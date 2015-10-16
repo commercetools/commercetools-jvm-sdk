@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":17,"i1":17,"i2":17,"i3":6,"i4":6,"i5":6,"i6":6,"i7":6,"i8":6,"i9":6,"i10":6,"i11":6,"i12":6,"i13":6,"i14":6,"i15":6,"i16":6,"i17":6,"i18":17,"i19":6,"i20":6,"i21":6,"i22":6,"i23":6,"i24":6,"i25":6,"i26":6,"i27":6,"i28":6,"i29":6,"i30":6,"i31":6,"i32":6,"i33":6,"i34":6,"i35":6,"i36":6,"i37":6,"i38":6,"i39":6,"i40":6};
+var methods = {"i0":17,"i1":17,"i2":17,"i3":6,"i4":6,"i5":6,"i6":6,"i7":6,"i8":6,"i9":6,"i10":6,"i11":6,"i12":6,"i13":6,"i14":6,"i15":6,"i16":17,"i17":6,"i18":6,"i19":6,"i20":6,"i21":6,"i22":6};
 var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],2:["t2","Instance Methods"],4:["t3","Abstract Methods"],16:["t5","Default Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -48,7 +48,7 @@ var activeTableTab = "activeTableTab";
 </div>
 <div class="subNav">
 <ul class="navList">
-<li><a href="../../../../../io/sphere/sdk/products/search/ProductAttributeSearchModel.html" title="class in io.sphere.sdk.products.search"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
+<li><a href="../../../../../io/sphere/sdk/products/search/ProductProjectionFilterSearchModel.html" title="class in io.sphere.sdk.products.search"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
 <li><a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearchModel.html" title="class in io.sphere.sdk.products.search"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">
@@ -100,15 +100,15 @@ var activeTableTab = "activeTableTab";
 <li class="blockList">
 <dl>
 <dt>All Superinterfaces:</dt>
-<dd><a href="../../../../../io/sphere/sdk/search/EntitySearch.html" title="interface in io.sphere.sdk.search">EntitySearch</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;, <a href="../../../../../io/sphere/sdk/expansion/MetaModelExpansionDsl.html" title="interface in io.sphere.sdk.expansion">MetaModelExpansionDsl</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>,<a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html" title="interface in io.sphere.sdk.products.search">ProductProjectionSearch</a>,<a href="../../../../../io/sphere/sdk/products/expansion/ProductProjectionExpansionModel.html" title="class in io.sphere.sdk.products.expansion">ProductProjectionExpansionModel</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;&gt;, <a href="../../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="interface in io.sphere.sdk.search">MetaModelSearchDsl</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>,<a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html" title="interface in io.sphere.sdk.products.search">ProductProjectionSearch</a>,<a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearchModel.html" title="class in io.sphere.sdk.products.search">ProductProjectionSearchModel</a>,<a href="../../../../../io/sphere/sdk/products/expansion/ProductProjectionExpansionModel.html" title="class in io.sphere.sdk.products.expansion">ProductProjectionExpansionModel</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;&gt;, <a href="../../../../../io/sphere/sdk/expansion/ReferenceExpansionDsl.html" title="interface in io.sphere.sdk.expansion">ReferenceExpansionDsl</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>,<a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html" title="interface in io.sphere.sdk.products.search">ProductProjectionSearch</a>&gt;, <a href="../../../../../io/sphere/sdk/expansion/ReferenceExpansionSupport.html" title="interface in io.sphere.sdk.expansion">ReferenceExpansionSupport</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;, <a href="../../../../../io/sphere/sdk/search/Search.html" title="interface in io.sphere.sdk.search">Search</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;, <a href="../../../../../io/sphere/sdk/search/SearchDsl.html" title="interface in io.sphere.sdk.search">SearchDsl</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>,<a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html" title="interface in io.sphere.sdk.products.search">ProductProjectionSearch</a>&gt;, <a href="../../../../../io/sphere/sdk/client/SphereRequest.html" title="interface in io.sphere.sdk.client">SphereRequest</a>&lt;<a href="../../../../../io/sphere/sdk/search/PagedSearchResult.html" title="class in io.sphere.sdk.search">PagedSearchResult</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;&gt;</dd>
+<dd><a href="../../../../../io/sphere/sdk/search/EntitySearch.html" title="interface in io.sphere.sdk.search">EntitySearch</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;, <a href="../../../../../io/sphere/sdk/search/FacetDsl.html" title="interface in io.sphere.sdk.search">FacetDsl</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>,<a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html" title="interface in io.sphere.sdk.products.search">ProductProjectionSearch</a>&gt;, <a href="../../../../../io/sphere/sdk/search/FacetSupport.html" title="interface in io.sphere.sdk.search">FacetSupport</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;, <a href="../../../../../io/sphere/sdk/search/FilterDsl.html" title="interface in io.sphere.sdk.search">FilterDsl</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>,<a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html" title="interface in io.sphere.sdk.products.search">ProductProjectionSearch</a>&gt;, <a href="../../../../../io/sphere/sdk/search/FilterSupport.html" title="interface in io.sphere.sdk.search">FilterSupport</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;, <a href="../../../../../io/sphere/sdk/expansion/MetaModelExpansionDsl.html" title="interface in io.sphere.sdk.expansion">MetaModelExpansionDsl</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>,<a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html" title="interface in io.sphere.sdk.products.search">ProductProjectionSearch</a>,<a href="../../../../../io/sphere/sdk/products/expansion/ProductProjectionExpansionModel.html" title="class in io.sphere.sdk.products.expansion">ProductProjectionExpansionModel</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;&gt;, <a href="../../../../../io/sphere/sdk/search/MetaModelFacetDsl.html" title="interface in io.sphere.sdk.search">MetaModelFacetDsl</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>,<a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html" title="interface in io.sphere.sdk.products.search">ProductProjectionSearch</a>,<a href="../../../../../io/sphere/sdk/products/search/ProductProjectionFacetSearchModel.html" title="class in io.sphere.sdk.products.search">ProductProjectionFacetSearchModel</a>&gt;, <a href="../../../../../io/sphere/sdk/search/MetaModelFilterDsl.html" title="interface in io.sphere.sdk.search">MetaModelFilterDsl</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>,<a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html" title="interface in io.sphere.sdk.products.search">ProductProjectionSearch</a>,<a href="../../../../../io/sphere/sdk/products/search/ProductProjectionFilterSearchModel.html" title="class in io.sphere.sdk.products.search">ProductProjectionFilterSearchModel</a>&gt;, <a href="../../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="interface in io.sphere.sdk.search">MetaModelSearchDsl</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>,<a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html" title="interface in io.sphere.sdk.products.search">ProductProjectionSearch</a>,<a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSortSearchModel.html" title="class in io.sphere.sdk.products.search">ProductProjectionSortSearchModel</a>,<a href="../../../../../io/sphere/sdk/products/search/ProductProjectionFilterSearchModel.html" title="class in io.sphere.sdk.products.search">ProductProjectionFilterSearchModel</a>,<a href="../../../../../io/sphere/sdk/products/search/ProductProjectionFacetSearchModel.html" title="class in io.sphere.sdk.products.search">ProductProjectionFacetSearchModel</a>,<a href="../../../../../io/sphere/sdk/products/expansion/ProductProjectionExpansionModel.html" title="class in io.sphere.sdk.products.expansion">ProductProjectionExpansionModel</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;&gt;, <a href="../../../../../io/sphere/sdk/search/MetaModelSortDsl.html" title="interface in io.sphere.sdk.search">MetaModelSortDsl</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>,<a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html" title="interface in io.sphere.sdk.products.search">ProductProjectionSearch</a>,<a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSortSearchModel.html" title="class in io.sphere.sdk.products.search">ProductProjectionSortSearchModel</a>&gt;, <a href="../../../../../io/sphere/sdk/expansion/ReferenceExpansionDsl.html" title="interface in io.sphere.sdk.expansion">ReferenceExpansionDsl</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>,<a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html" title="interface in io.sphere.sdk.products.search">ProductProjectionSearch</a>&gt;, <a href="../../../../../io/sphere/sdk/expansion/ReferenceExpansionSupport.html" title="interface in io.sphere.sdk.expansion">ReferenceExpansionSupport</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;, <a href="../../../../../io/sphere/sdk/search/Search.html" title="interface in io.sphere.sdk.search">Search</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;, <a href="../../../../../io/sphere/sdk/search/SearchDsl.html" title="interface in io.sphere.sdk.search">SearchDsl</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>,<a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html" title="interface in io.sphere.sdk.products.search">ProductProjectionSearch</a>&gt;, <a href="../../../../../io/sphere/sdk/search/SortDsl.html" title="interface in io.sphere.sdk.search">SortDsl</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>,<a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html" title="interface in io.sphere.sdk.products.search">ProductProjectionSearch</a>&gt;, <a href="../../../../../io/sphere/sdk/search/SortSupport.html" title="interface in io.sphere.sdk.search">SortSupport</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;, <a href="../../../../../io/sphere/sdk/client/SphereRequest.html" title="interface in io.sphere.sdk.client">SphereRequest</a>&lt;<a href="../../../../../io/sphere/sdk/search/PagedSearchResult.html" title="class in io.sphere.sdk.search">PagedSearchResult</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;&gt;</dd>
 </dl>
 <hr>
 <br>
 <pre>public interface <span class="typeNameLabel">ProductProjectionSearch</span>
-extends <a href="../../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="interface in io.sphere.sdk.search">MetaModelSearchDsl</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>,<a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html" title="interface in io.sphere.sdk.products.search">ProductProjectionSearch</a>,<a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearchModel.html" title="class in io.sphere.sdk.products.search">ProductProjectionSearchModel</a>,<a href="../../../../../io/sphere/sdk/products/expansion/ProductProjectionExpansionModel.html" title="class in io.sphere.sdk.products.expansion">ProductProjectionExpansionModel</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;&gt;</pre>
+extends <a href="../../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="interface in io.sphere.sdk.search">MetaModelSearchDsl</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>,<a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html" title="interface in io.sphere.sdk.products.search">ProductProjectionSearch</a>,<a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSortSearchModel.html" title="class in io.sphere.sdk.products.search">ProductProjectionSortSearchModel</a>,<a href="../../../../../io/sphere/sdk/products/search/ProductProjectionFilterSearchModel.html" title="class in io.sphere.sdk.products.search">ProductProjectionFilterSearchModel</a>,<a href="../../../../../io/sphere/sdk/products/search/ProductProjectionFacetSearchModel.html" title="class in io.sphere.sdk.products.search">ProductProjectionFacetSearchModel</a>,<a href="../../../../../io/sphere/sdk/products/expansion/ProductProjectionExpansionModel.html" title="class in io.sphere.sdk.products.expansion">ProductProjectionExpansionModel</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;&gt;</pre>
 <div class="block">Searches for products.
 
- Consult the documentation for <a href="../../../../../io/sphere/sdk/meta/ProductSearchDocumentation.html">Product Search API</a> for more information.</div>
+ Consult the documentation for <a href="../../../../../io/sphere/sdk/meta/SearchDocumentation.html">Product Search API</a> for more information.</div>
 </li>
 </ul>
 </div>
@@ -180,171 +180,103 @@ extends <a href="../../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" ti
 </tr>
 <tr id="i6" class="altColor">
 <td class="colFirst"><code><a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html" title="interface in io.sphere.sdk.products.search">ProductProjectionSearch</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html#plusFacetFilters-io.sphere.sdk.search.FilterExpression-">plusFacetFilters</a></span>(<a href="../../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;&nbsp;facetFilter)</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html#plusFacetFilters-java.util.function.Function-">plusFacetFilters</a></span>(java.util.function.Function&lt;<a href="../../../../../io/sphere/sdk/products/search/ProductProjectionFilterSearchModel.html" title="class in io.sphere.sdk.products.search">ProductProjectionFilterSearchModel</a>,java.util.List&lt;<a href="../../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;&gt;&gt;&nbsp;m)</code>
+<div class="block">Creates a new object with the properties of the old object but adds a new filter list to the <code>facetFilters</code> by using meta models.</div>
+</td>
 </tr>
 <tr id="i7" class="rowColor">
 <td class="colFirst"><code><a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html" title="interface in io.sphere.sdk.products.search">ProductProjectionSearch</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html#plusFacetFilters-java.util.function.Function-">plusFacetFilters</a></span>(java.util.function.Function&lt;<a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearchModel.html" title="class in io.sphere.sdk.products.search">ProductProjectionSearchModel</a>,<a href="../../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;&gt;&nbsp;m)</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html#plusFacetFilters-java.util.List-">plusFacetFilters</a></span>(java.util.List&lt;<a href="../../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;&gt;&nbsp;filterExpressions)</code>
+<div class="block">Returns a new object with the new facet filter list appended to the existing facet filters (query parameter <code>filter.facet</code>).</div>
+</td>
 </tr>
 <tr id="i8" class="altColor">
 <td class="colFirst"><code><a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html" title="interface in io.sphere.sdk.products.search">ProductProjectionSearch</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html#plusFacetFilters-java.util.List-">plusFacetFilters</a></span>(java.util.List&lt;<a href="../../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;&gt;&nbsp;facetFilters)</code>
-<div class="block">Returns an EntitySearch with the new facet filter list appended to the existing facet filters.</div>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html#plusFacets-java.util.function.Function-">plusFacets</a></span>(java.util.function.Function&lt;<a href="../../../../../io/sphere/sdk/products/search/ProductProjectionFacetSearchModel.html" title="class in io.sphere.sdk.products.search">ProductProjectionFacetSearchModel</a>,<a href="../../../../../io/sphere/sdk/search/FacetExpression.html" title="interface in io.sphere.sdk.search">FacetExpression</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;&gt;&nbsp;m)</code>
+<div class="block">Creates a new object with the properties of the old object but adds a new facet to it by using meta models.</div>
 </td>
 </tr>
 <tr id="i9" class="rowColor">
 <td class="colFirst"><code><a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html" title="interface in io.sphere.sdk.products.search">ProductProjectionSearch</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html#plusFacets-io.sphere.sdk.search.FacetExpression-">plusFacets</a></span>(<a href="../../../../../io/sphere/sdk/search/FacetExpression.html" title="interface in io.sphere.sdk.search">FacetExpression</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;&nbsp;facet)</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html#plusQueryFilters-java.util.function.Function-">plusQueryFilters</a></span>(java.util.function.Function&lt;<a href="../../../../../io/sphere/sdk/products/search/ProductProjectionFilterSearchModel.html" title="class in io.sphere.sdk.products.search">ProductProjectionFilterSearchModel</a>,java.util.List&lt;<a href="../../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;&gt;&gt;&nbsp;m)</code>
+<div class="block">Creates a new object with the properties of the old object but adds a new filter list to the <code>queryFilters</code> by using meta models.</div>
+</td>
 </tr>
 <tr id="i10" class="altColor">
 <td class="colFirst"><code><a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html" title="interface in io.sphere.sdk.products.search">ProductProjectionSearch</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html#plusFacets-java.util.function.Function-">plusFacets</a></span>(java.util.function.Function&lt;<a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearchModel.html" title="class in io.sphere.sdk.products.search">ProductProjectionSearchModel</a>,<a href="../../../../../io/sphere/sdk/search/FacetExpression.html" title="interface in io.sphere.sdk.search">FacetExpression</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;&gt;&nbsp;m)</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html#plusQueryFilters-java.util.List-">plusQueryFilters</a></span>(java.util.List&lt;<a href="../../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;&gt;&nbsp;filterExpressions)</code>
+<div class="block">Returns a new object with the new query filter expression list appended to the existing query filters (query parameter <code>filter.query</code>).</div>
+</td>
 </tr>
 <tr id="i11" class="rowColor">
 <td class="colFirst"><code><a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html" title="interface in io.sphere.sdk.products.search">ProductProjectionSearch</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html#plusFacets-java.util.List-">plusFacets</a></span>(java.util.List&lt;<a href="../../../../../io/sphere/sdk/search/FacetExpression.html" title="interface in io.sphere.sdk.search">FacetExpression</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;&gt;&nbsp;facets)</code>
-<div class="block">Returns an EntitySearch with the new facet list appended to the existing facets.</div>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html#plusResultFilters-java.util.function.Function-">plusResultFilters</a></span>(java.util.function.Function&lt;<a href="../../../../../io/sphere/sdk/products/search/ProductProjectionFilterSearchModel.html" title="class in io.sphere.sdk.products.search">ProductProjectionFilterSearchModel</a>,java.util.List&lt;<a href="../../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;&gt;&gt;&nbsp;m)</code>
+<div class="block">Creates a new object with the properties of the old object but adds a new filter list to the <code>resultFilters</code> by using meta models.</div>
 </td>
 </tr>
 <tr id="i12" class="altColor">
 <td class="colFirst"><code><a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html" title="interface in io.sphere.sdk.products.search">ProductProjectionSearch</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html#plusQueryFilters-io.sphere.sdk.search.FilterExpression-">plusQueryFilters</a></span>(<a href="../../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;&nbsp;queryFilter)</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html#plusResultFilters-java.util.List-">plusResultFilters</a></span>(java.util.List&lt;<a href="../../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;&gt;&nbsp;filterExpressions)</code>
+<div class="block">Returns a new object with the new result filter expression list appended to the existing result filters (query parameter <code>filter</code>).</div>
+</td>
 </tr>
 <tr id="i13" class="rowColor">
 <td class="colFirst"><code><a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html" title="interface in io.sphere.sdk.products.search">ProductProjectionSearch</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html#plusQueryFilters-java.util.function.Function-">plusQueryFilters</a></span>(java.util.function.Function&lt;<a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearchModel.html" title="class in io.sphere.sdk.products.search">ProductProjectionSearchModel</a>,<a href="../../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;&gt;&nbsp;m)</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html#plusSort-java.util.function.Function-">plusSort</a></span>(java.util.function.Function&lt;<a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSortSearchModel.html" title="class in io.sphere.sdk.products.search">ProductProjectionSortSearchModel</a>,<a href="../../../../../io/sphere/sdk/search/SortExpression.html" title="interface in io.sphere.sdk.search">SortExpression</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;&gt;&nbsp;m)</code>
+<div class="block">Creates a new object with the properties of the old object but adds a new sort expression to it by using meta models.</div>
+</td>
 </tr>
 <tr id="i14" class="altColor">
 <td class="colFirst"><code><a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html" title="interface in io.sphere.sdk.products.search">ProductProjectionSearch</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html#plusQueryFilters-java.util.List-">plusQueryFilters</a></span>(java.util.List&lt;<a href="../../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;&gt;&nbsp;queryFilters)</code>
-<div class="block">Returns an EntitySearch with the new query filter list appended to the existing query filters.</div>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html#plusSort-java.util.List-">plusSort</a></span>(java.util.List&lt;<a href="../../../../../io/sphere/sdk/search/SortExpression.html" title="interface in io.sphere.sdk.search">SortExpression</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;&gt;&nbsp;sortExpressions)</code>
+<div class="block">Returns a new object with the new sort expression list appended to the existing sort expressions.</div>
 </td>
 </tr>
 <tr id="i15" class="rowColor">
 <td class="colFirst"><code><a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html" title="interface in io.sphere.sdk.products.search">ProductProjectionSearch</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html#plusResultFilters-io.sphere.sdk.search.FilterExpression-">plusResultFilters</a></span>(<a href="../../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;&nbsp;resultFilter)</code>&nbsp;</td>
-</tr>
-<tr id="i16" class="altColor">
-<td class="colFirst"><code><a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html" title="interface in io.sphere.sdk.products.search">ProductProjectionSearch</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html#plusResultFilters-java.util.function.Function-">plusResultFilters</a></span>(java.util.function.Function&lt;<a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearchModel.html" title="class in io.sphere.sdk.products.search">ProductProjectionSearchModel</a>,<a href="../../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;&gt;&nbsp;m)</code>&nbsp;</td>
-</tr>
-<tr id="i17" class="rowColor">
-<td class="colFirst"><code><a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html" title="interface in io.sphere.sdk.products.search">ProductProjectionSearch</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html#plusResultFilters-java.util.List-">plusResultFilters</a></span>(java.util.List&lt;<a href="../../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;&gt;&nbsp;resultFilters)</code>
-<div class="block">Returns an EntitySearch with the new result filter list appended to the existing result filters.</div>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html#plusSort-io.sphere.sdk.search.SortExpression-">plusSort</a></span>(<a href="../../../../../io/sphere/sdk/search/SortExpression.html" title="interface in io.sphere.sdk.search">SortExpression</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;&nbsp;sortExpression)</code>
+<div class="block">Returns a new object with the new sort expression list appended to the existing sort expressions.</div>
 </td>
 </tr>
-<tr id="i18" class="altColor">
+<tr id="i16" class="altColor">
 <td class="colFirst"><code>static com.fasterxml.jackson.core.type.TypeReference&lt;<a href="../../../../../io/sphere/sdk/search/PagedSearchResult.html" title="class in io.sphere.sdk.search">PagedSearchResult</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html#resultTypeReference--">resultTypeReference</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i19" class="rowColor">
-<td class="colFirst"><code><a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html" title="interface in io.sphere.sdk.products.search">ProductProjectionSearch</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html#withExpansionPaths-io.sphere.sdk.expansion.ExpansionPath-">withExpansionPaths</a></span>(<a href="../../../../../io/sphere/sdk/expansion/ExpansionPath.html" title="interface in io.sphere.sdk.expansion">ExpansionPath</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;&nbsp;expansionPath)</code>
-<div class="block">Creates a new object with the properties of the old object but replaces all expansion paths with a single <code>expansionPath</code>.</div>
-</td>
-</tr>
-<tr id="i20" class="altColor">
-<td class="colFirst"><code><a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html" title="interface in io.sphere.sdk.products.search">ProductProjectionSearch</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html#withExpansionPaths-java.util.function.Function-">withExpansionPaths</a></span>(java.util.function.Function&lt;<a href="../../../../../io/sphere/sdk/products/expansion/ProductProjectionExpansionModel.html" title="class in io.sphere.sdk.products.expansion">ProductProjectionExpansionModel</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;,<a href="../../../../../io/sphere/sdk/expansion/ExpansionPath.html" title="interface in io.sphere.sdk.expansion">ExpansionPath</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;&gt;&nbsp;m)</code>
-<div class="block">Creates a new object with the properties of the old object but replaces all expansion paths with a single <code>expansionPath</code> by using meta models.</div>
-</td>
-</tr>
-<tr id="i21" class="rowColor">
-<td class="colFirst"><code><a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html" title="interface in io.sphere.sdk.products.search">ProductProjectionSearch</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html#withExpansionPaths-java.util.List-">withExpansionPaths</a></span>(java.util.List&lt;<a href="../../../../../io/sphere/sdk/expansion/ExpansionPath.html" title="interface in io.sphere.sdk.expansion">ExpansionPath</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;&gt;&nbsp;expansionPaths)</code>
-<div class="block">Creates a new object with the properties of the old object but replaces all expansion paths with <code>expansionPaths</code>.</div>
-</td>
-</tr>
-<tr id="i22" class="altColor">
-<td class="colFirst"><code><a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html" title="interface in io.sphere.sdk.products.search">ProductProjectionSearch</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html#withFacetFilters-io.sphere.sdk.search.FilterExpression-">withFacetFilters</a></span>(<a href="../../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;&nbsp;facetFilter)</code>&nbsp;</td>
-</tr>
-<tr id="i23" class="rowColor">
-<td class="colFirst"><code><a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html" title="interface in io.sphere.sdk.products.search">ProductProjectionSearch</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html#withFacetFilters-java.util.function.Function-">withFacetFilters</a></span>(java.util.function.Function&lt;<a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearchModel.html" title="class in io.sphere.sdk.products.search">ProductProjectionSearchModel</a>,<a href="../../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;&gt;&nbsp;m)</code>&nbsp;</td>
-</tr>
-<tr id="i24" class="altColor">
-<td class="colFirst"><code><a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html" title="interface in io.sphere.sdk.products.search">ProductProjectionSearch</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html#withFacetFilters-java.util.List-">withFacetFilters</a></span>(java.util.List&lt;<a href="../../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;&gt;&nbsp;facetFilters)</code>
-<div class="block">Returns an EntitySearch with the new facet filter list as facet filter.</div>
-</td>
-</tr>
-<tr id="i25" class="rowColor">
-<td class="colFirst"><code><a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html" title="interface in io.sphere.sdk.products.search">ProductProjectionSearch</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html#withFacets-io.sphere.sdk.search.FacetExpression-">withFacets</a></span>(<a href="../../../../../io/sphere/sdk/search/FacetExpression.html" title="interface in io.sphere.sdk.search">FacetExpression</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;&nbsp;facet)</code>&nbsp;</td>
-</tr>
-<tr id="i26" class="altColor">
-<td class="colFirst"><code><a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html" title="interface in io.sphere.sdk.products.search">ProductProjectionSearch</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html#withFacets-java.util.function.Function-">withFacets</a></span>(java.util.function.Function&lt;<a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearchModel.html" title="class in io.sphere.sdk.products.search">ProductProjectionSearchModel</a>,<a href="../../../../../io/sphere/sdk/search/FacetExpression.html" title="interface in io.sphere.sdk.search">FacetExpression</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;&gt;&nbsp;m)</code>&nbsp;</td>
-</tr>
-<tr id="i27" class="rowColor">
+<tr id="i17" class="rowColor">
 <td class="colFirst"><code><a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html" title="interface in io.sphere.sdk.products.search">ProductProjectionSearch</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html#withFacets-java.util.List-">withFacets</a></span>(java.util.List&lt;<a href="../../../../../io/sphere/sdk/search/FacetExpression.html" title="interface in io.sphere.sdk.search">FacetExpression</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;&gt;&nbsp;facets)</code>
-<div class="block">Returns an EntitySearch with the new facet list as facets.</div>
+<div class="block">Returns a new object with the new facet expression list as facets (query parameter <code>facet</code>).</div>
 </td>
 </tr>
-<tr id="i28" class="altColor">
+<tr id="i18" class="altColor">
 <td class="colFirst"><code><a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html" title="interface in io.sphere.sdk.products.search">ProductProjectionSearch</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html#withFuzzy-java.lang.Boolean-">withFuzzy</a></span>(java.lang.Boolean&nbsp;fuzzy)</code>
 <div class="block">Returns an EntitySearch with mofified fuzzyParameter.</div>
 </td>
 </tr>
-<tr id="i29" class="rowColor">
+<tr id="i19" class="rowColor">
 <td class="colFirst"><code><a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html" title="interface in io.sphere.sdk.products.search">ProductProjectionSearch</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html#withLimit-long-">withLimit</a></span>(long&nbsp;limit)</code>&nbsp;</td>
-</tr>
-<tr id="i30" class="altColor">
-<td class="colFirst"><code><a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html" title="interface in io.sphere.sdk.products.search">ProductProjectionSearch</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html#withOffset-long-">withOffset</a></span>(long&nbsp;offset)</code>&nbsp;</td>
-</tr>
-<tr id="i31" class="rowColor">
-<td class="colFirst"><code><a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html" title="interface in io.sphere.sdk.products.search">ProductProjectionSearch</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html#withQueryFilters-io.sphere.sdk.search.FilterExpression-">withQueryFilters</a></span>(<a href="../../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;&nbsp;queryFilter)</code>&nbsp;</td>
-</tr>
-<tr id="i32" class="altColor">
-<td class="colFirst"><code><a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html" title="interface in io.sphere.sdk.products.search">ProductProjectionSearch</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html#withQueryFilters-java.util.function.Function-">withQueryFilters</a></span>(java.util.function.Function&lt;<a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearchModel.html" title="class in io.sphere.sdk.products.search">ProductProjectionSearchModel</a>,<a href="../../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;&gt;&nbsp;m)</code>&nbsp;</td>
-</tr>
-<tr id="i33" class="rowColor">
-<td class="colFirst"><code><a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html" title="interface in io.sphere.sdk.products.search">ProductProjectionSearch</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html#withQueryFilters-java.util.List-">withQueryFilters</a></span>(java.util.List&lt;<a href="../../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;&gt;&nbsp;queryFilters)</code>
-<div class="block">Returns an EntitySearch with the new query filter list as query filters.</div>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html#withLimit-long-">withLimit</a></span>(long&nbsp;limit)</code>
+<div class="block">Returns a new object with the new limit.</div>
 </td>
 </tr>
-<tr id="i34" class="altColor">
+<tr id="i20" class="altColor">
 <td class="colFirst"><code><a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html" title="interface in io.sphere.sdk.products.search">ProductProjectionSearch</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html#withResultFilters-io.sphere.sdk.search.FilterExpression-">withResultFilters</a></span>(<a href="../../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;&nbsp;resultFilter)</code>&nbsp;</td>
-</tr>
-<tr id="i35" class="rowColor">
-<td class="colFirst"><code><a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html" title="interface in io.sphere.sdk.products.search">ProductProjectionSearch</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html#withResultFilters-java.util.function.Function-">withResultFilters</a></span>(java.util.function.Function&lt;<a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearchModel.html" title="class in io.sphere.sdk.products.search">ProductProjectionSearchModel</a>,<a href="../../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;&gt;&nbsp;m)</code>&nbsp;</td>
-</tr>
-<tr id="i36" class="altColor">
-<td class="colFirst"><code><a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html" title="interface in io.sphere.sdk.products.search">ProductProjectionSearch</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html#withResultFilters-java.util.List-">withResultFilters</a></span>(java.util.List&lt;<a href="../../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;&gt;&nbsp;resultFilters)</code>
-<div class="block">Returns an EntitySearch with the new result filter list as result filter.</div>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html#withOffset-long-">withOffset</a></span>(long&nbsp;offset)</code>
+<div class="block">Returns a new object with the new offset.</div>
 </td>
 </tr>
-<tr id="i37" class="rowColor">
-<td class="colFirst"><code><a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html" title="interface in io.sphere.sdk.products.search">ProductProjectionSearch</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html#withSort-java.util.function.Function-">withSort</a></span>(java.util.function.Function&lt;<a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearchModel.html" title="class in io.sphere.sdk.products.search">ProductProjectionSearchModel</a>,<a href="../../../../../io/sphere/sdk/search/SearchSort.html" title="interface in io.sphere.sdk.search">SearchSort</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;&gt;&nbsp;m)</code>&nbsp;</td>
-</tr>
-<tr id="i38" class="altColor">
-<td class="colFirst"><code><a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html" title="interface in io.sphere.sdk.products.search">ProductProjectionSearch</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html#withSort-io.sphere.sdk.search.SearchSort-">withSort</a></span>(<a href="../../../../../io/sphere/sdk/search/SearchSort.html" title="interface in io.sphere.sdk.search">SearchSort</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;&nbsp;sort)</code>
-<div class="block">Returns an EntityQuery with the new sort as sort.</div>
-</td>
-</tr>
-<tr id="i39" class="rowColor">
+<tr id="i21" class="rowColor">
 <td class="colFirst"><code><a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html" title="interface in io.sphere.sdk.products.search">ProductProjectionSearch</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html#withText-java.util.Locale-java.lang.String-">withText</a></span>(java.util.Locale&nbsp;locale,
-        java.lang.String&nbsp;text)</code>&nbsp;</td>
+        java.lang.String&nbsp;text)</code>
+<div class="block">Returns a new object with the new text as search text.</div>
+</td>
 </tr>
-<tr id="i40" class="altColor">
+<tr id="i22" class="altColor">
 <td class="colFirst"><code><a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html" title="interface in io.sphere.sdk.products.search">ProductProjectionSearch</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html#withText-io.sphere.sdk.models.LocalizedStringEntry-">withText</a></span>(<a href="../../../../../io/sphere/sdk/models/LocalizedStringEntry.html" title="class in io.sphere.sdk.models">LocalizedStringEntry</a>&nbsp;text)</code>
-<div class="block">Returns an EntitySearch with the new text as search text.</div>
+<div class="block">Returns a new object with the new text as search text.</div>
 </td>
 </tr>
 </table>
@@ -353,7 +285,7 @@ extends <a href="../../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" ti
 <!--   -->
 </a>
 <h3>Methods inherited from interface&nbsp;io.sphere.sdk.search.<a href="../../../../../io/sphere/sdk/search/EntitySearch.html" title="interface in io.sphere.sdk.search">EntitySearch</a></h3>
-<code><a href="../../../../../io/sphere/sdk/search/EntitySearch.html#endpoint--">endpoint</a>, <a href="../../../../../io/sphere/sdk/search/EntitySearch.html#facetFilters--">facetFilters</a>, <a href="../../../../../io/sphere/sdk/search/EntitySearch.html#facets--">facets</a>, <a href="../../../../../io/sphere/sdk/search/EntitySearch.html#isFuzzy--">isFuzzy</a>, <a href="../../../../../io/sphere/sdk/search/EntitySearch.html#limit--">limit</a>, <a href="../../../../../io/sphere/sdk/search/EntitySearch.html#offset--">offset</a>, <a href="../../../../../io/sphere/sdk/search/EntitySearch.html#queryFilters--">queryFilters</a>, <a href="../../../../../io/sphere/sdk/search/EntitySearch.html#resultFilters--">resultFilters</a>, <a href="../../../../../io/sphere/sdk/search/EntitySearch.html#sort--">sort</a>, <a href="../../../../../io/sphere/sdk/search/EntitySearch.html#text--">text</a></code></li>
+<code><a href="../../../../../io/sphere/sdk/search/EntitySearch.html#endpoint--">endpoint</a>, <a href="../../../../../io/sphere/sdk/search/EntitySearch.html#isFuzzy--">isFuzzy</a>, <a href="../../../../../io/sphere/sdk/search/EntitySearch.html#limit--">limit</a>, <a href="../../../../../io/sphere/sdk/search/EntitySearch.html#offset--">offset</a>, <a href="../../../../../io/sphere/sdk/search/EntitySearch.html#text--">text</a></code></li>
 </ul>
 <ul class="blockList">
 <li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.search.Search">
@@ -368,6 +300,83 @@ extends <a href="../../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" ti
 </a>
 <h3>Methods inherited from interface&nbsp;io.sphere.sdk.client.<a href="../../../../../io/sphere/sdk/client/SphereRequest.html" title="interface in io.sphere.sdk.client">SphereRequest</a></h3>
 <code><a href="../../../../../io/sphere/sdk/client/SphereRequest.html#canDeserialize-io.sphere.sdk.http.HttpResponse-">canDeserialize</a>, <a href="../../../../../io/sphere/sdk/client/SphereRequest.html#httpRequestIntent--">httpRequestIntent</a></code></li>
+</ul>
+<ul class="blockList">
+<li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.search.MetaModelSortDsl">
+<!--   -->
+</a>
+<h3>Methods inherited from interface&nbsp;io.sphere.sdk.search.<a href="../../../../../io/sphere/sdk/search/MetaModelSortDsl.html" title="interface in io.sphere.sdk.search">MetaModelSortDsl</a></h3>
+<code><a href="../../../../../io/sphere/sdk/search/MetaModelSortDsl.html#withSort-java.util.function.Function-">withSort</a></code></li>
+</ul>
+<ul class="blockList">
+<li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.search.SortDsl">
+<!--   -->
+</a>
+<h3>Methods inherited from interface&nbsp;io.sphere.sdk.search.<a href="../../../../../io/sphere/sdk/search/SortDsl.html" title="interface in io.sphere.sdk.search">SortDsl</a></h3>
+<code><a href="../../../../../io/sphere/sdk/search/SortDsl.html#withSort-java.util.List-">withSort</a>, <a href="../../../../../io/sphere/sdk/search/SortDsl.html#withSort-io.sphere.sdk.search.SortExpression-">withSort</a></code></li>
+</ul>
+<ul class="blockList">
+<li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.search.SortSupport">
+<!--   -->
+</a>
+<h3>Methods inherited from interface&nbsp;io.sphere.sdk.search.<a href="../../../../../io/sphere/sdk/search/SortSupport.html" title="interface in io.sphere.sdk.search">SortSupport</a></h3>
+<code><a href="../../../../../io/sphere/sdk/search/SortSupport.html#sort--">sort</a></code></li>
+</ul>
+<ul class="blockList">
+<li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.search.MetaModelFilterDsl">
+<!--   -->
+</a>
+<h3>Methods inherited from interface&nbsp;io.sphere.sdk.search.<a href="../../../../../io/sphere/sdk/search/MetaModelFilterDsl.html" title="interface in io.sphere.sdk.search">MetaModelFilterDsl</a></h3>
+<code><a href="../../../../../io/sphere/sdk/search/MetaModelFilterDsl.html#withFacetFilters-java.util.function.Function-">withFacetFilters</a>, <a href="../../../../../io/sphere/sdk/search/MetaModelFilterDsl.html#withQueryFilters-java.util.function.Function-">withQueryFilters</a>, <a href="../../../../../io/sphere/sdk/search/MetaModelFilterDsl.html#withResultFilters-java.util.function.Function-">withResultFilters</a></code></li>
+</ul>
+<ul class="blockList">
+<li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.search.FilterDsl">
+<!--   -->
+</a>
+<h3>Methods inherited from interface&nbsp;io.sphere.sdk.search.<a href="../../../../../io/sphere/sdk/search/FilterDsl.html" title="interface in io.sphere.sdk.search">FilterDsl</a></h3>
+<code><a href="../../../../../io/sphere/sdk/search/FilterDsl.html#plusFacetFilters-io.sphere.sdk.search.FilterExpression-">plusFacetFilters</a>, <a href="../../../../../io/sphere/sdk/search/FilterDsl.html#plusQueryFilters-io.sphere.sdk.search.FilterExpression-">plusQueryFilters</a>, <a href="../../../../../io/sphere/sdk/search/FilterDsl.html#plusResultFilters-io.sphere.sdk.search.FilterExpression-">plusResultFilters</a>, <a href="../../../../../io/sphere/sdk/search/FilterDsl.html#withFacetFilters-io.sphere.sdk.search.FilterExpression-">withFacetFilters</a>, <a href="../../../../../io/sphere/sdk/search/FilterDsl.html#withFacetFilters-java.util.List-">withFacetFilters</a>, <a href="../../../../../io/sphere/sdk/search/FilterDsl.html#withQueryFilters-io.sphere.sdk.search.FilterExpression-">withQueryFilters</a>, <a href="../../../../../io/sphere/sdk/search/FilterDsl.html#withQueryFilters-java.util.List-">withQueryFilters</a>, <a href="../../../../../io/sphere/sdk/search/FilterDsl.html#withResultFilters-io.sphere.sdk.search.FilterExpression-">withResultFilters</a>, <a href="../../../../../io/sphere/sdk/search/FilterDsl.html#withResultFilters-java.util.List-">withResultFilters</a></code></li>
+</ul>
+<ul class="blockList">
+<li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.search.FilterSupport">
+<!--   -->
+</a>
+<h3>Methods inherited from interface&nbsp;io.sphere.sdk.search.<a href="../../../../../io/sphere/sdk/search/FilterSupport.html" title="interface in io.sphere.sdk.search">FilterSupport</a></h3>
+<code><a href="../../../../../io/sphere/sdk/search/FilterSupport.html#facetFilters--">facetFilters</a>, <a href="../../../../../io/sphere/sdk/search/FilterSupport.html#queryFilters--">queryFilters</a>, <a href="../../../../../io/sphere/sdk/search/FilterSupport.html#resultFilters--">resultFilters</a></code></li>
+</ul>
+<ul class="blockList">
+<li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.search.MetaModelFacetDsl">
+<!--   -->
+</a>
+<h3>Methods inherited from interface&nbsp;io.sphere.sdk.search.<a href="../../../../../io/sphere/sdk/search/MetaModelFacetDsl.html" title="interface in io.sphere.sdk.search">MetaModelFacetDsl</a></h3>
+<code><a href="../../../../../io/sphere/sdk/search/MetaModelFacetDsl.html#withFacets-java.util.function.Function-">withFacets</a></code></li>
+</ul>
+<ul class="blockList">
+<li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.search.FacetDsl">
+<!--   -->
+</a>
+<h3>Methods inherited from interface&nbsp;io.sphere.sdk.search.<a href="../../../../../io/sphere/sdk/search/FacetDsl.html" title="interface in io.sphere.sdk.search">FacetDsl</a></h3>
+<code><a href="../../../../../io/sphere/sdk/search/FacetDsl.html#plusFacets-io.sphere.sdk.search.FacetExpression-">plusFacets</a>, <a href="../../../../../io/sphere/sdk/search/FacetDsl.html#plusFacets-java.util.List-">plusFacets</a>, <a href="../../../../../io/sphere/sdk/search/FacetDsl.html#withFacets-io.sphere.sdk.search.FacetExpression-">withFacets</a></code></li>
+</ul>
+<ul class="blockList">
+<li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.search.FacetSupport">
+<!--   -->
+</a>
+<h3>Methods inherited from interface&nbsp;io.sphere.sdk.search.<a href="../../../../../io/sphere/sdk/search/FacetSupport.html" title="interface in io.sphere.sdk.search">FacetSupport</a></h3>
+<code><a href="../../../../../io/sphere/sdk/search/FacetSupport.html#facets--">facets</a></code></li>
+</ul>
+<ul class="blockList">
+<li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.expansion.MetaModelExpansionDsl">
+<!--   -->
+</a>
+<h3>Methods inherited from interface&nbsp;io.sphere.sdk.expansion.<a href="../../../../../io/sphere/sdk/expansion/MetaModelExpansionDsl.html" title="interface in io.sphere.sdk.expansion">MetaModelExpansionDsl</a></h3>
+<code><a href="../../../../../io/sphere/sdk/expansion/MetaModelExpansionDsl.html#withExpansionPaths-java.util.function.Function-">withExpansionPaths</a></code></li>
+</ul>
+<ul class="blockList">
+<li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.expansion.ReferenceExpansionDsl">
+<!--   -->
+</a>
+<h3>Methods inherited from interface&nbsp;io.sphere.sdk.expansion.<a href="../../../../../io/sphere/sdk/expansion/ReferenceExpansionDsl.html" title="interface in io.sphere.sdk.expansion">ReferenceExpansionDsl</a></h3>
+<code><a href="../../../../../io/sphere/sdk/expansion/ReferenceExpansionDsl.html#withExpansionPaths-io.sphere.sdk.expansion.ExpansionPath-">withExpansionPaths</a>, <a href="../../../../../io/sphere/sdk/expansion/ReferenceExpansionDsl.html#withExpansionPaths-java.util.List-">withExpansionPaths</a></code></li>
 </ul>
 <ul class="blockList">
 <li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.expansion.ReferenceExpansionSupport">
@@ -454,16 +463,14 @@ extends <a href="../../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" ti
 <h4>withText</h4>
 <pre><a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html" title="interface in io.sphere.sdk.products.search">ProductProjectionSearch</a>&nbsp;withText(<a href="../../../../../io/sphere/sdk/models/LocalizedStringEntry.html" title="class in io.sphere.sdk.models">LocalizedStringEntry</a>&nbsp;text)</pre>
 <div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../../io/sphere/sdk/search/SearchDsl.html#withText-io.sphere.sdk.models.LocalizedStringEntry-">SearchDsl</a></code></span></div>
-<div class="block">Returns an EntitySearch with the new text as search text.</div>
+<div class="block">Returns a new object with the new text as search text.</div>
 <dl>
-<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../../io/sphere/sdk/search/MetaModelSearchDsl.html#withText-io.sphere.sdk.models.LocalizedStringEntry-">withText</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="interface in io.sphere.sdk.search">MetaModelSearchDsl</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>,<a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html" title="interface in io.sphere.sdk.products.search">ProductProjectionSearch</a>,<a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearchModel.html" title="class in io.sphere.sdk.products.search">ProductProjectionSearchModel</a>,<a href="../../../../../io/sphere/sdk/products/expansion/ProductProjectionExpansionModel.html" title="class in io.sphere.sdk.products.expansion">ProductProjectionExpansionModel</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;&gt;</code></dd>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="../../../../../io/sphere/sdk/search/SearchDsl.html#withText-io.sphere.sdk.models.LocalizedStringEntry-">withText</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../io/sphere/sdk/search/SearchDsl.html" title="interface in io.sphere.sdk.search">SearchDsl</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>,<a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html" title="interface in io.sphere.sdk.products.search">ProductProjectionSearch</a>&gt;</code></dd>
 <dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>text</code> - the new search text</dd>
+<dd><code>text</code> - the new search text with locale</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
-<dd>an EntitySearch with text</dd>
+<dd>a new object with <code>text</code></dd>
 </dl>
 </li>
 </ul>
@@ -475,11 +482,16 @@ extends <a href="../../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" ti
 <h4>withText</h4>
 <pre><a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html" title="interface in io.sphere.sdk.products.search">ProductProjectionSearch</a>&nbsp;withText(java.util.Locale&nbsp;locale,
                                  java.lang.String&nbsp;text)</pre>
+<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../../io/sphere/sdk/search/SearchDsl.html#withText-java.util.Locale-java.lang.String-">SearchDsl</a></code></span></div>
+<div class="block">Returns a new object with the new text as search text.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../../io/sphere/sdk/search/MetaModelSearchDsl.html#withText-java.util.Locale-java.lang.String-">withText</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="interface in io.sphere.sdk.search">MetaModelSearchDsl</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>,<a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html" title="interface in io.sphere.sdk.products.search">ProductProjectionSearch</a>,<a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearchModel.html" title="class in io.sphere.sdk.products.search">ProductProjectionSearchModel</a>,<a href="../../../../../io/sphere/sdk/products/expansion/ProductProjectionExpansionModel.html" title="class in io.sphere.sdk.products.expansion">ProductProjectionExpansionModel</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;&gt;</code></dd>
-<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="../../../../../io/sphere/sdk/search/SearchDsl.html#withText-java.util.Locale-java.lang.String-">withText</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../io/sphere/sdk/search/SearchDsl.html" title="interface in io.sphere.sdk.search">SearchDsl</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>,<a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html" title="interface in io.sphere.sdk.products.search">ProductProjectionSearch</a>&gt;</code></dd>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>locale</code> - the new locale</dd>
+<dd><code>text</code> - the new search text</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>a new object with <code>text</code></dd>
 </dl>
 </li>
 </ul>
@@ -493,8 +505,6 @@ extends <a href="../../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" ti
 <div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../../io/sphere/sdk/search/SearchDsl.html#withFuzzy-java.lang.Boolean-">SearchDsl</a></code></span></div>
 <div class="block">Returns an EntitySearch with mofified fuzzyParameter.</div>
 <dl>
-<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../../io/sphere/sdk/search/MetaModelSearchDsl.html#withFuzzy-java.lang.Boolean-">withFuzzy</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="interface in io.sphere.sdk.search">MetaModelSearchDsl</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>,<a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html" title="interface in io.sphere.sdk.products.search">ProductProjectionSearch</a>,<a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearchModel.html" title="class in io.sphere.sdk.products.search">ProductProjectionSearchModel</a>,<a href="../../../../../io/sphere/sdk/products/expansion/ProductProjectionExpansionModel.html" title="class in io.sphere.sdk.products.expansion">ProductProjectionExpansionModel</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;&gt;</code></dd>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="../../../../../io/sphere/sdk/search/SearchDsl.html#withFuzzy-java.lang.Boolean-">withFuzzy</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../io/sphere/sdk/search/SearchDsl.html" title="interface in io.sphere.sdk.search">SearchDsl</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>,<a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html" title="interface in io.sphere.sdk.products.search">ProductProjectionSearch</a>&gt;</code></dd>
 <dt><span class="paramLabel">Parameters:</span></dt>
@@ -511,81 +521,15 @@ extends <a href="../../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" ti
 <li class="blockList">
 <h4>withFacets</h4>
 <pre><a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html" title="interface in io.sphere.sdk.products.search">ProductProjectionSearch</a>&nbsp;withFacets(java.util.List&lt;<a href="../../../../../io/sphere/sdk/search/FacetExpression.html" title="interface in io.sphere.sdk.search">FacetExpression</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;&gt;&nbsp;facets)</pre>
-<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../../io/sphere/sdk/search/SearchDsl.html#withFacets-java.util.List-">SearchDsl</a></code></span></div>
-<div class="block">Returns an EntitySearch with the new facet list as facets.</div>
+<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../../io/sphere/sdk/search/FacetDsl.html#withFacets-java.util.List-">FacetDsl</a></code></span></div>
+<div class="block">Returns a new object with the new facet expression list as facets (query parameter <code>facet</code>).</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../../io/sphere/sdk/search/MetaModelSearchDsl.html#withFacets-java.util.List-">withFacets</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="interface in io.sphere.sdk.search">MetaModelSearchDsl</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>,<a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html" title="interface in io.sphere.sdk.products.search">ProductProjectionSearch</a>,<a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearchModel.html" title="class in io.sphere.sdk.products.search">ProductProjectionSearchModel</a>,<a href="../../../../../io/sphere/sdk/products/expansion/ProductProjectionExpansionModel.html" title="class in io.sphere.sdk.products.expansion">ProductProjectionExpansionModel</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;&gt;</code></dd>
-<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../../io/sphere/sdk/search/SearchDsl.html#withFacets-java.util.List-">withFacets</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../io/sphere/sdk/search/SearchDsl.html" title="interface in io.sphere.sdk.search">SearchDsl</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>,<a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html" title="interface in io.sphere.sdk.products.search">ProductProjectionSearch</a>&gt;</code></dd>
+<dd><code><a href="../../../../../io/sphere/sdk/search/FacetDsl.html#withFacets-java.util.List-">withFacets</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../io/sphere/sdk/search/FacetDsl.html" title="interface in io.sphere.sdk.search">FacetDsl</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>,<a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html" title="interface in io.sphere.sdk.products.search">ProductProjectionSearch</a>&gt;</code></dd>
 <dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>facets</code> - the new facet list</dd>
+<dd><code>facets</code> - the new facet expression list</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
-<dd>an EntitySearch with facets</dd>
-</dl>
-</li>
-</ul>
-<a name="withFacets-io.sphere.sdk.search.FacetExpression-">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>withFacets</h4>
-<pre><a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html" title="interface in io.sphere.sdk.products.search">ProductProjectionSearch</a>&nbsp;withFacets(<a href="../../../../../io/sphere/sdk/search/FacetExpression.html" title="interface in io.sphere.sdk.search">FacetExpression</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;&nbsp;facet)</pre>
-<dl>
-<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../../io/sphere/sdk/search/MetaModelSearchDsl.html#withFacets-io.sphere.sdk.search.FacetExpression-">withFacets</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="interface in io.sphere.sdk.search">MetaModelSearchDsl</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>,<a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html" title="interface in io.sphere.sdk.products.search">ProductProjectionSearch</a>,<a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearchModel.html" title="class in io.sphere.sdk.products.search">ProductProjectionSearchModel</a>,<a href="../../../../../io/sphere/sdk/products/expansion/ProductProjectionExpansionModel.html" title="class in io.sphere.sdk.products.expansion">ProductProjectionExpansionModel</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;&gt;</code></dd>
-<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../../io/sphere/sdk/search/SearchDsl.html#withFacets-io.sphere.sdk.search.FacetExpression-">withFacets</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../io/sphere/sdk/search/SearchDsl.html" title="interface in io.sphere.sdk.search">SearchDsl</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>,<a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html" title="interface in io.sphere.sdk.products.search">ProductProjectionSearch</a>&gt;</code></dd>
-</dl>
-</li>
-</ul>
-<a name="withFacets-java.util.function.Function-">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>withFacets</h4>
-<pre><a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html" title="interface in io.sphere.sdk.products.search">ProductProjectionSearch</a>&nbsp;withFacets(java.util.function.Function&lt;<a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearchModel.html" title="class in io.sphere.sdk.products.search">ProductProjectionSearchModel</a>,<a href="../../../../../io/sphere/sdk/search/FacetExpression.html" title="interface in io.sphere.sdk.search">FacetExpression</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;&gt;&nbsp;m)</pre>
-<dl>
-<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../../io/sphere/sdk/search/MetaModelSearchDsl.html#withFacets-java.util.function.Function-">withFacets</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="interface in io.sphere.sdk.search">MetaModelSearchDsl</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>,<a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html" title="interface in io.sphere.sdk.products.search">ProductProjectionSearch</a>,<a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearchModel.html" title="class in io.sphere.sdk.products.search">ProductProjectionSearchModel</a>,<a href="../../../../../io/sphere/sdk/products/expansion/ProductProjectionExpansionModel.html" title="class in io.sphere.sdk.products.expansion">ProductProjectionExpansionModel</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;&gt;</code></dd>
-</dl>
-</li>
-</ul>
-<a name="plusFacets-java.util.List-">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>plusFacets</h4>
-<pre><a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html" title="interface in io.sphere.sdk.products.search">ProductProjectionSearch</a>&nbsp;plusFacets(java.util.List&lt;<a href="../../../../../io/sphere/sdk/search/FacetExpression.html" title="interface in io.sphere.sdk.search">FacetExpression</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;&gt;&nbsp;facets)</pre>
-<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../../io/sphere/sdk/search/SearchDsl.html#plusFacets-java.util.List-">SearchDsl</a></code></span></div>
-<div class="block">Returns an EntitySearch with the new facet list appended to the existing facets.</div>
-<dl>
-<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../../io/sphere/sdk/search/MetaModelSearchDsl.html#plusFacets-java.util.List-">plusFacets</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="interface in io.sphere.sdk.search">MetaModelSearchDsl</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>,<a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html" title="interface in io.sphere.sdk.products.search">ProductProjectionSearch</a>,<a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearchModel.html" title="class in io.sphere.sdk.products.search">ProductProjectionSearchModel</a>,<a href="../../../../../io/sphere/sdk/products/expansion/ProductProjectionExpansionModel.html" title="class in io.sphere.sdk.products.expansion">ProductProjectionExpansionModel</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;&gt;</code></dd>
-<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../../io/sphere/sdk/search/SearchDsl.html#plusFacets-java.util.List-">plusFacets</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../io/sphere/sdk/search/SearchDsl.html" title="interface in io.sphere.sdk.search">SearchDsl</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>,<a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html" title="interface in io.sphere.sdk.products.search">ProductProjectionSearch</a>&gt;</code></dd>
-<dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>facets</code> - the new facet list</dd>
-<dt><span class="returnLabel">Returns:</span></dt>
-<dd>an EntitySearch with the existing facets plus the new facet list.</dd>
-</dl>
-</li>
-</ul>
-<a name="plusFacets-io.sphere.sdk.search.FacetExpression-">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>plusFacets</h4>
-<pre><a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html" title="interface in io.sphere.sdk.products.search">ProductProjectionSearch</a>&nbsp;plusFacets(<a href="../../../../../io/sphere/sdk/search/FacetExpression.html" title="interface in io.sphere.sdk.search">FacetExpression</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;&nbsp;facet)</pre>
-<dl>
-<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../../io/sphere/sdk/search/MetaModelSearchDsl.html#plusFacets-io.sphere.sdk.search.FacetExpression-">plusFacets</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="interface in io.sphere.sdk.search">MetaModelSearchDsl</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>,<a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html" title="interface in io.sphere.sdk.products.search">ProductProjectionSearch</a>,<a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearchModel.html" title="class in io.sphere.sdk.products.search">ProductProjectionSearchModel</a>,<a href="../../../../../io/sphere/sdk/products/expansion/ProductProjectionExpansionModel.html" title="class in io.sphere.sdk.products.expansion">ProductProjectionExpansionModel</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;&gt;</code></dd>
-<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../../io/sphere/sdk/search/SearchDsl.html#plusFacets-io.sphere.sdk.search.FacetExpression-">plusFacets</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../io/sphere/sdk/search/SearchDsl.html" title="interface in io.sphere.sdk.search">SearchDsl</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>,<a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html" title="interface in io.sphere.sdk.products.search">ProductProjectionSearch</a>&gt;</code></dd>
+<dd>a new object with facets</dd>
 </dl>
 </li>
 </ul>
@@ -595,59 +539,16 @@ extends <a href="../../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" ti
 <ul class="blockList">
 <li class="blockList">
 <h4>plusFacets</h4>
-<pre><a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html" title="interface in io.sphere.sdk.products.search">ProductProjectionSearch</a>&nbsp;plusFacets(java.util.function.Function&lt;<a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearchModel.html" title="class in io.sphere.sdk.products.search">ProductProjectionSearchModel</a>,<a href="../../../../../io/sphere/sdk/search/FacetExpression.html" title="interface in io.sphere.sdk.search">FacetExpression</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;&gt;&nbsp;m)</pre>
+<pre><a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html" title="interface in io.sphere.sdk.products.search">ProductProjectionSearch</a>&nbsp;plusFacets(java.util.function.Function&lt;<a href="../../../../../io/sphere/sdk/products/search/ProductProjectionFacetSearchModel.html" title="class in io.sphere.sdk.products.search">ProductProjectionFacetSearchModel</a>,<a href="../../../../../io/sphere/sdk/search/FacetExpression.html" title="interface in io.sphere.sdk.search">FacetExpression</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;&gt;&nbsp;m)</pre>
+<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../../io/sphere/sdk/search/MetaModelFacetDsl.html#plusFacets-java.util.function.Function-">MetaModelFacetDsl</a></code></span></div>
+<div class="block">Creates a new object with the properties of the old object but adds a new facet to it by using meta models.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../../io/sphere/sdk/search/MetaModelSearchDsl.html#plusFacets-java.util.function.Function-">plusFacets</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="interface in io.sphere.sdk.search">MetaModelSearchDsl</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>,<a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html" title="interface in io.sphere.sdk.products.search">ProductProjectionSearch</a>,<a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearchModel.html" title="class in io.sphere.sdk.products.search">ProductProjectionSearchModel</a>,<a href="../../../../../io/sphere/sdk/products/expansion/ProductProjectionExpansionModel.html" title="class in io.sphere.sdk.products.expansion">ProductProjectionExpansionModel</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;&gt;</code></dd>
-</dl>
-</li>
-</ul>
-<a name="withResultFilters-java.util.List-">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>withResultFilters</h4>
-<pre><a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html" title="interface in io.sphere.sdk.products.search">ProductProjectionSearch</a>&nbsp;withResultFilters(java.util.List&lt;<a href="../../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;&gt;&nbsp;resultFilters)</pre>
-<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../../io/sphere/sdk/search/SearchDsl.html#withResultFilters-java.util.List-">SearchDsl</a></code></span></div>
-<div class="block">Returns an EntitySearch with the new result filter list as result filter.</div>
-<dl>
-<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../../io/sphere/sdk/search/MetaModelSearchDsl.html#withResultFilters-java.util.List-">withResultFilters</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="interface in io.sphere.sdk.search">MetaModelSearchDsl</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>,<a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html" title="interface in io.sphere.sdk.products.search">ProductProjectionSearch</a>,<a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearchModel.html" title="class in io.sphere.sdk.products.search">ProductProjectionSearchModel</a>,<a href="../../../../../io/sphere/sdk/products/expansion/ProductProjectionExpansionModel.html" title="class in io.sphere.sdk.products.expansion">ProductProjectionExpansionModel</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;&gt;</code></dd>
-<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../../io/sphere/sdk/search/SearchDsl.html#withResultFilters-java.util.List-">withResultFilters</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../io/sphere/sdk/search/SearchDsl.html" title="interface in io.sphere.sdk.search">SearchDsl</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>,<a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html" title="interface in io.sphere.sdk.products.search">ProductProjectionSearch</a>&gt;</code></dd>
+<dd><code><a href="../../../../../io/sphere/sdk/search/MetaModelFacetDsl.html#plusFacets-java.util.function.Function-">plusFacets</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../io/sphere/sdk/search/MetaModelFacetDsl.html" title="interface in io.sphere.sdk.search">MetaModelFacetDsl</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>,<a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html" title="interface in io.sphere.sdk.products.search">ProductProjectionSearch</a>,<a href="../../../../../io/sphere/sdk/products/search/ProductProjectionFacetSearchModel.html" title="class in io.sphere.sdk.products.search">ProductProjectionFacetSearchModel</a>&gt;</code></dd>
 <dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>resultFilters</code> - the new result filter list</dd>
+<dd><code>m</code> - function to use the meta model for facets to create a facet expression</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
-<dd>an EntitySearch with resultFilters</dd>
-</dl>
-</li>
-</ul>
-<a name="withResultFilters-io.sphere.sdk.search.FilterExpression-">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>withResultFilters</h4>
-<pre><a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html" title="interface in io.sphere.sdk.products.search">ProductProjectionSearch</a>&nbsp;withResultFilters(<a href="../../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;&nbsp;resultFilter)</pre>
-<dl>
-<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../../io/sphere/sdk/search/MetaModelSearchDsl.html#withResultFilters-io.sphere.sdk.search.FilterExpression-">withResultFilters</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="interface in io.sphere.sdk.search">MetaModelSearchDsl</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>,<a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html" title="interface in io.sphere.sdk.products.search">ProductProjectionSearch</a>,<a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearchModel.html" title="class in io.sphere.sdk.products.search">ProductProjectionSearchModel</a>,<a href="../../../../../io/sphere/sdk/products/expansion/ProductProjectionExpansionModel.html" title="class in io.sphere.sdk.products.expansion">ProductProjectionExpansionModel</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;&gt;</code></dd>
-<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../../io/sphere/sdk/search/SearchDsl.html#withResultFilters-io.sphere.sdk.search.FilterExpression-">withResultFilters</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../io/sphere/sdk/search/SearchDsl.html" title="interface in io.sphere.sdk.search">SearchDsl</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>,<a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html" title="interface in io.sphere.sdk.products.search">ProductProjectionSearch</a>&gt;</code></dd>
-</dl>
-</li>
-</ul>
-<a name="withResultFilters-java.util.function.Function-">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>withResultFilters</h4>
-<pre><a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html" title="interface in io.sphere.sdk.products.search">ProductProjectionSearch</a>&nbsp;withResultFilters(java.util.function.Function&lt;<a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearchModel.html" title="class in io.sphere.sdk.products.search">ProductProjectionSearchModel</a>,<a href="../../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;&gt;&nbsp;m)</pre>
-<dl>
-<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../../io/sphere/sdk/search/MetaModelSearchDsl.html#withResultFilters-java.util.function.Function-">withResultFilters</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="interface in io.sphere.sdk.search">MetaModelSearchDsl</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>,<a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html" title="interface in io.sphere.sdk.products.search">ProductProjectionSearch</a>,<a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearchModel.html" title="class in io.sphere.sdk.products.search">ProductProjectionSearchModel</a>,<a href="../../../../../io/sphere/sdk/products/expansion/ProductProjectionExpansionModel.html" title="class in io.sphere.sdk.products.expansion">ProductProjectionExpansionModel</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;&gt;</code></dd>
+<dd>new object</dd>
 </dl>
 </li>
 </ul>
@@ -657,33 +558,16 @@ extends <a href="../../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" ti
 <ul class="blockList">
 <li class="blockList">
 <h4>plusResultFilters</h4>
-<pre><a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html" title="interface in io.sphere.sdk.products.search">ProductProjectionSearch</a>&nbsp;plusResultFilters(java.util.List&lt;<a href="../../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;&gt;&nbsp;resultFilters)</pre>
-<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../../io/sphere/sdk/search/SearchDsl.html#plusResultFilters-java.util.List-">SearchDsl</a></code></span></div>
-<div class="block">Returns an EntitySearch with the new result filter list appended to the existing result filters.</div>
+<pre><a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html" title="interface in io.sphere.sdk.products.search">ProductProjectionSearch</a>&nbsp;plusResultFilters(java.util.List&lt;<a href="../../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;&gt;&nbsp;filterExpressions)</pre>
+<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../../io/sphere/sdk/search/FilterDsl.html#plusResultFilters-java.util.List-">FilterDsl</a></code></span></div>
+<div class="block">Returns a new object with the new result filter expression list appended to the existing result filters (query parameter <code>filter</code>).</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../../io/sphere/sdk/search/MetaModelSearchDsl.html#plusResultFilters-java.util.List-">plusResultFilters</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="interface in io.sphere.sdk.search">MetaModelSearchDsl</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>,<a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html" title="interface in io.sphere.sdk.products.search">ProductProjectionSearch</a>,<a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearchModel.html" title="class in io.sphere.sdk.products.search">ProductProjectionSearchModel</a>,<a href="../../../../../io/sphere/sdk/products/expansion/ProductProjectionExpansionModel.html" title="class in io.sphere.sdk.products.expansion">ProductProjectionExpansionModel</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;&gt;</code></dd>
-<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../../io/sphere/sdk/search/SearchDsl.html#plusResultFilters-java.util.List-">plusResultFilters</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../io/sphere/sdk/search/SearchDsl.html" title="interface in io.sphere.sdk.search">SearchDsl</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>,<a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html" title="interface in io.sphere.sdk.products.search">ProductProjectionSearch</a>&gt;</code></dd>
+<dd><code><a href="../../../../../io/sphere/sdk/search/FilterDsl.html#plusResultFilters-java.util.List-">plusResultFilters</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../io/sphere/sdk/search/FilterDsl.html" title="interface in io.sphere.sdk.search">FilterDsl</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>,<a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html" title="interface in io.sphere.sdk.products.search">ProductProjectionSearch</a>&gt;</code></dd>
 <dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>resultFilters</code> - the new result filter list</dd>
+<dd><code>filterExpressions</code> - the new result filter expression list</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
-<dd>an EntitySearch with the existing result filter plus the new result filter list.</dd>
-</dl>
-</li>
-</ul>
-<a name="plusResultFilters-io.sphere.sdk.search.FilterExpression-">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>plusResultFilters</h4>
-<pre><a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html" title="interface in io.sphere.sdk.products.search">ProductProjectionSearch</a>&nbsp;plusResultFilters(<a href="../../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;&nbsp;resultFilter)</pre>
-<dl>
-<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../../io/sphere/sdk/search/MetaModelSearchDsl.html#plusResultFilters-io.sphere.sdk.search.FilterExpression-">plusResultFilters</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="interface in io.sphere.sdk.search">MetaModelSearchDsl</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>,<a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html" title="interface in io.sphere.sdk.products.search">ProductProjectionSearch</a>,<a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearchModel.html" title="class in io.sphere.sdk.products.search">ProductProjectionSearchModel</a>,<a href="../../../../../io/sphere/sdk/products/expansion/ProductProjectionExpansionModel.html" title="class in io.sphere.sdk.products.expansion">ProductProjectionExpansionModel</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;&gt;</code></dd>
-<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../../io/sphere/sdk/search/SearchDsl.html#plusResultFilters-io.sphere.sdk.search.FilterExpression-">plusResultFilters</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../io/sphere/sdk/search/SearchDsl.html" title="interface in io.sphere.sdk.search">SearchDsl</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>,<a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html" title="interface in io.sphere.sdk.products.search">ProductProjectionSearch</a>&gt;</code></dd>
+<dd>a new object with the existing <code>resultFilters</code> plus the new <code>filterExpressions</code>.</dd>
 </dl>
 </li>
 </ul>
@@ -693,59 +577,16 @@ extends <a href="../../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" ti
 <ul class="blockList">
 <li class="blockList">
 <h4>plusResultFilters</h4>
-<pre><a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html" title="interface in io.sphere.sdk.products.search">ProductProjectionSearch</a>&nbsp;plusResultFilters(java.util.function.Function&lt;<a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearchModel.html" title="class in io.sphere.sdk.products.search">ProductProjectionSearchModel</a>,<a href="../../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;&gt;&nbsp;m)</pre>
+<pre><a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html" title="interface in io.sphere.sdk.products.search">ProductProjectionSearch</a>&nbsp;plusResultFilters(java.util.function.Function&lt;<a href="../../../../../io/sphere/sdk/products/search/ProductProjectionFilterSearchModel.html" title="class in io.sphere.sdk.products.search">ProductProjectionFilterSearchModel</a>,java.util.List&lt;<a href="../../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;&gt;&gt;&nbsp;m)</pre>
+<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../../io/sphere/sdk/search/MetaModelFilterDsl.html#plusResultFilters-java.util.function.Function-">MetaModelFilterDsl</a></code></span></div>
+<div class="block">Creates a new object with the properties of the old object but adds a new filter list to the <code>resultFilters</code> by using meta models.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../../io/sphere/sdk/search/MetaModelSearchDsl.html#plusResultFilters-java.util.function.Function-">plusResultFilters</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="interface in io.sphere.sdk.search">MetaModelSearchDsl</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>,<a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html" title="interface in io.sphere.sdk.products.search">ProductProjectionSearch</a>,<a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearchModel.html" title="class in io.sphere.sdk.products.search">ProductProjectionSearchModel</a>,<a href="../../../../../io/sphere/sdk/products/expansion/ProductProjectionExpansionModel.html" title="class in io.sphere.sdk.products.expansion">ProductProjectionExpansionModel</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;&gt;</code></dd>
-</dl>
-</li>
-</ul>
-<a name="withQueryFilters-java.util.List-">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>withQueryFilters</h4>
-<pre><a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html" title="interface in io.sphere.sdk.products.search">ProductProjectionSearch</a>&nbsp;withQueryFilters(java.util.List&lt;<a href="../../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;&gt;&nbsp;queryFilters)</pre>
-<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../../io/sphere/sdk/search/SearchDsl.html#withQueryFilters-java.util.List-">SearchDsl</a></code></span></div>
-<div class="block">Returns an EntitySearch with the new query filter list as query filters.</div>
-<dl>
-<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../../io/sphere/sdk/search/MetaModelSearchDsl.html#withQueryFilters-java.util.List-">withQueryFilters</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="interface in io.sphere.sdk.search">MetaModelSearchDsl</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>,<a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html" title="interface in io.sphere.sdk.products.search">ProductProjectionSearch</a>,<a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearchModel.html" title="class in io.sphere.sdk.products.search">ProductProjectionSearchModel</a>,<a href="../../../../../io/sphere/sdk/products/expansion/ProductProjectionExpansionModel.html" title="class in io.sphere.sdk.products.expansion">ProductProjectionExpansionModel</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;&gt;</code></dd>
-<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../../io/sphere/sdk/search/SearchDsl.html#withQueryFilters-java.util.List-">withQueryFilters</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../io/sphere/sdk/search/SearchDsl.html" title="interface in io.sphere.sdk.search">SearchDsl</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>,<a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html" title="interface in io.sphere.sdk.products.search">ProductProjectionSearch</a>&gt;</code></dd>
+<dd><code><a href="../../../../../io/sphere/sdk/search/MetaModelFilterDsl.html#plusResultFilters-java.util.function.Function-">plusResultFilters</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../io/sphere/sdk/search/MetaModelFilterDsl.html" title="interface in io.sphere.sdk.search">MetaModelFilterDsl</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>,<a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html" title="interface in io.sphere.sdk.products.search">ProductProjectionSearch</a>,<a href="../../../../../io/sphere/sdk/products/search/ProductProjectionFilterSearchModel.html" title="class in io.sphere.sdk.products.search">ProductProjectionFilterSearchModel</a>&gt;</code></dd>
 <dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>queryFilters</code> - the new query filter list</dd>
+<dd><code>m</code> - function to use the meta model for filters to create a filter expression</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
-<dd>an EntitySearch with queryFilters</dd>
-</dl>
-</li>
-</ul>
-<a name="withQueryFilters-io.sphere.sdk.search.FilterExpression-">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>withQueryFilters</h4>
-<pre><a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html" title="interface in io.sphere.sdk.products.search">ProductProjectionSearch</a>&nbsp;withQueryFilters(<a href="../../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;&nbsp;queryFilter)</pre>
-<dl>
-<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../../io/sphere/sdk/search/MetaModelSearchDsl.html#withQueryFilters-io.sphere.sdk.search.FilterExpression-">withQueryFilters</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="interface in io.sphere.sdk.search">MetaModelSearchDsl</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>,<a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html" title="interface in io.sphere.sdk.products.search">ProductProjectionSearch</a>,<a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearchModel.html" title="class in io.sphere.sdk.products.search">ProductProjectionSearchModel</a>,<a href="../../../../../io/sphere/sdk/products/expansion/ProductProjectionExpansionModel.html" title="class in io.sphere.sdk.products.expansion">ProductProjectionExpansionModel</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;&gt;</code></dd>
-<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../../io/sphere/sdk/search/SearchDsl.html#withQueryFilters-io.sphere.sdk.search.FilterExpression-">withQueryFilters</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../io/sphere/sdk/search/SearchDsl.html" title="interface in io.sphere.sdk.search">SearchDsl</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>,<a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html" title="interface in io.sphere.sdk.products.search">ProductProjectionSearch</a>&gt;</code></dd>
-</dl>
-</li>
-</ul>
-<a name="withQueryFilters-java.util.function.Function-">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>withQueryFilters</h4>
-<pre><a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html" title="interface in io.sphere.sdk.products.search">ProductProjectionSearch</a>&nbsp;withQueryFilters(java.util.function.Function&lt;<a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearchModel.html" title="class in io.sphere.sdk.products.search">ProductProjectionSearchModel</a>,<a href="../../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;&gt;&nbsp;m)</pre>
-<dl>
-<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../../io/sphere/sdk/search/MetaModelSearchDsl.html#withQueryFilters-java.util.function.Function-">withQueryFilters</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="interface in io.sphere.sdk.search">MetaModelSearchDsl</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>,<a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html" title="interface in io.sphere.sdk.products.search">ProductProjectionSearch</a>,<a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearchModel.html" title="class in io.sphere.sdk.products.search">ProductProjectionSearchModel</a>,<a href="../../../../../io/sphere/sdk/products/expansion/ProductProjectionExpansionModel.html" title="class in io.sphere.sdk.products.expansion">ProductProjectionExpansionModel</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;&gt;</code></dd>
+<dd>new object</dd>
 </dl>
 </li>
 </ul>
@@ -755,33 +596,16 @@ extends <a href="../../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" ti
 <ul class="blockList">
 <li class="blockList">
 <h4>plusQueryFilters</h4>
-<pre><a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html" title="interface in io.sphere.sdk.products.search">ProductProjectionSearch</a>&nbsp;plusQueryFilters(java.util.List&lt;<a href="../../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;&gt;&nbsp;queryFilters)</pre>
-<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../../io/sphere/sdk/search/SearchDsl.html#plusQueryFilters-java.util.List-">SearchDsl</a></code></span></div>
-<div class="block">Returns an EntitySearch with the new query filter list appended to the existing query filters.</div>
+<pre><a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html" title="interface in io.sphere.sdk.products.search">ProductProjectionSearch</a>&nbsp;plusQueryFilters(java.util.List&lt;<a href="../../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;&gt;&nbsp;filterExpressions)</pre>
+<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../../io/sphere/sdk/search/FilterDsl.html#plusQueryFilters-java.util.List-">FilterDsl</a></code></span></div>
+<div class="block">Returns a new object with the new query filter expression list appended to the existing query filters (query parameter <code>filter.query</code>).</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../../io/sphere/sdk/search/MetaModelSearchDsl.html#plusQueryFilters-java.util.List-">plusQueryFilters</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="interface in io.sphere.sdk.search">MetaModelSearchDsl</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>,<a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html" title="interface in io.sphere.sdk.products.search">ProductProjectionSearch</a>,<a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearchModel.html" title="class in io.sphere.sdk.products.search">ProductProjectionSearchModel</a>,<a href="../../../../../io/sphere/sdk/products/expansion/ProductProjectionExpansionModel.html" title="class in io.sphere.sdk.products.expansion">ProductProjectionExpansionModel</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;&gt;</code></dd>
-<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../../io/sphere/sdk/search/SearchDsl.html#plusQueryFilters-java.util.List-">plusQueryFilters</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../io/sphere/sdk/search/SearchDsl.html" title="interface in io.sphere.sdk.search">SearchDsl</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>,<a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html" title="interface in io.sphere.sdk.products.search">ProductProjectionSearch</a>&gt;</code></dd>
+<dd><code><a href="../../../../../io/sphere/sdk/search/FilterDsl.html#plusQueryFilters-java.util.List-">plusQueryFilters</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../io/sphere/sdk/search/FilterDsl.html" title="interface in io.sphere.sdk.search">FilterDsl</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>,<a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html" title="interface in io.sphere.sdk.products.search">ProductProjectionSearch</a>&gt;</code></dd>
 <dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>queryFilters</code> - the new query filter list</dd>
+<dd><code>filterExpressions</code> - the new query filter expression list</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
-<dd>an EntitySearch with the existing query filters plus the new query filter list.</dd>
-</dl>
-</li>
-</ul>
-<a name="plusQueryFilters-io.sphere.sdk.search.FilterExpression-">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>plusQueryFilters</h4>
-<pre><a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html" title="interface in io.sphere.sdk.products.search">ProductProjectionSearch</a>&nbsp;plusQueryFilters(<a href="../../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;&nbsp;queryFilter)</pre>
-<dl>
-<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../../io/sphere/sdk/search/MetaModelSearchDsl.html#plusQueryFilters-io.sphere.sdk.search.FilterExpression-">plusQueryFilters</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="interface in io.sphere.sdk.search">MetaModelSearchDsl</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>,<a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html" title="interface in io.sphere.sdk.products.search">ProductProjectionSearch</a>,<a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearchModel.html" title="class in io.sphere.sdk.products.search">ProductProjectionSearchModel</a>,<a href="../../../../../io/sphere/sdk/products/expansion/ProductProjectionExpansionModel.html" title="class in io.sphere.sdk.products.expansion">ProductProjectionExpansionModel</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;&gt;</code></dd>
-<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../../io/sphere/sdk/search/SearchDsl.html#plusQueryFilters-io.sphere.sdk.search.FilterExpression-">plusQueryFilters</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../io/sphere/sdk/search/SearchDsl.html" title="interface in io.sphere.sdk.search">SearchDsl</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>,<a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html" title="interface in io.sphere.sdk.products.search">ProductProjectionSearch</a>&gt;</code></dd>
+<dd>a new object with the existing <code>queryFilters</code> plus the new <code>filterExpressions</code>.</dd>
 </dl>
 </li>
 </ul>
@@ -791,59 +615,16 @@ extends <a href="../../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" ti
 <ul class="blockList">
 <li class="blockList">
 <h4>plusQueryFilters</h4>
-<pre><a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html" title="interface in io.sphere.sdk.products.search">ProductProjectionSearch</a>&nbsp;plusQueryFilters(java.util.function.Function&lt;<a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearchModel.html" title="class in io.sphere.sdk.products.search">ProductProjectionSearchModel</a>,<a href="../../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;&gt;&nbsp;m)</pre>
+<pre><a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html" title="interface in io.sphere.sdk.products.search">ProductProjectionSearch</a>&nbsp;plusQueryFilters(java.util.function.Function&lt;<a href="../../../../../io/sphere/sdk/products/search/ProductProjectionFilterSearchModel.html" title="class in io.sphere.sdk.products.search">ProductProjectionFilterSearchModel</a>,java.util.List&lt;<a href="../../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;&gt;&gt;&nbsp;m)</pre>
+<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../../io/sphere/sdk/search/MetaModelFilterDsl.html#plusQueryFilters-java.util.function.Function-">MetaModelFilterDsl</a></code></span></div>
+<div class="block">Creates a new object with the properties of the old object but adds a new filter list to the <code>queryFilters</code> by using meta models.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../../io/sphere/sdk/search/MetaModelSearchDsl.html#plusQueryFilters-java.util.function.Function-">plusQueryFilters</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="interface in io.sphere.sdk.search">MetaModelSearchDsl</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>,<a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html" title="interface in io.sphere.sdk.products.search">ProductProjectionSearch</a>,<a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearchModel.html" title="class in io.sphere.sdk.products.search">ProductProjectionSearchModel</a>,<a href="../../../../../io/sphere/sdk/products/expansion/ProductProjectionExpansionModel.html" title="class in io.sphere.sdk.products.expansion">ProductProjectionExpansionModel</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;&gt;</code></dd>
-</dl>
-</li>
-</ul>
-<a name="withFacetFilters-java.util.List-">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>withFacetFilters</h4>
-<pre><a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html" title="interface in io.sphere.sdk.products.search">ProductProjectionSearch</a>&nbsp;withFacetFilters(java.util.List&lt;<a href="../../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;&gt;&nbsp;facetFilters)</pre>
-<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../../io/sphere/sdk/search/SearchDsl.html#withFacetFilters-java.util.List-">SearchDsl</a></code></span></div>
-<div class="block">Returns an EntitySearch with the new facet filter list as facet filter.</div>
-<dl>
-<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../../io/sphere/sdk/search/MetaModelSearchDsl.html#withFacetFilters-java.util.List-">withFacetFilters</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="interface in io.sphere.sdk.search">MetaModelSearchDsl</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>,<a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html" title="interface in io.sphere.sdk.products.search">ProductProjectionSearch</a>,<a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearchModel.html" title="class in io.sphere.sdk.products.search">ProductProjectionSearchModel</a>,<a href="../../../../../io/sphere/sdk/products/expansion/ProductProjectionExpansionModel.html" title="class in io.sphere.sdk.products.expansion">ProductProjectionExpansionModel</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;&gt;</code></dd>
-<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../../io/sphere/sdk/search/SearchDsl.html#withFacetFilters-java.util.List-">withFacetFilters</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../io/sphere/sdk/search/SearchDsl.html" title="interface in io.sphere.sdk.search">SearchDsl</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>,<a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html" title="interface in io.sphere.sdk.products.search">ProductProjectionSearch</a>&gt;</code></dd>
+<dd><code><a href="../../../../../io/sphere/sdk/search/MetaModelFilterDsl.html#plusQueryFilters-java.util.function.Function-">plusQueryFilters</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../io/sphere/sdk/search/MetaModelFilterDsl.html" title="interface in io.sphere.sdk.search">MetaModelFilterDsl</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>,<a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html" title="interface in io.sphere.sdk.products.search">ProductProjectionSearch</a>,<a href="../../../../../io/sphere/sdk/products/search/ProductProjectionFilterSearchModel.html" title="class in io.sphere.sdk.products.search">ProductProjectionFilterSearchModel</a>&gt;</code></dd>
 <dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>facetFilters</code> - the new facet filter list</dd>
+<dd><code>m</code> - function to use the meta model for filters to create a filter expression</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
-<dd>an EntitySearch with facetFilters</dd>
-</dl>
-</li>
-</ul>
-<a name="withFacetFilters-io.sphere.sdk.search.FilterExpression-">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>withFacetFilters</h4>
-<pre><a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html" title="interface in io.sphere.sdk.products.search">ProductProjectionSearch</a>&nbsp;withFacetFilters(<a href="../../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;&nbsp;facetFilter)</pre>
-<dl>
-<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../../io/sphere/sdk/search/MetaModelSearchDsl.html#withFacetFilters-io.sphere.sdk.search.FilterExpression-">withFacetFilters</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="interface in io.sphere.sdk.search">MetaModelSearchDsl</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>,<a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html" title="interface in io.sphere.sdk.products.search">ProductProjectionSearch</a>,<a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearchModel.html" title="class in io.sphere.sdk.products.search">ProductProjectionSearchModel</a>,<a href="../../../../../io/sphere/sdk/products/expansion/ProductProjectionExpansionModel.html" title="class in io.sphere.sdk.products.expansion">ProductProjectionExpansionModel</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;&gt;</code></dd>
-<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../../io/sphere/sdk/search/SearchDsl.html#withFacetFilters-io.sphere.sdk.search.FilterExpression-">withFacetFilters</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../io/sphere/sdk/search/SearchDsl.html" title="interface in io.sphere.sdk.search">SearchDsl</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>,<a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html" title="interface in io.sphere.sdk.products.search">ProductProjectionSearch</a>&gt;</code></dd>
-</dl>
-</li>
-</ul>
-<a name="withFacetFilters-java.util.function.Function-">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>withFacetFilters</h4>
-<pre><a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html" title="interface in io.sphere.sdk.products.search">ProductProjectionSearch</a>&nbsp;withFacetFilters(java.util.function.Function&lt;<a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearchModel.html" title="class in io.sphere.sdk.products.search">ProductProjectionSearchModel</a>,<a href="../../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;&gt;&nbsp;m)</pre>
-<dl>
-<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../../io/sphere/sdk/search/MetaModelSearchDsl.html#withFacetFilters-java.util.function.Function-">withFacetFilters</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="interface in io.sphere.sdk.search">MetaModelSearchDsl</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>,<a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html" title="interface in io.sphere.sdk.products.search">ProductProjectionSearch</a>,<a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearchModel.html" title="class in io.sphere.sdk.products.search">ProductProjectionSearchModel</a>,<a href="../../../../../io/sphere/sdk/products/expansion/ProductProjectionExpansionModel.html" title="class in io.sphere.sdk.products.expansion">ProductProjectionExpansionModel</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;&gt;</code></dd>
+<dd>new object</dd>
 </dl>
 </li>
 </ul>
@@ -853,33 +634,16 @@ extends <a href="../../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" ti
 <ul class="blockList">
 <li class="blockList">
 <h4>plusFacetFilters</h4>
-<pre><a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html" title="interface in io.sphere.sdk.products.search">ProductProjectionSearch</a>&nbsp;plusFacetFilters(java.util.List&lt;<a href="../../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;&gt;&nbsp;facetFilters)</pre>
-<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../../io/sphere/sdk/search/SearchDsl.html#plusFacetFilters-java.util.List-">SearchDsl</a></code></span></div>
-<div class="block">Returns an EntitySearch with the new facet filter list appended to the existing facet filters.</div>
+<pre><a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html" title="interface in io.sphere.sdk.products.search">ProductProjectionSearch</a>&nbsp;plusFacetFilters(java.util.List&lt;<a href="../../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;&gt;&nbsp;filterExpressions)</pre>
+<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../../io/sphere/sdk/search/FilterDsl.html#plusFacetFilters-java.util.List-">FilterDsl</a></code></span></div>
+<div class="block">Returns a new object with the new facet filter list appended to the existing facet filters (query parameter <code>filter.facet</code>).</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../../io/sphere/sdk/search/MetaModelSearchDsl.html#plusFacetFilters-java.util.List-">plusFacetFilters</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="interface in io.sphere.sdk.search">MetaModelSearchDsl</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>,<a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html" title="interface in io.sphere.sdk.products.search">ProductProjectionSearch</a>,<a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearchModel.html" title="class in io.sphere.sdk.products.search">ProductProjectionSearchModel</a>,<a href="../../../../../io/sphere/sdk/products/expansion/ProductProjectionExpansionModel.html" title="class in io.sphere.sdk.products.expansion">ProductProjectionExpansionModel</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;&gt;</code></dd>
-<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../../io/sphere/sdk/search/SearchDsl.html#plusFacetFilters-java.util.List-">plusFacetFilters</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../io/sphere/sdk/search/SearchDsl.html" title="interface in io.sphere.sdk.search">SearchDsl</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>,<a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html" title="interface in io.sphere.sdk.products.search">ProductProjectionSearch</a>&gt;</code></dd>
+<dd><code><a href="../../../../../io/sphere/sdk/search/FilterDsl.html#plusFacetFilters-java.util.List-">plusFacetFilters</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../io/sphere/sdk/search/FilterDsl.html" title="interface in io.sphere.sdk.search">FilterDsl</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>,<a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html" title="interface in io.sphere.sdk.products.search">ProductProjectionSearch</a>&gt;</code></dd>
 <dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>facetFilters</code> - the new facet filter list</dd>
+<dd><code>filterExpressions</code> - the new facet filter expression list</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
-<dd>an EntitySearch with the existing facet filters plus the new facet filter list.</dd>
-</dl>
-</li>
-</ul>
-<a name="plusFacetFilters-io.sphere.sdk.search.FilterExpression-">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>plusFacetFilters</h4>
-<pre><a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html" title="interface in io.sphere.sdk.products.search">ProductProjectionSearch</a>&nbsp;plusFacetFilters(<a href="../../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;&nbsp;facetFilter)</pre>
-<dl>
-<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../../io/sphere/sdk/search/MetaModelSearchDsl.html#plusFacetFilters-io.sphere.sdk.search.FilterExpression-">plusFacetFilters</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="interface in io.sphere.sdk.search">MetaModelSearchDsl</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>,<a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html" title="interface in io.sphere.sdk.products.search">ProductProjectionSearch</a>,<a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearchModel.html" title="class in io.sphere.sdk.products.search">ProductProjectionSearchModel</a>,<a href="../../../../../io/sphere/sdk/products/expansion/ProductProjectionExpansionModel.html" title="class in io.sphere.sdk.products.expansion">ProductProjectionExpansionModel</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;&gt;</code></dd>
-<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../../io/sphere/sdk/search/SearchDsl.html#plusFacetFilters-io.sphere.sdk.search.FilterExpression-">plusFacetFilters</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../io/sphere/sdk/search/SearchDsl.html" title="interface in io.sphere.sdk.search">SearchDsl</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>,<a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html" title="interface in io.sphere.sdk.products.search">ProductProjectionSearch</a>&gt;</code></dd>
+<dd>a new object with the existing <code>facetFilters</code> plus the new <code>filterExpressions</code>.</dd>
 </dl>
 </li>
 </ul>
@@ -889,44 +653,73 @@ extends <a href="../../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" ti
 <ul class="blockList">
 <li class="blockList">
 <h4>plusFacetFilters</h4>
-<pre><a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html" title="interface in io.sphere.sdk.products.search">ProductProjectionSearch</a>&nbsp;plusFacetFilters(java.util.function.Function&lt;<a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearchModel.html" title="class in io.sphere.sdk.products.search">ProductProjectionSearchModel</a>,<a href="../../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;&gt;&nbsp;m)</pre>
+<pre><a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html" title="interface in io.sphere.sdk.products.search">ProductProjectionSearch</a>&nbsp;plusFacetFilters(java.util.function.Function&lt;<a href="../../../../../io/sphere/sdk/products/search/ProductProjectionFilterSearchModel.html" title="class in io.sphere.sdk.products.search">ProductProjectionFilterSearchModel</a>,java.util.List&lt;<a href="../../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;&gt;&gt;&nbsp;m)</pre>
+<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../../io/sphere/sdk/search/MetaModelFilterDsl.html#plusFacetFilters-java.util.function.Function-">MetaModelFilterDsl</a></code></span></div>
+<div class="block">Creates a new object with the properties of the old object but adds a new filter list to the <code>facetFilters</code> by using meta models.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../../io/sphere/sdk/search/MetaModelSearchDsl.html#plusFacetFilters-java.util.function.Function-">plusFacetFilters</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="interface in io.sphere.sdk.search">MetaModelSearchDsl</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>,<a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html" title="interface in io.sphere.sdk.products.search">ProductProjectionSearch</a>,<a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearchModel.html" title="class in io.sphere.sdk.products.search">ProductProjectionSearchModel</a>,<a href="../../../../../io/sphere/sdk/products/expansion/ProductProjectionExpansionModel.html" title="class in io.sphere.sdk.products.expansion">ProductProjectionExpansionModel</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;&gt;</code></dd>
-</dl>
-</li>
-</ul>
-<a name="withSort-io.sphere.sdk.search.SearchSort-">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>withSort</h4>
-<pre><a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html" title="interface in io.sphere.sdk.products.search">ProductProjectionSearch</a>&nbsp;withSort(<a href="../../../../../io/sphere/sdk/search/SearchSort.html" title="interface in io.sphere.sdk.search">SearchSort</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;&nbsp;sort)</pre>
-<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../../io/sphere/sdk/search/SearchDsl.html#withSort-io.sphere.sdk.search.SearchSort-">SearchDsl</a></code></span></div>
-<div class="block">Returns an EntityQuery with the new sort as sort.</div>
-<dl>
-<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../../io/sphere/sdk/search/MetaModelSearchDsl.html#withSort-io.sphere.sdk.search.SearchSort-">withSort</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="interface in io.sphere.sdk.search">MetaModelSearchDsl</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>,<a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html" title="interface in io.sphere.sdk.products.search">ProductProjectionSearch</a>,<a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearchModel.html" title="class in io.sphere.sdk.products.search">ProductProjectionSearchModel</a>,<a href="../../../../../io/sphere/sdk/products/expansion/ProductProjectionExpansionModel.html" title="class in io.sphere.sdk.products.expansion">ProductProjectionExpansionModel</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;&gt;</code></dd>
-<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../../io/sphere/sdk/search/SearchDsl.html#withSort-io.sphere.sdk.search.SearchSort-">withSort</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../io/sphere/sdk/search/SearchDsl.html" title="interface in io.sphere.sdk.search">SearchDsl</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>,<a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html" title="interface in io.sphere.sdk.products.search">ProductProjectionSearch</a>&gt;</code></dd>
+<dd><code><a href="../../../../../io/sphere/sdk/search/MetaModelFilterDsl.html#plusFacetFilters-java.util.function.Function-">plusFacetFilters</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../io/sphere/sdk/search/MetaModelFilterDsl.html" title="interface in io.sphere.sdk.search">MetaModelFilterDsl</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>,<a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html" title="interface in io.sphere.sdk.products.search">ProductProjectionSearch</a>,<a href="../../../../../io/sphere/sdk/products/search/ProductProjectionFilterSearchModel.html" title="class in io.sphere.sdk.products.search">ProductProjectionFilterSearchModel</a>&gt;</code></dd>
 <dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>sort</code> - how the results of the search should be sorted</dd>
+<dd><code>m</code> - function to use the meta model for filters to create a filter expression</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
-<dd>EntityQuery with sort</dd>
+<dd>new object</dd>
 </dl>
 </li>
 </ul>
-<a name="withSort-java.util.function.Function-">
+<a name="plusSort-java.util.List-">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
-<h4>withSort</h4>
-<pre><a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html" title="interface in io.sphere.sdk.products.search">ProductProjectionSearch</a>&nbsp;withSort(java.util.function.Function&lt;<a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearchModel.html" title="class in io.sphere.sdk.products.search">ProductProjectionSearchModel</a>,<a href="../../../../../io/sphere/sdk/search/SearchSort.html" title="interface in io.sphere.sdk.search">SearchSort</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;&gt;&nbsp;m)</pre>
+<h4>plusSort</h4>
+<pre><a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html" title="interface in io.sphere.sdk.products.search">ProductProjectionSearch</a>&nbsp;plusSort(java.util.List&lt;<a href="../../../../../io/sphere/sdk/search/SortExpression.html" title="interface in io.sphere.sdk.search">SortExpression</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;&gt;&nbsp;sortExpressions)</pre>
+<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../../io/sphere/sdk/search/SortDsl.html#plusSort-java.util.List-">SortDsl</a></code></span></div>
+<div class="block">Returns a new object with the new sort expression list appended to the existing sort expressions.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../../io/sphere/sdk/search/MetaModelSearchDsl.html#withSort-java.util.function.Function-">withSort</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="interface in io.sphere.sdk.search">MetaModelSearchDsl</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>,<a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html" title="interface in io.sphere.sdk.products.search">ProductProjectionSearch</a>,<a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearchModel.html" title="class in io.sphere.sdk.products.search">ProductProjectionSearchModel</a>,<a href="../../../../../io/sphere/sdk/products/expansion/ProductProjectionExpansionModel.html" title="class in io.sphere.sdk.products.expansion">ProductProjectionExpansionModel</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;&gt;</code></dd>
+<dd><code><a href="../../../../../io/sphere/sdk/search/SortDsl.html#plusSort-java.util.List-">plusSort</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../io/sphere/sdk/search/SortDsl.html" title="interface in io.sphere.sdk.search">SortDsl</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>,<a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html" title="interface in io.sphere.sdk.products.search">ProductProjectionSearch</a>&gt;</code></dd>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>sortExpressions</code> - the new sort expression list</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>a new object with the existing sort expressions plus the new <code>sortExpressions</code>.</dd>
+</dl>
+</li>
+</ul>
+<a name="plusSort-io.sphere.sdk.search.SortExpression-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>plusSort</h4>
+<pre><a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html" title="interface in io.sphere.sdk.products.search">ProductProjectionSearch</a>&nbsp;plusSort(<a href="../../../../../io/sphere/sdk/search/SortExpression.html" title="interface in io.sphere.sdk.search">SortExpression</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;&nbsp;sortExpression)</pre>
+<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../../io/sphere/sdk/search/SortDsl.html#plusSort-io.sphere.sdk.search.SortExpression-">SortDsl</a></code></span></div>
+<div class="block">Returns a new object with the new sort expression list appended to the existing sort expressions.</div>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../../io/sphere/sdk/search/SortDsl.html#plusSort-io.sphere.sdk.search.SortExpression-">plusSort</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../io/sphere/sdk/search/SortDsl.html" title="interface in io.sphere.sdk.search">SortDsl</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>,<a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html" title="interface in io.sphere.sdk.products.search">ProductProjectionSearch</a>&gt;</code></dd>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>sortExpression</code> - the new sort expression</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>a new object with the existing sort expressions plus the new <code>sortExpressions</code>.</dd>
+</dl>
+</li>
+</ul>
+<a name="plusSort-java.util.function.Function-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>plusSort</h4>
+<pre><a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html" title="interface in io.sphere.sdk.products.search">ProductProjectionSearch</a>&nbsp;plusSort(java.util.function.Function&lt;<a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSortSearchModel.html" title="class in io.sphere.sdk.products.search">ProductProjectionSortSearchModel</a>,<a href="../../../../../io/sphere/sdk/search/SortExpression.html" title="interface in io.sphere.sdk.search">SortExpression</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;&gt;&nbsp;m)</pre>
+<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../../io/sphere/sdk/search/MetaModelSortDsl.html#plusSort-java.util.function.Function-">MetaModelSortDsl</a></code></span></div>
+<div class="block">Creates a new object with the properties of the old object but adds a new sort expression to it by using meta models.</div>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../../io/sphere/sdk/search/MetaModelSortDsl.html#plusSort-java.util.function.Function-">plusSort</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../io/sphere/sdk/search/MetaModelSortDsl.html" title="interface in io.sphere.sdk.search">MetaModelSortDsl</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>,<a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html" title="interface in io.sphere.sdk.products.search">ProductProjectionSearch</a>,<a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSortSearchModel.html" title="class in io.sphere.sdk.products.search">ProductProjectionSortSearchModel</a>&gt;</code></dd>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>m</code> - function to use the meta model for sort to create a sort expression</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>new object</dd>
 </dl>
 </li>
 </ul>
@@ -937,11 +730,15 @@ extends <a href="../../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" ti
 <li class="blockList">
 <h4>withLimit</h4>
 <pre><a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html" title="interface in io.sphere.sdk.products.search">ProductProjectionSearch</a>&nbsp;withLimit(long&nbsp;limit)</pre>
+<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../../io/sphere/sdk/search/SearchDsl.html#withLimit-long-">SearchDsl</a></code></span></div>
+<div class="block">Returns a new object with the new limit.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../../io/sphere/sdk/search/MetaModelSearchDsl.html#withLimit-long-">withLimit</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="interface in io.sphere.sdk.search">MetaModelSearchDsl</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>,<a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html" title="interface in io.sphere.sdk.products.search">ProductProjectionSearch</a>,<a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearchModel.html" title="class in io.sphere.sdk.products.search">ProductProjectionSearchModel</a>,<a href="../../../../../io/sphere/sdk/products/expansion/ProductProjectionExpansionModel.html" title="class in io.sphere.sdk.products.expansion">ProductProjectionExpansionModel</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;&gt;</code></dd>
-<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="../../../../../io/sphere/sdk/search/SearchDsl.html#withLimit-long-">withLimit</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../io/sphere/sdk/search/SearchDsl.html" title="interface in io.sphere.sdk.search">SearchDsl</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>,<a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html" title="interface in io.sphere.sdk.products.search">ProductProjectionSearch</a>&gt;</code></dd>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>limit</code> - the new limit</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>a new object with <code>limit</code></dd>
 </dl>
 </li>
 </ul>
@@ -952,102 +749,15 @@ extends <a href="../../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" ti
 <li class="blockList">
 <h4>withOffset</h4>
 <pre><a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html" title="interface in io.sphere.sdk.products.search">ProductProjectionSearch</a>&nbsp;withOffset(long&nbsp;offset)</pre>
+<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../../io/sphere/sdk/search/SearchDsl.html#withOffset-long-">SearchDsl</a></code></span></div>
+<div class="block">Returns a new object with the new offset.</div>
 <dl>
-<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../../io/sphere/sdk/search/MetaModelSearchDsl.html#withOffset-long-">withOffset</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="interface in io.sphere.sdk.search">MetaModelSearchDsl</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>,<a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html" title="interface in io.sphere.sdk.products.search">ProductProjectionSearch</a>,<a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearchModel.html" title="class in io.sphere.sdk.products.search">ProductProjectionSearchModel</a>,<a href="../../../../../io/sphere/sdk/products/expansion/ProductProjectionExpansionModel.html" title="class in io.sphere.sdk.products.expansion">ProductProjectionExpansionModel</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;&gt;</code></dd>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="../../../../../io/sphere/sdk/search/SearchDsl.html#withOffset-long-">withOffset</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../io/sphere/sdk/search/SearchDsl.html" title="interface in io.sphere.sdk.search">SearchDsl</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>,<a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html" title="interface in io.sphere.sdk.products.search">ProductProjectionSearch</a>&gt;</code></dd>
-</dl>
-</li>
-</ul>
-<a name="withExpansionPaths-java.util.List-">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>withExpansionPaths</h4>
-<pre><a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html" title="interface in io.sphere.sdk.products.search">ProductProjectionSearch</a>&nbsp;withExpansionPaths(java.util.List&lt;<a href="../../../../../io/sphere/sdk/expansion/ExpansionPath.html" title="interface in io.sphere.sdk.expansion">ExpansionPath</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;&gt;&nbsp;expansionPaths)</pre>
-<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../../io/sphere/sdk/expansion/ReferenceExpansionDsl.html#withExpansionPaths-java.util.List-">ReferenceExpansionDsl</a></code></span></div>
-<div class="block">Creates a new object with the properties of the old object but replaces all expansion paths with <code>expansionPaths</code>.</div>
-<dl>
-<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../../io/sphere/sdk/expansion/ReferenceExpansionDsl.html#withExpansionPaths-java.util.List-">withExpansionPaths</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../io/sphere/sdk/expansion/ReferenceExpansionDsl.html" title="interface in io.sphere.sdk.expansion">ReferenceExpansionDsl</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>,<a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html" title="interface in io.sphere.sdk.products.search">ProductProjectionSearch</a>&gt;</code></dd>
 <dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>expansionPaths</code> - the new expansion paths</dd>
+<dd><code>offset</code> - the new offset</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
-<dd>new object</dd>
-</dl>
-</li>
-</ul>
-<a name="withExpansionPaths-io.sphere.sdk.expansion.ExpansionPath-">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>withExpansionPaths</h4>
-<pre><a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html" title="interface in io.sphere.sdk.products.search">ProductProjectionSearch</a>&nbsp;withExpansionPaths(<a href="../../../../../io/sphere/sdk/expansion/ExpansionPath.html" title="interface in io.sphere.sdk.expansion">ExpansionPath</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;&nbsp;expansionPath)</pre>
-<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../../io/sphere/sdk/expansion/ReferenceExpansionDsl.html#withExpansionPaths-io.sphere.sdk.expansion.ExpansionPath-">ReferenceExpansionDsl</a></code></span></div>
-<div class="block">Creates a new object with the properties of the old object but replaces all expansion paths with a single <code>expansionPath</code>.
-
- <p>An example in the product projection context:</p>
- <div id="io-sphere-sdk-products-expansion-ProductProjectionExpansionModelTest-withExpansionPathDemo--%s" class=code-example><pre><code class='java'>final ProductProjectionByIdGet fetch = ProductProjectionByIdGet.of("id", ProductProjectionType.CURRENT)
-                .withExpansionPaths(asList(ProductProjectionExpansionModel.of().categories()));
-
-assertThat(fetch.expansionPaths())
-        .isEqualTo(asList(ExpansionPath.of("categories[*]")));
-
-final ProductProjectionByIdGet fetch2 =
-        fetch.withExpansionPaths(ProductProjectionExpansionModel.of().productType());
-
-assertThat(fetch.expansionPaths()).overridingErrorMessage("old object is unchanged")
-        .isEqualTo(asList(ExpansionPath.of("categories[*]")));
-assertThat(fetch2.expansionPaths()).isEqualTo(asList(ExpansionPath.of("productType")));
-assertThat(fetch2).isNotSameAs(fetch);
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/test/java/io/sphere/sdk/products/expansion/ProductProjectionExpansionModelTest.java" target="_blank">test code</a>.</pre></div></div>
-<dl>
-<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../../io/sphere/sdk/expansion/ReferenceExpansionDsl.html#withExpansionPaths-io.sphere.sdk.expansion.ExpansionPath-">withExpansionPaths</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../io/sphere/sdk/expansion/ReferenceExpansionDsl.html" title="interface in io.sphere.sdk.expansion">ReferenceExpansionDsl</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>,<a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html" title="interface in io.sphere.sdk.products.search">ProductProjectionSearch</a>&gt;</code></dd>
-<dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>expansionPath</code> - the new expansion paths</dd>
-<dt><span class="returnLabel">Returns:</span></dt>
-<dd>new object</dd>
-</dl>
-</li>
-</ul>
-<a name="withExpansionPaths-java.util.function.Function-">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>withExpansionPaths</h4>
-<pre><a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html" title="interface in io.sphere.sdk.products.search">ProductProjectionSearch</a>&nbsp;withExpansionPaths(java.util.function.Function&lt;<a href="../../../../../io/sphere/sdk/products/expansion/ProductProjectionExpansionModel.html" title="class in io.sphere.sdk.products.expansion">ProductProjectionExpansionModel</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;,<a href="../../../../../io/sphere/sdk/expansion/ExpansionPath.html" title="interface in io.sphere.sdk.expansion">ExpansionPath</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;&gt;&nbsp;m)</pre>
-<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../../io/sphere/sdk/expansion/MetaModelExpansionDsl.html#withExpansionPaths-java.util.function.Function-">MetaModelExpansionDsl</a></code></span></div>
-<div class="block">Creates a new object with the properties of the old object but replaces all expansion paths with a single <code>expansionPath</code> by using meta models.
-
- <p>An example in the product projection context:</p>
- <div id="io-sphere-sdk-products-expansion-ProductProjectionExpansionModelTest-withExpansionPathDslDemo--%s" class=code-example><pre><code class='java'>final ProductProjectionByIdGet fetch = ProductProjectionByIdGet.of("id", ProductProjectionType.CURRENT)
-                .plusExpansionPaths(ProductProjectionExpansionModel.of().categories());
-
-assertThat(fetch.expansionPaths())
-        .isEqualTo(asList(ExpansionPath.of("categories[*]")));
-
-final ProductProjectionByIdGet fetch2 =
-        fetch.withExpansionPaths(m -&gt; m.productType());
-
-assertThat(fetch.expansionPaths()).overridingErrorMessage("old object is unchanged")
-        .isEqualTo(asList(ExpansionPath.of("categories[*]")));
-assertThat(fetch2.expansionPaths()).isEqualTo(asList(ExpansionPath.of("productType")));
-assertThat(fetch2).isNotSameAs(fetch);
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/test/java/io/sphere/sdk/products/expansion/ProductProjectionExpansionModelTest.java" target="_blank">test code</a>.</pre></div></div>
-<dl>
-<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../../io/sphere/sdk/expansion/MetaModelExpansionDsl.html#withExpansionPaths-java.util.function.Function-">withExpansionPaths</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../io/sphere/sdk/expansion/MetaModelExpansionDsl.html" title="interface in io.sphere.sdk.expansion">MetaModelExpansionDsl</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>,<a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html" title="interface in io.sphere.sdk.products.search">ProductProjectionSearch</a>,<a href="../../../../../io/sphere/sdk/products/expansion/ProductProjectionExpansionModel.html" title="class in io.sphere.sdk.products.expansion">ProductProjectionExpansionModel</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;&gt;</code></dd>
-<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../../io/sphere/sdk/search/MetaModelSearchDsl.html#withExpansionPaths-java.util.function.Function-">withExpansionPaths</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="interface in io.sphere.sdk.search">MetaModelSearchDsl</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>,<a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html" title="interface in io.sphere.sdk.products.search">ProductProjectionSearch</a>,<a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearchModel.html" title="class in io.sphere.sdk.products.search">ProductProjectionSearchModel</a>,<a href="../../../../../io/sphere/sdk/products/expansion/ProductProjectionExpansionModel.html" title="class in io.sphere.sdk.products.expansion">ProductProjectionExpansionModel</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;&gt;</code></dd>
-<dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>m</code> - function to use the meta model for expansions to create an expansion path</dd>
-<dt><span class="returnLabel">Returns:</span></dt>
-<dd>new object</dd>
+<dd>a new object with <code>offset</code></dd>
 </dl>
 </li>
 </ul>
@@ -1135,8 +845,6 @@ assertThat(fetchB.expansionPaths())
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="../../../../../io/sphere/sdk/expansion/MetaModelExpansionDsl.html#plusExpansionPaths-java.util.function.Function-">plusExpansionPaths</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../io/sphere/sdk/expansion/MetaModelExpansionDsl.html" title="interface in io.sphere.sdk.expansion">MetaModelExpansionDsl</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>,<a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html" title="interface in io.sphere.sdk.products.search">ProductProjectionSearch</a>,<a href="../../../../../io/sphere/sdk/products/expansion/ProductProjectionExpansionModel.html" title="class in io.sphere.sdk.products.expansion">ProductProjectionExpansionModel</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;&gt;</code></dd>
-<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../../io/sphere/sdk/search/MetaModelSearchDsl.html#plusExpansionPaths-java.util.function.Function-">plusExpansionPaths</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="interface in io.sphere.sdk.search">MetaModelSearchDsl</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>,<a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html" title="interface in io.sphere.sdk.products.search">ProductProjectionSearch</a>,<a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearchModel.html" title="class in io.sphere.sdk.products.search">ProductProjectionSearchModel</a>,<a href="../../../../../io/sphere/sdk/products/expansion/ProductProjectionExpansionModel.html" title="class in io.sphere.sdk.products.expansion">ProductProjectionExpansionModel</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;&gt;</code></dd>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>m</code> - function to use the meta model for expansions to create an expansion path</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
@@ -1171,7 +879,7 @@ assertThat(fetchB.expansionPaths())
 </div>
 <div class="subNav">
 <ul class="navList">
-<li><a href="../../../../../io/sphere/sdk/products/search/ProductAttributeSearchModel.html" title="class in io.sphere.sdk.products.search"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
+<li><a href="../../../../../io/sphere/sdk/products/search/ProductProjectionFilterSearchModel.html" title="class in io.sphere.sdk.products.search"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
 <li><a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearchModel.html" title="class in io.sphere.sdk.products.search"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">

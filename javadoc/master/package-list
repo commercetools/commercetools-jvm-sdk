@@ -93,6 +93,7 @@ io.sphere.sdk.reviews.commands.updateactions
 io.sphere.sdk.reviews.expansion
 io.sphere.sdk.reviews.queries
 io.sphere.sdk.search
+io.sphere.sdk.search.model
 io.sphere.sdk.search.tokenizer
 io.sphere.sdk.shippingmethods
 io.sphere.sdk.shippingmethods.commands

@@ -68,10 +68,10 @@
 <li><a href="io/sphere/sdk/client/BadRequestException.html" title="class in io.sphere.sdk.client">BadRequestException</a></li>
 <li><a href="io/sphere/sdk/models/Base.html" title="class in io.sphere.sdk.models">Base</a></li>
 <li><a href="io/sphere/sdk/queries/BooleanQueryModel.html" title="interface in io.sphere.sdk.queries"><span class="interfaceName">BooleanQueryModel</span></a></li>
-<li><a href="io/sphere/sdk/search/BooleanSearchModel.html" title="class in io.sphere.sdk.search">BooleanSearchModel</a></li>
+<li><a href="io/sphere/sdk/search/model/BooleanSearchModel.html" title="class in io.sphere.sdk.search.model">BooleanSearchModel</a></li>
 <li><a href="io/sphere/sdk/products/attributes/BooleanType.html" title="class in io.sphere.sdk.products.attributes">BooleanType</a></li>
 <li><a href="io/sphere/sdk/types/BooleanType.html" title="class in io.sphere.sdk.types">BooleanType</a></li>
-<li><a href="io/sphere/sdk/search/Bound.html" title="class in io.sphere.sdk.search">Bound</a></li>
+<li><a href="io/sphere/sdk/search/model/Bound.html" title="class in io.sphere.sdk.search.model">Bound</a></li>
 <li><a href="io/sphere/sdk/models/Builder.html" title="interface in io.sphere.sdk.models"><span class="interfaceName">Builder</span></a></li>
 <li><a href="io/sphere/sdk/meta/BuildInfo.html" title="class in io.sphere.sdk.meta">BuildInfo</a></li>
 <li><a href="io/sphere/sdk/commands/ByIdDeleteCommand.html" title="interface in io.sphere.sdk.commands"><span class="interfaceName">ByIdDeleteCommand</span></a></li>
@@ -189,7 +189,7 @@
 <li><a href="io/sphere/sdk/commands/CreateCommandImpl.html" title="class in io.sphere.sdk.commands">CreateCommandImpl</a></li>
 <li><a href="io/sphere/sdk/models/CreationTimestamped.html" title="interface in io.sphere.sdk.models"><span class="interfaceName">CreationTimestamped</span></a></li>
 <li><a href="io/sphere/sdk/queries/CurrencyCodeQueryModel.html" title="interface in io.sphere.sdk.queries"><span class="interfaceName">CurrencyCodeQueryModel</span></a></li>
-<li><a href="io/sphere/sdk/search/CurrencySearchModel.html" title="class in io.sphere.sdk.search">CurrencySearchModel</a></li>
+<li><a href="io/sphere/sdk/search/model/CurrencySearchModel.html" title="class in io.sphere.sdk.search.model">CurrencySearchModel</a></li>
 <li><a href="io/sphere/sdk/types/Custom.html" title="interface in io.sphere.sdk.types"><span class="interfaceName">Custom</span></a></li>
 <li><a href="io/sphere/sdk/customers/Customer.html" title="interface in io.sphere.sdk.customers"><span class="interfaceName">Customer</span></a></li>
 <li><a href="io/sphere/sdk/customers/queries/CustomerByIdGet.html" title="interface in io.sphere.sdk.customers.queries"><span class="interfaceName">CustomerByIdGet</span></a></li>
@@ -248,8 +248,8 @@
 <li><a href="io/sphere/sdk/types/queries/CustomQueryModel.html" title="interface in io.sphere.sdk.types.queries"><span class="interfaceName">CustomQueryModel</span></a></li>
 <li><a href="io/sphere/sdk/types/queries/CustomQueryModelImpl.html" title="class in io.sphere.sdk.types.queries">CustomQueryModelImpl</a></li>
 <li><a href="io/sphere/sdk/search/tokenizer/CustomSuggestTokenizer.html" title="class in io.sphere.sdk.search.tokenizer">CustomSuggestTokenizer</a></li>
-<li><a href="io/sphere/sdk/search/DateSearchModel.html" title="class in io.sphere.sdk.search">DateSearchModel</a></li>
-<li><a href="io/sphere/sdk/search/DateTimeSearchModel.html" title="class in io.sphere.sdk.search">DateTimeSearchModel</a></li>
+<li><a href="io/sphere/sdk/search/model/DateSearchModel.html" title="class in io.sphere.sdk.search.model">DateSearchModel</a></li>
+<li><a href="io/sphere/sdk/search/model/DateTimeSearchModel.html" title="class in io.sphere.sdk.search.model">DateTimeSearchModel</a></li>
 <li><a href="io/sphere/sdk/products/attributes/DateTimeType.html" title="class in io.sphere.sdk.products.attributes">DateTimeType</a></li>
 <li><a href="io/sphere/sdk/types/DateTimeType.html" title="class in io.sphere.sdk.types">DateTimeType</a></li>
 <li><a href="io/sphere/sdk/products/attributes/DateType.html" title="class in io.sphere.sdk.products.attributes">DateType</a></li>
@@ -283,7 +283,9 @@
 <li><a href="io/sphere/sdk/meta/DocumentationGuidelines.html" title="class in io.sphere.sdk.meta">DocumentationGuidelines</a></li>
 <li><a href="io/sphere/sdk/queries/EntityQuery.html" title="interface in io.sphere.sdk.queries"><span class="interfaceName">EntityQuery</span></a></li>
 <li><a href="io/sphere/sdk/search/EntitySearch.html" title="interface in io.sphere.sdk.search"><span class="interfaceName">EntitySearch</span></a></li>
-<li><a href="io/sphere/sdk/search/EnumSearchModel.html" title="class in io.sphere.sdk.search">EnumSearchModel</a></li>
+<li><a href="io/sphere/sdk/search/model/EnumFacetSearchModel.html" title="class in io.sphere.sdk.search.model">EnumFacetSearchModel</a></li>
+<li><a href="io/sphere/sdk/search/model/EnumFilterSearchModel.html" title="class in io.sphere.sdk.search.model">EnumFilterSearchModel</a></li>
+<li><a href="io/sphere/sdk/search/model/EnumSortSearchModel.html" title="class in io.sphere.sdk.search.model">EnumSortSearchModel</a></li>
 <li><a href="io/sphere/sdk/products/attributes/EnumType.html" title="class in io.sphere.sdk.products.attributes">EnumType</a></li>
 <li><a href="io/sphere/sdk/types/EnumType.html" title="class in io.sphere.sdk.types">EnumType</a></li>
 <li><a href="io/sphere/sdk/models/EnumValue.html" title="class in io.sphere.sdk.models">EnumValue</a></li>
@@ -296,19 +298,21 @@
 <li><a href="io/sphere/sdk/expansion/ExpansionModel.html" title="class in io.sphere.sdk.expansion">ExpansionModel</a></li>
 <li><a href="io/sphere/sdk/expansion/ExpansionPath.html" title="interface in io.sphere.sdk.expansion"><span class="interfaceName">ExpansionPath</span></a></li>
 <li><a href="io/sphere/sdk/queries/ExperimentalReactiveStreamUtils.html" title="class in io.sphere.sdk.queries">ExperimentalReactiveStreamUtils</a></li>
+<li><a href="io/sphere/sdk/search/FacetDsl.html" title="interface in io.sphere.sdk.search"><span class="interfaceName">FacetDsl</span></a></li>
 <li><a href="io/sphere/sdk/search/FacetExpression.html" title="interface in io.sphere.sdk.search"><span class="interfaceName">FacetExpression</span></a></li>
-<li><a href="io/sphere/sdk/search/FacetRange.html" title="class in io.sphere.sdk.search">FacetRange</a></li>
+<li><a href="io/sphere/sdk/search/model/FacetRange.html" title="class in io.sphere.sdk.search.model">FacetRange</a></li>
 <li><a href="io/sphere/sdk/search/FacetResult.html" title="interface in io.sphere.sdk.search"><span class="interfaceName">FacetResult</span></a></li>
-<li><a href="io/sphere/sdk/search/FacetSearchModel.html" title="class in io.sphere.sdk.search">FacetSearchModel</a></li>
+<li><a href="io/sphere/sdk/search/FacetSupport.html" title="interface in io.sphere.sdk.search"><span class="interfaceName">FacetSupport</span></a></li>
 <li><a href="io/sphere/sdk/types/FieldDefinition.html" title="class in io.sphere.sdk.types">FieldDefinition</a></li>
 <li><a href="io/sphere/sdk/types/FieldType.html" title="interface in io.sphere.sdk.types"><span class="interfaceName">FieldType</span></a></li>
 <li><a href="io/sphere/sdk/types/FieldTypeBase.html" title="class in io.sphere.sdk.types">FieldTypeBase</a></li>
 <li><a href="io/sphere/sdk/http/FileHttpRequestBody.html" title="class in io.sphere.sdk.http">FileHttpRequestBody</a></li>
-<li><a href="io/sphere/sdk/search/FilteredFacetExpression.html" title="class in io.sphere.sdk.search">FilteredFacetExpression</a></li>
+<li><a href="io/sphere/sdk/search/FilterDsl.html" title="interface in io.sphere.sdk.search"><span class="interfaceName">FilterDsl</span></a></li>
+<li><a href="io/sphere/sdk/search/FilteredFacetExpression.html" title="interface in io.sphere.sdk.search"><span class="interfaceName">FilteredFacetExpression</span></a></li>
 <li><a href="io/sphere/sdk/search/FilteredFacetResult.html" title="class in io.sphere.sdk.search">FilteredFacetResult</a></li>
 <li><a href="io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search"><span class="interfaceName">FilterExpression</span></a></li>
-<li><a href="io/sphere/sdk/search/FilterRange.html" title="class in io.sphere.sdk.search">FilterRange</a></li>
-<li><a href="io/sphere/sdk/search/FilterSearchModel.html" title="class in io.sphere.sdk.search">FilterSearchModel</a></li>
+<li><a href="io/sphere/sdk/search/model/FilterRange.html" title="class in io.sphere.sdk.search.model">FilterRange</a></li>
+<li><a href="io/sphere/sdk/search/FilterSupport.html" title="interface in io.sphere.sdk.search"><span class="interfaceName">FilterSupport</span></a></li>
 <li><a href="io/sphere/sdk/meta/FormattingDocumentation.html" title="class in io.sphere.sdk.meta">FormattingDocumentation</a></li>
 <li><a href="io/sphere/sdk/http/FormUrlEncodedHttpRequestBody.html" title="class in io.sphere.sdk.http">FormUrlEncodedHttpRequestBody</a></li>
 <li><a href="io/sphere/sdk/utils/functional/FunctionalUtils.html" title="class in io.sphere.sdk.utils.functional">FunctionalUtils</a></li>
@@ -340,7 +344,7 @@
 <li><a href="io/sphere/sdk/models/errors/InvalidField.html" title="class in io.sphere.sdk.models.errors">InvalidField</a></li>
 <li><a href="io/sphere/sdk/models/errors/InvalidJsonInputError.html" title="class in io.sphere.sdk.models.errors">InvalidJsonInputError</a></li>
 <li><a href="io/sphere/sdk/queries/InvalidQueryOffsetException.html" title="class in io.sphere.sdk.queries">InvalidQueryOffsetException</a></li>
-<li><a href="io/sphere/sdk/search/InvalidRangeException.html" title="class in io.sphere.sdk.search">InvalidRangeException</a></li>
+<li><a href="io/sphere/sdk/search/model/InvalidRangeException.html" title="class in io.sphere.sdk.search.model">InvalidRangeException</a></li>
 <li><a href="io/sphere/sdk/client/InvalidTokenException.html" title="class in io.sphere.sdk.client">InvalidTokenException</a></li>
 <li><a href="io/sphere/sdk/inventory/InventoryEntry.html" title="interface in io.sphere.sdk.inventory"><span class="interfaceName">InventoryEntry</span></a></li>
 <li><a href="io/sphere/sdk/inventory/queries/InventoryEntryByIdGet.html" title="interface in io.sphere.sdk.inventory.queries"><span class="interfaceName">InventoryEntryByIdGet</span></a></li>
@@ -352,7 +356,7 @@
 <li><a href="io/sphere/sdk/inventory/queries/InventoryEntryQueryModel.html" title="interface in io.sphere.sdk.inventory.queries"><span class="interfaceName">InventoryEntryQueryModel</span></a></li>
 <li><a href="io/sphere/sdk/inventory/commands/InventoryEntryUpdateCommand.html" title="interface in io.sphere.sdk.inventory.commands"><span class="interfaceName">InventoryEntryUpdateCommand</span></a></li>
 <li><a href="io/sphere/sdk/carts/InventoryMode.html" title="enum in io.sphere.sdk.carts">InventoryMode</a></li>
-<li><a href="io/sphere/sdk/search/InvertedBoundsException.html" title="class in io.sphere.sdk.search">InvertedBoundsException</a></li>
+<li><a href="io/sphere/sdk/search/model/InvertedBoundsException.html" title="class in io.sphere.sdk.search.model">InvertedBoundsException</a></li>
 <li><a href="io/sphere/sdk/queries/IsInQueryModel.html" title="interface in io.sphere.sdk.queries"><span class="interfaceName">IsInQueryModel</span></a></li>
 <li><a href="io/sphere/sdk/queries/IsNotInQueryModel.html" title="interface in io.sphere.sdk.queries"><span class="interfaceName">IsNotInQueryModel</span></a></li>
 <li><a href="io/sphere/sdk/carts/ItemState.html" title="class in io.sphere.sdk.carts">ItemState</a></li>
@@ -371,15 +375,19 @@
 <li><a href="io/sphere/sdk/cartdiscounts/LineItemsTarget.html" title="class in io.sphere.sdk.cartdiscounts">LineItemsTarget</a></li>
 <li><a href="io/sphere/sdk/utils/ListUtils.html" title="class in io.sphere.sdk.utils">ListUtils</a></li>
 <li><a href="io/sphere/sdk/utils/LocaleUtils.html" title="class in io.sphere.sdk.utils">LocaleUtils</a></li>
-<li><a href="io/sphere/sdk/search/LocalizedEnumSearchModel.html" title="class in io.sphere.sdk.search">LocalizedEnumSearchModel</a></li>
+<li><a href="io/sphere/sdk/search/model/LocalizedEnumFacetSearchModel.html" title="class in io.sphere.sdk.search.model">LocalizedEnumFacetSearchModel</a></li>
+<li><a href="io/sphere/sdk/search/model/LocalizedEnumFilterSearchModel.html" title="class in io.sphere.sdk.search.model">LocalizedEnumFilterSearchModel</a></li>
+<li><a href="io/sphere/sdk/search/model/LocalizedEnumSortSearchModel.html" title="class in io.sphere.sdk.search.model">LocalizedEnumSortSearchModel</a></li>
 <li><a href="io/sphere/sdk/products/attributes/LocalizedEnumType.html" title="class in io.sphere.sdk.products.attributes">LocalizedEnumType</a></li>
 <li><a href="io/sphere/sdk/types/LocalizedEnumType.html" title="class in io.sphere.sdk.types">LocalizedEnumType</a></li>
 <li><a href="io/sphere/sdk/models/LocalizedEnumValue.html" title="class in io.sphere.sdk.models">LocalizedEnumValue</a></li>
 <li><a href="io/sphere/sdk/models/LocalizedString.html" title="class in io.sphere.sdk.models">LocalizedString</a></li>
 <li><a href="io/sphere/sdk/models/LocalizedStringEntry.html" title="class in io.sphere.sdk.models">LocalizedStringEntry</a></li>
+<li><a href="io/sphere/sdk/search/model/LocalizedStringFacetSearchModel.html" title="class in io.sphere.sdk.search.model">LocalizedStringFacetSearchModel</a></li>
+<li><a href="io/sphere/sdk/search/model/LocalizedStringFilterSearchModel.html" title="class in io.sphere.sdk.search.model">LocalizedStringFilterSearchModel</a></li>
 <li><a href="io/sphere/sdk/queries/LocalizedStringQueryModel.html" title="interface in io.sphere.sdk.queries"><span class="interfaceName">LocalizedStringQueryModel</span></a></li>
 <li><a href="io/sphere/sdk/queries/LocalizedStringQuerySortingModel.html" title="interface in io.sphere.sdk.queries"><span class="interfaceName">LocalizedStringQuerySortingModel</span></a></li>
-<li><a href="io/sphere/sdk/search/LocalizedStringSearchModel.html" title="class in io.sphere.sdk.search">LocalizedStringSearchModel</a></li>
+<li><a href="io/sphere/sdk/search/model/LocalizedStringSortSearchModel.html" title="class in io.sphere.sdk.search.model">LocalizedStringSortSearchModel</a></li>
 <li><a href="io/sphere/sdk/products/attributes/LocalizedStringType.html" title="class in io.sphere.sdk.products.attributes">LocalizedStringType</a></li>
 <li><a href="io/sphere/sdk/types/LocalizedStringType.html" title="class in io.sphere.sdk.types">LocalizedStringType</a></li>
 <li><a href="io/sphere/sdk/zones/Location.html" title="class in io.sphere.sdk.zones">Location</a></li>
@@ -403,6 +411,8 @@
 <li><a href="io/sphere/sdk/commands/MetaModelCreateCommandImpl.html" title="class in io.sphere.sdk.commands">MetaModelCreateCommandImpl</a></li>
 <li><a href="io/sphere/sdk/expansion/MetaModelExpansionDsl.html" title="interface in io.sphere.sdk.expansion"><span class="interfaceName">MetaModelExpansionDsl</span></a></li>
 <li><a href="io/sphere/sdk/expansion/MetaModelExpansionDslExpansionModelRead.html" title="interface in io.sphere.sdk.expansion"><span class="interfaceName">MetaModelExpansionDslExpansionModelRead</span></a></li>
+<li><a href="io/sphere/sdk/search/MetaModelFacetDsl.html" title="interface in io.sphere.sdk.search"><span class="interfaceName">MetaModelFacetDsl</span></a></li>
+<li><a href="io/sphere/sdk/search/MetaModelFilterDsl.html" title="interface in io.sphere.sdk.search"><span class="interfaceName">MetaModelFilterDsl</span></a></li>
 <li><a href="io/sphere/sdk/queries/MetaModelGetDsl.html" title="interface in io.sphere.sdk.queries"><span class="interfaceName">MetaModelGetDsl</span></a></li>
 <li><a href="io/sphere/sdk/queries/MetaModelGetDslBuilder.html" title="class in io.sphere.sdk.queries">MetaModelGetDslBuilder</a></li>
 <li><a href="io/sphere/sdk/queries/MetaModelGetDslImpl.html" title="class in io.sphere.sdk.queries">MetaModelGetDslImpl</a></li>
@@ -412,20 +422,25 @@
 <li><a href="io/sphere/sdk/search/MetaModelSearchDsl.html" title="interface in io.sphere.sdk.search"><span class="interfaceName">MetaModelSearchDsl</span></a></li>
 <li><a href="io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="class in io.sphere.sdk.search">MetaModelSearchDslBuilder</a></li>
 <li><a href="io/sphere/sdk/search/MetaModelSearchDslImpl.html" title="class in io.sphere.sdk.search">MetaModelSearchDslImpl</a></li>
+<li><a href="io/sphere/sdk/search/MetaModelSortDsl.html" title="interface in io.sphere.sdk.search"><span class="interfaceName">MetaModelSortDsl</span></a></li>
 <li><a href="io/sphere/sdk/commands/MetaModelUpdateCommandDslBuilder.html" title="class in io.sphere.sdk.commands">MetaModelUpdateCommandDslBuilder</a></li>
 <li><a href="io/sphere/sdk/commands/MetaModelUpdateCommandDslImpl.html" title="class in io.sphere.sdk.commands">MetaModelUpdateCommandDslImpl</a></li>
 <li><a href="io/sphere/sdk/producttypes/MetaProductType.html" title="interface in io.sphere.sdk.producttypes"><span class="interfaceName">MetaProductType</span></a></li>
-<li><a href="io/sphere/sdk/search/MoneyCentAmountSearchModel.html" title="class in io.sphere.sdk.search">MoneyCentAmountSearchModel</a></li>
+<li><a href="io/sphere/sdk/search/model/MoneyCentAmountSearchModel.html" title="class in io.sphere.sdk.search.model">MoneyCentAmountSearchModel</a></li>
+<li><a href="io/sphere/sdk/search/model/MoneyFacetSearchModel.html" title="class in io.sphere.sdk.search.model">MoneyFacetSearchModel</a></li>
+<li><a href="io/sphere/sdk/search/model/MoneyFilterSearchModel.html" title="class in io.sphere.sdk.search.model">MoneyFilterSearchModel</a></li>
 <li><a href="io/sphere/sdk/utils/MoneyImpl.html" title="class in io.sphere.sdk.utils">MoneyImpl</a></li>
 <li><a href="io/sphere/sdk/queries/MoneyQueryModel.html" title="interface in io.sphere.sdk.queries"><span class="interfaceName">MoneyQueryModel</span></a></li>
-<li><a href="io/sphere/sdk/search/MoneySearchModel.html" title="class in io.sphere.sdk.search">MoneySearchModel</a></li>
+<li><a href="io/sphere/sdk/search/model/MoneySortSearchModel.html" title="class in io.sphere.sdk.search.model">MoneySortSearchModel</a></li>
 <li><a href="io/sphere/sdk/products/attributes/MoneyType.html" title="class in io.sphere.sdk.products.attributes">MoneyType</a></li>
 <li><a href="io/sphere/sdk/types/MoneyType.html" title="class in io.sphere.sdk.types">MoneyType</a></li>
+<li><a href="io/sphere/sdk/search/model/MultiValueSortSearchModel.html" title="class in io.sphere.sdk.search.model">MultiValueSortSearchModel</a></li>
+<li><a href="io/sphere/sdk/search/model/MultiValueSortSearchModelFactory.html" title="class in io.sphere.sdk.search.model">MultiValueSortSearchModelFactory</a></li>
 <li><a href="io/sphere/sdk/products/attributes/NamedAttributeAccess.html" title="interface in io.sphere.sdk.products.attributes"><span class="interfaceName">NamedAttributeAccess</span></a></li>
 <li><a href="io/sphere/sdk/products/attributes/NestedType.html" title="class in io.sphere.sdk.products.attributes">NestedType</a></li>
 <li><a href="io/sphere/sdk/queries/NotEqualQueryModel.html" title="interface in io.sphere.sdk.queries"><span class="interfaceName">NotEqualQueryModel</span></a></li>
 <li><a href="io/sphere/sdk/client/NotFoundException.html" title="class in io.sphere.sdk.client">NotFoundException</a></li>
-<li><a href="io/sphere/sdk/search/NumberSearchModel.html" title="class in io.sphere.sdk.search">NumberSearchModel</a></li>
+<li><a href="io/sphere/sdk/search/model/NumberSearchModel.html" title="class in io.sphere.sdk.search.model">NumberSearchModel</a></li>
 <li><a href="io/sphere/sdk/products/attributes/NumberType.html" title="class in io.sphere.sdk.products.attributes">NumberType</a></li>
 <li><a href="io/sphere/sdk/types/NumberType.html" title="class in io.sphere.sdk.types">NumberType</a></li>
 <li><a href="io/sphere/sdk/queries/OptionalQueryModel.html" title="interface in io.sphere.sdk.queries"><span class="interfaceName">OptionalQueryModel</span></a></li>
@@ -490,7 +505,9 @@
 <li><a href="io/sphere/sdk/products/queries/ProductAllVariantsQueryModel.html" title="class in io.sphere.sdk.products.queries">ProductAllVariantsQueryModel</a></li>
 <li><a href="io/sphere/sdk/meta/ProductAttributeDocumentation.html" title="class in io.sphere.sdk.meta">ProductAttributeDocumentation</a></li>
 <li><a href="io/sphere/sdk/products/expansion/ProductAttributeExpansionModel.html" title="class in io.sphere.sdk.products.expansion">ProductAttributeExpansionModel</a></li>
-<li><a href="io/sphere/sdk/products/search/ProductAttributeSearchModel.html" title="class in io.sphere.sdk.products.search">ProductAttributeSearchModel</a></li>
+<li><a href="io/sphere/sdk/products/search/ProductAttributeFacetSearchModel.html" title="class in io.sphere.sdk.products.search">ProductAttributeFacetSearchModel</a></li>
+<li><a href="io/sphere/sdk/products/search/ProductAttributeFilterSearchModel.html" title="class in io.sphere.sdk.products.search">ProductAttributeFilterSearchModel</a></li>
+<li><a href="io/sphere/sdk/products/search/ProductAttributeSortSearchModel.html" title="class in io.sphere.sdk.products.search">ProductAttributeSortSearchModel</a></li>
 <li><a href="io/sphere/sdk/products/queries/ProductByIdGet.html" title="interface in io.sphere.sdk.products.queries"><span class="interfaceName">ProductByIdGet</span></a></li>
 <li><a href="io/sphere/sdk/products/ProductCatalogData.html" title="interface in io.sphere.sdk.products"><span class="interfaceName">ProductCatalogData</span></a></li>
 <li><a href="io/sphere/sdk/products/queries/ProductCatalogDataQueryModel.html" title="class in io.sphere.sdk.products.queries">ProductCatalogDataQueryModel</a></li>
@@ -498,7 +515,10 @@
 <li><a href="io/sphere/sdk/products/commands/ProductCreateCommand.html" title="interface in io.sphere.sdk.products.commands"><span class="interfaceName">ProductCreateCommand</span></a></li>
 <li><a href="io/sphere/sdk/products/ProductData.html" title="interface in io.sphere.sdk.products"><span class="interfaceName">ProductData</span></a></li>
 <li><a href="io/sphere/sdk/products/expansion/ProductDataExpansionModel.html" title="class in io.sphere.sdk.products.expansion">ProductDataExpansionModel</a></li>
+<li><a href="io/sphere/sdk/products/search/ProductDataFacetSearchModel.html" title="class in io.sphere.sdk.products.search">ProductDataFacetSearchModel</a></li>
+<li><a href="io/sphere/sdk/products/search/ProductDataFilterSearchModel.html" title="class in io.sphere.sdk.products.search">ProductDataFilterSearchModel</a></li>
 <li><a href="io/sphere/sdk/products/queries/ProductDataQueryModel.html" title="class in io.sphere.sdk.products.queries">ProductDataQueryModel</a></li>
+<li><a href="io/sphere/sdk/products/search/ProductDataSortSearchModel.html" title="class in io.sphere.sdk.products.search">ProductDataSortSearchModel</a></li>
 <li><a href="io/sphere/sdk/products/commands/ProductDeleteCommand.html" title="interface in io.sphere.sdk.products.commands"><span class="interfaceName">ProductDeleteCommand</span></a></li>
 <li><a href="io/sphere/sdk/productdiscounts/ProductDiscount.html" title="interface in io.sphere.sdk.productdiscounts"><span class="interfaceName">ProductDiscount</span></a></li>
 <li><a href="io/sphere/sdk/productdiscounts/queries/ProductDiscountByIdGet.html" title="interface in io.sphere.sdk.productdiscounts.queries"><span class="interfaceName">ProductDiscountByIdGet</span></a></li>
@@ -519,15 +539,17 @@
 <li><a href="io/sphere/sdk/products/queries/ProductProjectionByIdGet.html" title="interface in io.sphere.sdk.products.queries"><span class="interfaceName">ProductProjectionByIdGet</span></a></li>
 <li><a href="io/sphere/sdk/products/ProductProjectionComparators.html" title="class in io.sphere.sdk.products">ProductProjectionComparators</a></li>
 <li><a href="io/sphere/sdk/products/expansion/ProductProjectionExpansionModel.html" title="class in io.sphere.sdk.products.expansion">ProductProjectionExpansionModel</a></li>
+<li><a href="io/sphere/sdk/products/search/ProductProjectionFacetSearchModel.html" title="class in io.sphere.sdk.products.search">ProductProjectionFacetSearchModel</a></li>
+<li><a href="io/sphere/sdk/products/search/ProductProjectionFilterSearchModel.html" title="class in io.sphere.sdk.products.search">ProductProjectionFilterSearchModel</a></li>
 <li><a href="io/sphere/sdk/products/queries/ProductProjectionQuery.html" title="interface in io.sphere.sdk.products.queries"><span class="interfaceName">ProductProjectionQuery</span></a></li>
 <li><a href="io/sphere/sdk/products/queries/ProductProjectionQueryModel.html" title="class in io.sphere.sdk.products.queries">ProductProjectionQueryModel</a></li>
 <li><a href="io/sphere/sdk/products/search/ProductProjectionSearch.html" title="interface in io.sphere.sdk.products.search"><span class="interfaceName">ProductProjectionSearch</span></a></li>
 <li><a href="io/sphere/sdk/products/search/ProductProjectionSearchModel.html" title="class in io.sphere.sdk.products.search">ProductProjectionSearchModel</a></li>
+<li><a href="io/sphere/sdk/products/search/ProductProjectionSortSearchModel.html" title="class in io.sphere.sdk.products.search">ProductProjectionSortSearchModel</a></li>
 <li><a href="io/sphere/sdk/products/ProductProjectionType.html" title="enum in io.sphere.sdk.products">ProductProjectionType</a></li>
 <li><a href="io/sphere/sdk/products/messages/ProductPublishedMessage.html" title="class in io.sphere.sdk.products.messages">ProductPublishedMessage</a></li>
 <li><a href="io/sphere/sdk/products/queries/ProductQuery.html" title="interface in io.sphere.sdk.products.queries"><span class="interfaceName">ProductQuery</span></a></li>
 <li><a href="io/sphere/sdk/products/queries/ProductQueryModel.html" title="class in io.sphere.sdk.products.queries">ProductQueryModel</a></li>
-<li><a href="io/sphere/sdk/meta/ProductSearchDocumentation.html" title="class in io.sphere.sdk.meta">ProductSearchDocumentation</a></li>
 <li><a href="io/sphere/sdk/products/messages/ProductStateTransitionMessage.html" title="class in io.sphere.sdk.products.messages">ProductStateTransitionMessage</a></li>
 <li><a href="io/sphere/sdk/producttypes/ProductType.html" title="interface in io.sphere.sdk.producttypes"><span class="interfaceName">ProductType</span></a></li>
 <li><a href="io/sphere/sdk/producttypes/commands/ProductTypeCreateCommand.html" title="interface in io.sphere.sdk.producttypes.commands"><span class="interfaceName">ProductTypeCreateCommand</span></a></li>
@@ -544,10 +566,12 @@
 <li><a href="io/sphere/sdk/products/ProductVariantDraft.html" title="interface in io.sphere.sdk.products"><span class="interfaceName">ProductVariantDraft</span></a></li>
 <li><a href="io/sphere/sdk/products/ProductVariantDraftBuilder.html" title="class in io.sphere.sdk.products">ProductVariantDraftBuilder</a></li>
 <li><a href="io/sphere/sdk/products/expansion/ProductVariantExpansionModel.html" title="class in io.sphere.sdk.products.expansion">ProductVariantExpansionModel</a></li>
+<li><a href="io/sphere/sdk/products/search/ProductVariantFacetSearchModel.html" title="class in io.sphere.sdk.products.search">ProductVariantFacetSearchModel</a></li>
+<li><a href="io/sphere/sdk/products/search/ProductVariantFilterSearchModel.html" title="class in io.sphere.sdk.products.search">ProductVariantFilterSearchModel</a></li>
 <li><a href="io/sphere/sdk/orders/ProductVariantImportDraft.html" title="interface in io.sphere.sdk.orders"><span class="interfaceName">ProductVariantImportDraft</span></a></li>
 <li><a href="io/sphere/sdk/orders/ProductVariantImportDraftBuilder.html" title="class in io.sphere.sdk.orders">ProductVariantImportDraftBuilder</a></li>
 <li><a href="io/sphere/sdk/products/queries/ProductVariantQueryModel.html" title="class in io.sphere.sdk.products.queries">ProductVariantQueryModel</a></li>
-<li><a href="io/sphere/sdk/products/search/ProductVariantSearchModel.html" title="class in io.sphere.sdk.products.search">ProductVariantSearchModel</a></li>
+<li><a href="io/sphere/sdk/products/search/ProductVariantSortSearchModel.html" title="class in io.sphere.sdk.products.search">ProductVariantSortSearchModel</a></li>
 <li><a href="io/sphere/sdk/projects/Project.html" title="class in io.sphere.sdk.projects">Project</a></li>
 <li><a href="io/sphere/sdk/projects/queries/ProjectGet.html" title="class in io.sphere.sdk.projects.queries">ProjectGet</a></li>
 <li><a href="io/sphere/sdk/products/commands/updateactions/Publish.html" title="class in io.sphere.sdk.products.commands.updateactions">Publish</a></li>
@@ -562,21 +586,21 @@
 <li><a href="io/sphere/sdk/queries/QuerySortDirection.html" title="enum in io.sphere.sdk.queries">QuerySortDirection</a></li>
 <li><a href="io/sphere/sdk/queries/QuerySortingModel.html" title="interface in io.sphere.sdk.queries"><span class="interfaceName">QuerySortingModel</span></a></li>
 <li><a href="io/sphere/sdk/client/QueueSphereClientDecorator.html" title="class in io.sphere.sdk.client">QueueSphereClientDecorator</a></li>
-<li><a href="io/sphere/sdk/search/RangedFacetSearchModel.html" title="class in io.sphere.sdk.search">RangedFacetSearchModel</a></li>
-<li><a href="io/sphere/sdk/search/RangedFilterSearchModel.html" title="class in io.sphere.sdk.search">RangedFilterSearchModel</a></li>
-<li><a href="io/sphere/sdk/search/RangeFacetExpression.html" title="class in io.sphere.sdk.search">RangeFacetExpression</a></li>
+<li><a href="io/sphere/sdk/search/RangeFacetExpression.html" title="interface in io.sphere.sdk.search"><span class="interfaceName">RangeFacetExpression</span></a></li>
 <li><a href="io/sphere/sdk/search/RangeFacetResult.html" title="class in io.sphere.sdk.search">RangeFacetResult</a></li>
-<li><a href="io/sphere/sdk/search/RangeStats.html" title="class in io.sphere.sdk.search">RangeStats</a></li>
-<li><a href="io/sphere/sdk/search/RangeTermModel.html" title="interface in io.sphere.sdk.search"><span class="interfaceName">RangeTermModel</span></a></li>
+<li><a href="io/sphere/sdk/search/model/RangeFacetSearchModel.html" title="class in io.sphere.sdk.search.model">RangeFacetSearchModel</a></li>
+<li><a href="io/sphere/sdk/search/model/RangeFilterSearchModel.html" title="class in io.sphere.sdk.search.model">RangeFilterSearchModel</a></li>
+<li><a href="io/sphere/sdk/search/model/RangeStats.html" title="class in io.sphere.sdk.search.model">RangeStats</a></li>
 <li><a href="io/sphere/sdk/carts/commands/updateactions/Recalculate.html" title="class in io.sphere.sdk.carts.commands.updateactions">Recalculate</a></li>
 <li><a href="io/sphere/sdk/models/Reference.html" title="class in io.sphere.sdk.models">Reference</a></li>
 <li><a href="io/sphere/sdk/models/Referenceable.html" title="interface in io.sphere.sdk.models"><span class="interfaceName">Referenceable</span></a></li>
 <li><a href="io/sphere/sdk/queries/ReferenceCollectionQueryModel.html" title="interface in io.sphere.sdk.queries"><span class="interfaceName">ReferenceCollectionQueryModel</span></a></li>
 <li><a href="io/sphere/sdk/expansion/ReferenceExpansionDsl.html" title="interface in io.sphere.sdk.expansion"><span class="interfaceName">ReferenceExpansionDsl</span></a></li>
 <li><a href="io/sphere/sdk/expansion/ReferenceExpansionSupport.html" title="interface in io.sphere.sdk.expansion"><span class="interfaceName">ReferenceExpansionSupport</span></a></li>
+<li><a href="io/sphere/sdk/search/model/ReferenceFacetSearchModel.html" title="class in io.sphere.sdk.search.model">ReferenceFacetSearchModel</a></li>
+<li><a href="io/sphere/sdk/search/model/ReferenceFilterSearchModel.html" title="class in io.sphere.sdk.search.model">ReferenceFilterSearchModel</a></li>
 <li><a href="io/sphere/sdk/queries/ReferenceOptionalQueryModel.html" title="interface in io.sphere.sdk.queries"><span class="interfaceName">ReferenceOptionalQueryModel</span></a></li>
 <li><a href="io/sphere/sdk/queries/ReferenceQueryModel.html" title="interface in io.sphere.sdk.queries"><span class="interfaceName">ReferenceQueryModel</span></a></li>
-<li><a href="io/sphere/sdk/search/ReferenceSearchModel.html" title="class in io.sphere.sdk.search">ReferenceSearchModel</a></li>
 <li><a href="io/sphere/sdk/products/attributes/ReferenceType.html" title="class in io.sphere.sdk.products.attributes">ReferenceType</a></li>
 <li><a href="io/sphere/sdk/types/ReferenceType.html" title="class in io.sphere.sdk.types">ReferenceType</a></li>
 <li><a href="io/sphere/sdk/cartdiscounts/RelativeCartDiscountValue.html" title="class in io.sphere.sdk.cartdiscounts">RelativeCartDiscountValue</a></li>
@@ -626,17 +650,17 @@
 <li><a href="io/sphere/sdk/reviews/queries/ReviewQueryModel.html" title="class in io.sphere.sdk.reviews.queries">ReviewQueryModel</a></li>
 <li><a href="io/sphere/sdk/reviews/commands/ReviewUpdateCommand.html" title="interface in io.sphere.sdk.reviews.commands"><span class="interfaceName">ReviewUpdateCommand</span></a></li>
 <li><a href="io/sphere/sdk/products/attributes/RichReferenceType.html" title="class in io.sphere.sdk.products.attributes">RichReferenceType</a></li>
-<li><a href="io/sphere/sdk/search/SameExclusiveBoundsException.html" title="class in io.sphere.sdk.search">SameExclusiveBoundsException</a></li>
+<li><a href="io/sphere/sdk/search/model/SameExclusiveBoundsException.html" title="class in io.sphere.sdk.search.model">SameExclusiveBoundsException</a></li>
 <li><a href="io/sphere/sdk/models/SdkDefaults.html" title="class in io.sphere.sdk.models">SdkDefaults</a></li>
 <li><a href="io/sphere/sdk/search/Search.html" title="interface in io.sphere.sdk.search"><span class="interfaceName">Search</span></a></li>
+<li><a href="io/sphere/sdk/meta/SearchDocumentation.html" title="class in io.sphere.sdk.meta">SearchDocumentation</a></li>
 <li><a href="io/sphere/sdk/search/SearchDsl.html" title="interface in io.sphere.sdk.search"><span class="interfaceName">SearchDsl</span></a></li>
+<li><a href="io/sphere/sdk/search/SearchExpression.html" title="interface in io.sphere.sdk.search"><span class="interfaceName">SearchExpression</span></a></li>
 <li><a href="io/sphere/sdk/search/SearchKeyword.html" title="class in io.sphere.sdk.search">SearchKeyword</a></li>
 <li><a href="io/sphere/sdk/search/SearchKeywords.html" title="class in io.sphere.sdk.search">SearchKeywords</a></li>
-<li><a href="io/sphere/sdk/search/SearchModel.html" title="interface in io.sphere.sdk.search"><span class="interfaceName">SearchModel</span></a></li>
-<li><a href="io/sphere/sdk/search/SearchModelImpl.html" title="class in io.sphere.sdk.search">SearchModelImpl</a></li>
-<li><a href="io/sphere/sdk/search/SearchSort.html" title="interface in io.sphere.sdk.search"><span class="interfaceName">SearchSort</span></a></li>
-<li><a href="io/sphere/sdk/search/SearchSortDirection.html" title="interface in io.sphere.sdk.search"><span class="interfaceName">SearchSortDirection</span></a></li>
-<li><a href="io/sphere/sdk/search/SearchSortingModel.html" title="interface in io.sphere.sdk.search"><span class="interfaceName">SearchSortingModel</span></a></li>
+<li><a href="io/sphere/sdk/search/model/SearchModel.html" title="interface in io.sphere.sdk.search.model"><span class="interfaceName">SearchModel</span></a></li>
+<li><a href="io/sphere/sdk/search/model/SearchModelImpl.html" title="class in io.sphere.sdk.search.model">SearchModelImpl</a></li>
+<li><a href="io/sphere/sdk/search/SearchSortDirection.html" title="enum in io.sphere.sdk.search">SearchSortDirection</a></li>
 <li><a href="io/sphere/sdk/client/ServerErrorException.html" title="class in io.sphere.sdk.client">ServerErrorException</a></li>
 <li><a href="io/sphere/sdk/client/ServiceUnavailableException.html" title="class in io.sphere.sdk.client">ServiceUnavailableException</a></li>
 <li><a href="io/sphere/sdk/payments/commands/updateactions/SetAmountPaid.html" title="class in io.sphere.sdk.payments.commands.updateactions">SetAmountPaid</a></li>
@@ -742,7 +766,13 @@
 <li><a href="io/sphere/sdk/shippingmethods/commands/ShippingMethodUpdateCommand.html" title="interface in io.sphere.sdk.shippingmethods.commands"><span class="interfaceName">ShippingMethodUpdateCommand</span></a></li>
 <li><a href="io/sphere/sdk/shippingmethods/ShippingRate.html" title="class in io.sphere.sdk.shippingmethods">ShippingRate</a></li>
 <li><a href="io/sphere/sdk/orders/messages/SimpleOrderMessage.html" title="interface in io.sphere.sdk.orders.messages"><span class="interfaceName">SimpleOrderMessage</span></a></li>
-<li><a href="io/sphere/sdk/search/SimpleSearchSortDirection.html" title="enum in io.sphere.sdk.search">SimpleSearchSortDirection</a></li>
+<li><a href="io/sphere/sdk/search/model/SingleValueSortSearchModel.html" title="class in io.sphere.sdk.search.model">SingleValueSortSearchModel</a></li>
+<li><a href="io/sphere/sdk/search/model/SingleValueSortSearchModelFactory.html" title="class in io.sphere.sdk.search.model">SingleValueSortSearchModelFactory</a></li>
+<li><a href="io/sphere/sdk/search/model/SortableSearchModel.html" title="class in io.sphere.sdk.search.model">SortableSearchModel</a></li>
+<li><a href="io/sphere/sdk/search/SortDsl.html" title="interface in io.sphere.sdk.search"><span class="interfaceName">SortDsl</span></a></li>
+<li><a href="io/sphere/sdk/search/SortExpression.html" title="interface in io.sphere.sdk.search"><span class="interfaceName">SortExpression</span></a></li>
+<li><a href="io/sphere/sdk/search/model/SortSearchModel.html" title="interface in io.sphere.sdk.search.model"><span class="interfaceName">SortSearchModel</span></a></li>
+<li><a href="io/sphere/sdk/search/SortSupport.html" title="interface in io.sphere.sdk.search"><span class="interfaceName">SortSupport</span></a></li>
 <li><a href="io/sphere/sdk/client/SphereAccessTokenSupplier.html" title="interface in io.sphere.sdk.client"><span class="interfaceName">SphereAccessTokenSupplier</span></a></li>
 <li><a href="io/sphere/sdk/client/SphereAccessTokenSupplierFactory.html" title="class in io.sphere.sdk.client">SphereAccessTokenSupplierFactory</a></li>
 <li><a href="io/sphere/sdk/client/SphereApiConfig.html" title="interface in io.sphere.sdk.client"><span class="interfaceName">SphereApiConfig</span></a></li>
@@ -766,7 +796,6 @@
 <li><a href="io/sphere/sdk/client/SphereRequestBase.html" title="class in io.sphere.sdk.client">SphereRequestBase</a></li>
 <li><a href="io/sphere/sdk/client/SphereRequestDecorator.html" title="class in io.sphere.sdk.client">SphereRequestDecorator</a></li>
 <li><a href="io/sphere/sdk/meta/SphereResources.html" title="class in io.sphere.sdk.meta">SphereResources</a></li>
-<li><a href="io/sphere/sdk/search/SphereSearchSort.html" title="class in io.sphere.sdk.search">SphereSearchSort</a></li>
 <li><a href="io/sphere/sdk/client/SphereServiceException.html" title="class in io.sphere.sdk.client">SphereServiceException</a></li>
 <li><a href="io/sphere/sdk/states/State.html" title="interface in io.sphere.sdk.states"><span class="interfaceName">State</span></a></li>
 <li><a href="io/sphere/sdk/states/queries/StateByIdGet.html" title="interface in io.sphere.sdk.states.queries"><span class="interfaceName">StateByIdGet</span></a></li>
@@ -782,7 +811,7 @@
 <li><a href="io/sphere/sdk/http/StringHttpRequestBody.html" title="class in io.sphere.sdk.http">StringHttpRequestBody</a></li>
 <li><a href="io/sphere/sdk/queries/StringQueryModel.html" title="interface in io.sphere.sdk.queries"><span class="interfaceName">StringQueryModel</span></a></li>
 <li><a href="io/sphere/sdk/queries/StringQuerySortingModel.html" title="interface in io.sphere.sdk.queries"><span class="interfaceName">StringQuerySortingModel</span></a></li>
-<li><a href="io/sphere/sdk/search/StringSearchModel.html" title="class in io.sphere.sdk.search">StringSearchModel</a></li>
+<li><a href="io/sphere/sdk/search/model/StringSearchModel.html" title="class in io.sphere.sdk.search.model">StringSearchModel</a></li>
 <li><a href="io/sphere/sdk/products/attributes/StringType.html" title="class in io.sphere.sdk.products.attributes">StringType</a></li>
 <li><a href="io/sphere/sdk/types/StringType.html" title="class in io.sphere.sdk.types">StringType</a></li>
 <li><a href="io/sphere/sdk/utils/StringUtils.html" title="class in io.sphere.sdk.utils">StringUtils</a></li>
@@ -806,14 +835,15 @@
 <li><a href="io/sphere/sdk/carts/TaxPortion.html" title="class in io.sphere.sdk.carts">TaxPortion</a></li>
 <li><a href="io/sphere/sdk/taxcategories/TaxRate.html" title="interface in io.sphere.sdk.taxcategories"><span class="interfaceName">TaxRate</span></a></li>
 <li><a href="io/sphere/sdk/taxcategories/TaxRateBuilder.html" title="class in io.sphere.sdk.taxcategories">TaxRateBuilder</a></li>
-<li><a href="io/sphere/sdk/search/TermFacetExpression.html" title="class in io.sphere.sdk.search">TermFacetExpression</a></li>
+<li><a href="io/sphere/sdk/search/TermFacetExpression.html" title="interface in io.sphere.sdk.search"><span class="interfaceName">TermFacetExpression</span></a></li>
 <li><a href="io/sphere/sdk/search/TermFacetResult.html" title="class in io.sphere.sdk.search">TermFacetResult</a></li>
-<li><a href="io/sphere/sdk/search/TermModel.html" title="interface in io.sphere.sdk.search"><span class="interfaceName">TermModel</span></a></li>
+<li><a href="io/sphere/sdk/search/model/TermFacetSearchModel.html" title="class in io.sphere.sdk.search.model">TermFacetSearchModel</a></li>
+<li><a href="io/sphere/sdk/search/model/TermFilterSearchModel.html" title="class in io.sphere.sdk.search.model">TermFilterSearchModel</a></li>
 <li><a href="io/sphere/sdk/search/TermStats.html" title="class in io.sphere.sdk.search">TermStats</a></li>
 <li><a href="io/sphere/sdk/meta/TestingDocumentation.html" title="class in io.sphere.sdk.meta">TestingDocumentation</a></li>
 <li><a href="io/sphere/sdk/models/TextInputHint.html" title="enum in io.sphere.sdk.models">TextInputHint</a></li>
 <li><a href="io/sphere/sdk/client/TimeoutSphereClientDecorator.html" title="class in io.sphere.sdk.client">TimeoutSphereClientDecorator</a></li>
-<li><a href="io/sphere/sdk/search/TimeSearchModel.html" title="class in io.sphere.sdk.search">TimeSearchModel</a></li>
+<li><a href="io/sphere/sdk/search/model/TimeSearchModel.html" title="class in io.sphere.sdk.search.model">TimeSearchModel</a></li>
 <li><a href="io/sphere/sdk/models/Timestamped.html" title="interface in io.sphere.sdk.models"><span class="interfaceName">Timestamped</span></a></li>
 <li><a href="io/sphere/sdk/queries/TimestampSortingModel.html" title="interface in io.sphere.sdk.queries"><span class="interfaceName">TimestampSortingModel</span></a></li>
 <li><a href="io/sphere/sdk/products/attributes/TimeType.html" title="class in io.sphere.sdk.products.attributes">TimeType</a></li>
@@ -848,7 +878,6 @@
 <li><a href="io/sphere/sdk/meta/TypicalTrapsDocumentation.html" title="class in io.sphere.sdk.meta">TypicalTrapsDocumentation</a></li>
 <li><a href="io/sphere/sdk/client/UnauthorizedException.html" title="class in io.sphere.sdk.client">UnauthorizedException</a></li>
 <li><a href="io/sphere/sdk/products/commands/updateactions/Unpublish.html" title="class in io.sphere.sdk.products.commands.updateactions">Unpublish</a></li>
-<li><a href="io/sphere/sdk/search/UntypedSearchModel.html" title="class in io.sphere.sdk.search">UntypedSearchModel</a></li>
 <li><a href="io/sphere/sdk/commands/UpdateAction.html" title="interface in io.sphere.sdk.commands"><span class="interfaceName">UpdateAction</span></a></li>
 <li><a href="io/sphere/sdk/commands/UpdateActionImpl.html" title="class in io.sphere.sdk.commands">UpdateActionImpl</a></li>
 <li><a href="io/sphere/sdk/commands/UpdateCommand.html" title="interface in io.sphere.sdk.commands"><span class="interfaceName">UpdateCommand</span></a></li>
@@ -859,7 +888,6 @@
 <li><a href="io/sphere/sdk/http/UrlQueryBuilder.html" title="class in io.sphere.sdk.http">UrlQueryBuilder</a></li>
 <li><a href="io/sphere/sdk/http/UrlUtils.html" title="class in io.sphere.sdk.http">UrlUtils</a></li>
 <li><a href="io/sphere/sdk/products/VariantIdentifier.html" title="class in io.sphere.sdk.products">VariantIdentifier</a></li>
-<li><a href="io/sphere/sdk/products/search/VariantSearchSortDirection.html" title="enum in io.sphere.sdk.products.search">VariantSearchSortDirection</a></li>
 <li><a href="io/sphere/sdk/models/Versioned.html" title="interface in io.sphere.sdk.models"><span class="interfaceName">Versioned</span></a></li>
 <li><a href="io/sphere/sdk/search/tokenizer/WhiteSpaceSuggestTokenizer.html" title="class in io.sphere.sdk.search.tokenizer">WhiteSpaceSuggestTokenizer</a></li>
 <li><a href="io/sphere/sdk/models/WithKey.html" title="interface in io.sphere.sdk.models"><span class="interfaceName">WithKey</span></a></li>

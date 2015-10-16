@@ -18,12 +18,6 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":6,"i1":6,"i2":6,"i3":6,"i4":6,"i5":6,"i6":6,"i7":6,"i8":6,"i9":6,"i10":6,"i11":6,"i12":6,"i13":6,"i14":6,"i15":6,"i16":6,"i17":6,"i18":6,"i19":6,"i20":6,"i21":6,"i22":6,"i23":6,"i24":6,"i25":6,"i26":6,"i27":6,"i28":6,"i29":6,"i30":6,"i31":6,"i32":6};
-var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],4:["t3","Abstract Methods"]};
-var altColor = "altColor";
-var rowColor = "rowColor";
-var tableTab = "tableTab";
-var activeTableTab = "activeTableTab";
 </script>
 <noscript>
 <div>JavaScript is disabled on your browser.</div>
@@ -48,7 +42,7 @@ var activeTableTab = "activeTableTab";
 </div>
 <div class="subNav">
 <ul class="navList">
-<li><a href="../../../../io/sphere/sdk/search/LocalizedStringSearchModel.html" title="class in io.sphere.sdk.search"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
+<li><a href="../../../../io/sphere/sdk/search/MetaModelFilterDsl.html" title="interface in io.sphere.sdk.search"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
 <li><a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="class in io.sphere.sdk.search"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">
@@ -76,13 +70,13 @@ var activeTableTab = "activeTableTab";
 <li>Nested&nbsp;|&nbsp;</li>
 <li>Field&nbsp;|&nbsp;</li>
 <li>Constr&nbsp;|&nbsp;</li>
-<li><a href="#method.summary">Method</a></li>
+<li>Method</li>
 </ul>
 <ul class="subNavList">
 <li>Detail:&nbsp;</li>
 <li>Field&nbsp;|&nbsp;</li>
 <li>Constr&nbsp;|&nbsp;</li>
-<li><a href="#method.detail">Method</a></li>
+<li>Method</li>
 </ul>
 </div>
 <a name="skip.navbar.top">
@@ -92,7 +86,7 @@ var activeTableTab = "activeTableTab";
 <!-- ======== START OF CLASS DATA ======== -->
 <div class="header">
 <div class="subTitle">io.sphere.sdk.search</div>
-<h2 title="Interface MetaModelSearchDsl" class="title">Interface MetaModelSearchDsl&lt;T,C extends MetaModelSearchDsl&lt;T,C,S,E&gt;,S,E&gt;</h2>
+<h2 title="Interface MetaModelSearchDsl" class="title">Interface MetaModelSearchDsl&lt;T,C extends MetaModelSearchDsl&lt;T,C,S,L,F,E&gt;,S,L,F,E&gt;</h2>
 </div>
 <div class="contentContainer">
 <div class="description">
@@ -102,12 +96,14 @@ var activeTableTab = "activeTableTab";
 <dt><span class="paramLabel">Type Parameters:</span></dt>
 <dd><code>T</code> - type of the search result</dd>
 <dd><code>C</code> - type of the class implementing this class</dd>
-<dd><code>S</code> - type of the search model</dd>
+<dd><code>S</code> - type of the sort model</dd>
+<dd><code>L</code> - type of the filter model</dd>
+<dd><code>F</code> - type of the facet model</dd>
 <dd><code>E</code> - type of the expansion model</dd>
 </dl>
 <dl>
 <dt>All Superinterfaces:</dt>
-<dd><a href="../../../../io/sphere/sdk/search/EntitySearch.html" title="interface in io.sphere.sdk.search">EntitySearch</a>&lt;T&gt;, <a href="../../../../io/sphere/sdk/expansion/MetaModelExpansionDsl.html" title="interface in io.sphere.sdk.expansion">MetaModelExpansionDsl</a>&lt;T,C,E&gt;, <a href="../../../../io/sphere/sdk/expansion/ReferenceExpansionDsl.html" title="interface in io.sphere.sdk.expansion">ReferenceExpansionDsl</a>&lt;T,C&gt;, <a href="../../../../io/sphere/sdk/expansion/ReferenceExpansionSupport.html" title="interface in io.sphere.sdk.expansion">ReferenceExpansionSupport</a>&lt;T&gt;, <a href="../../../../io/sphere/sdk/search/Search.html" title="interface in io.sphere.sdk.search">Search</a>&lt;T&gt;, <a href="../../../../io/sphere/sdk/search/SearchDsl.html" title="interface in io.sphere.sdk.search">SearchDsl</a>&lt;T,C&gt;, <a href="../../../../io/sphere/sdk/client/SphereRequest.html" title="interface in io.sphere.sdk.client">SphereRequest</a>&lt;<a href="../../../../io/sphere/sdk/search/PagedSearchResult.html" title="class in io.sphere.sdk.search">PagedSearchResult</a>&lt;T&gt;&gt;</dd>
+<dd><a href="../../../../io/sphere/sdk/search/EntitySearch.html" title="interface in io.sphere.sdk.search">EntitySearch</a>&lt;T&gt;, <a href="../../../../io/sphere/sdk/search/FacetDsl.html" title="interface in io.sphere.sdk.search">FacetDsl</a>&lt;T,C&gt;, <a href="../../../../io/sphere/sdk/search/FacetSupport.html" title="interface in io.sphere.sdk.search">FacetSupport</a>&lt;T&gt;, <a href="../../../../io/sphere/sdk/search/FilterDsl.html" title="interface in io.sphere.sdk.search">FilterDsl</a>&lt;T,C&gt;, <a href="../../../../io/sphere/sdk/search/FilterSupport.html" title="interface in io.sphere.sdk.search">FilterSupport</a>&lt;T&gt;, <a href="../../../../io/sphere/sdk/expansion/MetaModelExpansionDsl.html" title="interface in io.sphere.sdk.expansion">MetaModelExpansionDsl</a>&lt;T,C,E&gt;, <a href="../../../../io/sphere/sdk/search/MetaModelFacetDsl.html" title="interface in io.sphere.sdk.search">MetaModelFacetDsl</a>&lt;T,C,F&gt;, <a href="../../../../io/sphere/sdk/search/MetaModelFilterDsl.html" title="interface in io.sphere.sdk.search">MetaModelFilterDsl</a>&lt;T,C,L&gt;, <a href="../../../../io/sphere/sdk/search/MetaModelSortDsl.html" title="interface in io.sphere.sdk.search">MetaModelSortDsl</a>&lt;T,C,S&gt;, <a href="../../../../io/sphere/sdk/expansion/ReferenceExpansionDsl.html" title="interface in io.sphere.sdk.expansion">ReferenceExpansionDsl</a>&lt;T,C&gt;, <a href="../../../../io/sphere/sdk/expansion/ReferenceExpansionSupport.html" title="interface in io.sphere.sdk.expansion">ReferenceExpansionSupport</a>&lt;T&gt;, <a href="../../../../io/sphere/sdk/search/Search.html" title="interface in io.sphere.sdk.search">Search</a>&lt;T&gt;, <a href="../../../../io/sphere/sdk/search/SearchDsl.html" title="interface in io.sphere.sdk.search">SearchDsl</a>&lt;T,C&gt;, <a href="../../../../io/sphere/sdk/search/SortDsl.html" title="interface in io.sphere.sdk.search">SortDsl</a>&lt;T,C&gt;, <a href="../../../../io/sphere/sdk/search/SortSupport.html" title="interface in io.sphere.sdk.search">SortSupport</a>&lt;T&gt;, <a href="../../../../io/sphere/sdk/client/SphereRequest.html" title="interface in io.sphere.sdk.client">SphereRequest</a>&lt;<a href="../../../../io/sphere/sdk/search/PagedSearchResult.html" title="class in io.sphere.sdk.search">PagedSearchResult</a>&lt;T&gt;&gt;</dd>
 </dl>
 <dl>
 <dt>All Known Subinterfaces:</dt>
@@ -119,8 +115,8 @@ var activeTableTab = "activeTableTab";
 </dl>
 <hr>
 <br>
-<pre>public interface <span class="typeNameLabel">MetaModelSearchDsl&lt;T,C extends MetaModelSearchDsl&lt;T,C,S,E&gt;,S,E&gt;</span>
-extends <a href="../../../../io/sphere/sdk/search/EntitySearch.html" title="interface in io.sphere.sdk.search">EntitySearch</a>&lt;T&gt;, <a href="../../../../io/sphere/sdk/search/SearchDsl.html" title="interface in io.sphere.sdk.search">SearchDsl</a>&lt;T,C&gt;, <a href="../../../../io/sphere/sdk/expansion/MetaModelExpansionDsl.html" title="interface in io.sphere.sdk.expansion">MetaModelExpansionDsl</a>&lt;T,C,E&gt;</pre>
+<pre>public interface <span class="typeNameLabel">MetaModelSearchDsl&lt;T,C extends MetaModelSearchDsl&lt;T,C,S,L,F,E&gt;,S,L,F,E&gt;</span>
+extends <a href="../../../../io/sphere/sdk/search/EntitySearch.html" title="interface in io.sphere.sdk.search">EntitySearch</a>&lt;T&gt;, <a href="../../../../io/sphere/sdk/search/SearchDsl.html" title="interface in io.sphere.sdk.search">SearchDsl</a>&lt;T,C&gt;, <a href="../../../../io/sphere/sdk/search/MetaModelSortDsl.html" title="interface in io.sphere.sdk.search">MetaModelSortDsl</a>&lt;T,C,S&gt;, <a href="../../../../io/sphere/sdk/search/MetaModelFilterDsl.html" title="interface in io.sphere.sdk.search">MetaModelFilterDsl</a>&lt;T,C,L&gt;, <a href="../../../../io/sphere/sdk/search/MetaModelFacetDsl.html" title="interface in io.sphere.sdk.search">MetaModelFacetDsl</a>&lt;T,C,F&gt;, <a href="../../../../io/sphere/sdk/expansion/MetaModelExpansionDsl.html" title="interface in io.sphere.sdk.expansion">MetaModelExpansionDsl</a>&lt;T,C,E&gt;</pre>
 </li>
 </ul>
 </div>
@@ -148,178 +144,19 @@ extends <a href="../../../../io/sphere/sdk/search/EntitySearch.html" title="inte
 <!--   -->
 </a>
 <h3>Method Summary</h3>
-<table class="memberSummary" border="0" cellpadding="3" cellspacing="0" summary="Method Summary table, listing methods, and an explanation">
-<caption><span id="t0" class="activeTableTab"><span>All Methods</span><span class="tabEnd">&nbsp;</span></span><span id="t2" class="tableTab"><span><a href="javascript:show(2);">Instance Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t3" class="tableTab"><span><a href="javascript:show(4);">Abstract Methods</a></span><span class="tabEnd">&nbsp;</span></span></caption>
-<tr>
-<th class="colFirst" scope="col">Modifier and Type</th>
-<th class="colLast" scope="col">Method and Description</th>
-</tr>
-<tr id="i0" class="altColor">
-<td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">C</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html#plusExpansionPaths-java.util.function.Function-">plusExpansionPaths</a></span>(java.util.function.Function&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">E</a>,<a href="../../../../io/sphere/sdk/expansion/ExpansionPath.html" title="interface in io.sphere.sdk.expansion">ExpansionPath</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">T</a>&gt;&gt;&nbsp;m)</code>
-<div class="block">Creates a new object with the properties of the old object but adds a new expansion path to it by using meta models.</div>
-</td>
-</tr>
-<tr id="i1" class="rowColor">
-<td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">C</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html#plusFacetFilters-io.sphere.sdk.search.FilterExpression-">plusFacetFilters</a></span>(<a href="../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">T</a>&gt;&nbsp;facetFilter)</code>&nbsp;</td>
-</tr>
-<tr id="i2" class="altColor">
-<td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">C</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html#plusFacetFilters-java.util.function.Function-">plusFacetFilters</a></span>(java.util.function.Function&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">S</a>,<a href="../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">T</a>&gt;&gt;&nbsp;m)</code>&nbsp;</td>
-</tr>
-<tr id="i3" class="rowColor">
-<td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">C</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html#plusFacetFilters-java.util.List-">plusFacetFilters</a></span>(java.util.List&lt;<a href="../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">T</a>&gt;&gt;&nbsp;facetFilters)</code>
-<div class="block">Returns an EntitySearch with the new facet filter list appended to the existing facet filters.</div>
-</td>
-</tr>
-<tr id="i4" class="altColor">
-<td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">C</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html#plusFacets-io.sphere.sdk.search.FacetExpression-">plusFacets</a></span>(<a href="../../../../io/sphere/sdk/search/FacetExpression.html" title="interface in io.sphere.sdk.search">FacetExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">T</a>&gt;&nbsp;facet)</code>&nbsp;</td>
-</tr>
-<tr id="i5" class="rowColor">
-<td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">C</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html#plusFacets-java.util.function.Function-">plusFacets</a></span>(java.util.function.Function&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">S</a>,<a href="../../../../io/sphere/sdk/search/FacetExpression.html" title="interface in io.sphere.sdk.search">FacetExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">T</a>&gt;&gt;&nbsp;m)</code>&nbsp;</td>
-</tr>
-<tr id="i6" class="altColor">
-<td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">C</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html#plusFacets-java.util.List-">plusFacets</a></span>(java.util.List&lt;<a href="../../../../io/sphere/sdk/search/FacetExpression.html" title="interface in io.sphere.sdk.search">FacetExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">T</a>&gt;&gt;&nbsp;facets)</code>
-<div class="block">Returns an EntitySearch with the new facet list appended to the existing facets.</div>
-</td>
-</tr>
-<tr id="i7" class="rowColor">
-<td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">C</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html#plusQueryFilters-io.sphere.sdk.search.FilterExpression-">plusQueryFilters</a></span>(<a href="../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">T</a>&gt;&nbsp;queryFilter)</code>&nbsp;</td>
-</tr>
-<tr id="i8" class="altColor">
-<td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">C</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html#plusQueryFilters-java.util.function.Function-">plusQueryFilters</a></span>(java.util.function.Function&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">S</a>,<a href="../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">T</a>&gt;&gt;&nbsp;m)</code>&nbsp;</td>
-</tr>
-<tr id="i9" class="rowColor">
-<td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">C</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html#plusQueryFilters-java.util.List-">plusQueryFilters</a></span>(java.util.List&lt;<a href="../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">T</a>&gt;&gt;&nbsp;queryFilters)</code>
-<div class="block">Returns an EntitySearch with the new query filter list appended to the existing query filters.</div>
-</td>
-</tr>
-<tr id="i10" class="altColor">
-<td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">C</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html#plusResultFilters-io.sphere.sdk.search.FilterExpression-">plusResultFilters</a></span>(<a href="../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">T</a>&gt;&nbsp;resultFilter)</code>&nbsp;</td>
-</tr>
-<tr id="i11" class="rowColor">
-<td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">C</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html#plusResultFilters-java.util.function.Function-">plusResultFilters</a></span>(java.util.function.Function&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">S</a>,<a href="../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">T</a>&gt;&gt;&nbsp;m)</code>&nbsp;</td>
-</tr>
-<tr id="i12" class="altColor">
-<td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">C</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html#plusResultFilters-java.util.List-">plusResultFilters</a></span>(java.util.List&lt;<a href="../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">T</a>&gt;&gt;&nbsp;resultFilters)</code>
-<div class="block">Returns an EntitySearch with the new result filter list appended to the existing result filters.</div>
-</td>
-</tr>
-<tr id="i13" class="rowColor">
-<td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">C</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html#withExpansionPaths-java.util.function.Function-">withExpansionPaths</a></span>(java.util.function.Function&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">E</a>,<a href="../../../../io/sphere/sdk/expansion/ExpansionPath.html" title="interface in io.sphere.sdk.expansion">ExpansionPath</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">T</a>&gt;&gt;&nbsp;m)</code>
-<div class="block">Creates a new object with the properties of the old object but replaces all expansion paths with a single <code>expansionPath</code> by using meta models.</div>
-</td>
-</tr>
-<tr id="i14" class="altColor">
-<td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">C</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html#withFacetFilters-io.sphere.sdk.search.FilterExpression-">withFacetFilters</a></span>(<a href="../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">T</a>&gt;&nbsp;facetFilter)</code>&nbsp;</td>
-</tr>
-<tr id="i15" class="rowColor">
-<td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">C</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html#withFacetFilters-java.util.function.Function-">withFacetFilters</a></span>(java.util.function.Function&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">S</a>,<a href="../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">T</a>&gt;&gt;&nbsp;m)</code>&nbsp;</td>
-</tr>
-<tr id="i16" class="altColor">
-<td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">C</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html#withFacetFilters-java.util.List-">withFacetFilters</a></span>(java.util.List&lt;<a href="../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">T</a>&gt;&gt;&nbsp;facetFilters)</code>
-<div class="block">Returns an EntitySearch with the new facet filter list as facet filter.</div>
-</td>
-</tr>
-<tr id="i17" class="rowColor">
-<td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">C</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html#withFacets-io.sphere.sdk.search.FacetExpression-">withFacets</a></span>(<a href="../../../../io/sphere/sdk/search/FacetExpression.html" title="interface in io.sphere.sdk.search">FacetExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">T</a>&gt;&nbsp;facet)</code>&nbsp;</td>
-</tr>
-<tr id="i18" class="altColor">
-<td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">C</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html#withFacets-java.util.function.Function-">withFacets</a></span>(java.util.function.Function&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">S</a>,<a href="../../../../io/sphere/sdk/search/FacetExpression.html" title="interface in io.sphere.sdk.search">FacetExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">T</a>&gt;&gt;&nbsp;m)</code>&nbsp;</td>
-</tr>
-<tr id="i19" class="rowColor">
-<td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">C</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html#withFacets-java.util.List-">withFacets</a></span>(java.util.List&lt;<a href="../../../../io/sphere/sdk/search/FacetExpression.html" title="interface in io.sphere.sdk.search">FacetExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">T</a>&gt;&gt;&nbsp;facets)</code>
-<div class="block">Returns an EntitySearch with the new facet list as facets.</div>
-</td>
-</tr>
-<tr id="i20" class="altColor">
-<td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">C</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html#withFuzzy-java.lang.Boolean-">withFuzzy</a></span>(java.lang.Boolean&nbsp;fuzzy)</code>
-<div class="block">Returns an EntitySearch with mofified fuzzyParameter.</div>
-</td>
-</tr>
-<tr id="i21" class="rowColor">
-<td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">C</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html#withLimit-long-">withLimit</a></span>(long&nbsp;limit)</code>&nbsp;</td>
-</tr>
-<tr id="i22" class="altColor">
-<td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">C</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html#withOffset-long-">withOffset</a></span>(long&nbsp;offset)</code>&nbsp;</td>
-</tr>
-<tr id="i23" class="rowColor">
-<td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">C</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html#withQueryFilters-io.sphere.sdk.search.FilterExpression-">withQueryFilters</a></span>(<a href="../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">T</a>&gt;&nbsp;queryFilter)</code>&nbsp;</td>
-</tr>
-<tr id="i24" class="altColor">
-<td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">C</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html#withQueryFilters-java.util.function.Function-">withQueryFilters</a></span>(java.util.function.Function&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">S</a>,<a href="../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">T</a>&gt;&gt;&nbsp;m)</code>&nbsp;</td>
-</tr>
-<tr id="i25" class="rowColor">
-<td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">C</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html#withQueryFilters-java.util.List-">withQueryFilters</a></span>(java.util.List&lt;<a href="../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">T</a>&gt;&gt;&nbsp;queryFilters)</code>
-<div class="block">Returns an EntitySearch with the new query filter list as query filters.</div>
-</td>
-</tr>
-<tr id="i26" class="altColor">
-<td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">C</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html#withResultFilters-io.sphere.sdk.search.FilterExpression-">withResultFilters</a></span>(<a href="../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">T</a>&gt;&nbsp;resultFilter)</code>&nbsp;</td>
-</tr>
-<tr id="i27" class="rowColor">
-<td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">C</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html#withResultFilters-java.util.function.Function-">withResultFilters</a></span>(java.util.function.Function&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">S</a>,<a href="../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">T</a>&gt;&gt;&nbsp;m)</code>&nbsp;</td>
-</tr>
-<tr id="i28" class="altColor">
-<td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">C</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html#withResultFilters-java.util.List-">withResultFilters</a></span>(java.util.List&lt;<a href="../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">T</a>&gt;&gt;&nbsp;resultFilters)</code>
-<div class="block">Returns an EntitySearch with the new result filter list as result filter.</div>
-</td>
-</tr>
-<tr id="i29" class="rowColor">
-<td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">C</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html#withSort-java.util.function.Function-">withSort</a></span>(java.util.function.Function&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">S</a>,<a href="../../../../io/sphere/sdk/search/SearchSort.html" title="interface in io.sphere.sdk.search">SearchSort</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">T</a>&gt;&gt;&nbsp;m)</code>&nbsp;</td>
-</tr>
-<tr id="i30" class="altColor">
-<td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">C</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html#withSort-io.sphere.sdk.search.SearchSort-">withSort</a></span>(<a href="../../../../io/sphere/sdk/search/SearchSort.html" title="interface in io.sphere.sdk.search">SearchSort</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">T</a>&gt;&nbsp;sort)</code>
-<div class="block">Returns an EntityQuery with the new sort as sort.</div>
-</td>
-</tr>
-<tr id="i31" class="rowColor">
-<td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">C</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html#withText-java.util.Locale-java.lang.String-">withText</a></span>(java.util.Locale&nbsp;locale,
-        java.lang.String&nbsp;text)</code>&nbsp;</td>
-</tr>
-<tr id="i32" class="altColor">
-<td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">C</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html#withText-io.sphere.sdk.models.LocalizedStringEntry-">withText</a></span>(<a href="../../../../io/sphere/sdk/models/LocalizedStringEntry.html" title="class in io.sphere.sdk.models">LocalizedStringEntry</a>&nbsp;text)</code>
-<div class="block">Returns an EntitySearch with the new text as search text.</div>
-</td>
-</tr>
-</table>
+<ul class="blockList">
+<li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.search.SearchDsl">
+<!--   -->
+</a>
+<h3>Methods inherited from interface&nbsp;io.sphere.sdk.search.<a href="../../../../io/sphere/sdk/search/SearchDsl.html" title="interface in io.sphere.sdk.search">SearchDsl</a></h3>
+<code><a href="../../../../io/sphere/sdk/search/SearchDsl.html#withFuzzy-java.lang.Boolean-">withFuzzy</a>, <a href="../../../../io/sphere/sdk/search/SearchDsl.html#withLimit-long-">withLimit</a>, <a href="../../../../io/sphere/sdk/search/SearchDsl.html#withOffset-long-">withOffset</a>, <a href="../../../../io/sphere/sdk/search/SearchDsl.html#withText-java.util.Locale-java.lang.String-">withText</a>, <a href="../../../../io/sphere/sdk/search/SearchDsl.html#withText-io.sphere.sdk.models.LocalizedStringEntry-">withText</a></code></li>
+</ul>
 <ul class="blockList">
 <li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.search.EntitySearch">
 <!--   -->
 </a>
 <h3>Methods inherited from interface&nbsp;io.sphere.sdk.search.<a href="../../../../io/sphere/sdk/search/EntitySearch.html" title="interface in io.sphere.sdk.search">EntitySearch</a></h3>
-<code><a href="../../../../io/sphere/sdk/search/EntitySearch.html#endpoint--">endpoint</a>, <a href="../../../../io/sphere/sdk/search/EntitySearch.html#facetFilters--">facetFilters</a>, <a href="../../../../io/sphere/sdk/search/EntitySearch.html#facets--">facets</a>, <a href="../../../../io/sphere/sdk/search/EntitySearch.html#isFuzzy--">isFuzzy</a>, <a href="../../../../io/sphere/sdk/search/EntitySearch.html#limit--">limit</a>, <a href="../../../../io/sphere/sdk/search/EntitySearch.html#offset--">offset</a>, <a href="../../../../io/sphere/sdk/search/EntitySearch.html#queryFilters--">queryFilters</a>, <a href="../../../../io/sphere/sdk/search/EntitySearch.html#resultFilters--">resultFilters</a>, <a href="../../../../io/sphere/sdk/search/EntitySearch.html#sort--">sort</a>, <a href="../../../../io/sphere/sdk/search/EntitySearch.html#text--">text</a></code></li>
+<code><a href="../../../../io/sphere/sdk/search/EntitySearch.html#endpoint--">endpoint</a>, <a href="../../../../io/sphere/sdk/search/EntitySearch.html#isFuzzy--">isFuzzy</a>, <a href="../../../../io/sphere/sdk/search/EntitySearch.html#limit--">limit</a>, <a href="../../../../io/sphere/sdk/search/EntitySearch.html#offset--">offset</a>, <a href="../../../../io/sphere/sdk/search/EntitySearch.html#text--">text</a></code></li>
 </ul>
 <ul class="blockList">
 <li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.search.Search">
@@ -336,6 +173,76 @@ extends <a href="../../../../io/sphere/sdk/search/EntitySearch.html" title="inte
 <code><a href="../../../../io/sphere/sdk/client/SphereRequest.html#canDeserialize-io.sphere.sdk.http.HttpResponse-">canDeserialize</a>, <a href="../../../../io/sphere/sdk/client/SphereRequest.html#httpRequestIntent--">httpRequestIntent</a></code></li>
 </ul>
 <ul class="blockList">
+<li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.search.MetaModelSortDsl">
+<!--   -->
+</a>
+<h3>Methods inherited from interface&nbsp;io.sphere.sdk.search.<a href="../../../../io/sphere/sdk/search/MetaModelSortDsl.html" title="interface in io.sphere.sdk.search">MetaModelSortDsl</a></h3>
+<code><a href="../../../../io/sphere/sdk/search/MetaModelSortDsl.html#plusSort-java.util.function.Function-">plusSort</a>, <a href="../../../../io/sphere/sdk/search/MetaModelSortDsl.html#withSort-java.util.function.Function-">withSort</a></code></li>
+</ul>
+<ul class="blockList">
+<li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.search.SortDsl">
+<!--   -->
+</a>
+<h3>Methods inherited from interface&nbsp;io.sphere.sdk.search.<a href="../../../../io/sphere/sdk/search/SortDsl.html" title="interface in io.sphere.sdk.search">SortDsl</a></h3>
+<code><a href="../../../../io/sphere/sdk/search/SortDsl.html#plusSort-java.util.List-">plusSort</a>, <a href="../../../../io/sphere/sdk/search/SortDsl.html#plusSort-io.sphere.sdk.search.SortExpression-">plusSort</a>, <a href="../../../../io/sphere/sdk/search/SortDsl.html#withSort-java.util.List-">withSort</a>, <a href="../../../../io/sphere/sdk/search/SortDsl.html#withSort-io.sphere.sdk.search.SortExpression-">withSort</a></code></li>
+</ul>
+<ul class="blockList">
+<li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.search.SortSupport">
+<!--   -->
+</a>
+<h3>Methods inherited from interface&nbsp;io.sphere.sdk.search.<a href="../../../../io/sphere/sdk/search/SortSupport.html" title="interface in io.sphere.sdk.search">SortSupport</a></h3>
+<code><a href="../../../../io/sphere/sdk/search/SortSupport.html#sort--">sort</a></code></li>
+</ul>
+<ul class="blockList">
+<li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.search.MetaModelFilterDsl">
+<!--   -->
+</a>
+<h3>Methods inherited from interface&nbsp;io.sphere.sdk.search.<a href="../../../../io/sphere/sdk/search/MetaModelFilterDsl.html" title="interface in io.sphere.sdk.search">MetaModelFilterDsl</a></h3>
+<code><a href="../../../../io/sphere/sdk/search/MetaModelFilterDsl.html#plusFacetFilters-java.util.function.Function-">plusFacetFilters</a>, <a href="../../../../io/sphere/sdk/search/MetaModelFilterDsl.html#plusQueryFilters-java.util.function.Function-">plusQueryFilters</a>, <a href="../../../../io/sphere/sdk/search/MetaModelFilterDsl.html#plusResultFilters-java.util.function.Function-">plusResultFilters</a>, <a href="../../../../io/sphere/sdk/search/MetaModelFilterDsl.html#withFacetFilters-java.util.function.Function-">withFacetFilters</a>, <a href="../../../../io/sphere/sdk/search/MetaModelFilterDsl.html#withQueryFilters-java.util.function.Function-">withQueryFilters</a>, <a href="../../../../io/sphere/sdk/search/MetaModelFilterDsl.html#withResultFilters-java.util.function.Function-">withResultFilters</a></code></li>
+</ul>
+<ul class="blockList">
+<li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.search.FilterDsl">
+<!--   -->
+</a>
+<h3>Methods inherited from interface&nbsp;io.sphere.sdk.search.<a href="../../../../io/sphere/sdk/search/FilterDsl.html" title="interface in io.sphere.sdk.search">FilterDsl</a></h3>
+<code><a href="../../../../io/sphere/sdk/search/FilterDsl.html#plusFacetFilters-io.sphere.sdk.search.FilterExpression-">plusFacetFilters</a>, <a href="../../../../io/sphere/sdk/search/FilterDsl.html#plusFacetFilters-java.util.List-">plusFacetFilters</a>, <a href="../../../../io/sphere/sdk/search/FilterDsl.html#plusQueryFilters-io.sphere.sdk.search.FilterExpression-">plusQueryFilters</a>, <a href="../../../../io/sphere/sdk/search/FilterDsl.html#plusQueryFilters-java.util.List-">plusQueryFilters</a>, <a href="../../../../io/sphere/sdk/search/FilterDsl.html#plusResultFilters-io.sphere.sdk.search.FilterExpression-">plusResultFilters</a>, <a href="../../../../io/sphere/sdk/search/FilterDsl.html#plusResultFilters-java.util.List-">plusResultFilters</a>, <a href="../../../../io/sphere/sdk/search/FilterDsl.html#withFacetFilters-io.sphere.sdk.search.FilterExpression-">withFacetFilters</a>, <a href="../../../../io/sphere/sdk/search/FilterDsl.html#withFacetFilters-java.util.List-">withFacetFilters</a>, <a href="../../../../io/sphere/sdk/search/FilterDsl.html#withQueryFilters-io.sphere.sdk.search.FilterExpression-">withQueryFilters</a>, <a href="../../../../io/sphere/sdk/search/FilterDsl.html#withQueryFilters-java.util.List-">withQueryFilters</a>, <a href="../../../../io/sphere/sdk/search/FilterDsl.html#withResultFilters-io.sphere.sdk.search.FilterExpression-">withResultFilters</a>, <a href="../../../../io/sphere/sdk/search/FilterDsl.html#withResultFilters-java.util.List-">withResultFilters</a></code></li>
+</ul>
+<ul class="blockList">
+<li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.search.FilterSupport">
+<!--   -->
+</a>
+<h3>Methods inherited from interface&nbsp;io.sphere.sdk.search.<a href="../../../../io/sphere/sdk/search/FilterSupport.html" title="interface in io.sphere.sdk.search">FilterSupport</a></h3>
+<code><a href="../../../../io/sphere/sdk/search/FilterSupport.html#facetFilters--">facetFilters</a>, <a href="../../../../io/sphere/sdk/search/FilterSupport.html#queryFilters--">queryFilters</a>, <a href="../../../../io/sphere/sdk/search/FilterSupport.html#resultFilters--">resultFilters</a></code></li>
+</ul>
+<ul class="blockList">
+<li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.search.MetaModelFacetDsl">
+<!--   -->
+</a>
+<h3>Methods inherited from interface&nbsp;io.sphere.sdk.search.<a href="../../../../io/sphere/sdk/search/MetaModelFacetDsl.html" title="interface in io.sphere.sdk.search">MetaModelFacetDsl</a></h3>
+<code><a href="../../../../io/sphere/sdk/search/MetaModelFacetDsl.html#plusFacets-java.util.function.Function-">plusFacets</a>, <a href="../../../../io/sphere/sdk/search/MetaModelFacetDsl.html#withFacets-java.util.function.Function-">withFacets</a></code></li>
+</ul>
+<ul class="blockList">
+<li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.search.FacetDsl">
+<!--   -->
+</a>
+<h3>Methods inherited from interface&nbsp;io.sphere.sdk.search.<a href="../../../../io/sphere/sdk/search/FacetDsl.html" title="interface in io.sphere.sdk.search">FacetDsl</a></h3>
+<code><a href="../../../../io/sphere/sdk/search/FacetDsl.html#plusFacets-io.sphere.sdk.search.FacetExpression-">plusFacets</a>, <a href="../../../../io/sphere/sdk/search/FacetDsl.html#plusFacets-java.util.List-">plusFacets</a>, <a href="../../../../io/sphere/sdk/search/FacetDsl.html#withFacets-io.sphere.sdk.search.FacetExpression-">withFacets</a>, <a href="../../../../io/sphere/sdk/search/FacetDsl.html#withFacets-java.util.List-">withFacets</a></code></li>
+</ul>
+<ul class="blockList">
+<li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.search.FacetSupport">
+<!--   -->
+</a>
+<h3>Methods inherited from interface&nbsp;io.sphere.sdk.search.<a href="../../../../io/sphere/sdk/search/FacetSupport.html" title="interface in io.sphere.sdk.search">FacetSupport</a></h3>
+<code><a href="../../../../io/sphere/sdk/search/FacetSupport.html#facets--">facets</a></code></li>
+</ul>
+<ul class="blockList">
+<li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.expansion.MetaModelExpansionDsl">
+<!--   -->
+</a>
+<h3>Methods inherited from interface&nbsp;io.sphere.sdk.expansion.<a href="../../../../io/sphere/sdk/expansion/MetaModelExpansionDsl.html" title="interface in io.sphere.sdk.expansion">MetaModelExpansionDsl</a></h3>
+<code><a href="../../../../io/sphere/sdk/expansion/MetaModelExpansionDsl.html#plusExpansionPaths-java.util.function.Function-">plusExpansionPaths</a>, <a href="../../../../io/sphere/sdk/expansion/MetaModelExpansionDsl.html#withExpansionPaths-java.util.function.Function-">withExpansionPaths</a></code></li>
+</ul>
+<ul class="blockList">
 <li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.expansion.ReferenceExpansionDsl">
 <!--   -->
 </a>
@@ -348,529 +255,6 @@ extends <a href="../../../../io/sphere/sdk/search/EntitySearch.html" title="inte
 </a>
 <h3>Methods inherited from interface&nbsp;io.sphere.sdk.expansion.<a href="../../../../io/sphere/sdk/expansion/ReferenceExpansionSupport.html" title="interface in io.sphere.sdk.expansion">ReferenceExpansionSupport</a></h3>
 <code><a href="../../../../io/sphere/sdk/expansion/ReferenceExpansionSupport.html#expansionPaths--">expansionPaths</a></code></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</div>
-<div class="details">
-<ul class="blockList">
-<li class="blockList">
-<!-- ============ METHOD DETAIL ========== -->
-<ul class="blockList">
-<li class="blockList"><a name="method.detail">
-<!--   -->
-</a>
-<h3>Method Detail</h3>
-<a name="withText-io.sphere.sdk.models.LocalizedStringEntry-">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>withText</h4>
-<pre><a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">C</a>&nbsp;withText(<a href="../../../../io/sphere/sdk/models/LocalizedStringEntry.html" title="class in io.sphere.sdk.models">LocalizedStringEntry</a>&nbsp;text)</pre>
-<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../io/sphere/sdk/search/SearchDsl.html#withText-io.sphere.sdk.models.LocalizedStringEntry-">SearchDsl</a></code></span></div>
-<div class="block">Returns an EntitySearch with the new text as search text.</div>
-<dl>
-<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../io/sphere/sdk/search/SearchDsl.html#withText-io.sphere.sdk.models.LocalizedStringEntry-">withText</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/search/SearchDsl.html" title="interface in io.sphere.sdk.search">SearchDsl</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">T</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">C</a> extends <a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="interface in io.sphere.sdk.search">MetaModelSearchDsl</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">T</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">C</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">S</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">E</a>&gt;&gt;</code></dd>
-<dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>text</code> - the new search text</dd>
-<dt><span class="returnLabel">Returns:</span></dt>
-<dd>an EntitySearch with text</dd>
-</dl>
-</li>
-</ul>
-<a name="withFuzzy-java.lang.Boolean-">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>withFuzzy</h4>
-<pre><a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">C</a>&nbsp;withFuzzy(java.lang.Boolean&nbsp;fuzzy)</pre>
-<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../io/sphere/sdk/search/SearchDsl.html#withFuzzy-java.lang.Boolean-">SearchDsl</a></code></span></div>
-<div class="block">Returns an EntitySearch with mofified fuzzyParameter.</div>
-<dl>
-<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../io/sphere/sdk/search/SearchDsl.html#withFuzzy-java.lang.Boolean-">withFuzzy</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/search/SearchDsl.html" title="interface in io.sphere.sdk.search">SearchDsl</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">T</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">C</a> extends <a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="interface in io.sphere.sdk.search">MetaModelSearchDsl</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">T</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">C</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">S</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">E</a>&gt;&gt;</code></dd>
-<dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>fuzzy</code> - a flag to indicate if fuzzy search is enabled (true) or not (false)</dd>
-<dt><span class="returnLabel">Returns:</span></dt>
-<dd>an EntitySearch with the new fuzzy flag setting</dd>
-</dl>
-</li>
-</ul>
-<a name="withText-java.util.Locale-java.lang.String-">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>withText</h4>
-<pre><a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">C</a>&nbsp;withText(java.util.Locale&nbsp;locale,
-           java.lang.String&nbsp;text)</pre>
-<dl>
-<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../io/sphere/sdk/search/SearchDsl.html#withText-java.util.Locale-java.lang.String-">withText</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/search/SearchDsl.html" title="interface in io.sphere.sdk.search">SearchDsl</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">T</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">C</a> extends <a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="interface in io.sphere.sdk.search">MetaModelSearchDsl</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">T</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">C</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">S</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">E</a>&gt;&gt;</code></dd>
-</dl>
-</li>
-</ul>
-<a name="withFacets-java.util.List-">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>withFacets</h4>
-<pre><a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">C</a>&nbsp;withFacets(java.util.List&lt;<a href="../../../../io/sphere/sdk/search/FacetExpression.html" title="interface in io.sphere.sdk.search">FacetExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">T</a>&gt;&gt;&nbsp;facets)</pre>
-<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../io/sphere/sdk/search/SearchDsl.html#withFacets-java.util.List-">SearchDsl</a></code></span></div>
-<div class="block">Returns an EntitySearch with the new facet list as facets.</div>
-<dl>
-<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../io/sphere/sdk/search/SearchDsl.html#withFacets-java.util.List-">withFacets</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/search/SearchDsl.html" title="interface in io.sphere.sdk.search">SearchDsl</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">T</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">C</a> extends <a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="interface in io.sphere.sdk.search">MetaModelSearchDsl</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">T</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">C</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">S</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">E</a>&gt;&gt;</code></dd>
-<dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>facets</code> - the new facet list</dd>
-<dt><span class="returnLabel">Returns:</span></dt>
-<dd>an EntitySearch with facets</dd>
-</dl>
-</li>
-</ul>
-<a name="withFacets-io.sphere.sdk.search.FacetExpression-">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>withFacets</h4>
-<pre><a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">C</a>&nbsp;withFacets(<a href="../../../../io/sphere/sdk/search/FacetExpression.html" title="interface in io.sphere.sdk.search">FacetExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">T</a>&gt;&nbsp;facet)</pre>
-<dl>
-<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../io/sphere/sdk/search/SearchDsl.html#withFacets-io.sphere.sdk.search.FacetExpression-">withFacets</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/search/SearchDsl.html" title="interface in io.sphere.sdk.search">SearchDsl</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">T</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">C</a> extends <a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="interface in io.sphere.sdk.search">MetaModelSearchDsl</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">T</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">C</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">S</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">E</a>&gt;&gt;</code></dd>
-</dl>
-</li>
-</ul>
-<a name="withFacets-java.util.function.Function-">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>withFacets</h4>
-<pre><a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">C</a>&nbsp;withFacets(java.util.function.Function&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">S</a>,<a href="../../../../io/sphere/sdk/search/FacetExpression.html" title="interface in io.sphere.sdk.search">FacetExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">T</a>&gt;&gt;&nbsp;m)</pre>
-</li>
-</ul>
-<a name="plusFacets-java.util.List-">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>plusFacets</h4>
-<pre><a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">C</a>&nbsp;plusFacets(java.util.List&lt;<a href="../../../../io/sphere/sdk/search/FacetExpression.html" title="interface in io.sphere.sdk.search">FacetExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">T</a>&gt;&gt;&nbsp;facets)</pre>
-<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../io/sphere/sdk/search/SearchDsl.html#plusFacets-java.util.List-">SearchDsl</a></code></span></div>
-<div class="block">Returns an EntitySearch with the new facet list appended to the existing facets.</div>
-<dl>
-<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../io/sphere/sdk/search/SearchDsl.html#plusFacets-java.util.List-">plusFacets</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/search/SearchDsl.html" title="interface in io.sphere.sdk.search">SearchDsl</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">T</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">C</a> extends <a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="interface in io.sphere.sdk.search">MetaModelSearchDsl</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">T</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">C</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">S</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">E</a>&gt;&gt;</code></dd>
-<dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>facets</code> - the new facet list</dd>
-<dt><span class="returnLabel">Returns:</span></dt>
-<dd>an EntitySearch with the existing facets plus the new facet list.</dd>
-</dl>
-</li>
-</ul>
-<a name="plusFacets-io.sphere.sdk.search.FacetExpression-">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>plusFacets</h4>
-<pre><a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">C</a>&nbsp;plusFacets(<a href="../../../../io/sphere/sdk/search/FacetExpression.html" title="interface in io.sphere.sdk.search">FacetExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">T</a>&gt;&nbsp;facet)</pre>
-<dl>
-<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../io/sphere/sdk/search/SearchDsl.html#plusFacets-io.sphere.sdk.search.FacetExpression-">plusFacets</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/search/SearchDsl.html" title="interface in io.sphere.sdk.search">SearchDsl</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">T</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">C</a> extends <a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="interface in io.sphere.sdk.search">MetaModelSearchDsl</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">T</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">C</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">S</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">E</a>&gt;&gt;</code></dd>
-</dl>
-</li>
-</ul>
-<a name="plusFacets-java.util.function.Function-">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>plusFacets</h4>
-<pre><a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">C</a>&nbsp;plusFacets(java.util.function.Function&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">S</a>,<a href="../../../../io/sphere/sdk/search/FacetExpression.html" title="interface in io.sphere.sdk.search">FacetExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">T</a>&gt;&gt;&nbsp;m)</pre>
-</li>
-</ul>
-<a name="withResultFilters-java.util.List-">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>withResultFilters</h4>
-<pre><a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">C</a>&nbsp;withResultFilters(java.util.List&lt;<a href="../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">T</a>&gt;&gt;&nbsp;resultFilters)</pre>
-<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../io/sphere/sdk/search/SearchDsl.html#withResultFilters-java.util.List-">SearchDsl</a></code></span></div>
-<div class="block">Returns an EntitySearch with the new result filter list as result filter.</div>
-<dl>
-<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../io/sphere/sdk/search/SearchDsl.html#withResultFilters-java.util.List-">withResultFilters</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/search/SearchDsl.html" title="interface in io.sphere.sdk.search">SearchDsl</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">T</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">C</a> extends <a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="interface in io.sphere.sdk.search">MetaModelSearchDsl</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">T</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">C</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">S</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">E</a>&gt;&gt;</code></dd>
-<dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>resultFilters</code> - the new result filter list</dd>
-<dt><span class="returnLabel">Returns:</span></dt>
-<dd>an EntitySearch with resultFilters</dd>
-</dl>
-</li>
-</ul>
-<a name="withResultFilters-io.sphere.sdk.search.FilterExpression-">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>withResultFilters</h4>
-<pre><a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">C</a>&nbsp;withResultFilters(<a href="../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">T</a>&gt;&nbsp;resultFilter)</pre>
-<dl>
-<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../io/sphere/sdk/search/SearchDsl.html#withResultFilters-io.sphere.sdk.search.FilterExpression-">withResultFilters</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/search/SearchDsl.html" title="interface in io.sphere.sdk.search">SearchDsl</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">T</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">C</a> extends <a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="interface in io.sphere.sdk.search">MetaModelSearchDsl</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">T</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">C</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">S</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">E</a>&gt;&gt;</code></dd>
-</dl>
-</li>
-</ul>
-<a name="withResultFilters-java.util.function.Function-">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>withResultFilters</h4>
-<pre><a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">C</a>&nbsp;withResultFilters(java.util.function.Function&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">S</a>,<a href="../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">T</a>&gt;&gt;&nbsp;m)</pre>
-</li>
-</ul>
-<a name="plusResultFilters-java.util.List-">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>plusResultFilters</h4>
-<pre><a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">C</a>&nbsp;plusResultFilters(java.util.List&lt;<a href="../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">T</a>&gt;&gt;&nbsp;resultFilters)</pre>
-<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../io/sphere/sdk/search/SearchDsl.html#plusResultFilters-java.util.List-">SearchDsl</a></code></span></div>
-<div class="block">Returns an EntitySearch with the new result filter list appended to the existing result filters.</div>
-<dl>
-<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../io/sphere/sdk/search/SearchDsl.html#plusResultFilters-java.util.List-">plusResultFilters</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/search/SearchDsl.html" title="interface in io.sphere.sdk.search">SearchDsl</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">T</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">C</a> extends <a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="interface in io.sphere.sdk.search">MetaModelSearchDsl</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">T</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">C</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">S</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">E</a>&gt;&gt;</code></dd>
-<dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>resultFilters</code> - the new result filter list</dd>
-<dt><span class="returnLabel">Returns:</span></dt>
-<dd>an EntitySearch with the existing result filter plus the new result filter list.</dd>
-</dl>
-</li>
-</ul>
-<a name="plusResultFilters-io.sphere.sdk.search.FilterExpression-">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>plusResultFilters</h4>
-<pre><a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">C</a>&nbsp;plusResultFilters(<a href="../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">T</a>&gt;&nbsp;resultFilter)</pre>
-<dl>
-<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../io/sphere/sdk/search/SearchDsl.html#plusResultFilters-io.sphere.sdk.search.FilterExpression-">plusResultFilters</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/search/SearchDsl.html" title="interface in io.sphere.sdk.search">SearchDsl</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">T</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">C</a> extends <a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="interface in io.sphere.sdk.search">MetaModelSearchDsl</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">T</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">C</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">S</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">E</a>&gt;&gt;</code></dd>
-</dl>
-</li>
-</ul>
-<a name="plusResultFilters-java.util.function.Function-">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>plusResultFilters</h4>
-<pre><a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">C</a>&nbsp;plusResultFilters(java.util.function.Function&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">S</a>,<a href="../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">T</a>&gt;&gt;&nbsp;m)</pre>
-</li>
-</ul>
-<a name="withQueryFilters-java.util.List-">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>withQueryFilters</h4>
-<pre><a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">C</a>&nbsp;withQueryFilters(java.util.List&lt;<a href="../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">T</a>&gt;&gt;&nbsp;queryFilters)</pre>
-<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../io/sphere/sdk/search/SearchDsl.html#withQueryFilters-java.util.List-">SearchDsl</a></code></span></div>
-<div class="block">Returns an EntitySearch with the new query filter list as query filters.</div>
-<dl>
-<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../io/sphere/sdk/search/SearchDsl.html#withQueryFilters-java.util.List-">withQueryFilters</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/search/SearchDsl.html" title="interface in io.sphere.sdk.search">SearchDsl</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">T</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">C</a> extends <a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="interface in io.sphere.sdk.search">MetaModelSearchDsl</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">T</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">C</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">S</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">E</a>&gt;&gt;</code></dd>
-<dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>queryFilters</code> - the new query filter list</dd>
-<dt><span class="returnLabel">Returns:</span></dt>
-<dd>an EntitySearch with queryFilters</dd>
-</dl>
-</li>
-</ul>
-<a name="withQueryFilters-io.sphere.sdk.search.FilterExpression-">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>withQueryFilters</h4>
-<pre><a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">C</a>&nbsp;withQueryFilters(<a href="../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">T</a>&gt;&nbsp;queryFilter)</pre>
-<dl>
-<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../io/sphere/sdk/search/SearchDsl.html#withQueryFilters-io.sphere.sdk.search.FilterExpression-">withQueryFilters</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/search/SearchDsl.html" title="interface in io.sphere.sdk.search">SearchDsl</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">T</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">C</a> extends <a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="interface in io.sphere.sdk.search">MetaModelSearchDsl</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">T</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">C</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">S</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">E</a>&gt;&gt;</code></dd>
-</dl>
-</li>
-</ul>
-<a name="withQueryFilters-java.util.function.Function-">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>withQueryFilters</h4>
-<pre><a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">C</a>&nbsp;withQueryFilters(java.util.function.Function&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">S</a>,<a href="../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">T</a>&gt;&gt;&nbsp;m)</pre>
-</li>
-</ul>
-<a name="plusQueryFilters-java.util.List-">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>plusQueryFilters</h4>
-<pre><a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">C</a>&nbsp;plusQueryFilters(java.util.List&lt;<a href="../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">T</a>&gt;&gt;&nbsp;queryFilters)</pre>
-<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../io/sphere/sdk/search/SearchDsl.html#plusQueryFilters-java.util.List-">SearchDsl</a></code></span></div>
-<div class="block">Returns an EntitySearch with the new query filter list appended to the existing query filters.</div>
-<dl>
-<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../io/sphere/sdk/search/SearchDsl.html#plusQueryFilters-java.util.List-">plusQueryFilters</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/search/SearchDsl.html" title="interface in io.sphere.sdk.search">SearchDsl</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">T</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">C</a> extends <a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="interface in io.sphere.sdk.search">MetaModelSearchDsl</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">T</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">C</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">S</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">E</a>&gt;&gt;</code></dd>
-<dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>queryFilters</code> - the new query filter list</dd>
-<dt><span class="returnLabel">Returns:</span></dt>
-<dd>an EntitySearch with the existing query filters plus the new query filter list.</dd>
-</dl>
-</li>
-</ul>
-<a name="plusQueryFilters-io.sphere.sdk.search.FilterExpression-">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>plusQueryFilters</h4>
-<pre><a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">C</a>&nbsp;plusQueryFilters(<a href="../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">T</a>&gt;&nbsp;queryFilter)</pre>
-<dl>
-<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../io/sphere/sdk/search/SearchDsl.html#plusQueryFilters-io.sphere.sdk.search.FilterExpression-">plusQueryFilters</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/search/SearchDsl.html" title="interface in io.sphere.sdk.search">SearchDsl</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">T</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">C</a> extends <a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="interface in io.sphere.sdk.search">MetaModelSearchDsl</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">T</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">C</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">S</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">E</a>&gt;&gt;</code></dd>
-</dl>
-</li>
-</ul>
-<a name="plusQueryFilters-java.util.function.Function-">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>plusQueryFilters</h4>
-<pre><a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">C</a>&nbsp;plusQueryFilters(java.util.function.Function&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">S</a>,<a href="../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">T</a>&gt;&gt;&nbsp;m)</pre>
-</li>
-</ul>
-<a name="withFacetFilters-java.util.List-">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>withFacetFilters</h4>
-<pre><a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">C</a>&nbsp;withFacetFilters(java.util.List&lt;<a href="../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">T</a>&gt;&gt;&nbsp;facetFilters)</pre>
-<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../io/sphere/sdk/search/SearchDsl.html#withFacetFilters-java.util.List-">SearchDsl</a></code></span></div>
-<div class="block">Returns an EntitySearch with the new facet filter list as facet filter.</div>
-<dl>
-<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../io/sphere/sdk/search/SearchDsl.html#withFacetFilters-java.util.List-">withFacetFilters</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/search/SearchDsl.html" title="interface in io.sphere.sdk.search">SearchDsl</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">T</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">C</a> extends <a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="interface in io.sphere.sdk.search">MetaModelSearchDsl</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">T</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">C</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">S</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">E</a>&gt;&gt;</code></dd>
-<dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>facetFilters</code> - the new facet filter list</dd>
-<dt><span class="returnLabel">Returns:</span></dt>
-<dd>an EntitySearch with facetFilters</dd>
-</dl>
-</li>
-</ul>
-<a name="withFacetFilters-io.sphere.sdk.search.FilterExpression-">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>withFacetFilters</h4>
-<pre><a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">C</a>&nbsp;withFacetFilters(<a href="../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">T</a>&gt;&nbsp;facetFilter)</pre>
-<dl>
-<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../io/sphere/sdk/search/SearchDsl.html#withFacetFilters-io.sphere.sdk.search.FilterExpression-">withFacetFilters</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/search/SearchDsl.html" title="interface in io.sphere.sdk.search">SearchDsl</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">T</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">C</a> extends <a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="interface in io.sphere.sdk.search">MetaModelSearchDsl</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">T</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">C</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">S</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">E</a>&gt;&gt;</code></dd>
-</dl>
-</li>
-</ul>
-<a name="withFacetFilters-java.util.function.Function-">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>withFacetFilters</h4>
-<pre><a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">C</a>&nbsp;withFacetFilters(java.util.function.Function&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">S</a>,<a href="../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">T</a>&gt;&gt;&nbsp;m)</pre>
-</li>
-</ul>
-<a name="plusFacetFilters-java.util.List-">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>plusFacetFilters</h4>
-<pre><a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">C</a>&nbsp;plusFacetFilters(java.util.List&lt;<a href="../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">T</a>&gt;&gt;&nbsp;facetFilters)</pre>
-<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../io/sphere/sdk/search/SearchDsl.html#plusFacetFilters-java.util.List-">SearchDsl</a></code></span></div>
-<div class="block">Returns an EntitySearch with the new facet filter list appended to the existing facet filters.</div>
-<dl>
-<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../io/sphere/sdk/search/SearchDsl.html#plusFacetFilters-java.util.List-">plusFacetFilters</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/search/SearchDsl.html" title="interface in io.sphere.sdk.search">SearchDsl</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">T</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">C</a> extends <a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="interface in io.sphere.sdk.search">MetaModelSearchDsl</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">T</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">C</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">S</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">E</a>&gt;&gt;</code></dd>
-<dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>facetFilters</code> - the new facet filter list</dd>
-<dt><span class="returnLabel">Returns:</span></dt>
-<dd>an EntitySearch with the existing facet filters plus the new facet filter list.</dd>
-</dl>
-</li>
-</ul>
-<a name="plusFacetFilters-io.sphere.sdk.search.FilterExpression-">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>plusFacetFilters</h4>
-<pre><a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">C</a>&nbsp;plusFacetFilters(<a href="../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">T</a>&gt;&nbsp;facetFilter)</pre>
-<dl>
-<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../io/sphere/sdk/search/SearchDsl.html#plusFacetFilters-io.sphere.sdk.search.FilterExpression-">plusFacetFilters</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/search/SearchDsl.html" title="interface in io.sphere.sdk.search">SearchDsl</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">T</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">C</a> extends <a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="interface in io.sphere.sdk.search">MetaModelSearchDsl</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">T</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">C</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">S</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">E</a>&gt;&gt;</code></dd>
-</dl>
-</li>
-</ul>
-<a name="plusFacetFilters-java.util.function.Function-">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>plusFacetFilters</h4>
-<pre><a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">C</a>&nbsp;plusFacetFilters(java.util.function.Function&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">S</a>,<a href="../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">T</a>&gt;&gt;&nbsp;m)</pre>
-</li>
-</ul>
-<a name="withSort-io.sphere.sdk.search.SearchSort-">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>withSort</h4>
-<pre><a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">C</a>&nbsp;withSort(<a href="../../../../io/sphere/sdk/search/SearchSort.html" title="interface in io.sphere.sdk.search">SearchSort</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">T</a>&gt;&nbsp;sort)</pre>
-<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../io/sphere/sdk/search/SearchDsl.html#withSort-io.sphere.sdk.search.SearchSort-">SearchDsl</a></code></span></div>
-<div class="block">Returns an EntityQuery with the new sort as sort.</div>
-<dl>
-<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../io/sphere/sdk/search/SearchDsl.html#withSort-io.sphere.sdk.search.SearchSort-">withSort</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/search/SearchDsl.html" title="interface in io.sphere.sdk.search">SearchDsl</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">T</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">C</a> extends <a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="interface in io.sphere.sdk.search">MetaModelSearchDsl</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">T</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">C</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">S</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">E</a>&gt;&gt;</code></dd>
-<dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>sort</code> - how the results of the search should be sorted</dd>
-<dt><span class="returnLabel">Returns:</span></dt>
-<dd>EntityQuery with sort</dd>
-</dl>
-</li>
-</ul>
-<a name="withSort-java.util.function.Function-">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>withSort</h4>
-<pre><a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">C</a>&nbsp;withSort(java.util.function.Function&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">S</a>,<a href="../../../../io/sphere/sdk/search/SearchSort.html" title="interface in io.sphere.sdk.search">SearchSort</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">T</a>&gt;&gt;&nbsp;m)</pre>
-</li>
-</ul>
-<a name="withLimit-long-">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>withLimit</h4>
-<pre><a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">C</a>&nbsp;withLimit(long&nbsp;limit)</pre>
-<dl>
-<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../io/sphere/sdk/search/SearchDsl.html#withLimit-long-">withLimit</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/search/SearchDsl.html" title="interface in io.sphere.sdk.search">SearchDsl</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">T</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">C</a> extends <a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="interface in io.sphere.sdk.search">MetaModelSearchDsl</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">T</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">C</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">S</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">E</a>&gt;&gt;</code></dd>
-</dl>
-</li>
-</ul>
-<a name="withOffset-long-">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>withOffset</h4>
-<pre><a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">C</a>&nbsp;withOffset(long&nbsp;offset)</pre>
-<dl>
-<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../io/sphere/sdk/search/SearchDsl.html#withOffset-long-">withOffset</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/search/SearchDsl.html" title="interface in io.sphere.sdk.search">SearchDsl</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">T</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">C</a> extends <a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="interface in io.sphere.sdk.search">MetaModelSearchDsl</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">T</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">C</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">S</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">E</a>&gt;&gt;</code></dd>
-</dl>
-</li>
-</ul>
-<a name="withExpansionPaths-java.util.function.Function-">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>withExpansionPaths</h4>
-<pre><a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">C</a>&nbsp;withExpansionPaths(java.util.function.Function&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">E</a>,<a href="../../../../io/sphere/sdk/expansion/ExpansionPath.html" title="interface in io.sphere.sdk.expansion">ExpansionPath</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">T</a>&gt;&gt;&nbsp;m)</pre>
-<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../io/sphere/sdk/expansion/MetaModelExpansionDsl.html#withExpansionPaths-java.util.function.Function-">MetaModelExpansionDsl</a></code></span></div>
-<div class="block">Creates a new object with the properties of the old object but replaces all expansion paths with a single <code>expansionPath</code> by using meta models.
-
- <p>An example in the product projection context:</p>
- <div id="io-sphere-sdk-products-expansion-ProductProjectionExpansionModelTest-withExpansionPathDslDemo--%s" class=code-example><pre><code class='java'>final ProductProjectionByIdGet fetch = ProductProjectionByIdGet.of("id", ProductProjectionType.CURRENT)
-                .plusExpansionPaths(ProductProjectionExpansionModel.of().categories());
-
-assertThat(fetch.expansionPaths())
-        .isEqualTo(asList(ExpansionPath.of("categories[*]")));
-
-final ProductProjectionByIdGet fetch2 =
-        fetch.withExpansionPaths(m -&gt; m.productType());
-
-assertThat(fetch.expansionPaths()).overridingErrorMessage("old object is unchanged")
-        .isEqualTo(asList(ExpansionPath.of("categories[*]")));
-assertThat(fetch2.expansionPaths()).isEqualTo(asList(ExpansionPath.of("productType")));
-assertThat(fetch2).isNotSameAs(fetch);
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/test/java/io/sphere/sdk/products/expansion/ProductProjectionExpansionModelTest.java" target="_blank">test code</a>.</pre></div></div>
-<dl>
-<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../io/sphere/sdk/expansion/MetaModelExpansionDsl.html#withExpansionPaths-java.util.function.Function-">withExpansionPaths</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/expansion/MetaModelExpansionDsl.html" title="interface in io.sphere.sdk.expansion">MetaModelExpansionDsl</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">T</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">C</a> extends <a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="interface in io.sphere.sdk.search">MetaModelSearchDsl</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">T</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">C</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">S</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">E</a>&gt;,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">E</a>&gt;</code></dd>
-<dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>m</code> - function to use the meta model for expansions to create an expansion path</dd>
-<dt><span class="returnLabel">Returns:</span></dt>
-<dd>new object</dd>
-</dl>
-</li>
-</ul>
-<a name="plusExpansionPaths-java.util.function.Function-">
-<!--   -->
-</a>
-<ul class="blockListLast">
-<li class="blockList">
-<h4>plusExpansionPaths</h4>
-<pre><a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">C</a>&nbsp;plusExpansionPaths(java.util.function.Function&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">E</a>,<a href="../../../../io/sphere/sdk/expansion/ExpansionPath.html" title="interface in io.sphere.sdk.expansion">ExpansionPath</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">T</a>&gt;&gt;&nbsp;m)</pre>
-<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../io/sphere/sdk/expansion/MetaModelExpansionDsl.html#plusExpansionPaths-java.util.function.Function-">MetaModelExpansionDsl</a></code></span></div>
-<div class="block">Creates a new object with the properties of the old object but adds a new expansion path to it by using meta models.
-
- <p>An example in the product projection context:</p>
- <div id="io-sphere-sdk-products-expansion-ProductProjectionExpansionModelTest-expandCategoriesDemo--%s" class=code-example><pre><code class='java'>final ProductProjectionByIdGet fetch1 = ProductProjectionByIdGet.of("id", ProductProjectionType.CURRENT)
-        .plusExpansionPaths(m -&gt; m.categories());
-assertThat(fetch1.expansionPaths())
-        .isEqualTo(asList(ExpansionPath.of("categories[*]")));
-
-final ProductProjectionByIdGet fetch2 = fetch1.plusExpansionPaths(m -&gt; m.productType());
-assertThat(fetch2.expansionPaths())
-        .isEqualTo(asList(ExpansionPath.of("categories[*]"), ExpansionPath.of("productType")))
-        .isEqualTo(listOf(fetch1.expansionPaths(), ExpansionPath.of("productType")));
-
-//this is equivalent to
-
-final ExpansionPath&lt;ProductProjection&gt; categoryExpand = ProductProjectionExpansionModel.of().categories();
-final ExpansionPath&lt;ProductProjection&gt; productTypeExpand = ProductProjectionExpansionModel.of().productType();
-final ProductProjectionByIdGet fetchB = ProductProjectionByIdGet.of("id", ProductProjectionType.CURRENT)
-                .withExpansionPaths(asList(categoryExpand, productTypeExpand));
-assertThat(fetchB.expansionPaths())
-        .isEqualTo(asList(ExpansionPath.of("categories[*]"), ExpansionPath.of("productType")));
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/test/java/io/sphere/sdk/products/expansion/ProductProjectionExpansionModelTest.java" target="_blank">test code</a>.</pre></div></div>
-<dl>
-<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../io/sphere/sdk/expansion/MetaModelExpansionDsl.html#plusExpansionPaths-java.util.function.Function-">plusExpansionPaths</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/expansion/MetaModelExpansionDsl.html" title="interface in io.sphere.sdk.expansion">MetaModelExpansionDsl</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">T</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">C</a> extends <a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="interface in io.sphere.sdk.search">MetaModelSearchDsl</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">T</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">C</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">S</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">E</a>&gt;,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">E</a>&gt;</code></dd>
-<dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>m</code> - function to use the meta model for expansions to create an expansion path</dd>
-<dt><span class="returnLabel">Returns:</span></dt>
-<dd>new object</dd>
-</dl>
-</li>
 </ul>
 </li>
 </ul>
@@ -899,7 +283,7 @@ assertThat(fetchB.expansionPaths())
 </div>
 <div class="subNav">
 <ul class="navList">
-<li><a href="../../../../io/sphere/sdk/search/LocalizedStringSearchModel.html" title="class in io.sphere.sdk.search"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
+<li><a href="../../../../io/sphere/sdk/search/MetaModelFilterDsl.html" title="interface in io.sphere.sdk.search"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
 <li><a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="class in io.sphere.sdk.search"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">
@@ -927,13 +311,13 @@ assertThat(fetchB.expansionPaths())
 <li>Nested&nbsp;|&nbsp;</li>
 <li>Field&nbsp;|&nbsp;</li>
 <li>Constr&nbsp;|&nbsp;</li>
-<li><a href="#method.summary">Method</a></li>
+<li>Method</li>
 </ul>
 <ul class="subNavList">
 <li>Detail:&nbsp;</li>
 <li>Field&nbsp;|&nbsp;</li>
 <li>Constr&nbsp;|&nbsp;</li>
-<li><a href="#method.detail">Method</a></li>
+<li>Method</li>
 </ul>
 </div>
 <a name="skip.navbar.bottom">

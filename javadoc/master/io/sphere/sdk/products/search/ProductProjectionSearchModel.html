@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":9,"i6":10};
+var methods = {"i0":10,"i1":10,"i2":9,"i3":10};
 var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -49,7 +49,7 @@ var activeTableTab = "activeTableTab";
 <div class="subNav">
 <ul class="navList">
 <li><a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html" title="interface in io.sphere.sdk.products.search"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
-<li><a href="../../../../../io/sphere/sdk/products/search/ProductVariantSearchModel.html" title="class in io.sphere.sdk.products.search"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
+<li><a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSortSearchModel.html" title="class in io.sphere.sdk.products.search"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">
 <li><a href="../../../../../index.html?io/sphere/sdk/products/search/ProductProjectionSearchModel.html" target="_top">Frames</a></li>
@@ -75,13 +75,13 @@ var activeTableTab = "activeTableTab";
 <li>Summary:&nbsp;</li>
 <li>Nested&nbsp;|&nbsp;</li>
 <li>Field&nbsp;|&nbsp;</li>
-<li>Constr&nbsp;|&nbsp;</li>
+<li><a href="#constructor.summary">Constr</a>&nbsp;|&nbsp;</li>
 <li><a href="#method.summary">Method</a></li>
 </ul>
 <ul class="subNavList">
 <li>Detail:&nbsp;</li>
 <li>Field&nbsp;|&nbsp;</li>
-<li>Constr&nbsp;|&nbsp;</li>
+<li><a href="#constructor.detail">Constr</a>&nbsp;|&nbsp;</li>
 <li><a href="#method.detail">Method</a></li>
 </ul>
 </div>
@@ -99,31 +99,17 @@ var activeTableTab = "activeTableTab";
 <li>java.lang.Object</li>
 <li>
 <ul class="inheritance">
-<li><a href="../../../../../io/sphere/sdk/models/Base.html" title="class in io.sphere.sdk.models">io.sphere.sdk.models.Base</a></li>
-<li>
-<ul class="inheritance">
-<li><a href="../../../../../io/sphere/sdk/search/SearchModelImpl.html" title="class in io.sphere.sdk.search">io.sphere.sdk.search.SearchModelImpl</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;</li>
-<li>
-<ul class="inheritance">
 <li>io.sphere.sdk.products.search.ProductProjectionSearchModel</li>
-</ul>
-</li>
-</ul>
-</li>
 </ul>
 </li>
 </ul>
 <div class="description">
 <ul class="blockList">
 <li class="blockList">
-<dl>
-<dt>All Implemented Interfaces:</dt>
-<dd><a href="../../../../../io/sphere/sdk/search/SearchModel.html" title="interface in io.sphere.sdk.search">SearchModel</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;</dd>
-</dl>
 <hr>
 <br>
 <pre>public class <span class="typeNameLabel">ProductProjectionSearchModel</span>
-extends <a href="../../../../../io/sphere/sdk/search/SearchModelImpl.html" title="class in io.sphere.sdk.search">SearchModelImpl</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;</pre>
+extends java.lang.Object</pre>
 <div class="block">EXPERIMENTAL model to easily build product projection search requests.
  Being it experimental, it can be modified in future releases therefore introducing breaking changes.</div>
 </li>
@@ -132,6 +118,23 @@ extends <a href="../../../../../io/sphere/sdk/search/SearchModelImpl.html" title
 <div class="summary">
 <ul class="blockList">
 <li class="blockList">
+<!-- ======== CONSTRUCTOR SUMMARY ======== -->
+<ul class="blockList">
+<li class="blockList"><a name="constructor.summary">
+<!--   -->
+</a>
+<h3>Constructor Summary</h3>
+<table class="memberSummary" border="0" cellpadding="3" cellspacing="0" summary="Constructor Summary table, listing constructors, and an explanation">
+<caption><span>Constructors</span><span class="tabEnd">&nbsp;</span></caption>
+<tr>
+<th class="colOne" scope="col">Constructor and Description</th>
+</tr>
+<tr class="altColor">
+<td class="colOne"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearchModel.html#ProductProjectionSearchModel--">ProductProjectionSearchModel</a></span>()</code>&nbsp;</td>
+</tr>
+</table>
+</li>
+</ul>
 <!-- ========== METHOD SUMMARY =========== -->
 <ul class="blockList">
 <li class="blockList"><a name="method.summary">
@@ -145,61 +148,28 @@ extends <a href="../../../../../io/sphere/sdk/search/SearchModelImpl.html" title
 <th class="colLast" scope="col">Method and Description</th>
 </tr>
 <tr id="i0" class="altColor">
-<td class="colFirst"><code><a href="../../../../../io/sphere/sdk/products/search/ProductVariantSearchModel.html" title="class in io.sphere.sdk.products.search">ProductVariantSearchModel</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearchModel.html#allVariants--">allVariants</a></span>()</code>&nbsp;</td>
+<td class="colFirst"><code><a href="../../../../../io/sphere/sdk/products/search/ProductProjectionFacetSearchModel.html" title="class in io.sphere.sdk.products.search">ProductProjectionFacetSearchModel</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearchModel.html#facet--">facet</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i1" class="rowColor">
-<td class="colFirst"><code><a href="../../../../../io/sphere/sdk/search/ReferenceSearchModel.html" title="class in io.sphere.sdk.search">ReferenceSearchModel</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>,<a href="../../../../../io/sphere/sdk/search/SimpleSearchSortDirection.html" title="enum in io.sphere.sdk.search">SimpleSearchSortDirection</a>&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearchModel.html#categories--">categories</a></span>()</code>&nbsp;</td>
+<td class="colFirst"><code><a href="../../../../../io/sphere/sdk/products/search/ProductProjectionFilterSearchModel.html" title="class in io.sphere.sdk.products.search">ProductProjectionFilterSearchModel</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearchModel.html#filter--">filter</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i2" class="altColor">
-<td class="colFirst"><code><a href="../../../../../io/sphere/sdk/search/DateTimeSearchModel.html" title="class in io.sphere.sdk.search">DateTimeSearchModel</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>,<a href="../../../../../io/sphere/sdk/search/SimpleSearchSortDirection.html" title="enum in io.sphere.sdk.search">SimpleSearchSortDirection</a>&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearchModel.html#createdAt--">createdAt</a></span>()</code>&nbsp;</td>
-</tr>
-<tr id="i3" class="rowColor">
-<td class="colFirst"><code><a href="../../../../../io/sphere/sdk/search/DateTimeSearchModel.html" title="class in io.sphere.sdk.search">DateTimeSearchModel</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>,<a href="../../../../../io/sphere/sdk/search/SimpleSearchSortDirection.html" title="enum in io.sphere.sdk.search">SimpleSearchSortDirection</a>&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearchModel.html#lastModifiedAt--">lastModifiedAt</a></span>()</code>&nbsp;</td>
-</tr>
-<tr id="i4" class="altColor">
-<td class="colFirst"><code><a href="../../../../../io/sphere/sdk/search/LocalizedStringSearchModel.html" title="class in io.sphere.sdk.search">LocalizedStringSearchModel</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>,<a href="../../../../../io/sphere/sdk/search/SimpleSearchSortDirection.html" title="enum in io.sphere.sdk.search">SimpleSearchSortDirection</a>&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearchModel.html#name--">name</a></span>()</code>&nbsp;</td>
-</tr>
-<tr id="i5" class="rowColor">
 <td class="colFirst"><code>static <a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearchModel.html" title="class in io.sphere.sdk.products.search">ProductProjectionSearchModel</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearchModel.html#of--">of</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i6" class="altColor">
-<td class="colFirst"><code><a href="../../../../../io/sphere/sdk/search/ReferenceSearchModel.html" title="class in io.sphere.sdk.search">ReferenceSearchModel</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>,<a href="../../../../../io/sphere/sdk/search/SimpleSearchSortDirection.html" title="enum in io.sphere.sdk.search">SimpleSearchSortDirection</a>&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearchModel.html#productType--">productType</a></span>()</code>&nbsp;</td>
+<tr id="i3" class="rowColor">
+<td class="colFirst"><code><a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSortSearchModel.html" title="class in io.sphere.sdk.products.search">ProductProjectionSortSearchModel</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearchModel.html#sort--">sort</a></span>()</code>&nbsp;</td>
 </tr>
 </table>
-<ul class="blockList">
-<li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.search.SearchModelImpl">
-<!--   -->
-</a>
-<h3>Methods inherited from class&nbsp;io.sphere.sdk.search.<a href="../../../../../io/sphere/sdk/search/SearchModelImpl.html" title="class in io.sphere.sdk.search">SearchModelImpl</a></h3>
-<code><a href="../../../../../io/sphere/sdk/search/SearchModelImpl.html#getParent--">getParent</a>, <a href="../../../../../io/sphere/sdk/search/SearchModelImpl.html#getPathSegment--">getPathSegment</a></code></li>
-</ul>
-<ul class="blockList">
-<li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.models.Base">
-<!--   -->
-</a>
-<h3>Methods inherited from class&nbsp;io.sphere.sdk.models.<a href="../../../../../io/sphere/sdk/models/Base.html" title="class in io.sphere.sdk.models">Base</a></h3>
-<code><a href="../../../../../io/sphere/sdk/models/Base.html#equals-java.lang.Object-">equals</a>, <a href="../../../../../io/sphere/sdk/models/Base.html#hashCode--">hashCode</a>, <a href="../../../../../io/sphere/sdk/models/Base.html#toString--">toString</a></code></li>
-</ul>
 <ul class="blockList">
 <li class="blockList"><a name="methods.inherited.from.class.java.lang.Object">
 <!--   -->
 </a>
 <h3>Methods inherited from class&nbsp;java.lang.Object</h3>
-<code>clone, finalize, getClass, notify, notifyAll, wait, wait, wait</code></li>
-</ul>
-<ul class="blockList">
-<li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.search.SearchModel">
-<!--   -->
-</a>
-<h3>Methods inherited from interface&nbsp;io.sphere.sdk.search.<a href="../../../../../io/sphere/sdk/search/SearchModel.html" title="interface in io.sphere.sdk.search">SearchModel</a></h3>
-<code><a href="../../../../../io/sphere/sdk/search/SearchModel.html#buildPath--">buildPath</a>, <a href="../../../../../io/sphere/sdk/search/SearchModel.html#hasPath-java.util.List-">hasPath</a></code></li>
+<code>clone, equals, finalize, getClass, hashCode, notify, notifyAll, toString, wait, wait, wait</code></li>
 </ul>
 </li>
 </ul>
@@ -209,73 +179,63 @@ extends <a href="../../../../../io/sphere/sdk/search/SearchModelImpl.html" title
 <div class="details">
 <ul class="blockList">
 <li class="blockList">
+<!-- ========= CONSTRUCTOR DETAIL ======== -->
+<ul class="blockList">
+<li class="blockList"><a name="constructor.detail">
+<!--   -->
+</a>
+<h3>Constructor Detail</h3>
+<a name="ProductProjectionSearchModel--">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>ProductProjectionSearchModel</h4>
+<pre>public&nbsp;ProductProjectionSearchModel()</pre>
+</li>
+</ul>
+</li>
+</ul>
 <!-- ============ METHOD DETAIL ========== -->
 <ul class="blockList">
 <li class="blockList"><a name="method.detail">
 <!--   -->
 </a>
 <h3>Method Detail</h3>
+<a name="filter--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>filter</h4>
+<pre>public&nbsp;<a href="../../../../../io/sphere/sdk/products/search/ProductProjectionFilterSearchModel.html" title="class in io.sphere.sdk.products.search">ProductProjectionFilterSearchModel</a>&nbsp;filter()</pre>
+</li>
+</ul>
+<a name="facet--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>facet</h4>
+<pre>public&nbsp;<a href="../../../../../io/sphere/sdk/products/search/ProductProjectionFacetSearchModel.html" title="class in io.sphere.sdk.products.search">ProductProjectionFacetSearchModel</a>&nbsp;facet()</pre>
+</li>
+</ul>
+<a name="sort--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>sort</h4>
+<pre>public&nbsp;<a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSortSearchModel.html" title="class in io.sphere.sdk.products.search">ProductProjectionSortSearchModel</a>&nbsp;sort()</pre>
+</li>
+</ul>
 <a name="of--">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>of</h4>
-<pre>public static&nbsp;<a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearchModel.html" title="class in io.sphere.sdk.products.search">ProductProjectionSearchModel</a>&nbsp;of()</pre>
-</li>
-</ul>
-<a name="allVariants--">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>allVariants</h4>
-<pre>public&nbsp;<a href="../../../../../io/sphere/sdk/products/search/ProductVariantSearchModel.html" title="class in io.sphere.sdk.products.search">ProductVariantSearchModel</a>&nbsp;allVariants()</pre>
-</li>
-</ul>
-<a name="name--">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>name</h4>
-<pre>public&nbsp;<a href="../../../../../io/sphere/sdk/search/LocalizedStringSearchModel.html" title="class in io.sphere.sdk.search">LocalizedStringSearchModel</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>,<a href="../../../../../io/sphere/sdk/search/SimpleSearchSortDirection.html" title="enum in io.sphere.sdk.search">SimpleSearchSortDirection</a>&gt;&nbsp;name()</pre>
-</li>
-</ul>
-<a name="categories--">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>categories</h4>
-<pre>public&nbsp;<a href="../../../../../io/sphere/sdk/search/ReferenceSearchModel.html" title="class in io.sphere.sdk.search">ReferenceSearchModel</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>,<a href="../../../../../io/sphere/sdk/search/SimpleSearchSortDirection.html" title="enum in io.sphere.sdk.search">SimpleSearchSortDirection</a>&gt;&nbsp;categories()</pre>
-</li>
-</ul>
-<a name="productType--">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>productType</h4>
-<pre>public&nbsp;<a href="../../../../../io/sphere/sdk/search/ReferenceSearchModel.html" title="class in io.sphere.sdk.search">ReferenceSearchModel</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>,<a href="../../../../../io/sphere/sdk/search/SimpleSearchSortDirection.html" title="enum in io.sphere.sdk.search">SimpleSearchSortDirection</a>&gt;&nbsp;productType()</pre>
-</li>
-</ul>
-<a name="createdAt--">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>createdAt</h4>
-<pre>public&nbsp;<a href="../../../../../io/sphere/sdk/search/DateTimeSearchModel.html" title="class in io.sphere.sdk.search">DateTimeSearchModel</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>,<a href="../../../../../io/sphere/sdk/search/SimpleSearchSortDirection.html" title="enum in io.sphere.sdk.search">SimpleSearchSortDirection</a>&gt;&nbsp;createdAt()</pre>
-</li>
-</ul>
-<a name="lastModifiedAt--">
 <!--   -->
 </a>
 <ul class="blockListLast">
 <li class="blockList">
-<h4>lastModifiedAt</h4>
-<pre>public&nbsp;<a href="../../../../../io/sphere/sdk/search/DateTimeSearchModel.html" title="class in io.sphere.sdk.search">DateTimeSearchModel</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>,<a href="../../../../../io/sphere/sdk/search/SimpleSearchSortDirection.html" title="enum in io.sphere.sdk.search">SimpleSearchSortDirection</a>&gt;&nbsp;lastModifiedAt()</pre>
+<h4>of</h4>
+<pre>public static&nbsp;<a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearchModel.html" title="class in io.sphere.sdk.products.search">ProductProjectionSearchModel</a>&nbsp;of()</pre>
 </li>
 </ul>
 </li>
@@ -306,7 +266,7 @@ extends <a href="../../../../../io/sphere/sdk/search/SearchModelImpl.html" title
 <div class="subNav">
 <ul class="navList">
 <li><a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html" title="interface in io.sphere.sdk.products.search"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
-<li><a href="../../../../../io/sphere/sdk/products/search/ProductVariantSearchModel.html" title="class in io.sphere.sdk.products.search"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
+<li><a href="../../../../../io/sphere/sdk/products/search/ProductProjectionSortSearchModel.html" title="class in io.sphere.sdk.products.search"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">
 <li><a href="../../../../../index.html?io/sphere/sdk/products/search/ProductProjectionSearchModel.html" target="_top">Frames</a></li>
@@ -332,13 +292,13 @@ extends <a href="../../../../../io/sphere/sdk/search/SearchModelImpl.html" title
 <li>Summary:&nbsp;</li>
 <li>Nested&nbsp;|&nbsp;</li>
 <li>Field&nbsp;|&nbsp;</li>
-<li>Constr&nbsp;|&nbsp;</li>
+<li><a href="#constructor.summary">Constr</a>&nbsp;|&nbsp;</li>
 <li><a href="#method.summary">Method</a></li>
 </ul>
 <ul class="subNavList">
 <li>Detail:&nbsp;</li>
 <li>Field&nbsp;|&nbsp;</li>
-<li>Constr&nbsp;|&nbsp;</li>
+<li><a href="#constructor.detail">Constr</a>&nbsp;|&nbsp;</li>
 <li><a href="#method.detail">Method</a></li>
 </ul>
 </div>
