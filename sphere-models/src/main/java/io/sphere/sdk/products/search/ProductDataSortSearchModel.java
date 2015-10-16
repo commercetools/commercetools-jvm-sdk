@@ -5,10 +5,10 @@ import io.sphere.sdk.search.model.*;
 
 import javax.annotation.Nullable;
 
-public class ProductDataSortSearchModel extends SearchModelImpl<ProductProjection> {
+public class ProductDataSortSearchModel extends SortableSearchModel<ProductProjection, SingleValueSortSearchModel<ProductProjection>> {
 
-    public ProductDataSortSearchModel(@Nullable final SearchModel<ProductProjection> parent, @Nullable final String pathSegment) {
-        super(parent, pathSegment);
+    ProductDataSortSearchModel(@Nullable final SearchModel<ProductProjection> parent, @Nullable final String pathSegment) {
+        super(parent, pathSegment, SingleValueSortSearchModelFactory.of());
     }
 
     public ProductVariantSortSearchModel allVariants() {
@@ -16,18 +16,14 @@ public class ProductDataSortSearchModel extends SearchModelImpl<ProductProjectio
     }
 
     public LocalizedStringSortSearchModel<ProductProjection, SingleValueSortSearchModel<ProductProjection>> name() {
-        return new LocalizedStringSortSearchModel<>(this, "name", sortModelBuilder());
+        return localizedStringSortSearchModel("name");
     }
 
     public SingleValueSortSearchModel<ProductProjection> createdAt() {
-        return new SortableSearchModel<>(this, "createdAt", sortModelBuilder()).sorted();
+        return searchModel("createdAt").sorted();
     }
 
     public SingleValueSortSearchModel<ProductProjection> lastModifiedAt() {
-        return new SortableSearchModel<>(this, "lastModifiedAt", sortModelBuilder()).sorted();
-    }
-
-    private SingleValueSortSearchModelBuilder<ProductProjection> sortModelBuilder() {
-        return new SingleValueSortSearchModelBuilder<>();
+        return searchModel("lastModifiedAt").sorted();
     }
 }

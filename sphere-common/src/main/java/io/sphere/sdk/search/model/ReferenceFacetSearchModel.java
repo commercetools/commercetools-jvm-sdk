@@ -4,7 +4,7 @@ import javax.annotation.Nullable;
 
 public class ReferenceFacetSearchModel<T> extends SearchModelImpl<T> {
 
-    public ReferenceFacetSearchModel(@Nullable final SearchModel<T> parent, @Nullable final String pathSegment) {
+    ReferenceFacetSearchModel(@Nullable final SearchModel<T> parent, @Nullable final String pathSegment) {
         super(parent, pathSegment);
     }
 

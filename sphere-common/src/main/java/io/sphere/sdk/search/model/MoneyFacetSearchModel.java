@@ -5,7 +5,7 @@ import javax.money.CurrencyUnit;
 
 public class MoneyFacetSearchModel<T> extends SearchModelImpl<T> {
 
-    public MoneyFacetSearchModel(@Nullable final SearchModel<T> parent, @Nullable final String pathSegment) {
+    MoneyFacetSearchModel(@Nullable final SearchModel<T> parent, @Nullable final String pathSegment) {
         super(parent, pathSegment);
     }
 

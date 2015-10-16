@@ -5,7 +5,7 @@ import java.util.Locale;
 
 public class LocalizedStringFacetSearchModel<T> extends SearchModelImpl<T> {
 
-    public LocalizedStringFacetSearchModel(@Nullable final SearchModel<T> parent, @Nullable final String pathSegment) {
+    LocalizedStringFacetSearchModel(@Nullable final SearchModel<T> parent, @Nullable final String pathSegment) {
         super(parent, pathSegment);
     }
 

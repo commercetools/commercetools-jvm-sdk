@@ -17,26 +17,26 @@ public class ProductDataFilterSearchModel extends SearchModelImpl<ProductProject
     }
 
     public TermFilterSearchModel<ProductProjection, String> id() {
-        return new StringSearchModel<>(this, "id").filtered();
+        return stringSearchModel("id").filtered();
     }
 
     public LocalizedStringFilterSearchModel<ProductProjection> name() {
-        return new LocalizedStringFilterSearchModel<>(this, "name");
+        return localizedStringFilterSearchModel("name");
     }
 
     public ReferenceFilterSearchModel<ProductProjection> categories() {
-        return new ReferenceFilterSearchModel<>(this, "categories");
+        return referenceFilterSearchModel("categories");
     }
 
     public ReferenceFilterSearchModel<ProductProjection> productType() {
-        return new ReferenceFilterSearchModel<>(this, "productType");
+        return referenceFilterSearchModel("productType");
     }
 
     public RangeFilterSearchModel<ProductProjection, ZonedDateTime> createdAt() {
-        return new DateTimeSearchModel<>(this, "createdAt").filtered();
+        return datetimeSearchModel("createdAt").filtered();
     }
 
     public RangeFilterSearchModel<ProductProjection, ZonedDateTime> lastModifiedAt() {
-        return new DateTimeSearchModel<>(this, "lastModifiedAt").filtered();
+        return datetimeSearchModel("lastModifiedAt").filtered();
     }
 }

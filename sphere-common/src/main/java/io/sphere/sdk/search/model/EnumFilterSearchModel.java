@@ -4,7 +4,7 @@ import javax.annotation.Nullable;
 
 public class EnumFilterSearchModel<T> extends SearchModelImpl<T> {
 
-    public EnumFilterSearchModel(@Nullable final SearchModel<T> parent, @Nullable final String pathSegment) {
+    EnumFilterSearchModel(@Nullable final SearchModel<T> parent, @Nullable final String pathSegment) {
         super(parent, pathSegment);
     }
 

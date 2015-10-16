@@ -17,26 +17,26 @@ public class ProductDataFacetSearchModel extends SearchModelImpl<ProductProjecti
     }
 
     public TermFacetSearchModel<ProductProjection, String> id() {
-        return new StringSearchModel<>(this, "id").faceted();
+        return stringSearchModel("id").faceted();
     }
 
     public LocalizedStringFacetSearchModel<ProductProjection> name() {
-        return new LocalizedStringFacetSearchModel<>(this, "name");
+        return localizedStringFacetSearchModel("name");
     }
 
     public ReferenceFacetSearchModel<ProductProjection> categories() {
-        return new ReferenceFacetSearchModel<>(this, "categories");
+        return referenceFacetSearchModel("categories");
     }
 
     public ReferenceFacetSearchModel<ProductProjection> productType() {
-        return new ReferenceFacetSearchModel<>(this, "productType");
+        return referenceFacetSearchModel("productType");
     }
 
     public RangeFacetSearchModel<ProductProjection, ZonedDateTime> createdAt() {
-        return new DateTimeSearchModel<>(this, "createdAt").faceted();
+        return datetimeSearchModel("createdAt").faceted();
     }
 
     public RangeFacetSearchModel<ProductProjection, ZonedDateTime> lastModifiedAt() {
-        return new DateTimeSearchModel<>(this, "lastModifiedAt").faceted();
+        return datetimeSearchModel("lastModifiedAt").faceted();
     }
 }

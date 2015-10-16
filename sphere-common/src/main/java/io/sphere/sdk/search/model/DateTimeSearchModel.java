@@ -5,7 +5,7 @@ import java.time.ZonedDateTime;
 
 public class DateTimeSearchModel<T> extends RangeTermModelImpl<T, ZonedDateTime> {
 
-    public DateTimeSearchModel(@Nullable final SearchModel<T> parent, @Nullable final String pathSegment) {
+    DateTimeSearchModel(@Nullable final SearchModel<T> parent, @Nullable final String pathSegment) {
         super(parent, pathSegment, TypeSerializer.ofDateTime());
     }
 }

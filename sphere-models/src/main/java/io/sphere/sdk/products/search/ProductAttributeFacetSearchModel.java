@@ -16,47 +16,47 @@ public class ProductAttributeFacetSearchModel extends SearchModelImpl<ProductPro
     }
 
     public TermFacetSearchModel<ProductProjection, Boolean> ofBoolean(final String attributeName) {
-        return new BooleanSearchModel<>(this, attributeName).faceted();
+        return booleanSearchModel(attributeName).faceted();
     }
 
     public TermFacetSearchModel<ProductProjection, String> ofString(final String attributeName) {
-        return new StringSearchModel<>(this, attributeName).faceted();
+        return stringSearchModel(attributeName).faceted();
     }
 
     public LocalizedStringFacetSearchModel<ProductProjection> ofLocalizedString(final String attributeName) {
-        return new LocalizedStringFacetSearchModel<>(this, attributeName);
+        return localizedStringFacetSearchModel(attributeName);
     }
 
     public EnumFacetSearchModel<ProductProjection> ofEnum(final String attributeName) {
-        return new EnumFacetSearchModel<>(this, attributeName);
+        return enumFacetSearchModel(attributeName);
     }
 
     public LocalizedEnumFacetSearchModel<ProductProjection> ofLocalizableEnum(final String attributeName) {
-        return new LocalizedEnumFacetSearchModel<>(this, attributeName);
+        return localizedEnumFacetSearchModel(attributeName);
     }
 
     public RangeFacetSearchModel<ProductProjection, BigDecimal> ofNumber(final String attributeName) {
-        return new NumberSearchModel<>(this, attributeName).faceted();
+        return numberSearchModel(attributeName).faceted();
     }
 
     public MoneyFacetSearchModel<ProductProjection> ofMoney(final String attributeName) {
-        return new MoneyFacetSearchModel<>(this, attributeName);
+        return moneyFacetSearchModel(attributeName);
     }
 
     public RangeFacetSearchModel<ProductProjection, LocalDate> ofDate(final String attributeName) {
-        return new DateSearchModel<>(this, attributeName).faceted();
+        return dateSearchModel(attributeName).faceted();
     }
 
     public RangeFacetSearchModel<ProductProjection, LocalTime> ofTime(final String attributeName) {
-        return new TimeSearchModel<>(this, attributeName).faceted();
+        return timeSearchModel(attributeName).faceted();
     }
 
     public RangeFacetSearchModel<ProductProjection, ZonedDateTime> ofDateTime(final String attributeName) {
-        return new DateTimeSearchModel<>(this, attributeName).faceted();
+        return datetimeSearchModel(attributeName).faceted();
     }
 
     public ReferenceFacetSearchModel<ProductProjection> ofReference(final String attributeName) {
-        return new ReferenceFacetSearchModel<>(this, attributeName);
+        return referenceFacetSearchModel(attributeName);
     }
 
     public TermFacetSearchModel<ProductProjection, Boolean> ofBooleanSet(final String attributeName) {

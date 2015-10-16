@@ -8,7 +8,7 @@ import java.util.function.Function;
  * @param <S> the type of the class, implementation of {@link SortSearchModel}, where the element should be built
  */
 @FunctionalInterface
-interface SearchSortBuilder<T, S extends SortSearchModel<T>> extends Function<SortableSearchModel<T, S>, S> {
+interface SearchSortFactory<T, S extends SortSearchModel<T>> extends Function<SortableSearchModel<T, S>, S> {
 
     /**
      * Creates a new instance of S with the values of this builder and the given search model.

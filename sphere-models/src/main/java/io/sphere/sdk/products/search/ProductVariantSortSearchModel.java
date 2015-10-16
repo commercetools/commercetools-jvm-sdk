@@ -5,10 +5,10 @@ import io.sphere.sdk.search.model.*;
 
 import javax.annotation.Nullable;
 
-public class ProductVariantSortSearchModel extends SearchModelImpl<ProductProjection> {
+public class ProductVariantSortSearchModel extends SortableSearchModel<ProductProjection, MultiValueSortSearchModel<ProductProjection>> {
 
     ProductVariantSortSearchModel(@Nullable final SearchModel<ProductProjection> parent, @Nullable final String pathSegment) {
-        super(parent, pathSegment);
+        super(parent, pathSegment, MultiValueSortSearchModelFactory.of());
     }
 
     public ProductAttributeSortSearchModel attribute() {
@@ -16,10 +16,6 @@ public class ProductVariantSortSearchModel extends SearchModelImpl<ProductProjec
     }
 
     public MultiValueSortSearchModel<ProductProjection> price() {
-        return new SortableSearchModel<>(null, "price", sortModelBuilder()).sorted();
-    }
-
-    private MultiValueSortSearchModelBuilder<ProductProjection> sortModelBuilder() {
-        return new MultiValueSortSearchModelBuilder<>();
+        return searchModel(null, "price").sorted();
     }
 }

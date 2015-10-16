@@ -4,8 +4,8 @@ import javax.annotation.Nullable;
 
 public class LocalizedEnumSortSearchModel<T, S extends SortSearchModel<T>> extends SortableSearchModel<T, S> {
 
-    public LocalizedEnumSortSearchModel(@Nullable final SearchModel<T> parent, @Nullable final String pathSegment, final SearchSortBuilder<T, S> searchSortBuilder) {
-        super(parent, pathSegment, searchSortBuilder);
+    LocalizedEnumSortSearchModel(@Nullable final SearchModel<T> parent, @Nullable final String pathSegment, final SearchSortFactory<T, S> searchSortFactory) {
+        super(parent, pathSegment, searchSortFactory);
     }
 
     public S key() {
@@ -13,6 +13,6 @@ public class LocalizedEnumSortSearchModel<T, S extends SortSearchModel<T>> exten
     }
 
     public LocalizedStringSortSearchModel<T, S> label() {
-        return new LocalizedStringSortSearchModel<>(this, "label", searchSortBuilder);
+        return new LocalizedStringSortSearchModel<>(this, "label", searchSortFactory);
     }
 }

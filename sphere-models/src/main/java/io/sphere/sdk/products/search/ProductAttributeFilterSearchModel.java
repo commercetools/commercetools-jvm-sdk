@@ -16,47 +16,47 @@ public class ProductAttributeFilterSearchModel extends SearchModelImpl<ProductPr
     }
 
     public TermFilterSearchModel<ProductProjection, Boolean> ofBoolean(final String attributeName) {
-        return new BooleanSearchModel<>(this, attributeName).filtered();
+        return booleanSearchModel(attributeName).filtered();
     }
 
     public TermFilterSearchModel<ProductProjection, String> ofString(final String attributeName) {
-        return new StringSearchModel<>(this, attributeName).filtered();
+        return stringSearchModel(attributeName).filtered();
     }
 
     public LocalizedStringFilterSearchModel<ProductProjection> ofLocalizedString(final String attributeName) {
-        return new LocalizedStringFilterSearchModel<>(this, attributeName);
+        return localizedStringFilterSearchModel(attributeName);
     }
 
     public EnumFilterSearchModel<ProductProjection> ofEnum(final String attributeName) {
-        return new EnumFilterSearchModel<>(this, attributeName);
+        return enumFilterSearchModel(attributeName);
     }
 
     public LocalizedEnumFilterSearchModel<ProductProjection> ofLocalizableEnum(final String attributeName) {
-        return new LocalizedEnumFilterSearchModel<>(this, attributeName);
+        return localizedEnumFilterSearchModel(attributeName);
     }
 
     public RangeFilterSearchModel<ProductProjection, BigDecimal> ofNumber(final String attributeName) {
-        return new NumberSearchModel<>(this, attributeName).filtered();
+        return numberSearchModel(attributeName).filtered();
     }
 
     public MoneyFilterSearchModel<ProductProjection> ofMoney(final String attributeName) {
-        return new MoneyFilterSearchModel<>(this, attributeName);
+        return moneyFilterSearchModel(attributeName);
     }
 
     public RangeFilterSearchModel<ProductProjection, LocalDate> ofDate(final String attributeName) {
-        return new DateSearchModel<>(this, attributeName).filtered();
+        return dateSearchModel(attributeName).filtered();
     }
 
     public RangeFilterSearchModel<ProductProjection, LocalTime> ofTime(final String attributeName) {
-        return new TimeSearchModel<>(this, attributeName).filtered();
+        return timeSearchModel(attributeName).filtered();
     }
 
     public RangeFilterSearchModel<ProductProjection, ZonedDateTime> ofDateTime(final String attributeName) {
-        return new DateTimeSearchModel<>(this, attributeName).filtered();
+        return datetimeSearchModel(attributeName).filtered();
     }
 
     public ReferenceFilterSearchModel<ProductProjection> ofReference(final String attributeName) {
-        return new ReferenceFilterSearchModel<>(this, attributeName);
+        return referenceFilterSearchModel(attributeName);
     }
 
     public TermFilterSearchModel<ProductProjection, Boolean> ofBooleanSet(final String attributeName) {

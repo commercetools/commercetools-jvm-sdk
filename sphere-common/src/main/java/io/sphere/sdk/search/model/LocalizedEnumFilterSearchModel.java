@@ -4,7 +4,7 @@ import javax.annotation.Nullable;
 
 public class LocalizedEnumFilterSearchModel<T> extends SearchModelImpl<T> {
 
-    public LocalizedEnumFilterSearchModel(@Nullable final SearchModel<T> parent, @Nullable final String pathSegment) {
+    LocalizedEnumFilterSearchModel(@Nullable final SearchModel<T> parent, @Nullable final String pathSegment) {
         super(parent, pathSegment);
     }
 

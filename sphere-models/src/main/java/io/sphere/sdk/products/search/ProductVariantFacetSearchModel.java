@@ -18,6 +18,6 @@ public class ProductVariantFacetSearchModel extends SearchModelImpl<ProductProje
     }
 
     public MoneyFacetSearchModel<ProductProjection> price() {
-        return new MoneyFacetSearchModel<>(this, "price");
+        return moneyFacetSearchModel("price");
     }
 }

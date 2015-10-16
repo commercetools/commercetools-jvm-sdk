@@ -5,7 +5,7 @@ import java.util.Locale;
 
 public class LocalizedStringFilterSearchModel<T> extends SearchModelImpl<T> {
 
-    public LocalizedStringFilterSearchModel(@Nullable final SearchModel<T> parent, @Nullable final String pathSegment) {
+    LocalizedStringFilterSearchModel(@Nullable final SearchModel<T> parent, @Nullable final String pathSegment) {
         super(parent, pathSegment);
     }
 
