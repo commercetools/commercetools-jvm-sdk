@@ -1,5 +1,6 @@
 package io.sphere.sdk.meta;
 
+import io.sphere.sdk.carts.CustomLineItem;
 import io.sphere.sdk.carts.LineItem;
 import io.sphere.sdk.carts.queries.CartByIdGet;
 import io.sphere.sdk.categories.Category;
@@ -7,6 +8,10 @@ import io.sphere.sdk.channels.queries.ChannelByIdGet;
 import io.sphere.sdk.client.SphereRequest;
 import io.sphere.sdk.commands.UpdateActionImpl;
 import io.sphere.sdk.commands.UpdateCommand;
+import io.sphere.sdk.customobjects.CustomObject;
+import io.sphere.sdk.customobjects.commands.CustomObjectDeleteCommand;
+import io.sphere.sdk.customobjects.queries.CustomObjectByKeyGet;
+import io.sphere.sdk.customobjects.queries.CustomObjectQuery;
 import io.sphere.sdk.expansion.ExpansionPath;
 import io.sphere.sdk.http.ApacheHttpClientAdapter;
 import io.sphere.sdk.http.HttpResponse;
@@ -18,6 +23,7 @@ import io.sphere.sdk.models.Referenceable;
 import io.sphere.sdk.orders.Order;
 import io.sphere.sdk.productdiscounts.queries.ProductDiscountByIdGet;
 import io.sphere.sdk.products.Price;
+import io.sphere.sdk.products.ProductProjection;
 import io.sphere.sdk.products.ProductProjectionType;
 import io.sphere.sdk.products.ProductVariant;
 import io.sphere.sdk.products.attributes.AttributeAccess;
@@ -27,10 +33,12 @@ import io.sphere.sdk.products.commands.updateactions.SetMetaTitle;
 import io.sphere.sdk.products.queries.ProductByIdGet;
 import io.sphere.sdk.products.queries.ProductProjectionByIdGet;
 import io.sphere.sdk.products.queries.ProductProjectionQuery;
+import io.sphere.sdk.products.queries.ProductProjectionQueryModel;
 import io.sphere.sdk.queries.Get;
 import io.sphere.sdk.queries.QueryPredicate;
 import io.sphere.sdk.search.SearchKeywords;
 import io.sphere.sdk.taxcategories.TaxRate;
+import io.sphere.sdk.types.CustomFieldsDraft;
 
 import javax.money.CurrencyUnit;
 import java.util.concurrent.CompletionStage;
@@ -55,6 +63,51 @@ import java.util.function.Function;
  <li class=fixed-in-release></li>
  </ul>
  -->
+
+ <h3 class=released-version id="v1_0_0_M19">1.0.0-M19</h3>
+
+ <a class="theme-btn expand-all">Expand all</a>
+ <br>
+ <br>
+ <ul>
+ <li class=new-in-release>Added {@link ProductProjection#getCategoryOrderHints()} and {@link ProductProjectionQueryModel#categoryOrderHints()}. It can be used for search, but the meta model comes in a later release.</li>
+ <li class=new-in-release>Added states and update actions for Orders, Reviews and Products: {@link Order#getState()}, {@link io.sphere.sdk.products.Product#getState()}, {@link io.sphere.sdk.reviews.Review#getState()}</li>
+ <li class=new-in-release>Added {@link LineItem#getTotalPrice()}, {@link LineItem#getDiscountedPricePerQuantity()}, {@link CustomLineItem#getTotalPrice()} and {@link CustomLineItem#getDiscountedPricePerQuantity()}</li>
+ <li class=change-in-release>Deprecated {@link LineItem#getDiscountedPrice()} and {@link CustomLineItem#getDiscountedPrice()} since they are deprecated in the HTTP API</li>
+ <li class=new-in-release>Improved documentation of {@link io.sphere.sdk.models.Versioned}.</li>
+ <li class=new-in-release>Added {@link io.sphere.sdk.payments.Payment}.</li>
+ <li class=change-in-release>Deprecated typo method {@link io.sphere.sdk.carts.CartDraft#witCustom(CustomFieldsDraft)}, use {@link io.sphere.sdk.carts.CartDraft#withCustom(CustomFieldsDraft)} instead.</li>
+ <li class=change-in-release>Deprecated {@link io.sphere.sdk.customers.queries.CustomerByTokenGet}, use {@link io.sphere.sdk.customers.queries.CustomerByPasswordTokenGet} instead.</li>
+ <li class=new-in-release>Added {@link io.sphere.sdk.customobjects.queries.CustomObjectByIdGet} and {@link CustomObjectDeleteCommand#of(String, long, Class)} which can delete a {@link CustomObject} by ID.</li>
+ <li class=change-in-release>Simplified CustomObject endpoints. Instead of a {@link com.fasterxml.jackson.core.type.TypeReference} for the endpoint result only the class of the value of the custom object needs to be provided.
+ <div class="rn-hidden">
+ <p>Before:</p>
+ <pre>{@code final CustomObjectQuery<Pojo> query = CustomObjectQuery.of(new TypeReference<PagedQueryResult<CustomObject<Pojo>>>(){});}</pre>
+ <p>After:</p>
+ <pre>{@code final CustomObjectQuery<Pojo> query = CustomObjectQuery.of(Pojo.class);}</pre>
+
+ <p>This change applies for other endpoints, too.</p>
+ </div>
+ </li>
+ <li class=change-in-release>
+ Deprecations in custom object endpoints:
+ <dl>
+ <dt>{@link CustomObjectDeleteCommand#of(io.sphere.sdk.customobjects.CustomObject)}</dt>
+ <dd>use instead {@link CustomObjectDeleteCommand#ofJsonNode(CustomObject)}</dd>
+
+ <dt>{@link CustomObjectDeleteCommand#of(java.lang.String, java.lang.String)}</dt>
+ <dd>use instead  {@link CustomObjectDeleteCommand#ofJsonNode(java.lang.String, java.lang.String)}</dd>
+ <dt>{@link CustomObjectByKeyGet#of(java.lang.String, java.lang.String)}</dt>
+ <dd>use instead {@link CustomObjectByKeyGet#ofJsonNode(java.lang.String, java.lang.String)}</dd>
+ <dt>{@link CustomObjectQuery#of()}</dt>
+ <dd>use instead {@link CustomObjectQuery#ofJsonNode()}</dd>
+
+ </dl>
+ </li>
+ <li class=fixed-in-release>Don't include customer password in logs. See <a href="https://github.com/sphereio/sphere-jvm-sdk/issues/767">767</a>.</li>
+ </ul>
+
+
 
  <h3 class=released-version id="v1_0_0_M18">1.0.0-M18</h3>
 

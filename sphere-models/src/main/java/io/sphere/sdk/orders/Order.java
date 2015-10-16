@@ -134,6 +134,13 @@ public interface Order extends CartLike<Order> {
     @Override
     CustomFields getCustom();
 
+    /**
+     * Returns this state of this Order.
+     *
+     * @return state of this order or null
+     *
+     * @see io.sphere.sdk.orders.commands.updateactions.TransitionState
+     */
     @Nullable
     Reference<State> getState();
 
