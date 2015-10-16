@@ -100,22 +100,22 @@ var activeTableTab = "activeTableTab";
 <li class="blockList">
 <dl>
 <dt>All Known Subinterfaces:</dt>
-<dd><a href="../../../../io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts">Cart</a>, <a href="../../../../io/sphere/sdk/carts/CartLike.html" title="interface in io.sphere.sdk.carts">CartLike</a>&lt;T&gt;, <a href="../../../../io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories">Category</a>, <a href="../../../../io/sphere/sdk/customers/Customer.html" title="interface in io.sphere.sdk.customers">Customer</a>, <a href="../../../../io/sphere/sdk/carts/CustomLineItem.html" title="interface in io.sphere.sdk.carts">CustomLineItem</a>, <a href="../../../../io/sphere/sdk/carts/LineItem.html" title="interface in io.sphere.sdk.carts">LineItem</a>, <a href="../../../../io/sphere/sdk/carts/LineItemLike.html" title="interface in io.sphere.sdk.carts">LineItemLike</a>, <a href="../../../../io/sphere/sdk/orders/Order.html" title="interface in io.sphere.sdk.orders">Order</a></dd>
+<dd><a href="../../../../io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts">Cart</a>, <a href="../../../../io/sphere/sdk/carts/CartLike.html" title="interface in io.sphere.sdk.carts">CartLike</a>&lt;T&gt;, <a href="../../../../io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories">Category</a>, <a href="../../../../io/sphere/sdk/customers/Customer.html" title="interface in io.sphere.sdk.customers">Customer</a>, <a href="../../../../io/sphere/sdk/carts/CustomLineItem.html" title="interface in io.sphere.sdk.carts">CustomLineItem</a>, <a href="../../../../io/sphere/sdk/carts/LineItem.html" title="interface in io.sphere.sdk.carts">LineItem</a>, <a href="../../../../io/sphere/sdk/carts/LineItemLike.html" title="interface in io.sphere.sdk.carts">LineItemLike</a>, <a href="../../../../io/sphere/sdk/orders/Order.html" title="interface in io.sphere.sdk.orders">Order</a>, <a href="../../../../io/sphere/sdk/payments/Payment.html" title="interface in io.sphere.sdk.payments">Payment</a></dd>
 </dl>
 <hr>
 <br>
 <pre>public interface <span class="typeNameLabel">Custom</span></pre>
 <div class="block">Interface to mark objects which can have custom fields, it has nothing to do with CustomObjects.
 
-  <p>To add fields to classes implementing <a href="../../../../io/sphere/sdk/types/Custom.html" title="interface in io.sphere.sdk.types"><code>Custom</code></a> a <a href="../../../../io/sphere/sdk/types/Type.html" title="interface in io.sphere.sdk.types"><code>Type</code></a> needs to be created and assigned to the object.</p>
+  <p>To use custom fields of a <a href="../../../../io/sphere/sdk/types/Custom.html" title="interface in io.sphere.sdk.types"><code>Custom</code></a> resource it is necessary to connect them to an existing <a href="../../../../io/sphere/sdk/types/Type.html" title="interface in io.sphere.sdk.types"><code>Type</code></a>, <a href="../../../../io/sphere/sdk/types/Type.html" title="interface in io.sphere.sdk.types"><code>Type</code></a>s define the field names and types like <code>String</code>, <code>MonetaryAmount</code> and <code>Long</code>.</p>
 
  <p>In the example scenario we create a type for categories.</p>
 
  The example type will contain:
  <ul>
-    <li>an enum field <em><code>state</code></em> to indicate the state of of the category like "published" and "draft"</li>
-    <li>a String field <strong><code>imageUrl</code></strong> to show an icon for the category</li>
-    <li>a set field with category references <code>relatedCategories</code> to suggest other categories with accessoires for example</li>
+    <li>an enum field "<code>state</code>" to indicate the state of of the category like "published" and "draft"</li>
+    <li>a String field "<code>imageUrl</code>" to show an icon for the category</li>
+    <li>a set field with category references "<code>relatedCategories</code>" to suggest other categories with accessoires for example</li>
  </ul>
 
  If you work with types it is a good idea to import <code>io.sphere.sdk.types.*;</code> so you don't get confused with

@@ -23,11 +23,14 @@
 <li><a href="io/sphere/sdk/types/commands/updateactions/AddEnumValue.html" title="class in io.sphere.sdk.types.commands.updateactions" target="classFrame">AddEnumValue</a></li>
 <li><a href="io/sphere/sdk/products/commands/updateactions/AddExternalImage.html" title="class in io.sphere.sdk.products.commands.updateactions" target="classFrame">AddExternalImage</a></li>
 <li><a href="io/sphere/sdk/types/commands/updateactions/AddFieldDefinition.html" title="class in io.sphere.sdk.types.commands.updateactions" target="classFrame">AddFieldDefinition</a></li>
+<li><a href="io/sphere/sdk/payments/commands/updateactions/AddInterfaceInteraction.html" title="class in io.sphere.sdk.payments.commands.updateactions" target="classFrame">AddInterfaceInteraction</a></li>
 <li><a href="io/sphere/sdk/carts/commands/updateactions/AddLineItem.html" title="class in io.sphere.sdk.carts.commands.updateactions" target="classFrame">AddLineItem</a></li>
 <li><a href="io/sphere/sdk/producttypes/commands/updateactions/AddLocalizedEnumValue.html" title="class in io.sphere.sdk.producttypes.commands.updateactions" target="classFrame">AddLocalizedEnumValue</a></li>
 <li><a href="io/sphere/sdk/types/commands/updateactions/AddLocalizedEnumValue.html" title="class in io.sphere.sdk.types.commands.updateactions" target="classFrame">AddLocalizedEnumValue</a></li>
 <li><a href="io/sphere/sdk/zones/commands/updateactions/AddLocation.html" title="class in io.sphere.sdk.zones.commands.updateactions" target="classFrame">AddLocation</a></li>
 <li><a href="io/sphere/sdk/orders/commands/updateactions/AddParcelToDelivery.html" title="class in io.sphere.sdk.orders.commands.updateactions" target="classFrame">AddParcelToDelivery</a></li>
+<li><a href="io/sphere/sdk/carts/commands/updateactions/AddPayment.html" title="class in io.sphere.sdk.carts.commands.updateactions" target="classFrame">AddPayment</a></li>
+<li><a href="io/sphere/sdk/orders/commands/updateactions/AddPayment.html" title="class in io.sphere.sdk.orders.commands.updateactions" target="classFrame">AddPayment</a></li>
 <li><a href="io/sphere/sdk/products/commands/updateactions/AddPrice.html" title="class in io.sphere.sdk.products.commands.updateactions" target="classFrame">AddPrice</a></li>
 <li><a href="io/sphere/sdk/inventory/commands/updateactions/AddQuantity.html" title="class in io.sphere.sdk.inventory.commands.updateactions" target="classFrame">AddQuantity</a></li>
 <li><a href="io/sphere/sdk/models/Address.html" title="class in io.sphere.sdk.models" target="classFrame">Address</a></li>
@@ -37,6 +40,7 @@
 <li><a href="io/sphere/sdk/shippingmethods/commands/updateactions/AddShippingRate.html" title="class in io.sphere.sdk.shippingmethods.commands.updateactions" target="classFrame">AddShippingRate</a></li>
 <li><a href="io/sphere/sdk/taxcategories/commands/updateactions/AddTaxRate.html" title="class in io.sphere.sdk.taxcategories.commands.updateactions" target="classFrame">AddTaxRate</a></li>
 <li><a href="io/sphere/sdk/products/commands/updateactions/AddToCategory.html" title="class in io.sphere.sdk.products.commands.updateactions" target="classFrame">AddToCategory</a></li>
+<li><a href="io/sphere/sdk/payments/commands/updateactions/AddTransaction.html" title="class in io.sphere.sdk.payments.commands.updateactions" target="classFrame">AddTransaction</a></li>
 <li><a href="io/sphere/sdk/products/commands/updateactions/AddVariant.html" title="class in io.sphere.sdk.products.commands.updateactions" target="classFrame">AddVariant</a></li>
 <li><a href="io/sphere/sdk/shippingmethods/commands/updateactions/AddZone.html" title="class in io.sphere.sdk.shippingmethods.commands.updateactions" target="classFrame">AddZone</a></li>
 <li><a href="io/sphere/sdk/queries/AnyReferenceQueryModel.html" title="interface in io.sphere.sdk.queries" target="classFrame"><span class="interfaceName">AnyReferenceQueryModel</span></a></li>
@@ -454,7 +458,30 @@
 <li><a href="io/sphere/sdk/products/queries/PartialProductDataQueryModel.html" title="class in io.sphere.sdk.products.queries" target="classFrame">PartialProductDataQueryModel</a></li>
 <li><a href="io/sphere/sdk/products/queries/PartialProductVariantQueryModel.html" title="class in io.sphere.sdk.products.queries" target="classFrame">PartialProductVariantQueryModel</a></li>
 <li><a href="io/sphere/sdk/utils/functional/PatternMatcher.html" title="class in io.sphere.sdk.utils.functional" target="classFrame">PatternMatcher</a></li>
+<li><a href="io/sphere/sdk/payments/Payment.html" title="interface in io.sphere.sdk.payments" target="classFrame"><span class="interfaceName">Payment</span></a></li>
+<li><a href="io/sphere/sdk/payments/queries/PaymentByIdGet.html" title="interface in io.sphere.sdk.payments.queries" target="classFrame"><span class="interfaceName">PaymentByIdGet</span></a></li>
+<li><a href="io/sphere/sdk/payments/commands/PaymentCreateCommand.html" title="interface in io.sphere.sdk.payments.commands" target="classFrame"><span class="interfaceName">PaymentCreateCommand</span></a></li>
+<li><a href="io/sphere/sdk/payments/messages/PaymentCreatedMessage.html" title="class in io.sphere.sdk.payments.messages" target="classFrame">PaymentCreatedMessage</a></li>
+<li><a href="io/sphere/sdk/payments/commands/PaymentDeleteCommand.html" title="interface in io.sphere.sdk.payments.commands" target="classFrame"><span class="interfaceName">PaymentDeleteCommand</span></a></li>
+<li><a href="io/sphere/sdk/payments/PaymentDraft.html" title="interface in io.sphere.sdk.payments" target="classFrame"><span class="interfaceName">PaymentDraft</span></a></li>
+<li><a href="io/sphere/sdk/payments/PaymentDraftBuilder.html" title="class in io.sphere.sdk.payments" target="classFrame">PaymentDraftBuilder</a></li>
+<li><a href="io/sphere/sdk/payments/expansion/PaymentExpansionModel.html" title="class in io.sphere.sdk.payments.expansion" target="classFrame">PaymentExpansionModel</a></li>
+<li><a href="io/sphere/sdk/carts/PaymentInfo.html" title="class in io.sphere.sdk.carts" target="classFrame">PaymentInfo</a></li>
+<li><a href="io/sphere/sdk/carts/expansion/PaymentInfoExpansionModel.html" title="class in io.sphere.sdk.carts.expansion" target="classFrame">PaymentInfoExpansionModel</a></li>
+<li><a href="io/sphere/sdk/payments/messages/PaymentInteractionAddedMessage.html" title="class in io.sphere.sdk.payments.messages" target="classFrame">PaymentInteractionAddedMessage</a></li>
+<li><a href="io/sphere/sdk/payments/PaymentMethodInfo.html" title="class in io.sphere.sdk.payments" target="classFrame">PaymentMethodInfo</a></li>
+<li><a href="io/sphere/sdk/payments/PaymentMethodInfoBuilder.html" title="class in io.sphere.sdk.payments" target="classFrame">PaymentMethodInfoBuilder</a></li>
+<li><a href="io/sphere/sdk/payments/queries/PaymentMethodInfoQueryModel.html" title="interface in io.sphere.sdk.payments.queries" target="classFrame"><span class="interfaceName">PaymentMethodInfoQueryModel</span></a></li>
+<li><a href="io/sphere/sdk/payments/queries/PaymentQuery.html" title="interface in io.sphere.sdk.payments.queries" target="classFrame"><span class="interfaceName">PaymentQuery</span></a></li>
+<li><a href="io/sphere/sdk/payments/queries/PaymentQueryModel.html" title="class in io.sphere.sdk.payments.queries" target="classFrame">PaymentQueryModel</a></li>
 <li><a href="io/sphere/sdk/orders/PaymentState.html" title="enum in io.sphere.sdk.orders" target="classFrame">PaymentState</a></li>
+<li><a href="io/sphere/sdk/payments/PaymentStatus.html" title="class in io.sphere.sdk.payments" target="classFrame">PaymentStatus</a></li>
+<li><a href="io/sphere/sdk/payments/PaymentStatusBuilder.html" title="class in io.sphere.sdk.payments" target="classFrame">PaymentStatusBuilder</a></li>
+<li><a href="io/sphere/sdk/payments/expansion/PaymentStatusExpansionModel.html" title="class in io.sphere.sdk.payments.expansion" target="classFrame">PaymentStatusExpansionModel</a></li>
+<li><a href="io/sphere/sdk/payments/queries/PaymentStatusQueryModel.html" title="interface in io.sphere.sdk.payments.queries" target="classFrame"><span class="interfaceName">PaymentStatusQueryModel</span></a></li>
+<li><a href="io/sphere/sdk/payments/messages/PaymentStatusStateTransitionMessage.html" title="class in io.sphere.sdk.payments.messages" target="classFrame">PaymentStatusStateTransitionMessage</a></li>
+<li><a href="io/sphere/sdk/payments/messages/PaymentTransactionAddedMessage.html" title="class in io.sphere.sdk.payments.messages" target="classFrame">PaymentTransactionAddedMessage</a></li>
+<li><a href="io/sphere/sdk/payments/commands/PaymentUpdateCommand.html" title="interface in io.sphere.sdk.payments.commands" target="classFrame"><span class="interfaceName">PaymentUpdateCommand</span></a></li>
 <li><a href="io/sphere/sdk/products/Price.html" title="class in io.sphere.sdk.products" target="classFrame">Price</a></li>
 <li><a href="io/sphere/sdk/products/PriceBuilder.html" title="class in io.sphere.sdk.products" target="classFrame">PriceBuilder</a></li>
 <li><a href="io/sphere/sdk/products/queries/PriceCollectionQueryModel.html" title="class in io.sphere.sdk.products.queries" target="classFrame">PriceCollectionQueryModel</a></li>
@@ -564,6 +591,8 @@
 <li><a href="io/sphere/sdk/products/commands/updateactions/RemoveImage.html" title="class in io.sphere.sdk.products.commands.updateactions" target="classFrame">RemoveImage</a></li>
 <li><a href="io/sphere/sdk/carts/commands/updateactions/RemoveLineItem.html" title="class in io.sphere.sdk.carts.commands.updateactions" target="classFrame">RemoveLineItem</a></li>
 <li><a href="io/sphere/sdk/zones/commands/updateactions/RemoveLocation.html" title="class in io.sphere.sdk.zones.commands.updateactions" target="classFrame">RemoveLocation</a></li>
+<li><a href="io/sphere/sdk/carts/commands/updateactions/RemovePayment.html" title="class in io.sphere.sdk.carts.commands.updateactions" target="classFrame">RemovePayment</a></li>
+<li><a href="io/sphere/sdk/orders/commands/updateactions/RemovePayment.html" title="class in io.sphere.sdk.orders.commands.updateactions" target="classFrame">RemovePayment</a></li>
 <li><a href="io/sphere/sdk/products/commands/updateactions/RemovePrice.html" title="class in io.sphere.sdk.products.commands.updateactions" target="classFrame">RemovePrice</a></li>
 <li><a href="io/sphere/sdk/inventory/commands/updateactions/RemoveQuantity.html" title="class in io.sphere.sdk.inventory.commands.updateactions" target="classFrame">RemoveQuantity</a></li>
 <li><a href="io/sphere/sdk/channels/commands/updateactions/RemoveRoles.html" title="class in io.sphere.sdk.channels.commands.updateactions" target="classFrame">RemoveRoles</a></li>
@@ -610,14 +639,18 @@
 <li><a href="io/sphere/sdk/search/SearchSortingModel.html" title="interface in io.sphere.sdk.search" target="classFrame"><span class="interfaceName">SearchSortingModel</span></a></li>
 <li><a href="io/sphere/sdk/client/ServerErrorException.html" title="class in io.sphere.sdk.client" target="classFrame">ServerErrorException</a></li>
 <li><a href="io/sphere/sdk/client/ServiceUnavailableException.html" title="class in io.sphere.sdk.client" target="classFrame">ServiceUnavailableException</a></li>
+<li><a href="io/sphere/sdk/payments/commands/updateactions/SetAmountPaid.html" title="class in io.sphere.sdk.payments.commands.updateactions" target="classFrame">SetAmountPaid</a></li>
+<li><a href="io/sphere/sdk/payments/commands/updateactions/SetAmountRefunded.html" title="class in io.sphere.sdk.payments.commands.updateactions" target="classFrame">SetAmountRefunded</a></li>
 <li><a href="io/sphere/sdk/products/commands/updateactions/SetAttribute.html" title="class in io.sphere.sdk.products.commands.updateactions" target="classFrame">SetAttribute</a></li>
 <li><a href="io/sphere/sdk/products/commands/updateactions/SetAttributeInAllVariants.html" title="class in io.sphere.sdk.products.commands.updateactions" target="classFrame">SetAttributeInAllVariants</a></li>
+<li><a href="io/sphere/sdk/payments/commands/updateactions/SetAuthorization.html" title="class in io.sphere.sdk.payments.commands.updateactions" target="classFrame">SetAuthorization</a></li>
 <li><a href="io/sphere/sdk/reviews/commands/updateactions/SetAuthorName.html" title="class in io.sphere.sdk.reviews.commands.updateactions" target="classFrame">SetAuthorName</a></li>
 <li><a href="io/sphere/sdk/carts/commands/updateactions/SetBillingAddress.html" title="class in io.sphere.sdk.carts.commands.updateactions" target="classFrame">SetBillingAddress</a></li>
 <li><a href="io/sphere/sdk/discountcodes/commands/updateactions/SetCartPredicate.html" title="class in io.sphere.sdk.discountcodes.commands.updateactions" target="classFrame">SetCartPredicate</a></li>
 <li><a href="io/sphere/sdk/products/commands/updateactions/SetCategoryOrderHint.html" title="class in io.sphere.sdk.products.commands.updateactions" target="classFrame">SetCategoryOrderHint</a></li>
 <li><a href="io/sphere/sdk/customers/commands/updateactions/SetCompanyName.html" title="class in io.sphere.sdk.customers.commands.updateactions" target="classFrame">SetCompanyName</a></li>
 <li><a href="io/sphere/sdk/carts/commands/updateactions/SetCountry.html" title="class in io.sphere.sdk.carts.commands.updateactions" target="classFrame">SetCountry</a></li>
+<li><a href="io/sphere/sdk/payments/commands/updateactions/SetCustomer.html" title="class in io.sphere.sdk.payments.commands.updateactions" target="classFrame">SetCustomer</a></li>
 <li><a href="io/sphere/sdk/carts/commands/updateactions/SetCustomerEmail.html" title="class in io.sphere.sdk.carts.commands.updateactions" target="classFrame">SetCustomerEmail</a></li>
 <li><a href="io/sphere/sdk/customers/commands/updateactions/SetCustomerGroup.html" title="class in io.sphere.sdk.customers.commands.updateactions" target="classFrame">SetCustomerGroup</a></li>
 <li><a href="io/sphere/sdk/carts/commands/updateactions/SetCustomerId.html" title="class in io.sphere.sdk.carts.commands.updateactions" target="classFrame">SetCustomerId</a></li>
@@ -626,6 +659,7 @@
 <li><a href="io/sphere/sdk/categories/commands/updateactions/SetCustomField.html" title="class in io.sphere.sdk.categories.commands.updateactions" target="classFrame">SetCustomField</a></li>
 <li><a href="io/sphere/sdk/customers/commands/updateactions/SetCustomField.html" title="class in io.sphere.sdk.customers.commands.updateactions" target="classFrame">SetCustomField</a></li>
 <li><a href="io/sphere/sdk/orders/commands/updateactions/SetCustomField.html" title="class in io.sphere.sdk.orders.commands.updateactions" target="classFrame">SetCustomField</a></li>
+<li><a href="io/sphere/sdk/payments/commands/updateactions/SetCustomField.html" title="class in io.sphere.sdk.payments.commands.updateactions" target="classFrame">SetCustomField</a></li>
 <li><a href="io/sphere/sdk/types/customupdateactions/SetCustomFieldBase.html" title="class in io.sphere.sdk.types.customupdateactions" target="classFrame">SetCustomFieldBase</a></li>
 <li><a href="io/sphere/sdk/carts/commands/updateactions/SetCustomLineItemCustomField.html" title="class in io.sphere.sdk.carts.commands.updateactions" target="classFrame">SetCustomLineItemCustomField</a></li>
 <li><a href="io/sphere/sdk/orders/commands/updateactions/SetCustomLineItemCustomField.html" title="class in io.sphere.sdk.orders.commands.updateactions" target="classFrame">SetCustomLineItemCustomField</a></li>
@@ -636,6 +670,7 @@
 <li><a href="io/sphere/sdk/categories/commands/updateactions/SetCustomType.html" title="class in io.sphere.sdk.categories.commands.updateactions" target="classFrame">SetCustomType</a></li>
 <li><a href="io/sphere/sdk/customers/commands/updateactions/SetCustomType.html" title="class in io.sphere.sdk.customers.commands.updateactions" target="classFrame">SetCustomType</a></li>
 <li><a href="io/sphere/sdk/orders/commands/updateactions/SetCustomType.html" title="class in io.sphere.sdk.orders.commands.updateactions" target="classFrame">SetCustomType</a></li>
+<li><a href="io/sphere/sdk/payments/commands/updateactions/SetCustomType.html" title="class in io.sphere.sdk.payments.commands.updateactions" target="classFrame">SetCustomType</a></li>
 <li><a href="io/sphere/sdk/types/customupdateactions/SetCustomTypeBase.html" title="class in io.sphere.sdk.types.customupdateactions" target="classFrame">SetCustomTypeBase</a></li>
 <li><a href="io/sphere/sdk/customers/commands/updateactions/SetDateOfBirth.html" title="class in io.sphere.sdk.customers.commands.updateactions" target="classFrame">SetDateOfBirth</a></li>
 <li><a href="io/sphere/sdk/customers/commands/updateactions/SetDefaultBillingAddress.html" title="class in io.sphere.sdk.customers.commands.updateactions" target="classFrame">SetDefaultBillingAddress</a></li>
@@ -651,6 +686,8 @@
 <li><a href="io/sphere/sdk/zones/commands/updateactions/SetDescription.html" title="class in io.sphere.sdk.zones.commands.updateactions" target="classFrame">SetDescription</a></li>
 <li><a href="io/sphere/sdk/inventory/commands/updateactions/SetExpectedDelivery.html" title="class in io.sphere.sdk.inventory.commands.updateactions" target="classFrame">SetExpectedDelivery</a></li>
 <li><a href="io/sphere/sdk/customers/commands/updateactions/SetExternalId.html" title="class in io.sphere.sdk.customers.commands.updateactions" target="classFrame">SetExternalId</a></li>
+<li><a href="io/sphere/sdk/payments/commands/updateactions/SetExternalId.html" title="class in io.sphere.sdk.payments.commands.updateactions" target="classFrame">SetExternalId</a></li>
+<li><a href="io/sphere/sdk/payments/commands/updateactions/SetInterfaceId.html" title="class in io.sphere.sdk.payments.commands.updateactions" target="classFrame">SetInterfaceId</a></li>
 <li><a href="io/sphere/sdk/carts/commands/updateactions/SetLineItemCustomField.html" title="class in io.sphere.sdk.carts.commands.updateactions" target="classFrame">SetLineItemCustomField</a></li>
 <li><a href="io/sphere/sdk/orders/commands/updateactions/SetLineItemCustomField.html" title="class in io.sphere.sdk.orders.commands.updateactions" target="classFrame">SetLineItemCustomField</a></li>
 <li><a href="io/sphere/sdk/carts/commands/updateactions/SetLineItemCustomType.html" title="class in io.sphere.sdk.carts.commands.updateactions" target="classFrame">SetLineItemCustomType</a></li>
@@ -663,6 +700,9 @@
 <li><a href="io/sphere/sdk/products/commands/updateactions/SetMetaKeywords.html" title="class in io.sphere.sdk.products.commands.updateactions" target="classFrame">SetMetaKeywords</a></li>
 <li><a href="io/sphere/sdk/categories/commands/updateactions/SetMetaTitle.html" title="class in io.sphere.sdk.categories.commands.updateactions" target="classFrame">SetMetaTitle</a></li>
 <li><a href="io/sphere/sdk/products/commands/updateactions/SetMetaTitle.html" title="class in io.sphere.sdk.products.commands.updateactions" target="classFrame">SetMetaTitle</a></li>
+<li><a href="io/sphere/sdk/payments/commands/updateactions/SetMethodInfoInterface.html" title="class in io.sphere.sdk.payments.commands.updateactions" target="classFrame">SetMethodInfoInterface</a></li>
+<li><a href="io/sphere/sdk/payments/commands/updateactions/SetMethodInfoMethod.html" title="class in io.sphere.sdk.payments.commands.updateactions" target="classFrame">SetMethodInfoMethod</a></li>
+<li><a href="io/sphere/sdk/payments/commands/updateactions/SetMethodInfoName.html" title="class in io.sphere.sdk.payments.commands.updateactions" target="classFrame">SetMethodInfoName</a></li>
 <li><a href="io/sphere/sdk/discountcodes/commands/updateactions/SetName.html" title="class in io.sphere.sdk.discountcodes.commands.updateactions" target="classFrame">SetName</a></li>
 <li><a href="io/sphere/sdk/states/commands/updateactions/SetName.html" title="class in io.sphere.sdk.states.commands.updateactions" target="classFrame">SetName</a></li>
 <li><a href="io/sphere/sdk/orders/commands/updateactions/SetOrderNumber.html" title="class in io.sphere.sdk.orders.commands.updateactions" target="classFrame">SetOrderNumber</a></li>
@@ -675,6 +715,8 @@
 <li><a href="io/sphere/sdk/carts/commands/updateactions/SetShippingAddress.html" title="class in io.sphere.sdk.carts.commands.updateactions" target="classFrame">SetShippingAddress</a></li>
 <li><a href="io/sphere/sdk/carts/commands/updateactions/SetShippingMethod.html" title="class in io.sphere.sdk.carts.commands.updateactions" target="classFrame">SetShippingMethod</a></li>
 <li><a href="io/sphere/sdk/products/commands/updateactions/SetSku.html" title="class in io.sphere.sdk.products.commands.updateactions" target="classFrame">SetSku</a></li>
+<li><a href="io/sphere/sdk/payments/commands/updateactions/SetStatusInterfaceCode.html" title="class in io.sphere.sdk.payments.commands.updateactions" target="classFrame">SetStatusInterfaceCode</a></li>
+<li><a href="io/sphere/sdk/payments/commands/updateactions/SetStatusInterfaceText.html" title="class in io.sphere.sdk.payments.commands.updateactions" target="classFrame">SetStatusInterfaceText</a></li>
 <li><a href="io/sphere/sdk/products/commands/updateactions/SetTaxCategory.html" title="class in io.sphere.sdk.products.commands.updateactions" target="classFrame">SetTaxCategory</a></li>
 <li><a href="io/sphere/sdk/reviews/commands/updateactions/SetText.html" title="class in io.sphere.sdk.reviews.commands.updateactions" target="classFrame">SetText</a></li>
 <li><a href="io/sphere/sdk/reviews/commands/updateactions/SetTitle.html" title="class in io.sphere.sdk.reviews.commands.updateactions" target="classFrame">SetTitle</a></li>
@@ -779,9 +821,14 @@
 <li><a href="io/sphere/sdk/client/TokensSupplier.html" title="interface in io.sphere.sdk.client" target="classFrame"><span class="interfaceName">TokensSupplier</span></a></li>
 <li><a href="io/sphere/sdk/orders/TrackingData.html" title="class in io.sphere.sdk.orders" target="classFrame">TrackingData</a></li>
 <li><a href="io/sphere/sdk/orders/TrackingDataBuilder.html" title="class in io.sphere.sdk.orders" target="classFrame">TrackingDataBuilder</a></li>
+<li><a href="io/sphere/sdk/payments/Transaction.html" title="class in io.sphere.sdk.payments" target="classFrame">Transaction</a></li>
+<li><a href="io/sphere/sdk/payments/TransactionBuilder.html" title="class in io.sphere.sdk.payments" target="classFrame">TransactionBuilder</a></li>
+<li><a href="io/sphere/sdk/payments/queries/TransactionCollectionQueryModel.html" title="interface in io.sphere.sdk.payments.queries" target="classFrame"><span class="interfaceName">TransactionCollectionQueryModel</span></a></li>
+<li><a href="io/sphere/sdk/payments/TransactionType.html" title="enum in io.sphere.sdk.payments" target="classFrame">TransactionType</a></li>
 <li><a href="io/sphere/sdk/orders/commands/updateactions/TransitionCustomLineItemState.html" title="class in io.sphere.sdk.orders.commands.updateactions" target="classFrame">TransitionCustomLineItemState</a></li>
 <li><a href="io/sphere/sdk/orders/commands/updateactions/TransitionLineItemState.html" title="class in io.sphere.sdk.orders.commands.updateactions" target="classFrame">TransitionLineItemState</a></li>
 <li><a href="io/sphere/sdk/orders/commands/updateactions/TransitionState.html" title="class in io.sphere.sdk.orders.commands.updateactions" target="classFrame">TransitionState</a></li>
+<li><a href="io/sphere/sdk/payments/commands/updateactions/TransitionState.html" title="class in io.sphere.sdk.payments.commands.updateactions" target="classFrame">TransitionState</a></li>
 <li><a href="io/sphere/sdk/products/commands/updateactions/TransitionState.html" title="class in io.sphere.sdk.products.commands.updateactions" target="classFrame">TransitionState</a></li>
 <li><a href="io/sphere/sdk/reviews/commands/updateactions/TransitionState.html" title="class in io.sphere.sdk.reviews.commands.updateactions" target="classFrame">TransitionState</a></li>
 <li><a href="io/sphere/sdk/states/relatedupdateactions/TransitionStateBase.html" title="class in io.sphere.sdk.states.relatedupdateactions" target="classFrame">TransitionStateBase</a></li>
