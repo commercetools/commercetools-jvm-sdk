@@ -122,6 +122,51 @@ extends java.lang.Object</pre>
  </ul>
  -->
 
+ <h3 class=released-version id="v1_0_0_M19">1.0.0-M19</h3>
+
+ <a class="theme-btn expand-all">Expand all</a>
+ <br>
+ <br>
+ <ul>
+ <li class=new-in-release>Added <a href="../../../../io/sphere/sdk/products/ProductProjection.html#getCategoryOrderHints--"><code>ProductProjection.getCategoryOrderHints()</code></a> and <a href="../../../../io/sphere/sdk/products/queries/ProductProjectionQueryModel.html#categoryOrderHints--"><code>ProductProjectionQueryModel.categoryOrderHints()</code></a>. It can be used for search, but the meta model comes in a later release.</li>
+ <li class=new-in-release>Added states and update actions for Orders, Reviews and Products: <a href="../../../../io/sphere/sdk/orders/Order.html#getState--"><code>Order.getState()</code></a>, <a href="../../../../io/sphere/sdk/products/Product.html#getState--"><code>Product.getState()</code></a>, <a href="../../../../io/sphere/sdk/reviews/Review.html#getState--"><code>Review.getState()</code></a></li>
+ <li class=new-in-release>Added <a href="../../../../io/sphere/sdk/carts/LineItem.html#getTotalPrice--"><code>LineItem.getTotalPrice()</code></a>, <a href="../../../../io/sphere/sdk/carts/LineItem.html#getDiscountedPricePerQuantity--"><code>LineItem.getDiscountedPricePerQuantity()</code></a>, <a href="../../../../io/sphere/sdk/carts/CustomLineItem.html#getTotalPrice--"><code>CustomLineItem.getTotalPrice()</code></a> and <a href="../../../../io/sphere/sdk/carts/CustomLineItem.html#getDiscountedPricePerQuantity--"><code>CustomLineItem.getDiscountedPricePerQuantity()</code></a></li>
+ <li class=change-in-release>Deprecated <a href="../../../../io/sphere/sdk/carts/LineItemLike.html#getDiscountedPrice--"><code>LineItemLike.getDiscountedPrice()</code></a> and <a href="../../../../io/sphere/sdk/carts/LineItemLike.html#getDiscountedPrice--"><code>LineItemLike.getDiscountedPrice()</code></a> since they are deprecated in the HTTP API</li>
+ <li class=new-in-release>Improved documentation of <a href="../../../../io/sphere/sdk/models/Versioned.html" title="interface in io.sphere.sdk.models"><code>Versioned</code></a>.</li>
+ <li class=new-in-release>Added <a href="../../../../io/sphere/sdk/payments/Payment.html" title="interface in io.sphere.sdk.payments"><code>Payment</code></a>.</li>
+ <li class=change-in-release>Deprecated typo method <a href="../../../../io/sphere/sdk/carts/CartDraft.html#witCustom-io.sphere.sdk.types.CustomFieldsDraft-"><code>CartDraft.witCustom(CustomFieldsDraft)</code></a>, use <a href="../../../../io/sphere/sdk/carts/CartDraft.html#withCustom-io.sphere.sdk.types.CustomFieldsDraft-"><code>CartDraft.withCustom(CustomFieldsDraft)</code></a> instead.</li>
+ <li class=change-in-release>Deprecated <a href="../../../../io/sphere/sdk/customers/queries/CustomerByTokenGet.html" title="interface in io.sphere.sdk.customers.queries"><code>CustomerByTokenGet</code></a>, use <a href="../../../../io/sphere/sdk/customers/queries/CustomerByPasswordTokenGet.html" title="interface in io.sphere.sdk.customers.queries"><code>CustomerByPasswordTokenGet</code></a> instead.</li>
+ <li class=new-in-release>Added <a href="../../../../io/sphere/sdk/customobjects/queries/CustomObjectByIdGet.html" title="interface in io.sphere.sdk.customobjects.queries"><code>CustomObjectByIdGet</code></a> and <a href="../../../../io/sphere/sdk/customobjects/commands/CustomObjectDeleteCommand.html#of-java.lang.String-long-java.lang.Class-"><code>CustomObjectDeleteCommand.of(String, long, Class)</code></a> which can delete a <a href="../../../../io/sphere/sdk/customobjects/CustomObject.html" title="interface in io.sphere.sdk.customobjects"><code>CustomObject</code></a> by ID.</li>
+ <li class=change-in-release>Simplified CustomObject endpoints. Instead of a <code>TypeReference</code> for the endpoint result only the class of the value of the custom object needs to be provided.
+ <div class="rn-hidden">
+ <p>Before:</p>
+ <pre><code> final CustomObjectQuery&lt;Pojo&gt; query = CustomObjectQuery.of(new TypeReference&lt;PagedQueryResult&lt;CustomObject&lt;Pojo&gt;&gt;&gt;(){});</code></pre>
+ <p>After:</p>
+ <pre><code> final CustomObjectQuery&lt;Pojo&gt; query = CustomObjectQuery.of(Pojo.class);</code></pre>
+
+ <p>This change applies for other endpoints, too.</p>
+ </div>
+ </li>
+ <li class=change-in-release>
+ Deprecations in custom object endpoints:
+ <dl>
+ <dt><a href="../../../../io/sphere/sdk/customobjects/commands/CustomObjectDeleteCommand.html#of-io.sphere.sdk.customobjects.CustomObject-"><code>CustomObjectDeleteCommand.of(io.sphere.sdk.customobjects.CustomObject)</code></a></dt>
+ <dd>use instead <a href="../../../../io/sphere/sdk/customobjects/commands/CustomObjectDeleteCommand.html#ofJsonNode-io.sphere.sdk.customobjects.CustomObject-"><code>CustomObjectDeleteCommand.ofJsonNode(CustomObject)</code></a></dd>
+
+ <dt><a href="../../../../io/sphere/sdk/customobjects/commands/CustomObjectDeleteCommand.html#of-java.lang.String-java.lang.String-"><code>CustomObjectDeleteCommand.of(java.lang.String, java.lang.String)</code></a></dt>
+ <dd>use instead  <a href="../../../../io/sphere/sdk/customobjects/commands/CustomObjectDeleteCommand.html#ofJsonNode-java.lang.String-java.lang.String-"><code>CustomObjectDeleteCommand.ofJsonNode(java.lang.String, java.lang.String)</code></a></dd>
+ <dt><a href="../../../../io/sphere/sdk/customobjects/queries/CustomObjectByKeyGet.html#of-java.lang.String-java.lang.String-"><code>CustomObjectByKeyGet.of(java.lang.String, java.lang.String)</code></a></dt>
+ <dd>use instead <a href="../../../../io/sphere/sdk/customobjects/queries/CustomObjectByKeyGet.html#ofJsonNode-java.lang.String-java.lang.String-"><code>CustomObjectByKeyGet.ofJsonNode(java.lang.String, java.lang.String)</code></a></dd>
+ <dt><a href="../../../../io/sphere/sdk/customobjects/queries/CustomObjectQuery.html#of--"><code>CustomObjectQuery.of()</code></a></dt>
+ <dd>use instead <a href="../../../../io/sphere/sdk/customobjects/queries/CustomObjectQuery.html#ofJsonNode--"><code>CustomObjectQuery.ofJsonNode()</code></a></dd>
+
+ </dl>
+ </li>
+ <li class=fixed-in-release>Don't include customer password in logs. See <a href="https://github.com/sphereio/sphere-jvm-sdk/issues/767">767</a>.</li>
+ </ul>
+
+
+
  <h3 class=released-version id="v1_0_0_M18">1.0.0-M18</h3>
 
  <ul>
