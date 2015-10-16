@@ -9,7 +9,7 @@ import java.util.Collections;
 import java.util.Map;
 
 /**
- * Adds a new interaction with the interface. These can be notifications received from the PSP or requests send to the PSP.
+ * Adds a new interaction with the interface. These can be notifications received from the PSP or requests sent to the PSP.
  * Some interactions may result in a transaction. If so, the interactionId in the transaction should be set to match the ID of the PSP for the interaction.
  *
  * {@doc.gen intro}
