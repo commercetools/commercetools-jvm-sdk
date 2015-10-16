@@ -138,15 +138,7 @@
 <tr class="rowColor">
 <td class="colFirst"><a href="../../../../../../io/sphere/sdk/payments/commands/updateactions/SetInterfaceId.html" title="class in io.sphere.sdk.payments.commands.updateactions">SetInterfaceId</a></td>
 <td class="colLast">
-<div class="block"><div id="io-sphere-sdk-payments-commands-PaymentUpdateCommandTest-setInterfaceId--%s" class=code-example><pre><code class='java'>withPayment(client(), payment -&gt; {
-    final String interfaceId =randomKey();
-    final Payment updatedPayment = execute(PaymentUpdateCommand.of(payment, SetInterfaceId.of(interfaceId)));
-
-    assertThat(updatedPayment.getInterfaceId()).isEqualTo(interfaceId);
-
-    return updatedPayment;
-});
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/payments/commands/PaymentUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+<div class="block">Sets the identifier that is used by the interface that manages the payment (usually the PSP).</div>
 </td>
 </tr>
 <tr class="altColor">

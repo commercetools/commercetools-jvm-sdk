@@ -9348,6 +9348,10 @@ CompletionStage&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execu
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/Order.html#resourceTypeId--">resourceTypeId()</a></span> - Static method in interface io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/Order.html" title="interface in io.sphere.sdk.orders">Order</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/payments/commands/updateactions/AddInterfaceInteraction.html#resourceTypeId--">resourceTypeId()</a></span> - Static method in class io.sphere.sdk.payments.commands.updateactions.<a href="io/sphere/sdk/payments/commands/updateactions/AddInterfaceInteraction.html" title="class in io.sphere.sdk.payments.commands.updateactions">AddInterfaceInteraction</a></dt>
+<dd>
+<div class="block">Gets the resource type id for the custom field creation.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/payments/Payment.html#resourceTypeId--">resourceTypeId()</a></span> - Static method in interface io.sphere.sdk.payments.<a href="io/sphere/sdk/payments/Payment.html" title="interface in io.sphere.sdk.payments">Payment</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/messages/GenericMessageImpl.html#resourceVersion">resourceVersion</a></span> - Variable in class io.sphere.sdk.messages.<a href="io/sphere/sdk/messages/GenericMessageImpl.html" title="class in io.sphere.sdk.messages">GenericMessageImpl</a></dt>
@@ -9735,15 +9739,7 @@ CompletionStage&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execu
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/payments/commands/updateactions/SetInterfaceId.html" title="class in io.sphere.sdk.payments.commands.updateactions"><span class="typeNameLink">SetInterfaceId</span></a> - Class in <a href="io/sphere/sdk/payments/commands/updateactions/package-summary.html">io.sphere.sdk.payments.commands.updateactions</a></dt>
 <dd>
-<div class="block"><div id="io-sphere-sdk-payments-commands-PaymentUpdateCommandTest-setInterfaceId--%s" class=code-example><pre><code class='java'>withPayment(client(), payment -&gt; {
-    final String interfaceId =randomKey();
-    final Payment updatedPayment = execute(PaymentUpdateCommand.of(payment, SetInterfaceId.of(interfaceId)));
-
-    assertThat(updatedPayment.getInterfaceId()).isEqualTo(interfaceId);
-
-    return updatedPayment;
-});
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/payments/commands/PaymentUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+<div class="block">Sets the identifier that is used by the interface that manages the payment (usually the PSP).</div>
 </dd>
 <dt><a href="io/sphere/sdk/carts/commands/updateactions/SetLineItemCustomField.html" title="class in io.sphere.sdk.carts.commands.updateactions"><span class="typeNameLink">SetLineItemCustomField</span></a> - Class in <a href="io/sphere/sdk/carts/commands/updateactions/package-summary.html">io.sphere.sdk.carts.commands.updateactions</a></dt>
 <dd>
