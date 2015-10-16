@@ -8,15 +8,15 @@ import javax.annotation.Nullable;
 /**
  Interface to mark objects which can have custom fields, it has nothing to do with CustomObjects.
 
-  <p>To add fields to classes implementing {@link Custom} a {@link Type} needs to be created and assigned to the object.</p>
+  <p>To use custom fields of a {@link Custom} resource it is necessary to connect them to an existing {@link Type}, {@link Type}s define the field names and types like {@link String}, {@link javax.money.MonetaryAmount} and {@link Long}.</p>
 
  <p>In the example scenario we create a type for categories.</p>
 
  The example type will contain:
  <ul>
-    <li>an enum field <em>{@code state}</em> to indicate the state of of the category like "published" and "draft"</li>
-    <li>a String field <strong>{@code imageUrl}</strong> to show an icon for the category</li>
-    <li>a set field with category references {@code relatedCategories} to suggest other categories with accessoires for example</li>
+    <li>an enum field "{@code state}" to indicate the state of of the category like "published" and "draft"</li>
+    <li>a String field "{@code imageUrl}" to show an icon for the category</li>
+    <li>a set field with category references "{@code relatedCategories}" to suggest other categories with accessoires for example</li>
  </ul>
 
  If you work with types it is a good idea to import {@code io.sphere.sdk.types.*;} so you don't get confused with
