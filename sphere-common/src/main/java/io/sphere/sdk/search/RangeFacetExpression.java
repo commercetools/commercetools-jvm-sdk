@@ -1,15 +1,13 @@
 package io.sphere.sdk.search;
 
-import javax.annotation.Nullable;
+/**
+ * Range facets calculate statistical data (i.e. minimum, maximum, mean, count...) for all values of an attribute within a range.
+ * Example: variants.price:range(0 to *)
+ * @param <T> Type of the resource for the facet
+ */
+public interface RangeFacetExpression<T> extends FacetExpression<T> {
 
-public class RangeFacetExpression<T, V extends Comparable<? super V>> extends RangeExpression<T, V> implements FacetExpressionBase<T> {
-
-    RangeFacetExpression(final SearchModel<T> searchModel, final TypeSerializer<V> typeSerializer, final Iterable<? extends Range<V>> ranges, @Nullable final String alias) {
-        super(searchModel, typeSerializer, ranges, alias);
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        return o != null && o instanceof FacetExpression && toSearchExpression().equals(((FacetExpression) o).toSearchExpression());
+    static <T> RangeFacetExpression<T> of(final String sphereFacetExpression) {
+        return new SimpleRangeFacetExpression<>(sphereFacetExpression);
     }
 }

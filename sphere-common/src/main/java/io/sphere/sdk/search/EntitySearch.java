@@ -13,16 +13,6 @@ public interface EntitySearch<T> extends Search<T> {
     @Nullable
     Boolean isFuzzy();
 
-    List<FacetExpression<T>> facets();
-
-    List<FilterExpression<T>> resultFilters();
-
-    List<FilterExpression<T>> queryFilters();
-
-    List<FilterExpression<T>> facetFilters();
-
-    List<SearchSort<T>> sort();
-
     @Nullable
     Long limit();
 

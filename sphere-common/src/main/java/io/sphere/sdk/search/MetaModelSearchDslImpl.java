@@ -27,10 +27,11 @@ import static java.util.Objects.requireNonNull;
  *
  * @param <T> type of the search result
  * @param <C> type of the class implementing this class
- * @param <S> type of the search model
+ * @param <S> type of the sort model
+ * @param <F> type of the facet model
  * @param <E> type of the expansion model
  */
-public abstract class MetaModelSearchDslImpl<T, C extends MetaModelSearchDsl<T, C, S, E>, S, E> extends SphereRequestBase implements MetaModelSearchDsl<T, C, S, E> {
+public abstract class MetaModelSearchDslImpl<T, C extends MetaModelSearchDsl<T, C, S, L, F, E>, S, L, F, E> extends SphereRequestBase implements MetaModelSearchDsl<T, C, S, L, F, E> {
 
     @Nullable
     final LocalizedStringEntry text;
@@ -40,7 +41,7 @@ public abstract class MetaModelSearchDslImpl<T, C extends MetaModelSearchDsl<T, 
     final List<FilterExpression<T>> resultFilters;
     final List<FilterExpression<T>> queryFilters;
     final List<FilterExpression<T>> facetFilters;
-    final List<SearchSort<T>> sort;
+    final List<SortExpression<T>> sort;
     @Nullable
     final Long limit;
     @Nullable
@@ -48,18 +49,20 @@ public abstract class MetaModelSearchDslImpl<T, C extends MetaModelSearchDsl<T, 
     final List<ExpansionPath<T>> expansionPaths;
     final List<HttpQueryParameter> additionalQueryParameters;
     final String endpoint;
-    final S searchModel;
+    final S sortModel;
+    final L filterModel;
+    final F facetModel;
     final E expansionModel;
     final Function<HttpResponse, PagedSearchResult<T>> resultMapper;
-    final Function<MetaModelSearchDslBuilder<T, C, S, E>, C> searchDslBuilderFunction;
+    final Function<MetaModelSearchDslBuilder<T, C, S, L, F, E>, C> searchDslBuilderFunction;
 
     public MetaModelSearchDslImpl(@Nullable final LocalizedStringEntry text, @Nullable final Boolean fuzzy,
                                   final List<FacetExpression<T>> facets, final List<FilterExpression<T>> resultFilters,
                                   final List<FilterExpression<T>> queryFilters, final List<FilterExpression<T>> facetFilters,
-                                  final List<SearchSort<T>> sort, @Nullable final Long limit, @Nullable final Long offset,
+                                  final List<SortExpression<T>> sort, @Nullable final Long limit, @Nullable final Long offset,
                                   final String endpoint, final Function<HttpResponse, PagedSearchResult<T>> resultMapper,
                                   final List<ExpansionPath<T>> expansionPaths, final List<HttpQueryParameter> additionalQueryParameters,
-                                  final S searchModel, final E expansionModel, final Function<MetaModelSearchDslBuilder<T, C, S, E>, C> searchDslBuilderFunction) {
+                                  final S sortModel, final L filterModel, final F facetModel, final E expansionModel, final Function<MetaModelSearchDslBuilder<T, C, S, L, F, E>, C> searchDslBuilderFunction) {
         Optional.ofNullable(offset).ifPresent(presentOffset -> {
             if (presentOffset < MIN_OFFSET || presentOffset > MAX_OFFSET) {
                 throw new IllegalArgumentException(format("The offset parameter must be in the range of [%d..%d], but was %d.", MIN_OFFSET, MAX_OFFSET, presentOffset));
@@ -79,26 +82,28 @@ public abstract class MetaModelSearchDslImpl<T, C extends MetaModelSearchDsl<T, 
         this.resultMapper = requireNonNull(resultMapper);
         this.expansionPaths = requireNonNull(expansionPaths);
         this.additionalQueryParameters = requireNonNull(additionalQueryParameters);
+        this.filterModel = requireNonNull(filterModel);
+        this.facetModel = requireNonNull(facetModel);
         this.expansionModel = requireNonNull(expansionModel);
-        this.searchModel = requireNonNull(searchModel);
+        this.sortModel = requireNonNull(sortModel);
     }
 
     public MetaModelSearchDslImpl(final String endpoint, final TypeReference<PagedSearchResult<T>> pagedSearchResultTypeReference,
-                                  final S searchModel, final E expansionModel, final Function<MetaModelSearchDslBuilder<T, C, S, E>, C> searchDslBuilderFunction,
+                                  final S sortModel, final L filterModel, final F facetModel, final E expansionModel, final Function<MetaModelSearchDslBuilder<T, C, S, L, F, E>, C> searchDslBuilderFunction,
                                   final List<HttpQueryParameter> additionalQueryParameters) {
         this(null, null, emptyList(), emptyList(), emptyList(), emptyList(), emptyList(), null, null, endpoint, httpResponse -> deserialize(httpResponse, pagedSearchResultTypeReference),
-                emptyList(), additionalQueryParameters, searchModel, expansionModel, searchDslBuilderFunction);
+                emptyList(), additionalQueryParameters, sortModel, filterModel, facetModel, expansionModel, searchDslBuilderFunction);
     }
 
     public MetaModelSearchDslImpl(final String endpoint, final TypeReference<PagedSearchResult<T>> pagedSearchResultTypeReference,
-                                  final S searchModel, final E expansionModel, final Function<MetaModelSearchDslBuilder<T, C, S, E>, C> searchDslBuilderFunction) {
-        this(endpoint, pagedSearchResultTypeReference, searchModel, expansionModel, searchDslBuilderFunction, emptyList());
+                                  final S sortModel, final L filterModel, final F facetModel, final E expansionModel, final Function<MetaModelSearchDslBuilder<T, C, S, L, F, E>, C> searchDslBuilderFunction) {
+        this(endpoint, pagedSearchResultTypeReference, sortModel, filterModel, facetModel, expansionModel, searchDslBuilderFunction, emptyList());
     }
 
-    public MetaModelSearchDslImpl(final MetaModelSearchDslBuilder<T, C, S, E> builder) {
+    public MetaModelSearchDslImpl(final MetaModelSearchDslBuilder<T, C, S, L, F, E> builder) {
         this(builder.text, builder.fuzzy, builder.facets, builder.resultFilters, builder.queryFilters, builder.facetFilters, builder.sort,
                 builder.limit, builder.offset, builder.endpoint, builder.resultMapper, builder.expansionPaths, builder.additionalQueryParameters,
-                builder.searchModel, builder.expansionModel, builder.searchDslBuilderFunction);
+                builder.sortModel, builder.filterModel, builder.facetModel, builder.expansionModel, builder.searchDslBuilderFunction);
     }
 
     @Override
@@ -123,132 +128,118 @@ public abstract class MetaModelSearchDslImpl<T, C extends MetaModelSearchDsl<T, 
     }
 
     @Override
-    public C withFacets(final FacetExpression<T> facet) {
-        return withFacets(singletonList(requireNonNull(facet)));
+    public C withFacets(final FacetExpression<T> facetExpression) {
+        return withFacets(singletonList(requireNonNull(facetExpression)));
     }
 
     @Override
-    public C withFacets(final Function<S, FacetExpression<T>> m) {
-        return withFacets(m.apply(searchModel));
+    public C withFacets(final Function<F, FacetExpression<T>> m) {
+        return withFacets(m.apply(facetModel));
     }
 
     @Override
-    public C plusFacets(final List<FacetExpression<T>> facets) {
-        return withFacets(listOf(facets(), facets));
+    public C plusFacets(final List<FacetExpression<T>> facetExpressions) {
+        return withFacets(listOf(facets(), facetExpressions));
     }
 
     @Override
-    public C plusFacets(final FacetExpression<T> facet) {
-        return plusFacets(singletonList(requireNonNull(facet)));
+    public C plusFacets(final FacetExpression<T> facetExpression) {
+        return plusFacets(singletonList(requireNonNull(facetExpression)));
     }
 
     @Override
-    public C plusFacets(final Function<S, FacetExpression<T>> m) {
-        return plusFacets(m.apply(searchModel));
+    public C plusFacets(final Function<F, FacetExpression<T>> m) {
+        return plusFacets(m.apply(facetModel));
     }
 
     @Override
-    public C withResultFilters(final List<FilterExpression<T>> resultFilters) {
-        return copyBuilder().resultFilters(resultFilters).build();
+    public C withResultFilters(final List<FilterExpression<T>> filterExpressions) {
+        return copyBuilder().resultFilters(filterExpressions).build();
     }
 
     @Override
-    public C withResultFilters(final FilterExpression<T> resultFilter) {
-        return withResultFilters(singletonList(requireNonNull(resultFilter)));
+    public C withResultFilters(final Function<L, List<FilterExpression<T>>> m) {
+        return withResultFilters(m.apply(filterModel));
     }
 
     @Override
-    public C withResultFilters(final Function<S, FilterExpression<T>> m) {
-        return withResultFilters(m.apply(searchModel));
+    public C plusResultFilters(final List<FilterExpression<T>> filterExpressions) {
+        return withResultFilters(listOf(resultFilters(), filterExpressions));
     }
 
     @Override
-    public C plusResultFilters(final List<FilterExpression<T>> resultFilters) {
-        return withResultFilters(listOf(resultFilters(), resultFilters));
+    public C plusResultFilters(final Function<L, List<FilterExpression<T>>> m) {
+        return plusResultFilters(m.apply(filterModel));
     }
 
     @Override
-    public C plusResultFilters(final FilterExpression<T> resultFilter) {
-        return plusResultFilters(singletonList(requireNonNull(resultFilter)));
+    public C withQueryFilters(final List<FilterExpression<T>> filterExpressions) {
+        return copyBuilder().queryFilters(filterExpressions).build();
     }
 
     @Override
-    public C plusResultFilters(final Function<S, FilterExpression<T>> m) {
-        return plusResultFilters(m.apply(searchModel));
+    public C withQueryFilters(final Function<L, List<FilterExpression<T>>> m) {
+        return withQueryFilters(m.apply(filterModel));
     }
 
     @Override
-    public C withQueryFilters(final List<FilterExpression<T>> queryFilters) {
-        return copyBuilder().queryFilters(queryFilters).build();
+    public C plusQueryFilters(final List<FilterExpression<T>> filterExpressions) {
+        return withQueryFilters(listOf(queryFilters(), filterExpressions));
     }
 
     @Override
-    public C withQueryFilters(final FilterExpression<T> queryFilter) {
-        return withQueryFilters(singletonList(requireNonNull(queryFilter)));
+    public C plusQueryFilters(final Function<L, List<FilterExpression<T>>> m) {
+        return plusQueryFilters(m.apply(filterModel));
     }
 
     @Override
-    public C withQueryFilters(final Function<S, FilterExpression<T>> m) {
-        return withQueryFilters(m.apply(searchModel));
+    public C withFacetFilters(final List<FilterExpression<T>> filterExpressions) {
+        return copyBuilder().facetFilters(filterExpressions).build();
     }
 
     @Override
-    public C plusQueryFilters(final List<FilterExpression<T>> queryFilters) {
-        return withQueryFilters(listOf(queryFilters(), queryFilters));
+    public C withFacetFilters(final Function<L, List<FilterExpression<T>>> m) {
+        return withFacetFilters(m.apply(filterModel));
     }
 
     @Override
-    public C plusQueryFilters(final FilterExpression<T> queryFilter) {
-        return plusQueryFilters(singletonList(requireNonNull(queryFilter)));
+    public C plusFacetFilters(final List<FilterExpression<T>> filterExpressions) {
+        return withFacetFilters(listOf(facetFilters(), filterExpressions));
     }
 
     @Override
-    public C plusQueryFilters(final Function<S, FilterExpression<T>> m) {
-        return plusQueryFilters(m.apply(searchModel));
+    public C plusFacetFilters(final Function<L, List<FilterExpression<T>>> m) {
+        return plusFacetFilters(m.apply(filterModel));
     }
 
     @Override
-    public C withFacetFilters(final List<FilterExpression<T>> facetFilters) {
-        return copyBuilder().facetFilters(facetFilters).build();
+    public C withSort(final List<SortExpression<T>> sortExpressions) {
+        return copyBuilder().sort(sortExpressions).build();
     }
 
     @Override
-    public C withFacetFilters(final FilterExpression<T> facetFilter) {
-        return withFacetFilters(singletonList(requireNonNull(facetFilter)));
+    public C withSort(final SortExpression<T> sortExpression) {
+        return withSort(singletonList(sortExpression));
     }
 
     @Override
-    public C withFacetFilters(final Function<S, FilterExpression<T>> m) {
-        return withFacetFilters(m.apply(searchModel));
+    public C withSort(final Function<S, SortExpression<T>> m) {
+        return withSort(m.apply(sortModel));
     }
 
     @Override
-    public C plusFacetFilters(final List<FilterExpression<T>> facetFilters) {
-        return withFacetFilters(listOf(facetFilters(), facetFilters));
+    public C plusSort(final List<SortExpression<T>> sortExpressions) {
+        return withSort(listOf(sort(), sortExpressions));
     }
 
     @Override
-    public C plusFacetFilters(final FilterExpression<T> facetFilter) {
-        return plusFacetFilters(singletonList(requireNonNull(facetFilter)));
+    public C plusSort(final SortExpression<T> sortExpression) {
+        return plusSort(singletonList(requireNonNull(sortExpression)));
     }
 
     @Override
-    public C plusFacetFilters(final Function<S, FilterExpression<T>> m) {
-        return plusFacetFilters(m.apply(searchModel));
-    }
-
-    private C withSort(final List<SearchSort<T>> sort) {
-        return copyBuilder().sort(sort).build();
-    }
-
-    @Override
-    public C withSort(final Function<S, SearchSort<T>> m) {
-        return withSort(m.apply(searchModel));
-    }
-
-    @Override
-    public C withSort(final SearchSort<T> sort) {
-        return withSort(singletonList(sort));
+    public C plusSort(final Function<S, SortExpression<T>> m) {
+        return plusSort(m.apply(sortModel));
     }
 
     @Override
@@ -291,6 +282,42 @@ public abstract class MetaModelSearchDslImpl<T, C extends MetaModelSearchDsl<T, 
         return plusExpansionPaths(m.apply(expansionModel));
     }
 
+    @Deprecated
+    @Override
+    public C withResultFilters(final FilterExpression<T> filterExpression) {
+        return withResultFilters(singletonList(filterExpression));
+    }
+
+    @Deprecated
+    @Override
+    public C plusResultFilters(final FilterExpression<T> filterExpression) {
+        return plusResultFilters(singletonList(filterExpression));
+    }
+
+    @Deprecated
+    @Override
+    public C withQueryFilters(final FilterExpression<T> filterExpression) {
+        return withQueryFilters(singletonList(filterExpression));
+    }
+
+    @Deprecated
+    @Override
+    public C plusQueryFilters(final FilterExpression<T> filterExpression) {
+        return plusQueryFilters(singletonList(filterExpression));
+    }
+
+    @Deprecated
+    @Override
+    public C withFacetFilters(final FilterExpression<T> filterExpression) {
+        return withFacetFilters(singletonList(filterExpression));
+    }
+
+    @Deprecated
+    @Override
+    public C plusFacetFilters(final FilterExpression<T> filterExpression) {
+        return plusFacetFilters(singletonList(filterExpression));
+    }
+
     @Override
     @Nullable
     public LocalizedStringEntry text() {
@@ -318,7 +345,7 @@ public abstract class MetaModelSearchDslImpl<T, C extends MetaModelSearchDsl<T, 
     }
 
     @Override
-    public List<SearchSort<T>> sort() {
+    public List<SortExpression<T>> sort() {
         return sort;
     }
 
@@ -354,7 +381,7 @@ public abstract class MetaModelSearchDslImpl<T, C extends MetaModelSearchDsl<T, 
         return additionalQueryParameters;
     }
 
-    protected MetaModelSearchDslBuilder<T, C, S, E> copyBuilder() {
+    protected MetaModelSearchDslBuilder<T, C, S, L, F, E> copyBuilder() {
         return new MetaModelSearchDslBuilder<>(this);
     }
 
@@ -372,15 +399,15 @@ public abstract class MetaModelSearchDslImpl<T, C extends MetaModelSearchDsl<T, 
     String queryParametersToString(final boolean urlEncoded) {
         final UrlQueryBuilder builder = UrlQueryBuilder.of();
         Optional.ofNullable(text()).ifPresent(t -> builder.add(TEXT + "." + t.getLocale().getLanguage(), t.getValue(), urlEncoded));
-        facets().forEach(f -> builder.add(FACET, f.toSearchExpression(), urlEncoded));
+        facets().forEach(f -> builder.add(FACET, f.expression(), urlEncoded));
         if (!facets().isEmpty()) {
             builder.add("formatBooleanFacet", Boolean.TRUE.toString(), urlEncoded);
         }
         Optional.ofNullable(isFuzzy()).ifPresent(b -> builder.add(FUZZY, b.toString(), urlEncoded));
-        resultFilters().forEach(f -> builder.add(FILTER, f.toSearchExpression(), urlEncoded));
-        queryFilters().forEach(f -> builder.add(FILTER_QUERY, f.toSearchExpression(), urlEncoded));
-        facetFilters().forEach(f -> builder.add(FILTER_FACETS, f.toSearchExpression(), urlEncoded));
-        sort().forEach(s -> builder.add(SORT, s.toSphereSort(), urlEncoded));
+        resultFilters().forEach(f -> builder.add(FILTER_RESULTS, f.expression(), urlEncoded));
+        queryFilters().forEach(f -> builder.add(FILTER_QUERY, f.expression(), urlEncoded));
+        facetFilters().forEach(f -> builder.add(FILTER_FACETS, f.expression(), urlEncoded));
+        sort().forEach(s -> builder.add(SORT, s.expression(), urlEncoded));
         Optional.ofNullable(limit()).ifPresent(l -> builder.add(LIMIT, l.toString(), urlEncoded));
         Optional.ofNullable(offset()).ifPresent(o -> builder.add(OFFSET, o.toString(), urlEncoded));
         expansionPaths().forEach(path -> builder.add(EXPAND, path.toSphereExpand(), urlEncoded));
@@ -420,8 +447,16 @@ public abstract class MetaModelSearchDslImpl<T, C extends MetaModelSearchDsl<T, 
                 '}';
     }
 
-    S getSearchModel() {
-        return searchModel;
+    S getSortModel() {
+        return sortModel;
+    }
+
+    L getFilterModel() {
+        return filterModel;
+    }
+
+    F getFacetModel() {
+        return facetModel;
     }
 
     E getExpansionModel() {

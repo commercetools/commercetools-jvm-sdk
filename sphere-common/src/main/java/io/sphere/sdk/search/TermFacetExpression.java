@@ -1,17 +1,13 @@
 package io.sphere.sdk.search;
 
-import javax.annotation.Nullable;
+/**
+ * Term facets calculate statistical counts for all values of an attribute.
+ * Example: variants.attributes.color
+ * @param <T> Type of the resource for the facet
+ */
+public interface TermFacetExpression<T> extends FacetExpression<T> {
 
-import static java.util.Collections.emptyList;
-
-public class TermFacetExpression<T, V> extends TermExpression<T, V> implements FacetExpressionBase<T> {
-
-    TermFacetExpression(final SearchModel<T> searchModel, final TypeSerializer<V> typeSerializer, @Nullable final String alias) {
-        super(searchModel, typeSerializer, emptyList(), alias);
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        return o != null && o instanceof FacetExpression && toSearchExpression().equals(((FacetExpression) o).toSearchExpression());
+    static <T> TermFacetExpression<T> of(final String sphereFacetExpression) {
+        return new SimpleTermFacetExpression<>(sphereFacetExpression);
     }
 }
