@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10,"i10":10,"i11":10,"i12":10,"i13":10,"i14":10,"i15":10,"i16":10,"i17":9,"i18":10,"i19":10,"i20":10,"i21":10};
+var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10,"i10":10,"i11":10,"i12":10,"i13":10,"i14":10,"i15":10,"i16":10,"i17":10,"i18":10,"i19":10,"i20":9,"i21":10,"i22":10,"i23":10,"i24":10};
 var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -146,88 +146,100 @@ implements <a href="../../../../io/sphere/sdk/models/Builder.html" title="interf
 </tr>
 <tr id="i1" class="rowColor">
 <td class="colFirst"><code>T</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/products/ProductDraftBuilder.html#categories-java.util.Set-">categories</a></span>(java.util.Set&lt;<a href="../../../../io/sphere/sdk/models/Reference.html" title="class in io.sphere.sdk.models">Reference</a>&lt;<a href="../../../../io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories">Category</a>&gt;&gt;&nbsp;categories)</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/products/ProductDraftBuilder.html#categories-java.util.List-">categories</a></span>(java.util.List&lt;<a href="../../../../io/sphere/sdk/models/Reference.html" title="class in io.sphere.sdk.models">Reference</a>&lt;<a href="../../../../io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories">Category</a>&gt;&gt;&nbsp;categories)</code>&nbsp;</td>
 </tr>
 <tr id="i2" class="altColor">
 <td class="colFirst"><code>T</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/products/ProductDraftBuilder.html#description-io.sphere.sdk.models.LocalizedString-">description</a></span>(<a href="../../../../io/sphere/sdk/models/LocalizedString.html" title="class in io.sphere.sdk.models">LocalizedString</a>&nbsp;description)</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/products/ProductDraftBuilder.html#categories-java.util.Set-">categories</a></span>(java.util.Set&lt;<a href="../../../../io/sphere/sdk/models/Reference.html" title="class in io.sphere.sdk.models">Reference</a>&lt;<a href="../../../../io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories">Category</a>&gt;&gt;&nbsp;categories)</code>&nbsp;</td>
 </tr>
 <tr id="i3" class="rowColor">
+<td class="colFirst"><code>T</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/products/ProductDraftBuilder.html#categoryOrderHints-io.sphere.sdk.products.CategoryOrderHints-">categoryOrderHints</a></span>(<a href="../../../../io/sphere/sdk/products/CategoryOrderHints.html" title="class in io.sphere.sdk.products">CategoryOrderHints</a>&nbsp;categoryOrderHints)</code>&nbsp;</td>
+</tr>
+<tr id="i4" class="altColor">
+<td class="colFirst"><code>T</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/products/ProductDraftBuilder.html#description-io.sphere.sdk.models.LocalizedString-">description</a></span>(<a href="../../../../io/sphere/sdk/models/LocalizedString.html" title="class in io.sphere.sdk.models">LocalizedString</a>&nbsp;description)</code>&nbsp;</td>
+</tr>
+<tr id="i5" class="rowColor">
 <td class="colFirst"><code>java.util.Set&lt;<a href="../../../../io/sphere/sdk/models/Reference.html" title="class in io.sphere.sdk.models">Reference</a>&lt;<a href="../../../../io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories">Category</a>&gt;&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/products/ProductDraftBuilder.html#getCategories--">getCategories</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i4" class="altColor">
-<td class="colFirst"><code><a href="../../../../io/sphere/sdk/models/LocalizedString.html" title="class in io.sphere.sdk.models">LocalizedString</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/products/ProductDraftBuilder.html#getDescription--">getDescription</a></span>()</code>&nbsp;</td>
-</tr>
-<tr id="i5" class="rowColor">
-<td class="colFirst"><code><a href="../../../../io/sphere/sdk/models/LocalizedString.html" title="class in io.sphere.sdk.models">LocalizedString</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/products/ProductDraftBuilder.html#getMetaDescription--">getMetaDescription</a></span>()</code>&nbsp;</td>
-</tr>
 <tr id="i6" class="altColor">
-<td class="colFirst"><code><a href="../../../../io/sphere/sdk/models/LocalizedString.html" title="class in io.sphere.sdk.models">LocalizedString</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/products/ProductDraftBuilder.html#getMetaKeywords--">getMetaKeywords</a></span>()</code>&nbsp;</td>
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/products/CategoryOrderHints.html" title="class in io.sphere.sdk.products">CategoryOrderHints</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/products/ProductDraftBuilder.html#getCategoryOrderHints--">getCategoryOrderHints</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i7" class="rowColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/models/LocalizedString.html" title="class in io.sphere.sdk.models">LocalizedString</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/products/ProductDraftBuilder.html#getMetaTitle--">getMetaTitle</a></span>()</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/products/ProductDraftBuilder.html#getDescription--">getDescription</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i8" class="altColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/models/LocalizedString.html" title="class in io.sphere.sdk.models">LocalizedString</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/products/ProductDraftBuilder.html#getName--">getName</a></span>()</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/products/ProductDraftBuilder.html#getMetaDescription--">getMetaDescription</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i9" class="rowColor">
-<td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/SearchKeywords.html" title="class in io.sphere.sdk.search">SearchKeywords</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/products/ProductDraftBuilder.html#getSearchKeywords--">getSearchKeywords</a></span>()</code>&nbsp;</td>
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/models/LocalizedString.html" title="class in io.sphere.sdk.models">LocalizedString</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/products/ProductDraftBuilder.html#getMetaKeywords--">getMetaKeywords</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i10" class="altColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/models/LocalizedString.html" title="class in io.sphere.sdk.models">LocalizedString</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/products/ProductDraftBuilder.html#getSlug--">getSlug</a></span>()</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/products/ProductDraftBuilder.html#getMetaTitle--">getMetaTitle</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i11" class="rowColor">
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/models/LocalizedString.html" title="class in io.sphere.sdk.models">LocalizedString</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/products/ProductDraftBuilder.html#getName--">getName</a></span>()</code>&nbsp;</td>
+</tr>
+<tr id="i12" class="altColor">
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/SearchKeywords.html" title="class in io.sphere.sdk.search">SearchKeywords</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/products/ProductDraftBuilder.html#getSearchKeywords--">getSearchKeywords</a></span>()</code>&nbsp;</td>
+</tr>
+<tr id="i13" class="rowColor">
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/models/LocalizedString.html" title="class in io.sphere.sdk.models">LocalizedString</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/products/ProductDraftBuilder.html#getSlug--">getSlug</a></span>()</code>&nbsp;</td>
+</tr>
+<tr id="i14" class="altColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/models/Reference.html" title="class in io.sphere.sdk.models">Reference</a>&lt;<a href="../../../../io/sphere/sdk/states/State.html" title="interface in io.sphere.sdk.states">State</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/products/ProductDraftBuilder.html#getState--">getState</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i12" class="altColor">
+<tr id="i15" class="rowColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/models/Reference.html" title="class in io.sphere.sdk.models">Reference</a>&lt;<a href="../../../../io/sphere/sdk/taxcategories/TaxCategory.html" title="interface in io.sphere.sdk.taxcategories">TaxCategory</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/products/ProductDraftBuilder.html#getTaxCategory--">getTaxCategory</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i13" class="rowColor">
+<tr id="i16" class="altColor">
 <td class="colFirst"><code>protected <a href="../../../../io/sphere/sdk/products/ProductDraftBuilder.html" title="class in io.sphere.sdk.products">ProductDraftBuilder</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/products/ProductDraftBuilder.html#getThis--">getThis</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i14" class="altColor">
+<tr id="i17" class="rowColor">
 <td class="colFirst"><code>T</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/products/ProductDraftBuilder.html#metaDescription-io.sphere.sdk.models.LocalizedString-">metaDescription</a></span>(<a href="../../../../io/sphere/sdk/models/LocalizedString.html" title="class in io.sphere.sdk.models">LocalizedString</a>&nbsp;metaDescription)</code>&nbsp;</td>
 </tr>
-<tr id="i15" class="rowColor">
+<tr id="i18" class="altColor">
 <td class="colFirst"><code>T</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/products/ProductDraftBuilder.html#metaKeywords-io.sphere.sdk.models.LocalizedString-">metaKeywords</a></span>(<a href="../../../../io/sphere/sdk/models/LocalizedString.html" title="class in io.sphere.sdk.models">LocalizedString</a>&nbsp;metaKeywords)</code>&nbsp;</td>
 </tr>
-<tr id="i16" class="altColor">
+<tr id="i19" class="rowColor">
 <td class="colFirst"><code>T</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/products/ProductDraftBuilder.html#metaTitle-io.sphere.sdk.models.LocalizedString-">metaTitle</a></span>(<a href="../../../../io/sphere/sdk/models/LocalizedString.html" title="class in io.sphere.sdk.models">LocalizedString</a>&nbsp;metaTitle)</code>&nbsp;</td>
 </tr>
-<tr id="i17" class="rowColor">
+<tr id="i20" class="altColor">
 <td class="colFirst"><code>static <a href="../../../../io/sphere/sdk/products/ProductDraftBuilder.html" title="class in io.sphere.sdk.products">ProductDraftBuilder</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/products/ProductDraftBuilder.html#of-io.sphere.sdk.models.Referenceable-io.sphere.sdk.models.LocalizedString-io.sphere.sdk.models.LocalizedString-io.sphere.sdk.products.ProductVariantDraft-">of</a></span>(<a href="../../../../io/sphere/sdk/models/Referenceable.html" title="interface in io.sphere.sdk.models">Referenceable</a>&lt;<a href="../../../../io/sphere/sdk/producttypes/ProductType.html" title="interface in io.sphere.sdk.producttypes">ProductType</a>&gt;&nbsp;productType,
   <a href="../../../../io/sphere/sdk/models/LocalizedString.html" title="class in io.sphere.sdk.models">LocalizedString</a>&nbsp;name,
   <a href="../../../../io/sphere/sdk/models/LocalizedString.html" title="class in io.sphere.sdk.models">LocalizedString</a>&nbsp;slug,
   <a href="../../../../io/sphere/sdk/products/ProductVariantDraft.html" title="interface in io.sphere.sdk.products">ProductVariantDraft</a>&nbsp;masterVariant)</code>&nbsp;</td>
 </tr>
-<tr id="i18" class="altColor">
+<tr id="i21" class="rowColor">
 <td class="colFirst"><code>T</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/products/ProductDraftBuilder.html#searchKeywords-io.sphere.sdk.search.SearchKeywords-">searchKeywords</a></span>(<a href="../../../../io/sphere/sdk/search/SearchKeywords.html" title="class in io.sphere.sdk.search">SearchKeywords</a>&nbsp;searchKeywords)</code>&nbsp;</td>
 </tr>
-<tr id="i19" class="rowColor">
+<tr id="i22" class="altColor">
 <td class="colFirst"><code>T</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/products/ProductDraftBuilder.html#state-io.sphere.sdk.models.Referenceable-">state</a></span>(<a href="../../../../io/sphere/sdk/models/Referenceable.html" title="interface in io.sphere.sdk.models">Referenceable</a>&lt;<a href="../../../../io/sphere/sdk/states/State.html" title="interface in io.sphere.sdk.states">State</a>&gt;&nbsp;state)</code>&nbsp;</td>
 </tr>
-<tr id="i20" class="altColor">
+<tr id="i23" class="rowColor">
 <td class="colFirst"><code>T</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/products/ProductDraftBuilder.html#taxCategory-io.sphere.sdk.models.Referenceable-">taxCategory</a></span>(<a href="../../../../io/sphere/sdk/models/Referenceable.html" title="interface in io.sphere.sdk.models">Referenceable</a>&lt;<a href="../../../../io/sphere/sdk/taxcategories/TaxCategory.html" title="interface in io.sphere.sdk.taxcategories">TaxCategory</a>&gt;&nbsp;taxCategory)</code>&nbsp;</td>
 </tr>
-<tr id="i21" class="rowColor">
+<tr id="i24" class="altColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/products/ProductDraftBuilder.html" title="class in io.sphere.sdk.products">ProductDraftBuilder</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/products/ProductDraftBuilder.html#variants-java.util.List-">variants</a></span>(java.util.List&lt;<a href="../../../../io/sphere/sdk/products/ProductVariantDraft.html" title="interface in io.sphere.sdk.products">ProductVariantDraft</a>&gt;&nbsp;variants)</code>&nbsp;</td>
 </tr>
@@ -370,6 +382,15 @@ implements <a href="../../../../io/sphere/sdk/models/Builder.html" title="interf
 <pre>public&nbsp;T&nbsp;categories(java.util.Set&lt;<a href="../../../../io/sphere/sdk/models/Reference.html" title="class in io.sphere.sdk.models">Reference</a>&lt;<a href="../../../../io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories">Category</a>&gt;&gt;&nbsp;categories)</pre>
 </li>
 </ul>
+<a name="categories-java.util.List-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>categories</h4>
+<pre>public&nbsp;T&nbsp;categories(java.util.List&lt;<a href="../../../../io/sphere/sdk/models/Reference.html" title="class in io.sphere.sdk.models">Reference</a>&lt;<a href="../../../../io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories">Category</a>&gt;&gt;&nbsp;categories)</pre>
+</li>
+</ul>
 <a name="searchKeywords-io.sphere.sdk.search.SearchKeywords-">
 <!--   -->
 </a>
@@ -377,6 +398,16 @@ implements <a href="../../../../io/sphere/sdk/models/Builder.html" title="interf
 <li class="blockList">
 <h4>searchKeywords</h4>
 <pre>public&nbsp;T&nbsp;searchKeywords(<a href="../../../../io/sphere/sdk/search/SearchKeywords.html" title="class in io.sphere.sdk.search">SearchKeywords</a>&nbsp;searchKeywords)</pre>
+</li>
+</ul>
+<a name="categoryOrderHints-io.sphere.sdk.products.CategoryOrderHints-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>categoryOrderHints</h4>
+<pre>public&nbsp;T&nbsp;categoryOrderHints(@Nullable
+                            <a href="../../../../io/sphere/sdk/products/CategoryOrderHints.html" title="class in io.sphere.sdk.products">CategoryOrderHints</a>&nbsp;categoryOrderHints)</pre>
 </li>
 </ul>
 <a name="getName--">
@@ -502,11 +533,21 @@ public&nbsp;<a href="../../../../io/sphere/sdk/models/LocalizedString.html" titl
 <a name="getState--">
 <!--   -->
 </a>
-<ul class="blockListLast">
+<ul class="blockList">
 <li class="blockList">
 <h4>getState</h4>
 <pre>@Nullable
 public&nbsp;<a href="../../../../io/sphere/sdk/models/Reference.html" title="class in io.sphere.sdk.models">Reference</a>&lt;<a href="../../../../io/sphere/sdk/states/State.html" title="interface in io.sphere.sdk.states">State</a>&gt;&nbsp;getState()</pre>
+</li>
+</ul>
+<a name="getCategoryOrderHints--">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>getCategoryOrderHints</h4>
+<pre>@Nullable
+public&nbsp;<a href="../../../../io/sphere/sdk/products/CategoryOrderHints.html" title="class in io.sphere.sdk.products">CategoryOrderHints</a>&nbsp;getCategoryOrderHints()</pre>
 </li>
 </ul>
 </li>
