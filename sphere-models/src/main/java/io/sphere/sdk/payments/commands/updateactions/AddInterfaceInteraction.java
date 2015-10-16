@@ -12,13 +12,26 @@ import java.util.Map;
  * Adds a new interaction with the interface. These can be notifications received from the PSP or requests send to the PSP.
  * Some interactions may result in a transaction. If so, the interactionId in the transaction should be set to match the ID of the PSP for the interaction.
  *
+ * {@doc.gen intro}
+ *
  * {@include.example io.sphere.sdk.payments.commands.PaymentUpdateCommandTest#addInterfaceInteraction()}
  *
- *@see Payment
- *@see Payment#getInterfaceInteractions()
- *@see io.sphere.sdk.payments.messages.PaymentInteractionAddedMessage
+ * @see Payment
+ * @see Payment#getInterfaceInteractions()
+ * @see io.sphere.sdk.payments.messages.PaymentInteractionAddedMessage
  */
 public class AddInterfaceInteraction extends SetCustomTypeBase<Payment> {
+    /**
+     * Gets the resource type id for the custom field creation.
+     *
+     * @return resource id
+     *
+     * @see io.sphere.sdk.types.TypeDraft#getResourceTypeIds()
+     * @see io.sphere.sdk.types.Custom
+     */
+    public static String resourceTypeId() {
+        return "payment-interface-interaction";
+    }
 
     private AddInterfaceInteraction(@Nullable final String typeId, @Nullable final String typeKey, @Nullable final Map<String, JsonNode> fields) {
         super("addInterfaceInteraction", typeId, typeKey, fields);

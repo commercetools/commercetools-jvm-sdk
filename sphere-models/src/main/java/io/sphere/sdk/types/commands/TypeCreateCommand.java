@@ -8,6 +8,8 @@ import io.sphere.sdk.types.expansion.TypeExpansionModel;
 
 /**
  * {@include.example io.sphere.sdk.types.commands.TypeCreateCommandTest#execution()}
+ *
+ * @see io.sphere.sdk.types.Custom
  */
 public interface TypeCreateCommand extends CreateCommand<Type>, MetaModelExpansionDsl<Type, TypeCreateCommand, TypeExpansionModel<Type>> {
 

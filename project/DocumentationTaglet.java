@@ -22,7 +22,7 @@ public class DocumentationTaglet implements Taglet {
     public static final Predicate<File> FILE_CONTAINS_PUBLIC_UPDATEACTION_PREDICATE =
             file -> readAllLines(file)
                     .stream()
-                    .anyMatch(line -> line.contains("public class " + file.getName().replace(".java", "")));
+                    .anyMatch(line -> line.contains("public class " + file.getName().replace(".java", "")) || line.contains("public final class " + file.getName().replace(".java", "")));
 
     private static List<String> readAllLines(final File file) {
         try {
