@@ -126,7 +126,7 @@ public final class SphereInternalLogger {
 
     private static String getPathElement(final HttpRequest httpRequest) {
         final String path = httpRequest.getUrl();
-        final String[] pathElements = path.split("/");
+        final String[] pathElements = path.split("[\\/\\?]");
         return pathElements.length >= 5 ? pathElements[4] : "project";
     }
 
