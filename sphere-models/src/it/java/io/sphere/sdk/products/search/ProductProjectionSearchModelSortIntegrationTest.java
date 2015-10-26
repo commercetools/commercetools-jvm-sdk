@@ -136,7 +136,7 @@ public class ProductProjectionSearchModelSortIntegrationTest extends ProductProj
 
     @Test
     public void onNumberSetAttributes() throws Exception {
-        testProductIds(SORT.allVariants().attribute().ofNumberSet(ATTR_NAME_NUMBER_SET).byAsc(),
+        testProductIds(SORT.allVariants().attribute().ofNumberSet(ATTR_NAME_NUMBER_SET).byDesc(),
                 ids -> assertThat(ids).containsExactly(product1.getId(), product2.getId()));
     }
 
