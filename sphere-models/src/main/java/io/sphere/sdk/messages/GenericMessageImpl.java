@@ -2,10 +2,11 @@ package io.sphere.sdk.messages;
 
 import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import com.fasterxml.jackson.databind.type.TypeFactory;
 import io.sphere.sdk.json.SphereJsonUtils;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.ResourceImpl;
@@ -25,18 +26,21 @@ public abstract class GenericMessageImpl<R> extends ResourceImpl<Message> implem
     @JsonIgnore
     private final Map<String, JsonNode> furtherFields = new HashMap<>();
     @JsonIgnore
-    private final TypeReference<Reference<R>> typeReference;
+    private final JavaType referenceJavaType;
 
     public GenericMessageImpl(final String id, final Long version, final ZonedDateTime createdAt,
                               final ZonedDateTime lastModifiedAt, final JsonNode resource,
                               final Long sequenceNumber, final Long resourceVersion,
-                              final String type, final TypeReference<Reference<R>> typeReference) {
+                              final String type, final Class<R> clazz) {
         super(id, version, createdAt, lastModifiedAt);
         this.resource = resource;
         this.sequenceNumber = sequenceNumber;
         this.resourceVersion = resourceVersion;
         this.type = type;
-        this.typeReference = requireNonNull(typeReference, "typeReference must be explicitly given, it cannot be part of a JsonCreator.");
+        requireNonNull(clazz, "class of reference must be explicitly given, it cannot be part of a JsonCreator.");
+        final JavaType javaType = SphereJsonUtils.convertToJavaType(clazz);
+        final TypeFactory typeFactory = TypeFactory.defaultInstance();
+        this.referenceJavaType = typeFactory.constructParametrizedType(Reference.class, Reference.class, javaType);
     }
 
     @Override
@@ -62,7 +66,7 @@ public abstract class GenericMessageImpl<R> extends ResourceImpl<Message> implem
     @SuppressWarnings("unchecked")
     @Override
     public Reference<R> getResource() {
-        return SphereJsonUtils.readObject(resource, typeReference);
+        return SphereJsonUtils.readObject(resource, referenceJavaType);
     }
 
     @Override
