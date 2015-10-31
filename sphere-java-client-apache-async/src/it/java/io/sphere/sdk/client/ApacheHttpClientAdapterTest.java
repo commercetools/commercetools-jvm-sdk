@@ -9,4 +9,9 @@ public class ApacheHttpClientAdapterTest extends HttpClientAdapterTest {
     protected HttpClient createClient() {
         return ApacheHttpClientAdapter.of(HttpAsyncClients.createDefault());
     }
+
+    @Override
+    protected int port() {
+        return 5014;
+    }
 }

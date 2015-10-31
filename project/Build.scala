@@ -50,7 +50,8 @@ object Build extends Build {
     .settings(libraryDependencies ++= allTestLibs.map(_ % "test,it"))
 
   lazy val `sphere-java-client-internal-test` = project.dependsOn(`sphere-java-client-core`).settings(commonSettings:_*).settings(
-    libraryDependencies ++= allTestLibs
+    libraryDependencies ++= allTestLibs,
+    libraryDependencies += `commons-io`
   ).configs(IntegrationTest)
 
   lazy val `sphere-java-client` = project.configs(IntegrationTest).dependsOn(`sphere-java-client-ahc-1_9`).settings(commonSettings:_*)
@@ -65,7 +66,7 @@ object Build extends Build {
     .settings().configs(IntegrationTest)
 
   lazy val `sdk-http-ahc-1_8` = project.configs(IntegrationTest).dependsOn(`sdk-http`, `sphere-java-client-internal-test` % "test,it").settings(commonSettings:_*)
-    .settings(libraryDependencies += `async-http-client-1.8`).configs(IntegrationTest)
+    .settings(libraryDependencies ++= Seq(`async-http-client-1.8`, `commons-io`)).configs(IntegrationTest)
 
   lazy val `sdk-http-ahc-1_9` = project.configs(IntegrationTest).dependsOn(`sdk-http`, `sphere-java-client-internal-test` % "test,it").settings(commonSettings:_*)
     .settings(libraryDependencies += `async-http-client-1.9`).configs(IntegrationTest)

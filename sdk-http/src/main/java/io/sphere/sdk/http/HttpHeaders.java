@@ -8,6 +8,7 @@ public class HttpHeaders extends Base {
     public static final String AUTHORIZATION = "Authorization";
     public static final String USER_AGENT = "User-Agent";
     public static final String CONTENT_TYPE = "Content-Type";
+    public static final String CONTENT_LENGTH = "Content-Length";
     private final Map<String, List<String>> headers;
 
     private HttpHeaders(final Map<String, List<String>> headers) {

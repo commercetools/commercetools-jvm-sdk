@@ -69,7 +69,7 @@ final class DefaultAsyncHttpClientAdapterImpl implements AsyncHttpClientAdapter 
                 .setUrl(request.getUrl())
                 .setMethod(request.getHttpMethod().toString());
 
-        request.getHeaders().getHeadersAsMap().forEach((name, values) -> values.forEach( value -> builder.addHeader(name, value)));
+        request.getHeaders().getHeadersAsMap().forEach((name, values) -> values.forEach(value -> builder.addHeader(name, value)));
 
         Optional.ofNullable(request.getBody()).ifPresent(body -> {
             if (body instanceof StringHttpRequestBody) {
@@ -78,7 +78,7 @@ final class DefaultAsyncHttpClientAdapterImpl implements AsyncHttpClientAdapter 
             } else if (body instanceof FileHttpRequestBody) {
                 builder.setBody(((FileHttpRequestBody) body).getFile());
             } else if (body instanceof FormUrlEncodedHttpRequestBody) {
-                ((FormUrlEncodedHttpRequestBody) body).getData().forEach((name, value) -> builder.addQueryParam(name, value));
+                ((FormUrlEncodedHttpRequestBody) body).getData().forEach((name, value) -> builder.addFormParam(name, value));
             }
         });
         final Request build = builder.build();
