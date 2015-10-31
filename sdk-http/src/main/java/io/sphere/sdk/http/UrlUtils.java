@@ -2,13 +2,14 @@ package io.sphere.sdk.http;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.util.concurrent.CompletionException;
 
 public final class UrlUtils {
     private UrlUtils() {
     }
 
     /**
-     * Encodes urls with US-ASCII.
+     * Encodes urls with UTF-8.
      * @param s String which should be URL encoded
      * @return url encoded s
      */
@@ -17,7 +18,7 @@ public final class UrlUtils {
         try {
             return URLEncoder.encode(s, encoding);
         } catch (final UnsupportedEncodingException e) {
-            throw new RuntimeException(String.format("Could not encode url %s with encoding %s", s, encoding));
+            throw new CompletionException(String.format("Could not encode url %s with encoding %s", s, encoding), e);
         }
     }
 }
