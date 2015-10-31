@@ -48,7 +48,7 @@ public class InventoryEntryQueryTest extends IntegrationTest {
                 final QueryPredicate<InventoryEntry> predicate = skuP.and(channelP).and(channelPById).and(availableP).and(stockP).and(restockableInDaysP);
                 final Query<InventoryEntry> query = InventoryEntryQuery.of()
                         .withPredicates(predicate)
-                        .withSort(m -> m.id().sort(QuerySortDirection.DESC))
+                        .withSort(m -> m.id().sort().desc())
                         .withExpansionPaths(m -> m.supplyChannel());
                 final PagedQueryResult<InventoryEntry> result = execute(query);
                 assertThat(result.head().map(e -> e.getId())).contains(entry.getId());

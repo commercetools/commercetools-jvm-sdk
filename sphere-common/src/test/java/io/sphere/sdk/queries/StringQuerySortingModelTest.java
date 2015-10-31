@@ -40,7 +40,12 @@ public class StringQuerySortingModelTest {
     }
 
     @Test
-    public void generateSortExpression() throws Exception {
-        assertThat(model.sort(ASC).toSphereSort()).isEqualTo("id asc");
+    public void generateSortExpressionAsc() throws Exception {
+        assertThat(model.sort().asc().toSphereSort()).isEqualTo("id asc");
+    }
+
+    @Test
+    public void generateSortExpressionDesc() throws Exception {
+        assertThat(model.sort().desc().toSphereSort()).isEqualTo("id desc");
     }
 }
