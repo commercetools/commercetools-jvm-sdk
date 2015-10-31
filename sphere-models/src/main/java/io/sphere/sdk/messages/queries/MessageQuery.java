@@ -54,6 +54,6 @@ public interface MessageQuery extends MetaModelQueryDsl<Message, MessageQuery, M
     default <T> Query<T> forMessageType(final MessageDerivateHint<T> hint) {
         final MessageQuery queryWithPredicateForType =
                 plusPredicates(hint.predicate());
-        return new TypedMessageQuery<>(queryWithPredicateForType.httpRequestIntent(), hint.queryResultTypeReference());
+        return new TypedMessageQuery<>(queryWithPredicateForType.httpRequestIntent(), hint.javaType());
     }
 }

@@ -1,10 +1,8 @@
 package io.sphere.sdk.products.messages;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.core.type.TypeReference;
 import io.sphere.sdk.messages.MessageDerivateHint;
 import io.sphere.sdk.models.Reference;
-import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.states.State;
 
 /**
@@ -17,12 +15,7 @@ import io.sphere.sdk.states.State;
 public class ProductStateTransitionMessage {
     public static final String MESSAGE_TYPE = "ProductStateTransition";
     public static final MessageDerivateHint<ProductStateTransitionMessage> MESSAGE_HINT =
-            MessageDerivateHint.ofSingleMessageType(MESSAGE_TYPE,
-                    new TypeReference<PagedQueryResult<ProductStateTransitionMessage>>() {
-                    },
-                    new TypeReference<ProductStateTransitionMessage>() {
-                    }
-            );
+            MessageDerivateHint.ofSingleMessageType(MESSAGE_TYPE, ProductStateTransitionMessage.class);
 
 
     private final Reference<State> state;

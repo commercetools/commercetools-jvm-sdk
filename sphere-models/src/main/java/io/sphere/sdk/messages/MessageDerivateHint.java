@@ -1,9 +1,9 @@
 package io.sphere.sdk.messages;
 
-import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.JavaType;
+import io.sphere.sdk.json.SphereJsonUtils;
 import io.sphere.sdk.messages.queries.MessageQuery;
 import io.sphere.sdk.messages.queries.MessageQueryModel;
-import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.queries.QueryPredicate;
 
 import java.util.function.Supplier;
@@ -14,35 +14,31 @@ import java.util.function.Supplier;
  * @see MessageQuery#forMessageType(io.sphere.sdk.messages.MessageDerivateHint)
  */
 public class MessageDerivateHint<T> {
-    private final TypeReference<PagedQueryResult<T>> queryResultTypeReference;
-    private final TypeReference<T> elementTypeReference;
+    private final JavaType javaType;
     private final Supplier<QueryPredicate<Message>> predicateSupplier;
 
-    private MessageDerivateHint(final TypeReference<PagedQueryResult<T>> resultTypeReference,
-                                final TypeReference<T> elementTypeReference,
-                                final Supplier<QueryPredicate<Message>> predicateSupplier) {
-        this.queryResultTypeReference = resultTypeReference;
+    private MessageDerivateHint(final JavaType javaType, final Supplier<QueryPredicate<Message>> predicateSupplier) {
+        this.javaType = javaType;
         this.predicateSupplier = predicateSupplier;
-        this.elementTypeReference = elementTypeReference;
-    }
-
-    public TypeReference<PagedQueryResult<T>> queryResultTypeReference() {
-        return queryResultTypeReference;
-    }
-
-    public TypeReference<T> elementTypeReference() {
-        return elementTypeReference;
     }
 
     public QueryPredicate<Message> predicate() {
         return predicateSupplier.get();
     }
 
-    public static <T> MessageDerivateHint<T> ofSingleMessageType(final String type, final TypeReference<PagedQueryResult<T>> queryResultTypeReference, final TypeReference<T> elementTypeReference) {
-        return new MessageDerivateHint<>(queryResultTypeReference, elementTypeReference, () -> MessageQueryModel.of().type().is(type));
+    private static <T> MessageDerivateHint<T> ofSingleMessageType(final String type, final JavaType javaType) {
+        return new MessageDerivateHint<>(javaType, () -> MessageQueryModel.of().type().is(type));
     }
 
-    public static <T> MessageDerivateHint<T> ofResourceType(final String resourceId, final TypeReference<PagedQueryResult<T>> queryResultTypeReference, final TypeReference<T> elementTypeReference) {
-        return new MessageDerivateHint<>(queryResultTypeReference, elementTypeReference, () -> MessageQueryModel.of().resource().typeId().is(resourceId));
+    public static <T> MessageDerivateHint<T> ofSingleMessageType(final String type, final Class<T> clazz) {
+        return ofSingleMessageType(type, SphereJsonUtils.convertToJavaType(clazz));
+    }
+
+    public static <T> MessageDerivateHint<T> ofResourceType(final String resourceId, final Class<T> clazz) {
+        return new MessageDerivateHint<>(SphereJsonUtils.convertToJavaType(clazz), () -> MessageQueryModel.of().resource().typeId().is(resourceId));
+    }
+
+    public JavaType javaType() {
+        return javaType;
     }
 }

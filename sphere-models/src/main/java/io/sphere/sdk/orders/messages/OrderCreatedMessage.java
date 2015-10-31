@@ -1,14 +1,12 @@
 package io.sphere.sdk.orders.messages;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import io.sphere.sdk.messages.GenericMessageImpl;
 import io.sphere.sdk.messages.Message;
 import io.sphere.sdk.messages.MessageDerivateHint;
 import io.sphere.sdk.orders.Order;
-import io.sphere.sdk.queries.PagedQueryResult;
 
 import java.time.ZonedDateTime;
 
@@ -16,18 +14,13 @@ import java.time.ZonedDateTime;
 public class OrderCreatedMessage extends GenericMessageImpl<Order> {
     public static final String MESSAGE_TYPE = "OrderCreated";
     public static final MessageDerivateHint<OrderCreatedMessage> MESSAGE_HINT =
-            MessageDerivateHint.ofSingleMessageType(MESSAGE_TYPE,
-                    new TypeReference<PagedQueryResult<OrderCreatedMessage>>() {
-                    },
-                    new TypeReference<OrderCreatedMessage>() {
-                    }
-            );
+            MessageDerivateHint.ofSingleMessageType(MESSAGE_TYPE, OrderCreatedMessage.class);
 
     private final Order order;
 
     @JsonCreator
     private OrderCreatedMessage(final String id, final Long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt, final JsonNode resource, final Long sequenceNumber, final Long resourceVersion, final String type, final Order order) {
-        super(id, version, createdAt, lastModifiedAt, resource, sequenceNumber, resourceVersion, type, MessagesPackage.ORDER_REFERENCE_TYPE_REFERENCE);
+        super(id, version, createdAt, lastModifiedAt, resource, sequenceNumber, resourceVersion, type, Order.class);
         this.order = order;
     }
 

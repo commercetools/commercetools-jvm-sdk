@@ -182,6 +182,10 @@ final public class SphereJsonUtils {
         return executing(() -> objectMapper.readerFor(clazz).readValue(jsonNode));
     }
 
+    public static <T> T readObject(final JsonNode jsonNode, final JavaType javaType) {
+        return executing(() -> objectMapper.readerFor(javaType).readValue(jsonNode));
+    }
+
     /**
      * Reads a Java object from JSON string data encoded as UTF-8.
      *
