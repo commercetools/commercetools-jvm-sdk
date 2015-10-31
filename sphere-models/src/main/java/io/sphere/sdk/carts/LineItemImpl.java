@@ -1,9 +1,12 @@
 package io.sphere.sdk.carts;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import io.sphere.sdk.cartdiscounts.DiscountedLineItemPrice;
 import io.sphere.sdk.cartdiscounts.DiscountedLineItemPriceForQuantity;
 import io.sphere.sdk.channels.Channel;
+import io.sphere.sdk.json.SphereJsonUtils;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.products.Price;
@@ -39,7 +42,7 @@ final class LineItemImpl extends LineItemLikeImpl implements LineItem {
 
     @JsonCreator
     LineItemImpl(final String id, final String productId, final LocalizedString name,
-                 final ProductVariant variant, final Price price, final Long quantity,
+                 final JsonNode variant, final Price price, final Long quantity,
                  final Set<ItemState> state, final TaxRate taxRate,
                  final Reference<Channel> supplyChannel, final DiscountedLineItemPrice discountedPrice,
                  final LocalizedString productSlug, final Reference<Channel> distributionChannel,
@@ -48,7 +51,10 @@ final class LineItemImpl extends LineItemLikeImpl implements LineItem {
         super(id, state, quantity, discountedPrice);
         this.productId = productId;
         this.name = name;
-        this.variant = variant;
+        if (variant instanceof ObjectNode) {
+            ((ObjectNode) variant).put("productId", productId);
+        }
+        this.variant = SphereJsonUtils.readObject(variant, ProductVariant.class);
         this.price = price;
         this.taxRate = taxRate;
         this.supplyChannel = supplyChannel;
