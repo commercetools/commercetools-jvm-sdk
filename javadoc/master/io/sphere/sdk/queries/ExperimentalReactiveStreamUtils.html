@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":9,"i1":9};
+var methods = {"i0":9,"i1":9,"i2":9};
 var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -133,6 +133,12 @@ extends java.lang.Object</pre>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/ExperimentalReactiveStreamUtils.html#collectAll-org.reactivestreams.Publisher-">collectAll</a></span>(org.reactivestreams.Publisher&lt;T&gt;&nbsp;publisher)</code>&nbsp;</td>
 </tr>
 <tr id="i1" class="rowColor">
+<td class="colFirst"><code>static &lt;T,C extends <a href="../../../../io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries">QueryDsl</a>&lt;T,C&gt;&gt;<br>org.reactivestreams.Publisher&lt;T&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/ExperimentalReactiveStreamUtils.html#publisherOf-io.sphere.sdk.queries.QueryDsl-java.util.function.Function-io.sphere.sdk.client.SphereClient-">publisherOf</a></span>(<a href="../../../../io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries">QueryDsl</a>&lt;T,C&gt;&nbsp;seedQuery,
+           java.util.function.Function&lt;T,java.lang.String&gt;&nbsp;idExtractor,
+           <a href="../../../../io/sphere/sdk/client/SphereClient.html" title="interface in io.sphere.sdk.client">SphereClient</a>&nbsp;sphereClient)</code>&nbsp;</td>
+</tr>
+<tr id="i2" class="altColor">
 <td class="colFirst"><code>static &lt;T extends <a href="../../../../io/sphere/sdk/models/Identifiable.html" title="interface in io.sphere.sdk.models">Identifiable</a>&lt;T&gt;,C extends <a href="../../../../io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries">QueryDsl</a>&lt;T,C&gt;&gt;<br>org.reactivestreams.Publisher&lt;T&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/ExperimentalReactiveStreamUtils.html#publisherOf-io.sphere.sdk.queries.QueryDsl-io.sphere.sdk.client.SphereClient-">publisherOf</a></span>(<a href="../../../../io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries">QueryDsl</a>&lt;T,C&gt;&nbsp;seedQuery,
            <a href="../../../../io/sphere/sdk/client/SphereClient.html" title="interface in io.sphere.sdk.client">SphereClient</a>&nbsp;sphereClient)</code>&nbsp;</td>
@@ -167,6 +173,17 @@ extends java.lang.Object</pre>
 <h4>publisherOf</h4>
 <pre>public static&nbsp;&lt;T extends <a href="../../../../io/sphere/sdk/models/Identifiable.html" title="interface in io.sphere.sdk.models">Identifiable</a>&lt;T&gt;,C extends <a href="../../../../io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries">QueryDsl</a>&lt;T,C&gt;&gt;&nbsp;org.reactivestreams.Publisher&lt;T&gt;&nbsp;publisherOf(<a href="../../../../io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries">QueryDsl</a>&lt;T,C&gt;&nbsp;seedQuery,
                                                                                                                <a href="../../../../io/sphere/sdk/client/SphereClient.html" title="interface in io.sphere.sdk.client">SphereClient</a>&nbsp;sphereClient)</pre>
+</li>
+</ul>
+<a name="publisherOf-io.sphere.sdk.queries.QueryDsl-java.util.function.Function-io.sphere.sdk.client.SphereClient-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>publisherOf</h4>
+<pre>public static&nbsp;&lt;T,C extends <a href="../../../../io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries">QueryDsl</a>&lt;T,C&gt;&gt;&nbsp;org.reactivestreams.Publisher&lt;T&gt;&nbsp;publisherOf(<a href="../../../../io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries">QueryDsl</a>&lt;T,C&gt;&nbsp;seedQuery,
+                                                                                       java.util.function.Function&lt;T,java.lang.String&gt;&nbsp;idExtractor,
+                                                                                       <a href="../../../../io/sphere/sdk/client/SphereClient.html" title="interface in io.sphere.sdk.client">SphereClient</a>&nbsp;sphereClient)</pre>
 </li>
 </ul>
 <a name="collectAll-org.reactivestreams.Publisher-">
