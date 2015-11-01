@@ -2,9 +2,10 @@ package io.sphere.sdk.json;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.javamoney.moneta.function.MonetaryUtil;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
+import javax.money.Monetary;
+import javax.money.MonetaryAmount;
 
 import static org.apache.commons.lang3.StringUtils.isEmpty;
 
@@ -21,12 +22,11 @@ final class MoneyRepresentation {
     /**
      * Creates a new Money instance.
      * Money can't represent cent fractions. The value will be rounded to nearest cent value using RoundingMode.HALF_EVEN.
-     * @param amount the money value as fraction, e.g. 43.21 will be 4321 cents.
-     * @param currencyCode the ISO 4217 currency code
+     * @param monetaryAmount the amount with currency to transform
      */
     @JsonIgnore
-    public MoneyRepresentation(final BigDecimal amount, final String currencyCode) {
-        this(amountToCents(amount), requireValidCurrencyCode(currencyCode));
+    public MoneyRepresentation(final MonetaryAmount monetaryAmount) {
+        this(amountToCents(monetaryAmount), requireValidCurrencyCode(monetaryAmount.getCurrency().getCurrencyCode()));
     }
 
     public long getCentAmount() {
@@ -46,7 +46,9 @@ final class MoneyRepresentation {
         return currencyCode;
     }
 
-    public static long amountToCents(final BigDecimal centAmount) {
-        return centAmount.multiply(new BigDecimal(100)).setScale(0, RoundingMode.HALF_EVEN).longValue();
+    public static long amountToCents(final MonetaryAmount monetaryAmount) {
+        return monetaryAmount
+                .with(Monetary.getDefaultRounding())
+                .query(MonetaryUtil.minorUnits());
     }
 }

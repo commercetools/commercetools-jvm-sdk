@@ -26,7 +26,7 @@ final public class MoneyImpl extends Base implements MonetaryAmount {
 
     @Override
     public MonetaryAmount with(MonetaryOperator operator) {
-        return money.with(operator);
+        return of(money.with(operator));
     }
 
     @Override
@@ -91,112 +91,119 @@ final public class MoneyImpl extends Base implements MonetaryAmount {
 
     @Override
     public MonetaryAmount add(MonetaryAmount amount) {
-        return money.add(amount);
+        return of(money.add(amount));
     }
 
     @Override
     public MonetaryAmount subtract(MonetaryAmount amount) {
-        return money.subtract(amount);
+        return of(money.subtract(amount));
     }
 
     @Override
     public MonetaryAmount multiply(long multiplicand) {
-        return money.multiply(multiplicand);
+        return of(money.multiply(multiplicand));
     }
 
     @Override
     public MonetaryAmount multiply(double multiplicand) {
-        return money.multiply(multiplicand);
+        return of(money.multiply(multiplicand));
     }
 
     @Override
     public MonetaryAmount multiply(Number multiplicand) {
-        return money.multiply(multiplicand);
+        return of(money.multiply(multiplicand));
     }
 
     @Override
     public MonetaryAmount divide(long divisor) {
-        return money.divide(divisor);
+        return of(money.divide(divisor));
     }
 
     @Override
     public MonetaryAmount divide(double divisor) {
-        return money.divide(divisor);
+        return of(money.divide(divisor));
     }
 
     @Override
     public MonetaryAmount divide(Number divisor) {
-        return money.divide(divisor);
+        return of(money.divide(divisor));
     }
 
     @Override
     public MonetaryAmount remainder(long divisor) {
-        return money.remainder(divisor);
+        return of(money.remainder(divisor));
     }
 
     @Override
     public MonetaryAmount remainder(double divisor) {
-        return money.remainder(divisor);
+        return of(money.remainder(divisor));
     }
 
     @Override
     public MonetaryAmount remainder(Number divisor) {
-        return money.remainder(divisor);
+        return of(money.remainder(divisor));
+    }
+
+    private static MonetaryAmount[] of(final MonetaryAmount[] array) {
+        for (int i = 0; i < array.length; i++) {
+            array[i] = of(array[i]);
+        }
+        return array;
     }
 
     @Override
     public MonetaryAmount[] divideAndRemainder(long divisor) {
-        return money.divideAndRemainder(divisor);
+        return of(money.divideAndRemainder(divisor));
     }
 
     @Override
     public MonetaryAmount[] divideAndRemainder(double divisor) {
-        return money.divideAndRemainder(divisor);
+        return of(money.divideAndRemainder(divisor));
     }
 
     @Override
     public MonetaryAmount[] divideAndRemainder(Number divisor) {
-        return money.divideAndRemainder(divisor);
+        return of(money.divideAndRemainder(divisor));
     }
 
     @Override
     public MonetaryAmount divideToIntegralValue(long divisor) {
-        return money.divideToIntegralValue(divisor);
+        return of(money.divideToIntegralValue(divisor));
     }
 
     @Override
     public MonetaryAmount divideToIntegralValue(double divisor) {
-        return money.divideToIntegralValue(divisor);
+        return of(money.divideToIntegralValue(divisor));
     }
 
     @Override
     public MonetaryAmount divideToIntegralValue(Number divisor) {
-        return money.divideToIntegralValue(divisor);
+        return of(money.divideToIntegralValue(divisor));
     }
 
     @Override
     public MonetaryAmount scaleByPowerOfTen(int power) {
-        return money.scaleByPowerOfTen(power);
+        return of(money.scaleByPowerOfTen(power));
     }
 
     @Override
     public MonetaryAmount abs() {
-        return money.abs();
+        return of(money.abs());
     }
 
     @Override
     public MonetaryAmount negate() {
-        return money.negate();
+        return of(money.negate());
     }
 
     @Override
     public MonetaryAmount plus() {
-        return money.plus();
+        return of(money.plus());
     }
 
     @Override
     public MonetaryAmount stripTrailingZeros() {
-        return money.stripTrailingZeros();
+        return of(money.stripTrailingZeros());
     }
 
     @Override
@@ -263,7 +270,7 @@ final public class MoneyImpl extends Base implements MonetaryAmount {
     }
 
     public static MonetaryAmount ofCents(final long centAmount, final CurrencyUnit currencyUnit) {
-        return of(new BigDecimal(centAmount).divide(new BigDecimal("100")), currencyUnit);
+        return of(new BigDecimal(centAmount).divide(new BigDecimal(10).pow(currencyUnit.getDefaultFractionDigits())), currencyUnit);
     }
 
     public static MonetaryAmount of(final String value, final String currencyCode) {
