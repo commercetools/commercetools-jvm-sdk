@@ -1,9 +1,11 @@
 package io.sphere.sdk.http;
 
 import com.ning.http.client.*;
+import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.Optional;
@@ -55,20 +57,23 @@ final class AsyncHttpClientAdapterImpl extends Base implements AsyncHttpClientAd
                 .setUrl(request.getUrl())
                 .setMethod(request.getHttpMethod().toString());
 
-        request.getHeaders().getHeadersAsMap().forEach((name, values) -> values.forEach( value -> builder.addHeader(name, value)));
+        request.getHeaders().getHeadersAsMap().forEach((name, values) -> values.forEach(value -> builder.addHeader(name, value)));
 
         Optional.ofNullable(request.getBody()).ifPresent(body -> {
             if (body instanceof StringHttpRequestBody) {
                 final String bodyAsString = ((StringHttpRequestBody) body).getString();
                 builder.setBodyEncoding(StandardCharsets.UTF_8.name()).setBody(bodyAsString);
             } else if (body instanceof FileHttpRequestBody) {
-                builder.setBody(((FileHttpRequestBody) body).getFile());
+                final File file = ((FileHttpRequestBody) body).getFile();
+                builder.setBody(out -> FileUtils.copyFile(file, out));
+                final long length = file.length();
+                builder.addHeader(HttpHeaders.CONTENT_LENGTH, "" + length);
             } else if (body instanceof FormUrlEncodedHttpRequestBody) {
-                ((FormUrlEncodedHttpRequestBody) body).getData().forEach((name, value) -> builder.addQueryParameter(name, value));
+                ((FormUrlEncodedHttpRequestBody) body).getData().forEach((name, value) -> builder.addParameter(name, value));
             }
         });
-        final Request build = builder.build();
-        return build;
+        final Request ahcRequest = builder.build();
+        return ahcRequest;
     }
 
     @Override
