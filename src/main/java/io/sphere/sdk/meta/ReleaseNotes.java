@@ -5,6 +5,7 @@ import io.sphere.sdk.carts.LineItem;
 import io.sphere.sdk.carts.queries.CartByIdGet;
 import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.channels.queries.ChannelByIdGet;
+import io.sphere.sdk.client.SphereClient;
 import io.sphere.sdk.client.SphereRequest;
 import io.sphere.sdk.commands.UpdateActionImpl;
 import io.sphere.sdk.commands.UpdateCommand;
@@ -35,6 +36,7 @@ import io.sphere.sdk.products.queries.ProductProjectionByIdGet;
 import io.sphere.sdk.products.queries.ProductProjectionQuery;
 import io.sphere.sdk.products.queries.ProductProjectionQueryModel;
 import io.sphere.sdk.queries.Get;
+import io.sphere.sdk.queries.QueryDsl;
 import io.sphere.sdk.queries.QueryPredicate;
 import io.sphere.sdk.search.SearchKeywords;
 import io.sphere.sdk.taxcategories.TaxRate;
@@ -63,6 +65,16 @@ import java.util.function.Function;
  <li class=fixed-in-release></li>
  </ul>
  -->
+
+ <h3 class=released-version id="v1_0_0_M20">1.0.0-M20</h3>
+ <ul>
+  <li class=change-in-release>{@code query.withSort(m -> m.createdAt().sort(DESC));} is deprecated, use it with {@code query.withSort(m -> m.createdAt().sort().desc());}</li>
+  <li class=fixed-in-release>Duplicates with {@link io.sphere.sdk.queries.ExperimentalReactiveStreamUtils#publisherOf(QueryDsl, SphereClient)} on multiple parallel request(n) calls. See <a href="https://github.com/sphereio/sphere-jvm-sdk/issues/809">809</a>.</li>
+  <li class=fixed-in-release>Logger name shows query string. See <a href="https://github.com/sphereio/sphere-jvm-sdk/issues/802">802</a>.</li>
+  <li class=fixed-in-release>Missing Content-Length header in Async HTTP Client. See <a href="https://github.com/sphereio/sphere-jvm-sdk/issues/799">799</a>.</li>
+  <li class=fixed-in-release>variantIdentifier in {@link LineItem} is null. See <a href="https://github.com/sphereio/sphere-jvm-sdk/issues/771">771</a>.</li>
+ </ul>
+
 
  <h3 class=released-version id="v1_0_0_M19">1.0.0-M19</h3>
 
