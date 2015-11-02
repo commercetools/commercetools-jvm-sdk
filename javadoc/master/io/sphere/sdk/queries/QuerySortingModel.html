@@ -18,8 +18,8 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":6,"i1":6};
-var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],4:["t3","Abstract Methods"]};
+var methods = {"i0":6,"i1":38};
+var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],4:["t3","Abstract Methods"],32:["t6","Deprecated Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
 var tableTab = "tableTab";
@@ -118,7 +118,7 @@ var activeTableTab = "activeTableTab";
 </a>
 <h3>Method Summary</h3>
 <table class="memberSummary" border="0" cellpadding="3" cellspacing="0" summary="Method Summary table, listing methods, and an explanation">
-<caption><span id="t0" class="activeTableTab"><span>All Methods</span><span class="tabEnd">&nbsp;</span></span><span id="t2" class="tableTab"><span><a href="javascript:show(2);">Instance Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t3" class="tableTab"><span><a href="javascript:show(4);">Abstract Methods</a></span><span class="tabEnd">&nbsp;</span></span></caption>
+<caption><span id="t0" class="activeTableTab"><span>All Methods</span><span class="tabEnd">&nbsp;</span></span><span id="t2" class="tableTab"><span><a href="javascript:show(2);">Instance Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t3" class="tableTab"><span><a href="javascript:show(4);">Abstract Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t6" class="tableTab"><span><a href="javascript:show(32);">Deprecated Methods</a></span><span class="tabEnd">&nbsp;</span></span></caption>
 <tr>
 <th class="colFirst" scope="col">Modifier and Type</th>
 <th class="colLast" scope="col">Method and Description</th>
@@ -129,7 +129,9 @@ var activeTableTab = "activeTableTab";
 </tr>
 <tr id="i1" class="rowColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/queries/QuerySort.html" title="interface in io.sphere.sdk.queries">QuerySort</a>&lt;<a href="../../../../io/sphere/sdk/queries/QuerySortingModel.html" title="type parameter in QuerySortingModel">T</a>&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/QuerySortingModel.html#sort-io.sphere.sdk.queries.QuerySortDirection-">sort</a></span>(<a href="../../../../io/sphere/sdk/queries/QuerySortDirection.html" title="enum in io.sphere.sdk.queries">QuerySortDirection</a>&nbsp;sortDirection)</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/QuerySortingModel.html#sort-io.sphere.sdk.queries.QuerySortDirection-">sort</a></span>(<a href="../../../../io/sphere/sdk/queries/QuerySortDirection.html" title="enum in io.sphere.sdk.queries">QuerySortDirection</a>&nbsp;sortDirection)</code>
+<div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;</div>
+</td>
 </tr>
 </table>
 </li>
@@ -152,7 +154,16 @@ var activeTableTab = "activeTableTab";
 <ul class="blockList">
 <li class="blockList">
 <h4>sort</h4>
-<pre><a href="../../../../io/sphere/sdk/queries/QuerySort.html" title="interface in io.sphere.sdk.queries">QuerySort</a>&lt;<a href="../../../../io/sphere/sdk/queries/QuerySortingModel.html" title="type parameter in QuerySortingModel">T</a>&gt;&nbsp;sort(<a href="../../../../io/sphere/sdk/queries/QuerySortDirection.html" title="enum in io.sphere.sdk.queries">QuerySortDirection</a>&nbsp;sortDirection)</pre>
+<pre>@Deprecated
+<a href="../../../../io/sphere/sdk/queries/QuerySort.html" title="interface in io.sphere.sdk.queries">QuerySort</a>&lt;<a href="../../../../io/sphere/sdk/queries/QuerySortingModel.html" title="type parameter in QuerySortingModel">T</a>&gt;&nbsp;sort(<a href="../../../../io/sphere/sdk/queries/QuerySortDirection.html" title="enum in io.sphere.sdk.queries">QuerySortDirection</a>&nbsp;sortDirection)</pre>
+<div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;</div>
+<div class="block">Use <a href="../../../../io/sphere/sdk/queries/QuerySortingModel.html#sort--"><code>sort()</code></a> instead.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>sortDirection</code> - the direction to sort with</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>query sort</dd>
+</dl>
 </li>
 </ul>
 <a name="sort--">
