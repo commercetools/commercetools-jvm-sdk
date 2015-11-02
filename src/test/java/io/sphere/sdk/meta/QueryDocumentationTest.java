@@ -11,12 +11,12 @@ import io.sphere.sdk.products.expansion.ProductProjectionExpansionModel;
 import io.sphere.sdk.products.queries.ProductProjectionQuery;
 import io.sphere.sdk.products.queries.ProductQuery;
 import io.sphere.sdk.products.queries.ProductQueryModel;
-import io.sphere.sdk.queries.*;
+import io.sphere.sdk.queries.QueryPredicate;
+import io.sphere.sdk.queries.QuerySort;
 import org.junit.Test;
 
 import static io.sphere.sdk.products.ProductProjectionType.CURRENT;
 import static io.sphere.sdk.products.ProductProjectionType.STAGED;
-import static io.sphere.sdk.queries.QuerySortDirection.ASC;
 import static io.sphere.sdk.queries.QuerySortDirection.DESC;
 import static java.util.Arrays.asList;
 import static java.util.Locale.ENGLISH;
@@ -94,21 +94,21 @@ public class QueryDocumentationTest {
 
     public void sortByName() {
         final QuerySort<Product> byNameAsc = ProductQueryModel.of().masterData().current().name()
-                .lang(ENGLISH).sort(ASC);
+                .lang(ENGLISH).sort().asc();
         final ProductQuery query = ProductQuery.of().withSort(asList(byNameAsc));
     }
 
     public void sortByNameAscAndIdDesc() {
         final QuerySort<Product> byNameAsc = ProductQueryModel.of().masterData().current().name()
-                .lang(ENGLISH).sort(ASC);
-        final QuerySort<Product> byIdDesc = ProductQueryModel.of().id().sort(DESC);
+                .lang(ENGLISH).sort().asc();
+        final QuerySort<Product> byIdDesc = ProductQueryModel.of().id().sort().by(DESC);
         final ProductQuery query = ProductQuery.of().withSort(asList(byNameAsc, byIdDesc));
     }
 
     @Test
     public void sortCreationByString() {
         final QuerySort<Product> safeSort = ProductQueryModel.of().masterData().current().name()
-                .lang(ENGLISH).sort(ASC);
+                .lang(ENGLISH).sort().asc();
         final QuerySort<Product> unsafeSort = QuerySort.of("masterData.current.name.en asc");
         assertThat(safeSort).isEqualTo(unsafeSort);
     }

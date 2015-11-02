@@ -31,6 +31,7 @@ public interface LongQuerySortingModel<T> extends QueryModel<T>, QuerySortingMod
     @Override
     QueryPredicate<T> isPresent();
 
+    @Deprecated
     @Override
     QuerySort<T> sort(QuerySortDirection sortDirection);
 }

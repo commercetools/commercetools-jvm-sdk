@@ -189,7 +189,7 @@ public class ProductProjectionQueryTest extends IntegrationTest {
             final Product updated = execute(ProductUpdateCommand.of(product, ChangeName.of(randomSlug())));
             final PagedQueryResult<ProductProjection> pagedQueryResult = execute(ProductProjectionQuery.of(STAGED)
                     .withPredicates(m -> m.hasStagedChanges().is(true))
-                    .withSort(m -> m.createdAt().sort(DESC)));
+                    .withSort(m -> m.createdAt().sort().desc()));
             assertThat(ids(pagedQueryResult)).contains(updated.getId());
         });
     }

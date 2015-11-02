@@ -47,8 +47,8 @@ public class QueryDemo {
     private void withPagination() {
         QueryPredicate<Category> predicate = CategoryQueryModel.of().name().lang(locale).is("demo cat");
 
-        QuerySort<Category> sortByName = CategoryQueryModel.of().name().lang(locale).sort(QuerySortDirection.DESC);
-        QuerySort<Category> sortById = CategoryQueryModel.of().id().sort(QuerySortDirection.ASC);
+        QuerySort<Category> sortByName = CategoryQueryModel.of().name().lang(locale).sort().desc();
+        QuerySort<Category> sortById = CategoryQueryModel.of().id().sort().asc();
         List<QuerySort<Category>> sort = Arrays.asList(sortByName, sortById);//sort by name desc and then by ID if name is the same
 
         int offset = 1;//skip first page

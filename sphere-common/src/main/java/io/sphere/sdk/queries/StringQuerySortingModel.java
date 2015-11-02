@@ -1,6 +1,7 @@
 package io.sphere.sdk.queries;
 
 public interface StringQuerySortingModel<T> extends QuerySortingModel<T>, StringQueryModel<T> {
+    @Deprecated
     @Override
     QuerySort<T> sort(QuerySortDirection sortDirection);
 

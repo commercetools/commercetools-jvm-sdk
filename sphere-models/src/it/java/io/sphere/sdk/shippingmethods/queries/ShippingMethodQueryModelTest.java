@@ -5,13 +5,12 @@ import io.sphere.sdk.shippingmethods.ShippingMethod;
 import io.sphere.sdk.test.IntegrationTest;
 import org.junit.Test;
 
-import static io.sphere.sdk.queries.QuerySortDirection.DESC;
 import static io.sphere.sdk.shippingmethods.ShippingMethodFixtures.withShippingMethod;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class ShippingMethodQueryModelTest extends IntegrationTest {
 
-    public static final QuerySort<ShippingMethod> BY_CREATED_AT_DESC = ShippingMethodQueryModel.of().createdAt().sort(DESC);
+    public static final QuerySort<ShippingMethod> BY_CREATED_AT_DESC = ShippingMethodQueryModel.of().createdAt().sort().desc();
 
     @Test
     public void queryByName() throws Exception {
