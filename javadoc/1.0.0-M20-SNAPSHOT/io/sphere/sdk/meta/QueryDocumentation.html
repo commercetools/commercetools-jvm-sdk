@@ -171,8 +171,8 @@ Query&lt;Category&gt; query = CategoryQuery.of().withPredicates(predicate);
 
  <div id="io-sphere-sdk-queries-QueryDemo-withPagination--%s" class=code-example><pre><code class='java'>QueryPredicate&lt;Category&gt; predicate = CategoryQueryModel.of().name().lang(locale).is("demo cat");
 
-QuerySort&lt;Category&gt; sortByName = CategoryQueryModel.of().name().lang(locale).sort(QuerySortDirection.DESC);
-QuerySort&lt;Category&gt; sortById = CategoryQueryModel.of().id().sort(QuerySortDirection.ASC);
+QuerySort&lt;Category&gt; sortByName = CategoryQueryModel.of().name().lang(locale).sort().desc();
+QuerySort&lt;Category&gt; sortById = CategoryQueryModel.of().id().sort().asc();
 List&lt;QuerySort&lt;Category&gt;&gt; sort = Arrays.asList(sortByName, sortById);//sort by name desc and then by ID if name is the same
 
 int offset = 1;//skip first page
@@ -327,15 +327,15 @@ assertThat(query.predicates()).isEqualTo(asList(QueryPredicate.of("not(masterDat
  The following example sorts by name in the English locale.
 
  <div id="io-sphere-sdk-meta-QueryDocumentationTest-sortByName--%s" class=code-example><pre><code class='java'>final QuerySort&lt;Product&gt; byNameAsc = ProductQueryModel.of().masterData().current().name()
-        .lang(ENGLISH).sort(ASC);
+        .lang(ENGLISH).sort().asc();
 final ProductQuery query = ProductQuery.of().withSort(asList(byNameAsc));
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/src/test/java/io/sphere/sdk/meta/QueryDocumentationTest.java" target="_blank">test code</a>.</pre></div>
 
  You can sort by multiple values, for example, for name sort ascending, and for ID sort descending:
 
  <div id="io-sphere-sdk-meta-QueryDocumentationTest-sortByNameAscAndIdDesc--%s" class=code-example><pre><code class='java'>final QuerySort&lt;Product&gt; byNameAsc = ProductQueryModel.of().masterData().current().name()
-        .lang(ENGLISH).sort(ASC);
-final QuerySort&lt;Product&gt; byIdDesc = ProductQueryModel.of().id().sort(DESC);
+        .lang(ENGLISH).sort().asc();
+final QuerySort&lt;Product&gt; byIdDesc = ProductQueryModel.of().id().sort().by(DESC);
 final ProductQuery query = ProductQuery.of().withSort(asList(byNameAsc, byIdDesc));
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/src/test/java/io/sphere/sdk/meta/QueryDocumentationTest.java" target="_blank">test code</a>.</pre></div>
 
@@ -344,7 +344,7 @@ Like for predicates, you can traverse the query model tree in the same way to sp
  <p>If the SDK lacks of a method to create the sort expression, you can still provide it via a string:</p>
 
  <div id="io-sphere-sdk-meta-QueryDocumentationTest-sortCreationByString--%s" class=code-example><pre><code class='java'>final QuerySort&lt;Product&gt; safeSort = ProductQueryModel.of().masterData().current().name()
-        .lang(ENGLISH).sort(ASC);
+        .lang(ENGLISH).sort().asc();
 final QuerySort&lt;Product&gt; unsafeSort = QuerySort.of("masterData.current.name.en asc");
 assertThat(safeSort).isEqualTo(unsafeSort);
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/src/test/java/io/sphere/sdk/meta/QueryDocumentationTest.java" target="_blank">test code</a>.</pre></div>
