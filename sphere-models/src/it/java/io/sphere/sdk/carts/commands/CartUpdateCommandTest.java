@@ -242,7 +242,7 @@ public class CartUpdateCommandTest extends IntegrationTest {
                 assertThat(cartWithShippingMethod.getShippingInfo().getShippingMethod()).isEqualTo(shippingMethod.toReference());
 
                 //remove shipping method
-                final Cart cartWithoutShippingMethod = execute(CartUpdateCommand.of(cart, SetShippingMethod.ofRemove()));
+                final Cart cartWithoutShippingMethod = execute(CartUpdateCommand.of(cartWithShippingMethod, SetShippingMethod.ofRemove()));
                 assertThat(cartWithoutShippingMethod.getShippingInfo()).isNull();
 
                 return cartWithoutShippingMethod;
