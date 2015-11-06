@@ -210,6 +210,31 @@ assertThat(formatted).isEqualTo("1234.56 $");
 
  <p>&#x00A4; is the currency sign which can be formatted with the styles <code>CurrencyStyle.CODE</code>, <code>CurrencyStyle.NAME</code>, <code>CurrencyStyle.NUMERIC_CODE</code> and <code>CurrencyStyle.SYMBOL</code>.</p>
 
+ <h4 id="obtain-minor-unit-amount">Obtain the cent amounts</h4>
+
+ Use <code>MonetaryUtil.minorUnits()</code> to get the <em>whole amount</em> as cents:
+
+ <div id="io-sphere-sdk-meta-FormattingDocumentationTest-getAmountInCents--%s" class=code-example><pre><code class='java'>final MonetaryAmount amount = MoneyImpl.of(new BigDecimal("1234.56"), "EUR");
+final Long centAmount = amount.query(MonetaryUtil.minorUnits());
+assertThat(centAmount).isEqualTo(123456);
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/src/test/java/io/sphere/sdk/meta/FormattingDocumentationTest.java" target="_blank">test code</a>.</pre></div>
+
+ Use <code>MonetaryUtil.minorPart()</code> and <code>MonetaryUtil.minorUnits()</code> to get the <em>minor unit (cent) part</em>:
+
+ <div id="io-sphere-sdk-meta-FormattingDocumentationTest-getCents--%s" class=code-example><pre><code class='java'>final MonetaryAmount amount = MoneyImpl.of(new BigDecimal("1234.56"), "EUR");
+final Long centPart = amount.with(MonetaryUtil.minorPart()).query(MonetaryUtil.minorUnits());
+assertThat(centPart).isEqualTo(56);
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/src/test/java/io/sphere/sdk/meta/FormattingDocumentationTest.java" target="_blank">test code</a>.</pre></div>
+
+ <h4 id="major-unit-amount">Obtain the smooth amount</h4>
+
+ Use <code>MonetaryUtil.majorUnits()</code> to get the smooth amount:
+
+ <div id="io-sphere-sdk-meta-FormattingDocumentationTest-getMajorUnitAmount--%s" class=code-example><pre><code class='java'>final MonetaryAmount amount = MoneyImpl.of(new BigDecimal("1234.56"), "EUR");
+final Long centAmount = amount.query(MonetaryUtil.majorUnits());
+assertThat(centAmount).isEqualTo(1234);
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/src/test/java/io/sphere/sdk/meta/FormattingDocumentationTest.java" target="_blank">test code</a>.</pre></div>
+
  <h4 id="sorting-money-values">Sorting MonetaryAmount values</h4>
 
  <p>By the amount:</p>
