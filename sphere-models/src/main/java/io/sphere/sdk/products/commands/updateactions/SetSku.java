@@ -20,7 +20,7 @@ public class SetSku extends UpdateActionImpl<Product> {
     @Nullable
     private final String sku;
 
-    private SetSku(final Integer variantId, final String sku) {
+    private SetSku(final Integer variantId, @Nullable final String sku) {
         super("setSKU");
         this.variantId = variantId;
         this.sku = sku;

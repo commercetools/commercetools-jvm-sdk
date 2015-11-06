@@ -30,11 +30,11 @@ public final class SetAuthorization extends UpdateActionImpl<Payment> {
         this.until = until;
     }
 
-    public static SetAuthorization of(final MonetaryAmount amount) {
+    public static SetAuthorization of(@Nullable final MonetaryAmount amount) {
         return of(amount, null);
     }
 
-    public static SetAuthorization of(final MonetaryAmount amount, final ZonedDateTime until) {
+    public static SetAuthorization of(@Nullable final MonetaryAmount amount, final ZonedDateTime until) {
         return new SetAuthorization(amount, until);
     }
 

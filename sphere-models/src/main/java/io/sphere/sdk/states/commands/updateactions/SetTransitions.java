@@ -16,7 +16,7 @@ public class SetTransitions extends UpdateActionImpl<State> {
     @Nullable
     private final Set<Reference<State>> transitions;
 
-    private SetTransitions(final Set<Reference<State>> transitions) {
+    private SetTransitions(@Nullable final Set<Reference<State>> transitions) {
         super("setTransitions");
         this.transitions = transitions;
     }
