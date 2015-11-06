@@ -17,9 +17,7 @@ final class MoneySerializer extends StdScalarSerializer<MonetaryAmount> {
 
     @Override
     public void serialize(final MonetaryAmount monetaryAmount, final JsonGenerator jsonGenerator, final SerializerProvider serializerProvider) throws IOException {
-        final BigDecimal value = monetaryAmount.getNumber().numberValue(BigDecimal.class);
-        final String currencyCode = monetaryAmount.getCurrency().getCurrencyCode();
-        final MoneyRepresentation moneyRepresentation = new MoneyRepresentation(value, currencyCode);
+        final MoneyRepresentation moneyRepresentation = new MoneyRepresentation(monetaryAmount);
         jsonGenerator.writeObject(moneyRepresentation);
     }
 }

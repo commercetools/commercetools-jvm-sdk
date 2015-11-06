@@ -1,6 +1,7 @@
 package io.sphere.sdk.meta;
 
 import org.javamoney.moneta.format.CurrencyStyle;
+import org.javamoney.moneta.function.MonetaryUtil;
 
 import java.time.format.DateTimeFormatter;
 
@@ -51,6 +52,22 @@ import java.time.format.DateTimeFormatter;
  * {@include.example io.sphere.sdk.meta.FormattingDocumentationTest#formatMoneyCustom3()}
  *
  * <p>&#x00A4; is the currency sign which can be formatted with the styles {@link CurrencyStyle#CODE}, {@link CurrencyStyle#NAME}, {@link CurrencyStyle#NUMERIC_CODE} and {@link CurrencyStyle#SYMBOL}.</p>
+ *
+ * <h4 id="obtain-minor-unit-amount">Obtain the cent amounts</h4>
+ *
+ * Use {@link MonetaryUtil#minorUnits()} to get the <em>whole amount</em> as cents:
+ *
+ * {@include.example io.sphere.sdk.meta.FormattingDocumentationTest#getAmountInCents()}
+ *
+ * Use {@link MonetaryUtil#minorPart()} and {@link MonetaryUtil#minorUnits()} to get the <em>minor unit (cent) part</em>:
+ *
+ * {@include.example io.sphere.sdk.meta.FormattingDocumentationTest#getCents()}
+ *
+ * <h4 id="major-unit-amount">Obtain the smooth amount</h4>
+ *
+ * Use {@link MonetaryUtil#majorUnits()} to get the smooth amount:
+ *
+ * {@include.example io.sphere.sdk.meta.FormattingDocumentationTest#getMajorUnitAmount()}
  *
  * <h4 id="sorting-money-values">Sorting MonetaryAmount values</h4>
  *

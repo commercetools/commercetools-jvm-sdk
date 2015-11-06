@@ -7,7 +7,6 @@ import io.sphere.sdk.utils.MoneyImpl;
 
 import javax.money.MonetaryAmount;
 import java.io.IOException;
-import java.math.BigDecimal;
 
 final class MoneyDeserializer extends StdScalarDeserializer<MonetaryAmount> {
     private static final long serialVersionUID = 0L;
@@ -19,8 +18,7 @@ final class MoneyDeserializer extends StdScalarDeserializer<MonetaryAmount> {
     @Override
     public MonetaryAmount deserialize(final JsonParser jsonParser, final DeserializationContext deserializationContext) throws IOException {
         final MoneyRepresentation moneyRepresentation = deserializationContext.readValue(jsonParser, MoneyRepresentation.class);
-        final BigDecimal amount = new BigDecimal(moneyRepresentation.getCentAmount()).divide(new BigDecimal(100));
         final String currencyCode = moneyRepresentation.getCurrencyCode();
-        return MoneyImpl.of(amount, currencyCode);
+        return MoneyImpl.ofCents(moneyRepresentation.getCentAmount(), currencyCode);
     }
 }

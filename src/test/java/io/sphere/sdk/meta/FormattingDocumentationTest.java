@@ -4,6 +4,7 @@ import io.sphere.sdk.models.DefaultCurrencyUnits;
 import io.sphere.sdk.utils.MoneyImpl;
 import org.javamoney.moneta.format.CurrencyStyle;
 import org.javamoney.moneta.function.MonetaryFunctions;
+import org.javamoney.moneta.function.MonetaryUtil;
 import org.junit.Test;
 
 import javax.money.Monetary;
@@ -156,5 +157,26 @@ public class FormattingDocumentationTest {
                 .isEqualTo("09.07.2015 03:46");
         assertThat(dateTime.withZoneSameInstant(ZoneId.of("America/Los_Angeles")).format(formatter))
                 .isEqualTo("09.07.2015 00:46");
+    }
+
+    @Test
+    public void getAmountInCents() throws Exception {
+        final MonetaryAmount amount = MoneyImpl.of(new BigDecimal("1234.56"), "EUR");
+        final Long centAmount = amount.query(MonetaryUtil.minorUnits());
+        assertThat(centAmount).isEqualTo(123456);
+    }
+
+    @Test
+    public void getCents() throws Exception {
+        final MonetaryAmount amount = MoneyImpl.of(new BigDecimal("1234.56"), "EUR");
+        final Long centPart = amount.with(MonetaryUtil.minorPart()).query(MonetaryUtil.minorUnits());
+        assertThat(centPart).isEqualTo(56);
+    }
+
+    @Test
+    public void getMajorUnitAmount() throws Exception {
+        final MonetaryAmount amount = MoneyImpl.of(new BigDecimal("1234.56"), "EUR");
+        final Long centAmount = amount.query(MonetaryUtil.majorUnits());
+        assertThat(centAmount).isEqualTo(1234);
     }
 }

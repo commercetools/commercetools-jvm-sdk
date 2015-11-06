@@ -3,11 +3,9 @@ package io.sphere.sdk.products.commands;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonUnwrapped;
 import io.sphere.sdk.categories.Category;
-import io.sphere.sdk.products.CategoryOrderHints;
 import io.sphere.sdk.commands.UpdateAction;
 import io.sphere.sdk.messages.queries.MessageQuery;
 import io.sphere.sdk.models.*;
-import io.sphere.sdk.orders.messages.OrderStateChangedMessage;
 import io.sphere.sdk.products.*;
 import io.sphere.sdk.products.attributes.AttributeAccess;
 import io.sphere.sdk.products.attributes.AttributeDraft;
@@ -20,8 +18,6 @@ import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.search.SearchKeyword;
 import io.sphere.sdk.search.SearchKeywords;
 import io.sphere.sdk.search.tokenizer.CustomSuggestTokenizer;
-import io.sphere.sdk.states.StateFixtures;
-import io.sphere.sdk.states.StateType;
 import io.sphere.sdk.suppliers.TShirtProductTypeDraftSupplier.Colors;
 import io.sphere.sdk.suppliers.TShirtProductTypeDraftSupplier.Sizes;
 import io.sphere.sdk.taxcategories.TaxCategoryFixtures;
@@ -32,6 +28,7 @@ import io.sphere.sdk.utils.MoneyImpl;
 import org.junit.Test;
 
 import javax.money.MonetaryAmount;
+import java.math.BigDecimal;
 import java.time.ZoneOffset;
 import java.util.Collections;
 import java.util.List;
@@ -41,7 +38,6 @@ import java.util.Random;
 import static io.sphere.sdk.models.DefaultCurrencyUnits.EUR;
 import static io.sphere.sdk.models.LocalizedString.ofEnglishLocale;
 import static io.sphere.sdk.products.ProductFixtures.*;
-import static io.sphere.sdk.states.StateFixtures.withState;
 import static io.sphere.sdk.states.StateFixtures.withStateByBuilder;
 import static io.sphere.sdk.states.StateType.PRODUCT_STATE;
 import static io.sphere.sdk.suppliers.TShirtProductTypeDraftSupplier.MONEY_ATTRIBUTE_NAME;
@@ -69,6 +65,12 @@ public class ProductUpdateCommandTest extends IntegrationTest {
     @Test
     public void addPrice() throws Exception {
         final Price expectedPrice = Price.of(MoneyImpl.of(123, EUR));
+        testAddPrice(expectedPrice);
+    }
+
+    @Test
+    public void addPriceYen() throws Exception {
+        final Price expectedPrice = Price.of(MoneyImpl.of(new BigDecimal("12345"), "JPY"));
         testAddPrice(expectedPrice);
     }
 
