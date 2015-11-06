@@ -6,6 +6,7 @@ import javax.annotation.Nullable;
 import java.util.List;
 import java.util.function.Function;
 
+import static java.util.Arrays.asList;
 import static java.util.Collections.singletonList;
 
 abstract class RangeFacetBaseSearchModel<T, V extends Comparable<? super V>> extends FacetSearchModel<T, V> {
@@ -16,6 +17,15 @@ abstract class RangeFacetBaseSearchModel<T, V extends Comparable<? super V>> ext
 
     RangeFacetBaseSearchModel(@Nullable final SearchModel<T> parent, final Function<V, String> typeSerializer) {
         super(parent, typeSerializer);
+    }
+
+    /**
+     * Generates an expression to obtain the facets of the attribute for all values.
+     * For example: a possible faceted classification could be ["red": 4, "yellow": 2, "blue": 1].
+     * @return a facet expression for all values
+     */
+    public RangeFacetExpression<T> allRanges() {
+        return onlyRangeAsString(asList(FacetRange.lessThan("0"), FacetRange.atLeast("0")));
     }
 
     /**
@@ -61,28 +71,33 @@ abstract class RangeFacetBaseSearchModel<T, V extends Comparable<? super V>> ext
 
     /**
      * Generates an expression to obtain the facet of the attribute for only values less than the given value.
-     * For example: a possible faceted classification for (-∞, 5] could be ["3": 4, "1": 3, "5": 2, "4": 1].
-     * @param value the upper endpoint of the range (-∞, v]
+     * For example: a possible faceted classification for (-∞, 5) could be ["3": 4, "1": 3, "4": 1].
+     * @param value the upper endpoint of the range (-∞, v)
      * @return a facet expression for only the given range
      */
     public RangeFacetExpression<T> onlyLessThan(final V value) {
         return onlyRange(FacetRange.lessThan(value));
     }
 
-    // NOT SUPPORTED YET
-/*
-    public RangeFacetExpression<T> onlyGreaterThan(final V value) {
-        return range(Range.greaterThan(value));
+    /**
+     * Generates an expression to obtain the facet of the attribute for only the given range.
+     * For example: a possible faceted classification for [3, 5] could be ["3": 4, "5": 2, "4": 1].
+     * @param range the range of values (as string) to be present in the facet
+     * @return a facet expression for only the given range
+     */
+    public RangeFacetExpression<T> onlyRangeAsString(final FacetRange<String> range) {
+        return onlyRangeAsString(singletonList(range));
     }
 
-    public RangeFacetExpression<T> onlyLessThanOrEqualTo(final V value) {
-        return range(Range.atMost(value));
+    /**
+     * Generates an expression to obtain the facet of the attribute for only the given ranges.
+     * For example: a possible faceted classification for [[3, 5], [8, 9]] could be ["3": 4, "9": 3, "5": 2, "4": 1].
+     * @param ranges the ranges of values (as string) to be present in the facet
+     * @return a facet expression for only the given ranges
+     */
+    public RangeFacetExpression<T> onlyRangeAsString(final Iterable<FacetRange<String>> ranges) {
+        return new RangeFacetExpressionImpl<>(this, TypeSerializer.ofString(), ranges, alias);
     }
-
-    public RangeFacetExpression<T> allRanges() {
-        return range(Range.all());
-    }
-*/
 
     /**
      * Generates an expression to obtain the facet of the attribute for only the given range.
@@ -90,7 +105,9 @@ abstract class RangeFacetBaseSearchModel<T, V extends Comparable<? super V>> ext
      * @param lowerEndpoint the lower endpoint of the range of values to be present in the facet, inclusive
      * @param upperEndpoint the upper endpoint of the range of values to be present in the facet, inclusive
      * @return a facet expression for only the given range
+     * @deprecated use {@link #onlyRangeAsString(FacetRange)}
      */
+    @Deprecated
     public RangeFacetExpression<T> onlyRangeAsString(final String lowerEndpoint, final String upperEndpoint) {
         final List<FacetRange<String>> ranges = singletonList(FacetRange.of(lowerEndpoint, upperEndpoint));
         return new RangeFacetExpressionImpl<>(this, TypeSerializer.ofString(), ranges, alias);

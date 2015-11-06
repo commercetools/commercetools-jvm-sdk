@@ -125,8 +125,8 @@ public class ProductProjectionSearchModelIntegrationTest extends IntegrationTest
     protected static final ZonedDateTime DATE_TIME_2001_22H = ZonedDateTime.parse("2001-09-11T22:05:09.203+00:00");
     protected static final ZonedDateTime DATE_TIME_2002_23H = ZonedDateTime.parse("2002-10-12T23:06:10.204+00:00");
 
-    @Rule
-    public RetryIntegrationTest retry = new RetryIntegrationTest(10, 10000, LoggerFactory.getLogger(this.getClass()));
+//    @Rule
+//    public RetryIntegrationTest retry = new RetryIntegrationTest(10, 10000, LoggerFactory.getLogger(this.getClass()));
 
     @BeforeClass
     public static void setupProducts() {

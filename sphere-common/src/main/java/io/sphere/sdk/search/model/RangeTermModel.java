@@ -14,4 +14,11 @@ interface RangeTermModel<T, V extends Comparable<? super V>> {
      */
     RangeFacetSearchModel<T, V> faceted();
 
+    /**
+     * Eventually generates both an expression to obtain the facets of the attribute for all ranges
+     * and an expression to filter elements by certain range of values.
+     * @return the model to specify the values from which to obtain the facets and to filter by
+     */
+    RangeFacetAndFilterSearchModel<T, V> facetedAndFiltered();
+
 }

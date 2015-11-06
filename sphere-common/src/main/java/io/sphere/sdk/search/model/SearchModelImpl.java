@@ -68,12 +68,20 @@ public class SearchModelImpl<T> extends Base implements SearchModel<T> {
         return new LocalizedStringFacetSearchModel<>(this, pathSegment);
     }
 
+    protected LocalizedStringFacetAndFilterSearchModel<T> localizedStringFacetAndFilterSearchModel(final String pathSegment) {
+        return new LocalizedStringFacetAndFilterSearchModel<>(this, pathSegment);
+    }
+
     protected EnumFilterSearchModel<T> enumFilterSearchModel(final String pathSegment) {
         return new EnumFilterSearchModel<>(this, pathSegment);
     }
 
     protected EnumFacetSearchModel<T> enumFacetSearchModel(final String pathSegment) {
         return new EnumFacetSearchModel<>(this, pathSegment);
+    }
+
+    protected EnumFacetAndFilterSearchModel<T> enumFacetAndFilterSearchModel(final String pathSegment) {
+        return new EnumFacetAndFilterSearchModel<>(this, pathSegment);
     }
 
     protected LocalizedEnumFilterSearchModel<T> localizedEnumFilterSearchModel(final String pathSegment) {
@@ -84,6 +92,10 @@ public class SearchModelImpl<T> extends Base implements SearchModel<T> {
         return new LocalizedEnumFacetSearchModel<>(this, pathSegment);
     }
 
+    protected LocalizedEnumFacetAndFilterSearchModel<T> localizedEnumFacetAndFilterSearchModel(final String pathSegment) {
+        return new LocalizedEnumFacetAndFilterSearchModel<>(this, pathSegment);
+    }
+
     protected MoneyFilterSearchModel<T> moneyFilterSearchModel(final String pathSegment) {
         return new MoneyFilterSearchModel<>(this, pathSegment);
     }
@@ -92,11 +104,19 @@ public class SearchModelImpl<T> extends Base implements SearchModel<T> {
         return new MoneyFacetSearchModel<>(this, pathSegment);
     }
 
+    protected MoneyFacetAndFilterSearchModel<T> moneyFacetAndFilterSearchModel(final String pathSegment) {
+        return new MoneyFacetAndFilterSearchModel<>(this, pathSegment);
+    }
+
     protected ReferenceFilterSearchModel<T> referenceFilterSearchModel(final String pathSegment) {
         return new ReferenceFilterSearchModel<>(this, pathSegment);
     }
 
     protected ReferenceFacetSearchModel<T> referenceFacetSearchModel(final String pathSegment) {
         return new ReferenceFacetSearchModel<>(this, pathSegment);
+    }
+
+    protected ReferenceFacetAndFilterSearchModel<T> referenceFacetAndFilterSearchModel(final String pathSegment) {
+        return new ReferenceFacetAndFilterSearchModel<>(this, pathSegment);
     }
 }

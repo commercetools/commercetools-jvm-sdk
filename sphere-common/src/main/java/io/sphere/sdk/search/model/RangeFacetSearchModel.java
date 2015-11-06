@@ -27,6 +27,11 @@ public class RangeFacetSearchModel<T, V extends Comparable<? super V>> extends R
     }
 
     @Override
+    public RangeFacetExpression<T> allRanges() {
+        return super.allRanges();
+    }
+
+    @Override
     public FilteredFacetExpression<T> onlyTerm(final V value) {
         return super.onlyTerm(value);
     }
