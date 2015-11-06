@@ -1,6 +1,7 @@
 package io.sphere.sdk.orders.commands;
 
 import io.sphere.sdk.cartdiscounts.DiscountedLineItemPriceForQuantity;
+import io.sphere.sdk.json.SphereJsonUtils;
 import io.sphere.sdk.products.attributes.Attribute;
 import io.sphere.sdk.products.attributes.AttributeImportDraft;
 import io.sphere.sdk.cartdiscounts.DiscountedLineItemPrice;
@@ -24,6 +25,7 @@ import java.math.BigDecimal;
 import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Set;
+import java.util.UUID;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
@@ -220,8 +222,8 @@ public class OrderImportCommandTest extends IntegrationTest {
                 final Reference<ShippingMethod> shippingMethodRef = shippingMethod.toReference();
                 final ZonedDateTime createdAt = SphereTestUtils.now().minusSeconds(4);
                 final ParcelMeasurements parcelMeasurements = ParcelMeasurements.of(2, 3, 1, 3);
-                final DeliveryItem deliveryItem = DeliveryItem.of(new LineItemLike() {
-                    private final String id = randomKey();
+                final LineItemLike lineItem = new LineItemLike() {
+                    private final String id = randomUUID();
 
                     @Override
                     public String getId() {
@@ -258,11 +260,12 @@ public class OrderImportCommandTest extends IntegrationTest {
                     public CustomFields getCustom() {
                         return null;
                     }
-                }, 5);
-                final String deliveryId = randomKey();
+                };
+                final DeliveryItem deliveryItem = DeliveryItem.of(lineItem, 5);
+                final String deliveryId = randomUUID();
                 final TrackingData trackingData = TrackingData.of().withTrackingId("tracking id")
                         .withCarrier("carrier").withProvider("provider").withProviderTransaction("prov transaction").withIsReturn(true);
-                final Parcel parcel = Parcel.of(randomKey(), createdAt, parcelMeasurements, trackingData);
+                final Parcel parcel = Parcel.of(randomUUID(), createdAt, parcelMeasurements, trackingData);
                 final List<Delivery> deliveries = asList(Delivery.of(deliveryId, createdAt, asList(deliveryItem), asList(parcel)));
                 final OrderShippingInfo shippingInfo = OrderShippingInfo.of(randomString(), price, shippingRate, taxRate, taxCategoryRef, shippingMethodRef, deliveries);
                 testOrderAspect(
@@ -271,6 +274,10 @@ public class OrderImportCommandTest extends IntegrationTest {
                 );
             });
         });
+    }
+
+    private String randomUUID() {
+        return UUID.randomUUID().toString();
     }
 
     @Test
@@ -383,6 +390,7 @@ public class OrderImportCommandTest extends IntegrationTest {
 
             final Order order = execute(cmd);
             orderConsumer.accept(order);
+            client().execute(OrderDeleteCommand.of(order));
         });
     }
 }
