@@ -34,7 +34,7 @@ public final class SetAuthorization extends UpdateActionImpl<Payment> {
         return of(amount, null);
     }
 
-    public static SetAuthorization of(@Nullable final MonetaryAmount amount, final ZonedDateTime until) {
+    public static SetAuthorization of(@Nullable final MonetaryAmount amount, @Nullable final ZonedDateTime until) {
         return new SetAuthorization(amount, until);
     }
 

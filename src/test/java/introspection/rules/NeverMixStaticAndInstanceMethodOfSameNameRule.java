@@ -3,6 +3,7 @@ package introspection.rules;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.util.Arrays;
+import java.util.Optional;
 
 public class NeverMixStaticAndInstanceMethodOfSameNameRule extends MethodStrategyRule {
     @Override
@@ -16,7 +17,8 @@ public class NeverMixStaticAndInstanceMethodOfSameNameRule extends MethodStrateg
     }
 
     @Override
-    protected boolean isRuleConform(final Method method) {
-        return !Arrays.stream(method.getDeclaringClass().getMethods()).anyMatch(cm -> cm.getName().equals(method.getName()) && !Modifier.isStatic(cm.getModifiers()));
+    protected Optional<MethodRuleViolation> check(final Method method) {
+        final Optional<Method> evilMethodOption = Arrays.stream(method.getDeclaringClass().getMethods()).filter(cm -> cm.getName().equals(method.getName()) && !Modifier.isStatic(cm.getModifiers())).findFirst();
+        return evilMethodOption.map(m -> new MethodRuleViolation(method.getDeclaringClass(), method, getClass().getSimpleName(), m.toString()));
     }
 }
