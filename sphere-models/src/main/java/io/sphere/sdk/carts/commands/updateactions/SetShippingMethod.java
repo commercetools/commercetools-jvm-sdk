@@ -6,6 +6,8 @@ import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Referenceable;
 import io.sphere.sdk.shippingmethods.ShippingMethod;
 
+import javax.annotation.Nullable;
+
 /**
  * Sets the shipping method.
  *
@@ -14,9 +16,10 @@ import io.sphere.sdk.shippingmethods.ShippingMethod;
  * {@include.example io.sphere.sdk.carts.commands.CartUpdateCommandTest#setShippingMethod()}
  */
 public class SetShippingMethod extends UpdateActionImpl<Cart> {
+    @Nullable
     private final Reference<ShippingMethod> shippingMethod;
 
-    private SetShippingMethod(final Reference<ShippingMethod> shippingMethod) {
+    private SetShippingMethod(@Nullable final Reference<ShippingMethod> shippingMethod) {
         super("setShippingMethod");
         this.shippingMethod = shippingMethod;
     }
@@ -27,5 +30,9 @@ public class SetShippingMethod extends UpdateActionImpl<Cart> {
 
     public static SetShippingMethod of(final Referenceable<ShippingMethod> shippingMethod) {
         return new SetShippingMethod(shippingMethod.toReference());
+    }
+
+    public static SetShippingMethod ofRemove() {
+        return new SetShippingMethod(null);
     }
 }

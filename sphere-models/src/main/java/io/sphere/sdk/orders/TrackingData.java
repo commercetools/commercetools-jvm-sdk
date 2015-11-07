@@ -1,6 +1,7 @@
 package io.sphere.sdk.orders;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import io.sphere.sdk.models.Base;
 
 import javax.annotation.Nullable;
@@ -54,6 +55,7 @@ public class TrackingData extends Base {
         return providerTransaction;
     }
 
+    @JsonProperty("isReturn")
     public Boolean isReturn() {
         return isReturn;
     }

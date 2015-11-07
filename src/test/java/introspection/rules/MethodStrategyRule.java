@@ -13,7 +13,7 @@ public abstract class MethodStrategyRule extends AbstractRule {
     protected boolean methodIsIncludedInRule(final Method method) {
         return true;
     }
-    protected abstract boolean isRuleConform(final Method method);
+    protected abstract Optional<MethodRuleViolation> check(final Method method);
 
     @Override
     public final RulesReport check(final List<Class<?>> classes) {
@@ -21,7 +21,7 @@ public abstract class MethodStrategyRule extends AbstractRule {
                 .filter(this::classIsIncludedInRule)
                 .map(clazz -> Arrays.stream(clazz.getMethods())
                                 .filter(method -> methodIsIncludedInRule(method))
-                                .map(method -> isRuleConform(method) ? Optional.<RuleViolation>empty() : Optional.<RuleViolation>of(new MethodRuleViolation(clazz, method)))
+                                .map(method -> check(method))
                                 .filter(Optional::isPresent)
                                 .map(Optional::get)
                 )

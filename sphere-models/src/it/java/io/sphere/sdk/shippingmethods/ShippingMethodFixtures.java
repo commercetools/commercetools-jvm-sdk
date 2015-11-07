@@ -4,6 +4,7 @@ import io.sphere.sdk.client.TestClient;
 import io.sphere.sdk.shippingmethods.commands.ShippingMethodCreateCommand;
 import io.sphere.sdk.shippingmethods.commands.ShippingMethodDeleteCommand;
 import io.sphere.sdk.shippingmethods.commands.ShippingMethodUpdateCommand;
+import io.sphere.sdk.shippingmethods.commands.updateactions.AddShippingRate;
 import io.sphere.sdk.shippingmethods.commands.updateactions.AddZone;
 import io.sphere.sdk.zones.Location;
 import io.sphere.sdk.zones.Zone;
@@ -33,7 +34,8 @@ public class ShippingMethodFixtures {
             zone = client.execute(ZoneCreateCommand.of(ZoneDraft.of("de", asSet(Location.of(DE)))));
         }
         withUpdateableShippingMethod(client, shippingMethodWithOutZone -> {
-            final ShippingMethod updated = client.execute(ShippingMethodUpdateCommand.of(shippingMethodWithOutZone, AddZone.of(zone)));
+            final ShippingMethod updated = client.execute(ShippingMethodUpdateCommand.of(shippingMethodWithOutZone, asList(AddZone.of(zone), AddShippingRate.of(ShippingRate.of(EURO_1), zone))));
+            consumer.accept(updated);
             return updated;
         });
     }

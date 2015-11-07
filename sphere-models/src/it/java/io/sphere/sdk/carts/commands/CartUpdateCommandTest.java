@@ -236,10 +236,16 @@ public class CartUpdateCommandTest extends IntegrationTest {
     public void setShippingMethod() throws Exception {
         withShippingMethodForGermany(client(), shippingMethod -> {
             withCart(client(), createCartWithShippingAddress(client()), cart -> {
+                //add shipping method
                 assertThat(cart.getShippingInfo()).isNull();
-                final Cart updatedCart = execute(CartUpdateCommand.of(cart, SetShippingMethod.of(shippingMethod)));
-                assertThat(updatedCart.getShippingInfo().getShippingMethod()).isEqualTo(shippingMethod.toReference());
-                return updatedCart;
+                final Cart cartWithShippingMethod = execute(CartUpdateCommand.of(cart, SetShippingMethod.of(shippingMethod)));
+                assertThat(cartWithShippingMethod.getShippingInfo().getShippingMethod()).isEqualTo(shippingMethod.toReference());
+
+                //remove shipping method
+                final Cart cartWithoutShippingMethod = execute(CartUpdateCommand.of(cartWithShippingMethod, SetShippingMethod.ofRemove()));
+                assertThat(cartWithoutShippingMethod.getShippingInfo()).isNull();
+
+                return cartWithoutShippingMethod;
             });
         });
     }
