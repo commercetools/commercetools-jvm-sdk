@@ -2,7 +2,7 @@ package io.sphere.sdk.products.search;
 
 import io.sphere.sdk.products.ProductProjection;
 import io.sphere.sdk.search.*;
-import io.sphere.sdk.search.model.RangeStats;
+import io.sphere.sdk.search.model.SimpleRangeStats;
 import org.junit.Test;
 
 import java.util.List;
@@ -99,8 +99,6 @@ public class ProductProjectionSearchModelFacetedSearchIntegrationTest extends Pr
                     assertThat(rangeStats.getCount()).isEqualTo(2L);
                     assertThat(rangeStats.getMin()).isEqualTo("5.0");
                     assertThat(rangeStats.getMax()).isEqualTo("10.0");
-                    assertThat(rangeStats.getSum()).isEqualTo("15.0");
-                    assertThat(rangeStats.getMean()).isEqualTo(7.50D);
                 });
     }
 
@@ -123,8 +121,6 @@ public class ProductProjectionSearchModelFacetedSearchIntegrationTest extends Pr
                     assertThat(rangeStats.getCount()).isEqualTo(2L);
                     assertThat(rangeStats.getMin()).isEqualTo("50000.0");
                     assertThat(rangeStats.getMax()).isEqualTo("100000.0");
-                    assertThat(rangeStats.getSum()).isEqualTo("150000.0");
-                    assertThat(rangeStats.getMean()).isEqualTo(75000D);
                 });
     }
 
@@ -156,8 +152,6 @@ public class ProductProjectionSearchModelFacetedSearchIntegrationTest extends Pr
                     assertThat(rangeStats.getCount()).isEqualTo(2L);
                     assertThat(rangeStats.getMin()).isEqualTo("1.0001664E12");
                     assertThat(rangeStats.getMax()).isEqualTo("1.0343808E12");
-                    assertThat(rangeStats.getSum()).isEqualTo("2.0345472E12");
-                    assertThat(rangeStats.getMean()).isEqualTo(1.0172736E12D);
                 });
     }
 
@@ -180,8 +174,6 @@ public class ProductProjectionSearchModelFacetedSearchIntegrationTest extends Pr
                     assertThat(rangeStats.getCount()).isEqualTo(2L);
                     assertThat(rangeStats.getMin()).isEqualTo("7.9509203E7");
                     assertThat(rangeStats.getMax()).isEqualTo("8.3170204E7");
-                    assertThat(rangeStats.getSum()).isEqualTo("1.62679407E8");
-                    assertThat(rangeStats.getMean()).isEqualTo(8.13397035E7D);
                 });
     }
 
@@ -204,8 +196,6 @@ public class ProductProjectionSearchModelFacetedSearchIntegrationTest extends Pr
                     assertThat(rangeStats.getCount()).isEqualTo(2L);
                     assertThat(rangeStats.getMin()).isEqualTo("1.000245909203E12");
                     assertThat(rangeStats.getMax()).isEqualTo("1.034463970204E12");
-                    assertThat(rangeStats.getSum()).isEqualTo("2.034709879407E12");
-                    assertThat(rangeStats.getMean()).isEqualTo(1.0173549397035E12D);
                 });
     }
 
@@ -300,8 +290,6 @@ public class ProductProjectionSearchModelFacetedSearchIntegrationTest extends Pr
                     assertThat(rangeStats.getCount()).isEqualTo(2L);
                     assertThat(rangeStats.getMin()).isEqualTo("5.0");
                     assertThat(rangeStats.getMax()).isEqualTo("5.0");
-                    assertThat(rangeStats.getSum()).isEqualTo("10.0");
-                    assertThat(rangeStats.getMean()).isEqualTo(5.0D);
                 });
     }
 
@@ -324,8 +312,6 @@ public class ProductProjectionSearchModelFacetedSearchIntegrationTest extends Pr
                     assertThat(rangeStats.getCount()).isEqualTo(2L);
                     assertThat(rangeStats.getMin()).isEqualTo("50000.0");
                     assertThat(rangeStats.getMax()).isEqualTo("50000.0");
-                    assertThat(rangeStats.getSum()).isEqualTo("100000.0");
-                    assertThat(rangeStats.getMean()).isEqualTo(50000D);
                 });
     }
 
@@ -357,8 +343,6 @@ public class ProductProjectionSearchModelFacetedSearchIntegrationTest extends Pr
                     assertThat(rangeStats.getCount()).isEqualTo(2L);
                     assertThat(rangeStats.getMin()).isEqualTo("1.0001664E12");
                     assertThat(rangeStats.getMax()).isEqualTo("1.0001664E12");
-                    assertThat(rangeStats.getSum()).isEqualTo("2.0003328E12");
-                    assertThat(rangeStats.getMean()).isEqualTo(1.0001664E12D);
                 });
     }
 
@@ -381,8 +365,6 @@ public class ProductProjectionSearchModelFacetedSearchIntegrationTest extends Pr
                     assertThat(rangeStats.getCount()).isEqualTo(2L);
                     assertThat(rangeStats.getMin()).isEqualTo("7.9509203E7");
                     assertThat(rangeStats.getMax()).isEqualTo("7.9509203E7");
-                    assertThat(rangeStats.getSum()).isEqualTo("1.59018406E8");
-                    assertThat(rangeStats.getMean()).isEqualTo(7.9509203E7D);
                 });
     }
 
@@ -405,8 +387,6 @@ public class ProductProjectionSearchModelFacetedSearchIntegrationTest extends Pr
                     assertThat(rangeStats.getCount()).isEqualTo(2L);
                     assertThat(rangeStats.getMin()).isEqualTo("1.000245909203E12");
                     assertThat(rangeStats.getMax()).isEqualTo("1.000245909203E12");
-                    assertThat(rangeStats.getSum()).isEqualTo("2.000491818406E12");
-                    assertThat(rangeStats.getMean()).isEqualTo(1.000245909203E12D);
                 });
     }
 
@@ -426,11 +406,9 @@ public class ProductProjectionSearchModelFacetedSearchIntegrationTest extends Pr
     }
 
     private static void testResultWithRange(final RangeFacetAndFilterExpression<ProductProjection> facetedSearchExpr,
-                                            final Consumer<List<String>> testFilter, final Consumer<RangeStats> rangeStats) {
+                                            final Consumer<List<String>> testFilter, final Consumer<SimpleRangeStats> rangeStats) {
         final PagedSearchResult<ProductProjection> result = executeFacetedSearch(facetedSearchExpr, testFilter);
-        System.out.println(facetedSearchExpr.facetExpression().expression());
-        System.out.println(result.getRangeFacetResult(facetedSearchExpr.facetExpression()));
-        rangeStats.accept(result.getRangeFacetResult(facetedSearchExpr.facetExpression()).getRanges().get(0));
+        rangeStats.accept(result.getRangeStatsOfAllRanges(facetedSearchExpr.facetExpression()));
     }
 
     private static PagedSearchResult<ProductProjection> executeFacetedSearch(final FacetAndFilterExpression<ProductProjection> facetedSearchExpr,

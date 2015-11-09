@@ -40,6 +40,7 @@ public class RangeStats extends Base {
      * Lower endpoint of the range.
      * @return the lower endpoint, or absent if no lower bound defined.
      */
+    @Nullable
     public String getLowerEndpoint() {
         return lowerEndpoint;
     }
@@ -48,6 +49,7 @@ public class RangeStats extends Base {
      * Upper endpoint of the range.
      * @return the upper endpoint, or absent if no upper bound defined.
      */
+    @Nullable
     public String getUpperEndpoint() {
         return upperEndpoint;
     }
