@@ -18,10 +18,24 @@ public class ProductProjectionSearchFacetedSearchIntegrationTest extends Product
     private static final TermFacetAndFilterExpression<ProductProjection> SIZE_FACETED_SEARCH = FACETED_SEARCH.allVariants().attribute().ofNumber(ATTR_NAME_SIZE).byAny(emptyList());
 
     @Test
-    public void facetedSearch() throws Exception {
+    public void facetedSearchExample() throws Exception {
+        final ProductAttributeFacetAndFilterSearchModel attributeModel = ProductProjectionSearchModel.of().facetedSearch().allVariants().attribute();
         final ProductProjectionSearch search = ProductProjectionSearch.ofStaged()
-                .plusFacetedSearch(SIZE_FACETED_SEARCH)
-                .plusFacetedSearch(COLOR_FACETED_SEARCH);
+                .plusFacetedSearch(attributeModel.ofNumber(ATTR_NAME_SIZE).byAny(emptyList()))
+                .plusFacetedSearch(attributeModel.ofString(ATTR_NAME_COLOR).by("red"));
+        testResult(search,
+                ids -> assertThat(ids).containsOnly(product2.getId()),
+                colors -> assertThat(colors).containsOnly(TermStats.of("blue", 2), TermStats.of("red", 1)),
+                sizes -> assertThat(sizes).containsOnly(TermStats.of("36.0", 1)));
+    }
+
+    @Test
+    public void facetedSearchVerboseExample() throws Exception {
+        final ProductProjectionSearch search = ProductProjectionSearch.ofStaged()
+                .plusFacets(facet -> facet.allVariants().attribute().ofString(ATTR_NAME_COLOR).allTerms())
+                .plusFacets(facet -> facet.allVariants().attribute().ofNumber(ATTR_NAME_SIZE).allTerms())
+                .plusResultFilters(filter -> filter.allVariants().attribute().ofString(ATTR_NAME_COLOR).by("red"))
+                .plusFacetFilters(filter -> filter.allVariants().attribute().ofString(ATTR_NAME_COLOR).by("red"));
         testResult(search,
                 ids -> assertThat(ids).containsOnly(product2.getId()),
                 colors -> assertThat(colors).containsOnly(TermStats.of("blue", 2), TermStats.of("red", 1)),
