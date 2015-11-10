@@ -422,7 +422,40 @@ assertThat(resultsToIds(result)).containsOnly(product1.getId(), product2.getId()
         .plusQueryFilters(filter -&gt; filter.allVariants().attribute().ofNumber(ATTR_NAME_SIZE).byAnyAsString(asList("36", "38")));
 final PagedSearchResult&lt;ProductProjection&gt; result = executeSearch(search);
 assertThat(resultsToIds(result)).containsOnly(product1.getId(), product2.getId());
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/products/search/ProductProjectionSearchFiltersIntegrationTest.java" target="_blank">test code</a>.</pre></div></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/products/search/ProductProjectionSearchFiltersIntegrationTest.java" target="_blank">test code</a>.</pre></div>
+
+ <h4 id=faceted-search>Faceted Search</h4>
+
+ <p>A faceted search is the most typical application of facets and filters when browsing products, which consists of using some of the facet result values as filter parameters. This enables the user to see all possible attribute values of the current product list (using facets) and search by these exact values (using filters).</p>
+
+ <p>This behaviour is achieved by using on the same attribute a <code>Facet</code> for all terms or ranges, together with a <code>Filter Facets</code> and <code>Filter Results</code>, both with the same filter parameters.</p>
+
+ <p>The <a href="../../../../io/sphere/sdk/products/search/ProductProjectionSearchModel.html" title="class in io.sphere.sdk.products.search"><code>ProductProjectionSearchModel</code></a> simplifies all this process by allowing you to build faceted search expressions directly, just providing the required filter parameters.</p>
+
+ <p>The following example demonstrates how to perform a faceted search with the model, involving two different attributes:</p>
+
+ <div id="io-sphere-sdk-products-search-ProductProjectionSearchFacetedSearchIntegrationTest-facetedSearchExample%s" class=code-example><pre><code class='java'>final ProductAttributeFacetAndFilterSearchModel attributeModel = ProductProjectionSearchModel.of().facetedSearch().allVariants().attribute();
+final ProductProjectionSearch search = ProductProjectionSearch.ofStaged()
+        .plusFacetedSearch(attributeModel.ofNumber(ATTR_NAME_SIZE).byAny(emptyList()))
+        .plusFacetedSearch(attributeModel.ofString(ATTR_NAME_COLOR).by("red"));
+testResult(search,
+        ids -&gt; assertThat(ids).containsOnly(product2.getId()),
+        colors -&gt; assertThat(colors).containsOnly(TermStats.of("blue", 2), TermStats.of("red", 1)),
+        sizes -&gt; assertThat(sizes).containsOnly(TermStats.of("36.0", 1)));
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/products/search/ProductProjectionSearchFacetedSearchIntegrationTest.java" target="_blank">test code</a>.</pre></div>
+
+ <p>You can see now how the same request is performed without the faceted search model:</p>
+
+ <div id="io-sphere-sdk-products-search-ProductProjectionSearchFacetedSearchIntegrationTest-facetedSearchVerboseExample%s" class=code-example><pre><code class='java'>final ProductProjectionSearch search = ProductProjectionSearch.ofStaged()
+        .plusFacets(facet -&gt; facet.allVariants().attribute().ofString(ATTR_NAME_COLOR).allTerms())
+        .plusFacets(facet -&gt; facet.allVariants().attribute().ofNumber(ATTR_NAME_SIZE).allTerms())
+        .plusResultFilters(filter -&gt; filter.allVariants().attribute().ofString(ATTR_NAME_COLOR).by("red"))
+        .plusFacetFilters(filter -&gt; filter.allVariants().attribute().ofString(ATTR_NAME_COLOR).by("red"));
+testResult(search,
+        ids -&gt; assertThat(ids).containsOnly(product2.getId()),
+        colors -&gt; assertThat(colors).containsOnly(TermStats.of("blue", 2), TermStats.of("red", 1)),
+        sizes -&gt; assertThat(sizes).containsOnly(TermStats.of("36.0", 1)));
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/products/search/ProductProjectionSearchFacetedSearchIntegrationTest.java" target="_blank">test code</a>.</pre></div></div>
 </li>
 </ul>
 </div>
