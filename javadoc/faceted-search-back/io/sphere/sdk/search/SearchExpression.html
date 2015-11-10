@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":6,"i1":6};
+var methods = {"i0":6,"i1":6,"i2":6};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],4:["t3","Abstract Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -140,6 +140,12 @@ var activeTableTab = "activeTableTab";
 <div class="block">Returns a search expression.</div>
 </td>
 </tr>
+<tr id="i2" class="altColor">
+<td class="colFirst"><code>java.lang.String</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/SearchExpression.html#value--">value</a></span>()</code>
+<div class="block">Generates the value applied to the search expression.</div>
+</td>
+</tr>
 </table>
 </li>
 </ul>
@@ -172,7 +178,7 @@ var activeTableTab = "activeTableTab";
 <a name="attributePath--">
 <!--   -->
 </a>
-<ul class="blockListLast">
+<ul class="blockList">
 <li class="blockList">
 <h4>attributePath</h4>
 <pre>java.lang.String&nbsp;attributePath()</pre>
@@ -181,6 +187,22 @@ var activeTableTab = "activeTableTab";
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>the path for the attribute</dd>
+</dl>
+</li>
+</ul>
+<a name="value--">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>value</h4>
+<pre>@Nullable
+java.lang.String&nbsp;value()</pre>
+<div class="block">Generates the value applied to the search expression.
+ Example: range(0 to *)</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>the value of the expression</dd>
 </dl>
 </li>
 </ul>
