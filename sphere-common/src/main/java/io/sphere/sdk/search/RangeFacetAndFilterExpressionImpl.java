@@ -1,21 +1,19 @@
-package io.sphere.sdk.search.model;
-
-import io.sphere.sdk.search.*;
+package io.sphere.sdk.search;
 
 import java.util.List;
 
 class RangeFacetAndFilterExpressionImpl<T> implements RangeFacetAndFilterExpression<T> {
-    private final RangeFacetExpression<T> termFacetExpression;
+    private final RangeFacetExpression<T> facetExpression;
     private final List<FilterExpression<T>> filterExpressions;
 
-    RangeFacetAndFilterExpressionImpl(final RangeFacetExpression<T> termFacetExpression, final List<FilterExpression<T>> filterExpressions) {
-        this.termFacetExpression = termFacetExpression;
+    RangeFacetAndFilterExpressionImpl(final RangeFacetExpression<T> facetExpression, final List<FilterExpression<T>> filterExpressions) {
+        this.facetExpression = facetExpression;
         this.filterExpressions = filterExpressions;
     }
 
     @Override
     public RangeFacetExpression<T> facetExpression() {
-        return termFacetExpression;
+        return facetExpression;
     }
 
     @Override

@@ -8,6 +8,8 @@ import javax.annotation.Nullable;
 import java.util.List;
 import java.util.function.Function;
 
+import static java.util.Collections.emptyList;
+
 abstract class RangeFacetAndFilterBaseSearchModel<T, V extends Comparable<? super V>> extends FacetAndFilterSearchModel<T, V> {
     private final RangeFacetExpression<T> facetExpression;
     private final RangeFilterSearchModel<T, V> filterSearchModel;
@@ -25,7 +27,7 @@ abstract class RangeFacetAndFilterBaseSearchModel<T, V extends Comparable<? supe
      * @return a filter expression for the given range
      */
     public RangeFacetAndFilterExpression<T> byRange(final FilterRange<V> range) {
-        return expression(filterSearchModel.byRange(range));
+        return buildExpression(filterSearchModel.byRange(range));
     }
 
     /**
@@ -35,7 +37,7 @@ abstract class RangeFacetAndFilterBaseSearchModel<T, V extends Comparable<? supe
      * @return a filter expression for the given ranges
      */
     public RangeFacetAndFilterExpression<T> byAnyRange(final Iterable<FilterRange<V>> ranges) {
-        return expression(filterSearchModel.byAnyRange(ranges));
+        return validateAndBuildExpression(ranges, r -> filterSearchModel.byAnyRange(r));
     }
 
     /**
@@ -45,7 +47,7 @@ abstract class RangeFacetAndFilterBaseSearchModel<T, V extends Comparable<? supe
      * @return a filter expression for the given ranges
      */
     public RangeFacetAndFilterExpression<T> byAllRanges(final Iterable<FilterRange<V>> ranges) {
-        return expression(filterSearchModel.byAllRanges(ranges));
+        return validateAndBuildExpression(ranges, r -> filterSearchModel.byAllRanges(r));
     }
 
     /**
@@ -56,7 +58,7 @@ abstract class RangeFacetAndFilterBaseSearchModel<T, V extends Comparable<? supe
      * @return a filter expression for the given range
      */
     public RangeFacetAndFilterExpression<T> byRange(final V lowerEndpoint, final V upperEndpoint) {
-        return expression(filterSearchModel.byRange(lowerEndpoint, upperEndpoint));
+        return buildExpression(filterSearchModel.byRange(lowerEndpoint, upperEndpoint));
     }
 
     /**
@@ -66,7 +68,7 @@ abstract class RangeFacetAndFilterBaseSearchModel<T, V extends Comparable<? supe
      * @return a filter expression for the given range
      */
     public RangeFacetAndFilterExpression<T> byGreaterThanOrEqualTo(final V value) {
-        return expression(filterSearchModel.byGreaterThanOrEqualTo(value));
+        return buildExpression(filterSearchModel.byGreaterThanOrEqualTo(value));
     }
 
     /**
@@ -76,7 +78,7 @@ abstract class RangeFacetAndFilterBaseSearchModel<T, V extends Comparable<? supe
      * @return a filter expression for the given range
      */
     public RangeFacetAndFilterExpression<T> byLessThanOrEqualTo(final V value) {
-        return expression(filterSearchModel.byLessThanOrEqualTo(value));
+        return buildExpression(filterSearchModel.byLessThanOrEqualTo(value));
     }
 
     /**
@@ -86,7 +88,7 @@ abstract class RangeFacetAndFilterBaseSearchModel<T, V extends Comparable<? supe
      * @return a filter expression for the given ranges
      */
     public RangeFacetAndFilterExpression<T> byAnyRangeAsString(final Iterable<FilterRange<String>> ranges) {
-        return expression(filterSearchModel.byAnyRangeAsString(ranges));
+        return validateAndBuildExpression(ranges, r -> filterSearchModel.byAnyRangeAsString(r));
     }
 
     /**
@@ -96,10 +98,21 @@ abstract class RangeFacetAndFilterBaseSearchModel<T, V extends Comparable<? supe
      * @return a filter expression for the given ranges
      */
     public RangeFacetAndFilterExpression<T> byAllRangesAsString(final Iterable<FilterRange<String>> ranges) {
-        return expression(filterSearchModel.byAllRangesAsString(ranges));
+        return validateAndBuildExpression(ranges, r -> filterSearchModel.byAllRangesAsString(r));
     }
 
-    private RangeFacetAndFilterExpressionImpl<T> expression(final List<FilterExpression<T>> filterExpressions) {
-        return new RangeFacetAndFilterExpressionImpl<>(facetExpression, filterExpressions);
+    private RangeFacetAndFilterExpression<T> buildExpression(final List<FilterExpression<T>> filterExpressions) {
+        return RangeFacetAndFilterExpression.of(facetExpression, filterExpressions);
+    }
+
+    private <R extends Comparable<? super R>> RangeFacetAndFilterExpression<T> validateAndBuildExpression(final Iterable<FilterRange<R>> ranges,
+                                                                                                          final Function<Iterable<FilterRange<R>>, List<FilterExpression<T>>> f) {
+        final List<FilterExpression<T>> filterExpressions;
+        if (ranges.iterator().hasNext()) {
+            filterExpressions = f.apply(ranges);
+        } else {
+            filterExpressions = emptyList();
+        }
+        return buildExpression(filterExpressions);
     }
 }

@@ -17,16 +17,16 @@ public class ProductProjectionSearchFacetedSearchIntegrationTest extends Product
     private static final TermFacetAndFilterExpression<ProductProjection> COLOR_FACETED_SEARCH = FACETED_SEARCH.allVariants().attribute().ofString(ATTR_NAME_COLOR).by("red");
     private static final TermFacetAndFilterExpression<ProductProjection> SIZE_FACETED_SEARCH = FACETED_SEARCH.allVariants().attribute().ofNumber(ATTR_NAME_SIZE).byAny(emptyList());
 
-//    @Test
-//    public void facetedSearch() throws Exception {
-//        final ProductProjectionSearch search = ProductProjectionSearch.ofStaged()
-//                .plusFacetedSearch(model -> model.allVariants().attribute().ofString(ATTR_NAME_SIZE).facetedAndFiltered().allTerms())
-//                .plusFacetedSearch(model -> model.allVariants().attribute().ofString(ATTR_NAME_COLOR).facetedAndFiltered().by("red"));
-//        testResult(search,
-//                ids -> assertThat(ids).containsOnly(product2.getId()),
-//                colors -> assertThat(colors).containsOnly(TermStats.of("blue", 2), TermStats.of("red", 1)),
-//                sizes -> assertThat(sizes).containsOnly(TermStats.of("36.0", 1)));
-//    }
+    @Test
+    public void facetedSearch() throws Exception {
+        final ProductProjectionSearch search = ProductProjectionSearch.ofStaged()
+                .plusFacetedSearch(SIZE_FACETED_SEARCH)
+                .plusFacetedSearch(COLOR_FACETED_SEARCH);
+        testResult(search,
+                ids -> assertThat(ids).containsOnly(product2.getId()),
+                colors -> assertThat(colors).containsOnly(TermStats.of("blue", 2), TermStats.of("red", 1)),
+                sizes -> assertThat(sizes).containsOnly(TermStats.of("36.0", 1)));
+    }
 
     @Test
     public void resultsAndFacetsAreFiltered() throws Exception {

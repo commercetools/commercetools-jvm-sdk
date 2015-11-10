@@ -12,4 +12,8 @@ public interface RangeFacetAndFilterExpression<T> extends FacetAndFilterExpressi
     RangeFacetExpression<T> facetExpression();
 
     List<FilterExpression<T>> filterExpressions();
+
+    static <T> RangeFacetAndFilterExpression<T> of(final RangeFacetExpression<T> facetExpression, List<FilterExpression<T>> filterExpressions) {
+        return new RangeFacetAndFilterExpressionImpl<>(facetExpression, filterExpressions);
+    }
 }

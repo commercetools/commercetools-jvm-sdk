@@ -12,4 +12,8 @@ public interface TermFacetAndFilterExpression<T> extends FacetAndFilterExpressio
     TermFacetExpression<T> facetExpression();
 
     List<FilterExpression<T>> filterExpressions();
+
+    static <T> TermFacetAndFilterExpression<T> of(final TermFacetExpression<T> facetExpression, List<FilterExpression<T>> filterExpressions) {
+        return new TermFacetAndFilterExpressionImpl<>(facetExpression, filterExpressions);
+    }
 }

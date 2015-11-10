@@ -8,6 +8,8 @@ import javax.annotation.Nullable;
 import java.util.List;
 import java.util.function.Function;
 
+import static java.util.Collections.emptyList;
+
 abstract class FacetAndFilterSearchModel<T, V> extends SearchModelImpl<T> {
     private final TermFacetExpression<T> facetExpression;
     private final TermFilterSearchModel<T, V> filterSearchModel;
@@ -25,7 +27,7 @@ abstract class FacetAndFilterSearchModel<T, V> extends SearchModelImpl<T> {
      * @return a filter expression for the given value
      */
     public TermFacetAndFilterExpression<T> by(final V value) {
-        return expression(filterSearchModel.by(value));
+        return buildExpression(filterSearchModel.by(value));
     }
 
     /**
@@ -35,7 +37,7 @@ abstract class FacetAndFilterSearchModel<T, V> extends SearchModelImpl<T> {
      * @return a filter expression for the given values
      */
     public TermFacetAndFilterExpression<T> byAny(final Iterable<V> values) {
-        return expression(filterSearchModel.byAny(values));
+        return validateAndBuildExpression(values, v -> filterSearchModel.byAny(v));
     }
 
     /**
@@ -45,7 +47,7 @@ abstract class FacetAndFilterSearchModel<T, V> extends SearchModelImpl<T> {
      * @return a filter expression for the given values
      */
     public TermFacetAndFilterExpression<T> byAll(final Iterable<V> values) {
-        return expression(filterSearchModel.byAll(values));
+        return validateAndBuildExpression(values, v -> filterSearchModel.byAll(v));
     }
 
     /**
@@ -55,7 +57,7 @@ abstract class FacetAndFilterSearchModel<T, V> extends SearchModelImpl<T> {
      * @return a filter expression for the given values
      */
     public TermFacetAndFilterExpression<T> byAnyAsString(final Iterable<String> values) {
-        return expression(filterSearchModel.byAnyAsString(values));
+        return validateAndBuildExpression(values, v -> filterSearchModel.byAnyAsString(v));
     }
 
     /**
@@ -65,10 +67,21 @@ abstract class FacetAndFilterSearchModel<T, V> extends SearchModelImpl<T> {
      * @return a filter expression for the given values
      */
     public TermFacetAndFilterExpression<T> byAllAsString(final Iterable<String> values) {
-        return expression(filterSearchModel.byAllAsString(values));
+        return validateAndBuildExpression(values, v -> filterSearchModel.byAllAsString(v));
     }
 
-    private TermFacetAndFilterExpressionImpl<T> expression(final List<FilterExpression<T>> filterExpressions) {
-        return new TermFacetAndFilterExpressionImpl<>(facetExpression, filterExpressions);
+    private TermFacetAndFilterExpression<T> buildExpression(final List<FilterExpression<T>> filterExpressions) {
+        return TermFacetAndFilterExpression.of(facetExpression, filterExpressions);
+    }
+
+    private <R> TermFacetAndFilterExpression<T> validateAndBuildExpression(final Iterable<R> values,
+                                                                           final Function<Iterable<R>, List<FilterExpression<T>>> f) {
+        final List<FilterExpression<T>> filterExpressions;
+        if (values.iterator().hasNext()) {
+            filterExpressions = f.apply(values);
+        } else {
+            filterExpressions = emptyList();
+        }
+        return buildExpression(filterExpressions);
     }
 }
