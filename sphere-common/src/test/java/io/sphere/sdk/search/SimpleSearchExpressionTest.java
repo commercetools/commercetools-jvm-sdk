@@ -4,6 +4,7 @@ import org.junit.Test;
 
 import static io.sphere.sdk.search.SearchSortDirection.ASC_MAX;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class SimpleSearchExpressionTest {
     private static final String ATTRIBUTE_PATH = "variants.attributes.size";
@@ -97,13 +98,13 @@ public class SimpleSearchExpressionTest {
     }
 
     @Test
-    public void doestNotFailOnWrongExpression() throws Exception {
+    public void throwsExceptionOnAccessingWrongExpression() throws Exception {
         final FilteredFacetExpression<Object> facet = FilteredFacetExpression.of("some wrong facet");
         assertThat(facet.expression()).isEqualTo("some wrong facet");
-        assertThat(facet.attributePath()).isNull();
-        assertThat(facet.value()).isNull();
-        assertThat(facet.alias()).isNull();
-        assertThat(facet.resultPath()).isNull();
+        assertThatThrownBy(() -> facet.attributePath()).isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> facet.value()).isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> facet.alias()).isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> facet.resultPath()).isInstanceOf(IllegalArgumentException.class);
     }
 
 }

@@ -94,7 +94,7 @@ public class PagedSearchResultTest {
     }
 
     private void testPagedSearchResultWithAllRanges(final List<RangeStats> rangeStats, final Consumer<SimpleRangeStats> test) {
-        final RangeFacetExpression<Object> facetExpression = RangeFacetExpression.of("foo:range(* to \"0\"),(\"0\" to *)");
+        final RangeFacetExpression<Object> facetExpression = RangeFacetExpression.of("foo:range(* to \"0\"),(\"0\" to *)  as allRangesFacet");
         final Map<String, FacetResult> facets = new HashMap<>();
         facets.put(facetExpression.resultPath(), RangeFacetResult.of(rangeStats));
         final PagedSearchResult<Object> result = pagedSearchResult(facets);

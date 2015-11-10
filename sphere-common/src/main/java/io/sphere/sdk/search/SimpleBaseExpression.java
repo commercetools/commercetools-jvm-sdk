@@ -33,7 +33,7 @@ abstract class SimpleBaseExpression extends Base {
         if (matcher.matches()) {
             return match.apply(matcher);
         } else {
-            return null;
+            throw new IllegalArgumentException(expression() + " must be of the form " + pattern());
         }
     }
 }

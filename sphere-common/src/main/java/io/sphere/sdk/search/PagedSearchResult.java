@@ -71,7 +71,9 @@ public class PagedSearchResult<T> extends PagedResult<T> {
 
     public SimpleRangeStats getRangeStatsOfAllRanges(final RangeFacetExpression<T> facetExpression) {
         final String facetResultPath = facetExpression.resultPath();
-        final boolean facetIsOfTypeAllRanges = facetExpression.expression().endsWith(":range(* to \"0\"),(\"0\" to *)");
+        final boolean facetIsOfTypeAllRanges = Optional.ofNullable(facetExpression.value())
+                .map(v -> v.trim().equals(":range(* to \"0\"),(\"0\" to *)"))
+                .orElse(false);
         if (facetIsOfTypeAllRanges) {
             final RangeFacetResult facetResult = getRangeFacetResult(facetResultPath);
             return getSimpleRangeStats(facetResult.getRanges());
