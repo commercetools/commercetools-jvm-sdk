@@ -7,7 +7,7 @@ import javax.annotation.Nullable;
 import java.time.ZonedDateTime;
 
 /**
- * EXPERIMENTAL model to easily build product projection facet requests.
+ * EXPERIMENTAL model to easily build product projection faceted search requests.
  * Being it experimental, it can be modified in future releases therefore introducing breaking changes.
  */
 public class ProductProjectionFacetAndFilterSearchModel extends ProductDataFacetAndFilterSearchModel {

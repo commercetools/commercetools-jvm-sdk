@@ -20,8 +20,9 @@ abstract class RangeFacetBaseSearchModel<T, V extends Comparable<? super V>> ext
     }
 
     /**
-     * Generates an expression to obtain the facets of the attribute for all values.
-     * For example: a possible faceted classification could be ["red": 4, "yellow": 2, "blue": 1].
+     * Generates an expression to obtain the facet of the attribute for any range.
+     * For example: a possible faceted classification could be ["-40": 4, "105": 2, "4": 1].
+     * Notice that this method generates a facet expression with two ranges: (-∞, 0] and [0, +∞), therefore two results should be expected.
      * @return a facet expression for all values
      */
     public RangeFacetExpression<T> allRanges() {
