@@ -168,7 +168,7 @@ extends <a href="../../../../../io/sphere/sdk/search/model/SearchModelImpl.html"
 <tr id="i0" class="altColor">
 <td class="colFirst"><code><a href="../../../../../io/sphere/sdk/search/RangeFacetExpression.html" title="interface in io.sphere.sdk.search">RangeFacetExpression</a>&lt;<a href="../../../../../io/sphere/sdk/search/model/RangeFacetSearchModel.html" title="type parameter in RangeFacetSearchModel">T</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/search/model/RangeFacetSearchModel.html#allRanges--">allRanges</a></span>()</code>
-<div class="block">Generates an expression to obtain the facets of the attribute for all values.</div>
+<div class="block">Generates an expression to obtain the facet of the attribute for any range.</div>
 </td>
 </tr>
 <tr id="i1" class="rowColor">
@@ -430,8 +430,9 @@ protected final&nbsp;java.lang.String alias</pre>
 <li class="blockList">
 <h4>allRanges</h4>
 <pre>public&nbsp;<a href="../../../../../io/sphere/sdk/search/RangeFacetExpression.html" title="interface in io.sphere.sdk.search">RangeFacetExpression</a>&lt;<a href="../../../../../io/sphere/sdk/search/model/RangeFacetSearchModel.html" title="type parameter in RangeFacetSearchModel">T</a>&gt;&nbsp;allRanges()</pre>
-<div class="block">Generates an expression to obtain the facets of the attribute for all values.
- For example: a possible faceted classification could be ["red": 4, "yellow": 2, "blue": 1].</div>
+<div class="block">Generates an expression to obtain the facet of the attribute for any range.
+ For example: a possible faceted classification could be ["-40": 4, "105": 2, "4": 1].
+ Notice that this method generates a facet expression with two ranges: (-∞, 0] and [0, +∞), therefore two results should be expected.</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>a facet expression for all values</dd>
