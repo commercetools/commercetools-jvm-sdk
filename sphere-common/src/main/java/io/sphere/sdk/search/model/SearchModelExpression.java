@@ -7,6 +7,7 @@ import java.util.Optional;
 import java.util.function.Function;
 
 import static io.sphere.sdk.utils.IterableUtils.toStream;
+import static java.util.Objects.requireNonNull;
 import static java.util.stream.Collectors.joining;
 
 abstract class SearchModelExpression<T, V> extends Base {
@@ -16,13 +17,13 @@ abstract class SearchModelExpression<T, V> extends Base {
     protected final String alias;
 
     protected SearchModelExpression(final SearchModel<T> searchModel, final Function<V, String> typeSerializer, @Nullable final String alias) {
-        this.searchModel = searchModel;
-        this.typeSerializer = typeSerializer;
+        this.searchModel = requireNonNull(searchModel);
+        this.typeSerializer = requireNonNull(typeSerializer);
         this.alias = alias;
     }
 
     public final String expression() {
-        return attributePath() + serializedValue() + serializedAlias();
+        return attributePath() + Optional.ofNullable(value()).orElse("") + Optional.ofNullable(alias).map(a -> " as " + a).orElse("");
     }
 
     public final String attributePath() {
@@ -33,11 +34,13 @@ abstract class SearchModelExpression<T, V> extends Base {
         return Optional.ofNullable(alias).orElse(attributePath());
     }
 
-    protected final String serializedAlias() {
-        return Optional.ofNullable(alias).map(a -> " as " + a).orElse("");
+    @Nullable
+    protected String alias() {
+        return alias;
     }
 
-    protected abstract String serializedValue();
+    @Nullable
+    protected abstract String value();
 
     protected Function<V, String> serializer() {
         return typeSerializer;

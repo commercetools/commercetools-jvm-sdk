@@ -3,9 +3,9 @@ package io.sphere.sdk.search.model;
 import io.sphere.sdk.models.Base;
 import io.sphere.sdk.search.SearchSortDirection;
 import io.sphere.sdk.search.SortExpression;
-import io.sphere.sdk.search.model.SearchModel;
 
 import static io.sphere.sdk.utils.IterableUtils.toStream;
+import static java.util.Objects.requireNonNull;
 import static java.util.stream.Collectors.joining;
 
 class SortExpressionImpl<T> extends Base implements SortExpression<T> {
@@ -13,13 +13,18 @@ class SortExpressionImpl<T> extends Base implements SortExpression<T> {
     private final SearchSortDirection direction;
 
     protected SortExpressionImpl(final SearchModel<T> searchModel, final SearchSortDirection direction) {
-        this.searchModel = searchModel;
-        this.direction = direction;
+        this.searchModel = requireNonNull(searchModel);
+        this.direction = requireNonNull(direction);
+    }
+
+    @Override
+    public String value() {
+        return direction.toString();
     }
 
     @Override
     public String expression() {
-        return renderPath() + " " + direction;
+        return attributePath() + " " + value();
     }
 
     @Override
@@ -35,9 +40,5 @@ class SortExpressionImpl<T> extends Base implements SortExpression<T> {
     @Override
     public final int hashCode() {
         return expression().hashCode();
-    }
-
-    private String renderPath() {
-        return toStream(searchModel.buildPath()).collect(joining("."));
     }
 }

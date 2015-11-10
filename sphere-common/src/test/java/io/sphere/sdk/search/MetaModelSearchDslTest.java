@@ -13,12 +13,14 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class MetaModelSearchDslTest {
     private static final SortExpression<Object> SORT_EXPR_ONE = SortExpression.of("sort-one");
     private static final SortExpression<Object> SORT_EXPR_TWO = SortExpression.of("sort-two");
-    private static final TermFacetExpression<Object> FACET_EXPR_ONE = TermFacetExpression.of("facet-one");
-    private static final TermFacetExpression<Object> FACET_EXPR_TWO = TermFacetExpression.of("facet-two");
+    private static final TermFacetExpression<Object> FACET_EXPR_ONE = TermFacetExpression.of("facet-one-term");
+    private static final RangeFacetExpression<Object> FACET_EXPR_TWO = RangeFacetExpression.of("facet-two-range");
     private static final FilterExpression<Object> FILTER_EXPR_ONE = FilterExpression.of("filter-one");
     private static final FilterExpression<Object> FILTER_EXPR_TWO = FilterExpression.of("filter-two");
     private static final ExpansionPath<Object> EXPANSION_PATH_ONE = ExpansionPath.of("expansion-one");
     private static final ExpansionPath<Object> EXPANSION_PATH_TWO = ExpansionPath.of("expansion-two");
+    private static final FacetAndFilterExpression<Object> FACETED_SEARCH_EXPR_ONE = TermFacetAndFilterExpression.of(FACET_EXPR_ONE, singletonList(FILTER_EXPR_ONE));
+    private static final FacetAndFilterExpression<Object> FACETED_SEARCH_EXPR_TWO = RangeFacetAndFilterExpression.of(FACET_EXPR_TWO, singletonList(FILTER_EXPR_TWO));
 
     @Test
     public void buildsText() throws Exception {
@@ -67,6 +69,15 @@ public class MetaModelSearchDslTest {
                 .isEqualTo(singletonList(FILTER_EXPR_ONE));
         assertThat(dsl.plusFacetFilters(singletonList(FILTER_EXPR_TWO)).facetFilters())
                 .isEqualTo(asList(FILTER_EXPR_ONE, FILTER_EXPR_TWO));
+    }
+
+    @Test
+    public void buildsFacetedSearch() throws Exception {
+        final TestableSearchDsl dsl = new TestableSearchDsl().withFacetedSearch(FACETED_SEARCH_EXPR_ONE);
+        assertThat(dsl.facetedSearch())
+                .isEqualTo(singletonList(FACETED_SEARCH_EXPR_ONE));
+        assertThat(dsl.plusFacetedSearch(FACETED_SEARCH_EXPR_TWO).facetedSearch())
+                .isEqualTo(asList(FACETED_SEARCH_EXPR_ONE, FACETED_SEARCH_EXPR_TWO));
     }
 
     @Test

@@ -5,4 +5,9 @@ final class SimpleRangeFacetExpression<T> extends SimpleFacetExpression<T> imple
     SimpleRangeFacetExpression(final String sphereFacetExpression) {
         super(sphereFacetExpression);
     }
+
+    @Override
+    protected String pattern() {
+        return "^(?<attribute>[^:\\s]*)(?<value>:range.*?)( as (?<alias>.*))?$";
+    }
 }

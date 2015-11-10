@@ -5,4 +5,9 @@ final class SimpleFilteredFacetExpression<T> extends SimpleFacetExpression<T> im
     SimpleFilteredFacetExpression(final String sphereFacetExpression) {
         super(sphereFacetExpression);
     }
+
+    @Override
+    protected String pattern() {
+        return "^(?<attribute>[^:\\s]*)(?<value>:.*?)( as (?<alias>.*))?$";
+    }
 }

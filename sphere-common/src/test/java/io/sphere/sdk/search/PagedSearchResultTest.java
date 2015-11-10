@@ -16,9 +16,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class PagedSearchResultTest {
-    private static final TermFacetExpression<Object> TERM_FACET_EXPR = TermFacetExpression.of("termFacet");
-    private static final RangeFacetExpression<Object> RANGE_FACET_EXPR = RangeFacetExpression.of("rangeFacet");
-    private static final FilteredFacetExpression<Object> FILTERED_FACET_EXPR = FilteredFacetExpression.of("filteredFacet");
+    private static final TermFacetExpression<Object> TERM_FACET_EXPR = TermFacetExpression.of("foo as termFacet");
+    private static final RangeFacetExpression<Object> RANGE_FACET_EXPR = RangeFacetExpression.of("foo:range(0 to *) as rangeFacet");
+    private static final FilteredFacetExpression<Object> FILTERED_FACET_EXPR = FilteredFacetExpression.of("foo:\"a\" as filteredFacet");
 
     private static final TermFacetResult TERM_FACET_RESULT = TermFacetResult.of(0L, 2L, 0L, asList(TermStats.of("a", 1), TermStats.of("b", 2)));
     private static final RangeFacetResult RANGE_FACET_RESULT = RangeFacetResult.of(singletonList(RangeStats.of(null, null, 4L, "3.0", "10.0", "20.0", 7.0)));

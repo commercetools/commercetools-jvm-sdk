@@ -11,4 +11,9 @@ final class SimpleSortExpression<T> extends SimpleBaseExpression implements Sort
     public String expression() {
         return sphereSortExpression;
     }
+
+    @Override
+    protected String pattern() {
+        return "^(?<attribute>[^\\s]*) (?<value>(asc|desc)(\\.(max|min))?)$";
+    }
 }
