@@ -413,10 +413,7 @@ public class ProductProjectionSearchModelFacetedSearchIntegrationTest extends Pr
 
     private static PagedSearchResult<ProductProjection> executeFacetedSearch(final FacetAndFilterExpression<ProductProjection> facetedSearchExpr,
                                                                              final Consumer<List<String>> testFilter) {
-        final PagedSearchResult<ProductProjection> result = executeSearch(ProductProjectionSearch.ofStaged()
-                .plusFacets(facetedSearchExpr.facetExpression())
-                .plusResultFilters(facetedSearchExpr.filterExpressions())
-                .plusFacetFilters(facetedSearchExpr.filterExpressions()));
+        final PagedSearchResult<ProductProjection> result = executeSearch(ProductProjectionSearch.ofStaged().plusFacetedSearch(facetedSearchExpr));
         testFilter.accept(toIds(result.getResults()));
         return result;
     }
