@@ -72,7 +72,7 @@ import java.util.function.Function;
  <li class=new-in-release>Added getters {@link io.sphere.sdk.search.SearchExpression#value()} and {@link io.sphere.sdk.search.FacetExpression#alias()} for the Search API.</li>
  <li class=new-in-release>Added helper method {@link io.sphere.sdk.search.model.RangeFacetSearchModel#allRanges()} to request a range facet for all values.</li>
  <li class=fixed-in-release>Validates the provided parameters in filter and facet expressions in order to avoid generating wrong requests.</li>
- <li class=change-in-release>Deprecated {@link io.sphere.sdk.search.model.RangeFacetBaseSearchModel#onlyRangeAsString(java.lang.String, java.lang.String)} in favour of a more generic {@code io.sphere.sdk.search.model.RangeFacetBaseSearchModel#onlyRangeAsString(FacetRange)}.</li>
+ <li class=change-in-release>Deprecated {@code io.sphere.sdk.search.model.RangeFacetBaseSearchModel#onlyRangeAsString(java.lang.String, java.lang.String)} in favour of a more generic {@code io.sphere.sdk.search.model.RangeFacetBaseSearchModel#onlyRangeAsString(FacetRange)}.</li>
  </ul>
 
 
