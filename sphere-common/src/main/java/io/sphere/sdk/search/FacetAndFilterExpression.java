@@ -3,9 +3,8 @@ package io.sphere.sdk.search;
 import java.util.List;
 
 /**
- * Facets calculate statistical counts to aid in faceted navigation.
- * Example: variants.attributes.color:"green","yellow"
- * @param <T> Type of the resource for the facet
+ * Bundle of a facet and filter expressions, intended to be used for {@code Faceted Search}.
+ * @param <T> Type of the resource for the facet and filters
  */
 public interface FacetAndFilterExpression<T> {
 
