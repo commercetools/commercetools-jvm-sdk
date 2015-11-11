@@ -8,18 +8,24 @@ import java.util.function.Function;
 
 import static java.util.Collections.singletonList;
 
-abstract class FacetSearchModel<T, V> extends SearchModelImpl<T> {
+/**
+ * Model to build term facets.
+ * This class is abstract to force the subclass to select the methods that need to be highlighted and/or extended.
+ * @param <T> type of the resource
+ * @param <V> type of the value
+ */
+abstract class TermFacetBaseSearchModel<T, V> extends SearchModelImpl<T> {
     @Nullable
     protected final String alias;
     protected final Function<V, String> typeSerializer;
 
-    FacetSearchModel(@Nullable final SearchModel<T> parent, final Function<V, String> typeSerializer, final String alias) {
+    TermFacetBaseSearchModel(@Nullable final SearchModel<T> parent, final Function<V, String> typeSerializer, final String alias) {
         super(parent, null);
         this.typeSerializer = typeSerializer;
         this.alias = alias;
     }
 
-    FacetSearchModel(@Nullable final SearchModel<T> parent, final Function<V, String> typeSerializer) {
+    TermFacetBaseSearchModel(@Nullable final SearchModel<T> parent, final Function<V, String> typeSerializer) {
         super(parent, null);
         this.typeSerializer = typeSerializer;
         this.alias = null;
@@ -35,7 +41,7 @@ abstract class FacetSearchModel<T, V> extends SearchModelImpl<T> {
      * @param alias the identifier to use for the facet
      * @return a new facet search model identical to the current one, but with the given alias
      */
-    public abstract FacetSearchModel<T, V> withAlias(final String alias);
+    public abstract TermFacetBaseSearchModel<T, V> withAlias(final String alias);
 
     /**
      * Generates an expression to obtain the facets of the attribute for all values.

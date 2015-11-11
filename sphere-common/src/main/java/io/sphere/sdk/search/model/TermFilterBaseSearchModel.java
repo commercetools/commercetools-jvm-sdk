@@ -11,10 +11,16 @@ import static io.sphere.sdk.utils.IterableUtils.toStream;
 import static java.util.Collections.singletonList;
 import static java.util.stream.Collectors.toList;
 
-abstract class FilterSearchModel<T, V> extends SearchModelImpl<T> {
+/**
+ * Model to build term filters.
+ * This class is abstract to force the subclass to select the methods that need to be highlighted and/or extended.
+ * @param <T> type of the resource
+ * @param <V> type of the value
+ */
+abstract class TermFilterBaseSearchModel<T, V> extends SearchModelImpl<T> {
     protected Function<V, String> typeSerializer;
 
-    FilterSearchModel(@Nullable final SearchModel<T> parent, final Function<V, String> typeSerializer) {
+    TermFilterBaseSearchModel(@Nullable final SearchModel<T> parent, final Function<V, String> typeSerializer) {
         super(parent, null);
         this.typeSerializer = typeSerializer;
     }
@@ -44,7 +50,7 @@ abstract class FilterSearchModel<T, V> extends SearchModelImpl<T> {
      * For example: filtering by ["red", "blue"] would select only those elements with either "red" or "blue" value.
      * @param values the values to filter by
      * @return a filter expression for the given values
-     * @deprecated use {@link FilterSearchModel#byAny} instead
+     * @deprecated use {@link TermFilterBaseSearchModel#byAny} instead
      */
     @Deprecated
     public List<FilterExpression<T>> by(final Iterable<V> values) {

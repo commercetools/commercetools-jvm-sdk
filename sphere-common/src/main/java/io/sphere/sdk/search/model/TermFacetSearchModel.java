@@ -6,7 +6,12 @@ import io.sphere.sdk.search.TermFacetExpression;
 import javax.annotation.Nullable;
 import java.util.function.Function;
 
-public class TermFacetSearchModel<T, V> extends FacetSearchModel<T, V> {
+/**
+ * Model to build term facets.
+ * @param <T> type of the resource
+ * @param <V> type of the value
+ */
+public class TermFacetSearchModel<T, V> extends TermFacetBaseSearchModel<T, V> {
 
     TermFacetSearchModel(@Nullable final SearchModel<T> parent, final Function<V, String> typeSerializer, final String alias) {
         super(parent, typeSerializer, alias);

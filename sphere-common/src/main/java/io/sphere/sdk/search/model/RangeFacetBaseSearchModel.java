@@ -9,7 +9,13 @@ import java.util.function.Function;
 import static java.util.Arrays.asList;
 import static java.util.Collections.singletonList;
 
-abstract class RangeFacetBaseSearchModel<T, V extends Comparable<? super V>> extends FacetSearchModel<T, V> {
+/**
+ * Model to build range and term facets.
+ * This class is abstract to force the subclass to select the methods that need to be highlighted and/or extended.
+ * @param <T> type of the resource
+ * @param <V> type of the value
+ */
+abstract class RangeFacetBaseSearchModel<T, V extends Comparable<? super V>> extends TermFacetBaseSearchModel<T, V> {
 
     RangeFacetBaseSearchModel(@Nullable final SearchModel<T> parent, final Function<V, String> typeSerializer, final String alias) {
         super(parent, typeSerializer, alias);

@@ -6,6 +6,11 @@ import javax.annotation.Nullable;
 
 import java.util.function.Function;
 
+/**
+ * Model to build range and term facets.
+ * @param <T> type of the resource
+ * @param <V> type of the value
+ */
 public class RangeFacetSearchModel<T, V extends Comparable<? super V>> extends RangeFacetBaseSearchModel<T, V> {
 
     RangeFacetSearchModel(@Nullable final SearchModel<T> parent, final Function<V, String> typeSerializer, final String alias) {

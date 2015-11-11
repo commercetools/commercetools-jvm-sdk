@@ -7,6 +7,11 @@ import javax.annotation.Nullable;
 import java.util.List;
 import java.util.function.Function;;
 
+/**
+ * Model to build range and term filters.
+ * @param <T> type of the resource
+ * @param <V> type of the value
+ */
 public class RangeFilterSearchModel<T, V extends Comparable<? super V>> extends RangeFilterBaseSearchModel<T, V> {
 
     RangeFilterSearchModel(@Nullable final SearchModel<T> parent, final Function<V, String> typeSerializer) {

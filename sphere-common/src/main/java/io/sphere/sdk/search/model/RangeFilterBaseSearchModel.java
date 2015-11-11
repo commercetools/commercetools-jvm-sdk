@@ -10,7 +10,13 @@ import java.util.stream.StreamSupport;
 import static java.util.Collections.singletonList;
 import static java.util.stream.Collectors.toList;
 
-abstract class RangeFilterBaseSearchModel<T, V extends Comparable<? super V>> extends FilterSearchModel<T, V> {
+/**
+ * Model to build range and term filters.
+ * This class is abstract to force the subclass to select the methods that need to be highlighted and/or extended.
+ * @param <T> type of the resource
+ * @param <V> type of the value
+ */
+abstract class RangeFilterBaseSearchModel<T, V extends Comparable<? super V>> extends TermFilterBaseSearchModel<T, V> {
 
     RangeFilterBaseSearchModel(@Nullable final SearchModel<T> parent, final Function<V, String> typeSerializer) {
         super(parent, typeSerializer);

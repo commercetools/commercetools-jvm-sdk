@@ -10,7 +10,13 @@ import java.util.function.Function;
 
 import static java.util.Collections.emptyList;
 
-abstract class RangeFacetAndFilterBaseSearchModel<T, V extends Comparable<? super V>> extends FacetAndFilterSearchModel<T, V> {
+/**
+ * Model to build range and term facets and filters.
+ * This class is abstract to force the subclass to select the methods that need to be highlighted and/or extended.
+ * @param <T> type of the resource
+ * @param <V> type of the value
+ */
+abstract class RangeFacetAndFilterBaseSearchModel<T, V extends Comparable<? super V>> extends TermFacetAndFilterBaseSearchModel<T, V> {
     private final RangeFacetExpression<T> facetExpression;
     private final RangeFilterSearchModel<T, V> filterSearchModel;
 

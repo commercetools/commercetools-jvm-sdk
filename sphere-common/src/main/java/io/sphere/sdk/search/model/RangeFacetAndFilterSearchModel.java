@@ -6,6 +6,11 @@ import io.sphere.sdk.search.TermFacetAndFilterExpression;
 import javax.annotation.Nullable;
 import java.util.function.Function;
 
+/**
+ * Model to build range and term facets and filters.
+ * @param <T> type of the resource
+ * @param <V> type of the value
+ */
 public class RangeFacetAndFilterSearchModel<T, V extends Comparable<? super V>> extends RangeFacetAndFilterBaseSearchModel<T, V> {
 
     RangeFacetAndFilterSearchModel(@Nullable final SearchModel<T> parent, final Function<V, String> typeSerializer) {
