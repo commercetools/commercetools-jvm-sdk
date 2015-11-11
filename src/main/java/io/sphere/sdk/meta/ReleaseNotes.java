@@ -68,11 +68,11 @@ import java.util.function.Function;
 
  <h3 class=released-version id="v1_0_0_M21">1.0.0-M21</h3>
  <ul>
- <li class=new-in-release>Introduced the possibility to perform faceted search on products, for more information see {@link io.sphere.sdk.meta.SearchDocumentation#faceted-search}.</li>
+ <li class=new-in-release>Introduced the possibility to perform faceted search on products, for more information see the {@link io.sphere.sdk.meta.SearchDocumentation search documentation}, section Faceted Search.</li>
  <li class=new-in-release>Added getters {@link io.sphere.sdk.search.SearchExpression#value()} and {@link io.sphere.sdk.search.FacetExpression#alias()} for the Search API.</li>
  <li class=new-in-release>Added helper method {@link io.sphere.sdk.search.model.RangeFacetSearchModel#allRanges()} to request a range facet for all values.</li>
  <li class=fixed-in-release>Validates the provided parameters in filter and facet expressions in order to avoid generating wrong requests.</li>
- <li class=change-in-release>Deprecated {@link io.sphere.sdk.search.model.RangeFacetBaseSearchModel#onlyRangeAsString(java.lang.String, java.lang.String)} in favour of a more generic {@link io.sphere.sdk.search.model.RangeFacetBaseSearchModel#onlyRangeAsString(io.sphere.sdk.search.model.FacetRange)}.</li>
+ <li class=change-in-release>Deprecated {@link io.sphere.sdk.search.model.RangeFacetBaseSearchModel#onlyRangeAsString(java.lang.String, java.lang.String)} in favour of a more generic {@code io.sphere.sdk.search.model.RangeFacetBaseSearchModel#onlyRangeAsString(FacetRange)}.</li>
  </ul>
 
 
