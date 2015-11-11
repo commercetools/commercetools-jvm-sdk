@@ -5,12 +5,13 @@ import io.sphere.sdk.search.FilterExpression;
 import javax.annotation.Nullable;
 import java.util.List;
 import java.util.function.Function;
-import java.util.stream.StreamSupport;
 
-import static java.util.Collections.singletonList;
-import static java.util.stream.Collectors.toList;
-
-public class TermFilterSearchModel<T, V> extends FilterSearchModel<T, V> {
+/**
+ * Model to build term filters.
+ * @param <T> type of the resource
+ * @param <V> type of the value
+ */
+public class TermFilterSearchModel<T, V> extends TermFilterBaseSearchModel<T, V> {
 
     TermFilterSearchModel(@Nullable final SearchModel<T> parent, final Function<V, String> typeSerializer) {
         super(parent, typeSerializer);

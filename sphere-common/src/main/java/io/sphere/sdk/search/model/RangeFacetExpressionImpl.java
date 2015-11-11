@@ -16,4 +16,10 @@ class RangeFacetExpressionImpl<T, V extends Comparable<? super V>> extends Range
     public boolean equals(Object o) {
         return o != null && o instanceof FacetExpression && expression().equals(((FacetExpression) o).expression());
     }
+
+    @Nullable
+    @Override
+    public String alias() {
+        return super.alias();
+    }
 }

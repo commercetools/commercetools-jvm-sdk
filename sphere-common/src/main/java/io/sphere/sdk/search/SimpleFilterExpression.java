@@ -8,6 +8,11 @@ final class SimpleFilterExpression<T> extends SimpleBaseExpression implements Fi
     }
 
     @Override
+    protected String pattern() {
+        return "^(?<attribute>[^:\\s]*)(?<value>:(range)?.*)$";
+    }
+
+    @Override
     public String expression() {
         return sphereFilterExpression;
     }

@@ -1,15 +1,15 @@
 package io.sphere.sdk.search.model;
 
 import io.sphere.sdk.search.FilterExpression;
-import io.sphere.sdk.search.model.SearchModel;
-import io.sphere.sdk.search.model.TermExpression;
 
 import java.util.function.Function;
+
+import static io.sphere.sdk.utils.IterableUtils.requireNonEmpty;
 
 class TermFilterExpression<T, V> extends TermExpression<T, V> implements FilterExpression<T> {
 
     TermFilterExpression(final SearchModel<T> searchModel, final Function<V, String> typeSerializer, final Iterable<V> terms) {
-        super(searchModel, typeSerializer, terms, null);
+        super(searchModel, typeSerializer, requireNonEmpty(terms), null);
     }
 
     @Override

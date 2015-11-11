@@ -31,6 +31,7 @@ public class MetaModelSearchDslBuilder<T, C extends MetaModelSearchDsl<T, C, S, 
     protected List<FilterExpression<T>> resultFilters = emptyList();
     protected List<FilterExpression<T>> queryFilters = emptyList();
     protected List<FilterExpression<T>> facetFilters = emptyList();
+    protected List<FacetAndFilterExpression<T>> facetedSearch = emptyList();
     protected List<SortExpression<T>> sort = emptyList();
     @Nullable
     protected Long limit;
@@ -66,6 +67,7 @@ public class MetaModelSearchDslBuilder<T, C extends MetaModelSearchDsl<T, C, S, 
         resultFilters = template.resultFilters();
         queryFilters = template.queryFilters();
         facetFilters = template.facetFilters();
+        facetedSearch = template.facetedSearch();
         sort = template.sort();
         limit = template.limit();
         offset = template.offset();
@@ -98,7 +100,12 @@ public class MetaModelSearchDslBuilder<T, C extends MetaModelSearchDsl<T, C, S, 
         this.facetFilters = facetFilters;
         return this;
     }
-    
+
+    public MetaModelSearchDslBuilder<T, C, S, L, F, E> facetedSearch(final List<FacetAndFilterExpression<T>> facetedSearch) {
+        this.facetedSearch = facetedSearch;
+        return this;
+    }
+
     public MetaModelSearchDslBuilder<T, C, S, L, F, E> sort(final List<SortExpression<T>> sort) {
         this.sort = sort;
         return this;

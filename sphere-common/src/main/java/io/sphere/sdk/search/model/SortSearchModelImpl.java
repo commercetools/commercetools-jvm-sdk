@@ -7,7 +7,12 @@ import io.sphere.sdk.search.SortExpression;
 import static io.sphere.sdk.search.SearchSortDirection.ASC;
 import static io.sphere.sdk.search.SearchSortDirection.DESC;
 
-class SortSearchModelImpl<T, S extends SortSearchModel<T>> extends Base implements SortSearchModel<T> {
+/**
+ * A sort model to decide the direction of a model with single values.
+ * This class is abstract to force the subclass to select the methods that need to be highlighted and/or extended.
+ * @param <T> type of the resource
+ */
+abstract class SortSearchModelImpl<T, S extends SortSearchModel<T>> extends Base implements SortSearchModel<T> {
     private final SearchModel<T> searchModel;
 
     SortSearchModelImpl(final SortableSearchModel<T, S> searchModel) {

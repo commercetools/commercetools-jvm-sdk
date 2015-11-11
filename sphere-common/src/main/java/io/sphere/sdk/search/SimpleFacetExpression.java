@@ -1,7 +1,7 @@
 package io.sphere.sdk.search;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import javax.annotation.Nullable;
+import java.util.Optional;
 
 abstract class SimpleFacetExpression<T> extends SimpleBaseExpression implements FacetExpression<T> {
     private final String sphereFacetExpression;
@@ -17,8 +17,12 @@ abstract class SimpleFacetExpression<T> extends SimpleBaseExpression implements 
 
     @Override
     public String resultPath() {
-        final Pattern pattern = Pattern.compile(".* as ([\\w]*)");
-        final Matcher matcher = pattern.matcher(expression());
-        return matcher.find() ? matcher.group(1) : attributePath();
+        return Optional.ofNullable(alias()).orElse(attributePath());
+    }
+
+    @Nullable
+    @Override
+    public String alias() {
+        return matchExpression(matcher -> matcher.group("alias"));
     }
 }

@@ -14,4 +14,11 @@ interface TermModel<T, V> {
      */
     TermFacetSearchModel<T, V> faceted();
 
+    /**
+     * Eventually generates both an expression to obtain the facets of the attribute for all terms
+     * and an expression to filter elements by certain values.
+     * @return the model to specify the values from which to obtain the facets and to filter by
+     */
+    TermFacetAndFilterSearchModel<T, V> facetedAndFiltered();
+
 }

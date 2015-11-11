@@ -223,6 +223,22 @@ import io.sphere.sdk.models.Base;
 
  {@include.example io.sphere.sdk.products.search.ProductProjectionSearchFiltersIntegrationTest#filterByValueAsString}
 
+ <h4 id=faceted-search>Faceted Search</h4>
+
+ <p>A faceted search is the most typical application of facets and filters when browsing products, which consists of using some of the facet result values as filter parameters. This enables the user to see all possible attribute values of the current product list (using facets) and search by these exact values (using filters).</p>
+
+ <p>This behaviour is achieved by using on the same attribute a {@code Facet} for all terms or ranges, together with a {@code Filter Facets} and {@code Filter Results}, both with the same filter parameters.</p>
+
+ <p>The {@link io.sphere.sdk.products.search.ProductProjectionSearchModel} simplifies all this process by allowing you to build faceted search expressions directly, just providing the required filter parameters.</p>
+
+ <p>The following example demonstrates how to perform a faceted search with the model, involving two different attributes:</p>
+
+ {@include.example io.sphere.sdk.products.search.ProductProjectionSearchFacetedSearchIntegrationTest#facetedSearchExample}
+
+ <p>You can see now how the same request is performed without the faceted search model:</p>
+
+ {@include.example io.sphere.sdk.products.search.ProductProjectionSearchFacetedSearchIntegrationTest#facetedSearchVerboseExample}
+
  */
 public final class SearchDocumentation extends Base {
     private SearchDocumentation() {

@@ -20,4 +20,9 @@ class RangeTermModelImpl<T, V extends Comparable<? super V>> extends SearchModel
     public RangeFacetSearchModel<T, V> faceted() {
         return new RangeFacetSearchModel<>(this, typeSerializer);
     }
+
+    @Override
+    public RangeFacetAndFilterSearchModel<T, V> facetedAndFiltered() {
+        return new RangeFacetAndFilterSearchModel<>(this, typeSerializer);
+    }
 }

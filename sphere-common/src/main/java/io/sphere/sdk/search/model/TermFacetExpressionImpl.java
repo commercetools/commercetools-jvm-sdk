@@ -18,4 +18,16 @@ class TermFacetExpressionImpl<T, V> extends TermExpression<T, V> implements Term
     public boolean equals(Object o) {
         return o != null && o instanceof FacetExpression && expression().equals(((FacetExpression) o).expression());
     }
+
+    @Nullable
+    @Override
+    public String alias() {
+        return super.alias();
+    }
+
+    @Nullable
+    @Override
+    public String value() {
+        return null;
+    }
 }
