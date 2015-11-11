@@ -122,6 +122,16 @@ extends java.lang.Object</pre>
  </ul>
  -->
 
+ <h3 class=released-version id="v1_0_0_M21">1.0.0-M21</h3>
+ <ul>
+ <li class=new-in-release>Introduced the possibility to perform faceted search on products, for more information see the <a href="../../../../io/sphere/sdk/meta/SearchDocumentation.html" title="class in io.sphere.sdk.meta"><code>search documentation</code></a>, section Faceted Search.</li>
+ <li class=new-in-release>Added getters <a href="../../../../io/sphere/sdk/search/SearchExpression.html#value--"><code>SearchExpression.value()</code></a> and <a href="../../../../io/sphere/sdk/search/FacetExpression.html#alias--"><code>FacetExpression.alias()</code></a> for the Search API.</li>
+ <li class=new-in-release>Added helper method <a href="../../../../io/sphere/sdk/search/model/RangeFacetSearchModel.html#allRanges--"><code>RangeFacetSearchModel.allRanges()</code></a> to request a range facet for all values.</li>
+ <li class=fixed-in-release>Validates the provided parameters in filter and facet expressions in order to avoid generating wrong requests.</li>
+ <li class=change-in-release>Deprecated <code>io.sphere.sdk.search.model.RangeFacetBaseSearchModel#onlyRangeAsString(java.lang.String, java.lang.String)</code> in favour of a more generic <code>io.sphere.sdk.search.model.RangeFacetBaseSearchModel#onlyRangeAsString(FacetRange)</code>.</li>
+ </ul>
+
+
  <h3 class=released-version id="v1_0_0_M20">1.0.0-M20</h3>
  <ul>
   <li class=change-in-release><code>query.withSort(m -&gt; m.createdAt().sort(DESC));</code> is deprecated, use it with <code>query.withSort(m -&gt; m.createdAt().sort().desc());</code></li>
