@@ -1,8 +1,7 @@
 package io.sphere.sdk.search.model;
 
+import io.sphere.sdk.models.Base;
 import io.sphere.sdk.search.FilterExpression;
-
-import javax.annotation.Nullable;
 
 import java.util.List;
 import java.util.function.Function;
@@ -17,11 +16,12 @@ import static java.util.stream.Collectors.toList;
  * @param <T> type of the resource
  * @param <V> type of the value
  */
-abstract class TermFilterBaseSearchModel<T, V> extends SearchModelImpl<T> {
-    protected Function<V, String> typeSerializer;
+abstract class TermFilterBaseSearchModel<T, V> extends Base {
+    protected final SearchModel<T> searchModel;
+    protected final Function<V, String> typeSerializer;
 
-    TermFilterBaseSearchModel(@Nullable final SearchModel<T> parent, final Function<V, String> typeSerializer) {
-        super(parent, null);
+    TermFilterBaseSearchModel(final SearchModel<T> searchModel, final Function<V, String> typeSerializer) {
+        this.searchModel = searchModel;
         this.typeSerializer = typeSerializer;
     }
 
@@ -96,7 +96,7 @@ abstract class TermFilterBaseSearchModel<T, V> extends SearchModelImpl<T> {
     }
 
     private TermFilterExpression<T, V> filterBy(final Iterable<V> values) {
-        return new TermFilterExpression<>(this, typeSerializer, values);
+        return new TermFilterExpression<>(searchModel, typeSerializer, values);
     }
 
     private TermFilterExpression<T, String> filterByAsString(final String value) {
@@ -104,6 +104,6 @@ abstract class TermFilterBaseSearchModel<T, V> extends SearchModelImpl<T> {
     }
 
     private TermFilterExpression<T, String> filterByAsString(final Iterable<String> values) {
-        return new TermFilterExpression<>(this, TypeSerializer.ofString(), values);
+        return new TermFilterExpression<>(searchModel, TypeSerializer.ofString(), values);
     }
 }

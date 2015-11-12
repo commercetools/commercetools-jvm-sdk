@@ -32,6 +32,6 @@ public class SortExpressionTest {
     }
 
     private SearchModelImpl<Object> sortModel() {
-        return new SearchModelImpl<>(null, "foo").appended("bar").appended("size");
+        return new SearchModelImpl<>("foo").appended("bar").appended("size");
     }
 }

@@ -2,7 +2,6 @@ package io.sphere.sdk.search.model;
 
 import io.sphere.sdk.search.FilterExpression;
 
-import javax.annotation.Nullable;
 import java.util.List;
 import java.util.function.Function;
 
@@ -13,8 +12,8 @@ import java.util.function.Function;
  */
 public class TermFilterSearchModel<T, V> extends TermFilterBaseSearchModel<T, V> {
 
-    TermFilterSearchModel(@Nullable final SearchModel<T> parent, final Function<V, String> typeSerializer) {
-        super(parent, typeSerializer);
+    TermFilterSearchModel(final SearchModel<T> searchModel, final Function<V, String> typeSerializer) {
+        super(searchModel, typeSerializer);
     }
 
     @Override
@@ -33,6 +32,6 @@ public class TermFilterSearchModel<T, V> extends TermFilterBaseSearchModel<T, V>
     }
 
     public static <T, V> TermFilterSearchModel<T, V> of(final String path, final Function<V, String> typeSerializer) {
-        return new TermFilterSearchModel<>(new SearchModelImpl<>(null, path), typeSerializer);
+        return new TermFilterSearchModel<>(new SearchModelImpl<>(path), typeSerializer);
     }
 }

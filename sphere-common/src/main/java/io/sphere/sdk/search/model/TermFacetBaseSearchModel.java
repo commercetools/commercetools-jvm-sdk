@@ -1,5 +1,6 @@
 package io.sphere.sdk.search.model;
 
+import io.sphere.sdk.models.Base;
 import io.sphere.sdk.search.*;
 
 import javax.annotation.Nullable;
@@ -14,21 +15,20 @@ import static java.util.Collections.singletonList;
  * @param <T> type of the resource
  * @param <V> type of the value
  */
-abstract class TermFacetBaseSearchModel<T, V> extends SearchModelImpl<T> {
+abstract class TermFacetBaseSearchModel<T, V> extends Base {
+    protected final SearchModel<T> searchModel;
+    protected final Function<V, String> typeSerializer;
     @Nullable
     protected final String alias;
-    protected final Function<V, String> typeSerializer;
 
-    TermFacetBaseSearchModel(@Nullable final SearchModel<T> parent, final Function<V, String> typeSerializer, final String alias) {
-        super(parent, null);
+    TermFacetBaseSearchModel(final SearchModel<T> searchModel, final Function<V, String> typeSerializer, final String alias) {
+        this.searchModel = searchModel;
         this.typeSerializer = typeSerializer;
         this.alias = alias;
     }
 
-    TermFacetBaseSearchModel(@Nullable final SearchModel<T> parent, final Function<V, String> typeSerializer) {
-        super(parent, null);
-        this.typeSerializer = typeSerializer;
-        this.alias = null;
+    TermFacetBaseSearchModel(final SearchModel<T> searchModel, final Function<V, String> typeSerializer) {
+        this(searchModel, typeSerializer, null);
     }
 
     @Nullable
@@ -49,7 +49,7 @@ abstract class TermFacetBaseSearchModel<T, V> extends SearchModelImpl<T> {
      * @return a facet expression for all values
      */
     public TermFacetExpression<T> allTerms() {
-        return new TermFacetExpressionImpl<>(this, typeSerializer, alias);
+        return new TermFacetExpressionImpl<>(searchModel, typeSerializer, alias);
     }
 
     /**
@@ -69,7 +69,7 @@ abstract class TermFacetBaseSearchModel<T, V> extends SearchModelImpl<T> {
      * @return a facet expression for only the given values
      */
     public FilteredFacetExpression<T> onlyTerm(final Iterable<V> values) {
-        return new FilteredFacetExpressionImpl<>(this, typeSerializer, values, alias);
+        return new FilteredFacetExpressionImpl<>(searchModel, typeSerializer, values, alias);
     }
 
     /**
@@ -79,7 +79,7 @@ abstract class TermFacetBaseSearchModel<T, V> extends SearchModelImpl<T> {
      * @return a facet expression for only the given values
      */
     public FilteredFacetExpression<T> onlyTermAsString(final Iterable<String> values) {
-        return new FilteredFacetExpressionImpl<>(this, TypeSerializer.ofString(), values, alias);
+        return new FilteredFacetExpressionImpl<>(searchModel, TypeSerializer.ofString(), values, alias);
     }
 
     /**
@@ -90,7 +90,7 @@ abstract class TermFacetBaseSearchModel<T, V> extends SearchModelImpl<T> {
      */
     @Deprecated
     public TermFacetExpression<T> byAllTerms() {
-        return new TermFacetExpressionImpl<>(this, typeSerializer, alias);
+        return new TermFacetExpressionImpl<>(searchModel, typeSerializer, alias);
     }
 
     /**
@@ -114,6 +114,6 @@ abstract class TermFacetBaseSearchModel<T, V> extends SearchModelImpl<T> {
      */
     @Deprecated
     public FilteredFacetExpression<T> byTerm(final Iterable<V> values) {
-        return new FilteredFacetExpressionImpl<>(this, typeSerializer, values, alias);
+        return new FilteredFacetExpressionImpl<>(searchModel, typeSerializer, values, alias);
     }
 }

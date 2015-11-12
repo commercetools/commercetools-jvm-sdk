@@ -47,4 +47,8 @@ public class MultiValueSortSearchModel<T> extends SortSearchModelImpl<T> {
     public SortExpression<T> byDescWithMin() {
         return by(DESC_MIN);
     }
+
+    public static <T> MultiValueSortSearchModel<T> of(final String path) {
+        return new MultiValueSortSearchModel<>(new SearchModelImpl<>(path));
+    }
 }

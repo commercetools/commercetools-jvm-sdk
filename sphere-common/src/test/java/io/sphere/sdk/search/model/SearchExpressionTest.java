@@ -6,6 +6,7 @@ import org.junit.Test;
 import java.math.BigDecimal;
 import java.util.List;
 
+import static io.sphere.sdk.search.SearchSortDirection.ASC;
 import static io.sphere.sdk.search.SearchSortDirection.ASC_MAX;
 import static io.sphere.sdk.search.model.TypeSerializer.ofNumber;
 import static io.sphere.sdk.search.model.TypeSerializer.ofString;
@@ -27,7 +28,9 @@ public class SearchExpressionTest {
 
     @Test
     public void buildsTermFilterExpression() throws Exception {
-        final TermFilterExpression<Object, String> filter = new TermFilterExpression<>(model(), ofString(), TERMS);
+        final List<FilterExpression<Object>> filters = TermFilterSearchModel.of(ATTRIBUTE_PATH, ofString()).byAny(TERMS);
+        assertThat(filters).hasSize(1);
+        final FilterExpression<Object> filter = filters.get(0);
         assertThat(filter.expression()).isEqualTo(ATTRIBUTE_PATH + TERM_VALUE);
         assertThat(filter.attributePath()).isEqualTo(ATTRIBUTE_PATH);
         assertThat(filter.value()).isEqualTo(TERM_VALUE);
@@ -35,7 +38,9 @@ public class SearchExpressionTest {
 
     @Test
     public void buildsRangeFilterExpression() throws Exception {
-        final RangeFilterExpression<Object, BigDecimal> filter = new RangeFilterExpression<>(model(), ofNumber(), FILTER_RANGES);
+        final List<FilterExpression<Object>> filters = RangeTermFilterSearchModel.of(ATTRIBUTE_PATH, ofNumber()).byAnyRange(FILTER_RANGES);
+        assertThat(filters).hasSize(1);
+        final FilterExpression<Object> filter = filters.get(0);
         assertThat(filter.expression()).isEqualTo(ATTRIBUTE_PATH + RANGE_VALUE);
         assertThat(filter.attributePath()).isEqualTo(ATTRIBUTE_PATH);
         assertThat(filter.value()).isEqualTo(RANGE_VALUE);
@@ -43,7 +48,7 @@ public class SearchExpressionTest {
 
     @Test
     public void buildsTermFacetExpression() throws Exception {
-        final TermFacetExpression<Object> facet = new TermFacetExpressionImpl<>(model(), ofString(), null);
+        final TermFacetExpression<Object> facet = TermFacetSearchModel.of(ATTRIBUTE_PATH, ofString()).allTerms();
         assertThat(facet.expression()).isEqualTo(ATTRIBUTE_PATH);
         assertThat(facet.attributePath()).isEqualTo(ATTRIBUTE_PATH);
         assertThat(facet.value()).isNull();
@@ -53,7 +58,7 @@ public class SearchExpressionTest {
 
     @Test
     public void buildsRangeFacetExpression() throws Exception {
-        final RangeFacetExpression<Object> facet = new RangeFacetExpressionImpl<>(model(), ofNumber(), FACET_RANGES, null);
+        final RangeFacetExpression<Object> facet = RangeTermFacetSearchModel.of(ATTRIBUTE_PATH, ofNumber()).onlyRange(FACET_RANGES);
         assertThat(facet.expression()).isEqualTo(ATTRIBUTE_PATH + RANGE_VALUE);
         assertThat(facet.attributePath()).isEqualTo(ATTRIBUTE_PATH);
         assertThat(facet.value()).isEqualTo(RANGE_VALUE);
@@ -63,7 +68,7 @@ public class SearchExpressionTest {
 
     @Test
     public void buildsFilteredFacetExpression() throws Exception {
-        final FilteredFacetExpression<Object> facet = new FilteredFacetExpressionImpl<>(model(), ofString(), TERMS, null);
+        final FilteredFacetExpression<Object> facet = TermFacetSearchModel.of(ATTRIBUTE_PATH, ofString()).onlyTerm(TERMS);
         assertThat(facet.expression()).isEqualTo(ATTRIBUTE_PATH + TERM_VALUE);
         assertThat(facet.attributePath()).isEqualTo(ATTRIBUTE_PATH);
         assertThat(facet.value()).isEqualTo(TERM_VALUE);
@@ -73,7 +78,7 @@ public class SearchExpressionTest {
 
     @Test
     public void buildsTermFacetExpressionWithAlias() throws Exception {
-        final TermFacetExpression<Object> facet = new TermFacetExpressionImpl<>(model(), ofString(), ALIAS);
+        final TermFacetExpression<Object> facet = TermFacetSearchModel.of(ATTRIBUTE_PATH, ofString()).withAlias(ALIAS).allTerms();
         assertThat(facet.expression()).isEqualTo(ATTRIBUTE_PATH + AS_ALIAS);
         assertThat(facet.attributePath()).isEqualTo(ATTRIBUTE_PATH);
         assertThat(facet.value()).isNull();
@@ -83,7 +88,7 @@ public class SearchExpressionTest {
 
     @Test
     public void buildsRangeFacetExpressionWithAlias() throws Exception {
-        final RangeFacetExpression<Object> facet = new RangeFacetExpressionImpl<>(model(), ofNumber(), FACET_RANGES, ALIAS);
+        final RangeFacetExpression<Object> facet = RangeTermFacetSearchModel.of(ATTRIBUTE_PATH, ofNumber()).withAlias(ALIAS).onlyRange(FACET_RANGES);
         assertThat(facet.expression()).isEqualTo(ATTRIBUTE_PATH + RANGE_VALUE + AS_ALIAS);
         assertThat(facet.attributePath()).isEqualTo(ATTRIBUTE_PATH);
         assertThat(facet.value()).isEqualTo(RANGE_VALUE);
@@ -93,7 +98,7 @@ public class SearchExpressionTest {
 
     @Test
     public void buildsFilteredFacetExpressionWithAlias() throws Exception {
-        final FilteredFacetExpression<Object> facet = new FilteredFacetExpressionImpl<>(model(), ofString(), TERMS, ALIAS);
+        final FilteredFacetExpression<Object> facet = TermFacetSearchModel.of(ATTRIBUTE_PATH, ofString()).withAlias(ALIAS).onlyTerm(TERMS);
         assertThat(facet.expression()).isEqualTo(ATTRIBUTE_PATH + TERM_VALUE + AS_ALIAS);
         assertThat(facet.attributePath()).isEqualTo(ATTRIBUTE_PATH);
         assertThat(facet.value()).isEqualTo(TERM_VALUE);
@@ -102,8 +107,16 @@ public class SearchExpressionTest {
     }
 
     @Test
-    public void buildsSortExpression() throws Exception {
-        final SortExpression<Object> sort = new SortExpressionImpl<>(model(), ASC_MAX);
+    public void buildsSingleValuedSortExpression() throws Exception {
+        final SortExpression<Object> sort = SingleValueSortSearchModel.of(ATTRIBUTE_PATH).byAsc();
+        assertThat(sort.expression()).isEqualTo(ATTRIBUTE_PATH + " " + ASC);
+        assertThat(sort.attributePath()).isEqualTo(ATTRIBUTE_PATH);
+        assertThat(sort.value()).isEqualTo(ASC.toString());
+    }
+
+    @Test
+    public void buildsMultiValuedSortExpression() throws Exception {
+        final SortExpression<Object> sort = MultiValueSortSearchModel.of(ATTRIBUTE_PATH).byAscWithMax();
         assertThat(sort.expression()).isEqualTo(ATTRIBUTE_PATH + " " + ASC_MAX);
         assertThat(sort.attributePath()).isEqualTo(ATTRIBUTE_PATH);
         assertThat(sort.value()).isEqualTo(ASC_MAX.toString());
@@ -111,33 +124,29 @@ public class SearchExpressionTest {
 
     @Test
     public void failsOnEmptyTermFilterExpression() throws Exception {
-        assertThatThrownBy(() -> new TermFilterExpression<>(model(), ofString(), emptyList()))
+        assertThatThrownBy(() -> TermFilterSearchModel.of(ATTRIBUTE_PATH, ofString()).byAny(emptyList()))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("iterable must not be empty");
     }
 
     @Test
     public void failsOnEmptyRangeFilterExpression() throws Exception {
-        assertThatThrownBy(() -> new RangeFilterExpression<>(model(), ofNumber(), emptyList()))
+        assertThatThrownBy(() -> RangeTermFilterSearchModel.of(ATTRIBUTE_PATH, ofNumber()).byAnyRange(emptyList()))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("iterable must not be empty");
     }
 
     @Test
     public void failsOnEmptyFilteredFacetExpression() throws Exception {
-        assertThatThrownBy(() -> new FilteredFacetExpressionImpl<>(model(), ofString(), emptyList(), null))
+        assertThatThrownBy(() -> TermFacetSearchModel.of(ATTRIBUTE_PATH, ofString()).onlyTerm(emptyList()))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("iterable must not be empty");
     }
 
     @Test
     public void failsOnEmptyRangeFacetExpression() throws Exception {
-        assertThatThrownBy(() -> new RangeFacetExpressionImpl<>(model(), ofNumber(), emptyList(), null))
+        assertThatThrownBy(() -> RangeTermFacetSearchModel.of(ATTRIBUTE_PATH, ofNumber()).onlyRange(emptyList()))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("iterable must not be empty");
-    }
-
-    private SearchModel<Object> model() {
-        return new SearchModelImpl<>(null, "variants").appended("attributes").appended("size");
     }
 }

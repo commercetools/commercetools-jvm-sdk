@@ -16,7 +16,7 @@ public class FacetSearchModelTest {
 
     @Test
     public void rangeFacetsAllowAlias() throws Exception {
-        final RangeFacetSearchModel<Object, String> facetModel = new RangeFacetSearchModel<>(null, ofString());
+        final RangeTermFacetSearchModel<Object, String> facetModel = new RangeTermFacetSearchModel<>(null, ofString());
         assertThat(facetModel.getAlias()).isNull();
         assertThat(facetModel.withAlias("my-alias").getAlias()).isEqualTo("my-alias");
     }

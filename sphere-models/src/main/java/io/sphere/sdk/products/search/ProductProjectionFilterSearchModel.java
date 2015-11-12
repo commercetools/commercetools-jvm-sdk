@@ -42,12 +42,12 @@ public class ProductProjectionFilterSearchModel extends ProductDataFilterSearchM
     }
 
     @Override
-    public RangeFilterSearchModel<ProductProjection, ZonedDateTime> createdAt() {
+    public RangeTermFilterSearchModel<ProductProjection, ZonedDateTime> createdAt() {
         return super.createdAt();
     }
 
     @Override
-    public RangeFilterSearchModel<ProductProjection, ZonedDateTime> lastModifiedAt() {
+    public RangeTermFilterSearchModel<ProductProjection, ZonedDateTime> lastModifiedAt() {
         return super.lastModifiedAt();
     }
 }

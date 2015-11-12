@@ -12,17 +12,17 @@ class RangeTermModelImpl<T, V extends Comparable<? super V>> extends SearchModel
     }
 
     @Override
-    public RangeFilterSearchModel<T, V> filtered() {
-        return new RangeFilterSearchModel<>(this, typeSerializer);
+    public RangeTermFilterSearchModel<T, V> filtered() {
+        return new RangeTermFilterSearchModel<>(this, typeSerializer);
     }
 
     @Override
-    public RangeFacetSearchModel<T, V> faceted() {
-        return new RangeFacetSearchModel<>(this, typeSerializer);
+    public RangeTermFacetSearchModel<T, V> faceted() {
+        return new RangeTermFacetSearchModel<>(this, typeSerializer);
     }
 
     @Override
-    public RangeFacetAndFilterSearchModel<T, V> facetedAndFiltered() {
-        return new RangeFacetAndFilterSearchModel<>(this, typeSerializer);
+    public RangeTermFacetAndFilterSearchModel<T, V> facetedAndFiltered() {
+        return new RangeTermFacetAndFilterSearchModel<>(this, typeSerializer);
     }
 }

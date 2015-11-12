@@ -66,7 +66,7 @@ public class FacetExpressionTest {
         return new StringSearchModel<>(null, "path.to.attribute").faceted();
     }
 
-    private RangeFacetSearchModel<Object, BigDecimal> numberModel() {
+    private RangeTermFacetSearchModel<Object, BigDecimal> numberModel() {
         return new NumberSearchModel<>(null, "path.to.attribute").faceted();
     }
 

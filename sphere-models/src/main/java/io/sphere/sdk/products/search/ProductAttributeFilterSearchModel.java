@@ -35,7 +35,7 @@ public class ProductAttributeFilterSearchModel extends SearchModelImpl<ProductPr
         return localizedEnumFilterSearchModel(attributeName);
     }
 
-    public RangeFilterSearchModel<ProductProjection, BigDecimal> ofNumber(final String attributeName) {
+    public RangeTermFilterSearchModel<ProductProjection, BigDecimal> ofNumber(final String attributeName) {
         return numberSearchModel(attributeName).filtered();
     }
 
@@ -43,15 +43,15 @@ public class ProductAttributeFilterSearchModel extends SearchModelImpl<ProductPr
         return moneyFilterSearchModel(attributeName);
     }
 
-    public RangeFilterSearchModel<ProductProjection, LocalDate> ofDate(final String attributeName) {
+    public RangeTermFilterSearchModel<ProductProjection, LocalDate> ofDate(final String attributeName) {
         return dateSearchModel(attributeName).filtered();
     }
 
-    public RangeFilterSearchModel<ProductProjection, LocalTime> ofTime(final String attributeName) {
+    public RangeTermFilterSearchModel<ProductProjection, LocalTime> ofTime(final String attributeName) {
         return timeSearchModel(attributeName).filtered();
     }
 
-    public RangeFilterSearchModel<ProductProjection, ZonedDateTime> ofDateTime(final String attributeName) {
+    public RangeTermFilterSearchModel<ProductProjection, ZonedDateTime> ofDateTime(final String attributeName) {
         return datetimeSearchModel(attributeName).filtered();
     }
 
@@ -79,7 +79,7 @@ public class ProductAttributeFilterSearchModel extends SearchModelImpl<ProductPr
         return ofLocalizableEnum(attributeName);
     }
 
-    public RangeFilterSearchModel<ProductProjection, BigDecimal> ofNumberSet(final String attributeName) {
+    public RangeTermFilterSearchModel<ProductProjection, BigDecimal> ofNumberSet(final String attributeName) {
         return ofNumber(attributeName);
     }
 
@@ -87,15 +87,15 @@ public class ProductAttributeFilterSearchModel extends SearchModelImpl<ProductPr
         return ofMoney(attributeName);
     }
 
-    public RangeFilterSearchModel<ProductProjection, LocalDate> ofDateSet(final String attributeName) {
+    public RangeTermFilterSearchModel<ProductProjection, LocalDate> ofDateSet(final String attributeName) {
         return ofDate(attributeName);
     }
 
-    public RangeFilterSearchModel<ProductProjection, LocalTime> ofTimeSet(final String attributeName) {
+    public RangeTermFilterSearchModel<ProductProjection, LocalTime> ofTimeSet(final String attributeName) {
         return ofTime(attributeName);
     }
 
-    public RangeFilterSearchModel<ProductProjection, ZonedDateTime> ofDateTimeSet(final String attributeName) {
+    public RangeTermFilterSearchModel<ProductProjection, ZonedDateTime> ofDateTimeSet(final String attributeName) {
         return ofDateTime(attributeName);
     }
 

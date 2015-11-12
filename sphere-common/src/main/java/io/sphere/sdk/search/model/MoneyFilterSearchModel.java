@@ -9,7 +9,7 @@ public class MoneyFilterSearchModel<T> extends SearchModelImpl<T> {
         super(parent, pathSegment);
     }
 
-    public RangeFilterSearchModel<T, Long> centAmount() {
+    public RangeTermFilterSearchModel<T, Long> centAmount() {
         return new MoneyCentAmountSearchModel<>(this, "centAmount").filtered();
     }
 

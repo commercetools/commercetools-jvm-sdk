@@ -32,11 +32,11 @@ public class ProductDataFacetAndFilterSearchModel extends SearchModelImpl<Produc
         return referenceFacetAndFilterSearchModel("productType");
     }
 
-    public RangeFacetAndFilterSearchModel<ProductProjection, ZonedDateTime> createdAt() {
+    public RangeTermFacetAndFilterSearchModel<ProductProjection, ZonedDateTime> createdAt() {
         return datetimeSearchModel("createdAt").facetedAndFiltered();
     }
 
-    public RangeFacetAndFilterSearchModel<ProductProjection, ZonedDateTime> lastModifiedAt() {
+    public RangeTermFacetAndFilterSearchModel<ProductProjection, ZonedDateTime> lastModifiedAt() {
         return datetimeSearchModel("lastModifiedAt").facetedAndFiltered();
     }
 }

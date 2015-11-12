@@ -32,11 +32,11 @@ public class ProductDataFacetSearchModel extends SearchModelImpl<ProductProjecti
         return referenceFacetSearchModel("productType");
     }
 
-    public RangeFacetSearchModel<ProductProjection, ZonedDateTime> createdAt() {
+    public RangeTermFacetSearchModel<ProductProjection, ZonedDateTime> createdAt() {
         return datetimeSearchModel("createdAt").faceted();
     }
 
-    public RangeFacetSearchModel<ProductProjection, ZonedDateTime> lastModifiedAt() {
+    public RangeTermFacetSearchModel<ProductProjection, ZonedDateTime> lastModifiedAt() {
         return datetimeSearchModel("lastModifiedAt").faceted();
     }
 }

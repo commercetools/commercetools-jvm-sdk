@@ -15,6 +15,10 @@ public class SearchModelImpl<T> extends Base implements SearchModel<T> {
         this.pathSegment = pathSegment;
     }
 
+    protected SearchModelImpl(@Nullable final String pathSegment) {
+        this(null, pathSegment);
+    }
+
     //for testing
     SearchModelImpl<T> appended(final String pathSegment) {
         return new SearchModelImpl<>(this, pathSegment) ;

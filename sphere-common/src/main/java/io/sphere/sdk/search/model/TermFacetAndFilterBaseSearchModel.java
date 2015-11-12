@@ -1,10 +1,10 @@
 package io.sphere.sdk.search.model;
 
+import io.sphere.sdk.models.Base;
 import io.sphere.sdk.search.FilterExpression;
 import io.sphere.sdk.search.TermFacetAndFilterExpression;
 import io.sphere.sdk.search.TermFacetExpression;
 
-import javax.annotation.Nullable;
 import java.util.List;
 import java.util.function.Function;
 
@@ -16,14 +16,15 @@ import static java.util.Collections.emptyList;
  * @param <T> type of the resource
  * @param <V> type of the value
  */
-abstract class TermFacetAndFilterBaseSearchModel<T, V> extends SearchModelImpl<T> {
+abstract class TermFacetAndFilterBaseSearchModel<T, V> extends Base {
+    protected final SearchModel<T> searchModel;
     private final TermFacetExpression<T> facetExpression;
     private final TermFilterSearchModel<T, V> filterSearchModel;
 
-    TermFacetAndFilterBaseSearchModel(@Nullable final SearchModel<T> parent, final Function<V, String> typeSerializer) {
-        super(parent, null);
-        this.facetExpression = new TermFacetSearchModel<>(parent, typeSerializer).allTerms();
-        this.filterSearchModel = new TermFilterSearchModel<>(parent, typeSerializer);
+    TermFacetAndFilterBaseSearchModel(final SearchModel<T> searchModel, final Function<V, String> typeSerializer) {
+        this.searchModel = searchModel;
+        this.facetExpression = new TermFacetSearchModel<>(searchModel, typeSerializer).allTerms();
+        this.filterSearchModel = new TermFilterSearchModel<>(searchModel, typeSerializer);
     }
 
     /**

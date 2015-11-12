@@ -3,7 +3,6 @@ package io.sphere.sdk.search.model;
 import io.sphere.sdk.search.FilteredFacetExpression;
 import io.sphere.sdk.search.TermFacetExpression;
 
-import javax.annotation.Nullable;
 import java.util.function.Function;
 
 /**
@@ -13,17 +12,17 @@ import java.util.function.Function;
  */
 public class TermFacetSearchModel<T, V> extends TermFacetBaseSearchModel<T, V> {
 
-    TermFacetSearchModel(@Nullable final SearchModel<T> parent, final Function<V, String> typeSerializer, final String alias) {
-        super(parent, typeSerializer, alias);
+    TermFacetSearchModel(final SearchModel<T> searchModel, final Function<V, String> typeSerializer, final String alias) {
+        super(searchModel, typeSerializer, alias);
     }
 
-    TermFacetSearchModel(@Nullable final SearchModel<T> parent, final Function<V, String> typeSerializer) {
-        super(parent, typeSerializer);
+    TermFacetSearchModel(final SearchModel<T> searchModel, final Function<V, String> typeSerializer) {
+        super(searchModel, typeSerializer);
     }
 
     @Override
     public TermFacetSearchModel<T, V> withAlias(final String alias) {
-        return new TermFacetSearchModel<>(this, typeSerializer, alias);
+        return new TermFacetSearchModel<>(searchModel, typeSerializer, alias);
     }
 
     @Override
@@ -42,6 +41,6 @@ public class TermFacetSearchModel<T, V> extends TermFacetBaseSearchModel<T, V> {
     }
 
     public static <T, V> TermFacetSearchModel<T, V> of(final String path, final Function<V, String> typeSerializer) {
-        return new TermFacetSearchModel<>(new SearchModelImpl<>(null, path), typeSerializer);
+        return new TermFacetSearchModel<>(new SearchModelImpl<>(path), typeSerializer);
     }
 }

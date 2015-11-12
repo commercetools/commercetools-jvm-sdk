@@ -3,7 +3,6 @@ package io.sphere.sdk.search.model;
 import io.sphere.sdk.search.RangeFacetAndFilterExpression;
 import io.sphere.sdk.search.TermFacetAndFilterExpression;
 
-import javax.annotation.Nullable;
 import java.util.function.Function;
 
 /**
@@ -11,10 +10,10 @@ import java.util.function.Function;
  * @param <T> type of the resource
  * @param <V> type of the value
  */
-public class RangeFacetAndFilterSearchModel<T, V extends Comparable<? super V>> extends RangeFacetAndFilterBaseSearchModel<T, V> {
+public class RangeTermFacetAndFilterSearchModel<T, V extends Comparable<? super V>> extends RangeTermFacetAndFilterBaseSearchModel<T, V> {
 
-    RangeFacetAndFilterSearchModel(@Nullable final SearchModel<T> parent, final Function<V, String> typeSerializer) {
-        super(parent, typeSerializer);
+    RangeTermFacetAndFilterSearchModel(final SearchModel<T> searchModel, final Function<V, String> typeSerializer) {
+        super(searchModel, typeSerializer);
     }
 
     @Override
@@ -62,8 +61,8 @@ public class RangeFacetAndFilterSearchModel<T, V extends Comparable<? super V>> 
         return super.byLessThanOrEqualTo(value);
     }
 
-    public static <T, V extends Comparable<? super V>> RangeFacetAndFilterSearchModel<T, V> of(final String path, final Function<V, String> typeSerializer) {
-        return new RangeFacetAndFilterSearchModel<>(new SearchModelImpl<>(null, path), typeSerializer);
+    public static <T, V extends Comparable<? super V>> RangeTermFacetAndFilterSearchModel<T, V> of(final String path, final Function<V, String> typeSerializer) {
+        return new RangeTermFacetAndFilterSearchModel<>(new SearchModelImpl<>(path), typeSerializer);
     }
 
 }

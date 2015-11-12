@@ -185,7 +185,7 @@ public class ProductProjectionSearchTest {
 
     @Test
     public void usesAlias() throws Exception {
-        final RangeFacetSearchModel<ProductProjection, BigDecimal> path = FACET_ATTR.ofNumber("size");
+        final RangeTermFacetSearchModel<ProductProjection, BigDecimal> path = FACET_ATTR.ofNumber("size");
         assertThat(path.withAlias("my-facet").allTerms().expression()).isEqualTo("variants.attributes.size as my-facet");
         assertThat(path.withAlias("my-facet").onlyTerm(valueOf(38)).expression()).isEqualTo("variants.attributes.size:38 as my-facet");
         assertThat(path.withAlias("my-facet").onlyLessThan(valueOf(38)).expression()).isEqualTo("variants.attributes.size:range(* to 38) as my-facet");

@@ -2,8 +2,6 @@ package io.sphere.sdk.search.model;
 
 import io.sphere.sdk.search.FilterExpression;
 
-import javax.annotation.Nullable;
-
 import java.util.List;
 import java.util.function.Function;;
 
@@ -12,10 +10,10 @@ import java.util.function.Function;;
  * @param <T> type of the resource
  * @param <V> type of the value
  */
-public class RangeFilterSearchModel<T, V extends Comparable<? super V>> extends RangeFilterBaseSearchModel<T, V> {
+public class RangeTermFilterSearchModel<T, V extends Comparable<? super V>> extends RangeTermFilterBaseSearchModel<T, V> {
 
-    RangeFilterSearchModel(@Nullable final SearchModel<T> parent, final Function<V, String> typeSerializer) {
-        super(parent, typeSerializer);
+    RangeTermFilterSearchModel(final SearchModel<T> searchModel, final Function<V, String> typeSerializer) {
+        super(searchModel, typeSerializer);
     }
 
     @Override
@@ -63,7 +61,7 @@ public class RangeFilterSearchModel<T, V extends Comparable<? super V>> extends 
         return super.byLessThanOrEqualTo(value);
     }
 
-    public static <T, V extends Comparable<? super V>> RangeFilterSearchModel<T, V> of(final String path, final Function<V, String> typeSerializer) {
-        return new RangeFilterSearchModel<>(new SearchModelImpl<>(null, path), typeSerializer);
+    public static <T, V extends Comparable<? super V>> RangeTermFilterSearchModel<T, V> of(final String path, final Function<V, String> typeSerializer) {
+        return new RangeTermFilterSearchModel<>(new SearchModelImpl<>(path), typeSerializer);
     }
 }

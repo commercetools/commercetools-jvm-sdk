@@ -2,8 +2,6 @@ package io.sphere.sdk.search.model;
 
 import io.sphere.sdk.search.*;
 
-import javax.annotation.Nullable;
-
 import java.util.function.Function;
 
 /**
@@ -11,19 +9,19 @@ import java.util.function.Function;
  * @param <T> type of the resource
  * @param <V> type of the value
  */
-public class RangeFacetSearchModel<T, V extends Comparable<? super V>> extends RangeFacetBaseSearchModel<T, V> {
+public class RangeTermFacetSearchModel<T, V extends Comparable<? super V>> extends RangeTermFacetBaseSearchModel<T, V> {
 
-    RangeFacetSearchModel(@Nullable final SearchModel<T> parent, final Function<V, String> typeSerializer, final String alias) {
-        super(parent, typeSerializer, alias);
+    RangeTermFacetSearchModel(final SearchModel<T> searchModel, final Function<V, String> typeSerializer, final String alias) {
+        super(searchModel, typeSerializer, alias);
     }
 
-    RangeFacetSearchModel(@Nullable final SearchModel<T> parent, final Function<V, String> typeSerializer) {
-        super(parent, typeSerializer);
+    RangeTermFacetSearchModel(final SearchModel<T> searchModel, final Function<V, String> typeSerializer) {
+        super(searchModel, typeSerializer);
     }
 
     @Override
-    public RangeFacetSearchModel<T, V> withAlias(final String alias) {
-        return new RangeFacetSearchModel<>(this, typeSerializer, alias);
+    public RangeTermFacetSearchModel<T, V> withAlias(final String alias) {
+        return new RangeTermFacetSearchModel<>(searchModel, typeSerializer, alias);
     }
 
     @Override
@@ -71,7 +69,7 @@ public class RangeFacetSearchModel<T, V extends Comparable<? super V>> extends R
         return super.onlyLessThan(value);
     }
 
-    public static <T, V extends Comparable<? super V>> RangeFacetSearchModel<T, V> of(final String path, final Function<V, String> typeSerializer) {
-        return new RangeFacetSearchModel<>(new SearchModelImpl<>(null, path), typeSerializer);
+    public static <T, V extends Comparable<? super V>> RangeTermFacetSearchModel<T, V> of(final String path, final Function<V, String> typeSerializer) {
+        return new RangeTermFacetSearchModel<>(new SearchModelImpl<>(path), typeSerializer);
     }
 }

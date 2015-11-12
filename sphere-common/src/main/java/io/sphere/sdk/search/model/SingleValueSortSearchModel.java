@@ -23,6 +23,6 @@ public class SingleValueSortSearchModel<T> extends SortSearchModelImpl<T> {
     }
 
     public static <T> SingleValueSortSearchModel<T> of(final String path) {
-        return new SingleValueSortSearchModel<>(new SearchModelImpl<>(null, path));
+        return new SingleValueSortSearchModel<>(new SearchModelImpl<>(path));
     }
 }

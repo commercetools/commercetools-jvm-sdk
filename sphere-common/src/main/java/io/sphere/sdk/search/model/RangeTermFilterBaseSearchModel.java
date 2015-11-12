@@ -1,29 +1,24 @@
 package io.sphere.sdk.search.model;
 
 import io.sphere.sdk.search.FilterExpression;
-import io.sphere.sdk.search.RangeFacetAndFilterExpression;
-import io.sphere.sdk.search.RangeFacetExpression;
 
-import javax.annotation.Nullable;
 import java.util.List;
 import java.util.function.Function;
+import java.util.stream.StreamSupport;
 
-import static java.util.Collections.emptyList;
+import static java.util.Collections.singletonList;
+import static java.util.stream.Collectors.toList;
 
 /**
- * Model to build range and term facets and filters.
+ * Model to build range and term filters.
  * This class is abstract to force the subclass to select the methods that need to be highlighted and/or extended.
  * @param <T> type of the resource
  * @param <V> type of the value
  */
-abstract class RangeFacetAndFilterBaseSearchModel<T, V extends Comparable<? super V>> extends TermFacetAndFilterBaseSearchModel<T, V> {
-    private final RangeFacetExpression<T> facetExpression;
-    private final RangeFilterSearchModel<T, V> filterSearchModel;
+abstract class RangeTermFilterBaseSearchModel<T, V extends Comparable<? super V>> extends TermFilterBaseSearchModel<T, V> {
 
-    RangeFacetAndFilterBaseSearchModel(@Nullable final SearchModel<T> parent, final Function<V, String> typeSerializer) {
-        super(parent, typeSerializer);
-        this.facetExpression = new RangeFacetSearchModel<>(parent, typeSerializer).allRanges();
-        this.filterSearchModel = new RangeFilterSearchModel<>(parent, typeSerializer);
+    RangeTermFilterBaseSearchModel(final SearchModel<T> searchModel, final Function<V, String> typeSerializer) {
+        super(searchModel, typeSerializer);
     }
 
     /**
@@ -32,8 +27,8 @@ abstract class RangeFacetAndFilterBaseSearchModel<T, V extends Comparable<? supe
      * @param range the range of values to filter by
      * @return a filter expression for the given range
      */
-    public RangeFacetAndFilterExpression<T> byRange(final FilterRange<V> range) {
-        return buildExpression(filterSearchModel.byRange(range));
+    public List<FilterExpression<T>> byRange(final FilterRange<V> range) {
+        return singletonList(filterBy(range));
     }
 
     /**
@@ -42,8 +37,8 @@ abstract class RangeFacetAndFilterBaseSearchModel<T, V extends Comparable<? supe
      * @param ranges the ranges of values to filter by
      * @return a filter expression for the given ranges
      */
-    public RangeFacetAndFilterExpression<T> byAnyRange(final Iterable<FilterRange<V>> ranges) {
-        return validateAndBuildExpression(ranges, r -> filterSearchModel.byAnyRange(r));
+    public List<FilterExpression<T>> byAnyRange(final Iterable<FilterRange<V>> ranges) {
+        return singletonList(filterBy(ranges));
     }
 
     /**
@@ -52,8 +47,10 @@ abstract class RangeFacetAndFilterBaseSearchModel<T, V extends Comparable<? supe
      * @param ranges the ranges of values to filter by
      * @return a filter expression for the given ranges
      */
-    public RangeFacetAndFilterExpression<T> byAllRanges(final Iterable<FilterRange<V>> ranges) {
-        return validateAndBuildExpression(ranges, r -> filterSearchModel.byAllRanges(r));
+    public List<FilterExpression<T>> byAllRanges(final Iterable<FilterRange<V>> ranges) {
+        return StreamSupport.stream(ranges.spliterator(), false)
+                .map(range -> filterBy(range))
+                .collect(toList());
     }
 
     /**
@@ -63,8 +60,8 @@ abstract class RangeFacetAndFilterBaseSearchModel<T, V extends Comparable<? supe
      * @param upperEndpoint the upper endpoint of the range of values to filter by, inclusive
      * @return a filter expression for the given range
      */
-    public RangeFacetAndFilterExpression<T> byRange(final V lowerEndpoint, final V upperEndpoint) {
-        return buildExpression(filterSearchModel.byRange(lowerEndpoint, upperEndpoint));
+    public List<FilterExpression<T>> byRange(final V lowerEndpoint, final V upperEndpoint) {
+        return singletonList(filterBy(FilterRange.of(lowerEndpoint, upperEndpoint)));
     }
 
     /**
@@ -73,8 +70,8 @@ abstract class RangeFacetAndFilterBaseSearchModel<T, V extends Comparable<? supe
      * @param value the lower endpoint of the range [v, +∞)
      * @return a filter expression for the given range
      */
-    public RangeFacetAndFilterExpression<T> byGreaterThanOrEqualTo(final V value) {
-        return buildExpression(filterSearchModel.byGreaterThanOrEqualTo(value));
+    public List<FilterExpression<T>> byGreaterThanOrEqualTo(final V value) {
+        return singletonList(filterBy(FilterRange.atLeast(value)));
     }
 
     /**
@@ -83,42 +80,55 @@ abstract class RangeFacetAndFilterBaseSearchModel<T, V extends Comparable<? supe
      * @param value the upper endpoint of the range (-∞, v]
      * @return a filter expression for the given range
      */
-    public RangeFacetAndFilterExpression<T> byLessThanOrEqualTo(final V value) {
-        return buildExpression(filterSearchModel.byLessThanOrEqualTo(value));
+    public List<FilterExpression<T>> byLessThanOrEqualTo(final V value) {
+        return singletonList(filterBy(FilterRange.atMost(value)));
+    }
+
+    /**
+     * Generates an expression to select all elements with an attribute value within the given range.
+     * For example: filtering by [3, 7] would select only those elements with values between 3 and 7, inclusive.
+     * @param range the range of values (as string) to filter by
+     * @return a filter expression for the given range
+     */
+    public List<FilterExpression<T>> byRangeAsString(final FilterRange<String> range) {
+        return singletonList(filterByAsString(range));
     }
 
     /**
      * Generates an expression to select all elements with an attribute value within any of the given ranges.
      * For example: filtering by [[3, 7], [5, 9]] would select only those elements with values within 3 and 7, or within 5 and 9, both inclusive.
-     * @param ranges the ranges of values to filter by
+     * @param ranges the ranges of values (as string) to filter by
      * @return a filter expression for the given ranges
      */
-    public RangeFacetAndFilterExpression<T> byAnyRangeAsString(final Iterable<FilterRange<String>> ranges) {
-        return validateAndBuildExpression(ranges, r -> filterSearchModel.byAnyRangeAsString(r));
+    public List<FilterExpression<T>> byAnyRangeAsString(final Iterable<FilterRange<String>> ranges) {
+        return singletonList(filterByAsString(ranges));
     }
 
     /**
      * Generates an expression to select all elements with an attribute value within all the given ranges.
      * For example: filtering by [[3, 7], [5, 9]] would select only those elements with values within the range intersection [5, 7], inclusive.
-     * @param ranges the ranges of values to filter by
+     * @param ranges the ranges of values (as string) to filter by
      * @return a filter expression for the given ranges
      */
-    public RangeFacetAndFilterExpression<T> byAllRangesAsString(final Iterable<FilterRange<String>> ranges) {
-        return validateAndBuildExpression(ranges, r -> filterSearchModel.byAllRangesAsString(r));
+    public List<FilterExpression<T>> byAllRangesAsString(final Iterable<FilterRange<String>> ranges) {
+        return StreamSupport.stream(ranges.spliterator(), false)
+                .map(range -> filterByAsString(range))
+                .collect(toList());
     }
 
-    private RangeFacetAndFilterExpression<T> buildExpression(final List<FilterExpression<T>> filterExpressions) {
-        return RangeFacetAndFilterExpression.of(facetExpression, filterExpressions);
+    private RangeFilterExpression<T, V> filterBy(final FilterRange<V> range) {
+        return filterBy(singletonList(range));
     }
 
-    private <R extends Comparable<? super R>> RangeFacetAndFilterExpression<T> validateAndBuildExpression(final Iterable<FilterRange<R>> ranges,
-                                                                                                          final Function<Iterable<FilterRange<R>>, List<FilterExpression<T>>> f) {
-        final List<FilterExpression<T>> filterExpressions;
-        if (ranges.iterator().hasNext()) {
-            filterExpressions = f.apply(ranges);
-        } else {
-            filterExpressions = emptyList();
-        }
-        return buildExpression(filterExpressions);
+    private RangeFilterExpression<T, V> filterBy(final Iterable<FilterRange<V>> ranges) {
+        return new RangeFilterExpression<>(searchModel, typeSerializer, ranges);
+    }
+
+    private RangeFilterExpression<T, String> filterByAsString(final FilterRange<String> range) {
+        return filterByAsString(singletonList(range));
+    }
+
+    private RangeFilterExpression<T, String> filterByAsString(final Iterable<FilterRange<String>> ranges) {
+        return new RangeFilterExpression<>(searchModel, TypeSerializer.ofString(), ranges);
     }
 }

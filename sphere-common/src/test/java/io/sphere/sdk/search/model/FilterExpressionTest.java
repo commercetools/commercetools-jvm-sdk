@@ -1,7 +1,6 @@
 package io.sphere.sdk.search.model;
 
 import io.sphere.sdk.search.FilterExpression;
-import io.sphere.sdk.search.model.*;
 import org.junit.Test;
 
 import java.math.BigDecimal;
@@ -76,7 +75,7 @@ public class FilterExpressionTest {
         return new StringSearchModel<>(null, PATH_TO_ATTRIBUTE).filtered();
     }
 
-    private RangeFilterSearchModel<Object, BigDecimal> numberModel() {
+    private RangeTermFilterSearchModel<Object, BigDecimal> numberModel() {
         return new NumberSearchModel<>(null, PATH_TO_ATTRIBUTE).filtered();
     }
 

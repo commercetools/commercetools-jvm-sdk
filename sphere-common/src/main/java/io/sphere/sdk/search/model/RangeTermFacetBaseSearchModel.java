@@ -2,7 +2,6 @@ package io.sphere.sdk.search.model;
 
 import io.sphere.sdk.search.RangeFacetExpression;
 
-import javax.annotation.Nullable;
 import java.util.List;
 import java.util.function.Function;
 
@@ -15,14 +14,14 @@ import static java.util.Collections.singletonList;
  * @param <T> type of the resource
  * @param <V> type of the value
  */
-abstract class RangeFacetBaseSearchModel<T, V extends Comparable<? super V>> extends TermFacetBaseSearchModel<T, V> {
+abstract class RangeTermFacetBaseSearchModel<T, V extends Comparable<? super V>> extends TermFacetBaseSearchModel<T, V> {
 
-    RangeFacetBaseSearchModel(@Nullable final SearchModel<T> parent, final Function<V, String> typeSerializer, final String alias) {
-        super(parent, typeSerializer, alias);
+    RangeTermFacetBaseSearchModel(final SearchModel<T> searchModel, final Function<V, String> typeSerializer, final String alias) {
+        super(searchModel, typeSerializer, alias);
     }
 
-    RangeFacetBaseSearchModel(@Nullable final SearchModel<T> parent, final Function<V, String> typeSerializer) {
-        super(parent, typeSerializer);
+    RangeTermFacetBaseSearchModel(final SearchModel<T> searchModel, final Function<V, String> typeSerializer) {
+        super(searchModel, typeSerializer);
     }
 
     /**
@@ -52,7 +51,7 @@ abstract class RangeFacetBaseSearchModel<T, V extends Comparable<? super V>> ext
      * @return a facet expression for only the given ranges
      */
     public RangeFacetExpression<T> onlyRange(final Iterable<FacetRange<V>> ranges) {
-        return new RangeFacetExpressionImpl<>(this, typeSerializer, ranges, alias);
+        return new RangeFacetExpressionImpl<>(searchModel, typeSerializer, ranges, alias);
     }
 
     /**
@@ -103,7 +102,7 @@ abstract class RangeFacetBaseSearchModel<T, V extends Comparable<? super V>> ext
      * @return a facet expression for only the given ranges
      */
     public RangeFacetExpression<T> onlyRangeAsString(final Iterable<FacetRange<String>> ranges) {
-        return new RangeFacetExpressionImpl<>(this, TypeSerializer.ofString(), ranges, alias);
+        return new RangeFacetExpressionImpl<>(searchModel, TypeSerializer.ofString(), ranges, alias);
     }
 
     /**
@@ -117,7 +116,7 @@ abstract class RangeFacetBaseSearchModel<T, V extends Comparable<? super V>> ext
     @Deprecated
     public RangeFacetExpression<T> onlyRangeAsString(final String lowerEndpoint, final String upperEndpoint) {
         final List<FacetRange<String>> ranges = singletonList(FacetRange.of(lowerEndpoint, upperEndpoint));
-        return new RangeFacetExpressionImpl<>(this, TypeSerializer.ofString(), ranges, alias);
+        return new RangeFacetExpressionImpl<>(searchModel, TypeSerializer.ofString(), ranges, alias);
     }
 
     /**
@@ -141,7 +140,7 @@ abstract class RangeFacetBaseSearchModel<T, V extends Comparable<? super V>> ext
      */
     @Deprecated
     public RangeFacetExpression<T> byRange(final Iterable<FacetRange<V>> ranges) {
-        return new RangeFacetExpressionImpl<>(this, typeSerializer, ranges, alias);
+        return new RangeFacetExpressionImpl<>(searchModel, typeSerializer, ranges, alias);
     }
 
     /**
