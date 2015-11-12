@@ -73,6 +73,9 @@ import java.util.function.Function;
  <li class=new-in-release>Added helper method {@link io.sphere.sdk.search.model.RangeFacetSearchModel#allRanges()} to request a range facet for all values.</li>
  <li class=fixed-in-release>Validates the provided parameters in filter and facet expressions in order to avoid generating wrong requests.</li>
  <li class=change-in-release>Deprecated {@code io.sphere.sdk.search.model.RangeFacetBaseSearchModel#onlyRangeAsString(java.lang.String, java.lang.String)} in favour of a more generic {@code io.sphere.sdk.search.model.RangeFacetBaseSearchModel#onlyRangeAsString(FacetRange)}.</li>
+ <li class=new-in-release>Added static constructors to all facet/filter/sort search model classes, to easily build customized search expressions.</li>
+ <li class=change-in-release>Since {@link io.sphere.sdk.search.model.SortSearchModel} implementation classes have now static constructors, these class constructors have been removed from the public API.</li>
+ <li class=change-in-release>Renamed {@code Range} filter/facet search models to {@code RangeTerm} to emphasize that you can build both range and term oriented search expressions with them.</li>
  </ul>
 
 
