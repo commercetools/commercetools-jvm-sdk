@@ -40,7 +40,15 @@ public class TermFacetSearchModel<T, V> extends TermFacetBaseSearchModel<T, V> {
         return super.onlyTerm(values);
     }
 
-    public static <T, V> TermFacetSearchModel<T, V> of(final String path, final Function<V, String> typeSerializer) {
-        return new TermFacetSearchModel<>(new SearchModelImpl<>(path), typeSerializer);
+    /**
+     * Creates an instance of the search model to generate term facet expressions.
+     * @param attributePath the path of the attribute as expected by Commercetools Platform (e.g. "variants.attributes.color.key")
+     * @param typeSerializer the function to convert the provided value to a string accepted by Commercetools Platform
+     * @param <T> type of the resource
+     * @param <V> type of the value
+     * @return new instance of TermFacetSearchModel
+     */
+    public static <T, V> TermFacetSearchModel<T, V> of(final String attributePath, final Function<V, String> typeSerializer) {
+        return new TermFacetSearchModel<>(new SearchModelImpl<>(attributePath), typeSerializer);
     }
 }

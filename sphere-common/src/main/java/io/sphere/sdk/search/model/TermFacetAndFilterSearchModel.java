@@ -30,7 +30,15 @@ public class TermFacetAndFilterSearchModel<T, V> extends TermFacetAndFilterBaseS
         return super.byAll(values);
     }
 
-    public static <T, V> TermFacetAndFilterSearchModel<T, V> of(final String path, final Function<V, String> typeSerializer) {
-        return new TermFacetAndFilterSearchModel<>(new SearchModelImpl<>(path), typeSerializer);
+    /**
+     * Creates an instance of the search model to generate term faceted search expressions.
+     * @param attributePath the path of the attribute as expected by Commercetools Platform (e.g. "variants.attributes.color.key")
+     * @param typeSerializer the function to convert the provided value to a string accepted by Commercetools Platform
+     * @param <T> type of the resource
+     * @param <V> type of the value
+     * @return new instance of TermFacetAndFilterSearchModel
+     */
+    public static <T, V> TermFacetAndFilterSearchModel<T, V> of(final String attributePath, final Function<V, String> typeSerializer) {
+        return new TermFacetAndFilterSearchModel<>(new SearchModelImpl<>(attributePath), typeSerializer);
     }
 }

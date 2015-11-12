@@ -22,7 +22,13 @@ public class SingleValueSortSearchModel<T> extends SortSearchModelImpl<T> {
         return super.byDesc();
     }
 
-    public static <T> SingleValueSortSearchModel<T> of(final String path) {
-        return new SingleValueSortSearchModel<>(new SearchModelImpl<>(path));
+    /**
+     * Creates an instance of the search model to generate single-valued sort expressions.
+     * @param attributePath the path of the attribute as expected by Commercetools Platform (e.g. "variants.attributes.color.key")
+     * @param <T> type of the resource
+     * @return new instance of SingleValueSortSearchModel
+     */
+    public static <T> SingleValueSortSearchModel<T> of(final String attributePath) {
+        return new SingleValueSortSearchModel<>(new SearchModelImpl<>(attributePath));
     }
 }

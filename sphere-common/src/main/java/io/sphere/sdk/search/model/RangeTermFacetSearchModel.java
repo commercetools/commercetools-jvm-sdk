@@ -69,7 +69,15 @@ public class RangeTermFacetSearchModel<T, V extends Comparable<? super V>> exten
         return super.onlyLessThan(value);
     }
 
-    public static <T, V extends Comparable<? super V>> RangeTermFacetSearchModel<T, V> of(final String path, final Function<V, String> typeSerializer) {
-        return new RangeTermFacetSearchModel<>(new SearchModelImpl<>(path), typeSerializer);
+    /**
+     * Creates an instance of the search model to generate range and term facet expressions.
+     * @param attributePath the path of the attribute as expected by Commercetools Platform (e.g. "variants.attributes.color.key")
+     * @param typeSerializer the function to convert the provided value to a string accepted by Commercetools Platform
+     * @param <T> type of the resource
+     * @param <V> type of the value
+     * @return new instance of RangeTermFacetSearchModel
+     */
+    public static <T, V extends Comparable<? super V>> RangeTermFacetSearchModel<T, V> of(final String attributePath, final Function<V, String> typeSerializer) {
+        return new RangeTermFacetSearchModel<>(new SearchModelImpl<>(attributePath), typeSerializer);
     }
 }

@@ -31,7 +31,15 @@ public class TermFilterSearchModel<T, V> extends TermFilterBaseSearchModel<T, V>
         return super.byAll(values);
     }
 
-    public static <T, V> TermFilterSearchModel<T, V> of(final String path, final Function<V, String> typeSerializer) {
-        return new TermFilterSearchModel<>(new SearchModelImpl<>(path), typeSerializer);
+    /**
+     * Creates an instance of the search model to generate term filters.
+     * @param attributePath the path of the attribute as expected by Commercetools Platform (e.g. "variants.attributes.color.key")
+     * @param typeSerializer the function to convert the provided value to a string accepted by Commercetools Platform
+     * @param <T> type of the resource
+     * @param <V> type of the value
+     * @return new instance of TermFilterSearchModel
+     */
+    public static <T, V> TermFilterSearchModel<T, V> of(final String attributePath, final Function<V, String> typeSerializer) {
+        return new TermFilterSearchModel<>(new SearchModelImpl<>(attributePath), typeSerializer);
     }
 }

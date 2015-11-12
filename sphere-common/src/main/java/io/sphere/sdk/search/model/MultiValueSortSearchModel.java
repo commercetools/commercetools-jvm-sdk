@@ -48,7 +48,13 @@ public class MultiValueSortSearchModel<T> extends SortSearchModelImpl<T> {
         return by(DESC_MIN);
     }
 
-    public static <T> MultiValueSortSearchModel<T> of(final String path) {
-        return new MultiValueSortSearchModel<>(new SearchModelImpl<>(path));
+    /**
+     * Creates an instance of the search model to generate multi-valued sort expressions.
+     * @param attributePath the path of the attribute as expected by Commercetools Platform (e.g. "variants.attributes.color.key")
+     * @param <T> type of the resource
+     * @return new instance of MultiValueSortSearchModel
+     */
+    public static <T> MultiValueSortSearchModel<T> of(final String attributePath) {
+        return new MultiValueSortSearchModel<>(new SearchModelImpl<>(attributePath));
     }
 }

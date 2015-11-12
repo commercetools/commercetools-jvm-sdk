@@ -61,7 +61,15 @@ public class RangeTermFilterSearchModel<T, V extends Comparable<? super V>> exte
         return super.byLessThanOrEqualTo(value);
     }
 
-    public static <T, V extends Comparable<? super V>> RangeTermFilterSearchModel<T, V> of(final String path, final Function<V, String> typeSerializer) {
-        return new RangeTermFilterSearchModel<>(new SearchModelImpl<>(path), typeSerializer);
+    /**
+     * Creates an instance of the search model to generate range and term filter expressions.
+     * @param attributePath the path of the attribute as expected by Commercetools Platform (e.g. "variants.attributes.color.key")
+     * @param typeSerializer the function to convert the provided value to a string accepted by Commercetools Platform
+     * @param <T> type of the resource
+     * @param <V> type of the value
+     * @return new instance of RangeTermFilterSearchModel
+     */
+    public static <T, V extends Comparable<? super V>> RangeTermFilterSearchModel<T, V> of(final String attributePath, final Function<V, String> typeSerializer) {
+        return new RangeTermFilterSearchModel<>(new SearchModelImpl<>(attributePath), typeSerializer);
     }
 }
