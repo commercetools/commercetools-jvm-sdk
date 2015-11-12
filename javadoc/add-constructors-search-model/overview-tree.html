@@ -445,6 +445,9 @@
 <li type="circle">io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/QueryModelQueryPredicate.html" title="class in io.sphere.sdk.queries"><span class="typeNameLink">QueryModelQueryPredicate</span></a>&lt;T&gt;</li>
 <li type="circle">io.sphere.sdk.search.<a href="io/sphere/sdk/search/RangeFacetResult.html" title="class in io.sphere.sdk.search"><span class="typeNameLink">RangeFacetResult</span></a> (implements io.sphere.sdk.search.<a href="io/sphere/sdk/search/FacetResult.html" title="interface in io.sphere.sdk.search">FacetResult</a>)</li>
 <li type="circle">io.sphere.sdk.search.model.<a href="io/sphere/sdk/search/model/RangeStats.html" title="class in io.sphere.sdk.search.model"><span class="typeNameLink">RangeStats</span></a></li>
+<li type="circle">io.sphere.sdk.search.model.<a href="io/sphere/sdk/search/model/RangeTermFacetAndFilterSearchModel.html" title="class in io.sphere.sdk.search.model"><span class="typeNameLink">RangeTermFacetAndFilterSearchModel</span></a>&lt;T,V&gt;</li>
+<li type="circle">io.sphere.sdk.search.model.<a href="io/sphere/sdk/search/model/RangeTermFacetSearchModel.html" title="class in io.sphere.sdk.search.model"><span class="typeNameLink">RangeTermFacetSearchModel</span></a>&lt;T,V&gt;</li>
+<li type="circle">io.sphere.sdk.search.model.<a href="io/sphere/sdk/search/model/RangeTermFilterSearchModel.html" title="class in io.sphere.sdk.search.model"><span class="typeNameLink">RangeTermFilterSearchModel</span></a>&lt;T,V&gt;</li>
 <li type="circle">io.sphere.sdk.products.attributes.<a href="io/sphere/sdk/products/attributes/ReferenceType.html" title="class in io.sphere.sdk.products.attributes"><span class="typeNameLink">ReferenceType</span></a>
 <ul>
 <li type="circle">io.sphere.sdk.products.attributes.<a href="io/sphere/sdk/products/attributes/RichReferenceType.html" title="class in io.sphere.sdk.products.attributes"><span class="typeNameLink">RichReferenceType</span></a>&lt;T&gt;</li>
@@ -524,9 +527,6 @@
 <li type="circle">io.sphere.sdk.products.search.<a href="io/sphere/sdk/products/search/ProductVariantFacetAndFilterSearchModel.html" title="class in io.sphere.sdk.products.search"><span class="typeNameLink">ProductVariantFacetAndFilterSearchModel</span></a></li>
 <li type="circle">io.sphere.sdk.products.search.<a href="io/sphere/sdk/products/search/ProductVariantFacetSearchModel.html" title="class in io.sphere.sdk.products.search"><span class="typeNameLink">ProductVariantFacetSearchModel</span></a></li>
 <li type="circle">io.sphere.sdk.products.search.<a href="io/sphere/sdk/products/search/ProductVariantFilterSearchModel.html" title="class in io.sphere.sdk.products.search"><span class="typeNameLink">ProductVariantFilterSearchModel</span></a></li>
-<li type="circle">io.sphere.sdk.search.model.<a href="io/sphere/sdk/search/model/RangeFacetAndFilterSearchModel.html" title="class in io.sphere.sdk.search.model"><span class="typeNameLink">RangeFacetAndFilterSearchModel</span></a>&lt;T,V&gt;</li>
-<li type="circle">io.sphere.sdk.search.model.<a href="io/sphere/sdk/search/model/RangeFacetSearchModel.html" title="class in io.sphere.sdk.search.model"><span class="typeNameLink">RangeFacetSearchModel</span></a>&lt;T,V&gt;</li>
-<li type="circle">io.sphere.sdk.search.model.<a href="io/sphere/sdk/search/model/RangeFilterSearchModel.html" title="class in io.sphere.sdk.search.model"><span class="typeNameLink">RangeFilterSearchModel</span></a>&lt;T,V&gt;</li>
 <li type="circle">io.sphere.sdk.search.model.<a href="io/sphere/sdk/search/model/ReferenceFacetAndFilterSearchModel.html" title="class in io.sphere.sdk.search.model"><span class="typeNameLink">ReferenceFacetAndFilterSearchModel</span></a>&lt;T&gt;</li>
 <li type="circle">io.sphere.sdk.search.model.<a href="io/sphere/sdk/search/model/ReferenceFacetSearchModel.html" title="class in io.sphere.sdk.search.model"><span class="typeNameLink">ReferenceFacetSearchModel</span></a>&lt;T&gt;</li>
 <li type="circle">io.sphere.sdk.search.model.<a href="io/sphere/sdk/search/model/ReferenceFilterSearchModel.html" title="class in io.sphere.sdk.search.model"><span class="typeNameLink">ReferenceFilterSearchModel</span></a>&lt;T&gt;</li>
@@ -546,9 +546,6 @@
 </ul>
 </li>
 <li type="circle">io.sphere.sdk.search.model.<a href="io/sphere/sdk/search/model/StringSearchModel.html" title="class in io.sphere.sdk.search.model"><span class="typeNameLink">StringSearchModel</span></a>&lt;T&gt;</li>
-<li type="circle">io.sphere.sdk.search.model.<a href="io/sphere/sdk/search/model/TermFacetAndFilterSearchModel.html" title="class in io.sphere.sdk.search.model"><span class="typeNameLink">TermFacetAndFilterSearchModel</span></a>&lt;T,V&gt;</li>
-<li type="circle">io.sphere.sdk.search.model.<a href="io/sphere/sdk/search/model/TermFacetSearchModel.html" title="class in io.sphere.sdk.search.model"><span class="typeNameLink">TermFacetSearchModel</span></a>&lt;T,V&gt;</li>
-<li type="circle">io.sphere.sdk.search.model.<a href="io/sphere/sdk/search/model/TermFilterSearchModel.html" title="class in io.sphere.sdk.search.model"><span class="typeNameLink">TermFilterSearchModel</span></a>&lt;T,V&gt;</li>
 <li type="circle">io.sphere.sdk.search.model.<a href="io/sphere/sdk/search/model/TimeSearchModel.html" title="class in io.sphere.sdk.search.model"><span class="typeNameLink">TimeSearchModel</span></a>&lt;T&gt;</li>
 </ul>
 </li>
@@ -613,7 +610,10 @@
 <li type="circle">io.sphere.sdk.carts.<a href="io/sphere/sdk/carts/TaxedPrice.html" title="class in io.sphere.sdk.carts"><span class="typeNameLink">TaxedPrice</span></a></li>
 <li type="circle">io.sphere.sdk.carts.<a href="io/sphere/sdk/carts/TaxPortion.html" title="class in io.sphere.sdk.carts"><span class="typeNameLink">TaxPortion</span></a></li>
 <li type="circle">io.sphere.sdk.taxcategories.<a href="io/sphere/sdk/taxcategories/TaxRateBuilder.html" title="class in io.sphere.sdk.taxcategories"><span class="typeNameLink">TaxRateBuilder</span></a> (implements io.sphere.sdk.models.<a href="io/sphere/sdk/models/Builder.html" title="interface in io.sphere.sdk.models">Builder</a>&lt;T&gt;)</li>
+<li type="circle">io.sphere.sdk.search.model.<a href="io/sphere/sdk/search/model/TermFacetAndFilterSearchModel.html" title="class in io.sphere.sdk.search.model"><span class="typeNameLink">TermFacetAndFilterSearchModel</span></a>&lt;T,V&gt;</li>
 <li type="circle">io.sphere.sdk.search.<a href="io/sphere/sdk/search/TermFacetResult.html" title="class in io.sphere.sdk.search"><span class="typeNameLink">TermFacetResult</span></a> (implements io.sphere.sdk.search.<a href="io/sphere/sdk/search/FacetResult.html" title="interface in io.sphere.sdk.search">FacetResult</a>)</li>
+<li type="circle">io.sphere.sdk.search.model.<a href="io/sphere/sdk/search/model/TermFacetSearchModel.html" title="class in io.sphere.sdk.search.model"><span class="typeNameLink">TermFacetSearchModel</span></a>&lt;T,V&gt;</li>
+<li type="circle">io.sphere.sdk.search.model.<a href="io/sphere/sdk/search/model/TermFilterSearchModel.html" title="class in io.sphere.sdk.search.model"><span class="typeNameLink">TermFilterSearchModel</span></a>&lt;T,V&gt;</li>
 <li type="circle">io.sphere.sdk.search.<a href="io/sphere/sdk/search/TermStats.html" title="class in io.sphere.sdk.search"><span class="typeNameLink">TermStats</span></a></li>
 <li type="circle">io.sphere.sdk.products.attributes.<a href="io/sphere/sdk/products/attributes/TimeType.html" title="class in io.sphere.sdk.products.attributes"><span class="typeNameLink">TimeType</span></a></li>
 <li type="circle">io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/TrackingData.html" title="class in io.sphere.sdk.orders"><span class="typeNameLink">TrackingData</span></a></li>
