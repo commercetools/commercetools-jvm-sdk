@@ -40,4 +40,8 @@ public class TermFacetSearchModel<T, V> extends TermFacetBaseSearchModel<T, V> {
     public FilteredFacetExpression<T> onlyTerm(final Iterable<V> values) {
         return super.onlyTerm(values);
     }
+
+    public static <T, V> TermFacetSearchModel<T, V> of(final String path, final Function<V, String> typeSerializer) {
+        return new TermFacetSearchModel<>(new SearchModelImpl<>(null, path), typeSerializer);
+    }
 }

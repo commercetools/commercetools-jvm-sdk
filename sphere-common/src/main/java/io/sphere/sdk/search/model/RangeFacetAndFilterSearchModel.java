@@ -61,4 +61,9 @@ public class RangeFacetAndFilterSearchModel<T, V extends Comparable<? super V>> 
     public RangeFacetAndFilterExpression<T> byLessThanOrEqualTo(final V value) {
         return super.byLessThanOrEqualTo(value);
     }
+
+    public static <T, V extends Comparable<? super V>> RangeFacetAndFilterSearchModel<T, V> of(final String path, final Function<V, String> typeSerializer) {
+        return new RangeFacetAndFilterSearchModel<>(new SearchModelImpl<>(null, path), typeSerializer);
+    }
+
 }

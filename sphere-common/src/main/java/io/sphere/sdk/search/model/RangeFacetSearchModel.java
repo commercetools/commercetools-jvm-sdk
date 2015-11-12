@@ -70,4 +70,8 @@ public class RangeFacetSearchModel<T, V extends Comparable<? super V>> extends R
     public RangeFacetExpression<T> onlyLessThan(final V value) {
         return super.onlyLessThan(value);
     }
+
+    public static <T, V extends Comparable<? super V>> RangeFacetSearchModel<T, V> of(final String path, final Function<V, String> typeSerializer) {
+        return new RangeFacetSearchModel<>(new SearchModelImpl<>(null, path), typeSerializer);
+    }
 }

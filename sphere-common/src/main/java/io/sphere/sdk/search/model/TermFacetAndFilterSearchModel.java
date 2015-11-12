@@ -31,4 +31,7 @@ public class TermFacetAndFilterSearchModel<T, V> extends TermFacetAndFilterBaseS
         return super.byAll(values);
     }
 
+    public static <T, V> TermFacetAndFilterSearchModel<T, V> of(final String path, final Function<V, String> typeSerializer) {
+        return new TermFacetAndFilterSearchModel<>(new SearchModelImpl<>(null, path), typeSerializer);
+    }
 }

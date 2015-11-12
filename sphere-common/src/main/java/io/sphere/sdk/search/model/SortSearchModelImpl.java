@@ -12,10 +12,10 @@ import static io.sphere.sdk.search.SearchSortDirection.DESC;
  * This class is abstract to force the subclass to select the methods that need to be highlighted and/or extended.
  * @param <T> type of the resource
  */
-abstract class SortSearchModelImpl<T, S extends SortSearchModel<T>> extends Base implements SortSearchModel<T> {
+abstract class SortSearchModelImpl<T> extends Base implements SortSearchModel<T> {
     private final SearchModel<T> searchModel;
 
-    SortSearchModelImpl(final SortableSearchModel<T, S> searchModel) {
+    SortSearchModelImpl(final SearchModel<T> searchModel) {
         this.searchModel = searchModel;
     }
 

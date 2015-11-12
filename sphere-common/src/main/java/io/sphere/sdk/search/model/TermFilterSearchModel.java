@@ -31,4 +31,8 @@ public class TermFilterSearchModel<T, V> extends TermFilterBaseSearchModel<T, V>
     public List<FilterExpression<T>> byAll(final Iterable<V> values) {
         return super.byAll(values);
     }
+
+    public static <T, V> TermFilterSearchModel<T, V> of(final String path, final Function<V, String> typeSerializer) {
+        return new TermFilterSearchModel<>(new SearchModelImpl<>(null, path), typeSerializer);
+    }
 }

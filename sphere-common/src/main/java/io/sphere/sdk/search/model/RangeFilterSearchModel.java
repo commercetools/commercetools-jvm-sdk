@@ -62,4 +62,8 @@ public class RangeFilterSearchModel<T, V extends Comparable<? super V>> extends 
     public List<FilterExpression<T>> byLessThanOrEqualTo(final V value) {
         return super.byLessThanOrEqualTo(value);
     }
+
+    public static <T, V extends Comparable<? super V>> RangeFilterSearchModel<T, V> of(final String path, final Function<V, String> typeSerializer) {
+        return new RangeFilterSearchModel<>(new SearchModelImpl<>(null, path), typeSerializer);
+    }
 }
