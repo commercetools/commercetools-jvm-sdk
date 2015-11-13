@@ -4,6 +4,12 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import io.sphere.sdk.models.Resource;
 import io.sphere.sdk.models.Reference;
+import io.sphere.sdk.products.attributes.AttributeDefinition;
+import org.apache.commons.lang3.StringUtils;
+
+import javax.annotation.Nullable;
+import java.util.List;
+import java.util.Optional;
 
 /** Describes common characteristics, most importantly common custom attributes, of many concrete products.
 
@@ -21,6 +27,19 @@ public interface ProductType extends Resource<ProductType>, AttributeDefinitionC
     String getName();
 
     String getDescription();
+
+    @Override
+    List<AttributeDefinition> getAttributes();
+
+    @Nullable
+    default AttributeDefinition getAttribute(final String attributeName) {
+        return AttributeDefinitionContainer.super.getAttribute(attributeName);
+    }
+
+    @Override
+    default Optional<AttributeDefinition> findAttribute(final String attributeName) {
+        return AttributeDefinitionContainer.super.findAttribute(attributeName);
+    }
 
     @Override
     default Reference<ProductType> toReference() {
