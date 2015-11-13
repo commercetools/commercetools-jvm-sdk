@@ -2,8 +2,6 @@ package io.sphere.sdk.search.model;
 
 import io.sphere.sdk.search.FilterExpression;
 
-import javax.annotation.Nullable;
-
 import java.util.List;
 import java.util.function.Function;;
 
@@ -12,10 +10,10 @@ import java.util.function.Function;;
  * @param <T> type of the resource
  * @param <V> type of the value
  */
-public class RangeFilterSearchModel<T, V extends Comparable<? super V>> extends RangeFilterBaseSearchModel<T, V> {
+public class RangeTermFilterSearchModel<T, V extends Comparable<? super V>> extends RangeTermFilterBaseSearchModel<T, V> {
 
-    RangeFilterSearchModel(@Nullable final SearchModel<T> parent, final Function<V, String> typeSerializer) {
-        super(parent, typeSerializer);
+    RangeTermFilterSearchModel(final SearchModel<T> searchModel, final Function<V, String> typeSerializer) {
+        super(searchModel, typeSerializer);
     }
 
     @Override
@@ -61,5 +59,17 @@ public class RangeFilterSearchModel<T, V extends Comparable<? super V>> extends 
     @Override
     public List<FilterExpression<T>> byLessThanOrEqualTo(final V value) {
         return super.byLessThanOrEqualTo(value);
+    }
+
+    /**
+     * Creates an instance of the search model to generate range and term filter expressions.
+     * @param attributePath the path of the attribute as expected by Commercetools Platform (e.g. "variants.attributes.color.key")
+     * @param typeSerializer the function to convert the provided value to a string accepted by Commercetools Platform
+     * @param <T> type of the resource
+     * @param <V> type of the value
+     * @return new instance of RangeTermFilterSearchModel
+     */
+    public static <T, V extends Comparable<? super V>> RangeTermFilterSearchModel<T, V> of(final String attributePath, final Function<V, String> typeSerializer) {
+        return new RangeTermFilterSearchModel<>(new SearchModelImpl<>(attributePath), typeSerializer);
     }
 }

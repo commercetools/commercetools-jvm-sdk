@@ -9,7 +9,7 @@ public class LocalizedStringFacetAndFilterSearchModel<T> extends SearchModelImpl
         super(parent, pathSegment);
     }
 
-    public TermFacetAndFilterSearchModel<T, String> locale(final Locale locale) {
+    public TermFacetAndFilterSearchModel<T> locale(final Locale locale) {
         return new StringSearchModel<>(this, locale.toLanguageTag()).facetedAndFiltered();
     }
 }

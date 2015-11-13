@@ -9,7 +9,7 @@ public class MoneyFacetSearchModel<T> extends SearchModelImpl<T> {
         super(parent, pathSegment);
     }
 
-    public RangeFacetSearchModel<T, Long> centAmount() {
+    public RangeTermFacetSearchModel<T, Long> centAmount() {
         return new MoneyCentAmountSearchModel<>(this, "centAmount").faceted();
     }
 

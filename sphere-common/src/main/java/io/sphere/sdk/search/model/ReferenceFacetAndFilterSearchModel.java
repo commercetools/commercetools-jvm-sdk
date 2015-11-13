@@ -8,7 +8,7 @@ public class ReferenceFacetAndFilterSearchModel<T> extends SearchModelImpl<T> {
         super(parent, pathSegment);
     }
 
-    public TermFacetAndFilterSearchModel<T, String> id() {
+    public TermFacetAndFilterSearchModel<T> id() {
         return new StringSearchModel<>(this, "id").facetedAndFiltered();
     }
 }

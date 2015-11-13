@@ -9,11 +9,11 @@ public class MoneyFacetAndFilterSearchModel<T> extends SearchModelImpl<T> {
         super(parent, pathSegment);
     }
 
-    public RangeFacetAndFilterSearchModel<T, Long> centAmount() {
+    public RangeTermFacetAndFilterSearchModel<T> centAmount() {
         return new MoneyCentAmountSearchModel<>(this, "centAmount").facetedAndFiltered();
     }
 
-    public TermFacetAndFilterSearchModel<T, CurrencyUnit> currency() {
+    public TermFacetAndFilterSearchModel<T> currency() {
         return new CurrencySearchModel<>(this, "currencyCode").facetedAndFiltered();
     }
 }

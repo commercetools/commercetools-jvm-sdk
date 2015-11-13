@@ -16,7 +16,7 @@ public class ProductDataFacetAndFilterSearchModel extends SearchModelImpl<Produc
         return new ProductVariantFacetAndFilterSearchModel(this, "variants");
     }
 
-    public TermFacetAndFilterSearchModel<ProductProjection, String> id() {
+    public TermFacetAndFilterSearchModel<ProductProjection> id() {
         return stringSearchModel("id").facetedAndFiltered();
     }
 
@@ -32,11 +32,11 @@ public class ProductDataFacetAndFilterSearchModel extends SearchModelImpl<Produc
         return referenceFacetAndFilterSearchModel("productType");
     }
 
-    public RangeFacetAndFilterSearchModel<ProductProjection, ZonedDateTime> createdAt() {
+    public RangeTermFacetAndFilterSearchModel<ProductProjection> createdAt() {
         return datetimeSearchModel("createdAt").facetedAndFiltered();
     }
 
-    public RangeFacetAndFilterSearchModel<ProductProjection, ZonedDateTime> lastModifiedAt() {
+    public RangeTermFacetAndFilterSearchModel<ProductProjection> lastModifiedAt() {
         return datetimeSearchModel("lastModifiedAt").facetedAndFiltered();
     }
 }

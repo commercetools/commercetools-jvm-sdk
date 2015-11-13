@@ -2,7 +2,6 @@ package io.sphere.sdk.search.model;
 
 import io.sphere.sdk.search.FilterExpression;
 
-import javax.annotation.Nullable;
 import java.util.List;
 import java.util.function.Function;
 import java.util.stream.StreamSupport;
@@ -16,10 +15,10 @@ import static java.util.stream.Collectors.toList;
  * @param <T> type of the resource
  * @param <V> type of the value
  */
-abstract class RangeFilterBaseSearchModel<T, V extends Comparable<? super V>> extends TermFilterBaseSearchModel<T, V> {
+abstract class RangeTermFilterBaseSearchModel<T, V extends Comparable<? super V>> extends TermFilterBaseSearchModel<T, V> {
 
-    RangeFilterBaseSearchModel(@Nullable final SearchModel<T> parent, final Function<V, String> typeSerializer) {
-        super(parent, typeSerializer);
+    RangeTermFilterBaseSearchModel(final SearchModel<T> searchModel, final Function<V, String> typeSerializer) {
+        super(searchModel, typeSerializer);
     }
 
     /**
@@ -122,7 +121,7 @@ abstract class RangeFilterBaseSearchModel<T, V extends Comparable<? super V>> ex
     }
 
     private RangeFilterExpression<T, V> filterBy(final Iterable<FilterRange<V>> ranges) {
-        return new RangeFilterExpression<>(this, typeSerializer, ranges);
+        return new RangeFilterExpression<>(searchModel, typeSerializer, ranges);
     }
 
     private RangeFilterExpression<T, String> filterByAsString(final FilterRange<String> range) {
@@ -130,6 +129,6 @@ abstract class RangeFilterBaseSearchModel<T, V extends Comparable<? super V>> ex
     }
 
     private RangeFilterExpression<T, String> filterByAsString(final Iterable<FilterRange<String>> ranges) {
-        return new RangeFilterExpression<>(this, TypeSerializer.ofString(), ranges);
+        return new RangeFilterExpression<>(searchModel, TypeSerializer.ofString(), ranges);
     }
 }

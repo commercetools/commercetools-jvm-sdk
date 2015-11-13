@@ -32,11 +32,11 @@ public class ProductDataFilterSearchModel extends SearchModelImpl<ProductProject
         return referenceFilterSearchModel("productType");
     }
 
-    public RangeFilterSearchModel<ProductProjection, ZonedDateTime> createdAt() {
+    public RangeTermFilterSearchModel<ProductProjection, ZonedDateTime> createdAt() {
         return datetimeSearchModel("createdAt").filtered();
     }
 
-    public RangeFilterSearchModel<ProductProjection, ZonedDateTime> lastModifiedAt() {
+    public RangeTermFilterSearchModel<ProductProjection, ZonedDateTime> lastModifiedAt() {
         return datetimeSearchModel("lastModifiedAt").filtered();
     }
 }

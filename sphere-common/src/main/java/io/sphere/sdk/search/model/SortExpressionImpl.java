@@ -12,7 +12,7 @@ class SortExpressionImpl<T> extends Base implements SortExpression<T> {
     private final SearchModel<T> searchModel;
     private final SearchSortDirection direction;
 
-    protected SortExpressionImpl(final SearchModel<T> searchModel, final SearchSortDirection direction) {
+    SortExpressionImpl(final SearchModel<T> searchModel, final SearchSortDirection direction) {
         this.searchModel = requireNonNull(searchModel);
         this.direction = requireNonNull(direction);
     }

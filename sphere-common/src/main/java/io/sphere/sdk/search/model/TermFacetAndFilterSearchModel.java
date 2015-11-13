@@ -2,33 +2,43 @@ package io.sphere.sdk.search.model;
 
 import io.sphere.sdk.search.TermFacetAndFilterExpression;
 
-import javax.annotation.Nullable;
-import java.util.function.Function;
-
 /**
  * Model to build term facets and filters.
  * @param <T> type of the resource
- * @param <V> type of the value
  */
-public class TermFacetAndFilterSearchModel<T, V> extends TermFacetAndFilterBaseSearchModel<T, V> {
+public class TermFacetAndFilterSearchModel<T> extends TermFacetAndFilterBaseSearchModel<T> {
 
-    TermFacetAndFilterSearchModel(@Nullable final SearchModel<T> parent, final Function<V, String> typeSerializer) {
-        super(parent, typeSerializer);
+    TermFacetAndFilterSearchModel(final SearchModel<T> searchModel) {
+        super(searchModel);
     }
 
     @Override
-    public TermFacetAndFilterExpression<T> by(final V value) {
+    public TermFacetAndFilterExpression<T> allTerms() {
+        return super.allTerms();
+    }
+
+    @Override
+    public TermFacetAndFilterExpression<T> by(final String value) {
         return super.by(value);
     }
 
     @Override
-    public TermFacetAndFilterExpression<T> byAny(final Iterable<V> values) {
+    public TermFacetAndFilterExpression<T> byAny(final Iterable<String> values) {
         return super.byAny(values);
     }
 
     @Override
-    public TermFacetAndFilterExpression<T> byAll(final Iterable<V> values) {
+    public TermFacetAndFilterExpression<T> byAll(final Iterable<String> values) {
         return super.byAll(values);
     }
 
+    /**
+     * Creates an instance of the search model to generate term faceted search expressions.
+     * @param attributePath the path of the attribute as expected by Commercetools Platform (e.g. "variants.attributes.color.key")
+     * @param <T> type of the resource
+     * @return new instance of TermFacetAndFilterSearchModel
+     */
+    public static <T> TermFacetAndFilterSearchModel<T> of(final String attributePath) {
+        return new TermFacetAndFilterSearchModel<>(new SearchModelImpl<>(attributePath));
+    }
 }

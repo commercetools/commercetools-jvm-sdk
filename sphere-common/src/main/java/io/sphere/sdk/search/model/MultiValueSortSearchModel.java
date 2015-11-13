@@ -8,9 +8,9 @@ import static io.sphere.sdk.search.SearchSortDirection.*;
  * A sort model to decide the direction of a model with multiple values per entity.
  * @see MultiValueSortSearchModelFactory to instantiate this class
  */
-public class MultiValueSortSearchModel<T> extends SortSearchModelImpl<T, MultiValueSortSearchModel<T>> {
+public class MultiValueSortSearchModel<T> extends SortSearchModelImpl<T> {
 
-    MultiValueSortSearchModel(final SortableSearchModel<T, MultiValueSortSearchModel<T>> searchModel) {
+    MultiValueSortSearchModel(final SearchModel<T> searchModel) {
         super(searchModel);
     }
 
@@ -46,5 +46,15 @@ public class MultiValueSortSearchModel<T> extends SortSearchModelImpl<T, MultiVa
      */
     public SortExpression<T> byDescWithMin() {
         return by(DESC_MIN);
+    }
+
+    /**
+     * Creates an instance of the search model to generate multi-valued sort expressions.
+     * @param attributePath the path of the attribute as expected by Commercetools Platform (e.g. "variants.attributes.color.key")
+     * @param <T> type of the resource
+     * @return new instance of MultiValueSortSearchModel
+     */
+    public static <T> MultiValueSortSearchModel<T> of(final String attributePath) {
+        return new MultiValueSortSearchModel<>(new SearchModelImpl<>(attributePath));
     }
 }

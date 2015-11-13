@@ -3,7 +3,6 @@ package io.sphere.sdk.search.model;
 import io.sphere.sdk.search.FilteredFacetExpression;
 import io.sphere.sdk.search.TermFacetExpression;
 
-import javax.annotation.Nullable;
 import java.util.function.Function;
 
 /**
@@ -13,17 +12,17 @@ import java.util.function.Function;
  */
 public class TermFacetSearchModel<T, V> extends TermFacetBaseSearchModel<T, V> {
 
-    TermFacetSearchModel(@Nullable final SearchModel<T> parent, final Function<V, String> typeSerializer, final String alias) {
-        super(parent, typeSerializer, alias);
+    TermFacetSearchModel(final SearchModel<T> searchModel, final Function<V, String> typeSerializer, final String alias) {
+        super(searchModel, typeSerializer, alias);
     }
 
-    TermFacetSearchModel(@Nullable final SearchModel<T> parent, final Function<V, String> typeSerializer) {
-        super(parent, typeSerializer);
+    TermFacetSearchModel(final SearchModel<T> searchModel, final Function<V, String> typeSerializer) {
+        super(searchModel, typeSerializer);
     }
 
     @Override
     public TermFacetSearchModel<T, V> withAlias(final String alias) {
-        return new TermFacetSearchModel<>(this, typeSerializer, alias);
+        return new TermFacetSearchModel<>(searchModel, typeSerializer, alias);
     }
 
     @Override
@@ -39,5 +38,17 @@ public class TermFacetSearchModel<T, V> extends TermFacetBaseSearchModel<T, V> {
     @Override
     public FilteredFacetExpression<T> onlyTerm(final Iterable<V> values) {
         return super.onlyTerm(values);
+    }
+
+    /**
+     * Creates an instance of the search model to generate term facet expressions.
+     * @param attributePath the path of the attribute as expected by Commercetools Platform (e.g. "variants.attributes.color.key")
+     * @param typeSerializer the function to convert the provided value to a string accepted by Commercetools Platform
+     * @param <T> type of the resource
+     * @param <V> type of the value
+     * @return new instance of TermFacetSearchModel
+     */
+    public static <T, V> TermFacetSearchModel<T, V> of(final String attributePath, final Function<V, String> typeSerializer) {
+        return new TermFacetSearchModel<>(new SearchModelImpl<>(attributePath), typeSerializer);
     }
 }

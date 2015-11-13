@@ -22,7 +22,7 @@ public class ProductProjectionFacetAndFilterSearchModel extends ProductDataFacet
     }
 
     @Override
-    public TermFacetAndFilterSearchModel<ProductProjection, String> id() {
+    public TermFacetAndFilterSearchModel<ProductProjection> id() {
         return super.id();
     }
 
@@ -42,12 +42,12 @@ public class ProductProjectionFacetAndFilterSearchModel extends ProductDataFacet
     }
 
     @Override
-    public RangeFacetAndFilterSearchModel<ProductProjection, ZonedDateTime> createdAt() {
+    public RangeTermFacetAndFilterSearchModel<ProductProjection> createdAt() {
         return super.createdAt();
     }
 
     @Override
-    public RangeFacetAndFilterSearchModel<ProductProjection, ZonedDateTime> lastModifiedAt() {
+    public RangeTermFacetAndFilterSearchModel<ProductProjection> lastModifiedAt() {
         return super.lastModifiedAt();
     }
 }
