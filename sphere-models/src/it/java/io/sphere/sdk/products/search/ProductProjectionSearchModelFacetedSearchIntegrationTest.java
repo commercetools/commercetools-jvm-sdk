@@ -19,7 +19,7 @@ public class ProductProjectionSearchModelFacetedSearchIntegrationTest extends Pr
 
     @Test
     public void facetedSearchOnBooleanAttributes() throws Exception {
-        testResultWithTerms(FACETED_SEARCH.allVariants().attribute().ofBoolean(ATTR_NAME_BOOLEAN).by(true),
+        testResultWithTerms(FACETED_SEARCH.allVariants().attribute().ofBoolean(ATTR_NAME_BOOLEAN).by(BOOL_TRUE),
                 ids -> assertThat(ids).containsOnly(product1.getId()),
                 termStats -> assertThat(termStats).containsOnly(
                         TermStats.of(BOOL_TRUE, 1),
@@ -82,7 +82,7 @@ public class ProductProjectionSearchModelFacetedSearchIntegrationTest extends Pr
 
     @Test
     public void facetedSearchOnNumberAttributes() throws Exception {
-        testResultWithTerms(FACETED_SEARCH.allVariants().attribute().ofNumber(ATTR_NAME_NUMBER).by(NUMBER_5),
+        testResultWithTerms(FACETED_SEARCH.allVariants().attribute().ofNumber(ATTR_NAME_NUMBER).by(NUMBER_5.toPlainString()),
                 ids -> assertThat(ids).containsOnly(product1.getId()),
                 termStats -> assertThat(termStats).containsOnly(
                         TermStats.of("5.0", 1),
@@ -91,7 +91,7 @@ public class ProductProjectionSearchModelFacetedSearchIntegrationTest extends Pr
 
     @Test
     public void facetedSearchOnNumberRangedAttributes() throws Exception {
-        testResultWithRange(FACETED_SEARCH.allVariants().attribute().ofNumber(ATTR_NAME_NUMBER).byRange(atMost(NUMBER_5)),
+        testResultWithRange(FACETED_SEARCH.allVariants().attribute().ofNumber(ATTR_NAME_NUMBER).byRange(atMost(NUMBER_5.toPlainString())),
                 ids -> assertThat(ids).containsOnly(product1.getId()),
                 rangeStats -> {
                     assertThat(rangeStats.getLowerEndpoint()).isEqualTo(null);
@@ -104,7 +104,7 @@ public class ProductProjectionSearchModelFacetedSearchIntegrationTest extends Pr
 
     @Test
     public void facetedSearchOnMoneyAmountAttributes() throws Exception {
-        testResultWithTerms(FACETED_SEARCH.allVariants().attribute().ofMoney(ATTR_NAME_MONEY).centAmount().by(toCents(MONEY_500_EUR)),
+        testResultWithTerms(FACETED_SEARCH.allVariants().attribute().ofMoney(ATTR_NAME_MONEY).centAmount().by(toCents(MONEY_500_EUR).toString()),
                 ids -> assertThat(ids).containsOnly(product1.getId()),
                 termStats -> assertThat(termStats).containsOnly(
                         TermStats.of("50000", 1),
@@ -113,7 +113,7 @@ public class ProductProjectionSearchModelFacetedSearchIntegrationTest extends Pr
 
     @Test
     public void facetedSearchOnMoneyAmountRangedAttributes() throws Exception {
-        testResultWithRange(FACETED_SEARCH.allVariants().attribute().ofMoney(ATTR_NAME_MONEY).centAmount().byRange(atMost(toCents(MONEY_500_EUR))),
+        testResultWithRange(FACETED_SEARCH.allVariants().attribute().ofMoney(ATTR_NAME_MONEY).centAmount().byRange(atMost(toCents(MONEY_500_EUR).toString())),
                 ids -> assertThat(ids).containsOnly(product1.getId()),
                 rangeStats -> {
                     assertThat(rangeStats.getLowerEndpoint()).isEqualTo(null);
@@ -126,7 +126,7 @@ public class ProductProjectionSearchModelFacetedSearchIntegrationTest extends Pr
 
     @Test
     public void facetedSearchOnMoneyCurrencyAttributes() throws Exception {
-        testResultWithTerms(FACETED_SEARCH.allVariants().attribute().ofMoney(ATTR_NAME_MONEY).currency().by(MONEY_500_EUR.getCurrency()),
+        testResultWithTerms(FACETED_SEARCH.allVariants().attribute().ofMoney(ATTR_NAME_MONEY).currency().by(MONEY_500_EUR.getCurrency().getCurrencyCode()),
                 ids -> assertThat(ids).containsOnly(product1.getId()),
                 termStats -> assertThat(termStats).containsOnly(
                         TermStats.of("EUR", 1),
@@ -135,7 +135,7 @@ public class ProductProjectionSearchModelFacetedSearchIntegrationTest extends Pr
 
     @Test
     public void facetedSearchOnDateAttributes() throws Exception {
-        testResultWithTerms(FACETED_SEARCH.allVariants().attribute().ofDate(ATTR_NAME_DATE).by(DATE_2001),
+        testResultWithTerms(FACETED_SEARCH.allVariants().attribute().ofDate(ATTR_NAME_DATE).by(DATE_2001.toString()),
                 ids -> assertThat(ids).containsOnly(product1.getId()),
                 termStats -> assertThat(termStats).containsOnly(
                         TermStats.of("2001-09-11", 1),
@@ -144,7 +144,7 @@ public class ProductProjectionSearchModelFacetedSearchIntegrationTest extends Pr
 
     @Test
     public void facetedSearchOnDateRangedAttributes() throws Exception {
-        testResultWithRange(FACETED_SEARCH.allVariants().attribute().ofDate(ATTR_NAME_DATE).byRange(atMost(DATE_2001)),
+        testResultWithRange(FACETED_SEARCH.allVariants().attribute().ofDate(ATTR_NAME_DATE).byRange(atMost(DATE_2001.toString())),
                 ids -> assertThat(ids).containsOnly(product1.getId()),
                 rangeStats -> {
                     assertThat(rangeStats.getLowerEndpoint()).isEqualTo(null);
@@ -157,7 +157,7 @@ public class ProductProjectionSearchModelFacetedSearchIntegrationTest extends Pr
 
     @Test
     public void facetedSearchOnTimeAttributes() throws Exception {
-        testResultWithTerms(FACETED_SEARCH.allVariants().attribute().ofTime(ATTR_NAME_TIME).by(TIME_22H),
+        testResultWithTerms(FACETED_SEARCH.allVariants().attribute().ofTime(ATTR_NAME_TIME).by(TIME_22H.toString()),
                 ids -> assertThat(ids).containsOnly(product1.getId()),
                 termStats -> assertThat(termStats).containsOnly(
                         TermStats.of("22:05:09.203", 1),
@@ -166,7 +166,7 @@ public class ProductProjectionSearchModelFacetedSearchIntegrationTest extends Pr
 
     @Test
     public void facetedSearchOnTimeRangedAttributes() throws Exception {
-        testResultWithRange(FACETED_SEARCH.allVariants().attribute().ofTime(ATTR_NAME_TIME).byRange(atMost(TIME_22H)),
+        testResultWithRange(FACETED_SEARCH.allVariants().attribute().ofTime(ATTR_NAME_TIME).byRange(atMost(TIME_22H.toString())),
                 ids -> assertThat(ids).containsOnly(product1.getId()),
                 rangeStats -> {
                     assertThat(rangeStats.getLowerEndpoint()).isEqualTo(null);
@@ -179,7 +179,7 @@ public class ProductProjectionSearchModelFacetedSearchIntegrationTest extends Pr
 
     @Test
     public void facetedSearchOnDateTimeAttributes() throws Exception {
-        testResultWithTerms(FACETED_SEARCH.allVariants().attribute().ofDateTime(ATTR_NAME_DATE_TIME).by(DATE_TIME_2001_22H),
+        testResultWithTerms(FACETED_SEARCH.allVariants().attribute().ofDateTime(ATTR_NAME_DATE_TIME).by(DATE_TIME_2001_22H.toString()),
                 ids -> assertThat(ids).containsOnly(product1.getId()),
                 termStats -> assertThat(termStats).containsOnly(
                         TermStats.of("2002-10-12T23:06:10.204+0000", 1),
@@ -188,7 +188,7 @@ public class ProductProjectionSearchModelFacetedSearchIntegrationTest extends Pr
 
     @Test
     public void facetedSearchOnDateTimeRangedAttributes() throws Exception {
-        testResultWithRange(FACETED_SEARCH.allVariants().attribute().ofDateTime(ATTR_NAME_DATE_TIME).byRange(atMost(DATE_TIME_2001_22H)),
+        testResultWithRange(FACETED_SEARCH.allVariants().attribute().ofDateTime(ATTR_NAME_DATE_TIME).byRange(atMost(DATE_TIME_2001_22H.toString())),
                 ids -> assertThat(ids).containsOnly(product1.getId()),
                 rangeStats -> {
                     assertThat(rangeStats.getLowerEndpoint()).isEqualTo(null);
@@ -210,7 +210,7 @@ public class ProductProjectionSearchModelFacetedSearchIntegrationTest extends Pr
 
     @Test
     public void facetedSearchOnBooleanSetAttributes() throws Exception {
-        testResultWithTerms(FACETED_SEARCH.allVariants().attribute().ofBooleanSet(ATTR_NAME_BOOLEAN_SET).by(false),
+        testResultWithTerms(FACETED_SEARCH.allVariants().attribute().ofBooleanSet(ATTR_NAME_BOOLEAN_SET).by(BOOL_FALSE),
                 ids -> assertThat(ids).containsOnly(product1.getId()),
                 termStats -> assertThat(termStats).containsExactly(
                         TermStats.of(BOOL_TRUE, 2),
@@ -273,7 +273,7 @@ public class ProductProjectionSearchModelFacetedSearchIntegrationTest extends Pr
 
     @Test
     public void facetedSearchOnNumberSetAttributes() throws Exception {
-        testResultWithTerms(FACETED_SEARCH.allVariants().attribute().ofNumberSet(ATTR_NAME_NUMBER_SET).by(NUMBER_10),
+        testResultWithTerms(FACETED_SEARCH.allVariants().attribute().ofNumberSet(ATTR_NAME_NUMBER_SET).by(NUMBER_10.toPlainString()),
                 ids -> assertThat(ids).containsOnly(product1.getId()),
                 termStats -> assertThat(termStats).containsExactly(
                         TermStats.of("5.0", 2),
@@ -282,7 +282,7 @@ public class ProductProjectionSearchModelFacetedSearchIntegrationTest extends Pr
 
     @Test
     public void facetedSearchOnNumberRangedSetAttributes() throws Exception {
-        testResultWithRange(FACETED_SEARCH.allVariants().attribute().ofNumberSet(ATTR_NAME_NUMBER_SET).byRange(atLeast(NUMBER_10)),
+        testResultWithRange(FACETED_SEARCH.allVariants().attribute().ofNumberSet(ATTR_NAME_NUMBER_SET).byRange(atLeast(NUMBER_10.toPlainString())),
                 ids -> assertThat(ids).containsOnly(product1.getId()),
                 rangeStats -> {
                     assertThat(rangeStats.getLowerEndpoint()).isEqualTo(null);
@@ -295,7 +295,7 @@ public class ProductProjectionSearchModelFacetedSearchIntegrationTest extends Pr
 
     @Test
     public void facetedSearchOnMoneyAmountSetAttributes() throws Exception {
-        testResultWithTerms(FACETED_SEARCH.allVariants().attribute().ofMoneySet(ATTR_NAME_MONEY_SET).centAmount().by(toCents(MONEY_1000_USD)),
+        testResultWithTerms(FACETED_SEARCH.allVariants().attribute().ofMoneySet(ATTR_NAME_MONEY_SET).centAmount().by(toCents(MONEY_1000_USD).toString()),
                 ids -> assertThat(ids).containsOnly(product1.getId()),
                 termStats -> assertThat(termStats).containsExactly(
                         TermStats.of("50000", 2),
@@ -304,7 +304,7 @@ public class ProductProjectionSearchModelFacetedSearchIntegrationTest extends Pr
 
     @Test
     public void facetedSearchOnMoneyAmountRangedSetAttributes() throws Exception {
-        testResultWithRange(FACETED_SEARCH.allVariants().attribute().ofMoneySet(ATTR_NAME_MONEY_SET).centAmount().byRange(atLeast(toCents(MONEY_1000_USD))),
+        testResultWithRange(FACETED_SEARCH.allVariants().attribute().ofMoneySet(ATTR_NAME_MONEY_SET).centAmount().byRange(atLeast(toCents(MONEY_1000_USD).toString())),
                 ids -> assertThat(ids).containsOnly(product1.getId()),
                 rangeStats -> {
                     assertThat(rangeStats.getLowerEndpoint()).isEqualTo(null);
@@ -317,7 +317,7 @@ public class ProductProjectionSearchModelFacetedSearchIntegrationTest extends Pr
 
     @Test
     public void facetedSearchOnMoneyCurrencySetAttributes() throws Exception {
-        testResultWithTerms(FACETED_SEARCH.allVariants().attribute().ofMoneySet(ATTR_NAME_MONEY_SET).currency().by(MONEY_1000_USD.getCurrency()),
+        testResultWithTerms(FACETED_SEARCH.allVariants().attribute().ofMoneySet(ATTR_NAME_MONEY_SET).currency().by(MONEY_1000_USD.getCurrency().getCurrencyCode()),
                 ids -> assertThat(ids).containsOnly(product1.getId()),
                 termStats -> assertThat(termStats).containsExactly(
                         TermStats.of("EUR", 2),
@@ -326,7 +326,7 @@ public class ProductProjectionSearchModelFacetedSearchIntegrationTest extends Pr
 
     @Test
     public void facetedSearchOnDateSetAttributes() throws Exception {
-        testResultWithTerms(FACETED_SEARCH.allVariants().attribute().ofDateSet(ATTR_NAME_DATE_SET).by(DATE_2002),
+        testResultWithTerms(FACETED_SEARCH.allVariants().attribute().ofDateSet(ATTR_NAME_DATE_SET).by(DATE_2002.toString()),
                 ids -> assertThat(ids).containsOnly(product1.getId()),
                 termStats -> assertThat(termStats).containsExactly(
                         TermStats.of("2001-09-11", 2),
@@ -335,7 +335,7 @@ public class ProductProjectionSearchModelFacetedSearchIntegrationTest extends Pr
 
     @Test
     public void facetedSearchOnDateRangedSetAttributes() throws Exception {
-        testResultWithRange(FACETED_SEARCH.allVariants().attribute().ofDateSet(ATTR_NAME_DATE_SET).byRange(atLeast(DATE_2002)),
+        testResultWithRange(FACETED_SEARCH.allVariants().attribute().ofDateSet(ATTR_NAME_DATE_SET).byRange(atLeast(DATE_2002.toString())),
                 ids -> assertThat(ids).containsOnly(product1.getId()),
                 rangeStats -> {
                     assertThat(rangeStats.getLowerEndpoint()).isEqualTo(null);
@@ -348,7 +348,7 @@ public class ProductProjectionSearchModelFacetedSearchIntegrationTest extends Pr
 
     @Test
     public void facetedSearchOnTimeSetAttributes() throws Exception {
-        testResultWithTerms(FACETED_SEARCH.allVariants().attribute().ofTimeSet(ATTR_NAME_TIME_SET).by(TIME_23H),
+        testResultWithTerms(FACETED_SEARCH.allVariants().attribute().ofTimeSet(ATTR_NAME_TIME_SET).by(TIME_23H.toString()),
                 ids -> assertThat(ids).containsOnly(product1.getId()),
                 termStats -> assertThat(termStats).containsExactly(
                         TermStats.of("22:05:09.203", 2),
@@ -357,7 +357,7 @@ public class ProductProjectionSearchModelFacetedSearchIntegrationTest extends Pr
 
     @Test
     public void facetedSearchOnTimeRangedSetAttributes() throws Exception {
-        testResultWithRange(FACETED_SEARCH.allVariants().attribute().ofTimeSet(ATTR_NAME_TIME_SET).byRange(atLeast(TIME_23H)),
+        testResultWithRange(FACETED_SEARCH.allVariants().attribute().ofTimeSet(ATTR_NAME_TIME_SET).byRange(atLeast(TIME_23H.toString())),
                 ids -> assertThat(ids).containsOnly(product1.getId()),
                 rangeStats -> {
                     assertThat(rangeStats.getLowerEndpoint()).isEqualTo(null);
@@ -370,7 +370,7 @@ public class ProductProjectionSearchModelFacetedSearchIntegrationTest extends Pr
 
     @Test
     public void facetedSearchOnDateTimeSetAttributes() throws Exception {
-        testResultWithTerms(FACETED_SEARCH.allVariants().attribute().ofDateTimeSet(ATTR_NAME_DATE_TIME_SET).by(DATE_TIME_2002_23H),
+        testResultWithTerms(FACETED_SEARCH.allVariants().attribute().ofDateTimeSet(ATTR_NAME_DATE_TIME_SET).by(DATE_TIME_2002_23H.toString()),
                 ids -> assertThat(ids).containsOnly(product1.getId()),
                 termStats -> assertThat(termStats).containsExactly(
                         TermStats.of("2001-09-11T22:05:09.203+0000", 2),
@@ -379,7 +379,7 @@ public class ProductProjectionSearchModelFacetedSearchIntegrationTest extends Pr
 
     @Test
     public void facetedSearchOnDateTimeRangedSetAttributes() throws Exception {
-        testResultWithRange(FACETED_SEARCH.allVariants().attribute().ofDateTimeSet(ATTR_NAME_DATE_TIME_SET).byRange(atLeast(DATE_TIME_2002_23H)),
+        testResultWithRange(FACETED_SEARCH.allVariants().attribute().ofDateTimeSet(ATTR_NAME_DATE_TIME_SET).byRange(atLeast(DATE_TIME_2002_23H.toString())),
                 ids -> assertThat(ids).containsOnly(product1.getId()),
                 rangeStats -> {
                     assertThat(rangeStats.getLowerEndpoint()).isEqualTo(null);

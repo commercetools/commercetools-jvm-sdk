@@ -8,20 +8,19 @@ import java.util.List;
 import java.util.function.Consumer;
 
 import static io.sphere.sdk.test.SphereTestUtils.*;
-import static java.util.Collections.emptyList;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class ProductProjectionSearchFacetedSearchIntegrationTest extends ProductProjectionSearchIntegrationTest {
 
     private static final ProductProjectionFacetAndFilterSearchModel FACETED_SEARCH = ProductProjectionSearchModel.of().facetedSearch();
     private static final TermFacetAndFilterExpression<ProductProjection> COLOR_FACETED_SEARCH = FACETED_SEARCH.allVariants().attribute().ofString(ATTR_NAME_COLOR).by("red");
-    private static final TermFacetAndFilterExpression<ProductProjection> SIZE_FACETED_SEARCH = FACETED_SEARCH.allVariants().attribute().ofNumber(ATTR_NAME_SIZE).byAny(emptyList());
+    private static final TermFacetAndFilterExpression<ProductProjection> SIZE_FACETED_SEARCH = FACETED_SEARCH.allVariants().attribute().ofNumber(ATTR_NAME_SIZE).allTerms();
 
     @Test
     public void facetedSearchExample() throws Exception {
         final ProductAttributeFacetAndFilterSearchModel attributeModel = ProductProjectionSearchModel.of().facetedSearch().allVariants().attribute();
         final ProductProjectionSearch search = ProductProjectionSearch.ofStaged()
-                .plusFacetedSearch(attributeModel.ofNumber(ATTR_NAME_SIZE).byAny(emptyList()))
+                .plusFacetedSearch(attributeModel.ofNumber(ATTR_NAME_SIZE).allTerms())
                 .plusFacetedSearch(attributeModel.ofString(ATTR_NAME_COLOR).by("red"));
         testResult(search,
                 ids -> assertThat(ids).containsOnly(product2.getId()),
