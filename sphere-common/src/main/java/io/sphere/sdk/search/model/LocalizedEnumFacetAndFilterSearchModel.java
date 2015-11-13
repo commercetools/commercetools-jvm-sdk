@@ -8,7 +8,7 @@ public class LocalizedEnumFacetAndFilterSearchModel<T> extends SearchModelImpl<T
         super(parent, pathSegment);
     }
 
-    public TermFacetAndFilterSearchModel<T, String> key() {
+    public TermFacetAndFilterSearchModel<T> key() {
         return new StringSearchModel<>(this, "key").facetedAndFiltered();
     }
 
