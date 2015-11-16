@@ -6,6 +6,7 @@ import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.Builder;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Referenceable;
+import io.sphere.sdk.types.CustomDraft;
 import io.sphere.sdk.types.CustomFieldsDraft;
 
 import javax.annotation.Nullable;
@@ -14,7 +15,7 @@ import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Optional;
 
-public final class PaymentDraftBuilder extends Base implements Builder<PaymentDraft> {
+public final class PaymentDraftBuilder extends Base implements Builder<PaymentDraft>, CustomDraft {
     @Nullable
     private Reference<Customer> customer;
     @Nullable

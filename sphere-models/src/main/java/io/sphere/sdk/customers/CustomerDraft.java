@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.sphere.sdk.carts.Cart;
 import io.sphere.sdk.customergroups.CustomerGroup;
 import io.sphere.sdk.models.*;
+import io.sphere.sdk.types.CustomDraft;
 import io.sphere.sdk.types.CustomFieldsDraft;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
@@ -19,7 +20,7 @@ import java.util.Optional;
  * @see io.sphere.sdk.customers.CustomerDraftBuilder
  * @see io.sphere.sdk.customers.commands.CustomerCreateCommand
  */
-public class CustomerDraft extends Base {
+public class CustomerDraft extends Base implements CustomDraft {
     @Nullable
     private final String customerNumber;
     private final String email;

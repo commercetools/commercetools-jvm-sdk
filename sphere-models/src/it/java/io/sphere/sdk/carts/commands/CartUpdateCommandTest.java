@@ -15,6 +15,7 @@ import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.payments.Payment;
 import io.sphere.sdk.payments.PaymentFixtures;
 import io.sphere.sdk.products.Price;
+import io.sphere.sdk.products.PriceDraft;
 import io.sphere.sdk.products.Product;
 import io.sphere.sdk.products.VariantIdentifier;
 import io.sphere.sdk.products.commands.ProductUpdateCommand;
@@ -269,7 +270,7 @@ public class CartUpdateCommandTest extends IntegrationTest {
 
             final Cart cartWithLineItem = execute(CartUpdateCommand.of(emptyCart, action));
             final Price oldPrice = cartWithLineItem.getLineItems().get(0).getPrice();
-            final Price newPrice = oldPrice.withValue(oldPrice.getValue().multiply(2));
+            final PriceDraft newPrice = PriceDraft.of(oldPrice).withValue(oldPrice.getValue().multiply(2));
             final Product productWithChangedPrice =
                     execute(ProductUpdateCommand.of(product, asList(ChangePrice.of(oldPrice, newPrice), Publish.of())));
 

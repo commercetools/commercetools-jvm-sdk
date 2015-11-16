@@ -7,6 +7,7 @@ import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Referenceable;
 import io.sphere.sdk.taxcategories.TaxCategory;
+import io.sphere.sdk.types.CustomDraft;
 import io.sphere.sdk.types.CustomFieldsDraft;
 
 import javax.annotation.Nullable;
@@ -19,7 +20,7 @@ import javax.money.MonetaryAmount;
 
  {@include.example io.sphere.sdk.carts.commands.CartUpdateCommandTest#addCustomLineItem()}
  */
-public class AddCustomLineItem extends UpdateActionImpl<Cart> {
+public class AddCustomLineItem extends UpdateActionImpl<Cart> implements CustomDraft {
     private final LocalizedString name;
     private final Long quantity;
     private final MonetaryAmount money;

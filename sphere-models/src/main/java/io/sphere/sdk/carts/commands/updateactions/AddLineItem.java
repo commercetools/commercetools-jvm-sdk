@@ -6,6 +6,7 @@ import io.sphere.sdk.commands.UpdateActionImpl;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Referenceable;
 import io.sphere.sdk.products.ProductIdentifiable;
+import io.sphere.sdk.types.CustomDraft;
 import io.sphere.sdk.types.CustomFieldsDraft;
 
 import javax.annotation.Nullable;
@@ -18,7 +19,7 @@ import javax.annotation.Nullable;
 
     {@include.example io.sphere.sdk.carts.commands.CartUpdateCommandTest#addLineItem()}
  */
-public class AddLineItem extends UpdateActionImpl<Cart> {
+public class AddLineItem extends UpdateActionImpl<Cart> implements CustomDraft {
     private final String productId;
     private final Integer variantId;
     private final Long quantity;

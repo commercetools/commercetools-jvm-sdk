@@ -5,10 +5,7 @@ import io.sphere.sdk.channels.ChannelRole;
 import io.sphere.sdk.customergroups.CustomerGroupFixtures;
 import io.sphere.sdk.expansion.ExpansionPath;
 import io.sphere.sdk.productdiscounts.ProductDiscount;
-import io.sphere.sdk.products.Price;
-import io.sphere.sdk.products.Product;
-import io.sphere.sdk.products.ProductFixtures;
-import io.sphere.sdk.products.VariantIdentifier;
+import io.sphere.sdk.products.*;
 import io.sphere.sdk.products.commands.ProductUpdateCommand;
 import io.sphere.sdk.products.commands.updateactions.Publish;
 import io.sphere.sdk.products.commands.updateactions.Unpublish;
@@ -17,16 +14,20 @@ import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.queries.Query;
 import io.sphere.sdk.suppliers.VariantsCottonTShirtProductDraftSupplier;
 import io.sphere.sdk.test.IntegrationTest;
+import io.sphere.sdk.utils.MoneyImpl;
 import org.junit.Test;
 
+import java.math.BigDecimal;
 import java.time.Duration;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
 import static io.sphere.sdk.customergroups.CustomerGroupFixtures.withCustomerGroup;
+import static io.sphere.sdk.models.DefaultCurrencyUnits.EUR;
 import static io.sphere.sdk.productdiscounts.ProductDiscountFixtures.withUpdateableProductDiscount;
 import static io.sphere.sdk.products.ProductFixtures.*;
+import static io.sphere.sdk.test.SphereTestUtils.DE;
 import static io.sphere.sdk.test.SphereTestUtils.assertEventually;
 import static io.sphere.sdk.test.SphereTestUtils.randomString;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -81,7 +82,7 @@ public class ProductQueryTest extends IntegrationTest {
     @Test
     public void canExpandCustomerGroupOfPrices() throws Exception {
         withCustomerGroup(client(), customerGroup ->
-                        withUpdateablePricedProduct(client(), PRICE.withCustomerGroup(customerGroup), product -> {
+                        withUpdateablePricedProduct(client(), PriceDraft.of(MoneyImpl.of(new BigDecimal("12.34"), EUR)).withCountry(DE).withCustomerGroup(customerGroup), product -> {
                             final ExpansionPath<Product> expansionPath = ProductExpansionModel.of().masterData().staged().masterVariant().prices().customerGroup();
                             final Query<Product> query = query(product).withExpansionPaths(expansionPath);
                             final List<Price> prices = execute(query).head().get().getMasterData().getStaged().getMasterVariant().getPrices();
@@ -97,7 +98,7 @@ public class ProductQueryTest extends IntegrationTest {
     @Test
     public void canExpandChannelOfPrices() throws Exception {
         ChannelFixtures.withChannelOfRole(client(), ChannelRole.INVENTORY_SUPPLY, channel -> {
-            withUpdateablePricedProduct(client(), PRICE.withChannel(channel), product -> {
+            withUpdateablePricedProduct(client(), PriceDraft.of(MoneyImpl.of(new BigDecimal("12.34"), EUR)).withCountry(DE).withChannel(channel), product -> {
                 final ExpansionPath<Product> expansionPath = ProductExpansionModel.of().masterData().staged().masterVariant().prices().channel();
                 final Query<Product> query = query(product).withExpansionPaths(expansionPath);
                 final List<Price> prices = execute(query).head().get().getMasterData().getStaged().getMasterVariant().getPrices();

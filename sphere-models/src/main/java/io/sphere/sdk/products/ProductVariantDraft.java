@@ -14,7 +14,7 @@ public interface ProductVariantDraft {
     @Nullable
     String getSku();
 
-    List<Price> getPrices();
+    List<PriceDraft> getPrices();
 
     List<AttributeDraft> getAttributes();
 

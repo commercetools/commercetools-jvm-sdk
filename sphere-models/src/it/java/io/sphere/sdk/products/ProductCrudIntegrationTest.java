@@ -87,7 +87,7 @@ public class ProductCrudIntegrationTest extends IntegrationTest {
         cleanUpChannelByKey(client(), channelKey);
         final Product product = createInBackendByName("assignPricesToMasterVariantAccordingToAChannel");
         final Channel channel = execute(ChannelCreateCommand.of(ChannelDraft.of(channelKey)));
-        final Price price = Price.of(MoneyImpl.of(523, EUR)).withChannel(channel);
+        final PriceDraft price = PriceDraft.of(MoneyImpl.of(523, EUR)).withChannel(channel);
         final Product updatedProduct = execute(ProductUpdateCommand.of(product, AddPrice.of(MASTER_VARIANT_ID, price)));
         final Price readPrice = updatedProduct.getMasterData().getStaged().getMasterVariant().getPrices().get(0);
         assertThat(readPrice.getChannel()).isEqualTo(channel.toReference());

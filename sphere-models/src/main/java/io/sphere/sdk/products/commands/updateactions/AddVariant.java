@@ -1,9 +1,9 @@
 package io.sphere.sdk.products.commands.updateactions;
 
-import io.sphere.sdk.products.attributes.AttributeDraft;
 import io.sphere.sdk.commands.UpdateActionImpl;
-import io.sphere.sdk.products.Price;
+import io.sphere.sdk.products.PriceDraft;
 import io.sphere.sdk.products.Product;
+import io.sphere.sdk.products.attributes.AttributeDraft;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -20,10 +20,10 @@ import java.util.List;
 public class AddVariant extends UpdateActionImpl<Product> {
     @Nullable
     private final String sku;
-    private final List<Price> prices;
+    private final List<PriceDraft> prices;
     private final List<AttributeDraft> attributes;
 
-    private AddVariant(final List<AttributeDraft> attributes, final List<Price> prices, @Nullable final String sku) {
+    private AddVariant(final List<AttributeDraft> attributes, final List<PriceDraft> prices, @Nullable final String sku) {
         super("addVariant");
         this.attributes = attributes;
         this.prices = prices;
@@ -34,7 +34,7 @@ public class AddVariant extends UpdateActionImpl<Product> {
         return attributes;
     }
 
-    public List<Price> getPrices() {
+    public List<PriceDraft> getPrices() {
         return prices;
     }
 
@@ -43,11 +43,11 @@ public class AddVariant extends UpdateActionImpl<Product> {
         return sku;
     }
 
-    public static AddVariant of(final List<AttributeDraft> attributes, final List<Price> prices, @Nullable final String sku) {
+    public static AddVariant of(final List<AttributeDraft> attributes, final List<PriceDraft> prices, @Nullable final String sku) {
         return new AddVariant(attributes, prices, sku);
     }
 
-    public static AddVariant of(final List<AttributeDraft> attributes, final List<Price> prices) {
+    public static AddVariant of(final List<AttributeDraft> attributes, final List<PriceDraft> prices) {
         return new AddVariant(attributes, prices, null);
     }
 }

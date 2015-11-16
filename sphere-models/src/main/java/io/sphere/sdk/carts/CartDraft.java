@@ -2,6 +2,7 @@ package io.sphere.sdk.carts;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.neovisionaries.i18n.CountryCode;
+import io.sphere.sdk.types.CustomDraft;
 import io.sphere.sdk.types.CustomFieldsDraft;
 
 import javax.annotation.Nullable;
@@ -13,7 +14,7 @@ import javax.money.CurrencyUnit;
  * @see io.sphere.sdk.carts.commands.CartCreateCommand
  * @see CartDraftBuilder
  */
-public class CartDraft {
+public class CartDraft implements CustomDraft {
     private final CurrencyUnit currency;
     @Nullable
     private final String customerId;

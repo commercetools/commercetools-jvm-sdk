@@ -5,6 +5,7 @@ import io.sphere.sdk.json.SphereJsonUtils;
 import io.sphere.sdk.productdiscounts.AbsoluteProductDiscountValue;
 import io.sphere.sdk.productdiscounts.DiscountedPrice;
 import io.sphere.sdk.productdiscounts.ProductDiscount;
+import io.sphere.sdk.utils.MoneyImpl;
 import org.junit.Test;
 
 import java.math.BigDecimal;
@@ -22,17 +23,8 @@ public class PriceTest {
                 "              \"currencyCode\": \"EUR\",\n" +
                 "              \"centAmount\": 2800\n" +
                 "            }\n" +
-                "          }", new TypeReference<Price>() {
-
-        });
-
-        final Price expected = Price.of(new BigDecimal("28.00"), EUR);
-        assertThat(actual.getValue().isEqualTo(expected.getValue())).isTrue();
-        assertThat(actual.getChannel()).isEqualTo(expected.getChannel());
-        assertThat(actual.getCountry()).isEqualTo(expected.getCountry());
-        assertThat(actual.getCustomerGroup()).isEqualTo(expected.getCustomerGroup());
-        assertThat(actual.getDiscounted()).isEqualTo(expected.getDiscounted());
-        assertThat(actual).isEqualTo(expected);
+                "          }", Price.class);
+        assertThat(actual.getValue().isEqualTo(MoneyImpl.ofCents(2800, "EUR")));
     }
 
     @Test
@@ -47,10 +39,18 @@ public class PriceTest {
 
     @Test
     public void equalsIgnoreId() {
-        final Price priceWithoutId = Price.of(new BigDecimal("28.00"), EUR);
-        final Price priceWithId = priceWithoutId.withId("foo");
-        assertThat(priceWithoutId)
-                .isNotEqualTo(priceWithId)
-                .matches(price -> price.equalsIgnoreId(priceWithId));
+        final String jsonAsString = "{\n" +
+                "            \"id\": \"foo-id\",\n" +
+                "            \"value\": {\n" +
+                "              \"currencyCode\": \"EUR\",\n" +
+                "              \"centAmount\": 2800\n" +
+                "            }\n" +
+                "          }";
+        final Price price1 = SphereJsonUtils.readObject(jsonAsString, Price.class);
+        final Price price2 = SphereJsonUtils.readObject(jsonAsString.replace("foo-id", "bar-id"), Price.class);
+        assertThat(price1.getId()).isEqualTo("foo-id");
+        assertThat(price2.getId()).isEqualTo("bar-id");
+        assertThat(price1).isNotEqualTo(price2);
+        assertThat(price1.equalsIgnoreId(price2)).isTrue();
     }
 }

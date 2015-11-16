@@ -23,6 +23,10 @@ public class CustomFieldsDraft {
         this.fields = MapUtils.immutableCopyOf(fields);
     }
 
+    public static CustomFieldsDraft ofCustomFields(final CustomFields custom) {
+        return CustomFieldsDraft.ofTypeIdAndJson(custom.getType().getTypeId(), custom.getFieldsMap());
+    }
+
     public static CustomFieldsDraft ofTypeIdAndJson(final String typeId, final Map<String, JsonNode> fields) {
         requireNonNull(typeId);
         return new CustomFieldsDraft(typeId, null, fields);

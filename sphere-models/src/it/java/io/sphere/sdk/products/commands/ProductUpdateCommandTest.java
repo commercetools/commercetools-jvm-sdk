@@ -64,25 +64,25 @@ public class ProductUpdateCommandTest extends IntegrationTest {
 
     @Test
     public void addPrice() throws Exception {
-        final Price expectedPrice = Price.of(MoneyImpl.of(123, EUR));
+        final PriceDraft expectedPrice = PriceDraft.of(MoneyImpl.of(123, EUR));
         testAddPrice(expectedPrice);
     }
 
     @Test
     public void addPriceYen() throws Exception {
-        final Price expectedPrice = Price.of(MoneyImpl.of(new BigDecimal("12345"), "JPY"));
+        final PriceDraft expectedPrice = PriceDraft.of(MoneyImpl.of(new BigDecimal("12345"), "JPY"));
         testAddPrice(expectedPrice);
     }
 
     @Test
     public void addPriceWithValidityPeriod() throws Exception {
-        final Price expectedPrice = Price.of(MoneyImpl.of(123, EUR))
+        final PriceDraft expectedPrice = PriceDraft.of(MoneyImpl.of(123, EUR))
                 .withValidFrom(SphereTestUtils.now())
                 .withValidUntil(SphereTestUtils.now().withZoneSameLocal(ZoneOffset.UTC).plusHours(2));
         testAddPrice(expectedPrice);
     }
 
-    private void testAddPrice(final Price expectedPrice) throws Exception {
+    private void testAddPrice(final PriceDraft expectedPrice) throws Exception {
         withUpdateableProduct(client(), product -> {
             final Product updatedProduct = client()
                     .execute(ProductUpdateCommand.of(product, AddPrice.of(1, expectedPrice)));
@@ -143,7 +143,7 @@ public class ProductUpdateCommandTest extends IntegrationTest {
     @Test
     public void changePrice() throws Exception {
         withUpdateablePricedProduct(client(), product -> {
-            final Price newPrice = Price.of(MoneyImpl.of(234, EUR));
+            final PriceDraft newPrice = PriceDraft.of(MoneyImpl.of(234, EUR));
             final List<Price> prices = product.getMasterData().getStaged().getMasterVariant()
                     .getPrices();
             assertThat(prices.stream().anyMatch(p -> p.equals(newPrice))).isFalse();
@@ -440,8 +440,8 @@ public class ProductUpdateCommandTest extends IntegrationTest {
         withUpdateableProduct(client(), product -> {
             assertThat(product.getMasterData().getStaged().getVariants()).isEmpty();
 
-            final Price price = PRICE;
-            final List<Price> prices = asList(price);
+            final PriceDraft price = PriceDraft.of(MoneyImpl.of(new BigDecimal("12.34"), EUR)).withCountry(DE);
+            final List<PriceDraft> prices = asList(price);
             final List<AttributeDraft> attributeValues = asList(moneyAttributeValue, colorAttributeValue, sizeValue);
             final ProductUpdateCommand addVariantCommand =
                     ProductUpdateCommand.of(product, AddVariant.of(attributeValues, prices, randomKey()));

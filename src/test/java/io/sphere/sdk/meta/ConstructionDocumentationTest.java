@@ -4,8 +4,8 @@ import com.neovisionaries.i18n.CountryCode;
 import io.sphere.sdk.models.Address;
 import io.sphere.sdk.models.AddressBuilder;
 import io.sphere.sdk.models.LocalizedString;
-import io.sphere.sdk.products.Price;
-import io.sphere.sdk.products.PriceBuilder;
+import io.sphere.sdk.products.PriceDraft;
+import io.sphere.sdk.products.PriceDraftBuilder;
 import io.sphere.sdk.utils.MoneyImpl;
 import org.junit.Test;
 
@@ -67,13 +67,13 @@ public class ConstructionDocumentationTest {
     @Test
     public void possibilities1() throws Exception {
         final MonetaryAmount eur100 = MoneyImpl.of(100, EUR);
-        final Price price0 = Price.of(eur100);//price without country
+        final PriceDraft price0 = PriceDraft.of(eur100);//price without country
         //builder style
-        final Price price1 = PriceBuilder.of(eur100).country(DE).build();
+        final PriceDraft price1 = PriceDraftBuilder.of(eur100).country(DE).build();
         //of method + copy method
-        final Price price2 = Price.of(eur100).withCountry(DE);
+        final PriceDraft price2 = PriceDraft.of(eur100).withCountry(DE);
         //withCountry semantically the same to
-        final Price price3 = PriceBuilder.of(Price.of(eur100)).country(DE).build();
+        final PriceDraft price3 = PriceDraftBuilder.of(PriceDraft.of(eur100)).country(DE).build();
         assertThat(price1).isEqualTo(price2).isEqualTo(price3)
                 .isNotEqualTo(price0);
     }
