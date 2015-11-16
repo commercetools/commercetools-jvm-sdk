@@ -9,6 +9,8 @@ import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Referenceable;
 import io.sphere.sdk.productdiscounts.DiscountedPrice;
+import io.sphere.sdk.types.Custom;
+import io.sphere.sdk.types.CustomFields;
 import io.sphere.sdk.utils.MoneyImpl;
 
 import javax.annotation.Nullable;
@@ -21,9 +23,16 @@ import java.util.Optional;
 /**
  * Amount that must be paid when buying goods.
  *
+ * <p>A Price can have {@link io.sphere.sdk.types.Custom custom fields}.</p>
+ *
  * For construction use a {@link io.sphere.sdk.products.PriceBuilder}.
+ *
+ * @see io.sphere.sdk.products.commands.updateactions.AddPrice
+ * @see io.sphere.sdk.products.commands.updateactions.ChangePrice
+ * @see io.sphere.sdk.products.commands.updateactions.RemovePrice
+ * @see ProductVariant#getPrices()
  */
-public class Price extends Base {
+public class Price extends Base implements Custom {
     private final MonetaryAmount value;
     @Nullable
     private final CountryCode country;
@@ -39,12 +48,15 @@ public class Price extends Base {
     private final ZonedDateTime validUntil;
     @Nullable
     private final String id;
+    @Nullable
+    private final CustomFields custom;
 
     @JsonCreator
     Price(final MonetaryAmount value, final CountryCode country,
           final Reference<CustomerGroup> customerGroup, final Reference<Channel> channel,
           final DiscountedPrice discounted,
-          @Nullable final ZonedDateTime validFrom, @Nullable final ZonedDateTime validUntil, final String id) {
+          @Nullable final ZonedDateTime validFrom, @Nullable final ZonedDateTime validUntil, final String id,
+          @Nullable final CustomFields custom) {
         this.value = value;
         this.country = country;
         this.customerGroup = customerGroup;
@@ -53,6 +65,7 @@ public class Price extends Base {
         this.validFrom = validFrom;
         this.validUntil = validUntil;
         this.id = id;
+        this.custom = custom;
     }
 
     public MonetaryAmount getValue() {
@@ -101,6 +114,12 @@ public class Price extends Base {
     @Nullable
     public String getId() {
         return id;
+    }
+
+    @Override
+    @Nullable
+    public CustomFields getCustom() {
+        return custom;
     }
 
     public Price withCustomerGroup(@Nullable final Referenceable<CustomerGroup> customerGroup) {
