@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":10,"i1":10};
+var methods = {"i0":10,"i1":10,"i2":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -49,7 +49,7 @@ var activeTableTab = "activeTableTab";
 <div class="subNav">
 <ul class="navList">
 <li><a href="../../../../../io/sphere/sdk/search/model/LocalizedStringSortSearchModel.html" title="class in io.sphere.sdk.search.model"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
-<li><a href="../../../../../io/sphere/sdk/search/model/MoneyFacetSearchModel.html" title="class in io.sphere.sdk.search.model"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
+<li><a href="../../../../../io/sphere/sdk/search/model/MoneyFacetAndFilterSearchModel.html" title="class in io.sphere.sdk.search.model"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">
 <li><a href="../../../../../index.html?io/sphere/sdk/search/model/MoneyCentAmountSearchModel.html" target="_top">Frames</a></li>
@@ -161,13 +161,20 @@ extends <a href="../../../../../io/sphere/sdk/search/model/SearchModelImpl.html"
 <th class="colLast" scope="col">Method and Description</th>
 </tr>
 <tr id="i0" class="altColor">
-<td class="colFirst"><code><a href="../../../../../io/sphere/sdk/search/model/RangeFacetSearchModel.html" title="class in io.sphere.sdk.search.model">RangeFacetSearchModel</a>&lt;T,V&gt;</code></td>
+<td class="colFirst"><code><a href="../../../../../io/sphere/sdk/search/model/RangeTermFacetSearchModel.html" title="class in io.sphere.sdk.search.model">RangeTermFacetSearchModel</a>&lt;T,V&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/search/model/MoneyCentAmountSearchModel.html#faceted--">faceted</a></span>()</code>
 <div class="block">Eventually generates an expression to obtain the facets of the attribute for certain range of values.</div>
 </td>
 </tr>
 <tr id="i1" class="rowColor">
-<td class="colFirst"><code><a href="../../../../../io/sphere/sdk/search/model/RangeFilterSearchModel.html" title="class in io.sphere.sdk.search.model">RangeFilterSearchModel</a>&lt;T,V&gt;</code></td>
+<td class="colFirst"><code><a href="../../../../../io/sphere/sdk/search/model/RangeTermFacetAndFilterSearchModel.html" title="class in io.sphere.sdk.search.model">RangeTermFacetAndFilterSearchModel</a>&lt;T&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/search/model/MoneyCentAmountSearchModel.html#facetedAndFiltered--">facetedAndFiltered</a></span>()</code>
+<div class="block">Eventually generates both an expression to obtain the facets of the attribute for all ranges
+ and an expression to filter elements by certain range of values.</div>
+</td>
+</tr>
+<tr id="i2" class="altColor">
+<td class="colFirst"><code><a href="../../../../../io/sphere/sdk/search/model/RangeTermFilterSearchModel.html" title="class in io.sphere.sdk.search.model">RangeTermFilterSearchModel</a>&lt;T,V&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/search/model/MoneyCentAmountSearchModel.html#filtered--">filtered</a></span>()</code>
 <div class="block">Eventually generates an expression to filter elements by certain range of values.</div>
 </td>
@@ -178,7 +185,7 @@ extends <a href="../../../../../io/sphere/sdk/search/model/SearchModelImpl.html"
 <!--   -->
 </a>
 <h3>Methods inherited from class&nbsp;io.sphere.sdk.search.model.<a href="../../../../../io/sphere/sdk/search/model/SearchModelImpl.html" title="class in io.sphere.sdk.search.model">SearchModelImpl</a></h3>
-<code><a href="../../../../../io/sphere/sdk/search/model/SearchModelImpl.html#booleanSearchModel-java.lang.String-">booleanSearchModel</a>, <a href="../../../../../io/sphere/sdk/search/model/SearchModelImpl.html#dateSearchModel-java.lang.String-">dateSearchModel</a>, <a href="../../../../../io/sphere/sdk/search/model/SearchModelImpl.html#datetimeSearchModel-java.lang.String-">datetimeSearchModel</a>, <a href="../../../../../io/sphere/sdk/search/model/SearchModelImpl.html#enumFacetSearchModel-java.lang.String-">enumFacetSearchModel</a>, <a href="../../../../../io/sphere/sdk/search/model/SearchModelImpl.html#enumFilterSearchModel-java.lang.String-">enumFilterSearchModel</a>, <a href="../../../../../io/sphere/sdk/search/model/SearchModelImpl.html#getParent--">getParent</a>, <a href="../../../../../io/sphere/sdk/search/model/SearchModelImpl.html#getPathSegment--">getPathSegment</a>, <a href="../../../../../io/sphere/sdk/search/model/SearchModelImpl.html#localizedEnumFacetSearchModel-java.lang.String-">localizedEnumFacetSearchModel</a>, <a href="../../../../../io/sphere/sdk/search/model/SearchModelImpl.html#localizedEnumFilterSearchModel-java.lang.String-">localizedEnumFilterSearchModel</a>, <a href="../../../../../io/sphere/sdk/search/model/SearchModelImpl.html#localizedStringFacetSearchModel-java.lang.String-">localizedStringFacetSearchModel</a>, <a href="../../../../../io/sphere/sdk/search/model/SearchModelImpl.html#localizedStringFilterSearchModel-java.lang.String-">localizedStringFilterSearchModel</a>, <a href="../../../../../io/sphere/sdk/search/model/SearchModelImpl.html#moneyFacetSearchModel-java.lang.String-">moneyFacetSearchModel</a>, <a href="../../../../../io/sphere/sdk/search/model/SearchModelImpl.html#moneyFilterSearchModel-java.lang.String-">moneyFilterSearchModel</a>, <a href="../../../../../io/sphere/sdk/search/model/SearchModelImpl.html#numberSearchModel-java.lang.String-">numberSearchModel</a>, <a href="../../../../../io/sphere/sdk/search/model/SearchModelImpl.html#referenceFacetSearchModel-java.lang.String-">referenceFacetSearchModel</a>, <a href="../../../../../io/sphere/sdk/search/model/SearchModelImpl.html#referenceFilterSearchModel-java.lang.String-">referenceFilterSearchModel</a>, <a href="../../../../../io/sphere/sdk/search/model/SearchModelImpl.html#searchModel-java.lang.String-">searchModel</a>, <a href="../../../../../io/sphere/sdk/search/model/SearchModelImpl.html#stringSearchModel-java.lang.String-">stringSearchModel</a>, <a href="../../../../../io/sphere/sdk/search/model/SearchModelImpl.html#timeSearchModel-java.lang.String-">timeSearchModel</a></code></li>
+<code><a href="../../../../../io/sphere/sdk/search/model/SearchModelImpl.html#booleanSearchModel-java.lang.String-">booleanSearchModel</a>, <a href="../../../../../io/sphere/sdk/search/model/SearchModelImpl.html#dateSearchModel-java.lang.String-">dateSearchModel</a>, <a href="../../../../../io/sphere/sdk/search/model/SearchModelImpl.html#datetimeSearchModel-java.lang.String-">datetimeSearchModel</a>, <a href="../../../../../io/sphere/sdk/search/model/SearchModelImpl.html#enumFacetAndFilterSearchModel-java.lang.String-">enumFacetAndFilterSearchModel</a>, <a href="../../../../../io/sphere/sdk/search/model/SearchModelImpl.html#enumFacetSearchModel-java.lang.String-">enumFacetSearchModel</a>, <a href="../../../../../io/sphere/sdk/search/model/SearchModelImpl.html#enumFilterSearchModel-java.lang.String-">enumFilterSearchModel</a>, <a href="../../../../../io/sphere/sdk/search/model/SearchModelImpl.html#getParent--">getParent</a>, <a href="../../../../../io/sphere/sdk/search/model/SearchModelImpl.html#getPathSegment--">getPathSegment</a>, <a href="../../../../../io/sphere/sdk/search/model/SearchModelImpl.html#localizedEnumFacetAndFilterSearchModel-java.lang.String-">localizedEnumFacetAndFilterSearchModel</a>, <a href="../../../../../io/sphere/sdk/search/model/SearchModelImpl.html#localizedEnumFacetSearchModel-java.lang.String-">localizedEnumFacetSearchModel</a>, <a href="../../../../../io/sphere/sdk/search/model/SearchModelImpl.html#localizedEnumFilterSearchModel-java.lang.String-">localizedEnumFilterSearchModel</a>, <a href="../../../../../io/sphere/sdk/search/model/SearchModelImpl.html#localizedStringFacetAndFilterSearchModel-java.lang.String-">localizedStringFacetAndFilterSearchModel</a>, <a href="../../../../../io/sphere/sdk/search/model/SearchModelImpl.html#localizedStringFacetSearchModel-java.lang.String-">localizedStringFacetSearchModel</a>, <a href="../../../../../io/sphere/sdk/search/model/SearchModelImpl.html#localizedStringFilterSearchModel-java.lang.String-">localizedStringFilterSearchModel</a>, <a href="../../../../../io/sphere/sdk/search/model/SearchModelImpl.html#moneyFacetAndFilterSearchModel-java.lang.String-">moneyFacetAndFilterSearchModel</a>, <a href="../../../../../io/sphere/sdk/search/model/SearchModelImpl.html#moneyFacetSearchModel-java.lang.String-">moneyFacetSearchModel</a>, <a href="../../../../../io/sphere/sdk/search/model/SearchModelImpl.html#moneyFilterSearchModel-java.lang.String-">moneyFilterSearchModel</a>, <a href="../../../../../io/sphere/sdk/search/model/SearchModelImpl.html#numberSearchModel-java.lang.String-">numberSearchModel</a>, <a href="../../../../../io/sphere/sdk/search/model/SearchModelImpl.html#referenceFacetAndFilterSearchModel-java.lang.String-">referenceFacetAndFilterSearchModel</a>, <a href="../../../../../io/sphere/sdk/search/model/SearchModelImpl.html#referenceFacetSearchModel-java.lang.String-">referenceFacetSearchModel</a>, <a href="../../../../../io/sphere/sdk/search/model/SearchModelImpl.html#referenceFilterSearchModel-java.lang.String-">referenceFilterSearchModel</a>, <a href="../../../../../io/sphere/sdk/search/model/SearchModelImpl.html#searchModel-java.lang.String-">searchModel</a>, <a href="../../../../../io/sphere/sdk/search/model/SearchModelImpl.html#stringSearchModel-java.lang.String-">stringSearchModel</a>, <a href="../../../../../io/sphere/sdk/search/model/SearchModelImpl.html#timeSearchModel-java.lang.String-">timeSearchModel</a></code></li>
 </ul>
 <ul class="blockList">
 <li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.models.Base">
@@ -241,7 +248,7 @@ extends <a href="../../../../../io/sphere/sdk/search/model/SearchModelImpl.html"
 <ul class="blockList">
 <li class="blockList">
 <h4>filtered</h4>
-<pre>public&nbsp;<a href="../../../../../io/sphere/sdk/search/model/RangeFilterSearchModel.html" title="class in io.sphere.sdk.search.model">RangeFilterSearchModel</a>&lt;T,V&gt;&nbsp;filtered()</pre>
+<pre>public&nbsp;<a href="../../../../../io/sphere/sdk/search/model/RangeTermFilterSearchModel.html" title="class in io.sphere.sdk.search.model">RangeTermFilterSearchModel</a>&lt;T,V&gt;&nbsp;filtered()</pre>
 <div class="block">Eventually generates an expression to filter elements by certain range of values.</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
@@ -252,14 +259,29 @@ extends <a href="../../../../../io/sphere/sdk/search/model/SearchModelImpl.html"
 <a name="faceted--">
 <!--   -->
 </a>
-<ul class="blockListLast">
+<ul class="blockList">
 <li class="blockList">
 <h4>faceted</h4>
-<pre>public&nbsp;<a href="../../../../../io/sphere/sdk/search/model/RangeFacetSearchModel.html" title="class in io.sphere.sdk.search.model">RangeFacetSearchModel</a>&lt;T,V&gt;&nbsp;faceted()</pre>
+<pre>public&nbsp;<a href="../../../../../io/sphere/sdk/search/model/RangeTermFacetSearchModel.html" title="class in io.sphere.sdk.search.model">RangeTermFacetSearchModel</a>&lt;T,V&gt;&nbsp;faceted()</pre>
 <div class="block">Eventually generates an expression to obtain the facets of the attribute for certain range of values.</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>the model to specify the range of values from which to obtain the facets</dd>
+</dl>
+</li>
+</ul>
+<a name="facetedAndFiltered--">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>facetedAndFiltered</h4>
+<pre>public&nbsp;<a href="../../../../../io/sphere/sdk/search/model/RangeTermFacetAndFilterSearchModel.html" title="class in io.sphere.sdk.search.model">RangeTermFacetAndFilterSearchModel</a>&lt;T&gt;&nbsp;facetedAndFiltered()</pre>
+<div class="block">Eventually generates both an expression to obtain the facets of the attribute for all ranges
+ and an expression to filter elements by certain range of values.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>the model to specify the values from which to obtain the facets and to filter by</dd>
 </dl>
 </li>
 </ul>
@@ -291,7 +313,7 @@ extends <a href="../../../../../io/sphere/sdk/search/model/SearchModelImpl.html"
 <div class="subNav">
 <ul class="navList">
 <li><a href="../../../../../io/sphere/sdk/search/model/LocalizedStringSortSearchModel.html" title="class in io.sphere.sdk.search.model"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
-<li><a href="../../../../../io/sphere/sdk/search/model/MoneyFacetSearchModel.html" title="class in io.sphere.sdk.search.model"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
+<li><a href="../../../../../io/sphere/sdk/search/model/MoneyFacetAndFilterSearchModel.html" title="class in io.sphere.sdk.search.model"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">
 <li><a href="../../../../../index.html?io/sphere/sdk/search/model/MoneyCentAmountSearchModel.html" target="_top">Frames</a></li>

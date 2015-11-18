@@ -18,8 +18,8 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":10,"i1":42,"i2":42,"i3":42,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10};
-var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"],32:["t6","Deprecated Methods"]};
+var methods = {"i0":10,"i1":42,"i2":42,"i3":42,"i4":10,"i5":9,"i6":10,"i7":10,"i8":10,"i9":10};
+var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"],32:["t6","Deprecated Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
 var tableTab = "tableTab";
@@ -48,7 +48,7 @@ var activeTableTab = "activeTableTab";
 </div>
 <div class="subNav">
 <ul class="navList">
-<li><a href="../../../../../io/sphere/sdk/search/model/StringSearchModel.html" title="class in io.sphere.sdk.search.model"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
+<li><a href="../../../../../io/sphere/sdk/search/model/TermFacetAndFilterSearchModel.html" title="class in io.sphere.sdk.search.model"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
 <li><a href="../../../../../io/sphere/sdk/search/model/TermFilterSearchModel.html" title="class in io.sphere.sdk.search.model"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">
@@ -102,12 +102,7 @@ var activeTableTab = "activeTableTab";
 <li><a href="../../../../../io/sphere/sdk/models/Base.html" title="class in io.sphere.sdk.models">io.sphere.sdk.models.Base</a></li>
 <li>
 <ul class="inheritance">
-<li><a href="../../../../../io/sphere/sdk/search/model/SearchModelImpl.html" title="class in io.sphere.sdk.search.model">io.sphere.sdk.search.model.SearchModelImpl</a>&lt;T&gt;</li>
-<li>
-<ul class="inheritance">
 <li>io.sphere.sdk.search.model.TermFacetSearchModel&lt;T,V&gt;</li>
-</ul>
-</li>
 </ul>
 </li>
 </ul>
@@ -117,13 +112,15 @@ var activeTableTab = "activeTableTab";
 <ul class="blockList">
 <li class="blockList">
 <dl>
-<dt>All Implemented Interfaces:</dt>
-<dd><a href="../../../../../io/sphere/sdk/search/model/SearchModel.html" title="interface in io.sphere.sdk.search.model">SearchModel</a>&lt;T&gt;</dd>
+<dt><span class="paramLabel">Type Parameters:</span></dt>
+<dd><code>T</code> - type of the resource</dd>
+<dd><code>V</code> - type of the value</dd>
 </dl>
 <hr>
 <br>
 <pre>public class <span class="typeNameLabel">TermFacetSearchModel&lt;T,V&gt;</span>
-extends <a href="../../../../../io/sphere/sdk/search/model/SearchModelImpl.html" title="class in io.sphere.sdk.search.model">SearchModelImpl</a>&lt;T&gt;</pre>
+extends <a href="../../../../../io/sphere/sdk/models/Base.html" title="class in io.sphere.sdk.models">Base</a></pre>
+<div class="block">Model to build term facets.</div>
 </li>
 </ul>
 </div>
@@ -147,6 +144,10 @@ extends <a href="../../../../../io/sphere/sdk/search/model/SearchModelImpl.html"
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/search/model/TermFacetSearchModel.html#alias">alias</a></span></code>&nbsp;</td>
 </tr>
 <tr class="rowColor">
+<td class="colFirst"><code>protected <a href="../../../../../io/sphere/sdk/search/model/SearchModel.html" title="interface in io.sphere.sdk.search.model">SearchModel</a>&lt;T&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/search/model/TermFacetSearchModel.html#searchModel">searchModel</a></span></code>&nbsp;</td>
+</tr>
+<tr class="altColor">
 <td class="colFirst"><code>protected java.util.function.Function&lt;V,java.lang.String&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/search/model/TermFacetSearchModel.html#typeSerializer">typeSerializer</a></span></code>&nbsp;</td>
 </tr>
@@ -160,7 +161,7 @@ extends <a href="../../../../../io/sphere/sdk/search/model/SearchModelImpl.html"
 </a>
 <h3>Method Summary</h3>
 <table class="memberSummary" border="0" cellpadding="3" cellspacing="0" summary="Method Summary table, listing methods, and an explanation">
-<caption><span id="t0" class="activeTableTab"><span>All Methods</span><span class="tabEnd">&nbsp;</span></span><span id="t2" class="tableTab"><span><a href="javascript:show(2);">Instance Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t4" class="tableTab"><span><a href="javascript:show(8);">Concrete Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t6" class="tableTab"><span><a href="javascript:show(32);">Deprecated Methods</a></span><span class="tabEnd">&nbsp;</span></span></caption>
+<caption><span id="t0" class="activeTableTab"><span>All Methods</span><span class="tabEnd">&nbsp;</span></span><span id="t1" class="tableTab"><span><a href="javascript:show(1);">Static Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t2" class="tableTab"><span><a href="javascript:show(2);">Instance Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t4" class="tableTab"><span><a href="javascript:show(8);">Concrete Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t6" class="tableTab"><span><a href="javascript:show(32);">Deprecated Methods</a></span><span class="tabEnd">&nbsp;</span></span></caption>
 <tr>
 <th class="colFirst" scope="col">Modifier and Type</th>
 <th class="colLast" scope="col">Method and Description</th>
@@ -200,37 +201,37 @@ extends <a href="../../../../../io/sphere/sdk/search/model/SearchModelImpl.html"
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/search/model/TermFacetSearchModel.html#getAlias--">getAlias</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i5" class="rowColor">
+<td class="colFirst"><code>static &lt;T,V&gt;&nbsp;<a href="../../../../../io/sphere/sdk/search/model/TermFacetSearchModel.html" title="class in io.sphere.sdk.search.model">TermFacetSearchModel</a>&lt;T,V&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/search/model/TermFacetSearchModel.html#of-java.lang.String-java.util.function.Function-">of</a></span>(java.lang.String&nbsp;attributePath,
+  java.util.function.Function&lt;V,java.lang.String&gt;&nbsp;typeSerializer)</code>
+<div class="block">Creates an instance of the search model to generate term facet expressions.</div>
+</td>
+</tr>
+<tr id="i6" class="altColor">
 <td class="colFirst"><code><a href="../../../../../io/sphere/sdk/search/FilteredFacetExpression.html" title="interface in io.sphere.sdk.search">FilteredFacetExpression</a>&lt;<a href="../../../../../io/sphere/sdk/search/model/TermFacetSearchModel.html" title="type parameter in TermFacetSearchModel">T</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/search/model/TermFacetSearchModel.html#onlyTerm-java.lang.Iterable-">onlyTerm</a></span>(java.lang.Iterable&lt;<a href="../../../../../io/sphere/sdk/search/model/TermFacetSearchModel.html" title="type parameter in TermFacetSearchModel">V</a>&gt;&nbsp;values)</code>
 <div class="block">Generates an expression to obtain the facets of the attribute for only the given values.</div>
 </td>
 </tr>
-<tr id="i6" class="altColor">
+<tr id="i7" class="rowColor">
 <td class="colFirst"><code><a href="../../../../../io/sphere/sdk/search/FilteredFacetExpression.html" title="interface in io.sphere.sdk.search">FilteredFacetExpression</a>&lt;<a href="../../../../../io/sphere/sdk/search/model/TermFacetSearchModel.html" title="type parameter in TermFacetSearchModel">T</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/search/model/TermFacetSearchModel.html#onlyTerm-V-">onlyTerm</a></span>(<a href="../../../../../io/sphere/sdk/search/model/TermFacetSearchModel.html" title="type parameter in TermFacetSearchModel">V</a>&nbsp;value)</code>
 <div class="block">Generates an expression to obtain the facet of the attribute for only the given value.</div>
 </td>
 </tr>
-<tr id="i7" class="rowColor">
+<tr id="i8" class="altColor">
 <td class="colFirst"><code><a href="../../../../../io/sphere/sdk/search/FilteredFacetExpression.html" title="interface in io.sphere.sdk.search">FilteredFacetExpression</a>&lt;T&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/search/model/TermFacetSearchModel.html#onlyTermAsString-java.lang.Iterable-">onlyTermAsString</a></span>(java.lang.Iterable&lt;java.lang.String&gt;&nbsp;values)</code>
 <div class="block">Generates an expression to obtain the facets of the attribute for only the given values.</div>
 </td>
 </tr>
-<tr id="i8" class="altColor">
+<tr id="i9" class="rowColor">
 <td class="colFirst"><code><a href="../../../../../io/sphere/sdk/search/model/TermFacetSearchModel.html" title="class in io.sphere.sdk.search.model">TermFacetSearchModel</a>&lt;<a href="../../../../../io/sphere/sdk/search/model/TermFacetSearchModel.html" title="type parameter in TermFacetSearchModel">T</a>,<a href="../../../../../io/sphere/sdk/search/model/TermFacetSearchModel.html" title="type parameter in TermFacetSearchModel">V</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/search/model/TermFacetSearchModel.html#withAlias-java.lang.String-">withAlias</a></span>(java.lang.String&nbsp;alias)</code>
 <div class="block">Allows to set an alias to identify the facet.</div>
 </td>
 </tr>
 </table>
-<ul class="blockList">
-<li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.search.model.SearchModelImpl">
-<!--   -->
-</a>
-<h3>Methods inherited from class&nbsp;io.sphere.sdk.search.model.<a href="../../../../../io/sphere/sdk/search/model/SearchModelImpl.html" title="class in io.sphere.sdk.search.model">SearchModelImpl</a></h3>
-<code><a href="../../../../../io/sphere/sdk/search/model/SearchModelImpl.html#booleanSearchModel-java.lang.String-">booleanSearchModel</a>, <a href="../../../../../io/sphere/sdk/search/model/SearchModelImpl.html#dateSearchModel-java.lang.String-">dateSearchModel</a>, <a href="../../../../../io/sphere/sdk/search/model/SearchModelImpl.html#datetimeSearchModel-java.lang.String-">datetimeSearchModel</a>, <a href="../../../../../io/sphere/sdk/search/model/SearchModelImpl.html#enumFacetSearchModel-java.lang.String-">enumFacetSearchModel</a>, <a href="../../../../../io/sphere/sdk/search/model/SearchModelImpl.html#enumFilterSearchModel-java.lang.String-">enumFilterSearchModel</a>, <a href="../../../../../io/sphere/sdk/search/model/SearchModelImpl.html#getParent--">getParent</a>, <a href="../../../../../io/sphere/sdk/search/model/SearchModelImpl.html#getPathSegment--">getPathSegment</a>, <a href="../../../../../io/sphere/sdk/search/model/SearchModelImpl.html#localizedEnumFacetSearchModel-java.lang.String-">localizedEnumFacetSearchModel</a>, <a href="../../../../../io/sphere/sdk/search/model/SearchModelImpl.html#localizedEnumFilterSearchModel-java.lang.String-">localizedEnumFilterSearchModel</a>, <a href="../../../../../io/sphere/sdk/search/model/SearchModelImpl.html#localizedStringFacetSearchModel-java.lang.String-">localizedStringFacetSearchModel</a>, <a href="../../../../../io/sphere/sdk/search/model/SearchModelImpl.html#localizedStringFilterSearchModel-java.lang.String-">localizedStringFilterSearchModel</a>, <a href="../../../../../io/sphere/sdk/search/model/SearchModelImpl.html#moneyFacetSearchModel-java.lang.String-">moneyFacetSearchModel</a>, <a href="../../../../../io/sphere/sdk/search/model/SearchModelImpl.html#moneyFilterSearchModel-java.lang.String-">moneyFilterSearchModel</a>, <a href="../../../../../io/sphere/sdk/search/model/SearchModelImpl.html#numberSearchModel-java.lang.String-">numberSearchModel</a>, <a href="../../../../../io/sphere/sdk/search/model/SearchModelImpl.html#referenceFacetSearchModel-java.lang.String-">referenceFacetSearchModel</a>, <a href="../../../../../io/sphere/sdk/search/model/SearchModelImpl.html#referenceFilterSearchModel-java.lang.String-">referenceFilterSearchModel</a>, <a href="../../../../../io/sphere/sdk/search/model/SearchModelImpl.html#searchModel-java.lang.String-">searchModel</a>, <a href="../../../../../io/sphere/sdk/search/model/SearchModelImpl.html#stringSearchModel-java.lang.String-">stringSearchModel</a>, <a href="../../../../../io/sphere/sdk/search/model/SearchModelImpl.html#timeSearchModel-java.lang.String-">timeSearchModel</a></code></li>
-</ul>
 <ul class="blockList">
 <li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.models.Base">
 <!--   -->
@@ -244,13 +245,6 @@ extends <a href="../../../../../io/sphere/sdk/search/model/SearchModelImpl.html"
 </a>
 <h3>Methods inherited from class&nbsp;java.lang.Object</h3>
 <code>clone, finalize, getClass, notify, notifyAll, wait, wait, wait</code></li>
-</ul>
-<ul class="blockList">
-<li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.search.model.SearchModel">
-<!--   -->
-</a>
-<h3>Methods inherited from interface&nbsp;io.sphere.sdk.search.model.<a href="../../../../../io/sphere/sdk/search/model/SearchModel.html" title="interface in io.sphere.sdk.search.model">SearchModel</a></h3>
-<code><a href="../../../../../io/sphere/sdk/search/model/SearchModel.html#buildPath--">buildPath</a>, <a href="../../../../../io/sphere/sdk/search/model/SearchModel.html#hasPath-java.util.List-">hasPath</a></code></li>
 </ul>
 </li>
 </ul>
@@ -266,23 +260,32 @@ extends <a href="../../../../../io/sphere/sdk/search/model/SearchModelImpl.html"
 <!--   -->
 </a>
 <h3>Field Detail</h3>
-<a name="alias">
+<a name="searchModel">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
-<h4>alias</h4>
-<pre>@Nullable
-protected final&nbsp;java.lang.String alias</pre>
+<h4>searchModel</h4>
+<pre>protected final&nbsp;<a href="../../../../../io/sphere/sdk/search/model/SearchModel.html" title="interface in io.sphere.sdk.search.model">SearchModel</a>&lt;T&gt; searchModel</pre>
 </li>
 </ul>
 <a name="typeSerializer">
 <!--   -->
 </a>
-<ul class="blockListLast">
+<ul class="blockList">
 <li class="blockList">
 <h4>typeSerializer</h4>
 <pre>protected final&nbsp;java.util.function.Function&lt;V,java.lang.String&gt; typeSerializer</pre>
+</li>
+</ul>
+<a name="alias">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>alias</h4>
+<pre>@Nullable
+protected final&nbsp;java.lang.String alias</pre>
 </li>
 </ul>
 </li>
@@ -357,6 +360,27 @@ protected final&nbsp;java.lang.String alias</pre>
 <dd><code>values</code> - the values from which to obtain the facets</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>a facet expression for only the given values</dd>
+</dl>
+</li>
+</ul>
+<a name="of-java.lang.String-java.util.function.Function-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>of</h4>
+<pre>public static&nbsp;&lt;T,V&gt;&nbsp;<a href="../../../../../io/sphere/sdk/search/model/TermFacetSearchModel.html" title="class in io.sphere.sdk.search.model">TermFacetSearchModel</a>&lt;T,V&gt;&nbsp;of(java.lang.String&nbsp;attributePath,
+                                                 java.util.function.Function&lt;V,java.lang.String&gt;&nbsp;typeSerializer)</pre>
+<div class="block">Creates an instance of the search model to generate term facet expressions.</div>
+<dl>
+<dt><span class="paramLabel">Type Parameters:</span></dt>
+<dd><code>T</code> - type of the resource</dd>
+<dd><code>V</code> - type of the value</dd>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>attributePath</code> - the path of the attribute as expected by Commercetools Platform (e.g. "variants.attributes.color.key")</dd>
+<dd><code>typeSerializer</code> - the function to convert the provided value to a string accepted by Commercetools Platform</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>new instance of TermFacetSearchModel</dd>
 </dl>
 </li>
 </ul>
@@ -471,7 +495,7 @@ public&nbsp;<a href="../../../../../io/sphere/sdk/search/FilteredFacetExpression
 </div>
 <div class="subNav">
 <ul class="navList">
-<li><a href="../../../../../io/sphere/sdk/search/model/StringSearchModel.html" title="class in io.sphere.sdk.search.model"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
+<li><a href="../../../../../io/sphere/sdk/search/model/TermFacetAndFilterSearchModel.html" title="class in io.sphere.sdk.search.model"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
 <li><a href="../../../../../io/sphere/sdk/search/model/TermFilterSearchModel.html" title="class in io.sphere.sdk.search.model"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">
