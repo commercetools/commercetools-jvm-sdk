@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":6};
+var methods = {"i0":6,"i1":6};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],4:["t3","Abstract Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -48,7 +48,7 @@ var activeTableTab = "activeTableTab";
 </div>
 <div class="subNav">
 <ul class="navList">
-<li><a href="../../../../io/sphere/sdk/search/FacetDsl.html" title="interface in io.sphere.sdk.search"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
+<li><a href="../../../../io/sphere/sdk/search/FacetedSearchSupport.html" title="interface in io.sphere.sdk.search"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
 <li><a href="../../../../io/sphere/sdk/search/FacetResult.html" title="interface in io.sphere.sdk.search"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">
@@ -136,6 +136,12 @@ extends <a href="../../../../io/sphere/sdk/search/SearchExpression.html" title="
 </tr>
 <tr id="i0" class="altColor">
 <td class="colFirst"><code>java.lang.String</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/FacetExpression.html#alias--">alias</a></span>()</code>
+<div class="block">Gets the defined alias.</div>
+</td>
+</tr>
+<tr id="i1" class="rowColor">
+<td class="colFirst"><code>java.lang.String</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/FacetExpression.html#resultPath--">resultPath</a></span>()</code>
 <div class="block">Gets the path of the facet result, which is either the alias or the search path if no alias defined.</div>
 </td>
@@ -146,7 +152,7 @@ extends <a href="../../../../io/sphere/sdk/search/SearchExpression.html" title="
 <!--   -->
 </a>
 <h3>Methods inherited from interface&nbsp;io.sphere.sdk.search.<a href="../../../../io/sphere/sdk/search/SearchExpression.html" title="interface in io.sphere.sdk.search">SearchExpression</a></h3>
-<code><a href="../../../../io/sphere/sdk/search/SearchExpression.html#attributePath--">attributePath</a>, <a href="../../../../io/sphere/sdk/search/SearchExpression.html#expression--">expression</a></code></li>
+<code><a href="../../../../io/sphere/sdk/search/SearchExpression.html#attributePath--">attributePath</a>, <a href="../../../../io/sphere/sdk/search/SearchExpression.html#expression--">expression</a>, <a href="../../../../io/sphere/sdk/search/SearchExpression.html#value--">value</a></code></li>
 </ul>
 </li>
 </ul>
@@ -165,7 +171,7 @@ extends <a href="../../../../io/sphere/sdk/search/SearchExpression.html" title="
 <a name="resultPath--">
 <!--   -->
 </a>
-<ul class="blockListLast">
+<ul class="blockList">
 <li class="blockList">
 <h4>resultPath</h4>
 <pre>java.lang.String&nbsp;resultPath()</pre>
@@ -173,7 +179,22 @@ extends <a href="../../../../io/sphere/sdk/search/SearchExpression.html" title="
  Example: variants.attributes.color</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
-<dd>the path to access the facet result.</dd>
+<dd>the path to access the facet result</dd>
+</dl>
+</li>
+</ul>
+<a name="alias--">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>alias</h4>
+<pre>@Nullable
+java.lang.String&nbsp;alias()</pre>
+<div class="block">Gets the defined alias.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>the alias of the facet</dd>
 </dl>
 </li>
 </ul>
@@ -204,7 +225,7 @@ extends <a href="../../../../io/sphere/sdk/search/SearchExpression.html" title="
 </div>
 <div class="subNav">
 <ul class="navList">
-<li><a href="../../../../io/sphere/sdk/search/FacetDsl.html" title="interface in io.sphere.sdk.search"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
+<li><a href="../../../../io/sphere/sdk/search/FacetedSearchSupport.html" title="interface in io.sphere.sdk.search"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
 <li><a href="../../../../io/sphere/sdk/search/FacetResult.html" title="interface in io.sphere.sdk.search"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">
