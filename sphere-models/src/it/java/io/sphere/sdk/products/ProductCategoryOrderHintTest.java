@@ -1,9 +1,12 @@
 package io.sphere.sdk.products;
 
+import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.categories.CategoryFixtures;
+import io.sphere.sdk.categories.commands.CategoryDeleteCommand;
 import io.sphere.sdk.products.commands.ProductCreateCommand;
 import io.sphere.sdk.products.queries.ProductProjectionQuery;
 import io.sphere.sdk.products.search.ProductProjectionSearch;
+import io.sphere.sdk.producttypes.ProductType;
 import io.sphere.sdk.producttypes.ProductTypeFixtures;
 import io.sphere.sdk.search.SortExpression;
 import io.sphere.sdk.test.IntegrationTest;
@@ -16,6 +19,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.function.Consumer;
 import java.util.function.Function;
 
 import static io.sphere.sdk.products.ProductProjectionComparators.comparingCategoryOrderHints;
@@ -26,6 +30,27 @@ import static java.util.stream.Collectors.toList;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class ProductCategoryOrderHintTest extends IntegrationTest {
+
+    static private class QueryResult {
+        public final List<ProductProjection> productProjections;
+        public final List<ProductProjection> sortedFromSearchForCategory1;
+        public final List<ProductProjection> sortedFromSearchForCategory2;
+        public final List<ProductProjection> sortedFromQueryForCategory1;
+        public final List<ProductProjection> sortedFromQueryForCategory2;
+
+        public QueryResult(List<ProductProjection> productProjections,
+                           List<ProductProjection> sortedFromSearchForCategory1,
+                           List<ProductProjection> sortedFromSearchForCategory2,
+                           List<ProductProjection> sortedFromQueryForCategory1,
+                           List<ProductProjection> sortedFromQueryForCategory2) {
+            this.productProjections = productProjections;
+            this.sortedFromSearchForCategory1 = sortedFromSearchForCategory1;
+            this.sortedFromSearchForCategory2 = sortedFromSearchForCategory2;
+            this.sortedFromQueryForCategory1 = sortedFromQueryForCategory1;
+            this.sortedFromQueryForCategory2 = sortedFromQueryForCategory2;
+        }
+    }
+
     /*
 
     Product | Cat 1 |  Cat 2
@@ -39,11 +64,8 @@ public class ProductCategoryOrderHintTest extends IntegrationTest {
      */
 
     private static List<Product> products;
-    private static List<ProductProjection> productProjections;
-    private static List<ProductProjection> sortedFromSearchForCategory1;
-    private static List<ProductProjection> sortedFromSearchForCategory2;
-    private static List<ProductProjection> sortedFromQueryForCategory1;
-    private static List<ProductProjection> sortedFromQueryForCategory2;
+    private static Category category1;
+    private static Category category2;
     private static String category1Id;
     private static String category2Id;
     private static String id1;
@@ -65,21 +87,36 @@ public class ProductCategoryOrderHintTest extends IntegrationTest {
     }
 
     @Test
-    public void sortProductProjectionsByCategory1() {
-        final Comparator<ProductProjection> comparator = comparingCategoryOrderHints(category1Id);
-        final List<String> expectedOrder = asList(id1, id3, id2, id5, id4);
-        assertThat(productProjectionsSortedBy(comparator)).isEqualTo(expectedOrder);
-        assertThat(sortedFromSearchForCategory1).extracting("id").as("search").isEqualTo(expectedOrder);
-        assertThat(sortedFromQueryForCategory1).extracting("id").as("query").isEqualTo(asList(id4, id1, id3, id2, id5));//query and search sort differently
-
+    public void sortProductProjectionsOnQueryByCategory1() {
+        QueryResult result = doQuery();
+        assertThat(result.sortedFromQueryForCategory1).extracting("id").as("query")
+                .isEqualTo(asList(id4, id1, id3, id2, id5));//query and search sort differently
     }
 
     @Test
-    public void sortProductProjectionsByCategory2() {
+    public void sortProductProjectionsOnSearchByCategory1() {
+        final Comparator<ProductProjection> comparator = comparingCategoryOrderHints(category1Id);
+        final List<String> expectedOrder = asList(id1, id3, id2, id5, id4);
+        assertWithQueryResult(result -> {
+            assertThat(productProjectionsSortedBy(result.productProjections, comparator)).isEqualTo(expectedOrder);
+            assertThat(result.sortedFromSearchForCategory1).extracting("id").as("search").isEqualTo(expectedOrder);
+        });
+    }
+
+    @Test
+    public void sortProductProjectionsOnQueryByCategory2() {
         final Comparator<ProductProjection> comparator = comparingCategoryOrderHints(category2Id);
-        assertThat(productProjectionsSortedBy(comparator)).has(itemsInThisOrder(asList(id5, id2, id1)));
-        assertThat(sortedFromSearchForCategory2).extracting("id").as("search").startsWith(id5, id2, id1);
-        assertThat(sortedFromQueryForCategory2).extracting("id").as("query").endsWith(id5, id2, id1);
+        QueryResult result = doQuery();
+        assertThat(result.sortedFromQueryForCategory2).extracting("id").as("query").endsWith(id5, id2, id1);
+    }
+
+    @Test
+    public void sortProductProjectionsOnSearchByCategory2() {
+        final Comparator<ProductProjection> comparator = comparingCategoryOrderHints(category2Id);
+        assertWithQueryResult(result -> {
+            assertThat(productProjectionsSortedBy(result.productProjections, comparator)).has(itemsInThisOrder(asList(id5, id2, id1)));
+            assertThat(result.sortedFromSearchForCategory2).extracting("id").as("search").startsWith(id5, id2, id1);
+        });
     }
 
     private static Comparator<Product> comparatorOfStagedForCategory(final String categoryId) {
@@ -90,7 +127,7 @@ public class ProductCategoryOrderHintTest extends IntegrationTest {
         return comparing(orderHintExtractor, Comparator.nullsLast(Comparator.<String>naturalOrder()));
     }
 
-    private List<String> productProjectionsSortedBy(final Comparator<ProductProjection> comparator) {
+    private List<String> productProjectionsSortedBy(final List<ProductProjection> productProjections, final Comparator<ProductProjection> comparator) {
         return productProjections.stream()
                 .sorted(comparator)
                 .map(ProductIdentifiable::getId)
@@ -117,61 +154,90 @@ public class ProductCategoryOrderHintTest extends IntegrationTest {
 
     @BeforeClass
     public static void setupProducts() {
-        CategoryFixtures.withCategory(client(), category1 ->
-            CategoryFixtures.withCategory(client(), category2 ->
-                ProductTypeFixtures.withEmptyProductType(client(), randomKey(), productType -> {
-                    category1Id = category1.getId();
-                    category2Id = category2.getId();
+        category1 = CategoryFixtures.createCategory(client());
+        category2 = CategoryFixtures.createCategory(client());
+        ProductType productType = ProductTypeFixtures.createProductType(client(), randomKey());
+        category1Id = category1.getId();
+        category2Id = category2.getId();
 
-                    final List<Map<String, String>> orderHintsList = asList(
-                            mapOf(category1.getId(), "0.1", category2.getId(), "0.89"),
-                            mapOf(category1.getId(), "0.3", category2.getId(), "0.88"),
-                            mapOf(category1.getId(), "0.2"),//missing category
-                            null,//missing orderHints
-                            mapOf(category1.getId(), "0.4", category2.getId(), "0.86")
-                    );
-
-
-                    products = orderHintsList.stream()
-                            .map(orderHints -> {
-                                final ProductVariantDraft masterVariantDraft = ProductVariantDraftBuilder.of().build();
-                                final CategoryOrderHints categoryOrderHints = orderHints != null ? CategoryOrderHints.of(orderHints) : null;
-                                final ProductDraft productDraft = ProductDraftBuilder.of(productType, randomSlug(), randomSlug(), masterVariantDraft)
-                                        .categoryOrderHints(categoryOrderHints)
-                                        .categories(asList(category1.toReference(), category2.toReference()))
-                                        .build();
-                                final Product product = execute(ProductCreateCommand.of(productDraft));
-                                return product;
-                            })
-                            .collect(toList());
-
-                    final List<String> ids = products.stream().map(p -> p.getId()).collect(toList());
-
-                    //eventual consistency
-                    try {
-                        Thread.sleep(2000);
-                    } catch (InterruptedException e) {
-                        throw new RuntimeException(e);
-                    }
-
-
-                    sortedFromSearchForCategory1 = searchForCategoryAndSort(category1Id);
-                    sortedFromQueryForCategory1 = queryForCategoryAndSort(category1Id);
-                    sortedFromSearchForCategory2 = searchForCategoryAndSort(category2Id);
-                    sortedFromQueryForCategory2 = queryForCategoryAndSort(category2Id);
-
-
-                    productProjections = execute(ProductProjectionQuery.ofStaged()
-                            .withPredicates(product -> product.id().isIn(ids))).getResults();
-
-                    id1 = products.get(0).getId();
-                    id2 = products.get(1).getId();
-                    id3 = products.get(2).getId();
-                    id4 = products.get(3).getId();
-                    id5 = products.get(4).getId();
-                })
-            )
+        final List<Map<String, String>> orderHintsList = asList(
+                mapOf(category1.getId(), "0.1", category2.getId(), "0.89"),
+                mapOf(category1.getId(), "0.3", category2.getId(), "0.88"),
+                mapOf(category1.getId(), "0.2"),//missing category
+                null,//missing orderHints
+                mapOf(category1.getId(), "0.4", category2.getId(), "0.86")
         );
+
+
+        products = orderHintsList.stream()
+                .map(orderHints -> {
+                    final ProductVariantDraft masterVariantDraft = ProductVariantDraftBuilder.of().build();
+                    final CategoryOrderHints categoryOrderHints = orderHints != null ? CategoryOrderHints.of(orderHints) : null;
+                    final ProductDraft productDraft = ProductDraftBuilder.of(productType, randomSlug(), randomSlug(), masterVariantDraft)
+                            .categoryOrderHints(categoryOrderHints)
+                            .categories(asList(category1.toReference(), category2.toReference()))
+                            .build();
+                    final Product product = execute(ProductCreateCommand.of(productDraft));
+                    return product;
+                })
+                .collect(toList());
+
+        id1 = products.get(0).getId();
+        id2 = products.get(1).getId();
+        id3 = products.get(2).getId();
+        id4 = products.get(3).getId();
+        id5 = products.get(4).getId();
+    }
+
+    @AfterClass
+    public static void cleanCategory1() {
+        client().execute(CategoryDeleteCommand.of(category1));
+        category1 = null;
+        category1Id = null;
+    }
+
+    @AfterClass
+    public static void cleanCategory2() {
+        client().execute(CategoryDeleteCommand.of(category2));
+        category2 = null;
+        category2Id = null;
+    }
+
+    @AfterClass
+    public static void cleanProducts() {
+        ProductFixtures.delete(client(), products);
+        products = null;
+        id1 = null;
+        id2 = null;
+        id3 = null;
+        id4 = null;
+        id5 = null;
+    }
+
+    private static void assertWithQueryResult(final Consumer<QueryResult> assertions) {
+        assertEventually(() -> {
+            final QueryResult result = doQuery();
+            assertions.accept(result);
+        });
+    }
+
+    private static QueryResult doQuery() {
+        List<ProductProjection> sortedFromSearchForCategory1 = searchForCategoryAndSort(category1Id);
+        List<ProductProjection> sortedFromQueryForCategory1 = queryForCategoryAndSort(category1Id);
+        List<ProductProjection> sortedFromSearchForCategory2 = searchForCategoryAndSort(category2Id);
+        List<ProductProjection> sortedFromQueryForCategory2 = queryForCategoryAndSort(category2Id);
+
+
+        final List<String> ids = products.stream().map(p -> p.getId()).collect(toList());
+
+        List<ProductProjection> productProjections = execute(ProductProjectionQuery.ofStaged()
+                .withPredicates(product -> product.id().isIn(ids))).getResults();
+
+        return new QueryResult(productProjections,
+                sortedFromSearchForCategory1,
+                sortedFromSearchForCategory2,
+                sortedFromQueryForCategory1,
+                sortedFromQueryForCategory2);
     }
 
     private static List<ProductProjection> searchForCategoryAndSort(final String categoryId) {
@@ -188,20 +254,4 @@ public class ProductCategoryOrderHintTest extends IntegrationTest {
         return execute(query).getResults();
     }
 
-    @AfterClass
-    public static void cleanUp() {
-        products = null;
-        productProjections = null;
-        category1Id = null;
-        category2Id = null;
-        id1 = null;
-        id2 = null;
-        id3 = null;
-        id4 = null;
-        id5 = null;
-        sortedFromSearchForCategory1 = null;
-        sortedFromSearchForCategory2 = null;
-        sortedFromQueryForCategory1 = null;
-        sortedFromQueryForCategory2 = null;
-    }
 }
