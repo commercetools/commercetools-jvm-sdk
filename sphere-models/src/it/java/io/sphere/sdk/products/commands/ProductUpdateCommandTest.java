@@ -14,6 +14,7 @@ import io.sphere.sdk.products.commands.updateactions.*;
 import io.sphere.sdk.products.messages.ProductStateTransitionMessage;
 import io.sphere.sdk.products.queries.ProductByIdGet;
 import io.sphere.sdk.products.queries.ProductProjectionByIdGet;
+import io.sphere.sdk.products.queries.ProductQuery;
 import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.search.SearchKeyword;
 import io.sphere.sdk.search.SearchKeywords;
@@ -513,6 +514,12 @@ public class ProductUpdateCommandTest extends IntegrationTest {
 
                 final ProductStateTransitionMessage message = messageQueryResult.head().get();
                 assertThat(message.getState()).isEqualTo(state.toReference());
+
+                //check query model
+                final Product productByState = execute(ProductQuery.of()
+                        .withPredicates(m -> m.id().is(product.getId()).and(m.state().is(state))))
+                        .head().get();
+                assertThat(productByState).isEqualTo(updatedProduct);
 
                 return updatedProduct;
             });

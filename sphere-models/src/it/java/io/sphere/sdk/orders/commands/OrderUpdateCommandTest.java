@@ -9,6 +9,7 @@ import io.sphere.sdk.orders.*;
 import io.sphere.sdk.orders.commands.updateactions.*;
 import io.sphere.sdk.orders.messages.OrderStateTransitionMessage;
 import io.sphere.sdk.orders.queries.OrderByIdGet;
+import io.sphere.sdk.orders.queries.OrderQuery;
 import io.sphere.sdk.payments.Payment;
 import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.states.State;
@@ -291,6 +292,12 @@ public class OrderUpdateCommandTest extends IntegrationTest {
 
                 final OrderStateTransitionMessage message = messageQueryResult.head().get();
                 assertThat(message.getState()).isEqualTo(state.toReference());
+
+                //check query model
+                final Order orderByState = execute(OrderQuery.of()
+                        .withPredicates(m -> m.id().is(order.getId()).and(m.state().is(state))))
+                        .head().get();
+                assertThat(orderByState).isEqualTo(updatedOrder);
 
                 return updatedOrder;
             });
