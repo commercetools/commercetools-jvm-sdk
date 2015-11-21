@@ -138,6 +138,12 @@ extends <a href="../../../../../../io/sphere/sdk/states/relatedupdateactions/Tra
 
         assertThat(updatedReview.getState()).isEqualTo(state);
 
+        //check query model
+        final Review reviewByState = execute(ReviewQuery.of()
+                .withPredicates(m -&gt; m.id().is(review.getId()).and(m.state().is(state))))
+                .head().get();
+        assertThat(reviewByState).isEqualTo(updatedReview);
+
         return updatedReview;
     });
 });
