@@ -30,7 +30,7 @@ public interface Order extends CartLike<Order> {
         return "order";
     }
 
-    static String referenceTypeId(){
+    static String referenceTypeId() {
         return "order";
     }
 
@@ -154,4 +154,8 @@ public interface Order extends CartLike<Order> {
     @Nullable
     @Override
     PaymentInfo getPaymentInfo();
+
+    static Reference<Order> referenceOfId(final String id) {
+        return Reference.of(referenceTypeId(), id);
+    }
 }

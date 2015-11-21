@@ -67,4 +67,8 @@ public interface ShippingMethod extends Resource<ShippingMethod> {
             }
         };
     }
+
+    static Reference<ShippingMethod> referenceOfId(final String id) {
+        return Reference.of(referenceTypeId(), id);
+    }
 }

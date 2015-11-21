@@ -57,7 +57,7 @@ public interface Product extends ProductLike<Product, Product>, Resource<Product
         return reference(this);
     }
 
-    static String referenceTypeId(){
+    static String referenceTypeId() {
         return "product";
     }
 
@@ -84,5 +84,9 @@ public interface Product extends ProductLike<Product, Product>, Resource<Product
         return Optional.ofNullable(getMasterData().get(productProjectionType))
                 .map(productData -> new ProductToProductProjectionWrapper(this, productProjectionType))
                 .orElse(null);
+    }
+
+    static Reference<Product> referenceOfId(final String id) {
+        return Reference.of(referenceTypeId(), id);
     }
 }

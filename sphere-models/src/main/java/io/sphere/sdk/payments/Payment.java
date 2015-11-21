@@ -84,4 +84,8 @@ public interface Payment extends Resource<Payment>, Custom {
     static String resourceTypeId() {
         return "payment";
     }
+
+    static Reference<Payment> referenceOfId(final String id) {
+        return Reference.of(referenceTypeId(), id);
+    }
 }

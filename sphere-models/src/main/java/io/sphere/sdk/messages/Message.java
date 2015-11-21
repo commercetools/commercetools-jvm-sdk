@@ -8,7 +8,7 @@ import io.sphere.sdk.models.Reference;
 
 @JsonDeserialize(as = MessageImpl.class)
 public interface Message extends Resource<Message> {
-    static String referenceTypeId(){
+    static String referenceTypeId() {
         return "message";
     }
 
@@ -51,4 +51,9 @@ public interface Message extends Resource<Message> {
     }
 
     <T extends Message> T as(final Class<T> messageClass);
+
+
+    static Reference<Message> referenceOfId(final String id) {
+        return Reference.of(referenceTypeId(), id);
+    }
 }

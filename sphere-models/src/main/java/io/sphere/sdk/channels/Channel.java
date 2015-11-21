@@ -35,7 +35,7 @@ public interface Channel extends Resource<Channel> {
         return Reference.of(referenceTypeId(), getId(), this);
     }
 
-    static String referenceTypeId(){
+    static String referenceTypeId() {
         return "channel";
     }
 
@@ -56,5 +56,9 @@ public interface Channel extends Resource<Channel> {
                 return "TypeReference<Channel>";
             }
         };
+    }
+
+    static Reference<Channel> referenceOfId(final String id) {
+        return Reference.of(referenceTypeId(), id);
     }
 }

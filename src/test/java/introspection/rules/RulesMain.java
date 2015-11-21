@@ -25,7 +25,8 @@ public class RulesMain {
                 new NeverMixStaticAndInstanceMethodOfSameNameRule(),
                 new OnlyOneNullableOfMethodRule(),
                 new InUpdateActionsPackageOnlyUpdateActionsRule(),
-                new QueryAndCommandsAreCompleteRule()
+                new QueryAndCommandsAreCompleteRule(),
+                new ReferenceableResourceCanCreateReferenceRule()
         );
         final boolean allIsOk = rules.stream()
                 .map(rule -> {

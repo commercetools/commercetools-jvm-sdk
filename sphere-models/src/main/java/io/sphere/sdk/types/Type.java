@@ -34,7 +34,7 @@ public interface Type extends Resource<Type> {
         return Reference.of(referenceTypeId(), getId(), this);
     }
 
-    static String referenceTypeId(){
+    static String referenceTypeId() {
         return "type";
     }
 
@@ -45,5 +45,9 @@ public interface Type extends Resource<Type> {
                 return "TypeReference<Type>";
             }
         };
+    }
+
+    static Reference<Type> referenceOfId(final String id) {
+        return Reference.of(referenceTypeId(), id);
     }
 }

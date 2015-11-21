@@ -42,7 +42,7 @@ public interface TaxCategory extends Resource<TaxCategory> {
         return Reference.of(referenceTypeId(), getId(), this);
     }
 
-    static String referenceTypeId(){
+    static String referenceTypeId() {
         return "tax-category";
     }
 
@@ -54,5 +54,9 @@ public interface TaxCategory extends Resource<TaxCategory> {
     @Deprecated
     static String typeId(){
         return "tax-category";
+    }
+
+    static Reference<TaxCategory> referenceOfId(final String id) {
+        return Reference.of(referenceTypeId(), id);
     }
 }

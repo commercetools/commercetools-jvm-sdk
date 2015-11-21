@@ -32,7 +32,7 @@ public interface InventoryEntry extends Resource<InventoryEntry> {
         return Reference.of(referenceTypeId(), getId(), this);
     }
 
-    static String referenceTypeId(){
+    static String referenceTypeId() {
         return "inventory-entry";
     }
 
@@ -53,5 +53,9 @@ public interface InventoryEntry extends Resource<InventoryEntry> {
                 return "TypeReference<InventoryEntry>";
             }
         };
+    }
+
+    static Reference<InventoryEntry> referenceOfId(final String id) {
+        return Reference.of(referenceTypeId(), id);
     }
 }

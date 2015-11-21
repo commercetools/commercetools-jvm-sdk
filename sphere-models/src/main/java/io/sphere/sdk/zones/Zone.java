@@ -27,7 +27,7 @@ public interface Zone extends Resource<Zone> {
         return Reference.of(referenceTypeId(), getId(), this);
     }
 
-    static String referenceTypeId(){
+    static String referenceTypeId() {
         return "zone";
     }
 
@@ -58,5 +58,9 @@ public interface Zone extends Resource<Zone> {
      */
     default boolean contains(final CountryCode countryCode) {
         return getLocations().stream().anyMatch(location -> location.getCountry().equals(countryCode));
+    }
+
+    static Reference<Zone> referenceOfId(final String id) {
+        return Reference.of(referenceTypeId(), id);
     }
 }
