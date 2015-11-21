@@ -28,8 +28,10 @@ public class SetShippingMethod extends UpdateActionImpl<Cart> {
         return shippingMethod;
     }
 
-    public static SetShippingMethod of(final Referenceable<ShippingMethod> shippingMethod) {
-        return new SetShippingMethod(shippingMethod.toReference());
+    public static SetShippingMethod of(@Nullable final Referenceable<ShippingMethod> shippingMethod) {
+        return shippingMethod != null
+                ? new SetShippingMethod(shippingMethod.toReference())
+                : ofRemove();
     }
 
     public static SetShippingMethod ofRemove() {
