@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":6,"i1":6,"i2":6,"i3":6,"i4":6,"i5":6,"i6":6,"i7":6,"i8":6,"i9":6,"i10":6,"i11":6,"i12":6,"i13":6,"i14":6,"i15":6,"i16":17,"i17":17,"i18":18,"i19":49,"i20":17};
+var methods = {"i0":6,"i1":6,"i2":6,"i3":6,"i4":6,"i5":6,"i6":6,"i7":6,"i8":6,"i9":6,"i10":6,"i11":6,"i12":6,"i13":6,"i14":6,"i15":6,"i16":17,"i17":17,"i18":17,"i19":18,"i20":49,"i21":17};
 var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],2:["t2","Instance Methods"],4:["t3","Abstract Methods"],16:["t5","Default Methods"],32:["t6","Deprecated Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -198,20 +198,24 @@ extends <a href="../../../../io/sphere/sdk/carts/CartLike.html" title="interface
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/carts/Cart.html#getTotalPrice--">getTotalPrice</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i16" class="altColor">
-<td class="colFirst"><code>static java.lang.String</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/carts/Cart.html#referenceTypeId--">referenceTypeId</a></span>()</code>&nbsp;</td>
+<td class="colFirst"><code>static <a href="../../../../io/sphere/sdk/models/Reference.html" title="class in io.sphere.sdk.models">Reference</a>&lt;<a href="../../../../io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts">Cart</a>&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/carts/Cart.html#referenceOfId-java.lang.String-">referenceOfId</a></span>(java.lang.String&nbsp;id)</code>&nbsp;</td>
 </tr>
 <tr id="i17" class="rowColor">
 <td class="colFirst"><code>static java.lang.String</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/carts/Cart.html#resourceTypeId--">resourceTypeId</a></span>()</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/carts/Cart.html#referenceTypeId--">referenceTypeId</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i18" class="altColor">
+<td class="colFirst"><code>static java.lang.String</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/carts/Cart.html#resourceTypeId--">resourceTypeId</a></span>()</code>&nbsp;</td>
+</tr>
+<tr id="i19" class="rowColor">
 <td class="colFirst"><code>default <a href="../../../../io/sphere/sdk/models/Reference.html" title="class in io.sphere.sdk.models">Reference</a>&lt;<a href="../../../../io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts">Cart</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/carts/Cart.html#toReference--">toReference</a></span>()</code>
 <div class="block">Creates a reference which is not necessarily filled.</div>
 </td>
 </tr>
-<tr id="i19" class="rowColor">
+<tr id="i20" class="altColor">
 <td class="colFirst"><code>static java.lang.String</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/carts/Cart.html#typeId--">typeId</a></span>()</code>
 <div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;
@@ -219,7 +223,7 @@ extends <a href="../../../../io/sphere/sdk/carts/CartLike.html" title="interface
 </div>
 </td>
 </tr>
-<tr id="i20" class="altColor">
+<tr id="i21" class="rowColor">
 <td class="colFirst"><code>static com.fasterxml.jackson.core.type.TypeReference&lt;<a href="../../../../io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts">Cart</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/carts/Cart.html#typeReference--">typeReference</a></span>()</code>&nbsp;</td>
 </tr>
@@ -535,7 +539,7 @@ java.lang.String&nbsp;getCustomerId()</pre>
 <a name="getPaymentInfo--">
 <!--   -->
 </a>
-<ul class="blockListLast">
+<ul class="blockList">
 <li class="blockList">
 <h4>getPaymentInfo</h4>
 <pre>@Nullable
@@ -550,6 +554,15 @@ java.lang.String&nbsp;getCustomerId()</pre>
 <dd><a href="../../../../io/sphere/sdk/carts/commands/updateactions/AddPayment.html" title="class in io.sphere.sdk.carts.commands.updateactions"><code>AddPayment</code></a>, 
 <a href="../../../../io/sphere/sdk/carts/commands/updateactions/RemovePayment.html" title="class in io.sphere.sdk.carts.commands.updateactions"><code>RemovePayment</code></a></dd>
 </dl>
+</li>
+</ul>
+<a name="referenceOfId-java.lang.String-">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>referenceOfId</h4>
+<pre>static&nbsp;<a href="../../../../io/sphere/sdk/models/Reference.html" title="class in io.sphere.sdk.models">Reference</a>&lt;<a href="../../../../io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts">Cart</a>&gt;&nbsp;referenceOfId(java.lang.String&nbsp;id)</pre>
 </li>
 </ul>
 </li>

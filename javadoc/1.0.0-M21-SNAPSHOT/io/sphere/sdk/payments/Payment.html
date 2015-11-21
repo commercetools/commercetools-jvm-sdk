@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":6,"i1":6,"i2":6,"i3":6,"i4":6,"i5":6,"i6":6,"i7":6,"i8":6,"i9":6,"i10":6,"i11":6,"i12":6,"i13":17,"i14":17,"i15":18,"i16":17};
+var methods = {"i0":6,"i1":6,"i2":6,"i3":6,"i4":6,"i5":6,"i6":6,"i7":6,"i8":6,"i9":6,"i10":6,"i11":6,"i12":6,"i13":17,"i14":17,"i15":17,"i16":18,"i17":17};
 var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],2:["t2","Instance Methods"],4:["t3","Abstract Methods"],16:["t5","Default Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -189,20 +189,24 @@ extends <a href="../../../../io/sphere/sdk/models/Resource.html" title="interfac
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/payments/Payment.html#getTransactions--">getTransactions</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i13" class="rowColor">
-<td class="colFirst"><code>static java.lang.String</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/payments/Payment.html#referenceTypeId--">referenceTypeId</a></span>()</code>&nbsp;</td>
+<td class="colFirst"><code>static <a href="../../../../io/sphere/sdk/models/Reference.html" title="class in io.sphere.sdk.models">Reference</a>&lt;<a href="../../../../io/sphere/sdk/payments/Payment.html" title="interface in io.sphere.sdk.payments">Payment</a>&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/payments/Payment.html#referenceOfId-java.lang.String-">referenceOfId</a></span>(java.lang.String&nbsp;id)</code>&nbsp;</td>
 </tr>
 <tr id="i14" class="altColor">
 <td class="colFirst"><code>static java.lang.String</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/payments/Payment.html#resourceTypeId--">resourceTypeId</a></span>()</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/payments/Payment.html#referenceTypeId--">referenceTypeId</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i15" class="rowColor">
+<td class="colFirst"><code>static java.lang.String</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/payments/Payment.html#resourceTypeId--">resourceTypeId</a></span>()</code>&nbsp;</td>
+</tr>
+<tr id="i16" class="altColor">
 <td class="colFirst"><code>default <a href="../../../../io/sphere/sdk/models/Reference.html" title="class in io.sphere.sdk.models">Reference</a>&lt;<a href="../../../../io/sphere/sdk/payments/Payment.html" title="interface in io.sphere.sdk.payments">Payment</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/payments/Payment.html#toReference--">toReference</a></span>()</code>
 <div class="block">Creates a reference which is not necessarily filled.</div>
 </td>
 </tr>
-<tr id="i16" class="altColor">
+<tr id="i17" class="rowColor">
 <td class="colFirst"><code>static com.fasterxml.jackson.core.type.TypeReference&lt;<a href="../../../../io/sphere/sdk/payments/Payment.html" title="interface in io.sphere.sdk.payments">Payment</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/payments/Payment.html#typeReference--">typeReference</a></span>()</code>&nbsp;</td>
 </tr>
@@ -411,10 +415,19 @@ javax.money.MonetaryAmount&nbsp;getAmountRefunded()</pre>
 <a name="resourceTypeId--">
 <!--   -->
 </a>
-<ul class="blockListLast">
+<ul class="blockList">
 <li class="blockList">
 <h4>resourceTypeId</h4>
 <pre>static&nbsp;java.lang.String&nbsp;resourceTypeId()</pre>
+</li>
+</ul>
+<a name="referenceOfId-java.lang.String-">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>referenceOfId</h4>
+<pre>static&nbsp;<a href="../../../../io/sphere/sdk/models/Reference.html" title="class in io.sphere.sdk.models">Reference</a>&lt;<a href="../../../../io/sphere/sdk/payments/Payment.html" title="interface in io.sphere.sdk.payments">Payment</a>&gt;&nbsp;referenceOfId(java.lang.String&nbsp;id)</pre>
 </li>
 </ul>
 </li>
