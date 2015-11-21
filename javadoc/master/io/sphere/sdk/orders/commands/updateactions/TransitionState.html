@@ -144,6 +144,12 @@ extends <a href="../../../../../../io/sphere/sdk/states/relatedupdateactions/Tra
         final OrderStateTransitionMessage message = messageQueryResult.head().get();
         assertThat(message.getState()).isEqualTo(state.toReference());
 
+        //check query model
+        final Order orderByState = execute(OrderQuery.of()
+                .withPredicates(m -&gt; m.id().is(order.getId()).and(m.state().is(state))))
+                .head().get();
+        assertThat(orderByState).isEqualTo(updatedOrder);
+
         return updatedOrder;
     });
 });

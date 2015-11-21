@@ -146,6 +146,12 @@ extends <a href="../../../../../../io/sphere/sdk/states/relatedupdateactions/Tra
         final ProductStateTransitionMessage message = messageQueryResult.head().get();
         assertThat(message.getState()).isEqualTo(state.toReference());
 
+        //check query model
+        final Product productByState = execute(ProductQuery.of()
+                .withPredicates(m -&gt; m.id().is(product.getId()).and(m.state().is(state))))
+                .head().get();
+        assertThat(productByState).isEqualTo(updatedProduct);
+
         return updatedProduct;
     });
 });
