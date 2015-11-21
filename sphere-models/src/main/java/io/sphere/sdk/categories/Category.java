@@ -114,4 +114,8 @@ public interface Category extends Resource<Category>, WithLocalizedSlug, MetaAtt
                 .append("orderHint", category.getOrderHint())
                 .toString();
     }
+
+    static Reference<Category> referenceOfId(final String id) {
+        return Reference.of(referenceTypeId(), id);
+    }
 }

@@ -28,7 +28,7 @@ public interface ProductDiscount extends Resource<ProductDiscount> {
 
     List<Reference<JsonNode>> getReferences();
 
-    static String referenceTypeId(){
+    static String referenceTypeId() {
         return "product-discount";
     }
 
@@ -49,5 +49,9 @@ public interface ProductDiscount extends Resource<ProductDiscount> {
                 return "TypeReference<ProductDiscount>";
             }
         };
+    }
+
+    static Reference<ProductDiscount> referenceOfId(final String id) {
+        return Reference.of(referenceTypeId(), id);
     }
 }

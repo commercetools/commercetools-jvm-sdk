@@ -176,7 +176,7 @@ public interface Customer extends Resource<Customer>, Custom {
         return "customer";
     }
 
-    static String referenceTypeId(){
+    static String referenceTypeId() {
         return "customer";
     }
 
@@ -197,5 +197,9 @@ public interface Customer extends Resource<Customer>, Custom {
                 return "TypeReference<Customer>";
             }
         };
+    }
+
+    static Reference<Customer> referenceOfId(final String id) {
+        return Reference.of(referenceTypeId(), id);
     }
 }

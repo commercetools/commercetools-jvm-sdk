@@ -66,4 +66,8 @@ public interface Review extends Resource<Review> {
             }
         };
     }
+
+    static Reference<Review> referenceOfId(final String id) {
+        return Reference.of(referenceTypeId(), id);
+    }
 }

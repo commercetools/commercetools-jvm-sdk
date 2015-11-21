@@ -49,4 +49,8 @@ public interface CustomerGroup extends Resource<CustomerGroup> {
             }
         };
     }
+
+    static Reference<CustomerGroup> referenceOfId(final String id) {
+        return Reference.of(referenceTypeId(), id);
+    }
 }

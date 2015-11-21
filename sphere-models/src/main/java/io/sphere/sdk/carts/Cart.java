@@ -118,4 +118,8 @@ public interface Cart extends CartLike<Cart> {
     @Nullable
     @Override
     PaymentInfo getPaymentInfo();
+
+    static Reference<Cart> referenceOfId(final String id) {
+        return Reference.of(referenceTypeId(), id);
+    }
 }

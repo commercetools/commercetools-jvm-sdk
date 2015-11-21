@@ -65,4 +65,8 @@ public interface CartDiscount extends Resource<CartDiscount> {
             }
         };
     }
+
+    static Reference<CartDiscount> referenceOfId(final String id) {
+        return Reference.of(referenceTypeId(), id);
+    }
 }

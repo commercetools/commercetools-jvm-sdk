@@ -41,7 +41,7 @@ public interface DiscountCode extends Resource<DiscountCode> {
         return Reference.of(referenceTypeId(), getId(), this);
     }
 
-    static String referenceTypeId(){
+    static String referenceTypeId() {
         return "discount-code";
     }
 
@@ -62,5 +62,9 @@ public interface DiscountCode extends Resource<DiscountCode> {
                 return "TypeReference<DiscountCode>";
             }
         };
+    }
+
+    static Reference<DiscountCode> referenceOfId(final String id) {
+        return Reference.of(referenceTypeId(), id);
     }
 }

@@ -45,7 +45,7 @@ public interface State extends Resource<State> {
         return Reference.of(referenceTypeId(), getId(), this);
     }
 
-    static String referenceTypeId(){
+    static String referenceTypeId() {
         return "state";
     }
 
@@ -68,4 +68,7 @@ public interface State extends Resource<State> {
         };
     }
 
+    static Reference<State> referenceOfId(final String id) {
+        return Reference.of(referenceTypeId(), id);
+    }
 }

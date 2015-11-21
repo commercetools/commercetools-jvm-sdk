@@ -46,7 +46,7 @@ public interface ProductType extends Resource<ProductType>, AttributeDefinitionC
         return reference(this);
     }
 
-    static String referenceTypeId(){
+    static String referenceTypeId() {
         return "product-type";
     }
 
@@ -75,5 +75,9 @@ public interface ProductType extends Resource<ProductType>, AttributeDefinitionC
                 return "TypeReference<ProductType>";
             }
         };
+    }
+
+    static Reference<ProductType> referenceOfId(final String id) {
+        return Reference.of(referenceTypeId(), id);
     }
 }
