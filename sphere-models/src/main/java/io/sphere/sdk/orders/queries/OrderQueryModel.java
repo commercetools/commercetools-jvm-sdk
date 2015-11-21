@@ -10,6 +10,7 @@ import io.sphere.sdk.orders.OrderState;
 import io.sphere.sdk.orders.PaymentState;
 import io.sphere.sdk.orders.ShipmentState;
 import io.sphere.sdk.queries.*;
+import io.sphere.sdk.states.State;
 
 public class OrderQueryModel extends CartLikeQueryModel<Order> {
     private OrderQueryModel(final QueryModel<Order> parent, final String pathSegment) {
@@ -73,5 +74,9 @@ public class OrderQueryModel extends CartLikeQueryModel<Order> {
     @Override
     public MoneyQueryModel<Order> totalPrice() {
         return super.totalPrice();
+    }
+
+    public ReferenceOptionalQueryModel<Order, State> state() {
+        return referenceOptionalModel("state");
     }
 }

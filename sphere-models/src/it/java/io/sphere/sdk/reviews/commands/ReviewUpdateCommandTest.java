@@ -1,9 +1,8 @@
 package io.sphere.sdk.reviews.commands;
 
 import io.sphere.sdk.reviews.Review;
-import io.sphere.sdk.reviews.ReviewFixtures;
 import io.sphere.sdk.reviews.commands.updateactions.*;
-import io.sphere.sdk.states.StateFixtures;
+import io.sphere.sdk.reviews.queries.ReviewQuery;
 import io.sphere.sdk.states.StateType;
 import io.sphere.sdk.test.IntegrationTest;
 import org.junit.Ignore;
@@ -13,8 +12,8 @@ import java.util.Optional;
 
 import static io.sphere.sdk.reviews.ReviewFixtures.withUpdateableReview;
 import static io.sphere.sdk.states.StateFixtures.withStateByBuilder;
-import static org.assertj.core.api.Assertions.*;
-import static io.sphere.sdk.test.SphereTestUtils.*;
+import static io.sphere.sdk.test.SphereTestUtils.randomString;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class ReviewUpdateCommandTest extends IntegrationTest {
     @Test
@@ -78,6 +77,12 @@ public class ReviewUpdateCommandTest extends IntegrationTest {
                 final Review updatedReview = execute(ReviewUpdateCommand.of(review, TransitionState.of(state)));
 
                 assertThat(updatedReview.getState()).isEqualTo(state);
+
+                //check query model
+                final Review reviewByState = execute(ReviewQuery.of()
+                        .withPredicates(m -> m.id().is(review.getId()).and(m.state().is(state))))
+                        .head().get();
+                assertThat(reviewByState).isEqualTo(updatedReview);
 
                 return updatedReview;
             });
