@@ -22,7 +22,13 @@ import java.util.Set;
 
  <p>An order can have {@link io.sphere.sdk.types.Custom custom fields}.</p>
 
-
+@see Cart
+@see io.sphere.sdk.orders.commands.OrderFromCartCreateCommand
+@see io.sphere.sdk.orders.commands.OrderDeleteCommand
+@see io.sphere.sdk.orders.commands.OrderImportCommand
+@see io.sphere.sdk.orders.commands.OrderUpdateCommand
+@see io.sphere.sdk.orders.queries.OrderByIdGet
+@see io.sphere.sdk.orders.queries.OrderQuery
  */
 @JsonDeserialize(as=OrderImpl.class)
 public interface Order extends CartLike<Order> {

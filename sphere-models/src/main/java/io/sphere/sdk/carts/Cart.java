@@ -17,6 +17,15 @@ import java.util.List;
  <p>A shopping cart holds product variants and can be ordered.</p> Each cart either belongs to a registered customer or is an anonymous cart ({@link #getCustomerId()} yields null).
 
  <p>A cart can have {@link io.sphere.sdk.types.Custom custom fields}.</p>
+
+ @see io.sphere.sdk.carts.commands.CartCreateCommand
+ @see io.sphere.sdk.carts.commands.CartUpdateCommand
+ @see io.sphere.sdk.carts.commands.CartDeleteCommand
+ @see io.sphere.sdk.orders.commands.OrderFromCartCreateCommand
+ @see io.sphere.sdk.carts.queries.CartQuery
+ @see io.sphere.sdk.carts.queries.CartByCustomerIdGet
+ @see io.sphere.sdk.carts.queries.CartByIdGet
+ @see io.sphere.sdk.orders.Order
  */
 @JsonDeserialize(as=CartImpl.class)
 public interface Cart extends CartLike<Cart> {
