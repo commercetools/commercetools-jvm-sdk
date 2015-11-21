@@ -6,6 +6,9 @@ import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.TextInputHint;
 
+/**
+ * @see Custom
+ */
 public class FieldDefinition extends Base {
     private final FieldType type;
     private final String name;

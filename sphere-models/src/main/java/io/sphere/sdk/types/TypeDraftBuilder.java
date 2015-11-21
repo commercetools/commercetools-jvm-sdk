@@ -8,6 +8,10 @@ import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Set;
 
+/**
+ * @see Custom
+ * @see TypeDraft
+ */
 public class TypeDraftBuilder extends Base implements Builder<TypeDraft> {
 
     private String key;

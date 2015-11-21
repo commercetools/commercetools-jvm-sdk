@@ -6,6 +6,9 @@ import io.sphere.sdk.models.LocalizedEnumValue;
 
 import java.util.List;
 
+/**
+ * @see Custom
+ */
 public class LocalizedEnumType extends FieldTypeBase {
     private final List<LocalizedEnumValue> values;
 

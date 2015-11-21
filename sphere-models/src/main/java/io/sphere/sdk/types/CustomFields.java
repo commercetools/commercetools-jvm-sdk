@@ -15,6 +15,9 @@ import java.time.ZonedDateTime;
 import java.util.Map;
 import java.util.Optional;
 
+/**
+ * @see Custom
+ */
 public class CustomFields extends Base {
     private final Reference<Type> type;
     private final Map<String, JsonNode> fields;

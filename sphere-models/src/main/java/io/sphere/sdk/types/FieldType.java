@@ -3,6 +3,9 @@ package io.sphere.sdk.types;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
+/**
+ * @see Custom
+ */
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "name", visible = true)
 @JsonSubTypes({
         @JsonSubTypes.Type(value = BooleanType.class, name = "Boolean"),

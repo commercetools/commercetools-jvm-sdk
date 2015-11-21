@@ -6,6 +6,10 @@ import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Set;
 
+/**
+ * @see Custom
+ * @see TypeDraftBuilder
+ */
 public interface TypeDraft {
     String getKey();
 

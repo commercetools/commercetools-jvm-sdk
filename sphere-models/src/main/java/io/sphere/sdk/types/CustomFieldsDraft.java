@@ -10,6 +10,10 @@ import java.util.stream.Collectors;
 
 import static java.util.Objects.requireNonNull;
 
+/**
+ * @see Custom
+ * @see CustomFieldsDraftBuilder
+ */
 public class CustomFieldsDraft {
     @Nullable
     private final String typeId;

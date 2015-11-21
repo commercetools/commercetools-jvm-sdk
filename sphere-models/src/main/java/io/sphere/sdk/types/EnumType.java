@@ -6,6 +6,9 @@ import io.sphere.sdk.models.EnumValue;
 
 import java.util.List;
 
+/**
+ * @see Custom
+ */
 public class EnumType extends FieldTypeBase {
     private final List<EnumValue> values;
 
