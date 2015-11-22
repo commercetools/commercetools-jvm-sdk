@@ -11,7 +11,7 @@ import io.sphere.sdk.producttypes.expansion.ProductTypeExpansionModel;
  <p>Delete by ID:</p>
  {@include.example io.sphere.sdk.producttypes.commands.ProductTypeDeleteCommandTest#execution()}
  <p>Delete by key:</p>
- {@include.example io.sphere.sdk.producttypes.commands.ProductTypeDeleteCommandTest#io.sphere.sdk.producttypes.commands.ProductTypeDeleteCommandTest#executionByKey()()}
+ {@include.example io.sphere.sdk.producttypes.commands.ProductTypeDeleteCommandTest#executionByKey()}
 
  */
 public interface ProductTypeDeleteCommand extends ByIdDeleteCommand<ProductType>, MetaModelExpansionDsl<ProductType, ProductTypeDeleteCommand, ProductTypeExpansionModel<ProductType>> {
