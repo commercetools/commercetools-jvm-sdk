@@ -30,6 +30,7 @@ import javax.money.MonetaryAmount;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import static io.sphere.sdk.carts.CartFixtures.*;
 import static io.sphere.sdk.carts.CustomLineItemFixtures.createCustomLineItemDraft;
@@ -270,29 +271,29 @@ public class CartUpdateCommandTest extends IntegrationTest {
 
             final Cart cartWithLineItem = execute(CartUpdateCommand.of(emptyCart, action));
             final Price oldPrice = cartWithLineItem.getLineItems().get(0).getPrice();
-            final PriceDraft newPrice = PriceDraft.of(oldPrice).withValue(oldPrice.getValue().multiply(2));
+            final PriceDraft priceDraft = PriceDraft.of(oldPrice).withValue(oldPrice.getValue().multiply(2));
             final Product productWithChangedPrice =
-                    execute(ProductUpdateCommand.of(product, asList(ChangePrice.of(oldPrice, newPrice), Publish.of())));
+                    execute(ProductUpdateCommand.of(product, asList(ChangePrice.of(oldPrice, priceDraft), Publish.of())));
 
             final List<Price> prices = productWithChangedPrice.getMasterData().getCurrent().getMasterVariant().getPrices();
-            assertThat(prices)
-                    .overridingErrorMessage("we updated the price of the product")
-                    .isEqualTo(asList(newPrice));
+            assertThat(prices.stream().map(price -> PriceDraft.of(price)).collect(Collectors.toList()))
+                    .as("we updated the price of the product")
+                    .isEqualTo(asList(priceDraft));
 
             final LineItem lineItemOfTheChangedProduct =
                     execute(CartByIdGet.of(cartWithLineItem)).getLineItems().get(0);
             assertThat(lineItemOfTheChangedProduct.getPrice())
-                    .overridingErrorMessage("the new product price is not automatically propagated to the line item in the cart")
-                    .isEqualTo(oldPrice).isNotEqualTo(newPrice);
+                    .as("the new product price is not automatically propagated to the line item in the cart")
+                    .isEqualTo(oldPrice).isNotEqualTo(priceDraft);
 
             final Cart recalculatedCart = execute(CartUpdateCommand.of(cartWithLineItem, Recalculate.of()));
 
-            assertThat(recalculatedCart.getLineItems().get(0).getPrice())
-                    .overridingErrorMessage("recalculate updated the price of the line item in the cart")
-                    .isEqualTo(newPrice);
+            assertThat(PriceDraft.of(recalculatedCart.getLineItems().get(0).getPrice()))
+                    .as("recalculate updated the price of the line item in the cart")
+                    .isEqualTo(priceDraft);
             assertThat(recalculatedCart.getTotalPrice())
-                    .overridingErrorMessage("recalculate also updated the total price of the cart")
-                    .isEqualTo(newPrice.getValue()).isNotEqualTo(cartWithLineItem.getTotalPrice());
+                    .as("recalculate also updated the total price of the cart")
+                    .isEqualTo(priceDraft.getValue()).isNotEqualTo(cartWithLineItem.getTotalPrice());
         });
     }
 

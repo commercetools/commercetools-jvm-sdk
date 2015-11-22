@@ -2,6 +2,8 @@ package io.sphere.sdk.client;
 
 import io.sphere.sdk.http.HttpResponse;
 
+import javax.annotation.Nullable;
+
 /**
  An argument for a sphere client to execute an HTTP API call on the level of one SPHERE.IO project.
 
@@ -17,9 +19,10 @@ public interface SphereRequest<T> {
      Takes an http response and maps it into a Java object of type T.
      Before calling this method, check with {@link #canDeserialize(HttpResponse)} if the response can be consumed.
 
-     @return the deserialized object, it should not be null
+     @return the deserialized object
      @param httpResponse the http response of SPHERE.IO
      */
+    @Nullable
     T deserialize(final HttpResponse httpResponse);
 
     /**
