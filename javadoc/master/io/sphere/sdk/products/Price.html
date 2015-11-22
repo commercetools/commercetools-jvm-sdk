@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":9,"i10":9,"i11":10,"i12":10,"i13":10,"i14":10,"i15":10,"i16":10,"i17":10,"i18":10};
+var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10,"i10":9,"i11":9,"i12":9,"i13":10,"i14":10,"i15":10,"i16":10,"i17":10,"i18":10,"i19":10,"i20":10};
 var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -111,13 +111,27 @@ var activeTableTab = "activeTableTab";
 <div class="description">
 <ul class="blockList">
 <li class="blockList">
+<dl>
+<dt>All Implemented Interfaces:</dt>
+<dd><a href="../../../../io/sphere/sdk/types/Custom.html" title="interface in io.sphere.sdk.types">Custom</a></dd>
+</dl>
 <hr>
 <br>
 <pre>public class <span class="typeNameLabel">Price</span>
-extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.sphere.sdk.models">Base</a></pre>
+extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.sphere.sdk.models">Base</a>
+implements <a href="../../../../io/sphere/sdk/types/Custom.html" title="interface in io.sphere.sdk.types">Custom</a></pre>
 <div class="block">Amount that must be paid when buying goods.
 
+ <p>A Price can have <a href="../../../../io/sphere/sdk/types/Custom.html" title="interface in io.sphere.sdk.types"><code>custom fields</code></a>.</p>
+
  For construction use a <a href="../../../../io/sphere/sdk/products/PriceBuilder.html" title="class in io.sphere.sdk.products"><code>PriceBuilder</code></a>.</div>
+<dl>
+<dt><span class="seeLabel">See Also:</span></dt>
+<dd><a href="../../../../io/sphere/sdk/products/commands/updateactions/AddPrice.html" title="class in io.sphere.sdk.products.commands.updateactions"><code>AddPrice</code></a>, 
+<a href="../../../../io/sphere/sdk/products/commands/updateactions/ChangePrice.html" title="class in io.sphere.sdk.products.commands.updateactions"><code>ChangePrice</code></a>, 
+<a href="../../../../io/sphere/sdk/products/commands/updateactions/RemovePrice.html" title="class in io.sphere.sdk.products.commands.updateactions"><code>RemovePrice</code></a>, 
+<a href="../../../../io/sphere/sdk/products/ProductVariant.html#getPrices--"><code>ProductVariant.getPrices()</code></a></dd>
+</dl>
 </li>
 </ul>
 </div>
@@ -149,71 +163,79 @@ extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/products/Price.html#getCountry--">getCountry</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i3" class="rowColor">
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/types/CustomFields.html" title="class in io.sphere.sdk.types">CustomFields</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/products/Price.html#getCustom--">getCustom</a></span>()</code>&nbsp;</td>
+</tr>
+<tr id="i4" class="altColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/models/Reference.html" title="class in io.sphere.sdk.models">Reference</a>&lt;<a href="../../../../io/sphere/sdk/customergroups/CustomerGroup.html" title="interface in io.sphere.sdk.customergroups">CustomerGroup</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/products/Price.html#getCustomerGroup--">getCustomerGroup</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i4" class="altColor">
+<tr id="i5" class="rowColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/productdiscounts/DiscountedPrice.html" title="class in io.sphere.sdk.productdiscounts">DiscountedPrice</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/products/Price.html#getDiscounted--">getDiscounted</a></span>()</code>
 <div class="block">Supplies a discount if there is any.</div>
 </td>
 </tr>
-<tr id="i5" class="rowColor">
+<tr id="i6" class="altColor">
 <td class="colFirst"><code>java.lang.String</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/products/Price.html#getId--">getId</a></span>()</code>
 <div class="block">The unique ID of this price.</div>
 </td>
 </tr>
-<tr id="i6" class="altColor">
+<tr id="i7" class="rowColor">
 <td class="colFirst"><code>java.time.ZonedDateTime</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/products/Price.html#getValidFrom--">getValidFrom</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i7" class="rowColor">
+<tr id="i8" class="altColor">
 <td class="colFirst"><code>java.time.ZonedDateTime</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/products/Price.html#getValidUntil--">getValidUntil</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i8" class="altColor">
+<tr id="i9" class="rowColor">
 <td class="colFirst"><code>javax.money.MonetaryAmount</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/products/Price.html#getValue--">getValue</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i9" class="rowColor">
+<tr id="i10" class="altColor">
 <td class="colFirst"><code>static <a href="../../../../io/sphere/sdk/products/Price.html" title="class in io.sphere.sdk.products">Price</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/products/Price.html#of-java.math.BigDecimal-javax.money.CurrencyUnit-">of</a></span>(java.math.BigDecimal&nbsp;amount,
   javax.money.CurrencyUnit&nbsp;currencyUnit)</code>&nbsp;</td>
 </tr>
-<tr id="i10" class="altColor">
+<tr id="i11" class="rowColor">
 <td class="colFirst"><code>static <a href="../../../../io/sphere/sdk/products/Price.html" title="class in io.sphere.sdk.products">Price</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/products/Price.html#of-javax.money.MonetaryAmount-">of</a></span>(javax.money.MonetaryAmount&nbsp;money)</code>&nbsp;</td>
 </tr>
-<tr id="i11" class="rowColor">
-<td class="colFirst"><code><a href="../../../../io/sphere/sdk/products/Price.html" title="class in io.sphere.sdk.products">Price</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/products/Price.html#withChannel-io.sphere.sdk.models.Referenceable-">withChannel</a></span>(<a href="../../../../io/sphere/sdk/models/Referenceable.html" title="interface in io.sphere.sdk.models">Referenceable</a>&lt;<a href="../../../../io/sphere/sdk/channels/Channel.html" title="interface in io.sphere.sdk.channels">Channel</a>&gt;&nbsp;channel)</code>&nbsp;</td>
-</tr>
 <tr id="i12" class="altColor">
-<td class="colFirst"><code><a href="../../../../io/sphere/sdk/products/Price.html" title="class in io.sphere.sdk.products">Price</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/products/Price.html#withCountry-com.neovisionaries.i18n.CountryCode-">withCountry</a></span>(com.neovisionaries.i18n.CountryCode&nbsp;country)</code>&nbsp;</td>
+<td class="colFirst"><code>static java.lang.String</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/products/Price.html#resourceTypeId--">resourceTypeId</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i13" class="rowColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/products/Price.html" title="class in io.sphere.sdk.products">Price</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/products/Price.html#withCustomerGroup-io.sphere.sdk.models.Referenceable-">withCustomerGroup</a></span>(<a href="../../../../io/sphere/sdk/models/Referenceable.html" title="interface in io.sphere.sdk.models">Referenceable</a>&lt;<a href="../../../../io/sphere/sdk/customergroups/CustomerGroup.html" title="interface in io.sphere.sdk.customergroups">CustomerGroup</a>&gt;&nbsp;customerGroup)</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/products/Price.html#withChannel-io.sphere.sdk.models.Referenceable-">withChannel</a></span>(<a href="../../../../io/sphere/sdk/models/Referenceable.html" title="interface in io.sphere.sdk.models">Referenceable</a>&lt;<a href="../../../../io/sphere/sdk/channels/Channel.html" title="interface in io.sphere.sdk.channels">Channel</a>&gt;&nbsp;channel)</code>&nbsp;</td>
 </tr>
 <tr id="i14" class="altColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/products/Price.html" title="class in io.sphere.sdk.products">Price</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/products/Price.html#withDiscounted-io.sphere.sdk.productdiscounts.DiscountedPrice-">withDiscounted</a></span>(<a href="../../../../io/sphere/sdk/productdiscounts/DiscountedPrice.html" title="class in io.sphere.sdk.productdiscounts">DiscountedPrice</a>&nbsp;discounted)</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/products/Price.html#withCountry-com.neovisionaries.i18n.CountryCode-">withCountry</a></span>(com.neovisionaries.i18n.CountryCode&nbsp;country)</code>&nbsp;</td>
 </tr>
 <tr id="i15" class="rowColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/products/Price.html" title="class in io.sphere.sdk.products">Price</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/products/Price.html#withId-java.lang.String-">withId</a></span>(java.lang.String&nbsp;id)</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/products/Price.html#withCustomerGroup-io.sphere.sdk.models.Referenceable-">withCustomerGroup</a></span>(<a href="../../../../io/sphere/sdk/models/Referenceable.html" title="interface in io.sphere.sdk.models">Referenceable</a>&lt;<a href="../../../../io/sphere/sdk/customergroups/CustomerGroup.html" title="interface in io.sphere.sdk.customergroups">CustomerGroup</a>&gt;&nbsp;customerGroup)</code>&nbsp;</td>
 </tr>
 <tr id="i16" class="altColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/products/Price.html" title="class in io.sphere.sdk.products">Price</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/products/Price.html#withValidFrom-java.time.ZonedDateTime-">withValidFrom</a></span>(java.time.ZonedDateTime&nbsp;validFrom)</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/products/Price.html#withDiscounted-io.sphere.sdk.productdiscounts.DiscountedPrice-">withDiscounted</a></span>(<a href="../../../../io/sphere/sdk/productdiscounts/DiscountedPrice.html" title="class in io.sphere.sdk.productdiscounts">DiscountedPrice</a>&nbsp;discounted)</code>&nbsp;</td>
 </tr>
 <tr id="i17" class="rowColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/products/Price.html" title="class in io.sphere.sdk.products">Price</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/products/Price.html#withValidUntil-java.time.ZonedDateTime-">withValidUntil</a></span>(java.time.ZonedDateTime&nbsp;validUntil)</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/products/Price.html#withId-java.lang.String-">withId</a></span>(java.lang.String&nbsp;id)</code>&nbsp;</td>
 </tr>
 <tr id="i18" class="altColor">
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/products/Price.html" title="class in io.sphere.sdk.products">Price</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/products/Price.html#withValidFrom-java.time.ZonedDateTime-">withValidFrom</a></span>(java.time.ZonedDateTime&nbsp;validFrom)</code>&nbsp;</td>
+</tr>
+<tr id="i19" class="rowColor">
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/products/Price.html" title="class in io.sphere.sdk.products">Price</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/products/Price.html#withValidUntil-java.time.ZonedDateTime-">withValidUntil</a></span>(java.time.ZonedDateTime&nbsp;validUntil)</code>&nbsp;</td>
+</tr>
+<tr id="i20" class="altColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/products/Price.html" title="class in io.sphere.sdk.products">Price</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/products/Price.html#withValue-javax.money.MonetaryAmount-">withValue</a></span>(javax.money.MonetaryAmount&nbsp;value)</code>&nbsp;</td>
 </tr>
@@ -336,6 +358,20 @@ public&nbsp;java.lang.String&nbsp;getId()</pre>
 </dl>
 </li>
 </ul>
+<a name="getCustom--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getCustom</h4>
+<pre>@Nullable
+public&nbsp;<a href="../../../../io/sphere/sdk/types/CustomFields.html" title="class in io.sphere.sdk.types">CustomFields</a>&nbsp;getCustom()</pre>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../io/sphere/sdk/types/Custom.html#getCustom--">getCustom</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/types/Custom.html" title="interface in io.sphere.sdk.types">Custom</a></code></dd>
+</dl>
+</li>
+</ul>
 <a name="withCustomerGroup-io.sphere.sdk.models.Referenceable-">
 <!--   -->
 </a>
@@ -435,10 +471,19 @@ public&nbsp;java.lang.String&nbsp;getId()</pre>
 <a name="equalsIgnoreId-io.sphere.sdk.products.Price-">
 <!--   -->
 </a>
-<ul class="blockListLast">
+<ul class="blockList">
 <li class="blockList">
 <h4>equalsIgnoreId</h4>
 <pre>public&nbsp;boolean&nbsp;equalsIgnoreId(<a href="../../../../io/sphere/sdk/products/Price.html" title="class in io.sphere.sdk.products">Price</a>&nbsp;price)</pre>
+</li>
+</ul>
+<a name="resourceTypeId--">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>resourceTypeId</h4>
+<pre>public static&nbsp;java.lang.String&nbsp;resourceTypeId()</pre>
 </li>
 </ul>
 </li>

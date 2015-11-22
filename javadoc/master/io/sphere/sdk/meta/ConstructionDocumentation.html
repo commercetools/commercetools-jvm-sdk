@@ -183,13 +183,13 @@ assertThat(address.getFirstName())
   you can create updated copies with a method starting with "with":
 
   <div id="io-sphere-sdk-meta-ConstructionDocumentationTest-possibilities1--%s" class=code-example><pre><code class='java'>final MonetaryAmount eur100 = MoneyImpl.of(100, EUR);
-final Price price0 = Price.of(eur100);//price without country
+final PriceDraft price0 = PriceDraft.of(eur100);//price without country
 //builder style
-final Price price1 = PriceBuilder.of(eur100).country(DE).build();
+final PriceDraft price1 = PriceDraftBuilder.of(eur100).country(DE).build();
 //of method + copy method
-final Price price2 = Price.of(eur100).withCountry(DE);
+final PriceDraft price2 = PriceDraft.of(eur100).withCountry(DE);
 //withCountry semantically the same to
-final Price price3 = PriceBuilder.of(Price.of(eur100)).country(DE).build();
+final PriceDraft price3 = PriceDraftBuilder.of(PriceDraft.of(eur100)).country(DE).build();
 assertThat(price1).isEqualTo(price2).isEqualTo(price3)
         .isNotEqualTo(price0);
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/src/test/java/io/sphere/sdk/meta/ConstructionDocumentationTest.java" target="_blank">test code</a>.</pre></div>

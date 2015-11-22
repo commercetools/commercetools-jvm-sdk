@@ -118,12 +118,13 @@ var activeTableTab = "activeTableTab";
 <li class="blockList">
 <dl>
 <dt>All Implemented Interfaces:</dt>
-<dd><a href="../../../../../../io/sphere/sdk/commands/UpdateAction.html" title="interface in io.sphere.sdk.commands">UpdateAction</a>&lt;<a href="../../../../../../io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts">Cart</a>&gt;</dd>
+<dd><a href="../../../../../../io/sphere/sdk/commands/UpdateAction.html" title="interface in io.sphere.sdk.commands">UpdateAction</a>&lt;<a href="../../../../../../io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts">Cart</a>&gt;, <a href="../../../../../../io/sphere/sdk/types/CustomDraft.html" title="interface in io.sphere.sdk.types">CustomDraft</a></dd>
 </dl>
 <hr>
 <br>
 <pre>public class <span class="typeNameLabel">AddLineItem</span>
-extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html" title="class in io.sphere.sdk.commands">UpdateActionImpl</a>&lt;<a href="../../../../../../io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts">Cart</a>&gt;</pre>
+extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html" title="class in io.sphere.sdk.commands">UpdateActionImpl</a>&lt;<a href="../../../../../../io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts">Cart</a>&gt;
+implements <a href="../../../../../../io/sphere/sdk/types/CustomDraft.html" title="interface in io.sphere.sdk.types">CustomDraft</a></pre>
 <div class="block">Adds a product variant in the given quantity to the cart.
     If the cart already contains the product variant then only the line item quantity is increased.
 
@@ -323,6 +324,10 @@ public&nbsp;<a href="../../../../../../io/sphere/sdk/models/Reference.html" titl
 <h4>getCustom</h4>
 <pre>@Nullable
 public&nbsp;<a href="../../../../../../io/sphere/sdk/types/CustomFieldsDraft.html" title="class in io.sphere.sdk.types">CustomFieldsDraft</a>&nbsp;getCustom()</pre>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../../../io/sphere/sdk/types/CustomDraft.html#getCustom--">getCustom</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../../io/sphere/sdk/types/CustomDraft.html" title="interface in io.sphere.sdk.types">CustomDraft</a></code></dd>
+</dl>
 </li>
 </ul>
 <a name="withSupplyChannel-io.sphere.sdk.models.Referenceable-">
