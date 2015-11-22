@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":17,"i1":17};
+var methods = {"i0":17,"i1":17,"i2":17,"i3":17};
 var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],16:["t5","Default Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -106,7 +106,9 @@ var activeTableTab = "activeTableTab";
 <br>
 <pre>public interface <span class="typeNameLabel">ProductTypeUpdateCommand</span>
 extends <a href="../../../../../io/sphere/sdk/commands/UpdateCommandDsl.html" title="interface in io.sphere.sdk.commands">UpdateCommandDsl</a>&lt;<a href="../../../../../io/sphere/sdk/producttypes/ProductType.html" title="interface in io.sphere.sdk.producttypes">ProductType</a>,<a href="../../../../../io/sphere/sdk/producttypes/commands/ProductTypeUpdateCommand.html" title="interface in io.sphere.sdk.producttypes.commands">ProductTypeUpdateCommand</a>&gt;, <a href="../../../../../io/sphere/sdk/expansion/MetaModelExpansionDsl.html" title="interface in io.sphere.sdk.expansion">MetaModelExpansionDsl</a>&lt;<a href="../../../../../io/sphere/sdk/producttypes/ProductType.html" title="interface in io.sphere.sdk.producttypes">ProductType</a>,<a href="../../../../../io/sphere/sdk/producttypes/commands/ProductTypeUpdateCommand.html" title="interface in io.sphere.sdk.producttypes.commands">ProductTypeUpdateCommand</a>,<a href="../../../../../io/sphere/sdk/producttypes/expansion/ProductTypeExpansionModel.html" title="class in io.sphere.sdk.producttypes.expansion">ProductTypeExpansionModel</a>&lt;<a href="../../../../../io/sphere/sdk/producttypes/ProductType.html" title="interface in io.sphere.sdk.producttypes">ProductType</a>&gt;&gt;</pre>
-<div class="block"><p id=update-actions>Known UpdateActions</p><ul><li><a href="updateactions/AddAttributeDefinition.html">AddAttributeDefinition</a></li><li><a href="updateactions/AddEnumValue.html">AddEnumValue</a></li><li><a href="updateactions/AddLocalizedEnumValue.html">AddLocalizedEnumValue</a></li><li><a href="updateactions/ChangeAttributeDefinitionLabel.html">ChangeAttributeDefinitionLabel</a></li><li><a href="updateactions/ChangeAttributeOrder.html">ChangeAttributeOrder</a></li><li><a href="updateactions/ChangeDescription.html">ChangeDescription</a></li><li><a href="updateactions/ChangeEnumValueOrder.html">ChangeEnumValueOrder</a></li><li><a href="updateactions/ChangeLocalizedEnumValueOrder.html">ChangeLocalizedEnumValueOrder</a></li><li><a href="updateactions/ChangeName.html">ChangeName</a></li><li><a href="updateactions/RemoveAttributeDefinition.html">RemoveAttributeDefinition</a></li></ul></div>
+<div class="block">Updates ProductTypes.
+
+ <p id=update-actions>Known UpdateActions</p><ul><li><a href="updateactions/AddAttributeDefinition.html">AddAttributeDefinition</a></li><li><a href="updateactions/AddEnumValue.html">AddEnumValue</a></li><li><a href="updateactions/AddLocalizedEnumValue.html">AddLocalizedEnumValue</a></li><li><a href="updateactions/ChangeAttributeDefinitionLabel.html">ChangeAttributeDefinitionLabel</a></li><li><a href="updateactions/ChangeAttributeOrder.html">ChangeAttributeOrder</a></li><li><a href="updateactions/ChangeDescription.html">ChangeDescription</a></li><li><a href="updateactions/ChangeEnumValueOrder.html">ChangeEnumValueOrder</a></li><li><a href="updateactions/ChangeLocalizedEnumValueOrder.html">ChangeLocalizedEnumValueOrder</a></li><li><a href="updateactions/ChangeName.html">ChangeName</a></li><li><a href="updateactions/RemoveAttributeDefinition.html">RemoveAttributeDefinition</a></li></ul></div>
 </li>
 </ul>
 </div>
@@ -134,6 +136,18 @@ extends <a href="../../../../../io/sphere/sdk/commands/UpdateCommandDsl.html" ti
 <td class="colFirst"><code>static <a href="../../../../../io/sphere/sdk/producttypes/commands/ProductTypeUpdateCommand.html" title="interface in io.sphere.sdk.producttypes.commands">ProductTypeUpdateCommand</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/producttypes/commands/ProductTypeUpdateCommand.html#of-io.sphere.sdk.models.Versioned-io.sphere.sdk.commands.UpdateAction-">of</a></span>(<a href="../../../../../io/sphere/sdk/models/Versioned.html" title="interface in io.sphere.sdk.models">Versioned</a>&lt;<a href="../../../../../io/sphere/sdk/producttypes/ProductType.html" title="interface in io.sphere.sdk.producttypes">ProductType</a>&gt;&nbsp;versioned,
   <a href="../../../../../io/sphere/sdk/commands/UpdateAction.html" title="interface in io.sphere.sdk.commands">UpdateAction</a>&lt;<a href="../../../../../io/sphere/sdk/producttypes/ProductType.html" title="interface in io.sphere.sdk.producttypes">ProductType</a>&gt;&nbsp;updateAction)</code>&nbsp;</td>
+</tr>
+<tr id="i2" class="altColor">
+<td class="colFirst"><code>static <a href="../../../../../io/sphere/sdk/producttypes/commands/ProductTypeUpdateCommand.html" title="interface in io.sphere.sdk.producttypes.commands">ProductTypeUpdateCommand</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/producttypes/commands/ProductTypeUpdateCommand.html#ofKey-java.lang.String-java.lang.Long-java.util.List-">ofKey</a></span>(java.lang.String&nbsp;key,
+     java.lang.Long&nbsp;version,
+     java.util.List&lt;? extends <a href="../../../../../io/sphere/sdk/commands/UpdateAction.html" title="interface in io.sphere.sdk.commands">UpdateAction</a>&lt;<a href="../../../../../io/sphere/sdk/producttypes/ProductType.html" title="interface in io.sphere.sdk.producttypes">ProductType</a>&gt;&gt;&nbsp;updateActions)</code>&nbsp;</td>
+</tr>
+<tr id="i3" class="rowColor">
+<td class="colFirst"><code>static <a href="../../../../../io/sphere/sdk/producttypes/commands/ProductTypeUpdateCommand.html" title="interface in io.sphere.sdk.producttypes.commands">ProductTypeUpdateCommand</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/producttypes/commands/ProductTypeUpdateCommand.html#ofKey-java.lang.String-java.lang.Long-io.sphere.sdk.commands.UpdateAction-">ofKey</a></span>(java.lang.String&nbsp;key,
+     java.lang.Long&nbsp;version,
+     <a href="../../../../../io/sphere/sdk/commands/UpdateAction.html" title="interface in io.sphere.sdk.commands">UpdateAction</a>&lt;<a href="../../../../../io/sphere/sdk/producttypes/ProductType.html" title="interface in io.sphere.sdk.producttypes">ProductType</a>&gt;&nbsp;updateAction)</code>&nbsp;</td>
 </tr>
 </table>
 <ul class="blockList">
@@ -205,11 +219,33 @@ extends <a href="../../../../../io/sphere/sdk/commands/UpdateCommandDsl.html" ti
 <a name="of-io.sphere.sdk.models.Versioned-io.sphere.sdk.commands.UpdateAction-">
 <!--   -->
 </a>
-<ul class="blockListLast">
+<ul class="blockList">
 <li class="blockList">
 <h4>of</h4>
 <pre>static&nbsp;<a href="../../../../../io/sphere/sdk/producttypes/commands/ProductTypeUpdateCommand.html" title="interface in io.sphere.sdk.producttypes.commands">ProductTypeUpdateCommand</a>&nbsp;of(<a href="../../../../../io/sphere/sdk/models/Versioned.html" title="interface in io.sphere.sdk.models">Versioned</a>&lt;<a href="../../../../../io/sphere/sdk/producttypes/ProductType.html" title="interface in io.sphere.sdk.producttypes">ProductType</a>&gt;&nbsp;versioned,
                                    <a href="../../../../../io/sphere/sdk/commands/UpdateAction.html" title="interface in io.sphere.sdk.commands">UpdateAction</a>&lt;<a href="../../../../../io/sphere/sdk/producttypes/ProductType.html" title="interface in io.sphere.sdk.producttypes">ProductType</a>&gt;&nbsp;updateAction)</pre>
+</li>
+</ul>
+<a name="ofKey-java.lang.String-java.lang.Long-java.util.List-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>ofKey</h4>
+<pre>static&nbsp;<a href="../../../../../io/sphere/sdk/producttypes/commands/ProductTypeUpdateCommand.html" title="interface in io.sphere.sdk.producttypes.commands">ProductTypeUpdateCommand</a>&nbsp;ofKey(java.lang.String&nbsp;key,
+                                      java.lang.Long&nbsp;version,
+                                      java.util.List&lt;? extends <a href="../../../../../io/sphere/sdk/commands/UpdateAction.html" title="interface in io.sphere.sdk.commands">UpdateAction</a>&lt;<a href="../../../../../io/sphere/sdk/producttypes/ProductType.html" title="interface in io.sphere.sdk.producttypes">ProductType</a>&gt;&gt;&nbsp;updateActions)</pre>
+</li>
+</ul>
+<a name="ofKey-java.lang.String-java.lang.Long-io.sphere.sdk.commands.UpdateAction-">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>ofKey</h4>
+<pre>static&nbsp;<a href="../../../../../io/sphere/sdk/producttypes/commands/ProductTypeUpdateCommand.html" title="interface in io.sphere.sdk.producttypes.commands">ProductTypeUpdateCommand</a>&nbsp;ofKey(java.lang.String&nbsp;key,
+                                      java.lang.Long&nbsp;version,
+                                      <a href="../../../../../io/sphere/sdk/commands/UpdateAction.html" title="interface in io.sphere.sdk.commands">UpdateAction</a>&lt;<a href="../../../../../io/sphere/sdk/producttypes/ProductType.html" title="interface in io.sphere.sdk.producttypes">ProductType</a>&gt;&nbsp;updateAction)</pre>
 </li>
 </ul>
 </li>

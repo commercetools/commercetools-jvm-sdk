@@ -141,7 +141,7 @@ extends java.lang.Object</pre>
         .of(ISBN_ATTR_NAME, en("ISBN"), StringType.of())
         .build();
 
-final ProductTypeDraft productTypeDraft = ProductTypeDraft.of(BOOK_PRODUCT_TYPE_NAME, "books", asList(isbn));
+final ProductTypeDraft productTypeDraft = ProductTypeDraft.of(randomKey(), BOOK_PRODUCT_TYPE_NAME, "books", asList(isbn));
 final ProductType productType = client().execute(ProductTypeCreateCommand.of(productTypeDraft));
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/attributestutorial/ProductTypeCreationDemoTest.java" target="_blank">test code</a>.</pre></div>
 
@@ -191,24 +191,14 @@ final AttributeDefinition availableSince = AttributeDefinitionBuilder
 
 final List&lt;AttributeDefinition&gt; attributes = asList(color, size, laundrySymbols,
         matchingProducts, rrp, availableSince);
-final ProductTypeDraft productTypeDraft = ProductTypeDraft.of(PRODUCT_TYPE_NAME, "a 'T' shaped cloth", attributes);
+final ProductTypeDraft productTypeDraft = ProductTypeDraft.of(randomKey(), PRODUCT_TYPE_NAME, "a 'T' shaped cloth", attributes);
 final ProductType productType = client().execute(ProductTypeCreateCommand.of(productTypeDraft));
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/attributestutorial/ProductTypeCreationDemoTest.java" target="_blank">test code</a>.</pre></div>
 
 
 
- <p><a href="../../../../io/sphere/sdk/producttypes/ProductType.html" title="interface in io.sphere.sdk.producttypes"><code>ProductType</code></a>s have a name (String)
- which can be used as key to logically identify <a href="../../../../io/sphere/sdk/producttypes/ProductType.html" title="interface in io.sphere.sdk.producttypes"><code>ProductType</code></a>s. Beware that the name has no unique constraint,
- so it is possible to create multiple <a href="../../../../io/sphere/sdk/producttypes/ProductType.html" title="interface in io.sphere.sdk.producttypes"><code>ProductType</code></a>s with the same name which will cause confusion.
- </p><p>Check if product type with the same name exists:</p>
-
- <div id="io-sphere-sdk-attributestutorial-ProductTypeCreationDemoTest-demoCheckingIfProductTypeExist--%s" class=code-example><pre><code class='java'>final ProductTypeQuery query = ProductTypeQuery.of().byName(PRODUCT_TYPE_NAME);
-final boolean productTypeAlreadyExists = client().execute(query).head().isPresent();
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/attributestutorial/ProductTypeCreationDemoTest.java" target="_blank">test code</a>.</pre></div>
-
-
-
-
+ <p><a href="../../../../io/sphere/sdk/producttypes/ProductType.html" title="interface in io.sphere.sdk.producttypes"><code>ProductType</code></a>s have a key (String)
+ which can be used as key to logically identify <a href="../../../../io/sphere/sdk/producttypes/ProductType.html" title="interface in io.sphere.sdk.producttypes"><code>ProductType</code></a>s. The key has an unique constraint.
 
  <h3 id="product-creation">Product Creation</h3>
 
@@ -770,7 +760,7 @@ import static java.util.stream.Collectors.toList;
     }
 
     private ProductTypeDraft createNutrientInformation() {
-        return ProductTypeDraft.of("NutrientInformation", "NutrientInformation",
+        return ProductTypeDraft.of(randomKey(), "NutrientInformation", "NutrientInformation",
                 asList(
                         AttributeDefinitionBuilder.of(NutrientInfo.quantityContainedUOM.getName(),
                                 en(NutrientInfo.quantityContainedUOM.getName()), StringType.of()).build(),
@@ -783,7 +773,7 @@ import static java.util.stream.Collectors.toList;
     }
 
     private ProductTypeDraft createNutrient(final Referenceable&lt;ProductType&gt; nutrientInformationType) {
-        return ProductTypeDraft.of("Nutrient", "Nutrient",
+        return ProductTypeDraft.of(randomKey(),"Nutrient", "Nutrient",
                 asList(
                         AttributeDefinitionBuilder.of(Nutrient.servingSizeUOM.getName(),
                                 en(Nutrient.servingSizeUOM.getName()), StringType.of()).build(),
@@ -794,7 +784,7 @@ import static java.util.stream.Collectors.toList;
     }
 
     private ProductTypeDraft createBanana(Referenceable&lt;ProductType&gt; nutrientType) {
-        return ProductTypeDraft.of("Banana", "Banana",
+        return ProductTypeDraft.of(randomKey(), "Banana", "Banana",
                 asList(
                         AttributeDefinitionBuilder.of(Banana.bananaColor.getName(),
                                 en(Banana.bananaColor.getName()), StringType.of()).build(),

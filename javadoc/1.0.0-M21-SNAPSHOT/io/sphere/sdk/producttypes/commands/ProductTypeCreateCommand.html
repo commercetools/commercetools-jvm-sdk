@@ -125,7 +125,7 @@ final AttributeDefinition sizeAttributeDefinition =
 
 final String name = getName();
 final ProductTypeDraft productTypeDraft =
-        ProductTypeDraft.of(name, "a 'T' shaped cloth", asList(sizeAttributeDefinition));
+        ProductTypeDraft.of(randomKey(), name, "a 'T' shaped cloth", asList(sizeAttributeDefinition));
 final ProductType productType = execute(ProductTypeCreateCommand.of(productTypeDraft));
 assertThat(productType.getName()).isEqualTo(name);
 assertThat(productType.getDescription()).isEqualTo("a 'T' shaped cloth");
@@ -144,6 +144,7 @@ import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.producttypes.ProductTypeDraft;
 import java.util.List;
 import java.util.function.Supplier;
+import static io.sphere.sdk.test.SphereTestUtils.randomKey;
 import static io.sphere.sdk.utils.ListUtils.asImmutableList;
 import static java.util.Arrays.asList;
 import static java.util.Locale.ENGLISH;
@@ -183,7 +184,7 @@ import static java.util.Locale.GERMAN;
 
     @Override
     public ProductTypeDraft get() {
-        return ProductTypeDraft.of(name, "a 'T' shaped cloth", createAttributes());
+        return ProductTypeDraft.of(randomKey(), name, "a 'T' shaped cloth", createAttributes());
     }
 
     private static List&lt;AttributeDefinition&gt; createAttributes() {
