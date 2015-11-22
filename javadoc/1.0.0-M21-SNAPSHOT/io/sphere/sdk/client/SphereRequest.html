@@ -176,14 +176,15 @@ var activeTableTab = "activeTableTab";
 <ul class="blockList">
 <li class="blockList">
 <h4>deserialize</h4>
-<pre><a href="../../../../io/sphere/sdk/client/SphereRequest.html" title="type parameter in SphereRequest">T</a>&nbsp;deserialize(<a href="../../../../io/sphere/sdk/http/HttpResponse.html" title="interface in io.sphere.sdk.http">HttpResponse</a>&nbsp;httpResponse)</pre>
+<pre>@Nullable
+<a href="../../../../io/sphere/sdk/client/SphereRequest.html" title="type parameter in SphereRequest">T</a>&nbsp;deserialize(<a href="../../../../io/sphere/sdk/http/HttpResponse.html" title="interface in io.sphere.sdk.http">HttpResponse</a>&nbsp;httpResponse)</pre>
 <div class="block">Takes an http response and maps it into a Java object of type T.
      Before calling this method, check with <a href="../../../../io/sphere/sdk/client/SphereRequest.html#canDeserialize-io.sphere.sdk.http.HttpResponse-"><code>canDeserialize(HttpResponse)</code></a> if the response can be consumed.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>httpResponse</code> - the http response of SPHERE.IO</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
-<dd>the deserialized object, it should not be null</dd>
+<dd>the deserialized object</dd>
 </dl>
 </li>
 </ul>

@@ -143,8 +143,8 @@ final AttributeDraft sizeValue = AttributeDraft.of(sizeAttribute, Sizes.M);
 withUpdateableProduct(client(), product -&gt; {
     assertThat(product.getMasterData().getStaged().getVariants()).isEmpty();
 
-    final Price price = PRICE;
-    final List&lt;Price&gt; prices = asList(price);
+    final PriceDraft price = PriceDraft.of(MoneyImpl.of(new BigDecimal("12.34"), EUR)).withCountry(DE);
+    final List&lt;PriceDraft&gt; prices = asList(price);
     final List&lt;AttributeDraft&gt; attributeValues = asList(moneyAttributeValue, colorAttributeValue, sizeValue);
     final ProductUpdateCommand addVariantCommand =
             ProductUpdateCommand.of(product, AddVariant.of(attributeValues, prices, randomKey()));

@@ -129,7 +129,7 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html"
  <p>See also <a href="../ProductUpdateCommand.html">ProductUpdateCommand</a>.<p>
 
  <div id="io-sphere-sdk-products-commands-ProductUpdateCommandTest-removePrice--%s" class=code-example><pre><code class='java'>withUpdateablePricedProduct(client(), product -&gt; {
-    final Price oldPrice = product.getMasterData().getStaged().getMasterVariant().getPrices().get(0);
+    final Price oldPrice = getFirstPrice(product);
 
     final Product updatedProduct = client()
             .execute(ProductUpdateCommand.of(product, RemovePrice.of(oldPrice)));

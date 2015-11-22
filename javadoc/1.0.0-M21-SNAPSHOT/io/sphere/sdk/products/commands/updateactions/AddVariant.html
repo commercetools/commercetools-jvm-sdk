@@ -143,8 +143,8 @@ final AttributeDraft sizeValue = AttributeDraft.of(sizeAttribute, Sizes.M);
 withUpdateableProduct(client(), product -&gt; {
     assertThat(product.getMasterData().getStaged().getVariants()).isEmpty();
 
-    final Price price = PRICE;
-    final List&lt;Price&gt; prices = asList(price);
+    final PriceDraft price = PriceDraft.of(MoneyImpl.of(new BigDecimal("12.34"), EUR)).withCountry(DE);
+    final List&lt;PriceDraft&gt; prices = asList(price);
     final List&lt;AttributeDraft&gt; attributeValues = asList(moneyAttributeValue, colorAttributeValue, sizeValue);
     final ProductUpdateCommand addVariantCommand =
             ProductUpdateCommand.of(product, AddVariant.of(attributeValues, prices, randomKey()));
@@ -189,7 +189,7 @@ withUpdateableProduct(client(), product -&gt; {
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../io/sphere/sdk/products/commands/updateactions/AddVariant.html#getAttributes--">getAttributes</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i1" class="rowColor">
-<td class="colFirst"><code>java.util.List&lt;<a href="../../../../../../io/sphere/sdk/products/Price.html" title="class in io.sphere.sdk.products">Price</a>&gt;</code></td>
+<td class="colFirst"><code>java.util.List&lt;<a href="../../../../../../io/sphere/sdk/products/PriceDraft.html" title="interface in io.sphere.sdk.products">PriceDraft</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../io/sphere/sdk/products/commands/updateactions/AddVariant.html#getPrices--">getPrices</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i2" class="altColor">
@@ -199,12 +199,12 @@ withUpdateableProduct(client(), product -&gt; {
 <tr id="i3" class="rowColor">
 <td class="colFirst"><code>static <a href="../../../../../../io/sphere/sdk/products/commands/updateactions/AddVariant.html" title="class in io.sphere.sdk.products.commands.updateactions">AddVariant</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../io/sphere/sdk/products/commands/updateactions/AddVariant.html#of-java.util.List-java.util.List-">of</a></span>(java.util.List&lt;<a href="../../../../../../io/sphere/sdk/products/attributes/AttributeDraft.html" title="class in io.sphere.sdk.products.attributes">AttributeDraft</a>&gt;&nbsp;attributes,
-  java.util.List&lt;<a href="../../../../../../io/sphere/sdk/products/Price.html" title="class in io.sphere.sdk.products">Price</a>&gt;&nbsp;prices)</code>&nbsp;</td>
+  java.util.List&lt;<a href="../../../../../../io/sphere/sdk/products/PriceDraft.html" title="interface in io.sphere.sdk.products">PriceDraft</a>&gt;&nbsp;prices)</code>&nbsp;</td>
 </tr>
 <tr id="i4" class="altColor">
 <td class="colFirst"><code>static <a href="../../../../../../io/sphere/sdk/products/commands/updateactions/AddVariant.html" title="class in io.sphere.sdk.products.commands.updateactions">AddVariant</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../io/sphere/sdk/products/commands/updateactions/AddVariant.html#of-java.util.List-java.util.List-java.lang.String-">of</a></span>(java.util.List&lt;<a href="../../../../../../io/sphere/sdk/products/attributes/AttributeDraft.html" title="class in io.sphere.sdk.products.attributes">AttributeDraft</a>&gt;&nbsp;attributes,
-  java.util.List&lt;<a href="../../../../../../io/sphere/sdk/products/Price.html" title="class in io.sphere.sdk.products">Price</a>&gt;&nbsp;prices,
+  java.util.List&lt;<a href="../../../../../../io/sphere/sdk/products/PriceDraft.html" title="interface in io.sphere.sdk.products">PriceDraft</a>&gt;&nbsp;prices,
   java.lang.String&nbsp;sku)</code>&nbsp;</td>
 </tr>
 </table>
@@ -258,7 +258,7 @@ withUpdateableProduct(client(), product -&gt; {
 <ul class="blockList">
 <li class="blockList">
 <h4>getPrices</h4>
-<pre>public&nbsp;java.util.List&lt;<a href="../../../../../../io/sphere/sdk/products/Price.html" title="class in io.sphere.sdk.products">Price</a>&gt;&nbsp;getPrices()</pre>
+<pre>public&nbsp;java.util.List&lt;<a href="../../../../../../io/sphere/sdk/products/PriceDraft.html" title="interface in io.sphere.sdk.products">PriceDraft</a>&gt;&nbsp;getPrices()</pre>
 </li>
 </ul>
 <a name="getSku--">
@@ -278,7 +278,7 @@ public&nbsp;java.lang.String&nbsp;getSku()</pre>
 <li class="blockList">
 <h4>of</h4>
 <pre>public static&nbsp;<a href="../../../../../../io/sphere/sdk/products/commands/updateactions/AddVariant.html" title="class in io.sphere.sdk.products.commands.updateactions">AddVariant</a>&nbsp;of(java.util.List&lt;<a href="../../../../../../io/sphere/sdk/products/attributes/AttributeDraft.html" title="class in io.sphere.sdk.products.attributes">AttributeDraft</a>&gt;&nbsp;attributes,
-                            java.util.List&lt;<a href="../../../../../../io/sphere/sdk/products/Price.html" title="class in io.sphere.sdk.products">Price</a>&gt;&nbsp;prices,
+                            java.util.List&lt;<a href="../../../../../../io/sphere/sdk/products/PriceDraft.html" title="interface in io.sphere.sdk.products">PriceDraft</a>&gt;&nbsp;prices,
                             @Nullable
                             java.lang.String&nbsp;sku)</pre>
 </li>
@@ -290,7 +290,7 @@ public&nbsp;java.lang.String&nbsp;getSku()</pre>
 <li class="blockList">
 <h4>of</h4>
 <pre>public static&nbsp;<a href="../../../../../../io/sphere/sdk/products/commands/updateactions/AddVariant.html" title="class in io.sphere.sdk.products.commands.updateactions">AddVariant</a>&nbsp;of(java.util.List&lt;<a href="../../../../../../io/sphere/sdk/products/attributes/AttributeDraft.html" title="class in io.sphere.sdk.products.attributes">AttributeDraft</a>&gt;&nbsp;attributes,
-                            java.util.List&lt;<a href="../../../../../../io/sphere/sdk/products/Price.html" title="class in io.sphere.sdk.products">Price</a>&gt;&nbsp;prices)</pre>
+                            java.util.List&lt;<a href="../../../../../../io/sphere/sdk/products/PriceDraft.html" title="interface in io.sphere.sdk.products">PriceDraft</a>&gt;&nbsp;prices)</pre>
 </li>
 </ul>
 </li>
