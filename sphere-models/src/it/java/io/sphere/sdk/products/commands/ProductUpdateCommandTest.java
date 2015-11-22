@@ -89,13 +89,13 @@ public class ProductUpdateCommandTest extends IntegrationTest {
             final Product updatedProduct = client()
                     .execute(ProductUpdateCommand.of(product, AddPrice.of(1, expectedPrice)));
 
-            final Price actualPrice = updatedProduct.getMasterData().getStaged().getMasterVariant().getPrices()
-                    .stream()
-                    .filter(p -> p.withId(null).equals(expectedPrice))
-                    .findFirst()
-                    .get();
 
-            assertThat(actualPrice.withId(null)).isEqualTo(expectedPrice);
+            final List<Price> prices = updatedProduct.getMasterData().getStaged().getMasterVariant().getPrices();
+            assertThat(prices).hasSize(1);
+            final Price actualPrice = prices.get(0);
+
+            assertThat(expectedPrice).isEqualTo(PriceDraft.of(actualPrice));
+
             return updatedProduct;
         });
     }
@@ -154,7 +154,7 @@ public class ProductUpdateCommandTest extends IntegrationTest {
                     .execute(ProductUpdateCommand.of(product, ChangePrice.of(prices.get(0), newPrice)));
 
             final Price actualPrice = getFirstPrice(updatedProduct);
-            assertThat(actualPrice.withId(null)).isEqualTo(newPrice);
+            assertThat(PriceDraft.of(actualPrice)).isEqualTo(newPrice);
 
             return updatedProduct;
         });

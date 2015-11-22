@@ -13,7 +13,7 @@ import org.junit.Test;
 
 import java.util.Locale;
 
-import static io.sphere.sdk.producttypes.ProductTypeFixtures.withProductType;
+import static io.sphere.sdk.producttypes.ProductTypeFixtures.withEmptyProductType;
 import static io.sphere.sdk.states.StateFixtures.withStateByBuilder;
 import static io.sphere.sdk.states.StateType.PRODUCT_STATE;
 import static io.sphere.sdk.taxcategories.TaxCategoryFixtures.defaultTaxCategory;
@@ -54,7 +54,7 @@ public class ProductCreateCommandTest extends IntegrationTest {
 
     @Test
     public void createProductWithCustomPrice() {
-        withProductType(client(), productType ->
+        withEmptyProductType(client(), randomKey(), productType ->
                 withUpdateableType(client(), type -> {
                     final String value = "foo";
                     final PriceDraft price = PriceDraft.of(EURO_1)
