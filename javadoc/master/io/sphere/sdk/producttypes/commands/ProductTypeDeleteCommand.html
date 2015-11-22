@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":17};
+var methods = {"i0":17,"i1":17};
 var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],16:["t5","Default Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -108,10 +108,19 @@ var activeTableTab = "activeTableTab";
 extends <a href="../../../../../io/sphere/sdk/commands/ByIdDeleteCommand.html" title="interface in io.sphere.sdk.commands">ByIdDeleteCommand</a>&lt;<a href="../../../../../io/sphere/sdk/producttypes/ProductType.html" title="interface in io.sphere.sdk.producttypes">ProductType</a>&gt;, <a href="../../../../../io/sphere/sdk/expansion/MetaModelExpansionDsl.html" title="interface in io.sphere.sdk.expansion">MetaModelExpansionDsl</a>&lt;<a href="../../../../../io/sphere/sdk/producttypes/ProductType.html" title="interface in io.sphere.sdk.producttypes">ProductType</a>,<a href="../../../../../io/sphere/sdk/producttypes/commands/ProductTypeDeleteCommand.html" title="interface in io.sphere.sdk.producttypes.commands">ProductTypeDeleteCommand</a>,<a href="../../../../../io/sphere/sdk/producttypes/expansion/ProductTypeExpansionModel.html" title="class in io.sphere.sdk.producttypes.expansion">ProductTypeExpansionModel</a>&lt;<a href="../../../../../io/sphere/sdk/producttypes/ProductType.html" title="interface in io.sphere.sdk.producttypes">ProductType</a>&gt;&gt;</pre>
 <div class="block">Deletes a product type.
 
- <p>Example:</p>
+ <p>Delete by ID:</p>
  <div id="io-sphere-sdk-producttypes-commands-ProductTypeDeleteCommandTest-execution--%s" class=code-example><pre><code class='java'>final ProductType productType = execute(ProductTypeCreateCommand.of(getDraft()));
 
 execute(ProductTypeDeleteCommand.of(productType));
+
+final Query&lt;ProductType&gt; query = ProductTypeQuery.of()
+        .withPredicates(m -&gt; m.id().is(productType.getId()));
+assertThat(execute(query).head()).isEmpty();
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/producttypes/commands/ProductTypeDeleteCommandTest.java" target="_blank">test code</a>.</pre></div>
+ <p>Delete by key:</p>
+ <div id="io-sphere-sdk-producttypes-commands-ProductTypeDeleteCommandTest-executionByKey--%s" class=code-example><pre><code class='java'>final ProductType productType = execute(ProductTypeCreateCommand.of(getDraft()));
+
+execute(ProductTypeDeleteCommand.ofKey(productType.getKey(), productType.getVersion()));
 
 final Query&lt;ProductType&gt; query = ProductTypeQuery.of()
         .withPredicates(m -&gt; m.id().is(productType.getId()));
@@ -138,6 +147,11 @@ assertThat(execute(query).head()).isEmpty();
 <tr id="i0" class="altColor">
 <td class="colFirst"><code>static <a href="../../../../../io/sphere/sdk/producttypes/commands/ProductTypeDeleteCommand.html" title="interface in io.sphere.sdk.producttypes.commands">ProductTypeDeleteCommand</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/producttypes/commands/ProductTypeDeleteCommand.html#of-io.sphere.sdk.models.Versioned-">of</a></span>(<a href="../../../../../io/sphere/sdk/models/Versioned.html" title="interface in io.sphere.sdk.models">Versioned</a>&lt;<a href="../../../../../io/sphere/sdk/producttypes/ProductType.html" title="interface in io.sphere.sdk.producttypes">ProductType</a>&gt;&nbsp;versioned)</code>&nbsp;</td>
+</tr>
+<tr id="i1" class="rowColor">
+<td class="colFirst"><code>static <a href="../../../../../io/sphere/sdk/producttypes/commands/ProductTypeDeleteCommand.html" title="interface in io.sphere.sdk.producttypes.commands">ProductTypeDeleteCommand</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/producttypes/commands/ProductTypeDeleteCommand.html#ofKey-java.lang.String-java.lang.Long-">ofKey</a></span>(java.lang.String&nbsp;key,
+     java.lang.Long&nbsp;version)</code>&nbsp;</td>
 </tr>
 </table>
 <ul class="blockList">
@@ -185,10 +199,20 @@ assertThat(execute(query).head()).isEmpty();
 <a name="of-io.sphere.sdk.models.Versioned-">
 <!--   -->
 </a>
-<ul class="blockListLast">
+<ul class="blockList">
 <li class="blockList">
 <h4>of</h4>
 <pre>static&nbsp;<a href="../../../../../io/sphere/sdk/producttypes/commands/ProductTypeDeleteCommand.html" title="interface in io.sphere.sdk.producttypes.commands">ProductTypeDeleteCommand</a>&nbsp;of(<a href="../../../../../io/sphere/sdk/models/Versioned.html" title="interface in io.sphere.sdk.models">Versioned</a>&lt;<a href="../../../../../io/sphere/sdk/producttypes/ProductType.html" title="interface in io.sphere.sdk.producttypes">ProductType</a>&gt;&nbsp;versioned)</pre>
+</li>
+</ul>
+<a name="ofKey-java.lang.String-java.lang.Long-">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>ofKey</h4>
+<pre>static&nbsp;<a href="../../../../../io/sphere/sdk/producttypes/commands/ProductTypeDeleteCommand.html" title="interface in io.sphere.sdk.producttypes.commands">ProductTypeDeleteCommand</a>&nbsp;ofKey(java.lang.String&nbsp;key,
+                                      java.lang.Long&nbsp;version)</pre>
 </li>
 </ul>
 </li>
