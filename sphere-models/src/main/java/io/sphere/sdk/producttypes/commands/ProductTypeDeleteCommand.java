@@ -8,12 +8,19 @@ import io.sphere.sdk.producttypes.expansion.ProductTypeExpansionModel;
 
 /** Deletes a product type.
 
- <p>Example:</p>
+ <p>Delete by ID:</p>
  {@include.example io.sphere.sdk.producttypes.commands.ProductTypeDeleteCommandTest#execution()}
+ <p>Delete by key:</p>
+ {@include.example io.sphere.sdk.producttypes.commands.ProductTypeDeleteCommandTest#io.sphere.sdk.producttypes.commands.ProductTypeDeleteCommandTest#executionByKey()()}
 
  */
 public interface ProductTypeDeleteCommand extends ByIdDeleteCommand<ProductType>, MetaModelExpansionDsl<ProductType, ProductTypeDeleteCommand, ProductTypeExpansionModel<ProductType>> {
     static ProductTypeDeleteCommand of(final Versioned<ProductType> versioned) {
         return new ProductTypeDeleteCommandImpl(versioned);
+    }
+
+    static ProductTypeDeleteCommand ofKey(final String key, final Long version) {
+        final Versioned<ProductType> versioned = Versioned.of("key=" + key, version);//hack for simple reuse
+        return of(versioned);
     }
 }

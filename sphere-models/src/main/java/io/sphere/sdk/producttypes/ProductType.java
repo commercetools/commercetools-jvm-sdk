@@ -2,10 +2,9 @@ package io.sphere.sdk.producttypes;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import io.sphere.sdk.models.Resource;
 import io.sphere.sdk.models.Reference;
+import io.sphere.sdk.models.Resource;
 import io.sphere.sdk.products.attributes.AttributeDefinition;
-import org.apache.commons.lang3.StringUtils;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -13,13 +12,12 @@ import java.util.Optional;
 
 /** Describes common characteristics, most importantly common custom attributes, of many concrete products.
 
- <p id=operations>Operations:</p>
- <ul>
-    <li>Create a product type with {@link io.sphere.sdk.producttypes.commands.ProductTypeCreateCommand}.</li>
-    <li>Query a product type with {@link io.sphere.sdk.producttypes.queries.ProductTypeQuery}.</li>
-    <li>Delete a product type with {@link io.sphere.sdk.producttypes.commands.ProductTypeDeleteCommand}.</li>
- </ul>
-
+ @see io.sphere.sdk.producttypes.commands.ProductTypeCreateCommand
+ @see io.sphere.sdk.producttypes.commands.ProductTypeUpdateCommand
+ @see io.sphere.sdk.producttypes.commands.ProductTypeDeleteCommand
+ @see io.sphere.sdk.producttypes.queries.ProductTypeQuery
+ @see io.sphere.sdk.producttypes.queries.ProductTypeByIdGet
+ @see io.sphere.sdk.producttypes.queries.ProductTypeByKeyGet
  */
 @JsonDeserialize(as=ProductTypeImpl.class)
 public interface ProductType extends Resource<ProductType>, AttributeDefinitionContainer {
@@ -40,6 +38,9 @@ public interface ProductType extends Resource<ProductType>, AttributeDefinitionC
     default Optional<AttributeDefinition> findAttribute(final String attributeName) {
         return AttributeDefinitionContainer.super.findAttribute(attributeName);
     }
+
+    @Nullable
+    String getKey();
 
     @Override
     default Reference<ProductType> toReference() {

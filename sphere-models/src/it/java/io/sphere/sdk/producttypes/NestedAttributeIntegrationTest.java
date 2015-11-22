@@ -134,7 +134,7 @@ public final class NestedAttributeIntegrationTest extends IntegrationTest {
     }
 
     private ProductTypeDraft createNutrientInformation() {
-        return ProductTypeDraft.of("NutrientInformation", "NutrientInformation",
+        return ProductTypeDraft.of(randomKey(), "NutrientInformation", "NutrientInformation",
                 asList(
                         AttributeDefinitionBuilder.of(NutrientInfo.quantityContainedUOM.getName(),
                                 en(NutrientInfo.quantityContainedUOM.getName()), StringType.of()).build(),
@@ -147,7 +147,7 @@ public final class NestedAttributeIntegrationTest extends IntegrationTest {
     }
 
     private ProductTypeDraft createNutrient(final Referenceable<ProductType> nutrientInformationType) {
-        return ProductTypeDraft.of("Nutrient", "Nutrient",
+        return ProductTypeDraft.of(randomKey(),"Nutrient", "Nutrient",
                 asList(
                         AttributeDefinitionBuilder.of(Nutrient.servingSizeUOM.getName(),
                                 en(Nutrient.servingSizeUOM.getName()), StringType.of()).build(),
@@ -158,7 +158,7 @@ public final class NestedAttributeIntegrationTest extends IntegrationTest {
     }
 
     private ProductTypeDraft createBanana(Referenceable<ProductType> nutrientType) {
-        return ProductTypeDraft.of("Banana", "Banana",
+        return ProductTypeDraft.of(randomKey(), "Banana", "Banana",
                 asList(
                         AttributeDefinitionBuilder.of(Banana.bananaColor.getName(),
                                 en(Banana.bananaColor.getName()), StringType.of()).build(),

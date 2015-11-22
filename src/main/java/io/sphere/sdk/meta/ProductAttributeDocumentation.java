@@ -45,16 +45,8 @@ import io.sphere.sdk.products.ProductVariantDraftBuilder;
 
 
 
- <p>{@link io.sphere.sdk.producttypes.ProductType}s have a name (String)
- which can be used as key to logically identify {@link io.sphere.sdk.producttypes.ProductType}s. Beware that the name has no unique constraint,
- so it is possible to create multiple {@link io.sphere.sdk.producttypes.ProductType}s with the same name which will cause confusion.
- </p><p>Check if product type with the same name exists:</p>
-
- {@include.example io.sphere.sdk.attributestutorial.ProductTypeCreationDemoTest#demoCheckingIfProductTypeExist()}
-
-
-
-
+ <p>{@link io.sphere.sdk.producttypes.ProductType}s have a key (String)
+ which can be used as key to logically identify {@link io.sphere.sdk.producttypes.ProductType}s. The key has an unique constraint.
 
  <h3 id="product-creation">Product Creation</h3>
 
