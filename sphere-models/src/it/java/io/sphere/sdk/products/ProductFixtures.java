@@ -182,4 +182,15 @@ public class ProductFixtures {
             withProduct(client, productDraftBuilder, consumer);
         });
     }
+
+    public static void creatingProduct(final TestClient client, final UnaryOperator<ProductDraftBuilder> builderMapper, final UnaryOperator<Product> op) {
+        withProductType(client, randomKey(), productType -> {
+            final ProductVariantDraft masterVariant = ProductVariantDraftBuilder.of().build();
+            final ProductDraftBuilder builder = ProductDraftBuilder.of(productType, randomSlug(), randomSlug(), masterVariant);
+            final ProductDraft productDraft = builderMapper.apply(builder).build();
+            final Product product = client.execute(ProductCreateCommand.of(productDraft));
+            final Product updatedProduct = op.apply(product);
+            client.execute(ProductDeleteCommand.of(updatedProduct));
+        });
+    }
 }

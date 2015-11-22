@@ -168,4 +168,8 @@ public class Price extends Base implements Custom {
     public boolean equalsIgnoreId(final Price price) {
         return price != null && withId(null).equals(price.withId(null));
     }
+
+    public static String resourceTypeId() {
+        return "product-price";
+    }
 }

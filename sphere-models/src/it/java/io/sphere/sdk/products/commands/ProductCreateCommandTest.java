@@ -6,20 +6,21 @@ import io.sphere.sdk.producttypes.ProductTypeFixtures;
 import io.sphere.sdk.search.SearchKeyword;
 import io.sphere.sdk.search.SearchKeywords;
 import io.sphere.sdk.search.tokenizer.CustomSuggestTokenizer;
-import io.sphere.sdk.states.StateFixtures;
-import io.sphere.sdk.states.StateType;
 import io.sphere.sdk.taxcategories.TaxCategory;
 import io.sphere.sdk.test.IntegrationTest;
+import io.sphere.sdk.types.CustomFieldsDraft;
 import org.junit.Test;
 
 import java.util.Locale;
 
+import static io.sphere.sdk.producttypes.ProductTypeFixtures.withProductType;
 import static io.sphere.sdk.states.StateFixtures.withStateByBuilder;
 import static io.sphere.sdk.states.StateType.PRODUCT_STATE;
 import static io.sphere.sdk.taxcategories.TaxCategoryFixtures.defaultTaxCategory;
-import static io.sphere.sdk.test.SphereTestUtils.asList;
-import static io.sphere.sdk.test.SphereTestUtils.en;
-import static io.sphere.sdk.test.SphereTestUtils.randomSlug;
+import static io.sphere.sdk.test.SphereTestUtils.*;
+import static io.sphere.sdk.types.TypeFixtures.STRING_FIELD_NAME;
+import static io.sphere.sdk.types.TypeFixtures.withUpdateableType;
+import static java.util.Collections.singletonMap;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class ProductCreateCommandTest extends IntegrationTest {
@@ -49,5 +50,29 @@ public class ProductCreateCommandTest extends IntegrationTest {
             //clean up test
             execute(ProductDeleteCommand.of(product));
         });
+    }
+
+    @Test
+    public void createProductWithCustomPrice() {
+        withProductType(client(), productType ->
+                withUpdateableType(client(), type -> {
+                    final String value = "foo";
+                    final PriceDraft price = PriceDraft.of(EURO_1)
+                            .withCustom(CustomFieldsDraft.ofTypeIdAndObjects(type.getId(), singletonMap(STRING_FIELD_NAME, value)));
+                    final ProductVariantDraft masterVariant = ProductVariantDraftBuilder.of().price(price).build();
+                    final ProductDraft productDraft = ProductDraftBuilder.of(productType, randomSlug(), randomSlug(), masterVariant).build();
+
+                    final Product product = execute(ProductCreateCommand.of(productDraft));
+                    final Price loadedPrice = product.getMasterData().getStaged().getMasterVariant().getPrices().get(0);
+
+                    assertThat(loadedPrice.getValue()).isEqualTo(EURO_1);
+                    assertThat(loadedPrice.getCustom().getFieldAsString(STRING_FIELD_NAME)).isEqualTo(value);
+
+                    execute(ProductDeleteCommand.of(product));
+
+                    return type;
+                })
+        );
+
     }
 }

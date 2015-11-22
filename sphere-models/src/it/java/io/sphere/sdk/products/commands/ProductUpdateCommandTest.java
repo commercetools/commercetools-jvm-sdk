@@ -43,6 +43,8 @@ import static io.sphere.sdk.states.StateType.PRODUCT_STATE;
 import static io.sphere.sdk.suppliers.TShirtProductTypeDraftSupplier.MONEY_ATTRIBUTE_NAME;
 import static io.sphere.sdk.test.SphereTestUtils.*;
 import static io.sphere.sdk.test.SphereTestUtils.MASTER_VARIANT_ID;
+import static io.sphere.sdk.types.TypeFixtures.STRING_FIELD_NAME;
+import static io.sphere.sdk.types.TypeFixtures.withUpdateableType;
 import static java.util.Locale.ENGLISH;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -151,7 +153,7 @@ public class ProductUpdateCommandTest extends IntegrationTest {
             final Product updatedProduct = client()
                     .execute(ProductUpdateCommand.of(product, ChangePrice.of(prices.get(0), newPrice)));
 
-            final Price actualPrice = updatedProduct.getMasterData().getStaged().getMasterVariant().getPrices().get(0);
+            final Price actualPrice = getFirstPrice(updatedProduct);
             assertThat(actualPrice.withId(null)).isEqualTo(newPrice);
 
             return updatedProduct;
@@ -199,7 +201,7 @@ public class ProductUpdateCommandTest extends IntegrationTest {
     @Test
     public void removePrice() throws Exception {
         withUpdateablePricedProduct(client(), product -> {
-            final Price oldPrice = product.getMasterData().getStaged().getMasterVariant().getPrices().get(0);
+            final Price oldPrice = getFirstPrice(product);
 
             final Product updatedProduct = client()
                     .execute(ProductUpdateCommand.of(product, RemovePrice.of(oldPrice)));
@@ -517,5 +519,32 @@ public class ProductUpdateCommandTest extends IntegrationTest {
                 return updatedProduct;
             });
         });
+    }
+
+    @Test
+    public void setProductPriceCustomTypeAndsetProductPriceCustomField() {
+        withUpdateableType(client(), type -> {
+            withUpdateablePricedProduct(client(), product -> {
+                final String priceId = getFirstPrice(product).getId();
+                final UpdateAction<Product> updateAction = SetProductPriceCustomType.
+                        ofTypeIdAndObjects(type.getId(), STRING_FIELD_NAME, "a value", priceId);
+                final ProductUpdateCommand productUpdateCommand = ProductUpdateCommand.of(product, updateAction);
+                final Product updatedProduct = execute(productUpdateCommand);
+
+                final Price price = getFirstPrice(updatedProduct);
+                assertThat(price.getCustom().getFieldAsString(STRING_FIELD_NAME))
+                        .isEqualTo("a value");
+
+                final Product updated2 = execute(ProductUpdateCommand.of(updatedProduct, SetProductPriceCustomField.ofObject(STRING_FIELD_NAME, "a new value", priceId)));
+                assertThat(getFirstPrice(updated2).getCustom().getFieldAsString(STRING_FIELD_NAME))
+                        .isEqualTo("a new value");
+                return updated2;
+            });
+            return type;
+        });
+    }
+
+    private Price getFirstPrice(final Product product) {
+        return product.getMasterData().getStaged().getMasterVariant().getPrices().get(0);
     }
 }
