@@ -45,6 +45,7 @@ import java.util.concurrent.CompletionStage;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
+import static io.sphere.sdk.test.SphereTestUtils.randomKey;
 import static java.lang.String.format;
 import static java.util.Arrays.asList;
 import static java.util.Locale.ENGLISH;
@@ -284,7 +285,7 @@ public class CategoryDocumentationTest extends IntegrationTest {
 
 
     private static void withProductInCategory(final TestClient client, final Referenceable<Category> category, final Consumer<Product> user) {
-        final ProductType productType = client.execute(ProductTypeCreateCommand.of(ProductTypeDraft.of(CategoryDocumentationTest.class.getSimpleName(), "", asList())));
+        final ProductType productType = client.execute(ProductTypeCreateCommand.of(ProductTypeDraft.of(randomKey(), CategoryDocumentationTest.class.getSimpleName(), "", asList())));
         final LocalizedString name = LocalizedString.of(ENGLISH, "foo");
         final Product product = client.execute(ProductCreateCommand.of(ProductDraftBuilder.of(productType, name, name.slugifiedUnique(), ProductVariantDraftBuilder.of().build()).categories(SetUtils.asSet(category.toReference())).build()));
         user.accept(product);

@@ -32,6 +32,17 @@ public class ProductTypeUpdateCommandTest extends IntegrationTest {
     }
 
     @Test
+    public void changeNameByKeyUpdate() throws Exception {
+        withUpdateableProductType(client(), productType -> {
+            final String name = randomKey();
+            final ProductType updatedProductType =
+                    execute(ProductTypeUpdateCommand.ofKey(productType.getKey(), productType.getVersion(), ChangeName.of(name)));
+            assertThat(updatedProductType.getName()).isEqualTo(name);
+            return updatedProductType;
+        });
+    }
+
+    @Test
     public void changeDescription() throws Exception {
         withUpdateableProductType(client(), productType -> {
             final String description = randomKey();

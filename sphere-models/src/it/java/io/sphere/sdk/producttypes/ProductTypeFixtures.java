@@ -30,7 +30,7 @@ public final class ProductTypeFixtures {
     }
 
     public static void withEmptyProductType(final TestClient client, final String name, final Consumer<ProductType> user) {
-        withProductType(client, () -> ProductTypeDraft.of(name, "desc", Collections.emptyList()), user);
+        withProductType(client, () -> ProductTypeDraft.of(randomKey(), name, "desc", Collections.emptyList()), user);
     }
 
     public static void withProductType(final TestClient client, final Consumer<ProductType> user) {
@@ -89,7 +89,7 @@ public final class ProductTypeFixtures {
                 .of("productreference", en("suggested product"), ReferenceType.ofProduct())
                 .required(true)
                 .build();
-        final ProductTypeDraft productTypeDraft = ProductTypeDraft.of(productReferenceProductTypeName, "has an attribute which is reference to a product", asList(productReferenceDefinition));
+        final ProductTypeDraft productTypeDraft = ProductTypeDraft.of(randomKey(), productReferenceProductTypeName, "has an attribute which is reference to a product", asList(productReferenceDefinition));
         final Optional<ProductType> productTypeOptional = client.execute(ProductTypeQuery.of().byName(productReferenceProductTypeName)).head();
         return productTypeOptional.orElseGet(() -> client.execute(ProductTypeCreateCommand.of(productTypeDraft)));
     }
@@ -100,7 +100,7 @@ public final class ProductTypeFixtures {
     }
 
     public static ProductType createProductType(final TestClient client, final String name) {
-        final ProductTypeDraft productTypeDraft = ProductTypeDraft.of(name, "", asList());
+        final ProductTypeDraft productTypeDraft = ProductTypeDraft.of(randomKey(), name, "", asList());
         return client.execute(ProductTypeQuery.of().byName(name)).head()
                 .orElseGet(() -> client.execute(ProductTypeCreateCommand.of(productTypeDraft)));
     }

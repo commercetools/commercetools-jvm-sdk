@@ -9,6 +9,7 @@ import io.sphere.sdk.producttypes.ProductTypeDraft;
 import java.util.List;
 import java.util.function.Supplier;
 
+import static io.sphere.sdk.test.SphereTestUtils.randomKey;
 import static io.sphere.sdk.utils.ListUtils.asImmutableList;
 import static java.util.Arrays.asList;
 import static java.util.Locale.ENGLISH;
@@ -49,7 +50,7 @@ public class TShirtProductTypeDraftSupplier implements Supplier<ProductTypeDraft
 
     @Override
     public ProductTypeDraft get() {
-        return ProductTypeDraft.of(name, "a 'T' shaped cloth", createAttributes());
+        return ProductTypeDraft.of(randomKey(), name, "a 'T' shaped cloth", createAttributes());
     }
 
     private static List<AttributeDefinition> createAttributes() {

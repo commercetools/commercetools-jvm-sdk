@@ -22,6 +22,17 @@ public class ProductTypeDeleteCommandTest extends IntegrationTest {
         assertThat(execute(query).head()).isEmpty();
     }
 
+    @Test
+    public void executionByKey() throws Exception {
+        final ProductType productType = execute(ProductTypeCreateCommand.of(getDraft()));
+
+        execute(ProductTypeDeleteCommand.ofKey(productType.getKey(), productType.getVersion()));
+
+        final Query<ProductType> query = ProductTypeQuery.of()
+                .withPredicates(m -> m.id().is(productType.getId()));
+        assertThat(execute(query).head()).isEmpty();
+    }
+
     private ProductTypeDraft getDraft() {
         return new TShirtProductTypeDraftSupplier(getProductTypeName()).get();
     }

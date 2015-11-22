@@ -36,6 +36,10 @@ public interface ProductTypeQuery extends MetaModelQueryDsl<ProductType, Product
         return withPredicates(m -> m.name().is(name));
     }
 
+    default ProductTypeQuery byKey(String key) {
+        return withPredicates(m -> m.key().is(key));
+    }
+
     static ProductTypeQuery of() {
         return new ProductTypeQueryImpl();
     }

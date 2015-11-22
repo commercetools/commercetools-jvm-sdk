@@ -16,6 +16,7 @@ import org.junit.Test;
 
 import java.util.List;
 
+import static io.sphere.sdk.test.SphereTestUtils.randomKey;
 import static java.util.Arrays.asList;
 import static java.util.Locale.ENGLISH;
 import static java.util.Locale.GERMAN;
@@ -44,7 +45,7 @@ public class ProductTypeCreateCommandTest extends IntegrationTest {
 
         final String name = getName();
         final ProductTypeDraft productTypeDraft =
-                ProductTypeDraft.of(name, "a 'T' shaped cloth", asList(sizeAttributeDefinition));
+                ProductTypeDraft.of(randomKey(), name, "a 'T' shaped cloth", asList(sizeAttributeDefinition));
         final ProductType productType = execute(ProductTypeCreateCommand.of(productTypeDraft));
         assertThat(productType.getName()).isEqualTo(name);
         assertThat(productType.getDescription()).isEqualTo("a 'T' shaped cloth");

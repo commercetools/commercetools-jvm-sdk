@@ -54,7 +54,7 @@ public final class ProductTypeAttributesTest extends IntegrationTest {
         final NamedAttributeAccess<Double> sizeAttr = AttributeAccess.ofDouble().ofName("size-nested");
         final NamedAttributeAccess<String> brandAttr = AttributeAccess.ofString().ofName("brand-nested");
 
-        final ProductTypeDraft productTypeDraft = ProductTypeDraft.of("test-sub-attribute", "nested attribute test",
+        final ProductTypeDraft productTypeDraft = ProductTypeDraft.of(randomKey(), "test-sub-attribute", "nested attribute test",
                 asList(
                         AttributeDefinitionBuilder.of(sizeAttr.getName(), LocalizedString.of(Locale.ENGLISH, "Size"), NumberType.of()).build(),
                         AttributeDefinitionBuilder.of(brandAttr.getName(), LocalizedString.of(Locale.ENGLISH, "Brand"), StringType.of()).build()));
@@ -272,7 +272,7 @@ public final class ProductTypeAttributesTest extends IntegrationTest {
     }
 
     private void withDistractorProductType(final Consumer<ProductType> consumer) {
-        withProductType(client(), () -> ProductTypeDraft.of(distractorName, "desc", Collections.emptyList()), consumer);
+        withProductType(client(), () -> ProductTypeDraft.of(randomKey(), distractorName, "desc", Collections.emptyList()), consumer);
     }
 
     private void withTShirtProductType(final Consumer<ProductType> consumer) {
@@ -309,7 +309,7 @@ public final class ProductTypeAttributesTest extends IntegrationTest {
 
         final List<AttributeDefinition> attributes = asList(attributeDefinition);
 
-        final ProductTypeCreateCommand command = ProductTypeCreateCommand.of(ProductTypeDraft.of(productTypeName, productTypeDescription, attributes));
+        final ProductTypeCreateCommand command = ProductTypeCreateCommand.of(ProductTypeDraft.of(randomKey(), productTypeName, productTypeDescription, attributes));
         final ProductType productType = execute(command);
         assertThat(productType.getName()).isEqualTo(productTypeName);
         assertThat(productType.getDescription()).isEqualTo(productTypeDescription);
@@ -356,7 +356,7 @@ public final class ProductTypeAttributesTest extends IntegrationTest {
 
         final List<AttributeDefinition> attributes = asList(attributeDefinition);
 
-        final ProductTypeCreateCommand command = ProductTypeCreateCommand.of(ProductTypeDraft.of(productTypeName, productTypeDescription, attributes));
+        final ProductTypeCreateCommand command = ProductTypeCreateCommand.of(ProductTypeDraft.of(randomKey(), productTypeName, productTypeDescription, attributes));
         final ProductType productType = execute(command);
         assertThat(productType.getName()).isEqualTo(productTypeName);
         assertThat(productType.getDescription()).isEqualTo(productTypeDescription);

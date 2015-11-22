@@ -64,11 +64,6 @@ public class ProductTypeCreationDemoTest extends IntegrationTest {
     private static final String AVAILABLE_SINCE_ATTR_NAME = "AttributeTutorialAvailableSince";
     private static final String ISBN_ATTR_NAME = "AttributeTutorialIsbn";
 
-    public void demoCheckingIfProductTypeExist() {
-        final ProductTypeQuery query = ProductTypeQuery.of().byName(PRODUCT_TYPE_NAME);
-        final boolean productTypeAlreadyExists = client().execute(query).head().isPresent();
-    }
-
     public ProductType fetchProductTypeByName() {
         final Optional<ProductType> productTypeOptional =
                 client().execute(ProductTypeQuery.of().byName(PRODUCT_TYPE_NAME)).head();
@@ -97,7 +92,7 @@ public class ProductTypeCreationDemoTest extends IntegrationTest {
                 .of(ISBN_ATTR_NAME, en("ISBN"), StringType.of())
                 .build();
 
-        final ProductTypeDraft productTypeDraft = ProductTypeDraft.of(BOOK_PRODUCT_TYPE_NAME, "books", asList(isbn));
+        final ProductTypeDraft productTypeDraft = ProductTypeDraft.of(randomKey(), BOOK_PRODUCT_TYPE_NAME, "books", asList(isbn));
         final ProductType productType = client().execute(ProductTypeCreateCommand.of(productTypeDraft));
     }
 
@@ -148,7 +143,7 @@ public class ProductTypeCreationDemoTest extends IntegrationTest {
 
         final List<AttributeDefinition> attributes = asList(color, size, laundrySymbols,
                 matchingProducts, rrp, availableSince);
-        final ProductTypeDraft productTypeDraft = ProductTypeDraft.of(PRODUCT_TYPE_NAME, "a 'T' shaped cloth", attributes);
+        final ProductTypeDraft productTypeDraft = ProductTypeDraft.of(randomKey(), PRODUCT_TYPE_NAME, "a 'T' shaped cloth", attributes);
         final ProductType productType = client().execute(ProductTypeCreateCommand.of(productTypeDraft));
     }
 

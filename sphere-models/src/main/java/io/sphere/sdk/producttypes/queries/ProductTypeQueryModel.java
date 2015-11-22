@@ -19,6 +19,10 @@ public final class ProductTypeQueryModel extends ResourceQueryModelImpl<ProductT
         return stringModel("name");
     }
 
+    public StringQuerySortingModel<ProductType> key() {
+        return stringModel("key");
+    }
+
     public AttributeDefinitionQueryModel<ProductType> attributes() {
         return new AttributeDefinitionQueryModel<>(this, "attributes");
     }
