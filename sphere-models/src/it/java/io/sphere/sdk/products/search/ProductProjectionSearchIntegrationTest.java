@@ -122,12 +122,12 @@ public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
         final LocalizedString name = LocalizedString.of(GERMAN, germanName, ENGLISH, englishName);
         final ProductVariantDraft masterVariant = ProductVariantDraftBuilder.of()
                 .attributes(AttributeDraft.of(ATTR_NAME_SIZE, size1), AttributeDraft.of(ATTR_NAME_COLOR, color))
-                .price(Price.of(new BigDecimal("23.45"), EUR))
+                .price(PriceDraft.of(new BigDecimal("23.45"), EUR))
                 .sku(sku)
                 .build();
         final ProductVariantDraft variant = ProductVariantDraftBuilder.of()
                 .attributes(AttributeDraft.of(ATTR_NAME_SIZE, size2))
-                .price(Price.of(new BigDecimal("27.45"), EUR))
+                .price(PriceDraft.of(new BigDecimal("27.45"), EUR))
                 .build();
         final ProductDraft productDraft = ProductDraftBuilder.of(productType, name, name.slugifiedUnique(), masterVariant)
                 .variants(singletonList(variant)).build();

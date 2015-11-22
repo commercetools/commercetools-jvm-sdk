@@ -44,6 +44,8 @@ import static io.sphere.sdk.states.StateType.PRODUCT_STATE;
 import static io.sphere.sdk.suppliers.TShirtProductTypeDraftSupplier.MONEY_ATTRIBUTE_NAME;
 import static io.sphere.sdk.test.SphereTestUtils.*;
 import static io.sphere.sdk.test.SphereTestUtils.MASTER_VARIANT_ID;
+import static io.sphere.sdk.types.TypeFixtures.STRING_FIELD_NAME;
+import static io.sphere.sdk.types.TypeFixtures.withUpdateableType;
 import static java.util.Locale.ENGLISH;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -65,36 +67,36 @@ public class ProductUpdateCommandTest extends IntegrationTest {
 
     @Test
     public void addPrice() throws Exception {
-        final Price expectedPrice = Price.of(MoneyImpl.of(123, EUR));
+        final PriceDraft expectedPrice = PriceDraft.of(MoneyImpl.of(123, EUR));
         testAddPrice(expectedPrice);
     }
 
     @Test
     public void addPriceYen() throws Exception {
-        final Price expectedPrice = Price.of(MoneyImpl.of(new BigDecimal("12345"), "JPY"));
+        final PriceDraft expectedPrice = PriceDraft.of(MoneyImpl.of(new BigDecimal("12345"), "JPY"));
         testAddPrice(expectedPrice);
     }
 
     @Test
     public void addPriceWithValidityPeriod() throws Exception {
-        final Price expectedPrice = Price.of(MoneyImpl.of(123, EUR))
+        final PriceDraft expectedPrice = PriceDraft.of(MoneyImpl.of(123, EUR))
                 .withValidFrom(SphereTestUtils.now())
                 .withValidUntil(SphereTestUtils.now().withZoneSameLocal(ZoneOffset.UTC).plusHours(2));
         testAddPrice(expectedPrice);
     }
 
-    private void testAddPrice(final Price expectedPrice) throws Exception {
+    private void testAddPrice(final PriceDraft expectedPrice) throws Exception {
         withUpdateableProduct(client(), product -> {
             final Product updatedProduct = client()
                     .execute(ProductUpdateCommand.of(product, AddPrice.of(1, expectedPrice)));
 
-            final Price actualPrice = updatedProduct.getMasterData().getStaged().getMasterVariant().getPrices()
-                    .stream()
-                    .filter(p -> p.withId(null).equals(expectedPrice))
-                    .findFirst()
-                    .get();
 
-            assertThat(actualPrice.withId(null)).isEqualTo(expectedPrice);
+            final List<Price> prices = updatedProduct.getMasterData().getStaged().getMasterVariant().getPrices();
+            assertThat(prices).hasSize(1);
+            final Price actualPrice = prices.get(0);
+
+            assertThat(expectedPrice).isEqualTo(PriceDraft.of(actualPrice));
+
             return updatedProduct;
         });
     }
@@ -144,7 +146,7 @@ public class ProductUpdateCommandTest extends IntegrationTest {
     @Test
     public void changePrice() throws Exception {
         withUpdateablePricedProduct(client(), product -> {
-            final Price newPrice = Price.of(MoneyImpl.of(234, EUR));
+            final PriceDraft newPrice = PriceDraft.of(MoneyImpl.of(234, EUR));
             final List<Price> prices = product.getMasterData().getStaged().getMasterVariant()
                     .getPrices();
             assertThat(prices.stream().anyMatch(p -> p.equals(newPrice))).isFalse();
@@ -152,8 +154,8 @@ public class ProductUpdateCommandTest extends IntegrationTest {
             final Product updatedProduct = client()
                     .execute(ProductUpdateCommand.of(product, ChangePrice.of(prices.get(0), newPrice)));
 
-            final Price actualPrice = updatedProduct.getMasterData().getStaged().getMasterVariant().getPrices().get(0);
-            assertThat(actualPrice.withId(null)).isEqualTo(newPrice);
+            final Price actualPrice = getFirstPrice(updatedProduct);
+            assertThat(PriceDraft.of(actualPrice)).isEqualTo(newPrice);
 
             return updatedProduct;
         });
@@ -200,7 +202,7 @@ public class ProductUpdateCommandTest extends IntegrationTest {
     @Test
     public void removePrice() throws Exception {
         withUpdateablePricedProduct(client(), product -> {
-            final Price oldPrice = product.getMasterData().getStaged().getMasterVariant().getPrices().get(0);
+            final Price oldPrice = getFirstPrice(product);
 
             final Product updatedProduct = client()
                     .execute(ProductUpdateCommand.of(product, RemovePrice.of(oldPrice)));
@@ -441,8 +443,8 @@ public class ProductUpdateCommandTest extends IntegrationTest {
         withUpdateableProduct(client(), product -> {
             assertThat(product.getMasterData().getStaged().getVariants()).isEmpty();
 
-            final Price price = PRICE;
-            final List<Price> prices = asList(price);
+            final PriceDraft price = PriceDraft.of(MoneyImpl.of(new BigDecimal("12.34"), EUR)).withCountry(DE);
+            final List<PriceDraft> prices = asList(price);
             final List<AttributeDraft> attributeValues = asList(moneyAttributeValue, colorAttributeValue, sizeValue);
             final ProductUpdateCommand addVariantCommand =
                     ProductUpdateCommand.of(product, AddVariant.of(attributeValues, prices, randomKey()));
@@ -524,5 +526,32 @@ public class ProductUpdateCommandTest extends IntegrationTest {
                 return updatedProduct;
             });
         });
+    }
+
+    @Test
+    public void setProductPriceCustomTypeAndsetProductPriceCustomField() {
+        withUpdateableType(client(), type -> {
+            withUpdateablePricedProduct(client(), product -> {
+                final String priceId = getFirstPrice(product).getId();
+                final UpdateAction<Product> updateAction = SetProductPriceCustomType.
+                        ofTypeIdAndObjects(type.getId(), STRING_FIELD_NAME, "a value", priceId);
+                final ProductUpdateCommand productUpdateCommand = ProductUpdateCommand.of(product, updateAction);
+                final Product updatedProduct = execute(productUpdateCommand);
+
+                final Price price = getFirstPrice(updatedProduct);
+                assertThat(price.getCustom().getFieldAsString(STRING_FIELD_NAME))
+                        .isEqualTo("a value");
+
+                final Product updated2 = execute(ProductUpdateCommand.of(updatedProduct, SetProductPriceCustomField.ofObject(STRING_FIELD_NAME, "a new value", priceId)));
+                assertThat(getFirstPrice(updated2).getCustom().getFieldAsString(STRING_FIELD_NAME))
+                        .isEqualTo("a new value");
+                return updated2;
+            });
+            return type;
+        });
+    }
+
+    private Price getFirstPrice(final Product product) {
+        return product.getMasterData().getStaged().getMasterVariant().getPrices().get(0);
     }
 }

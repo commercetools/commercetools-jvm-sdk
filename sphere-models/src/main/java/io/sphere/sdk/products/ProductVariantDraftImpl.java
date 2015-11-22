@@ -9,11 +9,11 @@ import java.util.List;
 class ProductVariantDraftImpl extends Base implements ProductVariantDraft {
     @Nullable
     private final String sku;
-    private final List<Price> prices;
+    private final List<PriceDraft> prices;
     private final List<AttributeDraft> attributes;
     private final List<Image> images;
 
-    public ProductVariantDraftImpl(@Nullable final String sku, final List<Price> prices, final List<AttributeDraft> attributes, final List<Image> images) {
+    public ProductVariantDraftImpl(@Nullable final String sku, final List<PriceDraft> prices, final List<AttributeDraft> attributes, final List<Image> images) {
         this.sku = sku;
         this.prices = prices;
         this.attributes = attributes;
@@ -27,7 +27,7 @@ class ProductVariantDraftImpl extends Base implements ProductVariantDraft {
     }
 
     @Override
-    public List<Price> getPrices() {
+    public List<PriceDraft> getPrices() {
         return prices;
     }
 

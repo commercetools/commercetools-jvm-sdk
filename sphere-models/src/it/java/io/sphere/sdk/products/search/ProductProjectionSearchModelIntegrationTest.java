@@ -180,7 +180,7 @@ public class ProductProjectionSearchModelIntegrationTest extends IntegrationTest
                         AttributeAccess.ofTimeSet().ofName(ATTR_NAME_TIME_SET).draftOf(asSet(TIME_22H, TIME_23H)),
                         AttributeAccess.ofDateTimeSet().ofName(ATTR_NAME_DATE_TIME_SET).draftOf(asSet(DATE_TIME_2001_22H, DATE_TIME_2002_23H)),
                         AttributeAccess.ofProductReferenceSet().ofName(ATTR_NAME_REF_SET).draftOf(asSet(productSomeId.toReference(), productOtherId.toReference())))
-                .price(Price.of(new BigDecimal("23.45"), EUR))
+                .price(PriceDraft.of(new BigDecimal("23.45"), EUR))
                 .sku(SKU1)
                 .build();
         return createTestProduct("Product one", masterVariant);
@@ -211,7 +211,7 @@ public class ProductProjectionSearchModelIntegrationTest extends IntegrationTest
                         AttributeAccess.ofTimeSet().ofName(ATTR_NAME_TIME_SET).draftOf(asSet(TIME_22H)),
                         AttributeAccess.ofDateTimeSet().ofName(ATTR_NAME_DATE_TIME_SET).draftOf(asSet(DATE_TIME_2001_22H)),
                         AttributeAccess.ofProductReferenceSet().ofName(ATTR_NAME_REF_SET).draftOf(asSet(productSomeId.toReference())))
-                .price(Price.of(new BigDecimal("46.80"), USD))
+                .price(PriceDraft.of(new BigDecimal("46.80"), USD))
                 .sku(SKU2)
                 .build();
         return createTestProduct("Product two", masterVariant);

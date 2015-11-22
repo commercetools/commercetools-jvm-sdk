@@ -16,7 +16,7 @@ public final class ProductVariantDraftBuilder extends Base implements Builder<Pr
     @Nullable
     private String sku;
 
-    private List<Price> prices = Collections.emptyList();
+    private List<PriceDraft> prices = Collections.emptyList();
 
     private List<AttributeDraft> attributes = Collections.emptyList();
 
@@ -43,16 +43,16 @@ public final class ProductVariantDraftBuilder extends Base implements Builder<Pr
         return images(Collections.singletonList(image));
     }
 
-    public ProductVariantDraftBuilder prices(final List<Price> prices) {
+    public ProductVariantDraftBuilder prices(final List<PriceDraft> prices) {
         this.prices = prices;
         return this;
     }
 
-    public ProductVariantDraftBuilder prices(final Price ... prices) {
+    public ProductVariantDraftBuilder prices(final PriceDraft ... prices) {
         return prices(asList(prices));
     }
 
-    public ProductVariantDraftBuilder price(final Price price) {
+    public ProductVariantDraftBuilder price(final PriceDraft price) {
         return prices(Collections.singletonList(price));
     }
 

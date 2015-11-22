@@ -34,13 +34,13 @@ public class VariantsCottonTShirtProductDraftSupplier implements Supplier<Produc
                 .plusAttribute(Sizes.ATTRIBUTE.draftOf(Sizes.S))
                 .plusAttribute(Colors.ATTRIBUTE.draftOf(Colors.GREEN))
                 .sku(UUID.randomUUID().toString())
-                .prices(Price.of(MoneyImpl.ofCents(1234, EUR)))
+                .prices(PriceDraft.of(MoneyImpl.ofCents(1234, EUR)))
                 .build();
         final ProductVariantDraft secondVariant = ProductVariantDraftBuilder.of()
                 .plusAttribute(Sizes.ATTRIBUTE.draftOf(Sizes.M))
                 .plusAttribute(Colors.ATTRIBUTE.draftOf(Colors.GREEN))
                 .sku(UUID.randomUUID().toString())
-                .prices(Price.of(MoneyImpl.ofCents(1234, EUR)), Price.of(MoneyImpl.ofCents(600, EUR)).withCustomerGroup(customerGroup))
+                .prices(PriceDraft.of(MoneyImpl.ofCents(1234, EUR)), PriceDraft.of(MoneyImpl.ofCents(600, EUR)).withCustomerGroup(customerGroup))
                 .build();
         final LocalizedString slug = en(name).slugifiedUnique();
         return ProductDraftBuilder.of(productType, en(name), slug, masterVariant)

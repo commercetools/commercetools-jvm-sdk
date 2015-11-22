@@ -154,6 +154,10 @@ final public class SphereJsonUtils {
         return executing(() -> objectMapper.readValue(jsonAsString, typeReference));
     }
 
+    public static <T> T readObject(final String jsonAsString, final Class<T> clazz) {
+        return executing(() -> objectMapper.readValue(jsonAsString, clazz));
+    }
+
     /**
      * Reads a Java object from JsonNode data.
      *

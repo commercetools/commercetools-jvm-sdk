@@ -18,6 +18,7 @@ import io.sphere.sdk.taxcategories.TaxRate;
 import io.sphere.sdk.test.IntegrationTest;
 import io.sphere.sdk.test.SphereTestUtils;
 import io.sphere.sdk.types.CustomFields;
+import io.sphere.sdk.utils.MoneyImpl;
 import org.junit.Test;
 
 import javax.money.MonetaryAmount;
@@ -32,7 +33,7 @@ import java.util.function.Function;
 import static io.sphere.sdk.channels.ChannelFixtures.withPersistentChannel;
 import static io.sphere.sdk.customers.CustomerFixtures.withCustomer;
 import static io.sphere.sdk.customers.CustomerFixtures.withCustomerInGroup;
-import static io.sphere.sdk.products.ProductFixtures.PRICE;
+import static io.sphere.sdk.models.DefaultCurrencyUnits.EUR;
 import static io.sphere.sdk.products.ProductFixtures.withProduct;
 import static io.sphere.sdk.shippingmethods.ShippingMethodFixtures.withShippingMethodForGermany;
 import static io.sphere.sdk.taxcategories.TaxCategoryFixtures.defaultTaxCategory;
@@ -41,6 +42,8 @@ import static io.sphere.sdk.test.SphereTestUtils.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class OrderImportCommandTest extends IntegrationTest {
+    public static final Price PRICE = Price.of(MoneyImpl.of(new BigDecimal("12.34"), EUR)).withCountry(DE);
+
     @Test
     public void minimalOrder() throws Exception {
         withProduct(client(), product -> {

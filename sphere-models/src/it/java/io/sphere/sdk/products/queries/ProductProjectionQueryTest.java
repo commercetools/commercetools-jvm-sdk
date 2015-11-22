@@ -18,8 +18,10 @@ import io.sphere.sdk.queries.Query;
 import io.sphere.sdk.queries.QueryPredicate;
 import io.sphere.sdk.taxcategories.TaxCategoryFixtures;
 import io.sphere.sdk.test.IntegrationTest;
+import io.sphere.sdk.utils.MoneyImpl;
 import org.junit.Test;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -28,10 +30,10 @@ import java.util.function.Consumer;
 
 import static io.sphere.sdk.categories.CategoryFixtures.withCategory;
 import static io.sphere.sdk.customergroups.CustomerGroupFixtures.withCustomerGroup;
+import static io.sphere.sdk.models.DefaultCurrencyUnits.EUR;
 import static io.sphere.sdk.products.ProductFixtures.*;
 import static io.sphere.sdk.products.ProductProjectionType.CURRENT;
 import static io.sphere.sdk.products.ProductProjectionType.STAGED;
-import static io.sphere.sdk.queries.QuerySortDirection.DESC;
 import static io.sphere.sdk.test.ReferenceAssert.assertThat;
 import static io.sphere.sdk.test.SphereTestUtils.*;
 import static java.util.Arrays.asList;
@@ -86,7 +88,7 @@ public class ProductProjectionQueryTest extends IntegrationTest {
     @Test
     public void expandCustomerGroupInPrice() throws Exception {
         withCustomerGroup(client(), customerGroup ->
-            withUpdateablePricedProduct(client(), PRICE.withCustomerGroup(customerGroup), product -> {
+            withUpdateablePricedProduct(client(), PriceDraft.of(MoneyImpl.of(new BigDecimal("12.34"), EUR)).withCountry(DE).withCustomerGroup(customerGroup), product -> {
                 final Query<ProductProjection> query = ProductProjectionQuery.of(STAGED)
                                 .withPredicates(m -> m.id().is(product.getId()))
                                 .withExpansionPaths(m -> m.masterVariant().prices().customerGroup());
@@ -103,7 +105,7 @@ public class ProductProjectionQueryTest extends IntegrationTest {
     @Test
     public void expandChannelInPrice() throws Exception {
         ChannelFixtures.withChannelOfRole(client(), ChannelRole.INVENTORY_SUPPLY, channel -> {
-            withUpdateablePricedProduct(client(), PRICE.withChannel(channel), product -> {
+            withUpdateablePricedProduct(client(), PriceDraft.of(MoneyImpl.of(new BigDecimal("12.34"), EUR)).withCountry(DE).withChannel(channel), product -> {
                 final Query<ProductProjection> query = ProductProjectionQuery.of(STAGED)
                         .withPredicates(m -> m.id().is(product.getId()))
                         .withExpansionPaths(m -> m.masterVariant().prices().channel());

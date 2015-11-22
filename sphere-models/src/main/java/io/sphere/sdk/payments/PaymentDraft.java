@@ -2,6 +2,7 @@ package io.sphere.sdk.payments;
 
 import io.sphere.sdk.customers.Customer;
 import io.sphere.sdk.models.Reference;
+import io.sphere.sdk.types.CustomDraft;
 import io.sphere.sdk.types.CustomFields;
 import io.sphere.sdk.types.CustomFieldsDraft;
 
@@ -15,7 +16,7 @@ import java.util.List;
  *
  * @see PaymentDraftBuilder
  */
-public interface PaymentDraft {
+public interface PaymentDraft extends CustomDraft {
     @Nullable
     Reference<Customer> getCustomer();
 

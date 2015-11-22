@@ -38,7 +38,7 @@ import static java.util.Arrays.asList;
 import static java.util.Collections.singletonList;
 
 public class ProductFixtures {
-    public static final Price PRICE = Price.of(MoneyImpl.of(new BigDecimal("12.34"), EUR)).withCountry(DE);
+    public static final PriceDraft PRICE = PriceDraft.of(MoneyImpl.of(new BigDecimal("12.34"), EUR)).withCountry(DE);
     private static final int MASTER_VARIANT_ID = 1;
 
     public static void withUpdateableProduct(final TestClient client, final Function<Product, Product> f) {
@@ -118,10 +118,10 @@ public class ProductFixtures {
     }
 
     public static void withUpdateablePricedProduct(final TestClient client, final Function<Product, Product> f) {
-        withUpdateablePricedProduct(client, Price.of(MoneyImpl.of(123, EUR)), f);
+        withUpdateablePricedProduct(client, PriceDraft.of(MoneyImpl.of(123, EUR)), f);
     }
 
-    public static void withUpdateablePricedProduct(final TestClient client, final Price expectedPrice, final Function<Product, Product> f) {
+    public static void withUpdateablePricedProduct(final TestClient client, final PriceDraft expectedPrice, final Function<Product, Product> f) {
         withUpdateableProduct(client, product -> {
             final ProductUpdateCommand command = ProductUpdateCommand.of(product, AddPrice.of(1, expectedPrice));
             return f.apply(client.execute(command));
@@ -180,6 +180,17 @@ public class ProductFixtures {
             final ProductDraftBuilder productDraftBuilder = ProductDraftBuilder.of(productType, randomSlug(), randomSlug(), ProductVariantDraftBuilder.of().build())
                     .searchKeywords(searchKeywords);
             withProduct(client, productDraftBuilder, consumer);
+        });
+    }
+
+    public static void creatingProduct(final TestClient client, final UnaryOperator<ProductDraftBuilder> builderMapper, final UnaryOperator<Product> op) {
+        withProductType(client, randomKey(), productType -> {
+            final ProductVariantDraft masterVariant = ProductVariantDraftBuilder.of().build();
+            final ProductDraftBuilder builder = ProductDraftBuilder.of(productType, randomSlug(), randomSlug(), masterVariant);
+            final ProductDraft productDraft = builderMapper.apply(builder).build();
+            final Product product = client.execute(ProductCreateCommand.of(productDraft));
+            final Product updatedProduct = op.apply(product);
+            client.execute(ProductDeleteCommand.of(updatedProduct));
         });
     }
 }

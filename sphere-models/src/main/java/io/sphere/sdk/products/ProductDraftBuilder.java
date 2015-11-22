@@ -9,7 +9,7 @@ import java.util.List;
 public final class ProductDraftBuilder extends ProductDataProductDraftBuilderBase<ProductDraftBuilder> implements Builder<ProductDraft> {
 
     private final Reference<ProductType> productType;
-    private final ProductVariantDraft masterVariant;
+    private ProductVariantDraft masterVariant;
     private List<ProductVariantDraft> variants = Collections.emptyList();
 
     private ProductDraftBuilder(final Reference<ProductType> productType, final LocalizedString name, final LocalizedString slug, final ProductVariantDraft masterVariant) {
@@ -34,6 +34,11 @@ public final class ProductDraftBuilder extends ProductDataProductDraftBuilderBas
 
     public ProductDraftBuilder variants(final List<ProductVariantDraft> variants) {
         this.variants = variants;
+        return getThis();
+    }
+
+    public ProductDraftBuilder masterVariant(final ProductVariantDraft masterVariant) {
+        this.masterVariant = masterVariant;
         return getThis();
     }
 }

@@ -4,6 +4,7 @@ import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.WithLocalizedSlug;
+import io.sphere.sdk.types.CustomDraft;
 import io.sphere.sdk.types.CustomFieldsDraft;
 
 import javax.annotation.Nullable;
@@ -13,7 +14,7 @@ import javax.annotation.Nullable;
  *
  * <p>For construction see {@link CategoryDraftBuilder}.</p>
  */
-public class CategoryDraft extends Base implements WithLocalizedSlug {
+public class CategoryDraft extends Base implements WithLocalizedSlug, CustomDraft {
     private final LocalizedString name;
     private final LocalizedString slug;
     @Nullable
