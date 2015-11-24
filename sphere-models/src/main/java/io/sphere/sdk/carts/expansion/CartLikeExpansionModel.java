@@ -43,4 +43,8 @@ public abstract class CartLikeExpansionModel<T> extends ExpansionModel<T> {
     private DiscountCodeInfoExpansionModel<T> discountCodes(final String s) {
         return new DiscountCodeInfoExpansionModel<>(pathExpression(), "discountCodes[" + s + "]");
     }
+
+    public ShippingInfoExpansionModel<T> shippingInfo() {
+        return new ShippingInfoExpansionModel<>(pathExpression(), "shippingInfo");
+    }
 }
