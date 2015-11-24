@@ -16,7 +16,7 @@ import static java.util.stream.Collectors.toList;
  * @param <T> type of the resource
  * @param <V> type of the value
  */
-abstract class TermFilterBaseSearchModel<T, V> extends Base {
+abstract class TermFilterBaseSearchModel<T, V> extends Base implements FilterSearchModel<T, V> {
     protected final SearchModel<T> searchModel;
     protected final Function<V, String> typeSerializer;
 
@@ -25,24 +25,33 @@ abstract class TermFilterBaseSearchModel<T, V> extends Base {
         this.typeSerializer = typeSerializer;
     }
 
-    /**
-     * Generates an expression to select all elements with the given attribute value.
-     * For example: filtering by "red" would select only those elements with "red" value.
-     * @param value the value to filter by
-     * @return a filter expression for the given value
-     */
+    @Override
     public List<FilterExpression<T>> by(final V value) {
         return singletonList(filterBy(value));
     }
 
-    /**
-     * Generates an expression to select all elements with attributes matching any of the given values.
-     * For example: filtering by ["red", "blue"] would select only those elements with either "red" or "blue" value.
-     * @param values the values to filter by
-     * @return a filter expression for the given values
-     */
+    @Override
     public List<FilterExpression<T>> byAny(final Iterable<V> values) {
         return singletonList(filterBy(values));
+    }
+
+    @Override
+    public List<FilterExpression<T>> byAll(final Iterable<V> values) {
+        return toStream(values)
+                .map(value -> filterBy(value))
+                .collect(toList());
+    }
+
+    @Override
+    public List<FilterExpression<T>> byAnyAsString(final Iterable<String> values) {
+        return singletonList(filterByAsString(values));
+    }
+
+    @Override
+    public List<FilterExpression<T>> byAllAsString(final Iterable<String> values) {
+        return toStream(values)
+                .map(value -> filterByAsString(value))
+                .collect(toList());
     }
 
     /**
@@ -55,40 +64,6 @@ abstract class TermFilterBaseSearchModel<T, V> extends Base {
     @Deprecated
     public List<FilterExpression<T>> by(final Iterable<V> values) {
         return byAny(values);
-    }
-
-    /**
-     * Generates an expression to select all elements with attributes matching all the given values.
-     * For example: filtering by ["red", "blue"] would select only those elements with both "red" and "blue" values.
-     * @param values the values to filter by
-     * @return a filter expression for the given values
-     */
-    public List<FilterExpression<T>> byAll(final Iterable<V> values) {
-        return toStream(values)
-                .map(value -> filterBy(value))
-                .collect(toList());
-    }
-
-    /**
-     * Generates an expression to select all elements with attributes matching any of the given values.
-     * For example: filtering by ["red", "blue"] would select only those elements with either "red" or "blue" value.
-     * @param values the values to filter by
-     * @return a filter expression for the given values
-     */
-    public List<FilterExpression<T>> byAnyAsString(final Iterable<String> values) {
-        return singletonList(filterByAsString(values));
-    }
-
-    /**
-     * Generates an expression to select all elements with attributes matching all the given values.
-     * For example: filtering by ["red", "blue"] would select only those elements with both "red" and "blue" values.
-     * @param values the values to filter by
-     * @return a filter expression for the given values
-     */
-    public List<FilterExpression<T>> byAllAsString(final Iterable<String> values) {
-        return toStream(values)
-                .map(value -> filterByAsString(value))
-                .collect(toList());
     }
 
     private TermFilterExpression<T, V> filterBy(final V value) {
