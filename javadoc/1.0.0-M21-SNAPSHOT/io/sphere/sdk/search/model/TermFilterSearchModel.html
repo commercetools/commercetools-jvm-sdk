@@ -116,6 +116,10 @@ var activeTableTab = "activeTableTab";
 <dd><code>T</code> - type of the resource</dd>
 <dd><code>V</code> - type of the value</dd>
 </dl>
+<dl>
+<dt>All Implemented Interfaces:</dt>
+<dd><a href="../../../../../io/sphere/sdk/search/model/FilterSearchModel.html" title="interface in io.sphere.sdk.search.model">FilterSearchModel</a>&lt;T,V&gt;</dd>
+</dl>
 <hr>
 <br>
 <pre>public class <span class="typeNameLabel">TermFilterSearchModel&lt;T,V&gt;</span>
@@ -271,9 +275,12 @@ extends <a href="../../../../../io/sphere/sdk/models/Base.html" title="class in 
 <li class="blockList">
 <h4>by</h4>
 <pre>public&nbsp;java.util.List&lt;<a href="../../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../../io/sphere/sdk/search/model/TermFilterSearchModel.html" title="type parameter in TermFilterSearchModel">T</a>&gt;&gt;&nbsp;by(<a href="../../../../../io/sphere/sdk/search/model/TermFilterSearchModel.html" title="type parameter in TermFilterSearchModel">V</a>&nbsp;value)</pre>
+<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../../io/sphere/sdk/search/model/FilterSearchModel.html#by-V-">FilterSearchModel</a></code></span></div>
 <div class="block">Generates an expression to select all elements with the given attribute value.
  For example: filtering by "red" would select only those elements with "red" value.</div>
 <dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../../io/sphere/sdk/search/model/FilterSearchModel.html#by-V-">by</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../io/sphere/sdk/search/model/FilterSearchModel.html" title="interface in io.sphere.sdk.search.model">FilterSearchModel</a>&lt;<a href="../../../../../io/sphere/sdk/search/model/TermFilterSearchModel.html" title="type parameter in TermFilterSearchModel">T</a>,<a href="../../../../../io/sphere/sdk/search/model/TermFilterSearchModel.html" title="type parameter in TermFilterSearchModel">V</a>&gt;</code></dd>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>value</code> - the value to filter by</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
@@ -288,9 +295,12 @@ extends <a href="../../../../../io/sphere/sdk/models/Base.html" title="class in 
 <li class="blockList">
 <h4>byAny</h4>
 <pre>public&nbsp;java.util.List&lt;<a href="../../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../../io/sphere/sdk/search/model/TermFilterSearchModel.html" title="type parameter in TermFilterSearchModel">T</a>&gt;&gt;&nbsp;byAny(java.lang.Iterable&lt;<a href="../../../../../io/sphere/sdk/search/model/TermFilterSearchModel.html" title="type parameter in TermFilterSearchModel">V</a>&gt;&nbsp;values)</pre>
+<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../../io/sphere/sdk/search/model/FilterSearchModel.html#byAny-java.lang.Iterable-">FilterSearchModel</a></code></span></div>
 <div class="block">Generates an expression to select all elements with attributes matching any of the given values.
  For example: filtering by ["red", "blue"] would select only those elements with either "red" or "blue" value.</div>
 <dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../../io/sphere/sdk/search/model/FilterSearchModel.html#byAny-java.lang.Iterable-">byAny</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../io/sphere/sdk/search/model/FilterSearchModel.html" title="interface in io.sphere.sdk.search.model">FilterSearchModel</a>&lt;<a href="../../../../../io/sphere/sdk/search/model/TermFilterSearchModel.html" title="type parameter in TermFilterSearchModel">T</a>,<a href="../../../../../io/sphere/sdk/search/model/TermFilterSearchModel.html" title="type parameter in TermFilterSearchModel">V</a>&gt;</code></dd>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>values</code> - the values to filter by</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
@@ -305,9 +315,12 @@ extends <a href="../../../../../io/sphere/sdk/models/Base.html" title="class in 
 <li class="blockList">
 <h4>byAll</h4>
 <pre>public&nbsp;java.util.List&lt;<a href="../../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../../io/sphere/sdk/search/model/TermFilterSearchModel.html" title="type parameter in TermFilterSearchModel">T</a>&gt;&gt;&nbsp;byAll(java.lang.Iterable&lt;<a href="../../../../../io/sphere/sdk/search/model/TermFilterSearchModel.html" title="type parameter in TermFilterSearchModel">V</a>&gt;&nbsp;values)</pre>
+<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../../io/sphere/sdk/search/model/FilterSearchModel.html#byAll-java.lang.Iterable-">FilterSearchModel</a></code></span></div>
 <div class="block">Generates an expression to select all elements with attributes matching all the given values.
  For example: filtering by ["red", "blue"] would select only those elements with both "red" and "blue" values.</div>
 <dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../../io/sphere/sdk/search/model/FilterSearchModel.html#byAll-java.lang.Iterable-">byAll</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../io/sphere/sdk/search/model/FilterSearchModel.html" title="interface in io.sphere.sdk.search.model">FilterSearchModel</a>&lt;<a href="../../../../../io/sphere/sdk/search/model/TermFilterSearchModel.html" title="type parameter in TermFilterSearchModel">T</a>,<a href="../../../../../io/sphere/sdk/search/model/TermFilterSearchModel.html" title="type parameter in TermFilterSearchModel">V</a>&gt;</code></dd>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>values</code> - the values to filter by</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
@@ -336,25 +349,6 @@ extends <a href="../../../../../io/sphere/sdk/models/Base.html" title="class in 
 </dl>
 </li>
 </ul>
-<a name="by-java.lang.Iterable-">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>by</h4>
-<pre>@Deprecated
-public&nbsp;java.util.List&lt;<a href="../../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;T&gt;&gt;&nbsp;by(java.lang.Iterable&lt;V&gt;&nbsp;values)</pre>
-<div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;<span class="deprecationComment">use <code>TermFilterBaseSearchModel.byAny(java.lang.Iterable&lt;V&gt;)</code> instead</span></div>
-<div class="block">Generates an expression to select all elements with attributes matching any of the given values.
- For example: filtering by ["red", "blue"] would select only those elements with either "red" or "blue" value.</div>
-<dl>
-<dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>values</code> - the values to filter by</dd>
-<dt><span class="returnLabel">Returns:</span></dt>
-<dd>a filter expression for the given values</dd>
-</dl>
-</li>
-</ul>
 <a name="byAnyAsString-java.lang.Iterable-">
 <!--   -->
 </a>
@@ -362,9 +356,12 @@ public&nbsp;java.util.List&lt;<a href="../../../../../io/sphere/sdk/search/Filte
 <li class="blockList">
 <h4>byAnyAsString</h4>
 <pre>public&nbsp;java.util.List&lt;<a href="../../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;T&gt;&gt;&nbsp;byAnyAsString(java.lang.Iterable&lt;java.lang.String&gt;&nbsp;values)</pre>
+<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../../io/sphere/sdk/search/model/FilterSearchModel.html#byAnyAsString-java.lang.Iterable-">FilterSearchModel</a></code></span></div>
 <div class="block">Generates an expression to select all elements with attributes matching any of the given values.
  For example: filtering by ["red", "blue"] would select only those elements with either "red" or "blue" value.</div>
 <dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../../io/sphere/sdk/search/model/FilterSearchModel.html#byAnyAsString-java.lang.Iterable-">byAnyAsString</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../io/sphere/sdk/search/model/FilterSearchModel.html" title="interface in io.sphere.sdk.search.model">FilterSearchModel</a>&lt;T,V&gt;</code></dd>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>values</code> - the values to filter by</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
@@ -375,12 +372,34 @@ public&nbsp;java.util.List&lt;<a href="../../../../../io/sphere/sdk/search/Filte
 <a name="byAllAsString-java.lang.Iterable-">
 <!--   -->
 </a>
-<ul class="blockListLast">
+<ul class="blockList">
 <li class="blockList">
 <h4>byAllAsString</h4>
 <pre>public&nbsp;java.util.List&lt;<a href="../../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;T&gt;&gt;&nbsp;byAllAsString(java.lang.Iterable&lt;java.lang.String&gt;&nbsp;values)</pre>
+<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../../io/sphere/sdk/search/model/FilterSearchModel.html#byAllAsString-java.lang.Iterable-">FilterSearchModel</a></code></span></div>
 <div class="block">Generates an expression to select all elements with attributes matching all the given values.
  For example: filtering by ["red", "blue"] would select only those elements with both "red" and "blue" values.</div>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../../io/sphere/sdk/search/model/FilterSearchModel.html#byAllAsString-java.lang.Iterable-">byAllAsString</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../io/sphere/sdk/search/model/FilterSearchModel.html" title="interface in io.sphere.sdk.search.model">FilterSearchModel</a>&lt;T,V&gt;</code></dd>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>values</code> - the values to filter by</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>a filter expression for the given values</dd>
+</dl>
+</li>
+</ul>
+<a name="by-java.lang.Iterable-">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>by</h4>
+<pre>@Deprecated
+public&nbsp;java.util.List&lt;<a href="../../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;T&gt;&gt;&nbsp;by(java.lang.Iterable&lt;V&gt;&nbsp;values)</pre>
+<div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;<span class="deprecationComment">use <code>TermFilterBaseSearchModel.byAny(java.lang.Iterable&lt;V&gt;)</code> instead</span></div>
+<div class="block">Generates an expression to select all elements with attributes matching any of the given values.
+ For example: filtering by ["red", "blue"] would select only those elements with either "red" or "blue" value.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>values</code> - the values to filter by</dd>
