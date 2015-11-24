@@ -45,4 +45,14 @@ public class CartExpansionModel<T> extends CartLikeExpansionModel<T> {
     public LineItemExpansionModel<T> lineItems(final int index) {
         return super.lineItems(index);
     }
+
+    @Override
+    public PaymentInfoExpansionModel<T> paymentInfo() {
+        return super.paymentInfo();
+    }
+
+    @Override
+    public ShippingInfoExpansionModel<T> shippingInfo() {
+        return super.shippingInfo();
+    }
 }

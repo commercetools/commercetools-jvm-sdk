@@ -240,8 +240,19 @@ public class CartUpdateCommandTest extends IntegrationTest {
             withCart(client(), createCartWithShippingAddress(client()), cart -> {
                 //add shipping method
                 assertThat(cart.getShippingInfo()).isNull();
-                final Cart cartWithShippingMethod = execute(CartUpdateCommand.of(cart, SetShippingMethod.of(shippingMethod)));
+                final CartUpdateCommand updateCommand =
+                        CartUpdateCommand.of(cart, SetShippingMethod.of(shippingMethod))
+                                .plusExpansionPaths(m -> m.shippingInfo().shippingMethod().taxCategory())
+                                .plusExpansionPaths(m -> m.shippingInfo().taxCategory());
+                final Cart cartWithShippingMethod = execute(updateCommand);
                 assertThat(cartWithShippingMethod.getShippingInfo().getShippingMethod()).isEqualTo(shippingMethod.toReference());
+                assertThat(cartWithShippingMethod.getShippingInfo().getShippingMethod().getObj())
+                        .as("reference expansion shippingMethod")
+                        .isEqualTo(shippingMethod);
+                assertThat(cartWithShippingMethod.getShippingInfo().getShippingMethod().getObj().getTaxCategory().getObj())
+                        .as("reference expansion taxCategory")
+                        .isEqualTo(cartWithShippingMethod.getShippingInfo().getTaxCategory().getObj())
+                        .isNotNull();
 
                 //remove shipping method
                 final Cart cartWithoutShippingMethod = execute(CartUpdateCommand.of(cartWithShippingMethod, SetShippingMethod.ofRemove()));
