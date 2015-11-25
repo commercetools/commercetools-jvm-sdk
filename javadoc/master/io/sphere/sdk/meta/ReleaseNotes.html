@@ -132,6 +132,26 @@ extends java.lang.Object</pre>
  <li class=new-in-release>Added static constructors to all facet/filter/sort search model classes, to easily build customized search expressions.</li>
  <li class=change-in-release>Since <a href="../../../../io/sphere/sdk/search/model/SortSearchModel.html" title="interface in io.sphere.sdk.search.model"><code>SortSearchModel</code></a> implementation classes have now static factory constructors, these class constructors have been removed from the public API.</li>
  <li class=change-in-release>Renamed <code>Range</code> filter/facet search models to <code>RangeTerm</code> to emphasize that you can build both range and term oriented search expressions with them.</li>
+ <li class=new-in-release>ExpansionPath for shippingInfo fields: <a href="../../../../io/sphere/sdk/carts/expansion/CartExpansionModel.html#shippingInfo--"><code>CartExpansionModel.shippingInfo()</code></a> and <a href="../../../../io/sphere/sdk/orders/expansion/OrderExpansionModel.html#shippingInfo--"><code>OrderExpansionModel.shippingInfo()</code></a></li>
+ <li class=new-in-release><a href="../../../../io/sphere/sdk/producttypes/ProductType.html#getKey--"><code>ProductType.getKey()</code></a></li>
+ <li class=change-in-release><a href="../../../../io/sphere/sdk/producttypes/ProductTypeDraft.html#of-java.lang.String-java.lang.String-java.util.List-"><code>ProductTypeDraft.of(String, String, List)</code></a> has been deprecated in favor of <a href="../../../../io/sphere/sdk/producttypes/ProductTypeDraft.html#of-java.lang.String-java.lang.String-java.lang.String-java.util.List-"><code>ProductTypeDraft.of(String, String, String, List)</code></a> since it is a very good practice to create a <a href="../../../../io/sphere/sdk/producttypes/ProductType.html" title="interface in io.sphere.sdk.producttypes"><code>ProductType</code></a> with a key.</li>
+ <li class=new-in-release><a href="../../../../io/sphere/sdk/carts/commands/updateactions/SetShippingMethod.html#ofRemove--"><code>SetShippingMethod.ofRemove()</code></a> to be able to remove a <a href="../../../../io/sphere/sdk/shippingmethods/ShippingMethod.html" title="interface in io.sphere.sdk.shippingmethods"><code>ShippingMethod</code></a> from a <a href="../../../../io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts"><code>Cart</code></a></li>
+ <li class=new-in-release><a href="../../../../io/sphere/sdk/orders/commands/OrderFromCartCreateCommand.html" title="interface in io.sphere.sdk.orders.commands"><code>OrderFromCartCreateCommand</code></a> contains an example</li>
+ <li class=new-in-release>Support for currencies like Yen.</li>
+ <li class=new-in-release>create <code>MonetaryAmount</code> with centAmount: <a href="../../../../io/sphere/sdk/utils/MoneyImpl.html#ofCents-long-javax.money.CurrencyUnit-"><code>MoneyImpl.ofCents(long, CurrencyUnit)</code></a></li>
+ <li class=new-in-release>Add <code>state</code> field to QueryModel for Products, Reviews and Orders.</li>
+ <li class=new-in-release>Custom fields for prices: <a href="../../../../io/sphere/sdk/products/Price.html#getCustom--"><code>Price.getCustom()</code></a></li>
+ <li class=change-in-release>For custom fields in prices the HTTP API and hence the SDK differentiate now between <a href="../../../../io/sphere/sdk/products/Price.html" title="class in io.sphere.sdk.products"><code>Price</code></a> and <a href="../../../../io/sphere/sdk/products/PriceDraft.html" title="interface in io.sphere.sdk.products"><code>PriceDraft</code></a>.
+ <p>Places where <a href="../../../../io/sphere/sdk/products/PriceDraft.html" title="interface in io.sphere.sdk.products"><code>PriceDraft</code></a> has to be used:</p>
+ <ul>
+   <li><a href="../../../../io/sphere/sdk/products/commands/updateactions/AddPrice.html" title="class in io.sphere.sdk.products.commands.updateactions"><code>AddPrice</code></a></li>
+   <li><a href="../../../../io/sphere/sdk/products/commands/updateactions/ChangePrice.html" title="class in io.sphere.sdk.products.commands.updateactions"><code>ChangePrice</code></a></li>
+   <li><a href="../../../../io/sphere/sdk/products/ProductVariantDraftBuilder.html#price-io.sphere.sdk.products.PriceDraft-"><code>ProductVariantDraftBuilder.price(PriceDraft)</code></a></li>
+   <li><a href="../../../../io/sphere/sdk/products/ProductVariantDraftBuilder.html#prices-java.util.List-"><code>ProductVariantDraftBuilder.prices(List)</code></a></li>
+   <li><a href="../../../../io/sphere/sdk/products/commands/updateactions/AddVariant.html" title="class in io.sphere.sdk.products.commands.updateactions"><code>AddVariant</code></a></li>
+ </ul>
+ <p>To roughly compare a <a href="../../../../io/sphere/sdk/products/Price.html" title="class in io.sphere.sdk.products"><code>Price</code></a> with a <a href="../../../../io/sphere/sdk/products/PriceDraft.html" title="interface in io.sphere.sdk.products"><code>PriceDraft</code></a>, use <a href="../../../../io/sphere/sdk/products/PriceDraft.html#of-io.sphere.sdk.products.Price-"><code>PriceDraft.of(Price)</code></a> to create a draft out of the price and then compare the drafts.</p>
+ </li>
  </ul>
 
 
