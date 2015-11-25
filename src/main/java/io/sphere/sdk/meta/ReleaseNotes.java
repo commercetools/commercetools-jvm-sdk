@@ -2,6 +2,8 @@ package io.sphere.sdk.meta;
 
 import io.sphere.sdk.carts.CustomLineItem;
 import io.sphere.sdk.carts.LineItem;
+import io.sphere.sdk.carts.commands.updateactions.SetShippingMethod;
+import io.sphere.sdk.carts.expansion.CartExpansionModel;
 import io.sphere.sdk.carts.queries.CartByIdGet;
 import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.channels.queries.ChannelByIdGet;
@@ -22,11 +24,9 @@ import io.sphere.sdk.models.Identifiable;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Referenceable;
 import io.sphere.sdk.orders.Order;
+import io.sphere.sdk.orders.expansion.OrderExpansionModel;
 import io.sphere.sdk.productdiscounts.queries.ProductDiscountByIdGet;
-import io.sphere.sdk.products.Price;
-import io.sphere.sdk.products.ProductProjection;
-import io.sphere.sdk.products.ProductProjectionType;
-import io.sphere.sdk.products.ProductVariant;
+import io.sphere.sdk.products.*;
 import io.sphere.sdk.products.attributes.AttributeAccess;
 import io.sphere.sdk.products.commands.updateactions.SetMetaDescription;
 import io.sphere.sdk.products.commands.updateactions.SetMetaKeywords;
@@ -35,6 +35,7 @@ import io.sphere.sdk.products.queries.ProductByIdGet;
 import io.sphere.sdk.products.queries.ProductProjectionByIdGet;
 import io.sphere.sdk.products.queries.ProductProjectionQuery;
 import io.sphere.sdk.products.queries.ProductProjectionQueryModel;
+import io.sphere.sdk.producttypes.ProductType;
 import io.sphere.sdk.queries.Get;
 import io.sphere.sdk.queries.QueryDsl;
 import io.sphere.sdk.queries.QueryPredicate;
@@ -43,6 +44,7 @@ import io.sphere.sdk.taxcategories.TaxRate;
 import io.sphere.sdk.types.CustomFieldsDraft;
 
 import javax.money.CurrencyUnit;
+import java.util.List;
 import java.util.concurrent.CompletionStage;
 import java.util.function.BiFunction;
 import java.util.function.Function;
@@ -76,6 +78,26 @@ import java.util.function.Function;
  <li class=new-in-release>Added static constructors to all facet/filter/sort search model classes, to easily build customized search expressions.</li>
  <li class=change-in-release>Since {@link io.sphere.sdk.search.model.SortSearchModel} implementation classes have now static factory constructors, these class constructors have been removed from the public API.</li>
  <li class=change-in-release>Renamed {@code Range} filter/facet search models to {@code RangeTerm} to emphasize that you can build both range and term oriented search expressions with them.</li>
+ <li class=new-in-release>ExpansionPath for shippingInfo fields: {@link CartExpansionModel#shippingInfo()} and {@link OrderExpansionModel#shippingInfo()}</li>
+ <li class=new-in-release>{@link ProductType#getKey()}</li>
+ <li class=change-in-release>{@link io.sphere.sdk.producttypes.ProductTypeDraft#of(String, String, List)} has been deprecated in favor of {@link io.sphere.sdk.producttypes.ProductTypeDraft#of(String, String, String, List)} since it is a very good practice to create a {@link ProductType} with a key.</li>
+ <li class=new-in-release>{@link SetShippingMethod#ofRemove()} to be able to remove a {@link io.sphere.sdk.shippingmethods.ShippingMethod} from a {@link io.sphere.sdk.carts.Cart}</li>
+ <li class=new-in-release>{@link io.sphere.sdk.orders.commands.OrderFromCartCreateCommand} contains an example</li>
+ <li class=new-in-release>Support for currencies like Yen.</li>
+ <li class=new-in-release>create {@link javax.money.MonetaryAmount} with centAmount: {@link io.sphere.sdk.utils.MoneyImpl#ofCents(long, CurrencyUnit)}</li>
+ <li class=new-in-release>Add {@code state} field to QueryModel for Products, Reviews and Orders.</li>
+ <li class=new-in-release>Custom fields for prices: {@link Price#getCustom()}</li>
+ <li class=change-in-release>For custom fields in prices the HTTP API and hence the SDK differentiate now between {@link Price} and {@link io.sphere.sdk.products.PriceDraft}.
+ <p>Places where {@link io.sphere.sdk.products.PriceDraft} has to be used:</p>
+ <ul>
+   <li>{@link io.sphere.sdk.products.commands.updateactions.AddPrice}</li>
+   <li>{@link io.sphere.sdk.products.commands.updateactions.ChangePrice}</li>
+   <li>{@link io.sphere.sdk.products.ProductVariantDraftBuilder#price(PriceDraft)}</li>
+   <li>{@link io.sphere.sdk.products.ProductVariantDraftBuilder#prices(List)}</li>
+   <li>{@link io.sphere.sdk.products.commands.updateactions.AddVariant}</li>
+ </ul>
+ <p>To roughly compare a {@link Price} with a {@link io.sphere.sdk.products.PriceDraft}, use {@link PriceDraft#of(Price)} to create a draft out of the price and then compare the drafts.</p>
+ </li>
  </ul>
 
 
