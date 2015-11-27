@@ -97,6 +97,23 @@ public interface ProductProjection extends ProductLike<ProductProjection, Produc
         return getId().equals(identifier.getProductId()) ? Optional.ofNullable(getVariant(identifier.getVariantId())) : Optional.empty();
     }
 
+    /**
+     * Finds a variant by SKU.
+     * @param sku the sku for the variant
+     * @return Optional of the found variant
+     */
+    default Optional<ProductVariant> findVariantBySku(final String sku) {
+        Objects.requireNonNull(sku);
+        return getAllVariants().stream().filter(v -> sku.equals(v.getSku())).findFirst();
+    }
+
+    /**
+     * Finds a variant by SKU.
+     * @param sku the sku for the variant
+     * @return Optional of the found variant
+     * @deprecated use {@link #findVariantBySku(String)} instead
+     */
+    @Deprecated
     default Optional<ProductVariant> findVariantBySky(final String sku) {
         Objects.requireNonNull(sku);
         return getAllVariants().stream().filter(v -> sku.equals(v.getSku())).findFirst();
