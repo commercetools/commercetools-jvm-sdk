@@ -248,10 +248,11 @@ public class PaymentUpdateCommandTest extends IntegrationTest {
             final Payment paymentWithFirstRefund = execute(PaymentUpdateCommand.of(payment, asList(SetAmountRefunded.of(firstRefundAmount), AddTransaction.of(firstRefundTransaction))));
 
             assertThat(paymentWithFirstRefund.getTransactions()).hasSize(2);
+            assertThat(paymentWithFirstRefund.getTransactions().get(0).getId()).isNotEmpty();
 
             final PagedQueryResult<PaymentTransactionAddedMessage> messageQueryResult = execute(MessageQuery.of().withPredicates(m -> m.resource().is(payment))
                     .forMessageType(PaymentTransactionAddedMessage.MESSAGE_HINT));
-            assertThat(messageQueryResult.head().get().getTransaction()).isEqualTo(firstRefundTransaction);
+            assertThat(messageQueryResult.head().get().getTransaction().getTimestamp()).isEqualTo(firstRefundTransaction.getTimestamp());
 
 
             final MonetaryAmount secondRefundAmount = EURO_5;
