@@ -38,7 +38,7 @@ public final class PaymentDraftBuilder extends Base implements Builder<PaymentDr
     @Nullable
     private PaymentStatus paymentStatus;
     @Nullable
-    private List<Transaction> transactions;
+    private List<TransactionDraft> transactions;
     @Nullable
     private List<CustomFieldsDraft> interfaceInteractions;
 
@@ -106,7 +106,7 @@ public final class PaymentDraftBuilder extends Base implements Builder<PaymentDr
         return this;
     }
 
-    public PaymentDraftBuilder transactions(@Nullable final List<Transaction> transactions) {
+    public PaymentDraftBuilder transactions(@Nullable final List<TransactionDraft> transactions) {
         this.transactions = transactions;
         return this;
     }
@@ -176,7 +176,7 @@ public final class PaymentDraftBuilder extends Base implements Builder<PaymentDr
     }
 
     @Nullable
-    public List<Transaction> getTransactions() {
+    public List<TransactionDraft> getTransactions() {
         return transactions;
     }
 

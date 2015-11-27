@@ -7,29 +7,29 @@ import javax.annotation.Nullable;
 import javax.money.MonetaryAmount;
 import java.time.ZonedDateTime;
 
-public final class TransactionBuilder extends Base implements Builder<Transaction> {
+public final class TransactionDraftBuilder extends Base implements Builder<TransactionDraft> {
     private ZonedDateTime timestamp;
     private TransactionType type;
     private MonetaryAmount amount;
     @Nullable
     private String interactionId;
 
-    private TransactionBuilder(final TransactionType type, final MonetaryAmount amount, final ZonedDateTime timestamp) {
+    private TransactionDraftBuilder(final TransactionType type, final MonetaryAmount amount, final ZonedDateTime timestamp) {
         this.type = type;
         this.amount = amount;
         this.timestamp = timestamp;
     }
 
-    public static TransactionBuilder of(final TransactionType type, final MonetaryAmount amount, final ZonedDateTime timestamp) {
-        return new TransactionBuilder(type, amount, timestamp);
+    public static TransactionDraftBuilder of(final TransactionType type, final MonetaryAmount amount, final ZonedDateTime timestamp) {
+        return new TransactionDraftBuilder(type, amount, timestamp);
     }
 
-    public TransactionBuilder timestamp(final ZonedDateTime timestamp) {
+    public TransactionDraftBuilder timestamp(final ZonedDateTime timestamp) {
         this.timestamp = timestamp;
         return this;
     }
 
-    public TransactionBuilder interactionId(@Nullable final String interactionId) {
+    public TransactionDraftBuilder interactionId(@Nullable final String interactionId) {
         this.interactionId = interactionId;
         return this;
     }
@@ -53,7 +53,7 @@ public final class TransactionBuilder extends Base implements Builder<Transactio
     }
 
     @Override
-    public Transaction build() {
-        return new Transaction(timestamp, type, amount, interactionId);
+    public TransactionDraft build() {
+        return new TransactionDraft(timestamp, type, amount, interactionId);
     }
 }

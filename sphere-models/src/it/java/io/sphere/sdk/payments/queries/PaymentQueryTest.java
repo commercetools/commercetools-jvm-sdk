@@ -38,7 +38,7 @@ public class PaymentQueryTest extends IntegrationTest {
                             .name(randomSlug())
                             .build();
                     final TransactionType transactionType = TransactionType.CHARGE;
-                    final List<Transaction> transactions = Collections.singletonList(TransactionBuilder
+                    final List<TransactionDraft> transactions = Collections.singletonList(TransactionDraftBuilder
                             .of(transactionType, totalAmount, ZonedDateTime.now())
                             .timestamp(ZonedDateTime.now())
                             .interactionId(randomKey())

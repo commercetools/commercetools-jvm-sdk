@@ -5,7 +5,6 @@ import io.sphere.sdk.messages.queries.MessageQuery;
 import io.sphere.sdk.payments.*;
 import io.sphere.sdk.payments.messages.PaymentCreatedMessage;
 import io.sphere.sdk.queries.PagedQueryResult;
-import io.sphere.sdk.queries.Query;
 import io.sphere.sdk.test.IntegrationTest;
 import io.sphere.sdk.types.CustomFieldsDraft;
 import io.sphere.sdk.types.TypeFixtures;
@@ -70,7 +69,7 @@ public class PaymentCreateCommandTest extends IntegrationTest {
                         .state(paidState).build();
                 final String interfaceId = randomKey();
                 final String interactionId = randomKey();
-                final List<Transaction> transactions = Collections.singletonList(TransactionBuilder
+                final List<TransactionDraft> transactions = Collections.singletonList(TransactionDraftBuilder
                         .of(TransactionType.CHARGE, totalAmount, ZonedDateTime.now())
                         .timestamp(ZonedDateTime.now())
                         .interactionId(interactionId)
@@ -110,7 +109,7 @@ public class PaymentCreateCommandTest extends IntegrationTest {
                             .method("CREDIT_CARD")
                             .name(randomSlug())
                             .build();
-                    final List<Transaction> transactions = Collections.singletonList(TransactionBuilder
+                    final List<TransactionDraft> transactions = Collections.singletonList(TransactionDraftBuilder
                             .of(TransactionType.CHARGE, totalAmount, ZonedDateTime.now())
                             .timestamp(ZonedDateTime.now())
                             .interactionId(randomKey())

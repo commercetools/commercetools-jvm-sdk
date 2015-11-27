@@ -9,7 +9,6 @@ import io.sphere.sdk.payments.messages.PaymentStatusStateTransitionMessage;
 import io.sphere.sdk.payments.messages.PaymentTransactionAddedMessage;
 import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.test.IntegrationTest;
-import io.sphere.sdk.types.TypeFixtures;
 import org.junit.Test;
 
 import javax.money.MonetaryAmount;
@@ -230,7 +229,7 @@ public class PaymentUpdateCommandTest extends IntegrationTest {
                     .paymentInterface(randomKey())
                     .method("CREDIT_CARD")
                     .build();
-            final Transaction chargeTransaction = TransactionBuilder
+            final TransactionDraft chargeTransaction = TransactionDraftBuilder
                     .of(TransactionType.CHARGE, totalAmount, ZonedDateTime.now())
                     .build();
             final PaymentDraftBuilder paymentDraftBuilder = PaymentDraftBuilder.of(totalAmount)
@@ -245,10 +244,10 @@ public class PaymentUpdateCommandTest extends IntegrationTest {
             assertThat(payment.getAmountPlanned()).isEqualTo(totalAmount);
 
             final MonetaryAmount firstRefundAmount = EURO_10;
-            final Transaction firstRefundTransaction = TransactionBuilder.of(TransactionType.REFUND, firstRefundAmount, ZonedDateTime.now()).build();
+            final TransactionDraft firstRefundTransaction = TransactionDraftBuilder.of(TransactionType.REFUND, firstRefundAmount, ZonedDateTime.now()).build();
             final Payment paymentWithFirstRefund = execute(PaymentUpdateCommand.of(payment, asList(SetAmountRefunded.of(firstRefundAmount), AddTransaction.of(firstRefundTransaction))));
 
-            assertThat(paymentWithFirstRefund.getTransactions()).contains(chargeTransaction, firstRefundTransaction);
+            assertThat(paymentWithFirstRefund.getTransactions()).hasSize(2);
 
             final PagedQueryResult<PaymentTransactionAddedMessage> messageQueryResult = execute(MessageQuery.of().withPredicates(m -> m.resource().is(payment))
                     .forMessageType(PaymentTransactionAddedMessage.MESSAGE_HINT));
@@ -256,11 +255,11 @@ public class PaymentUpdateCommandTest extends IntegrationTest {
 
 
             final MonetaryAmount secondRefundAmount = EURO_5;
-            final Transaction secondRefundTransaction = TransactionBuilder.of(TransactionType.REFUND, secondRefundAmount, ZonedDateTime.now()).build();
+            final TransactionDraft secondRefundTransaction = TransactionDraftBuilder.of(TransactionType.REFUND, secondRefundAmount, ZonedDateTime.now()).build();
             final MonetaryAmount totalRefundAmount = secondRefundAmount.add(paymentWithFirstRefund.getAmountRefunded());
             final Payment paymentWithSecondRefund = execute(PaymentUpdateCommand.of(paymentWithFirstRefund, asList(SetAmountRefunded.of(totalRefundAmount), AddTransaction.of(secondRefundTransaction))));
 
-            assertThat(paymentWithSecondRefund.getTransactions()).contains(chargeTransaction, firstRefundTransaction, secondRefundTransaction);
+            assertThat(paymentWithSecondRefund.getTransactions()).hasSize(3);
             assertThat(paymentWithSecondRefund.getAmountRefunded()).isEqualTo(totalRefundAmount);
         });
     }
