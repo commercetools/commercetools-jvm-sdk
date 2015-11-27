@@ -9,6 +9,7 @@ import io.sphere.sdk.payments.messages.PaymentStatusStateTransitionMessage;
 import io.sphere.sdk.payments.messages.PaymentTransactionAddedMessage;
 import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.test.IntegrationTest;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.Test;
 
 import javax.money.MonetaryAmount;
@@ -295,6 +296,20 @@ public class PaymentUpdateCommandTest extends IntegrationTest {
 
             final Transaction updatedTransaction = updatedPayment.getTransactions().get(0);
             assertThat(updatedTransaction.getTimestamp()).isEqualTo(now);
+
+            return updatedPayment;
+        });
+    }
+
+    @Test
+    public void changeTransactionInteractionId() {
+        withPaymentTransaction(client(), (Payment payment, Transaction transaction) -> {
+            final String newInteractionId = RandomStringUtils.randomAlphanumeric(32);
+
+            final Payment updatedPayment = client().execute(PaymentUpdateCommand.of(payment, ChangeTransactionInteractionId.of(newInteractionId, transaction.getId())));
+
+            final Transaction updatedTransaction = updatedPayment.getTransactions().get(0);
+            assertThat(updatedTransaction.getInteractionId()).isEqualTo(newInteractionId);
 
             return updatedPayment;
         });

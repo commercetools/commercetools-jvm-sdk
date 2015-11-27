@@ -5,6 +5,12 @@ import io.sphere.sdk.payments.Payment;
 
 import java.time.ZonedDateTime;
 
+/**
+ *Changes timestamp of a transaction. If this transaction represents an action at the PSP, the time returned by the PSP should be used.
+ *
+ * {@include.example io.sphere.sdk.payments.commands.PaymentUpdateCommandTest#changeTransactionTimestamp()}
+ *
+ */
 public class ChangeTransactionTimestamp extends UpdateActionImpl<Payment> {
     private final ZonedDateTime timestamp;
     private final String transactionId;
