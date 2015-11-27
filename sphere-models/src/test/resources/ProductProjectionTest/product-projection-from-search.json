@@ -1,0 +1,128 @@
+{
+  "id": "24593118-1354-442d-96b7-25f2a408ee41",
+  "version": 6,
+  "productType": {
+    "typeId": "product-type",
+    "id": "4698af68-fa24-49ab-8a3e-abb113d72c0a"
+  },
+  "name": {
+    "en": "Book",
+    "de": "Buch"
+  },
+  "categories": [],
+  "categoryOrderHints": {},
+  "slug": {
+    "de": "buch-1448540659781",
+    "en": "book-1448540608849"
+  },
+  "masterVariant": {
+    "id": 1,
+    "sku": "book-black-sku",
+    "prices": [
+      {
+        "value": {
+          "currencyCode": "EUR",
+          "centAmount": 1300
+        },
+        "id": "0a232258-0d95-4f18-883e-99551eacd545",
+        "channel": {
+          "typeId": "channel",
+          "id": "5724e113-86d8-4a4c-aa30-18dbc4ebcbf6"
+        }
+      },
+      {
+        "value": {
+          "currencyCode": "EUR",
+          "centAmount": 2000
+        },
+        "id": "15ca574c-ec3e-49b5-9de2-dbf32bee26b6"
+      }
+    ],
+    "images": [],
+    "attributes": [
+      {
+        "name": "color",
+        "value": "black"
+      },
+      {
+        "name": "longDescription",
+        "value": {
+          "en": "Some long description for the book",
+          "de": "Some long description for the book in german"
+        }
+      }
+    ],
+    "isMatchingVariant": false
+  },
+  "variants": [
+    {
+      "id": 2,
+      "sku": "book-white-sku",
+      "prices": [],
+      "images": [],
+      "attributes": [
+        {
+          "name": "color",
+          "value": "white"
+        },
+        {
+          "name": "longDescription",
+          "value": {
+            "en": "Some other long description for the book",
+            "de": "Some other long description for the book in German"
+          }
+        }
+      ],
+      "isMatchingVariant": true
+    },
+    {
+      "id": 3,
+      "sku": "book-red-sku",
+      "prices": [],
+      "images": [],
+      "attributes": [
+        {
+          "name": "color",
+          "value": "red"
+        },
+        {
+          "name": "longDescription",
+          "value": {
+            "en": "Some other long description for the book",
+            "de": "Some other long description for the book in German"
+          }
+        }
+      ],
+      "isMatchingVariant": false
+    },
+    {
+      "id": 4,
+      "sku": "book-blue-sku",
+      "prices": [],
+      "images": [],
+      "attributes": [
+        {
+          "name": "color",
+          "value": "blue"
+        },
+        {
+          "name": "longDescription",
+          "value": {
+            "en": "Some other long description for the book",
+            "de": "Some other long description for the book in German"
+          }
+        }
+      ],
+      "isMatchingVariant": true
+    }
+  ],
+  "searchKeywords": {},
+  "hasStagedChanges": false,
+  "published": true,
+  "taxCategory": {
+    "typeId": "tax-category",
+    "id": "577efa4c-538f-455d-bb46-60cec6308822"
+  },
+  "createdAt": "2015-11-26T12:24:23.289Z",
+  "lastModifiedAt": "2015-11-26T13:26:31.665Z"
+}

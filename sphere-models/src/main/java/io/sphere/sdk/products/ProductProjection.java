@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Stream;
 
 /**
   A projected representation of a product shows the product with its current or staged data.
@@ -105,6 +106,22 @@ public interface ProductProjection extends ProductLike<ProductProjection, Produc
     default Optional<ProductVariant> findVariantBySku(final String sku) {
         Objects.requireNonNull(sku);
         return getAllVariants().stream().filter(v -> sku.equals(v.getSku())).findFirst();
+    }
+
+    /**
+     * Finds all variants that match the search criteria used in the search request, if any.
+     * @return the {@link Stream} containing all matching variants
+     */
+    default Stream<ProductVariant> findMatchingVariants() {
+        return getAllVariants().stream().filter(v -> Optional.ofNullable(v.isMatchingVariant()).orElse(false));
+    }
+
+    /**
+     * Finds the first matching variant according to the search criteria used in the search request, if any.
+     * @return the first product variant that matches the search criteria, or empty if none does
+     */
+    default Optional<ProductVariant> findFirstMatchingVariant() {
+        return findMatchingVariants().findFirst();
     }
 
     /**
