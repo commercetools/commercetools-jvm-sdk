@@ -7,7 +7,7 @@ import io.sphere.sdk.payments.commands.updateactions.*;
 import io.sphere.sdk.payments.messages.PaymentInteractionAddedMessage;
 import io.sphere.sdk.payments.messages.PaymentStatusStateTransitionMessage;
 import io.sphere.sdk.payments.messages.PaymentTransactionAddedMessage;
-import io.sphere.sdk.payments.messages.PaymentTransactionStateChanged;
+import io.sphere.sdk.payments.messages.PaymentTransactionStateChangedMessage;
 import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.test.IntegrationTest;
 import org.apache.commons.lang3.RandomStringUtils;
@@ -328,9 +328,9 @@ public class PaymentUpdateCommandTest extends IntegrationTest {
             assertThat(updatedTransaction.getState()).isEqualTo(transactionState);
 
             //check messages
-            final PagedQueryResult<PaymentTransactionStateChanged> messageQueryResult = execute(MessageQuery.of()
+            final PagedQueryResult<PaymentTransactionStateChangedMessage> messageQueryResult = execute(MessageQuery.of()
                     .withPredicates(m -> m.resource().is(payment))
-                    .forMessageType(PaymentTransactionStateChanged.MESSAGE_HINT));
+                    .forMessageType(PaymentTransactionStateChangedMessage.MESSAGE_HINT));
             assertThat(messageQueryResult.head().get().getState()).isEqualTo(transactionState);
 
             return updatedPayment;

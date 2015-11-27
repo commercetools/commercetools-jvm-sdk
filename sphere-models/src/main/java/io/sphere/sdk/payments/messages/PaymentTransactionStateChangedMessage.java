@@ -16,16 +16,16 @@ import java.time.ZonedDateTime;
  * {@include.example io.sphere.sdk.payments.commands.PaymentUpdateCommandTest#changeTransactionState()}
  *
  */
-@JsonDeserialize(as = PaymentTransactionStateChanged.class)//important to override annotation in Message class
-public class PaymentTransactionStateChanged extends GenericMessageImpl<Payment> {
+@JsonDeserialize(as = PaymentTransactionStateChangedMessage.class)//important to override annotation in Message class
+public class PaymentTransactionStateChangedMessage extends GenericMessageImpl<Payment> {
     public static final String MESSAGE_TYPE = "PaymentTransactionStateChanged";
-    public static final MessageDerivateHint<PaymentTransactionStateChanged> MESSAGE_HINT =
-            MessageDerivateHint.ofSingleMessageType(MESSAGE_TYPE, PaymentTransactionStateChanged.class);
+    public static final MessageDerivateHint<PaymentTransactionStateChangedMessage> MESSAGE_HINT =
+            MessageDerivateHint.ofSingleMessageType(MESSAGE_TYPE, PaymentTransactionStateChangedMessage.class);
 
     private final TransactionState state;
 
     @JsonCreator
-    private PaymentTransactionStateChanged(final String id, final Long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt, final JsonNode resource, final Long sequenceNumber, final Long resourceVersion, final String type, final TransactionState state) {
+    private PaymentTransactionStateChangedMessage(final String id, final Long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt, final JsonNode resource, final Long sequenceNumber, final Long resourceVersion, final String type, final TransactionState state) {
         super(id, version, createdAt, lastModifiedAt, resource, sequenceNumber, resourceVersion, type, Payment.class);
         this.state = state;
     }
