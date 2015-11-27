@@ -314,4 +314,19 @@ public class PaymentUpdateCommandTest extends IntegrationTest {
             return updatedPayment;
         });
     }
+
+    @Test
+    public void changeTransactionState() {
+        withPaymentTransaction(client(), (Payment payment, Transaction transaction) -> {
+            assertThat(transaction.getState()).isEqualTo(TransactionState.PENDING);
+            final TransactionState transactionState = TransactionState.SUCCESS;
+
+            final Payment updatedPayment = client().execute(PaymentUpdateCommand.of(payment, ChangeTransactionState.of(transactionState, transaction.getId())));
+
+            final Transaction updatedTransaction = updatedPayment.getTransactions().get(0);
+            assertThat(updatedTransaction.getState()).isEqualTo(transactionState);
+
+            return updatedPayment;
+        });
+    }
 }
