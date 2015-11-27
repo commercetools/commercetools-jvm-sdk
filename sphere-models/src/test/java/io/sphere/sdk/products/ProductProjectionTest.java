@@ -40,8 +40,8 @@ public class ProductProjectionTest {
         final Product product = getProduct();
 
         final ProductProjection staged = product.toProjection(ProductProjectionType.STAGED);
-        assertThat(staged.findVariantBySky("sku-5000")).isPresent();
-        assertThat(staged.findVariantBySky("not existing")).isEmpty();
+        assertThat(staged.findVariantBySku("sku-5000")).isPresent();
+        assertThat(staged.findVariantBySku("not existing")).isEmpty();
     }
 
     @Test
