@@ -71,6 +71,7 @@ public class AttributeDefinition extends Base {
      * Whether the attribute is required to have a value.
      * @return true if required else false
      */
+    @JsonProperty("isRequired")
     public Boolean isRequired() {
         return isRequired;
     }
@@ -102,6 +103,7 @@ public class AttributeDefinition extends Base {
      *
      * @return true if searchable, false if not
      */
+    @JsonProperty("isSearchable")
     public Boolean isSearchable() {
         return isSearchable;
     }
