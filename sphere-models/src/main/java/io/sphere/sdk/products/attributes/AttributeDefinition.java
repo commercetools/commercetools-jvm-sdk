@@ -1,6 +1,7 @@
 package io.sphere.sdk.products.attributes;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.LocalizedString;
@@ -58,8 +59,20 @@ public class AttributeDefinition extends Base {
     /**
      * Whether the attribute is required to have a value.
      * @return true if required else false
+     * @deprecated use {@link #isRequired()} instead
      */
+    @Deprecated
+    @JsonIgnore
     public Boolean getIsRequired() {
+        return isRequired;
+    }
+
+    /**
+     * Whether the attribute is required to have a value.
+     * @return true if required else false
+     */
+    @JsonProperty("isRequired")
+    public Boolean isRequired() {
         return isRequired;
     }
 
@@ -76,8 +89,22 @@ public class AttributeDefinition extends Base {
      * The exact features that are enabled/disabled with this flag depend on the concrete attribute type and are described there.
      *
      * @return true if searchable, false if not
+     * @deprecated use {@link #isSearchable()} instead
      */
+    @Deprecated
+    @JsonIgnore
     public Boolean getIsSearchable() {
+        return isSearchable;
+    }
+
+    /**
+     * Whether the attribute's values should generally be enabled in product search.
+     * The exact features that are enabled/disabled with this flag depend on the concrete attribute type and are described there.
+     *
+     * @return true if searchable, false if not
+     */
+    @JsonProperty("isSearchable")
+    public Boolean isSearchable() {
         return isSearchable;
     }
 
