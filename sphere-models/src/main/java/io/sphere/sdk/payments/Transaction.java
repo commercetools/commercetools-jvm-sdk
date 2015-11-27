@@ -11,6 +11,7 @@ import java.util.Optional;
 
 public final class Transaction extends Base {
     private final String id;
+    @Nullable
     private final ZonedDateTime timestamp;
     private final TransactionType type;
     private final MonetaryAmount amount;
@@ -20,7 +21,7 @@ public final class Transaction extends Base {
     private final TransactionState state;
 
     @JsonCreator
-    Transaction(final ZonedDateTime timestamp, final String id, final TransactionType type, final MonetaryAmount amount, final String interactionId, @Nullable final TransactionState state) {
+    Transaction(@Nullable final ZonedDateTime timestamp, final String id, final TransactionType type, final MonetaryAmount amount, final String interactionId, @Nullable final TransactionState state) {
         this.id = id;
         this.state = state;
         this.timestamp = Optional.ofNullable(timestamp)
@@ -31,6 +32,7 @@ public final class Transaction extends Base {
         this.interactionId = interactionId;
     }
 
+    @Nullable
     public ZonedDateTime getTimestamp() {
         return timestamp;
     }

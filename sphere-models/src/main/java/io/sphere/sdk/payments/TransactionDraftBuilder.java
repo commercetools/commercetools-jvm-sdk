@@ -8,6 +8,7 @@ import javax.money.MonetaryAmount;
 import java.time.ZonedDateTime;
 
 public final class TransactionDraftBuilder extends Base implements Builder<TransactionDraft> {
+    @Nullable
     private ZonedDateTime timestamp;
     private TransactionType type;
     private MonetaryAmount amount;
@@ -16,18 +17,22 @@ public final class TransactionDraftBuilder extends Base implements Builder<Trans
     @Nullable
     private TransactionState state;
 
-    private TransactionDraftBuilder(final TransactionType type, final MonetaryAmount amount, final ZonedDateTime timestamp, final TransactionState state) {
+    private TransactionDraftBuilder(final TransactionType type, final MonetaryAmount amount, @Nullable final ZonedDateTime timestamp, final TransactionState state) {
         this.type = type;
         this.amount = amount;
         this.timestamp = timestamp;
         this.state = state;
     }
 
-    public static TransactionDraftBuilder of(final TransactionType type, final MonetaryAmount amount, final ZonedDateTime timestamp) {
+    public static TransactionDraftBuilder of(final TransactionType type, final MonetaryAmount amount) {
+        return of(type, amount, null);
+    }
+
+    public static TransactionDraftBuilder of(final TransactionType type, final MonetaryAmount amount, @Nullable final ZonedDateTime timestamp) {
         return new TransactionDraftBuilder(type, amount, timestamp, null);
     }
 
-    public TransactionDraftBuilder timestamp(final ZonedDateTime timestamp) {
+    public TransactionDraftBuilder timestamp(@Nullable final ZonedDateTime timestamp) {
         this.timestamp = timestamp;
         return this;
     }
