@@ -4,10 +4,12 @@ import io.sphere.sdk.client.TestClient;
 import io.sphere.sdk.payments.commands.PaymentCreateCommand;
 import io.sphere.sdk.payments.commands.PaymentDeleteCommand;
 
-import java.util.function.Function;
+import java.util.function.BiFunction;
 import java.util.function.UnaryOperator;
 
-import static io.sphere.sdk.test.SphereTestUtils.*;
+import static io.sphere.sdk.test.SphereTestUtils.EURO_1;
+import static io.sphere.sdk.test.SphereTestUtils.EURO_20;
+import static java.util.Collections.singletonList;
 
 public class PaymentFixtures {
     public static void withPayment(final TestClient client, final UnaryOperator<PaymentDraftBuilder> builderMapping, final UnaryOperator<Payment> op) {
@@ -19,5 +21,16 @@ public class PaymentFixtures {
 
     public static void withPayment(final TestClient client, final UnaryOperator<Payment> op) {
         withPayment(client, a -> a, op);
+    }
+
+    public static void withPaymentTransaction(final TestClient client, final BiFunction<Payment, Transaction, Payment> operation) {
+        final TransactionDraft transactionDraft = TransactionDraftBuilder.of(TransactionType.CHARGE, EURO_1).build();
+        final PaymentDraft paymentDraft = PaymentDraftBuilder.of(EURO_1)
+                .transactions(singletonList(transactionDraft))
+                .build();
+        final Payment payment = client.execute(PaymentCreateCommand.of(paymentDraft));
+        final Transaction transaction = payment.getTransactions().get(0);
+        final Payment paymentToDelete = operation.apply(payment, transaction);
+        client.execute(PaymentDeleteCommand.of(paymentToDelete));
     }
 }

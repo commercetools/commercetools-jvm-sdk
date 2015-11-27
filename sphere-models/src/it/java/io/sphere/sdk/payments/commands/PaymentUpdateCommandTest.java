@@ -18,6 +18,7 @@ import java.util.Collections;
 import static io.sphere.sdk.carts.CartFixtures.withCustomerAndFilledCart;
 import static io.sphere.sdk.customers.CustomerFixtures.withCustomer;
 import static io.sphere.sdk.payments.PaymentFixtures.withPayment;
+import static io.sphere.sdk.payments.PaymentFixtures.withPaymentTransaction;
 import static io.sphere.sdk.states.StateFixtures.withStateByBuilder;
 import static io.sphere.sdk.states.StateType.PAYMENT_STATE;
 import static io.sphere.sdk.test.SphereTestUtils.*;
@@ -282,6 +283,20 @@ public class PaymentUpdateCommandTest extends IntegrationTest {
                 return updatedPayment;
             });
             return type;
+        });
+    }
+
+    @Test
+    public void changeTransactionTimestamp() {
+        withPaymentTransaction(client(), (Payment payment, Transaction transaction) -> {
+            final ZonedDateTime now = ZonedDateTime.now();
+
+            final Payment updatedPayment = client().execute(PaymentUpdateCommand.of(payment, ChangeTransactionTimestamp.of(now, transaction.getId())));
+
+            final Transaction updatedTransaction = updatedPayment.getTransactions().get(0);
+            assertThat(updatedTransaction.getTimestamp()).isEqualTo(now);
+
+            return updatedPayment;
         });
     }
 }
