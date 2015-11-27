@@ -4,6 +4,7 @@ import io.sphere.sdk.carts.commands.CartUpdateCommand;
 import io.sphere.sdk.carts.commands.updateactions.*;
 import io.sphere.sdk.json.TypeReferences;
 import io.sphere.sdk.test.IntegrationTest;
+import io.sphere.sdk.types.CustomFields;
 import io.sphere.sdk.types.CustomFieldsDraft;
 import io.sphere.sdk.types.CustomFieldsDraftBuilder;
 import org.junit.Test;
@@ -20,9 +21,17 @@ public class CustomLineItemCustomFieldsTest extends IntegrationTest {
     public void creation() {
         withUpdateableType(client(), type -> {
             withCartAndTaxedProduct(client(), (cart, product) -> {
-                final CustomFieldsDraft customFieldsDraft = CustomFieldsDraftBuilder.ofType(type).addObject(STRING_FIELD_NAME, "a value").build();
-                final Cart updatedCart = execute(CartUpdateCommand.of(cart, AddCustomLineItem.of(en("custom line item"), "foo", EURO_30, product.getTaxCategory(), 3).withCustom(customFieldsDraft)));
-                assertThat(updatedCart.getCustomLineItems().get(0).getCustom().getField(STRING_FIELD_NAME, TypeReferences.stringTypeReference())).isEqualTo("a value");
+                final CustomFieldsDraft customFieldsDraft =
+                        CustomFieldsDraftBuilder
+                                .ofType(type)
+                                .addObject(STRING_FIELD_NAME, "a value")
+                                .build();
+                final AddCustomLineItem updateAction = AddCustomLineItem.of(en("custom line item"), "foo", EURO_30, product.getTaxCategory(), 3).withCustom(customFieldsDraft);
+
+                final Cart updatedCart = execute(CartUpdateCommand.of(cart, updateAction));
+
+                final CustomFields customFields = updatedCart.getCustomLineItems().get(0).getCustom();
+                assertThat(customFields.getFieldAsString(STRING_FIELD_NAME)).isEqualTo("a value");
                 return updatedCart;
             });
             return type;

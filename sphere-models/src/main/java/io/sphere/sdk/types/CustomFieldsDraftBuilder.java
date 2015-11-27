@@ -46,6 +46,11 @@ public class CustomFieldsDraftBuilder extends Base implements Builder<CustomFiel
         return addJsonField(fieldName, jsonNode);
     }
 
+    public CustomFieldsDraftBuilder addObjects(final Map<String, Object> fields) {
+        fields.entrySet().forEach(entry -> addObject(entry.getKey(), entry.getValue()));
+        return this;
+    }
+
     private CustomFieldsDraftBuilder addJsonField(final String fieldName, final JsonNode jsonNode) {
         fields.put(fieldName, jsonNode);
         return this;

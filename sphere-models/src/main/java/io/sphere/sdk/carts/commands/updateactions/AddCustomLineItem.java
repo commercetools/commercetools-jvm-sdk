@@ -18,7 +18,11 @@ import javax.money.MonetaryAmount;
 
  {@doc.gen intro}
 
+ <p>Add a simple {@link io.sphere.sdk.carts.CustomLineItem}:</p>
  {@include.example io.sphere.sdk.carts.commands.CartUpdateCommandTest#addCustomLineItem()}
+
+ <p>Add a {@link io.sphere.sdk.carts.CustomLineItem} with {@link io.sphere.sdk.types.CustomFields}:</p>
+ {@include.example io.sphere.sdk.carts.CustomLineItemCustomFieldsTest#creation()}
  */
 public class AddCustomLineItem extends UpdateActionImpl<Cart> implements CustomDraft {
     private final LocalizedString name;
@@ -44,12 +48,18 @@ public class AddCustomLineItem extends UpdateActionImpl<Cart> implements CustomD
     public static AddCustomLineItem of(final LocalizedString name, final String slug,
                                        final MonetaryAmount money, final Referenceable<TaxCategory> taxCategory,
                                        final long quantity) {
-        return new AddCustomLineItem(name, slug, money, taxCategory, quantity, null);
+        return of(name, slug, money, taxCategory, quantity, null);
+    }
+
+    public static AddCustomLineItem of(final LocalizedString name, final String slug,
+                                       final MonetaryAmount money, final Referenceable<TaxCategory> taxCategory,
+                                       final long quantity, @Nullable final CustomFieldsDraft custom) {
+        return new AddCustomLineItem(name, slug, money, taxCategory, quantity, custom);
     }
 
     public static AddCustomLineItem of(final CustomLineItemDraft draft) {
         return of(draft.getName(), draft.getSlug(), draft.getMoney(),
-                draft.getTaxCategory(), draft.getQuantity());
+                draft.getTaxCategory(), draft.getQuantity(), draft.getCustom());
     }
 
     public LocalizedString getName() {
