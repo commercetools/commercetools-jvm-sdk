@@ -236,9 +236,9 @@ public final class ProductTypeAttributesTest extends IntegrationTest {
                 searchable(false).
                 required(true).
                 build(), attributeDefinitionFromServer -> {
-            assertThat(attributeDefinitionFromServer.getIsRequired()).isTrue();
+            assertThat(attributeDefinitionFromServer.isRequired()).isTrue();
             assertThat(attributeDefinitionFromServer.getAttributeConstraint()).isEqualTo(AttributeConstraint.COMBINATION_UNIQUE);
-            assertThat(attributeDefinitionFromServer.getIsSearchable()).isFalse();
+            assertThat(attributeDefinitionFromServer.isSearchable()).isFalse();
             assertThat(attributeDefinitionFromServer.getInputHint()).isEqualTo(TEXT_INPUT_HINT);
         });
     }
@@ -251,9 +251,9 @@ public final class ProductTypeAttributesTest extends IntegrationTest {
                 searchable(false).
                 required(true).
                 build(), attributeDefinition -> {
-            assertThat(attributeDefinition.getIsRequired()).isTrue();
+            assertThat(attributeDefinition.isRequired()).isTrue();
             assertThat(attributeDefinition.getAttributeConstraint()).isEqualTo(AttributeConstraint.COMBINATION_UNIQUE);
-            assertThat(attributeDefinition.getIsSearchable()).isFalse();
+            assertThat(attributeDefinition.isSearchable()).isFalse();
             assertThat(attributeDefinition.getInputHint()).isEqualTo(TEXT_INPUT_HINT);
         });
     }
