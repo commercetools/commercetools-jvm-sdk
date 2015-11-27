@@ -14,9 +14,9 @@ import io.sphere.sdk.commands.UpdateActionImpl;
  */
 public class ChangeLineItemQuantity extends UpdateActionImpl<Cart> {
     private final String lineItemId;
-    private final long quantity;
+    private final Long quantity;
 
-    private ChangeLineItemQuantity(final String lineItemId, final long quantity) {
+    private ChangeLineItemQuantity(final String lineItemId, final Long quantity) {
         super("changeLineItemQuantity");
         this.lineItemId = lineItemId;
         this.quantity = quantity;
@@ -30,11 +30,11 @@ public class ChangeLineItemQuantity extends UpdateActionImpl<Cart> {
         return quantity;
     }
 
-    public static ChangeLineItemQuantity of(final String lineItemId, final long quantity) {
+    public static ChangeLineItemQuantity of(final String lineItemId, final Long quantity) {
         return new ChangeLineItemQuantity(lineItemId, quantity);
     }
 
-    public static UpdateAction<Cart> of(final LineItem lineItem, final long quantity) {
+    public static UpdateAction<Cart> of(final LineItem lineItem, final Long quantity) {
         return of(lineItem.getId(), quantity);
     }
 }

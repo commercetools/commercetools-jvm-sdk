@@ -9,12 +9,12 @@ import io.sphere.sdk.models.Base;
 public class Foo extends Base {
 
     /** this custom object stores a long */
-    private final long baz;
+    private final Long baz;
     /** this custom object stores also a String*/
     private final String bar;
 
     @JsonCreator
-    public Foo(final String bar, final long baz) {
+    public Foo(final String bar, final Long baz) {
         this.bar = bar;
         this.baz = baz;
     }

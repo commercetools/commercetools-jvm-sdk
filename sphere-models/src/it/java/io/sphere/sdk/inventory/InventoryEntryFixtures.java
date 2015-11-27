@@ -16,7 +16,7 @@ import static io.sphere.sdk.test.SphereTestUtils.*;
 
 public class InventoryEntryFixtures extends Base {
     public static void withUpdateableInventoryEntry(final TestClient client, final Function<InventoryEntry, InventoryEntry> f) {
-        withUpdateableInventoryEntry(client, InventoryEntryDraft.of(randomKey(), 5), f);
+        withUpdateableInventoryEntry(client, InventoryEntryDraft.of(randomKey(), 5L), f);
     }
 
     public static void withUpdateableInventoryEntry(final TestClient client, final InventoryEntryDraft inventoryEntryDraft, final Function<InventoryEntry, InventoryEntry> f) {

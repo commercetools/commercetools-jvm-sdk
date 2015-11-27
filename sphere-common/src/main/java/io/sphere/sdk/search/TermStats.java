@@ -21,7 +21,7 @@ public class TermStats extends Base {
         return count;
     }
 
-    public static TermStats of(final String term, final long count) {
+    public static TermStats of(final String term, final Long count) {
         return new TermStats(term, count);
     }
 }

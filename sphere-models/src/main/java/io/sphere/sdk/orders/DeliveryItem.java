@@ -23,7 +23,7 @@ public class DeliveryItem extends Base {
         return quantity;
     }
 
-    public static DeliveryItem of(final String id, final int quantity) {
+    public static DeliveryItem of(final String id, final long quantity) {
         return of(id, Long.valueOf(quantity));
     }
 
@@ -32,7 +32,7 @@ public class DeliveryItem extends Base {
     }
 
     @JsonIgnore
-    public static DeliveryItem of(final LineItemLike lineItem, final long quantity) {
+    public static DeliveryItem of(final LineItemLike lineItem, final Long quantity) {
         return of(lineItem.getId(), quantity);
     }
 

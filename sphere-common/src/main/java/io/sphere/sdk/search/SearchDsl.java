@@ -33,13 +33,13 @@ public interface SearchDsl<T, C extends SearchDsl<T, C>> extends EntitySearch<T>
      * @param limit the new limit
      * @return a new object with {@code limit}
      */
-    C withLimit(final long limit);
+    C withLimit(final Long limit);
 
     /**
      * Returns a new object with the new offset.
      * @param offset the new offset
      * @return a new object with {@code offset}
      */
-    C withOffset(final long offset);
+    C withOffset(final Long offset);
 
 }

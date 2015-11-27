@@ -97,7 +97,7 @@ public class MessageQueryTest extends IntegrationTest {
                             .withPredicates(m -> m.resource().is(order))
                             .withSort(m -> m.createdAt().sort().desc())
                             .withExpansionPaths(m -> m.resource())
-                            .withLimit(1)
+                            .withLimit(1L)
                             .forMessageType(ReturnInfoAddedMessage.MESSAGE_HINT);
             final PagedQueryResult<ReturnInfoAddedMessage> pagedQueryResult = execute(query);
             final ReturnInfoAddedMessage message = pagedQueryResult.head().get();
@@ -117,7 +117,7 @@ public class MessageQueryTest extends IntegrationTest {
                             .withPredicates(m -> m.type().is(ReturnInfoAddedMessage.MESSAGE_HINT).and(m.resource().is(order)))
                             .withSort(m -> m.createdAt().sort().desc())
                             .withExpansionPaths(m -> m.resource())
-                            .withLimit(1);
+                            .withLimit(1L);
             final PagedQueryResult<Message> pagedQueryResult = execute(query);
             final Message message = pagedQueryResult.head().get();
 
@@ -137,7 +137,7 @@ public class MessageQueryTest extends IntegrationTest {
                     .withPredicates(m -> m.type().is("ReturnInfoAdded").and(m.resource().is(order)))
                     .withSort(m -> m.createdAt().sort().desc())
                     .withExpansionPaths(m -> m.resource())
-                    .withLimit(1);
+                    .withLimit(1L);
             final Message message = execute(query).head().get();
             assertThat(message.getResource().getObj()).isNotNull();
             assertThat(message.getResource()).isEqualTo(order.toReference());

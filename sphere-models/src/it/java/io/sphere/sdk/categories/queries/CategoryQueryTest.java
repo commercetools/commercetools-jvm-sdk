@@ -94,7 +94,7 @@ public class CategoryQueryTest extends IntegrationTest {
     @Test
     public void withFetchTotalFalseRemovesTotalFromOutput() throws Exception {
         withCategory(client(), category -> {
-            final CategoryQuery baseQuery = CategoryQuery.of().byId(category.getId()).withLimit(1);
+            final CategoryQuery baseQuery = CategoryQuery.of().byId(category.getId()).withLimit(1L);
             checkTotalInQueryResultOf(baseQuery, total -> total.isNotNull().isEqualTo(1));
             checkTotalInQueryResultOf(baseQuery.withFetchTotal(true), total -> total.isNotNull().isEqualTo(1));
             checkTotalInQueryResultOf(baseQuery.withFetchTotal(false), total -> total.isNull());

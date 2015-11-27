@@ -31,7 +31,7 @@ public class CustomObjectDeleteCommandTest extends IntegrationTest {
     @Test
     public void demo() {
         final String key = randomKey();
-        final Foo foo = new Foo("bar", 7);
+        final Foo foo = new Foo("bar", 7L);
         final CustomObject<Foo> customObject = execute(CustomObjectUpsertCommand
                 .of(CustomObjectDraft.ofUnversionedUpsert(CONTAINER, key, foo, Foo.class)));
 
@@ -46,11 +46,11 @@ public class CustomObjectDeleteCommandTest extends IntegrationTest {
     @Test
     public void demoById() {
         final String key = randomKey();
-        final Foo foo = new Foo("bar", 7);
+        final Foo foo = new Foo("bar", 7L);
         final CustomObject<Foo> customObject = execute(CustomObjectUpsertCommand
                 .of(CustomObjectDraft.ofUnversionedUpsert(CONTAINER, key, foo, Foo.class)));
         final String id = customObject.getId();
-        final long version = customObject.getVersion();
+        final Long version = customObject.getVersion();
 
         final CustomObject<Foo> deletedObject = execute(CustomObjectDeleteCommand.of(id, version, Foo.class));
 

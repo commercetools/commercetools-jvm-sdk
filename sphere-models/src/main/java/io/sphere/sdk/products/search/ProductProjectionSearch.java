@@ -99,10 +99,10 @@ public interface ProductProjectionSearch extends MetaModelSearchDsl<ProductProje
     ProductProjectionSearch plusSort(final Function<ProductProjectionSortSearchModel, SortExpression<ProductProjection>> m);
 
     @Override
-    ProductProjectionSearch withLimit(final long limit);
+    ProductProjectionSearch withLimit(final Long limit);
 
     @Override
-    ProductProjectionSearch withOffset(final long offset);
+    ProductProjectionSearch withOffset(final Long offset);
 
     @Override
     ProductProjectionSearch plusExpansionPaths(final List<ExpansionPath<ProductProjection>> expansionPaths);

@@ -266,12 +266,12 @@ public abstract class MetaModelSearchDslImpl<T, C extends MetaModelSearchDsl<T, 
     }
 
     @Override
-    public C withLimit(final long limit) {
+    public C withLimit(final Long limit) {
         return copyBuilder().limit(limit).build();
     }
 
     @Override
-    public C withOffset(final long offset) {
+    public C withOffset(final Long offset) {
         return copyBuilder().offset(offset).build();
     }
 

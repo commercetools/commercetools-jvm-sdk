@@ -40,11 +40,11 @@ public class AddLineItem extends UpdateActionImpl<Cart> implements CustomDraft {
         this.custom = custom;
     }
 
-    public static AddLineItem of(final ProductIdentifiable product, final Integer variantId, final long quantity) {
+    public static AddLineItem of(final ProductIdentifiable product, final Integer variantId, final Long quantity) {
         return of(product.getId(), variantId, quantity);
     }
 
-    public static AddLineItem of(final String productId, final Integer variantId, final long quantity) {
+    public static AddLineItem of(final String productId, final Integer variantId, final Long quantity) {
         return new AddLineItem(productId, variantId, quantity, null, null, null);
     }
 

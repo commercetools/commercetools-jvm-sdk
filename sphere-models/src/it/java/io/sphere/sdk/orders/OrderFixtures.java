@@ -19,7 +19,6 @@ import io.sphere.sdk.orders.commands.updateactions.AddDelivery;
 import io.sphere.sdk.orders.commands.updateactions.AddReturnInfo;
 import io.sphere.sdk.orders.commands.updateactions.ChangePaymentState;
 import io.sphere.sdk.orders.commands.updateactions.ChangeShipmentState;
-import io.sphere.sdk.orders.queries.OrderByIdGet;
 import io.sphere.sdk.shippingmethods.ShippingRate;
 import io.sphere.sdk.taxcategories.TaxCategory;
 import io.sphere.sdk.taxcategories.TaxCategoryFixtures;
@@ -28,16 +27,15 @@ import org.assertj.core.api.Assertions;
 
 import javax.money.MonetaryAmount;
 import java.util.List;
-import java.util.function.BiConsumer;
 import java.util.function.BiFunction;
 import java.util.function.Consumer;
 import java.util.function.UnaryOperator;
 
-import static io.sphere.sdk.carts.CartFixtures.*;
-import static io.sphere.sdk.customers.CustomerFixtures.*;
-import static io.sphere.sdk.taxcategories.TaxCategoryFixtures.*;
+import static io.sphere.sdk.carts.CartFixtures.createCartWithShippingAddress;
+import static io.sphere.sdk.carts.CartFixtures.withFilledCart;
+import static io.sphere.sdk.customers.CustomerFixtures.withCustomer;
+import static io.sphere.sdk.taxcategories.TaxCategoryFixtures.withTaxCategory;
 import static io.sphere.sdk.test.SphereTestUtils.*;
-import static org.assertj.core.api.Assertions.assertThat;
 
 public class OrderFixtures {
 
@@ -87,7 +85,7 @@ public class OrderFixtures {
         withOrder(client, order -> {
             Assertions.assertThat(order.getReturnInfo()).isEmpty();
             final String lineItemId = order.getLineItems().get(0).getId();
-            final List<ReturnItemDraft> items = asList(ReturnItemDraft.of(1, lineItemId, ReturnShipmentState.RETURNED, "foo bar"));
+            final List<ReturnItemDraft> items = asList(ReturnItemDraft.of(1L, lineItemId, ReturnShipmentState.RETURNED, "foo bar"));
             final AddReturnInfo action = AddReturnInfo.of(items);
             final AddDelivery addDelivery = AddDelivery.of(asList(DeliveryItem.of(lineItemId, 1)));
             final Order updatedOrder = client.execute(OrderUpdateCommand.of(order, asList(action, addDelivery)));

@@ -40,7 +40,7 @@ public class InventoryEntryDraft extends Base {
         return of(sku, quantityOnStock, expectedDelivery, restockableInDays, supplyChannel);
     }
 
-    public static InventoryEntryDraft of(final String sku, final long quantityOnStock) {
+    public static InventoryEntryDraft of(final String sku, final Long quantityOnStock) {
         return of(sku, quantityOnStock, null, null, null);
     }
 

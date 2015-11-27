@@ -45,7 +45,7 @@ public class CartQueryTest extends IntegrationTest {
         withCustomerAndCart(client(), (customer, cart) -> {
             final CartQuery cartQuery = CartQuery.of()
                     .withSort(m -> m.createdAt().sort().desc())
-                    .withLimit(1)
+                    .withLimit(1L)
                     .withPredicates(
                             m -> m.customerId().is(customer.getId())
                                     .and(m.customerEmail().is(customer.getEmail())));
@@ -71,7 +71,7 @@ public class CartQueryTest extends IntegrationTest {
             final long centAmount = centAmountOf(cart.getTotalPrice());
             final Cart loadedCart = execute(CartQuery.of()
                     .withSort(m -> m.createdAt().sort().desc())
-                    .withLimit(1)
+                    .withLimit(1L)
                     .withPredicates(
                             m -> m.totalPrice().centAmount().isGreaterThan(centAmount - 1)
                                     .and(m.totalPrice().centAmount().isLessThan(centAmount + 1)
@@ -90,7 +90,7 @@ public class CartQueryTest extends IntegrationTest {
         withFilledCart(client(), cart -> {
             final Cart loadedCart = execute(CartQuery.of()
                     .withSort(m -> m.createdAt().sort().desc())
-                    .withLimit(1)
+                    .withLimit(1L)
                     .withPredicates(m -> m.taxedPrice().isPresent()
                                     .and(m.taxedPrice().totalNet().centAmount().is(centAmountOf(cart.getTaxedPrice().getTotalNet())))
                                     .and(m.taxedPrice().totalGross().centAmount().is(centAmountOf(cart.getTaxedPrice().getTotalGross()))

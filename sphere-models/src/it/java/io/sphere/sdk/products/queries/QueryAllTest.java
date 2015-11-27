@@ -16,7 +16,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class QueryAllTest extends QueryAllBase {
     //in production code it would higher #smalltestset
-    private static final int PAGE_SIZE = 5;
+    private static final long PAGE_SIZE = 5;
 
     @Test
     public void useIdPredicateInsteadOfOffset() throws Exception {

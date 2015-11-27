@@ -41,7 +41,7 @@ public interface QueryDsl<T, C extends QueryDsl<T, C>> extends EntityQuery<T>, R
 
     C withFetchTotal(final boolean fetchTotal);
 
-    C withLimit(final long limit);
+    C withLimit(final Long limit);
 
     /**
      * Returns a new query with the new offset as offset.
@@ -51,5 +51,5 @@ public interface QueryDsl<T, C extends QueryDsl<T, C>> extends EntityQuery<T>, R
      * @throws java.lang.IllegalArgumentException if offset is
      * not between {@value io.sphere.sdk.queries.Query#MIN_OFFSET} and {@value io.sphere.sdk.queries.Query#MAX_OFFSET}.
      */
-    C withOffset(final long offset);
+    C withOffset(final Long offset);
 }

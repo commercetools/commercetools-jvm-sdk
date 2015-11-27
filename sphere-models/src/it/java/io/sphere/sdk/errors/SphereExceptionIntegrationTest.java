@@ -75,12 +75,12 @@ public class SphereExceptionIntegrationTest extends IntegrationTest {
     @Test
     public void notFoundExceptionOnUpdateWithMissingObject() throws Exception {
         final CategoryUpdateCommand updateCommand =
-                CategoryUpdateCommand.of(Versioned.of("not-existing-id", 1), Collections.<UpdateActionImpl<Category>>emptyList());
+                CategoryUpdateCommand.of(Versioned.of("not-existing-id", 1L), Collections.<UpdateActionImpl<Category>>emptyList());
         executing(() -> updateCommand)
                 .resultsInA(NotFoundException.class);
 
         try {
-            execute(CategoryUpdateCommand.of(Versioned.of("foo", 1), Collections.<UpdateActionImpl<Category>>emptyList()));
+            execute(CategoryUpdateCommand.of(Versioned.of("foo", 1L), Collections.<UpdateActionImpl<Category>>emptyList()));
             fail("should throw exception");
         } catch (final SphereServiceException e) {
             assertThat(e.getProjectKey()).contains(getSphereClientConfig().getProjectKey());
@@ -90,7 +90,7 @@ public class SphereExceptionIntegrationTest extends IntegrationTest {
     @Test
     public void exceptionsGatherContext() throws Exception {
         CategoryFixtures.withCategory(client(), category -> {
-            final long wrongVersion = category.getVersion() - 1;
+            final Long wrongVersion = category.getVersion() - 1;
             final CategoryUpdateCommand command = CategoryUpdateCommand.of(Versioned.of(category.getId(), wrongVersion), Collections.<UpdateActionImpl<Category>>emptyList());
             try {
                 execute(command);

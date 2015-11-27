@@ -13,7 +13,6 @@ import io.sphere.sdk.models.AddressBuilder;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.payments.Payment;
-import io.sphere.sdk.payments.PaymentFixtures;
 import io.sphere.sdk.products.Price;
 import io.sphere.sdk.products.PriceDraft;
 import io.sphere.sdk.products.Product;
@@ -84,7 +83,7 @@ public class CartUpdateCommandTest extends IntegrationTest {
             //check expansion and query
             final Cart loadedCart = execute(CartQuery.of()
                     .withSort(m -> m.createdAt().sort().desc())
-                    .withLimit(1)
+                    .withLimit(1L)
                     .withPredicates(
                             m -> m.lineItems().supplyChannel().is(inventorySupplyChannel)
                                     .and(m.lineItems().distributionChannel().is(distributionChannel)))
@@ -100,7 +99,7 @@ public class CartUpdateCommandTest extends IntegrationTest {
     public void removeLineItem() throws Exception {
         withEmptyCartAndProduct(client(), (cart, product) -> {
             assertThat(cart.getLineItems()).hasSize(0);
-            final AddLineItem action = AddLineItem.of(product.getId(), MASTER_VARIANT_ID, 3);
+            final AddLineItem action = AddLineItem.of(product.getId(), MASTER_VARIANT_ID, 3L);
 
             final Cart cartWith3 = execute(CartUpdateCommand.of(cart, action));
             final LineItem lineItem = cartWith3.getLineItems().get(0);
@@ -118,16 +117,16 @@ public class CartUpdateCommandTest extends IntegrationTest {
     public void changeLineItemQuantity() throws Exception {
         withEmptyCartAndProduct(client(), (cart, product) -> {
             assertThat(cart.getLineItems()).hasSize(0);
-            final AddLineItem action = AddLineItem.of(product.getId(), MASTER_VARIANT_ID, 3);
+            final AddLineItem action = AddLineItem.of(product.getId(), MASTER_VARIANT_ID, 3L);
 
             final Cart cartWith3 = execute(CartUpdateCommand.of(cart, action));
             final LineItem lineItem = cartWith3.getLineItems().get(0);
             assertThat(lineItem.getQuantity()).isEqualTo(3);
 
-            final Cart cartWith2 = execute(CartUpdateCommand.of(cartWith3, ChangeLineItemQuantity.of(lineItem, 2)));
+            final Cart cartWith2 = execute(CartUpdateCommand.of(cartWith3, ChangeLineItemQuantity.of(lineItem, 2L)));
             assertThat(cartWith2.getLineItems().get(0).getQuantity()).isEqualTo(2);
 
-            final Cart cartWith0 = execute(CartUpdateCommand.of(cartWith2, ChangeLineItemQuantity.of(lineItem, 0)));
+            final Cart cartWith0 = execute(CartUpdateCommand.of(cartWith2, ChangeLineItemQuantity.of(lineItem, 0L)));
             assertThat(cartWith0.getLineItems()).hasSize(0);
         });
     }
@@ -278,7 +277,7 @@ public class CartUpdateCommandTest extends IntegrationTest {
     @Test
     public void recalculate() throws Exception {
         withEmptyCartAndProduct(client(), (emptyCart, product) -> {
-            final AddLineItem action = AddLineItem.of(product.getId(), MASTER_VARIANT_ID, 1);
+            final AddLineItem action = AddLineItem.of(product.getId(), MASTER_VARIANT_ID, 1L);
 
             final Cart cartWithLineItem = execute(CartUpdateCommand.of(emptyCart, action));
             final Price oldPrice = cartWithLineItem.getLineItems().get(0).getPrice();

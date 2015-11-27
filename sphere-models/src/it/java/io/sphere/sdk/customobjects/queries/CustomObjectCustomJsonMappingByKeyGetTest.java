@@ -22,7 +22,7 @@ public class CustomObjectCustomJsonMappingByKeyGetTest extends IntegrationTest {
             assertThat(customObject).isNotNull();
             assertThat(customObject.toReference()).isEqualTo(co.toReference());
             final GsonFoo value = customObject.getValue();
-            assertThat(value).isEqualTo(new GsonFoo("aString", 5));
+            assertThat(value).isEqualTo(new GsonFoo("aString", 5L));
         });
     }
 

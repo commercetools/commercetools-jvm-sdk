@@ -157,7 +157,7 @@ public class ProductProjectionQueryTest extends IntegrationTest {
             final Query<ProductProjection> query1 = ProductProjectionQuery.of(STAGED)
                     .withPredicates(m -> m.name().lang(ENGLISH).is(en(p1.getMasterData().getStaged().getName())))
                     .withSort(m -> m.createdAt().sort().desc())
-                    .withLimit(1);
+                    .withLimit(1L);
             assertThat(ids(execute(query1))).containsOnly(p1.getId());
         });
     }

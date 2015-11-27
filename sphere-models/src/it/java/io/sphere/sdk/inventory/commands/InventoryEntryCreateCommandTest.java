@@ -18,7 +18,7 @@ public class InventoryEntryCreateCommandTest extends IntegrationTest {
     public void execution() throws Exception {
         withChannelOfRole(client(), ChannelRole.INVENTORY_SUPPLY, channel -> {
             final String sku = randomKey();
-            final int quantityOnStock = 10;
+            final long quantityOnStock = 10;
             final ZonedDateTime expectedDelivery = tomorrowZonedDateTime();
             final int restockableInDays = 3;
             final InventoryEntryDraft inventoryEntryDraft = InventoryEntryDraft.of(sku, quantityOnStock)

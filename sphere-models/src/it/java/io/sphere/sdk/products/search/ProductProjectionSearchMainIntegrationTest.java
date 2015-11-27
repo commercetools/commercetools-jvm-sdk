@@ -35,21 +35,21 @@ public class ProductProjectionSearchMainIntegrationTest extends ProductProjectio
 
     @Test
     public void paginationExample() {
-        final int offset = 10;
-        final int limit = 25;
+        final long offset = 10;
+        final long limit = 25;
         final ProductProjectionSearch search = ProductProjectionSearch.ofStaged()
                 .withOffset(offset)
                 .withLimit(limit);
         final PagedSearchResult<ProductProjection> result = executeSearch(search);
-        final int remainingProducts = max(result.getTotal() - offset, 0);
-        final int expectedProducts = min(limit, remainingProducts);
+        final long remainingProducts = max(result.getTotal() - offset, 0);
+        final long expectedProducts = min(limit, remainingProducts);
         assertThat(result.size()).isEqualTo(expectedProducts);
         assertThat(result.getOffset()).isEqualTo(offset);
     }
 
     @Test
     public void allowsExpansion() throws Exception {
-        final ProductProjectionSearch search = ProductProjectionSearch.ofStaged().withLimit(1);
+        final ProductProjectionSearch search = ProductProjectionSearch.ofStaged().withLimit(1L);
         assertThat(executeSearch(search).getResults().get(0).getProductType().getObj()).isNull();
         final PagedSearchResult<ProductProjection> result = executeSearch(search.withExpansionPaths(model -> model.productType()));
         assertThat(result.getResults().get(0).getProductType().getObj()).isEqualTo(productType);

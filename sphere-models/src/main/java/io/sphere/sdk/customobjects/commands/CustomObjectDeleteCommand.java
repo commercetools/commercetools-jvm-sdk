@@ -112,7 +112,7 @@ public interface CustomObjectDeleteCommand<T> extends DeleteCommand<CustomObject
      * @param version the version of the custom object to delete
      * @return custom object with a JsonNode value
      */
-    static DeleteCommand<CustomObject<JsonNode>> ofJsonNode(final String id, final long version) {
+    static DeleteCommand<CustomObject<JsonNode>> ofJsonNode(final String id, final Long version) {
         return of(id, version, TypeReferences.jsonNodeTypeReference());
     }
 
@@ -125,7 +125,7 @@ public interface CustomObjectDeleteCommand<T> extends DeleteCommand<CustomObject
      * @param <T> type of the value of the custom object
      * @return custom object with a JsonNode value
      */
-    static <T> DeleteCommand<CustomObject<T>> of(final String id, final long version, final TypeReference<T> valueTypeReference) {
+    static <T> DeleteCommand<CustomObject<T>> of(final String id, final Long version, final TypeReference<T> valueTypeReference) {
         return new CustomObjectDeleteCommandImpl<>(id, version, valueTypeReference);
     }
 
@@ -140,7 +140,7 @@ public interface CustomObjectDeleteCommand<T> extends DeleteCommand<CustomObject
      * @param <T> type of the value of the custom object
      * @return custom object with a JsonNode value
      */
-    static <T> DeleteCommand<CustomObject<T>> of(final String id, final long version, final Class<T> valueClass) {
+    static <T> DeleteCommand<CustomObject<T>> of(final String id, final Long version, final Class<T> valueClass) {
         return new CustomObjectDeleteCommandImpl<>(id, version, valueClass);
     }
 }

@@ -37,11 +37,11 @@ public class CustomLineItemDraft extends Base implements CustomDraft {
         this.quantity = quantity;
     }
 
-    public static CustomLineItemDraft of(final LocalizedString name, final String slug, final MonetaryAmount money, final Referenceable<TaxCategory> taxCategory, final long quantity) {
+    public static CustomLineItemDraft of(final LocalizedString name, final String slug, final MonetaryAmount money, final Referenceable<TaxCategory> taxCategory, final Long quantity) {
         return of(name, slug, money, taxCategory, quantity, null);
     }
 
-    public static CustomLineItemDraft of(final LocalizedString name, final String slug, final MonetaryAmount money, final Referenceable<TaxCategory> taxCategory, final long quantity, @Nullable final CustomFieldsDraft custom) {
+    public static CustomLineItemDraft of(final LocalizedString name, final String slug, final MonetaryAmount money, final Referenceable<TaxCategory> taxCategory, final Long quantity, @Nullable final CustomFieldsDraft custom) {
         return new CustomLineItemDraft(name, slug, money, taxCategory, quantity, custom);
     }
 

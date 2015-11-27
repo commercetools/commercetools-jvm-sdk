@@ -10,7 +10,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class CategoriesPagingTest extends IntegrationTest {
     @Test
     public void overPaging() throws Exception {
-        final int offset = 100000;
+        final long offset = 100000;
         final PagedQueryResult<Category> result = execute(CategoryQuery.of().withOffset(offset));
         assertThat(result.getOffset()).isEqualTo(100000);
         assertThat(result.size()).isEqualTo(0);

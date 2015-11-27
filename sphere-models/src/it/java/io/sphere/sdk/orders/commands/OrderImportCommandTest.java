@@ -1,15 +1,17 @@
 package io.sphere.sdk.orders.commands;
 
-import io.sphere.sdk.cartdiscounts.DiscountedLineItemPriceForQuantity;
-import io.sphere.sdk.json.SphereJsonUtils;
-import io.sphere.sdk.products.attributes.Attribute;
-import io.sphere.sdk.products.attributes.AttributeImportDraft;
 import io.sphere.sdk.cartdiscounts.DiscountedLineItemPrice;
+import io.sphere.sdk.cartdiscounts.DiscountedLineItemPriceForQuantity;
 import io.sphere.sdk.carts.*;
 import io.sphere.sdk.channels.ChannelRole;
-import io.sphere.sdk.models.*;
+import io.sphere.sdk.models.Address;
+import io.sphere.sdk.models.DefaultCurrencyUnits;
+import io.sphere.sdk.models.LocalizedString;
+import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.orders.*;
 import io.sphere.sdk.products.*;
+import io.sphere.sdk.products.attributes.Attribute;
+import io.sphere.sdk.products.attributes.AttributeImportDraft;
 import io.sphere.sdk.shippingmethods.ShippingMethod;
 import io.sphere.sdk.shippingmethods.ShippingRate;
 import io.sphere.sdk.suppliers.TShirtProductTypeDraftSupplier;
@@ -50,7 +52,7 @@ public class OrderImportCommandTest extends IntegrationTest {
             final String productId = product.getId();
             final int variantId = 1;
             final LocalizedString name = en("a name");
-            final int quantity = 1;
+            final long quantity = 1;
             final Price price = Price.of(EURO_10);
             final OrderState orderState = OrderState.OPEN;
             final MonetaryAmount amount = EURO_10;
@@ -88,7 +90,7 @@ public class OrderImportCommandTest extends IntegrationTest {
                                 .build();
                         final Price price = PRICE;
                         final LocalizedString name = randomSlug();
-                        final LineItemImportDraft lineItemImportDraft = LineItemImportDraftBuilder.of(productVariantImportDraft, 2, price, name).supplyChannel(channel).build();
+                        final LineItemImportDraft lineItemImportDraft = LineItemImportDraftBuilder.of(productVariantImportDraft, 2L, price, name).supplyChannel(channel).build();
                         testOrderAspect(
                                 builder -> builder.lineItems(asList(lineItemImportDraft)),
                                 order -> {
@@ -132,7 +134,7 @@ public class OrderImportCommandTest extends IntegrationTest {
                     .build();
             final Price price = PRICE;
             final LocalizedString name = randomSlug();
-            final LineItemImportDraft lineItemImportDraft = LineItemImportDraftBuilder.of(productVariantImportDraft, 2, price, name).build();
+            final LineItemImportDraft lineItemImportDraft = LineItemImportDraftBuilder.of(productVariantImportDraft, 2L, price, name).build();
             testOrderAspect(
                     builder -> builder.lineItems(asList(lineItemImportDraft)),
                     order -> {
@@ -149,7 +151,7 @@ public class OrderImportCommandTest extends IntegrationTest {
     public void customLineItems() throws Exception {
         withTransientTaxCategory(client(), taxCategory -> withProduct(client(), product -> {
             final LocalizedString name = randomSlug();
-            final int quantity = 16;
+            final long quantity = 16;
             final MonetaryAmount money = EURO_20;
             final Reference<TaxCategory> taxCategoryReference = defaultTaxCategory(client()).toReference();
             final String id = "an id";
@@ -197,7 +199,7 @@ public class OrderImportCommandTest extends IntegrationTest {
                     .build();
             final Price price = PRICE;
             final LocalizedString name = randomSlug();
-            final LineItemImportDraft lineItemImportDraft = LineItemImportDraftBuilder.of(productVariantImportDraft, 2, price, name).build();
+            final LineItemImportDraft lineItemImportDraft = LineItemImportDraftBuilder.of(productVariantImportDraft, 2L, price, name).build();
             testOrderAspect(
                     builder -> builder.lineItems(asList(lineItemImportDraft)),
                     order -> {
@@ -264,7 +266,7 @@ public class OrderImportCommandTest extends IntegrationTest {
                         return null;
                     }
                 };
-                final DeliveryItem deliveryItem = DeliveryItem.of(lineItem, 5);
+                final DeliveryItem deliveryItem = DeliveryItem.of(lineItem, 5L);
                 final String deliveryId = randomUUID();
                 final TrackingData trackingData = TrackingData.of().withTrackingId("tracking id")
                         .withCarrier("carrier").withProvider("provider").withProviderTransaction("prov transaction").withIsReturn(true);
@@ -379,7 +381,7 @@ public class OrderImportCommandTest extends IntegrationTest {
             final String productId = product.getId();
             final int variantId = 1;
             final LocalizedString name = en("a name");
-            final int quantity = 1;
+            final long quantity = 1;
             final Price price = Price.of(EURO_10);
             final OrderState orderState = OrderState.OPEN;
             final MonetaryAmount amount = EURO_10;
