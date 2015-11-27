@@ -1,10 +1,14 @@
 package io.sphere.sdk.carts;
 
+import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Referenceable;
 import io.sphere.sdk.taxcategories.TaxCategory;
+import io.sphere.sdk.types.CustomDraft;
+import io.sphere.sdk.types.CustomFieldsDraft;
 
+import javax.annotation.Nullable;
 import javax.money.MonetaryAmount;
 
 /**
@@ -15,23 +19,30 @@ import javax.money.MonetaryAmount;
 
  @see CustomLineItem
  */
-public class CustomLineItemDraft {
+public class CustomLineItemDraft extends Base implements CustomDraft {
     private final LocalizedString name;
     private final MonetaryAmount money;
     private final String slug;
     private final Reference<TaxCategory> taxCategory;
     private final Long quantity;
+    @Nullable
+    private final CustomFieldsDraft custom;
 
-    private CustomLineItemDraft(final LocalizedString name, final String slug, final MonetaryAmount money, final Referenceable<TaxCategory> taxCategory, final Long quantity) {
+    private CustomLineItemDraft(final LocalizedString name, final String slug, final MonetaryAmount money, final Referenceable<TaxCategory> taxCategory, final Long quantity, @Nullable final CustomFieldsDraft custom) {
         this.name = name;
         this.money = money;
         this.slug = slug;
+        this.custom = custom;
         this.taxCategory = taxCategory.toReference();
         this.quantity = quantity;
     }
 
     public static CustomLineItemDraft of(final LocalizedString name, final String slug, final MonetaryAmount money, final Referenceable<TaxCategory> taxCategory, final long quantity) {
-        return new CustomLineItemDraft(name, slug, money, taxCategory, quantity);
+        return of(name, slug, money, taxCategory, quantity, null);
+    }
+
+    public static CustomLineItemDraft of(final LocalizedString name, final String slug, final MonetaryAmount money, final Referenceable<TaxCategory> taxCategory, final long quantity, @Nullable final CustomFieldsDraft custom) {
+        return new CustomLineItemDraft(name, slug, money, taxCategory, quantity, custom);
     }
 
     public LocalizedString getName() {
@@ -52,5 +63,11 @@ public class CustomLineItemDraft {
 
     public Long getQuantity() {
         return quantity;
+    }
+
+    @Nullable
+    @Override
+    public CustomFieldsDraft getCustom() {
+        return custom;
     }
 }
