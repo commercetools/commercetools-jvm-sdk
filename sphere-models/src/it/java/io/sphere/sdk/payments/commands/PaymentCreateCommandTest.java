@@ -113,6 +113,7 @@ public class PaymentCreateCommandTest extends IntegrationTest {
                             .of(TransactionType.CHARGE, totalAmount, ZonedDateTime.now())
                             .timestamp(ZonedDateTime.now())
                             .interactionId(randomKey())
+                            .state(TransactionState.PENDING)
                             .build();
                     final List<TransactionDraft> transactions = Collections.singletonList(transactionDraft);
                     final String externalId = randomKey();
@@ -152,6 +153,7 @@ public class PaymentCreateCommandTest extends IntegrationTest {
                         s.assertThat(transaction.getAmount()).isEqualTo(transactionDraft.getAmount());
                         s.assertThat(transaction.getInteractionId()).isEqualTo(transactionDraft.getInteractionId());
                         s.assertThat(transaction.getType()).isEqualTo(transactionDraft.getType());
+                        s.assertThat(transaction.getState()).isEqualTo(transactionDraft.getState());
                         s.assertThat(payment.getInterfaceInteractions().get(0).getFieldAsString(TypeFixtures.STRING_FIELD_NAME)).isEqualTo("foo1");
                         s.assertThat(payment.getInterfaceInteractions().get(1).getFieldAsString(TypeFixtures.STRING_FIELD_NAME)).isEqualTo("foo2");
                     });

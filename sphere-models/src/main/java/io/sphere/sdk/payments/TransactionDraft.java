@@ -15,9 +15,12 @@ public final class TransactionDraft extends Base {
     private final MonetaryAmount amount;
     @Nullable
     private final String interactionId;
+    @Nullable
+    private final TransactionState state;
 
     @JsonCreator
-    TransactionDraft(final ZonedDateTime timestamp, final TransactionType type, final MonetaryAmount amount, final String interactionId) {
+    TransactionDraft(final ZonedDateTime timestamp, final TransactionType type, final MonetaryAmount amount, final String interactionId, @Nullable final TransactionState state) {
+        this.state = state;
         this.timestamp = Optional.ofNullable(timestamp)
                 .map(value -> value.withZoneSameInstant(ZoneOffset.UTC))
                 .orElse(null);
@@ -41,5 +44,10 @@ public final class TransactionDraft extends Base {
     @Nullable
     public String getInteractionId() {
         return interactionId;
+    }
+
+    @Nullable
+    public TransactionState getState() {
+        return state;
     }
 }

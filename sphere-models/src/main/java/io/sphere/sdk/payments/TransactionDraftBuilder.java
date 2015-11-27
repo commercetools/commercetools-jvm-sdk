@@ -13,15 +13,18 @@ public final class TransactionDraftBuilder extends Base implements Builder<Trans
     private MonetaryAmount amount;
     @Nullable
     private String interactionId;
+    @Nullable
+    private TransactionState state;
 
-    private TransactionDraftBuilder(final TransactionType type, final MonetaryAmount amount, final ZonedDateTime timestamp) {
+    private TransactionDraftBuilder(final TransactionType type, final MonetaryAmount amount, final ZonedDateTime timestamp, final TransactionState state) {
         this.type = type;
         this.amount = amount;
         this.timestamp = timestamp;
+        this.state = state;
     }
 
     public static TransactionDraftBuilder of(final TransactionType type, final MonetaryAmount amount, final ZonedDateTime timestamp) {
-        return new TransactionDraftBuilder(type, amount, timestamp);
+        return new TransactionDraftBuilder(type, amount, timestamp, null);
     }
 
     public TransactionDraftBuilder timestamp(final ZonedDateTime timestamp) {
@@ -31,6 +34,11 @@ public final class TransactionDraftBuilder extends Base implements Builder<Trans
 
     public TransactionDraftBuilder interactionId(@Nullable final String interactionId) {
         this.interactionId = interactionId;
+        return this;
+    }
+
+    public TransactionDraftBuilder state(@Nullable final TransactionState state) {
+        this.state = state;
         return this;
     }
 
@@ -52,8 +60,13 @@ public final class TransactionDraftBuilder extends Base implements Builder<Trans
         return type;
     }
 
+    @Nullable
+    public TransactionState getState() {
+        return state;
+    }
+
     @Override
     public TransactionDraft build() {
-        return new TransactionDraft(timestamp, type, amount, interactionId);
+        return new TransactionDraft(timestamp, type, amount, interactionId, state);
     }
 }
