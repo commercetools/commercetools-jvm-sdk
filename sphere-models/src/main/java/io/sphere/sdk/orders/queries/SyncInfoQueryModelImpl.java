@@ -22,4 +22,14 @@ final class SyncInfoQueryModelImpl<T> extends QueryModelImpl<T> implements SyncI
     public final TimestampSortingModel<T> syncedAt() {
         return timestampSortingModel("syncedAt");
     }
+
+    @Override
+    public QueryPredicate<T> isEmpty() {
+        return isEmptyCollectionQueryPredicate();
+    }
+
+    @Override
+    public QueryPredicate<T> isNotEmpty() {
+        return isNotEmptyCollectionQueryPredicate();
+    }
 }

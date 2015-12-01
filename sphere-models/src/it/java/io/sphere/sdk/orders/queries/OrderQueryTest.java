@@ -95,12 +95,17 @@ public class OrderQueryTest extends IntegrationTest {
     }
 
     @Test
+    public void emptySyncInfo() throws Exception {
+        assertOrderIsFoundWithPredicate(order -> MODEL.syncInfo().isEmpty());
+    }
+
+    @Test
     public void syncInfo() throws Exception {
         final Channel channel = persistentChannelOfRole(client(), ORDER_EXPORT);
         final String externalId = randomKey();
         assertOrderIsFoundWithPredicate(
                 order -> execute(OrderUpdateCommand.of(order, UpdateSyncInfo.of(channel).withExternalId(externalId))),
-                order -> MODEL.syncInfo().channel().is(channel).and(MODEL.syncInfo().externalId().is(externalId)));
+                order -> MODEL.syncInfo().channel().is(channel).and(MODEL.syncInfo().externalId().is(externalId)).and(MODEL.syncInfo().isNotEmpty()));
     }
 
     private void assertOrderIsFound(final Function<Order, OrderQuery> p) {
