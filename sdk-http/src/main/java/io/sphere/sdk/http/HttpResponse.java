@@ -7,7 +7,8 @@ import java.util.Optional;
 import static io.sphere.sdk.http.HttpResponseImpl.responseCodeStartsWith;
 
 public interface HttpResponse {
-    int getStatusCode();
+    @Nullable
+    Integer getStatusCode();
 
     HttpHeaders getHeaders();
 
@@ -37,35 +38,35 @@ public interface HttpResponse {
         return responseCodeStartsWith(this, 5);
     }
 
-    static HttpResponse of(final int status, final String responseBody) {
+    static HttpResponse of(@Nullable final Integer status, final String responseBody) {
         return of(status, responseBody, null, HttpHeaders.of());
     }
 
-    static HttpResponse of(final int status, final String responseBody, final HttpHeaders headers) {
+    static HttpResponse of(@Nullable final Integer status, final String responseBody, final HttpHeaders headers) {
         return of(status, responseBody, null, headers);
     }
 
-    static HttpResponse of(final int status) {
+    static HttpResponse of(@Nullable final Integer status) {
         return of(status, (byte[]) null, null, null);
     }
 
-    static HttpResponse of(final int status, final HttpHeaders headers) {
+    static HttpResponse of(@Nullable final Integer status, final HttpHeaders headers) {
         return of(status, (byte[]) null, null, headers);
     }
 
-    static HttpResponse of(final int status, final String responseBody, final HttpRequest associatedRequest) {
+    static HttpResponse of(@Nullable final Integer status, final String responseBody, final HttpRequest associatedRequest) {
         return of(status, responseBody, associatedRequest, HttpHeaders.of());
     }
 
-    static HttpResponse of(final int status, final String responseBody, final HttpRequest associatedRequest, final HttpHeaders headers) {
+    static HttpResponse of(@Nullable final Integer status, final String responseBody, final HttpRequest associatedRequest, final HttpHeaders headers) {
         return of(status, responseBody.getBytes(StandardCharsets.UTF_8), associatedRequest, headers);
     }
 
-    static HttpResponse of(final int status, final byte[] body, final HttpRequest associatedRequest) {
+    static HttpResponse of(@Nullable final Integer status, final byte[] body, final HttpRequest associatedRequest) {
         return of(status, body, associatedRequest, HttpHeaders.empty());
     }
 
-    static HttpResponse of(final int status, final byte[] body, @Nullable final HttpRequest associatedRequest, @Nullable final HttpHeaders headers) {
+    static HttpResponse of(@Nullable final Integer status, final byte[] body, @Nullable final HttpRequest associatedRequest, @Nullable final HttpHeaders headers) {
         return new HttpResponseImpl(status, body, associatedRequest, Optional.ofNullable(headers).orElseGet(() -> HttpHeaders.of()));
     }
 
