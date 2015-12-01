@@ -122,7 +122,23 @@ extends java.lang.Object</pre>
  </ul>
  -->
 
- <h3 class=released-version id="v1_0_0_M21">1.0.0-M21</h3>
+ <h3 class=released-version id="v1_0_0_M22">1.0.0-M22 (01.12.2015)</h3>
+ <ul>
+ <li class=change-in-release><a href="../../../../io/sphere/sdk/products/attributes/AttributeDefinition.html#getIsRequired--"><code>AttributeDefinition.getIsRequired()</code></a> and <a href="../../../../io/sphere/sdk/products/attributes/AttributeDefinition.html#getIsSearchable--"><code>AttributeDefinition.getIsSearchable()</code></a> ()} have been
+ deprecated in favor of <a href="../../../../io/sphere/sdk/products/attributes/AttributeDefinition.html#isRequired--"><code>AttributeDefinition.isRequired()</code></a> and <a href="../../../../io/sphere/sdk/products/attributes/AttributeDefinition.html#isSearchable"><code>AttributeDefinition.isSearchable</code></a>.
+ </li>
+ <li class=new-in-release>Added new Payment actions:
+ <a href="../../../../io/sphere/sdk/payments/commands/updateactions/ChangeTransactionTimestamp.html" title="class in io.sphere.sdk.payments.commands.updateactions"><code>ChangeTransactionTimestamp</code></a>,
+ <a href="../../../../io/sphere/sdk/payments/commands/updateactions/ChangeTransactionInteractionId.html" title="class in io.sphere.sdk.payments.commands.updateactions"><code>ChangeTransactionInteractionId</code></a> and
+ <a href="../../../../io/sphere/sdk/payments/commands/updateactions/ChangeTransactionState.html" title="class in io.sphere.sdk.payments.commands.updateactions"><code>ChangeTransactionState</code></a>
+ </li>
+ <li class=new-in-release>Added <a href="../../../../io/sphere/sdk/payments/Transaction.html#getId--"><code>Transaction.getId()</code></a> and <a href="../../../../io/sphere/sdk/payments/Transaction.html#getState--"><code>Transaction.getState()</code></a></li>
+ <li class=change-in-release><a href="../../../../io/sphere/sdk/payments/Transaction.html" title="class in io.sphere.sdk.payments"><code>Transaction</code></a> has been split to <a href="../../../../io/sphere/sdk/payments/TransactionDraft.html" title="class in io.sphere.sdk.payments"><code>TransactionDraft</code></a> as input object
+ and <a href="../../../../io/sphere/sdk/payments/Transaction.html" title="class in io.sphere.sdk.payments"><code>Transaction</code></a> as output object of the API.</li>
+ <li class=change-in-release>Fixed method typo <a href="../../../../io/sphere/sdk/products/ProductProjection.html#findVariantBySky-java.lang.String-"><code>ProductProjection.findVariantBySky(String)</code></a>, use <a href="../../../../io/sphere/sdk/products/ProductProjection.html#findVariantBySku-java.lang.String-"><code>ProductProjection.findVariantBySku(String)</code></a></li>
+ </ul>
+
+ <h3 class=released-version id="v1_0_0_M21">1.0.0-M21 (25.11.2015)</h3>
  <ul>
  <li class=new-in-release>Introduced the possibility to perform faceted search on products, for more information see the <a href="../../../../io/sphere/sdk/meta/SearchDocumentation.html" title="class in io.sphere.sdk.meta"><code>search documentation</code></a>, section Faceted Search.</li>
  <li class=new-in-release>Added getters <a href="../../../../io/sphere/sdk/search/SearchExpression.html#value--"><code>SearchExpression.value()</code></a> and <a href="../../../../io/sphere/sdk/search/FacetExpression.html#alias--"><code>FacetExpression.alias()</code></a> for the Search API.</li>

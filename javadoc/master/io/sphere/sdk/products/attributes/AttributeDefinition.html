@@ -18,8 +18,8 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10};
-var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
+var methods = {"i0":10,"i1":10,"i2":10,"i3":42,"i4":42,"i5":10,"i6":10,"i7":10,"i8":10};
+var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"],32:["t6","Deprecated Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
 var tableTab = "tableTab";
@@ -132,7 +132,7 @@ extends <a href="../../../../../io/sphere/sdk/models/Base.html" title="class in 
 </a>
 <h3>Method Summary</h3>
 <table class="memberSummary" border="0" cellpadding="3" cellspacing="0" summary="Method Summary table, listing methods, and an explanation">
-<caption><span id="t0" class="activeTableTab"><span>All Methods</span><span class="tabEnd">&nbsp;</span></span><span id="t2" class="tableTab"><span><a href="javascript:show(2);">Instance Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t4" class="tableTab"><span><a href="javascript:show(8);">Concrete Methods</a></span><span class="tabEnd">&nbsp;</span></span></caption>
+<caption><span id="t0" class="activeTableTab"><span>All Methods</span><span class="tabEnd">&nbsp;</span></span><span id="t2" class="tableTab"><span><a href="javascript:show(2);">Instance Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t4" class="tableTab"><span><a href="javascript:show(8);">Concrete Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t6" class="tableTab"><span><a href="javascript:show(32);">Deprecated Methods</a></span><span class="tabEnd">&nbsp;</span></span></caption>
 <tr>
 <th class="colFirst" scope="col">Modifier and Type</th>
 <th class="colLast" scope="col">Method and Description</th>
@@ -156,13 +156,17 @@ extends <a href="../../../../../io/sphere/sdk/models/Base.html" title="class in 
 <tr id="i3" class="rowColor">
 <td class="colFirst"><code>java.lang.Boolean</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/products/attributes/AttributeDefinition.html#getIsRequired--">getIsRequired</a></span>()</code>
-<div class="block">Whether the attribute is required to have a value.</div>
+<div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;
+<div class="block"><span class="deprecationComment">use <a href="../../../../../io/sphere/sdk/products/attributes/AttributeDefinition.html#isRequired--"><code>isRequired()</code></a> instead</span></div>
+</div>
 </td>
 </tr>
 <tr id="i4" class="altColor">
 <td class="colFirst"><code>java.lang.Boolean</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/products/attributes/AttributeDefinition.html#getIsSearchable--">getIsSearchable</a></span>()</code>
-<div class="block">Whether the attribute's values should generally be enabled in product search.</div>
+<div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;
+<div class="block"><span class="deprecationComment">use <a href="../../../../../io/sphere/sdk/products/attributes/AttributeDefinition.html#isSearchable--"><code>isSearchable()</code></a> instead</span></div>
+</div>
 </td>
 </tr>
 <tr id="i5" class="rowColor">
@@ -175,6 +179,18 @@ extends <a href="../../../../../io/sphere/sdk/models/Base.html" title="class in 
 <td class="colFirst"><code>java.lang.String</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/products/attributes/AttributeDefinition.html#getName--">getName</a></span>()</code>
 <div class="block">The unique name of the attribute used in the API.</div>
+</td>
+</tr>
+<tr id="i7" class="rowColor">
+<td class="colFirst"><code>java.lang.Boolean</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/products/attributes/AttributeDefinition.html#isRequired--">isRequired</a></span>()</code>
+<div class="block">Whether the attribute is required to have a value.</div>
+</td>
+</tr>
+<tr id="i8" class="altColor">
+<td class="colFirst"><code>java.lang.Boolean</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/products/attributes/AttributeDefinition.html#isSearchable--">isSearchable</a></span>()</code>
+<div class="block">Whether the attribute's values should generally be enabled in product search.</div>
 </td>
 </tr>
 </table>
@@ -254,7 +270,23 @@ extends <a href="../../../../../io/sphere/sdk/models/Base.html" title="class in 
 <ul class="blockList">
 <li class="blockList">
 <h4>getIsRequired</h4>
-<pre>public&nbsp;java.lang.Boolean&nbsp;getIsRequired()</pre>
+<pre>@Deprecated
+public&nbsp;java.lang.Boolean&nbsp;getIsRequired()</pre>
+<div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;<span class="deprecationComment">use <a href="../../../../../io/sphere/sdk/products/attributes/AttributeDefinition.html#isRequired--"><code>isRequired()</code></a> instead</span></div>
+<div class="block">Whether the attribute is required to have a value.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>true if required else false</dd>
+</dl>
+</li>
+</ul>
+<a name="isRequired--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>isRequired</h4>
+<pre>public&nbsp;java.lang.Boolean&nbsp;isRequired()</pre>
 <div class="block">Whether the attribute is required to have a value.</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
@@ -282,7 +314,24 @@ extends <a href="../../../../../io/sphere/sdk/models/Base.html" title="class in 
 <ul class="blockList">
 <li class="blockList">
 <h4>getIsSearchable</h4>
-<pre>public&nbsp;java.lang.Boolean&nbsp;getIsSearchable()</pre>
+<pre>@Deprecated
+public&nbsp;java.lang.Boolean&nbsp;getIsSearchable()</pre>
+<div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;<span class="deprecationComment">use <a href="../../../../../io/sphere/sdk/products/attributes/AttributeDefinition.html#isSearchable--"><code>isSearchable()</code></a> instead</span></div>
+<div class="block">Whether the attribute's values should generally be enabled in product search.
+ The exact features that are enabled/disabled with this flag depend on the concrete attribute type and are described there.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>true if searchable, false if not</dd>
+</dl>
+</li>
+</ul>
+<a name="isSearchable--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>isSearchable</h4>
+<pre>public&nbsp;java.lang.Boolean&nbsp;isSearchable()</pre>
 <div class="block">Whether the attribute's values should generally be enabled in product search.
  The exact features that are enabled/disabled with this flag depend on the concrete attribute type and are described there.</div>
 <dl>
