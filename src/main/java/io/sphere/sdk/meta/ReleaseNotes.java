@@ -158,7 +158,7 @@ import java.util.function.Function;
  <li class=new-in-release>Added {@link io.sphere.sdk.payments.Payment}.</li>
  <li class=change-in-release>Deprecated typo method {@link io.sphere.sdk.carts.CartDraft#witCustom(CustomFieldsDraft)}, use {@link io.sphere.sdk.carts.CartDraft#withCustom(CustomFieldsDraft)} instead.</li>
  <li class=change-in-release>Deprecated {@link io.sphere.sdk.customers.queries.CustomerByTokenGet}, use {@link io.sphere.sdk.customers.queries.CustomerByPasswordTokenGet} instead.</li>
- <li class=new-in-release>Added {@link io.sphere.sdk.customobjects.queries.CustomObjectByIdGet} and {@link CustomObjectDeleteCommand#of(String, long, Class)} which can delete a {@link CustomObject} by ID.</li>
+ <li class=new-in-release>Added {@link io.sphere.sdk.customobjects.queries.CustomObjectByIdGet} and {@link CustomObjectDeleteCommand#of(String, Long, Class)} which can delete a {@link CustomObject} by ID.</li>
  <li class=change-in-release>Simplified CustomObject endpoints. Instead of a {@link com.fasterxml.jackson.core.type.TypeReference} for the endpoint result only the class of the value of the custom object needs to be provided.
  <div class="rn-hidden">
  <p>Before:</p>
