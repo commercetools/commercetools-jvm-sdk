@@ -5,7 +5,6 @@ import io.sphere.sdk.messages.queries.MessageQuery;
 import io.sphere.sdk.payments.*;
 import io.sphere.sdk.payments.messages.PaymentCreatedMessage;
 import io.sphere.sdk.queries.PagedQueryResult;
-import io.sphere.sdk.queries.Query;
 import io.sphere.sdk.test.IntegrationTest;
 import io.sphere.sdk.types.CustomFieldsDraft;
 import io.sphere.sdk.types.TypeFixtures;
@@ -70,7 +69,7 @@ public class PaymentCreateCommandTest extends IntegrationTest {
                         .state(paidState).build();
                 final String interfaceId = randomKey();
                 final String interactionId = randomKey();
-                final List<Transaction> transactions = Collections.singletonList(TransactionBuilder
+                final List<TransactionDraft> transactions = Collections.singletonList(TransactionDraftBuilder
                         .of(TransactionType.CHARGE, totalAmount, ZonedDateTime.now())
                         .timestamp(ZonedDateTime.now())
                         .interactionId(interactionId)
@@ -90,7 +89,7 @@ public class PaymentCreateCommandTest extends IntegrationTest {
                 assertThat(payment.getAmountPaid()).isEqualTo(totalAmount);
                 assertThat(payment.getPaymentStatus()).isEqualTo(paymentStatus);
                 assertThat(payment.getInterfaceId()).isEqualTo(interfaceId);
-                assertThat(payment.getTransactions()).isEqualTo(transactions);
+                assertThat(payment.getTransactions().get(0).getTimestamp()).isEqualTo(transactions.get(0).getTimestamp());
 
                 execute(PaymentDeleteCommand.of(payment));
             });
@@ -110,11 +109,13 @@ public class PaymentCreateCommandTest extends IntegrationTest {
                             .method("CREDIT_CARD")
                             .name(randomSlug())
                             .build();
-                    final List<Transaction> transactions = Collections.singletonList(TransactionBuilder
+                    final TransactionDraft transactionDraft = TransactionDraftBuilder
                             .of(TransactionType.CHARGE, totalAmount, ZonedDateTime.now())
                             .timestamp(ZonedDateTime.now())
                             .interactionId(randomKey())
-                            .build());
+                            .state(TransactionState.PENDING)
+                            .build();
+                    final List<TransactionDraft> transactions = Collections.singletonList(transactionDraft);
                     final String externalId = randomKey();
                     final String interfaceId = randomKey();
                     final ZonedDateTime authorizedUntil = ZonedDateTime.now().plusMonths(1);
@@ -147,7 +148,12 @@ public class PaymentCreateCommandTest extends IntegrationTest {
                         s.assertThat(payment.getPaymentMethodInfo()).isEqualTo(paymentMethodInfo);
                         s.assertThat(payment.getCustom().getFieldAsString(TypeFixtures.STRING_FIELD_NAME)).isEqualTo("foo");
                         s.assertThat(payment.getPaymentStatus()).isEqualTo(paymentStatus);
-                        s.assertThat(payment.getTransactions()).isEqualTo(transactions);
+                        final Transaction transaction = payment.getTransactions().get(0);
+                        s.assertThat(transaction.getTimestamp()).isEqualTo(transactionDraft.getTimestamp());
+                        s.assertThat(transaction.getAmount()).isEqualTo(transactionDraft.getAmount());
+                        s.assertThat(transaction.getInteractionId()).isEqualTo(transactionDraft.getInteractionId());
+                        s.assertThat(transaction.getType()).isEqualTo(transactionDraft.getType());
+                        s.assertThat(transaction.getState()).isEqualTo(transactionDraft.getState());
                         s.assertThat(payment.getInterfaceInteractions().get(0).getFieldAsString(TypeFixtures.STRING_FIELD_NAME)).isEqualTo("foo1");
                         s.assertThat(payment.getInterfaceInteractions().get(1).getFieldAsString(TypeFixtures.STRING_FIELD_NAME)).isEqualTo("foo2");
                     });

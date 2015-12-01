@@ -9,8 +9,7 @@ import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
 import java.util.Optional;
 
-public final class Transaction extends Base {
-    private final String id;
+public final class TransactionDraft extends Base {
     @Nullable
     private final ZonedDateTime timestamp;
     private final TransactionType type;
@@ -21,8 +20,7 @@ public final class Transaction extends Base {
     private final TransactionState state;
 
     @JsonCreator
-    Transaction(@Nullable final ZonedDateTime timestamp, final String id, final TransactionType type, final MonetaryAmount amount, final String interactionId, @Nullable final TransactionState state) {
-        this.id = id;
+    TransactionDraft(@Nullable final ZonedDateTime timestamp, final TransactionType type, final MonetaryAmount amount, final String interactionId, @Nullable final TransactionState state) {
         this.state = state;
         this.timestamp = Optional.ofNullable(timestamp)
                 .map(value -> value.withZoneSameInstant(ZoneOffset.UTC))
@@ -48,10 +46,6 @@ public final class Transaction extends Base {
     @Nullable
     public String getInteractionId() {
         return interactionId;
-    }
-
-    public String getId() {
-        return id;
     }
 
     @Nullable

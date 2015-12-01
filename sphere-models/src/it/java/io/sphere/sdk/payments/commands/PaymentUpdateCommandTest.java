@@ -7,9 +7,10 @@ import io.sphere.sdk.payments.commands.updateactions.*;
 import io.sphere.sdk.payments.messages.PaymentInteractionAddedMessage;
 import io.sphere.sdk.payments.messages.PaymentStatusStateTransitionMessage;
 import io.sphere.sdk.payments.messages.PaymentTransactionAddedMessage;
+import io.sphere.sdk.payments.messages.PaymentTransactionStateChangedMessage;
 import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.test.IntegrationTest;
-import io.sphere.sdk.types.TypeFixtures;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.Test;
 
 import javax.money.MonetaryAmount;
@@ -19,6 +20,7 @@ import java.util.Collections;
 import static io.sphere.sdk.carts.CartFixtures.withCustomerAndFilledCart;
 import static io.sphere.sdk.customers.CustomerFixtures.withCustomer;
 import static io.sphere.sdk.payments.PaymentFixtures.withPayment;
+import static io.sphere.sdk.payments.PaymentFixtures.withPaymentTransaction;
 import static io.sphere.sdk.states.StateFixtures.withStateByBuilder;
 import static io.sphere.sdk.states.StateType.PAYMENT_STATE;
 import static io.sphere.sdk.test.SphereTestUtils.*;
@@ -230,7 +232,7 @@ public class PaymentUpdateCommandTest extends IntegrationTest {
                     .paymentInterface(randomKey())
                     .method("CREDIT_CARD")
                     .build();
-            final Transaction chargeTransaction = TransactionBuilder
+            final TransactionDraft chargeTransaction = TransactionDraftBuilder
                     .of(TransactionType.CHARGE, totalAmount, ZonedDateTime.now())
                     .build();
             final PaymentDraftBuilder paymentDraftBuilder = PaymentDraftBuilder.of(totalAmount)
@@ -245,22 +247,23 @@ public class PaymentUpdateCommandTest extends IntegrationTest {
             assertThat(payment.getAmountPlanned()).isEqualTo(totalAmount);
 
             final MonetaryAmount firstRefundAmount = EURO_10;
-            final Transaction firstRefundTransaction = TransactionBuilder.of(TransactionType.REFUND, firstRefundAmount, ZonedDateTime.now()).build();
+            final TransactionDraft firstRefundTransaction = TransactionDraftBuilder.of(TransactionType.REFUND, firstRefundAmount, ZonedDateTime.now()).build();
             final Payment paymentWithFirstRefund = execute(PaymentUpdateCommand.of(payment, asList(SetAmountRefunded.of(firstRefundAmount), AddTransaction.of(firstRefundTransaction))));
 
-            assertThat(paymentWithFirstRefund.getTransactions()).contains(chargeTransaction, firstRefundTransaction);
+            assertThat(paymentWithFirstRefund.getTransactions()).hasSize(2);
+            assertThat(paymentWithFirstRefund.getTransactions().get(0).getId()).isNotEmpty();
 
             final PagedQueryResult<PaymentTransactionAddedMessage> messageQueryResult = execute(MessageQuery.of().withPredicates(m -> m.resource().is(payment))
                     .forMessageType(PaymentTransactionAddedMessage.MESSAGE_HINT));
-            assertThat(messageQueryResult.head().get().getTransaction()).isEqualTo(firstRefundTransaction);
+            assertThat(messageQueryResult.head().get().getTransaction().getTimestamp()).isEqualTo(firstRefundTransaction.getTimestamp());
 
 
             final MonetaryAmount secondRefundAmount = EURO_5;
-            final Transaction secondRefundTransaction = TransactionBuilder.of(TransactionType.REFUND, secondRefundAmount, ZonedDateTime.now()).build();
+            final TransactionDraft secondRefundTransaction = TransactionDraftBuilder.of(TransactionType.REFUND, secondRefundAmount, ZonedDateTime.now()).build();
             final MonetaryAmount totalRefundAmount = secondRefundAmount.add(paymentWithFirstRefund.getAmountRefunded());
             final Payment paymentWithSecondRefund = execute(PaymentUpdateCommand.of(paymentWithFirstRefund, asList(SetAmountRefunded.of(totalRefundAmount), AddTransaction.of(secondRefundTransaction))));
 
-            assertThat(paymentWithSecondRefund.getTransactions()).contains(chargeTransaction, firstRefundTransaction, secondRefundTransaction);
+            assertThat(paymentWithSecondRefund.getTransactions()).hasSize(3);
             assertThat(paymentWithSecondRefund.getAmountRefunded()).isEqualTo(totalRefundAmount);
         });
     }
@@ -282,6 +285,55 @@ public class PaymentUpdateCommandTest extends IntegrationTest {
                 return updatedPayment;
             });
             return type;
+        });
+    }
+
+    @Test
+    public void changeTransactionTimestamp() {
+        withPaymentTransaction(client(), (Payment payment, Transaction transaction) -> {
+            final ZonedDateTime now = ZonedDateTime.now();
+
+            final Payment updatedPayment = client().execute(PaymentUpdateCommand.of(payment, ChangeTransactionTimestamp.of(now, transaction.getId())));
+
+            final Transaction updatedTransaction = updatedPayment.getTransactions().get(0);
+            assertThat(updatedTransaction.getTimestamp()).isEqualTo(now);
+
+            return updatedPayment;
+        });
+    }
+
+    @Test
+    public void changeTransactionInteractionId() {
+        withPaymentTransaction(client(), (Payment payment, Transaction transaction) -> {
+            final String newInteractionId = RandomStringUtils.randomAlphanumeric(32);
+
+            final Payment updatedPayment = client().execute(PaymentUpdateCommand.of(payment, ChangeTransactionInteractionId.of(newInteractionId, transaction.getId())));
+
+            final Transaction updatedTransaction = updatedPayment.getTransactions().get(0);
+            assertThat(updatedTransaction.getInteractionId()).isEqualTo(newInteractionId);
+
+            return updatedPayment;
+        });
+    }
+
+    @Test
+    public void changeTransactionState() {
+        withPaymentTransaction(client(), (Payment payment, Transaction transaction) -> {
+            assertThat(transaction.getState()).isEqualTo(TransactionState.PENDING);
+            final TransactionState transactionState = TransactionState.SUCCESS;
+
+            final Payment updatedPayment = client().execute(PaymentUpdateCommand.of(payment, ChangeTransactionState.of(transactionState, transaction.getId())));
+
+            final Transaction updatedTransaction = updatedPayment.getTransactions().get(0);
+            assertThat(updatedTransaction.getState()).isEqualTo(transactionState);
+
+            //check messages
+            final PagedQueryResult<PaymentTransactionStateChangedMessage> messageQueryResult = execute(MessageQuery.of()
+                    .withPredicates(m -> m.resource().is(payment))
+                    .forMessageType(PaymentTransactionStateChangedMessage.MESSAGE_HINT));
+            assertThat(messageQueryResult.head().get().getState()).isEqualTo(transactionState);
+
+            return updatedPayment;
         });
     }
 }

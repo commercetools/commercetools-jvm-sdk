@@ -33,11 +33,11 @@ final class PaymentDraftImpl extends Base implements PaymentDraft {
     private final CustomFieldsDraft custom;
     @Nullable
     private final PaymentStatus paymentStatus;
-    private final List<Transaction> transactions;
+    private final List<TransactionDraft> transactions;
     private final List<CustomFieldsDraft> interfaceInteractions;
 
     @JsonCreator
-    PaymentDraftImpl(final MonetaryAmount amountAuthorized, final Reference<Customer> customer, final String externalId, final String interfaceId, final MonetaryAmount amountPlanned, final ZonedDateTime authorizedUntil, final MonetaryAmount amountPaid, final MonetaryAmount amountRefunded, final PaymentMethodInfo paymentMethodInfo, final CustomFieldsDraft custom, final PaymentStatus paymentStatus, final List<Transaction> transactions, final List<CustomFieldsDraft> interfaceInteractions) {
+    PaymentDraftImpl(final MonetaryAmount amountAuthorized, final Reference<Customer> customer, final String externalId, final String interfaceId, final MonetaryAmount amountPlanned, final ZonedDateTime authorizedUntil, final MonetaryAmount amountPaid, final MonetaryAmount amountRefunded, final PaymentMethodInfo paymentMethodInfo, final CustomFieldsDraft custom, final PaymentStatus paymentStatus, final List<TransactionDraft> transactions, final List<CustomFieldsDraft> interfaceInteractions) {
         this.amountAuthorized = amountAuthorized;
         this.customer = customer;
         this.externalId = externalId;
@@ -124,7 +124,7 @@ final class PaymentDraftImpl extends Base implements PaymentDraft {
     }
 
     @Override
-    public List<Transaction> getTransactions() {
+    public List<TransactionDraft> getTransactions() {
         return transactions;
     }
 }
