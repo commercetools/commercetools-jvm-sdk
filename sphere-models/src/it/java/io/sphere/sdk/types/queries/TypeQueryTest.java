@@ -11,6 +11,7 @@ import org.junit.Test;
 import java.util.List;
 import java.util.function.Function;
 
+import static io.sphere.sdk.types.TypeFixtures.STRING_FIELD_NAME;
 import static io.sphere.sdk.types.TypeFixtures.withUpdateableType;
 import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -21,13 +22,19 @@ public class TypeQueryTest extends IntegrationTest {
 
     @Test
     public void queryByContainsAllResourceTypeIds() {
-       checkByQuery(m -> m.resourceTypeIds().containsAll(RESOURCE_TYPE_IDS));
-   }
+        checkByQuery(m -> m.resourceTypeIds().containsAll(RESOURCE_TYPE_IDS));
+    }
 
-   @Test
+    @Test
     public void queryByContainsAnyResourceTypeIds() {
-       checkByQuery(m -> m.resourceTypeIds().containsAny(RESOURCE_TYPE_IDS));
-   }
+        checkByQuery(m -> m.resourceTypeIds().containsAny(RESOURCE_TYPE_IDS));
+    }
+
+    @Test
+    public void queryByFieldDefinition() {
+        checkByQuery(m -> m.fieldDefinitions().name().is(STRING_FIELD_NAME)
+                .and(m.fieldDefinitions().type().name().is("String")));
+    }
 
     private void checkByQuery(final Function<TypeQueryModel, QueryPredicate<Type>> typeQueryModelQueryPredicateFunction) {
         withUpdateableType(client(), type -> {
