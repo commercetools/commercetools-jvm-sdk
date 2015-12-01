@@ -35,6 +35,14 @@ public interface ProductProjectionQuery extends MetaModelQueryDsl<ProductProject
         return withPredicates(m -> m.slug().lang(locale).is(slug));
     }
 
+    default ProductProjectionQuery bySku(final String sku) {
+        return withPredicates(m -> m.allVariants().where(n -> n.sku().is(sku)));
+    }
+
+    default ProductProjectionQuery bySku(final List<String> skus) {
+        return withPredicates(m -> m.allVariants().where(n -> n.sku().isIn(skus)));
+    }
+
     static ProductProjectionQuery ofStaged() {
         return of(ProductProjectionType.STAGED);
     }
