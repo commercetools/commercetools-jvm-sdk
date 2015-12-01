@@ -25,9 +25,11 @@ import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Referenceable;
 import io.sphere.sdk.orders.Order;
 import io.sphere.sdk.orders.expansion.OrderExpansionModel;
+import io.sphere.sdk.payments.Transaction;
 import io.sphere.sdk.productdiscounts.queries.ProductDiscountByIdGet;
 import io.sphere.sdk.products.*;
 import io.sphere.sdk.products.attributes.AttributeAccess;
+import io.sphere.sdk.products.attributes.AttributeDefinition;
 import io.sphere.sdk.products.commands.updateactions.SetMetaDescription;
 import io.sphere.sdk.products.commands.updateactions.SetMetaKeywords;
 import io.sphere.sdk.products.commands.updateactions.SetMetaTitle;
@@ -68,7 +70,23 @@ import java.util.function.Function;
  </ul>
  -->
 
- <h3 class=released-version id="v1_0_0_M21">1.0.0-M21</h3>
+ <h3 class=released-version id="v1_0_0_M22">1.0.0-M22 (01.12.2015)</h3>
+ <ul>
+ <li class=change-in-release>{@link AttributeDefinition#getIsRequired()} and {@link AttributeDefinition#getIsSearchable()} ()} have been
+ deprecated in favor of {@link AttributeDefinition#isRequired()} and {@link AttributeDefinition#isSearchable}.
+ </li>
+ <li class=new-in-release>Added new Payment actions:
+ {@link io.sphere.sdk.payments.commands.updateactions.ChangeTransactionTimestamp},
+ {@link io.sphere.sdk.payments.commands.updateactions.ChangeTransactionInteractionId} and
+ {@link io.sphere.sdk.payments.commands.updateactions.ChangeTransactionState}
+ </li>
+ <li class=new-in-release>Added {@link Transaction#getId()} and {@link Transaction#getState()}</li>
+ <li class=change-in-release>{@link Transaction} has been split to {@link io.sphere.sdk.payments.TransactionDraft} as input object
+ and {@link Transaction} as output object of the API.</li>
+ <li class=change-in-release>Fixed method typo {@link ProductProjection#findVariantBySky(String)}, use {@link ProductProjection#findVariantBySku(String)}</li>
+ </ul>
+
+ <h3 class=released-version id="v1_0_0_M21">1.0.0-M21 (25.11.2015)</h3>
  <ul>
  <li class=new-in-release>Introduced the possibility to perform faceted search on products, for more information see the {@link io.sphere.sdk.meta.SearchDocumentation search documentation}, section Faceted Search.</li>
  <li class=new-in-release>Added getters {@link io.sphere.sdk.search.SearchExpression#value()} and {@link io.sphere.sdk.search.FacetExpression#alias()} for the Search API.</li>
