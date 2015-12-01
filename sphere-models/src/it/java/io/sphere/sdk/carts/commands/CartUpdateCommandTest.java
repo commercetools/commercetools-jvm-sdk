@@ -105,7 +105,7 @@ public class CartUpdateCommandTest extends IntegrationTest {
             final LineItem lineItem = cartWith3.getLineItems().get(0);
             assertThat(lineItem.getQuantity()).isEqualTo(3);
 
-            final Cart cartWith2 = execute(CartUpdateCommand.of(cartWith3, RemoveLineItem.of(lineItem, 1)));
+            final Cart cartWith2 = execute(CartUpdateCommand.of(cartWith3, RemoveLineItem.of(lineItem, 1L)));
             assertThat(cartWith2.getLineItems().get(0).getQuantity()).isEqualTo(2);
 
             final Cart cartWith0 = execute(CartUpdateCommand.of(cartWith2, RemoveLineItem.of(lineItem)));
