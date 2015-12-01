@@ -7,19 +7,22 @@ import io.sphere.sdk.models.LocalizedStringEntry;
 import io.sphere.sdk.queries.Query;
 import io.sphere.sdk.queries.QueryPredicate;
 import io.sphere.sdk.queries.QuerySort;
+import io.sphere.sdk.queries.TimestampSortingModel;
 import io.sphere.sdk.test.IntegrationTest;
 import org.assertj.core.api.AbstractIntegerAssert;
 import org.junit.Test;
 
+import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
+import java.util.function.BiFunction;
 import java.util.function.Consumer;
 
 import static io.sphere.sdk.categories.CategoryFixtures.withCategory;
-import static io.sphere.sdk.queries.QuerySortDirection.DESC;
 import static io.sphere.sdk.test.SphereTestUtils.randomKey;
 import static io.sphere.sdk.test.SphereTestUtils.randomSlug;
+import static java.util.Collections.singletonList;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class CategoryQueryTest extends IntegrationTest {
@@ -130,6 +133,59 @@ public class CategoryQueryTest extends IntegrationTest {
                 .plusSort(m -> m.createdAt().sort().desc()).sort();
         assertThat(sort).hasSize(2);
         assertThat(sort).extractingResultOf("toSphereSort").containsExactly("externalId asc", "createdAt desc");
+    }
+
+    @Test
+    public void queryForCreatedAtIs() {
+        createdAtTest((m, date) -> m.is(date));
+    }
+
+    @Test
+    public void queryForCreatedAtIsNot() {
+        createdAtTest((m, date) -> m.isNot(date.plusMinutes(1)));
+    }
+
+    @Test
+    public void queryForCreatedAtIsGreaterThan() {
+        createdAtTest((m, date) -> m.isGreaterThan(date.minusSeconds(1)));
+    }
+
+    @Test
+    public void queryForCreatedAtIsGreaterThanOrEqualTo() {
+        createdAtTest((m, date) -> m.isGreaterThanOrEqualTo(date.minusSeconds(1)));
+    }
+
+    @Test
+    public void queryForCreatedAtIsLessThan() {
+        createdAtTest((m, date) -> m.isLessThan(date.plusSeconds(1)));
+    }
+
+    @Test
+    public void queryForCreatedAtIsLessThanOrEqualTo() {
+        createdAtTest((m, date) -> m.isLessThanOrEqualTo(date.plusSeconds(1)));
+    }
+
+    @Test
+    public void queryForCreatedAtIsIn() {
+        createdAtTest((m, date) -> m.isIn(singletonList(date)));
+    }
+
+    @Test
+    public void queryForCreatedAtIsNotIn() {
+        createdAtTest((m, date) -> m.isNotIn(singletonList(date.plusMinutes(2))));
+    }
+
+    private void createdAtTest(final BiFunction<TimestampSortingModel<Category>, ZonedDateTime, QueryPredicate<Category>> predicateFunction) {
+        withCategory(client(), category -> {
+            final QueryPredicate<Category> predicate = predicateFunction.apply(CategoryQueryModel.of().createdAt(), category.getCreatedAt());
+
+            final CategoryQuery baseQuery = CategoryQuery.of()
+                    .withPredicates(predicate)
+                    .plusPredicates(m -> m.id().is(category.getId()));
+
+            final Optional<Category> fetched = execute(baseQuery).head();
+            assertThat(fetched).contains(category);
+        });
     }
 
     private static Optional<Category> query(final QueryPredicate<Category> predicate) {
