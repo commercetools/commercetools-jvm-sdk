@@ -16,15 +16,15 @@ import javax.annotation.Nullable;
 public class RemoveLineItem extends UpdateActionImpl<Cart> {
     private final String lineItemId;
     @Nullable
-    private final Integer quantity;
+    private final Long quantity;
 
-    private RemoveLineItem(final String lineItemId, @Nullable final Integer quantity) {
+    private RemoveLineItem(final String lineItemId, @Nullable final Long quantity) {
         super("removeLineItem");
         this.lineItemId = lineItemId;
         this.quantity = quantity;
     }
 
-    public static RemoveLineItem of(final String lineItemId, @Nullable final Integer quantity) {
+    public static RemoveLineItem of(final String lineItemId, @Nullable final Long quantity) {
         return new RemoveLineItem(lineItemId, quantity);
     }
 
@@ -32,7 +32,7 @@ public class RemoveLineItem extends UpdateActionImpl<Cart> {
         return of(lineItemId, null);
     }
 
-    public static RemoveLineItem of(final LineItem lineItem, @Nullable final Integer quantity) {
+    public static RemoveLineItem of(final LineItem lineItem, @Nullable final Long quantity) {
         return of(lineItem.getId(), quantity);
     }
 
@@ -45,7 +45,7 @@ public class RemoveLineItem extends UpdateActionImpl<Cart> {
     }
 
     @Nullable
-    public Integer getQuantity() {
+    public Long getQuantity() {
         return quantity;
     }
 }
