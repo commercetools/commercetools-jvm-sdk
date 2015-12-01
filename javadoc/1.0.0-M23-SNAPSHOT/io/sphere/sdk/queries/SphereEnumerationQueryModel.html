@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":6};
+var methods = {"i0":6,"i1":6,"i2":6,"i3":6};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],4:["t3","Abstract Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -100,12 +100,12 @@ var activeTableTab = "activeTableTab";
 <li class="blockList">
 <dl>
 <dt>All Superinterfaces:</dt>
-<dd><a href="../../../../io/sphere/sdk/queries/EqualityQueryModel.html" title="interface in io.sphere.sdk.queries">EqualityQueryModel</a>&lt;T,E&gt;</dd>
+<dd><a href="../../../../io/sphere/sdk/queries/EqualityQueryModel.html" title="interface in io.sphere.sdk.queries">EqualityQueryModel</a>&lt;T,E&gt;, <a href="../../../../io/sphere/sdk/queries/IsInQueryModel.html" title="interface in io.sphere.sdk.queries">IsInQueryModel</a>&lt;T,E&gt;, <a href="../../../../io/sphere/sdk/queries/IsNotInQueryModel.html" title="interface in io.sphere.sdk.queries">IsNotInQueryModel</a>&lt;T,E&gt;, <a href="../../../../io/sphere/sdk/queries/NotEqualQueryModel.html" title="interface in io.sphere.sdk.queries">NotEqualQueryModel</a>&lt;T,E&gt;</dd>
 </dl>
 <hr>
 <br>
 <pre>public interface <span class="typeNameLabel">SphereEnumerationQueryModel&lt;T,E extends <a href="../../../../io/sphere/sdk/models/SphereEnumeration.html" title="interface in io.sphere.sdk.models">SphereEnumeration</a>&gt;</span>
-extends <a href="../../../../io/sphere/sdk/queries/EqualityQueryModel.html" title="interface in io.sphere.sdk.queries">EqualityQueryModel</a>&lt;T,E&gt;</pre>
+extends <a href="../../../../io/sphere/sdk/queries/EqualityQueryModel.html" title="interface in io.sphere.sdk.queries">EqualityQueryModel</a>&lt;T,E&gt;, <a href="../../../../io/sphere/sdk/queries/NotEqualQueryModel.html" title="interface in io.sphere.sdk.queries">NotEqualQueryModel</a>&lt;T,E&gt;, <a href="../../../../io/sphere/sdk/queries/IsInQueryModel.html" title="interface in io.sphere.sdk.queries">IsInQueryModel</a>&lt;T,E&gt;, <a href="../../../../io/sphere/sdk/queries/IsNotInQueryModel.html" title="interface in io.sphere.sdk.queries">IsNotInQueryModel</a>&lt;T,E&gt;</pre>
 </li>
 </ul>
 </div>
@@ -126,7 +126,19 @@ extends <a href="../../../../io/sphere/sdk/queries/EqualityQueryModel.html" titl
 </tr>
 <tr id="i0" class="altColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/queries/QueryPredicate.html" title="interface in io.sphere.sdk.queries">QueryPredicate</a>&lt;<a href="../../../../io/sphere/sdk/queries/SphereEnumerationQueryModel.html" title="type parameter in SphereEnumerationQueryModel">T</a>&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/SphereEnumerationQueryModel.html#is-E-">is</a></span>(<a href="../../../../io/sphere/sdk/queries/SphereEnumerationQueryModel.html" title="type parameter in SphereEnumerationQueryModel">E</a>&nbsp;enumValue)</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/SphereEnumerationQueryModel.html#is-E-">is</a></span>(<a href="../../../../io/sphere/sdk/queries/SphereEnumerationQueryModel.html" title="type parameter in SphereEnumerationQueryModel">E</a>&nbsp;value)</code>&nbsp;</td>
+</tr>
+<tr id="i1" class="rowColor">
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/queries/QueryPredicate.html" title="interface in io.sphere.sdk.queries">QueryPredicate</a>&lt;<a href="../../../../io/sphere/sdk/queries/SphereEnumerationQueryModel.html" title="type parameter in SphereEnumerationQueryModel">T</a>&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/SphereEnumerationQueryModel.html#isIn-java.lang.Iterable-">isIn</a></span>(java.lang.Iterable&lt;<a href="../../../../io/sphere/sdk/queries/SphereEnumerationQueryModel.html" title="type parameter in SphereEnumerationQueryModel">E</a>&gt;&nbsp;args)</code>&nbsp;</td>
+</tr>
+<tr id="i2" class="altColor">
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/queries/QueryPredicate.html" title="interface in io.sphere.sdk.queries">QueryPredicate</a>&lt;<a href="../../../../io/sphere/sdk/queries/SphereEnumerationQueryModel.html" title="type parameter in SphereEnumerationQueryModel">T</a>&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/SphereEnumerationQueryModel.html#isNot-E-">isNot</a></span>(<a href="../../../../io/sphere/sdk/queries/SphereEnumerationQueryModel.html" title="type parameter in SphereEnumerationQueryModel">E</a>&nbsp;element)</code>&nbsp;</td>
+</tr>
+<tr id="i3" class="rowColor">
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/queries/QueryPredicate.html" title="interface in io.sphere.sdk.queries">QueryPredicate</a>&lt;<a href="../../../../io/sphere/sdk/queries/SphereEnumerationQueryModel.html" title="type parameter in SphereEnumerationQueryModel">T</a>&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/SphereEnumerationQueryModel.html#isNotIn-java.lang.Iterable-">isNotIn</a></span>(java.lang.Iterable&lt;<a href="../../../../io/sphere/sdk/queries/SphereEnumerationQueryModel.html" title="type parameter in SphereEnumerationQueryModel">E</a>&gt;&nbsp;args)</code>&nbsp;</td>
 </tr>
 </table>
 </li>
@@ -148,13 +160,54 @@ extends <a href="../../../../io/sphere/sdk/queries/EqualityQueryModel.html" titl
 </a><a name="is-E-">
 <!--   -->
 </a>
-<ul class="blockListLast">
+<ul class="blockList">
 <li class="blockList">
 <h4>is</h4>
-<pre><a href="../../../../io/sphere/sdk/queries/QueryPredicate.html" title="interface in io.sphere.sdk.queries">QueryPredicate</a>&lt;<a href="../../../../io/sphere/sdk/queries/SphereEnumerationQueryModel.html" title="type parameter in SphereEnumerationQueryModel">T</a>&gt;&nbsp;is(<a href="../../../../io/sphere/sdk/queries/SphereEnumerationQueryModel.html" title="type parameter in SphereEnumerationQueryModel">E</a>&nbsp;enumValue)</pre>
+<pre><a href="../../../../io/sphere/sdk/queries/QueryPredicate.html" title="interface in io.sphere.sdk.queries">QueryPredicate</a>&lt;<a href="../../../../io/sphere/sdk/queries/SphereEnumerationQueryModel.html" title="type parameter in SphereEnumerationQueryModel">T</a>&gt;&nbsp;is(<a href="../../../../io/sphere/sdk/queries/SphereEnumerationQueryModel.html" title="type parameter in SphereEnumerationQueryModel">E</a>&nbsp;value)</pre>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="../../../../io/sphere/sdk/queries/EqualityQueryModel.html#is-E-">is</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/queries/EqualityQueryModel.html" title="interface in io.sphere.sdk.queries">EqualityQueryModel</a>&lt;<a href="../../../../io/sphere/sdk/queries/SphereEnumerationQueryModel.html" title="type parameter in SphereEnumerationQueryModel">T</a>,<a href="../../../../io/sphere/sdk/queries/SphereEnumerationQueryModel.html" title="type parameter in SphereEnumerationQueryModel">E</a> extends <a href="../../../../io/sphere/sdk/models/SphereEnumeration.html" title="interface in io.sphere.sdk.models">SphereEnumeration</a>&gt;</code></dd>
+</dl>
+</li>
+</ul>
+<a name="isIn-java.lang.Iterable-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>isIn</h4>
+<pre><a href="../../../../io/sphere/sdk/queries/QueryPredicate.html" title="interface in io.sphere.sdk.queries">QueryPredicate</a>&lt;<a href="../../../../io/sphere/sdk/queries/SphereEnumerationQueryModel.html" title="type parameter in SphereEnumerationQueryModel">T</a>&gt;&nbsp;isIn(java.lang.Iterable&lt;<a href="../../../../io/sphere/sdk/queries/SphereEnumerationQueryModel.html" title="type parameter in SphereEnumerationQueryModel">E</a>&gt;&nbsp;args)</pre>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../io/sphere/sdk/queries/IsInQueryModel.html#isIn-java.lang.Iterable-">isIn</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/queries/IsInQueryModel.html" title="interface in io.sphere.sdk.queries">IsInQueryModel</a>&lt;<a href="../../../../io/sphere/sdk/queries/SphereEnumerationQueryModel.html" title="type parameter in SphereEnumerationQueryModel">T</a>,<a href="../../../../io/sphere/sdk/queries/SphereEnumerationQueryModel.html" title="type parameter in SphereEnumerationQueryModel">E</a> extends <a href="../../../../io/sphere/sdk/models/SphereEnumeration.html" title="interface in io.sphere.sdk.models">SphereEnumeration</a>&gt;</code></dd>
+</dl>
+</li>
+</ul>
+<a name="isNotIn-java.lang.Iterable-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>isNotIn</h4>
+<pre><a href="../../../../io/sphere/sdk/queries/QueryPredicate.html" title="interface in io.sphere.sdk.queries">QueryPredicate</a>&lt;<a href="../../../../io/sphere/sdk/queries/SphereEnumerationQueryModel.html" title="type parameter in SphereEnumerationQueryModel">T</a>&gt;&nbsp;isNotIn(java.lang.Iterable&lt;<a href="../../../../io/sphere/sdk/queries/SphereEnumerationQueryModel.html" title="type parameter in SphereEnumerationQueryModel">E</a>&gt;&nbsp;args)</pre>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../io/sphere/sdk/queries/IsNotInQueryModel.html#isNotIn-java.lang.Iterable-">isNotIn</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/queries/IsNotInQueryModel.html" title="interface in io.sphere.sdk.queries">IsNotInQueryModel</a>&lt;<a href="../../../../io/sphere/sdk/queries/SphereEnumerationQueryModel.html" title="type parameter in SphereEnumerationQueryModel">T</a>,<a href="../../../../io/sphere/sdk/queries/SphereEnumerationQueryModel.html" title="type parameter in SphereEnumerationQueryModel">E</a> extends <a href="../../../../io/sphere/sdk/models/SphereEnumeration.html" title="interface in io.sphere.sdk.models">SphereEnumeration</a>&gt;</code></dd>
+</dl>
+</li>
+</ul>
+<a name="isNot-io.sphere.sdk.models.SphereEnumeration-">
+<!--   -->
+</a><a name="isNot-E-">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>isNot</h4>
+<pre><a href="../../../../io/sphere/sdk/queries/QueryPredicate.html" title="interface in io.sphere.sdk.queries">QueryPredicate</a>&lt;<a href="../../../../io/sphere/sdk/queries/SphereEnumerationQueryModel.html" title="type parameter in SphereEnumerationQueryModel">T</a>&gt;&nbsp;isNot(<a href="../../../../io/sphere/sdk/queries/SphereEnumerationQueryModel.html" title="type parameter in SphereEnumerationQueryModel">E</a>&nbsp;element)</pre>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../io/sphere/sdk/queries/NotEqualQueryModel.html#isNot-E-">isNot</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/queries/NotEqualQueryModel.html" title="interface in io.sphere.sdk.queries">NotEqualQueryModel</a>&lt;<a href="../../../../io/sphere/sdk/queries/SphereEnumerationQueryModel.html" title="type parameter in SphereEnumerationQueryModel">T</a>,<a href="../../../../io/sphere/sdk/queries/SphereEnumerationQueryModel.html" title="type parameter in SphereEnumerationQueryModel">E</a> extends <a href="../../../../io/sphere/sdk/models/SphereEnumeration.html" title="interface in io.sphere.sdk.models">SphereEnumeration</a>&gt;</code></dd>
 </dl>
 </li>
 </ul>

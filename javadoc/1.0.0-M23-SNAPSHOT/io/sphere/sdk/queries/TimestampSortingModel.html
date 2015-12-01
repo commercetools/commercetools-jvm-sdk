@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":6,"i1":38};
+var methods = {"i0":6,"i1":6,"i2":6,"i3":6,"i4":6,"i5":6,"i6":6,"i7":6,"i8":6,"i9":38};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],4:["t3","Abstract Methods"],32:["t6","Deprecated Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -100,12 +100,12 @@ var activeTableTab = "activeTableTab";
 <li class="blockList">
 <dl>
 <dt>All Superinterfaces:</dt>
-<dd><a href="../../../../io/sphere/sdk/queries/QuerySortingModel.html" title="interface in io.sphere.sdk.queries">QuerySortingModel</a>&lt;T&gt;</dd>
+<dd><a href="../../../../io/sphere/sdk/queries/EqualityQueryModel.html" title="interface in io.sphere.sdk.queries">EqualityQueryModel</a>&lt;T,java.time.ZonedDateTime&gt;, <a href="../../../../io/sphere/sdk/queries/InequalityQueryModel.html" title="interface in io.sphere.sdk.queries">InequalityQueryModel</a>&lt;T,java.time.ZonedDateTime&gt;, <a href="../../../../io/sphere/sdk/queries/IsInQueryModel.html" title="interface in io.sphere.sdk.queries">IsInQueryModel</a>&lt;T,java.time.ZonedDateTime&gt;, <a href="../../../../io/sphere/sdk/queries/IsNotInQueryModel.html" title="interface in io.sphere.sdk.queries">IsNotInQueryModel</a>&lt;T,java.time.ZonedDateTime&gt;, <a href="../../../../io/sphere/sdk/queries/NotEqualQueryModel.html" title="interface in io.sphere.sdk.queries">NotEqualQueryModel</a>&lt;T,java.time.ZonedDateTime&gt;, <a href="../../../../io/sphere/sdk/queries/QuerySortingModel.html" title="interface in io.sphere.sdk.queries">QuerySortingModel</a>&lt;T&gt;</dd>
 </dl>
 <hr>
 <br>
 <pre>public interface <span class="typeNameLabel">TimestampSortingModel&lt;T&gt;</span>
-extends <a href="../../../../io/sphere/sdk/queries/QuerySortingModel.html" title="interface in io.sphere.sdk.queries">QuerySortingModel</a>&lt;T&gt;</pre>
+extends <a href="../../../../io/sphere/sdk/queries/QuerySortingModel.html" title="interface in io.sphere.sdk.queries">QuerySortingModel</a>&lt;T&gt;, <a href="../../../../io/sphere/sdk/queries/EqualityQueryModel.html" title="interface in io.sphere.sdk.queries">EqualityQueryModel</a>&lt;T,java.time.ZonedDateTime&gt;, <a href="../../../../io/sphere/sdk/queries/NotEqualQueryModel.html" title="interface in io.sphere.sdk.queries">NotEqualQueryModel</a>&lt;T,java.time.ZonedDateTime&gt;, <a href="../../../../io/sphere/sdk/queries/IsInQueryModel.html" title="interface in io.sphere.sdk.queries">IsInQueryModel</a>&lt;T,java.time.ZonedDateTime&gt;, <a href="../../../../io/sphere/sdk/queries/InequalityQueryModel.html" title="interface in io.sphere.sdk.queries">InequalityQueryModel</a>&lt;T,java.time.ZonedDateTime&gt;, <a href="../../../../io/sphere/sdk/queries/IsNotInQueryModel.html" title="interface in io.sphere.sdk.queries">IsNotInQueryModel</a>&lt;T,java.time.ZonedDateTime&gt;</pre>
 </li>
 </ul>
 </div>
@@ -125,10 +125,42 @@ extends <a href="../../../../io/sphere/sdk/queries/QuerySortingModel.html" title
 <th class="colLast" scope="col">Method and Description</th>
 </tr>
 <tr id="i0" class="altColor">
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/queries/QueryPredicate.html" title="interface in io.sphere.sdk.queries">QueryPredicate</a>&lt;<a href="../../../../io/sphere/sdk/queries/TimestampSortingModel.html" title="type parameter in TimestampSortingModel">T</a>&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/TimestampSortingModel.html#is-java.time.ZonedDateTime-">is</a></span>(java.time.ZonedDateTime&nbsp;value)</code>&nbsp;</td>
+</tr>
+<tr id="i1" class="rowColor">
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/queries/QueryPredicate.html" title="interface in io.sphere.sdk.queries">QueryPredicate</a>&lt;<a href="../../../../io/sphere/sdk/queries/TimestampSortingModel.html" title="type parameter in TimestampSortingModel">T</a>&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/TimestampSortingModel.html#isGreaterThan-java.time.ZonedDateTime-">isGreaterThan</a></span>(java.time.ZonedDateTime&nbsp;value)</code>&nbsp;</td>
+</tr>
+<tr id="i2" class="altColor">
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/queries/QueryPredicate.html" title="interface in io.sphere.sdk.queries">QueryPredicate</a>&lt;<a href="../../../../io/sphere/sdk/queries/TimestampSortingModel.html" title="type parameter in TimestampSortingModel">T</a>&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/TimestampSortingModel.html#isGreaterThanOrEqualTo-java.time.ZonedDateTime-">isGreaterThanOrEqualTo</a></span>(java.time.ZonedDateTime&nbsp;value)</code>&nbsp;</td>
+</tr>
+<tr id="i3" class="rowColor">
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/queries/QueryPredicate.html" title="interface in io.sphere.sdk.queries">QueryPredicate</a>&lt;<a href="../../../../io/sphere/sdk/queries/TimestampSortingModel.html" title="type parameter in TimestampSortingModel">T</a>&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/TimestampSortingModel.html#isIn-java.lang.Iterable-">isIn</a></span>(java.lang.Iterable&lt;java.time.ZonedDateTime&gt;&nbsp;args)</code>&nbsp;</td>
+</tr>
+<tr id="i4" class="altColor">
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/queries/QueryPredicate.html" title="interface in io.sphere.sdk.queries">QueryPredicate</a>&lt;<a href="../../../../io/sphere/sdk/queries/TimestampSortingModel.html" title="type parameter in TimestampSortingModel">T</a>&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/TimestampSortingModel.html#isLessThan-java.time.ZonedDateTime-">isLessThan</a></span>(java.time.ZonedDateTime&nbsp;value)</code>&nbsp;</td>
+</tr>
+<tr id="i5" class="rowColor">
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/queries/QueryPredicate.html" title="interface in io.sphere.sdk.queries">QueryPredicate</a>&lt;<a href="../../../../io/sphere/sdk/queries/TimestampSortingModel.html" title="type parameter in TimestampSortingModel">T</a>&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/TimestampSortingModel.html#isLessThanOrEqualTo-java.time.ZonedDateTime-">isLessThanOrEqualTo</a></span>(java.time.ZonedDateTime&nbsp;value)</code>&nbsp;</td>
+</tr>
+<tr id="i6" class="altColor">
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/queries/QueryPredicate.html" title="interface in io.sphere.sdk.queries">QueryPredicate</a>&lt;<a href="../../../../io/sphere/sdk/queries/TimestampSortingModel.html" title="type parameter in TimestampSortingModel">T</a>&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/TimestampSortingModel.html#isNot-java.time.ZonedDateTime-">isNot</a></span>(java.time.ZonedDateTime&nbsp;element)</code>&nbsp;</td>
+</tr>
+<tr id="i7" class="rowColor">
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/queries/QueryPredicate.html" title="interface in io.sphere.sdk.queries">QueryPredicate</a>&lt;<a href="../../../../io/sphere/sdk/queries/TimestampSortingModel.html" title="type parameter in TimestampSortingModel">T</a>&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/TimestampSortingModel.html#isNotIn-java.lang.Iterable-">isNotIn</a></span>(java.lang.Iterable&lt;java.time.ZonedDateTime&gt;&nbsp;args)</code>&nbsp;</td>
+</tr>
+<tr id="i8" class="altColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/queries/DirectionlessQuerySort.html" title="class in io.sphere.sdk.queries">DirectionlessQuerySort</a>&lt;<a href="../../../../io/sphere/sdk/queries/TimestampSortingModel.html" title="type parameter in TimestampSortingModel">T</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/TimestampSortingModel.html#sort--">sort</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i1" class="rowColor">
+<tr id="i9" class="rowColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/queries/QuerySort.html" title="interface in io.sphere.sdk.queries">QuerySort</a>&lt;<a href="../../../../io/sphere/sdk/queries/TimestampSortingModel.html" title="type parameter in TimestampSortingModel">T</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/TimestampSortingModel.html#sort-io.sphere.sdk.queries.QuerySortDirection-">sort</a></span>(<a href="../../../../io/sphere/sdk/queries/QuerySortDirection.html" title="enum in io.sphere.sdk.queries">QuerySortDirection</a>&nbsp;sortDirection)</code>
 <div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;</div>
@@ -173,13 +205,117 @@ extends <a href="../../../../io/sphere/sdk/queries/QuerySortingModel.html" title
 <a name="sort--">
 <!--   -->
 </a>
-<ul class="blockListLast">
+<ul class="blockList">
 <li class="blockList">
 <h4>sort</h4>
 <pre><a href="../../../../io/sphere/sdk/queries/DirectionlessQuerySort.html" title="class in io.sphere.sdk.queries">DirectionlessQuerySort</a>&lt;<a href="../../../../io/sphere/sdk/queries/TimestampSortingModel.html" title="type parameter in TimestampSortingModel">T</a>&gt;&nbsp;sort()</pre>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="../../../../io/sphere/sdk/queries/QuerySortingModel.html#sort--">sort</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/queries/QuerySortingModel.html" title="interface in io.sphere.sdk.queries">QuerySortingModel</a>&lt;<a href="../../../../io/sphere/sdk/queries/TimestampSortingModel.html" title="type parameter in TimestampSortingModel">T</a>&gt;</code></dd>
+</dl>
+</li>
+</ul>
+<a name="is-java.time.ZonedDateTime-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>is</h4>
+<pre><a href="../../../../io/sphere/sdk/queries/QueryPredicate.html" title="interface in io.sphere.sdk.queries">QueryPredicate</a>&lt;<a href="../../../../io/sphere/sdk/queries/TimestampSortingModel.html" title="type parameter in TimestampSortingModel">T</a>&gt;&nbsp;is(java.time.ZonedDateTime&nbsp;value)</pre>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../io/sphere/sdk/queries/EqualityQueryModel.html#is-E-">is</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/queries/EqualityQueryModel.html" title="interface in io.sphere.sdk.queries">EqualityQueryModel</a>&lt;<a href="../../../../io/sphere/sdk/queries/TimestampSortingModel.html" title="type parameter in TimestampSortingModel">T</a>,java.time.ZonedDateTime&gt;</code></dd>
+</dl>
+</li>
+</ul>
+<a name="isGreaterThan-java.time.ZonedDateTime-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>isGreaterThan</h4>
+<pre><a href="../../../../io/sphere/sdk/queries/QueryPredicate.html" title="interface in io.sphere.sdk.queries">QueryPredicate</a>&lt;<a href="../../../../io/sphere/sdk/queries/TimestampSortingModel.html" title="type parameter in TimestampSortingModel">T</a>&gt;&nbsp;isGreaterThan(java.time.ZonedDateTime&nbsp;value)</pre>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../io/sphere/sdk/queries/InequalityQueryModel.html#isGreaterThan-V-">isGreaterThan</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/queries/InequalityQueryModel.html" title="interface in io.sphere.sdk.queries">InequalityQueryModel</a>&lt;<a href="../../../../io/sphere/sdk/queries/TimestampSortingModel.html" title="type parameter in TimestampSortingModel">T</a>,java.time.ZonedDateTime&gt;</code></dd>
+</dl>
+</li>
+</ul>
+<a name="isGreaterThanOrEqualTo-java.time.ZonedDateTime-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>isGreaterThanOrEqualTo</h4>
+<pre><a href="../../../../io/sphere/sdk/queries/QueryPredicate.html" title="interface in io.sphere.sdk.queries">QueryPredicate</a>&lt;<a href="../../../../io/sphere/sdk/queries/TimestampSortingModel.html" title="type parameter in TimestampSortingModel">T</a>&gt;&nbsp;isGreaterThanOrEqualTo(java.time.ZonedDateTime&nbsp;value)</pre>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../io/sphere/sdk/queries/InequalityQueryModel.html#isGreaterThanOrEqualTo-V-">isGreaterThanOrEqualTo</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/queries/InequalityQueryModel.html" title="interface in io.sphere.sdk.queries">InequalityQueryModel</a>&lt;<a href="../../../../io/sphere/sdk/queries/TimestampSortingModel.html" title="type parameter in TimestampSortingModel">T</a>,java.time.ZonedDateTime&gt;</code></dd>
+</dl>
+</li>
+</ul>
+<a name="isLessThan-java.time.ZonedDateTime-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>isLessThan</h4>
+<pre><a href="../../../../io/sphere/sdk/queries/QueryPredicate.html" title="interface in io.sphere.sdk.queries">QueryPredicate</a>&lt;<a href="../../../../io/sphere/sdk/queries/TimestampSortingModel.html" title="type parameter in TimestampSortingModel">T</a>&gt;&nbsp;isLessThan(java.time.ZonedDateTime&nbsp;value)</pre>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../io/sphere/sdk/queries/InequalityQueryModel.html#isLessThan-V-">isLessThan</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/queries/InequalityQueryModel.html" title="interface in io.sphere.sdk.queries">InequalityQueryModel</a>&lt;<a href="../../../../io/sphere/sdk/queries/TimestampSortingModel.html" title="type parameter in TimestampSortingModel">T</a>,java.time.ZonedDateTime&gt;</code></dd>
+</dl>
+</li>
+</ul>
+<a name="isLessThanOrEqualTo-java.time.ZonedDateTime-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>isLessThanOrEqualTo</h4>
+<pre><a href="../../../../io/sphere/sdk/queries/QueryPredicate.html" title="interface in io.sphere.sdk.queries">QueryPredicate</a>&lt;<a href="../../../../io/sphere/sdk/queries/TimestampSortingModel.html" title="type parameter in TimestampSortingModel">T</a>&gt;&nbsp;isLessThanOrEqualTo(java.time.ZonedDateTime&nbsp;value)</pre>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../io/sphere/sdk/queries/InequalityQueryModel.html#isLessThanOrEqualTo-V-">isLessThanOrEqualTo</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/queries/InequalityQueryModel.html" title="interface in io.sphere.sdk.queries">InequalityQueryModel</a>&lt;<a href="../../../../io/sphere/sdk/queries/TimestampSortingModel.html" title="type parameter in TimestampSortingModel">T</a>,java.time.ZonedDateTime&gt;</code></dd>
+</dl>
+</li>
+</ul>
+<a name="isIn-java.lang.Iterable-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>isIn</h4>
+<pre><a href="../../../../io/sphere/sdk/queries/QueryPredicate.html" title="interface in io.sphere.sdk.queries">QueryPredicate</a>&lt;<a href="../../../../io/sphere/sdk/queries/TimestampSortingModel.html" title="type parameter in TimestampSortingModel">T</a>&gt;&nbsp;isIn(java.lang.Iterable&lt;java.time.ZonedDateTime&gt;&nbsp;args)</pre>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../io/sphere/sdk/queries/IsInQueryModel.html#isIn-java.lang.Iterable-">isIn</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/queries/IsInQueryModel.html" title="interface in io.sphere.sdk.queries">IsInQueryModel</a>&lt;<a href="../../../../io/sphere/sdk/queries/TimestampSortingModel.html" title="type parameter in TimestampSortingModel">T</a>,java.time.ZonedDateTime&gt;</code></dd>
+</dl>
+</li>
+</ul>
+<a name="isNotIn-java.lang.Iterable-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>isNotIn</h4>
+<pre><a href="../../../../io/sphere/sdk/queries/QueryPredicate.html" title="interface in io.sphere.sdk.queries">QueryPredicate</a>&lt;<a href="../../../../io/sphere/sdk/queries/TimestampSortingModel.html" title="type parameter in TimestampSortingModel">T</a>&gt;&nbsp;isNotIn(java.lang.Iterable&lt;java.time.ZonedDateTime&gt;&nbsp;args)</pre>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../io/sphere/sdk/queries/IsNotInQueryModel.html#isNotIn-java.lang.Iterable-">isNotIn</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/queries/IsNotInQueryModel.html" title="interface in io.sphere.sdk.queries">IsNotInQueryModel</a>&lt;<a href="../../../../io/sphere/sdk/queries/TimestampSortingModel.html" title="type parameter in TimestampSortingModel">T</a>,java.time.ZonedDateTime&gt;</code></dd>
+</dl>
+</li>
+</ul>
+<a name="isNot-java.time.ZonedDateTime-">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>isNot</h4>
+<pre><a href="../../../../io/sphere/sdk/queries/QueryPredicate.html" title="interface in io.sphere.sdk.queries">QueryPredicate</a>&lt;<a href="../../../../io/sphere/sdk/queries/TimestampSortingModel.html" title="type parameter in TimestampSortingModel">T</a>&gt;&nbsp;isNot(java.time.ZonedDateTime&nbsp;element)</pre>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../io/sphere/sdk/queries/NotEqualQueryModel.html#isNot-E-">isNot</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/queries/NotEqualQueryModel.html" title="interface in io.sphere.sdk.queries">NotEqualQueryModel</a>&lt;<a href="../../../../io/sphere/sdk/queries/TimestampSortingModel.html" title="type parameter in TimestampSortingModel">T</a>,java.time.ZonedDateTime&gt;</code></dd>
 </dl>
 </li>
 </ul>
