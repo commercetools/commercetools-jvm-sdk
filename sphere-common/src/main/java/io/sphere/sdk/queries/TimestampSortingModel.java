@@ -1,10 +1,38 @@
 package io.sphere.sdk.queries;
 
-public interface TimestampSortingModel<T> extends QuerySortingModel<T> {
+import java.time.ZonedDateTime;
+
+public interface TimestampSortingModel<T> extends QuerySortingModel<T>, EqualityQueryModel<T, ZonedDateTime> ,
+        NotEqualQueryModel<T, ZonedDateTime>, IsInQueryModel<T, ZonedDateTime>, InequalityQueryModel<T, ZonedDateTime>,
+        IsNotInQueryModel<T, ZonedDateTime>{
     @Deprecated
     @Override
     QuerySort<T> sort(QuerySortDirection sortDirection);
 
     @Override
     DirectionlessQuerySort<T> sort();
+
+    @Override
+    QueryPredicate<T> is(final ZonedDateTime value);
+
+    @Override
+    QueryPredicate<T> isGreaterThan(final ZonedDateTime value);
+
+    @Override
+    QueryPredicate<T> isGreaterThanOrEqualTo(final ZonedDateTime value);
+
+    @Override
+    QueryPredicate<T> isLessThan(final ZonedDateTime value);
+
+    @Override
+    QueryPredicate<T> isLessThanOrEqualTo(final ZonedDateTime value);
+
+    @Override
+    QueryPredicate<T> isIn(final Iterable<ZonedDateTime> args);
+
+    @Override
+    QueryPredicate<T> isNotIn(final Iterable<ZonedDateTime> args);
+
+    @Override
+    QueryPredicate<T> isNot(final ZonedDateTime element);
 }

@@ -39,10 +39,11 @@ public class TypeFixtures {
     public static final String LOCALIZED_ENUM_FIELD_NAME = "localized-enum-field-name";
     public static final Set<String> TYPE_IDS = new HashSet<>(asList(Category.resourceTypeId(), Customer.resourceTypeId(), Cart.resourceTypeId(), Order.resourceTypeId(), LineItem.resourceTypeId(), CustomLineItem.resourceTypeId(), Payment.resourceTypeId(), AddInterfaceInteraction.resourceTypeId(), Price.resourceTypeId()));
     public static final String STRING_FIELD_NAME = "string-field-name";
+    public static final String TYPE_NAME = "name of the custom type";
 
     public static void withUpdateableType(final TestClient client, final UnaryOperator<Type> operator) {
         final String typeKey = randomKey();
-        final TypeDraft typeDraft = TypeDraftBuilder.of(typeKey, en("name of the custom type"), TYPE_IDS)
+        final TypeDraft typeDraft = TypeDraftBuilder.of(typeKey, en(TYPE_NAME), TYPE_IDS)
                 .description(en("description"))
                 .fieldDefinitions(asList(stringfieldDefinition(), enumFieldDefinition(), localizedEnumFieldDefinition(), catRefDefinition(),
                         booleanDefinition(), LocalizedStringDefinition(), intDefinition(), doubleDefinition(), moneyDefinition(),

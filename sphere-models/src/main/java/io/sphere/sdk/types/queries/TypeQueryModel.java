@@ -1,8 +1,7 @@
 package io.sphere.sdk.types.queries;
 
-import io.sphere.sdk.queries.QueryModel;
-import io.sphere.sdk.queries.ResourceQueryModelImpl;
-import io.sphere.sdk.queries.StringQuerySortingModel;
+import io.sphere.sdk.queries.*;
+import io.sphere.sdk.types.FieldDefinition;
 import io.sphere.sdk.types.Type;
 
 public final class TypeQueryModel extends ResourceQueryModelImpl<Type> {
@@ -18,4 +17,14 @@ public final class TypeQueryModel extends ResourceQueryModelImpl<Type> {
     public StringQuerySortingModel<Type> key() {
         return stringModel("key");
     }
+
+    public StringCollectionQueryModel<Type> resourceTypeIds() {
+        return stringCollectionModel("resourceTypeIds");
+    }
+
+    public FieldDefinitionCollectionQueryModel<Type> fieldDefinitions() {
+        return new FieldDefinitionCollectionQueryModelImpl<>(this, "fieldDefinitions");
+    }
+
+//it is not possible to query by name/description with the API
 }

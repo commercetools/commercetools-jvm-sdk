@@ -7,13 +7,16 @@ import io.sphere.sdk.carts.queries.CartByIdGet;
 import io.sphere.sdk.client.SphereRequest;
 import io.sphere.sdk.customers.Customer;
 import io.sphere.sdk.customers.queries.CustomerByIdGet;
+import io.sphere.sdk.models.DefaultCurrencyUnits;
 import io.sphere.sdk.products.ProductProjection;
 import io.sphere.sdk.products.queries.ProductProjectionByIdGet;
 import io.sphere.sdk.utils.CompletableFutureUtils;
+import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+import javax.money.CurrencyUnit;
 import java.util.List;
 import java.util.concurrent.*;
 import java.util.function.Consumer;
@@ -26,6 +29,11 @@ import static java.util.stream.Collectors.toList;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class AsyncDocumentationTest {
+    @BeforeClass
+    public static void warmUpJavaMoney() throws Exception {
+        final CurrencyUnit eur = DefaultCurrencyUnits.EUR;//workaround for https://github.com/sphereio/sphere-jvm-sdk/issues/779
+    }
+
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 

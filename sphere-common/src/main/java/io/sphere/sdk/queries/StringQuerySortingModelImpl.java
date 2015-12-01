@@ -7,7 +7,7 @@ import static io.sphere.sdk.utils.IterableUtils.toStream;
 import static java.util.stream.Collectors.toList;
 
 final class StringQuerySortingModelImpl<T> extends QueryModelImpl<T> implements StringQuerySortingModel<T> {
-    public StringQuerySortingModelImpl(@Nullable final QueryModel<T> parent, final String pathSegment) {
+    public StringQuerySortingModelImpl(@Nullable final QueryModel<T> parent, @Nullable final String pathSegment) {
         super(parent, pathSegment);
     }
 
