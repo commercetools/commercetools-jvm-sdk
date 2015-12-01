@@ -29,7 +29,8 @@ public abstract class HttpClientAdapterTest {
         final HttpResponse response = client.execute(HttpRequest.of(HttpMethod.GET, "http://sphere.io")).toCompletableFuture().join();
         client.close();
         final String body = new String(response.getResponseBody());
-        assertThat(response.getStatusCode()).isLessThan(400);
+        final Integer statusCode = response.getStatusCode();
+        assertThat(statusCode).isLessThan(400);
         assertThat(body).containsIgnoringCase("commercetools");
     }
 
