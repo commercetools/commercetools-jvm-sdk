@@ -43,8 +43,8 @@ public class ProductProjectionSearchMainIntegrationTest extends ProductProjectio
         final PagedSearchResult<ProductProjection> result = executeSearch(search);
         final long remainingProducts = max(result.getTotal() - offset, 0);
         final long expectedProducts = min(limit, remainingProducts);
-        assertThat(result.size()).isEqualTo(expectedProducts);
-        assertThat(result.getOffset()).isEqualTo(offset);
+        assertThat(result.size()).as("size").isEqualTo(expectedProducts);
+        assertThat(result.getOffset()).as("offset").isEqualTo(offset);
     }
 
     @Test

@@ -10,8 +10,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class PagedQueryResultTest {
 
-    public static final int TOTAL = 100;
-    public static final int PAGE_SIZE = 25;
+    public static final Long TOTAL = 100;
+    public static final Long PAGE_SIZE = 25;
     final PagedQueryResult<Integer> a = PagedQueryResult.of(listOfSize(1));
     final PagedQueryResult<Integer> b = PagedQueryResult.of(listOfSize(2));
 
@@ -113,7 +113,7 @@ public class PagedQueryResultTest {
         assertThat(result.getTotal()).isEqualTo(500);
     }
 
-    private List<Integer> listOfSize(final int size) {
+    private List<Integer> listOfSize(final Long size) {
         if (size <= 0) {
             return Collections.emptyList();
         } else {

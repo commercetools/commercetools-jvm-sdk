@@ -6,11 +6,11 @@ import java.util.List;
 import java.util.Optional;
 
 public abstract class PagedResult<T> extends Base {
-    protected final Integer offset;
-    protected final Integer total;
+    protected final Long offset;
+    protected final Long total;
     protected final List<T> results;
 
-    protected PagedResult(final Integer offset, final Integer total, final List<T> results) {
+    protected PagedResult(final Long offset, final Long total, final List<T> results) {
         this.offset = offset;
         this.total = total;
         this.results = results;
@@ -20,7 +20,7 @@ public abstract class PagedResult<T> extends Base {
       * The offset supplied by the client or the server default.
       * @return the amount of items (not pages) skipped
       */
-     public Integer getOffset() {
+     public Long getOffset() {
          return offset;
      }
 
@@ -28,8 +28,8 @@ public abstract class PagedResult<T> extends Base {
       * The actual number of results returned.
       * @return the number of elements in this container
       */
-     public int size() {
-         return results.size();
+     public Long size() {
+         return (long) results.size();
      }
 
     /**
@@ -37,7 +37,7 @@ public abstract class PagedResult<T> extends Base {
       * Total is greater or equal to count.
       * @return the number of elements that can be fetched matching the criteria
       */
-     public Integer getTotal() {
+     public Long getTotal() {
          return total;
      }
 

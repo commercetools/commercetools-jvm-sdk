@@ -14,7 +14,7 @@ public class PagedSearchResult<T> extends PagedResult<T> {
     private final Map<String, FacetResult> facets;
 
     @JsonCreator
-    PagedSearchResult(final Integer offset, final Integer total, final List<T> results, final Map<String, FacetResult> facets) {
+    PagedSearchResult(final Long offset, final Long total, final List<T> results, final Map<String, FacetResult> facets) {
         super(offset, total, results);
         this.facets = facets;
     }
@@ -107,17 +107,17 @@ public class PagedSearchResult<T> extends PagedResult<T> {
     }
 
     @Override
-    public Integer getOffset() {
+    public Long getOffset() {
         return super.getOffset();
     }
 
     @Override
-    public int size() {
+    public Long size() {
         return super.size();
     }
 
     @Override
-    public Integer getTotal() {
+    public Long getTotal() {
         return super.getTotal();
     }
 

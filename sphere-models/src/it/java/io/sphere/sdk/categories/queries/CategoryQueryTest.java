@@ -7,7 +7,7 @@ import io.sphere.sdk.models.LocalizedStringEntry;
 import io.sphere.sdk.queries.Query;
 import io.sphere.sdk.queries.QueryPredicate;
 import io.sphere.sdk.test.IntegrationTest;
-import org.assertj.core.api.AbstractIntegerAssert;
+import org.assertj.core.api.AbstractLongAssert;
 import org.junit.Test;
 
 import java.util.Locale;
@@ -15,7 +15,6 @@ import java.util.Optional;
 import java.util.function.Consumer;
 
 import static io.sphere.sdk.categories.CategoryFixtures.withCategory;
-import static io.sphere.sdk.queries.QuerySortDirection.DESC;
 import static io.sphere.sdk.test.SphereTestUtils.randomKey;
 import static io.sphere.sdk.test.SphereTestUtils.randomSlug;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -125,7 +124,7 @@ public class CategoryQueryTest extends IntegrationTest {
         return client().execute(CategoryQuery.of().withPredicates(predicate)).head();
     }
 
-    private static void checkTotalInQueryResultOf(final Query<Category> query, final Consumer<AbstractIntegerAssert<?>> check) {
+    private static void checkTotalInQueryResultOf(final Query<Category> query, final Consumer<AbstractLongAssert<?>> check) {
         check.accept(assertThat(execute(query).getTotal()));
     }
 }
