@@ -10,14 +10,11 @@ import java.util.List;
 
 /** Tax Categories define how products are to be taxed in different countries.
 
- <p id=operations>Operations:</p>
-<ul>
- <li>Create a tax category with {@link io.sphere.sdk.taxcategories.commands.TaxCategoryCreateCommand}.</li>
- <li>Query a tax category with {@link io.sphere.sdk.taxcategories.queries.TaxCategoryQuery}.</li>
- <li>Delete a tax category with {@link io.sphere.sdk.taxcategories.commands.TaxCategoryDeleteCommand}.</li>
- </ul>
-
-
+@see io.sphere.sdk.taxcategories.queries.TaxCategoryByIdGet
+@see io.sphere.sdk.taxcategories.queries.TaxCategoryQuery
+@see io.sphere.sdk.taxcategories.commands.TaxCategoryCreateCommand
+@see io.sphere.sdk.taxcategories.commands.TaxCategoryUpdateCommand
+@see io.sphere.sdk.taxcategories.commands.TaxCategoryDeleteCommand
  */
 @JsonDeserialize(as=TaxCategoryImpl.class)
 public interface TaxCategory extends Resource<TaxCategory> {
