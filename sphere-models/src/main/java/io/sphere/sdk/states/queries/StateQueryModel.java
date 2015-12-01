@@ -3,8 +3,10 @@ package io.sphere.sdk.states.queries;
 
 import io.sphere.sdk.queries.ResourceQueryModelImpl;
 import io.sphere.sdk.queries.QueryModel;
+import io.sphere.sdk.queries.SphereEnumerationQueryModel;
 import io.sphere.sdk.queries.StringQuerySortingModel;
 import io.sphere.sdk.states.State;
+import io.sphere.sdk.states.StateType;
 
 public class StateQueryModel extends ResourceQueryModelImpl<State> {
 
@@ -20,4 +22,7 @@ public class StateQueryModel extends ResourceQueryModelImpl<State> {
         return stringModel("key");
     }
 
+    public SphereEnumerationQueryModel<State, StateType> type() {
+        return enumerationQueryModel("type");
+    }
 }
