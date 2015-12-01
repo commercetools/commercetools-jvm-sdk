@@ -34,7 +34,12 @@ public class SphereClientFactory extends Base {
 
     public static SphereClientFactory of() {
         try {
-            final Class<?> clazz = Class.forName("io.sphere.sdk.client.SphereAsyncHttpClientFactory");
+            Class<?> clazz;
+            try {
+                clazz = Class.forName("io.sphere.sdk.client.SphereAsyncHttpClientFactory");
+            } catch (final ClassNotFoundException e) {
+                clazz = Class.forName("io.sphere.sdk.client.SphereApacheHttpClientFactory");
+            }
             final Method create = clazz.getMethod("create");
             final Supplier<HttpClient> supplier = () -> {
                 try {
