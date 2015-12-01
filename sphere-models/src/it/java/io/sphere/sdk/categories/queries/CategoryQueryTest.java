@@ -6,10 +6,12 @@ import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.LocalizedStringEntry;
 import io.sphere.sdk.queries.Query;
 import io.sphere.sdk.queries.QueryPredicate;
+import io.sphere.sdk.queries.QuerySort;
 import io.sphere.sdk.test.IntegrationTest;
 import org.assertj.core.api.AbstractIntegerAssert;
 import org.junit.Test;
 
+import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
 import java.util.function.Consumer;
@@ -119,6 +121,15 @@ public class CategoryQueryTest extends IntegrationTest {
             assertThat(query(m.slug().lang(Locale.ENGLISH).is(usSlug))).isEmpty();
             assertThat(query(m.slug().lang(Locale.US).is(usSlug))).isPresent();
         });
+    }
+
+    @Test
+    public void plusSort() {
+        final List<QuerySort<Category>> sort = CategoryQuery.of()
+                .withSort(m -> m.externalId().sort().asc())
+                .plusSort(m -> m.createdAt().sort().desc()).sort();
+        assertThat(sort).hasSize(2);
+        assertThat(sort).extractingResultOf("toSphereSort").containsExactly("externalId asc", "createdAt desc");
     }
 
     private static Optional<Category> query(final QueryPredicate<Category> predicate) {

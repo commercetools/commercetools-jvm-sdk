@@ -42,6 +42,14 @@ public interface MetaModelQueryDsl<T, C extends MetaModelQueryDsl<T, C, Q, E>, Q
     C withSortMulti(final Function<Q, List<QuerySort<T>>> m);
 
     @Override
+    C plusSort(final List<QuerySort<T>> sort);
+
+    @Override
+    C plusSort(final QuerySort<T> sort);
+
+    C plusSort(final Function<Q, QuerySort<T>> m);
+
+    @Override
     C withLimit(final long limit);
 
     @Override

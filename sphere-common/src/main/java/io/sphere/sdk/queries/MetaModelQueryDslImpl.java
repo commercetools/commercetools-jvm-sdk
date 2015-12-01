@@ -10,6 +10,7 @@ import io.sphere.sdk.http.HttpMethod;
 import io.sphere.sdk.http.HttpQueryParameter;
 import io.sphere.sdk.http.HttpResponse;
 import io.sphere.sdk.http.UrlQueryBuilder;
+import io.sphere.sdk.utils.ListUtils;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -154,6 +155,22 @@ public abstract class MetaModelQueryDslImpl<T, C extends MetaModelQueryDsl<T, C,
     @Override
     public C withSortMulti(final Function<Q, List<QuerySort<T>>> m) {
         return withSort(m.apply(queryModel));
+    }
+
+    @Override
+    public C plusSort(final Function<Q, QuerySort<T>> m) {
+        final QuerySort<T> additionalSort = m.apply(queryModel);
+        return plusSort(additionalSort);
+    }
+
+    @Override
+    public C plusSort(final List<QuerySort<T>> sort) {
+        return withSort(ListUtils.listOf(sort(), sort));
+    }
+
+    @Override
+    public C plusSort(final QuerySort<T> sort) {
+        return plusSort(singletonList(sort));
     }
 
     @Override
