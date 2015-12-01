@@ -2,10 +2,14 @@ package io.sphere.sdk.queries;
 
 import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.SphereEnumeration;
+import io.sphere.sdk.utils.IterableUtils;
 
 import javax.annotation.Nullable;
 
+import java.util.List;
+
 import static io.sphere.sdk.queries.StringQuerySortingModel.normalize;
+import static java.util.stream.Collectors.toList;
 
 public class QueryModelImpl<T> extends Base implements QueryModel<T> {
     @Nullable
@@ -60,6 +64,10 @@ public class QueryModelImpl<T> extends Base implements QueryModel<T> {
 
     protected StringQuerySortingModel<T> stringModel(final String pathSegment) {
         return new StringQuerySortingModelImpl<>(this, pathSegment);
+    }
+
+    protected StringCollectionQueryModel<T> stringCollectionModel(final String pathSegment) {
+        return new StringCollectionQueryModelImpl<>(this, pathSegment);
     }
 
     protected BooleanQueryModel<T> booleanModel(final String pathSegment) {
@@ -152,5 +160,10 @@ public class QueryModelImpl<T> extends Base implements QueryModel<T> {
                 return " is not empty";
             }
         };
+    }
+
+    protected List<String> normalizeIterable(final Iterable<String> items) {
+        return IterableUtils.toStream(items)
+                .map(StringQuerySortingModel::normalize).collect(toList());
     }
 }
