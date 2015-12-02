@@ -69,6 +69,11 @@ see https://github.com/sphereio/sphere-jvm-sdk-experimental-java-add-ons
 * https://github.com/sphereio/sphere-jvm-sdk/milestones
 * https://waffle.io/sphereio/sphere-jvm-sdk
 
+## Open Source Examples
+* [Sunrise Java](https://github.com/sphereio/sphere-sunrise) - a shop using Play Framework 2.x with Handlebars.java as template engine, Google Guice for DI
+* [Donut](https://github.com/commercetools/sphere-donut) - single product subscription shop example with Play Framework 2.x and Twirl (Plays default) as template engine
+* [commercetools Spring MVC archetype](https://github.com/sphereio/commercetools-spring-mvc-archetype) - template integrating the SDK with Spring DI and Spring MVC and showing just some products, thymeleaf template engine
+
 ## Stability
 
 1. Experimental features in the API are also experimental features of the SDK.
