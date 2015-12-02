@@ -169,7 +169,7 @@ extends <a href="../../../../io/sphere/sdk/queries/PagedResult.html" title="clas
 </td>
 </tr>
 <tr id="i1" class="rowColor">
-<td class="colFirst"><code>java.lang.Integer</code></td>
+<td class="colFirst"><code>java.lang.Long</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/PagedQueryResult.html#getOffset--">getOffset</a></span>()</code>
 <div class="block">The offset supplied by the client or the server default.</div>
 </td>
@@ -181,7 +181,7 @@ extends <a href="../../../../io/sphere/sdk/queries/PagedResult.html" title="clas
 </td>
 </tr>
 <tr id="i3" class="rowColor">
-<td class="colFirst"><code>java.lang.Integer</code></td>
+<td class="colFirst"><code>java.lang.Long</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/PagedQueryResult.html#getTotal--">getTotal</a></span>()</code>
 <div class="block">The total number of results matching the request.</div>
 </td>
@@ -206,20 +206,20 @@ extends <a href="../../../../io/sphere/sdk/queries/PagedResult.html" title="clas
 </tr>
 <tr id="i7" class="rowColor">
 <td class="colFirst"><code>static &lt;T&gt;&nbsp;<a href="../../../../io/sphere/sdk/queries/PagedQueryResultDsl.html" title="class in io.sphere.sdk.queries">PagedQueryResultDsl</a>&lt;T&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/PagedQueryResult.html#of-java.lang.Integer-java.lang.Integer-java.util.List-">of</a></span>(java.lang.Integer&nbsp;offset,
-  java.lang.Integer&nbsp;total,
-  java.util.List&lt;T&gt;&nbsp;results)</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/PagedQueryResult.html#of-java.util.List-">of</a></span>(java.util.List&lt;T&gt;&nbsp;results)</code>&nbsp;</td>
 </tr>
 <tr id="i8" class="altColor">
 <td class="colFirst"><code>static &lt;T&gt;&nbsp;<a href="../../../../io/sphere/sdk/queries/PagedQueryResultDsl.html" title="class in io.sphere.sdk.queries">PagedQueryResultDsl</a>&lt;T&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/PagedQueryResult.html#of-java.util.List-">of</a></span>(java.util.List&lt;T&gt;&nbsp;results)</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/PagedQueryResult.html#of-java.lang.Long-java.lang.Long-java.util.List-">of</a></span>(java.lang.Long&nbsp;offset,
+  java.lang.Long&nbsp;total,
+  java.util.List&lt;T&gt;&nbsp;results)</code>&nbsp;</td>
 </tr>
 <tr id="i9" class="rowColor">
 <td class="colFirst"><code>static &lt;T&gt;&nbsp;<a href="../../../../io/sphere/sdk/queries/PagedQueryResultDsl.html" title="class in io.sphere.sdk.queries">PagedQueryResultDsl</a>&lt;T&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/PagedQueryResult.html#of-T-">of</a></span>(T&nbsp;singleResult)</code>&nbsp;</td>
 </tr>
 <tr id="i10" class="altColor">
-<td class="colFirst"><code>int</code></td>
+<td class="colFirst"><code>java.lang.Long</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/PagedQueryResult.html#size--">size</a></span>()</code>
 <div class="block">The actual number of results returned.</div>
 </td>
@@ -269,14 +269,14 @@ extends <a href="../../../../io/sphere/sdk/queries/PagedResult.html" title="clas
 </dl>
 </li>
 </ul>
-<a name="of-java.lang.Integer-java.lang.Integer-java.util.List-">
+<a name="of-java.lang.Long-java.lang.Long-java.util.List-">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
 <h4>of</h4>
-<pre>public static&nbsp;&lt;T&gt;&nbsp;<a href="../../../../io/sphere/sdk/queries/PagedQueryResultDsl.html" title="class in io.sphere.sdk.queries">PagedQueryResultDsl</a>&lt;T&gt;&nbsp;of(java.lang.Integer&nbsp;offset,
-                                            java.lang.Integer&nbsp;total,
+<pre>public static&nbsp;&lt;T&gt;&nbsp;<a href="../../../../io/sphere/sdk/queries/PagedQueryResultDsl.html" title="class in io.sphere.sdk.queries">PagedQueryResultDsl</a>&lt;T&gt;&nbsp;of(java.lang.Long&nbsp;offset,
+                                            java.lang.Long&nbsp;total,
                                             java.util.List&lt;T&gt;&nbsp;results)</pre>
 </li>
 </ul>
@@ -306,7 +306,7 @@ extends <a href="../../../../io/sphere/sdk/queries/PagedResult.html" title="clas
 <ul class="blockList">
 <li class="blockList">
 <h4>getOffset</h4>
-<pre>public&nbsp;java.lang.Integer&nbsp;getOffset()</pre>
+<pre>public&nbsp;java.lang.Long&nbsp;getOffset()</pre>
 <div class="block"><span class="descfrmTypeLabel">Description copied from class:&nbsp;<code><a href="../../../../io/sphere/sdk/queries/PagedResult.html#getOffset--">PagedResult</a></code></span></div>
 <div class="block">The offset supplied by the client or the server default.</div>
 <dl>
@@ -342,7 +342,7 @@ extends <a href="../../../../io/sphere/sdk/queries/PagedResult.html" title="clas
 <ul class="blockList">
 <li class="blockList">
 <h4>getTotal</h4>
-<pre>public&nbsp;java.lang.Integer&nbsp;getTotal()</pre>
+<pre>public&nbsp;java.lang.Long&nbsp;getTotal()</pre>
 <div class="block"><span class="descfrmTypeLabel">Description copied from class:&nbsp;<code><a href="../../../../io/sphere/sdk/queries/PagedResult.html#getTotal--">PagedResult</a></code></span></div>
 <div class="block">The total number of results matching the request.
  Total is greater or equal to count.</div>
@@ -412,7 +412,7 @@ extends <a href="../../../../io/sphere/sdk/queries/PagedResult.html" title="clas
 <ul class="blockListLast">
 <li class="blockList">
 <h4>size</h4>
-<pre>public&nbsp;int&nbsp;size()</pre>
+<pre>public&nbsp;java.lang.Long&nbsp;size()</pre>
 <div class="block"><span class="descfrmTypeLabel">Description copied from class:&nbsp;<code><a href="../../../../io/sphere/sdk/queries/PagedResult.html#size--">PagedResult</a></code></span></div>
 <div class="block">The actual number of results returned.</div>
 <dl>

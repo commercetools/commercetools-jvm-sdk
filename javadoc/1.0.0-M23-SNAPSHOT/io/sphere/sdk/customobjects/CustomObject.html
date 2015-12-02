@@ -143,12 +143,12 @@ import io.sphere.sdk.models.Base;
 public class Foo extends Base {
 
     /** this custom object stores a long */
-    private final long baz;
+    private final Long baz;
     /** this custom object stores also a String*/
     private final String bar;
 
     @JsonCreator
-    public Foo(final String bar, final long baz) {
+    public Foo(final String bar, final Long baz) {
         this.bar = bar;
         this.baz = baz;
     }
@@ -187,7 +187,7 @@ For update operations you can use <a href="../../../../io/sphere/sdk/customobjec
 to use optimistic concurrency control as in here:
 
 <div id="io-sphere-sdk-customobjects-commands-CustomObjectUpsertCommandTest-updateWithVersion--%s" class=code-example><pre><code class='java'>CustomObjectFixtures.withCustomObject(client(), customObject -&gt; {
-    final Foo newValue = new Foo("new value", 72);
+    final Foo newValue = new Foo("new value", 72L);
     final CustomObjectDraft&lt;Foo&gt; draft = CustomObjectDraft.ofVersionedUpdate(customObject, newValue, Foo.class);
     final CustomObjectUpsertCommand&lt;Foo&gt; command = CustomObjectUpsertCommand.of(draft);
     final CustomObject&lt;Foo&gt; updatedCustomObject = execute(command);
@@ -198,7 +198,7 @@ to use optimistic concurrency control as in here:
 Or you can just override the value using <a href="../../../../io/sphere/sdk/customobjects/CustomObjectDraft.html#ofUnversionedUpdate-io.sphere.sdk.customobjects.CustomObject-T-com.fasterxml.jackson.core.type.TypeReference-"><code>CustomObjectDraft.ofUnversionedUpdate(io.sphere.sdk.customobjects.CustomObject, Object, com.fasterxml.jackson.core.type.TypeReference)</code></a>
 
 <div id="io-sphere-sdk-customobjects-commands-CustomObjectUpsertCommandTest-updateWithoutVersion--%s" class=code-example><pre><code class='java'>CustomObjectFixtures.withCustomObject(client(), customObject -&gt; {
-    final Foo newValue = new Foo("new value", 72);
+    final Foo newValue = new Foo("new value", 72L);
     final CustomObjectDraft&lt;Foo&gt; draft = CustomObjectDraft.ofUnversionedUpdate(customObject, newValue, Foo.class);
     final CustomObjectUpsertCommand&lt;Foo&gt; createCommand = CustomObjectUpsertCommand.of(draft);
     final CustomObject&lt;Foo&gt; updatedCustomObject = execute(createCommand);
@@ -273,10 +273,10 @@ assertThat(customObject.getValue().get("baz").asLong(0)).isEqualTo(5);
 <div id="io-sphere-sdk-customobjects-demo-GsonFoo%s" class=code-example><button type='button' style='display: none;' class='reveal-imports'>show/hide imports</button><pre class='hide code-example-imports'><code class='java'>import io.sphere.sdk.models.Base;
 </code></pre><pre><code class='java'>public class GsonFoo extends Base {
 
-    private final long baz;
+    private final Long baz;
     private final String bar;
 
-    public GsonFoo(final String bar, final long baz) {
+    public GsonFoo(final String bar, final Long baz) {
         this.bar = bar;
         this.baz = baz;
     }
@@ -347,7 +347,7 @@ import io.sphere.sdk.http.HttpResponse;
     assertThat(customObject).isNotNull();
     assertThat(customObject.toReference()).isEqualTo(co.toReference());
     final GsonFoo value = customObject.getValue();
-    assertThat(value).isEqualTo(new GsonFoo("aString", 5));
+    assertThat(value).isEqualTo(new GsonFoo("aString", 5L));
 });
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/customobjects/queries/CustomObjectCustomJsonMappingByKeyGetTest.java" target="_blank">test code</a>.</pre></div>
 
@@ -361,11 +361,11 @@ The data model contains the last number and the last SPHERE.IO customer ID (just
 <div id="io-sphere-sdk-customobjects-occexample-CustomerNumberCounter%s" class=code-example><button type='button' style='display: none;' class='reveal-imports'>show/hide imports</button><pre class='hide code-example-imports'><code class='java'>import com.fasterxml.jackson.annotation.JsonCreator;
 import io.sphere.sdk.models.Base;
 </code></pre><pre><code class='java'>public class CustomerNumberCounter extends Base {
-    private final long lastUsedNumber;
+    private final Long lastUsedNumber;
     private final String customerId;
 
     @JsonCreator
-    public CustomerNumberCounter(final long lastUsedNumber, final String customerId) {
+    public CustomerNumberCounter(final Long lastUsedNumber, final String customerId) {
         this.lastUsedNumber = lastUsedNumber;
         this.customerId = customerId;
     }
@@ -382,9 +382,9 @@ import io.sphere.sdk.models.Base;
 
 <p>Imagine, the customer number should start at 1000, so we do the following request for the initialization of the counter:</p>
 
-<div id="io-sphere-sdk-customobjects-occexample-FlowTest-setupInitialValue--%s" class=code-example><pre><code class='java'>final int lastUsedNumber = 999;
+<div id="io-sphere-sdk-customobjects-occexample-FlowTest-setupInitialValue--%s" class=code-example><pre><code class='java'>final long lastUsedNumber = 999;
 final CustomerNumberCounter value = new CustomerNumberCounter(lastUsedNumber, "&lt;no name&gt;");
-final int initialVersionNumber = 0;
+final long initialVersionNumber = 0;
 final CustomObjectDraft&lt;CustomerNumberCounter&gt; draft = //important: it takes version as parameter
         CustomObjectDraft.ofVersionedUpsert(CONTAINER, KEY, value, initialVersionNumber, CustomerNumberCounter.class);
 
@@ -769,7 +769,7 @@ final QuerySort&lt;CustomObject&lt;Foo&gt;&gt; fooSort = CustomObjectQueryModel.
 <!--   -->
 </a>
 <h3>Methods inherited from interface&nbsp;io.sphere.sdk.models.<a href="../../../../io/sphere/sdk/models/Versioned.html" title="interface in io.sphere.sdk.models">Versioned</a></h3>
-<code><a href="../../../../io/sphere/sdk/models/Versioned.html#of-java.lang.String-long-">of</a>, <a href="../../../../io/sphere/sdk/models/Versioned.html#of-io.sphere.sdk.models.Versioned-">of</a></code></li>
+<code><a href="../../../../io/sphere/sdk/models/Versioned.html#of-java.lang.String-java.lang.Long-">of</a>, <a href="../../../../io/sphere/sdk/models/Versioned.html#of-io.sphere.sdk.models.Versioned-">of</a></code></li>
 </ul>
 <ul class="blockList">
 <li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.models.Referenceable">

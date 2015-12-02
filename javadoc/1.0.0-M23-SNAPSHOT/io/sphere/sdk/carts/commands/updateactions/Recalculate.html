@@ -129,7 +129,7 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html"
  <p>See also <a href="../CartUpdateCommand.html">CartUpdateCommand</a>.<p>
 
  <div id="io-sphere-sdk-carts-commands-CartUpdateCommandTest-recalculate--%s" class=code-example><pre><code class='java'>withEmptyCartAndProduct(client(), (emptyCart, product) -&gt; {
-    final AddLineItem action = AddLineItem.of(product.getId(), MASTER_VARIANT_ID, 1);
+    final AddLineItem action = AddLineItem.of(product.getId(), MASTER_VARIANT_ID, 1L);
 
     final Cart cartWithLineItem = execute(CartUpdateCommand.of(emptyCart, action));
     final Price oldPrice = cartWithLineItem.getLineItems().get(0).getPrice();
