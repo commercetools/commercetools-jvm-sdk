@@ -137,10 +137,10 @@ implements <a href="../../../../../io/sphere/sdk/queries/Get.html" title="interf
  <div id="io-sphere-sdk-customobjects-demo-GsonFoo%s" class=code-example><button type='button' style='display: none;' class='reveal-imports'>show/hide imports</button><pre class='hide code-example-imports'><code class='java'>import io.sphere.sdk.models.Base;
 </code></pre><pre><code class='java'>public class GsonFoo extends Base {
 
-    private final long baz;
+    private final Long baz;
     private final String bar;
 
-    public GsonFoo(final String bar, final long baz) {
+    public GsonFoo(final String bar, final Long baz) {
         this.bar = bar;
         this.baz = baz;
     }
@@ -238,7 +238,7 @@ import io.sphere.sdk.http.HttpResponse;
     assertThat(customObject).isNotNull();
     assertThat(customObject.toReference()).isEqualTo(co.toReference());
     final GsonFoo value = customObject.getValue();
-    assertThat(value).isEqualTo(new GsonFoo("aString", 5));
+    assertThat(value).isEqualTo(new GsonFoo("aString", 5L));
 });
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/customobjects/queries/CustomObjectCustomJsonMappingByKeyGetTest.java" target="_blank">test code</a>.</pre></div></div>
 <dl>

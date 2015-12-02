@@ -131,7 +131,7 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html"
     <div id="io-sphere-sdk-orders-commands-OrderUpdateCommandTest-addReturnInfo--%s" class=code-example><pre><code class='java'>withOrder(client(), order -&gt; {
     Assertions.assertThat(order.getReturnInfo()).isEmpty();
     final String lineItemId = order.getLineItems().get(0).getId();
-    final List&lt;ReturnItemDraft&gt; items = asList(ReturnItemDraft.of(1, lineItemId, ReturnShipmentState.RETURNED, "foo bar"));
+    final List&lt;ReturnItemDraft&gt; items = asList(ReturnItemDraft.of(1L, lineItemId, ReturnShipmentState.RETURNED, "foo bar"));
     final AddReturnInfo action = AddReturnInfo.of(items).withReturnDate(ZonedDateTime_IN_PAST).withReturnTrackingId("trackingId");
     final Order updatedOrder = execute(OrderUpdateCommand.of(order, action));
 

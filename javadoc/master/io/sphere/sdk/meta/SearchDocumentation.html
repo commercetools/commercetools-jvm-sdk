@@ -174,20 +174,20 @@ assertThat(resultsToIds(result)).containsOnly(product1.getId());
 
 <h3 id=pagination>Pagination</h3>
 
- <p>Use <a href="../../../../io/sphere/sdk/search/SearchDsl.html#withOffset-long-"><code>SearchDsl.withOffset(long)</code></a> and <a href="../../../../io/sphere/sdk/search/SearchDsl.html#withLimit-long-"><code>SearchDsl.withLimit(long)</code></a> for pagination. An extended explanation about how pagination works in SPHERE.IO can be found in <a href="../../../../io/sphere/sdk/meta/QueryDocumentation.html" title="class in io.sphere.sdk.meta"><code>QueryDocumentation</code></a>.</p>
+ <p>Use <a href="../../../../io/sphere/sdk/search/SearchDsl.html#withOffset-java.lang.Long-"><code>SearchDsl.withOffset(Long)</code></a> and <a href="../../../../io/sphere/sdk/search/SearchDsl.html#withLimit-java.lang.Long-"><code>SearchDsl.withLimit(Long)</code></a> for pagination. An extended explanation about how pagination works in SPHERE.IO can be found in <a href="../../../../io/sphere/sdk/meta/QueryDocumentation.html" title="class in io.sphere.sdk.meta"><code>QueryDocumentation</code></a>.</p>
 
  <p>The following request skips the first 50 products and limits the result set to only 25 products:</p>
 
- <div id="io-sphere-sdk-products-search-ProductProjectionSearchMainIntegrationTest-paginationExample--%s" class=code-example><pre><code class='java'>final int offset = 10;
-final int limit = 25;
+ <div id="io-sphere-sdk-products-search-ProductProjectionSearchMainIntegrationTest-paginationExample--%s" class=code-example><pre><code class='java'>final long offset = 10;
+final long limit = 25;
 final ProductProjectionSearch search = ProductProjectionSearch.ofStaged()
         .withOffset(offset)
         .withLimit(limit);
 final PagedSearchResult&lt;ProductProjection&gt; result = executeSearch(search);
-final int remainingProducts = max(result.getTotal() - offset, 0);
-final int expectedProducts = min(limit, remainingProducts);
-assertThat(result.size()).isEqualTo(expectedProducts);
-assertThat(result.getOffset()).isEqualTo(offset);
+final long remainingProducts = max(result.getTotal() - offset, 0);
+final long expectedProducts = min(limit, remainingProducts);
+assertThat(result.size()).as("size").isEqualTo(expectedProducts);
+assertThat(result.getOffset()).as("offset").isEqualTo(offset);
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/products/search/ProductProjectionSearchMainIntegrationTest.java" target="_blank">test code</a>.</pre></div>
 
 
@@ -256,7 +256,7 @@ final TermFacetResult termFacetResult = result.getTermFacetResult(facetExpr);
 assertThat(termFacetResult.getMissing()).isGreaterThanOrEqualTo(3);
 assertThat(termFacetResult.getTotal()).isEqualTo(3);
 assertThat(termFacetResult.getOther()).isEqualTo(0);
-assertThat(termFacetResult.getTerms()).isEqualTo(asList(TermStats.of("blue", 2), TermStats.of("red", 1)));
+assertThat(termFacetResult.getTerms()).isEqualTo(asList(TermStats.of("blue", 2L), TermStats.of("red", 1L)));
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/products/search/ProductProjectionSearchFacetsIntegrationTest.java" target="_blank">test code</a>.</pre></div>
 
  <p>In contrast, the Filtered Facet result contains the statistical count for some certain values specified in the request, in this case the amount of variants with blue color:</p>
@@ -293,7 +293,7 @@ final TermFacetResult termFacetResult = executeSearch(search).getTermFacetResult
 assertThat(termFacetResult.getMissing()).isGreaterThanOrEqualTo(3);
 assertThat(termFacetResult.getTotal()).isEqualTo(3);
 assertThat(termFacetResult.getOther()).isEqualTo(0);
-assertThat(termFacetResult.getTerms()).isEqualTo(asList(TermStats.of("blue", 2), TermStats.of("red", 1)));
+assertThat(termFacetResult.getTerms()).isEqualTo(asList(TermStats.of("blue", 2L), TermStats.of("red", 1L)));
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/products/search/ProductProjectionSearchFacetsIntegrationTest.java" target="_blank">test code</a>.</pre></div>
 
  <h4 id=facet-alias>Alias</h4>
@@ -314,7 +314,7 @@ final TermFacetResult allFacetResult = result.getTermFacetResult(allFacetExpr);
 final FilteredFacetResult blueFacetResult = result.getFilteredFacetResult(blueFacetAlias);
 assertThat(allFacetExpr.resultPath()).isEqualTo(allFacetAlias);
 assertThat(blueFacetExpr.resultPath()).isEqualTo(blueFacetAlias);
-assertThat(allFacetResult.getTerms()).isEqualTo(asList(TermStats.of("blue", 2), TermStats.of("red", 1)));
+assertThat(allFacetResult.getTerms()).isEqualTo(asList(TermStats.of("blue", 2L), TermStats.of("red", 1L)));
 assertThat(blueFacetResult.getCount()).isEqualTo(2);
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/products/search/ProductProjectionSearchFacetsIntegrationTest.java" target="_blank">test code</a>.</pre></div>
 
@@ -440,8 +440,8 @@ final ProductProjectionSearch search = ProductProjectionSearch.ofStaged()
         .plusFacetedSearch(attributeModel.ofString(ATTR_NAME_COLOR).by("red"));
 testResult(search,
         ids -&gt; assertThat(ids).containsOnly(product2.getId()),
-        colors -&gt; assertThat(colors).containsOnly(TermStats.of("blue", 2), TermStats.of("red", 1)),
-        sizes -&gt; assertThat(sizes).containsOnly(TermStats.of("36.0", 1)));
+        colors -&gt; assertThat(colors).containsOnly(TermStats.of("blue", 2L), TermStats.of("red", 1L)),
+        sizes -&gt; assertThat(sizes).containsOnly(TermStats.of("36.0", 1L)));
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/products/search/ProductProjectionSearchFacetedSearchIntegrationTest.java" target="_blank">test code</a>.</pre></div>
 
  <p>You can see now how the same request is performed without the faceted search model:</p>
@@ -453,8 +453,8 @@ testResult(search,
         .plusFacetFilters(filter -&gt; filter.allVariants().attribute().ofString(ATTR_NAME_COLOR).by("red"));
 testResult(search,
         ids -&gt; assertThat(ids).containsOnly(product2.getId()),
-        colors -&gt; assertThat(colors).containsOnly(TermStats.of("blue", 2), TermStats.of("red", 1)),
-        sizes -&gt; assertThat(sizes).containsOnly(TermStats.of("36.0", 1)));
+        colors -&gt; assertThat(colors).containsOnly(TermStats.of("blue", 2L), TermStats.of("red", 1L)),
+        sizes -&gt; assertThat(sizes).containsOnly(TermStats.of("36.0", 1L)));
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/products/search/ProductProjectionSearchFacetedSearchIntegrationTest.java" target="_blank">test code</a>.</pre></div></div>
 </li>
 </ul>

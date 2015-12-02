@@ -5185,7 +5185,7 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 </dd>
 <dt><a href="io/sphere/sdk/queries/InvalidQueryOffsetException.html" title="class in io.sphere.sdk.queries"><span class="typeNameLink">InvalidQueryOffsetException</span></a> - Exception in <a href="io/sphere/sdk/queries/package-summary.html">io.sphere.sdk.queries</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/InvalidQueryOffsetException.html#InvalidQueryOffsetException-long-">InvalidQueryOffsetException(long)</a></span> - Constructor for exception io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/InvalidQueryOffsetException.html" title="class in io.sphere.sdk.queries">InvalidQueryOffsetException</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/InvalidQueryOffsetException.html#InvalidQueryOffsetException-java.lang.Long-">InvalidQueryOffsetException(Long)</a></span> - Constructor for exception io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/InvalidQueryOffsetException.html" title="class in io.sphere.sdk.queries">InvalidQueryOffsetException</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/search/model/InvalidRangeException.html" title="class in io.sphere.sdk.search.model"><span class="typeNameLink">InvalidRangeException</span></a> - Exception in <a href="io/sphere/sdk/search/model/package-summary.html">io.sphere.sdk.search.model</a></dt>
 <dd>&nbsp;</dd>
@@ -5207,7 +5207,7 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dd>
 <div class="block"><div id="io-sphere-sdk-inventory-commands-InventoryEntryCreateCommandTest-execution--%s" class=code-example><pre><code class='java'>withChannelOfRole(client(), ChannelRole.INVENTORY_SUPPLY, channel -&gt; {
     final String sku = randomKey();
-    final int quantityOnStock = 10;
+    final long quantityOnStock = 10;
     final ZonedDateTime expectedDelivery = tomorrowZonedDateTime();
     final int restockableInDays = 3;
     final InventoryEntryDraft inventoryEntryDraft = InventoryEntryDraft.of(sku, quantityOnStock)
@@ -6412,7 +6412,7 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
     final MessageQuery query = MessageQuery.of()
             .withPredicates(m -&gt; m.type().is("ReturnInfoAdded"))
             .withSort(m -&gt; m.createdAt().sort().desc())
-            .withLimit(1);
+            .withLimit(1L);
     final Message messageFromQueryEndpoint = execute(query).head().get();
 
     final Message message = execute(MessageByIdGet.of(messageFromQueryEndpoint));
@@ -6805,7 +6805,7 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/cartdiscounts/DiscountedLineItemPrice.html#of-javax.money.MonetaryAmount-java.util.List-">of(MonetaryAmount, List&lt;DiscountedLineItemPortion&gt;)</a></span> - Static method in class io.sphere.sdk.cartdiscounts.<a href="io/sphere/sdk/cartdiscounts/DiscountedLineItemPrice.html" title="class in io.sphere.sdk.cartdiscounts">DiscountedLineItemPrice</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/cartdiscounts/DiscountedLineItemPriceForQuantity.html#of-io.sphere.sdk.cartdiscounts.DiscountedLineItemPrice-java.lang.Integer-">of(DiscountedLineItemPrice, Integer)</a></span> - Static method in class io.sphere.sdk.cartdiscounts.<a href="io/sphere/sdk/cartdiscounts/DiscountedLineItemPriceForQuantity.html" title="class in io.sphere.sdk.cartdiscounts">DiscountedLineItemPriceForQuantity</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/cartdiscounts/DiscountedLineItemPriceForQuantity.html#of-io.sphere.sdk.cartdiscounts.DiscountedLineItemPrice-java.lang.Long-">of(DiscountedLineItemPrice, Long)</a></span> - Static method in class io.sphere.sdk.cartdiscounts.<a href="io/sphere/sdk/cartdiscounts/DiscountedLineItemPriceForQuantity.html" title="class in io.sphere.sdk.cartdiscounts">DiscountedLineItemPriceForQuantity</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/cartdiscounts/expansion/CartDiscountExpansionModel.html#of--">of()</a></span> - Static method in class io.sphere.sdk.cartdiscounts.expansion.<a href="io/sphere/sdk/cartdiscounts/expansion/CartDiscountExpansionModel.html" title="class in io.sphere.sdk.cartdiscounts.expansion">CartDiscountExpansionModel</a></dt>
 <dd>&nbsp;</dd>
@@ -6837,9 +6837,9 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/commands/CartUpdateCommand.html#of-io.sphere.sdk.models.Versioned-io.sphere.sdk.commands.UpdateAction-">of(Versioned&lt;Cart&gt;, UpdateAction&lt;Cart&gt;)</a></span> - Static method in interface io.sphere.sdk.carts.commands.<a href="io/sphere/sdk/carts/commands/CartUpdateCommand.html" title="interface in io.sphere.sdk.carts.commands">CartUpdateCommand</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/commands/updateactions/AddCustomLineItem.html#of-io.sphere.sdk.models.LocalizedString-java.lang.String-javax.money.MonetaryAmount-io.sphere.sdk.models.Referenceable-long-">of(LocalizedString, String, MonetaryAmount, Referenceable&lt;TaxCategory&gt;, long)</a></span> - Static method in class io.sphere.sdk.carts.commands.updateactions.<a href="io/sphere/sdk/carts/commands/updateactions/AddCustomLineItem.html" title="class in io.sphere.sdk.carts.commands.updateactions">AddCustomLineItem</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/commands/updateactions/AddCustomLineItem.html#of-io.sphere.sdk.models.LocalizedString-java.lang.String-javax.money.MonetaryAmount-io.sphere.sdk.models.Referenceable-java.lang.Long-">of(LocalizedString, String, MonetaryAmount, Referenceable&lt;TaxCategory&gt;, Long)</a></span> - Static method in class io.sphere.sdk.carts.commands.updateactions.<a href="io/sphere/sdk/carts/commands/updateactions/AddCustomLineItem.html" title="class in io.sphere.sdk.carts.commands.updateactions">AddCustomLineItem</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/commands/updateactions/AddCustomLineItem.html#of-io.sphere.sdk.models.LocalizedString-java.lang.String-javax.money.MonetaryAmount-io.sphere.sdk.models.Referenceable-long-io.sphere.sdk.types.CustomFieldsDraft-">of(LocalizedString, String, MonetaryAmount, Referenceable&lt;TaxCategory&gt;, long, CustomFieldsDraft)</a></span> - Static method in class io.sphere.sdk.carts.commands.updateactions.<a href="io/sphere/sdk/carts/commands/updateactions/AddCustomLineItem.html" title="class in io.sphere.sdk.carts.commands.updateactions">AddCustomLineItem</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/commands/updateactions/AddCustomLineItem.html#of-io.sphere.sdk.models.LocalizedString-java.lang.String-javax.money.MonetaryAmount-io.sphere.sdk.models.Referenceable-java.lang.Long-io.sphere.sdk.types.CustomFieldsDraft-">of(LocalizedString, String, MonetaryAmount, Referenceable&lt;TaxCategory&gt;, Long, CustomFieldsDraft)</a></span> - Static method in class io.sphere.sdk.carts.commands.updateactions.<a href="io/sphere/sdk/carts/commands/updateactions/AddCustomLineItem.html" title="class in io.sphere.sdk.carts.commands.updateactions">AddCustomLineItem</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/commands/updateactions/AddCustomLineItem.html#of-io.sphere.sdk.carts.CustomLineItemDraft-">of(CustomLineItemDraft)</a></span> - Static method in class io.sphere.sdk.carts.commands.updateactions.<a href="io/sphere/sdk/carts/commands/updateactions/AddCustomLineItem.html" title="class in io.sphere.sdk.carts.commands.updateactions">AddCustomLineItem</a></dt>
 <dd>&nbsp;</dd>
@@ -6847,15 +6847,15 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/commands/updateactions/AddDiscountCode.html#of-java.lang.String-">of(String)</a></span> - Static method in class io.sphere.sdk.carts.commands.updateactions.<a href="io/sphere/sdk/carts/commands/updateactions/AddDiscountCode.html" title="class in io.sphere.sdk.carts.commands.updateactions">AddDiscountCode</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/commands/updateactions/AddLineItem.html#of-io.sphere.sdk.products.ProductIdentifiable-java.lang.Integer-long-">of(ProductIdentifiable, Integer, long)</a></span> - Static method in class io.sphere.sdk.carts.commands.updateactions.<a href="io/sphere/sdk/carts/commands/updateactions/AddLineItem.html" title="class in io.sphere.sdk.carts.commands.updateactions">AddLineItem</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/commands/updateactions/AddLineItem.html#of-io.sphere.sdk.products.ProductIdentifiable-java.lang.Integer-java.lang.Long-">of(ProductIdentifiable, Integer, Long)</a></span> - Static method in class io.sphere.sdk.carts.commands.updateactions.<a href="io/sphere/sdk/carts/commands/updateactions/AddLineItem.html" title="class in io.sphere.sdk.carts.commands.updateactions">AddLineItem</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/commands/updateactions/AddLineItem.html#of-java.lang.String-java.lang.Integer-long-">of(String, Integer, long)</a></span> - Static method in class io.sphere.sdk.carts.commands.updateactions.<a href="io/sphere/sdk/carts/commands/updateactions/AddLineItem.html" title="class in io.sphere.sdk.carts.commands.updateactions">AddLineItem</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/commands/updateactions/AddLineItem.html#of-java.lang.String-java.lang.Integer-java.lang.Long-">of(String, Integer, Long)</a></span> - Static method in class io.sphere.sdk.carts.commands.updateactions.<a href="io/sphere/sdk/carts/commands/updateactions/AddLineItem.html" title="class in io.sphere.sdk.carts.commands.updateactions">AddLineItem</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/commands/updateactions/AddPayment.html#of-io.sphere.sdk.models.Referenceable-">of(Referenceable&lt;Payment&gt;)</a></span> - Static method in class io.sphere.sdk.carts.commands.updateactions.<a href="io/sphere/sdk/carts/commands/updateactions/AddPayment.html" title="class in io.sphere.sdk.carts.commands.updateactions">AddPayment</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/commands/updateactions/ChangeLineItemQuantity.html#of-java.lang.String-long-">of(String, long)</a></span> - Static method in class io.sphere.sdk.carts.commands.updateactions.<a href="io/sphere/sdk/carts/commands/updateactions/ChangeLineItemQuantity.html" title="class in io.sphere.sdk.carts.commands.updateactions">ChangeLineItemQuantity</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/commands/updateactions/ChangeLineItemQuantity.html#of-java.lang.String-java.lang.Long-">of(String, Long)</a></span> - Static method in class io.sphere.sdk.carts.commands.updateactions.<a href="io/sphere/sdk/carts/commands/updateactions/ChangeLineItemQuantity.html" title="class in io.sphere.sdk.carts.commands.updateactions">ChangeLineItemQuantity</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/commands/updateactions/ChangeLineItemQuantity.html#of-io.sphere.sdk.carts.LineItem-long-">of(LineItem, long)</a></span> - Static method in class io.sphere.sdk.carts.commands.updateactions.<a href="io/sphere/sdk/carts/commands/updateactions/ChangeLineItemQuantity.html" title="class in io.sphere.sdk.carts.commands.updateactions">ChangeLineItemQuantity</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/commands/updateactions/ChangeLineItemQuantity.html#of-io.sphere.sdk.carts.LineItem-java.lang.Long-">of(LineItem, Long)</a></span> - Static method in class io.sphere.sdk.carts.commands.updateactions.<a href="io/sphere/sdk/carts/commands/updateactions/ChangeLineItemQuantity.html" title="class in io.sphere.sdk.carts.commands.updateactions">ChangeLineItemQuantity</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/commands/updateactions/Recalculate.html#of--">of()</a></span> - Static method in class io.sphere.sdk.carts.commands.updateactions.<a href="io/sphere/sdk/carts/commands/updateactions/Recalculate.html" title="class in io.sphere.sdk.carts.commands.updateactions">Recalculate</a></dt>
 <dd>&nbsp;</dd>
@@ -6865,11 +6865,11 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/commands/updateactions/RemoveDiscountCode.html#of-io.sphere.sdk.models.Referenceable-">of(Referenceable&lt;DiscountCode&gt;)</a></span> - Static method in class io.sphere.sdk.carts.commands.updateactions.<a href="io/sphere/sdk/carts/commands/updateactions/RemoveDiscountCode.html" title="class in io.sphere.sdk.carts.commands.updateactions">RemoveDiscountCode</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/commands/updateactions/RemoveLineItem.html#of-java.lang.String-java.lang.Integer-">of(String, Integer)</a></span> - Static method in class io.sphere.sdk.carts.commands.updateactions.<a href="io/sphere/sdk/carts/commands/updateactions/RemoveLineItem.html" title="class in io.sphere.sdk.carts.commands.updateactions">RemoveLineItem</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/commands/updateactions/RemoveLineItem.html#of-java.lang.String-java.lang.Long-">of(String, Long)</a></span> - Static method in class io.sphere.sdk.carts.commands.updateactions.<a href="io/sphere/sdk/carts/commands/updateactions/RemoveLineItem.html" title="class in io.sphere.sdk.carts.commands.updateactions">RemoveLineItem</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/commands/updateactions/RemoveLineItem.html#of-java.lang.String-">of(String)</a></span> - Static method in class io.sphere.sdk.carts.commands.updateactions.<a href="io/sphere/sdk/carts/commands/updateactions/RemoveLineItem.html" title="class in io.sphere.sdk.carts.commands.updateactions">RemoveLineItem</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/commands/updateactions/RemoveLineItem.html#of-io.sphere.sdk.carts.LineItem-java.lang.Integer-">of(LineItem, Integer)</a></span> - Static method in class io.sphere.sdk.carts.commands.updateactions.<a href="io/sphere/sdk/carts/commands/updateactions/RemoveLineItem.html" title="class in io.sphere.sdk.carts.commands.updateactions">RemoveLineItem</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/commands/updateactions/RemoveLineItem.html#of-io.sphere.sdk.carts.LineItem-java.lang.Long-">of(LineItem, Long)</a></span> - Static method in class io.sphere.sdk.carts.commands.updateactions.<a href="io/sphere/sdk/carts/commands/updateactions/RemoveLineItem.html" title="class in io.sphere.sdk.carts.commands.updateactions">RemoveLineItem</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/commands/updateactions/RemoveLineItem.html#of-io.sphere.sdk.carts.LineItem-">of(LineItem)</a></span> - Static method in class io.sphere.sdk.carts.commands.updateactions.<a href="io/sphere/sdk/carts/commands/updateactions/RemoveLineItem.html" title="class in io.sphere.sdk.carts.commands.updateactions">RemoveLineItem</a></dt>
 <dd>&nbsp;</dd>
@@ -6889,13 +6889,13 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/commands/updateactions/SetShippingMethod.html#of-io.sphere.sdk.models.Referenceable-">of(Referenceable&lt;ShippingMethod&gt;)</a></span> - Static method in class io.sphere.sdk.carts.commands.updateactions.<a href="io/sphere/sdk/carts/commands/updateactions/SetShippingMethod.html" title="class in io.sphere.sdk.carts.commands.updateactions">SetShippingMethod</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/CustomLineItemDraft.html#of-io.sphere.sdk.models.LocalizedString-java.lang.String-javax.money.MonetaryAmount-io.sphere.sdk.models.Referenceable-long-">of(LocalizedString, String, MonetaryAmount, Referenceable&lt;TaxCategory&gt;, long)</a></span> - Static method in class io.sphere.sdk.carts.<a href="io/sphere/sdk/carts/CustomLineItemDraft.html" title="class in io.sphere.sdk.carts">CustomLineItemDraft</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/CustomLineItemDraft.html#of-io.sphere.sdk.models.LocalizedString-java.lang.String-javax.money.MonetaryAmount-io.sphere.sdk.models.Referenceable-java.lang.Long-">of(LocalizedString, String, MonetaryAmount, Referenceable&lt;TaxCategory&gt;, Long)</a></span> - Static method in class io.sphere.sdk.carts.<a href="io/sphere/sdk/carts/CustomLineItemDraft.html" title="class in io.sphere.sdk.carts">CustomLineItemDraft</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/CustomLineItemDraft.html#of-io.sphere.sdk.models.LocalizedString-java.lang.String-javax.money.MonetaryAmount-io.sphere.sdk.models.Referenceable-long-io.sphere.sdk.types.CustomFieldsDraft-">of(LocalizedString, String, MonetaryAmount, Referenceable&lt;TaxCategory&gt;, long, CustomFieldsDraft)</a></span> - Static method in class io.sphere.sdk.carts.<a href="io/sphere/sdk/carts/CustomLineItemDraft.html" title="class in io.sphere.sdk.carts">CustomLineItemDraft</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/CustomLineItemDraft.html#of-io.sphere.sdk.models.LocalizedString-java.lang.String-javax.money.MonetaryAmount-io.sphere.sdk.models.Referenceable-java.lang.Long-io.sphere.sdk.types.CustomFieldsDraft-">of(LocalizedString, String, MonetaryAmount, Referenceable&lt;TaxCategory&gt;, Long, CustomFieldsDraft)</a></span> - Static method in class io.sphere.sdk.carts.<a href="io/sphere/sdk/carts/CustomLineItemDraft.html" title="class in io.sphere.sdk.carts">CustomLineItemDraft</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/expansion/CartExpansionModel.html#of--">of()</a></span> - Static method in class io.sphere.sdk.carts.expansion.<a href="io/sphere/sdk/carts/expansion/CartExpansionModel.html" title="class in io.sphere.sdk.carts.expansion">CartExpansionModel</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/ItemState.html#of-io.sphere.sdk.models.Referenceable-long-">of(Referenceable&lt;State&gt;, long)</a></span> - Static method in class io.sphere.sdk.carts.<a href="io/sphere/sdk/carts/ItemState.html" title="class in io.sphere.sdk.carts">ItemState</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/ItemState.html#of-io.sphere.sdk.models.Referenceable-java.lang.Long-">of(Referenceable&lt;State&gt;, Long)</a></span> - Static method in class io.sphere.sdk.carts.<a href="io/sphere/sdk/carts/ItemState.html" title="class in io.sphere.sdk.carts">ItemState</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/PaymentInfo.html#of-java.util.List-">of(List&lt;Reference&lt;Payment&gt;&gt;)</a></span> - Static method in class io.sphere.sdk.carts.<a href="io/sphere/sdk/carts/PaymentInfo.html" title="class in io.sphere.sdk.carts">PaymentInfo</a></dt>
 <dd>&nbsp;</dd>
@@ -7185,11 +7185,11 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <div class="block"><span class="deprecationComment">use <a href="io/sphere/sdk/customobjects/commands/CustomObjectDeleteCommand.html#ofJsonNode-java.lang.String-java.lang.String-"><code>CustomObjectDeleteCommand.ofJsonNode(String, String)</code></a> instead</span></div>
 </div>
 </dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/customobjects/commands/CustomObjectDeleteCommand.html#of-java.lang.String-long-com.fasterxml.jackson.core.type.TypeReference-">of(String, long, TypeReference&lt;T&gt;)</a></span> - Static method in interface io.sphere.sdk.customobjects.commands.<a href="io/sphere/sdk/customobjects/commands/CustomObjectDeleteCommand.html" title="interface in io.sphere.sdk.customobjects.commands">CustomObjectDeleteCommand</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/customobjects/commands/CustomObjectDeleteCommand.html#of-java.lang.String-java.lang.Long-com.fasterxml.jackson.core.type.TypeReference-">of(String, Long, TypeReference&lt;T&gt;)</a></span> - Static method in interface io.sphere.sdk.customobjects.commands.<a href="io/sphere/sdk/customobjects/commands/CustomObjectDeleteCommand.html" title="interface in io.sphere.sdk.customobjects.commands">CustomObjectDeleteCommand</a></dt>
 <dd>
 <div class="block">Deletes a custom object by id with optimistic concurrency control and returns the old custom object with the in <code>valueTypeReference</code> specified value type.</div>
 </dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/customobjects/commands/CustomObjectDeleteCommand.html#of-java.lang.String-long-java.lang.Class-">of(String, long, Class&lt;T&gt;)</a></span> - Static method in interface io.sphere.sdk.customobjects.commands.<a href="io/sphere/sdk/customobjects/commands/CustomObjectDeleteCommand.html" title="interface in io.sphere.sdk.customobjects.commands">CustomObjectDeleteCommand</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/customobjects/commands/CustomObjectDeleteCommand.html#of-java.lang.String-java.lang.Long-java.lang.Class-">of(String, Long, Class&lt;T&gt;)</a></span> - Static method in interface io.sphere.sdk.customobjects.commands.<a href="io/sphere/sdk/customobjects/commands/CustomObjectDeleteCommand.html" title="interface in io.sphere.sdk.customobjects.commands">CustomObjectDeleteCommand</a></dt>
 <dd>
 <div class="block">Deletes a custom object by id with optimistic concurrency control and returns the old custom object with the in <code>valueClass</code> specified value type.</div>
 </dd>
@@ -7301,21 +7301,21 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/http/HttpRequest.html#of-io.sphere.sdk.http.HttpMethod-java.lang.String-io.sphere.sdk.http.HttpHeaders-io.sphere.sdk.http.HttpRequestBody-">of(HttpMethod, String, HttpHeaders, HttpRequestBody)</a></span> - Static method in interface io.sphere.sdk.http.<a href="io/sphere/sdk/http/HttpRequest.html" title="interface in io.sphere.sdk.http">HttpRequest</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/http/HttpResponse.html#of-int-java.lang.String-">of(int, String)</a></span> - Static method in interface io.sphere.sdk.http.<a href="io/sphere/sdk/http/HttpResponse.html" title="interface in io.sphere.sdk.http">HttpResponse</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/http/HttpResponse.html#of-java.lang.Integer-java.lang.String-">of(Integer, String)</a></span> - Static method in interface io.sphere.sdk.http.<a href="io/sphere/sdk/http/HttpResponse.html" title="interface in io.sphere.sdk.http">HttpResponse</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/http/HttpResponse.html#of-int-java.lang.String-io.sphere.sdk.http.HttpHeaders-">of(int, String, HttpHeaders)</a></span> - Static method in interface io.sphere.sdk.http.<a href="io/sphere/sdk/http/HttpResponse.html" title="interface in io.sphere.sdk.http">HttpResponse</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/http/HttpResponse.html#of-java.lang.Integer-java.lang.String-io.sphere.sdk.http.HttpHeaders-">of(Integer, String, HttpHeaders)</a></span> - Static method in interface io.sphere.sdk.http.<a href="io/sphere/sdk/http/HttpResponse.html" title="interface in io.sphere.sdk.http">HttpResponse</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/http/HttpResponse.html#of-int-">of(int)</a></span> - Static method in interface io.sphere.sdk.http.<a href="io/sphere/sdk/http/HttpResponse.html" title="interface in io.sphere.sdk.http">HttpResponse</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/http/HttpResponse.html#of-java.lang.Integer-">of(Integer)</a></span> - Static method in interface io.sphere.sdk.http.<a href="io/sphere/sdk/http/HttpResponse.html" title="interface in io.sphere.sdk.http">HttpResponse</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/http/HttpResponse.html#of-int-io.sphere.sdk.http.HttpHeaders-">of(int, HttpHeaders)</a></span> - Static method in interface io.sphere.sdk.http.<a href="io/sphere/sdk/http/HttpResponse.html" title="interface in io.sphere.sdk.http">HttpResponse</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/http/HttpResponse.html#of-java.lang.Integer-io.sphere.sdk.http.HttpHeaders-">of(Integer, HttpHeaders)</a></span> - Static method in interface io.sphere.sdk.http.<a href="io/sphere/sdk/http/HttpResponse.html" title="interface in io.sphere.sdk.http">HttpResponse</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/http/HttpResponse.html#of-int-java.lang.String-io.sphere.sdk.http.HttpRequest-">of(int, String, HttpRequest)</a></span> - Static method in interface io.sphere.sdk.http.<a href="io/sphere/sdk/http/HttpResponse.html" title="interface in io.sphere.sdk.http">HttpResponse</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/http/HttpResponse.html#of-java.lang.Integer-java.lang.String-io.sphere.sdk.http.HttpRequest-">of(Integer, String, HttpRequest)</a></span> - Static method in interface io.sphere.sdk.http.<a href="io/sphere/sdk/http/HttpResponse.html" title="interface in io.sphere.sdk.http">HttpResponse</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/http/HttpResponse.html#of-int-java.lang.String-io.sphere.sdk.http.HttpRequest-io.sphere.sdk.http.HttpHeaders-">of(int, String, HttpRequest, HttpHeaders)</a></span> - Static method in interface io.sphere.sdk.http.<a href="io/sphere/sdk/http/HttpResponse.html" title="interface in io.sphere.sdk.http">HttpResponse</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/http/HttpResponse.html#of-java.lang.Integer-java.lang.String-io.sphere.sdk.http.HttpRequest-io.sphere.sdk.http.HttpHeaders-">of(Integer, String, HttpRequest, HttpHeaders)</a></span> - Static method in interface io.sphere.sdk.http.<a href="io/sphere/sdk/http/HttpResponse.html" title="interface in io.sphere.sdk.http">HttpResponse</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/http/HttpResponse.html#of-int-byte:A-io.sphere.sdk.http.HttpRequest-">of(int, byte[], HttpRequest)</a></span> - Static method in interface io.sphere.sdk.http.<a href="io/sphere/sdk/http/HttpResponse.html" title="interface in io.sphere.sdk.http">HttpResponse</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/http/HttpResponse.html#of-java.lang.Integer-byte:A-io.sphere.sdk.http.HttpRequest-">of(Integer, byte[], HttpRequest)</a></span> - Static method in interface io.sphere.sdk.http.<a href="io/sphere/sdk/http/HttpResponse.html" title="interface in io.sphere.sdk.http">HttpResponse</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/http/HttpResponse.html#of-int-byte:A-io.sphere.sdk.http.HttpRequest-io.sphere.sdk.http.HttpHeaders-">of(int, byte[], HttpRequest, HttpHeaders)</a></span> - Static method in interface io.sphere.sdk.http.<a href="io/sphere/sdk/http/HttpResponse.html" title="interface in io.sphere.sdk.http">HttpResponse</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/http/HttpResponse.html#of-java.lang.Integer-byte:A-io.sphere.sdk.http.HttpRequest-io.sphere.sdk.http.HttpHeaders-">of(Integer, byte[], HttpRequest, HttpHeaders)</a></span> - Static method in interface io.sphere.sdk.http.<a href="io/sphere/sdk/http/HttpResponse.html" title="interface in io.sphere.sdk.http">HttpResponse</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/http/StringHttpRequestBody.html#of-java.lang.String-">of(String)</a></span> - Static method in class io.sphere.sdk.http.<a href="io/sphere/sdk/http/StringHttpRequestBody.html" title="class in io.sphere.sdk.http">StringHttpRequestBody</a></dt>
 <dd>&nbsp;</dd>
@@ -7329,11 +7329,11 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/inventory/commands/InventoryEntryUpdateCommand.html#of-io.sphere.sdk.models.Versioned-java.util.List-">of(Versioned&lt;InventoryEntry&gt;, List&lt;? extends UpdateAction&lt;InventoryEntry&gt;&gt;)</a></span> - Static method in interface io.sphere.sdk.inventory.commands.<a href="io/sphere/sdk/inventory/commands/InventoryEntryUpdateCommand.html" title="interface in io.sphere.sdk.inventory.commands">InventoryEntryUpdateCommand</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/inventory/commands/updateactions/AddQuantity.html#of-long-">of(long)</a></span> - Static method in class io.sphere.sdk.inventory.commands.updateactions.<a href="io/sphere/sdk/inventory/commands/updateactions/AddQuantity.html" title="class in io.sphere.sdk.inventory.commands.updateactions">AddQuantity</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/inventory/commands/updateactions/AddQuantity.html#of-java.lang.Long-">of(Long)</a></span> - Static method in class io.sphere.sdk.inventory.commands.updateactions.<a href="io/sphere/sdk/inventory/commands/updateactions/AddQuantity.html" title="class in io.sphere.sdk.inventory.commands.updateactions">AddQuantity</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/inventory/commands/updateactions/ChangeQuantity.html#of-long-">of(long)</a></span> - Static method in class io.sphere.sdk.inventory.commands.updateactions.<a href="io/sphere/sdk/inventory/commands/updateactions/ChangeQuantity.html" title="class in io.sphere.sdk.inventory.commands.updateactions">ChangeQuantity</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/inventory/commands/updateactions/ChangeQuantity.html#of-java.lang.Long-">of(Long)</a></span> - Static method in class io.sphere.sdk.inventory.commands.updateactions.<a href="io/sphere/sdk/inventory/commands/updateactions/ChangeQuantity.html" title="class in io.sphere.sdk.inventory.commands.updateactions">ChangeQuantity</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/inventory/commands/updateactions/RemoveQuantity.html#of-long-">of(long)</a></span> - Static method in class io.sphere.sdk.inventory.commands.updateactions.<a href="io/sphere/sdk/inventory/commands/updateactions/RemoveQuantity.html" title="class in io.sphere.sdk.inventory.commands.updateactions">RemoveQuantity</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/inventory/commands/updateactions/RemoveQuantity.html#of-java.lang.Long-">of(Long)</a></span> - Static method in class io.sphere.sdk.inventory.commands.updateactions.<a href="io/sphere/sdk/inventory/commands/updateactions/RemoveQuantity.html" title="class in io.sphere.sdk.inventory.commands.updateactions">RemoveQuantity</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/inventory/commands/updateactions/SetExpectedDelivery.html#of-java.time.ZonedDateTime-">of(ZonedDateTime)</a></span> - Static method in class io.sphere.sdk.inventory.commands.updateactions.<a href="io/sphere/sdk/inventory/commands/updateactions/SetExpectedDelivery.html" title="class in io.sphere.sdk.inventory.commands.updateactions">SetExpectedDelivery</a></dt>
 <dd>&nbsp;</dd>
@@ -7341,7 +7341,7 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/inventory/expansion/InventoryEntryExpansionModel.html#of--">of()</a></span> - Static method in class io.sphere.sdk.inventory.expansion.<a href="io/sphere/sdk/inventory/expansion/InventoryEntryExpansionModel.html" title="class in io.sphere.sdk.inventory.expansion">InventoryEntryExpansionModel</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/inventory/InventoryEntryDraft.html#of-java.lang.String-long-">of(String, long)</a></span> - Static method in class io.sphere.sdk.inventory.<a href="io/sphere/sdk/inventory/InventoryEntryDraft.html" title="class in io.sphere.sdk.inventory">InventoryEntryDraft</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/inventory/InventoryEntryDraft.html#of-java.lang.String-java.lang.Long-">of(String, Long)</a></span> - Static method in class io.sphere.sdk.inventory.<a href="io/sphere/sdk/inventory/InventoryEntryDraft.html" title="class in io.sphere.sdk.inventory">InventoryEntryDraft</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/inventory/InventoryEntryDraft.html#of-java.lang.String-java.lang.Long-java.time.ZonedDateTime-java.lang.Integer-io.sphere.sdk.models.Reference-">of(String, Long, ZonedDateTime, Integer, Reference&lt;Channel&gt;)</a></span> - Static method in class io.sphere.sdk.inventory.<a href="io/sphere/sdk/inventory/InventoryEntryDraft.html" title="class in io.sphere.sdk.inventory">InventoryEntryDraft</a></dt>
 <dd>&nbsp;</dd>
@@ -7411,7 +7411,7 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dd>
 <div class="block">Creates a versioned that only contains the id and the version.</div>
 </dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/models/Versioned.html#of-java.lang.String-long-">of(String, long)</a></span> - Static method in interface io.sphere.sdk.models.<a href="io/sphere/sdk/models/Versioned.html" title="interface in io.sphere.sdk.models">Versioned</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/models/Versioned.html#of-java.lang.String-java.lang.Long-">of(String, Long)</a></span> - Static method in interface io.sphere.sdk.models.<a href="io/sphere/sdk/models/Versioned.html" title="interface in io.sphere.sdk.models">Versioned</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/commands/OrderDeleteCommand.html#of-io.sphere.sdk.models.Versioned-">of(Versioned&lt;Order&gt;)</a></span> - Static method in interface io.sphere.sdk.orders.commands.<a href="io/sphere/sdk/orders/commands/OrderDeleteCommand.html" title="interface in io.sphere.sdk.orders.commands">OrderDeleteCommand</a></dt>
 <dd>&nbsp;</dd>
@@ -7465,17 +7465,17 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/commands/updateactions/SetReturnShipmentState.html#of-io.sphere.sdk.orders.ReturnItem-io.sphere.sdk.orders.ReturnShipmentState-">of(ReturnItem, ReturnShipmentState)</a></span> - Static method in class io.sphere.sdk.orders.commands.updateactions.<a href="io/sphere/sdk/orders/commands/updateactions/SetReturnShipmentState.html" title="class in io.sphere.sdk.orders.commands.updateactions">SetReturnShipmentState</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/commands/updateactions/TransitionCustomLineItemState.html#of-java.lang.String-long-io.sphere.sdk.models.Referenceable-io.sphere.sdk.models.Referenceable-java.time.ZonedDateTime-">of(String, long, Referenceable&lt;State&gt;, Referenceable&lt;State&gt;, ZonedDateTime)</a></span> - Static method in class io.sphere.sdk.orders.commands.updateactions.<a href="io/sphere/sdk/orders/commands/updateactions/TransitionCustomLineItemState.html" title="class in io.sphere.sdk.orders.commands.updateactions">TransitionCustomLineItemState</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/commands/updateactions/TransitionCustomLineItemState.html#of-java.lang.String-java.lang.Long-io.sphere.sdk.models.Referenceable-io.sphere.sdk.models.Referenceable-java.time.ZonedDateTime-">of(String, Long, Referenceable&lt;State&gt;, Referenceable&lt;State&gt;, ZonedDateTime)</a></span> - Static method in class io.sphere.sdk.orders.commands.updateactions.<a href="io/sphere/sdk/orders/commands/updateactions/TransitionCustomLineItemState.html" title="class in io.sphere.sdk.orders.commands.updateactions">TransitionCustomLineItemState</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/commands/updateactions/TransitionCustomLineItemState.html#of-io.sphere.sdk.carts.CustomLineItem-long-io.sphere.sdk.models.Referenceable-io.sphere.sdk.models.Referenceable-java.time.ZonedDateTime-">of(CustomLineItem, long, Referenceable&lt;State&gt;, Referenceable&lt;State&gt;, ZonedDateTime)</a></span> - Static method in class io.sphere.sdk.orders.commands.updateactions.<a href="io/sphere/sdk/orders/commands/updateactions/TransitionCustomLineItemState.html" title="class in io.sphere.sdk.orders.commands.updateactions">TransitionCustomLineItemState</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/commands/updateactions/TransitionCustomLineItemState.html#of-io.sphere.sdk.carts.CustomLineItem-java.lang.Long-io.sphere.sdk.models.Referenceable-io.sphere.sdk.models.Referenceable-java.time.ZonedDateTime-">of(CustomLineItem, Long, Referenceable&lt;State&gt;, Referenceable&lt;State&gt;, ZonedDateTime)</a></span> - Static method in class io.sphere.sdk.orders.commands.updateactions.<a href="io/sphere/sdk/orders/commands/updateactions/TransitionCustomLineItemState.html" title="class in io.sphere.sdk.orders.commands.updateactions">TransitionCustomLineItemState</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/commands/updateactions/TransitionCustomLineItemState.html#of-io.sphere.sdk.carts.CustomLineItem-long-io.sphere.sdk.models.Referenceable-io.sphere.sdk.models.Referenceable-">of(CustomLineItem, long, Referenceable&lt;State&gt;, Referenceable&lt;State&gt;)</a></span> - Static method in class io.sphere.sdk.orders.commands.updateactions.<a href="io/sphere/sdk/orders/commands/updateactions/TransitionCustomLineItemState.html" title="class in io.sphere.sdk.orders.commands.updateactions">TransitionCustomLineItemState</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/commands/updateactions/TransitionCustomLineItemState.html#of-io.sphere.sdk.carts.CustomLineItem-java.lang.Long-io.sphere.sdk.models.Referenceable-io.sphere.sdk.models.Referenceable-">of(CustomLineItem, Long, Referenceable&lt;State&gt;, Referenceable&lt;State&gt;)</a></span> - Static method in class io.sphere.sdk.orders.commands.updateactions.<a href="io/sphere/sdk/orders/commands/updateactions/TransitionCustomLineItemState.html" title="class in io.sphere.sdk.orders.commands.updateactions">TransitionCustomLineItemState</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/commands/updateactions/TransitionLineItemState.html#of-java.lang.String-long-io.sphere.sdk.models.Referenceable-io.sphere.sdk.models.Referenceable-java.time.ZonedDateTime-">of(String, long, Referenceable&lt;State&gt;, Referenceable&lt;State&gt;, ZonedDateTime)</a></span> - Static method in class io.sphere.sdk.orders.commands.updateactions.<a href="io/sphere/sdk/orders/commands/updateactions/TransitionLineItemState.html" title="class in io.sphere.sdk.orders.commands.updateactions">TransitionLineItemState</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/commands/updateactions/TransitionLineItemState.html#of-java.lang.String-java.lang.Long-io.sphere.sdk.models.Referenceable-io.sphere.sdk.models.Referenceable-java.time.ZonedDateTime-">of(String, Long, Referenceable&lt;State&gt;, Referenceable&lt;State&gt;, ZonedDateTime)</a></span> - Static method in class io.sphere.sdk.orders.commands.updateactions.<a href="io/sphere/sdk/orders/commands/updateactions/TransitionLineItemState.html" title="class in io.sphere.sdk.orders.commands.updateactions">TransitionLineItemState</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/commands/updateactions/TransitionLineItemState.html#of-io.sphere.sdk.carts.LineItem-long-io.sphere.sdk.models.Referenceable-io.sphere.sdk.models.Referenceable-java.time.ZonedDateTime-">of(LineItem, long, Referenceable&lt;State&gt;, Referenceable&lt;State&gt;, ZonedDateTime)</a></span> - Static method in class io.sphere.sdk.orders.commands.updateactions.<a href="io/sphere/sdk/orders/commands/updateactions/TransitionLineItemState.html" title="class in io.sphere.sdk.orders.commands.updateactions">TransitionLineItemState</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/commands/updateactions/TransitionLineItemState.html#of-io.sphere.sdk.carts.LineItem-java.lang.Long-io.sphere.sdk.models.Referenceable-io.sphere.sdk.models.Referenceable-java.time.ZonedDateTime-">of(LineItem, Long, Referenceable&lt;State&gt;, Referenceable&lt;State&gt;, ZonedDateTime)</a></span> - Static method in class io.sphere.sdk.orders.commands.updateactions.<a href="io/sphere/sdk/orders/commands/updateactions/TransitionLineItemState.html" title="class in io.sphere.sdk.orders.commands.updateactions">TransitionLineItemState</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/commands/updateactions/TransitionLineItemState.html#of-io.sphere.sdk.carts.LineItem-long-io.sphere.sdk.models.Referenceable-io.sphere.sdk.models.Referenceable-">of(LineItem, long, Referenceable&lt;State&gt;, Referenceable&lt;State&gt;)</a></span> - Static method in class io.sphere.sdk.orders.commands.updateactions.<a href="io/sphere/sdk/orders/commands/updateactions/TransitionLineItemState.html" title="class in io.sphere.sdk.orders.commands.updateactions">TransitionLineItemState</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/commands/updateactions/TransitionLineItemState.html#of-io.sphere.sdk.carts.LineItem-java.lang.Long-io.sphere.sdk.models.Referenceable-io.sphere.sdk.models.Referenceable-">of(LineItem, Long, Referenceable&lt;State&gt;, Referenceable&lt;State&gt;)</a></span> - Static method in class io.sphere.sdk.orders.commands.updateactions.<a href="io/sphere/sdk/orders/commands/updateactions/TransitionLineItemState.html" title="class in io.sphere.sdk.orders.commands.updateactions">TransitionLineItemState</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/commands/updateactions/TransitionState.html#of-io.sphere.sdk.models.Referenceable-">of(Referenceable&lt;State&gt;)</a></span> - Static method in class io.sphere.sdk.orders.commands.updateactions.<a href="io/sphere/sdk/orders/commands/updateactions/TransitionState.html" title="class in io.sphere.sdk.orders.commands.updateactions">TransitionState</a></dt>
 <dd>&nbsp;</dd>
@@ -7483,15 +7483,15 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/commands/updateactions/UpdateSyncInfo.html#of-io.sphere.sdk.models.Referenceable-">of(Referenceable&lt;Channel&gt;)</a></span> - Static method in class io.sphere.sdk.orders.commands.updateactions.<a href="io/sphere/sdk/orders/commands/updateactions/UpdateSyncInfo.html" title="class in io.sphere.sdk.orders.commands.updateactions">UpdateSyncInfo</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/CustomLineItemImportDraftBuilder.html#of-io.sphere.sdk.models.LocalizedString-long-javax.money.MonetaryAmount-io.sphere.sdk.models.Referenceable-">of(LocalizedString, long, MonetaryAmount, Referenceable&lt;TaxCategory&gt;)</a></span> - Static method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/CustomLineItemImportDraftBuilder.html" title="class in io.sphere.sdk.orders">CustomLineItemImportDraftBuilder</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/CustomLineItemImportDraftBuilder.html#of-io.sphere.sdk.models.LocalizedString-java.lang.Long-javax.money.MonetaryAmount-io.sphere.sdk.models.Referenceable-">of(LocalizedString, Long, MonetaryAmount, Referenceable&lt;TaxCategory&gt;)</a></span> - Static method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/CustomLineItemImportDraftBuilder.html" title="class in io.sphere.sdk.orders">CustomLineItemImportDraftBuilder</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/Delivery.html#of-java.lang.String-java.time.ZonedDateTime-java.util.List-java.util.List-">of(String, ZonedDateTime, List&lt;DeliveryItem&gt;, List&lt;Parcel&gt;)</a></span> - Static method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/Delivery.html" title="class in io.sphere.sdk.orders">Delivery</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/DeliveryItem.html#of-java.lang.String-int-">of(String, int)</a></span> - Static method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/DeliveryItem.html" title="class in io.sphere.sdk.orders">DeliveryItem</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/DeliveryItem.html#of-java.lang.String-long-">of(String, long)</a></span> - Static method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/DeliveryItem.html" title="class in io.sphere.sdk.orders">DeliveryItem</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/DeliveryItem.html#of-java.lang.String-java.lang.Long-">of(String, Long)</a></span> - Static method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/DeliveryItem.html" title="class in io.sphere.sdk.orders">DeliveryItem</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/DeliveryItem.html#of-io.sphere.sdk.carts.LineItemLike-long-">of(LineItemLike, long)</a></span> - Static method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/DeliveryItem.html" title="class in io.sphere.sdk.orders">DeliveryItem</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/DeliveryItem.html#of-io.sphere.sdk.carts.LineItemLike-java.lang.Long-">of(LineItemLike, Long)</a></span> - Static method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/DeliveryItem.html" title="class in io.sphere.sdk.orders">DeliveryItem</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/DeliveryItem.html#of-io.sphere.sdk.carts.LineItemLike-">of(LineItemLike)</a></span> - Static method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/DeliveryItem.html" title="class in io.sphere.sdk.orders">DeliveryItem</a></dt>
 <dd>&nbsp;</dd>
@@ -7499,7 +7499,7 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/expansion/SyncInfoExpansionModel.html#of--">of()</a></span> - Static method in class io.sphere.sdk.orders.expansion.<a href="io/sphere/sdk/orders/expansion/SyncInfoExpansionModel.html" title="class in io.sphere.sdk.orders.expansion">SyncInfoExpansionModel</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/LineItemImportDraftBuilder.html#of-io.sphere.sdk.orders.ProductVariantImportDraft-long-io.sphere.sdk.products.Price-io.sphere.sdk.models.LocalizedString-">of(ProductVariantImportDraft, long, Price, LocalizedString)</a></span> - Static method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/LineItemImportDraftBuilder.html" title="class in io.sphere.sdk.orders">LineItemImportDraftBuilder</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/LineItemImportDraftBuilder.html#of-io.sphere.sdk.orders.ProductVariantImportDraft-java.lang.Long-io.sphere.sdk.products.Price-io.sphere.sdk.models.LocalizedString-">of(ProductVariantImportDraft, Long, Price, LocalizedString)</a></span> - Static method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/LineItemImportDraftBuilder.html" title="class in io.sphere.sdk.orders">LineItemImportDraftBuilder</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/OrderFromCartDraft.html#of-io.sphere.sdk.models.Versioned-java.lang.String-io.sphere.sdk.orders.PaymentState-">of(Versioned&lt;Cart&gt;, String, PaymentState)</a></span> - Static method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/OrderFromCartDraft.html" title="class in io.sphere.sdk.orders">OrderFromCartDraft</a></dt>
 <dd>&nbsp;</dd>
@@ -7533,9 +7533,9 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/ReturnItem.html#of-java.lang.String-java.lang.Long-java.lang.String-java.lang.String-io.sphere.sdk.orders.ReturnShipmentState-io.sphere.sdk.orders.ReturnPaymentState-java.time.ZonedDateTime-java.time.ZonedDateTime-">of(String, Long, String, String, ReturnShipmentState, ReturnPaymentState, ZonedDateTime, ZonedDateTime)</a></span> - Static method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/ReturnItem.html" title="class in io.sphere.sdk.orders">ReturnItem</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/ReturnItemDraft.html#of-long-java.lang.String-io.sphere.sdk.orders.ReturnShipmentState-java.lang.String-">of(long, String, ReturnShipmentState, String)</a></span> - Static method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/ReturnItemDraft.html" title="class in io.sphere.sdk.orders">ReturnItemDraft</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/ReturnItemDraft.html#of-java.lang.Long-java.lang.String-io.sphere.sdk.orders.ReturnShipmentState-java.lang.String-">of(Long, String, ReturnShipmentState, String)</a></span> - Static method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/ReturnItemDraft.html" title="class in io.sphere.sdk.orders">ReturnItemDraft</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/ReturnItemDraft.html#of-long-java.lang.String-io.sphere.sdk.orders.ReturnShipmentState-">of(long, String, ReturnShipmentState)</a></span> - Static method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/ReturnItemDraft.html" title="class in io.sphere.sdk.orders">ReturnItemDraft</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/ReturnItemDraft.html#of-java.lang.Long-java.lang.String-io.sphere.sdk.orders.ReturnShipmentState-">of(Long, String, ReturnShipmentState)</a></span> - Static method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/ReturnItemDraft.html" title="class in io.sphere.sdk.orders">ReturnItemDraft</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/SyncInfo.html#of-io.sphere.sdk.models.Referenceable-java.time.ZonedDateTime-java.lang.String-">of(Referenceable&lt;Channel&gt;, ZonedDateTime, String)</a></span> - Static method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/SyncInfo.html" title="class in io.sphere.sdk.orders">SyncInfo</a></dt>
 <dd>&nbsp;</dd>
@@ -7947,7 +7947,7 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/DirectionlessQuerySort.html#of-io.sphere.sdk.queries.QueryModel-">of(QueryModel&lt;T&gt;)</a></span> - Static method in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/DirectionlessQuerySort.html" title="class in io.sphere.sdk.queries">DirectionlessQuerySort</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/PagedQueryResult.html#of-java.lang.Integer-java.lang.Integer-java.util.List-">of(Integer, Integer, List&lt;T&gt;)</a></span> - Static method in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/PagedQueryResult.html" title="class in io.sphere.sdk.queries">PagedQueryResult</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/PagedQueryResult.html#of-java.lang.Long-java.lang.Long-java.util.List-">of(Long, Long, List&lt;T&gt;)</a></span> - Static method in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/PagedQueryResult.html" title="class in io.sphere.sdk.queries">PagedQueryResult</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/PagedQueryResult.html#of-java.util.List-">of(List&lt;T&gt;)</a></span> - Static method in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/PagedQueryResult.html" title="class in io.sphere.sdk.queries">PagedQueryResult</a></dt>
 <dd>&nbsp;</dd>
@@ -7993,7 +7993,7 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/search/FilteredFacetExpression.html#of-java.lang.String-">of(String)</a></span> - Static method in interface io.sphere.sdk.search.<a href="io/sphere/sdk/search/FilteredFacetExpression.html" title="interface in io.sphere.sdk.search">FilteredFacetExpression</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/search/FilteredFacetResult.html#of-long-">of(long)</a></span> - Static method in class io.sphere.sdk.search.<a href="io/sphere/sdk/search/FilteredFacetResult.html" title="class in io.sphere.sdk.search">FilteredFacetResult</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/search/FilteredFacetResult.html#of-java.lang.Long-">of(Long)</a></span> - Static method in class io.sphere.sdk.search.<a href="io/sphere/sdk/search/FilteredFacetResult.html" title="class in io.sphere.sdk.search">FilteredFacetResult</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/search/FilterExpression.html#of-java.lang.String-">of(String)</a></span> - Static method in interface io.sphere.sdk.search.<a href="io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a></dt>
 <dd>&nbsp;</dd>
@@ -8071,7 +8071,7 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/search/TermFacetResult.html#of-java.lang.Long-java.lang.Long-java.lang.Long-java.util.List-">of(Long, Long, Long, List&lt;TermStats&gt;)</a></span> - Static method in class io.sphere.sdk.search.<a href="io/sphere/sdk/search/TermFacetResult.html" title="class in io.sphere.sdk.search">TermFacetResult</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/search/TermStats.html#of-java.lang.String-long-">of(String, long)</a></span> - Static method in class io.sphere.sdk.search.<a href="io/sphere/sdk/search/TermStats.html" title="class in io.sphere.sdk.search">TermStats</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/search/TermStats.html#of-java.lang.String-java.lang.Long-">of(String, Long)</a></span> - Static method in class io.sphere.sdk.search.<a href="io/sphere/sdk/search/TermStats.html" title="class in io.sphere.sdk.search">TermStats</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/search/tokenizer/CustomSuggestTokenizer.html#of-java.lang.String-">of(String)</a></span> - Static method in class io.sphere.sdk.search.tokenizer.<a href="io/sphere/sdk/search/tokenizer/CustomSuggestTokenizer.html" title="class in io.sphere.sdk.search.tokenizer">CustomSuggestTokenizer</a></dt>
 <dd>&nbsp;</dd>
@@ -8514,7 +8514,7 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dd>
 <div class="block">Deletes a custom object without optimistic concurrency control and returns the old custom object with a JsonNode value type.</div>
 </dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/customobjects/commands/CustomObjectDeleteCommand.html#ofJsonNode-java.lang.String-long-">ofJsonNode(String, long)</a></span> - Static method in interface io.sphere.sdk.customobjects.commands.<a href="io/sphere/sdk/customobjects/commands/CustomObjectDeleteCommand.html" title="interface in io.sphere.sdk.customobjects.commands">CustomObjectDeleteCommand</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/customobjects/commands/CustomObjectDeleteCommand.html#ofJsonNode-java.lang.String-java.lang.Long-">ofJsonNode(String, Long)</a></span> - Static method in interface io.sphere.sdk.customobjects.commands.<a href="io/sphere/sdk/customobjects/commands/CustomObjectDeleteCommand.html" title="interface in io.sphere.sdk.customobjects.commands">CustomObjectDeleteCommand</a></dt>
 <dd>
 <div class="block">Deletes a custom object by id with optimistic concurrency control and returns the old custom object with a JsonNode value type.</div>
 </dd>
@@ -8980,11 +8980,11 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dd>
 <div class="block">Creates a draft for updating a custom object.</div>
 </dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/customobjects/CustomObjectDraft.html#ofVersionedUpsert-java.lang.String-java.lang.String-T-long-com.fasterxml.jackson.core.type.TypeReference-">ofVersionedUpsert(String, String, T, long, TypeReference&lt;T&gt;)</a></span> - Static method in class io.sphere.sdk.customobjects.<a href="io/sphere/sdk/customobjects/CustomObjectDraft.html" title="class in io.sphere.sdk.customobjects">CustomObjectDraft</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/customobjects/CustomObjectDraft.html#ofVersionedUpsert-java.lang.String-java.lang.String-T-java.lang.Long-com.fasterxml.jackson.core.type.TypeReference-">ofVersionedUpsert(String, String, T, Long, TypeReference&lt;T&gt;)</a></span> - Static method in class io.sphere.sdk.customobjects.<a href="io/sphere/sdk/customobjects/CustomObjectDraft.html" title="class in io.sphere.sdk.customobjects">CustomObjectDraft</a></dt>
 <dd>
 <div class="block">Creates a draft for creating or updating a custom object.</div>
 </dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/customobjects/CustomObjectDraft.html#ofVersionedUpsert-java.lang.String-java.lang.String-T-long-java.lang.Class-">ofVersionedUpsert(String, String, T, long, Class&lt;T&gt;)</a></span> - Static method in class io.sphere.sdk.customobjects.<a href="io/sphere/sdk/customobjects/CustomObjectDraft.html" title="class in io.sphere.sdk.customobjects">CustomObjectDraft</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/customobjects/CustomObjectDraft.html#ofVersionedUpsert-java.lang.String-java.lang.String-T-java.lang.Long-java.lang.Class-">ofVersionedUpsert(String, String, T, Long, Class&lt;T&gt;)</a></span> - Static method in class io.sphere.sdk.customobjects.<a href="io/sphere/sdk/customobjects/CustomObjectDraft.html" title="class in io.sphere.sdk.customobjects">CustomObjectDraft</a></dt>
 <dd>
 <div class="block">Creates a draft for creating or updating a custom object.</div>
 </dd>
@@ -9118,7 +9118,7 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/queries/PagedResult.html" title="class in io.sphere.sdk.queries"><span class="typeNameLink">PagedResult</span></a>&lt;<a href="io/sphere/sdk/queries/PagedResult.html" title="type parameter in PagedResult">T</a>&gt; - Class in <a href="io/sphere/sdk/queries/package-summary.html">io.sphere.sdk.queries</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/PagedResult.html#PagedResult-java.lang.Integer-java.lang.Integer-java.util.List-">PagedResult(Integer, Integer, List&lt;T&gt;)</a></span> - Constructor for class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/PagedResult.html" title="class in io.sphere.sdk.queries">PagedResult</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/PagedResult.html#PagedResult-java.lang.Long-java.lang.Long-java.util.List-">PagedResult(Long, Long, List&lt;T&gt;)</a></span> - Constructor for class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/PagedResult.html" title="class in io.sphere.sdk.queries">PagedResult</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/search/PagedSearchResult.html" title="class in io.sphere.sdk.search"><span class="typeNameLink">PagedSearchResult</span></a>&lt;<a href="io/sphere/sdk/search/PagedSearchResult.html" title="type parameter in PagedSearchResult">T</a>&gt; - Class in <a href="io/sphere/sdk/search/package-summary.html">io.sphere.sdk.search</a></dt>
 <dd>&nbsp;</dd>
@@ -13000,21 +13000,21 @@ the order they are declared.</div>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/Address.html#withLastName-java.lang.String-">withLastName(String)</a></span> - Method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/Address.html" title="class in io.sphere.sdk.models">Address</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/queries/ProductProjectionQuery.html#withLimit-long-">withLimit(long)</a></span> - Method in interface io.sphere.sdk.products.queries.<a href="io/sphere/sdk/products/queries/ProductProjectionQuery.html" title="interface in io.sphere.sdk.products.queries">ProductProjectionQuery</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/queries/ProductProjectionQuery.html#withLimit-java.lang.Long-">withLimit(Long)</a></span> - Method in interface io.sphere.sdk.products.queries.<a href="io/sphere/sdk/products/queries/ProductProjectionQuery.html" title="interface in io.sphere.sdk.products.queries">ProductProjectionQuery</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/queries/SuggestQuery.html#withLimit-java.lang.Integer-">withLimit(Integer)</a></span> - Method in interface io.sphere.sdk.products.queries.<a href="io/sphere/sdk/products/queries/SuggestQuery.html" title="interface in io.sphere.sdk.products.queries">SuggestQuery</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/search/ProductProjectionSearch.html#withLimit-long-">withLimit(long)</a></span> - Method in interface io.sphere.sdk.products.search.<a href="io/sphere/sdk/products/search/ProductProjectionSearch.html" title="interface in io.sphere.sdk.products.search">ProductProjectionSearch</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/search/ProductProjectionSearch.html#withLimit-java.lang.Long-">withLimit(Long)</a></span> - Method in interface io.sphere.sdk.products.search.<a href="io/sphere/sdk/products/search/ProductProjectionSearch.html" title="interface in io.sphere.sdk.products.search">ProductProjectionSearch</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/MetaModelQueryDsl.html#withLimit-long-">withLimit(long)</a></span> - Method in interface io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/MetaModelQueryDsl.html" title="interface in io.sphere.sdk.queries">MetaModelQueryDsl</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/MetaModelQueryDsl.html#withLimit-java.lang.Long-">withLimit(Long)</a></span> - Method in interface io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/MetaModelQueryDsl.html" title="interface in io.sphere.sdk.queries">MetaModelQueryDsl</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/MetaModelQueryDslImpl.html#withLimit-long-">withLimit(long)</a></span> - Method in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="class in io.sphere.sdk.queries">MetaModelQueryDslImpl</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/MetaModelQueryDslImpl.html#withLimit-java.lang.Long-">withLimit(Long)</a></span> - Method in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="class in io.sphere.sdk.queries">MetaModelQueryDslImpl</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/QueryDsl.html#withLimit-long-">withLimit(long)</a></span> - Method in interface io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries">QueryDsl</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/QueryDsl.html#withLimit-java.lang.Long-">withLimit(Long)</a></span> - Method in interface io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries">QueryDsl</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/search/MetaModelSearchDslImpl.html#withLimit-long-">withLimit(long)</a></span> - Method in class io.sphere.sdk.search.<a href="io/sphere/sdk/search/MetaModelSearchDslImpl.html" title="class in io.sphere.sdk.search">MetaModelSearchDslImpl</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/search/MetaModelSearchDslImpl.html#withLimit-java.lang.Long-">withLimit(Long)</a></span> - Method in class io.sphere.sdk.search.<a href="io/sphere/sdk/search/MetaModelSearchDslImpl.html" title="class in io.sphere.sdk.search">MetaModelSearchDslImpl</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/search/SearchDsl.html#withLimit-long-">withLimit(long)</a></span> - Method in interface io.sphere.sdk.search.<a href="io/sphere/sdk/search/SearchDsl.html" title="interface in io.sphere.sdk.search">SearchDsl</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/search/SearchDsl.html#withLimit-java.lang.Long-">withLimit(Long)</a></span> - Method in interface io.sphere.sdk.search.<a href="io/sphere/sdk/search/SearchDsl.html" title="interface in io.sphere.sdk.search">SearchDsl</a></dt>
 <dd>
 <div class="block">Returns a new object with the new limit.</div>
 </dd>
@@ -13034,25 +13034,25 @@ the order they are declared.</div>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/states/StateDraft.html#withName-io.sphere.sdk.models.LocalizedString-">withName(LocalizedString)</a></span> - Method in class io.sphere.sdk.states.<a href="io/sphere/sdk/states/StateDraft.html" title="class in io.sphere.sdk.states">StateDraft</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/queries/ProductProjectionQuery.html#withOffset-long-">withOffset(long)</a></span> - Method in interface io.sphere.sdk.products.queries.<a href="io/sphere/sdk/products/queries/ProductProjectionQuery.html" title="interface in io.sphere.sdk.products.queries">ProductProjectionQuery</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/queries/ProductProjectionQuery.html#withOffset-java.lang.Long-">withOffset(Long)</a></span> - Method in interface io.sphere.sdk.products.queries.<a href="io/sphere/sdk/products/queries/ProductProjectionQuery.html" title="interface in io.sphere.sdk.products.queries">ProductProjectionQuery</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/search/ProductProjectionSearch.html#withOffset-long-">withOffset(long)</a></span> - Method in interface io.sphere.sdk.products.search.<a href="io/sphere/sdk/products/search/ProductProjectionSearch.html" title="interface in io.sphere.sdk.products.search">ProductProjectionSearch</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/search/ProductProjectionSearch.html#withOffset-java.lang.Long-">withOffset(Long)</a></span> - Method in interface io.sphere.sdk.products.search.<a href="io/sphere/sdk/products/search/ProductProjectionSearch.html" title="interface in io.sphere.sdk.products.search">ProductProjectionSearch</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/MetaModelQueryDsl.html#withOffset-long-">withOffset(long)</a></span> - Method in interface io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/MetaModelQueryDsl.html" title="interface in io.sphere.sdk.queries">MetaModelQueryDsl</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/MetaModelQueryDsl.html#withOffset-java.lang.Long-">withOffset(Long)</a></span> - Method in interface io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/MetaModelQueryDsl.html" title="interface in io.sphere.sdk.queries">MetaModelQueryDsl</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/MetaModelQueryDslImpl.html#withOffset-long-">withOffset(long)</a></span> - Method in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="class in io.sphere.sdk.queries">MetaModelQueryDslImpl</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/MetaModelQueryDslImpl.html#withOffset-java.lang.Long-">withOffset(Long)</a></span> - Method in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="class in io.sphere.sdk.queries">MetaModelQueryDslImpl</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/PagedQueryResultDsl.html#withOffset-java.lang.Integer-">withOffset(Integer)</a></span> - Method in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/PagedQueryResultDsl.html" title="class in io.sphere.sdk.queries">PagedQueryResultDsl</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/PagedQueryResultDsl.html#withOffset-java.lang.Long-">withOffset(Long)</a></span> - Method in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/PagedQueryResultDsl.html" title="class in io.sphere.sdk.queries">PagedQueryResultDsl</a></dt>
 <dd>
 <div class="block">Creates a copy of this item with the given offset.</div>
 </dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/QueryDsl.html#withOffset-long-">withOffset(long)</a></span> - Method in interface io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries">QueryDsl</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/QueryDsl.html#withOffset-java.lang.Long-">withOffset(Long)</a></span> - Method in interface io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries">QueryDsl</a></dt>
 <dd>
 <div class="block">Returns a new query with the new offset as offset.</div>
 </dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/search/MetaModelSearchDslImpl.html#withOffset-long-">withOffset(long)</a></span> - Method in class io.sphere.sdk.search.<a href="io/sphere/sdk/search/MetaModelSearchDslImpl.html" title="class in io.sphere.sdk.search">MetaModelSearchDslImpl</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/search/MetaModelSearchDslImpl.html#withOffset-java.lang.Long-">withOffset(Long)</a></span> - Method in class io.sphere.sdk.search.<a href="io/sphere/sdk/search/MetaModelSearchDslImpl.html" title="class in io.sphere.sdk.search">MetaModelSearchDslImpl</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/search/SearchDsl.html#withOffset-long-">withOffset(long)</a></span> - Method in interface io.sphere.sdk.search.<a href="io/sphere/sdk/search/SearchDsl.html" title="interface in io.sphere.sdk.search">SearchDsl</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/search/SearchDsl.html#withOffset-java.lang.Long-">withOffset(Long)</a></span> - Method in interface io.sphere.sdk.search.<a href="io/sphere/sdk/search/SearchDsl.html" title="interface in io.sphere.sdk.search">SearchDsl</a></dt>
 <dd>
 <div class="block">Returns a new object with the new offset.</div>
 </dd>
@@ -13246,7 +13246,7 @@ the order they are declared.</div>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/MetaModelQueryDslBuilder.html#withTotal">withTotal</a></span> - Variable in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/MetaModelQueryDslBuilder.html" title="class in io.sphere.sdk.queries">MetaModelQueryDslBuilder</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/PagedQueryResultDsl.html#withTotal-java.lang.Integer-">withTotal(Integer)</a></span> - Method in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/PagedQueryResultDsl.html" title="class in io.sphere.sdk.queries">PagedQueryResultDsl</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/PagedQueryResultDsl.html#withTotal-java.lang.Long-">withTotal(Long)</a></span> - Method in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/PagedQueryResultDsl.html" title="class in io.sphere.sdk.queries">PagedQueryResultDsl</a></dt>
 <dd>
 <div class="block">Creates a copy of this with the given total items count.</div>
 </dd>

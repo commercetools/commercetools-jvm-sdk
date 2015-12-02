@@ -130,16 +130,16 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html"
 
  <div id="io-sphere-sdk-carts-commands-CartUpdateCommandTest-changeLineItemQuantity--%s" class=code-example><pre><code class='java'>withEmptyCartAndProduct(client(), (cart, product) -&gt; {
     assertThat(cart.getLineItems()).hasSize(0);
-    final AddLineItem action = AddLineItem.of(product.getId(), MASTER_VARIANT_ID, 3);
+    final AddLineItem action = AddLineItem.of(product.getId(), MASTER_VARIANT_ID, 3L);
 
     final Cart cartWith3 = execute(CartUpdateCommand.of(cart, action));
     final LineItem lineItem = cartWith3.getLineItems().get(0);
     assertThat(lineItem.getQuantity()).isEqualTo(3);
 
-    final Cart cartWith2 = execute(CartUpdateCommand.of(cartWith3, ChangeLineItemQuantity.of(lineItem, 2)));
+    final Cart cartWith2 = execute(CartUpdateCommand.of(cartWith3, ChangeLineItemQuantity.of(lineItem, 2L)));
     assertThat(cartWith2.getLineItems().get(0).getQuantity()).isEqualTo(2);
 
-    final Cart cartWith0 = execute(CartUpdateCommand.of(cartWith2, ChangeLineItemQuantity.of(lineItem, 0)));
+    final Cart cartWith0 = execute(CartUpdateCommand.of(cartWith2, ChangeLineItemQuantity.of(lineItem, 0L)));
     assertThat(cartWith0.getLineItems()).hasSize(0);
 });
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/carts/commands/CartUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
@@ -171,13 +171,13 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html"
 </tr>
 <tr id="i2" class="altColor">
 <td class="colFirst"><code>static <a href="../../../../../../io/sphere/sdk/commands/UpdateAction.html" title="interface in io.sphere.sdk.commands">UpdateAction</a>&lt;<a href="../../../../../../io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts">Cart</a>&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../io/sphere/sdk/carts/commands/updateactions/ChangeLineItemQuantity.html#of-io.sphere.sdk.carts.LineItem-long-">of</a></span>(<a href="../../../../../../io/sphere/sdk/carts/LineItem.html" title="interface in io.sphere.sdk.carts">LineItem</a>&nbsp;lineItem,
-  long&nbsp;quantity)</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../io/sphere/sdk/carts/commands/updateactions/ChangeLineItemQuantity.html#of-io.sphere.sdk.carts.LineItem-java.lang.Long-">of</a></span>(<a href="../../../../../../io/sphere/sdk/carts/LineItem.html" title="interface in io.sphere.sdk.carts">LineItem</a>&nbsp;lineItem,
+  java.lang.Long&nbsp;quantity)</code>&nbsp;</td>
 </tr>
 <tr id="i3" class="rowColor">
 <td class="colFirst"><code>static <a href="../../../../../../io/sphere/sdk/carts/commands/updateactions/ChangeLineItemQuantity.html" title="class in io.sphere.sdk.carts.commands.updateactions">ChangeLineItemQuantity</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../io/sphere/sdk/carts/commands/updateactions/ChangeLineItemQuantity.html#of-java.lang.String-long-">of</a></span>(java.lang.String&nbsp;lineItemId,
-  long&nbsp;quantity)</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../io/sphere/sdk/carts/commands/updateactions/ChangeLineItemQuantity.html#of-java.lang.String-java.lang.Long-">of</a></span>(java.lang.String&nbsp;lineItemId,
+  java.lang.Long&nbsp;quantity)</code>&nbsp;</td>
 </tr>
 </table>
 <ul class="blockList">
@@ -233,24 +233,24 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html"
 <pre>public&nbsp;long&nbsp;getQuantity()</pre>
 </li>
 </ul>
-<a name="of-java.lang.String-long-">
+<a name="of-java.lang.String-java.lang.Long-">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
 <h4>of</h4>
 <pre>public static&nbsp;<a href="../../../../../../io/sphere/sdk/carts/commands/updateactions/ChangeLineItemQuantity.html" title="class in io.sphere.sdk.carts.commands.updateactions">ChangeLineItemQuantity</a>&nbsp;of(java.lang.String&nbsp;lineItemId,
-                                        long&nbsp;quantity)</pre>
+                                        java.lang.Long&nbsp;quantity)</pre>
 </li>
 </ul>
-<a name="of-io.sphere.sdk.carts.LineItem-long-">
+<a name="of-io.sphere.sdk.carts.LineItem-java.lang.Long-">
 <!--   -->
 </a>
 <ul class="blockListLast">
 <li class="blockList">
 <h4>of</h4>
 <pre>public static&nbsp;<a href="../../../../../../io/sphere/sdk/commands/UpdateAction.html" title="interface in io.sphere.sdk.commands">UpdateAction</a>&lt;<a href="../../../../../../io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts">Cart</a>&gt;&nbsp;of(<a href="../../../../../../io/sphere/sdk/carts/LineItem.html" title="interface in io.sphere.sdk.carts">LineItem</a>&nbsp;lineItem,
-                                    long&nbsp;quantity)</pre>
+                                    java.lang.Long&nbsp;quantity)</pre>
 </li>
 </ul>
 </li>

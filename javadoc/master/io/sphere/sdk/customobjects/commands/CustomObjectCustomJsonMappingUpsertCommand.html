@@ -134,7 +134,7 @@ implements <a href="../../../../../io/sphere/sdk/commands/CreateCommand.html" ti
  <p>Example using Google GSON (multiple code snippets):</p>
 
  <p>The execution of the command:</p>
- <div id="io-sphere-sdk-customobjects-commands-CustomObjectCustomJsonMappingUpsertCommandTest-execution--%s" class=code-example><pre><code class='java'>final GsonFoo value = new GsonFoo("bar", 5);
+ <div id="io-sphere-sdk-customobjects-commands-CustomObjectCustomJsonMappingUpsertCommandTest-execution--%s" class=code-example><pre><code class='java'>final GsonFoo value = new GsonFoo("bar", 5L);
 final GsonFooCustomObjectDraft draft = new GsonFooCustomObjectDraft("container", "key", value);
 final GsonFooCustomObjectUpsertCommand command = new GsonFooCustomObjectUpsertCommand(draft);
 final CustomObject&lt;GsonFoo&gt; customObject = execute(command);
@@ -242,10 +242,10 @@ import java.time.ZonedDateTime;
  <div id="io-sphere-sdk-customobjects-demo-GsonFoo%s" class=code-example><button type='button' style='display: none;' class='reveal-imports'>show/hide imports</button><pre class='hide code-example-imports'><code class='java'>import io.sphere.sdk.models.Base;
 </code></pre><pre><code class='java'>public class GsonFoo extends Base {
 
-    private final long baz;
+    private final Long baz;
     private final String bar;
 
-    public GsonFoo(final String bar, final long baz) {
+    public GsonFoo(final String bar, final Long baz) {
         this.bar = bar;
         this.baz = baz;
     }

@@ -132,7 +132,7 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html"
     assertThat(order.getShippingInfo().getDeliveries()).isEmpty();
     final List&lt;ParcelDraft&gt; parcels = asList(ParcelDraft.of(PARCEL_MEASUREMENTS, TRACKING_DATA));
     final LineItem lineItem = order.getLineItems().get(0);
-    final int availableItemsToShip = 1;
+    final long availableItemsToShip = 1;
     final List&lt;DeliveryItem&gt; items = asList(DeliveryItem.of(lineItem, availableItemsToShip));
     final Order updatedOrder = execute(OrderUpdateCommand.of(order, AddDelivery.of(items, parcels)));
     final Delivery delivery = updatedOrder.getShippingInfo().getDeliveries().get(0);
