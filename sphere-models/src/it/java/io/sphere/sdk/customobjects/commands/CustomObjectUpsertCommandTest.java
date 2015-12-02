@@ -76,7 +76,7 @@ public class CustomObjectUpsertCommandTest extends IntegrationTest {
     @Test
     public void updateWithoutVersion() throws Exception {
         CustomObjectFixtures.withCustomObject(client(), customObject -> {
-            final Foo newValue = new Foo("new value", 72);
+            final Foo newValue = new Foo("new value", 72L);
             final CustomObjectDraft<Foo> draft = CustomObjectDraft.ofUnversionedUpdate(customObject, newValue, Foo.class);
             final CustomObjectUpsertCommand<Foo> createCommand = CustomObjectUpsertCommand.of(draft);
             final CustomObject<Foo> updatedCustomObject = execute(createCommand);
@@ -88,7 +88,7 @@ public class CustomObjectUpsertCommandTest extends IntegrationTest {
     @Test(expected = ConcurrentModificationException.class)
     public void updateWithVersion() throws Exception {
         CustomObjectFixtures.withCustomObject(client(), customObject -> {
-            final Foo newValue = new Foo("new value", 72);
+            final Foo newValue = new Foo("new value", 72L);
             final CustomObjectDraft<Foo> draft = CustomObjectDraft.ofVersionedUpdate(customObject, newValue, Foo.class);
             final CustomObjectUpsertCommand<Foo> command = CustomObjectUpsertCommand.of(draft);
             final CustomObject<Foo> updatedCustomObject = execute(command);

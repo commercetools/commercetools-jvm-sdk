@@ -11,9 +11,9 @@ import io.sphere.sdk.inventory.InventoryEntry;
  * {@include.example io.sphere.sdk.inventory.commands.InventoryEntryUpdateCommandTest#changeQuantity()}
  */
 public class ChangeQuantity extends UpdateActionImpl<InventoryEntry> {
-    private final long quantity;
+    private final Long quantity;
 
-    private ChangeQuantity(final long quantity) {
+    private ChangeQuantity(final Long quantity) {
         super("changeQuantity");
         this.quantity = quantity;
     }
@@ -22,7 +22,7 @@ public class ChangeQuantity extends UpdateActionImpl<InventoryEntry> {
         return quantity;
     }
 
-    public static ChangeQuantity of(final long quantity) {
+    public static ChangeQuantity of(final Long quantity) {
         return new ChangeQuantity(quantity);
     }
 }

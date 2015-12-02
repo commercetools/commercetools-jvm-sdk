@@ -22,7 +22,7 @@ public class LineItemCustomFieldsTest extends IntegrationTest {
         withUpdateableType(client(), type -> {
             withCartAndTaxedProduct(client(), (cart, product) -> {
                 final CustomFieldsDraft customFieldsDraft = CustomFieldsDraftBuilder.ofType(type).addObject(STRING_FIELD_NAME, "a value").build();
-                final Cart updatedCart = execute(CartUpdateCommand.of(cart, AddLineItem.of(product, 1, 1).withCustom(customFieldsDraft)));
+                final Cart updatedCart = execute(CartUpdateCommand.of(cart, AddLineItem.of(product, 1, 1L).withCustom(customFieldsDraft)));
                 assertThat(updatedCart.getLineItems().get(0).getCustom().getField(STRING_FIELD_NAME, TypeReferences.stringTypeReference())).isEqualTo("a value");
                 return updatedCart;
             });

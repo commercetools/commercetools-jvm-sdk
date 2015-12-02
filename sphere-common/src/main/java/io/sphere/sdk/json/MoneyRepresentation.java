@@ -10,11 +10,11 @@ import javax.money.MonetaryAmount;
 import static org.apache.commons.lang3.StringUtils.isEmpty;
 
 final class MoneyRepresentation {
-    private final long centAmount;
+    private final Long centAmount;
     private final String currencyCode;
 
     @JsonCreator
-    private MoneyRepresentation(final long centAmount, final String currencyCode) {
+    private MoneyRepresentation(final Long centAmount, final String currencyCode) {
         this.centAmount = centAmount;
         this.currencyCode = currencyCode;
     }

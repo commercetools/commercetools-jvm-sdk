@@ -87,7 +87,7 @@ public class OrderUpdateCommandTest extends IntegrationTest {
             assertThat(order.getShippingInfo().getDeliveries()).isEmpty();
             final List<ParcelDraft> parcels = asList(ParcelDraft.of(PARCEL_MEASUREMENTS, TRACKING_DATA));
             final LineItem lineItem = order.getLineItems().get(0);
-            final int availableItemsToShip = 1;
+            final long availableItemsToShip = 1;
             final List<DeliveryItem> items = asList(DeliveryItem.of(lineItem, availableItemsToShip));
             final Order updatedOrder = execute(OrderUpdateCommand.of(order, AddDelivery.of(items, parcels)));
             final Delivery delivery = updatedOrder.getShippingInfo().getDeliveries().get(0);
@@ -168,7 +168,7 @@ public class OrderUpdateCommandTest extends IntegrationTest {
         withOrder(client(), order -> {
             Assertions.assertThat(order.getReturnInfo()).isEmpty();
             final String lineItemId = order.getLineItems().get(0).getId();
-            final List<ReturnItemDraft> items = asList(ReturnItemDraft.of(1, lineItemId, ReturnShipmentState.RETURNED, "foo bar"));
+            final List<ReturnItemDraft> items = asList(ReturnItemDraft.of(1L, lineItemId, ReturnShipmentState.RETURNED, "foo bar"));
             final AddReturnInfo action = AddReturnInfo.of(items).withReturnDate(ZonedDateTime_IN_PAST).withReturnTrackingId("trackingId");
             final Order updatedOrder = execute(OrderUpdateCommand.of(order, action));
 
@@ -251,7 +251,7 @@ public class OrderUpdateCommandTest extends IntegrationTest {
             withOrder(client(), order -> {
                 final LineItem lineItem = order.getLineItems().get(0);
                 assertThat(lineItem).containsState(initialState).containsNotState(nextState);
-                final Set<ItemState> itemStates = asSet(ItemState.of(nextState, 1), ItemState.of(initialState, lineItem.getQuantity() - 1));
+                final Set<ItemState> itemStates = asSet(ItemState.of(nextState, 1L), ItemState.of(initialState, lineItem.getQuantity() - 1));
                 final Order updatedOrder = execute(OrderUpdateCommand.of(order, ImportLineItemState.of(lineItem, itemStates)));
                 assertThat(updatedOrder.getLineItems().get(0)).containsItemStates(itemStates);
 
@@ -271,7 +271,7 @@ public class OrderUpdateCommandTest extends IntegrationTest {
             withOrderOfCustomLineItems(client(), order -> {
                 final CustomLineItem customLineItem = order.getCustomLineItems().get(0);
                 assertThat(customLineItem).containsState(initialState).containsNotState(nextState);
-                final Set<ItemState> itemStates = asSet(ItemState.of(nextState, 1), ItemState.of(initialState, customLineItem.getQuantity() - 1));
+                final Set<ItemState> itemStates = asSet(ItemState.of(nextState, 1L), ItemState.of(initialState, customLineItem.getQuantity() - 1));
                 final Order updatedOrder = execute(OrderUpdateCommand.of(order, ImportCustomLineItemState.of(customLineItem, itemStates)));
                 assertThat(updatedOrder.getCustomLineItems().get(0)).containsItemStates(itemStates);
             })

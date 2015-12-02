@@ -56,9 +56,9 @@ public class FlowTest extends IntegrationTest {
     }
 
     private void setupInitialValue() {
-        final int lastUsedNumber = 999;
+        final long lastUsedNumber = 999;
         final CustomerNumberCounter value = new CustomerNumberCounter(lastUsedNumber, "<no name>");
-        final int initialVersionNumber = 0;
+        final long initialVersionNumber = 0;
         final CustomObjectDraft<CustomerNumberCounter> draft = //important: it takes version as parameter
                 CustomObjectDraft.ofVersionedUpsert(CONTAINER, KEY, value, initialVersionNumber, CustomerNumberCounter.class);
 

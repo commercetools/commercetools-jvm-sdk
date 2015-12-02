@@ -179,12 +179,12 @@ public abstract class MetaModelQueryDslImpl<T, C extends MetaModelQueryDsl<T, C,
     }
 
     @Override
-    public C withLimit(final long limit) {
+    public C withLimit(final Long limit) {
         return copyBuilder().limit(limit).build();
     }
 
     @Override
-    public C withOffset(final long offset) {
+    public C withOffset(final Long offset) {
         return copyBuilder().offset(offset).build();
     }
 

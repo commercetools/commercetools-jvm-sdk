@@ -22,7 +22,7 @@ public class OrderMessagesTest extends IntegrationTest {
                     MessageQuery.of()
                             .withSort(m -> m.createdAt().sort().desc())
                             .withExpansionPaths(m -> m.resource())
-                            .withLimit(1)
+                            .withLimit(1L)
                             .forMessageType(OrderStateChangedMessage.MESSAGE_HINT);
             final PagedQueryResult<OrderStateChangedMessage> pagedQueryResult = execute(query);
             final OrderStateChangedMessage message = pagedQueryResult.head().get();
@@ -41,7 +41,7 @@ public class OrderMessagesTest extends IntegrationTest {
                     MessageQuery.of()
                             .withSort(m -> m.createdAt().sort().desc())
                             .withExpansionPaths(m -> m.resource())
-                            .withLimit(1)
+                            .withLimit(1L)
                             .withPredicates(m -> m.resource().is(order))
                             .forMessageType(OrderCreatedMessage.MESSAGE_HINT);
             final PagedQueryResult<OrderCreatedMessage> pagedQueryResult = execute(query);

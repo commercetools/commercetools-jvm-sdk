@@ -56,10 +56,10 @@ public interface ProductProjectionQuery extends MetaModelQueryDsl<ProductProject
     }
 
     @Override
-    ProductProjectionQuery withLimit(final long limit);
+    ProductProjectionQuery withLimit(final Long limit);
 
     @Override
-    ProductProjectionQuery withOffset(final long offset);
+    ProductProjectionQuery withOffset(final Long offset);
 
     @Override
     ProductProjectionQuery withPredicates(final List<QueryPredicate<ProductProjection>> queryPredicates);

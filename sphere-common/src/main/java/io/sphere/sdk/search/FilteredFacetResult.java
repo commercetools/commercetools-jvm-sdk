@@ -19,7 +19,7 @@ public class FilteredFacetResult extends Base implements FacetResult {
         return count;
     }
 
-    public static FilteredFacetResult of(final long count) {
+    public static FilteredFacetResult of(final Long count) {
         return new FilteredFacetResult(count);
     }
 }

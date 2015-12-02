@@ -19,7 +19,7 @@ public class SphereConstantAccessTokenSupplierImplTest extends IntegrationTest {
 
             final SphereAccessTokenSupplier fixedTokenSupplier = SphereAccessTokenSupplier.ofOneTimeFetchingToken(authConfig, newHttpClient(), true);
             final SphereClient oneTokenClient = SphereClient.of(apiConfig, newHttpClient(), fixedTokenSupplier);
-            final int actual = oneTokenClient.execute(categoryQuery).toCompletableFuture().join().getTotal();
+            final Long actual = oneTokenClient.execute(categoryQuery).toCompletableFuture().join().getTotal();
             assertThat(actual).isGreaterThanOrEqualTo(1);
             oneTokenClient.close();
         });

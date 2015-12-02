@@ -76,9 +76,9 @@ public class CustomerSignInCommandTest extends CustomerIntegrationTest {
     private void withCustomerCustomerCartAndAnonymousCart(final TestClient client, final Function<Customer, Function<Cart, Consumer<Cart>>> curriedFunctions) {
         CustomerFixtures.withCustomerAndCart(client(), ((customer, cart) -> {
             ProductFixtures.withTaxedProduct(client(), product -> {
-                final Cart customerCartWithProduct = client.execute(CartUpdateCommand.of(cart, asList(SetCountry.of(CountryCode.DE), AddLineItem.of(product, 1, 3))));
+                final Cart customerCartWithProduct = client.execute(CartUpdateCommand.of(cart, asList(SetCountry.of(CountryCode.DE), AddLineItem.of(product, 1, 3L))));
                 final Cart anonymousCart = CartFixtures.createCartWithCountry(client());
-                final Cart anonymousCartWithProduct = client.execute(CartUpdateCommand.of(anonymousCart, asList(SetCountry.of(CountryCode.DE), AddLineItem.of(product, 1, 7))));
+                final Cart anonymousCartWithProduct = client.execute(CartUpdateCommand.of(anonymousCart, asList(SetCountry.of(CountryCode.DE), AddLineItem.of(product, 1, 7L))));
                 curriedFunctions.apply(customer).apply(customerCartWithProduct).accept(anonymousCartWithProduct);
             });
         }));

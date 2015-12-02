@@ -15,7 +15,7 @@ public class MessageByIdGetTest extends IntegrationTest {
             final MessageQuery query = MessageQuery.of()
                     .withPredicates(m -> m.type().is("ReturnInfoAdded"))
                     .withSort(m -> m.createdAt().sort().desc())
-                    .withLimit(1);
+                    .withLimit(1L);
             final Message messageFromQueryEndpoint = execute(query).head().get();
 
             final Message message = execute(MessageByIdGet.of(messageFromQueryEndpoint));

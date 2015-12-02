@@ -29,7 +29,7 @@ public class InventoryEntryUpdateCommandTest extends IntegrationTest {
     @Test
     public void changeQuantity() throws Exception {
         withUpdateableInventoryEntry(client(), entry -> {
-            final UpdateAction<InventoryEntry> action = ChangeQuantity.of(5000);
+            final UpdateAction<InventoryEntry> action = ChangeQuantity.of(5000L);
             final InventoryEntry updatedEntry = execute(InventoryEntryUpdateCommand.of(entry, action));
             assertThat(updatedEntry.getQuantityOnStock()).isEqualTo(5000);
             return updatedEntry;

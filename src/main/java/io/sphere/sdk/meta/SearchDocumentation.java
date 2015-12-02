@@ -64,7 +64,7 @@ import io.sphere.sdk.models.Base;
 
 <h3 id=pagination>Pagination</h3>
 
- <p>Use {@link io.sphere.sdk.search.SearchDsl#withOffset(long)} and {@link io.sphere.sdk.search.SearchDsl#withLimit(long)} for pagination. An extended explanation about how pagination works in SPHERE.IO can be found in {@link io.sphere.sdk.meta.QueryDocumentation}.</p>
+ <p>Use {@link io.sphere.sdk.search.SearchDsl#withOffset(Long)} and {@link io.sphere.sdk.search.SearchDsl#withLimit(Long)} for pagination. An extended explanation about how pagination works in SPHERE.IO can be found in {@link io.sphere.sdk.meta.QueryDocumentation}.</p>
 
  <p>The following request skips the first 50 products and limits the result set to only 25 products:</p>
 

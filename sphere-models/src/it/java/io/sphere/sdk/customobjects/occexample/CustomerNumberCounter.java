@@ -4,11 +4,11 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import io.sphere.sdk.models.Base;
 
 public class CustomerNumberCounter extends Base {
-    private final long lastUsedNumber;
+    private final Long lastUsedNumber;
     private final String customerId;
 
     @JsonCreator
-    public CustomerNumberCounter(final long lastUsedNumber, final String customerId) {
+    public CustomerNumberCounter(final Long lastUsedNumber, final String customerId) {
         this.lastUsedNumber = lastUsedNumber;
         this.customerId = customerId;
     }

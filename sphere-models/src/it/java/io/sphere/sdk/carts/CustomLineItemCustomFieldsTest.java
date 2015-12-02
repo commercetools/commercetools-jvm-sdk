@@ -26,7 +26,7 @@ public class CustomLineItemCustomFieldsTest extends IntegrationTest {
                                 .ofType(type)
                                 .addObject(STRING_FIELD_NAME, "a value")
                                 .build();
-                final AddCustomLineItem updateAction = AddCustomLineItem.of(en("custom line item"), "foo", EURO_30, product.getTaxCategory(), 3).withCustom(customFieldsDraft);
+                final AddCustomLineItem updateAction = AddCustomLineItem.of(en("custom line item"), "foo", EURO_30, product.getTaxCategory(), 3L).withCustom(customFieldsDraft);
 
                 final Cart updatedCart = execute(CartUpdateCommand.of(cart, updateAction));
 

@@ -22,7 +22,7 @@ public class RemoveQuantity extends UpdateActionImpl<InventoryEntry> {
         return quantity;
     }
 
-    public static RemoveQuantity of(final long quantity) {
+    public static RemoveQuantity of(final Long quantity) {
         return new RemoveQuantity(quantity);
     }
 }

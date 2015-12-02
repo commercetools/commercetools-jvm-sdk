@@ -137,7 +137,7 @@ public class ProductQueryTest extends IntegrationTest {
                     final PagedQueryResult<Product> result = execute(ProductQuery.of()
                             .withPredicates(m -> m.id().is(product.getId()))
                             .withExpansionPaths(m -> m.masterData().staged().variants().prices().customerGroup())
-                            .withLimit(1));
+                            .withLimit(1L));
                     final Price priceWithCustomerGroup = result.head().get().getMasterData().getStaged().getVariants().get(0).getPrices().stream()
                             .filter(price -> Objects.equals(price.getCustomerGroup(), customerGroup.toReference()))
                             .findFirst().get();

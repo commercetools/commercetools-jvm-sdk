@@ -30,7 +30,7 @@ public class MetaModelSearchDslTest {
 
     @Test
     public void buildsPagination() throws Exception {
-        final TestableSearchDsl dsl = new TestableSearchDsl().withLimit(10).withOffset(5);
+        final TestableSearchDsl dsl = new TestableSearchDsl().withLimit(10L).withOffset(5L);
         assertThat(dsl.limit()).isEqualTo(10);
         assertThat(dsl.offset()).isEqualTo(5);
     }

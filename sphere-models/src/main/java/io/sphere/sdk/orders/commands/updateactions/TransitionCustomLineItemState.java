@@ -29,19 +29,19 @@ public class TransitionCustomLineItemState extends TransitionLineItemLikeState {
         return customLineItemId;
     }
 
-    public static TransitionCustomLineItemState of(final String customLineItemId, final long quantity,
+    public static TransitionCustomLineItemState of(final String customLineItemId, final Long quantity,
                                              final Referenceable<State> fromState, final Referenceable<State> toState,
                                              final ZonedDateTime actualTransitionDate) {
         return new TransitionCustomLineItemState(customLineItemId, quantity, fromState, toState, actualTransitionDate);
     }
 
-    public static UpdateAction<Order> of(final CustomLineItem lineItem, final long quantity,
+    public static UpdateAction<Order> of(final CustomLineItem lineItem, final Long quantity,
                                          final Referenceable<State> fromState, final Referenceable<State> toState,
                                          final ZonedDateTime actualTransitionDate) {
         return of(lineItem.getId(), quantity, fromState, toState, actualTransitionDate);
     }
 
-    public static UpdateAction<Order> of(final CustomLineItem lineItem, final long quantity,
+    public static UpdateAction<Order> of(final CustomLineItem lineItem, final Long quantity,
                                          final Referenceable<State> fromState, final Referenceable<State> toState) {
         return of(lineItem.getId(), quantity, fromState, toState, null);
     }

@@ -15,7 +15,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class CustomObjectFixtures {
 
-    public static final Foo FOO_DEFAULT_VALUE = new Foo("aString", 5);
+    public static final Foo FOO_DEFAULT_VALUE = new Foo("aString", 5L);
 
     public static void withCustomObject(final TestClient client, final Consumer<CustomObject<Foo>> consumer) {
         final CustomObject<Foo> customObject = createCustomObject(client);
@@ -48,7 +48,7 @@ public class CustomObjectFixtures {
     }
 
     private static CustomObject<Foo> createCustomObjectOfContainerAndKey(final TestClient client, final String container, final String key) {
-        final Foo value = new Foo("aString", 5);
+        final Foo value = new Foo("aString", 5L);
         final CustomObjectDraft<Foo> draft = CustomObjectDraft.ofUnversionedUpsert(container, key, value, Foo.class);
         final CustomObjectUpsertCommand<Foo> createCommand = CustomObjectUpsertCommand.of(draft);
         final CustomObject<Foo> customObject = client.execute(createCommand);

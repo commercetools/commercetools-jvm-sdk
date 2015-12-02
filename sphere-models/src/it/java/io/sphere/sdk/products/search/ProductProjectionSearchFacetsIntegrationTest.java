@@ -26,7 +26,7 @@ public class ProductProjectionSearchFacetsIntegrationTest extends ProductProject
         final TermFacetExpression<ProductProjection> facetExpr = FACET.allVariants().attribute().ofString(ATTR_NAME_COLOR).allTerms();
         final ProductProjectionSearch search = ProductProjectionSearch.ofStaged().plusFacets(facetExpr);
         final PagedSearchResult<ProductProjection> result = executeSearch(search);
-        assertThat(result.getTermFacetResult(facetExpr).getTerms()).containsOnly(TermStats.of("blue", 2), TermStats.of("red", 1));
+        assertThat(result.getTermFacetResult(facetExpr).getTerms()).containsOnly(TermStats.of("blue", 2L), TermStats.of("red", 1L));
     }
 
     @Test
@@ -38,7 +38,7 @@ public class ProductProjectionSearchFacetsIntegrationTest extends ProductProject
         assertThat(termFacetResult.getMissing()).isGreaterThanOrEqualTo(3);
         assertThat(termFacetResult.getTotal()).isEqualTo(3);
         assertThat(termFacetResult.getOther()).isEqualTo(0);
-        assertThat(termFacetResult.getTerms()).isEqualTo(asList(TermStats.of("blue", 2), TermStats.of("red", 1)));
+        assertThat(termFacetResult.getTerms()).isEqualTo(asList(TermStats.of("blue", 2L), TermStats.of("red", 1L)));
     }
 
     @Test
@@ -73,7 +73,7 @@ public class ProductProjectionSearchFacetsIntegrationTest extends ProductProject
         assertThat(termFacetResult.getMissing()).isGreaterThanOrEqualTo(3);
         assertThat(termFacetResult.getTotal()).isEqualTo(3);
         assertThat(termFacetResult.getOther()).isEqualTo(0);
-        assertThat(termFacetResult.getTerms()).isEqualTo(asList(TermStats.of("blue", 2), TermStats.of("red", 1)));
+        assertThat(termFacetResult.getTerms()).isEqualTo(asList(TermStats.of("blue", 2L), TermStats.of("red", 1L)));
     }
 
     @Test
@@ -90,7 +90,7 @@ public class ProductProjectionSearchFacetsIntegrationTest extends ProductProject
         final FilteredFacetResult blueFacetResult = result.getFilteredFacetResult(blueFacetAlias);
         assertThat(allFacetExpr.resultPath()).isEqualTo(allFacetAlias);
         assertThat(blueFacetExpr.resultPath()).isEqualTo(blueFacetAlias);
-        assertThat(allFacetResult.getTerms()).isEqualTo(asList(TermStats.of("blue", 2), TermStats.of("red", 1)));
+        assertThat(allFacetResult.getTerms()).isEqualTo(asList(TermStats.of("blue", 2L), TermStats.of("red", 1L)));
         assertThat(blueFacetResult.getCount()).isEqualTo(2);
     }
 

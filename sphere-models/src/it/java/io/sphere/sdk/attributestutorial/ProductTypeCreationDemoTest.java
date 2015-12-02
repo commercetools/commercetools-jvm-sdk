@@ -80,7 +80,7 @@ public class ProductTypeCreationDemoTest extends IntegrationTest {
         if (!productTypes.isEmpty()) {
             final ProductQuery productQuery = ProductQuery.of()
                     .withPredicates(m -> m.productType().isIn(productTypes))
-                    .withLimit(500);
+                    .withLimit(500L);
             execute(productQuery).getResults().forEach(p -> execute(ProductDeleteCommand.of(p)));
             productTypes.forEach(p -> execute(ProductTypeDeleteCommand.of(p)));
         }
@@ -480,7 +480,7 @@ public class ProductTypeCreationDemoTest extends IntegrationTest {
                         AttributeImportDraft.of(RRP_ATTR_NAME, EURO_30)
                 ).build();
         final LineItemImportDraft lineItemImportDraft =
-                LineItemImportDraftBuilder.of(productVariantImportDraft, 1, Price.of(EURO_30), en("product name"))
+                LineItemImportDraftBuilder.of(productVariantImportDraft, 1L, Price.of(EURO_30), en("product name"))
                 .build();
         final OrderImportDraft orderImportDraft = OrderImportDraftBuilder
                 .ofLineItems(EURO_20, OrderState.COMPLETE, asList(lineItemImportDraft))

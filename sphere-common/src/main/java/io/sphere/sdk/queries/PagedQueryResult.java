@@ -14,7 +14,7 @@ import java.util.Optional;
 public class PagedQueryResult<T> extends PagedResult<T> {
 
     @JsonCreator
-    PagedQueryResult(final Integer offset, final Integer total, final List<T> results) {
+    PagedQueryResult(final Long offset, final Long total, final List<T> results) {
         super(offset, total, results);
     }
 
@@ -24,15 +24,15 @@ public class PagedQueryResult<T> extends PagedResult<T> {
      * @return an empty {@code PagedQueryResult}
      */
     public static <T> PagedQueryResultDsl<T> empty() {
-        return new PagedQueryResultDsl<>(0, 0, Collections.<T>emptyList());
+        return new PagedQueryResultDsl<>(0L, 0L, Collections.<T>emptyList());
     }
 
-    public static <T> PagedQueryResultDsl<T> of(final Integer offset, final Integer total, final List<T> results) {
+    public static <T> PagedQueryResultDsl<T> of(final Long offset, final Long total, final List<T> results) {
         return new PagedQueryResultDsl<>(offset, total, results);
     }
 
     public static <T> PagedQueryResultDsl<T> of(final List<T> results) {
-        return of(0, results.size(), results);
+        return of(0L, Long.valueOf(results.size()), results);
     }
 
     @JsonIgnore
@@ -41,7 +41,7 @@ public class PagedQueryResult<T> extends PagedResult<T> {
     }
 
     @Override
-    public Integer getOffset() {
+    public Long getOffset() {
         return super.getOffset();
     }
 
@@ -51,7 +51,7 @@ public class PagedQueryResult<T> extends PagedResult<T> {
     }
 
     @Override
-    public Integer getTotal() {
+    public Long getTotal() {
         return super.getTotal();
     }
 
@@ -71,7 +71,7 @@ public class PagedQueryResult<T> extends PagedResult<T> {
     }
 
     @Override
-    public int size() {
+    public Long size() {
         return super.size();
     }
 }

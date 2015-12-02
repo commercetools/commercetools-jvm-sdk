@@ -12,7 +12,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class CustomObjectCustomJsonMappingUpsertCommandTest extends IntegrationTest {
     @Test
     public void execution() throws Exception {
-        final GsonFoo value = new GsonFoo("bar", 5);
+        final GsonFoo value = new GsonFoo("bar", 5L);
         final GsonFooCustomObjectDraft draft = new GsonFooCustomObjectDraft("container", "key", value);
         final GsonFooCustomObjectUpsertCommand command = new GsonFooCustomObjectUpsertCommand(draft);
         final CustomObject<GsonFoo> customObject = execute(command);

@@ -47,13 +47,13 @@ public class AddCustomLineItem extends UpdateActionImpl<Cart> implements CustomD
 
     public static AddCustomLineItem of(final LocalizedString name, final String slug,
                                        final MonetaryAmount money, final Referenceable<TaxCategory> taxCategory,
-                                       final long quantity) {
+                                       final Long quantity) {
         return of(name, slug, money, taxCategory, quantity, null);
     }
 
     public static AddCustomLineItem of(final LocalizedString name, final String slug,
                                        final MonetaryAmount money, final Referenceable<TaxCategory> taxCategory,
-                                       final long quantity, @Nullable final CustomFieldsDraft custom) {
+                                       final Long quantity, @Nullable final CustomFieldsDraft custom) {
         return new AddCustomLineItem(name, slug, money, taxCategory, quantity, custom);
     }
 

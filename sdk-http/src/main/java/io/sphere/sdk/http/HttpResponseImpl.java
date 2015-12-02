@@ -12,22 +12,24 @@ import java.util.Optional;
 import static java.lang.String.format;
 
 class HttpResponseImpl extends Base implements HttpResponse {
-    private final int statusCode;
+    @Nullable
+    private final Integer statusCode;
     private final HttpHeaders headers;
     @Nullable
     private final byte[] responseBody;
     @Nullable
     private final HttpRequest associatedRequest;
 
-    HttpResponseImpl(final int statusCode, @Nullable final byte[] responseBody, @Nullable final HttpRequest associatedRequest, final HttpHeaders headers) {
+    HttpResponseImpl(@Nullable final Integer statusCode, @Nullable final byte[] responseBody, @Nullable final HttpRequest associatedRequest, final HttpHeaders headers) {
         this.statusCode = statusCode;
         this.responseBody = responseBody;
         this.associatedRequest = associatedRequest;
         this.headers = headers;
     }
 
+    @Nullable
     @Override
-    public int getStatusCode() {
+    public Integer getStatusCode() {
         return statusCode;
     }
 

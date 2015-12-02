@@ -51,8 +51,8 @@ public class QueryDemo {
         QuerySort<Category> sortById = CategoryQueryModel.of().id().sort().asc();
         List<QuerySort<Category>> sort = Arrays.asList(sortByName, sortById);//sort by name desc and then by ID if name is the same
 
-        int offset = 1;//skip first page
-        int limit = 200;//collect at most 200 entities per request
+        long offset = 1;//skip first element - not page
+        long limit = 200;//collect at most 200 entities per request
         Query<Category> query = CategoryQuery.of().
                 withPredicates(predicate).
           withSort(sort).
@@ -62,8 +62,8 @@ public class QueryDemo {
 
     private void immutableQueryDsl() {
         CategoryQuery query = CategoryQuery.of();
-        assertThat(query).isNotEqualTo(query.withLimit(30));
+        assertThat(query).isNotEqualTo(query.withLimit(30L));
         assertThat(query.limit()).isEqualTo(Optional.empty());
-        assertThat(query.withLimit(30).limit()).isEqualTo(Optional.of(30));
+        assertThat(query.withLimit(30L).limit()).isEqualTo(Optional.of(30));
     }
 }

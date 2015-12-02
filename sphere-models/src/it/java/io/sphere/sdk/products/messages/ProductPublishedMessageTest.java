@@ -21,7 +21,7 @@ public class ProductPublishedMessageTest extends IntegrationTest {
                     .withPredicates(m -> m.resource().is(product))
                     .withSort(m -> m.createdAt().sort().desc())
                     .withExpansionPaths(m -> m.resource())
-                    .withLimit(1)
+                    .withLimit(1L)
                     .forMessageType(ProductPublishedMessage.MESSAGE_HINT));
             final ProductPublishedMessage message = queryResult.head().get();
             assertThat(message.getResource().getId()).isEqualTo(product.getId());

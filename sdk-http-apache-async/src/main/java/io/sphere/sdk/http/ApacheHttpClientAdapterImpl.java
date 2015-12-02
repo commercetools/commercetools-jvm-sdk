@@ -66,7 +66,7 @@ final class ApacheHttpClientAdapterImpl extends Base implements ApacheHttpClient
                         throw new HttpException(e);
                     }
                 }).orElse(null);
-        final int statusCode = apacheResponse.getStatusLine().getStatusCode();
+        final Integer statusCode = apacheResponse.getStatusLine().getStatusCode();
         final Map<String, List<Header>> apacheHeaders = asList(apacheResponse.getAllHeaders()).stream()
                 .collect(Collectors.groupingBy(Header::getName));
         final Function<Map.Entry<String, List<Header>>, String> keyMapper = e -> e.getKey();

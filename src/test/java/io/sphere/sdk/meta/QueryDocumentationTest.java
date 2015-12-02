@@ -118,14 +118,14 @@ public class QueryDocumentationTest {
     }
 
     public void limitProductQueryTo4() {
-        final ProductQuery query = ProductQuery.of().withLimit(4);
+        final ProductQuery query = ProductQuery.of().withLimit(4L);
     }
 
     @Test
     public void limitProductQueryTo4PlusOffset4() {
-        final ProductQuery queryForFirst4 = ProductQuery.of().withLimit(4);
-        final ProductQuery queryForProductId04to07 = queryForFirst4.withOffset(4);
-        assertThat(queryForProductId04to07).isEqualTo(ProductQuery.of().withLimit(4).withOffset(4));
+        final ProductQuery queryForFirst4 = ProductQuery.of().withLimit(4L);
+        final ProductQuery queryForProductId04to07 = queryForFirst4.withOffset(4L);
+        assertThat(queryForProductId04to07).isEqualTo(ProductQuery.of().withLimit(4L).withOffset(4L));
     }
 
     public void expandProductTypeForProduct() {

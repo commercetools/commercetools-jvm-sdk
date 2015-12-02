@@ -9,7 +9,7 @@ import io.sphere.sdk.queries.QueryPredicate;
 import io.sphere.sdk.queries.QuerySort;
 import io.sphere.sdk.queries.TimestampSortingModel;
 import io.sphere.sdk.test.IntegrationTest;
-import org.assertj.core.api.AbstractIntegerAssert;
+import org.assertj.core.api.AbstractLongAssert;
 import org.junit.Test;
 
 import java.time.ZonedDateTime;
@@ -99,7 +99,7 @@ public class CategoryQueryTest extends IntegrationTest {
     @Test
     public void withFetchTotalFalseRemovesTotalFromOutput() throws Exception {
         withCategory(client(), category -> {
-            final CategoryQuery baseQuery = CategoryQuery.of().byId(category.getId()).withLimit(1);
+            final CategoryQuery baseQuery = CategoryQuery.of().byId(category.getId()).withLimit(1L);
             checkTotalInQueryResultOf(baseQuery, total -> total.isNotNull().isEqualTo(1));
             checkTotalInQueryResultOf(baseQuery.withFetchTotal(true), total -> total.isNotNull().isEqualTo(1));
             checkTotalInQueryResultOf(baseQuery.withFetchTotal(false), total -> total.isNull());
@@ -192,7 +192,7 @@ public class CategoryQueryTest extends IntegrationTest {
         return client().execute(CategoryQuery.of().withPredicates(predicate)).head();
     }
 
-    private static void checkTotalInQueryResultOf(final Query<Category> query, final Consumer<AbstractIntegerAssert<?>> check) {
+    private static void checkTotalInQueryResultOf(final Query<Category> query, final Consumer<AbstractLongAssert<?>> check) {
         check.accept(assertThat(execute(query).getTotal()));
     }
 }

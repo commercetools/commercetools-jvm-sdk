@@ -121,7 +121,7 @@ public final class CategoryBuilder extends Base implements Builder<Category> {
         return getThis();
     }
 
-    public CategoryBuilder version(final long version) {
+    public CategoryBuilder version(final Long version) {
         setVersion(version);
         return getThis();
     }
@@ -140,7 +140,7 @@ public final class CategoryBuilder extends Base implements Builder<Category> {
         this.id = id;
     }
 
-    public void setVersion(final long version) {
+    public void setVersion(final Long version) {
         this.version = version;
     }
 

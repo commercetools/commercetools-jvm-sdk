@@ -20,9 +20,9 @@ public class PagedSearchResultTest {
     private static final RangeFacetExpression<Object> RANGE_FACET_EXPR = RangeFacetExpression.of("foo:range(0 to *) as rangeFacet");
     private static final FilteredFacetExpression<Object> FILTERED_FACET_EXPR = FilteredFacetExpression.of("foo:\"a\" as filteredFacet");
 
-    private static final TermFacetResult TERM_FACET_RESULT = TermFacetResult.of(0L, 2L, 0L, asList(TermStats.of("a", 1), TermStats.of("b", 2)));
+    private static final TermFacetResult TERM_FACET_RESULT = TermFacetResult.of(0L, 2L, 0L, asList(TermStats.of("a", 1L), TermStats.of("b", 2L)));
     private static final RangeFacetResult RANGE_FACET_RESULT = RangeFacetResult.of(singletonList(RangeStats.of(null, null, 4L, "3.0", "10.0", "20.0", 7.0)));
-    private static final FilteredFacetResult FILTERED_FACET_RESULT = FilteredFacetResult.of(4);
+    private static final FilteredFacetResult FILTERED_FACET_RESULT = FilteredFacetResult.of(4L);
 
     @Test
     public void termFacetResult() throws Exception {
@@ -102,6 +102,6 @@ public class PagedSearchResultTest {
     }
 
     private <T> PagedSearchResult<T> pagedSearchResult(final Map<String, FacetResult> facets) {
-        return new PagedSearchResult<>(0, 0, emptyList(), facets);
+        return new PagedSearchResult<>(0L, 0L, emptyList(), facets);
     }
 }

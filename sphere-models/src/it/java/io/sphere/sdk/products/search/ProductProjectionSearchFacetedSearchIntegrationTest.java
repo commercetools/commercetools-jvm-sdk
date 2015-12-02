@@ -24,8 +24,8 @@ public class ProductProjectionSearchFacetedSearchIntegrationTest extends Product
                 .plusFacetedSearch(attributeModel.ofString(ATTR_NAME_COLOR).by("red"));
         testResult(search,
                 ids -> assertThat(ids).containsOnly(product2.getId()),
-                colors -> assertThat(colors).containsOnly(TermStats.of("blue", 2), TermStats.of("red", 1)),
-                sizes -> assertThat(sizes).containsOnly(TermStats.of("36.0", 1)));
+                colors -> assertThat(colors).containsOnly(TermStats.of("blue", 2L), TermStats.of("red", 1L)),
+                sizes -> assertThat(sizes).containsOnly(TermStats.of("36.0", 1L)));
     }
 
     @Test
@@ -37,8 +37,8 @@ public class ProductProjectionSearchFacetedSearchIntegrationTest extends Product
                 .plusFacetFilters(filter -> filter.allVariants().attribute().ofString(ATTR_NAME_COLOR).by("red"));
         testResult(search,
                 ids -> assertThat(ids).containsOnly(product2.getId()),
-                colors -> assertThat(colors).containsOnly(TermStats.of("blue", 2), TermStats.of("red", 1)),
-                sizes -> assertThat(sizes).containsOnly(TermStats.of("36.0", 1)));
+                colors -> assertThat(colors).containsOnly(TermStats.of("blue", 2L), TermStats.of("red", 1L)),
+                sizes -> assertThat(sizes).containsOnly(TermStats.of("36.0", 1L)));
     }
 
     @Test
@@ -50,8 +50,8 @@ public class ProductProjectionSearchFacetedSearchIntegrationTest extends Product
                 .plusFacetFilters(COLOR_FACETED_SEARCH.filterExpressions());
         testResult(search,
                 ids -> assertThat(ids).containsOnly(product2.getId()),
-                colors -> assertThat(colors).containsOnly(TermStats.of("blue", 2), TermStats.of("red", 1)),
-                sizes -> assertThat(sizes).containsOnly(TermStats.of("36.0", 1)));
+                colors -> assertThat(colors).containsOnly(TermStats.of("blue", 2L), TermStats.of("red", 1L)),
+                sizes -> assertThat(sizes).containsOnly(TermStats.of("36.0", 1L)));
     }
 
     @Test
@@ -62,8 +62,8 @@ public class ProductProjectionSearchFacetedSearchIntegrationTest extends Product
                 .plusFacetFilters(COLOR_FACETED_SEARCH.filterExpressions());
         testResult(search,
                 ids -> assertThat(ids).containsOnly(product1.getId(), product2.getId(), product3.getId()),
-                colors -> assertThat(colors).containsOnly(TermStats.of("blue", 2), TermStats.of("red", 1)),
-                sizes -> assertThat(sizes).containsOnly(TermStats.of("36.0", 1)));
+                colors -> assertThat(colors).containsOnly(TermStats.of("blue", 2L), TermStats.of("red", 1L)),
+                sizes -> assertThat(sizes).containsOnly(TermStats.of("36.0", 1L)));
     }
 
     @Test
@@ -74,8 +74,8 @@ public class ProductProjectionSearchFacetedSearchIntegrationTest extends Product
                 .plusResultFilters(COLOR_FACETED_SEARCH.filterExpressions());
         testResult(search,
                 ids -> assertThat(ids).containsOnly(product2.getId()),
-                colors -> assertThat(colors).containsOnly(TermStats.of("blue", 2), TermStats.of("red", 1)),
-                sizes -> assertThat(sizes).containsOnly(TermStats.of("36.0", 1), TermStats.of("38.0", 1), TermStats.of("40.0", 1), TermStats.of("42.0", 1), TermStats.of("44.0", 1), TermStats.of("46.0", 1)));
+                colors -> assertThat(colors).containsOnly(TermStats.of("blue", 2L), TermStats.of("red", 1L)),
+                sizes -> assertThat(sizes).containsOnly(TermStats.of("36.0", 1L), TermStats.of("38.0", 1L), TermStats.of("40.0", 1L), TermStats.of("42.0", 1L), TermStats.of("44.0", 1L), TermStats.of("46.0", 1L)));
     }
 
     @Test
@@ -86,8 +86,8 @@ public class ProductProjectionSearchFacetedSearchIntegrationTest extends Product
                 .plusQueryFilters(COLOR_FACETED_SEARCH.filterExpressions());
         testResult(search,
                 ids -> assertThat(ids).containsOnly(product2.getId()),
-                colors -> assertThat(colors).containsOnly(TermStats.of("red", 1)),
-                sizes -> assertThat(sizes).containsOnly(TermStats.of("36.0", 1)));
+                colors -> assertThat(colors).containsOnly(TermStats.of("red", 1L)),
+                sizes -> assertThat(sizes).containsOnly(TermStats.of("36.0", 1L)));
     }
 
     private static void testResult(final ProductProjectionSearch search,

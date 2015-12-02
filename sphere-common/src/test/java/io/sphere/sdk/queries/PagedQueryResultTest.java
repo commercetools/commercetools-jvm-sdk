@@ -10,7 +10,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class PagedQueryResultTest {
 
-    public static final int TOTAL = 100;
+    public static final Long TOTAL = 100L;
     public static final int PAGE_SIZE = 25;
     final PagedQueryResult<Integer> a = PagedQueryResult.of(listOfSize(1));
     final PagedQueryResult<Integer> b = PagedQueryResult.of(listOfSize(2));
@@ -31,14 +31,14 @@ public class PagedQueryResultTest {
 
     @Test
     public void firstOfManyResult() throws Exception {
-        final PagedQueryResult<Integer> queryResult = PagedQueryResult.of(0, TOTAL, listOfSize(PAGE_SIZE));
+        final PagedQueryResult<Integer> queryResult = PagedQueryResult.of(0L, TOTAL, listOfSize(PAGE_SIZE));
         assertThat(queryResult.isFirst()).isTrue();
         assertThat(queryResult.isLast()).isFalse();
     }
 
     @Test
     public void middleOfManyResult() throws Exception {
-        final PagedQueryResult<Integer> queryResult = PagedQueryResult.of(PAGE_SIZE, TOTAL, listOfSize(PAGE_SIZE));
+        final PagedQueryResult<Integer> queryResult = PagedQueryResult.of((long) PAGE_SIZE, TOTAL, listOfSize(PAGE_SIZE));
         assertThat(queryResult.isFirst()).isFalse();
         assertThat(queryResult.isLast()).isFalse();
     }
@@ -52,21 +52,21 @@ public class PagedQueryResultTest {
 
     @Test
     public void lastNotFullyFilledOfManyResult() throws Exception {
-        final PagedQueryResult<Integer> queryResult = PagedQueryResult.of(95 - PAGE_SIZE, 95, listOfSize(PAGE_SIZE));
+        final PagedQueryResult<Integer> queryResult = PagedQueryResult.of(95L - PAGE_SIZE, 95L, listOfSize(PAGE_SIZE));
         assertThat(queryResult.isFirst()).isFalse();
         assertThat(queryResult.isLast()).isTrue();
     }
 
     @Test
     public void lastOneResult() throws Exception {
-        final PagedQueryResult<Integer> queryResult = PagedQueryResult.of(100, 101, listOfSize(1));
+        final PagedQueryResult<Integer> queryResult = PagedQueryResult.of(100L, 101L, listOfSize(1));
         assertThat(queryResult.isFirst()).isFalse();
         assertThat(queryResult.isLast()).isTrue();
     }
 
     @Test
     public void beforeLastOneResult() throws Exception {
-        final PagedQueryResult<Integer> queryResult = PagedQueryResult.of(99, 101, listOfSize(1));
+        final PagedQueryResult<Integer> queryResult = PagedQueryResult.of(99L, 101L, listOfSize(1));
         assertThat(queryResult.isFirst()).isFalse();
         assertThat(queryResult.isLast()).isFalse();
     }
@@ -91,8 +91,8 @@ public class PagedQueryResultTest {
 
     @Test
     public void withOffset() throws Exception {
-        assertThat(PagedQueryResult.of(0, 500, listOfSize(25)).withOffset(5)).
-                isEqualTo(PagedQueryResult.of(5, 500, listOfSize(25)));
+        assertThat(PagedQueryResult.of(0L, 500L, listOfSize(25)).withOffset(5L)).
+                isEqualTo(PagedQueryResult.of(5L, 500L, listOfSize(25)));
     }
 
     @Test
@@ -100,16 +100,16 @@ public class PagedQueryResultTest {
         final PagedQueryResult<String> result = PagedQueryResult.of("hello");
         assertThat(result.size()).isEqualTo(1);
         assertThat(result.getOffset()).isEqualTo(0);
-        assertThat(result.getResults()).isEqualTo(Arrays.asList("hello"));
+        assertThat(result.getResults()).isEqualTo(Collections.singletonList("hello"));
         assertThat(result.getTotal()).isEqualTo(1);
     }
 
     @Test
     public void withTotal() throws Exception {
-        final PagedQueryResult<String> result = PagedQueryResult.of("hello").withTotal(500);
+        final PagedQueryResult<String> result = PagedQueryResult.of("hello").withTotal(500L);
         assertThat(result.size()).isEqualTo(1);
         assertThat(result.getOffset()).isEqualTo(0);
-        assertThat(result.getResults()).isEqualTo(Arrays.asList("hello"));
+        assertThat(result.getResults()).isEqualTo(Collections.singletonList("hello"));
         assertThat(result.getTotal()).isEqualTo(500);
     }
 

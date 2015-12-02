@@ -6,7 +6,7 @@ final class UpdateCommandBody<T> {
     private final Long version;
     private final List<? extends UpdateAction<T>> actions;
 
-    UpdateCommandBody(final long version, final List<? extends UpdateAction<T>> actions) {
+    UpdateCommandBody(final Long version, final List<? extends UpdateAction<T>> actions) {
         this.version = version;
         this.actions = actions;
     }

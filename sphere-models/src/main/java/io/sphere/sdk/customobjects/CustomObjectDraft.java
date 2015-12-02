@@ -129,7 +129,7 @@ public class CustomObjectDraft<T> extends Base {
      * @param <T> The type of the value of the custom object.
      * @return the draft
      */
-    public static <T> CustomObjectDraft<T> ofVersionedUpsert(final String container, final String key, final T value, final long version, final TypeReference<T> valueTypeReference) {
+    public static <T> CustomObjectDraft<T> ofVersionedUpsert(final String container, final String key, final T value, final Long version, final TypeReference<T> valueTypeReference) {
         return new CustomObjectDraft<>(container, key, value, version, valueTypeReference);
     }
 
@@ -143,7 +143,7 @@ public class CustomObjectDraft<T> extends Base {
      * @param <T> The type of the value of the custom object.
      * @return the draft
      */
-    public static <T> CustomObjectDraft<T> ofVersionedUpsert(final String container, final String key, final T value, final long version, final Class<T> valueClass) {
+    public static <T> CustomObjectDraft<T> ofVersionedUpsert(final String container, final String key, final T value, final Long version, final Class<T> valueClass) {
         return new CustomObjectDraft<>(container, key, value, version, valueClass);
     }
 

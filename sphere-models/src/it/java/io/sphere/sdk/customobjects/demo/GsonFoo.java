@@ -4,10 +4,10 @@ import io.sphere.sdk.models.Base;
 
 public class GsonFoo extends Base {
 
-    private final long baz;
+    private final Long baz;
     private final String bar;
 
-    public GsonFoo(final String bar, final long baz) {
+    public GsonFoo(final String bar, final Long baz) {
         this.bar = bar;
         this.baz = baz;
     }
