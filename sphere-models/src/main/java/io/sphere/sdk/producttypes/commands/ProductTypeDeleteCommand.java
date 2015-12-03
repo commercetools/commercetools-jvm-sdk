@@ -1,6 +1,6 @@
 package io.sphere.sdk.producttypes.commands;
 
-import io.sphere.sdk.commands.ByIdDeleteCommand;
+import io.sphere.sdk.commands.DeleteCommand;
 import io.sphere.sdk.expansion.MetaModelExpansionDsl;
 import io.sphere.sdk.models.Versioned;
 import io.sphere.sdk.producttypes.ProductType;
@@ -14,7 +14,7 @@ import io.sphere.sdk.producttypes.expansion.ProductTypeExpansionModel;
  {@include.example io.sphere.sdk.producttypes.commands.ProductTypeDeleteCommandTest#executionByKey()}
 
  */
-public interface ProductTypeDeleteCommand extends ByIdDeleteCommand<ProductType>, MetaModelExpansionDsl<ProductType, ProductTypeDeleteCommand, ProductTypeExpansionModel<ProductType>> {
+public interface ProductTypeDeleteCommand extends MetaModelExpansionDsl<ProductType, ProductTypeDeleteCommand, ProductTypeExpansionModel<ProductType>>, DeleteCommand<ProductType> {
     static ProductTypeDeleteCommand of(final Versioned<ProductType> versioned) {
         return new ProductTypeDeleteCommandImpl(versioned);
     }

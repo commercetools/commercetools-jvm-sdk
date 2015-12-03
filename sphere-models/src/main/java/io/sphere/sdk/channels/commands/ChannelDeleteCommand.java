@@ -2,7 +2,7 @@ package io.sphere.sdk.channels.commands;
 
 import io.sphere.sdk.channels.Channel;
 import io.sphere.sdk.channels.expansion.ChannelExpansionModel;
-import io.sphere.sdk.commands.ByIdDeleteCommand;
+import io.sphere.sdk.commands.DeleteCommand;
 import io.sphere.sdk.expansion.MetaModelExpansionDsl;
 import io.sphere.sdk.models.Versioned;
 
@@ -11,7 +11,7 @@ import io.sphere.sdk.models.Versioned;
  <p>Example:</p>
  {@include.example io.sphere.sdk.channels.commands.ChannelDeleteCommandTest#execution()}
  */
-public interface ChannelDeleteCommand extends ByIdDeleteCommand<Channel>, MetaModelExpansionDsl<Channel, ChannelDeleteCommand, ChannelExpansionModel<Channel>> {
+public interface ChannelDeleteCommand extends MetaModelExpansionDsl<Channel, ChannelDeleteCommand, ChannelExpansionModel<Channel>>, DeleteCommand<Channel> {
     static ChannelDeleteCommand of(final Versioned<Channel> versioned) {
         return new ChannelDeleteCommandImpl(versioned);
     }
