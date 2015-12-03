@@ -9,9 +9,9 @@ import java.util.List;
 
 /**
  * Queries for entities with getters and copy functions for where, sort, limit and offset
- * @param <T> Interface of the entity, i.e., Category interface
+ * @param <T> Interface of the resource, i.e., Category interface
  */
-public interface EntityQuery<T> extends Query<T>, ReferenceExpansionSupport<T> {
+public interface ResourceQuery<T> extends Query<T>, ReferenceExpansionSupport<T> {
     /**
      *
      * @return the predicate used to perform the query

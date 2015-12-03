@@ -4,7 +4,7 @@ import io.sphere.sdk.models.LocalizedStringEntry;
 
 import java.util.Locale;
 
-public interface SearchDsl<T, C extends SearchDsl<T, C>> extends EntitySearch<T> {
+public interface SearchDsl<T, C extends SearchDsl<T, C>> extends ResourceSearch<T> {
 
     /**
      * Returns a new object with the new text as search text.
@@ -22,9 +22,9 @@ public interface SearchDsl<T, C extends SearchDsl<T, C>> extends EntitySearch<T>
     C withText(final Locale locale, final String text);
 
     /**
-     * Returns an EntitySearch with mofified fuzzyParameter.
+     * Returns an ResourceSearch with mofified fuzzyParameter.
      * @param fuzzy a flag to indicate if fuzzy search is enabled (true) or not (false)
-     * @return an EntitySearch with the new fuzzy flag setting
+     * @return an ResourceSearch with the new fuzzy flag setting
      */
     C withFuzzy(final Boolean fuzzy);
 

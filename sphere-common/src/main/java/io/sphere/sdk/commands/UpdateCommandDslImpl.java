@@ -16,9 +16,9 @@ import static io.sphere.sdk.json.SphereJsonUtils.toJsonString;
 import static java.util.Objects.requireNonNull;
 
 /**
- * Internal base class to implement commands that change one entity in SPHERE.IO.
+ * Internal base class to implement commands that change one resource in SPHERE.IO.
  *
- * @param <T> the type of the result of the command, most likely the updated entity without expanded references
+ * @param <T> the type of the result of the command, most likely the updated resource without expanded references
  */
 public abstract class UpdateCommandDslImpl<T extends ResourceView<T, T>, C extends UpdateCommandDsl<T, C>> extends CommandImpl<T> implements UpdateCommandDsl<T, C> {
     private final Versioned<T> versioned;

@@ -10,8 +10,8 @@ import io.sphere.sdk.models.Versioned;
 import static java.util.Objects.requireNonNull;
 
 /**
- Internal base class to implement commands which deletes an entity by ID in SPHERE.IO.
- @param <T> the type of the result of the command, most likely the updated entity without expanded references */
+ Internal base class to implement commands which deletes a resource by ID in SPHERE.IO.
+ @param <T> the type of the result of the command, most likely the updated resource without expanded references */
 public abstract class ByIdDeleteCommandImpl<T> extends CommandImpl<T> implements DeleteCommand<T> {
     private final Versioned<T> versioned;
     private final JavaType javaType;

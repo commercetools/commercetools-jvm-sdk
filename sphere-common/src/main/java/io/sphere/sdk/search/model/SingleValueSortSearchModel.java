@@ -3,7 +3,7 @@ package io.sphere.sdk.search.model;
 import io.sphere.sdk.search.SortExpression;
 
 /**
- * A sort model to decide the direction of a model with just one value per entity
+ * A sort model to decide the direction of a model with just one value per resource
  * @see SingleValueSortSearchModelFactory to instantiate this class
  */
 public class SingleValueSortSearchModel<T> extends SortSearchModelImpl<T> {
