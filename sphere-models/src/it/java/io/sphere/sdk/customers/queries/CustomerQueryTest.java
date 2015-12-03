@@ -1,25 +1,31 @@
 package io.sphere.sdk.customers.queries;
 
-import io.sphere.sdk.customers.*;
+import io.sphere.sdk.customers.Customer;
+import io.sphere.sdk.customers.CustomerDraft;
+import io.sphere.sdk.customers.CustomerName;
+import io.sphere.sdk.customers.CustomerSignInResult;
 import io.sphere.sdk.customers.commands.CustomerCreateCommand;
 import io.sphere.sdk.customers.commands.CustomerUpdateCommand;
 import io.sphere.sdk.customers.commands.updateactions.AddAddress;
 import io.sphere.sdk.customers.commands.updateactions.SetCustomerGroup;
 import io.sphere.sdk.customers.commands.updateactions.SetDefaultBillingAddress;
 import io.sphere.sdk.customers.commands.updateactions.SetDefaultShippingAddress;
-import io.sphere.sdk.customers.expansion.CustomerExpansionModel;
-import io.sphere.sdk.queries.*;
+import io.sphere.sdk.queries.PagedQueryResult;
+import io.sphere.sdk.queries.Query;
+import io.sphere.sdk.queries.QueryPredicate;
 import io.sphere.sdk.test.IntegrationTest;
-import org.junit.*;
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
 import java.util.List;
 import java.util.function.Function;
 
 import static io.sphere.sdk.customergroups.CustomerGroupFixtures.b2cCustomerGroup;
-import static io.sphere.sdk.customers.CustomerFixtures.*;
-import static org.assertj.core.api.Assertions.assertThat;
+import static io.sphere.sdk.customers.CustomerFixtures.withCustomerInGroup;
 import static io.sphere.sdk.test.SphereTestUtils.*;
 import static java.util.stream.Collectors.toList;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class CustomerQueryTest extends IntegrationTest {
     public static final String FIRST_NAME = "John";
@@ -81,7 +87,7 @@ public class CustomerQueryTest extends IntegrationTest {
         check((model) -> model.defaultBillingAddressId().is(customer.getDefaultBillingAddressId()));
     }
 
-    @Ignore("see https://github.com/sphereio/sphere-jvm-sdk/issues/273")
+    @Test
     public void isEmailVerified() throws Exception {
         check((model) -> model.isEmailVerified().is(false), false);
     }
