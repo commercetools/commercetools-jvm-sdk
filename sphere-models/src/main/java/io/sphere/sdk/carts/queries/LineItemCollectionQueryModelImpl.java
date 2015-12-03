@@ -55,4 +55,9 @@ final class LineItemCollectionQueryModelImpl<T> extends QueryModelImpl<T> implem
     public PriceQueryModel<T> price() {
         return new PriceCollectionQueryModel<>(this, "price");
     }
+
+    @Override
+    public ItemStateCollectionQueryModel<T> state() {
+        return new ItemStateCollectionQueryModelImpl<>(this, "state");
+    }
 }

@@ -1,6 +1,6 @@
 package io.sphere.sdk.queries;
 
-public interface LongQuerySortingModel<T> extends QueryModel<T>, QuerySortingModel<T>, OptionalQueryModel<T>, EqualityQueryModel<T, Long>, NotEqualQueryModel<T, Long>, IsInQueryModel<T, Long>, IsNotInQueryModel<T, Long>, InequalityQueryModel<T, Long>, LongQueryModel<T> {
+public interface LongQueryModel<T> extends QueryModel<T>, OptionalQueryModel<T>, EqualityQueryModel<T, Long>, NotEqualQueryModel<T, Long>, IsInQueryModel<T, Long>, IsNotInQueryModel<T, Long>, InequalityQueryModel<T, Long> {
     @Override
     QueryPredicate<T> is(Long i);
 
@@ -30,8 +30,4 @@ public interface LongQuerySortingModel<T> extends QueryModel<T>, QuerySortingMod
 
     @Override
     QueryPredicate<T> isPresent();
-
-    @Deprecated
-    @Override
-    QuerySort<T> sort(QuerySortDirection sortDirection);
 }

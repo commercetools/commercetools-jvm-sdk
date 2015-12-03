@@ -1,6 +1,7 @@
 package io.sphere.sdk.carts.queries;
 
 import io.sphere.sdk.carts.Cart;
+import io.sphere.sdk.carts.ItemState;
 import io.sphere.sdk.carts.LineItem;
 import io.sphere.sdk.carts.commands.CartUpdateCommand;
 import io.sphere.sdk.carts.commands.updateactions.AddDiscountCode;
@@ -114,6 +115,7 @@ public class CartQueryTest extends IntegrationTest {
             final String englishName = lineItem.getName().get(Locale.ENGLISH);
             final Price price = lineItem.getPrice();
             final Long centAmount = price.getValue().query(MonetaryUtil.minorUnits());
+            final ItemState itemState = lineItem.getState().stream().findFirst().get();
             final CartQuery query = CartQuery.of()
                     .withLimit(1L)
                     .withPredicates(m ->
@@ -125,6 +127,8 @@ public class CartQueryTest extends IntegrationTest {
                                     .and(m.lineItems().price().id().is(price.getId()))
                                     .and(m.lineItems().price().value().centAmount().is(centAmount))
                                     .and(m.lineItems().price().country().is(price.getCountry()))
+                                    .and(m.lineItems().state().quantity().is(itemState.getQuantity()))
+                                    .and(m.lineItems().state().state().is(itemState.getState()))
                     );
             final Cart loadedCart = execute(query.plusPredicates(m -> m.id().is(cart.getId()))).head().get();
             assertThat(loadedCart.getId()).isEqualTo(cart.getId());
