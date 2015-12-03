@@ -125,7 +125,7 @@ var activeTableTab = "activeTableTab";
 </dl>
 <dl>
 <dt>All Implemented Interfaces:</dt>
-<dd><a href="../../../../io/sphere/sdk/client/SphereRequest.html" title="interface in io.sphere.sdk.client">SphereRequest</a>&lt;<a href="../../../../io/sphere/sdk/queries/PagedQueryResult.html" title="class in io.sphere.sdk.queries">PagedQueryResult</a>&lt;T&gt;&gt;, <a href="../../../../io/sphere/sdk/expansion/MetaModelExpansionDsl.html" title="interface in io.sphere.sdk.expansion">MetaModelExpansionDsl</a>&lt;T,C,E&gt;, <a href="../../../../io/sphere/sdk/expansion/ReferenceExpansionDsl.html" title="interface in io.sphere.sdk.expansion">ReferenceExpansionDsl</a>&lt;T,C&gt;, <a href="../../../../io/sphere/sdk/expansion/ReferenceExpansionSupport.html" title="interface in io.sphere.sdk.expansion">ReferenceExpansionSupport</a>&lt;T&gt;, <a href="../../../../io/sphere/sdk/queries/EntityQuery.html" title="interface in io.sphere.sdk.queries">EntityQuery</a>&lt;T&gt;, <a href="../../../../io/sphere/sdk/queries/MetaModelQueryDsl.html" title="interface in io.sphere.sdk.queries">MetaModelQueryDsl</a>&lt;T,C,Q,E&gt;, <a href="../../../../io/sphere/sdk/queries/Query.html" title="interface in io.sphere.sdk.queries">Query</a>&lt;T&gt;, <a href="../../../../io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries">QueryDsl</a>&lt;T,C&gt;</dd>
+<dd><a href="../../../../io/sphere/sdk/client/SphereRequest.html" title="interface in io.sphere.sdk.client">SphereRequest</a>&lt;<a href="../../../../io/sphere/sdk/queries/PagedQueryResult.html" title="class in io.sphere.sdk.queries">PagedQueryResult</a>&lt;T&gt;&gt;, <a href="../../../../io/sphere/sdk/expansion/MetaModelExpansionDsl.html" title="interface in io.sphere.sdk.expansion">MetaModelExpansionDsl</a>&lt;T,C,E&gt;, <a href="../../../../io/sphere/sdk/expansion/ReferenceExpansionDsl.html" title="interface in io.sphere.sdk.expansion">ReferenceExpansionDsl</a>&lt;T,C&gt;, <a href="../../../../io/sphere/sdk/expansion/ReferenceExpansionSupport.html" title="interface in io.sphere.sdk.expansion">ReferenceExpansionSupport</a>&lt;T&gt;, <a href="../../../../io/sphere/sdk/queries/MetaModelQueryDsl.html" title="interface in io.sphere.sdk.queries">MetaModelQueryDsl</a>&lt;T,C,Q,E&gt;, <a href="../../../../io/sphere/sdk/queries/Query.html" title="interface in io.sphere.sdk.queries">Query</a>&lt;T&gt;, <a href="../../../../io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries">QueryDsl</a>&lt;T,C&gt;, <a href="../../../../io/sphere/sdk/queries/ResourceQuery.html" title="interface in io.sphere.sdk.queries">ResourceQuery</a>&lt;T&gt;</dd>
 </dl>
 <hr>
 <br>
@@ -656,7 +656,7 @@ implements <a href="../../../../io/sphere/sdk/queries/MetaModelQueryDsl.html" ti
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>sort</code> - list of sorts how the results of the query should be sorted</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
-<dd>EntityQuery with sort</dd>
+<dd>Query with sort</dd>
 </dl>
 </li>
 </ul>
@@ -986,7 +986,7 @@ assertThat(fetchB.expansionPaths())
 <pre>public&nbsp;java.util.List&lt;<a href="../../../../io/sphere/sdk/queries/QueryPredicate.html" title="interface in io.sphere.sdk.queries">QueryPredicate</a>&lt;<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">T</a>&gt;&gt;&nbsp;predicates()</pre>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../io/sphere/sdk/queries/EntityQuery.html#predicates--">predicates</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/queries/EntityQuery.html" title="interface in io.sphere.sdk.queries">EntityQuery</a>&lt;<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">T</a>&gt;</code></dd>
+<dd><code><a href="../../../../io/sphere/sdk/queries/ResourceQuery.html#predicates--">predicates</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/queries/ResourceQuery.html" title="interface in io.sphere.sdk.queries">ResourceQuery</a>&lt;<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">T</a>&gt;</code></dd>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>the predicate used to perform the query</dd>
 </dl>
@@ -1001,7 +1001,7 @@ assertThat(fetchB.expansionPaths())
 <pre>public&nbsp;java.util.List&lt;<a href="../../../../io/sphere/sdk/queries/QuerySort.html" title="interface in io.sphere.sdk.queries">QuerySort</a>&lt;<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">T</a>&gt;&gt;&nbsp;sort()</pre>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../io/sphere/sdk/queries/EntityQuery.html#sort--">sort</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/queries/EntityQuery.html" title="interface in io.sphere.sdk.queries">EntityQuery</a>&lt;<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">T</a>&gt;</code></dd>
+<dd><code><a href="../../../../io/sphere/sdk/queries/ResourceQuery.html#sort--">sort</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/queries/ResourceQuery.html" title="interface in io.sphere.sdk.queries">ResourceQuery</a>&lt;<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">T</a>&gt;</code></dd>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>the used sort expressions for this query</dd>
 </dl>
@@ -1017,7 +1017,7 @@ assertThat(fetchB.expansionPaths())
 public&nbsp;java.lang.Boolean&nbsp;fetchTotal()</pre>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../io/sphere/sdk/queries/EntityQuery.html#fetchTotal--">fetchTotal</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/queries/EntityQuery.html" title="interface in io.sphere.sdk.queries">EntityQuery</a>&lt;<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">T</a>&gt;</code></dd>
+<dd><code><a href="../../../../io/sphere/sdk/queries/ResourceQuery.html#fetchTotal--">fetchTotal</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/queries/ResourceQuery.html" title="interface in io.sphere.sdk.queries">ResourceQuery</a>&lt;<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">T</a>&gt;</code></dd>
 </dl>
 </li>
 </ul>
@@ -1031,7 +1031,7 @@ public&nbsp;java.lang.Boolean&nbsp;fetchTotal()</pre>
 public&nbsp;java.lang.Long&nbsp;limit()</pre>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../io/sphere/sdk/queries/EntityQuery.html#limit--">limit</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/queries/EntityQuery.html" title="interface in io.sphere.sdk.queries">EntityQuery</a>&lt;<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">T</a>&gt;</code></dd>
+<dd><code><a href="../../../../io/sphere/sdk/queries/ResourceQuery.html#limit--">limit</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/queries/ResourceQuery.html" title="interface in io.sphere.sdk.queries">ResourceQuery</a>&lt;<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">T</a>&gt;</code></dd>
 </dl>
 </li>
 </ul>
@@ -1045,7 +1045,7 @@ public&nbsp;java.lang.Long&nbsp;limit()</pre>
 public&nbsp;java.lang.Long&nbsp;offset()</pre>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../io/sphere/sdk/queries/EntityQuery.html#offset--">offset</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/queries/EntityQuery.html" title="interface in io.sphere.sdk.queries">EntityQuery</a>&lt;<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">T</a>&gt;</code></dd>
+<dd><code><a href="../../../../io/sphere/sdk/queries/ResourceQuery.html#offset--">offset</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/queries/ResourceQuery.html" title="interface in io.sphere.sdk.queries">ResourceQuery</a>&lt;<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">T</a>&gt;</code></dd>
 </dl>
 </li>
 </ul>
@@ -1058,7 +1058,7 @@ public&nbsp;java.lang.Long&nbsp;offset()</pre>
 <pre>public&nbsp;java.lang.String&nbsp;endpoint()</pre>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../io/sphere/sdk/queries/EntityQuery.html#endpoint--">endpoint</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/queries/EntityQuery.html" title="interface in io.sphere.sdk.queries">EntityQuery</a>&lt;<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">T</a>&gt;</code></dd>
+<dd><code><a href="../../../../io/sphere/sdk/queries/ResourceQuery.html#endpoint--">endpoint</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/queries/ResourceQuery.html" title="interface in io.sphere.sdk.queries">ResourceQuery</a>&lt;<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">T</a>&gt;</code></dd>
 </dl>
 </li>
 </ul>
@@ -1073,7 +1073,7 @@ public&nbsp;java.lang.Long&nbsp;offset()</pre>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="../../../../io/sphere/sdk/expansion/ReferenceExpansionSupport.html#expansionPaths--">expansionPaths</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/expansion/ReferenceExpansionSupport.html" title="interface in io.sphere.sdk.expansion">ReferenceExpansionSupport</a>&lt;<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">T</a>&gt;</code></dd>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../io/sphere/sdk/queries/EntityQuery.html#expansionPaths--">expansionPaths</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/queries/EntityQuery.html" title="interface in io.sphere.sdk.queries">EntityQuery</a>&lt;<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">T</a>&gt;</code></dd>
+<dd><code><a href="../../../../io/sphere/sdk/queries/ResourceQuery.html#expansionPaths--">expansionPaths</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/queries/ResourceQuery.html" title="interface in io.sphere.sdk.queries">ResourceQuery</a>&lt;<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">T</a>&gt;</code></dd>
 </dl>
 </li>
 </ul>
