@@ -32,4 +32,6 @@ public interface LineItemCollectionQueryModel<T> extends QueryModel<T>, Collecti
     PriceQueryModel<T> price();
 
     ItemStateCollectionQueryModel<T> state();
+
+    DiscountedLineItemPriceForQuantityQueryModel<T> discountedPricePerQuantity();
 }
