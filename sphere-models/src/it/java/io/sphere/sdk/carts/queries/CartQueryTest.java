@@ -110,7 +110,8 @@ public class CartQueryTest extends IntegrationTest {
             final CartQuery query = CartQuery.of()
                     .withLimit(1L)
                     .withPredicates(m -> {
-                        return m.lineItems().id().is(lineItem.getId());
+                        return m.lineItems().id().is(lineItem.getId())
+                                .and(m.lineItems().quantity().is(lineItem.getQuantity()));
                     });
             final Cart loadedCart = execute(query.plusPredicates(m -> m.id().is(cart.getId()))).head().get();
             assertThat(loadedCart.getId()).isEqualTo(cart.getId());

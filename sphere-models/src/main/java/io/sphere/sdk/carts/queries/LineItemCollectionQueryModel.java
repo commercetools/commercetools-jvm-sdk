@@ -19,4 +19,6 @@ public interface LineItemCollectionQueryModel<T> extends QueryModel<T>, Collecti
     QueryPredicate<T> isNotEmpty();
 
     StringQueryModel<T> id();
+
+    LongQuerySortingModel<T> quantity();
 }

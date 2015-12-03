@@ -32,4 +32,9 @@ final class LineItemCollectionQueryModelImpl<T> extends QueryModelImpl<T> implem
     public StringQueryModel<T> id() {
         return stringModel("id");
     }
+
+    @Override
+    public LongQuerySortingModel<T> quantity() {
+        return longModel("quantity");
+    }
 }
