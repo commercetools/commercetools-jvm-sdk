@@ -2,6 +2,7 @@ package io.sphere.sdk.reviews;
 
 import io.sphere.sdk.client.TestClient;
 import io.sphere.sdk.reviews.commands.ReviewCreateCommand;
+import io.sphere.sdk.reviews.commands.ReviewDeleteCommand;
 
 import java.util.function.Function;
 
@@ -20,7 +21,7 @@ public class ReviewFixtures {
                         .build();
                 final Review review = client.execute(ReviewCreateCommand.of(reviewDraft));
                 final Review updatedReview = function.apply(review);
-                //Review delete command is not yet available in the SPHERE.IO API
+                client.execute(ReviewDeleteCommand.of(updatedReview));
             })
         );
     }
