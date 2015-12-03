@@ -6,6 +6,12 @@ import io.sphere.sdk.models.Base;
 import javax.annotation.Nullable;
 import java.util.List;
 
+/**
+ * Draft for a new TaxCategory.
+ *
+ * <p>If you need to create a TaxCategory without tax rates, just provide an empty list as parameter for {@code taxRates}.</p>
+ *
+ */
 public final class TaxCategoryDraft extends Base {
     private final String name;
     @Nullable
