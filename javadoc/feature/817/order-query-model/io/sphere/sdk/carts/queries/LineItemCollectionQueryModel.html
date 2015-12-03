@@ -49,7 +49,7 @@ var activeTableTab = "activeTableTab";
 <div class="subNav">
 <ul class="navList">
 <li><a href="../../../../../io/sphere/sdk/carts/queries/ItemStateCollectionQueryModel.html" title="interface in io.sphere.sdk.carts.queries"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
-<li><a href="../../../../../io/sphere/sdk/carts/queries/TaxedPriceOptionalQueryModel.html" title="interface in io.sphere.sdk.carts.queries"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
+<li><a href="../../../../../io/sphere/sdk/carts/queries/LineItemLikeCollectionQueryModel.html" title="interface in io.sphere.sdk.carts.queries"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">
 <li><a href="../../../../../index.html?io/sphere/sdk/carts/queries/LineItemCollectionQueryModel.html" target="_top">Frames</a></li>
@@ -104,12 +104,12 @@ var activeTableTab = "activeTableTab";
 </dl>
 <dl>
 <dt>All Superinterfaces:</dt>
-<dd><a href="../../../../../io/sphere/sdk/queries/CollectionQueryModel.html" title="interface in io.sphere.sdk.queries">CollectionQueryModel</a>&lt;T&gt;, <a href="../../../../../io/sphere/sdk/queries/QueryModel.html" title="interface in io.sphere.sdk.queries">QueryModel</a>&lt;T&gt;</dd>
+<dd><a href="../../../../../io/sphere/sdk/queries/CollectionQueryModel.html" title="interface in io.sphere.sdk.queries">CollectionQueryModel</a>&lt;T&gt;, <a href="../../../../../io/sphere/sdk/carts/queries/LineItemLikeCollectionQueryModel.html" title="interface in io.sphere.sdk.carts.queries">LineItemLikeCollectionQueryModel</a>&lt;T&gt;, <a href="../../../../../io/sphere/sdk/queries/QueryModel.html" title="interface in io.sphere.sdk.queries">QueryModel</a>&lt;T&gt;</dd>
 </dl>
 <hr>
 <br>
 <pre>public interface <span class="typeNameLabel">LineItemCollectionQueryModel&lt;T&gt;</span>
-extends <a href="../../../../../io/sphere/sdk/queries/QueryModel.html" title="interface in io.sphere.sdk.queries">QueryModel</a>&lt;T&gt;, <a href="../../../../../io/sphere/sdk/queries/CollectionQueryModel.html" title="interface in io.sphere.sdk.queries">CollectionQueryModel</a>&lt;T&gt;</pre>
+extends <a href="../../../../../io/sphere/sdk/carts/queries/LineItemLikeCollectionQueryModel.html" title="interface in io.sphere.sdk.carts.queries">LineItemLikeCollectionQueryModel</a>&lt;T&gt;</pre>
 <div class="block">Query predicate build for line items.</div>
 </li>
 </ul>
@@ -213,59 +213,6 @@ extends <a href="../../../../../io/sphere/sdk/queries/QueryModel.html" title="in
 <pre><a href="../../../../../io/sphere/sdk/queries/ReferenceOptionalQueryModel.html" title="interface in io.sphere.sdk.queries">ReferenceOptionalQueryModel</a>&lt;<a href="../../../../../io/sphere/sdk/carts/queries/LineItemCollectionQueryModel.html" title="type parameter in LineItemCollectionQueryModel">T</a>,<a href="../../../../../io/sphere/sdk/channels/Channel.html" title="interface in io.sphere.sdk.channels">Channel</a>&gt;&nbsp;distributionChannel()</pre>
 </li>
 </ul>
-<a name="isEmpty--">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>isEmpty</h4>
-<pre><a href="../../../../../io/sphere/sdk/queries/QueryPredicate.html" title="interface in io.sphere.sdk.queries">QueryPredicate</a>&lt;<a href="../../../../../io/sphere/sdk/carts/queries/LineItemCollectionQueryModel.html" title="type parameter in LineItemCollectionQueryModel">T</a>&gt;&nbsp;isEmpty()</pre>
-<dl>
-<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../../io/sphere/sdk/queries/CollectionQueryModel.html#isEmpty--">isEmpty</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../io/sphere/sdk/queries/CollectionQueryModel.html" title="interface in io.sphere.sdk.queries">CollectionQueryModel</a>&lt;<a href="../../../../../io/sphere/sdk/carts/queries/LineItemCollectionQueryModel.html" title="type parameter in LineItemCollectionQueryModel">T</a>&gt;</code></dd>
-</dl>
-</li>
-</ul>
-<a name="isNotEmpty--">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>isNotEmpty</h4>
-<pre><a href="../../../../../io/sphere/sdk/queries/QueryPredicate.html" title="interface in io.sphere.sdk.queries">QueryPredicate</a>&lt;<a href="../../../../../io/sphere/sdk/carts/queries/LineItemCollectionQueryModel.html" title="type parameter in LineItemCollectionQueryModel">T</a>&gt;&nbsp;isNotEmpty()</pre>
-<dl>
-<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../../io/sphere/sdk/queries/CollectionQueryModel.html#isNotEmpty--">isNotEmpty</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../io/sphere/sdk/queries/CollectionQueryModel.html" title="interface in io.sphere.sdk.queries">CollectionQueryModel</a>&lt;<a href="../../../../../io/sphere/sdk/carts/queries/LineItemCollectionQueryModel.html" title="type parameter in LineItemCollectionQueryModel">T</a>&gt;</code></dd>
-</dl>
-</li>
-</ul>
-<a name="id--">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>id</h4>
-<pre><a href="../../../../../io/sphere/sdk/queries/StringQueryModel.html" title="interface in io.sphere.sdk.queries">StringQueryModel</a>&lt;<a href="../../../../../io/sphere/sdk/carts/queries/LineItemCollectionQueryModel.html" title="type parameter in LineItemCollectionQueryModel">T</a>&gt;&nbsp;id()</pre>
-</li>
-</ul>
-<a name="quantity--">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>quantity</h4>
-<pre><a href="../../../../../io/sphere/sdk/queries/LongQuerySortingModel.html" title="interface in io.sphere.sdk.queries">LongQuerySortingModel</a>&lt;<a href="../../../../../io/sphere/sdk/carts/queries/LineItemCollectionQueryModel.html" title="type parameter in LineItemCollectionQueryModel">T</a>&gt;&nbsp;quantity()</pre>
-</li>
-</ul>
-<a name="name--">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>name</h4>
-<pre><a href="../../../../../io/sphere/sdk/queries/LocalizedStringQueryModel.html" title="interface in io.sphere.sdk.queries">LocalizedStringQueryModel</a>&lt;<a href="../../../../../io/sphere/sdk/carts/queries/LineItemCollectionQueryModel.html" title="type parameter in LineItemCollectionQueryModel">T</a>&gt;&nbsp;name()</pre>
-</li>
-</ul>
 <a name="variant--">
 <!--   -->
 </a>
@@ -284,22 +231,99 @@ extends <a href="../../../../../io/sphere/sdk/queries/QueryModel.html" title="in
 <pre><a href="../../../../../io/sphere/sdk/products/queries/PriceQueryModel.html" title="interface in io.sphere.sdk.products.queries">PriceQueryModel</a>&lt;<a href="../../../../../io/sphere/sdk/carts/queries/LineItemCollectionQueryModel.html" title="type parameter in LineItemCollectionQueryModel">T</a>&gt;&nbsp;price()</pre>
 </li>
 </ul>
-<a name="state--">
+<a name="discountedPricePerQuantity--">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
-<h4>state</h4>
-<pre><a href="../../../../../io/sphere/sdk/carts/queries/ItemStateCollectionQueryModel.html" title="interface in io.sphere.sdk.carts.queries">ItemStateCollectionQueryModel</a>&lt;<a href="../../../../../io/sphere/sdk/carts/queries/LineItemCollectionQueryModel.html" title="type parameter in LineItemCollectionQueryModel">T</a>&gt;&nbsp;state()</pre>
+<h4>discountedPricePerQuantity</h4>
+<pre><a href="../../../../../io/sphere/sdk/carts/queries/DiscountedLineItemPriceForQuantityQueryModel.html" title="interface in io.sphere.sdk.carts.queries">DiscountedLineItemPriceForQuantityQueryModel</a>&lt;<a href="../../../../../io/sphere/sdk/carts/queries/LineItemCollectionQueryModel.html" title="type parameter in LineItemCollectionQueryModel">T</a>&gt;&nbsp;discountedPricePerQuantity()</pre>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../../io/sphere/sdk/carts/queries/LineItemLikeCollectionQueryModel.html#discountedPricePerQuantity--">discountedPricePerQuantity</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../io/sphere/sdk/carts/queries/LineItemLikeCollectionQueryModel.html" title="interface in io.sphere.sdk.carts.queries">LineItemLikeCollectionQueryModel</a>&lt;<a href="../../../../../io/sphere/sdk/carts/queries/LineItemCollectionQueryModel.html" title="type parameter in LineItemCollectionQueryModel">T</a>&gt;</code></dd>
+</dl>
 </li>
 </ul>
-<a name="discountedPricePerQuantity--">
+<a name="id--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>id</h4>
+<pre><a href="../../../../../io/sphere/sdk/queries/StringQueryModel.html" title="interface in io.sphere.sdk.queries">StringQueryModel</a>&lt;<a href="../../../../../io/sphere/sdk/carts/queries/LineItemCollectionQueryModel.html" title="type parameter in LineItemCollectionQueryModel">T</a>&gt;&nbsp;id()</pre>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../../io/sphere/sdk/carts/queries/LineItemLikeCollectionQueryModel.html#id--">id</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../io/sphere/sdk/carts/queries/LineItemLikeCollectionQueryModel.html" title="interface in io.sphere.sdk.carts.queries">LineItemLikeCollectionQueryModel</a>&lt;<a href="../../../../../io/sphere/sdk/carts/queries/LineItemCollectionQueryModel.html" title="type parameter in LineItemCollectionQueryModel">T</a>&gt;</code></dd>
+</dl>
+</li>
+</ul>
+<a name="isEmpty--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>isEmpty</h4>
+<pre><a href="../../../../../io/sphere/sdk/queries/QueryPredicate.html" title="interface in io.sphere.sdk.queries">QueryPredicate</a>&lt;<a href="../../../../../io/sphere/sdk/carts/queries/LineItemCollectionQueryModel.html" title="type parameter in LineItemCollectionQueryModel">T</a>&gt;&nbsp;isEmpty()</pre>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../../io/sphere/sdk/queries/CollectionQueryModel.html#isEmpty--">isEmpty</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../io/sphere/sdk/queries/CollectionQueryModel.html" title="interface in io.sphere.sdk.queries">CollectionQueryModel</a>&lt;<a href="../../../../../io/sphere/sdk/carts/queries/LineItemCollectionQueryModel.html" title="type parameter in LineItemCollectionQueryModel">T</a>&gt;</code></dd>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../../io/sphere/sdk/carts/queries/LineItemLikeCollectionQueryModel.html#isEmpty--">isEmpty</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../io/sphere/sdk/carts/queries/LineItemLikeCollectionQueryModel.html" title="interface in io.sphere.sdk.carts.queries">LineItemLikeCollectionQueryModel</a>&lt;<a href="../../../../../io/sphere/sdk/carts/queries/LineItemCollectionQueryModel.html" title="type parameter in LineItemCollectionQueryModel">T</a>&gt;</code></dd>
+</dl>
+</li>
+</ul>
+<a name="isNotEmpty--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>isNotEmpty</h4>
+<pre><a href="../../../../../io/sphere/sdk/queries/QueryPredicate.html" title="interface in io.sphere.sdk.queries">QueryPredicate</a>&lt;<a href="../../../../../io/sphere/sdk/carts/queries/LineItemCollectionQueryModel.html" title="type parameter in LineItemCollectionQueryModel">T</a>&gt;&nbsp;isNotEmpty()</pre>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../../io/sphere/sdk/queries/CollectionQueryModel.html#isNotEmpty--">isNotEmpty</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../io/sphere/sdk/queries/CollectionQueryModel.html" title="interface in io.sphere.sdk.queries">CollectionQueryModel</a>&lt;<a href="../../../../../io/sphere/sdk/carts/queries/LineItemCollectionQueryModel.html" title="type parameter in LineItemCollectionQueryModel">T</a>&gt;</code></dd>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../../io/sphere/sdk/carts/queries/LineItemLikeCollectionQueryModel.html#isNotEmpty--">isNotEmpty</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../io/sphere/sdk/carts/queries/LineItemLikeCollectionQueryModel.html" title="interface in io.sphere.sdk.carts.queries">LineItemLikeCollectionQueryModel</a>&lt;<a href="../../../../../io/sphere/sdk/carts/queries/LineItemCollectionQueryModel.html" title="type parameter in LineItemCollectionQueryModel">T</a>&gt;</code></dd>
+</dl>
+</li>
+</ul>
+<a name="name--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>name</h4>
+<pre><a href="../../../../../io/sphere/sdk/queries/LocalizedStringQueryModel.html" title="interface in io.sphere.sdk.queries">LocalizedStringQueryModel</a>&lt;<a href="../../../../../io/sphere/sdk/carts/queries/LineItemCollectionQueryModel.html" title="type parameter in LineItemCollectionQueryModel">T</a>&gt;&nbsp;name()</pre>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../../io/sphere/sdk/carts/queries/LineItemLikeCollectionQueryModel.html#name--">name</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../io/sphere/sdk/carts/queries/LineItemLikeCollectionQueryModel.html" title="interface in io.sphere.sdk.carts.queries">LineItemLikeCollectionQueryModel</a>&lt;<a href="../../../../../io/sphere/sdk/carts/queries/LineItemCollectionQueryModel.html" title="type parameter in LineItemCollectionQueryModel">T</a>&gt;</code></dd>
+</dl>
+</li>
+</ul>
+<a name="quantity--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>quantity</h4>
+<pre><a href="../../../../../io/sphere/sdk/queries/LongQuerySortingModel.html" title="interface in io.sphere.sdk.queries">LongQuerySortingModel</a>&lt;<a href="../../../../../io/sphere/sdk/carts/queries/LineItemCollectionQueryModel.html" title="type parameter in LineItemCollectionQueryModel">T</a>&gt;&nbsp;quantity()</pre>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../../io/sphere/sdk/carts/queries/LineItemLikeCollectionQueryModel.html#quantity--">quantity</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../io/sphere/sdk/carts/queries/LineItemLikeCollectionQueryModel.html" title="interface in io.sphere.sdk.carts.queries">LineItemLikeCollectionQueryModel</a>&lt;<a href="../../../../../io/sphere/sdk/carts/queries/LineItemCollectionQueryModel.html" title="type parameter in LineItemCollectionQueryModel">T</a>&gt;</code></dd>
+</dl>
+</li>
+</ul>
+<a name="state--">
 <!--   -->
 </a>
 <ul class="blockListLast">
 <li class="blockList">
-<h4>discountedPricePerQuantity</h4>
-<pre><a href="../../../../../io/sphere/sdk/carts/queries/DiscountedLineItemPriceForQuantityQueryModel.html" title="interface in io.sphere.sdk.carts.queries">DiscountedLineItemPriceForQuantityQueryModel</a>&lt;<a href="../../../../../io/sphere/sdk/carts/queries/LineItemCollectionQueryModel.html" title="type parameter in LineItemCollectionQueryModel">T</a>&gt;&nbsp;discountedPricePerQuantity()</pre>
+<h4>state</h4>
+<pre><a href="../../../../../io/sphere/sdk/carts/queries/ItemStateCollectionQueryModel.html" title="interface in io.sphere.sdk.carts.queries">ItemStateCollectionQueryModel</a>&lt;<a href="../../../../../io/sphere/sdk/carts/queries/LineItemCollectionQueryModel.html" title="type parameter in LineItemCollectionQueryModel">T</a>&gt;&nbsp;state()</pre>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../../io/sphere/sdk/carts/queries/LineItemLikeCollectionQueryModel.html#state--">state</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../io/sphere/sdk/carts/queries/LineItemLikeCollectionQueryModel.html" title="interface in io.sphere.sdk.carts.queries">LineItemLikeCollectionQueryModel</a>&lt;<a href="../../../../../io/sphere/sdk/carts/queries/LineItemCollectionQueryModel.html" title="type parameter in LineItemCollectionQueryModel">T</a>&gt;</code></dd>
+</dl>
 </li>
 </ul>
 </li>
@@ -330,7 +354,7 @@ extends <a href="../../../../../io/sphere/sdk/queries/QueryModel.html" title="in
 <div class="subNav">
 <ul class="navList">
 <li><a href="../../../../../io/sphere/sdk/carts/queries/ItemStateCollectionQueryModel.html" title="interface in io.sphere.sdk.carts.queries"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
-<li><a href="../../../../../io/sphere/sdk/carts/queries/TaxedPriceOptionalQueryModel.html" title="interface in io.sphere.sdk.carts.queries"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
+<li><a href="../../../../../io/sphere/sdk/carts/queries/LineItemLikeCollectionQueryModel.html" title="interface in io.sphere.sdk.carts.queries"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">
 <li><a href="../../../../../index.html?io/sphere/sdk/carts/queries/LineItemCollectionQueryModel.html" target="_top">Frames</a></li>
