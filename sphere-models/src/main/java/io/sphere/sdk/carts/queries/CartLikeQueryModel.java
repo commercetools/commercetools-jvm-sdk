@@ -43,4 +43,12 @@ public abstract class CartLikeQueryModel<T> extends ResourceQueryModelImpl<T> {
     public CustomLineItemCollectionQueryModel<T> customLineItems() {
         return new LineItemLikeCollectionQueryModelImpl<>(this, "customLineItems");
     }
+
+    public AddressQueryModel<T> shippingAddress() {
+        return addressModel("shippingAddress");
+    }
+
+    public AddressQueryModel<T> billingAddress() {
+        return addressModel("billingAddress");
+    }
 }

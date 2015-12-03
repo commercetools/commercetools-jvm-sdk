@@ -193,6 +193,12 @@ public class CartUpdateCommandTest extends IntegrationTest {
         final Address address = AddressBuilder.of(DE).build();
         final Cart cartWithAddress = execute(CartUpdateCommand.of(cart, SetShippingAddress.of(address)));
         assertThat(cartWithAddress.getShippingAddress()).isEqualTo(address);
+
+        //you can query by shippingAddress fields
+        final CartQuery query = CartQuery.of()
+                .withPredicates(m -> m.shippingAddress().country().is(DE).and(m.id().is(cart.getId())));
+        assertThat(execute(query).head()).contains(cartWithAddress);
+
         final Cart cartWithoutAddress = execute(CartUpdateCommand.of(cartWithAddress, SetShippingAddress.of(null)));
         assertThat(cartWithoutAddress.getShippingAddress()).isNull();
     }
@@ -204,6 +210,12 @@ public class CartUpdateCommandTest extends IntegrationTest {
         final Address address = AddressBuilder.of(DE).build();
         final Cart cartWithAddress = execute(CartUpdateCommand.of(cart, SetBillingAddress.of(address)));
         assertThat(cartWithAddress.getBillingAddress()).isEqualTo(address);
+
+        //you can query by billingAddress fields
+        final CartQuery query = CartQuery.of()
+                .withPredicates(m -> m.billingAddress().country().is(DE).and(m.id().is(cart.getId())));
+        assertThat(execute(query).head()).contains(cartWithAddress);
+
         final Cart cartWithoutAddress = execute(CartUpdateCommand.of(cartWithAddress, SetBillingAddress.of(null)));
         assertThat(cartWithoutAddress.getBillingAddress()).isNull();
     }
