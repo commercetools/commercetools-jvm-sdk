@@ -19,9 +19,9 @@ public interface FacetDsl<T, C> extends FacetSupport<T> {
     C withFacets(final FacetExpression<T> facetExpression);
 
     /**
-     * Returns an EntitySearch with the new facet expression list appended to the existing facets (query parameter {@code facet}).
+     * Returns a ResourceSearch with the new facet expression list appended to the existing facets (query parameter {@code facet}).
      * @param facetExpressions the new facet expression list
-     * @return an EntitySearch with the existing facets plus the new facet list.
+     * @return a ResourceSearch with the existing facets plus the new facet list.
      */
     C plusFacets(final List<FacetExpression<T>> facetExpressions);
 

@@ -20,7 +20,7 @@ import static io.sphere.sdk.utils.ListUtils.listOf;
 import static java.util.Objects.requireNonNull;
 
 /**
- * Internal base class to implement commands which deletes an entity by ID in SPHERE.IO.
+ * Internal base class to implement commands which deletes a resource by ID in SPHERE.IO.
  *
  * @param <T> the type of the result of the command
  *

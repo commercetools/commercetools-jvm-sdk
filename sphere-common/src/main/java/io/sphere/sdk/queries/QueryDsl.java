@@ -9,7 +9,7 @@ import java.util.List;
  * @param <T> type of the query result
  * @param <C> type of the class implementing this class
  */
-public interface QueryDsl<T, C extends QueryDsl<T, C>> extends EntityQuery<T>, ReferenceExpansionDsl<T, C> {
+public interface QueryDsl<T, C extends QueryDsl<T, C>> extends ResourceQuery<T>, ReferenceExpansionDsl<T, C> {
 
     /**
      * Returns an instance with the new predicate list as predicates.
@@ -33,7 +33,7 @@ public interface QueryDsl<T, C extends QueryDsl<T, C>> extends EntityQuery<T>, R
     /**
      * Returns a query with the new sort as sort.
      * @param sort list of sorts how the results of the query should be sorted
-     * @return EntityQuery with sort
+     * @return Query with sort
      */
     C withSort(final List<QuerySort<T>> sort);
 

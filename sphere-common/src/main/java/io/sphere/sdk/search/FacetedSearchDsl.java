@@ -23,11 +23,11 @@ public interface FacetedSearchDsl<T, C> extends FacetedSearchSupport<T> {
     C withFacetedSearch(final FacetAndFilterExpression<T> facetedSearchExpression);
 
     /**
-     * Returns an EntitySearch with the new faceted search expression list appended to the existing faceted search (combination of the query parameter {@code facet}
+     * Returns a ResourceSearch with the new faceted search expression list appended to the existing faceted search (combination of the query parameter {@code facet}
      * with the facet expression and the query parameters {@code filter.facet} and {@code filter} with the filter expressions).
      * This enables the behaviour of the faceted search as explained in the <a href="{@docRoot}/io/sphere/sdk/meta/SearchDocumentation.html#facetedSearch">documentation</a>.
      * @param facetedSearchExpressions the new faceted search expression list
-     * @return an EntitySearch with the existing faceted search plus the new faceted search list.
+     * @return a ResourceSearch with the existing faceted search plus the new faceted search list.
      */
     C plusFacetedSearch(final List<FacetAndFilterExpression<T>> facetedSearchExpressions);
 

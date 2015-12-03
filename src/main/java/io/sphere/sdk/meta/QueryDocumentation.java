@@ -110,7 +110,7 @@ import io.sphere.sdk.queries.QueryPredicate;
 
  {@include.example io.sphere.sdk.meta.QueryDocumentationTest#predicateAndExample()}
 
- <p>Since the previous queries have a common path you can combine the two queries in a <strong>{@code where}</strong> clause, like below. This is not supported for every entity, though.</p>
+ <p>Since the previous queries have a common path you can combine the two queries in a <strong>{@code where}</strong> clause, like below. This is not supported for every resource, though.</p>
 
  {@include.example io.sphere.sdk.meta.QueryDocumentationTest#predicateAndWithWhereExample()}
 

@@ -10,7 +10,7 @@ import io.sphere.sdk.models.Reference;
 import javax.annotation.Nullable;
 import java.util.Set;
 
-/** A State represents a state of a particular entity (defines a finite state machine). States can be combined together
+/** A State represents a state of a particular resource (defines a finite state machine). States can be combined together
     by defining transitions between each state, thus allowing to create work-flows.
     Each project has by default an initial LineItemState (inherited also by custom Line Items)
 
