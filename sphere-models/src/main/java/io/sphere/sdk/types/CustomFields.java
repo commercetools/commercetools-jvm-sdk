@@ -32,7 +32,7 @@ public class CustomFields extends Base {
         this.fields = Collections.unmodifiableMap(fields);
     }
 
-    Map<String, JsonNode> getFieldsMap() {
+    public Map<String, JsonNode> getFieldsJsonMap() {
         return fields;
     }
 
