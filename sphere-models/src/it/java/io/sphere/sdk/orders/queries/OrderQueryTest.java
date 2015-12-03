@@ -7,10 +7,12 @@ import io.sphere.sdk.customers.CustomerFixtures;
 import io.sphere.sdk.orders.Order;
 import io.sphere.sdk.orders.OrderFixtures;
 import io.sphere.sdk.orders.commands.OrderUpdateCommand;
+import io.sphere.sdk.orders.commands.updateactions.SetOrderNumber;
 import io.sphere.sdk.orders.commands.updateactions.UpdateSyncInfo;
 import io.sphere.sdk.queries.QueryPredicate;
 import io.sphere.sdk.queries.QuerySort;
 import io.sphere.sdk.test.IntegrationTest;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.Test;
 
 import java.util.List;
@@ -69,6 +71,13 @@ public class OrderQueryTest extends IntegrationTest {
     @Test
     public void customerEmailQueryModel() throws Exception {
         assertOrderIsFoundWithPredicate(order -> MODEL.customerEmail().is(OrderFixtures.CUSTOMER_EMAIL));
+    }
+
+    @Test
+    public void orderNumber() throws Exception {
+        assertOrderIsFoundWithPredicate(
+                order -> client().execute(OrderUpdateCommand.of(order, SetOrderNumber.of(randomKey()))),
+                order -> MODEL.orderNumber().is(order.getOrderNumber()));
     }
 
     @Test
@@ -133,7 +142,7 @@ public class OrderQueryTest extends IntegrationTest {
             final Order updatedOrder = orderMutator.apply(order);
             assertEventually(() -> {
 
-                final OrderQuery query = p.apply(order).withSort(QuerySort.of("createdAt desc"));
+                final OrderQuery query = p.apply(updatedOrder).withSort(QuerySort.of("createdAt desc"));
                 final List<Order> results = client().execute(query).getResults();
 
                 if (shouldFind) {

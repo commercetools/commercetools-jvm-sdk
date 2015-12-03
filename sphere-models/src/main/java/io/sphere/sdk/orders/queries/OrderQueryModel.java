@@ -61,6 +61,10 @@ public class OrderQueryModel extends CartLikeQueryModel<Order> {
         return super.customerId();
     }
 
+    public StringQuerySortingModel<Order> orderNumber() {
+        return stringModel("orderNumber");
+    }
+
     @Override
     public LineItemCollectionQueryModel<Order> lineItems() {
         return super.lineItems();
