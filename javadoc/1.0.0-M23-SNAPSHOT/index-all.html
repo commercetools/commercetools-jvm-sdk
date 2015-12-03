@@ -674,10 +674,6 @@
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/categories/queries/CategoryQuery.html#byId-java.lang.String-">byId(String)</a></span> - Method in interface io.sphere.sdk.categories.queries.<a href="io/sphere/sdk/categories/queries/CategoryQuery.html" title="interface in io.sphere.sdk.categories.queries">CategoryQuery</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="io/sphere/sdk/commands/ByIdDeleteCommand.html" title="interface in io.sphere.sdk.commands"><span class="typeNameLink">ByIdDeleteCommand</span></a>&lt;<a href="io/sphere/sdk/commands/ByIdDeleteCommand.html" title="type parameter in ByIdDeleteCommand">T</a>&gt; - Interface in <a href="io/sphere/sdk/commands/package-summary.html">io.sphere.sdk.commands</a></dt>
-<dd>
-<div class="block">Command which deletes an entity by ID in SPHERE.IO.</div>
-</dd>
 <dt><a href="io/sphere/sdk/commands/ByIdDeleteCommandImpl.html" title="class in io.sphere.sdk.commands"><span class="typeNameLink">ByIdDeleteCommandImpl</span></a>&lt;<a href="io/sphere/sdk/commands/ByIdDeleteCommandImpl.html" title="type parameter in ByIdDeleteCommandImpl">T</a>&gt; - Class in <a href="io/sphere/sdk/commands/package-summary.html">io.sphere.sdk.commands</a></dt>
 <dd>
 <div class="block">Internal base class to implement commands which deletes an entity by ID in SPHERE.IO.</div>
@@ -3066,7 +3062,11 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/customobjects/CustomObjectUtils.html#getCustomObjectJavaTypeForValue-com.fasterxml.jackson.databind.JavaType-">getCustomObjectJavaTypeForValue(JavaType)</a></span> - Static method in class io.sphere.sdk.customobjects.<a href="io/sphere/sdk/customobjects/CustomObjectUtils.html" title="class in io.sphere.sdk.customobjects">CustomObjectUtils</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/http/FormUrlEncodedHttpRequestBody.html#getData--">getData()</a></span> - Method in class io.sphere.sdk.http.<a href="io/sphere/sdk/http/FormUrlEncodedHttpRequestBody.html" title="class in io.sphere.sdk.http">FormUrlEncodedHttpRequestBody</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block"><span class="deprecatedLabel">Deprecated.</span>
+<div class="block"><span class="deprecationComment">use <a href="io/sphere/sdk/http/FormUrlEncodedHttpRequestBody.html#getParameters--"><code>FormUrlEncodedHttpRequestBody.getParameters()</code></a> instead</span></div>
+</div>
+</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/customers/commands/updateactions/SetDateOfBirth.html#getDateOfBirth--">getDateOfBirth()</a></span> - Method in class io.sphere.sdk.customers.commands.updateactions.<a href="io/sphere/sdk/customers/commands/updateactions/SetDateOfBirth.html" title="class in io.sphere.sdk.customers.commands.updateactions">SetDateOfBirth</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/customers/Customer.html#getDateOfBirth--">getDateOfBirth()</a></span> - Method in interface io.sphere.sdk.customers.<a href="io/sphere/sdk/customers/Customer.html" title="interface in io.sphere.sdk.customers">Customer</a></dt>
@@ -3322,6 +3322,8 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/types/CustomFieldsDraft.html#getFields--">getFields()</a></span> - Method in class io.sphere.sdk.types.<a href="io/sphere/sdk/types/CustomFieldsDraft.html" title="class in io.sphere.sdk.types">CustomFieldsDraft</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/types/customupdateactions/SetCustomTypeBase.html#getFields--">getFields()</a></span> - Method in class io.sphere.sdk.types.customupdateactions.<a href="io/sphere/sdk/types/customupdateactions/SetCustomTypeBase.html" title="class in io.sphere.sdk.types.customupdateactions">SetCustomTypeBase</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/types/CustomFields.html#getFieldsJsonMap--">getFieldsJsonMap()</a></span> - Method in class io.sphere.sdk.types.<a href="io/sphere/sdk/types/CustomFields.html" title="class in io.sphere.sdk.types">CustomFields</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/http/FileHttpRequestBody.html#getFile--">getFile()</a></span> - Method in class io.sphere.sdk.http.<a href="io/sphere/sdk/http/FileHttpRequestBody.html" title="class in io.sphere.sdk.http">FileHttpRequestBody</a></dt>
 <dd>&nbsp;</dd>
@@ -3827,6 +3829,8 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/discountcodes/DiscountCodeDraft.html#getName--">getName()</a></span> - Method in class io.sphere.sdk.discountcodes.<a href="io/sphere/sdk/discountcodes/DiscountCodeDraft.html" title="class in io.sphere.sdk.discountcodes">DiscountCodeDraft</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/http/NameValuePair.html#getName--">getName()</a></span> - Method in interface io.sphere.sdk.http.<a href="io/sphere/sdk/http/NameValuePair.html" title="interface in io.sphere.sdk.http">NameValuePair</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/CustomLineItemImportDraft.html#getName--">getName()</a></span> - Method in interface io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/CustomLineItemImportDraft.html" title="interface in io.sphere.sdk.orders">CustomLineItemImportDraft</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/LineItemImportDraft.html#getName--">getName()</a></span> - Method in interface io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/LineItemImportDraft.html" title="interface in io.sphere.sdk.orders">LineItemImportDraft</a></dt>
@@ -3967,6 +3971,8 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dd>
 <div class="block">The number of resources not included in the returned list of terms.</div>
 </dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/http/FormUrlEncodedHttpRequestBody.html#getParameters--">getParameters()</a></span> - Method in class io.sphere.sdk.http.<a href="io/sphere/sdk/http/FormUrlEncodedHttpRequestBody.html" title="class in io.sphere.sdk.http">FormUrlEncodedHttpRequestBody</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/commands/updateactions/AddDelivery.html#getParcels--">getParcels()</a></span> - Method in class io.sphere.sdk.orders.commands.updateactions.<a href="io/sphere/sdk/orders/commands/updateactions/AddDelivery.html" title="class in io.sphere.sdk.orders.commands.updateactions">AddDelivery</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/Delivery.html#getParcels--">getParcels()</a></span> - Method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/Delivery.html" title="class in io.sphere.sdk.orders">Delivery</a></dt>
@@ -4780,6 +4786,8 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/customobjects/CustomObjectDraft.html#getValue--">getValue()</a></span> - Method in class io.sphere.sdk.customobjects.<a href="io/sphere/sdk/customobjects/CustomObjectDraft.html" title="class in io.sphere.sdk.customobjects">CustomObjectDraft</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/http/HttpQueryParameter.html#getValue--">getValue()</a></span> - Method in class io.sphere.sdk.http.<a href="io/sphere/sdk/http/HttpQueryParameter.html" title="class in io.sphere.sdk.http">HttpQueryParameter</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/http/NameValuePair.html#getValue--">getValue()</a></span> - Method in interface io.sphere.sdk.http.<a href="io/sphere/sdk/http/NameValuePair.html" title="interface in io.sphere.sdk.http">NameValuePair</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/LocalizedStringEntry.html#getValue--">getValue()</a></span> - Method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/LocalizedStringEntry.html" title="class in io.sphere.sdk.models">LocalizedStringEntry</a></dt>
 <dd>&nbsp;</dd>
@@ -6707,6 +6715,8 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dd>
 <div class="block">Type-safe attribute access</div>
 </dd>
+<dt><a href="io/sphere/sdk/http/NameValuePair.html" title="interface in io.sphere.sdk.http"><span class="typeNameLink">NameValuePair</span></a> - Interface in <a href="io/sphere/sdk/http/package-summary.html">io.sphere.sdk.http</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/QueryPredicate.html#negate--">negate()</a></span> - Method in interface io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/QueryPredicate.html" title="interface in io.sphere.sdk.queries">QueryPredicate</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/utils/MoneyImpl.html#negate--">negate()</a></span> - Method in class io.sphere.sdk.utils.<a href="io/sphere/sdk/utils/MoneyImpl.html" title="class in io.sphere.sdk.utils">MoneyImpl</a></dt>
@@ -7287,8 +7297,12 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/http/FileHttpRequestBody.html#of-java.io.File-">of(File)</a></span> - Static method in class io.sphere.sdk.http.<a href="io/sphere/sdk/http/FileHttpRequestBody.html" title="class in io.sphere.sdk.http">FileHttpRequestBody</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/http/FormUrlEncodedHttpRequestBody.html#of-java.util.Map-">of(Map&lt;String, String&gt;)</a></span> - Static method in class io.sphere.sdk.http.<a href="io/sphere/sdk/http/FormUrlEncodedHttpRequestBody.html" title="class in io.sphere.sdk.http">FormUrlEncodedHttpRequestBody</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/http/FormUrlEncodedHttpRequestBody.html#of-java.util.List-">of(List&lt;NameValuePair&gt;)</a></span> - Static method in class io.sphere.sdk.http.<a href="io/sphere/sdk/http/FormUrlEncodedHttpRequestBody.html" title="class in io.sphere.sdk.http">FormUrlEncodedHttpRequestBody</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/http/FormUrlEncodedHttpRequestBody.html#of-java.util.Map-">of(Map&lt;String, String&gt;)</a></span> - Static method in class io.sphere.sdk.http.<a href="io/sphere/sdk/http/FormUrlEncodedHttpRequestBody.html" title="class in io.sphere.sdk.http">FormUrlEncodedHttpRequestBody</a></dt>
+<dd>
+<div class="block">Creator if the order does not matter and there are no duplicates.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/http/HttpHeaders.html#of-java.util.Map-">of(Map&lt;String, List&lt;String&gt;&gt;)</a></span> - Static method in class io.sphere.sdk.http.<a href="io/sphere/sdk/http/HttpHeaders.html" title="class in io.sphere.sdk.http">HttpHeaders</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/http/HttpHeaders.html#of-java.lang.String-java.lang.String-">of(String, String)</a></span> - Static method in class io.sphere.sdk.http.<a href="io/sphere/sdk/http/HttpHeaders.html" title="class in io.sphere.sdk.http">HttpHeaders</a></dt>
@@ -7316,6 +7330,8 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/http/HttpResponse.html#of-java.lang.Integer-byte:A-io.sphere.sdk.http.HttpRequest-">of(Integer, byte[], HttpRequest)</a></span> - Static method in interface io.sphere.sdk.http.<a href="io/sphere/sdk/http/HttpResponse.html" title="interface in io.sphere.sdk.http">HttpResponse</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/http/HttpResponse.html#of-java.lang.Integer-byte:A-io.sphere.sdk.http.HttpRequest-io.sphere.sdk.http.HttpHeaders-">of(Integer, byte[], HttpRequest, HttpHeaders)</a></span> - Static method in interface io.sphere.sdk.http.<a href="io/sphere/sdk/http/HttpResponse.html" title="interface in io.sphere.sdk.http">HttpResponse</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/http/NameValuePair.html#of-java.lang.String-java.lang.String-">of(String, String)</a></span> - Static method in interface io.sphere.sdk.http.<a href="io/sphere/sdk/http/NameValuePair.html" title="interface in io.sphere.sdk.http">NameValuePair</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/http/StringHttpRequestBody.html#of-java.lang.String-">of(String)</a></span> - Static method in class io.sphere.sdk.http.<a href="io/sphere/sdk/http/StringHttpRequestBody.html" title="class in io.sphere.sdk.http">StringHttpRequestBody</a></dt>
 <dd>&nbsp;</dd>

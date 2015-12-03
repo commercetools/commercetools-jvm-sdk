@@ -136,7 +136,7 @@ extends <a href="../../../../../../io/sphere/sdk/states/relatedupdateactions/Tra
 
         final Review updatedReview = execute(ReviewUpdateCommand.of(review, TransitionState.of(state)));
 
-        assertThat(updatedReview.getState()).isEqualTo(state);
+        assertThat(updatedReview.getState()).isEqualTo(state.toReference());
 
         //check query model
         final Review reviewByState = execute(ReviewQuery.of()
