@@ -142,7 +142,7 @@ extends <a href="../../../../io/sphere/sdk/search/FacetedSearchSupport.html" tit
 <tr id="i1" class="rowColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/FacetedSearchDsl.html" title="type parameter in FacetedSearchDsl">C</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/FacetedSearchDsl.html#plusFacetedSearch-java.util.List-">plusFacetedSearch</a></span>(java.util.List&lt;<a href="../../../../io/sphere/sdk/search/FacetAndFilterExpression.html" title="interface in io.sphere.sdk.search">FacetAndFilterExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/FacetedSearchDsl.html" title="type parameter in FacetedSearchDsl">T</a>&gt;&gt;&nbsp;facetedSearchExpressions)</code>
-<div class="block">Returns an EntitySearch with the new faceted search expression list appended to the existing faceted search (combination of the query parameter <code>facet</code>
+<div class="block">Returns a ResourceSearch with the new faceted search expression list appended to the existing faceted search (combination of the query parameter <code>facet</code>
  with the facet expression and the query parameters <code>filter.facet</code> and <code>filter</code> with the filter expressions).</div>
 </td>
 </tr>
@@ -225,14 +225,14 @@ extends <a href="../../../../io/sphere/sdk/search/FacetedSearchSupport.html" tit
 <li class="blockList">
 <h4>plusFacetedSearch</h4>
 <pre><a href="../../../../io/sphere/sdk/search/FacetedSearchDsl.html" title="type parameter in FacetedSearchDsl">C</a>&nbsp;plusFacetedSearch(java.util.List&lt;<a href="../../../../io/sphere/sdk/search/FacetAndFilterExpression.html" title="interface in io.sphere.sdk.search">FacetAndFilterExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/FacetedSearchDsl.html" title="type parameter in FacetedSearchDsl">T</a>&gt;&gt;&nbsp;facetedSearchExpressions)</pre>
-<div class="block">Returns an EntitySearch with the new faceted search expression list appended to the existing faceted search (combination of the query parameter <code>facet</code>
+<div class="block">Returns a ResourceSearch with the new faceted search expression list appended to the existing faceted search (combination of the query parameter <code>facet</code>
  with the facet expression and the query parameters <code>filter.facet</code> and <code>filter</code> with the filter expressions).
  This enables the behaviour of the faceted search as explained in the <a href="../../../../io/sphere/sdk/meta/SearchDocumentation.html#facetedSearch">documentation</a>.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>facetedSearchExpressions</code> - the new faceted search expression list</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
-<dd>an EntitySearch with the existing faceted search plus the new faceted search list.</dd>
+<dd>a ResourceSearch with the existing faceted search plus the new faceted search list.</dd>
 </dl>
 </li>
 </ul>

@@ -293,7 +293,7 @@ final QueryPredicate&lt;Product&gt; isInCat1 = ProductQueryModel.of().masterData
 final ProductQuery query = ProductQuery.of().withPredicates(nameIsFoo.and(isInCat1));
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/src/test/java/io/sphere/sdk/meta/QueryDocumentationTest.java" target="_blank">test code</a>.</pre></div>
 
- <p>Since the previous queries have a common path you can combine the two queries in a <strong><code>where</code></strong> clause, like below. This is not supported for every entity, though.</p>
+ <p>Since the previous queries have a common path you can combine the two queries in a <strong><code>where</code></strong> clause, like below. This is not supported for every resource, though.</p>
 
  <div id="io-sphere-sdk-meta-QueryDocumentationTest-predicateAndWithWhereExample--%s" class=code-example><pre><code class='java'>final Reference&lt;Category&gt; cat1 = Category.reference("cat1");
 final QueryPredicate&lt;Product&gt; nameIsFooAndIsInCat1 = ProductQueryModel.of().masterData().current()

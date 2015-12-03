@@ -676,7 +676,7 @@
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/commands/ByIdDeleteCommandImpl.html" title="class in io.sphere.sdk.commands"><span class="typeNameLink">ByIdDeleteCommandImpl</span></a>&lt;<a href="io/sphere/sdk/commands/ByIdDeleteCommandImpl.html" title="type parameter in ByIdDeleteCommandImpl">T</a>&gt; - Class in <a href="io/sphere/sdk/commands/package-summary.html">io.sphere.sdk.commands</a></dt>
 <dd>
-<div class="block">Internal base class to implement commands which deletes an entity by ID in SPHERE.IO.</div>
+<div class="block">Internal base class to implement commands which deletes a resource by ID in SPHERE.IO.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/commands/ByIdDeleteCommandImpl.html#ByIdDeleteCommandImpl-io.sphere.sdk.models.Versioned-io.sphere.sdk.client.JsonEndpoint-">ByIdDeleteCommandImpl(Versioned&lt;T&gt;, JsonEndpoint&lt;T&gt;)</a></span> - Constructor for class io.sphere.sdk.commands.<a href="io/sphere/sdk/commands/ByIdDeleteCommandImpl.html" title="class in io.sphere.sdk.commands">ByIdDeleteCommandImpl</a></dt>
 <dd>&nbsp;</dd>
@@ -1427,11 +1427,11 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 </dd>
 <dt><a href="io/sphere/sdk/commands/CreateCommand.html" title="interface in io.sphere.sdk.commands"><span class="typeNameLink">CreateCommand</span></a>&lt;<a href="io/sphere/sdk/commands/CreateCommand.html" title="type parameter in CreateCommand">T</a>&gt; - Interface in <a href="io/sphere/sdk/commands/package-summary.html">io.sphere.sdk.commands</a></dt>
 <dd>
-<div class="block">Command to create an entity in SPHERE.IO.</div>
+<div class="block">Command to create a resource in SPHERE.IO.</div>
 </dd>
 <dt><a href="io/sphere/sdk/commands/CreateCommandImpl.html" title="class in io.sphere.sdk.commands"><span class="typeNameLink">CreateCommandImpl</span></a>&lt;<a href="io/sphere/sdk/commands/CreateCommandImpl.html" title="type parameter in CreateCommandImpl">T</a>,<a href="io/sphere/sdk/commands/CreateCommandImpl.html" title="type parameter in CreateCommandImpl">C</a>&gt; - Class in <a href="io/sphere/sdk/commands/package-summary.html">io.sphere.sdk.commands</a></dt>
 <dd>
-<div class="block">Base class to implement commands which create an entity in SPHERE.IO.</div>
+<div class="block">Base class to implement commands which create an resource in SPHERE.IO.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/commands/CreateCommandImpl.html#CreateCommandImpl-C-java.lang.String-com.fasterxml.jackson.databind.JavaType-">CreateCommandImpl(C, String, JavaType)</a></span> - Constructor for class io.sphere.sdk.commands.<a href="io/sphere/sdk/commands/CreateCommandImpl.html" title="class in io.sphere.sdk.commands">CreateCommandImpl</a></dt>
 <dd>&nbsp;</dd>
@@ -2056,13 +2056,11 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 </dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/client/JsonEndpoint.html#endpoint--">endpoint()</a></span> - Method in class io.sphere.sdk.client.<a href="io/sphere/sdk/client/JsonEndpoint.html" title="class in io.sphere.sdk.client">JsonEndpoint</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/EntityQuery.html#endpoint--">endpoint()</a></span> - Method in interface io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/EntityQuery.html" title="interface in io.sphere.sdk.queries">EntityQuery</a></dt>
-<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/MetaModelQueryDslBuilder.html#endpoint">endpoint</a></span> - Variable in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/MetaModelQueryDslBuilder.html" title="class in io.sphere.sdk.queries">MetaModelQueryDslBuilder</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/MetaModelQueryDslImpl.html#endpoint--">endpoint()</a></span> - Method in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="class in io.sphere.sdk.queries">MetaModelQueryDslImpl</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/search/EntitySearch.html#endpoint--">endpoint()</a></span> - Method in interface io.sphere.sdk.search.<a href="io/sphere/sdk/search/EntitySearch.html" title="interface in io.sphere.sdk.search">EntitySearch</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/ResourceQuery.html#endpoint--">endpoint()</a></span> - Method in interface io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/ResourceQuery.html" title="interface in io.sphere.sdk.queries">ResourceQuery</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/search/MetaModelSearchDslBuilder.html#endpoint">endpoint</a></span> - Variable in class io.sphere.sdk.search.<a href="io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="class in io.sphere.sdk.search">MetaModelSearchDslBuilder</a></dt>
 <dd>&nbsp;</dd>
@@ -2070,11 +2068,7 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/search/model/Bound.html#endpoint--">endpoint()</a></span> - Method in class io.sphere.sdk.search.model.<a href="io/sphere/sdk/search/model/Bound.html" title="class in io.sphere.sdk.search.model">Bound</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="io/sphere/sdk/queries/EntityQuery.html" title="interface in io.sphere.sdk.queries"><span class="typeNameLink">EntityQuery</span></a>&lt;<a href="io/sphere/sdk/queries/EntityQuery.html" title="type parameter in EntityQuery">T</a>&gt; - Interface in <a href="io/sphere/sdk/queries/package-summary.html">io.sphere.sdk.queries</a></dt>
-<dd>
-<div class="block">Queries for entities with getters and copy functions for where, sort, limit and offset</div>
-</dd>
-<dt><a href="io/sphere/sdk/search/EntitySearch.html" title="interface in io.sphere.sdk.search"><span class="typeNameLink">EntitySearch</span></a>&lt;<a href="io/sphere/sdk/search/EntitySearch.html" title="type parameter in EntitySearch">T</a>&gt; - Interface in <a href="io/sphere/sdk/search/package-summary.html">io.sphere.sdk.search</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/search/ResourceSearch.html#endpoint--">endpoint()</a></span> - Method in interface io.sphere.sdk.search.<a href="io/sphere/sdk/search/ResourceSearch.html" title="interface in io.sphere.sdk.search">ResourceSearch</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/QueryModelImpl.html#enumerationQueryModel-java.lang.String-">enumerationQueryModel(String)</a></span> - Method in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/QueryModelImpl.html" title="class in io.sphere.sdk.queries">QueryModelImpl</a></dt>
 <dd>&nbsp;</dd>
@@ -2250,8 +2244,6 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/producttypes/queries/ProductTypeByKeyGet.html#expansionPaths--">expansionPaths()</a></span> - Method in interface io.sphere.sdk.producttypes.queries.<a href="io/sphere/sdk/producttypes/queries/ProductTypeByKeyGet.html" title="interface in io.sphere.sdk.producttypes.queries">ProductTypeByKeyGet</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/EntityQuery.html#expansionPaths--">expansionPaths()</a></span> - Method in interface io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/EntityQuery.html" title="interface in io.sphere.sdk.queries">EntityQuery</a></dt>
-<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/MetaModelGetDsl.html#expansionPaths--">expansionPaths()</a></span> - Method in interface io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/MetaModelGetDsl.html" title="interface in io.sphere.sdk.queries">MetaModelGetDsl</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/MetaModelGetDslBuilder.html#expansionPaths-java.util.List-">expansionPaths(List&lt;ExpansionPath&lt;T&gt;&gt;)</a></span> - Method in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/MetaModelGetDslBuilder.html" title="class in io.sphere.sdk.queries">MetaModelGetDslBuilder</a></dt>
@@ -2263,6 +2255,8 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/MetaModelQueryDslBuilder.html#expansionPaths-java.util.List-">expansionPaths(List&lt;ExpansionPath&lt;T&gt;&gt;)</a></span> - Method in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/MetaModelQueryDslBuilder.html" title="class in io.sphere.sdk.queries">MetaModelQueryDslBuilder</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/MetaModelQueryDslImpl.html#expansionPaths--">expansionPaths()</a></span> - Method in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="class in io.sphere.sdk.queries">MetaModelQueryDslImpl</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/ResourceQuery.html#expansionPaths--">expansionPaths()</a></span> - Method in interface io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/ResourceQuery.html" title="interface in io.sphere.sdk.queries">ResourceQuery</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/search/MetaModelSearchDslBuilder.html#expansionPaths">expansionPaths</a></span> - Variable in class io.sphere.sdk.search.<a href="io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="class in io.sphere.sdk.search">MetaModelSearchDslBuilder</a></dt>
 <dd>&nbsp;</dd>
@@ -2374,11 +2368,11 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/utils/CompletableFutureUtils.html#failed-java.lang.Throwable-">failed(Throwable)</a></span> - Static method in class io.sphere.sdk.utils.<a href="io/sphere/sdk/utils/CompletableFutureUtils.html" title="class in io.sphere.sdk.utils">CompletableFutureUtils</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/EntityQuery.html#fetchTotal--">fetchTotal()</a></span> - Method in interface io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/EntityQuery.html" title="interface in io.sphere.sdk.queries">EntityQuery</a></dt>
-<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/MetaModelQueryDslBuilder.html#fetchTotal-java.lang.Boolean-">fetchTotal(Boolean)</a></span> - Method in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/MetaModelQueryDslBuilder.html" title="class in io.sphere.sdk.queries">MetaModelQueryDslBuilder</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/MetaModelQueryDslImpl.html#fetchTotal--">fetchTotal()</a></span> - Method in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="class in io.sphere.sdk.queries">MetaModelQueryDslImpl</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/ResourceQuery.html#fetchTotal--">fetchTotal()</a></span> - Method in interface io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/ResourceQuery.html" title="interface in io.sphere.sdk.queries">ResourceQuery</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/types/FieldDefinition.html" title="class in io.sphere.sdk.types"><span class="typeNameLink">FieldDefinition</span></a> - Class in <a href="io/sphere/sdk/types/package-summary.html">io.sphere.sdk.types</a></dt>
 <dd>&nbsp;</dd>
@@ -5754,9 +5748,9 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dd>
 <div class="block">Checks if this is the first page of a result.</div>
 </dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/search/EntitySearch.html#isFuzzy--">isFuzzy()</a></span> - Method in interface io.sphere.sdk.search.<a href="io/sphere/sdk/search/EntitySearch.html" title="interface in io.sphere.sdk.search">EntitySearch</a></dt>
-<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/search/MetaModelSearchDslImpl.html#isFuzzy--">isFuzzy()</a></span> - Method in class io.sphere.sdk.search.<a href="io/sphere/sdk/search/MetaModelSearchDslImpl.html" title="class in io.sphere.sdk.search">MetaModelSearchDslImpl</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/search/ResourceSearch.html#isFuzzy--">isFuzzy()</a></span> - Method in interface io.sphere.sdk.search.<a href="io/sphere/sdk/search/ResourceSearch.html" title="interface in io.sphere.sdk.search">ResourceSearch</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/InequalityQueryModel.html#isGreaterThan-V-">isGreaterThan(V)</a></span> - Method in interface io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/InequalityQueryModel.html" title="interface in io.sphere.sdk.queries">InequalityQueryModel</a></dt>
 <dd>&nbsp;</dd>
@@ -6160,21 +6154,21 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dd>
 <div class="block">Creates an interval with all values that are strictly less than the given endpoint.</div>
 </dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/EntityQuery.html#limit--">limit()</a></span> - Method in interface io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/EntityQuery.html" title="interface in io.sphere.sdk.queries">EntityQuery</a></dt>
-<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/MetaModelQueryDslBuilder.html#limit">limit</a></span> - Variable in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/MetaModelQueryDslBuilder.html" title="class in io.sphere.sdk.queries">MetaModelQueryDslBuilder</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/MetaModelQueryDslBuilder.html#limit-java.lang.Long-">limit(Long)</a></span> - Method in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/MetaModelQueryDslBuilder.html" title="class in io.sphere.sdk.queries">MetaModelQueryDslBuilder</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/MetaModelQueryDslImpl.html#limit--">limit()</a></span> - Method in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="class in io.sphere.sdk.queries">MetaModelQueryDslImpl</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/search/EntitySearch.html#limit--">limit()</a></span> - Method in interface io.sphere.sdk.search.<a href="io/sphere/sdk/search/EntitySearch.html" title="interface in io.sphere.sdk.search">EntitySearch</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/ResourceQuery.html#limit--">limit()</a></span> - Method in interface io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/ResourceQuery.html" title="interface in io.sphere.sdk.queries">ResourceQuery</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/search/MetaModelSearchDslBuilder.html#limit">limit</a></span> - Variable in class io.sphere.sdk.search.<a href="io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="class in io.sphere.sdk.search">MetaModelSearchDslBuilder</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/search/MetaModelSearchDslBuilder.html#limit-java.lang.Long-">limit(Long)</a></span> - Method in class io.sphere.sdk.search.<a href="io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="class in io.sphere.sdk.search">MetaModelSearchDslBuilder</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/search/MetaModelSearchDslImpl.html#limit--">limit()</a></span> - Method in class io.sphere.sdk.search.<a href="io/sphere/sdk/search/MetaModelSearchDslImpl.html" title="class in io.sphere.sdk.search">MetaModelSearchDslImpl</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/search/ResourceSearch.html#limit--">limit()</a></span> - Method in interface io.sphere.sdk.search.<a href="io/sphere/sdk/search/ResourceSearch.html" title="interface in io.sphere.sdk.search">ResourceSearch</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/carts/LineItem.html" title="interface in io.sphere.sdk.carts"><span class="typeNameLink">LineItem</span></a> - Interface in <a href="io/sphere/sdk/carts/package-summary.html">io.sphere.sdk.carts</a></dt>
 <dd>
@@ -6483,7 +6477,7 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 </dd>
 <dt><a href="io/sphere/sdk/commands/MetaModelByIdDeleteCommandImpl.html" title="class in io.sphere.sdk.commands"><span class="typeNameLink">MetaModelByIdDeleteCommandImpl</span></a>&lt;<a href="io/sphere/sdk/commands/MetaModelByIdDeleteCommandImpl.html" title="type parameter in MetaModelByIdDeleteCommandImpl">T</a> extends <a href="io/sphere/sdk/models/ResourceView.html" title="interface in io.sphere.sdk.models">ResourceView</a>&lt;<a href="io/sphere/sdk/commands/MetaModelByIdDeleteCommandImpl.html" title="type parameter in MetaModelByIdDeleteCommandImpl">T</a>,<a href="io/sphere/sdk/commands/MetaModelByIdDeleteCommandImpl.html" title="type parameter in MetaModelByIdDeleteCommandImpl">T</a>&gt;,<a href="io/sphere/sdk/commands/MetaModelByIdDeleteCommandImpl.html" title="type parameter in MetaModelByIdDeleteCommandImpl">C</a>,<a href="io/sphere/sdk/commands/MetaModelByIdDeleteCommandImpl.html" title="type parameter in MetaModelByIdDeleteCommandImpl">E</a>&gt; - Class in <a href="io/sphere/sdk/commands/package-summary.html">io.sphere.sdk.commands</a></dt>
 <dd>
-<div class="block">Internal base class to implement commands which deletes an entity by ID in SPHERE.IO.</div>
+<div class="block">Internal base class to implement commands which deletes a resource by ID in SPHERE.IO.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/commands/MetaModelByIdDeleteCommandImpl.html#MetaModelByIdDeleteCommandImpl-io.sphere.sdk.models.Versioned-io.sphere.sdk.client.JsonEndpoint-E-java.util.List-java.util.function.Function-">MetaModelByIdDeleteCommandImpl(Versioned&lt;T&gt;, JsonEndpoint&lt;T&gt;, E, List&lt;ExpansionPath&lt;T&gt;&gt;, Function&lt;MetaModelByIdDeleteCommandBuilder&lt;T, C, E&gt;, C&gt;)</a></span> - Constructor for class io.sphere.sdk.commands.<a href="io/sphere/sdk/commands/MetaModelByIdDeleteCommandImpl.html" title="class in io.sphere.sdk.commands">MetaModelByIdDeleteCommandImpl</a></dt>
 <dd>&nbsp;</dd>
@@ -6497,7 +6491,7 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 </dd>
 <dt><a href="io/sphere/sdk/commands/MetaModelCreateCommandImpl.html" title="class in io.sphere.sdk.commands"><span class="typeNameLink">MetaModelCreateCommandImpl</span></a>&lt;<a href="io/sphere/sdk/commands/MetaModelCreateCommandImpl.html" title="type parameter in MetaModelCreateCommandImpl">T</a>,<a href="io/sphere/sdk/commands/MetaModelCreateCommandImpl.html" title="type parameter in MetaModelCreateCommandImpl">C</a>,<a href="io/sphere/sdk/commands/MetaModelCreateCommandImpl.html" title="type parameter in MetaModelCreateCommandImpl">D</a>,<a href="io/sphere/sdk/commands/MetaModelCreateCommandImpl.html" title="type parameter in MetaModelCreateCommandImpl">E</a>&gt; - Class in <a href="io/sphere/sdk/commands/package-summary.html">io.sphere.sdk.commands</a></dt>
 <dd>
-<div class="block">Internal base class to implement commands which create an entity in SPHERE.IO.</div>
+<div class="block">Internal base class to implement commands which create a resource in SPHERE.IO.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/commands/MetaModelCreateCommandImpl.html#MetaModelCreateCommandImpl-D-io.sphere.sdk.client.JsonEndpoint-java.util.List-E-java.util.function.Function-">MetaModelCreateCommandImpl(D, JsonEndpoint&lt;T&gt;, List&lt;ExpansionPath&lt;T&gt;&gt;, E, Function&lt;MetaModelCreateCommandBuilder&lt;T, C, D, E&gt;, C&gt;)</a></span> - Constructor for class io.sphere.sdk.commands.<a href="io/sphere/sdk/commands/MetaModelCreateCommandImpl.html" title="class in io.sphere.sdk.commands">MetaModelCreateCommandImpl</a></dt>
 <dd>&nbsp;</dd>
@@ -6573,7 +6567,7 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 </dd>
 <dt><a href="io/sphere/sdk/commands/MetaModelUpdateCommandDslImpl.html" title="class in io.sphere.sdk.commands"><span class="typeNameLink">MetaModelUpdateCommandDslImpl</span></a>&lt;<a href="io/sphere/sdk/commands/MetaModelUpdateCommandDslImpl.html" title="type parameter in MetaModelUpdateCommandDslImpl">T</a> extends <a href="io/sphere/sdk/models/ResourceView.html" title="interface in io.sphere.sdk.models">ResourceView</a>&lt;<a href="io/sphere/sdk/commands/MetaModelUpdateCommandDslImpl.html" title="type parameter in MetaModelUpdateCommandDslImpl">T</a>,<a href="io/sphere/sdk/commands/MetaModelUpdateCommandDslImpl.html" title="type parameter in MetaModelUpdateCommandDslImpl">T</a>&gt;,<a href="io/sphere/sdk/commands/MetaModelUpdateCommandDslImpl.html" title="type parameter in MetaModelUpdateCommandDslImpl">C</a> extends <a href="io/sphere/sdk/commands/UpdateCommandDsl.html" title="interface in io.sphere.sdk.commands">UpdateCommandDsl</a>&lt;<a href="io/sphere/sdk/commands/MetaModelUpdateCommandDslImpl.html" title="type parameter in MetaModelUpdateCommandDslImpl">T</a>,<a href="io/sphere/sdk/commands/MetaModelUpdateCommandDslImpl.html" title="type parameter in MetaModelUpdateCommandDslImpl">C</a>&gt;,<a href="io/sphere/sdk/commands/MetaModelUpdateCommandDslImpl.html" title="type parameter in MetaModelUpdateCommandDslImpl">E</a>&gt; - Class in <a href="io/sphere/sdk/commands/package-summary.html">io.sphere.sdk.commands</a></dt>
 <dd>
-<div class="block">Internal base class to implement commands that change one entity in SPHERE.IO.</div>
+<div class="block">Internal base class to implement commands that change one resource in SPHERE.IO.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/commands/MetaModelUpdateCommandDslImpl.html#MetaModelUpdateCommandDslImpl-io.sphere.sdk.models.Versioned-java.util.List-io.sphere.sdk.client.JsonEndpoint-java.util.function.Function-E-">MetaModelUpdateCommandDslImpl(Versioned&lt;T&gt;, List&lt;? extends UpdateAction&lt;T&gt;&gt;, JsonEndpoint&lt;T&gt;, Function&lt;MetaModelUpdateCommandDslBuilder&lt;T, C, E&gt;, C&gt;, E)</a></span> - Constructor for class io.sphere.sdk.commands.<a href="io/sphere/sdk/commands/MetaModelUpdateCommandDslImpl.html" title="class in io.sphere.sdk.commands">MetaModelUpdateCommandDslImpl</a></dt>
 <dd>&nbsp;</dd>
@@ -6641,7 +6635,7 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/search/model/MultiValueSortSearchModel.html" title="class in io.sphere.sdk.search.model"><span class="typeNameLink">MultiValueSortSearchModel</span></a>&lt;<a href="io/sphere/sdk/search/model/MultiValueSortSearchModel.html" title="type parameter in MultiValueSortSearchModel">T</a>&gt; - Class in <a href="io/sphere/sdk/search/model/package-summary.html">io.sphere.sdk.search.model</a></dt>
 <dd>
-<div class="block">A sort model to decide the direction of a model with multiple values per entity.</div>
+<div class="block">A sort model to decide the direction of a model with multiple values per resource.</div>
 </dd>
 <dt><a href="io/sphere/sdk/search/model/MultiValueSortSearchModelFactory.html" title="class in io.sphere.sdk.search.model"><span class="typeNameLink">MultiValueSortSearchModelFactory</span></a>&lt;<a href="io/sphere/sdk/search/model/MultiValueSortSearchModelFactory.html" title="type parameter in MultiValueSortSearchModelFactory">T</a>&gt; - Class in <a href="io/sphere/sdk/search/model/package-summary.html">io.sphere.sdk.search.model</a></dt>
 <dd>
@@ -8480,8 +8474,6 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 </dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/customers/CustomerName.html#ofFirstAndLastName-java.lang.String-java.lang.String-">ofFirstAndLastName(String, String)</a></span> - Static method in class io.sphere.sdk.customers.<a href="io/sphere/sdk/customers/CustomerName.html" title="class in io.sphere.sdk.customers">CustomerName</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/EntityQuery.html#offset--">offset()</a></span> - Method in interface io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/EntityQuery.html" title="interface in io.sphere.sdk.queries">EntityQuery</a></dt>
-<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/MetaModelQueryDslBuilder.html#offset">offset</a></span> - Variable in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/MetaModelQueryDslBuilder.html" title="class in io.sphere.sdk.queries">MetaModelQueryDslBuilder</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/MetaModelQueryDslBuilder.html#offset-java.lang.Long-">offset(Long)</a></span> - Method in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/MetaModelQueryDslBuilder.html" title="class in io.sphere.sdk.queries">MetaModelQueryDslBuilder</a></dt>
@@ -8490,13 +8482,15 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/PagedResult.html#offset">offset</a></span> - Variable in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/PagedResult.html" title="class in io.sphere.sdk.queries">PagedResult</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/search/EntitySearch.html#offset--">offset()</a></span> - Method in interface io.sphere.sdk.search.<a href="io/sphere/sdk/search/EntitySearch.html" title="interface in io.sphere.sdk.search">EntitySearch</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/ResourceQuery.html#offset--">offset()</a></span> - Method in interface io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/ResourceQuery.html" title="interface in io.sphere.sdk.queries">ResourceQuery</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/search/MetaModelSearchDslBuilder.html#offset">offset</a></span> - Variable in class io.sphere.sdk.search.<a href="io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="class in io.sphere.sdk.search">MetaModelSearchDslBuilder</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/search/MetaModelSearchDslBuilder.html#offset-java.lang.Long-">offset(Long)</a></span> - Method in class io.sphere.sdk.search.<a href="io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="class in io.sphere.sdk.search">MetaModelSearchDslBuilder</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/search/MetaModelSearchDslImpl.html#offset--">offset()</a></span> - Method in class io.sphere.sdk.search.<a href="io/sphere/sdk/search/MetaModelSearchDslImpl.html" title="class in io.sphere.sdk.search">MetaModelSearchDslImpl</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/search/ResourceSearch.html#offset--">offset()</a></span> - Method in interface io.sphere.sdk.search.<a href="io/sphere/sdk/search/ResourceSearch.html" title="interface in io.sphere.sdk.search">ResourceSearch</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/attributes/AttributeAccess.html#ofInteger--">ofInteger()</a></span> - Static method in interface io.sphere.sdk.products.attributes.<a href="io/sphere/sdk/products/attributes/AttributeAccess.html" title="interface in io.sphere.sdk.products.attributes">AttributeAccess</a></dt>
 <dd>&nbsp;</dd>
@@ -9480,7 +9474,7 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/search/FacetedSearchDsl.html#plusFacetedSearch-java.util.List-">plusFacetedSearch(List&lt;FacetAndFilterExpression&lt;T&gt;&gt;)</a></span> - Method in interface io.sphere.sdk.search.<a href="io/sphere/sdk/search/FacetedSearchDsl.html" title="interface in io.sphere.sdk.search">FacetedSearchDsl</a></dt>
 <dd>
-<div class="block">Returns an EntitySearch with the new faceted search expression list appended to the existing faceted search (combination of the query parameter <code>facet</code>
+<div class="block">Returns a ResourceSearch with the new faceted search expression list appended to the existing faceted search (combination of the query parameter <code>facet</code>
  with the facet expression and the query parameters <code>filter.facet</code> and <code>filter</code> with the filter expressions).</div>
 </dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/search/FacetedSearchDsl.html#plusFacetedSearch-io.sphere.sdk.search.FacetAndFilterExpression-">plusFacetedSearch(FacetAndFilterExpression&lt;T&gt;)</a></span> - Method in interface io.sphere.sdk.search.<a href="io/sphere/sdk/search/FacetedSearchDsl.html" title="interface in io.sphere.sdk.search">FacetedSearchDsl</a></dt>
@@ -9522,7 +9516,7 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/search/FacetDsl.html#plusFacets-java.util.List-">plusFacets(List&lt;FacetExpression&lt;T&gt;&gt;)</a></span> - Method in interface io.sphere.sdk.search.<a href="io/sphere/sdk/search/FacetDsl.html" title="interface in io.sphere.sdk.search">FacetDsl</a></dt>
 <dd>
-<div class="block">Returns an EntitySearch with the new facet expression list appended to the existing facets (query parameter <code>facet</code>).</div>
+<div class="block">Returns a ResourceSearch with the new facet expression list appended to the existing facets (query parameter <code>facet</code>).</div>
 </dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/search/FacetDsl.html#plusFacets-io.sphere.sdk.search.FacetExpression-">plusFacets(FacetExpression&lt;T&gt;)</a></span> - Method in interface io.sphere.sdk.search.<a href="io/sphere/sdk/search/FacetDsl.html" title="interface in io.sphere.sdk.search">FacetDsl</a></dt>
 <dd>
@@ -9664,11 +9658,11 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/MetaModelQueryDslBuilder.html#predicate">predicate</a></span> - Variable in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/MetaModelQueryDslBuilder.html" title="class in io.sphere.sdk.queries">MetaModelQueryDslBuilder</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/EntityQuery.html#predicates--">predicates()</a></span> - Method in interface io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/EntityQuery.html" title="interface in io.sphere.sdk.queries">EntityQuery</a></dt>
-<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/MetaModelQueryDslBuilder.html#predicates-java.util.List-">predicates(List&lt;QueryPredicate&lt;T&gt;&gt;)</a></span> - Method in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/MetaModelQueryDslBuilder.html" title="class in io.sphere.sdk.queries">MetaModelQueryDslBuilder</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/MetaModelQueryDslImpl.html#predicates--">predicates()</a></span> - Method in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="class in io.sphere.sdk.queries">MetaModelQueryDslImpl</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/ResourceQuery.html#predicates--">predicates()</a></span> - Method in interface io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/ResourceQuery.html" title="interface in io.sphere.sdk.queries">ResourceQuery</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/client/HttpRequestIntent.html#prefixPath-java.lang.String-">prefixPath(String)</a></span> - Method in class io.sphere.sdk.client.<a href="io/sphere/sdk/client/HttpRequestIntent.html" title="class in io.sphere.sdk.client">HttpRequestIntent</a></dt>
 <dd>&nbsp;</dd>
@@ -10482,11 +10476,17 @@ CompletionStage&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execu
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/ResourceImpl.html#ResourceImpl-java.lang.String-java.lang.Long-java.time.ZonedDateTime-java.time.ZonedDateTime-">ResourceImpl(String, Long, ZonedDateTime, ZonedDateTime)</a></span> - Constructor for class io.sphere.sdk.models.<a href="io/sphere/sdk/models/ResourceImpl.html" title="class in io.sphere.sdk.models">ResourceImpl</a></dt>
 <dd>&nbsp;</dd>
+<dt><a href="io/sphere/sdk/queries/ResourceQuery.html" title="interface in io.sphere.sdk.queries"><span class="typeNameLink">ResourceQuery</span></a>&lt;<a href="io/sphere/sdk/queries/ResourceQuery.html" title="type parameter in ResourceQuery">T</a>&gt; - Interface in <a href="io/sphere/sdk/queries/package-summary.html">io.sphere.sdk.queries</a></dt>
+<dd>
+<div class="block">Queries for entities with getters and copy functions for where, sort, limit and offset</div>
+</dd>
 <dt><a href="io/sphere/sdk/queries/ResourceQueryModel.html" title="interface in io.sphere.sdk.queries"><span class="typeNameLink">ResourceQueryModel</span></a>&lt;<a href="io/sphere/sdk/queries/ResourceQueryModel.html" title="type parameter in ResourceQueryModel">T</a>&gt; - Interface in <a href="io/sphere/sdk/queries/package-summary.html">io.sphere.sdk.queries</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/queries/ResourceQueryModelImpl.html" title="class in io.sphere.sdk.queries"><span class="typeNameLink">ResourceQueryModelImpl</span></a>&lt;<a href="io/sphere/sdk/queries/ResourceQueryModelImpl.html" title="type parameter in ResourceQueryModelImpl">T</a>&gt; - Class in <a href="io/sphere/sdk/queries/package-summary.html">io.sphere.sdk.queries</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/ResourceQueryModelImpl.html#ResourceQueryModelImpl-io.sphere.sdk.queries.QueryModel-java.lang.String-">ResourceQueryModelImpl(QueryModel&lt;T&gt;, String)</a></span> - Constructor for class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/ResourceQueryModelImpl.html" title="class in io.sphere.sdk.queries">ResourceQueryModelImpl</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="io/sphere/sdk/search/ResourceSearch.html" title="interface in io.sphere.sdk.search"><span class="typeNameLink">ResourceSearch</span></a>&lt;<a href="io/sphere/sdk/search/ResourceSearch.html" title="type parameter in ResourceSearch">T</a>&gt; - Interface in <a href="io/sphere/sdk/search/package-summary.html">io.sphere.sdk.search</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/Cart.html#resourceTypeId--">resourceTypeId()</a></span> - Static method in interface io.sphere.sdk.carts.<a href="io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts">Cart</a></dt>
 <dd>&nbsp;</dd>
@@ -11193,7 +11193,7 @@ CompletionStage&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execu
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/search/model/SingleValueSortSearchModel.html" title="class in io.sphere.sdk.search.model"><span class="typeNameLink">SingleValueSortSearchModel</span></a>&lt;<a href="io/sphere/sdk/search/model/SingleValueSortSearchModel.html" title="type parameter in SingleValueSortSearchModel">T</a>&gt; - Class in <a href="io/sphere/sdk/search/model/package-summary.html">io.sphere.sdk.search.model</a></dt>
 <dd>
-<div class="block">A sort model to decide the direction of a model with just one value per entity</div>
+<div class="block">A sort model to decide the direction of a model with just one value per resource</div>
 </dd>
 <dt><a href="io/sphere/sdk/search/model/SingleValueSortSearchModelFactory.html" title="class in io.sphere.sdk.search.model"><span class="typeNameLink">SingleValueSortSearchModelFactory</span></a>&lt;<a href="io/sphere/sdk/search/model/SingleValueSortSearchModelFactory.html" title="type parameter in SingleValueSortSearchModelFactory">T</a>&gt; - Class in <a href="io/sphere/sdk/search/model/package-summary.html">io.sphere.sdk.search.model</a></dt>
 <dd>
@@ -11237,8 +11237,6 @@ CompletionStage&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execu
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/search/ProductProjectionSearchModel.html#sort--">sort()</a></span> - Method in class io.sphere.sdk.products.search.<a href="io/sphere/sdk/products/search/ProductProjectionSearchModel.html" title="class in io.sphere.sdk.products.search">ProductProjectionSearchModel</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/EntityQuery.html#sort--">sort()</a></span> - Method in interface io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/EntityQuery.html" title="interface in io.sphere.sdk.queries">EntityQuery</a></dt>
-<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/IntegerQuerySortingModel.html#sort-io.sphere.sdk.queries.QuerySortDirection-">sort(QuerySortDirection)</a></span> - Method in interface io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/IntegerQuerySortingModel.html" title="interface in io.sphere.sdk.queries">IntegerQuerySortingModel</a></dt>
 <dd>
 <div class="block"><span class="deprecatedLabel">Deprecated.</span></div>
@@ -11258,6 +11256,8 @@ CompletionStage&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execu
 <div class="block"><span class="deprecatedLabel">Deprecated.</span></div>
 </dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/QuerySortingModel.html#sort--">sort()</a></span> - Method in interface io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/QuerySortingModel.html" title="interface in io.sphere.sdk.queries">QuerySortingModel</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/ResourceQuery.html#sort--">sort()</a></span> - Method in interface io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/ResourceQuery.html" title="interface in io.sphere.sdk.queries">ResourceQuery</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/StringQuerySortingModel.html#sort-io.sphere.sdk.queries.QuerySortDirection-">sort(QuerySortDirection)</a></span> - Method in interface io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/StringQuerySortingModel.html" title="interface in io.sphere.sdk.queries">StringQuerySortingModel</a></dt>
 <dd>
@@ -11519,7 +11519,7 @@ CompletionStage&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execu
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/states/State.html" title="interface in io.sphere.sdk.states"><span class="typeNameLink">State</span></a> - Interface in <a href="io/sphere/sdk/states/package-summary.html">io.sphere.sdk.states</a></dt>
 <dd>
-<div class="block">A State represents a state of a particular entity (defines a finite state machine).</div>
+<div class="block">A State represents a state of a particular resource (defines a finite state machine).</div>
 </dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/taxcategories/TaxRateBuilder.html#state-java.lang.String-">state(String)</a></span> - Method in class io.sphere.sdk.taxcategories.<a href="io/sphere/sdk/taxcategories/TaxRateBuilder.html" title="class in io.sphere.sdk.taxcategories">TaxRateBuilder</a></dt>
 <dd>&nbsp;</dd>
@@ -11739,13 +11739,13 @@ CompletionStage&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execu
 </dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/reviews/ReviewDraftBuilder.html#text-java.lang.String-">text(String)</a></span> - Method in class io.sphere.sdk.reviews.<a href="io/sphere/sdk/reviews/ReviewDraftBuilder.html" title="class in io.sphere.sdk.reviews">ReviewDraftBuilder</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/search/EntitySearch.html#text--">text()</a></span> - Method in interface io.sphere.sdk.search.<a href="io/sphere/sdk/search/EntitySearch.html" title="interface in io.sphere.sdk.search">EntitySearch</a></dt>
-<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/search/MetaModelSearchDslBuilder.html#text">text</a></span> - Variable in class io.sphere.sdk.search.<a href="io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="class in io.sphere.sdk.search">MetaModelSearchDslBuilder</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/search/MetaModelSearchDslBuilder.html#text-io.sphere.sdk.models.LocalizedStringEntry-">text(LocalizedStringEntry)</a></span> - Method in class io.sphere.sdk.search.<a href="io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="class in io.sphere.sdk.search">MetaModelSearchDslBuilder</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/search/MetaModelSearchDslImpl.html#text--">text()</a></span> - Method in class io.sphere.sdk.search.<a href="io/sphere/sdk/search/MetaModelSearchDslImpl.html" title="class in io.sphere.sdk.search">MetaModelSearchDslImpl</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/search/ResourceSearch.html#text--">text()</a></span> - Method in interface io.sphere.sdk.search.<a href="io/sphere/sdk/search/ResourceSearch.html" title="interface in io.sphere.sdk.search">ResourceSearch</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/models/TextInputHint.html" title="enum in io.sphere.sdk.models"><span class="typeNameLink">TextInputHint</span></a> - Enum in <a href="io/sphere/sdk/models/package-summary.html">io.sphere.sdk.models</a></dt>
 <dd>&nbsp;</dd>
@@ -12284,7 +12284,7 @@ assertThat(type.getFieldDefinitions()).containsExactly(stringFieldDefinition);
 </dd>
 <dt><a href="io/sphere/sdk/commands/UpdateActionImpl.html" title="class in io.sphere.sdk.commands"><span class="typeNameLink">UpdateActionImpl</span></a>&lt;<a href="io/sphere/sdk/commands/UpdateActionImpl.html" title="type parameter in UpdateActionImpl">T</a>&gt; - Class in <a href="io/sphere/sdk/commands/package-summary.html">io.sphere.sdk.commands</a></dt>
 <dd>
-<div class="block">Operation which can be performed to change the state of an entity in SPHERE.IO.</div>
+<div class="block">Operation which can be performed to change the state of a resource in SPHERE.IO.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/commands/UpdateActionImpl.html#UpdateActionImpl-java.lang.String-">UpdateActionImpl(String)</a></span> - Constructor for class io.sphere.sdk.commands.<a href="io/sphere/sdk/commands/UpdateActionImpl.html" title="class in io.sphere.sdk.commands">UpdateActionImpl</a></dt>
 <dd>&nbsp;</dd>
@@ -12298,7 +12298,7 @@ assertThat(type.getFieldDefinitions()).containsExactly(stringFieldDefinition);
 </dd>
 <dt><a href="io/sphere/sdk/commands/UpdateCommandDslImpl.html" title="class in io.sphere.sdk.commands"><span class="typeNameLink">UpdateCommandDslImpl</span></a>&lt;<a href="io/sphere/sdk/commands/UpdateCommandDslImpl.html" title="type parameter in UpdateCommandDslImpl">T</a> extends <a href="io/sphere/sdk/models/ResourceView.html" title="interface in io.sphere.sdk.models">ResourceView</a>&lt;<a href="io/sphere/sdk/commands/UpdateCommandDslImpl.html" title="type parameter in UpdateCommandDslImpl">T</a>,<a href="io/sphere/sdk/commands/UpdateCommandDslImpl.html" title="type parameter in UpdateCommandDslImpl">T</a>&gt;,<a href="io/sphere/sdk/commands/UpdateCommandDslImpl.html" title="type parameter in UpdateCommandDslImpl">C</a> extends <a href="io/sphere/sdk/commands/UpdateCommandDsl.html" title="interface in io.sphere.sdk.commands">UpdateCommandDsl</a>&lt;<a href="io/sphere/sdk/commands/UpdateCommandDslImpl.html" title="type parameter in UpdateCommandDslImpl">T</a>,<a href="io/sphere/sdk/commands/UpdateCommandDslImpl.html" title="type parameter in UpdateCommandDslImpl">C</a>&gt;&gt; - Class in <a href="io/sphere/sdk/commands/package-summary.html">io.sphere.sdk.commands</a></dt>
 <dd>
-<div class="block">Internal base class to implement commands that change one entity in SPHERE.IO.</div>
+<div class="block">Internal base class to implement commands that change one resource in SPHERE.IO.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/commands/UpdateCommandDslImpl.html#UpdateCommandDslImpl-io.sphere.sdk.models.Versioned-java.util.List-io.sphere.sdk.client.JsonEndpoint-java.util.function.Function-">UpdateCommandDslImpl(Versioned&lt;T&gt;, List&lt;? extends UpdateAction&lt;T&gt;&gt;, JsonEndpoint&lt;T&gt;, Function&lt;UpdateCommandDslBuilder&lt;T, C&gt;, C&gt;)</a></span> - Constructor for class io.sphere.sdk.commands.<a href="io/sphere/sdk/commands/UpdateCommandDslImpl.html" title="class in io.sphere.sdk.commands">UpdateCommandDslImpl</a></dt>
 <dd>&nbsp;</dd>
@@ -12998,7 +12998,7 @@ the order they are declared.</div>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/search/SearchDsl.html#withFuzzy-java.lang.Boolean-">withFuzzy(Boolean)</a></span> - Method in interface io.sphere.sdk.search.<a href="io/sphere/sdk/search/SearchDsl.html" title="interface in io.sphere.sdk.search">SearchDsl</a></dt>
 <dd>
-<div class="block">Returns an EntitySearch with mofified fuzzyParameter.</div>
+<div class="block">Returns an ResourceSearch with mofified fuzzyParameter.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/Address.html#withId-java.lang.String-">withId(String)</a></span> - Method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/Address.html" title="class in io.sphere.sdk.models">Address</a></dt>
 <dd>&nbsp;</dd>
