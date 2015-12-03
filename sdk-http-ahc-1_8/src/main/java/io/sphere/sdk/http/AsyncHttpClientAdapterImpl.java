@@ -69,7 +69,8 @@ final class AsyncHttpClientAdapterImpl extends Base implements AsyncHttpClientAd
                 final long length = file.length();
                 builder.addHeader(HttpHeaders.CONTENT_LENGTH, "" + length);
             } else if (body instanceof FormUrlEncodedHttpRequestBody) {
-                ((FormUrlEncodedHttpRequestBody) body).getData().forEach((name, value) -> builder.addParameter(name, value));
+                final FormUrlEncodedHttpRequestBody formUrlEncodedHttpRequestBody = (FormUrlEncodedHttpRequestBody) body;
+                formUrlEncodedHttpRequestBody.getParameters().forEach(pair -> builder.addParameter(pair.getName(), pair.getValue()));
             }
         });
         final Request ahcRequest = builder.build();

@@ -78,7 +78,8 @@ final class DefaultAsyncHttpClientAdapterImpl implements AsyncHttpClientAdapter 
             } else if (body instanceof FileHttpRequestBody) {
                 builder.setBody(((FileHttpRequestBody) body).getFile());
             } else if (body instanceof FormUrlEncodedHttpRequestBody) {
-                ((FormUrlEncodedHttpRequestBody) body).getData().forEach((name, value) -> builder.addFormParam(name, value));
+                final FormUrlEncodedHttpRequestBody formUrlEncodedHttpRequestBody = (FormUrlEncodedHttpRequestBody) body;
+                formUrlEncodedHttpRequestBody.getParameters().forEach(pair -> builder.addFormParam(pair.getName(), pair.getValue()));
             }
         });
         final Request build = builder.build();

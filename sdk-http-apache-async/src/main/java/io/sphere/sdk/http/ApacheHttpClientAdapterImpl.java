@@ -106,9 +106,9 @@ final class ApacheHttpClientAdapterImpl extends Base implements ApacheHttpClient
     }
 
     private static HttpEntity urlEncodedOf(final FormUrlEncodedHttpRequestBody body) {
-        final List<BasicNameValuePair> values = body.getData().entrySet()
+        final List<BasicNameValuePair> values = body.getParameters()
                 .stream()
-                .map(entry -> new BasicNameValuePair(entry.getKey(), entry.getValue()))
+                .map(entry -> new BasicNameValuePair(entry.getName(), entry.getValue()))
                 .collect(Collectors.toList());
         try {
             return new UrlEncodedFormEntity(values);
