@@ -17,6 +17,7 @@ import io.sphere.sdk.customobjects.queries.CustomObjectByKeyGet;
 import io.sphere.sdk.customobjects.queries.CustomObjectQuery;
 import io.sphere.sdk.expansion.ExpansionPath;
 import io.sphere.sdk.http.ApacheHttpClientAdapter;
+import io.sphere.sdk.http.FormUrlEncodedHttpRequestBody;
 import io.sphere.sdk.http.HttpResponse;
 import io.sphere.sdk.http.AsyncHttpClientAdapter;
 import io.sphere.sdk.models.Address;
@@ -69,6 +70,14 @@ import java.util.function.Function;
  <li class=fixed-in-release></li>
  </ul>
  -->
+
+ <h3>Upcoming Release</h3>
+ <li class=change-in-release>Http core: {@link io.sphere.sdk.http.FormUrlEncodedHttpRequestBody} did not respect the order of elements and possible duplicates.
+ Use  {@link io.sphere.sdk.http.FormUrlEncodedHttpRequestBody#of(List)} for construction and {@link FormUrlEncodedHttpRequestBody#getParameters()} for getting the data.
+ {@link FormUrlEncodedHttpRequestBody#getData()} is deprecated.</li>
+
+
+
 
  <h3 class=released-version id="v1_0_0_M22">1.0.0-M22 (01.12.2015)</h3>
  <ul>
