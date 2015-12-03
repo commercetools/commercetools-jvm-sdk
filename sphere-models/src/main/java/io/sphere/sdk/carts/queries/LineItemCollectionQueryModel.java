@@ -2,6 +2,7 @@ package io.sphere.sdk.carts.queries;
 
 import io.sphere.sdk.carts.Cart;
 import io.sphere.sdk.channels.Channel;
+import io.sphere.sdk.products.queries.PriceQueryModel;
 import io.sphere.sdk.products.queries.ProductVariantQueryModel;
 import io.sphere.sdk.queries.*;
 
@@ -27,4 +28,6 @@ public interface LineItemCollectionQueryModel<T> extends QueryModel<T>, Collecti
     LocalizedStringQueryModel<T> name();
 
     ProductVariantQueryModel<T> variant();
+
+    PriceQueryModel<T> price();
 }

@@ -1,6 +1,8 @@
 package io.sphere.sdk.carts.queries;
 
 import io.sphere.sdk.channels.Channel;
+import io.sphere.sdk.products.queries.PriceCollectionQueryModel;
+import io.sphere.sdk.products.queries.PriceQueryModel;
 import io.sphere.sdk.products.queries.ProductVariantQueryModel;
 import io.sphere.sdk.queries.*;
 
@@ -47,5 +49,10 @@ final class LineItemCollectionQueryModelImpl<T> extends QueryModelImpl<T> implem
     @Override
     public ProductVariantQueryModel<T> variant() {
         return new ProductVariantQueryModel<>(this, "variant");
+    }
+
+    @Override
+    public PriceQueryModel<T> price() {
+        return new PriceCollectionQueryModel<>(this, "price");
     }
 }

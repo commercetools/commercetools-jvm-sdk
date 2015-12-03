@@ -6,9 +6,11 @@ import io.sphere.sdk.carts.commands.CartUpdateCommand;
 import io.sphere.sdk.carts.commands.updateactions.AddDiscountCode;
 import io.sphere.sdk.carts.commands.updateactions.RemoveDiscountCode;
 import io.sphere.sdk.discountcodes.DiscountCodeInfo;
+import io.sphere.sdk.products.Price;
 import io.sphere.sdk.products.queries.ProductProjectionByIdGet;
 import io.sphere.sdk.queries.QueryPredicate;
 import io.sphere.sdk.test.IntegrationTest;
+import org.javamoney.moneta.function.MonetaryUtil;
 import org.junit.Test;
 
 import javax.money.MonetaryAmount;
@@ -110,6 +112,8 @@ public class CartQueryTest extends IntegrationTest {
         withFilledCart(client(), cart -> {
             final LineItem lineItem = cart.getLineItems().get(0);
             final String englishName = lineItem.getName().get(Locale.ENGLISH);
+            final Price price = lineItem.getPrice();
+            final Long centAmount = price.getValue().query(MonetaryUtil.minorUnits());
             final CartQuery query = CartQuery.of()
                     .withLimit(1L)
                     .withPredicates(m ->
@@ -117,6 +121,10 @@ public class CartQueryTest extends IntegrationTest {
                                     .and(m.lineItems().quantity().is(lineItem.getQuantity()))
                                     .and(m.lineItems().name().locale(ENGLISH).is(englishName))
                                     .and(m.lineItems().variant().sku().is(lineItem.getVariant().getSku()))
+                                    .and(m.lineItems().price().discounted().isNotPresent())
+                                    .and(m.lineItems().price().id().is(price.getId()))
+                                    .and(m.lineItems().price().value().centAmount().is(centAmount))
+                                    .and(m.lineItems().price().country().is(price.getCountry()))
                     );
             final Cart loadedCart = execute(query.plusPredicates(m -> m.id().is(cart.getId()))).head().get();
             assertThat(loadedCart.getId()).isEqualTo(cart.getId());
