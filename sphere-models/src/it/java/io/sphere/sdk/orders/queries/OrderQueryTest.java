@@ -1,5 +1,6 @@
 package io.sphere.sdk.orders.queries;
 
+import com.neovisionaries.i18n.CountryCode;
 import io.sphere.sdk.carts.CartFixtures;
 import io.sphere.sdk.channels.Channel;
 import io.sphere.sdk.customers.CustomerFixtures;
@@ -21,6 +22,7 @@ import static io.sphere.sdk.channels.ChannelRole.ORDER_EXPORT;
 import static io.sphere.sdk.orders.OrderFixtures.withOrder;
 import static io.sphere.sdk.test.SphereTestUtils.assertEventually;
 import static io.sphere.sdk.test.SphereTestUtils.randomKey;
+import static java.util.Collections.singletonList;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class OrderQueryTest extends IntegrationTest {
@@ -72,6 +74,16 @@ public class OrderQueryTest extends IntegrationTest {
     @Test
     public void country() throws Exception {
         assertOrderIsFoundWithPredicate(order -> MODEL.country().is(CartFixtures.DEFAULT_COUNTRY));
+    }
+
+    @Test
+    public void countryIsIn() throws Exception {
+        assertOrderIsFoundWithPredicate(order -> MODEL.country().isIn(singletonList(CartFixtures.DEFAULT_COUNTRY)));
+    }
+
+    @Test
+    public void countryIsNot() throws Exception {
+        assertOrderIsFoundWithPredicate(order -> MODEL.country().isNot(CountryCode.AF));
     }
 
     @Test
