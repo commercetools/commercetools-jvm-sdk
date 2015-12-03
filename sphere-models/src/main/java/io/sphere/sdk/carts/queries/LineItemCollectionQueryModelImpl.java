@@ -1,6 +1,7 @@
 package io.sphere.sdk.carts.queries;
 
 import io.sphere.sdk.channels.Channel;
+import io.sphere.sdk.products.queries.ProductVariantQueryModel;
 import io.sphere.sdk.queries.*;
 
 final class LineItemCollectionQueryModelImpl<T> extends QueryModelImpl<T> implements LineItemCollectionQueryModel<T> {
@@ -41,5 +42,10 @@ final class LineItemCollectionQueryModelImpl<T> extends QueryModelImpl<T> implem
     @Override
     public LocalizedStringQueryModel<T> name() {
         return localizedStringQuerySortingModel("name");
+    }
+
+    @Override
+    public ProductVariantQueryModel<T> variant() {
+        return new ProductVariantQueryModel<>(this, "variant");
     }
 }

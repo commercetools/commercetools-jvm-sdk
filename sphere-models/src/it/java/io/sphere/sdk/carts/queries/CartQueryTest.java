@@ -116,6 +116,7 @@ public class CartQueryTest extends IntegrationTest {
                             m.lineItems().id().is(lineItem.getId())
                                     .and(m.lineItems().quantity().is(lineItem.getQuantity()))
                                     .and(m.lineItems().name().locale(ENGLISH).is(englishName))
+                                    .and(m.lineItems().variant().sku().is(lineItem.getVariant().getSku()))
                     );
             final Cart loadedCart = execute(query.plusPredicates(m -> m.id().is(cart.getId()))).head().get();
             assertThat(loadedCart.getId()).isEqualTo(cart.getId());

@@ -1,6 +1,8 @@
 package io.sphere.sdk.carts.queries;
 
+import io.sphere.sdk.carts.Cart;
 import io.sphere.sdk.channels.Channel;
+import io.sphere.sdk.products.queries.ProductVariantQueryModel;
 import io.sphere.sdk.queries.*;
 
 /**
@@ -23,4 +25,6 @@ public interface LineItemCollectionQueryModel<T> extends QueryModel<T>, Collecti
     LongQuerySortingModel<T> quantity();
 
     LocalizedStringQueryModel<T> name();
+
+    ProductVariantQueryModel<T> variant();
 }
