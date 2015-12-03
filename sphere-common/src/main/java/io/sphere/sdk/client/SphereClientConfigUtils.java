@@ -4,6 +4,7 @@ import org.apache.commons.lang3.tuple.ImmutablePair;
 
 import java.util.Map;
 import java.util.Objects;
+import java.util.Properties;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -27,7 +28,7 @@ final class SphereClientConfigUtils {
                 .filter(pair -> null != pair.getRight())
                 .collect(Collectors.toMap(ImmutablePair::getLeft, ImmutablePair::getRight));
 
-        final Function<String, String> throwExceptionOnAbsent = key -> throwException(prefix, buildEnvKey(prefix, key));
+        final Function<String, String> throwExceptionOnAbsent = key -> throwEnvException(prefix, buildEnvKey(prefix, key));
 
         final String projectKey = configMap.computeIfAbsent(ENVIRONMENT_VARIABLE_PROJECT_KEY_SUFFIX, throwExceptionOnAbsent);
         final String clientId = configMap.computeIfAbsent(ENVIRONMENT_VARIABLE_CLIENT_ID_SUFFIX, throwExceptionOnAbsent);
@@ -38,7 +39,7 @@ final class SphereClientConfigUtils {
         return SphereClientConfig.of(projectKey, clientId, clientSecret).withApiUrl(apiUrl).withAuthUrl(authUrl);
     }
 
-    private static String throwException(final String prefix, final String missingKey) {
+    private static String throwEnvException(final String prefix, final String missingKey) {
         throw new IllegalArgumentException(
                 "Missing environment variable '" + missingKey + "'.\n" +
                         "Usage:\n" +
@@ -53,5 +54,41 @@ final class SphereClientConfigUtils {
 
     private static String buildEnvKey(final String prefix, final String suffix) {
         return prefix + "_" + suffix;
+    }
+
+    private static String buildPropKey(final String prefix, final String suffix) {
+        return prefix + suffix;
+    }
+
+    public static SphereClientConfig ofProperties(final Properties properties, final String prefix) {
+        final String projectKey = extract(properties, prefix, PROPERTIES_KEY_PROJECT_KEY_SUFFIX);
+        final String clientId = extract(properties, prefix, PROPERTIES_KEY_CLIENT_ID_SUFFIX);
+        final String clientSecret = extract(properties, prefix, PROPERTIES_KEY_CLIENT_SECRET_SUFFIX);
+        final String apiUrl = extract(properties, prefix, PROPERTIES_KEY_API_URL_SUFFIX, API_URL);
+        final String authUrl = extract(properties, prefix, PROPERTIES_KEY_AUTH_URL_SUFFIX, API_URL);
+        return SphereClientConfig.of(projectKey, clientId, clientSecret).withApiUrl(apiUrl).withAuthUrl(authUrl);
+    }
+
+    private static String extract(final Properties properties, final String prefix, final String suffix, final String defaultValue) {
+        return properties.getProperty(buildPropKey(prefix, suffix), defaultValue);
+    }
+
+    private static String extract(final Properties properties, final String prefix, final String suffix) {
+        final String mapKey = buildPropKey(prefix, suffix);
+        return properties.computeIfAbsent(mapKey, key -> throwPropertiesException(prefix, mapKey)).toString();
+    }
+
+    private static String throwPropertiesException(final String prefix, final String missingKey) {
+        throw new IllegalArgumentException(
+                "Missing property value '" + missingKey + "'.\n" +
+                        "Usage:\n" +
+                        "" + buildPropKey(prefix, PROPERTIES_KEY_PROJECT_KEY_SUFFIX) + "=YOUR project key\n" +
+                        "" + buildPropKey(prefix, PROPERTIES_KEY_CLIENT_ID_SUFFIX) + "=YOUR client id\n" +
+                        "" + buildPropKey(prefix, PROPERTIES_KEY_CLIENT_SECRET_SUFFIX) + "=YOUR client secret\n" +
+                        "#optional:\n" +
+                        "" + buildPropKey(prefix, PROPERTIES_KEY_API_URL_SUFFIX) + "=https://api.sphere.io\n" +
+                        "" + buildPropKey(prefix, PROPERTIES_KEY_AUTH_URL_SUFFIX) + "=https://auth.sphere.io" +
+                        "#don't use quotes for the property values\n"
+        );
     }
 }

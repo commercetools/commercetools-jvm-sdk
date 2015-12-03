@@ -2,6 +2,8 @@ package io.sphere.sdk.client;
 
 import io.sphere.sdk.models.Base;
 
+import java.util.Properties;
+
 import static io.sphere.sdk.client.ClientPackage.API_URL;
 import static io.sphere.sdk.client.ClientPackage.AUTH_URL;
 import static io.sphere.sdk.client.ClientPackage.requireNonBlank;
@@ -16,6 +18,12 @@ public class SphereClientConfig extends Base implements SphereAuthConfig, Sphere
     public static final String ENVIRONMENT_VARIABLE_PROJECT_KEY_SUFFIX = "PROJECT_KEY";
     public static final String ENVIRONMENT_VARIABLE_CLIENT_ID_SUFFIX = "CLIENT_ID";
     public static final String ENVIRONMENT_VARIABLE_CLIENT_SECRET_SUFFIX = "CLIENT_SECRET";
+
+    public static final String PROPERTIES_KEY_API_URL_SUFFIX = "apiUrl";
+    public static final String PROPERTIES_KEY_AUTH_URL_SUFFIX = "authUrl";
+    public static final String PROPERTIES_KEY_PROJECT_KEY_SUFFIX = "projectKey";
+    public static final String PROPERTIES_KEY_CLIENT_ID_SUFFIX = "clientId";
+    public static final String PROPERTIES_KEY_CLIENT_SECRET_SUFFIX = "clientSecret";
 
     private final String projectKey;
     private final String clientId;
@@ -94,5 +102,29 @@ public class SphereClientConfig extends Base implements SphereAuthConfig, Sphere
      */
     public static SphereClientConfig ofEnvironmentVariables(final String prefix) {
         return SphereClientConfigUtils.ofEnvironmentVariables(prefix, System::getenv);
+    }
+
+    /**
+     Creates a {@link SphereClientConfig} using {@link Properties} using {@code prefix} as namespace parameter.
+
+     An example properties file with "commercetools." (including the dot) as {@code prefix}:
+     <pre>{@code
+    commercetools.projectKey=YOUR project key without quotes
+    commercetools.clientId=YOUR client id without quotes
+    commercetools.clientSecret=YOUR client secret without quotes
+    }</pre>
+
+     The possible suffixes are
+     {@value #PROPERTIES_KEY_PROJECT_KEY_SUFFIX},
+     {@value #PROPERTIES_KEY_CLIENT_ID_SUFFIX},
+     {@value #PROPERTIES_KEY_CLIENT_SECRET_SUFFIX},
+     {@value #PROPERTIES_KEY_AUTH_URL_SUFFIX} and
+     {@value #PROPERTIES_KEY_API_URL_SUFFIX}.
+
+     @param prefix prefix of the property keys
+     @return a new {@link SphereClientConfig} containing the values of the properties.
+     */
+    public static SphereClientConfig ofProperties(final Properties properties, final String prefix) {
+        return SphereClientConfigUtils.ofProperties(properties, prefix);
     }
 }
