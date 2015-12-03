@@ -15,6 +15,11 @@ import org.junit.BeforeClass;
 import org.slf4j.LoggerFactory;
 
 import javax.money.CurrencyUnit;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.UncheckedIOException;
+import java.util.Properties;
 import java.util.function.Consumer;
 
 public abstract class IntegrationTest {
@@ -36,7 +41,8 @@ public abstract class IntegrationTest {
         }
     }
 
-    protected static TestClient client() {
+    protected synchronized static TestClient client() {
+        setupClient();
         return client;
     }
 
@@ -59,7 +65,22 @@ public abstract class IntegrationTest {
     }
 
     public static SphereClientConfig getSphereClientConfig() {
+        final File file = new File("integrationtest.properties");
+        return file.exists() ? loadViaProperties(file) : loadViaEnvironmentArgs();
+    }
+
+    private static SphereClientConfig loadViaEnvironmentArgs() {
         return SphereClientConfig.ofEnvironmentVariables("JVM_SDK_IT");
+    }
+
+    private static SphereClientConfig loadViaProperties(final File file) {
+        try (final FileInputStream fileInputStream = new FileInputStream(file)) {
+            final Properties properties = new Properties();
+            properties.load(fileInputStream);
+            return SphereClientConfig.ofProperties(properties, "");
+        } catch (final IOException e) {
+            throw new UncheckedIOException(e);
+        }
     }
 
     protected static <T> T execute(final SphereRequest<T> sphereRequest) {

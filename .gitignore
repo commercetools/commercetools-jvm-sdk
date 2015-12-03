@@ -35,3 +35,5 @@ play-sdk/.project
 .project
 
 .classpath
+
+integrationtest.properties

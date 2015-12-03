@@ -89,3 +89,23 @@ see https://github.com/sphereio/sphere-jvm-sdk-experimental-java-add-ons
 1. JVM SDK test dependencies and build tools can be updated because they don't affect the production code.
 1. The JVM SDK has an abstract HTTP client layer so old or new http client versions can be used.
 1. class names containing the word "Experimental" can change at any time.
+
+## Executing integration tests
+
+1. create a file "integrationtest.properties" inside the project root
+1. fill it with the credentials of a new empty commercetools project which is for testing;
+
+```
+projectKey=YOUR project key without quotes
+clientId=YOUR client id without quotes
+clientSecret=YOUR client secret without quotes
+apiUrl=https://api.sphere.io
+authUrl=https://auth.sphere.io
+```
+
+1. use `sbt it:test` to execute all integration tests
+1. use `sbt "it:testOnly *Products*"` to execute all integration test classes which have "Product" in the class name
+1. for running the unit tests use `sbt test`
+1. alternatively use your IDE to execute the tests
+    * Eclipse: generate the project files with `sbt "eclipse with-source=true"`, see also https://www.playframework.com/documentation/2.4.x/IDE
+    * IntelliJ IDEA has a SBT plugin
