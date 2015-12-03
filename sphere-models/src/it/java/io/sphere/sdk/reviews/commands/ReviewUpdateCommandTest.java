@@ -68,7 +68,6 @@ public class ReviewUpdateCommandTest extends IntegrationTest {
         });
     }
 
-    @Ignore
     @Test
     public void transitionState() throws Exception {
         withStateByBuilder(client(), builder -> builder.type(StateType.REVIEW_STATE).initial(true), state -> {
@@ -76,7 +75,7 @@ public class ReviewUpdateCommandTest extends IntegrationTest {
 
                 final Review updatedReview = execute(ReviewUpdateCommand.of(review, TransitionState.of(state)));
 
-                assertThat(updatedReview.getState()).isEqualTo(state);
+                assertThat(updatedReview.getState()).isEqualTo(state.toReference());
 
                 //check query model
                 final Review reviewByState = execute(ReviewQuery.of()
