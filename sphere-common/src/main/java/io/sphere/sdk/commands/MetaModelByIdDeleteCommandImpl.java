@@ -25,7 +25,7 @@ import static java.util.Objects.requireNonNull;
  * @param <T> the type of the result of the command
  *
  */
-public abstract class MetaModelByIdDeleteCommandImpl<T extends ResourceView<T, T>, C, E> extends CommandImpl<T> implements ByIdDeleteCommand<T>, MetaModelExpansionDslExpansionModelRead<T, C, E> {
+public abstract class MetaModelByIdDeleteCommandImpl<T extends ResourceView<T, T>, C, E> extends CommandImpl<T> implements MetaModelExpansionDslExpansionModelRead<T, C, E>, DeleteCommand<T> {
     final Versioned<T> versioned;
     final JsonEndpoint<T> endpoint;
     final E expansionModel;
