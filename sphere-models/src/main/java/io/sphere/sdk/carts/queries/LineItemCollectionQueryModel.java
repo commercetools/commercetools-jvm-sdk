@@ -21,4 +21,6 @@ public interface LineItemCollectionQueryModel<T> extends QueryModel<T>, Collecti
     StringQueryModel<T> id();
 
     LongQuerySortingModel<T> quantity();
+
+    LocalizedStringQueryModel<T> name();
 }

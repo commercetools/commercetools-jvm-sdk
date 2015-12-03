@@ -37,4 +37,9 @@ final class LineItemCollectionQueryModelImpl<T> extends QueryModelImpl<T> implem
     public LongQuerySortingModel<T> quantity() {
         return longModel("quantity");
     }
+
+    @Override
+    public LocalizedStringQueryModel<T> name() {
+        return localizedStringQuerySortingModel("name");
+    }
 }

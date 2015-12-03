@@ -13,6 +13,8 @@ import org.junit.Test;
 
 import javax.money.MonetaryAmount;
 
+import java.util.Locale;
+
 import static io.sphere.sdk.carts.CartFixtures.*;
 import static io.sphere.sdk.customers.CustomerFixtures.*;
 import static org.assertj.core.api.Assertions.*;
@@ -107,12 +109,14 @@ public class CartQueryTest extends IntegrationTest {
     public void lineItemModel() throws Exception {
         withFilledCart(client(), cart -> {
             final LineItem lineItem = cart.getLineItems().get(0);
+            final String englishName = lineItem.getName().get(Locale.ENGLISH);
             final CartQuery query = CartQuery.of()
                     .withLimit(1L)
-                    .withPredicates(m -> {
-                        return m.lineItems().id().is(lineItem.getId())
-                                .and(m.lineItems().quantity().is(lineItem.getQuantity()));
-                    });
+                    .withPredicates(m ->
+                            m.lineItems().id().is(lineItem.getId())
+                                    .and(m.lineItems().quantity().is(lineItem.getQuantity()))
+                                    .and(m.lineItems().name().locale(ENGLISH).is(englishName))
+                    );
             final Cart loadedCart = execute(query.plusPredicates(m -> m.id().is(cart.getId()))).head().get();
             assertThat(loadedCart.getId()).isEqualTo(cart.getId());
         });
