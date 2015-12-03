@@ -11,6 +11,7 @@ import io.sphere.sdk.test.IntegrationTest;
 import org.junit.Test;
 
 import static io.sphere.sdk.orders.OrderFixtures.withOrderAndReturnInfo;
+import static io.sphere.sdk.test.SphereTestUtils.assertEventually;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class OrderMessagesTest extends IntegrationTest {
@@ -24,11 +25,13 @@ public class OrderMessagesTest extends IntegrationTest {
                             .withExpansionPaths(m -> m.resource())
                             .withLimit(1L)
                             .forMessageType(OrderStateChangedMessage.MESSAGE_HINT);
-            final PagedQueryResult<OrderStateChangedMessage> pagedQueryResult = execute(query);
-            final OrderStateChangedMessage message = pagedQueryResult.head().get();
-            assertThat(message.getOrderState()).isEqualTo(OrderState.CANCELLED);
-            assertThat(message.getResource().getObj()).isNotNull();
-            assertThat(message.getResource().getId()).isEqualTo(order.getId());
+            assertEventually(() -> {
+                final PagedQueryResult<OrderStateChangedMessage> pagedQueryResult = execute(query);
+                final OrderStateChangedMessage message = pagedQueryResult.head().get();
+                assertThat(message.getOrderState()).isEqualTo(OrderState.CANCELLED);
+                assertThat(message.getResource().getObj()).isNotNull();
+                assertThat(message.getResource().getId()).isEqualTo(order.getId());
+            });
 
             return updatedOrder;
         }));
