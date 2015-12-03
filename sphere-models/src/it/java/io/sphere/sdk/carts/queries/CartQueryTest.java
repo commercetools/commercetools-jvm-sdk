@@ -1,10 +1,13 @@
 package io.sphere.sdk.carts.queries;
 
 import io.sphere.sdk.carts.Cart;
+import io.sphere.sdk.carts.LineItem;
 import io.sphere.sdk.carts.commands.CartUpdateCommand;
 import io.sphere.sdk.carts.commands.updateactions.AddDiscountCode;
 import io.sphere.sdk.carts.commands.updateactions.RemoveDiscountCode;
 import io.sphere.sdk.discountcodes.DiscountCodeInfo;
+import io.sphere.sdk.products.queries.ProductProjectionByIdGet;
+import io.sphere.sdk.queries.QueryPredicate;
 import io.sphere.sdk.test.IntegrationTest;
 import org.junit.Test;
 
@@ -96,6 +99,20 @@ public class CartQueryTest extends IntegrationTest {
                                     .and(m.taxedPrice().totalGross().centAmount().is(centAmountOf(cart.getTaxedPrice().getTotalGross()))
                                     .and(m.id().is(cart.getId())))
                     )).head().get();
+            assertThat(loadedCart.getId()).isEqualTo(cart.getId());
+        });
+    }
+
+    @Test
+    public void lineItemModel() throws Exception {
+        withFilledCart(client(), cart -> {
+            final LineItem lineItem = cart.getLineItems().get(0);
+            final CartQuery query = CartQuery.of()
+                    .withLimit(1L)
+                    .withPredicates(m -> {
+                        return m.lineItems().id().is(lineItem.getId());
+                    });
+            final Cart loadedCart = execute(query.plusPredicates(m -> m.id().is(cart.getId()))).head().get();
             assertThat(loadedCart.getId()).isEqualTo(cart.getId());
         });
     }

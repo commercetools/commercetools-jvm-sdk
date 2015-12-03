@@ -1,10 +1,7 @@
 package io.sphere.sdk.carts.queries;
 
 import io.sphere.sdk.channels.Channel;
-import io.sphere.sdk.queries.CollectionQueryModel;
-import io.sphere.sdk.queries.ReferenceOptionalQueryModel;
-import io.sphere.sdk.queries.QueryModel;
-import io.sphere.sdk.queries.QueryPredicate;
+import io.sphere.sdk.queries.*;
 
 /**
  * Query predicate build for line items.
@@ -20,4 +17,6 @@ public interface LineItemCollectionQueryModel<T> extends QueryModel<T>, Collecti
 
     @Override
     QueryPredicate<T> isNotEmpty();
+
+    StringQueryModel<T> id();
 }
