@@ -37,6 +37,10 @@ public abstract class CartLikeQueryModel<T> extends ResourceQueryModelImpl<T> {
     }
 
     public LineItemCollectionQueryModel<T> lineItems() {
-        return new LineItemCollectionQueryModelImpl<>(this, "lineItems");
+        return new LineItemLikeCollectionQueryModelImpl<>(this, "lineItems");
+    }
+
+    public CustomLineItemCollectionQueryModel<T> customLineItems() {
+        return new LineItemLikeCollectionQueryModelImpl<>(this, "customLineItems");
     }
 }

@@ -1,6 +1,5 @@
 package io.sphere.sdk.carts.queries;
 
-import io.sphere.sdk.carts.Cart;
 import io.sphere.sdk.channels.Channel;
 import io.sphere.sdk.products.queries.PriceQueryModel;
 import io.sphere.sdk.products.queries.ProductVariantQueryModel;
@@ -10,10 +9,20 @@ import io.sphere.sdk.queries.*;
  * Query predicate build for line items.
  * @param <T> query context
  */
-public interface LineItemCollectionQueryModel<T> extends QueryModel<T>, CollectionQueryModel<T> {
+public interface LineItemCollectionQueryModel<T> extends LineItemLikeCollectionQueryModel<T> {
     ReferenceOptionalQueryModel<T, Channel> supplyChannel();
 
     ReferenceOptionalQueryModel<T, Channel> distributionChannel();
+
+    ProductVariantQueryModel<T> variant();
+
+    PriceQueryModel<T> price();
+
+    @Override
+    DiscountedLineItemPriceForQuantityQueryModel<T> discountedPricePerQuantity();
+
+    @Override
+    StringQueryModel<T> id();
 
     @Override
     QueryPredicate<T> isEmpty();
@@ -21,17 +30,12 @@ public interface LineItemCollectionQueryModel<T> extends QueryModel<T>, Collecti
     @Override
     QueryPredicate<T> isNotEmpty();
 
-    StringQueryModel<T> id();
-
-    LongQuerySortingModel<T> quantity();
-
+    @Override
     LocalizedStringQueryModel<T> name();
 
-    ProductVariantQueryModel<T> variant();
+    @Override
+    LongQuerySortingModel<T> quantity();
 
-    PriceQueryModel<T> price();
-
+    @Override
     ItemStateCollectionQueryModel<T> state();
-
-    DiscountedLineItemPriceForQuantityQueryModel<T> discountedPricePerQuantity();
 }

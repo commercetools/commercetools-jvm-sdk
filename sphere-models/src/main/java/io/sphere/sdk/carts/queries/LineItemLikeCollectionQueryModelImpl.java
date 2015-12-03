@@ -6,8 +6,8 @@ import io.sphere.sdk.products.queries.PriceQueryModel;
 import io.sphere.sdk.products.queries.ProductVariantQueryModel;
 import io.sphere.sdk.queries.*;
 
-final class LineItemCollectionQueryModelImpl<T> extends QueryModelImpl<T> implements LineItemCollectionQueryModel<T> {
-    public LineItemCollectionQueryModelImpl(final QueryModel<T> parent, final String pathSegment) {
+final class LineItemLikeCollectionQueryModelImpl<T> extends QueryModelImpl<T> implements LineItemCollectionQueryModel<T>, CustomLineItemCollectionQueryModel<T> {
+    public LineItemLikeCollectionQueryModelImpl(final QueryModel<T> parent, final String pathSegment) {
         super(parent, pathSegment);
     }
 
@@ -64,5 +64,15 @@ final class LineItemCollectionQueryModelImpl<T> extends QueryModelImpl<T> implem
     @Override
     public DiscountedLineItemPriceForQuantityQueryModel<T> discountedPricePerQuantity() {
         return new DiscountedLineItemPriceForQuantityQueryModelImpl<>(this, "discountedPricePerQuantity");
+    }
+
+    @Override
+    public MoneyQueryModel<T> money() {
+        return moneyModel("money");
+    }
+
+    @Override
+    public StringQueryModel<T> slug() {
+        return stringModel("slug");
     }
 }

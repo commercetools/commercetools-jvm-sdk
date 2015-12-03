@@ -48,4 +48,9 @@ public class CartQueryModel extends CartLikeQueryModel<Cart> {
     public MoneyQueryModel<Cart> totalPrice() {
         return super.totalPrice();
     }
+
+    @Override
+    public CustomLineItemCollectionQueryModel<Cart> customLineItems() {
+        return super.customLineItems();
+    }
 }

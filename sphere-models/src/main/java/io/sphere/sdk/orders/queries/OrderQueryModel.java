@@ -2,6 +2,7 @@ package io.sphere.sdk.orders.queries;
 
 import io.sphere.sdk.carts.Cart;
 import io.sphere.sdk.carts.queries.CartLikeQueryModel;
+import io.sphere.sdk.carts.queries.CustomLineItemCollectionQueryModel;
 import io.sphere.sdk.carts.queries.LineItemCollectionQueryModel;
 import io.sphere.sdk.carts.queries.TaxedPriceOptionalQueryModel;
 import io.sphere.sdk.customergroups.CustomerGroup;
@@ -82,5 +83,10 @@ public class OrderQueryModel extends CartLikeQueryModel<Order> {
 
     public ReferenceOptionalQueryModel<Order, State> state() {
         return referenceOptionalModel("state");
+    }
+
+    @Override
+    public CustomLineItemCollectionQueryModel<Order> customLineItems() {
+        return super.customLineItems();
     }
 }

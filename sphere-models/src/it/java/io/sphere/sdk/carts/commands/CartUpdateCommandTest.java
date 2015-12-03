@@ -153,6 +153,11 @@ public class CartUpdateCommandTest extends IntegrationTest {
             assertThat(state).hasSize(1);
             assertThat(state).extracting("quantity").containsOnly(quantity);
             assertThat(customLineItem.getTaxCategory()).isEqualTo(taxCategory.toReference());
+
+            final CartQuery cartQuery = CartQuery.of()
+                    .withPredicates(m -> m.customLineItems().slug().is(customLineItem.getSlug())
+                            .and(m.id().is(cart.getId())));
+            assertThat(execute(cartQuery).head().get().getId()).isEqualTo(cart.getId());
         });
     }
 
