@@ -28,7 +28,7 @@ public class CustomFieldsDraft {
     }
 
     public static CustomFieldsDraft ofCustomFields(final CustomFields custom) {
-        return CustomFieldsDraft.ofTypeIdAndJson(custom.getType().getTypeId(), custom.getFieldsMap());
+        return CustomFieldsDraft.ofTypeIdAndJson(custom.getType().getTypeId(), custom.getFieldsJsonMap());
     }
 
     public static CustomFieldsDraft ofTypeIdAndJson(final String typeId, final Map<String, JsonNode> fields) {
