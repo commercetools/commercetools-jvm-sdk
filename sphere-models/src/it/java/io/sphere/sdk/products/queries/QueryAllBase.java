@@ -30,6 +30,7 @@ public abstract class QueryAllBase extends IntegrationTest {
 
     @BeforeClass
     public static void createProducts() {
+        ProductFixtures.deleteProductsAndProductTypes(client());
         productType = ProductTypeFixtures.createProductType(client(), "QueryAllProductsDemo");
         final ProductVariantDraft masterVariant = ProductVariantDraftBuilder.of().build();
         final Stream<Product> productStream = Stream.generate(() -> {

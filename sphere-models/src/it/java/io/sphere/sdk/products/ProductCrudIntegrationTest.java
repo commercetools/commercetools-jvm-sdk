@@ -16,7 +16,6 @@ import io.sphere.sdk.client.SphereRequest;
 import io.sphere.sdk.suppliers.SimpleCottonTShirtProductDraftSupplier;
 import io.sphere.sdk.suppliers.TShirtProductTypeDraftSupplier;
 import io.sphere.sdk.test.IntegrationTest;
-import io.sphere.sdk.utils.IterableUtils;
 import io.sphere.sdk.utils.MoneyImpl;
 import io.sphere.sdk.utils.StringUtils;
 import org.junit.AfterClass;
@@ -47,13 +46,13 @@ public class ProductCrudIntegrationTest extends IntegrationTest {
     @BeforeClass
     public static void prepare() throws Exception {
         PagedQueryResult<ProductType> queryResult = execute(ProductTypeQuery.of().byName(productTypeName));
-        queryResult.getResults().forEach(pt -> deleteProductsAndProductType(client(), pt));
+        queryResult.getResults().forEach(pt -> deleteProductsProductTypeAndProductDiscounts(client(), pt));
         productType = execute(ProductTypeCreateCommand.of(new TShirtProductTypeDraftSupplier(productTypeName).get()));
     }
 
     @AfterClass
     public static void cleanUp() {
-        deleteProductsAndProductType(client(), productType);
+        deleteProductsProductTypeAndProductDiscounts(client(), productType);
         productType = null;
     }
 

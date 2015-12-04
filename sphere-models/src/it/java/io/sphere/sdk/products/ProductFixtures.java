@@ -2,6 +2,8 @@ package io.sphere.sdk.products;
 
 import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.client.TestClient;
+import io.sphere.sdk.productdiscounts.commands.ProductDiscountDeleteCommand;
+import io.sphere.sdk.productdiscounts.queries.ProductDiscountQuery;
 import io.sphere.sdk.products.attributes.AttributeDraft;
 import io.sphere.sdk.products.commands.ProductCreateCommand;
 import io.sphere.sdk.products.commands.ProductDeleteCommand;
@@ -12,6 +14,7 @@ import io.sphere.sdk.products.queries.ProductQuery;
 import io.sphere.sdk.products.queries.ProductQueryModel;
 import io.sphere.sdk.producttypes.ProductType;
 import io.sphere.sdk.producttypes.ProductTypeFixtures;
+import io.sphere.sdk.producttypes.queries.ProductTypeQuery;
 import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.queries.QueryPredicate;
 import io.sphere.sdk.search.SearchKeyword;
@@ -36,6 +39,7 @@ import static io.sphere.sdk.producttypes.ProductTypeFixtures.*;
 import static io.sphere.sdk.test.SphereTestUtils.*;
 import static java.util.Arrays.asList;
 import static java.util.Collections.singletonList;
+import static java.util.stream.Collectors.toList;
 
 public class ProductFixtures {
     public static final PriceDraft PRICE = PriceDraft.of(MoneyImpl.of(new BigDecimal("12.34"), EUR)).withCountry(DE);
@@ -128,12 +132,24 @@ public class ProductFixtures {
         });
     }
 
-    public static void deleteProductsAndProductType(final TestClient client, final ProductType productType) {
+    public static void deleteProductsProductTypeAndProductDiscounts(final TestClient client, final ProductType productType) {
+        client.execute(ProductDiscountQuery.of().withLimit(500L)).getResults()
+                .forEach(discount -> client.execute(ProductDiscountDeleteCommand.of(discount)));
+
         if (productType != null) {
             QueryPredicate<Product> ofProductType = ProductQueryModel.of().productType().is(productType);
-            ProductQuery productsOfProductTypeQuery = ProductQuery.of().withPredicates(ofProductType);
-            List<Product> products = client.execute(productsOfProductTypeQuery).getResults();
-            products.forEach(
+            ProductQuery productsOfProductTypeQuery = ProductQuery.of().withPredicates(ofProductType).withLimit(500L);
+            final List<Product> products = client.execute(productsOfProductTypeQuery).getResults();
+            final List<Product> unpublishedProducts = products.stream().map(
+                    product -> {
+                        if (product.getMasterData().isPublished()) {
+                            return client.execute(ProductUpdateCommand.of(product, Unpublish.of()));
+                        } else {
+                            return product;
+                        }
+                    }
+            ).collect(toList());
+            unpublishedProducts.forEach(
                     product -> client.execute(ProductDeleteCommand.of(product))
             );
             deleteProductType(client, productType);
@@ -192,5 +208,10 @@ public class ProductFixtures {
             final Product updatedProduct = op.apply(product);
             client.execute(ProductDeleteCommand.of(updatedProduct));
         });
+    }
+
+    public static void deleteProductsAndProductTypes(final TestClient client) {
+        final List<ProductType> productTypes = client.execute(ProductTypeQuery.of().withLimit(500L)).getResults();
+        productTypes.forEach(productType -> deleteProductsProductTypeAndProductDiscounts(client, productType));
     }
 }
