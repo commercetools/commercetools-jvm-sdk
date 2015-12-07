@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10};
+var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -118,7 +118,7 @@ var activeTableTab = "activeTableTab";
 <li class="blockList">
 <dl>
 <dt>All Implemented Interfaces:</dt>
-<dd><a href="../../../../../io/sphere/sdk/products/queries/PriceQueryModel.html" title="interface in io.sphere.sdk.products.queries">PriceQueryModel</a>&lt;T&gt;, <a href="../../../../../io/sphere/sdk/queries/CollectionQueryModel.html" title="interface in io.sphere.sdk.queries">CollectionQueryModel</a>&lt;T&gt;, <a href="../../../../../io/sphere/sdk/queries/QueryModel.html" title="interface in io.sphere.sdk.queries">QueryModel</a>&lt;T&gt;</dd>
+<dd><a href="../../../../../io/sphere/sdk/products/queries/PriceQueryModel.html" title="interface in io.sphere.sdk.products.queries">PriceQueryModel</a>&lt;T&gt;, <a href="../../../../../io/sphere/sdk/queries/CollectionQueryModel.html" title="interface in io.sphere.sdk.queries">CollectionQueryModel</a>&lt;T&gt;, <a href="../../../../../io/sphere/sdk/queries/QueryModel.html" title="interface in io.sphere.sdk.queries">QueryModel</a>&lt;T&gt;, <a href="../../../../../io/sphere/sdk/types/queries/WithCustomQueryModel.html" title="interface in io.sphere.sdk.types.queries">WithCustomQueryModel</a>&lt;T&gt;</dd>
 </dl>
 <hr>
 <br>
@@ -170,26 +170,30 @@ implements <a href="../../../../../io/sphere/sdk/queries/CollectionQueryModel.ht
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/products/queries/PriceCollectionQueryModel.html#country--">country</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i2" class="altColor">
+<td class="colFirst"><code><a href="../../../../../io/sphere/sdk/types/queries/CustomQueryModel.html" title="interface in io.sphere.sdk.types.queries">CustomQueryModel</a>&lt;<a href="../../../../../io/sphere/sdk/products/queries/PriceCollectionQueryModel.html" title="type parameter in PriceCollectionQueryModel">T</a>&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/products/queries/PriceCollectionQueryModel.html#custom--">custom</a></span>()</code>&nbsp;</td>
+</tr>
+<tr id="i3" class="rowColor">
 <td class="colFirst"><code><a href="../../../../../io/sphere/sdk/queries/ReferenceOptionalQueryModel.html" title="interface in io.sphere.sdk.queries">ReferenceOptionalQueryModel</a>&lt;<a href="../../../../../io/sphere/sdk/products/queries/PriceCollectionQueryModel.html" title="type parameter in PriceCollectionQueryModel">T</a>,<a href="../../../../../io/sphere/sdk/customergroups/CustomerGroup.html" title="interface in io.sphere.sdk.customergroups">CustomerGroup</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/products/queries/PriceCollectionQueryModel.html#customerGroup--">customerGroup</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i3" class="rowColor">
+<tr id="i4" class="altColor">
 <td class="colFirst"><code><a href="../../../../../io/sphere/sdk/products/queries/DiscountedPriceOptionalQueryModel.html" title="class in io.sphere.sdk.products.queries">DiscountedPriceOptionalQueryModel</a>&lt;<a href="../../../../../io/sphere/sdk/products/queries/PriceCollectionQueryModel.html" title="type parameter in PriceCollectionQueryModel">T</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/products/queries/PriceCollectionQueryModel.html#discounted--">discounted</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i4" class="altColor">
+<tr id="i5" class="rowColor">
 <td class="colFirst"><code><a href="../../../../../io/sphere/sdk/queries/StringQueryModel.html" title="interface in io.sphere.sdk.queries">StringQueryModel</a>&lt;<a href="../../../../../io/sphere/sdk/products/queries/PriceCollectionQueryModel.html" title="type parameter in PriceCollectionQueryModel">T</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/products/queries/PriceCollectionQueryModel.html#id--">id</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i5" class="rowColor">
+<tr id="i6" class="altColor">
 <td class="colFirst"><code><a href="../../../../../io/sphere/sdk/queries/QueryPredicate.html" title="interface in io.sphere.sdk.queries">QueryPredicate</a>&lt;<a href="../../../../../io/sphere/sdk/products/queries/PriceCollectionQueryModel.html" title="type parameter in PriceCollectionQueryModel">T</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/products/queries/PriceCollectionQueryModel.html#isEmpty--">isEmpty</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i6" class="altColor">
+<tr id="i7" class="rowColor">
 <td class="colFirst"><code><a href="../../../../../io/sphere/sdk/queries/QueryPredicate.html" title="interface in io.sphere.sdk.queries">QueryPredicate</a>&lt;<a href="../../../../../io/sphere/sdk/products/queries/PriceCollectionQueryModel.html" title="type parameter in PriceCollectionQueryModel">T</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/products/queries/PriceCollectionQueryModel.html#isNotEmpty--">isNotEmpty</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i7" class="rowColor">
+<tr id="i8" class="altColor">
 <td class="colFirst"><code><a href="../../../../../io/sphere/sdk/queries/MoneyQueryModel.html" title="interface in io.sphere.sdk.queries">MoneyQueryModel</a>&lt;<a href="../../../../../io/sphere/sdk/products/queries/PriceCollectionQueryModel.html" title="type parameter in PriceCollectionQueryModel">T</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/products/queries/PriceCollectionQueryModel.html#value--">value</a></span>()</code>&nbsp;</td>
 </tr>
@@ -343,13 +347,26 @@ implements <a href="../../../../../io/sphere/sdk/queries/CollectionQueryModel.ht
 <a name="channel--">
 <!--   -->
 </a>
-<ul class="blockListLast">
+<ul class="blockList">
 <li class="blockList">
 <h4>channel</h4>
 <pre>public&nbsp;<a href="../../../../../io/sphere/sdk/queries/ReferenceOptionalQueryModel.html" title="interface in io.sphere.sdk.queries">ReferenceOptionalQueryModel</a>&lt;<a href="../../../../../io/sphere/sdk/products/queries/PriceCollectionQueryModel.html" title="type parameter in PriceCollectionQueryModel">T</a>,<a href="../../../../../io/sphere/sdk/customergroups/CustomerGroup.html" title="interface in io.sphere.sdk.customergroups">CustomerGroup</a>&gt;&nbsp;channel()</pre>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="../../../../../io/sphere/sdk/products/queries/PriceQueryModel.html#channel--">channel</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../io/sphere/sdk/products/queries/PriceQueryModel.html" title="interface in io.sphere.sdk.products.queries">PriceQueryModel</a>&lt;<a href="../../../../../io/sphere/sdk/products/queries/PriceCollectionQueryModel.html" title="type parameter in PriceCollectionQueryModel">T</a>&gt;</code></dd>
+</dl>
+</li>
+</ul>
+<a name="custom--">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>custom</h4>
+<pre>public&nbsp;<a href="../../../../../io/sphere/sdk/types/queries/CustomQueryModel.html" title="interface in io.sphere.sdk.types.queries">CustomQueryModel</a>&lt;<a href="../../../../../io/sphere/sdk/products/queries/PriceCollectionQueryModel.html" title="type parameter in PriceCollectionQueryModel">T</a>&gt;&nbsp;custom()</pre>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../../io/sphere/sdk/types/queries/WithCustomQueryModel.html#custom--">custom</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../io/sphere/sdk/types/queries/WithCustomQueryModel.html" title="interface in io.sphere.sdk.types.queries">WithCustomQueryModel</a>&lt;<a href="../../../../../io/sphere/sdk/products/queries/PriceCollectionQueryModel.html" title="type parameter in PriceCollectionQueryModel">T</a>&gt;</code></dd>
 </dl>
 </li>
 </ul>
