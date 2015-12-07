@@ -58,7 +58,7 @@ public class QueryModelImpl<T> extends Base implements QueryModel<T> {
         return new ReferenceCollectionQueryModelImpl<>(this, pathSegment);
     }
 
-    protected <E extends SphereEnumeration> SphereEnumerationQueryModel<T, E> enumerationQueryModel(final String pathSegment) {
+    protected <E extends SphereEnumeration> SphereEnumerationOptionalQueryModel<T, E> enumerationQueryModel(final String pathSegment) {
         return new SphereEnumerationQueryModelImpl<>(this, pathSegment);
     }
 

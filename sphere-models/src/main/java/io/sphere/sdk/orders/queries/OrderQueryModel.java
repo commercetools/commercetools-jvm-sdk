@@ -1,10 +1,7 @@
 package io.sphere.sdk.orders.queries;
 
 import io.sphere.sdk.carts.Cart;
-import io.sphere.sdk.carts.queries.CartLikeQueryModel;
-import io.sphere.sdk.carts.queries.CustomLineItemCollectionQueryModel;
-import io.sphere.sdk.carts.queries.LineItemCollectionQueryModel;
-import io.sphere.sdk.carts.queries.TaxedPriceOptionalQueryModel;
+import io.sphere.sdk.carts.queries.*;
 import io.sphere.sdk.customergroups.CustomerGroup;
 import io.sphere.sdk.orders.Order;
 import io.sphere.sdk.orders.OrderState;
@@ -88,5 +85,25 @@ public class OrderQueryModel extends CartLikeQueryModel<Order> {
     @Override
     public CustomLineItemCollectionQueryModel<Order> customLineItems() {
         return super.customLineItems();
+    }
+
+    @Override
+    public AddressQueryModel<Order> billingAddress() {
+        return super.billingAddress();
+    }
+
+    @Override
+    public DiscountCodeInfoCollectionQueryModel<Order> discountCodes() {
+        return super.discountCodes();
+    }
+
+    @Override
+    public AddressQueryModel<Order> shippingAddress() {
+        return super.shippingAddress();
+    }
+
+    @Override
+    public CartShippingInfoQueryModel<Order> shippingInfo() {
+        return super.shippingInfo();
     }
 }

@@ -42,6 +42,12 @@ public class CartQueryTest extends IntegrationTest {
             assertThat(discountCodeInfo.getDiscountCode()).isEqualTo(discountCode.toReference());
             assertThat(discountCodeInfo.getDiscountCode().getObj()).isNotNull();
 
+            //query cart by discountCodes
+            final CartQuery cartQuery = CartQuery.of()
+                    .withPredicates(m -> m.discountCodes().discountCode().is(discountCode))
+                    .plusPredicates(m -> m.is(cart));
+            assertThat(execute(cartQuery).head()).contains(loadedCart);
+
             //clean up
             final Cart updatedCart = execute(CartUpdateCommand.of(cartWithCode, RemoveDiscountCode.of(discountCode)));
             assertThat(updatedCart.getDiscountCodes()).isEmpty();

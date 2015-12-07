@@ -1,5 +1,7 @@
 package io.sphere.sdk.queries;
 
+import io.sphere.sdk.models.Identifiable;
+
 public class ResourceQueryModelImpl<T> extends QueryModelImpl<T> implements ResourceQueryModel<T> {
     protected ResourceQueryModelImpl(final QueryModel<T> parent, final String pathSegment) {
         super(parent, pathSegment);
@@ -8,6 +10,11 @@ public class ResourceQueryModelImpl<T> extends QueryModelImpl<T> implements Reso
     @Override
     public final StringQuerySortingModel<T> id() {
         return stringModel("id");
+    }
+
+    @Override
+    public QueryPredicate<T> is(final Identifiable<T> identifiable) {
+        return id().is(identifiable.getId());
     }
 
     @Override

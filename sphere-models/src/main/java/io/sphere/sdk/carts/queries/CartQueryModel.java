@@ -53,4 +53,24 @@ public class CartQueryModel extends CartLikeQueryModel<Cart> {
     public CustomLineItemCollectionQueryModel<Cart> customLineItems() {
         return super.customLineItems();
     }
+
+    @Override
+    public AddressQueryModel<Cart> billingAddress() {
+        return super.billingAddress();
+    }
+
+    @Override
+    public DiscountCodeInfoCollectionQueryModel<Cart> discountCodes() {
+        return super.discountCodes();
+    }
+
+    @Override
+    public AddressQueryModel<Cart> shippingAddress() {
+        return super.shippingAddress();
+    }
+
+    @Override
+    public CartShippingInfoQueryModel<Cart> shippingInfo() {
+        return super.shippingInfo();
+    }
 }
