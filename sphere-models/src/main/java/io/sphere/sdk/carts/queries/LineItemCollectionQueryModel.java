@@ -4,12 +4,13 @@ import io.sphere.sdk.channels.Channel;
 import io.sphere.sdk.products.queries.PriceQueryModel;
 import io.sphere.sdk.products.queries.ProductVariantQueryModel;
 import io.sphere.sdk.queries.*;
+import io.sphere.sdk.types.queries.WithCustomQueryModel;
 
 /**
  * Query predicate build for line items.
  * @param <T> query context
  */
-public interface LineItemCollectionQueryModel<T> extends LineItemLikeCollectionQueryModel<T> {
+public interface LineItemCollectionQueryModel<T> extends LineItemLikeCollectionQueryModel<T>, WithCustomQueryModel<T> {
     ReferenceOptionalQueryModel<T, Channel> supplyChannel();
 
     ReferenceOptionalQueryModel<T, Channel> distributionChannel();

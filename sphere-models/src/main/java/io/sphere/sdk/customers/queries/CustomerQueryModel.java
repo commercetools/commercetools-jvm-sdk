@@ -2,9 +2,13 @@ package io.sphere.sdk.customers.queries;
 
 import io.sphere.sdk.customergroups.CustomerGroup;
 import io.sphere.sdk.customers.Customer;
+import io.sphere.sdk.models.Identifiable;
 import io.sphere.sdk.queries.*;
+import io.sphere.sdk.types.queries.CustomQueryModel;
+import io.sphere.sdk.types.queries.CustomResourceQueryModelImpl;
+import io.sphere.sdk.types.queries.WithCustomQueryModel;
 
-public final class CustomerQueryModel extends ResourceQueryModelImpl<Customer> {
+public final class CustomerQueryModel extends CustomResourceQueryModelImpl<Customer> implements WithCustomQueryModel<Customer> {
 
     public static CustomerQueryModel of() {
         return new CustomerQueryModel(null, null);
@@ -44,5 +48,15 @@ public final class CustomerQueryModel extends ResourceQueryModelImpl<Customer> {
 
     public ReferenceQueryModel<Customer, CustomerGroup> customerGroup() {
         return referenceModel("customerGroup");
+    }
+
+    @Override
+    public CustomQueryModel<Customer> custom() {
+        return super.custom();
+    }
+
+    @Override
+    public QueryPredicate<Customer> is(final Identifiable<Customer> identifiable) {
+        return super.is(identifiable);
     }
 }

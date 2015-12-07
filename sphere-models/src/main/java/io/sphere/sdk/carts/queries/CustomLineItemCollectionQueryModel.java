@@ -1,8 +1,9 @@
 package io.sphere.sdk.carts.queries;
 
 import io.sphere.sdk.queries.*;
+import io.sphere.sdk.types.queries.WithCustomQueryModel;
 
-public interface CustomLineItemCollectionQueryModel<T> extends LineItemLikeCollectionQueryModel<T> {
+public interface CustomLineItemCollectionQueryModel<T> extends LineItemLikeCollectionQueryModel<T>, WithCustomQueryModel<T> {
     @Override
     DiscountedLineItemPriceForQuantityQueryModel<T> discountedPricePerQuantity();
 

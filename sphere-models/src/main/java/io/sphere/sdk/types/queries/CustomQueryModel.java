@@ -5,4 +5,6 @@ import io.sphere.sdk.types.Type;
 
 public interface CustomQueryModel<T> {
     ReferenceQueryModel<T, Type> type();
+
+    FieldsQueryModel<T> fields();
 }

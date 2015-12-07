@@ -7,7 +7,7 @@ import io.sphere.sdk.types.Type;
 
 import javax.annotation.Nullable;
 
-public class CustomQueryModelImpl<T> extends QueryModelImpl<T> implements CustomQueryModel<T> {
+public final class CustomQueryModelImpl<T> extends QueryModelImpl<T> implements CustomQueryModel<T> {
     public CustomQueryModelImpl(@Nullable final QueryModel<T> parent, @Nullable final String pathSegment) {
         super(parent, pathSegment);
     }
@@ -15,5 +15,10 @@ public class CustomQueryModelImpl<T> extends QueryModelImpl<T> implements Custom
     @Override
     public ReferenceQueryModel<T, Type> type() {
         return referenceModel("type");
+    }
+
+    @Override
+    public FieldsQueryModel<T> fields() {
+        return new FieldsQueryModelImpl<>(this, "fields");
     }
 }

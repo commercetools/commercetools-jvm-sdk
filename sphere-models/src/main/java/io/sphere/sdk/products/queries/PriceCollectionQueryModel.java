@@ -2,6 +2,8 @@ package io.sphere.sdk.products.queries;
 
 import io.sphere.sdk.customergroups.CustomerGroup;
 import io.sphere.sdk.queries.*;
+import io.sphere.sdk.types.queries.CustomQueryModel;
+import io.sphere.sdk.types.queries.CustomQueryModelImpl;
 
 import javax.annotation.Nullable;
 
@@ -49,6 +51,12 @@ public final class PriceCollectionQueryModel<T> extends QueryModelImpl<T> implem
     @Override
     public ReferenceOptionalQueryModel<T, CustomerGroup> channel() {
         return referenceOptionalModel("channel");
+    }
+
+
+    @Override
+    public CustomQueryModel<T> custom() {
+        return new CustomQueryModelImpl<>(this, "custom");
     }
 }
 

@@ -5,11 +5,13 @@ import io.sphere.sdk.payments.Payment;
 import io.sphere.sdk.queries.*;
 import io.sphere.sdk.types.queries.CustomQueryModel;
 import io.sphere.sdk.types.queries.CustomQueryModelImpl;
+import io.sphere.sdk.types.queries.CustomResourceQueryModelImpl;
+import io.sphere.sdk.types.queries.WithCustomQueryModel;
 
 /**
  * {@doc.gen summary payments}
  */
-public final class PaymentQueryModel extends ResourceQueryModelImpl<Payment> {
+public final class PaymentQueryModel extends CustomResourceQueryModelImpl<Payment> implements WithCustomQueryModel<Payment> {
 
     public static PaymentQueryModel of() {
         return new PaymentQueryModel(null, null);

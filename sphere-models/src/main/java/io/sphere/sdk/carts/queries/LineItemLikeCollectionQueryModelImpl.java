@@ -5,6 +5,8 @@ import io.sphere.sdk.products.queries.PriceCollectionQueryModel;
 import io.sphere.sdk.products.queries.PriceQueryModel;
 import io.sphere.sdk.products.queries.ProductVariantQueryModel;
 import io.sphere.sdk.queries.*;
+import io.sphere.sdk.types.queries.CustomQueryModel;
+import io.sphere.sdk.types.queries.CustomQueryModelImpl;
 
 final class LineItemLikeCollectionQueryModelImpl<T> extends QueryModelImpl<T> implements LineItemCollectionQueryModel<T>, CustomLineItemCollectionQueryModel<T> {
     public LineItemLikeCollectionQueryModelImpl(final QueryModel<T> parent, final String pathSegment) {
@@ -74,5 +76,11 @@ final class LineItemLikeCollectionQueryModelImpl<T> extends QueryModelImpl<T> im
     @Override
     public StringQueryModel<T> slug() {
         return stringModel("slug");
+    }
+
+
+    @Override
+    public CustomQueryModel<T> custom() {
+        return new CustomQueryModelImpl<>(this, "custom");
     }
 }
