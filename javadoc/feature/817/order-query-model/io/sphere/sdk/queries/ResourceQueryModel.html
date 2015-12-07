@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":6,"i1":6,"i2":6};
+var methods = {"i0":6,"i1":6,"i2":6,"i3":6};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],4:["t3","Abstract Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -136,6 +136,10 @@ var activeTableTab = "activeTableTab";
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/ResourceQueryModel.html#id--">id</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i2" class="altColor">
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/queries/QueryPredicate.html" title="interface in io.sphere.sdk.queries">QueryPredicate</a>&lt;<a href="../../../../io/sphere/sdk/queries/ResourceQueryModel.html" title="type parameter in ResourceQueryModel">T</a>&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/ResourceQueryModel.html#is-io.sphere.sdk.models.Identifiable-">is</a></span>(<a href="../../../../io/sphere/sdk/models/Identifiable.html" title="interface in io.sphere.sdk.models">Identifiable</a>&lt;<a href="../../../../io/sphere/sdk/queries/ResourceQueryModel.html" title="type parameter in ResourceQueryModel">T</a>&gt;&nbsp;identifiable)</code>&nbsp;</td>
+</tr>
+<tr id="i3" class="rowColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/queries/TimestampSortingModel.html" title="interface in io.sphere.sdk.queries">TimestampSortingModel</a>&lt;<a href="../../../../io/sphere/sdk/queries/ResourceQueryModel.html" title="type parameter in ResourceQueryModel">T</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/ResourceQueryModel.html#lastModifiedAt--">lastModifiedAt</a></span>()</code>&nbsp;</td>
 </tr>
@@ -161,6 +165,15 @@ var activeTableTab = "activeTableTab";
 <li class="blockList">
 <h4>id</h4>
 <pre><a href="../../../../io/sphere/sdk/queries/StringQuerySortingModel.html" title="interface in io.sphere.sdk.queries">StringQuerySortingModel</a>&lt;<a href="../../../../io/sphere/sdk/queries/ResourceQueryModel.html" title="type parameter in ResourceQueryModel">T</a>&gt;&nbsp;id()</pre>
+</li>
+</ul>
+<a name="is-io.sphere.sdk.models.Identifiable-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>is</h4>
+<pre><a href="../../../../io/sphere/sdk/queries/QueryPredicate.html" title="interface in io.sphere.sdk.queries">QueryPredicate</a>&lt;<a href="../../../../io/sphere/sdk/queries/ResourceQueryModel.html" title="type parameter in ResourceQueryModel">T</a>&gt;&nbsp;is(<a href="../../../../io/sphere/sdk/models/Identifiable.html" title="interface in io.sphere.sdk.models">Identifiable</a>&lt;<a href="../../../../io/sphere/sdk/queries/ResourceQueryModel.html" title="type parameter in ResourceQueryModel">T</a>&gt;&nbsp;identifiable)</pre>
 </li>
 </ul>
 <a name="createdAt--">

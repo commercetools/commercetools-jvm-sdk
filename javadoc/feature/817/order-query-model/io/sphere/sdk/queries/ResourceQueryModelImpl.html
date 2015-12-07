@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":10,"i1":10,"i2":10,"i3":10};
+var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -49,7 +49,7 @@ var activeTableTab = "activeTableTab";
 <div class="subNav">
 <ul class="navList">
 <li><a href="../../../../io/sphere/sdk/queries/ResourceQueryModel.html" title="interface in io.sphere.sdk.queries"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
-<li><a href="../../../../io/sphere/sdk/queries/SphereEnumerationQueryModel.html" title="interface in io.sphere.sdk.queries"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
+<li><a href="../../../../io/sphere/sdk/queries/SphereEnumerationOptionalQueryModel.html" title="interface in io.sphere.sdk.queries"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">
 <li><a href="../../../../index.html?io/sphere/sdk/queries/ResourceQueryModelImpl.html" target="_top">Frames</a></li>
@@ -176,10 +176,14 @@ implements <a href="../../../../io/sphere/sdk/queries/ResourceQueryModel.html" t
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/ResourceQueryModelImpl.html#id--">id</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i2" class="altColor">
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/queries/QueryPredicate.html" title="interface in io.sphere.sdk.queries">QueryPredicate</a>&lt;<a href="../../../../io/sphere/sdk/queries/ResourceQueryModelImpl.html" title="type parameter in ResourceQueryModelImpl">T</a>&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/ResourceQueryModelImpl.html#is-io.sphere.sdk.models.Identifiable-">is</a></span>(<a href="../../../../io/sphere/sdk/models/Identifiable.html" title="interface in io.sphere.sdk.models">Identifiable</a>&lt;<a href="../../../../io/sphere/sdk/queries/ResourceQueryModelImpl.html" title="type parameter in ResourceQueryModelImpl">T</a>&gt;&nbsp;identifiable)</code>&nbsp;</td>
+</tr>
+<tr id="i3" class="rowColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/queries/TimestampSortingModel.html" title="interface in io.sphere.sdk.queries">TimestampSortingModel</a>&lt;<a href="../../../../io/sphere/sdk/queries/ResourceQueryModelImpl.html" title="type parameter in ResourceQueryModelImpl">T</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/ResourceQueryModelImpl.html#lastModifiedAt--">lastModifiedAt</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i3" class="rowColor">
+<tr id="i4" class="altColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/queries/QueryPredicate.html" title="interface in io.sphere.sdk.queries">QueryPredicate</a>&lt;<a href="../../../../io/sphere/sdk/queries/ResourceQueryModelImpl.html" title="type parameter in ResourceQueryModelImpl">T</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/ResourceQueryModelImpl.html#not-io.sphere.sdk.queries.QueryPredicate-">not</a></span>(<a href="../../../../io/sphere/sdk/queries/QueryPredicate.html" title="interface in io.sphere.sdk.queries">QueryPredicate</a>&lt;<a href="../../../../io/sphere/sdk/queries/ResourceQueryModelImpl.html" title="type parameter in ResourceQueryModelImpl">T</a>&gt;&nbsp;queryPredicateToNegate)</code>&nbsp;</td>
 </tr>
@@ -250,6 +254,19 @@ implements <a href="../../../../io/sphere/sdk/queries/ResourceQueryModel.html" t
 </dl>
 </li>
 </ul>
+<a name="is-io.sphere.sdk.models.Identifiable-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>is</h4>
+<pre>public&nbsp;<a href="../../../../io/sphere/sdk/queries/QueryPredicate.html" title="interface in io.sphere.sdk.queries">QueryPredicate</a>&lt;<a href="../../../../io/sphere/sdk/queries/ResourceQueryModelImpl.html" title="type parameter in ResourceQueryModelImpl">T</a>&gt;&nbsp;is(<a href="../../../../io/sphere/sdk/models/Identifiable.html" title="interface in io.sphere.sdk.models">Identifiable</a>&lt;<a href="../../../../io/sphere/sdk/queries/ResourceQueryModelImpl.html" title="type parameter in ResourceQueryModelImpl">T</a>&gt;&nbsp;identifiable)</pre>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../io/sphere/sdk/queries/ResourceQueryModel.html#is-io.sphere.sdk.models.Identifiable-">is</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/queries/ResourceQueryModel.html" title="interface in io.sphere.sdk.queries">ResourceQueryModel</a>&lt;<a href="../../../../io/sphere/sdk/queries/ResourceQueryModelImpl.html" title="type parameter in ResourceQueryModelImpl">T</a>&gt;</code></dd>
+</dl>
+</li>
+</ul>
 <a name="createdAt--">
 <!--   -->
 </a>
@@ -313,7 +330,7 @@ implements <a href="../../../../io/sphere/sdk/queries/ResourceQueryModel.html" t
 <div class="subNav">
 <ul class="navList">
 <li><a href="../../../../io/sphere/sdk/queries/ResourceQueryModel.html" title="interface in io.sphere.sdk.queries"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
-<li><a href="../../../../io/sphere/sdk/queries/SphereEnumerationQueryModel.html" title="interface in io.sphere.sdk.queries"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
+<li><a href="../../../../io/sphere/sdk/queries/SphereEnumerationOptionalQueryModel.html" title="interface in io.sphere.sdk.queries"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">
 <li><a href="../../../../index.html?io/sphere/sdk/queries/ResourceQueryModelImpl.html" target="_top">Frames</a></li>

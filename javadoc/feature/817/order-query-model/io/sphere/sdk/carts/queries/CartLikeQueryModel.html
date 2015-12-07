@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10,"i10":10};
+var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10,"i10":10,"i11":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -201,22 +201,26 @@ extends <a href="../../../../../io/sphere/sdk/queries/ResourceQueryModelImpl.htm
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/carts/queries/CartLikeQueryModel.html#customLineItems--">customLineItems</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i6" class="altColor">
+<td class="colFirst"><code><a href="../../../../../io/sphere/sdk/carts/queries/DiscountCodeInfoCollectionQueryModel.html" title="interface in io.sphere.sdk.carts.queries">DiscountCodeInfoCollectionQueryModel</a>&lt;<a href="../../../../../io/sphere/sdk/carts/queries/CartLikeQueryModel.html" title="type parameter in CartLikeQueryModel">T</a>&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/carts/queries/CartLikeQueryModel.html#discountCodes--">discountCodes</a></span>()</code>&nbsp;</td>
+</tr>
+<tr id="i7" class="rowColor">
 <td class="colFirst"><code><a href="../../../../../io/sphere/sdk/carts/queries/LineItemCollectionQueryModel.html" title="interface in io.sphere.sdk.carts.queries">LineItemCollectionQueryModel</a>&lt;<a href="../../../../../io/sphere/sdk/carts/queries/CartLikeQueryModel.html" title="type parameter in CartLikeQueryModel">T</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/carts/queries/CartLikeQueryModel.html#lineItems--">lineItems</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i7" class="rowColor">
+<tr id="i8" class="altColor">
 <td class="colFirst"><code><a href="../../../../../io/sphere/sdk/queries/AddressQueryModel.html" title="interface in io.sphere.sdk.queries">AddressQueryModel</a>&lt;<a href="../../../../../io/sphere/sdk/carts/queries/CartLikeQueryModel.html" title="type parameter in CartLikeQueryModel">T</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/carts/queries/CartLikeQueryModel.html#shippingAddress--">shippingAddress</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i8" class="altColor">
+<tr id="i9" class="rowColor">
 <td class="colFirst"><code><a href="../../../../../io/sphere/sdk/carts/queries/CartShippingInfoQueryModel.html" title="interface in io.sphere.sdk.carts.queries">CartShippingInfoQueryModel</a>&lt;<a href="../../../../../io/sphere/sdk/carts/queries/CartLikeQueryModel.html" title="type parameter in CartLikeQueryModel">T</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/carts/queries/CartLikeQueryModel.html#shippingInfo--">shippingInfo</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i9" class="rowColor">
+<tr id="i10" class="altColor">
 <td class="colFirst"><code><a href="../../../../../io/sphere/sdk/carts/queries/TaxedPriceOptionalQueryModel.html" title="interface in io.sphere.sdk.carts.queries">TaxedPriceOptionalQueryModel</a>&lt;<a href="../../../../../io/sphere/sdk/carts/queries/CartLikeQueryModel.html" title="type parameter in CartLikeQueryModel">T</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/carts/queries/CartLikeQueryModel.html#taxedPrice--">taxedPrice</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i10" class="altColor">
+<tr id="i11" class="rowColor">
 <td class="colFirst"><code><a href="../../../../../io/sphere/sdk/queries/MoneyQueryModel.html" title="interface in io.sphere.sdk.queries">MoneyQueryModel</a>&lt;<a href="../../../../../io/sphere/sdk/carts/queries/CartLikeQueryModel.html" title="type parameter in CartLikeQueryModel">T</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/carts/queries/CartLikeQueryModel.html#totalPrice--">totalPrice</a></span>()</code>&nbsp;</td>
 </tr>
@@ -226,7 +230,7 @@ extends <a href="../../../../../io/sphere/sdk/queries/ResourceQueryModelImpl.htm
 <!--   -->
 </a>
 <h3>Methods inherited from class&nbsp;io.sphere.sdk.queries.<a href="../../../../../io/sphere/sdk/queries/ResourceQueryModelImpl.html" title="class in io.sphere.sdk.queries">ResourceQueryModelImpl</a></h3>
-<code><a href="../../../../../io/sphere/sdk/queries/ResourceQueryModelImpl.html#createdAt--">createdAt</a>, <a href="../../../../../io/sphere/sdk/queries/ResourceQueryModelImpl.html#id--">id</a>, <a href="../../../../../io/sphere/sdk/queries/ResourceQueryModelImpl.html#lastModifiedAt--">lastModifiedAt</a>, <a href="../../../../../io/sphere/sdk/queries/ResourceQueryModelImpl.html#not-io.sphere.sdk.queries.QueryPredicate-">not</a></code></li>
+<code><a href="../../../../../io/sphere/sdk/queries/ResourceQueryModelImpl.html#createdAt--">createdAt</a>, <a href="../../../../../io/sphere/sdk/queries/ResourceQueryModelImpl.html#id--">id</a>, <a href="../../../../../io/sphere/sdk/queries/ResourceQueryModelImpl.html#is-io.sphere.sdk.models.Identifiable-">is</a>, <a href="../../../../../io/sphere/sdk/queries/ResourceQueryModelImpl.html#lastModifiedAt--">lastModifiedAt</a>, <a href="../../../../../io/sphere/sdk/queries/ResourceQueryModelImpl.html#not-io.sphere.sdk.queries.QueryPredicate-">not</a></code></li>
 </ul>
 <ul class="blockList">
 <li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.queries.QueryModelImpl">
@@ -374,10 +378,19 @@ extends <a href="../../../../../io/sphere/sdk/queries/ResourceQueryModelImpl.htm
 <a name="shippingInfo--">
 <!--   -->
 </a>
-<ul class="blockListLast">
+<ul class="blockList">
 <li class="blockList">
 <h4>shippingInfo</h4>
 <pre>public&nbsp;<a href="../../../../../io/sphere/sdk/carts/queries/CartShippingInfoQueryModel.html" title="interface in io.sphere.sdk.carts.queries">CartShippingInfoQueryModel</a>&lt;<a href="../../../../../io/sphere/sdk/carts/queries/CartLikeQueryModel.html" title="type parameter in CartLikeQueryModel">T</a>&gt;&nbsp;shippingInfo()</pre>
+</li>
+</ul>
+<a name="discountCodes--">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>discountCodes</h4>
+<pre>public&nbsp;<a href="../../../../../io/sphere/sdk/carts/queries/DiscountCodeInfoCollectionQueryModel.html" title="interface in io.sphere.sdk.carts.queries">DiscountCodeInfoCollectionQueryModel</a>&lt;<a href="../../../../../io/sphere/sdk/carts/queries/CartLikeQueryModel.html" title="type parameter in CartLikeQueryModel">T</a>&gt;&nbsp;discountCodes()</pre>
 </li>
 </ul>
 </li>
