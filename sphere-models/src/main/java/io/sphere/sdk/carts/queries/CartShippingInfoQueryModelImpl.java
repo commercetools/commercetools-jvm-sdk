@@ -3,7 +3,6 @@ package io.sphere.sdk.carts.queries;
 import io.sphere.sdk.queries.*;
 import io.sphere.sdk.shippingmethods.ShippingMethod;
 import io.sphere.sdk.taxcategories.queries.TaxRateQueryModel;
-import io.sphere.sdk.taxcategories.queries.TaxRateQueryModelImpl;
 
 final class CartShippingInfoQueryModelImpl<T> extends QueryModelImpl<T> implements CartShippingInfoQueryModel<T> {
     public CartShippingInfoQueryModelImpl(final QueryModel<T> parent, final String pathSegment) {
