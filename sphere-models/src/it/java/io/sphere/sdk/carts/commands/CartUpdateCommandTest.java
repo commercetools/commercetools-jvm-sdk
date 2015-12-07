@@ -38,6 +38,7 @@ import static io.sphere.sdk.payments.PaymentFixtures.withPayment;
 import static io.sphere.sdk.shippingmethods.ShippingMethodFixtures.withShippingMethodForGermany;
 import static io.sphere.sdk.taxcategories.TaxCategoryFixtures.withTaxCategory;
 import static io.sphere.sdk.test.SphereTestUtils.*;
+import static java.util.Collections.singletonList;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class CartUpdateCommandTest extends IntegrationTest {
@@ -359,6 +360,11 @@ public class CartUpdateCommandTest extends IntegrationTest {
                 final Reference<Payment> paymentReference = cartWithPayment.getPaymentInfo().getPayments().get(0);
                 assertThat(paymentReference).isEqualTo(payment.toReference());
                 assertThat(paymentReference).is(expanded(payment));
+
+                //query cart by payment
+                final CartQuery cartQuery = CartQuery.of()
+                        .withPredicates(m -> m.paymentInfo().payments().isIn(singletonList(payment)));
+                assertThat(execute(cartQuery).head()).contains(cartWithPayment);
 
                 //remove payment
                 final Cart cartWithoutPayment = execute(CartUpdateCommand.of(cartWithPayment, RemovePayment.of(payment)));

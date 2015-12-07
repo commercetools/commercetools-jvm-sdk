@@ -61,4 +61,8 @@ public abstract class CartLikeQueryModel<T> extends CustomResourceQueryModelImpl
     public DiscountCodeInfoCollectionQueryModel<T> discountCodes() {
         return new DiscountCodeInfoCollectionQueryModelImpl<>(this, "discountCodes");
     }
+
+    public PaymentInfoQueryModel<T> paymentInfo() {
+        return new PaymentInfoQueryModelImpl<>(this, "paymentInfo");
+    }
 }
