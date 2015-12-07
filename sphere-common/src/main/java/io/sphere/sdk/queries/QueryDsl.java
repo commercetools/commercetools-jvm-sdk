@@ -47,6 +47,10 @@ public interface QueryDsl<T, C extends QueryDsl<T, C>> extends ResourceQuery<T>,
 
     C withLimit(final Long limit);
 
+    default C withLimit(final long limit) {
+        return withLimit(Long.valueOf(limit));
+    }
+
     /**
      * Returns a new query with the new offset as offset.
      *
@@ -56,4 +60,8 @@ public interface QueryDsl<T, C extends QueryDsl<T, C>> extends ResourceQuery<T>,
      * not between {@value io.sphere.sdk.queries.Query#MIN_OFFSET} and {@value io.sphere.sdk.queries.Query#MAX_OFFSET}.
      */
     C withOffset(final Long offset);
+
+    default C withOffset(final long offset) {
+        return withOffset(Long.valueOf(offset));
+    }
 }

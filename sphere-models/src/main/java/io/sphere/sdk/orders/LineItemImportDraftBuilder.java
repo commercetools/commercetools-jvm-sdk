@@ -57,7 +57,7 @@ public class LineItemImportDraftBuilder extends Base implements Builder<LineItem
         return this;
     }
 
-    public static LineItemImportDraftBuilder of(final ProductVariantImportDraft variant, final Long quantity, final Price price, final LocalizedString name) {
+    public static LineItemImportDraftBuilder of(final ProductVariantImportDraft variant, final long quantity, final Price price, final LocalizedString name) {
         return new LineItemImportDraftBuilder(variant, quantity, price, variant.getProductId(), name);
     }
 

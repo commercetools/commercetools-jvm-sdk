@@ -22,7 +22,7 @@ public class AddQuantity extends UpdateActionImpl<InventoryEntry> {
         return quantity;
     }
 
-    public static AddQuantity of(final Long quantity) {
+    public static AddQuantity of(final long quantity) {
         return new AddQuantity(quantity);
     }
 }

@@ -16,7 +16,7 @@ public class ItemState extends Base {
         this.quantity = quantity;
     }
 
-    public static ItemState of(final Referenceable<State> state, final Long quantity) {
+    public static ItemState of(final Referenceable<State> state, final long quantity) {
         return new ItemState(state.toReference(), quantity);
     }
 

@@ -36,10 +36,28 @@ public interface SearchDsl<T, C extends SearchDsl<T, C>> extends ResourceSearch<
     C withLimit(final Long limit);
 
     /**
+     * Returns a new object with the new limit.
+     * @param limit the new limit
+     * @return a new object with {@code limit}
+     */
+    default C withLimit(final long limit) {
+        return withLimit(Long.valueOf(limit));
+    }
+
+    /**
      * Returns a new object with the new offset.
      * @param offset the new offset
      * @return a new object with {@code offset}
      */
     C withOffset(final Long offset);
+
+    /**
+     * Returns a new object with the new offset.
+     * @param offset the new offset
+     * @return a new object with {@code offset}
+     */
+    default C withOffset(final long offset) {
+        return withOffset(Long.valueOf(offset));
+    }
 
 }

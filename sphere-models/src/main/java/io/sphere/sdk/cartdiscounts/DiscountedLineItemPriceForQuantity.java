@@ -13,7 +13,7 @@ public class DiscountedLineItemPriceForQuantity extends Base {
         this.quantity = quantity;
     }
 
-    public static DiscountedLineItemPriceForQuantity of(final DiscountedLineItemPrice discountedLineItemPrice, final Long quantity) {
+    public static DiscountedLineItemPriceForQuantity of(final DiscountedLineItemPrice discountedLineItemPrice, final long quantity) {
         return new DiscountedLineItemPriceForQuantity(discountedLineItemPrice, quantity);
     }
 
