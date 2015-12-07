@@ -51,4 +51,8 @@ public abstract class CartLikeQueryModel<T> extends ResourceQueryModelImpl<T> {
     public AddressQueryModel<T> billingAddress() {
         return addressModel("billingAddress");
     }
+
+    public CartShippingInfoQueryModel<T> shippingInfo() {
+        return new CartShippingInfoQueryModelImpl<>(this, "shippingInfo");
+    }
 }

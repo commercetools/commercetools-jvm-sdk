@@ -1,27 +1,29 @@
 package io.sphere.sdk.carts.queries;
 
 import io.sphere.sdk.carts.Cart;
+import io.sphere.sdk.carts.CartShippingInfo;
 import io.sphere.sdk.carts.ItemState;
 import io.sphere.sdk.carts.LineItem;
 import io.sphere.sdk.carts.commands.CartUpdateCommand;
 import io.sphere.sdk.carts.commands.updateactions.AddDiscountCode;
 import io.sphere.sdk.carts.commands.updateactions.RemoveDiscountCode;
+import io.sphere.sdk.carts.commands.updateactions.SetShippingMethod;
 import io.sphere.sdk.discountcodes.DiscountCodeInfo;
 import io.sphere.sdk.products.Price;
-import io.sphere.sdk.products.queries.ProductProjectionByIdGet;
-import io.sphere.sdk.queries.QueryPredicate;
 import io.sphere.sdk.test.IntegrationTest;
+import io.sphere.sdk.utils.MoneyImpl;
 import org.javamoney.moneta.function.MonetaryUtil;
 import org.junit.Test;
 
 import javax.money.MonetaryAmount;
-
 import java.util.Locale;
 
 import static io.sphere.sdk.carts.CartFixtures.*;
-import static io.sphere.sdk.customers.CustomerFixtures.*;
-import static org.assertj.core.api.Assertions.*;
-import static io.sphere.sdk.test.SphereTestUtils.*;
+import static io.sphere.sdk.customers.CustomerFixtures.withCustomerAndCart;
+import static io.sphere.sdk.shippingmethods.ShippingMethodFixtures.withShippingMethodForGermany;
+import static io.sphere.sdk.test.SphereTestUtils.ENGLISH;
+import static io.sphere.sdk.test.SphereTestUtils.EUR;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class CartQueryTest extends IntegrationTest {
     @Test
@@ -132,6 +134,37 @@ public class CartQueryTest extends IntegrationTest {
                     );
             final Cart loadedCart = execute(query.plusPredicates(m -> m.id().is(cart.getId()))).head().get();
             assertThat(loadedCart.getId()).isEqualTo(cart.getId());
+        });
+    }
+
+
+    @Test
+    public void shippingMethodQuery() throws Exception {
+        withShippingMethodForGermany(client(), shippingMethod -> {
+            withCart(client(), createCartWithShippingAddress(client()), cart -> {
+                final CartUpdateCommand updateCommand =
+                        CartUpdateCommand.of(cart, SetShippingMethod.of(shippingMethod))
+                                .plusExpansionPaths(m -> m.shippingInfo().shippingMethod().taxCategory())
+                                .plusExpansionPaths(m -> m.shippingInfo().taxCategory());
+                final Cart cartWithShippingMethod = execute(updateCommand);
+
+                final CartShippingInfo shippingInfo = cartWithShippingMethod.getShippingInfo();
+
+                final CartQuery query = CartQuery.of()
+                        .plusPredicates(m -> m.id().is(cart.getId()))
+                        .plusPredicates(m -> m.shippingInfo().shippingMethodName().is(shippingMethod.getName()))
+                        .plusPredicates(m -> m.shippingInfo().price().centAmount().is(MoneyImpl.centAmountOf(shippingInfo.getPrice())))
+                        .plusPredicates(m -> m.shippingInfo().taxRate().name().is(shippingInfo.getTaxRate().getName()))
+                        .plusPredicates(m -> m.shippingInfo().taxRate().includedInPrice().is(shippingInfo.getTaxRate().isIncludedInPrice()))
+                        .plusPredicates(m -> m.shippingInfo().taxRate().country().is(shippingInfo.getTaxRate().getCountry()))
+                        .plusPredicates(m -> m.shippingInfo().shippingMethod().is(shippingMethod))
+                        .plusPredicates(m -> m.shippingInfo().discountedPrice().isNotPresent())
+                        ;
+                assertThat(execute(query).head().get()).isEqualTo(cartWithShippingMethod);
+
+
+                return cartWithShippingMethod;
+            });
         });
     }
 }

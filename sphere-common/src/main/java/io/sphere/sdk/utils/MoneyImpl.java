@@ -2,7 +2,9 @@ package io.sphere.sdk.utils;
 
 import io.sphere.sdk.models.Base;
 import org.javamoney.moneta.FastMoney;
+import org.javamoney.moneta.function.MonetaryUtil;
 
+import javax.annotation.Nonnull;
 import javax.money.*;
 import java.math.BigDecimal;
 import java.util.Optional;
@@ -275,5 +277,9 @@ final public class MoneyImpl extends Base implements MonetaryAmount {
 
     public static MonetaryAmount of(final String value, final String currencyCode) {
         return of(new BigDecimal(value), createCurrencyByCode(currencyCode));
+    }
+
+    public static Long centAmountOf(@Nonnull final MonetaryAmount monetaryAmount) {
+        return monetaryAmount.query(MonetaryUtil.minorUnits());
     }
 }

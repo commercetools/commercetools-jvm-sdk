@@ -12,7 +12,6 @@ import io.sphere.sdk.orders.commands.updateactions.UpdateSyncInfo;
 import io.sphere.sdk.queries.QueryPredicate;
 import io.sphere.sdk.queries.QuerySort;
 import io.sphere.sdk.test.IntegrationTest;
-import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.Test;
 
 import java.util.List;
