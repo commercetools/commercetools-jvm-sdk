@@ -18,8 +18,8 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":6,"i1":6,"i2":6,"i3":6,"i4":6,"i5":6,"i6":6,"i7":6,"i8":6,"i9":6,"i10":6};
-var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],4:["t3","Abstract Methods"]};
+var methods = {"i0":6,"i1":6,"i2":6,"i3":6,"i4":6,"i5":18,"i6":6,"i7":18,"i8":6,"i9":6,"i10":6,"i11":6,"i12":6};
+var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],4:["t3","Abstract Methods"],16:["t5","Default Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
 var tableTab = "tableTab";
@@ -147,7 +147,7 @@ extends <a href="../../../../io/sphere/sdk/queries/ResourceQuery.html" title="in
 </a>
 <h3>Method Summary</h3>
 <table class="memberSummary" border="0" cellpadding="3" cellspacing="0" summary="Method Summary table, listing methods, and an explanation">
-<caption><span id="t0" class="activeTableTab"><span>All Methods</span><span class="tabEnd">&nbsp;</span></span><span id="t2" class="tableTab"><span><a href="javascript:show(2);">Instance Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t3" class="tableTab"><span><a href="javascript:show(4);">Abstract Methods</a></span><span class="tabEnd">&nbsp;</span></span></caption>
+<caption><span id="t0" class="activeTableTab"><span>All Methods</span><span class="tabEnd">&nbsp;</span></span><span id="t2" class="tableTab"><span><a href="javascript:show(2);">Instance Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t3" class="tableTab"><span><a href="javascript:show(4);">Abstract Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t5" class="tableTab"><span><a href="javascript:show(16);">Default Methods</a></span><span class="tabEnd">&nbsp;</span></span></caption>
 <tr>
 <th class="colFirst" scope="col">Modifier and Type</th>
 <th class="colLast" scope="col">Method and Description</th>
@@ -175,32 +175,40 @@ extends <a href="../../../../io/sphere/sdk/queries/ResourceQuery.html" title="in
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/QueryDsl.html#withFetchTotal-boolean-">withFetchTotal</a></span>(boolean&nbsp;fetchTotal)</code>&nbsp;</td>
 </tr>
 <tr id="i5" class="rowColor">
+<td class="colFirst"><code>default <a href="../../../../io/sphere/sdk/queries/QueryDsl.html" title="type parameter in QueryDsl">C</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/QueryDsl.html#withLimit-long-">withLimit</a></span>(long&nbsp;limit)</code>&nbsp;</td>
+</tr>
+<tr id="i6" class="altColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/queries/QueryDsl.html" title="type parameter in QueryDsl">C</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/QueryDsl.html#withLimit-java.lang.Long-">withLimit</a></span>(java.lang.Long&nbsp;limit)</code>&nbsp;</td>
 </tr>
-<tr id="i6" class="altColor">
+<tr id="i7" class="rowColor">
+<td class="colFirst"><code>default <a href="../../../../io/sphere/sdk/queries/QueryDsl.html" title="type parameter in QueryDsl">C</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/QueryDsl.html#withOffset-long-">withOffset</a></span>(long&nbsp;offset)</code>&nbsp;</td>
+</tr>
+<tr id="i8" class="altColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/queries/QueryDsl.html" title="type parameter in QueryDsl">C</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/QueryDsl.html#withOffset-java.lang.Long-">withOffset</a></span>(java.lang.Long&nbsp;offset)</code>
 <div class="block">Returns a new query with the new offset as offset.</div>
 </td>
 </tr>
-<tr id="i7" class="rowColor">
+<tr id="i9" class="rowColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/queries/QueryDsl.html" title="type parameter in QueryDsl">C</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/QueryDsl.html#withPredicates-java.util.List-">withPredicates</a></span>(java.util.List&lt;<a href="../../../../io/sphere/sdk/queries/QueryPredicate.html" title="interface in io.sphere.sdk.queries">QueryPredicate</a>&lt;<a href="../../../../io/sphere/sdk/queries/QueryDsl.html" title="type parameter in QueryDsl">T</a>&gt;&gt;&nbsp;predicates)</code>
 <div class="block">Returns an instance with the new predicate list as predicates.</div>
 </td>
 </tr>
-<tr id="i8" class="altColor">
+<tr id="i10" class="altColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/queries/QueryDsl.html" title="type parameter in QueryDsl">C</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/QueryDsl.html#withPredicates-io.sphere.sdk.queries.QueryPredicate-">withPredicates</a></span>(<a href="../../../../io/sphere/sdk/queries/QueryPredicate.html" title="interface in io.sphere.sdk.queries">QueryPredicate</a>&lt;<a href="../../../../io/sphere/sdk/queries/QueryDsl.html" title="type parameter in QueryDsl">T</a>&gt;&nbsp;predicate)</code>&nbsp;</td>
 </tr>
-<tr id="i9" class="rowColor">
+<tr id="i11" class="rowColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/queries/QueryDsl.html" title="type parameter in QueryDsl">C</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/QueryDsl.html#withSort-java.util.List-">withSort</a></span>(java.util.List&lt;<a href="../../../../io/sphere/sdk/queries/QuerySort.html" title="interface in io.sphere.sdk.queries">QuerySort</a>&lt;<a href="../../../../io/sphere/sdk/queries/QueryDsl.html" title="type parameter in QueryDsl">T</a>&gt;&gt;&nbsp;sort)</code>
 <div class="block">Returns a query with the new sort as sort.</div>
 </td>
 </tr>
-<tr id="i10" class="altColor">
+<tr id="i12" class="altColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/queries/QueryDsl.html" title="type parameter in QueryDsl">C</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/QueryDsl.html#withSort-io.sphere.sdk.queries.QuerySort-">withSort</a></span>(<a href="../../../../io/sphere/sdk/queries/QuerySort.html" title="interface in io.sphere.sdk.queries">QuerySort</a>&lt;<a href="../../../../io/sphere/sdk/queries/QueryDsl.html" title="type parameter in QueryDsl">T</a>&gt;&nbsp;sort)</code>&nbsp;</td>
 </tr>
@@ -358,10 +366,19 @@ extends <a href="../../../../io/sphere/sdk/queries/ResourceQuery.html" title="in
 <pre><a href="../../../../io/sphere/sdk/queries/QueryDsl.html" title="type parameter in QueryDsl">C</a>&nbsp;withLimit(java.lang.Long&nbsp;limit)</pre>
 </li>
 </ul>
+<a name="withLimit-long-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>withLimit</h4>
+<pre>default&nbsp;<a href="../../../../io/sphere/sdk/queries/QueryDsl.html" title="type parameter in QueryDsl">C</a>&nbsp;withLimit(long&nbsp;limit)</pre>
+</li>
+</ul>
 <a name="withOffset-java.lang.Long-">
 <!--   -->
 </a>
-<ul class="blockListLast">
+<ul class="blockList">
 <li class="blockList">
 <h4>withOffset</h4>
 <pre><a href="../../../../io/sphere/sdk/queries/QueryDsl.html" title="type parameter in QueryDsl">C</a>&nbsp;withOffset(java.lang.Long&nbsp;offset)</pre>
@@ -375,6 +392,15 @@ extends <a href="../../../../io/sphere/sdk/queries/ResourceQuery.html" title="in
 <dd><code>java.lang.IllegalArgumentException</code> - if offset is
  not between <a href="../../../../io/sphere/sdk/queries/Query.html#MIN_OFFSET">0</a> and <a href="../../../../io/sphere/sdk/queries/Query.html#MAX_OFFSET">100000</a>.</dd>
 </dl>
+</li>
+</ul>
+<a name="withOffset-long-">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>withOffset</h4>
+<pre>default&nbsp;<a href="../../../../io/sphere/sdk/queries/QueryDsl.html" title="type parameter in QueryDsl">C</a>&nbsp;withOffset(long&nbsp;offset)</pre>
 </li>
 </ul>
 </li>
