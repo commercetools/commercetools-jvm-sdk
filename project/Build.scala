@@ -2,7 +2,6 @@ import java.io.ByteArrayOutputStream
 import java.lang.reflect.Method
 
 import Libs._
-import de.johoop.jacoco4sbt.JacocoPlugin.{itJacoco, jacoco}
 import net.sourceforge.plantuml.{FileFormat, FileFormatOption, SourceStringReader}
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Element
@@ -18,9 +17,8 @@ import scala.util.Try
 object Build extends Build {
 
   lazy val commonSettings: Seq[sbt.Def.Setting[_]] =
-    Defaults.itSettings ++ jacoco.settings ++ itJacoco.settings ++ Release.publishSettings ++ Seq(
+    Defaults.itSettings ++ Release.publishSettings ++ Seq(
       parallelExecution in IntegrationTest := false,
-      parallelExecution in itJacoco.Config:= false,
       testOptions += Tests.Argument(TestFrameworks.JUnit, "-v"),
       libraryDependencies += `logback-classic` % "test,it",
       testOptions in IntegrationTest += Tests.Setup(loader => Try {
