@@ -138,6 +138,11 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html"
         assertThat(paymentReference).isEqualTo(payment.toReference());
         assertThat(paymentReference).is(expanded(payment));
 
+        //query cart by payment
+        final CartQuery cartQuery = CartQuery.of()
+                .withPredicates(m -&gt; m.paymentInfo().payments().isIn(singletonList(payment)));
+        assertThat(execute(cartQuery).head()).contains(cartWithPayment);
+
         //remove payment
         final Cart cartWithoutPayment = execute(CartUpdateCommand.of(cartWithPayment, RemovePayment.of(payment)));
 
