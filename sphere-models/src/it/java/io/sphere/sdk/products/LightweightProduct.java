@@ -52,7 +52,7 @@ public class LightweightProduct extends Base implements Versioned<Product>, Prod
 
         public LightweightProductsBySku(final List<String> skus) {
             Validate.notEmpty(skus);
-            Validate.isTrue(skus.size() < MAX, "skus are limited to " + MAX + " elements");
+            Validate.isTrue(skus.size() <= MAX, "skus are limited to " + MAX + " elements");
             this.skus = skus;
         }
 
