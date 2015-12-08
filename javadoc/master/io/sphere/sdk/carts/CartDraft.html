@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":9,"i6":42,"i7":10,"i8":10,"i9":10,"i10":10};
+var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10,"i10":10,"i11":9,"i12":42,"i13":10,"i14":10,"i15":10,"i16":10,"i17":10,"i18":10,"i19":10,"i20":10,"i21":10,"i22":10};
 var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"],32:["t6","Deprecated Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -140,30 +140,54 @@ implements <a href="../../../../io/sphere/sdk/types/CustomDraft.html" title="int
 <th class="colLast" scope="col">Method and Description</th>
 </tr>
 <tr id="i0" class="altColor">
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/models/Address.html" title="class in io.sphere.sdk.models">Address</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/carts/CartDraft.html#getBillingAddress--">getBillingAddress</a></span>()</code>&nbsp;</td>
+</tr>
+<tr id="i1" class="rowColor">
 <td class="colFirst"><code>com.neovisionaries.i18n.CountryCode</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/carts/CartDraft.html#getCountry--">getCountry</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i1" class="rowColor">
+<tr id="i2" class="altColor">
 <td class="colFirst"><code>javax.money.CurrencyUnit</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/carts/CartDraft.html#getCurrency--">getCurrency</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i2" class="altColor">
+<tr id="i3" class="rowColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/types/CustomFieldsDraft.html" title="class in io.sphere.sdk.types">CustomFieldsDraft</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/carts/CartDraft.html#getCustom--">getCustom</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i3" class="rowColor">
+<tr id="i4" class="altColor">
+<td class="colFirst"><code>java.lang.String</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/carts/CartDraft.html#getCustomerEmail--">getCustomerEmail</a></span>()</code>&nbsp;</td>
+</tr>
+<tr id="i5" class="rowColor">
 <td class="colFirst"><code>java.lang.String</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/carts/CartDraft.html#getCustomerId--">getCustomerId</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i4" class="altColor">
+<tr id="i6" class="altColor">
+<td class="colFirst"><code>java.util.List&lt;<a href="../../../../io/sphere/sdk/carts/CustomLineItemDraft.html" title="class in io.sphere.sdk.carts">CustomLineItemDraft</a>&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/carts/CartDraft.html#getCustomLineItems--">getCustomLineItems</a></span>()</code>&nbsp;</td>
+</tr>
+<tr id="i7" class="rowColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/carts/InventoryMode.html" title="enum in io.sphere.sdk.carts">InventoryMode</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/carts/CartDraft.html#getInventoryMode--">getInventoryMode</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i5" class="rowColor">
+<tr id="i8" class="altColor">
+<td class="colFirst"><code>java.util.List&lt;<a href="../../../../io/sphere/sdk/carts/LineItemDraft.html" title="class in io.sphere.sdk.carts">LineItemDraft</a>&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/carts/CartDraft.html#getLineItems--">getLineItems</a></span>()</code>&nbsp;</td>
+</tr>
+<tr id="i9" class="rowColor">
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/models/Address.html" title="class in io.sphere.sdk.models">Address</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/carts/CartDraft.html#getShippingAddress--">getShippingAddress</a></span>()</code>&nbsp;</td>
+</tr>
+<tr id="i10" class="altColor">
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/models/Reference.html" title="class in io.sphere.sdk.models">Reference</a>&lt;<a href="../../../../io/sphere/sdk/shippingmethods/ShippingMethod.html" title="interface in io.sphere.sdk.shippingmethods">ShippingMethod</a>&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/carts/CartDraft.html#getShippingMethod--">getShippingMethod</a></span>()</code>&nbsp;</td>
+</tr>
+<tr id="i11" class="rowColor">
 <td class="colFirst"><code>static <a href="../../../../io/sphere/sdk/carts/CartDraft.html" title="class in io.sphere.sdk.carts">CartDraft</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/carts/CartDraft.html#of-javax.money.CurrencyUnit-">of</a></span>(javax.money.CurrencyUnit&nbsp;currency)</code>&nbsp;</td>
 </tr>
-<tr id="i6" class="altColor">
+<tr id="i12" class="altColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/carts/CartDraft.html" title="class in io.sphere.sdk.carts">CartDraft</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/carts/CartDraft.html#witCustom-io.sphere.sdk.types.CustomFieldsDraft-">witCustom</a></span>(<a href="../../../../io/sphere/sdk/types/CustomFieldsDraft.html" title="class in io.sphere.sdk.types">CustomFieldsDraft</a>&nbsp;custom)</code>
 <div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;
@@ -171,21 +195,45 @@ implements <a href="../../../../io/sphere/sdk/types/CustomDraft.html" title="int
 </div>
 </td>
 </tr>
-<tr id="i7" class="rowColor">
+<tr id="i13" class="rowColor">
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/carts/CartDraft.html" title="class in io.sphere.sdk.carts">CartDraft</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/carts/CartDraft.html#withBillingAddress-io.sphere.sdk.models.Address-">withBillingAddress</a></span>(<a href="../../../../io/sphere/sdk/models/Address.html" title="class in io.sphere.sdk.models">Address</a>&nbsp;billingAddress)</code>&nbsp;</td>
+</tr>
+<tr id="i14" class="altColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/carts/CartDraft.html" title="class in io.sphere.sdk.carts">CartDraft</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/carts/CartDraft.html#withCountry-com.neovisionaries.i18n.CountryCode-">withCountry</a></span>(com.neovisionaries.i18n.CountryCode&nbsp;country)</code>&nbsp;</td>
 </tr>
-<tr id="i8" class="altColor">
+<tr id="i15" class="rowColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/carts/CartDraft.html" title="class in io.sphere.sdk.carts">CartDraft</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/carts/CartDraft.html#withCustom-io.sphere.sdk.types.CustomFieldsDraft-">withCustom</a></span>(<a href="../../../../io/sphere/sdk/types/CustomFieldsDraft.html" title="class in io.sphere.sdk.types">CustomFieldsDraft</a>&nbsp;custom)</code>&nbsp;</td>
 </tr>
-<tr id="i9" class="rowColor">
+<tr id="i16" class="altColor">
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/carts/CartDraft.html" title="class in io.sphere.sdk.carts">CartDraft</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/carts/CartDraft.html#withCustomerEmail-java.lang.String-">withCustomerEmail</a></span>(java.lang.String&nbsp;customerEmail)</code>&nbsp;</td>
+</tr>
+<tr id="i17" class="rowColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/carts/CartDraft.html" title="class in io.sphere.sdk.carts">CartDraft</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/carts/CartDraft.html#withCustomerId-java.lang.String-">withCustomerId</a></span>(java.lang.String&nbsp;customerId)</code>&nbsp;</td>
 </tr>
-<tr id="i10" class="altColor">
+<tr id="i18" class="altColor">
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/carts/CartDraft.html" title="class in io.sphere.sdk.carts">CartDraft</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/carts/CartDraft.html#withCustomLineItems-java.util.List-">withCustomLineItems</a></span>(java.util.List&lt;<a href="../../../../io/sphere/sdk/carts/CustomLineItemDraft.html" title="class in io.sphere.sdk.carts">CustomLineItemDraft</a>&gt;&nbsp;customLineItems)</code>&nbsp;</td>
+</tr>
+<tr id="i19" class="rowColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/carts/CartDraft.html" title="class in io.sphere.sdk.carts">CartDraft</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/carts/CartDraft.html#withInventoryMode-io.sphere.sdk.carts.InventoryMode-">withInventoryMode</a></span>(<a href="../../../../io/sphere/sdk/carts/InventoryMode.html" title="enum in io.sphere.sdk.carts">InventoryMode</a>&nbsp;inventoryMode)</code>&nbsp;</td>
+</tr>
+<tr id="i20" class="altColor">
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/carts/CartDraft.html" title="class in io.sphere.sdk.carts">CartDraft</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/carts/CartDraft.html#withLineItems-java.util.List-">withLineItems</a></span>(java.util.List&lt;<a href="../../../../io/sphere/sdk/carts/LineItemDraft.html" title="class in io.sphere.sdk.carts">LineItemDraft</a>&gt;&nbsp;lineItems)</code>&nbsp;</td>
+</tr>
+<tr id="i21" class="rowColor">
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/carts/CartDraft.html" title="class in io.sphere.sdk.carts">CartDraft</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/carts/CartDraft.html#withShippingAddress-io.sphere.sdk.models.Address-">withShippingAddress</a></span>(<a href="../../../../io/sphere/sdk/models/Address.html" title="class in io.sphere.sdk.models">Address</a>&nbsp;shippingAddress)</code>&nbsp;</td>
+</tr>
+<tr id="i22" class="altColor">
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/carts/CartDraft.html" title="class in io.sphere.sdk.carts">CartDraft</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/carts/CartDraft.html#withShippingMethod-io.sphere.sdk.models.Referenceable-">withShippingMethod</a></span>(<a href="../../../../io/sphere/sdk/models/Referenceable.html" title="interface in io.sphere.sdk.models">Referenceable</a>&lt;<a href="../../../../io/sphere/sdk/shippingmethods/ShippingMethod.html" title="interface in io.sphere.sdk.shippingmethods">ShippingMethod</a>&gt;&nbsp;shippingMethod)</code>&nbsp;</td>
 </tr>
 </table>
 <ul class="blockList">
@@ -257,6 +305,66 @@ public&nbsp;com.neovisionaries.i18n.CountryCode&nbsp;getCountry()</pre>
 public&nbsp;<a href="../../../../io/sphere/sdk/carts/InventoryMode.html" title="enum in io.sphere.sdk.carts">InventoryMode</a>&nbsp;getInventoryMode()</pre>
 </li>
 </ul>
+<a name="getCustomerEmail--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getCustomerEmail</h4>
+<pre>@Nullable
+public&nbsp;java.lang.String&nbsp;getCustomerEmail()</pre>
+</li>
+</ul>
+<a name="getBillingAddress--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getBillingAddress</h4>
+<pre>@Nullable
+public&nbsp;<a href="../../../../io/sphere/sdk/models/Address.html" title="class in io.sphere.sdk.models">Address</a>&nbsp;getBillingAddress()</pre>
+</li>
+</ul>
+<a name="getCustomLineItems--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getCustomLineItems</h4>
+<pre>@Nullable
+public&nbsp;java.util.List&lt;<a href="../../../../io/sphere/sdk/carts/CustomLineItemDraft.html" title="class in io.sphere.sdk.carts">CustomLineItemDraft</a>&gt;&nbsp;getCustomLineItems()</pre>
+</li>
+</ul>
+<a name="getLineItems--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getLineItems</h4>
+<pre>@Nullable
+public&nbsp;java.util.List&lt;<a href="../../../../io/sphere/sdk/carts/LineItemDraft.html" title="class in io.sphere.sdk.carts">LineItemDraft</a>&gt;&nbsp;getLineItems()</pre>
+</li>
+</ul>
+<a name="getShippingAddress--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getShippingAddress</h4>
+<pre>@Nullable
+public&nbsp;<a href="../../../../io/sphere/sdk/models/Address.html" title="class in io.sphere.sdk.models">Address</a>&nbsp;getShippingAddress()</pre>
+</li>
+</ul>
+<a name="getShippingMethod--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getShippingMethod</h4>
+<pre>@Nullable
+public&nbsp;<a href="../../../../io/sphere/sdk/models/Reference.html" title="class in io.sphere.sdk.models">Reference</a>&lt;<a href="../../../../io/sphere/sdk/shippingmethods/ShippingMethod.html" title="interface in io.sphere.sdk.shippingmethods">ShippingMethod</a>&gt;&nbsp;getShippingMethod()</pre>
+</li>
+</ul>
 <a name="withCustomerId-java.lang.String-">
 <!--   -->
 </a>
@@ -265,6 +373,16 @@ public&nbsp;<a href="../../../../io/sphere/sdk/carts/InventoryMode.html" title="
 <h4>withCustomerId</h4>
 <pre>public&nbsp;<a href="../../../../io/sphere/sdk/carts/CartDraft.html" title="class in io.sphere.sdk.carts">CartDraft</a>&nbsp;withCustomerId(@Nullable
                                 java.lang.String&nbsp;customerId)</pre>
+</li>
+</ul>
+<a name="withCustomerEmail-java.lang.String-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>withCustomerEmail</h4>
+<pre>public&nbsp;<a href="../../../../io/sphere/sdk/carts/CartDraft.html" title="class in io.sphere.sdk.carts">CartDraft</a>&nbsp;withCustomerEmail(@Nullable
+                                   java.lang.String&nbsp;customerEmail)</pre>
 </li>
 </ul>
 <a name="withCountry-com.neovisionaries.i18n.CountryCode-">
@@ -295,6 +413,56 @@ public&nbsp;<a href="../../../../io/sphere/sdk/carts/InventoryMode.html" title="
 <h4>withCustom</h4>
 <pre>public&nbsp;<a href="../../../../io/sphere/sdk/carts/CartDraft.html" title="class in io.sphere.sdk.carts">CartDraft</a>&nbsp;withCustom(@Nullable
                             <a href="../../../../io/sphere/sdk/types/CustomFieldsDraft.html" title="class in io.sphere.sdk.types">CustomFieldsDraft</a>&nbsp;custom)</pre>
+</li>
+</ul>
+<a name="withLineItems-java.util.List-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>withLineItems</h4>
+<pre>public&nbsp;<a href="../../../../io/sphere/sdk/carts/CartDraft.html" title="class in io.sphere.sdk.carts">CartDraft</a>&nbsp;withLineItems(@Nullable
+                               java.util.List&lt;<a href="../../../../io/sphere/sdk/carts/LineItemDraft.html" title="class in io.sphere.sdk.carts">LineItemDraft</a>&gt;&nbsp;lineItems)</pre>
+</li>
+</ul>
+<a name="withCustomLineItems-java.util.List-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>withCustomLineItems</h4>
+<pre>public&nbsp;<a href="../../../../io/sphere/sdk/carts/CartDraft.html" title="class in io.sphere.sdk.carts">CartDraft</a>&nbsp;withCustomLineItems(@Nullable
+                                     java.util.List&lt;<a href="../../../../io/sphere/sdk/carts/CustomLineItemDraft.html" title="class in io.sphere.sdk.carts">CustomLineItemDraft</a>&gt;&nbsp;customLineItems)</pre>
+</li>
+</ul>
+<a name="withShippingAddress-io.sphere.sdk.models.Address-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>withShippingAddress</h4>
+<pre>public&nbsp;<a href="../../../../io/sphere/sdk/carts/CartDraft.html" title="class in io.sphere.sdk.carts">CartDraft</a>&nbsp;withShippingAddress(@Nullable
+                                     <a href="../../../../io/sphere/sdk/models/Address.html" title="class in io.sphere.sdk.models">Address</a>&nbsp;shippingAddress)</pre>
+</li>
+</ul>
+<a name="withBillingAddress-io.sphere.sdk.models.Address-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>withBillingAddress</h4>
+<pre>public&nbsp;<a href="../../../../io/sphere/sdk/carts/CartDraft.html" title="class in io.sphere.sdk.carts">CartDraft</a>&nbsp;withBillingAddress(@Nullable
+                                    <a href="../../../../io/sphere/sdk/models/Address.html" title="class in io.sphere.sdk.models">Address</a>&nbsp;billingAddress)</pre>
+</li>
+</ul>
+<a name="withShippingMethod-io.sphere.sdk.models.Referenceable-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>withShippingMethod</h4>
+<pre>public&nbsp;<a href="../../../../io/sphere/sdk/carts/CartDraft.html" title="class in io.sphere.sdk.carts">CartDraft</a>&nbsp;withShippingMethod(@Nullable
+                                    <a href="../../../../io/sphere/sdk/models/Referenceable.html" title="interface in io.sphere.sdk.models">Referenceable</a>&lt;<a href="../../../../io/sphere/sdk/shippingmethods/ShippingMethod.html" title="interface in io.sphere.sdk.shippingmethods">ShippingMethod</a>&gt;&nbsp;shippingMethod)</pre>
 </li>
 </ul>
 <a name="witCustom-io.sphere.sdk.types.CustomFieldsDraft-">

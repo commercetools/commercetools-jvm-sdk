@@ -113,6 +113,56 @@ final Cart cart = execute(CartCreateCommand.of(cartDraft));
 assertThat(cart.getTotalPrice().getCurrency().getCurrencyCode()).isEqualTo(EUR.getCurrencyCode());
 assertThat(cart.getCountry()).isEqualTo(DE);
 assertThat(cart.getTotalPrice().isZero()).isTrue();
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/carts/commands/CartCreateCommandTest.java" target="_blank">test code</a>.</pre></div>
+ <div id="io-sphere-sdk-carts-commands-CartCreateCommandTest-fullExample--%s" class=code-example><pre><code class='java'>final Address shippingAddress = Address.of(CountryCode.DE).withAdditionalAddressInfo("shipping");
+final Address billingAddress = Address.of(CountryCode.DE).withAdditionalAddressInfo("billing");
+
+withCustomer(client(), customer -&gt; {
+    final String customerId = customer.getId();
+    final String customerEmail = customer.getEmail();
+    withUpdateableType(client(), type -&gt; {
+        final CustomFieldsDraft customFieldsDraft =
+                CustomFieldsDraft.ofTypeKeyAndObjects(type.getKey(), singletonMap(TypeFixtures.STRING_FIELD_NAME, "foo"));
+        withShippingMethodForGermany(client(), shippingMethod -&gt; {
+            withTaxedProduct(client(), product -&gt; {
+                final List&lt;LineItemDraft&gt; lineItems = singletonList(LineItemDraft.of(product, 1, 15));
+
+                final List&lt;CustomLineItemDraft&gt; customLineItems = singletonList(CustomLineItemDraft.of(randomSlug(), "foo-bar", EURO_5, product.getTaxCategory(), 1L));
+
+                final CartDraft cartDraft = CartDraft.of(EUR)
+                        .withCountry(DE)
+                        .withCustomerId(customerId)
+                        .withCustomerEmail(customerEmail)
+                        .withLineItems(lineItems)
+                        .withCustomLineItems(customLineItems)
+                        .withBillingAddress(billingAddress)
+                        .withShippingAddress(shippingAddress)
+                        .withShippingMethod(shippingMethod)
+                        .withCustom(customFieldsDraft);
+                final Cart cart = execute(CartCreateCommand.of(cartDraft));
+
+                softAssert(s -&gt; {
+                    s.assertThat(cart.getCountry()).isEqualTo(DE);
+                    s.assertThat(cart.getTotalPrice().getCurrency()).isEqualTo(EUR);
+                    s.assertThat(cart.getCustomerId()).isEqualTo(customerId);
+                    s.assertThat(cart.getCustomerEmail()).isEqualTo(customerEmail);
+                    final LineItem lineItem = cart.getLineItems().get(0);
+                    s.assertThat(lineItem.getProductId()).isEqualTo(product.getId());
+                    s.assertThat(lineItem.getQuantity()).isEqualTo(15);
+                    s.assertThat(cart.getCustomLineItems().get(0).getSlug()).isEqualTo("foo-bar");
+                    s.assertThat(cart.getBillingAddress()).isEqualTo(billingAddress);
+                    s.assertThat(cart.getShippingAddress()).isEqualTo(shippingAddress);
+                    s.assertThat(cart.getCustom().getFieldsJsonMap()).isEqualTo(customFieldsDraft.getFields());
+                });
+
+                //cleanup
+                execute(CartDeleteCommand.of(cart));
+            });
+        });
+        return type;
+    });
+});
+
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/carts/commands/CartCreateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 </li>
 </ul>
