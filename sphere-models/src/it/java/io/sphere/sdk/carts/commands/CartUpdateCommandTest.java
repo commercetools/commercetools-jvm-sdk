@@ -38,6 +38,7 @@ import static io.sphere.sdk.payments.PaymentFixtures.withPayment;
 import static io.sphere.sdk.shippingmethods.ShippingMethodFixtures.withShippingMethodForGermany;
 import static io.sphere.sdk.taxcategories.TaxCategoryFixtures.withTaxCategory;
 import static io.sphere.sdk.test.SphereTestUtils.*;
+import static java.util.Collections.singletonList;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class CartUpdateCommandTest extends IntegrationTest {
@@ -153,6 +154,11 @@ public class CartUpdateCommandTest extends IntegrationTest {
             assertThat(state).hasSize(1);
             assertThat(state).extracting("quantity").containsOnly(quantity);
             assertThat(customLineItem.getTaxCategory()).isEqualTo(taxCategory.toReference());
+
+            final CartQuery cartQuery = CartQuery.of()
+                    .withPredicates(m -> m.customLineItems().slug().is(customLineItem.getSlug())
+                            .and(m.id().is(cart.getId())));
+            assertThat(execute(cartQuery).head().get().getId()).isEqualTo(cart.getId());
         });
     }
 
@@ -188,6 +194,12 @@ public class CartUpdateCommandTest extends IntegrationTest {
         final Address address = AddressBuilder.of(DE).build();
         final Cart cartWithAddress = execute(CartUpdateCommand.of(cart, SetShippingAddress.of(address)));
         assertThat(cartWithAddress.getShippingAddress()).isEqualTo(address);
+
+        //you can query by shippingAddress fields
+        final CartQuery query = CartQuery.of()
+                .withPredicates(m -> m.shippingAddress().country().is(DE).and(m.id().is(cart.getId())));
+        assertThat(execute(query).head()).contains(cartWithAddress);
+
         final Cart cartWithoutAddress = execute(CartUpdateCommand.of(cartWithAddress, SetShippingAddress.of(null)));
         assertThat(cartWithoutAddress.getShippingAddress()).isNull();
     }
@@ -199,6 +211,12 @@ public class CartUpdateCommandTest extends IntegrationTest {
         final Address address = AddressBuilder.of(DE).build();
         final Cart cartWithAddress = execute(CartUpdateCommand.of(cart, SetBillingAddress.of(address)));
         assertThat(cartWithAddress.getBillingAddress()).isEqualTo(address);
+
+        //you can query by billingAddress fields
+        final CartQuery query = CartQuery.of()
+                .withPredicates(m -> m.billingAddress().country().is(DE).and(m.id().is(cart.getId())));
+        assertThat(execute(query).head()).contains(cartWithAddress);
+
         final Cart cartWithoutAddress = execute(CartUpdateCommand.of(cartWithAddress, SetBillingAddress.of(null)));
         assertThat(cartWithoutAddress.getBillingAddress()).isNull();
     }
@@ -342,6 +360,11 @@ public class CartUpdateCommandTest extends IntegrationTest {
                 final Reference<Payment> paymentReference = cartWithPayment.getPaymentInfo().getPayments().get(0);
                 assertThat(paymentReference).isEqualTo(payment.toReference());
                 assertThat(paymentReference).is(expanded(payment));
+
+                //query cart by payment
+                final CartQuery cartQuery = CartQuery.of()
+                        .withPredicates(m -> m.paymentInfo().payments().isIn(singletonList(payment)));
+                assertThat(execute(cartQuery).head()).contains(cartWithPayment);
 
                 //remove payment
                 final Cart cartWithoutPayment = execute(CartUpdateCommand.of(cartWithPayment, RemovePayment.of(payment)));

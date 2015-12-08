@@ -10,7 +10,7 @@ import java.util.List;
 import static io.sphere.sdk.queries.StringQuerySortingModel.normalize;
 import static java.util.stream.Collectors.toList;
 
-final class SphereEnumerationQueryModelImpl<T, E extends SphereEnumeration> extends QueryModelImpl<T> implements SphereEnumerationQueryModel<T,E> {
+final class SphereEnumerationQueryModelImpl<T, E extends SphereEnumeration> extends QueryModelImpl<T> implements SphereEnumerationOptionalQueryModel<T,E> {
     public SphereEnumerationQueryModelImpl(@Nullable final QueryModel<T> parent, @Nullable final String pathSegment) {
         super(parent, pathSegment);
     }
@@ -33,6 +33,16 @@ final class SphereEnumerationQueryModelImpl<T, E extends SphereEnumeration> exte
     @Override
     public QueryPredicate<T> isNot(final E element) {
         return isNotPredicate(element.toSphereName());
+    }
+
+    @Override
+    public QueryPredicate<T> isNotPresent() {
+        return isNotPresentPredicate();
+    }
+
+    @Override
+    public QueryPredicate<T> isPresent() {
+        return isPresentPredicate();
     }
 
     private List<String> toSphereNameList(final Iterable<E> args) {

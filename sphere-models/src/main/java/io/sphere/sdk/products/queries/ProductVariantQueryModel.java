@@ -7,7 +7,7 @@ import java.util.function.Function;
 
 public class ProductVariantQueryModel<T> extends QueryModelImpl<T> {
 
-    ProductVariantQueryModel(@Nullable final QueryModel<T> parent, @Nullable final String pathSegment) {
+    public ProductVariantQueryModel(@Nullable final QueryModel<T> parent, @Nullable final String pathSegment) {
         super(parent, pathSegment);
     }
 

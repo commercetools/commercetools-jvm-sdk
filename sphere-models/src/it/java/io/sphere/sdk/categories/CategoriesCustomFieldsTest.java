@@ -7,12 +7,15 @@ import io.sphere.sdk.categories.commands.CategoryUpdateCommand;
 import io.sphere.sdk.categories.commands.updateactions.SetCustomField;
 import io.sphere.sdk.categories.commands.updateactions.SetCustomType;
 import io.sphere.sdk.categories.queries.CategoryByIdGet;
+import io.sphere.sdk.categories.queries.CategoryQuery;
 import io.sphere.sdk.client.ErrorResponseException;
 import io.sphere.sdk.expansion.ExpansionPath;
 import io.sphere.sdk.json.TypeReferences;
+import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.TextInputHint;
 import io.sphere.sdk.models.errors.RequiredField;
+import io.sphere.sdk.queries.QueryPredicate;
 import io.sphere.sdk.test.IntegrationTest;
 import io.sphere.sdk.types.*;
 import io.sphere.sdk.types.commands.TypeCreateCommand;
@@ -20,6 +23,7 @@ import io.sphere.sdk.types.commands.TypeDeleteCommand;
 import org.junit.Test;
 
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 
@@ -141,5 +145,26 @@ public class CategoriesCustomFieldsTest extends IntegrationTest {
         });
 
         execute(TypeDeleteCommand.of(type));
+    }
+
+    @Test
+    public void queryByField() {
+        withUpdateableType(client(), type -> {
+            withCategory(client(), category -> {
+                final Map<String, Object> fields = new HashMap<>();
+                fields.put(STRING_FIELD_NAME, "foo");
+                fields.put(LOC_STRING_FIELD_NAME, LocalizedString.of(ENGLISH, "bar"));
+                final CategoryUpdateCommand categoryUpdateCommand = CategoryUpdateCommand.of(category, SetCustomType.ofTypeIdAndObjects(type.getId(), fields));
+                final Category updatedCategory = execute(categoryUpdateCommand);
+
+                final CategoryQuery categoryQuery = CategoryQuery.of()
+                        .plusPredicates(m -> m.is(category))
+                        .plusPredicates(m -> m.custom().fields().ofString(STRING_FIELD_NAME).is("foo"))
+                        .plusPredicates(m -> m.custom().fields().ofString("njetpresent").isNotPresent())
+                        .plusPredicates(m -> m.custom().fields().ofLocalizedString(LOC_STRING_FIELD_NAME).locale(ENGLISH).is("bar"));
+                assertThat(execute(categoryQuery).head()).contains(updatedCategory);
+            });
+            return type;
+        });
     }
 }

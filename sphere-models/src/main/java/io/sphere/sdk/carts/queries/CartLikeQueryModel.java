@@ -2,12 +2,14 @@ package io.sphere.sdk.carts.queries;
 
 import io.sphere.sdk.customergroups.CustomerGroup;
 import io.sphere.sdk.queries.*;
+import io.sphere.sdk.types.queries.CustomResourceQueryModelImpl;
+import io.sphere.sdk.types.queries.WithCustomQueryModel;
 
 /**
  * Base class to create predicates for {@link io.sphere.sdk.carts.CartLike} resources.
  * @param <T> query context
  */
-public abstract class CartLikeQueryModel<T> extends ResourceQueryModelImpl<T> {
+public abstract class CartLikeQueryModel<T> extends CustomResourceQueryModelImpl<T> implements WithCustomQueryModel<T> {
     protected CartLikeQueryModel(QueryModel<T> parent, String pathSegment) {
         super(parent, pathSegment);
     }
@@ -37,6 +39,30 @@ public abstract class CartLikeQueryModel<T> extends ResourceQueryModelImpl<T> {
     }
 
     public LineItemCollectionQueryModel<T> lineItems() {
-        return new LineItemCollectionQueryModelImpl<>(this, "lineItems");
+        return new LineItemLikeCollectionQueryModelImpl<>(this, "lineItems");
+    }
+
+    public CustomLineItemCollectionQueryModel<T> customLineItems() {
+        return new LineItemLikeCollectionQueryModelImpl<>(this, "customLineItems");
+    }
+
+    public AddressQueryModel<T> shippingAddress() {
+        return addressModel("shippingAddress");
+    }
+
+    public AddressQueryModel<T> billingAddress() {
+        return addressModel("billingAddress");
+    }
+
+    public CartShippingInfoQueryModel<T> shippingInfo() {
+        return new CartShippingInfoQueryModelImpl<>(this, "shippingInfo");
+    }
+
+    public DiscountCodeInfoCollectionQueryModel<T> discountCodes() {
+        return new DiscountCodeInfoCollectionQueryModelImpl<>(this, "discountCodes");
+    }
+
+    public PaymentInfoQueryModel<T> paymentInfo() {
+        return new PaymentInfoQueryModelImpl<>(this, "paymentInfo");
     }
 }

@@ -15,6 +15,7 @@ import java.util.function.UnaryOperator;
 
 import static java.util.Arrays.asList;
 import static io.sphere.sdk.test.SphereTestUtils.*;
+import static java.util.Objects.requireNonNull;
 
 public final class TaxCategoryFixtures {
 
@@ -52,6 +53,7 @@ public final class TaxCategoryFixtures {
     }
 
     public static void withTaxCategory(final TestClient client, final TaxCategoryDraft draft, final Consumer<TaxCategory> user) {
+        requireNonNull(draft, "draft should not be null");
         final PagedQueryResult<TaxCategory> results = client.execute(TaxCategoryQuery.of().byName(draft.getName()));
         results.getResults().forEach(tc -> client.execute(TaxCategoryDeleteCommand.of(tc)));
         final TaxCategory taxCategory = client.execute(TaxCategoryCreateCommand.of(draft));

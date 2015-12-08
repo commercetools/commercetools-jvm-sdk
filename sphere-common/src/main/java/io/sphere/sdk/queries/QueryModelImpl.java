@@ -58,7 +58,7 @@ public class QueryModelImpl<T> extends Base implements QueryModel<T> {
         return new ReferenceCollectionQueryModelImpl<>(this, pathSegment);
     }
 
-    protected <E extends SphereEnumeration> SphereEnumerationQueryModel<T, E> enumerationQueryModel(final String pathSegment) {
+    protected <E extends SphereEnumeration> SphereEnumerationOptionalQueryModel<T, E> enumerationQueryModel(final String pathSegment) {
         return new SphereEnumerationQueryModelImpl<>(this, pathSegment);
     }
 
@@ -86,12 +86,16 @@ public class QueryModelImpl<T> extends Base implements QueryModel<T> {
         return new IntegerQuerySortingModelImpl<>(this, pathSegment);
     }
 
-    protected LocalizedStringQuerySortingModel<T> localizedStringQuerySortingModel(final String pathSegment) {
+    protected LocalizedStringQuerySortingModelImpl<T> localizedStringQuerySortingModel(final String pathSegment) {
         return new LocalizedStringQuerySortingModelImpl<>(this, pathSegment);
     }
 
     protected final TimestampSortingModel<T> timestampSortingModel(final String pathSegment) {
         return new TimestampSortingModelImpl<>(this, pathSegment);
+    }
+
+    protected final AddressQueryModel<T> addressModel(final String pathSegment) {
+        return new AddressQueryModelImpl<>(this, pathSegment);
     }
 
     @SuppressWarnings("unchecked")

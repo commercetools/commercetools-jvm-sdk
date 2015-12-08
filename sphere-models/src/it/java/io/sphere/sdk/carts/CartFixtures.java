@@ -20,6 +20,8 @@ import io.sphere.sdk.discountcodes.commands.DiscountCodeDeleteCommand;
 import io.sphere.sdk.models.Address;
 import io.sphere.sdk.models.AddressBuilder;
 import io.sphere.sdk.models.LocalizedString;
+import io.sphere.sdk.orders.Order;
+import io.sphere.sdk.orders.commands.OrderDeleteCommand;
 import io.sphere.sdk.products.Product;
 import io.sphere.sdk.utils.MoneyImpl;
 
@@ -68,13 +70,23 @@ public class CartFixtures {
         client.execute(CartDeleteCommand.of(cartToDelete));
     }
 
-    public static void withCart(final TestClient client, final Cart cart, final UnaryOperator<Cart> operator) {
-        final Cart updatedCart = operator.apply(cart);
-        client.execute(CartDeleteCommand.of(updatedCart));
+    public static void withCart(final TestClient client, final Cart cart, final Function<Cart, CartLike<?>> operator) {
+        final CartLike<?> cartLike = operator.apply(cart);
+        delete(client, cartLike);
+    }
+
+    private static void delete(final TestClient client, final CartLike<?> cartLike) {
+        if (cartLike instanceof Cart) {
+            final Cart cart = (Cart) cartLike;
+            client.execute(CartDeleteCommand.of(cart));
+        } else {
+            final Order order = (Order) cartLike;
+            client.execute(OrderDeleteCommand.of(order));
+        }
     }
 
     public static void withFilledCart(final TestClient client, final Consumer<Cart> f) {
-        withTaxedProduct(client, product -> {
+        withTaxedProduct(client,  product -> {
             final Cart cart = createCartWithShippingAddress(client);
             assertThat(cart.getLineItems()).hasSize(0);
             final long quantity = 3;

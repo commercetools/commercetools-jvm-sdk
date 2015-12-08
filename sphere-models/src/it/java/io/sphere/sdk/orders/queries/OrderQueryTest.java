@@ -1,11 +1,13 @@
 package io.sphere.sdk.orders.queries;
 
+import com.neovisionaries.i18n.CountryCode;
 import io.sphere.sdk.carts.CartFixtures;
 import io.sphere.sdk.channels.Channel;
 import io.sphere.sdk.customers.CustomerFixtures;
 import io.sphere.sdk.orders.Order;
 import io.sphere.sdk.orders.OrderFixtures;
 import io.sphere.sdk.orders.commands.OrderUpdateCommand;
+import io.sphere.sdk.orders.commands.updateactions.SetOrderNumber;
 import io.sphere.sdk.orders.commands.updateactions.UpdateSyncInfo;
 import io.sphere.sdk.queries.QueryPredicate;
 import io.sphere.sdk.queries.QuerySort;
@@ -21,6 +23,7 @@ import static io.sphere.sdk.channels.ChannelRole.ORDER_EXPORT;
 import static io.sphere.sdk.orders.OrderFixtures.withOrder;
 import static io.sphere.sdk.test.SphereTestUtils.assertEventually;
 import static io.sphere.sdk.test.SphereTestUtils.randomKey;
+import static java.util.Collections.singletonList;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class OrderQueryTest extends IntegrationTest {
@@ -70,8 +73,25 @@ public class OrderQueryTest extends IntegrationTest {
     }
 
     @Test
+    public void orderNumber() throws Exception {
+        assertOrderIsFoundWithPredicate(
+                order -> client().execute(OrderUpdateCommand.of(order, SetOrderNumber.of(randomKey()))),
+                order -> MODEL.orderNumber().is(order.getOrderNumber()));
+    }
+
+    @Test
     public void country() throws Exception {
         assertOrderIsFoundWithPredicate(order -> MODEL.country().is(CartFixtures.DEFAULT_COUNTRY));
+    }
+
+    @Test
+    public void countryIsIn() throws Exception {
+        assertOrderIsFoundWithPredicate(order -> MODEL.country().isIn(singletonList(CartFixtures.DEFAULT_COUNTRY)));
+    }
+
+    @Test
+    public void countryIsNot() throws Exception {
+        assertOrderIsFoundWithPredicate(order -> MODEL.country().isNot(CountryCode.AF));
     }
 
     @Test
@@ -121,7 +141,7 @@ public class OrderQueryTest extends IntegrationTest {
             final Order updatedOrder = orderMutator.apply(order);
             assertEventually(() -> {
 
-                final OrderQuery query = p.apply(order).withSort(QuerySort.of("createdAt desc"));
+                final OrderQuery query = p.apply(updatedOrder).withSort(QuerySort.of("createdAt desc"));
                 final List<Order> results = client().execute(query).getResults();
 
                 if (shouldFind) {
