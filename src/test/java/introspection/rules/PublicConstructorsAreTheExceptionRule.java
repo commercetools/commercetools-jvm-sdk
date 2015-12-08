@@ -12,6 +12,8 @@ public class PublicConstructorsAreTheExceptionRule extends ConstructorStrategyRu
                     "io.sphere.sdk.customobjects.commands.CustomObjectCustomJsonMappingUpsertCommand," +
                     "io.sphere.sdk.expansion.ExpandedModel," +
                     "io.sphere.sdk.carts.queries.TaxRateQueryModelImpl," +
+                    "io.sphere.sdk.products.queries.PriceCollectionQueryModel," +
+                    "io.sphere.sdk.products.queries.ProductVariantQueryModel," +
                     "io.sphere.sdk.search.MetaModelSearchDslBuilder").split(",( )?"));
 
     @Override
