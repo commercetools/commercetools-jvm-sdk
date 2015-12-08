@@ -18,8 +18,8 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":6,"i1":6,"i2":6,"i3":6,"i4":6};
-var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],4:["t3","Abstract Methods"]};
+var methods = {"i0":6,"i1":18,"i2":6,"i3":18,"i4":6,"i5":6,"i6":6};
+var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],4:["t3","Abstract Methods"],16:["t5","Default Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
 var tableTab = "tableTab";
@@ -142,7 +142,7 @@ extends <a href="../../../../io/sphere/sdk/search/ResourceSearch.html" title="in
 </a>
 <h3>Method Summary</h3>
 <table class="memberSummary" border="0" cellpadding="3" cellspacing="0" summary="Method Summary table, listing methods, and an explanation">
-<caption><span id="t0" class="activeTableTab"><span>All Methods</span><span class="tabEnd">&nbsp;</span></span><span id="t2" class="tableTab"><span><a href="javascript:show(2);">Instance Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t3" class="tableTab"><span><a href="javascript:show(4);">Abstract Methods</a></span><span class="tabEnd">&nbsp;</span></span></caption>
+<caption><span id="t0" class="activeTableTab"><span>All Methods</span><span class="tabEnd">&nbsp;</span></span><span id="t2" class="tableTab"><span><a href="javascript:show(2);">Instance Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t3" class="tableTab"><span><a href="javascript:show(4);">Abstract Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t5" class="tableTab"><span><a href="javascript:show(16);">Default Methods</a></span><span class="tabEnd">&nbsp;</span></span></caption>
 <tr>
 <th class="colFirst" scope="col">Modifier and Type</th>
 <th class="colLast" scope="col">Method and Description</th>
@@ -154,25 +154,37 @@ extends <a href="../../../../io/sphere/sdk/search/ResourceSearch.html" title="in
 </td>
 </tr>
 <tr id="i1" class="rowColor">
-<td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/SearchDsl.html" title="type parameter in SearchDsl">C</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/SearchDsl.html#withLimit-java.lang.Long-">withLimit</a></span>(java.lang.Long&nbsp;limit)</code>
+<td class="colFirst"><code>default <a href="../../../../io/sphere/sdk/search/SearchDsl.html" title="type parameter in SearchDsl">C</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/SearchDsl.html#withLimit-long-">withLimit</a></span>(long&nbsp;limit)</code>
 <div class="block">Returns a new object with the new limit.</div>
 </td>
 </tr>
 <tr id="i2" class="altColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/SearchDsl.html" title="type parameter in SearchDsl">C</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/SearchDsl.html#withLimit-java.lang.Long-">withLimit</a></span>(java.lang.Long&nbsp;limit)</code>
+<div class="block">Returns a new object with the new limit.</div>
+</td>
+</tr>
+<tr id="i3" class="rowColor">
+<td class="colFirst"><code>default <a href="../../../../io/sphere/sdk/search/SearchDsl.html" title="type parameter in SearchDsl">C</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/SearchDsl.html#withOffset-long-">withOffset</a></span>(long&nbsp;offset)</code>
+<div class="block">Returns a new object with the new offset.</div>
+</td>
+</tr>
+<tr id="i4" class="altColor">
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/SearchDsl.html" title="type parameter in SearchDsl">C</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/SearchDsl.html#withOffset-java.lang.Long-">withOffset</a></span>(java.lang.Long&nbsp;offset)</code>
 <div class="block">Returns a new object with the new offset.</div>
 </td>
 </tr>
-<tr id="i3" class="rowColor">
+<tr id="i5" class="rowColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/SearchDsl.html" title="type parameter in SearchDsl">C</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/SearchDsl.html#withText-java.util.Locale-java.lang.String-">withText</a></span>(java.util.Locale&nbsp;locale,
         java.lang.String&nbsp;text)</code>
 <div class="block">Returns a new object with the new text as search text.</div>
 </td>
 </tr>
-<tr id="i4" class="altColor">
+<tr id="i6" class="altColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/SearchDsl.html" title="type parameter in SearchDsl">C</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/SearchDsl.html#withText-io.sphere.sdk.models.LocalizedStringEntry-">withText</a></span>(<a href="../../../../io/sphere/sdk/models/LocalizedStringEntry.html" title="class in io.sphere.sdk.models">LocalizedStringEntry</a>&nbsp;text)</code>
 <div class="block">Returns a new object with the new text as search text.</div>
@@ -280,13 +292,45 @@ extends <a href="../../../../io/sphere/sdk/search/ResourceSearch.html" title="in
 </dl>
 </li>
 </ul>
+<a name="withLimit-long-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>withLimit</h4>
+<pre>default&nbsp;<a href="../../../../io/sphere/sdk/search/SearchDsl.html" title="type parameter in SearchDsl">C</a>&nbsp;withLimit(long&nbsp;limit)</pre>
+<div class="block">Returns a new object with the new limit.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>limit</code> - the new limit</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>a new object with <code>limit</code></dd>
+</dl>
+</li>
+</ul>
 <a name="withOffset-java.lang.Long-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>withOffset</h4>
+<pre><a href="../../../../io/sphere/sdk/search/SearchDsl.html" title="type parameter in SearchDsl">C</a>&nbsp;withOffset(java.lang.Long&nbsp;offset)</pre>
+<div class="block">Returns a new object with the new offset.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>offset</code> - the new offset</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>a new object with <code>offset</code></dd>
+</dl>
+</li>
+</ul>
+<a name="withOffset-long-">
 <!--   -->
 </a>
 <ul class="blockListLast">
 <li class="blockList">
 <h4>withOffset</h4>
-<pre><a href="../../../../io/sphere/sdk/search/SearchDsl.html" title="type parameter in SearchDsl">C</a>&nbsp;withOffset(java.lang.Long&nbsp;offset)</pre>
+<pre>default&nbsp;<a href="../../../../io/sphere/sdk/search/SearchDsl.html" title="type parameter in SearchDsl">C</a>&nbsp;withOffset(long&nbsp;offset)</pre>
 <div class="block">Returns a new object with the new offset.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
