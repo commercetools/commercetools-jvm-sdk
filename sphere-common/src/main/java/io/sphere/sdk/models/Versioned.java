@@ -39,7 +39,7 @@ public interface Versioned<T> extends Identifiable<T> {
         return of(versioned.getId(), versioned.getVersion());
     }
 
-    static <T> Versioned<T> of(final String id, final Long version) {
+    static <T> Versioned<T> of(final String id, final long version) {
         return new SimpleVersioned<>(id, version);
     }
 }

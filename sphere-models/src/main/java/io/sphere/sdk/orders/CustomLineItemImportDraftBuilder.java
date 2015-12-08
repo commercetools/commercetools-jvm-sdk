@@ -28,7 +28,7 @@ public class CustomLineItemImportDraftBuilder extends Base implements Builder<Cu
         this.taxCategory = taxCategory;
     }
 
-    public static CustomLineItemImportDraftBuilder of(final LocalizedString name, final Long quantity, final MonetaryAmount money, final Referenceable<TaxCategory> taxCategory) {
+    public static CustomLineItemImportDraftBuilder of(final LocalizedString name, final long quantity, final MonetaryAmount money, final Referenceable<TaxCategory> taxCategory) {
         return new CustomLineItemImportDraftBuilder(name, money, quantity, taxCategory.toReference());
     }
 

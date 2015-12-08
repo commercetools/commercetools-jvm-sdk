@@ -18,11 +18,11 @@ public class ReturnItemDraft extends Base {
         this.comment = comment;
     }
 
-    public static ReturnItemDraft of(final Long quantity, final String lineItemId, final ReturnShipmentState shipmentState, @Nullable final String comment) {
+    public static ReturnItemDraft of(final long quantity, final String lineItemId, final ReturnShipmentState shipmentState, @Nullable final String comment) {
         return new ReturnItemDraft(quantity, lineItemId, shipmentState, comment);
     }
 
-    public static ReturnItemDraft of(final Long quantity, final String lineItemId, final ReturnShipmentState shipmentState) {
+    public static ReturnItemDraft of(final long quantity, final String lineItemId, final ReturnShipmentState shipmentState) {
         return of(quantity, lineItemId, shipmentState, null);
     }
 

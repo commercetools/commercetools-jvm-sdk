@@ -30,11 +30,11 @@ public class ChangeLineItemQuantity extends UpdateActionImpl<Cart> {
         return quantity;
     }
 
-    public static ChangeLineItemQuantity of(final String lineItemId, final Long quantity) {
+    public static ChangeLineItemQuantity of(final String lineItemId, final long quantity) {
         return new ChangeLineItemQuantity(lineItemId, quantity);
     }
 
-    public static UpdateAction<Cart> of(final LineItem lineItem, final Long quantity) {
+    public static UpdateAction<Cart> of(final LineItem lineItem, final long quantity) {
         return of(lineItem.getId(), quantity);
     }
 }

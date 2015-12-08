@@ -109,3 +109,4 @@ authUrl=https://auth.sphere.io
 1. alternatively use your IDE to execute the tests
     * Eclipse: generate the project files with `sbt "eclipse with-source=true"`, see also https://www.playframework.com/documentation/2.4.x/IDE
     * IntelliJ IDEA has a SBT plugin
+    
