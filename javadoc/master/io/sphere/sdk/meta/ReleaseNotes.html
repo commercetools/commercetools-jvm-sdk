@@ -130,6 +130,28 @@ extends java.lang.Object</pre>
 
 
 
+ <h3 class=released-version id="v1_0_0_M23">1.0.0-M23 (09.12.2015)</h3>
+
+ <ul>
+ <li class=new-in-release>Create a cart including shipping and billing address as well as with items. See <a href="../../../../io/sphere/sdk/carts/CartDraftBuilder.html" title="class in io.sphere.sdk.carts"><code>CartDraftBuilder</code></a></li>
+ <li class=new-in-release>Improved Order Query, query by (custom) line items, billing and shipping address, discount codes and custom fields.</li>
+ <li class=new-in-release>Query <a href="../../../../io/sphere/sdk/types/Type.html" title="interface in io.sphere.sdk.types"><code>Type</code></a>s by resourceTypeIds and fieldDefinitions.</li>
+ <li class=new-in-release>Query <a href="../../../../io/sphere/sdk/orders/Order.html" title="interface in io.sphere.sdk.orders"><code>Order</code></a> by empty or not empty syncInfo.</li>
+ <li class=new-in-release>Added <a href="../../../../io/sphere/sdk/queries/QueryDsl.html#plusSort-java.util.List-"><code>QueryDsl.plusSort(List)</code></a>.</li>
+ <li class=new-in-release>Added query predicates for createdAt and lastModifiedAt.</li>
+ <li class=new-in-release>Added isIn() query for enum constants like <a href="../../../../io/sphere/sdk/states/StateType.html" title="enum in io.sphere.sdk.states"><code>StateType</code></a>.</li>
+ <li class=new-in-release>Added <a href="../../../../io/sphere/sdk/products/queries/ProductProjectionQuery.html#bySku-java.util.List-"><code>ProductProjectionQuery.bySku(List)</code></a>.</li>
+ <li class=new-in-release>Added <a href="../../../../io/sphere/sdk/taxcategories/queries/TaxCategoryByIdGet.html" title="interface in io.sphere.sdk.taxcategories.queries"><code>TaxCategoryByIdGet</code></a>.</li>
+ <li class=new-in-release><a href="../../../../io/sphere/sdk/client/SphereClientFactory.html" title="class in io.sphere.sdk.client"><code>SphereClientFactory</code></a> also auto discovers the Apache HTTP client SDK module if this is in the classpath and not the Async HTTP Client module.</li>
+ <li class=new-in-release>Added <a href="../../../../io/sphere/sdk/types/CustomFields.html#getFieldsJsonMap--"><code>CustomFields.getFieldsJsonMap()</code></a>.</li>
+ <li class=change-in-release>Primitive scalar values are now as wrapper classes defined (int to Long, long to Long)</li>
+ <li class=change-in-release><a href="../../../../io/sphere/sdk/cartdiscounts/DiscountedLineItemPriceForQuantity.html" title="class in io.sphere.sdk.cartdiscounts"><code>DiscountedLineItemPriceForQuantity</code></a> and <a href="../../../../io/sphere/sdk/carts/commands/updateactions/RemoveLineItem.html" title="class in io.sphere.sdk.carts.commands.updateactions"><code>RemoveLineItem</code></a> uses long for quantity. </li>
+ <li class=change-in-release><a href="../../../../io/sphere/sdk/models/Versioned.html#getVersion--"><code>Versioned.getVersion()</code></a> is of type <code>Long</code> instead of long.</li>
+ <li class=change-in-release>Internal change <a href="../../../../io/sphere/sdk/http/FormUrlEncodedHttpRequestBody.html" title="class in io.sphere.sdk.http"><code>FormUrlEncodedHttpRequestBody</code></a> had a map as interface, now it is a list of name value pairs. For the high level usage that should affect nothing.</li>
+ <li class=new-in-release>Added <a href="../../../../io/sphere/sdk/client/SphereClientConfig.html#ofProperties-java.util.Properties-java.lang.String-"><code>SphereClientConfig.ofProperties(Properties, String)</code></a> to get the commercetools credentials form a properties file.</li>
+ <li class=new-in-release>For SDK contributors: <a href="https://github.com/sphereio/sphere-jvm-sdk#executing-integration-tests" target="_blank">integration test credentials can be set via a properties file</a></li>
+ </ul>
+
  <h3 class=released-version id="v1_0_0_M22">1.0.0-M22 (01.12.2015)</h3>
  <ul>
  <li class=change-in-release><a href="../../../../io/sphere/sdk/products/attributes/AttributeDefinition.html#getIsRequired--"><code>AttributeDefinition.getIsRequired()</code></a> and <a href="../../../../io/sphere/sdk/products/attributes/AttributeDefinition.html#getIsSearchable--"><code>AttributeDefinition.getIsSearchable()</code></a> ()} have been
@@ -179,7 +201,7 @@ extends java.lang.Object</pre>
  </ul>
 
 
- <h3 class=released-version id="v1_0_0_M20">1.0.0-M20</h3>
+ <h3 class=released-version id="v1_0_0_M20">1.0.0-M20 (02.11.2015)</h3>
  <ul>
   <li class=change-in-release><code>query.withSort(m -&gt; m.createdAt().sort(DESC));</code> is deprecated, use it with <code>query.withSort(m -&gt; m.createdAt().sort().desc());</code></li>
   <li class=fixed-in-release>Duplicates with <a href="../../../../io/sphere/sdk/queries/ExperimentalReactiveStreamUtils.html#publisherOf-io.sphere.sdk.queries.QueryDsl-io.sphere.sdk.client.SphereClient-"><code>ExperimentalReactiveStreamUtils.publisherOf(QueryDsl, SphereClient)</code></a> on multiple parallel request(n) calls. See <a href="https://github.com/sphereio/sphere-jvm-sdk/issues/809">809</a>.</li>
@@ -189,7 +211,7 @@ extends java.lang.Object</pre>
  </ul>
 
 
- <h3 class=released-version id="v1_0_0_M19">1.0.0-M19</h3>
+ <h3 class=released-version id="v1_0_0_M19">1.0.0-M19 (16.10.2015)</h3>
 
  <a class="theme-btn expand-all">Expand all</a>
  <br>
@@ -275,7 +297,7 @@ return execute(searchRequest).getResults();
 
 
 
- <h3 class=released-version id="v1_0_0_M18">1.0.0-M18</h3>
+ <h3 class=released-version id="v1_0_0_M18">1.0.0-M18 (01.10.2015)</h3>
 
  <ul>
  <li class=new-in-release><a href="../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html#withFuzzy-java.lang.Boolean-"><code>ProductProjectionSearch.withFuzzy(Boolean)</code></a></li>
@@ -289,7 +311,7 @@ return execute(searchRequest).getResults();
  </ul>
 
 
- <h3 class=released-version id="v1_0_0_M17">1.0.0-M17</h3>
+ <h3 class=released-version id="v1_0_0_M17">1.0.0-M17 (28.08.2015)</h3>
 
  <ul>
  <li class=new-in-release>Support of full locales like "de_DE"</li>
@@ -303,7 +325,7 @@ return execute(searchRequest).getResults();
  <li class=new-in-release><a href="../../../../io/sphere/sdk/models/Address.html#equalsIgnoreId-io.sphere.sdk.models.Address-"><code>Address.equalsIgnoreId(Address)</code></a>, <a href="../../../../io/sphere/sdk/products/Price.html#equalsIgnoreId-io.sphere.sdk.products.Price-"><code>Price.equalsIgnoreId(Price)</code></a>, <a href="../../../../io/sphere/sdk/taxcategories/TaxRate.html#equalsIgnoreId-io.sphere.sdk.taxcategories.TaxRate-"><code>TaxRate.equalsIgnoreId(TaxRate)</code></a></li>
  </ul>
 
- <h3 class=released-version id="v1_0_0_M16">1.0.0-M16</h3>
+ <h3 class=released-version id="v1_0_0_M16">1.0.0-M16 (06.08.2015)</h3>
  <p>This release is intended to be the last release before 1.0.0-RC1.</p>
 
  <ul>
@@ -361,7 +383,7 @@ return execute(searchRequest).getResults();
  </ul>
 
 
- <h3 class=released-version id="v1_0_0_M15">1.0.0-M15</h3>
+ <h3 class=released-version id="v1_0_0_M15">1.0.0-M15 (23.06.2015)</h3>
 
  <a class="theme-btn expand-all">Expand all</a>
 
@@ -429,7 +451,7 @@ assertThat(query.expansionPaths().get(0).toSphereExpand())
 
 
 
- <h3 class=released-version id=v1_0_0_M14>1.0.0-M14</h3>
+ <h3 class=released-version id=v1_0_0_M14>1.0.0-M14 (27.05.2015)</h3>
  <ul>
  <li class=new-in-release>New fields in <a href="../../../../io/sphere/sdk/products/Price.html" title="class in io.sphere.sdk.products"><code>Price</code></a>: <a href="../../../../io/sphere/sdk/products/Price.html#validFrom"><code>Price.validFrom</code></a> and <a href="../../../../io/sphere/sdk/products/Price.html#validUntil"><code>Price.validUntil</code></a>.</li>
  <li class=new-in-release>Use <a href="../../../../io/sphere/sdk/products/queries/ProductProjectionQueryModel.html#allVariants--"><code>ProductProjectionQueryModel.allVariants()</code></a> to formulate a predicate for all variants. In SPHERE.IO the json fields masterVariant (object) and variants (array of objects) together contain all variants.</li>
@@ -459,7 +481,7 @@ assertThat(query.expansionPaths().get(0).toSphereExpand())
  It created twice a http client instance and closed just one.</li>
  </ul>
 
- <h3 class=released-version id=v1_0_0_M13>1.0.0-M13</h3>
+ <h3 class=released-version id=v1_0_0_M13>1.0.0-M13 (21.04.2015)</h3>
  <ul>
      <li class=new-in-release><a href="../../../../io/sphere/sdk/models/LocalizedString.html#mapValue-java.util.function.BiFunction-"><code>LocalizedString.mapValue(BiFunction)</code></a> and <a href="../../../../io/sphere/sdk/models/LocalizedString.html#stream--"><code>LocalizedString.stream()</code></a>
      can be used transform <a href="../../../../io/sphere/sdk/models/LocalizedString.html" title="class in io.sphere.sdk.models"><code>LocalizedString</code></a>, for example for creating slugs or formatting.</li>
@@ -495,7 +517,7 @@ assertThat(query.expansionPaths().get(0).toSphereExpand())
     <li class=fixed-in-release>URL encoding of parameters. See <a href="https://github.com/sphereio/sphere-jvm-sdk/issues/240">#240</a>.</li>
  </ul>
 
- <h3 class=released-version id=v1_0_0_M12>1.0.0-M12</h3>
+ <h3 class=released-version id=v1_0_0_M12>1.0.0-M12 (19.03.2015)</h3>
  <ul>
  <li class=new-in-release>Added the <a href="../../../../io/sphere/sdk/orders/commands/OrderImportCommand.html" title="class in io.sphere.sdk.orders.commands"><code>OrderImportCommand</code></a>.</li>
  <li class=new-in-release>Added the nested attributes: <code>io.sphere.sdk.attributes.AttributeAccess#ofNested()</code> + <code>io.sphere.sdk.attributes.AttributeAccess#ofNestedSet()</code>.</li>
@@ -514,7 +536,7 @@ assertThat(query.expansionPaths().get(0).toSphereExpand())
  <li class=fixed-in-release><a href="https://github.com/sphereio/sphere-jvm-sdk/issues/312">Incompatibility with Jackson 2.5.1</a> has been fixed. A cause message was "No suitable constructor found for type [simple type, class io.sphere.sdk.models.ImageImpl]: can not instantiate from JSON object (missing default constructor or creator, or perhaps need to add/enable type information?)"</li>
  </ul>
 
- <h3 class=released-version id=v1_0_0_M11>1.0.0-M11</h3>
+ <h3 class=released-version id=v1_0_0_M11>1.0.0-M11 (03.03.2015)</h3>
  <h4>Overall</h4>
  <ul>
     <li class=new-in-release>Code examples contain the links to the GitHub source code.</li>
@@ -553,7 +575,7 @@ assertThat(query.expansionPaths().get(0).toSphereExpand())
  <li class=new-in-release>Added update actions: <a href="../../../../io/sphere/sdk/products/commands/updateactions/AddVariant.html" title="class in io.sphere.sdk.products.commands.updateactions"><code>AddVariant</code></a>, <a href="../../../../io/sphere/sdk/products/commands/updateactions/RemoveFromCategory.html" title="class in io.sphere.sdk.products.commands.updateactions"><code>RemoveFromCategory</code></a>, <a href="../../../../io/sphere/sdk/products/commands/updateactions/RemoveVariant.html" title="class in io.sphere.sdk.products.commands.updateactions"><code>RemoveVariant</code></a>, <a href="../../../../io/sphere/sdk/products/commands/updateactions/RevertStagedChanges.html" title="class in io.sphere.sdk.products.commands.updateactions"><code>RevertStagedChanges</code></a>, <a href="../../../../io/sphere/sdk/products/commands/updateactions/SetAttribute.html" title="class in io.sphere.sdk.products.commands.updateactions"><code>SetAttribute</code></a>, <a href="../../../../io/sphere/sdk/products/commands/updateactions/SetAttributeInAllVariants.html" title="class in io.sphere.sdk.products.commands.updateactions"><code>SetAttributeInAllVariants</code></a>, <a href="../../../../io/sphere/sdk/products/commands/updateactions/SetSearchKeywords.html" title="class in io.sphere.sdk.products.commands.updateactions"><code>SetSearchKeywords</code></a></li>
  </ul>
 
- <h3 class=released-version id=v1_0_0_M10>1.0.0-M10</h3>
+ <h3 class=released-version id=v1_0_0_M10>1.0.0-M10 (26.01.2015)</h3>
  <ul>
  <li class=new-in-release>Added <a href="../../../../io/sphere/sdk/customobjects/CustomObject.html" title="interface in io.sphere.sdk.customobjects"><code>CustomObject</code></a> models and endpoints. There is also a <a href="../../../../io/sphere/sdk/meta/CustomObjectDocumentation.html" title="class in io.sphere.sdk.meta"><code>tutorial for custom objects</code></a>.</li>
  <li class=new-in-release>Added the <a href="../../../../io/sphere/sdk/zones/Zone.html" title="interface in io.sphere.sdk.zones"><code>Zone</code></a> models and endpoints.</li>
