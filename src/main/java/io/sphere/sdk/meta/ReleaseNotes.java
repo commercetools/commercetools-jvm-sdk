@@ -70,14 +70,6 @@ import java.util.function.Function;
  </ul>
  -->
 
- <h3>Upcoming Release</h3>
- <li class=change-in-release>Http core: {@link io.sphere.sdk.http.FormUrlEncodedHttpRequestBody} did not respect the order of elements and possible duplicates.
- Use  {@link io.sphere.sdk.http.FormUrlEncodedHttpRequestBody#of(List)} for construction and {@link FormUrlEncodedHttpRequestBody#getParameters()} for getting the data.
- {@link FormUrlEncodedHttpRequestBody#getData()} is deprecated.</li>
-
-
-
-
  <h3 class=released-version id="v1_0_0_M23">1.0.0-M23 (09.12.2015)</h3>
 
  <ul>
@@ -95,7 +87,9 @@ import java.util.function.Function;
  <li class=change-in-release>Primitive scalar values are now as wrapper classes defined (int to Long, long to Long)</li>
  <li class=change-in-release>{@link io.sphere.sdk.cartdiscounts.DiscountedLineItemPriceForQuantity} and {@link io.sphere.sdk.carts.commands.updateactions.RemoveLineItem} uses long for quantity. </li>
  <li class=change-in-release>{@link Versioned#getVersion()} is of type {@link Long} instead of long.</li>
- <li class=change-in-release>Internal change {@link FormUrlEncodedHttpRequestBody} had a map as interface, now it is a list of name value pairs. For the high level usage that should affect nothing.</li>
+ <li class=change-in-release>Http core: {@link io.sphere.sdk.http.FormUrlEncodedHttpRequestBody} did not respect the order of elements and possible duplicates.
+ Use  {@link io.sphere.sdk.http.FormUrlEncodedHttpRequestBody#of(List)} for construction and {@link FormUrlEncodedHttpRequestBody#getParameters()} for getting the data.
+ {@link FormUrlEncodedHttpRequestBody#getData()} is deprecated.</li>
  <li class=new-in-release>Added {@link io.sphere.sdk.client.SphereClientConfig#ofProperties(Properties, String)} to get the commercetools credentials form a properties file.</li>
  <li class=new-in-release>For SDK contributors: <a href="https://github.com/sphereio/sphere-jvm-sdk#executing-integration-tests" target="_blank">integration test credentials can be set via a properties file</a></li>
  </ul>
