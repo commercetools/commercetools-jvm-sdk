@@ -121,6 +121,7 @@ public class SphereClientConfig extends Base implements SphereAuthConfig, Sphere
      {@value #PROPERTIES_KEY_AUTH_URL_SUFFIX} and
      {@value #PROPERTIES_KEY_API_URL_SUFFIX}.
 
+     @param properties properties containing the commercetools platform credentials
      @param prefix prefix of the property keys
      @return a new {@link SphereClientConfig} containing the values of the properties.
      */
