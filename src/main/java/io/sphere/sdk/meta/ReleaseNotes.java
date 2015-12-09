@@ -20,10 +20,7 @@ import io.sphere.sdk.http.ApacheHttpClientAdapter;
 import io.sphere.sdk.http.FormUrlEncodedHttpRequestBody;
 import io.sphere.sdk.http.HttpResponse;
 import io.sphere.sdk.http.AsyncHttpClientAdapter;
-import io.sphere.sdk.models.Address;
-import io.sphere.sdk.models.Identifiable;
-import io.sphere.sdk.models.LocalizedString;
-import io.sphere.sdk.models.Referenceable;
+import io.sphere.sdk.models.*;
 import io.sphere.sdk.orders.Order;
 import io.sphere.sdk.orders.expansion.OrderExpansionModel;
 import io.sphere.sdk.payments.Transaction;
@@ -44,10 +41,12 @@ import io.sphere.sdk.queries.QueryDsl;
 import io.sphere.sdk.queries.QueryPredicate;
 import io.sphere.sdk.search.SearchKeywords;
 import io.sphere.sdk.taxcategories.TaxRate;
+import io.sphere.sdk.types.CustomFields;
 import io.sphere.sdk.types.CustomFieldsDraft;
 
 import javax.money.CurrencyUnit;
 import java.util.List;
+import java.util.Properties;
 import java.util.concurrent.CompletionStage;
 import java.util.function.BiFunction;
 import java.util.function.Function;
@@ -78,6 +77,28 @@ import java.util.function.Function;
 
 
 
+
+ <h3 class=released-version id="v1_0_0_M23">1.0.0-M23 (09.12.2015)</h3>
+
+ <ul>
+ <li class=new-in-release>Create a cart including shipping and billing address as well as with items. See {@link io.sphere.sdk.carts.CartDraftBuilder}</li>
+ <li class=new-in-release>Improved Order Query, query by (custom) line items, billing and shipping address, discount codes and custom fields.</li>
+ <li class=new-in-release>Query {@link io.sphere.sdk.types.Type}s by resourceTypeIds and fieldDefinitions.</li>
+ <li class=new-in-release>Query {@link Order} by empty or not empty syncInfo.</li>
+ <li class=new-in-release>Added {@link QueryDsl#plusSort(List)}.</li>
+ <li class=new-in-release>Added query predicates for createdAt and lastModifiedAt.</li>
+ <li class=new-in-release>Added isIn() query for enum constants like {@link io.sphere.sdk.states.StateType}.</li>
+ <li class=new-in-release>Added {@link ProductProjectionQuery#bySku(List)}.</li>
+ <li class=new-in-release>Added {@link io.sphere.sdk.taxcategories.queries.TaxCategoryByIdGet}.</li>
+ <li class=new-in-release>{@link io.sphere.sdk.client.SphereClientFactory} also auto discovers the Apache HTTP client SDK module if this is in the classpath and not the Async HTTP Client module.</li>
+ <li class=new-in-release>Added {@link CustomFields#getFieldsJsonMap()}.</li>
+ <li class=change-in-release>Primitive scalar values are now as wrapper classes defined (int to Long, long to Long)</li>
+ <li class=change-in-release>{@link io.sphere.sdk.cartdiscounts.DiscountedLineItemPriceForQuantity} and {@link io.sphere.sdk.carts.commands.updateactions.RemoveLineItem} uses long for quantity. </li>
+ <li class=change-in-release>{@link Versioned#getVersion()} is of type {@link Long} instead of long.</li>
+ <li class=change-in-release>Internal change {@link FormUrlEncodedHttpRequestBody} had a map as interface, now it is a list of name value pairs. For the high level usage that should affect nothing.</li>
+ <li class=new-in-release>Added {@link io.sphere.sdk.client.SphereClientConfig#ofProperties(Properties, String)} to get the commercetools credentials form a properties file.</li>
+ <li class=new-in-release>For SDK contributors: <a href="https://github.com/sphereio/sphere-jvm-sdk#executing-integration-tests" target="_blank">integration test credentials can be set via a properties file</a></li>
+ </ul>
 
  <h3 class=released-version id="v1_0_0_M22">1.0.0-M22 (01.12.2015)</h3>
  <ul>
@@ -128,7 +149,7 @@ import java.util.function.Function;
  </ul>
 
 
- <h3 class=released-version id="v1_0_0_M20">1.0.0-M20</h3>
+ <h3 class=released-version id="v1_0_0_M20">1.0.0-M20 (02.11.2015)</h3>
  <ul>
   <li class=change-in-release>{@code query.withSort(m -> m.createdAt().sort(DESC));} is deprecated, use it with {@code query.withSort(m -> m.createdAt().sort().desc());}</li>
   <li class=fixed-in-release>Duplicates with {@link io.sphere.sdk.queries.ExperimentalReactiveStreamUtils#publisherOf(QueryDsl, SphereClient)} on multiple parallel request(n) calls. See <a href="https://github.com/sphereio/sphere-jvm-sdk/issues/809">809</a>.</li>
@@ -138,7 +159,7 @@ import java.util.function.Function;
  </ul>
 
 
- <h3 class=released-version id="v1_0_0_M19">1.0.0-M19</h3>
+ <h3 class=released-version id="v1_0_0_M19">1.0.0-M19 (16.10.2015)</h3>
 
  <a class="theme-btn expand-all">Expand all</a>
  <br>
@@ -216,7 +237,7 @@ import java.util.function.Function;
 
 
 
- <h3 class=released-version id="v1_0_0_M18">1.0.0-M18</h3>
+ <h3 class=released-version id="v1_0_0_M18">1.0.0-M18 (01.10.2015)</h3>
 
  <ul>
  <li class=new-in-release>{@link io.sphere.sdk.products.search.ProductProjectionSearch#withFuzzy(Boolean)}</li>
@@ -230,7 +251,7 @@ import java.util.function.Function;
  </ul>
 
 
- <h3 class=released-version id="v1_0_0_M17">1.0.0-M17</h3>
+ <h3 class=released-version id="v1_0_0_M17">1.0.0-M17 (28.08.2015)</h3>
 
  <ul>
  <li class=new-in-release>Support of full locales like "de_DE"</li>
@@ -244,7 +265,7 @@ import java.util.function.Function;
  <li class=new-in-release>{@link io.sphere.sdk.models.Address#equalsIgnoreId(Address)}, {@link io.sphere.sdk.products.Price#equalsIgnoreId(Price)}, {@link io.sphere.sdk.taxcategories.TaxRate#equalsIgnoreId(TaxRate)}</li>
  </ul>
 
- <h3 class=released-version id="v1_0_0_M16">1.0.0-M16</h3>
+ <h3 class=released-version id="v1_0_0_M16">1.0.0-M16 (06.08.2015)</h3>
  <p>This release is intended to be the last release before 1.0.0-RC1.</p>
 
  <ul>
@@ -302,7 +323,7 @@ import java.util.function.Function;
  </ul>
 
 
- <h3 class=released-version id="v1_0_0_M15">1.0.0-M15</h3>
+ <h3 class=released-version id="v1_0_0_M15">1.0.0-M15 (23.06.2015)</h3>
 
  <a class="theme-btn expand-all">Expand all</a>
 
@@ -354,7 +375,7 @@ import java.util.function.Function;
 
 
 
- <h3 class=released-version id=v1_0_0_M14>1.0.0-M14</h3>
+ <h3 class=released-version id=v1_0_0_M14>1.0.0-M14 (27.05.2015)</h3>
  <ul>
  <li class=new-in-release>New fields in {@link io.sphere.sdk.products.Price}: {@link io.sphere.sdk.products.Price#validFrom} and {@link io.sphere.sdk.products.Price#validUntil}.</li>
  <li class=new-in-release>Use {@link io.sphere.sdk.products.queries.ProductProjectionQueryModel#allVariants()} to formulate a predicate for all variants. In SPHERE.IO the json fields masterVariant (object) and variants (array of objects) together contain all variants.</li>
@@ -384,7 +405,7 @@ import java.util.function.Function;
  It created twice a http client instance and closed just one.</li>
  </ul>
 
- <h3 class=released-version id=v1_0_0_M13>1.0.0-M13</h3>
+ <h3 class=released-version id=v1_0_0_M13>1.0.0-M13 (21.04.2015)</h3>
  <ul>
      <li class=new-in-release>{@link LocalizedString#mapValue(BiFunction)} and {@link LocalizedString#stream()}
      can be used transform {@link LocalizedString}, for example for creating slugs or formatting.</li>
@@ -420,7 +441,7 @@ import java.util.function.Function;
     <li class=fixed-in-release>URL encoding of parameters. See <a href="https://github.com/sphereio/sphere-jvm-sdk/issues/240">#240</a>.</li>
  </ul>
 
- <h3 class=released-version id=v1_0_0_M12>1.0.0-M12</h3>
+ <h3 class=released-version id=v1_0_0_M12>1.0.0-M12 (19.03.2015)</h3>
  <ul>
  <li class=new-in-release>Added the {@link io.sphere.sdk.orders.commands.OrderImportCommand}.</li>
  <li class=new-in-release>Added the nested attributes: {@code io.sphere.sdk.attributes.AttributeAccess#ofNested()} + {@code io.sphere.sdk.attributes.AttributeAccess#ofNestedSet()}.</li>
@@ -439,7 +460,7 @@ import java.util.function.Function;
  <li class=fixed-in-release><a href="https://github.com/sphereio/sphere-jvm-sdk/issues/312">Incompatibility with Jackson 2.5.1</a> has been fixed. A cause message was "No suitable constructor found for type [simple type, class io.sphere.sdk.models.ImageImpl]: can not instantiate from JSON object (missing default constructor or creator, or perhaps need to add/enable type information?)"</li>
  </ul>
 
- <h3 class=released-version id=v1_0_0_M11>1.0.0-M11</h3>
+ <h3 class=released-version id=v1_0_0_M11>1.0.0-M11 (03.03.2015)</h3>
  <h4>Overall</h4>
  <ul>
     <li class=new-in-release>Code examples contain the links to the GitHub source code.</li>
@@ -478,7 +499,7 @@ import java.util.function.Function;
  <li class=new-in-release>Added update actions: {@link io.sphere.sdk.products.commands.updateactions.AddVariant}, {@link io.sphere.sdk.products.commands.updateactions.RemoveFromCategory}, {@link io.sphere.sdk.products.commands.updateactions.RemoveVariant}, {@link io.sphere.sdk.products.commands.updateactions.RevertStagedChanges}, {@link io.sphere.sdk.products.commands.updateactions.SetAttribute}, {@link io.sphere.sdk.products.commands.updateactions.SetAttributeInAllVariants}, {@link io.sphere.sdk.products.commands.updateactions.SetSearchKeywords}</li>
  </ul>
 
- <h3 class=released-version id=v1_0_0_M10>1.0.0-M10</h3>
+ <h3 class=released-version id=v1_0_0_M10>1.0.0-M10 (26.01.2015)</h3>
  <ul>
  <li class=new-in-release>Added {@link io.sphere.sdk.customobjects.CustomObject} models and endpoints. There is also a {@link io.sphere.sdk.meta.CustomObjectDocumentation tutorial for custom objects}.</li>
  <li class=new-in-release>Added the {@link io.sphere.sdk.zones.Zone} models and endpoints.</li>
