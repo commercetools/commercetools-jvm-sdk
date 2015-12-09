@@ -122,14 +122,6 @@ extends java.lang.Object</pre>
  </ul>
  -->
 
- <h3>Upcoming Release</h3>
- <li class=change-in-release>Http core: <a href="../../../../io/sphere/sdk/http/FormUrlEncodedHttpRequestBody.html" title="class in io.sphere.sdk.http"><code>FormUrlEncodedHttpRequestBody</code></a> did not respect the order of elements and possible duplicates.
- Use  <a href="../../../../io/sphere/sdk/http/FormUrlEncodedHttpRequestBody.html#of-java.util.List-"><code>FormUrlEncodedHttpRequestBody.of(List)</code></a> for construction and <a href="../../../../io/sphere/sdk/http/FormUrlEncodedHttpRequestBody.html#getParameters--"><code>FormUrlEncodedHttpRequestBody.getParameters()</code></a> for getting the data.
- <a href="../../../../io/sphere/sdk/http/FormUrlEncodedHttpRequestBody.html#getData--"><code>FormUrlEncodedHttpRequestBody.getData()</code></a> is deprecated.</li>
-
-
-
-
  <h3 class=released-version id="v1_0_0_M23">1.0.0-M23 (09.12.2015)</h3>
 
  <ul>
@@ -147,7 +139,9 @@ extends java.lang.Object</pre>
  <li class=change-in-release>Primitive scalar values are now as wrapper classes defined (int to Long, long to Long)</li>
  <li class=change-in-release><a href="../../../../io/sphere/sdk/cartdiscounts/DiscountedLineItemPriceForQuantity.html" title="class in io.sphere.sdk.cartdiscounts"><code>DiscountedLineItemPriceForQuantity</code></a> and <a href="../../../../io/sphere/sdk/carts/commands/updateactions/RemoveLineItem.html" title="class in io.sphere.sdk.carts.commands.updateactions"><code>RemoveLineItem</code></a> uses long for quantity. </li>
  <li class=change-in-release><a href="../../../../io/sphere/sdk/models/Versioned.html#getVersion--"><code>Versioned.getVersion()</code></a> is of type <code>Long</code> instead of long.</li>
- <li class=change-in-release>Internal change <a href="../../../../io/sphere/sdk/http/FormUrlEncodedHttpRequestBody.html" title="class in io.sphere.sdk.http"><code>FormUrlEncodedHttpRequestBody</code></a> had a map as interface, now it is a list of name value pairs. For the high level usage that should affect nothing.</li>
+ <li class=change-in-release>Http core: <a href="../../../../io/sphere/sdk/http/FormUrlEncodedHttpRequestBody.html" title="class in io.sphere.sdk.http"><code>FormUrlEncodedHttpRequestBody</code></a> did not respect the order of elements and possible duplicates.
+ Use  <a href="../../../../io/sphere/sdk/http/FormUrlEncodedHttpRequestBody.html#of-java.util.List-"><code>FormUrlEncodedHttpRequestBody.of(List)</code></a> for construction and <a href="../../../../io/sphere/sdk/http/FormUrlEncodedHttpRequestBody.html#getParameters--"><code>FormUrlEncodedHttpRequestBody.getParameters()</code></a> for getting the data.
+ <a href="../../../../io/sphere/sdk/http/FormUrlEncodedHttpRequestBody.html#getData--"><code>FormUrlEncodedHttpRequestBody.getData()</code></a> is deprecated.</li>
  <li class=new-in-release>Added <a href="../../../../io/sphere/sdk/client/SphereClientConfig.html#ofProperties-java.util.Properties-java.lang.String-"><code>SphereClientConfig.ofProperties(Properties, String)</code></a> to get the commercetools credentials form a properties file.</li>
  <li class=new-in-release>For SDK contributors: <a href="https://github.com/sphereio/sphere-jvm-sdk#executing-integration-tests" target="_blank">integration test credentials can be set via a properties file</a></li>
  </ul>
