@@ -47,7 +47,7 @@ public abstract class IntegrationTest {
     }
 
     protected static SphereClient sphereClient() {
-        return client().getUnderlying();
+        return client();
     }
 
     private static SphereClient withMaybeDeprecationWarnTool(final SphereClient underlying) {

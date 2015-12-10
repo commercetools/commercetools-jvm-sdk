@@ -374,7 +374,7 @@ public class CategoryDocumentationTest extends IntegrationTest {
 
         @Override
         public void onNext(final Category category) {
-            client().getUnderlying().execute(CategoryDeleteCommand.of(category)).whenComplete((c, t) -> {
+            client().execute(CategoryDeleteCommand.of(category)).whenComplete((c, t) -> {
                 requestElements();
             });
         }

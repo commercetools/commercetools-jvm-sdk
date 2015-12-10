@@ -29,8 +29,4 @@ public final class TestClient implements BlockingSphereClient {
     public <T> T executeBlocking(final SphereRequest<T> sphereRequest, final long timeout, final TimeUnit unit) {
         return delegate.executeBlocking(sphereRequest, timeout, unit);
     }
-
-    public SphereClient getUnderlying() {
-        return this;
-    }
 }
