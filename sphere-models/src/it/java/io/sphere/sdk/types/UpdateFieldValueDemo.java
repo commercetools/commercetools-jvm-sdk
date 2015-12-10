@@ -20,7 +20,7 @@ public class UpdateFieldValueDemo {
                 SetCustomField.ofObject("imageUrl", null)//remove value
         );
 
-        final Category updatedCategory = client.execute(CategoryUpdateCommand.of(category, updateActions));
+        final Category updatedCategory = client.executeBlocking(CategoryUpdateCommand.of(category, updateActions));
 
         final CustomFields custom = updatedCategory.getCustom();
         assertThat(custom.getFieldAsEnumKey("state")).isEqualTo("draft");

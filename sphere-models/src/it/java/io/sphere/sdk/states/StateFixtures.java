@@ -28,7 +28,7 @@ public class StateFixtures {
 
     public static State createStateByKey(final TestClient client, final String key) {
         final StateDraft stateDraft = createStateDraft(key);
-        return client.execute(StateCreateCommand.of(stateDraft));
+        return client.executeBlocking(StateCreateCommand.of(stateDraft));
     }
 
     private static StateDraft createStateDraft(final String key) {
@@ -39,15 +39,15 @@ public class StateFixtures {
     }
 
     public static void cleanUpByKey(final TestClient client, final String key) {
-        client.execute(StateQuery.of().byKey(key)).head().ifPresent(state -> client.execute(StateDeleteCommand.of(state)));
+        client.executeBlocking(StateQuery.of().byKey(key)).head().ifPresent(state -> client.executeBlocking(StateDeleteCommand.of(state)));
     }
 
     public static void withStateByBuilder(final TestClient client, final UnaryOperator<StateDraftBuilder> drafting, final Consumer<State> consumer) {
         final StateDraftBuilder stateDraftBuilder = StateDraftBuilder.of(createStateDraft(randomKey()));
         final StateDraft stateDraft = drafting.apply(stateDraftBuilder).build();
-        final State state = client.execute(StateCreateCommand.of(stateDraft));
+        final State state = client.executeBlocking(StateCreateCommand.of(stateDraft));
         consumer.accept(state);
-        client.execute(StateDeleteCommand.of(state));
+        client.executeBlocking(StateDeleteCommand.of(state));
     }
 
     public static void withState(final TestClient client, final Consumer<State> consumer) {
@@ -63,15 +63,15 @@ public class StateFixtures {
     public static void withStandardStates(final TestClient client, final BiConsumer<State, State> consumer) {
         final String keyA = "Initial";//given from SPHERE.IO backend
         final String keyB = StateFixtures.class + "_B";
-        final State stateB = client.execute(StateQuery.of().byKey(keyB)).head().orElseGet(() -> createStateByKey(client, keyB));
-        final State stateA = client.execute(StateQuery.of().byKey(keyA)).head()
+        final State stateB = client.executeBlocking(StateQuery.of().byKey(keyB)).head().orElseGet(() -> createStateByKey(client, keyB));
+        final State stateA = client.executeBlocking(StateQuery.of().byKey(keyA)).head()
                 .map(initialState -> {
                     final Optional<Set<Reference<State>>> transitionOptional = Optional.ofNullable(initialState.getTransitions());
                     final Boolean initialCanTransistToStateB = transitionOptional.map(transitions -> transitions.contains(stateB.toReference())).orElse(false);
                     final Set<Reference<State>> transitions = transitionOptional.map(trans -> SetUtils.setOf(stateB.toReference(), trans)).orElse(asSet(stateB.toReference()));
                     final SetTransitions action = SetTransitions.of(transitions);
                     final StateUpdateCommand updateCommand = StateUpdateCommand.of(initialState, action);
-                    return initialCanTransistToStateB ? initialState : client.execute(updateCommand);
+                    return initialCanTransistToStateB ? initialState : client.executeBlocking(updateCommand);
                 })
                 .get();
         consumer.accept(stateA, stateB);
@@ -80,6 +80,6 @@ public class StateFixtures {
     public static void withUpdateableState(final TestClient client, final Function<State, State> f) {
         final State state = createStateByKey(client, randomKey());
         final State updatedState = f.apply(state);
-        client.execute(StateDeleteCommand.of(updatedState));
+        client.executeBlocking(StateDeleteCommand.of(updatedState));
     }
 }

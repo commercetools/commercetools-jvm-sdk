@@ -13,7 +13,7 @@ public class RemoveTypeFromObjectDemo {
 
         final CategoryUpdateCommand command = CategoryUpdateCommand
                 .of(category, SetCustomType.ofRemoveType());
-        final Category updatedCategory = client.execute(command);
+        final Category updatedCategory = client.executeBlocking(command);
 
         assertThat(updatedCategory.getCustom()).isNull();
 

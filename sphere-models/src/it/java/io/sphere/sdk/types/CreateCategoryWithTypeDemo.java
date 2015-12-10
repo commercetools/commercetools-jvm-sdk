@@ -31,7 +31,7 @@ public class CreateCategoryWithTypeDemo {
         final CategoryDraft categoryDraft = CategoryDraftBuilder.of(randomSlug(), randomSlug())
                 .custom(CustomFieldsDraft.ofTypeKeyAndObjects("category-customtype-key", fieldValues))
                 .build();
-        final Category category = client.execute(CategoryCreateCommand.of(categoryDraft));
+        final Category category = client.executeBlocking(CategoryCreateCommand.of(categoryDraft));
 
         final CustomFields custom = category.getCustom();
         assertThat(custom.getFieldAsEnumKey("state")).isEqualTo("published");

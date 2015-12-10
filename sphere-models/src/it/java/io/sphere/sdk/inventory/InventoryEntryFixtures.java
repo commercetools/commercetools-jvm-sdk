@@ -20,9 +20,9 @@ public class InventoryEntryFixtures extends Base {
     }
 
     public static void withUpdateableInventoryEntry(final TestClient client, final InventoryEntryDraft inventoryEntryDraft, final Function<InventoryEntry, InventoryEntry> f) {
-        final InventoryEntry inventoryEntry = client.execute(InventoryEntryCreateCommand.of(inventoryEntryDraft));
+        final InventoryEntry inventoryEntry = client.executeBlocking(InventoryEntryCreateCommand.of(inventoryEntryDraft));
         final InventoryEntry updatedEntry = f.apply(inventoryEntry);
-        client.execute(InventoryEntryDeleteCommand.of(updatedEntry));
+        client.executeBlocking(InventoryEntryDeleteCommand.of(updatedEntry));
     }
 
     public static void withInventoryEntryAndSupplyChannel(final TestClient client, final ChannelRole channelRole, final BiConsumer<InventoryEntry, Channel> consumer) {

@@ -14,9 +14,9 @@ import static java.util.Collections.singletonList;
 public class PaymentFixtures {
     public static void withPayment(final TestClient client, final UnaryOperator<PaymentDraftBuilder> builderMapping, final UnaryOperator<Payment> op) {
         final PaymentDraft paymentDraft = builderMapping.apply(PaymentDraftBuilder.of(EURO_20)).build();
-        final Payment payment = client.execute(PaymentCreateCommand.of(paymentDraft));
+        final Payment payment = client.executeBlocking(PaymentCreateCommand.of(paymentDraft));
         final Payment paymentToDelete = op.apply(payment);
-        client.execute(PaymentDeleteCommand.of(paymentToDelete));
+        client.executeBlocking(PaymentDeleteCommand.of(paymentToDelete));
     }
 
     public static void withPayment(final TestClient client, final UnaryOperator<Payment> op) {
@@ -28,9 +28,9 @@ public class PaymentFixtures {
         final PaymentDraft paymentDraft = PaymentDraftBuilder.of(EURO_1)
                 .transactions(singletonList(transactionDraft))
                 .build();
-        final Payment payment = client.execute(PaymentCreateCommand.of(paymentDraft));
+        final Payment payment = client.executeBlocking(PaymentCreateCommand.of(paymentDraft));
         final Transaction transaction = payment.getTransactions().get(0);
         final Payment paymentToDelete = operation.apply(payment, transaction);
-        client.execute(PaymentDeleteCommand.of(paymentToDelete));
+        client.executeBlocking(PaymentDeleteCommand.of(paymentToDelete));
     }
 }

@@ -22,11 +22,11 @@ public class CategoryFixtures {
 
     public static void withPersistentCategory(final TestClient client, final Consumer<Category> user) {
         final String externalId = "persistent-category-id";
-        final Optional<Category> fetchedCategory = client.execute(CategoryQuery.of().byExternalId(externalId)).head();
+        final Optional<Category> fetchedCategory = client.executeBlocking(CategoryQuery.of().byExternalId(externalId)).head();
         final Category category = fetchedCategory.orElseGet(() -> {
             final LocalizedString name = en("name persistent-category-id");
             final CategoryDraftBuilder catSupplier = CategoryDraftBuilder.of(name, name.slugified()).externalId(externalId);
-            return client.execute(CategoryCreateCommand.of(catSupplier.build()));
+            return client.executeBlocking(CategoryCreateCommand.of(catSupplier.build()));
         });
         user.accept(category);
     }
@@ -34,16 +34,16 @@ public class CategoryFixtures {
     public static void withCategory(final TestClient client, final Supplier<CategoryDraft> creator, final Consumer<Category> user) {
         final CategoryDraft categoryDraft = creator.get();
         final String slug = englishSlugOf(categoryDraft);
-        final PagedQueryResult<Category> pagedQueryResult = client.execute(CategoryQuery.of().bySlug(Locale.ENGLISH, slug));
-        pagedQueryResult.head().ifPresent(category -> client.execute(CategoryDeleteCommand.of(category)));
-        final Category category = client.execute(CategoryCreateCommand.of(categoryDraft));
+        final PagedQueryResult<Category> pagedQueryResult = client.executeBlocking(CategoryQuery.of().bySlug(Locale.ENGLISH, slug));
+        pagedQueryResult.head().ifPresent(category -> client.executeBlocking(CategoryDeleteCommand.of(category)));
+        final Category category = client.executeBlocking(CategoryCreateCommand.of(categoryDraft));
         LOGGER.debug(() -> "created category " + category.getSlug() + " id: " + category.getId());
         try {
             user.accept(category);
         } finally {
-            final PagedQueryResult<Category> res = client.execute(CategoryQuery.of().byId(category.getId()));
+            final PagedQueryResult<Category> res = client.executeBlocking(CategoryQuery.of().byId(category.getId()));
             //need to update because category could be changed
-            client.execute(CategoryDeleteCommand.of(res.head().get()));
+            client.executeBlocking(CategoryDeleteCommand.of(res.head().get()));
             LOGGER.debug(() -> "deleted category " + category.getId());
         }
     }
@@ -64,6 +64,6 @@ public class CategoryFixtures {
 
     public static Category createCategory(final TestClient client) {
         final CategoryDraft categoryDraft = CategoryDraftBuilder.of(randomSlug(), randomSlug()).build();
-        return client.execute(CategoryCreateCommand.of(categoryDraft));
+        return client.executeBlocking(CategoryCreateCommand.of(categoryDraft));
     }
 }

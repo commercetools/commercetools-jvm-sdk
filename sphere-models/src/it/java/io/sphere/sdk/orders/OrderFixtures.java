@@ -51,19 +51,19 @@ public class OrderFixtures {
             final TaxCategory taxCategory = TaxCategoryFixtures.defaultTaxCategory(client);
             final SetCustomShippingMethod shippingMethodAction = SetCustomShippingMethod.of("custom shipping method", ShippingRate.of(EURO_10), taxCategory);
             final SetCustomerEmail emailAction = SetCustomerEmail.of(CUSTOMER_EMAIL);
-            final Cart updatedCart = client.execute(CartUpdateCommand.of(cart, asList(shippingMethodAction, emailAction)));
+            final Cart updatedCart = client.executeBlocking(CartUpdateCommand.of(cart, asList(shippingMethodAction, emailAction)));
 
             final CustomerSignInCommand signInCommand = CustomerSignInCommand.of(customer.getEmail(), CustomerFixtures.PASSWORD, cart.getId());
-            final CustomerSignInResult signInResult = client.execute(signInCommand);
+            final CustomerSignInResult signInResult = client.executeBlocking(signInCommand);
 
-            final Order order = client.execute(OrderFromCartCreateCommand.of(signInResult.getCart()));
+            final Order order = client.executeBlocking(OrderFromCartCreateCommand.of(signInResult.getCart()));
 
-            final Order updatedOrder = client.execute(OrderUpdateCommand.of(order, asList(
+            final Order updatedOrder = client.executeBlocking(OrderUpdateCommand.of(order, asList(
                     ChangeShipmentState.of(ShipmentState.READY),
                     ChangePaymentState.of(PaymentState.PENDING)
             )));
             final Order orderToDelete = op.apply(updatedOrder);
-            client.execute(OrderDeleteCommand.of(orderToDelete));
+            client.executeBlocking(OrderDeleteCommand.of(orderToDelete));
         });
     }
 
@@ -75,8 +75,8 @@ public class OrderFixtures {
             final LocalizedString name = en("thing");
             final long quantity = 5;
             final CustomLineItemDraft item = CustomLineItemDraft.of(name, slug, money, taxCategory, quantity);
-            final Cart cartWith5 = client.execute(CartUpdateCommand.of(cart, AddCustomLineItem.of(item)));
-            final Order order = client.execute(OrderFromCartCreateCommand.of(cartWith5));
+            final Cart cartWith5 = client.executeBlocking(CartUpdateCommand.of(cart, AddCustomLineItem.of(item)));
+            final Order order = client.executeBlocking(OrderFromCartCreateCommand.of(cartWith5));
             f.accept(order);
         });
     }
@@ -88,7 +88,7 @@ public class OrderFixtures {
             final List<ReturnItemDraft> items = asList(ReturnItemDraft.of(1L, lineItemId, ReturnShipmentState.RETURNED, "foo bar"));
             final AddReturnInfo action = AddReturnInfo.of(items);
             final AddDelivery addDelivery = AddDelivery.of(asList(DeliveryItem.of(lineItemId, 1)));
-            final Order updatedOrder = client.execute(OrderUpdateCommand.of(order, asList(action, addDelivery)));
+            final Order updatedOrder = client.executeBlocking(OrderUpdateCommand.of(order, asList(action, addDelivery)));
 
             final ReturnInfo returnInfo = updatedOrder.getReturnInfo().get(0);
             return f.apply(updatedOrder, returnInfo);

@@ -33,7 +33,7 @@ public class TypeAssigningInUpdateActionDemo {
 
         final SetCustomType action = SetCustomType
                 .ofTypeKeyAndObjects("category-customtype-key", fieldValues);
-        final Category updatedCategory = client.execute(CategoryUpdateCommand.of(category, action));
+        final Category updatedCategory = client.executeBlocking(CategoryUpdateCommand.of(category, action));
 
         final CustomFields custom = updatedCategory.getCustom();
         assertThat(custom.getFieldAsEnumKey("state")).isEqualTo("published");

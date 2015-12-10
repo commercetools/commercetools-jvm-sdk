@@ -23,9 +23,9 @@ public class ChannelFixtures {
     }
 
     public static void withChannelOfRole(final TestClient client, final ChannelRole channelRole, final Consumer<Channel> f) {
-        final Channel channel = client.execute(ChannelCreateCommand.of(ChannelDraft.of(randomString()).withRoles(channelRole)));
+        final Channel channel = client.executeBlocking(ChannelCreateCommand.of(ChannelDraft.of(randomString()).withRoles(channelRole)));
         f.accept(channel);
-        client.execute(ChannelDeleteCommand.of(channel));
+        client.executeBlocking(ChannelDeleteCommand.of(channel));
     }
 
     public static void withUpdatableChannelOfRole(final TestClient client, final ChannelRole channelRole, final Function<Channel, Channel> f) {
@@ -33,9 +33,9 @@ public class ChannelFixtures {
     }
 
     public static void withUpdatableChannelOfRole(final TestClient client, final Set<ChannelRole> roles, final Function<Channel, Channel> f) {
-        final Channel channel = client.execute(ChannelCreateCommand.of(ChannelDraft.of(randomString()).withRoles(roles)));
+        final Channel channel = client.executeBlocking(ChannelCreateCommand.of(ChannelDraft.of(randomString()).withRoles(roles)));
         final Channel updateChannel = f.apply(channel);
-        client.execute(ChannelDeleteCommand.of(updateChannel));
+        client.executeBlocking(ChannelDeleteCommand.of(updateChannel));
     }
 
     public static void withOrderExportChannel(final TestClient client, final Consumer<Channel> f) {
@@ -52,15 +52,15 @@ public class ChannelFixtures {
     }
 
     private static Channel getOrCreateChannel(final TestClient client, final String key, final ChannelRole roles) {
-        return client.execute(ChannelQuery.of().byKey(key)).head().orElseGet(() -> {
+        return client.executeBlocking(ChannelQuery.of().byKey(key)).head().orElseGet(() -> {
             final ChannelCreateCommand channelCreateCommand =
                     ChannelCreateCommand.of(ChannelDraft.of(key).withRoles(roles));
-            return client.execute(channelCreateCommand);
+            return client.executeBlocking(channelCreateCommand);
         });
     }
 
     public static void cleanUpChannelByKey(final TestClient client, final String channelKey) {
-        client.execute(ChannelQuery.of().byKey(channelKey)).head()
-                .ifPresent(channel -> client.execute(ChannelDeleteCommand.of(channel)));
+        client.executeBlocking(ChannelQuery.of().byKey(channelKey)).head()
+                .ifPresent(channel -> client.executeBlocking(ChannelDeleteCommand.of(channel)));
     }
 }

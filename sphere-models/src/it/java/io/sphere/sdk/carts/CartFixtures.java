@@ -41,7 +41,7 @@ public class CartFixtures {
     public static final Address GERMAN_ADDRESS = AddressBuilder.of(DEFAULT_COUNTRY).build();
 
     public static Cart createCart(final TestClient client, final CartDraft cartDraft) {
-        return client.execute(CartCreateCommand.of(cartDraft));
+        return client.executeBlocking(CartCreateCommand.of(cartDraft));
     }
 
     public static Cart createCartWithCountry(final TestClient client) {
@@ -54,7 +54,7 @@ public class CartFixtures {
 
     public static Cart createCartWithShippingAddress(final TestClient client) {
         final Cart cart = createCartWithCountry(client);
-        return client.execute(CartUpdateCommand.of(cart, SetShippingAddress.of(GERMAN_ADDRESS)));
+        return client.executeBlocking(CartUpdateCommand.of(cart, SetShippingAddress.of(GERMAN_ADDRESS)));
     }
 
     public static void withEmptyCartAndProduct(final TestClient client, final BiConsumer<Cart, Product> f) {
@@ -67,7 +67,7 @@ public class CartFixtures {
     public static void withCart(final TestClient client, final UnaryOperator<Cart> operator) {
         final Cart cart = createCartWithCountry(client);
         final Cart cartToDelete = operator.apply(cart);
-        client.execute(CartDeleteCommand.of(cartToDelete));
+        client.executeBlocking(CartDeleteCommand.of(cartToDelete));
     }
 
     public static void withCart(final TestClient client, final Cart cart, final Function<Cart, CartLike<?>> operator) {
@@ -78,10 +78,10 @@ public class CartFixtures {
     private static void delete(final TestClient client, final CartLike<?> cartLike) {
         if (cartLike instanceof Cart) {
             final Cart cart = (Cart) cartLike;
-            client.execute(CartDeleteCommand.of(cart));
+            client.executeBlocking(CartDeleteCommand.of(cart));
         } else {
             final Order order = (Order) cartLike;
-            client.execute(OrderDeleteCommand.of(order));
+            client.executeBlocking(OrderDeleteCommand.of(order));
         }
     }
 
@@ -93,7 +93,7 @@ public class CartFixtures {
             final String productId = product.getId();
             final AddLineItem action = AddLineItem.of(productId, 1, quantity);
 
-            final Cart updatedCart = client.execute(CartUpdateCommand.of(cart, action));
+            final Cart updatedCart = client.executeBlocking(CartUpdateCommand.of(cart, action));
             assertThat(updatedCart.getLineItems()).hasSize(1);
             final LineItem lineItem = updatedCart.getLineItems().get(0);
             assertThat(lineItem.getName()).isEqualTo(product.getMasterData().getStaged().getName());
@@ -106,7 +106,7 @@ public class CartFixtures {
     public static void withCustomerAndFilledCart(final TestClient client, final BiConsumer<Customer, Cart> consumer) {
         withCustomer(client, customer -> {
             withFilledCart(client, cart -> {
-                final Cart cartForCustomer = client.execute(CartUpdateCommand.of(cart, SetCustomerId.of(customer.getId())));
+                final Cart cartForCustomer = client.executeBlocking(CartUpdateCommand.of(cart, SetCustomerId.of(customer.getId())));
                 consumer.accept(customer, cartForCustomer);
             });
         });
@@ -119,7 +119,7 @@ public class CartFixtures {
 
             final Cart cartToDelete = f.apply(cart, product);
 
-            client.execute(CartDeleteCommand.of(cartToDelete));
+            client.executeBlocking(CartDeleteCommand.of(cartToDelete));
         });
     }
 
@@ -139,13 +139,13 @@ public class CartFixtures {
             final CustomLineItemDraft item = CustomLineItemDraft.of(name, slug, money, product.getTaxCategory(), 5L);
             final AddCustomLineItem addCustomLineItemAction = AddCustomLineItem.of(item);
 
-            final Cart updatedCart = client.execute(CartUpdateCommand.of(cart, asList(addLineItemAction, addCustomLineItemAction)));
+            final Cart updatedCart = client.executeBlocking(CartUpdateCommand.of(cart, asList(addLineItemAction, addCustomLineItemAction)));
             assertThat(updatedCart.getLineItems()).hasSize(1);
             final LineItem lineItem = updatedCart.getLineItems().get(0);
             assertThat(lineItem.getName()).isEqualTo(product.getMasterData().getStaged().getName());
             assertThat(lineItem.getQuantity()).isEqualTo(quantity);
             final Cart cartToDelete = op.apply(updatedCart);
-            client.execute(CartDeleteCommand.of(cartToDelete));
+            client.executeBlocking(CartDeleteCommand.of(cartToDelete));
         });
     }
 
@@ -157,12 +157,12 @@ public class CartFixtures {
                     .validFrom(null)
                     .validUntil(null)
                     .build();
-            final CartDiscount cartDiscount = client.execute(CartDiscountCreateCommand.of(draft));
-            final DiscountCode discountCode = client.execute(DiscountCodeCreateCommand.of(DiscountCodeDraft.of(randomKey(), cartDiscount)));
+            final CartDiscount cartDiscount = client.executeBlocking(CartDiscountCreateCommand.of(draft));
+            final DiscountCode discountCode = client.executeBlocking(DiscountCodeCreateCommand.of(DiscountCodeDraft.of(randomKey(), cartDiscount)));
             final Cart updatedCart = user.apply(cart, discountCode);
-            client.execute(CartDeleteCommand.of(updatedCart));
-            client.execute(DiscountCodeDeleteCommand.of(discountCode));
-            client.execute(CartDiscountDeleteCommand.of(cartDiscount));
+            client.executeBlocking(CartDeleteCommand.of(updatedCart));
+            client.executeBlocking(DiscountCodeDeleteCommand.of(discountCode));
+            client.executeBlocking(CartDiscountDeleteCommand.of(cartDiscount));
         });
     }
 }

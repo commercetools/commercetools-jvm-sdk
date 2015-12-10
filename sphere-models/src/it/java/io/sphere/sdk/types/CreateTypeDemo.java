@@ -29,7 +29,7 @@ public final class CreateTypeDemo {
                 .fieldDefinitions(fieldDefinitions)
                 .build();
 
-        return client.execute(TypeCreateCommand.of(typeDraft));
+        return client.executeBlocking(TypeCreateCommand.of(typeDraft));
     }
 
     private static FieldDefinition stateFieldDefinition() {

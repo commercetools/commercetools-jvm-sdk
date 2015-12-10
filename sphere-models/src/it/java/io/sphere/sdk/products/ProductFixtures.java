@@ -56,7 +56,7 @@ public class ProductFixtures {
     public static void withTaxedProduct(final TestClient client, final Consumer<Product> user) {
         TaxCategoryFixtures.withTransientTaxCategory(client, taxCategory ->
                         withProduct(client, randomString(), product -> {
-                            final Product productWithTaxes = client.execute(createSetTaxesCommand(taxCategory, product));
+                            final Product productWithTaxes = client.executeBlocking(createSetTaxesCommand(taxCategory, product));
                             user.accept(productWithTaxes);
                         })
         );
@@ -67,8 +67,8 @@ public class ProductFixtures {
         final ProductVariantDraft variantDraft = ProductVariantDraftBuilder.of().price(PRICE).build();
         final String slugEn = "referenceable-product-2";
         final ProductDraft productDraft = ProductDraftBuilder.of(productType, en("referenceable product"), en(slugEn), variantDraft).build();
-        return client.execute(ProductQuery.of().bySlug(ProductProjectionType.STAGED, ENGLISH, slugEn)).head()
-                .orElseGet(() -> client.execute(ProductCreateCommand.of(productDraft)));
+        return client.executeBlocking(ProductQuery.of().bySlug(ProductProjectionType.STAGED, ENGLISH, slugEn)).head()
+                .orElseGet(() -> client.executeBlocking(ProductCreateCommand.of(productDraft)));
     }
 
     private static ProductUpdateCommand createSetTaxesCommand(final TaxCategory taxCategory, final Product product) {
@@ -88,9 +88,9 @@ public class ProductFixtures {
     public static void withUpdateableProduct(final TestClient client, final Supplier<ProductDraft> creator, final Function<Product, Product> user) {
         final ProductDraft productDraft = creator.get();
         final String slug = englishSlugOf(productDraft);
-        final PagedQueryResult<Product> pagedQueryResult = client.execute(ProductQuery.of().bySlug(ProductProjectionType.CURRENT, Locale.ENGLISH, slug));
+        final PagedQueryResult<Product> pagedQueryResult = client.executeBlocking(ProductQuery.of().bySlug(ProductProjectionType.CURRENT, Locale.ENGLISH, slug));
         delete(client, pagedQueryResult.getResults());
-        final Product product = client.execute(ProductCreateCommand.of(productDraft));
+        final Product product = client.executeBlocking(ProductCreateCommand.of(productDraft));
         final Product possiblyUpdateProduct = user.apply(product);
         delete(client, possiblyUpdateProduct);
     }
@@ -108,16 +108,16 @@ public class ProductFixtures {
     }
 
     public static void delete(final TestClient client, final Product product) {
-        final Optional<Product> freshLoadedProduct = Optional.ofNullable(client.execute(ProductByIdGet.of(product.getId())));
+        final Optional<Product> freshLoadedProduct = Optional.ofNullable(client.executeBlocking(ProductByIdGet.of(product.getId())));
         freshLoadedProduct.ifPresent(loadedProduct -> {
             final boolean isPublished = loadedProduct.getMasterData().isPublished();
             final Product unPublishedProduct;
             if (isPublished) {
-                unPublishedProduct = client.execute(ProductUpdateCommand.of(loadedProduct, asList(Unpublish.of())));
+                unPublishedProduct = client.executeBlocking(ProductUpdateCommand.of(loadedProduct, asList(Unpublish.of())));
             } else {
                 unPublishedProduct = loadedProduct;
             }
-            client.execute(ProductDeleteCommand.of(unPublishedProduct));
+            client.executeBlocking(ProductDeleteCommand.of(unPublishedProduct));
         });
     }
 
@@ -128,29 +128,29 @@ public class ProductFixtures {
     public static void withUpdateablePricedProduct(final TestClient client, final PriceDraft expectedPrice, final Function<Product, Product> f) {
         withUpdateableProduct(client, product -> {
             final ProductUpdateCommand command = ProductUpdateCommand.of(product, AddPrice.of(1, expectedPrice));
-            return f.apply(client.execute(command));
+            return f.apply(client.executeBlocking(command));
         });
     }
 
     public static void deleteProductsProductTypeAndProductDiscounts(final TestClient client, final ProductType productType) {
-        client.execute(ProductDiscountQuery.of().withLimit(500L)).getResults()
-                .forEach(discount -> client.execute(ProductDiscountDeleteCommand.of(discount)));
+        client.executeBlocking(ProductDiscountQuery.of().withLimit(500L)).getResults()
+                .forEach(discount -> client.executeBlocking(ProductDiscountDeleteCommand.of(discount)));
 
         if (productType != null) {
             QueryPredicate<Product> ofProductType = ProductQueryModel.of().productType().is(productType);
             ProductQuery productsOfProductTypeQuery = ProductQuery.of().withPredicates(ofProductType).withLimit(500L);
-            final List<Product> products = client.execute(productsOfProductTypeQuery).getResults();
+            final List<Product> products = client.executeBlocking(productsOfProductTypeQuery).getResults();
             final List<Product> unpublishedProducts = products.stream().map(
                     product -> {
                         if (product.getMasterData().isPublished()) {
-                            return client.execute(ProductUpdateCommand.of(product, Unpublish.of()));
+                            return client.executeBlocking(ProductUpdateCommand.of(product, Unpublish.of()));
                         } else {
                             return product;
                         }
                     }
             ).collect(toList());
             unpublishedProducts.forEach(
-                    product -> client.execute(ProductDeleteCommand.of(product))
+                    product -> client.executeBlocking(ProductDeleteCommand.of(product))
             );
             deleteProductType(client, productType);
         }
@@ -168,7 +168,7 @@ public class ProductFixtures {
         withCategory(client, category -> {
             final Consumer<Product> user = product -> consumer.accept(product, category);
             withProduct(client, "withProductAndCategory", product -> {
-                final Product productWithCategory = client.execute(ProductUpdateCommand.of(product, AddToCategory.of(category)));
+                final Product productWithCategory = client.executeBlocking(ProductUpdateCommand.of(product, AddToCategory.of(category)));
                 consumer.accept(productWithCategory, category);
             });
         });
@@ -180,9 +180,9 @@ public class ProductFixtures {
             final ProductVariantDraft productVariantDraft =
                     ProductVariantDraftBuilder.of().attributes(AttributeDraft.of("productreference", referencedProduct.toReference())).build();
             final ProductDraft productDraft = ProductDraftBuilder.of(productType, en("product reference name 1"), randomSlug(), productVariantDraft).build();
-            final Product product = client.execute(ProductCreateCommand.of(productDraft));
+            final Product product = client.executeBlocking(ProductCreateCommand.of(productDraft));
             consumer.accept(product, referencedProduct);
-            client.execute(ProductDeleteCommand.of(product));
+            client.executeBlocking(ProductDeleteCommand.of(product));
         });
     }
 
@@ -204,14 +204,14 @@ public class ProductFixtures {
             final ProductVariantDraft masterVariant = ProductVariantDraftBuilder.of().build();
             final ProductDraftBuilder builder = ProductDraftBuilder.of(productType, randomSlug(), randomSlug(), masterVariant);
             final ProductDraft productDraft = builderMapper.apply(builder).build();
-            final Product product = client.execute(ProductCreateCommand.of(productDraft));
+            final Product product = client.executeBlocking(ProductCreateCommand.of(productDraft));
             final Product updatedProduct = op.apply(product);
-            client.execute(ProductDeleteCommand.of(updatedProduct));
+            client.executeBlocking(ProductDeleteCommand.of(updatedProduct));
         });
     }
 
     public static void deleteProductsAndProductTypes(final TestClient client) {
-        final List<ProductType> productTypes = client.execute(ProductTypeQuery.of().withLimit(500L)).getResults();
+        final List<ProductType> productTypes = client.executeBlocking(ProductTypeQuery.of().withLimit(500L)).getResults();
         productTypes.forEach(productType -> deleteProductsProductTypeAndProductDiscounts(client, productType));
     }
 }

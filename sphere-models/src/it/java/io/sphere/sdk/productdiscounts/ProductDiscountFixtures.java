@@ -29,10 +29,10 @@ public class ProductDiscountFixtures {
         final ProductDiscountDraft discountDraft =
                 ProductDiscountDraft.of(name, description, predicate, discountValue, sortOrder, active);
 
-        final ProductDiscount productDiscount = client.execute(ProductDiscountCreateCommand.of(discountDraft));
+        final ProductDiscount productDiscount = client.executeBlocking(ProductDiscountCreateCommand.of(discountDraft));
 
         final ProductDiscount updatedDiscount = function.apply(productDiscount, product);
-        client.execute(ProductDiscountDeleteCommand.of(updatedDiscount));
+        client.executeBlocking(ProductDiscountDeleteCommand.of(updatedDiscount));
     }
 
 }

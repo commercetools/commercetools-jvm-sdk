@@ -19,9 +19,9 @@ public class ReviewFixtures {
                         .text("This product is ok.")
                         .score(0.36)
                         .build();
-                final Review review = client.execute(ReviewCreateCommand.of(reviewDraft));
+                final Review review = client.executeBlocking(ReviewCreateCommand.of(reviewDraft));
                 final Review updatedReview = function.apply(review);
-                client.execute(ReviewDeleteCommand.of(updatedReview));
+                client.executeBlocking(ReviewDeleteCommand.of(updatedReview));
             })
         );
     }

@@ -66,7 +66,7 @@ public class ProductTypeCreationDemoTest extends IntegrationTest {
 
     public ProductType fetchProductTypeByName() {
         final Optional<ProductType> productTypeOptional =
-                client().execute(ProductTypeQuery.of().byName(PRODUCT_TYPE_NAME)).head();
+                client().executeBlocking(ProductTypeQuery.of().byName(PRODUCT_TYPE_NAME)).head();
         final ProductType productType = productTypeOptional
                 .orElseThrow(() -> new RuntimeException("product type " + PRODUCT_TYPE_NAME + " is not present."));
         //end example parsing here
@@ -93,7 +93,7 @@ public class ProductTypeCreationDemoTest extends IntegrationTest {
                 .build();
 
         final ProductTypeDraft productTypeDraft = ProductTypeDraft.of(randomKey(), BOOK_PRODUCT_TYPE_NAME, "books", asList(isbn));
-        final ProductType productType = client().execute(ProductTypeCreateCommand.of(productTypeDraft));
+        final ProductType productType = client().executeBlocking(ProductTypeCreateCommand.of(productTypeDraft));
     }
 
     @BeforeClass
@@ -144,7 +144,7 @@ public class ProductTypeCreationDemoTest extends IntegrationTest {
         final List<AttributeDefinition> attributes = asList(color, size, laundrySymbols,
                 matchingProducts, rrp, availableSince);
         final ProductTypeDraft productTypeDraft = ProductTypeDraft.of(randomKey(), PRODUCT_TYPE_NAME, "a 'T' shaped cloth", attributes);
-        final ProductType productType = client().execute(ProductTypeCreateCommand.of(productTypeDraft));
+        final ProductType productType = client().executeBlocking(ProductTypeCreateCommand.of(productTypeDraft));
     }
 
     @Test
@@ -168,7 +168,7 @@ public class ProductTypeCreationDemoTest extends IntegrationTest {
                 .of(productType, en("basic shirt"), randomSlug(), masterVariantDraft)
                 .build();
 
-        final Product product = client().execute(ProductCreateCommand.of(draft));
+        final Product product = client().executeBlocking(ProductCreateCommand.of(draft));
 
         final ProductVariant masterVariant = product.getMasterData().getStaged().getMasterVariant();
         assertThat(masterVariant.findAttribute(COLOR_ATTR_NAME, AttributeAccess.ofLocalizedEnumValue()))
@@ -201,7 +201,7 @@ public class ProductTypeCreationDemoTest extends IntegrationTest {
                 .of(productType, en("a book"), randomSlug(), masterVariantDraft)
                 .build();
 
-        final Product product = client().execute(ProductCreateCommand.of(draft));
+        final Product product = client().executeBlocking(ProductCreateCommand.of(draft));
 
         final ProductVariant masterVariant = product.getMasterData().getStaged().getMasterVariant();
         assertThat(masterVariant.findAttribute(ISBN_ATTR_NAME, AttributeAccess.ofText()))
@@ -246,7 +246,7 @@ public class ProductTypeCreationDemoTest extends IntegrationTest {
                 .of(productType, en("basic shirt"), randomSlug(), masterVariantDraft)
                 .build();
 
-        final Product product = client().execute(ProductCreateCommand.of(draft));
+        final Product product = client().executeBlocking(ProductCreateCommand.of(draft));
 
         final ProductVariant masterVariant = product.getMasterData().getStaged().getMasterVariant();
         assertThat(masterVariant.findAttribute(color))

@@ -41,18 +41,18 @@ public class CartDiscountFixtures {
 
     private static CartDiscount getCartDiscount(final TestClient client, final String name) {
         final Query<CartDiscount> query = CartDiscountQuery.of().withPredicates(m -> m.name().lang(ENGLISH).is(name));
-        return client.execute(query).head().orElseGet(() -> {
+        return client.executeBlocking(query).head().orElseGet(() -> {
             final CartDiscountDraft draft = newCartDiscountDraftBuilder()
                     .name(LocalizedString.ofEnglishLocale(name))
                     .build();
-            return client.execute(CartDiscountCreateCommand.of(draft));
+            return client.executeBlocking(CartDiscountCreateCommand.of(draft));
         });
     }
 
     public static void withCartDiscount(final TestClient client, final String name, final Consumer<CartDiscount> consumer) {
         final CartDiscount cartDiscount = getCartDiscount(client, name);
         consumer.accept(cartDiscount);
-        client.execute(CartDiscountDeleteCommand.of(cartDiscount));
+        client.executeBlocking(CartDiscountDeleteCommand.of(cartDiscount));
     }
 
     public static void withPersistentCartDiscount(final TestClient client, final String name, final Consumer<CartDiscount> consumer) {
@@ -65,7 +65,7 @@ public class CartDiscountFixtures {
 
     public static void withCartDiscount(final TestClient client, final Function<CartDiscount, CartDiscount> consumer) {
         final CartDiscountDraft draft = newCartDiscountDraftBuilder().build();
-        final CartDiscount cartDiscount = client.execute(CartDiscountCreateCommand.of(draft));
-        client.execute(CartDiscountDeleteCommand.of(consumer.apply(cartDiscount)));
+        final CartDiscount cartDiscount = client.executeBlocking(CartDiscountCreateCommand.of(draft));
+        client.executeBlocking(CartDiscountDeleteCommand.of(consumer.apply(cartDiscount)));
     }
 }

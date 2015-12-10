@@ -191,14 +191,14 @@ public class ProductCategoryOrderHintTest extends IntegrationTest {
 
     @AfterClass
     public static void cleanCategory1() {
-        client().execute(CategoryDeleteCommand.of(category1));
+        client().executeBlocking(CategoryDeleteCommand.of(category1));
         category1 = null;
         category1Id = null;
     }
 
     @AfterClass
     public static void cleanCategory2() {
-        client().execute(CategoryDeleteCommand.of(category2));
+        client().executeBlocking(CategoryDeleteCommand.of(category2));
         category2 = null;
         category2Id = null;
     }

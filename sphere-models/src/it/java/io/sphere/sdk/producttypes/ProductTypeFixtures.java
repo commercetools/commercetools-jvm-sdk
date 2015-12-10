@@ -56,29 +56,29 @@ public final class ProductTypeFixtures {
         final SphereInternalLogger logger = SphereInternalLogger.getLogger("product-types.fixtures");
         final ProductTypeDraft productTypeDraft = creator.get();
         final String name = productTypeDraft.getName();
-        final PagedQueryResult<ProductType> queryResult = client.execute(ProductTypeQuery.of().byName(name));
+        final PagedQueryResult<ProductType> queryResult = client.executeBlocking(ProductTypeQuery.of().byName(name));
         queryResult.getResults().forEach(productType -> {
-            final PagedQueryResult<Product> pagedQueryResult = client.execute(ProductQuery.of().byProductType(productType));
+            final PagedQueryResult<Product> pagedQueryResult = client.executeBlocking(ProductQuery.of().byProductType(productType));
             delete(client, pagedQueryResult.getResults());
-            client.execute(ProductTypeDeleteCommand.of(productType));
+            client.executeBlocking(ProductTypeDeleteCommand.of(productType));
 
         });
-        final ProductType productType = client.execute(ProductTypeCreateCommand.of(productTypeDraft));
+        final ProductType productType = client.executeBlocking(ProductTypeCreateCommand.of(productTypeDraft));
         logger.debug(() -> "created product type " + productType.getName() + " " + productType.getId());
         final ProductType updated = user.apply(productType);
         logger.debug(() -> "attempt to delete product type " + productType.getName() + " " + productType.getId());
         try {
-            client.execute(ProductTypeDeleteCommand.of(updated));
+            client.executeBlocking(ProductTypeDeleteCommand.of(updated));
         } catch (final Exception e) {
-            final PagedQueryResult<Product> pagedQueryResult = client.execute(ProductQuery.of().byProductType(productType));
+            final PagedQueryResult<Product> pagedQueryResult = client.executeBlocking(ProductQuery.of().byProductType(productType));
             delete(client, pagedQueryResult.getResults());
-            client.execute(ProductTypeDeleteCommand.of(productType));
+            client.executeBlocking(ProductTypeDeleteCommand.of(productType));
         }
     }
 
     public static void deleteProductType(final TestClient client, final ProductType productType) {
         try {
-            client.execute(ProductTypeDeleteCommand.of(productType));
+            client.executeBlocking(ProductTypeDeleteCommand.of(productType));
         } catch (Exception e) {
             getLogger("test.fixtures").debug(() -> "no product type to delete");
         }
@@ -90,8 +90,8 @@ public final class ProductTypeFixtures {
                 .required(true)
                 .build();
         final ProductTypeDraft productTypeDraft = ProductTypeDraft.of(randomKey(), productReferenceProductTypeName, "has an attribute which is reference to a product", asList(productReferenceDefinition));
-        final Optional<ProductType> productTypeOptional = client.execute(ProductTypeQuery.of().byName(productReferenceProductTypeName)).head();
-        return productTypeOptional.orElseGet(() -> client.execute(ProductTypeCreateCommand.of(productTypeDraft)));
+        final Optional<ProductType> productTypeOptional = client.executeBlocking(ProductTypeQuery.of().byName(productReferenceProductTypeName)).head();
+        return productTypeOptional.orElseGet(() -> client.executeBlocking(ProductTypeCreateCommand.of(productTypeDraft)));
     }
 
     public static ProductType defaultProductType(final TestClient client) {
@@ -101,7 +101,7 @@ public final class ProductTypeFixtures {
 
     public static ProductType createProductType(final TestClient client, final String name) {
         final ProductTypeDraft productTypeDraft = ProductTypeDraft.of(randomKey(), name, "", asList());
-        return client.execute(ProductTypeQuery.of().byName(name)).head()
-                .orElseGet(() -> client.execute(ProductTypeCreateCommand.of(productTypeDraft)));
+        return client.executeBlocking(ProductTypeQuery.of().byName(name)).head()
+                .orElseGet(() -> client.executeBlocking(ProductTypeCreateCommand.of(productTypeDraft)));
     }
 }

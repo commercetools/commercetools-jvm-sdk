@@ -285,12 +285,12 @@ public class CategoryDocumentationTest extends IntegrationTest {
 
 
     private static void withProductInCategory(final TestClient client, final Referenceable<Category> category, final Consumer<Product> user) {
-        final ProductType productType = client.execute(ProductTypeCreateCommand.of(ProductTypeDraft.of(randomKey(), CategoryDocumentationTest.class.getSimpleName(), "", asList())));
+        final ProductType productType = client.executeBlocking(ProductTypeCreateCommand.of(ProductTypeDraft.of(randomKey(), CategoryDocumentationTest.class.getSimpleName(), "", asList())));
         final LocalizedString name = LocalizedString.of(ENGLISH, "foo");
-        final Product product = client.execute(ProductCreateCommand.of(ProductDraftBuilder.of(productType, name, name.slugifiedUnique(), ProductVariantDraftBuilder.of().build()).categories(SetUtils.asSet(category.toReference())).build()));
+        final Product product = client.executeBlocking(ProductCreateCommand.of(ProductDraftBuilder.of(productType, name, name.slugifiedUnique(), ProductVariantDraftBuilder.of().build()).categories(SetUtils.asSet(category.toReference())).build()));
         user.accept(product);
-        client.execute(ProductDeleteCommand.of(product));
-        client.execute(ProductTypeDeleteCommand.of(productType));
+        client.executeBlocking(ProductDeleteCommand.of(product));
+        client.executeBlocking(ProductTypeDeleteCommand.of(productType));
     }
 
     private static CategoryTree fetchCurrentTree() {
@@ -346,7 +346,7 @@ public class CategoryDocumentationTest extends IntegrationTest {
                                 final CategoryDraft draft = categoryDraftBuilder.build();
 
                                 //here is the call to SPHERE.IO
-                                final Category category = client().execute(CategoryCreateCommand.of(draft));
+                                final Category category = client().executeBlocking(CategoryCreateCommand.of(draft));
 
                                 externalIdToCategoryMap.put(externalId, category);
                                 return category;

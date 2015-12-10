@@ -13,7 +13,7 @@ public final class TestClient extends Base implements AutoCloseable {
         this.underlying = underlying;
     }
 
-    public <T> T execute(final SphereRequest<T> sphereRequest) {
+    public <T> T executeBlocking(final SphereRequest<T> sphereRequest) {
         try {
             return underlying.execute(sphereRequest).toCompletableFuture().get(20, TimeUnit.SECONDS);
         } catch (final InterruptedException | ExecutionException | TimeoutException e) {

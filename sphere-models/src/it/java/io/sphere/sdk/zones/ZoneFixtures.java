@@ -36,9 +36,9 @@ public class ZoneFixtures {
 
     private static void withUpdateableZone(final TestClient client, final ZoneDraft draft, final Function<Zone, Zone> f) {
         final ZoneCreateCommand createCommand = ZoneCreateCommand.of(draft);
-        Zone zone = client.execute(createCommand);
+        Zone zone = client.executeBlocking(createCommand);
         zone = f.apply(zone);//zone possibly has been updated
-        client.execute(ZoneDeleteCommand.of(zone));
+        client.executeBlocking(ZoneDeleteCommand.of(zone));
     }
 
     public static void deleteZonesForCountries(final TestClient client, final CountryCode country, final CountryCode ... moreCountries) {
@@ -46,17 +46,17 @@ public class ZoneFixtures {
         final ZoneQuery query = ZoneQuery.of();
         final Consumer<Zone> action = zone -> {
             try {
-                client.execute(ZoneDeleteCommand.of(zone));
+                client.executeBlocking(ZoneDeleteCommand.of(zone));
             } catch (final SphereException e) {
-                client.execute(ShippingMethodQuery.of().withPredicates(ShippingMethodQueryModel.of().zoneRates().zone().is(zone)))
+                client.executeBlocking(ShippingMethodQuery.of().withPredicates(ShippingMethodQueryModel.of().zoneRates().zone().is(zone)))
                         .head()
                         .ifPresent(sm -> {
-                            client.execute(ShippingMethodDeleteCommand.of(sm));
-                            client.execute(ZoneDeleteCommand.of(zone));
+                            client.executeBlocking(ShippingMethodDeleteCommand.of(sm));
+                            client.executeBlocking(ZoneDeleteCommand.of(zone));
                         });
             }
         };
-        client.execute(query).getResults().stream()
+        client.executeBlocking(query).getResults().stream()
                 .filter(zone -> countries.stream().anyMatch(zone::contains))
                 .forEach(action);
 

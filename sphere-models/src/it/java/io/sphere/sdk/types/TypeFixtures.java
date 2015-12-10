@@ -49,9 +49,9 @@ public class TypeFixtures {
                         booleanDefinition(), LocalizedStringDefinition(), intDefinition(), doubleDefinition(), moneyDefinition(),
                         dateDefinition(), dateTimeDefinition(), timeDefinition()))
                 .build();
-        final Type type = client.execute(TypeCreateCommand.of(typeDraft));
+        final Type type = client.executeBlocking(TypeCreateCommand.of(typeDraft));
         final Type updatedType = operator.apply(type);
-        client.execute(TypeDeleteCommand.of(updatedType));
+        client.executeBlocking(TypeDeleteCommand.of(updatedType));
     }
 
     private static FieldDefinition dateDefinition() {

@@ -15,7 +15,7 @@ import static io.sphere.sdk.test.SphereTestUtils.*;
 public class DiscountCodeFixtures {
     public static void withPersistentDiscountCode(final TestClient client, final Consumer<DiscountCode> consumer) {
         final String code = DiscountCodeFixtures.class.getSimpleName() + "-persistent-4";
-        final Optional<DiscountCode> fetchedDiscountCode = client.execute(DiscountCodeQuery.of()
+        final Optional<DiscountCode> fetchedDiscountCode = client.executeBlocking(DiscountCodeQuery.of()
                 .withPredicates(DiscountCodeQueryModel.of().code().is(code))).head();
 
         final DiscountCode discountCode = fetchedDiscountCode.orElseGet(() -> createDiscountCode(client, code));
@@ -30,7 +30,7 @@ public class DiscountCodeFixtures {
                 .withIsActive(true)
                 .withMaxApplications(5L)
                 .withMaxApplicationsPerCustomer(1L);
-        return client.execute(DiscountCodeCreateCommand.of(draft));
+        return client.executeBlocking(DiscountCodeCreateCommand.of(draft));
     }
 
 }

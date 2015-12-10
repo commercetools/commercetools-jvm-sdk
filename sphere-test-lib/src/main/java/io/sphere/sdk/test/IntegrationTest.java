@@ -85,7 +85,7 @@ public abstract class IntegrationTest {
 
     protected static <T> T execute(final SphereRequest<T> sphereRequest) {
         try {
-            return client().execute(sphereRequest);
+            return client().executeBlocking(sphereRequest);
         } catch (final TestClientException e) {
             if (e.getCause() != null && e.getCause() instanceof RuntimeException) {
                 throw (RuntimeException) e.getCause();
