@@ -118,7 +118,7 @@ final String key = randomKey();
 final Foo value = FOO_DEFAULT_VALUE;
 final CustomObjectDraft&lt;Foo&gt; draft = CustomObjectDraft.ofUnversionedUpsert(container, key, value, Foo.class);
 final CustomObjectUpsertCommand&lt;Foo&gt; createCommand = CustomObjectUpsertCommand.of(draft);
-final CustomObject&lt;Foo&gt; customObject = client.execute(createCommand);
+final CustomObject&lt;Foo&gt; customObject = client.executeBlocking(createCommand);
 assertThat(customObject.getContainer()).isEqualTo(container);
 assertThat(customObject.getKey()).isEqualTo(key);
 final Foo loadedValue = customObject.getValue();

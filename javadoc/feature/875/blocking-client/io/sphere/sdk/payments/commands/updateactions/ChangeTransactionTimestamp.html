@@ -129,7 +129,7 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html"
  <div id="io-sphere-sdk-payments-commands-PaymentUpdateCommandTest-changeTransactionTimestamp--%s" class=code-example><pre><code class='java'>withPaymentTransaction(client(), (Payment payment, Transaction transaction) -&gt; {
     final ZonedDateTime now = ZonedDateTime.now();
 
-    final Payment updatedPayment = client().execute(PaymentUpdateCommand.of(payment, ChangeTransactionTimestamp.of(now, transaction.getId())));
+    final Payment updatedPayment = client().executeBlocking(PaymentUpdateCommand.of(payment, ChangeTransactionTimestamp.of(now, transaction.getId())));
 
     final Transaction updatedTransaction = updatedPayment.getTransactions().get(0);
     assertThat(updatedTransaction.getTimestamp()).isEqualTo(now);
