@@ -44,7 +44,7 @@ public class ProductProjectionTest {
     @Test
     public void findMatchingVariantsOnSearch() throws Exception {
         final ProductProjection product = getProductProjectionFromSearch();
-        assertThat(product.findMatchingVariants().collect(toList())).extracting(v -> v.getId()).containsExactly(2, 4);
+        assertThat(product.findMatchingVariants()).extracting(v -> v.getId()).containsExactly(2, 4);
     }
 
     @Test
@@ -56,7 +56,7 @@ public class ProductProjectionTest {
     @Test
     public void findMatchingVariantsOnQuery() throws Exception {
         final ProductProjection product = getProductProjectionFromQuery();
-        assertThat(product.findMatchingVariants().collect(toList())).extracting(v -> v.getId()).isEmpty();
+        assertThat(product.findMatchingVariants()).extracting(v -> v.getId()).isEmpty();
     }
 
     @Test

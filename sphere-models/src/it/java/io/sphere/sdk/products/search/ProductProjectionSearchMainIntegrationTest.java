@@ -116,7 +116,7 @@ public class ProductProjectionSearchMainIntegrationTest extends ProductProjectio
                     .mapToLong(variant -> variant.findAttribute(SIZE_ATTRIBUTE_ACCESS).orElse(0L))
                     .max()
                     .getAsLong();
-            return product.findMatchingVariants()
+            return product.findMatchingVariants().stream()
                     .mapToLong(variant -> variant.findAttribute(SIZE_ATTRIBUTE_ACCESS).get())
                     .allMatch(size -> size == productMaximumSize);
         };
@@ -137,7 +137,7 @@ public class ProductProjectionSearchMainIntegrationTest extends ProductProjectio
                 .areAtLeastOne(notMatching(blueVariant))
                 .areAtLeastOne(blueVariant);
         final List<ProductVariant> allMatchingVariants = results.stream()
-                .flatMap(r -> r.findMatchingVariants())
+                .flatMap(r -> r.findMatchingVariants().stream())
                 .collect(toList());
         assertThat(allMatchingVariants).are(blueVariant);
         assertThat(results)

@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
@@ -110,10 +111,12 @@ public interface ProductProjection extends ProductLike<ProductProjection, Produc
 
     /**
      * Finds all variants that match the search criteria used in the search request, if any.
-     * @return the {@link Stream} containing all matching variants
+     * @return the list containing all matching variants
      */
-    default Stream<ProductVariant> findMatchingVariants() {
-        return getAllVariants().stream().filter(v -> Optional.ofNullable(v.isMatchingVariant()).orElse(false));
+    default List<ProductVariant> findMatchingVariants() {
+        return getAllVariants().stream()
+                .filter(v -> Optional.ofNullable(v.isMatchingVariant()).orElse(false))
+                .collect(Collectors.toList());
     }
 
     /**
@@ -121,7 +124,7 @@ public interface ProductProjection extends ProductLike<ProductProjection, Produc
      * @return the first product variant that matches the search criteria, or empty if none does
      */
     default Optional<ProductVariant> findFirstMatchingVariant() {
-        return findMatchingVariants().findFirst();
+        return findMatchingVariants().stream().findFirst();
     }
 
     /**
