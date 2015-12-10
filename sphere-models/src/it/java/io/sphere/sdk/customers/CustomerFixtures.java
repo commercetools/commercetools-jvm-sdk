@@ -5,7 +5,7 @@ import io.sphere.sdk.carts.CartDraft;
 import io.sphere.sdk.carts.commands.CartCreateCommand;
 import io.sphere.sdk.carts.commands.CartUpdateCommand;
 import io.sphere.sdk.carts.commands.updateactions.SetCustomerEmail;
-import io.sphere.sdk.client.TestClient;
+import io.sphere.sdk.client.BlockingSphereClient;
 import io.sphere.sdk.customergroups.CustomerGroup;
 import io.sphere.sdk.customers.commands.CustomerCreateCommand;
 import io.sphere.sdk.customers.commands.CustomerDeleteCommand;
@@ -27,7 +27,7 @@ public class CustomerFixtures {
     public static final CustomerName CUSTOMER_NAME = CustomerName.ofFirstAndLastName("John", "Smith");
     public static final String PASSWORD = "secret";
 
-    public static void withCustomerWithOneAddress(final TestClient client, final Consumer<Customer> customerConsumer) {
+    public static void withCustomerWithOneAddress(final BlockingSphereClient client, final Consumer<Customer> customerConsumer) {
         final Consumer<Customer> customerUpdater = customer -> {
             final Address address = AddressBuilder.of(DE).city("address city").build();
             final Customer customerWithAddress = client.executeBlocking(CustomerUpdateCommand.of(customer, AddAddress.of(address)));
@@ -37,7 +37,7 @@ public class CustomerFixtures {
         withCustomer(client, newCustomerDraft(), customerUpdater);
     }
 
-    public static void withCustomerInGroup(final TestClient client, final BiConsumer<Customer, CustomerGroup> consumer) {
+    public static void withCustomerInGroup(final BlockingSphereClient client, final BiConsumer<Customer, CustomerGroup> consumer) {
         withB2cCustomerGroup(client, group -> {
             withCustomer(client, customer -> {
                 final Customer customerInGroup = client.executeBlocking(CustomerUpdateCommand.of(customer, SetCustomerGroup.of(group)));
@@ -46,24 +46,24 @@ public class CustomerFixtures {
         });
     }
 
-    public static void withUpdateableCustomer(final TestClient client, final UnaryOperator<Customer> operator) {
+    public static void withUpdateableCustomer(final BlockingSphereClient client, final UnaryOperator<Customer> operator) {
         final CustomerSignInResult signInResult = client.executeBlocking(CustomerCreateCommand.of(newCustomerDraft()));
         final Customer customerToDelete = operator.apply(signInResult.getCustomer());
         client.executeBlocking(CustomerDeleteCommand.of(customerToDelete));
     }
 
-    public static void withCustomer(final TestClient client, final Consumer<Customer> customerConsumer) {
+    public static void withCustomer(final BlockingSphereClient client, final Consumer<Customer> customerConsumer) {
         withCustomer(client, newCustomerDraft(), customerConsumer);
     }
 
-    public static void withCustomer(final TestClient client,
+    public static void withCustomer(final BlockingSphereClient client,
                                     final CustomerDraft draft, final Consumer<Customer> customerConsumer) {
         final CustomerSignInResult signInResult = client.executeBlocking(CustomerCreateCommand.of(draft));
         customerConsumer.accept(signInResult.getCustomer());
         //currently the backend does not allow customer deletion
     }
 
-    public static void withCustomerAndCart(final TestClient client, final BiConsumer<Customer, Cart> consumer) {
+    public static void withCustomerAndCart(final BlockingSphereClient client, final BiConsumer<Customer, Cart> consumer) {
         withCustomer(client, customer -> {
             final CartDraft cartDraft = CartDraft.of(EUR).withCustomerId(customer.getId());
             final Cart cart = client.executeBlocking(CartCreateCommand.of(cartDraft));

@@ -6,7 +6,7 @@ import io.sphere.sdk.carts.commands.CartUpdateCommand;
 import io.sphere.sdk.carts.commands.updateactions.AddCustomLineItem;
 import io.sphere.sdk.carts.commands.updateactions.SetCustomShippingMethod;
 import io.sphere.sdk.carts.commands.updateactions.SetCustomerEmail;
-import io.sphere.sdk.client.TestClient;
+import io.sphere.sdk.client.BlockingSphereClient;
 import io.sphere.sdk.customers.Customer;
 import io.sphere.sdk.customers.CustomerFixtures;
 import io.sphere.sdk.customers.CustomerSignInResult;
@@ -41,12 +41,12 @@ public class OrderFixtures {
 
     public static final String CUSTOMER_EMAIL = "foo@bar.tld";
 
-    public static void withOrder(final TestClient client, final UnaryOperator<Order> op) {
+    public static void withOrder(final BlockingSphereClient client, final UnaryOperator<Order> op) {
         withCustomer(client, customer -> withOrder(client, customer, op)
         );
     }
 
-    public static void withOrder(final TestClient client, final Customer customer, final UnaryOperator<Order> op) {
+    public static void withOrder(final BlockingSphereClient client, final Customer customer, final UnaryOperator<Order> op) {
         withFilledCart(client, cart -> {
             final TaxCategory taxCategory = TaxCategoryFixtures.defaultTaxCategory(client);
             final SetCustomShippingMethod shippingMethodAction = SetCustomShippingMethod.of("custom shipping method", ShippingRate.of(EURO_10), taxCategory);
@@ -67,7 +67,7 @@ public class OrderFixtures {
         });
     }
 
-    public static void withOrderOfCustomLineItems(final TestClient client, final Consumer<Order> f) {
+    public static void withOrderOfCustomLineItems(final BlockingSphereClient client, final Consumer<Order> f) {
         withTaxCategory(client, taxCategory -> {
             final Cart cart = createCartWithShippingAddress(client);
             final MonetaryAmount money = MoneyImpl.of("23.50", EUR);
@@ -81,7 +81,7 @@ public class OrderFixtures {
         });
     }
 
-    public static void withOrderAndReturnInfo(final TestClient client, final BiFunction<Order, ReturnInfo, Order> f) {
+    public static void withOrderAndReturnInfo(final BlockingSphereClient client, final BiFunction<Order, ReturnInfo, Order> f) {
         withOrder(client, order -> {
             Assertions.assertThat(order.getReturnInfo()).isEmpty();
             final String lineItemId = order.getLineItems().get(0).getId();

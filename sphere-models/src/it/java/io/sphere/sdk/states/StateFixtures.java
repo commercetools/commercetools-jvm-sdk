@@ -1,6 +1,6 @@
 package io.sphere.sdk.states;
 
-import io.sphere.sdk.client.TestClient;
+import io.sphere.sdk.client.BlockingSphereClient;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.states.commands.StateCreateCommand;
@@ -26,7 +26,7 @@ public class StateFixtures {
     private StateFixtures() {
     }
 
-    public static State createStateByKey(final TestClient client, final String key) {
+    public static State createStateByKey(final BlockingSphereClient client, final String key) {
         final StateDraft stateDraft = createStateDraft(key);
         return client.executeBlocking(StateCreateCommand.of(stateDraft));
     }
@@ -38,11 +38,11 @@ public class StateFixtures {
                 .withInitial(Boolean.TRUE);
     }
 
-    public static void cleanUpByKey(final TestClient client, final String key) {
+    public static void cleanUpByKey(final BlockingSphereClient client, final String key) {
         client.executeBlocking(StateQuery.of().byKey(key)).head().ifPresent(state -> client.executeBlocking(StateDeleteCommand.of(state)));
     }
 
-    public static void withStateByBuilder(final TestClient client, final UnaryOperator<StateDraftBuilder> drafting, final Consumer<State> consumer) {
+    public static void withStateByBuilder(final BlockingSphereClient client, final UnaryOperator<StateDraftBuilder> drafting, final Consumer<State> consumer) {
         final StateDraftBuilder stateDraftBuilder = StateDraftBuilder.of(createStateDraft(randomKey()));
         final StateDraft stateDraft = drafting.apply(stateDraftBuilder).build();
         final State state = client.executeBlocking(StateCreateCommand.of(stateDraft));
@@ -50,7 +50,7 @@ public class StateFixtures {
         client.executeBlocking(StateDeleteCommand.of(state));
     }
 
-    public static void withState(final TestClient client, final Consumer<State> consumer) {
+    public static void withState(final BlockingSphereClient client, final Consumer<State> consumer) {
         withUpdateableState(client, consumerToFunction(consumer));
     }
 
@@ -60,7 +60,7 @@ public class StateFixtures {
      * @param client sphere test client
      * @param consumer consumer which uses the two states
      */
-    public static void withStandardStates(final TestClient client, final BiConsumer<State, State> consumer) {
+    public static void withStandardStates(final BlockingSphereClient client, final BiConsumer<State, State> consumer) {
         final String keyA = "Initial";//given from SPHERE.IO backend
         final String keyB = StateFixtures.class + "_B";
         final State stateB = client.executeBlocking(StateQuery.of().byKey(keyB)).head().orElseGet(() -> createStateByKey(client, keyB));
@@ -77,7 +77,7 @@ public class StateFixtures {
         consumer.accept(stateA, stateB);
     }
 
-    public static void withUpdateableState(final TestClient client, final Function<State, State> f) {
+    public static void withUpdateableState(final BlockingSphereClient client, final Function<State, State> f) {
         final State state = createStateByKey(client, randomKey());
         final State updatedState = f.apply(state);
         client.executeBlocking(StateDeleteCommand.of(updatedState));

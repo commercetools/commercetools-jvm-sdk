@@ -1,7 +1,7 @@
 package io.sphere.sdk.taxcategories;
 
 import com.neovisionaries.i18n.CountryCode;
-import io.sphere.sdk.client.TestClient;
+import io.sphere.sdk.client.BlockingSphereClient;
 import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.queries.QueryPredicate;
 import io.sphere.sdk.taxcategories.commands.TaxCategoryCreateCommand;
@@ -24,7 +24,7 @@ public final class TaxCategoryFixtures {
     private TaxCategoryFixtures() {
     }
 
-    public static void withTaxCategory(final TestClient client, final Consumer<TaxCategory> user) {
+    public static void withTaxCategory(final BlockingSphereClient client, final Consumer<TaxCategory> user) {
         final QueryPredicate<TaxCategory> predicate = TaxCategoryQueryModel.of().name().is(STANDARD_TAX_CATEGORY);
         final List<TaxCategory> results = client.executeBlocking(TaxCategoryQuery.of().withPredicates(predicate)).getResults();
         final TaxCategory taxCategory;
@@ -37,22 +37,22 @@ public final class TaxCategoryFixtures {
         user.accept(taxCategory);
     }
 
-    public static void withTransientTaxCategory(final TestClient client, final Consumer<TaxCategory> user) {
+    public static void withTransientTaxCategory(final BlockingSphereClient client, final Consumer<TaxCategory> user) {
         withTaxCategory(client, randomString(), user);
     }
 
-    public static TaxCategory defaultTaxCategory(final TestClient client) {
+    public static TaxCategory defaultTaxCategory(final BlockingSphereClient client) {
         final String name = "sdk-default-tax-cat-1";
         final TaxCategoryDraft categoryDraft = TaxCategoryDraft.of(name, asList(TaxRate.of("xyz", 0.20, true, DE)));
         return client.executeBlocking(TaxCategoryQuery.of().byName(name)).head().orElseGet(() -> client.executeBlocking(TaxCategoryCreateCommand.of(categoryDraft)));
     }
 
-    public static void withTaxCategory(final TestClient client, final String name, final Consumer<TaxCategory> user) {
+    public static void withTaxCategory(final BlockingSphereClient client, final String name, final Consumer<TaxCategory> user) {
         final TaxCategoryDraft de19 = TaxCategoryDraft.of(name, asList(TaxRateBuilder.of("de19", 0.19, true, CountryCode.DE).build()));
         withTaxCategory(client, de19, user);
     }
 
-    public static void withTaxCategory(final TestClient client, final TaxCategoryDraft draft, final Consumer<TaxCategory> user) {
+    public static void withTaxCategory(final BlockingSphereClient client, final TaxCategoryDraft draft, final Consumer<TaxCategory> user) {
         requireNonNull(draft, "draft should not be null");
         final PagedQueryResult<TaxCategory> results = client.executeBlocking(TaxCategoryQuery.of().byName(draft.getName()));
         results.getResults().forEach(tc -> client.executeBlocking(TaxCategoryDeleteCommand.of(tc)));
@@ -61,7 +61,7 @@ public final class TaxCategoryFixtures {
         client.executeBlocking(TaxCategoryDeleteCommand.of(taxCategory));
     }
 
-    public static void withUpdateableTaxCategory(final TestClient client, final UnaryOperator<TaxCategory> testApplicationFunction) {
+    public static void withUpdateableTaxCategory(final BlockingSphereClient client, final UnaryOperator<TaxCategory> testApplicationFunction) {
         final TaxCategoryDraft draft = TaxCategoryDraft.of(randomKey(), asList(TaxRateBuilder.of("de19", 0.19, true, CountryCode.DE).build()));
         final PagedQueryResult<TaxCategory> results = client.executeBlocking(TaxCategoryQuery.of().byName(draft.getName()));
         results.getResults().forEach(tc -> client.executeBlocking(TaxCategoryDeleteCommand.of(tc)));

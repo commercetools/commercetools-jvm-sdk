@@ -2,7 +2,7 @@ package io.sphere.sdk.client;
 
 import java.util.concurrent.*;
 
-final class BlockingSphereClientImpl implements BlockingSphereClient {
+ class BlockingSphereClientImpl implements BlockingSphereClient {
 
     private final SphereClient delegate;
     private final long defaultTimeout;

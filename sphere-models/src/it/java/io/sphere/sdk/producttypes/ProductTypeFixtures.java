@@ -1,9 +1,9 @@
 package io.sphere.sdk.producttypes;
 
+import io.sphere.sdk.client.BlockingSphereClient;
 import io.sphere.sdk.products.attributes.AttributeDefinition;
 import io.sphere.sdk.products.attributes.AttributeDefinitionBuilder;
 import io.sphere.sdk.products.attributes.ReferenceType;
-import io.sphere.sdk.client.TestClient;
 import io.sphere.sdk.products.Product;
 import io.sphere.sdk.products.queries.ProductQuery;
 import io.sphere.sdk.producttypes.commands.ProductTypeCreateCommand;
@@ -29,30 +29,30 @@ public final class ProductTypeFixtures {
     private ProductTypeFixtures() {
     }
 
-    public static void withEmptyProductType(final TestClient client, final String name, final Consumer<ProductType> user) {
+    public static void withEmptyProductType(final BlockingSphereClient client, final String name, final Consumer<ProductType> user) {
         withProductType(client, () -> ProductTypeDraft.of(randomKey(), name, "desc", Collections.emptyList()), user);
     }
 
-    public static void withProductType(final TestClient client, final Consumer<ProductType> user) {
+    public static void withProductType(final BlockingSphereClient client, final Consumer<ProductType> user) {
         withProductType(client, randomKey(), user);
     }
 
-    public static void withProductType(final TestClient client, final String name, final Consumer<ProductType> user) {
+    public static void withProductType(final BlockingSphereClient client, final String name, final Consumer<ProductType> user) {
         withProductType(client, new TShirtProductTypeDraftSupplier(name), user);
     }
 
-    public static void withProductType(final TestClient client, final Supplier<ProductTypeDraft> creator, final Consumer<ProductType> user) {
+    public static void withProductType(final BlockingSphereClient client, final Supplier<ProductTypeDraft> creator, final Consumer<ProductType> user) {
         withUpdateableProductType(client, creator, productType -> {
             user.accept(productType);
             return productType;
         });
     }
 
-    public static void withUpdateableProductType(final TestClient client, final UnaryOperator<ProductType> user) {
+    public static void withUpdateableProductType(final BlockingSphereClient client, final UnaryOperator<ProductType> user) {
         withUpdateableProductType(client, new TShirtProductTypeDraftSupplier(randomKey()), user);
     }
 
-    public static void withUpdateableProductType(final TestClient client, final Supplier<ProductTypeDraft> creator, final UnaryOperator<ProductType> user) {
+    public static void withUpdateableProductType(final BlockingSphereClient client, final Supplier<ProductTypeDraft> creator, final UnaryOperator<ProductType> user) {
         final SphereInternalLogger logger = SphereInternalLogger.getLogger("product-types.fixtures");
         final ProductTypeDraft productTypeDraft = creator.get();
         final String name = productTypeDraft.getName();
@@ -76,7 +76,7 @@ public final class ProductTypeFixtures {
         }
     }
 
-    public static void deleteProductType(final TestClient client, final ProductType productType) {
+    public static void deleteProductType(final BlockingSphereClient client, final ProductType productType) {
         try {
             client.executeBlocking(ProductTypeDeleteCommand.of(productType));
         } catch (Exception e) {
@@ -84,7 +84,7 @@ public final class ProductTypeFixtures {
         }
     }
 
-    public static ProductType productReferenceProductType(final TestClient client) {
+    public static ProductType productReferenceProductType(final BlockingSphereClient client) {
         final AttributeDefinition productReferenceDefinition = AttributeDefinitionBuilder
                 .of("productreference", en("suggested product"), ReferenceType.ofProduct())
                 .required(true)
@@ -94,12 +94,12 @@ public final class ProductTypeFixtures {
         return productTypeOptional.orElseGet(() -> client.executeBlocking(ProductTypeCreateCommand.of(productTypeDraft)));
     }
 
-    public static ProductType defaultProductType(final TestClient client) {
+    public static ProductType defaultProductType(final BlockingSphereClient client) {
         final String name = "referenceable-product-1";
         return createProductType(client, name);
     }
 
-    public static ProductType createProductType(final TestClient client, final String name) {
+    public static ProductType createProductType(final BlockingSphereClient client, final String name) {
         final ProductTypeDraft productTypeDraft = ProductTypeDraft.of(randomKey(), name, "", asList());
         return client.executeBlocking(ProductTypeQuery.of().byName(name)).head()
                 .orElseGet(() -> client.executeBlocking(ProductTypeCreateCommand.of(productTypeDraft)));

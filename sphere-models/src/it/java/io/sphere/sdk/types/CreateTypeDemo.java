@@ -1,7 +1,7 @@
 package io.sphere.sdk.types;
 
 import io.sphere.sdk.categories.Category;
-import io.sphere.sdk.client.TestClient;
+import io.sphere.sdk.client.BlockingSphereClient;
 import io.sphere.sdk.models.EnumValue;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.TextInputHint;
@@ -16,7 +16,7 @@ import static io.sphere.sdk.test.SphereTestUtils.en;
 
 public final class CreateTypeDemo {
 
-    public static Type createType(final TestClient client) {
+    public static Type createType(final BlockingSphereClient client) {
         final LocalizedString name = en("type for standard categories");
         final String key = "category-customtype-key";
         final String categoryResourceTypeId = Category.resourceTypeId();

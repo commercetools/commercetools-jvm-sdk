@@ -1,6 +1,6 @@
 package io.sphere.sdk.shippingmethods;
 
-import io.sphere.sdk.client.TestClient;
+import io.sphere.sdk.client.BlockingSphereClient;
 import io.sphere.sdk.shippingmethods.commands.ShippingMethodCreateCommand;
 import io.sphere.sdk.shippingmethods.commands.ShippingMethodDeleteCommand;
 import io.sphere.sdk.shippingmethods.commands.ShippingMethodUpdateCommand;
@@ -21,11 +21,11 @@ import static io.sphere.sdk.test.SphereTestUtils.*;
 import static io.sphere.sdk.utils.SetUtils.asSet;
 
 public class ShippingMethodFixtures {
-    public static void withShippingMethod(final TestClient client, final Consumer<ShippingMethod> consumer){
+    public static void withShippingMethod(final BlockingSphereClient client, final Consumer<ShippingMethod> consumer){
         withUpdateableShippingMethod(client, consumerToFunction(consumer));
     }
 
-    public static void withShippingMethodForGermany(final TestClient client, final Consumer<ShippingMethod> consumer) {
+    public static void withShippingMethodForGermany(final BlockingSphereClient client, final Consumer<ShippingMethod> consumer) {
         final Optional<Zone> zoneOptional = client.executeBlocking(ZoneQuery.of().byCountry(DE)).head();
         final Zone zone;
         if (zoneOptional.isPresent()) {
@@ -40,7 +40,7 @@ public class ShippingMethodFixtures {
         });
     }
 
-    public static void withUpdateableShippingMethod(final TestClient client, final Function<ShippingMethod, ShippingMethod> f){
+    public static void withUpdateableShippingMethod(final BlockingSphereClient client, final Function<ShippingMethod, ShippingMethod> f){
         withTaxCategory(client, taxCategory -> {
             final ShippingMethodDraft draft = ShippingMethodDraft.of(randomString(), "test shipping method", taxCategory, asList());
             final ShippingMethod shippingMethod = client.executeBlocking(ShippingMethodCreateCommand.of(draft));

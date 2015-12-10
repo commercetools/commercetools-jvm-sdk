@@ -1,7 +1,7 @@
 package io.sphere.sdk.customobjects;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import io.sphere.sdk.client.TestClient;
+import io.sphere.sdk.client.BlockingSphereClient;
 import io.sphere.sdk.commands.DeleteCommand;
 import io.sphere.sdk.customobjects.commands.CustomObjectDeleteCommand;
 import io.sphere.sdk.customobjects.commands.CustomObjectUpsertCommand;
@@ -17,7 +17,7 @@ public class CustomObjectFixtures {
 
     public static final Foo FOO_DEFAULT_VALUE = new Foo("aString", 5L);
 
-    public static void withCustomObject(final TestClient client, final Consumer<CustomObject<Foo>> consumer) {
+    public static void withCustomObject(final BlockingSphereClient client, final Consumer<CustomObject<Foo>> consumer) {
         final CustomObject<Foo> customObject = createCustomObject(client);
         consumer.accept(customObject);
         final DeleteCommand<CustomObject<Foo>> deleteCommand = CustomObjectDeleteCommand.of(customObject, Foo.class);
@@ -25,7 +25,7 @@ public class CustomObjectFixtures {
     }
 
     //is example
-    private static CustomObject<Foo> createCustomObject(final TestClient client) {
+    private static CustomObject<Foo> createCustomObject(final BlockingSphereClient client) {
         final String container = "CustomObjectFixtures";
         final String key = randomKey();
         final Foo value = FOO_DEFAULT_VALUE;
@@ -40,14 +40,14 @@ public class CustomObjectFixtures {
         return customObject;
     }
 
-    public static void withCustomObject(final TestClient client, final String container, final String key, final Consumer<CustomObject<Foo>> consumer) {
+    public static void withCustomObject(final BlockingSphereClient client, final String container, final String key, final Consumer<CustomObject<Foo>> consumer) {
         final CustomObject<Foo> customObject = createCustomObjectOfContainerAndKey(client, container, key);
         consumer.accept(customObject);
         final DeleteCommand<CustomObject<Foo>> deleteCommand = CustomObjectDeleteCommand.of(customObject, Foo.class);
         client.executeBlocking(deleteCommand);
     }
 
-    private static CustomObject<Foo> createCustomObjectOfContainerAndKey(final TestClient client, final String container, final String key) {
+    private static CustomObject<Foo> createCustomObjectOfContainerAndKey(final BlockingSphereClient client, final String container, final String key) {
         final Foo value = new Foo("aString", 5L);
         final CustomObjectDraft<Foo> draft = CustomObjectDraft.ofUnversionedUpsert(container, key, value, Foo.class);
         final CustomObjectUpsertCommand<Foo> createCommand = CustomObjectUpsertCommand.of(draft);
@@ -55,7 +55,7 @@ public class CustomObjectFixtures {
         return customObject;
     }
 
-    public static void dropAll(final TestClient client) {
+    public static void dropAll(final BlockingSphereClient client) {
         final CustomObjectQuery<JsonNode> query = CustomObjectQuery.ofJsonNode();
         client.executeBlocking(query).getResults()
                 .forEach(item -> {

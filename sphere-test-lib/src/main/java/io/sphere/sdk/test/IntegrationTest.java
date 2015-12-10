@@ -20,11 +20,12 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.UncheckedIOException;
 import java.util.Properties;
+import java.util.concurrent.TimeUnit;
 import java.util.function.Consumer;
 
 public abstract class IntegrationTest {
 
-    private static TestClient client;
+    private static BlockingSphereClient client;
 
     @BeforeClass
     public static void warmUpJavaMoney() throws Exception {
@@ -37,11 +38,12 @@ public abstract class IntegrationTest {
             final HttpClient httpClient = newHttpClient();
             final SphereAccessTokenSupplier tokenSupplier = SphereAccessTokenSupplier.ofAutoRefresh(config, httpClient, false);
             final SphereClient underlying = SphereClient.of(config, httpClient, tokenSupplier);
-            client = new TestClient(withMaybeDeprecationWarnTool(underlying));
+            final SphereClient underlying1 = withMaybeDeprecationWarnTool(underlying);
+            client = BlockingSphereClient.of(underlying1, 20, TimeUnit.SECONDS);
         }
     }
 
-    protected synchronized static TestClient client() {
+    protected synchronized static BlockingSphereClient client() {
         setupClient();
         return client;
     }

@@ -5,7 +5,7 @@ import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.categories.CategoryDraft;
 import io.sphere.sdk.categories.CategoryDraftBuilder;
 import io.sphere.sdk.categories.commands.CategoryCreateCommand;
-import io.sphere.sdk.client.TestClient;
+import io.sphere.sdk.client.BlockingSphereClient;
 import io.sphere.sdk.json.JsonException;
 import io.sphere.sdk.models.Reference;
 
@@ -19,7 +19,7 @@ import static io.sphere.sdk.test.SphereTestUtils.randomSlug;
 import static org.assertj.core.api.Assertions.*;
 
 public class CreateCategoryWithTypeDemo {
-    public static Category createCategoryWithType(final TestClient client, final Category category1,
+    public static Category createCategoryWithType(final BlockingSphereClient client, final Category category1,
                                                   final Category category2) throws Exception {
         final Map<String, Object> fieldValues = new HashMap<>();
         fieldValues.put("state", "published");//in the type it was enum, but for enums only keys are set

@@ -3,7 +3,7 @@ package io.sphere.sdk.categories;
 import io.sphere.sdk.categories.commands.CategoryCreateCommand;
 import io.sphere.sdk.categories.commands.CategoryDeleteCommand;
 import io.sphere.sdk.categories.queries.CategoryQuery;
-import io.sphere.sdk.client.TestClient;
+import io.sphere.sdk.client.BlockingSphereClient;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.utils.SphereInternalLogger;
@@ -20,7 +20,7 @@ import static java.util.Locale.ENGLISH;
 public class CategoryFixtures {
     private static final SphereInternalLogger LOGGER = SphereInternalLogger.getLogger("categories.fixtures");
 
-    public static void withPersistentCategory(final TestClient client, final Consumer<Category> user) {
+    public static void withPersistentCategory(final BlockingSphereClient client, final Consumer<Category> user) {
         final String externalId = "persistent-category-id";
         final Optional<Category> fetchedCategory = client.executeBlocking(CategoryQuery.of().byExternalId(externalId)).head();
         final Category category = fetchedCategory.orElseGet(() -> {
@@ -31,7 +31,7 @@ public class CategoryFixtures {
         user.accept(category);
     }
 
-    public static void withCategory(final TestClient client, final Supplier<CategoryDraft> creator, final Consumer<Category> user) {
+    public static void withCategory(final BlockingSphereClient client, final Supplier<CategoryDraft> creator, final Consumer<Category> user) {
         final CategoryDraft categoryDraft = creator.get();
         final String slug = englishSlugOf(categoryDraft);
         final PagedQueryResult<Category> pagedQueryResult = client.executeBlocking(CategoryQuery.of().bySlug(Locale.ENGLISH, slug));
@@ -48,7 +48,7 @@ public class CategoryFixtures {
         }
     }
 
-    public static void withCategoryAndParentCategory(final TestClient client, final BiConsumer<Category, Category> consumer) {
+    public static void withCategoryAndParentCategory(final BlockingSphereClient client, final BiConsumer<Category, Category> consumer) {
         withCategory(client, parent ->
             withCategory(client, CategoryDraftBuilder.of(randomSlug(), randomSlug()).parent(parent), category -> {
                 consumer.accept(category, parent);
@@ -56,13 +56,13 @@ public class CategoryFixtures {
         );
     }
 
-    public static void withCategory(final TestClient client, final Consumer<Category> consumer) {
+    public static void withCategory(final BlockingSphereClient client, final Consumer<Category> consumer) {
         final LocalizedString slug = randomSlug();
         final CategoryDraftBuilder catSupplier = CategoryDraftBuilder.of(en(slug.get(ENGLISH) + " name"), slug).externalId(randomKey());
         CategoryFixtures.withCategory(client, catSupplier, consumer);
     }
 
-    public static Category createCategory(final TestClient client) {
+    public static Category createCategory(final BlockingSphereClient client) {
         final CategoryDraft categoryDraft = CategoryDraftBuilder.of(randomSlug(), randomSlug()).build();
         return client.executeBlocking(CategoryCreateCommand.of(categoryDraft));
     }

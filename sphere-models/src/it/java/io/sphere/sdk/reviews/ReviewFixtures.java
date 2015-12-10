@@ -1,6 +1,6 @@
 package io.sphere.sdk.reviews;
 
-import io.sphere.sdk.client.TestClient;
+import io.sphere.sdk.client.BlockingSphereClient;
 import io.sphere.sdk.reviews.commands.ReviewCreateCommand;
 import io.sphere.sdk.reviews.commands.ReviewDeleteCommand;
 
@@ -10,7 +10,7 @@ import static io.sphere.sdk.customers.CustomerFixtures.withCustomer;
 import static io.sphere.sdk.products.ProductFixtures.withProduct;
 
 public class ReviewFixtures {
-    public static void withUpdateableReview(final TestClient client, final Function<Review, Review> function) {
+    public static void withUpdateableReview(final BlockingSphereClient client, final Function<Review, Review> function) {
         withProduct(client, product ->
             withCustomer(client, customer -> {
                 final ReviewDraft reviewDraft = ReviewDraftBuilder.of(product, customer)
