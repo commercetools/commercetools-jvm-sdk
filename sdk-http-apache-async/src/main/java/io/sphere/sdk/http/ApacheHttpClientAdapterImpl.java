@@ -1,6 +1,7 @@
 package io.sphere.sdk.http;
 
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.io.input.AutoCloseInputStream;
 import org.apache.http.Header;
 import org.apache.http.HttpEntity;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
@@ -22,6 +23,7 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionStage;
 import java.util.function.Function;
 import java.util.stream.Collectors;
+import java.util.zip.GZIPInputStream;
 
 import static java.util.Arrays.asList;
 
@@ -60,8 +62,15 @@ final class ApacheHttpClientAdapterImpl extends Base implements ApacheHttpClient
         final byte[] bodyNullable = Optional.ofNullable(apacheResponse.getEntity())
                 .map((HttpEntity entity) -> {
                     try {
-                        final InputStream content = entity.getContent();
-                        return IOUtils.toByteArray(content);
+                        final boolean gzipEncoded =
+                                Optional.ofNullable(apacheResponse.getFirstHeader(HttpHeaders.CONTENT_ENCODING))
+                                .map(Header::getValue)
+                                .map(v -> v.equalsIgnoreCase("gzip"))
+                                .orElse(false);
+                        final InputStream content = gzipEncoded ? new GZIPInputStream(entity.getContent()): entity.getContent();
+                        final AutoCloseInputStream autoCloseInputStream = new AutoCloseInputStream(content);
+                        final byte[] bytes = IOUtils.toByteArray(autoCloseInputStream);
+                        return bytes;
                     } catch (final IOException e) {
                         throw new HttpException(e);
                     }

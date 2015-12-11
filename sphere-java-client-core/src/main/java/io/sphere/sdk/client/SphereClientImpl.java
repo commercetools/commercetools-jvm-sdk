@@ -66,6 +66,7 @@ final class SphereClientImpl extends AutoCloseableService implements SphereClien
         return sphereRequest
                 .httpRequestIntent()
                 .plusHeader(HttpHeaders.USER_AGENT, BuildInfo.userAgent())
+                .plusHeader(HttpHeaders.ACCEPT_ENCODING, "gzip")
                 .plusHeader(HttpHeaders.AUTHORIZATION, "Bearer " + token)
                 .prefixPath("/" + config.getProjectKey())
                 .toHttpRequest(config.getApiUrl());
