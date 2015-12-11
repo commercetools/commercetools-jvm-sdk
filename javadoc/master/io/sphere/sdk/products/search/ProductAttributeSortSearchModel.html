@@ -18,8 +18,8 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10,"i10":10,"i11":10,"i12":10,"i13":10,"i14":10,"i15":10,"i16":10,"i17":10,"i18":10,"i19":10};
-var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
+var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":42,"i9":42,"i10":10,"i11":10,"i12":10,"i13":10,"i14":10,"i15":10,"i16":10,"i17":10,"i18":10,"i19":10,"i20":10,"i21":10};
+var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"],32:["t6","Deprecated Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
 var tableTab = "tableTab";
@@ -157,7 +157,7 @@ extends <a href="../../../../../io/sphere/sdk/search/model/SortableSearchModel.h
 </a>
 <h3>Method Summary</h3>
 <table class="memberSummary" border="0" cellpadding="3" cellspacing="0" summary="Method Summary table, listing methods, and an explanation">
-<caption><span id="t0" class="activeTableTab"><span>All Methods</span><span class="tabEnd">&nbsp;</span></span><span id="t2" class="tableTab"><span><a href="javascript:show(2);">Instance Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t4" class="tableTab"><span><a href="javascript:show(8);">Concrete Methods</a></span><span class="tabEnd">&nbsp;</span></span></caption>
+<caption><span id="t0" class="activeTableTab"><span>All Methods</span><span class="tabEnd">&nbsp;</span></span><span id="t2" class="tableTab"><span><a href="javascript:show(2);">Instance Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t4" class="tableTab"><span><a href="javascript:show(8);">Concrete Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t6" class="tableTab"><span><a href="javascript:show(32);">Deprecated Methods</a></span><span class="tabEnd">&nbsp;</span></span></caption>
 <tr>
 <th class="colFirst" scope="col">Modifier and Type</th>
 <th class="colLast" scope="col">Method and Description</th>
@@ -196,49 +196,65 @@ extends <a href="../../../../../io/sphere/sdk/search/model/SortableSearchModel.h
 </tr>
 <tr id="i8" class="altColor">
 <td class="colFirst"><code><a href="../../../../../io/sphere/sdk/search/model/LocalizedEnumSortSearchModel.html" title="class in io.sphere.sdk.search.model">LocalizedEnumSortSearchModel</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>,<a href="../../../../../io/sphere/sdk/search/model/MultiValueSortSearchModel.html" title="class in io.sphere.sdk.search.model">MultiValueSortSearchModel</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/products/search/ProductAttributeSortSearchModel.html#ofLocalizableEnum-java.lang.String-">ofLocalizableEnum</a></span>(java.lang.String&nbsp;attributeName)</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/products/search/ProductAttributeSortSearchModel.html#ofLocalizableEnum-java.lang.String-">ofLocalizableEnum</a></span>(java.lang.String&nbsp;attributeName)</code>
+<div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;
+<div class="block"><span class="deprecationComment">use <a href="../../../../../io/sphere/sdk/products/search/ProductAttributeSortSearchModel.html#ofLocalizedEnum-java.lang.String-"><code>ofLocalizedEnum(String)</code></a> instead</span></div>
+</div>
+</td>
 </tr>
 <tr id="i9" class="rowColor">
 <td class="colFirst"><code><a href="../../../../../io/sphere/sdk/search/model/LocalizedEnumSortSearchModel.html" title="class in io.sphere.sdk.search.model">LocalizedEnumSortSearchModel</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>,<a href="../../../../../io/sphere/sdk/search/model/MultiValueSortSearchModel.html" title="class in io.sphere.sdk.search.model">MultiValueSortSearchModel</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/products/search/ProductAttributeSortSearchModel.html#ofLocalizableEnumSet-java.lang.String-">ofLocalizableEnumSet</a></span>(java.lang.String&nbsp;attributeName)</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/products/search/ProductAttributeSortSearchModel.html#ofLocalizableEnumSet-java.lang.String-">ofLocalizableEnumSet</a></span>(java.lang.String&nbsp;attributeName)</code>
+<div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;
+<div class="block"><span class="deprecationComment">use <a href="../../../../../io/sphere/sdk/products/search/ProductAttributeSortSearchModel.html#ofLocalizedEnumSet-java.lang.String-"><code>ofLocalizedEnumSet(String)</code></a> instead</span></div>
+</div>
+</td>
 </tr>
 <tr id="i10" class="altColor">
+<td class="colFirst"><code><a href="../../../../../io/sphere/sdk/search/model/LocalizedEnumSortSearchModel.html" title="class in io.sphere.sdk.search.model">LocalizedEnumSortSearchModel</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>,<a href="../../../../../io/sphere/sdk/search/model/MultiValueSortSearchModel.html" title="class in io.sphere.sdk.search.model">MultiValueSortSearchModel</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/products/search/ProductAttributeSortSearchModel.html#ofLocalizedEnum-java.lang.String-">ofLocalizedEnum</a></span>(java.lang.String&nbsp;attributeName)</code>&nbsp;</td>
+</tr>
+<tr id="i11" class="rowColor">
+<td class="colFirst"><code><a href="../../../../../io/sphere/sdk/search/model/LocalizedEnumSortSearchModel.html" title="class in io.sphere.sdk.search.model">LocalizedEnumSortSearchModel</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>,<a href="../../../../../io/sphere/sdk/search/model/MultiValueSortSearchModel.html" title="class in io.sphere.sdk.search.model">MultiValueSortSearchModel</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/products/search/ProductAttributeSortSearchModel.html#ofLocalizedEnumSet-java.lang.String-">ofLocalizedEnumSet</a></span>(java.lang.String&nbsp;attributeName)</code>&nbsp;</td>
+</tr>
+<tr id="i12" class="altColor">
 <td class="colFirst"><code><a href="../../../../../io/sphere/sdk/search/model/LocalizedStringSortSearchModel.html" title="class in io.sphere.sdk.search.model">LocalizedStringSortSearchModel</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>,<a href="../../../../../io/sphere/sdk/search/model/MultiValueSortSearchModel.html" title="class in io.sphere.sdk.search.model">MultiValueSortSearchModel</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/products/search/ProductAttributeSortSearchModel.html#ofLocalizedString-java.lang.String-">ofLocalizedString</a></span>(java.lang.String&nbsp;attributeName)</code>&nbsp;</td>
 </tr>
-<tr id="i11" class="rowColor">
+<tr id="i13" class="rowColor">
 <td class="colFirst"><code><a href="../../../../../io/sphere/sdk/search/model/LocalizedStringSortSearchModel.html" title="class in io.sphere.sdk.search.model">LocalizedStringSortSearchModel</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>,<a href="../../../../../io/sphere/sdk/search/model/MultiValueSortSearchModel.html" title="class in io.sphere.sdk.search.model">MultiValueSortSearchModel</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/products/search/ProductAttributeSortSearchModel.html#ofLocalizedStringSet-java.lang.String-">ofLocalizedStringSet</a></span>(java.lang.String&nbsp;attributeName)</code>&nbsp;</td>
 </tr>
-<tr id="i12" class="altColor">
+<tr id="i14" class="altColor">
 <td class="colFirst"><code><a href="../../../../../io/sphere/sdk/search/model/MoneySortSearchModel.html" title="class in io.sphere.sdk.search.model">MoneySortSearchModel</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>,<a href="../../../../../io/sphere/sdk/search/model/MultiValueSortSearchModel.html" title="class in io.sphere.sdk.search.model">MultiValueSortSearchModel</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/products/search/ProductAttributeSortSearchModel.html#ofMoney-java.lang.String-">ofMoney</a></span>(java.lang.String&nbsp;attributeName)</code>&nbsp;</td>
 </tr>
-<tr id="i13" class="rowColor">
+<tr id="i15" class="rowColor">
 <td class="colFirst"><code><a href="../../../../../io/sphere/sdk/search/model/MoneySortSearchModel.html" title="class in io.sphere.sdk.search.model">MoneySortSearchModel</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>,<a href="../../../../../io/sphere/sdk/search/model/MultiValueSortSearchModel.html" title="class in io.sphere.sdk.search.model">MultiValueSortSearchModel</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/products/search/ProductAttributeSortSearchModel.html#ofMoneySet-java.lang.String-">ofMoneySet</a></span>(java.lang.String&nbsp;attributeName)</code>&nbsp;</td>
 </tr>
-<tr id="i14" class="altColor">
+<tr id="i16" class="altColor">
 <td class="colFirst"><code><a href="../../../../../io/sphere/sdk/search/model/MultiValueSortSearchModel.html" title="class in io.sphere.sdk.search.model">MultiValueSortSearchModel</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/products/search/ProductAttributeSortSearchModel.html#ofNumber-java.lang.String-">ofNumber</a></span>(java.lang.String&nbsp;attributeName)</code>&nbsp;</td>
 </tr>
-<tr id="i15" class="rowColor">
+<tr id="i17" class="rowColor">
 <td class="colFirst"><code><a href="../../../../../io/sphere/sdk/search/model/MultiValueSortSearchModel.html" title="class in io.sphere.sdk.search.model">MultiValueSortSearchModel</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/products/search/ProductAttributeSortSearchModel.html#ofNumberSet-java.lang.String-">ofNumberSet</a></span>(java.lang.String&nbsp;attributeName)</code>&nbsp;</td>
 </tr>
-<tr id="i16" class="altColor">
+<tr id="i18" class="altColor">
 <td class="colFirst"><code><a href="../../../../../io/sphere/sdk/search/model/MultiValueSortSearchModel.html" title="class in io.sphere.sdk.search.model">MultiValueSortSearchModel</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/products/search/ProductAttributeSortSearchModel.html#ofString-java.lang.String-">ofString</a></span>(java.lang.String&nbsp;attributeName)</code>&nbsp;</td>
 </tr>
-<tr id="i17" class="rowColor">
+<tr id="i19" class="rowColor">
 <td class="colFirst"><code><a href="../../../../../io/sphere/sdk/search/model/MultiValueSortSearchModel.html" title="class in io.sphere.sdk.search.model">MultiValueSortSearchModel</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/products/search/ProductAttributeSortSearchModel.html#ofStringSet-java.lang.String-">ofStringSet</a></span>(java.lang.String&nbsp;attributeName)</code>&nbsp;</td>
 </tr>
-<tr id="i18" class="altColor">
+<tr id="i20" class="altColor">
 <td class="colFirst"><code><a href="../../../../../io/sphere/sdk/search/model/MultiValueSortSearchModel.html" title="class in io.sphere.sdk.search.model">MultiValueSortSearchModel</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/products/search/ProductAttributeSortSearchModel.html#ofTime-java.lang.String-">ofTime</a></span>(java.lang.String&nbsp;attributeName)</code>&nbsp;</td>
 </tr>
-<tr id="i19" class="rowColor">
+<tr id="i21" class="rowColor">
 <td class="colFirst"><code><a href="../../../../../io/sphere/sdk/search/model/MultiValueSortSearchModel.html" title="class in io.sphere.sdk.search.model">MultiValueSortSearchModel</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/products/search/ProductAttributeSortSearchModel.html#ofTimeSet-java.lang.String-">ofTimeSet</a></span>(java.lang.String&nbsp;attributeName)</code>&nbsp;</td>
 </tr>
@@ -328,13 +344,13 @@ extends <a href="../../../../../io/sphere/sdk/search/model/SortableSearchModel.h
 <pre>public&nbsp;<a href="../../../../../io/sphere/sdk/search/model/EnumSortSearchModel.html" title="class in io.sphere.sdk.search.model">EnumSortSearchModel</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>,<a href="../../../../../io/sphere/sdk/search/model/MultiValueSortSearchModel.html" title="class in io.sphere.sdk.search.model">MultiValueSortSearchModel</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;&gt;&nbsp;ofEnum(java.lang.String&nbsp;attributeName)</pre>
 </li>
 </ul>
-<a name="ofLocalizableEnum-java.lang.String-">
+<a name="ofLocalizedEnum-java.lang.String-">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
-<h4>ofLocalizableEnum</h4>
-<pre>public&nbsp;<a href="../../../../../io/sphere/sdk/search/model/LocalizedEnumSortSearchModel.html" title="class in io.sphere.sdk.search.model">LocalizedEnumSortSearchModel</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>,<a href="../../../../../io/sphere/sdk/search/model/MultiValueSortSearchModel.html" title="class in io.sphere.sdk.search.model">MultiValueSortSearchModel</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;&gt;&nbsp;ofLocalizableEnum(java.lang.String&nbsp;attributeName)</pre>
+<h4>ofLocalizedEnum</h4>
+<pre>public&nbsp;<a href="../../../../../io/sphere/sdk/search/model/LocalizedEnumSortSearchModel.html" title="class in io.sphere.sdk.search.model">LocalizedEnumSortSearchModel</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>,<a href="../../../../../io/sphere/sdk/search/model/MultiValueSortSearchModel.html" title="class in io.sphere.sdk.search.model">MultiValueSortSearchModel</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;&gt;&nbsp;ofLocalizedEnum(java.lang.String&nbsp;attributeName)</pre>
 </li>
 </ul>
 <a name="ofNumber-java.lang.String-">
@@ -418,13 +434,13 @@ extends <a href="../../../../../io/sphere/sdk/search/model/SortableSearchModel.h
 <pre>public&nbsp;<a href="../../../../../io/sphere/sdk/search/model/EnumSortSearchModel.html" title="class in io.sphere.sdk.search.model">EnumSortSearchModel</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>,<a href="../../../../../io/sphere/sdk/search/model/MultiValueSortSearchModel.html" title="class in io.sphere.sdk.search.model">MultiValueSortSearchModel</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;&gt;&nbsp;ofEnumSet(java.lang.String&nbsp;attributeName)</pre>
 </li>
 </ul>
-<a name="ofLocalizableEnumSet-java.lang.String-">
+<a name="ofLocalizedEnumSet-java.lang.String-">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
-<h4>ofLocalizableEnumSet</h4>
-<pre>public&nbsp;<a href="../../../../../io/sphere/sdk/search/model/LocalizedEnumSortSearchModel.html" title="class in io.sphere.sdk.search.model">LocalizedEnumSortSearchModel</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>,<a href="../../../../../io/sphere/sdk/search/model/MultiValueSortSearchModel.html" title="class in io.sphere.sdk.search.model">MultiValueSortSearchModel</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;&gt;&nbsp;ofLocalizableEnumSet(java.lang.String&nbsp;attributeName)</pre>
+<h4>ofLocalizedEnumSet</h4>
+<pre>public&nbsp;<a href="../../../../../io/sphere/sdk/search/model/LocalizedEnumSortSearchModel.html" title="class in io.sphere.sdk.search.model">LocalizedEnumSortSearchModel</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>,<a href="../../../../../io/sphere/sdk/search/model/MultiValueSortSearchModel.html" title="class in io.sphere.sdk.search.model">MultiValueSortSearchModel</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;&gt;&nbsp;ofLocalizedEnumSet(java.lang.String&nbsp;attributeName)</pre>
 </li>
 </ul>
 <a name="ofNumberSet-java.lang.String-">
@@ -466,10 +482,32 @@ extends <a href="../../../../../io/sphere/sdk/search/model/SortableSearchModel.h
 <a name="ofDateTimeSet-java.lang.String-">
 <!--   -->
 </a>
-<ul class="blockListLast">
+<ul class="blockList">
 <li class="blockList">
 <h4>ofDateTimeSet</h4>
 <pre>public&nbsp;<a href="../../../../../io/sphere/sdk/search/model/MultiValueSortSearchModel.html" title="class in io.sphere.sdk.search.model">MultiValueSortSearchModel</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;&nbsp;ofDateTimeSet(java.lang.String&nbsp;attributeName)</pre>
+</li>
+</ul>
+<a name="ofLocalizableEnum-java.lang.String-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>ofLocalizableEnum</h4>
+<pre>@Deprecated
+public&nbsp;<a href="../../../../../io/sphere/sdk/search/model/LocalizedEnumSortSearchModel.html" title="class in io.sphere.sdk.search.model">LocalizedEnumSortSearchModel</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>,<a href="../../../../../io/sphere/sdk/search/model/MultiValueSortSearchModel.html" title="class in io.sphere.sdk.search.model">MultiValueSortSearchModel</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;&gt;&nbsp;ofLocalizableEnum(java.lang.String&nbsp;attributeName)</pre>
+<div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;<span class="deprecationComment">use <a href="../../../../../io/sphere/sdk/products/search/ProductAttributeSortSearchModel.html#ofLocalizedEnum-java.lang.String-"><code>ofLocalizedEnum(String)</code></a> instead</span></div>
+</li>
+</ul>
+<a name="ofLocalizableEnumSet-java.lang.String-">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>ofLocalizableEnumSet</h4>
+<pre>@Deprecated
+public&nbsp;<a href="../../../../../io/sphere/sdk/search/model/LocalizedEnumSortSearchModel.html" title="class in io.sphere.sdk.search.model">LocalizedEnumSortSearchModel</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>,<a href="../../../../../io/sphere/sdk/search/model/MultiValueSortSearchModel.html" title="class in io.sphere.sdk.search.model">MultiValueSortSearchModel</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;&gt;&nbsp;ofLocalizableEnumSet(java.lang.String&nbsp;attributeName)</pre>
+<div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;<span class="deprecationComment">use <a href="../../../../../io/sphere/sdk/products/search/ProductAttributeSortSearchModel.html#ofLocalizedEnumSet-java.lang.String-"><code>ofLocalizedEnumSet(String)</code></a> instead</span></div>
 </li>
 </ul>
 </li>
