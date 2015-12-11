@@ -185,7 +185,7 @@ public class SphereExceptionIntegrationTest extends IntegrationTest {
         public void resultsInA(final Class<? extends Throwable> type) throws Throwable {
             thrown.expect(type);
             try {
-                SphereClientFactory.createHttpTestDouble(
+                TestDoubleSphereClientFactory.createHttpTestDouble(
                         request -> HttpResponse.of(responseCode)).execute(CategoryQuery.of()
                 ).toCompletableFuture().join();
             } catch (final CompletionException e) {
@@ -270,7 +270,7 @@ public class SphereExceptionIntegrationTest extends IntegrationTest {
     @Test
     public void enrichmentForSearchMappingIssues() throws Exception {
         final String body = "{\"statusCode\":400,\"message\":\"SearchPhaseExecutionException[Failed to execute phase [query_fetch], all shards failed; shardFailures {[13K3EBPTQoWoMNpMexz6tQ][products-0][3]: RemoteTransportException[[search3.sphere.prod.commercetools.de][inet[/192.168.7.35:9300]][search/phase/query+fetch]]; nested: SearchParseException[[products-0][3]: query[ConstantScore(*:*)],from[-1],size[-1]: Parse Failure [Failed to parse source [{\\\"query\\\":{\\\"match_all\\\":{}},\\\"facets\\\":{\\\"variants.attributes.SizeProductProjectio\\\":{\\\"range\\\":{\\\"field\\\":\\\"variants.attributes.SizeProductProjectio\\\",\\\"ranges\\\":[{\\\"from\\\":\\\"0\\\"}]},\\\"nested\\\":\\\"variants\\\"}},\\\"from\\\":0,\\\"size\\\":20}]]]; nested: ClassCastException[java.lang.String cannot be cast to java.lang.Number]; }]\",\"errors\":[{\"code\":\"InvalidInput\",\"message\":\"SearchPhaseExecutionException[Failed to execute phase [query_fetch], all shards failed; shardFailures {[13K3EBPTQoWoMNpMexz6tQ][products-0][3]: RemoteTransportException[[search3.sphere.prod.commercetools.de][inet[/192.168.7.35:9300]][search/phase/query+fetch]]; nested: SearchParseException[[products-0][3]: query[ConstantScore(*:*)],from[-1],size[-1]: Parse Failure [Failed to parse source [{\\\"query\\\":{\\\"match_all\\\":{}},\\\"facets\\\":{\\\"variants.attributes.SizeProductProjectio\\\":{\\\"range\\\":{\\\"field\\\":\\\"variants.attributes.SizeProductProjectio\\\",\\\"ranges\\\":[{\\\"from\\\":\\\"0\\\"}]},\\\"nested\\\":\\\"variants\\\"}},\\\"from\\\":0,\\\"size\\\":20}]]]; nested: ClassCastException[java.lang.String cannot be cast to java.lang.Number]; }]\"}]}";
-        final SphereClient client = SphereClientFactory.createHttpTestDouble(intent -> HttpResponse.of(400, body));
+        final SphereClient client = TestDoubleSphereClientFactory.createHttpTestDouble(intent -> HttpResponse.of(400, body));
         assertThatThrownBy(() -> client.execute(CategoryQuery.of()).toCompletableFuture().join())
                 .hasCauseInstanceOf(ErrorResponseException.class)
                 .matches(e -> ((ErrorResponseException) e.getCause()).getAdditionalNotes().stream()
@@ -279,7 +279,7 @@ public class SphereExceptionIntegrationTest extends IntegrationTest {
 
     @Test
     public void noSearchHintNoteOnNormalException() throws Exception {
-        final SphereClient client = SphereClientFactory.createHttpTestDouble(intent -> HttpResponse.of(500));
+        final SphereClient client = TestDoubleSphereClientFactory.createHttpTestDouble(intent -> HttpResponse.of(500));
         assertThatThrownBy(() -> client.execute(CategoryQuery.of()).toCompletableFuture().join())
                 .hasCauseInstanceOf(SphereException.class)
                 .matches(e -> ((SphereException) e.getCause()).getAdditionalNotes().stream().allMatch(s -> !s.contains("reindex")));
