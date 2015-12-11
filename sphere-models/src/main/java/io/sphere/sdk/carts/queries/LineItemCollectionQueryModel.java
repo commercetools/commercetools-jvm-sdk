@@ -25,6 +25,8 @@ public interface LineItemCollectionQueryModel<T> extends LineItemLikeCollectionQ
     @Override
     StringQueryModel<T> id();
 
+    StringQueryModel<T> productId();
+
     @Override
     QueryPredicate<T> isEmpty();
 

@@ -39,6 +39,11 @@ final class LineItemLikeCollectionQueryModelImpl<T> extends QueryModelImpl<T> im
     }
 
     @Override
+    public StringQueryModel<T> productId() {
+        return stringModel("productId");
+    }
+
+    @Override
     public LongQuerySortingModel<T> quantity() {
         return longModel("quantity");
     }
