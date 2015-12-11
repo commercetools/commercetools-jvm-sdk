@@ -5,6 +5,18 @@ import io.sphere.sdk.models.Builder;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.TextInputHint;
 
+/**
+ * Builder to create an attribute definition for product types.
+ *
+ * <p>For {@link AttributeType}s use the Javadoc page of {@link AttributeType}s.</p>
+ *
+ * <p>brief example:</p>
+ * {@include.example io.sphere.sdk.attributestutorial.ProductTypeCreationDemoTest#createBookProductType()}
+ * <p>long example:</p>
+ * {@include.example io.sphere.sdk.attributestutorial.ProductTypeCreationDemoTest#createProductType()}
+ *
+ *
+ */
 public class AttributeDefinitionBuilder extends Base implements Builder<AttributeDefinition> {
     private final String name;
     private final LocalizedString label;
