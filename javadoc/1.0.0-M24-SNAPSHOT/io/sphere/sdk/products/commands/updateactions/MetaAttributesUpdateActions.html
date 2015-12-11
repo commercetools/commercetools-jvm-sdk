@@ -124,7 +124,7 @@ extends <a href="../../../../../../io/sphere/sdk/models/Base.html" title="class 
             "Platform-as-a-Service, e-commerce, http, api, tool");
     final List&lt;UpdateAction&lt;Product&gt;&gt; updateActions =
             MetaAttributesUpdateActions.of(metaAttributes);
-    final Product updatedProduct = client().execute(ProductUpdateCommand.of(product, updateActions));
+    final Product updatedProduct = client().executeBlocking(ProductUpdateCommand.of(product, updateActions));
 
     final ProductData productData = updatedProduct.getMasterData().getStaged();
     assertThat(productData.getMetaTitle()).isEqualTo(metaAttributes.getMetaTitle());

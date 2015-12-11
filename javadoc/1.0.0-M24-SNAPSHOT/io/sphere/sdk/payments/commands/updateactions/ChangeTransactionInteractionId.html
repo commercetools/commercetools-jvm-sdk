@@ -129,7 +129,7 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html"
  <div id="io-sphere-sdk-payments-commands-PaymentUpdateCommandTest-changeTransactionInteractionId--%s" class=code-example><pre><code class='java'>withPaymentTransaction(client(), (Payment payment, Transaction transaction) -&gt; {
     final String newInteractionId = RandomStringUtils.randomAlphanumeric(32);
 
-    final Payment updatedPayment = client().execute(PaymentUpdateCommand.of(payment, ChangeTransactionInteractionId.of(newInteractionId, transaction.getId())));
+    final Payment updatedPayment = client().executeBlocking(PaymentUpdateCommand.of(payment, ChangeTransactionInteractionId.of(newInteractionId, transaction.getId())));
 
     final Transaction updatedTransaction = updatedPayment.getTransactions().get(0);
     assertThat(updatedTransaction.getInteractionId()).isEqualTo(newInteractionId);

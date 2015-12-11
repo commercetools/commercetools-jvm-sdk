@@ -145,11 +145,15 @@ implements <a href="../../../../io/sphere/sdk/client/SphereClient.html" title="i
 </tr>
 <tr id="i0" class="altColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/client/QueueSphereClientDecorator.html#close--">close</a></span>()</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/client/QueueSphereClientDecorator.html#close--">close</a></span>()</code>
+<div class="block">Shuts down the client to save resources like connections and threads.</div>
+</td>
 </tr>
 <tr id="i1" class="rowColor">
 <td class="colFirst"><code>&lt;T&gt;&nbsp;java.util.concurrent.CompletionStage&lt;T&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/client/QueueSphereClientDecorator.html#execute-io.sphere.sdk.client.SphereRequest-">execute</a></span>(<a href="../../../../io/sphere/sdk/client/SphereRequest.html" title="interface in io.sphere.sdk.client">SphereRequest</a>&lt;T&gt;&nbsp;sphereRequest)</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/client/QueueSphereClientDecorator.html#execute-io.sphere.sdk.client.SphereRequest-">execute</a></span>(<a href="../../../../io/sphere/sdk/client/SphereRequest.html" title="interface in io.sphere.sdk.client">SphereRequest</a>&lt;T&gt;&nbsp;sphereRequest)</code>
+<div class="block">Executes asynchronously a request to commercetools.</div>
+</td>
 </tr>
 <tr id="i2" class="altColor">
 <td class="colFirst"><code>static <a href="../../../../io/sphere/sdk/client/SphereClient.html" title="interface in io.sphere.sdk.client">SphereClient</a></code></td>
@@ -205,11 +209,19 @@ implements <a href="../../../../io/sphere/sdk/client/SphereClient.html" title="i
 <li class="blockList">
 <h4>execute</h4>
 <pre>public&nbsp;&lt;T&gt;&nbsp;java.util.concurrent.CompletionStage&lt;T&gt;&nbsp;execute(<a href="../../../../io/sphere/sdk/client/SphereRequest.html" title="interface in io.sphere.sdk.client">SphereRequest</a>&lt;T&gt;&nbsp;sphereRequest)</pre>
+<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../io/sphere/sdk/client/SphereClient.html#execute-io.sphere.sdk.client.SphereRequest-">SphereClient</a></code></span></div>
+<div class="block">Executes asynchronously a request to commercetools. By default it does not have a timeout.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="../../../../io/sphere/sdk/client/SphereClient.html#execute-io.sphere.sdk.client.SphereRequest-">execute</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/client/SphereClient.html" title="interface in io.sphere.sdk.client">SphereClient</a></code></dd>
 <dt><span class="overrideSpecifyLabel">Overrides:</span></dt>
 <dd><code><a href="../../../../io/sphere/sdk/client/SphereClientDecorator.html#execute-io.sphere.sdk.client.SphereRequest-">execute</a></code>&nbsp;in class&nbsp;<code><a href="../../../../io/sphere/sdk/client/SphereClientDecorator.html" title="class in io.sphere.sdk.client">SphereClientDecorator</a></code></dd>
+<dt><span class="paramLabel">Type Parameters:</span></dt>
+<dd><code>T</code> - type of the result for the request</dd>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>sphereRequest</code> - request to commercetools to perfom</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>future monad which can contain the result or an exception</dd>
 </dl>
 </li>
 </ul>
@@ -220,6 +232,8 @@ implements <a href="../../../../io/sphere/sdk/client/SphereClient.html" title="i
 <li class="blockList">
 <h4>close</h4>
 <pre>public&nbsp;void&nbsp;close()</pre>
+<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../io/sphere/sdk/client/SphereClient.html#close--">SphereClient</a></code></span></div>
+<div class="block">Shuts down the client to save resources like connections and threads.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="../../../../io/sphere/sdk/client/SphereClient.html#close--">close</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/client/SphereClient.html" title="interface in io.sphere.sdk.client">SphereClient</a></code></dd>

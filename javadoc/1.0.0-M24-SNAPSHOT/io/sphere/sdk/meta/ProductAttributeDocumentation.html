@@ -142,7 +142,7 @@ extends java.lang.Object</pre>
         .build();
 
 final ProductTypeDraft productTypeDraft = ProductTypeDraft.of(randomKey(), BOOK_PRODUCT_TYPE_NAME, "books", asList(isbn));
-final ProductType productType = client().execute(ProductTypeCreateCommand.of(productTypeDraft));
+final ProductType productType = client().executeBlocking(ProductTypeCreateCommand.of(productTypeDraft));
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/attributestutorial/ProductTypeCreationDemoTest.java" target="_blank">test code</a>.</pre></div>
 
 <p>The code for the creation of the tshirt <a href="../../../../io/sphere/sdk/producttypes/ProductType.html" title="interface in io.sphere.sdk.producttypes"><code>ProductType</code></a>:</p>
@@ -192,7 +192,7 @@ final AttributeDefinition availableSince = AttributeDefinitionBuilder
 final List&lt;AttributeDefinition&gt; attributes = asList(color, size, laundrySymbols,
         matchingProducts, rrp, availableSince);
 final ProductTypeDraft productTypeDraft = ProductTypeDraft.of(randomKey(), PRODUCT_TYPE_NAME, "a 'T' shaped cloth", attributes);
-final ProductType productType = client().execute(ProductTypeCreateCommand.of(productTypeDraft));
+final ProductType productType = client().executeBlocking(ProductTypeCreateCommand.of(productTypeDraft));
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/attributestutorial/ProductTypeCreationDemoTest.java" target="_blank">test code</a>.</pre></div>
 
 
@@ -206,7 +206,7 @@ final ProductType productType = client().execute(ProductTypeCreateCommand.of(pro
  ID of the development system will not be the ID of the production system it is necessary to find the product type by name:</p>
 
  <div id="io-sphere-sdk-attributestutorial-ProductTypeCreationDemoTest-fetchProductTypeByName--%s" class=code-example><pre><code class='java'>final Optional&lt;ProductType&gt; productTypeOptional =
-        client().execute(ProductTypeQuery.of().byName(PRODUCT_TYPE_NAME)).head();
+        client().executeBlocking(ProductTypeQuery.of().byName(PRODUCT_TYPE_NAME)).head();
 final ProductType productType = productTypeOptional
         .orElseThrow(() -&gt; new RuntimeException("product type " + PRODUCT_TYPE_NAME + " is not present."));
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/attributestutorial/ProductTypeCreationDemoTest.java" target="_blank">test code</a>.</pre></div>
@@ -224,7 +224,7 @@ final ProductDraft draft = ProductDraftBuilder
         .of(productType, en("a book"), randomSlug(), masterVariantDraft)
         .build();
 
-final Product product = client().execute(ProductCreateCommand.of(draft));
+final Product product = client().executeBlocking(ProductCreateCommand.of(draft));
 
 final ProductVariant masterVariant = product.getMasterData().getStaged().getMasterVariant();
 assertThat(masterVariant.findAttribute(ISBN_ATTR_NAME, AttributeAccess.ofText()))
@@ -248,7 +248,7 @@ final ProductDraft draft = ProductDraftBuilder
         .of(productType, en("basic shirt"), randomSlug(), masterVariantDraft)
         .build();
 
-final Product product = client().execute(ProductCreateCommand.of(draft));
+final Product product = client().executeBlocking(ProductCreateCommand.of(draft));
 
 final ProductVariant masterVariant = product.getMasterData().getStaged().getMasterVariant();
 assertThat(masterVariant.findAttribute(COLOR_ATTR_NAME, AttributeAccess.ofLocalizedEnumValue()))
@@ -325,7 +325,7 @@ final ProductDraft draft = ProductDraftBuilder
         .of(productType, en("basic shirt"), randomSlug(), masterVariantDraft)
         .build();
 
-final Product product = client().execute(ProductCreateCommand.of(draft));
+final Product product = client().executeBlocking(ProductCreateCommand.of(draft));
 
 final ProductVariant masterVariant = product.getMasterData().getStaged().getMasterVariant();
 assertThat(masterVariant.findAttribute(color))
