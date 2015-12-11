@@ -8,18 +8,18 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
  */
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "name", visible = true)
 @JsonSubTypes({
-        @JsonSubTypes.Type(value = BooleanType.class, name = "Boolean"),
-        @JsonSubTypes.Type(value = StringType.class, name = "String"),
-        @JsonSubTypes.Type(value = LocalizedStringType.class, name = "LocalizedString"),
-        @JsonSubTypes.Type(value = EnumType.class, name = "Enum"),
-        @JsonSubTypes.Type(value = LocalizedEnumType.class, name = "LocalizedEnum"),
-        @JsonSubTypes.Type(value = NumberType.class, name = "Number"),
-        @JsonSubTypes.Type(value = MoneyType.class, name = "Money"),
-        @JsonSubTypes.Type(value = DateType.class, name = "Date"),
-        @JsonSubTypes.Type(value = TimeType.class, name = "Time"),
-        @JsonSubTypes.Type(value = DateTimeType.class, name = "DateTime"),
-        @JsonSubTypes.Type(value = ReferenceType.class, name = "Reference"),
-        @JsonSubTypes.Type(value = SetType.class, name = "Set")
+        @JsonSubTypes.Type(value = BooleanFieldType.class, name = "Boolean"),
+        @JsonSubTypes.Type(value = StringFieldType.class, name = "String"),
+        @JsonSubTypes.Type(value = LocalizedStringFieldType.class, name = "LocalizedString"),
+        @JsonSubTypes.Type(value = EnumFieldType.class, name = "Enum"),
+        @JsonSubTypes.Type(value = LocalizedEnumFieldType.class, name = "LocalizedEnum"),
+        @JsonSubTypes.Type(value = NumberFieldType.class, name = "Number"),
+        @JsonSubTypes.Type(value = MoneyFieldType.class, name = "Money"),
+        @JsonSubTypes.Type(value = DateFieldType.class, name = "Date"),
+        @JsonSubTypes.Type(value = TimeFieldType.class, name = "Time"),
+        @JsonSubTypes.Type(value = DateTimeFieldType.class, name = "DateTime"),
+        @JsonSubTypes.Type(value = ReferenceFieldType.class, name = "Reference"),
+        @JsonSubTypes.Type(value = SetFieldType.class, name = "Set")
 })
 public interface FieldType {
 }

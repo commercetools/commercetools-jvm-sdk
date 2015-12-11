@@ -2,10 +2,11 @@ package io.sphere.sdk.types.commands.updateactions;
 
 import io.sphere.sdk.commands.UpdateActionImpl;
 import io.sphere.sdk.models.EnumValue;
+import io.sphere.sdk.types.EnumFieldType;
 import io.sphere.sdk.types.Type;
 
 /**
- Adds an a new {@link EnumValue} value to an {@link io.sphere.sdk.types.EnumType} field.
+ Adds an a new {@link EnumValue} value to an {@link EnumFieldType} field.
 
  {@doc.gen intro}
 

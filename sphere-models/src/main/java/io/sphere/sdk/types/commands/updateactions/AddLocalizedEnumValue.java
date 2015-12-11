@@ -2,10 +2,11 @@ package io.sphere.sdk.types.commands.updateactions;
 
 import io.sphere.sdk.commands.UpdateActionImpl;
 import io.sphere.sdk.models.LocalizedEnumValue;
+import io.sphere.sdk.types.LocalizedEnumFieldType;
 import io.sphere.sdk.types.Type;
 
 /**
- Adds an a new {@link LocalizedEnumValue} value to an {@link io.sphere.sdk.types.LocalizedEnumType} field.
+ Adds an a new {@link LocalizedEnumValue} value to an {@link LocalizedEnumFieldType} field.
 
  {@doc.gen intro}
 

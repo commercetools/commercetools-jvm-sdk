@@ -6,14 +6,14 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 /**
  * @see Custom
  */
-public class TimeType extends FieldTypeBase {
+public class LocalizedStringFieldType extends FieldTypeBase {
 
     @JsonCreator
-    private TimeType() {
+    private LocalizedStringFieldType() {
     }
 
     @JsonIgnore
-    public static TimeType of() {
-        return new TimeType();
+    public static LocalizedStringFieldType of() {
+        return new LocalizedStringFieldType();
     }
 }

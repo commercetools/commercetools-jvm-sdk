@@ -15,7 +15,6 @@ import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.TextInputHint;
 import io.sphere.sdk.models.errors.RequiredField;
-import io.sphere.sdk.queries.QueryPredicate;
 import io.sphere.sdk.test.IntegrationTest;
 import io.sphere.sdk.types.*;
 import io.sphere.sdk.types.commands.TypeCreateCommand;
@@ -123,7 +122,7 @@ public class CategoriesCustomFieldsTest extends IntegrationTest {
     @Test
     public void requiredValidation() {
         final FieldDefinition stringFieldDefinition =
-                FieldDefinition.of(StringType.of(), STRING_FIELD_NAME, en("label"), true, TextInputHint.SINGLE_LINE);
+                FieldDefinition.of(StringFieldType.of(), STRING_FIELD_NAME, en("label"), true, TextInputHint.SINGLE_LINE);
         final String typeKey = randomKey();
         final TypeDraft typeDraft = TypeDraftBuilder.of(typeKey, en("name of the custom type"), TYPE_IDS)
                 .description(en("description"))
