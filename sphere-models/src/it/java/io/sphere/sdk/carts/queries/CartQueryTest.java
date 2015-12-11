@@ -129,6 +129,7 @@ public class CartQueryTest extends IntegrationTest {
                     .withPredicates(m ->
                             m.lineItems().id().is(lineItem.getId())
                                     .and(m.lineItems().quantity().is(lineItem.getQuantity()))
+                                    .and(m.lineItems().productId().is(lineItem.getProductId()))
                                     .and(m.lineItems().name().locale(ENGLISH).is(englishName))
                                     .and(m.lineItems().variant().sku().is(lineItem.getVariant().getSku()))
                                     .and(m.lineItems().price().discounted().isNotPresent())
