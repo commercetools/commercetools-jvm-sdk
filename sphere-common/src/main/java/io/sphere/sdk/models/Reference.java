@@ -15,7 +15,7 @@ import javax.annotation.Nullable;
  *
  * @param <T> the type of the referenced object
  */
-public final class Reference<T> implements Referenceable<T>, Identifiable<T> {
+public final class Reference<T> implements Referenceable<T>, Identifiable<T>, ResourceIdentifier<T> {
     private final String typeId;
     private final String id;
     @Nullable
@@ -78,6 +78,21 @@ public final class Reference<T> implements Referenceable<T>, Identifiable<T> {
     @Override
     public Reference<T> toReference() {
         return this;
+    }
+
+    @Override
+    public ResourceIdentifier<T> toResourceIdentifier() {
+        return this;
+    }
+
+    /**
+     * In references the key should always be null
+     * @return null
+     */
+    @Nullable
+    @Override
+    public String getKey() {
+        return null;
     }
 
     @Override

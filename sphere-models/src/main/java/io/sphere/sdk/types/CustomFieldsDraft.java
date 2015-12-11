@@ -16,7 +16,7 @@ import static java.util.Objects.requireNonNull;
  * @see CustomFieldsDraftBuilder
  */
 public class CustomFieldsDraft {
-    private final ResourceIdentifier type;
+    private final ResourceIdentifier<Type> type;
     @Nullable
     private final Map<String, JsonNode> fields;
 
@@ -69,7 +69,7 @@ public class CustomFieldsDraft {
         return type.getKey();
     }
 
-    public ResourceIdentifier getType() {
+    public ResourceIdentifier<Type> getType() {
         return type;
     }
 

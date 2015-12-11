@@ -2,7 +2,7 @@ package io.sphere.sdk.models;
 
 import javax.annotation.Nullable;
 
-final class ResourceIdentifierImpl implements ResourceIdentifier {
+final class ResourceIdentifierImpl<T> implements ResourceIdentifier<T> {
     @Nullable
     private final String id;
     @Nullable

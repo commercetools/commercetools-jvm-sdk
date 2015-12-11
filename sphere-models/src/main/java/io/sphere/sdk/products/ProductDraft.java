@@ -2,6 +2,7 @@ package io.sphere.sdk.products;
 
 import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.models.*;
+import io.sphere.sdk.producttypes.ProductType;
 import io.sphere.sdk.search.SearchKeywords;
 import io.sphere.sdk.states.State;
 import io.sphere.sdk.taxcategories.TaxCategory;
@@ -21,7 +22,7 @@ public interface ProductDraft extends WithLocalizedSlug, MetaAttributes {
 
     LocalizedString getName();
 
-    ResourceIdentifier getProductType();
+    ResourceIdentifier<ProductType> getProductType();
 
     LocalizedString getSlug();
 

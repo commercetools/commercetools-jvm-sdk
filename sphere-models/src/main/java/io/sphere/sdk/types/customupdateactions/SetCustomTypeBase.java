@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import io.sphere.sdk.commands.UpdateActionImpl;
 import io.sphere.sdk.json.SphereJsonUtils;
 import io.sphere.sdk.models.ResourceIdentifier;
+import io.sphere.sdk.types.Type;
 
 import javax.annotation.Nullable;
 import java.util.Map;
@@ -13,7 +14,7 @@ import java.util.stream.Collectors;
 
 public abstract class SetCustomTypeBase<T> extends UpdateActionImpl<T> {
     @Nullable
-    private final ResourceIdentifier type;
+    private final ResourceIdentifier<Type> type;
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     @Nullable
     private final Map<String, JsonNode> fields;
@@ -32,6 +33,7 @@ public abstract class SetCustomTypeBase<T> extends UpdateActionImpl<T> {
      * @deprecated use {@link #getType()} instead
      * @return id
      */
+    @Deprecated
     @Nullable
     public String getTypeId() {
         return Optional.ofNullable(type).map(t -> t.getId()).orElse(null);
@@ -42,12 +44,13 @@ public abstract class SetCustomTypeBase<T> extends UpdateActionImpl<T> {
      * @return key
      */
     @Nullable
+    @Deprecated
     public String getTypeKey() {
         return Optional.ofNullable(type).map(t -> t.getKey()).orElse(null);
     }
 
     @Nullable
-    public ResourceIdentifier getType() {
+    public ResourceIdentifier<Type> getType() {
         return type;
     }
 
