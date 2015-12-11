@@ -8,6 +8,7 @@ import org.junit.Test;
 
 import java.io.IOException;
 
+import static java.util.stream.Collectors.toList;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class ProductProjectionTest {
@@ -22,10 +23,6 @@ public class ProductProjectionTest {
 
         final ProductProjection current = product.toProjection(ProductProjectionType.CURRENT);
         assertThat(current).overridingErrorMessage("current can be empty").isNull();
-    }
-
-    private Product getProduct() throws IOException {
-        return SphereJsonUtils.readObjectFromResource("ProductProjectionTest/product.json", Product.typeReference());
     }
 
     @Test
@@ -45,8 +42,44 @@ public class ProductProjectionTest {
     }
 
     @Test
+    public void findMatchingVariantsOnSearch() throws Exception {
+        final ProductProjection product = getProductProjectionFromSearch();
+        assertThat(product.findMatchingVariants()).extracting(v -> v.getId()).containsExactly(2, 4);
+    }
+
+    @Test
+    public void findFirstMatchingVariantOnSearch() throws Exception {
+        final ProductProjection product = getProductProjectionFromSearch();
+        assertThat(product.findFirstMatchingVariant().get().getId()).isEqualTo(2);
+    }
+
+    @Test
+    public void findMatchingVariantsOnQuery() throws Exception {
+        final ProductProjection product = getProductProjectionFromQuery();
+        assertThat(product.findMatchingVariants()).extracting(v -> v.getId()).isEmpty();
+    }
+
+    @Test
+    public void findFirstMatchingVariantOnQuery() throws Exception {
+        final ProductProjection product = getProductProjectionFromQuery();
+        assertThat(product.findFirstMatchingVariant()).isEmpty();
+    }
+
+    @Test
     public void productProjectionIsAVersionedProduct() throws IOException {
         final ProductProjection productProjection = getProduct().toProjection(ProductProjectionType.STAGED);
         final Versioned<Product> versioned = productProjection;
+    }
+
+    private Product getProduct() throws IOException {
+        return SphereJsonUtils.readObjectFromResource("ProductProjectionTest/product.json", Product.typeReference());
+    }
+
+    private ProductProjection getProductProjectionFromSearch() throws IOException {
+        return SphereJsonUtils.readObjectFromResource("ProductProjectionTest/product-projection-from-search.json", ProductProjection.typeReference());
+    }
+
+    private ProductProjection getProductProjectionFromQuery() throws IOException {
+        return SphereJsonUtils.readObjectFromResource("ProductProjectionTest/product-projection-from-query.json", ProductProjection.typeReference());
     }
 }
