@@ -95,50 +95,23 @@ public class SphereClientFactory extends Base {
     }
 
     /**
-     * Creates a test double for a SPHERE.IO client which enables to fake http responses from SPHERE.IO.
-     * The client does not need an internet connection.
-     *
-     * {@include.example io.sphere.sdk.client.TestsDemo#withJson()}
-     *
-     * @param function a function which returns a matching object for a SPHERE.IO request.
-     * @return sphere client test double
+     * deprecated
+     * @deprecated use {@link TestDoubleSphereClientFactory#createHttpTestDouble(Function)}
+     * @param function mapping from intent to http response
+     * @return test double
      */
+    @Deprecated
     public static SphereClient createHttpTestDouble(final Function<HttpRequestIntent, HttpResponse> function) {
-        return new SphereClient() {
-            private final ObjectMapper objectMapper = SphereJsonUtils.newObjectMapper();
-
-            @Override
-            public <T> CompletionStage<T> execute(final SphereRequest<T> sphereRequest) {
-                final HttpRequestIntent httpRequest = sphereRequest.httpRequestIntent();
-                final HttpResponse httpResponse = function.apply(httpRequest);
-                try {
-                    final T t = SphereClientImpl.parse(sphereRequest, objectMapper, SphereApiConfig.of("fake-project-key-for-testing", "https://createHttpTestDouble.tld"), httpResponse);
-                    return CompletableFutureUtils.successful(t);
-                } catch (final Exception e) {
-                    return CompletableFutureUtils.failed(e);
-                }
-            }
-
-            @Override
-            public void close() {
-            }
-
-            @Override
-            public String toString() {
-                return "SphereClientHttpTestDouble";
-            }
-        };
+        return TestDoubleSphereClientFactory.createHttpTestDouble(function);
     }
 
     /**
-     * Creates a test double for a SPHERE.IO client which enables to fake the results of the client as Java object.
-     * The client does not need an internet connection.
-     *
-     * {@include.example io.sphere.sdk.client.TestsDemo#modelInstanceFromJson()}
-     *
+     * deprecated
+     * @deprecated use {@link TestDoubleSphereClientFactory#createObjectTestDouble(Function)}
      * @param function a function which returns a matching http request for a SPHERE.IO request.
      * @return sphere client test double
      */
+    @Deprecated
     @SuppressWarnings("unchecked")
     public static SphereClient createObjectTestDouble(final Function<HttpRequestIntent, Object> function) {
         return new SphereClient() {
