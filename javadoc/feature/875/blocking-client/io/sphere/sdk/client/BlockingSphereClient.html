@@ -279,7 +279,7 @@ extends <a href="../../../../io/sphere/sdk/client/SphereClient.html" title="inte
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>delegate</code> - underlying sphere client which may be initialized with the <a href="../../../../io/sphere/sdk/client/SphereClientFactory.html" title="class in io.sphere.sdk.client"><code>SphereClientFactory</code></a>.</dd>
-<dd><code>defaultTimeout</code> - the default maximum time to wait</dd>
+<dd><code>defaultTimeout</code> - the default maximum time to wait (to block the thread) which should be greater than the timeout of the underlying HTTP client</dd>
 <dd><code>unit</code> - the time unit of the defaultTimeout argument</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>wrapped client which can perform blocking calls.</dd>
