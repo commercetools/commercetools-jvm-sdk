@@ -34,7 +34,7 @@ public class BlockingSphereClientTest {
 
     @Test
     public void globalTimeout() {
-        final BlockingSphereClient blockingSphereClient = newBlockingClientWhichwouldBlockForever();
+        final BlockingSphereClient blockingSphereClient = newBlockingClientWhichWouldBlockForever();
 
         final Throwable throwable = catchThrowable(() -> blockingSphereClient.executeBlocking(DummySphereRequest.of()));
 
@@ -43,14 +43,14 @@ public class BlockingSphereClientTest {
 
     @Test
     public void timeoutPerCall() {
-        final BlockingSphereClient blockingSphereClient = newBlockingClientWhichwouldBlockForever();
+        final BlockingSphereClient blockingSphereClient = newBlockingClientWhichWouldBlockForever();
 
         final Throwable throwable = catchThrowable(() -> blockingSphereClient.executeBlocking(DummySphereRequest.of(), 1, TimeUnit.NANOSECONDS));
 
         assertThat(throwable).isInstanceOf(SphereTimeoutException.class);
     }
 
-    private BlockingSphereClient newBlockingClientWhichwouldBlockForever() {
+    private BlockingSphereClient newBlockingClientWhichWouldBlockForever() {
         final SphereClient sphereClient = new NotAnsweringSphereClient();
         return blockingClientOf(sphereClient);
     }
