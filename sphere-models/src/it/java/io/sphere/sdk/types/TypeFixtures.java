@@ -4,7 +4,7 @@ import io.sphere.sdk.carts.Cart;
 import io.sphere.sdk.carts.CustomLineItem;
 import io.sphere.sdk.carts.LineItem;
 import io.sphere.sdk.categories.Category;
-import io.sphere.sdk.client.TestClient;
+import io.sphere.sdk.client.BlockingSphereClient;
 import io.sphere.sdk.customers.Customer;
 import io.sphere.sdk.models.EnumValue;
 import io.sphere.sdk.models.LocalizedEnumValue;
@@ -41,7 +41,7 @@ public class TypeFixtures {
     public static final String STRING_FIELD_NAME = "string-field-name";
     public static final String TYPE_NAME = "name of the custom type";
 
-    public static void withUpdateableType(final TestClient client, final UnaryOperator<Type> operator) {
+    public static void withUpdateableType(final BlockingSphereClient client, final UnaryOperator<Type> operator) {
         final String typeKey = randomKey();
         final TypeDraft typeDraft = TypeDraftBuilder.of(typeKey, en(TYPE_NAME), TYPE_IDS)
                 .description(en("description"))
@@ -49,9 +49,9 @@ public class TypeFixtures {
                         booleanDefinition(), LocalizedStringDefinition(), intDefinition(), doubleDefinition(), moneyDefinition(),
                         dateDefinition(), dateTimeDefinition(), timeDefinition()))
                 .build();
-        final Type type = client.execute(TypeCreateCommand.of(typeDraft));
+        final Type type = client.executeBlocking(TypeCreateCommand.of(typeDraft));
         final Type updatedType = operator.apply(type);
-        client.execute(TypeDeleteCommand.of(updatedType));
+        client.executeBlocking(TypeDeleteCommand.of(updatedType));
     }
 
     private static FieldDefinition dateDefinition() {

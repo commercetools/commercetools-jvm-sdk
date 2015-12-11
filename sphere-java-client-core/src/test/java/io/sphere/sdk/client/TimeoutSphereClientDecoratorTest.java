@@ -18,17 +18,7 @@ public class TimeoutSphereClientDecoratorTest {
 
     @Test
     public void throwsTimeoutExceptionOnTimeout() throws Exception {
-        final SphereClient sphereClient = new SphereClient() {
-            @Override
-            public <T> CompletionStage<T> execute(final SphereRequest<T> sphereRequest) {
-                return new CompletableFuture<>();
-            }
-
-            @Override
-            public void close() {
-
-            }
-        };
+        final SphereClient sphereClient = new NotAnsweringSphereClient();
 
         final SphereClient decoratedClient = TimeoutSphereClientDecorator.of(sphereClient, DELAY, TimeUnit.MILLISECONDS);
         assertThatThrownBy(() -> decoratedClient.execute(DummySphereRequest.of()).toCompletableFuture().join())

@@ -88,7 +88,7 @@ public class ProductUpdateCommandTest extends IntegrationTest {
     private void testAddPrice(final PriceDraft expectedPrice) throws Exception {
         withUpdateableProduct(client(), product -> {
             final Product updatedProduct = client()
-                    .execute(ProductUpdateCommand.of(product, AddPrice.of(1, expectedPrice)));
+                    .executeBlocking(ProductUpdateCommand.of(product, AddPrice.of(1, expectedPrice)));
 
 
             final List<Price> prices = updatedProduct.getMasterData().getStaged().getMasterVariant().getPrices();
@@ -109,13 +109,13 @@ public class ProductUpdateCommandTest extends IntegrationTest {
 
             final String orderHint = "0.123";
             final Product productWithCategory = client()
-                    .execute(ProductUpdateCommand.of(product, AddToCategory.of(category, orderHint)));
+                    .executeBlocking(ProductUpdateCommand.of(product, AddToCategory.of(category, orderHint)));
 
             ReferenceAssert.assertThat(productWithCategory.getMasterData().getStaged().getCategories().stream().findAny().get()).references(category);
             assertThat(productWithCategory.getMasterData().getStaged().getCategoryOrderHints().get(category.getId())).isEqualTo(orderHint);
 
             final Product productWithoutCategory = client()
-                    .execute(ProductUpdateCommand.of(productWithCategory, RemoveFromCategory.of(category)));
+                    .executeBlocking(ProductUpdateCommand.of(productWithCategory, RemoveFromCategory.of(category)));
 
             assertThat(productWithoutCategory.getMasterData().getStaged().getCategories()).isEmpty();
         });
@@ -152,7 +152,7 @@ public class ProductUpdateCommandTest extends IntegrationTest {
             assertThat(prices.stream().anyMatch(p -> p.equals(newPrice))).isFalse();
 
             final Product updatedProduct = client()
-                    .execute(ProductUpdateCommand.of(product, ChangePrice.of(prices.get(0), newPrice)));
+                    .executeBlocking(ProductUpdateCommand.of(product, ChangePrice.of(prices.get(0), newPrice)));
 
             final Price actualPrice = getFirstPrice(updatedProduct);
             assertThat(PriceDraft.of(actualPrice)).isEqualTo(newPrice);
@@ -190,7 +190,7 @@ public class ProductUpdateCommandTest extends IntegrationTest {
     public void removeImage() throws Exception {
         final Image image = Image.ofWidthAndHeight("http://www.commercetools.com/assets/img/ct_logo_farbe.gif", 460, 102, "commercetools logo");
         withUpdateableProduct(client(), product -> {
-            final Product productWithImage = client().execute(ProductUpdateCommand.of(product, AddExternalImage.of(image, MASTER_VARIANT_ID)));
+            final Product productWithImage = client().executeBlocking(ProductUpdateCommand.of(product, AddExternalImage.of(image, MASTER_VARIANT_ID)));
             assertThat(productWithImage.getMasterData().getStaged().getMasterVariant().getImages()).isEqualTo(asList(image));
 
             final Product updatedProduct = execute(ProductUpdateCommand.of(productWithImage, RemoveImage.of(image, MASTER_VARIANT_ID)));
@@ -205,7 +205,7 @@ public class ProductUpdateCommandTest extends IntegrationTest {
             final Price oldPrice = getFirstPrice(product);
 
             final Product updatedProduct = client()
-                    .execute(ProductUpdateCommand.of(product, RemovePrice.of(oldPrice)));
+                    .executeBlocking(ProductUpdateCommand.of(product, RemovePrice.of(oldPrice)));
 
             assertThat(updatedProduct.getMasterData().getStaged().getMasterVariant()
                     .getPrices().stream().anyMatch(p -> p.equals(oldPrice))).isFalse();
@@ -233,7 +233,7 @@ public class ProductUpdateCommandTest extends IntegrationTest {
                     .of(ENGLISH, "Platform-as-a-Service, e-commerce, http, api, tool");
             final SetMetaKeywords action = SetMetaKeywords.of(metaKeywords);
 
-            final Product updatedProduct = client().execute(ProductUpdateCommand.of(product, action));
+            final Product updatedProduct = client().executeBlocking(ProductUpdateCommand.of(product, action));
 
             assertThat(updatedProduct.getMasterData().getStaged().getMetaKeywords()).isEqualTo(metaKeywords);
 
@@ -248,7 +248,7 @@ public class ProductUpdateCommandTest extends IntegrationTest {
                     .of(ENGLISH, "SPHERE.IO&#8482; is the first Platform-as-a-Service solution for eCommerce.");
             final SetMetaDescription action = SetMetaDescription.of(metaDescription);
 
-            final Product updatedProduct = client().execute(ProductUpdateCommand.of(product, action));
+            final Product updatedProduct = client().executeBlocking(ProductUpdateCommand.of(product, action));
 
             assertThat(updatedProduct.getMasterData().getStaged().getMetaDescription()).isEqualTo(metaDescription);
 
@@ -263,7 +263,7 @@ public class ProductUpdateCommandTest extends IntegrationTest {
                     .of(ENGLISH, "commercetools SPHERE.IO&#8482; - Next generation eCommerce");
             final SetMetaTitle action = SetMetaTitle.of(metaTitle);
 
-            final Product updatedProduct = client().execute(ProductUpdateCommand.of(product, action));
+            final Product updatedProduct = client().executeBlocking(ProductUpdateCommand.of(product, action));
 
             assertThat(updatedProduct.getMasterData().getStaged().getMetaTitle()).isEqualTo(metaTitle);
 
@@ -280,7 +280,7 @@ public class ProductUpdateCommandTest extends IntegrationTest {
                     "Platform-as-a-Service, e-commerce, http, api, tool");
             final List<UpdateAction<Product>> updateActions =
                     MetaAttributesUpdateActions.of(metaAttributes);
-            final Product updatedProduct = client().execute(ProductUpdateCommand.of(product, updateActions));
+            final Product updatedProduct = client().executeBlocking(ProductUpdateCommand.of(product, updateActions));
 
             final ProductData productData = updatedProduct.getMasterData().getStaged();
             assertThat(productData.getMetaTitle()).isEqualTo(metaAttributes.getMetaTitle());
@@ -302,7 +302,7 @@ public class ProductUpdateCommandTest extends IntegrationTest {
 
             final ProductProjection productProjection = execute(ProductProjectionByIdGet.of(product, ProductProjectionType.STAGED));
 
-            final Product updatedProduct = client().execute(ProductUpdateCommand.of(productProjection, updateActions));
+            final Product updatedProduct = client().executeBlocking(ProductUpdateCommand.of(productProjection, updateActions));
 
             final ProductData productData = updatedProduct.getMasterData().getStaged();
             assertThat(productData.getMetaTitle()).isEqualTo(metaAttributes.getMetaTitle());
@@ -333,12 +333,12 @@ public class ProductUpdateCommandTest extends IntegrationTest {
             final SetAttribute moneyUpdate = SetAttribute.of(MASTER_VARIANT_ID, moneyAttribute, newValueForMoney);
             final SetAttribute localizedEnumUpdate = SetAttribute.of(MASTER_VARIANT_ID, colorAttribute, newValueForColor);
 
-            final Product updatedProduct = client().execute(ProductUpdateCommand.of(product, asList(moneyUpdate, localizedEnumUpdate)));
+            final Product updatedProduct = client().executeBlocking(ProductUpdateCommand.of(product, asList(moneyUpdate, localizedEnumUpdate)));
             assertThat(updatedProduct.getMasterData().getStaged().getMasterVariant().findAttribute(moneyAttribute)).contains(newValueForMoney);
             assertThat(updatedProduct.getMasterData().getStaged().getMasterVariant().findAttribute(colorAttribute)).contains(newValueForColor);
 
             final SetAttribute unsetAction = SetAttribute.ofUnsetAttribute(MASTER_VARIANT_ID, moneyAttribute);
-            final Product productWithoutMoney = client().execute(ProductUpdateCommand.of(updatedProduct, unsetAction));
+            final Product productWithoutMoney = client().executeBlocking(ProductUpdateCommand.of(updatedProduct, unsetAction));
 
             assertThat(productWithoutMoney.getMasterData().getStaged().getMasterVariant().findAttribute(moneyAttribute)).isEmpty();
 
@@ -367,12 +367,12 @@ public class ProductUpdateCommandTest extends IntegrationTest {
             final SetAttributeInAllVariants moneyUpdate = SetAttributeInAllVariants.of(moneyAttribute, newValueForMoney);
             final SetAttributeInAllVariants localizedEnumUpdate = SetAttributeInAllVariants.of(colorAttribute, newValueForColor);
 
-            final Product updatedProduct = client().execute(ProductUpdateCommand.of(product, asList(moneyUpdate, localizedEnumUpdate)));
+            final Product updatedProduct = client().executeBlocking(ProductUpdateCommand.of(product, asList(moneyUpdate, localizedEnumUpdate)));
             assertThat(updatedProduct.getMasterData().getStaged().getMasterVariant().findAttribute(moneyAttribute)).contains(newValueForMoney);
             assertThat(updatedProduct.getMasterData().getStaged().getMasterVariant().findAttribute(colorAttribute)).contains(newValueForColor);
 
             final SetAttributeInAllVariants unsetAction = SetAttributeInAllVariants.ofUnsetAttribute(moneyAttribute);
-            final Product productWithoutMoney = client().execute(ProductUpdateCommand.of(updatedProduct, unsetAction));
+            final Product productWithoutMoney = client().executeBlocking(ProductUpdateCommand.of(updatedProduct, unsetAction));
 
             assertThat(productWithoutMoney.getMasterData().getStaged().getMasterVariant().findAttribute(moneyAttribute)).isEmpty();
 
@@ -449,14 +449,14 @@ public class ProductUpdateCommandTest extends IntegrationTest {
             final ProductUpdateCommand addVariantCommand =
                     ProductUpdateCommand.of(product, AddVariant.of(attributeValues, prices, randomKey()));
 
-            final Product productWithVariant = client().execute(addVariantCommand);
+            final Product productWithVariant = client().executeBlocking(addVariantCommand);
             final ProductVariant variant = productWithVariant.getMasterData().getStaged().getVariants().get(0);
             assertThat(variant.getId()).isEqualTo(2);
             assertThat(variant.findAttribute(moneyAttribute).get()).isEqualTo(EURO_10);
             assertThat(variant.findAttribute(colorAttribute).get()).isEqualTo(color);
             assertThat(variant.findAttribute(sizeAttribute).get()).isEqualTo(Sizes.M);
 
-            final Product productWithoutVariant = client().execute(ProductUpdateCommand.of(productWithVariant, RemoveVariant.of(variant)));
+            final Product productWithoutVariant = client().executeBlocking(ProductUpdateCommand.of(productWithVariant, RemoveVariant.of(variant)));
             assertThat(productWithoutVariant.getMasterData().getStaged().getVariants()).isEmpty();
 
             return productWithoutVariant;

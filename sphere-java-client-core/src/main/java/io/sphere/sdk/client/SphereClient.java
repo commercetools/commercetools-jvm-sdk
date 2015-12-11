@@ -19,8 +19,17 @@ import java.util.concurrent.CompletionStage;
  *
  */
 public interface SphereClient extends AutoCloseable {
+    /**
+     * Executes asynchronously a request to commercetools. By default it does not have a timeout.
+     * @param sphereRequest request to commercetools to perfom
+     * @param <T> type of the result for the request
+     * @return future monad which can contain the result or an exception
+     */
     <T> CompletionStage<T> execute(final SphereRequest<T> sphereRequest);
 
+    /**
+     * Shuts down the client to save resources like connections and threads.
+     */
     @Override
     void close();
 

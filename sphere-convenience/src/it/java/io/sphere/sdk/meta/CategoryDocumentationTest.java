@@ -9,7 +9,7 @@ import io.sphere.sdk.categories.commands.CategoryDeleteCommand;
 import io.sphere.sdk.categories.commands.CategoryUpdateCommand;
 import io.sphere.sdk.categories.commands.updateactions.ChangeParent;
 import io.sphere.sdk.categories.queries.CategoryQuery;
-import io.sphere.sdk.client.TestClient;
+import io.sphere.sdk.client.BlockingSphereClient;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Referenceable;
@@ -284,13 +284,13 @@ public class CategoryDocumentationTest extends IntegrationTest {
     }
 
 
-    private static void withProductInCategory(final TestClient client, final Referenceable<Category> category, final Consumer<Product> user) {
-        final ProductType productType = client.execute(ProductTypeCreateCommand.of(ProductTypeDraft.of(randomKey(), CategoryDocumentationTest.class.getSimpleName(), "", asList())));
+    private static void withProductInCategory(final BlockingSphereClient client, final Referenceable<Category> category, final Consumer<Product> user) {
+        final ProductType productType = client.executeBlocking(ProductTypeCreateCommand.of(ProductTypeDraft.of(randomKey(), CategoryDocumentationTest.class.getSimpleName(), "", asList())));
         final LocalizedString name = LocalizedString.of(ENGLISH, "foo");
-        final Product product = client.execute(ProductCreateCommand.of(ProductDraftBuilder.of(productType, name, name.slugifiedUnique(), ProductVariantDraftBuilder.of().build()).categories(SetUtils.asSet(category.toReference())).build()));
+        final Product product = client.executeBlocking(ProductCreateCommand.of(ProductDraftBuilder.of(productType, name, name.slugifiedUnique(), ProductVariantDraftBuilder.of().build()).categories(SetUtils.asSet(category.toReference())).build()));
         user.accept(product);
-        client.execute(ProductDeleteCommand.of(product));
-        client.execute(ProductTypeDeleteCommand.of(productType));
+        client.executeBlocking(ProductDeleteCommand.of(product));
+        client.executeBlocking(ProductTypeDeleteCommand.of(productType));
     }
 
     private static CategoryTree fetchCurrentTree() {
@@ -346,7 +346,7 @@ public class CategoryDocumentationTest extends IntegrationTest {
                                 final CategoryDraft draft = categoryDraftBuilder.build();
 
                                 //here is the call to SPHERE.IO
-                                final Category category = client().execute(CategoryCreateCommand.of(draft));
+                                final Category category = client().executeBlocking(CategoryCreateCommand.of(draft));
 
                                 externalIdToCategoryMap.put(externalId, category);
                                 return category;
@@ -374,7 +374,7 @@ public class CategoryDocumentationTest extends IntegrationTest {
 
         @Override
         public void onNext(final Category category) {
-            client().getUnderlying().execute(CategoryDeleteCommand.of(category)).whenComplete((c, t) -> {
+            client().execute(CategoryDeleteCommand.of(category)).whenComplete((c, t) -> {
                 requestElements();
             });
         }

@@ -5,7 +5,7 @@ import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.categories.CategoryFixtures;
 import io.sphere.sdk.categories.commands.CategoryUpdateCommand;
 import io.sphere.sdk.categories.commands.updateactions.SetCustomType;
-import io.sphere.sdk.client.TestClient;
+import io.sphere.sdk.client.BlockingSphereClient;
 import io.sphere.sdk.models.Reference;
 
 import java.util.HashMap;
@@ -17,7 +17,7 @@ import static io.sphere.sdk.test.SphereTestUtils.asList;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class TypeAssigningInUpdateActionDemo {
-    public static Category updateCategoryWithType(final TestClient client, final Category category1,
+    public static Category updateCategoryWithType(final BlockingSphereClient client, final Category category1,
                                                   final Category category2) {
         final Category category =
                 CategoryFixtures.createCategory(client);
@@ -33,7 +33,7 @@ public class TypeAssigningInUpdateActionDemo {
 
         final SetCustomType action = SetCustomType
                 .ofTypeKeyAndObjects("category-customtype-key", fieldValues);
-        final Category updatedCategory = client.execute(CategoryUpdateCommand.of(category, action));
+        final Category updatedCategory = client.executeBlocking(CategoryUpdateCommand.of(category, action));
 
         final CustomFields custom = updatedCategory.getCustom();
         assertThat(custom.getFieldAsEnumKey("state")).isEqualTo("published");

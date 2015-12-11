@@ -293,7 +293,7 @@ public class PaymentUpdateCommandTest extends IntegrationTest {
         withPaymentTransaction(client(), (Payment payment, Transaction transaction) -> {
             final ZonedDateTime now = ZonedDateTime.now();
 
-            final Payment updatedPayment = client().execute(PaymentUpdateCommand.of(payment, ChangeTransactionTimestamp.of(now, transaction.getId())));
+            final Payment updatedPayment = client().executeBlocking(PaymentUpdateCommand.of(payment, ChangeTransactionTimestamp.of(now, transaction.getId())));
 
             final Transaction updatedTransaction = updatedPayment.getTransactions().get(0);
             assertThat(updatedTransaction.getTimestamp()).isEqualTo(now);
@@ -307,7 +307,7 @@ public class PaymentUpdateCommandTest extends IntegrationTest {
         withPaymentTransaction(client(), (Payment payment, Transaction transaction) -> {
             final String newInteractionId = RandomStringUtils.randomAlphanumeric(32);
 
-            final Payment updatedPayment = client().execute(PaymentUpdateCommand.of(payment, ChangeTransactionInteractionId.of(newInteractionId, transaction.getId())));
+            final Payment updatedPayment = client().executeBlocking(PaymentUpdateCommand.of(payment, ChangeTransactionInteractionId.of(newInteractionId, transaction.getId())));
 
             final Transaction updatedTransaction = updatedPayment.getTransactions().get(0);
             assertThat(updatedTransaction.getInteractionId()).isEqualTo(newInteractionId);
@@ -322,7 +322,7 @@ public class PaymentUpdateCommandTest extends IntegrationTest {
             assertThat(transaction.getState()).isEqualTo(TransactionState.PENDING);
             final TransactionState transactionState = TransactionState.SUCCESS;
 
-            final Payment updatedPayment = client().execute(PaymentUpdateCommand.of(payment, ChangeTransactionState.of(transactionState, transaction.getId())));
+            final Payment updatedPayment = client().executeBlocking(PaymentUpdateCommand.of(payment, ChangeTransactionState.of(transactionState, transaction.getId())));
 
             final Transaction updatedTransaction = updatedPayment.getTransactions().get(0);
             assertThat(updatedTransaction.getState()).isEqualTo(transactionState);

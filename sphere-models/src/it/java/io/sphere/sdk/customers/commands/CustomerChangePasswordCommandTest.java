@@ -41,7 +41,7 @@ public class CustomerChangePasswordCommandTest extends CustomerIntegrationTest {
     @Test
     public void executionDemo() throws Exception {
         withCustomer(client(), customer -> {
-            final SphereClient client = client().getUnderlying();
+            final SphereClient client = client();
             demo(client, customer.getEmail());
 
             final String oldPassword = PASSWORD;

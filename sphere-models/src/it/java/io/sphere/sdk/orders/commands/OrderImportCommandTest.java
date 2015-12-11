@@ -395,7 +395,7 @@ public class OrderImportCommandTest extends IntegrationTest {
 
             final Order order = execute(cmd);
             orderConsumer.accept(order);
-            client().execute(OrderDeleteCommand.of(order));
+            client().executeBlocking(OrderDeleteCommand.of(order));
         });
     }
 }

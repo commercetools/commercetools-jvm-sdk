@@ -75,7 +75,7 @@ public class OrderQueryTest extends IntegrationTest {
     @Test
     public void orderNumber() throws Exception {
         assertOrderIsFoundWithPredicate(
-                order -> client().execute(OrderUpdateCommand.of(order, SetOrderNumber.of(randomKey()))),
+                order -> client().executeBlocking(OrderUpdateCommand.of(order, SetOrderNumber.of(randomKey()))),
                 order -> MODEL.orderNumber().is(order.getOrderNumber()));
     }
 
@@ -142,7 +142,7 @@ public class OrderQueryTest extends IntegrationTest {
             assertEventually(() -> {
 
                 final OrderQuery query = p.apply(updatedOrder).withSort(QuerySort.of("createdAt desc"));
-                final List<Order> results = client().execute(query).getResults();
+                final List<Order> results = client().executeBlocking(query).getResults();
 
                 if (shouldFind) {
                     assertThat(results).extracting("id").contains(order.getId());

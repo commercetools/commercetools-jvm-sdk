@@ -20,11 +20,12 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.UncheckedIOException;
 import java.util.Properties;
+import java.util.concurrent.TimeUnit;
 import java.util.function.Consumer;
 
 public abstract class IntegrationTest {
 
-    private static TestClient client;
+    private static BlockingSphereClient client;
 
     @BeforeClass
     public static void warmUpJavaMoney() throws Exception {
@@ -37,17 +38,18 @@ public abstract class IntegrationTest {
             final HttpClient httpClient = newHttpClient();
             final SphereAccessTokenSupplier tokenSupplier = SphereAccessTokenSupplier.ofAutoRefresh(config, httpClient, false);
             final SphereClient underlying = SphereClient.of(config, httpClient, tokenSupplier);
-            client = new TestClient(withMaybeDeprecationWarnTool(underlying));
+            final SphereClient underlying1 = withMaybeDeprecationWarnTool(underlying);
+            client = BlockingSphereClient.of(underlying1, 20, TimeUnit.SECONDS);
         }
     }
 
-    protected synchronized static TestClient client() {
+    protected synchronized static BlockingSphereClient client() {
         setupClient();
         return client;
     }
 
     protected static SphereClient sphereClient() {
-        return client().getUnderlying();
+        return client();
     }
 
     private static SphereClient withMaybeDeprecationWarnTool(final SphereClient underlying) {
@@ -85,7 +87,7 @@ public abstract class IntegrationTest {
 
     protected static <T> T execute(final SphereRequest<T> sphereRequest) {
         try {
-            return client().execute(sphereRequest);
+            return client().executeBlocking(sphereRequest);
         } catch (final TestClientException e) {
             if (e.getCause() != null && e.getCause() instanceof RuntimeException) {
                 throw (RuntimeException) e.getCause();

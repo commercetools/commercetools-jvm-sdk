@@ -189,7 +189,7 @@ public class CategoryQueryTest extends IntegrationTest {
     }
 
     private static Optional<Category> query(final QueryPredicate<Category> predicate) {
-        return client().execute(CategoryQuery.of().withPredicates(predicate)).head();
+        return client().executeBlocking(CategoryQuery.of().withPredicates(predicate)).head();
     }
 
     private static void checkTotalInQueryResultOf(final Query<Category> query, final Consumer<AbstractLongAssert<?>> check) {

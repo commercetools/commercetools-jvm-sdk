@@ -13,7 +13,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class CustomerDeleteCommandTest extends CustomerIntegrationTest {
     @Test
     public void execution() throws Exception {
-        final CustomerSignInResult result = client().execute(CustomerCreateCommand.of(newCustomerDraft()));
+        final CustomerSignInResult result = client().executeBlocking(CustomerCreateCommand.of(newCustomerDraft()));
         final Customer customer = result.getCustomer();
         execute(CustomerDeleteCommand.of(customer));
         final Cart cart = execute(CartByCustomerIdGet.of(customer));

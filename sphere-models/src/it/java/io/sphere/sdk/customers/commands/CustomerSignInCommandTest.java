@@ -9,8 +9,8 @@ import io.sphere.sdk.carts.commands.CartUpdateCommand;
 import io.sphere.sdk.carts.commands.updateactions.AddLineItem;
 import io.sphere.sdk.carts.commands.updateactions.SetCountry;
 import io.sphere.sdk.carts.queries.CartByIdGet;
+import io.sphere.sdk.client.BlockingSphereClient;
 import io.sphere.sdk.client.ErrorResponseException;
-import io.sphere.sdk.client.TestClient;
 import io.sphere.sdk.customers.Customer;
 import io.sphere.sdk.customers.CustomerFixtures;
 import io.sphere.sdk.customers.CustomerIntegrationTest;
@@ -73,12 +73,12 @@ public class CustomerSignInCommandTest extends CustomerIntegrationTest {
         });
     }
 
-    private void withCustomerCustomerCartAndAnonymousCart(final TestClient client, final Function<Customer, Function<Cart, Consumer<Cart>>> curriedFunctions) {
+    private void withCustomerCustomerCartAndAnonymousCart(final BlockingSphereClient client, final Function<Customer, Function<Cart, Consumer<Cart>>> curriedFunctions) {
         CustomerFixtures.withCustomerAndCart(client(), ((customer, cart) -> {
             ProductFixtures.withTaxedProduct(client(), product -> {
-                final Cart customerCartWithProduct = client.execute(CartUpdateCommand.of(cart, asList(SetCountry.of(CountryCode.DE), AddLineItem.of(product, 1, 3L))));
+                final Cart customerCartWithProduct = client.executeBlocking(CartUpdateCommand.of(cart, asList(SetCountry.of(CountryCode.DE), AddLineItem.of(product, 1, 3L))));
                 final Cart anonymousCart = CartFixtures.createCartWithCountry(client());
-                final Cart anonymousCartWithProduct = client.execute(CartUpdateCommand.of(anonymousCart, asList(SetCountry.of(CountryCode.DE), AddLineItem.of(product, 1, 7L))));
+                final Cart anonymousCartWithProduct = client.executeBlocking(CartUpdateCommand.of(anonymousCart, asList(SetCountry.of(CountryCode.DE), AddLineItem.of(product, 1, 7L))));
                 curriedFunctions.apply(customer).apply(customerCartWithProduct).accept(anonymousCartWithProduct);
             });
         }));

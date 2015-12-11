@@ -11,7 +11,7 @@ import io.sphere.sdk.carts.commands.CartCreateCommand;
 import io.sphere.sdk.carts.commands.CartDeleteCommand;
 import io.sphere.sdk.carts.commands.CartUpdateCommand;
 import io.sphere.sdk.carts.commands.updateactions.*;
-import io.sphere.sdk.client.TestClient;
+import io.sphere.sdk.client.BlockingSphereClient;
 import io.sphere.sdk.customers.Customer;
 import io.sphere.sdk.discountcodes.DiscountCode;
 import io.sphere.sdk.discountcodes.DiscountCodeDraft;
@@ -40,52 +40,52 @@ public class CartFixtures {
     public static final CountryCode DEFAULT_COUNTRY = DE;
     public static final Address GERMAN_ADDRESS = AddressBuilder.of(DEFAULT_COUNTRY).build();
 
-    public static Cart createCart(final TestClient client, final CartDraft cartDraft) {
-        return client.execute(CartCreateCommand.of(cartDraft));
+    public static Cart createCart(final BlockingSphereClient client, final CartDraft cartDraft) {
+        return client.executeBlocking(CartCreateCommand.of(cartDraft));
     }
 
-    public static Cart createCartWithCountry(final TestClient client) {
+    public static Cart createCartWithCountry(final BlockingSphereClient client) {
         return createCart(client, CartDraft.of(EUR).withCountry(DEFAULT_COUNTRY));
     }
 
-    public static Cart createCartWithoutCountry(final TestClient client) {
+    public static Cart createCartWithoutCountry(final BlockingSphereClient client) {
         return createCart(client, CartDraft.of(EUR));
     }
 
-    public static Cart createCartWithShippingAddress(final TestClient client) {
+    public static Cart createCartWithShippingAddress(final BlockingSphereClient client) {
         final Cart cart = createCartWithCountry(client);
-        return client.execute(CartUpdateCommand.of(cart, SetShippingAddress.of(GERMAN_ADDRESS)));
+        return client.executeBlocking(CartUpdateCommand.of(cart, SetShippingAddress.of(GERMAN_ADDRESS)));
     }
 
-    public static void withEmptyCartAndProduct(final TestClient client, final BiConsumer<Cart, Product> f) {
+    public static void withEmptyCartAndProduct(final BlockingSphereClient client, final BiConsumer<Cart, Product> f) {
         withTaxedProduct(client, product -> {
             final Cart cart = createCartWithCountry(client);
             f.accept(cart, product);
         });
     }
 
-    public static void withCart(final TestClient client, final UnaryOperator<Cart> operator) {
+    public static void withCart(final BlockingSphereClient client, final UnaryOperator<Cart> operator) {
         final Cart cart = createCartWithCountry(client);
         final Cart cartToDelete = operator.apply(cart);
-        client.execute(CartDeleteCommand.of(cartToDelete));
+        client.executeBlocking(CartDeleteCommand.of(cartToDelete));
     }
 
-    public static void withCart(final TestClient client, final Cart cart, final Function<Cart, CartLike<?>> operator) {
+    public static void withCart(final BlockingSphereClient client, final Cart cart, final Function<Cart, CartLike<?>> operator) {
         final CartLike<?> cartLike = operator.apply(cart);
         delete(client, cartLike);
     }
 
-    private static void delete(final TestClient client, final CartLike<?> cartLike) {
+    private static void delete(final BlockingSphereClient client, final CartLike<?> cartLike) {
         if (cartLike instanceof Cart) {
             final Cart cart = (Cart) cartLike;
-            client.execute(CartDeleteCommand.of(cart));
+            client.executeBlocking(CartDeleteCommand.of(cart));
         } else {
             final Order order = (Order) cartLike;
-            client.execute(OrderDeleteCommand.of(order));
+            client.executeBlocking(OrderDeleteCommand.of(order));
         }
     }
 
-    public static void withFilledCart(final TestClient client, final Consumer<Cart> f) {
+    public static void withFilledCart(final BlockingSphereClient client, final Consumer<Cart> f) {
         withTaxedProduct(client,  product -> {
             final Cart cart = createCartWithShippingAddress(client);
             assertThat(cart.getLineItems()).hasSize(0);
@@ -93,7 +93,7 @@ public class CartFixtures {
             final String productId = product.getId();
             final AddLineItem action = AddLineItem.of(productId, 1, quantity);
 
-            final Cart updatedCart = client.execute(CartUpdateCommand.of(cart, action));
+            final Cart updatedCart = client.executeBlocking(CartUpdateCommand.of(cart, action));
             assertThat(updatedCart.getLineItems()).hasSize(1);
             final LineItem lineItem = updatedCart.getLineItems().get(0);
             assertThat(lineItem.getName()).isEqualTo(product.getMasterData().getStaged().getName());
@@ -103,27 +103,27 @@ public class CartFixtures {
     }
 
 
-    public static void withCustomerAndFilledCart(final TestClient client, final BiConsumer<Customer, Cart> consumer) {
+    public static void withCustomerAndFilledCart(final BlockingSphereClient client, final BiConsumer<Customer, Cart> consumer) {
         withCustomer(client, customer -> {
             withFilledCart(client, cart -> {
-                final Cart cartForCustomer = client.execute(CartUpdateCommand.of(cart, SetCustomerId.of(customer.getId())));
+                final Cart cartForCustomer = client.executeBlocking(CartUpdateCommand.of(cart, SetCustomerId.of(customer.getId())));
                 consumer.accept(customer, cartForCustomer);
             });
         });
     }
 
 
-    public static void withCartAndTaxedProduct(final TestClient client, final BiFunction<Cart, Product, Cart> f) {
+    public static void withCartAndTaxedProduct(final BlockingSphereClient client, final BiFunction<Cart, Product, Cart> f) {
         withTaxedProduct(client, product -> {
             final Cart cart = createCartWithShippingAddress(client);
 
             final Cart cartToDelete = f.apply(cart, product);
 
-            client.execute(CartDeleteCommand.of(cartToDelete));
+            client.executeBlocking(CartDeleteCommand.of(cartToDelete));
         });
     }
 
-    public static void withLineItemAndCustomLineItemFilledCart(final TestClient client, final UnaryOperator<Cart> op) {
+    public static void withLineItemAndCustomLineItemFilledCart(final BlockingSphereClient client, final UnaryOperator<Cart> op) {
         withTaxedProduct(client, product -> {
             final Cart cart = createCartWithShippingAddress(client);
             assertThat(cart.getLineItems()).hasSize(0);
@@ -139,17 +139,17 @@ public class CartFixtures {
             final CustomLineItemDraft item = CustomLineItemDraft.of(name, slug, money, product.getTaxCategory(), 5L);
             final AddCustomLineItem addCustomLineItemAction = AddCustomLineItem.of(item);
 
-            final Cart updatedCart = client.execute(CartUpdateCommand.of(cart, asList(addLineItemAction, addCustomLineItemAction)));
+            final Cart updatedCart = client.executeBlocking(CartUpdateCommand.of(cart, asList(addLineItemAction, addCustomLineItemAction)));
             assertThat(updatedCart.getLineItems()).hasSize(1);
             final LineItem lineItem = updatedCart.getLineItems().get(0);
             assertThat(lineItem.getName()).isEqualTo(product.getMasterData().getStaged().getName());
             assertThat(lineItem.getQuantity()).isEqualTo(quantity);
             final Cart cartToDelete = op.apply(updatedCart);
-            client.execute(CartDeleteCommand.of(cartToDelete));
+            client.executeBlocking(CartDeleteCommand.of(cartToDelete));
         });
     }
 
-    public static void withCartAndDiscountCode(final TestClient client, final BiFunction<Cart, DiscountCode, Cart> user) {
+    public static void withCartAndDiscountCode(final BlockingSphereClient client, final BiFunction<Cart, DiscountCode, Cart> user) {
         withCustomerAndCart(client, (customer, cart) -> {
             final CartDiscountDraft draft = CartDiscountFixtures.newCartDiscountDraftBuilder()
                     .cartPredicate(CartDiscountPredicate.of(format("customer.id = \"%s\"", customer.getId())))
@@ -157,12 +157,12 @@ public class CartFixtures {
                     .validFrom(null)
                     .validUntil(null)
                     .build();
-            final CartDiscount cartDiscount = client.execute(CartDiscountCreateCommand.of(draft));
-            final DiscountCode discountCode = client.execute(DiscountCodeCreateCommand.of(DiscountCodeDraft.of(randomKey(), cartDiscount)));
+            final CartDiscount cartDiscount = client.executeBlocking(CartDiscountCreateCommand.of(draft));
+            final DiscountCode discountCode = client.executeBlocking(DiscountCodeCreateCommand.of(DiscountCodeDraft.of(randomKey(), cartDiscount)));
             final Cart updatedCart = user.apply(cart, discountCode);
-            client.execute(CartDeleteCommand.of(updatedCart));
-            client.execute(DiscountCodeDeleteCommand.of(discountCode));
-            client.execute(CartDiscountDeleteCommand.of(cartDiscount));
+            client.executeBlocking(CartDeleteCommand.of(updatedCart));
+            client.executeBlocking(DiscountCodeDeleteCommand.of(discountCode));
+            client.executeBlocking(CartDiscountDeleteCommand.of(cartDiscount));
         });
     }
 }

@@ -1,7 +1,7 @@
 package io.sphere.sdk.products;
 
 import io.sphere.sdk.categories.Category;
-import io.sphere.sdk.client.TestClient;
+import io.sphere.sdk.client.BlockingSphereClient;
 import io.sphere.sdk.productdiscounts.commands.ProductDiscountDeleteCommand;
 import io.sphere.sdk.productdiscounts.queries.ProductDiscountQuery;
 import io.sphere.sdk.products.attributes.AttributeDraft;
@@ -45,118 +45,118 @@ public class ProductFixtures {
     public static final PriceDraft PRICE = PriceDraft.of(MoneyImpl.of(new BigDecimal("12.34"), EUR)).withCountry(DE);
     private static final int MASTER_VARIANT_ID = 1;
 
-    public static void withUpdateableProduct(final TestClient client, final Function<Product, Product> f) {
+    public static void withUpdateableProduct(final BlockingSphereClient client, final Function<Product, Product> f) {
         withUpdateableProduct(client, randomString(), f);
     }
 
-    public static void withProduct(final TestClient client, final Consumer<Product> user) {
+    public static void withProduct(final BlockingSphereClient client, final Consumer<Product> user) {
         withProduct(client, randomString(), user);
     }
 
-    public static void withTaxedProduct(final TestClient client, final Consumer<Product> user) {
+    public static void withTaxedProduct(final BlockingSphereClient client, final Consumer<Product> user) {
         TaxCategoryFixtures.withTransientTaxCategory(client, taxCategory ->
                         withProduct(client, randomString(), product -> {
-                            final Product productWithTaxes = client.execute(createSetTaxesCommand(taxCategory, product));
+                            final Product productWithTaxes = client.executeBlocking(createSetTaxesCommand(taxCategory, product));
                             user.accept(productWithTaxes);
                         })
         );
     }
 
-    public static Product referenceableProduct(final TestClient client) {
+    public static Product referenceableProduct(final BlockingSphereClient client) {
         final ProductType productType = ProductTypeFixtures.defaultProductType(client);
         final ProductVariantDraft variantDraft = ProductVariantDraftBuilder.of().price(PRICE).build();
         final String slugEn = "referenceable-product-2";
         final ProductDraft productDraft = ProductDraftBuilder.of(productType, en("referenceable product"), en(slugEn), variantDraft).build();
-        return client.execute(ProductQuery.of().bySlug(ProductProjectionType.STAGED, ENGLISH, slugEn)).head()
-                .orElseGet(() -> client.execute(ProductCreateCommand.of(productDraft)));
+        return client.executeBlocking(ProductQuery.of().bySlug(ProductProjectionType.STAGED, ENGLISH, slugEn)).head()
+                .orElseGet(() -> client.executeBlocking(ProductCreateCommand.of(productDraft)));
     }
 
     private static ProductUpdateCommand createSetTaxesCommand(final TaxCategory taxCategory, final Product product) {
         return ProductUpdateCommand.of(product, asList(AddPrice.of(MASTER_VARIANT_ID, PRICE), SetTaxCategory.of(taxCategory), Publish.of()));
     }
 
-    public static void withUpdateableProduct(final TestClient client, final String testName, final Function<Product, Product> f) {
+    public static void withUpdateableProduct(final BlockingSphereClient client, final String testName, final Function<Product, Product> f) {
         withProductType(client, randomString(), productType -> {
             withUpdateableProduct(client, new SimpleCottonTShirtProductDraftSupplier(productType, "foo" + testName + "-2"), f);
         });
     }
 
-    public static void withProduct(final TestClient client, final String testName, final Consumer<Product> consumer) {
+    public static void withProduct(final BlockingSphereClient client, final String testName, final Consumer<Product> consumer) {
         withUpdateableProduct(client, testName, consumerToFunction(consumer));
     }
 
-    public static void withUpdateableProduct(final TestClient client, final Supplier<ProductDraft> creator, final Function<Product, Product> user) {
+    public static void withUpdateableProduct(final BlockingSphereClient client, final Supplier<ProductDraft> creator, final Function<Product, Product> user) {
         final ProductDraft productDraft = creator.get();
         final String slug = englishSlugOf(productDraft);
-        final PagedQueryResult<Product> pagedQueryResult = client.execute(ProductQuery.of().bySlug(ProductProjectionType.CURRENT, Locale.ENGLISH, slug));
+        final PagedQueryResult<Product> pagedQueryResult = client.executeBlocking(ProductQuery.of().bySlug(ProductProjectionType.CURRENT, Locale.ENGLISH, slug));
         delete(client, pagedQueryResult.getResults());
-        final Product product = client.execute(ProductCreateCommand.of(productDraft));
+        final Product product = client.executeBlocking(ProductCreateCommand.of(productDraft));
         final Product possiblyUpdateProduct = user.apply(product);
         delete(client, possiblyUpdateProduct);
     }
 
-    public static void withProduct(final TestClient client, final Supplier<ProductDraft> creator, final Consumer<Product> user) {
+    public static void withProduct(final BlockingSphereClient client, final Supplier<ProductDraft> creator, final Consumer<Product> user) {
         withUpdateableProduct(client, creator, consumerToFunction(user));
     }
 
-    public static void withProductType(final TestClient client, final String productTypeName, final Consumer<ProductType> user) {
+    public static void withProductType(final BlockingSphereClient client, final String productTypeName, final Consumer<ProductType> user) {
         ProductTypeFixtures.withProductType(client, new TShirtProductTypeDraftSupplier(productTypeName), user);
     }
 
-    public static void delete(final TestClient client, final List<Product> products) {
+    public static void delete(final BlockingSphereClient client, final List<Product> products) {
         products.forEach(product -> delete(client, product));
     }
 
-    public static void delete(final TestClient client, final Product product) {
-        final Optional<Product> freshLoadedProduct = Optional.ofNullable(client.execute(ProductByIdGet.of(product.getId())));
+    public static void delete(final BlockingSphereClient client, final Product product) {
+        final Optional<Product> freshLoadedProduct = Optional.ofNullable(client.executeBlocking(ProductByIdGet.of(product.getId())));
         freshLoadedProduct.ifPresent(loadedProduct -> {
             final boolean isPublished = loadedProduct.getMasterData().isPublished();
             final Product unPublishedProduct;
             if (isPublished) {
-                unPublishedProduct = client.execute(ProductUpdateCommand.of(loadedProduct, asList(Unpublish.of())));
+                unPublishedProduct = client.executeBlocking(ProductUpdateCommand.of(loadedProduct, asList(Unpublish.of())));
             } else {
                 unPublishedProduct = loadedProduct;
             }
-            client.execute(ProductDeleteCommand.of(unPublishedProduct));
+            client.executeBlocking(ProductDeleteCommand.of(unPublishedProduct));
         });
     }
 
-    public static void withUpdateablePricedProduct(final TestClient client, final Function<Product, Product> f) {
+    public static void withUpdateablePricedProduct(final BlockingSphereClient client, final Function<Product, Product> f) {
         withUpdateablePricedProduct(client, PriceDraft.of(MoneyImpl.of(123, EUR)), f);
     }
 
-    public static void withUpdateablePricedProduct(final TestClient client, final PriceDraft expectedPrice, final Function<Product, Product> f) {
+    public static void withUpdateablePricedProduct(final BlockingSphereClient client, final PriceDraft expectedPrice, final Function<Product, Product> f) {
         withUpdateableProduct(client, product -> {
             final ProductUpdateCommand command = ProductUpdateCommand.of(product, AddPrice.of(1, expectedPrice));
-            return f.apply(client.execute(command));
+            return f.apply(client.executeBlocking(command));
         });
     }
 
-    public static void deleteProductsProductTypeAndProductDiscounts(final TestClient client, final ProductType productType) {
-        client.execute(ProductDiscountQuery.of().withLimit(500L)).getResults()
-                .forEach(discount -> client.execute(ProductDiscountDeleteCommand.of(discount)));
+    public static void deleteProductsProductTypeAndProductDiscounts(final BlockingSphereClient client, final ProductType productType) {
+        client.executeBlocking(ProductDiscountQuery.of().withLimit(500L)).getResults()
+                .forEach(discount -> client.executeBlocking(ProductDiscountDeleteCommand.of(discount)));
 
         if (productType != null) {
             QueryPredicate<Product> ofProductType = ProductQueryModel.of().productType().is(productType);
             ProductQuery productsOfProductTypeQuery = ProductQuery.of().withPredicates(ofProductType).withLimit(500L);
-            final List<Product> products = client.execute(productsOfProductTypeQuery).getResults();
+            final List<Product> products = client.executeBlocking(productsOfProductTypeQuery).getResults();
             final List<Product> unpublishedProducts = products.stream().map(
                     product -> {
                         if (product.getMasterData().isPublished()) {
-                            return client.execute(ProductUpdateCommand.of(product, Unpublish.of()));
+                            return client.executeBlocking(ProductUpdateCommand.of(product, Unpublish.of()));
                         } else {
                             return product;
                         }
                     }
             ).collect(toList());
             unpublishedProducts.forEach(
-                    product -> client.execute(ProductDeleteCommand.of(product))
+                    product -> client.executeBlocking(ProductDeleteCommand.of(product))
             );
             deleteProductType(client, productType);
         }
     }
 
-    public static void withProductAndUnconnectedCategory(final TestClient client, final BiConsumer<Product, Category> consumer) {
+    public static void withProductAndUnconnectedCategory(final BlockingSphereClient client, final BiConsumer<Product, Category> consumer) {
         final Consumer<Category> consumer1 = category -> {
             final Consumer<Product> user = product -> consumer.accept(product, category);
             withProduct(client, "withProductAndCategory", user);
@@ -164,29 +164,29 @@ public class ProductFixtures {
         withCategory(client, consumer1);
     }
 
-    public static void withProductInCategory(final TestClient client, final BiConsumer<Product, Category> consumer) {
+    public static void withProductInCategory(final BlockingSphereClient client, final BiConsumer<Product, Category> consumer) {
         withCategory(client, category -> {
             final Consumer<Product> user = product -> consumer.accept(product, category);
             withProduct(client, "withProductAndCategory", product -> {
-                final Product productWithCategory = client.execute(ProductUpdateCommand.of(product, AddToCategory.of(category)));
+                final Product productWithCategory = client.executeBlocking(ProductUpdateCommand.of(product, AddToCategory.of(category)));
                 consumer.accept(productWithCategory, category);
             });
         });
     }
 
-    public static void withProductWithProductReference(final TestClient client, final BiConsumer<Product, Product> consumer) {
+    public static void withProductWithProductReference(final BlockingSphereClient client, final BiConsumer<Product, Product> consumer) {
         withProduct(client, referencedProduct -> {
             final ProductType productType = productReferenceProductType(client);
             final ProductVariantDraft productVariantDraft =
                     ProductVariantDraftBuilder.of().attributes(AttributeDraft.of("productreference", referencedProduct.toReference())).build();
             final ProductDraft productDraft = ProductDraftBuilder.of(productType, en("product reference name 1"), randomSlug(), productVariantDraft).build();
-            final Product product = client.execute(ProductCreateCommand.of(productDraft));
+            final Product product = client.executeBlocking(ProductCreateCommand.of(productDraft));
             consumer.accept(product, referencedProduct);
-            client.execute(ProductDeleteCommand.of(product));
+            client.executeBlocking(ProductDeleteCommand.of(product));
         });
     }
 
-    public static void withSuggestProduct(final TestClient client, final Consumer<Product> consumer) {
+    public static void withSuggestProduct(final BlockingSphereClient client, final Consumer<Product> consumer) {
         withEmptyProductType(client, randomKey(), productType -> {
             final SearchKeywords searchKeywords = SearchKeywords.of(
                     Locale.ENGLISH, asList(SearchKeyword.of("Multi tool"), SearchKeyword.of("Swiss Army Knife", WhiteSpaceSuggestTokenizer.of())),
@@ -199,19 +199,19 @@ public class ProductFixtures {
         });
     }
 
-    public static void creatingProduct(final TestClient client, final UnaryOperator<ProductDraftBuilder> builderMapper, final UnaryOperator<Product> op) {
+    public static void creatingProduct(final BlockingSphereClient client, final UnaryOperator<ProductDraftBuilder> builderMapper, final UnaryOperator<Product> op) {
         withProductType(client, randomKey(), productType -> {
             final ProductVariantDraft masterVariant = ProductVariantDraftBuilder.of().build();
             final ProductDraftBuilder builder = ProductDraftBuilder.of(productType, randomSlug(), randomSlug(), masterVariant);
             final ProductDraft productDraft = builderMapper.apply(builder).build();
-            final Product product = client.execute(ProductCreateCommand.of(productDraft));
+            final Product product = client.executeBlocking(ProductCreateCommand.of(productDraft));
             final Product updatedProduct = op.apply(product);
-            client.execute(ProductDeleteCommand.of(updatedProduct));
+            client.executeBlocking(ProductDeleteCommand.of(updatedProduct));
         });
     }
 
-    public static void deleteProductsAndProductTypes(final TestClient client) {
-        final List<ProductType> productTypes = client.execute(ProductTypeQuery.of().withLimit(500L)).getResults();
+    public static void deleteProductsAndProductTypes(final BlockingSphereClient client) {
+        final List<ProductType> productTypes = client.executeBlocking(ProductTypeQuery.of().withLimit(500L)).getResults();
         productTypes.forEach(productType -> deleteProductsProductTypeAndProductDiscounts(client, productType));
     }
 }

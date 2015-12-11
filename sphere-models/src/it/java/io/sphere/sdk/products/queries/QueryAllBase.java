@@ -25,7 +25,7 @@ public abstract class QueryAllBase extends IntegrationTest {
     protected static ProductType productType;
 
     protected static SphereClient sphereClient() {
-        return client().getUnderlying();
+        return client();
     }
 
     @BeforeClass

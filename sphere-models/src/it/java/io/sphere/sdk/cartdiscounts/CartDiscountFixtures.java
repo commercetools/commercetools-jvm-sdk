@@ -3,7 +3,7 @@ package io.sphere.sdk.cartdiscounts;
 import io.sphere.sdk.cartdiscounts.commands.CartDiscountCreateCommand;
 import io.sphere.sdk.cartdiscounts.commands.CartDiscountDeleteCommand;
 import io.sphere.sdk.cartdiscounts.queries.CartDiscountQuery;
-import io.sphere.sdk.client.TestClient;
+import io.sphere.sdk.client.BlockingSphereClient;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.queries.Query;
 import io.sphere.sdk.utils.MoneyImpl;
@@ -35,37 +35,37 @@ public class CartDiscountFixtures {
                 .description(description);
     }
 
-    public static CartDiscount defaultCartDiscount(final TestClient client) {
+    public static CartDiscount defaultCartDiscount(final BlockingSphereClient client) {
         return getCartDiscount(client, CartDiscountFixtures.class.getSimpleName() + "default-4");
     }
 
-    private static CartDiscount getCartDiscount(final TestClient client, final String name) {
+    private static CartDiscount getCartDiscount(final BlockingSphereClient client, final String name) {
         final Query<CartDiscount> query = CartDiscountQuery.of().withPredicates(m -> m.name().lang(ENGLISH).is(name));
-        return client.execute(query).head().orElseGet(() -> {
+        return client.executeBlocking(query).head().orElseGet(() -> {
             final CartDiscountDraft draft = newCartDiscountDraftBuilder()
                     .name(LocalizedString.ofEnglishLocale(name))
                     .build();
-            return client.execute(CartDiscountCreateCommand.of(draft));
+            return client.executeBlocking(CartDiscountCreateCommand.of(draft));
         });
     }
 
-    public static void withCartDiscount(final TestClient client, final String name, final Consumer<CartDiscount> consumer) {
+    public static void withCartDiscount(final BlockingSphereClient client, final String name, final Consumer<CartDiscount> consumer) {
         final CartDiscount cartDiscount = getCartDiscount(client, name);
         consumer.accept(cartDiscount);
-        client.execute(CartDiscountDeleteCommand.of(cartDiscount));
+        client.executeBlocking(CartDiscountDeleteCommand.of(cartDiscount));
     }
 
-    public static void withPersistentCartDiscount(final TestClient client, final String name, final Consumer<CartDiscount> consumer) {
+    public static void withPersistentCartDiscount(final BlockingSphereClient client, final String name, final Consumer<CartDiscount> consumer) {
         consumer.accept(getCartDiscount(client, name));
     }
 
-    public static void withPersistentCartDiscount(final TestClient client, final Consumer<CartDiscount> consumer) {
+    public static void withPersistentCartDiscount(final BlockingSphereClient client, final Consumer<CartDiscount> consumer) {
         consumer.accept(defaultCartDiscount(client));
     }
 
-    public static void withCartDiscount(final TestClient client, final Function<CartDiscount, CartDiscount> consumer) {
+    public static void withCartDiscount(final BlockingSphereClient client, final Function<CartDiscount, CartDiscount> consumer) {
         final CartDiscountDraft draft = newCartDiscountDraftBuilder().build();
-        final CartDiscount cartDiscount = client.execute(CartDiscountCreateCommand.of(draft));
-        client.execute(CartDiscountDeleteCommand.of(consumer.apply(cartDiscount)));
+        final CartDiscount cartDiscount = client.executeBlocking(CartDiscountCreateCommand.of(draft));
+        client.executeBlocking(CartDiscountDeleteCommand.of(consumer.apply(cartDiscount)));
     }
 }
