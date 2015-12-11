@@ -135,7 +135,7 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html"
     assertThat(prices.stream().anyMatch(p -&gt; p.equals(newPrice))).isFalse();
 
     final Product updatedProduct = client()
-            .execute(ProductUpdateCommand.of(product, ChangePrice.of(prices.get(0), newPrice)));
+            .executeBlocking(ProductUpdateCommand.of(product, ChangePrice.of(prices.get(0), newPrice)));
 
     final Price actualPrice = getFirstPrice(updatedProduct);
     assertThat(PriceDraft.of(actualPrice)).isEqualTo(newPrice);

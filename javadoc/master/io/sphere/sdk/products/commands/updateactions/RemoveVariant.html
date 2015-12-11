@@ -149,14 +149,14 @@ withUpdateableProduct(client(), product -&gt; {
     final ProductUpdateCommand addVariantCommand =
             ProductUpdateCommand.of(product, AddVariant.of(attributeValues, prices, randomKey()));
 
-    final Product productWithVariant = client().execute(addVariantCommand);
+    final Product productWithVariant = client().executeBlocking(addVariantCommand);
     final ProductVariant variant = productWithVariant.getMasterData().getStaged().getVariants().get(0);
     assertThat(variant.getId()).isEqualTo(2);
     assertThat(variant.findAttribute(moneyAttribute).get()).isEqualTo(EURO_10);
     assertThat(variant.findAttribute(colorAttribute).get()).isEqualTo(color);
     assertThat(variant.findAttribute(sizeAttribute).get()).isEqualTo(Sizes.M);
 
-    final Product productWithoutVariant = client().execute(ProductUpdateCommand.of(productWithVariant, RemoveVariant.of(variant)));
+    final Product productWithoutVariant = client().executeBlocking(ProductUpdateCommand.of(productWithVariant, RemoveVariant.of(variant)));
     assertThat(productWithoutVariant.getMasterData().getStaged().getVariants()).isEmpty();
 
     return productWithoutVariant;

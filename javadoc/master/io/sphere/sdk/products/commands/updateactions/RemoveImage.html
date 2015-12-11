@@ -132,7 +132,7 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html"
 
  <div id="io-sphere-sdk-products-commands-ProductUpdateCommandTest-removeImage--%s" class=code-example><pre><code class='java'>final Image image = Image.ofWidthAndHeight("http://www.commercetools.com/assets/img/ct_logo_farbe.gif", 460, 102, "commercetools logo");
 withUpdateableProduct(client(), product -&gt; {
-    final Product productWithImage = client().execute(ProductUpdateCommand.of(product, AddExternalImage.of(image, MASTER_VARIANT_ID)));
+    final Product productWithImage = client().executeBlocking(ProductUpdateCommand.of(product, AddExternalImage.of(image, MASTER_VARIANT_ID)));
     assertThat(productWithImage.getMasterData().getStaged().getMasterVariant().getImages()).isEqualTo(asList(image));
 
     final Product updatedProduct = execute(ProductUpdateCommand.of(productWithImage, RemoveImage.of(image, MASTER_VARIANT_ID)));

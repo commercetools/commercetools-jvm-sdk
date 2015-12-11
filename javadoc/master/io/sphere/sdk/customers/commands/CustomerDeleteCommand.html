@@ -108,7 +108,7 @@ var activeTableTab = "activeTableTab";
 extends <a href="../../../../../io/sphere/sdk/expansion/MetaModelExpansionDsl.html" title="interface in io.sphere.sdk.expansion">MetaModelExpansionDsl</a>&lt;<a href="../../../../../io/sphere/sdk/customers/Customer.html" title="interface in io.sphere.sdk.customers">Customer</a>,<a href="../../../../../io/sphere/sdk/customers/commands/CustomerDeleteCommand.html" title="interface in io.sphere.sdk.customers.commands">CustomerDeleteCommand</a>,<a href="../../../../../io/sphere/sdk/customers/expansion/CustomerExpansionModel.html" title="class in io.sphere.sdk.customers.expansion">CustomerExpansionModel</a>&lt;<a href="../../../../../io/sphere/sdk/customers/Customer.html" title="interface in io.sphere.sdk.customers">Customer</a>&gt;&gt;, <a href="../../../../../io/sphere/sdk/commands/DeleteCommand.html" title="interface in io.sphere.sdk.commands">DeleteCommand</a>&lt;<a href="../../../../../io/sphere/sdk/customers/Customer.html" title="interface in io.sphere.sdk.customers">Customer</a>&gt;</pre>
 <div class="block">Deletes a customer.
 
- <div id="io-sphere-sdk-customers-commands-CustomerDeleteCommandTest-execution--%s" class=code-example><pre><code class='java'>final CustomerSignInResult result = client().execute(CustomerCreateCommand.of(newCustomerDraft()));
+ <div id="io-sphere-sdk-customers-commands-CustomerDeleteCommandTest-execution--%s" class=code-example><pre><code class='java'>final CustomerSignInResult result = client().executeBlocking(CustomerCreateCommand.of(newCustomerDraft()));
 final Customer customer = result.getCustomer();
 execute(CustomerDeleteCommand.of(customer));
 final Cart cart = execute(CartByCustomerIdGet.of(customer));

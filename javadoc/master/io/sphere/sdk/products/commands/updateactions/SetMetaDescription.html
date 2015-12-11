@@ -133,7 +133,7 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html"
             .of(ENGLISH, "SPHERE.IO&amp;#8482; is the first Platform-as-a-Service solution for eCommerce.");
     final SetMetaDescription action = SetMetaDescription.of(metaDescription);
 
-    final Product updatedProduct = client().execute(ProductUpdateCommand.of(product, action));
+    final Product updatedProduct = client().executeBlocking(ProductUpdateCommand.of(product, action));
 
     assertThat(updatedProduct.getMasterData().getStaged().getMetaDescription()).isEqualTo(metaDescription);
 
@@ -148,7 +148,7 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html"
             "Platform-as-a-Service, e-commerce, http, api, tool");
     final List&lt;UpdateAction&lt;Product&gt;&gt; updateActions =
             MetaAttributesUpdateActions.of(metaAttributes);
-    final Product updatedProduct = client().execute(ProductUpdateCommand.of(product, updateActions));
+    final Product updatedProduct = client().executeBlocking(ProductUpdateCommand.of(product, updateActions));
 
     final ProductData productData = updatedProduct.getMasterData().getStaged();
     assertThat(productData.getMetaTitle()).isEqualTo(metaAttributes.getMetaTitle());

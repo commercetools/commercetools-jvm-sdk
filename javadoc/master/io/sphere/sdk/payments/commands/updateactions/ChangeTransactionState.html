@@ -130,7 +130,7 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html"
     assertThat(transaction.getState()).isEqualTo(TransactionState.PENDING);
     final TransactionState transactionState = TransactionState.SUCCESS;
 
-    final Payment updatedPayment = client().execute(PaymentUpdateCommand.of(payment, ChangeTransactionState.of(transactionState, transaction.getId())));
+    final Payment updatedPayment = client().executeBlocking(PaymentUpdateCommand.of(payment, ChangeTransactionState.of(transactionState, transaction.getId())));
 
     final Transaction updatedTransaction = updatedPayment.getTransactions().get(0);
     assertThat(updatedTransaction.getState()).isEqualTo(transactionState);

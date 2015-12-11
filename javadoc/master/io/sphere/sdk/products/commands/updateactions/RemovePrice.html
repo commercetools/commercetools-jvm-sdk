@@ -132,7 +132,7 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html"
     final Price oldPrice = getFirstPrice(product);
 
     final Product updatedProduct = client()
-            .execute(ProductUpdateCommand.of(product, RemovePrice.of(oldPrice)));
+            .executeBlocking(ProductUpdateCommand.of(product, RemovePrice.of(oldPrice)));
 
     assertThat(updatedProduct.getMasterData().getStaged().getMasterVariant()
             .getPrices().stream().anyMatch(p -&gt; p.equals(oldPrice))).isFalse();

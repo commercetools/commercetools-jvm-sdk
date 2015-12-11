@@ -169,7 +169,7 @@ try (final InputStream resourceAsStream = Thread.currentThread().getContextClass
                         final CategoryDraft draft = categoryDraftBuilder.build();
 
                         //here is the call to SPHERE.IO
-                        final Category category = client().execute(CategoryCreateCommand.of(draft));
+                        final Category category = client().executeBlocking(CategoryCreateCommand.of(draft));
 
                         externalIdToCategoryMap.put(externalId, category);
                         return category;

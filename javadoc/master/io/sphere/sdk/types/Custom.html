@@ -135,7 +135,7 @@ var activeTableTab = "activeTableTab";
 
  <p>Execution example:</p>
  <div id="io-sphere-sdk-types-CreateTypeDemo%s" class=code-example><button type='button' style='display: none;' class='reveal-imports'>show/hide imports</button><pre class='hide code-example-imports'><code class='java'>import io.sphere.sdk.categories.Category;
-import io.sphere.sdk.client.TestClient;
+import io.sphere.sdk.client.BlockingSphereClient;
 import io.sphere.sdk.models.EnumValue;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.TextInputHint;
@@ -147,7 +147,7 @@ import static io.sphere.sdk.test.SphereTestUtils.asList;
 import static io.sphere.sdk.test.SphereTestUtils.en;
 </code></pre><pre><code class='java'>public final class CreateTypeDemo {
 
-    public static Type createType(final TestClient client) {
+    public static Type createType(final BlockingSphereClient client) {
         final LocalizedString name = en("type for standard categories");
         final String key = "category-customtype-key";
         final String categoryResourceTypeId = Category.resourceTypeId();
@@ -160,7 +160,7 @@ import static io.sphere.sdk.test.SphereTestUtils.en;
                 .fieldDefinitions(fieldDefinitions)
                 .build();
 
-        return client.execute(TypeCreateCommand.of(typeDraft));
+        return client.executeBlocking(TypeCreateCommand.of(typeDraft));
     }
 
     private static FieldDefinition stateFieldDefinition() {
@@ -202,7 +202,7 @@ import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.categories.CategoryDraft;
 import io.sphere.sdk.categories.CategoryDraftBuilder;
 import io.sphere.sdk.categories.commands.CategoryCreateCommand;
-import io.sphere.sdk.client.TestClient;
+import io.sphere.sdk.client.BlockingSphereClient;
 import io.sphere.sdk.json.JsonException;
 import io.sphere.sdk.models.Reference;
 import java.util.HashMap;
@@ -213,7 +213,7 @@ import static io.sphere.sdk.test.SphereTestUtils.asList;
 import static io.sphere.sdk.test.SphereTestUtils.randomSlug;
 import static org.assertj.core.api.Assertions.*;
 </code></pre><pre><code class='java'>public class CreateCategoryWithTypeDemo {
-    public static Category createCategoryWithType(final TestClient client, final Category category1,
+    public static Category createCategoryWithType(final BlockingSphereClient client, final Category category1,
                                                   final Category category2) throws Exception {
         final Map&lt;String, Object&gt; fieldValues = new HashMap&lt;&gt;();
         fieldValues.put("state", "published");//in the type it was enum, but for enums only keys are set
@@ -225,7 +225,7 @@ import static org.assertj.core.api.Assertions.*;
         final CategoryDraft categoryDraft = CategoryDraftBuilder.of(randomSlug(), randomSlug())
                 .custom(CustomFieldsDraft.ofTypeKeyAndObjects("category-customtype-key", fieldValues))
                 .build();
-        final Category category = client.execute(CategoryCreateCommand.of(categoryDraft));
+        final Category category = client.executeBlocking(CategoryCreateCommand.of(categoryDraft));
 
         final CustomFields custom = category.getCustom();
         assertThat(custom.getFieldAsEnumKey("state")).isEqualTo("published");
@@ -257,7 +257,7 @@ import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.categories.CategoryFixtures;
 import io.sphere.sdk.categories.commands.CategoryUpdateCommand;
 import io.sphere.sdk.categories.commands.updateactions.SetCustomType;
-import io.sphere.sdk.client.TestClient;
+import io.sphere.sdk.client.BlockingSphereClient;
 import io.sphere.sdk.models.Reference;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -266,7 +266,7 @@ import java.util.Set;
 import static io.sphere.sdk.test.SphereTestUtils.asList;
 import static org.assertj.core.api.Assertions.assertThat;
 </code></pre><pre><code class='java'>public class TypeAssigningInUpdateActionDemo {
-    public static Category updateCategoryWithType(final TestClient client, final Category category1,
+    public static Category updateCategoryWithType(final BlockingSphereClient client, final Category category1,
                                                   final Category category2) {
         final Category category =
                 CategoryFixtures.createCategory(client);
@@ -282,7 +282,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
         final SetCustomType action = SetCustomType
                 .ofTypeKeyAndObjects("category-customtype-key", fieldValues);
-        final Category updatedCategory = client.execute(CategoryUpdateCommand.of(category, action));
+        final Category updatedCategory = client.executeBlocking(CategoryUpdateCommand.of(category, action));
 
         final CustomFields custom = updatedCategory.getCustom();
         assertThat(custom.getFieldAsEnumKey("state")).isEqualTo("published");
@@ -305,13 +305,13 @@ import static org.assertj.core.api.Assertions.assertThat;
  <div id="io-sphere-sdk-types-UpdateFieldValueDemo%s" class=code-example><button type='button' style='display: none;' class='reveal-imports'>show/hide imports</button><pre class='hide code-example-imports'><code class='java'>import io.sphere.sdk.categories.commands.updateactions.SetCustomField;
 import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.categories.commands.CategoryUpdateCommand;
-import io.sphere.sdk.client.TestClient;
+import io.sphere.sdk.client.BlockingSphereClient;
 import io.sphere.sdk.commands.UpdateAction;
 import java.util.List;
 import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
 </code></pre><pre><code class='java'>public class UpdateFieldValueDemo {
-    public static Category updateFieldValues(final TestClient client, final Category category) {
+    public static Category updateFieldValues(final BlockingSphereClient client, final Category category) {
         assertThat(category.getCustom().getFieldAsEnumKey("state")).isEqualTo("published");
 
         final List&lt;? extends UpdateAction&lt;Category&gt;&gt; updateActions = asList(
@@ -319,7 +319,7 @@ import static org.assertj.core.api.Assertions.assertThat;
                 SetCustomField.ofObject("imageUrl", null)//remove value
         );
 
-        final Category updatedCategory = client.execute(CategoryUpdateCommand.of(category, updateActions));
+        final Category updatedCategory = client.executeBlocking(CategoryUpdateCommand.of(category, updateActions));
 
         final CustomFields custom = updatedCategory.getCustom();
         assertThat(custom.getFieldAsEnumKey("state")).isEqualTo("draft");
@@ -335,15 +335,15 @@ import static org.assertj.core.api.Assertions.assertThat;
  <div id="io-sphere-sdk-types-RemoveTypeFromObjectDemo%s" class=code-example><button type='button' style='display: none;' class='reveal-imports'>show/hide imports</button><pre class='hide code-example-imports'><code class='java'>import io.sphere.sdk.categories.commands.updateactions.SetCustomType;
 import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.categories.commands.CategoryUpdateCommand;
-import io.sphere.sdk.client.TestClient;
+import io.sphere.sdk.client.BlockingSphereClient;
 import static org.assertj.core.api.Assertions.assertThat;
 </code></pre><pre><code class='java'>public class RemoveTypeFromObjectDemo {
-    public static Category removeTypeFromCategory(final TestClient client, final Category category) {
+    public static Category removeTypeFromCategory(final BlockingSphereClient client, final Category category) {
         assertThat(category.getCustom()).isNotNull();
 
         final CategoryUpdateCommand command = CategoryUpdateCommand
                 .of(category, SetCustomType.ofRemoveType());
-        final Category updatedCategory = client.execute(command);
+        final Category updatedCategory = client.executeBlocking(command);
 
         assertThat(updatedCategory.getCustom()).isNull();
 
