@@ -18,8 +18,8 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":10,"i1":10,"i2":10,"i3":9,"i4":9,"i5":9,"i6":9};
-var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
+var methods = {"i0":10,"i1":10,"i2":10,"i3":41,"i4":41,"i5":9,"i6":9};
+var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"],32:["t6","Deprecated Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
 var tableTab = "tableTab";
@@ -142,7 +142,7 @@ import io.sphere.sdk.client.SphereClientFactory;
 </a>
 <h3>Method Summary</h3>
 <table class="memberSummary" border="0" cellpadding="3" cellspacing="0" summary="Method Summary table, listing methods, and an explanation">
-<caption><span id="t0" class="activeTableTab"><span>All Methods</span><span class="tabEnd">&nbsp;</span></span><span id="t1" class="tableTab"><span><a href="javascript:show(1);">Static Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t2" class="tableTab"><span><a href="javascript:show(2);">Instance Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t4" class="tableTab"><span><a href="javascript:show(8);">Concrete Methods</a></span><span class="tabEnd">&nbsp;</span></span></caption>
+<caption><span id="t0" class="activeTableTab"><span>All Methods</span><span class="tabEnd">&nbsp;</span></span><span id="t1" class="tableTab"><span><a href="javascript:show(1);">Static Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t2" class="tableTab"><span><a href="javascript:show(2);">Instance Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t4" class="tableTab"><span><a href="javascript:show(8);">Concrete Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t6" class="tableTab"><span><a href="javascript:show(32);">Deprecated Methods</a></span><span class="tabEnd">&nbsp;</span></span></caption>
 <tr>
 <th class="colFirst" scope="col">Modifier and Type</th>
 <th class="colLast" scope="col">Method and Description</th>
@@ -171,13 +171,17 @@ import io.sphere.sdk.client.SphereClientFactory;
 <tr id="i3" class="rowColor">
 <td class="colFirst"><code>static <a href="../../../../io/sphere/sdk/client/SphereClient.html" title="interface in io.sphere.sdk.client">SphereClient</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/client/SphereClientFactory.html#createHttpTestDouble-java.util.function.Function-">createHttpTestDouble</a></span>(java.util.function.Function&lt;<a href="../../../../io/sphere/sdk/client/HttpRequestIntent.html" title="class in io.sphere.sdk.client">HttpRequestIntent</a>,<a href="../../../../io/sphere/sdk/http/HttpResponse.html" title="interface in io.sphere.sdk.http">HttpResponse</a>&gt;&nbsp;function)</code>
-<div class="block">Creates a test double for a SPHERE.IO client which enables to fake http responses from SPHERE.IO.</div>
+<div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;
+<div class="block"><span class="deprecationComment">use <a href="../../../../io/sphere/sdk/client/TestDoubleSphereClientFactory.html#createHttpTestDouble-java.util.function.Function-"><code>TestDoubleSphereClientFactory.createHttpTestDouble(Function)</code></a></span></div>
+</div>
 </td>
 </tr>
 <tr id="i4" class="altColor">
 <td class="colFirst"><code>static <a href="../../../../io/sphere/sdk/client/SphereClient.html" title="interface in io.sphere.sdk.client">SphereClient</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/client/SphereClientFactory.html#createObjectTestDouble-java.util.function.Function-">createObjectTestDouble</a></span>(java.util.function.Function&lt;<a href="../../../../io/sphere/sdk/client/HttpRequestIntent.html" title="class in io.sphere.sdk.client">HttpRequestIntent</a>,java.lang.Object&gt;&nbsp;function)</code>
-<div class="block">Creates a test double for a SPHERE.IO client which enables to fake the results of the client as Java object.</div>
+<div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;
+<div class="block"><span class="deprecationComment">use <a href="../../../../io/sphere/sdk/client/TestDoubleSphereClientFactory.html#createObjectTestDouble-java.util.function.Function-"><code>TestDoubleSphereClientFactory.createObjectTestDouble(Function)</code></a></span></div>
+</div>
 </td>
 </tr>
 <tr id="i5" class="rowColor">
@@ -298,46 +302,15 @@ import io.sphere.sdk.client.SphereClientFactory;
 <ul class="blockList">
 <li class="blockList">
 <h4>createHttpTestDouble</h4>
-<pre>public static&nbsp;<a href="../../../../io/sphere/sdk/client/SphereClient.html" title="interface in io.sphere.sdk.client">SphereClient</a>&nbsp;createHttpTestDouble(java.util.function.Function&lt;<a href="../../../../io/sphere/sdk/client/HttpRequestIntent.html" title="class in io.sphere.sdk.client">HttpRequestIntent</a>,<a href="../../../../io/sphere/sdk/http/HttpResponse.html" title="interface in io.sphere.sdk.http">HttpResponse</a>&gt;&nbsp;function)</pre>
-<div class="block">Creates a test double for a SPHERE.IO client which enables to fake http responses from SPHERE.IO.
- The client does not need an internet connection.
-
- <div id="io-sphere-sdk-client-TestsDemo-withJson--%s" class=code-example><pre><code class='java'>final SphereClient client = SphereClientFactory.createHttpTestDouble(httpRequest -&gt; {
-    final HttpResponse response;
-    if (httpRequest.getPath().contains("/categories")) {
-        //JSON representation is often useful to deal with errors, but this time again a happy path example
-        //alternatively you can provide the String from a file in the classpath
-        response = HttpResponse.of(200, "{\n" +
-                "    \"offset\" : 0,\n" +
-                "    \"count\" : 1,\n" +
-                "    \"total\" : 1,\n" +
-                "    \"results\" : [ {\n" +
-                "        \"id\" : \"5ebe6dc9-ba32-4030-9f3e-eee0137a1274\",\n" +
-                "        \"version\" : 1,\n" +
-                "        \"name\" : {\n" +
-                "            \"en\" : \"TestSnowboard equipment\"\n" +
-                "        },\n" +
-                "        \"slug\" : {\n" +
-                "            \"en\" : \"snowboard-equipment\"\n" +
-                "        },\n" +
-                "        \"ancestors\" : [ ],\n" +
-                "        \"orderHint\" : \"0.000014020459255201865700631\",\n" +
-                "        \"createdAt\" : \"2014-06-06T09:12:05.520Z\",\n" +
-                "        \"lastModifiedAt\" : \"2014-06-06T09:12:05.520Z\"\n" +
-                "    }]\n" +
-                "}");
-    } else {
-        //here you can put if else blocks for further preconfigured responses
-        throw new UnsupportedOperationException("I'm not prepared for this request: " + httpRequest);
-    }
-    return response;
-});
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/src/test/java/io/sphere/sdk/client/TestsDemo.java" target="_blank">test code</a>.</pre></div></div>
+<pre>@Deprecated
+public static&nbsp;<a href="../../../../io/sphere/sdk/client/SphereClient.html" title="interface in io.sphere.sdk.client">SphereClient</a>&nbsp;createHttpTestDouble(java.util.function.Function&lt;<a href="../../../../io/sphere/sdk/client/HttpRequestIntent.html" title="class in io.sphere.sdk.client">HttpRequestIntent</a>,<a href="../../../../io/sphere/sdk/http/HttpResponse.html" title="interface in io.sphere.sdk.http">HttpResponse</a>&gt;&nbsp;function)</pre>
+<div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;<span class="deprecationComment">use <a href="../../../../io/sphere/sdk/client/TestDoubleSphereClientFactory.html#createHttpTestDouble-java.util.function.Function-"><code>TestDoubleSphereClientFactory.createHttpTestDouble(Function)</code></a></span></div>
+<div class="block">deprecated</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>function</code> - a function which returns a matching object for a SPHERE.IO request.</dd>
+<dd><code>function</code> - mapping from intent to http response</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
-<dd>sphere client test double</dd>
+<dd>test double</dd>
 </dl>
 </li>
 </ul>
@@ -347,23 +320,10 @@ import io.sphere.sdk.client.SphereClientFactory;
 <ul class="blockListLast">
 <li class="blockList">
 <h4>createObjectTestDouble</h4>
-<pre>public static&nbsp;<a href="../../../../io/sphere/sdk/client/SphereClient.html" title="interface in io.sphere.sdk.client">SphereClient</a>&nbsp;createObjectTestDouble(java.util.function.Function&lt;<a href="../../../../io/sphere/sdk/client/HttpRequestIntent.html" title="class in io.sphere.sdk.client">HttpRequestIntent</a>,java.lang.Object&gt;&nbsp;function)</pre>
-<div class="block">Creates a test double for a SPHERE.IO client which enables to fake the results of the client as Java object.
- The client does not need an internet connection.
-
- <div id="io-sphere-sdk-client-TestsDemo-modelInstanceFromJson--%s" class=code-example><pre><code class='java'>//deserializes an object stored from JSON
-final SphereClient client = SphereClientFactory.createObjectTestDouble(httpRequest -&gt; {
-    final Object result;
-    if (httpRequest.getPath().contains("/categories")) {
-        //in Play projects the file is in "test/resources/categories.json"
-        final PagedQueryResult&lt;Category&gt; queryResult = SphereJsonUtils.readObjectFromResource("categories.json", CategoryQuery.resultTypeReference());
-        result = queryResult;
-    } else {
-        throw new UnsupportedOperationException("I'm not prepared for this request: " + httpRequest);
-    }
-    return result;
-});
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/src/test/java/io/sphere/sdk/client/TestsDemo.java" target="_blank">test code</a>.</pre></div></div>
+<pre>@Deprecated
+public static&nbsp;<a href="../../../../io/sphere/sdk/client/SphereClient.html" title="interface in io.sphere.sdk.client">SphereClient</a>&nbsp;createObjectTestDouble(java.util.function.Function&lt;<a href="../../../../io/sphere/sdk/client/HttpRequestIntent.html" title="class in io.sphere.sdk.client">HttpRequestIntent</a>,java.lang.Object&gt;&nbsp;function)</pre>
+<div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;<span class="deprecationComment">use <a href="../../../../io/sphere/sdk/client/TestDoubleSphereClientFactory.html#createObjectTestDouble-java.util.function.Function-"><code>TestDoubleSphereClientFactory.createObjectTestDouble(Function)</code></a></span></div>
+<div class="block">deprecated</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>function</code> - a function which returns a matching http request for a SPHERE.IO request.</dd>
