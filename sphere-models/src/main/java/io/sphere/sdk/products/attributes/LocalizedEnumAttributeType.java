@@ -8,11 +8,11 @@ import java.util.List;
 
 import static io.sphere.sdk.utils.ListUtils.listOf;
 
-public class LocalizedEnumType extends AttributeTypeBase {
+public class LocalizedEnumAttributeType extends AttributeTypeBase {
     private final List<LocalizedEnumValue> values;
 
     @JsonCreator
-    private LocalizedEnumType(final List<LocalizedEnumValue> values) {
+    private LocalizedEnumAttributeType(final List<LocalizedEnumValue> values) {
         this.values = values;
     }
 
@@ -21,13 +21,13 @@ public class LocalizedEnumType extends AttributeTypeBase {
     }
 
     @JsonIgnore
-    public static LocalizedEnumType of(final LocalizedEnumValue mandatoryValue, final LocalizedEnumValue ... moreValues) {
+    public static LocalizedEnumAttributeType of(final LocalizedEnumValue mandatoryValue, final LocalizedEnumValue ... moreValues) {
         final List<LocalizedEnumValue> localizedEnumValues = listOf(mandatoryValue, moreValues);
         return of(localizedEnumValues);
     }
 
     @JsonIgnore
-    public static LocalizedEnumType of(final List<LocalizedEnumValue> values) {
-        return new LocalizedEnumType(values);
+    public static LocalizedEnumAttributeType of(final List<LocalizedEnumValue> values) {
+        return new LocalizedEnumAttributeType(values);
     }
 }

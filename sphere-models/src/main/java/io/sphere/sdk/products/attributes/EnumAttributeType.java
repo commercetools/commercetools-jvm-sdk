@@ -8,11 +8,11 @@ import java.util.List;
 
 import static io.sphere.sdk.utils.ListUtils.listOf;
 
-public class EnumType extends AttributeTypeBase {
+public class EnumAttributeType extends AttributeTypeBase {
     private final List<EnumValue> values;
 
     @JsonCreator
-    private EnumType(final List<EnumValue> values) {
+    private EnumAttributeType(final List<EnumValue> values) {
         this.values = values;
     }
 
@@ -21,12 +21,12 @@ public class EnumType extends AttributeTypeBase {
     }
 
     @JsonIgnore
-    public static EnumType of(final EnumValue mandatoryValue, final EnumValue... moreValues) {
+    public static EnumAttributeType of(final EnumValue mandatoryValue, final EnumValue... moreValues) {
         return of(listOf(mandatoryValue, moreValues));
     }
 
     @JsonIgnore
-    public static EnumType of(final List<EnumValue> values) {
-        return new EnumType(values);
+    public static EnumAttributeType of(final List<EnumValue> values) {
+        return new EnumAttributeType(values);
     }
 }

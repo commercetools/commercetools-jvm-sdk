@@ -45,13 +45,13 @@ final class AttributeAccessImpl<T> extends Base implements AttributeAccess<T> {
         return new AttributeAccessImpl<>(AttributeMapper.of(typeReference), typeReference, attributeDefinition -> attributeTypeClass.isAssignableFrom(attributeDefinition.getAttributeType().getClass()));
     }
 
-    static <T> AttributeAccess<Reference<T>> ofReferenceType(final RichReferenceType<T> referenceType) {
+    static <T> AttributeAccess<Reference<T>> ofReferenceType(final RichReferenceAttributeType<T> referenceType) {
         final AttributeMapper<Reference<T>> mapper = new ReferenceAttributeMapperImpl<>(referenceType.typeReference());
 
         return new AttributeAccessImpl<>(mapper, referenceType.typeReference(),
                 attributeDefinition -> {
-                    if (attributeDefinition.getAttributeType() instanceof ReferenceType) {
-                        final ReferenceType attributeType = (ReferenceType) attributeDefinition.getAttributeType();
+                    if (attributeDefinition.getAttributeType() instanceof ReferenceAttributeType) {
+                        final ReferenceAttributeType attributeType = (ReferenceAttributeType) attributeDefinition.getAttributeType();
 
                         return attributeType.getReferenceTypeId().equals(referenceType.getReferenceTypeId());
                     } else {
@@ -66,8 +66,8 @@ final class AttributeAccessImpl<T> extends Base implements AttributeAccess<T> {
 
     static <T> AttributeAccess<Set<T>> ofSet(final Class<? extends AttributeType> typeClass, final TypeReference<Set<T>> typeReference, final AttributeMapper<Set<T>> mapper) {
         return new AttributeAccessImpl<>(mapper, typeReference, attributeDefinition -> {
-            if (attributeDefinition.getAttributeType() instanceof SetType) {
-                final SetType attributeType = (SetType) attributeDefinition.getAttributeType();
+            if (attributeDefinition.getAttributeType() instanceof SetAttributeType) {
+                final SetAttributeType attributeType = (SetAttributeType) attributeDefinition.getAttributeType();
 
                 return typeClass.isAssignableFrom(attributeType.getElementType().getClass());
             } else {
@@ -76,7 +76,7 @@ final class AttributeAccessImpl<T> extends Base implements AttributeAccess<T> {
         });
     }
 
-    static <T> AttributeAccess<Set<Reference<T>>> ofSet(final ReferenceType requiredReferenceType, final TypeReference<Set<Reference<T>>> typeReference) {
+    static <T> AttributeAccess<Set<Reference<T>>> ofSet(final ReferenceAttributeType requiredReferenceType, final TypeReference<Set<Reference<T>>> typeReference) {
         final AttributeMapper<Set<Reference<T>>> mapper = AttributeMapper.of(typeReference);
         return new AttributeAccessImpl<>(mapper, typeReference, new ReferenceSetAttributeDefinitionPredicate(requiredReferenceType));
     }
@@ -85,8 +85,8 @@ final class AttributeAccessImpl<T> extends Base implements AttributeAccess<T> {
                                                              final TypeReference<Set<T>> typeReference) {
         final AttributeMapper<Set<T>> mapper = new EnumLikeSetAttributeMapperImpl<>(typeReference);
         return new AttributeAccessImpl<>(mapper, typeReference, attributeDefinition -> {
-            if (attributeDefinition.getAttributeType() instanceof SetType) {
-                final SetType attributeType = (SetType) attributeDefinition.getAttributeType();
+            if (attributeDefinition.getAttributeType() instanceof SetAttributeType) {
+                final SetAttributeType attributeType = (SetAttributeType) attributeDefinition.getAttributeType();
 
                 return clazz.isAssignableFrom(attributeType.getElementType().getClass());
             } else {
@@ -100,9 +100,9 @@ final class AttributeAccessImpl<T> extends Base implements AttributeAccess<T> {
     }
 
     private static class ReferenceSetAttributeDefinitionPredicate implements Predicate<AttributeDefinition> {
-        private final ReferenceType requiredReferenceType;
+        private final ReferenceAttributeType requiredReferenceType;
 
-        public ReferenceSetAttributeDefinitionPredicate(final ReferenceType requiredReferenceType) {
+        public ReferenceSetAttributeDefinitionPredicate(final ReferenceAttributeType requiredReferenceType) {
             this.requiredReferenceType = requiredReferenceType;
         }
 
@@ -110,11 +110,11 @@ final class AttributeAccessImpl<T> extends Base implements AttributeAccess<T> {
         public boolean test(final AttributeDefinition attributeDefinition) {
             final boolean canHandle;
 
-            if (attributeDefinition.getAttributeType() instanceof SetType) {
-                final SetType attributeType = (SetType) attributeDefinition.getAttributeType();
+            if (attributeDefinition.getAttributeType() instanceof SetAttributeType) {
+                final SetAttributeType attributeType = (SetAttributeType) attributeDefinition.getAttributeType();
 
-                if (attributeType.getElementType() instanceof ReferenceType) {
-                    final ReferenceType referenceType = (ReferenceType) attributeType.getElementType();
+                if (attributeType.getElementType() instanceof ReferenceAttributeType) {
+                    final ReferenceAttributeType referenceType = (ReferenceAttributeType) attributeType.getElementType();
 
                     canHandle = referenceType.getReferenceTypeId().equals(requiredReferenceType.getReferenceTypeId());
                 } else {

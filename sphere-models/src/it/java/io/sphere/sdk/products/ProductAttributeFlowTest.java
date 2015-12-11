@@ -33,7 +33,7 @@ public class ProductAttributeFlowTest extends IntegrationTest {
     public void localizedEnumValue() throws Exception {
         final String productTypeName = ProductAttributeFlowTest.class.getSimpleName() + "lenum";
         final List<LocalizedEnumValue> localizedEnumValues = asList(A, B, C);
-        final ProductTypeDraft draft = ProductTypeDraft.of(randomKey(), productTypeName, "", asList(AttributeDefinitionBuilder.of(LOCALIZED_ENUM_ATTR, randomSlug(), LocalizedEnumType.of(localizedEnumValues)).build()));
+        final ProductTypeDraft draft = ProductTypeDraft.of(randomKey(), productTypeName, "", asList(AttributeDefinitionBuilder.of(LOCALIZED_ENUM_ATTR, randomSlug(), LocalizedEnumAttributeType.of(localizedEnumValues)).build()));
         final ProductTypeQuery query = ProductTypeQuery.of().byName(productTypeName);
         final ProductTypeCreateCommand createCommand = ProductTypeCreateCommand.of(draft);
         final ProductType productType = getOrCreate(createCommand, query);

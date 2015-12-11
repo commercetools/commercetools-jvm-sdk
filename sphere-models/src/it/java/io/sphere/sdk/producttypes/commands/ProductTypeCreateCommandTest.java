@@ -3,7 +3,7 @@ package io.sphere.sdk.producttypes.commands;
 import io.sphere.sdk.products.attributes.AttributeConstraint;
 import io.sphere.sdk.products.attributes.AttributeDefinition;
 import io.sphere.sdk.products.attributes.AttributeDefinitionBuilder;
-import io.sphere.sdk.products.attributes.EnumType;
+import io.sphere.sdk.products.attributes.EnumAttributeType;
 import io.sphere.sdk.models.EnumValue;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.producttypes.ProductType;
@@ -38,7 +38,7 @@ public class ProductTypeCreateCommandTest extends IntegrationTest {
         final List<EnumValue> values = asList(S, M, X);
         final LocalizedString sizeAttributeLabel = LocalizedString.of(ENGLISH, "size").plus(GERMAN, "Größe");
         final AttributeDefinition sizeAttributeDefinition =
-                AttributeDefinitionBuilder.of("size", sizeAttributeLabel, EnumType.of(values))
+                AttributeDefinitionBuilder.of("size", sizeAttributeLabel, EnumAttributeType.of(values))
                 .required(true)
                 .attributeConstraint(AttributeConstraint.COMBINATION_UNIQUE)
                 .build();

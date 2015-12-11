@@ -137,32 +137,32 @@ public final class NestedAttributeIntegrationTest extends IntegrationTest {
         return ProductTypeDraft.of(randomKey(), "NutrientInformation", "NutrientInformation",
                 asList(
                         AttributeDefinitionBuilder.of(NutrientInfo.quantityContainedUOM.getName(),
-                                en(NutrientInfo.quantityContainedUOM.getName()), StringType.of()).build(),
+                                en(NutrientInfo.quantityContainedUOM.getName()), StringAttributeType.of()).build(),
                         AttributeDefinitionBuilder.of(NutrientInfo.quantityContained.getName(),
-                                en(NutrientInfo.quantityContained.getName()), NumberType.of()).build(),
+                                en(NutrientInfo.quantityContained.getName()), NumberAttributeType.of()).build(),
                         AttributeDefinitionBuilder.of(NutrientInfo.measurementPrecision.getName(),
-                                en(NutrientInfo.measurementPrecision.getName()), StringType.of()).build(),
+                                en(NutrientInfo.measurementPrecision.getName()), StringAttributeType.of()).build(),
                         AttributeDefinitionBuilder.of(NutrientInfo.nutrientTypeCode.getName(),
-                                en(NutrientInfo.nutrientTypeCode.getName()), StringType.of()).build()));
+                                en(NutrientInfo.nutrientTypeCode.getName()), StringAttributeType.of()).build()));
     }
 
     private ProductTypeDraft createNutrient(final Referenceable<ProductType> nutrientInformationType) {
         return ProductTypeDraft.of(randomKey(),"Nutrient", "Nutrient",
                 asList(
                         AttributeDefinitionBuilder.of(Nutrient.servingSizeUOM.getName(),
-                                en(Nutrient.servingSizeUOM.getName()), StringType.of()).build(),
+                                en(Nutrient.servingSizeUOM.getName()), StringAttributeType.of()).build(),
                         AttributeDefinitionBuilder.of(Nutrient.servingSize.getName(),
-                                en(Nutrient.servingSize.getName()), NumberType.of()).build(),
+                                en(Nutrient.servingSize.getName()), NumberAttributeType.of()).build(),
                         AttributeDefinitionBuilder.of(Nutrient.nutrientInformation.getName(),
-                                en(Nutrient.nutrientInformation.getName()), SetType.of(NestedType.of(nutrientInformationType))).searchable(false).build()));
+                                en(Nutrient.nutrientInformation.getName()), SetAttributeType.of(NestedAttributeType.of(nutrientInformationType))).searchable(false).build()));
     }
 
     private ProductTypeDraft createBanana(Referenceable<ProductType> nutrientType) {
         return ProductTypeDraft.of(randomKey(), "Banana", "Banana",
                 asList(
                         AttributeDefinitionBuilder.of(Banana.bananaColor.getName(),
-                                en(Banana.bananaColor.getName()), StringType.of()).build(),
+                                en(Banana.bananaColor.getName()), StringAttributeType.of()).build(),
                         AttributeDefinitionBuilder.of(Banana.nutrients.getName(),
-                                en(Banana.nutrients.getName()), SetType.of(NestedType.of(nutrientType))).searchable(false).build()));
+                                en(Banana.nutrients.getName()), SetAttributeType.of(NestedAttributeType.of(nutrientType))).searchable(false).build()));
     }
 }

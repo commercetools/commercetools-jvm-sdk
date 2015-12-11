@@ -103,15 +103,15 @@ public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
     }
 
     private static ProductType createProductType() {
-        final AttributeDefinition colorAttrDef = AttributeDefinitionBuilder.of(ATTR_NAME_COLOR, ofEnglishLocale(ATTR_NAME_COLOR), StringType.of()).build();
-        final AttributeDefinition sizeAttrDef = AttributeDefinitionBuilder.of(ATTR_NAME_SIZE, ofEnglishLocale(ATTR_NAME_SIZE), NumberType.of()).build();
+        final AttributeDefinition colorAttrDef = AttributeDefinitionBuilder.of(ATTR_NAME_COLOR, ofEnglishLocale(ATTR_NAME_COLOR), StringAttributeType.of()).build();
+        final AttributeDefinition sizeAttrDef = AttributeDefinitionBuilder.of(ATTR_NAME_SIZE, ofEnglishLocale(ATTR_NAME_SIZE), NumberAttributeType.of()).build();
         final ProductTypeDraft productTypeDraft = ProductTypeDraft.of(randomKey(), PRODUCT_TYPE_NAME, "", asList(colorAttrDef, sizeAttrDef));
         final ProductTypeCreateCommand productTypeCreateCommand = ProductTypeCreateCommand.of(productTypeDraft);
         return execute(productTypeCreateCommand);
     }
 
     private static ProductType createEvilProductType() {
-        final AttributeDefinition evilAttrDef = AttributeDefinitionBuilder.of(ATTR_NAME_EVIL, ofEnglishLocale(ATTR_NAME_EVIL), StringType.of()).build();
+        final AttributeDefinition evilAttrDef = AttributeDefinitionBuilder.of(ATTR_NAME_EVIL, ofEnglishLocale(ATTR_NAME_EVIL), StringAttributeType.of()).build();
         final ProductTypeDraft evilProductTypeDraft = ProductTypeDraft.of(randomKey(), EVIL_PRODUCT_TYPE_NAME, "", singletonList(evilAttrDef));
         final ProductTypeCreateCommand evilProductTypeCreateCommand = ProductTypeCreateCommand.of(evilProductTypeDraft);
         return execute(evilProductTypeCreateCommand);

@@ -6,11 +6,11 @@ import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Referenceable;
 import io.sphere.sdk.producttypes.ProductType;
 
-public class NestedType extends AttributeTypeBase {
+public class NestedAttributeType extends AttributeTypeBase {
     private final Reference<ProductType> typeReference;
 
     @JsonCreator
-    private NestedType(final Reference<ProductType> typeReference) {
+    private NestedAttributeType(final Reference<ProductType> typeReference) {
         this.typeReference = typeReference;
     }
 
@@ -19,7 +19,7 @@ public class NestedType extends AttributeTypeBase {
     }
 
     @JsonIgnore
-    public static NestedType of(final Referenceable<ProductType> typeReference) {
-        return new NestedType(typeReference.toReference());
+    public static NestedAttributeType of(final Referenceable<ProductType> typeReference) {
+        return new NestedAttributeType(typeReference.toReference());
     }
 }

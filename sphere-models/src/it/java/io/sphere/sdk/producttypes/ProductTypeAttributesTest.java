@@ -46,7 +46,7 @@ public final class ProductTypeAttributesTest extends IntegrationTest {
     @Test
     public void booleanAttribute() throws Exception {
         testSingleAndSet(AttributeAccess.ofBoolean(), AttributeAccess.ofBooleanSet(), asSet(true, false),
-                BooleanType.of(), AttributeDefinitionBuilder.of("boolean-attribute", LABEL, BooleanType.of()).build());
+                BooleanAttributeType.of(), AttributeDefinitionBuilder.of("boolean-attribute", LABEL, BooleanAttributeType.of()).build());
     }
 
     @Test
@@ -56,8 +56,8 @@ public final class ProductTypeAttributesTest extends IntegrationTest {
 
         final ProductTypeDraft productTypeDraft = ProductTypeDraft.of(randomKey(), "test-sub-attribute", "nested attribute test",
                 asList(
-                        AttributeDefinitionBuilder.of(sizeAttr.getName(), LocalizedString.of(Locale.ENGLISH, "Size"), NumberType.of()).build(),
-                        AttributeDefinitionBuilder.of(brandAttr.getName(), LocalizedString.of(Locale.ENGLISH, "Brand"), StringType.of()).build()));
+                        AttributeDefinitionBuilder.of(sizeAttr.getName(), LocalizedString.of(Locale.ENGLISH, "Size"), NumberAttributeType.of()).build(),
+                        AttributeDefinitionBuilder.of(brandAttr.getName(), LocalizedString.of(Locale.ENGLISH, "Brand"), StringAttributeType.of()).build()));
 
         withProductType(client(), () -> productTypeDraft, nestedProductType -> {
             final AttributeContainer adidas = AttributeContainer.of(
@@ -65,7 +65,7 @@ public final class ProductTypeAttributesTest extends IntegrationTest {
             final AttributeContainer nike = AttributeContainer.of(
                     asList(Attribute.of(sizeAttr, 11.5D), Attribute.of(brandAttr, "Nike")));
 
-            final AttributeType type = NestedType.of(nestedProductType);
+            final AttributeType type = NestedAttributeType.of(nestedProductType);
 
             testSingleAndSet(AttributeAccess.ofNested(), AttributeAccess.ofNestedSet(), asSet(adidas, nike),
                     type, AttributeDefinitionBuilder.of("nested-attribute", LABEL, type).searchable(false).build());
@@ -75,79 +75,79 @@ public final class ProductTypeAttributesTest extends IntegrationTest {
     @Test
     public void textAttribute() throws Exception {
         testSingleAndSet(AttributeAccess.ofString(), AttributeAccess.ofStringSet(), asSet("hello", "world"),
-                StringType.of(), AttributeDefinitionBuilder.of("text-attribute", LABEL, StringType.of()).inputHint(TEXT_INPUT_HINT).build());
+                StringAttributeType.of(), AttributeDefinitionBuilder.of("text-attribute", LABEL, StringAttributeType.of()).inputHint(TEXT_INPUT_HINT).build());
     }
 
     @Test
     public void localizedStringAttribute() throws Exception {
         testSingleAndSet(AttributeAccess.ofLocalizedString(), AttributeAccess.ofLocalizedStringSet(),
                 asSet(LocalizedString.of(ENGLISH, "hello"), LocalizedString.of(ENGLISH, "world")),
-                LocalizedStringType.of(),
-                AttributeDefinitionBuilder.of("localized-text-attribute", LABEL, LocalizedStringType.of()).inputHint(TEXT_INPUT_HINT).build());
+                LocalizedStringAttributeType.of(),
+                AttributeDefinitionBuilder.of("localized-text-attribute", LABEL, LocalizedStringAttributeType.of()).inputHint(TEXT_INPUT_HINT).build());
     }
 
     @Test
     public void enumAttribute() throws Exception {
         testSingleAndSet(AttributeAccess.ofEnumValue(), AttributeAccess.ofEnumValueSet(),
                 new HashSet<>(PLAIN_ENUM_VALUES),
-                EnumType.of(PLAIN_ENUM_VALUES),
-                AttributeDefinitionBuilder.of("enum-attribute", LABEL, EnumType.of(PLAIN_ENUM_VALUES)).build());
+                EnumAttributeType.of(PLAIN_ENUM_VALUES),
+                AttributeDefinitionBuilder.of("enum-attribute", LABEL, EnumAttributeType.of(PLAIN_ENUM_VALUES)).build());
     }
 
     @Test
     public void localizedEnumAttribute() throws Exception {
         testSingleAndSet(AttributeAccess.ofLocalizedEnumValue(), AttributeAccess.ofLocalizedEnumValueSet(),
                 new HashSet<>(LOCALIZED_ENUM_VALUES),
-                LocalizedEnumType.of(LOCALIZED_ENUM_VALUES),
-                AttributeDefinitionBuilder.of("lenum-attribute", LABEL, LocalizedEnumType.of(LOCALIZED_ENUM_VALUES)).build());
+                LocalizedEnumAttributeType.of(LOCALIZED_ENUM_VALUES),
+                AttributeDefinitionBuilder.of("lenum-attribute", LABEL, LocalizedEnumAttributeType.of(LOCALIZED_ENUM_VALUES)).build());
     }
 
     @Test
     public void numberAttribute() throws Exception {
         testSingleAndSet(AttributeAccess.ofDouble(), AttributeAccess.ofDoubleSet(),
                 asSet(1.0, 1.5, 2.0),
-                NumberType.of(),
-                AttributeDefinitionBuilder.of("number-attribute", LABEL, NumberType.of()).build());
+                NumberAttributeType.of(),
+                AttributeDefinitionBuilder.of("number-attribute", LABEL, NumberAttributeType.of()).build());
     }
 
     @Test
     public void integerAttribute() throws Exception {
         testSingleAndSet(AttributeAccess.ofInteger(), AttributeAccess.ofIntegerSet(),
                 asSet(1, 2),
-                NumberType.of(),
-                AttributeDefinitionBuilder.of("number-attribute", LABEL, NumberType.of()).build());
+                NumberAttributeType.of(),
+                AttributeDefinitionBuilder.of("number-attribute", LABEL, NumberAttributeType.of()).build());
     }
 
     @Test
     public void longAttribute() throws Exception {
         testSingleAndSet(AttributeAccess.ofLong(), AttributeAccess.ofLongSet(),
                 asSet(1L, 2L),
-                NumberType.of(),
-                AttributeDefinitionBuilder.of("number-attribute", LABEL, NumberType.of()).build());
+                NumberAttributeType.of(),
+                AttributeDefinitionBuilder.of("number-attribute", LABEL, NumberAttributeType.of()).build());
     }
 
     @Test
     public void moneyAttribute() throws Exception {
         testSingleAndSet(AttributeAccess.ofMoney(), AttributeAccess.ofMoneySet(),
                 asSet(MoneyImpl.of(355, EUR), MoneyImpl.of(98774, EUR)),
-                MoneyType.of(),
-                AttributeDefinitionBuilder.of("money-attribute", LABEL, MoneyType.of()).build());
+                MoneyAttributeType.of(),
+                AttributeDefinitionBuilder.of("money-attribute", LABEL, MoneyAttributeType.of()).build());
     }
 
     @Test
     public void dateAttribute() throws Exception {
         testSingleAndSet(AttributeAccess.ofDate(), AttributeAccess.ofDateSet(),
                 asSet(LocalDate.now(), LocalDate.now().plus(5, ChronoUnit.DAYS)),
-                DateType.of(),
-                AttributeDefinitionBuilder.of("date-attribute", LABEL, DateType.of()).build());
+                DateAttributeType.of(),
+                AttributeDefinitionBuilder.of("date-attribute", LABEL, DateAttributeType.of()).build());
     }
 
     @Test
     public void timeAttribute() throws Exception {
         testSingleAndSet(AttributeAccess.ofTime(), AttributeAccess.ofTimeSet(),
                 asSet(LocalTime.now(), LocalTime.now().plus(3, ChronoUnit.MINUTES)),
-                TimeType.of(),
-                AttributeDefinitionBuilder.of("time-attribute", LABEL, TimeType.of()).build());
+                TimeAttributeType.of(),
+                AttributeDefinitionBuilder.of("time-attribute", LABEL, TimeAttributeType.of()).build());
     }
 
     @Test
@@ -155,8 +155,8 @@ public final class ProductTypeAttributesTest extends IntegrationTest {
         final ZonedDateTime now = SphereTestUtils.now().withZoneSameInstant(ZoneOffset.UTC);
         testSingleAndSet(AttributeAccess.ofDateTime(), AttributeAccess.ofDateTimeSet(),
                 asSet(now, now.plus(3, ChronoUnit.DAYS)),
-                DateTimeType.of(),
-                AttributeDefinitionBuilder.of("datetime-attribute", LABEL, DateTimeType.of()).build());
+                DateTimeAttributeType.of(),
+                AttributeDefinitionBuilder.of("datetime-attribute", LABEL, DateTimeAttributeType.of()).build());
     }
 
     @Test
@@ -167,35 +167,35 @@ public final class ProductTypeAttributesTest extends IntegrationTest {
             final Product product = execute(ProductCreateCommand.of(productDraft));
             testSingleAndSet(AttributeAccess.ofProductReference(), AttributeAccess.ofProductReferenceSet(),
                     asSet(product.toReference().filled(null)),
-                    ReferenceType.ofProduct(),
-                    AttributeDefinitionBuilder.of("productReference", LABEL, ReferenceType.ofProduct()).build());
+                    ReferenceAttributeType.ofProduct(),
+                    AttributeDefinitionBuilder.of("productReference", LABEL, ReferenceAttributeType.ofProduct()).build());
         });
     }
 
     @Test
     public void flatReferenceAttributes() throws Exception {
-        testReferenceAttribute("product-type-reference", ReferenceType.ofProductType());
-        testReferenceAttribute("product-reference", ReferenceType.ofProduct());
-        testReferenceAttribute("category-reference", ReferenceType.ofCategory());
-        testReferenceAttribute("channel-reference", ReferenceType.ofChannel());
+        testReferenceAttribute("product-type-reference", ReferenceAttributeType.ofProductType());
+        testReferenceAttribute("product-reference", ReferenceAttributeType.ofProduct());
+        testReferenceAttribute("category-reference", ReferenceAttributeType.ofCategory());
+        testReferenceAttribute("channel-reference", ReferenceAttributeType.ofChannel());
     }
 
     @Test
     public void setReferenceAttributes() throws Exception {
-        testSetAttribute("set-of-product-type-reference", ReferenceType.ofProductType());
-        testSetAttribute("set-of-product-reference", ReferenceType.ofProduct());
-        testSetAttribute("set-of-category-reference", ReferenceType.ofCategory());
-        testSetAttribute("set-of-channel-reference", ReferenceType.ofChannel());
+        testSetAttribute("set-of-product-type-reference", ReferenceAttributeType.ofProductType());
+        testSetAttribute("set-of-product-reference", ReferenceAttributeType.ofProduct());
+        testSetAttribute("set-of-category-reference", ReferenceAttributeType.ofCategory());
+        testSetAttribute("set-of-channel-reference", ReferenceAttributeType.ofChannel());
     }
 
     @Test
     public void createSetOfLocalizedEnumAttribute() throws Exception {
-        executeTest(SetType.class, AttributeDefinitionBuilder
-                .of("set-of-localized-enum-attribute", LABEL, SetType.of(LocalizedEnumType.of(LOCALIZED_ENUM_VALUES)))
+        executeTest(SetAttributeType.class, AttributeDefinitionBuilder
+                .of("set-of-localized-enum-attribute", LABEL, SetAttributeType.of(LocalizedEnumAttributeType.of(LOCALIZED_ENUM_VALUES)))
                 .searchable(false)
                 .build(), attributeDefinitionFromServer -> {
-            final SetType setType = (SetType) attributeDefinitionFromServer.getAttributeType();
-            final LocalizedEnumType elementType = (LocalizedEnumType) setType.getElementType();
+            final SetAttributeType setType = (SetAttributeType) attributeDefinitionFromServer.getAttributeType();
+            final LocalizedEnumAttributeType elementType = (LocalizedEnumAttributeType) setType.getElementType();
 
             assertThat(elementType.getValues()).isEqualTo(LOCALIZED_ENUM_VALUES);
         });
@@ -207,7 +207,7 @@ public final class ProductTypeAttributesTest extends IntegrationTest {
             final ProductType productType = execute(ProductTypeQuery.of().byName("t-shirt")).head().get();
             final Optional<AttributeDefinition> sizeAttribute = productType.findAttribute("size");
             final List<EnumValue> possibleSizeValues = sizeAttribute.
-                    map(attrib -> ((EnumType) attrib.getAttributeType()).getValues()).
+                    map(attrib -> ((EnumAttributeType) attrib.getAttributeType()).getValues()).
                     orElse(Collections.<EnumValue>emptyList());
             final List<EnumValue> expected =
                     asList(EnumValue.of("S", "S"), EnumValue.of("M", "M"), EnumValue.of("X", "X"));
@@ -230,7 +230,7 @@ public final class ProductTypeAttributesTest extends IntegrationTest {
 
     @Test
     public void createTextAttribute() throws Exception {
-        executeTest(StringType.class, AttributeDefinitionBuilder.of("text-attribute", LABEL, StringType.of()).
+        executeTest(StringAttributeType.class, AttributeDefinitionBuilder.of("text-attribute", LABEL, StringAttributeType.of()).
                 inputHint(TEXT_INPUT_HINT).
                 attributeConstraint(AttributeConstraint.COMBINATION_UNIQUE).
                 searchable(false).
@@ -245,7 +245,7 @@ public final class ProductTypeAttributesTest extends IntegrationTest {
 
     @Test
     public void createLocalizedStringAttribute() throws Exception {
-        executeTest(LocalizedStringType.class, AttributeDefinitionBuilder.of("localized-text-attribute", LABEL, LocalizedStringType.of()).
+        executeTest(LocalizedStringAttributeType.class, AttributeDefinitionBuilder.of("localized-text-attribute", LABEL, LocalizedStringAttributeType.of()).
                 inputHint(TEXT_INPUT_HINT).
                 attributeConstraint(AttributeConstraint.COMBINATION_UNIQUE).
                 searchable(false).
@@ -260,9 +260,9 @@ public final class ProductTypeAttributesTest extends IntegrationTest {
 
     @Test
     public void enumTypeContainsThePossibleValues() throws Exception {
-        executeTest(EnumType.class, AttributeDefinitionBuilder.of("enum-attribute", LABEL, EnumType.of(PLAIN_ENUM_VALUES)).
+        executeTest(EnumAttributeType.class, AttributeDefinitionBuilder.of("enum-attribute", LABEL, EnumAttributeType.of(PLAIN_ENUM_VALUES)).
                 build(), attributeDefinition -> {
-            final EnumType attributeType = (EnumType) attributeDefinition.getAttributeType();
+            final EnumAttributeType attributeType = (EnumAttributeType) attributeDefinition.getAttributeType();
             assertThat(attributeType.getValues()).isEqualTo(PLAIN_ENUM_VALUES);
         });
     }
@@ -280,18 +280,18 @@ public final class ProductTypeAttributesTest extends IntegrationTest {
     }
 
     private void testSetAttribute(final String attributeName, final AttributeType attributeType) {
-        executeTest(SetType.class, AttributeDefinitionBuilder.of(attributeName, LABEL, SetType.of(attributeType))
+        executeTest(SetAttributeType.class, AttributeDefinitionBuilder.of(attributeName, LABEL, SetAttributeType.of(attributeType))
                 .searchable(false)
                 .build(), attrDef -> {
-            final SetType receivedType = (SetType) attrDef.getAttributeType();
+            final SetAttributeType receivedType = (SetAttributeType) attrDef.getAttributeType();
             assertThat(receivedType.getElementType()).isInstanceOf(attributeType.getClass());
         });
     }
 
-    private void testReferenceAttribute(final String attributeName, final ReferenceType referenceType) {
-        executeTest(ReferenceType.class, AttributeDefinitionBuilder.of(attributeName, LABEL, referenceType).
+    private void testReferenceAttribute(final String attributeName, final ReferenceAttributeType referenceType) {
+        executeTest(ReferenceAttributeType.class, AttributeDefinitionBuilder.of(attributeName, LABEL, referenceType).
                 build(), attrDef -> {
-            final ReferenceType receivedType = (ReferenceType) attrDef.getAttributeType();
+            final ReferenceAttributeType receivedType = (ReferenceAttributeType) attrDef.getAttributeType();
             assertThat(receivedType.getReferenceTypeId()).isEqualTo(referenceType.getReferenceTypeId());
         });
     }
@@ -374,9 +374,9 @@ public final class ProductTypeAttributesTest extends IntegrationTest {
 
     private <X> void testSetAttribute(final AttributeAccess<Set<X>> access, final String attributeName, final Set<X> value, final AttributeType attributeType) {
         final AttributeDefinition setAttributeDefinition =
-                AttributeDefinitionBuilder.of(attributeName, LABEL, SetType.of(attributeType)).searchable(false).build();
-        test(access, value, SetType.class, setAttributeDefinition, attrDef -> {
-            final SetType receivedType = (SetType) attrDef.getAttributeType();
+                AttributeDefinitionBuilder.of(attributeName, LABEL, SetAttributeType.of(attributeType)).searchable(false).build();
+        test(access, value, SetAttributeType.class, setAttributeDefinition, attrDef -> {
+            final SetAttributeType receivedType = (SetAttributeType) attrDef.getAttributeType();
             assertThat(receivedType.getElementType()).isInstanceOf(attributeType.getClass());
         });
     }

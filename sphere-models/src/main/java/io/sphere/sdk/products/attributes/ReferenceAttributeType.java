@@ -8,11 +8,11 @@ import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.products.Product;
 import io.sphere.sdk.producttypes.ProductType;
 
-public class ReferenceType extends AttributeTypeBase {
+public class ReferenceAttributeType extends AttributeTypeBase {
 
     private final String referenceTypeId;
 
-    protected ReferenceType(final String referenceTypeId) {
+    protected ReferenceAttributeType(final String referenceTypeId) {
         this.referenceTypeId = referenceTypeId;
     }
 
@@ -21,32 +21,32 @@ public class ReferenceType extends AttributeTypeBase {
     }
 
     @JsonIgnore
-    public static ReferenceType of(final String referenceTypeId) {
-        return new ReferenceType(referenceTypeId);
+    public static ReferenceAttributeType of(final String referenceTypeId) {
+        return new ReferenceAttributeType(referenceTypeId);
     }
 
-    public static RichReferenceType<Product> ofProduct() {
+    public static RichReferenceAttributeType<Product> ofProduct() {
         return of("product", new TypeReference<Reference<Product>>() {
         });
     }
 
-    public static RichReferenceType<ProductType> ofProductType() {
+    public static RichReferenceAttributeType<ProductType> ofProductType() {
         return of("product-type", new TypeReference<Reference<ProductType>>() {
         });
     }
 
-    public static RichReferenceType<Channel> ofChannel() {
+    public static RichReferenceAttributeType<Channel> ofChannel() {
         return of("channel", new TypeReference<Reference<Channel>>() {
         });
     }
 
-    public static RichReferenceType<Category> ofCategory() {
+    public static RichReferenceAttributeType<Category> ofCategory() {
         return of("category", new TypeReference<Reference<Category>>() {
         });
     }
 
     @JsonIgnore
-    private static <T> RichReferenceType<T> of(final String referenceTypeId, final TypeReference<Reference<T>> typeReference) {
-        return RichReferenceType.of(referenceTypeId, typeReference);
+    private static <T> RichReferenceAttributeType<T> of(final String referenceTypeId, final TypeReference<Reference<T>> typeReference) {
+        return RichReferenceAttributeType.of(referenceTypeId, typeReference);
     }
 }

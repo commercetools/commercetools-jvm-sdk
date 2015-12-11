@@ -34,20 +34,20 @@ public interface AttributeAccess<T> {
     boolean canHandle(AttributeDefinition attributeDefinition);
 
     static AttributeAccess<Boolean> ofBoolean() {
-        return AttributeAccessImpl.ofPrimitive(booleanTypeReference(), BooleanType.class);
+        return AttributeAccessImpl.ofPrimitive(booleanTypeReference(), BooleanAttributeType.class);
     }
 
     static AttributeAccess<Set<Boolean>> ofBooleanSet() {
-        return AttributeAccessImpl.ofSet(BooleanType.class, new TypeReference<Set<Boolean>>() {
+        return AttributeAccessImpl.ofSet(BooleanAttributeType.class, new TypeReference<Set<Boolean>>() {
         });
     }
 
     static AttributeAccess<String> ofString() {
-        return AttributeAccessImpl.ofPrimitive(stringTypeReference(), StringType.class);
+        return AttributeAccessImpl.ofPrimitive(stringTypeReference(), StringAttributeType.class);
     }
 
     static AttributeAccess<Set<String>> ofStringSet() {
-        return AttributeAccessImpl.ofSet(StringType.class, new TypeReference<Set<String>>() {
+        return AttributeAccessImpl.ofSet(StringAttributeType.class, new TypeReference<Set<String>>() {
         });
     }
 
@@ -60,65 +60,65 @@ public interface AttributeAccess<T> {
     }
 
     static AttributeAccess<LocalizedString> ofLocalizedString() {
-        return AttributeAccessImpl.ofPrimitive(LocalizedString.typeReference(), LocalizedStringType.class);
+        return AttributeAccessImpl.ofPrimitive(LocalizedString.typeReference(), LocalizedStringAttributeType.class);
     }
 
     static AttributeAccess<Set<LocalizedString>> ofLocalizedStringSet() {
-        return AttributeAccessImpl.ofSet(LocalizedStringType.class, new TypeReference<Set<LocalizedString>>() {
+        return AttributeAccessImpl.ofSet(LocalizedStringAttributeType.class, new TypeReference<Set<LocalizedString>>() {
         });
     }
 
     static AttributeAccess<EnumValue> ofEnumValue() {
-        return AttributeAccessImpl.ofEnumLike(EnumValue.typeReference(), EnumType.class);
+        return AttributeAccessImpl.ofEnumLike(EnumValue.typeReference(), EnumAttributeType.class);
     }
 
     static AttributeAccess<Set<EnumValue>> ofEnumValueSet() {
-        return AttributeAccessImpl.ofEnumLikeSet(EnumType.class, new TypeReference<Set<EnumValue>>() {
+        return AttributeAccessImpl.ofEnumLikeSet(EnumAttributeType.class, new TypeReference<Set<EnumValue>>() {
         });
     }
 
     static AttributeAccess<LocalizedEnumValue> ofLocalizedEnumValue() {
-        return AttributeAccessImpl.ofEnumLike(LocalizedEnumValue.typeReference(), LocalizedEnumType.class);
+        return AttributeAccessImpl.ofEnumLike(LocalizedEnumValue.typeReference(), LocalizedEnumAttributeType.class);
     }
 
     static AttributeAccess<Set<LocalizedEnumValue>> ofLocalizedEnumValueSet() {
-        return AttributeAccessImpl.ofEnumLikeSet(LocalizedEnumType.class, new TypeReference<Set<LocalizedEnumValue>>() {
+        return AttributeAccessImpl.ofEnumLikeSet(LocalizedEnumAttributeType.class, new TypeReference<Set<LocalizedEnumValue>>() {
         });
     }
 
     static AttributeAccess<Double> ofDouble() {
-        return AttributeAccessImpl.ofPrimitive(doubleTypeReference(), NumberType.class);
+        return AttributeAccessImpl.ofPrimitive(doubleTypeReference(), NumberAttributeType.class);
     }
 
     static AttributeAccess<Set<Double>> ofDoubleSet() {
-        return AttributeAccessImpl.ofSet(NumberType.class, new TypeReference<Set<Double>>() {
+        return AttributeAccessImpl.ofSet(NumberAttributeType.class, new TypeReference<Set<Double>>() {
         });
     }
 
     static AttributeAccess<Integer> ofInteger() {
-        return AttributeAccessImpl.ofPrimitive(integerTypeReference(), NumberType.class);
+        return AttributeAccessImpl.ofPrimitive(integerTypeReference(), NumberAttributeType.class);
     }
 
     static AttributeAccess<Set<Integer>> ofIntegerSet() {
-        return AttributeAccessImpl.ofSet(NumberType.class, new TypeReference<Set<Integer>>() {
+        return AttributeAccessImpl.ofSet(NumberAttributeType.class, new TypeReference<Set<Integer>>() {
         });
     }
 
     static AttributeAccess<Long> ofLong() {
-        return AttributeAccessImpl.ofPrimitive(longTypeReference(), NumberType.class);
+        return AttributeAccessImpl.ofPrimitive(longTypeReference(), NumberAttributeType.class);
     }
 
     static AttributeAccess<Set<Long>> ofLongSet() {
-        return AttributeAccessImpl.ofSet(NumberType.class, new TypeReference<Set<Long>>() {
+        return AttributeAccessImpl.ofSet(NumberAttributeType.class, new TypeReference<Set<Long>>() {
         });
     }
 
     static AttributeAccess<MonetaryAmount> ofMoney() {
-        return AttributeAccessImpl.ofPrimitive(monetaryAmountTypeReference(), MoneyType.class);
+        return AttributeAccessImpl.ofPrimitive(monetaryAmountTypeReference(), MoneyAttributeType.class);
     }
 
     static AttributeAccess<Set<MonetaryAmount>> ofMoneySet() {
-        return AttributeAccessImpl.ofSet(MoneyType.class, new TypeReference<Set<MonetaryAmount>>() {
+        return AttributeAccessImpl.ofSet(MoneyAttributeType.class, new TypeReference<Set<MonetaryAmount>>() {
         });
     }
 
@@ -131,11 +131,11 @@ public interface AttributeAccess<T> {
     }
 
     static AttributeAccess<LocalDate> ofDate() {
-        return AttributeAccessImpl.ofPrimitive(localDateTypeReference(), DateType.class);
+        return AttributeAccessImpl.ofPrimitive(localDateTypeReference(), DateAttributeType.class);
     }
 
     static AttributeAccess<Set<LocalDate>> ofDateSet() {
-        return AttributeAccessImpl.ofSet(DateType.class, new TypeReference<Set<LocalDate>>() {
+        return AttributeAccessImpl.ofSet(DateAttributeType.class, new TypeReference<Set<LocalDate>>() {
         });
     }
 
@@ -148,20 +148,20 @@ public interface AttributeAccess<T> {
     }
 
     static AttributeAccess<LocalTime> ofTime() {
-        return AttributeAccessImpl.ofPrimitive(localTimeTypeReference(), TimeType.class);
+        return AttributeAccessImpl.ofPrimitive(localTimeTypeReference(), TimeAttributeType.class);
     }
 
     static AttributeAccess<Set<LocalTime>> ofTimeSet() {
-        return AttributeAccessImpl.ofSet(TimeType.class, new TypeReference<Set<LocalTime>>() {
+        return AttributeAccessImpl.ofSet(TimeAttributeType.class, new TypeReference<Set<LocalTime>>() {
         });
     }
 
     static AttributeAccess<ZonedDateTime> ofDateTime() {
-        return AttributeAccessImpl.ofPrimitive(zonedDateTimeTypeReference(), DateTimeType.class);
+        return AttributeAccessImpl.ofPrimitive(zonedDateTimeTypeReference(), DateTimeAttributeType.class);
     }
 
     static AttributeAccess<Set<ZonedDateTime>> ofDateTimeSet() {
-        return AttributeAccessImpl.ofSet(DateTimeType.class, new TypeReference<Set<ZonedDateTime>>() {
+        return AttributeAccessImpl.ofSet(DateTimeAttributeType.class, new TypeReference<Set<ZonedDateTime>>() {
         });
     }
 
@@ -174,38 +174,38 @@ public interface AttributeAccess<T> {
     }
 
     static AttributeAccess<Reference<Product>> ofProductReference() {
-        return AttributeAccessImpl.ofReferenceType(ReferenceType.ofProduct());
+        return AttributeAccessImpl.ofReferenceType(ReferenceAttributeType.ofProduct());
     }
 
     static AttributeAccess<Set<Reference<Product>>> ofProductReferenceSet() {
-        return AttributeAccessImpl.ofSet(ReferenceType.ofProduct(), new TypeReference<Set<Reference<Product>>>() {
+        return AttributeAccessImpl.ofSet(ReferenceAttributeType.ofProduct(), new TypeReference<Set<Reference<Product>>>() {
         });
     }
 
     static AttributeAccess<Reference<ProductType>> ofProductTypeReference() {
-        return AttributeAccessImpl.ofReferenceType(ReferenceType.ofProductType());
+        return AttributeAccessImpl.ofReferenceType(ReferenceAttributeType.ofProductType());
     }
 
     static AttributeAccess<Set<Reference<ProductType>>> ofProductTypeReferenceSet() {
-        return AttributeAccessImpl.ofSet(ReferenceType.ofProductType(), new TypeReference<Set<Reference<ProductType>>>() {
+        return AttributeAccessImpl.ofSet(ReferenceAttributeType.ofProductType(), new TypeReference<Set<Reference<ProductType>>>() {
         });
     }
 
     static AttributeAccess<Reference<Category>> ofCategoryReference() {
-        return AttributeAccessImpl.ofReferenceType(ReferenceType.ofCategory());
+        return AttributeAccessImpl.ofReferenceType(ReferenceAttributeType.ofCategory());
     }
 
     static AttributeAccess<Set<Reference<Category>>> ofCategoryReferenceSet() {
-        return AttributeAccessImpl.ofSet(ReferenceType.ofCategory(), new TypeReference<Set<Reference<Category>>>() {
+        return AttributeAccessImpl.ofSet(ReferenceAttributeType.ofCategory(), new TypeReference<Set<Reference<Category>>>() {
         });
     }
 
     static AttributeAccess<Reference<Channel>> ofChannelReference() {
-        return AttributeAccessImpl.ofReferenceType(ReferenceType.ofChannel());
+        return AttributeAccessImpl.ofReferenceType(ReferenceAttributeType.ofChannel());
     }
 
     static AttributeAccess<Set<Reference<Channel>>> ofChannelReferenceSet() {
-        return AttributeAccessImpl.ofSet(ReferenceType.ofChannel(), new TypeReference<Set<Reference<Channel>>>() {
+        return AttributeAccessImpl.ofSet(ReferenceAttributeType.ofChannel(), new TypeReference<Set<Reference<Channel>>>() {
         });
     }
 
@@ -230,11 +230,11 @@ public interface AttributeAccess<T> {
             public String toString() {
                 return "TypeReference<AttributeContainer>";
             }
-        }, attributeDefinition -> attributeDefinition.getAttributeType() instanceof NestedType);
+        }, attributeDefinition -> attributeDefinition.getAttributeType() instanceof NestedAttributeType);
     }
 
     static AttributeAccess<Set<AttributeContainer>> ofNestedSet() {
-        return AttributeAccessImpl.ofSet(NestedType.class, new TypeReference<Set<AttributeContainer>>() {
+        return AttributeAccessImpl.ofSet(NestedAttributeType.class, new TypeReference<Set<AttributeContainer>>() {
             @Override
             public String toString() {
                 return "TypeReference<Set<AttributeContainer>>";
