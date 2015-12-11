@@ -27,7 +27,7 @@ public class ProductAttributeSortSearchModel extends SortableSearchModel<Product
         return enumSortSearchModel(attributeName);
     }
 
-    public LocalizedEnumSortSearchModel<ProductProjection, MultiValueSortSearchModel<ProductProjection>> ofLocalizableEnum(final String attributeName) {
+    public LocalizedEnumSortSearchModel<ProductProjection, MultiValueSortSearchModel<ProductProjection>> ofLocalizedEnum(final String attributeName) {
         return localizedEnumSortSearchModel(attributeName);
     }
 
@@ -67,8 +67,8 @@ public class ProductAttributeSortSearchModel extends SortableSearchModel<Product
         return ofEnum(attributeName);
     }
 
-    public LocalizedEnumSortSearchModel<ProductProjection, MultiValueSortSearchModel<ProductProjection>> ofLocalizableEnumSet(final String attributeName) {
-        return ofLocalizableEnum(attributeName);
+    public LocalizedEnumSortSearchModel<ProductProjection, MultiValueSortSearchModel<ProductProjection>> ofLocalizedEnumSet(final String attributeName) {
+        return ofLocalizedEnum(attributeName);
     }
 
     public MultiValueSortSearchModel<ProductProjection> ofNumberSet(final String attributeName) {
@@ -89,5 +89,21 @@ public class ProductAttributeSortSearchModel extends SortableSearchModel<Product
 
     public MultiValueSortSearchModel<ProductProjection> ofDateTimeSet(final String attributeName) {
         return ofDateTime(attributeName);
+    }
+
+    /**
+     * @deprecated use {@link #ofLocalizedEnum(String)} instead
+     */
+    @Deprecated
+    public LocalizedEnumSortSearchModel<ProductProjection, MultiValueSortSearchModel<ProductProjection>> ofLocalizableEnum(final String attributeName) {
+        return localizedEnumSortSearchModel(attributeName);
+    }
+
+    /**
+     * @deprecated use {@link #ofLocalizedEnumSet(String)} instead
+     */
+    @Deprecated
+    public LocalizedEnumSortSearchModel<ProductProjection, MultiValueSortSearchModel<ProductProjection>> ofLocalizableEnumSet(final String attributeName) {
+        return ofLocalizableEnum(attributeName);
     }
 }

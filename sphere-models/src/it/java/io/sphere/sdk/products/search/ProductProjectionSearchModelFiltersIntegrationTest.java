@@ -46,13 +46,13 @@ public class ProductProjectionSearchModelFiltersIntegrationTest extends ProductP
 
     @Test
     public void onLocEnumKeyAttributes() throws Exception {
-        testProductIds(FILTER.allVariants().attribute().ofLocalizableEnum(ATTR_NAME_LOC_ENUM).key().by(LOC_ENUM_TWO.getKey()),
+        testProductIds(FILTER.allVariants().attribute().ofLocalizedEnum(ATTR_NAME_LOC_ENUM).key().by(LOC_ENUM_TWO.getKey()),
                 ids -> assertThat(ids).containsOnly(product1.getId()));
     }
 
     @Test
     public void onLocEnumLabelAttributes() throws Exception {
-        testProductIds(FILTER.allVariants().attribute().ofLocalizableEnum(ATTR_NAME_LOC_ENUM).label().locale(GERMAN).by(LOC_ENUM_TWO.getLabel().get(GERMAN)),
+        testProductIds(FILTER.allVariants().attribute().ofLocalizedEnum(ATTR_NAME_LOC_ENUM).label().locale(GERMAN).by(LOC_ENUM_TWO.getLabel().get(GERMAN)),
                 ids -> assertThat(ids).containsOnly(product1.getId()));
     }
 
@@ -160,13 +160,13 @@ public class ProductProjectionSearchModelFiltersIntegrationTest extends ProductP
 
     @Test
     public void onLocEnumKeySetAttributes() throws Exception {
-        testProductIds(FILTER.allVariants().attribute().ofLocalizableEnumSet(ATTR_NAME_LOC_ENUM_SET).key().by(LOC_ENUM_THREE.getKey()),
+        testProductIds(FILTER.allVariants().attribute().ofLocalizedEnumSet(ATTR_NAME_LOC_ENUM_SET).key().by(LOC_ENUM_THREE.getKey()),
                 ids -> assertThat(ids).containsOnly(product1.getId()));
     }
 
     @Test
     public void onLocEnumLabelSetAttributes() throws Exception {
-        testProductIds(FILTER.allVariants().attribute().ofLocalizableEnumSet(ATTR_NAME_LOC_ENUM_SET).label().locale(GERMAN).by(LOC_ENUM_THREE.getLabel().get(GERMAN)),
+        testProductIds(FILTER.allVariants().attribute().ofLocalizedEnumSet(ATTR_NAME_LOC_ENUM_SET).label().locale(GERMAN).by(LOC_ENUM_THREE.getLabel().get(GERMAN)),
                 ids -> assertThat(ids).containsOnly(product1.getId()));
     }
 

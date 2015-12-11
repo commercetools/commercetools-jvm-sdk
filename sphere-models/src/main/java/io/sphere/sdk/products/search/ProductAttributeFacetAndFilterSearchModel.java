@@ -4,10 +4,6 @@ import io.sphere.sdk.products.ProductProjection;
 import io.sphere.sdk.search.model.*;
 
 import javax.annotation.Nullable;
-import java.math.BigDecimal;
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.time.ZonedDateTime;
 
 public class ProductAttributeFacetAndFilterSearchModel extends SearchModelImpl<ProductProjection> {
 
@@ -31,7 +27,7 @@ public class ProductAttributeFacetAndFilterSearchModel extends SearchModelImpl<P
         return enumFacetAndFilterSearchModel(attributeName);
     }
 
-    public LocalizedEnumFacetAndFilterSearchModel<ProductProjection> ofLocalizableEnum(final String attributeName) {
+    public LocalizedEnumFacetAndFilterSearchModel<ProductProjection> ofLocalizedEnum(final String attributeName) {
         return localizedEnumFacetAndFilterSearchModel(attributeName);
     }
 
@@ -75,8 +71,8 @@ public class ProductAttributeFacetAndFilterSearchModel extends SearchModelImpl<P
         return ofEnum(attributeName);
     }
 
-    public LocalizedEnumFacetAndFilterSearchModel<ProductProjection> ofLocalizableEnumSet(final String attributeName) {
-        return ofLocalizableEnum(attributeName);
+    public LocalizedEnumFacetAndFilterSearchModel<ProductProjection> ofLocalizedEnumSet(final String attributeName) {
+        return ofLocalizedEnum(attributeName);
     }
 
     public RangeTermFacetAndFilterSearchModel<ProductProjection> ofNumberSet(final String attributeName) {
@@ -101,5 +97,21 @@ public class ProductAttributeFacetAndFilterSearchModel extends SearchModelImpl<P
 
     public ReferenceFacetAndFilterSearchModel<ProductProjection> ofReferenceSet(final String attributeName) {
         return ofReference(attributeName);
+    }
+
+    /**
+     * @deprecated use {@link #ofLocalizedEnum(String)} instead
+     */
+    @Deprecated
+    public LocalizedEnumFacetAndFilterSearchModel<ProductProjection> ofLocalizableEnum(final String attributeName) {
+        return localizedEnumFacetAndFilterSearchModel(attributeName);
+    }
+
+    /**
+     * @deprecated use {@link #ofLocalizedEnumSet(String)} instead
+     */
+    @Deprecated
+    public LocalizedEnumFacetAndFilterSearchModel<ProductProjection> ofLocalizableEnumSet(final String attributeName) {
+        return ofLocalizableEnum(attributeName);
     }
 }

@@ -58,7 +58,7 @@ public class ProductProjectionSearchModelFacetsIntegrationTest extends ProductPr
 
     @Test
     public void onLocEnumKeyAttributes() throws Exception {
-        testTermStats(FACET.allVariants().attribute().ofLocalizableEnum(ATTR_NAME_LOC_ENUM).key().allTerms(),
+        testTermStats(FACET.allVariants().attribute().ofLocalizedEnum(ATTR_NAME_LOC_ENUM).key().allTerms(),
                 termStats -> assertThat(termStats).containsOnly(
                         TermStats.of(LOC_ENUM_TWO.getKey(), 1L),
                         TermStats.of(LOC_ENUM_THREE.getKey(), 1L)));
@@ -66,7 +66,7 @@ public class ProductProjectionSearchModelFacetsIntegrationTest extends ProductPr
 
     @Test
     public void onLocEnumLabelAttributes() throws Exception {
-        testTermStats(FACET.allVariants().attribute().ofLocalizableEnum(ATTR_NAME_LOC_ENUM).label().locale(GERMAN).allTerms(),
+        testTermStats(FACET.allVariants().attribute().ofLocalizedEnum(ATTR_NAME_LOC_ENUM).label().locale(GERMAN).allTerms(),
                 termStats -> assertThat(termStats).containsOnly(
                         TermStats.of(LOC_ENUM_TWO.getLabel().get(GERMAN), 1L),
                         TermStats.of(LOC_ENUM_THREE.getLabel().get(GERMAN), 1L)));
@@ -240,7 +240,7 @@ public class ProductProjectionSearchModelFacetsIntegrationTest extends ProductPr
 
     @Test
     public void onLocEnumKeySetAttributes() throws Exception {
-        testTermStats(FACET.allVariants().attribute().ofLocalizableEnumSet(ATTR_NAME_LOC_ENUM_SET).key().allTerms(),
+        testTermStats(FACET.allVariants().attribute().ofLocalizedEnumSet(ATTR_NAME_LOC_ENUM_SET).key().allTerms(),
                 termStats -> assertThat(termStats).containsExactly(
                         TermStats.of(LOC_ENUM_TWO.getKey(), 2L),
                         TermStats.of(LOC_ENUM_THREE.getKey(), 1L)));
@@ -248,7 +248,7 @@ public class ProductProjectionSearchModelFacetsIntegrationTest extends ProductPr
 
     @Test
     public void onLocEnumLabelSetAttributes() throws Exception {
-        testTermStats(FACET.allVariants().attribute().ofLocalizableEnumSet(ATTR_NAME_LOC_ENUM_SET).label().locale(GERMAN).allTerms(),
+        testTermStats(FACET.allVariants().attribute().ofLocalizedEnumSet(ATTR_NAME_LOC_ENUM_SET).label().locale(GERMAN).allTerms(),
                 termStats -> assertThat(termStats).containsExactly(
                         TermStats.of(LOC_ENUM_TWO.getLabel().get(GERMAN), 2L),
                         TermStats.of(LOC_ENUM_THREE.getLabel().get(GERMAN), 1L)));

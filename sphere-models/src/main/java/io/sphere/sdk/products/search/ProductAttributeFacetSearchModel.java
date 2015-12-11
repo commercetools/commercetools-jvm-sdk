@@ -31,7 +31,7 @@ public class ProductAttributeFacetSearchModel extends SearchModelImpl<ProductPro
         return enumFacetSearchModel(attributeName);
     }
 
-    public LocalizedEnumFacetSearchModel<ProductProjection> ofLocalizableEnum(final String attributeName) {
+    public LocalizedEnumFacetSearchModel<ProductProjection> ofLocalizedEnum(final String attributeName) {
         return localizedEnumFacetSearchModel(attributeName);
     }
 
@@ -75,8 +75,8 @@ public class ProductAttributeFacetSearchModel extends SearchModelImpl<ProductPro
         return ofEnum(attributeName);
     }
 
-    public LocalizedEnumFacetSearchModel<ProductProjection> ofLocalizableEnumSet(final String attributeName) {
-        return ofLocalizableEnum(attributeName);
+    public LocalizedEnumFacetSearchModel<ProductProjection> ofLocalizedEnumSet(final String attributeName) {
+        return ofLocalizedEnum(attributeName);
     }
 
     public RangeTermFacetSearchModel<ProductProjection, BigDecimal> ofNumberSet(final String attributeName) {
@@ -101,5 +101,21 @@ public class ProductAttributeFacetSearchModel extends SearchModelImpl<ProductPro
 
     public ReferenceFacetSearchModel<ProductProjection> ofReferenceSet(final String attributeName) {
         return ofReference(attributeName);
+    }
+
+    /**
+     * @deprecated use {@link ProductAttributeFacetSearchModel#ofLocalizedEnum(String)}
+     */
+    @Deprecated
+    public LocalizedEnumFacetSearchModel<ProductProjection> ofLocalizableEnum(final String attributeName) {
+        return localizedEnumFacetSearchModel(attributeName);
+    }
+
+    /**
+     * @deprecated use {@link #ofLocalizedEnumSet(String)} instead
+     */
+    @Deprecated
+    public LocalizedEnumFacetSearchModel<ProductProjection> ofLocalizableEnumSet(final String attributeName) {
+        return ofLocalizableEnum(attributeName);
     }
 }
