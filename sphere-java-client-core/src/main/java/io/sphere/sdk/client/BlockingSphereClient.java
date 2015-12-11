@@ -42,7 +42,7 @@ public interface BlockingSphereClient extends SphereClient {
      * Creates a blocking client with a configured default timeout for blocking requests.
      * The asynchronous calls won't have a timeout by default.
      * @param delegate underlying sphere client which may be initialized with the {@link SphereClientFactory}.
-     * @param defaultTimeout the default maximum time to wait
+     * @param defaultTimeout the default maximum time to wait (to block the thread) which should be greater than the timeout of the underlying HTTP client
      * @param unit the time unit of the defaultTimeout argument
      * @return wrapped client which can perform blocking calls.
      */
