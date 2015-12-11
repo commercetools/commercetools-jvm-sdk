@@ -15,7 +15,9 @@ import static io.sphere.sdk.utils.CompletableFutureUtils.successful;
  * A factory to instantiate SPHERE.IO Java clients which use {@link CompletionStage} as future implementation.
 
  */
-public class TestDoubleSphereClientFactory extends Base {
+public final class TestDoubleSphereClientFactory extends Base {
+    private TestDoubleSphereClientFactory() {
+    }
 
     /**
      * Creates a test double for a SPHERE.IO client which enables to fake http responses from SPHERE.IO.
