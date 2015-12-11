@@ -64,7 +64,7 @@ public class ProductProjectionSearchModelFacetedSearchIntegrationTest extends Pr
 
     @Test
     public void facetedSearchOnLocEnumKeyAttributes() throws Exception {
-        testResultWithTerms(FACETED_SEARCH.allVariants().attribute().ofLocalizableEnum(ATTR_NAME_LOC_ENUM).key().by(LOC_ENUM_TWO.getKey()),
+        testResultWithTerms(FACETED_SEARCH.allVariants().attribute().ofLocalizedEnum(ATTR_NAME_LOC_ENUM).key().by(LOC_ENUM_TWO.getKey()),
                 ids -> assertThat(ids).containsOnly(product1.getId()),
                 termStats -> assertThat(termStats).containsOnly(
                         TermStats.of(LOC_ENUM_TWO.getKey(), 1L),
@@ -73,7 +73,7 @@ public class ProductProjectionSearchModelFacetedSearchIntegrationTest extends Pr
 
     @Test
     public void facetedSearchOnLocEnumLabelAttributes() throws Exception {
-        testResultWithTerms(FACETED_SEARCH.allVariants().attribute().ofLocalizableEnum(ATTR_NAME_LOC_ENUM).label().locale(GERMAN).by(LOC_ENUM_TWO.getLabel().get(GERMAN)),
+        testResultWithTerms(FACETED_SEARCH.allVariants().attribute().ofLocalizedEnum(ATTR_NAME_LOC_ENUM).label().locale(GERMAN).by(LOC_ENUM_TWO.getLabel().get(GERMAN)),
                 ids -> assertThat(ids).containsOnly(product1.getId()),
                 termStats -> assertThat(termStats).containsOnly(
                         TermStats.of(LOC_ENUM_TWO.getLabel().get(GERMAN), 1L),
@@ -255,7 +255,7 @@ public class ProductProjectionSearchModelFacetedSearchIntegrationTest extends Pr
 
     @Test
     public void facetedSearchOnLocEnumKeySetAttributes() throws Exception {
-        testResultWithTerms(FACETED_SEARCH.allVariants().attribute().ofLocalizableEnumSet(ATTR_NAME_LOC_ENUM_SET).key().by(LOC_ENUM_THREE.getKey()),
+        testResultWithTerms(FACETED_SEARCH.allVariants().attribute().ofLocalizedEnumSet(ATTR_NAME_LOC_ENUM_SET).key().by(LOC_ENUM_THREE.getKey()),
                 ids -> assertThat(ids).containsOnly(product1.getId()),
                 termStats -> assertThat(termStats).containsExactly(
                         TermStats.of(LOC_ENUM_TWO.getKey(), 2L),
@@ -264,7 +264,7 @@ public class ProductProjectionSearchModelFacetedSearchIntegrationTest extends Pr
 
     @Test
     public void facetedSearchOnLocEnumLabelSetAttributes() throws Exception {
-        testResultWithTerms(FACETED_SEARCH.allVariants().attribute().ofLocalizableEnumSet(ATTR_NAME_LOC_ENUM_SET).label().locale(GERMAN).by(LOC_ENUM_THREE.getLabel().get(GERMAN)),
+        testResultWithTerms(FACETED_SEARCH.allVariants().attribute().ofLocalizedEnumSet(ATTR_NAME_LOC_ENUM_SET).label().locale(GERMAN).by(LOC_ENUM_THREE.getLabel().get(GERMAN)),
                 ids -> assertThat(ids).containsOnly(product1.getId()),
                 termStats -> assertThat(termStats).containsExactly(
                         TermStats.of(LOC_ENUM_TWO.getLabel().get(GERMAN), 2L),

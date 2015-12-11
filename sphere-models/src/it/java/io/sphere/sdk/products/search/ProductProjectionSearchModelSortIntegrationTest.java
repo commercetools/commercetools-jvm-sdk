@@ -46,13 +46,13 @@ public class ProductProjectionSearchModelSortIntegrationTest extends ProductProj
 
     @Test
     public void onLocEnumKeyAttributes() throws Exception {
-        testProductIds(SORT.allVariants().attribute().ofLocalizableEnum(ATTR_NAME_LOC_ENUM).key().byAsc(),
+        testProductIds(SORT.allVariants().attribute().ofLocalizedEnum(ATTR_NAME_LOC_ENUM).key().byAsc(),
                 ids -> assertThat(ids).containsExactly(product2.getId(), product1.getId()));
     }
 
     @Test
     public void onLocEnumLabelAttributes() throws Exception {
-        testProductIds(SORT.allVariants().attribute().ofLocalizableEnum(ATTR_NAME_LOC_ENUM).label().locale(GERMAN).byAsc(),
+        testProductIds(SORT.allVariants().attribute().ofLocalizedEnum(ATTR_NAME_LOC_ENUM).label().locale(GERMAN).byAsc(),
                 ids -> assertThat(ids).containsExactly(product2.getId(), product1.getId()));
     }
 
@@ -124,13 +124,13 @@ public class ProductProjectionSearchModelSortIntegrationTest extends ProductProj
 
     @Test
     public void onLocEnumKeySetAttributes() throws Exception {
-        testProductIds(SORT.allVariants().attribute().ofLocalizableEnumSet(ATTR_NAME_LOC_ENUM_SET).key().byAsc(),
+        testProductIds(SORT.allVariants().attribute().ofLocalizedEnumSet(ATTR_NAME_LOC_ENUM_SET).key().byAsc(),
                 ids -> assertThat(ids).containsExactly(product1.getId(), product2.getId()));
     }
 
     @Test
     public void onLocEnumLabelSetAttributes() throws Exception {
-        testProductIds(SORT.allVariants().attribute().ofLocalizableEnumSet(ATTR_NAME_LOC_ENUM_SET).label().locale(GERMAN).byAsc(),
+        testProductIds(SORT.allVariants().attribute().ofLocalizedEnumSet(ATTR_NAME_LOC_ENUM_SET).label().locale(GERMAN).byAsc(),
                 ids -> assertThat(ids).containsExactly(product1.getId(), product2.getId()));
     }
 

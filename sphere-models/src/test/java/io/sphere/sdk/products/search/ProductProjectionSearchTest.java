@@ -170,17 +170,17 @@ public class ProductProjectionSearchTest {
     @Test
     public void canAccessLocEnumKeyCustomAttributes() throws Exception {
         final String attrName = "color";
-        assertThat(FACET_ATTR.ofLocalizableEnum(attrName).key().allTerms().expression()).isEqualTo("variants.attributes.color.key");
-        assertThat(FILTER_ATTR.ofLocalizableEnum(attrName).key().by("ROT")).extracting(expression()).containsExactly("variants.attributes.color.key:\"ROT\"");
-        assertThat(SORT_ATTR.ofLocalizableEnum(attrName).key().byDescWithMin().expression()).isEqualTo("variants.attributes.color.key desc.min");
+        assertThat(FACET_ATTR.ofLocalizedEnum(attrName).key().allTerms().expression()).isEqualTo("variants.attributes.color.key");
+        assertThat(FILTER_ATTR.ofLocalizedEnum(attrName).key().by("ROT")).extracting(expression()).containsExactly("variants.attributes.color.key:\"ROT\"");
+        assertThat(SORT_ATTR.ofLocalizedEnum(attrName).key().byDescWithMin().expression()).isEqualTo("variants.attributes.color.key desc.min");
     }
 
     @Test
     public void canAccessLocEnumLabelCustomAttributes() throws Exception {
         final String attrName = "color";
-        assertThat(FACET_ATTR.ofLocalizableEnum(attrName).label().locale(ENGLISH).allTerms().expression()).isEqualTo("variants.attributes.color.label.en");
-        assertThat(FILTER_ATTR.ofLocalizableEnum(attrName).label().locale(ENGLISH).by("red")).extracting(expression()).containsExactly("variants.attributes.color.label.en:\"red\"");
-        assertThat(SORT_ATTR.ofLocalizableEnum(attrName).label().locale(ENGLISH).byAscWithMax().expression()).isEqualTo("variants.attributes.color.label.en asc.max");
+        assertThat(FACET_ATTR.ofLocalizedEnum(attrName).label().locale(ENGLISH).allTerms().expression()).isEqualTo("variants.attributes.color.label.en");
+        assertThat(FILTER_ATTR.ofLocalizedEnum(attrName).label().locale(ENGLISH).by("red")).extracting(expression()).containsExactly("variants.attributes.color.label.en:\"red\"");
+        assertThat(SORT_ATTR.ofLocalizedEnum(attrName).label().locale(ENGLISH).byAscWithMax().expression()).isEqualTo("variants.attributes.color.label.en asc.max");
     }
 
     @Test
