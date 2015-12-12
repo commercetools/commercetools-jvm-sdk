@@ -107,7 +107,7 @@ var activeTableTab = "activeTableTab";
 <pre>public interface <span class="typeNameLabel">TypeCreateCommand</span>
 extends <a href="../../../../../io/sphere/sdk/commands/CreateCommand.html" title="interface in io.sphere.sdk.commands">CreateCommand</a>&lt;<a href="../../../../../io/sphere/sdk/types/Type.html" title="interface in io.sphere.sdk.types">Type</a>&gt;, <a href="../../../../../io/sphere/sdk/expansion/MetaModelExpansionDsl.html" title="interface in io.sphere.sdk.expansion">MetaModelExpansionDsl</a>&lt;<a href="../../../../../io/sphere/sdk/types/Type.html" title="interface in io.sphere.sdk.types">Type</a>,<a href="../../../../../io/sphere/sdk/types/commands/TypeCreateCommand.html" title="interface in io.sphere.sdk.types.commands">TypeCreateCommand</a>,<a href="../../../../../io/sphere/sdk/types/expansion/TypeExpansionModel.html" title="class in io.sphere.sdk.types.expansion">TypeExpansionModel</a>&lt;<a href="../../../../../io/sphere/sdk/types/Type.html" title="interface in io.sphere.sdk.types">Type</a>&gt;&gt;</pre>
 <div class="block"><div id="io-sphere-sdk-types-commands-TypeCreateCommandTest-execution--%s" class=code-example><pre><code class='java'>final FieldDefinition stringFieldDefinition =
-        FieldDefinition.of(StringType.of(), "string-field-name", en("label"), false, TextInputHint.SINGLE_LINE);
+        FieldDefinition.of(StringFieldType.of(), "string-field-name", en("label"), false, TextInputHint.SINGLE_LINE);
 final String typeKey = "type-key";
 final TypeDraft typeDraft = TypeDraftBuilder.of(typeKey, en("name of the custom type"), singleton(Category.referenceTypeId()))
         .description(en("description"))

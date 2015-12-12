@@ -48,7 +48,7 @@ var activeTableTab = "activeTableTab";
 </div>
 <div class="subNav">
 <ul class="navList">
-<li><a href="../../../../io/sphere/sdk/types/BooleanType.html" title="class in io.sphere.sdk.types"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
+<li><a href="../../../../io/sphere/sdk/types/BooleanFieldType.html" title="class in io.sphere.sdk.types"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
 <li><a href="../../../../io/sphere/sdk/types/CustomDraft.html" title="interface in io.sphere.sdk.types"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">
@@ -172,14 +172,14 @@ import static io.sphere.sdk.test.SphereTestUtils.en;
         final LocalizedString label = en("state of the category concerning to show it publicly");
         final String fieldName = "state";
         return FieldDefinition
-                .of(EnumType.of(values), fieldName, label, required, TextInputHint.SINGLE_LINE);
+                .of(EnumFieldType.of(values), fieldName, label, required, TextInputHint.SINGLE_LINE);
     }
 
     private static FieldDefinition imageUrlFieldDefinition() {
         final LocalizedString imageUrlLabel =
                 en("absolute url to an image to display for the category");
         return FieldDefinition
-                .of(StringType.of(), "imageUrl", imageUrlLabel, false, TextInputHint.SINGLE_LINE);
+                .of(StringFieldType.of(), "imageUrl", imageUrlLabel, false, TextInputHint.SINGLE_LINE);
     }
 
     private static FieldDefinition relatedCategoriesFieldDefinition() {
@@ -187,7 +187,7 @@ import static io.sphere.sdk.test.SphereTestUtils.en;
                 en("categories to suggest products similar to the current category");
         //referenceTypeId is required to refere to categories
         final String referenceTypeId = Category.referenceTypeId();
-        final SetType setType = SetType.of(ReferenceType.of(referenceTypeId));
+        final SetFieldType setType = SetFieldType.of(ReferenceFieldType.of(referenceTypeId));
         return FieldDefinition
                 .of(setType, "relatedCategories", relatedCategoriesLabel,
                         false, TextInputHint.SINGLE_LINE);
@@ -443,7 +443,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 </div>
 <div class="subNav">
 <ul class="navList">
-<li><a href="../../../../io/sphere/sdk/types/BooleanType.html" title="class in io.sphere.sdk.types"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
+<li><a href="../../../../io/sphere/sdk/types/BooleanFieldType.html" title="class in io.sphere.sdk.types"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
 <li><a href="../../../../io/sphere/sdk/types/CustomDraft.html" title="interface in io.sphere.sdk.types"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">

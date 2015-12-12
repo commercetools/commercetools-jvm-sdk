@@ -124,7 +124,7 @@ var activeTableTab = "activeTableTab";
 <br>
 <pre>public class <span class="typeNameLabel">AddEnumValue</span>
 extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html" title="class in io.sphere.sdk.commands">UpdateActionImpl</a>&lt;<a href="../../../../../../io/sphere/sdk/types/Type.html" title="interface in io.sphere.sdk.types">Type</a>&gt;</pre>
-<div class="block">Adds an a new <a href="../../../../../../io/sphere/sdk/models/EnumValue.html" title="class in io.sphere.sdk.models"><code>EnumValue</code></a> value to an <a href="../../../../../../io/sphere/sdk/types/EnumType.html" title="class in io.sphere.sdk.types"><code>EnumType</code></a> field.
+<div class="block">Adds an a new <a href="../../../../../../io/sphere/sdk/models/EnumValue.html" title="class in io.sphere.sdk.models"><code>EnumValue</code></a> value to an <a href="../../../../../../io/sphere/sdk/types/EnumFieldType.html" title="class in io.sphere.sdk.types"><code>EnumFieldType</code></a> field.
 
  <p>See also <a href="../TypeUpdateCommand.html">TypeUpdateCommand</a>.<p>
 
@@ -133,8 +133,8 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html"
     final EnumValue newEnumValue = EnumValue.of("key-new", "label new");
     final Type updatedType = execute(TypeUpdateCommand.of(type, AddEnumValue.of(name, newEnumValue)));
     assertThat(updatedType.getFieldDefinitionByName(name).getType())
-            .isInstanceOf(EnumType.class)
-            .matches(fieldType -&gt; ((EnumType) fieldType).getValues().contains(newEnumValue), "contains the new enum value");
+            .isInstanceOf(EnumFieldType.class)
+            .matches(fieldType -&gt; ((EnumFieldType) fieldType).getValues().contains(newEnumValue), "contains the new enum value");
     return updatedType;
 });
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/types/commands/TypeUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>

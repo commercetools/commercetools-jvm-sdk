@@ -138,7 +138,7 @@ extends java.lang.Object</pre>
 
 <p>The code for the creation of the book <a href="../../../../io/sphere/sdk/producttypes/ProductType.html" title="interface in io.sphere.sdk.producttypes"><code>ProductType</code></a>:</p>
  <div id="io-sphere-sdk-attributestutorial-ProductTypeCreationDemoTest-createBookProductType--%s" class=code-example><pre><code class='java'>final AttributeDefinition isbn = AttributeDefinitionBuilder
-        .of(ISBN_ATTR_NAME, en("ISBN"), StringType.of())
+        .of(ISBN_ATTR_NAME, en("ISBN"), StringAttributeType.of())
         .build();
 
 final ProductTypeDraft productTypeDraft = ProductTypeDraft.of(randomKey(), BOOK_PRODUCT_TYPE_NAME, "books", asList(isbn));
@@ -151,7 +151,7 @@ final ProductType productType = client().executeBlocking(ProductTypeCreateComman
 final LocalizedEnumValue red = LocalizedEnumValue.of("red",
         LocalizedString.of(ENGLISH, "red").plus(GERMAN, "rot"));
 final AttributeDefinition color = AttributeDefinitionBuilder
-        .of(COLOR_ATTR_NAME, en("color"), LocalizedEnumType.of(red, green))
+        .of(COLOR_ATTR_NAME, en("color"), LocalizedEnumAttributeType.of(red, green))
         .required(true)
         .build();
 
@@ -159,7 +159,7 @@ final EnumValue s = EnumValue.of("S", "S");
 final EnumValue m = EnumValue.of("M", "M");
 final EnumValue x = EnumValue.of("X", "X");
 final AttributeDefinition size = AttributeDefinitionBuilder
-        .of(SIZE_ATTR_NAME, en("size"), EnumType.of(s, m, x))
+        .of(SIZE_ATTR_NAME, en("size"), EnumAttributeType.of(s, m, x))
         .required(true)
         .build();
 
@@ -171,21 +171,21 @@ final LocalizedEnumValue tumbleDrying = LocalizedEnumValue.of("tumbleDrying",
         LocalizedString.of(ENGLISH, "tumble drying").plus(GERMAN, "Trommeltrocknen"));
 final LocalizedEnumValue noTumbleDrying = LocalizedEnumValue.of("noTumbleDrying",
         LocalizedString.of(ENGLISH, "no tumble drying").plus(GERMAN, "Nicht im Trommeltrockner trocknen"));
-final SetType laundryLabelType = SetType.of(LocalizedEnumType.of(cold, hot, tumbleDrying, noTumbleDrying));
+final SetAttributeType laundryLabelType = SetAttributeType.of(LocalizedEnumAttributeType.of(cold, hot, tumbleDrying, noTumbleDrying));
 final AttributeDefinition laundrySymbols = AttributeDefinitionBuilder
         .of(LAUNDRY_SYMBOLS_ATTR_NAME, en("washing labels"), laundryLabelType)
         .build();
 
 final AttributeDefinition matchingProducts = AttributeDefinitionBuilder
-        .of(MATCHING_PRODUCTS_ATTR_NAME, en("matching products"), SetType.of(ReferenceType.ofProduct()))
+        .of(MATCHING_PRODUCTS_ATTR_NAME, en("matching products"), SetAttributeType.of(ReferenceAttributeType.ofProduct()))
         .build();
 
 final AttributeDefinition rrp = AttributeDefinitionBuilder
-        .of(RRP_ATTR_NAME, en("recommended retail price"), MoneyType.of())
+        .of(RRP_ATTR_NAME, en("recommended retail price"), MoneyAttributeType.of())
         .build();
 
 final AttributeDefinition availableSince = AttributeDefinitionBuilder
-        .of(AVAILABLE_SINCE_ATTR_NAME, en("available since"), DateType.of())
+        .of(AVAILABLE_SINCE_ATTR_NAME, en("available since"), DateAttributeType.of())
         .build();
 
 
@@ -763,33 +763,33 @@ import static java.util.stream.Collectors.toList;
         return ProductTypeDraft.of(randomKey(), "NutrientInformation", "NutrientInformation",
                 asList(
                         AttributeDefinitionBuilder.of(NutrientInfo.quantityContainedUOM.getName(),
-                                en(NutrientInfo.quantityContainedUOM.getName()), StringType.of()).build(),
+                                en(NutrientInfo.quantityContainedUOM.getName()), StringAttributeType.of()).build(),
                         AttributeDefinitionBuilder.of(NutrientInfo.quantityContained.getName(),
-                                en(NutrientInfo.quantityContained.getName()), NumberType.of()).build(),
+                                en(NutrientInfo.quantityContained.getName()), NumberAttributeType.of()).build(),
                         AttributeDefinitionBuilder.of(NutrientInfo.measurementPrecision.getName(),
-                                en(NutrientInfo.measurementPrecision.getName()), StringType.of()).build(),
+                                en(NutrientInfo.measurementPrecision.getName()), StringAttributeType.of()).build(),
                         AttributeDefinitionBuilder.of(NutrientInfo.nutrientTypeCode.getName(),
-                                en(NutrientInfo.nutrientTypeCode.getName()), StringType.of()).build()));
+                                en(NutrientInfo.nutrientTypeCode.getName()), StringAttributeType.of()).build()));
     }
 
     private ProductTypeDraft createNutrient(final Referenceable&lt;ProductType&gt; nutrientInformationType) {
         return ProductTypeDraft.of(randomKey(),"Nutrient", "Nutrient",
                 asList(
                         AttributeDefinitionBuilder.of(Nutrient.servingSizeUOM.getName(),
-                                en(Nutrient.servingSizeUOM.getName()), StringType.of()).build(),
+                                en(Nutrient.servingSizeUOM.getName()), StringAttributeType.of()).build(),
                         AttributeDefinitionBuilder.of(Nutrient.servingSize.getName(),
-                                en(Nutrient.servingSize.getName()), NumberType.of()).build(),
+                                en(Nutrient.servingSize.getName()), NumberAttributeType.of()).build(),
                         AttributeDefinitionBuilder.of(Nutrient.nutrientInformation.getName(),
-                                en(Nutrient.nutrientInformation.getName()), SetType.of(NestedType.of(nutrientInformationType))).searchable(false).build()));
+                                en(Nutrient.nutrientInformation.getName()), SetAttributeType.of(NestedAttributeType.of(nutrientInformationType))).searchable(false).build()));
     }
 
     private ProductTypeDraft createBanana(Referenceable&lt;ProductType&gt; nutrientType) {
         return ProductTypeDraft.of(randomKey(), "Banana", "Banana",
                 asList(
                         AttributeDefinitionBuilder.of(Banana.bananaColor.getName(),
-                                en(Banana.bananaColor.getName()), StringType.of()).build(),
+                                en(Banana.bananaColor.getName()), StringAttributeType.of()).build(),
                         AttributeDefinitionBuilder.of(Banana.nutrients.getName(),
-                                en(Banana.nutrients.getName()), SetType.of(NestedType.of(nutrientType))).searchable(false).build()));
+                                en(Banana.nutrients.getName()), SetAttributeType.of(NestedAttributeType.of(nutrientType))).searchable(false).build()));
     }
 }
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/producttypes/NestedAttributeIntegrationTest.java" target="_blank">test code</a>.</pre></div>
