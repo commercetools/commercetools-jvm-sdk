@@ -130,14 +130,14 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html"
 
  <div id="io-sphere-sdk-producttypes-commands-ProductTypeUpdateCommandTest-changeEnumValueOrder--%s" class=code-example><pre><code class='java'>withUpdateableProductType(client(), productType -&gt; {
     final String attributeName = "size";
-    final EnumType attributeType = (EnumType) productType.getAttribute(attributeName)
+    final EnumAttributeType attributeType = (EnumAttributeType) productType.getAttribute(attributeName)
             .getAttributeType();
     final List&lt;EnumValue&gt; values = ListUtils.reverse(attributeType.getValues());
 
     final ProductType updatedProductType = execute(ProductTypeUpdateCommand.of(productType,
             ChangeEnumValueOrder.of(attributeName, values)));
 
-    final EnumType updatedType = (EnumType) updatedProductType
+    final EnumAttributeType updatedType = (EnumAttributeType) updatedProductType
             .getAttribute(attributeName).getAttributeType();
     assertThat(updatedType.getValues()).isEqualTo(values);
 

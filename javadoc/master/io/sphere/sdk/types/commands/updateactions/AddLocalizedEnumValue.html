@@ -124,7 +124,7 @@ var activeTableTab = "activeTableTab";
 <br>
 <pre>public class <span class="typeNameLabel">AddLocalizedEnumValue</span>
 extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html" title="class in io.sphere.sdk.commands">UpdateActionImpl</a>&lt;<a href="../../../../../../io/sphere/sdk/types/Type.html" title="interface in io.sphere.sdk.types">Type</a>&gt;</pre>
-<div class="block">Adds an a new <a href="../../../../../../io/sphere/sdk/models/LocalizedEnumValue.html" title="class in io.sphere.sdk.models"><code>LocalizedEnumValue</code></a> value to an <a href="../../../../../../io/sphere/sdk/types/LocalizedEnumType.html" title="class in io.sphere.sdk.types"><code>LocalizedEnumType</code></a> field.
+<div class="block">Adds an a new <a href="../../../../../../io/sphere/sdk/models/LocalizedEnumValue.html" title="class in io.sphere.sdk.models"><code>LocalizedEnumValue</code></a> value to an <a href="../../../../../../io/sphere/sdk/types/LocalizedEnumFieldType.html" title="class in io.sphere.sdk.types"><code>LocalizedEnumFieldType</code></a> field.
 
  <p>See also <a href="../TypeUpdateCommand.html">TypeUpdateCommand</a>.<p>
 
@@ -133,8 +133,8 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html"
     final LocalizedEnumValue newLocalizedEnumValue = LocalizedEnumValue.of("key-new", en("label new"));
     final Type updatedType = execute(TypeUpdateCommand.of(type, AddLocalizedEnumValue.of(name, newLocalizedEnumValue)));
     assertThat(updatedType.getFieldDefinitionByName(name).getType())
-            .isInstanceOf(LocalizedEnumType.class)
-            .matches(fieldType -&gt; ((LocalizedEnumType) fieldType).getValues().contains(newLocalizedEnumValue), "contains the new enum value");
+            .isInstanceOf(LocalizedEnumFieldType.class)
+            .matches(fieldType -&gt; ((LocalizedEnumFieldType) fieldType).getValues().contains(newLocalizedEnumValue), "contains the new enum value");
     return updatedType;
 });
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/types/commands/TypeUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>

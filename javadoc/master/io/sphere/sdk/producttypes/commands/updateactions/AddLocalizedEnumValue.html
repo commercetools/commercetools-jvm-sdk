@@ -139,8 +139,8 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html"
             AddLocalizedEnumValue.of(attributeName, value)));
 
     assertThat(updatedProductType.getAttribute(attributeName).getAttributeType())
-            .isInstanceOf(LocalizedEnumType.class)
-            .matches(type -&gt; ((LocalizedEnumType)type).getValues().contains(value));
+            .isInstanceOf(LocalizedEnumAttributeType.class)
+            .matches(type -&gt; ((LocalizedEnumAttributeType)type).getValues().contains(value));
 
     return updatedProductType;
 });

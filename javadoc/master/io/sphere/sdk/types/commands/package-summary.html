@@ -89,7 +89,7 @@
 <td class="colFirst"><a href="../../../../../io/sphere/sdk/types/commands/TypeCreateCommand.html" title="interface in io.sphere.sdk.types.commands">TypeCreateCommand</a></td>
 <td class="colLast">
 <div class="block"><div id="io-sphere-sdk-types-commands-TypeCreateCommandTest-execution--%s" class=code-example><pre><code class='java'>final FieldDefinition stringFieldDefinition =
-        FieldDefinition.of(StringType.of(), "string-field-name", en("label"), false, TextInputHint.SINGLE_LINE);
+        FieldDefinition.of(StringFieldType.of(), "string-field-name", en("label"), false, TextInputHint.SINGLE_LINE);
 final String typeKey = "type-key";
 final TypeDraft typeDraft = TypeDraftBuilder.of(typeKey, en("name of the custom type"), singleton(Category.referenceTypeId()))
         .description(en("description"))

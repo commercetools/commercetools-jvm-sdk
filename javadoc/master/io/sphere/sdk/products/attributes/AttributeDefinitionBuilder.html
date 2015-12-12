@@ -120,6 +120,67 @@ var activeTableTab = "activeTableTab";
 <pre>public class <span class="typeNameLabel">AttributeDefinitionBuilder</span>
 extends <a href="../../../../../io/sphere/sdk/models/Base.html" title="class in io.sphere.sdk.models">Base</a>
 implements <a href="../../../../../io/sphere/sdk/models/Builder.html" title="interface in io.sphere.sdk.models">Builder</a>&lt;<a href="../../../../../io/sphere/sdk/products/attributes/AttributeDefinition.html" title="class in io.sphere.sdk.products.attributes">AttributeDefinition</a>&gt;</pre>
+<div class="block">Builder to create an attribute definition for product types.
+
+ <p>For <a href="../../../../../io/sphere/sdk/products/attributes/AttributeType.html" title="interface in io.sphere.sdk.products.attributes"><code>AttributeType</code></a>s use the Javadoc page of <a href="../../../../../io/sphere/sdk/products/attributes/AttributeType.html" title="interface in io.sphere.sdk.products.attributes"><code>AttributeType</code></a>s.</p>
+
+ <p>brief example:</p>
+ <div id="io-sphere-sdk-attributestutorial-ProductTypeCreationDemoTest-createBookProductType--%s" class=code-example><pre><code class='java'>final AttributeDefinition isbn = AttributeDefinitionBuilder
+        .of(ISBN_ATTR_NAME, en("ISBN"), StringAttributeType.of())
+        .build();
+
+final ProductTypeDraft productTypeDraft = ProductTypeDraft.of(randomKey(), BOOK_PRODUCT_TYPE_NAME, "books", asList(isbn));
+final ProductType productType = client().executeBlocking(ProductTypeCreateCommand.of(productTypeDraft));
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/attributestutorial/ProductTypeCreationDemoTest.java" target="_blank">test code</a>.</pre></div>
+ <p>long example:</p>
+ <div id="io-sphere-sdk-attributestutorial-ProductTypeCreationDemoTest-createProductType--%s" class=code-example><pre><code class='java'>final LocalizedEnumValue green = LocalizedEnumValue.of("green",
+        LocalizedString.of(ENGLISH, "green").plus(GERMAN, "grün"));
+final LocalizedEnumValue red = LocalizedEnumValue.of("red",
+        LocalizedString.of(ENGLISH, "red").plus(GERMAN, "rot"));
+final AttributeDefinition color = AttributeDefinitionBuilder
+        .of(COLOR_ATTR_NAME, en("color"), LocalizedEnumAttributeType.of(red, green))
+        .required(true)
+        .build();
+
+final EnumValue s = EnumValue.of("S", "S");
+final EnumValue m = EnumValue.of("M", "M");
+final EnumValue x = EnumValue.of("X", "X");
+final AttributeDefinition size = AttributeDefinitionBuilder
+        .of(SIZE_ATTR_NAME, en("size"), EnumAttributeType.of(s, m, x))
+        .required(true)
+        .build();
+
+final LocalizedEnumValue cold = LocalizedEnumValue.of("cold",
+        LocalizedString.of(ENGLISH, "Wash at or below 30°C ").plus(GERMAN, "30°C"));
+final LocalizedEnumValue hot = LocalizedEnumValue.of("hot",
+        LocalizedString.of(ENGLISH, "Wash at or below 60°C ").plus(GERMAN, "60°C"));
+final LocalizedEnumValue tumbleDrying = LocalizedEnumValue.of("tumbleDrying",
+        LocalizedString.of(ENGLISH, "tumble drying").plus(GERMAN, "Trommeltrocknen"));
+final LocalizedEnumValue noTumbleDrying = LocalizedEnumValue.of("noTumbleDrying",
+        LocalizedString.of(ENGLISH, "no tumble drying").plus(GERMAN, "Nicht im Trommeltrockner trocknen"));
+final SetAttributeType laundryLabelType = SetAttributeType.of(LocalizedEnumAttributeType.of(cold, hot, tumbleDrying, noTumbleDrying));
+final AttributeDefinition laundrySymbols = AttributeDefinitionBuilder
+        .of(LAUNDRY_SYMBOLS_ATTR_NAME, en("washing labels"), laundryLabelType)
+        .build();
+
+final AttributeDefinition matchingProducts = AttributeDefinitionBuilder
+        .of(MATCHING_PRODUCTS_ATTR_NAME, en("matching products"), SetAttributeType.of(ReferenceAttributeType.ofProduct()))
+        .build();
+
+final AttributeDefinition rrp = AttributeDefinitionBuilder
+        .of(RRP_ATTR_NAME, en("recommended retail price"), MoneyAttributeType.of())
+        .build();
+
+final AttributeDefinition availableSince = AttributeDefinitionBuilder
+        .of(AVAILABLE_SINCE_ATTR_NAME, en("available since"), DateAttributeType.of())
+        .build();
+
+
+final List&lt;AttributeDefinition&gt; attributes = asList(color, size, laundrySymbols,
+        matchingProducts, rrp, availableSince);
+final ProductTypeDraft productTypeDraft = ProductTypeDraft.of(randomKey(), PRODUCT_TYPE_NAME, "a 'T' shaped cloth", attributes);
+final ProductType productType = client().executeBlocking(ProductTypeCreateCommand.of(productTypeDraft));
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/attributestutorial/ProductTypeCreationDemoTest.java" target="_blank">test code</a>.</pre></div></div>
 </li>
 </ul>
 </div>

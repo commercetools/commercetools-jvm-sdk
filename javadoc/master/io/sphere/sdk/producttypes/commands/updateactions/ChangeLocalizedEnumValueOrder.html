@@ -130,14 +130,14 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html"
 
  <div id="io-sphere-sdk-producttypes-commands-ProductTypeUpdateCommandTest-changeLocalizedEnumValueOrder--%s" class=code-example><pre><code class='java'>withUpdateableProductType(client(), productType -&gt; {
     final String attributeName = "color";
-    final LocalizedEnumType attributeType = (LocalizedEnumType) productType.getAttribute(attributeName)
+    final LocalizedEnumAttributeType attributeType = (LocalizedEnumAttributeType) productType.getAttribute(attributeName)
             .getAttributeType();
     final List&lt;LocalizedEnumValue&gt; values = ListUtils.reverse(attributeType.getValues());
 
     final ProductType updatedProductType = execute(ProductTypeUpdateCommand.of(productType,
             ChangeLocalizedEnumValueOrder.of(attributeName, values)));
 
-    final LocalizedEnumType updatedType = (LocalizedEnumType) updatedProductType.getAttribute(attributeName)
+    final LocalizedEnumAttributeType updatedType = (LocalizedEnumAttributeType) updatedProductType.getAttribute(attributeName)
             .getAttributeType();
     assertThat(updatedType.getValues()).isEqualTo(values);
 

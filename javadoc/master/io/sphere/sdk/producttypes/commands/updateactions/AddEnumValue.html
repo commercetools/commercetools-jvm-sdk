@@ -137,8 +137,8 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html"
             AddEnumValue.of(attributeName, value)));
 
     assertThat(updatedProductType.getAttribute(attributeName).getAttributeType())
-            .isInstanceOf(EnumType.class)
-            .matches(type -&gt; ((EnumType)type).getValues().contains(value));
+            .isInstanceOf(EnumAttributeType.class)
+            .matches(type -&gt; ((EnumAttributeType)type).getValues().contains(value));
 
     return updatedProductType;
 });
