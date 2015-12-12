@@ -41,14 +41,14 @@ public final class CreateTypeDemo {
         final LocalizedString label = en("state of the category concerning to show it publicly");
         final String fieldName = "state";
         return FieldDefinition
-                .of(EnumType.of(values), fieldName, label, required, TextInputHint.SINGLE_LINE);
+                .of(EnumFieldType.of(values), fieldName, label, required, TextInputHint.SINGLE_LINE);
     }
 
     private static FieldDefinition imageUrlFieldDefinition() {
         final LocalizedString imageUrlLabel =
                 en("absolute url to an image to display for the category");
         return FieldDefinition
-                .of(StringType.of(), "imageUrl", imageUrlLabel, false, TextInputHint.SINGLE_LINE);
+                .of(StringFieldType.of(), "imageUrl", imageUrlLabel, false, TextInputHint.SINGLE_LINE);
     }
 
     private static FieldDefinition relatedCategoriesFieldDefinition() {
@@ -56,7 +56,7 @@ public final class CreateTypeDemo {
                 en("categories to suggest products similar to the current category");
         //referenceTypeId is required to refere to categories
         final String referenceTypeId = Category.referenceTypeId();
-        final SetType setType = SetType.of(ReferenceType.of(referenceTypeId));
+        final SetFieldType setType = SetFieldType.of(ReferenceFieldType.of(referenceTypeId));
         return FieldDefinition
                 .of(setType, "relatedCategories", relatedCategoriesLabel,
                         false, TextInputHint.SINGLE_LINE);

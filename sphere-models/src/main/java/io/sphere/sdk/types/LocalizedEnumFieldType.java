@@ -9,17 +9,17 @@ import java.util.List;
 /**
  * @see Custom
  */
-public class LocalizedEnumType extends FieldTypeBase {
+public class LocalizedEnumFieldType extends FieldTypeBase {
     private final List<LocalizedEnumValue> values;
 
     @JsonCreator
-    private LocalizedEnumType(final List<LocalizedEnumValue> values) {
+    private LocalizedEnumFieldType(final List<LocalizedEnumValue> values) {
         this.values = values;
     }
 
     @JsonIgnore
-    public static LocalizedEnumType of(final List<LocalizedEnumValue> values) {
-        return new LocalizedEnumType(values);
+    public static LocalizedEnumFieldType of(final List<LocalizedEnumValue> values) {
+        return new LocalizedEnumFieldType(values);
     }
 
     public List<LocalizedEnumValue> getValues() {

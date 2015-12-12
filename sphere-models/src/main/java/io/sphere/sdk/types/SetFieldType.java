@@ -6,17 +6,17 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 /**
  * @see Custom
  */
-public class SetType extends FieldTypeBase {
+public class SetFieldType extends FieldTypeBase {
     private final FieldType elementType;
 
     @JsonCreator
-    private SetType(final FieldType elementType) {
+    private SetFieldType(final FieldType elementType) {
         this.elementType = elementType;
     }
 
     @JsonIgnore
-    public static SetType of(final FieldType elementType) {
-        return new SetType(elementType);
+    public static SetFieldType of(final FieldType elementType) {
+        return new SetFieldType(elementType);
     }
 
     public FieldType getElementType() {

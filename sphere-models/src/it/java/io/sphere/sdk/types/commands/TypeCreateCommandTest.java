@@ -4,7 +4,6 @@ import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.models.TextInputHint;
 import io.sphere.sdk.test.IntegrationTest;
 import io.sphere.sdk.types.FieldDefinition;
-//important
 import io.sphere.sdk.types.*;
 import io.sphere.sdk.types.queries.TypeQuery;
 import org.junit.After;
@@ -20,7 +19,7 @@ public class TypeCreateCommandTest extends IntegrationTest {
     @Test
     public void execution() {
         final FieldDefinition stringFieldDefinition =
-                FieldDefinition.of(StringType.of(), "string-field-name", en("label"), false, TextInputHint.SINGLE_LINE);
+                FieldDefinition.of(StringFieldType.of(), "string-field-name", en("label"), false, TextInputHint.SINGLE_LINE);
         final String typeKey = "type-key";
         final TypeDraft typeDraft = TypeDraftBuilder.of(typeKey, en("name of the custom type"), singleton(Category.referenceTypeId()))
                 .description(en("description"))

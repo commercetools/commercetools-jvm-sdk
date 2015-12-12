@@ -9,17 +9,17 @@ import java.util.List;
 /**
  * @see Custom
  */
-public class EnumType extends FieldTypeBase {
+public class EnumFieldType extends FieldTypeBase {
     private final List<EnumValue> values;
 
     @JsonCreator
-    private EnumType(final List<EnumValue> values) {
+    private EnumFieldType(final List<EnumValue> values) {
         this.values = values;
     }
 
     @JsonIgnore
-    public static EnumType of(final List<EnumValue> values) {
-        return new EnumType(values);
+    public static EnumFieldType of(final List<EnumValue> values) {
+        return new EnumFieldType(values);
     }
 
     public List<EnumValue> getValues() {

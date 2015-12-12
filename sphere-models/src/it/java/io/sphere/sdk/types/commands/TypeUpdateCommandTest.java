@@ -38,7 +38,7 @@ public class TypeUpdateCommandTest extends IntegrationTest {
     public void addFieldDefinition() {
         withUpdateableType(client(), type -> {
             final String name = randomKey();
-            final FieldDefinition fieldDefinition = FieldDefinition.of(StringType.of(), name, en("label"), false, TextInputHint.SINGLE_LINE);
+            final FieldDefinition fieldDefinition = FieldDefinition.of(StringFieldType.of(), name, en("label"), false, TextInputHint.SINGLE_LINE);
             final Type updatedType = execute(TypeUpdateCommand.of(type, AddFieldDefinition.of(fieldDefinition)));
             assertThat(updatedType.getFieldDefinitionByName(name)).isEqualTo(fieldDefinition);
             assertThat(updatedType.getFieldDefinitions()).hasSize(type.getFieldDefinitions().size() + 1);
@@ -68,8 +68,8 @@ public class TypeUpdateCommandTest extends IntegrationTest {
             final EnumValue newEnumValue = EnumValue.of("key-new", "label new");
             final Type updatedType = execute(TypeUpdateCommand.of(type, AddEnumValue.of(name, newEnumValue)));
             assertThat(updatedType.getFieldDefinitionByName(name).getType())
-                    .isInstanceOf(EnumType.class)
-                    .matches(fieldType -> ((EnumType) fieldType).getValues().contains(newEnumValue), "contains the new enum value");
+                    .isInstanceOf(EnumFieldType.class)
+                    .matches(fieldType -> ((EnumFieldType) fieldType).getValues().contains(newEnumValue), "contains the new enum value");
             return updatedType;
         });
     }
@@ -81,8 +81,8 @@ public class TypeUpdateCommandTest extends IntegrationTest {
             final LocalizedEnumValue newLocalizedEnumValue = LocalizedEnumValue.of("key-new", en("label new"));
             final Type updatedType = execute(TypeUpdateCommand.of(type, AddLocalizedEnumValue.of(name, newLocalizedEnumValue)));
             assertThat(updatedType.getFieldDefinitionByName(name).getType())
-                    .isInstanceOf(LocalizedEnumType.class)
-                    .matches(fieldType -> ((LocalizedEnumType) fieldType).getValues().contains(newLocalizedEnumValue), "contains the new enum value");
+                    .isInstanceOf(LocalizedEnumFieldType.class)
+                    .matches(fieldType -> ((LocalizedEnumFieldType) fieldType).getValues().contains(newLocalizedEnumValue), "contains the new enum value");
             return updatedType;
         });
     }

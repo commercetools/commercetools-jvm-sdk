@@ -89,7 +89,7 @@ public class ProductTypeCreationDemoTest extends IntegrationTest {
     @BeforeClass
     public static void createBookProductType() throws Exception {
         final AttributeDefinition isbn = AttributeDefinitionBuilder
-                .of(ISBN_ATTR_NAME, en("ISBN"), StringType.of())
+                .of(ISBN_ATTR_NAME, en("ISBN"), StringAttributeType.of())
                 .build();
 
         final ProductTypeDraft productTypeDraft = ProductTypeDraft.of(randomKey(), BOOK_PRODUCT_TYPE_NAME, "books", asList(isbn));
@@ -103,7 +103,7 @@ public class ProductTypeCreationDemoTest extends IntegrationTest {
         final LocalizedEnumValue red = LocalizedEnumValue.of("red",
                 LocalizedString.of(ENGLISH, "red").plus(GERMAN, "rot"));
         final AttributeDefinition color = AttributeDefinitionBuilder
-                .of(COLOR_ATTR_NAME, en("color"), LocalizedEnumType.of(red, green))
+                .of(COLOR_ATTR_NAME, en("color"), LocalizedEnumAttributeType.of(red, green))
                 .required(true)
                 .build();
 
@@ -111,7 +111,7 @@ public class ProductTypeCreationDemoTest extends IntegrationTest {
         final EnumValue m = EnumValue.of("M", "M");
         final EnumValue x = EnumValue.of("X", "X");
         final AttributeDefinition size = AttributeDefinitionBuilder
-                .of(SIZE_ATTR_NAME, en("size"), EnumType.of(s, m, x))
+                .of(SIZE_ATTR_NAME, en("size"), EnumAttributeType.of(s, m, x))
                 .required(true)
                 .build();
 
@@ -123,21 +123,21 @@ public class ProductTypeCreationDemoTest extends IntegrationTest {
                 LocalizedString.of(ENGLISH, "tumble drying").plus(GERMAN, "Trommeltrocknen"));
         final LocalizedEnumValue noTumbleDrying = LocalizedEnumValue.of("noTumbleDrying",
                 LocalizedString.of(ENGLISH, "no tumble drying").plus(GERMAN, "Nicht im Trommeltrockner trocknen"));
-        final SetType laundryLabelType = SetType.of(LocalizedEnumType.of(cold, hot, tumbleDrying, noTumbleDrying));
+        final SetAttributeType laundryLabelType = SetAttributeType.of(LocalizedEnumAttributeType.of(cold, hot, tumbleDrying, noTumbleDrying));
         final AttributeDefinition laundrySymbols = AttributeDefinitionBuilder
                 .of(LAUNDRY_SYMBOLS_ATTR_NAME, en("washing labels"), laundryLabelType)
                 .build();
 
         final AttributeDefinition matchingProducts = AttributeDefinitionBuilder
-                .of(MATCHING_PRODUCTS_ATTR_NAME, en("matching products"), SetType.of(ReferenceType.ofProduct()))
+                .of(MATCHING_PRODUCTS_ATTR_NAME, en("matching products"), SetAttributeType.of(ReferenceAttributeType.ofProduct()))
                 .build();
 
         final AttributeDefinition rrp = AttributeDefinitionBuilder
-                .of(RRP_ATTR_NAME, en("recommended retail price"), MoneyType.of())
+                .of(RRP_ATTR_NAME, en("recommended retail price"), MoneyAttributeType.of())
                 .build();
 
         final AttributeDefinition availableSince = AttributeDefinitionBuilder
-                .of(AVAILABLE_SINCE_ATTR_NAME, en("available since"), DateType.of())
+                .of(AVAILABLE_SINCE_ATTR_NAME, en("available since"), DateAttributeType.of())
                 .build();
 
 

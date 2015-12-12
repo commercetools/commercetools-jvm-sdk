@@ -59,10 +59,10 @@ public class ProductTypeUpdateCommandTest extends IntegrationTest {
             //add
             final String attributeName = "foostring";
             final AttributeDefinition foostring =
-                    AttributeDefinitionBuilder.of(attributeName, LocalizedString.of(ENGLISH, "foo string"), StringType.of()).build();
+                    AttributeDefinitionBuilder.of(attributeName, LocalizedString.of(ENGLISH, "foo string"), StringAttributeType.of()).build();
             final ProductType withFoostring = execute(ProductTypeUpdateCommand.of(productType, AddAttributeDefinition.of(foostring)));
             final AttributeDefinition loadedDefinition = withFoostring.getAttribute(attributeName);
-            assertThat(loadedDefinition.getAttributeType()).isEqualTo(StringType.of());
+            assertThat(loadedDefinition.getAttributeType()).isEqualTo(StringAttributeType.of());
 
             //remove
             final ProductType withoutFoostring = execute(ProductTypeUpdateCommand.of(withFoostring, RemoveAttributeDefinition.of(attributeName)));
@@ -97,8 +97,8 @@ public class ProductTypeUpdateCommandTest extends IntegrationTest {
                     AddEnumValue.of(attributeName, value)));
 
             assertThat(updatedProductType.getAttribute(attributeName).getAttributeType())
-                    .isInstanceOf(EnumType.class)
-                    .matches(type -> ((EnumType)type).getValues().contains(value));
+                    .isInstanceOf(EnumAttributeType.class)
+                    .matches(type -> ((EnumAttributeType)type).getValues().contains(value));
 
             return updatedProductType;
         });
@@ -117,8 +117,8 @@ public class ProductTypeUpdateCommandTest extends IntegrationTest {
                     AddLocalizedEnumValue.of(attributeName, value)));
 
             assertThat(updatedProductType.getAttribute(attributeName).getAttributeType())
-                    .isInstanceOf(LocalizedEnumType.class)
-                    .matches(type -> ((LocalizedEnumType)type).getValues().contains(value));
+                    .isInstanceOf(LocalizedEnumAttributeType.class)
+                    .matches(type -> ((LocalizedEnumAttributeType)type).getValues().contains(value));
 
             return updatedProductType;
         });
@@ -141,14 +141,14 @@ public class ProductTypeUpdateCommandTest extends IntegrationTest {
     public void changeEnumValueOrder() throws Exception {
         withUpdateableProductType(client(), productType -> {
             final String attributeName = "size";
-            final EnumType attributeType = (EnumType) productType.getAttribute(attributeName)
+            final EnumAttributeType attributeType = (EnumAttributeType) productType.getAttribute(attributeName)
                     .getAttributeType();
             final List<EnumValue> values = ListUtils.reverse(attributeType.getValues());
 
             final ProductType updatedProductType = execute(ProductTypeUpdateCommand.of(productType,
                     ChangeEnumValueOrder.of(attributeName, values)));
 
-            final EnumType updatedType = (EnumType) updatedProductType
+            final EnumAttributeType updatedType = (EnumAttributeType) updatedProductType
                     .getAttribute(attributeName).getAttributeType();
             assertThat(updatedType.getValues()).isEqualTo(values);
 
@@ -160,14 +160,14 @@ public class ProductTypeUpdateCommandTest extends IntegrationTest {
     public void changeLocalizedEnumValueOrder() throws Exception {
         withUpdateableProductType(client(), productType -> {
             final String attributeName = "color";
-            final LocalizedEnumType attributeType = (LocalizedEnumType) productType.getAttribute(attributeName)
+            final LocalizedEnumAttributeType attributeType = (LocalizedEnumAttributeType) productType.getAttribute(attributeName)
                     .getAttributeType();
             final List<LocalizedEnumValue> values = ListUtils.reverse(attributeType.getValues());
 
             final ProductType updatedProductType = execute(ProductTypeUpdateCommand.of(productType,
                     ChangeLocalizedEnumValueOrder.of(attributeName, values)));
 
-            final LocalizedEnumType updatedType = (LocalizedEnumType) updatedProductType.getAttribute(attributeName)
+            final LocalizedEnumAttributeType updatedType = (LocalizedEnumAttributeType) updatedProductType.getAttribute(attributeName)
                     .getAttributeType();
             assertThat(updatedType.getValues()).isEqualTo(values);
 

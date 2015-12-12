@@ -3,7 +3,7 @@ package io.sphere.sdk.producttypes;
 import io.sphere.sdk.client.BlockingSphereClient;
 import io.sphere.sdk.products.attributes.AttributeDefinition;
 import io.sphere.sdk.products.attributes.AttributeDefinitionBuilder;
-import io.sphere.sdk.products.attributes.ReferenceType;
+import io.sphere.sdk.products.attributes.ReferenceAttributeType;
 import io.sphere.sdk.products.Product;
 import io.sphere.sdk.products.queries.ProductQuery;
 import io.sphere.sdk.producttypes.commands.ProductTypeCreateCommand;
@@ -86,7 +86,7 @@ public final class ProductTypeFixtures {
 
     public static ProductType productReferenceProductType(final BlockingSphereClient client) {
         final AttributeDefinition productReferenceDefinition = AttributeDefinitionBuilder
-                .of("productreference", en("suggested product"), ReferenceType.ofProduct())
+                .of("productreference", en("suggested product"), ReferenceAttributeType.ofProduct())
                 .required(true)
                 .build();
         final ProductTypeDraft productTypeDraft = ProductTypeDraft.of(randomKey(), productReferenceProductTypeName, "has an attribute which is reference to a product", asList(productReferenceDefinition));

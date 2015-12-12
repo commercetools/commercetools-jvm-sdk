@@ -55,55 +55,55 @@ public class TypeFixtures {
     }
 
     private static FieldDefinition dateDefinition() {
-        return fieldDefinition(DateType.of(), DATE_FIELD_NAME);
+        return fieldDefinition(DateFieldType.of(), DATE_FIELD_NAME);
     }
 
     private static FieldDefinition dateTimeDefinition() {
-        return fieldDefinition(DateTimeType.of(), DATETIME_FIELD_NAME);
+        return fieldDefinition(DateTimeFieldType.of(), DATETIME_FIELD_NAME);
     }
 
     private static FieldDefinition timeDefinition() {
-        return fieldDefinition(TimeType.of(), TIME_FIELD_NAME);
+        return fieldDefinition(TimeFieldType.of(), TIME_FIELD_NAME);
     }
 
     private static FieldDefinition booleanDefinition() {
-        return fieldDefinition(BooleanType.of(), BOOLEAN_FIELD_NAME);
+        return fieldDefinition(BooleanFieldType.of(), BOOLEAN_FIELD_NAME);
     }
 
     private static FieldDefinition moneyDefinition() {
-        return fieldDefinition(MoneyType.of(), MONEY_FIELD_NAME);
+        return fieldDefinition(MoneyFieldType.of(), MONEY_FIELD_NAME);
     }
 
     private static FieldDefinition LocalizedStringDefinition() {
-        return fieldDefinition(LocalizedStringType.of(), LOC_STRING_FIELD_NAME);
+        return fieldDefinition(LocalizedStringFieldType.of(), LOC_STRING_FIELD_NAME);
     }
 
     private static FieldDefinition catRefDefinition() {
-        return fieldDefinition(ReferenceType.of(Category.referenceTypeId()), CAT_REFERENCE_FIELD_NAME);
+        return fieldDefinition(ReferenceFieldType.of(Category.referenceTypeId()), CAT_REFERENCE_FIELD_NAME);
     }
 
     private static FieldDefinition intDefinition() {
-        return fieldDefinition(NumberType.of(), INT_FIELD_NAME);
+        return fieldDefinition(NumberFieldType.of(), INT_FIELD_NAME);
     }
 
     private static FieldDefinition doubleDefinition() {
-        return fieldDefinition(NumberType.of(), DOUBLE_FIELD_NAME);
+        return fieldDefinition(NumberFieldType.of(), DOUBLE_FIELD_NAME);
     }
 
     private static FieldDefinition localizedEnumFieldDefinition() {
         final List<LocalizedEnumValue> localizedEnumValues = asList("1", "2").stream()
                 .map(s -> LocalizedEnumValue.of("key" + s, en("label " + s)))
                 .collect(toList());
-        return fieldDefinition(LocalizedEnumType.of(localizedEnumValues), LOCALIZED_ENUM_FIELD_NAME);
+        return fieldDefinition(LocalizedEnumFieldType.of(localizedEnumValues), LOCALIZED_ENUM_FIELD_NAME);
     }
 
     private static FieldDefinition enumFieldDefinition() {
         final List<EnumValue> enumValues = asList(EnumValue.of("key1", "label1"), EnumValue.of("key2", "label2"));
-        return fieldDefinition(EnumType.of(enumValues), ENUM_FIELD_NAME);
+        return fieldDefinition(EnumFieldType.of(enumValues), ENUM_FIELD_NAME);
     }
 
     private static FieldDefinition stringfieldDefinition() {
-        return fieldDefinition(StringType.of(), STRING_FIELD_NAME);
+        return fieldDefinition(StringFieldType.of(), STRING_FIELD_NAME);
     }
 
     private static FieldDefinition fieldDefinition(final FieldType fieldType, final String fieldName) {

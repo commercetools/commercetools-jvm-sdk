@@ -6,14 +6,14 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 /**
  * @see Custom
  */
-public class NumberType extends FieldTypeBase {
+public class BooleanFieldType extends FieldTypeBase {
 
     @JsonCreator
-    private NumberType() {
+    private BooleanFieldType() {
     }
 
     @JsonIgnore
-    public static NumberType of() {
-        return new NumberType();
+    public static BooleanFieldType of() {
+        return new BooleanFieldType();
     }
 }

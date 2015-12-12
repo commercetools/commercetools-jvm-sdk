@@ -6,14 +6,14 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 /**
  * @see Custom
  */
-public class LocalizedStringType extends FieldTypeBase {
+public class MoneyFieldType extends FieldTypeBase {
 
     @JsonCreator
-    private LocalizedStringType() {
+    private MoneyFieldType() {
     }
 
     @JsonIgnore
-    public static LocalizedStringType of() {
-        return new LocalizedStringType();
+    public static MoneyFieldType of() {
+        return new MoneyFieldType();
     }
 }

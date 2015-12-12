@@ -5,7 +5,7 @@ import io.sphere.sdk.products.attributes.AttributeType;
 import io.sphere.sdk.client.SphereClient;
 import io.sphere.sdk.producttypes.ProductType;
 import io.sphere.sdk.producttypes.queries.ProductTypeQuery;
-import io.sphere.sdk.products.attributes.EnumType;
+import io.sphere.sdk.products.attributes.EnumAttributeType;
 import io.sphere.sdk.models.EnumValue;
 import io.sphere.sdk.queries.PagedQueryResult;
 
@@ -30,10 +30,10 @@ public class QueryByProductTypeNameExample {
                 findAttribute("size").
                 orElseThrow(MissingAttributeException::new);
 
-        if (sizeAttribute.getAttributeType() instanceof EnumType) {
-            return ((EnumType) sizeAttribute.getAttributeType()).getValues();
+        if (sizeAttribute.getAttributeType() instanceof EnumAttributeType) {
+            return ((EnumAttributeType) sizeAttribute.getAttributeType()).getValues();
         } else {
-            throw new UnexpectedAttributeTypeException("size", EnumType.class, sizeAttribute.getAttributeType());
+            throw new UnexpectedAttributeTypeException("size", EnumAttributeType.class, sizeAttribute.getAttributeType());
         }
     }
 
