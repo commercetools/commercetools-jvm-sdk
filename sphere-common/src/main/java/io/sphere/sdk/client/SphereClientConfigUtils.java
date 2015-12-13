@@ -65,7 +65,7 @@ final class SphereClientConfigUtils {
         final String clientId = extract(properties, prefix, PROPERTIES_KEY_CLIENT_ID_SUFFIX);
         final String clientSecret = extract(properties, prefix, PROPERTIES_KEY_CLIENT_SECRET_SUFFIX);
         final String apiUrl = extract(properties, prefix, PROPERTIES_KEY_API_URL_SUFFIX, API_URL);
-        final String authUrl = extract(properties, prefix, PROPERTIES_KEY_AUTH_URL_SUFFIX, API_URL);
+        final String authUrl = extract(properties, prefix, PROPERTIES_KEY_AUTH_URL_SUFFIX, AUTH_URL);
         return SphereClientConfig.of(projectKey, clientId, clientSecret).withApiUrl(apiUrl).withAuthUrl(authUrl);
     }
 
