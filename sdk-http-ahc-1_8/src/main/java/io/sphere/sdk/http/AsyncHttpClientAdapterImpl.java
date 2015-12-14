@@ -2,14 +2,18 @@ package io.sphere.sdk.http;
 
 import com.ning.http.client.*;
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.IOUtils;
+import org.apache.commons.io.input.AutoCloseInputStream;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.Optional;
 import java.util.concurrent.*;
+import java.util.zip.GZIPInputStream;
 
 final class AsyncHttpClientAdapterImpl extends Base implements AsyncHttpClientAdapter {
     private static final Logger LOGGER = LoggerFactory.getLogger(AsyncHttpClientAdapterImpl.class);
@@ -45,10 +49,19 @@ final class AsyncHttpClientAdapterImpl extends Base implements AsyncHttpClientAd
 
     private byte[] getResponseBodyAsBytes(final Response response) {
         try {
-            return response.getResponseBodyAsBytes();
+            final boolean gzipEncoded =
+                    Optional.ofNullable(response.getHeader(HttpHeaders.CONTENT_ENCODING))
+                            .map(v -> v.equalsIgnoreCase("gzip"))
+                            .orElse(false);
+            return gzipEncoded ? unzip(response) : response.getResponseBodyAsBytes();
         } catch (IOException e) {
             throw new HttpException(e);
         }
+    }
+
+    private byte[] unzip(final Response response) throws IOException {
+        final InputStream autoCloseInputStream = new AutoCloseInputStream(new GZIPInputStream(response.getResponseBodyAsStream()));
+        return IOUtils.toByteArray(autoCloseInputStream);
     }
 
     /* package scope for testing */
