@@ -10,6 +10,7 @@ import io.sphere.sdk.types.Custom;
 import io.sphere.sdk.types.CustomFields;
 
 import javax.annotation.Nullable;
+import javax.money.CurrencyUnit;
 import javax.money.MonetaryAmount;
 import java.util.List;
 import java.util.Optional;
@@ -71,4 +72,8 @@ public interface CartLike<T> extends Resource<T>, Custom {
 
     @Nullable
     PaymentInfo getPaymentInfo();
+
+    default CurrencyUnit getCurrency() {
+        return getTotalPrice().getCurrency();
+    }
 }

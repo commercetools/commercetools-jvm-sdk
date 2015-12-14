@@ -61,6 +61,7 @@ public class CartCreateCommandTest extends IntegrationTest {
                         softAssert(s -> {
                             s.assertThat(cart.getCountry()).isEqualTo(DE);
                             s.assertThat(cart.getTotalPrice().getCurrency()).isEqualTo(EUR);
+                            s.assertThat(cart.getCurrency()).isEqualTo(EUR);
                             s.assertThat(cart.getCustomerId()).isEqualTo(customerId);
                             s.assertThat(cart.getCustomerEmail()).isEqualTo(customerEmail);
                             final LineItem lineItem = cart.getLineItems().get(0);
