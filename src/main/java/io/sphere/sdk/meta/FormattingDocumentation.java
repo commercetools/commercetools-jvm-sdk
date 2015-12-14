@@ -78,7 +78,12 @@ import java.time.format.DateTimeFormatter;
  *
  * {@include.example io.sphere.sdk.meta.FormattingDocumentationTest#moneySortByCurrencyAndAmount()}
  *
+ * <h4 id="round-money-values">Rounding MonetaryAmount values</h4>
  *
+ * <p>See <a href="https://github.com/JavaMoney/jsr354-ri/blob/master/src/main/asciidoc/userguide.adoc#23-rounding">JavaMoney Moneta User Guide - Rounding</a>.</p>
+ *
+ * {@include.example io.sphere.sdk.meta.FormattingDocumentationTest#roundMoneyDownExample()}
+ * {@include.example io.sphere.sdk.meta.FormattingDocumentationTest#roundMoneyUpExample()}
  *
  *
  */

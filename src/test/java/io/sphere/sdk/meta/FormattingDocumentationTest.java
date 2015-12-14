@@ -179,4 +179,18 @@ public class FormattingDocumentationTest {
         final Long centAmount = amount.query(MonetaryUtil.majorUnits());
         assertThat(centAmount).isEqualTo(1234);
     }
+
+    @Test
+    public void roundMoneyUpExample() throws Exception {
+        final MonetaryAmount amount = MoneyImpl.of(new BigDecimal("13.3749"), "EUR");
+        final MonetaryAmount rounded = amount.with(Monetary.getDefaultRounding());
+        assertThat(rounded).isEqualTo(MoneyImpl.of(new BigDecimal("13.37"), "EUR"));
+    }
+
+    @Test
+    public void roundMoneyDownExample() throws Exception {
+        final MonetaryAmount amount = MoneyImpl.of(new BigDecimal("13.3750"), "EUR");
+        final MonetaryAmount rounded = amount.with(Monetary.getDefaultRounding());
+        assertThat(rounded).isEqualTo(MoneyImpl.of(new BigDecimal("13.38"), "EUR"));
+    }
 }
