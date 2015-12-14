@@ -6,12 +6,17 @@ package io.sphere.sdk.models;
  *
  * @param <T> the type of the referenced object.
  */
-public interface Referenceable<T> {
+public interface Referenceable<T> extends ResourceIdentifiable<T> {
     /**
      * Creates a reference which is not necessarily filled.
      * @return reference
      */
     Reference<T> toReference();
+
+    @Override
+    default ResourceIdentifier<T> toResourceIdentifier() {
+        return toReference();
+    }
 
     default boolean hasSameIdAs(final Referenceable<T> other) {
         return toReference().getId().equals(other.toReference().getId());

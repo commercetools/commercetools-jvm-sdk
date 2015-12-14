@@ -29,6 +29,10 @@ public final class ProductTypeFixtures {
     private ProductTypeFixtures() {
     }
 
+    public static void withEmptyProductType(final BlockingSphereClient client, final Consumer<ProductType> user) {
+        withProductType(client, () -> ProductTypeDraft.of(randomKey(), randomKey(), "desc", Collections.emptyList()), user);
+    }
+
     public static void withEmptyProductType(final BlockingSphereClient client, final String name, final Consumer<ProductType> user) {
         withProductType(client, () -> ProductTypeDraft.of(randomKey(), name, "desc", Collections.emptyList()), user);
     }

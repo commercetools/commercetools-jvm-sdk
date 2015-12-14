@@ -1,8 +1,7 @@
 package io.sphere.sdk.models;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 import javax.annotation.Nullable;
 
@@ -15,34 +14,22 @@ import javax.annotation.Nullable;
  *
  * @param <T> the type of the referenced object
  */
-public final class Reference<T> implements Referenceable<T>, Identifiable<T> {
-    private final String typeId;
-    private final String id;
-    @Nullable
-    private final T obj;
-
-    @JsonCreator
-    private Reference(final String typeId, final String id, @Nullable final T obj) {
-        this.id = id;
-        this.typeId = typeId;
-        this.obj = obj;
-    }
+@JsonDeserialize(as = ReferenceImpl.class)
+public interface Reference<T> extends Referenceable<T>, Identifiable<T>, ResourceIdentifier<T> {
 
     /**
      * Id of the object this reference represents.
      * @return the id
      */
-    public String getId() {
-        return id;
-    }
+    @Override
+    String getId();
 
     /**
      * Type id of the object this reference represents, e.g. "customer".
      * @return the type id
      */
-    public String getTypeId() {
-        return typeId;
-    }
+    @Override
+    String getTypeId();
 
     /**
      * The optional value of the referenced object.
@@ -50,65 +37,46 @@ public final class Reference<T> implements Referenceable<T>, Identifiable<T> {
      */
     @JsonIgnore
     @Nullable
-    public T getObj() {
-        return obj;
+    T getObj();
+
+    default Reference<T> filled(@Nullable final T obj) {
+        return new ReferenceImpl<>(getTypeId(), getId(), obj);
     }
 
-    public Reference<T> filled(@Nullable final T obj) {
-        return new Reference<>(getTypeId(), getId(), obj);
+    static <T> Reference<T> of(final String typeId, final String id) {
+        return new ReferenceImpl<>(typeId, id, null);
     }
 
-    public static <T> Reference<T> of(final String typeId, final String id) {
-        return new Reference<>(typeId, id, null);
-    }
-
-    public static <T> Reference<T> of(final String typeId, final String id, T obj) {
+    static <T> Reference<T> of(final String typeId, final String id, T obj) {
         return Reference.<T>of(typeId, id).filled(obj);
     }
 
-    public static <T extends Identifiable<T>> Reference<T> of(final String typeId, final T obj) {
+    static <T extends Identifiable<T>> Reference<T> of(final String typeId, final T obj) {
         return Reference.of(typeId, obj.getId(), obj);
     }
 
-    public boolean referencesSameResource(final Referenceable<T> counterpart) {
+    default boolean referencesSameResource(final Referenceable<T> counterpart) {
         final Reference<T> reference = counterpart.toReference();
         return reference.getId().equals(getId()) && reference.getTypeId().equals(getTypeId());
     }
 
     @Override
-    public Reference<T> toReference() {
+    default Reference<T> toReference() {
         return this;
     }
 
     @Override
-    public String toString() {
-        return "Reference{" +
-                "typeId='" + typeId + '\'' +
-                ", id='" + id + '\'' +
-                ", obj=" + obj +
-                '}';
+    default ResourceIdentifier<T> toResourceIdentifier() {
+        return this;
     }
 
-    @SuppressWarnings("rawtypes")//at runtime generic type is not determinable
+    /**
+     * In references the key should always be null
+     * @return null
+     */
+    @Nullable
     @Override
-    public final boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Reference reference = (Reference) o;
-
-        if (!getId().equals(reference.getId())) return false;
-        if (!getTypeId().equals(reference.getTypeId())) return false;
-
-        return true;
-    }
-
-    @Override
-    public final int hashCode() {
-        //important, ignore obj hash code to match with equals
-        return new HashCodeBuilder(17, 37).
-                append(id).
-                append(typeId).
-                toHashCode();
+    default String getKey() {
+        return null;
     }
 }

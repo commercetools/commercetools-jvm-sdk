@@ -8,18 +8,18 @@ import java.util.List;
 
 public final class ProductDraftBuilder extends ProductDataProductDraftBuilderBase<ProductDraftBuilder> implements Builder<ProductDraft> {
 
-    private final Reference<ProductType> productType;
+    private final ResourceIdentifier<ProductType> productType;
     private ProductVariantDraft masterVariant;
     private List<ProductVariantDraft> variants = Collections.emptyList();
 
-    private ProductDraftBuilder(final Reference<ProductType> productType, final LocalizedString name, final LocalizedString slug, final ProductVariantDraft masterVariant) {
+    private ProductDraftBuilder(final ResourceIdentifier<ProductType> productType, final LocalizedString name, final LocalizedString slug, final ProductVariantDraft masterVariant) {
         super(name, slug);
         this.productType = productType;
         this.masterVariant = masterVariant;
     }
 
-    public static ProductDraftBuilder of(final Referenceable<ProductType> productType, final LocalizedString name, final LocalizedString slug, final ProductVariantDraft masterVariant) {
-        return new ProductDraftBuilder(productType.toReference(), name, slug, masterVariant);
+    public static ProductDraftBuilder of(final ResourceIdentifiable<ProductType> productType, final LocalizedString name, final LocalizedString slug, final ProductVariantDraft masterVariant) {
+        return new ProductDraftBuilder(productType.toResourceIdentifier(), name, slug, masterVariant);
     }
 
     @Override

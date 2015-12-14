@@ -1,5 +1,6 @@
 package io.sphere.sdk.products.commands;
 
+import io.sphere.sdk.models.ResourceIdentifiable;
 import io.sphere.sdk.products.*;
 import io.sphere.sdk.producttypes.ProductType;
 import io.sphere.sdk.producttypes.ProductTypeFixtures;
@@ -74,5 +75,20 @@ public class ProductCreateCommandTest extends IntegrationTest {
                 })
         );
 
+    }
+
+    @Test
+    public void createProductByProductTypeKeyIdentifiable() {
+        withEmptyProductType(client(), productType -> {
+            final ProductVariantDraft masterVariant = ProductVariantDraftBuilder.of().build();
+            final ResourceIdentifiable<ProductType> productTypeResourceIdentifier = productType;
+            final ProductDraft productDraft = ProductDraftBuilder.of(productTypeResourceIdentifier, randomSlug(), randomSlug(), masterVariant).build();
+
+            final Product product = execute(ProductCreateCommand.of(productDraft));
+
+            assertThat(product.getProductType()).isEqualTo(productType.toReference());
+
+            execute(ProductDeleteCommand.of(product));
+        });
     }
 }

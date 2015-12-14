@@ -1,10 +1,7 @@
 package io.sphere.sdk.products;
 
 import io.sphere.sdk.categories.Category;
-import io.sphere.sdk.models.LocalizedString;
-import io.sphere.sdk.models.MetaAttributes;
-import io.sphere.sdk.models.Reference;
-import io.sphere.sdk.models.WithLocalizedSlug;
+import io.sphere.sdk.models.*;
 import io.sphere.sdk.producttypes.ProductType;
 import io.sphere.sdk.search.SearchKeywords;
 import io.sphere.sdk.states.State;
@@ -25,7 +22,7 @@ public interface ProductDraft extends WithLocalizedSlug, MetaAttributes {
 
     LocalizedString getName();
 
-    Reference<ProductType> getProductType();
+    ResourceIdentifier<ProductType> getProductType();
 
     LocalizedString getSlug();
 

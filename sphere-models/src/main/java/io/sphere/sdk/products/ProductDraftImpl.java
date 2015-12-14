@@ -1,10 +1,7 @@
 package io.sphere.sdk.products;
 
 import io.sphere.sdk.categories.Category;
-import io.sphere.sdk.models.Base;
-import io.sphere.sdk.models.LocalizedString;
-import io.sphere.sdk.models.MetaAttributes;
-import io.sphere.sdk.models.Reference;
+import io.sphere.sdk.models.*;
 import io.sphere.sdk.producttypes.ProductType;
 import io.sphere.sdk.search.SearchKeywords;
 import io.sphere.sdk.states.State;
@@ -15,7 +12,7 @@ import java.util.List;
 import java.util.Set;
 
 class ProductDraftImpl extends Base implements ProductDraft {
-    private final Reference<ProductType> productType;
+    private final ResourceIdentifier<ProductType> productType;
     private final LocalizedString name;
     private final LocalizedString slug;
     @Nullable
@@ -36,7 +33,7 @@ class ProductDraftImpl extends Base implements ProductDraft {
     @Nullable
     private final CategoryOrderHints categoryOrderHints;
 
-    public ProductDraftImpl(final Reference<ProductType> productType, final LocalizedString name, final LocalizedString slug,
+    public ProductDraftImpl(final ResourceIdentifier<ProductType> productType, final LocalizedString name, final LocalizedString slug,
                             final LocalizedString description, final Set<Reference<Category>> categories,
                             final MetaAttributes metaAttributes, final ProductVariantDraft masterVariant,
                             final List<ProductVariantDraft> variants, final Reference<TaxCategory> taxCategory,
@@ -59,7 +56,7 @@ class ProductDraftImpl extends Base implements ProductDraft {
     }
 
     @Override
-    public Reference<ProductType> getProductType() {
+    public ResourceIdentifier<ProductType> getProductType() {
         return productType;
     }
 

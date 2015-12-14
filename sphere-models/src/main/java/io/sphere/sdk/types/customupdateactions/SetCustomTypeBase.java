@@ -4,18 +4,17 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.JsonNode;
 import io.sphere.sdk.commands.UpdateActionImpl;
 import io.sphere.sdk.json.SphereJsonUtils;
+import io.sphere.sdk.models.ResourceIdentifier;
+import io.sphere.sdk.types.Type;
 
 import javax.annotation.Nullable;
 import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 public abstract class SetCustomTypeBase<T> extends UpdateActionImpl<T> {
-    @JsonInclude(JsonInclude.Include.NON_EMPTY)
     @Nullable
-    private final String typeId;
-    @JsonInclude(JsonInclude.Include.NON_EMPTY)
-    @Nullable
-    private final String typeKey;
+    private final ResourceIdentifier<Type> type;
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     @Nullable
     private final Map<String, JsonNode> fields;
@@ -26,19 +25,33 @@ public abstract class SetCustomTypeBase<T> extends UpdateActionImpl<T> {
 
     protected SetCustomTypeBase(final String action, @Nullable final String typeId, @Nullable final String typeKey, @Nullable final Map<String, JsonNode> fields) {
         super(action);
-        this.typeId = typeId;
-        this.typeKey = typeKey;
+        this.type = ResourceIdentifier.ofIdOrKey(typeId, typeKey);
         this.fields = fields;
     }
 
+    /**
+     * @deprecated use {@link #getType()} instead
+     * @return id
+     */
+    @Deprecated
     @Nullable
     public String getTypeId() {
-        return typeId;
+        return Optional.ofNullable(type).map(t -> t.getId()).orElse(null);
+    }
+
+    /**
+     * @deprecated use {@link #getType()} instead
+     * @return key
+     */
+    @Nullable
+    @Deprecated
+    public String getTypeKey() {
+        return Optional.ofNullable(type).map(t -> t.getKey()).orElse(null);
     }
 
     @Nullable
-    public String getTypeKey() {
-        return typeKey;
+    public ResourceIdentifier<Type> getType() {
+        return type;
     }
 
     @Nullable

@@ -2,6 +2,7 @@ package io.sphere.sdk.types;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import io.sphere.sdk.json.SphereJsonUtils;
+import io.sphere.sdk.models.ResourceIdentifier;
 import io.sphere.sdk.utils.MapUtils;
 
 import javax.annotation.Nullable;
@@ -15,15 +16,12 @@ import static java.util.Objects.requireNonNull;
  * @see CustomFieldsDraftBuilder
  */
 public class CustomFieldsDraft {
+    private final ResourceIdentifier<Type> type;
     @Nullable
-    private final String typeId;
-    @Nullable
-    private final String typeKey;
     private final Map<String, JsonNode> fields;
 
     CustomFieldsDraft(@Nullable final String typeId, @Nullable final String typeKey, final Map<String, JsonNode> fields) {
-        this.typeId = typeId;
-        this.typeKey = typeKey;
+        this.type = ResourceIdentifier.ofIdOrKey(typeId, typeKey);
         this.fields = MapUtils.immutableCopyOf(fields);
     }
 
@@ -51,14 +49,28 @@ public class CustomFieldsDraft {
         return ofTypeKeyAndJson(typeKey, fieldsJson);
     }
 
+    /**
+     * use {@link #getType()} instead
+     * @return id of the type to set
+     */
+    @Deprecated
     @Nullable
     public String getTypeId() {
-        return typeId;
+        return type.getTypeId();
     }
 
+    /**
+     * @deprecated use {@link #getType()} instead
+     * @return key of the type to set
+     */
+    @Deprecated
     @Nullable
     public String getTypeKey() {
-        return typeKey;
+        return type.getKey();
+    }
+
+    public ResourceIdentifier<Type> getType() {
+        return type;
     }
 
     public Map<String, JsonNode> getFields() {
