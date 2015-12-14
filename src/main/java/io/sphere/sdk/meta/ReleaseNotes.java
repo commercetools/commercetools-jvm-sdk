@@ -193,7 +193,7 @@ import java.util.function.Function;
  <li class=new-in-release>Added {@link ProductProjection#getCategoryOrderHints()} and {@link ProductProjectionQueryModel#categoryOrderHints()}. It can be used for search as shown in the following example, but the meta model comes in a later release.
   <div class="rn-hidden">{@include.example io.sphere.sdk.products.ProductCategoryOrderHintTest#searchForCategoryAndSort()}</div>
  </li>
- <li class=new-in-release>Added states and update actions for Orders, Reviews and Products: {@link Order#getState()}, {@link io.sphere.sdk.products.Product#getState()}, {@link io.sphere.sdk.reviews.Review#getState()}</li>
+ <li class=new-in-release>Added states and update actions for Orders, Reviews and Products: {@link Order#getState()}, {@link io.sphere.sdk.products.Product#getState()}, {@code io.sphere.sdk.reviews.Review#getState()}</li>
  <li class=new-in-release>Added {@link LineItem#getTotalPrice()}, {@link LineItem#getDiscountedPricePerQuantity()}, {@link CustomLineItem#getTotalPrice()} and {@link CustomLineItem#getDiscountedPricePerQuantity()}</li>
  <li class=change-in-release>Deprecated {@link LineItem#getDiscountedPrice()} and {@link CustomLineItem#getDiscountedPrice()} since they are deprecated in the HTTP API</li>
  <li class=new-in-release>Improved documentation of {@link io.sphere.sdk.models.Versioned}.</li>
@@ -355,7 +355,7 @@ import java.util.function.Function;
  DSL for expansion of references in a product attribute.
  <div class="rn-hidden">{@include.example io.sphere.sdk.products.expansion.ProductVariantExpansionModelTest#productAttributeReferenceExpansion()}</div>
  </li>
- <li class=new-in-release>{@link io.sphere.sdk.reviews.commands.ReviewDeleteCommand}</li>
+ <li class=new-in-release>{@code io.sphere.sdk.reviews.commands.ReviewDeleteCommand}</li>
  <li class=new-in-release>{@link io.sphere.sdk.client.SphereClientConfig#ofEnvironmentVariables(String)} to get the </li>
  <li class=change-in-release>The product attributes have been refactored, look at the {@link ProductAttributeDocumentation} how it works now.</li>
  <li class=change-in-release>{@link io.sphere.sdk.client.SphereClient} implements {@link AutoCloseable} instead of {@link java.io.Closeable}.</li>
@@ -375,7 +375,7 @@ import java.util.function.Function;
  <li class=new-in-release>Use {@link io.sphere.sdk.products.queries.ProductProjectionQueryModel#allVariants()} to formulate a predicate for all variants. In SPHERE.IO the json fields masterVariant (object) and variants (array of objects) together contain all variants.</li>
  <li class=new-in-release>Using {@link ProductProjectionQuery#ofCurrent()} and {@link ProductProjectionQuery#ofStaged()} saves you the import of {@link ProductProjectionType}.</li>
  <li class=new-in-release>{@link CompletionStage} does not support by default timeouts which are quite important in a reactive application so you can decorate the {@link io.sphere.sdk.client.SphereClient} with {@link io.sphere.sdk.client.TimeoutSphereClientDecorator} to get a {@link java.util.concurrent.TimeoutException} after a certain amount of time. But this does NOT cancel the request to SPHERE.IO.</li>
- <li class=new-in-release>The {@link io.sphere.sdk.reviews.Review} endpoints and models are implemented, but we suggest to not use it, since {@link io.sphere.sdk.reviews.Review}s cannot be deleted or marked as hidden.</li>
+ <li class=new-in-release>The {@code io.sphere.sdk.reviews.Review} endpoints and models are implemented, but we suggest to not use it, since {@code io.sphere.sdk.reviews.Review}s cannot be deleted or marked as hidden.</li>
  <li class=new-in-release>New endpoint: Use {@link io.sphere.sdk.projects.queries.ProjectGet} to get the currencies, countries and languages of the SPHERE.IO project.</li>
  <li class=new-in-release>Categories with SEO meta attributes {@link Category#getMetaTitle()}, {@link Category#getMetaDescription()} and {@link Category#getMetaKeywords()} and
  update actions {@link io.sphere.sdk.categories.commands.updateactions.SetMetaTitle}, {@link io.sphere.sdk.categories.commands.updateactions.SetMetaDescription} and {@link io.sphere.sdk.categories.commands.updateactions.SetMetaKeywords}.</li>
