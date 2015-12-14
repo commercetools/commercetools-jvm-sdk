@@ -5,8 +5,10 @@ import java.util.*;
 import static java.util.Collections.unmodifiableMap;
 
 public class HttpHeaders extends Base {
+    public static final String ACCEPT_ENCODING = "Accept-Encoding";
     public static final String AUTHORIZATION = "Authorization";
     public static final String USER_AGENT = "User-Agent";
+    public static final String CONTENT_ENCODING = "Content-Encoding";
     public static final String CONTENT_TYPE = "Content-Type";
     public static final String CONTENT_LENGTH = "Content-Length";
     private final Map<String, List<String>> headers;
