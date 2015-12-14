@@ -10,8 +10,8 @@ import java.nio.charset.StandardCharsets;
 import java.util.Optional;
 import java.util.concurrent.*;
 
-public final class SphereRequestUtils {
-    private SphereRequestUtils() {
+public final class SphereClientUtils {
+    private SphereClientUtils() {
     }
 
     /**

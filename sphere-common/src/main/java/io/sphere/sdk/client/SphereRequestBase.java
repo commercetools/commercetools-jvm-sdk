@@ -15,14 +15,14 @@ public abstract class SphereRequestBase extends Base {
     }
 
     protected static <T> T deserialize(final HttpResponse httpResponse, final TypeReference<T> typeReference) {
-        return SphereRequestUtils.deserialize(httpResponse, typeReference);
+        return SphereClientUtils.deserialize(httpResponse, typeReference);
     }
 
     protected static <T> T deserialize(final HttpResponse httpResponse, final JavaType javaType) {
-        return SphereRequestUtils.deserialize(httpResponse, javaType);
+        return SphereClientUtils.deserialize(httpResponse, javaType);
     }
 
     protected static String getBodyAsString(final HttpResponse httpResponse) {
-        return SphereRequestUtils.getBodyAsString(httpResponse);
+        return SphereClientUtils.getBodyAsString(httpResponse);
     }
 }

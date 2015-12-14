@@ -2,7 +2,7 @@ package io.sphere.sdk.client;
 
 import java.util.concurrent.*;
 
-import static io.sphere.sdk.client.SphereRequestUtils.blockingWait;
+import static io.sphere.sdk.client.SphereClientUtils.blockingWait;
 
 class BlockingSphereClientImpl implements BlockingSphereClient {
 
