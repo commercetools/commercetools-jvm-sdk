@@ -35,4 +35,9 @@ public class ProductProjectionSortSearchModel extends ProductDataSortSearchModel
     public SingleValueSortSearchModel<ProductProjection> lastModifiedAt() {
         return super.lastModifiedAt();
     }
+
+    @Override
+    public CategoryOrderHintsSortSearchModel categoryOrderHints() {
+        return super.categoryOrderHints();
+    }
 }
