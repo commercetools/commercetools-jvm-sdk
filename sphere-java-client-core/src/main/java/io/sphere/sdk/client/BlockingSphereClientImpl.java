@@ -2,7 +2,9 @@ package io.sphere.sdk.client;
 
 import java.util.concurrent.*;
 
- class BlockingSphereClientImpl implements BlockingSphereClient {
+import static io.sphere.sdk.client.SphereRequestUtils.blockingWait;
+
+class BlockingSphereClientImpl implements BlockingSphereClient {
 
     private final SphereClient delegate;
     private final long defaultTimeout;
@@ -31,16 +33,7 @@ import java.util.concurrent.*;
 
     @Override
     public <T> T executeBlocking(final SphereRequest<T> sphereRequest, final long timeout, final TimeUnit unit) {
-        try {
-            return execute(sphereRequest).toCompletableFuture().get(timeout, unit);
-        } catch (InterruptedException | ExecutionException e) {
-            final Throwable cause =
-                    e.getCause() != null && e instanceof ExecutionException
-                            ? e.getCause()
-                            : e;
-            throw cause instanceof RuntimeException? (RuntimeException) cause : new CompletionException(cause);
-        } catch (final TimeoutException e) {
-            throw new SphereTimeoutException(e);
-        }
+        final CompletionStage<T> completionStage = execute(sphereRequest);
+        return blockingWait(completionStage, timeout, unit);
     }
 }
