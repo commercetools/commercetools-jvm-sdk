@@ -100,7 +100,7 @@ var activeTableTab = "activeTableTab";
 <li class="blockList">
 <dl>
 <dt>All Superinterfaces:</dt>
-<dd><a href="../../../../io/sphere/sdk/models/CreationTimestamped.html" title="interface in io.sphere.sdk.models">CreationTimestamped</a>, <a href="../../../../io/sphere/sdk/models/Identifiable.html" title="interface in io.sphere.sdk.models">Identifiable</a>&lt;<a href="../../../../io/sphere/sdk/messages/Message.html" title="interface in io.sphere.sdk.messages">Message</a>&gt;, <a href="../../../../io/sphere/sdk/messages/Message.html" title="interface in io.sphere.sdk.messages">Message</a>, <a href="../../../../io/sphere/sdk/models/Referenceable.html" title="interface in io.sphere.sdk.models">Referenceable</a>&lt;<a href="../../../../io/sphere/sdk/messages/Message.html" title="interface in io.sphere.sdk.messages">Message</a>&gt;, <a href="../../../../io/sphere/sdk/models/Resource.html" title="interface in io.sphere.sdk.models">Resource</a>&lt;<a href="../../../../io/sphere/sdk/messages/Message.html" title="interface in io.sphere.sdk.messages">Message</a>&gt;, <a href="../../../../io/sphere/sdk/models/ResourceView.html" title="interface in io.sphere.sdk.models">ResourceView</a>&lt;<a href="../../../../io/sphere/sdk/messages/Message.html" title="interface in io.sphere.sdk.messages">Message</a>,<a href="../../../../io/sphere/sdk/messages/Message.html" title="interface in io.sphere.sdk.messages">Message</a>&gt;, <a href="../../../../io/sphere/sdk/models/Timestamped.html" title="interface in io.sphere.sdk.models">Timestamped</a>, <a href="../../../../io/sphere/sdk/models/Versioned.html" title="interface in io.sphere.sdk.models">Versioned</a>&lt;<a href="../../../../io/sphere/sdk/messages/Message.html" title="interface in io.sphere.sdk.messages">Message</a>&gt;</dd>
+<dd><a href="../../../../io/sphere/sdk/models/CreationTimestamped.html" title="interface in io.sphere.sdk.models">CreationTimestamped</a>, <a href="../../../../io/sphere/sdk/models/Identifiable.html" title="interface in io.sphere.sdk.models">Identifiable</a>&lt;<a href="../../../../io/sphere/sdk/messages/Message.html" title="interface in io.sphere.sdk.messages">Message</a>&gt;, <a href="../../../../io/sphere/sdk/messages/Message.html" title="interface in io.sphere.sdk.messages">Message</a>, <a href="../../../../io/sphere/sdk/models/Referenceable.html" title="interface in io.sphere.sdk.models">Referenceable</a>&lt;<a href="../../../../io/sphere/sdk/messages/Message.html" title="interface in io.sphere.sdk.messages">Message</a>&gt;, <a href="../../../../io/sphere/sdk/models/Resource.html" title="interface in io.sphere.sdk.models">Resource</a>&lt;<a href="../../../../io/sphere/sdk/messages/Message.html" title="interface in io.sphere.sdk.messages">Message</a>&gt;, <a href="../../../../io/sphere/sdk/models/ResourceIdentifiable.html" title="interface in io.sphere.sdk.models">ResourceIdentifiable</a>&lt;<a href="../../../../io/sphere/sdk/messages/Message.html" title="interface in io.sphere.sdk.messages">Message</a>&gt;, <a href="../../../../io/sphere/sdk/models/ResourceView.html" title="interface in io.sphere.sdk.models">ResourceView</a>&lt;<a href="../../../../io/sphere/sdk/messages/Message.html" title="interface in io.sphere.sdk.messages">Message</a>,<a href="../../../../io/sphere/sdk/messages/Message.html" title="interface in io.sphere.sdk.messages">Message</a>&gt;, <a href="../../../../io/sphere/sdk/models/Timestamped.html" title="interface in io.sphere.sdk.models">Timestamped</a>, <a href="../../../../io/sphere/sdk/models/Versioned.html" title="interface in io.sphere.sdk.models">Versioned</a>&lt;<a href="../../../../io/sphere/sdk/messages/Message.html" title="interface in io.sphere.sdk.messages">Message</a>&gt;</dd>
 </dl>
 <dl>
 <dt>All Known Subinterfaces:</dt>
@@ -133,7 +133,7 @@ extends <a href="../../../../io/sphere/sdk/messages/Message.html" title="interfa
 <th class="colLast" scope="col">Method and Description</th>
 </tr>
 <tr id="i0" class="altColor">
-<td class="colFirst"><code><a href="../../../../io/sphere/sdk/models/Reference.html" title="class in io.sphere.sdk.models">Reference</a>&lt;<a href="../../../../io/sphere/sdk/messages/GenericMessage.html" title="type parameter in GenericMessage">T</a>&gt;</code></td>
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/models/Reference.html" title="interface in io.sphere.sdk.models">Reference</a>&lt;<a href="../../../../io/sphere/sdk/messages/GenericMessage.html" title="type parameter in GenericMessage">T</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/messages/GenericMessage.html#getResource--">getResource</a></span>()</code>&nbsp;</td>
 </tr>
 </table>
@@ -163,7 +163,7 @@ extends <a href="../../../../io/sphere/sdk/messages/Message.html" title="interfa
 <!--   -->
 </a>
 <h3>Methods inherited from interface&nbsp;io.sphere.sdk.models.<a href="../../../../io/sphere/sdk/models/Referenceable.html" title="interface in io.sphere.sdk.models">Referenceable</a></h3>
-<code><a href="../../../../io/sphere/sdk/models/Referenceable.html#hasSameIdAs-io.sphere.sdk.models.Referenceable-">hasSameIdAs</a></code></li>
+<code><a href="../../../../io/sphere/sdk/models/Referenceable.html#hasSameIdAs-io.sphere.sdk.models.Referenceable-">hasSameIdAs</a>, <a href="../../../../io/sphere/sdk/models/Referenceable.html#toResourceIdentifier--">toResourceIdentifier</a></code></li>
 </ul>
 </li>
 </ul>
@@ -185,7 +185,7 @@ extends <a href="../../../../io/sphere/sdk/messages/Message.html" title="interfa
 <ul class="blockListLast">
 <li class="blockList">
 <h4>getResource</h4>
-<pre><a href="../../../../io/sphere/sdk/models/Reference.html" title="class in io.sphere.sdk.models">Reference</a>&lt;<a href="../../../../io/sphere/sdk/messages/GenericMessage.html" title="type parameter in GenericMessage">T</a>&gt;&nbsp;getResource()</pre>
+<pre><a href="../../../../io/sphere/sdk/models/Reference.html" title="interface in io.sphere.sdk.models">Reference</a>&lt;<a href="../../../../io/sphere/sdk/messages/GenericMessage.html" title="type parameter in GenericMessage">T</a>&gt;&nbsp;getResource()</pre>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="../../../../io/sphere/sdk/messages/Message.html#getResource--">getResource</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/messages/Message.html" title="interface in io.sphere.sdk.messages">Message</a></code></dd>

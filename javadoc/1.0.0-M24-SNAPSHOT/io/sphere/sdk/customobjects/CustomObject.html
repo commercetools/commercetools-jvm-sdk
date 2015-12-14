@@ -104,7 +104,7 @@ var activeTableTab = "activeTableTab";
 </dl>
 <dl>
 <dt>All Superinterfaces:</dt>
-<dd><a href="../../../../io/sphere/sdk/models/CreationTimestamped.html" title="interface in io.sphere.sdk.models">CreationTimestamped</a>, <a href="../../../../io/sphere/sdk/models/Identifiable.html" title="interface in io.sphere.sdk.models">Identifiable</a>&lt;<a href="../../../../io/sphere/sdk/customobjects/CustomObject.html" title="interface in io.sphere.sdk.customobjects">CustomObject</a>&lt;com.fasterxml.jackson.databind.JsonNode&gt;&gt;, <a href="../../../../io/sphere/sdk/models/Referenceable.html" title="interface in io.sphere.sdk.models">Referenceable</a>&lt;<a href="../../../../io/sphere/sdk/customobjects/CustomObject.html" title="interface in io.sphere.sdk.customobjects">CustomObject</a>&lt;com.fasterxml.jackson.databind.JsonNode&gt;&gt;, <a href="../../../../io/sphere/sdk/models/ResourceView.html" title="interface in io.sphere.sdk.models">ResourceView</a>&lt;<a href="../../../../io/sphere/sdk/customobjects/CustomObject.html" title="interface in io.sphere.sdk.customobjects">CustomObject</a>&lt;T&gt;,<a href="../../../../io/sphere/sdk/customobjects/CustomObject.html" title="interface in io.sphere.sdk.customobjects">CustomObject</a>&lt;com.fasterxml.jackson.databind.JsonNode&gt;&gt;, <a href="../../../../io/sphere/sdk/models/Timestamped.html" title="interface in io.sphere.sdk.models">Timestamped</a>, <a href="../../../../io/sphere/sdk/models/Versioned.html" title="interface in io.sphere.sdk.models">Versioned</a>&lt;<a href="../../../../io/sphere/sdk/customobjects/CustomObject.html" title="interface in io.sphere.sdk.customobjects">CustomObject</a>&lt;com.fasterxml.jackson.databind.JsonNode&gt;&gt;</dd>
+<dd><a href="../../../../io/sphere/sdk/models/CreationTimestamped.html" title="interface in io.sphere.sdk.models">CreationTimestamped</a>, <a href="../../../../io/sphere/sdk/models/Identifiable.html" title="interface in io.sphere.sdk.models">Identifiable</a>&lt;<a href="../../../../io/sphere/sdk/customobjects/CustomObject.html" title="interface in io.sphere.sdk.customobjects">CustomObject</a>&lt;com.fasterxml.jackson.databind.JsonNode&gt;&gt;, <a href="../../../../io/sphere/sdk/models/Referenceable.html" title="interface in io.sphere.sdk.models">Referenceable</a>&lt;<a href="../../../../io/sphere/sdk/customobjects/CustomObject.html" title="interface in io.sphere.sdk.customobjects">CustomObject</a>&lt;com.fasterxml.jackson.databind.JsonNode&gt;&gt;, <a href="../../../../io/sphere/sdk/models/ResourceIdentifiable.html" title="interface in io.sphere.sdk.models">ResourceIdentifiable</a>&lt;<a href="../../../../io/sphere/sdk/customobjects/CustomObject.html" title="interface in io.sphere.sdk.customobjects">CustomObject</a>&lt;com.fasterxml.jackson.databind.JsonNode&gt;&gt;, <a href="../../../../io/sphere/sdk/models/ResourceView.html" title="interface in io.sphere.sdk.models">ResourceView</a>&lt;<a href="../../../../io/sphere/sdk/customobjects/CustomObject.html" title="interface in io.sphere.sdk.customobjects">CustomObject</a>&lt;T&gt;,<a href="../../../../io/sphere/sdk/customobjects/CustomObject.html" title="interface in io.sphere.sdk.customobjects">CustomObject</a>&lt;com.fasterxml.jackson.databind.JsonNode&gt;&gt;, <a href="../../../../io/sphere/sdk/models/Timestamped.html" title="interface in io.sphere.sdk.models">Timestamped</a>, <a href="../../../../io/sphere/sdk/models/Versioned.html" title="interface in io.sphere.sdk.models">Versioned</a>&lt;<a href="../../../../io/sphere/sdk/customobjects/CustomObject.html" title="interface in io.sphere.sdk.customobjects">CustomObject</a>&lt;com.fasterxml.jackson.databind.JsonNode&gt;&gt;</dd>
 </dl>
 <hr>
 <br>
@@ -735,7 +735,7 @@ final QuerySort&lt;CustomObject&lt;Foo&gt;&gt; fooSort = CustomObjectQueryModel.
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/customobjects/CustomObject.html#referenceTypeId--">referenceTypeId</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i4" class="altColor">
-<td class="colFirst"><code>default <a href="../../../../io/sphere/sdk/models/Reference.html" title="class in io.sphere.sdk.models">Reference</a>&lt;<a href="../../../../io/sphere/sdk/customobjects/CustomObject.html" title="interface in io.sphere.sdk.customobjects">CustomObject</a>&lt;com.fasterxml.jackson.databind.JsonNode&gt;&gt;</code></td>
+<td class="colFirst"><code>default <a href="../../../../io/sphere/sdk/models/Reference.html" title="interface in io.sphere.sdk.models">Reference</a>&lt;<a href="../../../../io/sphere/sdk/customobjects/CustomObject.html" title="interface in io.sphere.sdk.customobjects">CustomObject</a>&lt;com.fasterxml.jackson.databind.JsonNode&gt;&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/customobjects/CustomObject.html#toReference--">toReference</a></span>()</code>
 <div class="block">Creates a reference which is not necessarily filled.</div>
 </td>
@@ -776,7 +776,7 @@ final QuerySort&lt;CustomObject&lt;Foo&gt;&gt; fooSort = CustomObjectQueryModel.
 <!--   -->
 </a>
 <h3>Methods inherited from interface&nbsp;io.sphere.sdk.models.<a href="../../../../io/sphere/sdk/models/Referenceable.html" title="interface in io.sphere.sdk.models">Referenceable</a></h3>
-<code><a href="../../../../io/sphere/sdk/models/Referenceable.html#hasSameIdAs-io.sphere.sdk.models.Referenceable-">hasSameIdAs</a></code></li>
+<code><a href="../../../../io/sphere/sdk/models/Referenceable.html#hasSameIdAs-io.sphere.sdk.models.Referenceable-">hasSameIdAs</a>, <a href="../../../../io/sphere/sdk/models/Referenceable.html#toResourceIdentifier--">toResourceIdentifier</a></code></li>
 </ul>
 </li>
 </ul>
@@ -840,7 +840,7 @@ final QuerySort&lt;CustomObject&lt;Foo&gt;&gt; fooSort = CustomObjectQueryModel.
 <ul class="blockList">
 <li class="blockList">
 <h4>toReference</h4>
-<pre>default&nbsp;<a href="../../../../io/sphere/sdk/models/Reference.html" title="class in io.sphere.sdk.models">Reference</a>&lt;<a href="../../../../io/sphere/sdk/customobjects/CustomObject.html" title="interface in io.sphere.sdk.customobjects">CustomObject</a>&lt;com.fasterxml.jackson.databind.JsonNode&gt;&gt;&nbsp;toReference()</pre>
+<pre>default&nbsp;<a href="../../../../io/sphere/sdk/models/Reference.html" title="interface in io.sphere.sdk.models">Reference</a>&lt;<a href="../../../../io/sphere/sdk/customobjects/CustomObject.html" title="interface in io.sphere.sdk.customobjects">CustomObject</a>&lt;com.fasterxml.jackson.databind.JsonNode&gt;&gt;&nbsp;toReference()</pre>
 <div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../io/sphere/sdk/models/Referenceable.html#toReference--">Referenceable</a></code></span></div>
 <div class="block">Creates a reference which is not necessarily filled.</div>
 <dl>
