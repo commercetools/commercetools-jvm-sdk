@@ -88,6 +88,8 @@ public class SphereClientConfig extends Base implements SphereAuthConfig, Sphere
     export EXAMPLE_PROJECT_KEY="YOUR project key"
     export EXAMPLE_CLIENT_ID="YOUR client id"
     export EXAMPLE_CLIENT_SECRET="YOUR client secret"
+    export EXAMPLE_AUTH_URL="https://auth.sphere.io"
+    export EXAMPLE_API_URL="https://api.sphere.io"
     }</pre>
 
     The possible suffixes are
@@ -112,6 +114,8 @@ public class SphereClientConfig extends Base implements SphereAuthConfig, Sphere
     commercetools.projectKey=YOUR project key without quotes
     commercetools.clientId=YOUR client id without quotes
     commercetools.clientSecret=YOUR client secret without quotes
+    commercetools.authUrl=https://auth.sphere.io
+    commercetools.apiUrl=https://api.sphere.io
     }</pre>
 
      The possible suffixes are
