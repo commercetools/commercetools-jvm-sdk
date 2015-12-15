@@ -130,7 +130,7 @@ public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
                 .price(PriceDraft.of(new BigDecimal("27.45"), EUR))
                 .build();
         final ProductDraft productDraft = ProductDraftBuilder.of(productType, name, name.slugifiedUnique(), masterVariant)
-                .variants(singletonList(variant)).build();
+                .plusVariants(variant).build();
         return execute(ProductCreateCommand.of(productDraft));
     }
 
