@@ -5,13 +5,11 @@ import io.sphere.sdk.categories.expansion.CategoryExpansionModel;
 import io.sphere.sdk.commands.UpdateAction;
 import io.sphere.sdk.commands.UpdateCommandDsl;
 import io.sphere.sdk.expansion.ExpansionPath;
-import io.sphere.sdk.expansion.ExpansionPathsHolder;
 import io.sphere.sdk.expansion.MetaModelExpansionDsl;
 import io.sphere.sdk.models.Versioned;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.function.Function;
 
 /**
  * <p>Updates a category.</p>

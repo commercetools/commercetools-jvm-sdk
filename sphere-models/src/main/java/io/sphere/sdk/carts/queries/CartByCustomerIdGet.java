@@ -3,13 +3,11 @@ package io.sphere.sdk.carts.queries;
 import io.sphere.sdk.carts.Cart;
 import io.sphere.sdk.carts.expansion.CartExpansionModel;
 import io.sphere.sdk.customers.Customer;
-import io.sphere.sdk.expansion.ExpansionPathsHolder;
-import io.sphere.sdk.models.Identifiable;
 import io.sphere.sdk.expansion.ExpansionPath;
+import io.sphere.sdk.models.Identifiable;
 import io.sphere.sdk.queries.MetaModelGetDsl;
 
 import java.util.List;
-import java.util.function.Function;
 
 /**
  * Gets a cart by the customer id.

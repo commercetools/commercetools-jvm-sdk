@@ -1,7 +1,7 @@
 package io.sphere.sdk.carts.expansion;
 
 import io.sphere.sdk.expansion.ExpansionModel;
-import io.sphere.sdk.expansion.ExpansionPathsHolder;
+import io.sphere.sdk.expansion.ReferenceExpansionSupport;
 
 import java.util.List;
 
@@ -14,11 +14,11 @@ public class LineItemExpansionModel<T> extends ExpansionModel<T> {
         super();
     }
 
-    public ExpansionPathsHolder<T> supplyChannel() {
+    public ReferenceExpansionSupport<T> supplyChannel() {
         return expansionPath("supplyChannel");
     }
 
-    public ExpansionPathsHolder<T> distributionChannel() {
+    public ReferenceExpansionSupport<T> distributionChannel() {
         return expansionPath("distributionChannel");
     }
 

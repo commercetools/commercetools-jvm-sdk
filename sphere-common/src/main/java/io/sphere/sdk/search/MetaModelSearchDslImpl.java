@@ -4,10 +4,10 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import io.sphere.sdk.client.HttpRequestIntent;
 import io.sphere.sdk.client.SphereRequestBase;
 import io.sphere.sdk.expansion.ExpansionPath;
-import io.sphere.sdk.expansion.ExpansionPathsHolder;
+import io.sphere.sdk.expansion.ReferenceExpansionSupport;
 import io.sphere.sdk.http.HttpMethod;
-import io.sphere.sdk.http.HttpResponse;
 import io.sphere.sdk.http.HttpQueryParameter;
+import io.sphere.sdk.http.HttpResponse;
 import io.sphere.sdk.http.UrlQueryBuilder;
 import io.sphere.sdk.models.LocalizedStringEntry;
 
@@ -287,8 +287,8 @@ public abstract class MetaModelSearchDslImpl<T, C extends MetaModelSearchDsl<T, 
     }
 
     @Override
-    public C withExpansionPaths(final Function<E, ExpansionPathsHolder<T>> m) {
-        return withExpansionPaths(m.apply(expansionModel).getExpansionPaths());
+    public C withExpansionPaths(final Function<E, ReferenceExpansionSupport<T>> m) {
+        return withExpansionPaths(m.apply(expansionModel).expansionPaths());
     }
 
     @Override
@@ -302,8 +302,8 @@ public abstract class MetaModelSearchDslImpl<T, C extends MetaModelSearchDsl<T, 
     }
 
     @Override
-    public C plusExpansionPaths(final Function<E, ExpansionPathsHolder<T>> m) {
-        return plusExpansionPaths(m.apply(expansionModel).getExpansionPaths());
+    public C plusExpansionPaths(final Function<E, ReferenceExpansionSupport<T>> m) {
+        return plusExpansionPaths(m.apply(expansionModel).expansionPaths());
     }
 
     @Deprecated

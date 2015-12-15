@@ -1,7 +1,7 @@
 package io.sphere.sdk.carts.expansion;
 
 import io.sphere.sdk.expansion.ExpansionModel;
-import io.sphere.sdk.expansion.ExpansionPathsHolder;
+import io.sphere.sdk.expansion.ReferenceExpansionSupport;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -11,7 +11,7 @@ public class PaymentInfoExpansionModel<T> extends ExpansionModel<T> {
         super(parentPath, path);
     }
 
-    public ExpansionPathsHolder<T> payments() {
+    public ReferenceExpansionSupport<T> payments() {
         return expansionPath("payments[*]");
     }
 }

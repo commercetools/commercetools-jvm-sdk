@@ -1,7 +1,6 @@
 package io.sphere.sdk.expansion;
 
 import io.sphere.sdk.models.Base;
-import org.apache.commons.lang3.StringUtils;
 
 import javax.annotation.Nullable;
 import java.util.Collections;
@@ -46,7 +45,7 @@ public class ExpansionModel<T> extends Base {
         return buildPathExpression();
     }
 
-    protected final ExpansionPathsHolder<T> expansionPath(final String path) {
+    protected final ReferenceExpansionSupport<T> expansionPath(final String path) {
         return new ExpandedModel<>(buildPathExpression(), path);
     }
 }

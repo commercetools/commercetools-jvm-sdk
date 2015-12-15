@@ -1,15 +1,15 @@
 package io.sphere.sdk.inventory.expansion;
 
-import io.sphere.sdk.expansion.ExpansionPathsHolder;
-import io.sphere.sdk.inventory.InventoryEntry;
 import io.sphere.sdk.expansion.ExpansionModel;
+import io.sphere.sdk.expansion.ReferenceExpansionSupport;
+import io.sphere.sdk.inventory.InventoryEntry;
 
 public class InventoryEntryExpansionModel<T> extends ExpansionModel<T> {
 
     InventoryEntryExpansionModel() {
     }
 
-    public ExpansionPathsHolder<T> supplyChannel() {
+    public ReferenceExpansionSupport<T> supplyChannel() {
         return expansionPath("supplyChannel");
     }
 

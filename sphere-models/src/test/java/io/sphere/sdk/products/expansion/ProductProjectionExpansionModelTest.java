@@ -28,8 +28,8 @@ public class ProductProjectionExpansionModelTest {
 
         //this is equivalent to
 
-        final ExpansionPath<ProductProjection> categoryExpand = ProductProjectionExpansionModel.of().categories().getExpansionPaths().get(0);
-        final ExpansionPath<ProductProjection> productTypeExpand = ProductProjectionExpansionModel.of().productType().getExpansionPaths().get(0);
+        final ExpansionPath<ProductProjection> categoryExpand = ProductProjectionExpansionModel.of().categories().expansionPaths().get(0);
+        final ExpansionPath<ProductProjection> productTypeExpand = ProductProjectionExpansionModel.of().productType().expansionPaths().get(0);
         final ProductProjectionByIdGet fetchB = ProductProjectionByIdGet.of("id", ProductProjectionType.CURRENT)
                         .withExpansionPaths(asList(categoryExpand, productTypeExpand));
         assertThat(fetchB.expansionPaths())
@@ -87,14 +87,14 @@ public class ProductProjectionExpansionModelTest {
     @Test
     public void variants() {
         final ExpansionPath<ProductProjection> expansionPath =
-                ProductProjectionExpansionModel.of().variants().prices().customerGroup().getExpansionPaths().get(0);
+                ProductProjectionExpansionModel.of().variants().prices().customerGroup().expansionPaths().get(0);
         assertThat(expansionPath.toSphereExpand()).isEqualTo("variants[*].prices[*].customerGroup");
     }
 
     @Test
     public void allVariants() {
         final List<ExpansionPath<ProductProjection>> expansionPaths =
-                ProductProjectionExpansionModel.of().allVariants().prices().customerGroup().getExpansionPaths();
+                ProductProjectionExpansionModel.of().allVariants().prices().customerGroup().expansionPaths();
         assertThat(expansionPaths.stream().map(ExpansionPath::toSphereExpand).collect(Collectors.toList()))
                 .containsExactly("masterVariant.prices[*].customerGroup", "variants[*].prices[*].customerGroup");
     }

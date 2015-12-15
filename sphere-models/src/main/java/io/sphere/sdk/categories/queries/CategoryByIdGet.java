@@ -2,13 +2,11 @@ package io.sphere.sdk.categories.queries;
 
 import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.categories.expansion.CategoryExpansionModel;
-import io.sphere.sdk.expansion.ExpansionPathsHolder;
-import io.sphere.sdk.models.Identifiable;
 import io.sphere.sdk.expansion.ExpansionPath;
+import io.sphere.sdk.models.Identifiable;
 import io.sphere.sdk.queries.MetaModelGetDsl;
 
 import java.util.List;
-import java.util.function.Function;
 
 /**
  * Retrieves a category by a known ID.

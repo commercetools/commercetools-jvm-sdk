@@ -1,6 +1,5 @@
 package io.sphere.sdk.expansion;
 
-import java.util.List;
 import java.util.function.Function;
 
 public interface MetaModelExpansionDsl<T, C, E> extends ReferenceExpansionDsl<T, C> {
@@ -13,7 +12,7 @@ public interface MetaModelExpansionDsl<T, C, E> extends ReferenceExpansionDsl<T,
      * @param m function to use the meta model for expansions to create an expansion path
      * @return new object
      */
-    C plusExpansionPaths(final Function<E, ExpansionPathsHolder<T>> m);
+    C plusExpansionPaths(final Function<E, ReferenceExpansionSupport<T>> m);
 
     /**
      * Creates a new object with the properties of the old object but replaces all expansion paths with a single {@code expansionPath} by using meta models.
@@ -24,5 +23,5 @@ public interface MetaModelExpansionDsl<T, C, E> extends ReferenceExpansionDsl<T,
      * @param m function to use the meta model for expansions to create an expansion path
      * @return new object
      */
-    C withExpansionPaths(final Function<E, ExpansionPathsHolder<T>> m);
+    C withExpansionPaths(final Function<E, ReferenceExpansionSupport<T>> m);
 }

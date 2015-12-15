@@ -39,11 +39,11 @@ public interface ReferenceExpansionDsl<T, C> extends ReferenceExpansionSupport<T
      */
     C plusExpansionPaths(final ExpansionPath<T> expansionPath);
 
-    default C withExpansionPaths(ExpansionPathsHolder<T> holder) {
-        return withExpansionPaths(holder.getExpansionPaths());
-    }  
+    default C withExpansionPaths(ReferenceExpansionSupport<T> holder) {
+        return withExpansionPaths(holder.expansionPaths());
+    }
 
-    default C plusExpansionPaths(ExpansionPathsHolder<T> holder) {
-        return plusExpansionPaths(holder.getExpansionPaths());
+    default C plusExpansionPaths(ReferenceExpansionSupport<T> holder) {
+        return plusExpansionPaths(holder.expansionPaths());
     }
 }

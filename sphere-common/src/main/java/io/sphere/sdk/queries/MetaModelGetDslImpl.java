@@ -6,8 +6,8 @@ import io.sphere.sdk.client.JsonEndpoint;
 import io.sphere.sdk.client.SphereRequestBase;
 import io.sphere.sdk.expansion.ExpansionDslUtil;
 import io.sphere.sdk.expansion.ExpansionPath;
-import io.sphere.sdk.expansion.ExpansionPathsHolder;
 import io.sphere.sdk.expansion.MetaModelExpansionDslExpansionModelRead;
+import io.sphere.sdk.expansion.ReferenceExpansionSupport;
 import io.sphere.sdk.http.HttpMethod;
 import io.sphere.sdk.http.HttpQueryParameter;
 import io.sphere.sdk.http.HttpResponse;
@@ -120,7 +120,7 @@ public class MetaModelGetDslImpl<R, T, C extends MetaModelGetDsl<R, T, C, E>, E>
     }
 
     @Override
-    public C withExpansionPaths(final Function<E, ExpansionPathsHolder<T>> m) {
+    public C withExpansionPaths(final Function<E, ReferenceExpansionSupport<T>> m) {
         return ExpansionDslUtil.withExpansionPaths(this, m);
     }
 
@@ -135,7 +135,7 @@ public class MetaModelGetDslImpl<R, T, C extends MetaModelGetDsl<R, T, C, E>, E>
     }
 
     @Override
-    public C plusExpansionPaths(final Function<E, ExpansionPathsHolder<T>> m) {
+    public C plusExpansionPaths(final Function<E, ReferenceExpansionSupport<T>> m) {
         return ExpansionDslUtil.plusExpansionPaths(this, m);
     }
 

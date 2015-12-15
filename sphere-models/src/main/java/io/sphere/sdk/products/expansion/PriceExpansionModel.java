@@ -1,7 +1,7 @@
 package io.sphere.sdk.products.expansion;
 
 import io.sphere.sdk.expansion.ExpansionModel;
-import io.sphere.sdk.expansion.ExpansionPathsHolder;
+import io.sphere.sdk.expansion.ReferenceExpansionSupport;
 
 import java.util.List;
 
@@ -10,11 +10,11 @@ public class PriceExpansionModel<T> extends ExpansionModel<T> {
         super(parentPath, path);
     }
 
-    public ExpansionPathsHolder<T> customerGroup() {
+    public ReferenceExpansionSupport<T> customerGroup() {
         return expansionPath("customerGroup");
     }
 
-    public ExpansionPathsHolder<T> channel() {
+    public ReferenceExpansionSupport<T> channel() {
         return expansionPath("channel");
     }
 

@@ -5,7 +5,7 @@ import java.util.List;
 
 import static java.util.stream.Collectors.toList;
 
-public class ExpandedModel<T> extends ExpansionModel<T> implements ExpansionPathsHolder<T> {
+public class ExpandedModel<T> extends ExpansionModel<T> implements ReferenceExpansionSupport<T> {
 
     protected ExpandedModel(@Nullable final String parentPath, @Nullable final String path) {
         super(parentPath, path);
@@ -24,7 +24,7 @@ public class ExpandedModel<T> extends ExpansionModel<T> implements ExpansionPath
     }
 
     @Override
-    public List<ExpansionPath<T>> getExpansionPaths() {
+    public List<ExpansionPath<T>> expansionPaths() {
         return buildPathExpression().stream().map(ExpansionPath::<T>of).collect(toList());
     }
 }

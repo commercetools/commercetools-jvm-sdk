@@ -2,11 +2,9 @@ package io.sphere.sdk.customers.expansion;
 
 import io.sphere.sdk.customers.Customer;
 import io.sphere.sdk.expansion.ExpansionModel;
-import io.sphere.sdk.expansion.ExpansionPath;
-import io.sphere.sdk.expansion.ExpansionPathsHolder;
+import io.sphere.sdk.expansion.ReferenceExpansionSupport;
 
 import javax.annotation.Nullable;
-import java.util.List;
 
 public class CustomerExpansionModel<T> extends ExpansionModel<T> {
     private CustomerExpansionModel() {
@@ -21,7 +19,7 @@ public class CustomerExpansionModel<T> extends ExpansionModel<T> {
         return new CustomerExpansionModel<>();
     }
 
-    public ExpansionPathsHolder<T> customerGroup() {
+    public ReferenceExpansionSupport<T> customerGroup() {
         return expansionPath("customerGroup");
     }
 }

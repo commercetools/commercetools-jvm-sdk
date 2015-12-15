@@ -5,8 +5,8 @@ import io.sphere.sdk.client.HttpRequestIntent;
 import io.sphere.sdk.client.JsonEndpoint;
 import io.sphere.sdk.expansion.ExpansionDslUtil;
 import io.sphere.sdk.expansion.ExpansionPath;
-import io.sphere.sdk.expansion.ExpansionPathsHolder;
 import io.sphere.sdk.expansion.MetaModelExpansionDslExpansionModelRead;
+import io.sphere.sdk.expansion.ReferenceExpansionSupport;
 import io.sphere.sdk.http.HttpMethod;
 import io.sphere.sdk.http.UrlQueryBuilder;
 import io.sphere.sdk.json.SphereJsonUtils;
@@ -92,7 +92,7 @@ public abstract class MetaModelCreateCommandImpl<T, C, D, E> extends CommandImpl
     }
 
     @Override
-    public C withExpansionPaths(final Function<E, ExpansionPathsHolder<T>> m) {
+    public C withExpansionPaths(final Function<E, ReferenceExpansionSupport<T>> m) {
         return ExpansionDslUtil.withExpansionPaths(this, m);
     }
 
@@ -107,7 +107,7 @@ public abstract class MetaModelCreateCommandImpl<T, C, D, E> extends CommandImpl
     }
 
     @Override
-    public C plusExpansionPaths(final Function<E, ExpansionPathsHolder<T>> m) {
+    public C plusExpansionPaths(final Function<E, ReferenceExpansionSupport<T>> m) {
         return ExpansionDslUtil.plusExpansionPaths(this, m);
     }
 

@@ -1,7 +1,7 @@
 package io.sphere.sdk.shippingmethods.expansion;
 
 import io.sphere.sdk.expansion.ExpansionModel;
-import io.sphere.sdk.expansion.ExpansionPathsHolder;
+import io.sphere.sdk.expansion.ReferenceExpansionSupport;
 
 import java.util.List;
 
@@ -14,7 +14,7 @@ public class ZoneRateExpansionModel<T> extends ExpansionModel<T> {
         super();
     }
 
-    public ExpansionPathsHolder<T> zone() {
+    public ReferenceExpansionSupport<T> zone() {
         return expansionPath("zone");
     }
 }

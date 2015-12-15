@@ -30,25 +30,25 @@ public class ExpansionPathBaseTest {
 
     @Test
     public void allElementsPathCreatesCorrectPath() throws Exception {
-        assertThat(productModel.categories().getExpansionPaths().get(0).toSphereExpand())
+        assertThat(productModel.categories().expansionPaths().get(0).toSphereExpand())
                 .isEqualTo("categories[*]");
     }
 
     @Test
     public void oneElementPathCreatesCorrectPath() throws Exception {
-        assertThat(productModel.categories(5).getExpansionPaths().get(0).toSphereExpand())
+        assertThat(productModel.categories(5).expansionPaths().get(0).toSphereExpand())
                 .isEqualTo("categories[5]");
     }
 
     @Test
     public void pathOfCategoriesParent() throws Exception {
-        assertThat(productModel.categories().parent().getExpansionPaths().get(0).toSphereExpand())
+        assertThat(productModel.categories().parent().expansionPaths().get(0).toSphereExpand())
                 .isEqualTo("categories[*].parent");
     }
 
     @Test
     public void pathOfCategoriesParentOfIndex() throws Exception {
-        final ExpansionPath<ProductProjectionDummy> path = productModel.categories(4).parent().getExpansionPaths().get(0);
+        final ExpansionPath<ProductProjectionDummy> path = productModel.categories(4).parent().expansionPaths().get(0);
         assertThat(path.toSphereExpand())
                 .isEqualTo("categories[4].parent");
     }
@@ -56,7 +56,7 @@ public class ExpansionPathBaseTest {
     @Test
     public void pathOfCategoriesAncestor() throws Exception {
         final ExpansionPath<ProductProjectionDummy> path =
-                productModel.categories().ancestors(3).parent().getExpansionPaths().get(0);
+                productModel.categories().ancestors(3).parent().expansionPaths().get(0);
         assertThat(path.toSphereExpand()).isEqualTo("categories[*].ancestors[3].parent");
     }
 

@@ -1,10 +1,7 @@
 package io.sphere.sdk.carts.expansion;
 
 import io.sphere.sdk.expansion.ExpansionModel;
-import io.sphere.sdk.expansion.ExpansionPath;
-import io.sphere.sdk.expansion.ExpansionPathsHolder;
-
-import java.util.List;
+import io.sphere.sdk.expansion.ReferenceExpansionSupport;
 
 /**
  * Internal base class
@@ -19,7 +16,7 @@ public abstract class CartLikeExpansionModel<T> extends ExpansionModel<T> {
         super();
     }
 
-    public ExpansionPathsHolder<T> customerGroup() {
+    public ReferenceExpansionSupport<T> customerGroup() {
         return expansionPath("customerGroup");
     }
 
