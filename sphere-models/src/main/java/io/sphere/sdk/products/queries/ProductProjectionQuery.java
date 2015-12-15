@@ -91,9 +91,4 @@ public interface ProductProjectionQuery extends MetaModelQueryDsl<ProductProject
     @Override
     ProductProjectionQuery withSortMulti(final Function<ProductProjectionQueryModel, List<QuerySort<ProductProjection>>> m);
 
-    @Override
-    ProductProjectionQuery plusExpansionPaths(final Function<ProductProjectionExpansionModel<ProductProjection>, ExpansionPath<ProductProjection>> m);
-
-    @Override
-    ProductProjectionQuery withExpansionPaths(final Function<ProductProjectionExpansionModel<ProductProjection>, ExpansionPath<ProductProjection>> m);
 }

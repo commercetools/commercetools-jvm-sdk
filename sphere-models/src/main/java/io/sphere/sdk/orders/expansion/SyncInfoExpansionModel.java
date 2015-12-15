@@ -2,8 +2,10 @@ package io.sphere.sdk.orders.expansion;
 
 import io.sphere.sdk.expansion.ExpansionModel;
 import io.sphere.sdk.expansion.ExpansionPath;
+import io.sphere.sdk.expansion.ExpansionPathsHolder;
 
 import javax.annotation.Nullable;
+import java.util.List;
 
 /**
   DSL class to create expansion path expressions.
@@ -23,7 +25,7 @@ public class SyncInfoExpansionModel<T> extends ExpansionModel<T> {
         return new SyncInfoExpansionModel<>();
     }
 
-    public ExpansionPath<T> channel() {
+    public ExpansionPathsHolder<T> channel() {
         return expansionPath("channel");
     }
 }

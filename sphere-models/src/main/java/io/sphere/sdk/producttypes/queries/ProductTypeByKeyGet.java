@@ -19,12 +19,6 @@ public interface ProductTypeByKeyGet extends MetaModelGetDsl<ProductType, Produc
     }
 
     @Override
-    ProductTypeByKeyGet plusExpansionPaths(final Function<ProductTypeExpansionModel<ProductType>, ExpansionPath<ProductType>> m);
-
-    @Override
-    ProductTypeByKeyGet withExpansionPaths(final Function<ProductTypeExpansionModel<ProductType>, ExpansionPath<ProductType>> m);
-
-    @Override
     List<ExpansionPath<ProductType>> expansionPaths();
 
     @Override

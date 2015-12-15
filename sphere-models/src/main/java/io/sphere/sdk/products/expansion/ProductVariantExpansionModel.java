@@ -3,10 +3,15 @@ package io.sphere.sdk.products.expansion;
 import io.sphere.sdk.expansion.ExpansionModel;
 
 import javax.annotation.Nullable;
+import java.util.List;
 
 public class ProductVariantExpansionModel<T> extends ExpansionModel<T> {
     ProductVariantExpansionModel(@Nullable final String parentPath, @Nullable final String path) {
         super(parentPath, path);
+    }
+
+    ProductVariantExpansionModel(@Nullable final String parentPath, final List<String> paths) {
+        super(parentPath, paths);
     }
 
     public PriceExpansionModel<T> prices() {

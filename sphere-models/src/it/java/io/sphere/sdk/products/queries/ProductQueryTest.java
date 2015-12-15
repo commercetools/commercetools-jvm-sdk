@@ -72,7 +72,7 @@ public class ProductQueryTest extends IntegrationTest {
     public void canExpandItsCategories() throws Exception {
         withProductInCategory(client(), (product, category) -> {
             final Query<Product> query = query(product)
-                    .withExpansionPaths(ProductExpansionModel.of().masterData().staged().categories());
+                    .withExpansionPaths(m -> m.masterData().staged().categories());
             assertThat(execute(query).head().get().getMasterData().getStaged().getCategories().stream().anyMatch(reference -> reference.getObj() != null))
                     .isTrue();
         });
@@ -83,8 +83,8 @@ public class ProductQueryTest extends IntegrationTest {
     public void canExpandCustomerGroupOfPrices() throws Exception {
         withCustomerGroup(client(), customerGroup ->
                         withUpdateablePricedProduct(client(), PriceDraft.of(MoneyImpl.of(new BigDecimal("12.34"), EUR)).withCountry(DE).withCustomerGroup(customerGroup), product -> {
-                            final ExpansionPath<Product> expansionPath = ProductExpansionModel.of().masterData().staged().masterVariant().prices().customerGroup();
-                            final Query<Product> query = query(product).withExpansionPaths(expansionPath);
+                            final Query<Product> query = query(product)
+                                    .withExpansionPaths(m -> m.masterData().staged().masterVariant().prices().customerGroup());
                             final List<Price> prices = execute(query).head().get().getMasterData().getStaged().getMasterVariant().getPrices();
                             assertThat(prices
                                     .stream()
@@ -99,8 +99,7 @@ public class ProductQueryTest extends IntegrationTest {
     public void canExpandChannelOfPrices() throws Exception {
         ChannelFixtures.withChannelOfRole(client(), ChannelRole.INVENTORY_SUPPLY, channel -> {
             withUpdateablePricedProduct(client(), PriceDraft.of(MoneyImpl.of(new BigDecimal("12.34"), EUR)).withCountry(DE).withChannel(channel), product -> {
-                final ExpansionPath<Product> expansionPath = ProductExpansionModel.of().masterData().staged().masterVariant().prices().channel();
-                final Query<Product> query = query(product).withExpansionPaths(expansionPath);
+                final Query<Product> query = query(product).withExpansionPaths(m -> m.masterData().staged().masterVariant().prices().channel());
                 final List<Price> prices = execute(query).head().get().getMasterData().getStaged().getMasterVariant().getPrices();
                 assertThat(prices
                         .stream()

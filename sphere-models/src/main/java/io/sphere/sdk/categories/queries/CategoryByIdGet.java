@@ -2,6 +2,7 @@ package io.sphere.sdk.categories.queries;
 
 import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.categories.expansion.CategoryExpansionModel;
+import io.sphere.sdk.expansion.ExpansionPathsHolder;
 import io.sphere.sdk.models.Identifiable;
 import io.sphere.sdk.expansion.ExpansionPath;
 import io.sphere.sdk.queries.MetaModelGetDsl;
@@ -22,12 +23,6 @@ public interface CategoryByIdGet extends MetaModelGetDsl<Category, Category, Cat
     static CategoryByIdGet of(final String id) {
         return new CategoryByIdGetImpl(id);
     }
-
-    @Override
-    CategoryByIdGet plusExpansionPaths(final Function<CategoryExpansionModel<Category>, ExpansionPath<Category>> m);
-
-    @Override
-    CategoryByIdGet withExpansionPaths(final Function<CategoryExpansionModel<Category>, ExpansionPath<Category>> m);
 
     @Override
     List<ExpansionPath<Category>> expansionPaths();

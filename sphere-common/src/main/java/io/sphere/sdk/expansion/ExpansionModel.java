@@ -3,15 +3,22 @@ package io.sphere.sdk.expansion;
 import io.sphere.sdk.models.Base;
 
 import javax.annotation.Nullable;
+import java.util.List;
 import java.util.Optional;
 
 import static org.apache.commons.lang3.StringUtils.isEmpty;
 
 public class ExpansionModel<T> extends Base {
     @Nullable
-    protected final String parentPath;
+    private final String parentPath;
     @Nullable
-    protected final String path;
+    private final String path;
+
+    protected ExpansionModel(@Nullable final String parentPath, final List<String> paths) {
+
+        this.parentPath = null;
+        this.path = null;
+    }
 
     protected ExpansionModel(@Nullable final String parentPath, @Nullable final String path) {
         this.parentPath = parentPath;
@@ -19,11 +26,14 @@ public class ExpansionModel<T> extends Base {
     }
 
     public ExpansionModel() {
-        this(null, null);
+        parentPath = null;
+        path = null;
     }
 
     protected final String buildPathExpression() {
-        return Optional.ofNullable(parentPath).filter(p -> !isEmpty(p)).map(p -> p + ".").orElse("") + Optional.ofNullable(path).orElse("");
+        return Optional.ofNullable(parentPath)
+                .filter(p -> !isEmpty(p)).map(p -> p + ".").orElse("") + Optional.ofNullable(path)
+                .orElse("");
     }
 
     @Nullable
@@ -31,7 +41,7 @@ public class ExpansionModel<T> extends Base {
         return buildPathExpression();
     }
 
-    protected final ExpansionPath<T> expansionPath(final String path) {
+    protected final ExpansionPathsHolder<T> expansionPath(final String path) {
         return new ExpandedModel<>(buildPathExpression(), path);
     }
 }

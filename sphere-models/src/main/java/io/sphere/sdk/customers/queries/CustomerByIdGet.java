@@ -24,12 +24,6 @@ public interface CustomerByIdGet extends MetaModelGetDsl<Customer, Customer, Cus
     }
 
     @Override
-    CustomerByIdGet plusExpansionPaths(final Function<CustomerExpansionModel<Customer>, ExpansionPath<Customer>> m);
-
-    @Override
-    CustomerByIdGet withExpansionPaths(final Function<CustomerExpansionModel<Customer>, ExpansionPath<Customer>> m);
-
-    @Override
     List<ExpansionPath<Customer>> expansionPaths();
 
     @Override

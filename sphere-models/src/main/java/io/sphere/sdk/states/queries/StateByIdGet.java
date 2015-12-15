@@ -19,12 +19,6 @@ public interface StateByIdGet extends MetaModelGetDsl<State, State, StateByIdGet
     }
 
     @Override
-    StateByIdGet plusExpansionPaths(final Function<StateExpansionModel<State>, ExpansionPath<State>> m);
-
-    @Override
-    StateByIdGet withExpansionPaths(final Function<StateExpansionModel<State>, ExpansionPath<State>> m);
-
-    @Override
     StateByIdGet plusExpansionPaths(final ExpansionPath<State> expansionPath);
 
     @Override

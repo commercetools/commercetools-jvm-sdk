@@ -29,12 +29,6 @@ public interface PaymentUpdateCommand extends UpdateCommandDsl<Payment, PaymentU
     }
 
     @Override
-    PaymentUpdateCommand plusExpansionPaths(final Function<PaymentExpansionModel<Payment>, ExpansionPath<Payment>> m);
-
-    @Override
-    PaymentUpdateCommand withExpansionPaths(final Function<PaymentExpansionModel<Payment>, ExpansionPath<Payment>> m);
-
-    @Override
     PaymentUpdateCommand withExpansionPaths(final List<ExpansionPath<Payment>> expansionPaths);
 
     @Override

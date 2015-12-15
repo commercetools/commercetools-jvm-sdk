@@ -110,7 +110,4 @@ public interface ProductProjectionSearch extends MetaModelSearchDsl<ProductProje
     @Override
     ProductProjectionSearch plusExpansionPaths(final ExpansionPath<ProductProjection> expansionPath);
 
-    @Override
-    ProductProjectionSearch plusExpansionPaths(final Function<ProductProjectionExpansionModel<ProductProjection>, ExpansionPath<ProductProjection>> m);
-
 }

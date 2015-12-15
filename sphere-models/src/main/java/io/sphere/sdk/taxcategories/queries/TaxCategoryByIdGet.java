@@ -24,12 +24,6 @@ public interface TaxCategoryByIdGet extends MetaModelGetDsl<TaxCategory, TaxCate
     }
 
     @Override
-    TaxCategoryByIdGet plusExpansionPaths(final Function<TaxCategoryExpansionModel<TaxCategory>, ExpansionPath<TaxCategory>> m);
-
-    @Override
-    TaxCategoryByIdGet withExpansionPaths(final Function<TaxCategoryExpansionModel<TaxCategory>, ExpansionPath<TaxCategory>> m);
-
-    @Override
     List<ExpansionPath<TaxCategory>> expansionPaths();
 
     @Override

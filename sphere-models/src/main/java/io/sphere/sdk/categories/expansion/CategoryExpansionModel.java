@@ -2,6 +2,7 @@ package io.sphere.sdk.categories.expansion;
 
 import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.expansion.ExpandedModel;
+
 /**
   DSL class to create expansion path expressions.
 

@@ -37,12 +37,6 @@ public interface ProductProjectionByIdGet extends MetaModelGetDsl<ProductProject
     }
 
     @Override
-    ProductProjectionByIdGet plusExpansionPaths(final Function<ProductProjectionExpansionModel<ProductProjection>, ExpansionPath<ProductProjection>> m);
-
-    @Override
-    ProductProjectionByIdGet withExpansionPaths(final Function<ProductProjectionExpansionModel<ProductProjection>, ExpansionPath<ProductProjection>> m);
-
-    @Override
     List<ExpansionPath<ProductProjection>> expansionPaths();
 
     @Override

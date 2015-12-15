@@ -19,12 +19,6 @@ public interface TypeByIdGet extends MetaModelGetDsl<Type, Type, TypeByIdGet, Ty
     }
 
     @Override
-    TypeByIdGet plusExpansionPaths(final Function<TypeExpansionModel<Type>, ExpansionPath<Type>> m);
-
-    @Override
-    TypeByIdGet withExpansionPaths(final Function<TypeExpansionModel<Type>, ExpansionPath<Type>> m);
-
-    @Override
     TypeByIdGet plusExpansionPaths(final ExpansionPath<Type> expansionPath);
 
     @Override

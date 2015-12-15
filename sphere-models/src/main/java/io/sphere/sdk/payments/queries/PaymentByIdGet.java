@@ -24,12 +24,6 @@ public interface PaymentByIdGet extends MetaModelGetDsl<Payment, Payment, Paymen
     }
 
     @Override
-    PaymentByIdGet plusExpansionPaths(final Function<PaymentExpansionModel<Payment>, ExpansionPath<Payment>> m);
-
-    @Override
-    PaymentByIdGet withExpansionPaths(final Function<PaymentExpansionModel<Payment>, ExpansionPath<Payment>> m);
-
-    @Override
     List<ExpansionPath<Payment>> expansionPaths();
 
     @Override

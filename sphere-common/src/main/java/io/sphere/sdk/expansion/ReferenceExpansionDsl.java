@@ -38,4 +38,13 @@ public interface ReferenceExpansionDsl<T, C> extends ReferenceExpansionSupport<T
      * @return new object
      */
     C plusExpansionPaths(final ExpansionPath<T> expansionPath);
+
+    /**
+     * Creates a new object with the properties of the old object but adds {@code holder}s expansion paths to the existing expansion paths.
+     * @param holder container with expansion paths
+     * @return new object
+     */
+    default C withExpansionPaths(ExpansionPathsHolder<T> holder) {
+        return withExpansionPaths(holder.getExpansionPaths());
+    }
 }

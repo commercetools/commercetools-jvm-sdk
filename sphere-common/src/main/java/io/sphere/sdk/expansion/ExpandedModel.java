@@ -1,8 +1,10 @@
 package io.sphere.sdk.expansion;
 
 import javax.annotation.Nullable;
+import java.util.Collections;
+import java.util.List;
 
-public class ExpandedModel<T> extends ExpansionModel<T> implements ExpansionPath<T> {
+public class ExpandedModel<T> extends ExpansionModel<T> implements ExpansionPath<T>, ExpansionPathsHolder<T> {
 
     protected ExpandedModel(@Nullable final String parentPath, @Nullable final String path) {
         super(parentPath, path);
@@ -29,5 +31,10 @@ public class ExpandedModel<T> extends ExpansionModel<T> implements ExpansionPath
     @Override
     public final boolean equals(final Object o) {
         return ExpansionPathBase.equals(this, o);
+    }
+
+    @Override
+    public List<ExpansionPath<T>> getExpansionPaths() {
+        return Collections.singletonList(this);
     }
 }

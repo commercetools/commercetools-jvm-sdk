@@ -5,6 +5,7 @@ import io.sphere.sdk.categories.expansion.CategoryExpansionModel;
 import io.sphere.sdk.commands.UpdateAction;
 import io.sphere.sdk.commands.UpdateCommandDsl;
 import io.sphere.sdk.expansion.ExpansionPath;
+import io.sphere.sdk.expansion.ExpansionPathsHolder;
 import io.sphere.sdk.expansion.MetaModelExpansionDsl;
 import io.sphere.sdk.models.Versioned;
 
@@ -25,12 +26,6 @@ public interface CategoryUpdateCommand extends UpdateCommandDsl<Category, Catego
     static CategoryUpdateCommand of(final Versioned<Category> versioned, final List<? extends UpdateAction<Category>> updateActions) {
         return new CategoryUpdateCommandImpl(versioned, updateActions);
     }
-
-    @Override
-    CategoryUpdateCommand plusExpansionPaths(final Function<CategoryExpansionModel<Category>, ExpansionPath<Category>> m);
-
-    @Override
-    CategoryUpdateCommand withExpansionPaths(final Function<CategoryExpansionModel<Category>, ExpansionPath<Category>> m);
 
     @Override
     CategoryUpdateCommand withExpansionPaths(final List<ExpansionPath<Category>> expansionPaths);

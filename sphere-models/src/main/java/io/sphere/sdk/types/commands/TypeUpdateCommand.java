@@ -25,12 +25,6 @@ public interface TypeUpdateCommand extends UpdateCommandDsl<Type, TypeUpdateComm
     }
 
     @Override
-    TypeUpdateCommand plusExpansionPaths(final Function<TypeExpansionModel<Type>, ExpansionPath<Type>> m);
-
-    @Override
-    TypeUpdateCommand withExpansionPaths(final Function<TypeExpansionModel<Type>, ExpansionPath<Type>> m);
-
-    @Override
     TypeUpdateCommand withExpansionPaths(final List<ExpansionPath<Type>> expansionPaths);
 
     @Override

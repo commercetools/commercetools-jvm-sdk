@@ -52,7 +52,7 @@ public class CategoryExpansionModelTest extends IntegrationTest {
         withCategory(client(), CategoryDraftBuilder.of(en("1"), en("level1")), level1 -> {
             withCategory(client(), CategoryDraftBuilder.of(en("2"), en("level2")).parent(level1), level2 -> {
                 final Query<Category> query = CategoryQuery.of().byId(level2.getId())
-                        .withExpansionPaths(CategoryExpansionModel.of().parent())
+                        .withExpansionPaths(m -> m.parent())
                         .toQuery();
                 final PagedQueryResult<Category> queryResult = execute(query);
                 final Category loadedLevel2 = queryResult.head().get();

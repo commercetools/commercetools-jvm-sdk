@@ -19,12 +19,6 @@ public interface InventoryEntryByIdGet extends MetaModelGetDsl<InventoryEntry, I
     }
 
     @Override
-    InventoryEntryByIdGet plusExpansionPaths(final Function<InventoryEntryExpansionModel<InventoryEntry>, ExpansionPath<InventoryEntry>> m);
-
-    @Override
-    InventoryEntryByIdGet withExpansionPaths(final Function<InventoryEntryExpansionModel<InventoryEntry>, ExpansionPath<InventoryEntry>> m);
-
-    @Override
     List<ExpansionPath<InventoryEntry>> expansionPaths();
 
     @Override

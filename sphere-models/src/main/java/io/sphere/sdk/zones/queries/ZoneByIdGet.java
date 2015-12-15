@@ -24,12 +24,6 @@ public interface ZoneByIdGet extends MetaModelGetDsl<Zone, Zone, ZoneByIdGet, Zo
     }
 
     @Override
-    ZoneByIdGet withExpansionPaths(final Function<ZoneExpansionModel<Zone>, ExpansionPath<Zone>> m);
-
-    @Override
-    ZoneByIdGet plusExpansionPaths(final Function<ZoneExpansionModel<Zone>, ExpansionPath<Zone>> m);
-
-    @Override
     List<ExpansionPath<Zone>> expansionPaths();
 
     @Override

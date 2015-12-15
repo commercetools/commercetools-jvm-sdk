@@ -29,12 +29,6 @@ public interface CustomerByPasswordTokenGet extends MetaModelGetDsl<Customer, Cu
     }
 
     @Override
-    CustomerByPasswordTokenGet plusExpansionPaths(final Function<CustomerExpansionModel<Customer>, ExpansionPath<Customer>> m);
-
-    @Override
-    CustomerByPasswordTokenGet withExpansionPaths(final Function<CustomerExpansionModel<Customer>, ExpansionPath<Customer>> m);
-
-    @Override
     List<ExpansionPath<Customer>> expansionPaths();
 
     @Override

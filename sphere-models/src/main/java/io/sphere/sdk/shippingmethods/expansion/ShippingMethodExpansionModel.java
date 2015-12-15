@@ -1,8 +1,7 @@
 package io.sphere.sdk.shippingmethods.expansion;
 
 import io.sphere.sdk.expansion.ExpandedModel;
-import io.sphere.sdk.expansion.ExpansionModel;
-import io.sphere.sdk.expansion.ExpansionPath;
+import io.sphere.sdk.expansion.ExpansionPathsHolder;
 import io.sphere.sdk.shippingmethods.ShippingMethod;
 
 import javax.annotation.Nullable;
@@ -21,7 +20,7 @@ public class ShippingMethodExpansionModel<T> extends ExpandedModel<T> {
         super();
     }
 
-    public ExpansionPath<T> taxCategory() {
+    public ExpansionPathsHolder<T> taxCategory() {
         return expansionPath("taxCategory");
     }
 
@@ -33,11 +32,11 @@ public class ShippingMethodExpansionModel<T> extends ExpandedModel<T> {
         return zoneRates("" + index);
     }
 
-    public ExpansionPath<T> zones() {
+    public ExpansionPathsHolder<T> zones() {
         return zoneRates().zone();
     }
 
-    public ExpansionPath<T> zones(final int index) {
+    public ExpansionPathsHolder<T> zones(final int index) {
         return zoneRates(index).zone();
     }
 
