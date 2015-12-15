@@ -23,7 +23,7 @@ public abstract class Base {
     public String toString() {
         return new ReflectionToStringBuilder(this, SdkDefaults.TO_STRING_STYLE)
                 //important to not log passwords
-                .setExcludeFieldNames("password", "newPassword", "currentPassword", "oldPassword")
+                .setExcludeFieldNames("password", "newPassword", "currentPassword", "oldPassword", "access_token", "accessToken")
                 .build();
     }
 }

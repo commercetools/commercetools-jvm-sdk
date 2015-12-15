@@ -100,7 +100,13 @@ final class TokensSupplierImpl extends AutoCloseableService implements TokensSup
                 }
                 throw exception;
             }
-            return SphereJsonUtils.readObject(httpResponse.getResponseBody(), Tokens.typeReference());
+            try {
+                return SphereJsonUtils.readObject(httpResponse.getResponseBody(), Tokens.typeReference());
+            } catch (final SphereException e) {
+                throw e;
+            } catch (final Exception e) {
+                throw new SphereException(e);
+            }
         } catch (final SphereException exception) {
             exception.setProjectKey(config.getProjectKey());
             exception.setUnderlyingHttpResponse(httpResponse);
