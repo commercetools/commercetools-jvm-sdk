@@ -16,6 +16,9 @@ public interface ReferenceExpansionDsl<T, C> extends ReferenceExpansionSupport<T
      * <p>An example in the product projection context:</p>
      * {@include.example io.sphere.sdk.products.expansion.ProductProjectionExpansionModelTest#withExpansionPathDemo()}
      *
+     * <p>This method also can be used to use the same expansions as in another request:</p>
+     * {@include.example io.sphere.sdk.products.expansion.ProductProjectionExpansionModelTest#useExpansionPathsOfOtherRequest()}
+     *
      * @param expansionPath the new expansion paths
      * @return new object
      */

@@ -2,8 +2,11 @@ package io.sphere.sdk.products.expansion;
 
 import io.sphere.sdk.products.ProductProjection;
 import io.sphere.sdk.products.ProductProjectionType;
+import io.sphere.sdk.products.commands.ProductUpdateCommand;
 import io.sphere.sdk.products.queries.ProductProjectionByIdGet;
 import io.sphere.sdk.expansion.ExpansionPath;
+import io.sphere.sdk.products.queries.ProductProjectionQuery;
+import io.sphere.sdk.products.search.ProductProjectionSearch;
 import org.junit.Test;
 
 import java.util.List;
@@ -97,5 +100,15 @@ public class ProductProjectionExpansionModelTest {
                 ProductProjectionExpansionModel.of().allVariants().prices().customerGroup().expansionPaths();
         assertThat(expansionPaths.stream().map(ExpansionPath::toSphereExpand).collect(Collectors.toList()))
                 .containsExactly("masterVariant.prices[*].customerGroup", "variants[*].prices[*].customerGroup");
+    }
+
+    @Test
+    public void useExpansionPathsOfOtherRequest() {
+        final ProductProjectionQuery query = ProductProjectionQuery.ofCurrent().withExpansionPaths(m -> m.categories());
+        final ProductProjectionSearch search = ProductProjectionSearch.ofCurrent().withExpansionPaths(query);
+        assertThat(query.expansionPaths())
+                .hasSize(1)
+                .as("reuse expansion spec from other request")
+                .isEqualTo(search.expansionPaths());
     }
 }
