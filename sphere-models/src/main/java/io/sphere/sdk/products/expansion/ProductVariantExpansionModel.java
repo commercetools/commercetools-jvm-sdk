@@ -6,11 +6,7 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 public class ProductVariantExpansionModel<T> extends ExpansionModel<T> {
-    ProductVariantExpansionModel(@Nullable final String parentPath, @Nullable final String path) {
-        super(parentPath, path);
-    }
-
-    ProductVariantExpansionModel(@Nullable final String parentPath, final List<String> paths) {
+    ProductVariantExpansionModel(@Nullable final List<String> parentPath, final String paths) {
         super(parentPath, paths);
     }
 

@@ -5,6 +5,7 @@ import io.sphere.sdk.expansion.ExpansionPathsHolder;
 import io.sphere.sdk.shippingmethods.ShippingMethod;
 
 import javax.annotation.Nullable;
+import java.util.List;
 
 /**
   DSL class to create expansion path expressions.
@@ -12,7 +13,7 @@ import javax.annotation.Nullable;
  @param <T> the type for which the expansion path is
  */
 public class ShippingMethodExpansionModel<T> extends ExpandedModel<T> {
-    public ShippingMethodExpansionModel(@Nullable final String parentPath, @Nullable final String path) {
+    public ShippingMethodExpansionModel(final List<String> parentPath, @Nullable final String path) {
         super(parentPath, path);
     }
 

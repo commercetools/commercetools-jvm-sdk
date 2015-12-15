@@ -3,13 +3,15 @@ package io.sphere.sdk.categories.expansion;
 import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.expansion.ExpandedModel;
 
+import java.util.List;
+
 /**
   DSL class to create expansion path expressions.
 
  @param <T> the type for which the expansion path is
  */
 public class CategoryExpansionModel<T> extends ExpandedModel<T> {
-    public CategoryExpansionModel(final String parentPath, final String path) {
+    public CategoryExpansionModel(final List<String> parentPath, final String path) {
         super(parentPath, path);
     }
 

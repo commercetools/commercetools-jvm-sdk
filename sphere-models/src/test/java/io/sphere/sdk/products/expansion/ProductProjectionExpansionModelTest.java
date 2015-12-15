@@ -7,6 +7,7 @@ import io.sphere.sdk.expansion.ExpansionPath;
 import org.junit.Test;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static io.sphere.sdk.utils.ListUtils.listOf;
 import static java.util.Arrays.asList;
@@ -27,7 +28,7 @@ public class ProductProjectionExpansionModelTest {
 
         //this is equivalent to
 
-        final ExpansionPath<ProductProjection> categoryExpand = ProductProjectionExpansionModel.of().categories();
+        final ExpansionPath<ProductProjection> categoryExpand = ProductProjectionExpansionModel.of().categories().getExpansionPaths().get(0);
         final ExpansionPath<ProductProjection> productTypeExpand = ProductProjectionExpansionModel.of().productType().getExpansionPaths().get(0);
         final ProductProjectionByIdGet fetchB = ProductProjectionByIdGet.of("id", ProductProjectionType.CURRENT)
                         .withExpansionPaths(asList(categoryExpand, productTypeExpand));
@@ -52,7 +53,7 @@ public class ProductProjectionExpansionModelTest {
     @Test
     public void withExpansionPathDemo() throws Exception {
         final ProductProjectionByIdGet fetch = ProductProjectionByIdGet.of("id", ProductProjectionType.CURRENT)
-                        .withExpansionPaths(asList(ProductProjectionExpansionModel.of().categories()));
+                        .withExpansionPaths(ProductProjectionExpansionModel.of().categories());
 
         assertThat(fetch.expansionPaths())
                 .isEqualTo(asList(ExpansionPath.of("categories[*]")));
@@ -94,8 +95,7 @@ public class ProductProjectionExpansionModelTest {
     public void allVariants() {
         final List<ExpansionPath<ProductProjection>> expansionPaths =
                 ProductProjectionExpansionModel.of().allVariants().prices().customerGroup().getExpansionPaths();
-        assertThat(expansionPaths)
-                .extractingResultOf("toSphereExpand")
+        assertThat(expansionPaths.stream().map(ExpansionPath::toSphereExpand).collect(Collectors.toList()))
                 .containsExactly("masterVariant.prices[*].customerGroup", "variants[*].prices[*].customerGroup");
     }
 }

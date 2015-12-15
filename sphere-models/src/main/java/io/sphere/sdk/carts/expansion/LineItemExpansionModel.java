@@ -3,8 +3,10 @@ package io.sphere.sdk.carts.expansion;
 import io.sphere.sdk.expansion.ExpansionModel;
 import io.sphere.sdk.expansion.ExpansionPathsHolder;
 
+import java.util.List;
+
 public class LineItemExpansionModel<T> extends ExpansionModel<T> {
-    LineItemExpansionModel(final String parentPath, final String path) {
+    LineItemExpansionModel(final List<String> parentPath, final String path) {
         super(parentPath, path);
     }
 

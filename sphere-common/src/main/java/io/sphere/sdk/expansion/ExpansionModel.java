@@ -1,43 +1,48 @@
 package io.sphere.sdk.expansion;
 
 import io.sphere.sdk.models.Base;
+import org.apache.commons.lang3.StringUtils;
 
 import javax.annotation.Nullable;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
+import static java.util.stream.Collectors.toList;
 import static org.apache.commons.lang3.StringUtils.isEmpty;
 
 public class ExpansionModel<T> extends Base {
-    @Nullable
-    private final String parentPath;
-    @Nullable
-    private final String path;
+    private final List<String> pathExpressions;
 
     protected ExpansionModel(@Nullable final String parentPath, final List<String> paths) {
-
-        this.parentPath = null;
-        this.path = null;
+        pathExpressions = paths.stream()
+                .map(path ->
+                Optional.ofNullable(parentPath)
+                        .filter(p -> !isEmpty(p)).map(p -> p + ".").orElse("") + Optional.ofNullable(path).orElse(""))
+                .collect(toList());
     }
 
     protected ExpansionModel(@Nullable final String parentPath, @Nullable final String path) {
-        this.parentPath = parentPath;
-        this.path = path;
+        this(parentPath, Collections.singletonList(path));
     }
 
     public ExpansionModel() {
-        parentPath = null;
-        path = null;
+        this("", "");
     }
 
-    protected final String buildPathExpression() {
-        return Optional.ofNullable(parentPath)
-                .filter(p -> !isEmpty(p)).map(p -> p + ".").orElse("") + Optional.ofNullable(path)
-                .orElse("");
+    public ExpansionModel(final List<String> parentExpressions, final String path) {
+        this.pathExpressions = !isEmpty(path) ? parentExpressions.stream()
+                .map(p -> isEmpty(p) ? path : p + "." + path)
+                .collect(Collectors.toList()) : parentExpressions;
+    }
+
+    protected final List<String> buildPathExpression() {
+        return pathExpressions;
     }
 
     @Nullable
-    protected final String pathExpression() {
+    protected final List<String> pathExpression() {
         return buildPathExpression();
     }
 

@@ -5,7 +5,11 @@ import io.sphere.sdk.expansion.ExpansionModel;
 import io.sphere.sdk.expansion.ExpansionPathsHolder;
 import io.sphere.sdk.products.ProductProjection;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import static java.util.Arrays.asList;
+import static org.apache.commons.lang3.StringUtils.isEmpty;
 
 public final class ProductProjectionExpansionModel<T> extends ExpansionModel<T> {
 
@@ -40,7 +44,16 @@ public final class ProductProjectionExpansionModel<T> extends ExpansionModel<T> 
     }
 
     public ProductVariantExpansionModel<ProductProjection> allVariants() {
-        return new ProductVariantExpansionModel<>(pathExpression(), asList(MASTER_VARIANT, VARIANTS));
+        final List<String> parents = pathExpression();
+        final List<String> currentPaths = asList(MASTER_VARIANT, VARIANTS);
+        final List<String> paths;
+        if (parents.isEmpty()) {
+            paths = currentPaths;
+        } else {
+            paths = parents.stream().flatMap(p -> currentPaths.stream().map(c -> (isEmpty(p) ? "" : p + ".") + c)).collect(Collectors.toList());
+        }
+
+        return new ProductVariantExpansionModel<>(paths, null);
     }
 
     public static ProductProjectionExpansionModel<ProductProjection> of() {

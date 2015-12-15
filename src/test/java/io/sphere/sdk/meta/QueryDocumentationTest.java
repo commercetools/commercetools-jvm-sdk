@@ -141,7 +141,7 @@ public class QueryDocumentationTest {
     @Test
     public void createExpansionPathByString() throws Exception {
         final ExpansionPath<ProductProjection> safePath =
-                ProductProjectionExpansionModel.of().categories().parent();
+                ProductProjectionExpansionModel.of().categories().parent().getExpansionPaths().get(0);
         final ExpansionPath<ProductProjection> unsafePath = ExpansionPath.of("categories[*].parent");
         assertThat(safePath).isEqualTo(unsafePath);
     }

@@ -4,9 +4,10 @@ import io.sphere.sdk.categories.expansion.CategoryExpansionModel;
 import io.sphere.sdk.expansion.ExpansionModel;
 
 import javax.annotation.Nullable;
+import java.util.List;
 
 public class ProductDataExpansionModel<T> extends ExpansionModel<T> {
-    ProductDataExpansionModel(@Nullable final String parentPath, @Nullable final String path) {
+    ProductDataExpansionModel(final List<String> parentPath, @Nullable final String path) {
         super(parentPath, path);
     }
 

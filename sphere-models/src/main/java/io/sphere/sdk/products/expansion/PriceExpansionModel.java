@@ -1,13 +1,12 @@
 package io.sphere.sdk.products.expansion;
 
 import io.sphere.sdk.expansion.ExpansionModel;
-import io.sphere.sdk.expansion.ExpansionPath;
 import io.sphere.sdk.expansion.ExpansionPathsHolder;
 
 import java.util.List;
 
 public class PriceExpansionModel<T> extends ExpansionModel<T> {
-    PriceExpansionModel(final String parentPath, final String path) {
+    PriceExpansionModel(final List<String> parentPath, final String path) {
         super(parentPath, path);
     }
 

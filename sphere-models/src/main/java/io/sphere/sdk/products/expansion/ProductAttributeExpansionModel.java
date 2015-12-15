@@ -6,9 +6,10 @@ import io.sphere.sdk.expansion.ExpansionPathsHolder;
 import io.sphere.sdk.models.LocalizedString;
 
 import javax.annotation.Nullable;
+import java.util.List;
 
 public final class ProductAttributeExpansionModel<T> extends ExpansionModel<T> {
-    ProductAttributeExpansionModel(@Nullable final String parentPath, @Nullable final String path) {
+    ProductAttributeExpansionModel(final List<String> parentPath, @Nullable final String path) {
         super(parentPath, path);
     }
 
