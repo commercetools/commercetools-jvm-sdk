@@ -4,6 +4,7 @@ import io.sphere.sdk.carts.Cart;
 import io.sphere.sdk.carts.LineItem;
 import io.sphere.sdk.carts.queries.CartByCustomerIdGet;
 import io.sphere.sdk.carts.queries.CartByIdGet;
+import io.sphere.sdk.client.SphereClientUtils;
 import io.sphere.sdk.client.SphereRequest;
 import io.sphere.sdk.customers.Customer;
 import io.sphere.sdk.customers.queries.CustomerByIdGet;
@@ -97,10 +98,28 @@ public class AsyncDocumentationTest {
         //after creating the CompletionStage the Thread is freed to start further requests
         final CompletionStage<Cart> cartStage = execute(CartByCustomerIdGet.of(customerId));//t=2ms
         //collect the results
-        customerStage.thenAcceptBoth(cartStage, (customerOption, cartOption) -> {
+        customerStage.thenAcceptBoth(cartStage, (customer, cart) -> {
             //t=102ms
-            println("cart: " + cartOption + " customer: " + customerOption);
+            println("cart: " + cart + " customer: " + customer);
         });
+    }
+
+    public void firstAsyncThenSync() throws Exception {
+        final String customerId = "customer-id";//time t=0
+        final CompletionStage<Customer> customerStage = execute(CustomerByIdGet.of(customerId));//t=1ms
+        //after creating the CompletionStage the Thread is freed to start further requests
+        final CompletionStage<Cart> cartStage = execute(CartByCustomerIdGet.of(customerId));//t=2ms
+        //collect the results
+
+        final CompletionStage<String> resultStage = customerStage.thenCompose(customer ->
+            cartStage.thenApply(cart -> {
+                //t=102ms
+                return "cart: " + cart.getCustomerId() + " customer: " + customer.getId();//do some computation
+            })
+        );
+        final String result = SphereClientUtils.blockingWait(resultStage, 500, TimeUnit.MILLISECONDS);
+
+        assertThat(result).isEqualTo("cart: " + customerId + " customer: " + customerId);
     }
 
     protected static <T> CompletionStage<T> execute(final SphereRequest<T> sphereRequest) {

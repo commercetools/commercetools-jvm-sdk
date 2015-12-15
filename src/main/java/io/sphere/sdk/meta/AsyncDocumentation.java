@@ -29,6 +29,20 @@ import java.util.function.Supplier;
 
  <p>You can use future APIs to run code in separate Threads so that the result will not be immediately available, but in the future.
  The overhead of creating a future can be lower than the <a href="http://stackoverflow.com/a/5483105">overhead of creating new Thread</a>.</p>
+
+ <h3 id="mixing-async-and-sync">Mixing synchronous and asynchronous computations</h3>
+
+ A lot of frameworks do not support asynchronous results but it is still possible to execute calls in parallel and then wait for computed result:
+
+ {@include.example io.sphere.sdk.meta.AsyncDocumentationTest#firstAsyncThenSync()}
+
+ <!--
+
+ thenCompose/thenCombine examples und dann blocking wait
+
+ -->
+
+
  <!--
  <h3 id="what">What</h3>
 
