@@ -31,6 +31,10 @@ public class TypeDraftBuilder extends Base implements Builder<TypeDraft> {
         this.fieldDefinitions = fieldDefinitions;
     }
 
+    public static TypeDraftBuilder of(final String key, final LocalizedString name, final ResourceTypeIdsSetBuilder resourceTypeIdsSetBuilder) {
+        return of(key, name, resourceTypeIdsSetBuilder.build());
+    }
+
     public static TypeDraftBuilder of(final String key, final LocalizedString name, final Set<String> resourceTypeIds) {
         return new TypeDraftBuilder(key, name, null, resourceTypeIds, null);
     }

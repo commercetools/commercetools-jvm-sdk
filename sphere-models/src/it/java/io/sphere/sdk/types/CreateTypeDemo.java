@@ -19,9 +19,11 @@ public final class CreateTypeDemo {
     public static Type createType(final BlockingSphereClient client) {
         final LocalizedString name = en("type for standard categories");
         final String key = "category-customtype-key";
-        final String categoryResourceTypeId = Category.resourceTypeId();
         //this enables the type only to be used for categories
-        final Set<String> resourceTypeIds = Collections.singleton(categoryResourceTypeId);
+        final Set<String> resourceTypeIds = ResourceTypeIdsSetBuilder.of()
+                .addCategories()
+                //there are more methods for other objects which support custom
+                .build();
 
         final List<FieldDefinition> fieldDefinitions =
                 asList(stateFieldDefinition(), imageUrlFieldDefinition(), relatedCategoriesFieldDefinition());
