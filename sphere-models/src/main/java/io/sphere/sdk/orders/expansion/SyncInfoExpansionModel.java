@@ -1,7 +1,7 @@
 package io.sphere.sdk.orders.expansion;
 
 import io.sphere.sdk.expansion.ExpansionModel;
-import io.sphere.sdk.expansion.ReferenceExpansionSupport;
+import io.sphere.sdk.expansion.ExpansionPathContainer;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -24,7 +24,7 @@ public class SyncInfoExpansionModel<T> extends ExpansionModel<T> {
         return new SyncInfoExpansionModel<>();
     }
 
-    public ReferenceExpansionSupport<T> channel() {
+    public ExpansionPathContainer<T> channel() {
         return expansionPath("channel");
     }
 }

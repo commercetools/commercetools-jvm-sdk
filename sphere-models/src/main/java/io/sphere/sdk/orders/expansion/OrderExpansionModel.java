@@ -1,7 +1,7 @@
 package io.sphere.sdk.orders.expansion;
 
 import io.sphere.sdk.carts.expansion.*;
-import io.sphere.sdk.expansion.ReferenceExpansionSupport;
+import io.sphere.sdk.expansion.ExpansionPathContainer;
 import io.sphere.sdk.orders.Order;
 
 /**
@@ -23,7 +23,7 @@ public class OrderExpansionModel<T> extends CartLikeExpansionModel<T> {
         return new SyncInfoExpansionModel<>(pathExpression(), "syncInfo[*]");
     }
 
-    public ReferenceExpansionSupport<T> cart() {
+    public ExpansionPathContainer<T> cart() {
         return expansionPath("cart");
     }
 
@@ -32,7 +32,7 @@ public class OrderExpansionModel<T> extends CartLikeExpansionModel<T> {
     }
 
     @Override
-    public ReferenceExpansionSupport<T> customerGroup() {
+    public ExpansionPathContainer<T> customerGroup() {
         return super.customerGroup();
     }
 

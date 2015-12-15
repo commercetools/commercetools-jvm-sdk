@@ -1,7 +1,7 @@
 package io.sphere.sdk.payments.expansion;
 
 import io.sphere.sdk.expansion.ExpansionModel;
-import io.sphere.sdk.expansion.ReferenceExpansionSupport;
+import io.sphere.sdk.expansion.ExpansionPathContainer;
 import io.sphere.sdk.payments.Payment;
 
 
@@ -14,7 +14,7 @@ public class PaymentExpansionModel<T> extends ExpansionModel<T> {
         return new PaymentExpansionModel<>();
     }
 
-    public ReferenceExpansionSupport<T> customer() {
+    public ExpansionPathContainer<T> customer() {
         return expansionPath("customer");
     }
 

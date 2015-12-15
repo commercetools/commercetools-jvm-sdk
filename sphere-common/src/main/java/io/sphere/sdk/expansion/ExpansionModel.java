@@ -45,7 +45,7 @@ public class ExpansionModel<T> extends Base {
         return buildPathExpression();
     }
 
-    protected final ReferenceExpansionSupport<T> expansionPath(final String path) {
+    protected final ExpansionPathContainer<T> expansionPath(final String path) {
         return new ExpandedModel<>(buildPathExpression(), path);
     }
 }

@@ -1,7 +1,7 @@
 package io.sphere.sdk.products.expansion;
 
 import io.sphere.sdk.expansion.ExpansionModel;
-import io.sphere.sdk.expansion.ReferenceExpansionSupport;
+import io.sphere.sdk.expansion.ExpansionPathContainer;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -11,7 +11,7 @@ public final class DiscountedPriceExpansionModel<T> extends ExpansionModel<T> {
         super(parentPath, path);
     }
 
-    public ReferenceExpansionSupport<T> discount() {
+    public ExpansionPathContainer<T> discount() {
         return expansionPath("discount");
     }
 }

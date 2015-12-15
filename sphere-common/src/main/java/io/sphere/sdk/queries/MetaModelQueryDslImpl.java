@@ -6,7 +6,7 @@ import com.fasterxml.jackson.databind.type.TypeFactory;
 import io.sphere.sdk.client.HttpRequestIntent;
 import io.sphere.sdk.client.SphereRequestBase;
 import io.sphere.sdk.expansion.ExpansionPath;
-import io.sphere.sdk.expansion.ReferenceExpansionSupport;
+import io.sphere.sdk.expansion.ExpansionPathContainer;
 import io.sphere.sdk.http.HttpMethod;
 import io.sphere.sdk.http.HttpQueryParameter;
 import io.sphere.sdk.http.HttpResponse;
@@ -200,7 +200,7 @@ public abstract class MetaModelQueryDslImpl<T, C extends MetaModelQueryDsl<T, C,
     }
 
     @Override
-    public C withExpansionPaths(final Function<E, ReferenceExpansionSupport<T>> m) {
+    public C withExpansionPaths(final Function<E, ExpansionPathContainer<T>> m) {
         return withExpansionPaths(m.apply(expansionModel).expansionPaths());
     }
 
@@ -215,7 +215,7 @@ public abstract class MetaModelQueryDslImpl<T, C extends MetaModelQueryDsl<T, C,
     }
 
     @Override
-    public C plusExpansionPaths(final Function<E, ReferenceExpansionSupport<T>> m) {
+    public C plusExpansionPaths(final Function<E, ExpansionPathContainer<T>> m) {
         return plusExpansionPaths(m.apply(expansionModel).expansionPaths());
     }
 

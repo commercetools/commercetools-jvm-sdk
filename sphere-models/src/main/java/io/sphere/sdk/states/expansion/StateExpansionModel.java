@@ -1,7 +1,7 @@
 package io.sphere.sdk.states.expansion;
 
 import io.sphere.sdk.expansion.ExpansionModel;
-import io.sphere.sdk.expansion.ReferenceExpansionSupport;
+import io.sphere.sdk.expansion.ExpansionPathContainer;
 import io.sphere.sdk.states.State;
 
 /**
@@ -22,7 +22,7 @@ public class StateExpansionModel<T> extends ExpansionModel<T> {
         return new StateExpansionModel<>();
     }
 
-    public ReferenceExpansionSupport<T> transitions() {
+    public ExpansionPathContainer<T> transitions() {
         return expansionPath("transitions[*]");
     }
 }

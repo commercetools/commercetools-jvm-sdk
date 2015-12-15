@@ -2,7 +2,7 @@ package io.sphere.sdk.products.expansion;
 
 import io.sphere.sdk.expansion.ExpansionModel;
 import io.sphere.sdk.expansion.ExpansionPath;
-import io.sphere.sdk.expansion.ReferenceExpansionSupport;
+import io.sphere.sdk.expansion.ExpansionPathContainer;
 import io.sphere.sdk.models.LocalizedString;
 
 import javax.annotation.Nullable;
@@ -17,7 +17,7 @@ public final class ProductAttributeExpansionModel<T> extends ExpansionModel<T> {
      * {@link ExpansionPath} for flat attribute values like {@link String} and {@link LocalizedString}.
      * @return expansion path
      */
-    public ReferenceExpansionSupport<T> value() {
+    public ExpansionPathContainer<T> value() {
         return expansionPath("value");
     }
 
@@ -25,7 +25,7 @@ public final class ProductAttributeExpansionModel<T> extends ExpansionModel<T> {
      * {@link ExpansionPath} for set (collection) attribute values.
      * @return expansion path
      */
-    public ReferenceExpansionSupport<T> valueSet() {
+    public ExpansionPathContainer<T> valueSet() {
         return expansionPath("value[*]");
     }
 }

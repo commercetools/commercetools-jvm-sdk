@@ -1,7 +1,7 @@
 package io.sphere.sdk.carts.expansion;
 
 import io.sphere.sdk.expansion.ExpansionModel;
-import io.sphere.sdk.expansion.ReferenceExpansionSupport;
+import io.sphere.sdk.expansion.ExpansionPathContainer;
 
 import java.util.List;
 
@@ -10,7 +10,7 @@ public class ItemStateExpansionModel<T> extends ExpansionModel<T> {
         super(parentPath, path);
     }
 
-    public ReferenceExpansionSupport<T> state() {
+    public ExpansionPathContainer<T> state() {
         return expansionPath("state");
     }
 }

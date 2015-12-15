@@ -10,11 +10,11 @@ public final class ExpansionDslUtil {
     private ExpansionDslUtil() {
     }
 
-    public static <T, C, E> C plusExpansionPaths(final MetaModelExpansionDslExpansionModelRead<T, C, E> meta, final Function<E, ReferenceExpansionSupport<T>> m) {
+    public static <T, C, E> C plusExpansionPaths(final MetaModelExpansionDslExpansionModelRead<T, C, E> meta, final Function<E, ExpansionPathContainer<T>> m) {
         return meta.plusExpansionPaths(m.apply(meta.expansionModel()).expansionPaths());
     };
 
-    public static <T, C, E> C withExpansionPaths(final MetaModelExpansionDslExpansionModelRead<T, C, E> meta, final Function<E, ReferenceExpansionSupport<T>> m) {
+    public static <T, C, E> C withExpansionPaths(final MetaModelExpansionDslExpansionModelRead<T, C, E> meta, final Function<E, ExpansionPathContainer<T>> m) {
         return meta.withExpansionPaths(m.apply(meta.expansionModel()).expansionPaths());
     }
 

@@ -1,18 +1,18 @@
 package io.sphere.sdk.products.expansion;
 
 import io.sphere.sdk.expansion.ExpansionModel;
-import io.sphere.sdk.expansion.ReferenceExpansionSupport;
+import io.sphere.sdk.expansion.ExpansionPathContainer;
 import io.sphere.sdk.products.Product;
 
 public class ProductExpansionModel<T> extends ExpansionModel<T> {
     ProductExpansionModel() {
     }
 
-    public ReferenceExpansionSupport<T> productType() {
+    public ExpansionPathContainer<T> productType() {
         return expansionPath("productType");
     }
 
-    public ReferenceExpansionSupport<T> taxCategory() {
+    public ExpansionPathContainer<T> taxCategory() {
         return expansionPath("taxCategory");
     }
 

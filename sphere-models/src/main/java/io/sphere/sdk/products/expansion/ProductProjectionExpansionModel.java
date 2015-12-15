@@ -2,7 +2,7 @@ package io.sphere.sdk.products.expansion;
 
 import io.sphere.sdk.categories.expansion.CategoryExpansionModel;
 import io.sphere.sdk.expansion.ExpansionModel;
-import io.sphere.sdk.expansion.ReferenceExpansionSupport;
+import io.sphere.sdk.expansion.ExpansionPathContainer;
 import io.sphere.sdk.products.ProductProjection;
 
 import java.util.List;
@@ -19,11 +19,11 @@ public final class ProductProjectionExpansionModel<T> extends ExpansionModel<T> 
     private ProductProjectionExpansionModel() {
     }
 
-    public ReferenceExpansionSupport<T> productType() {
+    public ExpansionPathContainer<T> productType() {
         return expansionPath("productType");
     }
 
-    public ReferenceExpansionSupport<T> taxCategory() {
+    public ExpansionPathContainer<T> taxCategory() {
         return expansionPath("taxCategory");
     }
 

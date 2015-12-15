@@ -5,7 +5,7 @@ import java.util.List;
 
 import static java.util.stream.Collectors.toList;
 
-public class ExpandedModel<T> extends ExpansionModel<T> implements ReferenceExpansionSupport<T> {
+public class ExpandedModel<T> extends ExpansionModel<T> implements ExpansionPathContainer<T> {
 
     protected ExpandedModel(@Nullable final String parentPath, @Nullable final String path) {
         super(parentPath, path);
