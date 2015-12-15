@@ -1,5 +1,6 @@
 package io.sphere.sdk.payments.queries;
 
+import io.sphere.sdk.payments.TransactionState;
 import io.sphere.sdk.payments.TransactionType;
 import io.sphere.sdk.queries.*;
 
@@ -36,5 +37,15 @@ final class TransactionCollectionQueryModelImpl<T> extends QueryModelImpl<T> imp
     @Override
     public SphereEnumerationQueryModel<T, TransactionType> type() {
         return enumerationQueryModel("type");
+    }
+
+    @Override
+    public StringQuerySortingModel<T> id() {
+        return stringModel("id");
+    }
+
+    @Override
+    public SphereEnumerationQueryModel<T, TransactionState> state() {
+        return enumerationQueryModel("state");
     }
 }

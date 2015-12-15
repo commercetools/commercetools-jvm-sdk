@@ -80,6 +80,8 @@ public class PaymentQueryTest extends IntegrationTest {
                                             .and(m.paymentStatus().interfaceText().is(paymentStatus.getInterfaceText()))
                                             .and(m.paymentStatus().state().is(paidState))
                                             .and(m.transactions().type().is(transactionType))
+                                            .and(m.transactions().id().is(payment.getTransactions().get(0).getId()))
+                                            .and(m.transactions().state().is(payment.getTransactions().get(0).getState()))
                                     .and(m.transactions().amount().currencyCode().is(totalAmount.getCurrency()))
                                     .and(m.transactions().interactionId().is(transactions.get(0).getInteractionId()))
                             )
