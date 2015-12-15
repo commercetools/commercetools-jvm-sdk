@@ -141,7 +141,7 @@ public class MetaModelUpdateCommandDslImpl<T extends ResourceView<T, T>, C exten
 
     @Override
     public C plusExpansionPaths(final ExpansionPath<T> expansionPath) {
-        return ExpansionDslUtil.plusExpansionPaths(this, Collections.singletonList(expansionPath));
+        return ExpansionDslUtil.plusExpansionPaths(this, expansionPath);
     }
 
     @Override

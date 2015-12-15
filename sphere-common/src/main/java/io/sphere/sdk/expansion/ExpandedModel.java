@@ -23,21 +23,6 @@ public class ExpandedModel<T> extends ExpansionModel<T> implements ExpansionPath
         return String.format("%s[%d]", segmentName, index);
     }
 
-//    @Override
-//    public String toSphereExpand() {
-//        return buildPathExpression();
-//    }
-//
-//    @Override
-//    public final int hashCode() {
-//        return toSphereExpand().hashCode();
-//    }
-
-//    @Override
-//    public final boolean equals(final Object o) {
-//        return ExpansionPathBase.equals(this, o);
-//    }
-
     @Override
     public List<ExpansionPath<T>> getExpansionPaths() {
         return buildPathExpression().stream().map(ExpansionPath::<T>of).collect(toList());
