@@ -150,9 +150,11 @@ import static io.sphere.sdk.test.SphereTestUtils.en;
     public static Type createType(final BlockingSphereClient client) {
         final LocalizedString name = en("type for standard categories");
         final String key = "category-customtype-key";
-        final String categoryResourceTypeId = Category.resourceTypeId();
         //this enables the type only to be used for categories
-        final Set&lt;String&gt; resourceTypeIds = Collections.singleton(categoryResourceTypeId);
+        final Set&lt;String&gt; resourceTypeIds = ResourceTypeIdsSetBuilder.of()
+                .addCategories()
+                //there are more methods for other objects which support custom
+                .build();
 
         final List&lt;FieldDefinition&gt; fieldDefinitions =
                 asList(stateFieldDefinition(), imageUrlFieldDefinition(), relatedCategoriesFieldDefinition());
