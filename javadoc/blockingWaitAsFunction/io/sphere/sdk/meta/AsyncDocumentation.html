@@ -127,9 +127,9 @@ final CompletionStage&lt;Customer&gt; customerStage = execute(CustomerByIdGet.of
 //after creating the CompletionStage the Thread is freed to start further requests
 final CompletionStage&lt;Cart&gt; cartStage = execute(CartByCustomerIdGet.of(customerId));//t=2ms
 //collect the results
-customerStage.thenAcceptBoth(cartStage, (customerOption, cartOption) -&gt; {
+customerStage.thenAcceptBoth(cartStage, (customer, cart) -&gt; {
     //t=102ms
-    println("cart: " + cartOption + " customer: " + customerOption);
+    println("cart: " + cart + " customer: " + customer);
 });
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/src/test/java/io/sphere/sdk/meta/AsyncDocumentationTest.java" target="_blank">test code</a>.</pre></div>
 
@@ -137,6 +137,35 @@ customerStage.thenAcceptBoth(cartStage, (customerOption, cartOption) -&gt; {
 
  <p>You can use future APIs to run code in separate Threads so that the result will not be immediately available, but in the future.
  The overhead of creating a future can be lower than the <a href="http://stackoverflow.com/a/5483105">overhead of creating new Thread</a>.</p>
+
+ <h3 id="mixing-async-and-sync">Mixing synchronous and asynchronous computations</h3>
+
+ A lot of frameworks do not support asynchronous results but it is still possible to execute calls in parallel and then wait for computed result:
+
+ <div id="io-sphere-sdk-meta-AsyncDocumentationTest-firstAsyncThenSync--%s" class=code-example><pre><code class='java'>final String customerId = "customer-id";//time t=0
+final CompletionStage&lt;Customer&gt; customerStage = execute(CustomerByIdGet.of(customerId));//t=1ms
+//after creating the CompletionStage the Thread is freed to start further requests
+final CompletionStage&lt;Cart&gt; cartStage = execute(CartByCustomerIdGet.of(customerId));//t=2ms
+//collect the results
+
+final CompletionStage&lt;String&gt; resultStage = customerStage.thenCompose(customer -&gt;
+    cartStage.thenApply(cart -&gt; {
+        //t=102ms
+        return "cart: " + cart.getCustomerId() + " customer: " + customer.getId();//do some computation
+    })
+);
+final String result = SphereClientUtils.blockingWait(resultStage, 500, TimeUnit.MILLISECONDS);
+
+assertThat(result).isEqualTo("cart: " + customerId + " customer: " + customerId);
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/src/test/java/io/sphere/sdk/meta/AsyncDocumentationTest.java" target="_blank">test code</a>.</pre></div>
+
+ <!--
+
+ thenCompose/thenCombine examples und dann blocking wait
+
+ -->
+
+
  <!--
  <h3 id="what">What</h3>
 
