@@ -508,7 +508,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  If the SDK does not provide a type-safe way to construct a reference path, you can create it by string:
 
  <div id="io-sphere-sdk-meta-QueryDocumentationTest-createExpansionPathByString--%s" class=code-example><pre><code class='java'>final ExpansionPath&lt;ProductProjection&gt; safePath =
-        ProductProjectionExpansionModel.of().categories().parent().getExpansionPaths().get(0);
+        ProductProjectionExpansionModel.of().categories().parent().expansionPaths().get(0);
 final ExpansionPath&lt;ProductProjection&gt; unsafePath = ExpansionPath.of("categories[*].parent");
 assertThat(safePath).isEqualTo(unsafePath);
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/src/test/java/io/sphere/sdk/meta/QueryDocumentationTest.java" target="_blank">test code</a>.</pre></div></div>
