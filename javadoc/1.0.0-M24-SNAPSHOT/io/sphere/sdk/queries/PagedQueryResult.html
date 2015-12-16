@@ -183,7 +183,7 @@ extends <a href="../../../../io/sphere/sdk/queries/PagedResult.html" title="clas
 <tr id="i3" class="rowColor">
 <td class="colFirst"><code>java.lang.Long</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/PagedQueryResult.html#getTotal--">getTotal</a></span>()</code>
-<div class="block">The total number of results matching the request.</div>
+<div class="block">The total number of results matching the query.</div>
 </td>
 </tr>
 <tr id="i4" class="altColor">
@@ -343,14 +343,29 @@ extends <a href="../../../../io/sphere/sdk/queries/PagedResult.html" title="clas
 <li class="blockList">
 <h4>getTotal</h4>
 <pre>public&nbsp;java.lang.Long&nbsp;getTotal()</pre>
-<div class="block"><span class="descfrmTypeLabel">Description copied from class:&nbsp;<code><a href="../../../../io/sphere/sdk/queries/PagedResult.html#getTotal--">PagedResult</a></code></span></div>
-<div class="block">The total number of results matching the request.
- Total is greater or equal to count.</div>
+<div class="block">The total number of results matching the query.
+ This field is returned by default.
+ For improved performance, calculating this field can be deactivated by using <a href="../../../../io/sphere/sdk/queries/QueryDsl.html#withFetchTotal-boolean-"><code>QueryDsl.withFetchTotal(boolean)</code></a> and <code>false</code>.
+
+ <div id="io-sphere-sdk-categories-queries-CategoryQueryTest-withFetchTotalFalseRemovesTotalFromOutput--%s" class=code-example><pre><code class='java'>withCategory(client(), category -&gt; {
+    final CategoryQuery query = CategoryQuery.of().byId(category.getId());
+    final PagedQueryResult&lt;Category&gt; resultWithTotal = execute(query);
+    assertThat(resultWithTotal.getTotal())
+            .as("total is by default present")
+            .isNotNull().isEqualTo(1);
+
+    final CategoryQuery queryWithoutTotal = query.withFetchTotal(false);
+    final PagedQueryResult&lt;Category&gt; resultWithoutTotal = execute(queryWithoutTotal);
+    assertThat(resultWithoutTotal.getTotal())
+            .as("total is not present")
+            .isNull();
+});
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/categories/queries/CategoryQueryTest.java" target="_blank">test code</a>.</pre></div></div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Overrides:</span></dt>
 <dd><code><a href="../../../../io/sphere/sdk/queries/PagedResult.html#getTotal--">getTotal</a></code>&nbsp;in class&nbsp;<code><a href="../../../../io/sphere/sdk/queries/PagedResult.html" title="class in io.sphere.sdk.queries">PagedResult</a>&lt;<a href="../../../../io/sphere/sdk/queries/PagedQueryResult.html" title="type parameter in PagedQueryResult">T</a>&gt;</code></dd>
 <dt><span class="returnLabel">Returns:</span></dt>
-<dd>the number of elements that can be fetched matching the criteria</dd>
+<dd>total or null</dd>
 </dl>
 </li>
 </ul>
