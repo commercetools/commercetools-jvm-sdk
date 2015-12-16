@@ -1,10 +1,15 @@
 package io.sphere.sdk.test;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.ning.http.client.AsyncHttpClient;
 import com.ning.http.client.AsyncHttpClientConfig;
 import io.sphere.sdk.client.*;
 import io.sphere.sdk.http.AsyncHttpClientAdapter;
 import io.sphere.sdk.http.HttpClient;
+import io.sphere.sdk.http.HttpMethod;
+import io.sphere.sdk.http.HttpResponse;
+import io.sphere.sdk.json.SphereJsonUtils;
 import io.sphere.sdk.models.DefaultCurrencyUnits;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.queries.PagedQueryResult;
@@ -14,14 +19,19 @@ import org.assertj.core.api.SoftAssertions;
 import org.junit.BeforeClass;
 import org.slf4j.LoggerFactory;
 
+import javax.annotation.Nullable;
 import javax.money.CurrencyUnit;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.UncheckedIOException;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Consumer;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 public abstract class IntegrationTest {
 
@@ -40,7 +50,28 @@ public abstract class IntegrationTest {
             final SphereClient underlying = SphereClient.of(config, httpClient, tokenSupplier);
             final SphereClient underlying1 = withMaybeDeprecationWarnTool(underlying);
             client = BlockingSphereClient.of(underlying1, 20, TimeUnit.SECONDS);
+            assertProjectSettingsAreFine(client);
         }
+    }
+
+    private static void assertProjectSettingsAreFine(final BlockingSphereClient sphereClient) {
+        final JsonNode project = sphereClient.executeBlocking(new SphereRequest<JsonNode>() {
+            @Nullable
+            @Override
+            public JsonNode deserialize(final HttpResponse httpResponse) {
+                return SphereJsonUtils.parse(httpResponse.getResponseBody());
+            }
+
+            @Override
+            public HttpRequestIntent httpRequestIntent() {
+                return HttpRequestIntent.of(HttpMethod.GET, "/");
+            }
+        });
+
+        final ArrayNode languagesArray = (ArrayNode) project.get("languages");
+        final List<String> languages = new LinkedList<>();
+        languagesArray.elements().forEachRemaining(jsonNode -> languages.add(jsonNode.asText()));
+        assertThat(languages).as("tests will fail if the project has not the correct language settings").contains("de", "en");
     }
 
     protected synchronized static BlockingSphereClient client() {
