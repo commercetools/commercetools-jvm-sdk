@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10,"i10":10,"i11":10,"i12":10,"i13":10,"i14":10,"i15":10,"i16":10,"i17":10,"i18":10,"i19":10,"i20":10,"i21":9,"i22":10,"i23":10,"i24":10,"i25":10};
+var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10,"i10":10,"i11":10,"i12":10,"i13":10,"i14":10,"i15":10,"i16":10,"i17":10,"i18":10,"i19":10,"i20":10,"i21":9,"i22":10,"i23":10,"i24":10,"i25":10,"i26":10,"i27":10};
 var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -232,18 +232,26 @@ implements <a href="../../../../io/sphere/sdk/models/Builder.html" title="interf
   <a href="../../../../io/sphere/sdk/products/ProductVariantDraft.html" title="interface in io.sphere.sdk.products">ProductVariantDraft</a>&nbsp;masterVariant)</code>&nbsp;</td>
 </tr>
 <tr id="i22" class="altColor">
-<td class="colFirst"><code>T</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/products/ProductDraftBuilder.html#searchKeywords-io.sphere.sdk.search.SearchKeywords-">searchKeywords</a></span>(<a href="../../../../io/sphere/sdk/search/SearchKeywords.html" title="class in io.sphere.sdk.search">SearchKeywords</a>&nbsp;searchKeywords)</code>&nbsp;</td>
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/products/ProductDraftBuilder.html" title="class in io.sphere.sdk.products">ProductDraftBuilder</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/products/ProductDraftBuilder.html#plusVariants-java.util.List-">plusVariants</a></span>(java.util.List&lt;<a href="../../../../io/sphere/sdk/products/ProductVariantDraft.html" title="interface in io.sphere.sdk.products">ProductVariantDraft</a>&gt;&nbsp;variantsToAdd)</code>&nbsp;</td>
 </tr>
 <tr id="i23" class="rowColor">
-<td class="colFirst"><code>T</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/products/ProductDraftBuilder.html#state-io.sphere.sdk.models.Referenceable-">state</a></span>(<a href="../../../../io/sphere/sdk/models/Referenceable.html" title="interface in io.sphere.sdk.models">Referenceable</a>&lt;<a href="../../../../io/sphere/sdk/states/State.html" title="interface in io.sphere.sdk.states">State</a>&gt;&nbsp;state)</code>&nbsp;</td>
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/products/ProductDraftBuilder.html" title="class in io.sphere.sdk.products">ProductDraftBuilder</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/products/ProductDraftBuilder.html#plusVariants-io.sphere.sdk.products.ProductVariantDraft-">plusVariants</a></span>(<a href="../../../../io/sphere/sdk/products/ProductVariantDraft.html" title="interface in io.sphere.sdk.products">ProductVariantDraft</a>&nbsp;variantToAdd)</code>&nbsp;</td>
 </tr>
 <tr id="i24" class="altColor">
 <td class="colFirst"><code>T</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/products/ProductDraftBuilder.html#taxCategory-io.sphere.sdk.models.Referenceable-">taxCategory</a></span>(<a href="../../../../io/sphere/sdk/models/Referenceable.html" title="interface in io.sphere.sdk.models">Referenceable</a>&lt;<a href="../../../../io/sphere/sdk/taxcategories/TaxCategory.html" title="interface in io.sphere.sdk.taxcategories">TaxCategory</a>&gt;&nbsp;taxCategory)</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/products/ProductDraftBuilder.html#searchKeywords-io.sphere.sdk.search.SearchKeywords-">searchKeywords</a></span>(<a href="../../../../io/sphere/sdk/search/SearchKeywords.html" title="class in io.sphere.sdk.search">SearchKeywords</a>&nbsp;searchKeywords)</code>&nbsp;</td>
 </tr>
 <tr id="i25" class="rowColor">
+<td class="colFirst"><code>T</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/products/ProductDraftBuilder.html#state-io.sphere.sdk.models.Referenceable-">state</a></span>(<a href="../../../../io/sphere/sdk/models/Referenceable.html" title="interface in io.sphere.sdk.models">Referenceable</a>&lt;<a href="../../../../io/sphere/sdk/states/State.html" title="interface in io.sphere.sdk.states">State</a>&gt;&nbsp;state)</code>&nbsp;</td>
+</tr>
+<tr id="i26" class="altColor">
+<td class="colFirst"><code>T</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/products/ProductDraftBuilder.html#taxCategory-io.sphere.sdk.models.Referenceable-">taxCategory</a></span>(<a href="../../../../io/sphere/sdk/models/Referenceable.html" title="interface in io.sphere.sdk.models">Referenceable</a>&lt;<a href="../../../../io/sphere/sdk/taxcategories/TaxCategory.html" title="interface in io.sphere.sdk.taxcategories">TaxCategory</a>&gt;&nbsp;taxCategory)</code>&nbsp;</td>
+</tr>
+<tr id="i27" class="rowColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/products/ProductDraftBuilder.html" title="class in io.sphere.sdk.products">ProductDraftBuilder</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/products/ProductDraftBuilder.html#variants-java.util.List-">variants</a></span>(java.util.List&lt;<a href="../../../../io/sphere/sdk/products/ProductVariantDraft.html" title="interface in io.sphere.sdk.products">ProductVariantDraft</a>&gt;&nbsp;variants)</code>&nbsp;</td>
 </tr>
@@ -335,6 +343,24 @@ implements <a href="../../../../io/sphere/sdk/models/Builder.html" title="interf
 <li class="blockList">
 <h4>variants</h4>
 <pre>public&nbsp;<a href="../../../../io/sphere/sdk/products/ProductDraftBuilder.html" title="class in io.sphere.sdk.products">ProductDraftBuilder</a>&nbsp;variants(java.util.List&lt;<a href="../../../../io/sphere/sdk/products/ProductVariantDraft.html" title="interface in io.sphere.sdk.products">ProductVariantDraft</a>&gt;&nbsp;variants)</pre>
+</li>
+</ul>
+<a name="plusVariants-io.sphere.sdk.products.ProductVariantDraft-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>plusVariants</h4>
+<pre>public&nbsp;<a href="../../../../io/sphere/sdk/products/ProductDraftBuilder.html" title="class in io.sphere.sdk.products">ProductDraftBuilder</a>&nbsp;plusVariants(<a href="../../../../io/sphere/sdk/products/ProductVariantDraft.html" title="interface in io.sphere.sdk.products">ProductVariantDraft</a>&nbsp;variantToAdd)</pre>
+</li>
+</ul>
+<a name="plusVariants-java.util.List-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>plusVariants</h4>
+<pre>public&nbsp;<a href="../../../../io/sphere/sdk/products/ProductDraftBuilder.html" title="class in io.sphere.sdk.products">ProductDraftBuilder</a>&nbsp;plusVariants(java.util.List&lt;<a href="../../../../io/sphere/sdk/products/ProductVariantDraft.html" title="interface in io.sphere.sdk.products">ProductVariantDraft</a>&gt;&nbsp;variantsToAdd)</pre>
 </li>
 </ul>
 <a name="masterVariant-io.sphere.sdk.products.ProductVariantDraft-">
