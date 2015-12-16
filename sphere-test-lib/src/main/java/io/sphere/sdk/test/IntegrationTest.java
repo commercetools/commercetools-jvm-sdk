@@ -66,6 +66,13 @@ public abstract class IntegrationTest {
         return AsyncHttpClientAdapter.of(asyncHttpClient);
     }
 
+    protected static String accessToken() {
+        final SphereAccessTokenSupplier sphereAccessTokenSupplier = SphereAccessTokenSupplier.ofOneTimeFetchingToken(getSphereClientConfig(), newHttpClient(), true);
+        final String accessToken = sphereAccessTokenSupplier.get().toCompletableFuture().join();
+        sphereAccessTokenSupplier.close();
+        return accessToken;
+    }
+
     public static SphereClientConfig getSphereClientConfig() {
         final File file = new File("integrationtest.properties");
         return file.exists() ? loadViaProperties(file) : loadViaEnvironmentArgs();

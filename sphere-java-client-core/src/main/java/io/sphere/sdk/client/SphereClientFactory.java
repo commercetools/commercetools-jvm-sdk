@@ -1,12 +1,10 @@
 package io.sphere.sdk.client;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import io.sphere.sdk.http.HttpClient;
+import io.sphere.sdk.http.HttpRequest;
 import io.sphere.sdk.http.HttpResponse;
-import io.sphere.sdk.json.SphereJsonUtils;
 import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.SphereException;
-import io.sphere.sdk.utils.CompletableFutureUtils;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -54,7 +52,7 @@ public class SphereClientFactory extends Base {
         }
     }
 
-    private HttpClient defaultHttpClient() {
+    public HttpClient createHttpClient() {
         return httpClientSupplier.get();
     }
 
@@ -66,7 +64,7 @@ public class SphereClientFactory extends Base {
      * @return client
      */
     public SphereClient createClient(final SphereClientConfig config) {
-        final HttpClient httpClient = defaultHttpClient();
+        final HttpClient httpClient = createHttpClient();
         final SphereAccessTokenSupplier tokenSupplier = SphereAccessTokenSupplier.ofAutoRefresh(config, httpClient, false);
         return SphereClient.of(config, httpClient, tokenSupplier);
     }
@@ -78,7 +76,7 @@ public class SphereClientFactory extends Base {
      * @return client
      */
     public SphereClient createClient(final SphereApiConfig config, final SphereAccessTokenSupplier tokenSupplier) {
-        return SphereClient.of(config, defaultHttpClient(), tokenSupplier);
+        return SphereClient.of(config, createHttpClient(), tokenSupplier);
     }
 
     /**
@@ -92,6 +90,44 @@ public class SphereClientFactory extends Base {
      */
     public SphereClient createClient(final String projectKey, final String clientId, final String clientSecret) {
         return createClient(SphereClientConfig.of(projectKey, clientId, clientSecret));
+    }
+
+    /**
+     * Creates a client which relies on an access token and does not refresh it, it reuses an existing http client.
+     *
+     * A possible use case is keeping the clientSecret secret and/or instantiate a client which is used for few requests for a limited time.
+     * The underlying http client does not get closed by closing the client
+     *
+     * @param config the configuration to use the API
+     * @param accessToken the token belonging to the project in {@code config}
+     * @param httpClient the http client used for performing requests
+     * @return client
+     */
+    public SphereClient createClientOfApiConfigAndAccessToken(final SphereApiConfig config, final String accessToken, final HttpClient httpClient) {
+        final HttpClient uncloseableHttpClient = new HttpClient() {
+            @Override
+            public CompletionStage<HttpResponse> execute(final HttpRequest httpRequest) {
+                return httpClient.execute(httpRequest);
+            }
+
+            @Override
+            public void close() {
+            }
+        };
+        return SphereClient.of(config, uncloseableHttpClient, SphereAccessTokenSupplier.ofConstantToken(accessToken));
+    }
+
+    /**
+     * Creates a client which relies on an access token and does not refresh it.
+     *
+     * A possible use case is keeping the clientSecret secret and/or instantiate a client which is used for few requests for a limited time.
+     *
+     * @param config the configuration to use the API
+     * @param accessToken the token belonging to the project in {@code config}
+     * @return client
+     */
+    public SphereClient createClientOfApiConfigAndAccessToken(final SphereApiConfig config, final String accessToken) {
+        return SphereClient.of(config, createHttpClient(), SphereAccessTokenSupplier.ofConstantToken(accessToken));
     }
 
     /**
