@@ -50,6 +50,15 @@ public class PagedQueryResult<T> extends PagedResult<T> {
         return super.getResults();
     }
 
+    /**
+     * The total number of results matching the query.
+     * This field is returned by default.
+     * For improved performance, calculating this field can be deactivated by using {@link QueryDsl#withFetchTotal(boolean)} and {@code false}.
+     *
+     * {@include.example io.sphere.sdk.categories.queries.CategoryQueryTest#withFetchTotalFalseRemovesTotalFromOutput()}
+     *
+     * @return total or null
+     */
     @Override
     public Long getTotal() {
         return super.getTotal();

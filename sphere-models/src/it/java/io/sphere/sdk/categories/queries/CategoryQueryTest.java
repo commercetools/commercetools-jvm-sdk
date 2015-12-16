@@ -4,10 +4,7 @@ import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.categories.CategoryDraftBuilder;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.LocalizedStringEntry;
-import io.sphere.sdk.queries.Query;
-import io.sphere.sdk.queries.QueryPredicate;
-import io.sphere.sdk.queries.QuerySort;
-import io.sphere.sdk.queries.TimestampSortingModel;
+import io.sphere.sdk.queries.*;
 import io.sphere.sdk.test.IntegrationTest;
 import org.assertj.core.api.AbstractLongAssert;
 import org.junit.Test;
@@ -99,12 +96,18 @@ public class CategoryQueryTest extends IntegrationTest {
     @Test
     public void withFetchTotalFalseRemovesTotalFromOutput() throws Exception {
         withCategory(client(), category -> {
-            final CategoryQuery baseQuery = CategoryQuery.of().byId(category.getId()).withLimit(1L);
-            checkTotalInQueryResultOf(baseQuery, total -> total.isNotNull().isEqualTo(1));
-            checkTotalInQueryResultOf(baseQuery.withFetchTotal(true), total -> total.isNotNull().isEqualTo(1));
-            checkTotalInQueryResultOf(baseQuery.withFetchTotal(false), total -> total.isNull());
-        });
+            final CategoryQuery query = CategoryQuery.of().byId(category.getId());
+            final PagedQueryResult<Category> resultWithTotal = execute(query);
+            assertThat(resultWithTotal.getTotal())
+                    .as("total is by default present")
+                    .isNotNull().isEqualTo(1);
 
+            final CategoryQuery queryWithoutTotal = query.withFetchTotal(false);
+            final PagedQueryResult<Category> resultWithoutTotal = execute(queryWithoutTotal);
+            assertThat(resultWithoutTotal.getTotal())
+                    .as("total is not present")
+                    .isNull();
+        });
     }
 
     @Test
@@ -192,7 +195,4 @@ public class CategoryQueryTest extends IntegrationTest {
         return client().executeBlocking(CategoryQuery.of().withPredicates(predicate)).head();
     }
 
-    private static void checkTotalInQueryResultOf(final Query<Category> query, final Consumer<AbstractLongAssert<?>> check) {
-        check.accept(assertThat(execute(query).getTotal()));
-    }
 }
