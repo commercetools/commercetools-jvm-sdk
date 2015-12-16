@@ -63,7 +63,12 @@ class HttpResponseImpl extends Base implements HttpResponse {
 
     @Override
     public String toString() {
-        String textInterpretedBody = bodyAsUtf8();
+        String textInterpretedBody = "";
+        try {
+            textInterpretedBody = Optional.ofNullable(responseBody).map(b -> StringHttpRequestBody.tryToFilter(new String(b, StandardCharsets.UTF_8))).orElse("empty body");
+        } catch (final Exception e) {
+            textInterpretedBody = "not parseable: " + e;
+        }
 
         return new ToStringBuilder(this)
                 .append("statusCode", statusCode)
@@ -73,13 +78,4 @@ class HttpResponseImpl extends Base implements HttpResponse {
                 .toString();
     }
 
-    public String bodyAsUtf8() {
-        String textInterpretedBody = "";
-        try {
-            textInterpretedBody = Optional.ofNullable(responseBody).map(b -> new String(b, StandardCharsets.UTF_8)).orElse("empty body");
-        } catch (final Exception e) {
-            textInterpretedBody = "not parseable: " + e;
-        }
-        return textInterpretedBody;
-    }
 }

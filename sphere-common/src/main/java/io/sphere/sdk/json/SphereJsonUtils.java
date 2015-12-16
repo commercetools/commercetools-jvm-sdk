@@ -232,7 +232,7 @@ final public class SphereJsonUtils {
             Iterator<Map.Entry<String, JsonNode>> fields = node.fields();
             while (fields.hasNext()) {
                 Map.Entry<String, JsonNode> field = fields.next();
-                if (field.getValue().isTextual() && field.getKey().toLowerCase().contains("pass")) {
+                if (field.getValue().isTextual() && (field.getKey().toLowerCase().contains("pass") || field.getKey().toLowerCase().contains("access_token"))) {
                     objectNode.put(field.getKey(), "**removed from output**");
                 } else {
                     secure(field.getValue());

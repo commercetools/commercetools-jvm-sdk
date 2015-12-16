@@ -29,6 +29,10 @@ public class StringHttpRequestBody extends Base implements HttpRequestBody {
      * @return body without passwords
      */
     public String getSecuredBody() {
-        return body.replaceAll("(\"\\w*[Pp]ass\\w*\"):\"[^\"]*\"", "$1:\"**removed from output**\"");
+        return tryToFilter(this.body);
+    }
+
+    static String tryToFilter(final String input) {
+        return input.replaceAll("(\"\\w*([Pp]ass|access_token)\\w*\"):\"[^\"]*\"", "$1:\"**removed from output**\"");
     }
 }
