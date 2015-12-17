@@ -4,9 +4,22 @@ import java.util.concurrent.CompletionStage;
 import java.util.concurrent.TimeUnit;
 
 /**
- * A client for commercetools which provides thread block and non-blocking methods to execute a request.
+ * A client for commercetools which provides thread blocking and non-blocking methods to execute a request.
  *
  * The implementations should be thread-safe so they can be used by multiple threads in parallel.
+ *
+ *  <p>Creation requires a {@link SphereClient} and you specify the general timeout for all requests:</p>
+ {@include.example io.sphere.sdk.client.BlockingClientCreationDemo}
+
+ <p>Get a value blocking with {@link #executeBlocking(SphereRequest)}:</p>
+ {@include.example io.sphere.sdk.meta.BlockingClientValueGetDemo}
+ <p>Get a value without blocking like in {@link SphereClient#execute(SphereRequest)}:</p>
+ {@include.example io.sphere.sdk.meta.BlockingClientValueAsyncGetDemo}
+ <p>{@link SphereTimeoutException} occurs if the answer is not available in the configured timeout:</p>
+ {@include.example io.sphere.sdk.client.BlockingSphereClientTest#globalTimeout()}
+ <p>In case of errors sphere exceptions are directly thrown:</p>
+ {@include.example io.sphere.sdk.client.BlockingClientSphereExceptionDemo}
+ *
  */
 public interface BlockingSphereClient extends SphereClient {
 
