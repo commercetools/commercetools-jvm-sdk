@@ -1,5 +1,7 @@
 package io.sphere.sdk.products;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import io.sphere.sdk.client.HttpRequestIntent;
@@ -22,7 +24,8 @@ public class LightweightProduct extends Base implements Versioned<Product>, Prod
     private final String id;
     private final List<String> skus;
 
-    public LightweightProduct(final String id, final Long version, final List<String> skus) {
+    @JsonCreator
+    public LightweightProduct(@JsonProperty("id") final String id, @JsonProperty("version") final Long version, @JsonProperty("skus") final List<String> skus) {
         this.id = id;
         this.version = version;
         this.skus = skus;

@@ -3,7 +3,6 @@ package io.sphere.sdk.products;
 import io.sphere.sdk.test.IntegrationTest;
 import org.junit.Test;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -12,7 +11,7 @@ import static java.util.Arrays.asList;
 import static java.util.Collections.singletonList;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class GraphQlTest extends IntegrationTest {
+public class GraphQLTest extends IntegrationTest {
     @Test
     public void lightweigthProductsBySku() {
         withProduct(client(), product1 -> {
