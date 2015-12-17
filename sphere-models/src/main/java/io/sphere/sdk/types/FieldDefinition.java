@@ -6,6 +6,8 @@ import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.TextInputHint;
 
+import javax.annotation.Nullable;
+
 /**
  * @see Custom
  */
@@ -15,15 +17,20 @@ public class FieldDefinition extends Base {
     private final LocalizedString label;
     @JsonProperty("required")
     private final Boolean required;
+    @Nullable
     private final TextInputHint inputHint;
 
     @JsonCreator
-    private FieldDefinition(final FieldType type, final String name, final LocalizedString label, final Boolean required, final TextInputHint inputHint) {
+    private FieldDefinition(final FieldType type, final String name, final LocalizedString label, final Boolean required, @Nullable final TextInputHint inputHint) {
         this.type = type;
         this.name = name;
         this.label = label;
         this.required = required;
         this.inputHint = inputHint;
+    }
+
+    public static FieldDefinition of(final FieldType type, final String name, final LocalizedString label, final Boolean required) {
+        return of(type, name, label, required, null);
     }
 
     public static FieldDefinition of(final FieldType type, final String name, final LocalizedString label, final Boolean required, final TextInputHint inputHint) {
@@ -47,6 +54,7 @@ public class FieldDefinition extends Base {
         return required;
     }
 
+    @Nullable
     public TextInputHint getInputHint() {
         return inputHint;
     }

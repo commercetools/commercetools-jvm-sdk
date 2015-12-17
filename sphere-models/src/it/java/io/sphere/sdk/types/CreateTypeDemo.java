@@ -7,7 +7,6 @@ import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.TextInputHint;
 import io.sphere.sdk.types.commands.TypeCreateCommand;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
@@ -43,7 +42,7 @@ public final class CreateTypeDemo {
         final LocalizedString label = en("state of the category concerning to show it publicly");
         final String fieldName = "state";
         return FieldDefinition
-                .of(EnumFieldType.of(values), fieldName, label, required, TextInputHint.SINGLE_LINE);
+                .of(EnumFieldType.of(values), fieldName, label, required);
     }
 
     private static FieldDefinition imageUrlFieldDefinition() {
@@ -60,7 +59,6 @@ public final class CreateTypeDemo {
         final String referenceTypeId = Category.referenceTypeId();
         final SetFieldType setType = SetFieldType.of(ReferenceFieldType.of(referenceTypeId));
         return FieldDefinition
-                .of(setType, "relatedCategories", relatedCategoriesLabel,
-                        false, TextInputHint.SINGLE_LINE);
+                .of(setType, "relatedCategories", relatedCategoriesLabel, false);
     }
 }
