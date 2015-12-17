@@ -3,7 +3,9 @@ package io.sphere.sdk.products;
 import io.sphere.sdk.test.IntegrationTest;
 import org.junit.Test;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import static io.sphere.sdk.products.ProductFixtures.withProduct;
@@ -21,13 +23,13 @@ public class GraphQLTest extends IntegrationTest {
                         .collect(Collectors.toList());
 
 
-                final List<LightweightProduct> actual = execute(LightweightProduct.requestOfSkus(skus));
-                final List<LightweightProduct> expected = asList(product1, product2).stream()
+                final Set<LightweightProduct> actual = new HashSet<>(execute(LightweightProduct.requestOfSkus(skus)));
+                final Set<LightweightProduct> expected = asList(product1, product2).stream()
                         .map(product -> {
                             final String sku = product.getMasterData().getStaged().getMasterVariant().getSku();
                             return new LightweightProduct(product.getId(), product.getVersion(), singletonList(sku));
                         })
-                        .collect(Collectors.toList());
+                        .collect(Collectors.toSet());
                 assertThat(actual).isEqualTo(expected);
             });
         });
