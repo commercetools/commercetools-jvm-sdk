@@ -11,7 +11,7 @@ import static java.util.Arrays.asList;
 import static java.util.Collections.singletonList;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class X extends IntegrationTest {
+public class GraphQLTest extends IntegrationTest {
     @Test
     public void lightweigthProductsBySku() {
         withProduct(client(), product1 -> {
