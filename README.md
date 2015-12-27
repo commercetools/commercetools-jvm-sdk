@@ -127,5 +127,5 @@ authUrl=https://auth.sphere.io
 [release]:https://github.com/sphereio/sphere-jvm-sdk/releases
 [release img]:https://img.shields.io/github/release/sphereio/sphere-jvm-sdk.svg
 
-[license]:LICENSE-2.0.txt
+[license]:LICENSE.md
 [license img]:https://img.shields.io/badge/License-Apache%202-blue.svg
