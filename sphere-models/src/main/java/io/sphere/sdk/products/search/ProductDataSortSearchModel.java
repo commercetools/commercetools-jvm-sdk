@@ -26,4 +26,8 @@ public class ProductDataSortSearchModel extends SortableSearchModel<ProductProje
     public SingleValueSortSearchModel<ProductProjection> lastModifiedAt() {
         return searchModel("lastModifiedAt").sorted();
     }
+
+    public CategoryOrderHintsSortSearchModel categoryOrderHints() {
+        return new CategoryOrderHintsSortSearchModel(this, "categoryOrderHints");
+    }
 }

@@ -8,7 +8,6 @@ import io.sphere.sdk.products.queries.ProductProjectionQuery;
 import io.sphere.sdk.products.search.ProductProjectionSearch;
 import io.sphere.sdk.producttypes.ProductType;
 import io.sphere.sdk.producttypes.ProductTypeFixtures;
-import io.sphere.sdk.search.SortExpression;
 import io.sphere.sdk.test.IntegrationTest;
 import org.assertj.core.api.Condition;
 import org.junit.AfterClass;
@@ -243,7 +242,7 @@ public class ProductCategoryOrderHintTest extends IntegrationTest {
     private static List<ProductProjection> searchForCategoryAndSort(final String categoryId) {
         final ProductProjectionSearch searchRequest = ProductProjectionSearch.ofStaged()
                 .withQueryFilters(filter -> filter.categories().id().by(categoryId))
-                .withSort(SortExpression.of("categoryOrderHints." + categoryId + " asc"));
+                .withSort(m -> m.categoryOrderHints().category(categoryId).byAsc());
         return execute(searchRequest).getResults();
     }
 
