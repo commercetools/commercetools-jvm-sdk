@@ -127,7 +127,11 @@ package io.sphere.sdk.meta;
 
  <p>If you get do not get an exception, it may be of importance to know your JVM SDK version, Java version, date of occurrence and operating system.</p>
  Describe the behavior you observed and the one you would like to obtain.
-
+ <h3 id="product-not-found-by-text">Product not found</h3>
+ <ul>
+    <li>Maybe the product is not published. See {@link io.sphere.sdk.products.commands.updateactions.Publish}.</li>
+    <li>The product was not found for the search because the locale was not activated in the commercetools platform project. Enable it in the Merchant Center.</li>
+ </ul>
  */
 public final class TroubleshootingGuide {
     private TroubleshootingGuide() {

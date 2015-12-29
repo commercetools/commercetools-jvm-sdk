@@ -8,14 +8,14 @@ public interface SearchDsl<T, C extends SearchDsl<T, C>> extends ResourceSearch<
 
     /**
      * Returns a new object with the new text as search text.
-     * @param text the new search text with locale
+     * @param text the new search text with locale, the locale should be enabled for the commercetools platform project (see the project settings in the Merchant Center)
      * @return a new object with {@code text}
      */
     C withText(final LocalizedStringEntry text);
 
     /**
      * Returns a new object with the new text as search text.
-     * @param locale the new locale
+     * @param locale the new locale, the locale should be enabled for the commercetools platform project (see the project settings in the Merchant Center)
      * @param text the new search text
      * @return a new object with {@code text}
      */
