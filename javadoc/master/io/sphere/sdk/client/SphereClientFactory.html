@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":10,"i1":10,"i2":10,"i3":41,"i4":41,"i5":9,"i6":9};
+var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":41,"i7":41,"i8":9,"i9":9};
 var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"],32:["t6","Deprecated Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -169,6 +169,25 @@ import io.sphere.sdk.client.SphereClientFactory;
 </td>
 </tr>
 <tr id="i3" class="rowColor">
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/client/SphereClient.html" title="interface in io.sphere.sdk.client">SphereClient</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/client/SphereClientFactory.html#createClientOfApiConfigAndAccessToken-io.sphere.sdk.client.SphereApiConfig-java.lang.String-">createClientOfApiConfigAndAccessToken</a></span>(<a href="../../../../io/sphere/sdk/client/SphereApiConfig.html" title="interface in io.sphere.sdk.client">SphereApiConfig</a>&nbsp;config,
+                                     java.lang.String&nbsp;accessToken)</code>
+<div class="block">Creates a client which relies on an access token and does not refresh it.</div>
+</td>
+</tr>
+<tr id="i4" class="altColor">
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/client/SphereClient.html" title="interface in io.sphere.sdk.client">SphereClient</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/client/SphereClientFactory.html#createClientOfApiConfigAndAccessToken-io.sphere.sdk.client.SphereApiConfig-java.lang.String-io.sphere.sdk.http.HttpClient-">createClientOfApiConfigAndAccessToken</a></span>(<a href="../../../../io/sphere/sdk/client/SphereApiConfig.html" title="interface in io.sphere.sdk.client">SphereApiConfig</a>&nbsp;config,
+                                     java.lang.String&nbsp;accessToken,
+                                     <a href="../../../../io/sphere/sdk/http/HttpClient.html" title="interface in io.sphere.sdk.http">HttpClient</a>&nbsp;httpClient)</code>
+<div class="block">Creates a client which relies on an access token and does not refresh it, it reuses an existing http client.</div>
+</td>
+</tr>
+<tr id="i5" class="rowColor">
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/http/HttpClient.html" title="interface in io.sphere.sdk.http">HttpClient</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/client/SphereClientFactory.html#createHttpClient--">createHttpClient</a></span>()</code>&nbsp;</td>
+</tr>
+<tr id="i6" class="altColor">
 <td class="colFirst"><code>static <a href="../../../../io/sphere/sdk/client/SphereClient.html" title="interface in io.sphere.sdk.client">SphereClient</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/client/SphereClientFactory.html#createHttpTestDouble-java.util.function.Function-">createHttpTestDouble</a></span>(java.util.function.Function&lt;<a href="../../../../io/sphere/sdk/client/HttpRequestIntent.html" title="class in io.sphere.sdk.client">HttpRequestIntent</a>,<a href="../../../../io/sphere/sdk/http/HttpResponse.html" title="interface in io.sphere.sdk.http">HttpResponse</a>&gt;&nbsp;function)</code>
 <div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;
@@ -176,7 +195,7 @@ import io.sphere.sdk.client.SphereClientFactory;
 </div>
 </td>
 </tr>
-<tr id="i4" class="altColor">
+<tr id="i7" class="rowColor">
 <td class="colFirst"><code>static <a href="../../../../io/sphere/sdk/client/SphereClient.html" title="interface in io.sphere.sdk.client">SphereClient</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/client/SphereClientFactory.html#createObjectTestDouble-java.util.function.Function-">createObjectTestDouble</a></span>(java.util.function.Function&lt;<a href="../../../../io/sphere/sdk/client/HttpRequestIntent.html" title="class in io.sphere.sdk.client">HttpRequestIntent</a>,java.lang.Object&gt;&nbsp;function)</code>
 <div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;
@@ -184,11 +203,11 @@ import io.sphere.sdk.client.SphereClientFactory;
 </div>
 </td>
 </tr>
-<tr id="i5" class="rowColor">
+<tr id="i8" class="altColor">
 <td class="colFirst"><code>static <a href="../../../../io/sphere/sdk/client/SphereClientFactory.html" title="class in io.sphere.sdk.client">SphereClientFactory</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/client/SphereClientFactory.html#of--">of</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i6" class="altColor">
+<tr id="i9" class="rowColor">
 <td class="colFirst"><code>static <a href="../../../../io/sphere/sdk/client/SphereClientFactory.html" title="class in io.sphere.sdk.client">SphereClientFactory</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/client/SphereClientFactory.html#of-java.util.function.Supplier-">of</a></span>(java.util.function.Supplier&lt;<a href="../../../../io/sphere/sdk/http/HttpClient.html" title="interface in io.sphere.sdk.http">HttpClient</a>&gt;&nbsp;httpClientSupplier)</code>&nbsp;</td>
 </tr>
@@ -237,6 +256,15 @@ import io.sphere.sdk.client.SphereClientFactory;
 <li class="blockList">
 <h4>of</h4>
 <pre>public static&nbsp;<a href="../../../../io/sphere/sdk/client/SphereClientFactory.html" title="class in io.sphere.sdk.client">SphereClientFactory</a>&nbsp;of()</pre>
+</li>
+</ul>
+<a name="createHttpClient--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>createHttpClient</h4>
+<pre>public&nbsp;<a href="../../../../io/sphere/sdk/http/HttpClient.html" title="interface in io.sphere.sdk.http">HttpClient</a>&nbsp;createHttpClient()</pre>
 </li>
 </ul>
 <a name="createClient-io.sphere.sdk.client.SphereClientConfig-">
@@ -293,6 +321,49 @@ import io.sphere.sdk.client.SphereClientFactory;
 <dd><code>clientSecret</code> - password</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>sphere client</dd>
+</dl>
+</li>
+</ul>
+<a name="createClientOfApiConfigAndAccessToken-io.sphere.sdk.client.SphereApiConfig-java.lang.String-io.sphere.sdk.http.HttpClient-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>createClientOfApiConfigAndAccessToken</h4>
+<pre>public&nbsp;<a href="../../../../io/sphere/sdk/client/SphereClient.html" title="interface in io.sphere.sdk.client">SphereClient</a>&nbsp;createClientOfApiConfigAndAccessToken(<a href="../../../../io/sphere/sdk/client/SphereApiConfig.html" title="interface in io.sphere.sdk.client">SphereApiConfig</a>&nbsp;config,
+                                                          java.lang.String&nbsp;accessToken,
+                                                          <a href="../../../../io/sphere/sdk/http/HttpClient.html" title="interface in io.sphere.sdk.http">HttpClient</a>&nbsp;httpClient)</pre>
+<div class="block">Creates a client which relies on an access token and does not refresh it, it reuses an existing http client.
+
+ A possible use case is keeping the clientSecret secret and/or instantiate a client which is used for few requests for a limited time.
+ The underlying http client does not get closed by closing the client</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>config</code> - the configuration to use the API</dd>
+<dd><code>accessToken</code> - the token belonging to the project in <code>config</code></dd>
+<dd><code>httpClient</code> - the http client used for performing requests</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>client</dd>
+</dl>
+</li>
+</ul>
+<a name="createClientOfApiConfigAndAccessToken-io.sphere.sdk.client.SphereApiConfig-java.lang.String-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>createClientOfApiConfigAndAccessToken</h4>
+<pre>public&nbsp;<a href="../../../../io/sphere/sdk/client/SphereClient.html" title="interface in io.sphere.sdk.client">SphereClient</a>&nbsp;createClientOfApiConfigAndAccessToken(<a href="../../../../io/sphere/sdk/client/SphereApiConfig.html" title="interface in io.sphere.sdk.client">SphereApiConfig</a>&nbsp;config,
+                                                          java.lang.String&nbsp;accessToken)</pre>
+<div class="block">Creates a client which relies on an access token and does not refresh it.
+
+ A possible use case is keeping the clientSecret secret and/or instantiate a client which is used for few requests for a limited time.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>config</code> - the configuration to use the API</dd>
+<dd><code>accessToken</code> - the token belonging to the project in <code>config</code></dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>client</dd>
 </dl>
 </li>
 </ul>

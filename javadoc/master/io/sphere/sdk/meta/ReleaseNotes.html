@@ -249,7 +249,7 @@ assertThat(resultsToIds(result)).containsOnly(product1.getId(), product2.getId()
  <li class=new-in-release>Added <a href="../../../../io/sphere/sdk/products/ProductProjection.html#getCategoryOrderHints--"><code>ProductProjection.getCategoryOrderHints()</code></a> and <a href="../../../../io/sphere/sdk/products/queries/ProductProjectionQueryModel.html#categoryOrderHints--"><code>ProductProjectionQueryModel.categoryOrderHints()</code></a>. It can be used for search as shown in the following example, but the meta model comes in a later release.
   <div class="rn-hidden"><div id="io-sphere-sdk-products-ProductCategoryOrderHintTest-searchForCategoryAndSort--%s" class=code-example><pre><code class='java'>final ProductProjectionSearch searchRequest = ProductProjectionSearch.ofStaged()
         .withQueryFilters(filter -&gt; filter.categories().id().by(categoryId))
-        .withSort(SortExpression.of("categoryOrderHints." + categoryId + " asc"));
+        .withSort(m -&gt; m.categoryOrderHints().category(categoryId).byAsc());
 return execute(searchRequest).getResults();
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/products/ProductCategoryOrderHintTest.java" target="_blank">test code</a>.</pre></div></div>
  </li>
