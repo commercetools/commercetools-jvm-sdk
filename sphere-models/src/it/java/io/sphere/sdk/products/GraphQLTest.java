@@ -3,8 +3,9 @@ package io.sphere.sdk.products;
 import io.sphere.sdk.test.IntegrationTest;
 import org.junit.Test;
 
-import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import static io.sphere.sdk.products.ProductFixtures.withProduct;
@@ -12,7 +13,7 @@ import static java.util.Arrays.asList;
 import static java.util.Collections.singletonList;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class GraphQlTest extends IntegrationTest {
+public class GraphQLTest extends IntegrationTest {
     @Test
     public void lightweigthProductsBySku() {
         withProduct(client(), product1 -> {
@@ -22,13 +23,13 @@ public class GraphQlTest extends IntegrationTest {
                         .collect(Collectors.toList());
 
 
-                final List<LightweightProduct> actual = execute(LightweightProduct.requestOfSkus(skus));
-                final List<LightweightProduct> expected = asList(product1, product2).stream()
+                final Set<LightweightProduct> actual = new HashSet<>(execute(LightweightProduct.requestOfSkus(skus)));
+                final Set<LightweightProduct> expected = asList(product1, product2).stream()
                         .map(product -> {
                             final String sku = product.getMasterData().getStaged().getMasterVariant().getSku();
                             return new LightweightProduct(product.getId(), product.getVersion(), singletonList(sku));
                         })
-                        .collect(Collectors.toList());
+                        .collect(Collectors.toSet());
                 assertThat(actual).isEqualTo(expected);
             });
         });
