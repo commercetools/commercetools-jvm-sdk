@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":18,"i1":18,"i2":6,"i3":6,"i4":6,"i5":6,"i6":6,"i7":6,"i8":6,"i9":6,"i10":6,"i11":6,"i12":6,"i13":6,"i14":6,"i15":6};
+var methods = {"i0":18,"i1":18,"i2":6,"i3":6,"i4":18,"i5":6,"i6":6,"i7":6,"i8":6,"i9":6,"i10":6,"i11":6,"i12":6,"i13":6,"i14":6,"i15":6,"i16":6};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],4:["t3","Abstract Methods"],16:["t5","Default Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -150,52 +150,56 @@ extends <a href="../../../../io/sphere/sdk/models/Resource.html" title="interfac
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/carts/CartLike.html#getCountry--">getCountry</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i4" class="altColor">
+<td class="colFirst"><code>default javax.money.CurrencyUnit</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/carts/CartLike.html#getCurrency--">getCurrency</a></span>()</code>&nbsp;</td>
+</tr>
+<tr id="i5" class="rowColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/types/CustomFields.html" title="class in io.sphere.sdk.types">CustomFields</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/carts/CartLike.html#getCustom--">getCustom</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i5" class="rowColor">
+<tr id="i6" class="altColor">
 <td class="colFirst"><code>java.lang.String</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/carts/CartLike.html#getCustomerEmail--">getCustomerEmail</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i6" class="altColor">
+<tr id="i7" class="rowColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/models/Reference.html" title="interface in io.sphere.sdk.models">Reference</a>&lt;<a href="../../../../io/sphere/sdk/customergroups/CustomerGroup.html" title="interface in io.sphere.sdk.customergroups">CustomerGroup</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/carts/CartLike.html#getCustomerGroup--">getCustomerGroup</a></span>()</code>
 <div class="block">In the order context the customer group can only be expanded if the customer was in a group before creating the order.</div>
 </td>
 </tr>
-<tr id="i7" class="rowColor">
+<tr id="i8" class="altColor">
 <td class="colFirst"><code>java.lang.String</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/carts/CartLike.html#getCustomerId--">getCustomerId</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i8" class="altColor">
+<tr id="i9" class="rowColor">
 <td class="colFirst"><code>java.util.List&lt;<a href="../../../../io/sphere/sdk/carts/CustomLineItem.html" title="interface in io.sphere.sdk.carts">CustomLineItem</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/carts/CartLike.html#getCustomLineItems--">getCustomLineItems</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i9" class="rowColor">
+<tr id="i10" class="altColor">
 <td class="colFirst"><code>java.util.List&lt;<a href="../../../../io/sphere/sdk/discountcodes/DiscountCodeInfo.html" title="class in io.sphere.sdk.discountcodes">DiscountCodeInfo</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/carts/CartLike.html#getDiscountCodes--">getDiscountCodes</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i10" class="altColor">
+<tr id="i11" class="rowColor">
 <td class="colFirst"><code>java.util.List&lt;<a href="../../../../io/sphere/sdk/carts/LineItem.html" title="interface in io.sphere.sdk.carts">LineItem</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/carts/CartLike.html#getLineItems--">getLineItems</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i11" class="rowColor">
+<tr id="i12" class="altColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/carts/PaymentInfo.html" title="class in io.sphere.sdk.carts">PaymentInfo</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/carts/CartLike.html#getPaymentInfo--">getPaymentInfo</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i12" class="altColor">
+<tr id="i13" class="rowColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/models/Address.html" title="class in io.sphere.sdk.models">Address</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/carts/CartLike.html#getShippingAddress--">getShippingAddress</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i13" class="rowColor">
+<tr id="i14" class="altColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/carts/CartShippingInfo.html" title="class in io.sphere.sdk.carts">CartShippingInfo</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/carts/CartLike.html#getShippingInfo--">getShippingInfo</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i14" class="altColor">
+<tr id="i15" class="rowColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/carts/TaxedPrice.html" title="class in io.sphere.sdk.carts">TaxedPrice</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/carts/CartLike.html#getTaxedPrice--">getTaxedPrice</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i15" class="rowColor">
+<tr id="i16" class="altColor">
 <td class="colFirst"><code>javax.money.MonetaryAmount</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/carts/CartLike.html#getTotalPrice--">getTotalPrice</a></span>()</code>&nbsp;</td>
 </tr>
@@ -391,11 +395,20 @@ com.neovisionaries.i18n.CountryCode&nbsp;getCountry()</pre>
 <a name="getPaymentInfo--">
 <!--   -->
 </a>
-<ul class="blockListLast">
+<ul class="blockList">
 <li class="blockList">
 <h4>getPaymentInfo</h4>
 <pre>@Nullable
 <a href="../../../../io/sphere/sdk/carts/PaymentInfo.html" title="class in io.sphere.sdk.carts">PaymentInfo</a>&nbsp;getPaymentInfo()</pre>
+</li>
+</ul>
+<a name="getCurrency--">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>getCurrency</h4>
+<pre>default&nbsp;javax.money.CurrencyUnit&nbsp;getCurrency()</pre>
 </li>
 </ul>
 </li>
