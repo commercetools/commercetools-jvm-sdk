@@ -27,7 +27,7 @@ public class TimeoutSphereClientDecorator extends SphereClientDecorator implemen
         final CompletableFuture<T> result = new CompletableFuture<>();
         final CompletionStage<T> prevResult = super.execute(sphereRequest);
         CompletableFutureUtils.transferResult(prevResult, result);
-        scheduler.schedule(() -> result.completeExceptionally(new TimeoutException()), delay, timeUnit);
+        scheduler.schedule(() -> result.completeExceptionally(new SphereTimeoutException(new TimeoutException())), delay, timeUnit);
         return result;
     }
 

@@ -56,7 +56,7 @@ client secret: 222222222222222222222222222222226</code></pre>
 
  <h3 id=further-client-infos>Further client information</h3>
  <ul>
- <li>{@link SphereClientTuningDocumentation Tuning the client}</li>
+ <li>{@link SphereClientTuningDocumentation Tuning the client} (blocking requests, timeouts, rate limiting)</li>
  <li>{@link io.sphere.sdk.meta.TestingDocumentation Writing unit tests with the client}</li>
  </ul>
  */
