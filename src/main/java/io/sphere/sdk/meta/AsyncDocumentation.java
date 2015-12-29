@@ -37,13 +37,6 @@ import java.util.function.Supplier;
  {@include.example io.sphere.sdk.meta.AsyncDocumentationTest#firstAsyncThenSync()}
 
  <!--
-
- thenCompose/thenCombine examples und dann blocking wait
-
- -->
-
-
- <!--
  <h3 id="what">What</h3>
 
  <ul>

@@ -16,7 +16,7 @@ public final class SphereClientUtils {
 
     /**
      * Waits with a timeout for RESPONSES of a commercetools client wrapped in a {@link CompletionStage}.
-     * This method should not ne used for other {@link CompletionStage}s since it is throwing {@link io.sphere.sdk.models.SphereException}s.
+     * This method should not be used for other {@link CompletionStage}s since it is throwing {@link io.sphere.sdk.models.SphereException}s.
      *
      * @param completionStage the future monad to wait for
      * @param timeout the maximum time to wait for this single request
