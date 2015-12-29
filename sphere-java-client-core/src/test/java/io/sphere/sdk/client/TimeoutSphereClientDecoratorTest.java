@@ -3,14 +3,11 @@ package io.sphere.sdk.client;
 import io.sphere.sdk.utils.CompletableFutureUtils;
 import org.junit.Test;
 
-import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionStage;
 import java.util.concurrent.TimeUnit;
-import java.util.concurrent.TimeoutException;
 
 import static org.assertj.core.api.Assertions.assertThat;
-
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class TimeoutSphereClientDecoratorTest {
 
@@ -22,7 +19,7 @@ public class TimeoutSphereClientDecoratorTest {
 
         final SphereClient decoratedClient = TimeoutSphereClientDecorator.of(sphereClient, DELAY, TimeUnit.MILLISECONDS);
         assertThatThrownBy(() -> decoratedClient.execute(DummySphereRequest.of()).toCompletableFuture().join())
-                .hasCauseInstanceOf(TimeoutException.class);
+                .hasCauseInstanceOf(SphereTimeoutException.class);
     }
 
     @Test
