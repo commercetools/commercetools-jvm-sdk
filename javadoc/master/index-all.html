@@ -499,6 +499,10 @@
 <dd>
 <div class="block">A client for commercetools which provides thread block and non-blocking methods to execute a request.</div>
 </dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/client/SphereClientUtils.html#blockingWait-java.util.concurrent.CompletionStage-long-java.util.concurrent.TimeUnit-">blockingWait(CompletionStage&lt;T&gt;, long, TimeUnit)</a></span> - Static method in class io.sphere.sdk.client.<a href="io/sphere/sdk/client/SphereClientUtils.html" title="class in io.sphere.sdk.client">SphereClientUtils</a></dt>
+<dd>
+<div class="block">Waits with a timeout for RESPONSES of a commercetools client wrapped in a <code>CompletionStage</code>.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/customobjects/commands/CustomObjectCustomJsonMappingUpsertCommand.html#bodyAsJsonString--">bodyAsJsonString()</a></span> - Method in class io.sphere.sdk.customobjects.commands.<a href="io/sphere/sdk/customobjects/commands/CustomObjectCustomJsonMappingUpsertCommand.html" title="class in io.sphere.sdk.customobjects.commands">CustomObjectCustomJsonMappingUpsertCommand</a></dt>
 <dd>
 <div class="block">Produces JSON to create or update a custom object.</div>
@@ -1997,6 +2001,10 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/client/JsonNodeSphereRequest.html#deserialize-io.sphere.sdk.http.HttpResponse-">deserialize(HttpResponse)</a></span> - Method in class io.sphere.sdk.client.<a href="io/sphere/sdk/client/JsonNodeSphereRequest.html" title="class in io.sphere.sdk.client">JsonNodeSphereRequest</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/client/SphereClientUtils.html#deserialize-io.sphere.sdk.http.HttpResponse-com.fasterxml.jackson.core.type.TypeReference-">deserialize(HttpResponse, TypeReference&lt;T&gt;)</a></span> - Static method in class io.sphere.sdk.client.<a href="io/sphere/sdk/client/SphereClientUtils.html" title="class in io.sphere.sdk.client">SphereClientUtils</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/client/SphereClientUtils.html#deserialize-io.sphere.sdk.http.HttpResponse-com.fasterxml.jackson.databind.JavaType-">deserialize(HttpResponse, JavaType)</a></span> - Static method in class io.sphere.sdk.client.<a href="io/sphere/sdk/client/SphereClientUtils.html" title="class in io.sphere.sdk.client">SphereClientUtils</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/client/SphereRequest.html#deserialize-io.sphere.sdk.http.HttpResponse-">deserialize(HttpResponse)</a></span> - Method in interface io.sphere.sdk.client.<a href="io/sphere/sdk/client/SphereRequest.html" title="interface in io.sphere.sdk.client">SphereRequest</a></dt>
 <dd>
 <div class="block">Takes an http response and maps it into a Java object of type T.</div>
@@ -2924,6 +2932,8 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/client/HttpRequestIntent.html#getBody--">getBody()</a></span> - Method in class io.sphere.sdk.client.<a href="io/sphere/sdk/client/HttpRequestIntent.html" title="class in io.sphere.sdk.client">HttpRequestIntent</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/http/HttpRequest.html#getBody--">getBody()</a></span> - Method in interface io.sphere.sdk.http.<a href="io/sphere/sdk/http/HttpRequest.html" title="interface in io.sphere.sdk.http">HttpRequest</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/client/SphereClientUtils.html#getBodyAsString-io.sphere.sdk.http.HttpResponse-">getBodyAsString(HttpResponse)</a></span> - Static method in class io.sphere.sdk.client.<a href="io/sphere/sdk/client/SphereClientUtils.html" title="class in io.sphere.sdk.client">SphereClientUtils</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/client/SphereRequestBase.html#getBodyAsString-io.sphere.sdk.http.HttpResponse-">getBodyAsString(HttpResponse)</a></span> - Static method in class io.sphere.sdk.client.<a href="io/sphere/sdk/client/SphereRequestBase.html" title="class in io.sphere.sdk.client">SphereRequestBase</a></dt>
 <dd>&nbsp;</dd>
@@ -11761,6 +11771,8 @@ CompletionStage&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execu
 <dd>
 <div class="block"><h3 id=add-functionality-to-the-client>Using design patterns to add functionality to the clients</div>
 </dd>
+<dt><a href="io/sphere/sdk/client/SphereClientUtils.html" title="class in io.sphere.sdk.client"><span class="typeNameLink">SphereClientUtils</span></a> - Class in <a href="io/sphere/sdk/client/package-summary.html">io.sphere.sdk.client</a></dt>
+<dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/client/SphereDeprecationException.html" title="class in io.sphere.sdk.client"><span class="typeNameLink">SphereDeprecationException</span></a> - Exception in <a href="io/sphere/sdk/client/package-summary.html">io.sphere.sdk.client</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/client/SphereDeprecationException.html#SphereDeprecationException-java.util.List-">SphereDeprecationException(List&lt;String&gt;)</a></span> - Constructor for exception io.sphere.sdk.client.<a href="io/sphere/sdk/client/SphereDeprecationException.html" title="class in io.sphere.sdk.client">SphereDeprecationException</a></dt>
