@@ -130,7 +130,7 @@ package io.sphere.sdk.meta;
  <h3 id="product-not-found-by-text">Product not found</h3>
  <ul>
     <li>Maybe the product is not published. See {@link io.sphere.sdk.products.commands.updateactions.Publish}.</li>
-    <li>The product was not found for the search because the locale was not activated for search. Enable it in the Merchant Center.</li>
+    <li>The product was not found for the search because the locale was not activated in the commercetools platform project. Enable it in the Merchant Center.</li>
  </ul>
  */
 public final class TroubleshootingGuide {
