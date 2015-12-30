@@ -104,7 +104,87 @@
 <br>
 <pre>public class <span class="typeNameLabel">SphereClientTuningDocumentation</span>
 extends java.lang.Object</pre>
-<div class="block"><h3 id=add-functionality-to-the-client>Using design patterns to add functionality to the clients</h3>
+<div class="block"><h3 id=blocking-client>Blocking Client</h3>
+ <h4 id=usage-blocking-client>Usage of the Blocking Client</h4>
+ In a lot of frameworks there is no support for asynchronous execution and so it is necessary to wait for the responses.
+
+ <p>The <a href="../../../../io/sphere/sdk/client/BlockingSphereClient.html" title="interface in io.sphere.sdk.client"><code>BlockingSphereClient</code></a> can wait for responses with <a href="../../../../io/sphere/sdk/client/BlockingSphereClient.html#executeBlocking-io.sphere.sdk.client.SphereRequest-"><code>BlockingSphereClient.executeBlocking(SphereRequest)</code></a>. This method enforces a timeout for resilience
+ and throws directly <a href="../../../../io/sphere/sdk/models/SphereException.html" title="class in io.sphere.sdk.models"><code>SphereException</code></a>s. For creation refer to <a href="../../../../io/sphere/sdk/client/BlockingSphereClient.html" title="interface in io.sphere.sdk.client"><code>BlockingSphereClient</code></a>.</p>
+
+ <div id="io-sphere-sdk-meta-BlockingClientValueGetDemo%s" class=code-example><button type='button' style='display: none;' class='reveal-imports'>show/hide imports</button><pre class='hide code-example-imports'><code class='java'>import io.sphere.sdk.client.BlockingSphereClient;
+import io.sphere.sdk.client.SphereRequest;
+import io.sphere.sdk.projects.Project;
+import io.sphere.sdk.projects.queries.ProjectGet;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+</code></pre><pre><code class='java'>public class BlockingClientValueGetDemo {
+    public static void demo(final BlockingSphereClient client, final String expectedProjectKey) {
+        final SphereRequest&lt;Project&gt; sphereRequest = ProjectGet.of();
+        final Project project = client.executeBlocking(sphereRequest);//returns result directly, no CompletionStage
+        assertThat(project.getKey()).isEqualTo(expectedProjectKey);
+    }
+}
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/src/test/java/io/sphere/sdk/meta/BlockingClientValueGetDemo.java" target="_blank">test code</a>.</pre></div>
+
+ <h4 id=bad-blocking-example>Examples of bad usages of the default client in a blocking manner</h4>
+ <p>Here follow some examples how to <strong>NOT</strong> use the <a href="../../../../io/sphere/sdk/client/SphereClient.html" title="interface in io.sphere.sdk.client"><code>SphereClient</code></a>:</p>
+
+ <p>This examples lacks a timeout, so in an unfortunate case the thread is blocked forever:</p>
+
+ <div id="io-sphere-sdk-client-WrongBlockingWithJoin%s" class=code-example><button type='button' style='display: none;' class='reveal-imports'>show/hide imports</button><pre class='hide code-example-imports'><code class='java'>import java.util.concurrent.CompletionStage;
+</code></pre><pre><code class='java'>//NEGATIVE EXAMPLE
+public class WrongBlockingWithJoin {
+    public static &lt;T&gt; T demo(final SphereClient client, final SphereRequest&lt;T&gt; sphereRequest) {
+        //WRONG please don't do this
+        final CompletionStage&lt;T&gt; completionStage = client.execute(sphereRequest);
+        return completionStage.toCompletableFuture().join();
+    }
+}
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-java-client-core/src/test/java/io/sphere/sdk/client/WrongBlockingWithJoin.java" target="_blank">test code</a>.</pre></div>
+
+ <p>The following examples are even worse because they lack a timeout and they need to deal with checked exceptions:</p>
+
+ <div id="io-sphere-sdk-client-WrongBlockingWithGetAndSwallowing%s" class=code-example><button type='button' style='display: none;' class='reveal-imports'>show/hide imports</button><pre class='hide code-example-imports'><code class='java'>import java.util.concurrent.CompletionStage;
+import java.util.concurrent.ExecutionException;
+</code></pre><pre><code class='java'>//NEGATIVE EXAMPLE
+public class WrongBlockingWithGetAndSwallowing {
+    public static &lt;T&gt; T demo(final SphereClient client, final SphereRequest&lt;T&gt; sphereRequest) {
+        //WRONG!!! please don't do this !!!!! it swallows the exceptions
+        try {
+            final CompletionStage&lt;T&gt; completionStage = client.execute(sphereRequest);
+            return completionStage.toCompletableFuture().get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+}
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-java-client-core/src/test/java/io/sphere/sdk/client/WrongBlockingWithGetAndSwallowing.java" target="_blank">test code</a>.</pre></div>
+
+
+ <div id="io-sphere-sdk-client-WrongBlockingWithGetAndSignature%s" class=code-example><button type='button' style='display: none;' class='reveal-imports'>show/hide imports</button><pre class='hide code-example-imports'><code class='java'>import java.util.concurrent.CompletionStage;
+import java.util.concurrent.ExecutionException;
+</code></pre><pre><code class='java'>//NEGATIVE EXAMPLE
+public class WrongBlockingWithGetAndSignature {
+    //NOT a good idea
+    public static &lt;T&gt; T demo(final SphereClient client, final SphereRequest&lt;T&gt; sphereRequest)
+            throws ExecutionException, InterruptedException { //UNCOOL and contagious
+        final CompletionStage&lt;T&gt; completionStage = client.execute(sphereRequest);
+        return completionStage.toCompletableFuture().get();
+    }
+}
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-java-client-core/src/test/java/io/sphere/sdk/client/WrongBlockingWithGetAndSignature.java" target="_blank">test code</a>.</pre></div>
+
+
+
+ <h3 id=timeout-client>Timeout Client</h3>
+ See <a href="../../../../io/sphere/sdk/client/TimeoutSphereClientDecorator.html" title="class in io.sphere.sdk.client"><code>TimeoutSphereClientDecorator</code></a>.
+
+ <h3 id=queue-client>Limit the amount of parallel requests</h3>
+ See <a href="../../../../io/sphere/sdk/client/QueueSphereClientDecorator.html" title="class in io.sphere.sdk.client"><code>QueueSphereClientDecorator</code></a>.
+
+ <h3 id=add-functionality-to-the-client>Using design patterns to add functionality to the clients</h3>
  <p>The clients are interfaces which have a default implementation (add "Impl" to the interface name).<br>
  This enables you to use the <a href="http://en.wikipedia.org/wiki/Decorator_pattern">decorator pattern</a> to configure the cross concern behaviour of the client:</p>
 
