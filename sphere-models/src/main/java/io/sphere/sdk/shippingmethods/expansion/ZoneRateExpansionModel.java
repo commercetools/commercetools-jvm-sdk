@@ -1,10 +1,12 @@
 package io.sphere.sdk.shippingmethods.expansion;
 
 import io.sphere.sdk.expansion.ExpansionModel;
-import io.sphere.sdk.expansion.ExpansionPath;
+import io.sphere.sdk.expansion.ExpansionPathContainer;
+
+import java.util.List;
 
 public class ZoneRateExpansionModel<T> extends ExpansionModel<T> {
-    ZoneRateExpansionModel(final String parentPath, final String path) {
+    ZoneRateExpansionModel(final List<String> parentPath, final String path) {
         super(parentPath, path);
     }
 
@@ -12,7 +14,7 @@ public class ZoneRateExpansionModel<T> extends ExpansionModel<T> {
         super();
     }
 
-    public ExpansionPath<T> zone() {
+    public ExpansionPathContainer<T> zone() {
         return expansionPath("zone");
     }
 }

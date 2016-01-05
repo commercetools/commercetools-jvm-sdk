@@ -19,12 +19,6 @@ public interface DiscountCodeByIdGet extends MetaModelGetDsl<DiscountCode, Disco
     }
 
     @Override
-    DiscountCodeByIdGet plusExpansionPaths(final Function<DiscountCodeExpansionModel<DiscountCode>, ExpansionPath<DiscountCode>> m);
-
-    @Override
-    DiscountCodeByIdGet withExpansionPaths(final Function<DiscountCodeExpansionModel<DiscountCode>, ExpansionPath<DiscountCode>> m);
-
-    @Override
     List<ExpansionPath<DiscountCode>> expansionPaths();
 
     @Override

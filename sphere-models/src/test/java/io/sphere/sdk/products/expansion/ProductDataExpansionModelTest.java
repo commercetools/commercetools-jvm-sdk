@@ -11,7 +11,7 @@ public class ProductDataExpansionModelTest {
     @Test
     public void variants() throws Exception {
         final ExpansionPath<Product> expansionPath =
-                ProductExpansionModel.of().masterData().current().variants().prices().customerGroup();
+                ProductExpansionModel.of().masterData().current().variants().prices().customerGroup().expansionPaths().get(0);
         assertThat(expansionPath.toSphereExpand()).isEqualTo("masterData.current.variants[*].prices[*].customerGroup");
     }
 }

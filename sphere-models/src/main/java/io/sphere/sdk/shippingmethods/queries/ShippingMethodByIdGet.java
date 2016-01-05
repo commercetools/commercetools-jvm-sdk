@@ -24,12 +24,6 @@ public interface ShippingMethodByIdGet extends MetaModelGetDsl<ShippingMethod, S
     }
 
     @Override
-    ShippingMethodByIdGet plusExpansionPaths(final Function<ShippingMethodExpansionModel<ShippingMethod>, ExpansionPath<ShippingMethod>> m);
-
-    @Override
-    ShippingMethodByIdGet withExpansionPaths(final Function<ShippingMethodExpansionModel<ShippingMethod>, ExpansionPath<ShippingMethod>> m);
-
-    @Override
     List<ExpansionPath<ShippingMethod>> expansionPaths();
 
     @Override

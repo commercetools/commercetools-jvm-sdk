@@ -2,12 +2,11 @@ package io.sphere.sdk.cartdiscounts.queries;
 
 import io.sphere.sdk.cartdiscounts.CartDiscount;
 import io.sphere.sdk.cartdiscounts.expansion.CartDiscountExpansionModel;
-import io.sphere.sdk.models.Identifiable;
 import io.sphere.sdk.expansion.ExpansionPath;
+import io.sphere.sdk.models.Identifiable;
 import io.sphere.sdk.queries.MetaModelGetDsl;
 
 import java.util.List;
-import java.util.function.Function;
 
 /**
  * {@include.example io.sphere.sdk.cartdiscounts.queries.CartDiscountByIdGetTest#execution()}
@@ -20,12 +19,6 @@ public interface CartDiscountByIdGet extends MetaModelGetDsl<CartDiscount, CartD
     static CartDiscountByIdGet of(final String id) {
         return new CartDiscountByIdGetImpl(id);
     }
-
-    @Override
-    CartDiscountByIdGet plusExpansionPaths(final Function<CartDiscountExpansionModel<CartDiscount>, ExpansionPath<CartDiscount>> m);
-
-    @Override
-    CartDiscountByIdGet withExpansionPaths(final Function<CartDiscountExpansionModel<CartDiscount>, ExpansionPath<CartDiscount>> m);
 
     @Override
     List<ExpansionPath<CartDiscount>> expansionPaths();

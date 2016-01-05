@@ -24,12 +24,6 @@ public interface OrderByIdGet extends MetaModelGetDsl<Order, Order, OrderByIdGet
     }
 
     @Override
-    OrderByIdGet plusExpansionPaths(final Function<OrderExpansionModel<Order>, ExpansionPath<Order>> m);
-
-    @Override
-    OrderByIdGet withExpansionPaths(final Function<OrderExpansionModel<Order>, ExpansionPath<Order>> m);
-
-    @Override
     OrderByIdGet plusExpansionPaths(final ExpansionPath<Order> expansionPath);
 
     @Override

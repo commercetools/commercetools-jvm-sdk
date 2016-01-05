@@ -24,12 +24,6 @@ public interface ChannelByIdGet extends MetaModelGetDsl<Channel, Channel, Channe
     }
 
     @Override
-    ChannelByIdGet plusExpansionPaths(final Function<ChannelExpansionModel<Channel>, ExpansionPath<Channel>> m);
-
-    @Override
-    ChannelByIdGet withExpansionPaths(final Function<ChannelExpansionModel<Channel>, ExpansionPath<Channel>> m);
-
-    @Override
     List<ExpansionPath<Channel>> expansionPaths();
 
     @Override

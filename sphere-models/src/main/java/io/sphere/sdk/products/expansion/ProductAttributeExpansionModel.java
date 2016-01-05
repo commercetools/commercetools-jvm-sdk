@@ -2,12 +2,14 @@ package io.sphere.sdk.products.expansion;
 
 import io.sphere.sdk.expansion.ExpansionModel;
 import io.sphere.sdk.expansion.ExpansionPath;
+import io.sphere.sdk.expansion.ExpansionPathContainer;
 import io.sphere.sdk.models.LocalizedString;
 
 import javax.annotation.Nullable;
+import java.util.List;
 
 public final class ProductAttributeExpansionModel<T> extends ExpansionModel<T> {
-    ProductAttributeExpansionModel(@Nullable final String parentPath, @Nullable final String path) {
+    ProductAttributeExpansionModel(final List<String> parentPath, @Nullable final String path) {
         super(parentPath, path);
     }
 
@@ -15,7 +17,7 @@ public final class ProductAttributeExpansionModel<T> extends ExpansionModel<T> {
      * {@link ExpansionPath} for flat attribute values like {@link String} and {@link LocalizedString}.
      * @return expansion path
      */
-    public ExpansionPath<T> value() {
+    public ExpansionPathContainer<T> value() {
         return expansionPath("value");
     }
 
@@ -23,7 +25,7 @@ public final class ProductAttributeExpansionModel<T> extends ExpansionModel<T> {
      * {@link ExpansionPath} for set (collection) attribute values.
      * @return expansion path
      */
-    public ExpansionPath<T> valueSet() {
+    public ExpansionPathContainer<T> valueSet() {
         return expansionPath("value[*]");
     }
 }

@@ -2,6 +2,8 @@ package io.sphere.sdk.expansion;
 
 import org.junit.Test;
 
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class ExpansionPathBaseTest {
@@ -28,25 +30,25 @@ public class ExpansionPathBaseTest {
 
     @Test
     public void allElementsPathCreatesCorrectPath() throws Exception {
-        assertThat(productModel.categories().toSphereExpand())
+        assertThat(productModel.categories().expansionPaths().get(0).toSphereExpand())
                 .isEqualTo("categories[*]");
     }
 
     @Test
     public void oneElementPathCreatesCorrectPath() throws Exception {
-        assertThat(productModel.categories(5).toSphereExpand())
+        assertThat(productModel.categories(5).expansionPaths().get(0).toSphereExpand())
                 .isEqualTo("categories[5]");
     }
 
     @Test
     public void pathOfCategoriesParent() throws Exception {
-        assertThat(productModel.categories().parent().toSphereExpand())
+        assertThat(productModel.categories().parent().expansionPaths().get(0).toSphereExpand())
                 .isEqualTo("categories[*].parent");
     }
 
     @Test
     public void pathOfCategoriesParentOfIndex() throws Exception {
-        final ExpansionPath<ProductProjectionDummy> path = productModel.categories(4).parent();
+        final ExpansionPath<ProductProjectionDummy> path = productModel.categories(4).parent().expansionPaths().get(0);
         assertThat(path.toSphereExpand())
                 .isEqualTo("categories[4].parent");
     }
@@ -54,7 +56,7 @@ public class ExpansionPathBaseTest {
     @Test
     public void pathOfCategoriesAncestor() throws Exception {
         final ExpansionPath<ProductProjectionDummy> path =
-                productModel.categories().ancestors(3).parent();
+                productModel.categories().ancestors(3).parent().expansionPaths().get(0);
         assertThat(path.toSphereExpand()).isEqualTo("categories[*].ancestors[3].parent");
     }
 
@@ -66,16 +68,16 @@ public class ExpansionPathBaseTest {
 
     }
 
-    private static class CategoryDummyExpansionModelDsl<T> extends CategoryDummyExpansionModel<T> implements ExpansionPath<T> {
+    private static class CategoryDummyExpansionModelDsl<T> extends CategoryDummyExpansionModel<T> {
 
-        public CategoryDummyExpansionModelDsl(final String parentPath, final String path) {
+        public CategoryDummyExpansionModelDsl(final List<String> parentPath, final String path) {
             super(parentPath, path);
         }
     }
 
     private static class CategoryDummyExpansionModel<T> extends ExpandedModel<T> {
 
-        public CategoryDummyExpansionModel(final String parentPath, final String path) {
+        public CategoryDummyExpansionModel(final List<String> parentPath, final String path) {
             super(parentPath, path);
         }
 

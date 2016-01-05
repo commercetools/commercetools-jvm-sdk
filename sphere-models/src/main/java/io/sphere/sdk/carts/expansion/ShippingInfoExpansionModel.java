@@ -1,17 +1,18 @@
 package io.sphere.sdk.carts.expansion;
 
 import io.sphere.sdk.expansion.ExpansionModel;
-import io.sphere.sdk.expansion.ExpansionPath;
+import io.sphere.sdk.expansion.ExpansionPathContainer;
 import io.sphere.sdk.shippingmethods.expansion.ShippingMethodExpansionModel;
 
 import javax.annotation.Nullable;
+import java.util.List;
 
 public class ShippingInfoExpansionModel<T> extends ExpansionModel<T> {
-    public ShippingInfoExpansionModel(@Nullable final String parentPath, @Nullable final String path) {
+    public ShippingInfoExpansionModel(final List<String> parentPath, @Nullable final String path) {
         super(parentPath, path);
     }
 
-    public ExpansionPath<T> taxCategory() {
+    public ExpansionPathContainer<T> taxCategory() {
         return expansionPath("taxCategory");
     }
 

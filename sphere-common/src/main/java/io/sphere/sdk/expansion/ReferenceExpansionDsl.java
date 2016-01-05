@@ -2,7 +2,7 @@ package io.sphere.sdk.expansion;
 
 import java.util.List;
 
-public interface ReferenceExpansionDsl<T, C> extends ReferenceExpansionSupport<T> {
+public interface ReferenceExpansionDsl<T, C> extends ExpansionPathContainer<T> {
     /**
      * Creates a new object with the properties of the old object but replaces all expansion paths with {@code expansionPaths}.
      * @param expansionPaths the new expansion paths
@@ -15,6 +15,9 @@ public interface ReferenceExpansionDsl<T, C> extends ReferenceExpansionSupport<T
      *
      * <p>An example in the product projection context:</p>
      * {@include.example io.sphere.sdk.products.expansion.ProductProjectionExpansionModelTest#withExpansionPathDemo()}
+     *
+     * <p>This method also can be used to use the same expansions as in another request:</p>
+     * {@include.example io.sphere.sdk.products.expansion.ProductProjectionExpansionModelTest#useExpansionPathsOfOtherRequest()}
      *
      * @param expansionPath the new expansion paths
      * @return new object
@@ -38,4 +41,12 @@ public interface ReferenceExpansionDsl<T, C> extends ReferenceExpansionSupport<T
      * @return new object
      */
     C plusExpansionPaths(final ExpansionPath<T> expansionPath);
+
+    default C withExpansionPaths(ExpansionPathContainer<T> holder) {
+        return withExpansionPaths(holder.expansionPaths());
+    }
+
+    default C plusExpansionPaths(ExpansionPathContainer<T> holder) {
+        return plusExpansionPaths(holder.expansionPaths());
+    }
 }

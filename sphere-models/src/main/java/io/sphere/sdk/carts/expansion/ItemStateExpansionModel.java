@@ -1,14 +1,16 @@
 package io.sphere.sdk.carts.expansion;
 
 import io.sphere.sdk.expansion.ExpansionModel;
-import io.sphere.sdk.expansion.ExpansionPath;
+import io.sphere.sdk.expansion.ExpansionPathContainer;
+
+import java.util.List;
 
 public class ItemStateExpansionModel<T> extends ExpansionModel<T> {
-    ItemStateExpansionModel(final String parentPath, final String path) {
+    ItemStateExpansionModel(final List<String> parentPath, final String path) {
         super(parentPath, path);
     }
 
-    public ExpansionPath<T> state() {
+    public ExpansionPathContainer<T> state() {
         return expansionPath("state");
     }
 }

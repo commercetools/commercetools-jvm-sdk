@@ -19,12 +19,6 @@ public interface ProductDiscountByIdGet extends MetaModelGetDsl<ProductDiscount,
     }
 
     @Override
-    ProductDiscountByIdGet plusExpansionPaths(final Function<ProductDiscountExpansionModel<ProductDiscount>, ExpansionPath<ProductDiscount>> m);
-
-    @Override
-    ProductDiscountByIdGet withExpansionPaths(final Function<ProductDiscountExpansionModel<ProductDiscount>, ExpansionPath<ProductDiscount>> m);
-
-    @Override
     List<ExpansionPath<ProductDiscount>> expansionPaths();
 
     @Override

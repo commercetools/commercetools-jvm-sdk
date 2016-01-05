@@ -25,12 +25,6 @@ public interface MessageByIdGet extends MetaModelGetDsl<Message, Message, Messag
     }
 
     @Override
-    MessageByIdGet plusExpansionPaths(final Function<MessageExpansionModel<Message>, ExpansionPath<Message>> m);
-
-    @Override
-    MessageByIdGet withExpansionPaths(final Function<MessageExpansionModel<Message>, ExpansionPath<Message>> m);
-
-    @Override
     List<ExpansionPath<Message>> expansionPaths();
 
     @Override

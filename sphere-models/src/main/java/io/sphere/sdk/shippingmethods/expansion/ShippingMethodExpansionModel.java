@@ -1,11 +1,11 @@
 package io.sphere.sdk.shippingmethods.expansion;
 
 import io.sphere.sdk.expansion.ExpandedModel;
-import io.sphere.sdk.expansion.ExpansionModel;
-import io.sphere.sdk.expansion.ExpansionPath;
+import io.sphere.sdk.expansion.ExpansionPathContainer;
 import io.sphere.sdk.shippingmethods.ShippingMethod;
 
 import javax.annotation.Nullable;
+import java.util.List;
 
 /**
   DSL class to create expansion path expressions.
@@ -13,7 +13,7 @@ import javax.annotation.Nullable;
  @param <T> the type for which the expansion path is
  */
 public class ShippingMethodExpansionModel<T> extends ExpandedModel<T> {
-    public ShippingMethodExpansionModel(@Nullable final String parentPath, @Nullable final String path) {
+    public ShippingMethodExpansionModel(final List<String> parentPath, @Nullable final String path) {
         super(parentPath, path);
     }
 
@@ -21,7 +21,7 @@ public class ShippingMethodExpansionModel<T> extends ExpandedModel<T> {
         super();
     }
 
-    public ExpansionPath<T> taxCategory() {
+    public ExpansionPathContainer<T> taxCategory() {
         return expansionPath("taxCategory");
     }
 
@@ -33,11 +33,11 @@ public class ShippingMethodExpansionModel<T> extends ExpandedModel<T> {
         return zoneRates("" + index);
     }
 
-    public ExpansionPath<T> zones() {
+    public ExpansionPathContainer<T> zones() {
         return zoneRates().zone();
     }
 
-    public ExpansionPath<T> zones(final int index) {
+    public ExpansionPathContainer<T> zones(final int index) {
         return zoneRates(index).zone();
     }
 

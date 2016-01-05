@@ -27,7 +27,7 @@ public class CategoryExpansionModelTest extends IntegrationTest {
                 withCategory(client(), CategoryDraftBuilder.of(en("3"), en("level3")).parent(level2), level3 -> {
                     withCategory(client(), CategoryDraftBuilder.of(en("4"), en("level4")).parent(level3), level4 -> {
                         final ExpansionPath<Category> expansionPath =
-                                CategoryExpansionModel.of().ancestors().ancestors();
+                                CategoryExpansionModel.of().ancestors().ancestors().expansionPaths().get(0);
                         final Query<Category> query = CategoryQuery.of().byId(level4.getId())
                                 .withExpansionPaths(expansionPath)
                                 .toQuery();
@@ -52,7 +52,7 @@ public class CategoryExpansionModelTest extends IntegrationTest {
         withCategory(client(), CategoryDraftBuilder.of(en("1"), en("level1")), level1 -> {
             withCategory(client(), CategoryDraftBuilder.of(en("2"), en("level2")).parent(level1), level2 -> {
                 final Query<Category> query = CategoryQuery.of().byId(level2.getId())
-                        .withExpansionPaths(CategoryExpansionModel.of().parent())
+                        .withExpansionPaths(m -> m.parent())
                         .toQuery();
                 final PagedQueryResult<Category> queryResult = execute(query);
                 final Category loadedLevel2 = queryResult.head().get();
@@ -63,7 +63,7 @@ public class CategoryExpansionModelTest extends IntegrationTest {
 
     @Test
     public void ancestorsIndex() throws Exception {
-        assertThat(CategoryExpansionModel.of().ancestors(1).ancestors().toSphereExpand())
+        assertThat(CategoryExpansionModel.of().ancestors(1).ancestors().expansionPaths().get(0).toSphereExpand())
                 .isEqualTo("ancestors[1].ancestors[*]");
     }
 }
