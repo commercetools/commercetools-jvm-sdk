@@ -14,10 +14,10 @@ public class PaymentDeleteCommandTest extends IntegrationTest {
     @Test
     public void execution() {
         final PaymentDraft paymentDraft = PaymentDraftBuilder.of(EURO_20).build();
-        final Payment payment = execute(PaymentCreateCommand.of(paymentDraft));
-        execute(PaymentDeleteCommand.of(payment));
+        final Payment payment = client().executeBlocking(PaymentCreateCommand.of(paymentDraft));
+        client().executeBlocking(PaymentDeleteCommand.of(payment));
 
-        final Payment loadedPayment = execute(PaymentByIdGet.of(payment));
+        final Payment loadedPayment = client().executeBlocking(PaymentByIdGet.of(payment));
 
         assertThat(loadedPayment).isNull();
     }

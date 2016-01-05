@@ -12,7 +12,7 @@ public class CartByIdGetTest extends IntegrationTest {
     public void fetchById() throws Exception {
         final Cart cart = createCartWithCountry(client());
         final String id = cart.getId();
-        final Cart fetchedCart = execute(CartByIdGet.of(id));
+        final Cart fetchedCart = client().executeBlocking(CartByIdGet.of(id));
         assertThat(fetchedCart).isEqualTo(cart);
     }
 }

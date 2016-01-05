@@ -25,14 +25,14 @@ public class CartsCustomFieldsTest extends IntegrationTest {
         withUpdateableType(client(), type -> {
             final CustomFieldsDraft customFieldsDraft = CustomFieldsDraftBuilder.ofType(type).addObject(STRING_FIELD_NAME, "a value").build();
             final CartDraft categoryDraft = CartDraftBuilder.of(EUR).country(CountryCode.DE).custom(customFieldsDraft).build();
-            final Cart category = execute(CartCreateCommand.of(categoryDraft));
+            final Cart category = client().executeBlocking(CartCreateCommand.of(categoryDraft));
             assertThat(category.getCustom().getField(STRING_FIELD_NAME, TypeReferences.stringTypeReference())).isEqualTo("a value");
 
-            final Cart updatedCart = execute(CartUpdateCommand.of(category, SetCustomField.ofObject(STRING_FIELD_NAME, "a new value")));
+            final Cart updatedCart = client().executeBlocking(CartUpdateCommand.of(category, SetCustomField.ofObject(STRING_FIELD_NAME, "a new value")));
             assertThat(updatedCart.getCustom().getField(STRING_FIELD_NAME, TypeReferences.stringTypeReference())).isEqualTo("a new value");
 
             //cleanup
-            execute(CartDeleteCommand.of(updatedCart));
+            client().executeBlocking(CartDeleteCommand.of(updatedCart));
 
             return type;
         });
@@ -44,12 +44,12 @@ public class CartsCustomFieldsTest extends IntegrationTest {
             final Cart cart = CartFixtures.createCartWithShippingAddress(client());
             final HashMap<String, Object> fields = new HashMap<>();
             fields.put(STRING_FIELD_NAME, "hello");
-            final Cart updatedCart = execute(CartUpdateCommand.of(cart, SetCustomType.ofTypeIdAndObjects(type.getId(), fields)));
+            final Cart updatedCart = client().executeBlocking(CartUpdateCommand.of(cart, SetCustomType.ofTypeIdAndObjects(type.getId(), fields)));
             assertThat(updatedCart.getCustom().getType()).isEqualTo(type.toReference());
             assertThat(updatedCart.getCustom().getField(STRING_FIELD_NAME, TypeReferences.stringTypeReference())).isEqualTo("hello");
 
             //cleanup
-            execute(CartDeleteCommand.of(updatedCart));
+            client().executeBlocking(CartDeleteCommand.of(updatedCart));
 
             return type;
         });

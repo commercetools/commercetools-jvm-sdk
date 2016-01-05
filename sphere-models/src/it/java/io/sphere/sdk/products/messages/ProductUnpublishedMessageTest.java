@@ -19,15 +19,15 @@ public class ProductUnpublishedMessageTest extends IntegrationTest {
     public void message() {
         ProductFixtures.withUpdateableProduct(client(), product -> {
             assertThat(product.getMasterData().isPublished()).isFalse();
-            final Product unpublishedProduct = execute(ProductUpdateCommand.of(product, asList(Publish.of(), Unpublish.of())));
+            final Product unpublishedProduct = client().executeBlocking(ProductUpdateCommand.of(product, asList(Publish.of(), Unpublish.of())));
             assertEventually(() -> {
                 final PagedQueryResult<ProductUnpublishedMessage> queryResult =
-                        execute(MessageQuery.of()
-                        .withPredicates(m -> m.resource().is(unpublishedProduct))
-                        .withSort(m -> m.createdAt().sort().desc())
-                        .withExpansionPaths(m -> m.resource())
-                        .withLimit(1L)
-                        .forMessageType(ProductUnpublishedMessage.MESSAGE_HINT));
+                        client().executeBlocking(MessageQuery.of()
+                                .withPredicates(m -> m.resource().is(unpublishedProduct))
+                                .withSort(m -> m.createdAt().sort().desc())
+                                .withExpansionPaths(m -> m.resource())
+                                .withLimit(1L)
+                                .forMessageType(ProductUnpublishedMessage.MESSAGE_HINT));
                 final ProductUnpublishedMessage message = queryResult.head().get();
                 assertThat(message.getResource().getId()).as("productId").isEqualTo(product.getId());
                 assertThat(message.getResource().getObj().getMasterData().isPublished()).isFalse();

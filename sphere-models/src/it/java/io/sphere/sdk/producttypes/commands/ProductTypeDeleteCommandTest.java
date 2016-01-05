@@ -13,24 +13,24 @@ import static org.assertj.core.api.Assertions.*;
 public class ProductTypeDeleteCommandTest extends IntegrationTest {
     @Test
     public void execution() throws Exception {
-        final ProductType productType = execute(ProductTypeCreateCommand.of(getDraft()));
+        final ProductType productType = client().executeBlocking(ProductTypeCreateCommand.of(getDraft()));
 
-        execute(ProductTypeDeleteCommand.of(productType));
+        client().executeBlocking(ProductTypeDeleteCommand.of(productType));
 
         final Query<ProductType> query = ProductTypeQuery.of()
                 .withPredicates(m -> m.id().is(productType.getId()));
-        assertThat(execute(query).head()).isEmpty();
+        assertThat(client().executeBlocking(query).head()).isEmpty();
     }
 
     @Test
     public void executionByKey() throws Exception {
-        final ProductType productType = execute(ProductTypeCreateCommand.of(getDraft()));
+        final ProductType productType = client().executeBlocking(ProductTypeCreateCommand.of(getDraft()));
 
-        execute(ProductTypeDeleteCommand.ofKey(productType.getKey(), productType.getVersion()));
+        client().executeBlocking(ProductTypeDeleteCommand.ofKey(productType.getKey(), productType.getVersion()));
 
         final Query<ProductType> query = ProductTypeQuery.of()
                 .withPredicates(m -> m.id().is(productType.getId()));
-        assertThat(execute(query).head()).isEmpty();
+        assertThat(client().executeBlocking(query).head()).isEmpty();
     }
 
     private ProductTypeDraft getDraft() {

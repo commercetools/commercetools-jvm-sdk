@@ -54,7 +54,7 @@ public class CustomFieldsTest extends IntegrationTest {
                 fields.put(STRING_FIELD_NAME, STRING);
                 fields.put(TIME_FIELD_NAME, TIME);
 
-                final Category updatedCategory = execute(CategoryUpdateCommand.of(category, SetCustomType.ofTypeIdAndObjects(type.getId(), fields)));
+                final Category updatedCategory = client().executeBlocking(CategoryUpdateCommand.of(category, SetCustomType.ofTypeIdAndObjects(type.getId(), fields)));
 
                 custom = updatedCategory.getCustom();
             });

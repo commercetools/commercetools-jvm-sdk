@@ -8,8 +8,10 @@ import io.sphere.sdk.carts.commands.CartUpdateCommand;
 import io.sphere.sdk.carts.commands.updateactions.AddDiscountCode;
 import io.sphere.sdk.carts.commands.updateactions.RemoveDiscountCode;
 import io.sphere.sdk.carts.commands.updateactions.SetShippingMethod;
+import io.sphere.sdk.client.SphereRequest;
 import io.sphere.sdk.discountcodes.DiscountCodeInfo;
 import io.sphere.sdk.products.Price;
+import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.test.IntegrationTest;
 import io.sphere.sdk.utils.MoneyImpl;
 import org.javamoney.moneta.function.MonetaryUtil;
@@ -30,12 +32,12 @@ public class CartQueryTest extends IntegrationTest {
     public void expandDiscountCodeReference() throws Exception {
         withCartAndDiscountCode(client(), (cart, discountCode) -> {
             //addDiscountCode
-            final Cart cartWithCode = execute(CartUpdateCommand.of(cart, AddDiscountCode.of(discountCode)));
+            final Cart cartWithCode = client().executeBlocking(CartUpdateCommand.of(cart, AddDiscountCode.of(discountCode)));
 
             final CartQuery query = CartQuery.of()
                     .withPredicates(m -> m.id().is(cart.getId()))
                     .withExpansionPaths(m -> m.discountCodes().discountCode());
-            final Cart loadedCart = execute(query).head().get();
+            final Cart loadedCart = client().executeBlocking(query).head().get();
 
 
             final DiscountCodeInfo discountCodeInfo = loadedCart.getDiscountCodes().get(0);
@@ -46,10 +48,10 @@ public class CartQueryTest extends IntegrationTest {
             final CartQuery cartQuery = CartQuery.of()
                     .withPredicates(m -> m.discountCodes().discountCode().is(discountCode))
                     .plusPredicates(m -> m.is(cart));
-            assertThat(execute(cartQuery).head()).contains(loadedCart);
+            assertThat(client().executeBlocking(cartQuery).head()).contains(loadedCart);
 
             //clean up
-            final Cart updatedCart = execute(CartUpdateCommand.of(cartWithCode, RemoveDiscountCode.of(discountCode)));
+            final Cart updatedCart = client().executeBlocking(CartUpdateCommand.of(cartWithCode, RemoveDiscountCode.of(discountCode)));
             assertThat(updatedCart.getDiscountCodes()).isEmpty();
 
             return updatedCart;
@@ -65,8 +67,7 @@ public class CartQueryTest extends IntegrationTest {
                     .withPredicates(
                             m -> m.customerId().is(customer.getId())
                                     .and(m.customerEmail().is(customer.getEmail())));
-            final Cart loadedCart = execute(cartQuery
-            ).head().get();
+            final Cart loadedCart = client().executeBlocking(cartQuery).head().get();
             assertThat(loadedCart.getCustomerId()).contains(customer.getId());
         });
     }
@@ -76,7 +77,7 @@ public class CartQueryTest extends IntegrationTest {
         withCustomerAndCart(client(), (customer, cart) -> {
             final CartQuery cartQuery = CartQuery.of()
                     .withPredicates(m -> m.customerEmail().is(customer.getEmail()));
-            final Cart loadedCart = execute(cartQuery).head().get();
+            final Cart loadedCart = client().executeBlocking(cartQuery).head().get();
             assertThat(loadedCart.getCustomerId()).contains(customer.getId());
         });
     }
@@ -85,14 +86,15 @@ public class CartQueryTest extends IntegrationTest {
     public void queryTotalPrice() throws Exception {
         withFilledCart(client(), cart -> {
             final long centAmount = centAmountOf(cart.getTotalPrice());
-            final Cart loadedCart = execute(CartQuery.of()
+            final CartQuery cartQuery = CartQuery.of()
                     .withSort(m -> m.createdAt().sort().desc())
                     .withLimit(1L)
                     .withPredicates(
                             m -> m.totalPrice().centAmount().isGreaterThan(centAmount - 1)
                                     .and(m.totalPrice().centAmount().isLessThan(centAmount + 1)
                                                     .and(m.totalPrice().currencyCode().is(EUR))
-                                    ))).head().get();
+                                    ));
+            final Cart loadedCart = client().executeBlocking(cartQuery).head().get();
             assertThat(loadedCart.getId()).isEqualTo(cart.getId());
         });
     }
@@ -104,14 +106,15 @@ public class CartQueryTest extends IntegrationTest {
     @Test
     public void queryTaxedPrice() throws Exception {
         withFilledCart(client(), cart -> {
-            final Cart loadedCart = execute(CartQuery.of()
+            final CartQuery cartQuery = CartQuery.of()
                     .withSort(m -> m.createdAt().sort().desc())
                     .withLimit(1L)
                     .withPredicates(m -> m.taxedPrice().isPresent()
                                     .and(m.taxedPrice().totalNet().centAmount().is(centAmountOf(cart.getTaxedPrice().getTotalNet())))
                                     .and(m.taxedPrice().totalGross().centAmount().is(centAmountOf(cart.getTaxedPrice().getTotalGross()))
                                     .and(m.id().is(cart.getId())))
-                    )).head().get();
+                    );
+            final Cart loadedCart = client().executeBlocking(cartQuery).head().get();
             assertThat(loadedCart.getId()).isEqualTo(cart.getId());
         });
     }
@@ -139,7 +142,8 @@ public class CartQueryTest extends IntegrationTest {
                                     .and(m.lineItems().state().quantity().is(itemState.getQuantity()))
                                     .and(m.lineItems().state().state().is(itemState.getState()))
                     );
-            final Cart loadedCart = execute(query.plusPredicates(m -> m.id().is(cart.getId()))).head().get();
+            final CartQuery cartQuery = query.plusPredicates(m -> m.id().is(cart.getId()));
+            final Cart loadedCart = client().executeBlocking(cartQuery).head().get();
             assertThat(loadedCart.getId()).isEqualTo(cart.getId());
         });
     }
@@ -153,7 +157,7 @@ public class CartQueryTest extends IntegrationTest {
                         CartUpdateCommand.of(cart, SetShippingMethod.of(shippingMethod))
                                 .plusExpansionPaths(m -> m.shippingInfo().shippingMethod().taxCategory())
                                 .plusExpansionPaths(m -> m.shippingInfo().taxCategory());
-                final Cart cartWithShippingMethod = execute(updateCommand);
+                final Cart cartWithShippingMethod = client().executeBlocking(updateCommand);
 
                 final CartShippingInfo shippingInfo = cartWithShippingMethod.getShippingInfo();
 
@@ -167,7 +171,7 @@ public class CartQueryTest extends IntegrationTest {
                         .plusPredicates(m -> m.shippingInfo().shippingMethod().is(shippingMethod))
                         .plusPredicates(m -> m.shippingInfo().discountedPrice().isNotPresent())
                         ;
-                assertThat(execute(query).head().get()).isEqualTo(cartWithShippingMethod);
+                assertThat(client().executeBlocking(query).head().get()).isEqualTo(cartWithShippingMethod);
 
 
                 return cartWithShippingMethod;

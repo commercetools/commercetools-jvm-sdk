@@ -32,13 +32,13 @@ public class CustomObjectDeleteCommandTest extends IntegrationTest {
     public void demo() {
         final String key = randomKey();
         final Foo foo = new Foo("bar", 7L);
-        final CustomObject<Foo> customObject = execute(CustomObjectUpsertCommand
+        final CustomObject<Foo> customObject = client().executeBlocking(CustomObjectUpsertCommand
                 .of(CustomObjectDraft.ofUnversionedUpsert(CONTAINER, key, foo, Foo.class)));
 
-        final CustomObject<Foo> deletedObject = execute(CustomObjectDeleteCommand.of(CONTAINER, key, Foo.class));
+        final CustomObject<Foo> deletedObject = client().executeBlocking(CustomObjectDeleteCommand.of(CONTAINER, key, Foo.class));
 
         assertThat(deletedObject.getValue()).isEqualTo(foo);
-        assertThat(execute(CustomObjectByKeyGet.of(CONTAINER, key, Foo.class)))
+        assertThat(client().executeBlocking(CustomObjectByKeyGet.of(CONTAINER, key, Foo.class)))
                 .as("get request")
                 .isNull();
     }
@@ -47,15 +47,15 @@ public class CustomObjectDeleteCommandTest extends IntegrationTest {
     public void demoById() {
         final String key = randomKey();
         final Foo foo = new Foo("bar", 7L);
-        final CustomObject<Foo> customObject = execute(CustomObjectUpsertCommand
+        final CustomObject<Foo> customObject = client().executeBlocking(CustomObjectUpsertCommand
                 .of(CustomObjectDraft.ofUnversionedUpsert(CONTAINER, key, foo, Foo.class)));
         final String id = customObject.getId();
         final Long version = customObject.getVersion();
 
-        final CustomObject<Foo> deletedObject = execute(CustomObjectDeleteCommand.of(id, version, Foo.class));
+        final CustomObject<Foo> deletedObject = client().executeBlocking(CustomObjectDeleteCommand.of(id, version, Foo.class));
 
         assertThat(deletedObject.getValue()).isEqualTo(foo);
-        assertThat(execute(CustomObjectByKeyGet.of(CONTAINER, key, Foo.class)))
+        assertThat(client().executeBlocking(CustomObjectByKeyGet.of(CONTAINER, key, Foo.class)))
                 .as("get request")
                 .isNull();
     }
@@ -64,8 +64,8 @@ public class CustomObjectDeleteCommandTest extends IntegrationTest {
         final String value = "hello";
         final String key = "storeFlatString";
         final CustomObjectUpsertCommand<String> command = CustomObjectUpsertCommand.of(CustomObjectDraft.ofUnversionedUpsert(CONTAINER, key, value, String.class));
-        final CustomObject<String> customObject = execute(command);
-        final CustomObject<JsonNode> result = execute(f.apply(customObject));
+        final CustomObject<String> customObject = client().executeBlocking(command);
+        final CustomObject<JsonNode> result = client().executeBlocking(f.apply(customObject));
         assertThat(result.getId()).isEqualTo(customObject.getId());
     }
 }

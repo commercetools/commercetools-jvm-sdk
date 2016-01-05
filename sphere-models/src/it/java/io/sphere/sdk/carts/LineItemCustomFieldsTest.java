@@ -22,7 +22,7 @@ public class LineItemCustomFieldsTest extends IntegrationTest {
         withUpdateableType(client(), type -> {
             withCartAndTaxedProduct(client(), (cart, product) -> {
                 final CustomFieldsDraft customFieldsDraft = CustomFieldsDraftBuilder.ofType(type).addObject(STRING_FIELD_NAME, "a value").build();
-                final Cart updatedCart = execute(CartUpdateCommand.of(cart, AddLineItem.of(product, 1, 1L).withCustom(customFieldsDraft)));
+                final Cart updatedCart = client().executeBlocking(CartUpdateCommand.of(cart, AddLineItem.of(product, 1, 1L).withCustom(customFieldsDraft)));
                 assertThat(updatedCart.getLineItems().get(0).getCustom().getField(STRING_FIELD_NAME, TypeReferences.stringTypeReference())).isEqualTo("a value");
                 return updatedCart;
             });
@@ -38,13 +38,13 @@ public class LineItemCustomFieldsTest extends IntegrationTest {
                 final SetLineItemCustomType updateAction = SetLineItemCustomType.
                         ofTypeIdAndObjects(type.getId(), STRING_FIELD_NAME, "a value", lineItemId);
                 final CartUpdateCommand cartUpdateCommand = CartUpdateCommand.of(cart, updateAction);
-                final Cart updatedCart = execute(cartUpdateCommand);
+                final Cart updatedCart = client().executeBlocking(cartUpdateCommand);
 
                 final LineItem lineItem = updatedCart.getLineItems().get(0);
                 assertThat(lineItem.getCustom().getField(STRING_FIELD_NAME, TypeReferences.stringTypeReference()))
                         .isEqualTo("a value");
 
-                final Cart updated2 = execute(CartUpdateCommand.of(updatedCart, SetLineItemCustomField.ofObject(STRING_FIELD_NAME, "a new value", lineItem.getId())));
+                final Cart updated2 = client().executeBlocking(CartUpdateCommand.of(updatedCart, SetLineItemCustomField.ofObject(STRING_FIELD_NAME, "a new value", lineItem.getId())));
                 assertThat(updated2.getLineItems().get(0).getCustom().getField(STRING_FIELD_NAME, TypeReferences.stringTypeReference()))
                         .isEqualTo("a new value");
                 return updated2;

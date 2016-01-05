@@ -16,7 +16,7 @@ public class ProductDiscountUpdateCommandTest extends IntegrationTest {
         withUpdateableProductDiscount(client(), discount -> {
             final ProductDiscountValue productDiscountValue = AbsoluteProductDiscountValue.of(EURO_30);
 
-            final ProductDiscount updatedDiscount = execute(ProductDiscountUpdateCommand.of(discount, ChangeValue.of(productDiscountValue)));
+            final ProductDiscount updatedDiscount = client().executeBlocking(ProductDiscountUpdateCommand.of(discount, ChangeValue.of(productDiscountValue)));
 
             assertThat(updatedDiscount.getValue()).isEqualTo(productDiscountValue);
             return updatedDiscount;
@@ -30,8 +30,7 @@ public class ProductDiscountUpdateCommandTest extends IntegrationTest {
             final ProductDiscountPredicate predicate = ProductDiscountPredicate
                     .of(predicateAsString);
 
-            final ProductDiscount updatedDiscount = execute(
-                    ProductDiscountUpdateCommand.of(discount, ChangePredicate.of(predicate)));
+            final ProductDiscount updatedDiscount = client().executeBlocking(ProductDiscountUpdateCommand.of(discount, ChangePredicate.of(predicate)));
 
             final String updatedPredicate = updatedDiscount.getPredicate();
             assertThat(updatedPredicate).isEqualTo(predicateAsString);
@@ -44,7 +43,7 @@ public class ProductDiscountUpdateCommandTest extends IntegrationTest {
         withUpdateableProductDiscount(client(), discount -> {
             final boolean newIsActive = !discount.isActive();
 
-            final ProductDiscount updatedDiscount = execute(ProductDiscountUpdateCommand.of(discount, ChangeIsActive.of(newIsActive)));
+            final ProductDiscount updatedDiscount = client().executeBlocking(ProductDiscountUpdateCommand.of(discount, ChangeIsActive.of(newIsActive)));
 
             assertThat(updatedDiscount.isActive()).isEqualTo(newIsActive);
             return updatedDiscount;
@@ -56,7 +55,7 @@ public class ProductDiscountUpdateCommandTest extends IntegrationTest {
         withUpdateableProductDiscount(client(), discount -> {
             final LocalizedString newName = randomSlug();
 
-            final ProductDiscount updatedDiscount = execute(ProductDiscountUpdateCommand.of(discount, ChangeName.of(newName)));
+            final ProductDiscount updatedDiscount = client().executeBlocking(ProductDiscountUpdateCommand.of(discount, ChangeName.of(newName)));
 
             assertThat(updatedDiscount.getName()).isEqualTo(newName);
             return updatedDiscount;
@@ -68,7 +67,7 @@ public class ProductDiscountUpdateCommandTest extends IntegrationTest {
         withUpdateableProductDiscount(client(), discount -> {
             final LocalizedString newDescription = randomSlug();
 
-            final ProductDiscount updatedDiscount = execute(ProductDiscountUpdateCommand.of(discount, SetDescription.of(newDescription)));
+            final ProductDiscount updatedDiscount = client().executeBlocking(ProductDiscountUpdateCommand.of(discount, SetDescription.of(newDescription)));
 
             assertThat(updatedDiscount.getDescription()).isEqualTo(newDescription);
             return updatedDiscount;
@@ -80,7 +79,7 @@ public class ProductDiscountUpdateCommandTest extends IntegrationTest {
         withUpdateableProductDiscount(client(), discount -> {
             final String newSortOrder = randomSortOrder();
 
-            final ProductDiscount updatedDiscount = execute(ProductDiscountUpdateCommand.of(discount, ChangeSortOrder.of(newSortOrder)));
+            final ProductDiscount updatedDiscount = client().executeBlocking(ProductDiscountUpdateCommand.of(discount, ChangeSortOrder.of(newSortOrder)));
 
             assertThat(updatedDiscount.getSortOrder()).isEqualTo(newSortOrder);
             return updatedDiscount;

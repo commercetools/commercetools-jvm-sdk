@@ -31,7 +31,7 @@ public class ProductDiscountCreateCommandTest extends IntegrationTest {
         final ProductDiscountDraft discountDraft =
                 ProductDiscountDraft.of(name, description, predicate, discountValue, sortOrder, active);
 
-        final ProductDiscount productDiscount = execute(ProductDiscountCreateCommand.of(discountDraft));
+        final ProductDiscount productDiscount = client().executeBlocking(ProductDiscountCreateCommand.of(discountDraft));
 
         assertThat(productDiscount.getName()).isEqualTo(name);
         assertThat(productDiscount.getDescription()).isEqualTo(description);
@@ -45,14 +45,14 @@ public class ProductDiscountCreateCommandTest extends IntegrationTest {
                         .plusExpansionPaths(m -> m.masterData().staged().masterVariant().prices().discounted().discount());
 
         assertEventually(() -> {
-            final Product discountedProduct = execute(sphereRequest);
+            final Product discountedProduct = client().executeBlocking(sphereRequest);
             final List<Price> productPrices = discountedProduct.getMasterData().getStaged().getMasterVariant().getPrices();
 
             assertThat(productPrices)
                     .overridingErrorMessage("discount object in price is expanded")
                     .matches(prices -> prices.stream().anyMatch(price -> price.getDiscounted() != null && price.getDiscounted().getDiscount().getObj() != null));
             // clean up test
-            execute(ProductDiscountDeleteCommand.of(productDiscount));
+            client().executeBlocking(ProductDiscountDeleteCommand.of(productDiscount));
         });
     }
 }

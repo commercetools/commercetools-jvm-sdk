@@ -13,7 +13,7 @@ public class PaymentByIdGetTest extends IntegrationTest {
         withPayment(client(), payment -> {
             final String paymentId = payment.getId();
 
-            final Payment loadedPayment = execute(PaymentByIdGet.of(paymentId));
+            final Payment loadedPayment = client().executeBlocking(PaymentByIdGet.of(paymentId));
 
             assertThat(loadedPayment).isEqualTo(payment);
             return payment;

@@ -12,7 +12,7 @@ public class ProductTypeQueryTest extends IntegrationTest {
     @Test
     public void execution() {
         ProductTypeFixtures.withProductType(client(), productType -> {
-            final PagedQueryResult<ProductType> queryResult = execute(ProductTypeQuery.of().byKey(productType.getKey()));
+            final PagedQueryResult<ProductType> queryResult = client().executeBlocking(ProductTypeQuery.of().byKey(productType.getKey()));
             assertThat(queryResult.getResults().get(0)).isEqualTo(productType);
         });
     }

@@ -15,7 +15,7 @@ public class CustomerByIdGetTest extends IntegrationTest {
         withCustomerInGroup(client(), (customer, customerGroup) -> {
             final Get<Customer> fetch = CustomerByIdGet.of(customer)
                     .withExpansionPaths(CustomerExpansionModel.of().customerGroup());
-            final Customer fetchedCustomer = execute(fetch);
+            final Customer fetchedCustomer = client().executeBlocking(fetch);
             assertThat(fetchedCustomer.getId()).isEqualTo(customer.getId());
             assertThat(fetchedCustomer.getCustomerGroup().getObj().getId()).isEqualTo(customerGroup.getId());
         });

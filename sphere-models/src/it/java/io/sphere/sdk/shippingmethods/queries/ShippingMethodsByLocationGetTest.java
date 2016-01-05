@@ -13,6 +13,6 @@ public class ShippingMethodsByLocationGetTest extends IntegrationTest {
     @Test
     public void execution() throws Exception {
         final List<ShippingMethod> result =
-                execute(ShippingMethodsByLocationGet.of(CountryCode.US, "Kansas", USD));
+                client().executeBlocking(ShippingMethodsByLocationGet.of(CountryCode.US, "Kansas", USD));
     }
 }

@@ -10,7 +10,7 @@ public class StateByIdGetTest extends IntegrationTest {
     @Test
     public void execution() throws Exception {
         withState(client(), state -> {
-            assertThat(execute(StateByIdGet.of(state)).getId()).isEqualTo(state.getId());
+            assertThat(client().executeBlocking(StateByIdGet.of(state)).getId()).isEqualTo(state.getId());
         });
     }
 }

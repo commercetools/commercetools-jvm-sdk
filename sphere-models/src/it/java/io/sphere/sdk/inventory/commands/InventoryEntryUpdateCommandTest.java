@@ -20,7 +20,7 @@ public class InventoryEntryUpdateCommandTest extends IntegrationTest {
         withUpdateableInventoryEntry(client(), entry -> {
             final long additionalQuantity = 4;
             final UpdateAction<InventoryEntry> action = AddQuantity.of(additionalQuantity);
-            final InventoryEntry updatedEntry = execute(InventoryEntryUpdateCommand.of(entry, action));
+            final InventoryEntry updatedEntry = client().executeBlocking(InventoryEntryUpdateCommand.of(entry, action));
             assertThat(updatedEntry.getQuantityOnStock()).isEqualTo(entry.getQuantityOnStock() + additionalQuantity);
             return updatedEntry;
         });
@@ -30,7 +30,7 @@ public class InventoryEntryUpdateCommandTest extends IntegrationTest {
     public void changeQuantity() throws Exception {
         withUpdateableInventoryEntry(client(), entry -> {
             final UpdateAction<InventoryEntry> action = ChangeQuantity.of(5000L);
-            final InventoryEntry updatedEntry = execute(InventoryEntryUpdateCommand.of(entry, action));
+            final InventoryEntry updatedEntry = client().executeBlocking(InventoryEntryUpdateCommand.of(entry, action));
             assertThat(updatedEntry.getQuantityOnStock()).isEqualTo(5000);
             return updatedEntry;
         });
@@ -41,7 +41,7 @@ public class InventoryEntryUpdateCommandTest extends IntegrationTest {
         withUpdateableInventoryEntry(client(), entry -> {
             final long removingQuantity = 4;
             final UpdateAction<InventoryEntry> action = RemoveQuantity.of(removingQuantity);
-            final InventoryEntry updatedEntry = execute(InventoryEntryUpdateCommand.of(entry, action));
+            final InventoryEntry updatedEntry = client().executeBlocking(InventoryEntryUpdateCommand.of(entry, action));
             assertThat(updatedEntry.getQuantityOnStock()).isEqualTo(entry.getQuantityOnStock() - removingQuantity);
             return updatedEntry;
         });
@@ -52,7 +52,7 @@ public class InventoryEntryUpdateCommandTest extends IntegrationTest {
         withUpdateableInventoryEntry(client(), entry -> {
             final int restockableInDays = Optional.ofNullable(entry.getRestockableInDays()).map(i -> i + 4).orElse(4);
             final UpdateAction<InventoryEntry> action = SetRestockableInDays.of(restockableInDays);
-            final InventoryEntry updatedEntry = execute(InventoryEntryUpdateCommand.of(entry, action));
+            final InventoryEntry updatedEntry = client().executeBlocking(InventoryEntryUpdateCommand.of(entry, action));
             assertThat(updatedEntry.getRestockableInDays()).isEqualTo(restockableInDays);
             return updatedEntry;
         });
@@ -63,7 +63,7 @@ public class InventoryEntryUpdateCommandTest extends IntegrationTest {
         withUpdateableInventoryEntry(client(), entry -> {
             final ZonedDateTime expectedDelivery = SphereTestUtils.now().plus(7, ChronoUnit.DAYS);
             final UpdateAction<InventoryEntry> action = SetExpectedDelivery.of(expectedDelivery);
-            final InventoryEntry updatedEntry = execute(InventoryEntryUpdateCommand.of(entry, action));
+            final InventoryEntry updatedEntry = client().executeBlocking(InventoryEntryUpdateCommand.of(entry, action));
             assertThat(updatedEntry.getExpectedDelivery())
                     .isEqualTo(expectedDelivery);
             return updatedEntry;

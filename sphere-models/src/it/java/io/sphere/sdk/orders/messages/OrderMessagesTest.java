@@ -18,7 +18,7 @@ public class OrderMessagesTest extends IntegrationTest {
     @Test
     public void orderStateChangedMessage() throws Exception {
         withOrderAndReturnInfo(client(), ((order, returnInfo) -> {
-            final Order updatedOrder = execute(OrderUpdateCommand.of(order, ChangeOrderState.of(OrderState.CANCELLED)));
+            final Order updatedOrder = client().executeBlocking(OrderUpdateCommand.of(order, ChangeOrderState.of(OrderState.CANCELLED)));
             final Query<OrderStateChangedMessage> query =
                     MessageQuery.of()
                             .withSort(m -> m.createdAt().sort().desc())
@@ -26,7 +26,7 @@ public class OrderMessagesTest extends IntegrationTest {
                             .withLimit(1L)
                             .forMessageType(OrderStateChangedMessage.MESSAGE_HINT);
             assertEventually(() -> {
-                final PagedQueryResult<OrderStateChangedMessage> pagedQueryResult = execute(query);
+                final PagedQueryResult<OrderStateChangedMessage> pagedQueryResult = client().executeBlocking(query);
                 final OrderStateChangedMessage message = pagedQueryResult.head().get();
                 assertThat(message.getOrderState()).isEqualTo(OrderState.CANCELLED);
                 assertThat(message.getResource().getObj()).isNotNull();
@@ -47,7 +47,7 @@ public class OrderMessagesTest extends IntegrationTest {
                             .withLimit(1L)
                             .withPredicates(m -> m.resource().is(order))
                             .forMessageType(OrderCreatedMessage.MESSAGE_HINT);
-            final PagedQueryResult<OrderCreatedMessage> pagedQueryResult = execute(query);
+            final PagedQueryResult<OrderCreatedMessage> pagedQueryResult = client().executeBlocking(query);
             final OrderCreatedMessage message = pagedQueryResult.head().get();
             assertThat(message.getOrder().getId()).isEqualTo(order.getId());
             assertThat(message.getResource().getObj()).isNotNull();

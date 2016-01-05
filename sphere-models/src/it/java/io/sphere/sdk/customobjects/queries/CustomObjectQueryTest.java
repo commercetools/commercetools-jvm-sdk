@@ -13,7 +13,6 @@ import org.junit.Test;
 import java.util.List;
 
 import static io.sphere.sdk.customobjects.CustomObjectFixtures.withCustomObject;
-import static io.sphere.sdk.queries.QuerySortDirection.DESC;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class CustomObjectQueryTest extends IntegrationTest {
@@ -28,7 +27,7 @@ public class CustomObjectQueryTest extends IntegrationTest {
         withCustomObject(client(), co -> {
             final CustomObjectQuery<Foo> customObjectQuery = CustomObjectQuery.of(Foo.class)
                     .withPredicates(o -> o.id().is(co.getId()));
-            final PagedQueryResult<CustomObject<Foo>> result = execute(customObjectQuery);
+            final PagedQueryResult<CustomObject<Foo>> result = client().executeBlocking(customObjectQuery);
             assertThat(result.head().get())
                     .isEqualTo(co);
         });
@@ -41,7 +40,7 @@ public class CustomObjectQueryTest extends IntegrationTest {
             withCustomObject(client(), "containerB", "key", customObjectB -> {
                 final Class<Foo> classForTheValue = Foo.class;
                 final PagedQueryResult<CustomObject<Foo>> result =
-                        execute(CustomObjectQuery.of(classForTheValue).byContainer("containerA"));
+                        client().executeBlocking(CustomObjectQuery.of(classForTheValue).byContainer("containerA"));
                 final List<CustomObject<Foo>> results = result.getResults();
                 assertThat(results)
                         .contains(customObjectA)
@@ -55,7 +54,7 @@ public class CustomObjectQueryTest extends IntegrationTest {
         withCustomObject(client(), existingCustomObject -> {
             final CustomObjectQuery<JsonNode> clientRequest = CustomObjectQuery.ofJsonNode()
                     .withSort(m -> m.createdAt().sort().desc());
-            final PagedQueryResult<CustomObject<JsonNode>> result = execute(clientRequest);
+            final PagedQueryResult<CustomObject<JsonNode>> result = client().executeBlocking(clientRequest);
             assertThat(result.getResults().stream().filter(item -> item.hasSameIdAs(existingCustomObject)).count())
                     .isGreaterThanOrEqualTo(1);
             final String expected = existingCustomObject.getValue().getBar();

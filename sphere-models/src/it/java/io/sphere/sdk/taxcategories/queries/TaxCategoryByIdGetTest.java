@@ -11,7 +11,7 @@ public class TaxCategoryByIdGetTest extends IntegrationTest {
     @Test
     public void execution() {
         withTaxCategory(client(), taxCategory -> {
-            final TaxCategory loadedTaxCategory = execute(TaxCategoryByIdGet.of(taxCategory.getId()));
+            final TaxCategory loadedTaxCategory = client().executeBlocking(TaxCategoryByIdGet.of(taxCategory.getId()));
             assertThat(loadedTaxCategory).isEqualTo(taxCategory);
         });
     }

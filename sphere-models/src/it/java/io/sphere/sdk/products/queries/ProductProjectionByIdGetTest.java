@@ -16,7 +16,7 @@ public class ProductProjectionByIdGetTest extends IntegrationTest {
             final ProductProjectionType projectionType = STAGED;
             final String productId = product.getId();
             final ProductProjectionByIdGet sphereRequest = ProductProjectionByIdGet.of(productId, projectionType);
-            final ProductProjection productProjection = execute(sphereRequest);
+            final ProductProjection productProjection = client().executeBlocking(sphereRequest);
             final String fetchedProjectionId = productProjection.getId();
             assertThat(fetchedProjectionId).isEqualTo(productId);
             assertThat(productProjection.getCategories()).isEqualTo(product.getMasterData().get(projectionType).getCategories());

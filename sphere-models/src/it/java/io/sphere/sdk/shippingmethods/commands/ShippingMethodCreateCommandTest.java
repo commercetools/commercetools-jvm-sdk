@@ -38,9 +38,9 @@ public class ShippingMethodCreateCommandTest extends IntegrationTest {
                 final ZoneRate zoneRate = ZoneRate.of(zone, asList(ShippingRate.of(MoneyImpl.of(30, currencyUnit))));
                 final ShippingMethodDraft draft =
                         ShippingMethodDraft.of("standard shipping", "description", taxCategory, asList(zoneRate));
-                final ShippingMethod shippingMethod = execute(ShippingMethodCreateCommand.of(draft));
+                final ShippingMethod shippingMethod = client().executeBlocking(ShippingMethodCreateCommand.of(draft));
                 //deletion
-                execute(ShippingMethodDeleteCommand.of(shippingMethod));
+                client().executeBlocking(ShippingMethodDeleteCommand.of(shippingMethod));
             });
         }, COUNTRY_CODE);
     }

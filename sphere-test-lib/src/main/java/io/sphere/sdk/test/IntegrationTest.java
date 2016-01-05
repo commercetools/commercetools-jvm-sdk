@@ -123,18 +123,6 @@ public abstract class IntegrationTest {
         }
     }
 
-    protected static <T> T execute(final SphereRequest<T> sphereRequest) {
-        try {
-            return client().executeBlocking(sphereRequest);
-        } catch (final TestClientException e) {
-            if (e.getCause() != null && e.getCause() instanceof RuntimeException) {
-                throw (RuntimeException) e.getCause();
-            } else {
-                throw e;
-            }
-        }
-    }
-
     public synchronized static void shutdownClient() {
         if (client != null) {
             client.close();
@@ -143,7 +131,7 @@ public abstract class IntegrationTest {
     }
 
     protected static <T> T getOrCreate(final SphereRequest<T> createCommand, final Query<T> query) {
-        return execute(query).head().orElseGet(() -> execute(createCommand));
+        return client().executeBlocking(query).head().orElseGet(() -> client().executeBlocking(createCommand));
     }
 
     protected static <T> Condition<PagedQueryResult<T>> onlyTheResult(final T expected) {

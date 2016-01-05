@@ -16,6 +16,6 @@ public class ShippingMethodsByCartGetTest extends IntegrationTest {
         final Cart cart = createCartWithShippingAddress(client());
 
         final List<ShippingMethod> result =
-                execute(ShippingMethodsByCartGet.of(cart));
+                client().executeBlocking(ShippingMethodsByCartGet.of(cart));
     }
 }

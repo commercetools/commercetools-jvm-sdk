@@ -72,8 +72,8 @@ public class ProductQueryTest extends IntegrationTest {
     public void canExpandItsCategories() throws Exception {
         withProductInCategory(client(), (product, category) -> {
             final Query<Product> query = query(product)
-                    .withExpansionPaths(m -> m.masterData().staged().categories());
-            assertThat(execute(query).head().get().getMasterData().getStaged().getCategories().stream().anyMatch(reference -> reference.getObj() != null))
+                    .withExpansionPaths(ProductExpansionModel.of().masterData().staged().categories());
+            assertThat(client().executeBlocking(query).head().get().getMasterData().getStaged().getCategories().stream().anyMatch(reference -> reference.getObj() != null))
                     .isTrue();
         });
     }
@@ -83,9 +83,9 @@ public class ProductQueryTest extends IntegrationTest {
     public void canExpandCustomerGroupOfPrices() throws Exception {
         withCustomerGroup(client(), customerGroup ->
                         withUpdateablePricedProduct(client(), PriceDraft.of(MoneyImpl.of(new BigDecimal("12.34"), EUR)).withCountry(DE).withCustomerGroup(customerGroup), product -> {
-                            final Query<Product> query = query(product)
-                                    .withExpansionPaths(m -> m.masterData().staged().masterVariant().prices().customerGroup());
-                            final List<Price> prices = execute(query).head().get().getMasterData().getStaged().getMasterVariant().getPrices();
+                            final ExpansionPath<Product> expansionPath = ProductExpansionModel.of().masterData().staged().masterVariant().prices().customerGroup();
+                            final Query<Product> query = query(product).withExpansionPaths(expansionPath);
+                            final List<Price> prices = client().executeBlocking(query).head().get().getMasterData().getStaged().getMasterVariant().getPrices();
                             assertThat(prices
                                     .stream()
                                     .anyMatch(price -> Optional.ofNullable(price.getCustomerGroup()).map(customerGroupReference -> customerGroupReference.getObj() != null).orElse(false)))
@@ -99,8 +99,9 @@ public class ProductQueryTest extends IntegrationTest {
     public void canExpandChannelOfPrices() throws Exception {
         ChannelFixtures.withChannelOfRole(client(), ChannelRole.INVENTORY_SUPPLY, channel -> {
             withUpdateablePricedProduct(client(), PriceDraft.of(MoneyImpl.of(new BigDecimal("12.34"), EUR)).withCountry(DE).withChannel(channel), product -> {
-                final Query<Product> query = query(product).withExpansionPaths(m -> m.masterData().staged().masterVariant().prices().channel());
-                final List<Price> prices = execute(query).head().get().getMasterData().getStaged().getMasterVariant().getPrices();
+                final ExpansionPath<Product> expansionPath = ProductExpansionModel.of().masterData().staged().masterVariant().prices().channel();
+                final Query<Product> query = query(product).withExpansionPaths(expansionPath);
+                final List<Price> prices = client().executeBlocking(query).head().get().getMasterData().getStaged().getMasterVariant().getPrices();
                 assertThat(prices
                         .stream()
                         .anyMatch(price -> Optional.ofNullable(price.getChannel()).map(channelRef -> channelRef.getObj() != null).orElse(false)))

@@ -3,7 +3,6 @@ package io.sphere.sdk.customobjects.queries;
 import com.fasterxml.jackson.databind.JsonNode;
 import io.sphere.sdk.customobjects.CustomObject;
 import io.sphere.sdk.customobjects.demo.Foo;
-import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.test.IntegrationTest;
 import org.junit.Test;
 
@@ -19,7 +18,7 @@ public class CustomObjectByKeyGetTest extends IntegrationTest {
             final String key = existingCustomObject.getKey();
             final CustomObjectByKeyGet<Foo> fetch =
                     CustomObjectByKeyGet.of(container, key, Foo.class);
-            final CustomObject<Foo> customObject = execute(fetch);
+            final CustomObject<Foo> customObject = client().executeBlocking(fetch);
             assertThat(customObject).isNotNull();
             assertThat(customObject).isEqualTo(existingCustomObject);
         });
@@ -31,7 +30,7 @@ public class CustomObjectByKeyGetTest extends IntegrationTest {
             final String container = existingCustomObject.getContainer();
             final String key = existingCustomObject.getKey();
             final CustomObjectByKeyGet<JsonNode> fetch = CustomObjectByKeyGet.ofJsonNode(container, key);
-            final CustomObject<JsonNode> customObject = execute(fetch);
+            final CustomObject<JsonNode> customObject = client().executeBlocking(fetch);
             assertThat(customObject).isNotNull();
             final JsonNode value = customObject.getValue();
             final String expected = existingCustomObject.getValue().getBar();

@@ -15,7 +15,7 @@ public class ProductDiscountQueryTest extends IntegrationTest {
             final ProductDiscountQuery discountQuery = ProductDiscountQuery.of()
                     .withPredicates(m -> m.active().is(true).and(m.id().is(productDiscount.getId())))
                     .withExpansionPaths(m -> m.references());
-            final ProductDiscount loadedDiscount = execute(discountQuery).head().get();
+            final ProductDiscount loadedDiscount = client().executeBlocking(discountQuery).head().get();
 
             assertThat(loadedDiscount.getId()).isEqualTo(productDiscount.getId());
             assertThat(loadedDiscount.getReferences().size()).isGreaterThanOrEqualTo(1);

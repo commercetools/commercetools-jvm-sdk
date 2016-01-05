@@ -12,10 +12,10 @@ import static org.assertj.core.api.Assertions.*;
 public class ChannelDeleteCommandTest extends IntegrationTest {
     @Test
     public void execution() throws Exception {
-        final Channel channel = execute(ChannelCreateCommand.of(ChannelDraft.of(randomKey())));
+        final Channel channel = client().executeBlocking(ChannelCreateCommand.of(ChannelDraft.of(randomKey())));
 
-        execute(ChannelDeleteCommand.of(channel));
+        client().executeBlocking(ChannelDeleteCommand.of(channel));
 
-        assertThat(execute(ChannelByIdGet.of(channel.getId()))).isNull();
+        assertThat(client().executeBlocking(ChannelByIdGet.of(channel.getId()))).isNull();
     }
 }

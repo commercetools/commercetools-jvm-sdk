@@ -15,7 +15,7 @@ public class CategoryByIdGetTest extends IntegrationTest {
             final String id = category.getId();
             final Get<Category> fetch = CategoryByIdGet.of(id)
                     .withExpansionPaths(m -> m.parent());
-            final Category loadedCategory = execute(fetch);
+            final Category loadedCategory = client().executeBlocking(fetch);
             assertThat(loadedCategory.getId()).isEqualTo(id);
             assertThat(loadedCategory.getParent()).is(expanded(parent));
         });

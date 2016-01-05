@@ -61,7 +61,7 @@ public class PaymentQueryTest extends IntegrationTest {
                             .interfaceInteractions(asList("foo1", "foo2").stream()
                                     .map(s -> CustomFieldsDraft.ofTypeKeyAndObjects(type.getKey(), singletonMap(TypeFixtures.STRING_FIELD_NAME, s)))
                                     .collect(toList()));
-                    final Payment payment = execute(PaymentCreateCommand.of(paymentDraftBuilder.build()));
+                    final Payment payment = client().executeBlocking(PaymentCreateCommand.of(paymentDraftBuilder.build()));
 
                     final PaymentQuery paymentQuery = PaymentQuery.of()
                             .withPredicates(m -> m.id().is(payment.getId())
@@ -88,13 +88,13 @@ public class PaymentQueryTest extends IntegrationTest {
                             .withExpansionPaths(m -> m.customer())
                             .plusExpansionPaths(m -> m.paymentStatus().state());
 
-                    final PagedQueryResult<Payment> pagedQueryResult = execute(paymentQuery);
+                    final PagedQueryResult<Payment> pagedQueryResult = client().executeBlocking(paymentQuery);
                     assertThat(pagedQueryResult).has(onlyTheResult(payment));
                     final Payment loadedPayment = pagedQueryResult.head().get();
                     assertThat(loadedPayment.getCustomer()).is(expanded(customer));
                     assertThat(loadedPayment.getPaymentStatus().getState()).is(expanded(paidState));
 
-                    execute(PaymentDeleteCommand.of(payment));
+                    client().executeBlocking(PaymentDeleteCommand.of(payment));
                 }));
                 return type;
             });

@@ -25,16 +25,16 @@ public class OrderCustomFieldsTest extends IntegrationTest {
     public void setCustomType() {
         withUpdateableType(client(), type -> {
             withOrder(client(), order -> {
-                final Order orderWithType = execute(OrderUpdateCommand.of(order, SetCustomType.ofTypeIdAndObjects(type.getId(), CUSTOM_FIELDS_MAP)));
+                final Order orderWithType = client().executeBlocking(OrderUpdateCommand.of(order, SetCustomType.ofTypeIdAndObjects(type.getId(), CUSTOM_FIELDS_MAP)));
 
                 assertThat(orderWithType.getCustom().getType()).isEqualTo(type.toReference());
                 assertThat(orderWithType.getCustom().getField(STRING_FIELD_NAME, TypeReferences.stringTypeReference())).isEqualTo("hello");
 
-                final Order updatedOrder = execute(OrderUpdateCommand.of(orderWithType, SetCustomField.ofObject(STRING_FIELD_NAME, "other")));
+                final Order updatedOrder = client().executeBlocking(OrderUpdateCommand.of(orderWithType, SetCustomField.ofObject(STRING_FIELD_NAME, "other")));
                 assertThat(updatedOrder.getCustom().getField(STRING_FIELD_NAME, TypeReferences.stringTypeReference())).isEqualTo("other");
 
                 //test clean up
-                return execute(OrderUpdateCommand.of(updatedOrder, SetCustomType.ofRemoveType()));
+                return client().executeBlocking(OrderUpdateCommand.of(updatedOrder, SetCustomType.ofRemoveType()));
             });
             return type;
         });
@@ -45,16 +45,16 @@ public class OrderCustomFieldsTest extends IntegrationTest {
         withUpdateableType(client(), type -> {
             withOrderOfCustomLineItems(client(), order -> {
                 final String customLineItemId = order.getCustomLineItems().get(0).getId();
-                final Order orderWithType = execute(OrderUpdateCommand.of(order, SetCustomLineItemCustomType.ofTypeIdAndObjects(type.getId(), CUSTOM_FIELDS_MAP, customLineItemId)));
+                final Order orderWithType = client().executeBlocking(OrderUpdateCommand.of(order, SetCustomLineItemCustomType.ofTypeIdAndObjects(type.getId(), CUSTOM_FIELDS_MAP, customLineItemId)));
 
                 assertThat(orderWithType.getCustomLineItems().get(0).getCustom().getType()).isEqualTo(type.toReference());
                 assertThat(orderWithType.getCustomLineItems().get(0).getCustom().getField(STRING_FIELD_NAME, TypeReferences.stringTypeReference())).isEqualTo("hello");
 
-                final Order updatedOrder = execute(OrderUpdateCommand.of(orderWithType, SetCustomLineItemCustomField.ofObject(STRING_FIELD_NAME, "other", customLineItemId)));
+                final Order updatedOrder = client().executeBlocking(OrderUpdateCommand.of(orderWithType, SetCustomLineItemCustomField.ofObject(STRING_FIELD_NAME, "other", customLineItemId)));
                 assertThat(updatedOrder.getCustomLineItems().get(0).getCustom().getField(STRING_FIELD_NAME, TypeReferences.stringTypeReference())).isEqualTo("other");
 
                 //test clean up
-                execute(OrderUpdateCommand.of(updatedOrder, SetCustomLineItemCustomType.ofRemoveType(customLineItemId)));
+                client().executeBlocking(OrderUpdateCommand.of(updatedOrder, SetCustomLineItemCustomType.ofRemoveType(customLineItemId)));
             });
             return type;
         });

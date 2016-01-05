@@ -27,7 +27,7 @@ public class ZoneUpdateCommandTest extends IntegrationTest {
             final String newName = randomString();
             assertThat(zone.getName()).isNotEqualTo(newName);
             final ZoneUpdateCommand command = ZoneUpdateCommand.of(zone, ChangeName.of(newName));
-            final Zone updatedZone = execute(command);
+            final Zone updatedZone = client().executeBlocking(command);
             assertThat(updatedZone.getName()).isEqualTo(newName);
             return updatedZone;
         }, CountryCode.AM);
@@ -39,7 +39,7 @@ public class ZoneUpdateCommandTest extends IntegrationTest {
             final String newDescription = randomString();
             assertThat(zone.getDescription()).isNotEqualTo(newDescription);
             final ZoneUpdateCommand command = ZoneUpdateCommand.of(zone, SetDescription.of(newDescription));
-            final Zone updatedZone = execute(command);
+            final Zone updatedZone = client().executeBlocking(command);
             assertThat(updatedZone.getDescription()).isEqualTo(newDescription);
             return updatedZone;
         }, CountryCode.AN);
@@ -52,12 +52,12 @@ public class ZoneUpdateCommandTest extends IntegrationTest {
             final Location newLocation = Location.of(CountryCode.AQ, "state");
             assertThat(zone.getLocations().contains(newLocation)).isFalse();
             final ZoneUpdateCommand addCommand = ZoneUpdateCommand.of(zone, AddLocation.of(newLocation));
-            final Zone zoneWithNewLocation = execute(addCommand);
+            final Zone zoneWithNewLocation = client().executeBlocking(addCommand);
             assertThat(zoneWithNewLocation.getLocations()).contains(newLocation);
 
             //removing a location
             final ZoneUpdateCommand removeCommand = ZoneUpdateCommand.of(zoneWithNewLocation, RemoveLocation.of(newLocation));
-            final Zone zoneWithoutNewLocation = execute(removeCommand);
+            final Zone zoneWithoutNewLocation = client().executeBlocking(removeCommand);
             assertThat(zoneWithoutNewLocation.getLocations().contains(newLocation)).isFalse();
 
             return zoneWithoutNewLocation;

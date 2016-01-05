@@ -26,12 +26,12 @@ public class CategoryUpdateCommandTest extends IntegrationTest {
         withCategory(client(), category -> {
             final LocalizedString newName = ofEnglishLocale("new name");
             final CategoryUpdateCommand command = CategoryUpdateCommand.of(category, singletonList(ChangeName.of(newName)));
-            final Category updatedCategory = execute(command);
+            final Category updatedCategory = client().executeBlocking(command);
             assertThat(updatedCategory.getName()).isEqualTo(newName);
 
             final LocalizedString newName2 = ofEnglishLocale("new name2");
             final CategoryUpdateCommand command2 = CategoryUpdateCommand.of(category /** with old version */, singletonList(ChangeName.of(newName2)));
-            final Category againUpdatedCategory = execute(command2.withVersion(updatedCategory));
+            final Category againUpdatedCategory = client().executeBlocking(command2.withVersion(updatedCategory));
             assertThat(againUpdatedCategory.getName()).isEqualTo(newName2);
             assertThat(againUpdatedCategory.getVersion()).isGreaterThan(updatedCategory.getVersion());
         });
@@ -43,7 +43,7 @@ public class CategoryUpdateCommandTest extends IntegrationTest {
             final LocalizedString newName = LocalizedString.of(ENGLISH, "new name");
             final CategoryUpdateCommand command = CategoryUpdateCommand.of(category, ChangeName.of(newName));
 
-            final Category updatedCategory = execute(command);
+            final Category updatedCategory = client().executeBlocking(command);
 
             assertThat(updatedCategory.getName()).isEqualTo(newName);
         });
@@ -53,7 +53,7 @@ public class CategoryUpdateCommandTest extends IntegrationTest {
     public void setMetaDescription() throws Exception {
         withPersistentCategory(client(), category -> {
             final LocalizedString newValue = randomSlug();
-            final Category updatedCategory = execute(CategoryUpdateCommand.of(category, SetMetaDescription.of(newValue)));
+            final Category updatedCategory = client().executeBlocking(CategoryUpdateCommand.of(category, SetMetaDescription.of(newValue)));
             assertThat(updatedCategory.getMetaDescription()).isEqualTo(newValue);
         });
     }
@@ -62,7 +62,7 @@ public class CategoryUpdateCommandTest extends IntegrationTest {
     public void setMetaTitle() throws Exception {
         withPersistentCategory(client(), category -> {
             final LocalizedString newValue = randomSlug();
-            final Category updatedCategory = execute(CategoryUpdateCommand.of(category, SetMetaTitle.of(newValue)));
+            final Category updatedCategory = client().executeBlocking(CategoryUpdateCommand.of(category, SetMetaTitle.of(newValue)));
             assertThat(updatedCategory.getMetaTitle()).isEqualTo(newValue);
         });
     }
@@ -71,7 +71,7 @@ public class CategoryUpdateCommandTest extends IntegrationTest {
     public void setMetaKeywords() throws Exception {
         withPersistentCategory(client(), category -> {
             final LocalizedString newValue = randomSlug();
-            final Category updatedCategory = execute(CategoryUpdateCommand.of(category, SetMetaKeywords.of(newValue)));
+            final Category updatedCategory = client().executeBlocking(CategoryUpdateCommand.of(category, SetMetaKeywords.of(newValue)));
             assertThat(updatedCategory.getMetaKeywords()).isEqualTo(newValue);
         });
     }
@@ -86,7 +86,7 @@ public class CategoryUpdateCommandTest extends IntegrationTest {
                 final CategoryUpdateCommand updateCommand =
                         CategoryUpdateCommand.of(categoryB, ChangeParent.of(categoryA))
                         .plusExpansionPaths(m -> m.parent());
-                final Category updatedB = execute(updateCommand);
+                final Category updatedB = client().executeBlocking(updateCommand);
 
                 assertThat(updatedB.getParent().getId()).isEqualTo(categoryA.getId());
                 assertThat(updatedB.getParent().getObj()).isNotNull().isEqualTo(categoryA);

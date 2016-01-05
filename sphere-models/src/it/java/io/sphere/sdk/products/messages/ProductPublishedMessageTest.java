@@ -16,8 +16,8 @@ public class ProductPublishedMessageTest extends IntegrationTest {
     public void message() {
         ProductFixtures.withUpdateableProduct(client(), product -> {
             assertThat(product.getMasterData().isPublished()).isFalse();
-            final Product publishedProduct = execute(ProductUpdateCommand.of(product, Publish.of()));
-            final PagedQueryResult<ProductPublishedMessage> queryResult = execute(MessageQuery.of()
+            final Product publishedProduct = client().executeBlocking(ProductUpdateCommand.of(product, Publish.of()));
+            final PagedQueryResult<ProductPublishedMessage> queryResult = client().executeBlocking(MessageQuery.of()
                     .withPredicates(m -> m.resource().is(product))
                     .withSort(m -> m.createdAt().sort().desc())
                     .withExpansionPaths(m -> m.resource())

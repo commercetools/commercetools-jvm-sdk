@@ -45,9 +45,9 @@ public class ProductCrudIntegrationTest extends IntegrationTest {
 
     @BeforeClass
     public static void prepare() throws Exception {
-        PagedQueryResult<ProductType> queryResult = execute(ProductTypeQuery.of().byName(productTypeName));
+        PagedQueryResult<ProductType> queryResult = client().executeBlocking(ProductTypeQuery.of().byName(productTypeName));
         queryResult.getResults().forEach(pt -> deleteProductsProductTypeAndProductDiscounts(client(), pt));
-        productType = execute(ProductTypeCreateCommand.of(new TShirtProductTypeDraftSupplier(productTypeName).get()));
+        productType = client().executeBlocking(ProductTypeCreateCommand.of(new TShirtProductTypeDraftSupplier(productTypeName).get()));
     }
 
     @AfterClass
@@ -85,12 +85,12 @@ public class ProductCrudIntegrationTest extends IntegrationTest {
         final String channelKey = "assignPricesToMasterVariantAccordingToAChannel";
         cleanUpChannelByKey(client(), channelKey);
         final Product product = createInBackendByName("assignPricesToMasterVariantAccordingToAChannel");
-        final Channel channel = execute(ChannelCreateCommand.of(ChannelDraft.of(channelKey)));
+        final Channel channel = client().executeBlocking(ChannelCreateCommand.of(ChannelDraft.of(channelKey)));
         final PriceDraft price = PriceDraft.of(MoneyImpl.of(523, EUR)).withChannel(channel);
-        final Product updatedProduct = execute(ProductUpdateCommand.of(product, AddPrice.of(MASTER_VARIANT_ID, price)));
+        final Product updatedProduct = client().executeBlocking(ProductUpdateCommand.of(product, AddPrice.of(MASTER_VARIANT_ID, price)));
         final Price readPrice = updatedProduct.getMasterData().getStaged().getMasterVariant().getPrices().get(0);
         assertThat(readPrice.getChannel()).isEqualTo(channel.toReference());
-        execute(ProductUpdateCommand.of(updatedProduct, RemovePrice.of(readPrice)));
+        client().executeBlocking(ProductUpdateCommand.of(updatedProduct, RemovePrice.of(readPrice)));
         cleanUpChannelByKey(client(), channelKey);
     }
 
@@ -103,8 +103,8 @@ public class ProductCrudIntegrationTest extends IntegrationTest {
                 .plusAttribute(Sizes.ATTRIBUTE.draftOf(Sizes.S))
                 .plusAttribute(Colors.ATTRIBUTE.draftOf(Colors.GREEN)).build();
         final ProductDraft productDraft = ProductDraftBuilder.of(productType, en("foo"), en("foo-slug"), masterVariant).build();
-        execute(ProductCreateCommand.of(productDraft));
-        final PagedQueryResult<Product> result = execute(ProductQuery.of().bySku(sku, STAGED));
+        client().executeBlocking(ProductCreateCommand.of(productDraft));
+        final PagedQueryResult<Product> result = client().executeBlocking(ProductQuery.of().bySku(sku, STAGED));
         assertThat(result.getResults()).hasSize(1);
         assertThat(result.getResults().get(0).getMasterData().getStaged().getMasterVariant().getSku()).contains(sku);
         assertThat(result.getResults().get(0).getMasterData().getStaged().getMasterVariant().findAttribute(Colors.ATTRIBUTE)).contains(Colors.GREEN);
@@ -123,7 +123,7 @@ public class ProductCrudIntegrationTest extends IntegrationTest {
                 overridingErrorMessage(String.format("The test requires instances with the names %s.", "[" + joiner.toString() + "]")).
                 isEqualTo(modelNames());
         final String nameToFind = modelNames().get(1);
-        final List<Product> results = execute(queryObjectForName(nameToFind)).getResults();
+        final List<Product> results = client().executeBlocking(queryObjectForName(nameToFind)).getResults();
         assertThat(results).hasSize(1);
         assertThat(getNames(results)).isEqualTo(asList(nameToFind));
         assertModelsNotPresent();
@@ -135,19 +135,19 @@ public class ProductCrudIntegrationTest extends IntegrationTest {
      * @param names the names of the items to delete
      */
     protected void cleanUpByName(final List<String> names){
-        execute(queryObjectForNames(names)).getResults().forEach(item -> delete(item));
+        client().executeBlocking(queryObjectForNames(names)).getResults().forEach(item -> delete(item));
     }
 
     protected void delete(Product item) {
         try {
-            execute(deleteCommand(item));
+            client().executeBlocking(deleteCommand(item));
         } catch (final Exception e) {
             getLogger("test.fixtures").warn(() -> String.format("tried to delete %s but an Exception occurred: %s", item, e.toString()));
         }
     }
 
     protected List<Product> createInBackendByName(final List<String> names) {
-        return names.stream().map(name -> execute(newCreateCommandForName(name))).collect(toList());
+        return names.stream().map(name -> client().executeBlocking(newCreateCommandForName(name))).collect(toList());
     }
 
     protected io.sphere.sdk.products.Product createInBackendByName(final String name) {
@@ -169,6 +169,6 @@ public class ProductCrudIntegrationTest extends IntegrationTest {
 
     private void assertModelsNotPresent() {
         cleanUpByName(modelNames());
-        assertThat(getNames(execute(queryRequestForQueryAll()).getResults())).overridingErrorMessage("the instances with the names " + modelNames() + " should not be present.").doesNotContainAnyElementsOf(modelNames());
+        assertThat(getNames(client().executeBlocking(queryRequestForQueryAll()).getResults())).overridingErrorMessage("the instances with the names " + modelNames() + " should not be present.").doesNotContainAnyElementsOf(modelNames());
     }
 }

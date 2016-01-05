@@ -6,7 +6,6 @@ import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.LocalizedStringEntry;
 import io.sphere.sdk.queries.*;
 import io.sphere.sdk.test.IntegrationTest;
-import org.assertj.core.api.AbstractLongAssert;
 import org.junit.Test;
 
 import java.time.ZonedDateTime;
@@ -14,7 +13,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
 import java.util.function.BiFunction;
-import java.util.function.Consumer;
 
 import static io.sphere.sdk.categories.CategoryFixtures.withCategory;
 import static io.sphere.sdk.test.SphereTestUtils.randomKey;
@@ -29,7 +27,7 @@ public class CategoryQueryTest extends IntegrationTest {
             final LocalizedStringEntry name = category.getName().stream().findAny().get();
 
             final Query<Category> query = CategoryQuery.of().byName(name.getLocale(), name.getValue());
-            assertThat(execute(query).head().get().getId()).isEqualTo(category.getId());
+            assertThat(client().executeBlocking(query).head().get().getId()).isEqualTo(category.getId());
         });
     }
 
@@ -40,7 +38,7 @@ public class CategoryQueryTest extends IntegrationTest {
 
             final Query<Category> query = CategoryQuery.of().byExternalId(externalId);
 
-            final Category actual = execute(query).head().get();
+            final Category actual = client().executeBlocking(query).head().get();
             assertThat(actual).isEqualTo(category);
         });
     }
@@ -52,7 +50,7 @@ public class CategoryQueryTest extends IntegrationTest {
                 final Query<Category> query = CategoryQuery.of().
                         withPredicates(m -> m.name().lang(Locale.ENGLISH).isNot(category1.getName().get(Locale.ENGLISH)))
                         .withSort(m -> m.createdAt().sort().desc());
-                final boolean category1IsPresent = execute(query).getResults().stream().anyMatch(cat -> cat.getId().equals(category1.getId()));
+                final boolean category1IsPresent = client().executeBlocking(query).getResults().stream().anyMatch(cat -> cat.getId().equals(category1.getId()));
                 assertThat(category1IsPresent).isFalse();
             })
         );
@@ -69,7 +67,7 @@ public class CategoryQueryTest extends IntegrationTest {
                             return predicate;
                         })
                         .withSort(m -> m.createdAt().sort().desc());
-                final boolean category1IsPresent = execute(query).getResults().stream().anyMatch(cat -> cat.getId().equals(category1.getId()));
+                final boolean category1IsPresent = client().executeBlocking(query).getResults().stream().anyMatch(cat -> cat.getId().equals(category1.getId()));
                 assertThat(category1IsPresent).isFalse();
             })
         );
@@ -87,7 +85,7 @@ public class CategoryQueryTest extends IntegrationTest {
                             return predicate;
                         })
                         .withSort(m -> m.createdAt().sort().desc());
-                final boolean category1IsPresent = execute(query).getResults().stream().anyMatch(cat -> cat.getId().equals(category1.getId()));
+                final boolean category1IsPresent = client().executeBlocking(query).getResults().stream().anyMatch(cat -> cat.getId().equals(category1.getId()));
                 assertThat(category1IsPresent).isFalse();
             })
         );
@@ -97,13 +95,13 @@ public class CategoryQueryTest extends IntegrationTest {
     public void withFetchTotalFalseRemovesTotalFromOutput() throws Exception {
         withCategory(client(), category -> {
             final CategoryQuery query = CategoryQuery.of().byId(category.getId());
-            final PagedQueryResult<Category> resultWithTotal = execute(query);
+            final PagedQueryResult<Category> resultWithTotal = client().executeBlocking(query);
             assertThat(resultWithTotal.getTotal())
                     .as("total is by default present")
                     .isNotNull().isEqualTo(1);
 
             final CategoryQuery queryWithoutTotal = query.withFetchTotal(false);
-            final PagedQueryResult<Category> resultWithoutTotal = execute(queryWithoutTotal);
+            final PagedQueryResult<Category> resultWithoutTotal = client().executeBlocking(queryWithoutTotal);
             assertThat(resultWithoutTotal.getTotal())
                     .as("total is not present")
                     .isNull();
@@ -186,7 +184,7 @@ public class CategoryQueryTest extends IntegrationTest {
                     .withPredicates(predicate)
                     .plusPredicates(m -> m.id().is(category.getId()));
 
-            final Optional<Category> fetched = execute(baseQuery).head();
+            final Optional<Category> fetched = client().executeBlocking(baseQuery).head();
             assertThat(fetched).contains(category);
         });
     }

@@ -11,7 +11,7 @@ public class CartByCustomerIdGetTest extends IntegrationTest {
     @Test
     public void execution() throws Exception {
         withCustomerAndCart(client(), (customer, cart) -> {
-            final Cart fetchedCart = execute(CartByCustomerIdGet.of(customer.getId()));
+            final Cart fetchedCart = client().executeBlocking(CartByCustomerIdGet.of(customer.getId()));
             assertThat(fetchedCart.getId()).isEqualTo(cart.getId());
         });
     }

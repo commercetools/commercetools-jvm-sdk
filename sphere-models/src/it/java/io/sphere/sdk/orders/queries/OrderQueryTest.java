@@ -3,12 +3,14 @@ package io.sphere.sdk.orders.queries;
 import com.neovisionaries.i18n.CountryCode;
 import io.sphere.sdk.carts.CartFixtures;
 import io.sphere.sdk.channels.Channel;
+import io.sphere.sdk.client.SphereRequest;
 import io.sphere.sdk.customers.CustomerFixtures;
 import io.sphere.sdk.orders.Order;
 import io.sphere.sdk.orders.OrderFixtures;
 import io.sphere.sdk.orders.commands.OrderUpdateCommand;
 import io.sphere.sdk.orders.commands.updateactions.SetOrderNumber;
 import io.sphere.sdk.orders.commands.updateactions.UpdateSyncInfo;
+import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.queries.QueryPredicate;
 import io.sphere.sdk.queries.QuerySort;
 import io.sphere.sdk.test.IntegrationTest;
@@ -34,10 +36,10 @@ public class OrderQueryTest extends IntegrationTest {
     public void customerGroupIsExpandeable() throws Exception {
         CustomerFixtures.withCustomerInGroup(client(), (customer, customerGroup) -> {
             withOrder(client(), customer, order -> {
-                final Order queriedOrder = execute(OrderQuery.of()
+                final OrderQuery orderQuery = OrderQuery.of()
                                 .withPredicates(m -> m.id().is(order.getId()).and(m.customerGroup().is(customerGroup)))
-                                .withExpansionPaths(m -> m.customerGroup())
-                ).head().get();
+                                .withExpansionPaths(m -> m.customerGroup());
+                final Order queriedOrder = client().executeBlocking(orderQuery).head().get();
                 assertThat(queriedOrder.getCustomerGroup().getObj().getName())
                         .overridingErrorMessage("customerGroupIsExpandeable")
                         .isEqualTo(customerGroup.getName());
@@ -124,7 +126,7 @@ public class OrderQueryTest extends IntegrationTest {
         final Channel channel = persistentChannelOfRole(client(), ORDER_EXPORT);
         final String externalId = randomKey();
         assertOrderIsFoundWithPredicate(
-                order -> execute(OrderUpdateCommand.of(order, UpdateSyncInfo.of(channel).withExternalId(externalId))),
+                order -> client().executeBlocking(OrderUpdateCommand.of(order, UpdateSyncInfo.of(channel).withExternalId(externalId))),
                 order -> MODEL.syncInfo().channel().is(channel).and(MODEL.syncInfo().externalId().is(externalId)).and(MODEL.syncInfo().isNotEmpty()));
     }
 

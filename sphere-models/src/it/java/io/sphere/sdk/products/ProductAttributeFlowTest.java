@@ -40,10 +40,10 @@ public class ProductAttributeFlowTest extends IntegrationTest {
         final NamedAttributeAccess<LocalizedEnumValue> namesAccess = AttributeAccess.ofLocalizedEnumValue().ofName(LOCALIZED_ENUM_ATTR);
         final ProductVariantDraft masterVariant = ProductVariantDraftBuilder.of().attributes(AttributeDraft.of(namesAccess, B)).build();
         final ProductDraft productDraft = ProductDraftBuilder.of(productType, randomSlug(), randomSlug(), masterVariant).build();
-        final Product product = execute(ProductCreateCommand.of(productDraft));
+        final Product product = client().executeBlocking(ProductCreateCommand.of(productDraft));
         assertThat(extractAttribute(product, namesAccess)).contains(B);
 
-        final Product updatedProduct = execute(ProductUpdateCommand.of(product, SetAttribute.of(1, namesAccess, C)));
+        final Product updatedProduct = client().executeBlocking(ProductUpdateCommand.of(product, SetAttribute.of(1, namesAccess, C)));
         assertThat(extractAttribute(updatedProduct, namesAccess)).contains(C);
 
 

@@ -25,7 +25,7 @@ public class ZoneQueryTest extends IntegrationTest {
     public void queryByName() throws Exception {
         ZoneFixtures.withUpdateableZone(client(), zoneA -> {
             ZoneFixtures.withUpdateableZone(client(), zoneB -> {
-                final PagedQueryResult<Zone> result = execute(ZoneQuery.of().byName(zoneA.getName()));
+                final PagedQueryResult<Zone> result = client().executeBlocking(ZoneQuery.of().byName(zoneA.getName()));
                 assertThat(result.getResults()).isEqualTo(asList(zoneA));
                 return zoneB;
             }, CD);
@@ -38,7 +38,7 @@ public class ZoneQueryTest extends IntegrationTest {
         ZoneFixtures.withUpdateableZone(client(), zoneA -> {
             ZoneFixtures.withUpdateableZone(client(), zoneB -> {
                 final Set<Location> locations = zoneA.getLocations();
-                final PagedQueryResult<Zone> result = execute(ZoneQuery.of().byCountry(oneOf(locations).getCountry()));
+                final PagedQueryResult<Zone> result = client().executeBlocking(ZoneQuery.of().byCountry(oneOf(locations).getCountry()));
                 assertThat(result.getResults()).isEqualTo(asList(zoneA));
                 return zoneB;
             }, CF);
@@ -71,7 +71,7 @@ public class ZoneQueryTest extends IntegrationTest {
     }
 
     private void locationCheck(final Location searchLocation, final Zone ... expected) {
-        final PagedQueryResult<Zone> result = execute(ZoneQuery.of().byLocation(searchLocation));
+        final PagedQueryResult<Zone> result = client().executeBlocking(ZoneQuery.of().byLocation(searchLocation));
         final Set<Zone> actual = new HashSet<>(result.getResults());
         assertThat(actual).isEqualTo(new HashSet<>(asList(expected)));
     }

@@ -9,7 +9,7 @@ import static org.assertj.core.api.Assertions.*;
 public class ProjectGetTest extends IntegrationTest {
     @Test
     public void execution() throws Exception {
-        final Project project = execute(ProjectGet.of());
+        final Project project = client().executeBlocking(ProjectGet.of());
         assertThat(project.getKey()).isEqualTo(getSphereClientConfig().getProjectKey());
         assertThat(project.getName()).overridingErrorMessage("name").isNotEmpty();
         assertThat(project.getCountries()).overridingErrorMessage("countries").isNotEmpty();

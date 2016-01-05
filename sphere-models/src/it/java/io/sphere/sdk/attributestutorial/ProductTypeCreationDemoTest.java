@@ -76,13 +76,13 @@ public class ProductTypeCreationDemoTest extends IntegrationTest {
     @AfterClass
     @BeforeClass
     public static void deleteProductsAndProductType() {
-        final List<ProductType> productTypes = execute(ProductTypeQuery.of().byName(PRODUCT_TYPE_NAME)).getResults();
+        final List<ProductType> productTypes = client().executeBlocking(ProductTypeQuery.of().byName(PRODUCT_TYPE_NAME)).getResults();
         if (!productTypes.isEmpty()) {
             final ProductQuery productQuery = ProductQuery.of()
                     .withPredicates(m -> m.productType().isIn(productTypes))
                     .withLimit(500L);
-            execute(productQuery).getResults().forEach(p -> execute(ProductDeleteCommand.of(p)));
-            productTypes.forEach(p -> execute(ProductTypeDeleteCommand.of(p)));
+            client().executeBlocking(productQuery).getResults().forEach(p -> client().executeBlocking(ProductDeleteCommand.of(p)));
+            productTypes.forEach(p -> client().executeBlocking(ProductTypeDeleteCommand.of(p)));
         }
     }
 
@@ -193,7 +193,7 @@ public class ProductTypeCreationDemoTest extends IntegrationTest {
     }
 
     public Product createBookProduct() throws Exception {
-        final ProductType productType = execute(ProductTypeQuery.of().byName(BOOK_PRODUCT_TYPE_NAME)).head().get();
+        final ProductType productType = client().executeBlocking(ProductTypeQuery.of().byName(BOOK_PRODUCT_TYPE_NAME)).head().get();
         final ProductVariantDraft masterVariantDraft = ProductVariantDraftBuilder.of()
                 .plusAttribute(ISBN_ATTR_NAME, "978-3-86680-192-9")
                 .build();
@@ -267,7 +267,7 @@ public class ProductTypeCreationDemoTest extends IntegrationTest {
         final ProductDraft draft = ProductDraftBuilder
                 .of(productType, en("basic shirt"), randomSlug(), masterVariantDraft)
                 .build();
-        assertThatThrownBy(() -> execute(ProductCreateCommand.of(draft)))
+        assertThatThrownBy(() -> client().executeBlocking(ProductCreateCommand.of(draft)))
                 .isInstanceOf(ErrorResponseException.class)
                 .matches(e -> ((ErrorResponseException)e).hasErrorCode(InvalidField.CODE));
     }
@@ -329,7 +329,7 @@ public class ProductTypeCreationDemoTest extends IntegrationTest {
                 .plusExpansionPaths(m -> m.masterVariant().attributes().valueSet())
                 .plusExpansionPaths(m -> m.productType());
 
-        final ProductProjection productProjection = execute(query).head().get();
+        final ProductProjection productProjection = client().executeBlocking(query).head().get();
 
         final ProductType productType = productProjection.getProductType().getObj();
         final ProductVariant masterVariant = productProjection.getMasterVariant();
@@ -424,7 +424,7 @@ public class ProductTypeCreationDemoTest extends IntegrationTest {
         final AttributeDraft attributeDraft = AttributeDraft.of(ISBN_ATTR_NAME, "978-3-86680-192-8");
         final SetAttribute updateAction = SetAttribute.of(masterVariantId, attributeDraft);
 
-        final Product updatedProduct = execute(ProductUpdateCommand.of(product, updateAction));
+        final Product updatedProduct = client().executeBlocking(ProductUpdateCommand.of(product, updateAction));
 
         final ProductVariant masterVariant = updatedProduct.getMasterData().getStaged().getMasterVariant();
         assertThat(masterVariant.findAttribute(ISBN_ATTR_NAME, AttributeAccess.ofText()))
@@ -444,7 +444,7 @@ public class ProductTypeCreationDemoTest extends IntegrationTest {
                 draft.apply(AttributeDraft.of(RRP_ATTR_NAME, MoneyImpl.of(20, EUR)))
         );
 
-        final Product updatedProduct = execute(ProductUpdateCommand.of(product, updateActions));
+        final Product updatedProduct = client().executeBlocking(ProductUpdateCommand.of(product, updateActions));
 
         final ProductVariant masterVariant = updatedProduct.getMasterData().getStaged().getMasterVariant();
         assertThat(masterVariant.findAttribute(COLOR_ATTR_NAME, AttributeAccess.ofLocalizedEnumValue()))
@@ -462,7 +462,7 @@ public class ProductTypeCreationDemoTest extends IntegrationTest {
     @Test
     public void updateWithWrongType() throws Exception {
         final Product product = createProduct();
-        assertThatThrownBy(() -> execute(ProductUpdateCommand.of(product,
+        assertThatThrownBy(() -> client().executeBlocking(ProductUpdateCommand.of(product,
                 SetAttribute.of(1, AttributeDraft.of(LAUNDRY_SYMBOLS_ATTR_NAME, "cold")))))
                 .isInstanceOf(ErrorResponseException.class)
                 .matches(e -> ((ErrorResponseException)e).hasErrorCode(InvalidField.CODE));
@@ -486,7 +486,7 @@ public class ProductTypeCreationDemoTest extends IntegrationTest {
                 .ofLineItems(EURO_20, OrderState.COMPLETE, asList(lineItemImportDraft))
                 .build();
 
-        final Order order = execute(OrderImportCommand.of(orderImportDraft));
+        final Order order = client().executeBlocking(OrderImportCommand.of(orderImportDraft));
 
         final ProductVariant productVariant = order.getLineItems().get(0).getVariant();
         final Optional<LocalizedEnumValue> colorAttribute =

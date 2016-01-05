@@ -14,7 +14,7 @@ public class CartDiscountQueryTest extends IntegrationTest {
     public void execution() throws Exception {
         withPersistentCartDiscount(client(), cartDiscount -> {
             final QueryPredicate<CartDiscount> knownId = CartDiscountQueryModel.of().id().is(cartDiscount.getId());
-            final PagedQueryResult<CartDiscount> result = execute(CartDiscountQuery.of().withPredicates(knownId));
+            final PagedQueryResult<CartDiscount> result = client().executeBlocking(CartDiscountQuery.of().withPredicates(knownId));
             assertThat(result.getResults()).hasSize(1);
             assertThat(result.getResults().get(0).getId()).isEqualTo(cartDiscount.getId());
         });

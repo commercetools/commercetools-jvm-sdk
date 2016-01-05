@@ -72,8 +72,8 @@ public class ProductProjectionSearchMainIntegrationTest extends ProductProjectio
         final ProductProjectionSearch search = ProductProjectionSearch.ofStaged()
                 .withText(ENGLISH, "short")
                 .withQueryFilters(filter -> filter.productType().id().by(productType.getId()));
-        assertThat(execute(search).getResults()).matches(containsIdentifiable(product2).negate(), "not included");
-        assertThat(execute(search.withFuzzy(true)).getResults()).matches(containsIdentifiable(product2), "included");
+        assertThat(client().executeBlocking(search).getResults()).matches(containsIdentifiable(product2).negate(), "not included");
+        assertThat(client().executeBlocking(search.withFuzzy(true)).getResults()).matches(containsIdentifiable(product2), "included");
     }
 
     @Test

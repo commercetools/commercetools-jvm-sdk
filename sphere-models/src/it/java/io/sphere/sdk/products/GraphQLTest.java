@@ -23,7 +23,7 @@ public class GraphQLTest extends IntegrationTest {
                         .collect(Collectors.toList());
 
 
-                final Set<LightweightProduct> actual = new HashSet<>(execute(LightweightProduct.requestOfSkus(skus)));
+                final Set<LightweightProduct> actual = new HashSet<>(client().executeBlocking(LightweightProduct.requestOfSkus(skus)));
                 final Set<LightweightProduct> expected = asList(product1, product2).stream()
                         .map(product -> {
                             final String sku = product.getMasterData().getStaged().getMasterVariant().getSku();

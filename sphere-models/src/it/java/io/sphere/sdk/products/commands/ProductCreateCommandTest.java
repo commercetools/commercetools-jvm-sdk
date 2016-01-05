@@ -41,7 +41,7 @@ public class ProductCreateCommandTest extends IntegrationTest {
                     .searchKeywords(searchKeywords)
                     .state(initialProductState)
                     .build();
-            final Product product = execute(ProductCreateCommand.of(productDraft));
+            final Product product = client().executeBlocking(ProductCreateCommand.of(productDraft));
             final Image loadedImage = product.getMasterData().getStaged().getMasterVariant().getImages().get(0);
             assertThat(loadedImage).isEqualTo(image);
             assertThat(product.getTaxCategory()).isEqualTo(taxCategory.toReference());
@@ -49,7 +49,7 @@ public class ProductCreateCommandTest extends IntegrationTest {
             assertThat(product.getState()).isEqualTo(initialProductState.toReference());
 
             //clean up test
-            execute(ProductDeleteCommand.of(product));
+            client().executeBlocking(ProductDeleteCommand.of(product));
         });
     }
 
@@ -63,13 +63,13 @@ public class ProductCreateCommandTest extends IntegrationTest {
                     final ProductVariantDraft masterVariant = ProductVariantDraftBuilder.of().price(price).build();
                     final ProductDraft productDraft = ProductDraftBuilder.of(productType, randomSlug(), randomSlug(), masterVariant).build();
 
-                    final Product product = execute(ProductCreateCommand.of(productDraft));
+                    final Product product = client().executeBlocking(ProductCreateCommand.of(productDraft));
                     final Price loadedPrice = product.getMasterData().getStaged().getMasterVariant().getPrices().get(0);
 
                     assertThat(loadedPrice.getValue()).isEqualTo(EURO_1);
                     assertThat(loadedPrice.getCustom().getFieldAsString(STRING_FIELD_NAME)).isEqualTo(value);
 
-                    execute(ProductDeleteCommand.of(product));
+                    client().executeBlocking(ProductDeleteCommand.of(product));
 
                     return type;
                 })
@@ -84,11 +84,11 @@ public class ProductCreateCommandTest extends IntegrationTest {
             final ResourceIdentifiable<ProductType> productTypeResourceIdentifier = productType;
             final ProductDraft productDraft = ProductDraftBuilder.of(productTypeResourceIdentifier, randomSlug(), randomSlug(), masterVariant).build();
 
-            final Product product = execute(ProductCreateCommand.of(productDraft));
+            final Product product = client().executeBlocking(ProductCreateCommand.of(productDraft));
 
             assertThat(product.getProductType()).isEqualTo(productType.toReference());
 
-            execute(ProductDeleteCommand.of(product));
+            client().executeBlocking(ProductDeleteCommand.of(product));
         });
     }
 }

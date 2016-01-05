@@ -3,6 +3,7 @@ package io.sphere.sdk.products.commands;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonUnwrapped;
 import io.sphere.sdk.categories.Category;
+import io.sphere.sdk.client.SphereRequest;
 import io.sphere.sdk.commands.UpdateAction;
 import io.sphere.sdk.messages.queries.MessageQuery;
 import io.sphere.sdk.models.*;
@@ -58,7 +59,7 @@ public class ProductUpdateCommandTest extends IntegrationTest {
             assertThat(product.getMasterData().getStaged().getMasterVariant().getImages()).hasSize(0);
 
             final Image image = Image.ofWidthAndHeight("http://www.commercetools.com/assets/img/ct_logo_farbe.gif", 460, 102, "commercetools logo");
-            final Product updatedProduct = execute(ProductUpdateCommand.of(product, AddExternalImage.of(image, MASTER_VARIANT_ID)));
+            final Product updatedProduct = client().executeBlocking(ProductUpdateCommand.of(product, AddExternalImage.of(image, MASTER_VARIANT_ID)));
 
             assertThat(updatedProduct.getMasterData().getStaged().getMasterVariant().getImages()).isEqualTo(asList(image));
             return updatedProduct;
@@ -124,7 +125,7 @@ public class ProductUpdateCommandTest extends IntegrationTest {
     @Test
     public void setCategoryOrderHint() throws Exception {
         withProductInCategory(client(), (product, category) -> {
-            final Product updatedProduct = execute(ProductUpdateCommand.of(product, SetCategoryOrderHint.of(category.getId(), "0.1234")));
+            final Product updatedProduct = client().executeBlocking(ProductUpdateCommand.of(product, SetCategoryOrderHint.of(category.getId(), "0.1234")));
 
             final CategoryOrderHints actual = updatedProduct.getMasterData().getStaged().getCategoryOrderHints();
             assertThat(actual).isEqualTo(CategoryOrderHints.of(category.getId(), "0.1234"));
@@ -136,7 +137,7 @@ public class ProductUpdateCommandTest extends IntegrationTest {
     public void changeName() throws Exception {
         withUpdateableProduct(client(), product -> {
             final LocalizedString newName = ofEnglishLocale("newName " + RANDOM.nextInt());
-            final Product updatedProduct = execute(ProductUpdateCommand.of(product, ChangeName.of(newName)));
+            final Product updatedProduct = client().executeBlocking(ProductUpdateCommand.of(product, ChangeName.of(newName)));
 
             assertThat(updatedProduct.getMasterData().getStaged().getName()).isEqualTo(newName);
             return updatedProduct;
@@ -165,7 +166,7 @@ public class ProductUpdateCommandTest extends IntegrationTest {
     public void changeSlug() throws Exception {
         withUpdateableProduct(client(), product -> {
             final LocalizedString newSlug = ofEnglishLocale("new-slug-" + RANDOM.nextInt());
-            final Product updatedProduct = execute(ProductUpdateCommand.of(product, ChangeSlug.of(newSlug)));
+            final Product updatedProduct = client().executeBlocking(ProductUpdateCommand.of(product, ChangeSlug.of(newSlug)));
 
             assertThat(updatedProduct.getMasterData().getStaged().getSlug()).isEqualTo(newSlug);
             return updatedProduct;
@@ -177,10 +178,10 @@ public class ProductUpdateCommandTest extends IntegrationTest {
         withUpdateableProduct(client(), product -> {
             assertThat(product.getMasterData().isPublished()).isFalse();
 
-            final Product publishedProduct = execute(ProductUpdateCommand.of(product, Publish.of()));
+            final Product publishedProduct = client().executeBlocking(ProductUpdateCommand.of(product, Publish.of()));
             assertThat(publishedProduct.getMasterData().isPublished()).isTrue();
 
-            final Product unpublishedProduct = execute(ProductUpdateCommand.of(publishedProduct, Unpublish.of()));
+            final Product unpublishedProduct = client().executeBlocking(ProductUpdateCommand.of(publishedProduct, Unpublish.of()));
             assertThat(unpublishedProduct.getMasterData().isPublished()).isFalse();
             return unpublishedProduct;
         });
@@ -193,7 +194,7 @@ public class ProductUpdateCommandTest extends IntegrationTest {
             final Product productWithImage = client().executeBlocking(ProductUpdateCommand.of(product, AddExternalImage.of(image, MASTER_VARIANT_ID)));
             assertThat(productWithImage.getMasterData().getStaged().getMasterVariant().getImages()).isEqualTo(asList(image));
 
-            final Product updatedProduct = execute(ProductUpdateCommand.of(productWithImage, RemoveImage.of(image, MASTER_VARIANT_ID)));
+            final Product updatedProduct = client().executeBlocking(ProductUpdateCommand.of(productWithImage, RemoveImage.of(image, MASTER_VARIANT_ID)));
             assertThat(updatedProduct.getMasterData().getStaged().getMasterVariant().getImages()).hasSize(0);
             return updatedProduct;
         });
@@ -219,7 +220,7 @@ public class ProductUpdateCommandTest extends IntegrationTest {
         withUpdateableProduct(client(), product -> {
             final LocalizedString newDescription = ofEnglishLocale("new description " + RANDOM.nextInt());
             final ProductUpdateCommand cmd = ProductUpdateCommand.of(product, SetDescription.of(newDescription));
-            final Product updatedProduct = execute(cmd);
+            final Product updatedProduct = client().executeBlocking(cmd);
 
             assertThat(updatedProduct.getMasterData().getStaged().getDescription()).isEqualTo(newDescription);
             return updatedProduct;
@@ -300,7 +301,7 @@ public class ProductUpdateCommandTest extends IntegrationTest {
             final List<UpdateAction<Product>> updateActions =
                     MetaAttributesUpdateActions.of(metaAttributes);
 
-            final ProductProjection productProjection = execute(ProductProjectionByIdGet.of(product, ProductProjectionType.STAGED));
+            final ProductProjection productProjection = client().executeBlocking(ProductProjectionByIdGet.of(product, ProductProjectionType.STAGED));
 
             final Product updatedProduct = client().executeBlocking(ProductUpdateCommand.of(productProjection, updateActions));
 
@@ -387,12 +388,12 @@ public class ProductUpdateCommandTest extends IntegrationTest {
             final LocalizedString oldDescriptionOption = product.getMasterData().getStaged().getDescription();
             final LocalizedString newDescription = ofEnglishLocale("new description " + RANDOM.nextInt());
             final ProductUpdateCommand cmd = ProductUpdateCommand.of(product, asList(Publish.of(), SetDescription.of(newDescription)));
-            final Product updatedProduct = execute(cmd);
+            final Product updatedProduct = client().executeBlocking(cmd);
             assertThat(oldDescriptionOption).isNotEqualTo(newDescription);
             assertThat(updatedProduct.getMasterData().getStaged().getDescription()).isEqualTo(newDescription);
             assertThat(updatedProduct.getMasterData().getCurrent().getDescription()).isEqualTo(oldDescriptionOption);
 
-            final Product revertedProduct = execute(ProductUpdateCommand.of(updatedProduct, RevertStagedChanges.of()));
+            final Product revertedProduct = client().executeBlocking(ProductUpdateCommand.of(updatedProduct, RevertStagedChanges.of()));
             assertThat(revertedProduct.getMasterData().getStaged().getDescription()).isEqualTo(oldDescriptionOption);
             assertThat(revertedProduct.getMasterData().getCurrent().getDescription()).isEqualTo(oldDescriptionOption);
 
@@ -406,7 +407,7 @@ public class ProductUpdateCommandTest extends IntegrationTest {
             withUpdateableProduct(client(), product -> {
                 assertThat(product.getTaxCategory()).isNotEqualTo(taxCategory);
                 final ProductUpdateCommand command = ProductUpdateCommand.of(product, SetTaxCategory.of(taxCategory));
-                final Product updatedProduct = execute(command);
+                final Product updatedProduct = client().executeBlocking(command);
                 assertThat(updatedProduct.getTaxCategory()).isEqualTo(taxCategory.toReference());
                 return updatedProduct;
             })
@@ -418,7 +419,7 @@ public class ProductUpdateCommandTest extends IntegrationTest {
         withUpdateableProduct(client(), product -> {
             final SearchKeywords searchKeywords = SearchKeywords.of(Locale.ENGLISH, asList(SearchKeyword.of("foo bar baz", CustomSuggestTokenizer.of(asList("foo, baz")))));
             final ProductUpdateCommand command = ProductUpdateCommand.of(product, SetSearchKeywords.of(searchKeywords));
-            final Product updatedProduct = execute(command);
+            final Product updatedProduct = client().executeBlocking(command);
 
             final SearchKeywords actualKeywords = updatedProduct.getMasterData().getStaged().getSearchKeywords();
             assertThat(actualKeywords).isEqualTo(searchKeywords);
@@ -489,9 +490,9 @@ public class ProductUpdateCommandTest extends IntegrationTest {
          withUpdateableProduct(client(), product -> {
              final LocalizedString newName = randomSlug();
              final UpdateAction<Product> stagedWrapper = new StagedWrapper(ChangeName.of(newName), false);
-             final Product updatedProduct = execute(ProductUpdateCommand.of(product, asList(Publish.of(), stagedWrapper)));
+             final Product updatedProduct = client().executeBlocking(ProductUpdateCommand.of(product, asList(Publish.of(), stagedWrapper)));
 
-             final Product fetchedProduct = execute(ProductByIdGet.of(product));
+             final Product fetchedProduct = client().executeBlocking(ProductByIdGet.of(product));
              assertThat(fetchedProduct.getMasterData().getCurrent().getName())
                      .isEqualTo(fetchedProduct.getMasterData().getStaged().getName())
                      .isEqualTo(newName);
@@ -506,11 +507,11 @@ public class ProductUpdateCommandTest extends IntegrationTest {
             withUpdateableProduct(client(), product -> {
                 assertThat(product.getState()).isNull();
 
-                final Product updatedProduct = execute(ProductUpdateCommand.of(product, asList(TransitionState.of(state))));
+                final Product updatedProduct = client().executeBlocking(ProductUpdateCommand.of(product, asList(TransitionState.of(state))));
 
                 assertThat(updatedProduct.getState()).isEqualTo(state.toReference());
 
-                final PagedQueryResult<ProductStateTransitionMessage> messageQueryResult = execute(MessageQuery.of()
+                final PagedQueryResult<ProductStateTransitionMessage> messageQueryResult = client().executeBlocking(MessageQuery.of()
                         .withPredicates(m -> m.resource().is(product))
                         .forMessageType(ProductStateTransitionMessage.MESSAGE_HINT));
 
@@ -518,8 +519,9 @@ public class ProductUpdateCommandTest extends IntegrationTest {
                 assertThat(message.getState()).isEqualTo(state.toReference());
 
                 //check query model
-                final Product productByState = execute(ProductQuery.of()
-                        .withPredicates(m -> m.id().is(product.getId()).and(m.state().is(state))))
+                final ProductQuery query = ProductQuery.of()
+                        .withPredicates(m -> m.id().is(product.getId()).and(m.state().is(state)));
+                final Product productByState = client().executeBlocking(query)
                         .head().get();
                 assertThat(productByState).isEqualTo(updatedProduct);
 
@@ -536,13 +538,13 @@ public class ProductUpdateCommandTest extends IntegrationTest {
                 final UpdateAction<Product> updateAction = SetProductPriceCustomType.
                         ofTypeIdAndObjects(type.getId(), STRING_FIELD_NAME, "a value", priceId);
                 final ProductUpdateCommand productUpdateCommand = ProductUpdateCommand.of(product, updateAction);
-                final Product updatedProduct = execute(productUpdateCommand);
+                final Product updatedProduct = client().executeBlocking(productUpdateCommand);
 
                 final Price price = getFirstPrice(updatedProduct);
                 assertThat(price.getCustom().getFieldAsString(STRING_FIELD_NAME))
                         .isEqualTo("a value");
 
-                final Product updated2 = execute(ProductUpdateCommand.of(updatedProduct, SetProductPriceCustomField.ofObject(STRING_FIELD_NAME, "a new value", priceId)));
+                final Product updated2 = client().executeBlocking(ProductUpdateCommand.of(updatedProduct, SetProductPriceCustomField.ofObject(STRING_FIELD_NAME, "a new value", priceId)));
                 assertThat(getFirstPrice(updated2).getCustom().getFieldAsString(STRING_FIELD_NAME))
                         .isEqualTo("a new value");
                 return updated2;

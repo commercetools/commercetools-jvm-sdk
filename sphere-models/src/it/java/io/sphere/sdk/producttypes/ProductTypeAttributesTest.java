@@ -164,7 +164,7 @@ public final class ProductTypeAttributesTest extends IntegrationTest {
         withEmptyProductType(client(), "productReferenceAttribute-testcase", productType -> {
             final ProductVariantDraft masterVariant = ProductVariantDraftBuilder.of().build();
             final ProductDraft productDraft = ProductDraftBuilder.of(productType, LABEL, SphereTestUtils.randomSlug(), masterVariant).build();
-            final Product product = execute(ProductCreateCommand.of(productDraft));
+            final Product product = client().executeBlocking(ProductCreateCommand.of(productDraft));
             testSingleAndSet(AttributeAccess.ofProductReference(), AttributeAccess.ofProductReferenceSet(),
                     asSet(product.toReference().filled(null)),
                     ReferenceAttributeType.ofProduct(),
@@ -204,7 +204,7 @@ public final class ProductTypeAttributesTest extends IntegrationTest {
     @Test
     public void queryByName() throws Exception {
         withTShirtProductType(type -> {
-            final ProductType productType = execute(ProductTypeQuery.of().byName("t-shirt")).head().get();
+            final ProductType productType = client().executeBlocking(ProductTypeQuery.of().byName("t-shirt")).head().get();
             final Optional<AttributeDefinition> sizeAttribute = productType.findAttribute("size");
             final List<EnumValue> possibleSizeValues = sizeAttribute.
                     map(attrib -> ((EnumAttributeType) attrib.getAttributeType()).getValues()).
@@ -222,7 +222,7 @@ public final class ProductTypeAttributesTest extends IntegrationTest {
         withDistractorProductType(x -> {//contains no enum attribute, so it should not be included in the result
             withTShirtProductType(y -> {
                 final java.util.function.Predicate<ProductType> containsEnumAttr = productType -> productType.getAttributes().stream().anyMatch(attr -> attr.getName().equals(attributeTypeName));
-                final List<ProductType> productTypes = execute(queryForEnum).getResults();
+                final List<ProductType> productTypes = client().executeBlocking(queryForEnum).getResults();
                 assertThat(productTypes.stream().allMatch(containsEnumAttr));
             });
         });
@@ -310,7 +310,7 @@ public final class ProductTypeAttributesTest extends IntegrationTest {
         final List<AttributeDefinition> attributes = asList(attributeDefinition);
 
         final ProductTypeCreateCommand command = ProductTypeCreateCommand.of(ProductTypeDraft.of(randomKey(), productTypeName, productTypeDescription, attributes));
-        final ProductType productType = execute(command);
+        final ProductType productType = client().executeBlocking(command);
         assertThat(productType.getName()).isEqualTo(productTypeName);
         assertThat(productType.getDescription()).isEqualTo(productTypeDescription);
         assertThat(productType.getAttributes()).hasSize(1);
@@ -326,7 +326,7 @@ public final class ProductTypeAttributesTest extends IntegrationTest {
         final NamedAttributeAccess<X> namedAttributeAccess = access.ofName(attributeName);
         final ProductVariantDraft masterVariant = ProductVariantDraftBuilder.of().attributes(namedAttributeAccess.draftOf(exampleValue)).build();
         final ProductDraft productDraft = ProductDraftBuilder.of(productType, LocalizedString.of(ENGLISH, "product to test attributes"), SphereTestUtils.randomSlug(), masterVariant).build();
-        final Product product = execute(ProductCreateCommand.of(productDraft));
+        final Product product = client().executeBlocking(ProductCreateCommand.of(productDraft));
         final X actualAttributeValue = product.getMasterData().getStaged().getMasterVariant().findAttribute(namedAttributeAccess).get();
 
         assertThat(exampleValue).isEqualTo(actualAttributeValue);
@@ -336,7 +336,7 @@ public final class ProductTypeAttributesTest extends IntegrationTest {
                 .findValue().orElse(false);
         assertThat(found).overridingErrorMessage("the attribute type should be recognized").isTrue();
 
-        execute(ProductDeleteCommand.of(product));
+        client().executeBlocking(ProductDeleteCommand.of(product));
         cleanUpByName(productTypeName);
 
     }
@@ -357,7 +357,7 @@ public final class ProductTypeAttributesTest extends IntegrationTest {
         final List<AttributeDefinition> attributes = asList(attributeDefinition);
 
         final ProductTypeCreateCommand command = ProductTypeCreateCommand.of(ProductTypeDraft.of(randomKey(), productTypeName, productTypeDescription, attributes));
-        final ProductType productType = execute(command);
+        final ProductType productType = client().executeBlocking(command);
         assertThat(productType.getName()).isEqualTo(productTypeName);
         assertThat(productType.getDescription()).isEqualTo(productTypeDescription);
         assertThat(productType.getAttributes()).hasSize(1);
@@ -392,6 +392,6 @@ public final class ProductTypeAttributesTest extends IntegrationTest {
     }
 
     protected void cleanUpByName(final List<String> names) {
-        execute(ProductTypeQuery.of().withPredicates(ProductTypeQueryModel.of().name().isIn(names))).getResults().forEach(item -> ProductFixtures.deleteProductsProductTypeAndProductDiscounts(client(), item));
+        client().executeBlocking(ProductTypeQuery.of().withPredicates(ProductTypeQueryModel.of().name().isIn(names))).getResults().forEach(item -> ProductFixtures.deleteProductsProductTypeAndProductDiscounts(client(), item));
     }
 }

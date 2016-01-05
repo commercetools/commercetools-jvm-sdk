@@ -13,7 +13,7 @@ public class DiscountCodeDeleteCommandTest extends IntegrationTest {
     public void execution() throws Exception {
         final String code = DiscountCodeDeleteCommandTest.class.getSimpleName();
         final DiscountCode discountCode = createDiscountCode(client(), code);
-        execute(DiscountCodeDeleteCommand.of(discountCode));
-        assertThat(execute(DiscountCodeByIdGet.of(discountCode))).isNull();
+        client().executeBlocking(DiscountCodeDeleteCommand.of(discountCode));
+        assertThat(client().executeBlocking(DiscountCodeByIdGet.of(discountCode))).isNull();
     }
 }

@@ -40,7 +40,7 @@ public class CartDiscountCreateCommandTest extends IntegrationTest {
                 .isActive(false)
                 .build();
 
-        cartDiscount = execute(CartDiscountCreateCommand.of(discountDraft));
+        cartDiscount = client().executeBlocking(CartDiscountCreateCommand.of(discountDraft));
         assertThat(cartDiscount.getName()).isEqualTo(name);
         assertThat(cartDiscount.getCartPredicate()).isEqualTo(predicate);
         assertThat(cartDiscount.getValue()).isEqualTo(value);
@@ -56,7 +56,7 @@ public class CartDiscountCreateCommandTest extends IntegrationTest {
     @After
     public void tearDown() throws Exception {
         Optional.ofNullable(cartDiscount)
-                .ifPresent(cartDiscount -> execute(CartDiscountDeleteCommand.of(cartDiscount)));
+                .ifPresent(cartDiscount -> client().executeBlocking(CartDiscountDeleteCommand.of(cartDiscount)));
     }
 
     @Test
@@ -96,8 +96,8 @@ public class CartDiscountCreateCommandTest extends IntegrationTest {
     private void checkCreation(final Function<CartDiscountDraftBuilder, CartDiscountDraftBuilder> f, final Consumer<CartDiscount> assertions) throws Exception {
         final CartDiscountDraft draft = f.apply(newCartDiscountDraftBuilder())
                 .build();
-        final CartDiscount discount = execute(CartDiscountCreateCommand.of(draft));
-        execute(CartDiscountDeleteCommand.of(discount));
+        final CartDiscount discount = client().executeBlocking(CartDiscountCreateCommand.of(draft));
+        client().executeBlocking(CartDiscountDeleteCommand.of(discount));
         assertions.accept(discount);
     }
 }

@@ -18,7 +18,7 @@ public class CustomObjectCustomJsonMappingByKeyGetTest extends IntegrationTest {
             final String container = co.getContainer();
             final String key = co.getKey();
             final Get<CustomObject<GsonFoo>> fetch = new GsonFooCustomObjectByKeyGet(container, key);
-            final CustomObject<GsonFoo> customObject = execute(fetch);
+            final CustomObject<GsonFoo> customObject = client().executeBlocking(fetch);
             assertThat(customObject).isNotNull();
             assertThat(customObject.toReference()).isEqualTo(co.toReference());
             final GsonFoo value = customObject.getValue();
@@ -29,7 +29,7 @@ public class CustomObjectCustomJsonMappingByKeyGetTest extends IntegrationTest {
     @Test
     public void executionWithAbsent() throws Exception {
         final Get<CustomObject<GsonFoo>> fetch = new GsonFooCustomObjectByKeyGet("NOTPRESENT", "NOTPRESENT");
-        final CustomObject<GsonFoo> customObject = execute(fetch);
+        final CustomObject<GsonFoo> customObject = client().executeBlocking(fetch);
         assertThat(customObject).isNull();
     }
 }

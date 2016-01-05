@@ -11,7 +11,7 @@ public class DiscountCodeQueryTest extends IntegrationTest {
     @Test
     public void execution() throws Exception {
         withPersistentDiscountCode(client(), discountCode -> {
-            final DiscountCode actual = execute(DiscountCodeQuery.of()
+            final DiscountCode actual = client().executeBlocking(DiscountCodeQuery.of()
                     .withPredicates(DiscountCodeQueryModel.of().code().is(discountCode.getCode()))).head().get();
             assertThat(actual.getId()).isEqualTo(discountCode.getId());
         });

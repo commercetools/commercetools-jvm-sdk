@@ -32,7 +32,7 @@ public class CustomerSignInCommandTest extends CustomerIntegrationTest {
     @Test
     public void execution() throws Exception {
         withCustomer(client(), customer -> {
-            final CustomerSignInResult result = execute(CustomerSignInCommand.of(customer.getEmail(), PASSWORD));
+            final CustomerSignInResult result = client().executeBlocking(CustomerSignInCommand.of(customer.getEmail(), PASSWORD));
             assertThat(result.getCustomer()).isEqualTo(customer);
         });
     }
@@ -56,7 +56,7 @@ public class CustomerSignInCommandTest extends CustomerIntegrationTest {
                     anonymousCart.getLineItems().get(0).getQuantity());
             assertThat(maxOfBothQuantities).isEqualTo(7);
 
-            final CustomerSignInResult result = execute(CustomerSignInCommand
+            final CustomerSignInResult result = client().executeBlocking(CustomerSignInCommand
                     .of(customer.getEmail(), PASSWORD, anonymousCart.getId()));
 
             final Cart mergeResultCart = result.getCart();
@@ -68,7 +68,7 @@ public class CustomerSignInCommandTest extends CustomerIntegrationTest {
             assertThat(mergeResultCart.getId()).isEqualTo(customersCart.getId());
             assertThat(mergeResultCart.getId()).isEqualTo(customersCart.getId());
             assertThat(mergeResultCart.getCartState()).isEqualTo(CartState.ACTIVE);
-            final Cart abandonedCart = execute(CartByIdGet.of(anonymousCart.getId()));
+            final Cart abandonedCart = client().executeBlocking(CartByIdGet.of(anonymousCart.getId()));
             assertThat(abandonedCart.getCartState()).isEqualTo(CartState.MERGED);
         });
     }
@@ -87,7 +87,7 @@ public class CustomerSignInCommandTest extends CustomerIntegrationTest {
     @Test
     public void executionWithInvalidEmail() throws Exception {
         withCustomer(client(), customer -> {
-            assertThatThrownBy(() -> execute(CustomerSignInCommand.of("notpresent@null.sphere.io", PASSWORD)))
+            assertThatThrownBy(() -> client().executeBlocking(CustomerSignInCommand.of("notpresent@null.sphere.io", PASSWORD)))
                     .isInstanceOf(ErrorResponseException.class)
                     .matches(e -> ((ErrorResponseException) e).hasErrorCode(CustomerInvalidCredentials.CODE));
         });

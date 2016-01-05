@@ -25,7 +25,7 @@ public class TypeCreateCommandTest extends IntegrationTest {
                 .description(en("description"))
                 .fieldDefinitions(singletonList(stringFieldDefinition))
                 .build();
-        final Type type = execute(TypeCreateCommand.of(typeDraft));
+        final Type type = client().executeBlocking(TypeCreateCommand.of(typeDraft));
         assertThat(type.getKey()).isEqualTo(typeKey);
         assertThat(type.getName()).isEqualTo(en("name of the custom type"));
         assertThat(type.getResourceTypeIds()).containsExactly(Category.referenceTypeId());
@@ -36,7 +36,8 @@ public class TypeCreateCommandTest extends IntegrationTest {
     @Before
     @After
     public void cleanUp() throws Exception {
-        execute(TypeQuery.of().withPredicates(type -> type.key().is("type-key")))
-                .getResults().forEach(type -> execute(TypeDeleteCommand.of(type)));
+        final TypeQuery typeQuery = TypeQuery.of().withPredicates(type -> type.key().is("type-key"));
+        client().executeBlocking(typeQuery)
+                .getResults().forEach(type -> client().executeBlocking(TypeDeleteCommand.of(type)));
     }
 }

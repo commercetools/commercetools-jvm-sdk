@@ -1,5 +1,6 @@
 package io.sphere.sdk.products.search;
 
+import io.sphere.sdk.client.SphereRequest;
 import io.sphere.sdk.products.*;
 import io.sphere.sdk.products.attributes.*;
 import io.sphere.sdk.models.EnumValue;
@@ -130,12 +131,12 @@ public class ProductProjectionSearchModelIntegrationTest extends IntegrationTest
 
     @BeforeClass
     public static void setupProducts() {
-        productType = execute(ProductTypeQuery.of().byName(PRODUCT_TYPE_NAME)).head()
+        productType = client().executeBlocking(ProductTypeQuery.of().byName(PRODUCT_TYPE_NAME)).head()
                 .orElseGet(() -> createProductType());
 
         final Query<Product> query = ProductQuery.of()
                 .withPredicates(m -> m.masterData().staged().masterVariant().sku().isIn(asList(SKU1, SKU2, SKU_SOME_ID, SKU_OTHER_ID)));
-        final List<Product> products = execute(query).getResults();
+        final List<Product> products = client().executeBlocking(query).getResults();
 
         final Function<String, Optional<Product>> findBySku =
                 sku -> products.stream().filter(p -> sku.equals(p.getMasterData().getStaged().getMasterVariant().getSku())).findFirst();
@@ -152,7 +153,8 @@ public class ProductProjectionSearchModelIntegrationTest extends IntegrationTest
 
     protected static PagedSearchResult<ProductProjection> executeSearch(final ProductProjectionSearch search) {
         final List<String> ids = asList(product1.getId(), product2.getId());
-        return execute(search.plusQueryFilters(filter -> filter.id().byAny(ids)));
+        final ProductProjectionSearch sphereRequest = search.plusQueryFilters(filter -> filter.id().byAny(ids));
+        return client().executeBlocking(sphereRequest);
     }
 
     private static Product createProduct1() {
@@ -247,12 +249,12 @@ public class ProductProjectionSearchModelIntegrationTest extends IntegrationTest
                 refAttrDef, booleanSetAttrDef, textSetAttrDef, locTextSetAttrDef, enumSetAttrDef, locEnumSetAttrDef, numberSetAttrDef,
                 moneySetAttrDef, dateSetAttrDef, timeSetAttrDef, dateTimeSetAttrDef, refSetAttrDef));
         final ProductTypeCreateCommand productTypeCreateCommand = ProductTypeCreateCommand.of(productTypeDraft);
-        return execute(productTypeCreateCommand);
+        return client().executeBlocking(productTypeCreateCommand);
     }
 
     private static Product createTestProduct(final String name, final ProductVariantDraft masterVariant) {
         final LocalizedString locName = ofEnglishLocale(name);
         final ProductDraft productDraft = ProductDraftBuilder.of(productType, locName, locName.slugifiedUnique(), masterVariant).build();
-        return execute(ProductCreateCommand.of(productDraft));
+        return client().executeBlocking(ProductCreateCommand.of(productDraft));
     }
 }

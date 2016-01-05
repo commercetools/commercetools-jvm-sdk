@@ -21,7 +21,7 @@ public class StateDeleteCommandTest extends IntegrationTest {
     @Test
     public void execution() throws Exception {
         final State state = getState();
-        final State deletedState = execute(StateDeleteCommand.of(state));
+        final State deletedState = client().executeBlocking(StateDeleteCommand.of(state));
     }
 
     private State getState() {

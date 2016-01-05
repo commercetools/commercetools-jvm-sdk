@@ -3,11 +3,13 @@ package io.sphere.sdk.products;
 import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.categories.CategoryFixtures;
 import io.sphere.sdk.categories.commands.CategoryDeleteCommand;
+import io.sphere.sdk.client.SphereRequest;
 import io.sphere.sdk.products.commands.ProductCreateCommand;
 import io.sphere.sdk.products.queries.ProductProjectionQuery;
 import io.sphere.sdk.products.search.ProductProjectionSearch;
 import io.sphere.sdk.producttypes.ProductType;
 import io.sphere.sdk.producttypes.ProductTypeFixtures;
+import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.test.IntegrationTest;
 import org.assertj.core.api.Condition;
 import org.junit.AfterClass;
@@ -176,7 +178,7 @@ public class ProductCategoryOrderHintTest extends IntegrationTest {
                             .categoryOrderHints(categoryOrderHints)
                             .categories(asList(category1.toReference(), category2.toReference()))
                             .build();
-                    final Product product = execute(ProductCreateCommand.of(productDraft));
+                    final Product product = client().executeBlocking(ProductCreateCommand.of(productDraft));
                     return product;
                 })
                 .collect(toList());
@@ -229,8 +231,9 @@ public class ProductCategoryOrderHintTest extends IntegrationTest {
 
         final List<String> ids = products.stream().map(p -> p.getId()).collect(toList());
 
-        List<ProductProjection> productProjections = execute(ProductProjectionQuery.ofStaged()
-                .withPredicates(product -> product.id().isIn(ids))).getResults();
+        final ProductProjectionQuery productProjectionQuery = ProductProjectionQuery.ofStaged()
+                .withPredicates(product -> product.id().isIn(ids));
+        List<ProductProjection> productProjections = client().executeBlocking(productProjectionQuery).getResults();
 
         return new QueryResult(productProjections,
                 sortedFromSearchForCategory1,
@@ -243,14 +246,14 @@ public class ProductCategoryOrderHintTest extends IntegrationTest {
         final ProductProjectionSearch searchRequest = ProductProjectionSearch.ofStaged()
                 .withQueryFilters(filter -> filter.categories().id().by(categoryId))
                 .withSort(m -> m.categoryOrderHints().category(categoryId).byAsc());
-        return execute(searchRequest).getResults();
+        return client().executeBlocking(searchRequest).getResults();
     }
 
     private static List<ProductProjection> queryForCategoryAndSort(final String categoryId) {
         final ProductProjectionQuery query = ProductProjectionQuery.ofStaged()
                 .withPredicates(m -> m.categories().id().is(categoryId))
                 .withSort(m -> m.categoryOrderHints().category(categoryId).asc());
-        return execute(query).getResults();
+        return client().executeBlocking(query).getResults();
     }
 
 }

@@ -91,7 +91,7 @@ public class CategoryPredicatesTest extends IntegrationTest {
             withCategory(client(), CategoryDraftBuilder.of(en("2").plus(Locale.CHINESE, "x"), en("2")).description(en("desc 2")), c2 -> {
                 withCategory(client(), CategoryDraftBuilder.of(en("10"), en("10")), c10 -> {
                     final Query<Category> query = CategoryQuery.of().withPredicates(predicate).withSort(CategoryQueryModel.of().createdAt().sort().desc());
-                    final List<Category> results = execute(query).getResults();
+                    final List<Category> results = client().executeBlocking(query).getResults();
                     assertions.accept(results);
                 });
             });

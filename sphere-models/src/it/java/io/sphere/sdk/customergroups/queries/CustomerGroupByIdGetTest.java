@@ -13,7 +13,7 @@ public class CustomerGroupByIdGetTest extends IntegrationTest {
         withCustomerGroup(client(), customerGroup -> {
             final String customerGroupId = customerGroup.getId();
 
-            final CustomerGroup fetchedCustomerGroup = execute(CustomerGroupByIdGet.of(customerGroupId));
+            final CustomerGroup fetchedCustomerGroup = client().executeBlocking(CustomerGroupByIdGet.of(customerGroupId));
 
             assertThat(fetchedCustomerGroup).isEqualTo(customerGroup);
         });

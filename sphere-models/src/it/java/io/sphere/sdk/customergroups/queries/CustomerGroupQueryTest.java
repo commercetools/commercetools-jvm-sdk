@@ -17,7 +17,7 @@ public class CustomerGroupQueryTest extends IntegrationTest {
     @Test
     public void byName() throws Exception {
         withCustomerGroup(client(), customerGroup -> {
-            final PagedQueryResult<CustomerGroup> result = execute(CustomerGroupQuery.of().byName(customerGroup.getName()));
+            final PagedQueryResult<CustomerGroup> result = client().executeBlocking(CustomerGroupQuery.of().byName(customerGroup.getName()));
             final Optional<CustomerGroup> found = result.getResults().stream()
                     .filter(cg -> cg.hasSameIdAs(customerGroup))
                     .findFirst();
@@ -33,7 +33,7 @@ public class CustomerGroupQueryTest extends IntegrationTest {
                 final CustomerGroupQuery query = CustomerGroupQuery.of()
                         .withPredicates(group -> group.name().isIn(names));
 
-                final List<CustomerGroup> results = execute(query).getResults();
+                final List<CustomerGroup> results = client().executeBlocking(query).getResults();
                 assertThat(results).containsOnly(customerGroupA, customerGroupB);
             });
         });

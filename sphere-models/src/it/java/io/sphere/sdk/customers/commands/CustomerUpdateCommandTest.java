@@ -23,7 +23,7 @@ public class CustomerUpdateCommandTest extends CustomerIntegrationTest {
         withCustomer(client(), customer -> {
             final CustomerName newName = CustomerName.ofTitleFirstAndLastName("Mister", "John", "Smith");
             assertThat(customer.getName()).isNotEqualTo(newName);
-            final Customer updatedCustomer = execute(CustomerUpdateCommand.of(customer, ChangeName.of(newName)));
+            final Customer updatedCustomer = client().executeBlocking(CustomerUpdateCommand.of(customer, ChangeName.of(newName)));
             assertThat(updatedCustomer.getName()).isEqualTo(newName);
         });
     }
@@ -33,7 +33,7 @@ public class CustomerUpdateCommandTest extends CustomerIntegrationTest {
         withCustomer(client(), customer -> {
             final String newEmail = randomEmail(CustomerUpdateCommandTest.class);
             assertThat(customer.getEmail()).isNotEqualTo(newEmail);
-            final Customer updatedCustomer = execute(CustomerUpdateCommand.of(customer, ChangeEmail.of(newEmail)));
+            final Customer updatedCustomer = client().executeBlocking(CustomerUpdateCommand.of(customer, ChangeEmail.of(newEmail)));
             assertThat(updatedCustomer.getEmail()).isEqualTo(newEmail);
         });
     }
@@ -48,7 +48,7 @@ public class CustomerUpdateCommandTest extends CustomerIntegrationTest {
                     .anyMatch(containsNewAddressPredicate))
                     .overridingErrorMessage("address is not present, yet")
                     .isFalse();
-            final Customer updatedCustomer = execute(CustomerUpdateCommand.of(customer, AddAddress.of(newAddress)));
+            final Customer updatedCustomer = client().executeBlocking(CustomerUpdateCommand.of(customer, AddAddress.of(newAddress)));
             assertThat(updatedCustomer.getAddresses().stream()
             .anyMatch(containsNewAddressPredicate)).isTrue();
         });
@@ -68,7 +68,7 @@ public class CustomerUpdateCommandTest extends CustomerIntegrationTest {
 
             final Address newAddress = oldAddress.withCity(city);
             final ChangeAddress updateAction = ChangeAddress.ofOldAddressToNewAddress(oldAddress, newAddress);
-            final Customer customerWithReplacedAddress = execute(CustomerUpdateCommand.of(customer, updateAction));
+            final Customer customerWithReplacedAddress = client().executeBlocking(CustomerUpdateCommand.of(customer, updateAction));
 
             assertThat(customerWithReplacedAddress.getAddresses()).hasSize(1);
             assertThat(customerWithReplacedAddress.getAddresses().get(0).getCity()).contains(city);
@@ -85,7 +85,7 @@ public class CustomerUpdateCommandTest extends CustomerIntegrationTest {
 
             final RemoveAddress action = RemoveAddress.of(oldAddress);
             final Customer customerWithoutAddresses =
-                    execute(CustomerUpdateCommand.of(customer, action));
+                    client().executeBlocking(CustomerUpdateCommand.of(customer, action));
 
             assertThat(customerWithoutAddresses.getAddresses()).isEmpty();
         });
@@ -102,7 +102,7 @@ public class CustomerUpdateCommandTest extends CustomerIntegrationTest {
             assertThat(customer.findDefaultShippingAddress()).isEmpty();
 
             final Customer updatedCustomer =
-                    execute(CustomerUpdateCommand.of(customer, SetDefaultShippingAddress.ofAddress(address)));
+                    client().executeBlocking(CustomerUpdateCommand.of(customer, SetDefaultShippingAddress.ofAddress(address)));
 
             assertThat(updatedCustomer.getDefaultShippingAddressId()).contains(address.getId());
             assertThat(updatedCustomer.findDefaultShippingAddress()).contains(address);
@@ -120,7 +120,7 @@ public class CustomerUpdateCommandTest extends CustomerIntegrationTest {
             assertThat(customer.getDefaultBillingAddress()).isNull();
 
             final Customer updatedCustomer =
-                    execute(CustomerUpdateCommand.of(customer, SetDefaultBillingAddress.ofAddress(address)));
+                    client().executeBlocking(CustomerUpdateCommand.of(customer, SetDefaultBillingAddress.ofAddress(address)));
 
             assertThat(updatedCustomer.getDefaultBillingAddressId()).contains(address.getId());
             assertThat(updatedCustomer.getDefaultBillingAddress()).isEqualTo(address);
@@ -134,7 +134,7 @@ public class CustomerUpdateCommandTest extends CustomerIntegrationTest {
 
             final String customerNumber = randomString();
             final Customer updatedCustomer =
-                    execute(CustomerUpdateCommand.of(customer, SetCustomerNumber.of(customerNumber)));
+                    client().executeBlocking(CustomerUpdateCommand.of(customer, SetCustomerNumber.of(customerNumber)));
 
             assertThat(updatedCustomer.getCustomerNumber()).contains(customerNumber);
         });
@@ -147,7 +147,7 @@ public class CustomerUpdateCommandTest extends CustomerIntegrationTest {
 
             final String externalId = randomString();
             final Customer updatedCustomer =
-                    execute(CustomerUpdateCommand.of(customer, SetExternalId.of(externalId)));
+                    client().executeBlocking(CustomerUpdateCommand.of(customer, SetExternalId.of(externalId)));
 
             assertThat(updatedCustomer.getExternalId()).isEqualTo(externalId);
         });
@@ -160,7 +160,7 @@ public class CustomerUpdateCommandTest extends CustomerIntegrationTest {
 
             final String companyName = "Big coorp";
             final Customer updatedCustomer =
-                    execute(CustomerUpdateCommand.of(customer, SetCompanyName.of(companyName)));
+                    client().executeBlocking(CustomerUpdateCommand.of(customer, SetCompanyName.of(companyName)));
 
             assertThat(updatedCustomer.getCompanyName()).isEqualTo(companyName);
         });
@@ -173,7 +173,7 @@ public class CustomerUpdateCommandTest extends CustomerIntegrationTest {
 
             final String vatId = randomString();
             final Customer updatedCustomer =
-                    execute(CustomerUpdateCommand.of(customer, SetVatId.of(vatId)));
+                    client().executeBlocking(CustomerUpdateCommand.of(customer, SetVatId.of(vatId)));
 
             assertThat(updatedCustomer.getVatId()).isEqualTo(vatId);
         });
@@ -186,7 +186,7 @@ public class CustomerUpdateCommandTest extends CustomerIntegrationTest {
 
             final LocalDate dateOfBirth = LocalDate.now();
             final Customer updatedCustomer =
-                    execute(CustomerUpdateCommand.of(customer, SetDateOfBirth.of(dateOfBirth)));
+                    client().executeBlocking(CustomerUpdateCommand.of(customer, SetDateOfBirth.of(dateOfBirth)));
 
             assertThat(updatedCustomer.getDateOfBirth()).isEqualTo(dateOfBirth);
         });
@@ -197,7 +197,7 @@ public class CustomerUpdateCommandTest extends CustomerIntegrationTest {
         withB2cCustomerGroup(client(), customerGroup -> {
             withCustomer(client(), customer -> {
                 assertThat(customer.getCustomerGroup()).isNull();
-                final Customer updateCustomer = execute(CustomerUpdateCommand.of(customer, SetCustomerGroup.of(customerGroup)));
+                final Customer updateCustomer = client().executeBlocking(CustomerUpdateCommand.of(customer, SetCustomerGroup.of(customerGroup)));
                 assertThat(updateCustomer.getCustomerGroup()).isEqualTo(customerGroup.toReference());
             });
         });

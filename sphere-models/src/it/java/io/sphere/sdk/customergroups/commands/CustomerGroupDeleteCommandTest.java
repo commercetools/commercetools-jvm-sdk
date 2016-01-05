@@ -13,11 +13,11 @@ public class CustomerGroupDeleteCommandTest extends IntegrationTest {
     @Test
     public void execution() {
         final String name = randomKey();
-        final CustomerGroup customerGroup = execute(CustomerGroupCreateCommand.of(name));
+        final CustomerGroup customerGroup = client().executeBlocking(CustomerGroupCreateCommand.of(name));
 
-        execute(CustomerGroupDeleteCommand.of(customerGroup));
+        client().executeBlocking(CustomerGroupDeleteCommand.of(customerGroup));
 
-        final PagedQueryResult<CustomerGroup> queryResult = execute(CustomerGroupQuery.of().byName(name));
+        final PagedQueryResult<CustomerGroup> queryResult = client().executeBlocking(CustomerGroupQuery.of().byName(name));
         assertThat(queryResult.getResults()).isEmpty();
     }
 

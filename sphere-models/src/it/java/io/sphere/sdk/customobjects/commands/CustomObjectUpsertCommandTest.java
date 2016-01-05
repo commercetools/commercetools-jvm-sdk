@@ -38,7 +38,7 @@ public class CustomObjectUpsertCommandTest extends IntegrationTest {
         final String key = "pure-json";
         final CustomObjectUpsertCommand<JsonNode> command =
                 CustomObjectUpsertCommand.of(CustomObjectDraft.ofUnversionedUpsert(CONTAINER, key, objectNode));
-        final CustomObject<JsonNode> customObject = execute(command);
+        final CustomObject<JsonNode> customObject = client().executeBlocking(command);
         assertThat(customObject.getValue().get("bar").asText("default value")).isEqualTo(" a string");
         assertThat(customObject.getValue().get("baz").asLong(0)).isEqualTo(5);
     }
@@ -51,7 +51,7 @@ public class CustomObjectUpsertCommandTest extends IntegrationTest {
         final BinaryData value = new BinaryData(name, bytes);
         final String key = "storyBinaryData";
         final CustomObjectUpsertCommand<BinaryData> command = CustomObjectUpsertCommand.of(CustomObjectDraft.ofUnversionedUpsert(CONTAINER, key, value, BinaryData.class));
-        final BinaryData loadedValue = execute(command).getValue();
+        final BinaryData loadedValue = client().executeBlocking(command).getValue();
         assertThat(loadedValue).isEqualTo(value);
     }
 
@@ -60,7 +60,7 @@ public class CustomObjectUpsertCommandTest extends IntegrationTest {
         final String value = "hello";
         final String key = "storeFlatString";
         final CustomObjectUpsertCommand<String> command = CustomObjectUpsertCommand.of(CustomObjectDraft.ofUnversionedUpsert(CONTAINER, key, value, String.class));
-        final String loadedValue = execute(command).getValue();
+        final String loadedValue = client().executeBlocking(command).getValue();
         assertThat(loadedValue).isEqualTo(value);
     }
 
@@ -69,7 +69,7 @@ public class CustomObjectUpsertCommandTest extends IntegrationTest {
         final long value = 23;
         final String key = "storeLong";
         final CustomObjectUpsertCommand<Long> command = CustomObjectUpsertCommand.of(CustomObjectDraft.ofUnversionedUpsert(CONTAINER, key, value, Long.class));
-        final long loadedValue = execute(command).getValue();
+        final long loadedValue = client().executeBlocking(command).getValue();
         assertThat(loadedValue).isEqualTo(value);
     }
 
@@ -79,7 +79,7 @@ public class CustomObjectUpsertCommandTest extends IntegrationTest {
             final Foo newValue = new Foo("new value", 72L);
             final CustomObjectDraft<Foo> draft = CustomObjectDraft.ofUnversionedUpdate(customObject, newValue, Foo.class);
             final CustomObjectUpsertCommand<Foo> createCommand = CustomObjectUpsertCommand.of(draft);
-            final CustomObject<Foo> updatedCustomObject = execute(createCommand);
+            final CustomObject<Foo> updatedCustomObject = client().executeBlocking(createCommand);
             final Foo loadedValue = updatedCustomObject.getValue();
             assertThat(loadedValue).isEqualTo(newValue);
         });
@@ -91,11 +91,11 @@ public class CustomObjectUpsertCommandTest extends IntegrationTest {
             final Foo newValue = new Foo("new value", 72L);
             final CustomObjectDraft<Foo> draft = CustomObjectDraft.ofVersionedUpdate(customObject, newValue, Foo.class);
             final CustomObjectUpsertCommand<Foo> command = CustomObjectUpsertCommand.of(draft);
-            final CustomObject<Foo> updatedCustomObject = execute(command);
+            final CustomObject<Foo> updatedCustomObject = client().executeBlocking(command);
             final Foo loadedValue = updatedCustomObject.getValue();
             assertThat(loadedValue).isEqualTo(newValue);
             //end example parsing here
-            execute(command);
+            client().executeBlocking(command);
         });
     }
 }

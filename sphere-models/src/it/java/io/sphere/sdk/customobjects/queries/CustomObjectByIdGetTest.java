@@ -15,7 +15,7 @@ public class CustomObjectByIdGetTest extends IntegrationTest {
             final String id = existingCustomObject.getId();
             final CustomObjectByIdGet<Foo> fetch =
                     CustomObjectByIdGet.of(id, Foo.class);
-            final CustomObject<Foo> customObject = execute(fetch);
+            final CustomObject<Foo> customObject = client().executeBlocking(fetch);
             assertThat(customObject).isEqualTo(existingCustomObject);
         });
     }

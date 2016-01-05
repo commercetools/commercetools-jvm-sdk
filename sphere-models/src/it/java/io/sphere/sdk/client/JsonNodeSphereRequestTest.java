@@ -8,8 +8,6 @@ import io.sphere.sdk.test.IntegrationTest;
 import io.sphere.sdk.json.SphereJsonUtils;
 import org.junit.Test;
 
-import java.util.Optional;
-
 import static io.sphere.sdk.categories.CategoryFixtures.withCategory;
 import static io.sphere.sdk.http.HttpMethod.*;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -26,7 +24,7 @@ public class JsonNodeSphereRequestTest extends IntegrationTest {
             final String newName = "New Name";
             changeNameUpdateAction.put("action", "changeName").set("name", objectMapper.createObjectNode().put("en", newName));
             actions.add(changeNameUpdateAction);
-            final JsonNode jsonNode = execute(JsonNodeSphereRequest.of(POST, "/categories/" + category.getId(), body));
+            final JsonNode jsonNode = client().executeBlocking(JsonNodeSphereRequest.of(POST, "/categories/" + category.getId(), body));
             assertThat(jsonNode.get("name").get("en").asText()).isEqualTo(newName);
         });
     }

@@ -1,5 +1,6 @@
 package io.sphere.sdk.products.search;
 
+import io.sphere.sdk.client.SphereRequest;
 import io.sphere.sdk.products.*;
 import io.sphere.sdk.products.attributes.*;
 import io.sphere.sdk.models.LocalizedString;
@@ -68,15 +69,15 @@ public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
 
     @BeforeClass
     public static void setupProducts() {
-        productType = execute(ProductTypeQuery.of().byName(PRODUCT_TYPE_NAME)).head()
+        productType = client().executeBlocking(ProductTypeQuery.of().byName(PRODUCT_TYPE_NAME)).head()
                 .orElseGet(() -> createProductType());
 
-        evilProductType = execute(ProductTypeQuery.of().byName(EVIL_PRODUCT_TYPE_NAME)).head()
+        evilProductType = client().executeBlocking(ProductTypeQuery.of().byName(EVIL_PRODUCT_TYPE_NAME)).head()
                 .orElseGet(() -> createEvilProductType());
 
         final Query<Product> query = ProductQuery.of()
                 .withPredicates(m -> m.masterData().staged().masterVariant().sku().isIn(asList(SKU1, SKU2, SKU3, SKU_A, SKU_B)));
-        final List<Product> products = execute(query).getResults();
+        final List<Product> products = client().executeBlocking(query).getResults();
 
         final Function<String, Optional<Product>> findBySku =
                 sku -> products.stream().filter(p -> sku.equals(p.getMasterData().getStaged().getMasterVariant().getSku())).findFirst();
@@ -94,12 +95,14 @@ public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
 
     protected static PagedSearchResult<ProductProjection> executeSearch(final ProductProjectionSearch search) {
         final List<String> ids = asList(product1.getId(), product2.getId(), product3.getId());
-        return execute(search.plusQueryFilters(filter -> filter.id().byAny(ids)));
+        final ProductProjectionSearch sphereRequest = search.plusQueryFilters(filter -> filter.id().byAny(ids));
+        return client().executeBlocking(sphereRequest);
     }
 
     protected static PagedSearchResult<ProductProjection> executeEvilSearch(final ProductProjectionSearch search) {
         final List<String> ids = asList(evilProduct1.getId(), evilProduct2.getId());
-        return execute(search.plusQueryFilters(filter -> filter.id().byAny(ids)));
+        final ProductProjectionSearch sphereRequest = search.plusQueryFilters(filter -> filter.id().byAny(ids));
+        return client().executeBlocking(sphereRequest);
     }
 
     private static ProductType createProductType() {
@@ -107,14 +110,14 @@ public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
         final AttributeDefinition sizeAttrDef = AttributeDefinitionBuilder.of(ATTR_NAME_SIZE, ofEnglishLocale(ATTR_NAME_SIZE), NumberAttributeType.of()).build();
         final ProductTypeDraft productTypeDraft = ProductTypeDraft.of(randomKey(), PRODUCT_TYPE_NAME, "", asList(colorAttrDef, sizeAttrDef));
         final ProductTypeCreateCommand productTypeCreateCommand = ProductTypeCreateCommand.of(productTypeDraft);
-        return execute(productTypeCreateCommand);
+        return client().executeBlocking(productTypeCreateCommand);
     }
 
     private static ProductType createEvilProductType() {
         final AttributeDefinition evilAttrDef = AttributeDefinitionBuilder.of(ATTR_NAME_EVIL, ofEnglishLocale(ATTR_NAME_EVIL), StringAttributeType.of()).build();
         final ProductTypeDraft evilProductTypeDraft = ProductTypeDraft.of(randomKey(), EVIL_PRODUCT_TYPE_NAME, "", singletonList(evilAttrDef));
         final ProductTypeCreateCommand evilProductTypeCreateCommand = ProductTypeCreateCommand.of(evilProductTypeDraft);
-        return execute(evilProductTypeCreateCommand);
+        return client().executeBlocking(evilProductTypeCreateCommand);
     }
 
     private static Product createTestProduct(final ProductType productType, final String germanName, final String englishName,
@@ -131,7 +134,7 @@ public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
                 .build();
         final ProductDraft productDraft = ProductDraftBuilder.of(productType, name, name.slugifiedUnique(), masterVariant)
                 .plusVariants(variant).build();
-        return execute(ProductCreateCommand.of(productDraft));
+        return client().executeBlocking(ProductCreateCommand.of(productDraft));
     }
 
     private static Product createEvilTestProduct(final ProductType productType, final String germanName, final String evilValue, final String sku) {
@@ -141,6 +144,6 @@ public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
                 .sku(sku)
                 .build();
         final ProductDraft productDraft = ProductDraftBuilder.of(productType, name, name.slugifiedUnique(), masterVariant).build();
-        return execute(ProductCreateCommand.of(productDraft));
+        return client().executeBlocking(ProductCreateCommand.of(productDraft));
     }
 }

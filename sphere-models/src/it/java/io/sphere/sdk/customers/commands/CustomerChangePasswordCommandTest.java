@@ -23,14 +23,14 @@ public class CustomerChangePasswordCommandTest extends CustomerIntegrationTest {
         withCustomer(client(), customer -> {
             final String oldPassword = PASSWORD;
             final String newPassword = "newSecret";
-            final Customer updatedCustomer = execute(CustomerChangePasswordCommand.of(customer, oldPassword, newPassword));
+            final Customer updatedCustomer = client().executeBlocking(CustomerChangePasswordCommand.of(customer, oldPassword, newPassword));
             assertThat(customer.getPassword()).isNotEqualTo(updatedCustomer.getPassword());
             final CustomerSignInResult signInResult =
-                    execute(CustomerSignInCommand.of(customer.getEmail(), newPassword));
+                    client().executeBlocking(CustomerSignInCommand.of(customer.getEmail(), newPassword));
             assertThat(signInResult.getCustomer().hasSameIdAs(updatedCustomer))
                     .overridingErrorMessage("sign in works with new password")
                     .isTrue();
-            final Throwable throwable = catchThrowable(() -> execute(CustomerSignInCommand.of(customer.getEmail(), oldPassword)));
+            final Throwable throwable = catchThrowable(() -> client().executeBlocking(CustomerSignInCommand.of(customer.getEmail(), oldPassword)));
 
             assertThat(throwable).isInstanceOf(ErrorResponseException.class);
             final ErrorResponseException errorResponseException = (ErrorResponseException) throwable;
@@ -46,15 +46,15 @@ public class CustomerChangePasswordCommandTest extends CustomerIntegrationTest {
 
             final String oldPassword = PASSWORD;
             final String newPassword = "newSecret";
-            final Customer updatedCustomer = execute(CustomerChangePasswordCommand.of(customer, oldPassword, newPassword));
+            final Customer updatedCustomer = client().executeBlocking(CustomerChangePasswordCommand.of(customer, oldPassword, newPassword));
             assertThat(customer.getPassword()).isNotEqualTo(updatedCustomer.getPassword());
             final CustomerSignInResult signInResult =
-                    execute(CustomerSignInCommand.of(customer.getEmail(), newPassword));
+                    client().executeBlocking(CustomerSignInCommand.of(customer.getEmail(), newPassword));
             assertThat(signInResult.getCustomer().hasSameIdAs(updatedCustomer))
                     .overridingErrorMessage("sign in works with new password")
                     .isTrue();
             try {
-                execute(CustomerSignInCommand.of(customer.getEmail(), oldPassword));
+                client().executeBlocking(CustomerSignInCommand.of(customer.getEmail(), oldPassword));
                 fail();
             } catch (final ErrorResponseException e) {
                 assertThat(e.hasErrorCode(CustomerInvalidCredentials.CODE)).isTrue();

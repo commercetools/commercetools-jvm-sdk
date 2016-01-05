@@ -36,13 +36,13 @@ public class PaymentCreateCommandTest extends IntegrationTest {
                     .customer(customer)
                     .paymentMethodInfo(paymentMethodInfo)
                     ;
-            final Payment payment = execute(PaymentCreateCommand.of(paymentDraftBuilder.build()));
+            final Payment payment = client().executeBlocking(PaymentCreateCommand.of(paymentDraftBuilder.build()));
 
             assertThat(payment.getCustomer()).isEqualTo(payment.getCustomer());
             assertThat(payment.getPaymentMethodInfo()).isEqualTo(paymentMethodInfo);
             assertThat(payment.getAmountPlanned()).isEqualTo(totalAmount);
 
-            final PagedQueryResult<PaymentCreatedMessage> pagedQueryResult = execute(MessageQuery.of()
+            final PagedQueryResult<PaymentCreatedMessage> pagedQueryResult = client().executeBlocking(MessageQuery.of()
                     .withPredicates(m -> m.resource().is(payment))
                     .forMessageType(PaymentCreatedMessage.MESSAGE_HINT));
 
@@ -50,7 +50,7 @@ public class PaymentCreateCommandTest extends IntegrationTest {
             assertThat(paymentCreatedMessage.getPayment().getId()).isEqualTo(payment.getId());
             assertThat(paymentCreatedMessage.getResource().getId()).isEqualTo(payment.getId());
 
-            execute(PaymentDeleteCommand.of(payment));
+            client().executeBlocking(PaymentDeleteCommand.of(payment));
         }));
     }
 
@@ -81,7 +81,7 @@ public class PaymentCreateCommandTest extends IntegrationTest {
                         .paymentMethodInfo(paymentMethodInfo)
                         .paymentStatus(paymentStatus)
                         .transactions(transactions);
-                final Payment payment = execute(PaymentCreateCommand.of(paymentDraftBuilder.build()));
+                final Payment payment = client().executeBlocking(PaymentCreateCommand.of(paymentDraftBuilder.build()));
 
                 assertThat(payment.getCustomer()).isEqualTo(payment.getCustomer());
                 assertThat(payment.getPaymentMethodInfo()).isEqualTo(paymentMethodInfo);
@@ -91,7 +91,7 @@ public class PaymentCreateCommandTest extends IntegrationTest {
                 assertThat(payment.getInterfaceId()).isEqualTo(interfaceId);
                 assertThat(payment.getTransactions().get(0).getTimestamp()).isEqualTo(transactions.get(0).getTimestamp());
 
-                execute(PaymentDeleteCommand.of(payment));
+                client().executeBlocking(PaymentDeleteCommand.of(payment));
             });
             return customer;
         });
@@ -134,7 +134,7 @@ public class PaymentCreateCommandTest extends IntegrationTest {
                             .interfaceInteractions(asList("foo1", "foo2").stream()
                                     .map(s -> CustomFieldsDraft.ofTypeKeyAndObjects(type.getKey(), singletonMap(TypeFixtures.STRING_FIELD_NAME, s)))
                                     .collect(toList()));
-                    final Payment payment = execute(PaymentCreateCommand.of(paymentDraftBuilder.build()));
+                    final Payment payment = client().executeBlocking(PaymentCreateCommand.of(paymentDraftBuilder.build()));
 
                     softAssert(s -> {
                         s.assertThat(payment.getCustomer()).isEqualTo(payment.getCustomer());
@@ -157,7 +157,7 @@ public class PaymentCreateCommandTest extends IntegrationTest {
                         s.assertThat(payment.getInterfaceInteractions().get(0).getFieldAsString(TypeFixtures.STRING_FIELD_NAME)).isEqualTo("foo1");
                         s.assertThat(payment.getInterfaceInteractions().get(1).getFieldAsString(TypeFixtures.STRING_FIELD_NAME)).isEqualTo("foo2");
                     });
-                    execute(PaymentDeleteCommand.of(payment));
+                    client().executeBlocking(PaymentDeleteCommand.of(payment));
                 }));
                 return type;
             });

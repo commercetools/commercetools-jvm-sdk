@@ -15,7 +15,7 @@ public class CustomObjectCustomJsonMappingUpsertCommandTest extends IntegrationT
         final GsonFoo value = new GsonFoo("bar", 5L);
         final GsonFooCustomObjectDraft draft = new GsonFooCustomObjectDraft("container", "key", value);
         final GsonFooCustomObjectUpsertCommand command = new GsonFooCustomObjectUpsertCommand(draft);
-        final CustomObject<GsonFoo> customObject = execute(command);
+        final CustomObject<GsonFoo> customObject = client().executeBlocking(command);
         final GsonFoo actualValue = customObject.getValue();
         assertThat(actualValue).isEqualTo(value);
     }

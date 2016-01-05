@@ -10,6 +10,7 @@ import io.sphere.sdk.categories.commands.CategoryUpdateCommand;
 import io.sphere.sdk.categories.commands.updateactions.ChangeParent;
 import io.sphere.sdk.categories.queries.CategoryQuery;
 import io.sphere.sdk.client.BlockingSphereClient;
+import io.sphere.sdk.client.SphereRequest;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Referenceable;
@@ -169,7 +170,7 @@ public class CategoryDocumentationTest extends IntegrationTest {
                         "            14 boots\n");
 
         final Category men = categoryTree.findByExternalId("1").get();
-        execute(CategoryDeleteCommand.of(men));
+        client().executeBlocking(CategoryDeleteCommand.of(men));
         final CategoryTree categoryTreeAfterDeletion = fetchCurrentTree();
         final String actual = CategoryTreeTextRepresentation.visualizeTree(categoryTreeAfterDeletion);
         assertThat(actual).isEqualTo(
@@ -210,7 +211,7 @@ public class CategoryDocumentationTest extends IntegrationTest {
         final Category top = categoryTree.findByExternalId("0").get();
 
         //make mensClothing a child of top
-        execute(CategoryUpdateCommand.of(mensClothing, ChangeParent.of(top)));
+        client().executeBlocking(CategoryUpdateCommand.of(mensClothing, ChangeParent.of(top)));
 
         final CategoryTree categoryTreeAfterMovement = fetchCurrentTree();
         final String actual = CategoryTreeTextRepresentation.visualizeTree(categoryTreeAfterMovement);
@@ -259,9 +260,10 @@ public class CategoryDocumentationTest extends IntegrationTest {
         final Category jeansCategory = categoryTree.findByExternalId("8").get();
         withProductInCategory(client(), jeansCategory, jeansProduct -> {
             withProductInCategory(client(), tshirtCategory, tshirtProduct -> {
+                final ProductProjectionQuery sphereRequest = ProductProjectionQuery.ofStaged().withPredicates(m -> m.categories().isIn(asList(mensClothingCategory)));
                 final PagedQueryResult<ProductProjection> resultForParentCategory =
                         //query for the parent category
-                        execute(ProductProjectionQuery.ofStaged().withPredicates(m -> m.categories().isIn(asList(mensClothingCategory))));
+                        client().executeBlocking(sphereRequest);
                 assertThat(resultForParentCategory.getResults())
                         .overridingErrorMessage(
                                 "if a product is in a category," +
@@ -273,7 +275,7 @@ public class CategoryDocumentationTest extends IntegrationTest {
                 assertThat(query.predicates().get(0))
                         .isEqualTo(QueryPredicate.of(format("categories(id in (\"%s\", \"%s\"))", tshirtCategory.getId(), jeansCategory.getId())));
                 final PagedQueryResult<ProductProjection> resultForDirectCategories =
-                        execute(query);
+                        client().executeBlocking(query);
                 assertThat(resultForDirectCategories.getResults())
                         .hasSize(2)
                         .overridingErrorMessage("if a product is in a category, you can directy query for it")

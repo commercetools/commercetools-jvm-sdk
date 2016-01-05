@@ -32,7 +32,7 @@ public class StateCreateCommandTest extends IntegrationTest {
                 .withName(name)
                 .withInitial(true);
 
-        final State state = execute(StateCreateCommand.of(stateDraft));
+        final State state = client().executeBlocking(StateCreateCommand.of(stateDraft));
 
         assertThat(state.getKey()).isEqualTo(KEY);
         assertThat(state.getType()).isEqualTo(StateType.LINE_ITEM_STATE);

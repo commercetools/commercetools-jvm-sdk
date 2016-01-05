@@ -27,14 +27,14 @@ public class CustomerCustomFieldsTest extends IntegrationTest {
 
 
             final CustomerDraft customerDraft = CustomerDraftBuilder.of(newCustomerDraft()).custom(customFieldsDraft).build();
-            final Customer customer = execute(CustomerCreateCommand.of(customerDraft)).getCustomer();
+            final Customer customer = client().executeBlocking(CustomerCreateCommand.of(customerDraft)).getCustomer();
             assertThat(customer.getCustom().getField(STRING_FIELD_NAME, TypeReferences.stringTypeReference())).isEqualTo("a value");
 
-            final Customer updatedCustomer = execute(CustomerUpdateCommand.of(customer, SetCustomField.ofObject(STRING_FIELD_NAME, "a new value")));
+            final Customer updatedCustomer = client().executeBlocking(CustomerUpdateCommand.of(customer, SetCustomField.ofObject(STRING_FIELD_NAME, "a new value")));
             assertThat(updatedCustomer.getCustom().getField(STRING_FIELD_NAME, TypeReferences.stringTypeReference())).isEqualTo("a new value");
 
             //clean up
-            execute(CustomerDeleteCommand.of(updatedCustomer));
+            client().executeBlocking(CustomerDeleteCommand.of(updatedCustomer));
             return type;
         });
     }
@@ -45,11 +45,11 @@ public class CustomerCustomFieldsTest extends IntegrationTest {
            withCustomer(client(), customer -> {
                final HashMap<String, Object> fields = new HashMap<>();
                fields.put(STRING_FIELD_NAME, "hello");
-               final Customer updatedCustomer = execute(CustomerUpdateCommand.of(customer, SetCustomType.ofTypeIdAndObjects(type.getId(), fields)));
+               final Customer updatedCustomer = client().executeBlocking(CustomerUpdateCommand.of(customer, SetCustomType.ofTypeIdAndObjects(type.getId(), fields)));
                assertThat(updatedCustomer.getCustom().getType()).isEqualTo(type.toReference());
                assertThat(updatedCustomer.getCustom().getField(STRING_FIELD_NAME, TypeReferences.stringTypeReference())).isEqualTo("hello");
 
-               final Customer updated2 = execute(CustomerUpdateCommand.of(updatedCustomer, SetCustomType.ofRemoveType()));
+               final Customer updated2 = client().executeBlocking(CustomerUpdateCommand.of(updatedCustomer, SetCustomType.ofRemoveType()));
                assertThat(updated2.getCustom()).isNull();
            });
             return type;

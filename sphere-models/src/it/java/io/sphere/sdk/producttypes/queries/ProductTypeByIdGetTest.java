@@ -11,7 +11,7 @@ public class ProductTypeByIdGetTest extends IntegrationTest {
     @Test
     public void execution() {
         withProductType(client(), productType -> {
-            final ProductType loadedProductType = execute(ProductTypeByIdGet.of(productType));
+            final ProductType loadedProductType = client().executeBlocking(ProductTypeByIdGet.of(productType));
             assertThat(loadedProductType).isEqualTo(productType);
         });
     }

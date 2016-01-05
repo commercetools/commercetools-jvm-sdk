@@ -27,8 +27,8 @@ public class ZoneCreateCommandTest extends IntegrationTest {
         final Set<CountryCode> euAndSwissCountries = asSet(AT, BE, CH);//not complete, but you get the idea
         final ZoneDraft draft = ZoneDraft.ofCountries("zone1", euAndSwissCountries, "EU and Swiss");
         final ZoneCreateCommand createCommand = ZoneCreateCommand.of(draft);
-        final Zone zone = execute(createCommand);
+        final Zone zone = client().executeBlocking(createCommand);
         //end example parsing here
-        execute(ZoneDeleteCommand.of(zone));
+        client().executeBlocking(ZoneDeleteCommand.of(zone));
     }
 }

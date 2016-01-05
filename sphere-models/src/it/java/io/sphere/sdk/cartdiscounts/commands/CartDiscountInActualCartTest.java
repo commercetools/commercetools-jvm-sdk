@@ -29,7 +29,7 @@ public class CartDiscountInActualCartTest extends IntegrationTest {
     public void createACartDiscountAndGetTheDiscountedValueFromACart() throws Exception {
         withCustomer(client(), customer -> {
                     withFilledCart(client(), cart -> {
-                        final Cart cartWithCustomer = execute(CartUpdateCommand.of(cart, SetCustomerId.ofCustomer(customer)));
+                        final Cart cartWithCustomer = client().executeBlocking(CartUpdateCommand.of(cart, SetCustomerId.ofCustomer(customer)));
 
                         final LineItem undiscountedLineItem = cart.getLineItems().get(0);
                         assertThat(undiscountedLineItem.getDiscountedPricePerQuantity()).isEmpty();
@@ -43,8 +43,8 @@ public class CartDiscountInActualCartTest extends IntegrationTest {
                         final AbsoluteCartDiscountValue value = CartDiscountValue.ofAbsolute(discountAmount);
                         final CartDiscountDraft discountDraft = CartDiscountDraftBuilder.of(name, cartPredicate, value, LineItemsTarget.ofAll(), randomSortOrder(), false)
                                 .build();
-                        final CartDiscount cartDiscount = execute(CartDiscountCreateCommand.of(discountDraft));
-                        final Cart cartIncludingDiscount = execute(CartUpdateCommand.of(cartWithCustomer, Recalculate.of()));
+                        final CartDiscount cartDiscount = client().executeBlocking(CartDiscountCreateCommand.of(discountDraft));
+                        final Cart cartIncludingDiscount = client().executeBlocking(CartUpdateCommand.of(cartWithCustomer, Recalculate.of()));
 
                         assertThat(cartIncludingDiscount.getTotalPrice()).
                                 isEqualTo(cart.getTotalPrice().subtract(discountAmount));
@@ -82,10 +82,10 @@ public class CartDiscountInActualCartTest extends IntegrationTest {
                                 .plusPredicates(m -> m.lineItems().discountedPricePerQuantity().discountedPrice().value().centAmount().is(discountedPrice.getValue().query(MonetaryUtil.minorUnits())))
                                 .plusPredicates(m -> m.lineItems().discountedPricePerQuantity().quantity().is(lineItemWithDiscount.getDiscountedPricePerQuantity().get(0).getQuantity()))
                                 .plusPredicates(m -> m.id().is(cart.getId()));
-                        assertThat(execute(cartQuery).head().get().getId()).as("line item queries").isEqualTo(cart.getId());
+                        assertThat(client().executeBlocking(cartQuery).head().get().getId()).as("line item queries").isEqualTo(cart.getId());
 
                         //clean up
-                        execute(CartDiscountDeleteCommand.of(cartDiscount));
+                        client().executeBlocking(CartDiscountDeleteCommand.of(cartDiscount));
                     });
                 }
         );

@@ -63,7 +63,7 @@ public class OrderImportCommandTest extends IntegrationTest {
                     .country(DE).build();
             final OrderImportCommand cmd = OrderImportCommand.of(orderImportDraft);
 
-            final Order order = execute(cmd);
+            final Order order = client().executeBlocking(cmd);
 
             assertThat(order.getOrderState()).isEqualTo(orderState);
             assertThat(order.getTotalPrice()).isEqualTo(amount);
@@ -393,7 +393,7 @@ public class OrderImportCommandTest extends IntegrationTest {
             final OrderImportDraft orderImportDraft = orderImportDraftBuilder.build();
             final OrderImportCommand cmd = OrderImportCommand.of(orderImportDraft);
 
-            final Order order = execute(cmd);
+            final Order order = client().executeBlocking(cmd);
             orderConsumer.accept(order);
             client().executeBlocking(OrderDeleteCommand.of(order));
         });

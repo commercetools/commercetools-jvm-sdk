@@ -28,7 +28,7 @@ public class CartDiscountUpdateCommandTest extends IntegrationTest {
             assertThat(cartDiscount.getValue()).isNotEqualTo(newValue);
 
             final CartDiscount updatedDiscount =
-                    execute(CartDiscountUpdateCommand.of(cartDiscount, ChangeValue.of(newValue)));
+                    client().executeBlocking(CartDiscountUpdateCommand.of(cartDiscount, ChangeValue.of(newValue)));
 
             assertThat(updatedDiscount.getValue()).isEqualTo(newValue);
         });
@@ -42,7 +42,7 @@ public class CartDiscountUpdateCommandTest extends IntegrationTest {
             assertThat(cartDiscount.getCartPredicate()).isNotEqualTo(newPredicate);
 
             final CartDiscount updatedDiscount =
-                    execute(CartDiscountUpdateCommand.of(cartDiscount, ChangeCartPredicate.of(newPredicate)));
+                    client().executeBlocking(CartDiscountUpdateCommand.of(cartDiscount, ChangeCartPredicate.of(newPredicate)));
 
             assertThat(updatedDiscount.getCartPredicate()).isEqualTo(newPredicate);
         });
@@ -57,7 +57,7 @@ public class CartDiscountUpdateCommandTest extends IntegrationTest {
             assertThat(cartDiscount.getTarget()).isNotEqualTo(newTarget);
 
             final CartDiscount updatedDiscount =
-                    execute(CartDiscountUpdateCommand.of(cartDiscount, ChangeTarget.of(newTarget)));
+                    client().executeBlocking(CartDiscountUpdateCommand.of(cartDiscount, ChangeTarget.of(newTarget)));
 
             assertThat(updatedDiscount.getTarget()).isEqualTo(newTarget);
         });
@@ -71,7 +71,7 @@ public class CartDiscountUpdateCommandTest extends IntegrationTest {
             assertThat(cartDiscount.isActive()).isNotEqualTo(newIsActice);
 
             final CartDiscount updatedDiscount =
-                    execute(CartDiscountUpdateCommand.of(cartDiscount, ChangeIsActive.of(newIsActice)));
+                    client().executeBlocking(CartDiscountUpdateCommand.of(cartDiscount, ChangeIsActive.of(newIsActice)));
 
             assertThat(updatedDiscount.isActive()).isEqualTo(newIsActice);
         });
@@ -85,12 +85,12 @@ public class CartDiscountUpdateCommandTest extends IntegrationTest {
             assertThat(cartDiscount.getName()).isNotEqualTo(newName);
 
             final CartDiscount updatedDiscount =
-                    execute(CartDiscountUpdateCommand.of(cartDiscount, ChangeName.of(newName)));
+                    client().executeBlocking(CartDiscountUpdateCommand.of(cartDiscount, ChangeName.of(newName)));
 
             assertThat(updatedDiscount.getName()).isEqualTo(newName);
 
             //clean up test, cart discount is reused by name
-            execute(CartDiscountUpdateCommand.of(updatedDiscount, ChangeName.of(cartDiscount.getName())));
+            client().executeBlocking(CartDiscountUpdateCommand.of(updatedDiscount, ChangeName.of(cartDiscount.getName())));
         });
     }
 
@@ -102,7 +102,7 @@ public class CartDiscountUpdateCommandTest extends IntegrationTest {
             assertThat(cartDiscount.getDescription()).isNotEqualTo(newDescription);
 
             final CartDiscount updatedDiscount =
-                    execute(CartDiscountUpdateCommand.of(cartDiscount, SetDescription.of(newDescription)));
+                    client().executeBlocking(CartDiscountUpdateCommand.of(cartDiscount, SetDescription.of(newDescription)));
 
             assertThat(updatedDiscount.getDescription()).isEqualTo(newDescription);
         });
@@ -116,7 +116,7 @@ public class CartDiscountUpdateCommandTest extends IntegrationTest {
             assertThat(cartDiscount.getSortOrder()).isNotEqualTo(newSortOrder);
 
             final CartDiscount updatedDiscount =
-                    execute(CartDiscountUpdateCommand.of(cartDiscount, ChangeSortOrder.of(newSortOrder)));
+                    client().executeBlocking(CartDiscountUpdateCommand.of(cartDiscount, ChangeSortOrder.of(newSortOrder)));
 
             assertThat(updatedDiscount.getSortOrder()).isEqualTo(newSortOrder);
         });
@@ -130,7 +130,7 @@ public class CartDiscountUpdateCommandTest extends IntegrationTest {
             assertThat(cartDiscount.isRequiringDiscountCode()).isNotEqualTo(newRequiresDiscountCode);
 
             final CartDiscount updatedDiscount =
-                    execute(CartDiscountUpdateCommand.of(cartDiscount, ChangeRequiresDiscountCode.of(newRequiresDiscountCode)));
+                    client().executeBlocking(CartDiscountUpdateCommand.of(cartDiscount, ChangeRequiresDiscountCode.of(newRequiresDiscountCode)));
 
             assertThat(updatedDiscount.isRequiringDiscountCode()).isEqualTo(newRequiresDiscountCode);
         });
@@ -145,7 +145,7 @@ public class CartDiscountUpdateCommandTest extends IntegrationTest {
 
             final List<UpdateAction<CartDiscount>> updateActions =
                     asList(SetValidUntil.of(dateTime.plus(7, ChronoUnit.DAYS)), SetValidFrom.of(dateTime));
-            final CartDiscount updatedDiscount = execute(CartDiscountUpdateCommand.of(cartDiscount, updateActions));
+            final CartDiscount updatedDiscount = client().executeBlocking(CartDiscountUpdateCommand.of(cartDiscount, updateActions));
 
             assertThat(updatedDiscount.getValidFrom()).isEqualTo(dateTime);
         });
@@ -159,7 +159,7 @@ public class CartDiscountUpdateCommandTest extends IntegrationTest {
             assertThat(cartDiscount.getValidUntil()).isNotEqualTo(dateTime);
 
             final CartDiscount updatedDiscount =
-                    execute(CartDiscountUpdateCommand.of(cartDiscount, SetValidUntil.of(dateTime)));
+                    client().executeBlocking(CartDiscountUpdateCommand.of(cartDiscount, SetValidUntil.of(dateTime)));
 
             assertThat(updatedDiscount.getValidUntil()).isEqualTo(dateTime);
         });

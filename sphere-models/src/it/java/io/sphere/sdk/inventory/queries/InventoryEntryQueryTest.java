@@ -20,7 +20,7 @@ public class InventoryEntryQueryTest extends IntegrationTest {
     public void pure() throws Exception {
         withUpdateableInventoryEntry(client(), entry -> {
             final Query<InventoryEntry> query = InventoryEntryQuery.of().withSort(QuerySort.of("createdAt desc"));
-            final PagedQueryResult<InventoryEntry> result = execute(query);
+            final PagedQueryResult<InventoryEntry> result = client().executeBlocking(query);
             assertThat(result.head().get().getId()).isEqualTo(entry.getId());
             return entry;
         });
@@ -50,7 +50,7 @@ public class InventoryEntryQueryTest extends IntegrationTest {
                         .withPredicates(predicate)
                         .withSort(m -> m.id().sort().desc())
                         .withExpansionPaths(m -> m.supplyChannel());
-                final PagedQueryResult<InventoryEntry> result = execute(query);
+                final PagedQueryResult<InventoryEntry> result = client().executeBlocking(query);
                 assertThat(result.head().map(e -> e.getId())).contains(entry.getId());
                 assertThat(result.head().get().getSupplyChannel().getObj().getRoles())
                         .overridingErrorMessage("can expand supplyChannel reference")

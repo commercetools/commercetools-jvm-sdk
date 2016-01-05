@@ -28,7 +28,7 @@ public class CustomLineItemCustomFieldsTest extends IntegrationTest {
                                 .build();
                 final AddCustomLineItem updateAction = AddCustomLineItem.of(en("custom line item"), "foo", EURO_30, product.getTaxCategory(), 3L).withCustom(customFieldsDraft);
 
-                final Cart updatedCart = execute(CartUpdateCommand.of(cart, updateAction));
+                final Cart updatedCart = client().executeBlocking(CartUpdateCommand.of(cart, updateAction));
 
                 final CustomFields customFields = updatedCart.getCustomLineItems().get(0).getCustom();
                 assertThat(customFields.getFieldAsString(STRING_FIELD_NAME)).isEqualTo("a value");
@@ -46,13 +46,13 @@ public class CustomLineItemCustomFieldsTest extends IntegrationTest {
                 final SetCustomLineItemCustomType updateAction = SetCustomLineItemCustomType.
                         ofTypeIdAndObjects(type.getId(), STRING_FIELD_NAME, "a value", customLineItemId);
                 final CartUpdateCommand cartUpdateCommand = CartUpdateCommand.of(cart, updateAction);
-                final Cart updatedCart = execute(cartUpdateCommand);
+                final Cart updatedCart = client().executeBlocking(cartUpdateCommand);
 
                 final CustomLineItem lineItem = updatedCart.getCustomLineItems().get(0);
                 assertThat(lineItem.getCustom().getField(STRING_FIELD_NAME, TypeReferences.stringTypeReference()))
                         .isEqualTo("a value");
 
-                final Cart updated2 = execute(CartUpdateCommand.of(updatedCart, SetCustomLineItemCustomField.ofObject(STRING_FIELD_NAME, "a new value", lineItem.getId())));
+                final Cart updated2 = client().executeBlocking(CartUpdateCommand.of(updatedCart, SetCustomLineItemCustomField.ofObject(STRING_FIELD_NAME, "a new value", lineItem.getId())));
                 assertThat(updated2.getCustomLineItems().get(0).getCustom().getField(STRING_FIELD_NAME, TypeReferences.stringTypeReference()))
                         .isEqualTo("a new value");
                 return updated2;

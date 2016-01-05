@@ -34,7 +34,7 @@ public class SuggestQueryTest extends IntegrationTest {
                     .withStaged(true);
 
             assertEventually(() -> {
-                final SuggestionResult suggestionResult = execute(suggestQuery);
+                final SuggestionResult suggestionResult = client().executeBlocking(suggestQuery);
 
                 assertThat(suggestionResult.getSuggestionsForLocale(Locale.ENGLISH))
                         .matches(suggestionsList -> suggestionsList.stream()
@@ -58,7 +58,7 @@ public class SuggestQueryTest extends IntegrationTest {
                     .withStaged(true);
 
             assertEventually(() -> {
-                final SuggestionResult suggestionResult = execute(suggestQuery);
+                final SuggestionResult suggestionResult = client().executeBlocking(suggestQuery);
 
                 assertThat(suggestionResult.getSuggestionsForLocale(Locale.GERMAN))
                         .matches(suggestionsList -> suggestionsList.stream()
@@ -86,7 +86,7 @@ public class SuggestQueryTest extends IntegrationTest {
                     .withStaged(true);
 
             assertEventually(() -> {
-                final SuggestionResult suggestionResult = execute(suggestQuery);
+                final SuggestionResult suggestionResult = client().executeBlocking(suggestQuery);
 
                 assertThat(suggestionResult.getSuggestionsForLocale(Locale.GERMAN))
                         .matches(suggestionsList -> suggestionsList.stream()

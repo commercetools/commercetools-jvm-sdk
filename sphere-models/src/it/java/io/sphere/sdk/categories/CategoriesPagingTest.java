@@ -11,7 +11,7 @@ public class CategoriesPagingTest extends IntegrationTest {
     @Test
     public void overPaging() throws Exception {
         final long offset = 100000;
-        final PagedQueryResult<Category> result = execute(CategoryQuery.of().withOffset(offset));
+        final PagedQueryResult<Category> result = client().executeBlocking(CategoryQuery.of().withOffset(offset));
         assertThat(result.getOffset()).isEqualTo(100000);
         assertThat(result.size()).isEqualTo(0);
         assertThat(result.getResults().size()).isEqualTo(0);

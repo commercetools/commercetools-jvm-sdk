@@ -15,7 +15,7 @@ public class CustomerGroupCreateCommandTest extends IntegrationTest {
     public void execution() {
         final String name = "creation demo customer group name";
 
-        final CustomerGroup customerGroup = execute(CustomerGroupCreateCommand.of(name));
+        final CustomerGroup customerGroup = client().executeBlocking(CustomerGroupCreateCommand.of(name));
 
         assertThat(customerGroup.getName()).isEqualTo(name);
     }
@@ -32,8 +32,8 @@ public class CustomerGroupCreateCommandTest extends IntegrationTest {
     }
 
     private void deleteCustomerGroup() {
-        final PagedQueryResult<CustomerGroup> result = execute(CustomerGroupQuery.of()
+        final PagedQueryResult<CustomerGroup> result = client().executeBlocking(CustomerGroupQuery.of()
                 .byName("creation demo customer group name"));
-        result.getResults().forEach(customerGroup -> execute(CustomerGroupDeleteCommand.of(customerGroup)));
+        result.getResults().forEach(customerGroup -> client().executeBlocking(CustomerGroupDeleteCommand.of(customerGroup)));
     }
 }

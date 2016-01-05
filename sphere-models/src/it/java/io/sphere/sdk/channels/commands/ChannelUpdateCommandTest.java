@@ -20,7 +20,7 @@ public class ChannelUpdateCommandTest extends IntegrationTest {
     public void changeKey() throws Exception {
         withUpdatableChannelOfRole(client(), INVENTORY_SUPPLY, channel -> {
             final String newKey = randomKey();
-            final Channel updatedChannel = execute(ChannelUpdateCommand.of(channel, ChangeKey.of(newKey)));
+            final Channel updatedChannel = client().executeBlocking(ChannelUpdateCommand.of(channel, ChangeKey.of(newKey)));
             assertThat(updatedChannel.getKey()).isEqualTo(newKey).isNotEqualTo(channel.getKey());
             return updatedChannel;
         });
@@ -30,7 +30,7 @@ public class ChannelUpdateCommandTest extends IntegrationTest {
     public void changeName() throws Exception {
         withUpdatableChannelOfRole(client(), INVENTORY_SUPPLY, channel -> {
             final LocalizedString newName = randomSlug();
-            final Channel updatedChannel = execute(ChannelUpdateCommand.of(channel, ChangeName.of(newName)));
+            final Channel updatedChannel = client().executeBlocking(ChannelUpdateCommand.of(channel, ChangeName.of(newName)));
             assertThat(updatedChannel.getName()).isEqualTo(newName);
             return updatedChannel;
         });
@@ -40,7 +40,7 @@ public class ChannelUpdateCommandTest extends IntegrationTest {
     public void changeDescription() throws Exception {
         withUpdatableChannelOfRole(client(), INVENTORY_SUPPLY, channel -> {
             final LocalizedString newDescription = randomSlug();
-            final Channel updatedChannel = execute(ChannelUpdateCommand.of(channel, ChangeDescription.of(newDescription)));
+            final Channel updatedChannel = client().executeBlocking(ChannelUpdateCommand.of(channel, ChangeDescription.of(newDescription)));
             assertThat(updatedChannel.getDescription()).isEqualTo(newDescription);
             return updatedChannel;
         });
@@ -50,7 +50,7 @@ public class ChannelUpdateCommandTest extends IntegrationTest {
     public void setRoles() throws Exception {
         withUpdatableChannelOfRole(client(), ORDER_IMPORT, channel -> {
             final Set<ChannelRole> roles = asSet(ORDER_EXPORT, INVENTORY_SUPPLY);
-            final Channel updatedChannel = execute(ChannelUpdateCommand.of(channel, SetRoles.of(roles)));
+            final Channel updatedChannel = client().executeBlocking(ChannelUpdateCommand.of(channel, SetRoles.of(roles)));
             assertThat(updatedChannel.getRoles()).containsOnly(ORDER_EXPORT, INVENTORY_SUPPLY);
             return updatedChannel;
         });
@@ -60,7 +60,7 @@ public class ChannelUpdateCommandTest extends IntegrationTest {
     public void addRoles() throws Exception {
         withUpdatableChannelOfRole(client(), ORDER_IMPORT, channel -> {
             final Set<ChannelRole> roles = asSet(ORDER_EXPORT, INVENTORY_SUPPLY);
-            final Channel updatedChannel = execute(ChannelUpdateCommand.of(channel, AddRoles.of(roles)));
+            final Channel updatedChannel = client().executeBlocking(ChannelUpdateCommand.of(channel, AddRoles.of(roles)));
             assertThat(updatedChannel.getRoles()).containsOnly(ORDER_EXPORT, INVENTORY_SUPPLY, ORDER_IMPORT);
             return updatedChannel;
         });
@@ -70,7 +70,7 @@ public class ChannelUpdateCommandTest extends IntegrationTest {
     public void removeRoles() throws Exception {
         withUpdatableChannelOfRole(client(), asSet(ORDER_IMPORT, PRIMARY), channel -> {
             final Set<ChannelRole> roles = asSet(ORDER_IMPORT);
-            final Channel updatedChannel = execute(ChannelUpdateCommand.of(channel, RemoveRoles.of(roles)));
+            final Channel updatedChannel = client().executeBlocking(ChannelUpdateCommand.of(channel, RemoveRoles.of(roles)));
             assertThat(updatedChannel.getRoles()).containsOnly(PRIMARY);
             return updatedChannel;
         });

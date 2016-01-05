@@ -24,7 +24,7 @@ public class FlowTest extends IntegrationTest {
     @Before
     public void setUp() throws Exception {
         final CustomObjectByKeyGet<JsonNode> fetchByKey = CustomObjectByKeyGet.ofJsonNode(CONTAINER, KEY);
-        Optional.ofNullable(execute(fetchByKey)).ifPresent(o -> execute(CustomObjectDeleteCommand.ofJsonNode(o)));
+        Optional.ofNullable(client().executeBlocking(fetchByKey)).ifPresent(o -> client().executeBlocking(CustomObjectDeleteCommand.ofJsonNode(o)));
     }
 
     @Test
@@ -37,17 +37,17 @@ public class FlowTest extends IntegrationTest {
         final CustomObjectByKeyGet<CustomerNumberCounter> fetch =
                 CustomObjectByKeyGet.of(CONTAINER, KEY, CustomerNumberCounter.class);
 
-        final CustomObject<CustomerNumberCounter> loadedCustomObject = execute(fetch);
+        final CustomObject<CustomerNumberCounter> loadedCustomObject = client().executeBlocking(fetch);
         final long newCustomerNumber = loadedCustomObject.getValue().getLastUsedNumber() + 1;
         final CustomerNumberCounter value = new CustomerNumberCounter(newCustomerNumber, "whateverid");
         final long version = loadedCustomObject.getVersion();
         final CustomObjectDraft<CustomerNumberCounter> draft = CustomObjectDraft.ofVersionedUpsert(CONTAINER, KEY, value, version, CustomerNumberCounter.class);
         final CustomObjectUpsertCommand<CustomerNumberCounter> updateCommand = CustomObjectUpsertCommand.of(draft);
-        final CustomObject<CustomerNumberCounter> updatedCustomObject = execute(updateCommand);
+        final CustomObject<CustomerNumberCounter> updatedCustomObject = client().executeBlocking(updateCommand);
         assertThat(updatedCustomObject.getValue().getLastUsedNumber()).isEqualTo(newCustomerNumber);
 
         try {
-            execute(updateCommand);
+            client().executeBlocking(updateCommand);
             assertThat(true).overridingErrorMessage("optimistic concurrency control").isFalse();
         } catch (final ConcurrentModificationException e) {
             //start again at the top
@@ -64,7 +64,7 @@ public class FlowTest extends IntegrationTest {
 
         final Command<CustomObject<CustomerNumberCounter>> initialSettingCommand = CustomObjectUpsertCommand.of(draft);
 
-        final CustomObject<CustomerNumberCounter> initialCounterLoaded = execute(initialSettingCommand);
+        final CustomObject<CustomerNumberCounter> initialCounterLoaded = client().executeBlocking(initialSettingCommand);
         assertThat(initialCounterLoaded.getValue().getLastUsedNumber())
                 .overridingErrorMessage("We have created the object")
                 .isEqualTo(lastUsedNumber);
@@ -73,7 +73,7 @@ public class FlowTest extends IntegrationTest {
                 .isEqualTo(initialVersionNumber + 1);
 
         try {
-            execute(initialSettingCommand);
+            client().executeBlocking(initialSettingCommand);
             assertThat(true).overridingErrorMessage("execute the initial command a second time will throw an exception").isFalse();
         } catch (final ConcurrentModificationException e) {
             assertThat(true).overridingErrorMessage("Even in a distributed system the nodes will not override existing values with the initial value.").isTrue();

@@ -17,7 +17,7 @@ public class TaxCategoryUpdateCommandTest extends IntegrationTest {
     public void changeName() {
         withUpdateableTaxCategory(client(), taxCategory -> {
             final String newName = randomKey();
-            final TaxCategory updatedTaxCategory = execute(TaxCategoryUpdateCommand.of(taxCategory, ChangeName.of(newName)));
+            final TaxCategory updatedTaxCategory = client().executeBlocking(TaxCategoryUpdateCommand.of(taxCategory, ChangeName.of(newName)));
             assertThat(updatedTaxCategory.getName()).isEqualTo(newName);
             return updatedTaxCategory;
         });
@@ -27,7 +27,7 @@ public class TaxCategoryUpdateCommandTest extends IntegrationTest {
     public void setDescription() {
         withUpdateableTaxCategory(client(), taxCategory -> {
             final String newDescription = randomKey();
-            final TaxCategory updatedTaxCategory = execute(TaxCategoryUpdateCommand.of(taxCategory, SetDescription.of(newDescription)));
+            final TaxCategory updatedTaxCategory = client().executeBlocking(TaxCategoryUpdateCommand.of(taxCategory, SetDescription.of(newDescription)));
             assertThat(updatedTaxCategory.getDescription()).isEqualTo(newDescription);
             return updatedTaxCategory;
         });
@@ -40,7 +40,7 @@ public class TaxCategoryUpdateCommandTest extends IntegrationTest {
             final String name = "ag7";
             final CountryCode countryCode = CountryCode.AG;
             final TaxRate de7 = TaxRateBuilder.of(name, 0.07, true, countryCode).build();
-            final TaxCategory taxCategoryWithTaRate = execute(TaxCategoryUpdateCommand.of(taxCategory, AddTaxRate.of(de7)));
+            final TaxCategory taxCategoryWithTaRate = client().executeBlocking(TaxCategoryUpdateCommand.of(taxCategory, AddTaxRate.of(de7)));
             final TaxRate actual = taxCategoryWithTaRate.getTaxRates().stream().filter(rate -> name.equals(rate.getName())).findFirst().get();
             assertThat(actual.getCountry()).isEqualTo(countryCode);
             assertThat(actual.getAmount()).isEqualTo(0.07);
@@ -54,7 +54,7 @@ public class TaxCategoryUpdateCommandTest extends IntegrationTest {
 
 
             //remove tax rate
-            final TaxCategory updatedTaxCategory = execute(TaxCategoryUpdateCommand.of(taxCategoryWithTaRate, RemoveTaxRate.of(actual.getId())));
+            final TaxCategory updatedTaxCategory = client().executeBlocking(TaxCategoryUpdateCommand.of(taxCategoryWithTaRate, RemoveTaxRate.of(actual.getId())));
             assertThat(updatedTaxCategory.getTaxRates()).matches(rates -> !rates.stream().anyMatch(rate -> name.equals(rate.getName())));
 
             return updatedTaxCategory;
@@ -68,7 +68,7 @@ public class TaxCategoryUpdateCommandTest extends IntegrationTest {
             final double newAmount = old.getAmount() * 2;
             final TaxRate newTaxRate = TaxRateBuilder.of(old).amount(newAmount).build();
 
-            final TaxCategory updatedTaxCategory = execute(TaxCategoryUpdateCommand.of(taxCategory, ReplaceTaxRate.of(old.getId(), newTaxRate)));
+            final TaxCategory updatedTaxCategory = client().executeBlocking(TaxCategoryUpdateCommand.of(taxCategory, ReplaceTaxRate.of(old.getId(), newTaxRate)));
             final TaxRate actual = updatedTaxCategory.getTaxRates().get(0);
             assertThat(actual.getCountry()).isEqualTo(old.getCountry());
             assertThat(actual.getAmount()).isEqualTo(newAmount);

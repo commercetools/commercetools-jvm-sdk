@@ -24,7 +24,7 @@ public class DiscountCodeUpdateCommandTest extends IntegrationTest {
         withPersistentDiscountCode(client(), discountCode -> {
             final LocalizedString newName = randomSlug();
             final DiscountCode updatedDiscountCode =
-                    execute(DiscountCodeUpdateCommand.of(discountCode, SetName.of(newName)));
+                    client().executeBlocking(DiscountCodeUpdateCommand.of(discountCode, SetName.of(newName)));
             assertThat(updatedDiscountCode.getName()).isEqualTo(newName);
         });
     }
@@ -34,7 +34,7 @@ public class DiscountCodeUpdateCommandTest extends IntegrationTest {
         withPersistentDiscountCode(client(), discountCode -> {
             final LocalizedString newDescription = randomSlug();
             final DiscountCode updatedDiscountCode =
-                    execute(DiscountCodeUpdateCommand.of(discountCode, SetDescription.of(newDescription)));
+                    client().executeBlocking(DiscountCodeUpdateCommand.of(discountCode, SetDescription.of(newDescription)));
             assertThat(updatedDiscountCode.getDescription()).isEqualTo(newDescription);
         });
     }
@@ -48,7 +48,7 @@ public class DiscountCodeUpdateCommandTest extends IntegrationTest {
 
             final CartDiscountPredicate cartPredicate = CartDiscountPredicate.of(predicateAsString);
             final DiscountCode updatedDiscountCode =
-                    execute(DiscountCodeUpdateCommand.of(discountCode, SetCartPredicate.of(cartPredicate)));
+                    client().executeBlocking(DiscountCodeUpdateCommand.of(discountCode, SetCartPredicate.of(cartPredicate)));
             assertThat(updatedDiscountCode.getCartPredicate()).contains(cartPredicate.toSphereCartPredicate());
         });
     }
@@ -58,7 +58,7 @@ public class DiscountCodeUpdateCommandTest extends IntegrationTest {
         withPersistentDiscountCode(client(), discountCode -> {
             final long maxApplications = randomLong();
             final DiscountCode updatedDiscountCode =
-                    execute(DiscountCodeUpdateCommand.of(discountCode, SetMaxApplications.of(maxApplications)));
+                    client().executeBlocking(DiscountCodeUpdateCommand.of(discountCode, SetMaxApplications.of(maxApplications)));
             assertThat(updatedDiscountCode.getMaxApplications()).isEqualTo(maxApplications);
         });
     }
@@ -68,7 +68,7 @@ public class DiscountCodeUpdateCommandTest extends IntegrationTest {
         withPersistentDiscountCode(client(), discountCode -> {
             final long maxApplications = randomLong();
             final DiscountCode updatedDiscountCode =
-                    execute(DiscountCodeUpdateCommand.of(discountCode, SetMaxApplicationsPerCustomer.of(maxApplications)));
+                    client().executeBlocking(DiscountCodeUpdateCommand.of(discountCode, SetMaxApplicationsPerCustomer.of(maxApplications)));
             assertThat(updatedDiscountCode.getMaxApplicationsPerCustomer()).isEqualTo(maxApplications);
         });
     }
@@ -85,11 +85,11 @@ public class DiscountCodeUpdateCommandTest extends IntegrationTest {
                         listOf(oldCartDiscounts, cartDiscount.toReference());
 
                 final DiscountCode updatedDiscountCode =
-                        execute(DiscountCodeUpdateCommand.of(discountCode, ChangeCartDiscounts.of(newDiscountsList)));
+                        client().executeBlocking(DiscountCodeUpdateCommand.of(discountCode, ChangeCartDiscounts.of(newDiscountsList)));
                 assertThat(updatedDiscountCode.getCartDiscounts()).isEqualTo(newDiscountsList);
 
                 //clean up test
-                execute(DiscountCodeUpdateCommand.of(updatedDiscountCode, ChangeCartDiscounts.of(oldCartDiscounts)));
+                client().executeBlocking(DiscountCodeUpdateCommand.of(updatedDiscountCode, ChangeCartDiscounts.of(oldCartDiscounts)));
             })
         );
     }

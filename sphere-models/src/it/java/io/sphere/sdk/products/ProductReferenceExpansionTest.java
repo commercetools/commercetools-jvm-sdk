@@ -29,7 +29,7 @@ public class ProductReferenceExpansionTest extends IntegrationTest {
                     bySlug(ProductProjectionType.CURRENT, Locale.ENGLISH, englishSlugOf(product.getMasterData().getStaged())).
                     withExpansionPaths(ProductExpansionModel.of().productType()).
                     toQuery();
-            final PagedQueryResult<Product> queryResult = execute(query);
+            final PagedQueryResult<Product> queryResult = client().executeBlocking(query);
             final Reference<ProductType> productTypeReference = queryResult.head().get().getProductType();
             assertThat(productTypeReference).isExpanded();
         };
@@ -40,13 +40,13 @@ public class ProductReferenceExpansionTest extends IntegrationTest {
     public void taxCategory() throws Exception {
         TaxCategoryFixtures.withTransientTaxCategory(client(), taxCategory ->
             withProduct(client(), product -> {
-                final Product productWithTaxCategory = execute(ProductUpdateCommand.of(product, SetTaxCategory.of(taxCategory)));
+                final Product productWithTaxCategory = client().executeBlocking(ProductUpdateCommand.of(product, SetTaxCategory.of(taxCategory)));
                 assertThat(productWithTaxCategory.getTaxCategory()).isNotNull();
                 final Query<Product> query = ProductQuery.of().
                         bySlug(ProductProjectionType.CURRENT, Locale.ENGLISH, englishSlugOf(product.getMasterData().getStaged())).
                         withExpansionPaths(ProductExpansionModel.of().taxCategory()).
                         toQuery();
-                final PagedQueryResult<Product> queryResult = execute(query);
+                final PagedQueryResult<Product> queryResult = client().executeBlocking(query);
                 final Reference<TaxCategory> productTypeReference = firstOf(queryResult).getTaxCategory();
                 assertThat(productTypeReference).isExpanded();
             })

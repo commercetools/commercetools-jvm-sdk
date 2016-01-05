@@ -11,7 +11,7 @@ public class TypeByIdGetTest extends IntegrationTest {
     @Test
     public void execution() {
         TypeFixtures.withUpdateableType(client(), type -> {
-            final Type fetchedType = execute(TypeByIdGet.of(type.getId()));
+            final Type fetchedType = client().executeBlocking(TypeByIdGet.of(type.getId()));
             assertThat(fetchedType.getId()).isEqualTo(type.getId());
             return type;
         });

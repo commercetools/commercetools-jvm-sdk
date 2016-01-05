@@ -50,7 +50,7 @@ public class CustomerQueryTest extends IntegrationTest {
             final Query<Customer> query = CustomerQuery.of()
                     .byEmail(customer.getEmail())
                     .withExpansionPaths(m -> m.customerGroup());
-            final String actualCustomerGroupId = execute(query).head().get().getCustomerGroup().getObj().getId();
+            final String actualCustomerGroupId = client().executeBlocking(query).head().get().getCustomerGroup().getObj().getId();
             assertThat(actualCustomerGroupId).isEqualTo(customerGroup.getId());
         });
 
@@ -58,7 +58,7 @@ public class CustomerQueryTest extends IntegrationTest {
 
     @Test
     public void email() throws Exception {
-        final PagedQueryResult<Customer> result = execute(CustomerQuery.of().byEmail(customer.getEmail()));
+        final PagedQueryResult<Customer> result = client().executeBlocking(CustomerQuery.of().byEmail(customer.getEmail()));
         assertThat(result.getResults().get(0).getEmail()).isEqualTo(customer.getEmail());
     }
 
@@ -110,7 +110,7 @@ public class CustomerQueryTest extends IntegrationTest {
         final CustomerQueryModel model = CustomerQueryModel.of();
         final QueryPredicate<Customer> predicate = f.apply(model);
         final Query<Customer> query = CustomerQuery.of().withPredicates(predicate).withSort(model.createdAt().sort().desc());
-        final List<Customer> results = execute(query).getResults();
+        final List<Customer> results = client().executeBlocking(query).getResults();
         final List<String> ids = results.stream().map(x -> x.getId()).collect(toList());
         assertThat(ids).contains(customer.getId());
         if (checkDistraction) {
@@ -122,13 +122,13 @@ public class CustomerQueryTest extends IntegrationTest {
         final CustomerName customerName = CustomerName.ofFirstAndLastName(firstName, lastName);
         final CustomerDraft draft = CustomerDraft.of(customerName, randomEmail(CustomerQueryTest.class), "secret")
                 .withExternalId(randomString()+firstName);
-        final CustomerSignInResult signInResult = execute(CustomerCreateCommand.of(draft));
+        final CustomerSignInResult signInResult = client().executeBlocking(CustomerCreateCommand.of(draft));
         final Customer initialCustomer = signInResult.getCustomer();
 
-        final Customer updatedCustomer = execute(CustomerUpdateCommand.of(initialCustomer, asList(AddAddress.of(randomAddress()), SetCustomerGroup.of(b2cCustomerGroup(client())))));
+        final Customer updatedCustomer = client().executeBlocking(CustomerUpdateCommand.of(initialCustomer, asList(AddAddress.of(randomAddress()), SetCustomerGroup.of(b2cCustomerGroup(client())))));
 
         final SetDefaultShippingAddress shippingAddressAction = SetDefaultShippingAddress.ofAddress(updatedCustomer.getAddresses().get(0));
         final SetDefaultBillingAddress billingAddressAction = SetDefaultBillingAddress.ofAddress(updatedCustomer.getAddresses().get(0));
-        return execute(CustomerUpdateCommand.of(updatedCustomer, asList(shippingAddressAction, billingAddressAction)));
+        return client().executeBlocking(CustomerUpdateCommand.of(updatedCustomer, asList(shippingAddressAction, billingAddressAction)));
     }
 }

@@ -52,14 +52,14 @@ public class CategoriesCustomFieldsTest extends IntegrationTest {
             final CustomFieldsDraftBuilder customFieldsDraftBuilder = draftCreator.apply(type);
             final CustomFieldsDraft customFieldsDraft = customFieldsDraftBuilder.addObject(STRING_FIELD_NAME, "a value").build();
             final CategoryDraft categoryDraft = CategoryDraftBuilder.of(randomSlug(), randomSlug()).custom(customFieldsDraft).build();
-            final Category category = execute(CategoryCreateCommand.of(categoryDraft));
+            final Category category = client().executeBlocking(CategoryCreateCommand.of(categoryDraft));
             assertThat(category.getCustom().getField(STRING_FIELD_NAME, TypeReferences.stringTypeReference())).isEqualTo("a value");
 
-            final Category updatedCategory = execute(CategoryUpdateCommand.of(category, SetCustomField.ofObject(STRING_FIELD_NAME, "a new value")));
+            final Category updatedCategory = client().executeBlocking(CategoryUpdateCommand.of(category, SetCustomField.ofObject(STRING_FIELD_NAME, "a new value")));
             assertThat(updatedCategory.getCustom().getField(STRING_FIELD_NAME, TypeReferences.stringTypeReference())).isEqualTo("a new value");
 
             //clean up
-            execute(CategoryDeleteCommand.of(updatedCategory));
+            client().executeBlocking(CategoryDeleteCommand.of(updatedCategory));
             return type;
         });
     }
@@ -78,11 +78,11 @@ public class CategoriesCustomFieldsTest extends IntegrationTest {
         withUpdateableType(client(), type -> {
            withCategory(client(), category -> {
                final SetCustomType updateAction = updateActionCreator.apply(type);
-               final Category updatedCategory = execute(CategoryUpdateCommand.of(category, updateAction));
+               final Category updatedCategory = client().executeBlocking(CategoryUpdateCommand.of(category, updateAction));
                assertThat(updatedCategory.getCustom().getType()).isEqualTo(type.toReference());
                assertThat(updatedCategory.getCustom().getField(STRING_FIELD_NAME, TypeReferences.stringTypeReference())).isEqualTo("hello");
 
-               final Category updated2 = execute(CategoryUpdateCommand.of(updatedCategory, SetCustomType.ofRemoveType()));
+               final Category updated2 = client().executeBlocking(CategoryUpdateCommand.of(updatedCategory, SetCustomType.ofRemoveType()));
                assertThat(updated2.getCustom()).isNull();
            });
             return type;
@@ -97,13 +97,13 @@ public class CategoriesCustomFieldsTest extends IntegrationTest {
                    final Map<String, Object> fields = Collections.singletonMap(CAT_REFERENCE_FIELD_NAME, referencedCategory.toReference());
                    final CategoryUpdateCommand categoryUpdateCommand = CategoryUpdateCommand.of(category, SetCustomType.ofTypeIdAndObjects(type.getId(), fields));
                    final ExpansionPath<Category> expansionPath = ExpansionPath.of("custom.fields." + CAT_REFERENCE_FIELD_NAME);
-                   final Category updatedCategory = execute(categoryUpdateCommand.withExpansionPaths(expansionPath));
+                   final Category updatedCategory = client().executeBlocking(categoryUpdateCommand.withExpansionPaths(expansionPath));
 
                    final Reference<Category> createdReference = updatedCategory.getCustom().getField(CAT_REFERENCE_FIELD_NAME, TYPE_REFERENCE);
                    assertThat(createdReference).isEqualTo(referencedCategory.toReference());
                    assertThat(createdReference.getObj()).isNotNull();
 
-                   final Category loadedCat = execute(CategoryByIdGet.of(updatedCategory)
+                   final Category loadedCat = client().executeBlocking(CategoryByIdGet.of(updatedCategory)
                            .withExpansionPaths(expansionPath));
 
                    assertThat(loadedCat.getCustom().getField(CAT_REFERENCE_FIELD_NAME, TYPE_REFERENCE).getObj())
@@ -111,7 +111,7 @@ public class CategoriesCustomFieldsTest extends IntegrationTest {
                            .isNotNull();
 
 
-                   final Category updated2 = execute(CategoryUpdateCommand.of(updatedCategory, SetCustomType.ofRemoveType()));
+                   final Category updated2 = client().executeBlocking(CategoryUpdateCommand.of(updatedCategory, SetCustomType.ofRemoveType()));
                    assertThat(updated2.getCustom()).isNull();
                });
            });
@@ -128,10 +128,10 @@ public class CategoriesCustomFieldsTest extends IntegrationTest {
                 .description(en("description"))
                 .fieldDefinitions(asList(stringFieldDefinition))
                 .build();
-        final Type type = execute(TypeCreateCommand.of(typeDraft));
+        final Type type = client().executeBlocking(TypeCreateCommand.of(typeDraft));
 
         withCategory(client(), category -> {
-            assertThatThrownBy(() -> execute(CategoryUpdateCommand.of(category, SetCustomType.ofTypeIdAndObjects(type.getId(), Collections.emptyMap()))))
+            assertThatThrownBy(() -> client().executeBlocking(CategoryUpdateCommand.of(category, SetCustomType.ofTypeIdAndObjects(type.getId(), Collections.emptyMap()))))
             .isInstanceOf(ErrorResponseException.class)
                     .matches(e -> {
                         final ErrorResponseException errorResponseException = (ErrorResponseException) e;
@@ -143,7 +143,7 @@ public class CategoriesCustomFieldsTest extends IntegrationTest {
                     });
         });
 
-        execute(TypeDeleteCommand.of(type));
+        client().executeBlocking(TypeDeleteCommand.of(type));
     }
 
     @Test
@@ -154,14 +154,14 @@ public class CategoriesCustomFieldsTest extends IntegrationTest {
                 fields.put(STRING_FIELD_NAME, "foo");
                 fields.put(LOC_STRING_FIELD_NAME, LocalizedString.of(ENGLISH, "bar"));
                 final CategoryUpdateCommand categoryUpdateCommand = CategoryUpdateCommand.of(category, SetCustomType.ofTypeIdAndObjects(type.getId(), fields));
-                final Category updatedCategory = execute(categoryUpdateCommand);
+                final Category updatedCategory = client().executeBlocking(categoryUpdateCommand);
 
                 final CategoryQuery categoryQuery = CategoryQuery.of()
                         .plusPredicates(m -> m.is(category))
                         .plusPredicates(m -> m.custom().fields().ofString(STRING_FIELD_NAME).is("foo"))
                         .plusPredicates(m -> m.custom().fields().ofString("njetpresent").isNotPresent())
                         .plusPredicates(m -> m.custom().fields().ofLocalizedString(LOC_STRING_FIELD_NAME).locale(ENGLISH).is("bar"));
-                assertThat(execute(categoryQuery).head()).contains(updatedCategory);
+                assertThat(client().executeBlocking(categoryQuery).head()).contains(updatedCategory);
             });
             return type;
         });

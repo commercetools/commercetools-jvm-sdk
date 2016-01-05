@@ -11,7 +11,7 @@ public class DiscountCodeByIdGetTest extends IntegrationTest {
     @Test
     public void execution() throws Exception {
         withPersistentDiscountCode(client(), discountCode -> {
-            final DiscountCode fetchedCode = execute(DiscountCodeByIdGet.of(discountCode));
+            final DiscountCode fetchedCode = client().executeBlocking(DiscountCodeByIdGet.of(discountCode));
             assertThat(fetchedCode.getId()).isEqualTo(discountCode.getId());
         });
     }

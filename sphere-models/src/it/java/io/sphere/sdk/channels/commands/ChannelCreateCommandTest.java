@@ -20,8 +20,8 @@ public class ChannelCreateCommandTest extends IntegrationTest {
     @Before
     @After
     public void setUp() throws Exception {
-        final PagedQueryResult<Channel> queryResult = execute(ChannelQuery.of().byKey(channelKey()));
-        queryResult.head().ifPresent(c -> execute(ChannelDeleteCommand.of(c)));
+        final PagedQueryResult<Channel> queryResult = client().executeBlocking(ChannelQuery.of().byKey(channelKey()));
+        queryResult.head().ifPresent(c -> client().executeBlocking(ChannelDeleteCommand.of(c)));
     }
 
     @Test
@@ -31,7 +31,7 @@ public class ChannelCreateCommandTest extends IntegrationTest {
                 .withName(LocalizedString.of(ENGLISH, "name"))
                 .withDescription(LocalizedString.of(ENGLISH, "description"))
                 .withRoles(ChannelRole.INVENTORY_SUPPLY);
-        final Channel channel = execute(ChannelCreateCommand.of(channelDraft));
+        final Channel channel = client().executeBlocking(ChannelCreateCommand.of(channelDraft));
         assertThat(channel.getKey()).isEqualTo(key);
         assertThat(channel.getName()).isEqualTo(LocalizedString.of(ENGLISH, "name"));
         assertThat(channel.getDescription()).isEqualTo(LocalizedString.of(ENGLISH, "description"));

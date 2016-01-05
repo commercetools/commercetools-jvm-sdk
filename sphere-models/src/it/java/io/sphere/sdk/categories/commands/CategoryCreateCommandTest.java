@@ -3,6 +3,7 @@ package io.sphere.sdk.categories.commands;
 import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.categories.CategoryDraft;
 import io.sphere.sdk.categories.CategoryDraftBuilder;
+import io.sphere.sdk.client.SphereRequest;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.test.IntegrationTest;
 import org.junit.Test;
@@ -19,7 +20,7 @@ public class CategoryCreateCommandTest extends IntegrationTest {
         final LocalizedString slug = name.slugifiedUnique();
         final String externalId = randomKey();
         final CategoryDraft categoryDraft = CategoryDraftBuilder.of(name, slug).externalId(externalId).build();
-        final Category category = execute(CategoryCreateCommand.of(categoryDraft));
+        final Category category = client().executeBlocking(CategoryCreateCommand.of(categoryDraft));
         assertThat(category.getName()).isEqualTo(name);
         assertThat(category.getSlug()).isEqualTo(slug);
         assertThat(category.getExternalId()).contains(externalId);
@@ -28,10 +29,11 @@ public class CategoryCreateCommandTest extends IntegrationTest {
     @Test
     public void referenceExpansion() throws Exception {
         final CategoryDraft parentDraft = CategoryDraftBuilder.of(randomSlug(), randomSlug()).build();
-        final Category parent = execute(CategoryCreateCommand.of(parentDraft));
+        final Category parent = client().executeBlocking(CategoryCreateCommand.of(parentDraft));
         final CategoryDraft categoryDraft = CategoryDraftBuilder.of(randomSlug(), randomSlug()).parent(parent).build();
-        final Category category = execute(CategoryCreateCommand.of(categoryDraft).withExpansionPaths(m -> m.parent()));
+        final CategoryCreateCommand createCommand = CategoryCreateCommand.of(categoryDraft).withExpansionPaths(m -> m.parent());
+        final Category category = client().executeBlocking(createCommand);
         assertThat(category.getParent().getObj()).isNotNull();
-        execute(CategoryDeleteCommand.of(parent));
+        client().executeBlocking(CategoryDeleteCommand.of(parent));
     }
 }

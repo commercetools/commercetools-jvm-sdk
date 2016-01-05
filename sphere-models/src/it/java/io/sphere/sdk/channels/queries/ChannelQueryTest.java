@@ -14,7 +14,7 @@ public class ChannelQueryTest extends IntegrationTest {
     public void execution() {
         withUpdatableChannelOfRole(client(), ChannelRole.PRIMARY, channel -> {
             final String key = channel.getKey();
-            final PagedQueryResult<Channel> pagedQueryResult = execute(ChannelQuery.of().byKey(key));
+            final PagedQueryResult<Channel> pagedQueryResult = client().executeBlocking(ChannelQuery.of().byKey(key));
 
             assertThat(pagedQueryResult).has(onlyTheResult(channel));
             return channel;

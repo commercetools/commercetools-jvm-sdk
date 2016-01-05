@@ -14,8 +14,8 @@ public class CustomerByPasswordTokenGetTest extends IntegrationTest {
     @Test
     public void execution() throws Exception {
         withCustomer(client(), customer -> {
-            final CustomerToken token = execute(CustomerCreatePasswordTokenCommand.of(customer.getEmail()));
-            final Customer fetchedCustomer = execute(CustomerByPasswordTokenGet.of(token));
+            final CustomerToken token = client().executeBlocking(CustomerCreatePasswordTokenCommand.of(customer.getEmail()));
+            final Customer fetchedCustomer = client().executeBlocking(CustomerByPasswordTokenGet.of(token));
             assertThat(fetchedCustomer.getId()).isEqualTo(customer.getId());
         });
     }

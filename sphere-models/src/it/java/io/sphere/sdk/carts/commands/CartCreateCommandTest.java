@@ -23,7 +23,7 @@ public class CartCreateCommandTest extends IntegrationTest {
     @Test
     public void execution() throws Exception {
         final CartDraft cartDraft = CartDraft.of(EUR).withCountry(DE);
-        final Cart cart = execute(CartCreateCommand.of(cartDraft));
+        final Cart cart = client().executeBlocking(CartCreateCommand.of(cartDraft));
         assertThat(cart.getTotalPrice().getCurrency().getCurrencyCode()).isEqualTo(EUR.getCurrencyCode());
         assertThat(cart.getCountry()).isEqualTo(DE);
         assertThat(cart.getTotalPrice().isZero()).isTrue();
@@ -56,7 +56,7 @@ public class CartCreateCommandTest extends IntegrationTest {
                                 .withShippingAddress(shippingAddress)
                                 .withShippingMethod(shippingMethod)
                                 .withCustom(customFieldsDraft);
-                        final Cart cart = execute(CartCreateCommand.of(cartDraft));
+                        final Cart cart = client().executeBlocking(CartCreateCommand.of(cartDraft));
 
                         softAssert(s -> {
                             s.assertThat(cart.getCountry()).isEqualTo(DE);
@@ -74,7 +74,7 @@ public class CartCreateCommandTest extends IntegrationTest {
                         });
 
                         //cleanup
-                        execute(CartDeleteCommand.of(cart));
+                        client().executeBlocking(CartDeleteCommand.of(cart));
                     });
                 });
                 return type;
@@ -99,8 +99,8 @@ public class CartCreateCommandTest extends IntegrationTest {
     }
 
     private void testInventoryMode(final InventoryMode inventoryMode) {
-        final Cart cart = execute(CartCreateCommand.of(CartDraft.of(EUR).withInventoryMode(inventoryMode)));
+        final Cart cart = client().executeBlocking(CartCreateCommand.of(CartDraft.of(EUR).withInventoryMode(inventoryMode)));
         assertThat(cart.getInventoryMode()).isEqualTo(inventoryMode);
-        execute(CartDeleteCommand.of(cart));
+        client().executeBlocking(CartDeleteCommand.of(cart));
     }
 }

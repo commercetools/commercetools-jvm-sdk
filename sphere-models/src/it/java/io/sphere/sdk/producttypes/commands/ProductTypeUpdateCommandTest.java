@@ -25,7 +25,7 @@ public class ProductTypeUpdateCommandTest extends IntegrationTest {
         withUpdateableProductType(client(), productType -> {
             final String name = randomKey();
             final ProductType updatedProductType =
-                    execute(ProductTypeUpdateCommand.of(productType, ChangeName.of(name)));
+                    client().executeBlocking(ProductTypeUpdateCommand.of(productType, ChangeName.of(name)));
             assertThat(updatedProductType.getName()).isEqualTo(name);
             return updatedProductType;
         });
@@ -36,7 +36,7 @@ public class ProductTypeUpdateCommandTest extends IntegrationTest {
         withUpdateableProductType(client(), productType -> {
             final String name = randomKey();
             final ProductType updatedProductType =
-                    execute(ProductTypeUpdateCommand.ofKey(productType.getKey(), productType.getVersion(), ChangeName.of(name)));
+                    client().executeBlocking(ProductTypeUpdateCommand.ofKey(productType.getKey(), productType.getVersion(), ChangeName.of(name)));
             assertThat(updatedProductType.getName()).isEqualTo(name);
             return updatedProductType;
         });
@@ -47,7 +47,7 @@ public class ProductTypeUpdateCommandTest extends IntegrationTest {
         withUpdateableProductType(client(), productType -> {
             final String description = randomKey();
             final ProductType updatedProductType =
-                    execute(ProductTypeUpdateCommand.of(productType, ChangeDescription.of(description)));
+                    client().executeBlocking(ProductTypeUpdateCommand.of(productType, ChangeDescription.of(description)));
             assertThat(updatedProductType.getDescription()).isEqualTo(description);
             return updatedProductType;
         });
@@ -60,12 +60,12 @@ public class ProductTypeUpdateCommandTest extends IntegrationTest {
             final String attributeName = "foostring";
             final AttributeDefinition foostring =
                     AttributeDefinitionBuilder.of(attributeName, LocalizedString.of(ENGLISH, "foo string"), StringAttributeType.of()).build();
-            final ProductType withFoostring = execute(ProductTypeUpdateCommand.of(productType, AddAttributeDefinition.of(foostring)));
+            final ProductType withFoostring = client().executeBlocking(ProductTypeUpdateCommand.of(productType, AddAttributeDefinition.of(foostring)));
             final AttributeDefinition loadedDefinition = withFoostring.getAttribute(attributeName);
             assertThat(loadedDefinition.getAttributeType()).isEqualTo(StringAttributeType.of());
 
             //remove
-            final ProductType withoutFoostring = execute(ProductTypeUpdateCommand.of(withFoostring, RemoveAttributeDefinition.of(attributeName)));
+            final ProductType withoutFoostring = client().executeBlocking(ProductTypeUpdateCommand.of(withFoostring, RemoveAttributeDefinition.of(attributeName)));
             assertThat(withoutFoostring.findAttribute(attributeName)).isEmpty();
             return withoutFoostring;
         });
@@ -78,7 +78,7 @@ public class ProductTypeUpdateCommandTest extends IntegrationTest {
             assertThat(productType.findAttribute(attributeName)).isPresent();
             final LocalizedString label = LocalizedString.of(ENGLISH, "the color label");
 
-            final ProductType updatedProductType = execute(ProductTypeUpdateCommand.of(productType, ChangeAttributeDefinitionLabel.of(attributeName, label)));
+            final ProductType updatedProductType = client().executeBlocking(ProductTypeUpdateCommand.of(productType, ChangeAttributeDefinitionLabel.of(attributeName, label)));
 
             assertThat(updatedProductType.getAttribute(attributeName).getLabel()).isEqualTo(label);
 
@@ -93,7 +93,7 @@ public class ProductTypeUpdateCommandTest extends IntegrationTest {
             assertThat(productType.findAttribute(attributeName)).isPresent();
             final EnumValue value = EnumValue.of("XXXL", "XXXL");
 
-            final ProductType updatedProductType = execute(ProductTypeUpdateCommand.of(productType,
+            final ProductType updatedProductType = client().executeBlocking(ProductTypeUpdateCommand.of(productType,
                     AddEnumValue.of(attributeName, value)));
 
             assertThat(updatedProductType.getAttribute(attributeName).getAttributeType())
@@ -113,7 +113,7 @@ public class ProductTypeUpdateCommandTest extends IntegrationTest {
                     LocalizedEnumValue.of("brown", LocalizedString.of(Locale.ENGLISH, "brown").plus(GERMAN, "braun"));
 
 
-            final ProductType updatedProductType = execute(ProductTypeUpdateCommand.of(productType,
+            final ProductType updatedProductType = client().executeBlocking(ProductTypeUpdateCommand.of(productType,
                     AddLocalizedEnumValue.of(attributeName, value)));
 
             assertThat(updatedProductType.getAttribute(attributeName).getAttributeType())
@@ -129,7 +129,7 @@ public class ProductTypeUpdateCommandTest extends IntegrationTest {
         withUpdateableProductType(client(), productType -> {
 
             final List<AttributeDefinition> attributeDefinitions = ListUtils.reverse(productType.getAttributes());
-            final ProductType updatedProductType = execute(ProductTypeUpdateCommand.of(productType, ChangeAttributeOrder.of(attributeDefinitions)));
+            final ProductType updatedProductType = client().executeBlocking(ProductTypeUpdateCommand.of(productType, ChangeAttributeOrder.of(attributeDefinitions)));
 
             assertThat(updatedProductType.getAttributes()).isEqualTo(attributeDefinitions);
 
@@ -145,7 +145,7 @@ public class ProductTypeUpdateCommandTest extends IntegrationTest {
                     .getAttributeType();
             final List<EnumValue> values = ListUtils.reverse(attributeType.getValues());
 
-            final ProductType updatedProductType = execute(ProductTypeUpdateCommand.of(productType,
+            final ProductType updatedProductType = client().executeBlocking(ProductTypeUpdateCommand.of(productType,
                     ChangeEnumValueOrder.of(attributeName, values)));
 
             final EnumAttributeType updatedType = (EnumAttributeType) updatedProductType
@@ -164,7 +164,7 @@ public class ProductTypeUpdateCommandTest extends IntegrationTest {
                     .getAttributeType();
             final List<LocalizedEnumValue> values = ListUtils.reverse(attributeType.getValues());
 
-            final ProductType updatedProductType = execute(ProductTypeUpdateCommand.of(productType,
+            final ProductType updatedProductType = client().executeBlocking(ProductTypeUpdateCommand.of(productType,
                     ChangeLocalizedEnumValueOrder.of(attributeName, values)));
 
             final LocalizedEnumAttributeType updatedType = (LocalizedEnumAttributeType) updatedProductType.getAttribute(attributeName)

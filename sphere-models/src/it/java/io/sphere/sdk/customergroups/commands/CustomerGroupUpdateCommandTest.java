@@ -15,7 +15,7 @@ public class CustomerGroupUpdateCommandTest extends IntegrationTest {
         withCustomerGroup(client(), customerGroup -> {
             final String newName = randomString();
             assertThat(customerGroup.getName()).isNotEqualTo(newName);
-            final CustomerGroup updatedCustomerGroup = execute(CustomerGroupUpdateCommand.of(customerGroup, ChangeName.of(newName)));
+            final CustomerGroup updatedCustomerGroup = client().executeBlocking(CustomerGroupUpdateCommand.of(customerGroup, ChangeName.of(newName)));
             assertThat(updatedCustomerGroup.getName()).isEqualTo(newName);
         });
     }

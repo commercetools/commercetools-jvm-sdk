@@ -12,7 +12,7 @@ public class ProductTypeByKeyGetTest extends IntegrationTest {
     public void execution() {
         withProductType(client(), productType -> {
             assertThat(productType.getKey()).isNotEmpty();
-            final ProductType loadedProductType = execute(ProductTypeByKeyGet.of(productType.getKey()));
+            final ProductType loadedProductType = client().executeBlocking(ProductTypeByKeyGet.of(productType.getKey()));
             assertThat(loadedProductType).isEqualTo(productType);
         });
     }

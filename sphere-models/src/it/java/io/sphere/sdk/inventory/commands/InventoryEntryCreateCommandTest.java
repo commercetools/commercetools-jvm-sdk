@@ -26,7 +26,7 @@ public class InventoryEntryCreateCommandTest extends IntegrationTest {
                     .withRestockableInDays(restockableInDays)
                     .withSupplyChannel(channel);
 
-            final InventoryEntry inventoryEntry = execute(InventoryEntryCreateCommand.of(inventoryEntryDraft));
+            final InventoryEntry inventoryEntry = client().executeBlocking(InventoryEntryCreateCommand.of(inventoryEntryDraft));
 
             assertThat(inventoryEntry.getSku()).isEqualTo(sku);
             assertThat(inventoryEntry.getQuantityOnStock()).isEqualTo(quantityOnStock);
@@ -37,7 +37,7 @@ public class InventoryEntryCreateCommandTest extends IntegrationTest {
 
             //delete
             final DeleteCommand<InventoryEntry> deleteCommand = InventoryEntryDeleteCommand.of(inventoryEntry);
-            final InventoryEntry deletedEntry = execute(deleteCommand);
+            final InventoryEntry deletedEntry = client().executeBlocking(deleteCommand);
         });
     }
 }

@@ -26,7 +26,7 @@ public class ProductTypeCreateCommandTest extends IntegrationTest {
     @Before
     @After
     public void setUp() throws Exception {
-        execute(ProductTypeQuery.of().byName(getName())).getResults().forEach(pt -> execute(ProductTypeDeleteCommand.of(pt)));
+        client().executeBlocking(ProductTypeQuery.of().byName(getName())).getResults().forEach(pt -> client().executeBlocking(ProductTypeDeleteCommand.of(pt)));
     }
 
     @Test
@@ -46,7 +46,7 @@ public class ProductTypeCreateCommandTest extends IntegrationTest {
         final String name = getName();
         final ProductTypeDraft productTypeDraft =
                 ProductTypeDraft.of(randomKey(), name, "a 'T' shaped cloth", asList(sizeAttributeDefinition));
-        final ProductType productType = execute(ProductTypeCreateCommand.of(productTypeDraft));
+        final ProductType productType = client().executeBlocking(ProductTypeCreateCommand.of(productTypeDraft));
         assertThat(productType.getName()).isEqualTo(name);
         assertThat(productType.getDescription()).isEqualTo("a 'T' shaped cloth");
         assertThat(productType.getAttributes()).contains(sizeAttributeDefinition);

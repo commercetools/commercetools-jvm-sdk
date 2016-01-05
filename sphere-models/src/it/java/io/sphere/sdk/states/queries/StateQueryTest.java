@@ -1,5 +1,6 @@
 package io.sphere.sdk.states.queries;
 
+import io.sphere.sdk.client.SphereRequest;
 import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.queries.QueryPredicate;
 import io.sphere.sdk.queries.SphereEnumerationQueryModel;
@@ -21,7 +22,7 @@ public class StateQueryTest extends IntegrationTest {
     public void byKey() throws Exception {
         withState(client(), state -> {
                 final String key = state.getKey();
-                final PagedQueryResult<State> stateOption = execute(StateQuery.of().byKey(key));
+            final PagedQueryResult<State> stateOption = client().executeBlocking(StateQuery.of().byKey(key));
                 assertThat(stateOption.head()).contains(state);
             }
         );
@@ -49,8 +50,9 @@ public class StateQueryTest extends IntegrationTest {
 
     private void typeQueryTest(final Function<SphereEnumerationQueryModel<State, StateType>, QueryPredicate<State>> f) {
         withState(client(), state -> {
-            final PagedQueryResult<State> stateOption = execute(StateQuery.of()
-                        .withPredicates(m -> f.apply(m.type()).and(m.id().is(state.getId()))));
+            final StateQuery stateQuery = StateQuery.of()
+                        .withPredicates(m -> f.apply(m.type()).and(m.id().is(state.getId())));
+            final PagedQueryResult<State> stateOption = client().executeBlocking(stateQuery);
                 assertThat(stateOption.head()).contains(state);
             }
         );

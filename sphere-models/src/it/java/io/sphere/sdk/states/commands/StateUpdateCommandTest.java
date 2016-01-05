@@ -1,5 +1,6 @@
 package io.sphere.sdk.states.commands;
 
+import io.sphere.sdk.client.SphereRequest;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.states.State;
@@ -28,7 +29,7 @@ public class StateUpdateCommandTest extends IntegrationTest {
             final boolean newIsInitial = !oldIsInitial;
 
             final StateUpdateCommand command = StateUpdateCommand.of(state, ChangeInitial.of(newIsInitial));
-            final State updatedState = execute(command);
+            final State updatedState = client().executeBlocking(command);
             assertThat(updatedState.isInitial()).isEqualTo(newIsInitial);
             return updatedState;
         });
@@ -40,7 +41,7 @@ public class StateUpdateCommandTest extends IntegrationTest {
             final String newKey = randomKey();
 
             final StateUpdateCommand command = StateUpdateCommand.of(state, ChangeKey.of(newKey));
-            final State updatedState = execute(command);
+            final State updatedState = client().executeBlocking(command);
             assertThat(updatedState.getKey()).isEqualTo(newKey);
             return updatedState;
         });
@@ -52,7 +53,7 @@ public class StateUpdateCommandTest extends IntegrationTest {
             final LocalizedString newName = randomSlug();
 
             final StateUpdateCommand command = StateUpdateCommand.of(state, SetName.of(newName));
-            final State updatedState = execute(command);
+            final State updatedState = client().executeBlocking(command);
             assertThat(updatedState.getName()).isEqualTo(newName);
             return updatedState;
         });
@@ -64,15 +65,16 @@ public class StateUpdateCommandTest extends IntegrationTest {
             withUpdateableState(client(), stateB -> {
                 final Set<Reference<State>> transitions = asSet(stateA.toReference());
                 final StateUpdateCommand command = StateUpdateCommand.of(stateB, SetTransitions.of(transitions));
-                final State updatedStateB = execute(command);
+                final State updatedStateB = client().executeBlocking(command);
                 assertThat(updatedStateB.getTransitions()).isEqualTo(transitions);
 
                 //check reference expansion
-                final State loadedStateB = execute(StateByIdGet.of(stateB).withExpansionPaths(m -> m.transitions()));
+                final StateByIdGet stateByIdGet = StateByIdGet.of(stateB).withExpansionPaths(m -> m.transitions());
+                final State loadedStateB = client().executeBlocking(stateByIdGet);
                 final Reference<State> stateReference = new LinkedList<>(loadedStateB.getTransitions()).getFirst();
                 assertThat(stateReference.getObj()).isNotNull();
 
-                final State updatedStateBWithoutTransitions = execute(StateUpdateCommand.of(updatedStateB, SetTransitions.of(null)));
+                final State updatedStateBWithoutTransitions = client().executeBlocking(StateUpdateCommand.of(updatedStateB, SetTransitions.of(null)));
                 assertThat(updatedStateBWithoutTransitions.getTransitions()).isNull();
 
                 return updatedStateBWithoutTransitions;

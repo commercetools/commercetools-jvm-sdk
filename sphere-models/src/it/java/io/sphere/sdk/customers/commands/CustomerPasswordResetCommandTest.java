@@ -17,15 +17,15 @@ public class CustomerPasswordResetCommandTest extends CustomerIntegrationTest {
     public void execution() throws Exception {
         withCustomer(client(), customer -> {
             final String email = customer.getEmail();
-            final CustomerToken token = execute(CustomerCreatePasswordTokenCommand.of(email));
+            final CustomerToken token = client().executeBlocking(CustomerCreatePasswordTokenCommand.of(email));
             final String tokenValue = token.getValue();//this may need to be sent by email to the customer
 
-            final Customer customerByToken = execute(CustomerByPasswordTokenGet.of(tokenValue));
+            final Customer customerByToken = client().executeBlocking(CustomerByPasswordTokenGet.of(tokenValue));
             final String newPassword = "newPassword";
             final Customer updatedCustomer =
-                    execute(CustomerPasswordResetCommand.of(customerByToken, tokenValue, newPassword));
+                    client().executeBlocking(CustomerPasswordResetCommand.of(customerByToken, tokenValue, newPassword));
 
-            final CustomerSignInResult signInResult = execute(CustomerSignInCommand.of(email, newPassword));
+            final CustomerSignInResult signInResult = client().executeBlocking(CustomerSignInCommand.of(email, newPassword));
             assertThat(signInResult.getCustomer().getId())
                     .describedAs("customer can sign in with the new password")
                     .isEqualTo(customer.getId());
@@ -37,8 +37,7 @@ public class CustomerPasswordResetCommandTest extends CustomerIntegrationTest {
         withCustomer(client(), customer -> {
             final String tokenValue = "wrong-token-value";
 
-            final Throwable throwable = catchThrowable(() ->
-                    execute(CustomerPasswordResetCommand.of(customer, tokenValue, "newPassword")));
+            final Throwable throwable = catchThrowable(() -> client().executeBlocking(CustomerPasswordResetCommand.of(customer, tokenValue, "newPassword")));
 
             assertThat(throwable).isInstanceOf(ClientErrorException.class);
         });

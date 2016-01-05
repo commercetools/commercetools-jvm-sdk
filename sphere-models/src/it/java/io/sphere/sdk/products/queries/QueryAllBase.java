@@ -35,7 +35,7 @@ public abstract class QueryAllBase extends IntegrationTest {
         final ProductVariantDraft masterVariant = ProductVariantDraftBuilder.of().build();
         final Stream<Product> productStream = Stream.generate(() -> {
             final ProductDraft productDraft = ProductDraftBuilder.of(productType, en("QueryAllDemoProduct"), randomSlug(), masterVariant).build();
-            return execute(ProductCreateCommand.of(productDraft));
+            return client().executeBlocking(ProductCreateCommand.of(productDraft));
         });
         createdProducts = productStream.limit(19).sorted(BY_ID_COMPARATOR).collect(toList());
     }
@@ -44,7 +44,7 @@ public abstract class QueryAllBase extends IntegrationTest {
     public static void deleteProducts() {
         ProductTypeFixtures.deleteProductType(client(), productType);
         productType = null;
-        createdProducts.forEach(p -> execute(ProductDeleteCommand.of(p)));
+        createdProducts.forEach(p -> client().executeBlocking(ProductDeleteCommand.of(p)));
         createdProducts = null;
     }
 }

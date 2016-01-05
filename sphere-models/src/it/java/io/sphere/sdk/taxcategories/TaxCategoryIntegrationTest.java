@@ -16,20 +16,20 @@ public class TaxCategoryIntegrationTest extends IntegrationTest {
     @After
     @Before
     public void setUp() throws Exception {
-        execute(TaxCategoryQuery.of().byName("German tax")).getResults()
-                .forEach(taxCategory -> execute(TaxCategoryDeleteCommand.of(taxCategory)));
+        client().executeBlocking(TaxCategoryQuery.of().byName("German tax")).getResults()
+                .forEach(taxCategory -> client().executeBlocking(TaxCategoryDeleteCommand.of(taxCategory)));
     }
 
     @Test
     public void demoForDeletion() throws Exception {
         final TaxCategory taxCategory = createTaxCategory();
-        final TaxCategory deletedTaxCategory = execute(TaxCategoryDeleteCommand.of(taxCategory));
+        final TaxCategory deletedTaxCategory = client().executeBlocking(TaxCategoryDeleteCommand.of(taxCategory));
     }
 
     private TaxCategory createTaxCategory() {
         final TaxRate taxRate = TaxRate.of("GERMAN default tax", 0.19, false, DE);
         final TaxCategoryDraft taxCategoryDraft = TaxCategoryDraft.of("German tax", asList(taxRate), "Normal-Steuersatz");
-        final TaxCategory taxCategory = execute(TaxCategoryCreateCommand.of(taxCategoryDraft));
+        final TaxCategory taxCategory = client().executeBlocking(TaxCategoryCreateCommand.of(taxCategoryDraft));
         return taxCategory;
     }
 }

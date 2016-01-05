@@ -16,9 +16,9 @@ public class MessageByIdGetTest extends IntegrationTest {
                     .withPredicates(m -> m.type().is("ReturnInfoAdded"))
                     .withSort(m -> m.createdAt().sort().desc())
                     .withLimit(1L);
-            final Message messageFromQueryEndpoint = execute(query).head().get();
+            final Message messageFromQueryEndpoint = client().executeBlocking(query).head().get();
 
-            final Message message = execute(MessageByIdGet.of(messageFromQueryEndpoint));
+            final Message message = client().executeBlocking(MessageByIdGet.of(messageFromQueryEndpoint));
             assertThat(message).isEqualTo(messageFromQueryEndpoint);
 
             return order;

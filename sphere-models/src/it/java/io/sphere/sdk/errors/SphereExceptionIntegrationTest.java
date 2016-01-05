@@ -80,7 +80,7 @@ public class SphereExceptionIntegrationTest extends IntegrationTest {
                 .resultsInA(NotFoundException.class);
 
         try {
-            execute(CategoryUpdateCommand.of(Versioned.of("foo", 1L), Collections.<UpdateActionImpl<Category>>emptyList()));
+            client().executeBlocking(CategoryUpdateCommand.of(Versioned.of("foo", 1L), Collections.<UpdateActionImpl<Category>>emptyList()));
             fail("should throw exception");
         } catch (final SphereServiceException e) {
             assertThat(e.getProjectKey()).contains(getSphereClientConfig().getProjectKey());
@@ -93,7 +93,7 @@ public class SphereExceptionIntegrationTest extends IntegrationTest {
             final Long wrongVersion = category.getVersion() - 1;
             final CategoryUpdateCommand command = CategoryUpdateCommand.of(Versioned.of(category.getId(), wrongVersion), Collections.<UpdateActionImpl<Category>>emptyList());
             try {
-                execute(command);
+                client().executeBlocking(command);
                 fail("should throw exception");
             } catch (final SphereServiceException e) {
                 assertThat(e.getProjectKey()).contains(getSphereClientConfig().getProjectKey());
@@ -126,10 +126,10 @@ public class SphereExceptionIntegrationTest extends IntegrationTest {
     @Test
     public void referenceExists() throws Exception {
         final CategoryDraft cat1draft = categoryDraftOf(randomSlug()).build();
-        final Category cat1 = execute(CategoryCreateCommand.of(cat1draft));
+        final Category cat1 = client().executeBlocking(CategoryCreateCommand.of(cat1draft));
         final CategoryDraft cat2draft = categoryDraftOf(randomSlug()).parent(cat1).build();
-        final Category cat2 = execute(CategoryCreateCommand.of(cat2draft));
-        execute(CategoryDeleteCommand.of(cat2));
+        final Category cat2 = client().executeBlocking(CategoryCreateCommand.of(cat2draft));
+        client().executeBlocking(CategoryDeleteCommand.of(cat2));
 
     }
 
@@ -137,8 +137,8 @@ public class SphereExceptionIntegrationTest extends IntegrationTest {
     public void concurrentModification() throws Exception {
         withCategory(client(), cat -> {
             final CategoryUpdateCommand cmd = CategoryUpdateCommand.of(cat, asList(ChangeName.of(LocalizedString.ofEnglishLocale("new name"))));
-            execute(cmd);
-            execute(cmd);
+            client().executeBlocking(cmd);
+            client().executeBlocking(cmd);
         });
     }
 
@@ -204,14 +204,14 @@ public class SphereExceptionIntegrationTest extends IntegrationTest {
         public void resultsInA(final Class<? extends Throwable> type) {
             thrown.expect(type);
             final SphereRequest<?> testSphereRequest = f.get();
-            execute(testSphereRequest);
+            client().executeBlocking(testSphereRequest);
         }
 
         public void resultsInA(final Class<? extends ErrorResponseException> type, final Class<? extends SphereError> error) {
             thrown.expect(type);
             thrown.expect(ExceptionCodeMatches.of(error));
             final SphereRequest<?> testSphereRequest = f.get();
-            execute(testSphereRequest);
+            client().executeBlocking(testSphereRequest);
         }
     }
 

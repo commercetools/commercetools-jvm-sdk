@@ -41,7 +41,7 @@ public class TypeQueryTest extends IntegrationTest {
             final TypeQuery sphereRequest = TypeQuery.of()
                     .withPredicates(typeQueryModelQueryPredicateFunction)
                     .plusPredicates(m -> m.id().is(type.getId()));
-             final PagedQueryResult<Type> pagedQueryResult = execute(sphereRequest);
+            final PagedQueryResult<Type> pagedQueryResult = client().executeBlocking(sphereRequest);
              assertThat(pagedQueryResult.head()).contains(type);
              return type;
          });

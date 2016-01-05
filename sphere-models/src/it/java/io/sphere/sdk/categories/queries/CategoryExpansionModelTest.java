@@ -31,7 +31,7 @@ public class CategoryExpansionModelTest extends IntegrationTest {
                         final Query<Category> query = CategoryQuery.of().byId(level4.getId())
                                 .withExpansionPaths(expansionPath)
                                 .toQuery();
-                        final PagedQueryResult<Category> queryResult = execute(query);
+                        final PagedQueryResult<Category> queryResult = client().executeBlocking(query);
                         final Category loadedLevel4 = queryResult.head().get();
                         final List<Reference<Category>> ancestors = loadedLevel4.getAncestors();
                         final List<String> expectedAncestorIds = ancestors.stream().map(r -> r.getObj().getId()).collect(toList());
@@ -54,7 +54,7 @@ public class CategoryExpansionModelTest extends IntegrationTest {
                 final Query<Category> query = CategoryQuery.of().byId(level2.getId())
                         .withExpansionPaths(m -> m.parent())
                         .toQuery();
-                final PagedQueryResult<Category> queryResult = execute(query);
+                final PagedQueryResult<Category> queryResult = client().executeBlocking(query);
                 final Category loadedLevel2 = queryResult.head().get();
                 assertThat(loadedLevel2.getParent().getObj()).isNotNull();
             });

@@ -15,7 +15,7 @@ public class ShippingMethodQueryModelTest extends IntegrationTest {
     @Test
     public void queryByName() throws Exception {
         withShippingMethod(client(), shippingMethod -> {
-            final ShippingMethod actual = execute(ShippingMethodQuery.of()
+            final ShippingMethod actual = client().executeBlocking(ShippingMethodQuery.of()
                     .byName(shippingMethod.getName())
                     .withSort(BY_CREATED_AT_DESC))
                     .head().get();
@@ -26,7 +26,7 @@ public class ShippingMethodQueryModelTest extends IntegrationTest {
     @Test
     public void queryByTaxCategory() throws Exception {
         withShippingMethod(client(), shippingMethod -> {
-            final ShippingMethod actual = execute(ShippingMethodQuery.of()
+            final ShippingMethod actual = client().executeBlocking(ShippingMethodQuery.of()
                     .byTaxCategory(shippingMethod.getTaxCategory())
                     .withSort(BY_CREATED_AT_DESC))
                     .head().get();

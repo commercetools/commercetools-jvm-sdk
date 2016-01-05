@@ -18,7 +18,7 @@ public class ZoneByIdGetTest extends IntegrationTest {
     @Test
     public void fetchById() throws Exception {
         ZoneFixtures.withUpdateableZone(client(), zone -> {
-            final Zone fetchedZone = execute(ZoneByIdGet.of(zone.getId()));
+            final Zone fetchedZone = client().executeBlocking(ZoneByIdGet.of(zone.getId()));
             assertThat(fetchedZone.getId()).isEqualTo(zone.getId());
             return zone;
         }, CountryCode.BA);
