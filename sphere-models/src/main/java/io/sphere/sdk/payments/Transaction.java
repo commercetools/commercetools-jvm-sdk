@@ -17,11 +17,10 @@ public final class Transaction extends Base {
     private final MonetaryAmount amount;
     @Nullable
     private final String interactionId;
-    @Nullable
     private final TransactionState state;
 
     @JsonCreator
-    Transaction(@Nullable final ZonedDateTime timestamp, final String id, final TransactionType type, final MonetaryAmount amount, final String interactionId, @Nullable final TransactionState state) {
+    Transaction(@Nullable final ZonedDateTime timestamp, final String id, final TransactionType type, final MonetaryAmount amount, final String interactionId, final TransactionState state) {
         this.id = id;
         this.state = state;
         this.timestamp = Optional.ofNullable(timestamp)
@@ -54,7 +53,6 @@ public final class Transaction extends Base {
         return id;
     }
 
-    @Nullable
     public TransactionState getState() {
         return state;
     }
