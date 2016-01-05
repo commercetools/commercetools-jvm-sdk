@@ -1,5 +1,6 @@
 package io.sphere.sdk.meta;
 
+import io.sphere.sdk.carts.CartLike;
 import io.sphere.sdk.carts.CustomLineItem;
 import io.sphere.sdk.carts.LineItem;
 import io.sphere.sdk.carts.commands.updateactions.SetShippingMethod;
@@ -7,6 +8,7 @@ import io.sphere.sdk.carts.expansion.CartExpansionModel;
 import io.sphere.sdk.carts.queries.CartByIdGet;
 import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.channels.queries.ChannelByIdGet;
+import io.sphere.sdk.client.SphereApiConfig;
 import io.sphere.sdk.client.SphereClient;
 import io.sphere.sdk.client.SphereRequest;
 import io.sphere.sdk.commands.UpdateActionImpl;
@@ -16,10 +18,7 @@ import io.sphere.sdk.customobjects.commands.CustomObjectDeleteCommand;
 import io.sphere.sdk.customobjects.queries.CustomObjectByKeyGet;
 import io.sphere.sdk.customobjects.queries.CustomObjectQuery;
 import io.sphere.sdk.expansion.ExpansionPath;
-import io.sphere.sdk.http.ApacheHttpClientAdapter;
-import io.sphere.sdk.http.FormUrlEncodedHttpRequestBody;
-import io.sphere.sdk.http.HttpResponse;
-import io.sphere.sdk.http.AsyncHttpClientAdapter;
+import io.sphere.sdk.http.*;
 import io.sphere.sdk.models.*;
 import io.sphere.sdk.orders.Order;
 import io.sphere.sdk.orders.expansion.OrderExpansionModel;
@@ -31,6 +30,7 @@ import io.sphere.sdk.products.attributes.AttributeDefinition;
 import io.sphere.sdk.products.commands.updateactions.SetMetaDescription;
 import io.sphere.sdk.products.commands.updateactions.SetMetaKeywords;
 import io.sphere.sdk.products.commands.updateactions.SetMetaTitle;
+import io.sphere.sdk.products.expansion.ProductProjectionExpansionModel;
 import io.sphere.sdk.products.queries.ProductByIdGet;
 import io.sphere.sdk.products.queries.ProductProjectionByIdGet;
 import io.sphere.sdk.products.queries.ProductProjectionQuery;
@@ -43,11 +43,13 @@ import io.sphere.sdk.search.SearchKeywords;
 import io.sphere.sdk.taxcategories.TaxRate;
 import io.sphere.sdk.types.CustomFields;
 import io.sphere.sdk.types.CustomFieldsDraft;
+import io.sphere.sdk.types.FieldType;
 
 import javax.money.CurrencyUnit;
 import java.util.List;
 import java.util.Properties;
 import java.util.concurrent.CompletionStage;
+import java.util.concurrent.TimeUnit;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 
@@ -69,6 +71,36 @@ import java.util.function.Function;
  <li class=fixed-in-release></li>
  </ul>
  -->
+
+ <h3 class=released-version id="v1_0_0_M24">1.0.0-M24 (05.01.2016)</h3>
+
+ <ul>
+ <li class=new-in-release>Commercetools responses are gzipped which should result in less traffic and faster responses. {@link HttpResponse#getResponseBody()} returns the unpacked body.</li>
+ <li class=new-in-release>Added {@link io.sphere.sdk.client.BlockingSphereClient} which does not execute asynchronous: {@include.example io.sphere.sdk.meta.BlockingClientValueGetDemo}</li>
+ <li class=new-in-release>Added {@link ProductProjectionExpansionModel#allVariants()} for expanding objects in masterVariant and the other variants with one code expression. {@include.example io.sphere.sdk.products.expansion.ProductProjectionExpansionModelTest#allVariants()}</li>
+ <li class=new-in-release>{@link io.sphere.sdk.meta.GraphQLDocumentation GraphQL Example}</li>
+ <li class=new-in-release>InputHint for types is optional, so added {@link io.sphere.sdk.types.FieldDefinition#of(FieldType, String, LocalizedString, Boolean)}.</li>
+ <li class=new-in-release>Ease initialising clients which need a bearer token instead of the client secret:
+ {@link io.sphere.sdk.client.SphereClientFactory#createClientOfApiConfigAndAccessToken(SphereApiConfig, String)} and
+ {@link io.sphere.sdk.client.SphereClientFactory#createClientOfApiConfigAndAccessToken(SphereApiConfig, String, HttpClient)}
+ </li>
+ <li class=new-in-release>{@link ProductDraftBuilder#plusVariants(List)} and {@link ProductDraftBuilder#plusVariants(ProductVariantDraft)}</li>
+ <li class=new-in-release>Improve error reporting for failed attempts fetching OAuth tokens.</li>
+ <li class=new-in-release>Added missing transaction query fields.</li>
+ <li class=new-in-release>{@link io.sphere.sdk.client.SphereClientUtils#blockingWait(CompletionStage, long, TimeUnit)} for waiting for sphere requests</li>
+ <li class=new-in-release>{@link CartLike#getCurrency()} which gets the currency for a cart or an order</li>
+ <li class=new-in-release>Added category order hints to search model.</li>
+ <li class=new-in-release>Added {@link io.sphere.sdk.types.ResourceTypeIdsSetBuilder} which helps to find the resource type ids for creation {@link io.sphere.sdk.types.Type}s.</li>
+ <li class=new-in-release>{@link ResourceIdentifier}, for example for creating products with the product type key: {@link ProductDraftBuilder#of(ResourceIdentifiable, LocalizedString, LocalizedString, ProductVariantDraft)} </li>
+ <li class=new-in-release>Added {@link ProductVariant#isMatchingVariant()}.</li>
+ <li class=new-in-release>Several documentation improvements.</li>
+ <li class=change-in-release>Renamed methods like "ofLocalizable*" to "ofLocalized*". (the old methods are deprecated)</li>
+ <li class=change-in-release>Renamed duplicated classes like "*Type" to "*AttributeType" and "*FieldType". (direct change, no deprecation possible)</li>
+ <li class=change-in-release>Use {@link io.sphere.sdk.client.TestDoubleSphereClientFactory#createHttpTestDouble(Function)}
+ and {@link io.sphere.sdk.client.TestDoubleSphereClientFactory#createObjectTestDouble(Function)} instead of methods from {@link io.sphere.sdk.client.SphereClientFactory} for test doubles.</li>
+ <li class=fixed-in-release>In the properties config the default auth url is wrong. See <a href="https://github.com/sphereio/sphere-jvm-sdk/issues/889">889</a>.</li>
+ <li class=removed-in-release>The review classes are removed.</li>
+ </ul>
 
  <h3 class=released-version id="v1_0_0_M23">1.0.0-M23 (09.12.2015)</h3>
 
