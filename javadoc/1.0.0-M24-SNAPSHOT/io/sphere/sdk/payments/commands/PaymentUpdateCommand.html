@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":17,"i1":17,"i2":6,"i3":6,"i4":6,"i5":6,"i6":6,"i7":6,"i8":6};
+var methods = {"i0":17,"i1":17,"i2":6,"i3":6,"i4":6,"i5":6,"i6":6};
 var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],2:["t2","Instance Methods"],4:["t3","Abstract Methods"],16:["t5","Default Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -100,7 +100,7 @@ var activeTableTab = "activeTableTab";
 <li class="blockList">
 <dl>
 <dt>All Superinterfaces:</dt>
-<dd><a href="../../../../../io/sphere/sdk/commands/Command.html" title="interface in io.sphere.sdk.commands">Command</a>&lt;<a href="../../../../../io/sphere/sdk/payments/Payment.html" title="interface in io.sphere.sdk.payments">Payment</a>&gt;, <a href="../../../../../io/sphere/sdk/expansion/MetaModelExpansionDsl.html" title="interface in io.sphere.sdk.expansion">MetaModelExpansionDsl</a>&lt;<a href="../../../../../io/sphere/sdk/payments/Payment.html" title="interface in io.sphere.sdk.payments">Payment</a>,<a href="../../../../../io/sphere/sdk/payments/commands/PaymentUpdateCommand.html" title="interface in io.sphere.sdk.payments.commands">PaymentUpdateCommand</a>,<a href="../../../../../io/sphere/sdk/payments/expansion/PaymentExpansionModel.html" title="class in io.sphere.sdk.payments.expansion">PaymentExpansionModel</a>&lt;<a href="../../../../../io/sphere/sdk/payments/Payment.html" title="interface in io.sphere.sdk.payments">Payment</a>&gt;&gt;, <a href="../../../../../io/sphere/sdk/expansion/ReferenceExpansionDsl.html" title="interface in io.sphere.sdk.expansion">ReferenceExpansionDsl</a>&lt;<a href="../../../../../io/sphere/sdk/payments/Payment.html" title="interface in io.sphere.sdk.payments">Payment</a>,<a href="../../../../../io/sphere/sdk/payments/commands/PaymentUpdateCommand.html" title="interface in io.sphere.sdk.payments.commands">PaymentUpdateCommand</a>&gt;, <a href="../../../../../io/sphere/sdk/expansion/ReferenceExpansionSupport.html" title="interface in io.sphere.sdk.expansion">ReferenceExpansionSupport</a>&lt;<a href="../../../../../io/sphere/sdk/payments/Payment.html" title="interface in io.sphere.sdk.payments">Payment</a>&gt;, <a href="../../../../../io/sphere/sdk/client/SphereRequest.html" title="interface in io.sphere.sdk.client">SphereRequest</a>&lt;<a href="../../../../../io/sphere/sdk/payments/Payment.html" title="interface in io.sphere.sdk.payments">Payment</a>&gt;, <a href="../../../../../io/sphere/sdk/commands/UpdateCommand.html" title="interface in io.sphere.sdk.commands">UpdateCommand</a>&lt;<a href="../../../../../io/sphere/sdk/payments/Payment.html" title="interface in io.sphere.sdk.payments">Payment</a>&gt;, <a href="../../../../../io/sphere/sdk/commands/UpdateCommandDsl.html" title="interface in io.sphere.sdk.commands">UpdateCommandDsl</a>&lt;<a href="../../../../../io/sphere/sdk/payments/Payment.html" title="interface in io.sphere.sdk.payments">Payment</a>,<a href="../../../../../io/sphere/sdk/payments/commands/PaymentUpdateCommand.html" title="interface in io.sphere.sdk.payments.commands">PaymentUpdateCommand</a>&gt;</dd>
+<dd><a href="../../../../../io/sphere/sdk/commands/Command.html" title="interface in io.sphere.sdk.commands">Command</a>&lt;<a href="../../../../../io/sphere/sdk/payments/Payment.html" title="interface in io.sphere.sdk.payments">Payment</a>&gt;, <a href="../../../../../io/sphere/sdk/expansion/ExpansionPathContainer.html" title="interface in io.sphere.sdk.expansion">ExpansionPathContainer</a>&lt;<a href="../../../../../io/sphere/sdk/payments/Payment.html" title="interface in io.sphere.sdk.payments">Payment</a>&gt;, <a href="../../../../../io/sphere/sdk/expansion/MetaModelExpansionDsl.html" title="interface in io.sphere.sdk.expansion">MetaModelExpansionDsl</a>&lt;<a href="../../../../../io/sphere/sdk/payments/Payment.html" title="interface in io.sphere.sdk.payments">Payment</a>,<a href="../../../../../io/sphere/sdk/payments/commands/PaymentUpdateCommand.html" title="interface in io.sphere.sdk.payments.commands">PaymentUpdateCommand</a>,<a href="../../../../../io/sphere/sdk/payments/expansion/PaymentExpansionModel.html" title="class in io.sphere.sdk.payments.expansion">PaymentExpansionModel</a>&lt;<a href="../../../../../io/sphere/sdk/payments/Payment.html" title="interface in io.sphere.sdk.payments">Payment</a>&gt;&gt;, <a href="../../../../../io/sphere/sdk/expansion/ReferenceExpansionDsl.html" title="interface in io.sphere.sdk.expansion">ReferenceExpansionDsl</a>&lt;<a href="../../../../../io/sphere/sdk/payments/Payment.html" title="interface in io.sphere.sdk.payments">Payment</a>,<a href="../../../../../io/sphere/sdk/payments/commands/PaymentUpdateCommand.html" title="interface in io.sphere.sdk.payments.commands">PaymentUpdateCommand</a>&gt;, <a href="../../../../../io/sphere/sdk/client/SphereRequest.html" title="interface in io.sphere.sdk.client">SphereRequest</a>&lt;<a href="../../../../../io/sphere/sdk/payments/Payment.html" title="interface in io.sphere.sdk.payments">Payment</a>&gt;, <a href="../../../../../io/sphere/sdk/commands/UpdateCommand.html" title="interface in io.sphere.sdk.commands">UpdateCommand</a>&lt;<a href="../../../../../io/sphere/sdk/payments/Payment.html" title="interface in io.sphere.sdk.payments">Payment</a>&gt;, <a href="../../../../../io/sphere/sdk/commands/UpdateCommandDsl.html" title="interface in io.sphere.sdk.commands">UpdateCommandDsl</a>&lt;<a href="../../../../../io/sphere/sdk/payments/Payment.html" title="interface in io.sphere.sdk.payments">Payment</a>,<a href="../../../../../io/sphere/sdk/payments/commands/PaymentUpdateCommand.html" title="interface in io.sphere.sdk.payments.commands">PaymentUpdateCommand</a>&gt;</dd>
 </dl>
 <hr>
 <br>
@@ -149,35 +149,23 @@ extends <a href="../../../../../io/sphere/sdk/commands/UpdateCommandDsl.html" ti
 </tr>
 <tr id="i3" class="rowColor">
 <td class="colFirst"><code><a href="../../../../../io/sphere/sdk/payments/commands/PaymentUpdateCommand.html" title="interface in io.sphere.sdk.payments.commands">PaymentUpdateCommand</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/payments/commands/PaymentUpdateCommand.html#plusExpansionPaths-java.util.function.Function-">plusExpansionPaths</a></span>(java.util.function.Function&lt;<a href="../../../../../io/sphere/sdk/payments/expansion/PaymentExpansionModel.html" title="class in io.sphere.sdk.payments.expansion">PaymentExpansionModel</a>&lt;<a href="../../../../../io/sphere/sdk/payments/Payment.html" title="interface in io.sphere.sdk.payments">Payment</a>&gt;,<a href="../../../../../io/sphere/sdk/expansion/ExpansionPath.html" title="interface in io.sphere.sdk.expansion">ExpansionPath</a>&lt;<a href="../../../../../io/sphere/sdk/payments/Payment.html" title="interface in io.sphere.sdk.payments">Payment</a>&gt;&gt;&nbsp;m)</code>
-<div class="block">Creates a new object with the properties of the old object but adds a new expansion path to it by using meta models.</div>
-</td>
-</tr>
-<tr id="i4" class="altColor">
-<td class="colFirst"><code><a href="../../../../../io/sphere/sdk/payments/commands/PaymentUpdateCommand.html" title="interface in io.sphere.sdk.payments.commands">PaymentUpdateCommand</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/payments/commands/PaymentUpdateCommand.html#plusExpansionPaths-java.util.List-">plusExpansionPaths</a></span>(java.util.List&lt;<a href="../../../../../io/sphere/sdk/expansion/ExpansionPath.html" title="interface in io.sphere.sdk.expansion">ExpansionPath</a>&lt;<a href="../../../../../io/sphere/sdk/payments/Payment.html" title="interface in io.sphere.sdk.payments">Payment</a>&gt;&gt;&nbsp;expansionPaths)</code>
 <div class="block">Creates a new object with the properties of the old object but adds <code>expansionPaths</code> to the expansion paths.</div>
 </td>
 </tr>
-<tr id="i5" class="rowColor">
+<tr id="i4" class="altColor">
 <td class="colFirst"><code><a href="../../../../../io/sphere/sdk/payments/commands/PaymentUpdateCommand.html" title="interface in io.sphere.sdk.payments.commands">PaymentUpdateCommand</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/payments/commands/PaymentUpdateCommand.html#withExpansionPaths-io.sphere.sdk.expansion.ExpansionPath-">withExpansionPaths</a></span>(<a href="../../../../../io/sphere/sdk/expansion/ExpansionPath.html" title="interface in io.sphere.sdk.expansion">ExpansionPath</a>&lt;<a href="../../../../../io/sphere/sdk/payments/Payment.html" title="interface in io.sphere.sdk.payments">Payment</a>&gt;&nbsp;expansionPath)</code>
 <div class="block">Creates a new object with the properties of the old object but replaces all expansion paths with a single <code>expansionPath</code>.</div>
 </td>
 </tr>
-<tr id="i6" class="altColor">
-<td class="colFirst"><code><a href="../../../../../io/sphere/sdk/payments/commands/PaymentUpdateCommand.html" title="interface in io.sphere.sdk.payments.commands">PaymentUpdateCommand</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/payments/commands/PaymentUpdateCommand.html#withExpansionPaths-java.util.function.Function-">withExpansionPaths</a></span>(java.util.function.Function&lt;<a href="../../../../../io/sphere/sdk/payments/expansion/PaymentExpansionModel.html" title="class in io.sphere.sdk.payments.expansion">PaymentExpansionModel</a>&lt;<a href="../../../../../io/sphere/sdk/payments/Payment.html" title="interface in io.sphere.sdk.payments">Payment</a>&gt;,<a href="../../../../../io/sphere/sdk/expansion/ExpansionPath.html" title="interface in io.sphere.sdk.expansion">ExpansionPath</a>&lt;<a href="../../../../../io/sphere/sdk/payments/Payment.html" title="interface in io.sphere.sdk.payments">Payment</a>&gt;&gt;&nbsp;m)</code>
-<div class="block">Creates a new object with the properties of the old object but replaces all expansion paths with a single <code>expansionPath</code> by using meta models.</div>
-</td>
-</tr>
-<tr id="i7" class="rowColor">
+<tr id="i5" class="rowColor">
 <td class="colFirst"><code><a href="../../../../../io/sphere/sdk/payments/commands/PaymentUpdateCommand.html" title="interface in io.sphere.sdk.payments.commands">PaymentUpdateCommand</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/payments/commands/PaymentUpdateCommand.html#withExpansionPaths-java.util.List-">withExpansionPaths</a></span>(java.util.List&lt;<a href="../../../../../io/sphere/sdk/expansion/ExpansionPath.html" title="interface in io.sphere.sdk.expansion">ExpansionPath</a>&lt;<a href="../../../../../io/sphere/sdk/payments/Payment.html" title="interface in io.sphere.sdk.payments">Payment</a>&gt;&gt;&nbsp;expansionPaths)</code>
 <div class="block">Creates a new object with the properties of the old object but replaces all expansion paths with <code>expansionPaths</code>.</div>
 </td>
 </tr>
-<tr id="i8" class="altColor">
+<tr id="i6" class="altColor">
 <td class="colFirst"><code><a href="../../../../../io/sphere/sdk/payments/commands/PaymentUpdateCommand.html" title="interface in io.sphere.sdk.payments.commands">PaymentUpdateCommand</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/payments/commands/PaymentUpdateCommand.html#withVersion-io.sphere.sdk.models.Versioned-">withVersion</a></span>(<a href="../../../../../io/sphere/sdk/models/Versioned.html" title="interface in io.sphere.sdk.models">Versioned</a>&lt;<a href="../../../../../io/sphere/sdk/payments/Payment.html" title="interface in io.sphere.sdk.payments">Payment</a>&gt;&nbsp;versioned)</code>&nbsp;</td>
 </tr>
@@ -197,11 +185,25 @@ extends <a href="../../../../../io/sphere/sdk/commands/UpdateCommandDsl.html" ti
 <code><a href="../../../../../io/sphere/sdk/client/SphereRequest.html#canDeserialize-io.sphere.sdk.http.HttpResponse-">canDeserialize</a>, <a href="../../../../../io/sphere/sdk/client/SphereRequest.html#deserialize-io.sphere.sdk.http.HttpResponse-">deserialize</a>, <a href="../../../../../io/sphere/sdk/client/SphereRequest.html#httpRequestIntent--">httpRequestIntent</a></code></li>
 </ul>
 <ul class="blockList">
-<li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.expansion.ReferenceExpansionSupport">
+<li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.expansion.MetaModelExpansionDsl">
 <!--   -->
 </a>
-<h3>Methods inherited from interface&nbsp;io.sphere.sdk.expansion.<a href="../../../../../io/sphere/sdk/expansion/ReferenceExpansionSupport.html" title="interface in io.sphere.sdk.expansion">ReferenceExpansionSupport</a></h3>
-<code><a href="../../../../../io/sphere/sdk/expansion/ReferenceExpansionSupport.html#expansionPaths--">expansionPaths</a></code></li>
+<h3>Methods inherited from interface&nbsp;io.sphere.sdk.expansion.<a href="../../../../../io/sphere/sdk/expansion/MetaModelExpansionDsl.html" title="interface in io.sphere.sdk.expansion">MetaModelExpansionDsl</a></h3>
+<code><a href="../../../../../io/sphere/sdk/expansion/MetaModelExpansionDsl.html#plusExpansionPaths-java.util.function.Function-">plusExpansionPaths</a>, <a href="../../../../../io/sphere/sdk/expansion/MetaModelExpansionDsl.html#withExpansionPaths-java.util.function.Function-">withExpansionPaths</a></code></li>
+</ul>
+<ul class="blockList">
+<li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.expansion.ReferenceExpansionDsl">
+<!--   -->
+</a>
+<h3>Methods inherited from interface&nbsp;io.sphere.sdk.expansion.<a href="../../../../../io/sphere/sdk/expansion/ReferenceExpansionDsl.html" title="interface in io.sphere.sdk.expansion">ReferenceExpansionDsl</a></h3>
+<code><a href="../../../../../io/sphere/sdk/expansion/ReferenceExpansionDsl.html#plusExpansionPaths-io.sphere.sdk.expansion.ExpansionPathContainer-">plusExpansionPaths</a>, <a href="../../../../../io/sphere/sdk/expansion/ReferenceExpansionDsl.html#withExpansionPaths-io.sphere.sdk.expansion.ExpansionPathContainer-">withExpansionPaths</a></code></li>
+</ul>
+<ul class="blockList">
+<li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.expansion.ExpansionPathContainer">
+<!--   -->
+</a>
+<h3>Methods inherited from interface&nbsp;io.sphere.sdk.expansion.<a href="../../../../../io/sphere/sdk/expansion/ExpansionPathContainer.html" title="interface in io.sphere.sdk.expansion">ExpansionPathContainer</a></h3>
+<code><a href="../../../../../io/sphere/sdk/expansion/ExpansionPathContainer.html#expansionPaths--">expansionPaths</a></code></li>
 </ul>
 </li>
 </ul>
@@ -237,81 +239,6 @@ extends <a href="../../../../../io/sphere/sdk/commands/UpdateCommandDsl.html" ti
                                java.util.List&lt;? extends <a href="../../../../../io/sphere/sdk/commands/UpdateAction.html" title="interface in io.sphere.sdk.commands">UpdateAction</a>&lt;<a href="../../../../../io/sphere/sdk/payments/Payment.html" title="interface in io.sphere.sdk.payments">Payment</a>&gt;&gt;&nbsp;updateActions)</pre>
 </li>
 </ul>
-<a name="plusExpansionPaths-java.util.function.Function-">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>plusExpansionPaths</h4>
-<pre><a href="../../../../../io/sphere/sdk/payments/commands/PaymentUpdateCommand.html" title="interface in io.sphere.sdk.payments.commands">PaymentUpdateCommand</a>&nbsp;plusExpansionPaths(java.util.function.Function&lt;<a href="../../../../../io/sphere/sdk/payments/expansion/PaymentExpansionModel.html" title="class in io.sphere.sdk.payments.expansion">PaymentExpansionModel</a>&lt;<a href="../../../../../io/sphere/sdk/payments/Payment.html" title="interface in io.sphere.sdk.payments">Payment</a>&gt;,<a href="../../../../../io/sphere/sdk/expansion/ExpansionPath.html" title="interface in io.sphere.sdk.expansion">ExpansionPath</a>&lt;<a href="../../../../../io/sphere/sdk/payments/Payment.html" title="interface in io.sphere.sdk.payments">Payment</a>&gt;&gt;&nbsp;m)</pre>
-<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../../io/sphere/sdk/expansion/MetaModelExpansionDsl.html#plusExpansionPaths-java.util.function.Function-">MetaModelExpansionDsl</a></code></span></div>
-<div class="block">Creates a new object with the properties of the old object but adds a new expansion path to it by using meta models.
-
- <p>An example in the product projection context:</p>
- <div id="io-sphere-sdk-products-expansion-ProductProjectionExpansionModelTest-expandCategoriesDemo--%s" class=code-example><pre><code class='java'>final ProductProjectionByIdGet fetch1 = ProductProjectionByIdGet.of("id", ProductProjectionType.CURRENT)
-        .plusExpansionPaths(m -&gt; m.categories());
-assertThat(fetch1.expansionPaths())
-        .isEqualTo(asList(ExpansionPath.of("categories[*]")));
-
-final ProductProjectionByIdGet fetch2 = fetch1.plusExpansionPaths(m -&gt; m.productType());
-assertThat(fetch2.expansionPaths())
-        .isEqualTo(asList(ExpansionPath.of("categories[*]"), ExpansionPath.of("productType")))
-        .isEqualTo(listOf(fetch1.expansionPaths(), ExpansionPath.of("productType")));
-
-//this is equivalent to
-
-final ExpansionPath&lt;ProductProjection&gt; categoryExpand = ProductProjectionExpansionModel.of().categories();
-final ExpansionPath&lt;ProductProjection&gt; productTypeExpand = ProductProjectionExpansionModel.of().productType();
-final ProductProjectionByIdGet fetchB = ProductProjectionByIdGet.of("id", ProductProjectionType.CURRENT)
-                .withExpansionPaths(asList(categoryExpand, productTypeExpand));
-assertThat(fetchB.expansionPaths())
-        .isEqualTo(asList(ExpansionPath.of("categories[*]"), ExpansionPath.of("productType")));
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/test/java/io/sphere/sdk/products/expansion/ProductProjectionExpansionModelTest.java" target="_blank">test code</a>.</pre></div></div>
-<dl>
-<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../../io/sphere/sdk/expansion/MetaModelExpansionDsl.html#plusExpansionPaths-java.util.function.Function-">plusExpansionPaths</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../io/sphere/sdk/expansion/MetaModelExpansionDsl.html" title="interface in io.sphere.sdk.expansion">MetaModelExpansionDsl</a>&lt;<a href="../../../../../io/sphere/sdk/payments/Payment.html" title="interface in io.sphere.sdk.payments">Payment</a>,<a href="../../../../../io/sphere/sdk/payments/commands/PaymentUpdateCommand.html" title="interface in io.sphere.sdk.payments.commands">PaymentUpdateCommand</a>,<a href="../../../../../io/sphere/sdk/payments/expansion/PaymentExpansionModel.html" title="class in io.sphere.sdk.payments.expansion">PaymentExpansionModel</a>&lt;<a href="../../../../../io/sphere/sdk/payments/Payment.html" title="interface in io.sphere.sdk.payments">Payment</a>&gt;&gt;</code></dd>
-<dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>m</code> - function to use the meta model for expansions to create an expansion path</dd>
-<dt><span class="returnLabel">Returns:</span></dt>
-<dd>new object</dd>
-</dl>
-</li>
-</ul>
-<a name="withExpansionPaths-java.util.function.Function-">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>withExpansionPaths</h4>
-<pre><a href="../../../../../io/sphere/sdk/payments/commands/PaymentUpdateCommand.html" title="interface in io.sphere.sdk.payments.commands">PaymentUpdateCommand</a>&nbsp;withExpansionPaths(java.util.function.Function&lt;<a href="../../../../../io/sphere/sdk/payments/expansion/PaymentExpansionModel.html" title="class in io.sphere.sdk.payments.expansion">PaymentExpansionModel</a>&lt;<a href="../../../../../io/sphere/sdk/payments/Payment.html" title="interface in io.sphere.sdk.payments">Payment</a>&gt;,<a href="../../../../../io/sphere/sdk/expansion/ExpansionPath.html" title="interface in io.sphere.sdk.expansion">ExpansionPath</a>&lt;<a href="../../../../../io/sphere/sdk/payments/Payment.html" title="interface in io.sphere.sdk.payments">Payment</a>&gt;&gt;&nbsp;m)</pre>
-<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../../io/sphere/sdk/expansion/MetaModelExpansionDsl.html#withExpansionPaths-java.util.function.Function-">MetaModelExpansionDsl</a></code></span></div>
-<div class="block">Creates a new object with the properties of the old object but replaces all expansion paths with a single <code>expansionPath</code> by using meta models.
-
- <p>An example in the product projection context:</p>
- <div id="io-sphere-sdk-products-expansion-ProductProjectionExpansionModelTest-withExpansionPathDslDemo--%s" class=code-example><pre><code class='java'>final ProductProjectionByIdGet fetch = ProductProjectionByIdGet.of("id", ProductProjectionType.CURRENT)
-                .plusExpansionPaths(ProductProjectionExpansionModel.of().categories());
-
-assertThat(fetch.expansionPaths())
-        .isEqualTo(asList(ExpansionPath.of("categories[*]")));
-
-final ProductProjectionByIdGet fetch2 =
-        fetch.withExpansionPaths(m -&gt; m.productType());
-
-assertThat(fetch.expansionPaths()).overridingErrorMessage("old object is unchanged")
-        .isEqualTo(asList(ExpansionPath.of("categories[*]")));
-assertThat(fetch2.expansionPaths()).isEqualTo(asList(ExpansionPath.of("productType")));
-assertThat(fetch2).isNotSameAs(fetch);
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/test/java/io/sphere/sdk/products/expansion/ProductProjectionExpansionModelTest.java" target="_blank">test code</a>.</pre></div></div>
-<dl>
-<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../../io/sphere/sdk/expansion/MetaModelExpansionDsl.html#withExpansionPaths-java.util.function.Function-">withExpansionPaths</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../io/sphere/sdk/expansion/MetaModelExpansionDsl.html" title="interface in io.sphere.sdk.expansion">MetaModelExpansionDsl</a>&lt;<a href="../../../../../io/sphere/sdk/payments/Payment.html" title="interface in io.sphere.sdk.payments">Payment</a>,<a href="../../../../../io/sphere/sdk/payments/commands/PaymentUpdateCommand.html" title="interface in io.sphere.sdk.payments.commands">PaymentUpdateCommand</a>,<a href="../../../../../io/sphere/sdk/payments/expansion/PaymentExpansionModel.html" title="class in io.sphere.sdk.payments.expansion">PaymentExpansionModel</a>&lt;<a href="../../../../../io/sphere/sdk/payments/Payment.html" title="interface in io.sphere.sdk.payments">Payment</a>&gt;&gt;</code></dd>
-<dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>m</code> - function to use the meta model for expansions to create an expansion path</dd>
-<dt><span class="returnLabel">Returns:</span></dt>
-<dd>new object</dd>
-</dl>
-</li>
-</ul>
 <a name="withExpansionPaths-java.util.List-">
 <!--   -->
 </a>
@@ -343,7 +270,7 @@ assertThat(fetch2).isNotSameAs(fetch);
 
  <p>An example in the product projection context:</p>
  <div id="io-sphere-sdk-products-expansion-ProductProjectionExpansionModelTest-withExpansionPathDemo--%s" class=code-example><pre><code class='java'>final ProductProjectionByIdGet fetch = ProductProjectionByIdGet.of("id", ProductProjectionType.CURRENT)
-                .withExpansionPaths(asList(ProductProjectionExpansionModel.of().categories()));
+                .withExpansionPaths(ProductProjectionExpansionModel.of().categories());
 
 assertThat(fetch.expansionPaths())
         .isEqualTo(asList(ExpansionPath.of("categories[*]")));
@@ -355,6 +282,15 @@ assertThat(fetch.expansionPaths()).overridingErrorMessage("old object is unchang
         .isEqualTo(asList(ExpansionPath.of("categories[*]")));
 assertThat(fetch2.expansionPaths()).isEqualTo(asList(ExpansionPath.of("productType")));
 assertThat(fetch2).isNotSameAs(fetch);
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/test/java/io/sphere/sdk/products/expansion/ProductProjectionExpansionModelTest.java" target="_blank">test code</a>.</pre></div>
+
+ <p>This method also can be used to use the same expansions as in another request:</p>
+ <div id="io-sphere-sdk-products-expansion-ProductProjectionExpansionModelTest-useExpansionPathsOfOtherRequest--%s" class=code-example><pre><code class='java'>final ProductProjectionQuery query = ProductProjectionQuery.ofCurrent().withExpansionPaths(m -&gt; m.categories());
+final ProductProjectionSearch search = ProductProjectionSearch.ofCurrent().withExpansionPaths(query);
+assertThat(query.expansionPaths())
+        .hasSize(1)
+        .as("reuse expansion spec from other request")
+        .isEqualTo(search.expansionPaths());
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/test/java/io/sphere/sdk/products/expansion/ProductProjectionExpansionModelTest.java" target="_blank">test code</a>.</pre></div></div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>

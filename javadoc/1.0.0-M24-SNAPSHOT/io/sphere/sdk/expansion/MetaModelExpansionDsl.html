@@ -48,7 +48,7 @@ var activeTableTab = "activeTableTab";
 </div>
 <div class="subNav">
 <ul class="navList">
-<li><a href="../../../../io/sphere/sdk/expansion/ExpansionPath.html" title="interface in io.sphere.sdk.expansion"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
+<li><a href="../../../../io/sphere/sdk/expansion/ExpansionPathContainer.html" title="interface in io.sphere.sdk.expansion"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
 <li><a href="../../../../io/sphere/sdk/expansion/MetaModelExpansionDslExpansionModelRead.html" title="interface in io.sphere.sdk.expansion"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">
@@ -100,7 +100,7 @@ var activeTableTab = "activeTableTab";
 <li class="blockList">
 <dl>
 <dt>All Superinterfaces:</dt>
-<dd><a href="../../../../io/sphere/sdk/expansion/ReferenceExpansionDsl.html" title="interface in io.sphere.sdk.expansion">ReferenceExpansionDsl</a>&lt;T,C&gt;, <a href="../../../../io/sphere/sdk/expansion/ReferenceExpansionSupport.html" title="interface in io.sphere.sdk.expansion">ReferenceExpansionSupport</a>&lt;T&gt;</dd>
+<dd><a href="../../../../io/sphere/sdk/expansion/ExpansionPathContainer.html" title="interface in io.sphere.sdk.expansion">ExpansionPathContainer</a>&lt;T&gt;, <a href="../../../../io/sphere/sdk/expansion/ReferenceExpansionDsl.html" title="interface in io.sphere.sdk.expansion">ReferenceExpansionDsl</a>&lt;T,C&gt;</dd>
 </dl>
 <dl>
 <dt>All Known Subinterfaces:</dt>
@@ -134,13 +134,13 @@ extends <a href="../../../../io/sphere/sdk/expansion/ReferenceExpansionDsl.html"
 </tr>
 <tr id="i0" class="altColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/expansion/MetaModelExpansionDsl.html" title="type parameter in MetaModelExpansionDsl">C</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/expansion/MetaModelExpansionDsl.html#plusExpansionPaths-java.util.function.Function-">plusExpansionPaths</a></span>(java.util.function.Function&lt;<a href="../../../../io/sphere/sdk/expansion/MetaModelExpansionDsl.html" title="type parameter in MetaModelExpansionDsl">E</a>,<a href="../../../../io/sphere/sdk/expansion/ExpansionPath.html" title="interface in io.sphere.sdk.expansion">ExpansionPath</a>&lt;<a href="../../../../io/sphere/sdk/expansion/MetaModelExpansionDsl.html" title="type parameter in MetaModelExpansionDsl">T</a>&gt;&gt;&nbsp;m)</code>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/expansion/MetaModelExpansionDsl.html#plusExpansionPaths-java.util.function.Function-">plusExpansionPaths</a></span>(java.util.function.Function&lt;<a href="../../../../io/sphere/sdk/expansion/MetaModelExpansionDsl.html" title="type parameter in MetaModelExpansionDsl">E</a>,<a href="../../../../io/sphere/sdk/expansion/ExpansionPathContainer.html" title="interface in io.sphere.sdk.expansion">ExpansionPathContainer</a>&lt;<a href="../../../../io/sphere/sdk/expansion/MetaModelExpansionDsl.html" title="type parameter in MetaModelExpansionDsl">T</a>&gt;&gt;&nbsp;m)</code>
 <div class="block">Creates a new object with the properties of the old object but adds a new expansion path to it by using meta models.</div>
 </td>
 </tr>
 <tr id="i1" class="rowColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/expansion/MetaModelExpansionDsl.html" title="type parameter in MetaModelExpansionDsl">C</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/expansion/MetaModelExpansionDsl.html#withExpansionPaths-java.util.function.Function-">withExpansionPaths</a></span>(java.util.function.Function&lt;<a href="../../../../io/sphere/sdk/expansion/MetaModelExpansionDsl.html" title="type parameter in MetaModelExpansionDsl">E</a>,<a href="../../../../io/sphere/sdk/expansion/ExpansionPath.html" title="interface in io.sphere.sdk.expansion">ExpansionPath</a>&lt;<a href="../../../../io/sphere/sdk/expansion/MetaModelExpansionDsl.html" title="type parameter in MetaModelExpansionDsl">T</a>&gt;&gt;&nbsp;m)</code>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/expansion/MetaModelExpansionDsl.html#withExpansionPaths-java.util.function.Function-">withExpansionPaths</a></span>(java.util.function.Function&lt;<a href="../../../../io/sphere/sdk/expansion/MetaModelExpansionDsl.html" title="type parameter in MetaModelExpansionDsl">E</a>,<a href="../../../../io/sphere/sdk/expansion/ExpansionPathContainer.html" title="interface in io.sphere.sdk.expansion">ExpansionPathContainer</a>&lt;<a href="../../../../io/sphere/sdk/expansion/MetaModelExpansionDsl.html" title="type parameter in MetaModelExpansionDsl">T</a>&gt;&gt;&nbsp;m)</code>
 <div class="block">Creates a new object with the properties of the old object but replaces all expansion paths with a single <code>expansionPath</code> by using meta models.</div>
 </td>
 </tr>
@@ -150,14 +150,14 @@ extends <a href="../../../../io/sphere/sdk/expansion/ReferenceExpansionDsl.html"
 <!--   -->
 </a>
 <h3>Methods inherited from interface&nbsp;io.sphere.sdk.expansion.<a href="../../../../io/sphere/sdk/expansion/ReferenceExpansionDsl.html" title="interface in io.sphere.sdk.expansion">ReferenceExpansionDsl</a></h3>
-<code><a href="../../../../io/sphere/sdk/expansion/ReferenceExpansionDsl.html#plusExpansionPaths-io.sphere.sdk.expansion.ExpansionPath-">plusExpansionPaths</a>, <a href="../../../../io/sphere/sdk/expansion/ReferenceExpansionDsl.html#plusExpansionPaths-java.util.List-">plusExpansionPaths</a>, <a href="../../../../io/sphere/sdk/expansion/ReferenceExpansionDsl.html#withExpansionPaths-io.sphere.sdk.expansion.ExpansionPath-">withExpansionPaths</a>, <a href="../../../../io/sphere/sdk/expansion/ReferenceExpansionDsl.html#withExpansionPaths-java.util.List-">withExpansionPaths</a></code></li>
+<code><a href="../../../../io/sphere/sdk/expansion/ReferenceExpansionDsl.html#plusExpansionPaths-io.sphere.sdk.expansion.ExpansionPath-">plusExpansionPaths</a>, <a href="../../../../io/sphere/sdk/expansion/ReferenceExpansionDsl.html#plusExpansionPaths-io.sphere.sdk.expansion.ExpansionPathContainer-">plusExpansionPaths</a>, <a href="../../../../io/sphere/sdk/expansion/ReferenceExpansionDsl.html#plusExpansionPaths-java.util.List-">plusExpansionPaths</a>, <a href="../../../../io/sphere/sdk/expansion/ReferenceExpansionDsl.html#withExpansionPaths-io.sphere.sdk.expansion.ExpansionPath-">withExpansionPaths</a>, <a href="../../../../io/sphere/sdk/expansion/ReferenceExpansionDsl.html#withExpansionPaths-io.sphere.sdk.expansion.ExpansionPathContainer-">withExpansionPaths</a>, <a href="../../../../io/sphere/sdk/expansion/ReferenceExpansionDsl.html#withExpansionPaths-java.util.List-">withExpansionPaths</a></code></li>
 </ul>
 <ul class="blockList">
-<li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.expansion.ReferenceExpansionSupport">
+<li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.expansion.ExpansionPathContainer">
 <!--   -->
 </a>
-<h3>Methods inherited from interface&nbsp;io.sphere.sdk.expansion.<a href="../../../../io/sphere/sdk/expansion/ReferenceExpansionSupport.html" title="interface in io.sphere.sdk.expansion">ReferenceExpansionSupport</a></h3>
-<code><a href="../../../../io/sphere/sdk/expansion/ReferenceExpansionSupport.html#expansionPaths--">expansionPaths</a></code></li>
+<h3>Methods inherited from interface&nbsp;io.sphere.sdk.expansion.<a href="../../../../io/sphere/sdk/expansion/ExpansionPathContainer.html" title="interface in io.sphere.sdk.expansion">ExpansionPathContainer</a></h3>
+<code><a href="../../../../io/sphere/sdk/expansion/ExpansionPathContainer.html#expansionPaths--">expansionPaths</a></code></li>
 </ul>
 </li>
 </ul>
@@ -179,7 +179,7 @@ extends <a href="../../../../io/sphere/sdk/expansion/ReferenceExpansionDsl.html"
 <ul class="blockList">
 <li class="blockList">
 <h4>plusExpansionPaths</h4>
-<pre><a href="../../../../io/sphere/sdk/expansion/MetaModelExpansionDsl.html" title="type parameter in MetaModelExpansionDsl">C</a>&nbsp;plusExpansionPaths(java.util.function.Function&lt;<a href="../../../../io/sphere/sdk/expansion/MetaModelExpansionDsl.html" title="type parameter in MetaModelExpansionDsl">E</a>,<a href="../../../../io/sphere/sdk/expansion/ExpansionPath.html" title="interface in io.sphere.sdk.expansion">ExpansionPath</a>&lt;<a href="../../../../io/sphere/sdk/expansion/MetaModelExpansionDsl.html" title="type parameter in MetaModelExpansionDsl">T</a>&gt;&gt;&nbsp;m)</pre>
+<pre><a href="../../../../io/sphere/sdk/expansion/MetaModelExpansionDsl.html" title="type parameter in MetaModelExpansionDsl">C</a>&nbsp;plusExpansionPaths(java.util.function.Function&lt;<a href="../../../../io/sphere/sdk/expansion/MetaModelExpansionDsl.html" title="type parameter in MetaModelExpansionDsl">E</a>,<a href="../../../../io/sphere/sdk/expansion/ExpansionPathContainer.html" title="interface in io.sphere.sdk.expansion">ExpansionPathContainer</a>&lt;<a href="../../../../io/sphere/sdk/expansion/MetaModelExpansionDsl.html" title="type parameter in MetaModelExpansionDsl">T</a>&gt;&gt;&nbsp;m)</pre>
 <div class="block">Creates a new object with the properties of the old object but adds a new expansion path to it by using meta models.
 
  <p>An example in the product projection context:</p>
@@ -195,8 +195,8 @@ assertThat(fetch2.expansionPaths())
 
 //this is equivalent to
 
-final ExpansionPath&lt;ProductProjection&gt; categoryExpand = ProductProjectionExpansionModel.of().categories();
-final ExpansionPath&lt;ProductProjection&gt; productTypeExpand = ProductProjectionExpansionModel.of().productType();
+final ExpansionPath&lt;ProductProjection&gt; categoryExpand = ProductProjectionExpansionModel.of().categories().expansionPaths().get(0);
+final ExpansionPath&lt;ProductProjection&gt; productTypeExpand = ProductProjectionExpansionModel.of().productType().expansionPaths().get(0);
 final ProductProjectionByIdGet fetchB = ProductProjectionByIdGet.of("id", ProductProjectionType.CURRENT)
                 .withExpansionPaths(asList(categoryExpand, productTypeExpand));
 assertThat(fetchB.expansionPaths())
@@ -216,7 +216,7 @@ assertThat(fetchB.expansionPaths())
 <ul class="blockListLast">
 <li class="blockList">
 <h4>withExpansionPaths</h4>
-<pre><a href="../../../../io/sphere/sdk/expansion/MetaModelExpansionDsl.html" title="type parameter in MetaModelExpansionDsl">C</a>&nbsp;withExpansionPaths(java.util.function.Function&lt;<a href="../../../../io/sphere/sdk/expansion/MetaModelExpansionDsl.html" title="type parameter in MetaModelExpansionDsl">E</a>,<a href="../../../../io/sphere/sdk/expansion/ExpansionPath.html" title="interface in io.sphere.sdk.expansion">ExpansionPath</a>&lt;<a href="../../../../io/sphere/sdk/expansion/MetaModelExpansionDsl.html" title="type parameter in MetaModelExpansionDsl">T</a>&gt;&gt;&nbsp;m)</pre>
+<pre><a href="../../../../io/sphere/sdk/expansion/MetaModelExpansionDsl.html" title="type parameter in MetaModelExpansionDsl">C</a>&nbsp;withExpansionPaths(java.util.function.Function&lt;<a href="../../../../io/sphere/sdk/expansion/MetaModelExpansionDsl.html" title="type parameter in MetaModelExpansionDsl">E</a>,<a href="../../../../io/sphere/sdk/expansion/ExpansionPathContainer.html" title="interface in io.sphere.sdk.expansion">ExpansionPathContainer</a>&lt;<a href="../../../../io/sphere/sdk/expansion/MetaModelExpansionDsl.html" title="type parameter in MetaModelExpansionDsl">T</a>&gt;&gt;&nbsp;m)</pre>
 <div class="block">Creates a new object with the properties of the old object but replaces all expansion paths with a single <code>expansionPath</code> by using meta models.
 
  <p>An example in the product projection context:</p>
@@ -269,7 +269,7 @@ assertThat(fetch2).isNotSameAs(fetch);
 </div>
 <div class="subNav">
 <ul class="navList">
-<li><a href="../../../../io/sphere/sdk/expansion/ExpansionPath.html" title="interface in io.sphere.sdk.expansion"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
+<li><a href="../../../../io/sphere/sdk/expansion/ExpansionPathContainer.html" title="interface in io.sphere.sdk.expansion"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
 <li><a href="../../../../io/sphere/sdk/expansion/MetaModelExpansionDslExpansionModelRead.html" title="interface in io.sphere.sdk.expansion"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">

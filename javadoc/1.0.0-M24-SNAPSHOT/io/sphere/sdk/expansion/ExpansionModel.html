@@ -74,13 +74,13 @@ var activeTableTab = "activeTableTab";
 <ul class="subNavList">
 <li>Summary:&nbsp;</li>
 <li>Nested&nbsp;|&nbsp;</li>
-<li><a href="#field.summary">Field</a>&nbsp;|&nbsp;</li>
+<li>Field&nbsp;|&nbsp;</li>
 <li><a href="#constructor.summary">Constr</a>&nbsp;|&nbsp;</li>
 <li><a href="#method.summary">Method</a></li>
 </ul>
 <ul class="subNavList">
 <li>Detail:&nbsp;</li>
-<li><a href="#field.detail">Field</a>&nbsp;|&nbsp;</li>
+<li>Field&nbsp;|&nbsp;</li>
 <li><a href="#constructor.detail">Constr</a>&nbsp;|&nbsp;</li>
 <li><a href="#method.detail">Method</a></li>
 </ul>
@@ -125,29 +125,6 @@ extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.
 <div class="summary">
 <ul class="blockList">
 <li class="blockList">
-<!-- =========== FIELD SUMMARY =========== -->
-<ul class="blockList">
-<li class="blockList"><a name="field.summary">
-<!--   -->
-</a>
-<h3>Field Summary</h3>
-<table class="memberSummary" border="0" cellpadding="3" cellspacing="0" summary="Field Summary table, listing fields, and an explanation">
-<caption><span>Fields</span><span class="tabEnd">&nbsp;</span></caption>
-<tr>
-<th class="colFirst" scope="col">Modifier and Type</th>
-<th class="colLast" scope="col">Field and Description</th>
-</tr>
-<tr class="altColor">
-<td class="colFirst"><code>protected java.lang.String</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/expansion/ExpansionModel.html#parentPath">parentPath</a></span></code>&nbsp;</td>
-</tr>
-<tr class="rowColor">
-<td class="colFirst"><code>protected java.lang.String</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/expansion/ExpansionModel.html#path">path</a></span></code>&nbsp;</td>
-</tr>
-</table>
-</li>
-</ul>
 <!-- ======== CONSTRUCTOR SUMMARY ======== -->
 <ul class="blockList">
 <li class="blockList"><a name="constructor.summary">
@@ -163,6 +140,16 @@ extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.
 <tr class="altColor">
 <td class="colFirst"><code>&nbsp;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/expansion/ExpansionModel.html#ExpansionModel--">ExpansionModel</a></span>()</code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>&nbsp;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/expansion/ExpansionModel.html#ExpansionModel-java.util.List-java.lang.String-">ExpansionModel</a></span>(java.util.List&lt;java.lang.String&gt;&nbsp;parentExpressions,
+              java.lang.String&nbsp;path)</code>&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>protected </code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/expansion/ExpansionModel.html#ExpansionModel-java.lang.String-java.util.List-">ExpansionModel</a></span>(java.lang.String&nbsp;parentPath,
+              java.util.List&lt;java.lang.String&gt;&nbsp;paths)</code>&nbsp;</td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>protected </code></td>
@@ -185,15 +172,15 @@ extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.
 <th class="colLast" scope="col">Method and Description</th>
 </tr>
 <tr id="i0" class="altColor">
-<td class="colFirst"><code>protected java.lang.String</code></td>
+<td class="colFirst"><code>protected java.util.List&lt;java.lang.String&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/expansion/ExpansionModel.html#buildPathExpression--">buildPathExpression</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i1" class="rowColor">
-<td class="colFirst"><code>protected <a href="../../../../io/sphere/sdk/expansion/ExpansionPath.html" title="interface in io.sphere.sdk.expansion">ExpansionPath</a>&lt;<a href="../../../../io/sphere/sdk/expansion/ExpansionModel.html" title="type parameter in ExpansionModel">T</a>&gt;</code></td>
+<td class="colFirst"><code>protected <a href="../../../../io/sphere/sdk/expansion/ExpansionPathContainer.html" title="interface in io.sphere.sdk.expansion">ExpansionPathContainer</a>&lt;<a href="../../../../io/sphere/sdk/expansion/ExpansionModel.html" title="type parameter in ExpansionModel">T</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/expansion/ExpansionModel.html#expansionPath-java.lang.String-">expansionPath</a></span>(java.lang.String&nbsp;path)</code>&nbsp;</td>
 </tr>
 <tr id="i2" class="altColor">
-<td class="colFirst"><code>protected java.lang.String</code></td>
+<td class="colFirst"><code>protected java.util.List&lt;java.lang.String&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/expansion/ExpansionModel.html#pathExpression--">pathExpression</a></span>()</code>&nbsp;</td>
 </tr>
 </table>
@@ -219,40 +206,23 @@ extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.
 <div class="details">
 <ul class="blockList">
 <li class="blockList">
-<!-- ============ FIELD DETAIL =========== -->
-<ul class="blockList">
-<li class="blockList"><a name="field.detail">
-<!--   -->
-</a>
-<h3>Field Detail</h3>
-<a name="parentPath">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>parentPath</h4>
-<pre>@Nullable
-protected final&nbsp;java.lang.String parentPath</pre>
-</li>
-</ul>
-<a name="path">
-<!--   -->
-</a>
-<ul class="blockListLast">
-<li class="blockList">
-<h4>path</h4>
-<pre>@Nullable
-protected final&nbsp;java.lang.String path</pre>
-</li>
-</ul>
-</li>
-</ul>
 <!-- ========= CONSTRUCTOR DETAIL ======== -->
 <ul class="blockList">
 <li class="blockList"><a name="constructor.detail">
 <!--   -->
 </a>
 <h3>Constructor Detail</h3>
+<a name="ExpansionModel-java.lang.String-java.util.List-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>ExpansionModel</h4>
+<pre>protected&nbsp;ExpansionModel(@Nullable
+                         java.lang.String&nbsp;parentPath,
+                         java.util.List&lt;java.lang.String&gt;&nbsp;paths)</pre>
+</li>
+</ul>
 <a name="ExpansionModel-java.lang.String-java.lang.String-">
 <!--   -->
 </a>
@@ -268,10 +238,20 @@ protected final&nbsp;java.lang.String path</pre>
 <a name="ExpansionModel--">
 <!--   -->
 </a>
-<ul class="blockListLast">
+<ul class="blockList">
 <li class="blockList">
 <h4>ExpansionModel</h4>
 <pre>public&nbsp;ExpansionModel()</pre>
+</li>
+</ul>
+<a name="ExpansionModel-java.util.List-java.lang.String-">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>ExpansionModel</h4>
+<pre>public&nbsp;ExpansionModel(java.util.List&lt;java.lang.String&gt;&nbsp;parentExpressions,
+                      java.lang.String&nbsp;path)</pre>
 </li>
 </ul>
 </li>
@@ -288,7 +268,7 @@ protected final&nbsp;java.lang.String path</pre>
 <ul class="blockList">
 <li class="blockList">
 <h4>buildPathExpression</h4>
-<pre>protected final&nbsp;java.lang.String&nbsp;buildPathExpression()</pre>
+<pre>protected final&nbsp;java.util.List&lt;java.lang.String&gt;&nbsp;buildPathExpression()</pre>
 </li>
 </ul>
 <a name="pathExpression--">
@@ -298,7 +278,7 @@ protected final&nbsp;java.lang.String path</pre>
 <li class="blockList">
 <h4>pathExpression</h4>
 <pre>@Nullable
-protected final&nbsp;java.lang.String&nbsp;pathExpression()</pre>
+protected final&nbsp;java.util.List&lt;java.lang.String&gt;&nbsp;pathExpression()</pre>
 </li>
 </ul>
 <a name="expansionPath-java.lang.String-">
@@ -307,7 +287,7 @@ protected final&nbsp;java.lang.String&nbsp;pathExpression()</pre>
 <ul class="blockListLast">
 <li class="blockList">
 <h4>expansionPath</h4>
-<pre>protected final&nbsp;<a href="../../../../io/sphere/sdk/expansion/ExpansionPath.html" title="interface in io.sphere.sdk.expansion">ExpansionPath</a>&lt;<a href="../../../../io/sphere/sdk/expansion/ExpansionModel.html" title="type parameter in ExpansionModel">T</a>&gt;&nbsp;expansionPath(java.lang.String&nbsp;path)</pre>
+<pre>protected final&nbsp;<a href="../../../../io/sphere/sdk/expansion/ExpansionPathContainer.html" title="interface in io.sphere.sdk.expansion">ExpansionPathContainer</a>&lt;<a href="../../../../io/sphere/sdk/expansion/ExpansionModel.html" title="type parameter in ExpansionModel">T</a>&gt;&nbsp;expansionPath(java.lang.String&nbsp;path)</pre>
 </li>
 </ul>
 </li>
@@ -363,13 +343,13 @@ protected final&nbsp;java.lang.String&nbsp;pathExpression()</pre>
 <ul class="subNavList">
 <li>Summary:&nbsp;</li>
 <li>Nested&nbsp;|&nbsp;</li>
-<li><a href="#field.summary">Field</a>&nbsp;|&nbsp;</li>
+<li>Field&nbsp;|&nbsp;</li>
 <li><a href="#constructor.summary">Constr</a>&nbsp;|&nbsp;</li>
 <li><a href="#method.summary">Method</a></li>
 </ul>
 <ul class="subNavList">
 <li>Detail:&nbsp;</li>
-<li><a href="#field.detail">Field</a>&nbsp;|&nbsp;</li>
+<li>Field&nbsp;|&nbsp;</li>
 <li><a href="#constructor.detail">Constr</a>&nbsp;|&nbsp;</li>
 <li><a href="#method.detail">Method</a></li>
 </ul>

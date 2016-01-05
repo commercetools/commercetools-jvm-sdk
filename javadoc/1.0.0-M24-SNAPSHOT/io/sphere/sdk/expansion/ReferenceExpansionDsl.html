@@ -18,8 +18,8 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":6,"i1":6,"i2":6,"i3":6};
-var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],4:["t3","Abstract Methods"]};
+var methods = {"i0":6,"i1":18,"i2":6,"i3":6,"i4":18,"i5":6};
+var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],4:["t3","Abstract Methods"],16:["t5","Default Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
 var tableTab = "tableTab";
@@ -49,7 +49,7 @@ var activeTableTab = "activeTableTab";
 <div class="subNav">
 <ul class="navList">
 <li><a href="../../../../io/sphere/sdk/expansion/MetaModelExpansionDslExpansionModelRead.html" title="interface in io.sphere.sdk.expansion"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
-<li><a href="../../../../io/sphere/sdk/expansion/ReferenceExpansionSupport.html" title="interface in io.sphere.sdk.expansion"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
+<li>Next&nbsp;Class</li>
 </ul>
 <ul class="navList">
 <li><a href="../../../../index.html?io/sphere/sdk/expansion/ReferenceExpansionDsl.html" target="_top">Frames</a></li>
@@ -100,7 +100,7 @@ var activeTableTab = "activeTableTab";
 <li class="blockList">
 <dl>
 <dt>All Superinterfaces:</dt>
-<dd><a href="../../../../io/sphere/sdk/expansion/ReferenceExpansionSupport.html" title="interface in io.sphere.sdk.expansion">ReferenceExpansionSupport</a>&lt;T&gt;</dd>
+<dd><a href="../../../../io/sphere/sdk/expansion/ExpansionPathContainer.html" title="interface in io.sphere.sdk.expansion">ExpansionPathContainer</a>&lt;T&gt;</dd>
 </dl>
 <dl>
 <dt>All Known Subinterfaces:</dt>
@@ -113,7 +113,7 @@ var activeTableTab = "activeTableTab";
 <hr>
 <br>
 <pre>public interface <span class="typeNameLabel">ReferenceExpansionDsl&lt;T,C&gt;</span>
-extends <a href="../../../../io/sphere/sdk/expansion/ReferenceExpansionSupport.html" title="interface in io.sphere.sdk.expansion">ReferenceExpansionSupport</a>&lt;T&gt;</pre>
+extends <a href="../../../../io/sphere/sdk/expansion/ExpansionPathContainer.html" title="interface in io.sphere.sdk.expansion">ExpansionPathContainer</a>&lt;T&gt;</pre>
 </li>
 </ul>
 </div>
@@ -127,7 +127,7 @@ extends <a href="../../../../io/sphere/sdk/expansion/ReferenceExpansionSupport.h
 </a>
 <h3>Method Summary</h3>
 <table class="memberSummary" border="0" cellpadding="3" cellspacing="0" summary="Method Summary table, listing methods, and an explanation">
-<caption><span id="t0" class="activeTableTab"><span>All Methods</span><span class="tabEnd">&nbsp;</span></span><span id="t2" class="tableTab"><span><a href="javascript:show(2);">Instance Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t3" class="tableTab"><span><a href="javascript:show(4);">Abstract Methods</a></span><span class="tabEnd">&nbsp;</span></span></caption>
+<caption><span id="t0" class="activeTableTab"><span>All Methods</span><span class="tabEnd">&nbsp;</span></span><span id="t2" class="tableTab"><span><a href="javascript:show(2);">Instance Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t3" class="tableTab"><span><a href="javascript:show(4);">Abstract Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t5" class="tableTab"><span><a href="javascript:show(16);">Default Methods</a></span><span class="tabEnd">&nbsp;</span></span></caption>
 <tr>
 <th class="colFirst" scope="col">Modifier and Type</th>
 <th class="colLast" scope="col">Method and Description</th>
@@ -139,18 +139,26 @@ extends <a href="../../../../io/sphere/sdk/expansion/ReferenceExpansionSupport.h
 </td>
 </tr>
 <tr id="i1" class="rowColor">
+<td class="colFirst"><code>default <a href="../../../../io/sphere/sdk/expansion/ReferenceExpansionDsl.html" title="type parameter in ReferenceExpansionDsl">C</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/expansion/ReferenceExpansionDsl.html#plusExpansionPaths-io.sphere.sdk.expansion.ExpansionPathContainer-">plusExpansionPaths</a></span>(<a href="../../../../io/sphere/sdk/expansion/ExpansionPathContainer.html" title="interface in io.sphere.sdk.expansion">ExpansionPathContainer</a>&lt;<a href="../../../../io/sphere/sdk/expansion/ReferenceExpansionDsl.html" title="type parameter in ReferenceExpansionDsl">T</a>&gt;&nbsp;holder)</code>&nbsp;</td>
+</tr>
+<tr id="i2" class="altColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/expansion/ReferenceExpansionDsl.html" title="type parameter in ReferenceExpansionDsl">C</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/expansion/ReferenceExpansionDsl.html#plusExpansionPaths-java.util.List-">plusExpansionPaths</a></span>(java.util.List&lt;<a href="../../../../io/sphere/sdk/expansion/ExpansionPath.html" title="interface in io.sphere.sdk.expansion">ExpansionPath</a>&lt;<a href="../../../../io/sphere/sdk/expansion/ReferenceExpansionDsl.html" title="type parameter in ReferenceExpansionDsl">T</a>&gt;&gt;&nbsp;expansionPaths)</code>
 <div class="block">Creates a new object with the properties of the old object but adds <code>expansionPaths</code> to the expansion paths.</div>
 </td>
 </tr>
-<tr id="i2" class="altColor">
+<tr id="i3" class="rowColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/expansion/ReferenceExpansionDsl.html" title="type parameter in ReferenceExpansionDsl">C</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/expansion/ReferenceExpansionDsl.html#withExpansionPaths-io.sphere.sdk.expansion.ExpansionPath-">withExpansionPaths</a></span>(<a href="../../../../io/sphere/sdk/expansion/ExpansionPath.html" title="interface in io.sphere.sdk.expansion">ExpansionPath</a>&lt;<a href="../../../../io/sphere/sdk/expansion/ReferenceExpansionDsl.html" title="type parameter in ReferenceExpansionDsl">T</a>&gt;&nbsp;expansionPath)</code>
 <div class="block">Creates a new object with the properties of the old object but replaces all expansion paths with a single <code>expansionPath</code>.</div>
 </td>
 </tr>
-<tr id="i3" class="rowColor">
+<tr id="i4" class="altColor">
+<td class="colFirst"><code>default <a href="../../../../io/sphere/sdk/expansion/ReferenceExpansionDsl.html" title="type parameter in ReferenceExpansionDsl">C</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/expansion/ReferenceExpansionDsl.html#withExpansionPaths-io.sphere.sdk.expansion.ExpansionPathContainer-">withExpansionPaths</a></span>(<a href="../../../../io/sphere/sdk/expansion/ExpansionPathContainer.html" title="interface in io.sphere.sdk.expansion">ExpansionPathContainer</a>&lt;<a href="../../../../io/sphere/sdk/expansion/ReferenceExpansionDsl.html" title="type parameter in ReferenceExpansionDsl">T</a>&gt;&nbsp;holder)</code>&nbsp;</td>
+</tr>
+<tr id="i5" class="rowColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/expansion/ReferenceExpansionDsl.html" title="type parameter in ReferenceExpansionDsl">C</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/expansion/ReferenceExpansionDsl.html#withExpansionPaths-java.util.List-">withExpansionPaths</a></span>(java.util.List&lt;<a href="../../../../io/sphere/sdk/expansion/ExpansionPath.html" title="interface in io.sphere.sdk.expansion">ExpansionPath</a>&lt;<a href="../../../../io/sphere/sdk/expansion/ReferenceExpansionDsl.html" title="type parameter in ReferenceExpansionDsl">T</a>&gt;&gt;&nbsp;expansionPaths)</code>
 <div class="block">Creates a new object with the properties of the old object but replaces all expansion paths with <code>expansionPaths</code>.</div>
@@ -158,11 +166,11 @@ extends <a href="../../../../io/sphere/sdk/expansion/ReferenceExpansionSupport.h
 </tr>
 </table>
 <ul class="blockList">
-<li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.expansion.ReferenceExpansionSupport">
+<li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.expansion.ExpansionPathContainer">
 <!--   -->
 </a>
-<h3>Methods inherited from interface&nbsp;io.sphere.sdk.expansion.<a href="../../../../io/sphere/sdk/expansion/ReferenceExpansionSupport.html" title="interface in io.sphere.sdk.expansion">ReferenceExpansionSupport</a></h3>
-<code><a href="../../../../io/sphere/sdk/expansion/ReferenceExpansionSupport.html#expansionPaths--">expansionPaths</a></code></li>
+<h3>Methods inherited from interface&nbsp;io.sphere.sdk.expansion.<a href="../../../../io/sphere/sdk/expansion/ExpansionPathContainer.html" title="interface in io.sphere.sdk.expansion">ExpansionPathContainer</a></h3>
+<code><a href="../../../../io/sphere/sdk/expansion/ExpansionPathContainer.html#expansionPaths--">expansionPaths</a></code></li>
 </ul>
 </li>
 </ul>
@@ -205,7 +213,7 @@ extends <a href="../../../../io/sphere/sdk/expansion/ReferenceExpansionSupport.h
 
  <p>An example in the product projection context:</p>
  <div id="io-sphere-sdk-products-expansion-ProductProjectionExpansionModelTest-withExpansionPathDemo--%s" class=code-example><pre><code class='java'>final ProductProjectionByIdGet fetch = ProductProjectionByIdGet.of("id", ProductProjectionType.CURRENT)
-                .withExpansionPaths(asList(ProductProjectionExpansionModel.of().categories()));
+                .withExpansionPaths(ProductProjectionExpansionModel.of().categories());
 
 assertThat(fetch.expansionPaths())
         .isEqualTo(asList(ExpansionPath.of("categories[*]")));
@@ -217,6 +225,15 @@ assertThat(fetch.expansionPaths()).overridingErrorMessage("old object is unchang
         .isEqualTo(asList(ExpansionPath.of("categories[*]")));
 assertThat(fetch2.expansionPaths()).isEqualTo(asList(ExpansionPath.of("productType")));
 assertThat(fetch2).isNotSameAs(fetch);
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/test/java/io/sphere/sdk/products/expansion/ProductProjectionExpansionModelTest.java" target="_blank">test code</a>.</pre></div>
+
+ <p>This method also can be used to use the same expansions as in another request:</p>
+ <div id="io-sphere-sdk-products-expansion-ProductProjectionExpansionModelTest-useExpansionPathsOfOtherRequest--%s" class=code-example><pre><code class='java'>final ProductProjectionQuery query = ProductProjectionQuery.ofCurrent().withExpansionPaths(m -&gt; m.categories());
+final ProductProjectionSearch search = ProductProjectionSearch.ofCurrent().withExpansionPaths(query);
+assertThat(query.expansionPaths())
+        .hasSize(1)
+        .as("reuse expansion spec from other request")
+        .isEqualTo(search.expansionPaths());
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/test/java/io/sphere/sdk/products/expansion/ProductProjectionExpansionModelTest.java" target="_blank">test code</a>.</pre></div></div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
@@ -245,7 +262,7 @@ assertThat(fetch2).isNotSameAs(fetch);
 <a name="plusExpansionPaths-io.sphere.sdk.expansion.ExpansionPath-">
 <!--   -->
 </a>
-<ul class="blockListLast">
+<ul class="blockList">
 <li class="blockList">
 <h4>plusExpansionPaths</h4>
 <pre><a href="../../../../io/sphere/sdk/expansion/ReferenceExpansionDsl.html" title="type parameter in ReferenceExpansionDsl">C</a>&nbsp;plusExpansionPaths(<a href="../../../../io/sphere/sdk/expansion/ExpansionPath.html" title="interface in io.sphere.sdk.expansion">ExpansionPath</a>&lt;<a href="../../../../io/sphere/sdk/expansion/ReferenceExpansionDsl.html" title="type parameter in ReferenceExpansionDsl">T</a>&gt;&nbsp;expansionPath)</pre>
@@ -269,6 +286,24 @@ assertThat(fetch2).isNotSameAs(fetch);
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>new object</dd>
 </dl>
+</li>
+</ul>
+<a name="withExpansionPaths-io.sphere.sdk.expansion.ExpansionPathContainer-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>withExpansionPaths</h4>
+<pre>default&nbsp;<a href="../../../../io/sphere/sdk/expansion/ReferenceExpansionDsl.html" title="type parameter in ReferenceExpansionDsl">C</a>&nbsp;withExpansionPaths(<a href="../../../../io/sphere/sdk/expansion/ExpansionPathContainer.html" title="interface in io.sphere.sdk.expansion">ExpansionPathContainer</a>&lt;<a href="../../../../io/sphere/sdk/expansion/ReferenceExpansionDsl.html" title="type parameter in ReferenceExpansionDsl">T</a>&gt;&nbsp;holder)</pre>
+</li>
+</ul>
+<a name="plusExpansionPaths-io.sphere.sdk.expansion.ExpansionPathContainer-">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>plusExpansionPaths</h4>
+<pre>default&nbsp;<a href="../../../../io/sphere/sdk/expansion/ReferenceExpansionDsl.html" title="type parameter in ReferenceExpansionDsl">C</a>&nbsp;plusExpansionPaths(<a href="../../../../io/sphere/sdk/expansion/ExpansionPathContainer.html" title="interface in io.sphere.sdk.expansion">ExpansionPathContainer</a>&lt;<a href="../../../../io/sphere/sdk/expansion/ReferenceExpansionDsl.html" title="type parameter in ReferenceExpansionDsl">T</a>&gt;&nbsp;holder)</pre>
 </li>
 </ul>
 </li>
@@ -299,7 +334,7 @@ assertThat(fetch2).isNotSameAs(fetch);
 <div class="subNav">
 <ul class="navList">
 <li><a href="../../../../io/sphere/sdk/expansion/MetaModelExpansionDslExpansionModelRead.html" title="interface in io.sphere.sdk.expansion"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
-<li><a href="../../../../io/sphere/sdk/expansion/ReferenceExpansionSupport.html" title="interface in io.sphere.sdk.expansion"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
+<li>Next&nbsp;Class</li>
 </ul>
 <ul class="navList">
 <li><a href="../../../../index.html?io/sphere/sdk/expansion/ReferenceExpansionDsl.html" target="_top">Frames</a></li>
