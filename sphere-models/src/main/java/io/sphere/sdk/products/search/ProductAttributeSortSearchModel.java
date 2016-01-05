@@ -92,6 +92,9 @@ public class ProductAttributeSortSearchModel extends SortableSearchModel<Product
     }
 
     /**
+     * deprecated
+     * @param attributeName deprecated
+     * @return deprecated
      * @deprecated use {@link #ofLocalizedEnum(String)} instead
      */
     @Deprecated
@@ -100,6 +103,9 @@ public class ProductAttributeSortSearchModel extends SortableSearchModel<Product
     }
 
     /**
+     * deprecated
+     * @param attributeName deprecated
+     * @return deprecated
      * @deprecated use {@link #ofLocalizedEnumSet(String)} instead
      */
     @Deprecated

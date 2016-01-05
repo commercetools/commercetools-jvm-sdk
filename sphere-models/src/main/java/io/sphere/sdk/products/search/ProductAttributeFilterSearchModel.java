@@ -104,6 +104,9 @@ public class ProductAttributeFilterSearchModel extends SearchModelImpl<ProductPr
     }
 
     /**
+     * deprecated
+     * @param attributeName deprecated
+     * @return deprecated
      * @deprecated use {@link #ofLocalizedEnum(String)} instead
      */
     @Deprecated
@@ -112,6 +115,9 @@ public class ProductAttributeFilterSearchModel extends SearchModelImpl<ProductPr
     }
 
     /**
+     * deprecated
+     * @param attributeName deprecated
+     * @return deprecated
      * @deprecated use {@link #ofLocalizedEnumSet(String)} instead
      */
     @Deprecated

@@ -100,7 +100,10 @@ public class ProductAttributeFacetAndFilterSearchModel extends SearchModelImpl<P
     }
 
     /**
+     * deprecated
      * @deprecated use {@link #ofLocalizedEnum(String)} instead
+     * @param attributeName deprecated
+     * @return deprecated
      */
     @Deprecated
     public LocalizedEnumFacetAndFilterSearchModel<ProductProjection> ofLocalizableEnum(final String attributeName) {
@@ -108,7 +111,10 @@ public class ProductAttributeFacetAndFilterSearchModel extends SearchModelImpl<P
     }
 
     /**
+     * deprecated
      * @deprecated use {@link #ofLocalizedEnumSet(String)} instead
+     * @param attributeName deprecated
+     * @return deprecated
      */
     @Deprecated
     public LocalizedEnumFacetAndFilterSearchModel<ProductProjection> ofLocalizableEnumSet(final String attributeName) {
