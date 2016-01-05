@@ -122,6 +122,52 @@ extends java.lang.Object</pre>
  </ul>
  -->
 
+ <h3 class=released-version id="v1_0_0_M24">1.0.0-M24 (05.01.2016)</h3>
+
+ <ul>
+ <li class=new-in-release>Commercetools responses are gzipped which should result in less traffic and faster responses. <a href="../../../../io/sphere/sdk/http/HttpResponse.html#getResponseBody--"><code>HttpResponse.getResponseBody()</code></a> returns the unpacked body.</li>
+ <li class=new-in-release>Added <a href="../../../../io/sphere/sdk/client/BlockingSphereClient.html" title="interface in io.sphere.sdk.client"><code>BlockingSphereClient</code></a> which does not execute asynchronous: <div id="io-sphere-sdk-meta-BlockingClientValueGetDemo%s" class=code-example><button type='button' style='display: none;' class='reveal-imports'>show/hide imports</button><pre class='hide code-example-imports'><code class='java'>import io.sphere.sdk.client.BlockingSphereClient;
+import io.sphere.sdk.client.SphereRequest;
+import io.sphere.sdk.projects.Project;
+import io.sphere.sdk.projects.queries.ProjectGet;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+</code></pre><pre><code class='java'>public class BlockingClientValueGetDemo {
+    public static void demo(final BlockingSphereClient client, final String expectedProjectKey) {
+        final SphereRequest&lt;Project&gt; sphereRequest = ProjectGet.of();
+        final Project project = client.executeBlocking(sphereRequest);//returns result directly, no CompletionStage
+        assertThat(project.getKey()).isEqualTo(expectedProjectKey);
+    }
+}
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/src/test/java/io/sphere/sdk/meta/BlockingClientValueGetDemo.java" target="_blank">test code</a>.</pre></div></li>
+ <li class=new-in-release>Added <a href="../../../../io/sphere/sdk/products/expansion/ProductProjectionExpansionModel.html#allVariants--"><code>ProductProjectionExpansionModel.allVariants()</code></a> for expanding objects in masterVariant and the other variants with one code expression. <div id="io-sphere-sdk-products-expansion-ProductProjectionExpansionModelTest-allVariants--%s" class=code-example><pre><code class='java'>final List&lt;ExpansionPath&lt;ProductProjection&gt;&gt; expansionPaths =
+        ProductProjectionExpansionModel.of().allVariants().prices().customerGroup().expansionPaths();
+assertThat(expansionPaths.stream().map(ExpansionPath::toSphereExpand).collect(Collectors.toList()))
+        .containsExactly("masterVariant.prices[*].customerGroup", "variants[*].prices[*].customerGroup");
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/test/java/io/sphere/sdk/products/expansion/ProductProjectionExpansionModelTest.java" target="_blank">test code</a>.</pre></div></li>
+ <li class=new-in-release><a href="../../../../io/sphere/sdk/meta/GraphQLDocumentation.html" title="class in io.sphere.sdk.meta"><code>GraphQL Example</code></a></li>
+ <li class=new-in-release>InputHint for types is optional, so added <a href="../../../../io/sphere/sdk/types/FieldDefinition.html#of-io.sphere.sdk.types.FieldType-java.lang.String-io.sphere.sdk.models.LocalizedString-java.lang.Boolean-"><code>FieldDefinition.of(FieldType, String, LocalizedString, Boolean)</code></a>.</li>
+ <li class=new-in-release>Ease initialising clients which need a bearer token instead of the client secret:
+ <a href="../../../../io/sphere/sdk/client/SphereClientFactory.html#createClientOfApiConfigAndAccessToken-io.sphere.sdk.client.SphereApiConfig-java.lang.String-"><code>SphereClientFactory.createClientOfApiConfigAndAccessToken(SphereApiConfig, String)</code></a> and
+ <a href="../../../../io/sphere/sdk/client/SphereClientFactory.html#createClientOfApiConfigAndAccessToken-io.sphere.sdk.client.SphereApiConfig-java.lang.String-io.sphere.sdk.http.HttpClient-"><code>SphereClientFactory.createClientOfApiConfigAndAccessToken(SphereApiConfig, String, HttpClient)</code></a>
+ </li>
+ <li class=new-in-release><a href="../../../../io/sphere/sdk/products/ProductDraftBuilder.html#plusVariants-java.util.List-"><code>ProductDraftBuilder.plusVariants(List)</code></a> and <a href="../../../../io/sphere/sdk/products/ProductDraftBuilder.html#plusVariants-io.sphere.sdk.products.ProductVariantDraft-"><code>ProductDraftBuilder.plusVariants(ProductVariantDraft)</code></a></li>
+ <li class=new-in-release>Improve error reporting for failed attempts fetching OAuth tokens.</li>
+ <li class=new-in-release>Added missing transaction query fields.</li>
+ <li class=new-in-release><a href="../../../../io/sphere/sdk/client/SphereClientUtils.html#blockingWait-java.util.concurrent.CompletionStage-long-java.util.concurrent.TimeUnit-"><code>SphereClientUtils.blockingWait(CompletionStage, long, TimeUnit)</code></a> for waiting for sphere requests</li>
+ <li class=new-in-release><a href="../../../../io/sphere/sdk/carts/CartLike.html#getCurrency--"><code>CartLike.getCurrency()</code></a> which gets the currency for a cart or an order</li>
+ <li class=new-in-release>Added category order hints to search model.</li>
+ <li class=new-in-release>Added <a href="../../../../io/sphere/sdk/types/ResourceTypeIdsSetBuilder.html" title="class in io.sphere.sdk.types"><code>ResourceTypeIdsSetBuilder</code></a> which helps to find the resource type ids for creation <a href="../../../../io/sphere/sdk/types/Type.html" title="interface in io.sphere.sdk.types"><code>Type</code></a>s.</li>
+ <li class=new-in-release><a href="../../../../io/sphere/sdk/models/ResourceIdentifier.html" title="interface in io.sphere.sdk.models"><code>ResourceIdentifier</code></a>, for example for creating products with the product type key: <a href="../../../../io/sphere/sdk/products/ProductDraftBuilder.html#of-io.sphere.sdk.models.ResourceIdentifiable-io.sphere.sdk.models.LocalizedString-io.sphere.sdk.models.LocalizedString-io.sphere.sdk.products.ProductVariantDraft-"><code>ProductDraftBuilder.of(ResourceIdentifiable, LocalizedString, LocalizedString, ProductVariantDraft)</code></a> </li>
+ <li class=new-in-release>Added <a href="../../../../io/sphere/sdk/products/ProductVariant.html#isMatchingVariant--"><code>ProductVariant.isMatchingVariant()</code></a>.</li>
+ <li class=new-in-release>Several documentation improvements.</li>
+ <li class=change-in-release>Renamed methods like "ofLocalizable*" to "ofLocalized*". (the old methods are deprecated)</li>
+ <li class=change-in-release>Renamed duplicated classes like "*Type" to "*AttributeType" and "*FieldType". (direct change, no deprecation possible)</li>
+ <li class=change-in-release>Use <a href="../../../../io/sphere/sdk/client/TestDoubleSphereClientFactory.html#createHttpTestDouble-java.util.function.Function-"><code>TestDoubleSphereClientFactory.createHttpTestDouble(Function)</code></a>
+ and <a href="../../../../io/sphere/sdk/client/TestDoubleSphereClientFactory.html#createObjectTestDouble-java.util.function.Function-"><code>TestDoubleSphereClientFactory.createObjectTestDouble(Function)</code></a> instead of methods from <a href="../../../../io/sphere/sdk/client/SphereClientFactory.html" title="class in io.sphere.sdk.client"><code>SphereClientFactory</code></a> for test doubles.</li>
+ <li class=fixed-in-release>In the properties config the default auth url is wrong. See <a href="https://github.com/sphereio/sphere-jvm-sdk/issues/889">889</a>.</li>
+ <li class=removed-in-release>The review classes are removed.</li>
+ </ul>
+
  <h3 class=released-version id="v1_0_0_M23">1.0.0-M23 (09.12.2015)</h3>
 
  <ul>
