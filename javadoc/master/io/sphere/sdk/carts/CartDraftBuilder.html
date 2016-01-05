@@ -126,14 +126,14 @@ implements <a href="../../../../io/sphere/sdk/models/Builder.html" title="interf
  <div id="io-sphere-sdk-carts-CartsCustomFieldsTest-createCartWithCustomType--%s" class=code-example><pre><code class='java'>withUpdateableType(client(), type -&gt; {
     final CustomFieldsDraft customFieldsDraft = CustomFieldsDraftBuilder.ofType(type).addObject(STRING_FIELD_NAME, "a value").build();
     final CartDraft categoryDraft = CartDraftBuilder.of(EUR).country(CountryCode.DE).custom(customFieldsDraft).build();
-    final Cart category = execute(CartCreateCommand.of(categoryDraft));
+    final Cart category = client().executeBlocking(CartCreateCommand.of(categoryDraft));
     assertThat(category.getCustom().getField(STRING_FIELD_NAME, TypeReferences.stringTypeReference())).isEqualTo("a value");
 
-    final Cart updatedCart = execute(CartUpdateCommand.of(category, SetCustomField.ofObject(STRING_FIELD_NAME, "a new value")));
+    final Cart updatedCart = client().executeBlocking(CartUpdateCommand.of(category, SetCustomField.ofObject(STRING_FIELD_NAME, "a new value")));
     assertThat(updatedCart.getCustom().getField(STRING_FIELD_NAME, TypeReferences.stringTypeReference())).isEqualTo("a new value");
 
     //cleanup
-    execute(CartDeleteCommand.of(updatedCart));
+    client().executeBlocking(CartDeleteCommand.of(updatedCart));
 
     return type;
 });

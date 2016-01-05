@@ -133,15 +133,15 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html"
  <div id="io-sphere-sdk-carts-commands-CartUpdateCommandTest-setShippingAddress--%s" class=code-example><pre><code class='java'>final Cart cart = createCartWithCountry(client());
 assertThat(cart.getShippingAddress()).isNull();
 final Address address = AddressBuilder.of(DE).build();
-final Cart cartWithAddress = execute(CartUpdateCommand.of(cart, SetShippingAddress.of(address)));
+final Cart cartWithAddress = client().executeBlocking(CartUpdateCommand.of(cart, SetShippingAddress.of(address)));
 assertThat(cartWithAddress.getShippingAddress()).isEqualTo(address);
 
 //you can query by shippingAddress fields
 final CartQuery query = CartQuery.of()
         .withPredicates(m -&gt; m.shippingAddress().country().is(DE).and(m.id().is(cart.getId())));
-assertThat(execute(query).head()).contains(cartWithAddress);
+assertThat(client().executeBlocking(query).head()).contains(cartWithAddress);
 
-final Cart cartWithoutAddress = execute(CartUpdateCommand.of(cartWithAddress, SetShippingAddress.of(null)));
+final Cart cartWithoutAddress = client().executeBlocking(CartUpdateCommand.of(cartWithAddress, SetShippingAddress.of(null)));
 assertThat(cartWithoutAddress.getShippingAddress()).isNull();
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/carts/commands/CartUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 </li>

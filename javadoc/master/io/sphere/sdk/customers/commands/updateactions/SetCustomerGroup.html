@@ -131,7 +131,7 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html"
  <div id="io-sphere-sdk-customers-commands-CustomerUpdateCommandTest-setCustomerGroup--%s" class=code-example><pre><code class='java'>withB2cCustomerGroup(client(), customerGroup -&gt; {
     withCustomer(client(), customer -&gt; {
         assertThat(customer.getCustomerGroup()).isNull();
-        final Customer updateCustomer = execute(CustomerUpdateCommand.of(customer, SetCustomerGroup.of(customerGroup)));
+        final Customer updateCustomer = client().executeBlocking(CustomerUpdateCommand.of(customer, SetCustomerGroup.of(customerGroup)));
         assertThat(updateCustomer.getCustomerGroup()).isEqualTo(customerGroup.toReference());
     });
 });

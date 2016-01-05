@@ -131,7 +131,7 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html"
     final String name = "ag7";
     final CountryCode countryCode = CountryCode.AG;
     final TaxRate de7 = TaxRateBuilder.of(name, 0.07, true, countryCode).build();
-    final TaxCategory taxCategoryWithTaRate = execute(TaxCategoryUpdateCommand.of(taxCategory, AddTaxRate.of(de7)));
+    final TaxCategory taxCategoryWithTaRate = client().executeBlocking(TaxCategoryUpdateCommand.of(taxCategory, AddTaxRate.of(de7)));
     final TaxRate actual = taxCategoryWithTaRate.getTaxRates().stream().filter(rate -&gt; name.equals(rate.getName())).findFirst().get();
     assertThat(actual.getCountry()).isEqualTo(countryCode);
     assertThat(actual.getAmount()).isEqualTo(0.07);
@@ -145,7 +145,7 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html"
 
 
     //remove tax rate
-    final TaxCategory updatedTaxCategory = execute(TaxCategoryUpdateCommand.of(taxCategoryWithTaRate, RemoveTaxRate.of(actual.getId())));
+    final TaxCategory updatedTaxCategory = client().executeBlocking(TaxCategoryUpdateCommand.of(taxCategoryWithTaRate, RemoveTaxRate.of(actual.getId())));
     assertThat(updatedTaxCategory.getTaxRates()).matches(rates -&gt; !rates.stream().anyMatch(rate -&gt; name.equals(rate.getName())));
 
     return updatedTaxCategory;

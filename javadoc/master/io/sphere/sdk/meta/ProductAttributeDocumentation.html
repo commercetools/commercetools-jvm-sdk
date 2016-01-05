@@ -216,7 +216,7 @@ final ProductType productType = productTypeOptional
  put the value of the attribute to the draft. But it cannot check if you put the right objects and types in it.
 
  <p>A book example:</p>
- <div id="io-sphere-sdk-attributestutorial-ProductTypeCreationDemoTest-createBookProduct--%s" class=code-example><pre><code class='java'>final ProductType productType = execute(ProductTypeQuery.of().byName(BOOK_PRODUCT_TYPE_NAME)).head().get();
+ <div id="io-sphere-sdk-attributestutorial-ProductTypeCreationDemoTest-createBookProduct--%s" class=code-example><pre><code class='java'>final ProductType productType = client().executeBlocking(ProductTypeQuery.of().byName(BOOK_PRODUCT_TYPE_NAME)).head().get();
 final ProductVariantDraft masterVariantDraft = ProductVariantDraftBuilder.of()
         .plusAttribute(ISBN_ATTR_NAME, "978-3-86680-192-9")
         .build();
@@ -282,7 +282,7 @@ final ProductVariantDraft masterVariantDraft = ProductVariantDraftBuilder.of()
 final ProductDraft draft = ProductDraftBuilder
         .of(productType, en("basic shirt"), randomSlug(), masterVariantDraft)
         .build();
-assertThatThrownBy(() -&gt; execute(ProductCreateCommand.of(draft)))
+assertThatThrownBy(() -&gt; client().executeBlocking(ProductCreateCommand.of(draft)))
         .isInstanceOf(ErrorResponseException.class)
         .matches(e -&gt; ((ErrorResponseException)e).hasErrorCode(InvalidField.CODE));
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/attributestutorial/ProductTypeCreationDemoTest.java" target="_blank">test code</a>.</pre></div>
@@ -422,7 +422,7 @@ final ProductProjectionQuery query = ProductProjectionQuery.ofStaged()
         .plusExpansionPaths(m -&gt; m.masterVariant().attributes().valueSet())
         .plusExpansionPaths(m -&gt; m.productType());
 
-final ProductProjection productProjection = execute(query).head().get();
+final ProductProjection productProjection = client().executeBlocking(query).head().get();
 
 final ProductType productType = productProjection.getProductType().getObj();
 final ProductVariant masterVariant = productProjection.getMasterVariant();
@@ -511,7 +511,7 @@ final int masterVariantId = 1;
 final AttributeDraft attributeDraft = AttributeDraft.of(ISBN_ATTR_NAME, "978-3-86680-192-8");
 final SetAttribute updateAction = SetAttribute.of(masterVariantId, attributeDraft);
 
-final Product updatedProduct = execute(ProductUpdateCommand.of(product, updateAction));
+final Product updatedProduct = client().executeBlocking(ProductUpdateCommand.of(product, updateAction));
 
 final ProductVariant masterVariant = updatedProduct.getMasterData().getStaged().getMasterVariant();
 assertThat(masterVariant.findAttribute(ISBN_ATTR_NAME, AttributeAccess.ofText()))
@@ -530,7 +530,7 @@ final List&lt;SetAttribute&gt; updateActions = asList(
         draft.apply(AttributeDraft.of(RRP_ATTR_NAME, MoneyImpl.of(20, EUR)))
 );
 
-final Product updatedProduct = execute(ProductUpdateCommand.of(product, updateActions));
+final Product updatedProduct = client().executeBlocking(ProductUpdateCommand.of(product, updateActions));
 
 final ProductVariant masterVariant = updatedProduct.getMasterData().getStaged().getMasterVariant();
 assertThat(masterVariant.findAttribute(COLOR_ATTR_NAME, AttributeAccess.ofLocalizedEnumValue()))
@@ -549,7 +549,7 @@ assertThat(masterVariant.findAttribute(RRP_ATTR_NAME, AttributeAccess.ofMoney())
  with an error code of <a href="../../../../io/sphere/sdk/models/errors/InvalidField.html#CODE">"InvalidField"</a>.
 
  <div id="io-sphere-sdk-attributestutorial-ProductTypeCreationDemoTest-updateWithWrongType--%s" class=code-example><pre><code class='java'>final Product product = createProduct();
-assertThatThrownBy(() -&gt; execute(ProductUpdateCommand.of(product,
+assertThatThrownBy(() -&gt; client().executeBlocking(ProductUpdateCommand.of(product,
         SetAttribute.of(1, AttributeDraft.of(LAUNDRY_SYMBOLS_ATTR_NAME, "cold")))))
         .isInstanceOf(ErrorResponseException.class)
         .matches(e -&gt; ((ErrorResponseException)e).hasErrorCode(InvalidField.CODE));
@@ -595,7 +595,7 @@ final OrderImportDraft orderImportDraft = OrderImportDraftBuilder
         .ofLineItems(EURO_20, OrderState.COMPLETE, asList(lineItemImportDraft))
         .build();
 
-final Order order = execute(OrderImportCommand.of(orderImportDraft));
+final Order order = client().executeBlocking(OrderImportCommand.of(orderImportDraft));
 
 final ProductVariant productVariant = order.getLineItems().get(0).getVariant();
 final Optional&lt;LocalizedEnumValue&gt; colorAttribute =

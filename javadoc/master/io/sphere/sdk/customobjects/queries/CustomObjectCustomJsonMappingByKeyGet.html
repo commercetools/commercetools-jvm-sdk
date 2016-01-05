@@ -234,7 +234,7 @@ import io.sphere.sdk.http.HttpResponse;
     final String container = co.getContainer();
     final String key = co.getKey();
     final Get&lt;CustomObject&lt;GsonFoo&gt;&gt; fetch = new GsonFooCustomObjectByKeyGet(container, key);
-    final CustomObject&lt;GsonFoo&gt; customObject = execute(fetch);
+    final CustomObject&lt;GsonFoo&gt; customObject = client().executeBlocking(fetch);
     assertThat(customObject).isNotNull();
     assertThat(customObject.toReference()).isEqualTo(co.toReference());
     final GsonFoo value = customObject.getValue();

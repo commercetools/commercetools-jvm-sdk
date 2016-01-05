@@ -134,7 +134,7 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html"
     final LineItem lineItem = order.getLineItems().get(0);
     final long availableItemsToShip = 1;
     final List&lt;DeliveryItem&gt; items = asList(DeliveryItem.of(lineItem, availableItemsToShip));
-    final Order updatedOrder = execute(OrderUpdateCommand.of(order, AddDelivery.of(items, parcels)));
+    final Order updatedOrder = client().executeBlocking(OrderUpdateCommand.of(order, AddDelivery.of(items, parcels)));
     final Delivery delivery = updatedOrder.getShippingInfo().getDeliveries().get(0);
     assertThat(delivery.getItems()).isEqualTo(items);
     final Parcel parcel = delivery.getParcels().get(0);

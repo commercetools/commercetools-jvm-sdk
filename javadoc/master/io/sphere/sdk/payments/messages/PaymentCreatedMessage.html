@@ -146,13 +146,13 @@ extends <a href="../../../../../io/sphere/sdk/messages/GenericMessageImpl.html" 
             .customer(customer)
             .paymentMethodInfo(paymentMethodInfo)
             ;
-    final Payment payment = execute(PaymentCreateCommand.of(paymentDraftBuilder.build()));
+    final Payment payment = client().executeBlocking(PaymentCreateCommand.of(paymentDraftBuilder.build()));
 
     assertThat(payment.getCustomer()).isEqualTo(payment.getCustomer());
     assertThat(payment.getPaymentMethodInfo()).isEqualTo(paymentMethodInfo);
     assertThat(payment.getAmountPlanned()).isEqualTo(totalAmount);
 
-    final PagedQueryResult&lt;PaymentCreatedMessage&gt; pagedQueryResult = execute(MessageQuery.of()
+    final PagedQueryResult&lt;PaymentCreatedMessage&gt; pagedQueryResult = client().executeBlocking(MessageQuery.of()
             .withPredicates(m -&gt; m.resource().is(payment))
             .forMessageType(PaymentCreatedMessage.MESSAGE_HINT));
 
@@ -160,7 +160,7 @@ extends <a href="../../../../../io/sphere/sdk/messages/GenericMessageImpl.html" 
     assertThat(paymentCreatedMessage.getPayment().getId()).isEqualTo(payment.getId());
     assertThat(paymentCreatedMessage.getResource().getId()).isEqualTo(payment.getId());
 
-    execute(PaymentDeleteCommand.of(payment));
+    client().executeBlocking(PaymentDeleteCommand.of(payment));
 }));
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/payments/commands/PaymentCreateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 <dl>

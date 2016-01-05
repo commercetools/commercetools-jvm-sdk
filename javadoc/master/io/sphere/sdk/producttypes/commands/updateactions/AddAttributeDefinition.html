@@ -133,12 +133,12 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html"
     final String attributeName = "foostring";
     final AttributeDefinition foostring =
             AttributeDefinitionBuilder.of(attributeName, LocalizedString.of(ENGLISH, "foo string"), StringAttributeType.of()).build();
-    final ProductType withFoostring = execute(ProductTypeUpdateCommand.of(productType, AddAttributeDefinition.of(foostring)));
+    final ProductType withFoostring = client().executeBlocking(ProductTypeUpdateCommand.of(productType, AddAttributeDefinition.of(foostring)));
     final AttributeDefinition loadedDefinition = withFoostring.getAttribute(attributeName);
     assertThat(loadedDefinition.getAttributeType()).isEqualTo(StringAttributeType.of());
 
     //remove
-    final ProductType withoutFoostring = execute(ProductTypeUpdateCommand.of(withFoostring, RemoveAttributeDefinition.of(attributeName)));
+    final ProductType withoutFoostring = client().executeBlocking(ProductTypeUpdateCommand.of(withFoostring, RemoveAttributeDefinition.of(attributeName)));
     assertThat(withoutFoostring.findAttribute(attributeName)).isEmpty();
     return withoutFoostring;
 });

@@ -117,7 +117,7 @@ final String sortOrder = randomSortOrder();
 final ProductDiscountDraft discountDraft =
         ProductDiscountDraft.of(name, description, predicate, discountValue, sortOrder, active);
 
-final ProductDiscount productDiscount = execute(ProductDiscountCreateCommand.of(discountDraft));
+final ProductDiscount productDiscount = client().executeBlocking(ProductDiscountCreateCommand.of(discountDraft));
 
 assertThat(productDiscount.getName()).isEqualTo(name);
 assertThat(productDiscount.getDescription()).isEqualTo(description);
@@ -131,14 +131,14 @@ final ProductByIdGet sphereRequest =
                 .plusExpansionPaths(m -&gt; m.masterData().staged().masterVariant().prices().discounted().discount());
 
 assertEventually(() -&gt; {
-    final Product discountedProduct = execute(sphereRequest);
+    final Product discountedProduct = client().executeBlocking(sphereRequest);
     final List&lt;Price&gt; productPrices = discountedProduct.getMasterData().getStaged().getMasterVariant().getPrices();
 
     assertThat(productPrices)
             .overridingErrorMessage("discount object in price is expanded")
             .matches(prices -&gt; prices.stream().anyMatch(price -&gt; price.getDiscounted() != null &amp;&amp; price.getDiscounted().getDiscount().getObj() != null));
     // clean up test
-    execute(ProductDiscountDeleteCommand.of(productDiscount));
+    client().executeBlocking(ProductDiscountDeleteCommand.of(productDiscount));
 });
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/productdiscounts/commands/ProductDiscountCreateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 </li>

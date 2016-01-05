@@ -131,7 +131,7 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html"
  <div id="io-sphere-sdk-products-commands-ProductUpdateCommandTest-setDescription--%s" class=code-example><pre><code class='java'>withUpdateableProduct(client(), product -&gt; {
     final LocalizedString newDescription = ofEnglishLocale("new description " + RANDOM.nextInt());
     final ProductUpdateCommand cmd = ProductUpdateCommand.of(product, SetDescription.of(newDescription));
-    final Product updatedProduct = execute(cmd);
+    final Product updatedProduct = client().executeBlocking(cmd);
 
     assertThat(updatedProduct.getMasterData().getStaged().getDescription()).isEqualTo(newDescription);
     return updatedProduct;

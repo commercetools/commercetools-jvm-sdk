@@ -140,7 +140,7 @@ final CustomerDraft draft = CustomerDraft.of(name, email, password)
         .withDefaultShippingAddress(1);
 final CustomerCreateCommand sphereRequest = CustomerCreateCommand.of(draft)
         .withExpansionPaths(m -&gt; m.customer().customerGroup());
-final CustomerSignInResult result = execute(sphereRequest);
+final CustomerSignInResult result = client().executeBlocking(sphereRequest);
 assertThat(result.getCart())
         .as("no cart id given in creation, so this field is empty")
         .isNull();
@@ -167,10 +167,10 @@ assertThat(customer.getCustomerGroup().getObj())
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/customers/commands/CustomerCreateCommandTest.java" target="_blank">test code</a>.</pre></div>
 
  <p>Example for creating a customer with a cart:</p>
- <div id="io-sphere-sdk-customers-commands-CustomerCreateCommandTest-createCustomerWithCart--%s" class=code-example><pre><code class='java'>final Cart cart = execute(CartCreateCommand.of(CartDraft.of(EUR)));//could of course be filled with products
+ <div id="io-sphere-sdk-customers-commands-CustomerCreateCommandTest-createCustomerWithCart--%s" class=code-example><pre><code class='java'>final Cart cart = client().executeBlocking(CartCreateCommand.of(CartDraft.of(EUR)));//could of course be filled with products
 final String email = randomEmail(CustomerCreateCommandTest.class);
 final CustomerDraft draft = CustomerDraft.of(CUSTOMER_NAME, email, PASSWORD).withCart(cart);
-final CustomerSignInResult result = execute(CustomerCreateCommand.of(draft));
+final CustomerSignInResult result = client().executeBlocking(CustomerCreateCommand.of(draft));
 assertThat(result.getCart()).isNotNull();
 assertThat(result.getCart().getId()).isEqualTo(cart.getId());
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/customers/commands/CustomerCreateCommandTest.java" target="_blank">test code</a>.</pre></div>
@@ -193,11 +193,11 @@ assertThat(result.getCart().getId()).isEqualTo(cart.getId());
     final int ttlMinutes = 15;
     final Command&lt;CustomerToken&gt; createTokenCommand = CustomerCreateEmailTokenCommand.of(customer, ttlMinutes);
 
-    final CustomerToken customerToken = execute(createTokenCommand);
+    final CustomerToken customerToken = client().executeBlocking(createTokenCommand);
     final String tokenValue = customerToken.getValue();//this token needs to be sent via email to the customer
 
     final Command&lt;Customer&gt; verifyEmailCommand = CustomerVerifyEmailCommand.of(customer, tokenValue);
-    final Customer loadedCustomer = execute(verifyEmailCommand);
+    final Customer loadedCustomer = client().executeBlocking(verifyEmailCommand);
     assertThat(loadedCustomer.isEmailVerified()).isTrue();
 });
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/customers/commands/CustomerCreateEmailTokenCommandTest.java" target="_blank">test code</a>.</pre></div>
@@ -216,14 +216,14 @@ assertThat(result.getCart().getId()).isEqualTo(cart.getId());
 
  <p>Example for a successful sign in:</p>
  <div id="io-sphere-sdk-customers-commands-CustomerSignInCommandTest-execution--%s" class=code-example><pre><code class='java'>withCustomer(client(), customer -&gt; {
-    final CustomerSignInResult result = execute(CustomerSignInCommand.of(customer.getEmail(), PASSWORD));
+    final CustomerSignInResult result = client().executeBlocking(CustomerSignInCommand.of(customer.getEmail(), PASSWORD));
     assertThat(result.getCustomer()).isEqualTo(customer);
 });
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/customers/commands/CustomerSignInCommandTest.java" target="_blank">test code</a>.</pre></div>
 
   <p>Example for invalid credentials:</p>
  <div id="io-sphere-sdk-customers-commands-CustomerSignInCommandTest-executionWithInvalidEmail--%s" class=code-example><pre><code class='java'>withCustomer(client(), customer -&gt; {
-    assertThatThrownBy(() -&gt; execute(CustomerSignInCommand.of("notpresent@null.sphere.io", PASSWORD)))
+    assertThatThrownBy(() -&gt; client().executeBlocking(CustomerSignInCommand.of("notpresent@null.sphere.io", PASSWORD)))
             .isInstanceOf(ErrorResponseException.class)
             .matches(e -&gt; ((ErrorResponseException) e).hasErrorCode(CustomerInvalidCredentials.CODE));
 });
@@ -239,15 +239,15 @@ assertThat(result.getCart().getId()).isEqualTo(cart.getId());
 
  <div id="io-sphere-sdk-customers-commands-CustomerPasswordResetCommandTest-execution--%s" class=code-example><pre><code class='java'>withCustomer(client(), customer -&gt; {
     final String email = customer.getEmail();
-    final CustomerToken token = execute(CustomerCreatePasswordTokenCommand.of(email));
+    final CustomerToken token = client().executeBlocking(CustomerCreatePasswordTokenCommand.of(email));
     final String tokenValue = token.getValue();//this may need to be sent by email to the customer
 
-    final Customer customerByToken = execute(CustomerByPasswordTokenGet.of(tokenValue));
+    final Customer customerByToken = client().executeBlocking(CustomerByPasswordTokenGet.of(tokenValue));
     final String newPassword = "newPassword";
     final Customer updatedCustomer =
-            execute(CustomerPasswordResetCommand.of(customerByToken, tokenValue, newPassword));
+            client().executeBlocking(CustomerPasswordResetCommand.of(customerByToken, tokenValue, newPassword));
 
-    final CustomerSignInResult signInResult = execute(CustomerSignInCommand.of(email, newPassword));
+    final CustomerSignInResult signInResult = client().executeBlocking(CustomerSignInCommand.of(email, newPassword));
     assertThat(signInResult.getCustomer().getId())
             .describedAs("customer can sign in with the new password")
             .isEqualTo(customer.getId());

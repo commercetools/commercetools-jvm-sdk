@@ -131,7 +131,7 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html"
  <div id="io-sphere-sdk-producttypes-commands-ProductTypeUpdateCommandTest-changeAttributeOrder--%s" class=code-example><pre><code class='java'>withUpdateableProductType(client(), productType -&gt; {
 
     final List&lt;AttributeDefinition&gt; attributeDefinitions = ListUtils.reverse(productType.getAttributes());
-    final ProductType updatedProductType = execute(ProductTypeUpdateCommand.of(productType, ChangeAttributeOrder.of(attributeDefinitions)));
+    final ProductType updatedProductType = client().executeBlocking(ProductTypeUpdateCommand.of(productType, ChangeAttributeOrder.of(attributeDefinitions)));
 
     assertThat(updatedProductType.getAttributes()).isEqualTo(attributeDefinitions);
 

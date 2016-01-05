@@ -132,7 +132,7 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html"
     final LocalizedString newName = LocalizedString.of(ENGLISH, "new name");
     final CategoryUpdateCommand command = CategoryUpdateCommand.of(category, ChangeName.of(newName));
 
-    final Category updatedCategory = execute(command);
+    final Category updatedCategory = client().executeBlocking(command);
 
     assertThat(updatedCategory.getName()).isEqualTo(newName);
 });

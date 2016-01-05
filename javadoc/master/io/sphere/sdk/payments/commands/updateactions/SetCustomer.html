@@ -132,7 +132,7 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html"
     withPayment(client(), payment -&gt; {
         assertThat(payment.getCustomer()).isNotEqualTo(customer.toReference());
 
-        final Payment updatedPayment = execute(PaymentUpdateCommand.of(payment, SetCustomer.of(customer)));
+        final Payment updatedPayment = client().executeBlocking(PaymentUpdateCommand.of(payment, SetCustomer.of(customer)));
 
         assertThat(updatedPayment.getCustomer()).isEqualTo(customer.toReference());
 

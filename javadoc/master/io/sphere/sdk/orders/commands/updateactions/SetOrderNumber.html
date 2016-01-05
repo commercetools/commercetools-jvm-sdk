@@ -131,7 +131,7 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html"
  <div id="io-sphere-sdk-orders-commands-OrderUpdateCommandTest-setOrderNumber--%s" class=code-example><pre><code class='java'>withOrder(client(), order -&gt; {
     assertThat(order.getOrderNumber()).isNull();
     final String orderNumber = randomString();
-    final Order updatedOrder = execute(OrderUpdateCommand.of(order, SetOrderNumber.of(orderNumber)));
+    final Order updatedOrder = client().executeBlocking(OrderUpdateCommand.of(order, SetOrderNumber.of(orderNumber)));
     assertThat(updatedOrder.getOrderNumber()).isEqualTo(orderNumber);
 
     return updatedOrder;

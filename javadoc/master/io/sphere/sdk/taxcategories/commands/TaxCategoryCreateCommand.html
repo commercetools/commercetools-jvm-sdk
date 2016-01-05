@@ -110,7 +110,7 @@ extends <a href="../../../../../io/sphere/sdk/commands/CreateCommand.html" title
 
  <div id="io-sphere-sdk-taxcategories-TaxCategoryIntegrationTest-createTaxCategory--%s" class=code-example><pre><code class='java'>final TaxRate taxRate = TaxRate.of("GERMAN default tax", 0.19, false, DE);
 final TaxCategoryDraft taxCategoryDraft = TaxCategoryDraft.of("German tax", asList(taxRate), "Normal-Steuersatz");
-final TaxCategory taxCategory = execute(TaxCategoryCreateCommand.of(taxCategoryDraft));
+final TaxCategory taxCategory = client().executeBlocking(TaxCategoryCreateCommand.of(taxCategoryDraft));
 return taxCategory;
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/taxcategories/TaxCategoryIntegrationTest.java" target="_blank">test code</a>.</pre></div></div>
 <dl>

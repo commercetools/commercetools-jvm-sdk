@@ -141,7 +141,7 @@ extends <a href="../../../../../io/sphere/sdk/commands/CommandImpl.html" title="
 
  <p>Example for a simple sign in without any carts involved:</p>
  <div id="io-sphere-sdk-customers-commands-CustomerSignInCommandTest-execution--%s" class=code-example><pre><code class='java'>withCustomer(client(), customer -&gt; {
-    final CustomerSignInResult result = execute(CustomerSignInCommand.of(customer.getEmail(), PASSWORD));
+    final CustomerSignInResult result = client().executeBlocking(CustomerSignInCommand.of(customer.getEmail(), PASSWORD));
     assertThat(result.getCustomer()).isEqualTo(customer);
 });
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/customers/commands/CustomerSignInCommandTest.java" target="_blank">test code</a>.</pre></div>
@@ -164,7 +164,7 @@ extends <a href="../../../../../io/sphere/sdk/commands/CommandImpl.html" title="
             anonymousCart.getLineItems().get(0).getQuantity());
     assertThat(maxOfBothQuantities).isEqualTo(7);
 
-    final CustomerSignInResult result = execute(CustomerSignInCommand
+    final CustomerSignInResult result = client().executeBlocking(CustomerSignInCommand
             .of(customer.getEmail(), PASSWORD, anonymousCart.getId()));
 
     final Cart mergeResultCart = result.getCart();
@@ -176,14 +176,14 @@ extends <a href="../../../../../io/sphere/sdk/commands/CommandImpl.html" title="
     assertThat(mergeResultCart.getId()).isEqualTo(customersCart.getId());
     assertThat(mergeResultCart.getId()).isEqualTo(customersCart.getId());
     assertThat(mergeResultCart.getCartState()).isEqualTo(CartState.ACTIVE);
-    final Cart abandonedCart = execute(CartByIdGet.of(anonymousCart.getId()));
+    final Cart abandonedCart = client().executeBlocking(CartByIdGet.of(anonymousCart.getId()));
     assertThat(abandonedCart.getCartState()).isEqualTo(CartState.MERGED);
 });
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/customers/commands/CustomerSignInCommandTest.java" target="_blank">test code</a>.</pre></div>
 
   <p>Example for invalid credentials:</p>
  <div id="io-sphere-sdk-customers-commands-CustomerSignInCommandTest-executionWithInvalidEmail--%s" class=code-example><pre><code class='java'>withCustomer(client(), customer -&gt; {
-    assertThatThrownBy(() -&gt; execute(CustomerSignInCommand.of("notpresent@null.sphere.io", PASSWORD)))
+    assertThatThrownBy(() -&gt; client().executeBlocking(CustomerSignInCommand.of("notpresent@null.sphere.io", PASSWORD)))
             .isInstanceOf(ErrorResponseException.class)
             .matches(e -&gt; ((ErrorResponseException) e).hasErrorCode(CustomerInvalidCredentials.CODE));
 });

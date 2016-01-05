@@ -131,15 +131,16 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html"
  <div id="io-sphere-sdk-orders-commands-OrderUpdateCommandTest-addPayment--%s" class=code-example><pre><code class='java'>withPayment(client(), payment -&gt; {
     withOrder(client(), order -&gt; {
         //add payment
-        final Order orderWithPayment = execute(OrderUpdateCommand.of(order, AddPayment.of(payment))
-                .withExpansionPaths(m -&gt; m.paymentInfo().payments()));
+        final OrderUpdateCommand orderUpdateCommand = OrderUpdateCommand.of(order, AddPayment.of(payment))
+                .withExpansionPaths(m -&gt; m.paymentInfo().payments());
+        final Order orderWithPayment = client().executeBlocking(orderUpdateCommand);
 
         final Reference&lt;Payment&gt; paymentReference = orderWithPayment.getPaymentInfo().getPayments().get(0);
         assertThat(paymentReference).isEqualTo(payment.toReference());
         assertThat(paymentReference).is(expanded(payment));
 
         //remove payment
-        final Order orderWithoutPayment = execute(OrderUpdateCommand.of(orderWithPayment, RemovePayment.of(payment)));
+        final Order orderWithoutPayment = client().executeBlocking(OrderUpdateCommand.of(orderWithPayment, RemovePayment.of(payment)));
 
         assertThat(orderWithoutPayment.getPaymentInfo()).isNull();
 

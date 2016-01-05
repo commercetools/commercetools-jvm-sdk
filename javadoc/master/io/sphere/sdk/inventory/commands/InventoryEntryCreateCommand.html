@@ -116,7 +116,7 @@ extends <a href="../../../../../io/sphere/sdk/commands/CreateCommand.html" title
             .withRestockableInDays(restockableInDays)
             .withSupplyChannel(channel);
 
-    final InventoryEntry inventoryEntry = execute(InventoryEntryCreateCommand.of(inventoryEntryDraft));
+    final InventoryEntry inventoryEntry = client().executeBlocking(InventoryEntryCreateCommand.of(inventoryEntryDraft));
 
     assertThat(inventoryEntry.getSku()).isEqualTo(sku);
     assertThat(inventoryEntry.getQuantityOnStock()).isEqualTo(quantityOnStock);
@@ -127,7 +127,7 @@ extends <a href="../../../../../io/sphere/sdk/commands/CreateCommand.html" title
 
     //delete
     final DeleteCommand&lt;InventoryEntry&gt; deleteCommand = InventoryEntryDeleteCommand.of(inventoryEntry);
-    final InventoryEntry deletedEntry = execute(deleteCommand);
+    final InventoryEntry deletedEntry = client().executeBlocking(deleteCommand);
 });
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/inventory/commands/InventoryEntryCreateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 </li>

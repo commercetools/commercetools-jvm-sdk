@@ -131,12 +131,12 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html"
     <div id="io-sphere-sdk-orders-commands-OrderUpdateCommandTest-addParcelToDelivery--%s" class=code-example><pre><code class='java'>withOrder(client(), order -&gt; {
     final LineItem lineItem = order.getLineItems().get(0);
     final List&lt;DeliveryItem&gt; items = asList(DeliveryItem.of(lineItem));
-    final Order orderWithDelivery = execute(OrderUpdateCommand.of(order, AddDelivery.of(items)));
+    final Order orderWithDelivery = client().executeBlocking(OrderUpdateCommand.of(order, AddDelivery.of(items)));
     final Delivery delivery = orderWithDelivery.getShippingInfo().getDeliveries().get(0);
     assertThat(delivery.getParcels()).isEmpty();
     final ParcelDraft parcelDraft = ParcelDraft.of(PARCEL_MEASUREMENTS, TRACKING_DATA);
     final AddParcelToDelivery action = AddParcelToDelivery.of(delivery, parcelDraft);
-    final Order updatedOrder = execute(OrderUpdateCommand.of(orderWithDelivery, action));
+    final Order updatedOrder = client().executeBlocking(OrderUpdateCommand.of(orderWithDelivery, action));
     final Parcel actual = updatedOrder.getShippingInfo().getDeliveries().get(0).getParcels().get(0);
     assertThat(actual.getMeasurements()).isEqualTo(PARCEL_MEASUREMENTS);
     assertThat(actual.getTrackingData()).isEqualTo(TRACKING_DATA);

@@ -112,7 +112,7 @@ extends <a href="../../../../../io/sphere/sdk/queries/MetaModelQueryDsl.html" ti
 
  <div id="io-sphere-sdk-channels-queries-ChannelQueryTest-execution--%s" class=code-example><pre><code class='java'>withUpdatableChannelOfRole(client(), ChannelRole.PRIMARY, channel -&gt; {
     final String key = channel.getKey();
-    final PagedQueryResult&lt;Channel&gt; pagedQueryResult = execute(ChannelQuery.of().byKey(key));
+    final PagedQueryResult&lt;Channel&gt; pagedQueryResult = client().executeBlocking(ChannelQuery.of().byKey(key));
 
     assertThat(pagedQueryResult).has(onlyTheResult(channel));
     return channel;

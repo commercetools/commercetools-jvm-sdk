@@ -131,7 +131,7 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html"
  <div id="io-sphere-sdk-types-commands-TypeUpdateCommandTest-changeLabel--%s" class=code-example><pre><code class='java'>withUpdateableType(client(), type -&gt; {
     final LocalizedString newLabel = randomSlug();
     final String name = type.getFieldDefinitions().get(0).getName();
-    final Type updatedType = execute(TypeUpdateCommand.of(type, ChangeFieldDefinitionLabel.of(name, newLabel)));
+    final Type updatedType = client().executeBlocking(TypeUpdateCommand.of(type, ChangeFieldDefinitionLabel.of(name, newLabel)));
     assertThat(updatedType.getFieldDefinitionByName(name).getLabel()).isEqualTo(newLabel);
     return updatedType;
 });

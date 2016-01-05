@@ -133,12 +133,12 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html"
     final LocalizedString oldDescriptionOption = product.getMasterData().getStaged().getDescription();
     final LocalizedString newDescription = ofEnglishLocale("new description " + RANDOM.nextInt());
     final ProductUpdateCommand cmd = ProductUpdateCommand.of(product, asList(Publish.of(), SetDescription.of(newDescription)));
-    final Product updatedProduct = execute(cmd);
+    final Product updatedProduct = client().executeBlocking(cmd);
     assertThat(oldDescriptionOption).isNotEqualTo(newDescription);
     assertThat(updatedProduct.getMasterData().getStaged().getDescription()).isEqualTo(newDescription);
     assertThat(updatedProduct.getMasterData().getCurrent().getDescription()).isEqualTo(oldDescriptionOption);
 
-    final Product revertedProduct = execute(ProductUpdateCommand.of(updatedProduct, RevertStagedChanges.of()));
+    final Product revertedProduct = client().executeBlocking(ProductUpdateCommand.of(updatedProduct, RevertStagedChanges.of()));
     assertThat(revertedProduct.getMasterData().getStaged().getDescription()).isEqualTo(oldDescriptionOption);
     assertThat(revertedProduct.getMasterData().getCurrent().getDescription()).isEqualTo(oldDescriptionOption);
 

@@ -131,7 +131,7 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html"
  <div id="io-sphere-sdk-inventory-commands-InventoryEntryUpdateCommandTest-addQuantity--%s" class=code-example><pre><code class='java'>withUpdateableInventoryEntry(client(), entry -&gt; {
     final long additionalQuantity = 4;
     final UpdateAction&lt;InventoryEntry&gt; action = AddQuantity.of(additionalQuantity);
-    final InventoryEntry updatedEntry = execute(InventoryEntryUpdateCommand.of(entry, action));
+    final InventoryEntry updatedEntry = client().executeBlocking(InventoryEntryUpdateCommand.of(entry, action));
     assertThat(updatedEntry.getQuantityOnStock()).isEqualTo(entry.getQuantityOnStock() + additionalQuantity);
     return updatedEntry;
 });

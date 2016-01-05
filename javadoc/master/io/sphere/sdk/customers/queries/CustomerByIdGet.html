@@ -111,7 +111,7 @@ extends <a href="../../../../../io/sphere/sdk/queries/MetaModelGetDsl.html" titl
  <div id="io-sphere-sdk-customers-queries-CustomerByIdGetTest-execution--%s" class=code-example><pre><code class='java'>withCustomerInGroup(client(), (customer, customerGroup) -&gt; {
     final Get&lt;Customer&gt; fetch = CustomerByIdGet.of(customer)
             .withExpansionPaths(CustomerExpansionModel.of().customerGroup());
-    final Customer fetchedCustomer = execute(fetch);
+    final Customer fetchedCustomer = client().executeBlocking(fetch);
     assertThat(fetchedCustomer.getId()).isEqualTo(customer.getId());
     assertThat(fetchedCustomer.getCustomerGroup().getObj().getId()).isEqualTo(customerGroup.getId());
 });

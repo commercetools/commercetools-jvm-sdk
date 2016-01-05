@@ -135,7 +135,7 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html"
     assertThat(cartDiscount.getValidUntil()).isNotEqualTo(dateTime);
 
     final CartDiscount updatedDiscount =
-            execute(CartDiscountUpdateCommand.of(cartDiscount, SetValidUntil.of(dateTime)));
+            client().executeBlocking(CartDiscountUpdateCommand.of(cartDiscount, SetValidUntil.of(dateTime)));
 
     assertThat(updatedDiscount.getValidUntil()).isEqualTo(dateTime);
 });

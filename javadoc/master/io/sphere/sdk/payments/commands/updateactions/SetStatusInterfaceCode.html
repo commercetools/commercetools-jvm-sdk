@@ -131,7 +131,7 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html"
  <div id="io-sphere-sdk-payments-commands-PaymentUpdateCommandTest-setStatusInterfaceText--%s" class=code-example><pre><code class='java'>withPayment(client(), payment -&gt; {
     final String interfaceText = "Operation successful";
     final String interfaceCode = "20000";
-    final Payment updatedPayment = execute(PaymentUpdateCommand.of(payment,
+    final Payment updatedPayment = client().executeBlocking(PaymentUpdateCommand.of(payment,
             asList(
                     SetStatusInterfaceText.of(interfaceText),
                     SetStatusInterfaceCode.of(interfaceCode)

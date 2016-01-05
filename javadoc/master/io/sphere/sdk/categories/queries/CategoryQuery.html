@@ -113,7 +113,7 @@ extends <a href="../../../../../io/sphere/sdk/queries/MetaModelQueryDsl.html" ti
 
     final Query&lt;Category&gt; query = CategoryQuery.of().byExternalId(externalId);
 
-    final Category actual = execute(query).head().get();
+    final Category actual = client().executeBlocking(query).head().get();
     assertThat(actual).isEqualTo(category);
 });
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/categories/queries/CategoryQueryTest.java" target="_blank">test code</a>.</pre></div></div>

@@ -131,7 +131,7 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html"
  <div id="io-sphere-sdk-producttypes-commands-ProductTypeUpdateCommandTest-changeName--%s" class=code-example><pre><code class='java'>withUpdateableProductType(client(), productType -&gt; {
     final String name = randomKey();
     final ProductType updatedProductType =
-            execute(ProductTypeUpdateCommand.of(productType, ChangeName.of(name)));
+            client().executeBlocking(ProductTypeUpdateCommand.of(productType, ChangeName.of(name)));
     assertThat(updatedProductType.getName()).isEqualTo(name);
     return updatedProductType;
 });

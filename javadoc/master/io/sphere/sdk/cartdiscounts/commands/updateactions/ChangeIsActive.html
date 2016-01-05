@@ -134,7 +134,7 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html"
     assertThat(cartDiscount.isActive()).isNotEqualTo(newIsActice);
 
     final CartDiscount updatedDiscount =
-            execute(CartDiscountUpdateCommand.of(cartDiscount, ChangeIsActive.of(newIsActice)));
+            client().executeBlocking(CartDiscountUpdateCommand.of(cartDiscount, ChangeIsActive.of(newIsActice)));
 
     assertThat(updatedDiscount.isActive()).isEqualTo(newIsActice);
 });

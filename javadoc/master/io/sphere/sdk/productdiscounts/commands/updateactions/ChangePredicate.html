@@ -133,8 +133,7 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html"
     final ProductDiscountPredicate predicate = ProductDiscountPredicate
             .of(predicateAsString);
 
-    final ProductDiscount updatedDiscount = execute(
-            ProductDiscountUpdateCommand.of(discount, ChangePredicate.of(predicate)));
+    final ProductDiscount updatedDiscount = client().executeBlocking(ProductDiscountUpdateCommand.of(discount, ChangePredicate.of(predicate)));
 
     final String updatedPredicate = updatedDiscount.getPredicate();
     assertThat(updatedPredicate).isEqualTo(predicateAsString);

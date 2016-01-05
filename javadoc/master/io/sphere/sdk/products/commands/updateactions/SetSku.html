@@ -133,7 +133,7 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html"
 
  <div id="io-sphere-sdk-products-queries-ProductProjectionQueryTest-queryBySku--%s" class=code-example><pre><code class='java'>withProduct(client(), product -&gt; {
     final String sku = "sku-" + randomString();
-    final Product productWithSku = execute(ProductUpdateCommand.of(product, SetSku.of(MASTER_VARIANT_ID, sku)));
+    final Product productWithSku = client().executeBlocking(ProductUpdateCommand.of(product, SetSku.of(MASTER_VARIANT_ID, sku)));
     final QueryPredicate&lt;ProductProjection&gt; predicate = model().masterVariant().sku().is(sku);
     checkOneResult(productWithSku, predicate);
 });

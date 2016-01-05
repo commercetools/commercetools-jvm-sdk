@@ -140,7 +140,7 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html"
 
     final Address newAddress = oldAddress.withCity(city);
     final ChangeAddress updateAction = ChangeAddress.ofOldAddressToNewAddress(oldAddress, newAddress);
-    final Customer customerWithReplacedAddress = execute(CustomerUpdateCommand.of(customer, updateAction));
+    final Customer customerWithReplacedAddress = client().executeBlocking(CustomerUpdateCommand.of(customer, updateAction));
 
     assertThat(customerWithReplacedAddress.getAddresses()).hasSize(1);
     assertThat(customerWithReplacedAddress.getAddresses().get(0).getCity()).contains(city);

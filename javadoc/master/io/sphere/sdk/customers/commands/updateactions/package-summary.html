@@ -179,7 +179,7 @@
 
     final String vatId = randomString();
     final Customer updatedCustomer =
-            execute(CustomerUpdateCommand.of(customer, SetVatId.of(vatId)));
+            client().executeBlocking(CustomerUpdateCommand.of(customer, SetVatId.of(vatId)));
 
     assertThat(updatedCustomer.getVatId()).isEqualTo(vatId);
 });

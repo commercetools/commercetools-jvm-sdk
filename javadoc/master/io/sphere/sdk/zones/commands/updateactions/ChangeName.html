@@ -132,7 +132,7 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html"
     final String newName = randomString();
     assertThat(zone.getName()).isNotEqualTo(newName);
     final ZoneUpdateCommand command = ZoneUpdateCommand.of(zone, ChangeName.of(newName));
-    final Zone updatedZone = execute(command);
+    final Zone updatedZone = client().executeBlocking(command);
     assertThat(updatedZone.getName()).isEqualTo(newName);
     return updatedZone;
 }, CountryCode.AM);

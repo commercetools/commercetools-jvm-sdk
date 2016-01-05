@@ -214,7 +214,7 @@ import static org.assertj.core.api.Assertions.assertThat;
                         .collect(Collectors.toList());
 
 
-                final Set&lt;LightweightProduct&gt; actual = new HashSet&lt;&gt;(execute(LightweightProduct.requestOfSkus(skus)));
+                final Set&lt;LightweightProduct&gt; actual = new HashSet&lt;&gt;(client().executeBlocking(LightweightProduct.requestOfSkus(skus)));
                 final Set&lt;LightweightProduct&gt; expected = asList(product1, product2).stream()
                         .map(product -&gt; {
                             final String sku = product.getMasterData().getStaged().getMasterVariant().getSku();

@@ -134,12 +134,12 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html"
     assertThat(cartDiscount.getName()).isNotEqualTo(newName);
 
     final CartDiscount updatedDiscount =
-            execute(CartDiscountUpdateCommand.of(cartDiscount, ChangeName.of(newName)));
+            client().executeBlocking(CartDiscountUpdateCommand.of(cartDiscount, ChangeName.of(newName)));
 
     assertThat(updatedDiscount.getName()).isEqualTo(newName);
 
     //clean up test, cart discount is reused by name
-    execute(CartDiscountUpdateCommand.of(updatedDiscount, ChangeName.of(cartDiscount.getName())));
+    client().executeBlocking(CartDiscountUpdateCommand.of(updatedDiscount, ChangeName.of(cartDiscount.getName())));
 });
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/cartdiscounts/commands/CartDiscountUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 </li>

@@ -829,7 +829,7 @@
 <dt><a href="io/sphere/sdk/cartdiscounts/queries/CartDiscountByIdGet.html" title="interface in io.sphere.sdk.cartdiscounts.queries"><span class="typeNameLink">CartDiscountByIdGet</span></a> - Interface in <a href="io/sphere/sdk/cartdiscounts/queries/package-summary.html">io.sphere.sdk.cartdiscounts.queries</a></dt>
 <dd>
 <div class="block"><div id="io-sphere-sdk-cartdiscounts-queries-CartDiscountByIdGetTest-execution--%s" class=code-example><pre><code class='java'>withPersistentCartDiscount(client(), cartDiscount -&gt; {
-    final CartDiscount fetchedDiscount = execute(CartDiscountByIdGet.of(cartDiscount));
+    final CartDiscount fetchedDiscount = client().executeBlocking(CartDiscountByIdGet.of(cartDiscount));
     assertThat(fetchedDiscount.getId()).isEqualTo(cartDiscount.getId());
 });
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/cartdiscounts/queries/CartDiscountByIdGetTest.java" target="_blank">test code</a>.</pre></div></div>
@@ -853,7 +853,7 @@ final CartDiscountDraft discountDraft = CartDiscountDraftBuilder.of(name, CartDi
         .isActive(false)
         .build();
 
-cartDiscount = execute(CartDiscountCreateCommand.of(discountDraft));
+cartDiscount = client().executeBlocking(CartDiscountCreateCommand.of(discountDraft));
 assertThat(cartDiscount.getName()).isEqualTo(name);
 assertThat(cartDiscount.getCartPredicate()).isEqualTo(predicate);
 assertThat(cartDiscount.getValue()).isEqualTo(value);
@@ -1037,7 +1037,7 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 
     final Query&lt;Category&gt; query = CategoryQuery.of().byExternalId(externalId);
 
-    final Category actual = execute(query).head().get();
+    final Category actual = client().executeBlocking(query).head().get();
     assertThat(actual).isEqualTo(category);
 });
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/categories/queries/CategoryQueryTest.java" target="_blank">test code</a>.</pre></div></div>
@@ -1113,7 +1113,7 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
     final boolean newIsInitial = !oldIsInitial;
 
     final StateUpdateCommand command = StateUpdateCommand.of(state, ChangeInitial.of(newIsInitial));
-    final State updatedState = execute(command);
+    final State updatedState = client().executeBlocking(command);
     assertThat(updatedState.isInitial()).isEqualTo(newIsInitial);
     return updatedState;
 });
@@ -1141,7 +1141,7 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
     final String newKey = randomKey();
 
     final StateUpdateCommand command = StateUpdateCommand.of(state, ChangeKey.of(newKey));
-    final State updatedState = execute(command);
+    final State updatedState = client().executeBlocking(command);
     assertThat(updatedState.getKey()).isEqualTo(newKey);
     return updatedState;
 });
@@ -2066,7 +2066,7 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
             .withIsActive(false)
             .withMaxApplications(5L)
             .withMaxApplicationsPerCustomer(1L);
-    final DiscountCode discountCode = execute(DiscountCodeCreateCommand.of(draft));
+    final DiscountCode discountCode = client().executeBlocking(DiscountCodeCreateCommand.of(draft));
     assertThat(discountCode.getCode()).isEqualTo(code);
     assertThat(discountCode.getName()).isEqualTo(en(DiscountCodeCreateCommandTest.class.getName()));
     assertThat(discountCode.getDescription()).isEqualTo(en("sample discount code descr."));
@@ -2076,7 +2076,7 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
     assertThat(discountCode.getMaxApplications()).isEqualTo(5L);
     assertThat(discountCode.getMaxApplicationsPerCustomer()).isEqualTo(1L);
     //clean up
-    execute(DiscountCodeDeleteCommand.of(discountCode));
+    client().executeBlocking(DiscountCodeDeleteCommand.of(discountCode));
 });
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/discountcodes/commands/DiscountCodeCreateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 </dd>
@@ -5481,7 +5481,7 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
             .withRestockableInDays(restockableInDays)
             .withSupplyChannel(channel);
 
-    final InventoryEntry inventoryEntry = execute(InventoryEntryCreateCommand.of(inventoryEntryDraft));
+    final InventoryEntry inventoryEntry = client().executeBlocking(InventoryEntryCreateCommand.of(inventoryEntryDraft));
 
     assertThat(inventoryEntry.getSku()).isEqualTo(sku);
     assertThat(inventoryEntry.getQuantityOnStock()).isEqualTo(quantityOnStock);
@@ -5492,7 +5492,7 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 
     //delete
     final DeleteCommand&lt;InventoryEntry&gt; deleteCommand = InventoryEntryDeleteCommand.of(inventoryEntry);
-    final InventoryEntry deletedEntry = execute(deleteCommand);
+    final InventoryEntry deletedEntry = client().executeBlocking(deleteCommand);
 });
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/inventory/commands/InventoryEntryCreateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 </dd>
@@ -6767,9 +6767,9 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
             .withPredicates(m -&gt; m.type().is("ReturnInfoAdded"))
             .withSort(m -&gt; m.createdAt().sort().desc())
             .withLimit(1L);
-    final Message messageFromQueryEndpoint = execute(query).head().get();
+    final Message messageFromQueryEndpoint = client().executeBlocking(query).head().get();
 
-    final Message message = execute(MessageByIdGet.of(messageFromQueryEndpoint));
+    final Message message = client().executeBlocking(MessageByIdGet.of(messageFromQueryEndpoint));
     assertThat(message).isEqualTo(messageFromQueryEndpoint);
 
     return order;
@@ -10163,7 +10163,7 @@ final String sortOrder = randomSortOrder();
 final ProductDiscountDraft discountDraft =
         ProductDiscountDraft.of(name, description, predicate, discountValue, sortOrder, active);
 
-final ProductDiscount productDiscount = execute(ProductDiscountCreateCommand.of(discountDraft));
+final ProductDiscount productDiscount = client().executeBlocking(ProductDiscountCreateCommand.of(discountDraft));
 
 assertThat(productDiscount.getName()).isEqualTo(name);
 assertThat(productDiscount.getDescription()).isEqualTo(description);
@@ -10177,14 +10177,14 @@ final ProductByIdGet sphereRequest =
                 .plusExpansionPaths(m -&gt; m.masterData().staged().masterVariant().prices().discounted().discount());
 
 assertEventually(() -&gt; {
-    final Product discountedProduct = execute(sphereRequest);
+    final Product discountedProduct = client().executeBlocking(sphereRequest);
     final List&lt;Price&gt; productPrices = discountedProduct.getMasterData().getStaged().getMasterVariant().getPrices();
 
     assertThat(productPrices)
             .overridingErrorMessage("discount object in price is expanded")
             .matches(prices -&gt; prices.stream().anyMatch(price -&gt; price.getDiscounted() != null &amp;&amp; price.getDiscounted().getDiscount().getObj() != null));
     // clean up test
-    execute(ProductDiscountDeleteCommand.of(productDiscount));
+    client().executeBlocking(ProductDiscountDeleteCommand.of(productDiscount));
 });
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/productdiscounts/commands/ProductDiscountCreateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 </dd>
@@ -11351,7 +11351,7 @@ CompletionStage&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execu
     final LocalizedString newName = randomSlug();
 
     final StateUpdateCommand command = StateUpdateCommand.of(state, SetName.of(newName));
-    final State updatedState = execute(command);
+    final State updatedState = client().executeBlocking(command);
     assertThat(updatedState.getName()).isEqualTo(newName);
     return updatedState;
 });
@@ -11427,15 +11427,16 @@ CompletionStage&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execu
     withUpdateableState(client(), stateB -&gt; {
         final Set&lt;Reference&lt;State&gt;&gt; transitions = asSet(stateA.toReference());
         final StateUpdateCommand command = StateUpdateCommand.of(stateB, SetTransitions.of(transitions));
-        final State updatedStateB = execute(command);
+        final State updatedStateB = client().executeBlocking(command);
         assertThat(updatedStateB.getTransitions()).isEqualTo(transitions);
 
         //check reference expansion
-        final State loadedStateB = execute(StateByIdGet.of(stateB).withExpansionPaths(m -&gt; m.transitions()));
+        final StateByIdGet stateByIdGet = StateByIdGet.of(stateB).withExpansionPaths(m -&gt; m.transitions());
+        final State loadedStateB = client().executeBlocking(stateByIdGet);
         final Reference&lt;State&gt; stateReference = new LinkedList&lt;&gt;(loadedStateB.getTransitions()).getFirst();
         assertThat(stateReference.getObj()).isNotNull();
 
-        final State updatedStateBWithoutTransitions = execute(StateUpdateCommand.of(updatedStateB, SetTransitions.of(null)));
+        final State updatedStateBWithoutTransitions = client().executeBlocking(StateUpdateCommand.of(updatedStateB, SetTransitions.of(null)));
         assertThat(updatedStateBWithoutTransitions.getTransitions()).isNull();
 
         return updatedStateBWithoutTransitions;
@@ -11467,7 +11468,7 @@ CompletionStage&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execu
 
     final String vatId = randomString();
     final Customer updatedCustomer =
-            execute(CustomerUpdateCommand.of(customer, SetVatId.of(vatId)));
+            client().executeBlocking(CustomerUpdateCommand.of(customer, SetVatId.of(vatId)));
 
     assertThat(updatedCustomer.getVatId()).isEqualTo(vatId);
 });
@@ -12366,7 +12367,7 @@ CompletionStage&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execu
         assertThat(lineItem).containsState(initialState).containsNotState(nextState);
         final long quantity = 1;
         final ZonedDateTime actualTransitionDate = ZonedDateTime_IN_PAST;
-        final Order updatedOrder = execute(OrderUpdateCommand.of(order, TransitionLineItemState.of(lineItem, quantity, initialState, nextState, actualTransitionDate)));
+        final Order updatedOrder = client().executeBlocking(OrderUpdateCommand.of(order, TransitionLineItemState.of(lineItem, quantity, initialState, nextState, actualTransitionDate)));
         assertThat(updatedOrder.getLineItems().get(0)).containsItemStates(ItemState.of(nextState, quantity));
 
         return updatedOrder;
@@ -12435,7 +12436,7 @@ final TypeDraft typeDraft = TypeDraftBuilder.of(typeKey, en("name of the custom 
         .description(en("description"))
         .fieldDefinitions(singletonList(stringFieldDefinition))
         .build();
-final Type type = execute(TypeCreateCommand.of(typeDraft));
+final Type type = client().executeBlocking(TypeCreateCommand.of(typeDraft));
 assertThat(type.getKey()).isEqualTo(typeKey);
 assertThat(type.getName()).isEqualTo(en("name of the custom type"));
 assertThat(type.getResourceTypeIds()).containsExactly(Category.referenceTypeId());

@@ -128,7 +128,7 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html"
     final LocalizedString newName = randomSlug();
 
     final StateUpdateCommand command = StateUpdateCommand.of(state, SetName.of(newName));
-    final State updatedState = execute(command);
+    final State updatedState = client().executeBlocking(command);
     assertThat(updatedState.getName()).isEqualTo(newName);
     return updatedState;
 });

@@ -133,7 +133,7 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html"
 
     final LocalDate dateOfBirth = LocalDate.now();
     final Customer updatedCustomer =
-            execute(CustomerUpdateCommand.of(customer, SetDateOfBirth.of(dateOfBirth)));
+            client().executeBlocking(CustomerUpdateCommand.of(customer, SetDateOfBirth.of(dateOfBirth)));
 
     assertThat(updatedCustomer.getDateOfBirth()).isEqualTo(dateOfBirth);
 });

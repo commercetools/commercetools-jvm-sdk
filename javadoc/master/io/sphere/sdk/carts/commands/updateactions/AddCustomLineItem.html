@@ -139,7 +139,7 @@ implements <a href="../../../../../../io/sphere/sdk/types/CustomDraft.html" titl
     final long quantity = 5;
     final CustomLineItemDraft item = CustomLineItemDraft.of(name, slug, money, taxCategory, quantity);
 
-    final Cart cartWith5 = execute(CartUpdateCommand.of(cart, AddCustomLineItem.of(item)));
+    final Cart cartWith5 = client().executeBlocking(CartUpdateCommand.of(cart, AddCustomLineItem.of(item)));
     assertThat(cartWith5.getCustomLineItems()).hasSize(1);
     final CustomLineItem customLineItem = cartWith5.getCustomLineItems().get(0);
     assertThat(customLineItem.getMoney()).isEqualTo(money);
@@ -154,7 +154,7 @@ implements <a href="../../../../../../io/sphere/sdk/types/CustomDraft.html" titl
     final CartQuery cartQuery = CartQuery.of()
             .withPredicates(m -&gt; m.customLineItems().slug().is(customLineItem.getSlug())
                     .and(m.id().is(cart.getId())));
-    assertThat(execute(cartQuery).head().get().getId()).isEqualTo(cart.getId());
+    assertThat(client().executeBlocking(cartQuery).head().get().getId()).isEqualTo(cart.getId());
 });
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/carts/commands/CartUpdateCommandTest.java" target="_blank">test code</a>.</pre></div>
 
@@ -168,7 +168,7 @@ implements <a href="../../../../../../io/sphere/sdk/types/CustomDraft.html" titl
                         .build();
         final AddCustomLineItem updateAction = AddCustomLineItem.of(en("custom line item"), "foo", EURO_30, product.getTaxCategory(), 3L).withCustom(customFieldsDraft);
 
-        final Cart updatedCart = execute(CartUpdateCommand.of(cart, updateAction));
+        final Cart updatedCart = client().executeBlocking(CartUpdateCommand.of(cart, updateAction));
 
         final CustomFields customFields = updatedCart.getCustomLineItems().get(0).getCustom();
         assertThat(customFields.getFieldAsString(STRING_FIELD_NAME)).isEqualTo("a value");

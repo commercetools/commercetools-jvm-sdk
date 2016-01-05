@@ -136,7 +136,7 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html"
                 CartUpdateCommand.of(cart, SetShippingMethod.of(shippingMethod))
                         .plusExpansionPaths(m -&gt; m.shippingInfo().shippingMethod().taxCategory())
                         .plusExpansionPaths(m -&gt; m.shippingInfo().taxCategory());
-        final Cart cartWithShippingMethod = execute(updateCommand);
+        final Cart cartWithShippingMethod = client().executeBlocking(updateCommand);
         assertThat(cartWithShippingMethod.getShippingInfo().getShippingMethod()).isEqualTo(shippingMethod.toReference());
         assertThat(cartWithShippingMethod.getShippingInfo().getShippingMethod().getObj())
                 .as("reference expansion shippingMethod")
@@ -147,7 +147,7 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html"
                 .isNotNull();
 
         //remove shipping method
-        final Cart cartWithoutShippingMethod = execute(CartUpdateCommand.of(cartWithShippingMethod, SetShippingMethod.ofRemove()));
+        final Cart cartWithoutShippingMethod = client().executeBlocking(CartUpdateCommand.of(cartWithShippingMethod, SetShippingMethod.ofRemove()));
         assertThat(cartWithoutShippingMethod.getShippingInfo()).isNull();
 
         return cartWithoutShippingMethod;

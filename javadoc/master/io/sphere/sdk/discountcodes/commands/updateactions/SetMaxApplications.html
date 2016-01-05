@@ -131,7 +131,7 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html"
  <div id="io-sphere-sdk-discountcodes-commands-DiscountCodeUpdateCommandTest-setMaxApplications--%s" class=code-example><pre><code class='java'>withPersistentDiscountCode(client(), discountCode -&gt; {
     final long maxApplications = randomLong();
     final DiscountCode updatedDiscountCode =
-            execute(DiscountCodeUpdateCommand.of(discountCode, SetMaxApplications.of(maxApplications)));
+            client().executeBlocking(DiscountCodeUpdateCommand.of(discountCode, SetMaxApplications.of(maxApplications)));
     assertThat(updatedDiscountCode.getMaxApplications()).isEqualTo(maxApplications);
 });
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/discountcodes/commands/DiscountCodeUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>

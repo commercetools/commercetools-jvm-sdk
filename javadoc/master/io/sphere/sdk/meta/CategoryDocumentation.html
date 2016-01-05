@@ -414,7 +414,7 @@ assertThat(startingSituation).isEqualTo(
                 "            14 boots\n");
 
 final Category men = categoryTree.findByExternalId("1").get();
-execute(CategoryDeleteCommand.of(men));
+client().executeBlocking(CategoryDeleteCommand.of(men));
 final CategoryTree categoryTreeAfterDeletion = fetchCurrentTree();
 final String actual = CategoryTreeTextRepresentation.visualizeTree(categoryTreeAfterDeletion);
 assertThat(actual).isEqualTo(
@@ -458,7 +458,7 @@ final Category mensClothing = categoryTree.findByExternalId("3").get();
 final Category top = categoryTree.findByExternalId("0").get();
 
 //make mensClothing a child of top
-execute(CategoryUpdateCommand.of(mensClothing, ChangeParent.of(top)));
+client().executeBlocking(CategoryUpdateCommand.of(mensClothing, ChangeParent.of(top)));
 
 final CategoryTree categoryTreeAfterMovement = fetchCurrentTree();
 final String actual = CategoryTreeTextRepresentation.visualizeTree(categoryTreeAfterMovement);
@@ -508,9 +508,10 @@ final Category tshirtCategory = categoryTree.findByExternalId("7").get();
 final Category jeansCategory = categoryTree.findByExternalId("8").get();
 withProductInCategory(client(), jeansCategory, jeansProduct -&gt; {
     withProductInCategory(client(), tshirtCategory, tshirtProduct -&gt; {
+        final ProductProjectionQuery sphereRequest = ProductProjectionQuery.ofStaged().withPredicates(m -&gt; m.categories().isIn(asList(mensClothingCategory)));
         final PagedQueryResult&lt;ProductProjection&gt; resultForParentCategory =
                 //query for the parent category
-                execute(ProductProjectionQuery.ofStaged().withPredicates(m -&gt; m.categories().isIn(asList(mensClothingCategory))));
+                client().executeBlocking(sphereRequest);
         assertThat(resultForParentCategory.getResults())
                 .overridingErrorMessage(
                         "if a product is in a category," +
@@ -522,7 +523,7 @@ withProductInCategory(client(), jeansCategory, jeansProduct -&gt; {
         assertThat(query.predicates().get(0))
                 .isEqualTo(QueryPredicate.of(format("categories(id in (\"%s\", \"%s\"))", tshirtCategory.getId(), jeansCategory.getId())));
         final PagedQueryResult&lt;ProductProjection&gt; resultForDirectCategories =
-                execute(query);
+                client().executeBlocking(query);
         assertThat(resultForDirectCategories.getResults())
                 .hasSize(2)
                 .overridingErrorMessage("if a product is in a category, you can directy query for it")

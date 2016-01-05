@@ -131,7 +131,7 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html"
  <div id="io-sphere-sdk-orders-commands-OrderUpdateCommandTest-changeShipmentState--%s" class=code-example><pre><code class='java'>withOrder(client(), order -&gt; {
     final ShipmentState newState = ShipmentState.SHIPPED;
     assertThat(order.getShipmentState()).isNotEqualTo(newState);
-    final Order updatedOrder = execute(OrderUpdateCommand.of(order, ChangeShipmentState.of(newState)));
+    final Order updatedOrder = client().executeBlocking(OrderUpdateCommand.of(order, ChangeShipmentState.of(newState)));
     assertThat(updatedOrder.getShipmentState()).isEqualTo(newState);
 
     return updatedOrder;

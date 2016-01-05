@@ -138,11 +138,11 @@ extends <a href="../../../../../io/sphere/sdk/messages/GenericMessageImpl.html" 
 
  <div id="io-sphere-sdk-payments-commands-PaymentUpdateCommandTest-transitionState--%s" class=code-example><pre><code class='java'>withStateByBuilder(client(), stateBuilder -&gt; stateBuilder.initial(true).type(PAYMENT_STATE), validNextStateForPaymentStatus -&gt; {
     withPayment(client(), payment -&gt; {
-        final Payment updatedPayment = execute(PaymentUpdateCommand.of(payment, TransitionState.of(validNextStateForPaymentStatus)));
+        final Payment updatedPayment = client().executeBlocking(PaymentUpdateCommand.of(payment, TransitionState.of(validNextStateForPaymentStatus)));
 
         assertThat(updatedPayment.getPaymentStatus().getState()).isEqualTo(validNextStateForPaymentStatus.toReference());
 
-        final PagedQueryResult&lt;PaymentStatusStateTransitionMessage&gt; messageQueryResult = execute(MessageQuery.of()
+        final PagedQueryResult&lt;PaymentStatusStateTransitionMessage&gt; messageQueryResult = client().executeBlocking(MessageQuery.of()
                 .withPredicates(m -&gt; m.resource().is(payment))
                 .forMessageType(PaymentStatusStateTransitionMessage.MESSAGE_HINT));
         assertThat(messageQueryResult.head().get().getState()).isEqualTo(validNextStateForPaymentStatus.toReference());

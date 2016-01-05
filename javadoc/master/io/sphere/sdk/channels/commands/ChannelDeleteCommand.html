@@ -109,11 +109,11 @@ extends <a href="../../../../../io/sphere/sdk/expansion/MetaModelExpansionDsl.ht
 <div class="block">Deletes a channel.
 
  <p>Example:</p>
- <div id="io-sphere-sdk-channels-commands-ChannelDeleteCommandTest-execution--%s" class=code-example><pre><code class='java'>final Channel channel = execute(ChannelCreateCommand.of(ChannelDraft.of(randomKey())));
+ <div id="io-sphere-sdk-channels-commands-ChannelDeleteCommandTest-execution--%s" class=code-example><pre><code class='java'>final Channel channel = client().executeBlocking(ChannelCreateCommand.of(ChannelDraft.of(randomKey())));
 
-execute(ChannelDeleteCommand.of(channel));
+client().executeBlocking(ChannelDeleteCommand.of(channel));
 
-assertThat(execute(ChannelByIdGet.of(channel.getId()))).isNull();
+assertThat(client().executeBlocking(ChannelByIdGet.of(channel.getId()))).isNull();
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/channels/commands/ChannelDeleteCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 </li>
 </ul>

@@ -131,7 +131,7 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html"
  <div id="io-sphere-sdk-types-commands-TypeUpdateCommandTest-addEnumValue--%s" class=code-example><pre><code class='java'>withUpdateableType(client(), type -&gt; {
     final String name = TypeFixtures.ENUM_FIELD_NAME;
     final EnumValue newEnumValue = EnumValue.of("key-new", "label new");
-    final Type updatedType = execute(TypeUpdateCommand.of(type, AddEnumValue.of(name, newEnumValue)));
+    final Type updatedType = client().executeBlocking(TypeUpdateCommand.of(type, AddEnumValue.of(name, newEnumValue)));
     assertThat(updatedType.getFieldDefinitionByName(name).getType())
             .isInstanceOf(EnumFieldType.class)
             .matches(fieldType -&gt; ((EnumFieldType) fieldType).getValues().contains(newEnumValue), "contains the new enum value");

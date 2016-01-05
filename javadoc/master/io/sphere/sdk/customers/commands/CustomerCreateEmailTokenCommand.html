@@ -136,11 +136,11 @@ extends <a href="../../../../../io/sphere/sdk/commands/CommandImpl.html" title="
     final int ttlMinutes = 15;
     final Command&lt;CustomerToken&gt; createTokenCommand = CustomerCreateEmailTokenCommand.of(customer, ttlMinutes);
 
-    final CustomerToken customerToken = execute(createTokenCommand);
+    final CustomerToken customerToken = client().executeBlocking(createTokenCommand);
     final String tokenValue = customerToken.getValue();//this token needs to be sent via email to the customer
 
     final Command&lt;Customer&gt; verifyEmailCommand = CustomerVerifyEmailCommand.of(customer, tokenValue);
-    final Customer loadedCustomer = execute(verifyEmailCommand);
+    final Customer loadedCustomer = client().executeBlocking(verifyEmailCommand);
     assertThat(loadedCustomer.isEmailVerified()).isTrue();
 });
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/customers/commands/CustomerCreateEmailTokenCommandTest.java" target="_blank">test code</a>.</pre></div></div>

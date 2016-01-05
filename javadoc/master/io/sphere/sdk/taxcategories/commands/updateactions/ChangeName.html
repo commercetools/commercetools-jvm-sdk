@@ -128,7 +128,7 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html"
 
  <div id="io-sphere-sdk-taxcategories-commands-TaxCategoryUpdateCommandTest-changeName--%s" class=code-example><pre><code class='java'>withUpdateableTaxCategory(client(), taxCategory -&gt; {
     final String newName = randomKey();
-    final TaxCategory updatedTaxCategory = execute(TaxCategoryUpdateCommand.of(taxCategory, ChangeName.of(newName)));
+    final TaxCategory updatedTaxCategory = client().executeBlocking(TaxCategoryUpdateCommand.of(taxCategory, ChangeName.of(newName)));
     assertThat(updatedTaxCategory.getName()).isEqualTo(newName);
     return updatedTaxCategory;
 });

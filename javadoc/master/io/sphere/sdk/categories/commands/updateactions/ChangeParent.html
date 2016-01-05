@@ -136,7 +136,7 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html"
         final CategoryUpdateCommand updateCommand =
                 CategoryUpdateCommand.of(categoryB, ChangeParent.of(categoryA))
                 .plusExpansionPaths(m -&gt; m.parent());
-        final Category updatedB = execute(updateCommand);
+        final Category updatedB = client().executeBlocking(updateCommand);
 
         assertThat(updatedB.getParent().getId()).isEqualTo(categoryA.getId());
         assertThat(updatedB.getParent().getObj()).isNotNull().isEqualTo(categoryA);

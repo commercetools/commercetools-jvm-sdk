@@ -116,7 +116,7 @@ extends <a href="../../../../../io/sphere/sdk/queries/MetaModelQueryDsl.html" ti
             .withSort(m -&gt; m.createdAt().sort().desc())
             .withExpansionPaths(m -&gt; m.resource())
             .withLimit(1L);
-    final Message message = execute(query).head().get();
+    final Message message = client().executeBlocking(query).head().get();
     assertThat(message.getResource().getObj()).isNotNull();
     assertThat(message.getResource()).isEqualTo(order.toReference());
     assertThat(message.getResource().getId()).isEqualTo(order.getId());
@@ -134,7 +134,7 @@ extends <a href="../../../../../io/sphere/sdk/queries/MetaModelQueryDsl.html" ti
                     .withExpansionPaths(m -&gt; m.resource())
                     .withLimit(1L)
                     .forMessageType(ReturnInfoAddedMessage.MESSAGE_HINT);
-    final PagedQueryResult&lt;ReturnInfoAddedMessage&gt; pagedQueryResult = execute(query);
+    final PagedQueryResult&lt;ReturnInfoAddedMessage&gt; pagedQueryResult = client().executeBlocking(query);
     final ReturnInfoAddedMessage message = pagedQueryResult.head().get();
     assertThat(message.getReturnInfo()).isEqualTo(returnInfo);
     assertThat(message.getResource().getObj()).isNotNull();
@@ -150,7 +150,7 @@ extends <a href="../../../../../io/sphere/sdk/queries/MetaModelQueryDsl.html" ti
             .withPredicates(m -&gt; m.resource().is(order))
             .withSort(m -&gt; m.createdAt().sort().desc())
             .withExpansionPaths(m -&gt; m.resource());
-    final List&lt;Message&gt; results = execute(query).getResults();
+    final List&lt;Message&gt; results = client().executeBlocking(query).getResults();
 
     final Message returnInfoAddedUntypedMessage = results.stream()
             .filter(m -&gt; {
@@ -177,7 +177,7 @@ extends <a href="../../../../../io/sphere/sdk/queries/MetaModelQueryDsl.html" ti
             .withSort(m -&gt; m.createdAt().sort().desc())
             .withExpansionPaths(m -&gt; m.resource())
             .forMessageType(SimpleOrderMessage.MESSAGE_HINT);
-    final List&lt;SimpleOrderMessage&gt; results = execute(query).getResults();
+    final List&lt;SimpleOrderMessage&gt; results = client().executeBlocking(query).getResults();
 
     final Optional&lt;Order&gt; orderOptional = Optional.ofNullable(results.get(0).getResource().getObj());
     assertThat(orderOptional.map(o -&gt; o.getCreatedAt())).contains(order.getCreatedAt());
@@ -192,7 +192,7 @@ extends <a href="../../../../../io/sphere/sdk/queries/MetaModelQueryDsl.html" ti
             .withPredicates(m -&gt; m.resource().id().is(order.getId()))
             .withSort(m -&gt; m.createdAt().sort().desc())
             .withExpansionPaths(m -&gt; m.resource());
-    final List&lt;Message&gt; results = execute(query).getResults();
+    final List&lt;Message&gt; results = client().executeBlocking(query).getResults();
 
     final Message returnInfoAddedUntypedMessage = results.stream()
             .filter(m -&gt; {
@@ -358,7 +358,7 @@ extends <a href="../../../../../io/sphere/sdk/queries/MetaModelQueryDsl.html" ti
                     .withExpansionPaths(m -&gt; m.resource())
                     .withLimit(1L)
                     .forMessageType(ReturnInfoAddedMessage.MESSAGE_HINT);
-    final PagedQueryResult&lt;ReturnInfoAddedMessage&gt; pagedQueryResult = execute(query);
+    final PagedQueryResult&lt;ReturnInfoAddedMessage&gt; pagedQueryResult = client().executeBlocking(query);
     final ReturnInfoAddedMessage message = pagedQueryResult.head().get();
     assertThat(message.getReturnInfo()).isEqualTo(returnInfo);
     assertThat(message.getResource().getObj()).isNotNull();

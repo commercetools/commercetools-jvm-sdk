@@ -133,11 +133,11 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html"
     assertThat(cart.getCustomLineItems()).hasSize(0);
     final CustomLineItemDraft draftItem = createCustomLineItemDraft(taxCategory);
 
-    final Cart cartWithCustomLineItem = execute(CartUpdateCommand.of(cart, AddCustomLineItem.of(draftItem)));
+    final Cart cartWithCustomLineItem = client().executeBlocking(CartUpdateCommand.of(cart, AddCustomLineItem.of(draftItem)));
     assertThat(cartWithCustomLineItem.getCustomLineItems()).hasSize(1);
     final CustomLineItem customLineItem = cartWithCustomLineItem.getCustomLineItems().get(0);
 
-    final Cart emptyCart = execute(CartUpdateCommand.of(cartWithCustomLineItem, RemoveCustomLineItem.of(customLineItem)));
+    final Cart emptyCart = client().executeBlocking(CartUpdateCommand.of(cartWithCustomLineItem, RemoveCustomLineItem.of(customLineItem)));
     assertThat(emptyCart.getCustomLineItems()).hasSize(0);
 });
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/carts/commands/CartUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>

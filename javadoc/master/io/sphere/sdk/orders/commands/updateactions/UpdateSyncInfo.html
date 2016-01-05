@@ -134,11 +134,12 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html"
         final ZonedDateTime aDateInThePast = ZonedDateTime_IN_PAST;
         final String externalId = "foo";
         final UpdateSyncInfo action = UpdateSyncInfo.of(channel).withExternalId(externalId).withSyncedAt(aDateInThePast);
-        final Order updatedOrder = execute(OrderUpdateCommand.of(order, action));
+        final Order updatedOrder = client().executeBlocking(OrderUpdateCommand.of(order, action));
         assertThat(updatedOrder.getSyncInfo()).containsOnly(SyncInfo.of(channel, aDateInThePast, externalId));
 
         //check channel expansion
-        final Order loadedOrder = execute(OrderByIdGet.of(order).withExpansionPaths(m -&gt; m.syncInfo().channel()));
+        final OrderByIdGet orderByIdGet = OrderByIdGet.of(order).withExpansionPaths(m -&gt; m.syncInfo().channel());
+        final Order loadedOrder = client().executeBlocking(orderByIdGet);
         assertThat(new ArrayList&lt;&gt;(loadedOrder.getSyncInfo()).get(0).getChannel().getObj()).isNotNull();
 
         return updatedOrder;

@@ -115,7 +115,7 @@ extends <a href="../../../../../io/sphere/sdk/queries/MetaModelQueryDsl.html" ti
     final Query&lt;Customer&gt; query = CustomerQuery.of()
             .byEmail(customer.getEmail())
             .withExpansionPaths(m -&gt; m.customerGroup());
-    final String actualCustomerGroupId = execute(query).head().get().getCustomerGroup().getObj().getId();
+    final String actualCustomerGroupId = client().executeBlocking(query).head().get().getCustomerGroup().getObj().getId();
     assertThat(actualCustomerGroupId).isEqualTo(customerGroup.getId());
 });
 

@@ -134,7 +134,7 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html"
         assertThat(count).overridingErrorMessage("zone is not used yet").isEqualTo(0);
 
         //addZone
-        final ShippingMethod shippingMethodWithZone = execute(ShippingMethodUpdateCommand.of(shippingMethod, AddZone.of(zone)));
+        final ShippingMethod shippingMethodWithZone = client().executeBlocking(ShippingMethodUpdateCommand.of(shippingMethod, AddZone.of(zone)));
         final ZoneRate zoneRate = shippingMethodWithZone.getZoneRates().stream()
                 .filter(rate -&gt; rate.getZone().hasSameIdAs(zone))
                 .findFirst()
@@ -144,25 +144,25 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html"
         //addShippingRate
         final ShippingRate shippingRate = ShippingRate.of(MoneyImpl.of(30, USD));
         final ShippingMethod shippingMethodWithShippingRate =
-                execute(ShippingMethodUpdateCommand.of(shippingMethodWithZone, AddShippingRate.of(shippingRate, zone)));
+                client().executeBlocking(ShippingMethodUpdateCommand.of(shippingMethodWithZone, AddShippingRate.of(shippingRate, zone)));
         assertThat(shippingMethodWithShippingRate.getShippingRatesForZone(zone)).isEqualTo(asList(shippingRate));
 
         //check reference expansion
-        final ShippingMethod loadedShippingMethod = execute(ShippingMethodByIdGet.of(shippingMethod)
-                        .plusExpansionPaths(m -&gt; m.zoneRates().zone())
-        );
+        final ShippingMethodByIdGet shippingMethodByIdGet = ShippingMethodByIdGet.of(shippingMethod)
+                        .plusExpansionPaths(m -&gt; m.zoneRates().zone());
+        final ShippingMethod loadedShippingMethod = client().executeBlocking(shippingMethodByIdGet);
         assertThat(loadedShippingMethod.getZoneRates().get(0).getZone().getObj()).isNotNull();
         assertThat(loadedShippingMethod.getZones().get(0).getObj())
                 .overridingErrorMessage("the convenience method also has expanded references").isNotNull();
 
         //removeShippingRate
         final ShippingMethod shippingMethodWithoutShippingRate =
-                execute(ShippingMethodUpdateCommand.of(shippingMethodWithShippingRate, RemoveShippingRate.of(shippingRate, zone)));
+                client().executeBlocking(ShippingMethodUpdateCommand.of(shippingMethodWithShippingRate, RemoveShippingRate.of(shippingRate, zone)));
         assertThat(shippingMethodWithoutShippingRate.getShippingRatesForZone(zone)).isEmpty();
 
         //removeZone
         final ShippingMethod shippingMethodWithoutZone =
-                execute(ShippingMethodUpdateCommand.of(shippingMethodWithoutShippingRate, RemoveZone.of(zone)));
+                client().executeBlocking(ShippingMethodUpdateCommand.of(shippingMethodWithoutShippingRate, RemoveZone.of(zone)));
         assertThat(shippingMethodWithoutZone.getZoneRates()).isEqualTo(shippingMethod.getZoneRates());
 
         return shippingMethodWithoutZone;

@@ -116,11 +116,11 @@ extends java.lang.Object</pre>
     withUpdateableProduct(client(), product -&gt; {
         assertThat(product.getState()).isNull();
 
-        final Product updatedProduct = execute(ProductUpdateCommand.of(product, asList(TransitionState.of(state))));
+        final Product updatedProduct = client().executeBlocking(ProductUpdateCommand.of(product, asList(TransitionState.of(state))));
 
         assertThat(updatedProduct.getState()).isEqualTo(state.toReference());
 
-        final PagedQueryResult&lt;ProductStateTransitionMessage&gt; messageQueryResult = execute(MessageQuery.of()
+        final PagedQueryResult&lt;ProductStateTransitionMessage&gt; messageQueryResult = client().executeBlocking(MessageQuery.of()
                 .withPredicates(m -&gt; m.resource().is(product))
                 .forMessageType(ProductStateTransitionMessage.MESSAGE_HINT));
 
@@ -128,8 +128,9 @@ extends java.lang.Object</pre>
         assertThat(message.getState()).isEqualTo(state.toReference());
 
         //check query model
-        final Product productByState = execute(ProductQuery.of()
-                .withPredicates(m -&gt; m.id().is(product.getId()).and(m.state().is(state))))
+        final ProductQuery query = ProductQuery.of()
+                .withPredicates(m -&gt; m.id().is(product.getId()).and(m.state().is(state)));
+        final Product productByState = client().executeBlocking(query)
                 .head().get();
         assertThat(productByState).isEqualTo(updatedProduct);
 

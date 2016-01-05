@@ -136,7 +136,7 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html"
             .anyMatch(containsNewAddressPredicate))
             .overridingErrorMessage("address is not present, yet")
             .isFalse();
-    final Customer updatedCustomer = execute(CustomerUpdateCommand.of(customer, AddAddress.of(newAddress)));
+    final Customer updatedCustomer = client().executeBlocking(CustomerUpdateCommand.of(customer, AddAddress.of(newAddress)));
     assertThat(updatedCustomer.getAddresses().stream()
     .anyMatch(containsNewAddressPredicate)).isTrue();
 });

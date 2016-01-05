@@ -122,7 +122,7 @@ final ChannelDraft channelDraft = ChannelDraft.of(key)
         .withName(LocalizedString.of(ENGLISH, "name"))
         .withDescription(LocalizedString.of(ENGLISH, "description"))
         .withRoles(ChannelRole.INVENTORY_SUPPLY);
-final Channel channel = execute(ChannelCreateCommand.of(channelDraft));
+final Channel channel = client().executeBlocking(ChannelCreateCommand.of(channelDraft));
 assertThat(channel.getKey()).isEqualTo(key);
 assertThat(channel.getName()).isEqualTo(LocalizedString.of(ENGLISH, "name"));
 assertThat(channel.getDescription()).isEqualTo(LocalizedString.of(ENGLISH, "description"));

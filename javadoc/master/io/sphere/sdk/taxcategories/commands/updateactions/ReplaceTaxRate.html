@@ -131,7 +131,7 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html"
     final double newAmount = old.getAmount() * 2;
     final TaxRate newTaxRate = TaxRateBuilder.of(old).amount(newAmount).build();
 
-    final TaxCategory updatedTaxCategory = execute(TaxCategoryUpdateCommand.of(taxCategory, ReplaceTaxRate.of(old.getId(), newTaxRate)));
+    final TaxCategory updatedTaxCategory = client().executeBlocking(TaxCategoryUpdateCommand.of(taxCategory, ReplaceTaxRate.of(old.getId(), newTaxRate)));
     final TaxRate actual = updatedTaxCategory.getTaxRates().get(0);
     assertThat(actual.getCountry()).isEqualTo(old.getCountry());
     assertThat(actual.getAmount()).isEqualTo(newAmount);

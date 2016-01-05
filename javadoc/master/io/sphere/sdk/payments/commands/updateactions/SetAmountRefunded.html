@@ -131,7 +131,7 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html"
  <div id="io-sphere-sdk-payments-commands-PaymentUpdateCommandTest-refunded--%s" class=code-example><pre><code class='java'>withPayment(client(), payment -&gt; {
 
     final MonetaryAmount refundedAmount = payment.getAmountPlanned().divide(2);
-    final Payment updatedPayment = execute(PaymentUpdateCommand.of(payment, SetAmountRefunded.of(refundedAmount)));
+    final Payment updatedPayment = client().executeBlocking(PaymentUpdateCommand.of(payment, SetAmountRefunded.of(refundedAmount)));
 
     assertThat(updatedPayment.getAmountRefunded()).isEqualTo(refundedAmount);
 
@@ -145,7 +145,7 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html"
     assertThat(payment.getAmountPaid()).as("amount paid").isEqualTo(totalAmount);
 
     final MonetaryAmount firstRefundedAmount = totalAmount.scaleByPowerOfTen(-1);
-    final Payment firstRefundPayment = execute(PaymentUpdateCommand.of(payment, asList(SetAmountRefunded.of(firstRefundedAmount))));
+    final Payment firstRefundPayment = client().executeBlocking(PaymentUpdateCommand.of(payment, asList(SetAmountRefunded.of(firstRefundedAmount))));
 
     assertThat(firstRefundPayment.getAmountRefunded()).as("first refunded").isEqualTo(firstRefundedAmount);
 
@@ -153,7 +153,7 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html"
     //important, because SetAmountRefunded sets the total value
     final MonetaryAmount totalRefundedAmount = firstRefundPayment.getAmountRefunded().add(secondRefundedAmount);
 
-    final Payment secondRefundPayment = execute(PaymentUpdateCommand.of(firstRefundPayment, asList(SetAmountRefunded.of(totalRefundedAmount))));
+    final Payment secondRefundPayment = client().executeBlocking(PaymentUpdateCommand.of(firstRefundPayment, asList(SetAmountRefunded.of(totalRefundedAmount))));
 
     assertThat(secondRefundPayment.getAmountRefunded()).as("total refunded").isEqualTo(totalRefundedAmount);
 

@@ -116,7 +116,7 @@ extends <a href="../../../../../io/sphere/sdk/queries/Get.html" title="interface
     final String id = existingCustomObject.getId();
     final CustomObjectByIdGet&lt;Foo&gt; fetch =
             CustomObjectByIdGet.of(id, Foo.class);
-    final CustomObject&lt;Foo&gt; customObject = execute(fetch);
+    final CustomObject&lt;Foo&gt; customObject = client().executeBlocking(fetch);
     assertThat(customObject).isEqualTo(existingCustomObject);
 });
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/customobjects/queries/CustomObjectByIdGetTest.java" target="_blank">test code</a>.</pre></div></div>

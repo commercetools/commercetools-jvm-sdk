@@ -116,7 +116,7 @@ extends <a href="../../../../../io/sphere/sdk/queries/MetaModelQueryDsl.html" ti
         final CustomerGroupQuery query = CustomerGroupQuery.of()
                 .withPredicates(group -&gt; group.name().isIn(names));
 
-        final List&lt;CustomerGroup&gt; results = execute(query).getResults();
+        final List&lt;CustomerGroup&gt; results = client().executeBlocking(query).getResults();
         assertThat(results).containsOnly(customerGroupA, customerGroupB);
     });
 });

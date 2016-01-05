@@ -133,7 +133,7 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html"
     assertThat(productType.findAttribute(attributeName)).isPresent();
     final EnumValue value = EnumValue.of("XXXL", "XXXL");
 
-    final ProductType updatedProductType = execute(ProductTypeUpdateCommand.of(productType,
+    final ProductType updatedProductType = client().executeBlocking(ProductTypeUpdateCommand.of(productType,
             AddEnumValue.of(attributeName, value)));
 
     assertThat(updatedProductType.getAttribute(attributeName).getAttributeType())

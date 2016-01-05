@@ -111,7 +111,7 @@ extends <a href="../../../../../io/sphere/sdk/queries/MetaModelGetDsl.html" titl
  <div id="io-sphere-sdk-orders-commands-OrderFromCartCreateCommandTest-execution--%s" class=code-example><pre><code class='java'>withFilledCart(client(), cart -&gt; {
     final OrderFromCartCreateCommand createCommand =
             OrderFromCartCreateCommand.of(cart).plusExpansionPaths(m -&gt; m.cart());
-    final Order order = execute(createCommand);
+    final Order order = client().executeBlocking(createCommand);
     assertThat(order.getLineItems()).isEqualTo(cart.getLineItems());
     assertThat(order.getCustomLineItems()).isEqualTo(cart.getCustomLineItems());
     assertThat(order.getCart().getId()).isEqualTo(cart.getId());

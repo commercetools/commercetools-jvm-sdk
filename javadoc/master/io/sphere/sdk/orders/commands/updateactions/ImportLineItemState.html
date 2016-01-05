@@ -133,11 +133,12 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html"
         final LineItem lineItem = order.getLineItems().get(0);
         assertThat(lineItem).containsState(initialState).containsNotState(nextState);
         final Set&lt;ItemState&gt; itemStates = asSet(ItemState.of(nextState, 1L), ItemState.of(initialState, lineItem.getQuantity() - 1));
-        final Order updatedOrder = execute(OrderUpdateCommand.of(order, ImportLineItemState.of(lineItem, itemStates)));
+        final Order updatedOrder = client().executeBlocking(OrderUpdateCommand.of(order, ImportLineItemState.of(lineItem, itemStates)));
         assertThat(updatedOrder.getLineItems().get(0)).containsItemStates(itemStates);
 
         //reference expansion
-        final Order loadedOrder = execute(OrderByIdGet.of(order).withExpansionPaths(m -&gt; m.lineItems().state().state()));
+        final OrderByIdGet orderByIdGet = OrderByIdGet.of(order).withExpansionPaths(m -&gt; m.lineItems().state().state());
+        final Order loadedOrder = client().executeBlocking(orderByIdGet);
         final Reference&lt;State&gt; state = new LinkedList&lt;&gt;(loadedOrder.getLineItems().get(0).getState()).getFirst().getState();
         assertThat(state.getObj()).isNotNull();
 

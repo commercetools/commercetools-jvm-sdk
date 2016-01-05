@@ -111,7 +111,7 @@ extends <a href="../../../../../io/sphere/sdk/commands/CreateCommand.html" title
  <div id="io-sphere-sdk-zones-commands-ZoneCreateCommandTest-execution--%s" class=code-example><pre><code class='java'>final Set&lt;CountryCode&gt; euAndSwissCountries = asSet(AT, BE, CH);//not complete, but you get the idea
 final ZoneDraft draft = ZoneDraft.ofCountries("zone1", euAndSwissCountries, "EU and Swiss");
 final ZoneCreateCommand createCommand = ZoneCreateCommand.of(draft);
-final Zone zone = execute(createCommand);
+final Zone zone = client().executeBlocking(createCommand);
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/zones/commands/ZoneCreateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 </li>
 </ul>

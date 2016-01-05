@@ -131,7 +131,7 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html"
  <div id="io-sphere-sdk-productdiscounts-commands-ProductDiscountUpdateCommandTest-changeValue--%s" class=code-example><pre><code class='java'>withUpdateableProductDiscount(client(), discount -&gt; {
     final ProductDiscountValue productDiscountValue = AbsoluteProductDiscountValue.of(EURO_30);
 
-    final ProductDiscount updatedDiscount = execute(ProductDiscountUpdateCommand.of(discount, ChangeValue.of(productDiscountValue)));
+    final ProductDiscount updatedDiscount = client().executeBlocking(ProductDiscountUpdateCommand.of(discount, ChangeValue.of(productDiscountValue)));
 
     assertThat(updatedDiscount.getValue()).isEqualTo(productDiscountValue);
     return updatedDiscount;

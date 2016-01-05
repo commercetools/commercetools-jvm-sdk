@@ -112,7 +112,7 @@ extends <a href="../../../../../io/sphere/sdk/queries/MetaModelGetDsl.html" titl
     final String id = category.getId();
     final Get&lt;Category&gt; fetch = CategoryByIdGet.of(id)
             .withExpansionPaths(m -&gt; m.parent());
-    final Category loadedCategory = execute(fetch);
+    final Category loadedCategory = client().executeBlocking(fetch);
     assertThat(loadedCategory.getId()).isEqualTo(id);
     assertThat(loadedCategory.getParent()).is(expanded(parent));
 });

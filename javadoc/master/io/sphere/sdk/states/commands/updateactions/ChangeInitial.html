@@ -129,7 +129,7 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html"
     final boolean newIsInitial = !oldIsInitial;
 
     final StateUpdateCommand command = StateUpdateCommand.of(state, ChangeInitial.of(newIsInitial));
-    final State updatedState = execute(command);
+    final State updatedState = client().executeBlocking(command);
     assertThat(updatedState.isInitial()).isEqualTo(newIsInitial);
     return updatedState;
 });

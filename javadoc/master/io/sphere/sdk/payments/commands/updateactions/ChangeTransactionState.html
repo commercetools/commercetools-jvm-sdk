@@ -136,7 +136,7 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html"
     assertThat(updatedTransaction.getState()).isEqualTo(transactionState);
 
     //check messages
-    final PagedQueryResult&lt;PaymentTransactionStateChangedMessage&gt; messageQueryResult = execute(MessageQuery.of()
+    final PagedQueryResult&lt;PaymentTransactionStateChangedMessage&gt; messageQueryResult = client().executeBlocking(MessageQuery.of()
             .withPredicates(m -&gt; m.resource().is(payment))
             .forMessageType(PaymentTransactionStateChangedMessage.MESSAGE_HINT));
     assertThat(messageQueryResult.head().get().getState()).isEqualTo(transactionState);
