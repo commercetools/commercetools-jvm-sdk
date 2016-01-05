@@ -74,7 +74,7 @@ var activeTableTab = "activeTableTab";
 <ul class="subNavList">
 <li>Summary:&nbsp;</li>
 <li>Nested&nbsp;|&nbsp;</li>
-<li><a href="#fields.inherited.from.class.io.sphere.sdk.expansion.ExpansionModel">Field</a>&nbsp;|&nbsp;</li>
+<li>Field&nbsp;|&nbsp;</li>
 <li><a href="#constructor.summary">Constr</a>&nbsp;|&nbsp;</li>
 <li><a href="#method.summary">Method</a></li>
 </ul>
@@ -127,7 +127,7 @@ var activeTableTab = "activeTableTab";
 </dl>
 <dl>
 <dt>All Implemented Interfaces:</dt>
-<dd><a href="../../../../../io/sphere/sdk/expansion/ExpansionPath.html" title="interface in io.sphere.sdk.expansion">ExpansionPath</a>&lt;T&gt;</dd>
+<dd><a href="../../../../../io/sphere/sdk/expansion/ExpansionPathContainer.html" title="interface in io.sphere.sdk.expansion">ExpansionPathContainer</a>&lt;T&gt;</dd>
 </dl>
 <hr>
 <br>
@@ -140,21 +140,6 @@ extends <a href="../../../../../io/sphere/sdk/expansion/ExpandedModel.html" titl
 <div class="summary">
 <ul class="blockList">
 <li class="blockList">
-<!-- =========== FIELD SUMMARY =========== -->
-<ul class="blockList">
-<li class="blockList"><a name="field.summary">
-<!--   -->
-</a>
-<h3>Field Summary</h3>
-<ul class="blockList">
-<li class="blockList"><a name="fields.inherited.from.class.io.sphere.sdk.expansion.ExpansionModel">
-<!--   -->
-</a>
-<h3>Fields inherited from class&nbsp;io.sphere.sdk.expansion.<a href="../../../../../io/sphere/sdk/expansion/ExpansionModel.html" title="class in io.sphere.sdk.expansion">ExpansionModel</a></h3>
-<code><a href="../../../../../io/sphere/sdk/expansion/ExpansionModel.html#parentPath">parentPath</a>, <a href="../../../../../io/sphere/sdk/expansion/ExpansionModel.html#path">path</a></code></li>
-</ul>
-</li>
-</ul>
 <!-- ======== CONSTRUCTOR SUMMARY ======== -->
 <ul class="blockList">
 <li class="blockList"><a name="constructor.summary">
@@ -167,7 +152,7 @@ extends <a href="../../../../../io/sphere/sdk/expansion/ExpandedModel.html" titl
 <th class="colOne" scope="col">Constructor and Description</th>
 </tr>
 <tr class="altColor">
-<td class="colOne"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/categories/expansion/CategoryExpansionModel.html#CategoryExpansionModel-java.lang.String-java.lang.String-">CategoryExpansionModel</a></span>(java.lang.String&nbsp;parentPath,
+<td class="colOne"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/categories/expansion/CategoryExpansionModel.html#CategoryExpansionModel-java.util.List-java.lang.String-">CategoryExpansionModel</a></span>(java.util.List&lt;java.lang.String&gt;&nbsp;parentPath,
                       java.lang.String&nbsp;path)</code>&nbsp;</td>
 </tr>
 </table>
@@ -207,7 +192,7 @@ extends <a href="../../../../../io/sphere/sdk/expansion/ExpandedModel.html" titl
 <!--   -->
 </a>
 <h3>Methods inherited from class&nbsp;io.sphere.sdk.expansion.<a href="../../../../../io/sphere/sdk/expansion/ExpandedModel.html" title="class in io.sphere.sdk.expansion">ExpandedModel</a></h3>
-<code><a href="../../../../../io/sphere/sdk/expansion/ExpandedModel.html#collection-java.lang.String-java.lang.Integer-">collection</a>, <a href="../../../../../io/sphere/sdk/expansion/ExpandedModel.html#equals-java.lang.Object-">equals</a>, <a href="../../../../../io/sphere/sdk/expansion/ExpandedModel.html#hashCode--">hashCode</a>, <a href="../../../../../io/sphere/sdk/expansion/ExpandedModel.html#toSphereExpand--">toSphereExpand</a></code></li>
+<code><a href="../../../../../io/sphere/sdk/expansion/ExpandedModel.html#collection-java.lang.String-java.lang.Integer-">collection</a>, <a href="../../../../../io/sphere/sdk/expansion/ExpandedModel.html#expansionPaths--">expansionPaths</a></code></li>
 </ul>
 <ul class="blockList">
 <li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.expansion.ExpansionModel">
@@ -221,7 +206,7 @@ extends <a href="../../../../../io/sphere/sdk/expansion/ExpandedModel.html" titl
 <!--   -->
 </a>
 <h3>Methods inherited from class&nbsp;io.sphere.sdk.models.<a href="../../../../../io/sphere/sdk/models/Base.html" title="class in io.sphere.sdk.models">Base</a></h3>
-<code><a href="../../../../../io/sphere/sdk/models/Base.html#toString--">toString</a></code></li>
+<code><a href="../../../../../io/sphere/sdk/models/Base.html#equals-java.lang.Object-">equals</a>, <a href="../../../../../io/sphere/sdk/models/Base.html#hashCode--">hashCode</a>, <a href="../../../../../io/sphere/sdk/models/Base.html#toString--">toString</a></code></li>
 </ul>
 <ul class="blockList">
 <li class="blockList"><a name="methods.inherited.from.class.java.lang.Object">
@@ -229,13 +214,6 @@ extends <a href="../../../../../io/sphere/sdk/expansion/ExpandedModel.html" titl
 </a>
 <h3>Methods inherited from class&nbsp;java.lang.Object</h3>
 <code>clone, finalize, getClass, notify, notifyAll, wait, wait, wait</code></li>
-</ul>
-<ul class="blockList">
-<li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.expansion.ExpansionPath">
-<!--   -->
-</a>
-<h3>Methods inherited from interface&nbsp;io.sphere.sdk.expansion.<a href="../../../../../io/sphere/sdk/expansion/ExpansionPath.html" title="interface in io.sphere.sdk.expansion">ExpansionPath</a></h3>
-<code><a href="../../../../../io/sphere/sdk/expansion/ExpansionPath.html#of-java.lang.String-">of</a></code></li>
 </ul>
 </li>
 </ul>
@@ -251,13 +229,13 @@ extends <a href="../../../../../io/sphere/sdk/expansion/ExpandedModel.html" titl
 <!--   -->
 </a>
 <h3>Constructor Detail</h3>
-<a name="CategoryExpansionModel-java.lang.String-java.lang.String-">
+<a name="CategoryExpansionModel-java.util.List-java.lang.String-">
 <!--   -->
 </a>
 <ul class="blockListLast">
 <li class="blockList">
 <h4>CategoryExpansionModel</h4>
-<pre>public&nbsp;CategoryExpansionModel(java.lang.String&nbsp;parentPath,
+<pre>public&nbsp;CategoryExpansionModel(java.util.List&lt;java.lang.String&gt;&nbsp;parentPath,
                               java.lang.String&nbsp;path)</pre>
 </li>
 </ul>
@@ -358,7 +336,7 @@ extends <a href="../../../../../io/sphere/sdk/expansion/ExpandedModel.html" titl
 <ul class="subNavList">
 <li>Summary:&nbsp;</li>
 <li>Nested&nbsp;|&nbsp;</li>
-<li><a href="#fields.inherited.from.class.io.sphere.sdk.expansion.ExpansionModel">Field</a>&nbsp;|&nbsp;</li>
+<li>Field&nbsp;|&nbsp;</li>
 <li><a href="#constructor.summary">Constr</a>&nbsp;|&nbsp;</li>
 <li><a href="#method.summary">Method</a></li>
 </ul>
