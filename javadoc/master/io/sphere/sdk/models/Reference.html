@@ -112,7 +112,7 @@ var activeTableTab = "activeTableTab";
 extends <a href="../../../../io/sphere/sdk/models/Referenceable.html" title="interface in io.sphere.sdk.models">Referenceable</a>&lt;T&gt;, <a href="../../../../io/sphere/sdk/models/Identifiable.html" title="interface in io.sphere.sdk.models">Identifiable</a>&lt;T&gt;, <a href="../../../../io/sphere/sdk/models/ResourceIdentifier.html" title="interface in io.sphere.sdk.models">ResourceIdentifier</a>&lt;T&gt;</pre>
 <div class="block">A <a href="../../../../io/sphere/sdk/models/Reference.html" title="interface in io.sphere.sdk.models"><code>Reference</code></a> is a loose reference to another resource on the SPHERE.IO platform.
 
- The reference may have a copy of the referenced object available via the method <a href="../../../../io/sphere/sdk/models/Reference.html#getObj--"><code>getObj()</code></a>
+ <p>The reference <em>may</em> have a copy of the referenced object available via the method <a href="../../../../io/sphere/sdk/models/Reference.html#getObj--"><code>getObj()</code></a> on <a href="../../../../io/sphere/sdk/models/Reference.html#getObj--"><code>certain conditions</code></a>.</p>
 
  For equals, only the <a href="../../../../io/sphere/sdk/models/Reference.html#getTypeId--"><code>getTypeId()</code></a> and <a href="../../../../io/sphere/sdk/models/Reference.html#getId--"><code>getId()</code></a> are compared used and <a href="../../../../io/sphere/sdk/models/Reference.html#getObj--"><code>getObj()</code></a> will be ignored.</div>
 </li>
@@ -262,7 +262,36 @@ extends <a href="../../../../io/sphere/sdk/models/Referenceable.html" title="int
 <h4>getObj</h4>
 <pre>@Nullable
 <a href="../../../../io/sphere/sdk/models/Reference.html" title="type parameter in Reference">T</a>&nbsp;getObj()</pre>
-<div class="block">The optional value of the referenced object.</div>
+<div class="block">The optional value of the referenced object.
+
+ This value is by default null on requests:
+
+ <div id="io-sphere-sdk-models-ReferenceIntegrationTest-referencesAreNotByDefaultExpanded--%s" class=code-example><pre><code class='java'>withCustomerInGroup(client(), (customer, customerGroup) -&gt; {
+    final CustomerByIdGet customerByIdGet = CustomerByIdGet.of(customer);
+    final Customer loadedCustomer = client().executeBlocking(customerByIdGet);
+    final Reference&lt;CustomerGroup&gt; customerGroupReference = loadedCustomer.getCustomerGroup();
+    assertThat(customerGroupReference.getId()).isEqualTo(customerGroup.getId());
+    assertThat(customerGroupReference.getObj())
+            .as("reference is not expanded")
+            .isNull();
+});
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/models/ReferenceIntegrationTest.java" target="_blank">test code</a>.</pre></div>
+
+ But it can be expanded with using <a href="../../../../io/sphere/sdk/expansion/ReferenceExpansionDsl.html#withExpansionPaths-java.util.List-"><code>ReferenceExpansionDsl.withExpansionPaths(List)</code></a> on requests:
+
+ <div id="io-sphere-sdk-models-ReferenceIntegrationTest-howToExpandReferences--%s" class=code-example><pre><code class='java'>withCustomerInGroup(client(), (customer, customerGroup) -&gt; {
+    final CustomerByIdGet customerByIdGet = CustomerByIdGet.of(customer)
+            .withExpansionPaths(m -&gt; m.customerGroup());//the important part
+    final Customer loadedCustomer = client().executeBlocking(customerByIdGet);
+    final Reference&lt;CustomerGroup&gt; customerGroupReference = loadedCustomer.getCustomerGroup();
+    final CustomerGroup loadedCustomerGroup = customerGroupReference.getObj();
+    assertThat(loadedCustomerGroup)
+            .as("reference is expanded")
+            .isEqualTo(customerGroup);
+});
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/models/ReferenceIntegrationTest.java" target="_blank">test code</a>.</pre></div>
+
+ Refer to <a href="../../../../io/sphere/sdk/expansion/ReferenceExpansionDsl.html" title="interface in io.sphere.sdk.expansion"><code>ReferenceExpansionDsl</code></a> which endpoints support reference expansion.</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>The value of the referenced object or null.</dd>
