@@ -4,11 +4,12 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 import javax.annotation.Nullable;
+import java.util.List;
 
 /**
  * A {@link io.sphere.sdk.models.Reference} is a loose reference to another resource on the SPHERE.IO platform.
  *
- * The reference may have a copy of the referenced object available via the method {@link io.sphere.sdk.models.Reference#getObj()}
+ * <p>The reference <em>may</em> have a copy of the referenced object available via the method {@link io.sphere.sdk.models.Reference#getObj()} on {@link io.sphere.sdk.models.Reference#getObj() certain conditions}.</p>
  *
  * For equals, only the {@link Reference#getTypeId()} and {@link io.sphere.sdk.models.Reference#getId()} are compared used and {@link Reference#getObj()} will be ignored.
  *
@@ -33,6 +34,17 @@ public interface Reference<T> extends Referenceable<T>, Identifiable<T>, Resourc
 
     /**
      * The optional value of the referenced object.
+     *
+     * This value is by default null on requests:
+     *
+     * {@include.example io.sphere.sdk.models.ReferenceIntegrationTest#referencesAreNotByDefaultExpanded()}
+     *
+     * But it can be expanded with using {@link io.sphere.sdk.expansion.ReferenceExpansionDsl#withExpansionPaths(List)} on requests:
+     *
+     * {@include.example io.sphere.sdk.models.ReferenceIntegrationTest#howToExpandReferences()}
+     *
+     * Refer to {@link io.sphere.sdk.expansion.ReferenceExpansionDsl} which endpoints support reference expansion.
+     *
      * @return The value of the referenced object or null.
      */
     @JsonIgnore
