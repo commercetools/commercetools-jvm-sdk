@@ -40,19 +40,19 @@ public class ProductQueryTest extends IntegrationTest {
             assertThat(product.getMasterData().isPublished()).isFalse();
             checkIsFoundByPublishedFlag(product, false);
 
-            final Product publishedProduct = execute(ProductUpdateCommand.of(product, Publish.of()));
+            final Product publishedProduct = client().executeBlocking(ProductUpdateCommand.of(product, Publish.of()));
             assertThat(publishedProduct.getMasterData().isPublished()).isTrue();
             checkIsFoundByPublishedFlag(product, true);
 
 
-            final Product unpublishedProduct = execute(ProductUpdateCommand.of(publishedProduct, Unpublish.of()));
+            final Product unpublishedProduct = client().executeBlocking(ProductUpdateCommand.of(publishedProduct, Unpublish.of()));
             assertThat(unpublishedProduct.getMasterData().isPublished()).isFalse();
             return unpublishedProduct;
         });
     }
 
     private void checkIsFoundByPublishedFlag(final Product product, final boolean value) {
-        final Optional<Product> productFromQuery = execute(ProductQuery.of()
+        final Optional<Product> productFromQuery = client().executeBlocking(ProductQuery.of()
                 .withPredicates(m -> {
                     return m.masterData().isPublished().is(value);
                 })
@@ -83,7 +83,7 @@ public class ProductQueryTest extends IntegrationTest {
     public void canExpandCustomerGroupOfPrices() throws Exception {
         withCustomerGroup(client(), customerGroup ->
                         withUpdateablePricedProduct(client(), PriceDraft.of(MoneyImpl.of(new BigDecimal("12.34"), EUR)).withCountry(DE).withCustomerGroup(customerGroup), product -> {
-                            final ExpansionPath<Product> expansionPath = ProductExpansionModel.of().masterData().staged().masterVariant().prices().customerGroup();
+                            final ExpansionPath<Product> expansionPath = ProductExpansionModel.of().masterData().staged().masterVariant().prices().customerGroup().expansionPaths().get(0);
                             final Query<Product> query = query(product).withExpansionPaths(expansionPath);
                             final List<Price> prices = client().executeBlocking(query).head().get().getMasterData().getStaged().getMasterVariant().getPrices();
                             assertThat(prices
@@ -99,7 +99,7 @@ public class ProductQueryTest extends IntegrationTest {
     public void canExpandChannelOfPrices() throws Exception {
         ChannelFixtures.withChannelOfRole(client(), ChannelRole.INVENTORY_SUPPLY, channel -> {
             withUpdateablePricedProduct(client(), PriceDraft.of(MoneyImpl.of(new BigDecimal("12.34"), EUR)).withCountry(DE).withChannel(channel), product -> {
-                final ExpansionPath<Product> expansionPath = ProductExpansionModel.of().masterData().staged().masterVariant().prices().channel();
+                final ExpansionPath<Product> expansionPath = ProductExpansionModel.of().masterData().staged().masterVariant().prices().channel().expansionPaths().get(0);
                 final Query<Product> query = query(product).withExpansionPaths(expansionPath);
                 final List<Price> prices = client().executeBlocking(query).head().get().getMasterData().getStaged().getMasterVariant().getPrices();
                 assertThat(prices
@@ -121,7 +121,7 @@ public class ProductQueryTest extends IntegrationTest {
             final Duration maxWaitTime = Duration.ofMinutes(2);
             final Duration waitBeforeRetry = Duration.ofMillis(500);
             assertEventually(maxWaitTime, waitBeforeRetry, () -> {
-                final Optional<Product> loadedProduct = execute(query).head();
+                final Optional<Product> loadedProduct = client().executeBlocking(query).head();
                 assertThat(loadedProduct.isPresent()).isTrue();
                 assertThat(loadedProduct.get().getId()).isEqualTo(product.getId());
             });
@@ -134,7 +134,7 @@ public class ProductQueryTest extends IntegrationTest {
         CustomerGroupFixtures.withB2cCustomerGroup(client(), customerGroup ->
             ProductFixtures.withProductType(client(), randomString(), productType ->
                 withProduct(client(), new VariantsCottonTShirtProductDraftSupplier(productType, randomString(), customerGroup), product -> {
-                    final PagedQueryResult<Product> result = execute(ProductQuery.of()
+                    final PagedQueryResult<Product> result = client().executeBlocking(ProductQuery.of()
                             .withPredicates(m -> m.id().is(product.getId()))
                             .withExpansionPaths(m -> m.masterData().staged().variants().prices().customerGroup())
                             .withLimit(1L));
