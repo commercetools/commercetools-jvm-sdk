@@ -130,7 +130,7 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html"
 
  <div id="io-sphere-sdk-categories-commands-CategoryUpdateCommandTest-setMetaTitle--%s" class=code-example><pre><code class='java'>withPersistentCategory(client(), category -&gt; {
     final LocalizedString newValue = randomSlug();
-    final Category updatedCategory = execute(CategoryUpdateCommand.of(category, SetMetaTitle.of(newValue)));
+    final Category updatedCategory = client().executeBlocking(CategoryUpdateCommand.of(category, SetMetaTitle.of(newValue)));
     assertThat(updatedCategory.getMetaTitle()).isEqualTo(newValue);
 });
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/categories/commands/CategoryUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>

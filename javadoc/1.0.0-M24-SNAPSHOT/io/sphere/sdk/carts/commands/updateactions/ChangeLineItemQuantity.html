@@ -132,14 +132,14 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html"
     assertThat(cart.getLineItems()).hasSize(0);
     final AddLineItem action = AddLineItem.of(product.getId(), MASTER_VARIANT_ID, 3L);
 
-    final Cart cartWith3 = execute(CartUpdateCommand.of(cart, action));
+    final Cart cartWith3 = client().executeBlocking(CartUpdateCommand.of(cart, action));
     final LineItem lineItem = cartWith3.getLineItems().get(0);
     assertThat(lineItem.getQuantity()).isEqualTo(3);
 
-    final Cart cartWith2 = execute(CartUpdateCommand.of(cartWith3, ChangeLineItemQuantity.of(lineItem, 2L)));
+    final Cart cartWith2 = client().executeBlocking(CartUpdateCommand.of(cartWith3, ChangeLineItemQuantity.of(lineItem, 2L)));
     assertThat(cartWith2.getLineItems().get(0).getQuantity()).isEqualTo(2);
 
-    final Cart cartWith0 = execute(CartUpdateCommand.of(cartWith2, ChangeLineItemQuantity.of(lineItem, 0L)));
+    final Cart cartWith0 = client().executeBlocking(CartUpdateCommand.of(cartWith2, ChangeLineItemQuantity.of(lineItem, 0L)));
     assertThat(cartWith0.getLineItems()).hasSize(0);
 });
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/carts/commands/CartUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>

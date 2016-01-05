@@ -131,10 +131,10 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html"
  <div id="io-sphere-sdk-products-commands-ProductUpdateCommandTest-publish--%s" class=code-example><pre><code class='java'>withUpdateableProduct(client(), product -&gt; {
     assertThat(product.getMasterData().isPublished()).isFalse();
 
-    final Product publishedProduct = execute(ProductUpdateCommand.of(product, Publish.of()));
+    final Product publishedProduct = client().executeBlocking(ProductUpdateCommand.of(product, Publish.of()));
     assertThat(publishedProduct.getMasterData().isPublished()).isTrue();
 
-    final Product unpublishedProduct = execute(ProductUpdateCommand.of(publishedProduct, Unpublish.of()));
+    final Product unpublishedProduct = client().executeBlocking(ProductUpdateCommand.of(publishedProduct, Unpublish.of()));
     assertThat(unpublishedProduct.getMasterData().isPublished()).isFalse();
     return unpublishedProduct;
 });

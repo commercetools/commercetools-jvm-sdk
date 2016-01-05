@@ -109,7 +109,7 @@ extends <a href="../../../../../io/sphere/sdk/queries/MetaModelGetDsl.html" titl
 <div class="block">Gets a zone by ID.
 
  <div id="io-sphere-sdk-zones-queries-ZoneByIdGetTest-fetchById--%s" class=code-example><pre><code class='java'>ZoneFixtures.withUpdateableZone(client(), zone -&gt; {
-    final Zone fetchedZone = execute(ZoneByIdGet.of(zone.getId()));
+    final Zone fetchedZone = client().executeBlocking(ZoneByIdGet.of(zone.getId()));
     assertThat(fetchedZone.getId()).isEqualTo(zone.getId());
     return zone;
 }, CountryCode.BA);

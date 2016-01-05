@@ -130,19 +130,19 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html"
 
  <div id="io-sphere-sdk-shippingmethods-commands-ShippingMethodUpdateCommandTest-changeIsDefault--%s" class=code-example><pre><code class='java'>//only one can be default one, so clean up if there is any
 final Query&lt;ShippingMethod&gt; query = ShippingMethodQuery.of().withPredicates(QueryPredicate.of("isDefault = true"));
-final Optional&lt;ShippingMethod&gt; defaultShippingMethodOption = execute(query).head();
-defaultShippingMethodOption.ifPresent(sm -&gt; execute(ShippingMethodUpdateCommand.of(sm, ChangeIsDefault.toFalse())));
+final Optional&lt;ShippingMethod&gt; defaultShippingMethodOption = client().executeBlocking(query).head();
+defaultShippingMethodOption.ifPresent(sm -&gt; client().executeBlocking(ShippingMethodUpdateCommand.of(sm, ChangeIsDefault.toFalse())));
 
 withUpdateableShippingMethod(client(), shippingMethod -&gt; {
     assertThat(shippingMethod.isDefault()).isFalse();
     final ShippingMethodUpdateCommand cmd = ShippingMethodUpdateCommand.of(shippingMethod, ChangeIsDefault.toTrue());
-    final ShippingMethod updatedShippingMethod = execute(cmd);
+    final ShippingMethod updatedShippingMethod = client().executeBlocking(cmd);
     assertThat(updatedShippingMethod.isDefault()).isTrue();
 
-    final Long defaultShippingMethods = execute(ShippingMethodQuery.of().byIsDefault()).size();
+    final Long defaultShippingMethods = client().executeBlocking(ShippingMethodQuery.of().byIsDefault()).size();
     assertThat(defaultShippingMethods).isEqualTo(1);
 
-    return execute(ShippingMethodUpdateCommand.of(updatedShippingMethod, ChangeIsDefault.toFalse()));
+    return client().executeBlocking(ShippingMethodUpdateCommand.of(updatedShippingMethod, ChangeIsDefault.toFalse()));
 });
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/shippingmethods/commands/ShippingMethodUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 </li>

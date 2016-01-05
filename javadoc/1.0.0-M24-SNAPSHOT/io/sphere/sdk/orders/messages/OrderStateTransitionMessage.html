@@ -114,11 +114,11 @@ extends java.lang.Object</pre>
 
  <div id="io-sphere-sdk-orders-commands-OrderUpdateCommandTest-transitionState--%s" class=code-example><pre><code class='java'>withStateByBuilder(client(), builder -&gt; builder.type(StateType.ORDER_STATE), state -&gt; {
     withOrder(client(), order -&gt; {
-        final Order updatedOrder = execute(OrderUpdateCommand.of(order, TransitionState.of(state)));
+        final Order updatedOrder = client().executeBlocking(OrderUpdateCommand.of(order, TransitionState.of(state)));
 
         assertThat(updatedOrder.getState()).isEqualTo(state.toReference());
 
-        final PagedQueryResult&lt;OrderStateTransitionMessage&gt; messageQueryResult = execute(MessageQuery.of()
+        final PagedQueryResult&lt;OrderStateTransitionMessage&gt; messageQueryResult = client().executeBlocking(MessageQuery.of()
                 .withPredicates(m -&gt; m.resource().is(order))
                 .forMessageType(OrderStateTransitionMessage.MESSAGE_HINT));
 
@@ -126,8 +126,9 @@ extends java.lang.Object</pre>
         assertThat(message.getState()).isEqualTo(state.toReference());
 
         //check query model
-        final Order orderByState = execute(OrderQuery.of()
-                .withPredicates(m -&gt; m.id().is(order.getId()).and(m.state().is(state))))
+        final OrderQuery orderQuery = OrderQuery.of()
+                .withPredicates(m -&gt; m.id().is(order.getId()).and(m.state().is(state)));
+        final Order orderByState = client().executeBlocking(orderQuery)
                 .head().get();
         assertThat(orderByState).isEqualTo(updatedOrder);
 

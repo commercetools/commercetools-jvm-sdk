@@ -110,7 +110,7 @@ extends <a href="../../../../../io/sphere/sdk/queries/MetaModelGetDsl.html" titl
 
  <div id="io-sphere-sdk-channels-queries-ChannelByIdGetTest-execution--%s" class=code-example><pre><code class='java'>withChannelOfRole(client(), INVENTORY_SUPPLY, channel -&gt; {
     final String id = channel.getId();
-    final Channel fetchedChannel = execute(ChannelByIdGet.of(id));
+    final Channel fetchedChannel = client().executeBlocking(ChannelByIdGet.of(id));
     assertThat(fetchedChannel).isEqualTo(channel);
 });
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/channels/queries/ChannelByIdGetTest.java" target="_blank">test code</a>.</pre></div></div>

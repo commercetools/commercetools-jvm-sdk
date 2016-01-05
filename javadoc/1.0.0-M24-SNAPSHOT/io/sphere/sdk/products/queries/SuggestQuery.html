@@ -125,7 +125,7 @@ extends <a href="../../../../../io/sphere/sdk/client/SphereRequest.html" title="
             .withStaged(true);
 
     assertEventually(() -&gt; {
-        final SuggestionResult suggestionResult = execute(suggestQuery);
+        final SuggestionResult suggestionResult = client().executeBlocking(suggestQuery);
 
         assertThat(suggestionResult.getSuggestionsForLocale(Locale.GERMAN))
                 .matches(suggestionsList -&gt; suggestionsList.stream()

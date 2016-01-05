@@ -133,7 +133,7 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html"
         final CustomLineItem customLineItem = order.getCustomLineItems().get(0);
         assertThat(customLineItem).containsState(initialState).containsNotState(nextState);
         final Set&lt;ItemState&gt; itemStates = asSet(ItemState.of(nextState, 1L), ItemState.of(initialState, customLineItem.getQuantity() - 1));
-        final Order updatedOrder = execute(OrderUpdateCommand.of(order, ImportCustomLineItemState.of(customLineItem, itemStates)));
+        final Order updatedOrder = client().executeBlocking(OrderUpdateCommand.of(order, ImportCustomLineItemState.of(customLineItem, itemStates)));
         assertThat(updatedOrder.getCustomLineItems().get(0)).containsItemStates(itemStates);
     })
 );

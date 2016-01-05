@@ -130,7 +130,7 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html"
 
  <div id="io-sphere-sdk-channels-commands-ChannelUpdateCommandTest-removeRoles--%s" class=code-example><pre><code class='java'>withUpdatableChannelOfRole(client(), asSet(ORDER_IMPORT, PRIMARY), channel -&gt; {
     final Set&lt;ChannelRole&gt; roles = asSet(ORDER_IMPORT);
-    final Channel updatedChannel = execute(ChannelUpdateCommand.of(channel, RemoveRoles.of(roles)));
+    final Channel updatedChannel = client().executeBlocking(ChannelUpdateCommand.of(channel, RemoveRoles.of(roles)));
     assertThat(updatedChannel.getRoles()).containsOnly(PRIMARY);
     return updatedChannel;
 });

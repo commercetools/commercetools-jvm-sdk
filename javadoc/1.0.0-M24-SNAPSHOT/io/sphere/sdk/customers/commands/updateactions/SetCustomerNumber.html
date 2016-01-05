@@ -133,7 +133,7 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html"
 
     final String customerNumber = randomString();
     final Customer updatedCustomer =
-            execute(CustomerUpdateCommand.of(customer, SetCustomerNumber.of(customerNumber)));
+            client().executeBlocking(CustomerUpdateCommand.of(customer, SetCustomerNumber.of(customerNumber)));
 
     assertThat(updatedCustomer.getCustomerNumber()).contains(customerNumber);
 });

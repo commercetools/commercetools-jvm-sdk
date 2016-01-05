@@ -218,7 +218,7 @@
         assertThat(lineItem).containsState(initialState).containsNotState(nextState);
         final long quantity = 1;
         final ZonedDateTime actualTransitionDate = ZonedDateTime_IN_PAST;
-        final Order updatedOrder = execute(OrderUpdateCommand.of(order, TransitionLineItemState.of(lineItem, quantity, initialState, nextState, actualTransitionDate)));
+        final Order updatedOrder = client().executeBlocking(OrderUpdateCommand.of(order, TransitionLineItemState.of(lineItem, quantity, initialState, nextState, actualTransitionDate)));
         assertThat(updatedOrder.getLineItems().get(0)).containsItemStates(ItemState.of(nextState, quantity));
 
         return updatedOrder;

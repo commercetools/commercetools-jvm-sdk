@@ -137,13 +137,13 @@ extends <a href="../../../../../../io/sphere/sdk/types/customupdateactions/SetCu
         final UpdateAction&lt;Product&gt; updateAction = SetProductPriceCustomType.
                 ofTypeIdAndObjects(type.getId(), STRING_FIELD_NAME, "a value", priceId);
         final ProductUpdateCommand productUpdateCommand = ProductUpdateCommand.of(product, updateAction);
-        final Product updatedProduct = execute(productUpdateCommand);
+        final Product updatedProduct = client().executeBlocking(productUpdateCommand);
 
         final Price price = getFirstPrice(updatedProduct);
         assertThat(price.getCustom().getFieldAsString(STRING_FIELD_NAME))
                 .isEqualTo("a value");
 
-        final Product updated2 = execute(ProductUpdateCommand.of(updatedProduct, SetProductPriceCustomField.ofObject(STRING_FIELD_NAME, "a new value", priceId)));
+        final Product updated2 = client().executeBlocking(ProductUpdateCommand.of(updatedProduct, SetProductPriceCustomField.ofObject(STRING_FIELD_NAME, "a new value", priceId)));
         assertThat(getFirstPrice(updated2).getCustom().getFieldAsString(STRING_FIELD_NAME))
                 .isEqualTo("a new value");
         return updated2;

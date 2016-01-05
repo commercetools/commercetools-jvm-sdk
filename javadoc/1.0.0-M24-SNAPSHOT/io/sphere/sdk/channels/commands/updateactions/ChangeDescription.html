@@ -130,7 +130,7 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html"
 
  <div id="io-sphere-sdk-channels-commands-ChannelUpdateCommandTest-changeDescription--%s" class=code-example><pre><code class='java'>withUpdatableChannelOfRole(client(), INVENTORY_SUPPLY, channel -&gt; {
     final LocalizedString newDescription = randomSlug();
-    final Channel updatedChannel = execute(ChannelUpdateCommand.of(channel, ChangeDescription.of(newDescription)));
+    final Channel updatedChannel = client().executeBlocking(ChannelUpdateCommand.of(channel, ChangeDescription.of(newDescription)));
     assertThat(updatedChannel.getDescription()).isEqualTo(newDescription);
     return updatedChannel;
 });

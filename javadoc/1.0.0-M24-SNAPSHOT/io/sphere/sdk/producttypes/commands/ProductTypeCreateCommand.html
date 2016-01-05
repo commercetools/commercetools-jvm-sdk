@@ -126,14 +126,14 @@ final AttributeDefinition sizeAttributeDefinition =
 final String name = getName();
 final ProductTypeDraft productTypeDraft =
         ProductTypeDraft.of(randomKey(), name, "a 'T' shaped cloth", asList(sizeAttributeDefinition));
-final ProductType productType = execute(ProductTypeCreateCommand.of(productTypeDraft));
+final ProductType productType = client().executeBlocking(ProductTypeCreateCommand.of(productTypeDraft));
 assertThat(productType.getName()).isEqualTo(name);
 assertThat(productType.getDescription()).isEqualTo("a 'T' shaped cloth");
 assertThat(productType.getAttributes()).contains(sizeAttributeDefinition);
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/producttypes/commands/ProductTypeCreateCommandTest.java" target="_blank">test code</a>.</pre></div>
 
   <div id="io-sphere-sdk-producttypes-Example-createDemo--%s" class=code-example><pre><code class='java'>final ProductTypeCreateCommand command = ProductTypeCreateCommand.of(new TShirtProductTypeDraftSupplier("product-type-name").get());
-final ProductType productType = execute(command);
+final ProductType productType = client().executeBlocking(command);
 
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/producttypes/Example.java" target="_blank">test code</a>.</pre></div>
 

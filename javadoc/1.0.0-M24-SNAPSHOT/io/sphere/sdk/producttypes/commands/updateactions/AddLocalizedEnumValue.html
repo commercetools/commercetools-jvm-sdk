@@ -135,7 +135,7 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html"
             LocalizedEnumValue.of("brown", LocalizedString.of(Locale.ENGLISH, "brown").plus(GERMAN, "braun"));
 
 
-    final ProductType updatedProductType = execute(ProductTypeUpdateCommand.of(productType,
+    final ProductType updatedProductType = client().executeBlocking(ProductTypeUpdateCommand.of(productType,
             AddLocalizedEnumValue.of(attributeName, value)));
 
     assertThat(updatedProductType.getAttribute(attributeName).getAttributeType())

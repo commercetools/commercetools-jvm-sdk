@@ -133,7 +133,7 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html"
 
     final String companyName = "Big coorp";
     final Customer updatedCustomer =
-            execute(CustomerUpdateCommand.of(customer, SetCompanyName.of(companyName)));
+            client().executeBlocking(CustomerUpdateCommand.of(customer, SetCompanyName.of(companyName)));
 
     assertThat(updatedCustomer.getCompanyName()).isEqualTo(companyName);
 });

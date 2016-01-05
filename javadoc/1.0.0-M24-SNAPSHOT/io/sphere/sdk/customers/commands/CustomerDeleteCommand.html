@@ -110,8 +110,8 @@ extends <a href="../../../../../io/sphere/sdk/expansion/MetaModelExpansionDsl.ht
 
  <div id="io-sphere-sdk-customers-commands-CustomerDeleteCommandTest-execution--%s" class=code-example><pre><code class='java'>final CustomerSignInResult result = client().executeBlocking(CustomerCreateCommand.of(newCustomerDraft()));
 final Customer customer = result.getCustomer();
-execute(CustomerDeleteCommand.of(customer));
-final Cart cart = execute(CartByCustomerIdGet.of(customer));
+client().executeBlocking(CustomerDeleteCommand.of(customer));
+final Cart cart = client().executeBlocking(CartByCustomerIdGet.of(customer));
 assertThat(cart).isNull();
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/customers/commands/CustomerDeleteCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 <dl>

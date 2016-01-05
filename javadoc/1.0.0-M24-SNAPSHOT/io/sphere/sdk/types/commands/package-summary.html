@@ -95,7 +95,7 @@ final TypeDraft typeDraft = TypeDraftBuilder.of(typeKey, en("name of the custom 
         .description(en("description"))
         .fieldDefinitions(singletonList(stringFieldDefinition))
         .build();
-final Type type = execute(TypeCreateCommand.of(typeDraft));
+final Type type = client().executeBlocking(TypeCreateCommand.of(typeDraft));
 assertThat(type.getKey()).isEqualTo(typeKey);
 assertThat(type.getName()).isEqualTo(en("name of the custom type"));
 assertThat(type.getResourceTypeIds()).containsExactly(Category.referenceTypeId());

@@ -133,7 +133,7 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html"
     final ReturnShipmentState newShipmentState = ReturnShipmentState.BACK_IN_STOCK;
     assertThat(returnItem.getShipmentState()).isNotEqualTo(newShipmentState);
     final SetReturnShipmentState action = SetReturnShipmentState.of(returnItem, newShipmentState);
-    final Order updatedOrder = execute(OrderUpdateCommand.of(order, action));
+    final Order updatedOrder = client().executeBlocking(OrderUpdateCommand.of(order, action));
     final ReturnShipmentState updatedReturnItem = updatedOrder.getReturnInfo().get(0).getItems().get(0).getShipmentState();
     assertThat(updatedReturnItem).isEqualTo(newShipmentState);
 

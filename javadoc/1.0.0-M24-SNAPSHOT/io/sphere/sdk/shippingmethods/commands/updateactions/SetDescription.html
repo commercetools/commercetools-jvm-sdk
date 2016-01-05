@@ -132,7 +132,7 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html"
     final String newDescription = randomString();
     assertThat(shippingMethod.getDescription()).isNotEqualTo(newDescription);
     final ShippingMethodUpdateCommand cmd = ShippingMethodUpdateCommand.of(shippingMethod, SetDescription.of(newDescription));
-    final ShippingMethod updatedShippingMethod = execute(cmd);
+    final ShippingMethod updatedShippingMethod = client().executeBlocking(cmd);
     assertThat(updatedShippingMethod.getDescription()).isEqualTo(newDescription);
     return updatedShippingMethod;
 });

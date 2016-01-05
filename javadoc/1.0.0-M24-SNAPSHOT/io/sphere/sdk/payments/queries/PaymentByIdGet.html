@@ -111,7 +111,7 @@ extends <a href="../../../../../io/sphere/sdk/queries/MetaModelGetDsl.html" titl
  <div id="io-sphere-sdk-payments-queries-PaymentByIdGetTest-execution--%s" class=code-example><pre><code class='java'>withPayment(client(), payment -&gt; {
     final String paymentId = payment.getId();
 
-    final Payment loadedPayment = execute(PaymentByIdGet.of(paymentId));
+    final Payment loadedPayment = client().executeBlocking(PaymentByIdGet.of(paymentId));
 
     assertThat(loadedPayment).isEqualTo(payment);
     return payment;

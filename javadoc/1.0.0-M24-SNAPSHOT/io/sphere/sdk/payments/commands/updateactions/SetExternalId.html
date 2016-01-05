@@ -131,7 +131,7 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html"
  <div id="io-sphere-sdk-payments-commands-PaymentUpdateCommandTest-setExternalId--%s" class=code-example><pre><code class='java'>    withPayment(client(), payment -&gt; {
         final String externalId = randomKey();
 
-        final Payment updatedPayment = execute(PaymentUpdateCommand.of(payment, asList(SetExternalId.of(externalId))));
+        final Payment updatedPayment = client().executeBlocking(PaymentUpdateCommand.of(payment, asList(SetExternalId.of(externalId))));
 
         assertThat(updatedPayment.getExternalId()).isEqualTo(externalId);
 

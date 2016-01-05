@@ -131,7 +131,7 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html"
  <div id="io-sphere-sdk-productdiscounts-commands-ProductDiscountUpdateCommandTest-changeIsActive--%s" class=code-example><pre><code class='java'>withUpdateableProductDiscount(client(), discount -&gt; {
     final boolean newIsActive = !discount.isActive();
 
-    final ProductDiscount updatedDiscount = execute(ProductDiscountUpdateCommand.of(discount, ChangeIsActive.of(newIsActive)));
+    final ProductDiscount updatedDiscount = client().executeBlocking(ProductDiscountUpdateCommand.of(discount, ChangeIsActive.of(newIsActive)));
 
     assertThat(updatedDiscount.isActive()).isEqualTo(newIsActive);
     return updatedDiscount;

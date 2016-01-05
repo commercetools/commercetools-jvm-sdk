@@ -109,7 +109,7 @@ extends <a href="../../../../../io/sphere/sdk/commands/CreateCommand.html" title
 <div class="block">Creates a cart.
 
  <div id="io-sphere-sdk-carts-commands-CartCreateCommandTest-execution--%s" class=code-example><pre><code class='java'>final CartDraft cartDraft = CartDraft.of(EUR).withCountry(DE);
-final Cart cart = execute(CartCreateCommand.of(cartDraft));
+final Cart cart = client().executeBlocking(CartCreateCommand.of(cartDraft));
 assertThat(cart.getTotalPrice().getCurrency().getCurrencyCode()).isEqualTo(EUR.getCurrencyCode());
 assertThat(cart.getCountry()).isEqualTo(DE);
 assertThat(cart.getTotalPrice().isZero()).isTrue();
@@ -139,7 +139,7 @@ withCustomer(client(), customer -&gt; {
                         .withShippingAddress(shippingAddress)
                         .withShippingMethod(shippingMethod)
                         .withCustom(customFieldsDraft);
-                final Cart cart = execute(CartCreateCommand.of(cartDraft));
+                final Cart cart = client().executeBlocking(CartCreateCommand.of(cartDraft));
 
                 softAssert(s -&gt; {
                     s.assertThat(cart.getCountry()).isEqualTo(DE);
@@ -157,7 +157,7 @@ withCustomer(client(), customer -&gt; {
                 });
 
                 //cleanup
-                execute(CartDeleteCommand.of(cart));
+                client().executeBlocking(CartDeleteCommand.of(cart));
             });
         });
         return type;

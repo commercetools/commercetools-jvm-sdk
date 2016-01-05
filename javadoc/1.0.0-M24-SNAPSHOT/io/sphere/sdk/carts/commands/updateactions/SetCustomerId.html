@@ -132,9 +132,9 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html"
  <div id="io-sphere-sdk-carts-commands-CartUpdateCommandTest-setCustomerId--%s" class=code-example><pre><code class='java'>withCustomer(client(), customer -&gt; {
     final Cart cart = createCartWithCountry(client());
     assertThat(cart.getCustomerId()).isNull();
-    final Cart cartWithCustomerId = execute(CartUpdateCommand.of(cart, SetCustomerId.ofCustomer(customer)));
+    final Cart cartWithCustomerId = client().executeBlocking(CartUpdateCommand.of(cart, SetCustomerId.ofCustomer(customer)));
     assertThat(cartWithCustomerId.getCustomerId()).contains(customer.getId());
-    final Cart cartWithoutCustomerId = execute(CartUpdateCommand.of(cartWithCustomerId, SetCustomerId.empty()));
+    final Cart cartWithoutCustomerId = client().executeBlocking(CartUpdateCommand.of(cartWithCustomerId, SetCustomerId.empty()));
     assertThat(cartWithoutCustomerId.getCustomerId()).isNull();
 });
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/carts/commands/CartUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>

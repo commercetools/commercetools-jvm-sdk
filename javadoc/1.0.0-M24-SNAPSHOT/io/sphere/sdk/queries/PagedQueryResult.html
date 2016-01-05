@@ -349,13 +349,13 @@ extends <a href="../../../../io/sphere/sdk/queries/PagedResult.html" title="clas
 
  <div id="io-sphere-sdk-categories-queries-CategoryQueryTest-withFetchTotalFalseRemovesTotalFromOutput--%s" class=code-example><pre><code class='java'>withCategory(client(), category -&gt; {
     final CategoryQuery query = CategoryQuery.of().byId(category.getId());
-    final PagedQueryResult&lt;Category&gt; resultWithTotal = execute(query);
+    final PagedQueryResult&lt;Category&gt; resultWithTotal = client().executeBlocking(query);
     assertThat(resultWithTotal.getTotal())
             .as("total is by default present")
             .isNotNull().isEqualTo(1);
 
     final CategoryQuery queryWithoutTotal = query.withFetchTotal(false);
-    final PagedQueryResult&lt;Category&gt; resultWithoutTotal = execute(queryWithoutTotal);
+    final PagedQueryResult&lt;Category&gt; resultWithoutTotal = client().executeBlocking(queryWithoutTotal);
     assertThat(resultWithoutTotal.getTotal())
             .as("total is not present")
             .isNull();

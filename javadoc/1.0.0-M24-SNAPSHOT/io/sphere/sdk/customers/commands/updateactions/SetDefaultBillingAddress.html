@@ -137,7 +137,7 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html"
     assertThat(customer.getDefaultBillingAddress()).isNull();
 
     final Customer updatedCustomer =
-            execute(CustomerUpdateCommand.of(customer, SetDefaultBillingAddress.ofAddress(address)));
+            client().executeBlocking(CustomerUpdateCommand.of(customer, SetDefaultBillingAddress.ofAddress(address)));
 
     assertThat(updatedCustomer.getDefaultBillingAddressId()).contains(address.getId());
     assertThat(updatedCustomer.getDefaultBillingAddress()).isEqualTo(address);

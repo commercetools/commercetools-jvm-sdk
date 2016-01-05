@@ -117,7 +117,7 @@ extends <a href="../../../../../io/sphere/sdk/queries/Get.html" title="interface
     final String key = existingCustomObject.getKey();
     final CustomObjectByKeyGet&lt;Foo&gt; fetch =
             CustomObjectByKeyGet.of(container, key, Foo.class);
-    final CustomObject&lt;Foo&gt; customObject = execute(fetch);
+    final CustomObject&lt;Foo&gt; customObject = client().executeBlocking(fetch);
     assertThat(customObject).isNotNull();
     assertThat(customObject).isEqualTo(existingCustomObject);
 });

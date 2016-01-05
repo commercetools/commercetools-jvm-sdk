@@ -131,7 +131,7 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html"
  <div id="io-sphere-sdk-types-commands-TypeUpdateCommandTest-addLocalizedEnumValue--%s" class=code-example><pre><code class='java'>withUpdateableType(client(), type -&gt; {
     final String name = TypeFixtures.LOCALIZED_ENUM_FIELD_NAME;
     final LocalizedEnumValue newLocalizedEnumValue = LocalizedEnumValue.of("key-new", en("label new"));
-    final Type updatedType = execute(TypeUpdateCommand.of(type, AddLocalizedEnumValue.of(name, newLocalizedEnumValue)));
+    final Type updatedType = client().executeBlocking(TypeUpdateCommand.of(type, AddLocalizedEnumValue.of(name, newLocalizedEnumValue)));
     assertThat(updatedType.getFieldDefinitionByName(name).getType())
             .isInstanceOf(LocalizedEnumFieldType.class)
             .matches(fieldType -&gt; ((LocalizedEnumFieldType) fieldType).getValues().contains(newLocalizedEnumValue), "contains the new enum value");

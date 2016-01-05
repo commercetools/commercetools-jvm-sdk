@@ -137,7 +137,7 @@ implements <a href="../../../../../io/sphere/sdk/commands/CreateCommand.html" ti
  <div id="io-sphere-sdk-customobjects-commands-CustomObjectCustomJsonMappingUpsertCommandTest-execution--%s" class=code-example><pre><code class='java'>final GsonFoo value = new GsonFoo("bar", 5L);
 final GsonFooCustomObjectDraft draft = new GsonFooCustomObjectDraft("container", "key", value);
 final GsonFooCustomObjectUpsertCommand command = new GsonFooCustomObjectUpsertCommand(draft);
-final CustomObject&lt;GsonFoo&gt; customObject = execute(command);
+final CustomObject&lt;GsonFoo&gt; customObject = client().executeBlocking(command);
 final GsonFoo actualValue = customObject.getValue();
 assertThat(actualValue).isEqualTo(value);
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/customobjects/commands/CustomObjectCustomJsonMappingUpsertCommandTest.java" target="_blank">test code</a>.</pre></div>

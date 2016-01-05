@@ -109,7 +109,7 @@ extends <a href="../../../../../io/sphere/sdk/queries/MetaModelGetDsl.html" titl
 <div class="block">Fetches a tax category by a known ID.
 
  <div id="io-sphere-sdk-taxcategories-queries-TaxCategoryByIdGetTest-execution--%s" class=code-example><pre><code class='java'>withTaxCategory(client(), taxCategory -&gt; {
-    final TaxCategory loadedTaxCategory = execute(TaxCategoryByIdGet.of(taxCategory.getId()));
+    final TaxCategory loadedTaxCategory = client().executeBlocking(TaxCategoryByIdGet.of(taxCategory.getId()));
     assertThat(loadedTaxCategory).isEqualTo(taxCategory);
 });
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/taxcategories/queries/TaxCategoryByIdGetTest.java" target="_blank">test code</a>.</pre></div></div>

@@ -110,7 +110,7 @@ extends <a href="../../../../../io/sphere/sdk/expansion/MetaModelExpansionDsl.ht
 
  <p>Example:</p>
  <div id="io-sphere-sdk-states-commands-StateDeleteCommandTest-execution--%s" class=code-example><pre><code class='java'>final State state = getState();
-final State deletedState = execute(StateDeleteCommand.of(state));
+final State deletedState = client().executeBlocking(StateDeleteCommand.of(state));
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/states/commands/StateDeleteCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 </li>
 </ul>

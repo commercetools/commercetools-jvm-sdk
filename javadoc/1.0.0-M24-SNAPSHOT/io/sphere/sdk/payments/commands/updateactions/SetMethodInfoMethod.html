@@ -130,7 +130,7 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html"
 
  <div id="io-sphere-sdk-payments-commands-PaymentUpdateCommandTest-setMethodInfoMethod--%s" class=code-example><pre><code class='java'>withPayment(client(), payment -&gt; {
     final String method = "method";
-    final Payment updatedPayment = execute(PaymentUpdateCommand.of(payment, SetMethodInfoMethod.of(method)));
+    final Payment updatedPayment = client().executeBlocking(PaymentUpdateCommand.of(payment, SetMethodInfoMethod.of(method)));
 
     assertThat(updatedPayment.getPaymentMethodInfo().getMethod()).isEqualTo(method);
 

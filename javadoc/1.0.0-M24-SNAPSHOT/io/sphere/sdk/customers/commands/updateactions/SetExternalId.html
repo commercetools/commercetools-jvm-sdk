@@ -133,7 +133,7 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html"
 
     final String externalId = randomString();
     final Customer updatedCustomer =
-            execute(CustomerUpdateCommand.of(customer, SetExternalId.of(externalId)));
+            client().executeBlocking(CustomerUpdateCommand.of(customer, SetExternalId.of(externalId)));
 
     assertThat(updatedCustomer.getExternalId()).isEqualTo(externalId);
 });

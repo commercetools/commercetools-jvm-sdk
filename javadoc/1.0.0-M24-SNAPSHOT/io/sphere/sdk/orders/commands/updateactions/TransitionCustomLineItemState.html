@@ -134,7 +134,7 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html"
         assertThat(customLineItem).containsState(initialState).containsNotState(nextState);
         final long quantity = 1;
         final ZonedDateTime actualTransitionDate = ZonedDateTime_IN_PAST;
-        final Order updatedOrder = execute(OrderUpdateCommand.of(order, TransitionCustomLineItemState.of(customLineItem, quantity, initialState, nextState, actualTransitionDate)));
+        final Order updatedOrder = client().executeBlocking(OrderUpdateCommand.of(order, TransitionCustomLineItemState.of(customLineItem, quantity, initialState, nextState, actualTransitionDate)));
         assertThat(updatedOrder.getCustomLineItems().get(0)).containsItemStates(ItemState.of(nextState, quantity));
     })
 );

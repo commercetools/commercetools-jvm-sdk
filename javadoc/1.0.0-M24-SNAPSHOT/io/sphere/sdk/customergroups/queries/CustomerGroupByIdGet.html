@@ -111,7 +111,7 @@ extends <a href="../../../../../io/sphere/sdk/queries/MetaModelGetDsl.html" titl
  <div id="io-sphere-sdk-customergroups-queries-CustomerGroupByIdGetTest-execution--%s" class=code-example><pre><code class='java'>withCustomerGroup(client(), customerGroup -&gt; {
     final String customerGroupId = customerGroup.getId();
 
-    final CustomerGroup fetchedCustomerGroup = execute(CustomerGroupByIdGet.of(customerGroupId));
+    final CustomerGroup fetchedCustomerGroup = client().executeBlocking(CustomerGroupByIdGet.of(customerGroupId));
 
     assertThat(fetchedCustomerGroup).isEqualTo(customerGroup);
 });

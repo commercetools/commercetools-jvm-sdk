@@ -136,7 +136,7 @@ implements <a href="../../../../../../io/sphere/sdk/types/CustomDraft.html" titl
     final String productId = product.getId();
     final AddLineItem action = AddLineItem.of(productId, MASTER_VARIANT_ID, quantity);
 
-    final Cart updatedCart = execute(CartUpdateCommand.of(cart, action));
+    final Cart updatedCart = client().executeBlocking(CartUpdateCommand.of(cart, action));
     assertThat(updatedCart.getLineItems()).hasSize(1);
     final LineItem lineItem = updatedCart.getLineItems().get(0);
     assertThat(lineItem.getName()).isEqualTo(product.getMasterData().getStaged().getName());

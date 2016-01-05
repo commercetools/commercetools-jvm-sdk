@@ -109,10 +109,10 @@ extends <a href="../../../../../io/sphere/sdk/expansion/MetaModelExpansionDsl.ht
 <div class="block">Deletes a category in SPHERE.IO.
 
  <div id="io-sphere-sdk-categories-commands-CategoryDeleteCommandTest-execution--%s" class=code-example><pre><code class='java'>final CategoryDraft draft = CategoryDraftBuilder.of(randomSlug(), randomSlug()).build();
-final Category category = execute(CategoryCreateCommand.of(draft));
+final Category category = client().executeBlocking(CategoryCreateCommand.of(draft));
 
-execute(CategoryDeleteCommand.of(category));
-assertThat(execute(CategoryQuery.of().byId(category.getId())).head()).isEmpty();
+client().executeBlocking(CategoryDeleteCommand.of(category));
+assertThat(client().executeBlocking(CategoryQuery.of().byId(category.getId())).head()).isEmpty();
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/categories/commands/CategoryDeleteCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 </li>
 </ul>

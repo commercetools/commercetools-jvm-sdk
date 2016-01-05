@@ -131,8 +131,9 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html"
  <div id="io-sphere-sdk-carts-commands-CartUpdateCommandTest-addPayment--%s" class=code-example><pre><code class='java'>withPayment(client(), payment -&gt; {
     withCart(client(), cart -&gt; {
         //add payment
-        final Cart cartWithPayment = execute(CartUpdateCommand.of(cart, AddPayment.of(payment))
-                .withExpansionPaths(m -&gt; m.paymentInfo().payments()));
+        final CartUpdateCommand command = CartUpdateCommand.of(cart, AddPayment.of(payment))
+                .withExpansionPaths(m -&gt; m.paymentInfo().payments());
+        final Cart cartWithPayment = client().executeBlocking(command);
 
         final Reference&lt;Payment&gt; paymentReference = cartWithPayment.getPaymentInfo().getPayments().get(0);
         assertThat(paymentReference).isEqualTo(payment.toReference());
@@ -141,10 +142,10 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html"
         //query cart by payment
         final CartQuery cartQuery = CartQuery.of()
                 .withPredicates(m -&gt; m.paymentInfo().payments().isIn(singletonList(payment)));
-        assertThat(execute(cartQuery).head()).contains(cartWithPayment);
+        assertThat(client().executeBlocking(cartQuery).head()).contains(cartWithPayment);
 
         //remove payment
-        final Cart cartWithoutPayment = execute(CartUpdateCommand.of(cartWithPayment, RemovePayment.of(payment)));
+        final Cart cartWithoutPayment = client().executeBlocking(CartUpdateCommand.of(cartWithPayment, RemovePayment.of(payment)));
 
         assertThat(cartWithoutPayment.getPaymentInfo()).isNull();
 

@@ -130,7 +130,7 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html"
 
  <div id="io-sphere-sdk-payments-commands-PaymentUpdateCommandTest-setInterfaceId--%s" class=code-example><pre><code class='java'>withPayment(client(), payment -&gt; {
     final String interfaceId =randomKey();
-    final Payment updatedPayment = execute(PaymentUpdateCommand.of(payment, SetInterfaceId.of(interfaceId)));
+    final Payment updatedPayment = client().executeBlocking(PaymentUpdateCommand.of(payment, SetInterfaceId.of(interfaceId)));
 
     assertThat(updatedPayment.getInterfaceId()).isEqualTo(interfaceId);
 

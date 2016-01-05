@@ -131,11 +131,11 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html"
  <div id="io-sphere-sdk-types-commands-TypeUpdateCommandTest-addFieldDefinition--%s" class=code-example><pre><code class='java'>withUpdateableType(client(), type -&gt; {
     final String name = randomKey();
     final FieldDefinition fieldDefinition = FieldDefinition.of(StringFieldType.of(), name, en("label"), false, TextInputHint.SINGLE_LINE);
-    final Type updatedType = execute(TypeUpdateCommand.of(type, AddFieldDefinition.of(fieldDefinition)));
+    final Type updatedType = client().executeBlocking(TypeUpdateCommand.of(type, AddFieldDefinition.of(fieldDefinition)));
     assertThat(updatedType.getFieldDefinitionByName(name)).isEqualTo(fieldDefinition);
     assertThat(updatedType.getFieldDefinitions()).hasSize(type.getFieldDefinitions().size() + 1);
 
-    final Type updated2 = execute(TypeUpdateCommand.of(updatedType, RemoveFieldDefinition.of(name)));
+    final Type updated2 = client().executeBlocking(TypeUpdateCommand.of(updatedType, RemoveFieldDefinition.of(name)));
     assertThat(updated2.getFieldDefinitions()).hasSize(type.getFieldDefinitions().size());
 
     return updated2;

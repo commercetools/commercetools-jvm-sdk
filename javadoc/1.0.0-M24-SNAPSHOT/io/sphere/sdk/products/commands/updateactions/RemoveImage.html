@@ -135,7 +135,7 @@ withUpdateableProduct(client(), product -&gt; {
     final Product productWithImage = client().executeBlocking(ProductUpdateCommand.of(product, AddExternalImage.of(image, MASTER_VARIANT_ID)));
     assertThat(productWithImage.getMasterData().getStaged().getMasterVariant().getImages()).isEqualTo(asList(image));
 
-    final Product updatedProduct = execute(ProductUpdateCommand.of(productWithImage, RemoveImage.of(image, MASTER_VARIANT_ID)));
+    final Product updatedProduct = client().executeBlocking(ProductUpdateCommand.of(productWithImage, RemoveImage.of(image, MASTER_VARIANT_ID)));
     assertThat(updatedProduct.getMasterData().getStaged().getMasterVariant().getImages()).hasSize(0);
     return updatedProduct;
 });

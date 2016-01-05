@@ -190,7 +190,7 @@ to use optimistic concurrency control as in here:
     final Foo newValue = new Foo("new value", 72L);
     final CustomObjectDraft&lt;Foo&gt; draft = CustomObjectDraft.ofVersionedUpdate(customObject, newValue, Foo.class);
     final CustomObjectUpsertCommand&lt;Foo&gt; command = CustomObjectUpsertCommand.of(draft);
-    final CustomObject&lt;Foo&gt; updatedCustomObject = execute(command);
+    final CustomObject&lt;Foo&gt; updatedCustomObject = client().executeBlocking(command);
     final Foo loadedValue = updatedCustomObject.getValue();
     assertThat(loadedValue).isEqualTo(newValue);
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/customobjects/commands/CustomObjectUpsertCommandTest.java" target="_blank">test code</a>.</pre></div>
@@ -201,7 +201,7 @@ Or you can just override the value using <a href="../../../../io/sphere/sdk/cust
     final Foo newValue = new Foo("new value", 72L);
     final CustomObjectDraft&lt;Foo&gt; draft = CustomObjectDraft.ofUnversionedUpdate(customObject, newValue, Foo.class);
     final CustomObjectUpsertCommand&lt;Foo&gt; createCommand = CustomObjectUpsertCommand.of(draft);
-    final CustomObject&lt;Foo&gt; updatedCustomObject = execute(createCommand);
+    final CustomObject&lt;Foo&gt; updatedCustomObject = client().executeBlocking(createCommand);
     final Foo loadedValue = updatedCustomObject.getValue();
     assertThat(loadedValue).isEqualTo(newValue);
 });
@@ -218,7 +218,7 @@ final ObjectNode objectNode = objectMapper.createObjectNode()
 final String key = "pure-json";
 final CustomObjectUpsertCommand&lt;JsonNode&gt; command =
         CustomObjectUpsertCommand.of(CustomObjectDraft.ofUnversionedUpsert(CONTAINER, key, objectNode));
-final CustomObject&lt;JsonNode&gt; customObject = execute(command);
+final CustomObject&lt;JsonNode&gt; customObject = client().executeBlocking(command);
 assertThat(customObject.getValue().get("bar").asText("default value")).isEqualTo(" a string");
 assertThat(customObject.getValue().get("baz").asLong(0)).isEqualTo(5);
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/customobjects/commands/CustomObjectUpsertCommandTest.java" target="_blank">test code</a>.</pre></div>
@@ -229,7 +229,7 @@ assertThat(customObject.getValue().get("baz").asLong(0)).isEqualTo(5);
     final String container = existingCustomObject.getContainer();
     final String key = existingCustomObject.getKey();
     final CustomObjectByKeyGet&lt;JsonNode&gt; fetch = CustomObjectByKeyGet.ofJsonNode(container, key);
-    final CustomObject&lt;JsonNode&gt; customObject = execute(fetch);
+    final CustomObject&lt;JsonNode&gt; customObject = client().executeBlocking(fetch);
     assertThat(customObject).isNotNull();
     final JsonNode value = customObject.getValue();
     final String expected = existingCustomObject.getValue().getBar();
@@ -243,7 +243,7 @@ assertThat(customObject.getValue().get("baz").asLong(0)).isEqualTo(5);
 <div id="io-sphere-sdk-customobjects-queries-CustomObjectQueryTest-queryPureJson--%s" class=code-example><pre><code class='java'>withCustomObject(client(), existingCustomObject -&gt; {
     final CustomObjectQuery&lt;JsonNode&gt; clientRequest = CustomObjectQuery.ofJsonNode()
             .withSort(m -&gt; m.createdAt().sort().desc());
-    final PagedQueryResult&lt;CustomObject&lt;JsonNode&gt;&gt; result = execute(clientRequest);
+    final PagedQueryResult&lt;CustomObject&lt;JsonNode&gt;&gt; result = client().executeBlocking(clientRequest);
     assertThat(result.getResults().stream().filter(item -&gt; item.hasSameIdAs(existingCustomObject)).count())
             .isGreaterThanOrEqualTo(1);
     final String expected = existingCustomObject.getValue().getBar();
@@ -343,7 +343,7 @@ import io.sphere.sdk.http.HttpResponse;
     final String container = co.getContainer();
     final String key = co.getKey();
     final Get&lt;CustomObject&lt;GsonFoo&gt;&gt; fetch = new GsonFooCustomObjectByKeyGet(container, key);
-    final CustomObject&lt;GsonFoo&gt; customObject = execute(fetch);
+    final CustomObject&lt;GsonFoo&gt; customObject = client().executeBlocking(fetch);
     assertThat(customObject).isNotNull();
     assertThat(customObject.toReference()).isEqualTo(co.toReference());
     final GsonFoo value = customObject.getValue();
@@ -390,7 +390,7 @@ final CustomObjectDraft&lt;CustomerNumberCounter&gt; draft = //important: it tak
 
 final Command&lt;CustomObject&lt;CustomerNumberCounter&gt;&gt; initialSettingCommand = CustomObjectUpsertCommand.of(draft);
 
-final CustomObject&lt;CustomerNumberCounter&gt; initialCounterLoaded = execute(initialSettingCommand);
+final CustomObject&lt;CustomerNumberCounter&gt; initialCounterLoaded = client().executeBlocking(initialSettingCommand);
 assertThat(initialCounterLoaded.getValue().getLastUsedNumber())
         .overridingErrorMessage("We have created the object")
         .isEqualTo(lastUsedNumber);
@@ -399,7 +399,7 @@ assertThat(initialCounterLoaded.getVersion())
         .isEqualTo(initialVersionNumber + 1);
 
 try {
-    execute(initialSettingCommand);
+    client().executeBlocking(initialSettingCommand);
     assertThat(true).overridingErrorMessage("execute the initial command a second time will throw an exception").isFalse();
 } catch (final ConcurrentModificationException e) {
     assertThat(true).overridingErrorMessage("Even in a distributed system the nodes will not override existing values with the initial value.").isTrue();
@@ -410,17 +410,17 @@ try {
 <div id="io-sphere-sdk-customobjects-occexample-FlowTest-doAnUpdate--%s" class=code-example><pre><code class='java'>final CustomObjectByKeyGet&lt;CustomerNumberCounter&gt; fetch =
         CustomObjectByKeyGet.of(CONTAINER, KEY, CustomerNumberCounter.class);
 
-final CustomObject&lt;CustomerNumberCounter&gt; loadedCustomObject = execute(fetch);
+final CustomObject&lt;CustomerNumberCounter&gt; loadedCustomObject = client().executeBlocking(fetch);
 final long newCustomerNumber = loadedCustomObject.getValue().getLastUsedNumber() + 1;
 final CustomerNumberCounter value = new CustomerNumberCounter(newCustomerNumber, "whateverid");
 final long version = loadedCustomObject.getVersion();
 final CustomObjectDraft&lt;CustomerNumberCounter&gt; draft = CustomObjectDraft.ofVersionedUpsert(CONTAINER, KEY, value, version, CustomerNumberCounter.class);
 final CustomObjectUpsertCommand&lt;CustomerNumberCounter&gt; updateCommand = CustomObjectUpsertCommand.of(draft);
-final CustomObject&lt;CustomerNumberCounter&gt; updatedCustomObject = execute(updateCommand);
+final CustomObject&lt;CustomerNumberCounter&gt; updatedCustomObject = client().executeBlocking(updateCommand);
 assertThat(updatedCustomObject.getValue().getLastUsedNumber()).isEqualTo(newCustomerNumber);
 
 try {
-    execute(updateCommand);
+    client().executeBlocking(updateCommand);
     assertThat(true).overridingErrorMessage("optimistic concurrency control").isFalse();
 } catch (final ConcurrentModificationException e) {
     //start again at the top

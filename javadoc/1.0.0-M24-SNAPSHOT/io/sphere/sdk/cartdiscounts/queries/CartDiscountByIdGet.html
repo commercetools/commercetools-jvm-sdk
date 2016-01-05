@@ -107,7 +107,7 @@ var activeTableTab = "activeTableTab";
 <pre>public interface <span class="typeNameLabel">CartDiscountByIdGet</span>
 extends <a href="../../../../../io/sphere/sdk/queries/MetaModelGetDsl.html" title="interface in io.sphere.sdk.queries">MetaModelGetDsl</a>&lt;<a href="../../../../../io/sphere/sdk/cartdiscounts/CartDiscount.html" title="interface in io.sphere.sdk.cartdiscounts">CartDiscount</a>,<a href="../../../../../io/sphere/sdk/cartdiscounts/CartDiscount.html" title="interface in io.sphere.sdk.cartdiscounts">CartDiscount</a>,<a href="../../../../../io/sphere/sdk/cartdiscounts/queries/CartDiscountByIdGet.html" title="interface in io.sphere.sdk.cartdiscounts.queries">CartDiscountByIdGet</a>,<a href="../../../../../io/sphere/sdk/cartdiscounts/expansion/CartDiscountExpansionModel.html" title="class in io.sphere.sdk.cartdiscounts.expansion">CartDiscountExpansionModel</a>&lt;<a href="../../../../../io/sphere/sdk/cartdiscounts/CartDiscount.html" title="interface in io.sphere.sdk.cartdiscounts">CartDiscount</a>&gt;&gt;</pre>
 <div class="block"><div id="io-sphere-sdk-cartdiscounts-queries-CartDiscountByIdGetTest-execution--%s" class=code-example><pre><code class='java'>withPersistentCartDiscount(client(), cartDiscount -&gt; {
-    final CartDiscount fetchedDiscount = execute(CartDiscountByIdGet.of(cartDiscount));
+    final CartDiscount fetchedDiscount = client().executeBlocking(CartDiscountByIdGet.of(cartDiscount));
     assertThat(fetchedDiscount.getId()).isEqualTo(cartDiscount.getId());
 });
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/cartdiscounts/queries/CartDiscountByIdGetTest.java" target="_blank">test code</a>.</pre></div></div>

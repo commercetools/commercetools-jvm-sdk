@@ -111,7 +111,7 @@ extends <a href="../../../../../io/sphere/sdk/queries/MetaModelGetDsl.html" titl
  <div id="io-sphere-sdk-shippingmethods-queries-ShippingMethodByIdGetTest-execution--%s" class=code-example><pre><code class='java'>withShippingMethod(client(), shippingMethod -&gt; {
     final ShippingMethodByIdGet fetch = ShippingMethodByIdGet.of(shippingMethod)
             .withExpansionPaths(m -&gt; m.taxCategory());
-    final ShippingMethod loadedShippingMethod = execute(fetch);
+    final ShippingMethod loadedShippingMethod = client().executeBlocking(fetch);
     final String actualFetchedId = loadedShippingMethod.getId();
     assertThat(actualFetchedId).isEqualTo(shippingMethod.getId());
     assertThat(loadedShippingMethod.getTaxCategory().getObj()).isNotNull();

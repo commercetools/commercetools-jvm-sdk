@@ -131,7 +131,7 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html"
     final ReturnPaymentState newPaymentState = ReturnPaymentState.REFUNDED;
     assertThat(returnItem.getPaymentState()).isNotEqualTo(newPaymentState);
     final SetReturnPaymentState action = SetReturnPaymentState.of(returnItem, newPaymentState);
-    final Order updatedOrder = execute(OrderUpdateCommand.of(order, action));
+    final Order updatedOrder = client().executeBlocking(OrderUpdateCommand.of(order, action));
     final ReturnPaymentState updatedPaymentState = updatedOrder.getReturnInfo().get(0).getItems().get(0).getPaymentState();
     assertThat(updatedPaymentState).isEqualTo(newPaymentState);
 

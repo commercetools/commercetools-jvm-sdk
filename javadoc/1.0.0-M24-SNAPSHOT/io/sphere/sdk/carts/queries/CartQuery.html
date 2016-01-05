@@ -113,7 +113,7 @@ extends <a href="../../../../../io/sphere/sdk/queries/MetaModelQueryDsl.html" ti
  <div id="io-sphere-sdk-carts-queries-CartQueryTest-byCustomerEmail--%s" class=code-example><pre><code class='java'>withCustomerAndCart(client(), (customer, cart) -&gt; {
     final CartQuery cartQuery = CartQuery.of()
             .withPredicates(m -&gt; m.customerEmail().is(customer.getEmail()));
-    final Cart loadedCart = execute(cartQuery).head().get();
+    final Cart loadedCart = client().executeBlocking(cartQuery).head().get();
     assertThat(loadedCart.getCustomerId()).contains(customer.getId());
 });
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/carts/queries/CartQueryTest.java" target="_blank">test code</a>.</pre></div></div>

@@ -132,7 +132,7 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html"
     withUpdateableProduct(client(), product -&gt; {
         assertThat(product.getTaxCategory()).isNotEqualTo(taxCategory);
         final ProductUpdateCommand command = ProductUpdateCommand.of(product, SetTaxCategory.of(taxCategory));
-        final Product updatedProduct = execute(command);
+        final Product updatedProduct = client().executeBlocking(command);
         assertThat(updatedProduct.getTaxCategory()).isEqualTo(taxCategory.toReference());
         return updatedProduct;
     })

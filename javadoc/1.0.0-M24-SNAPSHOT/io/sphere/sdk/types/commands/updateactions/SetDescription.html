@@ -130,7 +130,7 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html"
 
  <div id="io-sphere-sdk-types-commands-TypeUpdateCommandTest-setDescription--%s" class=code-example><pre><code class='java'>withUpdateableType(client(), type -&gt; {
     final LocalizedString newDescription = randomSlug();
-    final Type updatedType = execute(TypeUpdateCommand.of(type, SetDescription.of(newDescription)));
+    final Type updatedType = client().executeBlocking(TypeUpdateCommand.of(type, SetDescription.of(newDescription)));
     assertThat(updatedType.getDescription()).isEqualTo(newDescription);
     return updatedType;
 });

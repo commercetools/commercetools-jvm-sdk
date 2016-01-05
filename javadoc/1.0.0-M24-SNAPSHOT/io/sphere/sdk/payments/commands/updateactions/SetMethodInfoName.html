@@ -130,7 +130,7 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html"
 
  <div id="io-sphere-sdk-payments-commands-PaymentUpdateCommandTest-setMethodInfoName--%s" class=code-example><pre><code class='java'>withPayment(client(), payment -&gt; {
     final LocalizedString name = randomSlug();
-    final Payment updatedPayment = execute(PaymentUpdateCommand.of(payment, SetMethodInfoName.of(name)));
+    final Payment updatedPayment = client().executeBlocking(PaymentUpdateCommand.of(payment, SetMethodInfoName.of(name)));
 
     assertThat(updatedPayment.getPaymentMethodInfo().getName()).isEqualTo(name);
 

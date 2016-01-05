@@ -133,7 +133,7 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html"
     assertThat(productType.findAttribute(attributeName)).isPresent();
     final LocalizedString label = LocalizedString.of(ENGLISH, "the color label");
 
-    final ProductType updatedProductType = execute(ProductTypeUpdateCommand.of(productType, ChangeAttributeDefinitionLabel.of(attributeName, label)));
+    final ProductType updatedProductType = client().executeBlocking(ProductTypeUpdateCommand.of(productType, ChangeAttributeDefinitionLabel.of(attributeName, label)));
 
     assertThat(updatedProductType.getAttribute(attributeName).getLabel()).isEqualTo(label);
 

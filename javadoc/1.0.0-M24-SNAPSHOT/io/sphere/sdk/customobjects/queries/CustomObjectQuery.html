@@ -119,7 +119,7 @@ extends <a href="../../../../../io/sphere/sdk/queries/MetaModelQueryDsl.html" ti
     withCustomObject(client(), "containerB", "key", customObjectB -&gt; {
         final Class&lt;Foo&gt; classForTheValue = Foo.class;
         final PagedQueryResult&lt;CustomObject&lt;Foo&gt;&gt; result =
-                execute(CustomObjectQuery.of(classForTheValue).byContainer("containerA"));
+                client().executeBlocking(CustomObjectQuery.of(classForTheValue).byContainer("containerA"));
         final List&lt;CustomObject&lt;Foo&gt;&gt; results = result.getResults();
         assertThat(results)
                 .contains(customObjectA)

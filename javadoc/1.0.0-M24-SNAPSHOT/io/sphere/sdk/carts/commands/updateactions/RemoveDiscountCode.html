@@ -130,12 +130,12 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html"
 
  <div id="io-sphere-sdk-carts-commands-CartUpdateCommandTest-removeDiscountCode--%s" class=code-example><pre><code class='java'>withCartAndDiscountCode(client(), (cart, discountCode) -&gt; {
     //addDiscountCode
-    final Cart cartWithCode = execute(CartUpdateCommand.of(cart, AddDiscountCode.of(discountCode)));
+    final Cart cartWithCode = client().executeBlocking(CartUpdateCommand.of(cart, AddDiscountCode.of(discountCode)));
     final DiscountCodeInfo discountCodeInfo = cartWithCode.getDiscountCodes().get(0);
     assertThat(discountCodeInfo.getDiscountCode()).isEqualTo(discountCode.toReference());
 
     //removeDiscountCode
-    final Cart updatedCart = execute(CartUpdateCommand.of(cartWithCode, RemoveDiscountCode.of(discountCode)));
+    final Cart updatedCart = client().executeBlocking(CartUpdateCommand.of(cartWithCode, RemoveDiscountCode.of(discountCode)));
     assertThat(updatedCart.getDiscountCodes()).isEmpty();
 
     return updatedCart;

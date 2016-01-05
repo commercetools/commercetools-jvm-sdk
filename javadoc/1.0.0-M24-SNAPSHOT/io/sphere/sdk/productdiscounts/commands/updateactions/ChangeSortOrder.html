@@ -131,7 +131,7 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html"
  <div id="io-sphere-sdk-productdiscounts-commands-ProductDiscountUpdateCommandTest-changeSortOrder--%s" class=code-example><pre><code class='java'>withUpdateableProductDiscount(client(), discount -&gt; {
     final String newSortOrder = randomSortOrder();
 
-    final ProductDiscount updatedDiscount = execute(ProductDiscountUpdateCommand.of(discount, ChangeSortOrder.of(newSortOrder)));
+    final ProductDiscount updatedDiscount = client().executeBlocking(ProductDiscountUpdateCommand.of(discount, ChangeSortOrder.of(newSortOrder)));
 
     assertThat(updatedDiscount.getSortOrder()).isEqualTo(newSortOrder);
     return updatedDiscount;

@@ -132,7 +132,7 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html"
 withUpdateableShippingMethod(client(), shippingMethod -&gt; {
     assertThat(shippingMethod.getTaxCategory().getId()).isNotEqualTo(newTaxCategory.getId());
     final ShippingMethodUpdateCommand cmd = ShippingMethodUpdateCommand.of(shippingMethod, ChangeTaxCategory.of(newTaxCategory));
-    final ShippingMethod updatedShippingMethod = execute(cmd);
+    final ShippingMethod updatedShippingMethod = client().executeBlocking(cmd);
     assertThat(updatedShippingMethod.getTaxCategory().getId()).isEqualTo(newTaxCategory.getId());
     return updatedShippingMethod;
 });

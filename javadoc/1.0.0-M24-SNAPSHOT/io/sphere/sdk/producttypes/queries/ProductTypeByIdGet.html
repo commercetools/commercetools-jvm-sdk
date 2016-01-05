@@ -109,7 +109,7 @@ extends <a href="../../../../../io/sphere/sdk/queries/MetaModelGetDsl.html" titl
 <div class="block">Retrieves a product type by a known ID.
 
  <div id="io-sphere-sdk-producttypes-queries-ProductTypeByIdGetTest-execution--%s" class=code-example><pre><code class='java'>withProductType(client(), productType -&gt; {
-    final ProductType loadedProductType = execute(ProductTypeByIdGet.of(productType));
+    final ProductType loadedProductType = client().executeBlocking(ProductTypeByIdGet.of(productType));
     assertThat(loadedProductType).isEqualTo(productType);
 });
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/producttypes/queries/ProductTypeByIdGetTest.java" target="_blank">test code</a>.</pre></div></div>

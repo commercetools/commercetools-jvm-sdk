@@ -140,7 +140,7 @@ extends <a href="../../../../../io/sphere/sdk/queries/ResourceQueryModelImpl.htm
  <div id="io-sphere-sdk-customobjects-queries-CustomObjectQueryTest-queryWithClass--%s" class=code-example><pre><code class='java'>withCustomObject(client(), co -&gt; {
     final CustomObjectQuery&lt;Foo&gt; customObjectQuery = CustomObjectQuery.of(Foo.class)
             .withPredicates(o -&gt; o.id().is(co.getId()));
-    final PagedQueryResult&lt;CustomObject&lt;Foo&gt;&gt; result = execute(customObjectQuery);
+    final PagedQueryResult&lt;CustomObject&lt;Foo&gt;&gt; result = client().executeBlocking(customObjectQuery);
     assertThat(result.head().get())
             .isEqualTo(co);
 });

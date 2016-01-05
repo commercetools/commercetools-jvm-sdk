@@ -133,7 +133,7 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html"
     final String lineItemId = order.getLineItems().get(0).getId();
     final List&lt;ReturnItemDraft&gt; items = asList(ReturnItemDraft.of(1L, lineItemId, ReturnShipmentState.RETURNED, "foo bar"));
     final AddReturnInfo action = AddReturnInfo.of(items).withReturnDate(ZonedDateTime_IN_PAST).withReturnTrackingId("trackingId");
-    final Order updatedOrder = execute(OrderUpdateCommand.of(order, action));
+    final Order updatedOrder = client().executeBlocking(OrderUpdateCommand.of(order, action));
 
     final ReturnInfo returnInfo = updatedOrder.getReturnInfo().get(0);
     final ReturnItem returnItem = returnInfo.getItems().get(0);

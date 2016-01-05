@@ -114,13 +114,13 @@ extends <a href="../../../../../io/sphere/sdk/commands/DeleteCommand.html" title
 
  <div id="io-sphere-sdk-customobjects-commands-CustomObjectDeleteCommandTest-demo--%s" class=code-example><pre><code class='java'>final String key = randomKey();
 final Foo foo = new Foo("bar", 7L);
-final CustomObject&lt;Foo&gt; customObject = execute(CustomObjectUpsertCommand
+final CustomObject&lt;Foo&gt; customObject = client().executeBlocking(CustomObjectUpsertCommand
         .of(CustomObjectDraft.ofUnversionedUpsert(CONTAINER, key, foo, Foo.class)));
 
-final CustomObject&lt;Foo&gt; deletedObject = execute(CustomObjectDeleteCommand.of(CONTAINER, key, Foo.class));
+final CustomObject&lt;Foo&gt; deletedObject = client().executeBlocking(CustomObjectDeleteCommand.of(CONTAINER, key, Foo.class));
 
 assertThat(deletedObject.getValue()).isEqualTo(foo);
-assertThat(execute(CustomObjectByKeyGet.of(CONTAINER, key, Foo.class)))
+assertThat(client().executeBlocking(CustomObjectByKeyGet.of(CONTAINER, key, Foo.class)))
         .as("get request")
         .isNull();
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/customobjects/commands/CustomObjectDeleteCommandTest.java" target="_blank">test code</a>.</pre></div></div>
@@ -462,15 +462,15 @@ static&nbsp;<a href="../../../../../io/sphere/sdk/commands/DeleteCommand.html" t
 
  <div id="io-sphere-sdk-customobjects-commands-CustomObjectDeleteCommandTest-demoById--%s" class=code-example><pre><code class='java'>final String key = randomKey();
 final Foo foo = new Foo("bar", 7L);
-final CustomObject&lt;Foo&gt; customObject = execute(CustomObjectUpsertCommand
+final CustomObject&lt;Foo&gt; customObject = client().executeBlocking(CustomObjectUpsertCommand
         .of(CustomObjectDraft.ofUnversionedUpsert(CONTAINER, key, foo, Foo.class)));
 final String id = customObject.getId();
 final Long version = customObject.getVersion();
 
-final CustomObject&lt;Foo&gt; deletedObject = execute(CustomObjectDeleteCommand.of(id, version, Foo.class));
+final CustomObject&lt;Foo&gt; deletedObject = client().executeBlocking(CustomObjectDeleteCommand.of(id, version, Foo.class));
 
 assertThat(deletedObject.getValue()).isEqualTo(foo);
-assertThat(execute(CustomObjectByKeyGet.of(CONTAINER, key, Foo.class)))
+assertThat(client().executeBlocking(CustomObjectByKeyGet.of(CONTAINER, key, Foo.class)))
         .as("get request")
         .isNull();
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/customobjects/commands/CustomObjectDeleteCommandTest.java" target="_blank">test code</a>.</pre></div></div>

@@ -250,7 +250,7 @@ assertThat(resultsToIds(result)).containsOnly(product1.getId(), product2.getId()
   <div class="rn-hidden"><div id="io-sphere-sdk-products-ProductCategoryOrderHintTest-searchForCategoryAndSort--%s" class=code-example><pre><code class='java'>final ProductProjectionSearch searchRequest = ProductProjectionSearch.ofStaged()
         .withQueryFilters(filter -&gt; filter.categories().id().by(categoryId))
         .withSort(m -&gt; m.categoryOrderHints().category(categoryId).byAsc());
-return execute(searchRequest).getResults();
+return client().executeBlocking(searchRequest).getResults();
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/products/ProductCategoryOrderHintTest.java" target="_blank">test code</a>.</pre></div></div>
  </li>
  <li class=new-in-release>Added states and update actions for Orders, Reviews and Products: <a href="../../../../io/sphere/sdk/orders/Order.html#getState--"><code>Order.getState()</code></a>, <a href="../../../../io/sphere/sdk/products/Product.html#getState--"><code>Product.getState()</code></a>, <code>io.sphere.sdk.reviews.Review#getState()</code></li>

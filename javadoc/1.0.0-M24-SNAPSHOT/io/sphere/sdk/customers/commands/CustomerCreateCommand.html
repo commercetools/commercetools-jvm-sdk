@@ -131,7 +131,7 @@ final CustomerDraft draft = CustomerDraft.of(name, email, password)
         .withDefaultShippingAddress(1);
 final CustomerCreateCommand sphereRequest = CustomerCreateCommand.of(draft)
         .withExpansionPaths(m -&gt; m.customer().customerGroup());
-final CustomerSignInResult result = execute(sphereRequest);
+final CustomerSignInResult result = client().executeBlocking(sphereRequest);
 assertThat(result.getCart())
         .as("no cart id given in creation, so this field is empty")
         .isNull();
@@ -158,10 +158,10 @@ assertThat(customer.getCustomerGroup().getObj())
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/customers/commands/CustomerCreateCommandTest.java" target="_blank">test code</a>.</pre></div>
 
  <h3 id="create-customer-with-cart">Example for creating a customer with a cart</h3>
- <div id="io-sphere-sdk-customers-commands-CustomerCreateCommandTest-createCustomerWithCart--%s" class=code-example><pre><code class='java'>final Cart cart = execute(CartCreateCommand.of(CartDraft.of(EUR)));//could of course be filled with products
+ <div id="io-sphere-sdk-customers-commands-CustomerCreateCommandTest-createCustomerWithCart--%s" class=code-example><pre><code class='java'>final Cart cart = client().executeBlocking(CartCreateCommand.of(CartDraft.of(EUR)));//could of course be filled with products
 final String email = randomEmail(CustomerCreateCommandTest.class);
 final CustomerDraft draft = CustomerDraft.of(CUSTOMER_NAME, email, PASSWORD).withCart(cart);
-final CustomerSignInResult result = execute(CustomerCreateCommand.of(draft));
+final CustomerSignInResult result = client().executeBlocking(CustomerCreateCommand.of(draft));
 assertThat(result.getCart()).isNotNull();
 assertThat(result.getCart().getId()).isEqualTo(cart.getId());
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/customers/commands/CustomerCreateCommandTest.java" target="_blank">test code</a>.</pre></div></div>

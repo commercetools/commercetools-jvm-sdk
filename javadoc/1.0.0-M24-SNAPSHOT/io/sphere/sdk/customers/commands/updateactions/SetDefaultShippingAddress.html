@@ -137,7 +137,7 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html"
     assertThat(customer.findDefaultShippingAddress()).isEmpty();
 
     final Customer updatedCustomer =
-            execute(CustomerUpdateCommand.of(customer, SetDefaultShippingAddress.ofAddress(address)));
+            client().executeBlocking(CustomerUpdateCommand.of(customer, SetDefaultShippingAddress.ofAddress(address)));
 
     assertThat(updatedCustomer.getDefaultShippingAddressId()).contains(address.getId());
     assertThat(updatedCustomer.findDefaultShippingAddress()).contains(address);

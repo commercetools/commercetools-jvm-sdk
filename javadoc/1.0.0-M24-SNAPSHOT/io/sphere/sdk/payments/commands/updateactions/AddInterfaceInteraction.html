@@ -137,11 +137,11 @@ extends <a href="../../../../../../io/sphere/sdk/types/customupdateactions/SetCu
  <div id="io-sphere-sdk-payments-commands-PaymentUpdateCommandTest-addInterfaceInteraction--%s" class=code-example><pre><code class='java'>withUpdateableType(client(), type -&gt; {
     withPayment(client(), payment -&gt; {
         final AddInterfaceInteraction addInterfaceInteraction = AddInterfaceInteraction.ofTypeIdAndObjects(type.getId(), singletonMap(STRING_FIELD_NAME, "some id"));
-        final Payment updatedPayment = execute(PaymentUpdateCommand.of(payment, addInterfaceInteraction));
+        final Payment updatedPayment = client().executeBlocking(PaymentUpdateCommand.of(payment, addInterfaceInteraction));
 
         assertThat(updatedPayment.getInterfaceInteractions().get(0).getFieldAsString(STRING_FIELD_NAME)).isEqualTo("some id");
 
-        final PagedQueryResult&lt;PaymentInteractionAddedMessage&gt; pagedQueryResult = execute(MessageQuery.of()
+        final PagedQueryResult&lt;PaymentInteractionAddedMessage&gt; pagedQueryResult = client().executeBlocking(MessageQuery.of()
                 .withPredicates(m -&gt; m.resource().is(payment))
                 .forMessageType(PaymentInteractionAddedMessage.MESSAGE_HINT));
         assertThat(pagedQueryResult.head().get().getInteraction().getFieldAsString(STRING_FIELD_NAME)).isEqualTo("some id");

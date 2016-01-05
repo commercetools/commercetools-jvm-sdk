@@ -142,7 +142,7 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html"
             .paymentMethodInfo(paymentMethodInfo)
             .amountPaid(totalAmount)
             .transactions(Collections.singletonList(chargeTransaction));
-    final Payment payment = execute(PaymentCreateCommand.of(paymentDraftBuilder.build()));
+    final Payment payment = client().executeBlocking(PaymentCreateCommand.of(paymentDraftBuilder.build()));
 
     assertThat(payment.getCustomer()).isEqualTo(payment.getCustomer());
     assertThat(payment.getPaymentMethodInfo()).isEqualTo(paymentMethodInfo);
@@ -150,12 +150,12 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html"
 
     final MonetaryAmount firstRefundAmount = EURO_10;
     final TransactionDraft firstRefundTransaction = TransactionDraftBuilder.of(TransactionType.REFUND, firstRefundAmount, ZonedDateTime.now()).build();
-    final Payment paymentWithFirstRefund = execute(PaymentUpdateCommand.of(payment, asList(SetAmountRefunded.of(firstRefundAmount), AddTransaction.of(firstRefundTransaction))));
+    final Payment paymentWithFirstRefund = client().executeBlocking(PaymentUpdateCommand.of(payment, asList(SetAmountRefunded.of(firstRefundAmount), AddTransaction.of(firstRefundTransaction))));
 
     assertThat(paymentWithFirstRefund.getTransactions()).hasSize(2);
     assertThat(paymentWithFirstRefund.getTransactions().get(0).getId()).isNotEmpty();
 
-    final PagedQueryResult&lt;PaymentTransactionAddedMessage&gt; messageQueryResult = execute(MessageQuery.of().withPredicates(m -&gt; m.resource().is(payment))
+    final PagedQueryResult&lt;PaymentTransactionAddedMessage&gt; messageQueryResult = client().executeBlocking(MessageQuery.of().withPredicates(m -&gt; m.resource().is(payment))
             .forMessageType(PaymentTransactionAddedMessage.MESSAGE_HINT));
     assertThat(messageQueryResult.head().get().getTransaction().getTimestamp()).isEqualTo(firstRefundTransaction.getTimestamp());
 
@@ -163,7 +163,7 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html"
     final MonetaryAmount secondRefundAmount = EURO_5;
     final TransactionDraft secondRefundTransaction = TransactionDraftBuilder.of(TransactionType.REFUND, secondRefundAmount, ZonedDateTime.now()).build();
     final MonetaryAmount totalRefundAmount = secondRefundAmount.add(paymentWithFirstRefund.getAmountRefunded());
-    final Payment paymentWithSecondRefund = execute(PaymentUpdateCommand.of(paymentWithFirstRefund, asList(SetAmountRefunded.of(totalRefundAmount), AddTransaction.of(secondRefundTransaction))));
+    final Payment paymentWithSecondRefund = client().executeBlocking(PaymentUpdateCommand.of(paymentWithFirstRefund, asList(SetAmountRefunded.of(totalRefundAmount), AddTransaction.of(secondRefundTransaction))));
 
     assertThat(paymentWithSecondRefund.getTransactions()).hasSize(3);
     assertThat(paymentWithSecondRefund.getAmountRefunded()).isEqualTo(totalRefundAmount);

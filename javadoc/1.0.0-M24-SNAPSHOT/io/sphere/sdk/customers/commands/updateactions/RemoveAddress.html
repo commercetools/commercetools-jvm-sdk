@@ -136,7 +136,7 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html"
 
     final RemoveAddress action = RemoveAddress.of(oldAddress);
     final Customer customerWithoutAddresses =
-            execute(CustomerUpdateCommand.of(customer, action));
+            client().executeBlocking(CustomerUpdateCommand.of(customer, action));
 
     assertThat(customerWithoutAddresses.getAddresses()).isEmpty();
 });

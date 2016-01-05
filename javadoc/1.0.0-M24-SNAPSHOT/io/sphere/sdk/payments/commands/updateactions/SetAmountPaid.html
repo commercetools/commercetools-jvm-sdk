@@ -132,14 +132,14 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html"
     //set authorization
     final MonetaryAmount totalAmount = EURO_30;
     final ZonedDateTime until = ZonedDateTime.now().plusDays(7);
-    final Payment updatedPayment = execute(PaymentUpdateCommand.of(payment, SetAuthorization.of(totalAmount, until)));
+    final Payment updatedPayment = client().executeBlocking(PaymentUpdateCommand.of(payment, SetAuthorization.of(totalAmount, until)));
 
     assertThat(updatedPayment.getAmountAuthorized()).isEqualTo(totalAmount);
     assertThat(updatedPayment.getAuthorizedUntil()).isEqualTo(until);
     assertThat(updatedPayment.getAmountPaid()).isNull();
 
     //remove authorization, set amount paid
-    final Payment updatedPayment2 = execute(PaymentUpdateCommand.of(updatedPayment, asList(SetAuthorization.ofRemove(), SetAmountPaid.of(totalAmount))));
+    final Payment updatedPayment2 = client().executeBlocking(PaymentUpdateCommand.of(updatedPayment, asList(SetAuthorization.ofRemove(), SetAmountPaid.of(totalAmount))));
 
     assertThat(updatedPayment2.getAmountAuthorized()).isNull();
     assertThat(updatedPayment2.getAuthorizedUntil()).isNull();

@@ -116,7 +116,7 @@ final StateDraft stateDraft = StateDraft.of(KEY, StateType.LINE_ITEM_STATE)
         .withName(name)
         .withInitial(true);
 
-final State state = execute(StateCreateCommand.of(stateDraft));
+final State state = client().executeBlocking(StateCreateCommand.of(stateDraft));
 
 assertThat(state.getKey()).isEqualTo(KEY);
 assertThat(state.getType()).isEqualTo(StateType.LINE_ITEM_STATE);

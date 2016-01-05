@@ -131,11 +131,11 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html"
  <div id="io-sphere-sdk-carts-commands-CartUpdateCommandTest-recalculate--%s" class=code-example><pre><code class='java'>withEmptyCartAndProduct(client(), (emptyCart, product) -&gt; {
     final AddLineItem action = AddLineItem.of(product.getId(), MASTER_VARIANT_ID, 1L);
 
-    final Cart cartWithLineItem = execute(CartUpdateCommand.of(emptyCart, action));
+    final Cart cartWithLineItem = client().executeBlocking(CartUpdateCommand.of(emptyCart, action));
     final Price oldPrice = cartWithLineItem.getLineItems().get(0).getPrice();
     final PriceDraft priceDraft = PriceDraft.of(oldPrice).withValue(oldPrice.getValue().multiply(2));
     final Product productWithChangedPrice =
-            execute(ProductUpdateCommand.of(product, asList(ChangePrice.of(oldPrice, priceDraft), Publish.of())));
+            client().executeBlocking(ProductUpdateCommand.of(product, asList(ChangePrice.of(oldPrice, priceDraft), Publish.of())));
 
     final List&lt;Price&gt; prices = productWithChangedPrice.getMasterData().getCurrent().getMasterVariant().getPrices();
     assertThat(prices.stream().map(price -&gt; PriceDraft.of(price)).collect(Collectors.toList()))
@@ -143,12 +143,12 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html"
             .isEqualTo(asList(priceDraft));
 
     final LineItem lineItemOfTheChangedProduct =
-            execute(CartByIdGet.of(cartWithLineItem)).getLineItems().get(0);
+            client().executeBlocking(CartByIdGet.of(cartWithLineItem)).getLineItems().get(0);
     assertThat(lineItemOfTheChangedProduct.getPrice())
             .as("the new product price is not automatically propagated to the line item in the cart")
             .isEqualTo(oldPrice).isNotEqualTo(priceDraft);
 
-    final Cart recalculatedCart = execute(CartUpdateCommand.of(cartWithLineItem, Recalculate.of()));
+    final Cart recalculatedCart = client().executeBlocking(CartUpdateCommand.of(cartWithLineItem, Recalculate.of()));
 
     assertThat(PriceDraft.of(recalculatedCart.getLineItems().get(0).getPrice()))
             .as("recalculate updated the price of the line item in the cart")
