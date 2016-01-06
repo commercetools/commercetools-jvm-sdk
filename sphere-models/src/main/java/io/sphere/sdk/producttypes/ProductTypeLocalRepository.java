@@ -7,6 +7,6 @@ public interface ProductTypeLocalRepository {
     Optional<ProductType> findById(final String id);
 
     static ProductTypeLocalRepository of(final Collection<ProductType> productTypes) {
-        return null;
+        return new ProductTypeLocalRepositoryImpl(productTypes);
     }
 }

@@ -26,12 +26,10 @@ import static java.util.stream.Collectors.joining;
 
 public class LocalizedToStringProductAttributeConverter extends ProductAttributeConverterBase<String> implements ProductAttributeConverter<String> {
     private final List<Locale> locales;
-    private final DateTimeFormatter dateTimeFormatter;
 
     protected LocalizedToStringProductAttributeConverter(final ProductTypeLocalRepository productTypes, final List<Locale> locales) {
         super(productTypes);
         this.locales = locales;
-        dateTimeFormatter = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM).withLocale(locale());
     }
 
     protected LocalizedToStringProductAttributeConverter(final Collection<ProductType> productTypes, final List<Locale> locales) {
@@ -58,7 +56,7 @@ public class LocalizedToStringProductAttributeConverter extends ProductAttribute
 
     @Override
     protected String convertStringSet(final Set<String> stringSet, final ProductType productType) {
-        return collectToString(stringSet.stream());
+        return collectToStringPreSorted(stringSet.stream());
     }
 
     @Override
@@ -81,18 +79,27 @@ public class LocalizedToStringProductAttributeConverter extends ProductAttribute
         return convertReference(productReference, productType);
     }
 
+    //todo sort by currency???
     @Override
     protected String convertMoneySet(final Set<MonetaryAmount> monetaryAmountSet, final ProductType productType) {
-        return collectToString(monetaryAmountSet.stream().map(money -> convertMoney(money, productType)));
+        return collectToString(monetaryAmountSet.stream().sorted().map(money -> convertMoney(money, productType)));
     }
 
     @Override
     protected String convertLongSet(final Set<Long> longSet, final ProductType productType) {
-        return collectToString(longSet.stream());
+        return collectToString(longSet.stream().sorted().map(value -> convertLong(value, productType)));
     }
 
     private <X> String collectToString(final Stream<X> stream) {
-        return stream.map(value -> value.toString()).collect(joining(", "));
+        return stream.filter(x -> x != null).map(value -> value.toString()).collect(joining(", "));
+    }
+
+    private <X> String collectToStringPreSorted(final Stream<X> stream) {
+        return stream.filter(x -> x != null).sorted().map(value -> value.toString()).collect(joining(", "));
+    }
+
+    private <X> String collectToStringPostSorted(final Stream<X> stream) {
+        return stream.filter(x -> x != null).map(value -> value.toString()).sorted().collect(joining(", "));
     }
 
     @Override
@@ -102,27 +109,28 @@ public class LocalizedToStringProductAttributeConverter extends ProductAttribute
 
     @Override
     protected String convertTimeSet(final Set<LocalTime> timeSet, final ProductType productType) {
-        return collectToString(timeSet.stream().map(value -> convertTime(value, productType)));
+        return collectToString(timeSet.stream().sorted().map(value -> convertTime(value, productType)));
     }
 
     @Override
     protected String convertTime(final LocalTime time, final ProductType productType) {
+        final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofLocalizedTime(FormatStyle.SHORT).withLocale(locale());
         return dateTimeFormatter.format(time);
     }
 
     @Override
     protected String convertLocalizedStringSet(final Set<LocalizedString> localizedStringSet, final ProductType productType) {
-        return collectToString(localizedStringSet.stream().map(value -> convertLocalizedString(value, productType)));
+        return collectToStringPostSorted(localizedStringSet.stream().map(value -> convertLocalizedString(value, productType)));
     }
 
     @Override
     protected String convertLocalizedEnumValueSet(final Set<LocalizedEnumValue> localizedEnumValueSet, final ProductType productType) {
-        return collectToString(localizedEnumValueSet.stream().map(value -> convertLocalizedEnumValue(value, productType)));
+        return collectToStringPostSorted(localizedEnumValueSet.stream().map(value -> convertLocalizedEnumValue(value, productType)));
     }
 
     @Override
     protected String convertIntegerSet(final Set<Integer> integerSet, final ProductType productType) {
-        return collectToString(integerSet.stream());
+        return collectToString(integerSet.stream().sorted());
     }
 
     @Override
@@ -132,12 +140,12 @@ public class LocalizedToStringProductAttributeConverter extends ProductAttribute
 
     @Override
     protected String convertEnumValueSet(final Set<EnumValue> enumValueSet, final ProductType productType) {
-        return collectToString(enumValueSet.stream().map(value -> convertEnumValue(value, productType)));
+        return collectToStringPostSorted(enumValueSet.stream().map(value -> convertEnumValue(value, productType)));
     }
 
     @Override
     protected String convertDoubleSet(final Set<Double> doubleSet, final ProductType productType) {
-        return collectToString(doubleSet.stream());
+        return collectToString(doubleSet.stream().sorted());
     }
 
     @Override
@@ -147,12 +155,12 @@ public class LocalizedToStringProductAttributeConverter extends ProductAttribute
 
     @Override
     protected String convertDateTimeSet(final Set<ZonedDateTime> zonedDateTimeSet, final ProductType productType) {
-        return collectToString(zonedDateTimeSet.stream().map(value -> convertDateTime(value, productType)));
+        return collectToString(zonedDateTimeSet.stream().sorted().map(value -> convertDateTime(value, productType)));
     }
 
     @Override
     protected String convertDateSet(final Set<LocalDate> dateSet, final ProductType productType) {
-        return collectToString(dateSet.stream().map(value -> convertDate(value, productType)));
+        return collectToString(dateSet.stream().sorted().map(value -> convertDate(value, productType)));
     }
 
     @Override
@@ -177,7 +185,7 @@ public class LocalizedToStringProductAttributeConverter extends ProductAttribute
 
     @Override
     protected String convertBooleanSet(final Set<Boolean> booleanSet, final ProductType productType) {
-        return collectToString(booleanSet.stream().map(value -> convertBoolean(value, productType)));
+        return collectToString(booleanSet.stream().sorted().map(value -> convertBoolean(value, productType)));
     }
 
     @Override
@@ -208,11 +216,13 @@ public class LocalizedToStringProductAttributeConverter extends ProductAttribute
 
     @Override
     protected String convertDateTime(final ZonedDateTime dateTimeValue, final ProductType productType) {
+        final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.SHORT).withLocale(locale());
         return dateTimeFormatter.format(dateTimeValue);
     }
 
     @Override
     protected String convertDate(final LocalDate dateValue, final ProductType productType) {
+        final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM).withLocale(locale());
         return dateTimeFormatter.format(dateValue);
     }
 

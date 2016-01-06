@@ -41,6 +41,7 @@ public abstract class ProductAttributeConverterBase<T> extends Base implements P
         return productTypeOptional.map(pt -> convertWithProductType(attribute, pt)).orElse(null);
     }
 
+    //TODO attribute or its name should also be part, otherwise the name is lost
     protected T convertWithProductType(final Attribute attribute, final ProductType productType) {
         return AttributeExtraction.<T>of(productType, attribute)
                 .ifIs(ofBoolean(), v -> convertBoolean(v, productType))
