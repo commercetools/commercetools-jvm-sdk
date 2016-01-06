@@ -12,6 +12,8 @@ import static io.sphere.sdk.test.SphereTestUtils.*;
 import static java.math.BigDecimal.valueOf;
 import static org.assertj.core.api.Assertions.assertThat;
 
+import static io.sphere.sdk.products.ProductsScenario1Fixtures.*;
+
 public class ProductProjectionSearchModelFacetsIntegrationTest extends ProductProjectionSearchModelIntegrationTest {
 
     public static final ProductProjectionFacetSearchModel FACET = ProductProjectionSearchModel.of().facet();

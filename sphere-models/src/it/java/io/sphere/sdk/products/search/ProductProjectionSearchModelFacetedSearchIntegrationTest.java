@@ -12,6 +12,7 @@ import static io.sphere.sdk.search.model.FilterRange.atLeast;
 import static io.sphere.sdk.search.model.FilterRange.atMost;
 import static io.sphere.sdk.test.SphereTestUtils.*;
 import static org.assertj.core.api.Assertions.assertThat;
+import static io.sphere.sdk.products.ProductsScenario1Fixtures.*;
 
 public class ProductProjectionSearchModelFacetedSearchIntegrationTest extends ProductProjectionSearchModelIntegrationTest {
 
