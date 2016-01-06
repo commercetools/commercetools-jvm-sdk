@@ -1,15 +1,18 @@
 package io.sphere.sdk.products;
 
 import io.sphere.sdk.client.BlockingSphereClient;
-import io.sphere.sdk.models.EnumValue;
-import io.sphere.sdk.models.LocalizedEnumValue;
-import io.sphere.sdk.models.LocalizedString;
-import io.sphere.sdk.models.Referenceable;
+import io.sphere.sdk.client.SphereClientUtils;
+import io.sphere.sdk.models.*;
 import io.sphere.sdk.products.attributes.*;
 import io.sphere.sdk.products.commands.ProductCreateCommand;
+import io.sphere.sdk.products.commands.ProductDeleteCommand;
+import io.sphere.sdk.products.queries.ProductQuery;
 import io.sphere.sdk.producttypes.ProductType;
 import io.sphere.sdk.producttypes.ProductTypeDraft;
 import io.sphere.sdk.producttypes.commands.ProductTypeCreateCommand;
+import io.sphere.sdk.producttypes.commands.ProductTypeDeleteCommand;
+import io.sphere.sdk.producttypes.queries.ProductTypeQuery;
+import io.sphere.sdk.queries.Query;
 import io.sphere.sdk.utils.MoneyImpl;
 
 import javax.money.MonetaryAmount;
@@ -17,6 +20,11 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.ZonedDateTime;
+import java.util.List;
+import java.util.Optional;
+import java.util.concurrent.CompletionStage;
+import java.util.concurrent.TimeUnit;
+import java.util.function.Function;
 
 import static io.sphere.sdk.models.DefaultCurrencyUnits.EUR;
 import static io.sphere.sdk.models.LocalizedString.ofEnglishLocale;
@@ -24,6 +32,7 @@ import static io.sphere.sdk.test.SphereTestUtils.*;
 import static io.sphere.sdk.utils.SetUtils.asSet;
 import static java.math.BigDecimal.valueOf;
 import static java.util.Locale.FRENCH;
+import static java.util.stream.Collectors.toList;
 
 /**
  * Generates some products to perform integration search, as shows the following table:
@@ -108,6 +117,72 @@ public class ProductsScenario1Fixtures {
     public static final ZonedDateTime DATE_TIME_2001_22H = ZonedDateTime.parse("2001-09-11T22:05:09.203+00:00");
     public static final ZonedDateTime DATE_TIME_2002_23H = ZonedDateTime.parse("2002-10-12T23:06:10.204+00:00");
 
+    public static class Data extends Base {
+        private final Product product1;
+        private final Product product2;
+        private final Product referencedProductA;
+        private final Product referencedProductB;
+        private final ProductType productType;
+
+        public Data(final ProductType productType, final Product product1, final Product product2, final Product referencedProductA, final Product referencedProductB) {
+            this.product1 = product1;
+            this.product2 = product2;
+            this.referencedProductA = referencedProductA;
+            this.referencedProductB = referencedProductB;
+            this.productType = productType;
+        }
+
+        public Product getProduct1() {
+            return product1;
+        }
+
+        public Product getProduct2() {
+            return product2;
+        }
+
+        public ProductType getProductType() {
+            return productType;
+        }
+
+        public Product getReferencedProductA() {
+            return referencedProductA;
+        }
+
+        public Product getReferencedProductB() {
+            return referencedProductB;
+        }
+
+        public List<Product> getAllProducts() {
+            return asList(getProduct1(), getProduct2(), getReferencedProductA(), getReferencedProductB());
+        }
+    }
+
+    public static Data createScenario(final BlockingSphereClient client) {
+        final ProductType productType = client.executeBlocking(ProductTypeQuery.of().byName(PRODUCT_TYPE_NAME)).head()
+                .orElseGet(() -> createProductType(client));
+
+        final Query<Product> query = ProductQuery.of()
+                .withPredicates(m -> m.masterData().staged().masterVariant().sku().isIn(asList(SKU1, SKU2, SKU_SOME_ID, SKU_OTHER_ID)));
+        final List<Product> products = client.executeBlocking(query).getResults();
+
+        final Function<String, Optional<Product>> findBySku =
+                sku -> products.stream().filter(p -> sku.equals(p.getMasterData().getStaged().getMasterVariant().getSku())).findFirst();
+
+        final Product productSomeId = findBySku.apply(SKU_SOME_ID).orElseGet(() -> createTestProduct(client, "Some Id", ProductVariantDraftBuilder.of().sku(SKU_SOME_ID).build(), productType));
+        final Product productOtherId = findBySku.apply(SKU_OTHER_ID).orElseGet(() -> createTestProduct(client, "Other Id", ProductVariantDraftBuilder.of().sku(SKU_OTHER_ID).build(), productType));
+        final Product product1 = findBySku.apply(SKU1).orElseGet(() -> createProduct1(client, productSomeId, productOtherId, productType));
+        final Product product2 = findBySku.apply(SKU2).orElseGet(() -> createProduct2(client, productSomeId, productOtherId, productType));
+        final Data data = new Data(productType, product1, product2, productSomeId, productOtherId);
+        return data;
+    }
+
+    public static void destroy(final BlockingSphereClient client, final Data data) {
+        final List<CompletionStage<Product>> productDeletions = data.getAllProducts().stream()
+                .map(product -> client.execute(ProductDeleteCommand.of(product)))
+                .collect(toList());
+        productDeletions.forEach(stage -> SphereClientUtils.blockingWait(stage, 2, TimeUnit.SECONDS));
+        client.executeBlocking(ProductTypeDeleteCommand.of(data.getProductType()));
+    }
 
     public static Product createProduct1(final BlockingSphereClient client, final Referenceable<Product> referencedProduct1, final Referenceable<Product> referencedProduct2, final Referenceable<ProductType> productTypeReferenceable) {
         final ProductVariantDraft masterVariant = ProductVariantDraftBuilder.of()
