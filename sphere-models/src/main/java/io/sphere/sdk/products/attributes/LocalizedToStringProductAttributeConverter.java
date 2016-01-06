@@ -7,12 +7,15 @@ import io.sphere.sdk.products.Product;
 import io.sphere.sdk.producttypes.ProductType;
 import io.sphere.sdk.producttypes.ProductTypeLocalRepository;
 
+import javax.annotation.Nullable;
 import javax.money.MonetaryAmount;
 import javax.money.format.MonetaryAmountFormat;
 import javax.money.format.MonetaryFormats;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 import java.util.Collection;
 import java.util.List;
 import java.util.Locale;
@@ -23,15 +26,16 @@ import static java.util.stream.Collectors.joining;
 
 public class LocalizedToStringProductAttributeConverter extends ProductAttributeConverterBase<String> implements ProductAttributeConverter<String> {
     private final List<Locale> locales;
-
-    protected LocalizedToStringProductAttributeConverter(final Collection<ProductType> productTypes, final List<Locale> locales) {
-        super(productTypes);
-        this.locales = locales;
-    }
+    private final DateTimeFormatter dateTimeFormatter;
 
     protected LocalizedToStringProductAttributeConverter(final ProductTypeLocalRepository productTypes, final List<Locale> locales) {
         super(productTypes);
         this.locales = locales;
+        dateTimeFormatter = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM).withLocale(locale());
+    }
+
+    protected LocalizedToStringProductAttributeConverter(final Collection<ProductType> productTypes, final List<Locale> locales) {
+        this(ProductTypeLocalRepository.of(productTypes), locales);
     }
 
     protected Locale locale() {
@@ -42,6 +46,16 @@ public class LocalizedToStringProductAttributeConverter extends ProductAttribute
         return locales;
     }
 
+    @Nullable
+    protected <X> String convertReference(final Reference<X> reference, final ProductType productType) {
+        return null;
+    }
+
+    @Nullable
+    protected <X> String convertReferenceSet(final Set<Reference<X>> referenceSet, final ProductType productType) {
+        return null;
+    }
+
     @Override
     protected String convertStringSet(final Set<String> stringSet, final ProductType productType) {
         return collectToString(stringSet.stream());
@@ -49,22 +63,22 @@ public class LocalizedToStringProductAttributeConverter extends ProductAttribute
 
     @Override
     protected String convertProductTypeReferenceSet(final Set<Reference<ProductType>> productTypeReferenceSet, final ProductType productType) {
-        return null;
+        return convertReferenceSet(productTypeReferenceSet, productType);
     }
 
     @Override
     protected String convertProductTypeReference(final Reference<ProductType> productTypeReference, final ProductType productType) {
-        return null;
+        return convertReference(productTypeReference, productType);
     }
 
     @Override
     protected String convertProductReferenceSet(final Set<Reference<Product>> referenceSet, final ProductType productType) {
-        return null;
+        return convertReferenceSet(referenceSet, productType);
     }
 
     @Override
     protected String convertProductReference(final Reference<Product> productReference, final ProductType productType) {
-        return null;
+        return convertReference(productReference, productType);
     }
 
     @Override
@@ -93,7 +107,7 @@ public class LocalizedToStringProductAttributeConverter extends ProductAttribute
 
     @Override
     protected String convertTime(final LocalTime time, final ProductType productType) {
-        return null;
+        return dateTimeFormatter.format(time);
     }
 
     @Override
@@ -113,7 +127,7 @@ public class LocalizedToStringProductAttributeConverter extends ProductAttribute
 
     @Override
     protected String convertInteger(final Integer integer, final ProductType productType) {
-        return null;
+        return integer.toString();
     }
 
     @Override
@@ -143,22 +157,22 @@ public class LocalizedToStringProductAttributeConverter extends ProductAttribute
 
     @Override
     protected String convertChannelReferenceSet(final Set<Reference<Channel>> channelReferenceSet, final ProductType productType) {
-        return null;
+        return convertReferenceSet(channelReferenceSet, productType);
     }
 
     @Override
     protected String convertChannelReference(final Reference<Channel> channelReference, final ProductType productType) {
-        return null;
+        return convertReference(channelReference, productType);
     }
 
     @Override
-    protected String convertCategoryReferenceSet(final Set<Reference<Category>> v, final ProductType productType) {
-        return null;
+    protected String convertCategoryReferenceSet(final Set<Reference<Category>> categoryReferenceSet, final ProductType productType) {
+        return convertReferenceSet(categoryReferenceSet, productType);
     }
 
     @Override
     protected String convertCategoryReference(final Reference<Category> categoryReference, final ProductType productType) {
-        return null;
+        return convertReference(categoryReference, productType);
     }
 
     @Override
@@ -194,12 +208,12 @@ public class LocalizedToStringProductAttributeConverter extends ProductAttribute
 
     @Override
     protected String convertDateTime(final ZonedDateTime dateTimeValue, final ProductType productType) {
-        return null;
+        return dateTimeFormatter.format(dateTimeValue);
     }
 
     @Override
     protected String convertDate(final LocalDate dateValue, final ProductType productType) {
-        return null;
+        return dateTimeFormatter.format(dateValue);
     }
 
     @Override
