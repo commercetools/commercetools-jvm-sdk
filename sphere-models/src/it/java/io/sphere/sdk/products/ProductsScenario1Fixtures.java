@@ -43,6 +43,7 @@ import static java.util.stream.Collectors.toList;
  * boolean          | true                          | false
  * text             | foo                           | bar
  * locText          | en: foo                       | en: bar
+ * locText2         | en: foo, de: German foo       |
  * enum             | two                           | three
  * locEnum          | en: two                       | en: three
  * number           | 5                             | 10
