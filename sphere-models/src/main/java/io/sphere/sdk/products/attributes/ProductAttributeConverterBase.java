@@ -44,79 +44,79 @@ public abstract class ProductAttributeConverterBase<T> extends Base implements P
     //TODO attribute or its name should also be part, otherwise the name is lost
     protected T convertWithProductType(final Attribute attribute, final ProductType productType) {
         return AttributeExtraction.<T>of(productType, attribute)
-                .ifIs(ofBoolean(), v -> convertBoolean(v, productType))
-                .ifIs(ofBooleanSet(), v -> convertBooleanSet(v, productType))
-                .ifIs(ofCategoryReference(), v -> convertCategoryReference(v, productType))
-                .ifIs(ofCategoryReferenceSet(), v -> convertCategoryReferenceSet(v, productType))
-                .ifIs(ofChannelReference(), v -> convertChannelReference(v, productType))
-                .ifIs(ofChannelReferenceSet(), v -> convertChannelReferenceSet(v, productType))
-                .ifIs(ofDate(), v -> convertDate(v, productType))
-                .ifIs(ofDateSet(), v -> convertDateSet(v, productType))
-                .ifIs(ofDateTime(), v -> convertDateTime(v, productType))
-                .ifIs(ofDateTimeSet(), v -> convertDateTimeSet(v, productType))
-                .ifIs(ofDouble(), v -> convertDouble(v, productType), value -> isDouble(attribute, productType))
-                .ifIs(ofDoubleSet(), v -> convertDoubleSet(v, productType), value -> isDoubleSet(attribute, productType))
-                .ifIs(ofEnumValue(), v -> convertEnumValue(v, productType))
-                .ifIs(ofEnumValueSet(), v -> convertEnumValueSet(v, productType))
-                .ifIs(ofInteger(), v -> convertInteger(v, productType), value -> isInteger(attribute, productType))
-                .ifIs(ofIntegerSet(), v -> convertIntegerSet(v, productType), value -> isIntegerSet(attribute, productType))
-                .ifIs(ofLocalizedEnumValue(), v -> convertLocalizedEnumValue(v, productType))
-                .ifIs(ofLocalizedEnumValueSet(), v -> convertLocalizedEnumValueSet(v, productType))
-                .ifIs(ofLocalizedString(), v -> convertLocalizedString(v, productType))
-                .ifIs(ofLocalizedStringSet(), v -> convertLocalizedStringSet(v, productType))
-                .ifIs(ofLocalTime(), v -> convertTime(v, productType))
-                .ifIs(ofLocalTimeSet(), v -> convertTimeSet(v, productType))
-                .ifIs(ofLong(), v -> convertLong(v, productType), value -> isLong(attribute, productType))
-                .ifIs(ofLongSet(), v -> convertLongSet(v, productType), value -> isLongSet(attribute, productType))
-                .ifIs(ofMoney(), v -> convertMoney(v, productType))
-                .ifIs(ofMoneySet(), v -> convertMoneySet(v, productType))
-                .ifIs(ofProductReference(), v -> convertProductReference(v, productType))
-                .ifIs(ofProductReferenceSet(), v -> convertProductReferenceSet(v, productType))
-                .ifIs(ofProductTypeReference(), v -> convertProductTypeReference(v, productType))
-                .ifIs(ofProductTypeReferenceSet(), v -> convertProductTypeReferenceSet(v, productType))
-                .ifIs(ofString(), v -> convertString(v, productType))
-                .ifIs(ofStringSet(), v -> convertStringSet(v, productType))
-                .ifIs(ofTime(), v -> convertTime(v, productType))
-                .ifIs(ofTimeSet(), v -> convertTimeSet(v, productType))
+                .ifIs(ofBoolean(), v -> convertBoolean(v, attribute, productType))
+                .ifIs(ofBooleanSet(), v -> convertBooleanSet(v, attribute, productType))
+                .ifIs(ofCategoryReference(), v -> convertCategoryReference(v, attribute, productType))
+                .ifIs(ofCategoryReferenceSet(), v -> convertCategoryReferenceSet(v, attribute, productType))
+                .ifIs(ofChannelReference(), v -> convertChannelReference(v, attribute, productType))
+                .ifIs(ofChannelReferenceSet(), v -> convertChannelReferenceSet(v, attribute, productType))
+                .ifIs(ofDate(), v -> convertDate(v, attribute, productType))
+                .ifIs(ofDateSet(), v -> convertDateSet(v, attribute, productType))
+                .ifIs(ofDateTime(), v -> convertDateTime(v, attribute, productType))
+                .ifIs(ofDateTimeSet(), v -> convertDateTimeSet(v, attribute, productType))
+                .ifIs(ofDouble(), v -> convertDouble(v, attribute, productType), value -> isDouble(attribute, productType))
+                .ifIs(ofDoubleSet(), v -> convertDoubleSet(v, attribute, productType), value -> isDoubleSet(attribute, productType))
+                .ifIs(ofEnumValue(), v -> convertEnumValue(v, attribute, productType))
+                .ifIs(ofEnumValueSet(), v -> convertEnumValueSet(v, attribute, productType))
+                .ifIs(ofInteger(), v -> convertInteger(v, attribute, productType), value -> isInteger(attribute, productType))
+                .ifIs(ofIntegerSet(), v -> convertIntegerSet(v, attribute, productType), value -> isIntegerSet(attribute, productType))
+                .ifIs(ofLocalizedEnumValue(), v -> convertLocalizedEnumValue(v, attribute, productType))
+                .ifIs(ofLocalizedEnumValueSet(), v -> convertLocalizedEnumValueSet(v, attribute, productType))
+                .ifIs(ofLocalizedString(), v -> convertLocalizedString(v, attribute, productType))
+                .ifIs(ofLocalizedStringSet(), v -> convertLocalizedStringSet(v, attribute, productType))
+                .ifIs(ofLocalTime(), v -> convertTime(v, attribute, productType))
+                .ifIs(ofLocalTimeSet(), v -> convertTimeSet(v, attribute, productType))
+                .ifIs(ofLong(), v -> convertLong(v, attribute, productType), value -> isLong(attribute, productType))
+                .ifIs(ofLongSet(), v -> convertLongSet(v, attribute, productType), value -> isLongSet(attribute, productType))
+                .ifIs(ofMoney(), v -> convertMoney(v, attribute, productType))
+                .ifIs(ofMoneySet(), v -> convertMoneySet(v, attribute, productType))
+                .ifIs(ofProductReference(), v -> convertProductReference(v, attribute, productType))
+                .ifIs(ofProductReferenceSet(), v -> convertProductReferenceSet(v, attribute, productType))
+                .ifIs(ofProductTypeReference(), v -> convertProductTypeReference(v, attribute, productType))
+                .ifIs(ofProductTypeReferenceSet(), v -> convertProductTypeReferenceSet(v, attribute, productType))
+                .ifIs(ofString(), v -> convertString(v, attribute, productType))
+                .ifIs(ofStringSet(), v -> convertStringSet(v, attribute, productType))
+                .ifIs(ofTime(), v -> convertTime(v, attribute, productType))
+                .ifIs(ofTimeSet(), v -> convertTimeSet(v, attribute, productType))
                 .findValue()
                 .orElse(null);
     }
 
     @Nullable
-    protected abstract T convertStringSet(final Set<String> stringSet, final ProductType productType);
+    protected abstract T convertStringSet(final Set<String> stringSet, final Attribute attribute, final ProductType productType);
 
     @Nullable
-    protected abstract T convertProductTypeReferenceSet(final Set<Reference<ProductType>> productTypeReferenceSet, final ProductType productType);
+    protected abstract T convertProductTypeReferenceSet(final Set<Reference<ProductType>> productTypeReferenceSet, final Attribute attribute, final ProductType productType);
 
     @Nullable
-    protected abstract T convertProductTypeReference(final Reference<ProductType> productTypeReference, final ProductType productType);
+    protected abstract T convertProductTypeReference(final Reference<ProductType> productTypeReference, final Attribute attribute, final ProductType productType);
 
     @Nullable
-    protected abstract T convertProductReferenceSet(final Set<Reference<Product>> referenceSet, final ProductType productType);
+    protected abstract T convertProductReferenceSet(final Set<Reference<Product>> referenceSet, final Attribute attribute, final ProductType productType);
 
     @Nullable
-    protected abstract T convertProductReference(final Reference<Product> productReference, final ProductType productType);
+    protected abstract T convertProductReference(final Reference<Product> productReference, final Attribute attribute, final ProductType productType);
 
     @Nullable
-    protected abstract T convertMoneySet(final Set<MonetaryAmount> monetaryAmountSet, final ProductType productType);
+    protected abstract T convertMoneySet(final Set<MonetaryAmount> monetaryAmountSet, final Attribute attribute, final ProductType productType);
 
     @Nullable
-    protected abstract T convertLongSet(final Set<Long> longSet, final ProductType productType);
+    protected abstract T convertLongSet(final Set<Long> longSet, final Attribute attribute, final ProductType productType);
 
     @Nullable
-    protected abstract T convertLong(final Long longValue, final ProductType productType);
+    protected abstract T convertLong(final Long longValue, final Attribute attribute, final ProductType productType);
 
     @Nullable
-    protected abstract T convertTimeSet(final Set<LocalTime> timeSet, final ProductType productType);
+    protected abstract T convertTimeSet(final Set<LocalTime> timeSet, final Attribute attribute, final ProductType productType);
 
     @Nullable
-    protected abstract T convertTime(final LocalTime time, final ProductType productType);
+    protected abstract T convertTime(final LocalTime time, final Attribute attribute, final ProductType productType);
 
     @Nullable
-    protected abstract T convertLocalizedStringSet(final Set<LocalizedString> localizedStringSet, final ProductType productType);
+    protected abstract T convertLocalizedStringSet(final Set<LocalizedString> localizedStringSet, final Attribute attribute, final ProductType productType);
 
     @Nullable
-    protected abstract T convertLocalizedEnumValueSet(final Set<LocalizedEnumValue> localizedEnumValueSet, final ProductType productType);
+    protected abstract T convertLocalizedEnumValueSet(final Set<LocalizedEnumValue> localizedEnumValueSet, final Attribute attribute, final ProductType productType);
 
     protected Collection<String> integerAttributes() {
         return Collections.emptyList();
@@ -143,16 +143,16 @@ public abstract class ProductAttributeConverterBase<T> extends Base implements P
     }
 
     @Nullable
-    protected abstract T convertIntegerSet(final Set<Integer> integerSet, final ProductType productType);
+    protected abstract T convertIntegerSet(final Set<Integer> integerSet, final Attribute attribute, final ProductType productType);
 
     @Nullable
-    protected abstract T convertInteger(final Integer integer, final ProductType productType);
+    protected abstract T convertInteger(final Integer integer, final Attribute attribute, final ProductType productType);
 
     @Nullable
-    protected abstract T convertEnumValueSet(final Set<EnumValue> enumValueSet, final ProductType productType);
+    protected abstract T convertEnumValueSet(final Set<EnumValue> enumValueSet, final Attribute attribute, final ProductType productType);
 
     @Nullable
-    protected abstract T convertDoubleSet(final Set<Double> doubleSet, final ProductType productType);
+    protected abstract T convertDoubleSet(final Set<Double> doubleSet, final Attribute attribute, final ProductType productType);
 
     protected boolean isIntegerSet(final Attribute attribute, final ProductType productType) {
         return integerSetAttributes().contains(attribute.getName());
@@ -179,50 +179,50 @@ public abstract class ProductAttributeConverterBase<T> extends Base implements P
     }
 
     @Nullable
-    protected abstract T convertDouble(final Double doubleValue, final ProductType productType);
+    protected abstract T convertDouble(final Double doubleValue, final Attribute attribute, final ProductType productType);
 
     @Nullable
-    protected abstract T convertDateTimeSet(final Set<ZonedDateTime> zonedDateTimeSet, final ProductType productType);
+    protected abstract T convertDateTimeSet(final Set<ZonedDateTime> zonedDateTimeSet, final Attribute attribute, final ProductType productType);
 
     @Nullable
-    protected abstract T convertDateSet(final Set<LocalDate> dateSet, final ProductType productType);
+    protected abstract T convertDateSet(final Set<LocalDate> dateSet, final Attribute attribute, final ProductType productType);
 
     @Nullable
-    protected abstract T convertChannelReferenceSet(final Set<Reference<Channel>> channelReferenceSet, final ProductType productType);
+    protected abstract T convertChannelReferenceSet(final Set<Reference<Channel>> channelReferenceSet, final Attribute attribute, final ProductType productType);
 
     @Nullable
-    protected abstract T convertChannelReference(final Reference<Channel> channelReference, final ProductType productType);
+    protected abstract T convertChannelReference(final Reference<Channel> channelReference, final Attribute attribute, final ProductType productType);
 
     @Nullable
-    protected abstract T convertCategoryReferenceSet(final Set<Reference<Category>> v, final ProductType productType);
+    protected abstract T convertCategoryReferenceSet(final Set<Reference<Category>> v, final Attribute attribute, final ProductType productType);
 
     @Nullable
-    protected abstract T convertCategoryReference(final Reference<Category> categoryReference, final ProductType productType);
+    protected abstract T convertCategoryReference(final Reference<Category> categoryReference, final Attribute attribute, final ProductType productType);
 
     @Nullable
-    protected abstract T convertBooleanSet(final Set<Boolean> booleanSet, final ProductType productType);
+    protected abstract T convertBooleanSet(final Set<Boolean> booleanSet, final Attribute attribute, final ProductType productType);
 
     @Nullable
-    protected abstract T convertString(final String stringValue, final ProductType productType);
+    protected abstract T convertString(final String stringValue, final Attribute attribute, final ProductType productType);
 
     @Nullable
-    protected abstract T convertMoney(final MonetaryAmount moneyValue, final ProductType productType);
+    protected abstract T convertMoney(final MonetaryAmount moneyValue, final Attribute attribute, final ProductType productType);
 
     @Nullable
-    protected abstract T convertLocalizedString(final LocalizedString localizedString, final ProductType productType);
+    protected abstract T convertLocalizedString(final LocalizedString localizedString, final Attribute attribute, final ProductType productType);
 
     @Nullable
-    protected abstract T convertLocalizedEnumValue(final LocalizedEnumValue localizedEnumValue, final ProductType productType);
+    protected abstract T convertLocalizedEnumValue(final LocalizedEnumValue localizedEnumValue, final Attribute attribute, final ProductType productType);
 
     @Nullable
-    protected abstract T convertEnumValue(final EnumValue enumValue, final ProductType productType);
+    protected abstract T convertEnumValue(final EnumValue enumValue, final Attribute attribute, final ProductType productType);
 
     @Nullable
-    protected abstract T convertDateTime(final ZonedDateTime dateTimeValue, final ProductType productType);
+    protected abstract T convertDateTime(final ZonedDateTime dateTimeValue, final Attribute attribute, final ProductType productType);
 
     @Nullable
-    protected abstract T convertDate(final LocalDate dateValue, final ProductType productType);
+    protected abstract T convertDate(final LocalDate dateValue, final Attribute attribute, final ProductType productType);
 
     @Nullable
-    protected abstract T convertBoolean(final Boolean booleanValue, final ProductType productType);
+    protected abstract T convertBoolean(final Boolean booleanValue, final Attribute attribute, final ProductType productType);
 }
