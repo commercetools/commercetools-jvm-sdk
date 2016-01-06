@@ -1,5 +1,6 @@
 package io.sphere.sdk.producttypes;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import io.sphere.sdk.models.Base;
 import io.sphere.sdk.products.attributes.AttributeDefinition;
 
@@ -16,6 +17,7 @@ public class ProductTypeDraft extends Base {
     private final String description;
     private final List<AttributeDefinition> attributes;
 
+    @JsonCreator
     ProductTypeDraft(@Nullable final String key, final String name, final String description, final List<AttributeDefinition> attributes) {
         this.key = key;
         this.name = name;
