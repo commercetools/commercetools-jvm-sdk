@@ -3,6 +3,7 @@ package io.sphere.sdk.carts;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.neovisionaries.i18n.CountryCode;
 import io.sphere.sdk.models.Address;
+import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Referenceable;
 import io.sphere.sdk.shippingmethods.ShippingMethod;
@@ -19,7 +20,7 @@ import java.util.List;
  * @see io.sphere.sdk.carts.commands.CartCreateCommand
  * @see CartDraftBuilder
  */
-public class CartDraft implements CustomDraft {
+public class CartDraft extends Base implements CustomDraft {
     private final CurrencyUnit currency;
     @Nullable
     private final String customerId;

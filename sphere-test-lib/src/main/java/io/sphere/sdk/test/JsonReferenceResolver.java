@@ -7,9 +7,11 @@ import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.Referenceable;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class JsonReferenceResolver extends Base {
+    public static final String PRODUCT_ID_FIELD_NAME = "productId";
     private final Map<String, String> keyToIdMap = new HashMap<>();
 
     public void addResourceByKey(final String key, final String id) {
@@ -20,19 +22,35 @@ public class JsonReferenceResolver extends Base {
         addResourceByKey(key, resource.toReference().getId());
     }
 
-    public void replaceReferences(final JsonNode resourceDraftNode) {
+    public void replaceIds(final JsonNode resourceDraftNode) {
         if (resourceDraftNode instanceof ObjectNode) {
-            resourceDraftNode.findParents("typeId")
-                    .stream()
-                    .filter(node -> node.isObject())
-                    .map(node -> (ObjectNode)node)
-                    .filter(node -> node.size() == 2 && node.has("id"))
-                    .forEach(node -> {
-                        final String id = keyToIdMap.get(node.get("id").asText());
-                        node.replace("id", new TextNode(id));
-                    });
+            references(resourceDraftNode);
+            productIdInLineItems(resourceDraftNode);
         } else {
             throw new IllegalArgumentException("" + resourceDraftNode + " should be instance of " + ObjectNode.class.getSimpleName());
         }
+    }
+
+    private void productIdInLineItems(final JsonNode resourceDraftNode) {
+        final JsonNode lineItems = resourceDraftNode.get("lineItems");
+        if (lineItems != null && lineItems.isArray()) {
+            final List<JsonNode> parents = resourceDraftNode.findParents(PRODUCT_ID_FIELD_NAME);
+            parents.forEach(node -> {
+                final String newId = keyToIdMap.get(node.get(PRODUCT_ID_FIELD_NAME).asText());
+                ((ObjectNode) node).replace(PRODUCT_ID_FIELD_NAME, new TextNode(newId));
+            });
+        }
+    }
+
+    private void references(final JsonNode resourceDraftNode) {
+        resourceDraftNode.findParents("typeId")
+                .stream()
+                .filter(node -> node.isObject())
+                .map(node -> (ObjectNode)node)
+                .filter(node -> node.size() == 2 && node.has("id"))
+                .forEach(node -> {
+                    final String id = keyToIdMap.get(node.get("id").asText());
+                    node.replace("id", new TextNode(id));
+                });
     }
 }

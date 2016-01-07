@@ -11,5 +11,6 @@ final class JavaMoneyModule extends SimpleModule {
         addSerializer(MonetaryAmount.class, new MoneySerializer());
         addSerializer(CurrencyUnit.class, new CurrencyUnitSerializer());
         addDeserializer(MonetaryAmount.class, new MoneyDeserializer());
+        addDeserializer(CurrencyUnit.class, new CurrencyUnitDeserializer());
     }
 }

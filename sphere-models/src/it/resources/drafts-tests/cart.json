@@ -1,0 +1,42 @@
+{
+  "currency": "EUR",
+  "country": "DE",
+  "inventoryMode": "TrackOnly",
+  "lineItems": [
+    {
+      "productId": "sample-product",
+      "variantId": 1,
+      "quantity": 2
+    }
+  ],
+
+  "customLineItems": [
+    {
+      "name": {
+        "en": "a custom line item"
+      },
+      "quantity": 3,
+      "money": {
+        "centAmount": 2000,
+        "currencyCode": "EUR"
+      },
+      "slug": "foo",
+      "taxCategory": {
+        "typeId": "tax-category",
+        "id": "standard-tax"
+      }
+    }
+  ],
+  "shippingAddress": {
+    "lastName": "Osgood",
+    "country": "DE"
+  },
+  "custom": {
+    "type": {
+      "key": "json-demo-type-key"
+    },
+    "fields": {
+      "stringField": "bar"
+    }
+  }
+}

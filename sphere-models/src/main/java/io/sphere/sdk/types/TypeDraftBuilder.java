@@ -39,6 +39,11 @@ public class TypeDraftBuilder extends Base implements Builder<TypeDraft> {
         return new TypeDraftBuilder(key, name, null, resourceTypeIds, null);
     }
 
+    public TypeDraftBuilder key(final String key) {
+        this.key = key;
+        return this;
+    }
+
     public TypeDraftBuilder description(final LocalizedString description) {
         this.description = description;
         return this;
