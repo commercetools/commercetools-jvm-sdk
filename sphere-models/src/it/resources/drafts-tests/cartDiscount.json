@@ -1,0 +1,22 @@
+{
+  "name": {
+    "en": "sample cart discount"
+  },
+  "value": {
+    "type": "absolute",
+    "money": [
+      {
+        "centAmount": 1200,
+        "currencyCode": "EUR"
+      }
+    ]
+  },
+  "cartPredicate": "customer.email = \"john@example.com\"",
+  "target": {
+    "type": "shipping"
+  },
+  "sortOrder": "0.45857448",
+  "isActive": true,
+  "validUntil": "2001-09-11T14:00:00.000Z",
+  "requiresDiscountCode": false
+}

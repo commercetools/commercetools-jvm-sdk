@@ -1,8 +1,5 @@
 package io.sphere.sdk.products.commands;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.node.ObjectNode;
-import com.fasterxml.jackson.databind.node.TextNode;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.ResourceIdentifiable;
 import io.sphere.sdk.products.*;
@@ -16,9 +13,9 @@ import io.sphere.sdk.states.StateType;
 import io.sphere.sdk.taxcategories.TaxCategory;
 import io.sphere.sdk.test.IntegrationTest;
 import io.sphere.sdk.test.JsonReferenceResolver;
-import io.sphere.sdk.test.SphereTestUtils;
 import io.sphere.sdk.types.CustomFieldsDraft;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.util.Locale;
@@ -38,8 +35,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class ProductCreateCommandTest extends IntegrationTest {
 
-    @Before
-    public void setUp() throws Exception {
+    @BeforeClass
+    public static void cleanUp() throws Exception {
         final ProductProjectionQuery query = ProductProjectionQuery.ofStaged().withPredicates(m -> m.slug().locale(Locale.ENGLISH).is("red-shirt"));
         client().executeBlocking(query).getResults()
                 .forEach(product -> client().executeBlocking(ProductDeleteCommand.of(product)));
