@@ -66,4 +66,11 @@ public class CustomObjectFixtures {
                     }
                 });
     }
+
+    public static void withCustomObject(final BlockingSphereClient client, final CustomObjectDraft<JsonNode> draft, final Consumer<CustomObject<JsonNode>> c) {
+        final CustomObjectUpsertCommand<JsonNode> createCommand = CustomObjectUpsertCommand.of(draft);
+        final CustomObject<JsonNode> customObject = client.executeBlocking(createCommand);
+        c.accept(customObject);
+        client.executeBlocking(CustomObjectDeleteCommand.ofJsonNode(customObject));
+    }
 }
