@@ -1,5 +1,6 @@
 package io.sphere.sdk.channels;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.LocalizedString;
@@ -27,6 +28,7 @@ public class ChannelDraft extends Base {
     @Nullable
     private final LocalizedString description;
 
+    @JsonCreator
     ChannelDraft(final String key, final Set<ChannelRole> roles, @Nullable final LocalizedString name, @Nullable final LocalizedString description) {
         this.key = key;
         this.roles = roles;

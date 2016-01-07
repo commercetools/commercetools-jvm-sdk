@@ -1,0 +1,4 @@
+{
+  "key": "example-channel-key",
+  "roles": ["OrderImport"]
+}

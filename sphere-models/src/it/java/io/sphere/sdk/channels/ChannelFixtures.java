@@ -8,7 +8,9 @@ import io.sphere.sdk.client.BlockingSphereClient;
 import java.util.Set;
 import java.util.function.Consumer;
 import java.util.function.Function;
+import java.util.function.UnaryOperator;
 
+import static io.sphere.sdk.test.SphereTestUtils.randomKey;
 import static io.sphere.sdk.test.SphereTestUtils.randomString;
 import static io.sphere.sdk.utils.SetUtils.asSet;
 
@@ -40,6 +42,18 @@ public class ChannelFixtures {
 
     public static void withOrderExportChannel(final BlockingSphereClient client, final Consumer<Channel> f) {
         withPersistent(client, "jvm sdk export channel", ChannelRole.ORDER_IMPORT, f);
+    }
+
+    private static void withChannel(final BlockingSphereClient client, final UnaryOperator<ChannelDraftBuilder> builderUnaryOperator, final Consumer<Channel> f) {
+        final ChannelDraftBuilder channelDraftBuilder = builderUnaryOperator.apply(ChannelDraftBuilder.of(randomKey()));
+        final ChannelDraft channelDraft = channelDraftBuilder.build();
+        withChannel(client, channelDraft, f);
+    }
+
+    public static void withChannel(final BlockingSphereClient client, final ChannelDraft channelDraft, final Consumer<Channel> f) {
+        final Channel channel = client.executeBlocking(ChannelCreateCommand.of(channelDraft));
+        f.accept(channel);
+        client.execute(ChannelDeleteCommand.of(channel));
     }
 
     private static void withPersistent(final BlockingSphereClient client, final String key, final ChannelRole roles, final Consumer<Channel> f) {
