@@ -20,7 +20,7 @@ public class CartDiscountDraftBuilder extends Base implements Builder<CartDiscou
     private ZonedDateTime validFrom;
     @Nullable
     private ZonedDateTime validUntil;
-    private final Boolean requiresDiscountCode;
+    private Boolean requiresDiscountCode;
 
     private CartDiscountDraftBuilder(final LocalizedString name, final CartDiscountPredicate cartPredicate, final CartDiscountValue value, final CartDiscountTarget target, final String sortOrder, final Boolean requiresDiscountCode) {
         this.cartPredicate = cartPredicate;
@@ -40,6 +40,11 @@ public class CartDiscountDraftBuilder extends Base implements Builder<CartDiscou
         return this;
     }
 
+    public CartDiscountDraftBuilder requiresDiscountCode(final boolean requiresDiscountCode) {
+        this.requiresDiscountCode = requiresDiscountCode;
+        return this;
+    }
+
     public CartDiscountDraftBuilder value(final CartDiscountValue value) {
         this.value = value;
         return this;
@@ -55,9 +60,13 @@ public class CartDiscountDraftBuilder extends Base implements Builder<CartDiscou
         return this;
     }
 
-    public CartDiscountDraftBuilder isActive(final boolean isActive) {
+    public CartDiscountDraftBuilder active(final boolean isActive) {
         this.isActive = isActive;
         return this;
+    }
+
+    public CartDiscountDraftBuilder isActive(final boolean active) {
+        return active(active);
     }
 
     public CartDiscountDraftBuilder cartPredicate(final CartDiscountPredicate cartPredicate) {

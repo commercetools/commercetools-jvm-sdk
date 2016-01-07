@@ -11,6 +11,7 @@ import io.sphere.sdk.utils.MoneyImpl;
 import java.time.ZonedDateTime;
 import java.util.function.Consumer;
 import java.util.function.Function;
+import java.util.function.UnaryOperator;
 
 import static io.sphere.sdk.test.SphereTestUtils.*;
 
@@ -47,6 +48,13 @@ public class CartDiscountFixtures {
                     .build();
             return client.executeBlocking(CartDiscountCreateCommand.of(draft));
         });
+    }
+
+    public static void withCartDiscount(final BlockingSphereClient client, final UnaryOperator<CartDiscountDraftBuilder> builderUnaryOperator, final Consumer<CartDiscount> consumer) {
+        final CartDiscountDraft draft = builderUnaryOperator.apply(newCartDiscountDraftBuilder()).build();
+        final CartDiscount cartDiscount = client.executeBlocking(CartDiscountCreateCommand.of(draft));
+        consumer.accept(cartDiscount);
+        client.executeBlocking(CartDiscountDeleteCommand.of(cartDiscount));
     }
 
     public static void withCartDiscount(final BlockingSphereClient client, final String name, final Consumer<CartDiscount> consumer) {

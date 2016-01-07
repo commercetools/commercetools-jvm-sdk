@@ -3,6 +3,7 @@ package io.sphere.sdk.discountcodes;
 import io.sphere.sdk.cartdiscounts.CartDiscount;
 import io.sphere.sdk.client.BlockingSphereClient;
 import io.sphere.sdk.discountcodes.commands.DiscountCodeCreateCommand;
+import io.sphere.sdk.discountcodes.commands.DiscountCodeDeleteCommand;
 import io.sphere.sdk.discountcodes.queries.DiscountCodeQuery;
 import io.sphere.sdk.discountcodes.queries.DiscountCodeQueryModel;
 
@@ -33,4 +34,9 @@ public class DiscountCodeFixtures {
         return client.executeBlocking(DiscountCodeCreateCommand.of(draft));
     }
 
+    public static void withDiscountCode(final BlockingSphereClient client, final DiscountCodeDraft draft, final Consumer<DiscountCode> consumer) {
+        final DiscountCode discountCode = client.executeBlocking(DiscountCodeCreateCommand.of(draft));
+        consumer.accept(discountCode);
+        client.executeBlocking(DiscountCodeDeleteCommand.of(discountCode));
+    }
 }

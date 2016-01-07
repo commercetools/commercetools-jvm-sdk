@@ -1,0 +1,11 @@
+{
+  "code": "demo-discount-code",
+  "cartDiscounts": [
+    {
+      "typeId": "cart-discount",
+      "id": "demo-cart-discount"
+    }
+  ],
+  "cartPredicate": "lineItemTotal(1 = 1) >  \"10.00 EUR\"",
+  "isActive": true
+}
