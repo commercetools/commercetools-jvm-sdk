@@ -12,9 +12,8 @@ import io.sphere.sdk.search.tokenizer.CustomSuggestTokenizer;
 import io.sphere.sdk.states.StateType;
 import io.sphere.sdk.taxcategories.TaxCategory;
 import io.sphere.sdk.test.IntegrationTest;
-import io.sphere.sdk.test.JsonReferenceResolver;
+import io.sphere.sdk.test.JsonNodeReferenceResolver;
 import io.sphere.sdk.types.CustomFieldsDraft;
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -111,7 +110,7 @@ public class ProductCreateCommandTest extends IntegrationTest {
 
     @Test
     public void createProductByJsonDraft() throws Exception {
-        final JsonReferenceResolver referenceResolver = new JsonReferenceResolver();
+        final JsonNodeReferenceResolver referenceResolver = new JsonNodeReferenceResolver();
         withCategory(client(), category -> {
             withProductType(client(), randomKey(), productType -> {
                 withTaxCategory(client(), taxCategory -> {

@@ -1,0 +1,12 @@
+{
+  "name": {
+    "en": "example category"
+  },
+  "parent": {
+    "typeId": "category",
+    "id": "example-category-parent"
+  },
+  "slug": {
+    "en": "example-category"
+  }
+}

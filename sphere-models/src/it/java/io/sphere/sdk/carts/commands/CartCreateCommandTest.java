@@ -4,7 +4,7 @@ import com.neovisionaries.i18n.CountryCode;
 import io.sphere.sdk.carts.*;
 import io.sphere.sdk.models.Address;
 import io.sphere.sdk.test.IntegrationTest;
-import io.sphere.sdk.test.JsonReferenceResolver;
+import io.sphere.sdk.test.JsonNodeReferenceResolver;
 import io.sphere.sdk.types.CustomFieldsDraft;
 import io.sphere.sdk.types.FieldDefinition;
 import io.sphere.sdk.types.StringFieldType;
@@ -115,7 +115,7 @@ public class CartCreateCommandTest extends IntegrationTest {
 
     @Test
     public void createByJson() {
-        final JsonReferenceResolver referenceResolver = new JsonReferenceResolver();
+        final JsonNodeReferenceResolver referenceResolver = new JsonNodeReferenceResolver();
         withTaxedProduct(client(), product -> {
             withType(client(),
                     typeBuilder -> typeBuilder.key("json-demo-type-key").fieldDefinitions(singletonList(FieldDefinition.of(StringFieldType.of(), "stringField", randomSlug(), true))),

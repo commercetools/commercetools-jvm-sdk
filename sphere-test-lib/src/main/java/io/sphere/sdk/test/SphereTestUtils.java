@@ -159,7 +159,7 @@ public final class SphereTestUtils {
         return SphereJsonUtils.parse(stringFromResource(resourcePath));
     }
 
-    public static  <T> T draftFromJsonResource(final String resourcePath, final Class<T> clazz, final JsonReferenceResolver referenceResolver) {
+    public static  <T> T draftFromJsonResource(final String resourcePath, final Class<T> clazz, final JsonNodeReferenceResolver referenceResolver) {
         final JsonNode draftAsJson = SphereTestUtils.jsonNodeFromResource(resourcePath);
         referenceResolver.replaceIds(draftAsJson);
         return SphereJsonUtils.readObject(draftAsJson, clazz);

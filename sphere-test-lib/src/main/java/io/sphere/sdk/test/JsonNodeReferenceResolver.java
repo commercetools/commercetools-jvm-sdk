@@ -10,7 +10,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class JsonReferenceResolver extends Base {
+public class JsonNodeReferenceResolver extends Base {
     public static final String PRODUCT_ID_FIELD_NAME = "productId";
     private final Map<String, String> keyToIdMap = new HashMap<>();
 
