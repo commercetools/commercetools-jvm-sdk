@@ -27,4 +27,10 @@ public class CustomerGroupFixtures {
     public static CustomerGroup b2cCustomerGroup(final BlockingSphereClient client) {
         return client.executeBlocking(CustomerGroupQuery.of().byName("b2c")).head().orElseGet(() -> client.executeBlocking(CustomerGroupCreateCommand.of("b2c")));
     }
+
+    public static void withCustomerGroup(final BlockingSphereClient client, final CustomerGroupDraft draft, final Consumer<CustomerGroup> consumer) {
+        final CustomerGroup customerGroup = client.executeBlocking(CustomerGroupCreateCommand.of(draft));
+        consumer.accept(customerGroup);
+        client.executeBlocking(CustomerGroupDeleteCommand.of(customerGroup));
+    }
 }

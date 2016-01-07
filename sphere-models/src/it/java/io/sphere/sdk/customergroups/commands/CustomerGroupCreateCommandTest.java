@@ -1,16 +1,28 @@
 package io.sphere.sdk.customergroups.commands;
 
 import io.sphere.sdk.customergroups.CustomerGroup;
+import io.sphere.sdk.customergroups.CustomerGroupDraft;
+import io.sphere.sdk.customergroups.CustomerGroupFixtures;
 import io.sphere.sdk.customergroups.queries.CustomerGroupQuery;
+import io.sphere.sdk.json.SphereJsonUtils;
 import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.test.IntegrationTest;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
+import static io.sphere.sdk.customergroups.CustomerGroupFixtures.withCustomerGroup;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class CustomerGroupCreateCommandTest extends IntegrationTest {
+    @BeforeClass
+    public static void clean() {
+        client().executeBlocking(CustomerGroupQuery.of().byName("demo-customer-group"))
+                .getResults()
+                .forEach(group -> client().executeBlocking(CustomerGroupDeleteCommand.of(group)));
+    }
+
     @Test
     public void execution() {
         final String name = "creation demo customer group name";
@@ -18,6 +30,14 @@ public class CustomerGroupCreateCommandTest extends IntegrationTest {
         final CustomerGroup customerGroup = client().executeBlocking(CustomerGroupCreateCommand.of(name));
 
         assertThat(customerGroup.getName()).isEqualTo(name);
+    }
+
+    @Test
+    public void createByJson() {
+        final CustomerGroupDraft draft = SphereJsonUtils.readObjectFromResource("drafts-tests/customerGroup.json", CustomerGroupDraft.class);
+        withCustomerGroup(client(), draft, customerGroup -> {
+            assertThat(customerGroup.getName()).isEqualTo("demo-customer-group");
+        });
     }
 
     @Before

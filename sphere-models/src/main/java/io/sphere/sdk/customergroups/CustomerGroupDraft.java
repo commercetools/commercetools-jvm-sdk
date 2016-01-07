@@ -1,5 +1,6 @@
 package io.sphere.sdk.customergroups;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import io.sphere.sdk.models.Base;
 
 /**
@@ -11,6 +12,7 @@ import io.sphere.sdk.models.Base;
 public class CustomerGroupDraft extends Base {
     private final String groupName;
 
+    @JsonCreator
     private CustomerGroupDraft(final String groupName) {
         this.groupName = groupName;
     }
