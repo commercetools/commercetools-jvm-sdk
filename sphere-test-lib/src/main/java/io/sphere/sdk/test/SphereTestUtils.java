@@ -1,6 +1,8 @@
 package io.sphere.sdk.test;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import com.neovisionaries.i18n.CountryCode;
+import io.sphere.sdk.json.SphereJsonUtils;
 import io.sphere.sdk.models.*;
 import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.utils.MoneyImpl;
@@ -9,6 +11,8 @@ import org.apache.commons.io.IOUtils;
 
 import javax.money.CurrencyUnit;
 import javax.money.MonetaryAmount;
+import java.io.IOException;
+import java.io.UncheckedIOException;
 import java.math.BigDecimal;
 import java.time.Duration;
 import java.time.ZoneOffset;
@@ -143,8 +147,22 @@ public final class SphereTestUtils {
         return StringUtils.slugify(s);
     }
 
-    public static String stringFromResource(final String resourcePath) throws Exception {
-        return IOUtils.toString(Thread.currentThread().getContextClassLoader().getResourceAsStream(resourcePath), "UTF-8");
+    public static String stringFromResource(final String resourcePath) {
+        try {
+            return IOUtils.toString(Thread.currentThread().getContextClassLoader().getResourceAsStream(resourcePath), "UTF-8");
+        } catch (final IOException e) {
+            throw new UncheckedIOException(e);
+        }
+    }
+
+    public static JsonNode jsonNodeFromResource(final String resourcePath) {
+        return SphereJsonUtils.parse(stringFromResource(resourcePath));
+    }
+
+    public static  <T> T draftFromJsonResource(final String resourcePath, final Class<T> clazz, final JsonReferenceResolver referenceResolver) {
+        final JsonNode draftAsJson = SphereTestUtils.jsonNodeFromResource(resourcePath);
+        referenceResolver.replaceReferences(draftAsJson);
+        return SphereJsonUtils.readObject(draftAsJson, clazz);
     }
 
     public static void assertEventually(final Duration maxWaitTime, final Duration waitBeforeRetry, final Runnable block) {

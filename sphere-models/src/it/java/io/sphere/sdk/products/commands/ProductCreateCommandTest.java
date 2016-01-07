@@ -1,23 +1,35 @@
 package io.sphere.sdk.products.commands;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
+import com.fasterxml.jackson.databind.node.TextNode;
+import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.ResourceIdentifiable;
 import io.sphere.sdk.products.*;
+import io.sphere.sdk.products.queries.ProductProjectionQuery;
 import io.sphere.sdk.producttypes.ProductType;
 import io.sphere.sdk.producttypes.ProductTypeFixtures;
 import io.sphere.sdk.search.SearchKeyword;
 import io.sphere.sdk.search.SearchKeywords;
 import io.sphere.sdk.search.tokenizer.CustomSuggestTokenizer;
+import io.sphere.sdk.states.StateType;
 import io.sphere.sdk.taxcategories.TaxCategory;
 import io.sphere.sdk.test.IntegrationTest;
+import io.sphere.sdk.test.JsonReferenceResolver;
+import io.sphere.sdk.test.SphereTestUtils;
 import io.sphere.sdk.types.CustomFieldsDraft;
+import org.junit.Before;
 import org.junit.Test;
 
 import java.util.Locale;
 
+import static io.sphere.sdk.categories.CategoryFixtures.withCategory;
 import static io.sphere.sdk.producttypes.ProductTypeFixtures.withEmptyProductType;
+import static io.sphere.sdk.producttypes.ProductTypeFixtures.withProductType;
 import static io.sphere.sdk.states.StateFixtures.withStateByBuilder;
 import static io.sphere.sdk.states.StateType.PRODUCT_STATE;
 import static io.sphere.sdk.taxcategories.TaxCategoryFixtures.defaultTaxCategory;
+import static io.sphere.sdk.taxcategories.TaxCategoryFixtures.withTaxCategory;
 import static io.sphere.sdk.test.SphereTestUtils.*;
 import static io.sphere.sdk.types.TypeFixtures.STRING_FIELD_NAME;
 import static io.sphere.sdk.types.TypeFixtures.withUpdateableType;
@@ -25,6 +37,14 @@ import static java.util.Collections.singletonMap;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class ProductCreateCommandTest extends IntegrationTest {
+
+    @Before
+    public void setUp() throws Exception {
+        final ProductProjectionQuery query = ProductProjectionQuery.ofStaged().withPredicates(m -> m.slug().locale(Locale.ENGLISH).is("red-shirt"));
+        client().executeBlocking(query).getResults()
+                .forEach(product -> client().executeBlocking(ProductDeleteCommand.of(product)));
+    }
+
     @Test
     public void createProductWithExternalImage() throws Exception {
         withStateByBuilder(client(), stateBuilder -> stateBuilder.initial(true).type(PRODUCT_STATE), initialProductState -> {
@@ -91,4 +111,33 @@ public class ProductCreateCommandTest extends IntegrationTest {
             client().executeBlocking(ProductDeleteCommand.of(product));
         });
     }
+
+    @Test
+    public void createProductByJsonDraft() throws Exception {
+        final JsonReferenceResolver referenceResolver = new JsonReferenceResolver();
+        withCategory(client(), category -> {
+            withProductType(client(), randomKey(), productType -> {
+                withTaxCategory(client(), taxCategory -> {
+                    withStateByBuilder(client(), stateBuilder -> stateBuilder.initial(true).type(StateType.PRODUCT_STATE), state -> {
+                        referenceResolver.addResourceByKey("t-shirt-category", category);
+                        referenceResolver.addResourceByKey("t-shirt-product-type", productType);
+                        referenceResolver.addResourceByKey("standard-tax", taxCategory);
+                        referenceResolver.addResourceByKey("initial-product-state", state);
+                        final ProductDraft productDraft = draftFromJsonResource("drafts-tests/product.json", ProductDraft.class, referenceResolver);
+                        final Product product = client().executeBlocking(ProductCreateCommand.of(productDraft));
+                        assertThat(product.getProductType()).isEqualTo(productType.toReference());
+                        assertThat(product.getTaxCategory()).isEqualTo(taxCategory.toReference());
+                        assertThat(product.getState()).isEqualTo(state.toReference());
+                        final ProductData productData = product.getMasterData().getStaged();
+                        assertThat(productData.getName()).isEqualTo(LocalizedString.ofEnglish("red shirt"));
+                        assertThat(productData.getCategories()).extracting("id").contains(category.getId());
+                        client().execute(ProductDeleteCommand.of(product));
+                    });
+                });
+            });
+        });
+    }
+
+
+
 }

@@ -55,7 +55,7 @@ public class ProductTypeCreateCommandTest extends IntegrationTest {
 
     @Test
     public void createByJson() {
-        final ProductTypeDraft productTypeDraft = SphereJsonUtils.readObjectFromResource("drafts-tests/productType.json", new TypeReference<ProductTypeDraft>() {});
+        final ProductTypeDraft productTypeDraft = SphereJsonUtils.readObjectFromResource("drafts-tests/productType.json", ProductTypeDraft.class);
         final ProductType productType = client().executeBlocking(ProductTypeCreateCommand.of(productTypeDraft));
         assertThat(productType.getName()).isEqualTo(getName());
         assertThat(productType.getKey()).isEqualTo("product-type-from-json");
