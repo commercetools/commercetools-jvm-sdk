@@ -18,6 +18,12 @@ import static io.sphere.sdk.utils.SetUtils.setOf;
 import static io.sphere.sdk.test.SphereTestUtils.*;
 
 public class ZoneFixtures {
+    public static void withZone(final BlockingSphereClient client, final ZoneDraft draft, final Consumer<Zone> consumer) {
+        final Zone zone = client.executeBlocking(ZoneCreateCommand.of(draft));
+        consumer.accept(zone);
+        client.executeBlocking(ZoneDeleteCommand.of(zone));
+    }
+
     public static synchronized void withZone(final BlockingSphereClient client, final Consumer<Zone> consumer, final CountryCode country, final CountryCode ... moreCountries) {
         withUpdateableZone(client, consumerToFunction(consumer), country, moreCountries);
     }
