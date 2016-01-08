@@ -44,7 +44,12 @@ public class TypeFixtures {
 
     public static void withType(final BlockingSphereClient client, final UnaryOperator<TypeDraftBuilder> b, final Consumer<Type> consumer) {
         final TypeDraftBuilder typeDraftBuilder = b.apply(createTypeDraftBuilder());
-        final Type type = client.executeBlocking(TypeCreateCommand.of(typeDraftBuilder.build()));
+        final TypeDraft draft = typeDraftBuilder.build();
+        withType(client, draft, consumer);
+    }
+
+    public static void withType(final BlockingSphereClient client, final TypeDraft draft, final Consumer<Type> consumer) {
+        final Type type = client.executeBlocking(TypeCreateCommand.of(draft));
         consumer.accept(type);
         client.executeBlocking(TypeDeleteCommand.of(type));
     }

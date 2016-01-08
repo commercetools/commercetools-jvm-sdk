@@ -1,0 +1,32 @@
+{
+  "key": "type-key",
+  "name": {
+    "en": "demo type"
+  },
+  "resourceTypeIds": [
+    "category",
+    "customer"
+  ],
+  "fieldDefinitions": [
+    {
+      "type": {
+        "name": "Enum",
+        "values": [
+          {
+            "key": "a",
+            "label": "A"
+          },
+          {
+            "key": "b",
+            "label": "B"
+          }
+        ]
+      },
+      "name": "demo-enum-field",
+      "label": {
+        "en": "demo field"
+      },
+      "required": true
+    }
+  ]
+}

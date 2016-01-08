@@ -1,5 +1,6 @@
 package io.sphere.sdk.types;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import io.sphere.sdk.models.LocalizedString;
 
 import javax.annotation.Nullable;
@@ -10,6 +11,7 @@ import java.util.Set;
  * @see Custom
  * @see TypeDraftBuilder
  */
+@JsonDeserialize(as = TypeDraftImpl.class)
 public interface TypeDraft {
     String getKey();
 
