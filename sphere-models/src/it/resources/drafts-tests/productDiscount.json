@@ -1,0 +1,17 @@
+{
+  "name": {
+    "en": "example product discount"
+  },
+  "value": {
+    "type": "absolute",
+    "money": [
+      {
+        "centAmount": 2000,
+        "currencyCode": "EUR"
+      }
+    ]
+  },
+  "predicate": "sku = \"foo\"",
+  "sortOrder": "0.34544",
+  "isActive": true
+}

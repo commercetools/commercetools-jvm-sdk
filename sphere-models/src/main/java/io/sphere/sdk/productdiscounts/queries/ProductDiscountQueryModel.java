@@ -1,9 +1,7 @@
 package io.sphere.sdk.productdiscounts.queries;
 
 import io.sphere.sdk.productdiscounts.ProductDiscount;
-import io.sphere.sdk.queries.BooleanQueryModel;
-import io.sphere.sdk.queries.ResourceQueryModelImpl;
-import io.sphere.sdk.queries.QueryModel;
+import io.sphere.sdk.queries.*;
 
 public class ProductDiscountQueryModel extends ResourceQueryModelImpl<ProductDiscount> {
     private ProductDiscountQueryModel(final QueryModel<ProductDiscount> parent, final String pathSegment) {
@@ -20,5 +18,9 @@ public class ProductDiscountQueryModel extends ResourceQueryModelImpl<ProductDis
 
     public BooleanQueryModel<ProductDiscount> active() {
         return isActive();
+    }
+
+    public LocalizedStringQuerySortingModel<ProductDiscount> name() {
+        return localizedStringQuerySortingModel("name");
     }
 }
