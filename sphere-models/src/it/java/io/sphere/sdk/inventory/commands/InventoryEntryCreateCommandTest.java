@@ -1,22 +1,26 @@
 package io.sphere.sdk.inventory.commands;
 
+import io.sphere.sdk.channels.ChannelFixtures;
 import io.sphere.sdk.channels.ChannelRole;
 import io.sphere.sdk.commands.DeleteCommand;
 import io.sphere.sdk.inventory.InventoryEntry;
 import io.sphere.sdk.inventory.InventoryEntryDraft;
+import io.sphere.sdk.inventory.InventoryEntryFixtures;
 import io.sphere.sdk.test.IntegrationTest;
+import io.sphere.sdk.test.JsonNodeReferenceResolver;
 import org.junit.Test;
 
 import java.time.ZonedDateTime;
 
 import static io.sphere.sdk.channels.ChannelFixtures.withChannelOfRole;
+import static io.sphere.sdk.channels.ChannelRole.INVENTORY_SUPPLY;
 import static io.sphere.sdk.test.SphereTestUtils.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class InventoryEntryCreateCommandTest extends IntegrationTest {
     @Test
     public void execution() throws Exception {
-        withChannelOfRole(client(), ChannelRole.INVENTORY_SUPPLY, channel -> {
+        withChannelOfRole(client(), INVENTORY_SUPPLY, channel -> {
             final String sku = randomKey();
             final long quantityOnStock = 10;
             final ZonedDateTime expectedDelivery = tomorrowZonedDateTime();
@@ -39,5 +43,21 @@ public class InventoryEntryCreateCommandTest extends IntegrationTest {
             final DeleteCommand<InventoryEntry> deleteCommand = InventoryEntryDeleteCommand.of(inventoryEntry);
             final InventoryEntry deletedEntry = client().executeBlocking(deleteCommand);
         });
+    }
+
+    @Test
+    public void createByJson() {
+        withChannelOfRole(client(), INVENTORY_SUPPLY, channel -> {
+            final JsonNodeReferenceResolver referenceResolver = new JsonNodeReferenceResolver();
+            referenceResolver.addResourceByKey("supply-channel", channel);
+            final InventoryEntryDraft draft = draftFromJsonResource("drafts-tests/inventory.json", InventoryEntryDraft.class, referenceResolver);
+
+            InventoryEntryFixtures.withInventoryEntry(client(), draft, inventoryEntry -> {
+                assertThat(inventoryEntry.getSku()).isEqualTo("demo-sku");
+                assertThat(inventoryEntry.getQuantityOnStock()).isEqualTo(523);
+                assertThat(inventoryEntry.getSupplyChannel()).isEqualTo(channel.toReference());
+            });
+        });
+
     }
 }

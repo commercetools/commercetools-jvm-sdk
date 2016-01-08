@@ -9,6 +9,7 @@ import io.sphere.sdk.models.Base;
 
 import java.time.ZonedDateTime;
 import java.util.function.BiConsumer;
+import java.util.function.Consumer;
 import java.util.function.Function;
 
 import static io.sphere.sdk.channels.ChannelFixtures.withChannelOfRole;
@@ -40,5 +41,11 @@ public class InventoryEntryFixtures extends Base {
                 return entry;
             });
         });
+    }
+
+    public static void withInventoryEntry(final BlockingSphereClient client, final InventoryEntryDraft draft, final Consumer<InventoryEntry> consumer) {
+        final InventoryEntry inventoryEntry = client.executeBlocking(InventoryEntryCreateCommand.of(draft));
+        consumer.accept(inventoryEntry);
+        client.executeBlocking(InventoryEntryDeleteCommand.of(inventoryEntry));
     }
 }

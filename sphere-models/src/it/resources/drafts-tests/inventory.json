@@ -1,0 +1,8 @@
+{
+  "sku": "demo-sku",
+  "quantityOnStock": 523,
+  "supplyChannel": {
+    "typeId": "channel",
+    "id": "supply-channel"
+  }
+}
