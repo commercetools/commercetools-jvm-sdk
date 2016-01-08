@@ -1,0 +1,24 @@
+{
+  "name": "demo shipping method",
+  "taxCategory": {
+    "typeId": "tax-category",
+    "id": "standard-tax"
+  },
+  "zoneRates": [
+    {
+      "zone": {
+        "typeId": "zone",
+        "id": "zone-id"
+      },
+      "shippingRates": [
+        {
+          "price": {
+            "centAmount": 2000,
+            "currencyCode": "EUR"
+          }
+        }
+      ]
+    }
+  ],
+  "isDefault": true
+}

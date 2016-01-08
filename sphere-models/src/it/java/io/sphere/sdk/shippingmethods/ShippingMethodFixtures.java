@@ -21,6 +21,12 @@ import static io.sphere.sdk.test.SphereTestUtils.*;
 import static io.sphere.sdk.utils.SetUtils.asSet;
 
 public class ShippingMethodFixtures {
+    public static void withShippingMethod(final BlockingSphereClient client, final ShippingMethodDraft draft, final Consumer<ShippingMethod> consumer){
+        final ShippingMethod shippingMethod = client.executeBlocking(ShippingMethodCreateCommand.of(draft));
+        consumer.accept(shippingMethod);
+        client.executeBlocking(ShippingMethodDeleteCommand.of(shippingMethod));
+    }
+
     public static void withShippingMethod(final BlockingSphereClient client, final Consumer<ShippingMethod> consumer){
         withUpdateableShippingMethod(client, consumerToFunction(consumer));
     }
