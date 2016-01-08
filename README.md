@@ -4,7 +4,6 @@
 
 [![][travis img]][travis]
 [![][maven img]][maven]
-[![][release img]][release]
 [![][license img]][license]
 
 [](the link definitions are at the bottom)
@@ -123,9 +122,6 @@ authUrl=https://auth.sphere.io
 
 [maven]:http://search.maven.org/#search|gav|1|g:"io.sphere.sdk.jvm"%20AND%20a:"sphere-jvm-sdk"
 [maven img]:https://maven-badges.herokuapp.com/maven-central/io.sphere.sdk.jvm/sphere-jvm-sdk/badge.svg
-
-[release]:https://github.com/sphereio/sphere-jvm-sdk/releases
-[release img]:https://img.shields.io/github/release/sphereio/sphere-jvm-sdk.svg
 
 [license]:LICENSE.md
 [license img]:https://img.shields.io/badge/License-Apache%202-blue.svg
