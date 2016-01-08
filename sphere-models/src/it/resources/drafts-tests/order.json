@@ -1,0 +1,87 @@
+{
+  "customerId": "a-customer",
+  "lineItems": [
+    {
+      "quantity": 5,
+      "productId": "a-product",
+      "name": {
+        "en": "a product"
+      },
+      "variant": {
+        "id": 1,
+        "prices": [
+          {
+            "value": {
+              "centAmount": 2000,
+              "currencyCode": "EUR"
+            }
+          }
+        ],
+        "attributes": [
+          {
+            "name": "foo",
+            "value": "bar"
+          }
+        ]
+      },
+      "taxRate": {
+        "name": "default-tax",
+        "amount": 0.19,
+        "includedInPrice": true,
+        "country": "DE"
+      },
+      "price": {
+        "value": {
+          "centAmount": 2000,
+          "currencyCode": "EUR"
+        }
+      }
+    }
+  ],
+  "customLineItems": [
+    {
+      "name": {
+        "en": "a custom line item"
+      },
+      "quantity": 3,
+      "money": {
+        "centAmount": 2000,
+        "currencyCode": "EUR"
+      },
+      "slug": "foo",
+      "taxCategory": {
+        "typeId": "tax-category",
+        "id": "standard-tax"
+      }
+    }
+  ],
+  "totalPrice": {
+    "centAmount": 2000,
+    "currencyCode": "EUR"
+  },
+  "taxedPrice": {
+    "totalNet": {
+      "centAmount": 2000,
+      "currencyCode": "EUR"
+    },
+    "totalGross": {
+      "centAmount": 2000,
+      "currencyCode": "EUR"
+    },
+    "taxPortions": [
+      {
+        "rate": 0.19,
+        "amount": {
+          "centAmount": 2000,
+          "currencyCode": "EUR"
+        }
+      }
+    ]
+  },
+  "shippingAddress": {
+    "lastName": "Osgood",
+    "country": "DE"
+  },
+  "country": "DE",
+  "orderState": "Complete"
+}

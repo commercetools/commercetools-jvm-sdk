@@ -1,9 +1,11 @@
 package io.sphere.sdk.orders.commands;
 
+import com.neovisionaries.i18n.CountryCode;
 import io.sphere.sdk.cartdiscounts.DiscountedLineItemPrice;
 import io.sphere.sdk.cartdiscounts.DiscountedLineItemPriceForQuantity;
 import io.sphere.sdk.carts.*;
 import io.sphere.sdk.channels.ChannelRole;
+import io.sphere.sdk.customers.CustomerFixtures;
 import io.sphere.sdk.models.Address;
 import io.sphere.sdk.models.DefaultCurrencyUnits;
 import io.sphere.sdk.models.LocalizedString;
@@ -11,13 +13,16 @@ import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.orders.*;
 import io.sphere.sdk.products.*;
 import io.sphere.sdk.products.attributes.Attribute;
+import io.sphere.sdk.products.attributes.AttributeAccess;
 import io.sphere.sdk.products.attributes.AttributeImportDraft;
+import io.sphere.sdk.products.search.ProductProjectionSearch;
 import io.sphere.sdk.shippingmethods.ShippingMethod;
 import io.sphere.sdk.shippingmethods.ShippingRate;
 import io.sphere.sdk.suppliers.TShirtProductTypeDraftSupplier;
 import io.sphere.sdk.taxcategories.TaxCategory;
 import io.sphere.sdk.taxcategories.TaxRate;
 import io.sphere.sdk.test.IntegrationTest;
+import io.sphere.sdk.test.JsonNodeReferenceResolver;
 import io.sphere.sdk.test.SphereTestUtils;
 import io.sphere.sdk.types.CustomFields;
 import io.sphere.sdk.utils.MoneyImpl;
@@ -27,6 +32,7 @@ import javax.money.MonetaryAmount;
 import java.math.BigDecimal;
 import java.time.ZonedDateTime;
 import java.util.List;
+import java.util.Locale;
 import java.util.Set;
 import java.util.UUID;
 import java.util.function.Consumer;
@@ -37,6 +43,7 @@ import static io.sphere.sdk.customers.CustomerFixtures.withCustomer;
 import static io.sphere.sdk.customers.CustomerFixtures.withCustomerInGroup;
 import static io.sphere.sdk.models.DefaultCurrencyUnits.EUR;
 import static io.sphere.sdk.products.ProductFixtures.withProduct;
+import static io.sphere.sdk.products.ProductFixtures.withTaxedProduct;
 import static io.sphere.sdk.shippingmethods.ShippingMethodFixtures.withShippingMethodForGermany;
 import static io.sphere.sdk.taxcategories.TaxCategoryFixtures.defaultTaxCategory;
 import static io.sphere.sdk.taxcategories.TaxCategoryFixtures.withTransientTaxCategory;
@@ -396,6 +403,45 @@ public class OrderImportCommandTest extends IntegrationTest {
             final Order order = client().executeBlocking(cmd);
             orderConsumer.accept(order);
             client().executeBlocking(OrderDeleteCommand.of(order));
+        });
+    }
+
+    @Test
+    public void createByJson() {
+        withCustomer(client(), customer -> {
+            withTaxedProduct(client(), product -> {
+                final JsonNodeReferenceResolver referenceResolver = new JsonNodeReferenceResolver();
+                referenceResolver.addResourceByKey("a-customer", customer);
+                final String productId = product.getId();
+                referenceResolver.addResourceByKey("a-product", productId);
+                final Reference<TaxCategory> taxCategoryReference = product.getTaxCategory();
+                referenceResolver.addResourceByKey("standard-tax", taxCategoryReference);
+                final OrderImportDraft orderImportDraft = draftFromJsonResource("drafts-tests/order.json", OrderImportDraft.class, referenceResolver);
+
+                final Order order = client().executeBlocking(OrderImportCommand.of(orderImportDraft));
+
+                assertThat(order.getCustomerId()).isEqualTo(customer.getId());
+                final LineItem lineItem = order.getLineItems().get(0);
+                assertThat(lineItem.getProductId()).isEqualTo(productId);
+                assertThat(lineItem.getVariant().getId()).isEqualTo(1);
+                assertThat(lineItem.getVariant().getPrices().get(0).getValue()).isEqualTo(EURO_20);
+                assertThat(lineItem.getVariant().getAttribute("foo").getValue(AttributeAccess.ofString())).isEqualTo("bar");
+                assertThat(lineItem.getTaxRate().getName()).isEqualTo("default-tax");
+                assertThat(lineItem.getTaxRate().isIncludedInPrice()).isTrue();
+                assertThat(lineItem.getTaxRate().getCountry()).isEqualTo(CountryCode.DE);
+                final CustomLineItem customLineItem = order.getCustomLineItems().get(0);
+                assertThat(customLineItem.getName().get(ENGLISH)).isEqualTo("a custom line item");
+                assertThat(customLineItem.getQuantity()).isEqualTo(3);
+                assertThat(customLineItem.getMoney()).isEqualTo(EURO_20);
+                assertThat(customLineItem.getSlug()).isEqualTo("foo");
+                assertThat(customLineItem.getTaxCategory()).isEqualTo(taxCategoryReference);
+                assertThat(order.getTotalPrice()).isEqualTo(EURO_20);
+                assertThat(order.getTaxedPrice().getTotalGross()).isEqualTo(EURO_20);
+                assertThat(order.getShippingAddress().getLastName()).isEqualTo("Osgood");
+                assertThat(order.getOrderState()).isEqualTo(OrderState.COMPLETE);
+
+                client().executeBlocking(OrderDeleteCommand.of(order));
+            });
         });
     }
 }

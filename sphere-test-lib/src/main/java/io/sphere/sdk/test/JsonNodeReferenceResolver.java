@@ -26,9 +26,21 @@ public class JsonNodeReferenceResolver extends Base {
         if (resourceDraftNode instanceof ObjectNode) {
             references(resourceDraftNode);
             productIdInLineItems(resourceDraftNode);
+            customerIdInOrders(resourceDraftNode);
         } else {
             throw new IllegalArgumentException("" + resourceDraftNode + " should be instance of " + ObjectNode.class.getSimpleName());
         }
+    }
+
+    private void customerIdInOrders(final JsonNode resourceDraftNode) {
+        final String fieldName = "customerId";
+        final List<JsonNode> nodesContainingCustomerId = resourceDraftNode.findParents(fieldName);
+        nodesContainingCustomerId.forEach(node -> {
+            if (node != null && node.isObject()) {
+                final String newId = keyToIdMap.get(node.get(fieldName).asText());
+                ((ObjectNode) node).replace(fieldName, new TextNode(newId));
+            }
+        });
     }
 
     private void productIdInLineItems(final JsonNode resourceDraftNode) {

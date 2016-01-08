@@ -1,5 +1,6 @@
 package io.sphere.sdk.orders;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import io.sphere.sdk.products.attributes.AttributeImportDraft;
 import io.sphere.sdk.products.Image;
 import io.sphere.sdk.products.Price;
@@ -11,6 +12,7 @@ import java.util.List;
  *
  * @see ProductVariantImportDraftBuilder
  */
+@JsonDeserialize(as = ProductVariantImportDraftImpl.class)
 public interface ProductVariantImportDraft {
     @Nullable
     List<AttributeImportDraft> getAttributes();
