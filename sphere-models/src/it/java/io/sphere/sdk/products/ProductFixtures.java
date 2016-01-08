@@ -95,6 +95,16 @@ public class ProductFixtures {
         delete(client, possiblyUpdateProduct);
     }
 
+    public static void withProduct(final BlockingSphereClient client, final UnaryOperator<ProductDraftBuilder> builderMapper, final Consumer<Product> productConsumer) {
+        withEmptyProductType(client, productType -> {
+            final ProductDraftBuilder builder = ProductDraftBuilder.of(productType, randomSlug(), randomSlug(), ProductVariantDraftBuilder.of().build());
+            final ProductDraftBuilder updatedBuilder = builderMapper.apply(builder);
+            final Product product = client.executeBlocking(ProductCreateCommand.of(updatedBuilder.build()));
+            productConsumer.accept(product);
+            client.executeBlocking(ProductDeleteCommand.of(product));
+        });
+    }
+
     public static void withProduct(final BlockingSphereClient client, final Supplier<ProductDraft> creator, final Consumer<Product> user) {
         withUpdateableProduct(client, creator, consumerToFunction(user));
     }

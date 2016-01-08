@@ -72,6 +72,11 @@ import java.util.function.Function;
  </ul>
  -->
 
+ <h3 class=released-version id="v1_0_0_M25">1.0.0-M25 (08.01.2016)</h3>
+ <ul>
+ <li class=fixed-in-release>Support full locales for search endpoint. See <a href="https://github.com/sphereio/sphere-jvm-sdk/issues/922" target="_blank">#922</a></li>
+ </ul>
+
  <h3 class=released-version id="v1_0_0_M24">1.0.0-M24 (05.01.2016)</h3>
 
  <ul>
