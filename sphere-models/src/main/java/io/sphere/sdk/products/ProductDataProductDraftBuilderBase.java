@@ -14,8 +14,8 @@ import java.util.List;
 import java.util.Set;
 
 abstract class ProductDataProductDraftBuilderBase<T extends ProductDataProductDraftBuilderBase<T>> extends Base implements WithLocalizedSlug, MetaAttributes {
-    private final LocalizedString name;
-    private final LocalizedString slug;
+    private LocalizedString name;
+    private LocalizedString slug;
     private LocalizedString description;
     private LocalizedString metaTitle;
     private LocalizedString metaDescription;
@@ -31,6 +31,16 @@ abstract class ProductDataProductDraftBuilderBase<T extends ProductDataProductDr
     protected ProductDataProductDraftBuilderBase(final LocalizedString name, final LocalizedString slug) {
         this.name = name;
         this.slug = slug;
+    }
+
+    public T slug(final LocalizedString slug) {
+        this.slug = slug;
+        return getThis();
+    }
+
+    public T name(final LocalizedString name) {
+        this.name = name;
+        return getThis();
     }
 
     public T description(@Nullable final LocalizedString description) {

@@ -427,7 +427,7 @@ public abstract class MetaModelSearchDslImpl<T, C extends MetaModelSearchDsl<T, 
 
     String queryParametersToString(final boolean urlEncoded) {
         final UrlQueryBuilder builder = UrlQueryBuilder.of();
-        Optional.ofNullable(text()).ifPresent(t -> builder.add(TEXT + "." + t.getLocale().getLanguage(), t.getValue(), urlEncoded));
+        Optional.ofNullable(text()).ifPresent(t -> builder.add(TEXT + "." + t.getLocale().toLanguageTag(), t.getValue(), urlEncoded));
         facets().forEach(f -> builder.add(FACET, f.expression(), urlEncoded));
         Optional.ofNullable(isFuzzy()).ifPresent(b -> builder.add(FUZZY, b.toString(), urlEncoded));
         resultFilters().forEach(f -> builder.add(FILTER_RESULTS, f.expression(), urlEncoded));
