@@ -5473,7 +5473,7 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/inventory/commands/InventoryEntryCreateCommand.html" title="interface in io.sphere.sdk.inventory.commands"><span class="typeNameLink">InventoryEntryCreateCommand</span></a> - Interface in <a href="io/sphere/sdk/inventory/commands/package-summary.html">io.sphere.sdk.inventory.commands</a></dt>
 <dd>
-<div class="block"><div id="io-sphere-sdk-inventory-commands-InventoryEntryCreateCommandTest-execution--%s" class=code-example><pre><code class='java'>withChannelOfRole(client(), ChannelRole.INVENTORY_SUPPLY, channel -&gt; {
+<div class="block"><div id="io-sphere-sdk-inventory-commands-InventoryEntryCreateCommandTest-execution--%s" class=code-example><pre><code class='java'>withChannelOfRole(client(), INVENTORY_SUPPLY, channel -&gt; {
     final String sku = randomKey();
     final long quantityOnStock = 10;
     final ZonedDateTime expectedDelivery = tomorrowZonedDateTime();
