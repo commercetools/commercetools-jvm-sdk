@@ -3,13 +3,18 @@ package io.sphere.sdk.states.commands;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.states.State;
 import io.sphere.sdk.states.StateDraft;
+import io.sphere.sdk.states.StateFixtures;
 import io.sphere.sdk.states.StateType;
 import io.sphere.sdk.test.IntegrationTest;
+import io.sphere.sdk.test.JsonNodeReferenceResolver;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
 import static io.sphere.sdk.states.StateFixtures.cleanUpByKey;
+import static io.sphere.sdk.states.StateFixtures.withState;
+import static io.sphere.sdk.states.StateFixtures.withStateByBuilder;
+import static io.sphere.sdk.test.SphereTestUtils.draftFromJsonResource;
 import static java.util.Locale.ENGLISH;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -38,5 +43,22 @@ public class StateCreateCommandTest extends IntegrationTest {
         assertThat(state.getType()).isEqualTo(StateType.LINE_ITEM_STATE);
         assertThat(state.getDescription()).isEqualTo(description);
         assertThat(state.getName()).isEqualTo(name);
+    }
+
+    @Test
+    @SuppressWarnings({"varargs", "unchecked"})
+    public void createByJson() {
+        withStateByBuilder(client(), builder -> builder.type(StateType.PRODUCT_STATE), otherState -> {
+            final JsonNodeReferenceResolver referenceResolver = new JsonNodeReferenceResolver();
+            referenceResolver.addResourceByKey("other-state", otherState);
+            final StateDraft draft = draftFromJsonResource("drafts-tests/state.json", StateDraft.class, referenceResolver);
+            withState(client(), draft, state -> {
+                assertThat(state.getKey()).isEqualTo(KEY);
+                assertThat(state.getType()).isEqualTo(StateType.PRODUCT_STATE);
+                assertThat(state.isInitial()).isEqualTo(true);
+                assertThat(state.getTransitions()).hasSize(1);
+            });
+        });
+
     }
 }

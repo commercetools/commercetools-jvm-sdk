@@ -45,6 +45,10 @@ public class StateFixtures {
     public static void withStateByBuilder(final BlockingSphereClient client, final UnaryOperator<StateDraftBuilder> drafting, final Consumer<State> consumer) {
         final StateDraftBuilder stateDraftBuilder = StateDraftBuilder.of(createStateDraft(randomKey()));
         final StateDraft stateDraft = drafting.apply(stateDraftBuilder).build();
+        withState(client, stateDraft, consumer);
+    }
+
+    public static void withState(final BlockingSphereClient client, final StateDraft stateDraft, final Consumer<State> consumer) {
         final State state = client.executeBlocking(StateCreateCommand.of(stateDraft));
         consumer.accept(state);
         client.executeBlocking(StateDeleteCommand.of(state));
