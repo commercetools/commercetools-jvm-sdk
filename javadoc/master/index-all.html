@@ -85,6 +85,8 @@
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/http/HttpStatusCode.html#ACCEPTED_202">ACCEPTED_202</a></span> - Static variable in class io.sphere.sdk.http.<a href="io/sphere/sdk/http/HttpStatusCode.html" title="class in io.sphere.sdk.http">HttpStatusCode</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/cartdiscounts/CartDiscountDraftBuilder.html#active-boolean-">active(boolean)</a></span> - Method in class io.sphere.sdk.cartdiscounts.<a href="io/sphere/sdk/cartdiscounts/CartDiscountDraftBuilder.html" title="class in io.sphere.sdk.cartdiscounts">CartDiscountDraftBuilder</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/productdiscounts/queries/ProductDiscountQueryModel.html#active--">active()</a></span> - Method in class io.sphere.sdk.productdiscounts.queries.<a href="io/sphere/sdk/productdiscounts/queries/ProductDiscountQueryModel.html" title="class in io.sphere.sdk.productdiscounts.queries">ProductDiscountQueryModel</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/http/UrlQueryBuilder.html#add-java.lang.String-java.lang.String-">add(String, String)</a></span> - Method in class io.sphere.sdk.http.<a href="io/sphere/sdk/http/UrlQueryBuilder.html" title="class in io.sphere.sdk.http">UrlQueryBuilder</a></dt>
@@ -5471,7 +5473,7 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/inventory/commands/InventoryEntryCreateCommand.html" title="interface in io.sphere.sdk.inventory.commands"><span class="typeNameLink">InventoryEntryCreateCommand</span></a> - Interface in <a href="io/sphere/sdk/inventory/commands/package-summary.html">io.sphere.sdk.inventory.commands</a></dt>
 <dd>
-<div class="block"><div id="io-sphere-sdk-inventory-commands-InventoryEntryCreateCommandTest-execution--%s" class=code-example><pre><code class='java'>withChannelOfRole(client(), ChannelRole.INVENTORY_SUPPLY, channel -&gt; {
+<div class="block"><div id="io-sphere-sdk-inventory-commands-InventoryEntryCreateCommandTest-execution--%s" class=code-example><pre><code class='java'>withChannelOfRole(client(), INVENTORY_SUPPLY, channel -&gt; {
     final String sku = randomKey();
     final long quantityOnStock = 10;
     final ZonedDateTime expectedDelivery = tomorrowZonedDateTime();
@@ -6428,6 +6430,8 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/types/queries/TypeQueryModel.html#key--">key()</a></span> - Method in class io.sphere.sdk.types.queries.<a href="io/sphere/sdk/types/queries/TypeQueryModel.html" title="class in io.sphere.sdk.types.queries">TypeQueryModel</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/types/TypeDraftBuilder.html#key-java.lang.String-">key(String)</a></span> - Method in class io.sphere.sdk.types.<a href="io/sphere/sdk/types/TypeDraftBuilder.html" title="class in io.sphere.sdk.types">TypeDraftBuilder</a></dt>
+<dd>&nbsp;</dd>
 </dl>
 <a name="I:L">
 <!--   -->
@@ -7026,6 +7030,8 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/payments/PaymentMethodInfoBuilder.html#name-io.sphere.sdk.models.LocalizedString-">name(LocalizedString)</a></span> - Method in class io.sphere.sdk.payments.<a href="io/sphere/sdk/payments/PaymentMethodInfoBuilder.html" title="class in io.sphere.sdk.payments">PaymentMethodInfoBuilder</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/payments/queries/PaymentMethodInfoQueryModel.html#name--">name()</a></span> - Method in interface io.sphere.sdk.payments.queries.<a href="io/sphere/sdk/payments/queries/PaymentMethodInfoQueryModel.html" title="interface in io.sphere.sdk.payments.queries">PaymentMethodInfoQueryModel</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/productdiscounts/queries/ProductDiscountQueryModel.html#name--">name()</a></span> - Method in class io.sphere.sdk.productdiscounts.queries.<a href="io/sphere/sdk/productdiscounts/queries/ProductDiscountQueryModel.html" title="class in io.sphere.sdk.productdiscounts.queries">ProductDiscountQueryModel</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/queries/PartialProductDataQueryModel.html#name--">name()</a></span> - Method in class io.sphere.sdk.products.queries.<a href="io/sphere/sdk/products/queries/PartialProductDataQueryModel.html" title="class in io.sphere.sdk.products.queries">PartialProductDataQueryModel</a></dt>
 <dd>&nbsp;</dd>
@@ -8673,6 +8679,10 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/cartdiscounts/CartDiscountValue.html#ofAbsolute-javax.money.MonetaryAmount-">ofAbsolute(MonetaryAmount)</a></span> - Static method in interface io.sphere.sdk.cartdiscounts.<a href="io/sphere/sdk/cartdiscounts/CartDiscountValue.html" title="interface in io.sphere.sdk.cartdiscounts">CartDiscountValue</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/productdiscounts/ProductDiscountValue.html#ofAbsolute-java.util.List-">ofAbsolute(List&lt;MonetaryAmount&gt;)</a></span> - Static method in interface io.sphere.sdk.productdiscounts.<a href="io/sphere/sdk/productdiscounts/ProductDiscountValue.html" title="interface in io.sphere.sdk.productdiscounts">ProductDiscountValue</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/productdiscounts/ProductDiscountValue.html#ofAbsolute-javax.money.MonetaryAmount-">ofAbsolute(MonetaryAmount)</a></span> - Static method in interface io.sphere.sdk.productdiscounts.<a href="io/sphere/sdk/productdiscounts/ProductDiscountValue.html" title="interface in io.sphere.sdk.productdiscounts">ProductDiscountValue</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/customers/commands/updateactions/SetDefaultBillingAddress.html#ofAddress-io.sphere.sdk.models.Address-">ofAddress(Address)</a></span> - Static method in class io.sphere.sdk.customers.commands.updateactions.<a href="io/sphere/sdk/customers/commands/updateactions/SetDefaultBillingAddress.html" title="class in io.sphere.sdk.customers.commands.updateactions">SetDefaultBillingAddress</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/customers/commands/updateactions/SetDefaultShippingAddress.html#ofAddress-io.sphere.sdk.models.Address-">ofAddress(Address)</a></span> - Static method in class io.sphere.sdk.customers.commands.updateactions.<a href="io/sphere/sdk/customers/commands/updateactions/SetDefaultShippingAddress.html" title="class in io.sphere.sdk.customers.commands.updateactions">SetDefaultShippingAddress</a></dt>
@@ -8787,6 +8797,8 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/attributes/AttributeAccess.html#ofDouble--">ofDouble()</a></span> - Static method in interface io.sphere.sdk.products.attributes.<a href="io/sphere/sdk/products/attributes/AttributeAccess.html" title="interface in io.sphere.sdk.products.attributes">AttributeAccess</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/attributes/AttributeAccess.html#ofDoubleSet--">ofDoubleSet()</a></span> - Static method in interface io.sphere.sdk.products.attributes.<a href="io/sphere/sdk/products/attributes/AttributeAccess.html" title="interface in io.sphere.sdk.products.attributes">AttributeAccess</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/models/LocalizedString.html#ofEnglish-java.lang.String-">ofEnglish(String)</a></span> - Static method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/LocalizedString.html" title="class in io.sphere.sdk.models">LocalizedString</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/LocalizedString.html#ofEnglishLocale-java.lang.String-">ofEnglishLocale(String)</a></span> - Static method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/LocalizedString.html" title="class in io.sphere.sdk.models">LocalizedString</a></dt>
 <dd>
@@ -9105,6 +9117,8 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/search/ProductAttributeFilterSearchModel.html#ofReferenceSet-java.lang.String-">ofReferenceSet(String)</a></span> - Method in class io.sphere.sdk.products.search.<a href="io/sphere/sdk/products/search/ProductAttributeFilterSearchModel.html" title="class in io.sphere.sdk.products.search">ProductAttributeFilterSearchModel</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/cartdiscounts/CartDiscountValue.html#ofRelative-int-">ofRelative(int)</a></span> - Static method in interface io.sphere.sdk.cartdiscounts.<a href="io/sphere/sdk/cartdiscounts/CartDiscountValue.html" title="interface in io.sphere.sdk.cartdiscounts">CartDiscountValue</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/productdiscounts/ProductDiscountValue.html#ofRelative-int-">ofRelative(int)</a></span> - Static method in interface io.sphere.sdk.productdiscounts.<a href="io/sphere/sdk/productdiscounts/ProductDiscountValue.html" title="interface in io.sphere.sdk.productdiscounts">ProductDiscountValue</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/commands/updateactions/SetShippingMethod.html#ofRemove--">ofRemove()</a></span> - Static method in class io.sphere.sdk.carts.commands.updateactions.<a href="io/sphere/sdk/carts/commands/updateactions/SetShippingMethod.html" title="class in io.sphere.sdk.carts.commands.updateactions">SetShippingMethod</a></dt>
 <dd>&nbsp;</dd>
@@ -10603,6 +10617,8 @@ CompletionStage&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execu
 </dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/json/SphereJsonUtils.html#readObjectFromResource-java.lang.String-com.fasterxml.jackson.databind.JavaType-">readObjectFromResource(String, JavaType)</a></span> - Static method in class io.sphere.sdk.json.<a href="io/sphere/sdk/json/SphereJsonUtils.html" title="class in io.sphere.sdk.json">SphereJsonUtils</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/json/SphereJsonUtils.html#readObjectFromResource-java.lang.String-java.lang.Class-">readObjectFromResource(String, Class&lt;T&gt;)</a></span> - Static method in class io.sphere.sdk.json.<a href="io/sphere/sdk/json/SphereJsonUtils.html" title="class in io.sphere.sdk.json">SphereJsonUtils</a></dt>
+<dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/carts/commands/updateactions/Recalculate.html" title="class in io.sphere.sdk.carts.commands.updateactions"><span class="typeNameLink">Recalculate</span></a> - Class in <a href="io/sphere/sdk/carts/commands/updateactions/package-summary.html">io.sphere.sdk.carts.commands.updateactions</a></dt>
 <dd>
 <div class="block">Updates tax rates and prices.</div>
@@ -10852,6 +10868,8 @@ CompletionStage&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execu
 <dt><a href="io/sphere/sdk/models/errors/RequiredField.html" title="class in io.sphere.sdk.models.errors"><span class="typeNameLink">RequiredField</span></a> - Class in <a href="io/sphere/sdk/models/errors/package-summary.html">io.sphere.sdk.models.errors</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/utils/IterableUtils.html#requireNonEmpty-java.lang.Iterable-">requireNonEmpty(Iterable&lt;T&gt;)</a></span> - Static method in class io.sphere.sdk.utils.<a href="io/sphere/sdk/utils/IterableUtils.html" title="class in io.sphere.sdk.utils">IterableUtils</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/cartdiscounts/CartDiscountDraftBuilder.html#requiresDiscountCode-boolean-">requiresDiscountCode(boolean)</a></span> - Method in class io.sphere.sdk.cartdiscounts.<a href="io/sphere/sdk/cartdiscounts/CartDiscountDraftBuilder.html" title="class in io.sphere.sdk.cartdiscounts">CartDiscountDraftBuilder</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/messages/expansion/MessageExpansionModel.html#resource--">resource()</a></span> - Method in class io.sphere.sdk.messages.expansion.<a href="io/sphere/sdk/messages/expansion/MessageExpansionModel.html" title="class in io.sphere.sdk.messages.expansion">MessageExpansionModel</a></dt>
 <dd>&nbsp;</dd>

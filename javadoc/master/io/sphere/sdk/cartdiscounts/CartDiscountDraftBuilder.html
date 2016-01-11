@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":9,"i6":10,"i7":10,"i8":10,"i9":10};
+var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":9,"i7":10,"i8":10,"i9":10,"i10":10,"i11":10};
 var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -139,28 +139,32 @@ implements <a href="../../../../io/sphere/sdk/models/Builder.html" title="interf
 <th class="colLast" scope="col">Method and Description</th>
 </tr>
 <tr id="i0" class="altColor">
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/cartdiscounts/CartDiscountDraftBuilder.html" title="class in io.sphere.sdk.cartdiscounts">CartDiscountDraftBuilder</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/cartdiscounts/CartDiscountDraftBuilder.html#active-boolean-">active</a></span>(boolean&nbsp;isActive)</code>&nbsp;</td>
+</tr>
+<tr id="i1" class="rowColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/cartdiscounts/CartDiscountDraft.html" title="class in io.sphere.sdk.cartdiscounts">CartDiscountDraft</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/cartdiscounts/CartDiscountDraftBuilder.html#build--">build</a></span>()</code>
 <div class="block">Creates a new instance of T with the values of this builder.</div>
 </td>
 </tr>
-<tr id="i1" class="rowColor">
+<tr id="i2" class="altColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/cartdiscounts/CartDiscountDraftBuilder.html" title="class in io.sphere.sdk.cartdiscounts">CartDiscountDraftBuilder</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/cartdiscounts/CartDiscountDraftBuilder.html#cartPredicate-io.sphere.sdk.cartdiscounts.CartDiscountPredicate-">cartPredicate</a></span>(<a href="../../../../io/sphere/sdk/cartdiscounts/CartDiscountPredicate.html" title="interface in io.sphere.sdk.cartdiscounts">CartDiscountPredicate</a>&nbsp;cartPredicate)</code>&nbsp;</td>
 </tr>
-<tr id="i2" class="altColor">
+<tr id="i3" class="rowColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/cartdiscounts/CartDiscountDraftBuilder.html" title="class in io.sphere.sdk.cartdiscounts">CartDiscountDraftBuilder</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/cartdiscounts/CartDiscountDraftBuilder.html#description-io.sphere.sdk.models.LocalizedString-">description</a></span>(<a href="../../../../io/sphere/sdk/models/LocalizedString.html" title="class in io.sphere.sdk.models">LocalizedString</a>&nbsp;description)</code>&nbsp;</td>
 </tr>
-<tr id="i3" class="rowColor">
-<td class="colFirst"><code><a href="../../../../io/sphere/sdk/cartdiscounts/CartDiscountDraftBuilder.html" title="class in io.sphere.sdk.cartdiscounts">CartDiscountDraftBuilder</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/cartdiscounts/CartDiscountDraftBuilder.html#isActive-boolean-">isActive</a></span>(boolean&nbsp;isActive)</code>&nbsp;</td>
-</tr>
 <tr id="i4" class="altColor">
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/cartdiscounts/CartDiscountDraftBuilder.html" title="class in io.sphere.sdk.cartdiscounts">CartDiscountDraftBuilder</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/cartdiscounts/CartDiscountDraftBuilder.html#isActive-boolean-">isActive</a></span>(boolean&nbsp;active)</code>&nbsp;</td>
+</tr>
+<tr id="i5" class="rowColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/cartdiscounts/CartDiscountDraftBuilder.html" title="class in io.sphere.sdk.cartdiscounts">CartDiscountDraftBuilder</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/cartdiscounts/CartDiscountDraftBuilder.html#name-io.sphere.sdk.models.LocalizedString-">name</a></span>(<a href="../../../../io/sphere/sdk/models/LocalizedString.html" title="class in io.sphere.sdk.models">LocalizedString</a>&nbsp;name)</code>&nbsp;</td>
 </tr>
-<tr id="i5" class="rowColor">
+<tr id="i6" class="altColor">
 <td class="colFirst"><code>static <a href="../../../../io/sphere/sdk/cartdiscounts/CartDiscountDraftBuilder.html" title="class in io.sphere.sdk.cartdiscounts">CartDiscountDraftBuilder</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/cartdiscounts/CartDiscountDraftBuilder.html#of-io.sphere.sdk.models.LocalizedString-io.sphere.sdk.cartdiscounts.CartDiscountPredicate-io.sphere.sdk.cartdiscounts.CartDiscountValue-io.sphere.sdk.cartdiscounts.CartDiscountTarget-java.lang.String-boolean-">of</a></span>(<a href="../../../../io/sphere/sdk/models/LocalizedString.html" title="class in io.sphere.sdk.models">LocalizedString</a>&nbsp;name,
   <a href="../../../../io/sphere/sdk/cartdiscounts/CartDiscountPredicate.html" title="interface in io.sphere.sdk.cartdiscounts">CartDiscountPredicate</a>&nbsp;cartPredicate,
@@ -169,19 +173,23 @@ implements <a href="../../../../io/sphere/sdk/models/Builder.html" title="interf
   java.lang.String&nbsp;sortOrder,
   boolean&nbsp;requiresDiscountCode)</code>&nbsp;</td>
 </tr>
-<tr id="i6" class="altColor">
-<td class="colFirst"><code><a href="../../../../io/sphere/sdk/cartdiscounts/CartDiscountDraftBuilder.html" title="class in io.sphere.sdk.cartdiscounts">CartDiscountDraftBuilder</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/cartdiscounts/CartDiscountDraftBuilder.html#target-io.sphere.sdk.cartdiscounts.CartDiscountTarget-">target</a></span>(<a href="../../../../io/sphere/sdk/cartdiscounts/CartDiscountTarget.html" title="interface in io.sphere.sdk.cartdiscounts">CartDiscountTarget</a>&nbsp;target)</code>&nbsp;</td>
-</tr>
 <tr id="i7" class="rowColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/cartdiscounts/CartDiscountDraftBuilder.html" title="class in io.sphere.sdk.cartdiscounts">CartDiscountDraftBuilder</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/cartdiscounts/CartDiscountDraftBuilder.html#validFrom-java.time.ZonedDateTime-">validFrom</a></span>(java.time.ZonedDateTime&nbsp;validFrom)</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/cartdiscounts/CartDiscountDraftBuilder.html#requiresDiscountCode-boolean-">requiresDiscountCode</a></span>(boolean&nbsp;requiresDiscountCode)</code>&nbsp;</td>
 </tr>
 <tr id="i8" class="altColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/cartdiscounts/CartDiscountDraftBuilder.html" title="class in io.sphere.sdk.cartdiscounts">CartDiscountDraftBuilder</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/cartdiscounts/CartDiscountDraftBuilder.html#validUntil-java.time.ZonedDateTime-">validUntil</a></span>(java.time.ZonedDateTime&nbsp;validUntil)</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/cartdiscounts/CartDiscountDraftBuilder.html#target-io.sphere.sdk.cartdiscounts.CartDiscountTarget-">target</a></span>(<a href="../../../../io/sphere/sdk/cartdiscounts/CartDiscountTarget.html" title="interface in io.sphere.sdk.cartdiscounts">CartDiscountTarget</a>&nbsp;target)</code>&nbsp;</td>
 </tr>
 <tr id="i9" class="rowColor">
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/cartdiscounts/CartDiscountDraftBuilder.html" title="class in io.sphere.sdk.cartdiscounts">CartDiscountDraftBuilder</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/cartdiscounts/CartDiscountDraftBuilder.html#validFrom-java.time.ZonedDateTime-">validFrom</a></span>(java.time.ZonedDateTime&nbsp;validFrom)</code>&nbsp;</td>
+</tr>
+<tr id="i10" class="altColor">
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/cartdiscounts/CartDiscountDraftBuilder.html" title="class in io.sphere.sdk.cartdiscounts">CartDiscountDraftBuilder</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/cartdiscounts/CartDiscountDraftBuilder.html#validUntil-java.time.ZonedDateTime-">validUntil</a></span>(java.time.ZonedDateTime&nbsp;validUntil)</code>&nbsp;</td>
+</tr>
+<tr id="i11" class="rowColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/cartdiscounts/CartDiscountDraftBuilder.html" title="class in io.sphere.sdk.cartdiscounts">CartDiscountDraftBuilder</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/cartdiscounts/CartDiscountDraftBuilder.html#value-io.sphere.sdk.cartdiscounts.CartDiscountValue-">value</a></span>(<a href="../../../../io/sphere/sdk/cartdiscounts/CartDiscountValue.html" title="interface in io.sphere.sdk.cartdiscounts">CartDiscountValue</a>&nbsp;value)</code>&nbsp;</td>
 </tr>
@@ -245,6 +253,15 @@ implements <a href="../../../../io/sphere/sdk/models/Builder.html" title="interf
                                             <a href="../../../../io/sphere/sdk/models/LocalizedString.html" title="class in io.sphere.sdk.models">LocalizedString</a>&nbsp;description)</pre>
 </li>
 </ul>
+<a name="requiresDiscountCode-boolean-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>requiresDiscountCode</h4>
+<pre>public&nbsp;<a href="../../../../io/sphere/sdk/cartdiscounts/CartDiscountDraftBuilder.html" title="class in io.sphere.sdk.cartdiscounts">CartDiscountDraftBuilder</a>&nbsp;requiresDiscountCode(boolean&nbsp;requiresDiscountCode)</pre>
+</li>
+</ul>
 <a name="value-io.sphere.sdk.cartdiscounts.CartDiscountValue-">
 <!--   -->
 </a>
@@ -272,13 +289,22 @@ implements <a href="../../../../io/sphere/sdk/models/Builder.html" title="interf
 <pre>public&nbsp;<a href="../../../../io/sphere/sdk/cartdiscounts/CartDiscountDraftBuilder.html" title="class in io.sphere.sdk.cartdiscounts">CartDiscountDraftBuilder</a>&nbsp;name(<a href="../../../../io/sphere/sdk/models/LocalizedString.html" title="class in io.sphere.sdk.models">LocalizedString</a>&nbsp;name)</pre>
 </li>
 </ul>
+<a name="active-boolean-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>active</h4>
+<pre>public&nbsp;<a href="../../../../io/sphere/sdk/cartdiscounts/CartDiscountDraftBuilder.html" title="class in io.sphere.sdk.cartdiscounts">CartDiscountDraftBuilder</a>&nbsp;active(boolean&nbsp;isActive)</pre>
+</li>
+</ul>
 <a name="isActive-boolean-">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
 <h4>isActive</h4>
-<pre>public&nbsp;<a href="../../../../io/sphere/sdk/cartdiscounts/CartDiscountDraftBuilder.html" title="class in io.sphere.sdk.cartdiscounts">CartDiscountDraftBuilder</a>&nbsp;isActive(boolean&nbsp;isActive)</pre>
+<pre>public&nbsp;<a href="../../../../io/sphere/sdk/cartdiscounts/CartDiscountDraftBuilder.html" title="class in io.sphere.sdk.cartdiscounts">CartDiscountDraftBuilder</a>&nbsp;isActive(boolean&nbsp;active)</pre>
 </li>
 </ul>
 <a name="cartPredicate-io.sphere.sdk.cartdiscounts.CartDiscountPredicate-">
