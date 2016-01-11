@@ -54,8 +54,6 @@ public abstract class ProductAttributeConverterBase<T> extends Base implements P
                 .ifIs(ofDateSet(), v -> convertDateSet(v, attribute, productType))
                 .ifIs(ofDateTime(), v -> convertDateTime(v, attribute, productType))
                 .ifIs(ofDateTimeSet(), v -> convertDateTimeSet(v, attribute, productType))
-                .ifIs(ofDouble(), v -> convertDouble(v, attribute, productType), value -> isDouble(attribute, productType))
-                .ifIs(ofDoubleSet(), v -> convertDoubleSet(v, attribute, productType), value -> isDoubleSet(attribute, productType))
                 .ifIs(ofEnumValue(), v -> convertEnumValue(v, attribute, productType))
                 .ifIs(ofEnumValueSet(), v -> convertEnumValueSet(v, attribute, productType))
                 .ifIs(ofInteger(), v -> convertInteger(v, attribute, productType), value -> isInteger(attribute, productType))
@@ -78,6 +76,11 @@ public abstract class ProductAttributeConverterBase<T> extends Base implements P
                 .ifIs(ofStringSet(), v -> convertStringSet(v, attribute, productType))
                 .ifIs(ofTime(), v -> convertTime(v, attribute, productType))
                 .ifIs(ofTimeSet(), v -> convertTimeSet(v, attribute, productType))
+
+                //double is fallback if not int or long are used
+                .ifIs(ofDouble(), v -> convertDouble(v, attribute, productType))
+                .ifIs(ofDoubleSet(), v -> convertDoubleSet(v, attribute, productType))
+
                 .findValue()
                 .orElse(null);
     }
@@ -126,10 +129,6 @@ public abstract class ProductAttributeConverterBase<T> extends Base implements P
         return Collections.emptyList();
     }
 
-    protected Collection<String> doubleAttributes() {
-        return Collections.emptyList();
-    }
-
     protected Collection<String> integerSetAttributes() {
         return Collections.emptyList();
     }
@@ -168,14 +167,6 @@ public abstract class ProductAttributeConverterBase<T> extends Base implements P
 
     protected boolean isLong(final Attribute attribute, final ProductType productType) {
         return longAttributes().contains(attribute.getName());
-    }
-
-    protected boolean isDoubleSet(final Attribute attribute, final ProductType productType) {
-        return doubleSetAttributes().contains(attribute.getName());
-    }
-
-    protected boolean isDouble(final Attribute attribute, final ProductType productType) {
-        return doubleAttributes().contains(attribute.getName());
     }
 
     @Nullable
