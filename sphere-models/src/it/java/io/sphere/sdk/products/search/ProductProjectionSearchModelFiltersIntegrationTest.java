@@ -126,7 +126,7 @@ public class ProductProjectionSearchModelFiltersIntegrationTest extends ProductP
 
     @Test
     public void onReferenceAttributes() throws Exception {
-        testProductIds(FILTER.allVariants().attribute().ofReference(ATTR_NAME_REF).id().by(productSomeId.getId()),
+        testProductIds(FILTER.allVariants().attribute().ofReference(ATTR_NAME_REF).id().by(productA.getId()),
                 ids -> assertThat(ids).containsOnly(product1.getId()));
     }
 
@@ -240,7 +240,7 @@ public class ProductProjectionSearchModelFiltersIntegrationTest extends ProductP
 
     @Test
     public void onReferenceSetAttributes() throws Exception {
-        testProductIds(FILTER.allVariants().attribute().ofReferenceSet(ATTR_NAME_REF_SET).id().by(productOtherId.getId()),
+        testProductIds(FILTER.allVariants().attribute().ofReferenceSet(ATTR_NAME_REF_SET).id().by(productB.getId()),
                 ids -> assertThat(ids).containsOnly(product1.getId()));
     }
 

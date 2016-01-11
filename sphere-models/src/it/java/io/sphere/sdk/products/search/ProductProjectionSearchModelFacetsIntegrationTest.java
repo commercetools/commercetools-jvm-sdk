@@ -196,8 +196,8 @@ public class ProductProjectionSearchModelFacetsIntegrationTest extends ProductPr
     public void onReferenceAttributes() throws Exception {
         testTermStats(FACET.allVariants().attribute().ofReference(ATTR_NAME_REF).id().allTerms(),
                 termStats -> assertThat(termStats).containsOnly(
-                        TermStats.of(productSomeId.getId(), 1L),
-                        TermStats.of(productOtherId.getId(), 1L)));
+                        TermStats.of(productA.getId(), 1L),
+                        TermStats.of(productB.getId(), 1L)));
     }
 
     @Test
@@ -378,8 +378,8 @@ public class ProductProjectionSearchModelFacetsIntegrationTest extends ProductPr
     public void onReferenceSetAttributes() throws Exception {
         testTermStats(FACET.allVariants().attribute().ofReferenceSet(ATTR_NAME_REF_SET).id().allTerms(),
                 termStats -> assertThat(termStats).containsExactly(
-                        TermStats.of(productSomeId.getId(), 2L),
-                        TermStats.of(productOtherId.getId(), 1L)));
+                        TermStats.of(productA.getId(), 2L),
+                        TermStats.of(productB.getId(), 1L)));
     }
 
     private static void testTermStats(final TermFacetExpression<ProductProjection> facetExpr,

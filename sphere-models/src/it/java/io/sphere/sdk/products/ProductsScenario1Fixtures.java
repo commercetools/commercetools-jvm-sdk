@@ -51,7 +51,7 @@ import static java.util.stream.Collectors.toList;
  * date             | 2001-09-11                    | 2002-10-12
  * time             | 22:05:09.203                  | 23:06:10.204
  * dateTime         | 2001-09-11T22:05:09.203+00:00 | 2002-10-12T23:06:10.204+00:00
- * reference        | productSomeId                 | productOtherId
+ * reference        | productA                      | productB
  * boolean Set      | true, false                   | true
  * text Set         | foo, bar                      | foo
  * locText Set      | en: foo, en: bar              | en: foo
@@ -62,11 +62,11 @@ import static java.util.stream.Collectors.toList;
  * date Set         | 2001-09-11, 2002-10-12        | 2001-09-11
  * time Set         | 22:05:09.203, 23:06:10.204    | 22:05:09.203
  * dateTime Set     | 2001-..T22:.., 2002-..T23:..  | 2001-..T22:..
- * reference Set    | productSomeId, productOtherId | productSomeId
+ * reference Set    | productA, productB            | productA
  *
  */
 public class ProductsScenario1Fixtures {
-    public static final String PRODUCT_TYPE_NAME = "ProductSearchTypeIT2";
+    public static final String PRODUCT_TYPE_NAME = "ProductSearchTypeIT3";
     public static final String SKU1 = PRODUCT_TYPE_NAME + "-sku1";
     public static final String SKU2 = PRODUCT_TYPE_NAME + "-sku2";
     public static final String SKU_SOME_ID = PRODUCT_TYPE_NAME + "-sku-some-id";
@@ -171,11 +171,11 @@ public class ProductsScenario1Fixtures {
         final Function<String, Optional<Product>> findBySku =
                 sku -> products.stream().filter(p -> sku.equals(p.getMasterData().getStaged().getMasterVariant().getSku())).findFirst();
 
-        final Product productSomeId = findBySku.apply(SKU_SOME_ID).orElseGet(() -> createTestProduct(client, "Some Id", ProductVariantDraftBuilder.of().sku(SKU_SOME_ID).build(), productType));
-        final Product productOtherId = findBySku.apply(SKU_OTHER_ID).orElseGet(() -> createTestProduct(client, "Other Id", ProductVariantDraftBuilder.of().sku(SKU_OTHER_ID).build(), productType));
-        final Product product1 = findBySku.apply(SKU1).orElseGet(() -> createProduct1(client, productSomeId, productOtherId, productType));
-        final Product product2 = findBySku.apply(SKU2).orElseGet(() -> createProduct2(client, productSomeId, productOtherId, productType));
-        final Data data = new Data(productType, product1, product2, productSomeId, productOtherId);
+        final Product productA = findBySku.apply(SKU_SOME_ID).orElseGet(() -> createTestProduct(client, "Some Id", ProductVariantDraftBuilder.of().sku(SKU_SOME_ID).build(), productType));
+        final Product productB = findBySku.apply(SKU_OTHER_ID).orElseGet(() -> createTestProduct(client, "Other Id", ProductVariantDraftBuilder.of().sku(SKU_OTHER_ID).build(), productType));
+        final Product product1 = findBySku.apply(SKU1).orElseGet(() -> createProduct1(client, productA, productB, productType));
+        final Product product2 = findBySku.apply(SKU2).orElseGet(() -> createProduct2(client, productA, productB, productType));
+        final Data data = new Data(productType, product1, product2, productA, productB);
         return data;
     }
 
@@ -187,7 +187,7 @@ public class ProductsScenario1Fixtures {
         client.executeBlocking(ProductTypeDeleteCommand.of(data.getProductType()));
     }
 
-    public static Product createProduct1(final BlockingSphereClient client, final Referenceable<Product> referencedProduct1, final Referenceable<Product> referencedProduct2, final Referenceable<ProductType> productTypeReferenceable) {
+    public static Product createProduct1(final BlockingSphereClient client, final Referenceable<Product> referencedProductA, final Referenceable<Product> referencedProductB, final Referenceable<ProductType> productTypeReferenceable) {
         final ProductVariantDraft masterVariant = ProductVariantDraftBuilder.of()
                 .attributes(
                         AttributeAccess.ofBoolean().ofName(ATTR_NAME_BOOLEAN).draftOf(true),
@@ -201,7 +201,7 @@ public class ProductsScenario1Fixtures {
                         AttributeAccess.ofDate().ofName(ATTR_NAME_DATE).draftOf(DATE_2001),
                         AttributeAccess.ofTime().ofName(ATTR_NAME_TIME).draftOf(TIME_22H),
                         AttributeAccess.ofDateTime().ofName(ATTR_NAME_DATE_TIME).draftOf(DATE_TIME_2001_22H),
-                        AttributeAccess.ofProductReference().ofName(ATTR_NAME_REF).draftOf(referencedProduct1.toReference()),
+                        AttributeAccess.ofProductReference().ofName(ATTR_NAME_REF).draftOf(referencedProductA.toReference()),
                         AttributeAccess.ofBooleanSet().ofName(ATTR_NAME_BOOLEAN_SET).draftOf(asSet(true, false)),
                         AttributeAccess.ofStringSet().ofName(ATTR_NAME_TEXT_SET).draftOf(asSet(TEXT_FOO, TEXT_BAR)),
                         AttributeAccess.ofLocalizedStringSet().ofName(ATTR_NAME_LOC_TEXT_SET).draftOf(asSet(LOC_TEXT_FOO, LOC_TEXT_BAR)),
@@ -212,14 +212,14 @@ public class ProductsScenario1Fixtures {
                         AttributeAccess.ofDateSet().ofName(ATTR_NAME_DATE_SET).draftOf(asSet(DATE_2001, DATE_2002)),
                         AttributeAccess.ofTimeSet().ofName(ATTR_NAME_TIME_SET).draftOf(asSet(TIME_22H, TIME_23H)),
                         AttributeAccess.ofDateTimeSet().ofName(ATTR_NAME_DATE_TIME_SET).draftOf(asSet(DATE_TIME_2001_22H, DATE_TIME_2002_23H)),
-                        AttributeAccess.ofProductReferenceSet().ofName(ATTR_NAME_REF_SET).draftOf(asSet(referencedProduct1.toReference(), referencedProduct2.toReference())))
+                        AttributeAccess.ofProductReferenceSet().ofName(ATTR_NAME_REF_SET).draftOf(asSet(referencedProductA.toReference(), referencedProductB.toReference())))
                 .price(PriceDraft.of(new BigDecimal("23.45"), EUR))
                 .sku(SKU1)
                 .build();
         return createTestProduct(client, "Product one", masterVariant, productTypeReferenceable);
     }
 
-    public static Product createProduct2(final BlockingSphereClient client, final Referenceable<Product> referencedProduct1, final Referenceable<Product> referencedProduct2, final Referenceable<ProductType> productTypeReferenceable) {
+    public static Product createProduct2(final BlockingSphereClient client, final Referenceable<Product> referencedProductA, final Referenceable<Product> referencedProductB, final Referenceable<ProductType> productTypeReferenceable) {
         final ProductVariantDraft masterVariant = ProductVariantDraftBuilder.of()
                 .attributes(
                         AttributeAccess.ofBoolean().ofName(ATTR_NAME_BOOLEAN).draftOf(false),
@@ -232,7 +232,7 @@ public class ProductsScenario1Fixtures {
                         AttributeAccess.ofDate().ofName(ATTR_NAME_DATE).draftOf(DATE_2002),
                         AttributeAccess.ofTime().ofName(ATTR_NAME_TIME).draftOf(TIME_23H),
                         AttributeAccess.ofDateTime().ofName(ATTR_NAME_DATE_TIME).draftOf(DATE_TIME_2002_23H),
-                        AttributeAccess.ofProductReference().ofName(ATTR_NAME_REF).draftOf(referencedProduct1.toReference()),
+                        AttributeAccess.ofProductReference().ofName(ATTR_NAME_REF).draftOf(referencedProductB.toReference()),
                         AttributeAccess.ofBooleanSet().ofName(ATTR_NAME_BOOLEAN_SET).draftOf(asSet(true)),
                         AttributeAccess.ofStringSet().ofName(ATTR_NAME_TEXT_SET).draftOf(asSet(TEXT_FOO)),
                         AttributeAccess.ofLocalizedStringSet().ofName(ATTR_NAME_LOC_TEXT_SET).draftOf(asSet(LOC_TEXT_FOO)),
@@ -243,7 +243,7 @@ public class ProductsScenario1Fixtures {
                         AttributeAccess.ofDateSet().ofName(ATTR_NAME_DATE_SET).draftOf(asSet(DATE_2001)),
                         AttributeAccess.ofTimeSet().ofName(ATTR_NAME_TIME_SET).draftOf(asSet(TIME_22H)),
                         AttributeAccess.ofDateTimeSet().ofName(ATTR_NAME_DATE_TIME_SET).draftOf(asSet(DATE_TIME_2001_22H)),
-                        AttributeAccess.ofProductReferenceSet().ofName(ATTR_NAME_REF_SET).draftOf(asSet(referencedProduct2.toReference())))
+                        AttributeAccess.ofProductReferenceSet().ofName(ATTR_NAME_REF_SET).draftOf(asSet(referencedProductA.toReference())))
                 .price(PriceDraft.of(new BigDecimal("46.80"), USD))
                 .sku(SKU2)
                 .build();

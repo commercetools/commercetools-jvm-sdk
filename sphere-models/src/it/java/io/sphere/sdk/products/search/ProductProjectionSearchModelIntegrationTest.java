@@ -18,11 +18,11 @@ import static io.sphere.sdk.products.ProductsScenario1Fixtures.Data;
 import static io.sphere.sdk.products.ProductsScenario1Fixtures.createScenario;
 import static io.sphere.sdk.test.SphereTestUtils.asList;
 
-public class ProductProjectionSearchModelIntegrationTest extends IntegrationTest {
+public abstract class ProductProjectionSearchModelIntegrationTest extends IntegrationTest {
     protected static Product product1;
     protected static Product product2;
-    protected static Product productSomeId;
-    protected static Product productOtherId;
+    protected static Product productA;
+    protected static Product productB;
     protected static ProductType productType;
 
     @Rule
@@ -32,8 +32,8 @@ public class ProductProjectionSearchModelIntegrationTest extends IntegrationTest
     public static void setupProducts() {
         final Data data = createScenario(client());
         productType = data.getProductType();
-        productSomeId = data.getReferencedProductA();
-        productOtherId = data.getReferencedProductB();
+        productA = data.getReferencedProductA();
+        productB = data.getReferencedProductB();
         product1 = data.getProduct1();
         product2 = data.getProduct2();
     }
