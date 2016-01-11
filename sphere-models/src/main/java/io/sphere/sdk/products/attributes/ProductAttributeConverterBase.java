@@ -137,10 +137,6 @@ public abstract class ProductAttributeConverterBase<T> extends Base implements P
         return Collections.emptyList();
     }
 
-    protected Collection<String> doubleSetAttributes() {
-        return Collections.emptyList();
-    }
-
     @Nullable
     protected abstract T convertIntegerSet(final Set<Integer> integerSet, final Attribute attribute, final ProductType productType);
 
