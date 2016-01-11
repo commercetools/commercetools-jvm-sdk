@@ -140,6 +140,11 @@ final public class SphereJsonUtils {
         });
     }
 
+    public static <T> T readObjectFromResource(final String resourcePath, final Class<T> clazz) {
+        final JavaType javaType = convertToJavaType(clazz);
+        return readObjectFromResource(resourcePath, javaType);
+    }
+
     /**
      * Reads a Java object from JSON data (String).
      *

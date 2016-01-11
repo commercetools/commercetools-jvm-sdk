@@ -7,6 +7,7 @@ import io.sphere.sdk.productdiscounts.commands.ProductDiscountDeleteCommand;
 import io.sphere.sdk.products.Product;
 
 import java.util.function.BiFunction;
+import java.util.function.Consumer;
 import java.util.function.Function;
 
 import static io.sphere.sdk.products.ProductFixtures.referenceableProduct;
@@ -35,4 +36,9 @@ public class ProductDiscountFixtures {
         client.executeBlocking(ProductDiscountDeleteCommand.of(updatedDiscount));
     }
 
+    public static void withProductDiscount(final BlockingSphereClient client, final ProductDiscountDraft draft, final Consumer<ProductDiscount> consumer) {
+        final ProductDiscount productDiscount = client.executeBlocking(ProductDiscountCreateCommand.of(draft));
+        consumer.accept(productDiscount);
+        client.executeBlocking(ProductDiscountDeleteCommand.of(productDiscount));
+    }
 }

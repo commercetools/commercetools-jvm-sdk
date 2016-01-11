@@ -1,5 +1,6 @@
 package io.sphere.sdk.cartdiscounts;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.LocalizedString;
 
@@ -25,8 +26,9 @@ public class CartDiscountDraft extends Base {
     private final ZonedDateTime validUntil;
     private final Boolean requiresDiscountCode;
 
-    CartDiscountDraft(final LocalizedString name, final CartDiscountPredicate cartDiscountPredicate, final LocalizedString description, final CartDiscountValue value, final CartDiscountTarget target, final String sortOrder, final Boolean isActive, final ZonedDateTime validFrom, final ZonedDateTime validUntil, final Boolean requiresDiscountCode) {
-        this.cartPredicate = cartDiscountPredicate.toSphereCartPredicate();
+    @JsonCreator
+    CartDiscountDraft(final LocalizedString name, final String cartPredicate, final LocalizedString description, final CartDiscountValue value, final CartDiscountTarget target, final String sortOrder, final Boolean isActive, final ZonedDateTime validFrom, final ZonedDateTime validUntil, final Boolean requiresDiscountCode) {
+        this.cartPredicate = cartPredicate;
         this.name = name;
         this.description = description;
         this.value = value;

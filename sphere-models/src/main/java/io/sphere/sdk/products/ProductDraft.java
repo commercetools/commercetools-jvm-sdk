@@ -1,5 +1,6 @@
 package io.sphere.sdk.products;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.models.*;
 import io.sphere.sdk.producttypes.ProductType;
@@ -17,6 +18,7 @@ import java.util.Set;
   @see ProductDraftBuilder
   @see io.sphere.sdk.products.commands.ProductCreateCommand
  */
+@JsonDeserialize(as = ProductDraftImpl.class)
 public interface ProductDraft extends WithLocalizedSlug, MetaAttributes {
 
 

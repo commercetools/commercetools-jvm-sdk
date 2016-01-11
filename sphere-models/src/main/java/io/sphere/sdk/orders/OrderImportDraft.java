@@ -1,5 +1,6 @@
 package io.sphere.sdk.orders;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.neovisionaries.i18n.CountryCode;
 import io.sphere.sdk.carts.TaxedPrice;
 import io.sphere.sdk.customergroups.CustomerGroup;
@@ -17,6 +18,7 @@ import java.util.List;
  *
  * @see OrderImportDraftBuilder
  */
+@JsonDeserialize(as = OrderImportDraftImpl.class)
 public interface OrderImportDraft {
     @Nullable
     Address getBillingAddress();

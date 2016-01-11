@@ -334,4 +334,8 @@ public class LocalizedString extends Base {
             }
         };
     }
+
+    public static LocalizedString ofEnglish(final String translationForEnglish) {
+        return LocalizedString.ofEnglishLocale(translationForEnglish);
+    }
 }

@@ -1,6 +1,7 @@
 package io.sphere.sdk.types.commands;
 
 import io.sphere.sdk.categories.Category;
+import io.sphere.sdk.json.SphereJsonUtils;
 import io.sphere.sdk.models.TextInputHint;
 import io.sphere.sdk.test.IntegrationTest;
 import io.sphere.sdk.types.FieldDefinition;
@@ -10,7 +11,9 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import static io.sphere.sdk.test.SphereTestUtils.ENGLISH;
 import static io.sphere.sdk.test.SphereTestUtils.en;
+import static io.sphere.sdk.types.TypeFixtures.withType;
 import static java.util.Collections.singleton;
 import static java.util.Collections.singletonList;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -39,5 +42,16 @@ public class TypeCreateCommandTest extends IntegrationTest {
         final TypeQuery typeQuery = TypeQuery.of().withPredicates(type -> type.key().is("type-key"));
         client().executeBlocking(typeQuery)
                 .getResults().forEach(type -> client().executeBlocking(TypeDeleteCommand.of(type)));
+    }
+
+    @Test
+    public void createByJson() {
+        final TypeDraft draft = SphereJsonUtils.readObjectFromResource("drafts-tests/type.json", TypeDraft.class);
+        withType(client(), draft, type -> {
+            assertThat(type.getKey()).isEqualTo("type-key");
+            assertThat(type.getName().get(ENGLISH)).isEqualTo("demo type");
+            assertThat(type.getFieldDefinitionByName("demo-enum-field").isRequired()).isTrue();
+        });
+
     }
 }

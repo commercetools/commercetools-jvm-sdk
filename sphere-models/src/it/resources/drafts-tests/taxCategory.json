@@ -1,0 +1,12 @@
+{
+  "name": "a tax category",
+  "rates": [
+    {
+      "name": "default-tax",
+      "amount": 0.19,
+      "includedInPrice": true,
+      "country": "DE"
+    }
+
+  ]
+}

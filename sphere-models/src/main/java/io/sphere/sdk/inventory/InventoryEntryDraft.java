@@ -1,5 +1,6 @@
 package io.sphere.sdk.inventory;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import io.sphere.sdk.channels.Channel;
 import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.Reference;
@@ -19,6 +20,7 @@ public class InventoryEntryDraft extends Base {
     @Nullable 
     private final Reference<Channel> supplyChannel;
 
+    @JsonCreator
     private InventoryEntryDraft(final String sku, final Long quantityOnStock, final ZonedDateTime expectedDelivery, final Integer restockableInDays, final Reference<Channel> supplyChannel) {
         this.expectedDelivery = expectedDelivery;
         this.sku = sku;

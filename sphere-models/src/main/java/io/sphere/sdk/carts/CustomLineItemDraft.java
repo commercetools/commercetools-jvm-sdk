@@ -1,5 +1,6 @@
 package io.sphere.sdk.carts;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Reference;
@@ -28,12 +29,13 @@ public class CustomLineItemDraft extends Base implements CustomDraft {
     @Nullable
     private final CustomFieldsDraft custom;
 
-    private CustomLineItemDraft(final LocalizedString name, final String slug, final MonetaryAmount money, final Referenceable<TaxCategory> taxCategory, final Long quantity, @Nullable final CustomFieldsDraft custom) {
+    @JsonCreator
+    private CustomLineItemDraft(final LocalizedString name, final String slug, final MonetaryAmount money, final Reference<TaxCategory> taxCategory, final Long quantity, @Nullable final CustomFieldsDraft custom) {
         this.name = name;
         this.money = money;
         this.slug = slug;
         this.custom = custom;
-        this.taxCategory = taxCategory.toReference();
+        this.taxCategory = taxCategory;
         this.quantity = quantity;
     }
 
@@ -42,7 +44,7 @@ public class CustomLineItemDraft extends Base implements CustomDraft {
     }
 
     public static CustomLineItemDraft of(final LocalizedString name, final String slug, final MonetaryAmount money, final Referenceable<TaxCategory> taxCategory, final long quantity, @Nullable final CustomFieldsDraft custom) {
-        return new CustomLineItemDraft(name, slug, money, taxCategory, quantity, custom);
+        return new CustomLineItemDraft(name, slug, money, taxCategory.toReference(), quantity, custom);
     }
 
     public LocalizedString getName() {

@@ -1,0 +1,12 @@
+{
+  "name": "demo zone",
+  "locations": [
+    {
+      "country": "CH",
+      "state": "Vaud"
+    },
+    {
+      "country": "CH"
+    }
+  ]
+}

@@ -1,15 +1,20 @@
 package io.sphere.sdk.cartdiscounts.commands;
 
 import io.sphere.sdk.cartdiscounts.*;
+import io.sphere.sdk.cartdiscounts.queries.CartDiscountQuery;
+import io.sphere.sdk.json.SphereJsonUtils;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.test.IntegrationTest;
 import io.sphere.sdk.test.SphereTestUtils;
 import io.sphere.sdk.utils.MoneyImpl;
 import org.junit.After;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
+import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.Collections;
+import java.util.Locale;
 import java.util.Optional;
 import java.util.function.Consumer;
 import java.util.function.Function;
@@ -20,6 +25,12 @@ import static io.sphere.sdk.test.SphereTestUtils.*;
 
 public class CartDiscountCreateCommandTest extends IntegrationTest {
     private CartDiscount cartDiscount;
+
+    @BeforeClass
+    public static void clean() {
+        client().executeBlocking(CartDiscountQuery.of().withPredicates(m -> m.name().locale(ENGLISH).is("sample cart discount")))
+                .getResults().forEach(discount -> client().executeBlocking(CartDiscountDeleteCommand.of(discount)));
+    }
 
     @Test
     public void execution() throws Exception {
@@ -84,6 +95,20 @@ public class CartDiscountCreateCommandTest extends IntegrationTest {
         checkTargetSerialization(CustomLineItemsTarget.of("1 = 1"));
     }
 
+    @Test
+    public void createByJson() {
+        final CartDiscountDraft cartDiscountDraft = SphereJsonUtils.readObjectFromResource("drafts-tests/cartDiscount.json", CartDiscountDraft.class);
+
+        final CartDiscount cartDiscount = client().executeBlocking(CartDiscountCreateCommand.of(cartDiscountDraft));
+
+        assertThat(cartDiscount.getName().get(Locale.ENGLISH)).isEqualTo("sample cart discount");
+        assertThat(cartDiscount.getValue()).isEqualTo(AbsoluteCartDiscountValue.of(MoneyImpl.ofCents(1200, EUR)));
+        assertThat(cartDiscount.getSortOrder()).isEqualTo("0.45857448");
+        assertThat(cartDiscount.isActive()).isTrue();
+        assertThat(cartDiscount.getValidUntil()).isEqualTo(ZonedDateTime.of(2001, 9, 11, 14, 0, 0, 0, ZoneId.of("Z")));
+
+        client().executeBlocking(CartDiscountDeleteCommand.of(cartDiscount));
+    }
 
     private void checkCartDiscountValueSerialization(final CartDiscountValue value) throws Exception {
         checkCreation(builder -> builder.value(value), discount -> assertThat(discount.getValue()).isEqualTo(value));

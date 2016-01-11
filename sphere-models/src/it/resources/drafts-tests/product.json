@@ -1,0 +1,53 @@
+{
+  "name": {
+    "en": "red shirt"
+  },
+  "productType": {
+    "typeId": "product-type",
+    "id": "t-shirt-product-type"
+  },
+  "slug": {
+    "en": "red-shirt"
+  },
+  "categories": [
+    {
+    "typeId": "tax-category",
+    "id": "t-shirt-category"
+    }
+  ],
+  "masterVariant": {
+    "prices": [
+      {
+        "value": {
+          "centAmount": 1200,
+          "currencyCode": "EUR"
+        }
+      }
+    ],
+    "attributes": [
+      {
+        "name": "size",
+        "value": "M"
+      },
+      {
+        "name": "color",
+        "value": "red"
+      },
+      {
+        "name": "srp",
+        "value": {
+          "centAmount": 2000,
+          "currencyCode": "EUR"
+        }
+      }
+    ]
+  },
+  "taxCategory": {
+    "typeId": "tax-category",
+    "id": "standard-tax"
+  },
+  "state": {
+    "typeId": "state",
+    "id": "initial-product-state"
+  }
+}

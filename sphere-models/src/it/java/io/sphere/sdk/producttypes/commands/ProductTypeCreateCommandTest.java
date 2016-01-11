@@ -1,15 +1,16 @@
 package io.sphere.sdk.producttypes.commands;
 
-import io.sphere.sdk.products.attributes.AttributeConstraint;
-import io.sphere.sdk.products.attributes.AttributeDefinition;
-import io.sphere.sdk.products.attributes.AttributeDefinitionBuilder;
-import io.sphere.sdk.products.attributes.EnumAttributeType;
+import com.fasterxml.jackson.core.type.TypeReference;
+import io.sphere.sdk.json.SphereJsonUtils;
+import io.sphere.sdk.models.TextInputHint;
+import io.sphere.sdk.products.attributes.*;
 import io.sphere.sdk.models.EnumValue;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.producttypes.ProductType;
 import io.sphere.sdk.producttypes.ProductTypeDraft;
 import io.sphere.sdk.producttypes.queries.ProductTypeQuery;
 import io.sphere.sdk.test.IntegrationTest;
+import io.sphere.sdk.test.SphereTestUtils;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -50,6 +51,24 @@ public class ProductTypeCreateCommandTest extends IntegrationTest {
         assertThat(productType.getName()).isEqualTo(name);
         assertThat(productType.getDescription()).isEqualTo("a 'T' shaped cloth");
         assertThat(productType.getAttributes()).contains(sizeAttributeDefinition);
+    }
+
+    @Test
+    public void createByJson() {
+        final ProductTypeDraft productTypeDraft = SphereJsonUtils.readObjectFromResource("drafts-tests/productType.json", ProductTypeDraft.class);
+        final ProductType productType = client().executeBlocking(ProductTypeCreateCommand.of(productTypeDraft));
+        assertThat(productType.getName()).isEqualTo(getName());
+        assertThat(productType.getKey()).isEqualTo("product-type-from-json");
+        assertThat(productType.getDescription()).isEqualTo("product type from json");
+        final AttributeDefinition attributeDefinition = productType.getAttributes().get(0);
+        assertThat(attributeDefinition.getAttributeType()).isEqualTo(StringAttributeType.of());
+        assertThat(attributeDefinition.getName()).isEqualTo("string-attribute-from-json");
+        final LocalizedString label = LocalizedString.of(ENGLISH, "an attribute from JSON", GERMAN, "ein Attribut von JSON");
+        assertThat(attributeDefinition.getLabel()).isEqualTo(label);
+        assertThat(attributeDefinition.isRequired()).isTrue();
+        assertThat(attributeDefinition.getAttributeConstraint()).isEqualTo(AttributeConstraint.NONE);
+        assertThat(attributeDefinition.getInputHint()).isEqualTo(TextInputHint.SINGLE_LINE);
+        assertThat(attributeDefinition.isSearchable()).isTrue();
     }
 
     private String getName() {

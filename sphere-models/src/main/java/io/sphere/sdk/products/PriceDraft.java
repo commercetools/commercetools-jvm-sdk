@@ -1,6 +1,7 @@
 package io.sphere.sdk.products;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.neovisionaries.i18n.CountryCode;
 import io.sphere.sdk.channels.Channel;
 import io.sphere.sdk.customergroups.CustomerGroup;
@@ -15,6 +16,7 @@ import javax.money.MonetaryAmount;
 import java.math.BigDecimal;
 import java.time.ZonedDateTime;
 
+@JsonDeserialize(as = PriceDraftDsl.class)
 public interface PriceDraft extends CustomDraft {
     MonetaryAmount getValue();
     @Nullable

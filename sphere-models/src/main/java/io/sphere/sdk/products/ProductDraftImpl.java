@@ -1,5 +1,6 @@
 package io.sphere.sdk.products;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.models.*;
 import io.sphere.sdk.producttypes.ProductType;
@@ -33,12 +34,13 @@ class ProductDraftImpl extends Base implements ProductDraft {
     @Nullable
     private final CategoryOrderHints categoryOrderHints;
 
-    public ProductDraftImpl(final ResourceIdentifier<ProductType> productType, final LocalizedString name, final LocalizedString slug,
-                            final LocalizedString description, final Set<Reference<Category>> categories,
-                            final MetaAttributes metaAttributes, final ProductVariantDraft masterVariant,
-                            final List<ProductVariantDraft> variants, final Reference<TaxCategory> taxCategory,
-                            final SearchKeywords searchKeywords, final Reference<State> state, 
-                            final CategoryOrderHints categoryOrderHints) {
+    @JsonCreator
+    ProductDraftImpl(final ResourceIdentifier<ProductType> productType, final LocalizedString name, final LocalizedString slug,
+                     final LocalizedString description, final Set<Reference<Category>> categories,
+                     final LocalizedString metaTitle, final LocalizedString metaDescription, final LocalizedString metaKeywords, final ProductVariantDraft masterVariant,
+                     final List<ProductVariantDraft> variants, final Reference<TaxCategory> taxCategory,
+                     final SearchKeywords searchKeywords, final Reference<State> state,
+                     final CategoryOrderHints categoryOrderHints) {
         this.name = name;
         this.productType = productType;
         this.slug = slug;
@@ -47,9 +49,9 @@ class ProductDraftImpl extends Base implements ProductDraft {
         this.taxCategory = taxCategory;
         this.searchKeywords = searchKeywords;
         this.state = state;
-        this.metaTitle = metaAttributes.getMetaTitle();
-        this.metaDescription = metaAttributes.getMetaTitle();
-        this.metaKeywords = metaAttributes.getMetaKeywords();
+        this.metaTitle = metaTitle;
+        this.metaDescription = metaDescription;
+        this.metaKeywords = metaKeywords;
         this.masterVariant = masterVariant;
         this.variants = variants;
         this.categoryOrderHints = categoryOrderHints;

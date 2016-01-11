@@ -1,5 +1,6 @@
 package io.sphere.sdk.payments;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import io.sphere.sdk.customers.Customer;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.types.CustomDraft;
@@ -15,6 +16,7 @@ import java.util.List;
  *
  * @see PaymentDraftBuilder
  */
+@JsonDeserialize(as = PaymentDraftImpl.class)
 public interface PaymentDraft extends CustomDraft {
     @Nullable
     Reference<Customer> getCustomer();

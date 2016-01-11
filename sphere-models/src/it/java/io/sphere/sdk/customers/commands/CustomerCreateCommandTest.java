@@ -6,12 +6,16 @@ import io.sphere.sdk.carts.commands.CartCreateCommand;
 import io.sphere.sdk.customergroups.CustomerGroup;
 import io.sphere.sdk.customergroups.CustomerGroupFixtures;
 import io.sphere.sdk.customers.*;
+import io.sphere.sdk.customers.queries.CustomerQuery;
 import io.sphere.sdk.models.Address;
+import io.sphere.sdk.test.JsonNodeReferenceResolver;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.time.LocalDate;
 import java.util.List;
 
+import static io.sphere.sdk.customergroups.CustomerGroupFixtures.withB2cCustomerGroup;
 import static io.sphere.sdk.customers.CustomerFixtures.CUSTOMER_NAME;
 import static io.sphere.sdk.customers.CustomerFixtures.PASSWORD;
 import static io.sphere.sdk.test.SphereTestUtils.*;
@@ -19,6 +23,12 @@ import static java.util.stream.Collectors.toList;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class CustomerCreateCommandTest extends CustomerIntegrationTest {
+    @BeforeClass
+    public static void clean() {
+        client().executeBlocking(CustomerQuery.of().byEmail("osgood@unit.tld"))
+                .getResults()
+                .forEach(customer -> client().executeBlocking(CustomerDeleteCommand.of(customer)));
+    }
 
     @Test
     public void createCustomer() throws Exception {
@@ -78,5 +88,21 @@ public class CustomerCreateCommandTest extends CustomerIntegrationTest {
         final CustomerSignInResult result = client().executeBlocking(CustomerCreateCommand.of(draft));
         assertThat(result.getCart()).isNotNull();
         assertThat(result.getCart().getId()).isEqualTo(cart.getId());
+    }
+
+    @Test
+    public void createByJson() {
+        final JsonNodeReferenceResolver referenceResolver = new JsonNodeReferenceResolver();
+        withB2cCustomerGroup(client(), customerGroup -> {
+            referenceResolver.addResourceByKey("b2c", customerGroup);
+            final CustomerDraft customerDraft = draftFromJsonResource("drafts-tests/customer.json", CustomerDraft.class, referenceResolver);
+            CustomerFixtures.withCustomer(client(), customerDraft, customer -> {
+                assertThat(customer.getLastName()).isEqualTo("Osgood");
+                assertThat(customer.getCustomerGroup()).isEqualTo(customerGroup.toReference());
+                assertThat(customer.getAddresses()).hasSize(2);
+                assertThat(customer.getDefaultShippingAddress().withId(null)).isEqualTo(Address.of(DE).withLastName("Osgood"));
+            });
+        });
+
     }
 }

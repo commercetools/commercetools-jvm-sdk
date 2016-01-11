@@ -4,22 +4,37 @@ import com.neovisionaries.i18n.CountryCode;
 import io.sphere.sdk.carts.*;
 import io.sphere.sdk.models.Address;
 import io.sphere.sdk.test.IntegrationTest;
+import io.sphere.sdk.test.JsonNodeReferenceResolver;
 import io.sphere.sdk.types.CustomFieldsDraft;
+import io.sphere.sdk.types.FieldDefinition;
+import io.sphere.sdk.types.StringFieldType;
 import io.sphere.sdk.types.TypeFixtures;
+import io.sphere.sdk.types.commands.TypeDeleteCommand;
+import io.sphere.sdk.types.queries.TypeQuery;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.util.List;
+import java.util.Locale;
 
 import static io.sphere.sdk.customers.CustomerFixtures.withCustomer;
 import static io.sphere.sdk.products.ProductFixtures.withTaxedProduct;
 import static io.sphere.sdk.shippingmethods.ShippingMethodFixtures.withShippingMethodForGermany;
 import static io.sphere.sdk.test.SphereTestUtils.*;
+import static io.sphere.sdk.types.TypeFixtures.withType;
 import static io.sphere.sdk.types.TypeFixtures.withUpdateableType;
 import static java.util.Collections.singletonList;
 import static java.util.Collections.singletonMap;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class CartCreateCommandTest extends IntegrationTest {
+    @BeforeClass
+    public static void prepare() {
+        client().executeBlocking(TypeQuery.of().withPredicates(m -> m.key().is("json-demo-type-key")))
+                .getResults()
+                .forEach(type -> client().executeBlocking(TypeDeleteCommand.of(type)));
+    }
+
     @Test
     public void execution() throws Exception {
         final CartDraft cartDraft = CartDraft.of(EUR).withCountry(DE);
@@ -96,6 +111,41 @@ public class CartCreateCommandTest extends IntegrationTest {
     @Test
     public void inventoryModeTrackOnly() {
         testInventoryMode(InventoryMode.TRACK_ONLY);
+    }
+
+    @Test
+    public void createByJson() {
+        final JsonNodeReferenceResolver referenceResolver = new JsonNodeReferenceResolver();
+        withTaxedProduct(client(), product -> {
+            withType(client(),
+                    typeBuilder -> typeBuilder.key("json-demo-type-key").fieldDefinitions(singletonList(FieldDefinition.of(StringFieldType.of(), "stringField", randomSlug(), true))),
+                    type -> {
+                referenceResolver.addResourceByKey("sample-product", product);
+                referenceResolver.addResourceByKey("standard-tax", product.getTaxCategory());
+                final CartDraft cartDraft = draftFromJsonResource("drafts-tests/cart.json", CartDraft.class, referenceResolver);
+
+                final Cart cart = client().executeBlocking(CartCreateCommand.of(cartDraft));
+
+                assertThat(cart.getCurrency()).isEqualTo(EUR);
+                assertThat(cart.getCountry()).isEqualTo(CountryCode.DE);
+                assertThat(cart.getInventoryMode()).isEqualTo(InventoryMode.TRACK_ONLY);
+                final LineItem lineItem = cart.getLineItems().get(0);
+                assertThat(lineItem.getProductId()).isEqualTo(product.getId());
+                assertThat(lineItem.getVariant().getId()).isEqualTo(1);
+                assertThat(lineItem.getQuantity()).isEqualTo(2);
+                final CustomLineItem customLineItem = cart.getCustomLineItems().get(0);
+                assertThat(customLineItem.getName().get(Locale.ENGLISH)).isEqualTo("a custom line item");
+                assertThat(customLineItem.getQuantity()).isEqualTo(3);
+                assertThat(customLineItem.getMoney()).isEqualTo(EURO_20);
+                assertThat(customLineItem.getSlug()).isEqualTo("foo");
+                assertThat(customLineItem.getTaxCategory()).isEqualTo(product.getTaxCategory());
+                assertThat(cart.getShippingAddress()).isEqualTo(Address.of(DE).withLastName("Osgood"));
+                assertThat(cart.getCustom().getFieldAsString("stringField")).isEqualTo("bar");
+
+                client().execute(CartDeleteCommand.of(cart));
+            });
+        });
+
     }
 
     private void testInventoryMode(final InventoryMode inventoryMode) {

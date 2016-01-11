@@ -1,6 +1,7 @@
 package io.sphere.sdk.orders;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import io.sphere.sdk.carts.ItemState;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Reference;
@@ -14,6 +15,7 @@ import java.util.Set;
 /**
  * @see CustomLineItemImportDraftBuilder
  */
+@JsonDeserialize(as = CustomLineItemImportDraftImpl.class)
 public interface CustomLineItemImportDraft {
 
     LocalizedString getName();

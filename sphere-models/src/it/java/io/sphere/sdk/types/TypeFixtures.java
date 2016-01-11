@@ -19,6 +19,7 @@ import io.sphere.sdk.types.commands.TypeDeleteCommand;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.function.Consumer;
 import java.util.function.UnaryOperator;
 
 import static io.sphere.sdk.test.SphereTestUtils.*;
@@ -41,17 +42,34 @@ public class TypeFixtures {
     public static final String STRING_FIELD_NAME = "string-field-name";
     public static final String TYPE_NAME = "name of the custom type";
 
+    public static void withType(final BlockingSphereClient client, final UnaryOperator<TypeDraftBuilder> b, final Consumer<Type> consumer) {
+        final TypeDraftBuilder typeDraftBuilder = b.apply(createTypeDraftBuilder());
+        final TypeDraft draft = typeDraftBuilder.build();
+        withType(client, draft, consumer);
+    }
+
+    public static void withType(final BlockingSphereClient client, final TypeDraft draft, final Consumer<Type> consumer) {
+        final Type type = client.executeBlocking(TypeCreateCommand.of(draft));
+        consumer.accept(type);
+        client.executeBlocking(TypeDeleteCommand.of(type));
+    }
+
     public static void withUpdateableType(final BlockingSphereClient client, final UnaryOperator<Type> operator) {
-        final String typeKey = randomKey();
-        final TypeDraft typeDraft = TypeDraftBuilder.of(typeKey, en(TYPE_NAME), TYPE_IDS)
-                .description(en("description"))
-                .fieldDefinitions(asList(stringfieldDefinition(), enumFieldDefinition(), localizedEnumFieldDefinition(), catRefDefinition(),
-                        booleanDefinition(), LocalizedStringDefinition(), intDefinition(), doubleDefinition(), moneyDefinition(),
-                        dateDefinition(), dateTimeDefinition(), timeDefinition()))
+        final TypeDraftBuilder typeDraftBuilder = createTypeDraftBuilder();
+        final TypeDraft typeDraft = typeDraftBuilder
                 .build();
         final Type type = client.executeBlocking(TypeCreateCommand.of(typeDraft));
         final Type updatedType = operator.apply(type);
         client.executeBlocking(TypeDeleteCommand.of(updatedType));
+    }
+
+    private static TypeDraftBuilder createTypeDraftBuilder() {
+        final String typeKey = randomKey();
+        return TypeDraftBuilder.of(typeKey, en(TYPE_NAME), TYPE_IDS)
+                .description(en("description"))
+                .fieldDefinitions(asList(stringfieldDefinition(), enumFieldDefinition(), localizedEnumFieldDefinition(), catRefDefinition(),
+                        booleanDefinition(), LocalizedStringDefinition(), intDefinition(), doubleDefinition(), moneyDefinition(),
+                        dateDefinition(), dateTimeDefinition(), timeDefinition()));
     }
 
     private static FieldDefinition dateDefinition() {

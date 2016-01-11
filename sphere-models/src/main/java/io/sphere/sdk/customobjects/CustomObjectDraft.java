@@ -1,13 +1,16 @@
 package io.sphere.sdk.customobjects;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.JsonNode;
-import io.sphere.sdk.json.SphereJsonUtils;
 import io.sphere.sdk.json.TypeReferences;
 import io.sphere.sdk.models.Base;
 
 import javax.annotation.Nullable;
+
+import static io.sphere.sdk.customobjects.CustomObjectUtils.getCustomObjectJavaTypeForValue;
+import static io.sphere.sdk.json.SphereJsonUtils.convertToJavaType;
 
 /**
  * A draft for creating or updating custom objects.
@@ -25,11 +28,22 @@ public class CustomObjectDraft<T> extends Base {
     private final String key;
 
     private CustomObjectDraft(final String container, final String key, final T value, @Nullable final Long version, final Class<T> valueClass) {
-        this(container, key, value, version, SphereJsonUtils.convertToJavaType(valueClass));
+        this(container, key, value, version, convertToJavaType(valueClass));
     }
 
     private CustomObjectDraft(final String container, final String key, final T value, @Nullable final Long version, final TypeReference<T> valueTypeReference) {
-        this(container, key, value, version, SphereJsonUtils.convertToJavaType(valueTypeReference));
+        this(container, key, value, version, convertToJavaType(valueTypeReference));
+    }
+
+    //only for use with T=JsonNode
+    @SuppressWarnings("unchecked")
+    @JsonCreator
+    private CustomObjectDraft(final String container, final String key, final JsonNode value, @Nullable final Long version) {
+        this.container = CustomObject.validatedContainer(container);
+        this.key = CustomObject.validatedKey(key);
+        this.value = (T) value;
+        this.version = version;
+        this.javaType = getCustomObjectJavaTypeForValue(convertToJavaType(JsonNode.class));
     }
 
     private CustomObjectDraft(final String container, final String key, final T value, @Nullable final Long version, final JavaType valueJavaType) {
@@ -37,7 +51,7 @@ public class CustomObjectDraft<T> extends Base {
         this.key = CustomObject.validatedKey(key);
         this.value = value;
         this.version = version;
-        this.javaType = CustomObjectUtils.getCustomObjectJavaTypeForValue(valueJavaType);
+        this.javaType = getCustomObjectJavaTypeForValue(valueJavaType);
     }
 
     public T getValue() {
@@ -116,7 +130,7 @@ public class CustomObjectDraft<T> extends Base {
      * @return the draft
      */
     public static <T> CustomObjectDraft<T> ofUnversionedUpsert(final String container, final String key, final T value, final Class<T> valueClass) {
-        return new CustomObjectDraft<>(container, key, value, null, SphereJsonUtils.convertToJavaType(valueClass));
+        return new CustomObjectDraft<>(container, key, value, null, convertToJavaType(valueClass));
     }
 
     /**

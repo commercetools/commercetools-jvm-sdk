@@ -1,7 +1,10 @@
 package io.sphere.sdk.models;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+
 import javax.annotation.Nullable;
 
+@JsonDeserialize(as = ResourceIdentifierImpl.class)
 public interface ResourceIdentifier<T> extends ResourceIdentifiable<T> {
     @Nullable
     String getId();

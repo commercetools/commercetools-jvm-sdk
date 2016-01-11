@@ -1,0 +1,21 @@
+{
+  "email": "osgood@unit.tld",
+  "lastName": "Osgood",
+  "firstName": "Petronella",
+  "password": "bowtiesarecool",
+  "customerGroup": {
+    "typeId": "customer-group",
+    "id": "b2c"
+  },
+  "addresses": [
+    {
+      "lastName": "Osgood",
+      "country": "DE"
+    },
+    {
+      "lastName": "Osgood",
+      "country": "UK"
+    }
+  ],
+  "defaultShippingAddress": 0
+}

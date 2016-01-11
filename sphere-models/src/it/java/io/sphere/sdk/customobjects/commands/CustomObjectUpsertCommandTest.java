@@ -1,5 +1,6 @@
 package io.sphere.sdk.customobjects.commands;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
@@ -9,9 +10,11 @@ import io.sphere.sdk.customobjects.CustomObjectDraft;
 import io.sphere.sdk.customobjects.CustomObjectFixtures;
 import io.sphere.sdk.customobjects.demo.BinaryData;
 import io.sphere.sdk.customobjects.demo.Foo;
+import io.sphere.sdk.customobjects.queries.CustomObjectByKeyGet;
 import io.sphere.sdk.json.SphereJsonUtils;
 import io.sphere.sdk.test.IntegrationTest;
 import org.apache.commons.io.FileUtils;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.io.File;
@@ -21,6 +24,14 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class CustomObjectUpsertCommandTest extends IntegrationTest {
 
     public static final String CONTAINER = CustomObjectUpsertCommandTest.class.getSimpleName();
+
+    @BeforeClass
+    public static void clean() {
+        final CustomObject<Foo> nullableObject = client().executeBlocking(CustomObjectByKeyGet.of("demo-container", "demo-key", Foo.class));
+        if (nullableObject != null) {
+            client().executeBlocking(CustomObjectDeleteCommand.ofJsonNode(nullableObject));
+        }
+    }
 
     @Test
     public void createSimpleNew() throws Exception {
@@ -96,6 +107,19 @@ public class CustomObjectUpsertCommandTest extends IntegrationTest {
             assertThat(loadedValue).isEqualTo(newValue);
             //end example parsing here
             client().executeBlocking(command);
+        });
+    }
+
+    @Test
+    public void createByJson() {
+        final CustomObjectDraft<JsonNode> customObjectDraft = SphereJsonUtils.readObjectFromResource("drafts-tests/customObject.json", new TypeReference<CustomObjectDraft<JsonNode>>() {
+        });
+        CustomObjectFixtures.withCustomObject(client(), customObjectDraft, customObject -> {
+            assertThat(customObject.getKey()).isEqualTo("demo-key");
+            assertThat(customObject.getContainer()).isEqualTo("demo-container");
+            final JsonNode actual = customObject.getValue();
+            assertThat(actual.get("baz").asInt()).isEqualTo(22);
+            assertThat(actual.get("bar").asText()).isEqualTo("hello");
         });
     }
 }

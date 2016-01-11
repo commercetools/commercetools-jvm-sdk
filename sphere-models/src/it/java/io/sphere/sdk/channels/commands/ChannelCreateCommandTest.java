@@ -2,8 +2,10 @@ package io.sphere.sdk.channels.commands;
 
 import io.sphere.sdk.channels.Channel;
 import io.sphere.sdk.channels.ChannelDraft;
+import io.sphere.sdk.channels.ChannelFixtures;
 import io.sphere.sdk.channels.ChannelRole;
 import io.sphere.sdk.channels.queries.ChannelQuery;
+import io.sphere.sdk.json.SphereJsonUtils;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.test.IntegrationTest;
@@ -36,6 +38,15 @@ public class ChannelCreateCommandTest extends IntegrationTest {
         assertThat(channel.getName()).isEqualTo(LocalizedString.of(ENGLISH, "name"));
         assertThat(channel.getDescription()).isEqualTo(LocalizedString.of(ENGLISH, "description"));
         assertThat(channel.getRoles()).isEqualTo(asSet(ChannelRole.INVENTORY_SUPPLY));
+    }
+
+    @Test
+    public void createByJson() {
+        final ChannelDraft channelDraft = SphereJsonUtils.readObjectFromResource("drafts-tests/channel.json", ChannelDraft.class);
+        ChannelFixtures.withChannel(client(), channelDraft, channel -> {
+            assertThat(channel.getKey()).isEqualTo("example-channel-key");
+            assertThat(channel.getRoles()).containsOnly(ChannelRole.ORDER_IMPORT);
+        });
     }
 
     private String channelKey() {
