@@ -6,6 +6,7 @@ import io.sphere.sdk.producttypes.ProductType;
 import io.sphere.sdk.search.PagedSearchResult;
 import io.sphere.sdk.test.IntegrationTest;
 import io.sphere.sdk.test.RetryIntegrationTest;
+import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.slf4j.LoggerFactory;
@@ -16,9 +17,11 @@ import java.util.List;
 
 import static io.sphere.sdk.products.ProductsScenario1Fixtures.Data;
 import static io.sphere.sdk.products.ProductsScenario1Fixtures.createScenario;
+import static io.sphere.sdk.products.ProductsScenario1Fixtures.destroy;
 import static io.sphere.sdk.test.SphereTestUtils.asList;
 
 public abstract class ProductProjectionSearchModelIntegrationTest extends IntegrationTest {
+    protected static Data data;
     protected static Product product1;
     protected static Product product2;
     protected static Product productA;
@@ -30,12 +33,17 @@ public abstract class ProductProjectionSearchModelIntegrationTest extends Integr
 
     @BeforeClass
     public static void setupProducts() {
-        final Data data = createScenario(client());
+        data = createScenario(client());
         productType = data.getProductType();
         productA = data.getReferencedProductA();
         productB = data.getReferencedProductB();
         product1 = data.getProduct1();
         product2 = data.getProduct2();
+    }
+
+    @AfterClass
+    public static void clean() {
+        destroy(client(), data);
     }
 
     protected static Long toCents(final MonetaryAmount money) {
