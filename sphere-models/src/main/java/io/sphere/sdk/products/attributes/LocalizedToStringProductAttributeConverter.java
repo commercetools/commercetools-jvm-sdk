@@ -6,6 +6,7 @@ import io.sphere.sdk.models.*;
 import io.sphere.sdk.products.Product;
 import io.sphere.sdk.producttypes.ProductType;
 import io.sphere.sdk.producttypes.ProductTypeLocalRepository;
+import org.javamoney.moneta.function.MonetaryFunctions;
 
 import javax.annotation.Nullable;
 import javax.money.MonetaryAmount;
@@ -16,10 +17,7 @@ import java.time.LocalTime;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
-import java.util.Collection;
-import java.util.List;
-import java.util.Locale;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.joining;
@@ -79,10 +77,10 @@ public class LocalizedToStringProductAttributeConverter extends ProductAttribute
         return convertReference(productReference, productType);
     }
 
-    //todo sort by currency???
     @Override
     protected String convertMoneySet(final Set<MonetaryAmount> monetaryAmountSet, final Attribute attribute, final ProductType productType) {
-        return collectToString(monetaryAmountSet.stream().sorted().map(money -> convertMoney(money, attribute, productType)));
+        final Comparator<MonetaryAmount> comparator = MonetaryFunctions.sortCurrencyUnit().thenComparing(MonetaryFunctions.sortNumber());
+        return collectToString(monetaryAmountSet.stream().sorted(comparator).map(money -> convertMoney(money, attribute, productType)));
     }
 
     @Override
