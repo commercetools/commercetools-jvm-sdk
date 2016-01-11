@@ -31,7 +31,6 @@ public abstract class ProductAttributeConverterBase<T> extends Base implements P
     }
 
 
-    //TODO maybe parameter product type id
     @Nullable
     @Override
     public T convert(final Attribute attribute, final Referenceable<ProductType> productType) {
