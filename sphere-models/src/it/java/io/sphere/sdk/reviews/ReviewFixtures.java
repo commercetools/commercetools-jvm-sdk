@@ -4,19 +4,30 @@ import io.sphere.sdk.client.BlockingSphereClient;
 import io.sphere.sdk.reviews.commands.ReviewCreateCommand;
 import io.sphere.sdk.reviews.commands.ReviewDeleteCommand;
 
+import java.util.Locale;
 import java.util.function.Consumer;
 import java.util.function.UnaryOperator;
 
 import static io.sphere.sdk.test.SphereTestUtils.randomKey;
 
 public class ReviewFixtures {
+
+    public static final String REVIEW_TITLE = "A review title";
+    public static final String REVIEW_TEXT = "It is great.";
+    public static final String AUTHOR_NAME = "John Smith";
+
     public static void withReview(final BlockingSphereClient client, final UnaryOperator<ReviewDraftBuilder> builderUnaryOperator, final Consumer<Review> consumer) {
         final ReviewDraft draft = builderUnaryOperator.apply(createReviewDraftBuilder()).build();
         withReview(client, draft, consumer);
     }
 
     private static ReviewDraftBuilder createReviewDraftBuilder() {
-        return ReviewDraftBuilder.ofTitle("A review title").key(randomKey());
+        return ReviewDraftBuilder.ofTitle(REVIEW_TITLE)
+                .authorName(AUTHOR_NAME)
+                .text(REVIEW_TEXT)
+                .rating(100)
+                .locale(Locale.ENGLISH)
+                .key(randomKey());
     }
 
     public static void withReview(final BlockingSphereClient client, final Consumer<Review> consumer) {

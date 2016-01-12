@@ -98,6 +98,10 @@ public class QueryModelImpl<T> extends Base implements QueryModel<T> {
         return new AddressQueryModelImpl<>(this, pathSegment);
     }
 
+    protected final LocaleQuerySortingModel<T> localeQuerySortingModel(final String pathSegment) {
+        return new LocaleQuerySortingModelImpl<>(this, pathSegment);
+    }
+
     @SuppressWarnings("unchecked")
     protected <V> QueryPredicate<T> isPredicate(final V value) {
         final V normalizedValue = value instanceof String ? (V) normalize((String) value) : value;
