@@ -3,12 +3,14 @@ package io.sphere.sdk.reviews;
 import io.sphere.sdk.customers.Customer;
 import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.Builder;
+import io.sphere.sdk.models.ResourceIdentifiable;
 import io.sphere.sdk.models.ResourceIdentifier;
 import io.sphere.sdk.states.State;
 import io.sphere.sdk.types.CustomFieldsDraft;
 
 import javax.annotation.Nullable;
 import java.util.Locale;
+import java.util.Optional;
 
 public final class ReviewDraftBuilder extends Base implements Builder<ReviewDraft> {
     @Nullable
@@ -79,13 +81,13 @@ public final class ReviewDraftBuilder extends Base implements Builder<ReviewDraf
         return this;
     }
 
-    public ReviewDraftBuilder target(@Nullable final ResourceIdentifier<?> target) {
-        this.target = target;
+    public ReviewDraftBuilder target(@Nullable final ResourceIdentifiable<?> target) {
+        this.target = Optional.ofNullable(target).map(ResourceIdentifiable::toResourceIdentifier).orElse(null);
         return this;
     }
 
-    public ReviewDraftBuilder state(@Nullable final ResourceIdentifier<State> state) {
-        this.state = state;
+    public ReviewDraftBuilder state(@Nullable final ResourceIdentifiable<State> state) {
+        this.state = Optional.ofNullable(state).map(ResourceIdentifiable::toResourceIdentifier).orElse(null);
         return this;
     }
 
@@ -94,8 +96,8 @@ public final class ReviewDraftBuilder extends Base implements Builder<ReviewDraf
         return this;
     }
 
-    public ReviewDraftBuilder customer(@Nullable final ResourceIdentifier<Customer> customer) {
-        this.customer = customer;
+    public ReviewDraftBuilder customer(@Nullable final ResourceIdentifiable<Customer> customer) {
+        this.customer = Optional.ofNullable(customer).map(ResourceIdentifiable::toResourceIdentifier).orElse(null);
         return this;
     }
 

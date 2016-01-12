@@ -1,10 +1,11 @@
 package io.sphere.sdk.reviews;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import io.sphere.sdk.customers.Customer;
-import io.sphere.sdk.models.ResourceIdentifier;
+import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.ResourceImpl;
 import io.sphere.sdk.states.State;
-import io.sphere.sdk.types.CustomFieldsDraft;
+import io.sphere.sdk.types.CustomFields;
 
 import javax.annotation.Nullable;
 import java.time.ZonedDateTime;
@@ -24,22 +25,22 @@ final class ReviewImpl extends ResourceImpl<Review> implements Review {
     @Nullable
     private final Locale locale;
     @Nullable
-    private final ResourceIdentifier<?> target;
+    private final Reference<JsonNode> target;
     @Nullable
-    private final ResourceIdentifier<State> state;
+    private final Reference<State> state;
     @Nullable
     private final Integer rating;
     @Nullable
-    private final ResourceIdentifier<Customer> customer;
+    private final Reference<Customer> customer;
     @Nullable
-    private final CustomFieldsDraft custom;
+    private final CustomFields custom;
 
     ReviewImpl(final String id, final Long version, final ZonedDateTime createdAt,
                final ZonedDateTime lastModifiedAt,
                final String authorName, final String key, final String uniquenessValue, final String text,
-               final String title, final Locale locale, final ResourceIdentifier<?> target,
-               final ResourceIdentifier<State> state, final Integer rating, final ResourceIdentifier<Customer> customer,
-               final CustomFieldsDraft custom) {
+               final String title, final Locale locale, final Reference<JsonNode> target,
+               final Reference<State> state, final Integer rating, final Reference<Customer> customer,
+               final CustomFields custom) {
         super(id, version, createdAt, lastModifiedAt);
         this.authorName = authorName;
         this.key = key;
@@ -62,13 +63,13 @@ final class ReviewImpl extends ResourceImpl<Review> implements Review {
 
     @Override
     @Nullable
-    public CustomFieldsDraft getCustom() {
+    public CustomFields getCustom() {
         return custom;
     }
 
     @Override
     @Nullable
-    public ResourceIdentifier<Customer> getCustomer() {
+    public Reference<Customer> getCustomer() {
         return customer;
     }
 
@@ -92,13 +93,13 @@ final class ReviewImpl extends ResourceImpl<Review> implements Review {
 
     @Override
     @Nullable
-    public ResourceIdentifier<State> getState() {
+    public Reference<State> getState() {
         return state;
     }
 
     @Override
     @Nullable
-    public ResourceIdentifier<?> getTarget() {
+    public Reference<JsonNode> getTarget() {
         return target;
     }
 

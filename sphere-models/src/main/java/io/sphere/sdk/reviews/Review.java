@@ -1,25 +1,29 @@
 package io.sphere.sdk.reviews;
 
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import io.sphere.sdk.customers.Customer;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Resource;
 import io.sphere.sdk.models.ResourceIdentifier;
 import io.sphere.sdk.states.State;
+import io.sphere.sdk.types.Custom;
+import io.sphere.sdk.types.CustomFields;
 import io.sphere.sdk.types.CustomFieldsDraft;
 
 import javax.annotation.Nullable;
 import java.util.Locale;
 
-public interface Review extends Resource<Review> {
+@JsonDeserialize(as = ReviewImpl.class)
+public interface Review extends Resource<Review>, Custom {
     @Nullable
     String getAuthorName();
 
     @Nullable
-    CustomFieldsDraft getCustom();
+    CustomFields getCustom();
 
     @Nullable
-    ResourceIdentifier<Customer> getCustomer();
+    Reference<Customer> getCustomer();
 
     @Nullable
     String getKey();
@@ -31,10 +35,10 @@ public interface Review extends Resource<Review> {
     Integer getRating();
 
     @Nullable
-    ResourceIdentifier<State> getState();
+    Reference<State> getState();
 
     @Nullable
-    ResourceIdentifier<?> getTarget();
+    Reference<?> getTarget();
 
     @Nullable
     String getText();
@@ -46,6 +50,10 @@ public interface Review extends Resource<Review> {
     String getUniquenessValue();
 
     static String referenceTypeId() {
+        return "review";
+    }
+
+    static String resourceTypeId() {
         return "review";
     }
 
