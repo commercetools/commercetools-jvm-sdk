@@ -1,30 +1,46 @@
 package io.sphere.sdk.reviews.commands;
 
 import io.sphere.sdk.client.BlockingSphereClient;
+import io.sphere.sdk.client.JsonNodeSphereRequest;
 import io.sphere.sdk.customers.Customer;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.products.Product;
+import io.sphere.sdk.products.ProductProjection;
+import io.sphere.sdk.products.queries.ProductByIdGet;
+import io.sphere.sdk.products.queries.ProductProjectionByIdGet;
 import io.sphere.sdk.reviews.Review;
 import io.sphere.sdk.reviews.ReviewDraft;
 import io.sphere.sdk.reviews.ReviewDraftBuilder;
+import io.sphere.sdk.reviews.ReviewRatingStatistics;
 import io.sphere.sdk.reviews.queries.ReviewByKeyGet;
 import io.sphere.sdk.states.State;
 import io.sphere.sdk.states.StateDraft;
+import io.sphere.sdk.states.StateRole;
 import io.sphere.sdk.states.StateType;
+import io.sphere.sdk.states.commands.StateDeleteCommand;
+import io.sphere.sdk.states.queries.StateByIdGet;
+import io.sphere.sdk.states.queries.StateQuery;
 import io.sphere.sdk.test.IntegrationTest;
 import io.sphere.sdk.test.JsonNodeReferenceResolver;
 import io.sphere.sdk.types.*;
+import io.sphere.sdk.utils.CompletableFutureUtils;
+import io.sphere.sdk.utils.ListUtils;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.util.Collections;
 import java.util.Locale;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.CompletionStage;
 import java.util.function.Consumer;
 
 import static io.sphere.sdk.customers.CustomerFixtures.withCustomer;
 import static io.sphere.sdk.products.ProductFixtures.withProduct;
 import static io.sphere.sdk.states.StateFixtures.withState;
+import static io.sphere.sdk.states.StateRole.REVIEW_INCLUDED_IN_STATISTICS;
 import static io.sphere.sdk.test.SphereTestUtils.draftFromJsonResource;
+import static java.util.Collections.singleton;
+import static java.util.Collections.singletonMap;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class ReviewCreateCommandTest extends IntegrationTest {
@@ -33,6 +49,11 @@ public class ReviewCreateCommandTest extends IntegrationTest {
         final Review review = client().executeBlocking(ReviewByKeyGet.of("review1"));
         if (review != null) {
             client().executeBlocking(ReviewDeleteCommand.of(review));
+        }
+        //since the state can have a remaining review, the review needs to be deleted first
+        final State state = client().executeBlocking(StateQuery.of().withPredicates(m -> m.key().is("initial-review-state"))).head().orElse(null);
+        if (state != null) {
+            client().executeBlocking(StateDeleteCommand.of(state));
         }
     }
 
@@ -43,7 +64,7 @@ public class ReviewCreateCommandTest extends IntegrationTest {
                 withProduct(client(), (Product product) -> {
                     withState(client(), StateDraft.of("initial-review-state", StateType.REVIEW_STATE), (State state) -> {
                         final CustomFieldsDraft extraFields = CustomFieldsDraft.ofTypeKeyAndObjects(type.getKey(),
-                                Collections.singletonMap("screenshotUrls",
+                                singletonMap("screenshotUrls",
                                         Collections.singleton("http://www.commercetools.com/assets/img/CT-logo.svg")));
                         final ReviewDraft reviewDraft = ReviewDraftBuilder.ofTitle("Commercetools rocks")
                                 .authorName("John Smith")
@@ -76,6 +97,11 @@ public class ReviewCreateCommandTest extends IntegrationTest {
                         assertThat(review.getState()).isEqualTo(state.toReference());
                         assertThat(review.getCustomer()).isEqualTo(customer.toReference());
 
+                        final ProductProjection productProjection = client().executeBlocking(ProductProjectionByIdGet.ofStaged(product));
+                        assertThat(productProjection.getReviewRatingStatistics()).
+                                as("the state has not the role ReviewIncludedInStatistics, so it is not accounted yet")
+                                .isNull();
+
                         client().executeBlocking(ReviewDeleteCommand.of(review));
                     });
                 });
@@ -88,7 +114,7 @@ public class ReviewCreateCommandTest extends IntegrationTest {
         final JsonNodeReferenceResolver referenceResolver = new JsonNodeReferenceResolver();
         withCustomer(client(), (Customer customer) -> {
             withProduct(client(), (Product product) -> {
-                withState(client(), StateDraft.of("initial-review-state", StateType.REVIEW_STATE), (State state) -> {
+                withState(client(), StateDraft.of("initial-review-state", StateType.REVIEW_STATE).withRoles(REVIEW_INCLUDED_IN_STATISTICS), (State state) -> {
                     referenceResolver.addResourceByKey("review-product", product);
                     referenceResolver.addResourceByKey("review-customer", customer);
                     final ReviewDraft reviewDraft = draftFromJsonResource("drafts-tests/review.json", ReviewDraft.class, referenceResolver);
@@ -105,6 +131,13 @@ public class ReviewCreateCommandTest extends IntegrationTest {
                     assertThat(review.getRating()).isEqualTo(100);
                     assertThat(review.getCustomer()).isEqualTo(customer.toReference());
                     assertThat(review.getState()).isEqualTo(state.toReference());
+
+                    final ProductProjection productProjection = client().executeBlocking(ProductProjectionByIdGet.ofStaged(product));
+                    assertThat(productProjection.getReviewRatingStatistics().getAverageRating()).isEqualTo(100D);
+                    assertThat(productProjection.getReviewRatingStatistics().getHighestRating()).isEqualTo(100);
+                    assertThat(productProjection.getReviewRatingStatistics().getLowestRating()).isEqualTo(100);
+                    assertThat(productProjection.getReviewRatingStatistics().getCount()).isEqualTo(1);
+                    assertThat(productProjection.getReviewRatingStatistics().getRatingsDistribution()).isEqualTo(singletonMap(100, 1));
 
                     client().executeBlocking(ReviewDeleteCommand.of(review));
                 });

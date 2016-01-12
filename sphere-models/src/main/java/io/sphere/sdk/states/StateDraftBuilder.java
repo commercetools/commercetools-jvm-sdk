@@ -19,6 +19,8 @@ public final class StateDraftBuilder extends Base implements Builder<StateDraft>
     private Boolean initial;
     @Nullable
     private Set<Reference<State>> transitions;
+    @Nullable
+    private Set<StateRole> roles;
 
     private StateDraftBuilder(final String key, final StateType type) {
         this.key = key;
@@ -64,7 +66,11 @@ public final class StateDraftBuilder extends Base implements Builder<StateDraft>
 
     @Override
     public StateDraft build() {
-        return new StateDraft(key, type, name, description, initial, transitions);
+        return new StateDraft(key, type, name, description, initial, transitions, roles);
     }
 
+    public StateDraftBuilder roles(final Set<StateRole> roles) {
+        this.roles = roles;
+        return this;
+    }
 }
