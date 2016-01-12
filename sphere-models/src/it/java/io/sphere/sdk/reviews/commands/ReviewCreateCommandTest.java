@@ -1,37 +1,28 @@
 package io.sphere.sdk.reviews.commands;
 
 import io.sphere.sdk.client.BlockingSphereClient;
-import io.sphere.sdk.client.JsonNodeSphereRequest;
 import io.sphere.sdk.customers.Customer;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.products.Product;
 import io.sphere.sdk.products.ProductProjection;
-import io.sphere.sdk.products.queries.ProductByIdGet;
 import io.sphere.sdk.products.queries.ProductProjectionByIdGet;
 import io.sphere.sdk.reviews.Review;
 import io.sphere.sdk.reviews.ReviewDraft;
 import io.sphere.sdk.reviews.ReviewDraftBuilder;
-import io.sphere.sdk.reviews.ReviewRatingStatistics;
 import io.sphere.sdk.reviews.queries.ReviewByKeyGet;
 import io.sphere.sdk.states.State;
 import io.sphere.sdk.states.StateDraft;
-import io.sphere.sdk.states.StateRole;
 import io.sphere.sdk.states.StateType;
 import io.sphere.sdk.states.commands.StateDeleteCommand;
-import io.sphere.sdk.states.queries.StateByIdGet;
 import io.sphere.sdk.states.queries.StateQuery;
 import io.sphere.sdk.test.IntegrationTest;
 import io.sphere.sdk.test.JsonNodeReferenceResolver;
 import io.sphere.sdk.types.*;
-import io.sphere.sdk.utils.CompletableFutureUtils;
-import io.sphere.sdk.utils.ListUtils;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.util.Collections;
 import java.util.Locale;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.CompletionStage;
 import java.util.function.Consumer;
 
 import static io.sphere.sdk.customers.CustomerFixtures.withCustomer;
@@ -39,7 +30,6 @@ import static io.sphere.sdk.products.ProductFixtures.withProduct;
 import static io.sphere.sdk.states.StateFixtures.withState;
 import static io.sphere.sdk.states.StateRole.REVIEW_INCLUDED_IN_STATISTICS;
 import static io.sphere.sdk.test.SphereTestUtils.draftFromJsonResource;
-import static java.util.Collections.singleton;
 import static java.util.Collections.singletonMap;
 import static org.assertj.core.api.Assertions.assertThat;
 
