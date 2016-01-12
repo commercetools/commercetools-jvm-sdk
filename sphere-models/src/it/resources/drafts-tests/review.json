@@ -11,5 +11,8 @@
   "target":{
     "typeId": "product",
     "id": "review-product"
+  },
+  "state": {
+    "key": "initial-review-state"
   }
 }

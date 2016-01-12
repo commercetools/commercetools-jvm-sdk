@@ -88,23 +88,26 @@ public class ReviewCreateCommandTest extends IntegrationTest {
         final JsonNodeReferenceResolver referenceResolver = new JsonNodeReferenceResolver();
         withCustomer(client(), (Customer customer) -> {
             withProduct(client(), (Product product) -> {
-                referenceResolver.addResourceByKey("review-product", product);
-                referenceResolver.addResourceByKey("review-customer", customer);
-                final ReviewDraft reviewDraft = draftFromJsonResource("drafts-tests/review.json", ReviewDraft.class, referenceResolver);
+                withState(client(), StateDraft.of("initial-review-state", StateType.REVIEW_STATE), (State state) -> {
+                    referenceResolver.addResourceByKey("review-product", product);
+                    referenceResolver.addResourceByKey("review-customer", customer);
+                    final ReviewDraft reviewDraft = draftFromJsonResource("drafts-tests/review.json", ReviewDraft.class, referenceResolver);
 
-                final Review review = client().executeBlocking(ReviewCreateCommand.of(reviewDraft));
+                    final Review review = client().executeBlocking(ReviewCreateCommand.of(reviewDraft));
 
-                assertThat(review.getAuthorName()).isEqualTo("John Smith");
-                assertThat(review.getCustomer()).isEqualTo(customer.toReference());
-                assertThat(review.getKey()).isEqualTo("review1");
-                assertThat(review.getLocale()).isEqualTo(Locale.ENGLISH);
-                assertThat(review.getAuthorName()).isEqualTo("John Smith");
-                assertThat(review.getTitle()).isEqualTo("Commercetools rocks");
-                assertThat(review.getTarget()).isEqualTo(product.toReference());
-                assertThat(review.getRating()).isEqualTo(100);
-                assertThat(review.getCustomer()).isEqualTo(customer.toReference());
+                    assertThat(review.getAuthorName()).isEqualTo("John Smith");
+                    assertThat(review.getCustomer()).isEqualTo(customer.toReference());
+                    assertThat(review.getKey()).isEqualTo("review1");
+                    assertThat(review.getLocale()).isEqualTo(Locale.ENGLISH);
+                    assertThat(review.getAuthorName()).isEqualTo("John Smith");
+                    assertThat(review.getTitle()).isEqualTo("Commercetools rocks");
+                    assertThat(review.getTarget()).isEqualTo(product.toReference());
+                    assertThat(review.getRating()).isEqualTo(100);
+                    assertThat(review.getCustomer()).isEqualTo(customer.toReference());
+                    assertThat(review.getState()).isEqualTo(state.toReference());
 
-                client().executeBlocking(ReviewDeleteCommand.of(review));
+                    client().executeBlocking(ReviewDeleteCommand.of(review));
+                });
             });
         });
     }
