@@ -34,6 +34,12 @@ public class ReviewFixtures {
         withReview(client, createReviewDraftBuilder().build(), consumer);
     }
 
+    public static void withUpdateableReview(final BlockingSphereClient client, final UnaryOperator<Review> f) {
+        final Review review = client.executeBlocking(ReviewCreateCommand.of(createReviewDraftBuilder().build()));
+        final Review reviewToDelete = f.apply(review);
+        client.executeBlocking(ReviewDeleteCommand.of(reviewToDelete));
+    }
+
     public static void withReview(final BlockingSphereClient client, final ReviewDraft draft, final Consumer<Review> consumer) {
         final Review review = client.executeBlocking(ReviewCreateCommand.of(draft));
         consumer.accept(review);

@@ -10,6 +10,11 @@ import io.sphere.sdk.reviews.Review;
 import javax.annotation.Nullable;
 import java.util.Optional;
 
+/**
+ * Sets/unsets the customer belonging to a review.
+ *
+ * {@include.example io.sphere.sdk.reviews.commands.ReviewUpdateCommandTest#setCustomer()}
+ */
 public class SetCustomer extends UpdateActionImpl<Review> {
     @Nullable
     private final ResourceIdentifier<Customer> customer;

@@ -5,6 +5,11 @@ import io.sphere.sdk.reviews.Review;
 
 import javax.annotation.Nullable;
 
+/**
+ * Sets/unsets the content of a review.
+ *
+ * {@include.example io.sphere.sdk.reviews.commands.ReviewUpdateCommandTest#setText()}
+ */
 public class SetText extends UpdateActionImpl<Review> {
     @Nullable
     private final String text;

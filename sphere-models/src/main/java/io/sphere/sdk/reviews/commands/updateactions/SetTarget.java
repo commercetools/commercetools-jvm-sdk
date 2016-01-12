@@ -8,6 +8,11 @@ import io.sphere.sdk.reviews.Review;
 import javax.annotation.Nullable;
 import java.util.Optional;
 
+/**
+ * Sets/unsets the target of a review.
+ *
+ * {@inlcude.example io.sphere.sdk.reviews.commands.ReviewUpdateCommandTest#setTarget()}
+ */
 public class SetTarget extends UpdateActionImpl<Review> {
     @Nullable
     private final ResourceIdentifier<?> target;

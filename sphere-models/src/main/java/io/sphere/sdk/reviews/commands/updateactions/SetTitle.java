@@ -5,12 +5,17 @@ import io.sphere.sdk.reviews.Review;
 
 import javax.annotation.Nullable;
 
+/**
+ * Sets/unsets the title of a review
+ *
+ * {@include.example io.sphere.sdk.reviews.commands.ReviewUpdateCommandTest#setTitle()}
+ */
 public class SetTitle extends UpdateActionImpl<Review> {
     @Nullable
     private final String title;
 
     private SetTitle(@Nullable final String title) {
-        super("setText");
+        super("setTitle");
         this.title = title;
     }
 

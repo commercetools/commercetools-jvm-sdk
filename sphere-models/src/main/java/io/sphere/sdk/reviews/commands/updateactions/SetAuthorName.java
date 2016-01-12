@@ -5,6 +5,11 @@ import io.sphere.sdk.reviews.Review;
 
 import javax.annotation.Nullable;
 
+/**
+ * Sets/unsets the author name of a review.
+ *
+ * {@include.example io.sphere.sdk.reviews.commands.ReviewUpdateCommandTest#setAuthorName()}
+ */
 public class SetAuthorName extends UpdateActionImpl<Review> {
     @Nullable
     private final String authorName;

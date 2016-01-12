@@ -8,6 +8,8 @@ import io.sphere.sdk.types.customupdateactions.SetCustomFieldBase;
 /**
  * Updates a custom field.
  *
+ * {@include.example io.sphere.sdk.reviews.commands.ReviewUpdateCommandTest#setCustomType()}
+ *
  * @see io.sphere.sdk.types.Custom
  */
 public class SetCustomField extends SetCustomFieldBase<Review> {
