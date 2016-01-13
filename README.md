@@ -1,3 +1,8 @@
+:warning::warning::warning:
+
+Currently GitHub has misconfigured servers online sothe Javadocs are not available. But you can download them as zip file: https://github.com/sphereio/sphere-jvm-sdk/blob/8a7cafc6b63a7b8003cdc589a8787837c8e7216e/sphere-jvm-sdk-javadoc.zip?raw=true
+
+
 # SPHERE.IO JVM SDK
 
 ![SPHERE.IO icon](https://admin.sphere.io/assets/images/sphere_logo_rgb_long.png)
