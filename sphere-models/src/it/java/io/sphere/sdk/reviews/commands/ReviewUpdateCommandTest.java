@@ -102,6 +102,19 @@ public class ReviewUpdateCommandTest extends IntegrationTest {
     }
 
     @Test
+    public void setKey() {
+        withUpdateableReview(client(), (Review review) -> {
+            final String key = randomKey();
+            final Review updatedReview =
+                    client().executeBlocking(ReviewUpdateCommand.of(review, SetKey.of(key)));
+
+            assertThat(updatedReview.getKey()).isEqualTo(key);
+
+            return updatedReview;
+        });
+    }
+
+    @Test
     public void transitionState() {
         withStateByBuilder(client(), stateBuilder -> stateBuilder.initial(true).type(REVIEW_STATE), state -> {
             withUpdateableReview(client(), (Review review) -> {
