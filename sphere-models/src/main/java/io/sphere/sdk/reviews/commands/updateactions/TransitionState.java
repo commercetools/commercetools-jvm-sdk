@@ -1,6 +1,6 @@
 package io.sphere.sdk.reviews.commands.updateactions;
 
-import io.sphere.sdk.models.Referenceable;
+import io.sphere.sdk.models.ResourceIdentifiable;
 import io.sphere.sdk.reviews.Review;
 import io.sphere.sdk.states.State;
 import io.sphere.sdk.states.relatedupdateactions.TransitionStateBase;
@@ -15,11 +15,11 @@ import javax.annotation.Nullable;
  * {@include.example io.sphere.sdk.reviews.commands.ReviewUpdateCommandTest#transitionState()}
  */
 public class TransitionState extends TransitionStateBase<Review> {
-    private TransitionState(final @Nullable Referenceable<State> state) {
+    private TransitionState(final @Nullable ResourceIdentifiable<State> state) {
         super(state);
     }
 
-    public static TransitionState of(final @Nullable Referenceable<State> state) {
+    public static TransitionState of(final @Nullable ResourceIdentifiable<State> state) {
         return new TransitionState(state);
     }
 }

@@ -9,8 +9,6 @@ import java.util.List;
 
 /**
  * Retrieves a review by a known key.
- *
- * {@include.example }
  */
 public interface ReviewByKeyGet extends MetaModelGetDsl<Review, Review, ReviewByKeyGet, ReviewExpansionModel<Review>> {
     static ReviewByKeyGet of(final String key) {
