@@ -4,6 +4,7 @@ import io.sphere.sdk.client.SphereClientUtils;
 import io.sphere.sdk.products.*;
 import io.sphere.sdk.products.commands.ProductCreateCommand;
 import io.sphere.sdk.products.search.ProductProjectionSearch;
+import io.sphere.sdk.products.search.ProductProjectionSortSearchModel;
 import io.sphere.sdk.producttypes.ProductType;
 import io.sphere.sdk.producttypes.ProductTypeDraft;
 import io.sphere.sdk.producttypes.commands.ProductTypeCreateCommand;
@@ -11,6 +12,7 @@ import io.sphere.sdk.reviews.commands.ReviewCreateCommand;
 import io.sphere.sdk.reviews.queries.ReviewQuery;
 import io.sphere.sdk.search.PagedSearchResult;
 import io.sphere.sdk.search.RangeFacetResult;
+import io.sphere.sdk.search.SortExpression;
 import io.sphere.sdk.search.model.FacetRange;
 import io.sphere.sdk.search.model.RangeStats;
 import io.sphere.sdk.test.IntegrationTest;
@@ -25,6 +27,8 @@ import java.util.List;
 import java.util.Random;
 import java.util.concurrent.CompletionStage;
 import java.util.concurrent.TimeUnit;
+import java.util.function.Consumer;
+import java.util.function.Function;
 import java.util.stream.IntStream;
 
 import static io.sphere.sdk.test.SphereTestUtils.*;
@@ -36,6 +40,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class ReviewProductProjectionSearchTest extends IntegrationTest {
 
     public static final String PRODUCT_TYPE_KEY = ReviewProductProjectionSearchTest.class.getSimpleName();
+    public static final int REVIEWS_PER_PRODUCT = 20;
+    public static final int HIGHEST_RATING = 5;
     public static Product product;
 
     @BeforeClass
@@ -54,7 +60,7 @@ public class ReviewProductProjectionSearchTest extends IntegrationTest {
 
         final Random random = new Random(32);
         final int productCount = 3;
-        final int reviewsPerProduct = 20;
+        final int reviewsPerProduct = REVIEWS_PER_PRODUCT;
         final List<CompletionStage<Review>> reviewStages = new ArrayList<>(reviewsPerProduct * productCount);
         for(int productIteration = 0; productIteration < productCount; productIteration++) {
             final ProductDraft draft = ProductDraftBuilder.of(productType, randomSlug(), randomSlug(), ProductVariantDraftBuilder.of().build()).build();
@@ -82,7 +88,7 @@ public class ReviewProductProjectionSearchTest extends IntegrationTest {
 
     @Test
     public void searchForReviewsWithAverageRatingGreaterThan2() {
-        final List<FacetRange<BigDecimal>> facetRanges = IntStream.range(0, 5)
+        final List<FacetRange<BigDecimal>> facetRanges = IntStream.range(0, HIGHEST_RATING)
                 .mapToObj(i -> FacetRange.of(new BigDecimal(i), new BigDecimal(i + 1)))
                 .collect(toList());
         assertThat(facetRanges.toString()).isEqualTo("[[0 to 1), [1 to 2), [2 to 3), [3 to 4), [4 to 5)]");
@@ -96,7 +102,7 @@ public class ReviewProductProjectionSearchTest extends IntegrationTest {
             final PagedSearchResult<ProductProjection> result = client().executeBlocking(searchRequest);
             assertThat(result.getResults()).hasSize(2);
             final ProductProjection productProjection = result.getResults().get(0);
-            assertThat(productProjection.getReviewRatingStatistics().getCount()).isEqualTo(20);
+            assertThat(productProjection.getReviewRatingStatistics().getCount()).isEqualTo(REVIEWS_PER_PRODUCT);
             final RangeFacetResult facetResult = (RangeFacetResult) result.getFacetResult("reviewRatingStatistics.averageRating");
             assertThat(facetResult.getRanges().get(2)).isEqualTo(RangeStats.of("2.0", "3.0", 2L, "2.2", "2.7", "4.9", 2.45));
 
@@ -109,9 +115,9 @@ public class ReviewProductProjectionSearchTest extends IntegrationTest {
         final ReviewQuery reviewQuery = ReviewQuery.of()
                 .withPredicates(m -> m.target().id().is(productId))
                 .withSort(m -> m.createdAt().sort().desc())
-                .withLimit(20);
+                .withLimit(REVIEWS_PER_PRODUCT);
         final List<Review> reviews = client().executeBlocking(reviewQuery).getResults();
-        assertThat(reviews).hasSize(20);
+        assertThat(reviews).hasSize(REVIEWS_PER_PRODUCT);
         assertThat(reviews).extracting(r -> r.getTarget().getId()).containsOnlyElementsOf(singletonList(productId));
     }
 
@@ -121,9 +127,9 @@ public class ReviewProductProjectionSearchTest extends IntegrationTest {
         final ReviewQuery reviewQuery = ReviewQuery.of()
                 .withPredicates(review -> review.includedInStatistics().is(true).and(review.target().id().is(productId)))
                 .withSort(m -> m.createdAt().sort().desc())
-                .withLimit(20);
+                .withLimit(REVIEWS_PER_PRODUCT);
         final List<Review> reviews = client().executeBlocking(reviewQuery).getResults();
-        assertThat(reviews).hasSize(20);
+        assertThat(reviews).hasSize(REVIEWS_PER_PRODUCT);
         assertThat(reviews).extracting(r -> r.getTarget().getId()).containsOnlyElementsOf(singletonList(productId));
         assertThat(reviews).extracting(r -> r.isIncludedInStatistics()).containsOnlyElementsOf(singletonList(true));
     }
@@ -149,6 +155,50 @@ public class ReviewProductProjectionSearchTest extends IntegrationTest {
                 final RangeFacetResult highestRatingFacets = (RangeFacetResult) res.getFacetResult("reviewRatingStatistics.highestRating");
                 soft.assertThat(highestRatingFacets.getRanges().get(1).getSum()).as("highestRating facets").isEqualTo("14.0");
             });
+        });
+    }
+
+    @Test
+    public void sortByAverageRating() {
+        checkSorting(
+                m -> m.reviewRatingStatistics().averageRating().byDesc(),
+                p -> assertThat(p.getReviewRatingStatistics().getAverageRating()).isBetween(2.70D, 2.73D)
+        );
+    }
+
+    @Test
+    public void sortByCount() {
+        checkSorting(
+                m -> m.reviewRatingStatistics().count().byDesc(),
+                p -> assertThat(p.getReviewRatingStatistics().getCount()).isEqualTo(REVIEWS_PER_PRODUCT)
+        );
+    }
+
+    @Test
+    public void sortByLowestRating() {
+        checkSorting(
+                m -> m.reviewRatingStatistics().lowestRating().byAsc(),
+                p -> assertThat(p.getReviewRatingStatistics().getLowestRating()).isEqualTo(0)
+        );
+    }
+
+    @Test
+    public void sortByHighestRating() {
+        checkSorting(
+                m -> m.reviewRatingStatistics().highestRating().byDesc(),
+                p -> assertThat(p.getReviewRatingStatistics().getHighestRating()).isEqualTo(HIGHEST_RATING)
+        );
+    }
+
+    private void checkSorting(final Function<ProductProjectionSortSearchModel, SortExpression<ProductProjection>> sortExpressionFunction, final Consumer<ProductProjection> asserter) {
+        final ProductProjectionSearch productProjectionSearch = ProductProjectionSearch.ofStaged()
+                .withQueryFilters(m -> m.reviewRatingStatistics().count().byGreaterThanOrEqualTo(BigDecimal.ZERO))
+                .withSort(sortExpressionFunction);
+        assertEventually(() -> {
+            final List<ProductProjection> results = client().executeBlocking(productProjectionSearch).getResults();
+            assertThat(results.size()).isGreaterThanOrEqualTo(3);
+            final ProductProjection first = results.get(0);
+            asserter.accept(first);
         });
     }
 }

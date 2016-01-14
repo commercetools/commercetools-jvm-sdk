@@ -1,9 +1,6 @@
 package io.sphere.sdk.reviews.search;
 
-import io.sphere.sdk.search.model.SearchModel;
-import io.sphere.sdk.search.model.SingleValueSortSearchModel;
-import io.sphere.sdk.search.model.SingleValueSortSearchModelFactory;
-import io.sphere.sdk.search.model.SortableSearchModel;
+import io.sphere.sdk.search.model.*;
 
 import javax.annotation.Nullable;
 
@@ -14,5 +11,17 @@ public class ReviewRatingStatisticsSortSearchModel<T> extends SortableSearchMode
 
     public SingleValueSortSearchModel<T> averageRating() {
         return searchModel(this, "averageRating").sorted();
+    }
+
+    public SingleValueSortSearchModel<T> highestRating() {
+        return searchModel(this, "highestRating").sorted();
+    }
+
+    public SingleValueSortSearchModel<T> lowestRating() {
+        return searchModel(this, "lowestRating").sorted();
+    }
+
+    public SingleValueSortSearchModel<T> count() {
+        return searchModel(this, "count").sorted();
     }
 }
