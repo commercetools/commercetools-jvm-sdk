@@ -12,6 +12,7 @@ import io.sphere.sdk.products.commands.updateactions.Unpublish;
 import io.sphere.sdk.products.expansion.ProductExpansionModel;
 import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.queries.Query;
+import io.sphere.sdk.reviews.ReviewFixtures;
 import io.sphere.sdk.suppliers.VariantsCottonTShirtProductDraftSupplier;
 import io.sphere.sdk.test.IntegrationTest;
 import io.sphere.sdk.utils.MoneyImpl;
@@ -27,6 +28,7 @@ import static io.sphere.sdk.customergroups.CustomerGroupFixtures.withCustomerGro
 import static io.sphere.sdk.models.DefaultCurrencyUnits.EUR;
 import static io.sphere.sdk.productdiscounts.ProductDiscountFixtures.withUpdateableProductDiscount;
 import static io.sphere.sdk.products.ProductFixtures.*;
+import static io.sphere.sdk.reviews.ReviewFixtures.withReview;
 import static io.sphere.sdk.test.SphereTestUtils.DE;
 import static io.sphere.sdk.test.SphereTestUtils.assertEventually;
 import static io.sphere.sdk.test.SphereTestUtils.randomString;
@@ -145,6 +147,24 @@ public class ProductQueryTest extends IntegrationTest {
                 })
             )
         );
+    }
+
+    @Test
+    public void queryByReviewRating() {
+        withProduct(client(), product -> {
+            withReview(client(), b -> b.target(product).rating(1), review1 -> {
+                withReview(client(), b -> b.target(product).rating(3), review2 -> {
+                    final ProductQuery query = ProductQuery.of()
+                            .withPredicates(m -> m.reviewRatingStatistics().averageRating().is(2.0))
+                            .plusPredicates(m -> m.reviewRatingStatistics().count().is(2))
+                            .plusPredicates(m -> m.is(product));
+                    final List<Product> results = client().executeBlocking(query).getResults();
+                    assertThat(results).hasSize(1);
+                    assertThat(results.get(0).getId()).isEqualTo(product.getId());
+                });
+            });
+        });
+
     }
 
     private ProductQuery query(final Product product) {

@@ -86,6 +86,10 @@ public class QueryModelImpl<T> extends Base implements QueryModel<T> {
         return new IntegerQuerySortingModelImpl<>(this, pathSegment);
     }
 
+    protected DoubleQuerySortingModel<T> doubleModel(final String pathSegment) {
+        return new DoubleQuerySortingModelImpl<>(this, pathSegment);
+    }
+
     protected LocalizedStringQuerySortingModelImpl<T> localizedStringQuerySortingModel(final String pathSegment) {
         return new LocalizedStringQuerySortingModelImpl<>(this, pathSegment);
     }

@@ -2,10 +2,9 @@ package io.sphere.sdk.products.queries;
 
 import io.sphere.sdk.products.Product;
 import io.sphere.sdk.producttypes.ProductType;
-import io.sphere.sdk.queries.QueryModel;
-import io.sphere.sdk.queries.ReferenceOptionalQueryModel;
-import io.sphere.sdk.queries.ReferenceQueryModel;
-import io.sphere.sdk.queries.ResourceQueryModelImpl;
+import io.sphere.sdk.queries.*;
+import io.sphere.sdk.reviews.queries.ReviewRatingStatisticsQueryModel;
+import io.sphere.sdk.reviews.queries.ReviewRatingStatisticsQueryModelImpl;
 import io.sphere.sdk.states.State;
 
 import javax.annotation.Nullable;
@@ -31,5 +30,9 @@ public class ProductQueryModel extends ResourceQueryModelImpl<Product> {
 
     public ReferenceOptionalQueryModel<Product, State> state() {
         return referenceOptionalModel("state");
+    }
+
+    public ReviewRatingStatisticsQueryModel<Product> reviewRatingStatistics() {
+        return new ReviewRatingStatisticsQueryModelImpl<>(this, "reviewRatingStatistics");
     }
 }

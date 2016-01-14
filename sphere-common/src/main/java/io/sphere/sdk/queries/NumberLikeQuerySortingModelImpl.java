@@ -9,10 +9,10 @@ import static io.sphere.sdk.utils.ListUtils.listOf;
  * @param <T> context type, like Channel
  * @param <V> argument type, Integer or Long
  */
-abstract class IntegerLikeQuerySortingModel<T, V> extends QueryModelImpl<T>
+abstract class NumberLikeQuerySortingModelImpl<T, V> extends QueryModelImpl<T>
         implements QuerySortingModel<T>, OptionalQueryModel<T>, EqualityQueryModel<T, V>,
         NotEqualQueryModel<T, V>, IsInQueryModel<T, V>, IsNotInQueryModel<T, V>, InequalityQueryModel<T, V> {
-    protected IntegerLikeQuerySortingModel(@Nullable final QueryModel<T> parent, @Nullable final String pathSegment) {
+    protected NumberLikeQuerySortingModelImpl(@Nullable final QueryModel<T> parent, @Nullable final String pathSegment) {
         super(parent, pathSegment);
     }
 
