@@ -1,6 +1,7 @@
 package io.sphere.sdk.reviews.expansion;
 
 import io.sphere.sdk.expansion.ExpansionModel;
+import io.sphere.sdk.expansion.ExpansionPathContainer;
 import io.sphere.sdk.reviews.Review;
 
 /**
@@ -19,5 +20,17 @@ public class ReviewExpansionModel<T> extends ExpansionModel<T> {
 
     public static ReviewExpansionModel<Review> of() {
         return new ReviewExpansionModel<>();
+    }
+
+    public ExpansionPathContainer<T> customer() {
+        return expansionPath("customer");
+    }
+
+    public ExpansionPathContainer<T> state() {
+        return expansionPath("state");
+    }
+
+    public ExpansionPathContainer<T> target() {
+        return expansionPath("target");
     }
 }
