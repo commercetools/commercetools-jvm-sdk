@@ -316,7 +316,9 @@ assertThat(reviews).extracting(r -&gt; r.getTarget().getId()).containsOnlyElemen
 </tr>
 <tr id="i7" class="rowColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/models/Reference.html" title="interface in io.sphere.sdk.models">Reference</a>&lt;?&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/reviews/Review.html#getTarget--">getTarget</a></span>()</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/reviews/Review.html#getTarget--">getTarget</a></span>()</code>
+<div class="block">Identifies the target of the review.</div>
+</td>
 </tr>
 <tr id="i8" class="altColor">
 <td class="colFirst"><code>java.lang.String</code></td>
@@ -476,6 +478,11 @@ java.lang.Integer&nbsp;getRating()</pre>
 <h4>getTarget</h4>
 <pre>@Nullable
 <a href="../../../../io/sphere/sdk/models/Reference.html" title="interface in io.sphere.sdk.models">Reference</a>&lt;?&gt;&nbsp;getTarget()</pre>
+<div class="block">Identifies the target of the review. Can be a Product or a Channel or nothing.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>the target of this review or null</dd>
+</dl>
 </li>
 </ul>
 <a name="getText--">
