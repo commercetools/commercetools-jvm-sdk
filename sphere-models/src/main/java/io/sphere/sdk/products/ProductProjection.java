@@ -7,6 +7,7 @@ import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Referenceable;
 import io.sphere.sdk.products.queries.ProductProjectionByIdGet;
+import io.sphere.sdk.reviews.ReviewRatingStatistics;
 import io.sphere.sdk.search.SearchKeywords;
 
 import javax.annotation.Nullable;
@@ -156,4 +157,8 @@ public interface ProductProjection extends ProductLike<ProductProjection, Produc
     @Override
     @Nullable
     CategoryOrderHints getCategoryOrderHints();
+
+    @Nullable
+    @Override
+    ReviewRatingStatistics getReviewRatingStatistics();
 }

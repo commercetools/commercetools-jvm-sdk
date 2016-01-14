@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import java.util.Optional;
 import io.sphere.sdk.models.Resource;
 import io.sphere.sdk.models.Reference;
+import io.sphere.sdk.reviews.ReviewRatingStatistics;
 import io.sphere.sdk.states.State;
 
 import javax.annotation.Nullable;
@@ -89,4 +90,8 @@ public interface Product extends ProductLike<Product, Product>, Resource<Product
     static Reference<Product> referenceOfId(final String id) {
         return Reference.of(referenceTypeId(), id);
     }
+
+    @Nullable
+    @Override
+    ReviewRatingStatistics getReviewRatingStatistics();
 }

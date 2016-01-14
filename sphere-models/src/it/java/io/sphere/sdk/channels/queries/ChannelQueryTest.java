@@ -2,14 +2,14 @@ package io.sphere.sdk.channels.queries;
 
 import io.sphere.sdk.channels.Channel;
 import io.sphere.sdk.channels.ChannelRole;
-import io.sphere.sdk.products.queries.ProductQuery;
 import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.test.IntegrationTest;
 import org.junit.Test;
 
 import java.util.List;
 
-import static io.sphere.sdk.channels.ChannelFixtures.*;
+import static io.sphere.sdk.channels.ChannelFixtures.withChannelOfRole;
+import static io.sphere.sdk.channels.ChannelFixtures.withUpdatableChannelOfRole;
 import static io.sphere.sdk.reviews.ReviewFixtures.withReview;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -36,7 +36,9 @@ public class ChannelQueryTest extends IntegrationTest {
                             .plusPredicates(m -> m.is(product));
                     final List<Channel> results = client().executeBlocking(query).getResults();
                     assertThat(results).hasSize(1);
-                    assertThat(results.get(0).getId()).isEqualTo(product.getId());
+                    final Channel channel = results.get(0);
+                    assertThat(channel.getId()).isEqualTo(product.getId());
+                    assertThat(channel.getReviewRatingStatistics().getCount()).isEqualTo(2);
                 });
             });
         });

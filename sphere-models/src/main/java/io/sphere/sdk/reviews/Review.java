@@ -82,6 +82,10 @@ public interface Review extends Resource<Review>, Custom {
     @Nullable
     Reference<State> getState();
 
+    /**
+     * Identifies the target of the review. Can be a Product or a Channel or nothing.
+     * @return the target of this review or null
+     */
     @Nullable
     Reference<?> getTarget();
 

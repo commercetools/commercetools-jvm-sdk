@@ -160,7 +160,9 @@ public class ProductQueryTest extends IntegrationTest {
                             .plusPredicates(m -> m.is(product));
                     final List<Product> results = client().executeBlocking(query).getResults();
                     assertThat(results).hasSize(1);
-                    assertThat(results.get(0).getId()).isEqualTo(product.getId());
+                    final Product loadedProduct = results.get(0);
+                    assertThat(loadedProduct.getId()).isEqualTo(product.getId());
+                    assertThat(loadedProduct.getReviewRatingStatistics().getCount()).isEqualTo(2);
                 });
             });
         });
