@@ -14,4 +14,16 @@ public class ReviewRatingStatisticsFacetSearchModel<T> extends SearchModelImpl<T
     public RangeTermFacetSearchModel<T, BigDecimal> averageRating() {
         return numberSearchModel("averageRating").faceted();
     }
+
+    public RangeTermFacetSearchModel<T, BigDecimal> count() {
+        return numberSearchModel("count").faceted();
+    }
+
+    public RangeTermFacetSearchModel<T, BigDecimal> highestRating() {
+        return numberSearchModel("highestRating").faceted();
+    }
+
+    public RangeTermFacetSearchModel<T, BigDecimal> lowestRating() {
+        return numberSearchModel("lowestRating").faceted();
+    }
 }

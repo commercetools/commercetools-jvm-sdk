@@ -6,7 +6,6 @@ import io.sphere.sdk.customers.Customer;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Resource;
 import io.sphere.sdk.states.State;
-import io.sphere.sdk.types.BooleanFieldType;
 import io.sphere.sdk.types.Custom;
 import io.sphere.sdk.types.CustomFields;
 

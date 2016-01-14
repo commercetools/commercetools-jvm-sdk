@@ -64,6 +64,10 @@ public class ReviewProductProjectionSearchTest extends IntegrationTest {
         final List<Product> products = productStages.stream()
                 .map(productStage -> SphereClientUtils.blockingWait(productStage, 10, TimeUnit.SECONDS))
                 .collect(toList());
+
+        final ProductDraft draft = ProductDraftBuilder.of(productType, randomSlug(), randomSlug(), ProductVariantDraftBuilder.of().build()).build();
+        final Product productWithoutReview = client().executeBlocking(ProductCreateCommand.of(draft));
+
         product = products.get(0);
         products.forEach(product -> {
             for(int reviewIteration = 0; reviewIteration < reviewsPerProduct; reviewIteration++) {
@@ -122,5 +126,29 @@ public class ReviewProductProjectionSearchTest extends IntegrationTest {
         assertThat(reviews).hasSize(20);
         assertThat(reviews).extracting(r -> r.getTarget().getId()).containsOnlyElementsOf(singletonList(productId));
         assertThat(reviews).extracting(r -> r.isIncludedInStatistics()).containsOnlyElementsOf(singletonList(true));
+    }
+
+    @Test
+    public void searchByCount() {
+        final ProductProjectionSearch projectionSearch = ProductProjectionSearch.ofStaged()//in prod it would be current
+                .withResultFilters(m -> m.reviewRatingStatistics().count().byGreaterThanOrEqualTo(new BigDecimal(2)))
+                .plusResultFilters(m -> m.reviewRatingStatistics().highestRating().byGreaterThanOrEqualTo(new BigDecimal(2)))
+                .plusResultFilters(m -> m.reviewRatingStatistics().lowestRating().byGreaterThanOrEqualTo(new BigDecimal(0)))
+                .plusFacets(m -> m.reviewRatingStatistics().count().allRanges())
+                .plusFacets(m -> m.reviewRatingStatistics().highestRating().allRanges())
+                .plusFacets(m -> m.reviewRatingStatistics().lowestRating().allRanges())
+                ;
+        assertEventually(() -> {
+            softAssert(soft -> {
+                final PagedSearchResult<ProductProjection> res = client().executeBlocking(projectionSearch);
+                soft.assertThat(res.size()).isGreaterThanOrEqualTo(3);
+                final RangeFacetResult countFacets = (RangeFacetResult) res.getFacetResult("reviewRatingStatistics.count");
+                soft.assertThat(countFacets.getRanges().get(1).getSum()).as("count facets").isEqualTo("60.0");
+                final RangeFacetResult lowestRatingFacets = (RangeFacetResult) res.getFacetResult("reviewRatingStatistics.lowestRating");
+                soft.assertThat(lowestRatingFacets.getRanges().get(1).getSum()).as("lowestRating facets").isEqualTo("0.0");
+                final RangeFacetResult highestRatingFacets = (RangeFacetResult) res.getFacetResult("reviewRatingStatistics.highestRating");
+                soft.assertThat(highestRatingFacets.getRanges().get(1).getSum()).as("highestRating facets").isEqualTo("14.0");
+            });
+        });
     }
 }
