@@ -8,7 +8,7 @@ import io.sphere.sdk.producttypes.ProductType;
 import io.sphere.sdk.producttypes.ProductTypeDraft;
 import io.sphere.sdk.producttypes.commands.ProductTypeCreateCommand;
 import io.sphere.sdk.reviews.commands.ReviewCreateCommand;
-import io.sphere.sdk.search.FacetResult;
+import io.sphere.sdk.reviews.queries.ReviewQuery;
 import io.sphere.sdk.search.PagedSearchResult;
 import io.sphere.sdk.search.RangeFacetResult;
 import io.sphere.sdk.search.model.FacetRange;
@@ -29,12 +29,14 @@ import java.util.stream.IntStream;
 
 import static io.sphere.sdk.test.SphereTestUtils.*;
 import static java.util.Collections.emptyList;
+import static java.util.Collections.singletonList;
 import static java.util.stream.Collectors.toList;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class ReviewProductProjectionSearchTest extends IntegrationTest {
 
     public static final String PRODUCT_TYPE_KEY = ReviewProductProjectionSearchTest.class.getSimpleName();
+    public static Product product;
 
     @BeforeClass
     @AfterClass
@@ -62,6 +64,7 @@ public class ReviewProductProjectionSearchTest extends IntegrationTest {
         final List<Product> products = productStages.stream()
                 .map(productStage -> SphereClientUtils.blockingWait(productStage, 10, TimeUnit.SECONDS))
                 .collect(toList());
+        product = products.get(0);
         products.forEach(product -> {
             for(int reviewIteration = 0; reviewIteration < reviewsPerProduct; reviewIteration++) {
                 final int rating = random.nextInt(6);
@@ -74,7 +77,7 @@ public class ReviewProductProjectionSearchTest extends IntegrationTest {
     }
 
     @Test
-    public void searchForReviewsWithAverageRatingGreaterThan3() {
+    public void searchForReviewsWithAverageRatingGreaterThan2() {
         final List<FacetRange<BigDecimal>> facetRanges = IntStream.range(0, 5)
                 .mapToObj(i -> FacetRange.of(new BigDecimal(i), new BigDecimal(i + 1)))
                 .collect(toList());
@@ -94,5 +97,30 @@ public class ReviewProductProjectionSearchTest extends IntegrationTest {
             assertThat(facetResult.getRanges().get(2)).isEqualTo(RangeStats.of("2.0", "3.0", 2L, "2.2", "2.7", "4.9", 2.45));
 
         });
+    }
+
+    @Test
+    public void getReviewsForOneProduct() {
+        final String productId = product.getId();
+        final ReviewQuery reviewQuery = ReviewQuery.of()
+                .withPredicates(m -> m.target().id().is(productId))
+                .withSort(m -> m.createdAt().sort().desc())
+                .withLimit(20);
+        final List<Review> reviews = client().executeBlocking(reviewQuery).getResults();
+        assertThat(reviews).hasSize(20);
+        assertThat(reviews).extracting(r -> r.getTarget().getId()).containsOnlyElementsOf(singletonList(productId));
+    }
+
+    @Test
+    public void getApprovedReviewsForOneProduct() {
+        final String productId = product.getId();
+        final ReviewQuery reviewQuery = ReviewQuery.of()
+                .withPredicates(review -> review.includedInStatistics().is(true).and(review.target().id().is(productId)))
+                .withSort(m -> m.createdAt().sort().desc())
+                .withLimit(20);
+        final List<Review> reviews = client().executeBlocking(reviewQuery).getResults();
+        assertThat(reviews).hasSize(20);
+        assertThat(reviews).extracting(r -> r.getTarget().getId()).containsOnlyElementsOf(singletonList(productId));
+        assertThat(reviews).extracting(r -> r.isIncludedInStatistics()).containsOnlyElementsOf(singletonList(true));
     }
 }

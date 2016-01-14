@@ -6,6 +6,7 @@ import io.sphere.sdk.customers.Customer;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Resource;
 import io.sphere.sdk.states.State;
+import io.sphere.sdk.types.BooleanFieldType;
 import io.sphere.sdk.types.Custom;
 import io.sphere.sdk.types.CustomFields;
 
@@ -27,32 +28,36 @@ import java.util.Locale;
 
  Only states with {@link io.sphere.sdk.states.StateRole#REVIEW_INCLUDED_IN_STATISTICS} makes review ratings count in statistics.
 
- <h4>Creating reviews</h4>
+ <h4 id=creating-reviews>Creating reviews</h4>
  <p>Now we can create a review in the initial state to-approve:</p>
 
  {@include.example io.sphere.sdk.reviews.approvaldemo.CreateReviewToApprove}
 
- <h4>Query which reviews should be approved</h4>
+ <h4 id=query-to-approve-reviews>Query which reviews should be approved</h4>
 
  {@include.example io.sphere.sdk.reviews.approvaldemo.QueryReviewsToApprove}
 
- <h4>Approving a review</h4>
+ <h4 id=approve-a-review>Approving a review</h4>
 
 
  {@include.example io.sphere.sdk.reviews.approvaldemo.ApprovingAReview}
 
 <h3 id=displaying-products>Displaying Products</h3>
-<h4>Searching for Products with a Minimal Rating</h4>
+<h4 id=search-products-for-minimal-rating>Searching for Products with a Minimal Rating</h4>
  <p>We can display all products that:</p>
 <ul>
- <li>have at least 3 stars (average rating superior to 3)</li>
+ <li>have at least 2 stars (average rating superior to 2)</li>
  <li>with facets about the number of products rated with an average in the different ranges 0 to 1 star, 1 to 2 stars, 2 to 3 stars, 3 to 4 stars and 4 to 5 stars.</li>
  <li>sorted by average ratings</li>
  </ul>
 
- {@include.example io.sphere.sdk.reviews.ReviewProductProjectionSearchTest#searchForReviewsWithAverageRatingGreaterThan3()}
+ {@include.example io.sphere.sdk.reviews.ReviewProductProjectionSearchTest#searchForReviewsWithAverageRatingGreaterThan2()}
 
+ <h4 id=query-approved-reviews-for-one-product>Getting reviews for one product (only approved)</h4>
+ {@include.example io.sphere.sdk.reviews.ReviewProductProjectionSearchTest#getApprovedReviewsForOneProduct()}
 
+ <h4 id=query-reviews-for-one-product>Getting reviews for one product</h4>
+ {@include.example io.sphere.sdk.reviews.ReviewProductProjectionSearchTest#getReviewsForOneProduct()}
 
  */
 @JsonDeserialize(as = ReviewImpl.class)
@@ -89,6 +94,14 @@ public interface Review extends Resource<Review>, Custom {
 
     @Nullable
     String getUniquenessValue();
+
+    /**
+     * Indicates if this review is taken into account in the ratings statistics of the target.
+     A review is per default used in the statistics, unless the review is in a state that does not have the role ReviewIncludedInStatistics.
+     If the role of a State is modified after the calculation of this field, the calculation is not updated.
+     * @return is included in review rating of target
+     */
+    Boolean isIncludedInStatistics();
 
     static String referenceTypeId() {
         return "review";

@@ -34,13 +34,14 @@ final class ReviewImpl extends ResourceImpl<Review> implements Review {
     private final Reference<Customer> customer;
     @Nullable
     private final CustomFields custom;
+    private final Boolean includedInStatistics;
 
     ReviewImpl(final String id, final Long version, final ZonedDateTime createdAt,
                final ZonedDateTime lastModifiedAt,
                final String authorName, final String key, final String uniquenessValue, final String text,
                final String title, final Locale locale, final Reference<JsonNode> target,
                final Reference<State> state, final Integer rating, final Reference<Customer> customer,
-               final CustomFields custom) {
+               final CustomFields custom, final Boolean includedInStatistics) {
         super(id, version, createdAt, lastModifiedAt);
         this.authorName = authorName;
         this.key = key;
@@ -53,6 +54,7 @@ final class ReviewImpl extends ResourceImpl<Review> implements Review {
         this.rating = rating;
         this.customer = customer;
         this.custom = custom;
+        this.includedInStatistics = includedInStatistics;
     }
 
     @Override
@@ -119,5 +121,9 @@ final class ReviewImpl extends ResourceImpl<Review> implements Review {
     @Nullable
     public String getUniquenessValue() {
         return uniquenessValue;
+    }
+
+    public Boolean isIncludedInStatistics() {
+        return includedInStatistics;
     }
 }
