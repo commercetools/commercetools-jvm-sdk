@@ -3,6 +3,7 @@ package io.sphere.sdk.reviews;
 import io.sphere.sdk.client.BlockingSphereClient;
 import io.sphere.sdk.reviews.commands.ReviewCreateCommand;
 import io.sphere.sdk.reviews.commands.ReviewDeleteCommand;
+import io.sphere.sdk.reviews.queries.ReviewQuery;
 
 import java.util.Locale;
 import java.util.function.Consumer;
@@ -44,5 +45,13 @@ public class ReviewFixtures {
         final Review review = client.executeBlocking(ReviewCreateCommand.of(draft));
         consumer.accept(review);
         client.executeBlocking(ReviewDeleteCommand.of(review));
+    }
+
+    public static void deleteReviews(final BlockingSphereClient client) {
+        do {
+            client.executeBlocking(ReviewQuery.of().withLimit(500))
+                    .getResults()
+                    .forEach(r -> client.executeBlocking(ReviewDeleteCommand.of(r)));
+        } while (!client.executeBlocking(ReviewQuery.of().withLimit(1)).getResults().isEmpty());
     }
 }

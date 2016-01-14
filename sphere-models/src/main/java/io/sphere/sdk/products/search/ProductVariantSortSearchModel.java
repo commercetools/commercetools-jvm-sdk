@@ -16,6 +16,6 @@ public class ProductVariantSortSearchModel extends SortableSearchModel<ProductPr
     }
 
     public MultiValueSortSearchModel<ProductProjection> price() {
-        return searchModel(null, "price").sorted();
+        return searchModel(/*sic! price is at top level*/null, "price").sorted();
     }
 }

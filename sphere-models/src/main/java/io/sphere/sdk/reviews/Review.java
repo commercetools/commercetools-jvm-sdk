@@ -41,6 +41,16 @@ import java.util.Locale;
 
  {@include.example io.sphere.sdk.reviews.approvaldemo.ApprovingAReview}
 
+<h3 id=displaying-products>Displaying Products</h3>
+<h4>Searching for Products with a Minimal Rating</h4>
+ <p>We can display all products that:</p>
+<ul>
+ <li>have at least 3 stars (average rating superior to 3)</li>
+ <li>with facets about the number of products rated with an average in the different ranges 0 to 1 star, 1 to 2 stars, 2 to 3 stars, 3 to 4 stars and 4 to 5 stars.</li>
+ <li>sorted by average ratings</li>
+ </ul>
+
+ {@include.example io.sphere.sdk.reviews.ReviewProductProjectionSearchTest#searchForReviewsWithAverageRatingGreaterThan3()}
 
 
 
