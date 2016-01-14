@@ -164,7 +164,6 @@ public class ProductQueryTest extends IntegrationTest {
                 });
             });
         });
-
     }
 
     private ProductQuery query(final Product product) {

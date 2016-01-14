@@ -1,9 +1,13 @@
 package io.sphere.sdk.products.queries;
 
 import io.sphere.sdk.categories.Category;
+import io.sphere.sdk.models.Referenceable;
+import io.sphere.sdk.products.Product;
 import io.sphere.sdk.products.ProductProjection;
 import io.sphere.sdk.producttypes.ProductType;
 import io.sphere.sdk.queries.*;
+import io.sphere.sdk.reviews.queries.ReviewRatingStatisticsQueryModel;
+import io.sphere.sdk.reviews.queries.ReviewRatingStatisticsQueryModelImpl;
 
 public final class ProductProjectionQueryModel extends ProductDataQueryModelBase<ProductProjection> {
 
@@ -76,5 +80,14 @@ public final class ProductProjectionQueryModel extends ProductDataQueryModelBase
     @Override
     public CategoryOrderHintsQueryModel<ProductProjection> categoryOrderHints() {
         return super.categoryOrderHints();
+    }
+
+//    currently not supported by the API
+//    public ReviewRatingStatisticsQueryModel<ProductProjection> reviewRatingStatistics() {
+//        return new ReviewRatingStatisticsQueryModelImpl<>(this, "reviewRatingStatistics");
+//    }
+
+    public QueryPredicate<ProductProjection> is(final Referenceable<Product> product) {
+        return id().is(product.toReference().getId());
     }
 }
