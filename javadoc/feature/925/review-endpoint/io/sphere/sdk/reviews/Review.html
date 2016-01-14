@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":6,"i1":6,"i2":6,"i3":6,"i4":6,"i5":6,"i6":6,"i7":6,"i8":6,"i9":6,"i10":6,"i11":17,"i12":17,"i13":17,"i14":18,"i15":17};
+var methods = {"i0":6,"i1":6,"i2":6,"i3":6,"i4":6,"i5":6,"i6":6,"i7":6,"i8":6,"i9":6,"i10":6,"i11":6,"i12":17,"i13":17,"i14":17,"i15":18,"i16":17};
 var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],2:["t2","Instance Methods"],4:["t3","Abstract Methods"],16:["t5","Default Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -143,7 +143,7 @@ import static java.util.Collections.singleton;
 
  Only states with <a href="../../../../io/sphere/sdk/states/StateRole.html#REVIEW_INCLUDED_IN_STATISTICS"><code>StateRole.REVIEW_INCLUDED_IN_STATISTICS</code></a> makes review ratings count in statistics.
 
- <h4>Creating reviews</h4>
+ <h4 id=creating-reviews>Creating reviews</h4>
  <p>Now we can create a review in the initial state to-approve:</p>
 
  <div id="io-sphere-sdk-reviews-approvaldemo-CreateReviewToApprove%s" class=code-example><button type='button' style='display: none;' class='reveal-imports'>show/hide imports</button><pre class='hide code-example-imports'><code class='java'>import io.sphere.sdk.client.BlockingSphereClient;
@@ -171,7 +171,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 }
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/reviews/approvaldemo/CreateReviewToApprove.java" target="_blank">test code</a>.</pre></div>
 
- <h4>Query which reviews should be approved</h4>
+ <h4 id=query-to-approve-reviews>Query which reviews should be approved</h4>
 
  <div id="io-sphere-sdk-reviews-approvaldemo-QueryReviewsToApprove%s" class=code-example><button type='button' style='display: none;' class='reveal-imports'>show/hide imports</button><pre class='hide code-example-imports'><code class='java'>import io.sphere.sdk.client.BlockingSphereClient;
 import io.sphere.sdk.reviews.Review;
@@ -195,7 +195,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 }
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/reviews/approvaldemo/QueryReviewsToApprove.java" target="_blank">test code</a>.</pre></div>
 
- <h4>Approving a review</h4>
+ <h4 id=approve-a-review>Approving a review</h4>
 
 
  <div id="io-sphere-sdk-reviews-approvaldemo-ApprovingAReview%s" class=code-example><button type='button' style='display: none;' class='reveal-imports'>show/hide imports</button><pre class='hide code-example-imports'><code class='java'>import io.sphere.sdk.client.BlockingSphereClient;
@@ -217,15 +217,15 @@ import static io.sphere.sdk.test.ReferenceAssert.assertThat;
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/reviews/approvaldemo/ApprovingAReview.java" target="_blank">test code</a>.</pre></div>
 
 <h3 id=displaying-products>Displaying Products</h3>
-<h4>Searching for Products with a Minimal Rating</h4>
+<h4 id=search-products-for-minimal-rating>Searching for Products with a Minimal Rating</h4>
  <p>We can display all products that:</p>
 <ul>
- <li>have at least 3 stars (average rating superior to 3)</li>
+ <li>have at least 2 stars (average rating superior to 2)</li>
  <li>with facets about the number of products rated with an average in the different ranges 0 to 1 star, 1 to 2 stars, 2 to 3 stars, 3 to 4 stars and 4 to 5 stars.</li>
  <li>sorted by average ratings</li>
  </ul>
 
- <div id="io-sphere-sdk-reviews-ReviewProductProjectionSearchTest-searchForReviewsWithAverageRatingGreaterThan3--%s" class=code-example><pre><code class='java'>final List&lt;FacetRange&lt;BigDecimal&gt;&gt; facetRanges = IntStream.range(0, 5)
+ <div id="io-sphere-sdk-reviews-ReviewProductProjectionSearchTest-searchForReviewsWithAverageRatingGreaterThan2--%s" class=code-example><pre><code class='java'>final List&lt;FacetRange&lt;BigDecimal&gt;&gt; facetRanges = IntStream.range(0, 5)
         .mapToObj(i -&gt; FacetRange.of(new BigDecimal(i), new BigDecimal(i + 1)))
         .collect(toList());
 assertThat(facetRanges.toString()).isEqualTo("[[0 to 1), [1 to 2), [2 to 3), [3 to 4), [4 to 5)]");
@@ -244,6 +244,29 @@ assertEventually(() -&gt; {
     assertThat(facetResult.getRanges().get(2)).isEqualTo(RangeStats.of("2.0", "3.0", 2L, "2.2", "2.7", "4.9", 2.45));
 
 });
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/reviews/ReviewProductProjectionSearchTest.java" target="_blank">test code</a>.</pre></div>
+
+ <h4 id=query-approved-reviews-for-one-product>Getting reviews for one product (only approved)</h4>
+ <div id="io-sphere-sdk-reviews-ReviewProductProjectionSearchTest-getApprovedReviewsForOneProduct--%s" class=code-example><pre><code class='java'>final String productId = product.getId();
+final ReviewQuery reviewQuery = ReviewQuery.of()
+        .withPredicates(review -&gt; review.includedInStatistics().is(true).and(review.target().id().is(productId)))
+        .withSort(m -&gt; m.createdAt().sort().desc())
+        .withLimit(20);
+final List&lt;Review&gt; reviews = client().executeBlocking(reviewQuery).getResults();
+assertThat(reviews).hasSize(20);
+assertThat(reviews).extracting(r -&gt; r.getTarget().getId()).containsOnlyElementsOf(singletonList(productId));
+assertThat(reviews).extracting(r -&gt; r.isIncludedInStatistics()).containsOnlyElementsOf(singletonList(true));
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/reviews/ReviewProductProjectionSearchTest.java" target="_blank">test code</a>.</pre></div>
+
+ <h4 id=query-reviews-for-one-product>Getting reviews for one product</h4>
+ <div id="io-sphere-sdk-reviews-ReviewProductProjectionSearchTest-getReviewsForOneProduct--%s" class=code-example><pre><code class='java'>final String productId = product.getId();
+final ReviewQuery reviewQuery = ReviewQuery.of()
+        .withPredicates(m -&gt; m.target().id().is(productId))
+        .withSort(m -&gt; m.createdAt().sort().desc())
+        .withLimit(20);
+final List&lt;Review&gt; reviews = client().executeBlocking(reviewQuery).getResults();
+assertThat(reviews).hasSize(20);
+assertThat(reviews).extracting(r -&gt; r.getTarget().getId()).containsOnlyElementsOf(singletonList(productId));
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/reviews/ReviewProductProjectionSearchTest.java" target="_blank">test code</a>.</pre></div></div>
 </li>
 </ul>
@@ -308,24 +331,30 @@ assertEventually(() -&gt; {
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/reviews/Review.html#getUniquenessValue--">getUniquenessValue</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i11" class="rowColor">
+<td class="colFirst"><code>java.lang.Boolean</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/reviews/Review.html#isIncludedInStatistics--">isIncludedInStatistics</a></span>()</code>
+<div class="block">Indicates if this review is taken into account in the ratings statistics of the target.</div>
+</td>
+</tr>
+<tr id="i12" class="altColor">
 <td class="colFirst"><code>static <a href="../../../../io/sphere/sdk/models/Reference.html" title="interface in io.sphere.sdk.models">Reference</a>&lt;<a href="../../../../io/sphere/sdk/reviews/Review.html" title="interface in io.sphere.sdk.reviews">Review</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/reviews/Review.html#referenceOfId-java.lang.String-">referenceOfId</a></span>(java.lang.String&nbsp;id)</code>&nbsp;</td>
 </tr>
-<tr id="i12" class="altColor">
+<tr id="i13" class="rowColor">
 <td class="colFirst"><code>static java.lang.String</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/reviews/Review.html#referenceTypeId--">referenceTypeId</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i13" class="rowColor">
+<tr id="i14" class="altColor">
 <td class="colFirst"><code>static java.lang.String</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/reviews/Review.html#resourceTypeId--">resourceTypeId</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i14" class="altColor">
+<tr id="i15" class="rowColor">
 <td class="colFirst"><code>default <a href="../../../../io/sphere/sdk/models/Reference.html" title="interface in io.sphere.sdk.models">Reference</a>&lt;<a href="../../../../io/sphere/sdk/reviews/Review.html" title="interface in io.sphere.sdk.reviews">Review</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/reviews/Review.html#toReference--">toReference</a></span>()</code>
 <div class="block">Creates a reference which is not necessarily filled.</div>
 </td>
 </tr>
-<tr id="i15" class="rowColor">
+<tr id="i16" class="altColor">
 <td class="colFirst"><code>static com.fasterxml.jackson.core.type.TypeReference&lt;<a href="../../../../io/sphere/sdk/reviews/Review.html" title="interface in io.sphere.sdk.reviews">Review</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/reviews/Review.html#typeReference--">typeReference</a></span>()</code>&nbsp;</td>
 </tr>
@@ -477,6 +506,22 @@ java.lang.String&nbsp;getTitle()</pre>
 <h4>getUniquenessValue</h4>
 <pre>@Nullable
 java.lang.String&nbsp;getUniquenessValue()</pre>
+</li>
+</ul>
+<a name="isIncludedInStatistics--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>isIncludedInStatistics</h4>
+<pre>java.lang.Boolean&nbsp;isIncludedInStatistics()</pre>
+<div class="block">Indicates if this review is taken into account in the ratings statistics of the target.
+     A review is per default used in the statistics, unless the review is in a state that does not have the role ReviewIncludedInStatistics.
+     If the role of a State is modified after the calculation of this field, the calculation is not updated.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>is included in review rating of target</dd>
+</dl>
 </li>
 </ul>
 <a name="referenceTypeId--">
