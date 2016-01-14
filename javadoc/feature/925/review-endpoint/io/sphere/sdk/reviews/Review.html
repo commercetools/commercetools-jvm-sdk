@@ -225,7 +225,7 @@ import static io.sphere.sdk.test.ReferenceAssert.assertThat;
  <li>sorted by average ratings</li>
  </ul>
 
- <div id="io-sphere-sdk-reviews-ReviewProductProjectionSearchTest-searchForReviewsWithAverageRatingGreaterThan2--%s" class=code-example><pre><code class='java'>final List&lt;FacetRange&lt;BigDecimal&gt;&gt; facetRanges = IntStream.range(0, 5)
+ <div id="io-sphere-sdk-reviews-ReviewProductProjectionSearchTest-searchForReviewsWithAverageRatingGreaterThan2--%s" class=code-example><pre><code class='java'>final List&lt;FacetRange&lt;BigDecimal&gt;&gt; facetRanges = IntStream.range(0, HIGHEST_RATING)
         .mapToObj(i -&gt; FacetRange.of(new BigDecimal(i), new BigDecimal(i + 1)))
         .collect(toList());
 assertThat(facetRanges.toString()).isEqualTo("[[0 to 1), [1 to 2), [2 to 3), [3 to 4), [4 to 5)]");
@@ -239,7 +239,7 @@ assertEventually(() -&gt; {
     final PagedSearchResult&lt;ProductProjection&gt; result = client().executeBlocking(searchRequest);
     assertThat(result.getResults()).hasSize(2);
     final ProductProjection productProjection = result.getResults().get(0);
-    assertThat(productProjection.getReviewRatingStatistics().getCount()).isEqualTo(20);
+    assertThat(productProjection.getReviewRatingStatistics().getCount()).isEqualTo(REVIEWS_PER_PRODUCT);
     final RangeFacetResult facetResult = (RangeFacetResult) result.getFacetResult("reviewRatingStatistics.averageRating");
     assertThat(facetResult.getRanges().get(2)).isEqualTo(RangeStats.of("2.0", "3.0", 2L, "2.2", "2.7", "4.9", 2.45));
 
@@ -251,9 +251,9 @@ assertEventually(() -&gt; {
 final ReviewQuery reviewQuery = ReviewQuery.of()
         .withPredicates(review -&gt; review.includedInStatistics().is(true).and(review.target().id().is(productId)))
         .withSort(m -&gt; m.createdAt().sort().desc())
-        .withLimit(20);
+        .withLimit(REVIEWS_PER_PRODUCT);
 final List&lt;Review&gt; reviews = client().executeBlocking(reviewQuery).getResults();
-assertThat(reviews).hasSize(20);
+assertThat(reviews).hasSize(REVIEWS_PER_PRODUCT);
 assertThat(reviews).extracting(r -&gt; r.getTarget().getId()).containsOnlyElementsOf(singletonList(productId));
 assertThat(reviews).extracting(r -&gt; r.isIncludedInStatistics()).containsOnlyElementsOf(singletonList(true));
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/reviews/ReviewProductProjectionSearchTest.java" target="_blank">test code</a>.</pre></div>
@@ -263,9 +263,9 @@ assertThat(reviews).extracting(r -&gt; r.isIncludedInStatistics()).containsOnlyE
 final ReviewQuery reviewQuery = ReviewQuery.of()
         .withPredicates(m -&gt; m.target().id().is(productId))
         .withSort(m -&gt; m.createdAt().sort().desc())
-        .withLimit(20);
+        .withLimit(REVIEWS_PER_PRODUCT);
 final List&lt;Review&gt; reviews = client().executeBlocking(reviewQuery).getResults();
-assertThat(reviews).hasSize(20);
+assertThat(reviews).hasSize(REVIEWS_PER_PRODUCT);
 assertThat(reviews).extracting(r -&gt; r.getTarget().getId()).containsOnlyElementsOf(singletonList(productId));
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/reviews/ReviewProductProjectionSearchTest.java" target="_blank">test code</a>.</pre></div></div>
 </li>
