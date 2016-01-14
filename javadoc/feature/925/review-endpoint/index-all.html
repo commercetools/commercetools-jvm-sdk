@@ -237,6 +237,8 @@
 <dd>
 <div class="block">Adds return data to an order.</div>
 </dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/types/ResourceTypeIdsSetBuilder.html#addReviews--">addReviews()</a></span> - Method in class io.sphere.sdk.types.<a href="io/sphere/sdk/types/ResourceTypeIdsSetBuilder.html" title="class in io.sphere.sdk.types">ResourceTypeIdsSetBuilder</a></dt>
+<dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/channels/commands/updateactions/AddRoles.html" title="class in io.sphere.sdk.channels.commands.updateactions"><span class="typeNameLink">AddRoles</span></a> - Class in <a href="io/sphere/sdk/channels/commands/updateactions/package-summary.html">io.sphere.sdk.channels.commands.updateactions</a></dt>
 <dd>
 <div class="block">Adds roles to a channel.</div>
@@ -459,9 +461,17 @@
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/payments/queries/PaymentQueryModel.html#authorizedUntil--">authorizedUntil()</a></span> - Method in class io.sphere.sdk.payments.queries.<a href="io/sphere/sdk/payments/queries/PaymentQueryModel.html" title="class in io.sphere.sdk.payments.queries">PaymentQueryModel</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/reviews/queries/ReviewQueryModel.html#authorName--">authorName()</a></span> - Method in class io.sphere.sdk.reviews.queries.<a href="io/sphere/sdk/reviews/queries/ReviewQueryModel.html" title="class in io.sphere.sdk.reviews.queries">ReviewQueryModel</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/reviews/ReviewDraftBuilder.html#authorName-java.lang.String-">authorName(String)</a></span> - Method in class io.sphere.sdk.reviews.<a href="io/sphere/sdk/reviews/ReviewDraftBuilder.html" title="class in io.sphere.sdk.reviews">ReviewDraftBuilder</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/inventory/queries/InventoryEntryQueryModel.html#availableQuantity--">availableQuantity()</a></span> - Method in interface io.sphere.sdk.inventory.queries.<a href="io/sphere/sdk/inventory/queries/InventoryEntryQueryModel.html" title="interface in io.sphere.sdk.inventory.queries">InventoryEntryQueryModel</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/reviews/search/ReviewRatingStatisticsFacetSearchModel.html#averageRating--">averageRating()</a></span> - Method in class io.sphere.sdk.reviews.search.<a href="io/sphere/sdk/reviews/search/ReviewRatingStatisticsFacetSearchModel.html" title="class in io.sphere.sdk.reviews.search">ReviewRatingStatisticsFacetSearchModel</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/reviews/search/ReviewRatingStatisticsFilterSearchModel.html#averageRating--">averageRating()</a></span> - Method in class io.sphere.sdk.reviews.search.<a href="io/sphere/sdk/reviews/search/ReviewRatingStatisticsFilterSearchModel.html" title="class in io.sphere.sdk.reviews.search">ReviewRatingStatisticsFilterSearchModel</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/reviews/search/ReviewRatingStatisticsSortSearchModel.html#averageRating--">averageRating()</a></span> - Method in class io.sphere.sdk.reviews.search.<a href="io/sphere/sdk/reviews/search/ReviewRatingStatisticsSortSearchModel.html" title="class in io.sphere.sdk.reviews.search">ReviewRatingStatisticsSortSearchModel</a></dt>
 <dd>&nbsp;</dd>
 </dl>
 <a name="I:B">
@@ -1654,7 +1664,9 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/payments/queries/PaymentQueryModel.html#customer--">customer()</a></span> - Method in class io.sphere.sdk.payments.queries.<a href="io/sphere/sdk/payments/queries/PaymentQueryModel.html" title="class in io.sphere.sdk.payments.queries">PaymentQueryModel</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/reviews/ReviewDraftBuilder.html#customer-io.sphere.sdk.models.ResourceIdentifier-">customer(ResourceIdentifier&lt;Customer&gt;)</a></span> - Method in class io.sphere.sdk.reviews.<a href="io/sphere/sdk/reviews/ReviewDraftBuilder.html" title="class in io.sphere.sdk.reviews">ReviewDraftBuilder</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/reviews/queries/ReviewQueryModel.html#customer--">customer()</a></span> - Method in class io.sphere.sdk.reviews.queries.<a href="io/sphere/sdk/reviews/queries/ReviewQueryModel.html" title="class in io.sphere.sdk.reviews.queries">ReviewQueryModel</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/reviews/ReviewDraftBuilder.html#customer-io.sphere.sdk.models.ResourceIdentifiable-">customer(ResourceIdentifiable&lt;Customer&gt;)</a></span> - Method in class io.sphere.sdk.reviews.<a href="io/sphere/sdk/reviews/ReviewDraftBuilder.html" title="class in io.sphere.sdk.reviews">ReviewDraftBuilder</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/customers/queries/CustomerByIdGet.html" title="interface in io.sphere.sdk.customers.queries"><span class="typeNameLink">CustomerByIdGet</span></a> - Interface in <a href="io/sphere/sdk/customers/queries/package-summary.html">io.sphere.sdk.customers.queries</a></dt>
 <dd>
@@ -2454,6 +2466,10 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/ResourceQuery.html#expansionPaths--">expansionPaths()</a></span> - Method in interface io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/ResourceQuery.html" title="interface in io.sphere.sdk.queries">ResourceQuery</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/reviews/queries/ReviewByIdGet.html#expansionPaths--">expansionPaths()</a></span> - Method in interface io.sphere.sdk.reviews.queries.<a href="io/sphere/sdk/reviews/queries/ReviewByIdGet.html" title="interface in io.sphere.sdk.reviews.queries">ReviewByIdGet</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/reviews/queries/ReviewByKeyGet.html#expansionPaths--">expansionPaths()</a></span> - Method in interface io.sphere.sdk.reviews.queries.<a href="io/sphere/sdk/reviews/queries/ReviewByKeyGet.html" title="interface in io.sphere.sdk.reviews.queries">ReviewByKeyGet</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/search/MetaModelSearchDslBuilder.html#expansionPaths">expansionPaths</a></span> - Variable in class io.sphere.sdk.search.<a href="io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="class in io.sphere.sdk.search">MetaModelSearchDslBuilder</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/search/MetaModelSearchDslBuilder.html#expansionPaths-java.util.List-">expansionPaths(List&lt;ExpansionPath&lt;T&gt;&gt;)</a></span> - Method in class io.sphere.sdk.search.<a href="io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="class in io.sphere.sdk.search">MetaModelSearchDslBuilder</a></dt>
@@ -2919,6 +2935,8 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/payments/PaymentDraftBuilder.html#getAuthorizedUntil--">getAuthorizedUntil()</a></span> - Method in class io.sphere.sdk.payments.<a href="io/sphere/sdk/payments/PaymentDraftBuilder.html" title="class in io.sphere.sdk.payments">PaymentDraftBuilder</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/reviews/commands/updateactions/SetAuthorName.html#getAuthorName--">getAuthorName()</a></span> - Method in class io.sphere.sdk.reviews.commands.updateactions.<a href="io/sphere/sdk/reviews/commands/updateactions/SetAuthorName.html" title="class in io.sphere.sdk.reviews.commands.updateactions">SetAuthorName</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/reviews/Review.html#getAuthorName--">getAuthorName()</a></span> - Method in interface io.sphere.sdk.reviews.<a href="io/sphere/sdk/reviews/Review.html" title="interface in io.sphere.sdk.reviews">Review</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/reviews/ReviewDraft.html#getAuthorName--">getAuthorName()</a></span> - Method in interface io.sphere.sdk.reviews.<a href="io/sphere/sdk/reviews/ReviewDraft.html" title="interface in io.sphere.sdk.reviews">ReviewDraft</a></dt>
@@ -3204,6 +3222,8 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/payments/PaymentDraft.html#getCustomer--">getCustomer()</a></span> - Method in interface io.sphere.sdk.payments.<a href="io/sphere/sdk/payments/PaymentDraft.html" title="interface in io.sphere.sdk.payments">PaymentDraft</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/payments/PaymentDraftBuilder.html#getCustomer--">getCustomer()</a></span> - Method in class io.sphere.sdk.payments.<a href="io/sphere/sdk/payments/PaymentDraftBuilder.html" title="class in io.sphere.sdk.payments">PaymentDraftBuilder</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/reviews/commands/updateactions/SetCustomer.html#getCustomer--">getCustomer()</a></span> - Method in class io.sphere.sdk.reviews.commands.updateactions.<a href="io/sphere/sdk/reviews/commands/updateactions/SetCustomer.html" title="class in io.sphere.sdk.reviews.commands.updateactions">SetCustomer</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/reviews/Review.html#getCustomer--">getCustomer()</a></span> - Method in interface io.sphere.sdk.reviews.<a href="io/sphere/sdk/reviews/Review.html" title="interface in io.sphere.sdk.reviews">Review</a></dt>
 <dd>&nbsp;</dd>
@@ -3539,6 +3559,8 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/types/CustomFields.html#getFieldAsString-java.lang.String-">getFieldAsString(String)</a></span> - Method in class io.sphere.sdk.types.<a href="io/sphere/sdk/types/CustomFields.html" title="class in io.sphere.sdk.types">CustomFields</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/types/CustomFields.html#getFieldAsStringSet-java.lang.String-">getFieldAsStringSet(String)</a></span> - Method in class io.sphere.sdk.types.<a href="io/sphere/sdk/types/CustomFields.html" title="class in io.sphere.sdk.types">CustomFields</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/types/CustomFields.html#getFieldAsTime-java.lang.String-">getFieldAsTime(String)</a></span> - Method in class io.sphere.sdk.types.<a href="io/sphere/sdk/types/CustomFields.html" title="class in io.sphere.sdk.types">CustomFields</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/types/commands/updateactions/AddFieldDefinition.html#getFieldDefinition--">getFieldDefinition()</a></span> - Method in class io.sphere.sdk.types.commands.updateactions.<a href="io/sphere/sdk/types/commands/updateactions/AddFieldDefinition.html" title="class in io.sphere.sdk.types.commands.updateactions">AddFieldDefinition</a></dt>
@@ -3800,6 +3822,8 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/producttypes/ProductTypeDraft.html#getKey--">getKey()</a></span> - Method in class io.sphere.sdk.producttypes.<a href="io/sphere/sdk/producttypes/ProductTypeDraft.html" title="class in io.sphere.sdk.producttypes">ProductTypeDraft</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/projects/Project.html#getKey--">getKey()</a></span> - Method in class io.sphere.sdk.projects.<a href="io/sphere/sdk/projects/Project.html" title="class in io.sphere.sdk.projects">Project</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/reviews/commands/updateactions/SetKey.html#getKey--">getKey()</a></span> - Method in class io.sphere.sdk.reviews.commands.updateactions.<a href="io/sphere/sdk/reviews/commands/updateactions/SetKey.html" title="class in io.sphere.sdk.reviews.commands.updateactions">SetKey</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/reviews/Review.html#getKey--">getKey()</a></span> - Method in interface io.sphere.sdk.reviews.<a href="io/sphere/sdk/reviews/Review.html" title="interface in io.sphere.sdk.reviews">Review</a></dt>
 <dd>&nbsp;</dd>
@@ -4467,6 +4491,8 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/TaxPortion.html#getRate--">getRate()</a></span> - Method in class io.sphere.sdk.carts.<a href="io/sphere/sdk/carts/TaxPortion.html" title="class in io.sphere.sdk.carts">TaxPortion</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/reviews/commands/updateactions/SetRating.html#getRating--">getRating()</a></span> - Method in class io.sphere.sdk.reviews.commands.updateactions.<a href="io/sphere/sdk/reviews/commands/updateactions/SetRating.html" title="class in io.sphere.sdk.reviews.commands.updateactions">SetRating</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/reviews/Review.html#getRating--">getRating()</a></span> - Method in interface io.sphere.sdk.reviews.<a href="io/sphere/sdk/reviews/Review.html" title="interface in io.sphere.sdk.reviews">Review</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/reviews/ReviewDraft.html#getRating--">getRating()</a></span> - Method in interface io.sphere.sdk.reviews.<a href="io/sphere/sdk/reviews/ReviewDraft.html" title="interface in io.sphere.sdk.reviews">ReviewDraft</a></dt>
@@ -4544,6 +4570,8 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/channels/commands/updateactions/RemoveRoles.html#getRoles--">getRoles()</a></span> - Method in class io.sphere.sdk.channels.commands.updateactions.<a href="io/sphere/sdk/channels/commands/updateactions/RemoveRoles.html" title="class in io.sphere.sdk.channels.commands.updateactions">RemoveRoles</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/channels/commands/updateactions/SetRoles.html#getRoles--">getRoles()</a></span> - Method in class io.sphere.sdk.channels.commands.updateactions.<a href="io/sphere/sdk/channels/commands/updateactions/SetRoles.html" title="class in io.sphere.sdk.channels.commands.updateactions">SetRoles</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/states/StateDraft.html#getRoles--">getRoles()</a></span> - Method in class io.sphere.sdk.states.<a href="io/sphere/sdk/states/StateDraft.html" title="class in io.sphere.sdk.states">StateDraft</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/categories/CategoryTree.html#getRoots--">getRoots()</a></span> - Method in interface io.sphere.sdk.categories.<a href="io/sphere/sdk/categories/CategoryTree.html" title="interface in io.sphere.sdk.categories">CategoryTree</a></dt>
 <dd>
@@ -4785,6 +4813,8 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/cartdiscounts/commands/updateactions/ChangeTarget.html#getTarget--">getTarget()</a></span> - Method in class io.sphere.sdk.cartdiscounts.commands.updateactions.<a href="io/sphere/sdk/cartdiscounts/commands/updateactions/ChangeTarget.html" title="class in io.sphere.sdk.cartdiscounts.commands.updateactions">ChangeTarget</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/reviews/commands/updateactions/SetTarget.html#getTarget--">getTarget()</a></span> - Method in class io.sphere.sdk.reviews.commands.updateactions.<a href="io/sphere/sdk/reviews/commands/updateactions/SetTarget.html" title="class in io.sphere.sdk.reviews.commands.updateactions">SetTarget</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/reviews/Review.html#getTarget--">getTarget()</a></span> - Method in interface io.sphere.sdk.reviews.<a href="io/sphere/sdk/reviews/Review.html" title="interface in io.sphere.sdk.reviews">Review</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/reviews/ReviewDraft.html#getTarget--">getTarget()</a></span> - Method in interface io.sphere.sdk.reviews.<a href="io/sphere/sdk/reviews/ReviewDraft.html" title="interface in io.sphere.sdk.reviews">ReviewDraft</a></dt>
@@ -4855,6 +4885,8 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 </dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/Suggestion.html#getText--">getText()</a></span> - Method in interface io.sphere.sdk.products.<a href="io/sphere/sdk/products/Suggestion.html" title="interface in io.sphere.sdk.products">Suggestion</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/reviews/commands/updateactions/SetText.html#getText--">getText()</a></span> - Method in class io.sphere.sdk.reviews.commands.updateactions.<a href="io/sphere/sdk/reviews/commands/updateactions/SetText.html" title="class in io.sphere.sdk.reviews.commands.updateactions">SetText</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/reviews/Review.html#getText--">getText()</a></span> - Method in interface io.sphere.sdk.reviews.<a href="io/sphere/sdk/reviews/Review.html" title="interface in io.sphere.sdk.reviews">Review</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/reviews/ReviewDraft.html#getText--">getText()</a></span> - Method in interface io.sphere.sdk.reviews.<a href="io/sphere/sdk/reviews/ReviewDraft.html" title="interface in io.sphere.sdk.reviews">ReviewDraft</a></dt>
@@ -4884,6 +4916,8 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/customers/CustomerName.html#getTitle--">getTitle()</a></span> - Method in class io.sphere.sdk.customers.<a href="io/sphere/sdk/customers/CustomerName.html" title="class in io.sphere.sdk.customers">CustomerName</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/Address.html#getTitle--">getTitle()</a></span> - Method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/Address.html" title="class in io.sphere.sdk.models">Address</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/reviews/commands/updateactions/SetTitle.html#getTitle--">getTitle()</a></span> - Method in class io.sphere.sdk.reviews.commands.updateactions.<a href="io/sphere/sdk/reviews/commands/updateactions/SetTitle.html" title="class in io.sphere.sdk.reviews.commands.updateactions">SetTitle</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/reviews/Review.html#getTitle--">getTitle()</a></span> - Method in interface io.sphere.sdk.reviews.<a href="io/sphere/sdk/reviews/Review.html" title="interface in io.sphere.sdk.reviews">Review</a></dt>
 <dd>&nbsp;</dd>
@@ -5461,6 +5495,8 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/taxcategories/queries/TaxRateQueryModel.html#includedInPrice--">includedInPrice()</a></span> - Method in interface io.sphere.sdk.taxcategories.queries.<a href="io/sphere/sdk/taxcategories/queries/TaxRateQueryModel.html" title="interface in io.sphere.sdk.taxcategories.queries">TaxRateQueryModel</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/reviews/queries/ReviewQueryModel.html#includedInStatistics--">includedInStatistics()</a></span> - Method in class io.sphere.sdk.reviews.queries.<a href="io/sphere/sdk/reviews/queries/ReviewQueryModel.html" title="class in io.sphere.sdk.reviews.queries">ReviewQueryModel</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/search/model/Bound.html#inclusive-T-">inclusive(T)</a></span> - Static method in class io.sphere.sdk.search.model.<a href="io/sphere/sdk/search/model/Bound.html" title="class in io.sphere.sdk.search.model">Bound</a></dt>
 <dd>
 <div class="block">Creates a bound with the given endpoint, included from the range.</div>
@@ -5868,6 +5904,16 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dd>
 <div class="block">Provides model classes and builders for  reviews.</div>
 </dd>
+<dt><a href="io/sphere/sdk/reviews/commands/package-summary.html">io.sphere.sdk.reviews.commands</a> - package io.sphere.sdk.reviews.commands</dt>
+<dd>&nbsp;</dd>
+<dt><a href="io/sphere/sdk/reviews/commands/updateactions/package-summary.html">io.sphere.sdk.reviews.commands.updateactions</a> - package io.sphere.sdk.reviews.commands.updateactions</dt>
+<dd>&nbsp;</dd>
+<dt><a href="io/sphere/sdk/reviews/expansion/package-summary.html">io.sphere.sdk.reviews.expansion</a> - package io.sphere.sdk.reviews.expansion</dt>
+<dd>&nbsp;</dd>
+<dt><a href="io/sphere/sdk/reviews/queries/package-summary.html">io.sphere.sdk.reviews.queries</a> - package io.sphere.sdk.reviews.queries</dt>
+<dd>&nbsp;</dd>
+<dt><a href="io/sphere/sdk/reviews/search/package-summary.html">io.sphere.sdk.reviews.search</a> - package io.sphere.sdk.reviews.search</dt>
+<dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/search/package-summary.html">io.sphere.sdk.search</a> - package io.sphere.sdk.search</dt>
 <dd>
 <div class="block">Provides types to perform searches.</div>
@@ -5993,6 +6039,8 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/EqualityQueryModel.html#is-E-">is(E)</a></span> - Method in interface io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/EqualityQueryModel.html" title="interface in io.sphere.sdk.queries">EqualityQueryModel</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/IntegerQuerySortingModel.html#is-java.lang.Integer-">is(Integer)</a></span> - Method in interface io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/IntegerQuerySortingModel.html" title="interface in io.sphere.sdk.queries">IntegerQuerySortingModel</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/LocaleQueryModel.html#is-java.util.Locale-">is(Locale)</a></span> - Method in interface io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/LocaleQueryModel.html" title="interface in io.sphere.sdk.queries">LocaleQueryModel</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/LongQueryModel.html#is-java.lang.Long-">is(Long)</a></span> - Method in interface io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/LongQueryModel.html" title="interface in io.sphere.sdk.queries">LongQueryModel</a></dt>
 <dd>&nbsp;</dd>
@@ -6136,6 +6184,8 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/IsInQueryModel.html#isIn-java.lang.Iterable-">isIn(Iterable&lt;V&gt;)</a></span> - Method in interface io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/IsInQueryModel.html" title="interface in io.sphere.sdk.queries">IsInQueryModel</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/LocaleQueryModel.html#isIn-java.lang.Iterable-">isIn(Iterable&lt;Locale&gt;)</a></span> - Method in interface io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/LocaleQueryModel.html" title="interface in io.sphere.sdk.queries">LocaleQueryModel</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/LongQueryModel.html#isIn-java.lang.Iterable-">isIn(Iterable&lt;Long&gt;)</a></span> - Method in interface io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/LongQueryModel.html" title="interface in io.sphere.sdk.queries">LongQueryModel</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/LongQuerySortingModel.html#isIn-java.lang.Iterable-">isIn(Iterable&lt;Long&gt;)</a></span> - Method in interface io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/LongQuerySortingModel.html" title="interface in io.sphere.sdk.queries">LongQuerySortingModel</a></dt>
@@ -6229,6 +6279,8 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/CountryQueryModel.html#isNot-com.neovisionaries.i18n.CountryCode-">isNot(CountryCode)</a></span> - Method in interface io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/CountryQueryModel.html" title="interface in io.sphere.sdk.queries">CountryQueryModel</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/IntegerQuerySortingModel.html#isNot-java.lang.Integer-">isNot(Integer)</a></span> - Method in interface io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/IntegerQuerySortingModel.html" title="interface in io.sphere.sdk.queries">IntegerQuerySortingModel</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/LocaleQueryModel.html#isNot-java.util.Locale-">isNot(Locale)</a></span> - Method in interface io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/LocaleQueryModel.html" title="interface in io.sphere.sdk.queries">LocaleQueryModel</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/LongQueryModel.html#isNot-java.lang.Long-">isNot(Long)</a></span> - Method in interface io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/LongQueryModel.html" title="interface in io.sphere.sdk.queries">LongQueryModel</a></dt>
 <dd>&nbsp;</dd>
@@ -6476,6 +6528,8 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/producttypes/queries/ProductTypeQueryModel.html#key--">key()</a></span> - Method in class io.sphere.sdk.producttypes.queries.<a href="io/sphere/sdk/producttypes/queries/ProductTypeQueryModel.html" title="class in io.sphere.sdk.producttypes.queries">ProductTypeQueryModel</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/reviews/queries/ReviewQueryModel.html#key--">key()</a></span> - Method in class io.sphere.sdk.reviews.queries.<a href="io/sphere/sdk/reviews/queries/ReviewQueryModel.html" title="class in io.sphere.sdk.reviews.queries">ReviewQueryModel</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/reviews/ReviewDraftBuilder.html#key-java.lang.String-">key(String)</a></span> - Method in class io.sphere.sdk.reviews.<a href="io/sphere/sdk/reviews/ReviewDraftBuilder.html" title="class in io.sphere.sdk.reviews">ReviewDraftBuilder</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/search/model/EnumFacetAndFilterSearchModel.html#key--">key()</a></span> - Method in class io.sphere.sdk.search.model.<a href="io/sphere/sdk/search/model/EnumFacetAndFilterSearchModel.html" title="class in io.sphere.sdk.search.model">EnumFacetAndFilterSearchModel</a></dt>
@@ -6644,6 +6698,8 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/LocalizedStringQuerySortingModel.html#locale-java.util.Locale-">locale(Locale)</a></span> - Method in interface io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/LocalizedStringQuerySortingModel.html" title="interface in io.sphere.sdk.queries">LocalizedStringQuerySortingModel</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/reviews/queries/ReviewQueryModel.html#locale--">locale()</a></span> - Method in class io.sphere.sdk.reviews.queries.<a href="io/sphere/sdk/reviews/queries/ReviewQueryModel.html" title="class in io.sphere.sdk.reviews.queries">ReviewQueryModel</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/reviews/ReviewDraftBuilder.html#locale-java.util.Locale-">locale(Locale)</a></span> - Method in class io.sphere.sdk.reviews.<a href="io/sphere/sdk/reviews/ReviewDraftBuilder.html" title="class in io.sphere.sdk.reviews">ReviewDraftBuilder</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/search/model/LocalizedStringFacetAndFilterSearchModel.html#locale-java.util.Locale-">locale(Locale)</a></span> - Method in class io.sphere.sdk.search.model.<a href="io/sphere/sdk/search/model/LocalizedStringFacetAndFilterSearchModel.html" title="class in io.sphere.sdk.search.model">LocalizedStringFacetAndFilterSearchModel</a></dt>
@@ -6653,6 +6709,12 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/search/model/LocalizedStringFilterSearchModel.html#locale-java.util.Locale-">locale(Locale)</a></span> - Method in class io.sphere.sdk.search.model.<a href="io/sphere/sdk/search/model/LocalizedStringFilterSearchModel.html" title="class in io.sphere.sdk.search.model">LocalizedStringFilterSearchModel</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/search/model/LocalizedStringSortSearchModel.html#locale-java.util.Locale-">locale(Locale)</a></span> - Method in class io.sphere.sdk.search.model.<a href="io/sphere/sdk/search/model/LocalizedStringSortSearchModel.html" title="class in io.sphere.sdk.search.model">LocalizedStringSortSearchModel</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="io/sphere/sdk/queries/LocaleQueryModel.html" title="interface in io.sphere.sdk.queries"><span class="typeNameLink">LocaleQueryModel</span></a>&lt;<a href="io/sphere/sdk/queries/LocaleQueryModel.html" title="type parameter in LocaleQueryModel">T</a>&gt; - Interface in <a href="io/sphere/sdk/queries/package-summary.html">io.sphere.sdk.queries</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="io/sphere/sdk/queries/LocaleQuerySortingModel.html" title="interface in io.sphere.sdk.queries"><span class="typeNameLink">LocaleQuerySortingModel</span></a>&lt;<a href="io/sphere/sdk/queries/LocaleQuerySortingModel.html" title="type parameter in LocaleQuerySortingModel">T</a>&gt; - Interface in <a href="io/sphere/sdk/queries/package-summary.html">io.sphere.sdk.queries</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/QueryModelImpl.html#localeQuerySortingModel-java.lang.String-">localeQuerySortingModel(String)</a></span> - Method in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/QueryModelImpl.html" title="class in io.sphere.sdk.queries">QueryModelImpl</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/json/TypeReferences.html#localeTypeReference--">localeTypeReference()</a></span> - Static method in class io.sphere.sdk.json.<a href="io/sphere/sdk/json/TypeReferences.html" title="class in io.sphere.sdk.json">TypeReferences</a></dt>
 <dd>&nbsp;</dd>
@@ -8415,6 +8477,42 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/QuerySort.html#of-java.lang.String-">of(String)</a></span> - Static method in interface io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/QuerySort.html" title="interface in io.sphere.sdk.queries">QuerySort</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/reviews/commands/ReviewCreateCommand.html#of-io.sphere.sdk.reviews.ReviewDraft-">of(ReviewDraft)</a></span> - Static method in interface io.sphere.sdk.reviews.commands.<a href="io/sphere/sdk/reviews/commands/ReviewCreateCommand.html" title="interface in io.sphere.sdk.reviews.commands">ReviewCreateCommand</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/reviews/commands/ReviewDeleteCommand.html#of-io.sphere.sdk.models.Versioned-">of(Versioned&lt;Review&gt;)</a></span> - Static method in interface io.sphere.sdk.reviews.commands.<a href="io/sphere/sdk/reviews/commands/ReviewDeleteCommand.html" title="interface in io.sphere.sdk.reviews.commands">ReviewDeleteCommand</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/reviews/commands/ReviewUpdateCommand.html#of-io.sphere.sdk.models.Versioned-java.util.List-">of(Versioned&lt;Review&gt;, List&lt;? extends UpdateAction&lt;Review&gt;&gt;)</a></span> - Static method in interface io.sphere.sdk.reviews.commands.<a href="io/sphere/sdk/reviews/commands/ReviewUpdateCommand.html" title="interface in io.sphere.sdk.reviews.commands">ReviewUpdateCommand</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/reviews/commands/ReviewUpdateCommand.html#of-io.sphere.sdk.models.Versioned-io.sphere.sdk.commands.UpdateAction-">of(Versioned&lt;Review&gt;, UpdateAction&lt;Review&gt;)</a></span> - Static method in interface io.sphere.sdk.reviews.commands.<a href="io/sphere/sdk/reviews/commands/ReviewUpdateCommand.html" title="interface in io.sphere.sdk.reviews.commands">ReviewUpdateCommand</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/reviews/commands/updateactions/SetAuthorName.html#of-java.lang.String-">of(String)</a></span> - Static method in class io.sphere.sdk.reviews.commands.updateactions.<a href="io/sphere/sdk/reviews/commands/updateactions/SetAuthorName.html" title="class in io.sphere.sdk.reviews.commands.updateactions">SetAuthorName</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/reviews/commands/updateactions/SetCustomer.html#of-io.sphere.sdk.models.Referenceable-">of(Referenceable&lt;Customer&gt;)</a></span> - Static method in class io.sphere.sdk.reviews.commands.updateactions.<a href="io/sphere/sdk/reviews/commands/updateactions/SetCustomer.html" title="class in io.sphere.sdk.reviews.commands.updateactions">SetCustomer</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/reviews/commands/updateactions/SetKey.html#of-java.lang.String-">of(String)</a></span> - Static method in class io.sphere.sdk.reviews.commands.updateactions.<a href="io/sphere/sdk/reviews/commands/updateactions/SetKey.html" title="class in io.sphere.sdk.reviews.commands.updateactions">SetKey</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/reviews/commands/updateactions/SetRating.html#of-java.lang.Integer-">of(Integer)</a></span> - Static method in class io.sphere.sdk.reviews.commands.updateactions.<a href="io/sphere/sdk/reviews/commands/updateactions/SetRating.html" title="class in io.sphere.sdk.reviews.commands.updateactions">SetRating</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/reviews/commands/updateactions/SetTarget.html#of-io.sphere.sdk.models.ResourceIdentifiable-">of(ResourceIdentifiable&lt;?&gt;)</a></span> - Static method in class io.sphere.sdk.reviews.commands.updateactions.<a href="io/sphere/sdk/reviews/commands/updateactions/SetTarget.html" title="class in io.sphere.sdk.reviews.commands.updateactions">SetTarget</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/reviews/commands/updateactions/SetText.html#of-java.lang.String-">of(String)</a></span> - Static method in class io.sphere.sdk.reviews.commands.updateactions.<a href="io/sphere/sdk/reviews/commands/updateactions/SetText.html" title="class in io.sphere.sdk.reviews.commands.updateactions">SetText</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/reviews/commands/updateactions/SetTitle.html#of-java.lang.String-">of(String)</a></span> - Static method in class io.sphere.sdk.reviews.commands.updateactions.<a href="io/sphere/sdk/reviews/commands/updateactions/SetTitle.html" title="class in io.sphere.sdk.reviews.commands.updateactions">SetTitle</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/reviews/commands/updateactions/TransitionState.html#of-io.sphere.sdk.models.ResourceIdentifiable-">of(ResourceIdentifiable&lt;State&gt;)</a></span> - Static method in class io.sphere.sdk.reviews.commands.updateactions.<a href="io/sphere/sdk/reviews/commands/updateactions/TransitionState.html" title="class in io.sphere.sdk.reviews.commands.updateactions">TransitionState</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/reviews/expansion/ReviewExpansionModel.html#of--">of()</a></span> - Static method in class io.sphere.sdk.reviews.expansion.<a href="io/sphere/sdk/reviews/expansion/ReviewExpansionModel.html" title="class in io.sphere.sdk.reviews.expansion">ReviewExpansionModel</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/reviews/queries/ReviewByIdGet.html#of-io.sphere.sdk.models.Identifiable-">of(Identifiable&lt;Review&gt;)</a></span> - Static method in interface io.sphere.sdk.reviews.queries.<a href="io/sphere/sdk/reviews/queries/ReviewByIdGet.html" title="interface in io.sphere.sdk.reviews.queries">ReviewByIdGet</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/reviews/queries/ReviewByIdGet.html#of-java.lang.String-">of(String)</a></span> - Static method in interface io.sphere.sdk.reviews.queries.<a href="io/sphere/sdk/reviews/queries/ReviewByIdGet.html" title="interface in io.sphere.sdk.reviews.queries">ReviewByIdGet</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/reviews/queries/ReviewByKeyGet.html#of-java.lang.String-">of(String)</a></span> - Static method in interface io.sphere.sdk.reviews.queries.<a href="io/sphere/sdk/reviews/queries/ReviewByKeyGet.html" title="interface in io.sphere.sdk.reviews.queries">ReviewByKeyGet</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/reviews/queries/ReviewQuery.html#of--">of()</a></span> - Static method in interface io.sphere.sdk.reviews.queries.<a href="io/sphere/sdk/reviews/queries/ReviewQuery.html" title="interface in io.sphere.sdk.reviews.queries">ReviewQuery</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/reviews/queries/ReviewQueryModel.html#of--">of()</a></span> - Static method in class io.sphere.sdk.reviews.queries.<a href="io/sphere/sdk/reviews/queries/ReviewQueryModel.html" title="class in io.sphere.sdk.reviews.queries">ReviewQueryModel</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/search/FilteredFacetExpression.html#of-java.lang.String-">of(String)</a></span> - Static method in interface io.sphere.sdk.search.<a href="io/sphere/sdk/search/FilteredFacetExpression.html" title="interface in io.sphere.sdk.search">FilteredFacetExpression</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/search/FilteredFacetResult.html#of-java.lang.Long-">of(Long)</a></span> - Static method in class io.sphere.sdk.search.<a href="io/sphere/sdk/search/FilteredFacetResult.html" title="class in io.sphere.sdk.search">FilteredFacetResult</a></dt>
@@ -8950,6 +9048,8 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/commands/updateactions/SetProductPriceCustomField.html#ofJson-java.lang.String-com.fasterxml.jackson.databind.JsonNode-java.lang.String-">ofJson(String, JsonNode, String)</a></span> - Static method in class io.sphere.sdk.products.commands.updateactions.<a href="io/sphere/sdk/products/commands/updateactions/SetProductPriceCustomField.html" title="class in io.sphere.sdk.products.commands.updateactions">SetProductPriceCustomField</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/reviews/commands/updateactions/SetCustomField.html#ofJson-java.lang.String-com.fasterxml.jackson.databind.JsonNode-">ofJson(String, JsonNode)</a></span> - Static method in class io.sphere.sdk.reviews.commands.updateactions.<a href="io/sphere/sdk/reviews/commands/updateactions/SetCustomField.html" title="class in io.sphere.sdk.reviews.commands.updateactions">SetCustomField</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/customobjects/commands/CustomObjectDeleteCommand.html#ofJsonNode-io.sphere.sdk.customobjects.CustomObject-">ofJsonNode(CustomObject&lt;?&gt;)</a></span> - Static method in interface io.sphere.sdk.customobjects.commands.<a href="io/sphere/sdk/customobjects/commands/CustomObjectDeleteCommand.html" title="interface in io.sphere.sdk.customobjects.commands">CustomObjectDeleteCommand</a></dt>
 <dd>
 <div class="block">Deletes a custom object without optimistic concurrency control and uses the delete endpoint via container and key and returns the old custom object with a JsonNode value type.</div>
@@ -8983,6 +9083,12 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/producttypes/commands/ProductTypeUpdateCommand.html#ofKey-java.lang.String-java.lang.Long-java.util.List-">ofKey(String, Long, List&lt;? extends UpdateAction&lt;ProductType&gt;&gt;)</a></span> - Static method in interface io.sphere.sdk.producttypes.commands.<a href="io/sphere/sdk/producttypes/commands/ProductTypeUpdateCommand.html" title="interface in io.sphere.sdk.producttypes.commands">ProductTypeUpdateCommand</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/producttypes/commands/ProductTypeUpdateCommand.html#ofKey-java.lang.String-java.lang.Long-io.sphere.sdk.commands.UpdateAction-">ofKey(String, Long, UpdateAction&lt;ProductType&gt;)</a></span> - Static method in interface io.sphere.sdk.producttypes.commands.<a href="io/sphere/sdk/producttypes/commands/ProductTypeUpdateCommand.html" title="interface in io.sphere.sdk.producttypes.commands">ProductTypeUpdateCommand</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/reviews/commands/ReviewDeleteCommand.html#ofKey-java.lang.String-java.lang.Long-">ofKey(String, Long)</a></span> - Static method in interface io.sphere.sdk.reviews.commands.<a href="io/sphere/sdk/reviews/commands/ReviewDeleteCommand.html" title="interface in io.sphere.sdk.reviews.commands">ReviewDeleteCommand</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/reviews/commands/ReviewUpdateCommand.html#ofKey-java.lang.String-java.lang.Long-java.util.List-">ofKey(String, Long, List&lt;? extends UpdateAction&lt;Review&gt;&gt;)</a></span> - Static method in interface io.sphere.sdk.reviews.commands.<a href="io/sphere/sdk/reviews/commands/ReviewUpdateCommand.html" title="interface in io.sphere.sdk.reviews.commands">ReviewUpdateCommand</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/reviews/commands/ReviewUpdateCommand.html#ofKey-java.lang.String-java.lang.Long-io.sphere.sdk.commands.UpdateAction-">ofKey(String, Long, UpdateAction&lt;Review&gt;)</a></span> - Static method in interface io.sphere.sdk.reviews.commands.<a href="io/sphere/sdk/reviews/commands/ReviewUpdateCommand.html" title="interface in io.sphere.sdk.reviews.commands">ReviewUpdateCommand</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/OrderImportDraftBuilder.html#ofLineItems-javax.money.MonetaryAmount-io.sphere.sdk.orders.OrderState-java.util.List-">ofLineItems(MonetaryAmount, OrderState, List&lt;LineItemImportDraft&gt;)</a></span> - Static method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/OrderImportDraftBuilder.html" title="class in io.sphere.sdk.orders">OrderImportDraftBuilder</a></dt>
 <dd>
@@ -9152,6 +9258,8 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/commands/updateactions/SetProductPriceCustomField.html#ofObject-java.lang.String-java.lang.Object-java.lang.String-">ofObject(String, Object, String)</a></span> - Static method in class io.sphere.sdk.products.commands.updateactions.<a href="io/sphere/sdk/products/commands/updateactions/SetProductPriceCustomField.html" title="class in io.sphere.sdk.products.commands.updateactions">SetProductPriceCustomField</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/reviews/commands/updateactions/SetCustomField.html#ofObject-java.lang.String-java.lang.Object-">ofObject(String, Object)</a></span> - Static method in class io.sphere.sdk.reviews.commands.updateactions.<a href="io/sphere/sdk/reviews/commands/updateactions/SetCustomField.html" title="class in io.sphere.sdk.reviews.commands.updateactions">SetCustomField</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/customers/commands/updateactions/ChangeAddress.html#ofOldAddressToNewAddress-io.sphere.sdk.models.Address-io.sphere.sdk.models.Address-">ofOldAddressToNewAddress(Address, Address)</a></span> - Static method in class io.sphere.sdk.customers.commands.updateactions.<a href="io/sphere/sdk/customers/commands/updateactions/ChangeAddress.html" title="class in io.sphere.sdk.customers.commands.updateactions">ChangeAddress</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/client/SphereAccessTokenSupplier.html#ofOneTimeFetchingToken-io.sphere.sdk.client.SphereAuthConfig-io.sphere.sdk.http.HttpClient-boolean-">ofOneTimeFetchingToken(SphereAuthConfig, HttpClient, boolean)</a></span> - Static method in interface io.sphere.sdk.client.<a href="io/sphere/sdk/client/SphereAccessTokenSupplier.html" title="interface in io.sphere.sdk.client">SphereAccessTokenSupplier</a></dt>
@@ -9216,6 +9324,8 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/commands/updateactions/SetProductPriceCustomType.html#ofRemoveType-java.lang.String-">ofRemoveType(String)</a></span> - Static method in class io.sphere.sdk.products.commands.updateactions.<a href="io/sphere/sdk/products/commands/updateactions/SetProductPriceCustomType.html" title="class in io.sphere.sdk.products.commands.updateactions">SetProductPriceCustomType</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/reviews/commands/updateactions/SetCustomType.html#ofRemoveType--">ofRemoveType()</a></span> - Static method in class io.sphere.sdk.reviews.commands.updateactions.<a href="io/sphere/sdk/reviews/commands/updateactions/SetCustomType.html" title="class in io.sphere.sdk.reviews.commands.updateactions">SetCustomType</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/messages/MessageDerivateHint.html#ofResourceType-java.lang.String-java.lang.Class-">ofResourceType(String, Class&lt;T&gt;)</a></span> - Static method in class io.sphere.sdk.messages.<a href="io/sphere/sdk/messages/MessageDerivateHint.html" title="class in io.sphere.sdk.messages">MessageDerivateHint</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/messages/MessageDerivateHint.html#ofSingleMessageType-java.lang.String-java.lang.Class-">ofSingleMessageType(String, Class&lt;T&gt;)</a></span> - Static method in class io.sphere.sdk.messages.<a href="io/sphere/sdk/messages/MessageDerivateHint.html" title="class in io.sphere.sdk.messages">MessageDerivateHint</a></dt>
@@ -9247,6 +9357,8 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/payments/TransactionType.html#ofSphereValue-java.lang.String-">ofSphereValue(String)</a></span> - Static method in enum io.sphere.sdk.payments.<a href="io/sphere/sdk/payments/TransactionType.html" title="enum in io.sphere.sdk.payments">TransactionType</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/attributes/AttributeConstraint.html#ofSphereValue-java.lang.String-">ofSphereValue(String)</a></span> - Static method in enum io.sphere.sdk.products.attributes.<a href="io/sphere/sdk/products/attributes/AttributeConstraint.html" title="enum in io.sphere.sdk.products.attributes">AttributeConstraint</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/states/StateRole.html#ofSphereValue-java.lang.String-">ofSphereValue(String)</a></span> - Static method in enum io.sphere.sdk.states.<a href="io/sphere/sdk/states/StateRole.html" title="enum in io.sphere.sdk.states">StateRole</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/states/StateType.html#ofSphereValue-java.lang.String-">ofSphereValue(String)</a></span> - Static method in enum io.sphere.sdk.states.<a href="io/sphere/sdk/states/StateType.html" title="enum in io.sphere.sdk.states">StateType</a></dt>
 <dd>&nbsp;</dd>
@@ -9338,6 +9450,8 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/commands/updateactions/SetProductPriceCustomType.html#ofTypeIdAndJson-java.lang.String-java.util.Map-java.lang.String-">ofTypeIdAndJson(String, Map&lt;String, JsonNode&gt;, String)</a></span> - Static method in class io.sphere.sdk.products.commands.updateactions.<a href="io/sphere/sdk/products/commands/updateactions/SetProductPriceCustomType.html" title="class in io.sphere.sdk.products.commands.updateactions">SetProductPriceCustomType</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/reviews/commands/updateactions/SetCustomType.html#ofTypeIdAndJson-java.lang.String-java.util.Map-">ofTypeIdAndJson(String, Map&lt;String, JsonNode&gt;)</a></span> - Static method in class io.sphere.sdk.reviews.commands.updateactions.<a href="io/sphere/sdk/reviews/commands/updateactions/SetCustomType.html" title="class in io.sphere.sdk.reviews.commands.updateactions">SetCustomType</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/types/CustomFieldsDraft.html#ofTypeIdAndJson-java.lang.String-java.util.Map-">ofTypeIdAndJson(String, Map&lt;String, JsonNode&gt;)</a></span> - Static method in class io.sphere.sdk.types.<a href="io/sphere/sdk/types/CustomFieldsDraft.html" title="class in io.sphere.sdk.types">CustomFieldsDraft</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/commands/updateactions/SetCustomLineItemCustomType.html#ofTypeIdAndObjects-java.lang.String-java.util.Map-java.lang.String-">ofTypeIdAndObjects(String, Map&lt;String, Object&gt;, String)</a></span> - Static method in class io.sphere.sdk.carts.commands.updateactions.<a href="io/sphere/sdk/carts/commands/updateactions/SetCustomLineItemCustomType.html" title="class in io.sphere.sdk.carts.commands.updateactions">SetCustomLineItemCustomType</a></dt>
@@ -9374,6 +9488,8 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/commands/updateactions/SetProductPriceCustomType.html#ofTypeIdAndObjects-java.lang.String-java.lang.String-java.lang.Object-java.lang.String-">ofTypeIdAndObjects(String, String, Object, String)</a></span> - Static method in class io.sphere.sdk.products.commands.updateactions.<a href="io/sphere/sdk/products/commands/updateactions/SetProductPriceCustomType.html" title="class in io.sphere.sdk.products.commands.updateactions">SetProductPriceCustomType</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/reviews/commands/updateactions/SetCustomType.html#ofTypeIdAndObjects-java.lang.String-java.util.Map-">ofTypeIdAndObjects(String, Map&lt;String, Object&gt;)</a></span> - Static method in class io.sphere.sdk.reviews.commands.updateactions.<a href="io/sphere/sdk/reviews/commands/updateactions/SetCustomType.html" title="class in io.sphere.sdk.reviews.commands.updateactions">SetCustomType</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/types/CustomFieldsDraft.html#ofTypeIdAndObjects-java.lang.String-java.util.Map-">ofTypeIdAndObjects(String, Map&lt;String, Object&gt;)</a></span> - Static method in class io.sphere.sdk.types.<a href="io/sphere/sdk/types/CustomFieldsDraft.html" title="class in io.sphere.sdk.types">CustomFieldsDraft</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/types/CustomFieldsDraftBuilder.html#ofTypeKey-java.lang.String-">ofTypeKey(String)</a></span> - Static method in class io.sphere.sdk.types.<a href="io/sphere/sdk/types/CustomFieldsDraftBuilder.html" title="class in io.sphere.sdk.types">CustomFieldsDraftBuilder</a></dt>
@@ -9399,6 +9515,8 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/payments/commands/updateactions/SetCustomType.html#ofTypeKeyAndJson-java.lang.String-java.util.Map-">ofTypeKeyAndJson(String, Map&lt;String, JsonNode&gt;)</a></span> - Static method in class io.sphere.sdk.payments.commands.updateactions.<a href="io/sphere/sdk/payments/commands/updateactions/SetCustomType.html" title="class in io.sphere.sdk.payments.commands.updateactions">SetCustomType</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/commands/updateactions/SetProductPriceCustomType.html#ofTypeKeyAndJson-java.lang.String-java.util.Map-java.lang.String-">ofTypeKeyAndJson(String, Map&lt;String, JsonNode&gt;, String)</a></span> - Static method in class io.sphere.sdk.products.commands.updateactions.<a href="io/sphere/sdk/products/commands/updateactions/SetProductPriceCustomType.html" title="class in io.sphere.sdk.products.commands.updateactions">SetProductPriceCustomType</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/reviews/commands/updateactions/SetCustomType.html#ofTypeKeyAndJson-java.lang.String-java.util.Map-">ofTypeKeyAndJson(String, Map&lt;String, JsonNode&gt;)</a></span> - Static method in class io.sphere.sdk.reviews.commands.updateactions.<a href="io/sphere/sdk/reviews/commands/updateactions/SetCustomType.html" title="class in io.sphere.sdk.reviews.commands.updateactions">SetCustomType</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/types/CustomFieldsDraft.html#ofTypeKeyAndJson-java.lang.String-java.util.Map-">ofTypeKeyAndJson(String, Map&lt;String, JsonNode&gt;)</a></span> - Static method in class io.sphere.sdk.types.<a href="io/sphere/sdk/types/CustomFieldsDraft.html" title="class in io.sphere.sdk.types">CustomFieldsDraft</a></dt>
 <dd>&nbsp;</dd>
@@ -9426,6 +9544,8 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/commands/updateactions/SetProductPriceCustomType.html#ofTypeKeyAndObjects-java.lang.String-java.util.Map-java.lang.String-">ofTypeKeyAndObjects(String, Map&lt;String, Object&gt;, String)</a></span> - Static method in class io.sphere.sdk.products.commands.updateactions.<a href="io/sphere/sdk/products/commands/updateactions/SetProductPriceCustomType.html" title="class in io.sphere.sdk.products.commands.updateactions">SetProductPriceCustomType</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/reviews/commands/updateactions/SetCustomType.html#ofTypeKeyAndObjects-java.lang.String-java.util.Map-">ofTypeKeyAndObjects(String, Map&lt;String, Object&gt;)</a></span> - Static method in class io.sphere.sdk.reviews.commands.updateactions.<a href="io/sphere/sdk/reviews/commands/updateactions/SetCustomType.html" title="class in io.sphere.sdk.reviews.commands.updateactions">SetCustomType</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/types/CustomFieldsDraft.html#ofTypeKeyAndObjects-java.lang.String-java.util.Map-">ofTypeKeyAndObjects(String, Map&lt;String, Object&gt;)</a></span> - Static method in class io.sphere.sdk.types.<a href="io/sphere/sdk/types/CustomFieldsDraft.html" title="class in io.sphere.sdk.types">CustomFieldsDraft</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/commands/updateactions/SetCustomField.html#ofUnset-java.lang.String-">ofUnset(String)</a></span> - Static method in class io.sphere.sdk.carts.commands.updateactions.<a href="io/sphere/sdk/carts/commands/updateactions/SetCustomField.html" title="class in io.sphere.sdk.carts.commands.updateactions">SetCustomField</a></dt>
@@ -9447,6 +9567,8 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/payments/commands/updateactions/SetCustomField.html#ofUnset-java.lang.String-">ofUnset(String)</a></span> - Static method in class io.sphere.sdk.payments.commands.updateactions.<a href="io/sphere/sdk/payments/commands/updateactions/SetCustomField.html" title="class in io.sphere.sdk.payments.commands.updateactions">SetCustomField</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/commands/updateactions/SetProductPriceCustomField.html#ofUnset-java.lang.String-java.lang.String-">ofUnset(String, String)</a></span> - Static method in class io.sphere.sdk.products.commands.updateactions.<a href="io/sphere/sdk/products/commands/updateactions/SetProductPriceCustomField.html" title="class in io.sphere.sdk.products.commands.updateactions">SetProductPriceCustomField</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/reviews/commands/updateactions/SetCustomField.html#ofUnset-java.lang.String-">ofUnset(String)</a></span> - Static method in class io.sphere.sdk.reviews.commands.updateactions.<a href="io/sphere/sdk/reviews/commands/updateactions/SetCustomField.html" title="class in io.sphere.sdk.reviews.commands.updateactions">SetCustomField</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/commands/updateactions/SetAttribute.html#ofUnsetAttribute-java.lang.Integer-java.lang.String-">ofUnsetAttribute(Integer, String)</a></span> - Static method in class io.sphere.sdk.products.commands.updateactions.<a href="io/sphere/sdk/products/commands/updateactions/SetAttribute.html" title="class in io.sphere.sdk.products.commands.updateactions">SetAttribute</a></dt>
 <dd>
@@ -9900,6 +10022,10 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/MetaModelQueryDslImpl.html#plusExpansionPaths-java.util.function.Function-">plusExpansionPaths(Function&lt;E, ExpansionPathContainer&lt;T&gt;&gt;)</a></span> - Method in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="class in io.sphere.sdk.queries">MetaModelQueryDslImpl</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/reviews/queries/ReviewByIdGet.html#plusExpansionPaths-io.sphere.sdk.expansion.ExpansionPath-">plusExpansionPaths(ExpansionPath&lt;Review&gt;)</a></span> - Method in interface io.sphere.sdk.reviews.queries.<a href="io/sphere/sdk/reviews/queries/ReviewByIdGet.html" title="interface in io.sphere.sdk.reviews.queries">ReviewByIdGet</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/reviews/queries/ReviewByKeyGet.html#plusExpansionPaths-io.sphere.sdk.expansion.ExpansionPath-">plusExpansionPaths(ExpansionPath&lt;Review&gt;)</a></span> - Method in interface io.sphere.sdk.reviews.queries.<a href="io/sphere/sdk/reviews/queries/ReviewByKeyGet.html" title="interface in io.sphere.sdk.reviews.queries">ReviewByKeyGet</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/search/MetaModelSearchDslImpl.html#plusExpansionPaths-java.util.List-">plusExpansionPaths(List&lt;ExpansionPath&lt;T&gt;&gt;)</a></span> - Method in class io.sphere.sdk.search.<a href="io/sphere/sdk/search/MetaModelSearchDslImpl.html" title="class in io.sphere.sdk.search">MetaModelSearchDslImpl</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/search/MetaModelSearchDslImpl.html#plusExpansionPaths-io.sphere.sdk.expansion.ExpansionPath-">plusExpansionPaths(ExpansionPath&lt;T&gt;)</a></span> - Method in class io.sphere.sdk.search.<a href="io/sphere/sdk/search/MetaModelSearchDslImpl.html" title="class in io.sphere.sdk.search">MetaModelSearchDslImpl</a></dt>
@@ -9979,6 +10105,10 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/search/MetaModelSearchDslImpl.html#plusFacets-io.sphere.sdk.search.FacetExpression-">plusFacets(FacetExpression&lt;T&gt;)</a></span> - Method in class io.sphere.sdk.search.<a href="io/sphere/sdk/search/MetaModelSearchDslImpl.html" title="class in io.sphere.sdk.search">MetaModelSearchDslImpl</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/search/MetaModelSearchDslImpl.html#plusFacets-java.util.function.Function-">plusFacets(Function&lt;F, FacetExpression&lt;T&gt;&gt;)</a></span> - Method in class io.sphere.sdk.search.<a href="io/sphere/sdk/search/MetaModelSearchDslImpl.html" title="class in io.sphere.sdk.search">MetaModelSearchDslImpl</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/types/TypeDraftBuilder.html#plusFieldDefinitions-java.util.List-">plusFieldDefinitions(List&lt;FieldDefinition&gt;)</a></span> - Method in class io.sphere.sdk.types.<a href="io/sphere/sdk/types/TypeDraftBuilder.html" title="class in io.sphere.sdk.types">TypeDraftBuilder</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/types/TypeDraftBuilder.html#plusFieldDefinitions-io.sphere.sdk.types.FieldDefinition-">plusFieldDefinitions(FieldDefinition)</a></span> - Method in class io.sphere.sdk.types.<a href="io/sphere/sdk/types/TypeDraftBuilder.html" title="class in io.sphere.sdk.types">TypeDraftBuilder</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/client/HttpRequestIntent.html#plusHeader-java.lang.String-java.lang.String-">plusHeader(String, String)</a></span> - Method in class io.sphere.sdk.client.<a href="io/sphere/sdk/client/HttpRequestIntent.html" title="class in io.sphere.sdk.client">HttpRequestIntent</a></dt>
 <dd>&nbsp;</dd>
@@ -10665,6 +10795,8 @@ CompletionStage&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execu
 <dd>
 <div class="block">Model to build range and term filters.</div>
 </dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/reviews/queries/ReviewQueryModel.html#rating--">rating()</a></span> - Method in class io.sphere.sdk.reviews.queries.<a href="io/sphere/sdk/reviews/queries/ReviewQueryModel.html" title="class in io.sphere.sdk.reviews.queries">ReviewQueryModel</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/reviews/ReviewDraftBuilder.html#rating-java.lang.Integer-">rating(Integer)</a></span> - Method in class io.sphere.sdk.reviews.<a href="io/sphere/sdk/reviews/ReviewDraftBuilder.html" title="class in io.sphere.sdk.reviews">ReviewDraftBuilder</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/json/SphereJsonUtils.html#readObject-java.lang.String-com.fasterxml.jackson.core.type.TypeReference-">readObject(String, TypeReference&lt;T&gt;)</a></span> - Static method in class io.sphere.sdk.json.<a href="io/sphere/sdk/json/SphereJsonUtils.html" title="class in io.sphere.sdk.json">SphereJsonUtils</a></dt>
@@ -11006,6 +11138,8 @@ CompletionStage&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execu
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/Price.html#resourceTypeId--">resourceTypeId()</a></span> - Static method in class io.sphere.sdk.products.<a href="io/sphere/sdk/products/Price.html" title="class in io.sphere.sdk.products">Price</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/reviews/Review.html#resourceTypeId--">resourceTypeId()</a></span> - Static method in interface io.sphere.sdk.reviews.<a href="io/sphere/sdk/reviews/Review.html" title="interface in io.sphere.sdk.reviews">Review</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/types/queries/TypeQueryModel.html#resourceTypeIds--">resourceTypeIds()</a></span> - Method in class io.sphere.sdk.types.queries.<a href="io/sphere/sdk/types/queries/TypeQueryModel.html" title="class in io.sphere.sdk.types.queries">TypeQueryModel</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/types/ResourceTypeIdsSetBuilder.html" title="class in io.sphere.sdk.types"><span class="typeNameLink">ResourceTypeIdsSetBuilder</span></a> - Class in <a href="io/sphere/sdk/types/package-summary.html">io.sphere.sdk.types</a></dt>
@@ -11073,6 +11207,8 @@ CompletionStage&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execu
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/producttypes/queries/ProductTypeQuery.html#resultTypeReference--">resultTypeReference()</a></span> - Static method in interface io.sphere.sdk.producttypes.queries.<a href="io/sphere/sdk/producttypes/queries/ProductTypeQuery.html" title="interface in io.sphere.sdk.producttypes.queries">ProductTypeQuery</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/reviews/queries/ReviewQuery.html#resultTypeReference--">resultTypeReference()</a></span> - Static method in interface io.sphere.sdk.reviews.queries.<a href="io/sphere/sdk/reviews/queries/ReviewQuery.html" title="interface in io.sphere.sdk.reviews.queries">ReviewQuery</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/shippingmethods/queries/ShippingMethodQuery.html#resultTypeReference--">resultTypeReference()</a></span> - Static method in interface io.sphere.sdk.shippingmethods.queries.<a href="io/sphere/sdk/shippingmethods/queries/ShippingMethodQuery.html" title="interface in io.sphere.sdk.shippingmethods.queries">ShippingMethodQuery</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/states/queries/StateQuery.html#resultTypeReference--">resultTypeReference()</a></span> - Static method in interface io.sphere.sdk.states.queries.<a href="io/sphere/sdk/states/queries/StateQuery.html" title="interface in io.sphere.sdk.states.queries">StateQuery</a></dt>
@@ -11102,16 +11238,70 @@ CompletionStage&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execu
 <div class="block">Revert all changes, which were made to the staged version of a product and reset to the current version.</div>
 </dd>
 <dt><a href="io/sphere/sdk/reviews/Review.html" title="interface in io.sphere.sdk.reviews"><span class="typeNameLink">Review</span></a> - Interface in <a href="io/sphere/sdk/reviews/package-summary.html">io.sphere.sdk.reviews</a></dt>
+<dd>
+<div class="block">Reviews are used to evaluate products and channels.</div>
+</dd>
+<dt><a href="io/sphere/sdk/reviews/queries/ReviewByIdGet.html" title="interface in io.sphere.sdk.reviews.queries"><span class="typeNameLink">ReviewByIdGet</span></a> - Interface in <a href="io/sphere/sdk/reviews/queries/package-summary.html">io.sphere.sdk.reviews.queries</a></dt>
+<dd>
+<div class="block">Retrieves a review by a known ID.</div>
+</dd>
+<dt><a href="io/sphere/sdk/reviews/queries/ReviewByKeyGet.html" title="interface in io.sphere.sdk.reviews.queries"><span class="typeNameLink">ReviewByKeyGet</span></a> - Interface in <a href="io/sphere/sdk/reviews/queries/package-summary.html">io.sphere.sdk.reviews.queries</a></dt>
+<dd>
+<div class="block">Retrieves a review by a known key.</div>
+</dd>
+<dt><a href="io/sphere/sdk/reviews/commands/ReviewCreateCommand.html" title="interface in io.sphere.sdk.reviews.commands"><span class="typeNameLink">ReviewCreateCommand</span></a> - Interface in <a href="io/sphere/sdk/reviews/commands/package-summary.html">io.sphere.sdk.reviews.commands</a></dt>
+<dd>
+<div class="block">Creates a review.</div>
+</dd>
+<dt><a href="io/sphere/sdk/reviews/commands/ReviewDeleteCommand.html" title="interface in io.sphere.sdk.reviews.commands"><span class="typeNameLink">ReviewDeleteCommand</span></a> - Interface in <a href="io/sphere/sdk/reviews/commands/package-summary.html">io.sphere.sdk.reviews.commands</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/reviews/ReviewDraft.html" title="interface in io.sphere.sdk.reviews"><span class="typeNameLink">ReviewDraft</span></a> - Interface in <a href="io/sphere/sdk/reviews/package-summary.html">io.sphere.sdk.reviews</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/reviews/ReviewDraftBuilder.html" title="class in io.sphere.sdk.reviews"><span class="typeNameLink">ReviewDraftBuilder</span></a> - Class in <a href="io/sphere/sdk/reviews/package-summary.html">io.sphere.sdk.reviews</a></dt>
 <dd>&nbsp;</dd>
+<dt><a href="io/sphere/sdk/reviews/expansion/ReviewExpansionModel.html" title="class in io.sphere.sdk.reviews.expansion"><span class="typeNameLink">ReviewExpansionModel</span></a>&lt;<a href="io/sphere/sdk/reviews/expansion/ReviewExpansionModel.html" title="type parameter in ReviewExpansionModel">T</a>&gt; - Class in <a href="io/sphere/sdk/reviews/expansion/package-summary.html">io.sphere.sdk.reviews.expansion</a></dt>
+<dd>
+<div class="block">DSL class to create expansion path expressions.</div>
+</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/reviews/expansion/ReviewExpansionModel.html#ReviewExpansionModel-java.lang.String-java.lang.String-">ReviewExpansionModel(String, String)</a></span> - Constructor for class io.sphere.sdk.reviews.expansion.<a href="io/sphere/sdk/reviews/expansion/ReviewExpansionModel.html" title="class in io.sphere.sdk.reviews.expansion">ReviewExpansionModel</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="io/sphere/sdk/reviews/queries/ReviewQuery.html" title="interface in io.sphere.sdk.reviews.queries"><span class="typeNameLink">ReviewQuery</span></a> - Interface in <a href="io/sphere/sdk/reviews/queries/package-summary.html">io.sphere.sdk.reviews.queries</a></dt>
+<dd>
+<div class="block">Provides a QueryDsl for  reviews to formulate predicates, search expressions and reference expansion path expressions. <p>For further information how to use the query API to consult the <a href='../../../../../io/sphere/sdk/meta/QueryDocumentation.html'>Query API documentation</a>.</p></div>
+</dd>
+<dt><a href="io/sphere/sdk/reviews/queries/ReviewQueryModel.html" title="class in io.sphere.sdk.reviews.queries"><span class="typeNameLink">ReviewQueryModel</span></a> - Class in <a href="io/sphere/sdk/reviews/queries/package-summary.html">io.sphere.sdk.reviews.queries</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/search/ProductDataFacetSearchModel.html#reviewRatingStatistics--">reviewRatingStatistics()</a></span> - Method in class io.sphere.sdk.products.search.<a href="io/sphere/sdk/products/search/ProductDataFacetSearchModel.html" title="class in io.sphere.sdk.products.search">ProductDataFacetSearchModel</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/search/ProductDataFilterSearchModel.html#reviewRatingStatistics--">reviewRatingStatistics()</a></span> - Method in class io.sphere.sdk.products.search.<a href="io/sphere/sdk/products/search/ProductDataFilterSearchModel.html" title="class in io.sphere.sdk.products.search">ProductDataFilterSearchModel</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/search/ProductDataSortSearchModel.html#reviewRatingStatistics--">reviewRatingStatistics()</a></span> - Method in class io.sphere.sdk.products.search.<a href="io/sphere/sdk/products/search/ProductDataSortSearchModel.html" title="class in io.sphere.sdk.products.search">ProductDataSortSearchModel</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/search/ProductProjectionSortSearchModel.html#reviewRatingStatistics--">reviewRatingStatistics()</a></span> - Method in class io.sphere.sdk.products.search.<a href="io/sphere/sdk/products/search/ProductProjectionSortSearchModel.html" title="class in io.sphere.sdk.products.search">ProductProjectionSortSearchModel</a></dt>
+<dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/reviews/ReviewRatingStatistics.html" title="interface in io.sphere.sdk.reviews"><span class="typeNameLink">ReviewRatingStatistics</span></a> - Interface in <a href="io/sphere/sdk/reviews/package-summary.html">io.sphere.sdk.reviews</a></dt>
 <dd>&nbsp;</dd>
+<dt><a href="io/sphere/sdk/reviews/search/ReviewRatingStatisticsFacetSearchModel.html" title="class in io.sphere.sdk.reviews.search"><span class="typeNameLink">ReviewRatingStatisticsFacetSearchModel</span></a>&lt;<a href="io/sphere/sdk/reviews/search/ReviewRatingStatisticsFacetSearchModel.html" title="type parameter in ReviewRatingStatisticsFacetSearchModel">T</a>&gt; - Class in <a href="io/sphere/sdk/reviews/search/package-summary.html">io.sphere.sdk.reviews.search</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/reviews/search/ReviewRatingStatisticsFacetSearchModel.html#ReviewRatingStatisticsFacetSearchModel-io.sphere.sdk.search.model.SearchModel-java.lang.String-">ReviewRatingStatisticsFacetSearchModel(SearchModel&lt;T&gt;, String)</a></span> - Constructor for class io.sphere.sdk.reviews.search.<a href="io/sphere/sdk/reviews/search/ReviewRatingStatisticsFacetSearchModel.html" title="class in io.sphere.sdk.reviews.search">ReviewRatingStatisticsFacetSearchModel</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="io/sphere/sdk/reviews/search/ReviewRatingStatisticsFilterSearchModel.html" title="class in io.sphere.sdk.reviews.search"><span class="typeNameLink">ReviewRatingStatisticsFilterSearchModel</span></a>&lt;<a href="io/sphere/sdk/reviews/search/ReviewRatingStatisticsFilterSearchModel.html" title="type parameter in ReviewRatingStatisticsFilterSearchModel">T</a>&gt; - Class in <a href="io/sphere/sdk/reviews/search/package-summary.html">io.sphere.sdk.reviews.search</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/reviews/search/ReviewRatingStatisticsFilterSearchModel.html#ReviewRatingStatisticsFilterSearchModel-io.sphere.sdk.search.model.SearchModel-java.lang.String-">ReviewRatingStatisticsFilterSearchModel(SearchModel&lt;T&gt;, String)</a></span> - Constructor for class io.sphere.sdk.reviews.search.<a href="io/sphere/sdk/reviews/search/ReviewRatingStatisticsFilterSearchModel.html" title="class in io.sphere.sdk.reviews.search">ReviewRatingStatisticsFilterSearchModel</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="io/sphere/sdk/reviews/search/ReviewRatingStatisticsSortSearchModel.html" title="class in io.sphere.sdk.reviews.search"><span class="typeNameLink">ReviewRatingStatisticsSortSearchModel</span></a>&lt;<a href="io/sphere/sdk/reviews/search/ReviewRatingStatisticsSortSearchModel.html" title="type parameter in ReviewRatingStatisticsSortSearchModel">T</a>&gt; - Class in <a href="io/sphere/sdk/reviews/search/package-summary.html">io.sphere.sdk.reviews.search</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/reviews/search/ReviewRatingStatisticsSortSearchModel.html#ReviewRatingStatisticsSortSearchModel-io.sphere.sdk.search.model.SearchModel-java.lang.String-">ReviewRatingStatisticsSortSearchModel(SearchModel&lt;T&gt;, String)</a></span> - Constructor for class io.sphere.sdk.reviews.search.<a href="io/sphere/sdk/reviews/search/ReviewRatingStatisticsSortSearchModel.html" title="class in io.sphere.sdk.reviews.search">ReviewRatingStatisticsSortSearchModel</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="io/sphere/sdk/reviews/commands/ReviewUpdateCommand.html" title="interface in io.sphere.sdk.reviews.commands"><span class="typeNameLink">ReviewUpdateCommand</span></a> - Interface in <a href="io/sphere/sdk/reviews/commands/package-summary.html">io.sphere.sdk.reviews.commands</a></dt>
+<dd>
+<div class="block">Updates a review.</div>
+</dd>
 <dt><a href="io/sphere/sdk/products/attributes/RichReferenceAttributeType.html" title="class in io.sphere.sdk.products.attributes"><span class="typeNameLink">RichReferenceAttributeType</span></a>&lt;<a href="io/sphere/sdk/products/attributes/RichReferenceAttributeType.html" title="type parameter in RichReferenceAttributeType">T</a>&gt; - Class in <a href="io/sphere/sdk/products/attributes/package-summary.html">io.sphere.sdk.products.attributes</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/channels/ChannelDraftBuilder.html#roles-java.util.Set-">roles(Set&lt;ChannelRole&gt;)</a></span> - Method in class io.sphere.sdk.channels.<a href="io/sphere/sdk/channels/ChannelDraftBuilder.html" title="class in io.sphere.sdk.channels">ChannelDraftBuilder</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/states/StateDraftBuilder.html#roles-java.util.Set-">roles(Set&lt;StateRole&gt;)</a></span> - Method in class io.sphere.sdk.states.<a href="io/sphere/sdk/states/StateDraftBuilder.html" title="class in io.sphere.sdk.states">StateDraftBuilder</a></dt>
 <dd>&nbsp;</dd>
 </dl>
 <a name="I:S">
@@ -11215,6 +11405,10 @@ CompletionStage&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execu
 <dd>
 <div class="block">Sets the amount of money that has been authorized and optionally until when the authorization is valid.</div>
 </dd>
+<dt><a href="io/sphere/sdk/reviews/commands/updateactions/SetAuthorName.html" title="class in io.sphere.sdk.reviews.commands.updateactions"><span class="typeNameLink">SetAuthorName</span></a> - Class in <a href="io/sphere/sdk/reviews/commands/updateactions/package-summary.html">io.sphere.sdk.reviews.commands.updateactions</a></dt>
+<dd>
+<div class="block">Sets/unsets the author name of a review.</div>
+</dd>
 <dt><a href="io/sphere/sdk/carts/commands/updateactions/SetBillingAddress.html" title="class in io.sphere.sdk.carts.commands.updateactions"><span class="typeNameLink">SetBillingAddress</span></a> - Class in <a href="io/sphere/sdk/carts/commands/updateactions/package-summary.html">io.sphere.sdk.carts.commands.updateactions</a></dt>
 <dd>
 <div class="block">Sets the billing address.</div>
@@ -11236,6 +11430,10 @@ CompletionStage&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execu
 <dt><a href="io/sphere/sdk/payments/commands/updateactions/SetCustomer.html" title="class in io.sphere.sdk.payments.commands.updateactions"><span class="typeNameLink">SetCustomer</span></a> - Class in <a href="io/sphere/sdk/payments/commands/updateactions/package-summary.html">io.sphere.sdk.payments.commands.updateactions</a></dt>
 <dd>
 <div class="block">Sets the reference to the customer.</div>
+</dd>
+<dt><a href="io/sphere/sdk/reviews/commands/updateactions/SetCustomer.html" title="class in io.sphere.sdk.reviews.commands.updateactions"><span class="typeNameLink">SetCustomer</span></a> - Class in <a href="io/sphere/sdk/reviews/commands/updateactions/package-summary.html">io.sphere.sdk.reviews.commands.updateactions</a></dt>
+<dd>
+<div class="block">Sets/unsets the customer belonging to a review.</div>
 </dd>
 <dt><a href="io/sphere/sdk/carts/commands/updateactions/SetCustomerEmail.html" title="class in io.sphere.sdk.carts.commands.updateactions"><span class="typeNameLink">SetCustomerEmail</span></a> - Class in <a href="io/sphere/sdk/carts/commands/updateactions/package-summary.html">io.sphere.sdk.carts.commands.updateactions</a></dt>
 <dd>
@@ -11270,6 +11468,10 @@ CompletionStage&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execu
 <div class="block">Updates a custom field.</div>
 </dd>
 <dt><a href="io/sphere/sdk/payments/commands/updateactions/SetCustomField.html" title="class in io.sphere.sdk.payments.commands.updateactions"><span class="typeNameLink">SetCustomField</span></a> - Class in <a href="io/sphere/sdk/payments/commands/updateactions/package-summary.html">io.sphere.sdk.payments.commands.updateactions</a></dt>
+<dd>
+<div class="block">Updates a custom field.</div>
+</dd>
+<dt><a href="io/sphere/sdk/reviews/commands/updateactions/SetCustomField.html" title="class in io.sphere.sdk.reviews.commands.updateactions"><span class="typeNameLink">SetCustomField</span></a> - Class in <a href="io/sphere/sdk/reviews/commands/updateactions/package-summary.html">io.sphere.sdk.reviews.commands.updateactions</a></dt>
 <dd>
 <div class="block">Updates a custom field.</div>
 </dd>
@@ -11314,6 +11516,10 @@ CompletionStage&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execu
 <div class="block">Sets or removes a custom type.</div>
 </dd>
 <dt><a href="io/sphere/sdk/payments/commands/updateactions/SetCustomType.html" title="class in io.sphere.sdk.payments.commands.updateactions"><span class="typeNameLink">SetCustomType</span></a> - Class in <a href="io/sphere/sdk/payments/commands/updateactions/package-summary.html">io.sphere.sdk.payments.commands.updateactions</a></dt>
+<dd>
+<div class="block">Sets or removes a custom type.</div>
+</dd>
+<dt><a href="io/sphere/sdk/reviews/commands/updateactions/SetCustomType.html" title="class in io.sphere.sdk.reviews.commands.updateactions"><span class="typeNameLink">SetCustomType</span></a> - Class in <a href="io/sphere/sdk/reviews/commands/updateactions/package-summary.html">io.sphere.sdk.reviews.commands.updateactions</a></dt>
 <dd>
 <div class="block">Sets or removes a custom type.</div>
 </dd>
@@ -11388,6 +11594,21 @@ CompletionStage&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execu
 <dt><a href="io/sphere/sdk/payments/commands/updateactions/SetInterfaceId.html" title="class in io.sphere.sdk.payments.commands.updateactions"><span class="typeNameLink">SetInterfaceId</span></a> - Class in <a href="io/sphere/sdk/payments/commands/updateactions/package-summary.html">io.sphere.sdk.payments.commands.updateactions</a></dt>
 <dd>
 <div class="block">Sets the identifier that is used by the interface that manages the payment (usually the PSP).</div>
+</dd>
+<dt><a href="io/sphere/sdk/reviews/commands/updateactions/SetKey.html" title="class in io.sphere.sdk.reviews.commands.updateactions"><span class="typeNameLink">SetKey</span></a> - Class in <a href="io/sphere/sdk/reviews/commands/updateactions/package-summary.html">io.sphere.sdk.reviews.commands.updateactions</a></dt>
+<dd>
+<div class="block">Sets/unsets the key of a review
+
+ <div id="io-sphere-sdk-reviews-commands-ReviewUpdateCommandTest-setKey--%s" class=code-example><pre><code class='java'>withUpdateableReview(client(), (Review review) -&gt; {
+    final String key = randomKey();
+    final Review updatedReview =
+            client().executeBlocking(ReviewUpdateCommand.of(review, SetKey.of(key)));
+
+    assertThat(updatedReview.getKey()).isEqualTo(key);
+
+    return updatedReview;
+});
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/reviews/commands/ReviewUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 </dd>
 <dt><a href="io/sphere/sdk/carts/commands/updateactions/SetLineItemCustomField.html" title="class in io.sphere.sdk.carts.commands.updateactions"><span class="typeNameLink">SetLineItemCustomField</span></a> - Class in <a href="io/sphere/sdk/carts/commands/updateactions/package-summary.html">io.sphere.sdk.carts.commands.updateactions</a></dt>
 <dd>
@@ -11483,6 +11704,10 @@ CompletionStage&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execu
 </dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/SphereException.html#setProjectKey-java.lang.String-">setProjectKey(String)</a></span> - Method in exception io.sphere.sdk.models.<a href="io/sphere/sdk/models/SphereException.html" title="class in io.sphere.sdk.models">SphereException</a></dt>
 <dd>&nbsp;</dd>
+<dt><a href="io/sphere/sdk/reviews/commands/updateactions/SetRating.html" title="class in io.sphere.sdk.reviews.commands.updateactions"><span class="typeNameLink">SetRating</span></a> - Class in <a href="io/sphere/sdk/reviews/commands/updateactions/package-summary.html">io.sphere.sdk.reviews.commands.updateactions</a></dt>
+<dd>
+<div class="block">Sets/unsets the rating of a review.</div>
+</dd>
 <dt><a href="io/sphere/sdk/inventory/commands/updateactions/SetRestockableInDays.html" title="class in io.sphere.sdk.inventory.commands.updateactions"><span class="typeNameLink">SetRestockableInDays</span></a> - Class in <a href="io/sphere/sdk/inventory/commands/updateactions/package-summary.html">io.sphere.sdk.inventory.commands.updateactions</a></dt>
 <dd>
 <div class="block">Sets the restackable in days value.</div>
@@ -11525,9 +11750,32 @@ CompletionStage&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execu
 <dd>
 <div class="block">Sets a text, given by the PSP, that describes the current status.</div>
 </dd>
+<dt><a href="io/sphere/sdk/reviews/commands/updateactions/SetTarget.html" title="class in io.sphere.sdk.reviews.commands.updateactions"><span class="typeNameLink">SetTarget</span></a> - Class in <a href="io/sphere/sdk/reviews/commands/updateactions/package-summary.html">io.sphere.sdk.reviews.commands.updateactions</a></dt>
+<dd>
+<div class="block">Sets/unsets the target of a review.</div>
+</dd>
 <dt><a href="io/sphere/sdk/products/commands/updateactions/SetTaxCategory.html" title="class in io.sphere.sdk.products.commands.updateactions"><span class="typeNameLink">SetTaxCategory</span></a> - Class in <a href="io/sphere/sdk/products/commands/updateactions/package-summary.html">io.sphere.sdk.products.commands.updateactions</a></dt>
 <dd>
 <div class="block">Adds, changes or removes a product's tax category.</div>
+</dd>
+<dt><a href="io/sphere/sdk/reviews/commands/updateactions/SetText.html" title="class in io.sphere.sdk.reviews.commands.updateactions"><span class="typeNameLink">SetText</span></a> - Class in <a href="io/sphere/sdk/reviews/commands/updateactions/package-summary.html">io.sphere.sdk.reviews.commands.updateactions</a></dt>
+<dd>
+<div class="block">Sets/unsets the content of a review.</div>
+</dd>
+<dt><a href="io/sphere/sdk/reviews/commands/updateactions/SetTitle.html" title="class in io.sphere.sdk.reviews.commands.updateactions"><span class="typeNameLink">SetTitle</span></a> - Class in <a href="io/sphere/sdk/reviews/commands/updateactions/package-summary.html">io.sphere.sdk.reviews.commands.updateactions</a></dt>
+<dd>
+<div class="block">Sets/unsets the title of a review
+
+ <div id="io-sphere-sdk-reviews-commands-ReviewUpdateCommandTest-setTitle--%s" class=code-example><pre><code class='java'>withUpdateableReview(client(), (Review review) -&gt; {
+    final String title = randomKey();
+    final Review updatedReview =
+            client().executeBlocking(ReviewUpdateCommand.of(review, SetTitle.of(title)));
+
+    assertThat(updatedReview.getTitle()).isEqualTo(title);
+
+    return updatedReview;
+});
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/reviews/commands/ReviewUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 </dd>
 <dt><a href="io/sphere/sdk/states/commands/updateactions/SetTransitions.html" title="class in io.sphere.sdk.states.commands.updateactions"><span class="typeNameLink">SetTransitions</span></a> - Class in <a href="io/sphere/sdk/states/commands/updateactions/package-summary.html">io.sphere.sdk.states.commands.updateactions</a></dt>
 <dd>
@@ -11937,6 +12185,9 @@ CompletionStage&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execu
 <tr><td><a href='../../../..//io/sphere/sdk/producttypes/queries/ProductTypeByKeyGet.html'>ProductTypeByKeyGet</a></td><td><a href='../../../..//io/sphere/sdk/producttypes/commands/ProductTypeUpdateCommand.html'>ProductTypeUpdateCommand</a></td></tr>
 <tr><td><a href='../../../..//io/sphere/sdk/producttypes/queries/ProductTypeByIdGet.html'>ProductTypeByIdGet</a></td><td><a href='../../../..//io/sphere/sdk/producttypes/commands/ProductTypeCreateCommand.html'>ProductTypeCreateCommand</a></td></tr>
 <tr><td rowspan="1">projects</td><td><a href='../../../..//io/sphere/sdk/projects/queries/ProjectGet.html'>ProjectGet</a></td><td></td></tr>
+<tr><td rowspan="3">reviews</td><td><a href='../../../..//io/sphere/sdk/reviews/queries/ReviewByKeyGet.html'>ReviewByKeyGet</a></td><td><a href='../../../..//io/sphere/sdk/reviews/commands/ReviewDeleteCommand.html'>ReviewDeleteCommand</a></td></tr>
+<tr><td><a href='../../../..//io/sphere/sdk/reviews/queries/ReviewQuery.html'>ReviewQuery</a></td><td><a href='../../../..//io/sphere/sdk/reviews/commands/ReviewUpdateCommand.html'>ReviewUpdateCommand</a></td></tr>
+<tr><td><a href='../../../..//io/sphere/sdk/reviews/queries/ReviewByIdGet.html'>ReviewByIdGet</a></td><td><a href='../../../..//io/sphere/sdk/reviews/commands/ReviewCreateCommand.html'>ReviewCreateCommand</a></td></tr>
 <tr><td rowspan="4">shippingmethods</td><td><a href='../../../..//io/sphere/sdk/shippingmethods/queries/ShippingMethodsByLocationGet.html'>ShippingMethodsByLocationGet</a></td><td><a href='../../../..//io/sphere/sdk/shippingmethods/commands/ShippingMethodDeleteCommand.html'>ShippingMethodDeleteCommand</a></td></tr>
 <tr><td><a href='../../../..//io/sphere/sdk/shippingmethods/queries/ShippingMethodQuery.html'>ShippingMethodQuery</a></td><td><a href='../../../..//io/sphere/sdk/shippingmethods/commands/ShippingMethodCreateCommand.html'>ShippingMethodCreateCommand</a></td></tr>
 <tr><td><a href='../../../..//io/sphere/sdk/shippingmethods/queries/ShippingMethodsByCartGet.html'>ShippingMethodsByCartGet</a></td><td><a href='../../../..//io/sphere/sdk/shippingmethods/commands/ShippingMethodUpdateCommand.html'>ShippingMethodUpdateCommand</a></td></tr>
@@ -12011,7 +12262,9 @@ CompletionStage&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execu
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/AddressQueryModel.html#state--">state()</a></span> - Method in interface io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/AddressQueryModel.html" title="interface in io.sphere.sdk.queries">AddressQueryModel</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/reviews/ReviewDraftBuilder.html#state-io.sphere.sdk.models.ResourceIdentifier-">state(ResourceIdentifier&lt;State&gt;)</a></span> - Method in class io.sphere.sdk.reviews.<a href="io/sphere/sdk/reviews/ReviewDraftBuilder.html" title="class in io.sphere.sdk.reviews">ReviewDraftBuilder</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/reviews/queries/ReviewQueryModel.html#state--">state()</a></span> - Method in class io.sphere.sdk.reviews.queries.<a href="io/sphere/sdk/reviews/queries/ReviewQueryModel.html" title="class in io.sphere.sdk.reviews.queries">ReviewQueryModel</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/reviews/ReviewDraftBuilder.html#state-io.sphere.sdk.models.ResourceIdentifiable-">state(ResourceIdentifiable&lt;State&gt;)</a></span> - Method in class io.sphere.sdk.reviews.<a href="io/sphere/sdk/reviews/ReviewDraftBuilder.html" title="class in io.sphere.sdk.reviews">ReviewDraftBuilder</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/states/State.html" title="interface in io.sphere.sdk.states"><span class="typeNameLink">State</span></a> - Interface in <a href="io/sphere/sdk/states/package-summary.html">io.sphere.sdk.states</a></dt>
 <dd>
@@ -12048,6 +12301,8 @@ CompletionStage&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execu
 <dt><a href="io/sphere/sdk/states/queries/StateQuery.html" title="interface in io.sphere.sdk.states.queries"><span class="typeNameLink">StateQuery</span></a> - Interface in <a href="io/sphere/sdk/states/queries/package-summary.html">io.sphere.sdk.states.queries</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/states/queries/StateQueryModel.html" title="class in io.sphere.sdk.states.queries"><span class="typeNameLink">StateQueryModel</span></a> - Class in <a href="io/sphere/sdk/states/queries/package-summary.html">io.sphere.sdk.states.queries</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="io/sphere/sdk/states/StateRole.html" title="enum in io.sphere.sdk.states"><span class="typeNameLink">StateRole</span></a> - Enum in <a href="io/sphere/sdk/states/package-summary.html">io.sphere.sdk.states</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/states/StateType.html" title="enum in io.sphere.sdk.states"><span class="typeNameLink">StateType</span></a> - Enum in <a href="io/sphere/sdk/states/package-summary.html">io.sphere.sdk.states</a></dt>
 <dd>&nbsp;</dd>
@@ -12090,6 +12345,8 @@ CompletionStage&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execu
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/search/model/SearchModelImpl.html#stringSearchModel-java.lang.String-">stringSearchModel(String)</a></span> - Method in class io.sphere.sdk.search.model.<a href="io/sphere/sdk/search/model/SearchModelImpl.html" title="class in io.sphere.sdk.search.model">SearchModelImpl</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/search/model/StringSearchModel.html" title="class in io.sphere.sdk.search.model"><span class="typeNameLink">StringSearchModel</span></a>&lt;<a href="io/sphere/sdk/search/model/StringSearchModel.html" title="type parameter in StringSearchModel">T</a>&gt; - Class in <a href="io/sphere/sdk/search/model/package-summary.html">io.sphere.sdk.search.model</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/json/TypeReferences.html#stringSetTypeReference--">stringSetTypeReference()</a></span> - Static method in class io.sphere.sdk.json.<a href="io/sphere/sdk/json/TypeReferences.html" title="class in io.sphere.sdk.json">TypeReferences</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/json/TypeReferences.html#stringTypeReference--">stringTypeReference()</a></span> - Static method in class io.sphere.sdk.json.<a href="io/sphere/sdk/json/TypeReferences.html" title="class in io.sphere.sdk.json">TypeReferences</a></dt>
 <dd>&nbsp;</dd>
@@ -12143,7 +12400,9 @@ CompletionStage&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execu
 <dl>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/cartdiscounts/CartDiscountDraftBuilder.html#target-io.sphere.sdk.cartdiscounts.CartDiscountTarget-">target(CartDiscountTarget)</a></span> - Method in class io.sphere.sdk.cartdiscounts.<a href="io/sphere/sdk/cartdiscounts/CartDiscountDraftBuilder.html" title="class in io.sphere.sdk.cartdiscounts">CartDiscountDraftBuilder</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/reviews/ReviewDraftBuilder.html#target-io.sphere.sdk.models.ResourceIdentifier-">target(ResourceIdentifier&lt;?&gt;)</a></span> - Method in class io.sphere.sdk.reviews.<a href="io/sphere/sdk/reviews/ReviewDraftBuilder.html" title="class in io.sphere.sdk.reviews">ReviewDraftBuilder</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/reviews/queries/ReviewQueryModel.html#target--">target()</a></span> - Method in class io.sphere.sdk.reviews.queries.<a href="io/sphere/sdk/reviews/queries/ReviewQueryModel.html" title="class in io.sphere.sdk.reviews.queries">ReviewQueryModel</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/reviews/ReviewDraftBuilder.html#target-io.sphere.sdk.models.ResourceIdentifiable-">target(ResourceIdentifiable&lt;?&gt;)</a></span> - Method in class io.sphere.sdk.reviews.<a href="io/sphere/sdk/reviews/ReviewDraftBuilder.html" title="class in io.sphere.sdk.reviews">ReviewDraftBuilder</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/expansion/ShippingInfoExpansionModel.html#taxCategory--">taxCategory()</a></span> - Method in class io.sphere.sdk.carts.expansion.<a href="io/sphere/sdk/carts/expansion/ShippingInfoExpansionModel.html" title="class in io.sphere.sdk.carts.expansion">ShippingInfoExpansionModel</a></dt>
 <dd>&nbsp;</dd>
@@ -12249,6 +12508,8 @@ CompletionStage&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execu
 <dd>
 <div class="block"><h3 id=client-test-doubles>Client test doubles for unit tests</div>
 </dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/reviews/queries/ReviewQueryModel.html#text--">text()</a></span> - Method in class io.sphere.sdk.reviews.queries.<a href="io/sphere/sdk/reviews/queries/ReviewQueryModel.html" title="class in io.sphere.sdk.reviews.queries">ReviewQueryModel</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/reviews/ReviewDraftBuilder.html#text-java.lang.String-">text(String)</a></span> - Method in class io.sphere.sdk.reviews.<a href="io/sphere/sdk/reviews/ReviewDraftBuilder.html" title="class in io.sphere.sdk.reviews">ReviewDraftBuilder</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/search/MetaModelSearchDslBuilder.html#text">text</a></span> - Variable in class io.sphere.sdk.search.<a href="io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="class in io.sphere.sdk.search">MetaModelSearchDslBuilder</a></dt>
@@ -12290,6 +12551,8 @@ CompletionStage&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execu
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/AddressBuilder.html#title-java.lang.String-">title(String)</a></span> - Method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/AddressBuilder.html" title="class in io.sphere.sdk.models">AddressBuilder</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/AddressQueryModel.html#title--">title()</a></span> - Method in interface io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/AddressQueryModel.html" title="interface in io.sphere.sdk.queries">AddressQueryModel</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/reviews/queries/ReviewQueryModel.html#title--">title()</a></span> - Method in class io.sphere.sdk.reviews.queries.<a href="io/sphere/sdk/reviews/queries/ReviewQueryModel.html" title="class in io.sphere.sdk.reviews.queries">ReviewQueryModel</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/reviews/ReviewDraftBuilder.html#title-java.lang.String-">title(String)</a></span> - Method in class io.sphere.sdk.reviews.<a href="io/sphere/sdk/reviews/ReviewDraftBuilder.html" title="class in io.sphere.sdk.reviews">ReviewDraftBuilder</a></dt>
 <dd>&nbsp;</dd>
@@ -12509,11 +12772,15 @@ CompletionStage&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execu
 <dd>
 <div class="block">Transition to a new state.</div>
 </dd>
+<dt><a href="io/sphere/sdk/reviews/commands/updateactions/TransitionState.html" title="class in io.sphere.sdk.reviews.commands.updateactions"><span class="typeNameLink">TransitionState</span></a> - Class in <a href="io/sphere/sdk/reviews/commands/updateactions/package-summary.html">io.sphere.sdk.reviews.commands.updateactions</a></dt>
+<dd>
+<div class="block">Transition to a new state.</div>
+</dd>
 <dt><a href="io/sphere/sdk/states/relatedupdateactions/TransitionStateBase.html" title="class in io.sphere.sdk.states.relatedupdateactions"><span class="typeNameLink">TransitionStateBase</span></a>&lt;<a href="io/sphere/sdk/states/relatedupdateactions/TransitionStateBase.html" title="type parameter in TransitionStateBase">T</a>&gt; - Class in <a href="io/sphere/sdk/states/relatedupdateactions/package-summary.html">io.sphere.sdk.states.relatedupdateactions</a></dt>
 <dd>
 <div class="block">Internal base class</div>
 </dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/states/relatedupdateactions/TransitionStateBase.html#TransitionStateBase-io.sphere.sdk.models.Referenceable-">TransitionStateBase(Referenceable&lt;State&gt;)</a></span> - Constructor for class io.sphere.sdk.states.relatedupdateactions.<a href="io/sphere/sdk/states/relatedupdateactions/TransitionStateBase.html" title="class in io.sphere.sdk.states.relatedupdateactions">TransitionStateBase</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/states/relatedupdateactions/TransitionStateBase.html#TransitionStateBase-io.sphere.sdk.models.ResourceIdentifiable-">TransitionStateBase(ResourceIdentifiable&lt;State&gt;)</a></span> - Constructor for class io.sphere.sdk.states.relatedupdateactions.<a href="io/sphere/sdk/states/relatedupdateactions/TransitionStateBase.html" title="class in io.sphere.sdk.states.relatedupdateactions">TransitionStateBase</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/utils/functional/TriFunction.html" title="interface in io.sphere.sdk.utils.functional"><span class="typeNameLink">TriFunction</span></a>&lt;<a href="io/sphere/sdk/utils/functional/TriFunction.html" title="type parameter in TriFunction">R</a>,<a href="io/sphere/sdk/utils/functional/TriFunction.html" title="type parameter in TriFunction">A</a>,<a href="io/sphere/sdk/utils/functional/TriFunction.html" title="type parameter in TriFunction">B</a>,<a href="io/sphere/sdk/utils/functional/TriFunction.html" title="type parameter in TriFunction">C</a>&gt; - Interface in <a href="io/sphere/sdk/utils/functional/package-summary.html">io.sphere.sdk.utils.functional</a></dt>
 <dd>&nbsp;</dd>
@@ -12780,6 +13047,8 @@ assertThat(type.getFieldDefinitions()).containsExactly(stringFieldDefinition);
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/client/UnauthorizedException.html#UnauthorizedException-java.lang.String-java.lang.Throwable-">UnauthorizedException(String, Throwable)</a></span> - Constructor for exception io.sphere.sdk.client.<a href="io/sphere/sdk/client/UnauthorizedException.html" title="class in io.sphere.sdk.client">UnauthorizedException</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/reviews/queries/ReviewQueryModel.html#uniquenessValue--">uniquenessValue()</a></span> - Method in class io.sphere.sdk.reviews.queries.<a href="io/sphere/sdk/reviews/queries/ReviewQueryModel.html" title="class in io.sphere.sdk.reviews.queries">ReviewQueryModel</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/reviews/ReviewDraftBuilder.html#uniquenessValue-java.lang.String-">uniquenessValue(String)</a></span> - Method in class io.sphere.sdk.reviews.<a href="io/sphere/sdk/reviews/ReviewDraftBuilder.html" title="class in io.sphere.sdk.reviews">ReviewDraftBuilder</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/products/commands/updateactions/Unpublish.html" title="class in io.sphere.sdk.products.commands.updateactions"><span class="typeNameLink">Unpublish</span></a> - Class in <a href="io/sphere/sdk/products/commands/updateactions/package-summary.html">io.sphere.sdk.products.commands.updateactions</a></dt>
@@ -12944,6 +13213,10 @@ assertThat(type.getFieldDefinitions()).containsExactly(stringFieldDefinition);
 <dd>
 <div class="block">Returns the enum constant of this type with the specified name.</div>
 </dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/states/StateRole.html#valueOf-java.lang.String-">valueOf(String)</a></span> - Static method in enum io.sphere.sdk.states.<a href="io/sphere/sdk/states/StateRole.html" title="enum in io.sphere.sdk.states">StateRole</a></dt>
+<dd>
+<div class="block">Returns the enum constant of this type with the specified name.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/states/StateType.html#valueOf-java.lang.String-">valueOf(String)</a></span> - Static method in enum io.sphere.sdk.states.<a href="io/sphere/sdk/states/StateType.html" title="enum in io.sphere.sdk.states">StateType</a></dt>
 <dd>
 <div class="block">Returns the enum constant of this type with the specified name.</div>
@@ -13029,6 +13302,11 @@ the order they are declared.</div>
 the order they are declared.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/search/SearchSortDirection.html#values--">values()</a></span> - Static method in enum io.sphere.sdk.search.<a href="io/sphere/sdk/search/SearchSortDirection.html" title="enum in io.sphere.sdk.search">SearchSortDirection</a></dt>
+<dd>
+<div class="block">Returns an array containing the constants of this enum type, in
+the order they are declared.</div>
+</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/states/StateRole.html#values--">values()</a></span> - Static method in enum io.sphere.sdk.states.<a href="io/sphere/sdk/states/StateRole.html" title="enum in io.sphere.sdk.states">StateRole</a></dt>
 <dd>
 <div class="block">Returns an array containing the constants of this enum type, in
 the order they are declared.</div>
@@ -13360,6 +13638,14 @@ the order they are declared.</div>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/MetaModelQueryDslImpl.html#withExpansionPaths-java.util.function.Function-">withExpansionPaths(Function&lt;E, ExpansionPathContainer&lt;T&gt;&gt;)</a></span> - Method in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="class in io.sphere.sdk.queries">MetaModelQueryDslImpl</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/reviews/queries/ReviewByIdGet.html#withExpansionPaths-io.sphere.sdk.expansion.ExpansionPath-">withExpansionPaths(ExpansionPath&lt;Review&gt;)</a></span> - Method in interface io.sphere.sdk.reviews.queries.<a href="io/sphere/sdk/reviews/queries/ReviewByIdGet.html" title="interface in io.sphere.sdk.reviews.queries">ReviewByIdGet</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/reviews/queries/ReviewByIdGet.html#withExpansionPaths-java.util.List-">withExpansionPaths(List&lt;ExpansionPath&lt;Review&gt;&gt;)</a></span> - Method in interface io.sphere.sdk.reviews.queries.<a href="io/sphere/sdk/reviews/queries/ReviewByIdGet.html" title="interface in io.sphere.sdk.reviews.queries">ReviewByIdGet</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/reviews/queries/ReviewByKeyGet.html#withExpansionPaths-io.sphere.sdk.expansion.ExpansionPath-">withExpansionPaths(ExpansionPath&lt;Review&gt;)</a></span> - Method in interface io.sphere.sdk.reviews.queries.<a href="io/sphere/sdk/reviews/queries/ReviewByKeyGet.html" title="interface in io.sphere.sdk.reviews.queries">ReviewByKeyGet</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/reviews/queries/ReviewByKeyGet.html#withExpansionPaths-java.util.List-">withExpansionPaths(List&lt;ExpansionPath&lt;Review&gt;&gt;)</a></span> - Method in interface io.sphere.sdk.reviews.queries.<a href="io/sphere/sdk/reviews/queries/ReviewByKeyGet.html" title="interface in io.sphere.sdk.reviews.queries">ReviewByKeyGet</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/search/MetaModelSearchDslImpl.html#withExpansionPaths-java.util.List-">withExpansionPaths(List&lt;ExpansionPath&lt;T&gt;&gt;)</a></span> - Method in class io.sphere.sdk.search.<a href="io/sphere/sdk/search/MetaModelSearchDslImpl.html" title="class in io.sphere.sdk.search">MetaModelSearchDslImpl</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/search/MetaModelSearchDslImpl.html#withExpansionPaths-io.sphere.sdk.expansion.ExpansionPath-">withExpansionPaths(ExpansionPath&lt;T&gt;)</a></span> - Method in class io.sphere.sdk.search.<a href="io/sphere/sdk/search/MetaModelSearchDslImpl.html" title="class in io.sphere.sdk.search">MetaModelSearchDslImpl</a></dt>
@@ -13643,6 +13929,10 @@ the order they are declared.</div>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/channels/ChannelDraft.html#withRoles-java.util.Set-">withRoles(Set&lt;ChannelRole&gt;)</a></span> - Method in class io.sphere.sdk.channels.<a href="io/sphere/sdk/channels/ChannelDraft.html" title="class in io.sphere.sdk.channels">ChannelDraft</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/channels/ChannelDraft.html#withRoles-io.sphere.sdk.channels.ChannelRole...-">withRoles(ChannelRole...)</a></span> - Method in class io.sphere.sdk.channels.<a href="io/sphere/sdk/channels/ChannelDraft.html" title="class in io.sphere.sdk.channels">ChannelDraft</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/states/StateDraft.html#withRoles-java.util.Set-">withRoles(Set&lt;StateRole&gt;)</a></span> - Method in class io.sphere.sdk.states.<a href="io/sphere/sdk/states/StateDraft.html" title="class in io.sphere.sdk.states">StateDraft</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/states/StateDraft.html#withRoles-io.sphere.sdk.states.StateRole-">withRoles(StateRole)</a></span> - Method in class io.sphere.sdk.states.<a href="io/sphere/sdk/states/StateDraft.html" title="class in io.sphere.sdk.states">StateDraft</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/Address.html#withSalutation-java.lang.String-">withSalutation(String)</a></span> - Method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/Address.html" title="class in io.sphere.sdk.models">Address</a></dt>
 <dd>&nbsp;</dd>

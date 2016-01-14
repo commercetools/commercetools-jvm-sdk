@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":6,"i1":6,"i2":6,"i3":6,"i4":6,"i5":6,"i6":6,"i7":6,"i8":6,"i9":6,"i10":6,"i11":17,"i12":17,"i13":18,"i14":17};
+var methods = {"i0":6,"i1":6,"i2":6,"i3":6,"i4":6,"i5":6,"i6":6,"i7":6,"i8":6,"i9":6,"i10":6,"i11":17,"i12":17,"i13":17,"i14":18,"i15":17};
 var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],2:["t2","Instance Methods"],4:["t3","Abstract Methods"],16:["t5","Default Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -100,12 +100,151 @@ var activeTableTab = "activeTableTab";
 <li class="blockList">
 <dl>
 <dt>All Superinterfaces:</dt>
-<dd><a href="../../../../io/sphere/sdk/models/CreationTimestamped.html" title="interface in io.sphere.sdk.models">CreationTimestamped</a>, <a href="../../../../io/sphere/sdk/models/Identifiable.html" title="interface in io.sphere.sdk.models">Identifiable</a>&lt;<a href="../../../../io/sphere/sdk/reviews/Review.html" title="interface in io.sphere.sdk.reviews">Review</a>&gt;, <a href="../../../../io/sphere/sdk/models/Referenceable.html" title="interface in io.sphere.sdk.models">Referenceable</a>&lt;<a href="../../../../io/sphere/sdk/reviews/Review.html" title="interface in io.sphere.sdk.reviews">Review</a>&gt;, <a href="../../../../io/sphere/sdk/models/Resource.html" title="interface in io.sphere.sdk.models">Resource</a>&lt;<a href="../../../../io/sphere/sdk/reviews/Review.html" title="interface in io.sphere.sdk.reviews">Review</a>&gt;, <a href="../../../../io/sphere/sdk/models/ResourceIdentifiable.html" title="interface in io.sphere.sdk.models">ResourceIdentifiable</a>&lt;<a href="../../../../io/sphere/sdk/reviews/Review.html" title="interface in io.sphere.sdk.reviews">Review</a>&gt;, <a href="../../../../io/sphere/sdk/models/ResourceView.html" title="interface in io.sphere.sdk.models">ResourceView</a>&lt;<a href="../../../../io/sphere/sdk/reviews/Review.html" title="interface in io.sphere.sdk.reviews">Review</a>,<a href="../../../../io/sphere/sdk/reviews/Review.html" title="interface in io.sphere.sdk.reviews">Review</a>&gt;, <a href="../../../../io/sphere/sdk/models/Timestamped.html" title="interface in io.sphere.sdk.models">Timestamped</a>, <a href="../../../../io/sphere/sdk/models/Versioned.html" title="interface in io.sphere.sdk.models">Versioned</a>&lt;<a href="../../../../io/sphere/sdk/reviews/Review.html" title="interface in io.sphere.sdk.reviews">Review</a>&gt;</dd>
+<dd><a href="../../../../io/sphere/sdk/models/CreationTimestamped.html" title="interface in io.sphere.sdk.models">CreationTimestamped</a>, <a href="../../../../io/sphere/sdk/types/Custom.html" title="interface in io.sphere.sdk.types">Custom</a>, <a href="../../../../io/sphere/sdk/models/Identifiable.html" title="interface in io.sphere.sdk.models">Identifiable</a>&lt;<a href="../../../../io/sphere/sdk/reviews/Review.html" title="interface in io.sphere.sdk.reviews">Review</a>&gt;, <a href="../../../../io/sphere/sdk/models/Referenceable.html" title="interface in io.sphere.sdk.models">Referenceable</a>&lt;<a href="../../../../io/sphere/sdk/reviews/Review.html" title="interface in io.sphere.sdk.reviews">Review</a>&gt;, <a href="../../../../io/sphere/sdk/models/Resource.html" title="interface in io.sphere.sdk.models">Resource</a>&lt;<a href="../../../../io/sphere/sdk/reviews/Review.html" title="interface in io.sphere.sdk.reviews">Review</a>&gt;, <a href="../../../../io/sphere/sdk/models/ResourceIdentifiable.html" title="interface in io.sphere.sdk.models">ResourceIdentifiable</a>&lt;<a href="../../../../io/sphere/sdk/reviews/Review.html" title="interface in io.sphere.sdk.reviews">Review</a>&gt;, <a href="../../../../io/sphere/sdk/models/ResourceView.html" title="interface in io.sphere.sdk.models">ResourceView</a>&lt;<a href="../../../../io/sphere/sdk/reviews/Review.html" title="interface in io.sphere.sdk.reviews">Review</a>,<a href="../../../../io/sphere/sdk/reviews/Review.html" title="interface in io.sphere.sdk.reviews">Review</a>&gt;, <a href="../../../../io/sphere/sdk/models/Timestamped.html" title="interface in io.sphere.sdk.models">Timestamped</a>, <a href="../../../../io/sphere/sdk/models/Versioned.html" title="interface in io.sphere.sdk.models">Versioned</a>&lt;<a href="../../../../io/sphere/sdk/reviews/Review.html" title="interface in io.sphere.sdk.reviews">Review</a>&gt;</dd>
 </dl>
 <hr>
 <br>
 <pre>public interface <span class="typeNameLabel">Review</span>
-extends <a href="../../../../io/sphere/sdk/models/Resource.html" title="interface in io.sphere.sdk.models">Resource</a>&lt;<a href="../../../../io/sphere/sdk/reviews/Review.html" title="interface in io.sphere.sdk.reviews">Review</a>&gt;</pre>
+extends <a href="../../../../io/sphere/sdk/models/Resource.html" title="interface in io.sphere.sdk.models">Resource</a>&lt;<a href="../../../../io/sphere/sdk/reviews/Review.html" title="interface in io.sphere.sdk.reviews">Review</a>&gt;, <a href="../../../../io/sphere/sdk/types/Custom.html" title="interface in io.sphere.sdk.types">Custom</a></pre>
+<div class="block">Reviews are used to evaluate products and channels.
+
+  <h3 id=review-approval-process>Review Approval Process</h3>
+
+  <p>If you do not need any approval process, skip this part.</p>
+
+ <p>If we have an approval process for a review to be used for a product or a channel, we model the approval process with a state machine.</p>
+
+ <p>First of all, we create the approved state. Then we create the initial to-approve state, which has a possible transition to the approved state:</p>
+
+ <div id="io-sphere-sdk-reviews-approvaldemo-CreateReviewStates%s" class=code-example><button type='button' style='display: none;' class='reveal-imports'>show/hide imports</button><pre class='hide code-example-imports'><code class='java'>import io.sphere.sdk.client.BlockingSphereClient;
+import io.sphere.sdk.states.State;
+import io.sphere.sdk.states.StateDraft;
+import io.sphere.sdk.states.StateRole;
+import io.sphere.sdk.states.StateType;
+import io.sphere.sdk.states.commands.StateCreateCommand;
+import java.util.List;
+import static java.util.Arrays.asList;
+import static java.util.Collections.singleton;
+</code></pre><pre><code class='java'>public class CreateReviewStates {
+    public static List&lt;State&gt; createStates(final BlockingSphereClient client) {
+        final StateDraft approvedStateDraft =
+                StateDraft.of("approved", StateType.REVIEW_STATE).withRoles(StateRole.REVIEW_INCLUDED_IN_STATISTICS);
+        final State approvedState = client.executeBlocking(StateCreateCommand.of(approvedStateDraft));
+
+        final StateDraft initialStateDraft =
+                StateDraft.of("to-approve", StateType.REVIEW_STATE)
+                        .withInitial(true)
+                        .withTransitions(singleton(approvedState.toReference()));
+        final State initialState = client.executeBlocking(StateCreateCommand.of(initialStateDraft));
+        return asList(initialState, approvedState);
+    }
+}
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/reviews/approvaldemo/CreateReviewStates.java" target="_blank">test code</a>.</pre></div>
+
+ Only states with <a href="../../../../io/sphere/sdk/states/StateRole.html#REVIEW_INCLUDED_IN_STATISTICS"><code>StateRole.REVIEW_INCLUDED_IN_STATISTICS</code></a> makes review ratings count in statistics.
+
+ <h4>Creating reviews</h4>
+ <p>Now we can create a review in the initial state to-approve:</p>
+
+ <div id="io-sphere-sdk-reviews-approvaldemo-CreateReviewToApprove%s" class=code-example><button type='button' style='display: none;' class='reveal-imports'>show/hide imports</button><pre class='hide code-example-imports'><code class='java'>import io.sphere.sdk.client.BlockingSphereClient;
+import io.sphere.sdk.models.Reference;
+import io.sphere.sdk.models.ResourceIdentifier;
+import io.sphere.sdk.products.Product;
+import io.sphere.sdk.reviews.Review;
+import io.sphere.sdk.reviews.ReviewDraft;
+import io.sphere.sdk.reviews.ReviewDraftBuilder;
+import io.sphere.sdk.reviews.commands.ReviewCreateCommand;
+import static org.assertj.core.api.Assertions.assertThat;
+</code></pre><pre><code class='java'>public class CreateReviewToApprove {
+    public static Review createReview(final BlockingSphereClient client, final Reference&lt;Product&gt; productReference) {
+        final ReviewDraft reviewDraft = ReviewDraftBuilder
+                .ofRating(4)
+                .title("review title")
+                .target(productReference)
+                .state(ResourceIdentifier.ofKey("to-approve"))//you know the initial state by key and don't need a ref
+                .build();
+        final Review review = client.executeBlocking(ReviewCreateCommand.of(reviewDraft));
+        assertThat(review.getState()).isNotNull();
+        assertThat(review.getRating()).isEqualTo(4);
+        return review;
+    }
+}
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/reviews/approvaldemo/CreateReviewToApprove.java" target="_blank">test code</a>.</pre></div>
+
+ <h4>Query which reviews should be approved</h4>
+
+ <div id="io-sphere-sdk-reviews-approvaldemo-QueryReviewsToApprove%s" class=code-example><button type='button' style='display: none;' class='reveal-imports'>show/hide imports</button><pre class='hide code-example-imports'><code class='java'>import io.sphere.sdk.client.BlockingSphereClient;
+import io.sphere.sdk.reviews.Review;
+import io.sphere.sdk.reviews.queries.ReviewQuery;
+import io.sphere.sdk.states.State;
+import io.sphere.sdk.states.queries.StateQuery;
+import java.util.List;
+import static org.assertj.core.api.Assertions.assertThat;
+</code></pre><pre><code class='java'>public class QueryReviewsToApprove {
+    public static List&lt;Review&gt; query(final BlockingSphereClient client, final State initialState) {
+        //this ID can be cached
+        final String initialStateId = client.executeBlocking(StateQuery.of().byKey("to-approve")).head().get().getId();
+
+        final ReviewQuery reviewQuery = ReviewQuery.of()
+                .withPredicates(m -&gt; m.state().id().is(initialStateId))
+                .withSort(m -&gt; m.createdAt().sort().asc());//oldest first
+        final List&lt;Review&gt; reviewsToApprove = client.executeBlocking(reviewQuery).getResults();
+        assertThat(reviewsToApprove).extracting(review -&gt; review.getTitle()).contains("review title");
+        return reviewsToApprove;
+    }
+}
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/reviews/approvaldemo/QueryReviewsToApprove.java" target="_blank">test code</a>.</pre></div>
+
+ <h4>Approving a review</h4>
+
+
+ <div id="io-sphere-sdk-reviews-approvaldemo-ApprovingAReview%s" class=code-example><button type='button' style='display: none;' class='reveal-imports'>show/hide imports</button><pre class='hide code-example-imports'><code class='java'>import io.sphere.sdk.client.BlockingSphereClient;
+import io.sphere.sdk.models.ResourceIdentifier;
+import io.sphere.sdk.reviews.Review;
+import io.sphere.sdk.reviews.commands.ReviewUpdateCommand;
+import io.sphere.sdk.reviews.commands.updateactions.TransitionState;
+import io.sphere.sdk.states.State;
+import static io.sphere.sdk.test.ReferenceAssert.assertThat;
+</code></pre><pre><code class='java'>public class ApprovingAReview {
+    public static Review approveReview(final BlockingSphereClient client, final Review reviewToApprove) {
+        final ResourceIdentifier&lt;State&gt; state = ResourceIdentifier.ofKey("approved");//we now the state by key
+        final ReviewUpdateCommand cmd = ReviewUpdateCommand.of(reviewToApprove, TransitionState.of(state));
+        final Review approvedReview = client.executeBlocking(cmd);
+        assertThat(reviewToApprove.getState()).isNotEqualTo(approvedReview.getState());
+        return approvedReview;
+    }
+}
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/reviews/approvaldemo/ApprovingAReview.java" target="_blank">test code</a>.</pre></div>
+
+<h3 id=displaying-products>Displaying Products</h3>
+<h4>Searching for Products with a Minimal Rating</h4>
+ <p>We can display all products that:</p>
+<ul>
+ <li>have at least 3 stars (average rating superior to 3)</li>
+ <li>with facets about the number of products rated with an average in the different ranges 0 to 1 star, 1 to 2 stars, 2 to 3 stars, 3 to 4 stars and 4 to 5 stars.</li>
+ <li>sorted by average ratings</li>
+ </ul>
+
+ <div id="io-sphere-sdk-reviews-ReviewProductProjectionSearchTest-searchForReviewsWithAverageRatingGreaterThan3--%s" class=code-example><pre><code class='java'>final List&lt;FacetRange&lt;BigDecimal&gt;&gt; facetRanges = IntStream.range(0, 5)
+        .mapToObj(i -&gt; FacetRange.of(new BigDecimal(i), new BigDecimal(i + 1)))
+        .collect(toList());
+assertThat(facetRanges.toString()).isEqualTo("[[0 to 1), [1 to 2), [2 to 3), [3 to 4), [4 to 5)]");
+
+final ProductProjectionSearch searchRequest = ProductProjectionSearch.ofStaged()//in prod it would be current
+        .withResultFilters(m -&gt; m.reviewRatingStatistics().averageRating().byGreaterThanOrEqualTo(new BigDecimal(2)))
+        .withFacets(m -&gt; m.reviewRatingStatistics().averageRating().onlyRange(facetRanges))
+        .withSort(m -&gt; m.reviewRatingStatistics().averageRating().byDesc());
+
+assertEventually(() -&gt; {
+    final PagedSearchResult&lt;ProductProjection&gt; result = client().executeBlocking(searchRequest);
+    assertThat(result.getResults()).hasSize(2);
+    final ProductProjection productProjection = result.getResults().get(0);
+    assertThat(productProjection.getReviewRatingStatistics().getCount()).isEqualTo(20);
+    final RangeFacetResult facetResult = (RangeFacetResult) result.getFacetResult("reviewRatingStatistics.averageRating");
+    assertThat(facetResult.getRanges().get(2)).isEqualTo(RangeStats.of("2.0", "3.0", 2L, "2.2", "2.7", "4.9", 2.45));
+
+});
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/reviews/ReviewProductProjectionSearchTest.java" target="_blank">test code</a>.</pre></div></div>
 </li>
 </ul>
 </div>
@@ -129,11 +268,11 @@ extends <a href="../../../../io/sphere/sdk/models/Resource.html" title="interfac
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/reviews/Review.html#getAuthorName--">getAuthorName</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i1" class="rowColor">
-<td class="colFirst"><code><a href="../../../../io/sphere/sdk/types/CustomFieldsDraft.html" title="class in io.sphere.sdk.types">CustomFieldsDraft</a></code></td>
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/types/CustomFields.html" title="class in io.sphere.sdk.types">CustomFields</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/reviews/Review.html#getCustom--">getCustom</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i2" class="altColor">
-<td class="colFirst"><code><a href="../../../../io/sphere/sdk/models/ResourceIdentifier.html" title="interface in io.sphere.sdk.models">ResourceIdentifier</a>&lt;<a href="../../../../io/sphere/sdk/customers/Customer.html" title="interface in io.sphere.sdk.customers">Customer</a>&gt;</code></td>
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/models/Reference.html" title="interface in io.sphere.sdk.models">Reference</a>&lt;<a href="../../../../io/sphere/sdk/customers/Customer.html" title="interface in io.sphere.sdk.customers">Customer</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/reviews/Review.html#getCustomer--">getCustomer</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i3" class="rowColor">
@@ -149,11 +288,11 @@ extends <a href="../../../../io/sphere/sdk/models/Resource.html" title="interfac
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/reviews/Review.html#getRating--">getRating</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i6" class="altColor">
-<td class="colFirst"><code><a href="../../../../io/sphere/sdk/models/ResourceIdentifier.html" title="interface in io.sphere.sdk.models">ResourceIdentifier</a>&lt;<a href="../../../../io/sphere/sdk/states/State.html" title="interface in io.sphere.sdk.states">State</a>&gt;</code></td>
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/models/Reference.html" title="interface in io.sphere.sdk.models">Reference</a>&lt;<a href="../../../../io/sphere/sdk/states/State.html" title="interface in io.sphere.sdk.states">State</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/reviews/Review.html#getState--">getState</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i7" class="rowColor">
-<td class="colFirst"><code><a href="../../../../io/sphere/sdk/models/ResourceIdentifier.html" title="interface in io.sphere.sdk.models">ResourceIdentifier</a>&lt;?&gt;</code></td>
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/models/Reference.html" title="interface in io.sphere.sdk.models">Reference</a>&lt;?&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/reviews/Review.html#getTarget--">getTarget</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i8" class="altColor">
@@ -177,12 +316,16 @@ extends <a href="../../../../io/sphere/sdk/models/Resource.html" title="interfac
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/reviews/Review.html#referenceTypeId--">referenceTypeId</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i13" class="rowColor">
+<td class="colFirst"><code>static java.lang.String</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/reviews/Review.html#resourceTypeId--">resourceTypeId</a></span>()</code>&nbsp;</td>
+</tr>
+<tr id="i14" class="altColor">
 <td class="colFirst"><code>default <a href="../../../../io/sphere/sdk/models/Reference.html" title="interface in io.sphere.sdk.models">Reference</a>&lt;<a href="../../../../io/sphere/sdk/reviews/Review.html" title="interface in io.sphere.sdk.reviews">Review</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/reviews/Review.html#toReference--">toReference</a></span>()</code>
 <div class="block">Creates a reference which is not necessarily filled.</div>
 </td>
 </tr>
-<tr id="i14" class="altColor">
+<tr id="i15" class="rowColor">
 <td class="colFirst"><code>static com.fasterxml.jackson.core.type.TypeReference&lt;<a href="../../../../io/sphere/sdk/reviews/Review.html" title="interface in io.sphere.sdk.reviews">Review</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/reviews/Review.html#typeReference--">typeReference</a></span>()</code>&nbsp;</td>
 </tr>
@@ -239,7 +382,11 @@ java.lang.String&nbsp;getAuthorName()</pre>
 <li class="blockList">
 <h4>getCustom</h4>
 <pre>@Nullable
-<a href="../../../../io/sphere/sdk/types/CustomFieldsDraft.html" title="class in io.sphere.sdk.types">CustomFieldsDraft</a>&nbsp;getCustom()</pre>
+<a href="../../../../io/sphere/sdk/types/CustomFields.html" title="class in io.sphere.sdk.types">CustomFields</a>&nbsp;getCustom()</pre>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../io/sphere/sdk/types/Custom.html#getCustom--">getCustom</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/types/Custom.html" title="interface in io.sphere.sdk.types">Custom</a></code></dd>
+</dl>
 </li>
 </ul>
 <a name="getCustomer--">
@@ -249,7 +396,7 @@ java.lang.String&nbsp;getAuthorName()</pre>
 <li class="blockList">
 <h4>getCustomer</h4>
 <pre>@Nullable
-<a href="../../../../io/sphere/sdk/models/ResourceIdentifier.html" title="interface in io.sphere.sdk.models">ResourceIdentifier</a>&lt;<a href="../../../../io/sphere/sdk/customers/Customer.html" title="interface in io.sphere.sdk.customers">Customer</a>&gt;&nbsp;getCustomer()</pre>
+<a href="../../../../io/sphere/sdk/models/Reference.html" title="interface in io.sphere.sdk.models">Reference</a>&lt;<a href="../../../../io/sphere/sdk/customers/Customer.html" title="interface in io.sphere.sdk.customers">Customer</a>&gt;&nbsp;getCustomer()</pre>
 </li>
 </ul>
 <a name="getKey--">
@@ -289,7 +436,7 @@ java.lang.Integer&nbsp;getRating()</pre>
 <li class="blockList">
 <h4>getState</h4>
 <pre>@Nullable
-<a href="../../../../io/sphere/sdk/models/ResourceIdentifier.html" title="interface in io.sphere.sdk.models">ResourceIdentifier</a>&lt;<a href="../../../../io/sphere/sdk/states/State.html" title="interface in io.sphere.sdk.states">State</a>&gt;&nbsp;getState()</pre>
+<a href="../../../../io/sphere/sdk/models/Reference.html" title="interface in io.sphere.sdk.models">Reference</a>&lt;<a href="../../../../io/sphere/sdk/states/State.html" title="interface in io.sphere.sdk.states">State</a>&gt;&nbsp;getState()</pre>
 </li>
 </ul>
 <a name="getTarget--">
@@ -299,7 +446,7 @@ java.lang.Integer&nbsp;getRating()</pre>
 <li class="blockList">
 <h4>getTarget</h4>
 <pre>@Nullable
-<a href="../../../../io/sphere/sdk/models/ResourceIdentifier.html" title="interface in io.sphere.sdk.models">ResourceIdentifier</a>&lt;?&gt;&nbsp;getTarget()</pre>
+<a href="../../../../io/sphere/sdk/models/Reference.html" title="interface in io.sphere.sdk.models">Reference</a>&lt;?&gt;&nbsp;getTarget()</pre>
 </li>
 </ul>
 <a name="getText--">
@@ -339,6 +486,15 @@ java.lang.String&nbsp;getUniquenessValue()</pre>
 <li class="blockList">
 <h4>referenceTypeId</h4>
 <pre>static&nbsp;java.lang.String&nbsp;referenceTypeId()</pre>
+</li>
+</ul>
+<a name="resourceTypeId--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>resourceTypeId</h4>
+<pre>static&nbsp;java.lang.String&nbsp;resourceTypeId()</pre>
 </li>
 </ul>
 <a name="typeReference--">

@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":9,"i7":10,"i8":10,"i9":10,"i10":10};
+var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":9,"i8":10,"i9":10,"i10":10,"i11":10,"i12":10,"i13":10};
 var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -151,35 +151,47 @@ extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/states/StateDraft.html#getName--">getName</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i3" class="rowColor">
+<td class="colFirst"><code>java.util.Set&lt;<a href="../../../../io/sphere/sdk/states/StateRole.html" title="enum in io.sphere.sdk.states">StateRole</a>&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/states/StateDraft.html#getRoles--">getRoles</a></span>()</code>&nbsp;</td>
+</tr>
+<tr id="i4" class="altColor">
 <td class="colFirst"><code>java.util.Set&lt;<a href="../../../../io/sphere/sdk/models/Reference.html" title="interface in io.sphere.sdk.models">Reference</a>&lt;<a href="../../../../io/sphere/sdk/states/State.html" title="interface in io.sphere.sdk.states">State</a>&gt;&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/states/StateDraft.html#getTransitions--">getTransitions</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i4" class="altColor">
+<tr id="i5" class="rowColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/states/StateType.html" title="enum in io.sphere.sdk.states">StateType</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/states/StateDraft.html#getType--">getType</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i5" class="rowColor">
+<tr id="i6" class="altColor">
 <td class="colFirst"><code>java.lang.Boolean</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/states/StateDraft.html#isInitial--">isInitial</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i6" class="altColor">
+<tr id="i7" class="rowColor">
 <td class="colFirst"><code>static <a href="../../../../io/sphere/sdk/states/StateDraft.html" title="class in io.sphere.sdk.states">StateDraft</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/states/StateDraft.html#of-java.lang.String-io.sphere.sdk.states.StateType-">of</a></span>(java.lang.String&nbsp;key,
   <a href="../../../../io/sphere/sdk/states/StateType.html" title="enum in io.sphere.sdk.states">StateType</a>&nbsp;type)</code>&nbsp;</td>
 </tr>
-<tr id="i7" class="rowColor">
+<tr id="i8" class="altColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/states/StateDraft.html" title="class in io.sphere.sdk.states">StateDraft</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/states/StateDraft.html#withDescription-io.sphere.sdk.models.LocalizedString-">withDescription</a></span>(<a href="../../../../io/sphere/sdk/models/LocalizedString.html" title="class in io.sphere.sdk.models">LocalizedString</a>&nbsp;description)</code>&nbsp;</td>
 </tr>
-<tr id="i8" class="altColor">
+<tr id="i9" class="rowColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/states/StateDraft.html" title="class in io.sphere.sdk.states">StateDraft</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/states/StateDraft.html#withInitial-boolean-">withInitial</a></span>(boolean&nbsp;initial)</code>&nbsp;</td>
 </tr>
-<tr id="i9" class="rowColor">
+<tr id="i10" class="altColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/states/StateDraft.html" title="class in io.sphere.sdk.states">StateDraft</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/states/StateDraft.html#withName-io.sphere.sdk.models.LocalizedString-">withName</a></span>(<a href="../../../../io/sphere/sdk/models/LocalizedString.html" title="class in io.sphere.sdk.models">LocalizedString</a>&nbsp;name)</code>&nbsp;</td>
 </tr>
-<tr id="i10" class="altColor">
+<tr id="i11" class="rowColor">
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/states/StateDraft.html" title="class in io.sphere.sdk.states">StateDraft</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/states/StateDraft.html#withRoles-java.util.Set-">withRoles</a></span>(java.util.Set&lt;<a href="../../../../io/sphere/sdk/states/StateRole.html" title="enum in io.sphere.sdk.states">StateRole</a>&gt;&nbsp;roles)</code>&nbsp;</td>
+</tr>
+<tr id="i12" class="altColor">
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/states/StateDraft.html" title="class in io.sphere.sdk.states">StateDraft</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/states/StateDraft.html#withRoles-io.sphere.sdk.states.StateRole-">withRoles</a></span>(<a href="../../../../io/sphere/sdk/states/StateRole.html" title="enum in io.sphere.sdk.states">StateRole</a>&nbsp;role)</code>&nbsp;</td>
+</tr>
+<tr id="i13" class="rowColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/states/StateDraft.html" title="class in io.sphere.sdk.states">StateDraft</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/states/StateDraft.html#withTransitions-java.util.Set-">withTransitions</a></span>(java.util.Set&lt;<a href="../../../../io/sphere/sdk/models/Reference.html" title="interface in io.sphere.sdk.models">Reference</a>&lt;<a href="../../../../io/sphere/sdk/states/State.html" title="interface in io.sphere.sdk.states">State</a>&gt;&gt;&nbsp;transitions)</code>&nbsp;</td>
 </tr>
@@ -280,6 +292,16 @@ public&nbsp;java.lang.Boolean&nbsp;isInitial()</pre>
 public&nbsp;java.util.Set&lt;<a href="../../../../io/sphere/sdk/models/Reference.html" title="interface in io.sphere.sdk.models">Reference</a>&lt;<a href="../../../../io/sphere/sdk/states/State.html" title="interface in io.sphere.sdk.states">State</a>&gt;&gt;&nbsp;getTransitions()</pre>
 </li>
 </ul>
+<a name="getRoles--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getRoles</h4>
+<pre>@Nullable
+public&nbsp;java.util.Set&lt;<a href="../../../../io/sphere/sdk/states/StateRole.html" title="enum in io.sphere.sdk.states">StateRole</a>&gt;&nbsp;getRoles()</pre>
+</li>
+</ul>
 <a name="withName-io.sphere.sdk.models.LocalizedString-">
 <!--   -->
 </a>
@@ -311,10 +333,28 @@ public&nbsp;java.util.Set&lt;<a href="../../../../io/sphere/sdk/models/Reference
 <a name="withInitial-boolean-">
 <!--   -->
 </a>
-<ul class="blockListLast">
+<ul class="blockList">
 <li class="blockList">
 <h4>withInitial</h4>
 <pre>public&nbsp;<a href="../../../../io/sphere/sdk/states/StateDraft.html" title="class in io.sphere.sdk.states">StateDraft</a>&nbsp;withInitial(boolean&nbsp;initial)</pre>
+</li>
+</ul>
+<a name="withRoles-java.util.Set-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>withRoles</h4>
+<pre>public&nbsp;<a href="../../../../io/sphere/sdk/states/StateDraft.html" title="class in io.sphere.sdk.states">StateDraft</a>&nbsp;withRoles(java.util.Set&lt;<a href="../../../../io/sphere/sdk/states/StateRole.html" title="enum in io.sphere.sdk.states">StateRole</a>&gt;&nbsp;roles)</pre>
+</li>
+</ul>
+<a name="withRoles-io.sphere.sdk.states.StateRole-">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>withRoles</h4>
+<pre>public&nbsp;<a href="../../../../io/sphere/sdk/states/StateDraft.html" title="class in io.sphere.sdk.states">StateDraft</a>&nbsp;withRoles(<a href="../../../../io/sphere/sdk/states/StateRole.html" title="enum in io.sphere.sdk.states">StateRole</a>&nbsp;role)</pre>
 </li>
 </ul>
 </li>
