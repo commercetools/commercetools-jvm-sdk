@@ -10,6 +10,13 @@ import io.sphere.sdk.reviews.Review;
 
 import java.time.ZonedDateTime;
 
+/**
+ * This message is the result of the create review request.
+ *
+ * {@include.example io.sphere.sdk.reviews.commands.ReviewCreateCommandTest#createByCode()}
+ *
+ * @see io.sphere.sdk.reviews.commands.ReviewCreateCommand
+ */
 @JsonDeserialize(as = ReviewCreatedMessage.class)//important to override annotation in Message class
 public class ReviewCreatedMessage extends GenericMessageImpl<Review> {
     public static final String MESSAGE_TYPE = "ReviewCreated";

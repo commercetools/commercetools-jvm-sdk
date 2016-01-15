@@ -15,6 +15,7 @@ Updates a review.
 
  {@doc.gen list actions}
 
+ @see Review
  */
 public interface ReviewUpdateCommand extends UpdateCommandDsl<Review, ReviewUpdateCommand>, MetaModelExpansionDsl<Review, ReviewUpdateCommand, ReviewExpansionModel<Review>> {
     static ReviewUpdateCommand of(final Versioned<Review> versioned, final List<? extends UpdateAction<Review>> updateActions) {

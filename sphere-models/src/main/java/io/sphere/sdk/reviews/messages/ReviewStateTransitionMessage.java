@@ -12,7 +12,7 @@ import javax.annotation.Nullable;
 /**
  * This message is the result of the {@link io.sphere.sdk.reviews.commands.updateactions.TransitionState} update action.
  *
- * {@include.example }
+ * {@include.example io.sphere.sdk.reviews.commands.ReviewUpdateCommandTest#transitionState()}
  *
  * @see io.sphere.sdk.reviews.Review
  * @see Review#getState()

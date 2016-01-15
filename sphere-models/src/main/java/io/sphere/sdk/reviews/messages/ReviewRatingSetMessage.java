@@ -11,6 +11,12 @@ import io.sphere.sdk.reviews.Review;
 import javax.annotation.Nullable;
 import java.time.ZonedDateTime;
 
+/**
+ * This message is the result of the {@link io.sphere.sdk.reviews.commands.updateactions.SetRating} update action.
+ *
+ * @see io.sphere.sdk.reviews.commands.updateactions.SetRating
+ * @see Review#getRating()
+ */
 @JsonDeserialize(as = ReviewRatingSetMessage.class)//important to override annotation in Message class
 public class ReviewRatingSetMessage extends GenericMessageImpl<Review> {
     public static final String MESSAGE_TYPE = "ReviewRatingSet";

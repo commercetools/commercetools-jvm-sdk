@@ -9,6 +9,13 @@ import io.sphere.sdk.types.CustomFieldsDraft;
 import javax.annotation.Nullable;
 import java.util.Locale;
 
+/**
+ * Draft for a new Review.
+ *
+ * @see Review
+ * @see ReviewDraftBuilder
+ * @see io.sphere.sdk.reviews.commands.ReviewCreateCommand
+ */
 @JsonDeserialize(as = ReviewDraftImpl.class)
 public interface ReviewDraft {
     @Nullable

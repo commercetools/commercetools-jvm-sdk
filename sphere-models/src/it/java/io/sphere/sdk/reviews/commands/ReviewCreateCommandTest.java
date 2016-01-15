@@ -96,6 +96,7 @@ public class ReviewCreateCommandTest extends IntegrationTest {
                                 as("the state has not the role ReviewIncludedInStatistics, so it is not accounted yet")
                                 .isNull();
 
+                        //you can observe a message
                         assertEventually(() -> {
                             final PagedQueryResult<ReviewCreatedMessage> pagedQueryResult = client().executeBlocking(MessageQuery.of()
                                     .withPredicates(m -> m.resource().is(review))

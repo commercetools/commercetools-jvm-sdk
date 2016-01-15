@@ -10,7 +10,7 @@ import io.sphere.sdk.reviews.expansion.ReviewExpansionModel;
 /** {@doc.gen summary reviews}
 
 
-
+    @see Review
  */
 public interface ReviewQuery extends MetaModelQueryDsl<Review, ReviewQuery, ReviewQueryModel, ReviewExpansionModel<Review>> {
     static TypeReference<PagedQueryResult<Review>> resultTypeReference() {

@@ -58,40 +58,94 @@ import java.util.Locale;
  <h4 id=query-reviews-for-one-product>Getting reviews for one product</h4>
  {@include.example io.sphere.sdk.reviews.ReviewProductProjectionSearchTest#getReviewsForOneProduct()}
 
+ @see io.sphere.sdk.reviews.commands.ReviewCreateCommand
+ @see io.sphere.sdk.reviews.commands.ReviewUpdateCommand
+ @see io.sphere.sdk.reviews.commands.ReviewDeleteCommand
+ @see io.sphere.sdk.reviews.queries.ReviewQuery
+ @see io.sphere.sdk.reviews.queries.ReviewByIdGet
+ @see io.sphere.sdk.reviews.queries.ReviewByKeyGet
  */
 @JsonDeserialize(as = ReviewImpl.class)
 public interface Review extends Resource<Review>, Custom {
+    /**
+     * The name of the author which created this review or null.
+     *
+     * @see io.sphere.sdk.reviews.commands.updateactions.SetAuthorName
+     * @return author name
+     */
     @Nullable
     String getAuthorName();
 
+    /**
+     * Gets the custom fields of this review or null.
+     * @see io.sphere.sdk.reviews.commands.updateactions.SetCustomField
+     * @see io.sphere.sdk.reviews.commands.updateactions.SetCustomType
+     * @return custom fields
+     */
     @Nullable
     CustomFields getCustom();
 
+    /**
+     * Gets the customer which created this review or null.
+     * @see io.sphere.sdk.reviews.commands.updateactions.SetCustomer
+     * @return customer
+     */
     @Nullable
     Reference<Customer> getCustomer();
 
+    /**
+     * Gets the key assigned to this review or null.
+     *
+     * @see io.sphere.sdk.reviews.commands.updateactions.SetKey
+     * @return key
+     */
     @Nullable
     String getKey();
 
+    /**
+     * Gets the locale (language) in which the text and title are or null.
+     * @return locale
+     */
     @Nullable
     Locale getLocale();
 
+    /**
+     * Gets the rating or null.
+     * @see io.sphere.sdk.reviews.commands.updateactions.SetRating
+     * @return the rating
+     */
     @Nullable
     Integer getRating();
 
+    /**
+     * Gets the state of this review or null.
+     * @see io.sphere.sdk.reviews.commands.updateactions.TransitionState
+     * @return state
+     */
     @Nullable
     Reference<State> getState();
 
     /**
      * Identifies the target of the review. Can be a Product or a Channel or nothing.
+     * @see io.sphere.sdk.reviews.commands.updateactions.SetTarget
      * @return the target of this review or null
      */
     @Nullable
     Reference<?> getTarget();
 
+    /**
+     * Gets the text of this review or null.
+     * @see io.sphere.sdk.reviews.commands.updateactions.SetText
+     * @return text
+     */
     @Nullable
     String getText();
 
+    /**
+     * Gets the title of this review or null.
+     * @see io.sphere.sdk.reviews.commands.updateactions.SetTitle
+     * @return title
+     */
     @Nullable
     String getTitle();
 

@@ -70,6 +70,7 @@ public class ReviewUpdateCommandTest extends IntegrationTest {
 
                 assertThat(updatedReview.getRating()).isEqualTo(rating);
 
+                //you can observe a message
                 assertEventually(() -> {
                     final Query<ReviewRatingSetMessage> messageQuery = MessageQuery.of()
                             .withPredicates(m -> m.resource().is(review))
@@ -153,6 +154,7 @@ public class ReviewUpdateCommandTest extends IntegrationTest {
 
                         assertThat(updatedReview.getState()).isEqualTo(newState.toReference());
 
+                        //you can observe a message
                         assertEventually(() -> {
                             final Query<ReviewStateTransitionMessage> messageQuery = MessageQuery.of()
                                     .withPredicates(m -> m.resource().is(review))

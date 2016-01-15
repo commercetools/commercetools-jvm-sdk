@@ -12,6 +12,13 @@ import javax.annotation.Nullable;
 import java.util.Locale;
 import java.util.Optional;
 
+/**
+ * DraftBuilder for a new Review.
+ *
+ * @see Review
+ * @see ReviewDraft
+ * @see io.sphere.sdk.reviews.commands.ReviewCreateCommand
+ */
 public final class ReviewDraftBuilder extends Base implements Builder<ReviewDraft> {
     @Nullable
     private String key;
