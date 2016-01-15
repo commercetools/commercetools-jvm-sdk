@@ -2,13 +2,16 @@ package io.sphere.sdk.reviews.commands;
 
 import io.sphere.sdk.client.BlockingSphereClient;
 import io.sphere.sdk.customers.Customer;
+import io.sphere.sdk.messages.queries.MessageQuery;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.products.Product;
 import io.sphere.sdk.products.ProductProjection;
 import io.sphere.sdk.products.queries.ProductProjectionByIdGet;
+import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.reviews.Review;
 import io.sphere.sdk.reviews.ReviewDraft;
 import io.sphere.sdk.reviews.ReviewDraftBuilder;
+import io.sphere.sdk.reviews.messages.ReviewCreatedMessage;
 import io.sphere.sdk.reviews.queries.ReviewByKeyGet;
 import io.sphere.sdk.states.State;
 import io.sphere.sdk.states.StateDraft;
@@ -29,6 +32,7 @@ import static io.sphere.sdk.customers.CustomerFixtures.withCustomer;
 import static io.sphere.sdk.products.ProductFixtures.withProduct;
 import static io.sphere.sdk.states.StateFixtures.withState;
 import static io.sphere.sdk.states.StateRole.REVIEW_INCLUDED_IN_STATISTICS;
+import static io.sphere.sdk.test.SphereTestUtils.assertEventually;
 import static io.sphere.sdk.test.SphereTestUtils.draftFromJsonResource;
 import static java.util.Collections.singletonMap;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -91,6 +95,16 @@ public class ReviewCreateCommandTest extends IntegrationTest {
                         assertThat(productProjection.getReviewRatingStatistics()).
                                 as("the state has not the role ReviewIncludedInStatistics, so it is not accounted yet")
                                 .isNull();
+
+                        assertEventually(() -> {
+                            final PagedQueryResult<ReviewCreatedMessage> pagedQueryResult = client().executeBlocking(MessageQuery.of()
+                                    .withPredicates(m -> m.resource().is(review))
+                                    .forMessageType(ReviewCreatedMessage.MESSAGE_HINT));
+
+                            final ReviewCreatedMessage paymentCreatedMessage = pagedQueryResult.head().get();
+                            assertThat(paymentCreatedMessage.getReview().getId()).isEqualTo(review.getId());
+                            assertThat(paymentCreatedMessage.getResource().getId()).isEqualTo(review.getId());
+                        });
 
                         client().executeBlocking(ReviewDeleteCommand.of(review));
                     });
