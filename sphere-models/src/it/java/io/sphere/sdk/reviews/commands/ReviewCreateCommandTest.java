@@ -11,6 +11,7 @@ import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.reviews.Review;
 import io.sphere.sdk.reviews.ReviewDraft;
 import io.sphere.sdk.reviews.ReviewDraftBuilder;
+import io.sphere.sdk.reviews.ReviewFixtures;
 import io.sphere.sdk.reviews.messages.ReviewCreatedMessage;
 import io.sphere.sdk.reviews.queries.ReviewByKeyGet;
 import io.sphere.sdk.states.State;
@@ -40,10 +41,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class ReviewCreateCommandTest extends IntegrationTest {
     @Before
     public void clean() throws Exception {
-        final Review review = client().executeBlocking(ReviewByKeyGet.of("review1"));
-        if (review != null) {
-            client().executeBlocking(ReviewDeleteCommand.of(review));
-        }
+        ReviewFixtures.deleteReviews(client());
         //since the state can have a remaining review, the review needs to be deleted first
         final State state = client().executeBlocking(StateQuery.of().withPredicates(m -> m.key().is("initial-review-state"))).head().orElse(null);
         if (state != null) {
