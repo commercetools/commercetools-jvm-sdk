@@ -91,6 +91,7 @@ io.sphere.sdk.reviews
 io.sphere.sdk.reviews.commands
 io.sphere.sdk.reviews.commands.updateactions
 io.sphere.sdk.reviews.expansion
+io.sphere.sdk.reviews.messages
 io.sphere.sdk.reviews.queries
 io.sphere.sdk.reviews.search
 io.sphere.sdk.search

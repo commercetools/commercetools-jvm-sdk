@@ -126,14 +126,30 @@ var activeTableTab = "activeTableTab";
 extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html" title="class in io.sphere.sdk.commands">UpdateActionImpl</a>&lt;<a href="../../../../../../io/sphere/sdk/reviews/Review.html" title="interface in io.sphere.sdk.reviews">Review</a>&gt;</pre>
 <div class="block">Sets/unsets the rating of a review.
 
- <div id="io-sphere-sdk-reviews-commands-ReviewUpdateCommandTest-setRating--%s" class=code-example><pre><code class='java'>withUpdateableReview(client(), (Review review) -&gt; {
-    final int rating = 44;
-    final Review updatedReview =
-            client().executeBlocking(ReviewUpdateCommand.of(review, SetRating.of(rating)));
+ <div id="io-sphere-sdk-reviews-commands-ReviewUpdateCommandTest-setRating--%s" class=code-example><pre><code class='java'>withChannelOfRole(client(), ChannelRole.INVENTORY_SUPPLY, channel -&gt; {
+    withUpdateableReview(client(),builder -&gt; builder.target(channel), (Review review) -&gt; {
+        final int rating = 44;
+        final Review updatedReview =
+                client().executeBlocking(ReviewUpdateCommand.of(review, SetRating.of(rating)));
 
-    assertThat(updatedReview.getRating()).isEqualTo(rating);
+        assertThat(updatedReview.getRating()).isEqualTo(rating);
 
-    return updatedReview;
+        //you can observe a message
+        assertEventually(() -&gt; {
+            final Query&lt;ReviewRatingSetMessage&gt; messageQuery = MessageQuery.of()
+                    .withPredicates(m -&gt; m.resource().is(review))
+                    .forMessageType(ReviewRatingSetMessage.MESSAGE_HINT);
+            final PagedQueryResult&lt;ReviewRatingSetMessage&gt; messages = client().executeBlocking(messageQuery);
+            assertThat(messages.head()).isPresent();
+            final ReviewRatingSetMessage reviewRatingSetMessage = messages.head().get();
+            assertThat(reviewRatingSetMessage.getNewRating()).isEqualTo(rating);
+            assertThat(reviewRatingSetMessage.getOldRating()).isEqualTo(100);
+            assertThat(reviewRatingSetMessage.isIncludedInStatistics()).isTrue();
+            assertThat(reviewRatingSetMessage.getTarget()).isEqualTo(channel.toReference());
+        });
+
+        return updatedReview;
+    });
 });
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/reviews/commands/ReviewUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 </li>

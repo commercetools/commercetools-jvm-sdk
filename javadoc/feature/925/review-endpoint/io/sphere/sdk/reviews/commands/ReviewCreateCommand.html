@@ -152,6 +152,17 @@ extends <a href="../../../../../io/sphere/sdk/commands/CreateCommand.html" title
                         as("the state has not the role ReviewIncludedInStatistics, so it is not accounted yet")
                         .isNull();
 
+                //you can observe a message
+                assertEventually(() -&gt; {
+                    final PagedQueryResult&lt;ReviewCreatedMessage&gt; pagedQueryResult = client().executeBlocking(MessageQuery.of()
+                            .withPredicates(m -&gt; m.resource().is(review))
+                            .forMessageType(ReviewCreatedMessage.MESSAGE_HINT));
+
+                    final ReviewCreatedMessage paymentCreatedMessage = pagedQueryResult.head().get();
+                    assertThat(paymentCreatedMessage.getReview().getId()).isEqualTo(review.getId());
+                    assertThat(paymentCreatedMessage.getResource().getId()).isEqualTo(review.getId());
+                });
+
                 client().executeBlocking(ReviewDeleteCommand.of(review));
             });
         });

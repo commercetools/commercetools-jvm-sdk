@@ -268,6 +268,15 @@ final List&lt;Review&gt; reviews = client().executeBlocking(reviewQuery).getResu
 assertThat(reviews).hasSize(REVIEWS_PER_PRODUCT);
 assertThat(reviews).extracting(r -&gt; r.getTarget().getId()).containsOnlyElementsOf(singletonList(productId));
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/reviews/ReviewProductProjectionSearchTest.java" target="_blank">test code</a>.</pre></div></div>
+<dl>
+<dt><span class="seeLabel">See Also:</span></dt>
+<dd><a href="../../../../io/sphere/sdk/reviews/commands/ReviewCreateCommand.html" title="interface in io.sphere.sdk.reviews.commands"><code>ReviewCreateCommand</code></a>, 
+<a href="../../../../io/sphere/sdk/reviews/commands/ReviewUpdateCommand.html" title="interface in io.sphere.sdk.reviews.commands"><code>ReviewUpdateCommand</code></a>, 
+<a href="../../../../io/sphere/sdk/reviews/commands/ReviewDeleteCommand.html" title="interface in io.sphere.sdk.reviews.commands"><code>ReviewDeleteCommand</code></a>, 
+<a href="../../../../io/sphere/sdk/reviews/queries/ReviewQuery.html" title="interface in io.sphere.sdk.reviews.queries"><code>ReviewQuery</code></a>, 
+<a href="../../../../io/sphere/sdk/reviews/queries/ReviewByIdGet.html" title="interface in io.sphere.sdk.reviews.queries"><code>ReviewByIdGet</code></a>, 
+<a href="../../../../io/sphere/sdk/reviews/queries/ReviewByKeyGet.html" title="interface in io.sphere.sdk.reviews.queries"><code>ReviewByKeyGet</code></a></dd>
+</dl>
 </li>
 </ul>
 </div>
@@ -288,31 +297,45 @@ assertThat(reviews).extracting(r -&gt; r.getTarget().getId()).containsOnlyElemen
 </tr>
 <tr id="i0" class="altColor">
 <td class="colFirst"><code>java.lang.String</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/reviews/Review.html#getAuthorName--">getAuthorName</a></span>()</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/reviews/Review.html#getAuthorName--">getAuthorName</a></span>()</code>
+<div class="block">The name of the author which created this review or null.</div>
+</td>
 </tr>
 <tr id="i1" class="rowColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/types/CustomFields.html" title="class in io.sphere.sdk.types">CustomFields</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/reviews/Review.html#getCustom--">getCustom</a></span>()</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/reviews/Review.html#getCustom--">getCustom</a></span>()</code>
+<div class="block">Gets the custom fields of this review or null.</div>
+</td>
 </tr>
 <tr id="i2" class="altColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/models/Reference.html" title="interface in io.sphere.sdk.models">Reference</a>&lt;<a href="../../../../io/sphere/sdk/customers/Customer.html" title="interface in io.sphere.sdk.customers">Customer</a>&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/reviews/Review.html#getCustomer--">getCustomer</a></span>()</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/reviews/Review.html#getCustomer--">getCustomer</a></span>()</code>
+<div class="block">Gets the customer which created this review or null.</div>
+</td>
 </tr>
 <tr id="i3" class="rowColor">
 <td class="colFirst"><code>java.lang.String</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/reviews/Review.html#getKey--">getKey</a></span>()</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/reviews/Review.html#getKey--">getKey</a></span>()</code>
+<div class="block">Gets the key assigned to this review or null.</div>
+</td>
 </tr>
 <tr id="i4" class="altColor">
 <td class="colFirst"><code>java.util.Locale</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/reviews/Review.html#getLocale--">getLocale</a></span>()</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/reviews/Review.html#getLocale--">getLocale</a></span>()</code>
+<div class="block">Gets the locale (language) in which the text and title are or null.</div>
+</td>
 </tr>
 <tr id="i5" class="rowColor">
 <td class="colFirst"><code>java.lang.Integer</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/reviews/Review.html#getRating--">getRating</a></span>()</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/reviews/Review.html#getRating--">getRating</a></span>()</code>
+<div class="block">Gets the rating or null.</div>
+</td>
 </tr>
 <tr id="i6" class="altColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/models/Reference.html" title="interface in io.sphere.sdk.models">Reference</a>&lt;<a href="../../../../io/sphere/sdk/states/State.html" title="interface in io.sphere.sdk.states">State</a>&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/reviews/Review.html#getState--">getState</a></span>()</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/reviews/Review.html#getState--">getState</a></span>()</code>
+<div class="block">Gets the state of this review or null.</div>
+</td>
 </tr>
 <tr id="i7" class="rowColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/models/Reference.html" title="interface in io.sphere.sdk.models">Reference</a>&lt;?&gt;</code></td>
@@ -322,11 +345,15 @@ assertThat(reviews).extracting(r -&gt; r.getTarget().getId()).containsOnlyElemen
 </tr>
 <tr id="i8" class="altColor">
 <td class="colFirst"><code>java.lang.String</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/reviews/Review.html#getText--">getText</a></span>()</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/reviews/Review.html#getText--">getText</a></span>()</code>
+<div class="block">Gets the text of this review or null.</div>
+</td>
 </tr>
 <tr id="i9" class="rowColor">
 <td class="colFirst"><code>java.lang.String</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/reviews/Review.html#getTitle--">getTitle</a></span>()</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/reviews/Review.html#getTitle--">getTitle</a></span>()</code>
+<div class="block">Gets the title of this review or null.</div>
+</td>
 </tr>
 <tr id="i10" class="altColor">
 <td class="colFirst"><code>java.lang.String</code></td>
@@ -404,6 +431,13 @@ assertThat(reviews).extracting(r -&gt; r.getTarget().getId()).containsOnlyElemen
 <h4>getAuthorName</h4>
 <pre>@Nullable
 java.lang.String&nbsp;getAuthorName()</pre>
+<div class="block">The name of the author which created this review or null.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>author name</dd>
+<dt><span class="seeLabel">See Also:</span></dt>
+<dd><a href="../../../../io/sphere/sdk/reviews/commands/updateactions/SetAuthorName.html" title="class in io.sphere.sdk.reviews.commands.updateactions"><code>SetAuthorName</code></a></dd>
+</dl>
 </li>
 </ul>
 <a name="getCustom--">
@@ -414,9 +448,15 @@ java.lang.String&nbsp;getAuthorName()</pre>
 <h4>getCustom</h4>
 <pre>@Nullable
 <a href="../../../../io/sphere/sdk/types/CustomFields.html" title="class in io.sphere.sdk.types">CustomFields</a>&nbsp;getCustom()</pre>
+<div class="block">Gets the custom fields of this review or null.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="../../../../io/sphere/sdk/types/Custom.html#getCustom--">getCustom</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/types/Custom.html" title="interface in io.sphere.sdk.types">Custom</a></code></dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>custom fields</dd>
+<dt><span class="seeLabel">See Also:</span></dt>
+<dd><a href="../../../../io/sphere/sdk/reviews/commands/updateactions/SetCustomField.html" title="class in io.sphere.sdk.reviews.commands.updateactions"><code>SetCustomField</code></a>, 
+<a href="../../../../io/sphere/sdk/reviews/commands/updateactions/SetCustomType.html" title="class in io.sphere.sdk.reviews.commands.updateactions"><code>SetCustomType</code></a></dd>
 </dl>
 </li>
 </ul>
@@ -428,6 +468,13 @@ java.lang.String&nbsp;getAuthorName()</pre>
 <h4>getCustomer</h4>
 <pre>@Nullable
 <a href="../../../../io/sphere/sdk/models/Reference.html" title="interface in io.sphere.sdk.models">Reference</a>&lt;<a href="../../../../io/sphere/sdk/customers/Customer.html" title="interface in io.sphere.sdk.customers">Customer</a>&gt;&nbsp;getCustomer()</pre>
+<div class="block">Gets the customer which created this review or null.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>customer</dd>
+<dt><span class="seeLabel">See Also:</span></dt>
+<dd><a href="../../../../io/sphere/sdk/reviews/commands/updateactions/SetCustomer.html" title="class in io.sphere.sdk.reviews.commands.updateactions"><code>SetCustomer</code></a></dd>
+</dl>
 </li>
 </ul>
 <a name="getKey--">
@@ -438,6 +485,13 @@ java.lang.String&nbsp;getAuthorName()</pre>
 <h4>getKey</h4>
 <pre>@Nullable
 java.lang.String&nbsp;getKey()</pre>
+<div class="block">Gets the key assigned to this review or null.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>key</dd>
+<dt><span class="seeLabel">See Also:</span></dt>
+<dd><a href="../../../../io/sphere/sdk/reviews/commands/updateactions/SetKey.html" title="class in io.sphere.sdk.reviews.commands.updateactions"><code>SetKey</code></a></dd>
+</dl>
 </li>
 </ul>
 <a name="getLocale--">
@@ -448,6 +502,11 @@ java.lang.String&nbsp;getKey()</pre>
 <h4>getLocale</h4>
 <pre>@Nullable
 java.util.Locale&nbsp;getLocale()</pre>
+<div class="block">Gets the locale (language) in which the text and title are or null.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>locale</dd>
+</dl>
 </li>
 </ul>
 <a name="getRating--">
@@ -458,6 +517,13 @@ java.util.Locale&nbsp;getLocale()</pre>
 <h4>getRating</h4>
 <pre>@Nullable
 java.lang.Integer&nbsp;getRating()</pre>
+<div class="block">Gets the rating or null.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>the rating</dd>
+<dt><span class="seeLabel">See Also:</span></dt>
+<dd><a href="../../../../io/sphere/sdk/reviews/commands/updateactions/SetRating.html" title="class in io.sphere.sdk.reviews.commands.updateactions"><code>SetRating</code></a></dd>
+</dl>
 </li>
 </ul>
 <a name="getState--">
@@ -468,6 +534,13 @@ java.lang.Integer&nbsp;getRating()</pre>
 <h4>getState</h4>
 <pre>@Nullable
 <a href="../../../../io/sphere/sdk/models/Reference.html" title="interface in io.sphere.sdk.models">Reference</a>&lt;<a href="../../../../io/sphere/sdk/states/State.html" title="interface in io.sphere.sdk.states">State</a>&gt;&nbsp;getState()</pre>
+<div class="block">Gets the state of this review or null.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>state</dd>
+<dt><span class="seeLabel">See Also:</span></dt>
+<dd><a href="../../../../io/sphere/sdk/reviews/commands/updateactions/TransitionState.html" title="class in io.sphere.sdk.reviews.commands.updateactions"><code>TransitionState</code></a></dd>
+</dl>
 </li>
 </ul>
 <a name="getTarget--">
@@ -482,6 +555,8 @@ java.lang.Integer&nbsp;getRating()</pre>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>the target of this review or null</dd>
+<dt><span class="seeLabel">See Also:</span></dt>
+<dd><a href="../../../../io/sphere/sdk/reviews/commands/updateactions/SetTarget.html" title="class in io.sphere.sdk.reviews.commands.updateactions"><code>SetTarget</code></a></dd>
 </dl>
 </li>
 </ul>
@@ -493,6 +568,13 @@ java.lang.Integer&nbsp;getRating()</pre>
 <h4>getText</h4>
 <pre>@Nullable
 java.lang.String&nbsp;getText()</pre>
+<div class="block">Gets the text of this review or null.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>text</dd>
+<dt><span class="seeLabel">See Also:</span></dt>
+<dd><a href="../../../../io/sphere/sdk/reviews/commands/updateactions/SetText.html" title="class in io.sphere.sdk.reviews.commands.updateactions"><code>SetText</code></a></dd>
+</dl>
 </li>
 </ul>
 <a name="getTitle--">
@@ -503,6 +585,13 @@ java.lang.String&nbsp;getText()</pre>
 <h4>getTitle</h4>
 <pre>@Nullable
 java.lang.String&nbsp;getTitle()</pre>
+<div class="block">Gets the title of this review or null.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>title</dd>
+<dt><span class="seeLabel">See Also:</span></dt>
+<dd><a href="../../../../io/sphere/sdk/reviews/commands/updateactions/SetTitle.html" title="class in io.sphere.sdk.reviews.commands.updateactions"><code>SetTitle</code></a></dd>
+</dl>
 </li>
 </ul>
 <a name="getUniquenessValue--">

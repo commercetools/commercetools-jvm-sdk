@@ -133,14 +133,34 @@ extends <a href="../../../../../../io/sphere/sdk/states/relatedupdateactions/Tra
  If the existing state has transitions set, there must be a direct transition to the new state.
  If transitions is not set, no validation is performed.
 
- <div id="io-sphere-sdk-reviews-commands-ReviewUpdateCommandTest-transitionState--%s" class=code-example><pre><code class='java'>withStateByBuilder(client(), stateBuilder -&gt; stateBuilder.initial(true).type(REVIEW_STATE), state -&gt; {
-    withUpdateableReview(client(), (Review review) -&gt; {
-        final Review updatedReview =
-                client().executeBlocking(ReviewUpdateCommand.of(review, TransitionState.of(state)));
+ <div id="io-sphere-sdk-reviews-commands-ReviewUpdateCommandTest-transitionState--%s" class=code-example><pre><code class='java'>withChannelOfRole(client(), ChannelRole.INVENTORY_SUPPLY, channel -&gt; {
+    withStateByBuilder(client(), stateBuilder -&gt; stateBuilder.initial(true).type(REVIEW_STATE).roles(REVIEW_INCLUDED_IN_STATISTICS), newState -&gt; {
+        withStateByBuilder(client(), stateBuilder -&gt; stateBuilder.type(REVIEW_STATE).transitions(singleton(newState.toReference())).roles(REVIEW_INCLUDED_IN_STATISTICS), oldState -&gt; {
+            withUpdateableReview(client(), reviewBuilder -&gt; reviewBuilder.state(oldState).target(channel), (Review review) -&gt; {
+                final Review updatedReview =
+                        client().executeBlocking(ReviewUpdateCommand.of(review, TransitionState.of(newState)));
 
-        assertThat(updatedReview.getState()).isEqualTo(state.toReference());
+                assertThat(updatedReview.getState()).isEqualTo(newState.toReference());
 
-        return updatedReview;
+                //you can observe a message
+                assertEventually(() -&gt; {
+                    final Query&lt;ReviewStateTransitionMessage&gt; messageQuery = MessageQuery.of()
+                            .withPredicates(m -&gt; m.resource().is(review))
+                            .forMessageType(ReviewStateTransitionMessage.MESSAGE_HINT);
+                    final Optional&lt;ReviewStateTransitionMessage&gt; messageOptional =
+                            client().executeBlocking(messageQuery).head();
+                    assertThat(messageOptional).isPresent();
+                    final ReviewStateTransitionMessage message = messageOptional.get();
+                    assertThat(message.getOldState()).isEqualTo(oldState.toReference());
+                    assertThat(message.getNewState()).isEqualTo(newState.toReference());
+                    assertThat(message.getTarget()).isEqualTo(channel.toReference());
+                    assertThat(message.getOldIncludedInStatistics()).isTrue();
+                    assertThat(message.getNewIncludedInStatistics()).isTrue();
+                });
+
+                return updatedReview;
+            });
+        });
     });
 });
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/reviews/commands/ReviewUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>

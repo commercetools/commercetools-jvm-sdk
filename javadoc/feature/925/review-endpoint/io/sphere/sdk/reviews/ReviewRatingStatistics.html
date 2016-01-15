@@ -137,7 +137,9 @@ var activeTableTab = "activeTableTab";
 </tr>
 <tr id="i4" class="altColor">
 <td class="colFirst"><code>java.util.Map&lt;java.lang.Integer,java.lang.Integer&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/reviews/ReviewRatingStatistics.html#getRatingsDistribution--">getRatingsDistribution</a></span>()</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/reviews/ReviewRatingStatistics.html#getRatingsDistribution--">getRatingsDistribution</a></span>()</code>
+<div class="block">A mapping from a concrete rating to the count of this rating.</div>
+</td>
 </tr>
 </table>
 </li>
@@ -197,6 +199,13 @@ var activeTableTab = "activeTableTab";
 <li class="blockList">
 <h4>getRatingsDistribution</h4>
 <pre>java.util.Map&lt;java.lang.Integer,java.lang.Integer&gt;&nbsp;getRatingsDistribution()</pre>
+<div class="block">A mapping from a concrete rating to the count of this rating.
+ It uses a sparse representation so ratings with count of 0 can be absent.
+ Use <code>Map.getOrDefault(Object, Object)</code> with 0 as second parameter.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>ratings distribution</dd>
+</dl>
 </li>
 </ul>
 </li>
