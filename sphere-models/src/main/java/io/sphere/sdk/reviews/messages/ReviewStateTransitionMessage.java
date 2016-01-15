@@ -23,7 +23,7 @@ public class ReviewStateTransitionMessage {
     public static final MessageDerivateHint<ReviewStateTransitionMessage> MESSAGE_HINT =
             MessageDerivateHint.ofSingleMessageType(MESSAGE_TYPE, ReviewStateTransitionMessage.class);
 
-
+    @Nullable
     private final Reference<State> oldState;
     private final Reference<State> newState;
     @Nullable
@@ -32,7 +32,7 @@ public class ReviewStateTransitionMessage {
     private final Boolean newIncludedInStatistics;
 
     @JsonCreator
-    private ReviewStateTransitionMessage(final Reference<State> oldState, final Reference<State> newState, final Reference<JsonNode> target, final Boolean oldIncludedInStatistics, final Boolean newIncludedInStatistics) {
+    private ReviewStateTransitionMessage(@Nullable final Reference<State> oldState, final Reference<State> newState, final Reference<JsonNode> target, final Boolean oldIncludedInStatistics, final Boolean newIncludedInStatistics) {
         this.oldState = oldState;
         this.newState = newState;
 
@@ -41,6 +41,7 @@ public class ReviewStateTransitionMessage {
         this.newIncludedInStatistics = newIncludedInStatistics;
     }
 
+    @Nullable
     public Reference<State> getOldState() {
         return oldState;
     }
