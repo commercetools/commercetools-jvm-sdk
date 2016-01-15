@@ -1,9 +1,14 @@
 package io.sphere.sdk.products.messages;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.databind.JsonNode;
+import io.sphere.sdk.messages.GenericMessageImpl;
 import io.sphere.sdk.messages.MessageDerivateHint;
 import io.sphere.sdk.models.Reference;
+import io.sphere.sdk.products.Product;
 import io.sphere.sdk.states.State;
+
+import java.time.ZonedDateTime;
 
 /**
  * This message is the result of the {@link io.sphere.sdk.products.commands.updateactions.TransitionState} update action.
@@ -12,7 +17,7 @@ import io.sphere.sdk.states.State;
  *
  * @see io.sphere.sdk.products.commands.updateactions.TransitionState
  */
-public class ProductStateTransitionMessage {
+public class ProductStateTransitionMessage extends GenericMessageImpl<Product> {
     public static final String MESSAGE_TYPE = "ProductStateTransition";
     public static final MessageDerivateHint<ProductStateTransitionMessage> MESSAGE_HINT =
             MessageDerivateHint.ofSingleMessageType(MESSAGE_TYPE, ProductStateTransitionMessage.class);
@@ -21,7 +26,8 @@ public class ProductStateTransitionMessage {
     private final Reference<State> state;
 
     @JsonCreator
-    private ProductStateTransitionMessage(final Reference<State> state) {
+    private ProductStateTransitionMessage(final String id, final Long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt, final JsonNode resource, final Long sequenceNumber, final Long resourceVersion, final String type, final Reference<State> state) {
+        super(id, version, createdAt, lastModifiedAt, resource, sequenceNumber, resourceVersion, type, Product.class);
         this.state = state;
     }
 
