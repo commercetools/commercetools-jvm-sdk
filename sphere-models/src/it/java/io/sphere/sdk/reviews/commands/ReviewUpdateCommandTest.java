@@ -1,17 +1,24 @@
 package io.sphere.sdk.reviews.commands;
 
+import io.sphere.sdk.channels.ChannelRole;
 import io.sphere.sdk.customers.Customer;
+import io.sphere.sdk.messages.queries.MessageQuery;
 import io.sphere.sdk.products.Product;
+import io.sphere.sdk.queries.PagedQueryResult;
+import io.sphere.sdk.queries.Query;
 import io.sphere.sdk.reviews.Review;
 import io.sphere.sdk.reviews.commands.updateactions.*;
+import io.sphere.sdk.reviews.messages.ReviewRatingSetMessage;
 import io.sphere.sdk.test.IntegrationTest;
 import org.junit.Test;
 
+import static io.sphere.sdk.channels.ChannelFixtures.withChannelOfRole;
 import static io.sphere.sdk.customers.CustomerFixtures.withCustomer;
 import static io.sphere.sdk.products.ProductFixtures.withProduct;
 import static io.sphere.sdk.reviews.ReviewFixtures.withUpdateableReview;
 import static io.sphere.sdk.states.StateFixtures.withStateByBuilder;
 import static io.sphere.sdk.states.StateType.REVIEW_STATE;
+import static io.sphere.sdk.test.SphereTestUtils.assertEventually;
 import static io.sphere.sdk.test.SphereTestUtils.randomKey;
 import static io.sphere.sdk.types.TypeFixtures.STRING_FIELD_NAME;
 import static io.sphere.sdk.types.TypeFixtures.withUpdateableType;
@@ -49,14 +56,29 @@ public class ReviewUpdateCommandTest extends IntegrationTest {
 
     @Test
     public void setRating() {
-        withUpdateableReview(client(), (Review review) -> {
-            final int rating = 44;
-            final Review updatedReview =
-                    client().executeBlocking(ReviewUpdateCommand.of(review, SetRating.of(rating)));
+        withChannelOfRole(client(), ChannelRole.INVENTORY_SUPPLY, channel -> {
+            withUpdateableReview(client(),builder -> builder.target(channel), (Review review) -> {
+                final int rating = 44;
+                final Review updatedReview =
+                        client().executeBlocking(ReviewUpdateCommand.of(review, SetRating.of(rating)));
 
-            assertThat(updatedReview.getRating()).isEqualTo(rating);
+                assertThat(updatedReview.getRating()).isEqualTo(rating);
 
-            return updatedReview;
+                assertEventually(() -> {
+                    final Query<ReviewRatingSetMessage> messageQuery = MessageQuery.of()
+                            .withPredicates(m -> m.resource().is(review))
+                            .forMessageType(ReviewRatingSetMessage.MESSAGE_HINT);
+                    final PagedQueryResult<ReviewRatingSetMessage> messages = client().executeBlocking(messageQuery);
+                    assertThat(messages.head()).isPresent();
+                    final ReviewRatingSetMessage reviewRatingSetMessage = messages.head().get();
+                    assertThat(reviewRatingSetMessage.getNewRating()).isEqualTo(rating);
+                    assertThat(reviewRatingSetMessage.getOldRating()).isEqualTo(100);
+                    assertThat(reviewRatingSetMessage.isIncludedInStatistics()).isTrue();
+                    assertThat(reviewRatingSetMessage.getTarget()).isEqualTo(channel.toReference());
+                });
+
+                return updatedReview;
+            });
         });
     }
 

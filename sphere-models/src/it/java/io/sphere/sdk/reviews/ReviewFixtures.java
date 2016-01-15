@@ -7,6 +7,7 @@ import io.sphere.sdk.reviews.queries.ReviewQuery;
 
 import java.util.Locale;
 import java.util.function.Consumer;
+import java.util.function.Function;
 import java.util.function.UnaryOperator;
 
 import static io.sphere.sdk.test.SphereTestUtils.randomKey;
@@ -35,10 +36,15 @@ public class ReviewFixtures {
         withReview(client, createReviewDraftBuilder().build(), consumer);
     }
 
-    public static void withUpdateableReview(final BlockingSphereClient client, final UnaryOperator<Review> f) {
-        final Review review = client.executeBlocking(ReviewCreateCommand.of(createReviewDraftBuilder().build()));
+    public static void withUpdateableReview(final BlockingSphereClient client, final UnaryOperator<ReviewDraftBuilder> builderUnaryOperator, final UnaryOperator<Review> f) {
+        final ReviewDraft draft = builderUnaryOperator.apply(createReviewDraftBuilder()).build();
+        final Review review = client.executeBlocking(ReviewCreateCommand.of(draft));
         final Review reviewToDelete = f.apply(review);
         client.executeBlocking(ReviewDeleteCommand.of(reviewToDelete));
+    }
+
+    public static void withUpdateableReview(final BlockingSphereClient client, final UnaryOperator<Review> f) {
+        withUpdateableReview(client, UnaryOperator.identity(), f);
     }
 
     public static void withReview(final BlockingSphereClient client, final ReviewDraft draft, final Consumer<Review> consumer) {
