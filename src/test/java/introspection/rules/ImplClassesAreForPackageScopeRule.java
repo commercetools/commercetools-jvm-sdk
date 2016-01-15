@@ -13,7 +13,8 @@ public class ImplClassesAreForPackageScopeRule extends ClassStrategyRule {
                     "QueryModelImpl,SearchDslImpl,UpdateCommandDslImpl,SearchModelImpl," +
                     "UpdateActionImpl,MetaModelSearchDslImpl,MetaModelByIdDeleteCommandImpl," +
                     "CustomResourceQueryModelImpl," +
-                    "MetaModelCreateCommandImpl,MetaModelUpdateCommandDslImpl,CustomQueryModelImpl").split(","));
+                    "MetaModelCreateCommandImpl,MetaModelUpdateCommandDslImpl,CustomQueryModelImpl," +
+                    "ReviewRatingStatisticsQueryModelImpl").split(","));
 
 
     @Override
