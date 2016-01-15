@@ -28,4 +28,8 @@ public class CustomObjectQueryModel<T extends CustomObject<?>> extends ResourceQ
     public StringQuerySortingModel<T> container() {
         return stringModel("container");
     }
+
+    public StringQuerySortingModel<T> key() {
+        return stringModel("key");
+    }
 }
