@@ -104,14 +104,18 @@ public interface Customer extends Resource<Customer>, Custom {
 
     String getEmail();
 
+    @Nullable
     String getFirstName();
 
+    @Nullable
     String getLastName();
 
     String getPassword();
 
+    @Nullable
     String getMiddleName();
 
+    @Nullable
     String getTitle();
 
     List<Address> getAddresses();
