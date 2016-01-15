@@ -6,7 +6,10 @@ import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Reference;
 
 import javax.annotation.Nullable;
+import java.util.Collections;
 import java.util.Set;
+
+import static java.util.Collections.singleton;
 
 public final class StateDraftBuilder extends Base implements Builder<StateDraft> {
     private final String key;
@@ -72,5 +75,9 @@ public final class StateDraftBuilder extends Base implements Builder<StateDraft>
     public StateDraftBuilder roles(final Set<StateRole> roles) {
         this.roles = roles;
         return this;
+    }
+
+    public StateDraftBuilder roles(final StateRole role) {
+        return roles(singleton(role));
     }
 }

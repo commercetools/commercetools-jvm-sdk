@@ -9,19 +9,25 @@ import io.sphere.sdk.queries.Query;
 import io.sphere.sdk.reviews.Review;
 import io.sphere.sdk.reviews.commands.updateactions.*;
 import io.sphere.sdk.reviews.messages.ReviewRatingSetMessage;
+import io.sphere.sdk.reviews.messages.ReviewStateTransitionMessage;
+import io.sphere.sdk.states.StateRole;
 import io.sphere.sdk.test.IntegrationTest;
 import org.junit.Test;
+
+import java.util.Optional;
 
 import static io.sphere.sdk.channels.ChannelFixtures.withChannelOfRole;
 import static io.sphere.sdk.customers.CustomerFixtures.withCustomer;
 import static io.sphere.sdk.products.ProductFixtures.withProduct;
 import static io.sphere.sdk.reviews.ReviewFixtures.withUpdateableReview;
 import static io.sphere.sdk.states.StateFixtures.withStateByBuilder;
+import static io.sphere.sdk.states.StateRole.REVIEW_INCLUDED_IN_STATISTICS;
 import static io.sphere.sdk.states.StateType.REVIEW_STATE;
 import static io.sphere.sdk.test.SphereTestUtils.assertEventually;
 import static io.sphere.sdk.test.SphereTestUtils.randomKey;
 import static io.sphere.sdk.types.TypeFixtures.STRING_FIELD_NAME;
 import static io.sphere.sdk.types.TypeFixtures.withUpdateableType;
+import static java.util.Collections.singleton;
 import static java.util.Collections.singletonMap;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -138,14 +144,33 @@ public class ReviewUpdateCommandTest extends IntegrationTest {
 
     @Test
     public void transitionState() {
-        withStateByBuilder(client(), stateBuilder -> stateBuilder.initial(true).type(REVIEW_STATE), state -> {
-            withUpdateableReview(client(), (Review review) -> {
-                final Review updatedReview =
-                        client().executeBlocking(ReviewUpdateCommand.of(review, TransitionState.of(state)));
+        withChannelOfRole(client(), ChannelRole.INVENTORY_SUPPLY, channel -> {
+            withStateByBuilder(client(), stateBuilder -> stateBuilder.initial(true).type(REVIEW_STATE).roles(REVIEW_INCLUDED_IN_STATISTICS), newState -> {
+                withStateByBuilder(client(), stateBuilder -> stateBuilder.type(REVIEW_STATE).transitions(singleton(newState.toReference())).roles(REVIEW_INCLUDED_IN_STATISTICS), oldState -> {
+                    withUpdateableReview(client(), reviewBuilder -> reviewBuilder.state(oldState).target(channel), (Review review) -> {
+                        final Review updatedReview =
+                                client().executeBlocking(ReviewUpdateCommand.of(review, TransitionState.of(newState)));
 
-                assertThat(updatedReview.getState()).isEqualTo(state.toReference());
+                        assertThat(updatedReview.getState()).isEqualTo(newState.toReference());
 
-                return updatedReview;
+                        assertEventually(() -> {
+                            final Query<ReviewStateTransitionMessage> messageQuery = MessageQuery.of()
+                                    .withPredicates(m -> m.resource().is(review))
+                                    .forMessageType(ReviewStateTransitionMessage.MESSAGE_HINT);
+                            final Optional<ReviewStateTransitionMessage> messageOptional =
+                                    client().executeBlocking(messageQuery).head();
+                            assertThat(messageOptional).isPresent();
+                            final ReviewStateTransitionMessage message = messageOptional.get();
+                            assertThat(message.getOldState()).isEqualTo(oldState.toReference());
+                            assertThat(message.getNewState()).isEqualTo(newState.toReference());
+                            assertThat(message.getTarget()).isEqualTo(channel.toReference());
+                            assertThat(message.getOldIncludedInStatistics()).isTrue();
+                            assertThat(message.getNewIncludedInStatistics()).isTrue();
+                        });
+
+                        return updatedReview;
+                    });
+                });
             });
         });
     }
