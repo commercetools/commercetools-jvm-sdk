@@ -3068,7 +3068,9 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/search/TermStats.html#getCount--">getCount()</a></span> - Method in class io.sphere.sdk.search.<a href="io/sphere/sdk/search/TermStats.html" title="class in io.sphere.sdk.search">TermStats</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/projects/Project.html#getCountries--">getCountries()</a></span> - Method in class io.sphere.sdk.projects.<a href="io/sphere/sdk/projects/Project.html" title="class in io.sphere.sdk.projects">Project</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Enabled countries.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/Cart.html#getCountry--">getCountry()</a></span> - Method in interface io.sphere.sdk.carts.<a href="io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts">Cart</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/CartDraft.html#getCountry--">getCountry()</a></span> - Method in class io.sphere.sdk.carts.<a href="io/sphere/sdk/carts/CartDraft.html" title="class in io.sphere.sdk.carts">CartDraft</a></dt>
@@ -3115,6 +3117,10 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/projects/Project.html#getCreatedAt--">getCreatedAt()</a></span> - Method in class io.sphere.sdk.projects.<a href="io/sphere/sdk/projects/Project.html" title="class in io.sphere.sdk.projects">Project</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/projects/Project.html#getCurrencies--">getCurrencies()</a></span> - Method in class io.sphere.sdk.projects.<a href="io/sphere/sdk/projects/Project.html" title="class in io.sphere.sdk.projects">Project</a></dt>
+<dd>
+<div class="block">A three-digit currency code as per ISO 4217.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/CartDraft.html#getCurrency--">getCurrency()</a></span> - Method in class io.sphere.sdk.carts.<a href="io/sphere/sdk/carts/CartDraft.html" title="class in io.sphere.sdk.carts">CartDraft</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/CartDraftBuilder.html#getCurrency--">getCurrency()</a></span> - Method in class io.sphere.sdk.carts.<a href="io/sphere/sdk/carts/CartDraftBuilder.html" title="class in io.sphere.sdk.carts">CartDraftBuilder</a></dt>
@@ -3123,6 +3129,10 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/utils/MoneyImpl.html#getCurrency--">getCurrency()</a></span> - Method in class io.sphere.sdk.utils.<a href="io/sphere/sdk/utils/MoneyImpl.html" title="class in io.sphere.sdk.utils">MoneyImpl</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/projects/Project.html#getCurrencyUnits--">getCurrencyUnits()</a></span> - Method in class io.sphere.sdk.projects.<a href="io/sphere/sdk/projects/Project.html" title="class in io.sphere.sdk.projects">Project</a></dt>
+<dd>
+<div class="block">Currencies assigned to this project as <code>CurrencyUnit</code>.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/ProductCatalogData.html#getCurrent--">getCurrent()</a></span> - Method in interface io.sphere.sdk.products.<a href="io/sphere/sdk/products/ProductCatalogData.html" title="interface in io.sphere.sdk.products">ProductCatalogData</a></dt>
 <dd>
 <div class="block">The current data of the product.</div>
@@ -3774,7 +3784,9 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/producttypes/ProductTypeDraft.html#getKey--">getKey()</a></span> - Method in class io.sphere.sdk.producttypes.<a href="io/sphere/sdk/producttypes/ProductTypeDraft.html" title="class in io.sphere.sdk.producttypes">ProductTypeDraft</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/projects/Project.html#getKey--">getKey()</a></span> - Method in class io.sphere.sdk.projects.<a href="io/sphere/sdk/projects/Project.html" title="class in io.sphere.sdk.projects">Project</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">The unique key of the project.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/states/commands/updateactions/ChangeKey.html#getKey--">getKey()</a></span> - Method in class io.sphere.sdk.states.commands.updateactions.<a href="io/sphere/sdk/states/commands/updateactions/ChangeKey.html" title="class in io.sphere.sdk.states.commands.updateactions">ChangeKey</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/states/State.html#getKey--">getKey()</a></span> - Method in interface io.sphere.sdk.states.<a href="io/sphere/sdk/states/State.html" title="interface in io.sphere.sdk.states">State</a></dt>
@@ -3803,8 +3815,14 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/types/FieldDefinition.html#getLabel--">getLabel()</a></span> - Method in class io.sphere.sdk.types.<a href="io/sphere/sdk/types/FieldDefinition.html" title="class in io.sphere.sdk.types">FieldDefinition</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/projects/Project.html#getLanguageLocales--">getLanguageLocales()</a></span> - Method in class io.sphere.sdk.projects.<a href="io/sphere/sdk/projects/Project.html" title="class in io.sphere.sdk.projects">Project</a></dt>
+<dd>
+<div class="block">The languages as list of <code>Locale</code>s of this project.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/projects/Project.html#getLanguages--">getLanguages()</a></span> - Method in class io.sphere.sdk.projects.<a href="io/sphere/sdk/projects/Project.html" title="class in io.sphere.sdk.projects">Project</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">A two-digit language code as per ISO 3166-1 alpha-2 String.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/Order.html#getLastMessageSequenceNumber--">getLastMessageSequenceNumber()</a></span> - Method in interface io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/Order.html" title="interface in io.sphere.sdk.orders">Order</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/Resource.html#getLastModifiedAt--">getLastModifiedAt()</a></span> - Method in interface io.sphere.sdk.models.<a href="io/sphere/sdk/models/Resource.html" title="interface in io.sphere.sdk.models">Resource</a></dt>
@@ -4110,7 +4128,9 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/producttypes/ProductTypeDraft.html#getName--">getName()</a></span> - Method in class io.sphere.sdk.producttypes.<a href="io/sphere/sdk/producttypes/ProductTypeDraft.html" title="class in io.sphere.sdk.producttypes">ProductTypeDraft</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/projects/Project.html#getName--">getName()</a></span> - Method in class io.sphere.sdk.projects.<a href="io/sphere/sdk/projects/Project.html" title="class in io.sphere.sdk.projects">Project</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">The name of the project.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/shippingmethods/commands/updateactions/ChangeName.html#getName--">getName()</a></span> - Method in class io.sphere.sdk.shippingmethods.commands.updateactions.<a href="io/sphere/sdk/shippingmethods/commands/updateactions/ChangeName.html" title="class in io.sphere.sdk.shippingmethods.commands.updateactions">ChangeName</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/shippingmethods/ShippingMethod.html#getName--">getName()</a></span> - Method in interface io.sphere.sdk.shippingmethods.<a href="io/sphere/sdk/shippingmethods/ShippingMethod.html" title="interface in io.sphere.sdk.shippingmethods">ShippingMethod</a></dt>
@@ -6407,6 +6427,8 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <h2 class="title">K</h2>
 <dl>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/channels/queries/ChannelQueryModel.html#key--">key()</a></span> - Method in class io.sphere.sdk.channels.queries.<a href="io/sphere/sdk/channels/queries/ChannelQueryModel.html" title="class in io.sphere.sdk.channels.queries">ChannelQueryModel</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/customobjects/queries/CustomObjectQueryModel.html#key--">key()</a></span> - Method in class io.sphere.sdk.customobjects.queries.<a href="io/sphere/sdk/customobjects/queries/CustomObjectQueryModel.html" title="class in io.sphere.sdk.customobjects.queries">CustomObjectQueryModel</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/producttypes/queries/ProductTypeQueryModel.html#key--">key()</a></span> - Method in class io.sphere.sdk.producttypes.queries.<a href="io/sphere/sdk/producttypes/queries/ProductTypeQueryModel.html" title="class in io.sphere.sdk.producttypes.queries">ProductTypeQueryModel</a></dt>
 <dd>&nbsp;</dd>
