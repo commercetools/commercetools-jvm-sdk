@@ -12,6 +12,7 @@ import org.junit.Test;
 import java.util.Collection;
 import java.util.Locale;
 
+import static java.util.Arrays.asList;
 import static java.util.Collections.singleton;
 import static java.util.Collections.singletonList;
 import static io.sphere.sdk.products.ProductsScenario1Fixtures.*;
@@ -29,7 +30,7 @@ public class LocalizedToStringProductAttributeConverterTest extends IntegrationT
         data = ProductsScenario1Fixtures.createScenario(client());
         product = data.getProduct1();
         productType = data.getProductType();
-        mapper = new LocalizedToStringProductAttributeConverter(singletonList(productType), singletonList(Locale.GERMANY)) {
+        mapper = new LocalizedToStringProductAttributeConverter(singletonList(productType), asList(Locale.GERMANY, Locale.ENGLISH)) {
             @Override
             protected Collection<String> longAttributes() {
                 return singletonList(ATTR_NAME_NUMBER);
@@ -99,7 +100,7 @@ public class LocalizedToStringProductAttributeConverterTest extends IntegrationT
 
     @Test
     public void convertLocalizedStringSet() {
-        assertThat(converting(ATTR_NAME_LOC_TEXT_SET)).isEqualTo("");
+        assertThat(converting(ATTR_NAME_LOC_TEXT_SET)).isEqualTo("localized bar, localized foo");
     }
 
     @Test
