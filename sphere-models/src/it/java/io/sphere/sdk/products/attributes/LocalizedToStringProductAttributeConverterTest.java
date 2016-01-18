@@ -11,6 +11,7 @@ import org.junit.Test;
 
 import java.util.Collection;
 import java.util.Locale;
+import java.util.regex.Pattern;
 
 import static java.util.Arrays.asList;
 import static java.util.Collections.singleton;
@@ -65,12 +66,12 @@ public class LocalizedToStringProductAttributeConverterTest extends IntegrationT
 
     @Test
     public void convertProductReferenceSet() {
-        assertThat(converting(ATTR_NAME_REF)).isNull();
+        assertThat(converting(ATTR_NAME_REF_SET)).matches(Pattern.compile("\\S+, \\S+"));
     }
 
     @Test
     public void convertProductReference() {
-        assertThat(converting(ATTR_NAME_REF_SET)).isNull();
+        assertThat(converting(ATTR_NAME_REF)).matches(Pattern.compile("\\S+"));
     }
 
     @Test

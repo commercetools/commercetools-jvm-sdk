@@ -44,12 +44,12 @@ public class LocalizedToStringProductAttributeConverter extends ProductAttribute
 
     @Nullable
     protected <X> String convertReference(final Reference<X> reference, final ProductType productType) {
-        return null;
+        return reference.getId();
     }
 
     @Nullable
     protected <X> String convertReferenceSet(final Set<Reference<X>> referenceSet, final ProductType productType) {
-        return null;
+        return collectToStringPostSorted(referenceSet.stream().map(r -> convertReference(r, productType)));
     }
 
     @Override
