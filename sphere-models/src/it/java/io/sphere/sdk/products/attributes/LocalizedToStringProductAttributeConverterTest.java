@@ -24,14 +24,27 @@ public class LocalizedToStringProductAttributeConverterTest extends IntegrationT
     private static ProductsScenario1Fixtures.Data data;
     private static Product product;
     private static ProductType productType;
-    private static ProductAttributeConverter<String> mapper;
+    private static ProductAttributeConverter<String> numberAsLongMapper;
+    private static ProductAttributeConverter<String> numberAsIntegerMapper;
+    private static ProductAttributeConverter<String> numberAsDoubleMapper;
 
     @BeforeClass
     public static void setupScenario() {
         data = ProductsScenario1Fixtures.createScenario(client());
         product = data.getProduct1();
         productType = data.getProductType();
-        mapper = new LocalizedToStringProductAttributeConverter(singletonList(productType), asList(Locale.GERMANY, Locale.ENGLISH)) {
+        numberAsIntegerMapper = new LocalizedToStringProductAttributeConverter(singletonList(productType), asList(Locale.GERMANY, Locale.ENGLISH)) {
+            @Override
+            protected Collection<String> integerAttributes() {
+                return singletonList(ATTR_NAME_NUMBER);
+            }
+
+            @Override
+            protected Collection<String> integerSetAttributes() {
+                return singleton(ATTR_NAME_NUMBER_SET);
+            }
+        };
+        numberAsLongMapper = new LocalizedToStringProductAttributeConverter(singletonList(productType), asList(Locale.GERMANY, Locale.ENGLISH)) {
             @Override
             protected Collection<String> longAttributes() {
                 return singletonList(ATTR_NAME_NUMBER);
@@ -42,6 +55,7 @@ public class LocalizedToStringProductAttributeConverterTest extends IntegrationT
                 return singleton(ATTR_NAME_NUMBER_SET);
             }
         };
+        numberAsDoubleMapper = new LocalizedToStringProductAttributeConverter(singletonList(productType), asList(Locale.GERMANY, Locale.ENGLISH));
     }
 
     @AfterClass
@@ -109,14 +123,14 @@ public class LocalizedToStringProductAttributeConverterTest extends IntegrationT
         assertThat(converting(ATTR_NAME_LOC_ENUM_SET)).isEqualTo("drei, zwei");
     }
 
-    @Ignore
     @Test
     public void convertIntegerSet() {
+        assertThat(converting(ATTR_NAME_NUMBER_SET, numberAsIntegerMapper)).isEqualTo("5, 10");
     }
 
-    @Ignore
     @Test
     public void convertInteger() {
+        assertThat(converting(ATTR_NAME_NUMBER, numberAsIntegerMapper)).isEqualTo("5");
     }
 
     @Test
@@ -124,14 +138,14 @@ public class LocalizedToStringProductAttributeConverterTest extends IntegrationT
         assertThat(converting(ATTR_NAME_ENUM_SET)).isEqualTo("three, two");
     }
 
-    @Ignore
     @Test
     public void convertDoubleSet() {
+        assertThat(converting(ATTR_NAME_NUMBER_SET, numberAsDoubleMapper)).isEqualTo("5.0, 10.0");
     }
 
-    @Ignore
     @Test
     public void convertDouble() {
+        assertThat(converting(ATTR_NAME_NUMBER, numberAsDoubleMapper)).isEqualTo("5.0");
     }
 
     @Test
@@ -211,11 +225,16 @@ public class LocalizedToStringProductAttributeConverterTest extends IntegrationT
 
 
     private String converting(final String attributeName) {
+        return converting(attributeName, numberAsLongMapper);
+    }
+
+    private String converting(final String attributeName, final ProductAttributeConverter<String> attributeConverter) {
         final Attribute attribute = attribute(attributeName);
         if (attribute == null) {
             throw new NullPointerException("attribute for " + attributeName + " should not be null");
         }
-        return mapper.convert(attribute, productType);
+
+        return attributeConverter.convert(attribute, productType);
     }
 
     private Attribute attribute(final String attributeName) {
