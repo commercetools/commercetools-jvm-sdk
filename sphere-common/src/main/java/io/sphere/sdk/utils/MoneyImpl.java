@@ -229,7 +229,7 @@ final public class MoneyImpl extends Base implements MonetaryAmount {
                 .filter(other -> other != null)
                 .filter(other -> other instanceof MonetaryAmount)
                 .map(o -> (MonetaryAmount) o)
-                .map(o -> o.isEqualTo(money))
+                .map(o -> o.getCurrency().equals(getCurrency()) && o.isEqualTo(money))
                 .orElse(false);
     }
 

@@ -1,8 +1,10 @@
 package io.sphere.sdk.search;
 
+import io.sphere.sdk.models.Base;
+
 import java.util.List;
 
-class TermFacetAndFilterExpressionImpl<T> implements TermFacetAndFilterExpression<T> {
+class TermFacetAndFilterExpressionImpl<T> extends Base implements TermFacetAndFilterExpression<T> {
     private final TermFacetExpression<T> facetExpression;
     private final List<FilterExpression<T>> filterExpressions;
 

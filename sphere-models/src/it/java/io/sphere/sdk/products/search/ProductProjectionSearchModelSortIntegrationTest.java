@@ -10,6 +10,8 @@ import java.util.function.Consumer;
 import static io.sphere.sdk.test.SphereTestUtils.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
+import static io.sphere.sdk.products.ProductsScenario1Fixtures.*;
+
 public class ProductProjectionSearchModelSortIntegrationTest extends ProductProjectionSearchModelIntegrationTest {
 
     public static final ProductProjectionSortSearchModel SORT = ProductProjectionSearchModel.of().sort();

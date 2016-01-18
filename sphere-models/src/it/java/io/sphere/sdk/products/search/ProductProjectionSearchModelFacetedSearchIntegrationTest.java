@@ -12,6 +12,7 @@ import static io.sphere.sdk.search.model.FilterRange.atLeast;
 import static io.sphere.sdk.search.model.FilterRange.atMost;
 import static io.sphere.sdk.test.SphereTestUtils.*;
 import static org.assertj.core.api.Assertions.assertThat;
+import static io.sphere.sdk.products.ProductsScenario1Fixtures.*;
 
 public class ProductProjectionSearchModelFacetedSearchIntegrationTest extends ProductProjectionSearchModelIntegrationTest {
 
@@ -201,11 +202,11 @@ public class ProductProjectionSearchModelFacetedSearchIntegrationTest extends Pr
 
     @Test
     public void facetedSearchOnReferenceAttributes() throws Exception {
-        testResultWithTerms(FACETED_SEARCH.allVariants().attribute().ofReference(ATTR_NAME_REF).id().by(productSomeId.getId()),
-                ids -> assertThat(ids).containsOnly(product1.getId()),
+        testResultWithTerms(FACETED_SEARCH.allVariants().attribute().ofReference(ATTR_NAME_REF).id().by(productA.getId()),
+                ids -> assertThat(ids).as("expected products in result").containsOnly(product1.getId()),
                 termStats -> assertThat(termStats).containsOnly(
-                        TermStats.of(productSomeId.getId(), 1L),
-                        TermStats.of(productOtherId.getId(), 1L)));
+                        TermStats.of(productA.getId(), 1L),
+                        TermStats.of(productB.getId(), 1L)));
     }
 
     @Test
@@ -392,11 +393,11 @@ public class ProductProjectionSearchModelFacetedSearchIntegrationTest extends Pr
 
     @Test
     public void facetedSearchOnReferenceSetAttributes() throws Exception {
-        testResultWithTerms(FACETED_SEARCH.allVariants().attribute().ofReferenceSet(ATTR_NAME_REF_SET).id().by(productOtherId.getId()),
-                ids -> assertThat(ids).containsOnly(product1.getId()),
+        testResultWithTerms(FACETED_SEARCH.allVariants().attribute().ofReferenceSet(ATTR_NAME_REF_SET).id().by(productB.getId()),
+                ids -> assertThat(ids).as("expected products in result").containsOnly(product1.getId()),
                 termStats -> assertThat(termStats).containsExactly(
-                        TermStats.of(productSomeId.getId(), 2L),
-                        TermStats.of(productOtherId.getId(), 1L)));
+                        TermStats.of(productA.getId(), 2L),
+                        TermStats.of(productB.getId(), 1L)));
     }
 
     private static void testResultWithTerms(final TermFacetAndFilterExpression<ProductProjection> facetedSearchExpr,
