@@ -1,15 +1,16 @@
 package io.sphere.sdk.queries;
 
 import io.sphere.sdk.expansion.ExpansionPathContainer;
+import io.sphere.sdk.models.Base;
 
 import java.util.List;
 import java.util.function.Function;
 import java.util.function.UnaryOperator;
 
-public abstract class ResourceMetaModelQueryDslBuilderImpl<B, T, C extends MetaModelQueryDsl<T, C, Q, E>, Q, E> implements ResourceMetaModelQueryDslBuilder<B, T, C, Q, E> {
+public abstract class ResourceMetaModelQueryDslBuilderImpl<B, T, C extends MetaModelQueryDsl<T, C, Q, E>, Q, E> extends Base implements ResourceMetaModelQueryDslBuilder<B, T, C, Q, E> {
     private C delegate;
 
-    public ResourceMetaModelQueryDslBuilderImpl(final C initialQuery) {
+    protected ResourceMetaModelQueryDslBuilderImpl(final C initialQuery) {
         this.delegate = initialQuery;
     }
 
