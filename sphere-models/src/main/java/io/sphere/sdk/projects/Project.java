@@ -69,7 +69,7 @@ public final class Project extends Base implements CreationTimestamped {
     }
 
     /**
-     * The languages as list of{@link Locale}s of this project.
+     * The languages as list of {@link Locale}s of this project.
      * @see #getLanguages()
      * @return
      */
