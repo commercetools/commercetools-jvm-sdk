@@ -82,10 +82,9 @@ public final class ProductProjectionQueryModel extends ProductDataQueryModelBase
         return super.categoryOrderHints();
     }
 
-//    currently not supported by the API
-//    public ReviewRatingStatisticsQueryModel<ProductProjection> reviewRatingStatistics() {
-//        return new ReviewRatingStatisticsQueryModelImpl<>(this, "reviewRatingStatistics");
-//    }
+    public ReviewRatingStatisticsQueryModel<ProductProjection> reviewRatingStatistics() {
+        return new ReviewRatingStatisticsQueryModelImpl<>(this, "reviewRatingStatistics");
+    }
 
     public QueryPredicate<ProductProjection> is(final Referenceable<Product> product) {
         return id().is(product.toReference().getId());

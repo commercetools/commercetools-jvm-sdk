@@ -241,23 +241,22 @@ public class ProductProjectionQueryTest extends IntegrationTest {
         );
     }
 
-//not supported in the API
-//    @Test
-//    public void queryByReviewRating() {
-//        withProduct(client(), product -> {
-//            withReview(client(), b -> b.target(product).rating(1), review1 -> {
-//                withReview(client(), b -> b.target(product).rating(3), review2 -> {
-//                    final ProductProjectionQuery query = ProductProjectionQuery.ofStaged()
-//                            .withPredicates(m -> m.reviewRatingStatistics().averageRating().is(2.0))
-//                            .plusPredicates(m -> m.reviewRatingStatistics().count().is(2))
-//                            .plusPredicates(m -> m.is(product));
-//                    final List<ProductProjection> results = client().executeBlocking(query).getResults();
-//                    assertThat(results).hasSize(1);
-//                    assertThat(results.get(0).getId()).isEqualTo(product.getId());
-//                });
-//            });
-//        });
-//    }
+    @Test
+    public void queryByReviewRating() {
+        withProduct(client(), product -> {
+            withReview(client(), b -> b.target(product).rating(1), review1 -> {
+                withReview(client(), b -> b.target(product).rating(3), review2 -> {
+                    final ProductProjectionQuery query = ProductProjectionQuery.ofStaged()
+                            .withPredicates(m -> m.reviewRatingStatistics().averageRating().is(2.0))
+                            .plusPredicates(m -> m.reviewRatingStatistics().count().is(2))
+                            .plusPredicates(m -> m.is(product));
+                    final List<ProductProjection> results = client().executeBlocking(query).getResults();
+                    assertThat(results).hasSize(1);
+                    assertThat(results.get(0).getId()).isEqualTo(product.getId());
+                });
+            });
+        });
+    }
 
     private void checkOneResult(final Product product, final QueryPredicate<ProductProjection> predicate) {
         final PagedQueryResult<ProductProjection> queryResult = client().executeBlocking(ProductProjectionQuery.of(STAGED).withPredicates(predicate));
