@@ -36,9 +36,7 @@ public class ProductCreateCommandTest extends IntegrationTest {
 
     @BeforeClass
     public static void cleanUp() throws Exception {
-        final ProductProjectionQuery query = ProductProjectionQuery.ofStaged().withPredicates(m -> m.slug().locale(Locale.ENGLISH).is("red-shirt"));
-        client().executeBlocking(query).getResults()
-                .forEach(product -> client().executeBlocking(ProductDeleteCommand.of(product)));
+        ProductFixtures.deleteProductsAndProductTypes(client());
     }
 
     @Test
