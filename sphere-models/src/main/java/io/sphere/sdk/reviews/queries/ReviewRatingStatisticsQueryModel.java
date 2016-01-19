@@ -6,5 +6,10 @@ import io.sphere.sdk.queries.OptionalQueryModel;
 
 public interface ReviewRatingStatisticsQueryModel<T> extends OptionalQueryModel<T> {
     IntegerQuerySortingModel<T> count();
+
+    IntegerQuerySortingModel<T> highestRating();
+
+    IntegerQuerySortingModel<T> lowestRating();
+
     DoubleQuerySortingModel<T> averageRating();
 }

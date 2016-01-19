@@ -249,6 +249,8 @@ public class ProductProjectionQueryTest extends IntegrationTest {
                     final ProductProjectionQuery query = ProductProjectionQuery.ofStaged()
                             .withPredicates(m -> m.reviewRatingStatistics().averageRating().is(2.0))
                             .plusPredicates(m -> m.reviewRatingStatistics().count().is(2))
+                            .plusPredicates(m -> m.reviewRatingStatistics().lowestRating().is(1))
+                            .plusPredicates(m -> m.reviewRatingStatistics().highestRating().is(3))
                             .plusPredicates(m -> m.is(product));
                     final List<ProductProjection> results = client().executeBlocking(query).getResults();
                     assertThat(results).hasSize(1);

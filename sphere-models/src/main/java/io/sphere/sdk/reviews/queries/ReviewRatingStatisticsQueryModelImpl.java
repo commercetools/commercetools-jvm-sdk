@@ -13,6 +13,16 @@ public class ReviewRatingStatisticsQueryModelImpl<T> extends QueryModelImpl<T> i
     }
 
     @Override
+    public IntegerQuerySortingModel<T> highestRating() {
+        return integerModel("highestRating");
+    }
+
+    @Override
+    public IntegerQuerySortingModel<T> lowestRating() {
+        return integerModel("lowestRating");
+    }
+
+    @Override
     public DoubleQuerySortingModel<T> averageRating() {
         return doubleModel("averageRating");
     }
