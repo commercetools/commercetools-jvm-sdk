@@ -200,7 +200,7 @@ Like for predicates, you can traverse the query model tree in the same way to sp
 
  <h3 id=reference-expansion>Reference expansion</h3>
 
- The documentation for reference expansion have been move to {@link ReferenceExpansionDocumentation} since was also enabled for search and commands.
+ {@link ReferenceExpansionDocumentation The documentation for reference expansion have been moved to ReferenceExpansionDocumentation} since was also enabled for search and commands.
  */
 public class QueryDocumentation extends Base {
     private QueryDocumentation() {

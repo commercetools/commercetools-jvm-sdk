@@ -130,11 +130,11 @@ public class QueryDocumentationTest {
 
     public void expandProductTypeForProduct() {
         final ProductQuery query = ProductQuery.of()
-                .withExpansionPaths(ProductExpansionModel.of().productType());
+                .withExpansionPaths(m -> m.productType());
     }
 
     public void expandCategoryAndCategoryParentForProduct() {
-        final ProductProjectionQuery query = ProductProjectionQuery.of(STAGED)
+        final ProductProjectionQuery query = ProductProjectionQuery.ofStaged()
                 .withExpansionPaths(m -> m.categories().parent());
     }
 

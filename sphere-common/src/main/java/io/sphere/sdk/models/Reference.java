@@ -33,7 +33,7 @@ public interface Reference<T> extends Referenceable<T>, Identifiable<T>, Resourc
     String getTypeId();
 
     /**
-     * The optional value of the referenced object.
+     * The nullable value of the referenced object.
      *
      * This value is by default null on requests:
      *
