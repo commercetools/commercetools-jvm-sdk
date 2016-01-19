@@ -125,7 +125,7 @@ public class ProductCreateCommandTest extends IntegrationTest {
                         final ProductData productData = product.getMasterData().getStaged();
                         assertThat(productData.getName()).isEqualTo(LocalizedString.ofEnglish("red shirt"));
                         assertThat(productData.getCategories()).extracting("id").contains(category.getId());
-                        client().execute(ProductDeleteCommand.of(product));
+                        client().executeBlocking(ProductDeleteCommand.of(product));
                     });
                 });
             });
