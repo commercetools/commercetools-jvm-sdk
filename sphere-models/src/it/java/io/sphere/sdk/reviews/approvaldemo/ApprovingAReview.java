@@ -11,7 +11,7 @@ import static io.sphere.sdk.test.ReferenceAssert.assertThat;
 
 public class ApprovingAReview {
     public static Review approveReview(final BlockingSphereClient client, final Review reviewToApprove) {
-        final ResourceIdentifier<State> state = ResourceIdentifier.ofKey("approved");//we now the state by key
+        final ResourceIdentifier<State> state = ResourceIdentifier.ofKey("approved");//we know the state by key
         final ReviewUpdateCommand cmd = ReviewUpdateCommand.of(reviewToApprove, TransitionState.of(state));
         final Review approvedReview = client.executeBlocking(cmd);
         assertThat(reviewToApprove.getState()).isNotEqualTo(approvedReview.getState());

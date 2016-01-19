@@ -3,16 +3,20 @@ package io.sphere.sdk.reviews;
 import io.sphere.sdk.client.SphereClientUtils;
 import io.sphere.sdk.products.*;
 import io.sphere.sdk.products.commands.ProductCreateCommand;
+import io.sphere.sdk.products.queries.ProductByIdGet;
 import io.sphere.sdk.products.search.ProductProjectionSearch;
+import io.sphere.sdk.products.search.ProductProjectionSearchModel;
 import io.sphere.sdk.products.search.ProductProjectionSortSearchModel;
 import io.sphere.sdk.producttypes.ProductType;
 import io.sphere.sdk.producttypes.ProductTypeDraft;
 import io.sphere.sdk.producttypes.commands.ProductTypeCreateCommand;
 import io.sphere.sdk.reviews.commands.ReviewCreateCommand;
 import io.sphere.sdk.reviews.queries.ReviewQuery;
+import io.sphere.sdk.reviews.search.ReviewRatingStatisticsFacetAndFilterSearchModel;
 import io.sphere.sdk.search.PagedSearchResult;
 import io.sphere.sdk.search.RangeFacetResult;
 import io.sphere.sdk.search.SortExpression;
+import io.sphere.sdk.search.TermFacetAndFilterExpression;
 import io.sphere.sdk.search.model.FacetRange;
 import io.sphere.sdk.search.model.RangeStats;
 import io.sphere.sdk.test.IntegrationTest;
@@ -42,6 +46,7 @@ public class ReviewProductProjectionSearchTest extends IntegrationTest {
     public static final String PRODUCT_TYPE_KEY = ReviewProductProjectionSearchTest.class.getSimpleName();
     public static final int REVIEWS_PER_PRODUCT = 20;
     public static final int HIGHEST_RATING = 5;
+    public static final int LOWEST_RATING = 0;
     public static Product product;
 
     @BeforeClass
@@ -51,8 +56,12 @@ public class ReviewProductProjectionSearchTest extends IntegrationTest {
         ProductFixtures.deleteProductsAndProductTypes(client());
     }
 
+    /**
+     * The fixtures are created by using {@link Random} with a fixed seed so the results are the same for each test run.
+     * The generated data contains reviews with the highest rating ({@value HIGHEST_RATING}) and the lowest rating ({@value LOWEST_RATING}).
+     */
     @BeforeClass
-    public static void prepareData() throws InterruptedException {
+    public static void prepareData() throws Exception {
 
         final ProductTypeDraft productTypeDraft = ProductTypeDraft.of(PRODUCT_TYPE_KEY, PRODUCT_TYPE_KEY, randomKey(), emptyList());
         final ProductType productType = client().executeBlocking(ProductTypeCreateCommand.of(productTypeDraft));
@@ -88,7 +97,7 @@ public class ReviewProductProjectionSearchTest extends IntegrationTest {
 
     @Test
     public void searchForReviewsWithAverageRatingGreaterThan2() {
-        final List<FacetRange<BigDecimal>> facetRanges = IntStream.range(0, HIGHEST_RATING)
+        final List<FacetRange<BigDecimal>> facetRanges = IntStream.range(LOWEST_RATING, HIGHEST_RATING)
                 .mapToObj(i -> FacetRange.of(new BigDecimal(i), new BigDecimal(i + 1)))
                 .collect(toList());
         assertThat(facetRanges.toString()).isEqualTo("[[0 to 1), [1 to 2), [2 to 3), [3 to 4), [4 to 5)]");
@@ -178,7 +187,7 @@ public class ReviewProductProjectionSearchTest extends IntegrationTest {
     public void sortByLowestRating() {
         checkSorting(
                 m -> m.reviewRatingStatistics().lowestRating().byAsc(),
-                p -> assertThat(p.getReviewRatingStatistics().getLowestRating()).isEqualTo(0)
+                p -> assertThat(p.getReviewRatingStatistics().getLowestRating()).isEqualTo(LOWEST_RATING)
         );
     }
 
@@ -188,6 +197,31 @@ public class ReviewProductProjectionSearchTest extends IntegrationTest {
                 m -> m.reviewRatingStatistics().highestRating().byDesc(),
                 p -> assertThat(p.getReviewRatingStatistics().getHighestRating()).isEqualTo(HIGHEST_RATING)
         );
+    }
+
+    @Test
+    public void facetAndFilter() {
+        final ReviewRatingStatisticsFacetAndFilterSearchModel<ProductProjection> reviewRatingsModel
+                = ProductProjectionSearchModel.of().facetedSearch().reviewRatingStatistics();
+        final TermFacetAndFilterExpression<ProductProjection> count = reviewRatingsModel.count().by("20");
+        final TermFacetAndFilterExpression<ProductProjection> averageRating = reviewRatingsModel.averageRating().by("2.7");
+        final TermFacetAndFilterExpression<ProductProjection> highestRating = reviewRatingsModel.highestRating().by(String.valueOf(HIGHEST_RATING));
+        final TermFacetAndFilterExpression<ProductProjection> lowestRating = reviewRatingsModel.lowestRating().by(String.valueOf(LOWEST_RATING));
+
+        final ProductProjectionSearch productProjectionSearch = ProductProjectionSearch.ofStaged()
+                .withQueryFilters(m -> m.id().by(product.getId()))
+                .plusFacetedSearch(asList(count, averageRating, highestRating, lowestRating));
+        assertEventually(() -> {
+            final PagedSearchResult<ProductProjection> result = client().executeBlocking(productProjectionSearch);
+            final List<ProductProjection> productProjectionList = result.getResults();
+            assertThat(productProjectionList).isNotEmpty();
+            assertThat(productProjectionList.get(0).getId()).isEqualTo(product.getId());
+
+            assertThat(result.getTermFacetResult(count.facetExpression()).getTotal()).as("count facet").isEqualTo(1L);
+            assertThat(result.getTermFacetResult(averageRating.facetExpression()).getTotal()).as("averageRating facet").isEqualTo(1L);
+            assertThat(result.getTermFacetResult(highestRating.facetExpression()).getTotal()).as("highestRating facet").isEqualTo(1L);
+            assertThat(result.getTermFacetResult(lowestRating.facetExpression()).getTotal()).as("lowestRating facet").isEqualTo(1L);
+        });
     }
 
     private void checkSorting(final Function<ProductProjectionSortSearchModel, SortExpression<ProductProjection>> sortExpressionFunction, final Consumer<ProductProjection> asserter) {
