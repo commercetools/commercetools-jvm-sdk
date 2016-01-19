@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10,"i10":10,"i11":10,"i12":10,"i13":10,"i14":10,"i15":10,"i16":10,"i17":10,"i18":10,"i19":10,"i20":10,"i21":10,"i22":10,"i23":10,"i24":10,"i25":10,"i26":10,"i27":10,"i28":10,"i29":10,"i30":10,"i31":10,"i32":10};
+var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10,"i10":10,"i11":10,"i12":10,"i13":10,"i14":10,"i15":10,"i16":10,"i17":10,"i18":10,"i19":10,"i20":10,"i21":10,"i22":10,"i23":10,"i24":10,"i25":10,"i26":10,"i27":10,"i28":10,"i29":10,"i30":10,"i31":10,"i32":10,"i33":10,"i34":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -117,7 +117,7 @@ var activeTableTab = "activeTableTab";
 </dl>
 <dl>
 <dt>Direct Known Subclasses:</dt>
-<dd><a href="../../../../io/sphere/sdk/producttypes/queries/AttributeDefinitionQueryModel.html" title="class in io.sphere.sdk.producttypes.queries">AttributeDefinitionQueryModel</a>, <a href="../../../../io/sphere/sdk/producttypes/queries/AttributeTypeQueryModel.html" title="class in io.sphere.sdk.producttypes.queries">AttributeTypeQueryModel</a>, <a href="../../../../io/sphere/sdk/types/queries/CustomQueryModelImpl.html" title="class in io.sphere.sdk.types.queries">CustomQueryModelImpl</a>, <a href="../../../../io/sphere/sdk/products/queries/DiscountedPriceOptionalQueryModel.html" title="class in io.sphere.sdk.products.queries">DiscountedPriceOptionalQueryModel</a>, <a href="../../../../io/sphere/sdk/products/queries/PriceCollectionQueryModel.html" title="class in io.sphere.sdk.products.queries">PriceCollectionQueryModel</a>, <a href="../../../../io/sphere/sdk/products/queries/ProductAllVariantsQueryModel.html" title="class in io.sphere.sdk.products.queries">ProductAllVariantsQueryModel</a>, <a href="../../../../io/sphere/sdk/products/queries/ProductCatalogDataQueryModel.html" title="class in io.sphere.sdk.products.queries">ProductCatalogDataQueryModel</a>, <a href="../../../../io/sphere/sdk/products/queries/ProductVariantQueryModel.html" title="class in io.sphere.sdk.products.queries">ProductVariantQueryModel</a>, <a href="../../../../io/sphere/sdk/queries/ResourceQueryModelImpl.html" title="class in io.sphere.sdk.queries">ResourceQueryModelImpl</a>, <a href="../../../../io/sphere/sdk/shippingmethods/queries/ZoneRateCollectionQueryModel.html" title="class in io.sphere.sdk.shippingmethods.queries">ZoneRateCollectionQueryModel</a></dd>
+<dd><a href="../../../../io/sphere/sdk/producttypes/queries/AttributeDefinitionQueryModel.html" title="class in io.sphere.sdk.producttypes.queries">AttributeDefinitionQueryModel</a>, <a href="../../../../io/sphere/sdk/producttypes/queries/AttributeTypeQueryModel.html" title="class in io.sphere.sdk.producttypes.queries">AttributeTypeQueryModel</a>, <a href="../../../../io/sphere/sdk/types/queries/CustomQueryModelImpl.html" title="class in io.sphere.sdk.types.queries">CustomQueryModelImpl</a>, <a href="../../../../io/sphere/sdk/products/queries/DiscountedPriceOptionalQueryModel.html" title="class in io.sphere.sdk.products.queries">DiscountedPriceOptionalQueryModel</a>, <a href="../../../../io/sphere/sdk/products/queries/PriceCollectionQueryModel.html" title="class in io.sphere.sdk.products.queries">PriceCollectionQueryModel</a>, <a href="../../../../io/sphere/sdk/products/queries/ProductAllVariantsQueryModel.html" title="class in io.sphere.sdk.products.queries">ProductAllVariantsQueryModel</a>, <a href="../../../../io/sphere/sdk/products/queries/ProductCatalogDataQueryModel.html" title="class in io.sphere.sdk.products.queries">ProductCatalogDataQueryModel</a>, <a href="../../../../io/sphere/sdk/products/queries/ProductVariantQueryModel.html" title="class in io.sphere.sdk.products.queries">ProductVariantQueryModel</a>, <a href="../../../../io/sphere/sdk/queries/ResourceQueryModelImpl.html" title="class in io.sphere.sdk.queries">ResourceQueryModelImpl</a>, <a href="../../../../io/sphere/sdk/reviews/queries/ReviewRatingStatisticsQueryModelImpl.html" title="class in io.sphere.sdk.reviews.queries">ReviewRatingStatisticsQueryModelImpl</a>, <a href="../../../../io/sphere/sdk/shippingmethods/queries/ZoneRateCollectionQueryModel.html" title="class in io.sphere.sdk.shippingmethods.queries">ZoneRateCollectionQueryModel</a></dd>
 </dl>
 <hr>
 <br>
@@ -183,114 +183,122 @@ implements <a href="../../../../io/sphere/sdk/queries/QueryModel.html" title="in
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/QueryModelImpl.html#currencyCodeModel-java.lang.String-">currencyCodeModel</a></span>(java.lang.String&nbsp;pathSegment)</code>&nbsp;</td>
 </tr>
 <tr id="i5" class="rowColor">
+<td class="colFirst"><code>protected <a href="../../../../io/sphere/sdk/queries/DoubleQuerySortingModel.html" title="interface in io.sphere.sdk.queries">DoubleQuerySortingModel</a>&lt;<a href="../../../../io/sphere/sdk/queries/QueryModelImpl.html" title="type parameter in QueryModelImpl">T</a>&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/QueryModelImpl.html#doubleModel-java.lang.String-">doubleModel</a></span>(java.lang.String&nbsp;pathSegment)</code>&nbsp;</td>
+</tr>
+<tr id="i6" class="altColor">
 <td class="colFirst"><code>protected &lt;X&gt;&nbsp;<a href="../../../../io/sphere/sdk/queries/QueryPredicate.html" title="interface in io.sphere.sdk.queries">QueryPredicate</a>&lt;<a href="../../../../io/sphere/sdk/queries/QueryModelImpl.html" title="type parameter in QueryModelImpl">T</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/QueryModelImpl.html#embedPredicate-io.sphere.sdk.queries.QueryPredicate-">embedPredicate</a></span>(<a href="../../../../io/sphere/sdk/queries/QueryPredicate.html" title="interface in io.sphere.sdk.queries">QueryPredicate</a>&lt;X&gt;&nbsp;embeddedPredicate)</code>&nbsp;</td>
 </tr>
-<tr id="i6" class="altColor">
+<tr id="i7" class="rowColor">
 <td class="colFirst"><code>protected &lt;E extends <a href="../../../../io/sphere/sdk/models/SphereEnumeration.html" title="interface in io.sphere.sdk.models">SphereEnumeration</a>&gt;<br><a href="../../../../io/sphere/sdk/queries/SphereEnumerationOptionalQueryModel.html" title="interface in io.sphere.sdk.queries">SphereEnumerationOptionalQueryModel</a>&lt;<a href="../../../../io/sphere/sdk/queries/QueryModelImpl.html" title="type parameter in QueryModelImpl">T</a>,E&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/QueryModelImpl.html#enumerationQueryModel-java.lang.String-">enumerationQueryModel</a></span>(java.lang.String&nbsp;pathSegment)</code>&nbsp;</td>
 </tr>
-<tr id="i7" class="rowColor">
+<tr id="i8" class="altColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/queries/QueryModel.html" title="interface in io.sphere.sdk.queries">QueryModel</a>&lt;<a href="../../../../io/sphere/sdk/queries/QueryModelImpl.html" title="type parameter in QueryModelImpl">T</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/QueryModelImpl.html#getParent--">getParent</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i8" class="altColor">
+<tr id="i9" class="rowColor">
 <td class="colFirst"><code>java.lang.String</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/QueryModelImpl.html#getPathSegment--">getPathSegment</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i9" class="rowColor">
+<tr id="i10" class="altColor">
 <td class="colFirst"><code>protected <a href="../../../../io/sphere/sdk/queries/IntegerQuerySortingModel.html" title="interface in io.sphere.sdk.queries">IntegerQuerySortingModel</a>&lt;<a href="../../../../io/sphere/sdk/queries/QueryModelImpl.html" title="type parameter in QueryModelImpl">T</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/QueryModelImpl.html#integerModel-java.lang.String-">integerModel</a></span>(java.lang.String&nbsp;pathSegment)</code>&nbsp;</td>
 </tr>
-<tr id="i10" class="altColor">
+<tr id="i11" class="rowColor">
 <td class="colFirst"><code>protected <a href="../../../../io/sphere/sdk/queries/QueryPredicate.html" title="interface in io.sphere.sdk.queries">QueryPredicate</a>&lt;<a href="../../../../io/sphere/sdk/queries/QueryModelImpl.html" title="type parameter in QueryModelImpl">T</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/QueryModelImpl.html#isEmptyCollectionQueryPredicate--">isEmptyCollectionQueryPredicate</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i11" class="rowColor">
+<tr id="i12" class="altColor">
 <td class="colFirst"><code>protected &lt;V&gt;&nbsp;<a href="../../../../io/sphere/sdk/queries/QueryPredicate.html" title="interface in io.sphere.sdk.queries">QueryPredicate</a>&lt;<a href="../../../../io/sphere/sdk/queries/QueryModelImpl.html" title="type parameter in QueryModelImpl">T</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/QueryModelImpl.html#isGreaterThanOrEqualToPredicate-V-">isGreaterThanOrEqualToPredicate</a></span>(V&nbsp;value)</code>&nbsp;</td>
 </tr>
-<tr id="i12" class="altColor">
+<tr id="i13" class="rowColor">
 <td class="colFirst"><code>protected &lt;V&gt;&nbsp;<a href="../../../../io/sphere/sdk/queries/QueryPredicate.html" title="interface in io.sphere.sdk.queries">QueryPredicate</a>&lt;<a href="../../../../io/sphere/sdk/queries/QueryModelImpl.html" title="type parameter in QueryModelImpl">T</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/QueryModelImpl.html#isGreaterThanPredicate-V-">isGreaterThanPredicate</a></span>(V&nbsp;value)</code>&nbsp;</td>
 </tr>
-<tr id="i13" class="rowColor">
+<tr id="i14" class="altColor">
 <td class="colFirst"><code>protected &lt;V&gt;&nbsp;<a href="../../../../io/sphere/sdk/queries/QueryPredicate.html" title="interface in io.sphere.sdk.queries">QueryPredicate</a>&lt;<a href="../../../../io/sphere/sdk/queries/QueryModelImpl.html" title="type parameter in QueryModelImpl">T</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/QueryModelImpl.html#isInPredicate-java.lang.Iterable-">isInPredicate</a></span>(java.lang.Iterable&lt;V&gt;&nbsp;args)</code>&nbsp;</td>
 </tr>
-<tr id="i14" class="altColor">
+<tr id="i15" class="rowColor">
 <td class="colFirst"><code>protected &lt;V&gt;&nbsp;<a href="../../../../io/sphere/sdk/queries/QueryPredicate.html" title="interface in io.sphere.sdk.queries">QueryPredicate</a>&lt;<a href="../../../../io/sphere/sdk/queries/QueryModelImpl.html" title="type parameter in QueryModelImpl">T</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/QueryModelImpl.html#isLessThanOrEqualToPredicate-V-">isLessThanOrEqualToPredicate</a></span>(V&nbsp;value)</code>&nbsp;</td>
 </tr>
-<tr id="i15" class="rowColor">
+<tr id="i16" class="altColor">
 <td class="colFirst"><code>protected &lt;V&gt;&nbsp;<a href="../../../../io/sphere/sdk/queries/QueryPredicate.html" title="interface in io.sphere.sdk.queries">QueryPredicate</a>&lt;<a href="../../../../io/sphere/sdk/queries/QueryModelImpl.html" title="type parameter in QueryModelImpl">T</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/QueryModelImpl.html#isLessThanPredicate-V-">isLessThanPredicate</a></span>(V&nbsp;value)</code>&nbsp;</td>
 </tr>
-<tr id="i16" class="altColor">
+<tr id="i17" class="rowColor">
 <td class="colFirst"><code>protected <a href="../../../../io/sphere/sdk/queries/QueryPredicate.html" title="interface in io.sphere.sdk.queries">QueryPredicate</a>&lt;<a href="../../../../io/sphere/sdk/queries/QueryModelImpl.html" title="type parameter in QueryModelImpl">T</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/QueryModelImpl.html#isNotEmptyCollectionQueryPredicate--">isNotEmptyCollectionQueryPredicate</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i17" class="rowColor">
+<tr id="i18" class="altColor">
 <td class="colFirst"><code>protected &lt;V&gt;&nbsp;<a href="../../../../io/sphere/sdk/queries/QueryPredicate.html" title="interface in io.sphere.sdk.queries">QueryPredicate</a>&lt;<a href="../../../../io/sphere/sdk/queries/QueryModelImpl.html" title="type parameter in QueryModelImpl">T</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/QueryModelImpl.html#isNotInPredicate-java.lang.Iterable-">isNotInPredicate</a></span>(java.lang.Iterable&lt;V&gt;&nbsp;args)</code>&nbsp;</td>
 </tr>
-<tr id="i18" class="altColor">
+<tr id="i19" class="rowColor">
 <td class="colFirst"><code>protected <a href="../../../../io/sphere/sdk/queries/QueryPredicate.html" title="interface in io.sphere.sdk.queries">QueryPredicate</a>&lt;<a href="../../../../io/sphere/sdk/queries/QueryModelImpl.html" title="type parameter in QueryModelImpl">T</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/QueryModelImpl.html#isNotPredicate-java.lang.String-">isNotPredicate</a></span>(java.lang.String&nbsp;value)</code>&nbsp;</td>
 </tr>
-<tr id="i19" class="rowColor">
+<tr id="i20" class="altColor">
 <td class="colFirst"><code>protected &lt;V&gt;&nbsp;<a href="../../../../io/sphere/sdk/queries/QueryPredicate.html" title="interface in io.sphere.sdk.queries">QueryPredicate</a>&lt;<a href="../../../../io/sphere/sdk/queries/QueryModelImpl.html" title="type parameter in QueryModelImpl">T</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/QueryModelImpl.html#isNotPredicate-V-">isNotPredicate</a></span>(V&nbsp;value)</code>&nbsp;</td>
 </tr>
-<tr id="i20" class="altColor">
+<tr id="i21" class="rowColor">
 <td class="colFirst"><code>protected <a href="../../../../io/sphere/sdk/queries/QueryPredicate.html" title="interface in io.sphere.sdk.queries">QueryPredicate</a>&lt;<a href="../../../../io/sphere/sdk/queries/QueryModelImpl.html" title="type parameter in QueryModelImpl">T</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/QueryModelImpl.html#isNotPresentPredicate--">isNotPresentPredicate</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i21" class="rowColor">
+<tr id="i22" class="altColor">
 <td class="colFirst"><code>protected &lt;V&gt;&nbsp;<a href="../../../../io/sphere/sdk/queries/QueryPredicate.html" title="interface in io.sphere.sdk.queries">QueryPredicate</a>&lt;<a href="../../../../io/sphere/sdk/queries/QueryModelImpl.html" title="type parameter in QueryModelImpl">T</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/QueryModelImpl.html#isPredicate-V-">isPredicate</a></span>(V&nbsp;value)</code>&nbsp;</td>
 </tr>
-<tr id="i22" class="altColor">
+<tr id="i23" class="rowColor">
 <td class="colFirst"><code>protected <a href="../../../../io/sphere/sdk/queries/QueryPredicate.html" title="interface in io.sphere.sdk.queries">QueryPredicate</a>&lt;<a href="../../../../io/sphere/sdk/queries/QueryModelImpl.html" title="type parameter in QueryModelImpl">T</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/QueryModelImpl.html#isPresentPredicate--">isPresentPredicate</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i23" class="rowColor">
+<tr id="i24" class="altColor">
+<td class="colFirst"><code>protected <a href="../../../../io/sphere/sdk/queries/LocaleQuerySortingModel.html" title="interface in io.sphere.sdk.queries">LocaleQuerySortingModel</a>&lt;<a href="../../../../io/sphere/sdk/queries/QueryModelImpl.html" title="type parameter in QueryModelImpl">T</a>&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/QueryModelImpl.html#localeQuerySortingModel-java.lang.String-">localeQuerySortingModel</a></span>(java.lang.String&nbsp;pathSegment)</code>&nbsp;</td>
+</tr>
+<tr id="i25" class="rowColor">
 <td class="colFirst"><code>protected io.sphere.sdk.queries.LocalizedStringQuerySortingModelImpl&lt;<a href="../../../../io/sphere/sdk/queries/QueryModelImpl.html" title="type parameter in QueryModelImpl">T</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/QueryModelImpl.html#localizedStringQuerySortingModel-java.lang.String-">localizedStringQuerySortingModel</a></span>(java.lang.String&nbsp;pathSegment)</code>&nbsp;</td>
 </tr>
-<tr id="i24" class="altColor">
+<tr id="i26" class="altColor">
 <td class="colFirst"><code>protected <a href="../../../../io/sphere/sdk/queries/LongQuerySortingModel.html" title="interface in io.sphere.sdk.queries">LongQuerySortingModel</a>&lt;<a href="../../../../io/sphere/sdk/queries/QueryModelImpl.html" title="type parameter in QueryModelImpl">T</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/QueryModelImpl.html#longModel-java.lang.String-">longModel</a></span>(java.lang.String&nbsp;pathSegment)</code>&nbsp;</td>
 </tr>
-<tr id="i25" class="rowColor">
+<tr id="i27" class="rowColor">
 <td class="colFirst"><code>protected <a href="../../../../io/sphere/sdk/queries/MoneyQueryModel.html" title="interface in io.sphere.sdk.queries">MoneyQueryModel</a>&lt;<a href="../../../../io/sphere/sdk/queries/QueryModelImpl.html" title="type parameter in QueryModelImpl">T</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/QueryModelImpl.html#moneyModel-java.lang.String-">moneyModel</a></span>(java.lang.String&nbsp;pathSegment)</code>&nbsp;</td>
 </tr>
-<tr id="i26" class="altColor">
+<tr id="i28" class="altColor">
 <td class="colFirst"><code>protected java.util.List&lt;java.lang.String&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/QueryModelImpl.html#normalizeIterable-java.lang.Iterable-">normalizeIterable</a></span>(java.lang.Iterable&lt;java.lang.String&gt;&nbsp;items)</code>&nbsp;</td>
 </tr>
-<tr id="i27" class="rowColor">
+<tr id="i29" class="rowColor">
 <td class="colFirst"><code>protected &lt;R&gt;&nbsp;<a href="../../../../io/sphere/sdk/queries/ReferenceCollectionQueryModel.html" title="interface in io.sphere.sdk.queries">ReferenceCollectionQueryModel</a>&lt;<a href="../../../../io/sphere/sdk/queries/QueryModelImpl.html" title="type parameter in QueryModelImpl">T</a>,R&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/QueryModelImpl.html#referenceCollectionModel-java.lang.String-">referenceCollectionModel</a></span>(java.lang.String&nbsp;pathSegment)</code>&nbsp;</td>
 </tr>
-<tr id="i28" class="altColor">
+<tr id="i30" class="altColor">
 <td class="colFirst"><code>protected &lt;R&gt;&nbsp;<a href="../../../../io/sphere/sdk/queries/ReferenceQueryModel.html" title="interface in io.sphere.sdk.queries">ReferenceQueryModel</a>&lt;<a href="../../../../io/sphere/sdk/queries/QueryModelImpl.html" title="type parameter in QueryModelImpl">T</a>,R&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/QueryModelImpl.html#referenceModel-java.lang.String-">referenceModel</a></span>(java.lang.String&nbsp;pathSegment)</code>&nbsp;</td>
 </tr>
-<tr id="i29" class="rowColor">
+<tr id="i31" class="rowColor">
 <td class="colFirst"><code>protected &lt;R&gt;&nbsp;<a href="../../../../io/sphere/sdk/queries/ReferenceOptionalQueryModel.html" title="interface in io.sphere.sdk.queries">ReferenceOptionalQueryModel</a>&lt;<a href="../../../../io/sphere/sdk/queries/QueryModelImpl.html" title="type parameter in QueryModelImpl">T</a>,R&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/QueryModelImpl.html#referenceOptionalModel-java.lang.String-">referenceOptionalModel</a></span>(java.lang.String&nbsp;pathSegment)</code>&nbsp;</td>
 </tr>
-<tr id="i30" class="altColor">
+<tr id="i32" class="altColor">
 <td class="colFirst"><code>protected <a href="../../../../io/sphere/sdk/queries/StringCollectionQueryModel.html" title="interface in io.sphere.sdk.queries">StringCollectionQueryModel</a>&lt;<a href="../../../../io/sphere/sdk/queries/QueryModelImpl.html" title="type parameter in QueryModelImpl">T</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/QueryModelImpl.html#stringCollectionModel-java.lang.String-">stringCollectionModel</a></span>(java.lang.String&nbsp;pathSegment)</code>&nbsp;</td>
 </tr>
-<tr id="i31" class="rowColor">
+<tr id="i33" class="rowColor">
 <td class="colFirst"><code>protected <a href="../../../../io/sphere/sdk/queries/StringQuerySortingModel.html" title="interface in io.sphere.sdk.queries">StringQuerySortingModel</a>&lt;<a href="../../../../io/sphere/sdk/queries/QueryModelImpl.html" title="type parameter in QueryModelImpl">T</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/QueryModelImpl.html#stringModel-java.lang.String-">stringModel</a></span>(java.lang.String&nbsp;pathSegment)</code>&nbsp;</td>
 </tr>
-<tr id="i32" class="altColor">
+<tr id="i34" class="altColor">
 <td class="colFirst"><code>protected <a href="../../../../io/sphere/sdk/queries/TimestampSortingModel.html" title="interface in io.sphere.sdk.queries">TimestampSortingModel</a>&lt;<a href="../../../../io/sphere/sdk/queries/QueryModelImpl.html" title="type parameter in QueryModelImpl">T</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/QueryModelImpl.html#timestampSortingModel-java.lang.String-">timestampSortingModel</a></span>(java.lang.String&nbsp;pathSegment)</code>&nbsp;</td>
 </tr>
@@ -486,6 +494,15 @@ public&nbsp;<a href="../../../../io/sphere/sdk/queries/QueryModel.html" title="i
 <pre>protected&nbsp;<a href="../../../../io/sphere/sdk/queries/IntegerQuerySortingModel.html" title="interface in io.sphere.sdk.queries">IntegerQuerySortingModel</a>&lt;<a href="../../../../io/sphere/sdk/queries/QueryModelImpl.html" title="type parameter in QueryModelImpl">T</a>&gt;&nbsp;integerModel(java.lang.String&nbsp;pathSegment)</pre>
 </li>
 </ul>
+<a name="doubleModel-java.lang.String-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>doubleModel</h4>
+<pre>protected&nbsp;<a href="../../../../io/sphere/sdk/queries/DoubleQuerySortingModel.html" title="interface in io.sphere.sdk.queries">DoubleQuerySortingModel</a>&lt;<a href="../../../../io/sphere/sdk/queries/QueryModelImpl.html" title="type parameter in QueryModelImpl">T</a>&gt;&nbsp;doubleModel(java.lang.String&nbsp;pathSegment)</pre>
+</li>
+</ul>
 <a name="localizedStringQuerySortingModel-java.lang.String-">
 <!--   -->
 </a>
@@ -511,6 +528,15 @@ public&nbsp;<a href="../../../../io/sphere/sdk/queries/QueryModel.html" title="i
 <li class="blockList">
 <h4>addressModel</h4>
 <pre>protected final&nbsp;<a href="../../../../io/sphere/sdk/queries/AddressQueryModel.html" title="interface in io.sphere.sdk.queries">AddressQueryModel</a>&lt;<a href="../../../../io/sphere/sdk/queries/QueryModelImpl.html" title="type parameter in QueryModelImpl">T</a>&gt;&nbsp;addressModel(java.lang.String&nbsp;pathSegment)</pre>
+</li>
+</ul>
+<a name="localeQuerySortingModel-java.lang.String-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>localeQuerySortingModel</h4>
+<pre>protected final&nbsp;<a href="../../../../io/sphere/sdk/queries/LocaleQuerySortingModel.html" title="interface in io.sphere.sdk.queries">LocaleQuerySortingModel</a>&lt;<a href="../../../../io/sphere/sdk/queries/QueryModelImpl.html" title="type parameter in QueryModelImpl">T</a>&gt;&nbsp;localeQuerySortingModel(java.lang.String&nbsp;pathSegment)</pre>
 </li>
 </ul>
 <a name="isPredicate-java.lang.Object-">
