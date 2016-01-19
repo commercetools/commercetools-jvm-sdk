@@ -86,6 +86,10 @@ public class QueryModelImpl<T> extends Base implements QueryModel<T> {
         return new IntegerQuerySortingModelImpl<>(this, pathSegment);
     }
 
+    protected DoubleQuerySortingModel<T> doubleModel(final String pathSegment) {
+        return new DoubleQuerySortingModelImpl<>(this, pathSegment);
+    }
+
     protected LocalizedStringQuerySortingModelImpl<T> localizedStringQuerySortingModel(final String pathSegment) {
         return new LocalizedStringQuerySortingModelImpl<>(this, pathSegment);
     }
@@ -96,6 +100,10 @@ public class QueryModelImpl<T> extends Base implements QueryModel<T> {
 
     protected final AddressQueryModel<T> addressModel(final String pathSegment) {
         return new AddressQueryModelImpl<>(this, pathSegment);
+    }
+
+    protected final LocaleQuerySortingModel<T> localeQuerySortingModel(final String pathSegment) {
+        return new LocaleQuerySortingModelImpl<>(this, pathSegment);
     }
 
     @SuppressWarnings("unchecked")

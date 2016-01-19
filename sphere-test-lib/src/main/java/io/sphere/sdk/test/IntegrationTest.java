@@ -14,6 +14,7 @@ import io.sphere.sdk.models.DefaultCurrencyUnits;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.queries.Query;
+import io.sphere.sdk.utils.ListUtils;
 import org.assertj.core.api.Condition;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.BeforeClass;
@@ -28,6 +29,7 @@ import java.io.UncheckedIOException;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Properties;
+import java.util.concurrent.CompletionStage;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Consumer;
 
@@ -165,5 +167,10 @@ public abstract class IntegrationTest {
         final SoftAssertions softly = new SoftAssertions();
         assertionsConsumer.accept(softly);
         softly.assertAll();
+    }
+
+
+    protected static void await(final CompletionStage<?> wait1, final CompletionStage<?> ... moreWait) {
+        ListUtils.listOf(wait1, moreWait).forEach(stage -> stage.toCompletableFuture().join());
     }
 }

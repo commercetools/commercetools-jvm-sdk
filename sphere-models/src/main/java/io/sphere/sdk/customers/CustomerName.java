@@ -9,7 +9,10 @@ import javax.annotation.Nullable;
  *
  * @see Customer
  * @see Customer#getName()
- * @see io.sphere.sdk.customers.commands.updateactions.ChangeName
+ * @see io.sphere.sdk.customers.commands.updateactions.SetFirstName
+ * @see io.sphere.sdk.customers.commands.updateactions.SetMiddleName
+ * @see io.sphere.sdk.customers.commands.updateactions.SetLastName
+ * @see io.sphere.sdk.customers.commands.updateactions.SetTitle
  * @see CustomerDraftBuilder
  */
 public class CustomerName extends Base {

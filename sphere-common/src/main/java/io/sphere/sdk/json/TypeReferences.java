@@ -8,6 +8,7 @@ import java.time.ZonedDateTime;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Locale;
+import java.util.Set;
 
 public final class TypeReferences {
     private TypeReferences() {
@@ -108,6 +109,15 @@ public final class TypeReferences {
             @Override
             public String toString() {
                 return "TypeReference<Locale>";
+            }
+        };
+    }
+
+    public static TypeReference<Set<String>> stringSetTypeReference() {
+        return new TypeReference<Set<String>>() {
+            @Override
+            public String toString() {
+                return "TypeReference<Set<String>>";
             }
         };
     }

@@ -1,6 +1,7 @@
 package io.sphere.sdk.products.search;
 
 import io.sphere.sdk.products.ProductProjection;
+import io.sphere.sdk.reviews.search.ReviewRatingStatisticsFilterSearchModel;
 import io.sphere.sdk.search.model.*;
 
 import javax.annotation.Nullable;
@@ -49,5 +50,10 @@ public class ProductProjectionFilterSearchModel extends ProductDataFilterSearchM
     @Override
     public RangeTermFilterSearchModel<ProductProjection, ZonedDateTime> lastModifiedAt() {
         return super.lastModifiedAt();
+    }
+
+    @Override
+    public ReviewRatingStatisticsFilterSearchModel<ProductProjection> reviewRatingStatistics() {
+        return super.reviewRatingStatistics();
     }
 }

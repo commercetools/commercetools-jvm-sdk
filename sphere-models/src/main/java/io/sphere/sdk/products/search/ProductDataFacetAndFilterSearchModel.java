@@ -1,10 +1,10 @@
 package io.sphere.sdk.products.search;
 
 import io.sphere.sdk.products.ProductProjection;
+import io.sphere.sdk.reviews.search.ReviewRatingStatisticsFacetAndFilterSearchModel;
 import io.sphere.sdk.search.model.*;
 
 import javax.annotation.Nullable;
-import java.time.ZonedDateTime;
 
 public class ProductDataFacetAndFilterSearchModel extends SearchModelImpl<ProductProjection> {
 
@@ -38,5 +38,9 @@ public class ProductDataFacetAndFilterSearchModel extends SearchModelImpl<Produc
 
     public RangeTermFacetAndFilterSearchModel<ProductProjection> lastModifiedAt() {
         return datetimeSearchModel("lastModifiedAt").facetedAndFiltered();
+    }
+
+    public ReviewRatingStatisticsFacetAndFilterSearchModel<ProductProjection> reviewRatingStatistics() {
+        return new ReviewRatingStatisticsFacetAndFilterSearchModel<>(this, "reviewRatingStatistics");
     }
 }

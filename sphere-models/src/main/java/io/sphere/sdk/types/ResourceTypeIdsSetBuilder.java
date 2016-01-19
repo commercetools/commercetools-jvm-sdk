@@ -9,6 +9,7 @@ import io.sphere.sdk.models.Builder;
 import io.sphere.sdk.payments.Payment;
 import io.sphere.sdk.payments.commands.updateactions.AddInterfaceInteraction;
 import io.sphere.sdk.products.Price;
+import io.sphere.sdk.reviews.Review;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -58,6 +59,10 @@ public class ResourceTypeIdsSetBuilder implements Builder<Set<String>> {
 
     public ResourceTypeIdsSetBuilder addPaymentInterfaceInteractions() {
         return add(AddInterfaceInteraction.resourceTypeId());
+    }
+
+    public ResourceTypeIdsSetBuilder addReviews() {
+        return add(Review.resourceTypeId());
     }
 
     @Override
