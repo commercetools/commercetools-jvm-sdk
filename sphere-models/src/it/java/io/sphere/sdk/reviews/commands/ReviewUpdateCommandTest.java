@@ -14,6 +14,7 @@ import io.sphere.sdk.states.StateRole;
 import io.sphere.sdk.test.IntegrationTest;
 import org.junit.Test;
 
+import java.util.Locale;
 import java.util.Optional;
 
 import static io.sphere.sdk.channels.ChannelFixtures.withChannelOfRole;
@@ -197,5 +198,17 @@ public class ReviewUpdateCommandTest extends IntegrationTest {
             return type;
         });
 
+    }
+
+    @Test
+    public void setLocale() {
+        withUpdateableReview(client(), builder -> builder.locale(Locale.GERMAN), (Review review) -> {
+            final Review updatedReview =
+                    client().executeBlocking(ReviewUpdateCommand.of(review, SetLocale.of(Locale.ENGLISH)));
+
+            assertThat(updatedReview.getLocale()).isEqualTo(Locale.ENGLISH);
+
+            return updatedReview;
+        });
     }
 }
