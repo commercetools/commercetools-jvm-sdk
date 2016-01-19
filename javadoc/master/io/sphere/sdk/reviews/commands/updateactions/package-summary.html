@@ -70,6 +70,10 @@
 <!-- ========= END OF TOP NAVBAR ========= -->
 <div class="header">
 <h1 title="Package" class="title">Package&nbsp;io.sphere.sdk.reviews.commands.updateactions</h1>
+<div class="docSummary">
+<div class="block">Provides the possible operations which can be performed on update commands for  reviews.</div>
+</div>
+<p>See:&nbsp;<a href="#package.description">Description</a></p>
 </div>
 <div class="contentContainer">
 <ul class="blockList">
@@ -84,25 +88,83 @@
 <tr class="altColor">
 <td class="colFirst"><a href="../../../../../../io/sphere/sdk/reviews/commands/updateactions/SetAuthorName.html" title="class in io.sphere.sdk.reviews.commands.updateactions">SetAuthorName</a></td>
 <td class="colLast">
-<div class="block">Updates the author name of a review.</div>
+<div class="block">Sets/unsets the author name of a review.</div>
 </td>
 </tr>
 <tr class="rowColor">
-<td class="colFirst"><a href="../../../../../../io/sphere/sdk/reviews/commands/updateactions/SetScore.html" title="class in io.sphere.sdk.reviews.commands.updateactions">SetScore</a></td>
+<td class="colFirst"><a href="../../../../../../io/sphere/sdk/reviews/commands/updateactions/SetCustomer.html" title="class in io.sphere.sdk.reviews.commands.updateactions">SetCustomer</a></td>
 <td class="colLast">
-<div class="block">Updates the score of a review.</div>
+<div class="block">Sets/unsets the customer belonging to a review.</div>
+</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><a href="../../../../../../io/sphere/sdk/reviews/commands/updateactions/SetCustomField.html" title="class in io.sphere.sdk.reviews.commands.updateactions">SetCustomField</a></td>
+<td class="colLast">
+<div class="block">Updates a custom field.</div>
+</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><a href="../../../../../../io/sphere/sdk/reviews/commands/updateactions/SetCustomType.html" title="class in io.sphere.sdk.reviews.commands.updateactions">SetCustomType</a></td>
+<td class="colLast">
+<div class="block">Sets or removes a custom type.</div>
+</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><a href="../../../../../../io/sphere/sdk/reviews/commands/updateactions/SetKey.html" title="class in io.sphere.sdk.reviews.commands.updateactions">SetKey</a></td>
+<td class="colLast">
+<div class="block">Sets/unsets the key of a review
+
+ <div id="io-sphere-sdk-reviews-commands-ReviewUpdateCommandTest-setKey--%s" class=code-example><pre><code class='java'>withUpdateableReview(client(), (Review review) -&gt; {
+    final String key = randomKey();
+    final Review updatedReview =
+            client().executeBlocking(ReviewUpdateCommand.of(review, SetKey.of(key)));
+
+    assertThat(updatedReview.getKey()).isEqualTo(key);
+
+    return updatedReview;
+});
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/reviews/commands/ReviewUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><a href="../../../../../../io/sphere/sdk/reviews/commands/updateactions/SetLocale.html" title="class in io.sphere.sdk.reviews.commands.updateactions">SetLocale</a></td>
+<td class="colLast">
+<div class="block">Sets/unsets the locale of a review.</div>
+</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><a href="../../../../../../io/sphere/sdk/reviews/commands/updateactions/SetRating.html" title="class in io.sphere.sdk.reviews.commands.updateactions">SetRating</a></td>
+<td class="colLast">
+<div class="block">Sets/unsets the rating of a review.</div>
+</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><a href="../../../../../../io/sphere/sdk/reviews/commands/updateactions/SetTarget.html" title="class in io.sphere.sdk.reviews.commands.updateactions">SetTarget</a></td>
+<td class="colLast">
+<div class="block">Sets/unsets the target of a review.</div>
 </td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><a href="../../../../../../io/sphere/sdk/reviews/commands/updateactions/SetText.html" title="class in io.sphere.sdk.reviews.commands.updateactions">SetText</a></td>
 <td class="colLast">
-<div class="block">Updates the text of a review.</div>
+<div class="block">Sets/unsets the content of a review.</div>
 </td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><a href="../../../../../../io/sphere/sdk/reviews/commands/updateactions/SetTitle.html" title="class in io.sphere.sdk.reviews.commands.updateactions">SetTitle</a></td>
 <td class="colLast">
-<div class="block">Updates the title of a review.</div>
+<div class="block">Sets/unsets the title of a review
+
+ <div id="io-sphere-sdk-reviews-commands-ReviewUpdateCommandTest-setTitle--%s" class=code-example><pre><code class='java'>withUpdateableReview(client(), (Review review) -&gt; {
+    final String title = randomKey();
+    final Review updatedReview =
+            client().executeBlocking(ReviewUpdateCommand.of(review, SetTitle.of(title)));
+
+    assertThat(updatedReview.getTitle()).isEqualTo(title);
+
+    return updatedReview;
+});
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/reviews/commands/ReviewUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 </td>
 </tr>
 <tr class="altColor">
@@ -115,6 +177,11 @@
 </table>
 </li>
 </ul>
+<a name="package.description">
+<!--   -->
+</a>
+<h2 title="Package io.sphere.sdk.reviews.commands.updateactions Description">Package io.sphere.sdk.reviews.commands.updateactions Description</h2>
+<div class="block">Provides the possible operations which can be performed on update commands for  reviews.</div>
 </div>
 <!-- ======= START OF BOTTOM NAVBAR ====== -->
 <div class="bottomNav"><a name="navbar.bottom">

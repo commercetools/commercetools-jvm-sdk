@@ -18,8 +18,8 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":18,"i1":17,"i2":17};
-var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],2:["t2","Instance Methods"],16:["t5","Default Methods"]};
+var methods = {"i0":17,"i1":17};
+var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],16:["t5","Default Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
 var tableTab = "tableTab";
@@ -48,8 +48,8 @@ var activeTableTab = "activeTableTab";
 </div>
 <div class="subNav">
 <ul class="navList">
-<li>Prev&nbsp;Class</li>
-<li><a href="../../../../../io/sphere/sdk/reviews/queries/ReviewQueryModel.html" title="class in io.sphere.sdk.reviews.queries"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
+<li><a href="../../../../../io/sphere/sdk/reviews/queries/ReviewByKeyGet.html" title="interface in io.sphere.sdk.reviews.queries"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
+<li><a href="../../../../../io/sphere/sdk/reviews/queries/ReviewQueryBuilder.html" title="class in io.sphere.sdk.reviews.queries"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">
 <li><a href="../../../../../index.html?io/sphere/sdk/reviews/queries/ReviewQuery.html" target="_top">Frames</a></li>
@@ -100,13 +100,17 @@ var activeTableTab = "activeTableTab";
 <li class="blockList">
 <dl>
 <dt>All Superinterfaces:</dt>
-<dd><a href="../../../../../io/sphere/sdk/expansion/MetaModelExpansionDsl.html" title="interface in io.sphere.sdk.expansion">MetaModelExpansionDsl</a>&lt;<a href="../../../../../io/sphere/sdk/reviews/Review.html" title="interface in io.sphere.sdk.reviews">Review</a>,<a href="../../../../../io/sphere/sdk/reviews/queries/ReviewQuery.html" title="interface in io.sphere.sdk.reviews.queries">ReviewQuery</a>,<a href="../../../../../io/sphere/sdk/reviews/expansion/ReviewExpansionModel.html" title="class in io.sphere.sdk.reviews.expansion">ReviewExpansionModel</a>&lt;<a href="../../../../../io/sphere/sdk/reviews/Review.html" title="interface in io.sphere.sdk.reviews">Review</a>&gt;&gt;, <a href="../../../../../io/sphere/sdk/queries/MetaModelQueryDsl.html" title="interface in io.sphere.sdk.queries">MetaModelQueryDsl</a>&lt;<a href="../../../../../io/sphere/sdk/reviews/Review.html" title="interface in io.sphere.sdk.reviews">Review</a>,<a href="../../../../../io/sphere/sdk/reviews/queries/ReviewQuery.html" title="interface in io.sphere.sdk.reviews.queries">ReviewQuery</a>,<a href="../../../../../io/sphere/sdk/reviews/queries/ReviewQueryModel.html" title="class in io.sphere.sdk.reviews.queries">ReviewQueryModel</a>,<a href="../../../../../io/sphere/sdk/reviews/expansion/ReviewExpansionModel.html" title="class in io.sphere.sdk.reviews.expansion">ReviewExpansionModel</a>&lt;<a href="../../../../../io/sphere/sdk/reviews/Review.html" title="interface in io.sphere.sdk.reviews">Review</a>&gt;&gt;, <a href="../../../../../io/sphere/sdk/queries/Query.html" title="interface in io.sphere.sdk.queries">Query</a>&lt;<a href="../../../../../io/sphere/sdk/reviews/Review.html" title="interface in io.sphere.sdk.reviews">Review</a>&gt;, <a href="../../../../../io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries">QueryDsl</a>&lt;<a href="../../../../../io/sphere/sdk/reviews/Review.html" title="interface in io.sphere.sdk.reviews">Review</a>,<a href="../../../../../io/sphere/sdk/reviews/queries/ReviewQuery.html" title="interface in io.sphere.sdk.reviews.queries">ReviewQuery</a>&gt;, <a href="../../../../../io/sphere/sdk/expansion/ReferenceExpansionDsl.html" title="interface in io.sphere.sdk.expansion">ReferenceExpansionDsl</a>&lt;<a href="../../../../../io/sphere/sdk/reviews/Review.html" title="interface in io.sphere.sdk.reviews">Review</a>,<a href="../../../../../io/sphere/sdk/reviews/queries/ReviewQuery.html" title="interface in io.sphere.sdk.reviews.queries">ReviewQuery</a>&gt;, <a href="../../../../../io/sphere/sdk/expansion/ReferenceExpansionSupport.html" title="interface in io.sphere.sdk.expansion">ReferenceExpansionSupport</a>&lt;<a href="../../../../../io/sphere/sdk/reviews/Review.html" title="interface in io.sphere.sdk.reviews">Review</a>&gt;, <a href="../../../../../io/sphere/sdk/queries/ResourceQuery.html" title="interface in io.sphere.sdk.queries">ResourceQuery</a>&lt;<a href="../../../../../io/sphere/sdk/reviews/Review.html" title="interface in io.sphere.sdk.reviews">Review</a>&gt;, <a href="../../../../../io/sphere/sdk/client/SphereRequest.html" title="interface in io.sphere.sdk.client">SphereRequest</a>&lt;<a href="../../../../../io/sphere/sdk/queries/PagedQueryResult.html" title="class in io.sphere.sdk.queries">PagedQueryResult</a>&lt;<a href="../../../../../io/sphere/sdk/reviews/Review.html" title="interface in io.sphere.sdk.reviews">Review</a>&gt;&gt;</dd>
+<dd><a href="../../../../../io/sphere/sdk/expansion/ExpansionPathContainer.html" title="interface in io.sphere.sdk.expansion">ExpansionPathContainer</a>&lt;<a href="../../../../../io/sphere/sdk/reviews/Review.html" title="interface in io.sphere.sdk.reviews">Review</a>&gt;, <a href="../../../../../io/sphere/sdk/expansion/MetaModelExpansionDsl.html" title="interface in io.sphere.sdk.expansion">MetaModelExpansionDsl</a>&lt;<a href="../../../../../io/sphere/sdk/reviews/Review.html" title="interface in io.sphere.sdk.reviews">Review</a>,<a href="../../../../../io/sphere/sdk/reviews/queries/ReviewQuery.html" title="interface in io.sphere.sdk.reviews.queries">ReviewQuery</a>,<a href="../../../../../io/sphere/sdk/reviews/expansion/ReviewExpansionModel.html" title="class in io.sphere.sdk.reviews.expansion">ReviewExpansionModel</a>&lt;<a href="../../../../../io/sphere/sdk/reviews/Review.html" title="interface in io.sphere.sdk.reviews">Review</a>&gt;&gt;, <a href="../../../../../io/sphere/sdk/queries/MetaModelQueryDsl.html" title="interface in io.sphere.sdk.queries">MetaModelQueryDsl</a>&lt;<a href="../../../../../io/sphere/sdk/reviews/Review.html" title="interface in io.sphere.sdk.reviews">Review</a>,<a href="../../../../../io/sphere/sdk/reviews/queries/ReviewQuery.html" title="interface in io.sphere.sdk.reviews.queries">ReviewQuery</a>,<a href="../../../../../io/sphere/sdk/reviews/queries/ReviewQueryModel.html" title="class in io.sphere.sdk.reviews.queries">ReviewQueryModel</a>,<a href="../../../../../io/sphere/sdk/reviews/expansion/ReviewExpansionModel.html" title="class in io.sphere.sdk.reviews.expansion">ReviewExpansionModel</a>&lt;<a href="../../../../../io/sphere/sdk/reviews/Review.html" title="interface in io.sphere.sdk.reviews">Review</a>&gt;&gt;, <a href="../../../../../io/sphere/sdk/queries/Query.html" title="interface in io.sphere.sdk.queries">Query</a>&lt;<a href="../../../../../io/sphere/sdk/reviews/Review.html" title="interface in io.sphere.sdk.reviews">Review</a>&gt;, <a href="../../../../../io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries">QueryDsl</a>&lt;<a href="../../../../../io/sphere/sdk/reviews/Review.html" title="interface in io.sphere.sdk.reviews">Review</a>,<a href="../../../../../io/sphere/sdk/reviews/queries/ReviewQuery.html" title="interface in io.sphere.sdk.reviews.queries">ReviewQuery</a>&gt;, <a href="../../../../../io/sphere/sdk/expansion/ReferenceExpansionDsl.html" title="interface in io.sphere.sdk.expansion">ReferenceExpansionDsl</a>&lt;<a href="../../../../../io/sphere/sdk/reviews/Review.html" title="interface in io.sphere.sdk.reviews">Review</a>,<a href="../../../../../io/sphere/sdk/reviews/queries/ReviewQuery.html" title="interface in io.sphere.sdk.reviews.queries">ReviewQuery</a>&gt;, <a href="../../../../../io/sphere/sdk/expansion/ReferenceExpansionSupport.html" title="interface in io.sphere.sdk.expansion">ReferenceExpansionSupport</a>&lt;<a href="../../../../../io/sphere/sdk/reviews/Review.html" title="interface in io.sphere.sdk.reviews">Review</a>&gt;, <a href="../../../../../io/sphere/sdk/queries/ResourceQuery.html" title="interface in io.sphere.sdk.queries">ResourceQuery</a>&lt;<a href="../../../../../io/sphere/sdk/reviews/Review.html" title="interface in io.sphere.sdk.reviews">Review</a>&gt;, <a href="../../../../../io/sphere/sdk/client/SphereRequest.html" title="interface in io.sphere.sdk.client">SphereRequest</a>&lt;<a href="../../../../../io/sphere/sdk/queries/PagedQueryResult.html" title="class in io.sphere.sdk.queries">PagedQueryResult</a>&lt;<a href="../../../../../io/sphere/sdk/reviews/Review.html" title="interface in io.sphere.sdk.reviews">Review</a>&gt;&gt;</dd>
 </dl>
 <hr>
 <br>
 <pre>public interface <span class="typeNameLabel">ReviewQuery</span>
 extends <a href="../../../../../io/sphere/sdk/queries/MetaModelQueryDsl.html" title="interface in io.sphere.sdk.queries">MetaModelQueryDsl</a>&lt;<a href="../../../../../io/sphere/sdk/reviews/Review.html" title="interface in io.sphere.sdk.reviews">Review</a>,<a href="../../../../../io/sphere/sdk/reviews/queries/ReviewQuery.html" title="interface in io.sphere.sdk.reviews.queries">ReviewQuery</a>,<a href="../../../../../io/sphere/sdk/reviews/queries/ReviewQueryModel.html" title="class in io.sphere.sdk.reviews.queries">ReviewQueryModel</a>,<a href="../../../../../io/sphere/sdk/reviews/expansion/ReviewExpansionModel.html" title="class in io.sphere.sdk.reviews.expansion">ReviewExpansionModel</a>&lt;<a href="../../../../../io/sphere/sdk/reviews/Review.html" title="interface in io.sphere.sdk.reviews">Review</a>&gt;&gt;</pre>
 <div class="block">Provides a QueryDsl for  reviews to formulate predicates, search expressions and reference expansion path expressions. <p>For further information how to use the query API to consult the <a href='../../../../../io/sphere/sdk/meta/QueryDocumentation.html'>Query API documentation</a>.</p></div>
+<dl>
+<dt><span class="seeLabel">See Also:</span></dt>
+<dd><a href="../../../../../io/sphere/sdk/reviews/Review.html" title="interface in io.sphere.sdk.reviews"><code>Review</code></a></dd>
+</dl>
 </li>
 </ul>
 </div>
@@ -135,20 +139,16 @@ extends <a href="../../../../../io/sphere/sdk/queries/MetaModelQueryDsl.html" ti
 </a>
 <h3>Method Summary</h3>
 <table class="memberSummary" border="0" cellpadding="3" cellspacing="0" summary="Method Summary table, listing methods, and an explanation">
-<caption><span id="t0" class="activeTableTab"><span>All Methods</span><span class="tabEnd">&nbsp;</span></span><span id="t1" class="tableTab"><span><a href="javascript:show(1);">Static Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t2" class="tableTab"><span><a href="javascript:show(2);">Instance Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t5" class="tableTab"><span><a href="javascript:show(16);">Default Methods</a></span><span class="tabEnd">&nbsp;</span></span></caption>
+<caption><span id="t0" class="activeTableTab"><span>All Methods</span><span class="tabEnd">&nbsp;</span></span><span id="t1" class="tableTab"><span><a href="javascript:show(1);">Static Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t5" class="tableTab"><span><a href="javascript:show(16);">Default Methods</a></span><span class="tabEnd">&nbsp;</span></span></caption>
 <tr>
 <th class="colFirst" scope="col">Modifier and Type</th>
 <th class="colLast" scope="col">Method and Description</th>
 </tr>
 <tr id="i0" class="altColor">
-<td class="colFirst"><code>default <a href="../../../../../io/sphere/sdk/reviews/queries/ReviewQuery.html" title="interface in io.sphere.sdk.reviews.queries">ReviewQuery</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/reviews/queries/ReviewQuery.html#byProductId-java.lang.String-">byProductId</a></span>(java.lang.String&nbsp;productId)</code>&nbsp;</td>
-</tr>
-<tr id="i1" class="rowColor">
 <td class="colFirst"><code>static <a href="../../../../../io/sphere/sdk/reviews/queries/ReviewQuery.html" title="interface in io.sphere.sdk.reviews.queries">ReviewQuery</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/reviews/queries/ReviewQuery.html#of--">of</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i2" class="altColor">
+<tr id="i1" class="rowColor">
 <td class="colFirst"><code>static com.fasterxml.jackson.core.type.TypeReference&lt;<a href="../../../../../io/sphere/sdk/queries/PagedQueryResult.html" title="class in io.sphere.sdk.queries">PagedQueryResult</a>&lt;<a href="../../../../../io/sphere/sdk/reviews/Review.html" title="interface in io.sphere.sdk.reviews">Review</a>&gt;&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/reviews/queries/ReviewQuery.html#resultTypeReference--">resultTypeReference</a></span>()</code>&nbsp;</td>
 </tr>
@@ -158,14 +158,14 @@ extends <a href="../../../../../io/sphere/sdk/queries/MetaModelQueryDsl.html" ti
 <!--   -->
 </a>
 <h3>Methods inherited from interface&nbsp;io.sphere.sdk.queries.<a href="../../../../../io/sphere/sdk/queries/MetaModelQueryDsl.html" title="interface in io.sphere.sdk.queries">MetaModelQueryDsl</a></h3>
-<code><a href="../../../../../io/sphere/sdk/queries/MetaModelQueryDsl.html#plusExpansionPaths-java.util.function.Function-">plusExpansionPaths</a>, <a href="../../../../../io/sphere/sdk/queries/MetaModelQueryDsl.html#plusPredicates-java.util.function.Function-">plusPredicates</a>, <a href="../../../../../io/sphere/sdk/queries/MetaModelQueryDsl.html#plusPredicates-java.util.List-">plusPredicates</a>, <a href="../../../../../io/sphere/sdk/queries/MetaModelQueryDsl.html#plusPredicates-io.sphere.sdk.queries.QueryPredicate-">plusPredicates</a>, <a href="../../../../../io/sphere/sdk/queries/MetaModelQueryDsl.html#plusSort-java.util.function.Function-">plusSort</a>, <a href="../../../../../io/sphere/sdk/queries/MetaModelQueryDsl.html#plusSort-java.util.List-">plusSort</a>, <a href="../../../../../io/sphere/sdk/queries/MetaModelQueryDsl.html#plusSort-io.sphere.sdk.queries.QuerySort-">plusSort</a>, <a href="../../../../../io/sphere/sdk/queries/MetaModelQueryDsl.html#withExpansionPaths-java.util.function.Function-">withExpansionPaths</a>, <a href="../../../../../io/sphere/sdk/queries/MetaModelQueryDsl.html#withLimit-java.lang.Long-">withLimit</a>, <a href="../../../../../io/sphere/sdk/queries/MetaModelQueryDsl.html#withOffset-java.lang.Long-">withOffset</a>, <a href="../../../../../io/sphere/sdk/queries/MetaModelQueryDsl.html#withPredicates-java.util.function.Function-">withPredicates</a>, <a href="../../../../../io/sphere/sdk/queries/MetaModelQueryDsl.html#withPredicates-java.util.List-">withPredicates</a>, <a href="../../../../../io/sphere/sdk/queries/MetaModelQueryDsl.html#withPredicates-io.sphere.sdk.queries.QueryPredicate-">withPredicates</a>, <a href="../../../../../io/sphere/sdk/queries/MetaModelQueryDsl.html#withSort-java.util.function.Function-">withSort</a>, <a href="../../../../../io/sphere/sdk/queries/MetaModelQueryDsl.html#withSort-java.util.List-">withSort</a>, <a href="../../../../../io/sphere/sdk/queries/MetaModelQueryDsl.html#withSort-io.sphere.sdk.queries.QuerySort-">withSort</a>, <a href="../../../../../io/sphere/sdk/queries/MetaModelQueryDsl.html#withSortMulti-java.util.function.Function-">withSortMulti</a></code></li>
+<code><a href="../../../../../io/sphere/sdk/queries/MetaModelQueryDsl.html#plusPredicates-java.util.function.Function-">plusPredicates</a>, <a href="../../../../../io/sphere/sdk/queries/MetaModelQueryDsl.html#plusPredicates-java.util.List-">plusPredicates</a>, <a href="../../../../../io/sphere/sdk/queries/MetaModelQueryDsl.html#plusPredicates-io.sphere.sdk.queries.QueryPredicate-">plusPredicates</a>, <a href="../../../../../io/sphere/sdk/queries/MetaModelQueryDsl.html#plusSort-java.util.function.Function-">plusSort</a>, <a href="../../../../../io/sphere/sdk/queries/MetaModelQueryDsl.html#plusSort-java.util.List-">plusSort</a>, <a href="../../../../../io/sphere/sdk/queries/MetaModelQueryDsl.html#plusSort-io.sphere.sdk.queries.QuerySort-">plusSort</a>, <a href="../../../../../io/sphere/sdk/queries/MetaModelQueryDsl.html#withPredicates-java.util.function.Function-">withPredicates</a>, <a href="../../../../../io/sphere/sdk/queries/MetaModelQueryDsl.html#withPredicates-java.util.List-">withPredicates</a>, <a href="../../../../../io/sphere/sdk/queries/MetaModelQueryDsl.html#withPredicates-io.sphere.sdk.queries.QueryPredicate-">withPredicates</a>, <a href="../../../../../io/sphere/sdk/queries/MetaModelQueryDsl.html#withSort-java.util.function.Function-">withSort</a>, <a href="../../../../../io/sphere/sdk/queries/MetaModelQueryDsl.html#withSort-java.util.List-">withSort</a>, <a href="../../../../../io/sphere/sdk/queries/MetaModelQueryDsl.html#withSort-io.sphere.sdk.queries.QuerySort-">withSort</a>, <a href="../../../../../io/sphere/sdk/queries/MetaModelQueryDsl.html#withSortMulti-java.util.function.Function-">withSortMulti</a></code></li>
 </ul>
 <ul class="blockList">
 <li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.queries.QueryDsl">
 <!--   -->
 </a>
 <h3>Methods inherited from interface&nbsp;io.sphere.sdk.queries.<a href="../../../../../io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries">QueryDsl</a></h3>
-<code><a href="../../../../../io/sphere/sdk/queries/QueryDsl.html#withFetchTotal-boolean-">withFetchTotal</a>, <a href="../../../../../io/sphere/sdk/queries/QueryDsl.html#withLimit-long-">withLimit</a>, <a href="../../../../../io/sphere/sdk/queries/QueryDsl.html#withOffset-long-">withOffset</a></code></li>
+<code><a href="../../../../../io/sphere/sdk/queries/QueryDsl.html#withFetchTotal-boolean-">withFetchTotal</a>, <a href="../../../../../io/sphere/sdk/queries/QueryDsl.html#withLimit-long-">withLimit</a>, <a href="../../../../../io/sphere/sdk/queries/QueryDsl.html#withLimit-java.lang.Long-">withLimit</a>, <a href="../../../../../io/sphere/sdk/queries/QueryDsl.html#withOffset-long-">withOffset</a>, <a href="../../../../../io/sphere/sdk/queries/QueryDsl.html#withOffset-java.lang.Long-">withOffset</a></code></li>
 </ul>
 <ul class="blockList">
 <li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.queries.ResourceQuery">
@@ -189,11 +189,18 @@ extends <a href="../../../../../io/sphere/sdk/queries/MetaModelQueryDsl.html" ti
 <code><a href="../../../../../io/sphere/sdk/client/SphereRequest.html#canDeserialize-io.sphere.sdk.http.HttpResponse-">canDeserialize</a>, <a href="../../../../../io/sphere/sdk/client/SphereRequest.html#httpRequestIntent--">httpRequestIntent</a></code></li>
 </ul>
 <ul class="blockList">
+<li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.expansion.MetaModelExpansionDsl">
+<!--   -->
+</a>
+<h3>Methods inherited from interface&nbsp;io.sphere.sdk.expansion.<a href="../../../../../io/sphere/sdk/expansion/MetaModelExpansionDsl.html" title="interface in io.sphere.sdk.expansion">MetaModelExpansionDsl</a></h3>
+<code><a href="../../../../../io/sphere/sdk/expansion/MetaModelExpansionDsl.html#plusExpansionPaths-java.util.function.Function-">plusExpansionPaths</a>, <a href="../../../../../io/sphere/sdk/expansion/MetaModelExpansionDsl.html#withExpansionPaths-java.util.function.Function-">withExpansionPaths</a></code></li>
+</ul>
+<ul class="blockList">
 <li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.expansion.ReferenceExpansionDsl">
 <!--   -->
 </a>
 <h3>Methods inherited from interface&nbsp;io.sphere.sdk.expansion.<a href="../../../../../io/sphere/sdk/expansion/ReferenceExpansionDsl.html" title="interface in io.sphere.sdk.expansion">ReferenceExpansionDsl</a></h3>
-<code><a href="../../../../../io/sphere/sdk/expansion/ReferenceExpansionDsl.html#plusExpansionPaths-io.sphere.sdk.expansion.ExpansionPath-">plusExpansionPaths</a>, <a href="../../../../../io/sphere/sdk/expansion/ReferenceExpansionDsl.html#plusExpansionPaths-java.util.List-">plusExpansionPaths</a>, <a href="../../../../../io/sphere/sdk/expansion/ReferenceExpansionDsl.html#withExpansionPaths-io.sphere.sdk.expansion.ExpansionPath-">withExpansionPaths</a>, <a href="../../../../../io/sphere/sdk/expansion/ReferenceExpansionDsl.html#withExpansionPaths-java.util.List-">withExpansionPaths</a></code></li>
+<code><a href="../../../../../io/sphere/sdk/expansion/ReferenceExpansionDsl.html#plusExpansionPaths-io.sphere.sdk.expansion.ExpansionPath-">plusExpansionPaths</a>, <a href="../../../../../io/sphere/sdk/expansion/ReferenceExpansionDsl.html#plusExpansionPaths-io.sphere.sdk.expansion.ExpansionPathContainer-">plusExpansionPaths</a>, <a href="../../../../../io/sphere/sdk/expansion/ReferenceExpansionDsl.html#plusExpansionPaths-java.util.List-">plusExpansionPaths</a>, <a href="../../../../../io/sphere/sdk/expansion/ReferenceExpansionDsl.html#withExpansionPaths-io.sphere.sdk.expansion.ExpansionPath-">withExpansionPaths</a>, <a href="../../../../../io/sphere/sdk/expansion/ReferenceExpansionDsl.html#withExpansionPaths-io.sphere.sdk.expansion.ExpansionPathContainer-">withExpansionPaths</a>, <a href="../../../../../io/sphere/sdk/expansion/ReferenceExpansionDsl.html#withExpansionPaths-java.util.List-">withExpansionPaths</a></code></li>
 </ul>
 </li>
 </ul>
@@ -216,15 +223,6 @@ extends <a href="../../../../../io/sphere/sdk/queries/MetaModelQueryDsl.html" ti
 <li class="blockList">
 <h4>resultTypeReference</h4>
 <pre>static&nbsp;com.fasterxml.jackson.core.type.TypeReference&lt;<a href="../../../../../io/sphere/sdk/queries/PagedQueryResult.html" title="class in io.sphere.sdk.queries">PagedQueryResult</a>&lt;<a href="../../../../../io/sphere/sdk/reviews/Review.html" title="interface in io.sphere.sdk.reviews">Review</a>&gt;&gt;&nbsp;resultTypeReference()</pre>
-</li>
-</ul>
-<a name="byProductId-java.lang.String-">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>byProductId</h4>
-<pre>default&nbsp;<a href="../../../../../io/sphere/sdk/reviews/queries/ReviewQuery.html" title="interface in io.sphere.sdk.reviews.queries">ReviewQuery</a>&nbsp;byProductId(java.lang.String&nbsp;productId)</pre>
 </li>
 </ul>
 <a name="of--">
@@ -263,8 +261,8 @@ extends <a href="../../../../../io/sphere/sdk/queries/MetaModelQueryDsl.html" ti
 </div>
 <div class="subNav">
 <ul class="navList">
-<li>Prev&nbsp;Class</li>
-<li><a href="../../../../../io/sphere/sdk/reviews/queries/ReviewQueryModel.html" title="class in io.sphere.sdk.reviews.queries"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
+<li><a href="../../../../../io/sphere/sdk/reviews/queries/ReviewByKeyGet.html" title="interface in io.sphere.sdk.reviews.queries"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
+<li><a href="../../../../../io/sphere/sdk/reviews/queries/ReviewQueryBuilder.html" title="class in io.sphere.sdk.reviews.queries"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">
 <li><a href="../../../../../index.html?io/sphere/sdk/reviews/queries/ReviewQuery.html" target="_top">Frames</a></li>

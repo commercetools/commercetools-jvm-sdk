@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":17};
+var methods = {"i0":17,"i1":17};
 var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],16:["t5","Default Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -100,26 +100,12 @@ var activeTableTab = "activeTableTab";
 <li class="blockList">
 <dl>
 <dt>All Superinterfaces:</dt>
-<dd><a href="../../../../../io/sphere/sdk/commands/Command.html" title="interface in io.sphere.sdk.commands">Command</a>&lt;<a href="../../../../../io/sphere/sdk/reviews/Review.html" title="interface in io.sphere.sdk.reviews">Review</a>&gt;, <a href="../../../../../io/sphere/sdk/commands/DeleteCommand.html" title="interface in io.sphere.sdk.commands">DeleteCommand</a>&lt;<a href="../../../../../io/sphere/sdk/reviews/Review.html" title="interface in io.sphere.sdk.reviews">Review</a>&gt;, <a href="../../../../../io/sphere/sdk/expansion/MetaModelExpansionDsl.html" title="interface in io.sphere.sdk.expansion">MetaModelExpansionDsl</a>&lt;<a href="../../../../../io/sphere/sdk/reviews/Review.html" title="interface in io.sphere.sdk.reviews">Review</a>,<a href="../../../../../io/sphere/sdk/reviews/commands/ReviewDeleteCommand.html" title="interface in io.sphere.sdk.reviews.commands">ReviewDeleteCommand</a>,<a href="../../../../../io/sphere/sdk/reviews/expansion/ReviewExpansionModel.html" title="class in io.sphere.sdk.reviews.expansion">ReviewExpansionModel</a>&lt;<a href="../../../../../io/sphere/sdk/reviews/Review.html" title="interface in io.sphere.sdk.reviews">Review</a>&gt;&gt;, <a href="../../../../../io/sphere/sdk/expansion/ReferenceExpansionDsl.html" title="interface in io.sphere.sdk.expansion">ReferenceExpansionDsl</a>&lt;<a href="../../../../../io/sphere/sdk/reviews/Review.html" title="interface in io.sphere.sdk.reviews">Review</a>,<a href="../../../../../io/sphere/sdk/reviews/commands/ReviewDeleteCommand.html" title="interface in io.sphere.sdk.reviews.commands">ReviewDeleteCommand</a>&gt;, <a href="../../../../../io/sphere/sdk/expansion/ReferenceExpansionSupport.html" title="interface in io.sphere.sdk.expansion">ReferenceExpansionSupport</a>&lt;<a href="../../../../../io/sphere/sdk/reviews/Review.html" title="interface in io.sphere.sdk.reviews">Review</a>&gt;, <a href="../../../../../io/sphere/sdk/client/SphereRequest.html" title="interface in io.sphere.sdk.client">SphereRequest</a>&lt;<a href="../../../../../io/sphere/sdk/reviews/Review.html" title="interface in io.sphere.sdk.reviews">Review</a>&gt;</dd>
+<dd><a href="../../../../../io/sphere/sdk/commands/Command.html" title="interface in io.sphere.sdk.commands">Command</a>&lt;<a href="../../../../../io/sphere/sdk/reviews/Review.html" title="interface in io.sphere.sdk.reviews">Review</a>&gt;, <a href="../../../../../io/sphere/sdk/commands/DeleteCommand.html" title="interface in io.sphere.sdk.commands">DeleteCommand</a>&lt;<a href="../../../../../io/sphere/sdk/reviews/Review.html" title="interface in io.sphere.sdk.reviews">Review</a>&gt;, <a href="../../../../../io/sphere/sdk/expansion/ExpansionPathContainer.html" title="interface in io.sphere.sdk.expansion">ExpansionPathContainer</a>&lt;<a href="../../../../../io/sphere/sdk/reviews/Review.html" title="interface in io.sphere.sdk.reviews">Review</a>&gt;, <a href="../../../../../io/sphere/sdk/expansion/MetaModelExpansionDsl.html" title="interface in io.sphere.sdk.expansion">MetaModelExpansionDsl</a>&lt;<a href="../../../../../io/sphere/sdk/reviews/Review.html" title="interface in io.sphere.sdk.reviews">Review</a>,<a href="../../../../../io/sphere/sdk/reviews/commands/ReviewDeleteCommand.html" title="interface in io.sphere.sdk.reviews.commands">ReviewDeleteCommand</a>,<a href="../../../../../io/sphere/sdk/reviews/expansion/ReviewExpansionModel.html" title="class in io.sphere.sdk.reviews.expansion">ReviewExpansionModel</a>&lt;<a href="../../../../../io/sphere/sdk/reviews/Review.html" title="interface in io.sphere.sdk.reviews">Review</a>&gt;&gt;, <a href="../../../../../io/sphere/sdk/expansion/ReferenceExpansionDsl.html" title="interface in io.sphere.sdk.expansion">ReferenceExpansionDsl</a>&lt;<a href="../../../../../io/sphere/sdk/reviews/Review.html" title="interface in io.sphere.sdk.reviews">Review</a>,<a href="../../../../../io/sphere/sdk/reviews/commands/ReviewDeleteCommand.html" title="interface in io.sphere.sdk.reviews.commands">ReviewDeleteCommand</a>&gt;, <a href="../../../../../io/sphere/sdk/expansion/ReferenceExpansionSupport.html" title="interface in io.sphere.sdk.expansion">ReferenceExpansionSupport</a>&lt;<a href="../../../../../io/sphere/sdk/reviews/Review.html" title="interface in io.sphere.sdk.reviews">Review</a>&gt;, <a href="../../../../../io/sphere/sdk/client/SphereRequest.html" title="interface in io.sphere.sdk.client">SphereRequest</a>&lt;<a href="../../../../../io/sphere/sdk/reviews/Review.html" title="interface in io.sphere.sdk.reviews">Review</a>&gt;</dd>
 </dl>
 <hr>
 <br>
 <pre>public interface <span class="typeNameLabel">ReviewDeleteCommand</span>
 extends <a href="../../../../../io/sphere/sdk/expansion/MetaModelExpansionDsl.html" title="interface in io.sphere.sdk.expansion">MetaModelExpansionDsl</a>&lt;<a href="../../../../../io/sphere/sdk/reviews/Review.html" title="interface in io.sphere.sdk.reviews">Review</a>,<a href="../../../../../io/sphere/sdk/reviews/commands/ReviewDeleteCommand.html" title="interface in io.sphere.sdk.reviews.commands">ReviewDeleteCommand</a>,<a href="../../../../../io/sphere/sdk/reviews/expansion/ReviewExpansionModel.html" title="class in io.sphere.sdk.reviews.expansion">ReviewExpansionModel</a>&lt;<a href="../../../../../io/sphere/sdk/reviews/Review.html" title="interface in io.sphere.sdk.reviews">Review</a>&gt;&gt;, <a href="../../../../../io/sphere/sdk/commands/DeleteCommand.html" title="interface in io.sphere.sdk.commands">DeleteCommand</a>&lt;<a href="../../../../../io/sphere/sdk/reviews/Review.html" title="interface in io.sphere.sdk.reviews">Review</a>&gt;</pre>
-<div class="block">Deletes a review in SPHERE.IO.
-
- <div id="io-sphere-sdk-reviews-commands-ReviewDeleteCommandTest-execution--%s" class=code-example><pre><code class='java'>withProduct(client(), product -&gt;
-        withCustomer(client(), customer -&gt; {
-            final ReviewDraft reviewDraft = ReviewDraftBuilder.of(product, customer).score(0.5).build();
-            final Review review = execute(ReviewCreateCommand.of(reviewDraft));
-
-            execute(ReviewDeleteCommand.of(review));
-
-            PagedQueryResult&lt;Review&gt; result = execute(ReviewQuery.of().withPredicates(m -&gt; m.id().is(review.getId())));
-            assertThat(result.getTotal()).isEqualTo(0);
-        })
-);
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/reviews/commands/ReviewDeleteCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 </li>
 </ul>
 </div>
@@ -142,6 +128,11 @@ extends <a href="../../../../../io/sphere/sdk/expansion/MetaModelExpansionDsl.ht
 <td class="colFirst"><code>static <a href="../../../../../io/sphere/sdk/reviews/commands/ReviewDeleteCommand.html" title="interface in io.sphere.sdk.reviews.commands">ReviewDeleteCommand</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/reviews/commands/ReviewDeleteCommand.html#of-io.sphere.sdk.models.Versioned-">of</a></span>(<a href="../../../../../io/sphere/sdk/models/Versioned.html" title="interface in io.sphere.sdk.models">Versioned</a>&lt;<a href="../../../../../io/sphere/sdk/reviews/Review.html" title="interface in io.sphere.sdk.reviews">Review</a>&gt;&nbsp;versioned)</code>&nbsp;</td>
 </tr>
+<tr id="i1" class="rowColor">
+<td class="colFirst"><code>static <a href="../../../../../io/sphere/sdk/reviews/commands/ReviewDeleteCommand.html" title="interface in io.sphere.sdk.reviews.commands">ReviewDeleteCommand</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/reviews/commands/ReviewDeleteCommand.html#ofKey-java.lang.String-java.lang.Long-">ofKey</a></span>(java.lang.String&nbsp;key,
+     java.lang.Long&nbsp;version)</code>&nbsp;</td>
+</tr>
 </table>
 <ul class="blockList">
 <li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.expansion.MetaModelExpansionDsl">
@@ -155,7 +146,7 @@ extends <a href="../../../../../io/sphere/sdk/expansion/MetaModelExpansionDsl.ht
 <!--   -->
 </a>
 <h3>Methods inherited from interface&nbsp;io.sphere.sdk.expansion.<a href="../../../../../io/sphere/sdk/expansion/ReferenceExpansionDsl.html" title="interface in io.sphere.sdk.expansion">ReferenceExpansionDsl</a></h3>
-<code><a href="../../../../../io/sphere/sdk/expansion/ReferenceExpansionDsl.html#plusExpansionPaths-io.sphere.sdk.expansion.ExpansionPath-">plusExpansionPaths</a>, <a href="../../../../../io/sphere/sdk/expansion/ReferenceExpansionDsl.html#plusExpansionPaths-java.util.List-">plusExpansionPaths</a>, <a href="../../../../../io/sphere/sdk/expansion/ReferenceExpansionDsl.html#withExpansionPaths-io.sphere.sdk.expansion.ExpansionPath-">withExpansionPaths</a>, <a href="../../../../../io/sphere/sdk/expansion/ReferenceExpansionDsl.html#withExpansionPaths-java.util.List-">withExpansionPaths</a></code></li>
+<code><a href="../../../../../io/sphere/sdk/expansion/ReferenceExpansionDsl.html#plusExpansionPaths-io.sphere.sdk.expansion.ExpansionPath-">plusExpansionPaths</a>, <a href="../../../../../io/sphere/sdk/expansion/ReferenceExpansionDsl.html#plusExpansionPaths-io.sphere.sdk.expansion.ExpansionPathContainer-">plusExpansionPaths</a>, <a href="../../../../../io/sphere/sdk/expansion/ReferenceExpansionDsl.html#plusExpansionPaths-java.util.List-">plusExpansionPaths</a>, <a href="../../../../../io/sphere/sdk/expansion/ReferenceExpansionDsl.html#withExpansionPaths-io.sphere.sdk.expansion.ExpansionPath-">withExpansionPaths</a>, <a href="../../../../../io/sphere/sdk/expansion/ReferenceExpansionDsl.html#withExpansionPaths-io.sphere.sdk.expansion.ExpansionPathContainer-">withExpansionPaths</a>, <a href="../../../../../io/sphere/sdk/expansion/ReferenceExpansionDsl.html#withExpansionPaths-java.util.List-">withExpansionPaths</a></code></li>
 </ul>
 <ul class="blockList">
 <li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.expansion.ReferenceExpansionSupport">
@@ -188,10 +179,20 @@ extends <a href="../../../../../io/sphere/sdk/expansion/MetaModelExpansionDsl.ht
 <a name="of-io.sphere.sdk.models.Versioned-">
 <!--   -->
 </a>
-<ul class="blockListLast">
+<ul class="blockList">
 <li class="blockList">
 <h4>of</h4>
 <pre>static&nbsp;<a href="../../../../../io/sphere/sdk/reviews/commands/ReviewDeleteCommand.html" title="interface in io.sphere.sdk.reviews.commands">ReviewDeleteCommand</a>&nbsp;of(<a href="../../../../../io/sphere/sdk/models/Versioned.html" title="interface in io.sphere.sdk.models">Versioned</a>&lt;<a href="../../../../../io/sphere/sdk/reviews/Review.html" title="interface in io.sphere.sdk.reviews">Review</a>&gt;&nbsp;versioned)</pre>
+</li>
+</ul>
+<a name="ofKey-java.lang.String-java.lang.Long-">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>ofKey</h4>
+<pre>static&nbsp;<a href="../../../../../io/sphere/sdk/reviews/commands/ReviewDeleteCommand.html" title="interface in io.sphere.sdk.reviews.commands">ReviewDeleteCommand</a>&nbsp;ofKey(java.lang.String&nbsp;key,
+                                 java.lang.Long&nbsp;version)</pre>
 </li>
 </ul>
 </li>

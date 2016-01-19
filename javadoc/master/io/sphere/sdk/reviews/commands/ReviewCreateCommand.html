@@ -100,7 +100,7 @@ var activeTableTab = "activeTableTab";
 <li class="blockList">
 <dl>
 <dt>All Superinterfaces:</dt>
-<dd><a href="../../../../../io/sphere/sdk/commands/Command.html" title="interface in io.sphere.sdk.commands">Command</a>&lt;<a href="../../../../../io/sphere/sdk/reviews/Review.html" title="interface in io.sphere.sdk.reviews">Review</a>&gt;, <a href="../../../../../io/sphere/sdk/commands/CreateCommand.html" title="interface in io.sphere.sdk.commands">CreateCommand</a>&lt;<a href="../../../../../io/sphere/sdk/reviews/Review.html" title="interface in io.sphere.sdk.reviews">Review</a>&gt;, <a href="../../../../../io/sphere/sdk/expansion/MetaModelExpansionDsl.html" title="interface in io.sphere.sdk.expansion">MetaModelExpansionDsl</a>&lt;<a href="../../../../../io/sphere/sdk/reviews/Review.html" title="interface in io.sphere.sdk.reviews">Review</a>,<a href="../../../../../io/sphere/sdk/reviews/commands/ReviewCreateCommand.html" title="interface in io.sphere.sdk.reviews.commands">ReviewCreateCommand</a>,<a href="../../../../../io/sphere/sdk/reviews/expansion/ReviewExpansionModel.html" title="class in io.sphere.sdk.reviews.expansion">ReviewExpansionModel</a>&lt;<a href="../../../../../io/sphere/sdk/reviews/Review.html" title="interface in io.sphere.sdk.reviews">Review</a>&gt;&gt;, <a href="../../../../../io/sphere/sdk/expansion/ReferenceExpansionDsl.html" title="interface in io.sphere.sdk.expansion">ReferenceExpansionDsl</a>&lt;<a href="../../../../../io/sphere/sdk/reviews/Review.html" title="interface in io.sphere.sdk.reviews">Review</a>,<a href="../../../../../io/sphere/sdk/reviews/commands/ReviewCreateCommand.html" title="interface in io.sphere.sdk.reviews.commands">ReviewCreateCommand</a>&gt;, <a href="../../../../../io/sphere/sdk/expansion/ReferenceExpansionSupport.html" title="interface in io.sphere.sdk.expansion">ReferenceExpansionSupport</a>&lt;<a href="../../../../../io/sphere/sdk/reviews/Review.html" title="interface in io.sphere.sdk.reviews">Review</a>&gt;, <a href="../../../../../io/sphere/sdk/client/SphereRequest.html" title="interface in io.sphere.sdk.client">SphereRequest</a>&lt;<a href="../../../../../io/sphere/sdk/reviews/Review.html" title="interface in io.sphere.sdk.reviews">Review</a>&gt;</dd>
+<dd><a href="../../../../../io/sphere/sdk/commands/Command.html" title="interface in io.sphere.sdk.commands">Command</a>&lt;<a href="../../../../../io/sphere/sdk/reviews/Review.html" title="interface in io.sphere.sdk.reviews">Review</a>&gt;, <a href="../../../../../io/sphere/sdk/commands/CreateCommand.html" title="interface in io.sphere.sdk.commands">CreateCommand</a>&lt;<a href="../../../../../io/sphere/sdk/reviews/Review.html" title="interface in io.sphere.sdk.reviews">Review</a>&gt;, <a href="../../../../../io/sphere/sdk/expansion/ExpansionPathContainer.html" title="interface in io.sphere.sdk.expansion">ExpansionPathContainer</a>&lt;<a href="../../../../../io/sphere/sdk/reviews/Review.html" title="interface in io.sphere.sdk.reviews">Review</a>&gt;, <a href="../../../../../io/sphere/sdk/expansion/MetaModelExpansionDsl.html" title="interface in io.sphere.sdk.expansion">MetaModelExpansionDsl</a>&lt;<a href="../../../../../io/sphere/sdk/reviews/Review.html" title="interface in io.sphere.sdk.reviews">Review</a>,<a href="../../../../../io/sphere/sdk/reviews/commands/ReviewCreateCommand.html" title="interface in io.sphere.sdk.reviews.commands">ReviewCreateCommand</a>,<a href="../../../../../io/sphere/sdk/reviews/expansion/ReviewExpansionModel.html" title="class in io.sphere.sdk.reviews.expansion">ReviewExpansionModel</a>&lt;<a href="../../../../../io/sphere/sdk/reviews/Review.html" title="interface in io.sphere.sdk.reviews">Review</a>&gt;&gt;, <a href="../../../../../io/sphere/sdk/expansion/ReferenceExpansionDsl.html" title="interface in io.sphere.sdk.expansion">ReferenceExpansionDsl</a>&lt;<a href="../../../../../io/sphere/sdk/reviews/Review.html" title="interface in io.sphere.sdk.reviews">Review</a>,<a href="../../../../../io/sphere/sdk/reviews/commands/ReviewCreateCommand.html" title="interface in io.sphere.sdk.reviews.commands">ReviewCreateCommand</a>&gt;, <a href="../../../../../io/sphere/sdk/expansion/ReferenceExpansionSupport.html" title="interface in io.sphere.sdk.expansion">ReferenceExpansionSupport</a>&lt;<a href="../../../../../io/sphere/sdk/reviews/Review.html" title="interface in io.sphere.sdk.reviews">Review</a>&gt;, <a href="../../../../../io/sphere/sdk/client/SphereRequest.html" title="interface in io.sphere.sdk.client">SphereRequest</a>&lt;<a href="../../../../../io/sphere/sdk/reviews/Review.html" title="interface in io.sphere.sdk.reviews">Review</a>&gt;</dd>
 </dl>
 <hr>
 <br>
@@ -108,25 +108,72 @@ var activeTableTab = "activeTableTab";
 extends <a href="../../../../../io/sphere/sdk/commands/CreateCommand.html" title="interface in io.sphere.sdk.commands">CreateCommand</a>&lt;<a href="../../../../../io/sphere/sdk/reviews/Review.html" title="interface in io.sphere.sdk.reviews">Review</a>&gt;, <a href="../../../../../io/sphere/sdk/expansion/MetaModelExpansionDsl.html" title="interface in io.sphere.sdk.expansion">MetaModelExpansionDsl</a>&lt;<a href="../../../../../io/sphere/sdk/reviews/Review.html" title="interface in io.sphere.sdk.reviews">Review</a>,<a href="../../../../../io/sphere/sdk/reviews/commands/ReviewCreateCommand.html" title="interface in io.sphere.sdk.reviews.commands">ReviewCreateCommand</a>,<a href="../../../../../io/sphere/sdk/reviews/expansion/ReviewExpansionModel.html" title="class in io.sphere.sdk.reviews.expansion">ReviewExpansionModel</a>&lt;<a href="../../../../../io/sphere/sdk/reviews/Review.html" title="interface in io.sphere.sdk.reviews">Review</a>&gt;&gt;</pre>
 <div class="block">Creates a review.
 
- <div id="io-sphere-sdk-reviews-commands-ReviewCreateCommandTest-execution--%s" class=code-example><pre><code class='java'>withProduct(client(), product -&gt;
-    withCustomer(client(), customer -&gt; {
-        final ReviewDraft reviewDraft = ReviewDraftBuilder.of(product, customer)
-                .authorName("John Smith")
-                .title("It is ok")
-                .text("This product is ok.")
-                .score(0.36)
-                .build();
-        final Review review = execute(ReviewCreateCommand.of(reviewDraft));
-        assertThat(review.getAuthorName()).contains("John Smith");
-        assertThat(review.getTitle()).contains("It is ok");
-        assertThat(review.getText()).contains("This product is ok.");
-        assertThat(review.getScore()).isEqualTo(0.36, within(0.1));
-    })
-);
+ <p>Example:</p>
+ <div id="io-sphere-sdk-reviews-commands-ReviewCreateCommandTest-createByCode--%s" class=code-example><pre><code class='java'>withType(client(), (Type type) -&gt; {
+    withCustomer(client(), (Customer customer) -&gt; {
+        withProduct(client(), (Product product) -&gt; {
+            withState(client(), StateDraft.of("initial-review-state", StateType.REVIEW_STATE), (State state) -&gt; {
+                final CustomFieldsDraft extraFields = CustomFieldsDraft.ofTypeKeyAndObjects(type.getKey(),
+                        singletonMap("screenshotUrls",
+                                Collections.singleton("http://www.commercetools.com/assets/img/CT-logo.svg")));
+                final ReviewDraft reviewDraft = ReviewDraftBuilder.ofTitle("Commercetools rocks")
+                        .authorName("John Smith")
+                        .text("It is great.")
+                        .rating(100)
+                        .custom(extraFields)
+                        .customer(customer)
+                        .key("review1")
+                        //only allow one review for a product from one customer
+                        .uniquenessValue(product.getId() + "+" + customer.getId())
+                        .locale(Locale.ENGLISH)
+                        .state(state)
+                        .target(product)
+                        .build();
+
+                final Review review = client().executeBlocking(ReviewCreateCommand.of(reviewDraft));
+
+                assertThat(review.getAuthorName()).isEqualTo("John Smith");
+                assertThat(review.getCustom().getFieldAsStringSet("screenshotUrls"))
+                        .containsExactly("http://www.commercetools.com/assets/img/CT-logo.svg");
+                assertThat(review.getCustomer()).isEqualTo(customer.toReference());
+                assertThat(review.getKey()).isEqualTo("review1");
+                assertThat(review.getUniquenessValue()).isEqualTo(product.getId() + "+" + customer.getId());
+                assertThat(review.getLocale()).isEqualTo(Locale.ENGLISH);
+                assertThat(review.getAuthorName()).isEqualTo("John Smith");
+                assertThat(review.getTitle()).isEqualTo("Commercetools rocks");
+                assertThat(review.getText()).isEqualTo("It is great.");
+                assertThat(review.getTarget()).isEqualTo(product.toReference());
+                assertThat(review.getRating()).isEqualTo(100);
+                assertThat(review.getState()).isEqualTo(state.toReference());
+                assertThat(review.getCustomer()).isEqualTo(customer.toReference());
+
+                final ProductProjection productProjection = client().executeBlocking(ProductProjectionByIdGet.ofStaged(product));
+                assertThat(productProjection.getReviewRatingStatistics()).
+                        as("the state has not the role ReviewIncludedInStatistics, so it is not accounted yet")
+                        .isNull();
+
+                //you can observe a message
+                assertEventually(() -&gt; {
+                    final PagedQueryResult&lt;ReviewCreatedMessage&gt; pagedQueryResult = client().executeBlocking(MessageQuery.of()
+                            .withPredicates(m -&gt; m.resource().is(review))
+                            .forMessageType(ReviewCreatedMessage.MESSAGE_HINT));
+
+                    final ReviewCreatedMessage paymentCreatedMessage = pagedQueryResult.head().get();
+                    assertThat(paymentCreatedMessage.getReview().getId()).isEqualTo(review.getId());
+                    assertThat(paymentCreatedMessage.getResource().getId()).isEqualTo(review.getId());
+                });
+
+                client().executeBlocking(ReviewDeleteCommand.of(review));
+            });
+        });
+    });
+});
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/reviews/commands/ReviewCreateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 <dl>
 <dt><span class="seeLabel">See Also:</span></dt>
-<dd><a href="../../../../../io/sphere/sdk/reviews/ReviewDraftBuilder.html" title="class in io.sphere.sdk.reviews"><code>ReviewDraftBuilder</code></a></dd>
+<dd><a href="../../../../../io/sphere/sdk/reviews/ReviewDraftBuilder.html" title="class in io.sphere.sdk.reviews"><code>ReviewDraftBuilder</code></a>, 
+<a href="../../../../../io/sphere/sdk/reviews/ReviewDraft.html" title="interface in io.sphere.sdk.reviews"><code>ReviewDraft</code></a>, 
+<a href="../../../../../io/sphere/sdk/reviews/Review.html" title="interface in io.sphere.sdk.reviews"><code>Review</code></a></dd>
 </dl>
 </li>
 </ul>
@@ -148,7 +195,7 @@ extends <a href="../../../../../io/sphere/sdk/commands/CreateCommand.html" title
 </tr>
 <tr id="i0" class="altColor">
 <td class="colFirst"><code>static <a href="../../../../../io/sphere/sdk/reviews/commands/ReviewCreateCommand.html" title="interface in io.sphere.sdk.reviews.commands">ReviewCreateCommand</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/reviews/commands/ReviewCreateCommand.html#of-io.sphere.sdk.reviews.ReviewDraft-">of</a></span>(<a href="../../../../../io/sphere/sdk/reviews/ReviewDraft.html" title="class in io.sphere.sdk.reviews">ReviewDraft</a>&nbsp;draft)</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/reviews/commands/ReviewCreateCommand.html#of-io.sphere.sdk.reviews.ReviewDraft-">of</a></span>(<a href="../../../../../io/sphere/sdk/reviews/ReviewDraft.html" title="interface in io.sphere.sdk.reviews">ReviewDraft</a>&nbsp;draft)</code>&nbsp;</td>
 </tr>
 </table>
 <ul class="blockList">
@@ -170,7 +217,7 @@ extends <a href="../../../../../io/sphere/sdk/commands/CreateCommand.html" title
 <!--   -->
 </a>
 <h3>Methods inherited from interface&nbsp;io.sphere.sdk.expansion.<a href="../../../../../io/sphere/sdk/expansion/ReferenceExpansionDsl.html" title="interface in io.sphere.sdk.expansion">ReferenceExpansionDsl</a></h3>
-<code><a href="../../../../../io/sphere/sdk/expansion/ReferenceExpansionDsl.html#plusExpansionPaths-io.sphere.sdk.expansion.ExpansionPath-">plusExpansionPaths</a>, <a href="../../../../../io/sphere/sdk/expansion/ReferenceExpansionDsl.html#plusExpansionPaths-java.util.List-">plusExpansionPaths</a>, <a href="../../../../../io/sphere/sdk/expansion/ReferenceExpansionDsl.html#withExpansionPaths-io.sphere.sdk.expansion.ExpansionPath-">withExpansionPaths</a>, <a href="../../../../../io/sphere/sdk/expansion/ReferenceExpansionDsl.html#withExpansionPaths-java.util.List-">withExpansionPaths</a></code></li>
+<code><a href="../../../../../io/sphere/sdk/expansion/ReferenceExpansionDsl.html#plusExpansionPaths-io.sphere.sdk.expansion.ExpansionPath-">plusExpansionPaths</a>, <a href="../../../../../io/sphere/sdk/expansion/ReferenceExpansionDsl.html#plusExpansionPaths-io.sphere.sdk.expansion.ExpansionPathContainer-">plusExpansionPaths</a>, <a href="../../../../../io/sphere/sdk/expansion/ReferenceExpansionDsl.html#plusExpansionPaths-java.util.List-">plusExpansionPaths</a>, <a href="../../../../../io/sphere/sdk/expansion/ReferenceExpansionDsl.html#withExpansionPaths-io.sphere.sdk.expansion.ExpansionPath-">withExpansionPaths</a>, <a href="../../../../../io/sphere/sdk/expansion/ReferenceExpansionDsl.html#withExpansionPaths-io.sphere.sdk.expansion.ExpansionPathContainer-">withExpansionPaths</a>, <a href="../../../../../io/sphere/sdk/expansion/ReferenceExpansionDsl.html#withExpansionPaths-java.util.List-">withExpansionPaths</a></code></li>
 </ul>
 <ul class="blockList">
 <li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.expansion.ReferenceExpansionSupport">
@@ -199,7 +246,7 @@ extends <a href="../../../../../io/sphere/sdk/commands/CreateCommand.html" title
 <ul class="blockListLast">
 <li class="blockList">
 <h4>of</h4>
-<pre>static&nbsp;<a href="../../../../../io/sphere/sdk/reviews/commands/ReviewCreateCommand.html" title="interface in io.sphere.sdk.reviews.commands">ReviewCreateCommand</a>&nbsp;of(<a href="../../../../../io/sphere/sdk/reviews/ReviewDraft.html" title="class in io.sphere.sdk.reviews">ReviewDraft</a>&nbsp;draft)</pre>
+<pre>static&nbsp;<a href="../../../../../io/sphere/sdk/reviews/commands/ReviewCreateCommand.html" title="interface in io.sphere.sdk.reviews.commands">ReviewCreateCommand</a>&nbsp;of(<a href="../../../../../io/sphere/sdk/reviews/ReviewDraft.html" title="interface in io.sphere.sdk.reviews">ReviewDraft</a>&nbsp;draft)</pre>
 </li>
 </ul>
 </li>

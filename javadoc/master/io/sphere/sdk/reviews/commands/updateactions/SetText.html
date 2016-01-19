@@ -48,7 +48,7 @@ var activeTableTab = "activeTableTab";
 </div>
 <div class="subNav">
 <ul class="navList">
-<li><a href="../../../../../../io/sphere/sdk/reviews/commands/updateactions/SetScore.html" title="class in io.sphere.sdk.reviews.commands.updateactions"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
+<li><a href="../../../../../../io/sphere/sdk/reviews/commands/updateactions/SetTarget.html" title="class in io.sphere.sdk.reviews.commands.updateactions"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
 <li><a href="../../../../../../io/sphere/sdk/reviews/commands/updateactions/SetTitle.html" title="class in io.sphere.sdk.reviews.commands.updateactions"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">
@@ -124,16 +124,14 @@ var activeTableTab = "activeTableTab";
 <br>
 <pre>public class <span class="typeNameLabel">SetText</span>
 extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html" title="class in io.sphere.sdk.commands">UpdateActionImpl</a>&lt;<a href="../../../../../../io/sphere/sdk/reviews/Review.html" title="interface in io.sphere.sdk.reviews">Review</a>&gt;</pre>
-<div class="block">Updates the text of a review.
+<div class="block">Sets/unsets the content of a review.
 
- <p>See also <a href="../ReviewUpdateCommand.html">ReviewUpdateCommand</a>.<p>
+ <div id="io-sphere-sdk-reviews-commands-ReviewUpdateCommandTest-setText--%s" class=code-example><pre><code class='java'>withUpdateableReview(client(), (Review review) -&gt; {
+    final String text = randomKey();
+    final Review updatedReview =
+            client().executeBlocking(ReviewUpdateCommand.of(review, SetText.of(text)));
 
- <div id="io-sphere-sdk-reviews-commands-ReviewUpdateCommandTest-setText--%s" class=code-example><pre><code class='java'>withUpdateableReview(client(), review -&gt; {
-    final String newText = randomString();
-    assertThat(review.getTitle()).isNotEqualTo(newText);
-
-    final Review updatedReview = execute(ReviewUpdateCommand.of(review, SetText.of(newText)));
-    assertThat(updatedReview.getText()).contains(newText);
+    assertThat(updatedReview.getText()).isEqualTo(text);
 
     return updatedReview;
 });
@@ -247,7 +245,7 @@ public&nbsp;java.lang.String&nbsp;getText()</pre>
 </div>
 <div class="subNav">
 <ul class="navList">
-<li><a href="../../../../../../io/sphere/sdk/reviews/commands/updateactions/SetScore.html" title="class in io.sphere.sdk.reviews.commands.updateactions"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
+<li><a href="../../../../../../io/sphere/sdk/reviews/commands/updateactions/SetTarget.html" title="class in io.sphere.sdk.reviews.commands.updateactions"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
 <li><a href="../../../../../../io/sphere/sdk/reviews/commands/updateactions/SetTitle.html" title="class in io.sphere.sdk.reviews.commands.updateactions"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">

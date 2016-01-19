@@ -43,7 +43,7 @@
 <div class="subNav">
 <ul class="navList">
 <li><a href="../../../../io/sphere/sdk/meta/ProductAttributeDocumentation.html" title="class in io.sphere.sdk.meta"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
-<li><a href="../../../../io/sphere/sdk/meta/ReleaseNotes.html" title="class in io.sphere.sdk.meta"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
+<li><a href="../../../../io/sphere/sdk/meta/ReferenceExpansionDocumentation.html" title="class in io.sphere.sdk.meta"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">
 <li><a href="../../../../index.html?io/sphere/sdk/meta/QueryDocumentation.html" target="_top">Frames</a></li>
@@ -471,47 +471,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
  <h3 id=reference-expansion>Reference expansion</h3>
 
- Reference expansion is a feature of certain query endpoints that enables clients to request
- server-side expansion of Reference resources, thereby reducing the number of required
- client-server roundtrips to obtain the data that a client needs for a specific use-case.
- A query endpoint that supports reference expansion does so by providing an expand query
- parameter which can be used to specifiy one or more expansion paths.
-
- <p>For example, <a href="../../../../io/sphere/sdk/products/Product.html" title="interface in io.sphere.sdk.products"><code>Product</code></a> contains a member
- <code>ProductLike.getProductType()</code>, which has a reference to a <a href="../../../../io/sphere/sdk/producttypes/ProductType.html" title="interface in io.sphere.sdk.producttypes"><code>ProductType</code></a>.
-
- By default, the field <a href="../../../../io/sphere/sdk/models/Reference.html#getObj--"><code>Reference.getObj()</code></a> will return an absent optional.
- If you specify an expansion path with <a href="../../../../io/sphere/sdk/expansion/ReferenceExpansionDsl.html#withExpansionPaths-java.util.List-"><code>ReferenceExpansionDsl.withExpansionPaths(java.util.List)</code></a>
- it is possible that the product type will be filled so that you can work with it.
- </p>
-
- Reference expansion is a feature without any guarantees. So, if you provide a malformatted
- reference expansion path, the platform will not inform you about the problem; but just fullfills the query. Even if the
- expansion path is correct, it is possible that it will not be expanded. This can happen, for example,
- if too many resources are expanded at the same time.
-
- <p>To prevent you from constructing invalid paths, some resources provide methods to generate valid paths.</p>
-
- If you want to expand the product type of a product you can query like this:
-
- <div id="io-sphere-sdk-meta-QueryDocumentationTest-expandProductTypeForProduct--%s" class=code-example><pre><code class='java'>final ProductQuery query = ProductQuery.of()
-        .withExpansionPaths(ProductExpansionModel.of().productType());
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/src/test/java/io/sphere/sdk/meta/QueryDocumentationTest.java" target="_blank">test code</a>.</pre></div>
-
- Expansion paths are not limited to the next element; for example, you can expand the
- categories for a product projection plus you can expand the parent category of the category you have expanded before:
-
- <div id="io-sphere-sdk-meta-QueryDocumentationTest-expandCategoryAndCategoryParentForProduct--%s" class=code-example><pre><code class='java'>final ProductProjectionQuery query = ProductProjectionQuery.of(STAGED)
-        .withExpansionPaths(m -&gt; m.categories().parent());
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/src/test/java/io/sphere/sdk/meta/QueryDocumentationTest.java" target="_blank">test code</a>.</pre></div>
-
- If the SDK does not provide a type-safe way to construct a reference path, you can create it by string:
-
- <div id="io-sphere-sdk-meta-QueryDocumentationTest-createExpansionPathByString--%s" class=code-example><pre><code class='java'>final ExpansionPath&lt;ProductProjection&gt; safePath =
-        ProductProjectionExpansionModel.of().categories().parent().expansionPaths().get(0);
-final ExpansionPath&lt;ProductProjection&gt; unsafePath = ExpansionPath.of("categories[*].parent");
-assertThat(safePath).isEqualTo(unsafePath);
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/src/test/java/io/sphere/sdk/meta/QueryDocumentationTest.java" target="_blank">test code</a>.</pre></div></div>
+ <a href="../../../../io/sphere/sdk/meta/ReferenceExpansionDocumentation.html" title="class in io.sphere.sdk.meta"><code>The documentation for reference expansion have been moved to ReferenceExpansionDocumentation</code></a> since was also enabled for search and commands.</div>
 </li>
 </ul>
 </div>
@@ -566,7 +526,7 @@ assertThat(safePath).isEqualTo(unsafePath);
 <div class="subNav">
 <ul class="navList">
 <li><a href="../../../../io/sphere/sdk/meta/ProductAttributeDocumentation.html" title="class in io.sphere.sdk.meta"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
-<li><a href="../../../../io/sphere/sdk/meta/ReleaseNotes.html" title="class in io.sphere.sdk.meta"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
+<li><a href="../../../../io/sphere/sdk/meta/ReferenceExpansionDocumentation.html" title="class in io.sphere.sdk.meta"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">
 <li><a href="../../../../index.html?io/sphere/sdk/meta/QueryDocumentation.html" target="_top">Frames</a></li>

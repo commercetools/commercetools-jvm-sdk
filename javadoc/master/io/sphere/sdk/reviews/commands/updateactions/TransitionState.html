@@ -129,30 +129,41 @@ var activeTableTab = "activeTableTab";
 <br>
 <pre>public class <span class="typeNameLabel">TransitionState</span>
 extends <a href="../../../../../../io/sphere/sdk/states/relatedupdateactions/TransitionStateBase.html" title="class in io.sphere.sdk.states.relatedupdateactions">TransitionStateBase</a>&lt;<a href="../../../../../../io/sphere/sdk/reviews/Review.html" title="interface in io.sphere.sdk.reviews">Review</a>&gt;</pre>
-<div class="block">Transition to a new state. If there is no state yet, the new state must be an initial state. If the existing state has transitions set, there must be a direct transition to the new state. If transitions is not set, no validation is performed.
+<div class="block">Transition to a new state. If there is no state yet, the new state must be an initial state.
+ If the existing state has transitions set, there must be a direct transition to the new state.
+ If transitions is not set, no validation is performed.
 
- <div id="io-sphere-sdk-reviews-commands-ReviewUpdateCommandTest-transitionState--%s" class=code-example><pre><code class='java'>withStateByBuilder(client(), builder -&gt; builder.type(StateType.REVIEW_STATE).initial(true), state -&gt; {
-    withUpdateableReview(client(), review -&gt; {
+ <div id="io-sphere-sdk-reviews-commands-ReviewUpdateCommandTest-transitionState--%s" class=code-example><pre><code class='java'>withChannelOfRole(client(), ChannelRole.INVENTORY_SUPPLY, channel -&gt; {
+    withStateByBuilder(client(), stateBuilder -&gt; stateBuilder.initial(true).type(REVIEW_STATE).roles(REVIEW_INCLUDED_IN_STATISTICS), newState -&gt; {
+        withStateByBuilder(client(), stateBuilder -&gt; stateBuilder.type(REVIEW_STATE).transitions(singleton(newState.toReference())).roles(REVIEW_INCLUDED_IN_STATISTICS), oldState -&gt; {
+            withUpdateableReview(client(), reviewBuilder -&gt; reviewBuilder.state(oldState).target(channel), (Review review) -&gt; {
+                final Review updatedReview =
+                        client().executeBlocking(ReviewUpdateCommand.of(review, TransitionState.of(newState)));
 
-        final Review updatedReview = execute(ReviewUpdateCommand.of(review, TransitionState.of(state)));
+                assertThat(updatedReview.getState()).isEqualTo(newState.toReference());
 
-        assertThat(updatedReview.getState()).isEqualTo(state.toReference());
+                //you can observe a message
+                assertEventually(() -&gt; {
+                    final Query&lt;ReviewStateTransitionMessage&gt; messageQuery = MessageQuery.of()
+                            .withPredicates(m -&gt; m.resource().is(review))
+                            .forMessageType(ReviewStateTransitionMessage.MESSAGE_HINT);
+                    final Optional&lt;ReviewStateTransitionMessage&gt; messageOptional =
+                            client().executeBlocking(messageQuery).head();
+                    assertThat(messageOptional).isPresent();
+                    final ReviewStateTransitionMessage message = messageOptional.get();
+                    assertThat(message.getOldState()).isEqualTo(oldState.toReference());
+                    assertThat(message.getNewState()).isEqualTo(newState.toReference());
+                    assertThat(message.getTarget()).isEqualTo(channel.toReference());
+                    assertThat(message.getOldIncludedInStatistics()).isTrue();
+                    assertThat(message.getNewIncludedInStatistics()).isTrue();
+                });
 
-        //check query model
-        final Review reviewByState = execute(ReviewQuery.of()
-                .withPredicates(m -&gt; m.id().is(review.getId()).and(m.state().is(state))))
-                .head().get();
-        assertThat(reviewByState).isEqualTo(updatedReview);
-
-        return updatedReview;
+                return updatedReview;
+            });
+        });
     });
 });
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/reviews/commands/ReviewUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
-<dl>
-<dt><span class="seeLabel">See Also:</span></dt>
-<dd><a href="../../../../../../io/sphere/sdk/reviews/Review.html" title="interface in io.sphere.sdk.reviews"><code>Review</code></a>, 
-<a href="../../../../../../io/sphere/sdk/reviews/Review.html#getState--"><code>Review.getState()</code></a></dd>
-</dl>
 </li>
 </ul>
 </div>
@@ -173,7 +184,7 @@ extends <a href="../../../../../../io/sphere/sdk/states/relatedupdateactions/Tra
 </tr>
 <tr id="i0" class="altColor">
 <td class="colFirst"><code>static <a href="../../../../../../io/sphere/sdk/reviews/commands/updateactions/TransitionState.html" title="class in io.sphere.sdk.reviews.commands.updateactions">TransitionState</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../io/sphere/sdk/reviews/commands/updateactions/TransitionState.html#of-io.sphere.sdk.models.Referenceable-">of</a></span>(<a href="../../../../../../io/sphere/sdk/models/Referenceable.html" title="interface in io.sphere.sdk.models">Referenceable</a>&lt;<a href="../../../../../../io/sphere/sdk/states/State.html" title="interface in io.sphere.sdk.states">State</a>&gt;&nbsp;state)</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../io/sphere/sdk/reviews/commands/updateactions/TransitionState.html#of-io.sphere.sdk.models.ResourceIdentifiable-">of</a></span>(<a href="../../../../../../io/sphere/sdk/models/ResourceIdentifiable.html" title="interface in io.sphere.sdk.models">ResourceIdentifiable</a>&lt;<a href="../../../../../../io/sphere/sdk/states/State.html" title="interface in io.sphere.sdk.states">State</a>&gt;&nbsp;state)</code>&nbsp;</td>
 </tr>
 </table>
 <ul class="blockList">
@@ -218,14 +229,14 @@ extends <a href="../../../../../../io/sphere/sdk/states/relatedupdateactions/Tra
 <!--   -->
 </a>
 <h3>Method Detail</h3>
-<a name="of-io.sphere.sdk.models.Referenceable-">
+<a name="of-io.sphere.sdk.models.ResourceIdentifiable-">
 <!--   -->
 </a>
 <ul class="blockListLast">
 <li class="blockList">
 <h4>of</h4>
 <pre>public static&nbsp;<a href="../../../../../../io/sphere/sdk/reviews/commands/updateactions/TransitionState.html" title="class in io.sphere.sdk.reviews.commands.updateactions">TransitionState</a>&nbsp;of(@Nullable
-                                 <a href="../../../../../../io/sphere/sdk/models/Referenceable.html" title="interface in io.sphere.sdk.models">Referenceable</a>&lt;<a href="../../../../../../io/sphere/sdk/states/State.html" title="interface in io.sphere.sdk.states">State</a>&gt;&nbsp;state)</pre>
+                                 <a href="../../../../../../io/sphere/sdk/models/ResourceIdentifiable.html" title="interface in io.sphere.sdk.models">ResourceIdentifiable</a>&lt;<a href="../../../../../../io/sphere/sdk/states/State.html" title="interface in io.sphere.sdk.states">State</a>&gt;&nbsp;state)</pre>
 </li>
 </ul>
 </li>

@@ -124,16 +124,14 @@ var activeTableTab = "activeTableTab";
 <br>
 <pre>public class <span class="typeNameLabel">SetTitle</span>
 extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html" title="class in io.sphere.sdk.commands">UpdateActionImpl</a>&lt;<a href="../../../../../../io/sphere/sdk/reviews/Review.html" title="interface in io.sphere.sdk.reviews">Review</a>&gt;</pre>
-<div class="block">Updates the title of a review.
+<div class="block">Sets/unsets the title of a review
 
- <p>See also <a href="../ReviewUpdateCommand.html">ReviewUpdateCommand</a>.<p>
+ <div id="io-sphere-sdk-reviews-commands-ReviewUpdateCommandTest-setTitle--%s" class=code-example><pre><code class='java'>withUpdateableReview(client(), (Review review) -&gt; {
+    final String title = randomKey();
+    final Review updatedReview =
+            client().executeBlocking(ReviewUpdateCommand.of(review, SetTitle.of(title)));
 
- <div id="io-sphere-sdk-reviews-commands-ReviewUpdateCommandTest-setTitle--%s" class=code-example><pre><code class='java'>withUpdateableReview(client(), review -&gt; {
-    final String newTitle = randomString();
-    assertThat(review.getTitle()).isNotEqualTo(newTitle);
-
-    final Review updatedReview = execute(ReviewUpdateCommand.of(review, SetTitle.of(newTitle)));
-    assertThat(updatedReview.getTitle()).contains(newTitle);
+    assertThat(updatedReview.getTitle()).isEqualTo(title);
 
     return updatedReview;
 });
