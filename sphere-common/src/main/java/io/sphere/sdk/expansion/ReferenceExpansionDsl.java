@@ -2,7 +2,7 @@ package io.sphere.sdk.expansion;
 
 import java.util.List;
 
-public interface ReferenceExpansionDsl<T, C> extends ExpansionPathContainer<T> {
+public interface ReferenceExpansionDsl<T, C> extends ReferenceExpansionSupport<T> {
     /**
      * Creates a new object with the properties of the old object but replaces all expansion paths with {@code expansionPaths}.
      * @param expansionPaths the new expansion paths
