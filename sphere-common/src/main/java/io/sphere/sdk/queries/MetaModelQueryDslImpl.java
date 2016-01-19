@@ -43,7 +43,7 @@ public abstract class MetaModelQueryDslImpl<T, C extends MetaModelQueryDsl<T, C,
     @Nullable
     final Long offset;
     final List<ExpansionPath<T>> expansionPaths;
-    final List<HttpQueryParameter> additionalQueryParameters;
+    final List<HttpQueryParameter> additionalHttpQueryParameters;
     final String endpoint;
     final Q queryModel;
     final E expansionModel;
@@ -53,7 +53,7 @@ public abstract class MetaModelQueryDslImpl<T, C extends MetaModelQueryDsl<T, C,
     public MetaModelQueryDslImpl(final List<QueryPredicate<T>> predicate, final List<QuerySort<T>> sort, @Nullable final Boolean fetchTotal, @Nullable final Long limit,
                                  @Nullable final Long offset, final String endpoint,
                                  final Function<HttpResponse, PagedQueryResult<T>> resultMapper,
-                                 final List<ExpansionPath<T>> expansionPaths, final List<HttpQueryParameter> additionalQueryParameters,
+                                 final List<ExpansionPath<T>> expansionPaths, final List<HttpQueryParameter> additionalHttpQueryParameters,
                                  final Q queryModel, final E expansionModel, final Function<MetaModelQueryDslBuilder<T, C, Q, E>, C> queryDslBuilderFunction) {
         Optional.ofNullable(offset).ifPresent(presentOffset -> {
             if (presentOffset < MIN_OFFSET || presentOffset > MAX_OFFSET) {
@@ -69,7 +69,7 @@ public abstract class MetaModelQueryDslImpl<T, C extends MetaModelQueryDsl<T, C,
         this.endpoint = requireNonNull(endpoint);
         this.resultMapper = requireNonNull(resultMapper);
         this.expansionPaths = requireNonNull(expansionPaths);
-        this.additionalQueryParameters = requireNonNull(additionalQueryParameters);
+        this.additionalHttpQueryParameters = requireNonNull(additionalHttpQueryParameters);
         this.expansionModel = requireNonNull(expansionModel);
         this.queryModel = requireNonNull(queryModel);
     }
@@ -77,17 +77,17 @@ public abstract class MetaModelQueryDslImpl<T, C extends MetaModelQueryDsl<T, C,
     //uses typeReference of whole result
     public MetaModelQueryDslImpl(final String endpoint, final TypeReference<PagedQueryResult<T>> pagedQueryResultTypeReference,
                                  final Q queryModel, final E expansionModel, final Function<MetaModelQueryDslBuilder<T, C, Q, E>, C> queryDslBuilderFunction,
-                                 final List<HttpQueryParameter> additionalQueryParameters) {
+                                 final List<HttpQueryParameter> additionalHttpQueryParameters) {
         this(emptyList(), emptyList(), null, null, null, endpoint, httpResponse -> deserialize(httpResponse, pagedQueryResultTypeReference),
-                emptyList(), additionalQueryParameters, queryModel, expansionModel, queryDslBuilderFunction);
+                emptyList(), additionalHttpQueryParameters, queryModel, expansionModel, queryDslBuilderFunction);
     }
 
     //uses typeReference of the fetched objects
     public MetaModelQueryDslImpl(final String endpoint, final JavaType singleElementJavatype,
                                  final Q queryModel, final E expansionModel, final Function<MetaModelQueryDslBuilder<T, C, Q, E>, C> queryDslBuilderFunction,
-                                 final List<HttpQueryParameter> additionalQueryParameters) {
+                                 final List<HttpQueryParameter> additionalHttpQueryParameters) {
         this(emptyList(), emptyList(), null, null, null, endpoint, httpResponse -> deserialize(httpResponse, resolveJavaType(singleElementJavatype)),
-                emptyList(), additionalQueryParameters, queryModel, expansionModel, queryDslBuilderFunction);
+                emptyList(), additionalHttpQueryParameters, queryModel, expansionModel, queryDslBuilderFunction);
     }
 
     //uses typeReference of the fetched objects
@@ -104,7 +104,7 @@ public abstract class MetaModelQueryDslImpl<T, C extends MetaModelQueryDsl<T, C,
 
     public MetaModelQueryDslImpl(final MetaModelQueryDslBuilder<T, C, Q, E> builder) {
         this(builder.predicate, builder.sort, builder.withTotal, builder.limit, builder.offset, builder.endpoint,
-                builder.resultMapper, builder.expansionPaths, builder.additionalQueryParameters, builder.queryModel,
+                builder.resultMapper, builder.expansionPaths, builder.additionalHttpQueryParameters, builder.queryModel,
                 builder.expansionModel, builder.queryDslBuilderFunction);
     }
 
@@ -257,8 +257,8 @@ public abstract class MetaModelQueryDslImpl<T, C extends MetaModelQueryDsl<T, C,
         return expansionPaths;
     }
 
-    protected List<HttpQueryParameter> additionalQueryParameters() {
-        return additionalQueryParameters;
+    protected List<HttpQueryParameter> additionalHttpQueryParameters() {
+        return additionalHttpQueryParameters;
     }
 
     protected MetaModelQueryDslBuilder<T, C, Q, E> copyBuilder() {
@@ -284,7 +284,7 @@ public abstract class MetaModelQueryDslImpl<T, C extends MetaModelQueryDsl<T, C,
         Optional.ofNullable(offset()).ifPresent(offset -> builder.add(OFFSET, offset.toString(), urlEncoded));
         Optional.ofNullable(fetchTotal()).ifPresent(withTotal -> builder.add(WITH_TOTAL, withTotal.toString(), urlEncoded));
         expansionPaths().forEach(path -> builder.add(EXPAND, path.toSphereExpand(), urlEncoded));
-        additionalQueryParameters().forEach(parameter -> builder.add(parameter.getKey(), parameter.getValue(), urlEncoded));
+        additionalHttpQueryParameters().forEach(parameter -> builder.add(parameter.getKey(), parameter.getValue(), urlEncoded));
         return builder.toStringWithOptionalQuestionMark();
     }
 
@@ -306,7 +306,7 @@ public abstract class MetaModelQueryDslImpl<T, C extends MetaModelQueryDsl<T, C,
                 "predicate=" + predicate +
                 ", sort=" + sort +
                 ", expand=" + expansionPaths +
-                ", additionalQueryParameters=" + additionalQueryParameters +
+                ", additionalHttpQueryParameters=" + additionalHttpQueryParameters +
                 ", limit=" + limit +
                 ", offset=" + offset +
                 ", endpoint='" + endpoint + '\'' +

@@ -1,0 +1,25 @@
+package io.sphere.sdk.products.search;
+
+import org.junit.Test;
+
+import static org.assertj.core.api.Assertions.*;
+
+public class ProductProjectionSearchBuilderTest {
+    @Test
+    public void searchRequestIsAsExpected() {
+        final ProductProjectionSearch actual = ProductProjectionSearchBuilder.ofCurrent()
+                .facets(m -> m.allVariants().price().centAmount().allRanges())
+                .queryFilters(m -> m.allVariants().price().centAmount().byGreaterThanOrEqualTo(4L))
+                .sort(m -> m.createdAt().byAsc())
+                .expansionPaths(m -> m.categories())
+                .build();
+
+        final ProductProjectionSearch expected = ProductProjectionSearch.ofCurrent()
+                .withFacets(m -> m.allVariants().price().centAmount().allRanges())
+                .withQueryFilters(m -> m.allVariants().price().centAmount().byGreaterThanOrEqualTo(4L))
+                .withSort(m -> m.createdAt().byAsc())
+                .withExpansionPaths(m -> m.categories());
+
+        assertThat(actual).isEqualTo(expected);
+    }
+}
