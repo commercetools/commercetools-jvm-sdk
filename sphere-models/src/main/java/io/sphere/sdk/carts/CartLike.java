@@ -18,6 +18,8 @@ import java.util.Optional;
 /**
  * Interface to collect the common stuff between carts and orders.
  *
+ * <p>If you want to use this class as abstraction for {@link Cart} and {@link io.sphere.sdk.orders.Order} then use it as {@code CartLike<?>}.</p>
+ *
  * @param <T> the type of this {@link CartLike}, order or cart
  */
 public interface CartLike<T> extends Resource<T>, Custom {
