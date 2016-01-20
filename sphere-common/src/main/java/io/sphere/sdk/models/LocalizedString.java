@@ -112,13 +112,14 @@ public class LocalizedString extends Base {
      *
      * {@include.example io.sphere.sdk.models.LocalizedStringTest#ofEnglishLocale()}
      *
-     * @param value the translation in English
+     * @param translationForEnglish the translation in English
      * @return new instance with one key value pair
+     * @deprecated use {@link #ofEnglish(String)} instead
      */
+    @Deprecated
     @JsonIgnore
-    public static LocalizedString ofEnglishLocale(final String value) {
-        requireNonNull(value);
-        return of(Locale.ENGLISH, value);
+    public static LocalizedString ofEnglishLocale(final String translationForEnglish) {
+        return LocalizedString.ofEnglish(translationForEnglish);
     }
 
     /**
@@ -336,6 +337,7 @@ public class LocalizedString extends Base {
     }
 
     public static LocalizedString ofEnglish(final String translationForEnglish) {
-        return LocalizedString.ofEnglishLocale(translationForEnglish);
+        requireNonNull(translationForEnglish);
+        return of(Locale.ENGLISH, translationForEnglish);
     }
 }
