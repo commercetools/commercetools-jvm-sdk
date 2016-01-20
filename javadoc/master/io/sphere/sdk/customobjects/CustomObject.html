@@ -295,6 +295,7 @@ assertThat(customObject.getValue().get("baz").asLong(0)).isEqualTo(5);
 <p>Extend <a href="../../../../io/sphere/sdk/customobjects/commands/CustomObjectCustomJsonMappingUpsertCommand.html" title="class in io.sphere.sdk.customobjects.commands"><code>CustomObjectCustomJsonMappingUpsertCommand</code></a> to create or update a custom object with <a href="https://code.google.com/p/google-gson/">Google Gson</a>:</p>
 
 <div id="io-sphere-sdk-customobjects-demo-GsonFooCustomObjectUpsertCommand%s" class=code-example><button type='button' style='display: none;' class='reveal-imports'>show/hide imports</button><pre class='hide code-example-imports'><code class='java'>import com.google.gson.Gson;
+import io.sphere.sdk.client.SphereRequestUtils;
 import io.sphere.sdk.customobjects.commands.CustomObjectCustomJsonMappingUpsertCommand;
 import io.sphere.sdk.http.HttpResponse;
 </code></pre><pre><code class='java'>public class GsonFooCustomObjectUpsertCommand extends CustomObjectCustomJsonMappingUpsertCommand&lt;GsonFoo&gt; {
@@ -314,7 +315,7 @@ import io.sphere.sdk.http.HttpResponse;
     //used to deserialize the response
     @Override
     public GsonFooCustomObject deserialize(final HttpResponse httpResponse) {
-        final String jsonAsString = getBodyAsString(httpResponse);
+        final String jsonAsString = SphereRequestUtils.getBodyAsString(httpResponse);
         return gson.fromJson(jsonAsString, GsonFooCustomObject.class);
     }
 }
@@ -323,6 +324,7 @@ import io.sphere.sdk.http.HttpResponse;
 <h4>Fetch by container and key</h4>
 
 <div id="io-sphere-sdk-customobjects-demo-GsonFooCustomObjectByKeyGet%s" class=code-example><button type='button' style='display: none;' class='reveal-imports'>show/hide imports</button><pre class='hide code-example-imports'><code class='java'>import com.google.gson.Gson;
+import io.sphere.sdk.client.SphereRequestUtils;
 import io.sphere.sdk.customobjects.CustomObject;
 import io.sphere.sdk.customobjects.queries.CustomObjectCustomJsonMappingByKeyGet;
 import io.sphere.sdk.http.HttpResponse;
@@ -334,7 +336,7 @@ import io.sphere.sdk.http.HttpResponse;
 
     @Override
     protected CustomObject&lt;GsonFoo&gt; deserializeCustomObject(final HttpResponse httpResponse) {
-        final String jsonAsString = getBodyAsString(httpResponse);
+        final String jsonAsString = SphereRequestUtils.getBodyAsString(httpResponse);
         return new Gson().fromJson(jsonAsString, GsonFooCustomObject.class);
     }
 }

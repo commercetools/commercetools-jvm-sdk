@@ -102,12 +102,7 @@ var activeTableTab = "activeTableTab";
 <li><a href="../../../../../io/sphere/sdk/models/Base.html" title="class in io.sphere.sdk.models">io.sphere.sdk.models.Base</a></li>
 <li>
 <ul class="inheritance">
-<li><a href="../../../../../io/sphere/sdk/client/SphereRequestBase.html" title="class in io.sphere.sdk.client">io.sphere.sdk.client.SphereRequestBase</a></li>
-<li>
-<ul class="inheritance">
 <li>io.sphere.sdk.customobjects.commands.CustomObjectCustomJsonMappingUpsertCommand&lt;T&gt;</li>
-</ul>
-</li>
 </ul>
 </li>
 </ul>
@@ -127,7 +122,7 @@ var activeTableTab = "activeTableTab";
 <hr>
 <br>
 <pre>public abstract class <span class="typeNameLabel">CustomObjectCustomJsonMappingUpsertCommand&lt;T&gt;</span>
-extends <a href="../../../../../io/sphere/sdk/client/SphereRequestBase.html" title="class in io.sphere.sdk.client">SphereRequestBase</a>
+extends <a href="../../../../../io/sphere/sdk/models/Base.html" title="class in io.sphere.sdk.models">Base</a>
 implements <a href="../../../../../io/sphere/sdk/commands/CreateCommand.html" title="interface in io.sphere.sdk.commands">CreateCommand</a>&lt;<a href="../../../../../io/sphere/sdk/customobjects/CustomObject.html" title="interface in io.sphere.sdk.customobjects">CustomObject</a>&lt;T&gt;&gt;</pre>
 <div class="block">Command for creating or updating a custom object using a custom JSON mapper.
 
@@ -144,6 +139,7 @@ assertThat(actualValue).isEqualTo(value);
 
  <p>The command class:</p>
  <div id="io-sphere-sdk-customobjects-demo-GsonFooCustomObjectUpsertCommand%s" class=code-example><button type='button' style='display: none;' class='reveal-imports'>show/hide imports</button><pre class='hide code-example-imports'><code class='java'>import com.google.gson.Gson;
+import io.sphere.sdk.client.SphereRequestUtils;
 import io.sphere.sdk.customobjects.commands.CustomObjectCustomJsonMappingUpsertCommand;
 import io.sphere.sdk.http.HttpResponse;
 </code></pre><pre><code class='java'>public class GsonFooCustomObjectUpsertCommand extends CustomObjectCustomJsonMappingUpsertCommand&lt;GsonFoo&gt; {
@@ -163,7 +159,7 @@ import io.sphere.sdk.http.HttpResponse;
     //used to deserialize the response
     @Override
     public GsonFooCustomObject deserialize(final HttpResponse httpResponse) {
-        final String jsonAsString = getBodyAsString(httpResponse);
+        final String jsonAsString = SphereRequestUtils.getBodyAsString(httpResponse);
         return gson.fromJson(jsonAsString, GsonFooCustomObject.class);
     }
 }
@@ -278,10 +274,12 @@ import java.time.ZonedDateTime;
 <table class="memberSummary" border="0" cellpadding="3" cellspacing="0" summary="Constructor Summary table, listing constructors, and an explanation">
 <caption><span>Constructors</span><span class="tabEnd">&nbsp;</span></caption>
 <tr>
-<th class="colOne" scope="col">Constructor and Description</th>
+<th class="colFirst" scope="col">Modifier</th>
+<th class="colLast" scope="col">Constructor and Description</th>
 </tr>
 <tr class="altColor">
-<td class="colOne"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/customobjects/commands/CustomObjectCustomJsonMappingUpsertCommand.html#CustomObjectCustomJsonMappingUpsertCommand--">CustomObjectCustomJsonMappingUpsertCommand</a></span>()</code>&nbsp;</td>
+<td class="colFirst"><code>protected </code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/customobjects/commands/CustomObjectCustomJsonMappingUpsertCommand.html#CustomObjectCustomJsonMappingUpsertCommand--">CustomObjectCustomJsonMappingUpsertCommand</a></span>()</code>&nbsp;</td>
 </tr>
 </table>
 </li>
@@ -317,13 +315,6 @@ import java.time.ZonedDateTime;
 </td>
 </tr>
 </table>
-<ul class="blockList">
-<li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.client.SphereRequestBase">
-<!--   -->
-</a>
-<h3>Methods inherited from class&nbsp;io.sphere.sdk.client.<a href="../../../../../io/sphere/sdk/client/SphereRequestBase.html" title="class in io.sphere.sdk.client">SphereRequestBase</a></h3>
-<code><a href="../../../../../io/sphere/sdk/client/SphereRequestBase.html#deserialize-io.sphere.sdk.http.HttpResponse-com.fasterxml.jackson.databind.JavaType-">deserialize</a>, <a href="../../../../../io/sphere/sdk/client/SphereRequestBase.html#deserialize-io.sphere.sdk.http.HttpResponse-com.fasterxml.jackson.core.type.TypeReference-">deserialize</a>, <a href="../../../../../io/sphere/sdk/client/SphereRequestBase.html#getBodyAsString-io.sphere.sdk.http.HttpResponse-">getBodyAsString</a></code></li>
-</ul>
 <ul class="blockList">
 <li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.models.Base">
 <!--   -->
@@ -365,7 +356,7 @@ import java.time.ZonedDateTime;
 <ul class="blockListLast">
 <li class="blockList">
 <h4>CustomObjectCustomJsonMappingUpsertCommand</h4>
-<pre>public&nbsp;CustomObjectCustomJsonMappingUpsertCommand()</pre>
+<pre>protected&nbsp;CustomObjectCustomJsonMappingUpsertCommand()</pre>
 </li>
 </ul>
 </li>
