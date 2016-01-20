@@ -1,8 +1,11 @@
 package io.sphere.sdk.commands;
 
-import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.JavaType;
 import io.sphere.sdk.expansion.ExpansionPath;
-import io.sphere.sdk.models.*;
+import io.sphere.sdk.models.Base;
+import io.sphere.sdk.models.Builder;
+import io.sphere.sdk.models.ResourceView;
+import io.sphere.sdk.models.Versioned;
 
 import java.util.List;
 import java.util.function.Function;
@@ -15,7 +18,7 @@ import static java.util.Objects.requireNonNull;
 public class MetaModelUpdateCommandDslBuilder<T extends ResourceView<T, T>, C extends UpdateCommandDsl<T, C>, E> extends Base implements Builder<C>{
     Versioned<T> versioned;
     List<? extends UpdateAction<T>> updateActions;
-    TypeReference<T> typeReference;
+    JavaType javaType;
     String baseEndpointWithoutId;
     Function<MetaModelUpdateCommandDslBuilder<T, C, E>, C> creationFunction;
     final E expansionModel;
@@ -27,7 +30,7 @@ public class MetaModelUpdateCommandDslBuilder<T extends ResourceView<T, T>, C ex
         this.creationFunction = requireNonNull(template.creationFunction);
         this.versioned = requireNonNull(template.versioned);
         this.updateActions = requireNonNull(template.updateActions);
-        this.typeReference = requireNonNull(template.typeReference);
+        this.javaType = requireNonNull(template.javaType);
         this.baseEndpointWithoutId = requireNonNull(template.baseEndpointWithoutId);
     }
 
@@ -49,8 +52,8 @@ public class MetaModelUpdateCommandDslBuilder<T extends ResourceView<T, T>, C ex
         return creationFunction;
     }
 
-    TypeReference<T> getTypeReference() {
-        return typeReference;
+    JavaType getJacksonJavaType() {
+        return javaType;
     }
 
     List<? extends UpdateAction<T>> getUpdateActions() {
