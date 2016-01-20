@@ -25,8 +25,10 @@ import io.sphere.sdk.orders.expansion.OrderExpansionModel;
 import io.sphere.sdk.payments.Transaction;
 import io.sphere.sdk.productdiscounts.queries.ProductDiscountByIdGet;
 import io.sphere.sdk.products.*;
+import io.sphere.sdk.products.attributes.Attribute;
 import io.sphere.sdk.products.attributes.AttributeAccess;
 import io.sphere.sdk.products.attributes.AttributeDefinition;
+import io.sphere.sdk.products.attributes.LocalizedToStringProductAttributeConverter;
 import io.sphere.sdk.products.commands.updateactions.SetMetaDescription;
 import io.sphere.sdk.products.commands.updateactions.SetMetaKeywords;
 import io.sphere.sdk.products.commands.updateactions.SetMetaTitle;
@@ -36,6 +38,7 @@ import io.sphere.sdk.products.queries.ProductProjectionByIdGet;
 import io.sphere.sdk.products.queries.ProductProjectionQuery;
 import io.sphere.sdk.products.queries.ProductProjectionQueryModel;
 import io.sphere.sdk.producttypes.ProductType;
+import io.sphere.sdk.projects.Project;
 import io.sphere.sdk.queries.Get;
 import io.sphere.sdk.queries.QueryDsl;
 import io.sphere.sdk.queries.QueryPredicate;
@@ -71,6 +74,47 @@ import java.util.function.Function;
  <li class=fixed-in-release></li>
  </ul>
  -->
+
+ <h3 class=released-version id="v1_0_0_M26">1.0.0-M26 (20.01.2016)</h3>
+ <a class="theme-btn expand-all">Expand all</a>
+
+ <br>
+ <br>
+ <ul>
+ <li class=new-in-release>Added {@link io.sphere.sdk.reviews.Review}s.</li>
+
+ <li class=new-in-release>Builders for query and search requests. So for example
+ {@link io.sphere.sdk.products.queries.ProductProjectionQueryBuilder}
+ to build {@link io.sphere.sdk.products.queries.ProductProjectionQuery} and
+ {@link io.sphere.sdk.products.search.ProductProjectionSearchBuilder}
+ to build {@link io.sphere.sdk.products.search.ProductProjectionSearch}.
+
+
+ <div class="rn-hidden">
+ <p>The new way with builders (code with side effects)</p>
+ {@include.example io.sphere.sdk.meta.M26Demo#createSearchQueryWithBuilder}
+ <p>The classic way (immutable objects, reassigning)</p>
+ {@include.example io.sphere.sdk.meta.M26Demo#createSearchQueryClassicWay()}
+ </div>
+
+ </li>
+
+ <li class=new-in-release>Added customer update actions
+ {@link io.sphere.sdk.customers.commands.updateactions.SetTitle},
+ {@link io.sphere.sdk.customers.commands.updateactions.SetFirstName},
+ {@link io.sphere.sdk.customers.commands.updateactions.SetMiddleName} and
+ {@link io.sphere.sdk.customers.commands.updateactions.SetLastName}.</li>
+ <li class=new-in-release>{@link CustomObjectQuery} supports now predicates containing key.
+ <div class="rn-hidden">
+ {@include.example io.sphere.sdk.meta.M26Demo#queryCustomObjectsByKeyExample()}
+ </div>
+ </li>
+ <li class=new-in-release>Added {@link Project#getCurrencies()} and {@link Project#getCurrencyUnits()} so you can get your enabled currencies for the commercetools project.</li>
+
+ <li class=new-in-release>Added some short hand methods for the work with product attributes like {@link Attribute#getValueAsLong()} and {@link Attribute#getValueAsString()}. For all see {@link Attribute}.</li>
+ <li class=new-in-release>Added {@link LocalizedToStringProductAttributeConverter} which provides some defaults to present product attribute (including monetary amounts and date) values as String. The behaviour can be changed through subclasses.</li>
+ </ul>
+
 
  <h3 class=released-version id="v1_0_0_M25">1.0.0-M25 (08.01.2016)</h3>
  <ul>
