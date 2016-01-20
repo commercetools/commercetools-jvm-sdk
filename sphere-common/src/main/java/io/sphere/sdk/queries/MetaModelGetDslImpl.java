@@ -1,17 +1,18 @@
 package io.sphere.sdk.queries;
 
-import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.JavaType;
 import io.sphere.sdk.client.HttpRequestIntent;
 import io.sphere.sdk.client.JsonEndpoint;
 import io.sphere.sdk.client.SphereRequestBase;
 import io.sphere.sdk.expansion.ExpansionDslUtil;
 import io.sphere.sdk.expansion.ExpansionPath;
-import io.sphere.sdk.expansion.MetaModelExpansionDslExpansionModelRead;
 import io.sphere.sdk.expansion.ExpansionPathContainer;
+import io.sphere.sdk.expansion.MetaModelExpansionDslExpansionModelRead;
 import io.sphere.sdk.http.HttpMethod;
 import io.sphere.sdk.http.HttpQueryParameter;
 import io.sphere.sdk.http.HttpResponse;
 import io.sphere.sdk.http.UrlQueryBuilder;
+import io.sphere.sdk.json.SphereJsonUtils;
 
 import javax.annotation.Nullable;
 import java.util.Collections;
@@ -32,7 +33,8 @@ import static java.util.Objects.requireNonNull;
  */
 public class MetaModelGetDslImpl<R, T, C extends MetaModelGetDsl<R, T, C, E>, E> extends SphereRequestBase implements MetaModelGetDsl<R, T, C, E>, MetaModelExpansionDslExpansionModelRead<T, C, E> {
 
-    final JsonEndpoint<R> endpoint;
+    final JavaType javaType;
+    final String endpoint;
     /**
      for example an ID, a key, slug, token
      */
@@ -43,22 +45,19 @@ public class MetaModelGetDslImpl<R, T, C extends MetaModelGetDsl<R, T, C, E>, E>
     final Function<MetaModelGetDslBuilder<R, T, C, E>, C> builderFunction;
 
     protected MetaModelGetDslImpl(final JsonEndpoint<R> endpoint, final String identifierToSearchFor, final E expansionModel, final Function<MetaModelGetDslBuilder<R, T, C, E>, C> builderFunction, final List<HttpQueryParameter> additionalParameters) {
-        this(endpoint, identifierToSearchFor, Collections.emptyList(), expansionModel, builderFunction, additionalParameters);
+        this(SphereJsonUtils.convertToJavaType(endpoint.typeReference()), endpoint.endpoint(), identifierToSearchFor, Collections.emptyList(), expansionModel, builderFunction, additionalParameters);
     }
 
     protected MetaModelGetDslImpl(final String identifierToSearchFor, final JsonEndpoint<R> endpoint, final E expansionModel, final Function<MetaModelGetDslBuilder<R, T, C, E>, C> builderFunction) {
-        this(endpoint, identifierToSearchFor, Collections.emptyList(), expansionModel, builderFunction, Collections.emptyList());
-    }
-
-    protected MetaModelGetDslImpl(final JsonEndpoint<R> endpoint, final String identifierToSearchFor, final E expansionModel, final Function<MetaModelGetDslBuilder<R, T, C, E>, C> builderFunction) {
-        this(endpoint, identifierToSearchFor, Collections.emptyList(), expansionModel, builderFunction, Collections.emptyList());
+        this(SphereJsonUtils.convertToJavaType(endpoint.typeReference()), endpoint.endpoint(), identifierToSearchFor, Collections.emptyList(), expansionModel, builderFunction, Collections.emptyList());
     }
 
     protected MetaModelGetDslImpl(final MetaModelGetDslBuilder<R, T, C, E> builder) {
-        this(builder.endpoint, builder.identifierToSearchFor, builder.expansionPaths, builder.expansionModel, builder.builderFunction, builder.additionalParameters);
+        this(builder.javaType, builder.endpoint, builder.identifierToSearchFor, builder.expansionPaths, builder.expansionModel, builder.builderFunction, builder.additionalParameters);
     }
 
-    protected MetaModelGetDslImpl(final JsonEndpoint<R> endpoint, final String identifierToSearchFor, final List<ExpansionPath<T>> expansionPaths, final E expansionModel, final Function<MetaModelGetDslBuilder<R, T, C, E>, C> builderFunction, final List<HttpQueryParameter> additionalParameters) {
+    protected MetaModelGetDslImpl(final JavaType javaType, final String endpoint, final String identifierToSearchFor, final List<ExpansionPath<T>> expansionPaths, final E expansionModel, final Function<MetaModelGetDslBuilder<R, T, C, E>, C> builderFunction, final List<HttpQueryParameter> additionalParameters) {
+        this.javaType = requireNonNull(javaType);
         this.endpoint = requireNonNull(endpoint);
         this.identifierToSearchFor = requireNonNull(identifierToSearchFor);
         this.expansionPaths = requireNonNull(expansionPaths);
@@ -72,13 +71,13 @@ public class MetaModelGetDslImpl<R, T, C extends MetaModelGetDsl<R, T, C, E>, E>
     public R deserialize(final HttpResponse httpResponse) {
         return Optional.of(httpResponse)
                 .filter(r -> r.getStatusCode() != NOT_FOUND_404)
-                .map(r -> deserialize(r, typeReference()))
+                .map(r -> SphereRequestBase.<R>deserialize(r, jacksonJavaType()))
                 .orElse(null);
     }
 
     @Override
     public HttpRequestIntent httpRequestIntent() {
-        if (!endpoint.endpoint().startsWith("/")) {
+        if (!endpoint.startsWith("/")) {
             throw new RuntimeException("By convention the paths start with a slash, see baseEndpointWithoutId()");
         }
         final boolean urlEncoded = true;
@@ -86,12 +85,12 @@ public class MetaModelGetDslImpl<R, T, C extends MetaModelGetDsl<R, T, C, E>, E>
         expansionPaths().forEach(path -> builder.add(EXPAND, path.toSphereExpand(), urlEncoded));
         additionalQueryParameters().forEach(parameter -> builder.add(parameter.getKey(), parameter.getValue(), urlEncoded));
         final String queryParameters = builder.toStringWithOptionalQuestionMark();
-        final String path = endpoint.endpoint() + "/" + identifierToSearchFor + (queryParameters.length() > 1 ? queryParameters : "");
+        final String path = endpoint + "/" + identifierToSearchFor + (queryParameters.length() > 1 ? queryParameters : "");
         return HttpRequestIntent.of(HttpMethod.GET, path);
     }
 
-    protected TypeReference<R> typeReference() {
-        return endpoint.typeReference();
+    protected JavaType jacksonJavaType() {
+        return javaType;
     }
 
 
