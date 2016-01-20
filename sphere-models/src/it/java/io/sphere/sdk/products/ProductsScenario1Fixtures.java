@@ -27,7 +27,6 @@ import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
 
 import static io.sphere.sdk.models.DefaultCurrencyUnits.EUR;
-import static io.sphere.sdk.models.LocalizedString.ofEnglishLocale;
 import static io.sphere.sdk.test.SphereTestUtils.*;
 import static io.sphere.sdk.utils.SetUtils.asSet;
 import static java.math.BigDecimal.valueOf;
@@ -100,9 +99,9 @@ public class ProductsScenario1Fixtures {
     public static final String BOOL_FALSE = "false";
     public static final String TEXT_FOO = "foo";
     public static final String TEXT_BAR = "bar";
-    public static final LocalizedString LOC_TEXT_FOO = ofEnglishLocale("localized foo");
+    public static final LocalizedString LOC_TEXT_FOO = LocalizedString.ofEnglish("localized foo");
     public static final LocalizedString LOC_TEXT_FOO2 = LOC_TEXT_FOO.plus(GERMAN, "German foo");
-    public static final LocalizedString LOC_TEXT_BAR = ofEnglishLocale("localized bar");
+    public static final LocalizedString LOC_TEXT_BAR = LocalizedString.ofEnglish("localized bar");
     public static final EnumValue ENUM_ONE = EnumValue.of("one-key", "one");
     public static final EnumValue ENUM_TWO = EnumValue.of("two-key", "two");
     public static final EnumValue ENUM_THREE = EnumValue.of("three-key", "three");
@@ -254,29 +253,29 @@ public class ProductsScenario1Fixtures {
     public static ProductType createProductType(final BlockingSphereClient client) {
         final EnumAttributeType enumType = EnumAttributeType.of(ENUM_ONE, ENUM_TWO, ENUM_THREE);
         final LocalizedEnumAttributeType enumLocType = LocalizedEnumAttributeType.of(LOC_ENUM_ONE, LOC_ENUM_TWO, LOC_ENUM_THREE);
-        final AttributeDefinition booleanAttrDef = AttributeDefinitionBuilder.of(ATTR_NAME_BOOLEAN, ofEnglishLocale(ATTR_NAME_BOOLEAN), BooleanAttributeType.of()).build();
-        final AttributeDefinition textAttrDef = AttributeDefinitionBuilder.of(ATTR_NAME_TEXT, ofEnglishLocale(ATTR_NAME_TEXT), StringAttributeType.of()).build();
-        final AttributeDefinition locTextAttrDef = AttributeDefinitionBuilder.of(ATTR_NAME_LOC_TEXT, ofEnglishLocale(ATTR_NAME_LOC_TEXT), LocalizedStringAttributeType.of()).build();
-        final AttributeDefinition locTextAttrDef2 = AttributeDefinitionBuilder.of(ATTR_NAME_LOC_TEXT2, ofEnglishLocale(ATTR_NAME_LOC_TEXT2), LocalizedStringAttributeType.of()).build();
-        final AttributeDefinition enumAttrDef = AttributeDefinitionBuilder.of(ATTR_NAME_ENUM, ofEnglishLocale(ATTR_NAME_ENUM), enumType).build();
-        final AttributeDefinition locEnumAttrDef = AttributeDefinitionBuilder.of(ATTR_NAME_LOC_ENUM, ofEnglishLocale(ATTR_NAME_LOC_ENUM), enumLocType).build();
-        final AttributeDefinition numberAttrDef = AttributeDefinitionBuilder.of(ATTR_NAME_NUMBER, ofEnglishLocale(ATTR_NAME_NUMBER), NumberAttributeType.of()).build();
-        final AttributeDefinition moneyAttrDef = AttributeDefinitionBuilder.of(ATTR_NAME_MONEY, ofEnglishLocale(ATTR_NAME_MONEY), MoneyAttributeType.of()).build();
-        final AttributeDefinition dateAttrDef = AttributeDefinitionBuilder.of(ATTR_NAME_DATE, ofEnglishLocale(ATTR_NAME_DATE), DateAttributeType.of()).build();
-        final AttributeDefinition timeAttrDef = AttributeDefinitionBuilder.of(ATTR_NAME_TIME, ofEnglishLocale(ATTR_NAME_TIME), TimeAttributeType.of()).build();
-        final AttributeDefinition dateTimeAttrDef = AttributeDefinitionBuilder.of(ATTR_NAME_DATE_TIME, ofEnglishLocale(ATTR_NAME_DATE_TIME), DateTimeAttributeType.of()).build();
-        final AttributeDefinition refAttrDef = AttributeDefinitionBuilder.of(ATTR_NAME_REF, ofEnglishLocale(ATTR_NAME_REF), ReferenceAttributeType.of(Product.referenceTypeId())).build();
-        final AttributeDefinition booleanSetAttrDef = AttributeDefinitionBuilder.of(ATTR_NAME_BOOLEAN_SET, ofEnglishLocale(ATTR_NAME_BOOLEAN_SET), SetAttributeType.of(BooleanAttributeType.of())).build();
-        final AttributeDefinition textSetAttrDef = AttributeDefinitionBuilder.of(ATTR_NAME_TEXT_SET, ofEnglishLocale(ATTR_NAME_TEXT_SET), SetAttributeType.of(StringAttributeType.of())).build();
-        final AttributeDefinition locTextSetAttrDef = AttributeDefinitionBuilder.of(ATTR_NAME_LOC_TEXT_SET, ofEnglishLocale(ATTR_NAME_LOC_TEXT_SET), SetAttributeType.of(LocalizedStringAttributeType.of())).build();
-        final AttributeDefinition enumSetAttrDef = AttributeDefinitionBuilder.of(ATTR_NAME_ENUM_SET, ofEnglishLocale(ATTR_NAME_ENUM_SET), SetAttributeType.of(enumType)).build();
-        final AttributeDefinition locEnumSetAttrDef = AttributeDefinitionBuilder.of(ATTR_NAME_LOC_ENUM_SET, ofEnglishLocale(ATTR_NAME_LOC_ENUM_SET), SetAttributeType.of(enumLocType)).build();
-        final AttributeDefinition numberSetAttrDef = AttributeDefinitionBuilder.of(ATTR_NAME_NUMBER_SET, ofEnglishLocale(ATTR_NAME_NUMBER_SET), SetAttributeType.of(NumberAttributeType.of())).build();
-        final AttributeDefinition moneySetAttrDef = AttributeDefinitionBuilder.of(ATTR_NAME_MONEY_SET, ofEnglishLocale(ATTR_NAME_MONEY_SET), SetAttributeType.of(MoneyAttributeType.of())).build();
-        final AttributeDefinition dateSetAttrDef = AttributeDefinitionBuilder.of(ATTR_NAME_DATE_SET, ofEnglishLocale(ATTR_NAME_DATE_SET), SetAttributeType.of(DateAttributeType.of())).build();
-        final AttributeDefinition timeSetAttrDef = AttributeDefinitionBuilder.of(ATTR_NAME_TIME_SET, ofEnglishLocale(ATTR_NAME_TIME_SET), SetAttributeType.of(TimeAttributeType.of())).build();
-        final AttributeDefinition dateTimeSetAttrDef = AttributeDefinitionBuilder.of(ATTR_NAME_DATE_TIME_SET, ofEnglishLocale(ATTR_NAME_DATE_TIME_SET), SetAttributeType.of(DateTimeAttributeType.of())).build();
-        final AttributeDefinition refSetAttrDef = AttributeDefinitionBuilder.of(ATTR_NAME_REF_SET, ofEnglishLocale(ATTR_NAME_REF_SET), SetAttributeType.of(ReferenceAttributeType.of(Product.referenceTypeId()))).build();
+        final AttributeDefinition booleanAttrDef = AttributeDefinitionBuilder.of(ATTR_NAME_BOOLEAN, LocalizedString.ofEnglish(ATTR_NAME_BOOLEAN), BooleanAttributeType.of()).build();
+        final AttributeDefinition textAttrDef = AttributeDefinitionBuilder.of(ATTR_NAME_TEXT, LocalizedString.ofEnglish(ATTR_NAME_TEXT), StringAttributeType.of()).build();
+        final AttributeDefinition locTextAttrDef = AttributeDefinitionBuilder.of(ATTR_NAME_LOC_TEXT, LocalizedString.ofEnglish(ATTR_NAME_LOC_TEXT), LocalizedStringAttributeType.of()).build();
+        final AttributeDefinition locTextAttrDef2 = AttributeDefinitionBuilder.of(ATTR_NAME_LOC_TEXT2, LocalizedString.ofEnglish(ATTR_NAME_LOC_TEXT2), LocalizedStringAttributeType.of()).build();
+        final AttributeDefinition enumAttrDef = AttributeDefinitionBuilder.of(ATTR_NAME_ENUM, LocalizedString.ofEnglish(ATTR_NAME_ENUM), enumType).build();
+        final AttributeDefinition locEnumAttrDef = AttributeDefinitionBuilder.of(ATTR_NAME_LOC_ENUM, LocalizedString.ofEnglish(ATTR_NAME_LOC_ENUM), enumLocType).build();
+        final AttributeDefinition numberAttrDef = AttributeDefinitionBuilder.of(ATTR_NAME_NUMBER, LocalizedString.ofEnglish(ATTR_NAME_NUMBER), NumberAttributeType.of()).build();
+        final AttributeDefinition moneyAttrDef = AttributeDefinitionBuilder.of(ATTR_NAME_MONEY, LocalizedString.ofEnglish(ATTR_NAME_MONEY), MoneyAttributeType.of()).build();
+        final AttributeDefinition dateAttrDef = AttributeDefinitionBuilder.of(ATTR_NAME_DATE, LocalizedString.ofEnglish(ATTR_NAME_DATE), DateAttributeType.of()).build();
+        final AttributeDefinition timeAttrDef = AttributeDefinitionBuilder.of(ATTR_NAME_TIME, LocalizedString.ofEnglish(ATTR_NAME_TIME), TimeAttributeType.of()).build();
+        final AttributeDefinition dateTimeAttrDef = AttributeDefinitionBuilder.of(ATTR_NAME_DATE_TIME, LocalizedString.ofEnglish(ATTR_NAME_DATE_TIME), DateTimeAttributeType.of()).build();
+        final AttributeDefinition refAttrDef = AttributeDefinitionBuilder.of(ATTR_NAME_REF, LocalizedString.ofEnglish(ATTR_NAME_REF), ReferenceAttributeType.of(Product.referenceTypeId())).build();
+        final AttributeDefinition booleanSetAttrDef = AttributeDefinitionBuilder.of(ATTR_NAME_BOOLEAN_SET, LocalizedString.ofEnglish(ATTR_NAME_BOOLEAN_SET), SetAttributeType.of(BooleanAttributeType.of())).build();
+        final AttributeDefinition textSetAttrDef = AttributeDefinitionBuilder.of(ATTR_NAME_TEXT_SET, LocalizedString.ofEnglish(ATTR_NAME_TEXT_SET), SetAttributeType.of(StringAttributeType.of())).build();
+        final AttributeDefinition locTextSetAttrDef = AttributeDefinitionBuilder.of(ATTR_NAME_LOC_TEXT_SET, LocalizedString.ofEnglish(ATTR_NAME_LOC_TEXT_SET), SetAttributeType.of(LocalizedStringAttributeType.of())).build();
+        final AttributeDefinition enumSetAttrDef = AttributeDefinitionBuilder.of(ATTR_NAME_ENUM_SET, LocalizedString.ofEnglish(ATTR_NAME_ENUM_SET), SetAttributeType.of(enumType)).build();
+        final AttributeDefinition locEnumSetAttrDef = AttributeDefinitionBuilder.of(ATTR_NAME_LOC_ENUM_SET, LocalizedString.ofEnglish(ATTR_NAME_LOC_ENUM_SET), SetAttributeType.of(enumLocType)).build();
+        final AttributeDefinition numberSetAttrDef = AttributeDefinitionBuilder.of(ATTR_NAME_NUMBER_SET, LocalizedString.ofEnglish(ATTR_NAME_NUMBER_SET), SetAttributeType.of(NumberAttributeType.of())).build();
+        final AttributeDefinition moneySetAttrDef = AttributeDefinitionBuilder.of(ATTR_NAME_MONEY_SET, LocalizedString.ofEnglish(ATTR_NAME_MONEY_SET), SetAttributeType.of(MoneyAttributeType.of())).build();
+        final AttributeDefinition dateSetAttrDef = AttributeDefinitionBuilder.of(ATTR_NAME_DATE_SET, LocalizedString.ofEnglish(ATTR_NAME_DATE_SET), SetAttributeType.of(DateAttributeType.of())).build();
+        final AttributeDefinition timeSetAttrDef = AttributeDefinitionBuilder.of(ATTR_NAME_TIME_SET, LocalizedString.ofEnglish(ATTR_NAME_TIME_SET), SetAttributeType.of(TimeAttributeType.of())).build();
+        final AttributeDefinition dateTimeSetAttrDef = AttributeDefinitionBuilder.of(ATTR_NAME_DATE_TIME_SET, LocalizedString.ofEnglish(ATTR_NAME_DATE_TIME_SET), SetAttributeType.of(DateTimeAttributeType.of())).build();
+        final AttributeDefinition refSetAttrDef = AttributeDefinitionBuilder.of(ATTR_NAME_REF_SET, LocalizedString.ofEnglish(ATTR_NAME_REF_SET), SetAttributeType.of(ReferenceAttributeType.of(Product.referenceTypeId()))).build();
         final ProductTypeDraft productTypeDraft = ProductTypeDraft.of(randomKey(), PRODUCT_TYPE_NAME, "", asList(booleanAttrDef, textAttrDef,
                 locTextAttrDef, enumAttrDef, locEnumAttrDef, numberAttrDef, moneyAttrDef, dateAttrDef, timeAttrDef, dateTimeAttrDef,
                 refAttrDef, booleanSetAttrDef, textSetAttrDef, locTextSetAttrDef, locTextAttrDef2, enumSetAttrDef, locEnumSetAttrDef, numberSetAttrDef,
@@ -286,7 +285,7 @@ public class ProductsScenario1Fixtures {
     }
 
     public static Product createTestProduct(final BlockingSphereClient client, final String name, final ProductVariantDraft masterVariant, final Referenceable<ProductType> productTypeReferenceable) {
-        final LocalizedString locName = ofEnglishLocale(name);
+        final LocalizedString locName = LocalizedString.ofEnglish(name);
         final ProductDraft productDraft = ProductDraftBuilder.of(productTypeReferenceable.toReference(), locName, locName.slugifiedUnique(), masterVariant).build();
         return client.executeBlocking(ProductCreateCommand.of(productDraft));
     }

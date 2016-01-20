@@ -13,7 +13,7 @@ public class AttributeAccessTest {
     @Test
     public void setReference() throws Exception {
         final AttributeAccess<Set<Reference<Product>>> access = AttributeAccess.ofProductReferenceSet();
-        final AttributeDefinition attributeDefinition = AttributeDefinitionBuilder.of("productreference", LocalizedString.ofEnglishLocale("foo"), SetAttributeType.of(ReferenceAttributeType.ofProduct())).build();
+        final AttributeDefinition attributeDefinition = AttributeDefinitionBuilder.of("productreference", LocalizedString.ofEnglish("foo"), SetAttributeType.of(ReferenceAttributeType.ofProduct())).build();
         assertThat(access.canHandle(attributeDefinition)).isTrue();
     }
 }

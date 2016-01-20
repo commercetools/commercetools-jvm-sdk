@@ -37,7 +37,6 @@ import java.util.Locale;
 import java.util.Random;
 
 import static io.sphere.sdk.models.DefaultCurrencyUnits.EUR;
-import static io.sphere.sdk.models.LocalizedString.ofEnglishLocale;
 import static io.sphere.sdk.products.ProductFixtures.*;
 import static io.sphere.sdk.states.StateFixtures.withStateByBuilder;
 import static io.sphere.sdk.states.StateType.PRODUCT_STATE;
@@ -135,7 +134,7 @@ public class ProductUpdateCommandTest extends IntegrationTest {
     @Test
     public void changeName() throws Exception {
         withUpdateableProduct(client(), product -> {
-            final LocalizedString newName = ofEnglishLocale("newName " + RANDOM.nextInt());
+            final LocalizedString newName = LocalizedString.ofEnglish("newName " + RANDOM.nextInt());
             final Product updatedProduct = client().executeBlocking(ProductUpdateCommand.of(product, ChangeName.of(newName)));
 
             assertThat(updatedProduct.getMasterData().getStaged().getName()).isEqualTo(newName);
@@ -164,7 +163,7 @@ public class ProductUpdateCommandTest extends IntegrationTest {
     @Test
     public void changeSlug() throws Exception {
         withUpdateableProduct(client(), product -> {
-            final LocalizedString newSlug = ofEnglishLocale("new-slug-" + RANDOM.nextInt());
+            final LocalizedString newSlug = LocalizedString.ofEnglish("new-slug-" + RANDOM.nextInt());
             final Product updatedProduct = client().executeBlocking(ProductUpdateCommand.of(product, ChangeSlug.of(newSlug)));
 
             assertThat(updatedProduct.getMasterData().getStaged().getSlug()).isEqualTo(newSlug);
@@ -217,7 +216,7 @@ public class ProductUpdateCommandTest extends IntegrationTest {
     @Test
     public void setDescription() throws Exception {
         withUpdateableProduct(client(), product -> {
-            final LocalizedString newDescription = ofEnglishLocale("new description " + RANDOM.nextInt());
+            final LocalizedString newDescription = LocalizedString.ofEnglish("new description " + RANDOM.nextInt());
             final ProductUpdateCommand cmd = ProductUpdateCommand.of(product, SetDescription.of(newDescription));
             final Product updatedProduct = client().executeBlocking(cmd);
 
@@ -385,7 +384,7 @@ public class ProductUpdateCommandTest extends IntegrationTest {
         withUpdateableProduct(client(), product -> {
             //changing only staged and not current
             final LocalizedString oldDescriptionOption = product.getMasterData().getStaged().getDescription();
-            final LocalizedString newDescription = ofEnglishLocale("new description " + RANDOM.nextInt());
+            final LocalizedString newDescription = LocalizedString.ofEnglish("new description " + RANDOM.nextInt());
             final ProductUpdateCommand cmd = ProductUpdateCommand.of(product, asList(Publish.of(), SetDescription.of(newDescription)));
             final Product updatedProduct = client().executeBlocking(cmd);
             assertThat(oldDescriptionOption).isNotEqualTo(newDescription);

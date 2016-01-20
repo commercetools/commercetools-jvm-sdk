@@ -57,7 +57,7 @@ public class LocalizedStringTest {
 
     @Test
     public void ofEnglishLocale() {
-        assertThat(LocalizedString.ofEnglishLocale("dog food"))
+        assertThat(LocalizedString.ofEnglish("dog food"))
                 .isEqualTo(LocalizedString.of(Locale.ENGLISH, "dog food"));
     }
 
