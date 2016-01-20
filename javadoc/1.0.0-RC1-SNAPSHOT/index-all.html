@@ -499,7 +499,7 @@
 <dd>
 <div class="block">HTTP code 400 response from SPHERE.IO.</div>
 </dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/client/BadRequestException.html#BadRequestException--">BadRequestException()</a></span> - Constructor for exception io.sphere.sdk.client.<a href="io/sphere/sdk/client/BadRequestException.html" title="class in io.sphere.sdk.client">BadRequestException</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/client/BadRequestException.html#BadRequestException-java.lang.String-">BadRequestException(String)</a></span> - Constructor for exception io.sphere.sdk.client.<a href="io/sphere/sdk/client/BadRequestException.html" title="class in io.sphere.sdk.client">BadRequestException</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/models/Base.html" title="class in io.sphere.sdk.models"><span class="typeNameLink">Base</span></a> - Class in <a href="io/sphere/sdk/models/package-summary.html">io.sphere.sdk.models</a></dt>
 <dd>
@@ -568,8 +568,6 @@
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/commands/MetaModelCreateCommandBuilder.html#build--">build()</a></span> - Method in class io.sphere.sdk.commands.<a href="io/sphere/sdk/commands/MetaModelCreateCommandBuilder.html" title="class in io.sphere.sdk.commands">MetaModelCreateCommandBuilder</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/commands/MetaModelUpdateCommandDslBuilder.html#build--">build()</a></span> - Method in class io.sphere.sdk.commands.<a href="io/sphere/sdk/commands/MetaModelUpdateCommandDslBuilder.html" title="class in io.sphere.sdk.commands">MetaModelUpdateCommandDslBuilder</a></dt>
-<dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/commands/UpdateCommandDslBuilder.html#build--">build()</a></span> - Method in class io.sphere.sdk.commands.<a href="io/sphere/sdk/commands/UpdateCommandDslBuilder.html" title="class in io.sphere.sdk.commands">UpdateCommandDslBuilder</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/customergroups/queries/CustomerGroupQueryBuilder.html#build--">build()</a></span> - Method in class io.sphere.sdk.customergroups.queries.<a href="io/sphere/sdk/customergroups/queries/CustomerGroupQueryBuilder.html" title="class in io.sphere.sdk.customergroups.queries">CustomerGroupQueryBuilder</a></dt>
 <dd>&nbsp;</dd>
@@ -1669,8 +1667,6 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/commands/MetaModelUpdateCommandDslImpl.html#copyBuilder--">copyBuilder()</a></span> - Method in class io.sphere.sdk.commands.<a href="io/sphere/sdk/commands/MetaModelUpdateCommandDslImpl.html" title="class in io.sphere.sdk.commands">MetaModelUpdateCommandDslImpl</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/commands/UpdateCommandDslImpl.html#copyBuilder--">copyBuilder()</a></span> - Method in class io.sphere.sdk.commands.<a href="io/sphere/sdk/commands/UpdateCommandDslImpl.html" title="class in io.sphere.sdk.commands">UpdateCommandDslImpl</a></dt>
-<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/MetaModelGetDslImpl.html#copyBuilder--">copyBuilder()</a></span> - Method in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/MetaModelGetDslImpl.html" title="class in io.sphere.sdk.queries">MetaModelGetDslImpl</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/MetaModelQueryDslImpl.html#copyBuilder--">copyBuilder()</a></span> - Method in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="class in io.sphere.sdk.queries">MetaModelQueryDslImpl</a></dt>
@@ -1754,8 +1750,6 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <div class="block">Base class to implement commands which create an resource in SPHERE.IO.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/commands/CreateCommandImpl.html#CreateCommandImpl-C-java.lang.String-com.fasterxml.jackson.databind.JavaType-">CreateCommandImpl(C, String, JavaType)</a></span> - Constructor for class io.sphere.sdk.commands.<a href="io/sphere/sdk/commands/CreateCommandImpl.html" title="class in io.sphere.sdk.commands">CreateCommandImpl</a></dt>
-<dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/commands/CreateCommandImpl.html#CreateCommandImpl-C-io.sphere.sdk.client.JsonEndpoint-">CreateCommandImpl(C, JsonEndpoint&lt;T&gt;)</a></span> - Constructor for class io.sphere.sdk.commands.<a href="io/sphere/sdk/commands/CreateCommandImpl.html" title="class in io.sphere.sdk.commands">CreateCommandImpl</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/http/HttpStatusCode.html#CREATED_201">CREATED_201</a></span> - Static variable in class io.sphere.sdk.http.<a href="io/sphere/sdk/http/HttpStatusCode.html" title="class in io.sphere.sdk.http">HttpStatusCode</a></dt>
 <dd>&nbsp;</dd>
@@ -2247,19 +2241,15 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/client/JsonNodeSphereRequest.html#deserialize-io.sphere.sdk.http.HttpResponse-">deserialize(HttpResponse)</a></span> - Method in class io.sphere.sdk.client.<a href="io/sphere/sdk/client/JsonNodeSphereRequest.html" title="class in io.sphere.sdk.client">JsonNodeSphereRequest</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/client/SphereClientUtils.html#deserialize-io.sphere.sdk.http.HttpResponse-com.fasterxml.jackson.core.type.TypeReference-">deserialize(HttpResponse, TypeReference&lt;T&gt;)</a></span> - Static method in class io.sphere.sdk.client.<a href="io/sphere/sdk/client/SphereClientUtils.html" title="class in io.sphere.sdk.client">SphereClientUtils</a></dt>
-<dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/client/SphereClientUtils.html#deserialize-io.sphere.sdk.http.HttpResponse-com.fasterxml.jackson.databind.JavaType-">deserialize(HttpResponse, JavaType)</a></span> - Static method in class io.sphere.sdk.client.<a href="io/sphere/sdk/client/SphereClientUtils.html" title="class in io.sphere.sdk.client">SphereClientUtils</a></dt>
-<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/client/SphereRequest.html#deserialize-io.sphere.sdk.http.HttpResponse-">deserialize(HttpResponse)</a></span> - Method in interface io.sphere.sdk.client.<a href="io/sphere/sdk/client/SphereRequest.html" title="interface in io.sphere.sdk.client">SphereRequest</a></dt>
 <dd>
 <div class="block">Takes an http response and maps it into a Java object of type T.</div>
 </dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/client/SphereRequestBase.html#deserialize-io.sphere.sdk.http.HttpResponse-com.fasterxml.jackson.core.type.TypeReference-">deserialize(HttpResponse, TypeReference&lt;T&gt;)</a></span> - Static method in class io.sphere.sdk.client.<a href="io/sphere/sdk/client/SphereRequestBase.html" title="class in io.sphere.sdk.client">SphereRequestBase</a></dt>
-<dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/client/SphereRequestBase.html#deserialize-io.sphere.sdk.http.HttpResponse-com.fasterxml.jackson.databind.JavaType-">deserialize(HttpResponse, JavaType)</a></span> - Static method in class io.sphere.sdk.client.<a href="io/sphere/sdk/client/SphereRequestBase.html" title="class in io.sphere.sdk.client">SphereRequestBase</a></dt>
-<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/client/SphereRequestDecorator.html#deserialize-io.sphere.sdk.http.HttpResponse-">deserialize(HttpResponse)</a></span> - Method in class io.sphere.sdk.client.<a href="io/sphere/sdk/client/SphereRequestDecorator.html" title="class in io.sphere.sdk.client">SphereRequestDecorator</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/client/SphereRequestUtils.html#deserialize-io.sphere.sdk.http.HttpResponse-com.fasterxml.jackson.core.type.TypeReference-">deserialize(HttpResponse, TypeReference&lt;T&gt;)</a></span> - Static method in class io.sphere.sdk.client.<a href="io/sphere/sdk/client/SphereRequestUtils.html" title="class in io.sphere.sdk.client">SphereRequestUtils</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/client/SphereRequestUtils.html#deserialize-io.sphere.sdk.http.HttpResponse-com.fasterxml.jackson.databind.JavaType-">deserialize(HttpResponse, JavaType)</a></span> - Static method in class io.sphere.sdk.client.<a href="io/sphere/sdk/client/SphereRequestUtils.html" title="class in io.sphere.sdk.client">SphereRequestUtils</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/commands/CommandImpl.html#deserialize-io.sphere.sdk.http.HttpResponse-">deserialize(HttpResponse)</a></span> - Method in class io.sphere.sdk.commands.<a href="io/sphere/sdk/commands/CommandImpl.html" title="class in io.sphere.sdk.commands">CommandImpl</a></dt>
 <dd>&nbsp;</dd>
@@ -3377,9 +3367,7 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/http/HttpRequest.html#getBody--">getBody()</a></span> - Method in interface io.sphere.sdk.http.<a href="io/sphere/sdk/http/HttpRequest.html" title="interface in io.sphere.sdk.http">HttpRequest</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/client/SphereClientUtils.html#getBodyAsString-io.sphere.sdk.http.HttpResponse-">getBodyAsString(HttpResponse)</a></span> - Static method in class io.sphere.sdk.client.<a href="io/sphere/sdk/client/SphereClientUtils.html" title="class in io.sphere.sdk.client">SphereClientUtils</a></dt>
-<dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/client/SphereRequestBase.html#getBodyAsString-io.sphere.sdk.http.HttpResponse-">getBodyAsString(HttpResponse)</a></span> - Static method in class io.sphere.sdk.client.<a href="io/sphere/sdk/client/SphereRequestBase.html" title="class in io.sphere.sdk.client">SphereRequestBase</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/client/SphereRequestUtils.html#getBodyAsString-io.sphere.sdk.http.HttpResponse-">getBodyAsString(HttpResponse)</a></span> - Static method in class io.sphere.sdk.client.<a href="io/sphere/sdk/client/SphereRequestUtils.html" title="class in io.sphere.sdk.client">SphereRequestUtils</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/Address.html#getBuilding--">getBuilding()</a></span> - Method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/Address.html" title="class in io.sphere.sdk.models">Address</a></dt>
 <dd>&nbsp;</dd>
@@ -5591,8 +5579,6 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/commands/UpdateCommand.html#getUpdateActions--">getUpdateActions()</a></span> - Method in interface io.sphere.sdk.commands.<a href="io/sphere/sdk/commands/UpdateCommand.html" title="interface in io.sphere.sdk.commands">UpdateCommand</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/commands/UpdateCommandDslImpl.html#getUpdateActions--">getUpdateActions()</a></span> - Method in class io.sphere.sdk.commands.<a href="io/sphere/sdk/commands/UpdateCommandDslImpl.html" title="class in io.sphere.sdk.commands">UpdateCommandDslImpl</a></dt>
-<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/search/model/RangeStats.html#getUpperEndpoint--">getUpperEndpoint()</a></span> - Method in class io.sphere.sdk.search.model.<a href="io/sphere/sdk/search/model/RangeStats.html" title="class in io.sphere.sdk.search.model">RangeStats</a></dt>
 <dd>
 <div class="block">Upper endpoint of the range.</div>
@@ -5817,8 +5803,6 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/commands/MetaModelUpdateCommandDslImpl.html#getVersioned--">getVersioned()</a></span> - Method in class io.sphere.sdk.commands.<a href="io/sphere/sdk/commands/MetaModelUpdateCommandDslImpl.html" title="class in io.sphere.sdk.commands">MetaModelUpdateCommandDslImpl</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/commands/UpdateCommandDslImpl.html#getVersioned--">getVersioned()</a></span> - Method in class io.sphere.sdk.commands.<a href="io/sphere/sdk/commands/UpdateCommandDslImpl.html" title="class in io.sphere.sdk.commands">UpdateCommandDslImpl</a></dt>
-<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/ParcelMeasurements.html#getWeightInGram--">getWeightInGram()</a></span> - Method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/ParcelMeasurements.html" title="class in io.sphere.sdk.orders">ParcelMeasurements</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/Image.html#getWidth--">getWidth()</a></span> - Method in interface io.sphere.sdk.products.<a href="io/sphere/sdk/products/Image.html" title="interface in io.sphere.sdk.products">Image</a></dt>
@@ -5958,8 +5942,6 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/commands/MetaModelCreateCommandImpl.html#httpRequestIntent--">httpRequestIntent()</a></span> - Method in class io.sphere.sdk.commands.<a href="io/sphere/sdk/commands/MetaModelCreateCommandImpl.html" title="class in io.sphere.sdk.commands">MetaModelCreateCommandImpl</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/commands/MetaModelUpdateCommandDslImpl.html#httpRequestIntent--">httpRequestIntent()</a></span> - Method in class io.sphere.sdk.commands.<a href="io/sphere/sdk/commands/MetaModelUpdateCommandDslImpl.html" title="class in io.sphere.sdk.commands">MetaModelUpdateCommandDslImpl</a></dt>
-<dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/commands/UpdateCommandDslImpl.html#httpRequestIntent--">httpRequestIntent()</a></span> - Method in class io.sphere.sdk.commands.<a href="io/sphere/sdk/commands/UpdateCommandDslImpl.html" title="class in io.sphere.sdk.commands">UpdateCommandDslImpl</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/customers/commands/CustomerChangePasswordCommand.html#httpRequestIntent--">httpRequestIntent()</a></span> - Method in class io.sphere.sdk.customers.commands.<a href="io/sphere/sdk/customers/commands/CustomerChangePasswordCommand.html" title="class in io.sphere.sdk.customers.commands">CustomerChangePasswordCommand</a></dt>
 <dd>&nbsp;</dd>
@@ -7124,8 +7106,6 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/commands/MetaModelUpdateCommandDslImpl.html#jacksonJavaType--">jacksonJavaType()</a></span> - Method in class io.sphere.sdk.commands.<a href="io/sphere/sdk/commands/MetaModelUpdateCommandDslImpl.html" title="class in io.sphere.sdk.commands">MetaModelUpdateCommandDslImpl</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/commands/UpdateCommandDslImpl.html#jacksonJavaType--">jacksonJavaType()</a></span> - Method in class io.sphere.sdk.commands.<a href="io/sphere/sdk/commands/UpdateCommandDslImpl.html" title="class in io.sphere.sdk.commands">UpdateCommandDslImpl</a></dt>
-<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/customers/commands/CustomerChangePasswordCommand.html#jacksonJavaType--">jacksonJavaType()</a></span> - Method in class io.sphere.sdk.customers.commands.<a href="io/sphere/sdk/customers/commands/CustomerChangePasswordCommand.html" title="class in io.sphere.sdk.customers.commands">CustomerChangePasswordCommand</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/customers/commands/CustomerCreateEmailTokenCommand.html#jacksonJavaType--">jacksonJavaType()</a></span> - Method in class io.sphere.sdk.customers.commands.<a href="io/sphere/sdk/customers/commands/CustomerCreateEmailTokenCommand.html" title="class in io.sphere.sdk.customers.commands">CustomerCreateEmailTokenCommand</a></dt>
@@ -7143,6 +7123,8 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/customers/commands/CustomerVerifyEmailCommand.html#jacksonJavaType--">jacksonJavaType()</a></span> - Method in class io.sphere.sdk.customers.commands.<a href="io/sphere/sdk/customers/commands/CustomerVerifyEmailCommand.html" title="class in io.sphere.sdk.customers.commands">CustomerVerifyEmailCommand</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/commands/OrderImportCommand.html#jacksonJavaType--">jacksonJavaType()</a></span> - Method in class io.sphere.sdk.orders.commands.<a href="io/sphere/sdk/orders/commands/OrderImportCommand.html" title="class in io.sphere.sdk.orders.commands">OrderImportCommand</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/MetaModelGetDslImpl.html#jacksonJavaType--">jacksonJavaType()</a></span> - Method in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/MetaModelGetDslImpl.html" title="class in io.sphere.sdk.queries">MetaModelGetDslImpl</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/messages/MessageDerivateHint.html#javaType--">javaType()</a></span> - Method in class io.sphere.sdk.messages.<a href="io/sphere/sdk/messages/MessageDerivateHint.html" title="class in io.sphere.sdk.messages">MessageDerivateHint</a></dt>
 <dd>&nbsp;</dd>
@@ -7767,7 +7749,7 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dd>
 <div class="block">Internal base class to implement commands which deletes a resource by ID in SPHERE.IO.</div>
 </dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/commands/MetaModelByIdDeleteCommandImpl.html#MetaModelByIdDeleteCommandImpl-io.sphere.sdk.models.Versioned-io.sphere.sdk.client.JsonEndpoint-E-java.util.List-java.util.function.Function-">MetaModelByIdDeleteCommandImpl(Versioned&lt;T&gt;, JsonEndpoint&lt;T&gt;, E, List&lt;ExpansionPath&lt;T&gt;&gt;, Function&lt;MetaModelByIdDeleteCommandBuilder&lt;T, C, E&gt;, C&gt;)</a></span> - Constructor for class io.sphere.sdk.commands.<a href="io/sphere/sdk/commands/MetaModelByIdDeleteCommandImpl.html" title="class in io.sphere.sdk.commands">MetaModelByIdDeleteCommandImpl</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/commands/MetaModelByIdDeleteCommandImpl.html#MetaModelByIdDeleteCommandImpl-io.sphere.sdk.models.Versioned-com.fasterxml.jackson.databind.JavaType-java.lang.String-E-java.util.List-java.util.function.Function-">MetaModelByIdDeleteCommandImpl(Versioned&lt;T&gt;, JavaType, String, E, List&lt;ExpansionPath&lt;T&gt;&gt;, Function&lt;MetaModelByIdDeleteCommandBuilder&lt;T, C, E&gt;, C&gt;)</a></span> - Constructor for class io.sphere.sdk.commands.<a href="io/sphere/sdk/commands/MetaModelByIdDeleteCommandImpl.html" title="class in io.sphere.sdk.commands">MetaModelByIdDeleteCommandImpl</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/commands/MetaModelByIdDeleteCommandImpl.html#MetaModelByIdDeleteCommandImpl-io.sphere.sdk.models.Versioned-io.sphere.sdk.client.JsonEndpoint-E-java.util.function.Function-">MetaModelByIdDeleteCommandImpl(Versioned&lt;T&gt;, JsonEndpoint&lt;T&gt;, E, Function&lt;MetaModelByIdDeleteCommandBuilder&lt;T, C, E&gt;, C&gt;)</a></span> - Constructor for class io.sphere.sdk.commands.<a href="io/sphere/sdk/commands/MetaModelByIdDeleteCommandImpl.html" title="class in io.sphere.sdk.commands">MetaModelByIdDeleteCommandImpl</a></dt>
 <dd>&nbsp;</dd>
@@ -7781,7 +7763,7 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dd>
 <div class="block">Internal base class to implement commands which create a resource in SPHERE.IO.</div>
 </dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/commands/MetaModelCreateCommandImpl.html#MetaModelCreateCommandImpl-D-io.sphere.sdk.client.JsonEndpoint-java.util.List-E-java.util.function.Function-">MetaModelCreateCommandImpl(D, JsonEndpoint&lt;T&gt;, List&lt;ExpansionPath&lt;T&gt;&gt;, E, Function&lt;MetaModelCreateCommandBuilder&lt;T, C, D, E&gt;, C&gt;)</a></span> - Constructor for class io.sphere.sdk.commands.<a href="io/sphere/sdk/commands/MetaModelCreateCommandImpl.html" title="class in io.sphere.sdk.commands">MetaModelCreateCommandImpl</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/commands/MetaModelCreateCommandImpl.html#MetaModelCreateCommandImpl-D-com.fasterxml.jackson.databind.JavaType-java.lang.String-java.util.List-E-java.util.function.Function-">MetaModelCreateCommandImpl(D, JavaType, String, List&lt;ExpansionPath&lt;T&gt;&gt;, E, Function&lt;MetaModelCreateCommandBuilder&lt;T, C, D, E&gt;, C&gt;)</a></span> - Constructor for class io.sphere.sdk.commands.<a href="io/sphere/sdk/commands/MetaModelCreateCommandImpl.html" title="class in io.sphere.sdk.commands">MetaModelCreateCommandImpl</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/commands/MetaModelCreateCommandImpl.html#MetaModelCreateCommandImpl-io.sphere.sdk.commands.MetaModelCreateCommandBuilder-">MetaModelCreateCommandImpl(MetaModelCreateCommandBuilder&lt;T, C, D, E&gt;)</a></span> - Constructor for class io.sphere.sdk.commands.<a href="io/sphere/sdk/commands/MetaModelCreateCommandImpl.html" title="class in io.sphere.sdk.commands">MetaModelCreateCommandImpl</a></dt>
 <dd>&nbsp;</dd>
@@ -7805,11 +7787,9 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/MetaModelGetDslImpl.html#MetaModelGetDslImpl-java.lang.String-io.sphere.sdk.client.JsonEndpoint-E-java.util.function.Function-">MetaModelGetDslImpl(String, JsonEndpoint&lt;R&gt;, E, Function&lt;MetaModelGetDslBuilder&lt;R, T, C, E&gt;, C&gt;)</a></span> - Constructor for class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/MetaModelGetDslImpl.html" title="class in io.sphere.sdk.queries">MetaModelGetDslImpl</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/MetaModelGetDslImpl.html#MetaModelGetDslImpl-io.sphere.sdk.client.JsonEndpoint-java.lang.String-E-java.util.function.Function-">MetaModelGetDslImpl(JsonEndpoint&lt;R&gt;, String, E, Function&lt;MetaModelGetDslBuilder&lt;R, T, C, E&gt;, C&gt;)</a></span> - Constructor for class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/MetaModelGetDslImpl.html" title="class in io.sphere.sdk.queries">MetaModelGetDslImpl</a></dt>
-<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/MetaModelGetDslImpl.html#MetaModelGetDslImpl-io.sphere.sdk.queries.MetaModelGetDslBuilder-">MetaModelGetDslImpl(MetaModelGetDslBuilder&lt;R, T, C, E&gt;)</a></span> - Constructor for class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/MetaModelGetDslImpl.html" title="class in io.sphere.sdk.queries">MetaModelGetDslImpl</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/MetaModelGetDslImpl.html#MetaModelGetDslImpl-io.sphere.sdk.client.JsonEndpoint-java.lang.String-java.util.List-E-java.util.function.Function-java.util.List-">MetaModelGetDslImpl(JsonEndpoint&lt;R&gt;, String, List&lt;ExpansionPath&lt;T&gt;&gt;, E, Function&lt;MetaModelGetDslBuilder&lt;R, T, C, E&gt;, C&gt;, List&lt;HttpQueryParameter&gt;)</a></span> - Constructor for class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/MetaModelGetDslImpl.html" title="class in io.sphere.sdk.queries">MetaModelGetDslImpl</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/MetaModelGetDslImpl.html#MetaModelGetDslImpl-com.fasterxml.jackson.databind.JavaType-java.lang.String-java.lang.String-java.util.List-E-java.util.function.Function-java.util.List-">MetaModelGetDslImpl(JavaType, String, String, List&lt;ExpansionPath&lt;T&gt;&gt;, E, Function&lt;MetaModelGetDslBuilder&lt;R, T, C, E&gt;, C&gt;, List&lt;HttpQueryParameter&gt;)</a></span> - Constructor for class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/MetaModelGetDslImpl.html" title="class in io.sphere.sdk.queries">MetaModelGetDslImpl</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/queries/MetaModelQueryDsl.html" title="interface in io.sphere.sdk.queries"><span class="typeNameLink">MetaModelQueryDsl</span></a>&lt;<a href="io/sphere/sdk/queries/MetaModelQueryDsl.html" title="type parameter in MetaModelQueryDsl">T</a>,<a href="io/sphere/sdk/queries/MetaModelQueryDsl.html" title="type parameter in MetaModelQueryDsl">C</a> extends <a href="io/sphere/sdk/queries/MetaModelQueryDsl.html" title="interface in io.sphere.sdk.queries">MetaModelQueryDsl</a>&lt;<a href="io/sphere/sdk/queries/MetaModelQueryDsl.html" title="type parameter in MetaModelQueryDsl">T</a>,<a href="io/sphere/sdk/queries/MetaModelQueryDsl.html" title="type parameter in MetaModelQueryDsl">C</a>,<a href="io/sphere/sdk/queries/MetaModelQueryDsl.html" title="type parameter in MetaModelQueryDsl">Q</a>,<a href="io/sphere/sdk/queries/MetaModelQueryDsl.html" title="type parameter in MetaModelQueryDsl">E</a>&gt;,<a href="io/sphere/sdk/queries/MetaModelQueryDsl.html" title="type parameter in MetaModelQueryDsl">Q</a>,<a href="io/sphere/sdk/queries/MetaModelQueryDsl.html" title="type parameter in MetaModelQueryDsl">E</a>&gt; - Interface in <a href="io/sphere/sdk/queries/package-summary.html">io.sphere.sdk.queries</a></dt>
 <dd>&nbsp;</dd>
@@ -8358,8 +8338,6 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/client/TimeoutSphereClientDecorator.html#of-io.sphere.sdk.client.SphereClient-long-java.util.concurrent.TimeUnit-">of(SphereClient, long, TimeUnit)</a></span> - Static method in class io.sphere.sdk.client.<a href="io/sphere/sdk/client/TimeoutSphereClientDecorator.html" title="class in io.sphere.sdk.client">TimeoutSphereClientDecorator</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/client/TokensSupplier.html#of-io.sphere.sdk.client.SphereAuthConfig-io.sphere.sdk.http.HttpClient-boolean-">of(SphereAuthConfig, HttpClient, boolean)</a></span> - Static method in interface io.sphere.sdk.client.<a href="io/sphere/sdk/client/TokensSupplier.html" title="interface in io.sphere.sdk.client">TokensSupplier</a></dt>
-<dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/commands/UpdateCommandDslBuilder.html#of-io.sphere.sdk.models.Versioned-java.util.List-com.fasterxml.jackson.core.type.TypeReference-java.lang.String-java.util.function.Function-">of(Versioned&lt;T&gt;, List&lt;? extends UpdateAction&lt;T&gt;&gt;, TypeReference&lt;T&gt;, String, Function&lt;UpdateCommandDslBuilder&lt;T, C&gt;, C&gt;)</a></span> - Static method in class io.sphere.sdk.commands.<a href="io/sphere/sdk/commands/UpdateCommandDslBuilder.html" title="class in io.sphere.sdk.commands">UpdateCommandDslBuilder</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/customergroups/commands/CustomerGroupCreateCommand.html#of-io.sphere.sdk.customergroups.CustomerGroupDraft-">of(CustomerGroupDraft)</a></span> - Static method in interface io.sphere.sdk.customergroups.commands.<a href="io/sphere/sdk/customergroups/commands/CustomerGroupCreateCommand.html" title="interface in io.sphere.sdk.customergroups.commands">CustomerGroupCreateCommand</a></dt>
 <dd>&nbsp;</dd>
@@ -9832,7 +9810,9 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/LocalizedString.html#ofEnglishLocale-java.lang.String-">ofEnglishLocale(String)</a></span> - Static method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/LocalizedString.html" title="class in io.sphere.sdk.models">LocalizedString</a></dt>
 <dd>
-<div class="block">Creates an instance with one translation for English (<code>Locale.ENGLISH</code>).</div>
+<div class="block"><span class="deprecatedLabel">Deprecated.</span>
+<div class="block"><span class="deprecationComment">use <a href="io/sphere/sdk/models/LocalizedString.html#ofEnglish-java.lang.String-"><code>LocalizedString.ofEnglish(String)</code></a> instead</span></div>
+</div>
 </dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/search/ProductAttributeFacetAndFilterSearchModel.html#ofEnum-java.lang.String-">ofEnum(String)</a></span> - Method in class io.sphere.sdk.products.search.<a href="io/sphere/sdk/products/search/ProductAttributeFacetAndFilterSearchModel.html" title="class in io.sphere.sdk.products.search">ProductAttributeFacetAndFilterSearchModel</a></dt>
 <dd>&nbsp;</dd>
@@ -14042,15 +14022,11 @@ CompletionStage&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execu
 <dd>
 <div class="block">An argument for a sphere client to execute an HTTP API call on the level of one SPHERE.IO project.</div>
 </dd>
-<dt><a href="io/sphere/sdk/client/SphereRequestBase.html" title="class in io.sphere.sdk.client"><span class="typeNameLink">SphereRequestBase</span></a> - Class in <a href="io/sphere/sdk/client/package-summary.html">io.sphere.sdk.client</a></dt>
-<dd>
-<div class="block">A base class with utility methods for the implementation of <a href="io/sphere/sdk/client/SphereRequest.html" title="interface in io.sphere.sdk.client"><code>SphereRequest</code></a>s.</div>
-</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/client/SphereRequestBase.html#SphereRequestBase--">SphereRequestBase()</a></span> - Constructor for class io.sphere.sdk.client.<a href="io/sphere/sdk/client/SphereRequestBase.html" title="class in io.sphere.sdk.client">SphereRequestBase</a></dt>
-<dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/client/SphereRequestDecorator.html" title="class in io.sphere.sdk.client"><span class="typeNameLink">SphereRequestDecorator</span></a>&lt;<a href="io/sphere/sdk/client/SphereRequestDecorator.html" title="type parameter in SphereRequestDecorator">T</a>&gt; - Class in <a href="io/sphere/sdk/client/package-summary.html">io.sphere.sdk.client</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/client/SphereRequestDecorator.html#SphereRequestDecorator-io.sphere.sdk.client.SphereRequest-">SphereRequestDecorator(SphereRequest&lt;T&gt;)</a></span> - Constructor for class io.sphere.sdk.client.<a href="io/sphere/sdk/client/SphereRequestDecorator.html" title="class in io.sphere.sdk.client">SphereRequestDecorator</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="io/sphere/sdk/client/SphereRequestUtils.html" title="class in io.sphere.sdk.client"><span class="typeNameLink">SphereRequestUtils</span></a> - Class in <a href="io/sphere/sdk/client/package-summary.html">io.sphere.sdk.client</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/meta/SphereResources.html" title="class in io.sphere.sdk.meta"><span class="typeNameLink">SphereResources</span></a> - Class in <a href="io/sphere/sdk/meta/package-summary.html">io.sphere.sdk.meta</a></dt>
 <dd>
@@ -14957,8 +14933,6 @@ assertThat(type.getFieldDefinitions()).containsExactly(stringFieldDefinition);
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/projects/Project.html#typeReference--">typeReference()</a></span> - Static method in class io.sphere.sdk.projects.<a href="io/sphere/sdk/projects/Project.html" title="class in io.sphere.sdk.projects">Project</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/MetaModelGetDslImpl.html#typeReference--">typeReference()</a></span> - Method in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/MetaModelGetDslImpl.html" title="class in io.sphere.sdk.queries">MetaModelGetDslImpl</a></dt>
-<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/reviews/Review.html#typeReference--">typeReference()</a></span> - Static method in interface io.sphere.sdk.reviews.<a href="io/sphere/sdk/reviews/Review.html" title="interface in io.sphere.sdk.reviews">Review</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/shippingmethods/ShippingMethod.html#typeReference--">typeReference()</a></span> - Static method in interface io.sphere.sdk.shippingmethods.<a href="io/sphere/sdk/shippingmethods/ShippingMethod.html" title="interface in io.sphere.sdk.shippingmethods">ShippingMethod</a></dt>
@@ -15020,18 +14994,6 @@ assertThat(type.getFieldDefinitions()).containsExactly(stringFieldDefinition);
 <dt><a href="io/sphere/sdk/commands/UpdateCommand.html" title="interface in io.sphere.sdk.commands"><span class="typeNameLink">UpdateCommand</span></a>&lt;<a href="io/sphere/sdk/commands/UpdateCommand.html" title="type parameter in UpdateCommand">T</a>&gt; - Interface in <a href="io/sphere/sdk/commands/package-summary.html">io.sphere.sdk.commands</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/commands/UpdateCommandDsl.html" title="interface in io.sphere.sdk.commands"><span class="typeNameLink">UpdateCommandDsl</span></a>&lt;<a href="io/sphere/sdk/commands/UpdateCommandDsl.html" title="type parameter in UpdateCommandDsl">T</a> extends <a href="io/sphere/sdk/models/ResourceView.html" title="interface in io.sphere.sdk.models">ResourceView</a>&lt;<a href="io/sphere/sdk/commands/UpdateCommandDsl.html" title="type parameter in UpdateCommandDsl">T</a>,<a href="io/sphere/sdk/commands/UpdateCommandDsl.html" title="type parameter in UpdateCommandDsl">T</a>&gt;,<a href="io/sphere/sdk/commands/UpdateCommandDsl.html" title="type parameter in UpdateCommandDsl">C</a> extends <a href="io/sphere/sdk/commands/UpdateCommandDsl.html" title="interface in io.sphere.sdk.commands">UpdateCommandDsl</a>&lt;<a href="io/sphere/sdk/commands/UpdateCommandDsl.html" title="type parameter in UpdateCommandDsl">T</a>,<a href="io/sphere/sdk/commands/UpdateCommandDsl.html" title="type parameter in UpdateCommandDsl">C</a>&gt;&gt; - Interface in <a href="io/sphere/sdk/commands/package-summary.html">io.sphere.sdk.commands</a></dt>
-<dd>&nbsp;</dd>
-<dt><a href="io/sphere/sdk/commands/UpdateCommandDslBuilder.html" title="class in io.sphere.sdk.commands"><span class="typeNameLink">UpdateCommandDslBuilder</span></a>&lt;<a href="io/sphere/sdk/commands/UpdateCommandDslBuilder.html" title="type parameter in UpdateCommandDslBuilder">T</a> extends <a href="io/sphere/sdk/models/ResourceView.html" title="interface in io.sphere.sdk.models">ResourceView</a>&lt;<a href="io/sphere/sdk/commands/UpdateCommandDslBuilder.html" title="type parameter in UpdateCommandDslBuilder">T</a>,<a href="io/sphere/sdk/commands/UpdateCommandDslBuilder.html" title="type parameter in UpdateCommandDslBuilder">T</a>&gt;,<a href="io/sphere/sdk/commands/UpdateCommandDslBuilder.html" title="type parameter in UpdateCommandDslBuilder">C</a> extends <a href="io/sphere/sdk/commands/UpdateCommandDsl.html" title="interface in io.sphere.sdk.commands">UpdateCommandDsl</a>&lt;<a href="io/sphere/sdk/commands/UpdateCommandDslBuilder.html" title="type parameter in UpdateCommandDslBuilder">T</a>,<a href="io/sphere/sdk/commands/UpdateCommandDslBuilder.html" title="type parameter in UpdateCommandDslBuilder">C</a>&gt;&gt; - Class in <a href="io/sphere/sdk/commands/package-summary.html">io.sphere.sdk.commands</a></dt>
-<dd>
-<div class="block">Internal class.</div>
-</dd>
-<dt><a href="io/sphere/sdk/commands/UpdateCommandDslImpl.html" title="class in io.sphere.sdk.commands"><span class="typeNameLink">UpdateCommandDslImpl</span></a>&lt;<a href="io/sphere/sdk/commands/UpdateCommandDslImpl.html" title="type parameter in UpdateCommandDslImpl">T</a> extends <a href="io/sphere/sdk/models/ResourceView.html" title="interface in io.sphere.sdk.models">ResourceView</a>&lt;<a href="io/sphere/sdk/commands/UpdateCommandDslImpl.html" title="type parameter in UpdateCommandDslImpl">T</a>,<a href="io/sphere/sdk/commands/UpdateCommandDslImpl.html" title="type parameter in UpdateCommandDslImpl">T</a>&gt;,<a href="io/sphere/sdk/commands/UpdateCommandDslImpl.html" title="type parameter in UpdateCommandDslImpl">C</a> extends <a href="io/sphere/sdk/commands/UpdateCommandDsl.html" title="interface in io.sphere.sdk.commands">UpdateCommandDsl</a>&lt;<a href="io/sphere/sdk/commands/UpdateCommandDslImpl.html" title="type parameter in UpdateCommandDslImpl">T</a>,<a href="io/sphere/sdk/commands/UpdateCommandDslImpl.html" title="type parameter in UpdateCommandDslImpl">C</a>&gt;&gt; - Class in <a href="io/sphere/sdk/commands/package-summary.html">io.sphere.sdk.commands</a></dt>
-<dd>
-<div class="block">Internal base class to implement commands that change one resource in SPHERE.IO.</div>
-</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/commands/UpdateCommandDslImpl.html#UpdateCommandDslImpl-io.sphere.sdk.models.Versioned-java.util.List-io.sphere.sdk.client.JsonEndpoint-java.util.function.Function-">UpdateCommandDslImpl(Versioned&lt;T&gt;, List&lt;? extends UpdateAction&lt;T&gt;&gt;, JsonEndpoint&lt;T&gt;, Function&lt;UpdateCommandDslBuilder&lt;T, C&gt;, C&gt;)</a></span> - Constructor for class io.sphere.sdk.commands.<a href="io/sphere/sdk/commands/UpdateCommandDslImpl.html" title="class in io.sphere.sdk.commands">UpdateCommandDslImpl</a></dt>
-<dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/commands/UpdateCommandDslImpl.html#UpdateCommandDslImpl-io.sphere.sdk.commands.UpdateCommandDslBuilder-">UpdateCommandDslImpl(UpdateCommandDslBuilder&lt;T, C&gt;)</a></span> - Constructor for class io.sphere.sdk.commands.<a href="io/sphere/sdk/commands/UpdateCommandDslImpl.html" title="class in io.sphere.sdk.commands">UpdateCommandDslImpl</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/orders/commands/updateactions/UpdateSyncInfo.html" title="class in io.sphere.sdk.orders.commands.updateactions"><span class="typeNameLink">UpdateSyncInfo</span></a> - Class in <a href="io/sphere/sdk/orders/commands/updateactions/package-summary.html">io.sphere.sdk.orders.commands.updateactions</a></dt>
 <dd>
@@ -15293,8 +15255,6 @@ the order they are declared.</div>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/meta/BuildInfo.html#version--">version()</a></span> - Static method in class io.sphere.sdk.meta.<a href="io/sphere/sdk/meta/BuildInfo.html" title="class in io.sphere.sdk.meta">BuildInfo</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/commands/MetaModelUpdateCommandDslBuilder.html#versioned-io.sphere.sdk.models.Versioned-">versioned(Versioned&lt;T&gt;)</a></span> - Method in class io.sphere.sdk.commands.<a href="io/sphere/sdk/commands/MetaModelUpdateCommandDslBuilder.html" title="class in io.sphere.sdk.commands">MetaModelUpdateCommandDslBuilder</a></dt>
-<dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/commands/UpdateCommandDslBuilder.html#versioned-io.sphere.sdk.models.Versioned-">versioned(Versioned&lt;T&gt;)</a></span> - Method in class io.sphere.sdk.commands.<a href="io/sphere/sdk/commands/UpdateCommandDslBuilder.html" title="class in io.sphere.sdk.commands">UpdateCommandDslBuilder</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/models/Versioned.html" title="interface in io.sphere.sdk.models"><span class="typeNameLink">Versioned</span></a>&lt;<a href="io/sphere/sdk/models/Versioned.html" title="type parameter in Versioned">T</a>&gt; - Interface in <a href="io/sphere/sdk/models/package-summary.html">io.sphere.sdk.models</a></dt>
 <dd>
@@ -16061,8 +16021,6 @@ the order they are declared.</div>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/commands/MetaModelUpdateCommandDslImpl.html#withVersion-io.sphere.sdk.models.Versioned-">withVersion(Versioned&lt;T&gt;)</a></span> - Method in class io.sphere.sdk.commands.<a href="io/sphere/sdk/commands/MetaModelUpdateCommandDslImpl.html" title="class in io.sphere.sdk.commands">MetaModelUpdateCommandDslImpl</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/commands/UpdateCommandDsl.html#withVersion-io.sphere.sdk.models.Versioned-">withVersion(Versioned&lt;T&gt;)</a></span> - Method in interface io.sphere.sdk.commands.<a href="io/sphere/sdk/commands/UpdateCommandDsl.html" title="interface in io.sphere.sdk.commands">UpdateCommandDsl</a></dt>
-<dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/commands/UpdateCommandDslImpl.html#withVersion-io.sphere.sdk.models.Versioned-">withVersion(Versioned&lt;T&gt;)</a></span> - Method in class io.sphere.sdk.commands.<a href="io/sphere/sdk/commands/UpdateCommandDslImpl.html" title="class in io.sphere.sdk.commands">UpdateCommandDslImpl</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/customobjects/CustomObjectDraft.html#withVersion-java.lang.Long-">withVersion(Long)</a></span> - Method in class io.sphere.sdk.customobjects.<a href="io/sphere/sdk/customobjects/CustomObjectDraft.html" title="class in io.sphere.sdk.customobjects">CustomObjectDraft</a></dt>
 <dd>

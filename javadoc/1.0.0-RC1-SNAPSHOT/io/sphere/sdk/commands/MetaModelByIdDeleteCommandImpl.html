@@ -102,15 +102,10 @@ var activeTableTab = "activeTableTab";
 <li><a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.sphere.sdk.models">io.sphere.sdk.models.Base</a></li>
 <li>
 <ul class="inheritance">
-<li><a href="../../../../io/sphere/sdk/client/SphereRequestBase.html" title="class in io.sphere.sdk.client">io.sphere.sdk.client.SphereRequestBase</a></li>
-<li>
-<ul class="inheritance">
 <li><a href="../../../../io/sphere/sdk/commands/CommandImpl.html" title="class in io.sphere.sdk.commands">io.sphere.sdk.commands.CommandImpl</a>&lt;T&gt;</li>
 <li>
 <ul class="inheritance">
 <li>io.sphere.sdk.commands.MetaModelByIdDeleteCommandImpl&lt;T,C,E&gt;</li>
-</ul>
-</li>
 </ul>
 </li>
 </ul>
@@ -159,17 +154,18 @@ implements <a href="../../../../io/sphere/sdk/expansion/MetaModelExpansionDslExp
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>protected </code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/commands/MetaModelByIdDeleteCommandImpl.html#MetaModelByIdDeleteCommandImpl-io.sphere.sdk.models.Versioned-io.sphere.sdk.client.JsonEndpoint-E-java.util.function.Function-">MetaModelByIdDeleteCommandImpl</a></span>(<a href="../../../../io/sphere/sdk/models/Versioned.html" title="interface in io.sphere.sdk.models">Versioned</a>&lt;<a href="../../../../io/sphere/sdk/commands/MetaModelByIdDeleteCommandImpl.html" title="type parameter in MetaModelByIdDeleteCommandImpl">T</a>&gt;&nbsp;versioned,
-                              <a href="../../../../io/sphere/sdk/client/JsonEndpoint.html" title="class in io.sphere.sdk.client">JsonEndpoint</a>&lt;<a href="../../../../io/sphere/sdk/commands/MetaModelByIdDeleteCommandImpl.html" title="type parameter in MetaModelByIdDeleteCommandImpl">T</a>&gt;&nbsp;endpoint,
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/commands/MetaModelByIdDeleteCommandImpl.html#MetaModelByIdDeleteCommandImpl-io.sphere.sdk.models.Versioned-com.fasterxml.jackson.databind.JavaType-java.lang.String-E-java.util.List-java.util.function.Function-">MetaModelByIdDeleteCommandImpl</a></span>(<a href="../../../../io/sphere/sdk/models/Versioned.html" title="interface in io.sphere.sdk.models">Versioned</a>&lt;<a href="../../../../io/sphere/sdk/commands/MetaModelByIdDeleteCommandImpl.html" title="type parameter in MetaModelByIdDeleteCommandImpl">T</a>&gt;&nbsp;versioned,
+                              com.fasterxml.jackson.databind.JavaType&nbsp;javaType,
+                              java.lang.String&nbsp;endpoint,
                               <a href="../../../../io/sphere/sdk/commands/MetaModelByIdDeleteCommandImpl.html" title="type parameter in MetaModelByIdDeleteCommandImpl">E</a>&nbsp;expansionModel,
+                              java.util.List&lt;<a href="../../../../io/sphere/sdk/expansion/ExpansionPath.html" title="interface in io.sphere.sdk.expansion">ExpansionPath</a>&lt;<a href="../../../../io/sphere/sdk/commands/MetaModelByIdDeleteCommandImpl.html" title="type parameter in MetaModelByIdDeleteCommandImpl">T</a>&gt;&gt;&nbsp;expansionPaths,
                               java.util.function.Function&lt;<a href="../../../../io/sphere/sdk/commands/MetaModelByIdDeleteCommandBuilder.html" title="class in io.sphere.sdk.commands">MetaModelByIdDeleteCommandBuilder</a>&lt;<a href="../../../../io/sphere/sdk/commands/MetaModelByIdDeleteCommandImpl.html" title="type parameter in MetaModelByIdDeleteCommandImpl">T</a>,<a href="../../../../io/sphere/sdk/commands/MetaModelByIdDeleteCommandImpl.html" title="type parameter in MetaModelByIdDeleteCommandImpl">C</a>,<a href="../../../../io/sphere/sdk/commands/MetaModelByIdDeleteCommandImpl.html" title="type parameter in MetaModelByIdDeleteCommandImpl">E</a>&gt;,<a href="../../../../io/sphere/sdk/commands/MetaModelByIdDeleteCommandImpl.html" title="type parameter in MetaModelByIdDeleteCommandImpl">C</a>&gt;&nbsp;creationFunction)</code>&nbsp;</td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>protected </code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/commands/MetaModelByIdDeleteCommandImpl.html#MetaModelByIdDeleteCommandImpl-io.sphere.sdk.models.Versioned-io.sphere.sdk.client.JsonEndpoint-E-java.util.List-java.util.function.Function-">MetaModelByIdDeleteCommandImpl</a></span>(<a href="../../../../io/sphere/sdk/models/Versioned.html" title="interface in io.sphere.sdk.models">Versioned</a>&lt;<a href="../../../../io/sphere/sdk/commands/MetaModelByIdDeleteCommandImpl.html" title="type parameter in MetaModelByIdDeleteCommandImpl">T</a>&gt;&nbsp;versioned,
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/commands/MetaModelByIdDeleteCommandImpl.html#MetaModelByIdDeleteCommandImpl-io.sphere.sdk.models.Versioned-io.sphere.sdk.client.JsonEndpoint-E-java.util.function.Function-">MetaModelByIdDeleteCommandImpl</a></span>(<a href="../../../../io/sphere/sdk/models/Versioned.html" title="interface in io.sphere.sdk.models">Versioned</a>&lt;<a href="../../../../io/sphere/sdk/commands/MetaModelByIdDeleteCommandImpl.html" title="type parameter in MetaModelByIdDeleteCommandImpl">T</a>&gt;&nbsp;versioned,
                               <a href="../../../../io/sphere/sdk/client/JsonEndpoint.html" title="class in io.sphere.sdk.client">JsonEndpoint</a>&lt;<a href="../../../../io/sphere/sdk/commands/MetaModelByIdDeleteCommandImpl.html" title="type parameter in MetaModelByIdDeleteCommandImpl">T</a>&gt;&nbsp;endpoint,
                               <a href="../../../../io/sphere/sdk/commands/MetaModelByIdDeleteCommandImpl.html" title="type parameter in MetaModelByIdDeleteCommandImpl">E</a>&nbsp;expansionModel,
-                              java.util.List&lt;<a href="../../../../io/sphere/sdk/expansion/ExpansionPath.html" title="interface in io.sphere.sdk.expansion">ExpansionPath</a>&lt;<a href="../../../../io/sphere/sdk/commands/MetaModelByIdDeleteCommandImpl.html" title="type parameter in MetaModelByIdDeleteCommandImpl">T</a>&gt;&gt;&nbsp;expansionPaths,
                               java.util.function.Function&lt;<a href="../../../../io/sphere/sdk/commands/MetaModelByIdDeleteCommandBuilder.html" title="class in io.sphere.sdk.commands">MetaModelByIdDeleteCommandBuilder</a>&lt;<a href="../../../../io/sphere/sdk/commands/MetaModelByIdDeleteCommandImpl.html" title="type parameter in MetaModelByIdDeleteCommandImpl">T</a>,<a href="../../../../io/sphere/sdk/commands/MetaModelByIdDeleteCommandImpl.html" title="type parameter in MetaModelByIdDeleteCommandImpl">C</a>,<a href="../../../../io/sphere/sdk/commands/MetaModelByIdDeleteCommandImpl.html" title="type parameter in MetaModelByIdDeleteCommandImpl">E</a>&gt;,<a href="../../../../io/sphere/sdk/commands/MetaModelByIdDeleteCommandImpl.html" title="type parameter in MetaModelByIdDeleteCommandImpl">C</a>&gt;&nbsp;creationFunction)</code>&nbsp;</td>
 </tr>
 </table>
@@ -254,13 +250,6 @@ implements <a href="../../../../io/sphere/sdk/expansion/MetaModelExpansionDslExp
 <code><a href="../../../../io/sphere/sdk/commands/CommandImpl.html#deserialize-io.sphere.sdk.http.HttpResponse-">deserialize</a></code></li>
 </ul>
 <ul class="blockList">
-<li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.client.SphereRequestBase">
-<!--   -->
-</a>
-<h3>Methods inherited from class&nbsp;io.sphere.sdk.client.<a href="../../../../io/sphere/sdk/client/SphereRequestBase.html" title="class in io.sphere.sdk.client">SphereRequestBase</a></h3>
-<code><a href="../../../../io/sphere/sdk/client/SphereRequestBase.html#deserialize-io.sphere.sdk.http.HttpResponse-com.fasterxml.jackson.databind.JavaType-">deserialize</a>, <a href="../../../../io/sphere/sdk/client/SphereRequestBase.html#deserialize-io.sphere.sdk.http.HttpResponse-com.fasterxml.jackson.core.type.TypeReference-">deserialize</a>, <a href="../../../../io/sphere/sdk/client/SphereRequestBase.html#getBodyAsString-io.sphere.sdk.http.HttpResponse-">getBodyAsString</a></code></li>
-</ul>
-<ul class="blockList">
 <li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.models.Base">
 <!--   -->
 </a>
@@ -302,16 +291,17 @@ implements <a href="../../../../io/sphere/sdk/expansion/MetaModelExpansionDslExp
 <!--   -->
 </a>
 <h3>Constructor Detail</h3>
-<a name="MetaModelByIdDeleteCommandImpl-io.sphere.sdk.models.Versioned-io.sphere.sdk.client.JsonEndpoint-java.lang.Object-java.util.List-java.util.function.Function-">
+<a name="MetaModelByIdDeleteCommandImpl-io.sphere.sdk.models.Versioned-com.fasterxml.jackson.databind.JavaType-java.lang.String-java.lang.Object-java.util.List-java.util.function.Function-">
 <!--   -->
-</a><a name="MetaModelByIdDeleteCommandImpl-io.sphere.sdk.models.Versioned-io.sphere.sdk.client.JsonEndpoint-E-java.util.List-java.util.function.Function-">
+</a><a name="MetaModelByIdDeleteCommandImpl-io.sphere.sdk.models.Versioned-com.fasterxml.jackson.databind.JavaType-java.lang.String-E-java.util.List-java.util.function.Function-">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
 <h4>MetaModelByIdDeleteCommandImpl</h4>
 <pre>protected&nbsp;MetaModelByIdDeleteCommandImpl(<a href="../../../../io/sphere/sdk/models/Versioned.html" title="interface in io.sphere.sdk.models">Versioned</a>&lt;<a href="../../../../io/sphere/sdk/commands/MetaModelByIdDeleteCommandImpl.html" title="type parameter in MetaModelByIdDeleteCommandImpl">T</a>&gt;&nbsp;versioned,
-                                         <a href="../../../../io/sphere/sdk/client/JsonEndpoint.html" title="class in io.sphere.sdk.client">JsonEndpoint</a>&lt;<a href="../../../../io/sphere/sdk/commands/MetaModelByIdDeleteCommandImpl.html" title="type parameter in MetaModelByIdDeleteCommandImpl">T</a>&gt;&nbsp;endpoint,
+                                         com.fasterxml.jackson.databind.JavaType&nbsp;javaType,
+                                         java.lang.String&nbsp;endpoint,
                                          <a href="../../../../io/sphere/sdk/commands/MetaModelByIdDeleteCommandImpl.html" title="type parameter in MetaModelByIdDeleteCommandImpl">E</a>&nbsp;expansionModel,
                                          java.util.List&lt;<a href="../../../../io/sphere/sdk/expansion/ExpansionPath.html" title="interface in io.sphere.sdk.expansion">ExpansionPath</a>&lt;<a href="../../../../io/sphere/sdk/commands/MetaModelByIdDeleteCommandImpl.html" title="type parameter in MetaModelByIdDeleteCommandImpl">T</a>&gt;&gt;&nbsp;expansionPaths,
                                          java.util.function.Function&lt;<a href="../../../../io/sphere/sdk/commands/MetaModelByIdDeleteCommandBuilder.html" title="class in io.sphere.sdk.commands">MetaModelByIdDeleteCommandBuilder</a>&lt;<a href="../../../../io/sphere/sdk/commands/MetaModelByIdDeleteCommandImpl.html" title="type parameter in MetaModelByIdDeleteCommandImpl">T</a>,<a href="../../../../io/sphere/sdk/commands/MetaModelByIdDeleteCommandImpl.html" title="type parameter in MetaModelByIdDeleteCommandImpl">C</a>,<a href="../../../../io/sphere/sdk/commands/MetaModelByIdDeleteCommandImpl.html" title="type parameter in MetaModelByIdDeleteCommandImpl">E</a>&gt;,<a href="../../../../io/sphere/sdk/commands/MetaModelByIdDeleteCommandImpl.html" title="type parameter in MetaModelByIdDeleteCommandImpl">C</a>&gt;&nbsp;creationFunction)</pre>

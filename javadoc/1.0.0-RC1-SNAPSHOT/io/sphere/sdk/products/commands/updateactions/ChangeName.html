@@ -129,7 +129,7 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html"
  <p>See also <a href="../ProductUpdateCommand.html">ProductUpdateCommand</a>.<p>
 
  <div id="io-sphere-sdk-products-commands-ProductUpdateCommandTest-changeName--%s" class=code-example><pre><code class='java'>withUpdateableProduct(client(), product -&gt; {
-    final LocalizedString newName = ofEnglishLocale("newName " + RANDOM.nextInt());
+    final LocalizedString newName = LocalizedString.ofEnglish("newName " + RANDOM.nextInt());
     final Product updatedProduct = client().executeBlocking(ProductUpdateCommand.of(product, ChangeName.of(newName)));
 
     assertThat(updatedProduct.getMasterData().getStaged().getName()).isEqualTo(newName);

@@ -131,7 +131,7 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html"
  <div id="io-sphere-sdk-products-commands-ProductUpdateCommandTest-revertStagedChanges--%s" class=code-example><pre><code class='java'>withUpdateableProduct(client(), product -&gt; {
     //changing only staged and not current
     final LocalizedString oldDescriptionOption = product.getMasterData().getStaged().getDescription();
-    final LocalizedString newDescription = ofEnglishLocale("new description " + RANDOM.nextInt());
+    final LocalizedString newDescription = LocalizedString.ofEnglish("new description " + RANDOM.nextInt());
     final ProductUpdateCommand cmd = ProductUpdateCommand.of(product, asList(Publish.of(), SetDescription.of(newDescription)));
     final Product updatedProduct = client().executeBlocking(cmd);
     assertThat(oldDescriptionOption).isNotEqualTo(newDescription);

@@ -122,10 +122,19 @@ assertThatThrownBy(() -&gt; simpleDateFormat.format(localDate))
  <div id="io-sphere-sdk-meta-FormattingDocumentationTest-formatLocalDate--%s" class=code-example><pre><code class='java'>final LocalDate localDate = LocalDate.of(2015, 7, 25);
 assertThat(localDate.format(DateTimeFormatter.ofPattern("dd.MM.yy"))).isEqualTo("25.07.15");
 assertThat(localDate.format(DateTimeFormatter.ISO_LOCAL_DATE)).isEqualTo("2015-07-25");
+assertThat(localDate.format(
+        DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM).withLocale(Locale.GERMANY)
+)).isEqualTo("25.07.2015");
+assertThat(localDate.format(
+        DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL).withLocale(Locale.GERMANY)
+)).isEqualTo("Samstag, 25. Juli 2015");
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/src/test/java/io/sphere/sdk/meta/FormattingDocumentationTest.java" target="_blank">test code</a>.</pre></div>
  <div id="io-sphere-sdk-meta-FormattingDocumentationTest-formatLocalTime--%s" class=code-example><pre><code class='java'>final LocalTime localTime = LocalTime.of(16, 35);
 assertThat(localTime.format(DateTimeFormatter.ofPattern("HH:mm"))).isEqualTo("16:35");
 assertThat(localTime.format(DateTimeFormatter.ISO_LOCAL_TIME)).isEqualTo("16:35:00");
+assertThat(localTime.format(
+        DateTimeFormatter.ofLocalizedTime(FormatStyle.MEDIUM).withLocale(Locale.GERMANY)
+)).isEqualTo("16:35:00");
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/src/test/java/io/sphere/sdk/meta/FormattingDocumentationTest.java" target="_blank">test code</a>.</pre></div>
  <div id="io-sphere-sdk-meta-FormattingDocumentationTest-formatZonedDateTime--%s" class=code-example><pre><code class='java'>final String timeAsString = "2015-07-09T07:46:40.230Z";//typical date format from SPHERE.IO
 final ZonedDateTime dateTime = ZonedDateTime.parse(timeAsString);
@@ -143,6 +152,9 @@ assertThat(dateTime.withZoneSameInstant(ZoneId.of("America/New_York")).format(fo
         .isEqualTo("09.07.2015 03:46");
 assertThat(dateTime.withZoneSameInstant(ZoneId.of("America/Los_Angeles")).format(formatter))
         .isEqualTo("09.07.2015 00:46");
+assertThat(dateTime.withZoneSameInstant(ZoneId.of("Europe/Berlin")).format(
+        DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL).withLocale(Locale.GERMANY)
+)).isEqualTo("Donnerstag, 9. Juli 2015");
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/src/test/java/io/sphere/sdk/meta/FormattingDocumentationTest.java" target="_blank">test code</a>.</pre></div>
 
 
@@ -209,6 +221,30 @@ assertThat(formatted).isEqualTo("1234.56 $");
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/src/test/java/io/sphere/sdk/meta/FormattingDocumentationTest.java" target="_blank">test code</a>.</pre></div>
 
  <p>&#x00A4; is the currency sign which can be formatted with the styles <code>CurrencyStyle.CODE</code>, <code>CurrencyStyle.NAME</code>, <code>CurrencyStyle.NUMERIC_CODE</code> and <code>CurrencyStyle.SYMBOL</code>.</p>
+
+ <p>Be aware of that there is a difference if you use a locale with a language or a locale with both language and country:</p>
+
+ <div id="io-sphere-sdk-meta-FormattingDocumentationTest-formatMoneyCustomLocales--%s" class=code-example><pre><code class='java'>final Locale germany = Locale.GERMANY;
+assertThat(germany.toLanguageTag()).as("contains language and country").isEqualTo("de-DE");
+final Locale german = Locale.GERMAN;
+assertThat(german.toLanguageTag()).as("contains language").isEqualTo("de");
+
+final MonetaryAmount amount = MoneyImpl.ofCents(123456, "EUR");
+
+final MonetaryAmountFormat formatByLanguageAndCountry = MonetaryFormats.getAmountFormat(
+        AmountFormatQueryBuilder.of(germany)
+                .set(CurrencyStyle.SYMBOL)
+                .build()
+);
+final MonetaryAmountFormat formatByJustLanguage = MonetaryFormats.getAmountFormat(
+        AmountFormatQueryBuilder.of(german)
+                .set(CurrencyStyle.SYMBOL)
+                .build()
+);
+
+assertThat(formatByLanguageAndCountry.format(amount)).as("contains symbol").isEqualTo("1.234,56 €");
+assertThat(formatByJustLanguage.format(amount)).as("contains not symbol").isEqualTo("EUR 1.234,56");
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/src/test/java/io/sphere/sdk/meta/FormattingDocumentationTest.java" target="_blank">test code</a>.</pre></div>
 
  <h4 id="obtain-minor-unit-amount">Obtain the cent amounts</h4>
 

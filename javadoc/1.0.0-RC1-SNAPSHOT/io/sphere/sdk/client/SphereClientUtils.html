@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":9,"i1":9,"i2":9,"i3":9};
+var methods = {"i0":9};
 var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -136,20 +136,6 @@ extends java.lang.Object</pre>
 <div class="block">Waits with a timeout for RESPONSES of a commercetools client wrapped in a <code>CompletionStage</code>.</div>
 </td>
 </tr>
-<tr id="i1" class="rowColor">
-<td class="colFirst"><code>static &lt;T&gt;&nbsp;T</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/client/SphereClientUtils.html#deserialize-io.sphere.sdk.http.HttpResponse-com.fasterxml.jackson.databind.JavaType-">deserialize</a></span>(<a href="../../../../io/sphere/sdk/http/HttpResponse.html" title="interface in io.sphere.sdk.http">HttpResponse</a>&nbsp;httpResponse,
-           com.fasterxml.jackson.databind.JavaType&nbsp;javaType)</code>&nbsp;</td>
-</tr>
-<tr id="i2" class="altColor">
-<td class="colFirst"><code>static &lt;T&gt;&nbsp;T</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/client/SphereClientUtils.html#deserialize-io.sphere.sdk.http.HttpResponse-com.fasterxml.jackson.core.type.TypeReference-">deserialize</a></span>(<a href="../../../../io/sphere/sdk/http/HttpResponse.html" title="interface in io.sphere.sdk.http">HttpResponse</a>&nbsp;httpResponse,
-           com.fasterxml.jackson.core.type.TypeReference&lt;T&gt;&nbsp;typeReference)</code>&nbsp;</td>
-</tr>
-<tr id="i3" class="rowColor">
-<td class="colFirst"><code>static java.lang.String</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/client/SphereClientUtils.html#getBodyAsString-io.sphere.sdk.http.HttpResponse-">getBodyAsString</a></span>(<a href="../../../../io/sphere/sdk/http/HttpResponse.html" title="interface in io.sphere.sdk.http">HttpResponse</a>&nbsp;httpResponse)</code>&nbsp;</td>
-</tr>
 </table>
 <ul class="blockList">
 <li class="blockList"><a name="methods.inherited.from.class.java.lang.Object">
@@ -175,7 +161,7 @@ extends java.lang.Object</pre>
 <a name="blockingWait-java.util.concurrent.CompletionStage-long-java.util.concurrent.TimeUnit-">
 <!--   -->
 </a>
-<ul class="blockList">
+<ul class="blockListLast">
 <li class="blockList">
 <h4>blockingWait</h4>
 <pre>public static&nbsp;&lt;T&gt;&nbsp;T&nbsp;blockingWait(java.util.concurrent.CompletionStage&lt;T&gt;&nbsp;completionStage,
@@ -195,35 +181,6 @@ extends java.lang.Object</pre>
 <dt><span class="throwsLabel">Throws:</span></dt>
 <dd><code><a href="../../../../io/sphere/sdk/client/SphereTimeoutException.html" title="class in io.sphere.sdk.client">SphereTimeoutException</a></code> - if a timeout occurs</dd>
 </dl>
-</li>
-</ul>
-<a name="deserialize-io.sphere.sdk.http.HttpResponse-com.fasterxml.jackson.core.type.TypeReference-">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>deserialize</h4>
-<pre>public static&nbsp;&lt;T&gt;&nbsp;T&nbsp;deserialize(<a href="../../../../io/sphere/sdk/http/HttpResponse.html" title="interface in io.sphere.sdk.http">HttpResponse</a>&nbsp;httpResponse,
-                                com.fasterxml.jackson.core.type.TypeReference&lt;T&gt;&nbsp;typeReference)</pre>
-</li>
-</ul>
-<a name="deserialize-io.sphere.sdk.http.HttpResponse-com.fasterxml.jackson.databind.JavaType-">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>deserialize</h4>
-<pre>public static&nbsp;&lt;T&gt;&nbsp;T&nbsp;deserialize(<a href="../../../../io/sphere/sdk/http/HttpResponse.html" title="interface in io.sphere.sdk.http">HttpResponse</a>&nbsp;httpResponse,
-                                com.fasterxml.jackson.databind.JavaType&nbsp;javaType)</pre>
-</li>
-</ul>
-<a name="getBodyAsString-io.sphere.sdk.http.HttpResponse-">
-<!--   -->
-</a>
-<ul class="blockListLast">
-<li class="blockList">
-<h4>getBodyAsString</h4>
-<pre>public static&nbsp;java.lang.String&nbsp;getBodyAsString(<a href="../../../../io/sphere/sdk/http/HttpResponse.html" title="interface in io.sphere.sdk.http">HttpResponse</a>&nbsp;httpResponse)</pre>
 </li>
 </ul>
 </li>

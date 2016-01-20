@@ -102,12 +102,7 @@ var activeTableTab = "activeTableTab";
 <li><a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.sphere.sdk.models">io.sphere.sdk.models.Base</a></li>
 <li>
 <ul class="inheritance">
-<li><a href="../../../../io/sphere/sdk/client/SphereRequestBase.html" title="class in io.sphere.sdk.client">io.sphere.sdk.client.SphereRequestBase</a></li>
-<li>
-<ul class="inheritance">
 <li>io.sphere.sdk.commands.CommandImpl&lt;T&gt;</li>
-</ul>
-</li>
 </ul>
 </li>
 </ul>
@@ -126,12 +121,12 @@ var activeTableTab = "activeTableTab";
 </dl>
 <dl>
 <dt>Direct Known Subclasses:</dt>
-<dd><a href="../../../../io/sphere/sdk/commands/ByIdDeleteCommandImpl.html" title="class in io.sphere.sdk.commands">ByIdDeleteCommandImpl</a>, <a href="../../../../io/sphere/sdk/commands/CreateCommandImpl.html" title="class in io.sphere.sdk.commands">CreateCommandImpl</a>, <a href="../../../../io/sphere/sdk/customers/commands/CustomerChangePasswordCommand.html" title="class in io.sphere.sdk.customers.commands">CustomerChangePasswordCommand</a>, <a href="../../../../io/sphere/sdk/customers/commands/CustomerCreateEmailTokenCommand.html" title="class in io.sphere.sdk.customers.commands">CustomerCreateEmailTokenCommand</a>, <a href="../../../../io/sphere/sdk/customers/commands/CustomerCreatePasswordTokenCommand.html" title="class in io.sphere.sdk.customers.commands">CustomerCreatePasswordTokenCommand</a>, <a href="../../../../io/sphere/sdk/customers/commands/CustomerCreateTokenCommand.html" title="class in io.sphere.sdk.customers.commands">CustomerCreateTokenCommand</a>, <a href="../../../../io/sphere/sdk/customers/commands/CustomerPasswordResetCommand.html" title="class in io.sphere.sdk.customers.commands">CustomerPasswordResetCommand</a>, <a href="../../../../io/sphere/sdk/customers/commands/CustomerSignInCommand.html" title="class in io.sphere.sdk.customers.commands">CustomerSignInCommand</a>, <a href="../../../../io/sphere/sdk/customers/commands/CustomerVerifyEmailCommand.html" title="class in io.sphere.sdk.customers.commands">CustomerVerifyEmailCommand</a>, <a href="../../../../io/sphere/sdk/commands/MetaModelByIdDeleteCommandImpl.html" title="class in io.sphere.sdk.commands">MetaModelByIdDeleteCommandImpl</a>, <a href="../../../../io/sphere/sdk/commands/MetaModelCreateCommandImpl.html" title="class in io.sphere.sdk.commands">MetaModelCreateCommandImpl</a>, <a href="../../../../io/sphere/sdk/commands/MetaModelUpdateCommandDslImpl.html" title="class in io.sphere.sdk.commands">MetaModelUpdateCommandDslImpl</a>, <a href="../../../../io/sphere/sdk/orders/commands/OrderImportCommand.html" title="class in io.sphere.sdk.orders.commands">OrderImportCommand</a>, <a href="../../../../io/sphere/sdk/commands/UpdateCommandDslImpl.html" title="class in io.sphere.sdk.commands">UpdateCommandDslImpl</a></dd>
+<dd><a href="../../../../io/sphere/sdk/commands/ByIdDeleteCommandImpl.html" title="class in io.sphere.sdk.commands">ByIdDeleteCommandImpl</a>, <a href="../../../../io/sphere/sdk/commands/CreateCommandImpl.html" title="class in io.sphere.sdk.commands">CreateCommandImpl</a>, <a href="../../../../io/sphere/sdk/customers/commands/CustomerChangePasswordCommand.html" title="class in io.sphere.sdk.customers.commands">CustomerChangePasswordCommand</a>, <a href="../../../../io/sphere/sdk/customers/commands/CustomerCreateEmailTokenCommand.html" title="class in io.sphere.sdk.customers.commands">CustomerCreateEmailTokenCommand</a>, <a href="../../../../io/sphere/sdk/customers/commands/CustomerCreatePasswordTokenCommand.html" title="class in io.sphere.sdk.customers.commands">CustomerCreatePasswordTokenCommand</a>, <a href="../../../../io/sphere/sdk/customers/commands/CustomerCreateTokenCommand.html" title="class in io.sphere.sdk.customers.commands">CustomerCreateTokenCommand</a>, <a href="../../../../io/sphere/sdk/customers/commands/CustomerPasswordResetCommand.html" title="class in io.sphere.sdk.customers.commands">CustomerPasswordResetCommand</a>, <a href="../../../../io/sphere/sdk/customers/commands/CustomerSignInCommand.html" title="class in io.sphere.sdk.customers.commands">CustomerSignInCommand</a>, <a href="../../../../io/sphere/sdk/customers/commands/CustomerVerifyEmailCommand.html" title="class in io.sphere.sdk.customers.commands">CustomerVerifyEmailCommand</a>, <a href="../../../../io/sphere/sdk/commands/MetaModelByIdDeleteCommandImpl.html" title="class in io.sphere.sdk.commands">MetaModelByIdDeleteCommandImpl</a>, <a href="../../../../io/sphere/sdk/commands/MetaModelCreateCommandImpl.html" title="class in io.sphere.sdk.commands">MetaModelCreateCommandImpl</a>, <a href="../../../../io/sphere/sdk/commands/MetaModelUpdateCommandDslImpl.html" title="class in io.sphere.sdk.commands">MetaModelUpdateCommandDslImpl</a>, <a href="../../../../io/sphere/sdk/orders/commands/OrderImportCommand.html" title="class in io.sphere.sdk.orders.commands">OrderImportCommand</a></dd>
 </dl>
 <hr>
 <br>
 <pre>public abstract class <span class="typeNameLabel">CommandImpl&lt;T&gt;</span>
-extends <a href="../../../../io/sphere/sdk/client/SphereRequestBase.html" title="class in io.sphere.sdk.client">SphereRequestBase</a>
+extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.sphere.sdk.models">Base</a>
 implements <a href="../../../../io/sphere/sdk/commands/Command.html" title="interface in io.sphere.sdk.commands">Command</a>&lt;T&gt;</pre>
 <div class="block">Base class to implement commands using the Jackson JSON mapper.</div>
 </li>
@@ -149,10 +144,12 @@ implements <a href="../../../../io/sphere/sdk/commands/Command.html" title="inte
 <table class="memberSummary" border="0" cellpadding="3" cellspacing="0" summary="Constructor Summary table, listing constructors, and an explanation">
 <caption><span>Constructors</span><span class="tabEnd">&nbsp;</span></caption>
 <tr>
-<th class="colOne" scope="col">Constructor and Description</th>
+<th class="colFirst" scope="col">Modifier</th>
+<th class="colLast" scope="col">Constructor and Description</th>
 </tr>
 <tr class="altColor">
-<td class="colOne"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/commands/CommandImpl.html#CommandImpl--">CommandImpl</a></span>()</code>&nbsp;</td>
+<td class="colFirst"><code>protected </code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/commands/CommandImpl.html#CommandImpl--">CommandImpl</a></span>()</code>&nbsp;</td>
 </tr>
 </table>
 </li>
@@ -180,13 +177,6 @@ implements <a href="../../../../io/sphere/sdk/commands/Command.html" title="inte
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/commands/CommandImpl.html#jacksonJavaType--">jacksonJavaType</a></span>()</code>&nbsp;</td>
 </tr>
 </table>
-<ul class="blockList">
-<li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.client.SphereRequestBase">
-<!--   -->
-</a>
-<h3>Methods inherited from class&nbsp;io.sphere.sdk.client.<a href="../../../../io/sphere/sdk/client/SphereRequestBase.html" title="class in io.sphere.sdk.client">SphereRequestBase</a></h3>
-<code><a href="../../../../io/sphere/sdk/client/SphereRequestBase.html#deserialize-io.sphere.sdk.http.HttpResponse-com.fasterxml.jackson.databind.JavaType-">deserialize</a>, <a href="../../../../io/sphere/sdk/client/SphereRequestBase.html#deserialize-io.sphere.sdk.http.HttpResponse-com.fasterxml.jackson.core.type.TypeReference-">deserialize</a>, <a href="../../../../io/sphere/sdk/client/SphereRequestBase.html#getBodyAsString-io.sphere.sdk.http.HttpResponse-">getBodyAsString</a></code></li>
-</ul>
 <ul class="blockList">
 <li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.models.Base">
 <!--   -->
@@ -228,7 +218,7 @@ implements <a href="../../../../io/sphere/sdk/commands/Command.html" title="inte
 <ul class="blockListLast">
 <li class="blockList">
 <h4>CommandImpl</h4>
-<pre>public&nbsp;CommandImpl()</pre>
+<pre>protected&nbsp;CommandImpl()</pre>
 </li>
 </ul>
 </li>

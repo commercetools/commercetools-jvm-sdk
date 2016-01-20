@@ -124,13 +124,15 @@ extends <a href="../../../../../io/sphere/sdk/commands/CreateCommand.html" title
     assertThat(payment.getPaymentMethodInfo()).isEqualTo(paymentMethodInfo);
     assertThat(payment.getAmountPlanned()).isEqualTo(totalAmount);
 
-    final PagedQueryResult&lt;PaymentCreatedMessage&gt; pagedQueryResult = client().executeBlocking(MessageQuery.of()
-            .withPredicates(m -&gt; m.resource().is(payment))
-            .forMessageType(PaymentCreatedMessage.MESSAGE_HINT));
+    assertEventually(() -&gt; {
+        final PagedQueryResult&lt;PaymentCreatedMessage&gt; pagedQueryResult = client().executeBlocking(MessageQuery.of()
+                .withPredicates(m -&gt; m.resource().is(payment))
+                .forMessageType(PaymentCreatedMessage.MESSAGE_HINT));
 
-    final PaymentCreatedMessage paymentCreatedMessage = pagedQueryResult.head().get();
-    assertThat(paymentCreatedMessage.getPayment().getId()).isEqualTo(payment.getId());
-    assertThat(paymentCreatedMessage.getResource().getId()).isEqualTo(payment.getId());
+        final PaymentCreatedMessage paymentCreatedMessage = pagedQueryResult.head().get();
+        assertThat(paymentCreatedMessage.getPayment().getId()).isEqualTo(payment.getId());
+        assertThat(paymentCreatedMessage.getResource().getId()).isEqualTo(payment.getId());
+    });
 
     client().executeBlocking(PaymentDeleteCommand.of(payment));
 }));
