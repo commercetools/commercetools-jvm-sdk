@@ -142,7 +142,7 @@ public class CartCreateCommandTest extends IntegrationTest {
                 assertThat(cart.getShippingAddress()).isEqualTo(Address.of(DE).withLastName("Osgood"));
                 assertThat(cart.getCustom().getFieldAsString("stringField")).isEqualTo("bar");
 
-                client().execute(CartDeleteCommand.of(cart));
+                client().executeBlocking(CartDeleteCommand.of(cart));
             });
         });
 
