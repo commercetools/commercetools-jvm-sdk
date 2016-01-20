@@ -15,10 +15,10 @@ Users gain type-safety, encapsulation, IDE auto completion and an internal domai
 
 ## Using the SDK 
 * install [Java 8](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)
-* <strong>Javadoc</strong> [(latest release)](http://sphereio.github.io/sphere-jvm-sdk/javadoc/v1.0.0-M25/index.html) or [(master)](http://sphereio.github.io/sphere-jvm-sdk/javadoc/master/index.html)</strong>, there you find also code snippets and insights
-    * [Getting Started](http://sphereio.github.io/sphere-jvm-sdk/javadoc/v1.0.0-M25/io/sphere/sdk/meta/GettingStarted.html)
-    * [Release Notes](http://sphereio.github.io/sphere-jvm-sdk/javadoc/v1.0.0-M25/io/sphere/sdk/meta/ReleaseNotes.html)
-    * [Contributing](http://sphereio.github.io/sphere-jvm-sdk/javadoc/v1.0.0-M25/io/sphere/sdk/meta/ContributorDocumentation.html)
+* <strong>Javadoc</strong> [(latest release)](http://sphereio.github.io/sphere-jvm-sdk/javadoc/v1.0.0-M26/index.html) or [(master)](http://sphereio.github.io/sphere-jvm-sdk/javadoc/master/index.html)</strong>, there you find also code snippets and insights
+    * [Getting Started](http://sphereio.github.io/sphere-jvm-sdk/javadoc/v1.0.0-M26/io/sphere/sdk/meta/GettingStarted.html)
+    * [Release Notes](http://sphereio.github.io/sphere-jvm-sdk/javadoc/v1.0.0-M26/io/sphere/sdk/meta/ReleaseNotes.html)
+    * [Contributing](http://sphereio.github.io/sphere-jvm-sdk/javadoc/v1.0.0-M26/io/sphere/sdk/meta/ContributorDocumentation.html)
  
 ## Installation
 
@@ -28,24 +28,24 @@ Users gain type-safety, encapsulation, IDE auto completion and an internal domai
 <dependency>
   <groupId>io.sphere.sdk.jvm</groupId>
   <artifactId>sphere-models</artifactId>
-  <version>1.0.0-M25</version>
+  <version>1.0.0-M26</version>
 </dependency>
 <dependency>
   <groupId>io.sphere.sdk.jvm</groupId>
   <artifactId>sphere-java-client</artifactId>
-  <version>1.0.0-M25</version>
+  <version>1.0.0-M26</version>
 </dependency>
 
 <!-- experimental, includes for example reactive streams support -->
 <dependency>
   <groupId>io.sphere.sdk.jvm</groupId>
   <artifactId>sphere-convenience</artifactId>
-  <version>1.0.0-M25</version>
+  <version>1.0.0-M26</version>
 </dependency>
 ````
-* http://search.maven.org/#artifactdetails%7Cio.sphere.sdk.jvm%7Csphere-models%7C1.0.0-M25%7Cjar
-* http://search.maven.org/#artifactdetails%7Cio.sphere.sdk.jvm%7Csphere-java-client%7C1.0.0-M25%7Cjar
-* http://search.maven.org/#artifactdetails%7Cio.sphere.sdk.jvm%7Csphere-convenience%7C1.0.0-M25%7Cjar
+* http://search.maven.org/#artifactdetails%7Cio.sphere.sdk.jvm%7Csphere-models%7C1.0.0-M26%7Cjar
+* http://search.maven.org/#artifactdetails%7Cio.sphere.sdk.jvm%7Csphere-java-client%7C1.0.0-M26%7Cjar
+* http://search.maven.org/#artifactdetails%7Cio.sphere.sdk.jvm%7Csphere-convenience%7C1.0.0-M26%7Cjar
 
 ### Modules
 * `sphere-java-client`: alias for sphere-java-client-ahc-1_9
