@@ -3,8 +3,6 @@ package io.sphere.sdk.commands;
 import com.fasterxml.jackson.databind.JavaType;
 import io.sphere.sdk.client.HttpRequestIntent;
 import io.sphere.sdk.http.HttpMethod;
-import io.sphere.sdk.client.JsonEndpoint;
-import io.sphere.sdk.json.SphereJsonUtils;
 
 import static io.sphere.sdk.json.SphereJsonUtils.toJsonString;
 import static java.util.Objects.requireNonNull;
@@ -25,10 +23,6 @@ public abstract class CreateCommandImpl<T, C> extends CommandImpl<T> implements 
         this.body = requireNonNull(draft);
         this.path = requireNonNull(path);
         this.javaType = requireNonNull(javaType);
-    }
-
-    public CreateCommandImpl(final C draft, final JsonEndpoint<T> endpoint) {
-        this(draft, endpoint.endpoint(), SphereJsonUtils.convertToJavaType(endpoint.typeReference()));
     }
 
     @Override
