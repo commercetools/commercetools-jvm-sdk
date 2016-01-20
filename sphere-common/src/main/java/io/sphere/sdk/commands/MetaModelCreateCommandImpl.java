@@ -9,13 +9,12 @@ import io.sphere.sdk.expansion.MetaModelExpansionDslExpansionModelRead;
 import io.sphere.sdk.expansion.ExpansionPathContainer;
 import io.sphere.sdk.http.HttpMethod;
 import io.sphere.sdk.http.UrlQueryBuilder;
-import io.sphere.sdk.json.SphereJsonUtils;
 
 import java.util.Collections;
 import java.util.List;
 import java.util.function.Function;
 
-import static io.sphere.sdk.json.SphereJsonUtils.toJsonString;
+import static io.sphere.sdk.json.SphereJsonUtils.*;
 import static io.sphere.sdk.utils.ListUtils.listOf;
 import static java.util.Objects.requireNonNull;
 
@@ -31,30 +30,32 @@ public abstract class MetaModelCreateCommandImpl<T, C, D, E> extends CommandImpl
 
     final D body;
     final E expansionModel;
-    final JsonEndpoint<T> endpoint;
+    final JavaType javaType;
+    final String endpoint;
     final List<ExpansionPath<T>> expansionPaths;
     final Function<MetaModelCreateCommandBuilder<T, C, D, E>, C> creationFunction;
 
-    protected MetaModelCreateCommandImpl(final D draft, final JsonEndpoint<T> endpoint, final List<ExpansionPath<T>> expansionPaths, final E expansionModel, final Function<MetaModelCreateCommandBuilder<T, C, D, E>, C> creationFunction) {
+    protected MetaModelCreateCommandImpl(final D draft, final JavaType javaType, final String endpoint, final List<ExpansionPath<T>> expansionPaths, final E expansionModel, final Function<MetaModelCreateCommandBuilder<T, C, D, E>, C> creationFunction) {
         this.creationFunction = requireNonNull(creationFunction);
         this.expansionPaths = requireNonNull(expansionPaths);
         this.expansionModel = requireNonNull(expansionModel);
         this.body = requireNonNull(draft);
-        this.endpoint = requireNonNull(endpoint);
+        this.javaType = javaType;
+        this.endpoint = endpoint;
     }
 
     protected MetaModelCreateCommandImpl(final MetaModelCreateCommandBuilder<T, C, D, E> builder) {
-        this(builder.body, builder.endpoint, builder.expansionPaths, builder.expansionModel, builder.creationFunction);
+        this(builder.body, builder.javaType, builder.endpoint, builder.expansionPaths, builder.expansionModel, builder.creationFunction);
     }
 
     protected MetaModelCreateCommandImpl(final D draft, final JsonEndpoint<T> endpoint, final E expansionModel, final Function<MetaModelCreateCommandBuilder<T, C, D, E>, C> creationFunction) {
-        this(draft, endpoint, Collections.emptyList(), expansionModel, creationFunction);
+        this(draft, convertToJavaType(endpoint.typeReference()), endpoint.endpoint(), Collections.emptyList(), expansionModel, creationFunction);
     }
 
     @Override
     public HttpRequestIntent httpRequestIntent() {
         final String additions = queryParametersToString(true);
-        return HttpRequestIntent.of(httpMethod(), endpoint.endpoint() + (additions.length() > 1 ? additions : ""), httpBody());
+        return HttpRequestIntent.of(httpMethod(), endpoint + (additions.length() > 1 ? additions : ""), httpBody());
     }
 
     private String queryParametersToString(final boolean urlEncoded) {
@@ -73,7 +74,7 @@ public abstract class MetaModelCreateCommandImpl<T, C, D, E> extends CommandImpl
 
     @Override
     protected JavaType jacksonJavaType() {
-        return SphereJsonUtils.convertToJavaType(endpoint.typeReference());
+        return javaType;
     }
 
     @Override

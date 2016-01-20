@@ -1,6 +1,6 @@
 package io.sphere.sdk.commands;
 
-import io.sphere.sdk.client.JsonEndpoint;
+import com.fasterxml.jackson.databind.JavaType;
 import io.sphere.sdk.expansion.ExpansionPath;
 import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.Builder;
@@ -15,7 +15,8 @@ Internal builder.
 public class MetaModelCreateCommandBuilder<T, C, D, E> extends Base implements Builder<C> {
     final D body;
     final E expansionModel;
-    final JsonEndpoint<T> endpoint;
+    final JavaType javaType;
+    final String endpoint;
     final Function<MetaModelCreateCommandBuilder<T, C, D, E>, C> creationFunction;
     List<ExpansionPath<T>> expansionPaths;
 
@@ -24,6 +25,7 @@ public class MetaModelCreateCommandBuilder<T, C, D, E> extends Base implements B
         body = template.body;
         expansionModel = template.expansionModel;
         endpoint = template.endpoint;
+        javaType = template.javaType;
         expansionPaths = template.expansionPaths;
         creationFunction = template.creationFunction;
     }
