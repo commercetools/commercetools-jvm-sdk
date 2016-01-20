@@ -610,8 +610,8 @@ import java.util.function.Function;
  <li class=change-in-release>{@link io.sphere.sdk.models.Reference} is not instantiated with new.</li>
  <li class=change-in-release>{@link io.sphere.sdk.http.UrlQueryBuilder} is not instantiated with new.</li>
  <li class=change-in-release>io.sphere.sdk.client.SphereErrorResponse is not instantiated with new.</li>
- <li class=change-in-release>{@code ClientRequest} has been renamed to {@link io.sphere.sdk.client.SphereRequest} and therefore {@code ClientRequestBase} to {@link io.sphere.sdk.client.SphereRequestBase}. </li>
- <li class=change-in-release>{@code ClientRequest} has been renamed to {@link io.sphere.sdk.client.SphereRequest} and therefore {@code ClientRequestBase} to {@link io.sphere.sdk.client.SphereRequestBase}. </li>
+ <li class=change-in-release>{@code ClientRequest} has been renamed to {@link io.sphere.sdk.client.SphereRequest} and therefore {@code ClientRequestBase} to {@code io.sphere.sdk.client.SphereRequestBase}. </li>
+ <li class=change-in-release>{@code ClientRequest} has been renamed to {@link io.sphere.sdk.client.SphereRequest} and therefore {@code ClientRequestBase} to {@code io.sphere.sdk.client.SphereRequestBase}. </li>
  <li class=change-in-release>{@code JavaClient} has been renamed to {@link io.sphere.sdk.client.SphereClient} and uses the {@link io.sphere.sdk.client.SphereClientFactory} to initialized a client, {@code JavaClientIml} has been removed, see {@link io.sphere.sdk.meta.GettingStarted}.
  The typesafe config library is not used anymore. The class {@code HttpClientTestDouble} has been removed, use {@link io.sphere.sdk.client.SphereClientFactory#createHttpTestDouble(java.util.function.Function)} instead.
  {@code SphereRequestExecutor} and {@code SphereRequestExecutorTestDouble} have been removed, use {@link io.sphere.sdk.client.SphereClientFactory#createObjectTestDouble(java.util.function.Function)} instead.
