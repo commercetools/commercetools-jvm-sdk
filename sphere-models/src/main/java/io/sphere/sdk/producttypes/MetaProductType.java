@@ -7,8 +7,9 @@ import java.util.*;
 /**
  * All product types merged into one.
  *
- * In SPHERE.IO different product types can be created but the attribute type for one attribute name must be consistent.
+ * In SPHERE.IO different product types can be created but the attribute type for one attribute name and labels must be consistent.
  * So this container can contain all attribute information for all product types.
+ *
  */
 public interface MetaProductType extends AttributeDefinitionContainer {
     public static MetaProductType of(final List<AttributeDefinition> definitions) {
