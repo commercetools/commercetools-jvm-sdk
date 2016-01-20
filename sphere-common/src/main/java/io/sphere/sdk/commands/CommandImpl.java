@@ -1,7 +1,7 @@
 package io.sphere.sdk.commands;
 
 import com.fasterxml.jackson.databind.JavaType;
-import io.sphere.sdk.client.SphereClientUtils;
+import io.sphere.sdk.client.SphereRequestUtils;
 import io.sphere.sdk.http.HttpResponse;
 import io.sphere.sdk.models.Base;
 
@@ -17,7 +17,7 @@ public abstract class CommandImpl<T> extends Base implements Command<T> {
 
     @Override
     public T deserialize(final HttpResponse httpResponse) {
-        return SphereClientUtils.deserialize(httpResponse, jacksonJavaType());
+        return SphereRequestUtils.deserialize(httpResponse, jacksonJavaType());
     }
 
     protected abstract JavaType jacksonJavaType();

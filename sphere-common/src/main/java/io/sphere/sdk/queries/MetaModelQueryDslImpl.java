@@ -4,7 +4,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.type.TypeFactory;
 import io.sphere.sdk.client.HttpRequestIntent;
-import io.sphere.sdk.client.SphereClientUtils;
+import io.sphere.sdk.client.SphereRequestUtils;
 import io.sphere.sdk.expansion.ExpansionPath;
 import io.sphere.sdk.expansion.ExpansionPathContainer;
 import io.sphere.sdk.http.HttpMethod;
@@ -79,7 +79,7 @@ public abstract class MetaModelQueryDslImpl<T, C extends MetaModelQueryDsl<T, C,
     public MetaModelQueryDslImpl(final String endpoint, final TypeReference<PagedQueryResult<T>> pagedQueryResultTypeReference,
                                  final Q queryModel, final E expansionModel, final Function<MetaModelQueryDslBuilder<T, C, Q, E>, C> queryDslBuilderFunction,
                                  final List<HttpQueryParameter> additionalHttpQueryParameters) {
-        this(emptyList(), emptyList(), null, null, null, endpoint, httpResponse -> SphereClientUtils.deserialize(httpResponse, pagedQueryResultTypeReference),
+        this(emptyList(), emptyList(), null, null, null, endpoint, httpResponse -> SphereRequestUtils.deserialize(httpResponse, pagedQueryResultTypeReference),
                 emptyList(), additionalHttpQueryParameters, queryModel, expansionModel, queryDslBuilderFunction);
     }
 
@@ -87,7 +87,7 @@ public abstract class MetaModelQueryDslImpl<T, C extends MetaModelQueryDsl<T, C,
     public MetaModelQueryDslImpl(final String endpoint, final JavaType singleElementJavatype,
                                  final Q queryModel, final E expansionModel, final Function<MetaModelQueryDslBuilder<T, C, Q, E>, C> queryDslBuilderFunction,
                                  final List<HttpQueryParameter> additionalHttpQueryParameters) {
-        this(emptyList(), emptyList(), null, null, null, endpoint, httpResponse -> SphereClientUtils.deserialize(httpResponse, resolveJavaType(singleElementJavatype)),
+        this(emptyList(), emptyList(), null, null, null, endpoint, httpResponse -> SphereRequestUtils.deserialize(httpResponse, resolveJavaType(singleElementJavatype)),
                 emptyList(), additionalHttpQueryParameters, queryModel, expansionModel, queryDslBuilderFunction);
     }
 

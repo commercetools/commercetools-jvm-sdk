@@ -2,7 +2,7 @@ package io.sphere.sdk.products.queries;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import io.sphere.sdk.client.HttpRequestIntent;
-import io.sphere.sdk.client.SphereClientUtils;
+import io.sphere.sdk.client.SphereRequestUtils;
 import io.sphere.sdk.http.HttpMethod;
 import io.sphere.sdk.http.HttpResponse;
 import io.sphere.sdk.http.UrlQueryBuilder;
@@ -45,7 +45,7 @@ final class SuggestQueryImpl extends Base implements SuggestQuery {
 
     @Override
     public SuggestionResult deserialize(final HttpResponse httpResponse) {
-        return SphereClientUtils.deserialize(httpResponse, new TypeReference<SuggestionResult>() {
+        return SphereRequestUtils.deserialize(httpResponse, new TypeReference<SuggestionResult>() {
             @Override
             public String toString() {
                 return "TypeReference<SuggestionResult>";

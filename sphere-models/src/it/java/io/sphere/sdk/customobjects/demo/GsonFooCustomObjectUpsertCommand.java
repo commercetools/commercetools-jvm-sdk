@@ -1,7 +1,7 @@
 package io.sphere.sdk.customobjects.demo;
 
 import com.google.gson.Gson;
-import io.sphere.sdk.client.SphereClientUtils;
+import io.sphere.sdk.client.SphereRequestUtils;
 import io.sphere.sdk.customobjects.commands.CustomObjectCustomJsonMappingUpsertCommand;
 import io.sphere.sdk.http.HttpResponse;
 
@@ -22,7 +22,7 @@ public class GsonFooCustomObjectUpsertCommand extends CustomObjectCustomJsonMapp
     //used to deserialize the response
     @Override
     public GsonFooCustomObject deserialize(final HttpResponse httpResponse) {
-        final String jsonAsString = SphereClientUtils.getBodyAsString(httpResponse);
+        final String jsonAsString = SphereRequestUtils.getBodyAsString(httpResponse);
         return gson.fromJson(jsonAsString, GsonFooCustomObject.class);
     }
 }

@@ -3,7 +3,7 @@ package io.sphere.sdk.queries;
 import com.fasterxml.jackson.databind.JavaType;
 import io.sphere.sdk.client.HttpRequestIntent;
 import io.sphere.sdk.client.JsonEndpoint;
-import io.sphere.sdk.client.SphereClientUtils;
+import io.sphere.sdk.client.SphereRequestUtils;
 import io.sphere.sdk.expansion.ExpansionDslUtil;
 import io.sphere.sdk.expansion.ExpansionPath;
 import io.sphere.sdk.expansion.ExpansionPathContainer;
@@ -72,7 +72,7 @@ public class MetaModelGetDslImpl<R, T, C extends MetaModelGetDsl<R, T, C, E>, E>
     public R deserialize(final HttpResponse httpResponse) {
         return Optional.of(httpResponse)
                 .filter(r -> r.getStatusCode() != NOT_FOUND_404)
-                .map(r -> SphereClientUtils.<R>deserialize(r, jacksonJavaType()))
+                .map(r -> SphereRequestUtils.<R>deserialize(r, jacksonJavaType()))
                 .orElse(null);
     }
 
