@@ -53,7 +53,7 @@ final class MessageTypeQueryModelImpl extends QueryModelImpl<Message> implements
 
     @Override
     public QueryPredicate<Message> isNotIn(final Iterable<String> args) {
-        return isNotIn(args);
+        return isNotInPredicate(args);
     }
 
     @Override

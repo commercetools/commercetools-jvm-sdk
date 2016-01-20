@@ -17,7 +17,7 @@ public final class ExperimentalReactiveStreamUtils {
     }
 
     public static <T, C extends QueryDsl<T, C>> Publisher<T> publisherOf(final QueryDsl<T, C> seedQuery, final Function<T, String> idExtractor, final SphereClient sphereClient) {
-        return new QueryEndpointElementsPublisher<T, C>(seedQuery, idExtractor, sphereClient);
+        return new QueryEndpointElementsPublisher<>(seedQuery, idExtractor, sphereClient);
     }
 
     public static <T> CompletionStage<List<T>> collectAll(final Publisher<T> publisher) {

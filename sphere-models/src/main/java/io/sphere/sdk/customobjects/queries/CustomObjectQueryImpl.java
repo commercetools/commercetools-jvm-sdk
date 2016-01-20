@@ -19,7 +19,7 @@ final class CustomObjectQueryImpl<T> extends MetaModelQueryDslImpl<CustomObject<
     }
 
     CustomObjectQueryImpl(final JavaType valueJavaType) {
-        super(CustomObjectEndpoint.PATH, CustomObjectUtils.getCustomObjectJavaTypeForValue(valueJavaType), CustomObjectQueryModel.of(), CustomObjectExpansionModel.<T>of(), b -> new CustomObjectQueryImpl<T>(b));
+        super(CustomObjectEndpoint.PATH, CustomObjectUtils.getCustomObjectJavaTypeForValue(valueJavaType), CustomObjectQueryModel.of(), CustomObjectExpansionModel.<T>of(), b -> new CustomObjectQueryImpl<>(b));
     }
 
     private CustomObjectQueryImpl(final MetaModelQueryDslBuilder<CustomObject<T>, CustomObjectQuery<T>, CustomObjectQueryModel<CustomObject<T>>, CustomObjectExpansionModel<CustomObject<T>>> builder) {

@@ -10,7 +10,7 @@ import java.util.function.Function;
 final class SubscriptionImpl<T, C extends QueryDsl<T, C>> extends Base implements Subscription {
     SubscriptionsState state;
     SubscriptionImpl(final QueryDsl<T, C> seedQuery, final Function<T, String> idExtractor, final SphereClient sphereClient, final Subscriber<? super T> subscriber) {
-        state = new RunningSubscription<T, C>(seedQuery, idExtractor, sphereClient, subscriber, this);
+        state = new RunningSubscription<>(seedQuery, idExtractor, sphereClient, subscriber, this);
     }
 
     @Override

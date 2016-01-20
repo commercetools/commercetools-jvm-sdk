@@ -18,11 +18,11 @@ final class DiscountCodeInfoCollectionQueryModelImpl<T> extends QueryModelImpl<T
 
     @Override
     public QueryPredicate<T> isEmpty() {
-        return isEmpty();
+        return isEmptyCollectionQueryPredicate();
     }
 
     @Override
     public QueryPredicate<T> isNotEmpty() {
-        return isNotEmpty();
+        return isNotEmptyCollectionQueryPredicate();
     }
 }

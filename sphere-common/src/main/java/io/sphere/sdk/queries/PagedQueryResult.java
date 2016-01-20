@@ -32,7 +32,7 @@ public class PagedQueryResult<T> extends PagedResult<T> {
     }
 
     public static <T> PagedQueryResultDsl<T> of(final List<T> results) {
-        return of(0L, Long.valueOf(results.size()), results);
+        return of(0L, (long) results.size(), results);
     }
 
     @JsonIgnore

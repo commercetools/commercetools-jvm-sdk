@@ -13,12 +13,12 @@ final class PaymentInfoQueryModelImpl<T> extends QueryModelImpl<T> implements Pa
 
     @Override
     public QueryPredicate<T> isNotPresent() {
-        return isNotPresent();
+        return isNotPresentPredicate();
     }
 
     @Override
     public QueryPredicate<T> isPresent() {
-        return isPresent();
+        return isPresentPredicate();
     }
 
     @Override

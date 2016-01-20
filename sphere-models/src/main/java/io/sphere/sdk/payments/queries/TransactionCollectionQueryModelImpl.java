@@ -26,12 +26,12 @@ final class TransactionCollectionQueryModelImpl<T> extends QueryModelImpl<T> imp
 
     @Override
     public QueryPredicate<T> isEmpty() {
-        return isEmpty();
+        return isEmptyCollectionQueryPredicate();
     }
 
     @Override
     public QueryPredicate<T> isNotEmpty() {
-        return isNotEmpty();
+        return isNotEmptyCollectionQueryPredicate();
     }
 
     @Override
