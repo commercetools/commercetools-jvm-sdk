@@ -12,11 +12,11 @@ import java.util.*;
  *
  */
 public interface MetaProductType extends AttributeDefinitionContainer {
-    public static MetaProductType of(final List<AttributeDefinition> definitions) {
+    static MetaProductType of(final List<AttributeDefinition> definitions) {
         return new MetaProductTypeImpl(definitions);
     }
 
-    public static MetaProductType of(final Collection<? extends AttributeDefinitionContainer> definitionContainers) {
+    static MetaProductType of(final Collection<? extends AttributeDefinitionContainer> definitionContainers) {
         final Map<String, AttributeDefinition> nameToDefinitionMap = new HashMap<>();
         definitionContainers.forEach(container ->
             container.getAttributes().forEach(definition ->

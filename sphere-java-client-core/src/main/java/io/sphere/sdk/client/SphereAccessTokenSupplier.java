@@ -11,9 +11,9 @@ import java.util.function.Supplier;
  */
 public interface SphereAccessTokenSupplier extends AutoCloseable, Supplier<CompletionStage<String>> {
     /** Returns the OAuth access token. */
-    public CompletionStage<String> get();
+    CompletionStage<String> get();
 
-    public void close();
+    void close();
 
     /**
      * Provides a token generator which tries to always provide a valid token.

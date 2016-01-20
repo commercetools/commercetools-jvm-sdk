@@ -49,11 +49,11 @@ public final class SphereTestUtils {
     public static final MonetaryAmount EURO_20 = MoneyImpl.of(20, EUR);
     public static final MonetaryAmount EURO_30 = MoneyImpl.of(30, EUR);
 
-    public static final ZonedDateTime now() {
+    public static ZonedDateTime now() {
         return ZonedDateTime. now().withZoneSameInstant(ZoneOffset.UTC);
     }
 
-    public static final ZonedDateTime tomorrowZonedDateTime() {
+    public static ZonedDateTime tomorrowZonedDateTime() {
         return now().plus(1, ChronoUnit.DAYS);
     }
 

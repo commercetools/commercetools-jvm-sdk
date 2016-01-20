@@ -3,7 +3,7 @@ package io.sphere.sdk.search.model;
 import io.sphere.sdk.search.FilterExpression;
 
 import java.util.List;
-import java.util.function.Function;;
+import java.util.function.Function;
 
 /**
  * Model to build range and term filters.
