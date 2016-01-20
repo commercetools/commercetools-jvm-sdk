@@ -3,7 +3,7 @@ package io.sphere.sdk.queries;
 import com.fasterxml.jackson.databind.JavaType;
 import io.sphere.sdk.client.HttpRequestIntent;
 import io.sphere.sdk.client.JsonEndpoint;
-import io.sphere.sdk.client.SphereRequestBase;
+import io.sphere.sdk.client.SphereClientUtils;
 import io.sphere.sdk.expansion.ExpansionDslUtil;
 import io.sphere.sdk.expansion.ExpansionPath;
 import io.sphere.sdk.expansion.ExpansionPathContainer;
@@ -13,6 +13,7 @@ import io.sphere.sdk.http.HttpQueryParameter;
 import io.sphere.sdk.http.HttpResponse;
 import io.sphere.sdk.http.UrlQueryBuilder;
 import io.sphere.sdk.json.SphereJsonUtils;
+import io.sphere.sdk.models.Base;
 
 import javax.annotation.Nullable;
 import java.util.Collections;
@@ -31,7 +32,7 @@ import static java.util.Objects.requireNonNull;
  * @param <C> type of the class implementing this class
  * @param <E> type of the expansion model
  */
-public class MetaModelGetDslImpl<R, T, C extends MetaModelGetDsl<R, T, C, E>, E> extends SphereRequestBase implements MetaModelGetDsl<R, T, C, E>, MetaModelExpansionDslExpansionModelRead<T, C, E> {
+public class MetaModelGetDslImpl<R, T, C extends MetaModelGetDsl<R, T, C, E>, E> extends Base implements MetaModelGetDsl<R, T, C, E>, MetaModelExpansionDslExpansionModelRead<T, C, E> {
 
     final JavaType javaType;
     final String endpoint;
@@ -71,7 +72,7 @@ public class MetaModelGetDslImpl<R, T, C extends MetaModelGetDsl<R, T, C, E>, E>
     public R deserialize(final HttpResponse httpResponse) {
         return Optional.of(httpResponse)
                 .filter(r -> r.getStatusCode() != NOT_FOUND_404)
-                .map(r -> SphereRequestBase.<R>deserialize(r, jacksonJavaType()))
+                .map(r -> SphereClientUtils.<R>deserialize(r, jacksonJavaType()))
                 .orElse(null);
     }
 

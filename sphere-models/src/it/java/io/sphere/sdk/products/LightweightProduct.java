@@ -6,7 +6,6 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import io.sphere.sdk.client.HttpRequestIntent;
 import io.sphere.sdk.client.SphereRequest;
-import io.sphere.sdk.client.SphereRequestBase;
 import io.sphere.sdk.http.HttpMethod;
 import io.sphere.sdk.http.HttpResponse;
 import io.sphere.sdk.json.SphereJsonUtils;
@@ -49,7 +48,7 @@ public class LightweightProduct extends Base implements Versioned<Product>, Prod
         return new LightweightProductsBySku(skus);
     }
 
-    private static class LightweightProductsBySku extends SphereRequestBase implements SphereRequest<List<LightweightProduct>> {
+    private static class LightweightProductsBySku extends Base implements SphereRequest<List<LightweightProduct>> {
         public static final int MAX = 100;
         private final List<String> skus;
 

@@ -4,13 +4,14 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.type.TypeFactory;
 import io.sphere.sdk.client.HttpRequestIntent;
-import io.sphere.sdk.client.SphereRequestBase;
+import io.sphere.sdk.client.SphereClientUtils;
 import io.sphere.sdk.expansion.ExpansionPath;
 import io.sphere.sdk.expansion.ExpansionPathContainer;
 import io.sphere.sdk.http.HttpMethod;
 import io.sphere.sdk.http.HttpQueryParameter;
 import io.sphere.sdk.http.HttpResponse;
 import io.sphere.sdk.http.UrlQueryBuilder;
+import io.sphere.sdk.models.Base;
 import io.sphere.sdk.utils.ListUtils;
 
 import javax.annotation.Nullable;
@@ -32,7 +33,7 @@ import static java.util.Objects.requireNonNull;
  * @param <Q> type of the query model
  * @param <E> type of the expansion model
  */
-public abstract class MetaModelQueryDslImpl<T, C extends MetaModelQueryDsl<T, C, Q, E>, Q, E> extends SphereRequestBase implements MetaModelQueryDsl<T, C, Q, E> {
+public abstract class MetaModelQueryDslImpl<T, C extends MetaModelQueryDsl<T, C, Q, E>, Q, E> extends Base implements MetaModelQueryDsl<T, C, Q, E> {
 
     final List<QueryPredicate<T>> predicate;
     final List<QuerySort<T>> sort;
@@ -78,7 +79,7 @@ public abstract class MetaModelQueryDslImpl<T, C extends MetaModelQueryDsl<T, C,
     public MetaModelQueryDslImpl(final String endpoint, final TypeReference<PagedQueryResult<T>> pagedQueryResultTypeReference,
                                  final Q queryModel, final E expansionModel, final Function<MetaModelQueryDslBuilder<T, C, Q, E>, C> queryDslBuilderFunction,
                                  final List<HttpQueryParameter> additionalHttpQueryParameters) {
-        this(emptyList(), emptyList(), null, null, null, endpoint, httpResponse -> deserialize(httpResponse, pagedQueryResultTypeReference),
+        this(emptyList(), emptyList(), null, null, null, endpoint, httpResponse -> SphereClientUtils.deserialize(httpResponse, pagedQueryResultTypeReference),
                 emptyList(), additionalHttpQueryParameters, queryModel, expansionModel, queryDslBuilderFunction);
     }
 
@@ -86,7 +87,7 @@ public abstract class MetaModelQueryDslImpl<T, C extends MetaModelQueryDsl<T, C,
     public MetaModelQueryDslImpl(final String endpoint, final JavaType singleElementJavatype,
                                  final Q queryModel, final E expansionModel, final Function<MetaModelQueryDslBuilder<T, C, Q, E>, C> queryDslBuilderFunction,
                                  final List<HttpQueryParameter> additionalHttpQueryParameters) {
-        this(emptyList(), emptyList(), null, null, null, endpoint, httpResponse -> deserialize(httpResponse, resolveJavaType(singleElementJavatype)),
+        this(emptyList(), emptyList(), null, null, null, endpoint, httpResponse -> SphereClientUtils.deserialize(httpResponse, resolveJavaType(singleElementJavatype)),
                 emptyList(), additionalHttpQueryParameters, queryModel, expansionModel, queryDslBuilderFunction);
     }
 
