@@ -68,6 +68,30 @@ public class FormattingDocumentationTest {
     }
 
     @Test
+    public void formatMoneyCustomLocales() throws Exception {
+        final Locale germany = Locale.GERMANY;
+        assertThat(germany.toLanguageTag()).as("contains language and country").isEqualTo("de-DE");
+        final Locale german = Locale.GERMAN;
+        assertThat(german.toLanguageTag()).as("contains language").isEqualTo("de");
+
+        final MonetaryAmount amount = MoneyImpl.ofCents(123456, "EUR");
+
+        final MonetaryAmountFormat formatByLanguageAndCountry = MonetaryFormats.getAmountFormat(
+                AmountFormatQueryBuilder.of(germany)
+                        .set(CurrencyStyle.SYMBOL)
+                        .build()
+        );
+        final MonetaryAmountFormat formatByJustLanguage = MonetaryFormats.getAmountFormat(
+                AmountFormatQueryBuilder.of(german)
+                        .set(CurrencyStyle.SYMBOL)
+                        .build()
+        );
+
+        assertThat(formatByLanguageAndCountry.format(amount)).as("contains symbol").isEqualTo("1.234,56 €");
+        assertThat(formatByJustLanguage.format(amount)).as("contains not symbol").isEqualTo("EUR 1.234,56");
+    }
+
+    @Test
     public void formatMoneyCustom2() throws Exception {
         final MonetaryAmountFormat format = MonetaryFormats.getAmountFormat(
                 AmountFormatQueryBuilder.of(Locale.US)

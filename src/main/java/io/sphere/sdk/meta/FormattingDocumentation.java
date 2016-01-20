@@ -53,6 +53,10 @@ import java.time.format.DateTimeFormatter;
  *
  * <p>&#x00A4; is the currency sign which can be formatted with the styles {@link CurrencyStyle#CODE}, {@link CurrencyStyle#NAME}, {@link CurrencyStyle#NUMERIC_CODE} and {@link CurrencyStyle#SYMBOL}.</p>
  *
+ * <p>Be aware of that there is a difference if you use a locale with a language or a locale with both language and country:</p>
+ *
+ * {@include.example io.sphere.sdk.meta.FormattingDocumentationTest#formatMoneyCustomLocales()}
+ *
  * <h4 id="obtain-minor-unit-amount">Obtain the cent amounts</h4>
  *
  * Use {@link MonetaryUtil#minorUnits()} to get the <em>whole amount</em> as cents:
