@@ -36,7 +36,7 @@ public class ReviewStateTransitionMessage  extends GenericMessageImpl<Review> {
     private final Boolean newIncludedInStatistics;
 
     @JsonCreator
-    private ReviewStateTransitionMessage(final String id, final Long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt, final JsonNode resource, final Long sequenceNumber, final Long resourceVersion, final String type, @Nullable final Reference<State> oldState, final Reference<State> newState, final Reference<JsonNode> target, final Boolean oldIncludedInStatistics, final Boolean newIncludedInStatistics) {
+    private ReviewStateTransitionMessage(final String id, final Long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt, final JsonNode resource, final Long sequenceNumber, final Long resourceVersion, final String type, @Nullable final Reference<State> oldState, final Reference<State> newState, @Nullable final Reference<JsonNode> target, final Boolean oldIncludedInStatistics, final Boolean newIncludedInStatistics) {
         super(id, version, createdAt, lastModifiedAt, resource, sequenceNumber, resourceVersion, type, Review.class);
         this.oldState = oldState;
         this.newState = newState;

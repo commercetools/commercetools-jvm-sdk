@@ -12,7 +12,7 @@ public abstract class SetCustomFieldBase<T> extends UpdateActionImpl<T> {
     @Nullable
     private final JsonNode value;
 
-    protected SetCustomFieldBase(final String action, final String name, final JsonNode value) {
+    protected SetCustomFieldBase(final String action, final String name, @Nullable final JsonNode value) {
         super(action);
         this.name = name;
         this.value = value;

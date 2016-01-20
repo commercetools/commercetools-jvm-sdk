@@ -21,7 +21,7 @@ abstract class TermFacetBaseSearchModel<T, V> extends Base implements FacetSearc
     @Nullable
     protected final String alias;
 
-    TermFacetBaseSearchModel(final SearchModel<T> searchModel, final Function<V, String> typeSerializer, final String alias) {
+    TermFacetBaseSearchModel(final SearchModel<T> searchModel, final Function<V, String> typeSerializer, @Nullable final String alias) {
         this.searchModel = searchModel;
         this.typeSerializer = typeSerializer;
         this.alias = alias;

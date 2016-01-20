@@ -24,8 +24,8 @@ final class StateImpl extends ResourceImpl<State> implements State {
 
     @JsonCreator
     public StateImpl(String id, Long version, ZonedDateTime createdAt, ZonedDateTime lastModifiedAt, String key, StateType type,
-                     LocalizedString name, LocalizedString description, Boolean initial,
-                     Boolean builtIn, Set<Reference<State>> transitions) {
+                     @Nullable LocalizedString name, @Nullable LocalizedString description, Boolean initial,
+                     Boolean builtIn, @Nullable Set<Reference<State>> transitions) {
         super(id, version, createdAt, lastModifiedAt);
         this.key = key;
         this.type = type;

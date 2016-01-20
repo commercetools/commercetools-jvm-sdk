@@ -17,7 +17,7 @@ public class SetMetaDescription extends UpdateActionImpl<Category> {
     @Nullable
     private final LocalizedString metaDescription;
 
-    private SetMetaDescription(final LocalizedString metaDescription) {
+    private SetMetaDescription(@Nullable final LocalizedString metaDescription) {
         super("setMetaDescription");
         this.metaDescription = metaDescription;
     }

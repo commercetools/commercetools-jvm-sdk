@@ -64,7 +64,7 @@ public class Address extends Base {
     final String additionalAddressInfo;
 
     @JsonCreator
-    private Address(final CountryCode country, final String id, final String title, final String salutation, final String firstName, final String lastName, final String streetName, final String streetNumber, final String additionalStreetInfo, final String postalCode, final String city, final String region, final String state, final String company, final String department, final String building, final String apartment, final String poBox, final String phone, final String mobile, final String email, final String additionalAddressInfo) {
+    private Address(final CountryCode country, @Nullable final String id, @Nullable final String title, @Nullable final String salutation, @Nullable final String firstName, @Nullable final String lastName, @Nullable final String streetName, @Nullable final String streetNumber, @Nullable final String additionalStreetInfo, @Nullable final String postalCode, @Nullable final String city, @Nullable final String region, @Nullable final String state, @Nullable final String company, @Nullable final String department, @Nullable final String building, @Nullable final String apartment, @Nullable final String poBox, @Nullable final String phone, @Nullable final String mobile, @Nullable final String email, @Nullable final String additionalAddressInfo) {
         this.country = country;
         this.id = id;
         this.title = title;

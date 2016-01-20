@@ -24,6 +24,7 @@ public class SetShippingMethod extends UpdateActionImpl<Cart> {
         this.shippingMethod = shippingMethod;
     }
 
+    @Nullable
     public Reference<ShippingMethod> getShippingMethod() {
         return shippingMethod;
     }

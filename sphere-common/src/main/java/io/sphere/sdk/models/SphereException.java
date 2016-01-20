@@ -67,20 +67,20 @@ public class SphereException extends RuntimeException {
         return httpResponse;
     }
 
-    public void setProjectKey(final String projectKey) {
+    public void setProjectKey(@Nullable final String projectKey) {
         this.projectKey = projectKey;
     }
 
-    public void setSphereRequest(final SphereRequest<?> sphereRequest) {
+    public void setSphereRequest(@Nullable final SphereRequest<?> sphereRequest) {
         this.sphereRequest = sphereRequest;
         setHttpRequestIntent(sphereRequest.httpRequestIntent());
     }
 
-    private void setHttpRequestIntent(final HttpRequestIntent httpRequestIntent) {
+    private void setHttpRequestIntent(@Nullable final HttpRequestIntent httpRequestIntent) {
         this.httpRequestIntent = httpRequestIntent;
     }
 
-    public void setHttpRequest(final HttpRequest httpRequest) {
+    public void setHttpRequest(@Nullable final HttpRequest httpRequest) {
         this.httpRequest = httpRequest;
     }
 

@@ -18,7 +18,7 @@ class ProductTypeImpl extends ResourceImpl<ProductType> implements ProductType {
 
     @JsonCreator
     ProductTypeImpl(final String id, final Long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt,
-                    final String name, final String key, final String description, final List<AttributeDefinition> attributes) {
+                    final String name, @Nullable final String key, final String description, final List<AttributeDefinition> attributes) {
         super(id, version, createdAt, lastModifiedAt);
         this.name = name;
         this.key = key;

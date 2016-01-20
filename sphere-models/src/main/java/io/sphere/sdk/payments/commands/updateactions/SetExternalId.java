@@ -18,7 +18,7 @@ public final class SetExternalId extends UpdateActionImpl<Payment> {
     @Nullable
     private final String externalId;
 
-    private SetExternalId(final String externalId) {
+    private SetExternalId(@Nullable final String externalId) {
         super("setExternalId");
         this.externalId = externalId;
     }

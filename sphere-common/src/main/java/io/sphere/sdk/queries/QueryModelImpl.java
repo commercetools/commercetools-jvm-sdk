@@ -17,7 +17,7 @@ public class QueryModelImpl<T> extends Base implements QueryModel<T> {
     @Nullable
     private final String pathSegment;
 
-    protected QueryModelImpl(final QueryModel<T> parent, final String pathSegment) {
+    protected QueryModelImpl(@Nullable final QueryModel<T> parent, @Nullable final String pathSegment) {
         this.parent = parent;
         this.pathSegment = pathSegment;
     }

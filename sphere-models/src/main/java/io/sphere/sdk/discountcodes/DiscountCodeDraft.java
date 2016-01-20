@@ -30,7 +30,7 @@ public class DiscountCodeDraft extends Base {
     @Nullable
     private final Long maxApplicationsPerCustomer;
 
-    DiscountCodeDraft(final List<Reference<CartDiscount>> cartDiscounts, final LocalizedString name, final LocalizedString description, final String code, final String cartPredicate, final Boolean isActive, final Long maxApplications, final Long maxApplicationsPerCustomer) {
+    DiscountCodeDraft(final List<Reference<CartDiscount>> cartDiscounts, @Nullable final LocalizedString name, @Nullable final LocalizedString description, final String code, @Nullable final String cartPredicate, final Boolean isActive, @Nullable final Long maxApplications, @Nullable final Long maxApplicationsPerCustomer) {
         this.cartDiscounts = cartDiscounts;
         this.name = name;
         this.description = description;

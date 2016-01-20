@@ -19,7 +19,7 @@ public final class PaymentStatus extends Base {
     private final Reference<State> state;
 
     @JsonCreator
-    PaymentStatus(final String interfaceCode, final String interfaceText, final Reference<State> state) {
+    PaymentStatus(@Nullable final String interfaceCode, @Nullable final String interfaceText, @Nullable final Reference<State> state) {
         this.interfaceCode = interfaceCode;
         this.interfaceText = interfaceText;
         this.state = state;

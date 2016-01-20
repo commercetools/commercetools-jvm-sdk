@@ -26,7 +26,7 @@ class ProductImpl extends ResourceImpl<Product> implements Product {
     @JsonCreator
     ProductImpl(final String id, final Long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt,
                 @Nullable final Reference<ProductType> productType, final ProductCatalogData masterData,
-                final Reference<TaxCategory> taxCategory, final Reference<State> state,
+                @Nullable final Reference<TaxCategory> taxCategory, @Nullable final Reference<State> state,
                 @Nullable final ReviewRatingStatistics reviewRatingStatistics) {
         super(id, version, createdAt, lastModifiedAt);
         this.productType = productType;

@@ -20,7 +20,7 @@ class ProductCatalogDataImpl extends Base implements ProductCatalogData {
     private final ProductData staged;
 
     @JsonCreator
-    ProductCatalogDataImpl(final Boolean isPublished, final ProductData current, final ProductData staged,
+    ProductCatalogDataImpl(final Boolean isPublished, @Nullable final ProductData current, final ProductData staged,
                            final Boolean hasStagedChanges) {
         this.isPublished = isPublished;
         this.current = current;

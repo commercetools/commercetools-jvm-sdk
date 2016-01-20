@@ -43,9 +43,9 @@ final class LineItemImpl extends LineItemLikeImpl implements LineItem {
     @JsonCreator
     LineItemImpl(final String id, final String productId, final LocalizedString name,
                  final JsonNode variant, final Price price, final Long quantity,
-                 final Set<ItemState> state, final TaxRate taxRate,
-                 final Reference<Channel> supplyChannel, final DiscountedLineItemPrice discountedPrice,
-                 final LocalizedString productSlug, final Reference<Channel> distributionChannel,
+                 final Set<ItemState> state, @Nullable final TaxRate taxRate,
+                 @Nullable final Reference<Channel> supplyChannel, final DiscountedLineItemPrice discountedPrice,
+                 @Nullable final LocalizedString productSlug, @Nullable final Reference<Channel> distributionChannel,
                  @Nullable final CustomFields custom, final MonetaryAmount totalPrice,
                  final List<DiscountedLineItemPriceForQuantity> discountedPricePerQuantity) {
         super(id, state, quantity, discountedPrice);

@@ -27,7 +27,7 @@ public class ProductVariantImportDraftBuilder extends Base implements Builder<Pr
     @Nullable
     private List<Image> images;
 
-    private ProductVariantImportDraftBuilder(final String sku, final String productId, final Integer id) {
+    private ProductVariantImportDraftBuilder(@Nullable final String sku, @Nullable final String productId, @Nullable final Integer id) {
         this.sku = sku;
         this.productId = productId;
         this.id = id;

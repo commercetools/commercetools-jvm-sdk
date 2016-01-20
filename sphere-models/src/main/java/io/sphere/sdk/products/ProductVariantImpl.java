@@ -25,9 +25,9 @@ class ProductVariantImpl extends AttributeContainerImpl implements ProductVarian
     private final Boolean isMatchingVariant;
 
     @JsonCreator
-    ProductVariantImpl(final Integer id, final String sku, final List<Price> prices, final List<Attribute> attributes,
-                       final List<Image> images, final ProductVariantAvailability availability,
-                       final Boolean isMatchingVariant, final String productId) {
+    ProductVariantImpl(final Integer id, @Nullable final String sku, final List<Price> prices, final List<Attribute> attributes,
+                       final List<Image> images, @Nullable final ProductVariantAvailability availability,
+                       @Nullable final Boolean isMatchingVariant, @Nullable final String productId) {
         super(attributes);
         this.id = id;
         this.sku = sku;

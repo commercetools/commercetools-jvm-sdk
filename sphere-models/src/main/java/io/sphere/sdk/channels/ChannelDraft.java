@@ -29,7 +29,7 @@ public class ChannelDraft extends Base {
     private final LocalizedString description;
 
     @JsonCreator
-    ChannelDraft(final String key, final Set<ChannelRole> roles, @Nullable final LocalizedString name, @Nullable final LocalizedString description) {
+    ChannelDraft(final String key, @Nullable final Set<ChannelRole> roles, @Nullable final LocalizedString name, @Nullable final LocalizedString description) {
         this.key = key;
         this.roles = roles;
         this.name = name;
@@ -44,6 +44,7 @@ public class ChannelDraft extends Base {
         return key;
     }
 
+    @Nullable
     public Set<ChannelRole> getRoles() {
         return roles;
     }

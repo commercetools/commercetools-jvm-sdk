@@ -36,11 +36,11 @@ class ProductDraftImpl extends Base implements ProductDraft {
 
     @JsonCreator
     ProductDraftImpl(final ResourceIdentifier<ProductType> productType, final LocalizedString name, final LocalizedString slug,
-                     final LocalizedString description, final Set<Reference<Category>> categories,
-                     final LocalizedString metaTitle, final LocalizedString metaDescription, final LocalizedString metaKeywords, final ProductVariantDraft masterVariant,
+                     @Nullable final LocalizedString description, final Set<Reference<Category>> categories,
+                     @Nullable final LocalizedString metaTitle, @Nullable final LocalizedString metaDescription, @Nullable final LocalizedString metaKeywords, final ProductVariantDraft masterVariant,
                      final List<ProductVariantDraft> variants, final Reference<TaxCategory> taxCategory,
-                     final SearchKeywords searchKeywords, final Reference<State> state,
-                     final CategoryOrderHints categoryOrderHints) {
+                     final SearchKeywords searchKeywords, @Nullable final Reference<State> state,
+                     @Nullable final CategoryOrderHints categoryOrderHints) {
         this.name = name;
         this.productType = productType;
         this.slug = slug;

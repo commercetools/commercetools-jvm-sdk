@@ -25,7 +25,7 @@ public class TypeDraftBuilder extends Base implements Builder<TypeDraft> {
     @Nullable
     private List<FieldDefinition> fieldDefinitions;
 
-    private TypeDraftBuilder(final String key, final LocalizedString name, final LocalizedString description, final Set<String> resourceTypeIds, final List<FieldDefinition> fieldDefinitions) {
+    private TypeDraftBuilder(final String key, final LocalizedString name, @Nullable final LocalizedString description, final Set<String> resourceTypeIds, @Nullable final List<FieldDefinition> fieldDefinitions) {
         this.key = key;
         this.name = name;
         this.description = description;

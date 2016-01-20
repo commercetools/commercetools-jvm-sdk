@@ -32,7 +32,7 @@ public class ReviewRatingSetMessage extends GenericMessageImpl<Review> {
     private final Reference<JsonNode> target;
 
     @JsonCreator
-    private ReviewRatingSetMessage(final String id, final Long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt, final JsonNode resource, final Long sequenceNumber, final Long resourceVersion, final String type, final Integer oldRating, final Integer newRating, final Boolean includedInStatistics, final Reference<JsonNode> target) {
+    private ReviewRatingSetMessage(final String id, final Long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt, final JsonNode resource, final Long sequenceNumber, final Long resourceVersion, final String type, @Nullable final Integer oldRating, @Nullable final Integer newRating, final Boolean includedInStatistics, @Nullable final Reference<JsonNode> target) {
         super(id, version, createdAt, lastModifiedAt, resource, sequenceNumber, resourceVersion, type, Review.class);
         this.oldRating = oldRating;
         this.newRating = newRating;

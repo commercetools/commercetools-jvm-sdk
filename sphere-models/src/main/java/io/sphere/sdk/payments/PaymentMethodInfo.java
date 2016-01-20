@@ -18,7 +18,7 @@ public final class PaymentMethodInfo extends Base {
     private final LocalizedString name;
 
     @JsonCreator
-    PaymentMethodInfo(final String paymentInterface, final String method, final LocalizedString name) {
+    PaymentMethodInfo(@Nullable final String paymentInterface, @Nullable final String method, @Nullable final LocalizedString name) {
         this.paymentInterface = paymentInterface;
         this.method = method;
         this.name = name;

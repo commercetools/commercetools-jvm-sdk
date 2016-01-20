@@ -19,7 +19,7 @@ public class TrackingData extends Base {
     private final Boolean isReturn;
 
     @JsonCreator
-    private TrackingData(@Nullable final String trackingId, @Nullable final String carrier, @Nullable final String provider, @Nullable final String providerTransaction, final Boolean isReturn) {
+    private TrackingData(@Nullable final String trackingId, @Nullable final String carrier, @Nullable final String provider, @Nullable final String providerTransaction, @Nullable final Boolean isReturn) {
         this.trackingId = trackingId;
         this.carrier = carrier;
         this.provider = provider;

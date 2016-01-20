@@ -50,12 +50,12 @@ class ProductProjectionImpl extends ResourceViewImpl<ProductProjection, Product>
     ProductProjectionImpl(final String id, final Long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt,
                           final Reference<ProductType> productType, @Nullable final Reference<TaxCategory> taxCategory,
                           final Boolean hasStagedChanges, final LocalizedString name,
-                          final Set<Reference<Category>> categories, final LocalizedString description,
-                          final LocalizedString slug, final LocalizedString metaTitle,
-                          final LocalizedString metaDescription, final LocalizedString metaKeywords,
+                          final Set<Reference<Category>> categories, @Nullable final LocalizedString description,
+                          final LocalizedString slug, @Nullable final LocalizedString metaTitle,
+                          @Nullable final LocalizedString metaDescription, @Nullable final LocalizedString metaKeywords,
                           final ProductVariant masterVariant, final List<ProductVariant> variants,
                           final Boolean isPublished, final SearchKeywords searchKeywords,
-                          @JsonInclude(JsonInclude.Include.NON_EMPTY) final CategoryOrderHints categoryOrderHints,
+                          @Nullable @JsonInclude(JsonInclude.Include.NON_EMPTY) final CategoryOrderHints categoryOrderHints,
                           @Nullable final ReviewRatingStatistics reviewRatingStatistics) {
         super(id, version, createdAt, lastModifiedAt);
         this.productType = productType;

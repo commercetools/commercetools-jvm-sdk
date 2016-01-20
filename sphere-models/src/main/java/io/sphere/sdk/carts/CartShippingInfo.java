@@ -26,7 +26,7 @@ public class CartShippingInfo extends Base {
     private final Reference<ShippingMethod> shippingMethod;
 
     @JsonCreator
-    protected CartShippingInfo(final String shippingMethodName, final MonetaryAmount price, final ShippingRate shippingRate, final TaxRate taxRate, final Reference<TaxCategory> taxCategory, final Reference<ShippingMethod> shippingMethod) {
+    protected CartShippingInfo(final String shippingMethodName, final MonetaryAmount price, final ShippingRate shippingRate, final TaxRate taxRate, final Reference<TaxCategory> taxCategory, @Nullable final Reference<ShippingMethod> shippingMethod) {
         this.shippingMethodName = shippingMethodName;
         this.price = price;
         this.shippingRate = shippingRate;

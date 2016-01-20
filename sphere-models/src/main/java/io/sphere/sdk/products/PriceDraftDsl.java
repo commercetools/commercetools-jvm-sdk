@@ -39,8 +39,8 @@ public final class PriceDraftDsl extends Base implements PriceDraft {
     private final CustomFieldsDraft custom;
 
     @JsonCreator
-    PriceDraftDsl(final MonetaryAmount value, final CountryCode country,
-                  final Reference<CustomerGroup> customerGroup, final Reference<Channel> channel,
+    PriceDraftDsl(final MonetaryAmount value, @Nullable final CountryCode country,
+                  @Nullable final Reference<CustomerGroup> customerGroup, @Nullable final Reference<Channel> channel,
                   @Nullable final ZonedDateTime validFrom, @Nullable final ZonedDateTime validUntil,
                   @Nullable final CustomFieldsDraft custom) {
         this.value = value;

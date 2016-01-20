@@ -23,7 +23,7 @@ public class TransitionState extends UpdateActionImpl<Payment> {
     @Nullable
     private final Reference<State> state;
 
-    private TransitionState(final Reference<State> state) {
+    private TransitionState(@Nullable final Reference<State> state) {
         super("transitionState");
         this.state = state;
     }

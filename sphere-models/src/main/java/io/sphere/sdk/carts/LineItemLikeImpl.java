@@ -13,7 +13,7 @@ abstract class LineItemLikeImpl extends Base implements LineItemLike {
     @Nullable
     private final DiscountedLineItemPrice discountedPrice;
 
-    public LineItemLikeImpl(final String id, final Set<ItemState> state, final Long quantity, final DiscountedLineItemPrice discountedPrice) {
+    public LineItemLikeImpl(final String id, final Set<ItemState> state, final Long quantity, @Nullable final DiscountedLineItemPrice discountedPrice) {
         this.discountedPrice = discountedPrice;
         this.id = id;
         this.state = state;

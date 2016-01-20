@@ -38,9 +38,9 @@ class ProductDataImpl extends Base implements ProductData {
 
     @JsonCreator
     ProductDataImpl(final LocalizedString name, final Set<Reference<Category>> categories,
-                    final LocalizedString description, final LocalizedString slug,
-                    final LocalizedString metaTitle, final LocalizedString metaDescription,
-                    final LocalizedString metaKeywords, final ProductVariant masterVariant,
+                    @Nullable final LocalizedString description, final LocalizedString slug,
+                    @Nullable final LocalizedString metaTitle, @Nullable final LocalizedString metaDescription,
+                    @Nullable final LocalizedString metaKeywords, final ProductVariant masterVariant,
                     final List<ProductVariant> variants, final SearchKeywords searchKeywords,
                     @Nullable final CategoryOrderHints categoryOrderHints) {
         this.name = name;

@@ -26,7 +26,7 @@ final class SuggestQueryImpl extends SphereRequestBase implements SuggestQuery {
         this(searchKeywords, null, null);
     }
 
-    private SuggestQueryImpl(final List<LocalizedStringEntry> searchKeywords, final Integer limit, final Boolean staged) {
+    private SuggestQueryImpl(final List<LocalizedStringEntry> searchKeywords, @Nullable final Integer limit, @Nullable final Boolean staged) {
         this.searchKeywords = searchKeywords;
         this.limit = limit;
         this.staged = staged;

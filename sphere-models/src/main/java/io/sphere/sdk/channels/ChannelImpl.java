@@ -21,8 +21,8 @@ class ChannelImpl extends ResourceImpl<Channel> implements Channel {
 
     @JsonCreator
     ChannelImpl(final String id, final Long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt,
-                final String key, final Set<ChannelRole> roles, final LocalizedString name,
-                final LocalizedString description, final ReviewRatingStatistics reviewRatingStatistics) {
+                final String key, final Set<ChannelRole> roles, @Nullable final LocalizedString name,
+                @Nullable final LocalizedString description, @Nullable final ReviewRatingStatistics reviewRatingStatistics) {
         super(id, version, createdAt, lastModifiedAt);
         this.key = key;
         this.roles = roles;

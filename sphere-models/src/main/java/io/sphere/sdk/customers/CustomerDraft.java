@@ -52,15 +52,15 @@ public class CustomerDraft extends Base implements CustomDraft {
     private final CustomFieldsDraft custom;
 
 
-    CustomerDraft(final String customerNumber, final String email,
+    CustomerDraft(@Nullable final String customerNumber, final String email,
                   final String firstName, final String lastName, final String middleName,
                   final String password, final String title,
-                  final String externalId,
-                  final String anonymousCartId, final LocalDate dateOfBirth,
-                  final String companyName, final String vatId,
-                  final Boolean emailVerified, final Reference<CustomerGroup> customerGroup,
-                  final Integer defaultBillingAddress, final Integer defaultShippingAddress,
-                  final List<Address> addresses, final CustomFieldsDraft custom) {
+                  @Nullable final String externalId,
+                  @Nullable final String anonymousCartId, @Nullable final LocalDate dateOfBirth,
+                  @Nullable final String companyName, @Nullable final String vatId,
+                  @Nullable final Boolean emailVerified, @Nullable final Reference<CustomerGroup> customerGroup,
+                  @Nullable final Integer defaultBillingAddress, @Nullable final Integer defaultShippingAddress,
+                  final List<Address> addresses, @Nullable final CustomFieldsDraft custom) {
         this.customerNumber = customerNumber;
         this.email = email;
         this.firstName = firstName;

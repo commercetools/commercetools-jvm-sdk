@@ -16,7 +16,7 @@ public class SetMaxApplications extends UpdateActionImpl<DiscountCode> {
     @Nullable
     private final Long maxApplications;
 
-    private SetMaxApplications(final Long maxApplications) {
+    private SetMaxApplications(@Nullable final Long maxApplications) {
         super("setMaxApplications");
         this.maxApplications = maxApplications;
     }

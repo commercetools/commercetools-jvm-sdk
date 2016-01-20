@@ -35,7 +35,7 @@ final class ReviewDraftImpl extends Base implements ReviewDraft {
     private final CustomFieldsDraft custom;
 
     @JsonCreator
-    ReviewDraftImpl(final String authorName, final String key, final String uniquenessValue, final String text, final String title, final Locale locale, final ResourceIdentifier<?> target, final ResourceIdentifier<State> state, final Integer rating, final ResourceIdentifier<Customer> customer, final CustomFieldsDraft custom) {
+    ReviewDraftImpl(@Nullable final String authorName, @Nullable final String key, @Nullable final String uniquenessValue, @Nullable final String text, @Nullable final String title, @Nullable final Locale locale, @Nullable final ResourceIdentifier<?> target, @Nullable final ResourceIdentifier<State> state, @Nullable final Integer rating, @Nullable final ResourceIdentifier<Customer> customer, @Nullable final CustomFieldsDraft custom) {
         this.authorName = authorName;
         this.key = key;
         this.uniquenessValue = uniquenessValue;

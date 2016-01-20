@@ -32,6 +32,7 @@ public class SetAttributeInAllVariants extends UpdateActionImpl<Product> {
         return name;
     }
 
+    @Nullable
     public JsonNode getValue() {
         return value;
     }

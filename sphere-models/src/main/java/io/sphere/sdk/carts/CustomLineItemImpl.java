@@ -32,7 +32,7 @@ final class CustomLineItemImpl extends LineItemLikeImpl implements CustomLineIte
     @JsonCreator
     CustomLineItemImpl(final String id, final LocalizedString name, final MonetaryAmount money,
                        final String slug, final Long quantity, final Set<ItemState> state,
-                       final Reference<TaxCategory> taxCategory, final TaxRate taxRate,
+                       final Reference<TaxCategory> taxCategory, @Nullable final TaxRate taxRate,
                        @Nullable final DiscountedLineItemPrice discountedPrice, @Nullable final CustomFields custom,
                        final MonetaryAmount totalPrice,
                        final List<DiscountedLineItemPriceForQuantity> discountedPricePerQuantity) {

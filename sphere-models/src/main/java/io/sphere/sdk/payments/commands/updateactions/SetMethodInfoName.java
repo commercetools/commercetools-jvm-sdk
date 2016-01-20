@@ -23,7 +23,7 @@ public class SetMethodInfoName extends UpdateActionImpl<Payment> {
     @Nullable
     private final LocalizedString name;
 
-    private SetMethodInfoName(final LocalizedString name) {
+    private SetMethodInfoName(@Nullable final LocalizedString name) {
         super("setMethodInfoName");
         this.name = name;
     }

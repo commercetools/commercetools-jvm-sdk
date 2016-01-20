@@ -73,6 +73,7 @@ public class CustomFieldsDraft {
         return type;
     }
 
+    @Nullable
     public Map<String, JsonNode> getFields() {
         return fields;
     }
