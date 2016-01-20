@@ -135,12 +135,15 @@ public class ReviewCreateCommandTest extends IntegrationTest {
                     assertThat(review.getCustomer()).isEqualTo(customer.toReference());
                     assertThat(review.getState()).isEqualTo(state.toReference());
 
-                    final ProductProjection productProjection = client().executeBlocking(ProductProjectionByIdGet.ofStaged(product));
-                    assertThat(productProjection.getReviewRatingStatistics().getAverageRating()).isEqualTo(100D);
-                    assertThat(productProjection.getReviewRatingStatistics().getHighestRating()).isEqualTo(100);
-                    assertThat(productProjection.getReviewRatingStatistics().getLowestRating()).isEqualTo(100);
-                    assertThat(productProjection.getReviewRatingStatistics().getCount()).isEqualTo(1);
-                    assertThat(productProjection.getReviewRatingStatistics().getRatingsDistribution()).isEqualTo(singletonMap(100, 1));
+                    assertEventually(() -> {
+                        final ProductProjection productProjection = client().executeBlocking(ProductProjectionByIdGet.ofStaged(product));
+                        assertThat(productProjection.getReviewRatingStatistics()).isNotNull();
+                        assertThat(productProjection.getReviewRatingStatistics().getAverageRating()).isEqualTo(100D);
+                        assertThat(productProjection.getReviewRatingStatistics().getHighestRating()).isEqualTo(100);
+                        assertThat(productProjection.getReviewRatingStatistics().getLowestRating()).isEqualTo(100);
+                        assertThat(productProjection.getReviewRatingStatistics().getCount()).isEqualTo(1);
+                        assertThat(productProjection.getReviewRatingStatistics().getRatingsDistribution()).isEqualTo(singletonMap(100, 1));
+                    });
 
                     client().executeBlocking(ReviewDeleteCommand.of(review));
                 });
