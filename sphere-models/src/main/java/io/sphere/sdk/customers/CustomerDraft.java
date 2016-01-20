@@ -79,7 +79,7 @@ public class CustomerDraft extends Base implements CustomDraft {
         this.custom = custom;
         if (!isValidAddressIndex(addresses, defaultBillingAddress)
                 || !isValidAddressIndex(addresses, defaultShippingAddress)) {
-            throw new IllegalArgumentException("The defaultBillingAddress and defaultShippingAddress cannot contain an index which");
+            throw new IllegalArgumentException("The defaultBillingAddress and defaultShippingAddress cannot contain an index which is not in the address list");
         }
         this.defaultBillingAddress = defaultBillingAddress;
         this.defaultShippingAddress = defaultShippingAddress;
@@ -91,6 +91,10 @@ public class CustomerDraft extends Base implements CustomDraft {
 
     public static CustomerDraft of(final CustomerName customerName, final String email, final String password) {
         return CustomerDraftBuilder.of(customerName, email, password).build();
+    }
+
+    public static CustomerDraft of(final String email, final String password) {
+        return CustomerDraftBuilder.of(email, password).build();
     }
 
     @Nullable

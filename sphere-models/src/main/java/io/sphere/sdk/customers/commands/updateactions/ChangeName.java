@@ -12,10 +12,8 @@ import javax.annotation.Nullable;
  *  {@doc.gen intro}
  *
  * {@include.example io.sphere.sdk.customers.commands.CustomerUpdateCommandTest#changeName()}
- * @deprecated use {@link SetFirstName}, {@link SetLastName}, {@link SetMiddleName} and {@link SetTitle} instead
  * @see Customer
  */
-@Deprecated
 public class ChangeName extends UpdateActionImpl<Customer> {
     private final String firstName;
     private final String lastName;

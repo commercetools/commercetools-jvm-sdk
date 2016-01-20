@@ -52,6 +52,10 @@ public class CustomerDraftBuilder extends Base implements Builder<CustomerDraft>
     private CustomFieldsDraft custom;
 
 
+    public static CustomerDraftBuilder of(final String email, final String password) {
+        return of(CustomerName.of(null, null, null, null), email, password);
+    }
+
     public static CustomerDraftBuilder of(final CustomerName customerName, final String email, final String password) {
         final CustomerDraftBuilder customerDraftBuilder = new CustomerDraftBuilder();
         customerDraftBuilder.email = email;
