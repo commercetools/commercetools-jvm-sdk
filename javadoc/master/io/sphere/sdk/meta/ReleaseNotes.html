@@ -122,6 +122,66 @@ extends java.lang.Object</pre>
  </ul>
  -->
 
+ <h3 class=released-version id="v1_0_0_M26">1.0.0-M26 (20.01.2016)</h3>
+ <a class="theme-btn expand-all">Expand all</a>
+
+ <br>
+ <br>
+ <ul>
+ <li class=new-in-release>Added <a href="../../../../io/sphere/sdk/reviews/Review.html" title="interface in io.sphere.sdk.reviews"><code>Review</code></a>s.</li>
+
+ <li class=new-in-release>Builders for query and search requests. So for example
+ <a href="../../../../io/sphere/sdk/products/queries/ProductProjectionQueryBuilder.html" title="class in io.sphere.sdk.products.queries"><code>ProductProjectionQueryBuilder</code></a>
+ to build <a href="../../../../io/sphere/sdk/products/queries/ProductProjectionQuery.html" title="interface in io.sphere.sdk.products.queries"><code>ProductProjectionQuery</code></a> and
+ <a href="../../../../io/sphere/sdk/products/search/ProductProjectionSearchBuilder.html" title="class in io.sphere.sdk.products.search"><code>ProductProjectionSearchBuilder</code></a>
+ to build <a href="../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html" title="interface in io.sphere.sdk.products.search"><code>ProductProjectionSearch</code></a>.
+
+
+ <div class="rn-hidden">
+ <p>The new way with builders (code with side effects)</p>
+ <div id="io-sphere-sdk-meta-M26Demo-createSearchQueryWithBuilder%s" class=code-example><pre><code class='java'>@Nullable final String term = getTerm();
+final ProductProjectionSearchBuilder searchBuilder = ProductProjectionSearchBuilder.ofCurrent()
+        .limit(30)
+        .sort(m -&gt; m.name().locale(Locale.ENGLISH).byAsc());
+if (StringUtils.isNotBlank(term)) {
+    searchBuilder.text(Locale.ENGLISH, term);
+}
+final ProductProjectionSearch result = searchBuilder.build();
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/src/test/java/io/sphere/sdk/meta/M26Demo.java" target="_blank">test code</a>.</pre></div>
+ <p>The classic way (immutable objects, reassigning)</p>
+ <div id="io-sphere-sdk-meta-M26Demo-createSearchQueryClassicWay--%s" class=code-example><pre><code class='java'>@Nullable final String term = getTerm();
+ProductProjectionSearch search = ProductProjectionSearch.ofCurrent()
+        .withLimit(30)
+        .withSort(m -&gt; m.name().locale(Locale.ENGLISH).byAsc());
+if (StringUtils.isNotBlank(term)) {
+    search = search.withText(Locale.ENGLISH, term);
+}
+final ProductProjectionSearch result = search;
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/src/test/java/io/sphere/sdk/meta/M26Demo.java" target="_blank">test code</a>.</pre></div>
+ </div>
+
+ </li>
+
+ <li class=new-in-release>Added customer update actions
+ <a href="../../../../io/sphere/sdk/customers/commands/updateactions/SetTitle.html" title="class in io.sphere.sdk.customers.commands.updateactions"><code>SetTitle</code></a>,
+ <a href="../../../../io/sphere/sdk/customers/commands/updateactions/SetFirstName.html" title="class in io.sphere.sdk.customers.commands.updateactions"><code>SetFirstName</code></a>,
+ <a href="../../../../io/sphere/sdk/customers/commands/updateactions/SetMiddleName.html" title="class in io.sphere.sdk.customers.commands.updateactions"><code>SetMiddleName</code></a> and
+ <a href="../../../../io/sphere/sdk/customers/commands/updateactions/SetLastName.html" title="class in io.sphere.sdk.customers.commands.updateactions"><code>SetLastName</code></a>.</li>
+ <li class=new-in-release><a href="../../../../io/sphere/sdk/customobjects/queries/CustomObjectQuery.html" title="interface in io.sphere.sdk.customobjects.queries"><code>CustomObjectQuery</code></a> supports now predicates containing key.
+ <div class="rn-hidden">
+ <div id="io-sphere-sdk-meta-M26Demo-queryCustomObjectsByKeyExample--%s" class=code-example><pre><code class='java'>final CustomObjectQuery&lt;JsonNode&gt; customObjectQuery = CustomObjectQuery.ofJsonNode()
+        .withPredicates(m -&gt; m.container().is("my-container"))
+        .plusPredicates(m -&gt; m.key().isIn(asList("key1", "key2", "key3")));
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/src/test/java/io/sphere/sdk/meta/M26Demo.java" target="_blank">test code</a>.</pre></div>
+ </div>
+ </li>
+ <li class=new-in-release>Added <a href="../../../../io/sphere/sdk/projects/Project.html#getCurrencies--"><code>Project.getCurrencies()</code></a> and <a href="../../../../io/sphere/sdk/projects/Project.html#getCurrencyUnits--"><code>Project.getCurrencyUnits()</code></a> so you can get your enabled currencies for the commercetools project.</li>
+
+ <li class=new-in-release>Added some short hand methods for the work with product attributes like <a href="../../../../io/sphere/sdk/products/attributes/Attribute.html#getValueAsLong--"><code>Attribute.getValueAsLong()</code></a> and <a href="../../../../io/sphere/sdk/products/attributes/Attribute.html#getValueAsString--"><code>Attribute.getValueAsString()</code></a>. For all see <a href="../../../../io/sphere/sdk/products/attributes/Attribute.html" title="interface in io.sphere.sdk.products.attributes"><code>Attribute</code></a>.</li>
+ <li class=new-in-release>Added <a href="../../../../io/sphere/sdk/products/attributes/LocalizedToStringProductAttributeConverter.html" title="class in io.sphere.sdk.products.attributes"><code>LocalizedToStringProductAttributeConverter</code></a> which provides some defaults to present product attribute (including monetary amounts and date) values as String. The behaviour can be changed through subclasses.</li>
+ </ul>
+
+
  <h3 class=released-version id="v1_0_0_M25">1.0.0-M25 (08.01.2016)</h3>
  <ul>
  <li class=fixed-in-release>Support full locales for search endpoint. See <a href="https://github.com/sphereio/sphere-jvm-sdk/issues/922" target="_blank">#922</a></li>

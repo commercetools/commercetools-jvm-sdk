@@ -231,7 +231,8 @@ public&nbsp;java.lang.String&nbsp;getTitle()</pre>
 <ul class="blockList">
 <li class="blockList">
 <h4>getFirstName</h4>
-<pre>public&nbsp;java.lang.String&nbsp;getFirstName()</pre>
+<pre>@Nullable
+public&nbsp;java.lang.String&nbsp;getFirstName()</pre>
 </li>
 </ul>
 <a name="getMiddleName--">
@@ -250,7 +251,8 @@ public&nbsp;java.lang.String&nbsp;getMiddleName()</pre>
 <ul class="blockList">
 <li class="blockList">
 <h4>getLastName</h4>
-<pre>public&nbsp;java.lang.String&nbsp;getLastName()</pre>
+<pre>@Nullable
+public&nbsp;java.lang.String&nbsp;getLastName()</pre>
 </li>
 </ul>
 <a name="withTitle-java.lang.String-">
@@ -279,7 +281,9 @@ public&nbsp;java.lang.String&nbsp;getMiddleName()</pre>
 <ul class="blockList">
 <li class="blockList">
 <h4>ofFirstAndLastName</h4>
-<pre>public static&nbsp;<a href="../../../../io/sphere/sdk/customers/CustomerName.html" title="class in io.sphere.sdk.customers">CustomerName</a>&nbsp;ofFirstAndLastName(java.lang.String&nbsp;firstName,
+<pre>public static&nbsp;<a href="../../../../io/sphere/sdk/customers/CustomerName.html" title="class in io.sphere.sdk.customers">CustomerName</a>&nbsp;ofFirstAndLastName(@Nullable
+                                              java.lang.String&nbsp;firstName,
+                                              @Nullable
                                               java.lang.String&nbsp;lastName)</pre>
 </li>
 </ul>
@@ -289,8 +293,11 @@ public&nbsp;java.lang.String&nbsp;getMiddleName()</pre>
 <ul class="blockList">
 <li class="blockList">
 <h4>ofTitleFirstAndLastName</h4>
-<pre>public static&nbsp;<a href="../../../../io/sphere/sdk/customers/CustomerName.html" title="class in io.sphere.sdk.customers">CustomerName</a>&nbsp;ofTitleFirstAndLastName(java.lang.String&nbsp;title,
+<pre>public static&nbsp;<a href="../../../../io/sphere/sdk/customers/CustomerName.html" title="class in io.sphere.sdk.customers">CustomerName</a>&nbsp;ofTitleFirstAndLastName(@Nullable
+                                                   java.lang.String&nbsp;title,
+                                                   @Nullable
                                                    java.lang.String&nbsp;firstName,
+                                                   @Nullable
                                                    java.lang.String&nbsp;lastName)</pre>
 </li>
 </ul>
@@ -302,9 +309,11 @@ public&nbsp;java.lang.String&nbsp;getMiddleName()</pre>
 <h4>of</h4>
 <pre>public static&nbsp;<a href="../../../../io/sphere/sdk/customers/CustomerName.html" title="class in io.sphere.sdk.customers">CustomerName</a>&nbsp;of(@Nullable
                               java.lang.String&nbsp;title,
+                              @Nullable
                               java.lang.String&nbsp;firstName,
                               @Nullable
                               java.lang.String&nbsp;middleName,
+                              @Nullable
                               java.lang.String&nbsp;lastName)</pre>
 </li>
 </ul>
