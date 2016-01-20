@@ -19,7 +19,6 @@ public class ErrorResponseException extends BadRequestException implements Error
     private static final long serialVersionUID = 0L;
 
     private final Integer statusCode;
-    private final String message;
     private final List<? extends SphereError> errors;
 
     public ErrorResponseException(final ErrorResponse errorResponse) {
@@ -27,8 +26,8 @@ public class ErrorResponseException extends BadRequestException implements Error
     }
 
     ErrorResponseException(final Integer statusCode, final String message, final List<? extends SphereError> errors) {
+        super(message);
         this.statusCode = statusCode;
-        this.message = message;
         this.errors = errors == null ? Collections.<SphereError>emptyList() : errors;
     }
 
