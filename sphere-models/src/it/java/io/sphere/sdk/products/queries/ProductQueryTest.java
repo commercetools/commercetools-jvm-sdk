@@ -154,15 +154,17 @@ public class ProductQueryTest extends IntegrationTest {
         withProduct(client(), product -> {
             withReview(client(), b -> b.target(product).rating(1), review1 -> {
                 withReview(client(), b -> b.target(product).rating(3), review2 -> {
-                    final ProductQuery query = ProductQuery.of()
-                            .withPredicates(m -> m.reviewRatingStatistics().averageRating().is(2.0))
-                            .plusPredicates(m -> m.reviewRatingStatistics().count().is(2))
-                            .plusPredicates(m -> m.is(product));
-                    final List<Product> results = client().executeBlocking(query).getResults();
-                    assertThat(results).hasSize(1);
-                    final Product loadedProduct = results.get(0);
-                    assertThat(loadedProduct.getId()).isEqualTo(product.getId());
-                    assertThat(loadedProduct.getReviewRatingStatistics().getCount()).isEqualTo(2);
+                    assertEventually(() -> {
+                        final ProductQuery query = ProductQuery.of()
+                                .withPredicates(m -> m.reviewRatingStatistics().averageRating().is(2.0))
+                                .plusPredicates(m -> m.reviewRatingStatistics().count().is(2))
+                                .plusPredicates(m -> m.is(product));
+                        final List<Product> results = client().executeBlocking(query).getResults();
+                        assertThat(results).hasSize(1);
+                        final Product loadedProduct = results.get(0);
+                        assertThat(loadedProduct.getId()).isEqualTo(product.getId());
+                        assertThat(loadedProduct.getReviewRatingStatistics().getCount()).isEqualTo(2);
+                    });
                 });
             });
         });
