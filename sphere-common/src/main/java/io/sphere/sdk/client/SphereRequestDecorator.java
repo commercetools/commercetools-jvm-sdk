@@ -4,7 +4,7 @@ import io.sphere.sdk.http.HttpResponse;
 import io.sphere.sdk.models.Base;
 
 public abstract class SphereRequestDecorator<T> extends Base implements SphereRequest<T> {
-    private final SphereRequest<T> delegate;
+    protected final SphereRequest<T> delegate;
 
     protected SphereRequestDecorator(final SphereRequest<T> delegate) {
         this.delegate = delegate;
