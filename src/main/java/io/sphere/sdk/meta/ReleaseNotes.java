@@ -598,7 +598,7 @@ import java.util.function.Function;
  <li class=new-in-release>Added {@code io.sphere.sdk.carts.Cart#getLineItem(String)} and {@code io.sphere.sdk.carts.Cart#getCustomLineItem(String)} to find items in a cart.</li>
  <li class=new-in-release>Added {@link io.sphere.sdk.products.ProductProjection#getAllVariants()} to receive master variant and all other variants in one call. {@link io.sphere.sdk.products.ProductProjection#getVariants()} just returns all variants except the master variant.</li>
  <li class=new-in-release>Added {@link io.sphere.sdk.products.ProductProjection#getVariant(int)} and {@link io.sphere.sdk.products.ProductProjection#getVariantOrMaster(int)} to find a product variant by id.</li>
- <li class=new-in-release>Added {@link io.sphere.sdk.products.VariantIdentifier} to have a container to address product variants which needs a product ID and a variant ID.</li>
+ <li class=new-in-release>Added {@code VariantIdentifier} to have a container to address product variants which needs a product ID and a variant ID.</li>
  <li class=new-in-release>added {@link io.sphere.sdk.customers.commands.CustomerDeleteCommand} to delete customers.</li>
  <li class=new-in-release>Added {@link io.sphere.sdk.products.commands.updateactions.AddExternalImage} to connect products with images not hosted by SPHERE.IO.</li>
  <li class=new-in-release>Added {@link io.sphere.sdk.products.commands.updateactions.RemoveImage} to disconnect images from a product (external images and SPHERE.IO hosted).</li>

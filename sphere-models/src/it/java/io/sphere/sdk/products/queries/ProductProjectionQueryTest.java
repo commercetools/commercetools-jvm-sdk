@@ -1,6 +1,5 @@
 package io.sphere.sdk.products.queries;
 
-import io.sphere.sdk.client.SphereRequest;
 import io.sphere.sdk.products.attributes.AttributeAccess;
 import io.sphere.sdk.products.attributes.NamedAttributeAccess;
 import io.sphere.sdk.categories.Category;
@@ -67,8 +66,8 @@ public class ProductProjectionQueryTest extends IntegrationTest {
             final Query<ProductProjection> query = ProductProjectionQuery.of(STAGED)
                     .withPredicates(m -> m.id().is(product.getId()));
             final ProductProjection productProjection = client().executeBlocking(query).head().get();
-            final VariantIdentifier identifier = productProjection.getMasterVariant().getIdentifier();
-            assertThat(identifier).isEqualTo(VariantIdentifier.of(product.getId(), 1));
+            final ByIdVariantIdentifier identifier = productProjection.getMasterVariant().getIdentifier();
+            assertThat(identifier).isEqualTo(ByIdVariantIdentifier.of(product.getId(), 1));
         });
     }
 

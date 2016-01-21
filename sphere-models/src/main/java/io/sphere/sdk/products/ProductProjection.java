@@ -16,7 +16,6 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 /**
   A projected representation of a product shows the product with its current or staged data.
@@ -96,7 +95,7 @@ public interface ProductProjection extends ProductLike<ProductProjection, Produc
         return ProductsPackage.getAllVariants(this);
     }
 
-    default Optional<ProductVariant> findVariant(final VariantIdentifier identifier){
+    default Optional<ProductVariant> findVariant(final ByIdVariantIdentifier identifier){
         return getId().equals(identifier.getProductId()) ? Optional.ofNullable(getVariant(identifier.getVariantId())) : Optional.empty();
     }
 

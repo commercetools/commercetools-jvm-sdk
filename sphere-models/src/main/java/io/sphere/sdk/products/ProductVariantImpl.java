@@ -72,8 +72,8 @@ class ProductVariantImpl extends AttributeContainerImpl implements ProductVarian
     }
 
     @Override
-    public VariantIdentifier getIdentifier() {
-        return Optional.ofNullable(productId).map(pId -> VariantIdentifier.of(pId, getId())).orElseThrow(UnsupportedOperationException::new);
+    public ByIdVariantIdentifier getIdentifier() {
+        return Optional.ofNullable(productId).map(pId -> ByIdVariantIdentifier.of(pId, getId())).orElseThrow(UnsupportedOperationException::new);
     }
 
     @Override

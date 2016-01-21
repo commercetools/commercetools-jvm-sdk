@@ -12,7 +12,6 @@ import io.sphere.sdk.products.commands.updateactions.Unpublish;
 import io.sphere.sdk.products.expansion.ProductExpansionModel;
 import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.queries.Query;
-import io.sphere.sdk.reviews.ReviewFixtures;
 import io.sphere.sdk.suppliers.VariantsCottonTShirtProductDraftSupplier;
 import io.sphere.sdk.test.IntegrationTest;
 import io.sphere.sdk.utils.MoneyImpl;
@@ -65,8 +64,8 @@ public class ProductQueryTest extends IntegrationTest {
     @Test
     public void variantIdentifierIsAvailable() throws Exception {
         withProduct(client(), product -> {
-            final VariantIdentifier identifier = product.getMasterData().getStaged().getMasterVariant().getIdentifier();
-            assertThat(identifier).isEqualTo(VariantIdentifier.of(product.getId(), 1));
+            final ByIdVariantIdentifier identifier = product.getMasterData().getStaged().getMasterVariant().getIdentifier();
+            assertThat(identifier).isEqualTo(ByIdVariantIdentifier.of(product.getId(), 1));
         });
     }
 
