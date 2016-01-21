@@ -135,7 +135,8 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html"
     final Product productWithCategory = client()
             .executeBlocking(ProductUpdateCommand.of(product, AddToCategory.of(category, orderHint)));
 
-    ReferenceAssert.assertThat(productWithCategory.getMasterData().getStaged().getCategories().stream().findAny().get()).references(category);
+    final Reference&lt;Category&gt; categoryReference = productWithCategory.getMasterData().getStaged().getCategories().stream().findAny().get();
+    assertThat(categoryReference.referencesSameResource(category)).isTrue();
     assertThat(productWithCategory.getMasterData().getStaged().getCategoryOrderHints().get(category.getId())).isEqualTo(orderHint);
 
     final Product productWithoutCategory = client()

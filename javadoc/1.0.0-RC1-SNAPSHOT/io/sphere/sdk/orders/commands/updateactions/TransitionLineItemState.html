@@ -131,11 +131,11 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html"
  <div id="io-sphere-sdk-orders-commands-OrderUpdateCommandTest-transitionLineItemState--%s" class=code-example><pre><code class='java'>withStandardStates(client(), (State initialState, State nextState) -&gt;
     withOrder(client(), order -&gt; {
         final LineItem lineItem = order.getLineItems().get(0);
-        assertThat(lineItem).containsState(initialState).containsNotState(nextState);
+        assertThat(lineItem).has(state(initialState)).has(not(state(nextState)));
         final long quantity = 1;
         final ZonedDateTime actualTransitionDate = ZonedDateTime_IN_PAST;
         final Order updatedOrder = client().executeBlocking(OrderUpdateCommand.of(order, TransitionLineItemState.of(lineItem, quantity, initialState, nextState, actualTransitionDate)));
-        assertThat(updatedOrder.getLineItems().get(0)).containsItemStates(ItemState.of(nextState, quantity));
+        assertThat(updatedOrder.getLineItems().get(0)).has(itemStates(ItemState.of(nextState, quantity)));
 
         return updatedOrder;
     })

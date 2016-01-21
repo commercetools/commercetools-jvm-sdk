@@ -800,6 +800,10 @@
 </dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/commands/ByIdDeleteCommandImpl.html#ByIdDeleteCommandImpl-io.sphere.sdk.models.Versioned-io.sphere.sdk.client.JsonEndpoint-">ByIdDeleteCommandImpl(Versioned&lt;T&gt;, JsonEndpoint&lt;T&gt;)</a></span> - Constructor for class io.sphere.sdk.commands.<a href="io/sphere/sdk/commands/ByIdDeleteCommandImpl.html" title="class in io.sphere.sdk.commands">ByIdDeleteCommandImpl</a></dt>
 <dd>&nbsp;</dd>
+<dt><a href="io/sphere/sdk/products/ByIdVariantIdentifier.html" title="interface in io.sphere.sdk.products"><span class="typeNameLink">ByIdVariantIdentifier</span></a> - Interface in <a href="io/sphere/sdk/products/package-summary.html">io.sphere.sdk.products</a></dt>
+<dd>
+<div class="block">Identifies a <a href="io/sphere/sdk/products/ProductVariant.html" title="interface in io.sphere.sdk.products"><code>ProductVariant</code></a> by product ID and variant ID.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/shippingmethods/queries/ShippingMethodQuery.html#byIsDefault--">byIsDefault()</a></span> - Method in interface io.sphere.sdk.shippingmethods.queries.<a href="io/sphere/sdk/shippingmethods/queries/ShippingMethodQuery.html" title="interface in io.sphere.sdk.shippingmethods.queries">ShippingMethodQuery</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/categories/queries/CategoryQuery.html#byIsRoot--">byIsRoot()</a></span> - Method in interface io.sphere.sdk.categories.queries.<a href="io/sphere/sdk/categories/queries/CategoryQuery.html" title="interface in io.sphere.sdk.categories.queries">CategoryQuery</a></dt>
@@ -843,6 +847,8 @@
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/queries/ProductProjectionQuery.html#bySku-java.util.List-">bySku(List&lt;String&gt;)</a></span> - Method in interface io.sphere.sdk.products.queries.<a href="io/sphere/sdk/products/queries/ProductProjectionQuery.html" title="interface in io.sphere.sdk.products.queries">ProductProjectionQuery</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/queries/ProductQuery.html#bySku-java.lang.String-io.sphere.sdk.products.ProductProjectionType-">bySku(String, ProductProjectionType)</a></span> - Method in interface io.sphere.sdk.products.queries.<a href="io/sphere/sdk/products/queries/ProductQuery.html" title="interface in io.sphere.sdk.products.queries">ProductQuery</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="io/sphere/sdk/products/BySkuVariantIdentifier.html" title="interface in io.sphere.sdk.products"><span class="typeNameLink">BySkuVariantIdentifier</span></a> - Interface in <a href="io/sphere/sdk/products/package-summary.html">io.sphere.sdk.products</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/categories/queries/CategoryQuery.html#bySlug-java.util.Locale-java.lang.String-">bySlug(Locale, String)</a></span> - Method in interface io.sphere.sdk.categories.queries.<a href="io/sphere/sdk/categories/queries/CategoryQuery.html" title="interface in io.sphere.sdk.categories.queries">CategoryQuery</a></dt>
 <dd>&nbsp;</dd>
@@ -3084,7 +3090,7 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 </dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/attributes/AttributeExtraction.html#findValue--">findValue()</a></span> - Method in class io.sphere.sdk.products.attributes.<a href="io/sphere/sdk/products/attributes/AttributeExtraction.html" title="class in io.sphere.sdk.products.attributes">AttributeExtraction</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/ProductProjection.html#findVariant-io.sphere.sdk.products.VariantIdentifier-">findVariant(VariantIdentifier)</a></span> - Method in interface io.sphere.sdk.products.<a href="io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/ProductProjection.html#findVariant-io.sphere.sdk.products.ByIdVariantIdentifier-">findVariant(ByIdVariantIdentifier)</a></span> - Method in interface io.sphere.sdk.products.<a href="io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/ProductProjection.html#findVariantBySku-java.lang.String-">findVariantBySku(String)</a></span> - Method in interface io.sphere.sdk.products.<a href="io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a></dt>
 <dd>
@@ -4857,7 +4863,7 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dd>
 <div class="block">Field is not part of the SPHERE.IO API, it is used to initialize <a href="io/sphere/sdk/orders/LineItemImportDraftBuilder.html" title="class in io.sphere.sdk.orders"><code>LineItemImportDraftBuilder</code></a> correctly.</div>
 </dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/VariantIdentifier.html#getProductId--">getProductId()</a></span> - Method in class io.sphere.sdk.products.<a href="io/sphere/sdk/products/VariantIdentifier.html" title="class in io.sphere.sdk.products">VariantIdentifier</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/ByIdVariantIdentifier.html#getProductId--">getProductId()</a></span> - Method in interface io.sphere.sdk.products.<a href="io/sphere/sdk/products/ByIdVariantIdentifier.html" title="interface in io.sphere.sdk.products">ByIdVariantIdentifier</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/messages/ProductPublishedMessage.html#getProductProjection--">getProductProjection()</a></span> - Method in class io.sphere.sdk.products.messages.<a href="io/sphere/sdk/products/messages/ProductPublishedMessage.html" title="class in io.sphere.sdk.products.messages">ProductPublishedMessage</a></dt>
 <dd>&nbsp;</dd>
@@ -5110,6 +5116,8 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/inventory/InventoryEntryDraft.html#getSku--">getSku()</a></span> - Method in class io.sphere.sdk.inventory.<a href="io/sphere/sdk/inventory/InventoryEntryDraft.html" title="class in io.sphere.sdk.inventory">InventoryEntryDraft</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/ProductVariantImportDraft.html#getSku--">getSku()</a></span> - Method in interface io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/ProductVariantImportDraft.html" title="interface in io.sphere.sdk.orders">ProductVariantImportDraft</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/BySkuVariantIdentifier.html#getSku--">getSku()</a></span> - Method in interface io.sphere.sdk.products.<a href="io/sphere/sdk/products/BySkuVariantIdentifier.html" title="interface in io.sphere.sdk.products">BySkuVariantIdentifier</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/commands/updateactions/AddVariant.html#getSku--">getSku()</a></span> - Method in class io.sphere.sdk.products.commands.updateactions.<a href="io/sphere/sdk/products/commands/updateactions/AddVariant.html" title="class in io.sphere.sdk.products.commands.updateactions">AddVariant</a></dt>
 <dd>&nbsp;</dd>
@@ -5753,6 +5761,8 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/LineItemDraft.html#getVariantId--">getVariantId()</a></span> - Method in class io.sphere.sdk.carts.<a href="io/sphere/sdk/carts/LineItemDraft.html" title="class in io.sphere.sdk.carts">LineItemDraft</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/ByIdVariantIdentifier.html#getVariantId--">getVariantId()</a></span> - Method in interface io.sphere.sdk.products.<a href="io/sphere/sdk/products/ByIdVariantIdentifier.html" title="interface in io.sphere.sdk.products">ByIdVariantIdentifier</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/commands/updateactions/AddExternalImage.html#getVariantId--">getVariantId()</a></span> - Method in class io.sphere.sdk.products.commands.updateactions.<a href="io/sphere/sdk/products/commands/updateactions/AddExternalImage.html" title="class in io.sphere.sdk.products.commands.updateactions">AddExternalImage</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/commands/updateactions/AddPrice.html#getVariantId--">getVariantId()</a></span> - Method in class io.sphere.sdk.products.commands.updateactions.<a href="io/sphere/sdk/products/commands/updateactions/AddPrice.html" title="class in io.sphere.sdk.products.commands.updateactions">AddPrice</a></dt>
@@ -5762,8 +5772,6 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/commands/updateactions/SetAttribute.html#getVariantId--">getVariantId()</a></span> - Method in class io.sphere.sdk.products.commands.updateactions.<a href="io/sphere/sdk/products/commands/updateactions/SetAttribute.html" title="class in io.sphere.sdk.products.commands.updateactions">SetAttribute</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/commands/updateactions/SetSku.html#getVariantId--">getVariantId()</a></span> - Method in class io.sphere.sdk.products.commands.updateactions.<a href="io/sphere/sdk/products/commands/updateactions/SetSku.html" title="class in io.sphere.sdk.products.commands.updateactions">SetSku</a></dt>
-<dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/VariantIdentifier.html#getVariantId--">getVariantId()</a></span> - Method in class io.sphere.sdk.products.<a href="io/sphere/sdk/products/VariantIdentifier.html" title="class in io.sphere.sdk.products">VariantIdentifier</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/ProductData.html#getVariantOrMaster-int-">getVariantOrMaster(int)</a></span> - Method in interface io.sphere.sdk.products.<a href="io/sphere/sdk/products/ProductData.html" title="interface in io.sphere.sdk.products">ProductData</a></dt>
 <dd>&nbsp;</dd>
@@ -7769,8 +7777,6 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/commands/MetaModelCreateCommandImpl.html#MetaModelCreateCommandImpl-D-io.sphere.sdk.client.JsonEndpoint-E-java.util.function.Function-">MetaModelCreateCommandImpl(D, JsonEndpoint&lt;T&gt;, E, Function&lt;MetaModelCreateCommandBuilder&lt;T, C, D, E&gt;, C&gt;)</a></span> - Constructor for class io.sphere.sdk.commands.<a href="io/sphere/sdk/commands/MetaModelCreateCommandImpl.html" title="class in io.sphere.sdk.commands">MetaModelCreateCommandImpl</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="io/sphere/sdk/expansion/MetaModelExpansionDsl.html" title="interface in io.sphere.sdk.expansion"><span class="typeNameLink">MetaModelExpansionDsl</span></a>&lt;<a href="io/sphere/sdk/expansion/MetaModelExpansionDsl.html" title="type parameter in MetaModelExpansionDsl">T</a>,<a href="io/sphere/sdk/expansion/MetaModelExpansionDsl.html" title="type parameter in MetaModelExpansionDsl">C</a>,<a href="io/sphere/sdk/expansion/MetaModelExpansionDsl.html" title="type parameter in MetaModelExpansionDsl">E</a>&gt; - Interface in <a href="io/sphere/sdk/expansion/package-summary.html">io.sphere.sdk.expansion</a></dt>
-<dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/expansion/MetaModelExpansionDslExpansionModelRead.html" title="interface in io.sphere.sdk.expansion"><span class="typeNameLink">MetaModelExpansionDslExpansionModelRead</span></a>&lt;<a href="io/sphere/sdk/expansion/MetaModelExpansionDslExpansionModelRead.html" title="type parameter in MetaModelExpansionDslExpansionModelRead">T</a>,<a href="io/sphere/sdk/expansion/MetaModelExpansionDslExpansionModelRead.html" title="type parameter in MetaModelExpansionDslExpansionModelRead">C</a>,<a href="io/sphere/sdk/expansion/MetaModelExpansionDslExpansionModelRead.html" title="type parameter in MetaModelExpansionDslExpansionModelRead">E</a>&gt; - Interface in <a href="io/sphere/sdk/expansion/package-summary.html">io.sphere.sdk.expansion</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/search/MetaModelFacetDsl.html" title="interface in io.sphere.sdk.search"><span class="typeNameLink">MetaModelFacetDsl</span></a>&lt;<a href="io/sphere/sdk/search/MetaModelFacetDsl.html" title="type parameter in MetaModelFacetDsl">T</a>,<a href="io/sphere/sdk/search/MetaModelFacetDsl.html" title="type parameter in MetaModelFacetDsl">C</a>,<a href="io/sphere/sdk/search/MetaModelFacetDsl.html" title="type parameter in MetaModelFacetDsl">F</a>&gt; - Interface in <a href="io/sphere/sdk/search/package-summary.html">io.sphere.sdk.search</a></dt>
@@ -7810,6 +7816,8 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/MetaModelQueryDslImpl.html#MetaModelQueryDslImpl-java.lang.String-com.fasterxml.jackson.core.type.TypeReference-Q-E-java.util.function.Function-">MetaModelQueryDslImpl(String, TypeReference&lt;PagedQueryResult&lt;T&gt;&gt;, Q, E, Function&lt;MetaModelQueryDslBuilder&lt;T, C, Q, E&gt;, C&gt;)</a></span> - Constructor for class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="class in io.sphere.sdk.queries">MetaModelQueryDslImpl</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/MetaModelQueryDslImpl.html#MetaModelQueryDslImpl-io.sphere.sdk.queries.MetaModelQueryDslBuilder-">MetaModelQueryDslImpl(MetaModelQueryDslBuilder&lt;T, C, Q, E&gt;)</a></span> - Constructor for class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="class in io.sphere.sdk.queries">MetaModelQueryDslImpl</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="io/sphere/sdk/expansion/MetaModelReferenceExpansionDsl.html" title="interface in io.sphere.sdk.expansion"><span class="typeNameLink">MetaModelReferenceExpansionDsl</span></a>&lt;<a href="io/sphere/sdk/expansion/MetaModelReferenceExpansionDsl.html" title="type parameter in MetaModelReferenceExpansionDsl">T</a>,<a href="io/sphere/sdk/expansion/MetaModelReferenceExpansionDsl.html" title="type parameter in MetaModelReferenceExpansionDsl">C</a>,<a href="io/sphere/sdk/expansion/MetaModelReferenceExpansionDsl.html" title="type parameter in MetaModelReferenceExpansionDsl">E</a>&gt; - Interface in <a href="io/sphere/sdk/expansion/package-summary.html">io.sphere.sdk.expansion</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/search/MetaModelSearchDsl.html" title="interface in io.sphere.sdk.search"><span class="typeNameLink">MetaModelSearchDsl</span></a>&lt;<a href="io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">T</a>,<a href="io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">C</a> extends <a href="io/sphere/sdk/search/MetaModelSearchDsl.html" title="interface in io.sphere.sdk.search">MetaModelSearchDsl</a>&lt;<a href="io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">T</a>,<a href="io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">C</a>,<a href="io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">S</a>,<a href="io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">L</a>,<a href="io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">F</a>,<a href="io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">E</a>&gt;,<a href="io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">S</a>,<a href="io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">L</a>,<a href="io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">F</a>,<a href="io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">E</a>&gt; - Interface in <a href="io/sphere/sdk/search/package-summary.html">io.sphere.sdk.search</a></dt>
 <dd>&nbsp;</dd>
@@ -9049,6 +9057,12 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/attributes/TimeAttributeType.html#of--">of()</a></span> - Static method in class io.sphere.sdk.products.attributes.<a href="io/sphere/sdk/products/attributes/TimeAttributeType.html" title="class in io.sphere.sdk.products.attributes">TimeAttributeType</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/ByIdVariantIdentifier.html#of-io.sphere.sdk.models.Referenceable-java.lang.Integer-">of(Referenceable&lt;Product&gt;, Integer)</a></span> - Static method in interface io.sphere.sdk.products.<a href="io/sphere/sdk/products/ByIdVariantIdentifier.html" title="interface in io.sphere.sdk.products">ByIdVariantIdentifier</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/ByIdVariantIdentifier.html#of-java.lang.String-java.lang.Integer-">of(String, Integer)</a></span> - Static method in interface io.sphere.sdk.products.<a href="io/sphere/sdk/products/ByIdVariantIdentifier.html" title="interface in io.sphere.sdk.products">ByIdVariantIdentifier</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/BySkuVariantIdentifier.html#of-java.lang.String-">of(String)</a></span> - Static method in interface io.sphere.sdk.products.<a href="io/sphere/sdk/products/BySkuVariantIdentifier.html" title="interface in io.sphere.sdk.products">BySkuVariantIdentifier</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/CategoryOrderHints.html#of-java.lang.String-java.lang.String-">of(String, String)</a></span> - Static method in class io.sphere.sdk.products.<a href="io/sphere/sdk/products/CategoryOrderHints.html" title="class in io.sphere.sdk.products">CategoryOrderHints</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/CategoryOrderHints.html#of-java.util.Map-">of(Map&lt;String, String&gt;)</a></span> - Static method in class io.sphere.sdk.products.<a href="io/sphere/sdk/products/CategoryOrderHints.html" title="class in io.sphere.sdk.products">CategoryOrderHints</a></dt>
@@ -9224,10 +9238,6 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/Suggestion.html#of-java.lang.String-">of(String)</a></span> - Static method in interface io.sphere.sdk.products.<a href="io/sphere/sdk/products/Suggestion.html" title="interface in io.sphere.sdk.products">Suggestion</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/SuggestionResult.html#of-java.util.Map-">of(Map&lt;Locale, List&lt;Suggestion&gt;&gt;)</a></span> - Static method in interface io.sphere.sdk.products.<a href="io/sphere/sdk/products/SuggestionResult.html" title="interface in io.sphere.sdk.products">SuggestionResult</a></dt>
-<dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/VariantIdentifier.html#of-io.sphere.sdk.models.Referenceable-java.lang.Integer-">of(Referenceable&lt;Product&gt;, Integer)</a></span> - Static method in class io.sphere.sdk.products.<a href="io/sphere/sdk/products/VariantIdentifier.html" title="class in io.sphere.sdk.products">VariantIdentifier</a></dt>
-<dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/VariantIdentifier.html#of-java.lang.String-java.lang.Integer-">of(String, Integer)</a></span> - Static method in class io.sphere.sdk.products.<a href="io/sphere/sdk/products/VariantIdentifier.html" title="class in io.sphere.sdk.products">VariantIdentifier</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/producttypes/commands/ProductTypeCreateCommand.html#of-io.sphere.sdk.producttypes.ProductTypeDraft-">of(ProductTypeDraft)</a></span> - Static method in interface io.sphere.sdk.producttypes.commands.<a href="io/sphere/sdk/producttypes/commands/ProductTypeCreateCommand.html" title="interface in io.sphere.sdk.producttypes.commands">ProductTypeCreateCommand</a></dt>
 <dd>&nbsp;</dd>
@@ -10944,7 +10954,7 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/expansion/ExpansionDslUtil.html#plusExpansionPaths-io.sphere.sdk.expansion.MetaModelExpansionDslExpansionModelRead-java.util.List-">plusExpansionPaths(MetaModelExpansionDslExpansionModelRead&lt;T, C, E&gt;, List&lt;ExpansionPath&lt;T&gt;&gt;)</a></span> - Static method in class io.sphere.sdk.expansion.<a href="io/sphere/sdk/expansion/ExpansionDslUtil.html" title="class in io.sphere.sdk.expansion">ExpansionDslUtil</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/expansion/MetaModelExpansionDsl.html#plusExpansionPaths-java.util.function.Function-">plusExpansionPaths(Function&lt;E, ExpansionPathContainer&lt;T&gt;&gt;)</a></span> - Method in interface io.sphere.sdk.expansion.<a href="io/sphere/sdk/expansion/MetaModelExpansionDsl.html" title="interface in io.sphere.sdk.expansion">MetaModelExpansionDsl</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/expansion/MetaModelReferenceExpansionDsl.html#plusExpansionPaths-java.util.function.Function-">plusExpansionPaths(Function&lt;E, ExpansionPathContainer&lt;T&gt;&gt;)</a></span> - Method in interface io.sphere.sdk.expansion.<a href="io/sphere/sdk/expansion/MetaModelReferenceExpansionDsl.html" title="interface in io.sphere.sdk.expansion">MetaModelReferenceExpansionDsl</a></dt>
 <dd>
 <div class="block">Creates a new object with the properties of the old object but adds a new expansion path to it by using meta models.</div>
 </dd>
@@ -14669,11 +14679,11 @@ CompletionStage&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execu
  <div id="io-sphere-sdk-orders-commands-OrderUpdateCommandTest-transitionLineItemState--%s" class=code-example><pre><code class='java'>withStandardStates(client(), (State initialState, State nextState) -&gt;
     withOrder(client(), order -&gt; {
         final LineItem lineItem = order.getLineItems().get(0);
-        assertThat(lineItem).containsState(initialState).containsNotState(nextState);
+        assertThat(lineItem).has(state(initialState)).has(not(state(nextState)));
         final long quantity = 1;
         final ZonedDateTime actualTransitionDate = ZonedDateTime_IN_PAST;
         final Order updatedOrder = client().executeBlocking(OrderUpdateCommand.of(order, TransitionLineItemState.of(lineItem, quantity, initialState, nextState, actualTransitionDate)));
-        assertThat(updatedOrder.getLineItems().get(0)).containsItemStates(ItemState.of(nextState, quantity));
+        assertThat(updatedOrder.getLineItems().get(0)).has(itemStates(ItemState.of(nextState, quantity)));
 
         return updatedOrder;
     })
@@ -15234,10 +15244,8 @@ the order they are declared.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/queries/LineItemCollectionQueryModel.html#variant--">variant()</a></span> - Method in interface io.sphere.sdk.carts.queries.<a href="io/sphere/sdk/carts/queries/LineItemCollectionQueryModel.html" title="interface in io.sphere.sdk.carts.queries">LineItemCollectionQueryModel</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="io/sphere/sdk/products/VariantIdentifier.html" title="class in io.sphere.sdk.products"><span class="typeNameLink">VariantIdentifier</span></a> - Class in <a href="io/sphere/sdk/products/package-summary.html">io.sphere.sdk.products</a></dt>
-<dd>
-<div class="block">Identifies a <a href="io/sphere/sdk/products/ProductVariant.html" title="interface in io.sphere.sdk.products"><code>ProductVariant</code></a>.</div>
-</dd>
+<dt><a href="io/sphere/sdk/products/VariantIdentifier.html" title="interface in io.sphere.sdk.products"><span class="typeNameLink">VariantIdentifier</span></a> - Interface in <a href="io/sphere/sdk/products/package-summary.html">io.sphere.sdk.products</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/expansion/ProductDataExpansionModel.html#variants--">variants()</a></span> - Method in class io.sphere.sdk.products.expansion.<a href="io/sphere/sdk/products/expansion/ProductDataExpansionModel.html" title="class in io.sphere.sdk.products.expansion">ProductDataExpansionModel</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/expansion/ProductProjectionExpansionModel.html#variants--">variants()</a></span> - Method in class io.sphere.sdk.products.expansion.<a href="io/sphere/sdk/products/expansion/ProductProjectionExpansionModel.html" title="class in io.sphere.sdk.products.expansion">ProductProjectionExpansionModel</a></dt>
@@ -15484,7 +15492,7 @@ the order they are declared.</div>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/expansion/ExpansionDslUtil.html#withExpansionPaths-io.sphere.sdk.expansion.MetaModelExpansionDslExpansionModelRead-io.sphere.sdk.expansion.ExpansionPath-">withExpansionPaths(MetaModelExpansionDslExpansionModelRead&lt;T, C, E&gt;, ExpansionPath&lt;T&gt;)</a></span> - Static method in class io.sphere.sdk.expansion.<a href="io/sphere/sdk/expansion/ExpansionDslUtil.html" title="class in io.sphere.sdk.expansion">ExpansionDslUtil</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/expansion/MetaModelExpansionDsl.html#withExpansionPaths-java.util.function.Function-">withExpansionPaths(Function&lt;E, ExpansionPathContainer&lt;T&gt;&gt;)</a></span> - Method in interface io.sphere.sdk.expansion.<a href="io/sphere/sdk/expansion/MetaModelExpansionDsl.html" title="interface in io.sphere.sdk.expansion">MetaModelExpansionDsl</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/expansion/MetaModelReferenceExpansionDsl.html#withExpansionPaths-java.util.function.Function-">withExpansionPaths(Function&lt;E, ExpansionPathContainer&lt;T&gt;&gt;)</a></span> - Method in interface io.sphere.sdk.expansion.<a href="io/sphere/sdk/expansion/MetaModelReferenceExpansionDsl.html" title="interface in io.sphere.sdk.expansion">MetaModelReferenceExpansionDsl</a></dt>
 <dd>
 <div class="block">Creates a new object with the properties of the old object but replaces all expansion paths with a single <code>expansionPath</code> by using meta models.</div>
 </dd>

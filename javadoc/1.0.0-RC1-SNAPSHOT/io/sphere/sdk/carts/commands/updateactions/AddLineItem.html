@@ -142,7 +142,7 @@ implements <a href="../../../../../../io/sphere/sdk/types/CustomDraft.html" titl
     assertThat(lineItem.getName()).isEqualTo(product.getMasterData().getStaged().getName());
     assertThat(lineItem.getQuantity()).isEqualTo(quantity);
     assertThat(lineItem.getProductSlug()).isEqualTo(product.getMasterData().getStaged().getSlug());
-    assertThat(lineItem.getVariant().getIdentifier()).isEqualTo(VariantIdentifier.of(lineItem.getProductId(), lineItem.getVariant().getId()));
+    assertThat(lineItem.getVariant().getIdentifier()).isEqualTo(ByIdVariantIdentifier.of(lineItem.getProductId(), lineItem.getVariant().getId()));
 });
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/carts/commands/CartUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 </li>
