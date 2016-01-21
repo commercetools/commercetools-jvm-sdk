@@ -34,10 +34,8 @@ public final class SimpleMetricsSphereClient extends SphereClientDecorator imple
         final CompletionStage<T> completionStage = super.execute(metricSphereRequest);
         completionStage.whenComplete((nullableResult, nullableThrowable) -> {
             final long stopTimestamp = System.currentTimeMillis();
-            if (nullableThrowable == null) {
-                final long duration = stopTimestamp - startTimestamp;
-                metricObservable.notifyObservers(ObservedTotalDuration.of(duration, id, sphereRequest));
-            }
+            final long duration = stopTimestamp - startTimestamp;
+            metricObservable.notifyObservers(ObservedTotalDuration.of(duration, id, sphereRequest));
         });
         return completionStage;
     }
