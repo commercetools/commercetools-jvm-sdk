@@ -3,9 +3,10 @@ package io.sphere.sdk.orders.commands;
 import io.sphere.sdk.carts.CustomLineItem;
 import io.sphere.sdk.carts.ItemState;
 import io.sphere.sdk.carts.LineItem;
-import io.sphere.sdk.client.SphereRequest;
+import io.sphere.sdk.carts.LineItemLike;
 import io.sphere.sdk.messages.queries.MessageQuery;
 import io.sphere.sdk.models.Reference;
+import io.sphere.sdk.models.Referenceable;
 import io.sphere.sdk.orders.*;
 import io.sphere.sdk.orders.commands.updateactions.*;
 import io.sphere.sdk.orders.messages.OrderStateTransitionMessage;
@@ -18,6 +19,8 @@ import io.sphere.sdk.states.StateType;
 import io.sphere.sdk.test.IntegrationTest;
 import io.sphere.sdk.test.SphereTestUtils;
 import org.assertj.core.api.Assertions;
+import org.assertj.core.api.Condition;
+import org.assertj.core.description.Description;
 import org.junit.Test;
 
 import java.time.ZonedDateTime;
@@ -26,7 +29,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
-import static io.sphere.sdk.carts.LineItemLikeAssert.assertThat;
 import static io.sphere.sdk.channels.ChannelFixtures.withOrderExportChannel;
 import static io.sphere.sdk.orders.OrderFixtures.*;
 import static io.sphere.sdk.payments.PaymentFixtures.withPayment;
@@ -35,7 +37,9 @@ import static io.sphere.sdk.states.StateFixtures.withStateByBuilder;
 import static io.sphere.sdk.test.SphereTestUtils.asList;
 import static io.sphere.sdk.test.SphereTestUtils.randomString;
 import static io.sphere.sdk.utils.SetUtils.asSet;
+import static io.sphere.sdk.utils.SetUtils.setOf;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.condition.Not.not;
 
 public class OrderUpdateCommandTest extends IntegrationTest {
 
@@ -223,15 +227,24 @@ public class OrderUpdateCommandTest extends IntegrationTest {
         withStandardStates(client(), (State initialState, State nextState) ->
             withOrder(client(), order -> {
                 final LineItem lineItem = order.getLineItems().get(0);
-                assertThat(lineItem).containsState(initialState).containsNotState(nextState);
+                assertThat(lineItem).has(state(initialState)).has(not(state(nextState)));
                 final long quantity = 1;
                 final ZonedDateTime actualTransitionDate = ZonedDateTime_IN_PAST;
                 final Order updatedOrder = client().executeBlocking(OrderUpdateCommand.of(order, TransitionLineItemState.of(lineItem, quantity, initialState, nextState, actualTransitionDate)));
-                assertThat(updatedOrder.getLineItems().get(0)).containsItemStates(ItemState.of(nextState, quantity));
+                assertThat(updatedOrder.getLineItems().get(0)).has(itemStates(ItemState.of(nextState, quantity)));
 
                 return updatedOrder;
             })
         );
+    }
+
+    private Condition<LineItemLike> state(final Referenceable<State> state) {
+        return new Condition<LineItemLike>() {
+            @Override
+            public boolean matches(final LineItemLike actual) {
+                return actual.getState().stream().anyMatch(itemState -> itemState.getState().equals(state.toReference()));
+            }
+        };
     }
 
     @Test
@@ -239,24 +252,39 @@ public class OrderUpdateCommandTest extends IntegrationTest {
         withStandardStates(client(), (State initialState, State nextState) ->
             withOrderOfCustomLineItems(client(), order -> {
                 final CustomLineItem customLineItem = order.getCustomLineItems().get(0);
-                assertThat(customLineItem).containsState(initialState).containsNotState(nextState);
+                assertThat(customLineItem).has(state(initialState)).has(not(state(nextState)));
                 final long quantity = 1;
                 final ZonedDateTime actualTransitionDate = ZonedDateTime_IN_PAST;
                 final Order updatedOrder = client().executeBlocking(OrderUpdateCommand.of(order, TransitionCustomLineItemState.of(customLineItem, quantity, initialState, nextState, actualTransitionDate)));
-                assertThat(updatedOrder.getCustomLineItems().get(0)).containsItemStates(ItemState.of(nextState, quantity));
+                assertThat(updatedOrder.getCustomLineItems().get(0)).has(itemStates(ItemState.of(nextState, quantity)));
             })
         );
     }
+
+    private Condition<? super LineItemLike> itemStates(final ItemState itemState, final ItemState ... moreItemStates) {
+        final Set<ItemState> itemStates = setOf(itemState, moreItemStates);
+        return itemStates(itemStates);
+    }
+
+    private Condition<? super LineItemLike> itemStates(final Set<ItemState> itemStates) {
+        return new Condition<LineItemLike>(){
+            @Override
+            public boolean matches(final LineItemLike actual) {
+                return actual.getState().stream().anyMatch(state -> itemStates.contains(state));
+            }
+        }.describedAs("states " + itemStates);
+    }
+
 
     @Test
     public void importLineItemState() throws Exception {
         withStandardStates(client(), (State initialState, State nextState) ->
             withOrder(client(), order -> {
                 final LineItem lineItem = order.getLineItems().get(0);
-                assertThat(lineItem).containsState(initialState).containsNotState(nextState);
+                assertThat(lineItem).has(state(initialState)).has(not(state(nextState)));
                 final Set<ItemState> itemStates = asSet(ItemState.of(nextState, 1L), ItemState.of(initialState, lineItem.getQuantity() - 1));
                 final Order updatedOrder = client().executeBlocking(OrderUpdateCommand.of(order, ImportLineItemState.of(lineItem, itemStates)));
-                assertThat(updatedOrder.getLineItems().get(0)).containsItemStates(itemStates);
+                assertThat(updatedOrder.getLineItems().get(0)).has(itemStates(itemStates));
 
                 //reference expansion
                 final OrderByIdGet orderByIdGet = OrderByIdGet.of(order).withExpansionPaths(m -> m.lineItems().state().state());
@@ -274,10 +302,10 @@ public class OrderUpdateCommandTest extends IntegrationTest {
         withStandardStates(client(), (State initialState, State nextState) ->
             withOrderOfCustomLineItems(client(), order -> {
                 final CustomLineItem customLineItem = order.getCustomLineItems().get(0);
-                assertThat(customLineItem).containsState(initialState).containsNotState(nextState);
+                assertThat(customLineItem).has(state(initialState)).has(not(state(nextState)));
                 final Set<ItemState> itemStates = asSet(ItemState.of(nextState, 1L), ItemState.of(initialState, customLineItem.getQuantity() - 1));
                 final Order updatedOrder = client().executeBlocking(OrderUpdateCommand.of(order, ImportCustomLineItemState.of(customLineItem, itemStates)));
-                assertThat(updatedOrder.getCustomLineItems().get(0)).containsItemStates(itemStates);
+                assertThat(updatedOrder.getCustomLineItems().get(0)).has(itemStates(itemStates));
             })
         );
     }
