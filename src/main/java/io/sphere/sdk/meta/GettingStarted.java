@@ -39,7 +39,7 @@ client secret: 222222222222222222222222222222226</code></pre>
 
  {@include.example example.JavaClientInstantiationExample}
 
- <h3 id=perform-requests>Perform requests</h3>
+ <h3 id=perform-requests>Performing requests</h3>
 
  <p>A client works on the abstraction level of one HTTP request for one project.
  With one client you can start multiple requests in parallel, it is thread-safe.</p>
