@@ -7,37 +7,163 @@
         <ol>
             <li>{@link io.sphere.sdk.meta.GettingStarted Getting Started}</li>
             <li>{@link io.sphere.sdk.meta.SphereResources supported endpoints}</li>
-            <li>{@link io.sphere.sdk.meta.QueryDocumentation Query API}</li>
-            <li>{@link io.sphere.sdk.meta.ReferenceExpansionDocumentation Reference Expansion}</li>
+            <li>{@link io.sphere.sdk.meta.QueryDocumentation Query API}
+                <ol>
+                    <li>Creating queries</li>
+                    <li>Predicates</li>
+                    <li>Sorting</li>
+                    <li>Pagination</li>
+                    <li>Pagination for large offsets</li>
+                </ol>
+            </li>
+            <li>{@link io.sphere.sdk.meta.ReferenceExpansionDocumentation Reference Expansion}
+                <ol>
+                    <li>Introduction</li>
+                    <li>Guarantees</li>
+                    <li>Use Expansion Models</li>
+                    <li>Expansion Path by String</li>
+                </ol>
+            </li>
             <li>{@link io.sphere.sdk.meta.ReleaseNotes Release Notes}</li>
         </ol>
 
         <h4>Products, Categories and ProductTypes</h4>
         <ol>
-            <li>{@link io.sphere.sdk.meta.SearchDocumentation Search API}</li>
-            <li>{@link io.sphere.sdk.meta.ProductAttributeDocumentation product attributes}</li>
-            <li>{@link io.sphere.sdk.meta.CategoryDocumentation categories}</li>
-            <li>{@link io.sphere.sdk.meta.FormattingDocumentation tips to render money and date}</li>
+            <li>{@link io.sphere.sdk.meta.SearchDocumentation Search API}
+                <ol>
+                    <li>Full Text Search</li>
+                    <li>Pagination</li>
+                    <li>Sorting</li>
+                    <li>Faceting</li>
+                    <li>Filtering</li>
+                    <li>Product Projection Search Model</li>
+                </ol>
+            </li>
+            <li>{@link io.sphere.sdk.meta.ProductAttributeDocumentation product attributes}
+                <ol>
+                    <li>Introduction</li>
+                    <li>ProductType Creation</li>
+                    <li>Product Creation</li>
+                    <li>Reading Attributes</li>
+                    <li>Creating a table of attributes</li>
+                    <li>Update attribute values of a product</li>
+                    <li>Create attribute stubs for unit tests</li>
+                    <li>Create attributes for importing orders</li>
+                    <li>Semantics of the Attribute classes</li>
+                    <li>Nested attributes (experimental)</li>
+                </ol>
+            </li>
+            <li>{@link io.sphere.sdk.meta.CategoryDocumentation categories}
+                <ol>
+                    <li>Introduction</li>
+                    <li>ProductType Creation</li>
+                    <li>Product Creation</li>
+                    <li>Reading Attributes</li>
+                    <li>Creating a table of attributes</li>
+                    <li>Update attribute values of a product</li>
+                    <li>Create attribute stubs for unit tests</li>
+                    <li>Create attributes for importing orders</li>
+                    <li>Semantics of the Attribute classes</li>
+                    <li>Nested attributes (experimental)</li>
+                </ol>
+            </li>
+            <li>{@link io.sphere.sdk.meta.FormattingDocumentation tips to render money and date}
+                <ol>
+                    <li>Temporal Data
+                        <ol>
+                            <li>Formatting</li>
+                        </ol>
+                    </li>
+                    <li>Monetary Data
+                        <ol>
+                            <li>Creating MonetaryAmount values</li>
+                            <li>Formatting MonetaryAmount values</li>
+                            <li>Obtain the cent amounts</li>
+                            <li>Obtain the smooth amount</li>
+                            <li>Sorting MonetaryAmount values</li>
+                            <li>Rounding MonetaryAmount values</li>
+                        </ol>
+                    </li>
+                </ol>
+            </li>
         </ol>
 
         <h4>Preparing for the worst</h4>
         <ol>
-            <li>{@link io.sphere.sdk.meta.ExceptionDocumentation Exception Documentation}</li>
-            <li>{@link io.sphere.sdk.utils.SphereInternalLogger Logging}</li>
-            <li>{@link io.sphere.sdk.meta.TroubleshootingGuide Troubleshooting}</li>
+            <li>{@link io.sphere.sdk.meta.ExceptionDocumentation Exception Documentation}
+                <ol>
+                    <li>Exception Hierarchy (UML)</li>
+                    <li>Exceptions</li>
+                    <li>Errors</li>
+                </ol>
+            </li>
+            <li>{@link io.sphere.sdk.utils.SphereInternalLogger Logging}
+                <ol>
+                    <li>Logger hierarchy</li>
+                    <li>Remove the chatty output of the Ning HTTP client</li>
+                </ol>
+            </li>
+            <li>{@link io.sphere.sdk.meta.TroubleshootingGuide Troubleshooting}
+                <ol>
+                    <li>Mixed dependencies</li>
+                    <li>JSON Jackson Initialization Problems</li>
+                    <li>Incompatible Ning Async Http Client Versions</li>
+                    <li>Ning Async Http Client is flooding the logs</li>
+                    <li>How to provide a reproduceable support question</li>
+                    <li>Product not found</li>
+                </ol>
+            </li>
         </ol>
 
         <h4>More about the client</h4>
         <ol>
-            <li>{@link io.sphere.sdk.meta.AsyncDocumentation Async Execution}</li>
-            <li>{@link io.sphere.sdk.meta.SphereClientTuningDocumentation Tuning the client}</li>
-            <li>{@link io.sphere.sdk.meta.TestingDocumentation Writing unit tests with the client}</li>
+            <li>{@link io.sphere.sdk.meta.AsyncDocumentation Async Execution}
+                <ol>
+                    <li>Why asynchronous</li>
+                    <li>Mixing synchronous and asynchronous computations</li>
+                    <li>Functional Composition</li>
+                    <li>Callbacks</li>
+                    <li>Creation and filling</li>
+                    <li>Blocking Access and Immediate Access</li>
+                    <li>Java Functions</li>
+                    <li>Threads and the Trinity</li>
+                    <li>Error Handling</li>
+                    <li>Working with multiple futures</li>
+                    <li>Traps</li>
+                    <li>Advanced Examples</li>
+                    <li>Summary</li>
+                    <li>Further Topics</li>
+                    <li>Further read and sources</li>
+                </ol>
+            </li>
+            <li>{@link io.sphere.sdk.meta.SphereClientTuningDocumentation Tuning the client}
+                <ol>
+                    <li>Blocking Client</li>
+                    <li>Timeout Client</li>
+                    <li>Limit the amount of parallel requests</li>
+                    <li>Using design patterns to add functionality to the clients</li>
+                    <li>Configure the underlying http client.</li>
+                </ol>
+            </li>
+            <li>{@link io.sphere.sdk.meta.TestingDocumentation Writing unit tests with the client}
+                <ol>
+                    <li>Client test doubles for unit tests</li>
+                    <li>Detailed example for creating test doubles</li>
+                </ol>
+            </li>
         </ol>
 
         <h4>Other</h4>
         <ol>
             <li>{@link io.sphere.sdk.customobjects.CustomObject Custom Objects}</li>
-            <li>{@link io.sphere.sdk.meta.ConstructionDocumentation Construction of Objects}</li>
+            <li>{@link io.sphere.sdk.meta.ConstructionDocumentation Construction of Objects}
+                <ol>
+                    <li>Static 'of' method</li>
+                    <li>Builders</li>
+                    <li>Copy methods</li>
+                    <li>Persistent objects vs. local test doubles</li>
+                </ol>
+            </li>
             <li>{@link io.sphere.sdk.meta.JvmSdkFeatures Features of the SDK}</li>
             <li>{@link io.sphere.sdk.meta.Architecture}</li>
             <li>{@link io.sphere.sdk.meta.DocumentationGuidelines Documentation Guidelines}</li>
