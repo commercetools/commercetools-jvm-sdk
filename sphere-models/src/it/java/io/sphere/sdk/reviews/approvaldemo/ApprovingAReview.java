@@ -7,7 +7,8 @@ import io.sphere.sdk.reviews.commands.ReviewUpdateCommand;
 import io.sphere.sdk.reviews.commands.updateactions.TransitionState;
 import io.sphere.sdk.states.State;
 
-import static io.sphere.sdk.test.ReferenceAssert.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
+
 
 public class ApprovingAReview {
     public static Review approveReview(final BlockingSphereClient client, final Review reviewToApprove) {

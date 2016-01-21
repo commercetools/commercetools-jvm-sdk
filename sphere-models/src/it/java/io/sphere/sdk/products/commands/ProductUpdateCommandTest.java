@@ -23,7 +23,6 @@ import io.sphere.sdk.suppliers.TShirtProductTypeDraftSupplier.Colors;
 import io.sphere.sdk.suppliers.TShirtProductTypeDraftSupplier.Sizes;
 import io.sphere.sdk.taxcategories.TaxCategoryFixtures;
 import io.sphere.sdk.test.IntegrationTest;
-import io.sphere.sdk.test.ReferenceAssert;
 import io.sphere.sdk.test.SphereTestUtils;
 import io.sphere.sdk.utils.MoneyImpl;
 import org.junit.Test;
@@ -110,7 +109,8 @@ public class ProductUpdateCommandTest extends IntegrationTest {
             final Product productWithCategory = client()
                     .executeBlocking(ProductUpdateCommand.of(product, AddToCategory.of(category, orderHint)));
 
-            ReferenceAssert.assertThat(productWithCategory.getMasterData().getStaged().getCategories().stream().findAny().get()).references(category);
+            final Reference<Category> categoryReference = productWithCategory.getMasterData().getStaged().getCategories().stream().findAny().get();
+            assertThat(categoryReference.referencesSameResource(category)).isTrue();
             assertThat(productWithCategory.getMasterData().getStaged().getCategoryOrderHints().get(category.getId())).isEqualTo(orderHint);
 
             final Product productWithoutCategory = client()

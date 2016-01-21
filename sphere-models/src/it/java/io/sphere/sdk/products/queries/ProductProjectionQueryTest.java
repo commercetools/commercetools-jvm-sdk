@@ -35,7 +35,6 @@ import static io.sphere.sdk.products.ProductFixtures.*;
 import static io.sphere.sdk.products.ProductProjectionType.CURRENT;
 import static io.sphere.sdk.products.ProductProjectionType.STAGED;
 import static io.sphere.sdk.reviews.ReviewFixtures.withReview;
-import static io.sphere.sdk.test.ReferenceAssert.assertThat;
 import static io.sphere.sdk.test.SphereTestUtils.*;
 import static java.util.Arrays.asList;
 import static java.util.Locale.ENGLISH;
@@ -130,7 +129,7 @@ public class ProductProjectionQueryTest extends IntegrationTest {
                             .byProductType(p1.getProductType())
                             .withExpansionPaths(m -> m.productType());
             final PagedQueryResult<ProductProjection> queryResult = client().executeBlocking(query);
-            assertThat(queryResult.head().get().getProductType()).isExpanded();
+            assertThat(queryResult.head().get().getProductType()).is(expanded());
             assertThat(ids(queryResult)).containsOnly(p1.getId());
         });
     }
@@ -179,9 +178,9 @@ public class ProductProjectionQueryTest extends IntegrationTest {
                                                             final PagedQueryResult<ProductProjection> queryResult = client().executeBlocking(query);
                                                             assertThat(ids(queryResult)).containsOnly(productWithCat1.getId());
                                                             final Reference<Category> cat1Loaded = queryResult.head().get().getCategories().stream().findAny().get();
-                                                            assertThat(cat1Loaded).overridingErrorMessage("cat of product is expanded").isExpanded();
+                                                            assertThat(cat1Loaded).as("cat of product is expanded").is(expanded());
                                                             final Reference<Category> parent = cat1Loaded.getObj().getParent();
-                                                            assertThat(parent).overridingErrorMessage("parent of cat is expanded").isExpanded();
+                                                            assertThat(parent).as("parent of cat is expanded").is(expanded());
                                                         })
                                         )
                         )
@@ -235,7 +234,7 @@ public class ProductProjectionQueryTest extends IntegrationTest {
                                     .withExpansionPaths(m -> m.taxCategory());
                             final PagedQueryResult<ProductProjection> pagedQueryResult =
                                     client().executeBlocking(query);
-                            assertThat(pagedQueryResult.head().get().getTaxCategory()).isExpanded();
+                            assertThat(pagedQueryResult.head().get().getTaxCategory()).is(expanded());
                         })
         );
     }
