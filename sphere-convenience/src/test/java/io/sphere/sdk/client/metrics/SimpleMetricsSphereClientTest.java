@@ -10,8 +10,6 @@ import io.sphere.sdk.projects.queries.ProjectGet;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.Test;
 
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
@@ -25,18 +23,11 @@ public class SimpleMetricsSphereClientTest {
     public void demo() {
         final SphereClient asyncClient = TestDoubleSphereClientFactory.createHttpTestDouble(intent -> HttpResponse.of(200, "{}"));
         final SphereClient metricClient = SimpleMetricsSphereClientDemo.demo(asyncClient);
-        final PrintStream stdOut = System.out;
-        try {
-            final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-            System.setOut(new PrintStream(outContent));
-            metricClient.execute(ProjectGet.of()).toCompletableFuture().join();
-            assertThat(outContent.toString()).matches("observed: ObservedSerializationDuration\\[requestId=1,durationInMilliseconds=\\d+,request=ProjectGet\\[\\]\\]\n" +
-                    "observed: ObservedDeserializationDuration\\[requestId=1,durationInMilliseconds=\\d+,request=ProjectGet\\[\\]\\]\n" +
-                    "observed: ObservedTotalDuration\\[requestId=1,durationInMilliseconds=\\d+,request=ProjectGet\\[\\]\\]\n");
-        } catch (final Exception e) {
-            System.setOut(stdOut);
-            throw e;
-        }
+
+        metricClient.execute(ProjectGet.of()).toCompletableFuture().join();
+        assertThat(Logger.getAndClear()).matches("observed: ObservedSerializationDuration\\[requestId=1,durationInMilliseconds=\\d+,request=ProjectGet\\[\\]\\]\n" +
+                "observed: ObservedDeserializationDuration\\[requestId=1,durationInMilliseconds=\\d+,request=ProjectGet\\[\\]\\]\n" +
+                "observed: ObservedTotalDuration\\[requestId=1,durationInMilliseconds=\\d+,request=ProjectGet\\[\\]\\]");
     }
 
     @Test
