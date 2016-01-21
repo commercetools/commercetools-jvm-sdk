@@ -1,6 +1,6 @@
 package io.sphere.sdk.queries;
 
-import io.sphere.sdk.expansion.MetaModelExpansionDsl;
+import io.sphere.sdk.expansion.MetaModelReferenceExpansionDsl;
 
 /**
  *
@@ -9,6 +9,6 @@ import io.sphere.sdk.expansion.MetaModelExpansionDsl;
  * @param <C> type of the class implementing this class
  * @param <E> type of the expansion model
  */
-public interface MetaModelGetDsl<R, T, C extends MetaModelGetDsl<R, T, C, E>, E> extends GetDsl<R, T, C>, MetaModelExpansionDsl<T, C, E> {
+public interface MetaModelGetDsl<R, T, C extends MetaModelGetDsl<R, T, C, E>, E> extends GetDsl<R, T, C>, MetaModelReferenceExpansionDsl<T, C, E> {
 
 }

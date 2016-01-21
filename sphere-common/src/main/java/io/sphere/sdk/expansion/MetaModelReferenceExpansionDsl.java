@@ -2,7 +2,7 @@ package io.sphere.sdk.expansion;
 
 import java.util.function.Function;
 
-public interface MetaModelExpansionDsl<T, C, E> extends ReferenceExpansionDsl<T, C> {
+public interface MetaModelReferenceExpansionDsl<T, C, E> extends ReferenceExpansionDsl<T, C> {
     /**
      * Creates a new object with the properties of the old object but adds a new expansion path to it by using meta models.
      *

@@ -2,7 +2,7 @@ package io.sphere.sdk.orders.commands;
 
 import io.sphere.sdk.carts.Cart;
 import io.sphere.sdk.commands.CreateCommand;
-import io.sphere.sdk.expansion.MetaModelExpansionDsl;
+import io.sphere.sdk.expansion.MetaModelReferenceExpansionDsl;
 import io.sphere.sdk.models.Versioned;
 import io.sphere.sdk.orders.Order;
 import io.sphere.sdk.orders.OrderFromCartDraft;
@@ -13,7 +13,7 @@ import io.sphere.sdk.orders.expansion.OrderExpansionModel;
  *
  * {@include.example io.sphere.sdk.orders.commands.OrderFromCartCreateCommandTest#execution()}
  */
-public interface OrderFromCartCreateCommand extends CreateCommand<Order>, MetaModelExpansionDsl<Order, OrderFromCartCreateCommand, OrderExpansionModel<Order>> {
+public interface OrderFromCartCreateCommand extends CreateCommand<Order>, MetaModelReferenceExpansionDsl<Order, OrderFromCartCreateCommand, OrderExpansionModel<Order>> {
     static OrderFromCartCreateCommand of(final OrderFromCartDraft draft) {
         return new OrderFromCartCreateCommandImpl(draft);
     }

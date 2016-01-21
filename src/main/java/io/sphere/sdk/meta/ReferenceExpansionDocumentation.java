@@ -1,6 +1,7 @@
 package io.sphere.sdk.meta;
 
 import io.sphere.sdk.customers.Customer;
+import io.sphere.sdk.expansion.MetaModelReferenceExpansionDsl;
 import io.sphere.sdk.expansion.ReferenceExpansionDsl;
 
 /**
@@ -33,7 +34,7 @@ import io.sphere.sdk.expansion.ReferenceExpansionDsl;
  if too many resources are expanded at the same time.
 
  <h3 id=meta-model-dsl>Use Expansion Models</h3>
- <p>To prevent you from constructing invalid paths, endpoints implementing {@link io.sphere.sdk.expansion.MetaModelExpansionDsl} provide methods to generate valid paths.</p>
+ <p>To prevent you from constructing invalid paths, endpoints implementing {@link MetaModelReferenceExpansionDsl} provide methods to generate valid paths.</p>
 
  If you want to expand the product type of a product you can query like this:
 
