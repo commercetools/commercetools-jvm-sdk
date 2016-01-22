@@ -11,6 +11,8 @@ import java.util.Observable;
 final class MetricSphereRequest<T> extends SphereRequestDecorator<T> {
     private final String id;
     private final Observable observable;
+    @Nullable
+    private String correlationId = null;
 
     MetricSphereRequest(final SphereRequest<T> delegate, final String id, final Observable observable) {
         super(delegate);
@@ -35,7 +37,13 @@ final class MetricSphereRequest<T> extends SphereRequestDecorator<T> {
         final T result = super.deserialize(httpResponse);
         final long stopTimestamp = System.currentTimeMillis();
         final long duration = stopTimestamp - startTimestamp;
-        observable.notifyObservers(ObservedDeserializationDuration.of(duration, id, delegate));
+        correlationId = httpResponse.getHeaders().findFlatHeader("X-Correlation-ID").orElse(null);
+        observable.notifyObservers(ObservedDeserializationDuration.of(duration, id, delegate, correlationId));
         return result;
+    }
+
+    @Nullable
+    String getCorrelationId() {
+        return correlationId;
     }
 }

@@ -4,6 +4,7 @@ import io.sphere.sdk.client.BlockingSphereClient;
 import io.sphere.sdk.client.SphereClient;
 import io.sphere.sdk.client.SphereRequest;
 import io.sphere.sdk.client.TestDoubleSphereClientFactory;
+import io.sphere.sdk.http.HttpHeaders;
 import io.sphere.sdk.http.HttpResponse;
 import io.sphere.sdk.projects.Project;
 import io.sphere.sdk.projects.queries.ProjectGet;
@@ -18,16 +19,19 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class SimpleMetricsSphereClientTest {
 
     public static final int MINIMUM_WAIT_IN_MILLISECONDS = 23;
+    public static final String CORRELATION_ID = "ID-123456";
+    public static final HttpResponse HTTP_RESPONSE = HttpResponse.of(200, "{}", HttpHeaders.of("X-Correlation-ID", CORRELATION_ID));
 
     @Test
     public void demo() {
-        final SphereClient asyncClient = TestDoubleSphereClientFactory.createHttpTestDouble(intent -> HttpResponse.of(200, "{}"));
+        final SphereClient asyncClient = TestDoubleSphereClientFactory
+                .createHttpTestDouble(intent -> HTTP_RESPONSE);
         final SphereClient metricClient = SimpleMetricsSphereClientDemo.demo(asyncClient);
 
         metricClient.execute(ProjectGet.of()).toCompletableFuture().join();
         assertThat(Logger.getAndClear()).matches("observed: ObservedSerializationDuration\\[requestId=1,durationInMilliseconds=\\d+,request=ProjectGet\\[\\]\\]\n" +
-                "observed: ObservedDeserializationDuration\\[requestId=1,durationInMilliseconds=\\d+,request=ProjectGet\\[\\]\\]\n" +
-                "observed: ObservedTotalDuration\\[requestId=1,durationInMilliseconds=\\d+,request=ProjectGet\\[\\]\\]");
+                "observed: ObservedDeserializationDuration\\[correlationId=ID-123456,requestId=1,durationInMilliseconds=\\d+,request=ProjectGet\\[\\]\\]\n" +
+                "observed: ObservedTotalDuration\\[correlationId=ID-123456,requestId=1,durationInMilliseconds=\\d+,request=ProjectGet\\[\\]\\]");
     }
 
     @Test
@@ -38,7 +42,7 @@ public class SimpleMetricsSphereClientTest {
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
-            return HttpResponse.of(200, "{}");
+            return HTTP_RESPONSE;
         });
         final SimpleMetricsSphereClient simpleMetricsSphereClient = SimpleMetricsSphereClient.of(asyncClient);
         final BlockingSphereClient blockingSphereClient = BlockingSphereClient.of(simpleMetricsSphereClient, 10, TimeUnit.SECONDS);
@@ -57,17 +61,19 @@ public class SimpleMetricsSphereClientTest {
         softly.assertThat(deserializationDuration.getRequest()).as("deser request").isEqualTo(sphereRequest);
         softly.assertThat(deserializationDuration.getDurationInMilliseconds()).as("deser duration").isBetween(0L, 4L);
         softly.assertThat(deserializationDuration.getRequestId()).as("deser id").isEqualTo(requestId);
-        softly.assertThat(deserializationDuration.topic()).as("deser topic").isEqualTo("ObservedDeserializationDuration");
+        softly.assertThat(deserializationDuration.getTopic()).as("deser topic").isEqualTo("ObservedDeserializationDuration");
+        softly.assertThat(deserializationDuration.getCorrelationId()).as("total correlationId").isEqualTo(CORRELATION_ID);
         final ObservedTotalDuration totalDuration = metricObserver.get(ObservedTotalDuration.class);
         softly.assertThat(totalDuration.getRequest()).as("total request").isEqualTo(sphereRequest);
         softly.assertThat(totalDuration.getDurationInMilliseconds()).as("total duration").isBetween((long) MINIMUM_WAIT_IN_MILLISECONDS, MINIMUM_WAIT_IN_MILLISECONDS + 5L);
         softly.assertThat(totalDuration.getRequestId()).as("total id").isEqualTo(requestId);
-        softly.assertThat(totalDuration.topic()).as("total topic").isEqualTo("ObservedTotalDuration");
+        softly.assertThat(totalDuration.getTopic()).as("total topic").isEqualTo("ObservedTotalDuration");
+        softly.assertThat(totalDuration.getCorrelationId()).as("total correlationId").isEqualTo(CORRELATION_ID);
         final ObservedSerializationDuration serializationDuration = metricObserver.get(ObservedSerializationDuration.class);
         softly.assertThat(serializationDuration.getRequest()).as("ser request").isEqualTo(sphereRequest);
         softly.assertThat(serializationDuration.getDurationInMilliseconds()).as("ser duration").isBetween(0L, 4L);
         softly.assertThat(serializationDuration.getRequestId()).as("ser id").isEqualTo(requestId);
-        softly.assertThat(serializationDuration.topic()).as("ser topic").isEqualTo("ObservedSerializationDuration");
+        softly.assertThat(serializationDuration.getTopic()).as("ser topic").isEqualTo("ObservedSerializationDuration");
         softly.assertAll();//important
     }
 

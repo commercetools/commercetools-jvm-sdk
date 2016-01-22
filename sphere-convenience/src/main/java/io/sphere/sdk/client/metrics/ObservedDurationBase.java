@@ -27,7 +27,7 @@ abstract class ObservedDurationBase extends Base implements ObservedDuration {
     }
 
     @Override
-    public final String topic() {
+    public final String getTopic() {
         return getClass().getSimpleName();
     }
 }
