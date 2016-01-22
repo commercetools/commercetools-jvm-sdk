@@ -1,24 +1,15 @@
 package io.sphere.sdk.zones.queries;
 
-import io.sphere.sdk.queries.ResourceQueryModelImpl;
-import io.sphere.sdk.queries.QueryModel;
+import io.sphere.sdk.queries.ResourceQueryModel;
 import io.sphere.sdk.queries.StringQuerySortingModel;
 import io.sphere.sdk.zones.Zone;
 
-public class ZoneQueryModel extends ResourceQueryModelImpl<Zone> {
-    public static ZoneQueryModel of() {
-        return new ZoneQueryModel(null, null);
-    }
+public interface ZoneQueryModel extends ResourceQueryModel<Zone> {
+    StringQuerySortingModel<Zone> name();
 
-    private ZoneQueryModel(final QueryModel<Zone> parent, final String pathSegment) {
-        super(parent, pathSegment);
-    }
+    LocationsCollectionQueryModel<Zone> locations();
 
-    public StringQuerySortingModel<Zone> name() {
-        return stringModel("name");
-    }
-
-    public LocationsCollectionQueryModel<Zone> locations() {
-        return new LocationsCollectionQueryModelImpl<>(this, "locations");
+    static ZoneQueryModel of() {
+        return new ZoneQueryModelImpl(null, null);
     }
 }
