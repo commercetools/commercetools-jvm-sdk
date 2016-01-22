@@ -33,7 +33,7 @@ class ProductDataQueryModelBase<T> extends ResourceQueryModelImpl<T> {
     }
 
     public ProductAllVariantsQueryModel<T> allVariants() {
-        return new ProductAllVariantsQueryModel<>(this);
+        return new ProductAllVariantsQueryModelImpl<>(this);
     }
 
     public ProductVariantQueryModel<T> masterVariant() {
