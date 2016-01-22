@@ -48,6 +48,8 @@ io.sphere.sdk.inventory.commands.updateactions
 io.sphere.sdk.inventory.expansion
 io.sphere.sdk.inventory.queries
 io.sphere.sdk.json
+io.sphere.sdk.jsonnodes.expansion
+io.sphere.sdk.jsonnodes.queries
 io.sphere.sdk.messages
 io.sphere.sdk.messages.expansion
 io.sphere.sdk.messages.queries
