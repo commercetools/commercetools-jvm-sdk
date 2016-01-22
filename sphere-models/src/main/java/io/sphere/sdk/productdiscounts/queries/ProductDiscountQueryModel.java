@@ -1,26 +1,18 @@
 package io.sphere.sdk.productdiscounts.queries;
 
 import io.sphere.sdk.productdiscounts.ProductDiscount;
-import io.sphere.sdk.queries.*;
+import io.sphere.sdk.queries.BooleanQueryModel;
+import io.sphere.sdk.queries.LocalizedStringQuerySortingModel;
+import io.sphere.sdk.queries.ResourceQueryModel;
 
-public class ProductDiscountQueryModel extends ResourceQueryModelImpl<ProductDiscount> {
-    private ProductDiscountQueryModel(final QueryModel<ProductDiscount> parent, final String pathSegment) {
-        super(parent, pathSegment);
-    }
+public interface ProductDiscountQueryModel extends ResourceQueryModel<ProductDiscount> {
+    BooleanQueryModel<ProductDiscount> isActive();
 
-    public static ProductDiscountQueryModel of() {
-        return new ProductDiscountQueryModel(null, null);
-    }
+    BooleanQueryModel<ProductDiscount> active();
 
-    public BooleanQueryModel<ProductDiscount> isActive() {
-        return booleanModel("isActive");
-    }
+    LocalizedStringQuerySortingModel<ProductDiscount> name();
 
-    public BooleanQueryModel<ProductDiscount> active() {
-        return isActive();
-    }
-
-    public LocalizedStringQuerySortingModel<ProductDiscount> name() {
-        return localizedStringQuerySortingModel("name");
+    static ProductDiscountQueryModel of() {
+        return new ProductDiscountQueryModelImpl(null, null);
     }
 }
