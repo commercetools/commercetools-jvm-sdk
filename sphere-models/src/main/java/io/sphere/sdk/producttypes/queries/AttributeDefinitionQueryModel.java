@@ -1,20 +1,9 @@
 package io.sphere.sdk.producttypes.queries;
 
-import io.sphere.sdk.queries.QueryModel;
-import io.sphere.sdk.queries.QueryModelImpl;
 import io.sphere.sdk.queries.StringQueryModel;
 
-public final class AttributeDefinitionQueryModel<T> extends QueryModelImpl<T> {
+public interface AttributeDefinitionQueryModel<T> {
+    StringQueryModel<T> name();
 
-    AttributeDefinitionQueryModel(QueryModel<T> parent, String pathSegment) {
-        super(parent, pathSegment);
-    }
-
-    public StringQueryModel<T> name() {
-        return stringModel("name");
-    }
-
-    public AttributeTypeQueryModel<T> type() {
-        return new AttributeTypeQueryModelImpl<>(this, "type");
-    }
+    AttributeTypeQueryModel<T> type();
 }

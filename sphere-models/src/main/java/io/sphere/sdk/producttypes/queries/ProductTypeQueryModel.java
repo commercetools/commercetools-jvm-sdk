@@ -24,6 +24,6 @@ public final class ProductTypeQueryModel extends ResourceQueryModelImpl<ProductT
     }
 
     public AttributeDefinitionQueryModel<ProductType> attributes() {
-        return new AttributeDefinitionQueryModel<>(this, "attributes");
+        return new AttributeDefinitionQueryModelImpl<>(this, "attributes");
     }
 }
