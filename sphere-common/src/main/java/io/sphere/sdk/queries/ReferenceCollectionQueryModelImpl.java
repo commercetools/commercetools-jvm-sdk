@@ -5,7 +5,7 @@ import io.sphere.sdk.models.Referenceable;
 import javax.annotation.Nullable;
 import java.util.List;
 
-import static io.sphere.sdk.utils.IterableUtils.toStream;
+import static io.sphere.sdk.utils.SphereInternalUtils.toStream;
 import static java.util.stream.Collectors.toList;
 
 final class ReferenceCollectionQueryModelImpl<T, R> extends QueryModelImpl<T> implements ReferenceCollectionQueryModel<T,R> {

@@ -3,12 +3,13 @@ package io.sphere.sdk.types;
 import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.Builder;
 import io.sphere.sdk.models.LocalizedString;
-import io.sphere.sdk.utils.ListUtils;
 
 import javax.annotation.Nullable;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
+
+import static io.sphere.sdk.utils.SphereInternalUtils.listOf;
 
 /**
  * @see Custom
@@ -57,7 +58,7 @@ public class TypeDraftBuilder extends Base implements Builder<TypeDraft> {
     }
 
     public TypeDraftBuilder plusFieldDefinitions(final List<FieldDefinition> fieldDefinitions) {
-        this.fieldDefinitions = ListUtils.listOf(getFieldDefinitions(), fieldDefinitions);
+        this.fieldDefinitions = listOf(getFieldDefinitions(), fieldDefinitions);
         return this;
     }
 

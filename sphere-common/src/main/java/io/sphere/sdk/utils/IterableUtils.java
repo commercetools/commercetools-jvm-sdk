@@ -2,9 +2,12 @@ package io.sphere.sdk.utils;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.StringJoiner;
 import java.util.stream.Stream;
 
+/**
+ * @deprecated This is an internal class.
+ */
+@Deprecated
 public final class IterableUtils {
     private IterableUtils() {
     }

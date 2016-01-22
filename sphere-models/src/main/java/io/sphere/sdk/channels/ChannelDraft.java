@@ -4,12 +4,13 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.LocalizedString;
+import io.sphere.sdk.utils.SphereInternalUtils;
 
 import javax.annotation.Nullable;
 import java.util.Collections;
 import java.util.Set;
 
-import static io.sphere.sdk.utils.SetUtils.asSet;
+import static io.sphere.sdk.utils.SphereInternalUtils.asSet;
 
 /**
  * Template to create a new Channel.

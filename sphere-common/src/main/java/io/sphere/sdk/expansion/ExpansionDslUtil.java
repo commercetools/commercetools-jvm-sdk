@@ -4,7 +4,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.function.Function;
 
-import static io.sphere.sdk.utils.ListUtils.listOf;
+import static io.sphere.sdk.utils.SphereInternalUtils.listOf;
 
 public final class ExpansionDslUtil {
     private ExpansionDslUtil() {

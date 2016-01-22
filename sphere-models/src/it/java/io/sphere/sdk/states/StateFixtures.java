@@ -8,7 +8,7 @@ import io.sphere.sdk.states.commands.StateDeleteCommand;
 import io.sphere.sdk.states.commands.StateUpdateCommand;
 import io.sphere.sdk.states.commands.updateactions.SetTransitions;
 import io.sphere.sdk.states.queries.StateQuery;
-import io.sphere.sdk.utils.SetUtils;
+import io.sphere.sdk.utils.SphereInternalUtils;
 
 import java.util.Optional;
 import java.util.Set;
@@ -19,7 +19,8 @@ import java.util.function.UnaryOperator;
 
 import static io.sphere.sdk.test.SphereTestUtils.consumerToFunction;
 import static io.sphere.sdk.test.SphereTestUtils.randomKey;
-import static io.sphere.sdk.utils.SetUtils.asSet;
+import static io.sphere.sdk.utils.SphereInternalUtils.asSet;
+import static io.sphere.sdk.utils.SphereInternalUtils.setOf;
 import static java.util.Locale.ENGLISH;
 
 public class StateFixtures {
@@ -72,7 +73,7 @@ public class StateFixtures {
                 .map(initialState -> {
                     final Optional<Set<Reference<State>>> transitionOptional = Optional.ofNullable(initialState.getTransitions());
                     final Boolean initialCanTransistToStateB = transitionOptional.map(transitions -> transitions.contains(stateB.toReference())).orElse(false);
-                    final Set<Reference<State>> transitions = transitionOptional.map(trans -> SetUtils.setOf(stateB.toReference(), trans)).orElse(asSet(stateB.toReference()));
+                    final Set<Reference<State>> transitions = transitionOptional.map(trans -> setOf(stateB.toReference(), trans)).orElse(asSet(stateB.toReference()));
                     final SetTransitions action = SetTransitions.of(transitions);
                     final StateUpdateCommand updateCommand = StateUpdateCommand.of(initialState, action);
                     return initialCanTransistToStateB ? initialState : client.executeBlocking(updateCommand);

@@ -6,7 +6,7 @@ import io.sphere.sdk.search.FilterExpression;
 import java.util.List;
 import java.util.function.Function;
 
-import static io.sphere.sdk.utils.IterableUtils.toStream;
+import static io.sphere.sdk.utils.SphereInternalUtils.toStream;
 import static java.util.Collections.singletonList;
 import static java.util.stream.Collectors.toList;
 

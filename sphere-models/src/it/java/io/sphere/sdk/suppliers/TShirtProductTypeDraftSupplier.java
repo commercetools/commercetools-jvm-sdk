@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.function.Supplier;
 
 import static io.sphere.sdk.test.SphereTestUtils.randomKey;
-import static io.sphere.sdk.utils.ListUtils.asImmutableList;
+import static io.sphere.sdk.utils.SphereInternalUtils.asImmutableList;
 import static java.util.Arrays.asList;
 import static java.util.Locale.ENGLISH;
 import static java.util.Locale.GERMAN;

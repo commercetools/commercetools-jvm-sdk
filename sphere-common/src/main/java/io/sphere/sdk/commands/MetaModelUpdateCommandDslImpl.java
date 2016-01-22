@@ -1,6 +1,5 @@
 package io.sphere.sdk.commands;
 
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JavaType;
 import io.sphere.sdk.client.HttpRequestIntent;
 import io.sphere.sdk.client.JsonEndpoint;
@@ -19,7 +18,7 @@ import java.util.List;
 import java.util.function.Function;
 
 import static io.sphere.sdk.json.SphereJsonUtils.toJsonString;
-import static io.sphere.sdk.utils.ListUtils.listOf;
+import static io.sphere.sdk.utils.SphereInternalUtils.listOf;
 import static java.util.Objects.requireNonNull;
 
 /**

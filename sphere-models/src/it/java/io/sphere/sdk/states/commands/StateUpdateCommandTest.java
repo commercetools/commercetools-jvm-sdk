@@ -1,6 +1,5 @@
 package io.sphere.sdk.states.commands;
 
-import io.sphere.sdk.client.SphereRequest;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.states.State;
@@ -18,7 +17,7 @@ import java.util.Set;
 import static io.sphere.sdk.states.StateFixtures.withUpdateableState;
 import static io.sphere.sdk.test.SphereTestUtils.randomKey;
 import static io.sphere.sdk.test.SphereTestUtils.randomSlug;
-import static io.sphere.sdk.utils.SetUtils.asSet;
+import static io.sphere.sdk.utils.SphereInternalUtils.asSet;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class StateUpdateCommandTest extends IntegrationTest {

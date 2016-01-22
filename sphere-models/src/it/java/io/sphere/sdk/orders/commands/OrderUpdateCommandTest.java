@@ -18,9 +18,9 @@ import io.sphere.sdk.states.State;
 import io.sphere.sdk.states.StateType;
 import io.sphere.sdk.test.IntegrationTest;
 import io.sphere.sdk.test.SphereTestUtils;
+import io.sphere.sdk.utils.SphereInternalUtils;
 import org.assertj.core.api.Assertions;
 import org.assertj.core.api.Condition;
-import org.assertj.core.description.Description;
 import org.junit.Test;
 
 import java.time.ZonedDateTime;
@@ -36,8 +36,8 @@ import static io.sphere.sdk.states.StateFixtures.withStandardStates;
 import static io.sphere.sdk.states.StateFixtures.withStateByBuilder;
 import static io.sphere.sdk.test.SphereTestUtils.asList;
 import static io.sphere.sdk.test.SphereTestUtils.randomString;
-import static io.sphere.sdk.utils.SetUtils.asSet;
-import static io.sphere.sdk.utils.SetUtils.setOf;
+import static io.sphere.sdk.utils.SphereInternalUtils.asSet;
+import static io.sphere.sdk.utils.SphereInternalUtils.setOf;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.condition.Not.not;
 

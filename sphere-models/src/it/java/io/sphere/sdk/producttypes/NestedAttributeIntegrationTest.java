@@ -4,14 +4,15 @@ import io.sphere.sdk.products.attributes.*;
 import io.sphere.sdk.models.Referenceable;
 import io.sphere.sdk.products.*;
 import io.sphere.sdk.test.IntegrationTest;
+import io.sphere.sdk.utils.SphereInternalUtils;
 import org.junit.Test;
 
 import java.util.*;
 
 import static io.sphere.sdk.products.ProductFixtures.withProduct;
 import static io.sphere.sdk.producttypes.ProductTypeFixtures.withProductType;
+import static io.sphere.sdk.utils.SphereInternalUtils.asSet;
 import static java.util.Arrays.asList;
-import static io.sphere.sdk.utils.SetUtils.asSet;
 import static org.assertj.core.api.Assertions.assertThat;
 import static io.sphere.sdk.test.SphereTestUtils.*;
 
@@ -97,38 +98,30 @@ public final class NestedAttributeIntegrationTest extends IntegrationTest {
     private ProductVariantDraft createBananaVariant() {
         return ProductVariantDraftBuilder.of()
                 .plusAttribute(Banana.bananaColor.draftOf("blue"))
-                .plusAttribute(Banana.nutrients.draftOf(asSet(
-                        AttributeContainerDraft.of(asList(
-                                Nutrient.servingSize.draftOf(1.5D),
-                                Nutrient.servingSizeUOM.draftOf("M"),
-                                Nutrient.nutrientInformation.draftOf(asSet(
-                                        AttributeContainerDraft.of(
-                                                NutrientInfo.nutrientTypeCode.draftOf("FIBTG"),
-                                                NutrientInfo.measurementPrecision.draftOf("APPROXIMATELY"),
-                                                NutrientInfo.quantityContained.draftOf(3.8D),
-                                                NutrientInfo.quantityContainedUOM.draftOf("GR")
-                                        ),
-                                        AttributeContainerDraft.of(
-                                                NutrientInfo.nutrientTypeCode.draftOf("FAT"),
-                                                NutrientInfo.measurementPrecision.draftOf("APPROXIMATELY"),
-                                                NutrientInfo.quantityContained.draftOf(0.06D),
-                                                NutrientInfo.quantityContainedUOM.draftOf("KG")
-                                        )
-                                ))
-                        )),
-                        AttributeContainerDraft.of(asList(
-                                Nutrient.servingSize.draftOf(0.05D),
-                                Nutrient.servingSizeUOM.draftOf("KM"),
-                                Nutrient.nutrientInformation.draftOf(asSet(
-                                        AttributeContainerDraft.of(asList(
-                                                NutrientInfo.nutrientTypeCode.draftOf("FIBTG"),
-                                                NutrientInfo.measurementPrecision.draftOf("PRECISE"),
-                                                NutrientInfo.quantityContained.draftOf(1.3D),
-                                                NutrientInfo.quantityContainedUOM.draftOf("GR")
-                                        ))
-                                ))
-                        ))
-                )))
+                .plusAttribute(Banana.nutrients.draftOf(asSet(AttributeContainerDraft.of(asList(
+                        Nutrient.servingSize.draftOf(1.5D),
+                        Nutrient.servingSizeUOM.draftOf("M"),
+                        Nutrient.nutrientInformation.draftOf(asSet(AttributeContainerDraft.of(
+                                NutrientInfo.nutrientTypeCode.draftOf("FIBTG"),
+                                NutrientInfo.measurementPrecision.draftOf("APPROXIMATELY"),
+                                NutrientInfo.quantityContained.draftOf(3.8D),
+                                NutrientInfo.quantityContainedUOM.draftOf("GR")
+                        ), AttributeContainerDraft.of(
+                                NutrientInfo.nutrientTypeCode.draftOf("FAT"),
+                                NutrientInfo.measurementPrecision.draftOf("APPROXIMATELY"),
+                                NutrientInfo.quantityContained.draftOf(0.06D),
+                                NutrientInfo.quantityContainedUOM.draftOf("KG")
+                        )))
+                )), AttributeContainerDraft.of(asList(
+                        Nutrient.servingSize.draftOf(0.05D),
+                        Nutrient.servingSizeUOM.draftOf("KM"),
+                        Nutrient.nutrientInformation.draftOf(asSet(AttributeContainerDraft.of(asList(
+                                NutrientInfo.nutrientTypeCode.draftOf("FIBTG"),
+                                NutrientInfo.measurementPrecision.draftOf("PRECISE"),
+                                NutrientInfo.quantityContained.draftOf(1.3D),
+                                NutrientInfo.quantityContainedUOM.draftOf("GR")
+                        ))))
+                )))))
                 .sku(randomKey())
                 .build();
     }

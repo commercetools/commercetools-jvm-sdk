@@ -2,7 +2,6 @@ package io.sphere.sdk.products.expansion;
 
 import io.sphere.sdk.products.ProductProjection;
 import io.sphere.sdk.products.ProductProjectionType;
-import io.sphere.sdk.products.commands.ProductUpdateCommand;
 import io.sphere.sdk.products.queries.ProductProjectionByIdGet;
 import io.sphere.sdk.expansion.ExpansionPath;
 import io.sphere.sdk.products.queries.ProductProjectionQuery;
@@ -12,7 +11,7 @@ import org.junit.Test;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static io.sphere.sdk.utils.ListUtils.listOf;
+import static io.sphere.sdk.utils.SphereInternalUtils.listOf;
 import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.*;
 

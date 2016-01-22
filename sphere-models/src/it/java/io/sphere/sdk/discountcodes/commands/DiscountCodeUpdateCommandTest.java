@@ -15,7 +15,7 @@ import java.util.Optional;
 import static io.sphere.sdk.cartdiscounts.CartDiscountFixtures.*;
 import static io.sphere.sdk.discountcodes.DiscountCodeFixtures.*;
 import static io.sphere.sdk.test.SphereTestUtils.*;
-import static io.sphere.sdk.utils.ListUtils.listOf;
+import static io.sphere.sdk.utils.SphereInternalUtils.listOf;
 import static org.assertj.core.api.Assertions.*;
 
 public class DiscountCodeUpdateCommandTest extends IntegrationTest {

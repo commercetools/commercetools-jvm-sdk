@@ -17,7 +17,7 @@ import io.sphere.sdk.suppliers.SimpleCottonTShirtProductDraftSupplier;
 import io.sphere.sdk.suppliers.TShirtProductTypeDraftSupplier;
 import io.sphere.sdk.test.IntegrationTest;
 import io.sphere.sdk.utils.MoneyImpl;
-import io.sphere.sdk.utils.SphereStringUtils;
+import io.sphere.sdk.utils.SphereInternalUtils;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -156,7 +156,7 @@ public class ProductCrudIntegrationTest extends IntegrationTest {
 
     private String sluggedClassName() {
         final String className = this.getClass().toString();
-        return SphereStringUtils.slugify(className);
+        return SphereInternalUtils.slugify(className);
     }
 
     protected List<String> modelNames(){

@@ -23,7 +23,7 @@ import java.util.function.Function;
 
 import static io.sphere.sdk.http.HttpStatusCode.NOT_FOUND_404;
 import static io.sphere.sdk.queries.QueryParameterKeys.EXPAND;
-import static io.sphere.sdk.utils.ListUtils.listOf;
+import static io.sphere.sdk.utils.SphereInternalUtils.listOf;
 import static java.util.Objects.requireNonNull;
 
 /**

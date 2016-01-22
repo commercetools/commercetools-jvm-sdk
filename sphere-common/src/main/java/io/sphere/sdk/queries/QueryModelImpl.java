@@ -2,13 +2,12 @@ package io.sphere.sdk.queries;
 
 import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.SphereEnumeration;
-import io.sphere.sdk.utils.IterableUtils;
 
 import javax.annotation.Nullable;
-
 import java.util.List;
 
 import static io.sphere.sdk.queries.StringQuerySortingModel.normalize;
+import static io.sphere.sdk.utils.SphereInternalUtils.toStream;
 import static java.util.stream.Collectors.toList;
 
 public class QueryModelImpl<T> extends Base implements QueryModel<T> {
@@ -175,7 +174,7 @@ public class QueryModelImpl<T> extends Base implements QueryModel<T> {
     }
 
     protected List<String> normalizeIterable(final Iterable<String> items) {
-        return IterableUtils.toStream(items)
+        return toStream(items)
                 .map(StringQuerySortingModel::normalize).collect(toList());
     }
 }

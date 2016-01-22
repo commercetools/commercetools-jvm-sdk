@@ -1,12 +1,10 @@
 package io.sphere.sdk.queries;
 
-import com.neovisionaries.i18n.CountryCode;
-import io.sphere.sdk.utils.IterableUtils;
-
 import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Locale;
 
+import static io.sphere.sdk.utils.SphereInternalUtils.toStream;
 import static java.util.stream.Collectors.toList;
 
 final class LocaleQuerySortingModelImpl<T> extends QueryModelImpl<T> implements LocaleQuerySortingModel<T> {
@@ -22,7 +20,7 @@ final class LocaleQuerySortingModelImpl<T> extends QueryModelImpl<T> implements 
 
     @Override
     public QueryPredicate<T> isIn(final Iterable<Locale> args) {
-        final List<String> LocalesStringList = IterableUtils.toStream(args)
+        final List<String> LocalesStringList = toStream(args)
                 .map(v -> v.toLanguageTag())
                 .map(code -> '"' + code + '"')
                 .collect(toList());

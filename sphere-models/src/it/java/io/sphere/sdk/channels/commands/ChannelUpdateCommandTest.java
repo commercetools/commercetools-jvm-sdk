@@ -11,8 +11,9 @@ import java.util.Set;
 
 import static io.sphere.sdk.channels.ChannelFixtures.withUpdatableChannelOfRole;
 import static io.sphere.sdk.channels.ChannelRole.*;
-import static io.sphere.sdk.test.SphereTestUtils.*;
-import static io.sphere.sdk.utils.SetUtils.asSet;
+import static io.sphere.sdk.test.SphereTestUtils.randomKey;
+import static io.sphere.sdk.test.SphereTestUtils.randomSlug;
+import static io.sphere.sdk.utils.SphereInternalUtils.asSet;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class ChannelUpdateCommandTest extends IntegrationTest {

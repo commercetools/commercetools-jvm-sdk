@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.function.Function;
 
 import static io.sphere.sdk.json.SphereJsonUtils.*;
-import static io.sphere.sdk.utils.ListUtils.listOf;
+import static io.sphere.sdk.utils.SphereInternalUtils.listOf;
 import static java.util.Objects.requireNonNull;
 
 /**

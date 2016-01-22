@@ -4,7 +4,6 @@ import io.sphere.sdk.client.QueueSphereClientDecorator;
 import io.sphere.sdk.client.SphereClient;
 import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.Identifiable;
-import io.sphere.sdk.utils.ListUtils;
 import org.reactivestreams.Subscriber;
 import org.reactivestreams.Subscription;
 
@@ -13,6 +12,7 @@ import java.util.List;
 import java.util.Queue;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 
+import static io.sphere.sdk.utils.SphereInternalUtils.listOf;
 import static java.lang.String.format;
 
 final class ForAllSubscription<T extends Identifiable<T>, C extends QueryDsl<T, C>> extends Base implements Subscription {
@@ -69,7 +69,7 @@ final class ForAllSubscription<T extends Identifiable<T>, C extends QueryDsl<T, 
 
     private void fetchNewElements() {
         final QueryPredicate<T> idIsGreaterThanLastIdPredicate = QueryPredicate.of(format("id > \"%s\"", lastId));
-        final Query<T> query = lastId == null ? seedQuery : seedQuery.withPredicates(ListUtils.listOf(seedQuery.predicates(), idIsGreaterThanLastIdPredicate));
+        final Query<T> query = lastId == null ? seedQuery : seedQuery.withPredicates(listOf(seedQuery.predicates(), idIsGreaterThanLastIdPredicate));
         sphereClient.execute(query).whenComplete((r, e) -> {
             executor.execute(() -> {
                 final boolean success = e == null;

@@ -4,12 +4,13 @@ import io.sphere.sdk.products.attributes.AttributeDraft;
 import io.sphere.sdk.products.attributes.NamedAttributeAccess;
 import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.Builder;
-import io.sphere.sdk.utils.ListUtils;
+import io.sphere.sdk.utils.SphereInternalUtils;
 
 import javax.annotation.Nullable;
 import java.util.Collections;
 import java.util.List;
 
+import static io.sphere.sdk.utils.SphereInternalUtils.listOf;
 import static java.util.Arrays.asList;
 
 public final class ProductVariantDraftBuilder extends Base implements Builder<ProductVariantDraft> {
@@ -74,7 +75,7 @@ public final class ProductVariantDraftBuilder extends Base implements Builder<Pr
     }
 
     public ProductVariantDraftBuilder plusAttribute(final AttributeDraft attribute) {
-        return attributes(ListUtils.listOf(attributes, attribute));
+        return attributes(listOf(attributes, attribute));
     }
 
     @Override

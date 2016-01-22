@@ -6,8 +6,7 @@ import io.sphere.sdk.models.LocalizedStringEntry;
 
 import java.util.*;
 
-import static io.sphere.sdk.utils.MapUtils.*;
-import static io.sphere.sdk.utils.ListUtils.*;
+import static io.sphere.sdk.utils.SphereInternalUtils.*;
 
 class CategoryTreeImpl extends Base implements CategoryTree {
     private final List<Category> roots;

@@ -1,12 +1,16 @@
 package io.sphere.sdk.products;
 
-import io.sphere.sdk.models.*;
+import io.sphere.sdk.models.Builder;
+import io.sphere.sdk.models.LocalizedString;
+import io.sphere.sdk.models.ResourceIdentifiable;
+import io.sphere.sdk.models.ResourceIdentifier;
 import io.sphere.sdk.producttypes.ProductType;
-import io.sphere.sdk.utils.ListUtils;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
+import static io.sphere.sdk.utils.SphereInternalUtils.listOf;
 
 public final class ProductDraftBuilder extends ProductDataProductDraftBuilderBase<ProductDraftBuilder> implements Builder<ProductDraft> {
 
@@ -40,11 +44,11 @@ public final class ProductDraftBuilder extends ProductDataProductDraftBuilderBas
     }
 
     public ProductDraftBuilder plusVariants(final ProductVariantDraft variantToAdd) {
-        return variants(ListUtils.listOf(this.variants, variantToAdd));
+        return variants(listOf(this.variants, variantToAdd));
     }
 
     public ProductDraftBuilder plusVariants(final List<ProductVariantDraft> variantsToAdd) {
-        return variants(ListUtils.listOf(this.variants, variantsToAdd));
+        return variants(listOf(this.variants, variantsToAdd));
     }
 
     public ProductDraftBuilder masterVariant(final ProductVariantDraft masterVariant) {

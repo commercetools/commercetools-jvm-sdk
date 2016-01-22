@@ -6,7 +6,7 @@ import io.sphere.sdk.json.SphereJsonUtils;
 import io.sphere.sdk.models.*;
 import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.utils.MoneyImpl;
-import io.sphere.sdk.utils.SphereStringUtils;
+import io.sphere.sdk.utils.SphereInternalUtils;
 import org.apache.commons.io.IOUtils;
 
 import javax.money.CurrencyUnit;
@@ -22,7 +22,7 @@ import java.util.*;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
-import static io.sphere.sdk.utils.IterableUtils.toStream;
+import static io.sphere.sdk.utils.SphereInternalUtils.toStream;
 import static java.util.stream.Collectors.toList;
 
 public final class SphereTestUtils {
@@ -144,7 +144,7 @@ public final class SphereTestUtils {
     }
 
     public static String slugify(final String s) {
-        return SphereStringUtils.slugify(s);
+        return SphereInternalUtils.slugify(s);
     }
 
     public static String stringFromResource(final String resourcePath) {

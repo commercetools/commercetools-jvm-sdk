@@ -2,8 +2,6 @@ package io.sphere.sdk.queries;
 
 import javax.annotation.Nullable;
 
-import static io.sphere.sdk.utils.ListUtils.listOf;
-
 /**
  * 
  * @param <T> context type, like Channel

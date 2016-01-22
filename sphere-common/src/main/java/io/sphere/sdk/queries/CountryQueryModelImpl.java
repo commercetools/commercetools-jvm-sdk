@@ -1,12 +1,11 @@
 package io.sphere.sdk.queries;
 
 import com.neovisionaries.i18n.CountryCode;
-import io.sphere.sdk.utils.IterableUtils;
 
 import javax.annotation.Nullable;
-
 import java.util.List;
 
+import static io.sphere.sdk.utils.SphereInternalUtils.toStream;
 import static java.util.stream.Collectors.toList;
 
 final class CountryQueryModelImpl<T> extends QueryModelImpl<T> implements CountryQueryModel<T> {
@@ -21,7 +20,7 @@ final class CountryQueryModelImpl<T> extends QueryModelImpl<T> implements Countr
 
     @Override
     public QueryPredicate<T> isIn(final Iterable<CountryCode> args) {
-        final List<String> countryCodesStringList = IterableUtils.toStream(args)
+        final List<String> countryCodesStringList = toStream(args)
                 .map(CountryCode::getAlpha2)
                 .map(code -> '"' + code + '"')
                 .collect(toList());

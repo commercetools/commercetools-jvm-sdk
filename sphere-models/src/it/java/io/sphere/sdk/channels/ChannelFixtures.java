@@ -12,7 +12,7 @@ import java.util.function.UnaryOperator;
 
 import static io.sphere.sdk.test.SphereTestUtils.randomKey;
 import static io.sphere.sdk.test.SphereTestUtils.randomString;
-import static io.sphere.sdk.utils.SetUtils.asSet;
+import static io.sphere.sdk.utils.SphereInternalUtils.asSet;
 
 public class ChannelFixtures {
     public static void withPersistentChannel(final BlockingSphereClient client, final ChannelRole channelRole, final Consumer<Channel> f) {

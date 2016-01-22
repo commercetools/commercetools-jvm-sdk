@@ -14,7 +14,6 @@ import io.sphere.sdk.models.DefaultCurrencyUnits;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.queries.Query;
-import io.sphere.sdk.utils.ListUtils;
 import org.assertj.core.api.Condition;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.BeforeClass;
@@ -33,6 +32,7 @@ import java.util.concurrent.CompletionStage;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Consumer;
 
+import static io.sphere.sdk.utils.SphereInternalUtils.listOf;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public abstract class IntegrationTest {
@@ -171,6 +171,6 @@ public abstract class IntegrationTest {
 
 
     protected static void await(final CompletionStage<?> wait1, final CompletionStage<?> ... moreWait) {
-        ListUtils.listOf(wait1, moreWait).forEach(stage -> stage.toCompletableFuture().join());
+        listOf(wait1, moreWait).forEach(stage -> stage.toCompletableFuture().join());
     }
 }

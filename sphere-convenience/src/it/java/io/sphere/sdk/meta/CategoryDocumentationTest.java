@@ -30,7 +30,7 @@ import io.sphere.sdk.queries.ExperimentalReactiveStreamUtils;
 import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.queries.QueryPredicate;
 import io.sphere.sdk.test.IntegrationTest;
-import io.sphere.sdk.utils.SetUtils;
+import io.sphere.sdk.utils.SphereInternalUtils;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.reactivestreams.Publisher;
@@ -48,6 +48,7 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 
 import static io.sphere.sdk.test.SphereTestUtils.randomKey;
+import static io.sphere.sdk.utils.SphereInternalUtils.asSet;
 import static java.lang.String.format;
 import static java.util.Arrays.asList;
 import static java.util.Locale.ENGLISH;
@@ -301,7 +302,7 @@ public class CategoryDocumentationTest extends IntegrationTest {
     private static void withProductInCategory(final BlockingSphereClient client, final Referenceable<Category> category, final Consumer<Product> user) {
         final ProductType productType = client.executeBlocking(ProductTypeCreateCommand.of(ProductTypeDraft.of(randomKey(), CategoryDocumentationTest.class.getSimpleName(), "", asList())));
         final LocalizedString name = LocalizedString.of(ENGLISH, "foo");
-        final Product product = client.executeBlocking(ProductCreateCommand.of(ProductDraftBuilder.of(productType, name, name.slugifiedUnique(), ProductVariantDraftBuilder.of().build()).categories(SetUtils.asSet(category.toReference())).build()));
+        final Product product = client.executeBlocking(ProductCreateCommand.of(ProductDraftBuilder.of(productType, name, name.slugifiedUnique(), ProductVariantDraftBuilder.of().build()).categories(asSet(category.toReference())).build()));
         user.accept(product);
         client.executeBlocking(ProductDeleteCommand.of(product));
         client.executeBlocking(ProductTypeDeleteCommand.of(productType));

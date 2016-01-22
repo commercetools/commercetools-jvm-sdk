@@ -14,8 +14,8 @@ import java.util.Set;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
-import static io.sphere.sdk.utils.SetUtils.setOf;
-import static io.sphere.sdk.test.SphereTestUtils.*;
+import static io.sphere.sdk.test.SphereTestUtils.consumerToFunction;
+import static io.sphere.sdk.utils.SphereInternalUtils.setOf;
 
 public class ZoneFixtures {
     public static void withZone(final BlockingSphereClient client, final ZoneDraft draft, final Consumer<Zone> consumer) {

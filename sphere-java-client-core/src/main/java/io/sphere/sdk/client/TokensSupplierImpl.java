@@ -6,7 +6,7 @@ import io.sphere.sdk.json.JsonException;
 import io.sphere.sdk.json.SphereJsonUtils;
 import io.sphere.sdk.meta.BuildInfo;
 import io.sphere.sdk.models.SphereException;
-import io.sphere.sdk.utils.MapUtils;
+import io.sphere.sdk.utils.SphereInternalUtils;
 
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
@@ -15,6 +15,7 @@ import java.util.concurrent.CompletionStage;
 
 import static io.sphere.sdk.client.SphereAuth.AUTH_LOGGER;
 import static io.sphere.sdk.http.HttpMethod.POST;
+import static io.sphere.sdk.utils.SphereInternalUtils.mapOf;
 import static java.lang.String.format;
 
 /**
@@ -77,7 +78,7 @@ final class TokensSupplierImpl extends AutoCloseableService implements TokensSup
                 .of(HttpHeaders.AUTHORIZATION, "Basic " + encodedString)
                 .plus(HttpHeaders.USER_AGENT, BuildInfo.userAgent())
                 .plus(HttpHeaders.CONTENT_TYPE, "application/x-www-form-urlencoded");
-        final FormUrlEncodedHttpRequestBody body = FormUrlEncodedHttpRequestBody.of(MapUtils.mapOf("grant_type", "client_credentials", "scope", format("manage_project:%s", config.getProjectKey())));
+        final FormUrlEncodedHttpRequestBody body = FormUrlEncodedHttpRequestBody.of(mapOf("grant_type", "client_credentials", "scope", format("manage_project:%s", config.getProjectKey())));
         return HttpRequest.of(POST, config.getAuthUrl() + "/oauth/token", httpHeaders, body);
     }
 

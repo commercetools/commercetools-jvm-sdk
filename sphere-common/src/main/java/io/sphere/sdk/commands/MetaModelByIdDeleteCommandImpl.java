@@ -9,7 +9,6 @@ import io.sphere.sdk.expansion.MetaModelExpansionDslExpansionModelRead;
 import io.sphere.sdk.expansion.ExpansionPathContainer;
 import io.sphere.sdk.http.HttpMethod;
 import io.sphere.sdk.http.UrlQueryBuilder;
-import io.sphere.sdk.json.SphereJsonUtils;
 import io.sphere.sdk.models.ResourceView;
 import io.sphere.sdk.models.Versioned;
 
@@ -18,7 +17,7 @@ import java.util.List;
 import java.util.function.Function;
 
 import static io.sphere.sdk.json.SphereJsonUtils.convertToJavaType;
-import static io.sphere.sdk.utils.ListUtils.listOf;
+import static io.sphere.sdk.utils.SphereInternalUtils.listOf;
 import static java.util.Objects.requireNonNull;
 
 /**

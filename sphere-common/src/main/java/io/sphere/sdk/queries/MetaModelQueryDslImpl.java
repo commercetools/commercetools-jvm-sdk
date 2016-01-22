@@ -12,7 +12,7 @@ import io.sphere.sdk.http.HttpQueryParameter;
 import io.sphere.sdk.http.HttpResponse;
 import io.sphere.sdk.http.UrlQueryBuilder;
 import io.sphere.sdk.models.Base;
-import io.sphere.sdk.utils.ListUtils;
+import io.sphere.sdk.utils.SphereInternalUtils;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -20,7 +20,7 @@ import java.util.Optional;
 import java.util.function.Function;
 
 import static io.sphere.sdk.queries.QueryParameterKeys.*;
-import static io.sphere.sdk.utils.ListUtils.listOf;
+import static io.sphere.sdk.utils.SphereInternalUtils.listOf;
 import static java.lang.String.format;
 import static java.util.Collections.emptyList;
 import static java.util.Collections.singletonList;
@@ -167,7 +167,7 @@ public abstract class MetaModelQueryDslImpl<T, C extends MetaModelQueryDsl<T, C,
 
     @Override
     public C plusSort(final List<QuerySort<T>> sort) {
-        return withSort(ListUtils.listOf(sort(), sort));
+        return withSort(listOf(sort(), sort));
     }
 
     @Override

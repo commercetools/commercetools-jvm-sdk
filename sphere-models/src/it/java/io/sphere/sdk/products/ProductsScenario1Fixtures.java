@@ -14,6 +14,7 @@ import io.sphere.sdk.producttypes.commands.ProductTypeDeleteCommand;
 import io.sphere.sdk.producttypes.queries.ProductTypeQuery;
 import io.sphere.sdk.queries.Query;
 import io.sphere.sdk.utils.MoneyImpl;
+import io.sphere.sdk.utils.SphereInternalUtils;
 
 import javax.money.MonetaryAmount;
 import java.math.BigDecimal;
@@ -28,7 +29,7 @@ import java.util.function.Function;
 
 import static io.sphere.sdk.models.DefaultCurrencyUnits.EUR;
 import static io.sphere.sdk.test.SphereTestUtils.*;
-import static io.sphere.sdk.utils.SetUtils.asSet;
+import static io.sphere.sdk.utils.SphereInternalUtils.asSet;
 import static java.math.BigDecimal.valueOf;
 import static java.util.Locale.FRENCH;
 import static java.util.stream.Collectors.toList;

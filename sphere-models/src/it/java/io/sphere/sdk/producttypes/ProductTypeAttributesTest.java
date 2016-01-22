@@ -17,6 +17,7 @@ import io.sphere.sdk.queries.QueryPredicate;
 import io.sphere.sdk.test.IntegrationTest;
 import io.sphere.sdk.test.SphereTestUtils;
 import io.sphere.sdk.utils.MoneyImpl;
+import io.sphere.sdk.utils.SphereInternalUtils;
 import org.junit.Test;
 
 import java.time.LocalDate;
@@ -30,7 +31,7 @@ import java.util.function.*;
 import static io.sphere.sdk.models.DefaultCurrencyUnits.EUR;
 import static io.sphere.sdk.producttypes.ProductTypeFixtures.*;
 import static io.sphere.sdk.test.SphereTestUtils.*;
-import static io.sphere.sdk.utils.SetUtils.asSet;
+import static io.sphere.sdk.utils.SphereInternalUtils.asSet;
 import static java.util.Arrays.asList;
 import static java.util.Locale.ENGLISH;
 import static org.assertj.core.api.Assertions.assertThat;
