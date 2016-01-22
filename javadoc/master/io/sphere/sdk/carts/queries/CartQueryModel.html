@@ -18,8 +18,8 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":9,"i9":10,"i10":10,"i11":10,"i12":10};
-var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
+var methods = {"i0":6,"i1":6,"i2":6,"i3":6,"i4":6,"i5":6,"i6":6,"i7":6,"i8":17,"i9":6,"i10":6,"i11":6,"i12":6,"i13":6};
+var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],2:["t2","Instance Methods"],4:["t3","Abstract Methods"],16:["t5","Default Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
 var tableTab = "tableTab";
@@ -92,53 +92,20 @@ var activeTableTab = "activeTableTab";
 <!-- ======== START OF CLASS DATA ======== -->
 <div class="header">
 <div class="subTitle">io.sphere.sdk.carts.queries</div>
-<h2 title="Class CartQueryModel" class="title">Class CartQueryModel</h2>
+<h2 title="Interface CartQueryModel" class="title">Interface CartQueryModel</h2>
 </div>
 <div class="contentContainer">
-<ul class="inheritance">
-<li>java.lang.Object</li>
-<li>
-<ul class="inheritance">
-<li><a href="../../../../../io/sphere/sdk/models/Base.html" title="class in io.sphere.sdk.models">io.sphere.sdk.models.Base</a></li>
-<li>
-<ul class="inheritance">
-<li><a href="../../../../../io/sphere/sdk/queries/QueryModelImpl.html" title="class in io.sphere.sdk.queries">io.sphere.sdk.queries.QueryModelImpl</a>&lt;T&gt;</li>
-<li>
-<ul class="inheritance">
-<li><a href="../../../../../io/sphere/sdk/queries/ResourceQueryModelImpl.html" title="class in io.sphere.sdk.queries">io.sphere.sdk.queries.ResourceQueryModelImpl</a>&lt;T&gt;</li>
-<li>
-<ul class="inheritance">
-<li><a href="../../../../../io/sphere/sdk/types/queries/CustomResourceQueryModelImpl.html" title="class in io.sphere.sdk.types.queries">io.sphere.sdk.types.queries.CustomResourceQueryModelImpl</a>&lt;T&gt;</li>
-<li>
-<ul class="inheritance">
-<li><a href="../../../../../io/sphere/sdk/carts/queries/CartLikeQueryModel.html" title="class in io.sphere.sdk.carts.queries">io.sphere.sdk.carts.queries.CartLikeQueryModel</a>&lt;<a href="../../../../../io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts">Cart</a>&gt;</li>
-<li>
-<ul class="inheritance">
-<li>io.sphere.sdk.carts.queries.CartQueryModel</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
 <div class="description">
 <ul class="blockList">
 <li class="blockList">
 <dl>
-<dt>All Implemented Interfaces:</dt>
-<dd><a href="../../../../../io/sphere/sdk/queries/QueryModel.html" title="interface in io.sphere.sdk.queries">QueryModel</a>&lt;<a href="../../../../../io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts">Cart</a>&gt;, <a href="../../../../../io/sphere/sdk/queries/ResourceQueryModel.html" title="interface in io.sphere.sdk.queries">ResourceQueryModel</a>&lt;<a href="../../../../../io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts">Cart</a>&gt;, <a href="../../../../../io/sphere/sdk/types/queries/WithCustomQueryModel.html" title="interface in io.sphere.sdk.types.queries">WithCustomQueryModel</a>&lt;<a href="../../../../../io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts">Cart</a>&gt;</dd>
+<dt>All Superinterfaces:</dt>
+<dd><a href="../../../../../io/sphere/sdk/carts/queries/CartLikeQueryModel.html" title="interface in io.sphere.sdk.carts.queries">CartLikeQueryModel</a>&lt;<a href="../../../../../io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts">Cart</a>&gt;, <a href="../../../../../io/sphere/sdk/queries/ResourceQueryModel.html" title="interface in io.sphere.sdk.queries">ResourceQueryModel</a>&lt;<a href="../../../../../io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts">Cart</a>&gt;, <a href="../../../../../io/sphere/sdk/types/queries/WithCustomQueryModel.html" title="interface in io.sphere.sdk.types.queries">WithCustomQueryModel</a>&lt;<a href="../../../../../io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts">Cart</a>&gt;</dd>
 </dl>
 <hr>
 <br>
-<pre>public class <span class="typeNameLabel">CartQueryModel</span>
-extends <a href="../../../../../io/sphere/sdk/carts/queries/CartLikeQueryModel.html" title="class in io.sphere.sdk.carts.queries">CartLikeQueryModel</a>&lt;<a href="../../../../../io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts">Cart</a>&gt;</pre>
+<pre>public interface <span class="typeNameLabel">CartQueryModel</span>
+extends <a href="../../../../../io/sphere/sdk/queries/ResourceQueryModel.html" title="interface in io.sphere.sdk.queries">ResourceQueryModel</a>&lt;<a href="../../../../../io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts">Cart</a>&gt;, <a href="../../../../../io/sphere/sdk/types/queries/WithCustomQueryModel.html" title="interface in io.sphere.sdk.types.queries">WithCustomQueryModel</a>&lt;<a href="../../../../../io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts">Cart</a>&gt;, <a href="../../../../../io/sphere/sdk/carts/queries/CartLikeQueryModel.html" title="interface in io.sphere.sdk.carts.queries">CartLikeQueryModel</a>&lt;<a href="../../../../../io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts">Cart</a>&gt;</pre>
 </li>
 </ul>
 </div>
@@ -152,7 +119,7 @@ extends <a href="../../../../../io/sphere/sdk/carts/queries/CartLikeQueryModel.h
 </a>
 <h3>Method Summary</h3>
 <table class="memberSummary" border="0" cellpadding="3" cellspacing="0" summary="Method Summary table, listing methods, and an explanation">
-<caption><span id="t0" class="activeTableTab"><span>All Methods</span><span class="tabEnd">&nbsp;</span></span><span id="t1" class="tableTab"><span><a href="javascript:show(1);">Static Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t2" class="tableTab"><span><a href="javascript:show(2);">Instance Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t4" class="tableTab"><span><a href="javascript:show(8);">Concrete Methods</a></span><span class="tabEnd">&nbsp;</span></span></caption>
+<caption><span id="t0" class="activeTableTab"><span>All Methods</span><span class="tabEnd">&nbsp;</span></span><span id="t1" class="tableTab"><span><a href="javascript:show(1);">Static Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t2" class="tableTab"><span><a href="javascript:show(2);">Instance Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t3" class="tableTab"><span><a href="javascript:show(4);">Abstract Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t5" class="tableTab"><span><a href="javascript:show(16);">Default Methods</a></span><span class="tabEnd">&nbsp;</span></span></caption>
 <tr>
 <th class="colFirst" scope="col">Modifier and Type</th>
 <th class="colLast" scope="col">Method and Description</th>
@@ -190,67 +157,36 @@ extends <a href="../../../../../io/sphere/sdk/carts/queries/CartLikeQueryModel.h
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/carts/queries/CartQueryModel.html#lineItems--">lineItems</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i8" class="altColor">
-<td class="colFirst"><code>static <a href="../../../../../io/sphere/sdk/carts/queries/CartQueryModel.html" title="class in io.sphere.sdk.carts.queries">CartQueryModel</a></code></td>
+<td class="colFirst"><code>static <a href="../../../../../io/sphere/sdk/carts/queries/CartQueryModel.html" title="interface in io.sphere.sdk.carts.queries">CartQueryModel</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/carts/queries/CartQueryModel.html#of--">of</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i9" class="rowColor">
+<td class="colFirst"><code><a href="../../../../../io/sphere/sdk/carts/queries/PaymentInfoQueryModel.html" title="interface in io.sphere.sdk.carts.queries">PaymentInfoQueryModel</a>&lt;<a href="../../../../../io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts">Cart</a>&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/carts/queries/CartQueryModel.html#paymentInfo--">paymentInfo</a></span>()</code>&nbsp;</td>
+</tr>
+<tr id="i10" class="altColor">
 <td class="colFirst"><code><a href="../../../../../io/sphere/sdk/queries/AddressQueryModel.html" title="interface in io.sphere.sdk.queries">AddressQueryModel</a>&lt;<a href="../../../../../io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts">Cart</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/carts/queries/CartQueryModel.html#shippingAddress--">shippingAddress</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i10" class="altColor">
+<tr id="i11" class="rowColor">
 <td class="colFirst"><code><a href="../../../../../io/sphere/sdk/carts/queries/CartShippingInfoQueryModel.html" title="interface in io.sphere.sdk.carts.queries">CartShippingInfoQueryModel</a>&lt;<a href="../../../../../io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts">Cart</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/carts/queries/CartQueryModel.html#shippingInfo--">shippingInfo</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i11" class="rowColor">
+<tr id="i12" class="altColor">
 <td class="colFirst"><code><a href="../../../../../io/sphere/sdk/carts/queries/TaxedPriceOptionalQueryModel.html" title="interface in io.sphere.sdk.carts.queries">TaxedPriceOptionalQueryModel</a>&lt;<a href="../../../../../io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts">Cart</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/carts/queries/CartQueryModel.html#taxedPrice--">taxedPrice</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i12" class="altColor">
+<tr id="i13" class="rowColor">
 <td class="colFirst"><code><a href="../../../../../io/sphere/sdk/queries/MoneyQueryModel.html" title="interface in io.sphere.sdk.queries">MoneyQueryModel</a>&lt;<a href="../../../../../io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts">Cart</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/carts/queries/CartQueryModel.html#totalPrice--">totalPrice</a></span>()</code>&nbsp;</td>
 </tr>
 </table>
 <ul class="blockList">
-<li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.carts.queries.CartLikeQueryModel">
+<li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.queries.ResourceQueryModel">
 <!--   -->
 </a>
-<h3>Methods inherited from class&nbsp;io.sphere.sdk.carts.queries.<a href="../../../../../io/sphere/sdk/carts/queries/CartLikeQueryModel.html" title="class in io.sphere.sdk.carts.queries">CartLikeQueryModel</a></h3>
-<code><a href="../../../../../io/sphere/sdk/carts/queries/CartLikeQueryModel.html#paymentInfo--">paymentInfo</a></code></li>
-</ul>
-<ul class="blockList">
-<li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.types.queries.CustomResourceQueryModelImpl">
-<!--   -->
-</a>
-<h3>Methods inherited from class&nbsp;io.sphere.sdk.types.queries.<a href="../../../../../io/sphere/sdk/types/queries/CustomResourceQueryModelImpl.html" title="class in io.sphere.sdk.types.queries">CustomResourceQueryModelImpl</a></h3>
-<code><a href="../../../../../io/sphere/sdk/types/queries/CustomResourceQueryModelImpl.html#custom--">custom</a></code></li>
-</ul>
-<ul class="blockList">
-<li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.queries.ResourceQueryModelImpl">
-<!--   -->
-</a>
-<h3>Methods inherited from class&nbsp;io.sphere.sdk.queries.<a href="../../../../../io/sphere/sdk/queries/ResourceQueryModelImpl.html" title="class in io.sphere.sdk.queries">ResourceQueryModelImpl</a></h3>
-<code><a href="../../../../../io/sphere/sdk/queries/ResourceQueryModelImpl.html#createdAt--">createdAt</a>, <a href="../../../../../io/sphere/sdk/queries/ResourceQueryModelImpl.html#id--">id</a>, <a href="../../../../../io/sphere/sdk/queries/ResourceQueryModelImpl.html#is-io.sphere.sdk.models.Identifiable-">is</a>, <a href="../../../../../io/sphere/sdk/queries/ResourceQueryModelImpl.html#lastModifiedAt--">lastModifiedAt</a>, <a href="../../../../../io/sphere/sdk/queries/ResourceQueryModelImpl.html#not-io.sphere.sdk.queries.QueryPredicate-">not</a></code></li>
-</ul>
-<ul class="blockList">
-<li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.queries.QueryModelImpl">
-<!--   -->
-</a>
-<h3>Methods inherited from class&nbsp;io.sphere.sdk.queries.<a href="../../../../../io/sphere/sdk/queries/QueryModelImpl.html" title="class in io.sphere.sdk.queries">QueryModelImpl</a></h3>
-<code><a href="../../../../../io/sphere/sdk/queries/QueryModelImpl.html#addressModel-java.lang.String-">addressModel</a>, <a href="../../../../../io/sphere/sdk/queries/QueryModelImpl.html#anyReferenceModel-java.lang.String-">anyReferenceModel</a>, <a href="../../../../../io/sphere/sdk/queries/QueryModelImpl.html#booleanModel-java.lang.String-">booleanModel</a>, <a href="../../../../../io/sphere/sdk/queries/QueryModelImpl.html#countryQueryModel-java.lang.String-">countryQueryModel</a>, <a href="../../../../../io/sphere/sdk/queries/QueryModelImpl.html#currencyCodeModel-java.lang.String-">currencyCodeModel</a>, <a href="../../../../../io/sphere/sdk/queries/QueryModelImpl.html#doubleModel-java.lang.String-">doubleModel</a>, <a href="../../../../../io/sphere/sdk/queries/QueryModelImpl.html#embedPredicate-io.sphere.sdk.queries.QueryPredicate-">embedPredicate</a>, <a href="../../../../../io/sphere/sdk/queries/QueryModelImpl.html#enumerationQueryModel-java.lang.String-">enumerationQueryModel</a>, <a href="../../../../../io/sphere/sdk/queries/QueryModelImpl.html#getParent--">getParent</a>, <a href="../../../../../io/sphere/sdk/queries/QueryModelImpl.html#getPathSegment--">getPathSegment</a>, <a href="../../../../../io/sphere/sdk/queries/QueryModelImpl.html#integerModel-java.lang.String-">integerModel</a>, <a href="../../../../../io/sphere/sdk/queries/QueryModelImpl.html#isEmptyCollectionQueryPredicate--">isEmptyCollectionQueryPredicate</a>, <a href="../../../../../io/sphere/sdk/queries/QueryModelImpl.html#isGreaterThanOrEqualToPredicate-V-">isGreaterThanOrEqualToPredicate</a>, <a href="../../../../../io/sphere/sdk/queries/QueryModelImpl.html#isGreaterThanPredicate-V-">isGreaterThanPredicate</a>, <a href="../../../../../io/sphere/sdk/queries/QueryModelImpl.html#isInPredicate-java.lang.Iterable-">isInPredicate</a>, <a href="../../../../../io/sphere/sdk/queries/QueryModelImpl.html#isLessThanOrEqualToPredicate-V-">isLessThanOrEqualToPredicate</a>, <a href="../../../../../io/sphere/sdk/queries/QueryModelImpl.html#isLessThanPredicate-V-">isLessThanPredicate</a>, <a href="../../../../../io/sphere/sdk/queries/QueryModelImpl.html#isNotEmptyCollectionQueryPredicate--">isNotEmptyCollectionQueryPredicate</a>, <a href="../../../../../io/sphere/sdk/queries/QueryModelImpl.html#isNotInPredicate-java.lang.Iterable-">isNotInPredicate</a>, <a href="../../../../../io/sphere/sdk/queries/QueryModelImpl.html#isNotPredicate-java.lang.String-">isNotPredicate</a>, <a href="../../../../../io/sphere/sdk/queries/QueryModelImpl.html#isNotPredicate-V-">isNotPredicate</a>, <a href="../../../../../io/sphere/sdk/queries/QueryModelImpl.html#isNotPresentPredicate--">isNotPresentPredicate</a>, <a href="../../../../../io/sphere/sdk/queries/QueryModelImpl.html#isPredicate-V-">isPredicate</a>, <a href="../../../../../io/sphere/sdk/queries/QueryModelImpl.html#isPresentPredicate--">isPresentPredicate</a>, <a href="../../../../../io/sphere/sdk/queries/QueryModelImpl.html#localeQuerySortingModel-java.lang.String-">localeQuerySortingModel</a>, <a href="../../../../../io/sphere/sdk/queries/QueryModelImpl.html#localizedStringQuerySortingModel-java.lang.String-">localizedStringQuerySortingModel</a>, <a href="../../../../../io/sphere/sdk/queries/QueryModelImpl.html#longModel-java.lang.String-">longModel</a>, <a href="../../../../../io/sphere/sdk/queries/QueryModelImpl.html#moneyModel-java.lang.String-">moneyModel</a>, <a href="../../../../../io/sphere/sdk/queries/QueryModelImpl.html#normalizeIterable-java.lang.Iterable-">normalizeIterable</a>, <a href="../../../../../io/sphere/sdk/queries/QueryModelImpl.html#referenceCollectionModel-java.lang.String-">referenceCollectionModel</a>, <a href="../../../../../io/sphere/sdk/queries/QueryModelImpl.html#referenceModel-java.lang.String-">referenceModel</a>, <a href="../../../../../io/sphere/sdk/queries/QueryModelImpl.html#referenceOptionalModel-java.lang.String-">referenceOptionalModel</a>, <a href="../../../../../io/sphere/sdk/queries/QueryModelImpl.html#stringCollectionModel-java.lang.String-">stringCollectionModel</a>, <a href="../../../../../io/sphere/sdk/queries/QueryModelImpl.html#stringModel-java.lang.String-">stringModel</a>, <a href="../../../../../io/sphere/sdk/queries/QueryModelImpl.html#timestampSortingModel-java.lang.String-">timestampSortingModel</a></code></li>
-</ul>
-<ul class="blockList">
-<li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.models.Base">
-<!--   -->
-</a>
-<h3>Methods inherited from class&nbsp;io.sphere.sdk.models.<a href="../../../../../io/sphere/sdk/models/Base.html" title="class in io.sphere.sdk.models">Base</a></h3>
-<code><a href="../../../../../io/sphere/sdk/models/Base.html#equals-java.lang.Object-">equals</a>, <a href="../../../../../io/sphere/sdk/models/Base.html#hashCode--">hashCode</a>, <a href="../../../../../io/sphere/sdk/models/Base.html#toString--">toString</a></code></li>
-</ul>
-<ul class="blockList">
-<li class="blockList"><a name="methods.inherited.from.class.java.lang.Object">
-<!--   -->
-</a>
-<h3>Methods inherited from class&nbsp;java.lang.Object</h3>
-<code>clone, finalize, getClass, notify, notifyAll, wait, wait, wait</code></li>
+<h3>Methods inherited from interface&nbsp;io.sphere.sdk.queries.<a href="../../../../../io/sphere/sdk/queries/ResourceQueryModel.html" title="interface in io.sphere.sdk.queries">ResourceQueryModel</a></h3>
+<code><a href="../../../../../io/sphere/sdk/queries/ResourceQueryModel.html#createdAt--">createdAt</a>, <a href="../../../../../io/sphere/sdk/queries/ResourceQueryModel.html#id--">id</a>, <a href="../../../../../io/sphere/sdk/queries/ResourceQueryModel.html#is-io.sphere.sdk.models.Identifiable-">is</a>, <a href="../../../../../io/sphere/sdk/queries/ResourceQueryModel.html#lastModifiedAt--">lastModifiedAt</a>, <a href="../../../../../io/sphere/sdk/queries/ResourceQueryModel.html#not-io.sphere.sdk.queries.QueryPredicate-">not</a></code></li>
 </ul>
 <ul class="blockList">
 <li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.types.queries.WithCustomQueryModel">
@@ -273,25 +209,16 @@ extends <a href="../../../../../io/sphere/sdk/carts/queries/CartLikeQueryModel.h
 <!--   -->
 </a>
 <h3>Method Detail</h3>
-<a name="of--">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>of</h4>
-<pre>public static&nbsp;<a href="../../../../../io/sphere/sdk/carts/queries/CartQueryModel.html" title="class in io.sphere.sdk.carts.queries">CartQueryModel</a>&nbsp;of()</pre>
-</li>
-</ul>
 <a name="country--">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
 <h4>country</h4>
-<pre>public&nbsp;<a href="../../../../../io/sphere/sdk/queries/CountryQueryModel.html" title="interface in io.sphere.sdk.queries">CountryQueryModel</a>&lt;<a href="../../../../../io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts">Cart</a>&gt;&nbsp;country()</pre>
+<pre><a href="../../../../../io/sphere/sdk/queries/CountryQueryModel.html" title="interface in io.sphere.sdk.queries">CountryQueryModel</a>&lt;<a href="../../../../../io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts">Cart</a>&gt;&nbsp;country()</pre>
 <dl>
-<dt><span class="overrideSpecifyLabel">Overrides:</span></dt>
-<dd><code><a href="../../../../../io/sphere/sdk/carts/queries/CartLikeQueryModel.html#country--">country</a></code>&nbsp;in class&nbsp;<code><a href="../../../../../io/sphere/sdk/carts/queries/CartLikeQueryModel.html" title="class in io.sphere.sdk.carts.queries">CartLikeQueryModel</a>&lt;<a href="../../../../../io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts">Cart</a>&gt;</code></dd>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../../io/sphere/sdk/carts/queries/CartLikeQueryModel.html#country--">country</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../io/sphere/sdk/carts/queries/CartLikeQueryModel.html" title="interface in io.sphere.sdk.carts.queries">CartLikeQueryModel</a>&lt;<a href="../../../../../io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts">Cart</a>&gt;</code></dd>
 </dl>
 </li>
 </ul>
@@ -301,10 +228,10 @@ extends <a href="../../../../../io/sphere/sdk/carts/queries/CartLikeQueryModel.h
 <ul class="blockList">
 <li class="blockList">
 <h4>customerEmail</h4>
-<pre>public&nbsp;<a href="../../../../../io/sphere/sdk/queries/StringQuerySortingModel.html" title="interface in io.sphere.sdk.queries">StringQuerySortingModel</a>&lt;<a href="../../../../../io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts">Cart</a>&gt;&nbsp;customerEmail()</pre>
+<pre><a href="../../../../../io/sphere/sdk/queries/StringQuerySortingModel.html" title="interface in io.sphere.sdk.queries">StringQuerySortingModel</a>&lt;<a href="../../../../../io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts">Cart</a>&gt;&nbsp;customerEmail()</pre>
 <dl>
-<dt><span class="overrideSpecifyLabel">Overrides:</span></dt>
-<dd><code><a href="../../../../../io/sphere/sdk/carts/queries/CartLikeQueryModel.html#customerEmail--">customerEmail</a></code>&nbsp;in class&nbsp;<code><a href="../../../../../io/sphere/sdk/carts/queries/CartLikeQueryModel.html" title="class in io.sphere.sdk.carts.queries">CartLikeQueryModel</a>&lt;<a href="../../../../../io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts">Cart</a>&gt;</code></dd>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../../io/sphere/sdk/carts/queries/CartLikeQueryModel.html#customerEmail--">customerEmail</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../io/sphere/sdk/carts/queries/CartLikeQueryModel.html" title="interface in io.sphere.sdk.carts.queries">CartLikeQueryModel</a>&lt;<a href="../../../../../io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts">Cart</a>&gt;</code></dd>
 </dl>
 </li>
 </ul>
@@ -314,10 +241,10 @@ extends <a href="../../../../../io/sphere/sdk/carts/queries/CartLikeQueryModel.h
 <ul class="blockList">
 <li class="blockList">
 <h4>customerGroup</h4>
-<pre>public&nbsp;<a href="../../../../../io/sphere/sdk/queries/ReferenceOptionalQueryModel.html" title="interface in io.sphere.sdk.queries">ReferenceOptionalQueryModel</a>&lt;<a href="../../../../../io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts">Cart</a>,<a href="../../../../../io/sphere/sdk/customergroups/CustomerGroup.html" title="interface in io.sphere.sdk.customergroups">CustomerGroup</a>&gt;&nbsp;customerGroup()</pre>
+<pre><a href="../../../../../io/sphere/sdk/queries/ReferenceOptionalQueryModel.html" title="interface in io.sphere.sdk.queries">ReferenceOptionalQueryModel</a>&lt;<a href="../../../../../io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts">Cart</a>,<a href="../../../../../io/sphere/sdk/customergroups/CustomerGroup.html" title="interface in io.sphere.sdk.customergroups">CustomerGroup</a>&gt;&nbsp;customerGroup()</pre>
 <dl>
-<dt><span class="overrideSpecifyLabel">Overrides:</span></dt>
-<dd><code><a href="../../../../../io/sphere/sdk/carts/queries/CartLikeQueryModel.html#customerGroup--">customerGroup</a></code>&nbsp;in class&nbsp;<code><a href="../../../../../io/sphere/sdk/carts/queries/CartLikeQueryModel.html" title="class in io.sphere.sdk.carts.queries">CartLikeQueryModel</a>&lt;<a href="../../../../../io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts">Cart</a>&gt;</code></dd>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../../io/sphere/sdk/carts/queries/CartLikeQueryModel.html#customerGroup--">customerGroup</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../io/sphere/sdk/carts/queries/CartLikeQueryModel.html" title="interface in io.sphere.sdk.carts.queries">CartLikeQueryModel</a>&lt;<a href="../../../../../io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts">Cart</a>&gt;</code></dd>
 </dl>
 </li>
 </ul>
@@ -327,10 +254,10 @@ extends <a href="../../../../../io/sphere/sdk/carts/queries/CartLikeQueryModel.h
 <ul class="blockList">
 <li class="blockList">
 <h4>customerId</h4>
-<pre>public&nbsp;<a href="../../../../../io/sphere/sdk/queries/StringQuerySortingModel.html" title="interface in io.sphere.sdk.queries">StringQuerySortingModel</a>&lt;<a href="../../../../../io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts">Cart</a>&gt;&nbsp;customerId()</pre>
+<pre><a href="../../../../../io/sphere/sdk/queries/StringQuerySortingModel.html" title="interface in io.sphere.sdk.queries">StringQuerySortingModel</a>&lt;<a href="../../../../../io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts">Cart</a>&gt;&nbsp;customerId()</pre>
 <dl>
-<dt><span class="overrideSpecifyLabel">Overrides:</span></dt>
-<dd><code><a href="../../../../../io/sphere/sdk/carts/queries/CartLikeQueryModel.html#customerId--">customerId</a></code>&nbsp;in class&nbsp;<code><a href="../../../../../io/sphere/sdk/carts/queries/CartLikeQueryModel.html" title="class in io.sphere.sdk.carts.queries">CartLikeQueryModel</a>&lt;<a href="../../../../../io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts">Cart</a>&gt;</code></dd>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../../io/sphere/sdk/carts/queries/CartLikeQueryModel.html#customerId--">customerId</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../io/sphere/sdk/carts/queries/CartLikeQueryModel.html" title="interface in io.sphere.sdk.carts.queries">CartLikeQueryModel</a>&lt;<a href="../../../../../io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts">Cart</a>&gt;</code></dd>
 </dl>
 </li>
 </ul>
@@ -340,10 +267,10 @@ extends <a href="../../../../../io/sphere/sdk/carts/queries/CartLikeQueryModel.h
 <ul class="blockList">
 <li class="blockList">
 <h4>lineItems</h4>
-<pre>public&nbsp;<a href="../../../../../io/sphere/sdk/carts/queries/LineItemCollectionQueryModel.html" title="interface in io.sphere.sdk.carts.queries">LineItemCollectionQueryModel</a>&lt;<a href="../../../../../io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts">Cart</a>&gt;&nbsp;lineItems()</pre>
+<pre><a href="../../../../../io/sphere/sdk/carts/queries/LineItemCollectionQueryModel.html" title="interface in io.sphere.sdk.carts.queries">LineItemCollectionQueryModel</a>&lt;<a href="../../../../../io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts">Cart</a>&gt;&nbsp;lineItems()</pre>
 <dl>
-<dt><span class="overrideSpecifyLabel">Overrides:</span></dt>
-<dd><code><a href="../../../../../io/sphere/sdk/carts/queries/CartLikeQueryModel.html#lineItems--">lineItems</a></code>&nbsp;in class&nbsp;<code><a href="../../../../../io/sphere/sdk/carts/queries/CartLikeQueryModel.html" title="class in io.sphere.sdk.carts.queries">CartLikeQueryModel</a>&lt;<a href="../../../../../io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts">Cart</a>&gt;</code></dd>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../../io/sphere/sdk/carts/queries/CartLikeQueryModel.html#lineItems--">lineItems</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../io/sphere/sdk/carts/queries/CartLikeQueryModel.html" title="interface in io.sphere.sdk.carts.queries">CartLikeQueryModel</a>&lt;<a href="../../../../../io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts">Cart</a>&gt;</code></dd>
 </dl>
 </li>
 </ul>
@@ -353,10 +280,10 @@ extends <a href="../../../../../io/sphere/sdk/carts/queries/CartLikeQueryModel.h
 <ul class="blockList">
 <li class="blockList">
 <h4>taxedPrice</h4>
-<pre>public&nbsp;<a href="../../../../../io/sphere/sdk/carts/queries/TaxedPriceOptionalQueryModel.html" title="interface in io.sphere.sdk.carts.queries">TaxedPriceOptionalQueryModel</a>&lt;<a href="../../../../../io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts">Cart</a>&gt;&nbsp;taxedPrice()</pre>
+<pre><a href="../../../../../io/sphere/sdk/carts/queries/TaxedPriceOptionalQueryModel.html" title="interface in io.sphere.sdk.carts.queries">TaxedPriceOptionalQueryModel</a>&lt;<a href="../../../../../io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts">Cart</a>&gt;&nbsp;taxedPrice()</pre>
 <dl>
-<dt><span class="overrideSpecifyLabel">Overrides:</span></dt>
-<dd><code><a href="../../../../../io/sphere/sdk/carts/queries/CartLikeQueryModel.html#taxedPrice--">taxedPrice</a></code>&nbsp;in class&nbsp;<code><a href="../../../../../io/sphere/sdk/carts/queries/CartLikeQueryModel.html" title="class in io.sphere.sdk.carts.queries">CartLikeQueryModel</a>&lt;<a href="../../../../../io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts">Cart</a>&gt;</code></dd>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../../io/sphere/sdk/carts/queries/CartLikeQueryModel.html#taxedPrice--">taxedPrice</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../io/sphere/sdk/carts/queries/CartLikeQueryModel.html" title="interface in io.sphere.sdk.carts.queries">CartLikeQueryModel</a>&lt;<a href="../../../../../io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts">Cart</a>&gt;</code></dd>
 </dl>
 </li>
 </ul>
@@ -366,10 +293,10 @@ extends <a href="../../../../../io/sphere/sdk/carts/queries/CartLikeQueryModel.h
 <ul class="blockList">
 <li class="blockList">
 <h4>totalPrice</h4>
-<pre>public&nbsp;<a href="../../../../../io/sphere/sdk/queries/MoneyQueryModel.html" title="interface in io.sphere.sdk.queries">MoneyQueryModel</a>&lt;<a href="../../../../../io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts">Cart</a>&gt;&nbsp;totalPrice()</pre>
+<pre><a href="../../../../../io/sphere/sdk/queries/MoneyQueryModel.html" title="interface in io.sphere.sdk.queries">MoneyQueryModel</a>&lt;<a href="../../../../../io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts">Cart</a>&gt;&nbsp;totalPrice()</pre>
 <dl>
-<dt><span class="overrideSpecifyLabel">Overrides:</span></dt>
-<dd><code><a href="../../../../../io/sphere/sdk/carts/queries/CartLikeQueryModel.html#totalPrice--">totalPrice</a></code>&nbsp;in class&nbsp;<code><a href="../../../../../io/sphere/sdk/carts/queries/CartLikeQueryModel.html" title="class in io.sphere.sdk.carts.queries">CartLikeQueryModel</a>&lt;<a href="../../../../../io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts">Cart</a>&gt;</code></dd>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../../io/sphere/sdk/carts/queries/CartLikeQueryModel.html#totalPrice--">totalPrice</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../io/sphere/sdk/carts/queries/CartLikeQueryModel.html" title="interface in io.sphere.sdk.carts.queries">CartLikeQueryModel</a>&lt;<a href="../../../../../io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts">Cart</a>&gt;</code></dd>
 </dl>
 </li>
 </ul>
@@ -379,10 +306,10 @@ extends <a href="../../../../../io/sphere/sdk/carts/queries/CartLikeQueryModel.h
 <ul class="blockList">
 <li class="blockList">
 <h4>customLineItems</h4>
-<pre>public&nbsp;<a href="../../../../../io/sphere/sdk/carts/queries/CustomLineItemCollectionQueryModel.html" title="interface in io.sphere.sdk.carts.queries">CustomLineItemCollectionQueryModel</a>&lt;<a href="../../../../../io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts">Cart</a>&gt;&nbsp;customLineItems()</pre>
+<pre><a href="../../../../../io/sphere/sdk/carts/queries/CustomLineItemCollectionQueryModel.html" title="interface in io.sphere.sdk.carts.queries">CustomLineItemCollectionQueryModel</a>&lt;<a href="../../../../../io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts">Cart</a>&gt;&nbsp;customLineItems()</pre>
 <dl>
-<dt><span class="overrideSpecifyLabel">Overrides:</span></dt>
-<dd><code><a href="../../../../../io/sphere/sdk/carts/queries/CartLikeQueryModel.html#customLineItems--">customLineItems</a></code>&nbsp;in class&nbsp;<code><a href="../../../../../io/sphere/sdk/carts/queries/CartLikeQueryModel.html" title="class in io.sphere.sdk.carts.queries">CartLikeQueryModel</a>&lt;<a href="../../../../../io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts">Cart</a>&gt;</code></dd>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../../io/sphere/sdk/carts/queries/CartLikeQueryModel.html#customLineItems--">customLineItems</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../io/sphere/sdk/carts/queries/CartLikeQueryModel.html" title="interface in io.sphere.sdk.carts.queries">CartLikeQueryModel</a>&lt;<a href="../../../../../io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts">Cart</a>&gt;</code></dd>
 </dl>
 </li>
 </ul>
@@ -392,10 +319,10 @@ extends <a href="../../../../../io/sphere/sdk/carts/queries/CartLikeQueryModel.h
 <ul class="blockList">
 <li class="blockList">
 <h4>billingAddress</h4>
-<pre>public&nbsp;<a href="../../../../../io/sphere/sdk/queries/AddressQueryModel.html" title="interface in io.sphere.sdk.queries">AddressQueryModel</a>&lt;<a href="../../../../../io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts">Cart</a>&gt;&nbsp;billingAddress()</pre>
+<pre><a href="../../../../../io/sphere/sdk/queries/AddressQueryModel.html" title="interface in io.sphere.sdk.queries">AddressQueryModel</a>&lt;<a href="../../../../../io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts">Cart</a>&gt;&nbsp;billingAddress()</pre>
 <dl>
-<dt><span class="overrideSpecifyLabel">Overrides:</span></dt>
-<dd><code><a href="../../../../../io/sphere/sdk/carts/queries/CartLikeQueryModel.html#billingAddress--">billingAddress</a></code>&nbsp;in class&nbsp;<code><a href="../../../../../io/sphere/sdk/carts/queries/CartLikeQueryModel.html" title="class in io.sphere.sdk.carts.queries">CartLikeQueryModel</a>&lt;<a href="../../../../../io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts">Cart</a>&gt;</code></dd>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../../io/sphere/sdk/carts/queries/CartLikeQueryModel.html#billingAddress--">billingAddress</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../io/sphere/sdk/carts/queries/CartLikeQueryModel.html" title="interface in io.sphere.sdk.carts.queries">CartLikeQueryModel</a>&lt;<a href="../../../../../io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts">Cart</a>&gt;</code></dd>
 </dl>
 </li>
 </ul>
@@ -405,10 +332,10 @@ extends <a href="../../../../../io/sphere/sdk/carts/queries/CartLikeQueryModel.h
 <ul class="blockList">
 <li class="blockList">
 <h4>discountCodes</h4>
-<pre>public&nbsp;<a href="../../../../../io/sphere/sdk/carts/queries/DiscountCodeInfoCollectionQueryModel.html" title="interface in io.sphere.sdk.carts.queries">DiscountCodeInfoCollectionQueryModel</a>&lt;<a href="../../../../../io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts">Cart</a>&gt;&nbsp;discountCodes()</pre>
+<pre><a href="../../../../../io/sphere/sdk/carts/queries/DiscountCodeInfoCollectionQueryModel.html" title="interface in io.sphere.sdk.carts.queries">DiscountCodeInfoCollectionQueryModel</a>&lt;<a href="../../../../../io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts">Cart</a>&gt;&nbsp;discountCodes()</pre>
 <dl>
-<dt><span class="overrideSpecifyLabel">Overrides:</span></dt>
-<dd><code><a href="../../../../../io/sphere/sdk/carts/queries/CartLikeQueryModel.html#discountCodes--">discountCodes</a></code>&nbsp;in class&nbsp;<code><a href="../../../../../io/sphere/sdk/carts/queries/CartLikeQueryModel.html" title="class in io.sphere.sdk.carts.queries">CartLikeQueryModel</a>&lt;<a href="../../../../../io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts">Cart</a>&gt;</code></dd>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../../io/sphere/sdk/carts/queries/CartLikeQueryModel.html#discountCodes--">discountCodes</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../io/sphere/sdk/carts/queries/CartLikeQueryModel.html" title="interface in io.sphere.sdk.carts.queries">CartLikeQueryModel</a>&lt;<a href="../../../../../io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts">Cart</a>&gt;</code></dd>
 </dl>
 </li>
 </ul>
@@ -418,24 +345,46 @@ extends <a href="../../../../../io/sphere/sdk/carts/queries/CartLikeQueryModel.h
 <ul class="blockList">
 <li class="blockList">
 <h4>shippingAddress</h4>
-<pre>public&nbsp;<a href="../../../../../io/sphere/sdk/queries/AddressQueryModel.html" title="interface in io.sphere.sdk.queries">AddressQueryModel</a>&lt;<a href="../../../../../io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts">Cart</a>&gt;&nbsp;shippingAddress()</pre>
+<pre><a href="../../../../../io/sphere/sdk/queries/AddressQueryModel.html" title="interface in io.sphere.sdk.queries">AddressQueryModel</a>&lt;<a href="../../../../../io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts">Cart</a>&gt;&nbsp;shippingAddress()</pre>
 <dl>
-<dt><span class="overrideSpecifyLabel">Overrides:</span></dt>
-<dd><code><a href="../../../../../io/sphere/sdk/carts/queries/CartLikeQueryModel.html#shippingAddress--">shippingAddress</a></code>&nbsp;in class&nbsp;<code><a href="../../../../../io/sphere/sdk/carts/queries/CartLikeQueryModel.html" title="class in io.sphere.sdk.carts.queries">CartLikeQueryModel</a>&lt;<a href="../../../../../io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts">Cart</a>&gt;</code></dd>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../../io/sphere/sdk/carts/queries/CartLikeQueryModel.html#shippingAddress--">shippingAddress</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../io/sphere/sdk/carts/queries/CartLikeQueryModel.html" title="interface in io.sphere.sdk.carts.queries">CartLikeQueryModel</a>&lt;<a href="../../../../../io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts">Cart</a>&gt;</code></dd>
 </dl>
 </li>
 </ul>
 <a name="shippingInfo--">
 <!--   -->
 </a>
-<ul class="blockListLast">
+<ul class="blockList">
 <li class="blockList">
 <h4>shippingInfo</h4>
-<pre>public&nbsp;<a href="../../../../../io/sphere/sdk/carts/queries/CartShippingInfoQueryModel.html" title="interface in io.sphere.sdk.carts.queries">CartShippingInfoQueryModel</a>&lt;<a href="../../../../../io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts">Cart</a>&gt;&nbsp;shippingInfo()</pre>
+<pre><a href="../../../../../io/sphere/sdk/carts/queries/CartShippingInfoQueryModel.html" title="interface in io.sphere.sdk.carts.queries">CartShippingInfoQueryModel</a>&lt;<a href="../../../../../io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts">Cart</a>&gt;&nbsp;shippingInfo()</pre>
 <dl>
-<dt><span class="overrideSpecifyLabel">Overrides:</span></dt>
-<dd><code><a href="../../../../../io/sphere/sdk/carts/queries/CartLikeQueryModel.html#shippingInfo--">shippingInfo</a></code>&nbsp;in class&nbsp;<code><a href="../../../../../io/sphere/sdk/carts/queries/CartLikeQueryModel.html" title="class in io.sphere.sdk.carts.queries">CartLikeQueryModel</a>&lt;<a href="../../../../../io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts">Cart</a>&gt;</code></dd>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../../io/sphere/sdk/carts/queries/CartLikeQueryModel.html#shippingInfo--">shippingInfo</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../io/sphere/sdk/carts/queries/CartLikeQueryModel.html" title="interface in io.sphere.sdk.carts.queries">CartLikeQueryModel</a>&lt;<a href="../../../../../io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts">Cart</a>&gt;</code></dd>
 </dl>
+</li>
+</ul>
+<a name="paymentInfo--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>paymentInfo</h4>
+<pre><a href="../../../../../io/sphere/sdk/carts/queries/PaymentInfoQueryModel.html" title="interface in io.sphere.sdk.carts.queries">PaymentInfoQueryModel</a>&lt;<a href="../../../../../io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts">Cart</a>&gt;&nbsp;paymentInfo()</pre>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../../io/sphere/sdk/carts/queries/CartLikeQueryModel.html#paymentInfo--">paymentInfo</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../io/sphere/sdk/carts/queries/CartLikeQueryModel.html" title="interface in io.sphere.sdk.carts.queries">CartLikeQueryModel</a>&lt;<a href="../../../../../io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts">Cart</a>&gt;</code></dd>
+</dl>
+</li>
+</ul>
+<a name="of--">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>of</h4>
+<pre>static&nbsp;<a href="../../../../../io/sphere/sdk/carts/queries/CartQueryModel.html" title="interface in io.sphere.sdk.carts.queries">CartQueryModel</a>&nbsp;of()</pre>
 </li>
 </ul>
 </li>

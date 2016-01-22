@@ -509,9 +509,11 @@
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/CartDraftBuilder.html#billingAddress-io.sphere.sdk.models.Address-">billingAddress(Address)</a></span> - Method in class io.sphere.sdk.carts.<a href="io/sphere/sdk/carts/CartDraftBuilder.html" title="class in io.sphere.sdk.carts">CartDraftBuilder</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/queries/CartLikeQueryModel.html#billingAddress--">billingAddress()</a></span> - Method in class io.sphere.sdk.carts.queries.<a href="io/sphere/sdk/carts/queries/CartLikeQueryModel.html" title="class in io.sphere.sdk.carts.queries">CartLikeQueryModel</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/queries/CartLikeQueryModel.html#billingAddress--">billingAddress()</a></span> - Method in interface io.sphere.sdk.carts.queries.<a href="io/sphere/sdk/carts/queries/CartLikeQueryModel.html" title="interface in io.sphere.sdk.carts.queries">CartLikeQueryModel</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/queries/CartQueryModel.html#billingAddress--">billingAddress()</a></span> - Method in class io.sphere.sdk.carts.queries.<a href="io/sphere/sdk/carts/queries/CartQueryModel.html" title="class in io.sphere.sdk.carts.queries">CartQueryModel</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/queries/CartLikeQueryModelImpl.html#billingAddress--">billingAddress()</a></span> - Method in class io.sphere.sdk.carts.queries.<a href="io/sphere/sdk/carts/queries/CartLikeQueryModelImpl.html" title="class in io.sphere.sdk.carts.queries">CartLikeQueryModelImpl</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/queries/CartQueryModel.html#billingAddress--">billingAddress()</a></span> - Method in interface io.sphere.sdk.carts.queries.<a href="io/sphere/sdk/carts/queries/CartQueryModel.html" title="interface in io.sphere.sdk.carts.queries">CartQueryModel</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/OrderImportDraftBuilder.html#billingAddress-io.sphere.sdk.models.Address-">billingAddress(Address)</a></span> - Method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/OrderImportDraftBuilder.html" title="class in io.sphere.sdk.orders">OrderImportDraftBuilder</a></dt>
 <dd>&nbsp;</dd>
@@ -998,11 +1000,13 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/expansion/CartLikeExpansionModel.html#CartLikeExpansionModel--">CartLikeExpansionModel()</a></span> - Constructor for class io.sphere.sdk.carts.expansion.<a href="io/sphere/sdk/carts/expansion/CartLikeExpansionModel.html" title="class in io.sphere.sdk.carts.expansion">CartLikeExpansionModel</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="io/sphere/sdk/carts/queries/CartLikeQueryModel.html" title="class in io.sphere.sdk.carts.queries"><span class="typeNameLink">CartLikeQueryModel</span></a>&lt;<a href="io/sphere/sdk/carts/queries/CartLikeQueryModel.html" title="type parameter in CartLikeQueryModel">T</a>&gt; - Class in <a href="io/sphere/sdk/carts/queries/package-summary.html">io.sphere.sdk.carts.queries</a></dt>
+<dt><a href="io/sphere/sdk/carts/queries/CartLikeQueryModel.html" title="interface in io.sphere.sdk.carts.queries"><span class="typeNameLink">CartLikeQueryModel</span></a>&lt;<a href="io/sphere/sdk/carts/queries/CartLikeQueryModel.html" title="type parameter in CartLikeQueryModel">T</a>&gt; - Interface in <a href="io/sphere/sdk/carts/queries/package-summary.html">io.sphere.sdk.carts.queries</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="io/sphere/sdk/carts/queries/CartLikeQueryModelImpl.html" title="class in io.sphere.sdk.carts.queries"><span class="typeNameLink">CartLikeQueryModelImpl</span></a>&lt;<a href="io/sphere/sdk/carts/queries/CartLikeQueryModelImpl.html" title="type parameter in CartLikeQueryModelImpl">T</a>&gt; - Class in <a href="io/sphere/sdk/carts/queries/package-summary.html">io.sphere.sdk.carts.queries</a></dt>
 <dd>
 <div class="block">Base class to create predicates for <a href="io/sphere/sdk/carts/CartLike.html" title="interface in io.sphere.sdk.carts"><code>CartLike</code></a> resources.</div>
 </dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/queries/CartLikeQueryModel.html#CartLikeQueryModel-io.sphere.sdk.queries.QueryModel-java.lang.String-">CartLikeQueryModel(QueryModel&lt;T&gt;, String)</a></span> - Constructor for class io.sphere.sdk.carts.queries.<a href="io/sphere/sdk/carts/queries/CartLikeQueryModel.html" title="class in io.sphere.sdk.carts.queries">CartLikeQueryModel</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/queries/CartLikeQueryModelImpl.html#CartLikeQueryModelImpl-io.sphere.sdk.queries.QueryModel-java.lang.String-">CartLikeQueryModelImpl(QueryModel&lt;T&gt;, String)</a></span> - Constructor for class io.sphere.sdk.carts.queries.<a href="io/sphere/sdk/carts/queries/CartLikeQueryModelImpl.html" title="class in io.sphere.sdk.carts.queries">CartLikeQueryModelImpl</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/cartdiscounts/CartDiscountDraftBuilder.html#cartPredicate-io.sphere.sdk.cartdiscounts.CartDiscountPredicate-">cartPredicate(CartDiscountPredicate)</a></span> - Method in class io.sphere.sdk.cartdiscounts.<a href="io/sphere/sdk/cartdiscounts/CartDiscountDraftBuilder.html" title="class in io.sphere.sdk.cartdiscounts">CartDiscountDraftBuilder</a></dt>
 <dd>&nbsp;</dd>
@@ -1014,7 +1018,7 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 </dd>
 <dt><a href="io/sphere/sdk/carts/queries/CartQueryBuilder.html" title="class in io.sphere.sdk.carts.queries"><span class="typeNameLink">CartQueryBuilder</span></a> - Class in <a href="io/sphere/sdk/carts/queries/package-summary.html">io.sphere.sdk.carts.queries</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="io/sphere/sdk/carts/queries/CartQueryModel.html" title="class in io.sphere.sdk.carts.queries"><span class="typeNameLink">CartQueryModel</span></a> - Class in <a href="io/sphere/sdk/carts/queries/package-summary.html">io.sphere.sdk.carts.queries</a></dt>
+<dt><a href="io/sphere/sdk/carts/queries/CartQueryModel.html" title="interface in io.sphere.sdk.carts.queries"><span class="typeNameLink">CartQueryModel</span></a> - Interface in <a href="io/sphere/sdk/carts/queries/package-summary.html">io.sphere.sdk.carts.queries</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/carts/CartShippingInfo.html" title="class in io.sphere.sdk.carts"><span class="typeNameLink">CartShippingInfo</span></a> - Class in <a href="io/sphere/sdk/carts/package-summary.html">io.sphere.sdk.carts</a></dt>
 <dd>
@@ -1124,7 +1128,7 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 </dd>
 <dt><a href="io/sphere/sdk/categories/queries/CategoryQueryBuilder.html" title="class in io.sphere.sdk.categories.queries"><span class="typeNameLink">CategoryQueryBuilder</span></a> - Class in <a href="io/sphere/sdk/categories/queries/package-summary.html">io.sphere.sdk.categories.queries</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="io/sphere/sdk/categories/queries/CategoryQueryModel.html" title="class in io.sphere.sdk.categories.queries"><span class="typeNameLink">CategoryQueryModel</span></a> - Class in <a href="io/sphere/sdk/categories/queries/package-summary.html">io.sphere.sdk.categories.queries</a></dt>
+<dt><a href="io/sphere/sdk/categories/queries/CategoryQueryModel.html" title="interface in io.sphere.sdk.categories.queries"><span class="typeNameLink">CategoryQueryModel</span></a> - Interface in <a href="io/sphere/sdk/categories/queries/package-summary.html">io.sphere.sdk.categories.queries</a></dt>
 <dd>
 <div class="block">Provides a domain specific language to formulate predicates and search expressions for querying  categories.</div>
 </dd>
@@ -1409,7 +1413,7 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 </dd>
 <dt><a href="io/sphere/sdk/channels/queries/ChannelQueryBuilder.html" title="class in io.sphere.sdk.channels.queries"><span class="typeNameLink">ChannelQueryBuilder</span></a> - Class in <a href="io/sphere/sdk/channels/queries/package-summary.html">io.sphere.sdk.channels.queries</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="io/sphere/sdk/channels/queries/ChannelQueryModel.html" title="class in io.sphere.sdk.channels.queries"><span class="typeNameLink">ChannelQueryModel</span></a> - Class in <a href="io/sphere/sdk/channels/queries/package-summary.html">io.sphere.sdk.channels.queries</a></dt>
+<dt><a href="io/sphere/sdk/channels/queries/ChannelQueryModel.html" title="interface in io.sphere.sdk.channels.queries"><span class="typeNameLink">ChannelQueryModel</span></a> - Interface in <a href="io/sphere/sdk/channels/queries/package-summary.html">io.sphere.sdk.channels.queries</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/channels/ChannelRole.html" title="enum in io.sphere.sdk.channels"><span class="typeNameLink">ChannelRole</span></a> - Enum in <a href="io/sphere/sdk/channels/package-summary.html">io.sphere.sdk.channels</a></dt>
 <dd>
@@ -1505,7 +1509,7 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dd>
 <div class="block">This documentation is about creating objects.</div>
 </dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/customobjects/queries/CustomObjectQueryModel.html#container--">container()</a></span> - Method in class io.sphere.sdk.customobjects.queries.<a href="io/sphere/sdk/customobjects/queries/CustomObjectQueryModel.html" title="class in io.sphere.sdk.customobjects.queries">CustomObjectQueryModel</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/customobjects/queries/CustomObjectQueryModel.html#container--">container()</a></span> - Method in interface io.sphere.sdk.customobjects.queries.<a href="io/sphere/sdk/customobjects/queries/CustomObjectQueryModel.html" title="interface in io.sphere.sdk.customobjects.queries">CustomObjectQueryModel</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/zones/Zone.html#contains-com.neovisionaries.i18n.CountryCode-">contains(CountryCode)</a></span> - Method in interface io.sphere.sdk.zones.<a href="io/sphere/sdk/zones/Zone.html" title="interface in io.sphere.sdk.zones">Zone</a></dt>
 <dd>
@@ -1695,9 +1699,11 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/CartDraftBuilder.html#country-com.neovisionaries.i18n.CountryCode-">country(CountryCode)</a></span> - Method in class io.sphere.sdk.carts.<a href="io/sphere/sdk/carts/CartDraftBuilder.html" title="class in io.sphere.sdk.carts">CartDraftBuilder</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/queries/CartLikeQueryModel.html#country--">country()</a></span> - Method in class io.sphere.sdk.carts.queries.<a href="io/sphere/sdk/carts/queries/CartLikeQueryModel.html" title="class in io.sphere.sdk.carts.queries">CartLikeQueryModel</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/queries/CartLikeQueryModel.html#country--">country()</a></span> - Method in interface io.sphere.sdk.carts.queries.<a href="io/sphere/sdk/carts/queries/CartLikeQueryModel.html" title="interface in io.sphere.sdk.carts.queries">CartLikeQueryModel</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/queries/CartQueryModel.html#country--">country()</a></span> - Method in class io.sphere.sdk.carts.queries.<a href="io/sphere/sdk/carts/queries/CartQueryModel.html" title="class in io.sphere.sdk.carts.queries">CartQueryModel</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/queries/CartLikeQueryModelImpl.html#country--">country()</a></span> - Method in class io.sphere.sdk.carts.queries.<a href="io/sphere/sdk/carts/queries/CartLikeQueryModelImpl.html" title="class in io.sphere.sdk.carts.queries">CartLikeQueryModelImpl</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/queries/CartQueryModel.html#country--">country()</a></span> - Method in interface io.sphere.sdk.carts.queries.<a href="io/sphere/sdk/carts/queries/CartQueryModel.html" title="interface in io.sphere.sdk.carts.queries">CartQueryModel</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/AddressBuilder.html#country-com.neovisionaries.i18n.CountryCode-">country(CountryCode)</a></span> - Method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/AddressBuilder.html" title="class in io.sphere.sdk.models">AddressBuilder</a></dt>
 <dd>&nbsp;</dd>
@@ -1840,11 +1846,11 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/categories/CategoryDraftBuilder.html#custom-io.sphere.sdk.types.CustomFieldsDraft-">custom(CustomFieldsDraft)</a></span> - Method in class io.sphere.sdk.categories.<a href="io/sphere/sdk/categories/CategoryDraftBuilder.html" title="class in io.sphere.sdk.categories">CategoryDraftBuilder</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/categories/queries/CategoryQueryModel.html#custom--">custom()</a></span> - Method in class io.sphere.sdk.categories.queries.<a href="io/sphere/sdk/categories/queries/CategoryQueryModel.html" title="class in io.sphere.sdk.categories.queries">CategoryQueryModel</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/categories/queries/CategoryQueryModel.html#custom--">custom()</a></span> - Method in interface io.sphere.sdk.categories.queries.<a href="io/sphere/sdk/categories/queries/CategoryQueryModel.html" title="interface in io.sphere.sdk.categories.queries">CategoryQueryModel</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/customers/CustomerDraftBuilder.html#custom-io.sphere.sdk.types.CustomFieldsDraft-">custom(CustomFieldsDraft)</a></span> - Method in class io.sphere.sdk.customers.<a href="io/sphere/sdk/customers/CustomerDraftBuilder.html" title="class in io.sphere.sdk.customers">CustomerDraftBuilder</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/customers/queries/CustomerQueryModel.html#custom--">custom()</a></span> - Method in class io.sphere.sdk.customers.queries.<a href="io/sphere/sdk/customers/queries/CustomerQueryModel.html" title="class in io.sphere.sdk.customers.queries">CustomerQueryModel</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/customers/queries/CustomerQueryModel.html#custom--">custom()</a></span> - Method in interface io.sphere.sdk.customers.queries.<a href="io/sphere/sdk/customers/queries/CustomerQueryModel.html" title="interface in io.sphere.sdk.customers.queries">CustomerQueryModel</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/payments/PaymentDraftBuilder.html#custom-io.sphere.sdk.types.CustomFieldsDraft-">custom(CustomFieldsDraft)</a></span> - Method in class io.sphere.sdk.payments.<a href="io/sphere/sdk/payments/PaymentDraftBuilder.html" title="class in io.sphere.sdk.payments">PaymentDraftBuilder</a></dt>
 <dd>&nbsp;</dd>
@@ -1932,9 +1938,11 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 </dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/CartDraftBuilder.html#customerEmail-java.lang.String-">customerEmail(String)</a></span> - Method in class io.sphere.sdk.carts.<a href="io/sphere/sdk/carts/CartDraftBuilder.html" title="class in io.sphere.sdk.carts">CartDraftBuilder</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/queries/CartLikeQueryModel.html#customerEmail--">customerEmail()</a></span> - Method in class io.sphere.sdk.carts.queries.<a href="io/sphere/sdk/carts/queries/CartLikeQueryModel.html" title="class in io.sphere.sdk.carts.queries">CartLikeQueryModel</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/queries/CartLikeQueryModel.html#customerEmail--">customerEmail()</a></span> - Method in interface io.sphere.sdk.carts.queries.<a href="io/sphere/sdk/carts/queries/CartLikeQueryModel.html" title="interface in io.sphere.sdk.carts.queries">CartLikeQueryModel</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/queries/CartQueryModel.html#customerEmail--">customerEmail()</a></span> - Method in class io.sphere.sdk.carts.queries.<a href="io/sphere/sdk/carts/queries/CartQueryModel.html" title="class in io.sphere.sdk.carts.queries">CartQueryModel</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/queries/CartLikeQueryModelImpl.html#customerEmail--">customerEmail()</a></span> - Method in class io.sphere.sdk.carts.queries.<a href="io/sphere/sdk/carts/queries/CartLikeQueryModelImpl.html" title="class in io.sphere.sdk.carts.queries">CartLikeQueryModelImpl</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/queries/CartQueryModel.html#customerEmail--">customerEmail()</a></span> - Method in interface io.sphere.sdk.carts.queries.<a href="io/sphere/sdk/carts/queries/CartQueryModel.html" title="interface in io.sphere.sdk.carts.queries">CartQueryModel</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/OrderImportDraftBuilder.html#customerEmail-java.lang.String-">customerEmail(String)</a></span> - Method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/OrderImportDraftBuilder.html" title="class in io.sphere.sdk.orders">OrderImportDraftBuilder</a></dt>
 <dd>&nbsp;</dd>
@@ -1946,9 +1954,11 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/expansion/CartLikeExpansionModel.html#customerGroup--">customerGroup()</a></span> - Method in class io.sphere.sdk.carts.expansion.<a href="io/sphere/sdk/carts/expansion/CartLikeExpansionModel.html" title="class in io.sphere.sdk.carts.expansion">CartLikeExpansionModel</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/queries/CartLikeQueryModel.html#customerGroup--">customerGroup()</a></span> - Method in class io.sphere.sdk.carts.queries.<a href="io/sphere/sdk/carts/queries/CartLikeQueryModel.html" title="class in io.sphere.sdk.carts.queries">CartLikeQueryModel</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/queries/CartLikeQueryModel.html#customerGroup--">customerGroup()</a></span> - Method in interface io.sphere.sdk.carts.queries.<a href="io/sphere/sdk/carts/queries/CartLikeQueryModel.html" title="interface in io.sphere.sdk.carts.queries">CartLikeQueryModel</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/queries/CartQueryModel.html#customerGroup--">customerGroup()</a></span> - Method in class io.sphere.sdk.carts.queries.<a href="io/sphere/sdk/carts/queries/CartQueryModel.html" title="class in io.sphere.sdk.carts.queries">CartQueryModel</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/queries/CartLikeQueryModelImpl.html#customerGroup--">customerGroup()</a></span> - Method in class io.sphere.sdk.carts.queries.<a href="io/sphere/sdk/carts/queries/CartLikeQueryModelImpl.html" title="class in io.sphere.sdk.carts.queries">CartLikeQueryModelImpl</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/queries/CartQueryModel.html#customerGroup--">customerGroup()</a></span> - Method in interface io.sphere.sdk.carts.queries.<a href="io/sphere/sdk/carts/queries/CartQueryModel.html" title="interface in io.sphere.sdk.carts.queries">CartQueryModel</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/customergroups/CustomerGroup.html" title="interface in io.sphere.sdk.customergroups"><span class="typeNameLink">CustomerGroup</span></a> - Interface in <a href="io/sphere/sdk/customergroups/package-summary.html">io.sphere.sdk.customergroups</a></dt>
 <dd>
@@ -1958,7 +1968,7 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/customers/expansion/CustomerExpansionModel.html#customerGroup--">customerGroup()</a></span> - Method in class io.sphere.sdk.customers.expansion.<a href="io/sphere/sdk/customers/expansion/CustomerExpansionModel.html" title="class in io.sphere.sdk.customers.expansion">CustomerExpansionModel</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/customers/queries/CustomerQueryModel.html#customerGroup--">customerGroup()</a></span> - Method in class io.sphere.sdk.customers.queries.<a href="io/sphere/sdk/customers/queries/CustomerQueryModel.html" title="class in io.sphere.sdk.customers.queries">CustomerQueryModel</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/customers/queries/CustomerQueryModel.html#customerGroup--">customerGroup()</a></span> - Method in interface io.sphere.sdk.customers.queries.<a href="io/sphere/sdk/customers/queries/CustomerQueryModel.html" title="interface in io.sphere.sdk.customers.queries">CustomerQueryModel</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/expansion/OrderExpansionModel.html#customerGroup--">customerGroup()</a></span> - Method in class io.sphere.sdk.orders.expansion.<a href="io/sphere/sdk/orders/expansion/OrderExpansionModel.html" title="class in io.sphere.sdk.orders.expansion">OrderExpansionModel</a></dt>
 <dd>&nbsp;</dd>
@@ -2004,7 +2014,7 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 </dd>
 <dt><a href="io/sphere/sdk/customergroups/queries/CustomerGroupQueryBuilder.html" title="class in io.sphere.sdk.customergroups.queries"><span class="typeNameLink">CustomerGroupQueryBuilder</span></a> - Class in <a href="io/sphere/sdk/customergroups/queries/package-summary.html">io.sphere.sdk.customergroups.queries</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="io/sphere/sdk/customergroups/queries/CustomerGroupQueryModel.html" title="class in io.sphere.sdk.customergroups.queries"><span class="typeNameLink">CustomerGroupQueryModel</span></a> - Class in <a href="io/sphere/sdk/customergroups/queries/package-summary.html">io.sphere.sdk.customergroups.queries</a></dt>
+<dt><a href="io/sphere/sdk/customergroups/queries/CustomerGroupQueryModel.html" title="interface in io.sphere.sdk.customergroups.queries"><span class="typeNameLink">CustomerGroupQueryModel</span></a> - Interface in <a href="io/sphere/sdk/customergroups/queries/package-summary.html">io.sphere.sdk.customergroups.queries</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/customergroups/commands/CustomerGroupUpdateCommand.html" title="interface in io.sphere.sdk.customergroups.commands"><span class="typeNameLink">CustomerGroupUpdateCommand</span></a> - Interface in <a href="io/sphere/sdk/customergroups/commands/package-summary.html">io.sphere.sdk.customergroups.commands</a></dt>
 <dd>
@@ -2012,9 +2022,11 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 </dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/CartDraftBuilder.html#customerId-java.lang.String-">customerId(String)</a></span> - Method in class io.sphere.sdk.carts.<a href="io/sphere/sdk/carts/CartDraftBuilder.html" title="class in io.sphere.sdk.carts">CartDraftBuilder</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/queries/CartLikeQueryModel.html#customerId--">customerId()</a></span> - Method in class io.sphere.sdk.carts.queries.<a href="io/sphere/sdk/carts/queries/CartLikeQueryModel.html" title="class in io.sphere.sdk.carts.queries">CartLikeQueryModel</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/queries/CartLikeQueryModel.html#customerId--">customerId()</a></span> - Method in interface io.sphere.sdk.carts.queries.<a href="io/sphere/sdk/carts/queries/CartLikeQueryModel.html" title="interface in io.sphere.sdk.carts.queries">CartLikeQueryModel</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/queries/CartQueryModel.html#customerId--">customerId()</a></span> - Method in class io.sphere.sdk.carts.queries.<a href="io/sphere/sdk/carts/queries/CartQueryModel.html" title="class in io.sphere.sdk.carts.queries">CartQueryModel</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/queries/CartLikeQueryModelImpl.html#customerId--">customerId()</a></span> - Method in class io.sphere.sdk.carts.queries.<a href="io/sphere/sdk/carts/queries/CartLikeQueryModelImpl.html" title="class in io.sphere.sdk.carts.queries">CartLikeQueryModelImpl</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/queries/CartQueryModel.html#customerId--">customerId()</a></span> - Method in interface io.sphere.sdk.carts.queries.<a href="io/sphere/sdk/carts/queries/CartQueryModel.html" title="interface in io.sphere.sdk.carts.queries">CartQueryModel</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/OrderImportDraftBuilder.html#customerId-java.lang.String-">customerId(String)</a></span> - Method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/OrderImportDraftBuilder.html" title="class in io.sphere.sdk.orders">OrderImportDraftBuilder</a></dt>
 <dd>&nbsp;</dd>
@@ -2040,7 +2052,7 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 </dd>
 <dt><a href="io/sphere/sdk/customers/queries/CustomerQueryBuilder.html" title="class in io.sphere.sdk.customers.queries"><span class="typeNameLink">CustomerQueryBuilder</span></a> - Class in <a href="io/sphere/sdk/customers/queries/package-summary.html">io.sphere.sdk.customers.queries</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="io/sphere/sdk/customers/queries/CustomerQueryModel.html" title="class in io.sphere.sdk.customers.queries"><span class="typeNameLink">CustomerQueryModel</span></a> - Class in <a href="io/sphere/sdk/customers/queries/package-summary.html">io.sphere.sdk.customers.queries</a></dt>
+<dt><a href="io/sphere/sdk/customers/queries/CustomerQueryModel.html" title="interface in io.sphere.sdk.customers.queries"><span class="typeNameLink">CustomerQueryModel</span></a> - Interface in <a href="io/sphere/sdk/customers/queries/package-summary.html">io.sphere.sdk.customers.queries</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/customers/commands/CustomerSignInCommand.html" title="class in io.sphere.sdk.customers.commands"><span class="typeNameLink">CustomerSignInCommand</span></a> - Class in <a href="io/sphere/sdk/customers/commands/package-summary.html">io.sphere.sdk.customers.commands</a></dt>
 <dd>
@@ -2086,9 +2098,11 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/CartDraftBuilder.html#customLineItems-java.util.List-">customLineItems(List&lt;CustomLineItemDraft&gt;)</a></span> - Method in class io.sphere.sdk.carts.<a href="io/sphere/sdk/carts/CartDraftBuilder.html" title="class in io.sphere.sdk.carts">CartDraftBuilder</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/queries/CartLikeQueryModel.html#customLineItems--">customLineItems()</a></span> - Method in class io.sphere.sdk.carts.queries.<a href="io/sphere/sdk/carts/queries/CartLikeQueryModel.html" title="class in io.sphere.sdk.carts.queries">CartLikeQueryModel</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/queries/CartLikeQueryModel.html#customLineItems--">customLineItems()</a></span> - Method in interface io.sphere.sdk.carts.queries.<a href="io/sphere/sdk/carts/queries/CartLikeQueryModel.html" title="interface in io.sphere.sdk.carts.queries">CartLikeQueryModel</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/queries/CartQueryModel.html#customLineItems--">customLineItems()</a></span> - Method in class io.sphere.sdk.carts.queries.<a href="io/sphere/sdk/carts/queries/CartQueryModel.html" title="class in io.sphere.sdk.carts.queries">CartQueryModel</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/queries/CartLikeQueryModelImpl.html#customLineItems--">customLineItems()</a></span> - Method in class io.sphere.sdk.carts.queries.<a href="io/sphere/sdk/carts/queries/CartLikeQueryModelImpl.html" title="class in io.sphere.sdk.carts.queries">CartLikeQueryModelImpl</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/queries/CartQueryModel.html#customLineItems--">customLineItems()</a></span> - Method in interface io.sphere.sdk.carts.queries.<a href="io/sphere/sdk/carts/queries/CartQueryModel.html" title="interface in io.sphere.sdk.carts.queries">CartQueryModel</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/OrderImportDraftBuilder.html#customLineItems-java.util.List-">customLineItems(List&lt;CustomLineItemImportDraft&gt;)</a></span> - Method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/OrderImportDraftBuilder.html" title="class in io.sphere.sdk.orders">OrderImportDraftBuilder</a></dt>
 <dd>&nbsp;</dd>
@@ -2142,9 +2156,9 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 </dd>
 <dt><a href="io/sphere/sdk/customobjects/queries/CustomObjectQueryBuilder.html" title="class in io.sphere.sdk.customobjects.queries"><span class="typeNameLink">CustomObjectQueryBuilder</span></a>&lt;<a href="io/sphere/sdk/customobjects/queries/CustomObjectQueryBuilder.html" title="type parameter in CustomObjectQueryBuilder">T</a>&gt; - Class in <a href="io/sphere/sdk/customobjects/queries/package-summary.html">io.sphere.sdk.customobjects.queries</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="io/sphere/sdk/customobjects/queries/CustomObjectQueryModel.html" title="class in io.sphere.sdk.customobjects.queries"><span class="typeNameLink">CustomObjectQueryModel</span></a>&lt;<a href="io/sphere/sdk/customobjects/queries/CustomObjectQueryModel.html" title="type parameter in CustomObjectQueryModel">T</a> extends <a href="io/sphere/sdk/customobjects/CustomObject.html" title="interface in io.sphere.sdk.customobjects">CustomObject</a>&lt;?&gt;&gt; - Class in <a href="io/sphere/sdk/customobjects/queries/package-summary.html">io.sphere.sdk.customobjects.queries</a></dt>
+<dt><a href="io/sphere/sdk/customobjects/queries/CustomObjectQueryModel.html" title="interface in io.sphere.sdk.customobjects.queries"><span class="typeNameLink">CustomObjectQueryModel</span></a>&lt;<a href="io/sphere/sdk/customobjects/queries/CustomObjectQueryModel.html" title="type parameter in CustomObjectQueryModel">T</a> extends <a href="io/sphere/sdk/customobjects/CustomObject.html" title="interface in io.sphere.sdk.customobjects">CustomObject</a>&lt;?&gt;&gt; - Interface in <a href="io/sphere/sdk/customobjects/queries/package-summary.html">io.sphere.sdk.customobjects.queries</a></dt>
 <dd>
-<div class="block">Metamodel to explore for which fields can be queried in a CustomObject.</div>
+<div class="block">Meta model to explore for which fields can be queried in a CustomObject.</div>
 </dd>
 <dt><a href="io/sphere/sdk/customobjects/commands/CustomObjectUpsertCommand.html" title="interface in io.sphere.sdk.customobjects.commands"><span class="typeNameLink">CustomObjectUpsertCommand</span></a>&lt;<a href="io/sphere/sdk/customobjects/commands/CustomObjectUpsertCommand.html" title="type parameter in CustomObjectUpsertCommand">T</a>&gt; - Interface in <a href="io/sphere/sdk/customobjects/commands/package-summary.html">io.sphere.sdk.customobjects.commands</a></dt>
 <dd>
@@ -2194,13 +2208,13 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/customers/CustomerDraftBuilder.html#defaultBillingAddress-java.lang.Integer-">defaultBillingAddress(Integer)</a></span> - Method in class io.sphere.sdk.customers.<a href="io/sphere/sdk/customers/CustomerDraftBuilder.html" title="class in io.sphere.sdk.customers">CustomerDraftBuilder</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/customers/queries/CustomerQueryModel.html#defaultBillingAddressId--">defaultBillingAddressId()</a></span> - Method in class io.sphere.sdk.customers.queries.<a href="io/sphere/sdk/customers/queries/CustomerQueryModel.html" title="class in io.sphere.sdk.customers.queries">CustomerQueryModel</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/customers/queries/CustomerQueryModel.html#defaultBillingAddressId--">defaultBillingAddressId()</a></span> - Method in interface io.sphere.sdk.customers.queries.<a href="io/sphere/sdk/customers/queries/CustomerQueryModel.html" title="interface in io.sphere.sdk.customers.queries">CustomerQueryModel</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/models/DefaultCurrencyUnits.html" title="class in io.sphere.sdk.models"><span class="typeNameLink">DefaultCurrencyUnits</span></a> - Class in <a href="io/sphere/sdk/models/package-summary.html">io.sphere.sdk.models</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/customers/CustomerDraftBuilder.html#defaultShippingAddress-java.lang.Integer-">defaultShippingAddress(Integer)</a></span> - Method in class io.sphere.sdk.customers.<a href="io/sphere/sdk/customers/CustomerDraftBuilder.html" title="class in io.sphere.sdk.customers">CustomerDraftBuilder</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/customers/queries/CustomerQueryModel.html#defaultShippingAddressId--">defaultShippingAddressId()</a></span> - Method in class io.sphere.sdk.customers.queries.<a href="io/sphere/sdk/customers/queries/CustomerQueryModel.html" title="class in io.sphere.sdk.customers.queries">CustomerQueryModel</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/customers/queries/CustomerQueryModel.html#defaultShippingAddressId--">defaultShippingAddressId()</a></span> - Method in interface io.sphere.sdk.customers.queries.<a href="io/sphere/sdk/customers/queries/CustomerQueryModel.html" title="interface in io.sphere.sdk.customers.queries">CustomerQueryModel</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/CartState.html#defaultValue--">defaultValue()</a></span> - Static method in enum io.sphere.sdk.carts.<a href="io/sphere/sdk/carts/CartState.html" title="enum in io.sphere.sdk.carts">CartState</a></dt>
 <dd>&nbsp;</dd>
@@ -2352,9 +2366,11 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/expansion/CartLikeExpansionModel.html#discountCodes-int-">discountCodes(int)</a></span> - Method in class io.sphere.sdk.carts.expansion.<a href="io/sphere/sdk/carts/expansion/CartLikeExpansionModel.html" title="class in io.sphere.sdk.carts.expansion">CartLikeExpansionModel</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/queries/CartLikeQueryModel.html#discountCodes--">discountCodes()</a></span> - Method in class io.sphere.sdk.carts.queries.<a href="io/sphere/sdk/carts/queries/CartLikeQueryModel.html" title="class in io.sphere.sdk.carts.queries">CartLikeQueryModel</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/queries/CartLikeQueryModel.html#discountCodes--">discountCodes()</a></span> - Method in interface io.sphere.sdk.carts.queries.<a href="io/sphere/sdk/carts/queries/CartLikeQueryModel.html" title="interface in io.sphere.sdk.carts.queries">CartLikeQueryModel</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/queries/CartQueryModel.html#discountCodes--">discountCodes()</a></span> - Method in class io.sphere.sdk.carts.queries.<a href="io/sphere/sdk/carts/queries/CartQueryModel.html" title="class in io.sphere.sdk.carts.queries">CartQueryModel</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/queries/CartLikeQueryModelImpl.html#discountCodes--">discountCodes()</a></span> - Method in class io.sphere.sdk.carts.queries.<a href="io/sphere/sdk/carts/queries/CartLikeQueryModelImpl.html" title="class in io.sphere.sdk.carts.queries">CartLikeQueryModelImpl</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/queries/CartQueryModel.html#discountCodes--">discountCodes()</a></span> - Method in interface io.sphere.sdk.carts.queries.<a href="io/sphere/sdk/carts/queries/CartQueryModel.html" title="interface in io.sphere.sdk.carts.queries">CartQueryModel</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/expansion/OrderExpansionModel.html#discountCodes--">discountCodes()</a></span> - Method in class io.sphere.sdk.orders.expansion.<a href="io/sphere/sdk/orders/expansion/OrderExpansionModel.html" title="class in io.sphere.sdk.orders.expansion">OrderExpansionModel</a></dt>
 <dd>&nbsp;</dd>
@@ -2448,7 +2464,7 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dl>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/customers/CustomerDraftBuilder.html#email-java.lang.String-">email(String)</a></span> - Method in class io.sphere.sdk.customers.<a href="io/sphere/sdk/customers/CustomerDraftBuilder.html" title="class in io.sphere.sdk.customers">CustomerDraftBuilder</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/customers/queries/CustomerQueryModel.html#email--">email()</a></span> - Method in class io.sphere.sdk.customers.queries.<a href="io/sphere/sdk/customers/queries/CustomerQueryModel.html" title="class in io.sphere.sdk.customers.queries">CustomerQueryModel</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/customers/queries/CustomerQueryModel.html#email--">email()</a></span> - Method in interface io.sphere.sdk.customers.queries.<a href="io/sphere/sdk/customers/queries/CustomerQueryModel.html" title="interface in io.sphere.sdk.customers.queries">CustomerQueryModel</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/AddressBuilder.html#email-java.lang.String-">email(String)</a></span> - Method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/AddressBuilder.html" title="class in io.sphere.sdk.models">AddressBuilder</a></dt>
 <dd>&nbsp;</dd>
@@ -2794,11 +2810,11 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 </dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/categories/CategoryDraftBuilder.html#externalId-java.lang.String-">externalId(String)</a></span> - Method in class io.sphere.sdk.categories.<a href="io/sphere/sdk/categories/CategoryDraftBuilder.html" title="class in io.sphere.sdk.categories">CategoryDraftBuilder</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/categories/queries/CategoryQueryModel.html#externalId--">externalId()</a></span> - Method in class io.sphere.sdk.categories.queries.<a href="io/sphere/sdk/categories/queries/CategoryQueryModel.html" title="class in io.sphere.sdk.categories.queries">CategoryQueryModel</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/categories/queries/CategoryQueryModel.html#externalId--">externalId()</a></span> - Method in interface io.sphere.sdk.categories.queries.<a href="io/sphere/sdk/categories/queries/CategoryQueryModel.html" title="interface in io.sphere.sdk.categories.queries">CategoryQueryModel</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/customers/CustomerDraftBuilder.html#externalId-java.lang.String-">externalId(String)</a></span> - Method in class io.sphere.sdk.customers.<a href="io/sphere/sdk/customers/CustomerDraftBuilder.html" title="class in io.sphere.sdk.customers">CustomerDraftBuilder</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/customers/queries/CustomerQueryModel.html#externalId--">externalId()</a></span> - Method in class io.sphere.sdk.customers.queries.<a href="io/sphere/sdk/customers/queries/CustomerQueryModel.html" title="class in io.sphere.sdk.customers.queries">CustomerQueryModel</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/customers/queries/CustomerQueryModel.html#externalId--">externalId()</a></span> - Method in interface io.sphere.sdk.customers.queries.<a href="io/sphere/sdk/customers/queries/CustomerQueryModel.html" title="interface in io.sphere.sdk.customers.queries">CustomerQueryModel</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/queries/SyncInfoQueryModel.html#externalId--">externalId()</a></span> - Method in interface io.sphere.sdk.orders.queries.<a href="io/sphere/sdk/orders/queries/SyncInfoQueryModel.html" title="interface in io.sphere.sdk.orders.queries">SyncInfoQueryModel</a></dt>
 <dd>&nbsp;</dd>
@@ -3106,7 +3122,7 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 </dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/customers/CustomerDraftBuilder.html#firstName-java.lang.String-">firstName(String)</a></span> - Method in class io.sphere.sdk.customers.<a href="io/sphere/sdk/customers/CustomerDraftBuilder.html" title="class in io.sphere.sdk.customers">CustomerDraftBuilder</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/customers/queries/CustomerQueryModel.html#firstName--">firstName()</a></span> - Method in class io.sphere.sdk.customers.queries.<a href="io/sphere/sdk/customers/queries/CustomerQueryModel.html" title="class in io.sphere.sdk.customers.queries">CustomerQueryModel</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/customers/queries/CustomerQueryModel.html#firstName--">firstName()</a></span> - Method in interface io.sphere.sdk.customers.queries.<a href="io/sphere/sdk/customers/queries/CustomerQueryModel.html" title="interface in io.sphere.sdk.customers.queries">CustomerQueryModel</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/AddressBuilder.html#firstName-java.lang.String-">firstName(String)</a></span> - Method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/AddressBuilder.html" title="class in io.sphere.sdk.models">AddressBuilder</a></dt>
 <dd>&nbsp;</dd>
@@ -6628,9 +6644,9 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dd>
 <div class="block">Provides types to retrieve the state of  zones.</div>
 </dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/categories/queries/CategoryQueryModel.html#is-io.sphere.sdk.models.Identifiable-">is(Identifiable&lt;Category&gt;)</a></span> - Method in class io.sphere.sdk.categories.queries.<a href="io/sphere/sdk/categories/queries/CategoryQueryModel.html" title="class in io.sphere.sdk.categories.queries">CategoryQueryModel</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/categories/queries/CategoryQueryModel.html#is-io.sphere.sdk.models.Identifiable-">is(Identifiable&lt;Category&gt;)</a></span> - Method in interface io.sphere.sdk.categories.queries.<a href="io/sphere/sdk/categories/queries/CategoryQueryModel.html" title="interface in io.sphere.sdk.categories.queries">CategoryQueryModel</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/customers/queries/CustomerQueryModel.html#is-io.sphere.sdk.models.Identifiable-">is(Identifiable&lt;Customer&gt;)</a></span> - Method in class io.sphere.sdk.customers.queries.<a href="io/sphere/sdk/customers/queries/CustomerQueryModel.html" title="class in io.sphere.sdk.customers.queries">CustomerQueryModel</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/customers/queries/CustomerQueryModel.html#is-io.sphere.sdk.models.Identifiable-">is(Identifiable&lt;Customer&gt;)</a></span> - Method in interface io.sphere.sdk.customers.queries.<a href="io/sphere/sdk/customers/queries/CustomerQueryModel.html" title="interface in io.sphere.sdk.customers.queries">CustomerQueryModel</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/messages/queries/MessageTypeQueryModel.html#is-io.sphere.sdk.messages.MessageDerivateHint-">is(MessageDerivateHint&lt;?&gt;)</a></span> - Method in interface io.sphere.sdk.messages.queries.<a href="io/sphere/sdk/messages/queries/MessageTypeQueryModel.html" title="interface in io.sphere.sdk.messages.queries">MessageTypeQueryModel</a></dt>
 <dd>&nbsp;</dd>
@@ -6714,7 +6730,7 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/customers/CustomerDraftBuilder.html#isEmailVerified-java.lang.Boolean-">isEmailVerified(Boolean)</a></span> - Method in class io.sphere.sdk.customers.<a href="io/sphere/sdk/customers/CustomerDraftBuilder.html" title="class in io.sphere.sdk.customers">CustomerDraftBuilder</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/customers/queries/CustomerQueryModel.html#isEmailVerified--">isEmailVerified()</a></span> - Method in class io.sphere.sdk.customers.queries.<a href="io/sphere/sdk/customers/queries/CustomerQueryModel.html" title="class in io.sphere.sdk.customers.queries">CustomerQueryModel</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/customers/queries/CustomerQueryModel.html#isEmailVerified--">isEmailVerified()</a></span> - Method in interface io.sphere.sdk.customers.queries.<a href="io/sphere/sdk/customers/queries/CustomerQueryModel.html" title="interface in io.sphere.sdk.customers.queries">CustomerQueryModel</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/queries/CustomLineItemCollectionQueryModel.html#isEmpty--">isEmpty()</a></span> - Method in interface io.sphere.sdk.carts.queries.<a href="io/sphere/sdk/carts/queries/CustomLineItemCollectionQueryModel.html" title="interface in io.sphere.sdk.carts.queries">CustomLineItemCollectionQueryModel</a></dt>
 <dd>&nbsp;</dd>
@@ -7180,9 +7196,9 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 </a>
 <h2 class="title">K</h2>
 <dl>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/channels/queries/ChannelQueryModel.html#key--">key()</a></span> - Method in class io.sphere.sdk.channels.queries.<a href="io/sphere/sdk/channels/queries/ChannelQueryModel.html" title="class in io.sphere.sdk.channels.queries">ChannelQueryModel</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/channels/queries/ChannelQueryModel.html#key--">key()</a></span> - Method in interface io.sphere.sdk.channels.queries.<a href="io/sphere/sdk/channels/queries/ChannelQueryModel.html" title="interface in io.sphere.sdk.channels.queries">ChannelQueryModel</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/customobjects/queries/CustomObjectQueryModel.html#key--">key()</a></span> - Method in class io.sphere.sdk.customobjects.queries.<a href="io/sphere/sdk/customobjects/queries/CustomObjectQueryModel.html" title="class in io.sphere.sdk.customobjects.queries">CustomObjectQueryModel</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/customobjects/queries/CustomObjectQueryModel.html#key--">key()</a></span> - Method in interface io.sphere.sdk.customobjects.queries.<a href="io/sphere/sdk/customobjects/queries/CustomObjectQueryModel.html" title="interface in io.sphere.sdk.customobjects.queries">CustomObjectQueryModel</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/producttypes/queries/ProductTypeQueryModel.html#key--">key()</a></span> - Method in class io.sphere.sdk.producttypes.queries.<a href="io/sphere/sdk/producttypes/queries/ProductTypeQueryModel.html" title="class in io.sphere.sdk.producttypes.queries">ProductTypeQueryModel</a></dt>
 <dd>&nbsp;</dd>
@@ -7264,7 +7280,7 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/customers/CustomerDraftBuilder.html#lastName-java.lang.String-">lastName(String)</a></span> - Method in class io.sphere.sdk.customers.<a href="io/sphere/sdk/customers/CustomerDraftBuilder.html" title="class in io.sphere.sdk.customers">CustomerDraftBuilder</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/customers/queries/CustomerQueryModel.html#lastName--">lastName()</a></span> - Method in class io.sphere.sdk.customers.queries.<a href="io/sphere/sdk/customers/queries/CustomerQueryModel.html" title="class in io.sphere.sdk.customers.queries">CustomerQueryModel</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/customers/queries/CustomerQueryModel.html#lastName--">lastName()</a></span> - Method in interface io.sphere.sdk.customers.queries.<a href="io/sphere/sdk/customers/queries/CustomerQueryModel.html" title="interface in io.sphere.sdk.customers.queries">CustomerQueryModel</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/AddressBuilder.html#lastName-java.lang.String-">lastName(String)</a></span> - Method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/AddressBuilder.html" title="class in io.sphere.sdk.models">AddressBuilder</a></dt>
 <dd>&nbsp;</dd>
@@ -7434,9 +7450,11 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/expansion/CartLikeExpansionModel.html#lineItems-int-">lineItems(int)</a></span> - Method in class io.sphere.sdk.carts.expansion.<a href="io/sphere/sdk/carts/expansion/CartLikeExpansionModel.html" title="class in io.sphere.sdk.carts.expansion">CartLikeExpansionModel</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/queries/CartLikeQueryModel.html#lineItems--">lineItems()</a></span> - Method in class io.sphere.sdk.carts.queries.<a href="io/sphere/sdk/carts/queries/CartLikeQueryModel.html" title="class in io.sphere.sdk.carts.queries">CartLikeQueryModel</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/queries/CartLikeQueryModel.html#lineItems--">lineItems()</a></span> - Method in interface io.sphere.sdk.carts.queries.<a href="io/sphere/sdk/carts/queries/CartLikeQueryModel.html" title="interface in io.sphere.sdk.carts.queries">CartLikeQueryModel</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/queries/CartQueryModel.html#lineItems--">lineItems()</a></span> - Method in class io.sphere.sdk.carts.queries.<a href="io/sphere/sdk/carts/queries/CartQueryModel.html" title="class in io.sphere.sdk.carts.queries">CartQueryModel</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/queries/CartLikeQueryModelImpl.html#lineItems--">lineItems()</a></span> - Method in class io.sphere.sdk.carts.queries.<a href="io/sphere/sdk/carts/queries/CartLikeQueryModelImpl.html" title="class in io.sphere.sdk.carts.queries">CartLikeQueryModelImpl</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/queries/CartQueryModel.html#lineItems--">lineItems()</a></span> - Method in interface io.sphere.sdk.carts.queries.<a href="io/sphere/sdk/carts/queries/CartQueryModel.html" title="interface in io.sphere.sdk.carts.queries">CartQueryModel</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/expansion/OrderExpansionModel.html#lineItems--">lineItems()</a></span> - Method in class io.sphere.sdk.orders.expansion.<a href="io/sphere/sdk/orders/expansion/OrderExpansionModel.html" title="class in io.sphere.sdk.orders.expansion">OrderExpansionModel</a></dt>
 <dd>&nbsp;</dd>
@@ -7955,11 +7973,11 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/queries/LineItemLikeCollectionQueryModel.html#name--">name()</a></span> - Method in interface io.sphere.sdk.carts.queries.<a href="io/sphere/sdk/carts/queries/LineItemLikeCollectionQueryModel.html" title="interface in io.sphere.sdk.carts.queries">LineItemLikeCollectionQueryModel</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/categories/queries/CategoryQueryModel.html#name--">name()</a></span> - Method in class io.sphere.sdk.categories.queries.<a href="io/sphere/sdk/categories/queries/CategoryQueryModel.html" title="class in io.sphere.sdk.categories.queries">CategoryQueryModel</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/categories/queries/CategoryQueryModel.html#name--">name()</a></span> - Method in interface io.sphere.sdk.categories.queries.<a href="io/sphere/sdk/categories/queries/CategoryQueryModel.html" title="interface in io.sphere.sdk.categories.queries">CategoryQueryModel</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/channels/ChannelDraftBuilder.html#name-io.sphere.sdk.models.LocalizedString-">name(LocalizedString)</a></span> - Method in class io.sphere.sdk.channels.<a href="io/sphere/sdk/channels/ChannelDraftBuilder.html" title="class in io.sphere.sdk.channels">ChannelDraftBuilder</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/customergroups/queries/CustomerGroupQueryModel.html#name--">name()</a></span> - Method in class io.sphere.sdk.customergroups.queries.<a href="io/sphere/sdk/customergroups/queries/CustomerGroupQueryModel.html" title="class in io.sphere.sdk.customergroups.queries">CustomerGroupQueryModel</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/customergroups/queries/CustomerGroupQueryModel.html#name--">name()</a></span> - Method in interface io.sphere.sdk.customergroups.queries.<a href="io/sphere/sdk/customergroups/queries/CustomerGroupQueryModel.html" title="interface in io.sphere.sdk.customergroups.queries">CustomerGroupQueryModel</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/discountcodes/DiscountCodeDraftBuilder.html#name-io.sphere.sdk.models.LocalizedString-">name(LocalizedString)</a></span> - Method in class io.sphere.sdk.discountcodes.<a href="io/sphere/sdk/discountcodes/DiscountCodeDraftBuilder.html" title="class in io.sphere.sdk.discountcodes">DiscountCodeDraftBuilder</a></dt>
 <dd>&nbsp;</dd>
@@ -8042,6 +8060,8 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <div class="block">Internal method to normalize Strings for queries.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/QueryModelImpl.html#normalizeIterable-java.lang.Iterable-">normalizeIterable(Iterable&lt;String&gt;)</a></span> - Method in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/QueryModelImpl.html" title="class in io.sphere.sdk.queries">QueryModelImpl</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/ResourceQueryModel.html#not-io.sphere.sdk.queries.QueryPredicate-">not(QueryPredicate&lt;T&gt;)</a></span> - Method in interface io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/ResourceQueryModel.html" title="interface in io.sphere.sdk.queries">ResourceQueryModel</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/ResourceQueryModelImpl.html#not-io.sphere.sdk.queries.QueryPredicate-">not(QueryPredicate&lt;T&gt;)</a></span> - Method in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/ResourceQueryModelImpl.html" title="class in io.sphere.sdk.queries">ResourceQueryModelImpl</a></dt>
 <dd>&nbsp;</dd>
@@ -8229,7 +8249,7 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/queries/CartQueryBuilder.html#of--">of()</a></span> - Static method in class io.sphere.sdk.carts.queries.<a href="io/sphere/sdk/carts/queries/CartQueryBuilder.html" title="class in io.sphere.sdk.carts.queries">CartQueryBuilder</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/queries/CartQueryModel.html#of--">of()</a></span> - Static method in class io.sphere.sdk.carts.queries.<a href="io/sphere/sdk/carts/queries/CartQueryModel.html" title="class in io.sphere.sdk.carts.queries">CartQueryModel</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/queries/CartQueryModel.html#of--">of()</a></span> - Static method in interface io.sphere.sdk.carts.queries.<a href="io/sphere/sdk/carts/queries/CartQueryModel.html" title="interface in io.sphere.sdk.carts.queries">CartQueryModel</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/TaxedPrice.html#of-javax.money.MonetaryAmount-javax.money.MonetaryAmount-java.util.List-">of(MonetaryAmount, MonetaryAmount, List&lt;TaxPortion&gt;)</a></span> - Static method in class io.sphere.sdk.carts.<a href="io/sphere/sdk/carts/TaxedPrice.html" title="class in io.sphere.sdk.carts">TaxedPrice</a></dt>
 <dd>&nbsp;</dd>
@@ -8269,7 +8289,7 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/categories/queries/CategoryQueryBuilder.html#of--">of()</a></span> - Static method in class io.sphere.sdk.categories.queries.<a href="io/sphere/sdk/categories/queries/CategoryQueryBuilder.html" title="class in io.sphere.sdk.categories.queries">CategoryQueryBuilder</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/categories/queries/CategoryQueryModel.html#of--">of()</a></span> - Static method in class io.sphere.sdk.categories.queries.<a href="io/sphere/sdk/categories/queries/CategoryQueryModel.html" title="class in io.sphere.sdk.categories.queries">CategoryQueryModel</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/categories/queries/CategoryQueryModel.html#of--">of()</a></span> - Static method in interface io.sphere.sdk.categories.queries.<a href="io/sphere/sdk/categories/queries/CategoryQueryModel.html" title="interface in io.sphere.sdk.categories.queries">CategoryQueryModel</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/channels/ChannelDraft.html#of-java.lang.String-">of(String)</a></span> - Static method in class io.sphere.sdk.channels.<a href="io/sphere/sdk/channels/ChannelDraft.html" title="class in io.sphere.sdk.channels">ChannelDraft</a></dt>
 <dd>&nbsp;</dd>
@@ -8307,7 +8327,7 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/channels/queries/ChannelQueryBuilder.html#of--">of()</a></span> - Static method in class io.sphere.sdk.channels.queries.<a href="io/sphere/sdk/channels/queries/ChannelQueryBuilder.html" title="class in io.sphere.sdk.channels.queries">ChannelQueryBuilder</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/channels/queries/ChannelQueryModel.html#of--">of()</a></span> - Static method in class io.sphere.sdk.channels.queries.<a href="io/sphere/sdk/channels/queries/ChannelQueryModel.html" title="class in io.sphere.sdk.channels.queries">ChannelQueryModel</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/channels/queries/ChannelQueryModel.html#of--">of()</a></span> - Static method in interface io.sphere.sdk.channels.queries.<a href="io/sphere/sdk/channels/queries/ChannelQueryModel.html" title="interface in io.sphere.sdk.channels.queries">ChannelQueryModel</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/client/BlockingSphereClient.html#of-io.sphere.sdk.client.SphereClient-long-java.util.concurrent.TimeUnit-">of(SphereClient, long, TimeUnit)</a></span> - Static method in interface io.sphere.sdk.client.<a href="io/sphere/sdk/client/BlockingSphereClient.html" title="interface in io.sphere.sdk.client">BlockingSphereClient</a></dt>
 <dd>
@@ -8386,6 +8406,8 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/customergroups/queries/CustomerGroupQuery.html#of--">of()</a></span> - Static method in interface io.sphere.sdk.customergroups.queries.<a href="io/sphere/sdk/customergroups/queries/CustomerGroupQuery.html" title="interface in io.sphere.sdk.customergroups.queries">CustomerGroupQuery</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/customergroups/queries/CustomerGroupQueryBuilder.html#of--">of()</a></span> - Static method in class io.sphere.sdk.customergroups.queries.<a href="io/sphere/sdk/customergroups/queries/CustomerGroupQueryBuilder.html" title="class in io.sphere.sdk.customergroups.queries">CustomerGroupQueryBuilder</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/customergroups/queries/CustomerGroupQueryModel.html#of--">of()</a></span> - Static method in interface io.sphere.sdk.customergroups.queries.<a href="io/sphere/sdk/customergroups/queries/CustomerGroupQueryModel.html" title="interface in io.sphere.sdk.customergroups.queries">CustomerGroupQueryModel</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/customers/commands/CustomerChangePasswordCommand.html#of-io.sphere.sdk.models.Versioned-java.lang.String-java.lang.String-">of(Versioned&lt;Customer&gt;, String, String)</a></span> - Static method in class io.sphere.sdk.customers.commands.<a href="io/sphere/sdk/customers/commands/CustomerChangePasswordCommand.html" title="class in io.sphere.sdk.customers.commands">CustomerChangePasswordCommand</a></dt>
 <dd>&nbsp;</dd>
@@ -8497,7 +8519,7 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/customers/queries/CustomerQueryBuilder.html#of--">of()</a></span> - Static method in class io.sphere.sdk.customers.queries.<a href="io/sphere/sdk/customers/queries/CustomerQueryBuilder.html" title="class in io.sphere.sdk.customers.queries">CustomerQueryBuilder</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/customers/queries/CustomerQueryModel.html#of--">of()</a></span> - Static method in class io.sphere.sdk.customers.queries.<a href="io/sphere/sdk/customers/queries/CustomerQueryModel.html" title="class in io.sphere.sdk.customers.queries">CustomerQueryModel</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/customers/queries/CustomerQueryModel.html#of--">of()</a></span> - Static method in interface io.sphere.sdk.customers.queries.<a href="io/sphere/sdk/customers/queries/CustomerQueryModel.html" title="interface in io.sphere.sdk.customers.queries">CustomerQueryModel</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/customobjects/commands/CustomObjectDeleteCommand.html#of-io.sphere.sdk.customobjects.CustomObject-com.fasterxml.jackson.core.type.TypeReference-">of(CustomObject&lt;T&gt;, TypeReference&lt;T&gt;)</a></span> - Static method in interface io.sphere.sdk.customobjects.commands.<a href="io/sphere/sdk/customobjects/commands/CustomObjectDeleteCommand.html" title="interface in io.sphere.sdk.customobjects.commands">CustomObjectDeleteCommand</a></dt>
 <dd>
@@ -8575,7 +8597,7 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <div class="block"><span class="deprecationComment">use <a href="io/sphere/sdk/customobjects/queries/CustomObjectQuery.html#ofJsonNode--"><code>CustomObjectQuery.ofJsonNode()</code></a> instead</span></div>
 </div>
 </dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/customobjects/queries/CustomObjectQueryModel.html#of--">of()</a></span> - Static method in class io.sphere.sdk.customobjects.queries.<a href="io/sphere/sdk/customobjects/queries/CustomObjectQueryModel.html" title="class in io.sphere.sdk.customobjects.queries">CustomObjectQueryModel</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/customobjects/queries/CustomObjectQueryModel.html#of--">of()</a></span> - Static method in interface io.sphere.sdk.customobjects.queries.<a href="io/sphere/sdk/customobjects/queries/CustomObjectQueryModel.html" title="interface in io.sphere.sdk.customobjects.queries">CustomObjectQueryModel</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/discountcodes/commands/DiscountCodeCreateCommand.html#of-io.sphere.sdk.discountcodes.DiscountCodeDraft-">of(DiscountCodeDraft)</a></span> - Static method in interface io.sphere.sdk.discountcodes.commands.<a href="io/sphere/sdk/discountcodes/commands/DiscountCodeCreateCommand.html" title="interface in io.sphere.sdk.discountcodes.commands">DiscountCodeCreateCommand</a></dt>
 <dd>&nbsp;</dd>
@@ -10758,7 +10780,7 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/categories/expansion/CategoryExpansionModel.html#parent--">parent()</a></span> - Method in class io.sphere.sdk.categories.expansion.<a href="io/sphere/sdk/categories/expansion/CategoryExpansionModel.html" title="class in io.sphere.sdk.categories.expansion">CategoryExpansionModel</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/categories/queries/CategoryQueryModel.html#parent--">parent()</a></span> - Method in class io.sphere.sdk.categories.queries.<a href="io/sphere/sdk/categories/queries/CategoryQueryModel.html" title="class in io.sphere.sdk.categories.queries">CategoryQueryModel</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/categories/queries/CategoryQueryModel.html#parent--">parent()</a></span> - Method in interface io.sphere.sdk.categories.queries.<a href="io/sphere/sdk/categories/queries/CategoryQueryModel.html" title="interface in io.sphere.sdk.categories.queries">CategoryQueryModel</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/json/SphereJsonUtils.html#parse-java.lang.String-">parse(String)</a></span> - Static method in class io.sphere.sdk.json.<a href="io/sphere/sdk/json/SphereJsonUtils.html" title="class in io.sphere.sdk.json">SphereJsonUtils</a></dt>
 <dd>
@@ -10822,7 +10844,11 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/carts/PaymentInfo.html" title="class in io.sphere.sdk.carts"><span class="typeNameLink">PaymentInfo</span></a> - Class in <a href="io/sphere/sdk/carts/package-summary.html">io.sphere.sdk.carts</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/queries/CartLikeQueryModel.html#paymentInfo--">paymentInfo()</a></span> - Method in class io.sphere.sdk.carts.queries.<a href="io/sphere/sdk/carts/queries/CartLikeQueryModel.html" title="class in io.sphere.sdk.carts.queries">CartLikeQueryModel</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/queries/CartLikeQueryModel.html#paymentInfo--">paymentInfo()</a></span> - Method in interface io.sphere.sdk.carts.queries.<a href="io/sphere/sdk/carts/queries/CartLikeQueryModel.html" title="interface in io.sphere.sdk.carts.queries">CartLikeQueryModel</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/queries/CartLikeQueryModelImpl.html#paymentInfo--">paymentInfo()</a></span> - Method in class io.sphere.sdk.carts.queries.<a href="io/sphere/sdk/carts/queries/CartLikeQueryModelImpl.html" title="class in io.sphere.sdk.carts.queries">CartLikeQueryModelImpl</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/queries/CartQueryModel.html#paymentInfo--">paymentInfo()</a></span> - Method in interface io.sphere.sdk.carts.queries.<a href="io/sphere/sdk/carts/queries/CartQueryModel.html" title="interface in io.sphere.sdk.carts.queries">CartQueryModel</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/expansion/OrderExpansionModel.html#paymentInfo--">paymentInfo()</a></span> - Method in class io.sphere.sdk.orders.expansion.<a href="io/sphere/sdk/orders/expansion/OrderExpansionModel.html" title="class in io.sphere.sdk.orders.expansion">OrderExpansionModel</a></dt>
 <dd>&nbsp;</dd>
@@ -12987,7 +13013,7 @@ CompletionStage&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execu
 <dd>
 <div class="block">This message is the result of the <a href="io/sphere/sdk/reviews/commands/updateactions/SetRating.html" title="class in io.sphere.sdk.reviews.commands.updateactions"><code>SetRating</code></a> update action.</div>
 </dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/channels/queries/ChannelQueryModel.html#reviewRatingStatistics--">reviewRatingStatistics()</a></span> - Method in class io.sphere.sdk.channels.queries.<a href="io/sphere/sdk/channels/queries/ChannelQueryModel.html" title="class in io.sphere.sdk.channels.queries">ChannelQueryModel</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/channels/queries/ChannelQueryModel.html#reviewRatingStatistics--">reviewRatingStatistics()</a></span> - Method in interface io.sphere.sdk.channels.queries.<a href="io/sphere/sdk/channels/queries/ChannelQueryModel.html" title="interface in io.sphere.sdk.channels.queries">ChannelQueryModel</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/queries/ProductProjectionQueryModel.html#reviewRatingStatistics--">reviewRatingStatistics()</a></span> - Method in class io.sphere.sdk.products.queries.<a href="io/sphere/sdk/products/queries/ProductProjectionQueryModel.html" title="class in io.sphere.sdk.products.queries">ProductProjectionQueryModel</a></dt>
 <dd>&nbsp;</dd>
@@ -13600,9 +13626,11 @@ CompletionStage&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execu
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/CartDraftBuilder.html#shippingAddress-io.sphere.sdk.models.Address-">shippingAddress(Address)</a></span> - Method in class io.sphere.sdk.carts.<a href="io/sphere/sdk/carts/CartDraftBuilder.html" title="class in io.sphere.sdk.carts">CartDraftBuilder</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/queries/CartLikeQueryModel.html#shippingAddress--">shippingAddress()</a></span> - Method in class io.sphere.sdk.carts.queries.<a href="io/sphere/sdk/carts/queries/CartLikeQueryModel.html" title="class in io.sphere.sdk.carts.queries">CartLikeQueryModel</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/queries/CartLikeQueryModel.html#shippingAddress--">shippingAddress()</a></span> - Method in interface io.sphere.sdk.carts.queries.<a href="io/sphere/sdk/carts/queries/CartLikeQueryModel.html" title="interface in io.sphere.sdk.carts.queries">CartLikeQueryModel</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/queries/CartQueryModel.html#shippingAddress--">shippingAddress()</a></span> - Method in class io.sphere.sdk.carts.queries.<a href="io/sphere/sdk/carts/queries/CartQueryModel.html" title="class in io.sphere.sdk.carts.queries">CartQueryModel</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/queries/CartLikeQueryModelImpl.html#shippingAddress--">shippingAddress()</a></span> - Method in class io.sphere.sdk.carts.queries.<a href="io/sphere/sdk/carts/queries/CartLikeQueryModelImpl.html" title="class in io.sphere.sdk.carts.queries">CartLikeQueryModelImpl</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/queries/CartQueryModel.html#shippingAddress--">shippingAddress()</a></span> - Method in interface io.sphere.sdk.carts.queries.<a href="io/sphere/sdk/carts/queries/CartQueryModel.html" title="interface in io.sphere.sdk.carts.queries">CartQueryModel</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/OrderImportDraftBuilder.html#shippingAddress-io.sphere.sdk.models.Address-">shippingAddress(Address)</a></span> - Method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/OrderImportDraftBuilder.html" title="class in io.sphere.sdk.orders">OrderImportDraftBuilder</a></dt>
 <dd>&nbsp;</dd>
@@ -13614,9 +13642,11 @@ CompletionStage&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execu
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/expansion/CartLikeExpansionModel.html#shippingInfo--">shippingInfo()</a></span> - Method in class io.sphere.sdk.carts.expansion.<a href="io/sphere/sdk/carts/expansion/CartLikeExpansionModel.html" title="class in io.sphere.sdk.carts.expansion">CartLikeExpansionModel</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/queries/CartLikeQueryModel.html#shippingInfo--">shippingInfo()</a></span> - Method in class io.sphere.sdk.carts.queries.<a href="io/sphere/sdk/carts/queries/CartLikeQueryModel.html" title="class in io.sphere.sdk.carts.queries">CartLikeQueryModel</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/queries/CartLikeQueryModel.html#shippingInfo--">shippingInfo()</a></span> - Method in interface io.sphere.sdk.carts.queries.<a href="io/sphere/sdk/carts/queries/CartLikeQueryModel.html" title="interface in io.sphere.sdk.carts.queries">CartLikeQueryModel</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/queries/CartQueryModel.html#shippingInfo--">shippingInfo()</a></span> - Method in class io.sphere.sdk.carts.queries.<a href="io/sphere/sdk/carts/queries/CartQueryModel.html" title="class in io.sphere.sdk.carts.queries">CartQueryModel</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/queries/CartLikeQueryModelImpl.html#shippingInfo--">shippingInfo()</a></span> - Method in class io.sphere.sdk.carts.queries.<a href="io/sphere/sdk/carts/queries/CartLikeQueryModelImpl.html" title="class in io.sphere.sdk.carts.queries">CartLikeQueryModelImpl</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/queries/CartQueryModel.html#shippingInfo--">shippingInfo()</a></span> - Method in interface io.sphere.sdk.carts.queries.<a href="io/sphere/sdk/carts/queries/CartQueryModel.html" title="interface in io.sphere.sdk.carts.queries">CartQueryModel</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/expansion/OrderExpansionModel.html#shippingInfo--">shippingInfo()</a></span> - Method in class io.sphere.sdk.orders.expansion.<a href="io/sphere/sdk/orders/expansion/OrderExpansionModel.html" title="class in io.sphere.sdk.orders.expansion">OrderExpansionModel</a></dt>
 <dd>&nbsp;</dd>
@@ -13706,7 +13736,7 @@ CompletionStage&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execu
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/queries/CustomLineItemCollectionQueryModel.html#slug--">slug()</a></span> - Method in interface io.sphere.sdk.carts.queries.<a href="io/sphere/sdk/carts/queries/CustomLineItemCollectionQueryModel.html" title="interface in io.sphere.sdk.carts.queries">CustomLineItemCollectionQueryModel</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/categories/queries/CategoryQueryModel.html#slug--">slug()</a></span> - Method in class io.sphere.sdk.categories.queries.<a href="io/sphere/sdk/categories/queries/CategoryQueryModel.html" title="class in io.sphere.sdk.categories.queries">CategoryQueryModel</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/categories/queries/CategoryQueryModel.html#slug--">slug()</a></span> - Method in interface io.sphere.sdk.categories.queries.<a href="io/sphere/sdk/categories/queries/CategoryQueryModel.html" title="interface in io.sphere.sdk.categories.queries">CategoryQueryModel</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/CustomLineItemImportDraftBuilder.html#slug-java.lang.String-">slug(String)</a></span> - Method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/CustomLineItemImportDraftBuilder.html" title="class in io.sphere.sdk.orders">CustomLineItemImportDraftBuilder</a></dt>
 <dd>&nbsp;</dd>
@@ -14433,9 +14463,11 @@ CompletionStage&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execu
 <dd>
 <div class="block"><p id=update-actions>Known UpdateActions</p><ul><li><a href="updateactions/AddTaxRate.html">AddTaxRate</a></li><li><a href="updateactions/ChangeName.html">ChangeName</a></li><li><a href="updateactions/RemoveTaxRate.html">RemoveTaxRate</a></li><li><a href="updateactions/ReplaceTaxRate.html">ReplaceTaxRate</a></li><li><a href="updateactions/SetDescription.html">SetDescription</a></li></ul></div>
 </dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/queries/CartLikeQueryModel.html#taxedPrice--">taxedPrice()</a></span> - Method in class io.sphere.sdk.carts.queries.<a href="io/sphere/sdk/carts/queries/CartLikeQueryModel.html" title="class in io.sphere.sdk.carts.queries">CartLikeQueryModel</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/queries/CartLikeQueryModel.html#taxedPrice--">taxedPrice()</a></span> - Method in interface io.sphere.sdk.carts.queries.<a href="io/sphere/sdk/carts/queries/CartLikeQueryModel.html" title="interface in io.sphere.sdk.carts.queries">CartLikeQueryModel</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/queries/CartQueryModel.html#taxedPrice--">taxedPrice()</a></span> - Method in class io.sphere.sdk.carts.queries.<a href="io/sphere/sdk/carts/queries/CartQueryModel.html" title="class in io.sphere.sdk.carts.queries">CartQueryModel</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/queries/CartLikeQueryModelImpl.html#taxedPrice--">taxedPrice()</a></span> - Method in class io.sphere.sdk.carts.queries.<a href="io/sphere/sdk/carts/queries/CartLikeQueryModelImpl.html" title="class in io.sphere.sdk.carts.queries">CartLikeQueryModelImpl</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/queries/CartQueryModel.html#taxedPrice--">taxedPrice()</a></span> - Method in interface io.sphere.sdk.carts.queries.<a href="io/sphere/sdk/carts/queries/CartQueryModel.html" title="interface in io.sphere.sdk.carts.queries">CartQueryModel</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/carts/TaxedPrice.html" title="class in io.sphere.sdk.carts"><span class="typeNameLink">TaxedPrice</span></a> - Class in <a href="io/sphere/sdk/carts/package-summary.html">io.sphere.sdk.carts</a></dt>
 <dd>&nbsp;</dd>
@@ -14689,9 +14721,11 @@ CompletionStage&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execu
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/queries/TaxedPriceOptionalQueryModel.html#totalNet--">totalNet()</a></span> - Method in interface io.sphere.sdk.carts.queries.<a href="io/sphere/sdk/carts/queries/TaxedPriceOptionalQueryModel.html" title="interface in io.sphere.sdk.carts.queries">TaxedPriceOptionalQueryModel</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/queries/CartLikeQueryModel.html#totalPrice--">totalPrice()</a></span> - Method in class io.sphere.sdk.carts.queries.<a href="io/sphere/sdk/carts/queries/CartLikeQueryModel.html" title="class in io.sphere.sdk.carts.queries">CartLikeQueryModel</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/queries/CartLikeQueryModel.html#totalPrice--">totalPrice()</a></span> - Method in interface io.sphere.sdk.carts.queries.<a href="io/sphere/sdk/carts/queries/CartLikeQueryModel.html" title="interface in io.sphere.sdk.carts.queries">CartLikeQueryModel</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/queries/CartQueryModel.html#totalPrice--">totalPrice()</a></span> - Method in class io.sphere.sdk.carts.queries.<a href="io/sphere/sdk/carts/queries/CartQueryModel.html" title="class in io.sphere.sdk.carts.queries">CartQueryModel</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/queries/CartLikeQueryModelImpl.html#totalPrice--">totalPrice()</a></span> - Method in class io.sphere.sdk.carts.queries.<a href="io/sphere/sdk/carts/queries/CartLikeQueryModelImpl.html" title="class in io.sphere.sdk.carts.queries">CartLikeQueryModelImpl</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/queries/CartQueryModel.html#totalPrice--">totalPrice()</a></span> - Method in interface io.sphere.sdk.carts.queries.<a href="io/sphere/sdk/carts/queries/CartQueryModel.html" title="interface in io.sphere.sdk.carts.queries">CartQueryModel</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/OrderImportDraftBuilder.html#totalPrice-javax.money.MonetaryAmount-">totalPrice(MonetaryAmount)</a></span> - Method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/OrderImportDraftBuilder.html" title="class in io.sphere.sdk.orders">OrderImportDraftBuilder</a></dt>
 <dd>&nbsp;</dd>
