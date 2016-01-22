@@ -27,7 +27,8 @@ public class RulesMain {
                 new InUpdateActionsPackageOnlyUpdateActionsRule(),
                 new QueryAndCommandsAreCompleteRule(),
                 new ReferenceableResourceCanCreateReferenceRule(),
-                new QueryEndpointsHaveAlsoABuilderRule()
+                new QueryEndpointsHaveAlsoABuilderRule(),
+                new QueryModelsAreInterfacesRule()
         );
         final boolean allIsOk = rules.stream()
                 .map(rule -> {
