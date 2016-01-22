@@ -60,7 +60,7 @@ final class LineItemLikeCollectionQueryModelImpl<T> extends QueryModelImpl<T> im
 
     @Override
     public PriceQueryModel<T> price() {
-        return new PriceCollectionQueryModel<>(this, "price");
+        return PriceCollectionQueryModel.of(this, "price");
     }
 
     @Override

@@ -28,6 +28,6 @@ class ProductVariantQueryModelImpl<T> extends QueryModelImpl<T> implements Produ
 
     @Override
     public PriceCollectionQueryModel<T> prices() {
-        return new PriceCollectionQueryModel<>(this, "prices");
+        return new PriceCollectionQueryModelImpl<>(this, "prices");
     }
 }
