@@ -1,31 +1,22 @@
 package io.sphere.sdk.shippingmethods.queries;
 
-import io.sphere.sdk.queries.*;
+import io.sphere.sdk.queries.BooleanQueryModel;
+import io.sphere.sdk.queries.ReferenceQueryModel;
+import io.sphere.sdk.queries.ResourceQueryModel;
+import io.sphere.sdk.queries.StringQuerySortingModel;
 import io.sphere.sdk.shippingmethods.ShippingMethod;
 import io.sphere.sdk.taxcategories.TaxCategory;
 
-public class ShippingMethodQueryModel extends ResourceQueryModelImpl<ShippingMethod> {
-    public static ShippingMethodQueryModel of() {
-        return new ShippingMethodQueryModel(null, null);
-    }
+public interface ShippingMethodQueryModel extends ResourceQueryModel<ShippingMethod> {
+    StringQuerySortingModel<ShippingMethod> name();
 
-    private ShippingMethodQueryModel(final QueryModel<ShippingMethod> parent, final String pathSegment) {
-        super(parent, pathSegment);
-    }
+    ReferenceQueryModel<ShippingMethod, TaxCategory> taxCategory();
 
-    public StringQuerySortingModel<ShippingMethod> name() {
-        return stringModel("name");
-    }
+    ZoneRateCollectionQueryModel<ShippingMethod> zoneRates();
 
-    public ReferenceQueryModel<ShippingMethod, TaxCategory> taxCategory() {
-        return referenceModel("taxCategory");
-    }
+    BooleanQueryModel<ShippingMethod> isDefault();
 
-    public ZoneRateCollectionQueryModel<ShippingMethod> zoneRates() {
-        return new ZoneRateCollectionQueryModelImpl<>(this, "zoneRates");
-    }
-
-    public BooleanQueryModel<ShippingMethod> isDefault() {
-        return booleanModel("isDefault");
+    static ShippingMethodQueryModel of() {
+        return new ShippingMethodQueryModelImpl(null, null);
     }
 }
