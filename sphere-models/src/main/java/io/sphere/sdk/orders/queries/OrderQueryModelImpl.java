@@ -10,7 +10,7 @@ import io.sphere.sdk.orders.ShipmentState;
 import io.sphere.sdk.queries.*;
 import io.sphere.sdk.states.State;
 
-final class OrderQueryModelImpl extends CartLikeQueryModel<Order> implements OrderQueryModel {
+final class OrderQueryModelImpl extends CartLikeQueryModelImpl<Order> implements OrderQueryModel {
     OrderQueryModelImpl(final QueryModel<Order> parent, final String pathSegment) {
         super(parent, pathSegment);
     }

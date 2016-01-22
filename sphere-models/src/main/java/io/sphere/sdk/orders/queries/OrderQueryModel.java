@@ -11,7 +11,7 @@ import io.sphere.sdk.queries.*;
 import io.sphere.sdk.states.State;
 import io.sphere.sdk.types.queries.WithCustomQueryModel;
 
-public interface OrderQueryModel extends ResourceQueryModel<Order>, WithCustomQueryModel<Order> {
+public interface OrderQueryModel extends ResourceQueryModel<Order>, WithCustomQueryModel<Order>, CartLikeQueryModel<Order> {
     SphereEnumerationQueryModel<Order, OrderState> orderState();
 
     SphereEnumerationQueryModel<Order, ShipmentState> shipmentState();
