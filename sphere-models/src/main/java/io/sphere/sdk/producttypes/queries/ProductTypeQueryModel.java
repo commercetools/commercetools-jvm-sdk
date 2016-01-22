@@ -1,29 +1,17 @@
 package io.sphere.sdk.producttypes.queries;
 
 import io.sphere.sdk.producttypes.ProductType;
-import io.sphere.sdk.queries.ResourceQueryModelImpl;
-import io.sphere.sdk.queries.QueryModel;
+import io.sphere.sdk.queries.ResourceQueryModel;
 import io.sphere.sdk.queries.StringQuerySortingModel;
 
-public final class ProductTypeQueryModel extends ResourceQueryModelImpl<ProductType> {
+public interface ProductTypeQueryModel extends ResourceQueryModel<ProductType> {
+    StringQuerySortingModel<ProductType> name();
 
-    public static ProductTypeQueryModel of() {
-        return new ProductTypeQueryModel(null, null);
-    }
+    StringQuerySortingModel<ProductType> key();
 
-    private ProductTypeQueryModel(final QueryModel<ProductType> parent, final String pathSegment) {
-        super(parent, pathSegment);
-    }
+    AttributeDefinitionQueryModel<ProductType> attributes();
 
-    public StringQuerySortingModel<ProductType> name() {
-        return stringModel("name");
-    }
-
-    public StringQuerySortingModel<ProductType> key() {
-        return stringModel("key");
-    }
-
-    public AttributeDefinitionQueryModel<ProductType> attributes() {
-        return new AttributeDefinitionQueryModelImpl<>(this, "attributes");
+    static ProductTypeQueryModel of() {
+        return new ProductTypeQueryModelImpl(null, null);
     }
 }
