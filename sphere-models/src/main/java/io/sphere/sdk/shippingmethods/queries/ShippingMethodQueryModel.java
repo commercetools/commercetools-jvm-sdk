@@ -22,7 +22,7 @@ public class ShippingMethodQueryModel extends ResourceQueryModelImpl<ShippingMet
     }
 
     public ZoneRateCollectionQueryModel<ShippingMethod> zoneRates() {
-        return new ZoneRateCollectionQueryModel<>(this, "zoneRates");
+        return new ZoneRateCollectionQueryModelImpl<>(this, "zoneRates");
     }
 
     public BooleanQueryModel<ShippingMethod> isDefault() {
