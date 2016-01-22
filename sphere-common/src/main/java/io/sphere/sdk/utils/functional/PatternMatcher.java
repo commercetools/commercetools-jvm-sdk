@@ -5,6 +5,10 @@ import io.sphere.sdk.models.Base;
 import javax.annotation.Nullable;
 import java.util.function.Function;
 
+/**
+ * @deprecated This is an internal class.
+ */
+@Deprecated
 public class PatternMatcher<T> extends Base {
     private final Object thing;
     @Nullable
