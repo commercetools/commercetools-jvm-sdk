@@ -1,5 +1,6 @@
 package io.sphere.sdk.meta;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.categories.CategoryDraft;
 import io.sphere.sdk.categories.CategoryDraftBuilder;
@@ -10,7 +11,7 @@ import io.sphere.sdk.categories.commands.CategoryUpdateCommand;
 import io.sphere.sdk.categories.commands.updateactions.ChangeParent;
 import io.sphere.sdk.categories.queries.CategoryQuery;
 import io.sphere.sdk.client.BlockingSphereClient;
-import io.sphere.sdk.client.SphereRequest;
+import io.sphere.sdk.jsonnodes.queries.JsonNodeQuery;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Referenceable;
@@ -80,6 +81,17 @@ public class CategoryDocumentationTest extends IntegrationTest {
         assertThat(categories)
                 .hasSize(15)
                 .matches(cats -> cats.parallelStream().anyMatch(cat -> cat.getSlug().get(ENGLISH).equals("boots-women")));
+    }
+    @Test
+    public void fetchAllAsJson() throws Exception {
+        final Publisher<JsonNode> categoryPublisher =
+                ExperimentalReactiveStreamUtils.publisherOf(JsonNodeQuery.of("/categories"), (JsonNode jsonNode) -> jsonNode.get("id").asText(), sphereClient());
+        final CompletionStage<List<JsonNode>> categoriesStage =
+                ExperimentalReactiveStreamUtils.collectAll(categoryPublisher);
+        final List<JsonNode> categories = categoriesStage.toCompletableFuture().join();
+        assertThat(categories)
+                .hasSize(15)
+                .matches(cats -> cats.parallelStream().anyMatch(cat -> cat.get("slug").get("en").asText().equals("boots-women")));
     }
 
     @Test
