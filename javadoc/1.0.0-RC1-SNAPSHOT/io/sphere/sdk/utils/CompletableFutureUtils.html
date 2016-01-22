@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":9,"i1":9,"i2":9,"i3":9,"i4":9,"i5":9,"i6":9,"i7":9,"i8":9,"i9":9,"i10":9,"i11":9};
+var methods = {"i0":9,"i1":9,"i2":9,"i3":9,"i4":9,"i5":9,"i6":9,"i7":9,"i8":9,"i9":9,"i10":9};
 var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -177,13 +177,6 @@ extends java.lang.Object</pre>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/utils/CompletableFutureUtils.html#successful-T-">successful</a></span>(T&nbsp;object)</code>&nbsp;</td>
 </tr>
 <tr id="i10" class="altColor">
-<td class="colFirst"><code>static &lt;R,A,B,C&gt;&nbsp;java.util.concurrent.CompletionStage&lt;R&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/utils/CompletableFutureUtils.html#thenCombine-java.util.concurrent.CompletionStage-java.util.concurrent.CompletionStage-java.util.concurrent.CompletionStage-io.sphere.sdk.utils.functional.TriFunction-">thenCombine</a></span>(java.util.concurrent.CompletionStage&lt;A&gt;&nbsp;a,
-           java.util.concurrent.CompletionStage&lt;B&gt;&nbsp;b,
-           java.util.concurrent.CompletionStage&lt;C&gt;&nbsp;c,
-           <a href="../../../../io/sphere/sdk/utils/functional/TriFunction.html" title="interface in io.sphere.sdk.utils.functional">TriFunction</a>&lt;R,A,B,C&gt;&nbsp;f)</code>&nbsp;</td>
-</tr>
-<tr id="i11" class="rowColor">
 <td class="colFirst"><code>static &lt;T&gt;&nbsp;void</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/utils/CompletableFutureUtils.html#transferResult-java.util.concurrent.CompletionStage-java.util.concurrent.CompletableFuture-">transferResult</a></span>(java.util.concurrent.CompletionStage&lt;T&gt;&nbsp;source,
               java.util.concurrent.CompletableFuture&lt;T&gt;&nbsp;target)</code>&nbsp;</td>
@@ -329,23 +322,11 @@ extends java.lang.Object</pre>
 <a name="flatMap-java.util.concurrent.CompletionStage-java.util.function.Function-">
 <!--   -->
 </a>
-<ul class="blockList">
+<ul class="blockListLast">
 <li class="blockList">
 <h4>flatMap</h4>
 <pre>public static&nbsp;&lt;T,U&gt;&nbsp;java.util.concurrent.CompletionStage&lt;U&gt;&nbsp;flatMap(java.util.concurrent.CompletionStage&lt;T&gt;&nbsp;future,
                                                                     java.util.function.Function&lt;? super T,java.util.concurrent.CompletionStage&lt;U&gt;&gt;&nbsp;f)</pre>
-</li>
-</ul>
-<a name="thenCombine-java.util.concurrent.CompletionStage-java.util.concurrent.CompletionStage-java.util.concurrent.CompletionStage-io.sphere.sdk.utils.functional.TriFunction-">
-<!--   -->
-</a>
-<ul class="blockListLast">
-<li class="blockList">
-<h4>thenCombine</h4>
-<pre>public static&nbsp;&lt;R,A,B,C&gt;&nbsp;java.util.concurrent.CompletionStage&lt;R&gt;&nbsp;thenCombine(java.util.concurrent.CompletionStage&lt;A&gt;&nbsp;a,
-                                                                            java.util.concurrent.CompletionStage&lt;B&gt;&nbsp;b,
-                                                                            java.util.concurrent.CompletionStage&lt;C&gt;&nbsp;c,
-                                                                            <a href="../../../../io/sphere/sdk/utils/functional/TriFunction.html" title="interface in io.sphere.sdk.utils.functional">TriFunction</a>&lt;R,A,B,C&gt;&nbsp;f)</pre>
 </li>
 </ul>
 </li>
