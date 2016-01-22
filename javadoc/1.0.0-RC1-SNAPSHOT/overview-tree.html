@@ -93,6 +93,7 @@
 <li><a href="io/sphere/sdk/channels/expansion/package-tree.html">io.sphere.sdk.channels.expansion</a>, </li>
 <li><a href="io/sphere/sdk/channels/queries/package-tree.html">io.sphere.sdk.channels.queries</a>, </li>
 <li><a href="io/sphere/sdk/client/package-tree.html">io.sphere.sdk.client</a>, </li>
+<li><a href="io/sphere/sdk/client/metrics/package-tree.html">io.sphere.sdk.client.metrics</a>, </li>
 <li><a href="io/sphere/sdk/commands/package-tree.html">io.sphere.sdk.commands</a>, </li>
 <li><a href="io/sphere/sdk/customergroups/package-tree.html">io.sphere.sdk.customergroups</a>, </li>
 <li><a href="io/sphere/sdk/customergroups/commands/package-tree.html">io.sphere.sdk.customergroups.commands</a>, </li>
@@ -387,6 +388,9 @@
 <li type="circle">io.sphere.sdk.search.model.<a href="io/sphere/sdk/search/model/MultiValueSortSearchModel.html" title="class in io.sphere.sdk.search.model"><span class="typeNameLink">MultiValueSortSearchModel</span></a>&lt;T&gt;</li>
 <li type="circle">io.sphere.sdk.products.attributes.<a href="io/sphere/sdk/products/attributes/NestedAttributeType.html" title="class in io.sphere.sdk.products.attributes"><span class="typeNameLink">NestedAttributeType</span></a></li>
 <li type="circle">io.sphere.sdk.products.attributes.<a href="io/sphere/sdk/products/attributes/NumberAttributeType.html" title="class in io.sphere.sdk.products.attributes"><span class="typeNameLink">NumberAttributeType</span></a></li>
+<li type="circle">io.sphere.sdk.client.metrics.<a href="io/sphere/sdk/client/metrics/ObservedDeserializationDuration.html" title="class in io.sphere.sdk.client.metrics"><span class="typeNameLink">ObservedDeserializationDuration</span></a></li>
+<li type="circle">io.sphere.sdk.client.metrics.<a href="io/sphere/sdk/client/metrics/ObservedSerializationDuration.html" title="class in io.sphere.sdk.client.metrics"><span class="typeNameLink">ObservedSerializationDuration</span></a></li>
+<li type="circle">io.sphere.sdk.client.metrics.<a href="io/sphere/sdk/client/metrics/ObservedTotalDuration.html" title="class in io.sphere.sdk.client.metrics"><span class="typeNameLink">ObservedTotalDuration</span></a></li>
 <li type="circle">io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/OrderFromCartDraft.html" title="class in io.sphere.sdk.orders"><span class="typeNameLink">OrderFromCartDraft</span></a></li>
 <li type="circle">io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/OrderImportDraftBuilder.html" title="class in io.sphere.sdk.orders"><span class="typeNameLink">OrderImportDraftBuilder</span></a> (implements io.sphere.sdk.models.<a href="io/sphere/sdk/models/Builder.html" title="interface in io.sphere.sdk.models">Builder</a>&lt;T&gt;)</li>
 <li type="circle">io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/PagedResult.html" title="class in io.sphere.sdk.queries"><span class="typeNameLink">PagedResult</span></a>&lt;T&gt;
@@ -599,6 +603,7 @@
 <ul>
 <li type="circle">io.sphere.sdk.client.<a href="io/sphere/sdk/client/DeprecationExceptionSphereClientDecorator.html" title="class in io.sphere.sdk.client"><span class="typeNameLink">DeprecationExceptionSphereClientDecorator</span></a> (implements io.sphere.sdk.client.<a href="io/sphere/sdk/client/SphereClient.html" title="interface in io.sphere.sdk.client">SphereClient</a>)</li>
 <li type="circle">io.sphere.sdk.client.<a href="io/sphere/sdk/client/QueueSphereClientDecorator.html" title="class in io.sphere.sdk.client"><span class="typeNameLink">QueueSphereClientDecorator</span></a> (implements io.sphere.sdk.client.<a href="io/sphere/sdk/client/SphereClient.html" title="interface in io.sphere.sdk.client">SphereClient</a>)</li>
+<li type="circle">io.sphere.sdk.client.metrics.<a href="io/sphere/sdk/client/metrics/SimpleMetricsSphereClient.html" title="class in io.sphere.sdk.client.metrics"><span class="typeNameLink">SimpleMetricsSphereClient</span></a> (implements io.sphere.sdk.client.<a href="io/sphere/sdk/client/SphereClient.html" title="interface in io.sphere.sdk.client">SphereClient</a>)</li>
 <li type="circle">io.sphere.sdk.client.<a href="io/sphere/sdk/client/TimeoutSphereClientDecorator.html" title="class in io.sphere.sdk.client"><span class="typeNameLink">TimeoutSphereClientDecorator</span></a> (implements io.sphere.sdk.client.<a href="io/sphere/sdk/client/SphereClient.html" title="interface in io.sphere.sdk.client">SphereClient</a>)</li>
 </ul>
 </li>
@@ -4121,6 +4126,7 @@
 <li type="circle">io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/TimestampSortingModel.html" title="interface in io.sphere.sdk.queries"><span class="typeNameLink">TimestampSortingModel</span></a>&lt;T&gt; (also extends io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/EqualityQueryModel.html" title="interface in io.sphere.sdk.queries">EqualityQueryModel</a>&lt;T,E&gt;, io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/InequalityQueryModel.html" title="interface in io.sphere.sdk.queries">InequalityQueryModel</a>&lt;T,V&gt;, io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/IsInQueryModel.html" title="interface in io.sphere.sdk.queries">IsInQueryModel</a>&lt;T,V&gt;, io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/IsNotInQueryModel.html" title="interface in io.sphere.sdk.queries">IsNotInQueryModel</a>&lt;T,V&gt;, io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/QuerySortingModel.html" title="interface in io.sphere.sdk.queries">QuerySortingModel</a>&lt;T&gt;)</li>
 </ul>
 </li>
+<li type="circle">io.sphere.sdk.client.metrics.<a href="io/sphere/sdk/client/metrics/ObservedDuration.html" title="interface in io.sphere.sdk.client.metrics"><span class="typeNameLink">ObservedDuration</span></a></li>
 <li type="circle">io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/OptionalQueryModel.html" title="interface in io.sphere.sdk.queries"><span class="typeNameLink">OptionalQueryModel</span></a>&lt;T&gt;
 <ul>
 <li type="circle">io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/AddressQueryModel.html" title="interface in io.sphere.sdk.queries"><span class="typeNameLink">AddressQueryModel</span></a>&lt;T&gt;</li>
