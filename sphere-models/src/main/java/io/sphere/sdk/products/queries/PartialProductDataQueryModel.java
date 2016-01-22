@@ -5,7 +5,7 @@ import io.sphere.sdk.queries.*;
 
 import java.util.function.Function;
 
-public interface PartialProductDataQueryModel extends ResourceQueryModel<PartialProductDataQueryModel> {
+public interface PartialProductDataQueryModel {
     ReferenceCollectionQueryModel<PartialProductDataQueryModel, Category> categories();
 
     LocalizedStringQueryModel<PartialProductDataQueryModel> description();

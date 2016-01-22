@@ -6,7 +6,7 @@ import io.sphere.sdk.queries.*;
 import javax.annotation.Nullable;
 import java.util.function.Function;
 
-final class PartialProductDataQueryModelImpl extends ProductDataQueryModel<PartialProductDataQueryModel> implements PartialProductDataQueryModel {
+final class PartialProductDataQueryModelImpl extends ProductDataQueryModelImpl<PartialProductDataQueryModel> implements PartialProductDataQueryModel {
     PartialProductDataQueryModelImpl(@Nullable final QueryModel<PartialProductDataQueryModel> parent, @Nullable final String pathSegment) {
         super(parent, pathSegment);
     }

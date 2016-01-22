@@ -9,7 +9,7 @@ import io.sphere.sdk.queries.*;
 import io.sphere.sdk.reviews.queries.ReviewRatingStatisticsQueryModel;
 import io.sphere.sdk.reviews.queries.ReviewRatingStatisticsQueryModelImpl;
 
-public final class ProductProjectionQueryModel extends ProductDataQueryModelBase<ProductProjection> {
+public final class ProductProjectionQueryModel extends ProductDataQueryModelBaseImpl<ProductProjection> {
 
     private ProductProjectionQueryModel(final QueryModel<ProductProjection> parent, final String pathSegment) {
         super(parent, pathSegment);

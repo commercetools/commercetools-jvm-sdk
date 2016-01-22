@@ -43,7 +43,7 @@ class ProductCatalogDataQueryModelImpl<M> extends QueryModelImpl<M> implements P
     }
 
     private ProductDataQueryModel<M> newProductDataQueryModel(final String pathSegment) {
-        return new ProductDataQueryModel<>(this, pathSegment);
+        return new ProductDataQueryModelImpl<>(this, pathSegment);
     }
 
     @Override

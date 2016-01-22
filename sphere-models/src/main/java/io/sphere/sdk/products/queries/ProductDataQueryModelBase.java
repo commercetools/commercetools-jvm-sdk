@@ -1,67 +1,37 @@
 package io.sphere.sdk.products.queries;
 
 import io.sphere.sdk.categories.Category;
-import io.sphere.sdk.queries.*;
+import io.sphere.sdk.queries.LocalizedStringQueryModel;
+import io.sphere.sdk.queries.LocalizedStringQuerySortingModel;
+import io.sphere.sdk.queries.QueryPredicate;
+import io.sphere.sdk.queries.ReferenceCollectionQueryModel;
 
-import javax.annotation.Nullable;
 import java.util.function.Function;
 
-class ProductDataQueryModelBase<T> extends ResourceQueryModelImpl<T> {
+interface ProductDataQueryModelBase<T> {
+    QueryPredicate<T> where(QueryPredicate<PartialProductDataQueryModel> embeddedPredicate);
 
-    public QueryPredicate<T> where(final QueryPredicate<PartialProductDataQueryModel> embeddedPredicate) {
-        return embedPredicate(embeddedPredicate);
-    }
+    QueryPredicate<T> where(Function<PartialProductDataQueryModel, QueryPredicate<PartialProductDataQueryModel>> embeddedPredicate);
 
-    public QueryPredicate<T> where(final Function<PartialProductDataQueryModel, QueryPredicate<PartialProductDataQueryModel>> embeddedPredicate) {
-        return where(embeddedPredicate.apply(PartialProductDataQueryModel.of()));
-    }
+    LocalizedStringQuerySortingModel<T> name();
 
-    ProductDataQueryModelBase(@Nullable final QueryModel<T> parent, @Nullable final String pathSegment) {
-        super(parent, pathSegment);
-    }
+    LocalizedStringQueryModel<T> description();
 
-    public LocalizedStringQuerySortingModel<T> name() {
-        return localizedStringQuerySortingModel("name");
-    }
+    LocalizedStringQuerySortingModel<T> slug();
 
-    public LocalizedStringQueryModel<T> description() {
-        return localizedStringQuerySortingModel("description");
-    }
+    ProductAllVariantsQueryModel<T> allVariants();
 
-    public LocalizedStringQuerySortingModel<T> slug() {
-        return localizedStringQuerySortingModel("slug");
-    }
+    ProductVariantQueryModel<T> masterVariant();
 
-    public ProductAllVariantsQueryModel<T> allVariants() {
-        return new ProductAllVariantsQueryModelImpl<>(this);
-    }
+    ProductVariantQueryModel<T> variants();
 
-    public ProductVariantQueryModel<T> masterVariant() {
-        return ProductVariantQueryModel.of(this, "masterVariant");
-    }
+    LocalizedStringQuerySortingModel<T> metaTitle();
 
-    public ProductVariantQueryModel<T> variants() {
-        return ProductVariantQueryModel.of(this, "variants");
-    }
+    LocalizedStringQuerySortingModel<T> metaKeywords();
 
-    public LocalizedStringQuerySortingModel<T> metaTitle() {
-        return localizedStringQuerySortingModel("metaTitle");
-    }
+    LocalizedStringQuerySortingModel<T> metaDescription();
 
-    public LocalizedStringQuerySortingModel<T> metaKeywords() {
-        return localizedStringQuerySortingModel("metaKeywords");
-    }
+    ReferenceCollectionQueryModel<T, Category> categories();
 
-    public LocalizedStringQuerySortingModel<T> metaDescription() {
-        return localizedStringQuerySortingModel("metaDescription");
-    }
-
-    public ReferenceCollectionQueryModel<T, Category> categories() {
-        return referenceCollectionModel("categories");
-    }
-
-    public CategoryOrderHintsQueryModel<T> categoryOrderHints() {
-        return new CategoryOrderHintsQueryModelImpl<>(this, "categoryOrderHints");
-    }
+    CategoryOrderHintsQueryModel<T> categoryOrderHints();
 }
-
