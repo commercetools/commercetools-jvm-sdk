@@ -132,7 +132,7 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html"
     final String attributeName = "size";
     final EnumAttributeType attributeType = (EnumAttributeType) productType.getAttribute(attributeName)
             .getAttributeType();
-    final List&lt;EnumValue&gt; values = ListUtils.reverse(attributeType.getValues());
+    final List&lt;EnumValue&gt; values = reverse(attributeType.getValues());
 
     final ProductType updatedProductType = client().executeBlocking(ProductTypeUpdateCommand.of(productType,
             ChangeEnumValueOrder.of(attributeName, values)));

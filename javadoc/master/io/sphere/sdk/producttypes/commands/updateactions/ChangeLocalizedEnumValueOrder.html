@@ -132,7 +132,7 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html"
     final String attributeName = "color";
     final LocalizedEnumAttributeType attributeType = (LocalizedEnumAttributeType) productType.getAttribute(attributeName)
             .getAttributeType();
-    final List&lt;LocalizedEnumValue&gt; values = ListUtils.reverse(attributeType.getValues());
+    final List&lt;LocalizedEnumValue&gt; values = reverse(attributeType.getValues());
 
     final ProductType updatedProductType = client().executeBlocking(ProductTypeUpdateCommand.of(productType,
             ChangeLocalizedEnumValueOrder.of(attributeName, values)));
