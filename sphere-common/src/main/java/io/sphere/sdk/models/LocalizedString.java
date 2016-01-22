@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.core.type.TypeReference;
-import io.sphere.sdk.utils.StringUtils;
+import io.sphere.sdk.utils.SphereStringUtils;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -272,7 +272,7 @@ public class LocalizedString extends Base {
      * @return new instance
      */
     public LocalizedString slugified() {
-        return mapValue((locale, value) -> StringUtils.slugify(value));
+        return mapValue((locale, value) -> SphereStringUtils.slugify(value));
     }
 
     /**
@@ -284,7 +284,7 @@ public class LocalizedString extends Base {
      * @return new instance
      */
     public LocalizedString slugifiedUnique() {
-        return mapValue((locale, value) -> StringUtils.slugifyUnique(value));
+        return mapValue((locale, value) -> SphereStringUtils.slugifyUnique(value));
     }
 
     /**
