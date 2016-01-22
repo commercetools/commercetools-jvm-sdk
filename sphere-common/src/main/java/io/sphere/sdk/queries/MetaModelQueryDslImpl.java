@@ -120,8 +120,8 @@ public abstract class MetaModelQueryDslImpl<T, C extends MetaModelQueryDsl<T, C,
     }
 
     @Override
-    public C withPredicates(final Function<Q, QueryPredicate<T>> m) {
-        return withPredicates(m.apply(queryModel));
+    public C withPredicates(final Function<Q, QueryPredicate<T>> predicateFunction) {
+        return withPredicates(predicateFunction.apply(queryModel));
     }
 
     @Override

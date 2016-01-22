@@ -68,7 +68,7 @@ public interface ProductProjectionQuery extends MetaModelQueryDsl<ProductProject
     ProductProjectionQuery withPredicates(final QueryPredicate<ProductProjection> queryPredicate);
 
     @Override
-    ProductProjectionQuery withPredicates(final Function<ProductProjectionQueryModel, QueryPredicate<ProductProjection>> m);
+    ProductProjectionQuery withPredicates(final Function<ProductProjectionQueryModel, QueryPredicate<ProductProjection>> predicateFunction);
 
     @Override
     ProductProjectionQuery plusPredicates(final List<QueryPredicate<ProductProjection>> queryPredicates);

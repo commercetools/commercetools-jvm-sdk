@@ -73,7 +73,7 @@ public interface CategoryQuery extends MetaModelQueryDsl<Category, CategoryQuery
     CategoryQuery plusSort(final QuerySort<Category> sort);
 
     @Override
-    CategoryQuery withPredicates(final Function<CategoryQueryModel, QueryPredicate<Category>> m);
+    CategoryQuery withPredicates(final Function<CategoryQueryModel, QueryPredicate<Category>> predicateFunction);
 
     @Override
     CategoryQuery withPredicates(final QueryPredicate<Category> queryPredicate);
