@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":10,"i1":10,"i2":10,"i3":9,"i4":10};
+var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":9};
 var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -174,26 +174,26 @@ extends <a href="../../../../../io/sphere/sdk/models/Base.html" title="class in 
 <tr id="i1" class="rowColor">
 <td class="colFirst"><code><a href="../../../../../io/sphere/sdk/client/SphereRequest.html" title="interface in io.sphere.sdk.client">SphereRequest</a>&lt;?&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/client/metrics/ObservedSerializationDuration.html#getRequest--">getRequest</a></span>()</code>
-<div class="block">The sphere request which the duration is related to.</div>
+<div class="block">The sphere request related to the observed duration.</div>
 </td>
 </tr>
 <tr id="i2" class="altColor">
 <td class="colFirst"><code>java.lang.String</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/client/metrics/ObservedSerializationDuration.html#getRequestId--">getRequestId</a></span>()</code>
-<div class="block">The <a href="../../../../../io/sphere/sdk/client/metrics/SimpleMetricsSphereClient.html" title="class in io.sphere.sdk.client.metrics"><code>SimpleMetricsSphereClient</code></a> adds a request ID to each <a href="../../../../../io/sphere/sdk/client/SphereRequest.html" title="interface in io.sphere.sdk.client"><code>SphereRequest</code></a> so that matching <a href="../../../../../io/sphere/sdk/client/metrics/ObservedDuration.html" title="interface in io.sphere.sdk.client.metrics"><code>ObservedDuration</code></a>s can be matched.</div>
+<div class="block">The <a href="../../../../../io/sphere/sdk/client/metrics/SimpleMetricsSphereClient.html" title="class in io.sphere.sdk.client.metrics"><code>SimpleMetricsSphereClient</code></a> adds a request ID to each <a href="../../../../../io/sphere/sdk/client/SphereRequest.html" title="interface in io.sphere.sdk.client"><code>SphereRequest</code></a>, so that <a href="../../../../../io/sphere/sdk/client/metrics/ObservedDuration.html" title="interface in io.sphere.sdk.client.metrics"><code>ObservedDuration</code></a>s belonging to the same request can be associated..</div>
 </td>
 </tr>
 <tr id="i3" class="rowColor">
+<td class="colFirst"><code>java.lang.String</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/client/metrics/ObservedSerializationDuration.html#getTopic--">getTopic</a></span>()</code>
+<div class="block">A String to describe the topic associated with the observed duration (e.g.</div>
+</td>
+</tr>
+<tr id="i4" class="altColor">
 <td class="colFirst"><code>static <a href="../../../../../io/sphere/sdk/client/metrics/ObservedSerializationDuration.html" title="class in io.sphere.sdk.client.metrics">ObservedSerializationDuration</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/client/metrics/ObservedSerializationDuration.html#of-long-java.lang.String-io.sphere.sdk.client.SphereRequest-">of</a></span>(long&nbsp;durationInMilliseconds,
   java.lang.String&nbsp;requestId,
   <a href="../../../../../io/sphere/sdk/client/SphereRequest.html" title="interface in io.sphere.sdk.client">SphereRequest</a>&lt;?&gt;&nbsp;request)</code>&nbsp;</td>
-</tr>
-<tr id="i4" class="altColor">
-<td class="colFirst"><code>java.lang.String</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/client/metrics/ObservedSerializationDuration.html#topic--">topic</a></span>()</code>
-<div class="block">A String for which topic (for example the deserialization of JSON) the duration is.</div>
-</td>
 </tr>
 </table>
 <ul class="blockList">
@@ -295,7 +295,7 @@ extends <a href="../../../../../io/sphere/sdk/models/Base.html" title="class in 
 <h4>getRequestId</h4>
 <pre>public&nbsp;java.lang.String&nbsp;getRequestId()</pre>
 <div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../../io/sphere/sdk/client/metrics/ObservedDuration.html#getRequestId--">ObservedDuration</a></code></span></div>
-<div class="block">The <a href="../../../../../io/sphere/sdk/client/metrics/SimpleMetricsSphereClient.html" title="class in io.sphere.sdk.client.metrics"><code>SimpleMetricsSphereClient</code></a> adds a request ID to each <a href="../../../../../io/sphere/sdk/client/SphereRequest.html" title="interface in io.sphere.sdk.client"><code>SphereRequest</code></a> so that matching <a href="../../../../../io/sphere/sdk/client/metrics/ObservedDuration.html" title="interface in io.sphere.sdk.client.metrics"><code>ObservedDuration</code></a>s can be matched.
+<div class="block">The <a href="../../../../../io/sphere/sdk/client/metrics/SimpleMetricsSphereClient.html" title="class in io.sphere.sdk.client.metrics"><code>SimpleMetricsSphereClient</code></a> adds a request ID to each <a href="../../../../../io/sphere/sdk/client/SphereRequest.html" title="interface in io.sphere.sdk.client"><code>SphereRequest</code></a>, so that <a href="../../../../../io/sphere/sdk/client/metrics/ObservedDuration.html" title="interface in io.sphere.sdk.client.metrics"><code>ObservedDuration</code></a>s belonging to the same request can be associated..
  <p>This is necessary since a <a href="../../../../../io/sphere/sdk/client/SphereRequest.html" title="interface in io.sphere.sdk.client"><code>SphereRequest</code></a> can be reused for multiple requests.</p></div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
@@ -313,7 +313,7 @@ extends <a href="../../../../../io/sphere/sdk/models/Base.html" title="class in 
 <h4>getRequest</h4>
 <pre>public&nbsp;<a href="../../../../../io/sphere/sdk/client/SphereRequest.html" title="interface in io.sphere.sdk.client">SphereRequest</a>&lt;?&gt;&nbsp;getRequest()</pre>
 <div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../../io/sphere/sdk/client/metrics/ObservedDuration.html#getRequest--">ObservedDuration</a></code></span></div>
-<div class="block">The sphere request which the duration is related to.</div>
+<div class="block">The sphere request related to the observed duration.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="../../../../../io/sphere/sdk/client/metrics/ObservedDuration.html#getRequest--">getRequest</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../io/sphere/sdk/client/metrics/ObservedDuration.html" title="interface in io.sphere.sdk.client.metrics">ObservedDuration</a></code></dd>
@@ -322,18 +322,18 @@ extends <a href="../../../../../io/sphere/sdk/models/Base.html" title="class in 
 </dl>
 </li>
 </ul>
-<a name="topic--">
+<a name="getTopic--">
 <!--   -->
 </a>
 <ul class="blockListLast">
 <li class="blockList">
-<h4>topic</h4>
-<pre>public final&nbsp;java.lang.String&nbsp;topic()</pre>
-<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../../io/sphere/sdk/client/metrics/ObservedDuration.html#topic--">ObservedDuration</a></code></span></div>
-<div class="block">A String for which topic (for example the deserialization of JSON) the duration is.</div>
+<h4>getTopic</h4>
+<pre>public final&nbsp;java.lang.String&nbsp;getTopic()</pre>
+<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../../io/sphere/sdk/client/metrics/ObservedDuration.html#getTopic--">ObservedDuration</a></code></span></div>
+<div class="block">A String to describe the topic associated with the observed duration (e.g. "ObservedSerializationDuration" for the deserialization of JSON).</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../../io/sphere/sdk/client/metrics/ObservedDuration.html#topic--">topic</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../io/sphere/sdk/client/metrics/ObservedDuration.html" title="interface in io.sphere.sdk.client.metrics">ObservedDuration</a></code></dd>
+<dd><code><a href="../../../../../io/sphere/sdk/client/metrics/ObservedDuration.html#getTopic--">getTopic</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../io/sphere/sdk/client/metrics/ObservedDuration.html" title="interface in io.sphere.sdk.client.metrics">ObservedDuration</a></code></dd>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>topic</dd>
 </dl>

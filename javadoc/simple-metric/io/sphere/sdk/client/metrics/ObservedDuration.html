@@ -105,7 +105,7 @@ var activeTableTab = "activeTableTab";
 <hr>
 <br>
 <pre>public interface <span class="typeNameLabel">ObservedDuration</span></pre>
-<div class="block">Contains duration information for one aspect for one execution of a <a href="../../../../../io/sphere/sdk/client/metrics/SimpleMetricsSphereClient.html#execute-io.sphere.sdk.client.SphereRequest-"><code>SimpleMetricsSphereClient.execute(SphereRequest)</code></a>.</div>
+<div class="block">Contains duration information for a particular aspect of one execution of a <a href="../../../../../io/sphere/sdk/client/metrics/SimpleMetricsSphereClient.html#execute-io.sphere.sdk.client.SphereRequest-"><code>SimpleMetricsSphereClient.execute(SphereRequest)</code></a>.</div>
 <dl>
 <dt><span class="seeLabel">See Also:</span></dt>
 <dd><a href="../../../../../io/sphere/sdk/client/metrics/SimpleMetricsSphereClient.html" title="class in io.sphere.sdk.client.metrics"><code>SimpleMetricsSphereClient</code></a></dd>
@@ -137,19 +137,19 @@ var activeTableTab = "activeTableTab";
 <tr id="i1" class="rowColor">
 <td class="colFirst"><code><a href="../../../../../io/sphere/sdk/client/SphereRequest.html" title="interface in io.sphere.sdk.client">SphereRequest</a>&lt;?&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/client/metrics/ObservedDuration.html#getRequest--">getRequest</a></span>()</code>
-<div class="block">The sphere request which the duration is related to.</div>
+<div class="block">The sphere request related to the observed duration.</div>
 </td>
 </tr>
 <tr id="i2" class="altColor">
 <td class="colFirst"><code>java.lang.String</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/client/metrics/ObservedDuration.html#getRequestId--">getRequestId</a></span>()</code>
-<div class="block">The <a href="../../../../../io/sphere/sdk/client/metrics/SimpleMetricsSphereClient.html" title="class in io.sphere.sdk.client.metrics"><code>SimpleMetricsSphereClient</code></a> adds a request ID to each <a href="../../../../../io/sphere/sdk/client/SphereRequest.html" title="interface in io.sphere.sdk.client"><code>SphereRequest</code></a> so that matching <a href="../../../../../io/sphere/sdk/client/metrics/ObservedDuration.html" title="interface in io.sphere.sdk.client.metrics"><code>ObservedDuration</code></a>s can be matched.</div>
+<div class="block">The <a href="../../../../../io/sphere/sdk/client/metrics/SimpleMetricsSphereClient.html" title="class in io.sphere.sdk.client.metrics"><code>SimpleMetricsSphereClient</code></a> adds a request ID to each <a href="../../../../../io/sphere/sdk/client/SphereRequest.html" title="interface in io.sphere.sdk.client"><code>SphereRequest</code></a>, so that <a href="../../../../../io/sphere/sdk/client/metrics/ObservedDuration.html" title="interface in io.sphere.sdk.client.metrics"><code>ObservedDuration</code></a>s belonging to the same request can be associated..</div>
 </td>
 </tr>
 <tr id="i3" class="rowColor">
 <td class="colFirst"><code>java.lang.String</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/client/metrics/ObservedDuration.html#topic--">topic</a></span>()</code>
-<div class="block">A String for which topic (for example the deserialization of JSON) the duration is.</div>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/client/metrics/ObservedDuration.html#getTopic--">getTopic</a></span>()</code>
+<div class="block">A String to describe the topic associated with the observed duration (e.g.</div>
 </td>
 </tr>
 </table>
@@ -188,7 +188,7 @@ var activeTableTab = "activeTableTab";
 <li class="blockList">
 <h4>getRequestId</h4>
 <pre>java.lang.String&nbsp;getRequestId()</pre>
-<div class="block">The <a href="../../../../../io/sphere/sdk/client/metrics/SimpleMetricsSphereClient.html" title="class in io.sphere.sdk.client.metrics"><code>SimpleMetricsSphereClient</code></a> adds a request ID to each <a href="../../../../../io/sphere/sdk/client/SphereRequest.html" title="interface in io.sphere.sdk.client"><code>SphereRequest</code></a> so that matching <a href="../../../../../io/sphere/sdk/client/metrics/ObservedDuration.html" title="interface in io.sphere.sdk.client.metrics"><code>ObservedDuration</code></a>s can be matched.
+<div class="block">The <a href="../../../../../io/sphere/sdk/client/metrics/SimpleMetricsSphereClient.html" title="class in io.sphere.sdk.client.metrics"><code>SimpleMetricsSphereClient</code></a> adds a request ID to each <a href="../../../../../io/sphere/sdk/client/SphereRequest.html" title="interface in io.sphere.sdk.client"><code>SphereRequest</code></a>, so that <a href="../../../../../io/sphere/sdk/client/metrics/ObservedDuration.html" title="interface in io.sphere.sdk.client.metrics"><code>ObservedDuration</code></a>s belonging to the same request can be associated..
  <p>This is necessary since a <a href="../../../../../io/sphere/sdk/client/SphereRequest.html" title="interface in io.sphere.sdk.client"><code>SphereRequest</code></a> can be reused for multiple requests.</p></div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
@@ -196,14 +196,14 @@ var activeTableTab = "activeTableTab";
 </dl>
 </li>
 </ul>
-<a name="topic--">
+<a name="getTopic--">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
-<h4>topic</h4>
-<pre>java.lang.String&nbsp;topic()</pre>
-<div class="block">A String for which topic (for example the deserialization of JSON) the duration is.</div>
+<h4>getTopic</h4>
+<pre>java.lang.String&nbsp;getTopic()</pre>
+<div class="block">A String to describe the topic associated with the observed duration (e.g. "ObservedSerializationDuration" for the deserialization of JSON).</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>topic</dd>
@@ -217,7 +217,7 @@ var activeTableTab = "activeTableTab";
 <li class="blockList">
 <h4>getRequest</h4>
 <pre><a href="../../../../../io/sphere/sdk/client/SphereRequest.html" title="interface in io.sphere.sdk.client">SphereRequest</a>&lt;?&gt;&nbsp;getRequest()</pre>
-<div class="block">The sphere request which the duration is related to.</div>
+<div class="block">The sphere request related to the observed duration.</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>request</dd>

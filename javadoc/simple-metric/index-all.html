@@ -3485,6 +3485,10 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/utils/MoneyImpl.html#getContext--">getContext()</a></span> - Method in class io.sphere.sdk.utils.<a href="io/sphere/sdk/utils/MoneyImpl.html" title="class in io.sphere.sdk.utils">MoneyImpl</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/client/metrics/ObservedDeserializationDuration.html#getCorrelationId--">getCorrelationId()</a></span> - Method in class io.sphere.sdk.client.metrics.<a href="io/sphere/sdk/client/metrics/ObservedDeserializationDuration.html" title="class in io.sphere.sdk.client.metrics">ObservedDeserializationDuration</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/client/metrics/ObservedTotalDuration.html#getCorrelationId--">getCorrelationId()</a></span> - Method in class io.sphere.sdk.client.metrics.<a href="io/sphere/sdk/client/metrics/ObservedTotalDuration.html" title="class in io.sphere.sdk.client.metrics">ObservedTotalDuration</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/reviews/ReviewRatingStatistics.html#getCount--">getCount()</a></span> - Method in interface io.sphere.sdk.reviews.<a href="io/sphere/sdk/reviews/ReviewRatingStatistics.html" title="interface in io.sphere.sdk.reviews">ReviewRatingStatistics</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/search/FilteredFacetResult.html#getCount--">getCount()</a></span> - Method in class io.sphere.sdk.search.<a href="io/sphere/sdk/search/FilteredFacetResult.html" title="class in io.sphere.sdk.search">FilteredFacetResult</a></dt>
@@ -4975,11 +4979,11 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/client/metrics/ObservedDuration.html#getRequest--">getRequest()</a></span> - Method in interface io.sphere.sdk.client.metrics.<a href="io/sphere/sdk/client/metrics/ObservedDuration.html" title="interface in io.sphere.sdk.client.metrics">ObservedDuration</a></dt>
 <dd>
-<div class="block">The sphere request which the duration is related to.</div>
+<div class="block">The sphere request related to the observed duration.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/client/metrics/ObservedDuration.html#getRequestId--">getRequestId()</a></span> - Method in interface io.sphere.sdk.client.metrics.<a href="io/sphere/sdk/client/metrics/ObservedDuration.html" title="interface in io.sphere.sdk.client.metrics">ObservedDuration</a></dt>
 <dd>
-<div class="block">The <a href="io/sphere/sdk/client/metrics/SimpleMetricsSphereClient.html" title="class in io.sphere.sdk.client.metrics"><code>SimpleMetricsSphereClient</code></a> adds a request ID to each <a href="io/sphere/sdk/client/SphereRequest.html" title="interface in io.sphere.sdk.client"><code>SphereRequest</code></a> so that matching <a href="io/sphere/sdk/client/metrics/ObservedDuration.html" title="interface in io.sphere.sdk.client.metrics"><code>ObservedDuration</code></a>s can be matched.</div>
+<div class="block">The <a href="io/sphere/sdk/client/metrics/SimpleMetricsSphereClient.html" title="class in io.sphere.sdk.client.metrics"><code>SimpleMetricsSphereClient</code></a> adds a request ID to each <a href="io/sphere/sdk/client/SphereRequest.html" title="interface in io.sphere.sdk.client"><code>SphereRequest</code></a>, so that <a href="io/sphere/sdk/client/metrics/ObservedDuration.html" title="interface in io.sphere.sdk.client.metrics"><code>ObservedDuration</code></a>s belonging to the same request can be associated..</div>
 </dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/messages/GenericMessage.html#getResource--">getResource()</a></span> - Method in interface io.sphere.sdk.messages.<a href="io/sphere/sdk/messages/GenericMessage.html" title="interface in io.sphere.sdk.messages">GenericMessage</a></dt>
 <dd>&nbsp;</dd>
@@ -5473,6 +5477,10 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/customers/commands/CustomerVerifyEmailCommand.html#getTokenValue--">getTokenValue()</a></span> - Method in class io.sphere.sdk.customers.commands.<a href="io/sphere/sdk/customers/commands/CustomerVerifyEmailCommand.html" title="class in io.sphere.sdk.customers.commands">CustomerVerifyEmailCommand</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/client/metrics/ObservedDuration.html#getTopic--">getTopic()</a></span> - Method in interface io.sphere.sdk.client.metrics.<a href="io/sphere/sdk/client/metrics/ObservedDuration.html" title="interface in io.sphere.sdk.client.metrics">ObservedDuration</a></dt>
+<dd>
+<div class="block">A String to describe the topic associated with the observed duration (e.g.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/PagedQueryResult.html#getTotal--">getTotal()</a></span> - Method in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/PagedQueryResult.html" title="class in io.sphere.sdk.queries">PagedQueryResult</a></dt>
 <dd>
 <div class="block">The total number of results matching the query.</div>
@@ -8085,7 +8093,7 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 </dd>
 <dt><a href="io/sphere/sdk/client/metrics/ObservedDuration.html" title="interface in io.sphere.sdk.client.metrics"><span class="typeNameLink">ObservedDuration</span></a> - Interface in <a href="io/sphere/sdk/client/metrics/package-summary.html">io.sphere.sdk.client.metrics</a></dt>
 <dd>
-<div class="block">Contains duration information for one aspect for one execution of a <a href="io/sphere/sdk/client/metrics/SimpleMetricsSphereClient.html#execute-io.sphere.sdk.client.SphereRequest-"><code>SimpleMetricsSphereClient.execute(SphereRequest)</code></a>.</div>
+<div class="block">Contains duration information for a particular aspect of one execution of a <a href="io/sphere/sdk/client/metrics/SimpleMetricsSphereClient.html#execute-io.sphere.sdk.client.SphereRequest-"><code>SimpleMetricsSphereClient.execute(SphereRequest)</code></a>.</div>
 </dd>
 <dt><a href="io/sphere/sdk/client/metrics/ObservedSerializationDuration.html" title="class in io.sphere.sdk.client.metrics"><span class="typeNameLink">ObservedSerializationDuration</span></a> - Class in <a href="io/sphere/sdk/client/metrics/package-summary.html">io.sphere.sdk.client.metrics</a></dt>
 <dd>
@@ -8355,11 +8363,11 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/client/JsonNodeSphereRequest.html#of-io.sphere.sdk.http.HttpMethod-java.lang.String-com.fasterxml.jackson.databind.JsonNode-">of(HttpMethod, String, JsonNode)</a></span> - Static method in class io.sphere.sdk.client.<a href="io/sphere/sdk/client/JsonNodeSphereRequest.html" title="class in io.sphere.sdk.client">JsonNodeSphereRequest</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/client/metrics/ObservedDeserializationDuration.html#of-long-java.lang.String-io.sphere.sdk.client.SphereRequest-">of(long, String, SphereRequest&lt;?&gt;)</a></span> - Static method in class io.sphere.sdk.client.metrics.<a href="io/sphere/sdk/client/metrics/ObservedDeserializationDuration.html" title="class in io.sphere.sdk.client.metrics">ObservedDeserializationDuration</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/client/metrics/ObservedDeserializationDuration.html#of-long-java.lang.String-io.sphere.sdk.client.SphereRequest-java.lang.String-">of(long, String, SphereRequest&lt;?&gt;, String)</a></span> - Static method in class io.sphere.sdk.client.metrics.<a href="io/sphere/sdk/client/metrics/ObservedDeserializationDuration.html" title="class in io.sphere.sdk.client.metrics">ObservedDeserializationDuration</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/client/metrics/ObservedSerializationDuration.html#of-long-java.lang.String-io.sphere.sdk.client.SphereRequest-">of(long, String, SphereRequest&lt;?&gt;)</a></span> - Static method in class io.sphere.sdk.client.metrics.<a href="io/sphere/sdk/client/metrics/ObservedSerializationDuration.html" title="class in io.sphere.sdk.client.metrics">ObservedSerializationDuration</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/client/metrics/ObservedTotalDuration.html#of-long-java.lang.String-io.sphere.sdk.client.SphereRequest-">of(long, String, SphereRequest&lt;?&gt;)</a></span> - Static method in class io.sphere.sdk.client.metrics.<a href="io/sphere/sdk/client/metrics/ObservedTotalDuration.html" title="class in io.sphere.sdk.client.metrics">ObservedTotalDuration</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/client/metrics/ObservedTotalDuration.html#of-long-java.lang.String-io.sphere.sdk.client.SphereRequest-java.lang.String-">of(long, String, SphereRequest&lt;?&gt;, String)</a></span> - Static method in class io.sphere.sdk.client.metrics.<a href="io/sphere/sdk/client/metrics/ObservedTotalDuration.html" title="class in io.sphere.sdk.client.metrics">ObservedTotalDuration</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/client/metrics/SimpleMetricsSphereClient.html#of-io.sphere.sdk.client.SphereClient-">of(SphereClient)</a></span> - Static method in class io.sphere.sdk.client.metrics.<a href="io/sphere/sdk/client/metrics/SimpleMetricsSphereClient.html" title="class in io.sphere.sdk.client.metrics">SimpleMetricsSphereClient</a></dt>
 <dd>&nbsp;</dd>
@@ -14563,10 +14571,6 @@ CompletionStage&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execu
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/http/HttpStatusCode.html#TOO_MANY_REQUESTS_429">TOO_MANY_REQUESTS_429</a></span> - Static variable in class io.sphere.sdk.http.<a href="io/sphere/sdk/http/HttpStatusCode.html" title="class in io.sphere.sdk.http">HttpStatusCode</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/client/metrics/ObservedDuration.html#topic--">topic()</a></span> - Method in interface io.sphere.sdk.client.metrics.<a href="io/sphere/sdk/client/metrics/ObservedDuration.html" title="interface in io.sphere.sdk.client.metrics">ObservedDuration</a></dt>
-<dd>
-<div class="block">A String for which topic (for example the deserialization of JSON) the duration is.</div>
-</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/Product.html#toProjection-io.sphere.sdk.products.ProductProjectionType-">toProjection(ProductProjectionType)</a></span> - Method in interface io.sphere.sdk.products.<a href="io/sphere/sdk/products/Product.html" title="interface in io.sphere.sdk.products">Product</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/Query.html#toQuery--">toQuery()</a></span> - Method in interface io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/Query.html" title="interface in io.sphere.sdk.queries">Query</a></dt>
