@@ -1,21 +1,13 @@
 package io.sphere.sdk.taxcategories.queries;
 
-import io.sphere.sdk.queries.ResourceQueryModelImpl;
-import io.sphere.sdk.queries.QueryModel;
+import io.sphere.sdk.queries.ResourceQueryModel;
 import io.sphere.sdk.queries.StringQuerySortingModel;
 import io.sphere.sdk.taxcategories.TaxCategory;
 
-public class TaxCategoryQueryModel extends ResourceQueryModelImpl<TaxCategory> {
+public interface TaxCategoryQueryModel extends ResourceQueryModel<TaxCategory> {
+    StringQuerySortingModel<TaxCategory> name();
 
-    public static TaxCategoryQueryModel of() {
-        return new TaxCategoryQueryModel(null, null);
-    }
-
-    private TaxCategoryQueryModel(final QueryModel<TaxCategory> parent, final String pathSegment) {
-        super(parent, pathSegment);
-    }
-
-    public StringQuerySortingModel<TaxCategory> name() {
-        return stringModel("name");
+    static TaxCategoryQueryModel of() {
+        return new TaxCategoryQueryModelImpl(null, null);
     }
 }

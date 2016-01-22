@@ -20,7 +20,7 @@ public interface TaxCategoryQuery extends MetaModelQueryDsl<TaxCategory, TaxCate
     }
 
     default TaxCategoryQuery byName(final String name) {
-        return withPredicates(TaxCategoryQueryModel.of().name().is(name));
+        return withPredicates(m -> m.name().is(name));
     }
 
     static TaxCategoryQuery of() {
