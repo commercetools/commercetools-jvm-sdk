@@ -4,45 +4,27 @@ import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.models.Identifiable;
 import io.sphere.sdk.queries.*;
 import io.sphere.sdk.types.queries.CustomQueryModel;
-import io.sphere.sdk.types.queries.CustomResourceQueryModelImpl;
 import io.sphere.sdk.types.queries.WithCustomQueryModel;
 
 /**
  * {@doc.gen summary categories}
  */
-public final class CategoryQueryModel extends CustomResourceQueryModelImpl<Category> implements WithCustomQueryModel<Category> {
+public interface CategoryQueryModel extends QueryModel<Category>, ResourceQueryModel<Category>, WithCustomQueryModel<Category> {
+    LocalizedStringQuerySortingModel<Category> slug();
 
-    public static CategoryQueryModel of() {
-        return new CategoryQueryModel(null, null);
-    }
+    LocalizedStringQuerySortingModel<Category> name();
 
-    private CategoryQueryModel(QueryModel<Category> parent, String pathSegment) {
-        super(parent, pathSegment);
-    }
+    StringQuerySortingModel<Category> externalId();
 
-    public LocalizedStringQuerySortingModel<Category> slug() {
-        return localizedStringQuerySortingModel("slug");
-    }
-
-    public LocalizedStringQuerySortingModel<Category> name() {
-        return localizedStringQuerySortingModel("name");
-    }
-
-    public StringQuerySortingModel<Category> externalId() {
-        return stringModel("externalId");
-    }
-
-    public ReferenceOptionalQueryModel<Category, Category> parent() {
-        return referenceOptionalModel("parent");
-    }
+    ReferenceOptionalQueryModel<Category, Category> parent();
 
     @Override
-    public CustomQueryModel<Category> custom() {
-        return super.custom();
-    }
+    CustomQueryModel<Category> custom();
 
     @Override
-    public QueryPredicate<Category> is(final Identifiable<Category> identifiable) {
-        return super.is(identifiable);
+    QueryPredicate<Category> is(Identifiable<Category> identifiable);
+
+    static CategoryQueryModel of() {
+        return new CategoryQueryModelImpl(null, null);
     }
 }
