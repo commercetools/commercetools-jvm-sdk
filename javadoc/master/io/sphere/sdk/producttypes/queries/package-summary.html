@@ -191,12 +191,16 @@ import java.util.concurrent.CompletionStage;
 }
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/src/test/java/example/QueryByProductTypeNameExample.java" target="_blank">test code</a>.</pre></div>
 
-  With <a href="../../../../../io/sphere/sdk/producttypes/queries/ProductTypeQueryModel.html" title="class in io.sphere.sdk.producttypes.queries"><code>ProductTypeQueryModel</code></a> you can query for product types containing specific attributes:
+  With <a href="../../../../../io/sphere/sdk/producttypes/queries/ProductTypeQueryModel.html" title="interface in io.sphere.sdk.producttypes.queries"><code>ProductTypeQueryModel</code></a> you can query for product types containing specific attributes:
 
   <div id="example-QueryProductTypeExamples-queryByAttributeName--%s" class=code-example><pre><code class='java'>QueryPredicate&lt;ProductType&gt; hasSizeAttribute = ProductTypeQueryModel.of().attributes().name().is("size");
 CompletionStage&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execute(ProductTypeQuery.of().withPredicates(hasSizeAttribute));
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/src/test/java/example/QueryProductTypeExamples.java" target="_blank">test code</a>.</pre></div></div>
 </td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><a href="../../../../../io/sphere/sdk/producttypes/queries/ProductTypeQueryModel.html" title="interface in io.sphere.sdk.producttypes.queries">ProductTypeQueryModel</a></td>
+<td class="colLast">&nbsp;</td>
 </tr>
 </tbody>
 </table>
@@ -211,10 +215,6 @@ CompletionStage&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execu
 <tbody>
 <tr class="altColor">
 <td class="colFirst"><a href="../../../../../io/sphere/sdk/producttypes/queries/ProductTypeQueryBuilder.html" title="class in io.sphere.sdk.producttypes.queries">ProductTypeQueryBuilder</a></td>
-<td class="colLast">&nbsp;</td>
-</tr>
-<tr class="rowColor">
-<td class="colFirst"><a href="../../../../../io/sphere/sdk/producttypes/queries/ProductTypeQueryModel.html" title="class in io.sphere.sdk.producttypes.queries">ProductTypeQueryModel</a></td>
 <td class="colLast">&nbsp;</td>
 </tr>
 </tbody>
