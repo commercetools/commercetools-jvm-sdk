@@ -33,10 +33,7 @@ import io.sphere.sdk.products.commands.updateactions.SetMetaDescription;
 import io.sphere.sdk.products.commands.updateactions.SetMetaKeywords;
 import io.sphere.sdk.products.commands.updateactions.SetMetaTitle;
 import io.sphere.sdk.products.expansion.ProductProjectionExpansionModel;
-import io.sphere.sdk.products.queries.ProductByIdGet;
-import io.sphere.sdk.products.queries.ProductProjectionByIdGet;
-import io.sphere.sdk.products.queries.ProductProjectionQuery;
-import io.sphere.sdk.products.queries.ProductProjectionQueryModel;
+import io.sphere.sdk.products.queries.*;
 import io.sphere.sdk.producttypes.ProductType;
 import io.sphere.sdk.projects.Project;
 import io.sphere.sdk.queries.Get;
@@ -490,7 +487,7 @@ import java.util.function.Function;
      <li class=new-in-release>{@link io.sphere.sdk.models.SphereException}s may give hint to developers how to recover from errors. For example on typical elasticsearch related problems it suggests to reindex the product index.</li>
      <li class=new-in-release>The JVM SDK is available for Ning Async HTTP Client 1.8 and 1.9 (incompatible to 1.8).</li>
      <li class=new-in-release>State update actions and {@code io.sphere.sdk.states.StateBuilder} contributed by <a href="https://github.com/abrauner">Ansgar Brauner</a></li>
-     <li class=new-in-release>Embedded predicates (as used in 'where'-clauses) now support lambda syntax: {@link io.sphere.sdk.products.queries.ProductVariantQueryModel#where(java.util.function.Function)}.</li>
+     <li class=new-in-release>Embedded predicates (as used in 'where'-clauses) now support lambda syntax: {@code ProductVariantQueryModel#where(java.util.function.Function)}.</li>
      <li class=new-in-release>{@link io.sphere.sdk.orders.queries.OrderQuery#byCustomerId(java.lang.String)} and {@link io.sphere.sdk.orders.queries.OrderQuery#byCustomerEmail(java.lang.String)}</li>
      <li class=new-in-release>{@link io.sphere.sdk.channels.commands.ChannelUpdateCommand}</li>
      <li class=new-in-release>{@link ChannelByIdGet}</li>

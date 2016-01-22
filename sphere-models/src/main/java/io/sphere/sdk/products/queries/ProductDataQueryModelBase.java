@@ -37,11 +37,11 @@ class ProductDataQueryModelBase<T> extends ResourceQueryModelImpl<T> {
     }
 
     public ProductVariantQueryModel<T> masterVariant() {
-        return new ProductVariantQueryModel<>(this, "masterVariant");
+        return ProductVariantQueryModel.of(this, "masterVariant");
     }
 
     public ProductVariantQueryModel<T> variants() {
-        return new ProductVariantQueryModel<>(this, "variants");
+        return ProductVariantQueryModel.of(this, "variants");
     }
 
     public LocalizedStringQuerySortingModel<T> metaTitle() {

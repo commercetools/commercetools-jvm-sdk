@@ -55,7 +55,7 @@ final class LineItemLikeCollectionQueryModelImpl<T> extends QueryModelImpl<T> im
 
     @Override
     public ProductVariantQueryModel<T> variant() {
-        return new ProductVariantQueryModel<>(this, "variant");
+        return ProductVariantQueryModel.of(this, "variant");
     }
 
     @Override
