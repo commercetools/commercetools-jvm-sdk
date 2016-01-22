@@ -12,7 +12,7 @@ public class QueryEndpointsHaveAlsoABuilderRule extends ClassStrategyRule {
 
     @Override
     protected boolean classIsIncludedInRule(final Class<?> clazz) {
-        return clazz.isInterface() && clazz.getSimpleName().endsWith("Query") && isSubTypeOf(clazz, baseClass);
+        return clazz.isInterface() && clazz.getSimpleName().endsWith("Query") && isSubTypeOf(clazz, baseClass) && !clazz.getSimpleName().endsWith("JsonNodeQuery");
     }
 
     @Override
