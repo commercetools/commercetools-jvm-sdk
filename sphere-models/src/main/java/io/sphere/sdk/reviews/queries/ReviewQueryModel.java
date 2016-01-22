@@ -4,60 +4,32 @@ import io.sphere.sdk.customers.Customer;
 import io.sphere.sdk.queries.*;
 import io.sphere.sdk.reviews.Review;
 import io.sphere.sdk.states.State;
-import io.sphere.sdk.types.queries.CustomResourceQueryModelImpl;
 import io.sphere.sdk.types.queries.WithCustomQueryModel;
 
-public final class ReviewQueryModel extends CustomResourceQueryModelImpl<Review> implements WithCustomQueryModel<Review> {
+public interface ReviewQueryModel extends ResourceQueryModel<Review>,WithCustomQueryModel<Review> {
+    StringQuerySortingModel<Review> key();
 
-    public static ReviewQueryModel of() {
-        return new ReviewQueryModel(null, null);
-    }
+    StringQuerySortingModel<Review> uniquenessValue();
 
-    private ReviewQueryModel(final QueryModel<Review> parent, final String pathSegment) {
-        super(parent, pathSegment);
-    }
+    StringQuerySortingModel<Review> title();
 
-    public StringQuerySortingModel<Review> key() {
-        return stringModel("key");
-    }
+    StringQuerySortingModel<Review> text();
 
-    public StringQuerySortingModel<Review> uniquenessValue() {
-        return stringModel("uniquenessValue");
-    }
+    StringQuerySortingModel<Review> authorName();
 
-    public StringQuerySortingModel<Review> title() {
-        return stringModel("title");
-    }
+    LocaleQuerySortingModel<Review> locale();
 
-    public StringQuerySortingModel<Review> text() {
-        return stringModel("text");
-    }
+    AnyReferenceQueryModel<Review> target();
 
-    public StringQuerySortingModel<Review> authorName() {
-        return stringModel("authorName");
-    }
+    IntegerQuerySortingModel<Review> rating();
 
-    public LocaleQuerySortingModel<Review> locale() {
-        return localeQuerySortingModel("locale");
-    }
+    ReferenceOptionalQueryModel<Review, State> state();
 
-    public AnyReferenceQueryModel<Review> target() {
-        return anyReferenceModel("target");
-    }
+    BooleanQueryModel<Review> includedInStatistics();
 
-    public IntegerQuerySortingModel<Review> rating() {
-        return integerModel("rating");
-    }
+    ReferenceOptionalQueryModel<Review, Customer> customer();
 
-    public ReferenceOptionalQueryModel<Review, State> state() {
-        return referenceOptionalModel("state");
-    }
-
-    public BooleanQueryModel<Review> includedInStatistics() {
-        return booleanModel("includedInStatistics");
-    }
-
-    public ReferenceOptionalQueryModel<Review, Customer> customer() {
-        return referenceOptionalModel("customer");
+    static ReviewQueryModel of() {
+        return new ReviewQueryModelImpl(null, null);
     }
 }
