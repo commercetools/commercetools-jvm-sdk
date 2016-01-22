@@ -15,7 +15,7 @@ final class PriceCollectionQueryModelImpl<T> extends QueryModelImpl<T> implement
 
     @Override
     public DiscountedPriceOptionalQueryModel<T> discounted() {
-        return new DiscountedPriceOptionalQueryModel<>(this, "discounted");
+        return new DiscountedPriceOptionalQueryModelImpl<>(this, "discounted");
     }
 
     @Override
