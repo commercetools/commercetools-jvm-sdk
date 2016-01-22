@@ -2,50 +2,22 @@ package io.sphere.sdk.products.queries;
 
 import io.sphere.sdk.products.ProductProjectionType;
 import io.sphere.sdk.queries.BooleanQueryModel;
-import io.sphere.sdk.queries.QueryModel;
-import io.sphere.sdk.queries.QueryModelImpl;
 import io.sphere.sdk.queries.QueryPredicate;
 
-import javax.annotation.Nullable;
 import java.util.function.Function;
 
-import static io.sphere.sdk.products.ProductProjectionType.CURRENT;
+public interface ProductCatalogDataQueryModel<M> {
+    ProductDataQueryModel<M> forProjection(ProductProjectionType type);
 
-public class ProductCatalogDataQueryModel<M> extends QueryModelImpl<M> {
+    ProductDataQueryModel<M> current();
 
-    ProductCatalogDataQueryModel(@Nullable final QueryModel<M> parent, @Nullable final String pathSegment) {
-        super(parent, pathSegment);
-    }
+    ProductDataQueryModel<M> staged();
 
-    public ProductDataQueryModel<M> forProjection(final ProductProjectionType type) {
-        return type == CURRENT ? current() : staged();
-    }
+    BooleanQueryModel<M> isPublished();
 
-    public ProductDataQueryModel<M> current() {
-        return newProductDataQueryModel("current");
-    }
+    BooleanQueryModel<M> published();
 
-    public ProductDataQueryModel<M> staged() {
-        return newProductDataQueryModel("staged");
-    }
+    QueryPredicate<M> where(QueryPredicate<PartialProductCatalogDataQueryModel> embeddedPredicate);
 
-    public BooleanQueryModel<M> isPublished() {
-        return published();
-    }
-
-    public BooleanQueryModel<M> published() {
-        return booleanModel("published");
-    }
-
-    private ProductDataQueryModel<M> newProductDataQueryModel(final String pathSegment) {
-        return new ProductDataQueryModel<>(this, pathSegment);
-    }
-
-    public QueryPredicate<M> where(final QueryPredicate<PartialProductCatalogDataQueryModel> embeddedPredicate) {
-        return embedPredicate(embeddedPredicate);
-    }
-
-    public QueryPredicate<M> where(final Function<PartialProductCatalogDataQueryModel, QueryPredicate<PartialProductCatalogDataQueryModel>> embeddedPredicate) {
-        return where(embeddedPredicate.apply(PartialProductCatalogDataQueryModel.of()));
-    }
+    QueryPredicate<M> where(Function<PartialProductCatalogDataQueryModel, QueryPredicate<PartialProductCatalogDataQueryModel>> embeddedPredicate);
 }

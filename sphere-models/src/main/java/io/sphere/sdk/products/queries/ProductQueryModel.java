@@ -20,7 +20,7 @@ public class ProductQueryModel extends ResourceQueryModelImpl<Product> {
     }
 
     public ProductCatalogDataQueryModel<Product> masterData() {
-        return new ProductCatalogDataQueryModel<>(this, "masterData");
+        return new ProductCatalogDataQueryModelImpl<>(this, "masterData");
     }
 
     public ReferenceQueryModel<Product, ProductType> productType() {
