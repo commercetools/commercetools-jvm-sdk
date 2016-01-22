@@ -7798,7 +7798,9 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/MetaModelGetDslImpl.html#MetaModelGetDslImpl-com.fasterxml.jackson.databind.JavaType-java.lang.String-java.lang.String-java.util.List-E-java.util.function.Function-java.util.List-">MetaModelGetDslImpl(JavaType, String, String, List&lt;ExpansionPath&lt;T&gt;&gt;, E, Function&lt;MetaModelGetDslBuilder&lt;R, T, C, E&gt;, C&gt;, List&lt;HttpQueryParameter&gt;)</a></span> - Constructor for class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/MetaModelGetDslImpl.html" title="class in io.sphere.sdk.queries">MetaModelGetDslImpl</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/queries/MetaModelQueryDsl.html" title="interface in io.sphere.sdk.queries"><span class="typeNameLink">MetaModelQueryDsl</span></a>&lt;<a href="io/sphere/sdk/queries/MetaModelQueryDsl.html" title="type parameter in MetaModelQueryDsl">T</a>,<a href="io/sphere/sdk/queries/MetaModelQueryDsl.html" title="type parameter in MetaModelQueryDsl">C</a> extends <a href="io/sphere/sdk/queries/MetaModelQueryDsl.html" title="interface in io.sphere.sdk.queries">MetaModelQueryDsl</a>&lt;<a href="io/sphere/sdk/queries/MetaModelQueryDsl.html" title="type parameter in MetaModelQueryDsl">T</a>,<a href="io/sphere/sdk/queries/MetaModelQueryDsl.html" title="type parameter in MetaModelQueryDsl">C</a>,<a href="io/sphere/sdk/queries/MetaModelQueryDsl.html" title="type parameter in MetaModelQueryDsl">Q</a>,<a href="io/sphere/sdk/queries/MetaModelQueryDsl.html" title="type parameter in MetaModelQueryDsl">E</a>&gt;,<a href="io/sphere/sdk/queries/MetaModelQueryDsl.html" title="type parameter in MetaModelQueryDsl">Q</a>,<a href="io/sphere/sdk/queries/MetaModelQueryDsl.html" title="type parameter in MetaModelQueryDsl">E</a>&gt; - Interface in <a href="io/sphere/sdk/queries/package-summary.html">io.sphere.sdk.queries</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Query request interface for immutable value classes which can copy themselves with modified fields providing a meta model for convenient creation of expressions.</div>
+</dd>
 <dt><a href="io/sphere/sdk/queries/MetaModelQueryDslBuilder.html" title="class in io.sphere.sdk.queries"><span class="typeNameLink">MetaModelQueryDslBuilder</span></a>&lt;<a href="io/sphere/sdk/queries/MetaModelQueryDslBuilder.html" title="type parameter in MetaModelQueryDslBuilder">T</a>,<a href="io/sphere/sdk/queries/MetaModelQueryDslBuilder.html" title="type parameter in MetaModelQueryDslBuilder">C</a> extends <a href="io/sphere/sdk/queries/MetaModelQueryDsl.html" title="interface in io.sphere.sdk.queries">MetaModelQueryDsl</a>&lt;<a href="io/sphere/sdk/queries/MetaModelQueryDslBuilder.html" title="type parameter in MetaModelQueryDslBuilder">T</a>,<a href="io/sphere/sdk/queries/MetaModelQueryDslBuilder.html" title="type parameter in MetaModelQueryDslBuilder">C</a>,<a href="io/sphere/sdk/queries/MetaModelQueryDslBuilder.html" title="type parameter in MetaModelQueryDslBuilder">Q</a>,<a href="io/sphere/sdk/queries/MetaModelQueryDslBuilder.html" title="type parameter in MetaModelQueryDslBuilder">E</a>&gt;,<a href="io/sphere/sdk/queries/MetaModelQueryDslBuilder.html" title="type parameter in MetaModelQueryDslBuilder">Q</a>,<a href="io/sphere/sdk/queries/MetaModelQueryDslBuilder.html" title="type parameter in MetaModelQueryDslBuilder">E</a>&gt; - Class in <a href="io/sphere/sdk/queries/package-summary.html">io.sphere.sdk.queries</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/MetaModelQueryDslBuilder.html#MetaModelQueryDslBuilder-io.sphere.sdk.queries.MetaModelQueryDslImpl-">MetaModelQueryDslBuilder(MetaModelQueryDslImpl&lt;T, C, Q, E&gt;)</a></span> - Constructor for class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/MetaModelQueryDslBuilder.html" title="class in io.sphere.sdk.queries">MetaModelQueryDslBuilder</a></dt>
@@ -11317,7 +11319,9 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/MetaModelQueryDsl.html#plusPredicates-io.sphere.sdk.queries.QueryPredicate-">plusPredicates(QueryPredicate&lt;T&gt;)</a></span> - Method in interface io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/MetaModelQueryDsl.html" title="interface in io.sphere.sdk.queries">MetaModelQueryDsl</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/MetaModelQueryDsl.html#plusPredicates-java.util.function.Function-">plusPredicates(Function&lt;Q, QueryPredicate&lt;T&gt;&gt;)</a></span> - Method in interface io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/MetaModelQueryDsl.html" title="interface in io.sphere.sdk.queries">MetaModelQueryDsl</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Returns a new instance with the new predicate appended (AND semantics).</div>
+</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/MetaModelQueryDslImpl.html#plusPredicates-java.util.List-">plusPredicates(List&lt;QueryPredicate&lt;T&gt;&gt;)</a></span> - Method in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="class in io.sphere.sdk.queries">MetaModelQueryDslImpl</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/MetaModelQueryDslImpl.html#plusPredicates-io.sphere.sdk.queries.QueryPredicate-">plusPredicates(QueryPredicate&lt;T&gt;)</a></span> - Method in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="class in io.sphere.sdk.queries">MetaModelQueryDslImpl</a></dt>
@@ -11326,10 +11330,12 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/QueryDsl.html#plusPredicates-java.util.List-">plusPredicates(List&lt;QueryPredicate&lt;T&gt;&gt;)</a></span> - Method in interface io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries">QueryDsl</a></dt>
 <dd>
-<div class="block">Returns an instance with the new predicate list appended to the existing predicates.</div>
+<div class="block">Returns a new instance with the new predicate list appended to the existing predicates (AND semantic).</div>
 </dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/QueryDsl.html#plusPredicates-io.sphere.sdk.queries.QueryPredicate-">plusPredicates(QueryPredicate&lt;T&gt;)</a></span> - Method in interface io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries">QueryDsl</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Returns a new instance with the new predicate appended to the existing predicates (AND semantic).</div>
+</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/ResourceMetaModelQueryDslBuilder.html#plusPredicates-java.util.function.Function-">plusPredicates(Function&lt;Q, QueryPredicate&lt;T&gt;&gt;)</a></span> - Method in interface io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/ResourceMetaModelQueryDslBuilder.html" title="interface in io.sphere.sdk.queries">ResourceMetaModelQueryDslBuilder</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/ResourceMetaModelQueryDslBuilder.html#plusPredicates-io.sphere.sdk.queries.QueryPredicate-">plusPredicates(QueryPredicate&lt;T&gt;)</a></span> - Method in interface io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/ResourceMetaModelQueryDslBuilder.html" title="interface in io.sphere.sdk.queries">ResourceMetaModelQueryDslBuilder</a></dt>
@@ -11573,7 +11579,9 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/MetaModelQueryDsl.html#plusSort-io.sphere.sdk.queries.QuerySort-">plusSort(QuerySort&lt;T&gt;)</a></span> - Method in interface io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/MetaModelQueryDsl.html" title="interface in io.sphere.sdk.queries">MetaModelQueryDsl</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/MetaModelQueryDsl.html#plusSort-java.util.function.Function-">plusSort(Function&lt;Q, QuerySort&lt;T&gt;&gt;)</a></span> - Method in interface io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/MetaModelQueryDsl.html" title="interface in io.sphere.sdk.queries">MetaModelQueryDsl</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Returns a query with the sort expression appended to the existing ones.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/MetaModelQueryDslImpl.html#plusSort-java.util.function.Function-">plusSort(Function&lt;Q, QuerySort&lt;T&gt;&gt;)</a></span> - Method in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="class in io.sphere.sdk.queries">MetaModelQueryDslImpl</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/MetaModelQueryDslImpl.html#plusSort-java.util.List-">plusSort(List&lt;QuerySort&lt;T&gt;&gt;)</a></span> - Method in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="class in io.sphere.sdk.queries">MetaModelQueryDslImpl</a></dt>
@@ -11581,9 +11589,13 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/MetaModelQueryDslImpl.html#plusSort-io.sphere.sdk.queries.QuerySort-">plusSort(QuerySort&lt;T&gt;)</a></span> - Method in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="class in io.sphere.sdk.queries">MetaModelQueryDslImpl</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/QueryDsl.html#plusSort-java.util.List-">plusSort(List&lt;QuerySort&lt;T&gt;&gt;)</a></span> - Method in interface io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries">QueryDsl</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Returns a query with the sort expressions appended to the existing ones.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/QueryDsl.html#plusSort-io.sphere.sdk.queries.QuerySort-">plusSort(QuerySort&lt;T&gt;)</a></span> - Method in interface io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries">QueryDsl</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Returns a query with the sort expression appended to the existing ones.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/ResourceMetaModelQueryDslBuilder.html#plusSort-java.util.function.Function-">plusSort(Function&lt;Q, QuerySort&lt;T&gt;&gt;)</a></span> - Method in interface io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/ResourceMetaModelQueryDslBuilder.html" title="interface in io.sphere.sdk.queries">ResourceMetaModelQueryDslBuilder</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/ResourceMetaModelQueryDslBuilder.html#plusSort-java.util.List-">plusSort(List&lt;QuerySort&lt;T&gt;&gt;)</a></span> - Method in interface io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/ResourceMetaModelQueryDslBuilder.html" title="interface in io.sphere.sdk.queries">ResourceMetaModelQueryDslBuilder</a></dt>
@@ -12330,7 +12342,9 @@ CompletionStage&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execu
 <div class="block">The Query API is for reading specific resources from SPHERE.IO.</div>
 </dd>
 <dt><a href="io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries"><span class="typeNameLink">QueryDsl</span></a>&lt;<a href="io/sphere/sdk/queries/QueryDsl.html" title="type parameter in QueryDsl">T</a>,<a href="io/sphere/sdk/queries/QueryDsl.html" title="type parameter in QueryDsl">C</a> extends <a href="io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries">QueryDsl</a>&lt;<a href="io/sphere/sdk/queries/QueryDsl.html" title="type parameter in QueryDsl">T</a>,<a href="io/sphere/sdk/queries/QueryDsl.html" title="type parameter in QueryDsl">C</a>&gt;&gt; - Interface in <a href="io/sphere/sdk/queries/package-summary.html">io.sphere.sdk.queries</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Query request interface for immutable value classes which can copy themselves with modified fields.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/MetaModelQueryDslBuilder.html#queryDslBuilderFunction">queryDslBuilderFunction</a></span> - Variable in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/MetaModelQueryDslBuilder.html" title="class in io.sphere.sdk.queries">MetaModelQueryDslBuilder</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/search/ProductProjectionSearchBuilder.html#queryFilters-java.util.List-">queryFilters(List&lt;FilterExpression&lt;ProductProjection&gt;&gt;)</a></span> - Method in class io.sphere.sdk.products.search.<a href="io/sphere/sdk/products/search/ProductProjectionSearchBuilder.html" title="class in io.sphere.sdk.products.search">ProductProjectionSearchBuilder</a></dt>
@@ -15681,7 +15695,9 @@ the order they are declared.</div>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/MetaModelQueryDslImpl.html#withFetchTotal-boolean-">withFetchTotal(boolean)</a></span> - Method in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="class in io.sphere.sdk.queries">MetaModelQueryDslImpl</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/QueryDsl.html#withFetchTotal-boolean-">withFetchTotal(boolean)</a></span> - Method in interface io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries">QueryDsl</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Enables/disables a flag it the total amount of items should be counted.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/Address.html#withFirstName-java.lang.String-">withFirstName(String)</a></span> - Method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/Address.html" title="class in io.sphere.sdk.models">Address</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/search/ProductProjectionSearch.html#withFuzzy-java.lang.Boolean-">withFuzzy(Boolean)</a></span> - Method in interface io.sphere.sdk.products.search.<a href="io/sphere/sdk/products/search/ProductProjectionSearch.html" title="interface in io.sphere.sdk.products.search">ProductProjectionSearch</a></dt>
@@ -15721,9 +15737,13 @@ the order they are declared.</div>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/MetaModelQueryDslImpl.html#withLimit-java.lang.Long-">withLimit(Long)</a></span> - Method in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="class in io.sphere.sdk.queries">MetaModelQueryDslImpl</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/QueryDsl.html#withLimit-java.lang.Long-">withLimit(Long)</a></span> - Method in interface io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries">QueryDsl</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Creates a new instance which a limited amount of results.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/QueryDsl.html#withLimit-long-">withLimit(long)</a></span> - Method in interface io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries">QueryDsl</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Creates a new instance which a limited amount of results.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/search/MetaModelSearchDslImpl.html#withLimit-java.lang.Long-">withLimit(Long)</a></span> - Method in class io.sphere.sdk.search.<a href="io/sphere/sdk/search/MetaModelSearchDslImpl.html" title="class in io.sphere.sdk.search">MetaModelSearchDslImpl</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/search/SearchDsl.html#withLimit-java.lang.Long-">withLimit(Long)</a></span> - Method in interface io.sphere.sdk.search.<a href="io/sphere/sdk/search/SearchDsl.html" title="interface in io.sphere.sdk.search">SearchDsl</a></dt>
@@ -15769,7 +15789,9 @@ the order they are declared.</div>
 <div class="block">Returns a new query with the new offset as offset.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/QueryDsl.html#withOffset-long-">withOffset(long)</a></span> - Method in interface io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries">QueryDsl</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Returns a new query with the new offset as offset.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/search/MetaModelSearchDslImpl.html#withOffset-java.lang.Long-">withOffset(Long)</a></span> - Method in class io.sphere.sdk.search.<a href="io/sphere/sdk/search/MetaModelSearchDslImpl.html" title="class in io.sphere.sdk.search">MetaModelSearchDslImpl</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/search/SearchDsl.html#withOffset-java.lang.Long-">withOffset(Long)</a></span> - Method in interface io.sphere.sdk.search.<a href="io/sphere/sdk/search/SearchDsl.html" title="interface in io.sphere.sdk.search">SearchDsl</a></dt>
@@ -15807,7 +15829,9 @@ the order they are declared.</div>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/MetaModelQueryDsl.html#withPredicates-io.sphere.sdk.queries.QueryPredicate-">withPredicates(QueryPredicate&lt;T&gt;)</a></span> - Method in interface io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/MetaModelQueryDsl.html" title="interface in io.sphere.sdk.queries">MetaModelQueryDsl</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/MetaModelQueryDsl.html#withPredicates-java.util.function.Function-">withPredicates(Function&lt;Q, QueryPredicate&lt;T&gt;&gt;)</a></span> - Method in interface io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/MetaModelQueryDsl.html" title="interface in io.sphere.sdk.queries">MetaModelQueryDsl</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Returns a new instance with the new predicate as only predicate.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/MetaModelQueryDslImpl.html#withPredicates-java.util.List-">withPredicates(List&lt;QueryPredicate&lt;T&gt;&gt;)</a></span> - Method in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="class in io.sphere.sdk.queries">MetaModelQueryDslImpl</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/MetaModelQueryDslImpl.html#withPredicates-io.sphere.sdk.queries.QueryPredicate-">withPredicates(QueryPredicate&lt;T&gt;)</a></span> - Method in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="class in io.sphere.sdk.queries">MetaModelQueryDslImpl</a></dt>
@@ -15816,10 +15840,12 @@ the order they are declared.</div>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/QueryDsl.html#withPredicates-java.util.List-">withPredicates(List&lt;QueryPredicate&lt;T&gt;&gt;)</a></span> - Method in interface io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries">QueryDsl</a></dt>
 <dd>
-<div class="block">Returns an instance with the new predicate list as predicates.</div>
+<div class="block">Returns a new instance with the new predicate list as predicates.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/QueryDsl.html#withPredicates-io.sphere.sdk.queries.QueryPredicate-">withPredicates(QueryPredicate&lt;T&gt;)</a></span> - Method in interface io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries">QueryDsl</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Returns a new instance with the new predicate as only predicate.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/TrackingData.html#withProvider-java.lang.String-">withProvider(String)</a></span> - Method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/TrackingData.html" title="class in io.sphere.sdk.orders">TrackingData</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/TrackingData.html#withProviderTransaction-java.lang.String-">withProviderTransaction(String)</a></span> - Method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/TrackingData.html" title="class in io.sphere.sdk.orders">TrackingData</a></dt>
@@ -15921,7 +15947,9 @@ the order they are declared.</div>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/MetaModelQueryDsl.html#withSort-io.sphere.sdk.queries.QuerySort-">withSort(QuerySort&lt;T&gt;)</a></span> - Method in interface io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/MetaModelQueryDsl.html" title="interface in io.sphere.sdk.queries">MetaModelQueryDsl</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/MetaModelQueryDsl.html#withSort-java.util.function.Function-">withSort(Function&lt;Q, QuerySort&lt;T&gt;&gt;)</a></span> - Method in interface io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/MetaModelQueryDsl.html" title="interface in io.sphere.sdk.queries">MetaModelQueryDsl</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Returns a query with the new sort as only sort parameter.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/MetaModelQueryDslImpl.html#withSort-java.util.List-">withSort(List&lt;QuerySort&lt;T&gt;&gt;)</a></span> - Method in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="class in io.sphere.sdk.queries">MetaModelQueryDslImpl</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/MetaModelQueryDslImpl.html#withSort-io.sphere.sdk.queries.QuerySort-">withSort(QuerySort&lt;T&gt;)</a></span> - Method in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="class in io.sphere.sdk.queries">MetaModelQueryDslImpl</a></dt>
@@ -15930,10 +15958,12 @@ the order they are declared.</div>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/QueryDsl.html#withSort-java.util.List-">withSort(List&lt;QuerySort&lt;T&gt;&gt;)</a></span> - Method in interface io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries">QueryDsl</a></dt>
 <dd>
-<div class="block">Returns a query with the new sort as sort.</div>
+<div class="block">Returns a query with the new sort list as only sort parameters.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/QueryDsl.html#withSort-io.sphere.sdk.queries.QuerySort-">withSort(QuerySort&lt;T&gt;)</a></span> - Method in interface io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries">QueryDsl</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Returns a query with the new sort as only sort parameter.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/search/MetaModelSearchDslImpl.html#withSort-java.util.List-">withSort(List&lt;SortExpression&lt;T&gt;&gt;)</a></span> - Method in class io.sphere.sdk.search.<a href="io/sphere/sdk/search/MetaModelSearchDslImpl.html" title="class in io.sphere.sdk.search">MetaModelSearchDslImpl</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/search/MetaModelSearchDslImpl.html#withSort-io.sphere.sdk.search.SortExpression-">withSort(SortExpression&lt;T&gt;)</a></span> - Method in class io.sphere.sdk.search.<a href="io/sphere/sdk/search/MetaModelSearchDslImpl.html" title="class in io.sphere.sdk.search">MetaModelSearchDslImpl</a></dt>
@@ -15957,7 +15987,9 @@ the order they are declared.</div>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/queries/ProductProjectionQuery.html#withSortMulti-java.util.function.Function-">withSortMulti(Function&lt;ProductProjectionQueryModel, List&lt;QuerySort&lt;ProductProjection&gt;&gt;&gt;)</a></span> - Method in interface io.sphere.sdk.products.queries.<a href="io/sphere/sdk/products/queries/ProductProjectionQuery.html" title="interface in io.sphere.sdk.products.queries">ProductProjectionQuery</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/MetaModelQueryDsl.html#withSortMulti-java.util.function.Function-">withSortMulti(Function&lt;Q, List&lt;QuerySort&lt;T&gt;&gt;&gt;)</a></span> - Method in interface io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/MetaModelQueryDsl.html" title="interface in io.sphere.sdk.queries">MetaModelQueryDsl</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Returns a query with the new sort list as only sort parameters.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/MetaModelQueryDslImpl.html#withSortMulti-java.util.function.Function-">withSortMulti(Function&lt;Q, List&lt;QuerySort&lt;T&gt;&gt;&gt;)</a></span> - Method in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="class in io.sphere.sdk.queries">MetaModelQueryDslImpl</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/queries/SuggestQuery.html#withStaged-boolean-">withStaged(boolean)</a></span> - Method in interface io.sphere.sdk.products.queries.<a href="io/sphere/sdk/products/queries/SuggestQuery.html" title="interface in io.sphere.sdk.products.queries">SuggestQuery</a></dt>

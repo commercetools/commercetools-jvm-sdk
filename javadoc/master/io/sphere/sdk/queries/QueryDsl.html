@@ -119,6 +119,7 @@ var activeTableTab = "activeTableTab";
 <br>
 <pre>public interface <span class="typeNameLabel">QueryDsl&lt;T,C extends QueryDsl&lt;T,C&gt;&gt;</span>
 extends <a href="../../../../io/sphere/sdk/queries/ResourceQuery.html" title="interface in io.sphere.sdk.queries">ResourceQuery</a>&lt;T&gt;, <a href="../../../../io/sphere/sdk/expansion/ReferenceExpansionDsl.html" title="interface in io.sphere.sdk.expansion">ReferenceExpansionDsl</a>&lt;T,C&gt;</pre>
+<div class="block">Query request interface for immutable value classes which can copy themselves with modified fields.</div>
 </li>
 </ul>
 </div>
@@ -155,36 +156,50 @@ extends <a href="../../../../io/sphere/sdk/queries/ResourceQuery.html" title="in
 <tr id="i0" class="altColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/queries/QueryDsl.html" title="type parameter in QueryDsl">C</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/QueryDsl.html#plusPredicates-java.util.List-">plusPredicates</a></span>(java.util.List&lt;<a href="../../../../io/sphere/sdk/queries/QueryPredicate.html" title="interface in io.sphere.sdk.queries">QueryPredicate</a>&lt;<a href="../../../../io/sphere/sdk/queries/QueryDsl.html" title="type parameter in QueryDsl">T</a>&gt;&gt;&nbsp;predicates)</code>
-<div class="block">Returns an instance with the new predicate list appended to the existing predicates.</div>
+<div class="block">Returns a new instance with the new predicate list appended to the existing predicates (AND semantic).</div>
 </td>
 </tr>
 <tr id="i1" class="rowColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/queries/QueryDsl.html" title="type parameter in QueryDsl">C</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/QueryDsl.html#plusPredicates-io.sphere.sdk.queries.QueryPredicate-">plusPredicates</a></span>(<a href="../../../../io/sphere/sdk/queries/QueryPredicate.html" title="interface in io.sphere.sdk.queries">QueryPredicate</a>&lt;<a href="../../../../io/sphere/sdk/queries/QueryDsl.html" title="type parameter in QueryDsl">T</a>&gt;&nbsp;predicate)</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/QueryDsl.html#plusPredicates-io.sphere.sdk.queries.QueryPredicate-">plusPredicates</a></span>(<a href="../../../../io/sphere/sdk/queries/QueryPredicate.html" title="interface in io.sphere.sdk.queries">QueryPredicate</a>&lt;<a href="../../../../io/sphere/sdk/queries/QueryDsl.html" title="type parameter in QueryDsl">T</a>&gt;&nbsp;predicate)</code>
+<div class="block">Returns a new instance with the new predicate appended to the existing predicates (AND semantic).</div>
+</td>
 </tr>
 <tr id="i2" class="altColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/queries/QueryDsl.html" title="type parameter in QueryDsl">C</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/QueryDsl.html#plusSort-java.util.List-">plusSort</a></span>(java.util.List&lt;<a href="../../../../io/sphere/sdk/queries/QuerySort.html" title="interface in io.sphere.sdk.queries">QuerySort</a>&lt;<a href="../../../../io/sphere/sdk/queries/QueryDsl.html" title="type parameter in QueryDsl">T</a>&gt;&gt;&nbsp;sort)</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/QueryDsl.html#plusSort-java.util.List-">plusSort</a></span>(java.util.List&lt;<a href="../../../../io/sphere/sdk/queries/QuerySort.html" title="interface in io.sphere.sdk.queries">QuerySort</a>&lt;<a href="../../../../io/sphere/sdk/queries/QueryDsl.html" title="type parameter in QueryDsl">T</a>&gt;&gt;&nbsp;sort)</code>
+<div class="block">Returns a query with the sort expressions appended to the existing ones.</div>
+</td>
 </tr>
 <tr id="i3" class="rowColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/queries/QueryDsl.html" title="type parameter in QueryDsl">C</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/QueryDsl.html#plusSort-io.sphere.sdk.queries.QuerySort-">plusSort</a></span>(<a href="../../../../io/sphere/sdk/queries/QuerySort.html" title="interface in io.sphere.sdk.queries">QuerySort</a>&lt;<a href="../../../../io/sphere/sdk/queries/QueryDsl.html" title="type parameter in QueryDsl">T</a>&gt;&nbsp;sort)</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/QueryDsl.html#plusSort-io.sphere.sdk.queries.QuerySort-">plusSort</a></span>(<a href="../../../../io/sphere/sdk/queries/QuerySort.html" title="interface in io.sphere.sdk.queries">QuerySort</a>&lt;<a href="../../../../io/sphere/sdk/queries/QueryDsl.html" title="type parameter in QueryDsl">T</a>&gt;&nbsp;sort)</code>
+<div class="block">Returns a query with the sort expression appended to the existing ones.</div>
+</td>
 </tr>
 <tr id="i4" class="altColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/queries/QueryDsl.html" title="type parameter in QueryDsl">C</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/QueryDsl.html#withFetchTotal-boolean-">withFetchTotal</a></span>(boolean&nbsp;fetchTotal)</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/QueryDsl.html#withFetchTotal-boolean-">withFetchTotal</a></span>(boolean&nbsp;fetchTotal)</code>
+<div class="block">Enables/disables a flag it the total amount of items should be counted.</div>
+</td>
 </tr>
 <tr id="i5" class="rowColor">
 <td class="colFirst"><code>default <a href="../../../../io/sphere/sdk/queries/QueryDsl.html" title="type parameter in QueryDsl">C</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/QueryDsl.html#withLimit-long-">withLimit</a></span>(long&nbsp;limit)</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/QueryDsl.html#withLimit-long-">withLimit</a></span>(long&nbsp;limit)</code>
+<div class="block">Creates a new instance which a limited amount of results.</div>
+</td>
 </tr>
 <tr id="i6" class="altColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/queries/QueryDsl.html" title="type parameter in QueryDsl">C</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/QueryDsl.html#withLimit-java.lang.Long-">withLimit</a></span>(java.lang.Long&nbsp;limit)</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/QueryDsl.html#withLimit-java.lang.Long-">withLimit</a></span>(java.lang.Long&nbsp;limit)</code>
+<div class="block">Creates a new instance which a limited amount of results.</div>
+</td>
 </tr>
 <tr id="i7" class="rowColor">
 <td class="colFirst"><code>default <a href="../../../../io/sphere/sdk/queries/QueryDsl.html" title="type parameter in QueryDsl">C</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/QueryDsl.html#withOffset-long-">withOffset</a></span>(long&nbsp;offset)</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/QueryDsl.html#withOffset-long-">withOffset</a></span>(long&nbsp;offset)</code>
+<div class="block">Returns a new query with the new offset as offset.</div>
+</td>
 </tr>
 <tr id="i8" class="altColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/queries/QueryDsl.html" title="type parameter in QueryDsl">C</a></code></td>
@@ -195,22 +210,26 @@ extends <a href="../../../../io/sphere/sdk/queries/ResourceQuery.html" title="in
 <tr id="i9" class="rowColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/queries/QueryDsl.html" title="type parameter in QueryDsl">C</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/QueryDsl.html#withPredicates-java.util.List-">withPredicates</a></span>(java.util.List&lt;<a href="../../../../io/sphere/sdk/queries/QueryPredicate.html" title="interface in io.sphere.sdk.queries">QueryPredicate</a>&lt;<a href="../../../../io/sphere/sdk/queries/QueryDsl.html" title="type parameter in QueryDsl">T</a>&gt;&gt;&nbsp;predicates)</code>
-<div class="block">Returns an instance with the new predicate list as predicates.</div>
+<div class="block">Returns a new instance with the new predicate list as predicates.</div>
 </td>
 </tr>
 <tr id="i10" class="altColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/queries/QueryDsl.html" title="type parameter in QueryDsl">C</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/QueryDsl.html#withPredicates-io.sphere.sdk.queries.QueryPredicate-">withPredicates</a></span>(<a href="../../../../io/sphere/sdk/queries/QueryPredicate.html" title="interface in io.sphere.sdk.queries">QueryPredicate</a>&lt;<a href="../../../../io/sphere/sdk/queries/QueryDsl.html" title="type parameter in QueryDsl">T</a>&gt;&nbsp;predicate)</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/QueryDsl.html#withPredicates-io.sphere.sdk.queries.QueryPredicate-">withPredicates</a></span>(<a href="../../../../io/sphere/sdk/queries/QueryPredicate.html" title="interface in io.sphere.sdk.queries">QueryPredicate</a>&lt;<a href="../../../../io/sphere/sdk/queries/QueryDsl.html" title="type parameter in QueryDsl">T</a>&gt;&nbsp;predicate)</code>
+<div class="block">Returns a new instance with the new predicate as only predicate.</div>
+</td>
 </tr>
 <tr id="i11" class="rowColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/queries/QueryDsl.html" title="type parameter in QueryDsl">C</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/QueryDsl.html#withSort-java.util.List-">withSort</a></span>(java.util.List&lt;<a href="../../../../io/sphere/sdk/queries/QuerySort.html" title="interface in io.sphere.sdk.queries">QuerySort</a>&lt;<a href="../../../../io/sphere/sdk/queries/QueryDsl.html" title="type parameter in QueryDsl">T</a>&gt;&gt;&nbsp;sort)</code>
-<div class="block">Returns a query with the new sort as sort.</div>
+<div class="block">Returns a query with the new sort list as only sort parameters.</div>
 </td>
 </tr>
 <tr id="i12" class="altColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/queries/QueryDsl.html" title="type parameter in QueryDsl">C</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/QueryDsl.html#withSort-io.sphere.sdk.queries.QuerySort-">withSort</a></span>(<a href="../../../../io/sphere/sdk/queries/QuerySort.html" title="interface in io.sphere.sdk.queries">QuerySort</a>&lt;<a href="../../../../io/sphere/sdk/queries/QueryDsl.html" title="type parameter in QueryDsl">T</a>&gt;&nbsp;sort)</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/QueryDsl.html#withSort-io.sphere.sdk.queries.QuerySort-">withSort</a></span>(<a href="../../../../io/sphere/sdk/queries/QuerySort.html" title="interface in io.sphere.sdk.queries">QuerySort</a>&lt;<a href="../../../../io/sphere/sdk/queries/QueryDsl.html" title="type parameter in QueryDsl">T</a>&gt;&nbsp;sort)</code>
+<div class="block">Returns a query with the new sort as only sort parameter.</div>
+</td>
 </tr>
 </table>
 <ul class="blockList">
@@ -262,12 +281,14 @@ extends <a href="../../../../io/sphere/sdk/queries/ResourceQuery.html" title="in
 <li class="blockList">
 <h4>withPredicates</h4>
 <pre><a href="../../../../io/sphere/sdk/queries/QueryDsl.html" title="type parameter in QueryDsl">C</a>&nbsp;withPredicates(java.util.List&lt;<a href="../../../../io/sphere/sdk/queries/QueryPredicate.html" title="interface in io.sphere.sdk.queries">QueryPredicate</a>&lt;<a href="../../../../io/sphere/sdk/queries/QueryDsl.html" title="type parameter in QueryDsl">T</a>&gt;&gt;&nbsp;predicates)</pre>
-<div class="block">Returns an instance with the new predicate list as predicates.</div>
+<div class="block">Returns a new instance with the new predicate list as predicates.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>predicates</code> - the new predicate list</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>instance with the predicate list</dd>
+<dt><span class="seeLabel">See Also:</span></dt>
+<dd><a href="../../../../io/sphere/sdk/queries/QueryDsl.html#plusPredicates-java.util.List-"><code>plusPredicates(List)</code></a></dd>
 </dl>
 </li>
 </ul>
@@ -278,6 +299,15 @@ extends <a href="../../../../io/sphere/sdk/queries/ResourceQuery.html" title="in
 <li class="blockList">
 <h4>withPredicates</h4>
 <pre><a href="../../../../io/sphere/sdk/queries/QueryDsl.html" title="type parameter in QueryDsl">C</a>&nbsp;withPredicates(<a href="../../../../io/sphere/sdk/queries/QueryPredicate.html" title="interface in io.sphere.sdk.queries">QueryPredicate</a>&lt;<a href="../../../../io/sphere/sdk/queries/QueryDsl.html" title="type parameter in QueryDsl">T</a>&gt;&nbsp;predicate)</pre>
+<div class="block">Returns a new instance with the new predicate as only predicate.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>predicate</code> - the new predicate</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>instance with the predicate</dd>
+<dt><span class="seeLabel">See Also:</span></dt>
+<dd><a href="../../../../io/sphere/sdk/queries/QueryDsl.html#plusPredicates-io.sphere.sdk.queries.QueryPredicate-"><code>plusPredicates(QueryPredicate)</code></a></dd>
+</dl>
 </li>
 </ul>
 <a name="plusPredicates-java.util.List-">
@@ -287,12 +317,14 @@ extends <a href="../../../../io/sphere/sdk/queries/ResourceQuery.html" title="in
 <li class="blockList">
 <h4>plusPredicates</h4>
 <pre><a href="../../../../io/sphere/sdk/queries/QueryDsl.html" title="type parameter in QueryDsl">C</a>&nbsp;plusPredicates(java.util.List&lt;<a href="../../../../io/sphere/sdk/queries/QueryPredicate.html" title="interface in io.sphere.sdk.queries">QueryPredicate</a>&lt;<a href="../../../../io/sphere/sdk/queries/QueryDsl.html" title="type parameter in QueryDsl">T</a>&gt;&gt;&nbsp;predicates)</pre>
-<div class="block">Returns an instance with the new predicate list appended to the existing predicates.</div>
+<div class="block">Returns a new instance with the new predicate list appended to the existing predicates (AND semantic).</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>predicates</code> - the new predicate list</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>instance with the existing predicate list plus the new predicate list</dd>
+<dt><span class="seeLabel">See Also:</span></dt>
+<dd><a href="../../../../io/sphere/sdk/queries/QueryDsl.html#withPredicates-java.util.List-"><code>withPredicates(List)</code></a></dd>
 </dl>
 </li>
 </ul>
@@ -303,6 +335,15 @@ extends <a href="../../../../io/sphere/sdk/queries/ResourceQuery.html" title="in
 <li class="blockList">
 <h4>plusPredicates</h4>
 <pre><a href="../../../../io/sphere/sdk/queries/QueryDsl.html" title="type parameter in QueryDsl">C</a>&nbsp;plusPredicates(<a href="../../../../io/sphere/sdk/queries/QueryPredicate.html" title="interface in io.sphere.sdk.queries">QueryPredicate</a>&lt;<a href="../../../../io/sphere/sdk/queries/QueryDsl.html" title="type parameter in QueryDsl">T</a>&gt;&nbsp;predicate)</pre>
+<div class="block">Returns a new instance with the new predicate appended to the existing predicates (AND semantic).</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>predicate</code> - the new predicate</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>instance with the existing predicate list plus the new predicate list</dd>
+<dt><span class="seeLabel">See Also:</span></dt>
+<dd><a href="../../../../io/sphere/sdk/queries/QueryDsl.html#withPredicates-io.sphere.sdk.queries.QueryPredicate-"><code>withPredicates(QueryPredicate)</code></a></dd>
+</dl>
 </li>
 </ul>
 <a name="withSort-java.util.List-">
@@ -312,12 +353,14 @@ extends <a href="../../../../io/sphere/sdk/queries/ResourceQuery.html" title="in
 <li class="blockList">
 <h4>withSort</h4>
 <pre><a href="../../../../io/sphere/sdk/queries/QueryDsl.html" title="type parameter in QueryDsl">C</a>&nbsp;withSort(java.util.List&lt;<a href="../../../../io/sphere/sdk/queries/QuerySort.html" title="interface in io.sphere.sdk.queries">QuerySort</a>&lt;<a href="../../../../io/sphere/sdk/queries/QueryDsl.html" title="type parameter in QueryDsl">T</a>&gt;&gt;&nbsp;sort)</pre>
-<div class="block">Returns a query with the new sort as sort.</div>
+<div class="block">Returns a query with the new sort list as only sort parameters.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>sort</code> - list of sorts how the results of the query should be sorted</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>Query with sort</dd>
+<dt><span class="seeLabel">See Also:</span></dt>
+<dd><a href="../../../../io/sphere/sdk/queries/QueryDsl.html#plusSort-java.util.List-"><code>plusSort(List)</code></a></dd>
 </dl>
 </li>
 </ul>
@@ -328,6 +371,15 @@ extends <a href="../../../../io/sphere/sdk/queries/ResourceQuery.html" title="in
 <li class="blockList">
 <h4>withSort</h4>
 <pre><a href="../../../../io/sphere/sdk/queries/QueryDsl.html" title="type parameter in QueryDsl">C</a>&nbsp;withSort(<a href="../../../../io/sphere/sdk/queries/QuerySort.html" title="interface in io.sphere.sdk.queries">QuerySort</a>&lt;<a href="../../../../io/sphere/sdk/queries/QueryDsl.html" title="type parameter in QueryDsl">T</a>&gt;&nbsp;sort)</pre>
+<div class="block">Returns a query with the new sort as only sort parameter.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>sort</code> - sort expression how the results of the query should be sorted</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>Query with sort</dd>
+<dt><span class="seeLabel">See Also:</span></dt>
+<dd><a href="../../../../io/sphere/sdk/queries/QueryDsl.html#plusSort-io.sphere.sdk.queries.QuerySort-"><code>plusSort(QuerySort)</code></a></dd>
+</dl>
 </li>
 </ul>
 <a name="plusSort-java.util.List-">
@@ -337,6 +389,15 @@ extends <a href="../../../../io/sphere/sdk/queries/ResourceQuery.html" title="in
 <li class="blockList">
 <h4>plusSort</h4>
 <pre><a href="../../../../io/sphere/sdk/queries/QueryDsl.html" title="type parameter in QueryDsl">C</a>&nbsp;plusSort(java.util.List&lt;<a href="../../../../io/sphere/sdk/queries/QuerySort.html" title="interface in io.sphere.sdk.queries">QuerySort</a>&lt;<a href="../../../../io/sphere/sdk/queries/QueryDsl.html" title="type parameter in QueryDsl">T</a>&gt;&gt;&nbsp;sort)</pre>
+<div class="block">Returns a query with the sort expressions appended to the existing ones.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>sort</code> - sort expressions how the results of the query should be sorted</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>Query with sort</dd>
+<dt><span class="seeLabel">See Also:</span></dt>
+<dd><a href="../../../../io/sphere/sdk/queries/QueryDsl.html#withSort-java.util.List-"><code>withSort(List)</code></a></dd>
+</dl>
 </li>
 </ul>
 <a name="plusSort-io.sphere.sdk.queries.QuerySort-">
@@ -346,6 +407,15 @@ extends <a href="../../../../io/sphere/sdk/queries/ResourceQuery.html" title="in
 <li class="blockList">
 <h4>plusSort</h4>
 <pre><a href="../../../../io/sphere/sdk/queries/QueryDsl.html" title="type parameter in QueryDsl">C</a>&nbsp;plusSort(<a href="../../../../io/sphere/sdk/queries/QuerySort.html" title="interface in io.sphere.sdk.queries">QuerySort</a>&lt;<a href="../../../../io/sphere/sdk/queries/QueryDsl.html" title="type parameter in QueryDsl">T</a>&gt;&nbsp;sort)</pre>
+<div class="block">Returns a query with the sort expression appended to the existing ones.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>sort</code> - sort expression how the results of the query should be sorted</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>Query with sort</dd>
+<dt><span class="seeLabel">See Also:</span></dt>
+<dd><a href="../../../../io/sphere/sdk/queries/QueryDsl.html#withSort-io.sphere.sdk.queries.QuerySort-"><code>withSort(QuerySort)</code></a></dd>
+</dl>
 </li>
 </ul>
 <a name="withFetchTotal-boolean-">
@@ -355,6 +425,14 @@ extends <a href="../../../../io/sphere/sdk/queries/ResourceQuery.html" title="in
 <li class="blockList">
 <h4>withFetchTotal</h4>
 <pre><a href="../../../../io/sphere/sdk/queries/QueryDsl.html" title="type parameter in QueryDsl">C</a>&nbsp;withFetchTotal(boolean&nbsp;fetchTotal)</pre>
+<div class="block">Enables/disables a flag it the total amount of items should be counted.
+ <p>If <code>fetchTotal</code> is true then <a href="../../../../io/sphere/sdk/queries/PagedQueryResult.html#getTotal--"><code>PagedQueryResult.getTotal()</code></a> is null.</p></div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>fetchTotal</code> - enable the total count if true (default on the construction of the QueryDsl).</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>the same <a href="../../../../io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries"><code>QueryDsl</code></a> as this instance but with the updated flag</dd>
+</dl>
 </li>
 </ul>
 <a name="withLimit-java.lang.Long-">
@@ -364,6 +442,16 @@ extends <a href="../../../../io/sphere/sdk/queries/ResourceQuery.html" title="in
 <li class="blockList">
 <h4>withLimit</h4>
 <pre><a href="../../../../io/sphere/sdk/queries/QueryDsl.html" title="type parameter in QueryDsl">C</a>&nbsp;withLimit(java.lang.Long&nbsp;limit)</pre>
+<div class="block">Creates a new instance which a limited amount of results.
+ <p><a href="http://dev.commercetools.com/http-api.html#limit">Limit restrictions on the API.</a></p></div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>limit</code> - the maximum amount of items of <code>T</code> which should be included in the <a href="../../../../io/sphere/sdk/queries/PagedQueryResult.html" title="class in io.sphere.sdk.queries"><code>PagedQueryResult</code></a>.</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>copy of this item with modified limit settings</dd>
+<dt><span class="seeLabel">See Also:</span></dt>
+<dd><a href="../../../../io/sphere/sdk/queries/PagedQueryResult.html#getResults--"><code>PagedQueryResult.getResults()</code></a></dd>
+</dl>
 </li>
 </ul>
 <a name="withLimit-long-">
@@ -373,6 +461,16 @@ extends <a href="../../../../io/sphere/sdk/queries/ResourceQuery.html" title="in
 <li class="blockList">
 <h4>withLimit</h4>
 <pre>default&nbsp;<a href="../../../../io/sphere/sdk/queries/QueryDsl.html" title="type parameter in QueryDsl">C</a>&nbsp;withLimit(long&nbsp;limit)</pre>
+<div class="block">Creates a new instance which a limited amount of results.
+ <p><a href="http://dev.commercetools.com/http-api.html#limit">Limit restrictions on the API.</a></p></div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>limit</code> - the maximum amount of items of <code>T</code> which should be included in the <a href="../../../../io/sphere/sdk/queries/PagedQueryResult.html" title="class in io.sphere.sdk.queries"><code>PagedQueryResult</code></a>.</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>copy of this item with modified limit settings</dd>
+<dt><span class="seeLabel">See Also:</span></dt>
+<dd><a href="../../../../io/sphere/sdk/queries/PagedQueryResult.html#getResults--"><code>PagedQueryResult.getResults()</code></a></dd>
+</dl>
 </li>
 </ul>
 <a name="withOffset-java.lang.Long-">
@@ -401,6 +499,16 @@ extends <a href="../../../../io/sphere/sdk/queries/ResourceQuery.html" title="in
 <li class="blockList">
 <h4>withOffset</h4>
 <pre>default&nbsp;<a href="../../../../io/sphere/sdk/queries/QueryDsl.html" title="type parameter in QueryDsl">C</a>&nbsp;withOffset(long&nbsp;offset)</pre>
+<div class="block">Returns a new query with the new offset as offset.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>offset</code> - the number of items which should be omitted in the query result.</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>a new query</dd>
+<dt><span class="throwsLabel">Throws:</span></dt>
+<dd><code>java.lang.IllegalArgumentException</code> - if offset is
+ not between <a href="../../../../io/sphere/sdk/queries/Query.html#MIN_OFFSET">0</a> and <a href="../../../../io/sphere/sdk/queries/Query.html#MAX_OFFSET">100000</a>.</dd>
+</dl>
 </li>
 </ul>
 </li>
