@@ -402,13 +402,13 @@ public class ProductProjectionSearchModelFacetedSearchIntegrationTest extends Pr
     private static void testResultWithTerms(final TermFacetAndFilterExpression<ProductProjection> facetedSearchExpr,
                                             final Consumer<List<String>> testFilter, final Consumer<List<TermStats>> testTerms) {
         final PagedSearchResult<ProductProjection> result = executeFacetedSearch(facetedSearchExpr, testFilter);
-        testTerms.accept(result.getTermFacetResult(facetedSearchExpr.facetExpression()).getTerms());
+        testTerms.accept(result.getFacetResult(facetedSearchExpr).getTerms());
     }
 
     private static void testResultWithRange(final RangeFacetAndFilterExpression<ProductProjection> facetedSearchExpr,
                                             final Consumer<List<String>> testFilter, final Consumer<SimpleRangeStats> rangeStats) {
         final PagedSearchResult<ProductProjection> result = executeFacetedSearch(facetedSearchExpr, testFilter);
-        rangeStats.accept(result.getRangeStatsOfAllRanges(facetedSearchExpr.facetExpression()));
+        rangeStats.accept(result.getRangeStatsOfAllRanges(facetedSearchExpr));
     }
 
     private static PagedSearchResult<ProductProjection> executeFacetedSearch(final FacetAndFilterExpression<ProductProjection> facetedSearchExpr,

@@ -23,7 +23,7 @@ public interface FacetAndFilterSearchModel<T> {
     TermFacetAndFilterExpression<T> is(final String value);
 
     /**
-     * @see {@link #containsAny(Iterable)}
+     * @see #containsAny(Iterable)
      */
     default TermFacetAndFilterExpression<T> isIn(final Iterable<String> values) {
         return containsAny(values);

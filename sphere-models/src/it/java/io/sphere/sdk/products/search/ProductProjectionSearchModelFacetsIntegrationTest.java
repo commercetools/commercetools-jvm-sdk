@@ -382,13 +382,13 @@ public class ProductProjectionSearchModelFacetsIntegrationTest extends ProductPr
 
     private static void testTermStats(final TermFacetExpression<ProductProjection> facetExpr,
                                       final Consumer<List<TermStats>> test) {
-        final List<TermStats> termStats = executeSearchWithFacets(facetExpr).getTermFacetResult(facetExpr).getTerms();
+        final List<TermStats> termStats = executeSearchWithFacets(facetExpr).getFacetResult(facetExpr).getTerms();
         test.accept(termStats);
     }
 
     private static void testRangeStats(final RangeFacetExpression<ProductProjection> facetExpr,
                                        final Consumer<RangeStats> test) {
-        final List<RangeStats> ranges = executeSearchWithFacets(facetExpr).getRangeFacetResult(facetExpr).getRanges();
+        final List<RangeStats> ranges = executeSearchWithFacets(facetExpr).getFacetResult(facetExpr).getRanges();
         assertThat(ranges).hasSize(1);
         test.accept(ranges.get(0));
     }

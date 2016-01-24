@@ -27,7 +27,7 @@ public class PagedSearchResultTest {
     @Test
     public void termFacetResult() throws Exception {
         testPagedSearchResult(result -> {
-            assertThat(result.getTermFacetResult(TERM_FACET_EXPR)).isEqualTo(TERM_FACET_RESULT);
+            assertThat(result.getFacetResult(TERM_FACET_EXPR)).isEqualTo(TERM_FACET_RESULT);
             assertThat(result.getTermFacetResult("non-existent")).isNull();
             assertThatThrownBy(() -> result.getTermFacetResult(RANGE_FACET_EXPR.resultPath()))
                     .isInstanceOf(ClassCastException.class);
@@ -39,7 +39,7 @@ public class PagedSearchResultTest {
     @Test
     public void rangeFacetResult() throws Exception {
         testPagedSearchResult(result -> {
-            assertThat(result.getRangeFacetResult(RANGE_FACET_EXPR)).isEqualTo(RANGE_FACET_RESULT);
+            assertThat(result.getFacetResult(RANGE_FACET_EXPR)).isEqualTo(RANGE_FACET_RESULT);
             assertThat(result.getRangeFacetResult("non-existent")).isNull();
             assertThatThrownBy(() -> result.getRangeFacetResult(TERM_FACET_EXPR.resultPath()))
                     .isInstanceOf(ClassCastException.class);
@@ -51,7 +51,7 @@ public class PagedSearchResultTest {
     @Test
     public void filteredFacetResult() throws Exception {
         testPagedSearchResult(result -> {
-            assertThat(result.getFilteredFacetResult(FILTERED_FACET_EXPR)).isEqualTo(FILTERED_FACET_RESULT);
+            assertThat(result.getFacetResult(FILTERED_FACET_EXPR)).isEqualTo(FILTERED_FACET_RESULT);
             assertThat(result.getFilteredFacetResult("non-existent")).isNull();
             assertThatThrownBy(() -> result.getFilteredFacetResult(TERM_FACET_EXPR.resultPath()))
                     .isInstanceOf(ClassCastException.class);
