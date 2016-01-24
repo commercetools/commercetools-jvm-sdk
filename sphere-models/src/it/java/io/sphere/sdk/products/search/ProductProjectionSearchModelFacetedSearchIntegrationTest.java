@@ -15,7 +15,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class ProductProjectionSearchModelFacetedSearchIntegrationTest extends ProductProjectionSearchModelIntegrationTest {
 
-    private static final ProductProjectionFacetAndFilterSearchModel PRODUCT_MODEL = ProductProjectionSearchModel.of().facetedSearch();
+    private static final ProductProjectionFacetedSearchSearchModel PRODUCT_MODEL = ProductProjectionSearchModel.of().facetedSearch();
 
     @Test
     public void facetedSearchOnBooleanAttributes() throws Exception {
@@ -399,19 +399,19 @@ public class ProductProjectionSearchModelFacetedSearchIntegrationTest extends Pr
                         TermStats.of(productOtherId.getId(), 1L)));
     }
 
-    private static void testResultWithTerms(final TermFacetAndFilterExpression<ProductProjection> facetedSearchExpr,
+    private static void testResultWithTerms(final TermFacetedSearchExpression<ProductProjection> facetedSearchExpr,
                                             final Consumer<List<String>> testFilter, final Consumer<List<TermStats>> testTerms) {
         final PagedSearchResult<ProductProjection> result = executeFacetedSearch(facetedSearchExpr, testFilter);
         testTerms.accept(result.getFacetResult(facetedSearchExpr).getTerms());
     }
 
-    private static void testResultWithRange(final RangeFacetAndFilterExpression<ProductProjection> facetedSearchExpr,
+    private static void testResultWithRange(final RangeFacetedSearchExpression<ProductProjection> facetedSearchExpr,
                                             final Consumer<List<String>> testFilter, final Consumer<SimpleRangeStats> rangeStats) {
         final PagedSearchResult<ProductProjection> result = executeFacetedSearch(facetedSearchExpr, testFilter);
         rangeStats.accept(result.getRangeStatsOfAllRanges(facetedSearchExpr));
     }
 
-    private static PagedSearchResult<ProductProjection> executeFacetedSearch(final FacetAndFilterExpression<ProductProjection> facetedSearchExpr,
+    private static PagedSearchResult<ProductProjection> executeFacetedSearch(final FacetedSearchExpression<ProductProjection> facetedSearchExpr,
                                                                              final Consumer<List<String>> testFilter) {
         final PagedSearchResult<ProductProjection> result = executeSearch(ProductProjectionSearch.ofStaged().plusFacetedSearch(facetedSearchExpr));
         testFilter.accept(toIds(result.getResults()));

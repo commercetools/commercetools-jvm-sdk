@@ -12,13 +12,13 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class ProductProjectionSearchFacetedSearchIntegrationTest extends ProductProjectionSearchIntegrationTest {
 
-    private static final ProductProjectionFacetAndFilterSearchModel PRODUCT_MODEL = ProductProjectionSearchModel.of().facetedSearch();
-    private static final TermFacetAndFilterExpression<ProductProjection> COLOR_FACETED_SEARCH = PRODUCT_MODEL.allVariants().attribute().ofString(ATTR_NAME_COLOR).is("red");
-    private static final TermFacetAndFilterExpression<ProductProjection> SIZE_FACETED_SEARCH = PRODUCT_MODEL.allVariants().attribute().ofNumber(ATTR_NAME_SIZE).allTerms();
+    private static final ProductProjectionFacetedSearchSearchModel PRODUCT_MODEL = ProductProjectionSearchModel.of().facetedSearch();
+    private static final TermFacetedSearchExpression<ProductProjection> COLOR_FACETED_SEARCH = PRODUCT_MODEL.allVariants().attribute().ofString(ATTR_NAME_COLOR).is("red");
+    private static final TermFacetedSearchExpression<ProductProjection> SIZE_FACETED_SEARCH = PRODUCT_MODEL.allVariants().attribute().ofNumber(ATTR_NAME_SIZE).allTerms();
 
     @Test
     public void facetedSearchExample() throws Exception {
-        final ProductAttributeFacetAndFilterSearchModel attributeModel = ProductProjectionSearchModel.of().facetedSearch().allVariants().attribute();
+        final ProductAttributeFacetedSearchSearchModel attributeModel = ProductProjectionSearchModel.of().facetedSearch().allVariants().attribute();
         final ProductProjectionSearch search = ProductProjectionSearch.ofStaged()
                 .plusFacetedSearch(attributeModel.ofNumber(ATTR_NAME_SIZE).allTerms())
                 .plusFacetedSearch(attributeModel.ofString(ATTR_NAME_COLOR).is("red"));

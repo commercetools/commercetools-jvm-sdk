@@ -19,8 +19,8 @@ public class MetaModelSearchDslTest {
     private static final FilterExpression<Object> FILTER_EXPR_TWO = FilterExpression.of("filter-two");
     private static final ExpansionPath<Object> EXPANSION_PATH_ONE = ExpansionPath.of("expansion-one");
     private static final ExpansionPath<Object> EXPANSION_PATH_TWO = ExpansionPath.of("expansion-two");
-    private static final FacetAndFilterExpression<Object> FACETED_SEARCH_EXPR_ONE = TermFacetAndFilterExpression.of(FACET_EXPR_ONE, singletonList(FILTER_EXPR_ONE));
-    private static final FacetAndFilterExpression<Object> FACETED_SEARCH_EXPR_TWO = RangeFacetAndFilterExpression.of(FACET_EXPR_TWO, singletonList(FILTER_EXPR_TWO));
+    private static final FacetedSearchExpression<Object> FACETED_SEARCH_EXPR_ONE = TermFacetedSearchExpression.of(FACET_EXPR_ONE, singletonList(FILTER_EXPR_ONE));
+    private static final FacetedSearchExpression<Object> FACETED_SEARCH_EXPR_TWO = RangeFacetedSearchExpression.of(FACET_EXPR_TWO, singletonList(FILTER_EXPR_TWO));
 
     @Test
     public void buildsText() throws Exception {

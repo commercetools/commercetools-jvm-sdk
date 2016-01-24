@@ -18,8 +18,8 @@ public class ProductProjectionSearchModel {
         return new ProductProjectionSortSearchModel(null, null);
     }
 
-    public ProductProjectionFacetAndFilterSearchModel facetedSearch() {
-        return new ProductProjectionFacetAndFilterSearchModel(null, null);
+    public ProductProjectionFacetedSearchSearchModel facetedSearch() {
+        return new ProductProjectionFacetedSearchSearchModel(null, null);
     }
 
     public static ProductProjectionSearchModel of() {

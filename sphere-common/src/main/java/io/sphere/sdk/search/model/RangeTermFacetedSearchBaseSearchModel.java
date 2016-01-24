@@ -1,7 +1,7 @@
 package io.sphere.sdk.search.model;
 
 import io.sphere.sdk.search.FilterExpression;
-import io.sphere.sdk.search.RangeFacetAndFilterExpression;
+import io.sphere.sdk.search.RangeFacetedSearchExpression;
 import io.sphere.sdk.search.RangeFacetExpression;
 
 import java.util.List;
@@ -14,11 +14,11 @@ import static java.util.Collections.singletonList;
  * This class is abstract to force the subclass to select the methods that need to be highlighted and/or extended.
  * @param <T> type of the resource
  */
-abstract class RangeTermFacetAndFilterBaseSearchModel<T> extends TermFacetAndFilterBaseSearchModel<T> {
+abstract class RangeTermFacetedSearchBaseSearchModel<T> extends TermFacetedSearchBaseSearchModel<T> {
     private final RangeFacetExpression<T> facetExpression;
     private final RangeTermFilterSearchModel<T, String> filterSearchModel;
 
-    RangeTermFacetAndFilterBaseSearchModel(final SearchModel<T> searchModel) {
+    RangeTermFacetedSearchBaseSearchModel(final SearchModel<T> searchModel) {
         super(searchModel);
         this.facetExpression = new RangeTermFacetSearchModel<>(searchModel, TYPE_SERIALIZER).allRanges();
         this.filterSearchModel = new RangeTermFilterSearchModel<>(searchModel, TYPE_SERIALIZER);
@@ -28,7 +28,7 @@ abstract class RangeTermFacetAndFilterBaseSearchModel<T> extends TermFacetAndFil
      * Generates an expression to select all elements, without filtering, along with the facet for all terms for this attribute.
      * @return a bundle of an empty filter expression and a facet expression for all terms
      */
-    public RangeFacetAndFilterExpression<T> allRanges() {
+    public RangeFacetedSearchExpression<T> allRanges() {
         return buildExpression(emptyList());
     }
 
@@ -38,7 +38,7 @@ abstract class RangeTermFacetAndFilterBaseSearchModel<T> extends TermFacetAndFil
      * @param range the range of values to filter by
      * @return a bundle of the filter expressions for the given range and a facet expression for all ranges
      */
-    public RangeFacetAndFilterExpression<T> isBetween(final FilterRange<String> range) {
+    public RangeFacetedSearchExpression<T> isBetween(final FilterRange<String> range) {
         return isBetweenAny(singletonList(range));
     }
 
@@ -48,7 +48,7 @@ abstract class RangeTermFacetAndFilterBaseSearchModel<T> extends TermFacetAndFil
      * @param ranges the ranges of values to filter by
      * @return a bundle of the filter expressions for the given ranges and a facet expression for all ranges
      */
-    public RangeFacetAndFilterExpression<T> isBetweenAny(final Iterable<FilterRange<String>> ranges) {
+    public RangeFacetedSearchExpression<T> isBetweenAny(final Iterable<FilterRange<String>> ranges) {
         return buildExpression(filterSearchModel.isBetweenAnyAsString(ranges));
     }
 
@@ -58,7 +58,7 @@ abstract class RangeTermFacetAndFilterBaseSearchModel<T> extends TermFacetAndFil
      * @param ranges the ranges of values to filter by
      * @return a bundle of the filter expressions for the given ranges and a facet expression for all ranges
      */
-    public RangeFacetAndFilterExpression<T> isBetweenAll(final Iterable<FilterRange<String>> ranges) {
+    public RangeFacetedSearchExpression<T> isBetweenAll(final Iterable<FilterRange<String>> ranges) {
         return buildExpression(filterSearchModel.isBetweenAllAsString(ranges));
     }
 
@@ -66,7 +66,7 @@ abstract class RangeTermFacetAndFilterBaseSearchModel<T> extends TermFacetAndFil
      * @deprecated use {@link #isBetween(FilterRange)} instead
      */
     @Deprecated
-    public RangeFacetAndFilterExpression<T> byRange(final FilterRange<String> range) {
+    public RangeFacetedSearchExpression<T> byRange(final FilterRange<String> range) {
         return isBetween(range);
     }
 
@@ -74,7 +74,7 @@ abstract class RangeTermFacetAndFilterBaseSearchModel<T> extends TermFacetAndFil
      * @deprecated use {@link #isBetweenAny(Iterable)} instead
      */
     @Deprecated
-    public RangeFacetAndFilterExpression<T> byAnyRange(final Iterable<FilterRange<String>> ranges) {
+    public RangeFacetedSearchExpression<T> byAnyRange(final Iterable<FilterRange<String>> ranges) {
         return isBetweenAny(ranges);
     }
 
@@ -82,11 +82,11 @@ abstract class RangeTermFacetAndFilterBaseSearchModel<T> extends TermFacetAndFil
      * @deprecated use {@link #isBetweenAll(Iterable)}  instead
      */
     @Deprecated
-    public RangeFacetAndFilterExpression<T> byAllRanges(final Iterable<FilterRange<String>> ranges) {
+    public RangeFacetedSearchExpression<T> byAllRanges(final Iterable<FilterRange<String>> ranges) {
         return isBetweenAll(ranges);
     }
 
-    private RangeFacetAndFilterExpression<T> buildExpression(final List<FilterExpression<T>> filterExpressions) {
-        return RangeFacetAndFilterExpression.of(facetExpression, filterExpressions);
+    private RangeFacetedSearchExpression<T> buildExpression(final List<FilterExpression<T>> filterExpressions) {
+        return RangeFacetedSearchExpression.of(facetExpression, filterExpressions);
     }
 }

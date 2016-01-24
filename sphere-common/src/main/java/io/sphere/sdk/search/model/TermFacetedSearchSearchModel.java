@@ -1,34 +1,34 @@
 package io.sphere.sdk.search.model;
 
-import io.sphere.sdk.search.TermFacetAndFilterExpression;
+import io.sphere.sdk.search.TermFacetedSearchExpression;
 
 /**
  * Model to build term facets and filters.
  * @param <T> type of the resource
  */
-public class TermFacetAndFilterSearchModel<T> extends TermFacetAndFilterBaseSearchModel<T> {
+public class TermFacetedSearchSearchModel<T> extends TermFacetedSearchBaseSearchModel<T> {
 
-    TermFacetAndFilterSearchModel(final SearchModel<T> searchModel) {
+    TermFacetedSearchSearchModel(final SearchModel<T> searchModel) {
         super(searchModel);
     }
 
     @Override
-    public TermFacetAndFilterExpression<T> allTerms() {
+    public TermFacetedSearchExpression<T> allTerms() {
         return super.allTerms();
     }
 
     @Override
-    public TermFacetAndFilterExpression<T> is(final String value) {
+    public TermFacetedSearchExpression<T> is(final String value) {
         return super.is(value);
     }
 
     @Override
-    public TermFacetAndFilterExpression<T> containsAny(final Iterable<String> values) {
+    public TermFacetedSearchExpression<T> containsAny(final Iterable<String> values) {
         return super.containsAny(values);
     }
 
     @Override
-    public TermFacetAndFilterExpression<T> containsAll(final Iterable<String> values) {
+    public TermFacetedSearchExpression<T> containsAll(final Iterable<String> values) {
         return super.containsAll(values);
     }
 
@@ -38,7 +38,7 @@ public class TermFacetAndFilterSearchModel<T> extends TermFacetAndFilterBaseSear
      * @param <T> type of the resource
      * @return new instance of TermFacetAndFilterSearchModel
      */
-    public static <T> TermFacetAndFilterSearchModel<T> of(final String attributePath) {
-        return new TermFacetAndFilterSearchModel<>(new SearchModelImpl<>(attributePath));
+    public static <T> TermFacetedSearchSearchModel<T> of(final String attributePath) {
+        return new TermFacetedSearchSearchModel<>(new SearchModelImpl<>(attributePath));
     }
 }

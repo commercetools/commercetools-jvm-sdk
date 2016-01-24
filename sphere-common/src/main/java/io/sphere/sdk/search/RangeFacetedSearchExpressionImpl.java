@@ -2,11 +2,11 @@ package io.sphere.sdk.search;
 
 import java.util.List;
 
-class RangeFacetAndFilterExpressionImpl<T> implements RangeFacetAndFilterExpression<T> {
+class RangeFacetedSearchExpressionImpl<T> implements RangeFacetedSearchExpression<T> {
     private final RangeFacetExpression<T> facetExpression;
     private final List<FilterExpression<T>> filterExpressions;
 
-    RangeFacetAndFilterExpressionImpl(final RangeFacetExpression<T> facetExpression, final List<FilterExpression<T>> filterExpressions) {
+    RangeFacetedSearchExpressionImpl(final RangeFacetExpression<T> facetExpression, final List<FilterExpression<T>> filterExpressions) {
         this.facetExpression = facetExpression;
         this.filterExpressions = filterExpressions;
     }

@@ -19,6 +19,6 @@ interface RangeTermModel<T, V extends Comparable<? super V>> {
      * and an expression to filter elements by certain range of values.
      * @return the model to specify the values from which to obtain the facets and to filter by
      */
-    RangeTermFacetAndFilterSearchModel<T> facetedAndFiltered();
+    RangeTermFacetedSearchSearchModel<T> facetedAndFiltered();
 
 }

@@ -3,7 +3,7 @@ package io.sphere.sdk.search;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import io.sphere.sdk.queries.PagedResult;
 import io.sphere.sdk.search.model.RangeStats;
-import io.sphere.sdk.search.model.RangeTermFacetAndFilterSearchModel;
+import io.sphere.sdk.search.model.RangeTermFacetedSearchSearchModel;
 import io.sphere.sdk.search.model.SimpleRangeStats;
 
 import java.util.List;
@@ -57,21 +57,21 @@ public class PagedSearchResult<T> extends PagedResult<T> {
     /**
      * @see #getFacetResult(String)
      */
-    public TermFacetResult getFacetResult(final TermFacetAndFilterExpression<T> facetAndFilterExpression) {
+    public TermFacetResult getFacetResult(final TermFacetedSearchExpression<T> facetAndFilterExpression) {
         return getFacetResult(facetAndFilterExpression.facetExpression());
     }
 
     /**
      * @see #getFacetResult(String)
      */
-    public RangeFacetResult getFacetResult(final RangeFacetAndFilterExpression<T> facetAndFilterExpression) {
+    public RangeFacetResult getFacetResult(final RangeFacetedSearchExpression<T> facetAndFilterExpression) {
         return getFacetResult(facetAndFilterExpression.facetExpression());
     }
 
     /**
      * Obtains the {@code RangeStats} of the range facet.
      * This method should only be used when the range facet has the form {@code (* to "0"),("0" to *)},
-     * which is obtained when calling {@link RangeTermFacetAndFilterSearchModel#allRanges()}.
+     * which is obtained when calling {@link RangeTermFacetedSearchSearchModel#allRanges()}.
      * @param facetExpression the range facet expression
      * @return a {@code SimpleRangeStats} for the given range facet
      */
@@ -89,9 +89,9 @@ public class PagedSearchResult<T> extends PagedResult<T> {
     }
 
     /**
-     * @see #getRangeStatsOfAllRanges(RangeFacetAndFilterExpression)
+     * @see #getRangeStatsOfAllRanges(RangeFacetedSearchExpression)
      */
-    public SimpleRangeStats getRangeStatsOfAllRanges(final RangeFacetAndFilterExpression<T> facetedSearchExpression) {
+    public SimpleRangeStats getRangeStatsOfAllRanges(final RangeFacetedSearchExpression<T> facetedSearchExpression) {
         return getRangeStatsOfAllRanges(facetedSearchExpression.facetExpression());
     }
 

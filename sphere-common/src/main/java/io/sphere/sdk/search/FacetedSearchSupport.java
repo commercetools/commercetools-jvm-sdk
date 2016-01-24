@@ -4,5 +4,5 @@ import java.util.List;
 
 public interface FacetedSearchSupport<T> {
 
-    List<FacetAndFilterExpression<T>> facetedSearch();
+    List<FacetedSearchExpression<T>> facetedSearch();
 }

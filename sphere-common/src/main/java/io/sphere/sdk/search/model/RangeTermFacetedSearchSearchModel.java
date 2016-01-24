@@ -1,15 +1,15 @@
 package io.sphere.sdk.search.model;
 
-import io.sphere.sdk.search.RangeFacetAndFilterExpression;
-import io.sphere.sdk.search.TermFacetAndFilterExpression;
+import io.sphere.sdk.search.RangeFacetedSearchExpression;
+import io.sphere.sdk.search.TermFacetedSearchExpression;
 
 /**
  * Model to build range and term facets and filters.
  * @param <T> type of the resource
  */
-public class RangeTermFacetAndFilterSearchModel<T> extends RangeTermFacetAndFilterBaseSearchModel<T> {
+public class RangeTermFacetedSearchSearchModel<T> extends RangeTermFacetedSearchBaseSearchModel<T> {
 
-    RangeTermFacetAndFilterSearchModel(final SearchModel<T> searchModel) {
+    RangeTermFacetedSearchSearchModel(final SearchModel<T> searchModel) {
         super(searchModel);
     }
 
@@ -17,7 +17,7 @@ public class RangeTermFacetAndFilterSearchModel<T> extends RangeTermFacetAndFilt
      * {@inheritDoc}
      */
     @Override
-    public RangeFacetAndFilterExpression<T> isBetween(final FilterRange<String> range) {
+    public RangeFacetedSearchExpression<T> isBetween(final FilterRange<String> range) {
         return super.isBetween(range);
     }
 
@@ -25,7 +25,7 @@ public class RangeTermFacetAndFilterSearchModel<T> extends RangeTermFacetAndFilt
      * {@inheritDoc}
      */
     @Override
-    public RangeFacetAndFilterExpression<T> isBetweenAny(final Iterable<FilterRange<String>> ranges) {
+    public RangeFacetedSearchExpression<T> isBetweenAny(final Iterable<FilterRange<String>> ranges) {
         return super.isBetweenAny(ranges);
     }
 
@@ -33,7 +33,7 @@ public class RangeTermFacetAndFilterSearchModel<T> extends RangeTermFacetAndFilt
      * {@inheritDoc}
      */
     @Override
-    public RangeFacetAndFilterExpression<T> isBetweenAll(final Iterable<FilterRange<String>> ranges) {
+    public RangeFacetedSearchExpression<T> isBetweenAll(final Iterable<FilterRange<String>> ranges) {
         return super.isBetweenAll(ranges);
     }
 
@@ -41,7 +41,7 @@ public class RangeTermFacetAndFilterSearchModel<T> extends RangeTermFacetAndFilt
      * {@inheritDoc}
      */
     @Override
-    public RangeFacetAndFilterExpression<T> allRanges() {
+    public RangeFacetedSearchExpression<T> allRanges() {
         return super.allRanges();
     }
 
@@ -49,7 +49,7 @@ public class RangeTermFacetAndFilterSearchModel<T> extends RangeTermFacetAndFilt
      * {@inheritDoc}
      */
     @Override
-    public TermFacetAndFilterExpression<T> allTerms() {
+    public TermFacetedSearchExpression<T> allTerms() {
         return super.allTerms();
     }
 
@@ -57,7 +57,7 @@ public class RangeTermFacetAndFilterSearchModel<T> extends RangeTermFacetAndFilt
      * {@inheritDoc}
      */
     @Override
-    public TermFacetAndFilterExpression<T> is(final String value) {
+    public TermFacetedSearchExpression<T> is(final String value) {
         return super.is(value);
     }
 
@@ -65,7 +65,7 @@ public class RangeTermFacetAndFilterSearchModel<T> extends RangeTermFacetAndFilt
      * {@inheritDoc}
      */
     @Override
-    public TermFacetAndFilterExpression<T> isIn(final Iterable<String> values) {
+    public TermFacetedSearchExpression<T> isIn(final Iterable<String> values) {
         return super.isIn(values);
     }
 
@@ -73,7 +73,7 @@ public class RangeTermFacetAndFilterSearchModel<T> extends RangeTermFacetAndFilt
      * {@inheritDoc}
      */
     @Override
-    public TermFacetAndFilterExpression<T> containsAny(final Iterable<String> values) {
+    public TermFacetedSearchExpression<T> containsAny(final Iterable<String> values) {
         return super.containsAny(values);
     }
 
@@ -81,7 +81,7 @@ public class RangeTermFacetAndFilterSearchModel<T> extends RangeTermFacetAndFilt
      * {@inheritDoc}
      */
     @Override
-    public TermFacetAndFilterExpression<T> containsAll(final Iterable<String> values) {
+    public TermFacetedSearchExpression<T> containsAll(final Iterable<String> values) {
         return super.containsAll(values);
     }
 
@@ -91,7 +91,7 @@ public class RangeTermFacetAndFilterSearchModel<T> extends RangeTermFacetAndFilt
      * @param <T> type of the resource
      * @return new instance of RangeTermFacetAndFilterSearchModel
      */
-    public static <T> RangeTermFacetAndFilterSearchModel<T> of(final String attributePath) {
-        return new RangeTermFacetAndFilterSearchModel<>(new SearchModelImpl<>(attributePath));
+    public static <T> RangeTermFacetedSearchSearchModel<T> of(final String attributePath) {
+        return new RangeTermFacetedSearchSearchModel<>(new SearchModelImpl<>(attributePath));
     }
 }

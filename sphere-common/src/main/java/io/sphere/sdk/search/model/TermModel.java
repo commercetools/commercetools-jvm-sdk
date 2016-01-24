@@ -19,6 +19,6 @@ interface TermModel<T, V> {
      * and an expression to filter elements by certain values.
      * @return the model to specify the values from which to obtain the facets and to filter by
      */
-    TermFacetAndFilterSearchModel<T> facetedAndFiltered();
+    TermFacetedSearchSearchModel<T> facetedAndFiltered();
 
 }
