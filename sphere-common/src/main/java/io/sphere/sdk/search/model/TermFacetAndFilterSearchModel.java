@@ -18,18 +18,18 @@ public class TermFacetAndFilterSearchModel<T> extends TermFacetAndFilterBaseSear
     }
 
     @Override
-    public TermFacetAndFilterExpression<T> by(final String value) {
-        return super.by(value);
+    public TermFacetAndFilterExpression<T> is(final String value) {
+        return super.is(value);
     }
 
     @Override
-    public TermFacetAndFilterExpression<T> byAny(final Iterable<String> values) {
-        return super.byAny(values);
+    public TermFacetAndFilterExpression<T> containsAny(final Iterable<String> values) {
+        return super.containsAny(values);
     }
 
     @Override
-    public TermFacetAndFilterExpression<T> byAll(final Iterable<String> values) {
-        return super.byAll(values);
+    public TermFacetAndFilterExpression<T> containsAll(final Iterable<String> values) {
+        return super.containsAll(values);
     }
 
     /**

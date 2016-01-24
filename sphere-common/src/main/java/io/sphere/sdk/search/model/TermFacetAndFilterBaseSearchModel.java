@@ -27,24 +27,36 @@ abstract class TermFacetAndFilterBaseSearchModel<T> extends Base implements Face
         this.filterSearchModel = new TermFilterSearchModel<>(searchModel, TYPE_SERIALIZER);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public TermFacetAndFilterExpression<T> allTerms() {
         return buildExpression(emptyList());
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public TermFacetAndFilterExpression<T> by(final String value) {
-        return byAny(singletonList(value));
+    public TermFacetAndFilterExpression<T> is(final String value) {
+        return containsAny(singletonList(value));
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public TermFacetAndFilterExpression<T> byAny(final Iterable<String> values) {
-        return buildExpression(filterSearchModel.byAnyAsString(values));
+    public TermFacetAndFilterExpression<T> containsAny(final Iterable<String> values) {
+        return buildExpression(filterSearchModel.containsAnyAsString(values));
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public TermFacetAndFilterExpression<T> byAll(final Iterable<String> values) {
-        return buildExpression(filterSearchModel.byAll(values));
+    public TermFacetAndFilterExpression<T> containsAll(final Iterable<String> values) {
+        return buildExpression(filterSearchModel.containsAll(values));
     }
 
     private TermFacetAndFilterExpression<T> buildExpression(final List<FilterExpression<T>> filterExpressions) {

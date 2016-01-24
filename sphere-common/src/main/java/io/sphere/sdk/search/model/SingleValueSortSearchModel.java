@@ -13,13 +13,13 @@ public class SingleValueSortSearchModel<T> extends SortSearchModelImpl<T> {
     }
 
     @Override
-    public SortExpression<T> byAsc() {
-        return super.byAsc();
+    public SortExpression<T> asc() {
+        return super.asc();
     }
 
     @Override
-    public SortExpression<T> byDesc() {
-        return super.byDesc();
+    public SortExpression<T> desc() {
+        return super.desc();
     }
 
     /**

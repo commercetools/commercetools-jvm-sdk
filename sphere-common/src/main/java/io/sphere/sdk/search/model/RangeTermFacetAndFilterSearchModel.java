@@ -13,44 +13,76 @@ public class RangeTermFacetAndFilterSearchModel<T> extends RangeTermFacetAndFilt
         super(searchModel);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public RangeFacetAndFilterExpression<T> byRange(final FilterRange<String> range) {
-        return super.byRange(range);
+    public RangeFacetAndFilterExpression<T> isBetween(final FilterRange<String> range) {
+        return super.isBetween(range);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public RangeFacetAndFilterExpression<T> byAnyRange(final Iterable<FilterRange<String>> ranges) {
-        return super.byAnyRange(ranges);
+    public RangeFacetAndFilterExpression<T> isBetweenAny(final Iterable<FilterRange<String>> ranges) {
+        return super.isBetweenAny(ranges);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public RangeFacetAndFilterExpression<T> byAllRanges(final Iterable<FilterRange<String>> ranges) {
-        return super.byAllRanges(ranges);
+    public RangeFacetAndFilterExpression<T> isBetweenAll(final Iterable<FilterRange<String>> ranges) {
+        return super.isBetweenAll(ranges);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public RangeFacetAndFilterExpression<T> allRanges() {
         return super.allRanges();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public TermFacetAndFilterExpression<T> allTerms() {
         return super.allTerms();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public TermFacetAndFilterExpression<T> by(final String value) {
-        return super.by(value);
+    public TermFacetAndFilterExpression<T> is(final String value) {
+        return super.is(value);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public TermFacetAndFilterExpression<T> byAny(final Iterable<String> values) {
-        return super.byAny(values);
+    public TermFacetAndFilterExpression<T> isIn(final Iterable<String> values) {
+        return super.isIn(values);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public TermFacetAndFilterExpression<T> byAll(final Iterable<String> values) {
-        return super.byAll(values);
+    public TermFacetAndFilterExpression<T> containsAny(final Iterable<String> values) {
+        return super.containsAny(values);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public TermFacetAndFilterExpression<T> containsAll(final Iterable<String> values) {
+        return super.containsAll(values);
     }
 
     /**

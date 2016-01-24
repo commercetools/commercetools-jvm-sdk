@@ -27,30 +27,8 @@ abstract class RangeTermFilterBaseSearchModel<T, V extends Comparable<? super V>
      * @param range the range of values to filter by
      * @return a filter expression for the given range
      */
-    public List<FilterExpression<T>> byRange(final FilterRange<V> range) {
+    public List<FilterExpression<T>> isBetween(final FilterRange<V> range) {
         return singletonList(filterBy(range));
-    }
-
-    /**
-     * Generates an expression to select all elements with an attribute value within any of the given ranges.
-     * For example: filtering by [[3, 7], [5, 9]] would select only those elements with values within 3 and 7, or within 5 and 9, both inclusive.
-     * @param ranges the ranges of values to filter by
-     * @return a filter expression for the given ranges
-     */
-    public List<FilterExpression<T>> byAnyRange(final Iterable<FilterRange<V>> ranges) {
-        return singletonList(filterBy(ranges));
-    }
-
-    /**
-     * Generates an expression to select all elements with an attribute value within all the given ranges.
-     * For example: filtering by [[3, 7], [5, 9]] would select only those elements with values within the range intersection [5, 7], inclusive.
-     * @param ranges the ranges of values to filter by
-     * @return a filter expression for the given ranges
-     */
-    public List<FilterExpression<T>> byAllRanges(final Iterable<FilterRange<V>> ranges) {
-        return StreamSupport.stream(ranges.spliterator(), false)
-                .map(range -> filterBy(range))
-                .collect(toList());
     }
 
     /**
@@ -60,8 +38,30 @@ abstract class RangeTermFilterBaseSearchModel<T, V extends Comparable<? super V>
      * @param upperEndpoint the upper endpoint of the range of values to filter by, inclusive
      * @return a filter expression for the given range
      */
-    public List<FilterExpression<T>> byRange(final V lowerEndpoint, final V upperEndpoint) {
+    public List<FilterExpression<T>> isBetween(final V lowerEndpoint, final V upperEndpoint) {
         return singletonList(filterBy(FilterRange.of(lowerEndpoint, upperEndpoint)));
+    }
+
+    /**
+     * Generates an expression to select all elements with an attribute value within any of the given ranges.
+     * For example: filtering by [[3, 7], [5, 9]] would select only those elements with values within 3 and 7, or within 5 and 9, both inclusive.
+     * @param ranges the ranges of values to filter by
+     * @return a filter expression for the given ranges
+     */
+    public List<FilterExpression<T>> isBetweenAny(final Iterable<FilterRange<V>> ranges) {
+        return singletonList(filterBy(ranges));
+    }
+
+    /**
+     * Generates an expression to select all elements with an attribute value within all the given ranges.
+     * For example: filtering by [[3, 7], [5, 9]] would select only those elements with values within the range intersection [5, 7], inclusive.
+     * @param ranges the ranges of values to filter by
+     * @return a filter expression for the given ranges
+     */
+    public List<FilterExpression<T>> isBetweenAll(final Iterable<FilterRange<V>> ranges) {
+        return StreamSupport.stream(ranges.spliterator(), false)
+                .map(range -> filterBy(range))
+                .collect(toList());
     }
 
     /**
@@ -70,7 +70,7 @@ abstract class RangeTermFilterBaseSearchModel<T, V extends Comparable<? super V>
      * @param value the lower endpoint of the range [v, +∞)
      * @return a filter expression for the given range
      */
-    public List<FilterExpression<T>> byGreaterThanOrEqualTo(final V value) {
+    public List<FilterExpression<T>> isGreaterThanOrEqualTo(final V value) {
         return singletonList(filterBy(FilterRange.atLeast(value)));
     }
 
@@ -80,7 +80,7 @@ abstract class RangeTermFilterBaseSearchModel<T, V extends Comparable<? super V>
      * @param value the upper endpoint of the range (-∞, v]
      * @return a filter expression for the given range
      */
-    public List<FilterExpression<T>> byLessThanOrEqualTo(final V value) {
+    public List<FilterExpression<T>> isLessThanOrEqualTo(final V value) {
         return singletonList(filterBy(FilterRange.atMost(value)));
     }
 
@@ -90,7 +90,7 @@ abstract class RangeTermFilterBaseSearchModel<T, V extends Comparable<? super V>
      * @param range the range of values (as string) to filter by
      * @return a filter expression for the given range
      */
-    public List<FilterExpression<T>> byRangeAsString(final FilterRange<String> range) {
+    public List<FilterExpression<T>> isBetweenAsString(final FilterRange<String> range) {
         return singletonList(filterByAsString(range));
     }
 
@@ -100,7 +100,7 @@ abstract class RangeTermFilterBaseSearchModel<T, V extends Comparable<? super V>
      * @param ranges the ranges of values (as string) to filter by
      * @return a filter expression for the given ranges
      */
-    public List<FilterExpression<T>> byAnyRangeAsString(final Iterable<FilterRange<String>> ranges) {
+    public List<FilterExpression<T>> isBetweenAnyAsString(final Iterable<FilterRange<String>> ranges) {
         return singletonList(filterByAsString(ranges));
     }
 
@@ -110,10 +110,82 @@ abstract class RangeTermFilterBaseSearchModel<T, V extends Comparable<? super V>
      * @param ranges the ranges of values (as string) to filter by
      * @return a filter expression for the given ranges
      */
-    public List<FilterExpression<T>> byAllRangesAsString(final Iterable<FilterRange<String>> ranges) {
+    public List<FilterExpression<T>> isBetweenAllAsString(final Iterable<FilterRange<String>> ranges) {
         return StreamSupport.stream(ranges.spliterator(), false)
                 .map(range -> filterByAsString(range))
                 .collect(toList());
+    }
+
+    /**
+     * @deprecated use {@link #isBetween(FilterRange)} instead
+     */
+    @Deprecated
+    public List<FilterExpression<T>> byRange(final FilterRange<V> range) {
+        return isBetween(range);
+    }
+
+    /**
+     * @deprecated use {@link #isBetween(Comparable, Comparable)} instead
+     */
+    @Deprecated
+    public List<FilterExpression<T>> byRange(final V lowerEndpoint, final V upperEndpoint) {
+        return isBetween(lowerEndpoint, upperEndpoint);
+    }
+
+    /**
+     * @deprecated use {@link #isBetweenAny(Iterable)} instead
+     */
+    @Deprecated
+    public List<FilterExpression<T>> byAnyRange(final Iterable<FilterRange<V>> ranges) {
+        return isBetweenAny(ranges);
+    }
+
+    /**
+     * @deprecated use {@link #isBetweenAll(Iterable)} instead
+     */
+    @Deprecated
+    public List<FilterExpression<T>> byAllRanges(final Iterable<FilterRange<V>> ranges) {
+        return isBetweenAll(ranges);
+    }
+
+    /**
+     * @deprecated use {@link #isGreaterThanOrEqualTo(Comparable)} instead
+     */
+    @Deprecated
+    public List<FilterExpression<T>> byGreaterThanOrEqualTo(final V value) {
+        return isGreaterThanOrEqualTo(value);
+    }
+
+    /**
+     * @deprecated use {@link #isLessThanOrEqualTo(Comparable)} instead
+     */
+    @Deprecated
+    public List<FilterExpression<T>> byLessThanOrEqualTo(final V value) {
+        return isLessThanOrEqualTo(value);
+    }
+
+    /**
+     * @deprecated use {@link #isBetweenAsString(FilterRange)} instead
+     */
+    @Deprecated
+    public List<FilterExpression<T>> byRangeAsString(final FilterRange<String> range) {
+        return isBetweenAsString(range);
+    }
+
+    /**
+     * @deprecated use {@link #isBetweenAnyAsString(Iterable)} instead
+     */
+    @Deprecated
+    public List<FilterExpression<T>> byAnyRangeAsString(final Iterable<FilterRange<String>> ranges) {
+        return isBetweenAnyAsString(ranges);
+    }
+
+    /**
+     * @deprecated use {@link #isBetweenAllAsString(Iterable)} instead
+     */
+    @Deprecated
+    public List<FilterExpression<T>> byAllRangesAsString(final Iterable<FilterRange<String>> ranges) {
+        return isBetweenAllAsString(ranges);
     }
 
     private RangeFilterExpression<T, V> filterBy(final FilterRange<V> range) {

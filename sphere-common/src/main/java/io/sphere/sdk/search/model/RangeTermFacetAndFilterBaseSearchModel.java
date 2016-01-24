@@ -38,8 +38,8 @@ abstract class RangeTermFacetAndFilterBaseSearchModel<T> extends TermFacetAndFil
      * @param range the range of values to filter by
      * @return a bundle of the filter expressions for the given range and a facet expression for all ranges
      */
-    public RangeFacetAndFilterExpression<T> byRange(final FilterRange<String> range) {
-        return byAnyRange(singletonList(range));
+    public RangeFacetAndFilterExpression<T> isBetween(final FilterRange<String> range) {
+        return isBetweenAny(singletonList(range));
     }
 
     /**
@@ -48,8 +48,8 @@ abstract class RangeTermFacetAndFilterBaseSearchModel<T> extends TermFacetAndFil
      * @param ranges the ranges of values to filter by
      * @return a bundle of the filter expressions for the given ranges and a facet expression for all ranges
      */
-    public RangeFacetAndFilterExpression<T> byAnyRange(final Iterable<FilterRange<String>> ranges) {
-        return buildExpression(filterSearchModel.byAnyRangeAsString(ranges));
+    public RangeFacetAndFilterExpression<T> isBetweenAny(final Iterable<FilterRange<String>> ranges) {
+        return buildExpression(filterSearchModel.isBetweenAnyAsString(ranges));
     }
 
     /**
@@ -58,8 +58,32 @@ abstract class RangeTermFacetAndFilterBaseSearchModel<T> extends TermFacetAndFil
      * @param ranges the ranges of values to filter by
      * @return a bundle of the filter expressions for the given ranges and a facet expression for all ranges
      */
+    public RangeFacetAndFilterExpression<T> isBetweenAll(final Iterable<FilterRange<String>> ranges) {
+        return buildExpression(filterSearchModel.isBetweenAllAsString(ranges));
+    }
+
+    /**
+     * @deprecated use {@link #isBetween(FilterRange)} instead
+     */
+    @Deprecated
+    public RangeFacetAndFilterExpression<T> byRange(final FilterRange<String> range) {
+        return isBetween(range);
+    }
+
+    /**
+     * @deprecated use {@link #isBetweenAny(Iterable)} instead
+     */
+    @Deprecated
+    public RangeFacetAndFilterExpression<T> byAnyRange(final Iterable<FilterRange<String>> ranges) {
+        return isBetweenAny(ranges);
+    }
+
+    /**
+     * @deprecated use {@link #isBetweenAll(Iterable)}  instead
+     */
+    @Deprecated
     public RangeFacetAndFilterExpression<T> byAllRanges(final Iterable<FilterRange<String>> ranges) {
-        return buildExpression(filterSearchModel.byAllRangesAsString(ranges));
+        return isBetweenAll(ranges);
     }
 
     private RangeFacetAndFilterExpression<T> buildExpression(final List<FilterExpression<T>> filterExpressions) {

@@ -1,6 +1,5 @@
 package io.sphere.sdk.products.search;
 
-import io.sphere.sdk.client.SphereRequest;
 import io.sphere.sdk.products.*;
 import io.sphere.sdk.products.attributes.*;
 import io.sphere.sdk.models.LocalizedString;
@@ -76,7 +75,7 @@ public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
                 .orElseGet(() -> createEvilProductType());
 
         final Query<Product> query = ProductQuery.of()
-                .withPredicates(m -> m.masterData().staged().masterVariant().sku().isIn(asList(SKU1, SKU2, SKU3, SKU_A, SKU_B)));
+                .withPredicates(product -> product.masterData().staged().masterVariant().sku().isIn(asList(SKU1, SKU2, SKU3, SKU_A, SKU_B)));
         final List<Product> products = client().executeBlocking(query).getResults();
 
         final Function<String, Optional<Product>> findBySku =
@@ -95,13 +94,13 @@ public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
 
     protected static PagedSearchResult<ProductProjection> executeSearch(final ProductProjectionSearch search) {
         final List<String> ids = asList(product1.getId(), product2.getId(), product3.getId());
-        final ProductProjectionSearch sphereRequest = search.plusQueryFilters(filter -> filter.id().byAny(ids));
+        final ProductProjectionSearch sphereRequest = search.plusQueryFilters(product -> product.id().isIn(ids));
         return client().executeBlocking(sphereRequest);
     }
 
     protected static PagedSearchResult<ProductProjection> executeEvilSearch(final ProductProjectionSearch search) {
         final List<String> ids = asList(evilProduct1.getId(), evilProduct2.getId());
-        final ProductProjectionSearch sphereRequest = search.plusQueryFilters(filter -> filter.id().byAny(ids));
+        final ProductProjectionSearch sphereRequest = search.plusQueryFilters(product -> product.id().containsAny(ids));
         return client().executeBlocking(sphereRequest);
     }
 

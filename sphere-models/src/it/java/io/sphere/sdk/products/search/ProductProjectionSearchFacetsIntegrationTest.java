@@ -11,11 +11,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class ProductProjectionSearchFacetsIntegrationTest extends ProductProjectionSearchIntegrationTest {
 
-    public static final ProductDataFacetSearchModel FACET = ProductProjectionSearchModel.of().facet();
+    public static final ProductDataFacetSearchModel PRODUCT_MODEL = ProductProjectionSearchModel.of().facet();
 
     @Test
     public void responseContainsRangeFacetsForAttributes() throws Exception {
-        final RangeFacetExpression<ProductProjection> facetExpr = FACET.allVariants().price().centAmount().onlyGreaterThanOrEqualTo(0L);
+        final RangeFacetExpression<ProductProjection> facetExpr = PRODUCT_MODEL.allVariants().price().centAmount().onlyGreaterThanOrEqualTo(0L);
         final ProductProjectionSearch search = ProductProjectionSearch.ofStaged().plusFacets(facetExpr);
         final PagedSearchResult<ProductProjection> result = executeSearch(search);
         assertThat(result.getRangeFacetResult(facetExpr).getRanges().get(0).getCount()).isGreaterThan(0);
@@ -23,7 +23,7 @@ public class ProductProjectionSearchFacetsIntegrationTest extends ProductProject
 
     @Test
     public void responseContainsTermFacetsForAttributes() throws Exception {
-        final TermFacetExpression<ProductProjection> facetExpr = FACET.allVariants().attribute().ofString(ATTR_NAME_COLOR).allTerms();
+        final TermFacetExpression<ProductProjection> facetExpr = PRODUCT_MODEL.allVariants().attribute().ofString(ATTR_NAME_COLOR).allTerms();
         final ProductProjectionSearch search = ProductProjectionSearch.ofStaged().plusFacets(facetExpr);
         final PagedSearchResult<ProductProjection> result = executeSearch(search);
         assertThat(result.getTermFacetResult(facetExpr).getTerms()).containsOnly(TermStats.of("blue", 2L), TermStats.of("red", 1L));
@@ -31,7 +31,7 @@ public class ProductProjectionSearchFacetsIntegrationTest extends ProductProject
 
     @Test
     public void termFacetsAreParsed() throws Exception {
-        final TermFacetExpression<ProductProjection> facetExpr = FACET.allVariants().attribute().ofString(ATTR_NAME_COLOR).allTerms();
+        final TermFacetExpression<ProductProjection> facetExpr = PRODUCT_MODEL.allVariants().attribute().ofString(ATTR_NAME_COLOR).allTerms();
         final ProductProjectionSearch search = ProductProjectionSearch.ofStaged().plusFacets(facetExpr);
         final PagedSearchResult<ProductProjection> result = executeSearch(search);
         final TermFacetResult termFacetResult = result.getTermFacetResult(facetExpr);
@@ -43,7 +43,7 @@ public class ProductProjectionSearchFacetsIntegrationTest extends ProductProject
 
     @Test
     public void rangeFacetsAreParsed() throws Exception {
-        final RangeFacetExpression<ProductProjection> facetExpr = FACET.allVariants().attribute().ofNumber(ATTR_NAME_SIZE).onlyGreaterThanOrEqualTo(ZERO);
+        final RangeFacetExpression<ProductProjection> facetExpr = PRODUCT_MODEL.allVariants().attribute().ofNumber(ATTR_NAME_SIZE).onlyGreaterThanOrEqualTo(ZERO);
         final ProductProjectionSearch search = ProductProjectionSearch.ofStaged().plusFacets(facetExpr);
         final PagedSearchResult<ProductProjection> result = executeSearch(search);
         final RangeStats rangeStats = result.getRangeFacetResult(facetExpr).getRanges().get(0);
@@ -58,7 +58,7 @@ public class ProductProjectionSearchFacetsIntegrationTest extends ProductProject
 
     @Test
     public void filteredFacetsAreParsed() throws Exception {
-        final FilteredFacetExpression<ProductProjection> facetExpr = FACET.allVariants().attribute().ofString(ATTR_NAME_COLOR).onlyTerm("blue");
+        final FilteredFacetExpression<ProductProjection> facetExpr = PRODUCT_MODEL.allVariants().attribute().ofString(ATTR_NAME_COLOR).onlyTerm("blue");
         final ProductProjectionSearch search = ProductProjectionSearch.ofStaged().plusFacets(facetExpr);
         final PagedSearchResult<ProductProjection> result = executeSearch(search);
         final FilteredFacetResult filteredFacetResult = result.getFilteredFacetResult(facetExpr);
@@ -80,8 +80,8 @@ public class ProductProjectionSearchFacetsIntegrationTest extends ProductProject
     public void termFacetsSupportsAlias() throws Exception {
         final String allFacetAlias = "my-facet";
         final String blueFacetAlias = "my-blue-facet";
-        final TermFacetExpression<ProductProjection> allFacetExpr = FACET.allVariants().attribute().ofString(ATTR_NAME_COLOR).withAlias(allFacetAlias).allTerms();
-        final FilteredFacetExpression<ProductProjection> blueFacetExpr = FACET.allVariants().attribute().ofString(ATTR_NAME_COLOR).withAlias(blueFacetAlias).onlyTerm("blue");
+        final TermFacetExpression<ProductProjection> allFacetExpr = PRODUCT_MODEL.allVariants().attribute().ofString(ATTR_NAME_COLOR).withAlias(allFacetAlias).allTerms();
+        final FilteredFacetExpression<ProductProjection> blueFacetExpr = PRODUCT_MODEL.allVariants().attribute().ofString(ATTR_NAME_COLOR).withAlias(blueFacetAlias).onlyTerm("blue");
         final ProductProjectionSearch search = ProductProjectionSearch.ofStaged()
                 .plusFacets(allFacetExpr)
                 .plusFacets(blueFacetExpr);
@@ -97,7 +97,7 @@ public class ProductProjectionSearchFacetsIntegrationTest extends ProductProject
     @Test
     public void rangeFacetsSupportsAlias() throws Exception {
         final String alias = "my-facet";
-        final RangeFacetExpression<ProductProjection> facetExpr = FACET.allVariants().attribute().ofNumber(ATTR_NAME_SIZE).withAlias(alias).onlyGreaterThanOrEqualTo(ZERO);
+        final RangeFacetExpression<ProductProjection> facetExpr = PRODUCT_MODEL.allVariants().attribute().ofNumber(ATTR_NAME_SIZE).withAlias(alias).onlyGreaterThanOrEqualTo(ZERO);
         final ProductProjectionSearch search = ProductProjectionSearch.ofStaged().plusFacets(facetExpr);
         final PagedSearchResult<ProductProjection> result = executeSearch(search);
         assertThat(facetExpr.resultPath()).isEqualTo(alias);
@@ -114,7 +114,7 @@ public class ProductProjectionSearchFacetsIntegrationTest extends ProductProject
     @Test
     public void filteredFacetsSupportsAlias() throws Exception {
         final String alias = "my-facet";
-        final FilteredFacetExpression<ProductProjection> facetExpr = FACET.allVariants().attribute().ofString(ATTR_NAME_COLOR).withAlias(alias).onlyTerm("blue");
+        final FilteredFacetExpression<ProductProjection> facetExpr = PRODUCT_MODEL.allVariants().attribute().ofString(ATTR_NAME_COLOR).withAlias(alias).onlyTerm("blue");
         final ProductProjectionSearch search = ProductProjectionSearch.ofStaged().plusFacets(facetExpr);
         final PagedSearchResult<ProductProjection> result = executeSearch(search);
         assertThat(facetExpr.resultPath()).isEqualTo(alias);

@@ -20,21 +20,33 @@ public class TermFacetSearchModel<T, V> extends TermFacetBaseSearchModel<T, V> {
         super(searchModel, typeSerializer);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public TermFacetSearchModel<T, V> withAlias(final String alias) {
         return new TermFacetSearchModel<>(searchModel, typeSerializer, alias);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public TermFacetExpression<T> allTerms() {
         return super.allTerms();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public FilteredFacetExpression<T> onlyTerm(final V value) {
         return super.onlyTerm(value);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public FilteredFacetExpression<T> onlyTerm(final Iterable<V> values) {
         return super.onlyTerm(values);

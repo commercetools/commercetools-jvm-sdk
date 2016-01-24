@@ -19,8 +19,8 @@ public class MultiValueSortSearchModel<T> extends SortSearchModelImpl<T> {
      * @return the ascending sort direction
      */
     @Override
-    public SortExpression<T> byAsc() {
-        return super.byAsc();
+    public SortExpression<T> asc() {
+        return super.asc();
     }
 
     /**
@@ -28,15 +28,15 @@ public class MultiValueSortSearchModel<T> extends SortSearchModelImpl<T> {
      * @return the descending sort direction
      */
     @Override
-    public SortExpression<T> byDesc() {
-        return super.byDesc();
+    public SortExpression<T> desc() {
+        return super.desc();
     }
 
     /**
      * Changes the default behaviour of the ascending sort by using the maximum value instead.
      * @return the ascending sort direction using the maximum value
      */
-    public SortExpression<T> byAscWithMax() {
+    public SortExpression<T> ascWithMaxValue() {
         return by(ASC_MAX);
     }
 
@@ -44,6 +44,22 @@ public class MultiValueSortSearchModel<T> extends SortSearchModelImpl<T> {
      * Changes the default behaviour of the descending sort by using the minimum value instead.
      * @return the descending sort direction using the minimum value
      */
+    public SortExpression<T> descWithMinValue() {
+        return by(DESC_MIN);
+    }
+
+    /**
+     * @deprecated use {@link #ascWithMaxValue()} instead
+     */
+    @Deprecated
+    public SortExpression<T> byAscWithMax() {
+        return by(ASC_MAX);
+    }
+
+    /**
+     * @deprecated use {@link #descWithMinValue()} instead
+     */
+    @Deprecated
     public SortExpression<T> byDescWithMin() {
         return by(DESC_MIN);
     }

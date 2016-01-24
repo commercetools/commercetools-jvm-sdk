@@ -26,7 +26,7 @@ public class FullLocaleSearchTest extends IntegrationTest {
         withProduct(client(), productBuilder -> productBuilder.name(apricot), product -> {
             final ProductProjectionSearch austrianSearchRequest = ProductProjectionSearch.ofStaged()
                     .withText(austria, marille)
-                    .plusQueryFilters(m -> m.id().by(product.getId()));
+                    .plusQueryFilters(productModel -> productModel.id().is(product.getId()));
             final ProductProjectionSearch germanSearchRequest = austrianSearchRequest.withText(GERMAN, marille);
             assertEventually(() -> {
                 final List<ProductProjection> results = client().executeBlocking(austrianSearchRequest).getResults();
