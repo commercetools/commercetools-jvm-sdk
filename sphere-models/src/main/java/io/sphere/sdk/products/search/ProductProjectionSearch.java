@@ -112,16 +112,16 @@ public interface ProductProjectionSearch extends MetaModelSearchDsl<ProductProje
     ProductProjectionSearch plusExpansionPaths(final ExpansionPath<ProductProjection> expansionPath);
 
     @Override
-    ProductProjectionSearch plusFacetedSearch(final FacetAndFilterExpression<ProductProjection> facetedSearchExpression);
+    ProductProjectionSearch plusFacetedSearch(final FacetedSearchExpression<ProductProjection> facetedSearchExpression);
 
     @Override
-    ProductProjectionSearch plusFacetedSearch(final List<FacetAndFilterExpression<ProductProjection>> facetedSearchExpressions);
+    ProductProjectionSearch plusFacetedSearch(final List<FacetedSearchExpression<ProductProjection>> facetedSearchExpressions);
 
     @Override
-    ProductProjectionSearch withFacetedSearch(final FacetAndFilterExpression<ProductProjection> facetedSearchExpression);
+    ProductProjectionSearch withFacetedSearch(final FacetedSearchExpression<ProductProjection> facetedSearchExpression);
 
     @Override
-    ProductProjectionSearch withFacetedSearch(final List<FacetAndFilterExpression<ProductProjection>> facetedSearchExpressions);
+    ProductProjectionSearch withFacetedSearch(final List<FacetedSearchExpression<ProductProjection>> facetedSearchExpressions);
 
     @Override
     ProductProjectionSearch withQueryFilters(final List<FilterExpression<ProductProjection>> filterExpressions);

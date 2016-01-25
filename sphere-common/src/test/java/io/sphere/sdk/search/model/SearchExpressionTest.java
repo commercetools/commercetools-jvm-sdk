@@ -28,7 +28,7 @@ public class SearchExpressionTest {
 
     @Test
     public void buildsTermFilterExpression() throws Exception {
-        final List<FilterExpression<Object>> filters = TermFilterSearchModel.of(ATTRIBUTE_PATH, ofString()).byAny(TERMS);
+        final List<FilterExpression<Object>> filters = TermFilterSearchModel.of(ATTRIBUTE_PATH, ofString()).isIn(TERMS);
         assertThat(filters).hasSize(1);
         final FilterExpression<Object> filter = filters.get(0);
         assertThat(filter.expression()).isEqualTo(ATTRIBUTE_PATH + TERM_VALUE);
@@ -38,7 +38,7 @@ public class SearchExpressionTest {
 
     @Test
     public void buildsRangeFilterExpression() throws Exception {
-        final List<FilterExpression<Object>> filters = RangeTermFilterSearchModel.of(ATTRIBUTE_PATH, ofNumber()).byAnyRange(FILTER_RANGES);
+        final List<FilterExpression<Object>> filters = RangeTermFilterSearchModel.of(ATTRIBUTE_PATH, ofNumber()).isBetweenAny(FILTER_RANGES);
         assertThat(filters).hasSize(1);
         final FilterExpression<Object> filter = filters.get(0);
         assertThat(filter.expression()).isEqualTo(ATTRIBUTE_PATH + RANGE_VALUE);
@@ -108,7 +108,7 @@ public class SearchExpressionTest {
 
     @Test
     public void buildsSingleValuedSortExpression() throws Exception {
-        final SortExpression<Object> sort = SingleValueSortSearchModel.of(ATTRIBUTE_PATH).byAsc();
+        final SortExpression<Object> sort = SingleValueSortSearchModel.of(ATTRIBUTE_PATH).asc();
         assertThat(sort.expression()).isEqualTo(ATTRIBUTE_PATH + " " + ASC);
         assertThat(sort.attributePath()).isEqualTo(ATTRIBUTE_PATH);
         assertThat(sort.value()).isEqualTo(ASC.toString());
@@ -116,7 +116,7 @@ public class SearchExpressionTest {
 
     @Test
     public void buildsMultiValuedSortExpression() throws Exception {
-        final SortExpression<Object> sort = MultiValueSortSearchModel.of(ATTRIBUTE_PATH).byAscWithMax();
+        final SortExpression<Object> sort = MultiValueSortSearchModel.of(ATTRIBUTE_PATH).ascWithMaxValue();
         assertThat(sort.expression()).isEqualTo(ATTRIBUTE_PATH + " " + ASC_MAX);
         assertThat(sort.attributePath()).isEqualTo(ATTRIBUTE_PATH);
         assertThat(sort.value()).isEqualTo(ASC_MAX.toString());
@@ -124,14 +124,14 @@ public class SearchExpressionTest {
 
     @Test
     public void failsOnEmptyTermFilterExpression() throws Exception {
-        assertThatThrownBy(() -> TermFilterSearchModel.of(ATTRIBUTE_PATH, ofString()).byAny(emptyList()))
+        assertThatThrownBy(() -> TermFilterSearchModel.of(ATTRIBUTE_PATH, ofString()).isIn(emptyList()))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("iterable must not be empty");
     }
 
     @Test
     public void failsOnEmptyRangeFilterExpression() throws Exception {
-        assertThatThrownBy(() -> RangeTermFilterSearchModel.of(ATTRIBUTE_PATH, ofNumber()).byAnyRange(emptyList()))
+        assertThatThrownBy(() -> RangeTermFilterSearchModel.of(ATTRIBUTE_PATH, ofNumber()).isBetweenAny(emptyList()))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("iterable must not be empty");
     }

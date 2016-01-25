@@ -19,55 +19,55 @@ public class FilterExpressionTest {
 
     @Test
     public void filtersByTerm() throws Exception {
-        testExpression(stringModel().by("foo"), (expr) ->
+        testExpression(stringModel().is("foo"), (expr) ->
                 assertThat(expr).containsExactly("path.to.attribute:\"foo\""));
     }
 
     @Test
     public void filtersByAnyTerm() throws Exception {
-        testExpression(stringModel().byAny(asList("foo", "bar")), (expr) ->
+        testExpression(stringModel().containsAny(asList("foo", "bar")), (expr) ->
                 assertThat(expr).containsExactly("path.to.attribute:\"foo\",\"bar\""));
     }
 
     @Test
     public void filtersByAllTerms() throws Exception {
-        testExpression(stringModel().byAll(asList("foo", "bar")), (expr) ->
+        testExpression(stringModel().containsAll(asList("foo", "bar")), (expr) ->
                 assertThat(expr).containsExactly("path.to.attribute:\"foo\"", "path.to.attribute:\"bar\""));
     }
 
     @Test
     public void filtersByRange() throws Exception {
-        testExpression(numberModel().byRange(RANGE_3_TO_7), (expr) ->
+        testExpression(numberModel().isBetween(RANGE_3_TO_7), (expr) ->
                 assertThat(expr).containsExactly("path.to.attribute:range(3 to 7)"));
     }
 
     @Test
     public void filtersByAnyRange() throws Exception {
-        testExpression(numberModel().byAnyRange(asList(RANGE_3_TO_7, RANGE_5_TO_9)), (expr) ->
+        testExpression(numberModel().isBetweenAny(asList(RANGE_3_TO_7, RANGE_5_TO_9)), (expr) ->
                 assertThat(expr).containsExactly("path.to.attribute:range(3 to 7),(5 to 9)"));
     }
 
     @Test
     public void filtersByAllRanges() throws Exception {
-        testExpression(numberModel().byAllRanges(asList(RANGE_3_TO_7, RANGE_5_TO_9)), (expr) ->
+        testExpression(numberModel().isBetweenAll(asList(RANGE_3_TO_7, RANGE_5_TO_9)), (expr) ->
                 assertThat(expr).containsExactly("path.to.attribute:range(3 to 7)", "path.to.attribute:range(5 to 9)"));
     }
 
     @Test
     public void filtersByRangeBounds() throws Exception {
-        testExpression(numberModel().byRange(valueOf(3), valueOf(7)), (expr) ->
+        testExpression(numberModel().isBetween(valueOf(3), valueOf(7)), (expr) ->
                 assertThat(expr).containsExactly("path.to.attribute:range(3 to 7)"));
     }
 
     @Test
     public void filtersByGreaterThanOrEqualToRange() throws Exception {
-        testExpression(numberModel().byGreaterThanOrEqualTo(valueOf(3)), (expr) ->
+        testExpression(numberModel().isGreaterThanOrEqualTo(valueOf(3)), (expr) ->
                 assertThat(expr).containsExactly("path.to.attribute:range(3 to *)"));
     }
 
     @Test
     public void filtersByLessThanOrEqualToRange() throws Exception {
-        testExpression(numberModel().byLessThanOrEqualTo(valueOf(3)), (expr) ->
+        testExpression(numberModel().isLessThanOrEqualTo(valueOf(3)), (expr) ->
                 assertThat(expr).containsExactly("path.to.attribute:range(* to 3)"));
     }
 

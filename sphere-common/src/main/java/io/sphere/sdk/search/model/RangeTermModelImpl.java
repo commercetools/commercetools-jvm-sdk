@@ -22,7 +22,7 @@ class RangeTermModelImpl<T, V extends Comparable<? super V>> extends SearchModel
     }
 
     @Override
-    public RangeTermFacetAndFilterSearchModel<T> facetedAndFiltered() {
-        return new RangeTermFacetAndFilterSearchModel<>(this);
+    public RangeTermFacetedSearchSearchModel<T> facetedAndFiltered() {
+        return new RangeTermFacetedSearchSearchModel<>(this);
     }
 }

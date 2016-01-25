@@ -22,7 +22,7 @@ abstract class TermModelImpl<T, V> extends SearchModelImpl<T> implements TermMod
     }
 
     @Override
-    public TermFacetAndFilterSearchModel<T> facetedAndFiltered() {
-        return new TermFacetAndFilterSearchModel<>(this);
+    public TermFacetedSearchSearchModel<T> facetedAndFiltered() {
+        return new TermFacetedSearchSearchModel<>(this);
     }
 }

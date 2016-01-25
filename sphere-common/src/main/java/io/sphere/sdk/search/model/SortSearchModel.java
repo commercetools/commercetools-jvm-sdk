@@ -13,10 +13,26 @@ public interface SortSearchModel<T> {
     /**
      * @return the ascending sort direction
      */
-    SortExpression<T> byAsc();
+    SortExpression<T> asc();
 
     /**
      * @return the descending sort direction
      */
-    SortExpression<T> byDesc();
+    SortExpression<T> desc();
+
+    /**
+     * @deprecated use {@link #asc()} instead
+     */
+    @Deprecated
+    default SortExpression<T> byAsc() {
+        return asc();
+    }
+
+    /**
+     * @deprecated use {@link #desc()} instead
+     */
+    @Deprecated
+    default SortExpression<T> byDesc() {
+        return desc();
+    }
 }

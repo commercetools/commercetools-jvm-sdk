@@ -41,12 +41,12 @@ public final class ProductProjectionSearchBuilder extends ResourceMetaModelSearc
     }
 
     @Override
-    public ProductProjectionSearchBuilder facetedSearch(final FacetAndFilterExpression<ProductProjection> facetedSearchExpression) {
+    public ProductProjectionSearchBuilder facetedSearch(final FacetedSearchExpression<ProductProjection> facetedSearchExpression) {
         return super.facetedSearch(facetedSearchExpression);
     }
 
     @Override
-    public ProductProjectionSearchBuilder facetedSearch(final List<FacetAndFilterExpression<ProductProjection>> facetedSearchExpressions) {
+    public ProductProjectionSearchBuilder facetedSearch(final List<FacetedSearchExpression<ProductProjection>> facetedSearchExpressions) {
         return super.facetedSearch(facetedSearchExpressions);
     }
 
@@ -91,12 +91,12 @@ public final class ProductProjectionSearchBuilder extends ResourceMetaModelSearc
     }
 
     @Override
-    public ProductProjectionSearchBuilder plusFacetedSearch(final FacetAndFilterExpression<ProductProjection> facetedSearchExpression) {
+    public ProductProjectionSearchBuilder plusFacetedSearch(final FacetedSearchExpression<ProductProjection> facetedSearchExpression) {
         return super.plusFacetedSearch(facetedSearchExpression);
     }
 
     @Override
-    public ProductProjectionSearchBuilder plusFacetedSearch(final List<FacetAndFilterExpression<ProductProjection>> facetedSearchExpressions) {
+    public ProductProjectionSearchBuilder plusFacetedSearch(final List<FacetedSearchExpression<ProductProjection>> facetedSearchExpressions) {
         return super.plusFacetedSearch(facetedSearchExpressions);
     }
 

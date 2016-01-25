@@ -26,7 +26,7 @@ public class ProductProjectionSearchMainIntegrationTest extends ProductProjectio
 
     public static final NamedAttributeAccess<String> COLOR_ATTRIBUTE_ACCESS = AttributeAccess.ofString().ofName(ATTR_NAME_COLOR);
     public static final NamedAttributeAccess<Long> SIZE_ATTRIBUTE_ACCESS = AttributeAccess.ofLong().ofName(ATTR_NAME_SIZE);
-    public static final ProductProjectionFilterSearchModel FILTER_MODEL = ProductProjectionSearchModel.of().filter();
+    public static final ProductProjectionFilterSearchModel PRODUCT_MODEL = ProductProjectionSearchModel.of().filter();
 
     @Test
     public void searchByTextInACertainLanguage() throws Exception {
@@ -38,8 +38,8 @@ public class ProductProjectionSearchMainIntegrationTest extends ProductProjectio
     @Test
     public void resultsArePaginated() throws Exception {
         final PagedSearchResult<ProductProjection> result = executeSearch(ProductProjectionSearch.ofStaged()
-                .plusQueryFilters(filter -> filter.allVariants().attribute().ofString(ATTR_NAME_COLOR).byAny(asList("blue", "red")))
-                .withSort(sort -> sort.name().locale(ENGLISH).byDesc())
+                .plusQueryFilters(productModel -> productModel.allVariants().attribute().ofString(ATTR_NAME_COLOR).isIn(asList("blue", "red")))
+                .withSort(sort -> sort.name().locale(ENGLISH).desc())
                 .withOffset(1L)
                 .withLimit(1L));
         assertThat(resultsToIds(result)).containsOnly(product2.getId());
@@ -63,7 +63,7 @@ public class ProductProjectionSearchMainIntegrationTest extends ProductProjectio
     public void allowsExpansion() throws Exception {
         final ProductProjectionSearch search = ProductProjectionSearch.ofStaged().withLimit(1L);
         assertThat(executeSearch(search).getResults().get(0).getProductType().getObj()).isNull();
-        final PagedSearchResult<ProductProjection> result = executeSearch(search.withExpansionPaths(model -> model.productType()));
+        final PagedSearchResult<ProductProjection> result = executeSearch(search.withExpansionPaths(product -> product.productType()));
         assertThat(result.getResults().get(0).getProductType().getObj()).isEqualTo(productType);
     }
 
@@ -71,7 +71,7 @@ public class ProductProjectionSearchMainIntegrationTest extends ProductProjectio
     public void fuzzySearch() {
         final ProductProjectionSearch search = ProductProjectionSearch.ofStaged()
                 .withText(ENGLISH, "short")
-                .withQueryFilters(filter -> filter.productType().id().by(productType.getId()));
+                .withQueryFilters(productModel -> productModel.productType().id().is(productType.getId()));
         assertThat(client().executeBlocking(search).getResults()).matches(containsIdentifiable(product2).negate(), "not included");
         assertThat(client().executeBlocking(search.withFuzzy(true)).getResults()).matches(containsIdentifiable(product2), "included");
     }
@@ -90,7 +90,7 @@ public class ProductProjectionSearchMainIntegrationTest extends ProductProjectio
     @Test
     public void findMatchingVariantBySort() throws Exception {
         final ProductProjectionSearch search = ProductProjectionSearch.ofStaged()
-                .withSort(product -> product.allVariants().attribute().ofNumber(ATTR_NAME_SIZE).byAscWithMax());
+                .withSort(productModel -> productModel.allVariants().attribute().ofNumber(ATTR_NAME_SIZE).ascWithMaxValue());
         assertThat(executeSearch(search).getResults()).are(productWithMatchingVariantsHavingMaxSize());
     }
 
@@ -124,7 +124,7 @@ public class ProductProjectionSearchMainIntegrationTest extends ProductProjectio
     }
 
     private void testBlueFilter(final Function<List<FilterExpression<ProductProjection>>, ProductProjectionSearch> createSearch) {
-        final ProductProjectionSearch search = createSearch.apply(FILTER_MODEL.allVariants().attribute().ofString(ATTR_NAME_COLOR).by("blue"));
+        final ProductProjectionSearch search = createSearch.apply(PRODUCT_MODEL.allVariants().attribute().ofString(ATTR_NAME_COLOR).is("blue"));
         final List<ProductProjection> results = executeSearch(search).getResults();
 
         final Predicate<ProductVariant> isBlue = variant -> variant.findAttribute(COLOR_ATTRIBUTE_ACCESS)

@@ -16,7 +16,7 @@ public class ProductProjectionSearchFiltersIntegrationTest extends ProductProjec
     @Test
     public void filtersByTerm() throws Exception {
         final ProductProjectionSearch search = ProductProjectionSearch.ofStaged()
-                .plusQueryFilters(filter -> filter.allVariants().attribute().ofString(ATTR_NAME_COLOR).by("red"));
+                .plusQueryFilters(productModel -> productModel.allVariants().attribute().ofString(ATTR_NAME_COLOR).is("red"));
         final PagedSearchResult<ProductProjection> result = executeSearch(search);
         assertThat(resultsToIds(result)).containsOnly(product2.getId());
     }
@@ -24,7 +24,7 @@ public class ProductProjectionSearchFiltersIntegrationTest extends ProductProjec
     @Test
     public void filtersByAnyTerm() throws Exception {
         final ProductProjectionSearch search = ProductProjectionSearch.ofStaged()
-                .plusQueryFilters(filter -> filter.allVariants().attribute().ofNumber(ATTR_NAME_SIZE).byAny(asList(valueOf(36), valueOf(38))));
+                .plusQueryFilters(productModel -> productModel.allVariants().attribute().ofNumber(ATTR_NAME_SIZE).isIn(asList(valueOf(36), valueOf(38))));
         final PagedSearchResult<ProductProjection> result = executeSearch(search);
         assertThat(resultsToIds(result)).containsOnly(product1.getId(), product2.getId());
     }
@@ -32,7 +32,7 @@ public class ProductProjectionSearchFiltersIntegrationTest extends ProductProjec
     @Test
     public void filtersByRange() throws Exception {
         final ProductProjectionSearch search = ProductProjectionSearch.ofStaged()
-                .plusQueryFilters(filter -> filter.allVariants().attribute().ofNumber(ATTR_NAME_SIZE).byGreaterThanOrEqualTo(valueOf(44)));
+                .plusQueryFilters(productModel -> productModel.allVariants().attribute().ofNumber(ATTR_NAME_SIZE).isGreaterThanOrEqualTo(valueOf(44)));
         final PagedSearchResult<ProductProjection> result = executeSearch(search);
         assertThat(resultsToIds(result)).containsOnly(product1.getId(), product2.getId());
     }
@@ -40,7 +40,7 @@ public class ProductProjectionSearchFiltersIntegrationTest extends ProductProjec
     @Test
     public void filtersByAnyRange() throws Exception {
         final ProductProjectionSearch search = ProductProjectionSearch.ofStaged()
-                .plusQueryFilters(filter -> filter.allVariants().attribute().ofNumber(ATTR_NAME_SIZE).byAnyRange(asList(atLeast(valueOf(46)), atMost(valueOf(36)))));
+                .plusQueryFilters(productModel -> productModel.allVariants().attribute().ofNumber(ATTR_NAME_SIZE).isBetweenAny(asList(atLeast(valueOf(46)), atMost(valueOf(36)))));
         final PagedSearchResult<ProductProjection> result = executeSearch(search);
         assertThat(resultsToIds(result)).containsOnly(product1.getId(), product2.getId());
     }
@@ -48,7 +48,7 @@ public class ProductProjectionSearchFiltersIntegrationTest extends ProductProjec
     @Test
     public void filtersByAllRanges() throws Exception {
         final ProductProjectionSearch search = ProductProjectionSearch.ofStaged()
-                .plusQueryFilters(filter -> filter.allVariants().attribute().ofNumber(ATTR_NAME_SIZE).byAllRanges(asList(atLeast(valueOf(39)), atMost(valueOf(43)))));
+                .plusQueryFilters(productModel -> productModel.allVariants().attribute().ofNumber(ATTR_NAME_SIZE).isBetweenAll(asList(atLeast(valueOf(39)), atMost(valueOf(43)))));
         final PagedSearchResult<ProductProjection> result = executeSearch(search);
         assertThat(resultsToIds(result)).containsOnly(product3.getId());
     }
@@ -64,7 +64,7 @@ public class ProductProjectionSearchFiltersIntegrationTest extends ProductProjec
     @Test
     public void filterByEvilCharacterWord() throws Exception {
         final ProductProjectionSearch search = ProductProjectionSearch.ofStaged()
-                .plusQueryFilters(filter -> filter.allVariants().attribute().ofString(ATTR_NAME_EVIL).by(EVIL_CHARACTER_WORD));
+                .plusQueryFilters(productModel -> productModel.allVariants().attribute().ofString(ATTR_NAME_EVIL).is(EVIL_CHARACTER_WORD));
         final PagedSearchResult<ProductProjection> result = executeEvilSearch(search);
         assertThat(result.getTotal()).isEqualTo(1);
     }
@@ -72,7 +72,7 @@ public class ProductProjectionSearchFiltersIntegrationTest extends ProductProjec
     @Test
     public void filterByValueAsString() throws Exception {
         final ProductProjectionSearch search = ProductProjectionSearch.ofStaged()
-                .plusQueryFilters(filter -> filter.allVariants().attribute().ofNumber(ATTR_NAME_SIZE).byAnyAsString(asList("36", "38")));
+                .plusQueryFilters(productModel -> productModel.allVariants().attribute().ofNumber(ATTR_NAME_SIZE).containsAnyAsString(asList("36", "38")));
         final PagedSearchResult<ProductProjection> result = executeSearch(search);
         assertThat(resultsToIds(result)).containsOnly(product1.getId(), product2.getId());
     }

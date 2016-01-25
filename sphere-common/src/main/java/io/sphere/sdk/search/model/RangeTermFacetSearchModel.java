@@ -19,51 +19,81 @@ public class RangeTermFacetSearchModel<T, V extends Comparable<? super V>> exten
         super(searchModel, typeSerializer);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public RangeTermFacetSearchModel<T, V> withAlias(final String alias) {
         return new RangeTermFacetSearchModel<>(searchModel, typeSerializer, alias);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public TermFacetExpression<T> allTerms() {
         return super.allTerms();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public RangeFacetExpression<T> allRanges() {
         return super.allRanges();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public FilteredFacetExpression<T> onlyTerm(final V value) {
         return super.onlyTerm(value);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public FilteredFacetExpression<T> onlyTerm(final Iterable<V> values) {
         return super.onlyTerm(values);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public RangeFacetExpression<T> onlyRange(final FacetRange<V> range) {
         return super.onlyRange(range);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public RangeFacetExpression<T> onlyRange(final Iterable<FacetRange<V>> facetRanges) {
         return super.onlyRange(facetRanges);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public RangeFacetExpression<T> onlyRange(final V lowerEndpoint, final V upperEndpoint) {
         return super.onlyRange(lowerEndpoint, upperEndpoint);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public RangeFacetExpression<T> onlyGreaterThanOrEqualTo(final V value) {
         return super.onlyGreaterThanOrEqualTo(value);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public RangeFacetExpression<T> onlyLessThan(final V value) {
         return super.onlyLessThan(value);

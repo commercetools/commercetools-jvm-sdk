@@ -6,6 +6,8 @@ import javax.annotation.Nullable;
  * Facets calculate statistical counts to aid in faceted navigation.
  * Example: variants.attributes.color:"green","yellow"
  * @param <T> Type of the resource for the facet
+ *
+ * @see io.sphere.sdk.search.model.FacetSearchModel
  */
 public interface FacetExpression<T> extends SearchExpression<T> {
 

@@ -17,7 +17,14 @@ public interface FilterSearchModel<T, V> {
      * @param value the value to filter by
      * @return a filter expression for the given value
      */
-    List<FilterExpression<T>> by(final V value);
+    List<FilterExpression<T>> is(final V value);
+
+    /**
+     * @see #containsAny(Iterable)
+     */
+    default List<FilterExpression<T>> isIn(final Iterable<V> values) {
+        return containsAny(values);
+    }
 
     /**
      * Generates an expression to select all elements with attributes matching any of the given values.
@@ -25,7 +32,7 @@ public interface FilterSearchModel<T, V> {
      * @param values the values to filter by
      * @return a filter expression for the given values
      */
-    List<FilterExpression<T>> byAny(final Iterable<V> values);
+    List<FilterExpression<T>> containsAny(final Iterable<V> values);
 
     /**
      * Generates an expression to select all elements with attributes matching all the given values.
@@ -33,7 +40,7 @@ public interface FilterSearchModel<T, V> {
      * @param values the values to filter by
      * @return a filter expression for the given values
      */
-    List<FilterExpression<T>> byAll(final Iterable<V> values);
+    List<FilterExpression<T>> containsAll(final Iterable<V> values);
 
     /**
      * Generates an expression to select all elements with attributes matching any of the given values.
@@ -41,7 +48,7 @@ public interface FilterSearchModel<T, V> {
      * @param values the values to filter by
      * @return a filter expression for the given values
      */
-    List<FilterExpression<T>> byAnyAsString(final Iterable<String> values);
+    List<FilterExpression<T>> containsAnyAsString(final Iterable<String> values);
 
     /**
      * Generates an expression to select all elements with attributes matching all the given values.
@@ -49,6 +56,47 @@ public interface FilterSearchModel<T, V> {
      * @param values the values to filter by
      * @return a filter expression for the given values
      */
-    List<FilterExpression<T>> byAllAsString(final Iterable<String> values);
+    List<FilterExpression<T>> containsAllAsString(final Iterable<String> values);
+
+    /**
+     * @deprecated use {@link #is(Object)} instead
+     */
+    @Deprecated
+    default List<FilterExpression<T>> by(final V value) {
+        return is(value);
+    }
+
+
+    /**
+     * @deprecated use {@link #containsAny(Iterable)} instead
+     */
+    @Deprecated
+    default List<FilterExpression<T>> byAny(final Iterable<V> values) {
+        return containsAny(values);
+    }
+
+    /**
+     * @deprecated use {@link #containsAll(Iterable)} instead
+     */
+    @Deprecated
+    default List<FilterExpression<T>> byAll(final Iterable<V> values) {
+        return containsAll(values);
+    }
+
+    /**
+     * @deprecated use {@link #containsAnyAsString(Iterable)} instead
+     */
+    @Deprecated
+    default List<FilterExpression<T>> byAnyAsString(final Iterable<String> values) {
+        return containsAnyAsString(values);
+    }
+
+    /**
+     * @deprecated use {@link #containsAllAsString(Iterable)} instead
+     */
+    @Deprecated
+    default List<FilterExpression<T>> byAllAsString(final Iterable<String> values) {
+        return containsAllAsString(values);
+    }
 
 }

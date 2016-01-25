@@ -16,49 +16,84 @@ public class RangeTermFilterSearchModel<T, V extends Comparable<? super V>> exte
         super(searchModel, typeSerializer);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public List<FilterExpression<T>> by(final V value) {
-        return super.by(value);
+    public List<FilterExpression<T>> is(final V value) {
+        return super.is(value);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public List<FilterExpression<T>> byAny(final Iterable<V> values) {
-        return super.byAny(values);
+    public List<FilterExpression<T>> isIn(final Iterable<V> values) {
+        return super.isIn(values);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public List<FilterExpression<T>> byAll(final Iterable<V> values) {
-        return super.byAll(values);
+    public List<FilterExpression<T>> containsAny(final Iterable<V> values) {
+        return super.containsAny(values);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public List<FilterExpression<T>> byRange(final FilterRange<V> range) {
-        return super.byRange(range);
+    public List<FilterExpression<T>> containsAll(final Iterable<V> values) {
+        return super.containsAll(values);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public List<FilterExpression<T>> byAnyRange(final Iterable<FilterRange<V>> filterRanges) {
-        return super.byAnyRange(filterRanges);
+    public List<FilterExpression<T>> isBetween(final FilterRange<V> range) {
+        return super.isBetween(range);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public List<FilterExpression<T>> byAllRanges(final Iterable<FilterRange<V>> filterRanges) {
-        return super.byAllRanges(filterRanges);
+    public List<FilterExpression<T>> isBetween(final V lowerEndpoint, final V upperEndpoint) {
+        return super.isBetween(lowerEndpoint, upperEndpoint);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public List<FilterExpression<T>> byRange(final V lowerEndpoint, final V upperEndpoint) {
-        return super.byRange(lowerEndpoint, upperEndpoint);
+    public List<FilterExpression<T>> isBetweenAny(final Iterable<FilterRange<V>> filterRanges) {
+        return super.isBetweenAny(filterRanges);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public List<FilterExpression<T>> byGreaterThanOrEqualTo(final V value) {
-        return super.byGreaterThanOrEqualTo(value);
+    public List<FilterExpression<T>> isBetweenAll(final Iterable<FilterRange<V>> filterRanges) {
+        return super.isBetweenAll(filterRanges);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public List<FilterExpression<T>> byLessThanOrEqualTo(final V value) {
-        return super.byLessThanOrEqualTo(value);
+    public List<FilterExpression<T>> isGreaterThanOrEqualTo(final V value) {
+        return super.isGreaterThanOrEqualTo(value);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public List<FilterExpression<T>> isLessThanOrEqualTo(final V value) {
+        return super.isLessThanOrEqualTo(value);
     }
 
     /**
@@ -69,7 +104,8 @@ public class RangeTermFilterSearchModel<T, V extends Comparable<? super V>> exte
      * @param <V> type of the value
      * @return new instance of RangeTermFilterSearchModel
      */
-    public static <T, V extends Comparable<? super V>> RangeTermFilterSearchModel<T, V> of(final String attributePath, final Function<V, String> typeSerializer) {
+    public static <T, V extends Comparable<? super V>> RangeTermFilterSearchModel<T, V> of(final String attributePath,
+                                                                                           final Function<V, String> typeSerializer) {
         return new RangeTermFilterSearchModel<>(new SearchModelImpl<>(attributePath), typeSerializer);
     }
 }

@@ -230,7 +230,7 @@ public class ProductCategoryOrderHintTest extends IntegrationTest {
         final List<String> ids = products.stream().map(p -> p.getId()).collect(toList());
 
         final ProductProjectionQuery productProjectionQuery = ProductProjectionQuery.ofStaged()
-                .withPredicates(product -> product.id().isIn(ids));
+                .withPredicates(productModel -> productModel.id().isIn(ids));
         List<ProductProjection> productProjections = client().executeBlocking(productProjectionQuery).getResults();
 
         return new QueryResult(productProjections,
@@ -242,15 +242,15 @@ public class ProductCategoryOrderHintTest extends IntegrationTest {
 
     private static List<ProductProjection> searchForCategoryAndSort(final String categoryId) {
         final ProductProjectionSearch searchRequest = ProductProjectionSearch.ofStaged()
-                .withQueryFilters(filter -> filter.categories().id().by(categoryId))
-                .withSort(m -> m.categoryOrderHints().category(categoryId).byAsc());
+                .withQueryFilters(productModel -> productModel.categories().id().is(categoryId))
+                .withSort(productModel -> productModel.categoryOrderHints().category(categoryId).asc());
         return client().executeBlocking(searchRequest).getResults();
     }
 
     private static List<ProductProjection> queryForCategoryAndSort(final String categoryId) {
         final ProductProjectionQuery query = ProductProjectionQuery.ofStaged()
-                .withPredicates(m -> m.categories().id().is(categoryId))
-                .withSort(m -> m.categoryOrderHints().category(categoryId).asc());
+                .withPredicates(productModel -> productModel.categories().id().is(categoryId))
+                .withSort(productModel -> productModel.categoryOrderHints().category(categoryId).asc());
         return client().executeBlocking(query).getResults();
     }
 

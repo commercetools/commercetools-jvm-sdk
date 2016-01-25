@@ -25,30 +25,45 @@ abstract class TermFilterBaseSearchModel<T, V> extends Base implements FilterSea
         this.typeSerializer = typeSerializer;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public List<FilterExpression<T>> by(final V value) {
+    public List<FilterExpression<T>> is(final V value) {
         return singletonList(filterBy(value));
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public List<FilterExpression<T>> byAny(final Iterable<V> values) {
+    public List<FilterExpression<T>> containsAny(final Iterable<V> values) {
         return singletonList(filterBy(values));
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public List<FilterExpression<T>> byAll(final Iterable<V> values) {
+    public List<FilterExpression<T>> containsAll(final Iterable<V> values) {
         return toStream(values)
                 .map(value -> filterBy(value))
                 .collect(toList());
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public List<FilterExpression<T>> byAnyAsString(final Iterable<String> values) {
+    public List<FilterExpression<T>> containsAnyAsString(final Iterable<String> values) {
         return singletonList(filterByAsString(values));
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public List<FilterExpression<T>> byAllAsString(final Iterable<String> values) {
+    public List<FilterExpression<T>> containsAllAsString(final Iterable<String> values) {
         return toStream(values)
                 .map(value -> filterByAsString(value))
                 .collect(toList());
@@ -59,11 +74,11 @@ abstract class TermFilterBaseSearchModel<T, V> extends Base implements FilterSea
      * For example: filtering by ["red", "blue"] would select only those elements with either "red" or "blue" value.
      * @param values the values to filter by
      * @return a filter expression for the given values
-     * @deprecated use {@link TermFilterBaseSearchModel#byAny} instead
+     * @deprecated use {@link TermFilterBaseSearchModel#containsAny} instead
      */
     @Deprecated
     public List<FilterExpression<T>> by(final Iterable<V> values) {
-        return byAny(values);
+        return containsAny(values);
     }
 
     private TermFilterExpression<T, V> filterBy(final V value) {

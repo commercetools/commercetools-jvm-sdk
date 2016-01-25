@@ -26,14 +26,14 @@ abstract class SortSearchModelImpl<T> extends Base implements SortSearchModel<T>
     /**
      * @return the ascending sort direction
      */
-    public SortExpression<T> byAsc() {
+    public SortExpression<T> asc() {
         return by(ASC);
     }
 
     /**
      * @return the descending sort direction
      */
-    public SortExpression<T> byDesc() {
+    public SortExpression<T> desc() {
         return by(DESC);
     }
 }

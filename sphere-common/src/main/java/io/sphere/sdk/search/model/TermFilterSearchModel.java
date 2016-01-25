@@ -16,19 +16,36 @@ public class TermFilterSearchModel<T, V> extends TermFilterBaseSearchModel<T, V>
         super(searchModel, typeSerializer);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public List<FilterExpression<T>> by(final V value) {
-        return super.by(value);
+    public List<FilterExpression<T>> is(final V value) {
+        return super.is(value);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public List<FilterExpression<T>> byAny(final Iterable<V> values) {
-        return super.byAny(values);
+    public List<FilterExpression<T>> isIn(final Iterable<V> values) {
+        return super.isIn(values);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public List<FilterExpression<T>> byAll(final Iterable<V> values) {
-        return super.byAll(values);
+    public List<FilterExpression<T>> containsAny(final Iterable<V> values) {
+        return super.containsAny(values);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public List<FilterExpression<T>> containsAll(final Iterable<V> values) {
+        return super.containsAll(values);
     }
 
     /**

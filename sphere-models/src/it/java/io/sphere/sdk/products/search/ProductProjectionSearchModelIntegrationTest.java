@@ -52,7 +52,7 @@ public abstract class ProductProjectionSearchModelIntegrationTest extends Integr
 
     protected static PagedSearchResult<ProductProjection> executeSearch(final ProductProjectionSearch search) {
         final List<String> ids = asList(product1.getId(), product2.getId());
-        final ProductProjectionSearch sphereRequest = search.plusQueryFilters(filter -> filter.id().byAny(ids));
+        final ProductProjectionSearch sphereRequest = search.plusQueryFilters(productModel -> productModel.id().isIn(ids));
         return client().executeBlocking(sphereRequest);
     }
 }

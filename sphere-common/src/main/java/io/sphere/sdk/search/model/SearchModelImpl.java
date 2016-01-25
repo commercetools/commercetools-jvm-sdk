@@ -72,8 +72,8 @@ public class SearchModelImpl<T> extends Base implements SearchModel<T> {
         return new LocalizedStringFacetSearchModel<>(this, pathSegment);
     }
 
-    protected LocalizedStringFacetAndFilterSearchModel<T> localizedStringFacetAndFilterSearchModel(final String pathSegment) {
-        return new LocalizedStringFacetAndFilterSearchModel<>(this, pathSegment);
+    protected LocalizedStringFacetedSearchSearchModel<T> localizedStringFacetedSearchSearchModel(final String pathSegment) {
+        return new LocalizedStringFacetedSearchSearchModel<>(this, pathSegment);
     }
 
     protected EnumFilterSearchModel<T> enumFilterSearchModel(final String pathSegment) {
@@ -84,8 +84,8 @@ public class SearchModelImpl<T> extends Base implements SearchModel<T> {
         return new EnumFacetSearchModel<>(this, pathSegment);
     }
 
-    protected EnumFacetAndFilterSearchModel<T> enumFacetAndFilterSearchModel(final String pathSegment) {
-        return new EnumFacetAndFilterSearchModel<>(this, pathSegment);
+    protected EnumFacetedSearchSearchModel<T> enumFacetedSearchSearchModel(final String pathSegment) {
+        return new EnumFacetedSearchSearchModel<>(this, pathSegment);
     }
 
     protected LocalizedEnumFilterSearchModel<T> localizedEnumFilterSearchModel(final String pathSegment) {
@@ -96,8 +96,8 @@ public class SearchModelImpl<T> extends Base implements SearchModel<T> {
         return new LocalizedEnumFacetSearchModel<>(this, pathSegment);
     }
 
-    protected LocalizedEnumFacetAndFilterSearchModel<T> localizedEnumFacetAndFilterSearchModel(final String pathSegment) {
-        return new LocalizedEnumFacetAndFilterSearchModel<>(this, pathSegment);
+    protected LocalizedEnumFacetedSearchSearchModel<T> localizedEnumFacetedSearchSearchModel(final String pathSegment) {
+        return new LocalizedEnumFacetedSearchSearchModel<>(this, pathSegment);
     }
 
     protected MoneyFilterSearchModel<T> moneyFilterSearchModel(final String pathSegment) {
@@ -108,8 +108,8 @@ public class SearchModelImpl<T> extends Base implements SearchModel<T> {
         return new MoneyFacetSearchModel<>(this, pathSegment);
     }
 
-    protected MoneyFacetAndFilterSearchModel<T> moneyFacetAndFilterSearchModel(final String pathSegment) {
-        return new MoneyFacetAndFilterSearchModel<>(this, pathSegment);
+    protected MoneyFacetedSearchSearchModel<T> moneyFacetedSearchSearchModel(final String pathSegment) {
+        return new MoneyFacetedSearchSearchModel<>(this, pathSegment);
     }
 
     protected ReferenceFilterSearchModel<T> referenceFilterSearchModel(final String pathSegment) {
@@ -120,7 +120,7 @@ public class SearchModelImpl<T> extends Base implements SearchModel<T> {
         return new ReferenceFacetSearchModel<>(this, pathSegment);
     }
 
-    protected ReferenceFacetAndFilterSearchModel<T> referenceFacetAndFilterSearchModel(final String pathSegment) {
-        return new ReferenceFacetAndFilterSearchModel<>(this, pathSegment);
+    protected ReferenceFacetedSearchSearchModel<T> referenceFacetedSearchSearchModel(final String pathSegment) {
+        return new ReferenceFacetedSearchSearchModel<>(this, pathSegment);
     }
 }

@@ -31,27 +31,42 @@ abstract class TermFacetBaseSearchModel<T, V> extends Base implements FacetSearc
         this(searchModel, typeSerializer, null);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     @Nullable
     public String getAlias() {
         return alias;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public TermFacetExpression<T> allTerms() {
         return new TermFacetExpressionImpl<>(searchModel, typeSerializer, alias);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public FilteredFacetExpression<T> onlyTerm(final V value) {
         return onlyTerm(singletonList(value));
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public FilteredFacetExpression<T> onlyTerm(final Iterable<V> values) {
         return new FilteredFacetExpressionImpl<>(searchModel, typeSerializer, values, alias);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public FilteredFacetExpression<T> onlyTermAsString(final Iterable<String> values) {
         return new FilteredFacetExpressionImpl<>(searchModel, TypeSerializer.ofString(), values, alias);

@@ -43,7 +43,7 @@ public abstract class MetaModelSearchDslImpl<T, C extends MetaModelSearchDsl<T, 
     final List<FilterExpression<T>> resultFilters;
     final List<FilterExpression<T>> queryFilters;
     final List<FilterExpression<T>> facetFilters;
-    final List<FacetAndFilterExpression<T>> facetedSearch;
+    final List<FacetedSearchExpression<T>> facetedSearch;
     final List<SortExpression<T>> sort;
     @Nullable
     final Long limit;
@@ -62,7 +62,7 @@ public abstract class MetaModelSearchDslImpl<T, C extends MetaModelSearchDsl<T, 
     public MetaModelSearchDslImpl(@Nullable final LocalizedStringEntry text, @Nullable final Boolean fuzzy,
                                   final List<FacetExpression<T>> facets, final List<FilterExpression<T>> resultFilters,
                                   final List<FilterExpression<T>> queryFilters, final List<FilterExpression<T>> facetFilters,
-                                  final List<FacetAndFilterExpression<T>> facetedSearch,
+                                  final List<FacetedSearchExpression<T>> facetedSearch,
                                   final List<SortExpression<T>> sort, @Nullable final Long limit, @Nullable final Long offset,
                                   final String endpoint, final Function<HttpResponse, PagedSearchResult<T>> resultMapper,
                                   final List<ExpansionPath<T>> expansionPaths, final List<HttpQueryParameter> additionalQueryParameters,
@@ -218,22 +218,22 @@ public abstract class MetaModelSearchDslImpl<T, C extends MetaModelSearchDsl<T, 
     }
 
     @Override
-    public C withFacetedSearch(final List<FacetAndFilterExpression<T>> facetedSearchExpressions) {
+    public C withFacetedSearch(final List<FacetedSearchExpression<T>> facetedSearchExpressions) {
         return copyBuilder().facetedSearch(facetedSearchExpressions).build();
     }
 
     @Override
-    public C withFacetedSearch(final FacetAndFilterExpression<T> facetedSearchExpression) {
+    public C withFacetedSearch(final FacetedSearchExpression<T> facetedSearchExpression) {
         return withFacetedSearch(singletonList(requireNonNull(facetedSearchExpression)));
     }
 
     @Override
-    public C plusFacetedSearch(final List<FacetAndFilterExpression<T>> facetedSearchExpressions) {
+    public C plusFacetedSearch(final List<FacetedSearchExpression<T>> facetedSearchExpressions) {
         return withFacetedSearch(listOf(facetedSearch(), facetedSearchExpressions));
     }
 
     @Override
-    public C plusFacetedSearch(final FacetAndFilterExpression<T> facetedSearchExpression) {
+    public C plusFacetedSearch(final FacetedSearchExpression<T> facetedSearchExpression) {
         return plusFacetedSearch(singletonList(requireNonNull(facetedSearchExpression)));
     }
 
@@ -370,7 +370,7 @@ public abstract class MetaModelSearchDslImpl<T, C extends MetaModelSearchDsl<T, 
     }
 
     @Override
-    public List<FacetAndFilterExpression<T>> facetedSearch() {
+    public List<FacetedSearchExpression<T>> facetedSearch() {
         return facetedSearch;
     }
 
