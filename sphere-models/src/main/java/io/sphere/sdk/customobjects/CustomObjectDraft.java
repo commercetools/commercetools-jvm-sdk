@@ -18,7 +18,7 @@ import static io.sphere.sdk.json.SphereJsonUtils.convertToJavaType;
  * @see io.sphere.sdk.customobjects.commands.CustomObjectUpsertCommand
  * @see CustomObject
  */
-public class CustomObjectDraft<T> extends Base {
+public final class CustomObjectDraft<T> extends Base {
 
     private final T value;
     @Nullable
