@@ -7,6 +7,9 @@ import javax.money.MonetaryAmount;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * Defines cart discount type with the corresponding value. The type can be relative or absolute.
+ */
 @JsonTypeInfo(
         use = JsonTypeInfo.Id.NAME,
         include = JsonTypeInfo.As.PROPERTY,
