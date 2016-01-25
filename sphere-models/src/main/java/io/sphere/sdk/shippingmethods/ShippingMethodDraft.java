@@ -22,11 +22,11 @@ public interface ShippingMethodDraft {
     Boolean isDefault();
 
 
-    public static ShippingMethodDraft of(final String name, @Nullable final String description, final Referenceable<TaxCategory> taxCategory, final List<ZoneRate> zoneRates) {
+    static ShippingMethodDraft of(final String name, @Nullable final String description, final Referenceable<TaxCategory> taxCategory, final List<ZoneRate> zoneRates) {
         return of(name, description, taxCategory, zoneRates, false);
     }
 
-    public static ShippingMethodDraft of(final String name, @Nullable final String description, final Referenceable<TaxCategory> taxCategory, final List<ZoneRate> zoneRates, final boolean isDefault) {
+    static ShippingMethodDraft of(final String name, @Nullable final String description, final Referenceable<TaxCategory> taxCategory, final List<ZoneRate> zoneRates, final boolean isDefault) {
         return new ShippingMethodDraftImpl(name, description, taxCategory.toReference(), zoneRates, isDefault);
     }
 }

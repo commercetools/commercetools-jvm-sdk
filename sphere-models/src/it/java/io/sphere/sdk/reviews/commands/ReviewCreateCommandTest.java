@@ -15,6 +15,7 @@ import io.sphere.sdk.reviews.ReviewFixtures;
 import io.sphere.sdk.reviews.messages.ReviewCreatedMessage;
 import io.sphere.sdk.states.State;
 import io.sphere.sdk.states.StateDraft;
+import io.sphere.sdk.states.StateDraftDsl;
 import io.sphere.sdk.states.StateType;
 import io.sphere.sdk.states.commands.StateDeleteCommand;
 import io.sphere.sdk.states.queries.StateQuery;

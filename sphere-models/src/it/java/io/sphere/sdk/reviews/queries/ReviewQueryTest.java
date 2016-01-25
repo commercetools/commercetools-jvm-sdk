@@ -10,7 +10,6 @@ import org.junit.Test;
 
 import java.util.Locale;
 
-import static io.sphere.sdk.channels.ChannelFixtures.withChannel;
 import static io.sphere.sdk.channels.ChannelFixtures.withChannelOfRole;
 import static io.sphere.sdk.customers.CustomerFixtures.withCustomer;
 import static io.sphere.sdk.reviews.ReviewFixtures.*;
