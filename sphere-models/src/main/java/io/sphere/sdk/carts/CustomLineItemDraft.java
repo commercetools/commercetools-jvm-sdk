@@ -1,7 +1,6 @@
 package io.sphere.sdk.carts;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import io.sphere.sdk.models.Base;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Referenceable;
@@ -20,56 +19,27 @@ import javax.money.MonetaryAmount;
 
  @see CustomLineItem
  */
-public class CustomLineItemDraft extends Base implements CustomDraft {
-    private final LocalizedString name;
-    private final MonetaryAmount money;
-    private final String slug;
-    private final Reference<TaxCategory> taxCategory;
-    private final Long quantity;
-    @Nullable
-    private final CustomFieldsDraft custom;
+@JsonDeserialize(as = CustomLineItemDraftImpl.class)
+public interface CustomLineItemDraft extends CustomDraft {
+    LocalizedString getName();
 
-    @JsonCreator
-    private CustomLineItemDraft(final LocalizedString name, final String slug, final MonetaryAmount money, final Reference<TaxCategory> taxCategory, final Long quantity, @Nullable final CustomFieldsDraft custom) {
-        this.name = name;
-        this.money = money;
-        this.slug = slug;
-        this.custom = custom;
-        this.taxCategory = taxCategory;
-        this.quantity = quantity;
-    }
+    MonetaryAmount getMoney();
 
-    public static CustomLineItemDraft of(final LocalizedString name, final String slug, final MonetaryAmount money, final Referenceable<TaxCategory> taxCategory, final long quantity) {
-        return of(name, slug, money, taxCategory, quantity, null);
-    }
+    String getSlug();
 
-    public static CustomLineItemDraft of(final LocalizedString name, final String slug, final MonetaryAmount money, final Referenceable<TaxCategory> taxCategory, final long quantity, @Nullable final CustomFieldsDraft custom) {
-        return new CustomLineItemDraft(name, slug, money, taxCategory.toReference(), quantity, custom);
-    }
+    Reference<TaxCategory> getTaxCategory();
 
-    public LocalizedString getName() {
-        return name;
-    }
-
-    public MonetaryAmount getMoney() {
-        return money;
-    }
-
-    public String getSlug() {
-        return slug;
-    }
-
-    public Reference<TaxCategory> getTaxCategory() {
-        return taxCategory;
-    }
-
-    public Long getQuantity() {
-        return quantity;
-    }
+    Long getQuantity();
 
     @Nullable
     @Override
-    public CustomFieldsDraft getCustom() {
-        return custom;
+    CustomFieldsDraft getCustom();
+
+    static CustomLineItemDraft of(final LocalizedString name, final String slug, final MonetaryAmount money, final Referenceable<TaxCategory> taxCategory, final long quantity) {
+        return of(name, slug, money, taxCategory, quantity, null);
+    }
+
+    static CustomLineItemDraft of(final LocalizedString name, final String slug, final MonetaryAmount money, final Referenceable<TaxCategory> taxCategory, final long quantity, @Nullable final CustomFieldsDraft custom) {
+        return new CustomLineItemDraftImpl(name, slug, money, taxCategory.toReference(), quantity, custom);
     }
 }

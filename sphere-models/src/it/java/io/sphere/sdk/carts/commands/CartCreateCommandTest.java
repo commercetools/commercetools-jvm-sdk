@@ -56,7 +56,7 @@ public class CartCreateCommandTest extends IntegrationTest {
                     withTaxedProduct(client(), product -> {
                         final List<LineItemDraft> lineItems = singletonList(LineItemDraft.of(product, 1, 15));
 
-                        final List<CustomLineItemDraft> customLineItems = singletonList(CustomLineItemDraft.of(randomSlug(), "foo-bar", EURO_5, product.getTaxCategory(), 1L));
+                        final List<CustomLineItemDraft> customLineItems = singletonList(CustomLineItemDraft.of(randomSlug(), "foo-bar", EURO_5, product.getTaxCategory(), 1L, null));
 
                         final CartDraft cartDraft = CartDraft.of(EUR)
                                 .withCountry(DE)

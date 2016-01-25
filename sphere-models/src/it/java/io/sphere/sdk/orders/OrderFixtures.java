@@ -74,7 +74,7 @@ public class OrderFixtures {
             final String slug = "thing-slug";
             final LocalizedString name = en("thing");
             final long quantity = 5;
-            final CustomLineItemDraft item = CustomLineItemDraft.of(name, slug, money, taxCategory, quantity);
+            final CustomLineItemDraft item = CustomLineItemDraft.of(name, slug, money, taxCategory, quantity, null);
             final Cart cartWith5 = client.executeBlocking(CartUpdateCommand.of(cart, AddCustomLineItem.of(item)));
             final Order order = client.executeBlocking(OrderFromCartCreateCommand.of(cartWith5));
             f.accept(order);

@@ -136,7 +136,7 @@ public class CartFixtures {
             final MonetaryAmount money = MoneyImpl.of("23.50", EUR);
             final String slug = "thing-slug";
             final LocalizedString name = en("thing");
-            final CustomLineItemDraft item = CustomLineItemDraft.of(name, slug, money, product.getTaxCategory(), 5L);
+            final CustomLineItemDraft item = CustomLineItemDraft.of(name, slug, money, product.getTaxCategory(), 5L, null);
             final AddCustomLineItem addCustomLineItemAction = AddCustomLineItem.of(item);
 
             final Cart updatedCart = client.executeBlocking(CartUpdateCommand.of(cart, asList(addLineItemAction, addCustomLineItemAction)));

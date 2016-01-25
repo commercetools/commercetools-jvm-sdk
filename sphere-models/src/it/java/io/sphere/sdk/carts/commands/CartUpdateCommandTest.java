@@ -9,10 +9,7 @@ import io.sphere.sdk.channels.ChannelFixtures;
 import io.sphere.sdk.channels.ChannelRole;
 import io.sphere.sdk.client.SphereRequest;
 import io.sphere.sdk.discountcodes.DiscountCodeInfo;
-import io.sphere.sdk.models.Address;
-import io.sphere.sdk.models.AddressBuilder;
-import io.sphere.sdk.models.LocalizedString;
-import io.sphere.sdk.models.Reference;
+import io.sphere.sdk.models.*;
 import io.sphere.sdk.payments.Payment;
 import io.sphere.sdk.products.*;
 import io.sphere.sdk.products.commands.ProductUpdateCommand;
@@ -141,7 +138,7 @@ public class CartUpdateCommandTest extends IntegrationTest {
             final String slug = "thing-slug";//you handle to identify the custom line item
             final LocalizedString name = en("thing");
             final long quantity = 5;
-            final CustomLineItemDraft item = CustomLineItemDraft.of(name, slug, money, taxCategory, quantity);
+            final CustomLineItemDraft item = CustomLineItemDraft.of(name, slug, money, taxCategory, quantity, null);
 
             final Cart cartWith5 = client().executeBlocking(CartUpdateCommand.of(cart, AddCustomLineItem.of(item)));
             assertThat(cartWith5.getCustomLineItems()).hasSize(1);
