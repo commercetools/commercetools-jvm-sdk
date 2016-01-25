@@ -7,6 +7,16 @@ import javax.money.MonetaryAmount;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * Cart discount value of an absolute amount.
+ *
+ * {@include.example io.sphere.sdk.cartdiscounts.commands.CartDiscountCreateCommandTest#execution()}
+ *
+ * @see CartDiscountValue
+ * @see CartDiscount#getValue()
+ * @see io.sphere.sdk.cartdiscounts.commands.updateactions.ChangeValue
+ *
+ */
 public class AbsoluteCartDiscountValue extends Base implements CartDiscountValue {
     private final List<MonetaryAmount> money;
 
