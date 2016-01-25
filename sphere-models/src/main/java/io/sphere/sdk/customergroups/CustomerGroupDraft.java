@@ -1,7 +1,7 @@
 package io.sphere.sdk.customergroups;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import io.sphere.sdk.models.Base;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import io.sphere.sdk.types.CustomDraft;
 
 /**
  * <p>Draft for a customer group.</p>
@@ -9,19 +9,11 @@ import io.sphere.sdk.models.Base;
  * @see io.sphere.sdk.customergroups.commands.CustomerGroupCreateCommand
  * @see CustomerGroup
  */
-public class CustomerGroupDraft extends Base {
-    private final String groupName;
+@JsonDeserialize(as = CustomerGroupDraftImpl.class)
+public interface CustomerGroupDraft {
+    String getGroupName();
 
-    @JsonCreator
-    private CustomerGroupDraft(final String groupName) {
-        this.groupName = groupName;
-    }
-
-    public static CustomerGroupDraft of(final String groupName) {
-        return new CustomerGroupDraft(groupName);
-    }
-
-    public String getGroupName() {
-        return groupName;
+    static CustomerGroupDraft of(final String groupName) {
+        return new CustomerGroupDraftImpl(groupName);
     }
 }
