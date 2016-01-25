@@ -6,7 +6,7 @@ import static java.util.Arrays.asList;
 
 public class DraftsAreInterfacesRule extends ClassStrategyRule {
     private final List<String> fullClassNamesWhiteList =
-            asList(("").split(",( )?"));
+            asList(("CustomObjectDraft").split(",( )?"));
 
     @Override
     protected boolean classIsIncludedInRule(final Class<?> clazz) {
@@ -14,7 +14,7 @@ public class DraftsAreInterfacesRule extends ClassStrategyRule {
     }
 
     private boolean isInWhiteList(final Class<?> clazz) {
-        return fullClassNamesWhiteList.contains(clazz.getName())
+        return fullClassNamesWhiteList.contains(clazz.getSimpleName())
                 ;
     }
 
