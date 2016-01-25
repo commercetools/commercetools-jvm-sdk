@@ -86,6 +86,6 @@ public class CartDiscountDraftBuilder extends Base implements Builder<CartDiscou
 
     @Override
     public CartDiscountDraft build() {
-        return new CartDiscountDraft(name, cartPredicate.toSphereCartPredicate(), description, value, target, sortOrder, isActive, validFrom, validUntil, requiresDiscountCode);
+        return new CartDiscountDraftImpl(name, cartPredicate.toSphereCartPredicate(), description, value, target, sortOrder, isActive, validFrom, validUntil, requiresDiscountCode);
     }
 }

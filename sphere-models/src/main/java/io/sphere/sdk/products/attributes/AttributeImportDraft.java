@@ -1,9 +1,11 @@
 package io.sphere.sdk.products.attributes;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import io.sphere.sdk.json.SphereJsonUtils;
 
-public interface AttributeImportDraft {
+@JsonDeserialize(as = AttributeImportDraftImpl.class)
+        public interface AttributeImportDraft {
     String getName();
 
     static AttributeImportDraft of(final String name, final JsonNode jsonNode) {

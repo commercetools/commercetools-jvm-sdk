@@ -1,6 +1,7 @@
 package io.sphere.sdk.products.attributes;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import io.sphere.sdk.json.SphereJsonUtils;
 import io.sphere.sdk.models.EnumValue;
 import io.sphere.sdk.models.LocalizedEnumValue;
@@ -10,6 +11,7 @@ import java.util.Set;
 
 import static java.util.stream.Collectors.toSet;
 
+@JsonDeserialize(as = AttributeDraftImpl.class)
 public interface AttributeDraft {
     String getName();
 
