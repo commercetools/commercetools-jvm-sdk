@@ -4,7 +4,7 @@ import com.fasterxml.jackson.databind.JavaType;
 import io.sphere.sdk.client.HttpRequestIntent;
 import io.sphere.sdk.client.JsonEndpoint;
 import io.sphere.sdk.client.SphereRequestUtils;
-import io.sphere.sdk.expansion.ExpansionDslUtil;
+import io.sphere.sdk.expansion.ExpansionDslUtils;
 import io.sphere.sdk.expansion.ExpansionPath;
 import io.sphere.sdk.expansion.ExpansionPathContainer;
 import io.sphere.sdk.expansion.MetaModelExpansionDslExpansionModelRead;
@@ -116,12 +116,12 @@ public class MetaModelGetDslImpl<R, T, C extends MetaModelGetDsl<R, T, C, E>, E>
 
     @Override
     public C withExpansionPaths(final ExpansionPath<T> expansionPath) {
-        return ExpansionDslUtil.withExpansionPaths(this, expansionPath);
+        return ExpansionDslUtils.withExpansionPaths(this, expansionPath);
     }
 
     @Override
     public C withExpansionPaths(final Function<E, ExpansionPathContainer<T>> m) {
-        return ExpansionDslUtil.withExpansionPaths(this, m);
+        return ExpansionDslUtils.withExpansionPaths(this, m);
     }
 
     @Override
@@ -131,12 +131,12 @@ public class MetaModelGetDslImpl<R, T, C extends MetaModelGetDsl<R, T, C, E>, E>
 
     @Override
     public C plusExpansionPaths(final ExpansionPath<T> expansionPath) {
-        return ExpansionDslUtil.plusExpansionPaths(this, Collections.singletonList(expansionPath));
+        return ExpansionDslUtils.plusExpansionPaths(this, Collections.singletonList(expansionPath));
     }
 
     @Override
     public C plusExpansionPaths(final Function<E, ExpansionPathContainer<T>> m) {
-        return ExpansionDslUtil.plusExpansionPaths(this, m);
+        return ExpansionDslUtils.plusExpansionPaths(this, m);
     }
 
     @Override

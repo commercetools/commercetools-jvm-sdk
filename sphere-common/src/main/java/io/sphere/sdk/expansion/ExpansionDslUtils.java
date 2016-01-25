@@ -6,8 +6,8 @@ import java.util.function.Function;
 
 import static io.sphere.sdk.utils.SphereInternalUtils.listOf;
 
-public final class ExpansionDslUtil {
-    private ExpansionDslUtil() {
+public final class ExpansionDslUtils {
+    private ExpansionDslUtils() {
     }
 
     public static <T, C, E> C plusExpansionPaths(final MetaModelExpansionDslExpansionModelRead<T, C, E> meta, final Function<E, ExpansionPathContainer<T>> m) {

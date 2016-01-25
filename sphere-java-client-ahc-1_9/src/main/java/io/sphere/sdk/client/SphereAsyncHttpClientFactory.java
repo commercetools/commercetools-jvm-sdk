@@ -4,8 +4,9 @@ import com.ning.http.client.AsyncHttpClient;
 import com.ning.http.client.AsyncHttpClientConfig;
 import io.sphere.sdk.http.HttpClient;
 import io.sphere.sdk.http.AsyncHttpClientAdapter;
+import io.sphere.sdk.models.Base;
 
-public final class SphereAsyncHttpClientFactory {
+public final class SphereAsyncHttpClientFactory extends Base {
     private SphereAsyncHttpClientFactory() {
     }
 

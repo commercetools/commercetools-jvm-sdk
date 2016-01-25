@@ -5,6 +5,7 @@ import io.sphere.sdk.carts.CustomLineItem;
 import io.sphere.sdk.carts.LineItem;
 import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.customers.Customer;
+import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.Builder;
 import io.sphere.sdk.payments.Payment;
 import io.sphere.sdk.payments.commands.updateactions.AddInterfaceInteraction;
@@ -14,7 +15,7 @@ import io.sphere.sdk.reviews.Review;
 import java.util.HashSet;
 import java.util.Set;
 
-public class ResourceTypeIdsSetBuilder implements Builder<Set<String>> {
+public class ResourceTypeIdsSetBuilder extends Base implements Builder<Set<String>> {
     private final Set<String> resourceTypeIds = new HashSet<>();
 
     private ResourceTypeIdsSetBuilder() {

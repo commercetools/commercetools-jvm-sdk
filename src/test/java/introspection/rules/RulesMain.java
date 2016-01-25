@@ -30,7 +30,9 @@ public class RulesMain {
                 new QueryEndpointsHaveAlsoABuilderRule(),
                 new QueryModelsAreInterfacesRule(),
                 new DraftsAreInterfacesRule(),
-                new MethodsStartWithLowercaseRule()
+                new MethodsStartWithLowercaseRule(),
+                new EveryObjectHasAGoodBaseClass(),
+                new UtilClassesEndWithUtilsRule()
         );
         final boolean allIsOk = rules.stream()
                 .map(rule -> {

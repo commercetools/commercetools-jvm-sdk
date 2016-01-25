@@ -1,10 +1,11 @@
 package io.sphere.sdk.client;
 
 import io.sphere.sdk.http.HttpClient;
+import io.sphere.sdk.models.Base;
 
 import java.util.function.Supplier;
 
-public final class SphereAccessTokenSupplierFactory {
+public final class SphereAccessTokenSupplierFactory extends Base {
     private final Supplier<HttpClient> httpClientSupplier;
 
     private SphereAccessTokenSupplierFactory(final Supplier<HttpClient> httpClientSupplier) {

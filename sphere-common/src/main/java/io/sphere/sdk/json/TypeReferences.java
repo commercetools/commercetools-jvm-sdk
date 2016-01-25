@@ -2,6 +2,7 @@ package io.sphere.sdk.json;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
+import io.sphere.sdk.models.Base;
 
 import javax.money.MonetaryAmount;
 import java.time.ZonedDateTime;
@@ -10,7 +11,7 @@ import java.time.LocalTime;
 import java.util.Locale;
 import java.util.Set;
 
-public final class TypeReferences {
+public final class TypeReferences extends Base {
     private TypeReferences() {
     }
 

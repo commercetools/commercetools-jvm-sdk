@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.JavaType;
 import io.sphere.sdk.json.SphereJsonUtils;
 import io.sphere.sdk.messages.queries.MessageQuery;
 import io.sphere.sdk.messages.queries.MessageQueryModel;
+import io.sphere.sdk.models.Base;
 import io.sphere.sdk.queries.QueryPredicate;
 
 import java.util.function.Supplier;
@@ -13,7 +14,7 @@ import java.util.function.Supplier;
  * @param <T> the type of the message the type hint is about
  * @see MessageQuery#forMessageType(io.sphere.sdk.messages.MessageDerivateHint)
  */
-public class MessageDerivateHint<T> {
+public class MessageDerivateHint<T> extends Base {
     private final JavaType javaType;
     private final Supplier<QueryPredicate<Message>> predicateSupplier;
 
