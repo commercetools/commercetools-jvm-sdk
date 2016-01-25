@@ -29,7 +29,8 @@ public class RulesMain {
                 new ReferenceableResourceCanCreateReferenceRule(),
                 new QueryEndpointsHaveAlsoABuilderRule(),
                 new QueryModelsAreInterfacesRule(),
-                new DraftsAreInterfacesRule()
+                new DraftsAreInterfacesRule(),
+                new MethodsStartWithLowercaseRule()
         );
         final boolean allIsOk = rules.stream()
                 .map(rule -> {
