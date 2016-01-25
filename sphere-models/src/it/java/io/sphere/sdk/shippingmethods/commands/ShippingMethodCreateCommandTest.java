@@ -1,11 +1,9 @@
 package io.sphere.sdk.shippingmethods.commands;
 
 import com.neovisionaries.i18n.CountryCode;
-import io.sphere.sdk.products.ProductDraft;
 import io.sphere.sdk.shippingmethods.*;
 import io.sphere.sdk.shippingmethods.queries.ShippingMethodQuery;
 import io.sphere.sdk.taxcategories.TaxCategoryDraft;
-import io.sphere.sdk.taxcategories.TaxCategoryFixtures;
 import io.sphere.sdk.taxcategories.TaxRate;
 import io.sphere.sdk.test.IntegrationTest;
 import io.sphere.sdk.test.JsonNodeReferenceResolver;
