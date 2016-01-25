@@ -16,7 +16,7 @@ import java.util.Optional;
  *  <p>Example of creating a cart with custom fields:</p>
  * {@include.example io.sphere.sdk.carts.CartsCustomFieldsTest#createCartWithCustomType()}
  */
-public class CartDraftBuilder extends Base implements Builder<CartDraft> {
+public class CartDraftBuilder extends Base implements Builder<CartDraftDsl> {
     private final CurrencyUnit currency;
     @Nullable
     private String customerId;    
@@ -89,8 +89,8 @@ public class CartDraftBuilder extends Base implements Builder<CartDraft> {
     }
 
     @Override
-    public CartDraft build() {
-        return new CartDraft(currency, customerId, country, inventoryMode, custom, customerEmail, lineItems, customLineItems, shippingAddress, billingAddress, shippingMethod);
+    public CartDraftDsl build() {
+        return new CartDraftDsl(currency, customerId, country, inventoryMode, custom, customerEmail, lineItems, customLineItems, shippingAddress, billingAddress, shippingMethod);
     }
 
     public CartDraftBuilder custom(@Nullable final CustomFieldsDraft custom) {

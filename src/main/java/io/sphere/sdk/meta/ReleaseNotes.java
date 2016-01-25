@@ -276,7 +276,7 @@ import java.util.function.Function;
  <li class=change-in-release>Deprecated {@link LineItem#getDiscountedPrice()} and {@link CustomLineItem#getDiscountedPrice()} since they are deprecated in the HTTP API</li>
  <li class=new-in-release>Improved documentation of {@link io.sphere.sdk.models.Versioned}.</li>
  <li class=new-in-release>Added {@link io.sphere.sdk.payments.Payment}.</li>
- <li class=change-in-release>Deprecated typo method {@link io.sphere.sdk.carts.CartDraft#witCustom(CustomFieldsDraft)}, use {@link io.sphere.sdk.carts.CartDraft#withCustom(CustomFieldsDraft)} instead.</li>
+ <li class=change-in-release>Deprecated typo method {@code io.sphere.sdk.carts.CartDraft#witCustom(CustomFieldsDraft)}, use {@code io.sphere.sdk.carts.CartDraft#withCustom(CustomFieldsDraft)} instead.</li>
  <li class=change-in-release>Deprecated {@link io.sphere.sdk.customers.queries.CustomerByTokenGet}, use {@link io.sphere.sdk.customers.queries.CustomerByPasswordTokenGet} instead.</li>
  <li class=new-in-release>Added {@link io.sphere.sdk.customobjects.queries.CustomObjectByIdGet} and {@link CustomObjectDeleteCommand#of(String, Long, Class)} which can delete a {@link CustomObject} by ID.</li>
  <li class=change-in-release>Simplified CustomObject endpoints. Instead of a {@link com.fasterxml.jackson.core.type.TypeReference} for the endpoint result only the class of the value of the custom object needs to be provided.
