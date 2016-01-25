@@ -12,7 +12,11 @@ import java.util.List;
  * An absolute discount reduces the matching price by a fixed amount (for example 10€ off).
  * If more than one product discount matches a price, the discount sort order determines which one will be applied.
  *
+ * {@include.example io.sphere.sdk.productdiscounts.commands.ProductDiscountUpdateCommandTest#changeValue()}
+ *
  * @see io.sphere.sdk.productdiscounts.ProductDiscount
+ * @see ProductDiscount#getValue()
+ * @see io.sphere.sdk.productdiscounts.commands.updateactions.ChangeValue
  */
 public class AbsoluteProductDiscountValue extends Base implements ProductDiscountValue {
     private final List<MonetaryAmount> money;
