@@ -3,9 +3,9 @@ package io.sphere.sdk.customobjects.commands;
 import io.sphere.sdk.client.HttpRequestIntent;
 import io.sphere.sdk.commands.CreateCommand;
 import io.sphere.sdk.customobjects.CustomObject;
-import io.sphere.sdk.client.SphereRequestBase;
 import io.sphere.sdk.http.HttpMethod;
 import io.sphere.sdk.http.HttpResponse;
+import io.sphere.sdk.models.Base;
 
 /**
  Command for creating or updating a custom object using a custom JSON mapper.
@@ -31,7 +31,10 @@ import io.sphere.sdk.http.HttpResponse;
  @param <T> The type of the value of this custom object.
  @see CustomObject
  */
-public abstract class CustomObjectCustomJsonMappingUpsertCommand<T> extends SphereRequestBase implements CreateCommand<CustomObject<T>> {
+public abstract class CustomObjectCustomJsonMappingUpsertCommand<T> extends Base implements CreateCommand<CustomObject<T>> {
+
+    protected CustomObjectCustomJsonMappingUpsertCommand() {
+    }
 
     @Override
     public abstract CustomObject<T> deserialize(final HttpResponse httpResponse);

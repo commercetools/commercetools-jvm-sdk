@@ -2,7 +2,7 @@ package io.sphere.sdk.producttypes.commands;
 
 import io.sphere.sdk.commands.UpdateAction;
 import io.sphere.sdk.commands.UpdateCommandDsl;
-import io.sphere.sdk.expansion.MetaModelExpansionDsl;
+import io.sphere.sdk.expansion.MetaModelReferenceExpansionDsl;
 import io.sphere.sdk.models.Versioned;
 import io.sphere.sdk.producttypes.ProductType;
 import io.sphere.sdk.producttypes.expansion.ProductTypeExpansionModel;
@@ -16,7 +16,7 @@ Updates ProductTypes.
  {@doc.gen list actions}
 
  */
-public interface ProductTypeUpdateCommand extends UpdateCommandDsl<ProductType, ProductTypeUpdateCommand>, MetaModelExpansionDsl<ProductType, ProductTypeUpdateCommand, ProductTypeExpansionModel<ProductType>> {
+public interface ProductTypeUpdateCommand extends UpdateCommandDsl<ProductType, ProductTypeUpdateCommand>, MetaModelReferenceExpansionDsl<ProductType, ProductTypeUpdateCommand, ProductTypeExpansionModel<ProductType>> {
     static ProductTypeUpdateCommand of(final Versioned<ProductType> versioned, final List<? extends UpdateAction<ProductType>> updateActions) {
         return new ProductTypeUpdateCommandImpl(versioned, updateActions);
     }

@@ -39,7 +39,7 @@ public final class CustomerSignInCommand extends CommandImpl<CustomerSignInResul
     @Nullable
     private final String anonymousCartId;
 
-    private CustomerSignInCommand(final String email, final String password, final String anonymousCartId) {
+    private CustomerSignInCommand(final String email, final String password, @Nullable final String anonymousCartId) {
         this.email = email;
         this.password = password;
         this.anonymousCartId = anonymousCartId;

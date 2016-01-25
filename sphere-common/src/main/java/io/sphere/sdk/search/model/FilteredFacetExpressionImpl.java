@@ -6,7 +6,7 @@ import io.sphere.sdk.search.FilteredFacetExpression;
 import javax.annotation.Nullable;
 import java.util.function.Function;
 
-import static io.sphere.sdk.utils.IterableUtils.requireNonEmpty;
+import static io.sphere.sdk.utils.SphereInternalUtils.requireNonEmpty;
 
 class FilteredFacetExpressionImpl<T, V> extends TermExpression<T, V> implements FilteredFacetExpression<T> {
 

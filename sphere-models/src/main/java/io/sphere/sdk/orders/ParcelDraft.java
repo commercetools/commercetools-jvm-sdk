@@ -10,7 +10,7 @@ public class ParcelDraft extends Base {
     @Nullable
     private final TrackingData trackingData;
 
-    private ParcelDraft(final ParcelMeasurements measurements, final TrackingData trackingData) {
+    private ParcelDraft(@Nullable final ParcelMeasurements measurements, @Nullable final TrackingData trackingData) {
         this.measurements = measurements;
         this.trackingData = trackingData;
     }

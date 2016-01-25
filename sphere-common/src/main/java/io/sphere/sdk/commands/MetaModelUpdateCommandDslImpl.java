@@ -1,6 +1,5 @@
 package io.sphere.sdk.commands;
 
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JavaType;
 import io.sphere.sdk.client.HttpRequestIntent;
 import io.sphere.sdk.client.JsonEndpoint;
@@ -19,7 +18,7 @@ import java.util.List;
 import java.util.function.Function;
 
 import static io.sphere.sdk.json.SphereJsonUtils.toJsonString;
-import static io.sphere.sdk.utils.ListUtils.listOf;
+import static io.sphere.sdk.utils.SphereInternalUtils.listOf;
 import static java.util.Objects.requireNonNull;
 
 /**
@@ -30,7 +29,7 @@ import static java.util.Objects.requireNonNull;
 public class MetaModelUpdateCommandDslImpl<T extends ResourceView<T, T>, C extends UpdateCommandDsl<T, C>, E> extends CommandImpl<T> implements UpdateCommandDsl<T, C>, MetaModelExpansionDslExpansionModelRead<T, C, E> {
     final Versioned<T> versioned;
     final List<? extends UpdateAction<T>> updateActions;
-    final TypeReference<T> typeReference;
+    final JavaType javaType;
     final String baseEndpointWithoutId;
     final Function<MetaModelUpdateCommandDslBuilder<T, C, E>, C> creationFunction;
     final E expansionModel;
@@ -38,7 +37,7 @@ public class MetaModelUpdateCommandDslImpl<T extends ResourceView<T, T>, C exten
 
     private MetaModelUpdateCommandDslImpl(final Versioned<T> versioned,
                                           final List<? extends UpdateAction<T>> updateActions,
-                                          final TypeReference<T> typeReference,
+                                          final JavaType javaType,
                                           final String baseEndpointWithoutId,
                                           final Function<MetaModelUpdateCommandDslBuilder<T, C, E>, C> creationFunction,
                                           final E expansionModel,
@@ -48,7 +47,7 @@ public class MetaModelUpdateCommandDslImpl<T extends ResourceView<T, T>, C exten
         this.creationFunction = requireNonNull(creationFunction);
         this.versioned = requireNonNull(versioned);
         this.updateActions = requireNonNull(updateActions);
-        this.typeReference = requireNonNull(typeReference);
+        this.javaType = requireNonNull(javaType);
         this.baseEndpointWithoutId = requireNonNull(baseEndpointWithoutId);
     }
 
@@ -57,16 +56,16 @@ public class MetaModelUpdateCommandDslImpl<T extends ResourceView<T, T>, C exten
                                             final JsonEndpoint<T> endpoint,
                                             final Function<MetaModelUpdateCommandDslBuilder<T, C, E>, C> creationFunction,
                                             final E expansionModel) {
-        this(versioned, updateActions, endpoint.typeReference(), endpoint.endpoint(), creationFunction, expansionModel, Collections.<ExpansionPath<T>>emptyList());
+        this(versioned, updateActions, SphereJsonUtils.convertToJavaType(endpoint.typeReference()), endpoint.endpoint(), creationFunction, expansionModel, Collections.<ExpansionPath<T>>emptyList());
     }
 
     protected MetaModelUpdateCommandDslImpl(final MetaModelUpdateCommandDslBuilder<T, C, E> builder) {
-        this(builder.getVersioned(), builder.getUpdateActions(), builder.getTypeReference(), builder.getBaseEndpointWithoutId(), builder.getCreationFunction(), builder.expansionModel, builder.expansionPaths);
+        this(builder.getVersioned(), builder.getUpdateActions(), builder.getJacksonJavaType(), builder.getBaseEndpointWithoutId(), builder.getCreationFunction(), builder.expansionModel, builder.expansionPaths);
     }
 
     @Override
     protected JavaType jacksonJavaType() {
-        return SphereJsonUtils.convertToJavaType(typeReference);
+        return javaType;
     }
 
     @Override
@@ -108,10 +107,6 @@ public class MetaModelUpdateCommandDslImpl<T extends ResourceView<T, T>, C exten
 
     Function<MetaModelUpdateCommandDslBuilder<T, C, E>, C> getCreationFunction() {
         return creationFunction;
-    }
-
-    TypeReference<T> getTypeReference() {
-        return typeReference;
     }
 
     @Override

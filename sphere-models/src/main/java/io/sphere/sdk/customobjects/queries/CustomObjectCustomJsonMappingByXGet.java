@@ -1,9 +1,9 @@
 package io.sphere.sdk.customobjects.queries;
 
 import io.sphere.sdk.client.HttpRequestIntent;
-import io.sphere.sdk.client.SphereRequestBase;
 import io.sphere.sdk.customobjects.CustomObject;
 import io.sphere.sdk.http.HttpResponse;
+import io.sphere.sdk.models.Base;
 import io.sphere.sdk.queries.Get;
 
 import javax.annotation.Nullable;
@@ -12,7 +12,7 @@ import java.util.function.Function;
 import static io.sphere.sdk.http.HttpMethod.GET;
 import static io.sphere.sdk.http.HttpStatusCode.NOT_FOUND_404;
 
-abstract class CustomObjectCustomJsonMappingByXGet<T> extends SphereRequestBase implements Get<CustomObject<T>> {
+abstract class CustomObjectCustomJsonMappingByXGet<T> extends Base implements Get<CustomObject<T>> {
     private final String path;
 
     public CustomObjectCustomJsonMappingByXGet(final String path) {

@@ -23,7 +23,6 @@ import java.util.Optional;
 import java.util.function.Function;
 
 import static io.sphere.sdk.models.DefaultCurrencyUnits.EUR;
-import static io.sphere.sdk.models.LocalizedString.ofEnglishLocale;
 import static io.sphere.sdk.test.SphereTestUtils.*;
 import static java.lang.Math.min;
 import static java.util.Arrays.asList;
@@ -105,15 +104,15 @@ public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
     }
 
     private static ProductType createProductType() {
-        final AttributeDefinition colorAttrDef = AttributeDefinitionBuilder.of(ATTR_NAME_COLOR, ofEnglishLocale(ATTR_NAME_COLOR), StringAttributeType.of()).build();
-        final AttributeDefinition sizeAttrDef = AttributeDefinitionBuilder.of(ATTR_NAME_SIZE, ofEnglishLocale(ATTR_NAME_SIZE), NumberAttributeType.of()).build();
+        final AttributeDefinition colorAttrDef = AttributeDefinitionBuilder.of(ATTR_NAME_COLOR, LocalizedString.ofEnglish(ATTR_NAME_COLOR), StringAttributeType.of()).build();
+        final AttributeDefinition sizeAttrDef = AttributeDefinitionBuilder.of(ATTR_NAME_SIZE, LocalizedString.ofEnglish(ATTR_NAME_SIZE), NumberAttributeType.of()).build();
         final ProductTypeDraft productTypeDraft = ProductTypeDraft.of(randomKey(), PRODUCT_TYPE_NAME, "", asList(colorAttrDef, sizeAttrDef));
         final ProductTypeCreateCommand productTypeCreateCommand = ProductTypeCreateCommand.of(productTypeDraft);
         return client().executeBlocking(productTypeCreateCommand);
     }
 
     private static ProductType createEvilProductType() {
-        final AttributeDefinition evilAttrDef = AttributeDefinitionBuilder.of(ATTR_NAME_EVIL, ofEnglishLocale(ATTR_NAME_EVIL), StringAttributeType.of()).build();
+        final AttributeDefinition evilAttrDef = AttributeDefinitionBuilder.of(ATTR_NAME_EVIL, LocalizedString.ofEnglish(ATTR_NAME_EVIL), StringAttributeType.of()).build();
         final ProductTypeDraft evilProductTypeDraft = ProductTypeDraft.of(randomKey(), EVIL_PRODUCT_TYPE_NAME, "", singletonList(evilAttrDef));
         final ProductTypeCreateCommand evilProductTypeCreateCommand = ProductTypeCreateCommand.of(evilProductTypeDraft);
         return client().executeBlocking(evilProductTypeCreateCommand);

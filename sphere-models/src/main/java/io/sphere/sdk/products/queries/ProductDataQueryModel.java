@@ -3,70 +3,28 @@ package io.sphere.sdk.products.queries;
 import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.queries.LocalizedStringQueryModel;
 import io.sphere.sdk.queries.LocalizedStringQuerySortingModel;
-import io.sphere.sdk.queries.QueryModel;
 import io.sphere.sdk.queries.ReferenceCollectionQueryModel;
 
-import javax.annotation.Nullable;
+public interface ProductDataQueryModel<T> extends ProductDataQueryModelBase<T> {
+    ReferenceCollectionQueryModel<T, Category> categories();
 
-public class ProductDataQueryModel<T> extends ProductDataQueryModelBase<T> {
+    LocalizedStringQueryModel<T> description();
 
-    ProductDataQueryModel(@Nullable final QueryModel<T> parent, @Nullable final String pathSegment) {
-        super(parent, pathSegment);
-    }
+    ProductAllVariantsQueryModel<T> allVariants();
 
-    @Override
-    public ReferenceCollectionQueryModel<T, Category> categories() {
-        return super.categories();
-    }
+    ProductVariantQueryModel<T> masterVariant();
 
-    @Override
-    public LocalizedStringQueryModel<T> description() {
-        return super.description();
-    }
+    LocalizedStringQuerySortingModel<T> metaDescription();
 
-    @Override
-    public ProductAllVariantsQueryModel<T> allVariants() {
-        return super.allVariants();
-    }
+    LocalizedStringQuerySortingModel<T> metaKeywords();
 
-    @Override
-    public ProductVariantQueryModel<T> masterVariant() {
-        return super.masterVariant();
-    }
+    LocalizedStringQuerySortingModel<T> metaTitle();
 
-    @Override
-    public LocalizedStringQuerySortingModel<T> metaDescription() {
-        return super.metaDescription();
-    }
+    LocalizedStringQuerySortingModel<T> name();
 
-    @Override
-    public LocalizedStringQuerySortingModel<T> metaKeywords() {
-        return super.metaKeywords();
-    }
+    LocalizedStringQuerySortingModel<T> slug();
 
-    @Override
-    public LocalizedStringQuerySortingModel<T> metaTitle() {
-        return super.metaTitle();
-    }
+    ProductVariantQueryModel<T> variants();
 
-    @Override
-    public LocalizedStringQuerySortingModel<T> name() {
-        return super.name();
-    }
-
-    @Override
-    public LocalizedStringQuerySortingModel<T> slug() {
-        return super.slug();
-    }
-
-    @Override
-    public ProductVariantQueryModel<T> variants() {
-        return super.variants();
-    }
-
-    @Override
-    public CategoryOrderHintsQueryModel<T> categoryOrderHints() {
-        return super.categoryOrderHints();
-    }
+    CategoryOrderHintsQueryModel<T> categoryOrderHints();
 }
-

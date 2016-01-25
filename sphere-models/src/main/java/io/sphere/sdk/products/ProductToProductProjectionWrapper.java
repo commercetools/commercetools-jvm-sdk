@@ -4,6 +4,7 @@ import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.producttypes.ProductType;
+import io.sphere.sdk.reviews.ReviewRatingStatistics;
 import io.sphere.sdk.search.SearchKeywords;
 import io.sphere.sdk.taxcategories.TaxCategory;
 
@@ -120,5 +121,11 @@ class ProductToProductProjectionWrapper implements ProductProjection {
     @Override
     public CategoryOrderHints getCategoryOrderHints() {
         return productData.getCategoryOrderHints();
+    }
+
+    @Nullable
+    @Override
+    public ReviewRatingStatistics getReviewRatingStatistics() {
+        return product.getReviewRatingStatistics();
     }
 }

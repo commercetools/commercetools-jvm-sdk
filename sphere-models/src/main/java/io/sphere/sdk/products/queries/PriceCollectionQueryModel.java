@@ -3,60 +3,36 @@ package io.sphere.sdk.products.queries;
 import io.sphere.sdk.customergroups.CustomerGroup;
 import io.sphere.sdk.queries.*;
 import io.sphere.sdk.types.queries.CustomQueryModel;
-import io.sphere.sdk.types.queries.CustomQueryModelImpl;
 
-import javax.annotation.Nullable;
-
-public final class PriceCollectionQueryModel<T> extends QueryModelImpl<T> implements CollectionQueryModel<T>, PriceQueryModel<T> {
-
-    public PriceCollectionQueryModel(@Nullable final QueryModel<T> parent, @Nullable final String pathSegment) {
-        super(parent, pathSegment);
-    }
+public interface PriceCollectionQueryModel<T> extends CollectionQueryModel<T>, PriceQueryModel<T> {
+    @Override
+    DiscountedPriceOptionalQueryModel<T> discounted();
 
     @Override
-    public DiscountedPriceOptionalQueryModel<T> discounted() {
-        return new DiscountedPriceOptionalQueryModel<>(this, "discounted");
-    }
+    QueryPredicate<T> isEmpty();
 
     @Override
-    public QueryPredicate<T> isEmpty() {
-        return isEmptyCollectionQueryPredicate();
-    }
+    QueryPredicate<T> isNotEmpty();
 
     @Override
-    public QueryPredicate<T> isNotEmpty() {
-        return isNotEmptyCollectionQueryPredicate();
-    }
+    StringQueryModel<T> id();
 
     @Override
-    public StringQueryModel<T> id() {
-        return stringModel("id");
-    }
+    MoneyQueryModel<T> value();
 
     @Override
-    public MoneyQueryModel<T> value() {
-        return moneyModel("value");
-    }
+    CountryQueryModel<T> country();
 
     @Override
-    public CountryQueryModel<T> country() {
-        return countryQueryModel("country");
-    }
+    ReferenceOptionalQueryModel<T, CustomerGroup> customerGroup();
 
     @Override
-    public ReferenceOptionalQueryModel<T, CustomerGroup> customerGroup() {
-        return referenceOptionalModel("customerGroup");
-    }
+    ReferenceOptionalQueryModel<T, CustomerGroup> channel();
 
     @Override
-    public ReferenceOptionalQueryModel<T, CustomerGroup> channel() {
-        return referenceOptionalModel("channel");
-    }
+    CustomQueryModel<T> custom();
 
-
-    @Override
-    public CustomQueryModel<T> custom() {
-        return new CustomQueryModelImpl<>(this, "custom");
+    static <T> PriceCollectionQueryModel<T> of(final QueryModel<T> parent, final String path) {
+        return new PriceCollectionQueryModelImpl<>(parent, path);
     }
 }
-

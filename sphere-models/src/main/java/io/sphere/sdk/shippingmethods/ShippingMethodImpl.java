@@ -18,7 +18,7 @@ final class ShippingMethodImpl extends ResourceImpl<ShippingMethod> implements S
     private final Boolean isDefault;
 
     @JsonCreator
-    private ShippingMethodImpl(final String id, final Long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt, final String name, final String description, final Reference<TaxCategory> taxCategory, final List<ZoneRate> zoneRates, final Boolean isDefault) {
+    private ShippingMethodImpl(final String id, final Long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt, final String name, @Nullable final String description, final Reference<TaxCategory> taxCategory, final List<ZoneRate> zoneRates, final Boolean isDefault) {
         super(id, version, createdAt, lastModifiedAt);
         this.name = name;
         this.description = description;

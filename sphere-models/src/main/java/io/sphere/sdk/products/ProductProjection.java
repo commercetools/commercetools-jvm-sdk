@@ -7,6 +7,7 @@ import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Referenceable;
 import io.sphere.sdk.products.queries.ProductProjectionByIdGet;
+import io.sphere.sdk.reviews.ReviewRatingStatistics;
 import io.sphere.sdk.search.SearchKeywords;
 
 import javax.annotation.Nullable;
@@ -15,7 +16,6 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 /**
   A projected representation of a product shows the product with its current or staged data.
@@ -95,7 +95,7 @@ public interface ProductProjection extends ProductLike<ProductProjection, Produc
         return ProductsPackage.getAllVariants(this);
     }
 
-    default Optional<ProductVariant> findVariant(final VariantIdentifier identifier){
+    default Optional<ProductVariant> findVariant(final ByIdVariantIdentifier identifier){
         return getId().equals(identifier.getProductId()) ? Optional.ofNullable(getVariant(identifier.getVariantId())) : Optional.empty();
     }
 
@@ -156,4 +156,8 @@ public interface ProductProjection extends ProductLike<ProductProjection, Produc
     @Override
     @Nullable
     CategoryOrderHints getCategoryOrderHints();
+
+    @Nullable
+    @Override
+    ReviewRatingStatistics getReviewRatingStatistics();
 }

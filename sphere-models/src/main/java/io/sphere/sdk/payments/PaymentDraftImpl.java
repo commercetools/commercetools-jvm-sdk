@@ -37,7 +37,7 @@ final class PaymentDraftImpl extends Base implements PaymentDraft {
     private final List<CustomFieldsDraft> interfaceInteractions;
 
     @JsonCreator
-    PaymentDraftImpl(final MonetaryAmount amountAuthorized, final Reference<Customer> customer, final String externalId, final String interfaceId, final MonetaryAmount amountPlanned, final ZonedDateTime authorizedUntil, final MonetaryAmount amountPaid, final MonetaryAmount amountRefunded, final PaymentMethodInfo paymentMethodInfo, final CustomFieldsDraft custom, final PaymentStatus paymentStatus, final List<TransactionDraft> transactions, final List<CustomFieldsDraft> interfaceInteractions) {
+    PaymentDraftImpl(@Nullable final MonetaryAmount amountAuthorized, @Nullable final Reference<Customer> customer, @Nullable final String externalId, @Nullable final String interfaceId, final MonetaryAmount amountPlanned, @Nullable final ZonedDateTime authorizedUntil, @Nullable final MonetaryAmount amountPaid, @Nullable final MonetaryAmount amountRefunded, @Nullable final PaymentMethodInfo paymentMethodInfo, @Nullable final CustomFieldsDraft custom, @Nullable final PaymentStatus paymentStatus, final List<TransactionDraft> transactions, final List<CustomFieldsDraft> interfaceInteractions) {
         this.amountAuthorized = amountAuthorized;
         this.customer = customer;
         this.externalId = externalId;

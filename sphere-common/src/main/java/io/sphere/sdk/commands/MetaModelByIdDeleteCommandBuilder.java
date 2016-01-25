@@ -1,6 +1,6 @@
 package io.sphere.sdk.commands;
 
-import io.sphere.sdk.client.JsonEndpoint;
+import com.fasterxml.jackson.databind.JavaType;
 import io.sphere.sdk.expansion.ExpansionPath;
 import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.Builder;
@@ -19,7 +19,8 @@ import static java.util.Objects.requireNonNull;
  */
 public class MetaModelByIdDeleteCommandBuilder<T extends ResourceView<T, T>, C, E> extends Base implements Builder<C> {
     final Versioned<T> versioned;
-    final JsonEndpoint<T> endpoint;
+    final JavaType javaType;
+    final String endpoint;
     final E expansionModel;
     List<ExpansionPath<T>> expansionPaths;
     final Function<MetaModelByIdDeleteCommandBuilder<T, C, E>, C> creationFunction;
@@ -29,6 +30,7 @@ public class MetaModelByIdDeleteCommandBuilder<T extends ResourceView<T, T>, C, 
         this.expansionModel = requireNonNull(template.expansionModel);
         this.expansionPaths = requireNonNull(template.expansionPaths);
         this.versioned = requireNonNull(template.versioned);
+        this.javaType = requireNonNull(template.javaType);
         this.endpoint = requireNonNull(template.endpoint);
     }
 

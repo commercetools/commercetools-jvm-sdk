@@ -36,7 +36,7 @@
 
 // ReleaseNotes - toggling hidden div
 
-$(".rn-hidden").before('<div class="more-thing"><a class="show-more" href="#">more ...</a></div>')
+$(".rn-hidden").before('<div class="more-thing"><a class="show-more" href="#">more ...</a></div>');
 
 $(".more-thing").click(function(event) {
     event.preventDefault();
@@ -48,7 +48,7 @@ $(".more-thing").click(function(event) {
 
 $(".expand-all").click(function () {
     var attr = $(this).attr("data-for");
-    $("#" + attr).nextAll("ul .rn-hidden").first()
+    $("#" + attr).nextAll("ul .rn-hidden").first();
     $(".rn-hidden").css("display", "block");
 });
 

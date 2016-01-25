@@ -10,4 +10,6 @@ public interface ResourceQueryModel<T> {
     TimestampSortingModel<T> createdAt();
 
     TimestampSortingModel<T> lastModifiedAt();
+
+    QueryPredicate<T> not(final QueryPredicate<T> queryPredicateToNegate);
 }

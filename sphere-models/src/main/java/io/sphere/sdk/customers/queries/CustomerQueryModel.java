@@ -5,58 +5,32 @@ import io.sphere.sdk.customers.Customer;
 import io.sphere.sdk.models.Identifiable;
 import io.sphere.sdk.queries.*;
 import io.sphere.sdk.types.queries.CustomQueryModel;
-import io.sphere.sdk.types.queries.CustomResourceQueryModelImpl;
 import io.sphere.sdk.types.queries.WithCustomQueryModel;
 
-public final class CustomerQueryModel extends CustomResourceQueryModelImpl<Customer> implements WithCustomQueryModel<Customer> {
+public interface CustomerQueryModel extends ResourceQueryModel<Customer>, WithCustomQueryModel<Customer> {
+    StringQuerySortingModel<Customer> firstName();
 
-    public static CustomerQueryModel of() {
-        return new CustomerQueryModel(null, null);
-    }
+    StringQuerySortingModel<Customer> lastName();
 
-    private CustomerQueryModel(final QueryModel<Customer> parent, final String pathSegment) {
-        super(parent, pathSegment);
-    }
+    StringQuerySortingModel<Customer> email();
 
-    public StringQuerySortingModel<Customer> firstName() {
-        return stringModel("firstName");
-    }
+    StringQuerySortingModel<Customer> defaultShippingAddressId();
 
-    public StringQuerySortingModel<Customer> lastName() {
-        return stringModel("lastName");
-    }
+    StringQuerySortingModel<Customer> defaultBillingAddressId();
 
-    public StringQuerySortingModel<Customer> email() {
-        return stringModel("email");
-    }
+    BooleanQueryModel<Customer> isEmailVerified();
 
-    public StringQuerySortingModel<Customer> defaultShippingAddressId() {
-        return stringModel("defaultShippingAddressId");
-    }
+    StringQuerySortingModel<Customer> externalId();
 
-    public StringQuerySortingModel<Customer> defaultBillingAddressId() {
-        return stringModel("defaultBillingAddressId");
-    }
-
-    public BooleanQueryModel<Customer> isEmailVerified() {
-        return booleanModel("isEmailVerified");
-    }
-
-    public StringQuerySortingModel<Customer> externalId() {
-        return stringModel("externalId");
-    }
-
-    public ReferenceQueryModel<Customer, CustomerGroup> customerGroup() {
-        return referenceModel("customerGroup");
-    }
+    ReferenceQueryModel<Customer, CustomerGroup> customerGroup();
 
     @Override
-    public CustomQueryModel<Customer> custom() {
-        return super.custom();
-    }
+    CustomQueryModel<Customer> custom();
 
     @Override
-    public QueryPredicate<Customer> is(final Identifiable<Customer> identifiable) {
-        return super.is(identifiable);
+    QueryPredicate<Customer> is(Identifiable<Customer> identifiable);
+
+    static CustomerQueryModel of() {
+        return new CustomerQueryModelImpl(null, null);
     }
 }

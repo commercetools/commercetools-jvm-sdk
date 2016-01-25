@@ -1,7 +1,5 @@
 package io.sphere.sdk.queries;
 
-import io.sphere.sdk.utils.IterableUtils;
-
 import javax.annotation.Nullable;
 import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
@@ -9,7 +7,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static java.util.stream.Collectors.toList;
+import static io.sphere.sdk.utils.SphereInternalUtils.toStream;
 
 final class TimestampSortingModelImpl<T> extends QueryModelImpl<T> implements TimestampSortingModel<T> {
     public TimestampSortingModelImpl(@Nullable final QueryModel<T> parent, @Nullable final String pathSegment) {
@@ -63,7 +61,7 @@ final class TimestampSortingModelImpl<T> extends QueryModelImpl<T> implements Ti
     }
 
     private List<String> quotify(final Iterable<ZonedDateTime> values) {
-        return IterableUtils.toStream(values).map(this::quotify).collect(Collectors.toList());
+        return toStream(values).map(this::quotify).collect(Collectors.toList());
     }
 
     @Override

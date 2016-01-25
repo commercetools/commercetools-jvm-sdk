@@ -3,74 +3,37 @@ package io.sphere.sdk.carts.queries;
 import io.sphere.sdk.carts.Cart;
 import io.sphere.sdk.customergroups.CustomerGroup;
 import io.sphere.sdk.queries.*;
+import io.sphere.sdk.types.queries.WithCustomQueryModel;
 
-public class CartQueryModel extends CartLikeQueryModel<Cart> {
+public interface CartQueryModel extends ResourceQueryModel<Cart>, WithCustomQueryModel<Cart>, CartLikeQueryModel<Cart> {
+    CountryQueryModel<Cart> country();
 
-    public static CartQueryModel of() {
-        return new CartQueryModel(null, null);
-    }
+    StringQuerySortingModel<Cart> customerEmail();
 
-    private CartQueryModel(QueryModel<Cart> parent, String pathSegment) {
-        super(parent, pathSegment);
-    }
+    ReferenceOptionalQueryModel<Cart, CustomerGroup> customerGroup();
 
-    @Override
-    public CountryQueryModel<Cart> country() {
-        return super.country();
-    }
+    StringQuerySortingModel<Cart> customerId();
 
-    @Override
-    public StringQuerySortingModel<Cart> customerEmail() {
-        return super.customerEmail();
-    }
+    LineItemCollectionQueryModel<Cart> lineItems();
 
-    @Override
-    public ReferenceOptionalQueryModel<Cart, CustomerGroup> customerGroup() {
-        return super.customerGroup();
-    }
+    TaxedPriceOptionalQueryModel<Cart> taxedPrice();
 
-    @Override
-    public StringQuerySortingModel<Cart> customerId() {
-        return super.customerId();
-    }
+    MoneyQueryModel<Cart> totalPrice();
+
+    CustomLineItemCollectionQueryModel<Cart> customLineItems();
+
+    AddressQueryModel<Cart> billingAddress();
+
+    DiscountCodeInfoCollectionQueryModel<Cart> discountCodes();
+
+    AddressQueryModel<Cart> shippingAddress();
+
+    CartShippingInfoQueryModel<Cart> shippingInfo();
 
     @Override
-    public LineItemCollectionQueryModel<Cart> lineItems() {
-        return super.lineItems();
-    }
+    PaymentInfoQueryModel<Cart> paymentInfo();
 
-    @Override
-    public TaxedPriceOptionalQueryModel<Cart> taxedPrice() {
-        return super.taxedPrice();
-    }
-
-    @Override
-    public MoneyQueryModel<Cart> totalPrice() {
-        return super.totalPrice();
-    }
-
-    @Override
-    public CustomLineItemCollectionQueryModel<Cart> customLineItems() {
-        return super.customLineItems();
-    }
-
-    @Override
-    public AddressQueryModel<Cart> billingAddress() {
-        return super.billingAddress();
-    }
-
-    @Override
-    public DiscountCodeInfoCollectionQueryModel<Cart> discountCodes() {
-        return super.discountCodes();
-    }
-
-    @Override
-    public AddressQueryModel<Cart> shippingAddress() {
-        return super.shippingAddress();
-    }
-
-    @Override
-    public CartShippingInfoQueryModel<Cart> shippingInfo() {
-        return super.shippingInfo();
+    static CartQueryModel of() {
+        return new CartQueryModelImpl(null, null);
     }
 }

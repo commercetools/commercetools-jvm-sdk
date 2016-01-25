@@ -6,6 +6,7 @@ import io.sphere.sdk.producttypes.AttributeDefinitionContainer;
 import javax.annotation.Nullable;
 import java.util.Optional;
 import java.util.function.Function;
+import java.util.function.Supplier;
 
 public final class AttributeExtraction<T> extends Base {
     @Nullable
@@ -63,16 +64,14 @@ public final class AttributeExtraction<T> extends Base {
     }
 
     public <A> AttributeExtraction<T> ifIs(final AttributeAccess<A> extraction, final Function<? super A, ? extends T> function, final java.util.function.Predicate<? super A> guard) {
-        return Optional.ofNullable(value).map(x -> this).orElseGet(() -> {
+        final Supplier<AttributeExtraction<T>> askChain = () -> {
             final T newValue = calculateValue(extraction).flatMap(attributeValue -> {
-                Optional<T> mappedValue = Optional.empty();
-                if (guard.test(attributeValue)) {
-                    mappedValue = Optional.of(function.apply(attributeValue));
-                }
-                return mappedValue;
+                final T nullableValue = guard.test(attributeValue) ? function.apply(attributeValue) : null;
+                return Optional.ofNullable(nullableValue);
             }).orElse(null);
             return withValue(newValue);
-        });
+        };
+        return Optional.ofNullable(this.value).map(x -> this).orElseGet(askChain);
     }
 
     public Optional<T> findValue() {

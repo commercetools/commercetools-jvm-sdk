@@ -9,7 +9,6 @@ import io.sphere.sdk.expansion.MetaModelExpansionDslExpansionModelRead;
 import io.sphere.sdk.expansion.ExpansionPathContainer;
 import io.sphere.sdk.http.HttpMethod;
 import io.sphere.sdk.http.UrlQueryBuilder;
-import io.sphere.sdk.json.SphereJsonUtils;
 import io.sphere.sdk.models.ResourceView;
 import io.sphere.sdk.models.Versioned;
 
@@ -17,7 +16,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.function.Function;
 
-import static io.sphere.sdk.utils.ListUtils.listOf;
+import static io.sphere.sdk.json.SphereJsonUtils.convertToJavaType;
+import static io.sphere.sdk.utils.SphereInternalUtils.listOf;
 import static java.util.Objects.requireNonNull;
 
 /**
@@ -28,30 +28,32 @@ import static java.util.Objects.requireNonNull;
  */
 public abstract class MetaModelByIdDeleteCommandImpl<T extends ResourceView<T, T>, C, E> extends CommandImpl<T> implements MetaModelExpansionDslExpansionModelRead<T, C, E>, DeleteCommand<T> {
     final Versioned<T> versioned;
-    final JsonEndpoint<T> endpoint;
+    final String endpoint;
+    final JavaType javaType;
     final E expansionModel;
     final List<ExpansionPath<T>> expansionPaths;
     final Function<MetaModelByIdDeleteCommandBuilder<T, C, E>, C> creationFunction;
 
-    protected MetaModelByIdDeleteCommandImpl(final Versioned<T> versioned, final JsonEndpoint<T> endpoint, final E expansionModel, final List<ExpansionPath<T>> expansionPaths, final Function<MetaModelByIdDeleteCommandBuilder<T, C, E>, C> creationFunction) {
+    protected MetaModelByIdDeleteCommandImpl(final Versioned<T> versioned, final JavaType javaType, final String endpoint, final E expansionModel, final List<ExpansionPath<T>> expansionPaths, final Function<MetaModelByIdDeleteCommandBuilder<T, C, E>, C> creationFunction) {
         this.creationFunction = requireNonNull(creationFunction);
         this.expansionModel = requireNonNull(expansionModel);
         this.expansionPaths = requireNonNull(expansionPaths);
         this.versioned = requireNonNull(versioned);
         this.endpoint = requireNonNull(endpoint);
+        this.javaType = requireNonNull(javaType);
     }
 
     protected MetaModelByIdDeleteCommandImpl(final Versioned<T> versioned, final JsonEndpoint<T> endpoint, final E expansionModel, final Function<MetaModelByIdDeleteCommandBuilder<T, C, E>, C> creationFunction) {
-        this(versioned, endpoint, expansionModel, Collections.emptyList(), creationFunction);
+        this(versioned, convertToJavaType(endpoint.typeReference()), endpoint.endpoint(), expansionModel, Collections.emptyList(), creationFunction);
     }
 
     protected MetaModelByIdDeleteCommandImpl(final MetaModelByIdDeleteCommandBuilder<T, C, E> builder) {
-        this(builder.versioned, builder.endpoint, builder.expansionModel, builder.expansionPaths, builder.creationFunction);
+        this(builder.versioned, builder.javaType, builder.endpoint, builder.expansionModel, builder.expansionPaths, builder.creationFunction);
     }
 
     @Override
     public HttpRequestIntent httpRequestIntent() {
-        final String baseEndpointWithoutId = endpoint.endpoint();
+        final String baseEndpointWithoutId = endpoint;
         if (!baseEndpointWithoutId.startsWith("/")) {
             throw new RuntimeException("By convention the paths start with a slash");
         }
@@ -63,7 +65,7 @@ public abstract class MetaModelByIdDeleteCommandImpl<T extends ResourceView<T, T
 
     @Override
     protected JavaType jacksonJavaType() {
-        return SphereJsonUtils.convertToJavaType(endpoint.typeReference());
+        return javaType;
     }
 
     @Override

@@ -14,10 +14,7 @@ import io.sphere.sdk.models.AddressBuilder;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.payments.Payment;
-import io.sphere.sdk.products.Price;
-import io.sphere.sdk.products.PriceDraft;
-import io.sphere.sdk.products.Product;
-import io.sphere.sdk.products.VariantIdentifier;
+import io.sphere.sdk.products.*;
 import io.sphere.sdk.products.commands.ProductUpdateCommand;
 import io.sphere.sdk.products.commands.updateactions.ChangePrice;
 import io.sphere.sdk.products.commands.updateactions.Publish;
@@ -60,7 +57,7 @@ public class CartUpdateCommandTest extends IntegrationTest {
             assertThat(lineItem.getName()).isEqualTo(product.getMasterData().getStaged().getName());
             assertThat(lineItem.getQuantity()).isEqualTo(quantity);
             assertThat(lineItem.getProductSlug()).isEqualTo(product.getMasterData().getStaged().getSlug());
-            assertThat(lineItem.getVariant().getIdentifier()).isEqualTo(VariantIdentifier.of(lineItem.getProductId(), lineItem.getVariant().getId()));
+            assertThat(lineItem.getVariant().getIdentifier()).isEqualTo(ByIdVariantIdentifier.of(lineItem.getProductId(), lineItem.getVariant().getId()));
         });
     }
 

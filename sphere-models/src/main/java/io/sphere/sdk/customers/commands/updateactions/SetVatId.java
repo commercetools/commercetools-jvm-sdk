@@ -18,7 +18,7 @@ public class SetVatId extends UpdateActionImpl<Customer> {
     @Nullable
     private final String vatId;
 
-    private SetVatId(final String vatId) {
+    private SetVatId(@Nullable final String vatId) {
         super("setVatId");
         this.vatId = vatId;
     }

@@ -8,6 +8,7 @@ import io.sphere.sdk.http.HttpResponse;
 import io.sphere.sdk.http.StringHttpRequestBody;
 import io.sphere.sdk.json.SphereJsonUtils;
 import io.sphere.sdk.meta.BuildInfo;
+import org.apache.commons.lang3.StringUtils;
 
 import javax.annotation.Nullable;
 import java.nio.charset.StandardCharsets;
@@ -15,7 +16,6 @@ import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
-import java.util.function.Supplier;
 import java.util.regex.Pattern;
 
 /**
@@ -67,20 +67,20 @@ public class SphereException extends RuntimeException {
         return httpResponse;
     }
 
-    public void setProjectKey(final String projectKey) {
+    public void setProjectKey(@Nullable final String projectKey) {
         this.projectKey = projectKey;
     }
 
-    public void setSphereRequest(final SphereRequest<?> sphereRequest) {
+    public void setSphereRequest(@Nullable final SphereRequest<?> sphereRequest) {
         this.sphereRequest = sphereRequest;
         setHttpRequestIntent(sphereRequest.httpRequestIntent());
     }
 
-    private void setHttpRequestIntent(final HttpRequestIntent httpRequestIntent) {
+    private void setHttpRequestIntent(@Nullable final HttpRequestIntent httpRequestIntent) {
         this.httpRequestIntent = httpRequestIntent;
     }
 
-    public void setHttpRequest(final HttpRequest httpRequest) {
+    public void setHttpRequest(@Nullable final HttpRequest httpRequest) {
         this.httpRequest = httpRequest;
     }
 
@@ -93,6 +93,9 @@ public class SphereException extends RuntimeException {
         StringBuilder builder = new StringBuilder();
         return builder
                 .append(Optional.ofNullable(super.getMessage()).map(s -> "detailMessage: " + s + "\n").orElse(""))
+                .append(httpSummary())
+                .append(responseBodyFormatted())
+                .append("http response: ").append(Optional.ofNullable(getHttpResponse()).map(Object::toString).orElse("<unknown>")).append("\n")
                 .append("SDK: ").append(BuildInfo.version()).append("\n")
                 .append("project: ").append(Optional.ofNullable(getProjectKey()).orElse("<unknown>")).append("\n")
                 .append(Optional.ofNullable(getSphereRequest()).map(x -> x.httpRequestIntent()).map(x -> "" + x.getHttpMethod() + " " + x.getPath()).map(x -> "endpoint: " + x + "\n").orElse(""))
@@ -103,11 +106,52 @@ public class SphereException extends RuntimeException {
                         //duplicated in case SphereRequest does not implement a proper to String
                 .append(httpRequestLine())
                 .append(requestBodyFormatted())
-                .append("http response: ").append(Optional.ofNullable(getHttpResponse()).map(Object::toString).orElse("<unknown>")).append("\n")
-                .append(responseBodyFormatted())
                 .append("additional notes: ").append(additionalNotes).append("\n")
                 .append("Javadoc: ").append("http://sphereio.github.io/sphere-jvm-sdk/javadoc/").append(getVersionForJavadoc()).append("/").append(this.getClass().getCanonicalName().replace('.', '/')).append(".html").append("\n")
                 .toString();
+    }
+
+    private String httpSummary() {
+        try {
+            final StringBuilder builder = new StringBuilder();
+            if (this.httpRequest != null || this.httpRequestIntent != null) {
+                builder.append("summary: ");
+                final String httpMethod = Optional.ofNullable(this.httpRequest)
+                        .map(r -> r.getHttpMethod().toString())
+                        .orElseGet(() -> this.httpRequestIntent.getHttpMethod().toString());
+
+                final String project = StringUtils.defaultString(projectKey);
+
+                final String path = Optional.ofNullable(this.httpRequest)
+                        .map(r -> r.getUrl())
+                        .orElseGet(() -> project + this.httpRequestIntent.getPath());
+
+                final String responseCode = " with " + Optional.ofNullable(this.httpResponse)
+                        .map(r -> r.getStatusCode())
+                        .map(r -> r.toString())
+                        .map(r -> "response code " + r)
+                        .orElse("an unknown status code");
+
+
+                final String correlationIdHeaderName = "X-Correlation-ID";
+                final String correlationId = Optional.ofNullable(this.httpResponse)
+                        .map(r -> r.getHeaders())
+                        .flatMap(headers -> headers.findFlatHeader(correlationIdHeaderName))
+                        .map(id -> " with " + correlationIdHeaderName + " `" + id + "`")
+                        .orElse("");
+
+                builder.append(httpMethod)
+                        .append(" ")
+                        .append(path)
+                        .append(" failed ")
+                        .append(responseCode)
+                        .append(correlationId)
+                        .append("\n");
+            }
+            return builder.toString();
+        } catch (final Exception e) {
+            return "";
+        }
     }
 
     private String httpRequestLine() {

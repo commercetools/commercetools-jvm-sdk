@@ -3,12 +3,13 @@ package io.sphere.sdk.products;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.sphere.sdk.models.Base;
-import io.sphere.sdk.utils.ListUtils;
 
 import javax.annotation.Nullable;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+
+import static io.sphere.sdk.utils.SphereInternalUtils.listOf;
 
 class ProductCatalogDataImpl extends Base implements ProductCatalogData {
     @JsonProperty("published")
@@ -20,7 +21,7 @@ class ProductCatalogDataImpl extends Base implements ProductCatalogData {
     private final ProductData staged;
 
     @JsonCreator
-    ProductCatalogDataImpl(final Boolean isPublished, final ProductData current, final ProductData staged,
+    ProductCatalogDataImpl(final Boolean isPublished, @Nullable final ProductData current, final ProductData staged,
                            final Boolean hasStagedChanges) {
         this.isPublished = isPublished;
         this.current = current;
@@ -47,7 +48,7 @@ class ProductCatalogDataImpl extends Base implements ProductCatalogData {
 
     public void setProductId(final String id) {
         final List<ProductData> currentAsList = Optional.ofNullable(current).map(c -> Collections.singletonList(c)).orElse(Collections.emptyList());
-        ListUtils.listOf(currentAsList, staged).stream()
+        listOf(currentAsList, staged).stream()
                 .filter(x -> x instanceof ProductDataImpl)
                 .forEach(x -> ((ProductDataImpl)x).setProductId(id));
     }

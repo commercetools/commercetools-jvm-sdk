@@ -1,0 +1,33 @@
+package io.sphere.sdk.products.queries;
+
+import io.sphere.sdk.queries.*;
+
+import javax.annotation.Nullable;
+import java.util.function.Function;
+
+class ProductVariantQueryModelImpl<T> extends QueryModelImpl<T> implements ProductVariantQueryModel<T> {
+
+    ProductVariantQueryModelImpl(@Nullable final QueryModel<T> parent, @Nullable final String pathSegment) {
+        super(parent, pathSegment);
+    }
+
+    @Override
+    public StringQueryModel<T> sku() {
+        return stringModel("sku");
+    }
+
+    @Override
+    public QueryPredicate<T> where(final QueryPredicate<PartialProductVariantQueryModel> embeddedPredicate) {
+        return embedPredicate(embeddedPredicate);
+    }
+
+    @Override
+    public QueryPredicate<T> where(final Function<PartialProductVariantQueryModel, QueryPredicate<PartialProductVariantQueryModel>> embeddedPredicate) {
+        return where(embeddedPredicate.apply(PartialProductVariantQueryModelImpl.of()));
+    }
+
+    @Override
+    public PriceCollectionQueryModel<T> prices() {
+        return new PriceCollectionQueryModelImpl<>(this, "prices");
+    }
+}

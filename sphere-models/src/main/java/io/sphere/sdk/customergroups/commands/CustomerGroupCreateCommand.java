@@ -4,7 +4,7 @@ import io.sphere.sdk.commands.CreateCommand;
 import io.sphere.sdk.customergroups.CustomerGroup;
 import io.sphere.sdk.customergroups.CustomerGroupDraft;
 import io.sphere.sdk.customergroups.expansion.CustomerGroupExpansionModel;
-import io.sphere.sdk.expansion.MetaModelExpansionDsl;
+import io.sphere.sdk.expansion.MetaModelReferenceExpansionDsl;
 
 /**
  * <p>Creates a new customer group</p>
@@ -13,7 +13,7 @@ import io.sphere.sdk.expansion.MetaModelExpansionDsl;
  *
  * @see CustomerGroup
  */
-public interface CustomerGroupCreateCommand extends CreateCommand<CustomerGroup>, MetaModelExpansionDsl<CustomerGroup, CustomerGroupCreateCommand, CustomerGroupExpansionModel<CustomerGroup>> {
+public interface CustomerGroupCreateCommand extends CreateCommand<CustomerGroup>, MetaModelReferenceExpansionDsl<CustomerGroup, CustomerGroupCreateCommand, CustomerGroupExpansionModel<CustomerGroup>> {
     static CustomerGroupCreateCommand of(final CustomerGroupDraft draft) {
         return new CustomerGroupCreateCommandImpl(draft);
     }

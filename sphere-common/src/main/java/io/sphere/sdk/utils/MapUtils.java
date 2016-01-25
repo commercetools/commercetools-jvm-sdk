@@ -7,6 +7,10 @@ import java.util.function.Supplier;
 
 import static java.lang.String.format;
 
+/**
+ * @deprecated This is an internal class.
+ */
+@Deprecated
 public final class MapUtils {
     private MapUtils() {
     }

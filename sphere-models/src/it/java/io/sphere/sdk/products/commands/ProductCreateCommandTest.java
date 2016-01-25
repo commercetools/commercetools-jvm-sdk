@@ -36,9 +36,7 @@ public class ProductCreateCommandTest extends IntegrationTest {
 
     @BeforeClass
     public static void cleanUp() throws Exception {
-        final ProductProjectionQuery query = ProductProjectionQuery.ofStaged().withPredicates(m -> m.slug().locale(Locale.ENGLISH).is("red-shirt"));
-        client().executeBlocking(query).getResults()
-                .forEach(product -> client().executeBlocking(ProductDeleteCommand.of(product)));
+        ProductFixtures.deleteProductsAndProductTypes(client());
     }
 
     @Test
@@ -127,7 +125,7 @@ public class ProductCreateCommandTest extends IntegrationTest {
                         final ProductData productData = product.getMasterData().getStaged();
                         assertThat(productData.getName()).isEqualTo(LocalizedString.ofEnglish("red shirt"));
                         assertThat(productData.getCategories()).extracting("id").contains(category.getId());
-                        client().execute(ProductDeleteCommand.of(product));
+                        client().executeBlocking(ProductDeleteCommand.of(product));
                     });
                 });
             });

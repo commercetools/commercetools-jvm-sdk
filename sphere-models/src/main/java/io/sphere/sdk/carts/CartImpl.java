@@ -44,14 +44,14 @@ class CartImpl extends ResourceImpl<Cart> implements Cart {
 
     @JsonCreator
     CartImpl(final String id, final Long version, final ZonedDateTime createdAt,
-             final ZonedDateTime lastModifiedAt, final String customerId,
-             final String customerEmail, final List<LineItem> lineItems,
+             final ZonedDateTime lastModifiedAt, @Nullable final String customerId,
+             @Nullable final String customerEmail, final List<LineItem> lineItems,
              final List<CustomLineItem> customLineItems, final MonetaryAmount totalPrice,
-             final TaxedPrice taxedPrice, final CartState cartState,
-             final Address shippingAddress, final Address billingAddress,
-             final InventoryMode inventoryMode, final Reference<CustomerGroup> customerGroup,
-             final CountryCode country, final CartShippingInfo shippingInfo,
-             final List<DiscountCodeInfo> discountCodes, final CustomFields custom, final PaymentInfo paymentInfo) {
+             @Nullable final TaxedPrice taxedPrice, final CartState cartState,
+             @Nullable final Address shippingAddress, @Nullable final Address billingAddress,
+             final InventoryMode inventoryMode, @Nullable final Reference<CustomerGroup> customerGroup,
+             @Nullable final CountryCode country, @Nullable final CartShippingInfo shippingInfo,
+             final List<DiscountCodeInfo> discountCodes, @Nullable final CustomFields custom, @Nullable final PaymentInfo paymentInfo) {
         super(id, version, createdAt, lastModifiedAt);
         this.customerId = customerId;
         this.customerEmail = customerEmail;

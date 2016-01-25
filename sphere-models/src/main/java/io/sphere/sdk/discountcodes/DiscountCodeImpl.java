@@ -28,7 +28,7 @@ final class DiscountCodeImpl extends ResourceImpl<DiscountCode> implements Disco
     private final List<Reference<JsonNode>> references;
 
     @JsonCreator
-    public DiscountCodeImpl(final String id, final Long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt, final List<Reference<CartDiscount>> cartDiscounts, final String code, final LocalizedString name, final LocalizedString description, final Boolean isActive, final Long maxApplications, final Long maxApplicationsPerCustomer, final String cartPredicate, final List<Reference<JsonNode>> references) {
+    public DiscountCodeImpl(final String id, final Long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt, final List<Reference<CartDiscount>> cartDiscounts, final String code, @Nullable final LocalizedString name, @Nullable final LocalizedString description, final Boolean isActive, @Nullable final Long maxApplications, @Nullable final Long maxApplicationsPerCustomer, @Nullable final String cartPredicate, final List<Reference<JsonNode>> references) {
         super(id, version, createdAt, lastModifiedAt);
         this.cartDiscounts = cartDiscounts;
         this.code = code;

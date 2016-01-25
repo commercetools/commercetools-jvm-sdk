@@ -44,5 +44,5 @@ public interface ProductVariant extends AttributeContainer {
      * @return identifier for this variant
      * @throws UnsupportedOperationException if the operation is not available
      */
-    VariantIdentifier getIdentifier();
+    ByIdVariantIdentifier getIdentifier();
 }

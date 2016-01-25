@@ -13,7 +13,6 @@ import java.util.List;
 
 import static io.sphere.sdk.categories.CategoryFixtures.withCategory;
 import static io.sphere.sdk.categories.CategoryFixtures.withPersistentCategory;
-import static io.sphere.sdk.models.LocalizedString.ofEnglishLocale;
 import static io.sphere.sdk.test.SphereTestUtils.ENGLISH;
 import static io.sphere.sdk.test.SphereTestUtils.asList;
 import static io.sphere.sdk.test.SphereTestUtils.randomSlug;
@@ -24,12 +23,12 @@ public class CategoryUpdateCommandTest extends IntegrationTest {
     @Test
     public void updateCommandDsl() throws Exception {
         withCategory(client(), category -> {
-            final LocalizedString newName = ofEnglishLocale("new name");
+            final LocalizedString newName = LocalizedString.ofEnglish("new name");
             final CategoryUpdateCommand command = CategoryUpdateCommand.of(category, singletonList(ChangeName.of(newName)));
             final Category updatedCategory = client().executeBlocking(command);
             assertThat(updatedCategory.getName()).isEqualTo(newName);
 
-            final LocalizedString newName2 = ofEnglishLocale("new name2");
+            final LocalizedString newName2 = LocalizedString.ofEnglish("new name2");
             final CategoryUpdateCommand command2 = CategoryUpdateCommand.of(category /** with old version */, singletonList(ChangeName.of(newName2)));
             final Category againUpdatedCategory = client().executeBlocking(command2.withVersion(updatedCategory));
             assertThat(againUpdatedCategory.getName()).isEqualTo(newName2);

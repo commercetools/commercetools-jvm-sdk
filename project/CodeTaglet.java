@@ -23,7 +23,7 @@ public class CodeTaglet implements Taglet {
         }
     }
 
-    private static enum Position {
+    private enum Position {
         START, IMPORTS, CODE
     }
 

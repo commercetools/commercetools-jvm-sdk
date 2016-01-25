@@ -7,7 +7,7 @@ import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.producttypes.ProductType;
 import io.sphere.sdk.producttypes.commands.updateactions.*;
 import io.sphere.sdk.test.IntegrationTest;
-import io.sphere.sdk.utils.ListUtils;
+import io.sphere.sdk.utils.SphereInternalUtils;
 import org.junit.Test;
 
 import java.util.List;
@@ -16,6 +16,7 @@ import java.util.Locale;
 import static io.sphere.sdk.producttypes.ProductTypeFixtures.*;
 import static io.sphere.sdk.test.SphereTestUtils.ENGLISH;
 import static io.sphere.sdk.test.SphereTestUtils.randomKey;
+import static io.sphere.sdk.utils.SphereInternalUtils.reverse;
 import static java.util.Locale.GERMAN;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -128,7 +129,7 @@ public class ProductTypeUpdateCommandTest extends IntegrationTest {
     public void changeAttributeOrder() throws Exception {
         withUpdateableProductType(client(), productType -> {
 
-            final List<AttributeDefinition> attributeDefinitions = ListUtils.reverse(productType.getAttributes());
+            final List<AttributeDefinition> attributeDefinitions = reverse(productType.getAttributes());
             final ProductType updatedProductType = client().executeBlocking(ProductTypeUpdateCommand.of(productType, ChangeAttributeOrder.of(attributeDefinitions)));
 
             assertThat(updatedProductType.getAttributes()).isEqualTo(attributeDefinitions);
@@ -143,7 +144,7 @@ public class ProductTypeUpdateCommandTest extends IntegrationTest {
             final String attributeName = "size";
             final EnumAttributeType attributeType = (EnumAttributeType) productType.getAttribute(attributeName)
                     .getAttributeType();
-            final List<EnumValue> values = ListUtils.reverse(attributeType.getValues());
+            final List<EnumValue> values = reverse(attributeType.getValues());
 
             final ProductType updatedProductType = client().executeBlocking(ProductTypeUpdateCommand.of(productType,
                     ChangeEnumValueOrder.of(attributeName, values)));
@@ -162,7 +163,7 @@ public class ProductTypeUpdateCommandTest extends IntegrationTest {
             final String attributeName = "color";
             final LocalizedEnumAttributeType attributeType = (LocalizedEnumAttributeType) productType.getAttribute(attributeName)
                     .getAttributeType();
-            final List<LocalizedEnumValue> values = ListUtils.reverse(attributeType.getValues());
+            final List<LocalizedEnumValue> values = reverse(attributeType.getValues());
 
             final ProductType updatedProductType = client().executeBlocking(ProductTypeUpdateCommand.of(productType,
                     ChangeLocalizedEnumValueOrder.of(attributeName, values)));

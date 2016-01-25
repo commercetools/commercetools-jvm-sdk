@@ -27,6 +27,7 @@ import static io.sphere.sdk.customergroups.CustomerGroupFixtures.withCustomerGro
 import static io.sphere.sdk.models.DefaultCurrencyUnits.EUR;
 import static io.sphere.sdk.productdiscounts.ProductDiscountFixtures.withUpdateableProductDiscount;
 import static io.sphere.sdk.products.ProductFixtures.*;
+import static io.sphere.sdk.reviews.ReviewFixtures.withReview;
 import static io.sphere.sdk.test.SphereTestUtils.DE;
 import static io.sphere.sdk.test.SphereTestUtils.assertEventually;
 import static io.sphere.sdk.test.SphereTestUtils.randomString;
@@ -63,8 +64,8 @@ public class ProductQueryTest extends IntegrationTest {
     @Test
     public void variantIdentifierIsAvailable() throws Exception {
         withProduct(client(), product -> {
-            final VariantIdentifier identifier = product.getMasterData().getStaged().getMasterVariant().getIdentifier();
-            assertThat(identifier).isEqualTo(VariantIdentifier.of(product.getId(), 1));
+            final ByIdVariantIdentifier identifier = product.getMasterData().getStaged().getMasterVariant().getIdentifier();
+            assertThat(identifier).isEqualTo(ByIdVariantIdentifier.of(product.getId(), 1));
         });
     }
 
@@ -145,6 +146,27 @@ public class ProductQueryTest extends IntegrationTest {
                 })
             )
         );
+    }
+
+    @Test
+    public void queryByReviewRating() {
+        withProduct(client(), product -> {
+            withReview(client(), b -> b.target(product).rating(1), review1 -> {
+                withReview(client(), b -> b.target(product).rating(3), review2 -> {
+                    assertEventually(() -> {
+                        final ProductQuery query = ProductQuery.of()
+                                .withPredicates(m -> m.reviewRatingStatistics().averageRating().is(2.0))
+                                .plusPredicates(m -> m.reviewRatingStatistics().count().is(2))
+                                .plusPredicates(m -> m.is(product));
+                        final List<Product> results = client().executeBlocking(query).getResults();
+                        assertThat(results).hasSize(1);
+                        final Product loadedProduct = results.get(0);
+                        assertThat(loadedProduct.getId()).isEqualTo(product.getId());
+                        assertThat(loadedProduct.getReviewRatingStatistics().getCount()).isEqualTo(2);
+                    });
+                });
+            });
+        });
     }
 
     private ProductQuery query(final Product product) {

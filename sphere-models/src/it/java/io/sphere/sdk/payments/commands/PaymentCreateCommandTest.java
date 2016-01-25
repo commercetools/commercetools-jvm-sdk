@@ -42,13 +42,15 @@ public class PaymentCreateCommandTest extends IntegrationTest {
             assertThat(payment.getPaymentMethodInfo()).isEqualTo(paymentMethodInfo);
             assertThat(payment.getAmountPlanned()).isEqualTo(totalAmount);
 
-            final PagedQueryResult<PaymentCreatedMessage> pagedQueryResult = client().executeBlocking(MessageQuery.of()
-                    .withPredicates(m -> m.resource().is(payment))
-                    .forMessageType(PaymentCreatedMessage.MESSAGE_HINT));
+            assertEventually(() -> {
+                final PagedQueryResult<PaymentCreatedMessage> pagedQueryResult = client().executeBlocking(MessageQuery.of()
+                        .withPredicates(m -> m.resource().is(payment))
+                        .forMessageType(PaymentCreatedMessage.MESSAGE_HINT));
 
-            final PaymentCreatedMessage paymentCreatedMessage = pagedQueryResult.head().get();
-            assertThat(paymentCreatedMessage.getPayment().getId()).isEqualTo(payment.getId());
-            assertThat(paymentCreatedMessage.getResource().getId()).isEqualTo(payment.getId());
+                final PaymentCreatedMessage paymentCreatedMessage = pagedQueryResult.head().get();
+                assertThat(paymentCreatedMessage.getPayment().getId()).isEqualTo(payment.getId());
+                assertThat(paymentCreatedMessage.getResource().getId()).isEqualTo(payment.getId());
+            });
 
             client().executeBlocking(PaymentDeleteCommand.of(payment));
         }));

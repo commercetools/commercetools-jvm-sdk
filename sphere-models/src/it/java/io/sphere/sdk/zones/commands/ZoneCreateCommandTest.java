@@ -9,15 +9,12 @@ import io.sphere.sdk.zones.Zone;
 import io.sphere.sdk.zones.ZoneDraft;
 import io.sphere.sdk.zones.ZoneFixtures;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.util.Set;
 
-import static com.neovisionaries.i18n.CountryCode.AT;
-import static com.neovisionaries.i18n.CountryCode.BE;
-import static com.neovisionaries.i18n.CountryCode.CH;
-import static io.sphere.sdk.utils.SetUtils.asSet;
+import static com.neovisionaries.i18n.CountryCode.*;
+import static io.sphere.sdk.utils.SphereInternalUtils.asSet;
 import static io.sphere.sdk.zones.ZoneFixtures.withZone;
 import static org.assertj.core.api.Assertions.assertThat;
 

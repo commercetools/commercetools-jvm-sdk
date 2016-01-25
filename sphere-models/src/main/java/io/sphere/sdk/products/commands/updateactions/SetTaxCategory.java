@@ -21,7 +21,7 @@ public class SetTaxCategory extends UpdateActionImpl<Product> {
     @Nullable
     private final Reference<TaxCategory> taxCategory;
 
-    private SetTaxCategory(final Reference<TaxCategory> taxCategory) {
+    private SetTaxCategory(@Nullable final Reference<TaxCategory> taxCategory) {
         super("setTaxCategory");
         this.taxCategory = taxCategory;
     }

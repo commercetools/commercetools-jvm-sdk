@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Resource;
 import io.sphere.sdk.models.Reference;
+import io.sphere.sdk.reviews.ReviewRatingStatistics;
 
 import javax.annotation.Nullable;
 import java.util.Set;
@@ -29,6 +30,9 @@ public interface Channel extends Resource<Channel> {
 
     @Nullable
     LocalizedString getDescription();
+
+    @Nullable
+    ReviewRatingStatistics getReviewRatingStatistics();
 
 
     default Reference<Channel> toReference() {

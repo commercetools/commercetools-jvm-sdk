@@ -20,7 +20,7 @@ public final class Transaction extends Base {
     private final TransactionState state;
 
     @JsonCreator
-    Transaction(@Nullable final ZonedDateTime timestamp, final String id, final TransactionType type, final MonetaryAmount amount, final String interactionId, final TransactionState state) {
+    Transaction(@Nullable final ZonedDateTime timestamp, final String id, final TransactionType type, final MonetaryAmount amount, @Nullable final String interactionId, final TransactionState state) {
         this.id = id;
         this.state = state;
         this.timestamp = Optional.ofNullable(timestamp)

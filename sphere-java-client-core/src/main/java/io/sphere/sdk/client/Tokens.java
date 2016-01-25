@@ -27,7 +27,7 @@ final class Tokens extends Base {
     private final ZonedDateTime expiresInZonedDateTime;
 
     @JsonCreator
-    private Tokens(String accessToken, String refreshToken, Long expiresIn) {
+    private Tokens(String accessToken, String refreshToken, @Nullable Long expiresIn) {
         if (isEmpty(accessToken))
             throw new SphereException("OAuth response must contain an access_token. Was empty.");
         this.accessToken = accessToken;

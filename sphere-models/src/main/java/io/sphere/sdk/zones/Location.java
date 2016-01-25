@@ -27,6 +27,7 @@ public class Location extends Base {
         return country;
     }
 
+    @Nullable
     public String getState() {
         return state;
     }

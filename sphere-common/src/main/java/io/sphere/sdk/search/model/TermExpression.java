@@ -3,7 +3,7 @@ package io.sphere.sdk.search.model;
 import javax.annotation.Nullable;
 import java.util.function.Function;
 
-import static io.sphere.sdk.utils.IterableUtils.toStream;
+import static io.sphere.sdk.utils.SphereInternalUtils.toStream;
 import static java.util.stream.Collectors.joining;
 
 abstract class TermExpression<T, V> extends SearchModelExpression<T, V> {

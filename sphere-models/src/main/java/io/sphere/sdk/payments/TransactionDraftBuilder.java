@@ -17,7 +17,7 @@ public final class TransactionDraftBuilder extends Base implements Builder<Trans
     @Nullable
     private TransactionState state;
 
-    private TransactionDraftBuilder(final TransactionType type, final MonetaryAmount amount, @Nullable final ZonedDateTime timestamp, final TransactionState state) {
+    private TransactionDraftBuilder(final TransactionType type, final MonetaryAmount amount, @Nullable final ZonedDateTime timestamp, @Nullable final TransactionState state) {
         this.type = type;
         this.amount = amount;
         this.timestamp = timestamp;

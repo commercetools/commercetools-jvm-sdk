@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.sphere.sdk.models.Base;
-import io.sphere.sdk.utils.MapUtils;
+import io.sphere.sdk.utils.SphereInternalUtils;
 
 import javax.annotation.Nullable;
 import java.util.*;
@@ -17,7 +17,7 @@ public class CategoryOrderHints extends Base {
     @JsonCreator
     private CategoryOrderHints(final Map<String, String> orderHints) {
         this.orderHints = Optional.ofNullable(orderHints)
-                .map(MapUtils::immutableCopyOf)
+                .map(SphereInternalUtils::immutableCopyOf)
                 .orElseGet(() -> new LinkedHashMap<>());
     }
 

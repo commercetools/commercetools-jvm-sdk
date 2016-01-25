@@ -2,6 +2,7 @@ package io.sphere.sdk.products;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -15,10 +16,10 @@ final class ProductsPackage {
     static Optional<ProductVariant> getVariant(final Integer variantId, final ProductDataLike product) {
         final Optional<ProductVariant> result;
         final ProductVariant masterVariant = product.getMasterVariant();
-        if (variantId == masterVariant.getId()) {
+        if (Objects.equals(variantId, masterVariant.getId())) {
             result = Optional.of(masterVariant);
         } else {
-            result = product.getVariants().stream().filter(v -> v.getId() == variantId).findFirst();
+            result = product.getVariants().stream().filter(v -> Objects.equals(v.getId(), variantId)).findFirst();
         }
         return result;
     }

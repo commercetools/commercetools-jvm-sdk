@@ -7,5 +7,5 @@ public interface LocalizedStringQuerySortingModel<T> extends LocalizedStringQuer
     StringQuerySortingModel<T> lang(Locale locale);
 
     @Override
-    StringQueryModel<T> locale(final Locale locale);
+    StringQuerySortingModel<T> locale(final Locale locale);
 }

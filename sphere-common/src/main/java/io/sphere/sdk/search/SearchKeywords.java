@@ -8,7 +8,7 @@ import io.sphere.sdk.models.Base;
 
 import java.util.*;
 
-import static io.sphere.sdk.utils.MapUtils.*;
+import static io.sphere.sdk.utils.SphereInternalUtils.*;
 
 public class SearchKeywords extends Base {
     @JsonIgnore

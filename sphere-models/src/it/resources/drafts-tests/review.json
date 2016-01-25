@@ -1,0 +1,18 @@
+{
+  "title": "Commercetools rocks",
+  "authorName": "John Smith",
+  "rating": 100,
+  "customer": {
+    "typeId": "customer",
+    "id": "review-customer"
+  },
+  "key": "review1",
+  "locale": "en",
+  "target":{
+    "typeId": "product",
+    "id": "review-product"
+  },
+  "state": {
+    "key": "initial-review-state"
+  }
+}

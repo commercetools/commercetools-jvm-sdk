@@ -1,8 +1,9 @@
 package io.sphere.sdk.commands;
 
 import com.fasterxml.jackson.databind.JavaType;
-import io.sphere.sdk.client.SphereRequestBase;
+import io.sphere.sdk.client.SphereRequestUtils;
 import io.sphere.sdk.http.HttpResponse;
+import io.sphere.sdk.models.Base;
 
 /**
  * Base class to implement commands using the Jackson JSON mapper.
@@ -10,10 +11,13 @@ import io.sphere.sdk.http.HttpResponse;
  * @param <T> the type of the result of the command, most likely the updated resource without expanded references
  *
  */
-public abstract class CommandImpl<T> extends SphereRequestBase implements Command<T> {
+public abstract class CommandImpl<T> extends Base implements Command<T> {
+    protected CommandImpl() {
+    }
+
     @Override
     public T deserialize(final HttpResponse httpResponse) {
-        return deserialize(httpResponse, jacksonJavaType());
+        return SphereRequestUtils.deserialize(httpResponse, jacksonJavaType());
     }
 
     protected abstract JavaType jacksonJavaType();

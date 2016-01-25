@@ -1,11 +1,10 @@
 package io.sphere.sdk.search.model;
 
 import javax.annotation.Nullable;
-
 import java.util.function.Function;
 
-import static io.sphere.sdk.utils.IterableUtils.requireNonEmpty;
-import static io.sphere.sdk.utils.IterableUtils.toStream;
+import static io.sphere.sdk.utils.SphereInternalUtils.requireNonEmpty;
+import static io.sphere.sdk.utils.SphereInternalUtils.toStream;
 import static java.util.stream.Collectors.joining;
 
 abstract class RangeExpression<T, V extends Comparable<? super V>> extends SearchModelExpression<T, V> {

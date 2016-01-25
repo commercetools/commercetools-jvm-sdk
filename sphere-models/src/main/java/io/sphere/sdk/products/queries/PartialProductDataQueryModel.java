@@ -3,70 +3,32 @@ package io.sphere.sdk.products.queries;
 import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.queries.*;
 
-import javax.annotation.Nullable;
 import java.util.function.Function;
 
-public final class PartialProductDataQueryModel extends ProductDataQueryModel<PartialProductDataQueryModel> {
-    private PartialProductDataQueryModel(@Nullable final QueryModel<PartialProductDataQueryModel> parent, @Nullable final String pathSegment) {
-        super(parent, pathSegment);
-    }
+public interface PartialProductDataQueryModel {
+    ReferenceCollectionQueryModel<PartialProductDataQueryModel, Category> categories();
 
-    public static PartialProductDataQueryModel of() {
-        return new PartialProductDataQueryModel(null, null);
-    }
+    LocalizedStringQueryModel<PartialProductDataQueryModel> description();
 
-    @Override
-    public ReferenceCollectionQueryModel<PartialProductDataQueryModel, Category> categories() {
-        return super.categories();
-    }
+    ProductVariantQueryModel<PartialProductDataQueryModel> masterVariant();
 
-    @Override
-    public LocalizedStringQueryModel<PartialProductDataQueryModel> description() {
-        return super.description();
-    }
+    LocalizedStringQuerySortingModel<PartialProductDataQueryModel> metaDescription();
 
-    @Override
-    public ProductVariantQueryModel<PartialProductDataQueryModel> masterVariant() {
-        return super.masterVariant();
-    }
+    LocalizedStringQuerySortingModel<PartialProductDataQueryModel> metaKeywords();
 
-    @Override
-    public LocalizedStringQuerySortingModel<PartialProductDataQueryModel> metaDescription() {
-        return super.metaDescription();
-    }
+    LocalizedStringQuerySortingModel<PartialProductDataQueryModel> metaTitle();
 
-    @Override
-    public LocalizedStringQuerySortingModel<PartialProductDataQueryModel> metaKeywords() {
-        return super.metaKeywords();
-    }
+    LocalizedStringQuerySortingModel<PartialProductDataQueryModel> name();
 
-    @Override
-    public LocalizedStringQuerySortingModel<PartialProductDataQueryModel> metaTitle() {
-        return super.metaTitle();
-    }
+    LocalizedStringQuerySortingModel<PartialProductDataQueryModel> slug();
 
-    @Override
-    public LocalizedStringQuerySortingModel<PartialProductDataQueryModel> name() {
-        return super.name();
-    }
+    ProductVariantQueryModel<PartialProductDataQueryModel> variants();
 
-    @Override
-    public LocalizedStringQuerySortingModel<PartialProductDataQueryModel> slug() {
-        return super.slug();
-    }
+    QueryPredicate<PartialProductDataQueryModel> where(Function<PartialProductDataQueryModel, QueryPredicate<PartialProductDataQueryModel>> embeddedPredicate);
 
-    @Override
-    public ProductVariantQueryModel<PartialProductDataQueryModel> variants() {
-        return super.variants();
-    }
+    QueryPredicate<PartialProductDataQueryModel> where(QueryPredicate<PartialProductDataQueryModel> embeddedPredicate);
 
-    @Override
-    public QueryPredicate<PartialProductDataQueryModel> where(final Function<PartialProductDataQueryModel, QueryPredicate<PartialProductDataQueryModel>> embeddedPredicate) {
-        return super.where(embeddedPredicate);
-    }
-
-    @Override
-    public QueryPredicate<PartialProductDataQueryModel> where(final QueryPredicate<PartialProductDataQueryModel> embeddedPredicate) {
-        return super.where(embeddedPredicate);
+    static PartialProductDataQueryModel of() {
+        return new PartialProductDataQueryModelImpl(null, null);
     }
 }

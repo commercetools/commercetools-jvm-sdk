@@ -17,7 +17,6 @@ import java.util.function.Consumer;
 
 import static io.sphere.sdk.products.ProductFixtures.withProduct;
 import static org.assertj.core.api.Assertions.assertThat;
-import static io.sphere.sdk.test.ReferenceAssert.assertThat;
 import static io.sphere.sdk.test.SphereTestUtils.*;
 
 public class ProductReferenceExpansionTest extends IntegrationTest {
@@ -31,7 +30,7 @@ public class ProductReferenceExpansionTest extends IntegrationTest {
                     toQuery();
             final PagedQueryResult<Product> queryResult = client().executeBlocking(query);
             final Reference<ProductType> productTypeReference = queryResult.head().get().getProductType();
-            assertThat(productTypeReference).isExpanded();
+            assertThat(productTypeReference).is(expanded());
         };
         withProduct(client(), "productTypeReferenceExpansion", user);
     }
@@ -48,7 +47,7 @@ public class ProductReferenceExpansionTest extends IntegrationTest {
                         toQuery();
                 final PagedQueryResult<Product> queryResult = client().executeBlocking(query);
                 final Reference<TaxCategory> productTypeReference = firstOf(queryResult).getTaxCategory();
-                assertThat(productTypeReference).isExpanded();
+                assertThat(productTypeReference).is(expanded());
             })
         );
     }

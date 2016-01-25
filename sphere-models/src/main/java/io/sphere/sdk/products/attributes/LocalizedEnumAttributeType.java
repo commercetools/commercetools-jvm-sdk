@@ -6,7 +6,7 @@ import io.sphere.sdk.models.LocalizedEnumValue;
 
 import java.util.List;
 
-import static io.sphere.sdk.utils.ListUtils.listOf;
+import static io.sphere.sdk.utils.SphereInternalUtils.listOf;
 
 public class LocalizedEnumAttributeType extends AttributeTypeBase {
     private final List<LocalizedEnumValue> values;

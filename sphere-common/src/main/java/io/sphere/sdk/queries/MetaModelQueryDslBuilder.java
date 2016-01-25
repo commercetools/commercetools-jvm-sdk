@@ -29,7 +29,7 @@ public class MetaModelQueryDslBuilder<T, C extends MetaModelQueryDsl<T, C, Q, E>
     @Nullable
     protected Long offset;
     protected List<ExpansionPath<T>> expansionPaths = Collections.emptyList();
-    protected List<HttpQueryParameter> additionalQueryParameters = Collections.emptyList();
+    protected List<HttpQueryParameter> additionalHttpQueryParameters = Collections.emptyList();
     protected final String endpoint;
     protected final Function<HttpResponse, PagedQueryResult<T>> resultMapper;
     protected final Q queryModel;
@@ -45,14 +45,14 @@ public class MetaModelQueryDslBuilder<T, C extends MetaModelQueryDsl<T, C, Q, E>
         this.queryDslBuilderFunction = queryDslBuilderFunction;
     }
 
-    MetaModelQueryDslBuilder(final MetaModelQueryDslImpl<T, C, Q, E> template) {
+    protected MetaModelQueryDslBuilder(final MetaModelQueryDslImpl<T, C, Q, E> template) {
         this(template.endpoint(), r -> template.deserialize(r), template.getQueryModel(), template.getExpansionModel(), template.queryDslBuilderFunction);
         predicate = template.predicates();
         sort = template.sort();
         limit = template.limit();
         offset = template.offset();
         expansionPaths = template.expansionPaths();
-        additionalQueryParameters = template.additionalQueryParameters();
+        additionalHttpQueryParameters = template.additionalHttpQueryParameters();
         withTotal = template.fetchTotal();
     }
 
@@ -86,8 +86,8 @@ public class MetaModelQueryDslBuilder<T, C extends MetaModelQueryDsl<T, C, Q, E>
         return this;
     }
 
-    public MetaModelQueryDslBuilder<T, C, Q, E> additionalQueryParameters(final List<HttpQueryParameter> additionalQueryParameters) {
-        this.additionalQueryParameters = additionalQueryParameters;
+    public MetaModelQueryDslBuilder<T, C, Q, E> additionalHttpQueryParameters(final List<HttpQueryParameter> additionalQueryParameters) {
+        this.additionalHttpQueryParameters = additionalQueryParameters;
         return this;
     }
 

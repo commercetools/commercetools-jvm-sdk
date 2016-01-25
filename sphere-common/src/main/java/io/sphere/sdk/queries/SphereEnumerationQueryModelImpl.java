@@ -1,13 +1,12 @@
 package io.sphere.sdk.queries;
 
 import io.sphere.sdk.models.SphereEnumeration;
-import io.sphere.sdk.utils.IterableUtils;
 
 import javax.annotation.Nullable;
-
 import java.util.List;
 
 import static io.sphere.sdk.queries.StringQuerySortingModel.normalize;
+import static io.sphere.sdk.utils.SphereInternalUtils.toStream;
 import static java.util.stream.Collectors.toList;
 
 final class SphereEnumerationQueryModelImpl<T, E extends SphereEnumeration> extends QueryModelImpl<T> implements SphereEnumerationOptionalQueryModel<T,E> {
@@ -46,7 +45,7 @@ final class SphereEnumerationQueryModelImpl<T, E extends SphereEnumeration> exte
     }
 
     private List<String> toSphereNameList(final Iterable<E> args) {
-        return IterableUtils.toStream(args)
+        return toStream(args)
                 .map(e -> normalize(e.toSphereName()))
                 .collect(toList());
     }

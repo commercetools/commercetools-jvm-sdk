@@ -27,6 +27,7 @@ public class ResourceQueryModelImpl<T> extends QueryModelImpl<T> implements Reso
         return new TimestampSortingModelImpl<>(this, "lastModifiedAt");
     }
 
+    @Override
     public final QueryPredicate<T> not(final QueryPredicate<T> queryPredicateToNegate) {
         return queryPredicateToNegate.negate();
     }

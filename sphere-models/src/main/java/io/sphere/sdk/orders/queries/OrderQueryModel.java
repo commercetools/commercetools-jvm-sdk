@@ -9,101 +9,48 @@ import io.sphere.sdk.orders.PaymentState;
 import io.sphere.sdk.orders.ShipmentState;
 import io.sphere.sdk.queries.*;
 import io.sphere.sdk.states.State;
+import io.sphere.sdk.types.queries.WithCustomQueryModel;
 
-public class OrderQueryModel extends CartLikeQueryModel<Order> {
-    private OrderQueryModel(final QueryModel<Order> parent, final String pathSegment) {
-        super(parent, pathSegment);
-    }
+public interface OrderQueryModel extends ResourceQueryModel<Order>, WithCustomQueryModel<Order>, CartLikeQueryModel<Order> {
+    SphereEnumerationQueryModel<Order, OrderState> orderState();
 
-    public static OrderQueryModel of() {
-        return new OrderQueryModel(null, null);
-    }
+    SphereEnumerationQueryModel<Order, ShipmentState> shipmentState();
 
-    public SphereEnumerationQueryModel<Order, OrderState> orderState() {
-        return enumerationQueryModel("orderState");
-    }
+    SphereEnumerationQueryModel<Order, PaymentState> paymentState();
 
-    public SphereEnumerationQueryModel<Order, ShipmentState> shipmentState() {
-        return enumerationQueryModel("shipmentState");
-    }
+    SyncInfoQueryModel<Order> syncInfo();
 
-    public SphereEnumerationQueryModel<Order, PaymentState> paymentState() {
-        return enumerationQueryModel("paymentState");
-    }
+    ReferenceQueryModel<Order, Cart> cart();
 
-    public SyncInfoQueryModel<Order> syncInfo() {
-        return new SyncInfoQueryModelImpl<>(this, "syncInfo");
-    }
+    CountryQueryModel<Order> country();
 
-    public ReferenceQueryModel<Order, Cart> cart() {
-        return referenceModel("cart");
-    }
+    StringQuerySortingModel<Order> customerEmail();
 
-    @Override
-    public CountryQueryModel<Order> country() {
-        return super.country();
-    }
+    ReferenceOptionalQueryModel<Order, CustomerGroup> customerGroup();
 
-    @Override
-    public StringQuerySortingModel<Order> customerEmail() {
-        return super.customerEmail();
-    }
+    StringQuerySortingModel<Order> customerId();
 
-    @Override
-    public ReferenceOptionalQueryModel<Order, CustomerGroup> customerGroup() {
-        return super.customerGroup();
-    }
+    StringQuerySortingModel<Order> orderNumber();
 
-    @Override
-    public StringQuerySortingModel<Order> customerId() {
-        return super.customerId();
-    }
+    LineItemCollectionQueryModel<Order> lineItems();
 
-    public StringQuerySortingModel<Order> orderNumber() {
-        return stringModel("orderNumber");
-    }
+    TaxedPriceOptionalQueryModel<Order> taxedPrice();
 
-    @Override
-    public LineItemCollectionQueryModel<Order> lineItems() {
-        return super.lineItems();
-    }
+    MoneyQueryModel<Order> totalPrice();
 
-    @Override
-    public TaxedPriceOptionalQueryModel<Order> taxedPrice() {
-        return super.taxedPrice();
-    }
+    ReferenceOptionalQueryModel<Order, State> state();
 
-    @Override
-    public MoneyQueryModel<Order> totalPrice() {
-        return super.totalPrice();
-    }
+    CustomLineItemCollectionQueryModel<Order> customLineItems();
 
-    public ReferenceOptionalQueryModel<Order, State> state() {
-        return referenceOptionalModel("state");
-    }
+    AddressQueryModel<Order> billingAddress();
 
-    @Override
-    public CustomLineItemCollectionQueryModel<Order> customLineItems() {
-        return super.customLineItems();
-    }
+    DiscountCodeInfoCollectionQueryModel<Order> discountCodes();
 
-    @Override
-    public AddressQueryModel<Order> billingAddress() {
-        return super.billingAddress();
-    }
+    AddressQueryModel<Order> shippingAddress();
 
-    @Override
-    public DiscountCodeInfoCollectionQueryModel<Order> discountCodes() {
-        return super.discountCodes();
-    }
+    CartShippingInfoQueryModel<Order> shippingInfo();
 
-    @Override
-    public AddressQueryModel<Order> shippingAddress() {
-        return super.shippingAddress();
-    }
-
-    @Override
-    public CartShippingInfoQueryModel<Order> shippingInfo() {
-        return super.shippingInfo();
+    static OrderQueryModel of() {
+        return new OrderQueryModelImpl(null, null);
     }
 }

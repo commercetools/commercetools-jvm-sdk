@@ -2,14 +2,14 @@ package io.sphere.sdk.queries;
 
 import java.util.StringJoiner;
 
-import static io.sphere.sdk.utils.IterableUtils.requireNonEmpty;
+import static io.sphere.sdk.utils.SphereInternalUtils.requireNonEmpty;
 
 final class ContainsAllPredicate<T, V, M> extends QueryModelQueryPredicate<M> {
     private final Iterable<V> values;
 
     public ContainsAllPredicate(final QueryModel<M> queryModel, final Iterable<V> values) {
         super(queryModel);
-        requireNonEmpty(values);//SPHERE.IO requires values not to be empty
+        requireNonEmpty(values);
         this.values = values;
     }
 

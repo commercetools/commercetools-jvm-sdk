@@ -27,7 +27,7 @@ public class CartDiscountDraft extends Base {
     private final Boolean requiresDiscountCode;
 
     @JsonCreator
-    CartDiscountDraft(final LocalizedString name, final String cartPredicate, final LocalizedString description, final CartDiscountValue value, final CartDiscountTarget target, final String sortOrder, final Boolean isActive, final ZonedDateTime validFrom, final ZonedDateTime validUntil, final Boolean requiresDiscountCode) {
+    CartDiscountDraft(final LocalizedString name, final String cartPredicate, @Nullable final LocalizedString description, final CartDiscountValue value, final CartDiscountTarget target, final String sortOrder, final Boolean isActive, @Nullable final ZonedDateTime validFrom, @Nullable final ZonedDateTime validUntil, final Boolean requiresDiscountCode) {
         this.cartPredicate = cartPredicate;
         this.name = name;
         this.description = description;

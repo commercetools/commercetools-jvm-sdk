@@ -25,17 +25,17 @@ import io.sphere.sdk.orders.expansion.OrderExpansionModel;
 import io.sphere.sdk.payments.Transaction;
 import io.sphere.sdk.productdiscounts.queries.ProductDiscountByIdGet;
 import io.sphere.sdk.products.*;
+import io.sphere.sdk.products.attributes.Attribute;
 import io.sphere.sdk.products.attributes.AttributeAccess;
 import io.sphere.sdk.products.attributes.AttributeDefinition;
+import io.sphere.sdk.products.attributes.LocalizedToStringProductAttributeConverter;
 import io.sphere.sdk.products.commands.updateactions.SetMetaDescription;
 import io.sphere.sdk.products.commands.updateactions.SetMetaKeywords;
 import io.sphere.sdk.products.commands.updateactions.SetMetaTitle;
 import io.sphere.sdk.products.expansion.ProductProjectionExpansionModel;
-import io.sphere.sdk.products.queries.ProductByIdGet;
-import io.sphere.sdk.products.queries.ProductProjectionByIdGet;
-import io.sphere.sdk.products.queries.ProductProjectionQuery;
-import io.sphere.sdk.products.queries.ProductProjectionQueryModel;
+import io.sphere.sdk.products.queries.*;
 import io.sphere.sdk.producttypes.ProductType;
+import io.sphere.sdk.projects.Project;
 import io.sphere.sdk.queries.Get;
 import io.sphere.sdk.queries.QueryDsl;
 import io.sphere.sdk.queries.QueryPredicate;
@@ -71,6 +71,47 @@ import java.util.function.Function;
  <li class=fixed-in-release></li>
  </ul>
  -->
+
+ <h3 class=released-version id="v1_0_0_M26">1.0.0-M26 (20.01.2016)</h3>
+ <a class="theme-btn expand-all">Expand all</a>
+
+ <br>
+ <br>
+ <ul>
+ <li class=new-in-release>Added {@link io.sphere.sdk.reviews.Review}s.</li>
+
+ <li class=new-in-release>Builders for query and search requests. So for example
+ {@link io.sphere.sdk.products.queries.ProductProjectionQueryBuilder}
+ to build {@link io.sphere.sdk.products.queries.ProductProjectionQuery} and
+ {@link io.sphere.sdk.products.search.ProductProjectionSearchBuilder}
+ to build {@link io.sphere.sdk.products.search.ProductProjectionSearch}.
+
+
+ <div class="rn-hidden">
+ <p>The new way with builders (code with side effects)</p>
+ {@include.example io.sphere.sdk.meta.M26Demo#createSearchQueryWithBuilder}
+ <p>The classic way (immutable objects, reassigning)</p>
+ {@include.example io.sphere.sdk.meta.M26Demo#createSearchQueryClassicWay()}
+ </div>
+
+ </li>
+
+ <li class=new-in-release>Added customer update actions
+ {@link io.sphere.sdk.customers.commands.updateactions.SetTitle},
+ {@link io.sphere.sdk.customers.commands.updateactions.SetFirstName},
+ {@link io.sphere.sdk.customers.commands.updateactions.SetMiddleName} and
+ {@link io.sphere.sdk.customers.commands.updateactions.SetLastName}.</li>
+ <li class=new-in-release>{@link CustomObjectQuery} supports now predicates containing key.
+ <div class="rn-hidden">
+ {@include.example io.sphere.sdk.meta.M26Demo#queryCustomObjectsByKeyExample()}
+ </div>
+ </li>
+ <li class=new-in-release>Added {@link Project#getCurrencies()} and {@link Project#getCurrencyUnits()} so you can get your enabled currencies for the commercetools project.</li>
+
+ <li class=new-in-release>Added some short hand methods for the work with product attributes like {@link Attribute#getValueAsLong()} and {@link Attribute#getValueAsString()}. For all see {@link Attribute}.</li>
+ <li class=new-in-release>Added {@link LocalizedToStringProductAttributeConverter} which provides some defaults to present product attribute (including monetary amounts and date) values as String. The behaviour can be changed through subclasses.</li>
+ </ul>
+
 
  <h3 class=released-version id="v1_0_0_M25">1.0.0-M25 (08.01.2016)</h3>
  <ul>
@@ -446,7 +487,7 @@ import java.util.function.Function;
      <li class=new-in-release>{@link io.sphere.sdk.models.SphereException}s may give hint to developers how to recover from errors. For example on typical elasticsearch related problems it suggests to reindex the product index.</li>
      <li class=new-in-release>The JVM SDK is available for Ning Async HTTP Client 1.8 and 1.9 (incompatible to 1.8).</li>
      <li class=new-in-release>State update actions and {@code io.sphere.sdk.states.StateBuilder} contributed by <a href="https://github.com/abrauner">Ansgar Brauner</a></li>
-     <li class=new-in-release>Embedded predicates (as used in 'where'-clauses) now support lambda syntax: {@link io.sphere.sdk.products.queries.ProductVariantQueryModel#where(java.util.function.Function)}.</li>
+     <li class=new-in-release>Embedded predicates (as used in 'where'-clauses) now support lambda syntax: {@code ProductVariantQueryModel#where(java.util.function.Function)}.</li>
      <li class=new-in-release>{@link io.sphere.sdk.orders.queries.OrderQuery#byCustomerId(java.lang.String)} and {@link io.sphere.sdk.orders.queries.OrderQuery#byCustomerEmail(java.lang.String)}</li>
      <li class=new-in-release>{@link io.sphere.sdk.channels.commands.ChannelUpdateCommand}</li>
      <li class=new-in-release>{@link ChannelByIdGet}</li>
@@ -554,7 +595,7 @@ import java.util.function.Function;
  <li class=new-in-release>Added {@code io.sphere.sdk.carts.Cart#getLineItem(String)} and {@code io.sphere.sdk.carts.Cart#getCustomLineItem(String)} to find items in a cart.</li>
  <li class=new-in-release>Added {@link io.sphere.sdk.products.ProductProjection#getAllVariants()} to receive master variant and all other variants in one call. {@link io.sphere.sdk.products.ProductProjection#getVariants()} just returns all variants except the master variant.</li>
  <li class=new-in-release>Added {@link io.sphere.sdk.products.ProductProjection#getVariant(int)} and {@link io.sphere.sdk.products.ProductProjection#getVariantOrMaster(int)} to find a product variant by id.</li>
- <li class=new-in-release>Added {@link io.sphere.sdk.products.VariantIdentifier} to have a container to address product variants which needs a product ID and a variant ID.</li>
+ <li class=new-in-release>Added {@code VariantIdentifier} to have a container to address product variants which needs a product ID and a variant ID.</li>
  <li class=new-in-release>added {@link io.sphere.sdk.customers.commands.CustomerDeleteCommand} to delete customers.</li>
  <li class=new-in-release>Added {@link io.sphere.sdk.products.commands.updateactions.AddExternalImage} to connect products with images not hosted by SPHERE.IO.</li>
  <li class=new-in-release>Added {@link io.sphere.sdk.products.commands.updateactions.RemoveImage} to disconnect images from a product (external images and SPHERE.IO hosted).</li>
@@ -566,8 +607,8 @@ import java.util.function.Function;
  <li class=change-in-release>{@link io.sphere.sdk.models.Reference} is not instantiated with new.</li>
  <li class=change-in-release>{@link io.sphere.sdk.http.UrlQueryBuilder} is not instantiated with new.</li>
  <li class=change-in-release>io.sphere.sdk.client.SphereErrorResponse is not instantiated with new.</li>
- <li class=change-in-release>{@code ClientRequest} has been renamed to {@link io.sphere.sdk.client.SphereRequest} and therefore {@code ClientRequestBase} to {@link io.sphere.sdk.client.SphereRequestBase}. </li>
- <li class=change-in-release>{@code ClientRequest} has been renamed to {@link io.sphere.sdk.client.SphereRequest} and therefore {@code ClientRequestBase} to {@link io.sphere.sdk.client.SphereRequestBase}. </li>
+ <li class=change-in-release>{@code ClientRequest} has been renamed to {@link io.sphere.sdk.client.SphereRequest} and therefore {@code ClientRequestBase} to {@code io.sphere.sdk.client.SphereRequestBase}. </li>
+ <li class=change-in-release>{@code ClientRequest} has been renamed to {@link io.sphere.sdk.client.SphereRequest} and therefore {@code ClientRequestBase} to {@code io.sphere.sdk.client.SphereRequestBase}. </li>
  <li class=change-in-release>{@code JavaClient} has been renamed to {@link io.sphere.sdk.client.SphereClient} and uses the {@link io.sphere.sdk.client.SphereClientFactory} to initialized a client, {@code JavaClientIml} has been removed, see {@link io.sphere.sdk.meta.GettingStarted}.
  The typesafe config library is not used anymore. The class {@code HttpClientTestDouble} has been removed, use {@link io.sphere.sdk.client.SphereClientFactory#createHttpTestDouble(java.util.function.Function)} instead.
  {@code SphereRequestExecutor} and {@code SphereRequestExecutorTestDouble} have been removed, use {@link io.sphere.sdk.client.SphereClientFactory#createObjectTestDouble(java.util.function.Function)} instead.

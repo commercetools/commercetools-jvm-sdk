@@ -2,13 +2,14 @@ package io.sphere.sdk.search;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import io.sphere.sdk.client.HttpRequestIntent;
-import io.sphere.sdk.client.SphereRequestBase;
+import io.sphere.sdk.client.SphereRequestUtils;
 import io.sphere.sdk.expansion.ExpansionPath;
 import io.sphere.sdk.expansion.ExpansionPathContainer;
 import io.sphere.sdk.http.HttpMethod;
 import io.sphere.sdk.http.HttpQueryParameter;
 import io.sphere.sdk.http.HttpResponse;
 import io.sphere.sdk.http.UrlQueryBuilder;
+import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.LocalizedStringEntry;
 
 import javax.annotation.Nullable;
@@ -18,7 +19,7 @@ import java.util.Optional;
 import java.util.function.Function;
 
 import static io.sphere.sdk.search.SearchParameterKeys.*;
-import static io.sphere.sdk.utils.ListUtils.listOf;
+import static io.sphere.sdk.utils.SphereInternalUtils.listOf;
 import static java.lang.String.format;
 import static java.util.Collections.emptyList;
 import static java.util.Collections.singletonList;
@@ -32,7 +33,7 @@ import static java.util.Objects.requireNonNull;
  * @param <F> type of the facet model
  * @param <E> type of the expansion model
  */
-public abstract class MetaModelSearchDslImpl<T, C extends MetaModelSearchDsl<T, C, S, L, F, E>, S, L, F, E> extends SphereRequestBase implements MetaModelSearchDsl<T, C, S, L, F, E> {
+public abstract class MetaModelSearchDslImpl<T, C extends MetaModelSearchDsl<T, C, S, L, F, E>, S, L, F, E> extends Base implements MetaModelSearchDsl<T, C, S, L, F, E> {
 
     @Nullable
     final LocalizedStringEntry text;
@@ -95,7 +96,7 @@ public abstract class MetaModelSearchDslImpl<T, C extends MetaModelSearchDsl<T, 
     public MetaModelSearchDslImpl(final String endpoint, final TypeReference<PagedSearchResult<T>> pagedSearchResultTypeReference,
                                   final S sortModel, final L filterModel, final F facetModel, final E expansionModel, final Function<MetaModelSearchDslBuilder<T, C, S, L, F, E>, C> searchDslBuilderFunction,
                                   final List<HttpQueryParameter> additionalQueryParameters) {
-        this(null, null, emptyList(), emptyList(), emptyList(), emptyList(), emptyList(), emptyList(), null, null, endpoint, httpResponse -> deserialize(httpResponse, pagedSearchResultTypeReference),
+        this(null, null, emptyList(), emptyList(), emptyList(), emptyList(), emptyList(), emptyList(), null, null, endpoint, httpResponse -> SphereRequestUtils.deserialize(httpResponse, pagedSearchResultTypeReference),
                 emptyList(), additionalQueryParameters, sortModel, filterModel, facetModel, expansionModel, searchDslBuilderFunction);
     }
 

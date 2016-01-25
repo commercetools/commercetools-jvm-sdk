@@ -23,7 +23,7 @@ import java.util.function.Function;
 
 import static io.sphere.sdk.products.ProductProjectionComparators.comparingCategoryOrderHints;
 import static io.sphere.sdk.test.SphereTestUtils.*;
-import static io.sphere.sdk.utils.MapUtils.mapOf;
+import static io.sphere.sdk.utils.SphereInternalUtils.mapOf;
 import static java.util.Comparator.comparing;
 import static java.util.stream.Collectors.toList;
 import static org.assertj.core.api.Assertions.assertThat;

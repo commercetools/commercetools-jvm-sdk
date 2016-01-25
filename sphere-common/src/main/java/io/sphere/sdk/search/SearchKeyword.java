@@ -12,7 +12,7 @@ public class SearchKeyword extends Base {
     private final SuggestTokenizer suggestTokenizer;
 
     @JsonCreator
-    private SearchKeyword(final String text, final SuggestTokenizer suggestTokenizer) {
+    private SearchKeyword(final String text, @Nullable final SuggestTokenizer suggestTokenizer) {
         this.suggestTokenizer = suggestTokenizer;
         this.text = text;
     }

@@ -1,6 +1,7 @@
 package io.sphere.sdk.products.search;
 
 import io.sphere.sdk.products.ProductProjection;
+import io.sphere.sdk.reviews.search.ReviewRatingStatisticsFacetedSearchSearchModel;
 import io.sphere.sdk.search.model.*;
 
 import javax.annotation.Nullable;
@@ -37,5 +38,9 @@ public class ProductDataFacetedSearchSearchModel extends SearchModelImpl<Product
 
     public RangeTermFacetedSearchSearchModel<ProductProjection> lastModifiedAt() {
         return datetimeSearchModel("lastModifiedAt").facetedAndFiltered();
+    }
+
+    public ReviewRatingStatisticsFacetedSearchSearchModel<ProductProjection> reviewRatingStatistics() {
+        return new ReviewRatingStatisticsFacetedSearchSearchModel<>(this, "reviewRatingStatistics");
     }
 }

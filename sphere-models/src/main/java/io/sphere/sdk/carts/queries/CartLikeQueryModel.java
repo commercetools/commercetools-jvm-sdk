@@ -2,67 +2,32 @@ package io.sphere.sdk.carts.queries;
 
 import io.sphere.sdk.customergroups.CustomerGroup;
 import io.sphere.sdk.queries.*;
-import io.sphere.sdk.types.queries.CustomResourceQueryModelImpl;
 import io.sphere.sdk.types.queries.WithCustomQueryModel;
 
-/**
- * Base class to create predicates for {@link io.sphere.sdk.carts.CartLike} resources.
- * @param <T> query context
- */
-public abstract class CartLikeQueryModel<T> extends CustomResourceQueryModelImpl<T> implements WithCustomQueryModel<T> {
-    protected CartLikeQueryModel(QueryModel<T> parent, String pathSegment) {
-        super(parent, pathSegment);
-    }
+public interface CartLikeQueryModel<T> extends ResourceQueryModel<T>, WithCustomQueryModel<T> {
+    StringQuerySortingModel<T> customerId();
 
-    public StringQuerySortingModel<T> customerId() {
-        return stringModel("customerId");
-    }
+    StringQuerySortingModel<T> customerEmail();
 
-    public StringQuerySortingModel<T> customerEmail() {
-        return stringModel("customerEmail");
-    }
+    MoneyQueryModel<T> totalPrice();
 
-    public MoneyQueryModel<T> totalPrice() {
-        return moneyModel("totalPrice");
-    }
+    TaxedPriceOptionalQueryModel<T> taxedPrice();
 
-    public TaxedPriceOptionalQueryModel<T> taxedPrice() {
-        return new TaxedPriceOptionalQueryModelImpl<>(this, "taxedPrice");
-    }
+    CountryQueryModel<T> country();
 
-    public CountryQueryModel<T> country() {
-        return countryQueryModel("country");
-    }
+    ReferenceOptionalQueryModel<T, CustomerGroup> customerGroup();
 
-    public ReferenceOptionalQueryModel<T, CustomerGroup> customerGroup() {
-        return referenceOptionalModel("customerGroup");
-    }
+    LineItemCollectionQueryModel<T> lineItems();
 
-    public LineItemCollectionQueryModel<T> lineItems() {
-        return new LineItemLikeCollectionQueryModelImpl<>(this, "lineItems");
-    }
+    CustomLineItemCollectionQueryModel<T> customLineItems();
 
-    public CustomLineItemCollectionQueryModel<T> customLineItems() {
-        return new LineItemLikeCollectionQueryModelImpl<>(this, "customLineItems");
-    }
+    AddressQueryModel<T> shippingAddress();
 
-    public AddressQueryModel<T> shippingAddress() {
-        return addressModel("shippingAddress");
-    }
+    AddressQueryModel<T> billingAddress();
 
-    public AddressQueryModel<T> billingAddress() {
-        return addressModel("billingAddress");
-    }
+    CartShippingInfoQueryModel<T> shippingInfo();
 
-    public CartShippingInfoQueryModel<T> shippingInfo() {
-        return new CartShippingInfoQueryModelImpl<>(this, "shippingInfo");
-    }
+    DiscountCodeInfoCollectionQueryModel<T> discountCodes();
 
-    public DiscountCodeInfoCollectionQueryModel<T> discountCodes() {
-        return new DiscountCodeInfoCollectionQueryModelImpl<>(this, "discountCodes");
-    }
-
-    public PaymentInfoQueryModel<T> paymentInfo() {
-        return new PaymentInfoQueryModelImpl<>(this, "paymentInfo");
-    }
+    PaymentInfoQueryModel<T> paymentInfo();
 }

@@ -3,7 +3,7 @@ package io.sphere.sdk.queries;
 import io.sphere.sdk.client.QueueSphereClientDecorator;
 import io.sphere.sdk.client.SphereClient;
 import io.sphere.sdk.models.Base;
-import io.sphere.sdk.utils.ListUtils;
+import io.sphere.sdk.utils.SphereInternalUtils;
 import org.reactivestreams.Subscriber;
 
 import java.util.LinkedList;
@@ -13,6 +13,7 @@ import java.util.concurrent.CompletionException;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.function.Function;
 
+import static io.sphere.sdk.utils.SphereInternalUtils.listOf;
 import static java.lang.String.format;
 
 class RunningSubscription<T, C extends QueryDsl<T, C>> extends Base implements SubscriptionsState {
@@ -60,7 +61,7 @@ class RunningSubscription<T, C extends QueryDsl<T, C>> extends Base implements S
 
     private void fetchNewElements(final long initialRemainingElements) {
         final long bulkSize = bulkSize(initialRemainingElements);
-        final Query<T> query = (lastId == null ? seedQuery : seedQuery.withPredicates(ListUtils.listOf(seedQuery.predicates(), QueryPredicate.of(format("id > \"%s\"", lastId))))).withLimit(bulkSize);
+        final Query<T> query = (lastId == null ? seedQuery : seedQuery.withPredicates(listOf(seedQuery.predicates(), QueryPredicate.of(format("id > \"%s\"", lastId))))).withLimit(bulkSize);
         try {
             final List<T> results = sphereClient.execute(query).toCompletableFuture().join().getResults();
             if (results.size() == 0) {

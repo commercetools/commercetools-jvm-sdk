@@ -22,7 +22,7 @@ final class CustomLineItemImportDraftImpl implements CustomLineItemImportDraft {
     @Nullable
     private final TaxRate taxRate;
 
-    public CustomLineItemImportDraftImpl(final String id, final LocalizedString name, final MonetaryAmount money, final String slug, final Long quantity, final Set<ItemState> state, final Reference<TaxCategory> taxCategory, final TaxRate taxRate) {
+    public CustomLineItemImportDraftImpl(final String id, final LocalizedString name, final MonetaryAmount money, final String slug, final Long quantity, @Nullable final Set<ItemState> state, final Reference<TaxCategory> taxCategory, @Nullable final TaxRate taxRate) {
         this.id = id;
         this.name = name;
         this.money = money;

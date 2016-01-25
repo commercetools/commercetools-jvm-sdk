@@ -3,7 +3,7 @@ package io.sphere.sdk.customers.commands;
 import io.sphere.sdk.commands.DeleteCommand;
 import io.sphere.sdk.customers.Customer;
 import io.sphere.sdk.customers.expansion.CustomerExpansionModel;
-import io.sphere.sdk.expansion.MetaModelExpansionDsl;
+import io.sphere.sdk.expansion.MetaModelReferenceExpansionDsl;
 import io.sphere.sdk.models.Versioned;
 
 /**
@@ -13,7 +13,7 @@ import io.sphere.sdk.models.Versioned;
  *
  * @see Customer
  */
-public interface CustomerDeleteCommand extends MetaModelExpansionDsl<Customer, CustomerDeleteCommand, CustomerExpansionModel<Customer>>, DeleteCommand<Customer> {
+public interface CustomerDeleteCommand extends MetaModelReferenceExpansionDsl<Customer, CustomerDeleteCommand, CustomerExpansionModel<Customer>>, DeleteCommand<Customer> {
     static CustomerDeleteCommand of(final Versioned<Customer> versioned) {
         return new CustomerDeleteCommandImpl(versioned);
     }

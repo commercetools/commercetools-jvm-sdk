@@ -26,7 +26,9 @@ public class RulesMain {
                 new OnlyOneNullableOfMethodRule(),
                 new InUpdateActionsPackageOnlyUpdateActionsRule(),
                 new QueryAndCommandsAreCompleteRule(),
-                new ReferenceableResourceCanCreateReferenceRule()
+                new ReferenceableResourceCanCreateReferenceRule(),
+                new QueryEndpointsHaveAlsoABuilderRule(),
+                new QueryModelsAreInterfacesRule()
         );
         final boolean allIsOk = rules.stream()
                 .map(rule -> {

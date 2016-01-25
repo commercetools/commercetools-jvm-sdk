@@ -10,6 +10,8 @@ import java.util.function.Consumer;
 import static io.sphere.sdk.test.SphereTestUtils.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
+import static io.sphere.sdk.products.ProductsScenario1Fixtures.*;
+
 public class ProductProjectionSearchModelFiltersIntegrationTest extends ProductProjectionSearchModelIntegrationTest {
 
     public static final ProductProjectionFilterSearchModel PRODUCT_MODEL = ProductProjectionSearchModel.of().filter();
@@ -124,7 +126,7 @@ public class ProductProjectionSearchModelFiltersIntegrationTest extends ProductP
 
     @Test
     public void onReferenceAttributes() throws Exception {
-        testProductIds(PRODUCT_MODEL.allVariants().attribute().ofReference(ATTR_NAME_REF).id().is(productSomeId.getId()),
+        testProductIds(PRODUCT_MODEL.allVariants().attribute().ofReference(ATTR_NAME_REF).id().is(productA.getId()),
                 ids -> assertThat(ids).containsOnly(product1.getId()));
     }
 
@@ -238,7 +240,7 @@ public class ProductProjectionSearchModelFiltersIntegrationTest extends ProductP
 
     @Test
     public void onReferenceSetAttributes() throws Exception {
-        testProductIds(PRODUCT_MODEL.allVariants().attribute().ofReferenceSet(ATTR_NAME_REF_SET).id().is(productOtherId.getId()),
+        testProductIds(PRODUCT_MODEL.allVariants().attribute().ofReferenceSet(ATTR_NAME_REF_SET).id().is(productB.getId()),
                 ids -> assertThat(ids).containsOnly(product1.getId()));
     }
 

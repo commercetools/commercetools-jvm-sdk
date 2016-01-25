@@ -20,7 +20,7 @@ final class InventoryEntryImpl extends ResourceImpl<InventoryEntry> implements I
     private final ZonedDateTime expectedDelivery;
 
     @JsonCreator
-    public InventoryEntryImpl(final String id, final Long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt, final Long availableQuantity, final String sku, final Reference<Channel> supplyChannel, final Long quantityOnStock, final Integer restockableInDays, final ZonedDateTime expectedDelivery) {
+    public InventoryEntryImpl(final String id, final Long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt, final Long availableQuantity, final String sku, @Nullable final Reference<Channel> supplyChannel, final Long quantityOnStock, @Nullable final Integer restockableInDays, @Nullable final ZonedDateTime expectedDelivery) {
         super(id, version, createdAt, lastModifiedAt);
         this.availableQuantity = availableQuantity;
         this.sku = sku;

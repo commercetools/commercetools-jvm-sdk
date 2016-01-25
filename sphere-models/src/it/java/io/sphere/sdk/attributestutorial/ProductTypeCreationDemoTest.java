@@ -26,6 +26,7 @@ import io.sphere.sdk.producttypes.commands.ProductTypeDeleteCommand;
 import io.sphere.sdk.producttypes.queries.ProductTypeQuery;
 import io.sphere.sdk.test.IntegrationTest;
 import io.sphere.sdk.utils.MoneyImpl;
+import io.sphere.sdk.utils.SphereInternalUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 import org.junit.AfterClass;
@@ -43,7 +44,7 @@ import java.util.Set;
 import java.util.function.Function;
 
 import static io.sphere.sdk.test.SphereTestUtils.*;
-import static io.sphere.sdk.utils.SetUtils.asSet;
+import static io.sphere.sdk.utils.SphereInternalUtils.asSet;
 import static java.util.Arrays.asList;
 import static java.util.Locale.ENGLISH;
 import static java.util.Locale.GERMAN;

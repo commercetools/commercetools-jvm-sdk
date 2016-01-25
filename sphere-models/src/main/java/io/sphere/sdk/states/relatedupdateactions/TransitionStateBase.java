@@ -1,8 +1,8 @@
 package io.sphere.sdk.states.relatedupdateactions;
 
 import io.sphere.sdk.commands.UpdateActionImpl;
-import io.sphere.sdk.models.Reference;
-import io.sphere.sdk.models.Referenceable;
+import io.sphere.sdk.models.ResourceIdentifiable;
+import io.sphere.sdk.models.ResourceIdentifier;
 import io.sphere.sdk.states.State;
 
 import javax.annotation.Nullable;
@@ -14,15 +14,15 @@ import java.util.Optional;
  */
 public abstract class TransitionStateBase<T> extends UpdateActionImpl<T> {
     @Nullable
-    private final Reference<State> state;
+    private final ResourceIdentifier<State> state;
 
-    protected TransitionStateBase(final @Nullable Referenceable<State> state) {
+    protected TransitionStateBase(final @Nullable ResourceIdentifiable<State> state) {
         super("transitionState");
-        this.state = Optional.ofNullable(state).map(stateReferenceable -> stateReferenceable.toReference()).orElse(null);
+        this.state = Optional.ofNullable(state).map(ResourceIdentifiable::toResourceIdentifier).orElse(null);
     }
 
     @Nullable
-    public Reference<State> getState() {
+    public ResourceIdentifier<State> getState() {
         return state;
     }
 }

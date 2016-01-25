@@ -1,5 +1,7 @@
 package io.sphere.sdk.customers.commands;
 
+import io.sphere.sdk.commands.UpdateAction;
+import io.sphere.sdk.commands.UpdateActionImpl;
 import io.sphere.sdk.customers.Customer;
 import io.sphere.sdk.customers.CustomerIntegrationTest;
 import io.sphere.sdk.customers.CustomerName;
@@ -9,6 +11,7 @@ import io.sphere.sdk.models.AddressBuilder;
 import org.junit.Test;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.function.Predicate;
 
 import static io.sphere.sdk.customergroups.CustomerGroupFixtures.withB2cCustomerGroup;
@@ -21,10 +24,17 @@ public class CustomerUpdateCommandTest extends CustomerIntegrationTest {
     @Test
     public void changeName() throws Exception {
         withCustomer(client(), customer -> {
-            final CustomerName newName = CustomerName.ofTitleFirstAndLastName("Mister", "John", "Smith");
-            assertThat(customer.getName()).isNotEqualTo(newName);
-            final Customer updatedCustomer = client().executeBlocking(CustomerUpdateCommand.of(customer, ChangeName.of(newName)));
-            assertThat(updatedCustomer.getName()).isEqualTo(newName);
+            final List<UpdateAction<Customer>> updateActions = asList(
+                    SetTitle.of("Dr."),
+                    SetFirstName.of("Petronella"),
+                    SetMiddleName.of("M."),
+                    SetLastName.of("Osgood")
+            );
+            final Customer updatedCustomer = client().executeBlocking(CustomerUpdateCommand.of(customer, updateActions));
+            assertThat(updatedCustomer.getTitle()).isEqualTo("Dr.");
+            assertThat(updatedCustomer.getFirstName()).isEqualTo("Petronella");
+            assertThat(updatedCustomer.getMiddleName()).isEqualTo("M.");
+            assertThat(updatedCustomer.getLastName()).isEqualTo("Osgood");
         });
     }
 

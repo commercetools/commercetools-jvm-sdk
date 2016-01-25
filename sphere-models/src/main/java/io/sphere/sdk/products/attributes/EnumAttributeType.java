@@ -6,7 +6,7 @@ import io.sphere.sdk.models.EnumValue;
 
 import java.util.List;
 
-import static io.sphere.sdk.utils.ListUtils.listOf;
+import static io.sphere.sdk.utils.SphereInternalUtils.listOf;
 
 public class EnumAttributeType extends AttributeTypeBase {
     private final List<EnumValue> values;

@@ -1,6 +1,5 @@
 package io.sphere.sdk.products.queries;
 
-import io.sphere.sdk.client.SphereRequest;
 import io.sphere.sdk.products.attributes.AttributeAccess;
 import io.sphere.sdk.products.attributes.NamedAttributeAccess;
 import io.sphere.sdk.categories.Category;
@@ -35,7 +34,7 @@ import static io.sphere.sdk.models.DefaultCurrencyUnits.EUR;
 import static io.sphere.sdk.products.ProductFixtures.*;
 import static io.sphere.sdk.products.ProductProjectionType.CURRENT;
 import static io.sphere.sdk.products.ProductProjectionType.STAGED;
-import static io.sphere.sdk.test.ReferenceAssert.assertThat;
+import static io.sphere.sdk.reviews.ReviewFixtures.withReview;
 import static io.sphere.sdk.test.SphereTestUtils.*;
 import static java.util.Arrays.asList;
 import static java.util.Locale.ENGLISH;
@@ -66,8 +65,8 @@ public class ProductProjectionQueryTest extends IntegrationTest {
             final Query<ProductProjection> query = ProductProjectionQuery.of(STAGED)
                     .withPredicates(m -> m.id().is(product.getId()));
             final ProductProjection productProjection = client().executeBlocking(query).head().get();
-            final VariantIdentifier identifier = productProjection.getMasterVariant().getIdentifier();
-            assertThat(identifier).isEqualTo(VariantIdentifier.of(product.getId(), 1));
+            final ByIdVariantIdentifier identifier = productProjection.getMasterVariant().getIdentifier();
+            assertThat(identifier).isEqualTo(ByIdVariantIdentifier.of(product.getId(), 1));
         });
     }
 
@@ -130,7 +129,7 @@ public class ProductProjectionQueryTest extends IntegrationTest {
                             .byProductType(p1.getProductType())
                             .withExpansionPaths(m -> m.productType());
             final PagedQueryResult<ProductProjection> queryResult = client().executeBlocking(query);
-            assertThat(queryResult.head().get().getProductType()).isExpanded();
+            assertThat(queryResult.head().get().getProductType()).is(expanded());
             assertThat(ids(queryResult)).containsOnly(p1.getId());
         });
     }
@@ -179,9 +178,9 @@ public class ProductProjectionQueryTest extends IntegrationTest {
                                                             final PagedQueryResult<ProductProjection> queryResult = client().executeBlocking(query);
                                                             assertThat(ids(queryResult)).containsOnly(productWithCat1.getId());
                                                             final Reference<Category> cat1Loaded = queryResult.head().get().getCategories().stream().findAny().get();
-                                                            assertThat(cat1Loaded).overridingErrorMessage("cat of product is expanded").isExpanded();
+                                                            assertThat(cat1Loaded).as("cat of product is expanded").is(expanded());
                                                             final Reference<Category> parent = cat1Loaded.getObj().getParent();
-                                                            assertThat(parent).overridingErrorMessage("parent of cat is expanded").isExpanded();
+                                                            assertThat(parent).as("parent of cat is expanded").is(expanded());
                                                         })
                                         )
                         )
@@ -235,9 +234,30 @@ public class ProductProjectionQueryTest extends IntegrationTest {
                                     .withExpansionPaths(m -> m.taxCategory());
                             final PagedQueryResult<ProductProjection> pagedQueryResult =
                                     client().executeBlocking(query);
-                            assertThat(pagedQueryResult.head().get().getTaxCategory()).isExpanded();
+                            assertThat(pagedQueryResult.head().get().getTaxCategory()).is(expanded());
                         })
         );
+    }
+
+    @Test
+    public void queryByReviewRating() {
+        withProduct(client(), product -> {
+            withReview(client(), b -> b.target(product).rating(1), review1 -> {
+                withReview(client(), b -> b.target(product).rating(3), review2 -> {
+                    assertEventually(() -> {
+                        final ProductProjectionQuery query = ProductProjectionQuery.ofStaged()
+                                .withPredicates(m -> m.reviewRatingStatistics().averageRating().is(2.0))
+                                .plusPredicates(m -> m.reviewRatingStatistics().count().is(2))
+                                .plusPredicates(m -> m.reviewRatingStatistics().lowestRating().is(1))
+                                .plusPredicates(m -> m.reviewRatingStatistics().highestRating().is(3))
+                                .plusPredicates(m -> m.is(product));
+                        final List<ProductProjection> results = client().executeBlocking(query).getResults();
+                        assertThat(results).hasSize(1);
+                        assertThat(results.get(0).getId()).isEqualTo(product.getId());
+                    });
+                });
+            });
+        });
     }
 
     private void checkOneResult(final Product product, final QueryPredicate<ProductProjection> predicate) {

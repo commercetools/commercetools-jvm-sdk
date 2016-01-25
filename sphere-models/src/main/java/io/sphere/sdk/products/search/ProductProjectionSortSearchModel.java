@@ -1,6 +1,7 @@
 package io.sphere.sdk.products.search;
 
 import io.sphere.sdk.products.ProductProjection;
+import io.sphere.sdk.reviews.search.ReviewRatingStatisticsSortSearchModel;
 import io.sphere.sdk.search.model.*;
 
 import javax.annotation.Nullable;
@@ -39,5 +40,10 @@ public class ProductProjectionSortSearchModel extends ProductDataSortSearchModel
     @Override
     public CategoryOrderHintsSortSearchModel categoryOrderHints() {
         return super.categoryOrderHints();
+    }
+
+    @Override
+    public ReviewRatingStatisticsSortSearchModel<ProductProjection> reviewRatingStatistics() {
+        return super.reviewRatingStatistics();
     }
 }

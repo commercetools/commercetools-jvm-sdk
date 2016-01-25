@@ -149,20 +149,22 @@ public class ProductFixtures {
         if (productType != null) {
             QueryPredicate<Product> ofProductType = ProductQueryModel.of().productType().is(productType);
             ProductQuery productsOfProductTypeQuery = ProductQuery.of().withPredicates(ofProductType).withLimit(500L);
-            final List<Product> products = client.executeBlocking(productsOfProductTypeQuery).getResults();
-            final List<Product> unpublishedProducts = products.stream().map(
-                    product -> {
-                        if (product.getMasterData().isPublished()) {
-                            return client.executeBlocking(ProductUpdateCommand.of(product, Unpublish.of()));
-                        } else {
-                            return product;
+            do {
+                final List<Product> products = client.executeBlocking(productsOfProductTypeQuery).getResults();
+                final List<Product> unpublishedProducts = products.stream().map(
+                        product -> {
+                            if (product.getMasterData().isPublished()) {
+                                return client.executeBlocking(ProductUpdateCommand.of(product, Unpublish.of()));
+                            } else {
+                                return product;
+                            }
                         }
-                    }
-            ).collect(toList());
-            unpublishedProducts.forEach(
-                    product -> client.executeBlocking(ProductDeleteCommand.of(product))
-            );
-            deleteProductType(client, productType);
+                ).collect(toList());
+                unpublishedProducts.forEach(
+                        product -> client.executeBlocking(ProductDeleteCommand.of(product))
+                );
+                deleteProductType(client, productType);
+            } while (client.executeBlocking(productsOfProductTypeQuery).size() > 0);
         }
     }
 

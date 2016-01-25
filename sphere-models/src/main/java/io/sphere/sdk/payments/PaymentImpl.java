@@ -35,7 +35,7 @@ final class PaymentImpl extends ResourceImpl<Payment> implements Payment {
     private final List<CustomFields> interfaceInteractions;
 
     @JsonCreator
-    private PaymentImpl(final String id, final Long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt, final Reference<Customer> customer, final String externalId, final String interfaceId, final MonetaryAmount amountPlanned, final MonetaryAmount amountAuthorized, final ZonedDateTime authorizedUntil, final MonetaryAmount amountPaid, final MonetaryAmount amountRefunded, final PaymentMethodInfo paymentMethodInfo, final CustomFields custom, final PaymentStatus paymentStatus, final List<Transaction> transactions, final List<CustomFields> interfaceInteractions) {
+    private PaymentImpl(final String id, final Long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt, @Nullable final Reference<Customer> customer, @Nullable final String externalId, @Nullable final String interfaceId, final MonetaryAmount amountPlanned, @Nullable final MonetaryAmount amountAuthorized, @Nullable final ZonedDateTime authorizedUntil, @Nullable final MonetaryAmount amountPaid, @Nullable final MonetaryAmount amountRefunded, final PaymentMethodInfo paymentMethodInfo, @Nullable final CustomFields custom, final PaymentStatus paymentStatus, final List<Transaction> transactions, final List<CustomFields> interfaceInteractions) {
         super(id, version, createdAt, lastModifiedAt);
         this.customer = customer;
         this.externalId = externalId;

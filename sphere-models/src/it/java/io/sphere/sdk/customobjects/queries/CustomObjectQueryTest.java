@@ -23,6 +23,17 @@ public class CustomObjectQueryTest extends IntegrationTest {
     }
 
     @Test
+    public void queryByContainerAndKey() {
+        withCustomObject(client(), co -> {
+            final CustomObjectQuery<Foo> customObjectQuery = CustomObjectQuery.of(Foo.class)
+                    .withPredicates(m -> m.container().is(co.getContainer()).and(m.key().is(co.getKey())));
+            final PagedQueryResult<CustomObject<Foo>> result = client().executeBlocking(customObjectQuery);
+            assertThat(result.head().get())
+                    .isEqualTo(co);
+        });
+    }
+
+    @Test
     public void queryWithClass() throws Exception {
         withCustomObject(client(), co -> {
             final CustomObjectQuery<Foo> customObjectQuery = CustomObjectQuery.of(Foo.class)

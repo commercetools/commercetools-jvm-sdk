@@ -5,8 +5,11 @@ import io.sphere.sdk.models.Builder;
 import io.sphere.sdk.models.LocalizedString;
 
 import javax.annotation.Nullable;
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
+
+import static io.sphere.sdk.utils.SphereInternalUtils.listOf;
 
 /**
  * @see Custom
@@ -23,7 +26,7 @@ public class TypeDraftBuilder extends Base implements Builder<TypeDraft> {
     @Nullable
     private List<FieldDefinition> fieldDefinitions;
 
-    private TypeDraftBuilder(final String key, final LocalizedString name, final LocalizedString description, final Set<String> resourceTypeIds, final List<FieldDefinition> fieldDefinitions) {
+    private TypeDraftBuilder(final String key, final LocalizedString name, @Nullable final LocalizedString description, final Set<String> resourceTypeIds, @Nullable final List<FieldDefinition> fieldDefinitions) {
         this.key = key;
         this.name = name;
         this.description = description;
@@ -52,6 +55,15 @@ public class TypeDraftBuilder extends Base implements Builder<TypeDraft> {
     public TypeDraftBuilder fieldDefinitions(final List<FieldDefinition> fieldDefinitions) {
         this.fieldDefinitions = fieldDefinitions;
         return this;
+    }
+
+    public TypeDraftBuilder plusFieldDefinitions(final List<FieldDefinition> fieldDefinitions) {
+        this.fieldDefinitions = listOf(getFieldDefinitions(), fieldDefinitions);
+        return this;
+    }
+
+    public TypeDraftBuilder plusFieldDefinitions(final FieldDefinition fieldDefinition) {
+        return plusFieldDefinitions(Collections.singletonList(fieldDefinition));
     }
 
     @Override

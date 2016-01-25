@@ -1,28 +1,16 @@
 package io.sphere.sdk.products.queries;
 
 import io.sphere.sdk.productdiscounts.ProductDiscount;
-import io.sphere.sdk.queries.*;
+import io.sphere.sdk.queries.OptionalQueryModel;
+import io.sphere.sdk.queries.QueryPredicate;
+import io.sphere.sdk.queries.ReferenceQueryModel;
 
-import javax.annotation.Nullable;
-
-public final class DiscountedPriceOptionalQueryModel<T> extends QueryModelImpl<T> implements OptionalQueryModel<T> {
-
-    DiscountedPriceOptionalQueryModel(@Nullable final QueryModel<T> parent, @Nullable final String pathSegment) {
-        super(parent, pathSegment);
-    }
+public interface DiscountedPriceOptionalQueryModel<T> extends OptionalQueryModel<T> {
+    @Override
+    QueryPredicate<T> isPresent();
 
     @Override
-    public QueryPredicate<T> isPresent() {
-        return isPresentPredicate();
-    }
+    QueryPredicate<T> isNotPresent();
 
-    @Override
-    public QueryPredicate<T> isNotPresent() {
-        return isNotPresentPredicate();
-    }
-
-    public ReferenceQueryModel<T, ProductDiscount> discount() {
-        return referenceModel("discount");
-    }
+    ReferenceQueryModel<T, ProductDiscount> discount();
 }
-

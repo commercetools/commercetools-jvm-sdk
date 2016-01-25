@@ -24,11 +24,11 @@ final class LocalizedStringQuerySortingModelImpl<T> extends QueryModelImpl<T> im
 
     @Override
     public QueryPredicate<T> isNotPresent() {
-        return isNotPresent();
+        return isNotPresentPredicate();
     }
 
     @Override
     public QueryPredicate<T> isPresent() {
-        return isPresent();
+        return isNotPresentPredicate();
     }
 }

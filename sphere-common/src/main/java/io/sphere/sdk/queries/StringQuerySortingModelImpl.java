@@ -3,7 +3,7 @@ package io.sphere.sdk.queries;
 import javax.annotation.Nullable;
 import java.util.List;
 
-import static io.sphere.sdk.utils.IterableUtils.toStream;
+import static io.sphere.sdk.utils.SphereInternalUtils.toStream;
 import static java.util.stream.Collectors.toList;
 
 final class StringQuerySortingModelImpl<T> extends QueryModelImpl<T> implements StringQuerySortingModel<T> {

@@ -22,7 +22,7 @@ public final class SetCustomer extends UpdateActionImpl<Payment> {
     @Nullable
     private final Reference<Customer> customer;
 
-    private SetCustomer(final Reference<Customer> customer) {
+    private SetCustomer(@Nullable final Reference<Customer> customer) {
         super("setCustomer");
         this.customer = customer;
     }

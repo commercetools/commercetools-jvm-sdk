@@ -18,6 +18,7 @@ import java.time.ZonedDateTime;
 import java.util.Collections;
 import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
 
 /**
  * @see Custom
@@ -114,5 +115,9 @@ public class CustomFields extends Base {
 
     public Reference<Type> getType() {
         return type;
+    }
+
+    public Set<String> getFieldAsStringSet(final String name) {
+        return getField(name, TypeReferences.stringSetTypeReference());
     }
 }

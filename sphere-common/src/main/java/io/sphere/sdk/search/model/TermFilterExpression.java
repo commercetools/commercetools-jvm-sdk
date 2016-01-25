@@ -4,7 +4,7 @@ import io.sphere.sdk.search.FilterExpression;
 
 import java.util.function.Function;
 
-import static io.sphere.sdk.utils.IterableUtils.requireNonEmpty;
+import static io.sphere.sdk.utils.SphereInternalUtils.requireNonEmpty;
 
 class TermFilterExpression<T, V> extends TermExpression<T, V> implements FilterExpression<T> {
 

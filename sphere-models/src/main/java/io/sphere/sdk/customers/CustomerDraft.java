@@ -52,15 +52,15 @@ public class CustomerDraft extends Base implements CustomDraft {
     private final CustomFieldsDraft custom;
 
 
-    CustomerDraft(final String customerNumber, final String email,
+    CustomerDraft(@Nullable final String customerNumber, final String email,
                   final String firstName, final String lastName, final String middleName,
                   final String password, final String title,
-                  final String externalId,
-                  final String anonymousCartId, final LocalDate dateOfBirth,
-                  final String companyName, final String vatId,
-                  final Boolean emailVerified, final Reference<CustomerGroup> customerGroup,
-                  final Integer defaultBillingAddress, final Integer defaultShippingAddress,
-                  final List<Address> addresses, final CustomFieldsDraft custom) {
+                  @Nullable final String externalId,
+                  @Nullable final String anonymousCartId, @Nullable final LocalDate dateOfBirth,
+                  @Nullable final String companyName, @Nullable final String vatId,
+                  @Nullable final Boolean emailVerified, @Nullable final Reference<CustomerGroup> customerGroup,
+                  @Nullable final Integer defaultBillingAddress, @Nullable final Integer defaultShippingAddress,
+                  final List<Address> addresses, @Nullable final CustomFieldsDraft custom) {
         this.customerNumber = customerNumber;
         this.email = email;
         this.firstName = firstName;
@@ -79,7 +79,7 @@ public class CustomerDraft extends Base implements CustomDraft {
         this.custom = custom;
         if (!isValidAddressIndex(addresses, defaultBillingAddress)
                 || !isValidAddressIndex(addresses, defaultShippingAddress)) {
-            throw new IllegalArgumentException("The defaultBillingAddress and defaultShippingAddress cannot contain an index which");
+            throw new IllegalArgumentException("The defaultBillingAddress and defaultShippingAddress cannot contain an index which is not in the address list");
         }
         this.defaultBillingAddress = defaultBillingAddress;
         this.defaultShippingAddress = defaultShippingAddress;
@@ -91,6 +91,10 @@ public class CustomerDraft extends Base implements CustomDraft {
 
     public static CustomerDraft of(final CustomerName customerName, final String email, final String password) {
         return CustomerDraftBuilder.of(customerName, email, password).build();
+    }
+
+    public static CustomerDraft of(final String email, final String password) {
+        return CustomerDraftBuilder.of(email, password).build();
     }
 
     @Nullable

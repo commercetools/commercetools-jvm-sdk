@@ -13,17 +13,18 @@ import javax.money.format.AmountFormatQueryBuilder;
 import javax.money.format.MonetaryAmountFormat;
 import javax.money.format.MonetaryFormats;
 import java.math.BigDecimal;
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Locale;
 
 import static java.util.Arrays.asList;
 import static java.util.stream.Collectors.toList;
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class FormattingDocumentationTest {
     @Test
@@ -65,6 +66,30 @@ public class FormattingDocumentationTest {
         );
         final String formatted = format.format(MoneyImpl.ofCents(123456, "USD"));
         assertThat(formatted).isEqualTo("$1,234.56");
+    }
+
+    @Test
+    public void formatMoneyCustomLocales() throws Exception {
+        final Locale germany = Locale.GERMANY;
+        assertThat(germany.toLanguageTag()).as("contains language and country").isEqualTo("de-DE");
+        final Locale german = Locale.GERMAN;
+        assertThat(german.toLanguageTag()).as("contains language").isEqualTo("de");
+
+        final MonetaryAmount amount = MoneyImpl.ofCents(123456, "EUR");
+
+        final MonetaryAmountFormat formatByLanguageAndCountry = MonetaryFormats.getAmountFormat(
+                AmountFormatQueryBuilder.of(germany)
+                        .set(CurrencyStyle.SYMBOL)
+                        .build()
+        );
+        final MonetaryAmountFormat formatByJustLanguage = MonetaryFormats.getAmountFormat(
+                AmountFormatQueryBuilder.of(german)
+                        .set(CurrencyStyle.SYMBOL)
+                        .build()
+        );
+
+        assertThat(formatByLanguageAndCountry.format(amount)).as("contains symbol").isEqualTo("1.234,56 €");
+        assertThat(formatByJustLanguage.format(amount)).as("contains not symbol").isEqualTo("EUR 1.234,56");
     }
 
     @Test
@@ -130,6 +155,12 @@ public class FormattingDocumentationTest {
         final LocalDate localDate = LocalDate.of(2015, 7, 25);
         assertThat(localDate.format(DateTimeFormatter.ofPattern("dd.MM.yy"))).isEqualTo("25.07.15");
         assertThat(localDate.format(DateTimeFormatter.ISO_LOCAL_DATE)).isEqualTo("2015-07-25");
+        assertThat(localDate.format(
+                DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM).withLocale(Locale.GERMANY)
+        )).isEqualTo("25.07.2015");
+        assertThat(localDate.format(
+                DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL).withLocale(Locale.GERMANY)
+        )).isEqualTo("Samstag, 25. Juli 2015");
     }
 
     @Test
@@ -137,6 +168,9 @@ public class FormattingDocumentationTest {
         final LocalTime localTime = LocalTime.of(16, 35);
         assertThat(localTime.format(DateTimeFormatter.ofPattern("HH:mm"))).isEqualTo("16:35");
         assertThat(localTime.format(DateTimeFormatter.ISO_LOCAL_TIME)).isEqualTo("16:35:00");
+        assertThat(localTime.format(
+                DateTimeFormatter.ofLocalizedTime(FormatStyle.MEDIUM).withLocale(Locale.GERMANY)
+        )).isEqualTo("16:35:00");
     }
 
     @Test
@@ -157,6 +191,9 @@ public class FormattingDocumentationTest {
                 .isEqualTo("09.07.2015 03:46");
         assertThat(dateTime.withZoneSameInstant(ZoneId.of("America/Los_Angeles")).format(formatter))
                 .isEqualTo("09.07.2015 00:46");
+        assertThat(dateTime.withZoneSameInstant(ZoneId.of("Europe/Berlin")).format(
+                DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL).withLocale(Locale.GERMANY)
+        )).isEqualTo("Donnerstag, 9. Juli 2015");
     }
 
     @Test

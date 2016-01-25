@@ -17,7 +17,7 @@ final class TypeDraftImpl extends Base implements TypeDraft {
     @Nullable
     private final List<FieldDefinition> fieldDefinitions;
 
-    public TypeDraftImpl(final String key, final LocalizedString name, final LocalizedString description, final Set<String> resourceTypeIds, final List<FieldDefinition> fieldDefinitions) {
+    public TypeDraftImpl(final String key, final LocalizedString name, @Nullable final LocalizedString description, final Set<String> resourceTypeIds, @Nullable final List<FieldDefinition> fieldDefinitions) {
         this.key = key;
         this.name = name;
         this.description = description;

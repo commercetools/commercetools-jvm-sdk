@@ -1,30 +1,18 @@
 package io.sphere.sdk.types.queries;
 
-import io.sphere.sdk.queries.*;
-import io.sphere.sdk.types.FieldDefinition;
+import io.sphere.sdk.queries.ResourceQueryModel;
+import io.sphere.sdk.queries.StringCollectionQueryModel;
+import io.sphere.sdk.queries.StringQuerySortingModel;
 import io.sphere.sdk.types.Type;
 
-public final class TypeQueryModel extends ResourceQueryModelImpl<Type> {
+public interface TypeQueryModel extends ResourceQueryModel<Type> {
+    StringQuerySortingModel<Type> key();
 
-    public static TypeQueryModel of() {
-        return new TypeQueryModel(null, null);
+    StringCollectionQueryModel<Type> resourceTypeIds();
+
+    FieldDefinitionCollectionQueryModel<Type> fieldDefinitions();
+
+    static TypeQueryModel of() {
+        return new TypeQueryModelImpl(null, null);
     }
-
-    private TypeQueryModel(final QueryModel<Type> parent, final String pathSegment) {
-        super(parent, pathSegment);
-    }
-
-    public StringQuerySortingModel<Type> key() {
-        return stringModel("key");
-    }
-
-    public StringCollectionQueryModel<Type> resourceTypeIds() {
-        return stringCollectionModel("resourceTypeIds");
-    }
-
-    public FieldDefinitionCollectionQueryModel<Type> fieldDefinitions() {
-        return new FieldDefinitionCollectionQueryModelImpl<>(this, "fieldDefinitions");
-    }
-
-//it is not possible to query by name/description with the API
 }

@@ -3,7 +3,6 @@ package io.sphere.sdk.products.commands;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonUnwrapped;
 import io.sphere.sdk.categories.Category;
-import io.sphere.sdk.client.SphereRequest;
 import io.sphere.sdk.commands.UpdateAction;
 import io.sphere.sdk.messages.queries.MessageQuery;
 import io.sphere.sdk.models.*;
@@ -24,7 +23,6 @@ import io.sphere.sdk.suppliers.TShirtProductTypeDraftSupplier.Colors;
 import io.sphere.sdk.suppliers.TShirtProductTypeDraftSupplier.Sizes;
 import io.sphere.sdk.taxcategories.TaxCategoryFixtures;
 import io.sphere.sdk.test.IntegrationTest;
-import io.sphere.sdk.test.ReferenceAssert;
 import io.sphere.sdk.test.SphereTestUtils;
 import io.sphere.sdk.utils.MoneyImpl;
 import org.junit.Test;
@@ -38,7 +36,6 @@ import java.util.Locale;
 import java.util.Random;
 
 import static io.sphere.sdk.models.DefaultCurrencyUnits.EUR;
-import static io.sphere.sdk.models.LocalizedString.ofEnglishLocale;
 import static io.sphere.sdk.products.ProductFixtures.*;
 import static io.sphere.sdk.states.StateFixtures.withStateByBuilder;
 import static io.sphere.sdk.states.StateType.PRODUCT_STATE;
@@ -112,7 +109,8 @@ public class ProductUpdateCommandTest extends IntegrationTest {
             final Product productWithCategory = client()
                     .executeBlocking(ProductUpdateCommand.of(product, AddToCategory.of(category, orderHint)));
 
-            ReferenceAssert.assertThat(productWithCategory.getMasterData().getStaged().getCategories().stream().findAny().get()).references(category);
+            final Reference<Category> categoryReference = productWithCategory.getMasterData().getStaged().getCategories().stream().findAny().get();
+            assertThat(categoryReference.referencesSameResource(category)).isTrue();
             assertThat(productWithCategory.getMasterData().getStaged().getCategoryOrderHints().get(category.getId())).isEqualTo(orderHint);
 
             final Product productWithoutCategory = client()
@@ -136,7 +134,7 @@ public class ProductUpdateCommandTest extends IntegrationTest {
     @Test
     public void changeName() throws Exception {
         withUpdateableProduct(client(), product -> {
-            final LocalizedString newName = ofEnglishLocale("newName " + RANDOM.nextInt());
+            final LocalizedString newName = LocalizedString.ofEnglish("newName " + RANDOM.nextInt());
             final Product updatedProduct = client().executeBlocking(ProductUpdateCommand.of(product, ChangeName.of(newName)));
 
             assertThat(updatedProduct.getMasterData().getStaged().getName()).isEqualTo(newName);
@@ -165,7 +163,7 @@ public class ProductUpdateCommandTest extends IntegrationTest {
     @Test
     public void changeSlug() throws Exception {
         withUpdateableProduct(client(), product -> {
-            final LocalizedString newSlug = ofEnglishLocale("new-slug-" + RANDOM.nextInt());
+            final LocalizedString newSlug = LocalizedString.ofEnglish("new-slug-" + RANDOM.nextInt());
             final Product updatedProduct = client().executeBlocking(ProductUpdateCommand.of(product, ChangeSlug.of(newSlug)));
 
             assertThat(updatedProduct.getMasterData().getStaged().getSlug()).isEqualTo(newSlug);
@@ -218,7 +216,7 @@ public class ProductUpdateCommandTest extends IntegrationTest {
     @Test
     public void setDescription() throws Exception {
         withUpdateableProduct(client(), product -> {
-            final LocalizedString newDescription = ofEnglishLocale("new description " + RANDOM.nextInt());
+            final LocalizedString newDescription = LocalizedString.ofEnglish("new description " + RANDOM.nextInt());
             final ProductUpdateCommand cmd = ProductUpdateCommand.of(product, SetDescription.of(newDescription));
             final Product updatedProduct = client().executeBlocking(cmd);
 
@@ -386,7 +384,7 @@ public class ProductUpdateCommandTest extends IntegrationTest {
         withUpdateableProduct(client(), product -> {
             //changing only staged and not current
             final LocalizedString oldDescriptionOption = product.getMasterData().getStaged().getDescription();
-            final LocalizedString newDescription = ofEnglishLocale("new description " + RANDOM.nextInt());
+            final LocalizedString newDescription = LocalizedString.ofEnglish("new description " + RANDOM.nextInt());
             final ProductUpdateCommand cmd = ProductUpdateCommand.of(product, asList(Publish.of(), SetDescription.of(newDescription)));
             final Product updatedProduct = client().executeBlocking(cmd);
             assertThat(oldDescriptionOption).isNotEqualTo(newDescription);

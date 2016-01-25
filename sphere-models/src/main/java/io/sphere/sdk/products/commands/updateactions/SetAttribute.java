@@ -23,7 +23,7 @@ public class SetAttribute extends UpdateActionImpl<Product> {
     @Nullable
     private final JsonNode value;
 
-    SetAttribute(final Integer variantId, final String name, final JsonNode value) {
+    SetAttribute(final Integer variantId, final String name, @Nullable final JsonNode value) {
         super("setAttribute");
         this.variantId = variantId;
         this.name = name;

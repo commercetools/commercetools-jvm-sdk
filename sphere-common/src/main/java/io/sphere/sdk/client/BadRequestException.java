@@ -7,7 +7,7 @@ package io.sphere.sdk.client;
 public class BadRequestException extends ClientErrorException {
     private static final long serialVersionUID = 0L;
 
-    public BadRequestException() {
-        super(400);
+    public BadRequestException(final String message) {
+        super(message, 400);
     }
 }

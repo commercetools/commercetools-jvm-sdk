@@ -2,13 +2,12 @@ package io.sphere.sdk.queries;
 
 import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.SphereEnumeration;
-import io.sphere.sdk.utils.IterableUtils;
 
 import javax.annotation.Nullable;
-
 import java.util.List;
 
 import static io.sphere.sdk.queries.StringQuerySortingModel.normalize;
+import static io.sphere.sdk.utils.SphereInternalUtils.toStream;
 import static java.util.stream.Collectors.toList;
 
 public class QueryModelImpl<T> extends Base implements QueryModel<T> {
@@ -17,7 +16,7 @@ public class QueryModelImpl<T> extends Base implements QueryModel<T> {
     @Nullable
     private final String pathSegment;
 
-    protected QueryModelImpl(final QueryModel<T> parent, final String pathSegment) {
+    protected QueryModelImpl(@Nullable final QueryModel<T> parent, @Nullable final String pathSegment) {
         this.parent = parent;
         this.pathSegment = pathSegment;
     }
@@ -86,6 +85,10 @@ public class QueryModelImpl<T> extends Base implements QueryModel<T> {
         return new IntegerQuerySortingModelImpl<>(this, pathSegment);
     }
 
+    protected DoubleQuerySortingModel<T> doubleModel(final String pathSegment) {
+        return new DoubleQuerySortingModelImpl<>(this, pathSegment);
+    }
+
     protected LocalizedStringQuerySortingModelImpl<T> localizedStringQuerySortingModel(final String pathSegment) {
         return new LocalizedStringQuerySortingModelImpl<>(this, pathSegment);
     }
@@ -96,6 +99,10 @@ public class QueryModelImpl<T> extends Base implements QueryModel<T> {
 
     protected final AddressQueryModel<T> addressModel(final String pathSegment) {
         return new AddressQueryModelImpl<>(this, pathSegment);
+    }
+
+    protected final LocaleQuerySortingModel<T> localeQuerySortingModel(final String pathSegment) {
+        return new LocaleQuerySortingModelImpl<>(this, pathSegment);
     }
 
     @SuppressWarnings("unchecked")
@@ -167,7 +174,7 @@ public class QueryModelImpl<T> extends Base implements QueryModel<T> {
     }
 
     protected List<String> normalizeIterable(final Iterable<String> items) {
-        return IterableUtils.toStream(items)
+        return toStream(items)
                 .map(StringQuerySortingModel::normalize).collect(toList());
     }
 }

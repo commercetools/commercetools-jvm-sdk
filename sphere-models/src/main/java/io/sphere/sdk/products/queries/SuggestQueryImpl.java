@@ -2,10 +2,11 @@ package io.sphere.sdk.products.queries;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import io.sphere.sdk.client.HttpRequestIntent;
-import io.sphere.sdk.client.SphereRequestBase;
+import io.sphere.sdk.client.SphereRequestUtils;
 import io.sphere.sdk.http.HttpMethod;
 import io.sphere.sdk.http.HttpResponse;
 import io.sphere.sdk.http.UrlQueryBuilder;
+import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.LocalizedStringEntry;
 import io.sphere.sdk.products.SuggestionResult;
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -15,7 +16,7 @@ import java.util.List;
 import java.util.Optional;
 
 
-final class SuggestQueryImpl extends SphereRequestBase implements SuggestQuery {
+final class SuggestQueryImpl extends Base implements SuggestQuery {
     private List<LocalizedStringEntry> searchKeywords;
     @Nullable
     private final Integer limit;
@@ -26,7 +27,7 @@ final class SuggestQueryImpl extends SphereRequestBase implements SuggestQuery {
         this(searchKeywords, null, null);
     }
 
-    private SuggestQueryImpl(final List<LocalizedStringEntry> searchKeywords, final Integer limit, final Boolean staged) {
+    private SuggestQueryImpl(final List<LocalizedStringEntry> searchKeywords, @Nullable final Integer limit, @Nullable final Boolean staged) {
         this.searchKeywords = searchKeywords;
         this.limit = limit;
         this.staged = staged;
@@ -44,7 +45,7 @@ final class SuggestQueryImpl extends SphereRequestBase implements SuggestQuery {
 
     @Override
     public SuggestionResult deserialize(final HttpResponse httpResponse) {
-        return deserialize(httpResponse, new TypeReference<SuggestionResult>() {
+        return SphereRequestUtils.deserialize(httpResponse, new TypeReference<SuggestionResult>() {
             @Override
             public String toString() {
                 return "TypeReference<SuggestionResult>";

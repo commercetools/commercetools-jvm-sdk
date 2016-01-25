@@ -18,7 +18,7 @@ import java.util.function.Function;
 
 import static io.sphere.sdk.taxcategories.TaxCategoryFixtures.withTaxCategory;
 import static io.sphere.sdk.test.SphereTestUtils.*;
-import static io.sphere.sdk.utils.SetUtils.asSet;
+import static java.util.Collections.singleton;
 
 public class ShippingMethodFixtures {
     public static void withShippingMethod(final BlockingSphereClient client, final ShippingMethodDraft draft, final Consumer<ShippingMethod> consumer){
@@ -37,7 +37,7 @@ public class ShippingMethodFixtures {
         if (zoneOptional.isPresent()) {
             zone = zoneOptional.get();
         } else {
-            zone = client.executeBlocking(ZoneCreateCommand.of(ZoneDraft.of("de", asSet(Location.of(DE)))));
+            zone = client.executeBlocking(ZoneCreateCommand.of(ZoneDraft.of("de", singleton(Location.of(DE)))));
         }
         withUpdateableShippingMethod(client, shippingMethodWithOutZone -> {
             final ShippingMethod updated = client.executeBlocking(ShippingMethodUpdateCommand.of(shippingMethodWithOutZone, asList(AddZone.of(zone), AddShippingRate.of(ShippingRate.of(EURO_1), zone))));

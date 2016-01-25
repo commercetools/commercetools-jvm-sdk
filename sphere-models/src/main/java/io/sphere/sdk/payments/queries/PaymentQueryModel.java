@@ -4,68 +4,37 @@ import io.sphere.sdk.customers.Customer;
 import io.sphere.sdk.payments.Payment;
 import io.sphere.sdk.queries.*;
 import io.sphere.sdk.types.queries.CustomQueryModel;
-import io.sphere.sdk.types.queries.CustomQueryModelImpl;
-import io.sphere.sdk.types.queries.CustomResourceQueryModelImpl;
 import io.sphere.sdk.types.queries.WithCustomQueryModel;
 
 /**
  * {@doc.gen summary payments}
  */
-public final class PaymentQueryModel extends CustomResourceQueryModelImpl<Payment> implements WithCustomQueryModel<Payment> {
+public interface PaymentQueryModel extends ResourceQueryModel<Payment>, WithCustomQueryModel<Payment> {
+    CustomQueryModel<Payment> custom();
 
-    public static PaymentQueryModel of() {
-        return new PaymentQueryModel(null, null);
-    }
+    ReferenceOptionalQueryModel<Payment, Customer> customer();
 
-    private PaymentQueryModel(QueryModel<Payment> parent, String pathSegment) {
-        super(parent, pathSegment);
-    }
+    StringQuerySortingModel<Payment> externalId();
 
-    public CustomQueryModel<Payment> custom() {
-        return new CustomQueryModelImpl<>(this, "custom");
-    }
+    StringQuerySortingModel<Payment> interfaceId();
 
-    public ReferenceOptionalQueryModel<Payment, Customer> customer() {
-        return referenceOptionalModel("customer");
-    }
+    MoneyQueryModel<Payment> amountPlanned();
 
-    public StringQuerySortingModel<Payment> externalId() {
-        return stringModel("externalId");
-    }
+    MoneyQueryModel<Payment> amountAuthorized();
 
-    public StringQuerySortingModel<Payment> interfaceId() {
-        return stringModel("interfaceId");
-    }
+    MoneyQueryModel<Payment> amountPaid();
 
-    public MoneyQueryModel<Payment> amountPlanned() {
-        return moneyModel("amountPlanned");
-    }
+    MoneyQueryModel<Payment> amountRefunded();
 
-    public MoneyQueryModel<Payment> amountAuthorized() {
-        return moneyModel("amountAuthorized");
-    }
+    TimestampSortingModel<Payment> authorizedUntil();
 
-    public MoneyQueryModel<Payment> amountPaid() {
-        return moneyModel("amountPaid");
-    }
+    PaymentMethodInfoQueryModel<Payment> paymentMethodInfo();
 
-    public MoneyQueryModel<Payment> amountRefunded() {
-        return moneyModel("amountRefunded");
-    }
+    PaymentStatusQueryModel<Payment> paymentStatus();
 
-    public TimestampSortingModel<Payment> authorizedUntil() {
-        return timestampSortingModel("authorizedUntil");
-    }
+    TransactionCollectionQueryModel<Payment> transactions();
 
-    public PaymentMethodInfoQueryModel<Payment> paymentMethodInfo() {
-        return new PaymentMethodInfoQueryModelImpl<>(this, "paymentMethodInfo");
-    }
-
-    public PaymentStatusQueryModel<Payment> paymentStatus() {
-        return new PaymentStatusQueryModelImpl<>(this, "paymentStatus");
-    }
-
-    public TransactionCollectionQueryModel<Payment> transactions() {
-        return new TransactionCollectionQueryModelImpl<>(this, "transactions");
+    static PaymentQueryModel of() {
+        return new PaymentQueryModelImpl(null, null);
     }
 }

@@ -13,4 +13,11 @@ public class CustomerDraftBuilderTest {
         assertThat(CustomerDraftBuilder.of(draft).toString()).doesNotContain(secret);
     }
 
+    @Test
+    public void constructionWithoutName() {
+        final CustomerDraft customerDraft = CustomerDraft.of(randomString(), "password");
+        assertThat(customerDraft.getLastName()).isNull();
+        assertThat(customerDraft.getFirstName()).isNull();
+        assertThat(customerDraft.getName().getLastName()).isNull();
+    }
 }

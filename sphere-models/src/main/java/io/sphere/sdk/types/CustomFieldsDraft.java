@@ -3,12 +3,12 @@ package io.sphere.sdk.types;
 import com.fasterxml.jackson.databind.JsonNode;
 import io.sphere.sdk.json.SphereJsonUtils;
 import io.sphere.sdk.models.ResourceIdentifier;
-import io.sphere.sdk.utils.MapUtils;
 
 import javax.annotation.Nullable;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import static io.sphere.sdk.utils.SphereInternalUtils.immutableCopyOf;
 import static java.util.Objects.requireNonNull;
 
 /**
@@ -22,7 +22,7 @@ public class CustomFieldsDraft {
 
     CustomFieldsDraft(@Nullable final String typeId, @Nullable final String typeKey, final Map<String, JsonNode> fields) {
         this.type = ResourceIdentifier.ofIdOrKey(typeId, typeKey);
-        this.fields = MapUtils.immutableCopyOf(fields);
+        this.fields = immutableCopyOf(fields);
     }
 
     public static CustomFieldsDraft ofCustomFields(final CustomFields custom) {
@@ -73,6 +73,7 @@ public class CustomFieldsDraft {
         return type;
     }
 
+    @Nullable
     public Map<String, JsonNode> getFields() {
         return fields;
     }

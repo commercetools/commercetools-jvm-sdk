@@ -1,7 +1,7 @@
 package io.sphere.sdk.states.commands;
 
 import io.sphere.sdk.commands.DeleteCommand;
-import io.sphere.sdk.expansion.MetaModelExpansionDsl;
+import io.sphere.sdk.expansion.MetaModelReferenceExpansionDsl;
 import io.sphere.sdk.models.Versioned;
 import io.sphere.sdk.states.State;
 import io.sphere.sdk.states.expansion.StateExpansionModel;
@@ -11,7 +11,7 @@ import io.sphere.sdk.states.expansion.StateExpansionModel;
  <p>Example:</p>
  {@include.example io.sphere.sdk.states.commands.StateDeleteCommandTest#execution()}
  */
-public interface StateDeleteCommand extends MetaModelExpansionDsl<State, StateDeleteCommand, StateExpansionModel<State>>, DeleteCommand<State> {
+public interface StateDeleteCommand extends MetaModelReferenceExpansionDsl<State, StateDeleteCommand, StateExpansionModel<State>>, DeleteCommand<State> {
     static StateDeleteCommand of(final Versioned<State> versioned) {
         return new StateDeleteCommandImpl(versioned);
     }

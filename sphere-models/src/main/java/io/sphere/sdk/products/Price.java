@@ -52,10 +52,10 @@ public class Price extends Base implements Custom {
     private final CustomFields custom;
 
     @JsonCreator
-    Price(final MonetaryAmount value, final CountryCode country,
-          final Reference<CustomerGroup> customerGroup, final Reference<Channel> channel,
-          final DiscountedPrice discounted,
-          @Nullable final ZonedDateTime validFrom, @Nullable final ZonedDateTime validUntil, final String id,
+    Price(final MonetaryAmount value, @Nullable final CountryCode country,
+          @Nullable final Reference<CustomerGroup> customerGroup, @Nullable final Reference<Channel> channel,
+          @Nullable final DiscountedPrice discounted,
+          @Nullable final ZonedDateTime validFrom, @Nullable final ZonedDateTime validUntil, @Nullable final String id,
           @Nullable final CustomFields custom) {
         this.value = value;
         this.country = country;

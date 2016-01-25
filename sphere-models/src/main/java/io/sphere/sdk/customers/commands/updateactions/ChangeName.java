@@ -12,7 +12,6 @@ import javax.annotation.Nullable;
  *  {@doc.gen intro}
  *
  * {@include.example io.sphere.sdk.customers.commands.CustomerUpdateCommandTest#changeName()}
- *
  * @see Customer
  */
 public class ChangeName extends UpdateActionImpl<Customer> {
@@ -23,7 +22,7 @@ public class ChangeName extends UpdateActionImpl<Customer> {
     @Nullable
     private final String title;
 
-    private ChangeName(final String firstName, final String lastName, final String middleName, final String title) {
+    private ChangeName(final String firstName, final String lastName, @Nullable final String middleName, @Nullable final String title) {
         super("changeName");
         this.firstName = firstName;
         this.lastName = lastName;

@@ -1,29 +1,22 @@
 package io.sphere.sdk.products.queries;
 
-import io.sphere.sdk.queries.*;
+import io.sphere.sdk.queries.QueryModel;
+import io.sphere.sdk.queries.QueryPredicate;
+import io.sphere.sdk.queries.StringQueryModel;
 
 import javax.annotation.Nullable;
 import java.util.function.Function;
 
-public class ProductVariantQueryModel<T> extends QueryModelImpl<T> {
+public interface ProductVariantQueryModel<T> {
+    StringQueryModel<T> sku();
 
-    public ProductVariantQueryModel(@Nullable final QueryModel<T> parent, @Nullable final String pathSegment) {
-        super(parent, pathSegment);
-    }
+    QueryPredicate<T> where(QueryPredicate<PartialProductVariantQueryModel> embeddedPredicate);
 
-    public StringQueryModel<T> sku() {
-        return stringModel("sku");
-    }
+    QueryPredicate<T> where(Function<PartialProductVariantQueryModel, QueryPredicate<PartialProductVariantQueryModel>> embeddedPredicate);
 
-    public QueryPredicate<T> where(final QueryPredicate<PartialProductVariantQueryModel> embeddedPredicate) {
-        return embedPredicate(embeddedPredicate);
-    }
+    PriceCollectionQueryModel<T> prices();
 
-    public QueryPredicate<T> where(final Function<PartialProductVariantQueryModel, QueryPredicate<PartialProductVariantQueryModel>> embeddedPredicate) {
-        return where(embeddedPredicate.apply(PartialProductVariantQueryModel.of()));
-    }
-
-    public PriceCollectionQueryModel<T> prices() {
-        return new PriceCollectionQueryModel<>(this, "prices");
+    static <T> ProductVariantQueryModel<T> of(@Nullable final QueryModel<T> parent, @Nullable final String pathSegment) {
+        return new ProductVariantQueryModelImpl<>(parent, pathSegment);
     }
 }

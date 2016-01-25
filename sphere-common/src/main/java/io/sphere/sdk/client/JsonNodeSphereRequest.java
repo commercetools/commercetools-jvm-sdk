@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import io.sphere.sdk.http.HttpMethod;
 import io.sphere.sdk.http.HttpResponse;
 import io.sphere.sdk.json.SphereJsonUtils;
+import io.sphere.sdk.json.TypeReferences;
 import io.sphere.sdk.models.Base;
 
 import javax.annotation.Nullable;
@@ -20,8 +21,9 @@ public class JsonNodeSphereRequest extends Base implements SphereRequest<JsonNod
     @Nullable
     @Override
     public JsonNode deserialize(final HttpResponse httpResponse) {
-        return Optional.ofNullable(httpResponse.getResponseBody()).map(body -> SphereJsonUtils.readObject(body, new TypeReference<JsonNode>() {
-        })).orElse(null);
+        return Optional.ofNullable(httpResponse.getResponseBody())
+                .map(body -> SphereJsonUtils.readObject(body, TypeReferences.jsonNodeTypeReference()))
+                .orElse(null);
     }
 
     @Override

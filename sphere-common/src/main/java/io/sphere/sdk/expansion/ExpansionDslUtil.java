@@ -4,7 +4,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.function.Function;
 
-import static io.sphere.sdk.utils.ListUtils.listOf;
+import static io.sphere.sdk.utils.SphereInternalUtils.listOf;
 
 public final class ExpansionDslUtil {
     private ExpansionDslUtil() {
@@ -12,7 +12,7 @@ public final class ExpansionDslUtil {
 
     public static <T, C, E> C plusExpansionPaths(final MetaModelExpansionDslExpansionModelRead<T, C, E> meta, final Function<E, ExpansionPathContainer<T>> m) {
         return meta.plusExpansionPaths(m.apply(meta.expansionModel()).expansionPaths());
-    };
+    }
 
     public static <T, C, E> C withExpansionPaths(final MetaModelExpansionDslExpansionModelRead<T, C, E> meta, final Function<E, ExpansionPathContainer<T>> m) {
         return meta.withExpansionPaths(m.apply(meta.expansionModel()).expansionPaths());

@@ -27,7 +27,7 @@ final class CartDiscountImpl extends ResourceImpl<CartDiscount> implements CartD
     private final List<Reference<JsonNode>> references;
 
     @JsonCreator
-    public CartDiscountImpl(final String id, final Long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt, final String cartPredicate, final LocalizedString name, final LocalizedString description, final CartDiscountValue value, final CartDiscountTarget target, final String sortOrder, final Boolean isActive, final ZonedDateTime validFrom, final ZonedDateTime validUntil, final Boolean requiresDiscountCode, final List<Reference<JsonNode>> references) {
+    public CartDiscountImpl(final String id, final Long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt, final String cartPredicate, final LocalizedString name, @Nullable final LocalizedString description, final CartDiscountValue value, final CartDiscountTarget target, final String sortOrder, final Boolean isActive, @Nullable final ZonedDateTime validFrom, @Nullable final ZonedDateTime validUntil, final Boolean requiresDiscountCode, final List<Reference<JsonNode>> references) {
         super(id, version, createdAt, lastModifiedAt);
         this.cartPredicate = cartPredicate;
         this.name = name;

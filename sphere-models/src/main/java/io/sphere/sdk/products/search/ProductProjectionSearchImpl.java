@@ -28,5 +28,4 @@ final class ProductProjectionSearchImpl extends MetaModelSearchDslImpl<ProductPr
     private static List<HttpQueryParameter> additionalParametersOf(final ProductProjectionType productProjectionType) {
         return singletonList(HttpQueryParameter.of("staged", productProjectionType.isStaged().toString()));
     }
-
 }

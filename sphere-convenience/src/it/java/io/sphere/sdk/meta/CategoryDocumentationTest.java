@@ -1,5 +1,6 @@
 package io.sphere.sdk.meta;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.categories.CategoryDraft;
 import io.sphere.sdk.categories.CategoryDraftBuilder;
@@ -10,7 +11,7 @@ import io.sphere.sdk.categories.commands.CategoryUpdateCommand;
 import io.sphere.sdk.categories.commands.updateactions.ChangeParent;
 import io.sphere.sdk.categories.queries.CategoryQuery;
 import io.sphere.sdk.client.BlockingSphereClient;
-import io.sphere.sdk.client.SphereRequest;
+import io.sphere.sdk.jsonnodes.queries.JsonNodeQuery;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Referenceable;
@@ -29,7 +30,7 @@ import io.sphere.sdk.queries.ExperimentalReactiveStreamUtils;
 import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.queries.QueryPredicate;
 import io.sphere.sdk.test.IntegrationTest;
-import io.sphere.sdk.utils.SetUtils;
+import io.sphere.sdk.utils.SphereInternalUtils;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.reactivestreams.Publisher;
@@ -47,6 +48,7 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 
 import static io.sphere.sdk.test.SphereTestUtils.randomKey;
+import static io.sphere.sdk.utils.SphereInternalUtils.asSet;
 import static java.lang.String.format;
 import static java.util.Arrays.asList;
 import static java.util.Locale.ENGLISH;
@@ -80,6 +82,17 @@ public class CategoryDocumentationTest extends IntegrationTest {
         assertThat(categories)
                 .hasSize(15)
                 .matches(cats -> cats.parallelStream().anyMatch(cat -> cat.getSlug().get(ENGLISH).equals("boots-women")));
+    }
+    @Test
+    public void fetchAllAsJson() throws Exception {
+        final Publisher<JsonNode> categoryPublisher =
+                ExperimentalReactiveStreamUtils.publisherOf(JsonNodeQuery.of("/categories"), (JsonNode jsonNode) -> jsonNode.get("id").asText(), sphereClient());
+        final CompletionStage<List<JsonNode>> categoriesStage =
+                ExperimentalReactiveStreamUtils.collectAll(categoryPublisher);
+        final List<JsonNode> categories = categoriesStage.toCompletableFuture().join();
+        assertThat(categories)
+                .hasSize(15)
+                .matches(cats -> cats.parallelStream().anyMatch(cat -> cat.get("slug").get("en").asText().equals("boots-women")));
     }
 
     @Test
@@ -289,7 +302,7 @@ public class CategoryDocumentationTest extends IntegrationTest {
     private static void withProductInCategory(final BlockingSphereClient client, final Referenceable<Category> category, final Consumer<Product> user) {
         final ProductType productType = client.executeBlocking(ProductTypeCreateCommand.of(ProductTypeDraft.of(randomKey(), CategoryDocumentationTest.class.getSimpleName(), "", asList())));
         final LocalizedString name = LocalizedString.of(ENGLISH, "foo");
-        final Product product = client.executeBlocking(ProductCreateCommand.of(ProductDraftBuilder.of(productType, name, name.slugifiedUnique(), ProductVariantDraftBuilder.of().build()).categories(SetUtils.asSet(category.toReference())).build()));
+        final Product product = client.executeBlocking(ProductCreateCommand.of(ProductDraftBuilder.of(productType, name, name.slugifiedUnique(), ProductVariantDraftBuilder.of().build()).categories(asSet(category.toReference())).build()));
         user.accept(product);
         client.executeBlocking(ProductDeleteCommand.of(product));
         client.executeBlocking(ProductTypeDeleteCommand.of(productType));

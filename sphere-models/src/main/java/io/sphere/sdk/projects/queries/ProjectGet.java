@@ -2,14 +2,14 @@ package io.sphere.sdk.projects.queries;
 
 import io.sphere.sdk.client.HttpRequestIntent;
 import io.sphere.sdk.client.SphereRequest;
-import io.sphere.sdk.client.SphereRequestBase;
 import io.sphere.sdk.http.HttpResponse;
+import io.sphere.sdk.models.Base;
 import io.sphere.sdk.projects.Project;
 import io.sphere.sdk.json.SphereJsonUtils;
 
 import static io.sphere.sdk.http.HttpMethod.GET;
 
-public class ProjectGet extends SphereRequestBase implements SphereRequest<Project> {
+public class ProjectGet extends Base implements SphereRequest<Project> {
     private ProjectGet() {
     }
 

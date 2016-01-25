@@ -28,9 +28,11 @@ import java.io.UncheckedIOException;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Properties;
+import java.util.concurrent.CompletionStage;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Consumer;
 
+import static io.sphere.sdk.utils.SphereInternalUtils.listOf;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public abstract class IntegrationTest {
@@ -84,11 +86,11 @@ public abstract class IntegrationTest {
     }
 
     private static SphereClient withMaybeDeprecationWarnTool(final SphereClient underlying) {
-        if ("false".equals(System.getenv("JVM_SDK_IT_DEPRECATION"))) {
+        if ("true".equals(System.getenv("JVM_SDK_IT_DEPRECATION"))) {
+            return DeprecationExceptionSphereClientDecorator.of(underlying);
+        } else {
             LoggerFactory.getLogger(IntegrationTest.class).info("Deprecation client deactivated.");
             return underlying;
-        } else {
-            return DeprecationExceptionSphereClientDecorator.of(underlying);
         }
     }
 
@@ -165,5 +167,10 @@ public abstract class IntegrationTest {
         final SoftAssertions softly = new SoftAssertions();
         assertionsConsumer.accept(softly);
         softly.assertAll();
+    }
+
+
+    protected static void await(final CompletionStage<?> wait1, final CompletionStage<?> ... moreWait) {
+        listOf(wait1, moreWait).forEach(stage -> stage.toCompletableFuture().join());
     }
 }

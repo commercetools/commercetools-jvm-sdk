@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.core.type.TypeReference;
-import io.sphere.sdk.utils.StringUtils;
+import io.sphere.sdk.utils.SphereInternalUtils;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -15,9 +15,7 @@ import java.util.stream.Collector;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
-import static io.sphere.sdk.utils.IterableUtils.toStream;
-import static io.sphere.sdk.utils.MapUtils.immutableCopyOf;
-import static io.sphere.sdk.utils.MapUtils.mapOf;
+import static io.sphere.sdk.utils.SphereInternalUtils.*;
 import static java.lang.String.format;
 import static java.util.Collections.*;
 import static java.util.Objects.requireNonNull;
@@ -112,13 +110,14 @@ public class LocalizedString extends Base {
      *
      * {@include.example io.sphere.sdk.models.LocalizedStringTest#ofEnglishLocale()}
      *
-     * @param value the translation in English
+     * @param translationForEnglish the translation in English
      * @return new instance with one key value pair
+     * @deprecated use {@link #ofEnglish(String)} instead
      */
+    @Deprecated
     @JsonIgnore
-    public static LocalizedString ofEnglishLocale(final String value) {
-        requireNonNull(value);
-        return of(Locale.ENGLISH, value);
+    public static LocalizedString ofEnglishLocale(final String translationForEnglish) {
+        return LocalizedString.ofEnglish(translationForEnglish);
     }
 
     /**
@@ -271,7 +270,7 @@ public class LocalizedString extends Base {
      * @return new instance
      */
     public LocalizedString slugified() {
-        return mapValue((locale, value) -> StringUtils.slugify(value));
+        return mapValue((locale, value) -> slugify(value));
     }
 
     /**
@@ -283,7 +282,7 @@ public class LocalizedString extends Base {
      * @return new instance
      */
     public LocalizedString slugifiedUnique() {
-        return mapValue((locale, value) -> StringUtils.slugifyUnique(value));
+        return mapValue((locale, value) -> slugifyUnique(value));
     }
 
     /**
@@ -336,6 +335,7 @@ public class LocalizedString extends Base {
     }
 
     public static LocalizedString ofEnglish(final String translationForEnglish) {
-        return LocalizedString.ofEnglishLocale(translationForEnglish);
+        requireNonNull(translationForEnglish);
+        return of(Locale.ENGLISH, translationForEnglish);
     }
 }

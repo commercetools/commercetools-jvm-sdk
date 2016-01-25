@@ -45,7 +45,7 @@ class CustomerImpl extends ResourceImpl<Customer> implements Customer {
     private final CustomFields custom;
 
     @JsonCreator
-    public CustomerImpl(final String id, final Long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt, final String customerNumber, final String email, final String firstName, final String lastName, final String password, final String middleName, final String title, final List<Address> addresses, final String defaultShippingAddressId, final String defaultBillingAddressId, final Boolean isEmailVerified, final String externalId, final Reference<CustomerGroup> customerGroup, final String companyName, final String vatId, final LocalDate dateOfBirth, final CustomFields custom) {
+    public CustomerImpl(final String id, final Long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt, @Nullable final String customerNumber, final String email, final String firstName, final String lastName, final String password, @Nullable final String middleName, @Nullable final String title, final List<Address> addresses, @Nullable final String defaultShippingAddressId, @Nullable final String defaultBillingAddressId, final Boolean isEmailVerified, @Nullable final String externalId, @Nullable final Reference<CustomerGroup> customerGroup, @Nullable final String companyName, @Nullable final String vatId, @Nullable final LocalDate dateOfBirth, @Nullable final CustomFields custom) {
         super(id, version, createdAt, lastModifiedAt);
         this.customerNumber = customerNumber;
         this.email = email;
@@ -66,6 +66,7 @@ class CustomerImpl extends ResourceImpl<Customer> implements Customer {
         this.custom = custom;
     }
 
+    @Nullable
     @Override
     public String getCustomerNumber() {
         return customerNumber;

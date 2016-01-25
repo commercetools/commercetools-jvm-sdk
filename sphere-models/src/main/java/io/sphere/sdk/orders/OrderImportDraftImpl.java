@@ -42,7 +42,7 @@ final class OrderImportDraftImpl extends Base implements OrderImportDraft {
     @Nullable
     private final ZonedDateTime completedAt;
 
-    public OrderImportDraftImpl(final Address billingAddress, final String orderNumber, final String customerId, final String customerEmail, final List<LineItemImportDraft> lineItems, final List<CustomLineItemImportDraft> customLineItems, final MonetaryAmount totalPrice, final TaxedPrice taxedPrice, final Address shippingAddress, final Reference<CustomerGroup> customerGroup, final CountryCode country, final OrderState orderState, final ShipmentState shipmentState, final PaymentState paymentState, final OrderShippingInfo shippingInfo, final ZonedDateTime completedAt) {
+    public OrderImportDraftImpl(@Nullable final Address billingAddress, @Nullable final String orderNumber, @Nullable final String customerId, @Nullable final String customerEmail, final List<LineItemImportDraft> lineItems, final List<CustomLineItemImportDraft> customLineItems, final MonetaryAmount totalPrice, @Nullable final TaxedPrice taxedPrice, @Nullable final Address shippingAddress, @Nullable final Reference<CustomerGroup> customerGroup, @Nullable final CountryCode country, final OrderState orderState, @Nullable final ShipmentState shipmentState, @Nullable final PaymentState paymentState, @Nullable final OrderShippingInfo shippingInfo, @Nullable final ZonedDateTime completedAt) {
         this.billingAddress = billingAddress;
         this.orderNumber = orderNumber;
         this.customerId = customerId;
@@ -67,6 +67,7 @@ final class OrderImportDraftImpl extends Base implements OrderImportDraft {
         return billingAddress;
     }
 
+    @Nullable
     @Override
     public ZonedDateTime getCompletedAt() {
         return completedAt;

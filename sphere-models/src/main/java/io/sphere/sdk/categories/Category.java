@@ -11,7 +11,7 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import javax.annotation.Nullable;
 import java.util.List;
 
-import static io.sphere.sdk.utils.ListUtils.join;
+import static io.sphere.sdk.utils.SphereInternalUtils.join;
 
 /**
  * Categories are used to organize products in a hierarchical structure.

@@ -42,8 +42,8 @@ class CategoryImpl extends ResourceImpl<Category> implements Category {
                  final List<Reference<Category>> ancestors,
                  @Nullable final Reference<Category> parent,
                  @Nullable final String orderHint, @Nullable final String externalId,
-                 final LocalizedString metaTitle, final LocalizedString metaDescription,
-                 final LocalizedString metaKeywords, @Nullable final CustomFields custom) {
+                 @Nullable final LocalizedString metaTitle, @Nullable final LocalizedString metaDescription,
+                 @Nullable final LocalizedString metaKeywords, @Nullable final CustomFields custom) {
         super(id, version, createdAt, lastModifiedAt);
         this.name = name;
         this.slug = slug;

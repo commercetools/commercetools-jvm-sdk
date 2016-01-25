@@ -4,12 +4,13 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.LocalizedString;
+import io.sphere.sdk.utils.SphereInternalUtils;
 
 import javax.annotation.Nullable;
 import java.util.Collections;
 import java.util.Set;
 
-import static io.sphere.sdk.utils.SetUtils.asSet;
+import static io.sphere.sdk.utils.SphereInternalUtils.asSet;
 
 /**
  * Template to create a new Channel.
@@ -29,7 +30,7 @@ public class ChannelDraft extends Base {
     private final LocalizedString description;
 
     @JsonCreator
-    ChannelDraft(final String key, final Set<ChannelRole> roles, @Nullable final LocalizedString name, @Nullable final LocalizedString description) {
+    ChannelDraft(final String key, @Nullable final Set<ChannelRole> roles, @Nullable final LocalizedString name, @Nullable final LocalizedString description) {
         this.key = key;
         this.roles = roles;
         this.name = name;
@@ -44,6 +45,7 @@ public class ChannelDraft extends Base {
         return key;
     }
 
+    @Nullable
     public Set<ChannelRole> getRoles() {
         return roles;
     }

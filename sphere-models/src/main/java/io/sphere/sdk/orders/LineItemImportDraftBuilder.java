@@ -24,7 +24,7 @@ public class LineItemImportDraftBuilder extends Base implements Builder<LineItem
     @Nullable
     private TaxRate taxRate;
 
-    private LineItemImportDraftBuilder(final ProductVariantImportDraft variant, final Long quantity, final Price price, final String productId, final LocalizedString name) {
+    private LineItemImportDraftBuilder(final ProductVariantImportDraft variant, final Long quantity, final Price price, @Nullable final String productId, final LocalizedString name) {
         this.price = price;
         this.variant = variant;
         this.quantity = quantity;

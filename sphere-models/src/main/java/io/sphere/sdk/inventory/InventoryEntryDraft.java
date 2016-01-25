@@ -21,7 +21,7 @@ public class InventoryEntryDraft extends Base {
     private final Reference<Channel> supplyChannel;
 
     @JsonCreator
-    private InventoryEntryDraft(final String sku, final Long quantityOnStock, final ZonedDateTime expectedDelivery, final Integer restockableInDays, final Reference<Channel> supplyChannel) {
+    private InventoryEntryDraft(final String sku, final Long quantityOnStock, @Nullable final ZonedDateTime expectedDelivery, @Nullable final Integer restockableInDays, @Nullable final Reference<Channel> supplyChannel) {
         this.expectedDelivery = expectedDelivery;
         this.sku = sku;
         this.quantityOnStock = quantityOnStock;

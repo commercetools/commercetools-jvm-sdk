@@ -23,7 +23,7 @@ final class ProductVariantImportDraftImpl extends Base implements ProductVariant
     @Nullable
     private final List<Image> images;
 
-    ProductVariantImportDraftImpl(final Integer id, final String sku, final List<Price> prices, final List<Image> images, final List<AttributeImportDraft> attributes, final String productId) {
+    ProductVariantImportDraftImpl(@Nullable final Integer id, @Nullable final String sku, @Nullable final List<Price> prices, @Nullable final List<Image> images, @Nullable final List<AttributeImportDraft> attributes, @Nullable final String productId) {
         this.attributes = attributes;
         this.id = id;
         this.sku = sku;

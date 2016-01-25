@@ -3,6 +3,7 @@ package io.sphere.sdk.products;
 import io.sphere.sdk.json.TypeReferences;
 import io.sphere.sdk.json.SphereJsonUtils;
 import io.sphere.sdk.utils.MoneyImpl;
+import io.sphere.sdk.utils.SphereInternalUtils;
 import org.javamoney.moneta.function.MonetaryUtil;
 import org.junit.Test;
 
@@ -11,7 +12,7 @@ import javax.money.MonetaryAmount;
 import java.math.BigDecimal;
 
 import static io.sphere.sdk.models.DefaultCurrencyUnits.EUR;
-import static io.sphere.sdk.utils.SetUtils.asSet;
+import static io.sphere.sdk.utils.SphereInternalUtils.asSet;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class MoneyTest {
