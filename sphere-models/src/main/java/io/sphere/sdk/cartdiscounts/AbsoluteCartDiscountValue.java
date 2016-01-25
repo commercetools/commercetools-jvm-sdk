@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * Cart discount value of an absolute amount.
  *
- * {@include.example io.sphere.sdk.cartdiscounts.commands.CartDiscountCreateCommandTest#execution()}
+ * {@include.example io.sphere.sdk.cartdiscounts.commands.CartDiscountUpdateCommandTest#changeValue()}
  *
  * @see CartDiscountValue
  * @see CartDiscount#getValue()
