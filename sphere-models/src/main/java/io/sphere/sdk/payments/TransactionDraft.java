@@ -6,6 +6,9 @@ import javax.annotation.Nullable;
 import javax.money.MonetaryAmount;
 import java.time.ZonedDateTime;
 
+/**
+ * @see TransactionDraftBuilder
+ */
 @JsonDeserialize(as = TransactionDraftImpl.class)
 public interface TransactionDraft {
     @Nullable
