@@ -12,6 +12,9 @@ import io.sphere.sdk.models.Address;
  * {@include.example io.sphere.sdk.customers.commands.CustomerUpdateCommandTest#addAddress()}
  *
  * @see Customer
+ * @see Customer#getAddresses()
+ * @see Customer#getDefaultBillingAddress()
+ * @see Customer#getDefaultShippingAddress()
  */
 public class AddAddress extends UpdateActionImpl<Customer> {
     private final Address address;
