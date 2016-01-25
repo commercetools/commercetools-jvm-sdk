@@ -1,6 +1,6 @@
 package io.sphere.sdk.categories;
 
-import io.sphere.sdk.models.Base;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.WithLocalizedSlug;
@@ -14,64 +14,24 @@ import javax.annotation.Nullable;
  *
  * <p>For construction see {@link CategoryDraftBuilder}.</p>
  */
-public class CategoryDraft extends Base implements WithLocalizedSlug, CustomDraft {
-    private final LocalizedString name;
-    private final LocalizedString slug;
-    @Nullable
-    private final LocalizedString description;
-    @Nullable
-    private final Reference<Category> parent;
-    @Nullable
-    private final String orderHint;
-    @Nullable
-    private final String externalId;
-    @Nullable
-    private final CustomFieldsDraft custom;
+@JsonDeserialize(as = CategoryDraftImpl.class)
+public interface CategoryDraft extends CustomDraft, WithLocalizedSlug {
+    LocalizedString getName();
 
-    CategoryDraft(final LocalizedString name, final LocalizedString slug,
-                  @Nullable final LocalizedString description, @Nullable final Reference<Category> parent,
-                  @Nullable final String orderHint, @Nullable final String externalId,
-                  @Nullable final CustomFieldsDraft custom) {
-        this.name = name;
-        this.slug = slug;
-        this.description = description;
-        this.parent = parent;
-        this.orderHint = orderHint;
-        this.externalId = externalId;
-        this.custom = custom;
-    }
-
-    public LocalizedString getName() {
-        return name;
-    }
-
-    @Override
-    public LocalizedString getSlug() {
-        return slug;
-    }
+    LocalizedString getSlug();
 
     @Nullable
-    public LocalizedString getDescription() {
-        return description;
-    }
+    LocalizedString getDescription();
 
     @Nullable
-    public Reference<Category> getParent() {
-        return parent;
-    }
+    Reference<Category> getParent();
 
     @Nullable
-    public String getOrderHint() {
-        return orderHint;
-    }
+    String getOrderHint();
 
     @Nullable
-    public String getExternalId() {
-        return externalId;
-    }
+    String getExternalId();
 
     @Nullable
-    public CustomFieldsDraft getCustom() {
-        return custom;
-    }
+    CustomFieldsDraft getCustom();
 }
