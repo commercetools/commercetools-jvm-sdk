@@ -617,7 +617,7 @@ assertThat(presentAttributes).containsOnly(COLOR_ATTR_NAME, RRP_ATTR_NAME);
  <table>
     <caption>attribute properties</caption>
     <tr>
-        <th></th><th><a href="../../../../io/sphere/sdk/products/attributes/Attribute.html" title="interface in io.sphere.sdk.products.attributes"><code>Attribute</code></a></th><th><a href="../../../../io/sphere/sdk/products/attributes/AttributeDraft.html" title="class in io.sphere.sdk.products.attributes"><code>AttributeDraft</code></a></th><th><a href="../../../../io/sphere/sdk/products/attributes/AttributeImportDraft.html" title="class in io.sphere.sdk.products.attributes"><code>AttributeImportDraft</code></a></th>
+        <th></th><th><a href="../../../../io/sphere/sdk/products/attributes/Attribute.html" title="interface in io.sphere.sdk.products.attributes"><code>Attribute</code></a></th><th><a href="../../../../io/sphere/sdk/products/attributes/AttributeDraft.html" title="interface in io.sphere.sdk.products.attributes"><code>AttributeDraft</code></a></th><th><a href="../../../../io/sphere/sdk/products/attributes/AttributeImportDraft.html" title="interface in io.sphere.sdk.products.attributes"><code>AttributeImportDraft</code></a></th>
     </tr>
  <tr> <td>purpose</td>    <td>read access</td>    <td>write product, create product</td>    <td>order import</td></tr>
  <tr> <td>reference expansion</td>    <td>keeps expanded references</td>    <td>no expansion</td>    <td>no expansion</td></tr>
@@ -634,7 +634,6 @@ assertThat(presentAttributes).containsOnly(COLOR_ATTR_NAME, RRP_ATTR_NAME);
 import io.sphere.sdk.models.Referenceable;
 import io.sphere.sdk.products.*;
 import io.sphere.sdk.test.IntegrationTest;
-import io.sphere.sdk.utils.SphereInternalUtils;
 import org.junit.Test;
 import java.util.*;
 import static io.sphere.sdk.products.ProductFixtures.withProduct;
@@ -753,8 +752,7 @@ import static java.util.stream.Collectors.toList;
     }
 
     private ProductTypeDraft createNutrientInformation() {
-        return ProductTypeDraft.of(randomKey(), "NutrientInformation", "NutrientInformation",
-                asList(
+        return ProductTypeDraft.of(randomKey(), "NutrientInformation", "NutrientInformation", asList(
                         AttributeDefinitionBuilder.of(NutrientInfo.quantityContainedUOM.getName(),
                                 en(NutrientInfo.quantityContainedUOM.getName()), StringAttributeType.of()).build(),
                         AttributeDefinitionBuilder.of(NutrientInfo.quantityContained.getName(),
@@ -766,8 +764,7 @@ import static java.util.stream.Collectors.toList;
     }
 
     private ProductTypeDraft createNutrient(final Referenceable&lt;ProductType&gt; nutrientInformationType) {
-        return ProductTypeDraft.of(randomKey(),"Nutrient", "Nutrient",
-                asList(
+        return ProductTypeDraft.of(randomKey(), "Nutrient", "Nutrient", asList(
                         AttributeDefinitionBuilder.of(Nutrient.servingSizeUOM.getName(),
                                 en(Nutrient.servingSizeUOM.getName()), StringAttributeType.of()).build(),
                         AttributeDefinitionBuilder.of(Nutrient.servingSize.getName(),
@@ -777,8 +774,7 @@ import static java.util.stream.Collectors.toList;
     }
 
     private ProductTypeDraft createBanana(Referenceable&lt;ProductType&gt; nutrientType) {
-        return ProductTypeDraft.of(randomKey(), "Banana", "Banana",
-                asList(
+        return ProductTypeDraft.of(randomKey(), "Banana", "Banana", asList(
                         AttributeDefinitionBuilder.of(Banana.bananaColor.getName(),
                                 en(Banana.bananaColor.getName()), StringAttributeType.of()).build(),
                         AttributeDefinitionBuilder.of(Banana.nutrients.getName(),

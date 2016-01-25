@@ -137,7 +137,7 @@ implements <a href="../../../../../../io/sphere/sdk/types/CustomDraft.html" titl
     final String slug = "thing-slug";//you handle to identify the custom line item
     final LocalizedString name = en("thing");
     final long quantity = 5;
-    final CustomLineItemDraft item = CustomLineItemDraft.of(name, slug, money, taxCategory, quantity);
+    final CustomLineItemDraft item = CustomLineItemDraft.of(name, slug, money, taxCategory, quantity, null);
 
     final Cart cartWith5 = client().executeBlocking(CartUpdateCommand.of(cart, AddCustomLineItem.of(item)));
     assertThat(cartWith5.getCustomLineItems()).hasSize(1);
@@ -196,7 +196,7 @@ implements <a href="../../../../../../io/sphere/sdk/types/CustomDraft.html" titl
 <th class="colLast" scope="col">Method and Description</th>
 </tr>
 <tr id="i0" class="altColor">
-<td class="colFirst"><code><a href="../../../../../../io/sphere/sdk/types/CustomFieldsDraft.html" title="class in io.sphere.sdk.types">CustomFieldsDraft</a></code></td>
+<td class="colFirst"><code><a href="../../../../../../io/sphere/sdk/types/CustomFieldsDraft.html" title="interface in io.sphere.sdk.types">CustomFieldsDraft</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../io/sphere/sdk/carts/commands/updateactions/AddCustomLineItem.html#getCustom--">getCustom</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i1" class="rowColor">
@@ -221,7 +221,7 @@ implements <a href="../../../../../../io/sphere/sdk/types/CustomDraft.html" titl
 </tr>
 <tr id="i6" class="altColor">
 <td class="colFirst"><code>static <a href="../../../../../../io/sphere/sdk/carts/commands/updateactions/AddCustomLineItem.html" title="class in io.sphere.sdk.carts.commands.updateactions">AddCustomLineItem</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../io/sphere/sdk/carts/commands/updateactions/AddCustomLineItem.html#of-io.sphere.sdk.carts.CustomLineItemDraft-">of</a></span>(<a href="../../../../../../io/sphere/sdk/carts/CustomLineItemDraft.html" title="class in io.sphere.sdk.carts">CustomLineItemDraft</a>&nbsp;draft)</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../io/sphere/sdk/carts/commands/updateactions/AddCustomLineItem.html#of-io.sphere.sdk.carts.CustomLineItemDraft-">of</a></span>(<a href="../../../../../../io/sphere/sdk/carts/CustomLineItemDraft.html" title="interface in io.sphere.sdk.carts">CustomLineItemDraft</a>&nbsp;draft)</code>&nbsp;</td>
 </tr>
 <tr id="i7" class="rowColor">
 <td class="colFirst"><code>static <a href="../../../../../../io/sphere/sdk/carts/commands/updateactions/AddCustomLineItem.html" title="class in io.sphere.sdk.carts.commands.updateactions">AddCustomLineItem</a></code></td>
@@ -238,11 +238,11 @@ implements <a href="../../../../../../io/sphere/sdk/types/CustomDraft.html" titl
   javax.money.MonetaryAmount&nbsp;money,
   <a href="../../../../../../io/sphere/sdk/models/Referenceable.html" title="interface in io.sphere.sdk.models">Referenceable</a>&lt;<a href="../../../../../../io/sphere/sdk/taxcategories/TaxCategory.html" title="interface in io.sphere.sdk.taxcategories">TaxCategory</a>&gt;&nbsp;taxCategory,
   long&nbsp;quantity,
-  <a href="../../../../../../io/sphere/sdk/types/CustomFieldsDraft.html" title="class in io.sphere.sdk.types">CustomFieldsDraft</a>&nbsp;custom)</code>&nbsp;</td>
+  <a href="../../../../../../io/sphere/sdk/types/CustomFieldsDraft.html" title="interface in io.sphere.sdk.types">CustomFieldsDraft</a>&nbsp;custom)</code>&nbsp;</td>
 </tr>
 <tr id="i9" class="rowColor">
 <td class="colFirst"><code><a href="../../../../../../io/sphere/sdk/carts/commands/updateactions/AddCustomLineItem.html" title="class in io.sphere.sdk.carts.commands.updateactions">AddCustomLineItem</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../io/sphere/sdk/carts/commands/updateactions/AddCustomLineItem.html#withCustom-io.sphere.sdk.types.CustomFieldsDraft-">withCustom</a></span>(<a href="../../../../../../io/sphere/sdk/types/CustomFieldsDraft.html" title="class in io.sphere.sdk.types">CustomFieldsDraft</a>&nbsp;custom)</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../io/sphere/sdk/carts/commands/updateactions/AddCustomLineItem.html#withCustom-io.sphere.sdk.types.CustomFieldsDraft-">withCustom</a></span>(<a href="../../../../../../io/sphere/sdk/types/CustomFieldsDraft.html" title="interface in io.sphere.sdk.types">CustomFieldsDraft</a>&nbsp;custom)</code>&nbsp;</td>
 </tr>
 </table>
 <ul class="blockList">
@@ -305,7 +305,7 @@ implements <a href="../../../../../../io/sphere/sdk/types/CustomDraft.html" titl
                                    <a href="../../../../../../io/sphere/sdk/models/Referenceable.html" title="interface in io.sphere.sdk.models">Referenceable</a>&lt;<a href="../../../../../../io/sphere/sdk/taxcategories/TaxCategory.html" title="interface in io.sphere.sdk.taxcategories">TaxCategory</a>&gt;&nbsp;taxCategory,
                                    long&nbsp;quantity,
                                    @Nullable
-                                   <a href="../../../../../../io/sphere/sdk/types/CustomFieldsDraft.html" title="class in io.sphere.sdk.types">CustomFieldsDraft</a>&nbsp;custom)</pre>
+                                   <a href="../../../../../../io/sphere/sdk/types/CustomFieldsDraft.html" title="interface in io.sphere.sdk.types">CustomFieldsDraft</a>&nbsp;custom)</pre>
 </li>
 </ul>
 <a name="of-io.sphere.sdk.carts.CustomLineItemDraft-">
@@ -314,7 +314,7 @@ implements <a href="../../../../../../io/sphere/sdk/types/CustomDraft.html" titl
 <ul class="blockList">
 <li class="blockList">
 <h4>of</h4>
-<pre>public static&nbsp;<a href="../../../../../../io/sphere/sdk/carts/commands/updateactions/AddCustomLineItem.html" title="class in io.sphere.sdk.carts.commands.updateactions">AddCustomLineItem</a>&nbsp;of(<a href="../../../../../../io/sphere/sdk/carts/CustomLineItemDraft.html" title="class in io.sphere.sdk.carts">CustomLineItemDraft</a>&nbsp;draft)</pre>
+<pre>public static&nbsp;<a href="../../../../../../io/sphere/sdk/carts/commands/updateactions/AddCustomLineItem.html" title="class in io.sphere.sdk.carts.commands.updateactions">AddCustomLineItem</a>&nbsp;of(<a href="../../../../../../io/sphere/sdk/carts/CustomLineItemDraft.html" title="interface in io.sphere.sdk.carts">CustomLineItemDraft</a>&nbsp;draft)</pre>
 </li>
 </ul>
 <a name="getName--">
@@ -369,7 +369,7 @@ implements <a href="../../../../../../io/sphere/sdk/types/CustomDraft.html" titl
 <li class="blockList">
 <h4>getCustom</h4>
 <pre>@Nullable
-public&nbsp;<a href="../../../../../../io/sphere/sdk/types/CustomFieldsDraft.html" title="class in io.sphere.sdk.types">CustomFieldsDraft</a>&nbsp;getCustom()</pre>
+public&nbsp;<a href="../../../../../../io/sphere/sdk/types/CustomFieldsDraft.html" title="interface in io.sphere.sdk.types">CustomFieldsDraft</a>&nbsp;getCustom()</pre>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="../../../../../../io/sphere/sdk/types/CustomDraft.html#getCustom--">getCustom</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../../io/sphere/sdk/types/CustomDraft.html" title="interface in io.sphere.sdk.types">CustomDraft</a></code></dd>
@@ -383,7 +383,7 @@ public&nbsp;<a href="../../../../../../io/sphere/sdk/types/CustomFieldsDraft.htm
 <li class="blockList">
 <h4>withCustom</h4>
 <pre>public&nbsp;<a href="../../../../../../io/sphere/sdk/carts/commands/updateactions/AddCustomLineItem.html" title="class in io.sphere.sdk.carts.commands.updateactions">AddCustomLineItem</a>&nbsp;withCustom(@Nullable
-                                    <a href="../../../../../../io/sphere/sdk/types/CustomFieldsDraft.html" title="class in io.sphere.sdk.types">CustomFieldsDraft</a>&nbsp;custom)</pre>
+                                    <a href="../../../../../../io/sphere/sdk/types/CustomFieldsDraft.html" title="interface in io.sphere.sdk.types">CustomFieldsDraft</a>&nbsp;custom)</pre>
 </li>
 </ul>
 </li>

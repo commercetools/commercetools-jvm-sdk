@@ -49,7 +49,7 @@ var activeTableTab = "activeTableTab";
 <div class="subNav">
 <ul class="navList">
 <li><a href="../../../../io/sphere/sdk/carts/CartState.html" title="enum in io.sphere.sdk.carts"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
-<li><a href="../../../../io/sphere/sdk/carts/CustomLineItemDraft.html" title="class in io.sphere.sdk.carts"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
+<li><a href="../../../../io/sphere/sdk/carts/CustomLineItemDraft.html" title="interface in io.sphere.sdk.carts"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">
 <li><a href="../../../../index.html?io/sphere/sdk/carts/CustomLineItem.html" target="_top">Frames</a></li>
@@ -119,7 +119,7 @@ extends <a href="../../../../io/sphere/sdk/carts/LineItemLike.html" title="inter
     final String slug = "thing-slug";//you handle to identify the custom line item
     final LocalizedString name = en("thing");
     final long quantity = 5;
-    final CustomLineItemDraft item = CustomLineItemDraft.of(name, slug, money, taxCategory, quantity);
+    final CustomLineItemDraft item = CustomLineItemDraft.of(name, slug, money, taxCategory, quantity, null);
 
     final Cart cartWith5 = client().executeBlocking(CartUpdateCommand.of(cart, AddCustomLineItem.of(item)));
     assertThat(cartWith5.getCustomLineItems()).hasSize(1);
@@ -141,7 +141,7 @@ extends <a href="../../../../io/sphere/sdk/carts/LineItemLike.html" title="inter
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/carts/commands/CartUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 <dl>
 <dt><span class="seeLabel">See Also:</span></dt>
-<dd><a href="../../../../io/sphere/sdk/carts/CustomLineItemDraft.html" title="class in io.sphere.sdk.carts"><code>CustomLineItemDraft</code></a>, 
+<dd><code>CustomLineItemDraftImpl</code>, 
 <a href="../../../../io/sphere/sdk/carts/commands/updateactions/AddCustomLineItem.html" title="class in io.sphere.sdk.carts.commands.updateactions"><code>AddCustomLineItem</code></a>, 
 <a href="../../../../io/sphere/sdk/carts/commands/updateactions/RemoveCustomLineItem.html" title="class in io.sphere.sdk.carts.commands.updateactions"><code>RemoveCustomLineItem</code></a>, 
 <a href="../../../../io/sphere/sdk/orders/Order.html#getCustomLineItems--"><code>Order.getCustomLineItems()</code></a>, 
@@ -396,7 +396,7 @@ extends <a href="../../../../io/sphere/sdk/carts/LineItemLike.html" title="inter
 <div class="subNav">
 <ul class="navList">
 <li><a href="../../../../io/sphere/sdk/carts/CartState.html" title="enum in io.sphere.sdk.carts"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
-<li><a href="../../../../io/sphere/sdk/carts/CustomLineItemDraft.html" title="class in io.sphere.sdk.carts"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
+<li><a href="../../../../io/sphere/sdk/carts/CustomLineItemDraft.html" title="interface in io.sphere.sdk.carts"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">
 <li><a href="../../../../index.html?io/sphere/sdk/carts/CustomLineItem.html" target="_top">Frames</a></li>

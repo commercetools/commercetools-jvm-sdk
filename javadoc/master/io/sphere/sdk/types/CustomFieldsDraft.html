@@ -18,8 +18,8 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":10,"i1":10,"i2":42,"i3":42,"i4":9,"i5":9,"i6":9,"i7":9,"i8":9};
-var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"],32:["t6","Deprecated Methods"]};
+var methods = {"i0":6,"i1":6,"i2":17,"i3":17,"i4":17,"i5":17,"i6":17};
+var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],2:["t2","Instance Methods"],4:["t3","Abstract Methods"],16:["t5","Default Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
 var tableTab = "tableTab";
@@ -92,29 +92,15 @@ var activeTableTab = "activeTableTab";
 <!-- ======== START OF CLASS DATA ======== -->
 <div class="header">
 <div class="subTitle">io.sphere.sdk.types</div>
-<h2 title="Class CustomFieldsDraft" class="title">Class CustomFieldsDraft</h2>
+<h2 title="Interface CustomFieldsDraft" class="title">Interface CustomFieldsDraft</h2>
 </div>
 <div class="contentContainer">
-<ul class="inheritance">
-<li>java.lang.Object</li>
-<li>
-<ul class="inheritance">
-<li>io.sphere.sdk.types.CustomFieldsDraft</li>
-</ul>
-</li>
-</ul>
 <div class="description">
 <ul class="blockList">
 <li class="blockList">
 <hr>
 <br>
-<pre>public class <span class="typeNameLabel">CustomFieldsDraft</span>
-extends java.lang.Object</pre>
-<dl>
-<dt><span class="seeLabel">See Also:</span></dt>
-<dd><a href="../../../../io/sphere/sdk/types/Custom.html" title="interface in io.sphere.sdk.types"><code>Custom</code></a>, 
-<a href="../../../../io/sphere/sdk/types/CustomFieldsDraftBuilder.html" title="class in io.sphere.sdk.types"><code>CustomFieldsDraftBuilder</code></a></dd>
-</dl>
+<pre>public interface <span class="typeNameLabel">CustomFieldsDraft</span></pre>
 </li>
 </ul>
 </div>
@@ -128,7 +114,7 @@ extends java.lang.Object</pre>
 </a>
 <h3>Method Summary</h3>
 <table class="memberSummary" border="0" cellpadding="3" cellspacing="0" summary="Method Summary table, listing methods, and an explanation">
-<caption><span id="t0" class="activeTableTab"><span>All Methods</span><span class="tabEnd">&nbsp;</span></span><span id="t1" class="tableTab"><span><a href="javascript:show(1);">Static Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t2" class="tableTab"><span><a href="javascript:show(2);">Instance Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t4" class="tableTab"><span><a href="javascript:show(8);">Concrete Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t6" class="tableTab"><span><a href="javascript:show(32);">Deprecated Methods</a></span><span class="tabEnd">&nbsp;</span></span></caption>
+<caption><span id="t0" class="activeTableTab"><span>All Methods</span><span class="tabEnd">&nbsp;</span></span><span id="t1" class="tableTab"><span><a href="javascript:show(1);">Static Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t2" class="tableTab"><span><a href="javascript:show(2);">Instance Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t3" class="tableTab"><span><a href="javascript:show(4);">Abstract Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t5" class="tableTab"><span><a href="javascript:show(16);">Default Methods</a></span><span class="tabEnd">&nbsp;</span></span></caption>
 <tr>
 <th class="colFirst" scope="col">Modifier and Type</th>
 <th class="colLast" scope="col">Method and Description</th>
@@ -142,51 +128,30 @@ extends java.lang.Object</pre>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/types/CustomFieldsDraft.html#getType--">getType</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i2" class="altColor">
-<td class="colFirst"><code>java.lang.String</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/types/CustomFieldsDraft.html#getTypeId--">getTypeId</a></span>()</code>
-<div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;</div>
-</td>
-</tr>
-<tr id="i3" class="rowColor">
-<td class="colFirst"><code>java.lang.String</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/types/CustomFieldsDraft.html#getTypeKey--">getTypeKey</a></span>()</code>
-<div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;
-<div class="block"><span class="deprecationComment">use <a href="../../../../io/sphere/sdk/types/CustomFieldsDraft.html#getType--"><code>getType()</code></a> instead</span></div>
-</div>
-</td>
-</tr>
-<tr id="i4" class="altColor">
-<td class="colFirst"><code>static <a href="../../../../io/sphere/sdk/types/CustomFieldsDraft.html" title="class in io.sphere.sdk.types">CustomFieldsDraft</a></code></td>
+<td class="colFirst"><code>static <a href="../../../../io/sphere/sdk/types/CustomFieldsDraft.html" title="interface in io.sphere.sdk.types">CustomFieldsDraft</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/types/CustomFieldsDraft.html#ofCustomFields-io.sphere.sdk.types.CustomFields-">ofCustomFields</a></span>(<a href="../../../../io/sphere/sdk/types/CustomFields.html" title="class in io.sphere.sdk.types">CustomFields</a>&nbsp;custom)</code>&nbsp;</td>
 </tr>
-<tr id="i5" class="rowColor">
-<td class="colFirst"><code>static <a href="../../../../io/sphere/sdk/types/CustomFieldsDraft.html" title="class in io.sphere.sdk.types">CustomFieldsDraft</a></code></td>
+<tr id="i3" class="rowColor">
+<td class="colFirst"><code>static <a href="../../../../io/sphere/sdk/types/CustomFieldsDraft.html" title="interface in io.sphere.sdk.types">CustomFieldsDraft</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/types/CustomFieldsDraft.html#ofTypeIdAndJson-java.lang.String-java.util.Map-">ofTypeIdAndJson</a></span>(java.lang.String&nbsp;typeId,
                java.util.Map&lt;java.lang.String,com.fasterxml.jackson.databind.JsonNode&gt;&nbsp;fields)</code>&nbsp;</td>
 </tr>
-<tr id="i6" class="altColor">
-<td class="colFirst"><code>static <a href="../../../../io/sphere/sdk/types/CustomFieldsDraft.html" title="class in io.sphere.sdk.types">CustomFieldsDraft</a></code></td>
+<tr id="i4" class="altColor">
+<td class="colFirst"><code>static <a href="../../../../io/sphere/sdk/types/CustomFieldsDraft.html" title="interface in io.sphere.sdk.types">CustomFieldsDraft</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/types/CustomFieldsDraft.html#ofTypeIdAndObjects-java.lang.String-java.util.Map-">ofTypeIdAndObjects</a></span>(java.lang.String&nbsp;typeId,
                   java.util.Map&lt;java.lang.String,java.lang.Object&gt;&nbsp;fields)</code>&nbsp;</td>
 </tr>
-<tr id="i7" class="rowColor">
-<td class="colFirst"><code>static <a href="../../../../io/sphere/sdk/types/CustomFieldsDraft.html" title="class in io.sphere.sdk.types">CustomFieldsDraft</a></code></td>
+<tr id="i5" class="rowColor">
+<td class="colFirst"><code>static <a href="../../../../io/sphere/sdk/types/CustomFieldsDraft.html" title="interface in io.sphere.sdk.types">CustomFieldsDraft</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/types/CustomFieldsDraft.html#ofTypeKeyAndJson-java.lang.String-java.util.Map-">ofTypeKeyAndJson</a></span>(java.lang.String&nbsp;typeKey,
                 java.util.Map&lt;java.lang.String,com.fasterxml.jackson.databind.JsonNode&gt;&nbsp;fields)</code>&nbsp;</td>
 </tr>
-<tr id="i8" class="altColor">
-<td class="colFirst"><code>static <a href="../../../../io/sphere/sdk/types/CustomFieldsDraft.html" title="class in io.sphere.sdk.types">CustomFieldsDraft</a></code></td>
+<tr id="i6" class="altColor">
+<td class="colFirst"><code>static <a href="../../../../io/sphere/sdk/types/CustomFieldsDraft.html" title="interface in io.sphere.sdk.types">CustomFieldsDraft</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/types/CustomFieldsDraft.html#ofTypeKeyAndObjects-java.lang.String-java.util.Map-">ofTypeKeyAndObjects</a></span>(java.lang.String&nbsp;typeKey,
                    java.util.Map&lt;java.lang.String,java.lang.Object&gt;&nbsp;fields)</code>&nbsp;</td>
 </tr>
 </table>
-<ul class="blockList">
-<li class="blockList"><a name="methods.inherited.from.class.java.lang.Object">
-<!--   -->
-</a>
-<h3>Methods inherited from class&nbsp;java.lang.Object</h3>
-<code>clone, equals, finalize, getClass, hashCode, notify, notifyAll, toString, wait, wait, wait</code></li>
-</ul>
 </li>
 </ul>
 </li>
@@ -201,13 +166,32 @@ extends java.lang.Object</pre>
 <!--   -->
 </a>
 <h3>Method Detail</h3>
+<a name="getType--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getType</h4>
+<pre><a href="../../../../io/sphere/sdk/models/ResourceIdentifier.html" title="interface in io.sphere.sdk.models">ResourceIdentifier</a>&lt;<a href="../../../../io/sphere/sdk/types/Type.html" title="interface in io.sphere.sdk.types">Type</a>&gt;&nbsp;getType()</pre>
+</li>
+</ul>
+<a name="getFields--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getFields</h4>
+<pre>@Nullable
+java.util.Map&lt;java.lang.String,com.fasterxml.jackson.databind.JsonNode&gt;&nbsp;getFields()</pre>
+</li>
+</ul>
 <a name="ofCustomFields-io.sphere.sdk.types.CustomFields-">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
 <h4>ofCustomFields</h4>
-<pre>public static&nbsp;<a href="../../../../io/sphere/sdk/types/CustomFieldsDraft.html" title="class in io.sphere.sdk.types">CustomFieldsDraft</a>&nbsp;ofCustomFields(<a href="../../../../io/sphere/sdk/types/CustomFields.html" title="class in io.sphere.sdk.types">CustomFields</a>&nbsp;custom)</pre>
+<pre>static&nbsp;<a href="../../../../io/sphere/sdk/types/CustomFieldsDraft.html" title="interface in io.sphere.sdk.types">CustomFieldsDraft</a>&nbsp;ofCustomFields(<a href="../../../../io/sphere/sdk/types/CustomFields.html" title="class in io.sphere.sdk.types">CustomFields</a>&nbsp;custom)</pre>
 </li>
 </ul>
 <a name="ofTypeIdAndJson-java.lang.String-java.util.Map-">
@@ -216,8 +200,8 @@ extends java.lang.Object</pre>
 <ul class="blockList">
 <li class="blockList">
 <h4>ofTypeIdAndJson</h4>
-<pre>public static&nbsp;<a href="../../../../io/sphere/sdk/types/CustomFieldsDraft.html" title="class in io.sphere.sdk.types">CustomFieldsDraft</a>&nbsp;ofTypeIdAndJson(java.lang.String&nbsp;typeId,
-                                                java.util.Map&lt;java.lang.String,com.fasterxml.jackson.databind.JsonNode&gt;&nbsp;fields)</pre>
+<pre>static&nbsp;<a href="../../../../io/sphere/sdk/types/CustomFieldsDraft.html" title="interface in io.sphere.sdk.types">CustomFieldsDraft</a>&nbsp;ofTypeIdAndJson(java.lang.String&nbsp;typeId,
+                                         java.util.Map&lt;java.lang.String,com.fasterxml.jackson.databind.JsonNode&gt;&nbsp;fields)</pre>
 </li>
 </ul>
 <a name="ofTypeIdAndObjects-java.lang.String-java.util.Map-">
@@ -226,8 +210,8 @@ extends java.lang.Object</pre>
 <ul class="blockList">
 <li class="blockList">
 <h4>ofTypeIdAndObjects</h4>
-<pre>public static&nbsp;<a href="../../../../io/sphere/sdk/types/CustomFieldsDraft.html" title="class in io.sphere.sdk.types">CustomFieldsDraft</a>&nbsp;ofTypeIdAndObjects(java.lang.String&nbsp;typeId,
-                                                   java.util.Map&lt;java.lang.String,java.lang.Object&gt;&nbsp;fields)</pre>
+<pre>static&nbsp;<a href="../../../../io/sphere/sdk/types/CustomFieldsDraft.html" title="interface in io.sphere.sdk.types">CustomFieldsDraft</a>&nbsp;ofTypeIdAndObjects(java.lang.String&nbsp;typeId,
+                                            java.util.Map&lt;java.lang.String,java.lang.Object&gt;&nbsp;fields)</pre>
 </li>
 </ul>
 <a name="ofTypeKeyAndJson-java.lang.String-java.util.Map-">
@@ -236,70 +220,18 @@ extends java.lang.Object</pre>
 <ul class="blockList">
 <li class="blockList">
 <h4>ofTypeKeyAndJson</h4>
-<pre>public static&nbsp;<a href="../../../../io/sphere/sdk/types/CustomFieldsDraft.html" title="class in io.sphere.sdk.types">CustomFieldsDraft</a>&nbsp;ofTypeKeyAndJson(java.lang.String&nbsp;typeKey,
-                                                 java.util.Map&lt;java.lang.String,com.fasterxml.jackson.databind.JsonNode&gt;&nbsp;fields)</pre>
+<pre>static&nbsp;<a href="../../../../io/sphere/sdk/types/CustomFieldsDraft.html" title="interface in io.sphere.sdk.types">CustomFieldsDraft</a>&nbsp;ofTypeKeyAndJson(java.lang.String&nbsp;typeKey,
+                                          java.util.Map&lt;java.lang.String,com.fasterxml.jackson.databind.JsonNode&gt;&nbsp;fields)</pre>
 </li>
 </ul>
 <a name="ofTypeKeyAndObjects-java.lang.String-java.util.Map-">
 <!--   -->
 </a>
-<ul class="blockList">
-<li class="blockList">
-<h4>ofTypeKeyAndObjects</h4>
-<pre>public static&nbsp;<a href="../../../../io/sphere/sdk/types/CustomFieldsDraft.html" title="class in io.sphere.sdk.types">CustomFieldsDraft</a>&nbsp;ofTypeKeyAndObjects(java.lang.String&nbsp;typeKey,
-                                                    java.util.Map&lt;java.lang.String,java.lang.Object&gt;&nbsp;fields)</pre>
-</li>
-</ul>
-<a name="getTypeId--">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>getTypeId</h4>
-<pre>@Deprecated
- @Nullable
-public&nbsp;java.lang.String&nbsp;getTypeId()</pre>
-<div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;</div>
-<div class="block">use <a href="../../../../io/sphere/sdk/types/CustomFieldsDraft.html#getType--"><code>getType()</code></a> instead</div>
-<dl>
-<dt><span class="returnLabel">Returns:</span></dt>
-<dd>id of the type to set</dd>
-</dl>
-</li>
-</ul>
-<a name="getTypeKey--">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>getTypeKey</h4>
-<pre>@Deprecated
- @Nullable
-public&nbsp;java.lang.String&nbsp;getTypeKey()</pre>
-<div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;<span class="deprecationComment">use <a href="../../../../io/sphere/sdk/types/CustomFieldsDraft.html#getType--"><code>getType()</code></a> instead</span></div>
-<dl>
-<dt><span class="returnLabel">Returns:</span></dt>
-<dd>key of the type to set</dd>
-</dl>
-</li>
-</ul>
-<a name="getType--">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>getType</h4>
-<pre>public&nbsp;<a href="../../../../io/sphere/sdk/models/ResourceIdentifier.html" title="interface in io.sphere.sdk.models">ResourceIdentifier</a>&lt;<a href="../../../../io/sphere/sdk/types/Type.html" title="interface in io.sphere.sdk.types">Type</a>&gt;&nbsp;getType()</pre>
-</li>
-</ul>
-<a name="getFields--">
-<!--   -->
-</a>
 <ul class="blockListLast">
 <li class="blockList">
-<h4>getFields</h4>
-<pre>@Nullable
-public&nbsp;java.util.Map&lt;java.lang.String,com.fasterxml.jackson.databind.JsonNode&gt;&nbsp;getFields()</pre>
+<h4>ofTypeKeyAndObjects</h4>
+<pre>static&nbsp;<a href="../../../../io/sphere/sdk/types/CustomFieldsDraft.html" title="interface in io.sphere.sdk.types">CustomFieldsDraft</a>&nbsp;ofTypeKeyAndObjects(java.lang.String&nbsp;typeKey,
+                                             java.util.Map&lt;java.lang.String,java.lang.Object&gt;&nbsp;fields)</pre>
 </li>
 </ul>
 </li>

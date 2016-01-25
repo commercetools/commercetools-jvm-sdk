@@ -113,9 +113,8 @@ extends <a href="../../../../../io/sphere/sdk/commands/CreateCommand.html" title
     withCustomer(client(), (Customer customer) -&gt; {
         withProduct(client(), (Product product) -&gt; {
             withState(client(), StateDraft.of("initial-review-state", StateType.REVIEW_STATE), (State state) -&gt; {
-                final CustomFieldsDraft extraFields = CustomFieldsDraft.ofTypeKeyAndObjects(type.getKey(),
-                        singletonMap("screenshotUrls",
-                                Collections.singleton("http://www.commercetools.com/assets/img/CT-logo.svg")));
+                final CustomFieldsDraft extraFields = CustomFieldsDraft.ofTypeKeyAndObjects(type.getKey(), singletonMap("screenshotUrls",
+                        Collections.singleton("http://www.commercetools.com/assets/img/CT-logo.svg")));
                 final ReviewDraft reviewDraft = ReviewDraftBuilder.ofTitle("Commercetools rocks")
                         .authorName("John Smith")
                         .text("It is great.")
