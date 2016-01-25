@@ -231,9 +231,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 assertThat(facetRanges.toString()).isEqualTo("[[0 to 1), [1 to 2), [2 to 3), [3 to 4), [4 to 5)]");
 
 final ProductProjectionSearch searchRequest = ProductProjectionSearch.ofStaged()//in prod it would be current
-        .withResultFilters(m -&gt; m.reviewRatingStatistics().averageRating().byGreaterThanOrEqualTo(new BigDecimal(2)))
+        .withResultFilters(m -&gt; m.reviewRatingStatistics().averageRating().isGreaterThanOrEqualTo(new BigDecimal(2)))
         .withFacets(m -&gt; m.reviewRatingStatistics().averageRating().onlyRange(facetRanges))
-        .withSort(m -&gt; m.reviewRatingStatistics().averageRating().byDesc());
+        .withSort(m -&gt; m.reviewRatingStatistics().averageRating().desc());
 
 assertEventually(() -&gt; {
     final PagedSearchResult&lt;ProductProjection&gt; result = client().executeBlocking(searchRequest);

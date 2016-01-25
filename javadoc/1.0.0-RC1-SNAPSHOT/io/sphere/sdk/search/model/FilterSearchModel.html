@@ -18,8 +18,8 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":6,"i1":6,"i2":6,"i3":6,"i4":6};
-var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],4:["t3","Abstract Methods"]};
+var methods = {"i0":50,"i1":50,"i2":50,"i3":50,"i4":50,"i5":6,"i6":6,"i7":6,"i8":6,"i9":6,"i10":18};
+var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],4:["t3","Abstract Methods"],16:["t5","Default Methods"],32:["t6","Deprecated Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
 var tableTab = "tableTab";
@@ -124,40 +124,84 @@ var activeTableTab = "activeTableTab";
 </a>
 <h3>Method Summary</h3>
 <table class="memberSummary" border="0" cellpadding="3" cellspacing="0" summary="Method Summary table, listing methods, and an explanation">
-<caption><span id="t0" class="activeTableTab"><span>All Methods</span><span class="tabEnd">&nbsp;</span></span><span id="t2" class="tableTab"><span><a href="javascript:show(2);">Instance Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t3" class="tableTab"><span><a href="javascript:show(4);">Abstract Methods</a></span><span class="tabEnd">&nbsp;</span></span></caption>
+<caption><span id="t0" class="activeTableTab"><span>All Methods</span><span class="tabEnd">&nbsp;</span></span><span id="t2" class="tableTab"><span><a href="javascript:show(2);">Instance Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t3" class="tableTab"><span><a href="javascript:show(4);">Abstract Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t5" class="tableTab"><span><a href="javascript:show(16);">Default Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t6" class="tableTab"><span><a href="javascript:show(32);">Deprecated Methods</a></span><span class="tabEnd">&nbsp;</span></span></caption>
 <tr>
 <th class="colFirst" scope="col">Modifier and Type</th>
 <th class="colLast" scope="col">Method and Description</th>
 </tr>
 <tr id="i0" class="altColor">
-<td class="colFirst"><code>java.util.List&lt;<a href="../../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../../io/sphere/sdk/search/model/FilterSearchModel.html" title="type parameter in FilterSearchModel">T</a>&gt;&gt;</code></td>
+<td class="colFirst"><code>default java.util.List&lt;<a href="../../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../../io/sphere/sdk/search/model/FilterSearchModel.html" title="type parameter in FilterSearchModel">T</a>&gt;&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/search/model/FilterSearchModel.html#by-V-">by</a></span>(<a href="../../../../../io/sphere/sdk/search/model/FilterSearchModel.html" title="type parameter in FilterSearchModel">V</a>&nbsp;value)</code>
-<div class="block">Generates an expression to select all elements with the given attribute value.</div>
+<div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;
+<div class="block"><span class="deprecationComment">use <a href="../../../../../io/sphere/sdk/search/model/FilterSearchModel.html#is-V-"><code>is(Object)</code></a> instead</span></div>
+</div>
 </td>
 </tr>
 <tr id="i1" class="rowColor">
-<td class="colFirst"><code>java.util.List&lt;<a href="../../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../../io/sphere/sdk/search/model/FilterSearchModel.html" title="type parameter in FilterSearchModel">T</a>&gt;&gt;</code></td>
+<td class="colFirst"><code>default java.util.List&lt;<a href="../../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../../io/sphere/sdk/search/model/FilterSearchModel.html" title="type parameter in FilterSearchModel">T</a>&gt;&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/search/model/FilterSearchModel.html#byAll-java.lang.Iterable-">byAll</a></span>(java.lang.Iterable&lt;<a href="../../../../../io/sphere/sdk/search/model/FilterSearchModel.html" title="type parameter in FilterSearchModel">V</a>&gt;&nbsp;values)</code>
-<div class="block">Generates an expression to select all elements with attributes matching all the given values.</div>
+<div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;
+<div class="block"><span class="deprecationComment">use <a href="../../../../../io/sphere/sdk/search/model/FilterSearchModel.html#containsAll-java.lang.Iterable-"><code>containsAll(Iterable)</code></a> instead</span></div>
+</div>
 </td>
 </tr>
 <tr id="i2" class="altColor">
-<td class="colFirst"><code>java.util.List&lt;<a href="../../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../../io/sphere/sdk/search/model/FilterSearchModel.html" title="type parameter in FilterSearchModel">T</a>&gt;&gt;</code></td>
+<td class="colFirst"><code>default java.util.List&lt;<a href="../../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../../io/sphere/sdk/search/model/FilterSearchModel.html" title="type parameter in FilterSearchModel">T</a>&gt;&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/search/model/FilterSearchModel.html#byAllAsString-java.lang.Iterable-">byAllAsString</a></span>(java.lang.Iterable&lt;java.lang.String&gt;&nbsp;values)</code>
-<div class="block">Generates an expression to select all elements with attributes matching all the given values.</div>
+<div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;
+<div class="block"><span class="deprecationComment">use <a href="../../../../../io/sphere/sdk/search/model/FilterSearchModel.html#containsAllAsString-java.lang.Iterable-"><code>containsAllAsString(Iterable)</code></a> instead</span></div>
+</div>
 </td>
 </tr>
 <tr id="i3" class="rowColor">
-<td class="colFirst"><code>java.util.List&lt;<a href="../../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../../io/sphere/sdk/search/model/FilterSearchModel.html" title="type parameter in FilterSearchModel">T</a>&gt;&gt;</code></td>
+<td class="colFirst"><code>default java.util.List&lt;<a href="../../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../../io/sphere/sdk/search/model/FilterSearchModel.html" title="type parameter in FilterSearchModel">T</a>&gt;&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/search/model/FilterSearchModel.html#byAny-java.lang.Iterable-">byAny</a></span>(java.lang.Iterable&lt;<a href="../../../../../io/sphere/sdk/search/model/FilterSearchModel.html" title="type parameter in FilterSearchModel">V</a>&gt;&nbsp;values)</code>
-<div class="block">Generates an expression to select all elements with attributes matching any of the given values.</div>
+<div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;
+<div class="block"><span class="deprecationComment">use <a href="../../../../../io/sphere/sdk/search/model/FilterSearchModel.html#containsAny-java.lang.Iterable-"><code>containsAny(Iterable)</code></a> instead</span></div>
+</div>
 </td>
 </tr>
 <tr id="i4" class="altColor">
-<td class="colFirst"><code>java.util.List&lt;<a href="../../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../../io/sphere/sdk/search/model/FilterSearchModel.html" title="type parameter in FilterSearchModel">T</a>&gt;&gt;</code></td>
+<td class="colFirst"><code>default java.util.List&lt;<a href="../../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../../io/sphere/sdk/search/model/FilterSearchModel.html" title="type parameter in FilterSearchModel">T</a>&gt;&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/search/model/FilterSearchModel.html#byAnyAsString-java.lang.Iterable-">byAnyAsString</a></span>(java.lang.Iterable&lt;java.lang.String&gt;&nbsp;values)</code>
+<div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;
+<div class="block"><span class="deprecationComment">use <a href="../../../../../io/sphere/sdk/search/model/FilterSearchModel.html#containsAnyAsString-java.lang.Iterable-"><code>containsAnyAsString(Iterable)</code></a> instead</span></div>
+</div>
+</td>
+</tr>
+<tr id="i5" class="rowColor">
+<td class="colFirst"><code>java.util.List&lt;<a href="../../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../../io/sphere/sdk/search/model/FilterSearchModel.html" title="type parameter in FilterSearchModel">T</a>&gt;&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/search/model/FilterSearchModel.html#containsAll-java.lang.Iterable-">containsAll</a></span>(java.lang.Iterable&lt;<a href="../../../../../io/sphere/sdk/search/model/FilterSearchModel.html" title="type parameter in FilterSearchModel">V</a>&gt;&nbsp;values)</code>
+<div class="block">Generates an expression to select all elements with attributes matching all the given values.</div>
+</td>
+</tr>
+<tr id="i6" class="altColor">
+<td class="colFirst"><code>java.util.List&lt;<a href="../../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../../io/sphere/sdk/search/model/FilterSearchModel.html" title="type parameter in FilterSearchModel">T</a>&gt;&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/search/model/FilterSearchModel.html#containsAllAsString-java.lang.Iterable-">containsAllAsString</a></span>(java.lang.Iterable&lt;java.lang.String&gt;&nbsp;values)</code>
+<div class="block">Generates an expression to select all elements with attributes matching all the given values.</div>
+</td>
+</tr>
+<tr id="i7" class="rowColor">
+<td class="colFirst"><code>java.util.List&lt;<a href="../../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../../io/sphere/sdk/search/model/FilterSearchModel.html" title="type parameter in FilterSearchModel">T</a>&gt;&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/search/model/FilterSearchModel.html#containsAny-java.lang.Iterable-">containsAny</a></span>(java.lang.Iterable&lt;<a href="../../../../../io/sphere/sdk/search/model/FilterSearchModel.html" title="type parameter in FilterSearchModel">V</a>&gt;&nbsp;values)</code>
 <div class="block">Generates an expression to select all elements with attributes matching any of the given values.</div>
 </td>
+</tr>
+<tr id="i8" class="altColor">
+<td class="colFirst"><code>java.util.List&lt;<a href="../../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../../io/sphere/sdk/search/model/FilterSearchModel.html" title="type parameter in FilterSearchModel">T</a>&gt;&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/search/model/FilterSearchModel.html#containsAnyAsString-java.lang.Iterable-">containsAnyAsString</a></span>(java.lang.Iterable&lt;java.lang.String&gt;&nbsp;values)</code>
+<div class="block">Generates an expression to select all elements with attributes matching any of the given values.</div>
+</td>
+</tr>
+<tr id="i9" class="rowColor">
+<td class="colFirst"><code>java.util.List&lt;<a href="../../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../../io/sphere/sdk/search/model/FilterSearchModel.html" title="type parameter in FilterSearchModel">T</a>&gt;&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/search/model/FilterSearchModel.html#is-V-">is</a></span>(<a href="../../../../../io/sphere/sdk/search/model/FilterSearchModel.html" title="type parameter in FilterSearchModel">V</a>&nbsp;value)</code>
+<div class="block">Generates an expression to select all elements with the given attribute value.</div>
+</td>
+</tr>
+<tr id="i10" class="altColor">
+<td class="colFirst"><code>default java.util.List&lt;<a href="../../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../../io/sphere/sdk/search/model/FilterSearchModel.html" title="type parameter in FilterSearchModel">T</a>&gt;&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/search/model/FilterSearchModel.html#isIn-java.lang.Iterable-">isIn</a></span>(java.lang.Iterable&lt;<a href="../../../../../io/sphere/sdk/search/model/FilterSearchModel.html" title="type parameter in FilterSearchModel">V</a>&gt;&nbsp;values)</code>&nbsp;</td>
 </tr>
 </table>
 </li>
@@ -174,15 +218,15 @@ var activeTableTab = "activeTableTab";
 <!--   -->
 </a>
 <h3>Method Detail</h3>
-<a name="by-java.lang.Object-">
+<a name="is-java.lang.Object-">
 <!--   -->
-</a><a name="by-V-">
+</a><a name="is-V-">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
-<h4>by</h4>
-<pre>java.util.List&lt;<a href="../../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../../io/sphere/sdk/search/model/FilterSearchModel.html" title="type parameter in FilterSearchModel">T</a>&gt;&gt;&nbsp;by(<a href="../../../../../io/sphere/sdk/search/model/FilterSearchModel.html" title="type parameter in FilterSearchModel">V</a>&nbsp;value)</pre>
+<h4>is</h4>
+<pre>java.util.List&lt;<a href="../../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../../io/sphere/sdk/search/model/FilterSearchModel.html" title="type parameter in FilterSearchModel">T</a>&gt;&gt;&nbsp;is(<a href="../../../../../io/sphere/sdk/search/model/FilterSearchModel.html" title="type parameter in FilterSearchModel">V</a>&nbsp;value)</pre>
 <div class="block">Generates an expression to select all elements with the given attribute value.
  For example: filtering by "red" would select only those elements with "red" value.</div>
 <dl>
@@ -193,13 +237,26 @@ var activeTableTab = "activeTableTab";
 </dl>
 </li>
 </ul>
-<a name="byAny-java.lang.Iterable-">
+<a name="isIn-java.lang.Iterable-">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
-<h4>byAny</h4>
-<pre>java.util.List&lt;<a href="../../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../../io/sphere/sdk/search/model/FilterSearchModel.html" title="type parameter in FilterSearchModel">T</a>&gt;&gt;&nbsp;byAny(java.lang.Iterable&lt;<a href="../../../../../io/sphere/sdk/search/model/FilterSearchModel.html" title="type parameter in FilterSearchModel">V</a>&gt;&nbsp;values)</pre>
+<h4>isIn</h4>
+<pre>default&nbsp;java.util.List&lt;<a href="../../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../../io/sphere/sdk/search/model/FilterSearchModel.html" title="type parameter in FilterSearchModel">T</a>&gt;&gt;&nbsp;isIn(java.lang.Iterable&lt;<a href="../../../../../io/sphere/sdk/search/model/FilterSearchModel.html" title="type parameter in FilterSearchModel">V</a>&gt;&nbsp;values)</pre>
+<dl>
+<dt><span class="seeLabel">See Also:</span></dt>
+<dd><a href="../../../../../io/sphere/sdk/search/model/FilterSearchModel.html#containsAny-java.lang.Iterable-"><code>containsAny(Iterable)</code></a></dd>
+</dl>
+</li>
+</ul>
+<a name="containsAny-java.lang.Iterable-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>containsAny</h4>
+<pre>java.util.List&lt;<a href="../../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../../io/sphere/sdk/search/model/FilterSearchModel.html" title="type parameter in FilterSearchModel">T</a>&gt;&gt;&nbsp;containsAny(java.lang.Iterable&lt;<a href="../../../../../io/sphere/sdk/search/model/FilterSearchModel.html" title="type parameter in FilterSearchModel">V</a>&gt;&nbsp;values)</pre>
 <div class="block">Generates an expression to select all elements with attributes matching any of the given values.
  For example: filtering by ["red", "blue"] would select only those elements with either "red" or "blue" value.</div>
 <dl>
@@ -208,6 +265,81 @@ var activeTableTab = "activeTableTab";
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>a filter expression for the given values</dd>
 </dl>
+</li>
+</ul>
+<a name="containsAll-java.lang.Iterable-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>containsAll</h4>
+<pre>java.util.List&lt;<a href="../../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../../io/sphere/sdk/search/model/FilterSearchModel.html" title="type parameter in FilterSearchModel">T</a>&gt;&gt;&nbsp;containsAll(java.lang.Iterable&lt;<a href="../../../../../io/sphere/sdk/search/model/FilterSearchModel.html" title="type parameter in FilterSearchModel">V</a>&gt;&nbsp;values)</pre>
+<div class="block">Generates an expression to select all elements with attributes matching all the given values.
+ For example: filtering by ["red", "blue"] would select only those elements with both "red" and "blue" values.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>values</code> - the values to filter by</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>a filter expression for the given values</dd>
+</dl>
+</li>
+</ul>
+<a name="containsAnyAsString-java.lang.Iterable-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>containsAnyAsString</h4>
+<pre>java.util.List&lt;<a href="../../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../../io/sphere/sdk/search/model/FilterSearchModel.html" title="type parameter in FilterSearchModel">T</a>&gt;&gt;&nbsp;containsAnyAsString(java.lang.Iterable&lt;java.lang.String&gt;&nbsp;values)</pre>
+<div class="block">Generates an expression to select all elements with attributes matching any of the given values.
+ For example: filtering by ["red", "blue"] would select only those elements with either "red" or "blue" value.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>values</code> - the values to filter by</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>a filter expression for the given values</dd>
+</dl>
+</li>
+</ul>
+<a name="containsAllAsString-java.lang.Iterable-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>containsAllAsString</h4>
+<pre>java.util.List&lt;<a href="../../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../../io/sphere/sdk/search/model/FilterSearchModel.html" title="type parameter in FilterSearchModel">T</a>&gt;&gt;&nbsp;containsAllAsString(java.lang.Iterable&lt;java.lang.String&gt;&nbsp;values)</pre>
+<div class="block">Generates an expression to select all elements with attributes matching all the given values.
+ For example: filtering by ["red", "blue"] would select only those elements with both "red" and "blue" values.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>values</code> - the values to filter by</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>a filter expression for the given values</dd>
+</dl>
+</li>
+</ul>
+<a name="by-java.lang.Object-">
+<!--   -->
+</a><a name="by-V-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>by</h4>
+<pre>@Deprecated
+default&nbsp;java.util.List&lt;<a href="../../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../../io/sphere/sdk/search/model/FilterSearchModel.html" title="type parameter in FilterSearchModel">T</a>&gt;&gt;&nbsp;by(<a href="../../../../../io/sphere/sdk/search/model/FilterSearchModel.html" title="type parameter in FilterSearchModel">V</a>&nbsp;value)</pre>
+<div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;<span class="deprecationComment">use <a href="../../../../../io/sphere/sdk/search/model/FilterSearchModel.html#is-V-"><code>is(Object)</code></a> instead</span></div>
+</li>
+</ul>
+<a name="byAny-java.lang.Iterable-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>byAny</h4>
+<pre>@Deprecated
+default&nbsp;java.util.List&lt;<a href="../../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../../io/sphere/sdk/search/model/FilterSearchModel.html" title="type parameter in FilterSearchModel">T</a>&gt;&gt;&nbsp;byAny(java.lang.Iterable&lt;<a href="../../../../../io/sphere/sdk/search/model/FilterSearchModel.html" title="type parameter in FilterSearchModel">V</a>&gt;&nbsp;values)</pre>
+<div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;<span class="deprecationComment">use <a href="../../../../../io/sphere/sdk/search/model/FilterSearchModel.html#containsAny-java.lang.Iterable-"><code>containsAny(Iterable)</code></a> instead</span></div>
 </li>
 </ul>
 <a name="byAll-java.lang.Iterable-">
@@ -216,15 +348,9 @@ var activeTableTab = "activeTableTab";
 <ul class="blockList">
 <li class="blockList">
 <h4>byAll</h4>
-<pre>java.util.List&lt;<a href="../../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../../io/sphere/sdk/search/model/FilterSearchModel.html" title="type parameter in FilterSearchModel">T</a>&gt;&gt;&nbsp;byAll(java.lang.Iterable&lt;<a href="../../../../../io/sphere/sdk/search/model/FilterSearchModel.html" title="type parameter in FilterSearchModel">V</a>&gt;&nbsp;values)</pre>
-<div class="block">Generates an expression to select all elements with attributes matching all the given values.
- For example: filtering by ["red", "blue"] would select only those elements with both "red" and "blue" values.</div>
-<dl>
-<dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>values</code> - the values to filter by</dd>
-<dt><span class="returnLabel">Returns:</span></dt>
-<dd>a filter expression for the given values</dd>
-</dl>
+<pre>@Deprecated
+default&nbsp;java.util.List&lt;<a href="../../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../../io/sphere/sdk/search/model/FilterSearchModel.html" title="type parameter in FilterSearchModel">T</a>&gt;&gt;&nbsp;byAll(java.lang.Iterable&lt;<a href="../../../../../io/sphere/sdk/search/model/FilterSearchModel.html" title="type parameter in FilterSearchModel">V</a>&gt;&nbsp;values)</pre>
+<div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;<span class="deprecationComment">use <a href="../../../../../io/sphere/sdk/search/model/FilterSearchModel.html#containsAll-java.lang.Iterable-"><code>containsAll(Iterable)</code></a> instead</span></div>
 </li>
 </ul>
 <a name="byAnyAsString-java.lang.Iterable-">
@@ -233,15 +359,9 @@ var activeTableTab = "activeTableTab";
 <ul class="blockList">
 <li class="blockList">
 <h4>byAnyAsString</h4>
-<pre>java.util.List&lt;<a href="../../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../../io/sphere/sdk/search/model/FilterSearchModel.html" title="type parameter in FilterSearchModel">T</a>&gt;&gt;&nbsp;byAnyAsString(java.lang.Iterable&lt;java.lang.String&gt;&nbsp;values)</pre>
-<div class="block">Generates an expression to select all elements with attributes matching any of the given values.
- For example: filtering by ["red", "blue"] would select only those elements with either "red" or "blue" value.</div>
-<dl>
-<dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>values</code> - the values to filter by</dd>
-<dt><span class="returnLabel">Returns:</span></dt>
-<dd>a filter expression for the given values</dd>
-</dl>
+<pre>@Deprecated
+default&nbsp;java.util.List&lt;<a href="../../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../../io/sphere/sdk/search/model/FilterSearchModel.html" title="type parameter in FilterSearchModel">T</a>&gt;&gt;&nbsp;byAnyAsString(java.lang.Iterable&lt;java.lang.String&gt;&nbsp;values)</pre>
+<div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;<span class="deprecationComment">use <a href="../../../../../io/sphere/sdk/search/model/FilterSearchModel.html#containsAnyAsString-java.lang.Iterable-"><code>containsAnyAsString(Iterable)</code></a> instead</span></div>
 </li>
 </ul>
 <a name="byAllAsString-java.lang.Iterable-">
@@ -250,15 +370,9 @@ var activeTableTab = "activeTableTab";
 <ul class="blockListLast">
 <li class="blockList">
 <h4>byAllAsString</h4>
-<pre>java.util.List&lt;<a href="../../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../../io/sphere/sdk/search/model/FilterSearchModel.html" title="type parameter in FilterSearchModel">T</a>&gt;&gt;&nbsp;byAllAsString(java.lang.Iterable&lt;java.lang.String&gt;&nbsp;values)</pre>
-<div class="block">Generates an expression to select all elements with attributes matching all the given values.
- For example: filtering by ["red", "blue"] would select only those elements with both "red" and "blue" values.</div>
-<dl>
-<dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>values</code> - the values to filter by</dd>
-<dt><span class="returnLabel">Returns:</span></dt>
-<dd>a filter expression for the given values</dd>
-</dl>
+<pre>@Deprecated
+default&nbsp;java.util.List&lt;<a href="../../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../../io/sphere/sdk/search/model/FilterSearchModel.html" title="type parameter in FilterSearchModel">T</a>&gt;&gt;&nbsp;byAllAsString(java.lang.Iterable&lt;java.lang.String&gt;&nbsp;values)</pre>
+<div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;<span class="deprecationComment">use <a href="../../../../../io/sphere/sdk/search/model/FilterSearchModel.html#containsAllAsString-java.lang.Iterable-"><code>containsAllAsString(Iterable)</code></a> instead</span></div>
 </li>
 </ul>
 </li>
