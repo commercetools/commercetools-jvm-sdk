@@ -30,9 +30,9 @@ public class PagedSearchResultTest {
             assertThat(result.getFacetResult(TERM_FACET_EXPR)).isEqualTo(TERM_FACET_RESULT);
             assertThat(result.getTermFacetResult("non-existent")).isNull();
             assertThatThrownBy(() -> result.getTermFacetResult(RANGE_FACET_EXPR.resultPath()))
-                    .isInstanceOf(ClassCastException.class);
+                    .isInstanceOf(IllegalArgumentException.class);
             assertThatThrownBy(() -> result.getTermFacetResult(FILTERED_FACET_EXPR.resultPath()))
-                    .isInstanceOf(ClassCastException.class);
+                    .isInstanceOf(IllegalArgumentException.class);
         });
     }
 
@@ -42,9 +42,9 @@ public class PagedSearchResultTest {
             assertThat(result.getFacetResult(RANGE_FACET_EXPR)).isEqualTo(RANGE_FACET_RESULT);
             assertThat(result.getRangeFacetResult("non-existent")).isNull();
             assertThatThrownBy(() -> result.getRangeFacetResult(TERM_FACET_EXPR.resultPath()))
-                    .isInstanceOf(ClassCastException.class);
+                    .isInstanceOf(IllegalArgumentException.class);
             assertThatThrownBy(() -> result.getRangeFacetResult(FILTERED_FACET_EXPR.resultPath()))
-                    .isInstanceOf(ClassCastException.class);
+                    .isInstanceOf(IllegalArgumentException.class);
         });
     }
 
@@ -54,9 +54,9 @@ public class PagedSearchResultTest {
             assertThat(result.getFacetResult(FILTERED_FACET_EXPR)).isEqualTo(FILTERED_FACET_RESULT);
             assertThat(result.getFilteredFacetResult("non-existent")).isNull();
             assertThatThrownBy(() -> result.getFilteredFacetResult(TERM_FACET_EXPR.resultPath()))
-                    .isInstanceOf(ClassCastException.class);
+                    .isInstanceOf(IllegalArgumentException.class);
             assertThatThrownBy(() -> result.getFilteredFacetResult(RANGE_FACET_EXPR.resultPath()))
-                    .isInstanceOf(ClassCastException.class);
+                    .isInstanceOf(IllegalArgumentException.class);
         });
     }
 

@@ -57,15 +57,15 @@ public class PagedSearchResult<T> extends PagedResult<T> {
     /**
      * @see #getFacetResult(String)
      */
-    public TermFacetResult getFacetResult(final TermFacetedSearchExpression<T> facetAndFilterExpression) {
-        return getFacetResult(facetAndFilterExpression.facetExpression());
+    public TermFacetResult getFacetResult(final TermFacetedSearchExpression<T> facetedSearchExpression) {
+        return getFacetResult(facetedSearchExpression.facetExpression());
     }
 
     /**
      * @see #getFacetResult(String)
      */
-    public RangeFacetResult getFacetResult(final RangeFacetedSearchExpression<T> facetAndFilterExpression) {
-        return getFacetResult(facetAndFilterExpression.facetExpression());
+    public RangeFacetResult getFacetResult(final RangeFacetedSearchExpression<T> facetedSearchExpression) {
+        return getFacetResult(facetedSearchExpression.facetExpression());
     }
 
     /**
@@ -84,7 +84,7 @@ public class PagedSearchResult<T> extends PagedResult<T> {
             final RangeFacetResult facetResult = getRangeFacetResult(facetResultPath);
             return getSimpleRangeStats(facetResult.getRanges());
         } else {
-            throw new ClassCastException("Facet result is not of type RangeFacetResult for all ranges, i.e. (* to \"0\"),(\"0\" to *): " + facetResultPath);
+            throw new IllegalArgumentException("Facet result is not of type RangeFacetResult for all ranges, i.e. (* to \"0\"),(\"0\" to *): " + facetResultPath);
         }
     }
 
@@ -100,7 +100,7 @@ public class PagedSearchResult<T> extends PagedResult<T> {
             if (facetResult instanceof TermFacetResult) {
                 return (TermFacetResult) facetResult;
             } else {
-                throw new ClassCastException("Facet result is not of type TermFacetResult: " + facetResult);
+                throw new IllegalArgumentException("Facet result is not of type TermFacetResult: " + facetResult);
             }
         }).orElse(null);
     }
@@ -110,7 +110,7 @@ public class PagedSearchResult<T> extends PagedResult<T> {
             if (facetResult instanceof RangeFacetResult) {
                 return (RangeFacetResult) facetResult;
             } else {
-                throw new ClassCastException("Facet result is not of type RangeFacetResult: " + facetResult);
+                throw new IllegalArgumentException("Facet result is not of type RangeFacetResult: " + facetResult);
             }
         }).orElse(null);
     }
@@ -120,7 +120,7 @@ public class PagedSearchResult<T> extends PagedResult<T> {
             if (facetResult instanceof FilteredFacetResult) {
                 return (FilteredFacetResult) facetResult;
             } else {
-                throw new ClassCastException("Facet result is not of type FilteredFacetResult: " + facetResult);
+                throw new IllegalArgumentException("Facet result is not of type FilteredFacetResult: " + facetResult);
             }
         }).orElse(null);
     }
