@@ -15,7 +15,7 @@ import io.sphere.sdk.reviews.search.ReviewRatingStatisticsFacetedSearchSearchMod
 import io.sphere.sdk.search.PagedSearchResult;
 import io.sphere.sdk.search.RangeFacetResult;
 import io.sphere.sdk.search.SortExpression;
-import io.sphere.sdk.search.TermFacetAndFilterExpression;
+import io.sphere.sdk.search.TermFacetedSearchExpression;
 import io.sphere.sdk.search.model.FacetRange;
 import io.sphere.sdk.search.model.RangeStats;
 import io.sphere.sdk.test.IntegrationTest;
@@ -102,9 +102,9 @@ public class ReviewProductProjectionSearchTest extends IntegrationTest {
         assertThat(facetRanges.toString()).isEqualTo("[[0 to 1), [1 to 2), [2 to 3), [3 to 4), [4 to 5)]");
 
         final ProductProjectionSearch searchRequest = ProductProjectionSearch.ofStaged()//in prod it would be current
-                .withResultFilters(m -> m.reviewRatingStatistics().averageRating().byGreaterThanOrEqualTo(new BigDecimal(2)))
+                .withResultFilters(m -> m.reviewRatingStatistics().averageRating().isGreaterThanOrEqualTo(new BigDecimal(2)))
                 .withFacets(m -> m.reviewRatingStatistics().averageRating().onlyRange(facetRanges))
-                .withSort(m -> m.reviewRatingStatistics().averageRating().byDesc());
+                .withSort(m -> m.reviewRatingStatistics().averageRating().desc());
 
         assertEventually(() -> {
             final PagedSearchResult<ProductProjection> result = client().executeBlocking(searchRequest);
@@ -145,9 +145,9 @@ public class ReviewProductProjectionSearchTest extends IntegrationTest {
     @Test
     public void searchByCount() {
         final ProductProjectionSearch projectionSearch = ProductProjectionSearch.ofStaged()//in prod it would be current
-                .withResultFilters(m -> m.reviewRatingStatistics().count().byGreaterThanOrEqualTo(new BigDecimal(2)))
-                .plusResultFilters(m -> m.reviewRatingStatistics().highestRating().byGreaterThanOrEqualTo(new BigDecimal(2)))
-                .plusResultFilters(m -> m.reviewRatingStatistics().lowestRating().byGreaterThanOrEqualTo(new BigDecimal(0)))
+                .withResultFilters(m -> m.reviewRatingStatistics().count().isGreaterThanOrEqualTo(new BigDecimal(2)))
+                .plusResultFilters(m -> m.reviewRatingStatistics().highestRating().isGreaterThanOrEqualTo(new BigDecimal(2)))
+                .plusResultFilters(m -> m.reviewRatingStatistics().lowestRating().isGreaterThanOrEqualTo(new BigDecimal(0)))
                 .plusFacets(m -> m.reviewRatingStatistics().count().allRanges())
                 .plusFacets(m -> m.reviewRatingStatistics().highestRating().allRanges())
                 .plusFacets(m -> m.reviewRatingStatistics().lowestRating().allRanges())
@@ -169,7 +169,7 @@ public class ReviewProductProjectionSearchTest extends IntegrationTest {
     @Test
     public void sortByAverageRating() {
         checkSorting(
-                m -> m.reviewRatingStatistics().averageRating().byDesc(),
+                m -> m.reviewRatingStatistics().averageRating().desc(),
                 p -> assertThat(p.getReviewRatingStatistics().getAverageRating()).isBetween(2.70D, 2.73D)
         );
     }
@@ -177,7 +177,7 @@ public class ReviewProductProjectionSearchTest extends IntegrationTest {
     @Test
     public void sortByCount() {
         checkSorting(
-                m -> m.reviewRatingStatistics().count().byDesc(),
+                m -> m.reviewRatingStatistics().count().desc(),
                 p -> assertThat(p.getReviewRatingStatistics().getCount()).isEqualTo(REVIEWS_PER_PRODUCT)
         );
     }
@@ -185,7 +185,7 @@ public class ReviewProductProjectionSearchTest extends IntegrationTest {
     @Test
     public void sortByLowestRating() {
         checkSorting(
-                m -> m.reviewRatingStatistics().lowestRating().byAsc(),
+                m -> m.reviewRatingStatistics().lowestRating().asc(),
                 p -> assertThat(p.getReviewRatingStatistics().getLowestRating()).isEqualTo(LOWEST_RATING)
         );
     }
@@ -193,7 +193,7 @@ public class ReviewProductProjectionSearchTest extends IntegrationTest {
     @Test
     public void sortByHighestRating() {
         checkSorting(
-                m -> m.reviewRatingStatistics().highestRating().byDesc(),
+                m -> m.reviewRatingStatistics().highestRating().desc(),
                 p -> assertThat(p.getReviewRatingStatistics().getHighestRating()).isEqualTo(HIGHEST_RATING)
         );
     }
@@ -202,13 +202,13 @@ public class ReviewProductProjectionSearchTest extends IntegrationTest {
     public void facetAndFilter() {
         final ReviewRatingStatisticsFacetedSearchSearchModel<ProductProjection> reviewRatingsModel
                 = ProductProjectionSearchModel.of().facetedSearch().reviewRatingStatistics();
-        final TermFacetAndFilterExpression<ProductProjection> count = reviewRatingsModel.count().by("20");
-        final TermFacetAndFilterExpression<ProductProjection> averageRating = reviewRatingsModel.averageRating().by("2.7");
-        final TermFacetAndFilterExpression<ProductProjection> highestRating = reviewRatingsModel.highestRating().by(String.valueOf(HIGHEST_RATING));
-        final TermFacetAndFilterExpression<ProductProjection> lowestRating = reviewRatingsModel.lowestRating().by(String.valueOf(LOWEST_RATING));
+        final TermFacetedSearchExpression<ProductProjection> count = reviewRatingsModel.count().is("20");
+        final TermFacetedSearchExpression<ProductProjection> averageRating = reviewRatingsModel.averageRating().is("2.7");
+        final TermFacetedSearchExpression<ProductProjection> highestRating = reviewRatingsModel.highestRating().is(String.valueOf(HIGHEST_RATING));
+        final TermFacetedSearchExpression<ProductProjection> lowestRating = reviewRatingsModel.lowestRating().is(String.valueOf(LOWEST_RATING));
 
         final ProductProjectionSearch productProjectionSearch = ProductProjectionSearch.ofStaged()
-                .withQueryFilters(m -> m.id().by(product.getId()))
+                .withQueryFilters(m -> m.id().is(product.getId()))
                 .plusFacetedSearch(asList(count, averageRating, highestRating, lowestRating));
         assertEventually(() -> {
             final PagedSearchResult<ProductProjection> result = client().executeBlocking(productProjectionSearch);
@@ -216,16 +216,16 @@ public class ReviewProductProjectionSearchTest extends IntegrationTest {
             assertThat(productProjectionList).isNotEmpty();
             assertThat(productProjectionList.get(0).getId()).isEqualTo(product.getId());
 
-            assertThat(result.getTermFacetResult(count.facetExpression()).getTotal()).as("count facet").isEqualTo(1L);
-            assertThat(result.getTermFacetResult(averageRating.facetExpression()).getTotal()).as("averageRating facet").isEqualTo(1L);
-            assertThat(result.getTermFacetResult(highestRating.facetExpression()).getTotal()).as("highestRating facet").isEqualTo(1L);
-            assertThat(result.getTermFacetResult(lowestRating.facetExpression()).getTotal()).as("lowestRating facet").isEqualTo(1L);
+            assertThat(result.getFacetResult(count).getTotal()).as("count facet").isEqualTo(1L);
+            assertThat(result.getFacetResult(averageRating).getTotal()).as("averageRating facet").isEqualTo(1L);
+            assertThat(result.getFacetResult(highestRating).getTotal()).as("highestRating facet").isEqualTo(1L);
+            assertThat(result.getFacetResult(lowestRating).getTotal()).as("lowestRating facet").isEqualTo(1L);
         });
     }
 
     private void checkSorting(final Function<ProductProjectionSortSearchModel, SortExpression<ProductProjection>> sortExpressionFunction, final Consumer<ProductProjection> asserter) {
         final ProductProjectionSearch productProjectionSearch = ProductProjectionSearch.ofStaged()
-                .withQueryFilters(m -> m.reviewRatingStatistics().count().byGreaterThanOrEqualTo(BigDecimal.ZERO))
+                .withQueryFilters(m -> m.reviewRatingStatistics().count().isGreaterThanOrEqualTo(BigDecimal.ZERO))
                 .withSort(sortExpressionFunction);
         assertEventually(() -> {
             final List<ProductProjection> results = client().executeBlocking(productProjectionSearch).getResults();

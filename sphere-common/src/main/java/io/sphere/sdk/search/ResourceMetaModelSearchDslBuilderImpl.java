@@ -31,7 +31,7 @@ public abstract class ResourceMetaModelSearchDslBuilderImpl<B, T, C extends Meta
 
 
     @Override
-    public B facetedSearch(final FacetAndFilterExpression<T> facetedSearchExpression) {
+    public B facetedSearch(final FacetedSearchExpression<T> facetedSearchExpression) {
         return op(d -> d.withFacetedSearch(facetedSearchExpression));
     }
 
@@ -136,17 +136,17 @@ public abstract class ResourceMetaModelSearchDslBuilderImpl<B, T, C extends Meta
     }
 
     @Override
-    public B plusFacetedSearch(final FacetAndFilterExpression<T> facetedSearchExpression) {
+    public B plusFacetedSearch(final FacetedSearchExpression<T> facetedSearchExpression) {
         return op(d -> d.plusFacetedSearch(facetedSearchExpression));
     }
 
     @Override
-    public B plusFacetedSearch(final List<FacetAndFilterExpression<T>> facetedSearchExpressions) {
+    public B plusFacetedSearch(final List<FacetedSearchExpression<T>> facetedSearchExpressions) {
         return op(d -> d.plusFacetedSearch(facetedSearchExpressions));
     }
 
     @Override
-    public B facetedSearch(final List<FacetAndFilterExpression<T>> facetedSearchExpressions) {
+    public B facetedSearch(final List<FacetedSearchExpression<T>> facetedSearchExpressions) {
         return op(d -> d.withFacetedSearch(facetedSearchExpressions));
     }
 

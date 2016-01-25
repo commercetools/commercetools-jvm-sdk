@@ -20,7 +20,7 @@ public class M26Demo {
         @Nullable final String term = getTerm();
         final ProductProjectionSearchBuilder searchBuilder = ProductProjectionSearchBuilder.ofCurrent()
                 .limit(30)
-                .sort(m -> m.name().locale(Locale.ENGLISH).byAsc());
+                .sort(m -> m.name().locale(Locale.ENGLISH).asc());
         if (StringUtils.isNotBlank(term)) {
             searchBuilder.text(Locale.ENGLISH, term);
         }
@@ -35,7 +35,7 @@ public class M26Demo {
         @Nullable final String term = getTerm();
         ProductProjectionSearch search = ProductProjectionSearch.ofCurrent()
                 .withLimit(30)
-                .withSort(m -> m.name().locale(Locale.ENGLISH).byAsc());
+                .withSort(m -> m.name().locale(Locale.ENGLISH).asc());
         if (StringUtils.isNotBlank(term)) {
             search = search.withText(Locale.ENGLISH, term);
         }

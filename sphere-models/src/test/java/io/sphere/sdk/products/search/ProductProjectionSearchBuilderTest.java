@@ -9,15 +9,15 @@ public class ProductProjectionSearchBuilderTest {
     public void searchRequestIsAsExpected() {
         final ProductProjectionSearch actual = ProductProjectionSearchBuilder.ofCurrent()
                 .facets(m -> m.allVariants().price().centAmount().allRanges())
-                .queryFilters(m -> m.allVariants().price().centAmount().byGreaterThanOrEqualTo(4L))
-                .sort(m -> m.createdAt().byAsc())
+                .queryFilters(m -> m.allVariants().price().centAmount().isGreaterThanOrEqualTo(4L))
+                .sort(m -> m.createdAt().asc())
                 .expansionPaths(m -> m.categories())
                 .build();
 
         final ProductProjectionSearch expected = ProductProjectionSearch.ofCurrent()
                 .withFacets(m -> m.allVariants().price().centAmount().allRanges())
-                .withQueryFilters(m -> m.allVariants().price().centAmount().byGreaterThanOrEqualTo(4L))
-                .withSort(m -> m.createdAt().byAsc())
+                .withQueryFilters(m -> m.allVariants().price().centAmount().isGreaterThanOrEqualTo(4L))
+                .withSort(m -> m.createdAt().asc())
                 .withExpansionPaths(m -> m.categories());
 
         assertThat(actual).isEqualTo(expected);

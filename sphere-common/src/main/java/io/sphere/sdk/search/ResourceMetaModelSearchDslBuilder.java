@@ -61,13 +61,13 @@ public interface ResourceMetaModelSearchDslBuilder<B, T, C extends MetaModelSear
 
     B plusExpansionPaths(final ExpansionPath<T> expansionPath);
 
-    B plusFacetedSearch(final FacetAndFilterExpression<T> facetedSearchExpression);
+    B plusFacetedSearch(final FacetedSearchExpression<T> facetedSearchExpression);
 
-    B plusFacetedSearch(final List<FacetAndFilterExpression<T>> facetedSearchExpressions);
+    B plusFacetedSearch(final List<FacetedSearchExpression<T>> facetedSearchExpressions);
 
-    B facetedSearch(final FacetAndFilterExpression<T> facetedSearchExpression);
+    B facetedSearch(final FacetedSearchExpression<T> facetedSearchExpression);
 
-    B facetedSearch(final List<FacetAndFilterExpression<T>> facetedSearchExpressions);
+    B facetedSearch(final List<FacetedSearchExpression<T>> facetedSearchExpressions);
 
     B queryFilters(final List<FilterExpression<T>> filterExpressions);
 
