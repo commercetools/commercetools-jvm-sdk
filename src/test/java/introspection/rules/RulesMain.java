@@ -28,7 +28,8 @@ public class RulesMain {
                 new QueryAndCommandsAreCompleteRule(),
                 new ReferenceableResourceCanCreateReferenceRule(),
                 new QueryEndpointsHaveAlsoABuilderRule(),
-                new QueryModelsAreInterfacesRule()
+                new QueryModelsAreInterfacesRule(),
+                new DraftsAreInterfacesRule()
         );
         final boolean allIsOk = rules.stream()
                 .map(rule -> {
