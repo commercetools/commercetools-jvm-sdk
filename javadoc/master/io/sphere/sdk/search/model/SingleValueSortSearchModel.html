@@ -143,16 +143,16 @@ extends <a href="../../../../../io/sphere/sdk/models/Base.html" title="class in 
 <th class="colLast" scope="col">Method and Description</th>
 </tr>
 <tr id="i0" class="altColor">
+<td class="colFirst"><code><a href="../../../../../io/sphere/sdk/search/SortExpression.html" title="interface in io.sphere.sdk.search">SortExpression</a>&lt;<a href="../../../../../io/sphere/sdk/search/model/SingleValueSortSearchModel.html" title="type parameter in SingleValueSortSearchModel">T</a>&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/search/model/SingleValueSortSearchModel.html#asc--">asc</a></span>()</code>&nbsp;</td>
+</tr>
+<tr id="i1" class="rowColor">
 <td class="colFirst"><code><a href="../../../../../io/sphere/sdk/search/SortExpression.html" title="interface in io.sphere.sdk.search">SortExpression</a>&lt;T&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/search/model/SingleValueSortSearchModel.html#by-io.sphere.sdk.search.SearchSortDirection-">by</a></span>(<a href="../../../../../io/sphere/sdk/search/SearchSortDirection.html" title="enum in io.sphere.sdk.search">SearchSortDirection</a>&nbsp;direction)</code>&nbsp;</td>
 </tr>
-<tr id="i1" class="rowColor">
-<td class="colFirst"><code><a href="../../../../../io/sphere/sdk/search/SortExpression.html" title="interface in io.sphere.sdk.search">SortExpression</a>&lt;<a href="../../../../../io/sphere/sdk/search/model/SingleValueSortSearchModel.html" title="type parameter in SingleValueSortSearchModel">T</a>&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/search/model/SingleValueSortSearchModel.html#byAsc--">byAsc</a></span>()</code>&nbsp;</td>
-</tr>
 <tr id="i2" class="altColor">
 <td class="colFirst"><code><a href="../../../../../io/sphere/sdk/search/SortExpression.html" title="interface in io.sphere.sdk.search">SortExpression</a>&lt;<a href="../../../../../io/sphere/sdk/search/model/SingleValueSortSearchModel.html" title="type parameter in SingleValueSortSearchModel">T</a>&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/search/model/SingleValueSortSearchModel.html#byDesc--">byDesc</a></span>()</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/search/model/SingleValueSortSearchModel.html#desc--">desc</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i3" class="rowColor">
 <td class="colFirst"><code>static &lt;T&gt;&nbsp;<a href="../../../../../io/sphere/sdk/search/model/SingleValueSortSearchModel.html" title="class in io.sphere.sdk.search.model">SingleValueSortSearchModel</a>&lt;T&gt;</code></td>
@@ -175,6 +175,13 @@ extends <a href="../../../../../io/sphere/sdk/models/Base.html" title="class in 
 <h3>Methods inherited from class&nbsp;java.lang.Object</h3>
 <code>clone, finalize, getClass, notify, notifyAll, wait, wait, wait</code></li>
 </ul>
+<ul class="blockList">
+<li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.search.model.SortSearchModel">
+<!--   -->
+</a>
+<h3>Methods inherited from interface&nbsp;io.sphere.sdk.search.model.<a href="../../../../../io/sphere/sdk/search/model/SortSearchModel.html" title="interface in io.sphere.sdk.search.model">SortSearchModel</a></h3>
+<code><a href="../../../../../io/sphere/sdk/search/model/SortSearchModel.html#byAsc--">byAsc</a>, <a href="../../../../../io/sphere/sdk/search/model/SortSearchModel.html#byDesc--">byDesc</a></code></li>
+</ul>
 </li>
 </ul>
 </li>
@@ -189,31 +196,31 @@ extends <a href="../../../../../io/sphere/sdk/models/Base.html" title="class in 
 <!--   -->
 </a>
 <h3>Method Detail</h3>
-<a name="byAsc--">
+<a name="asc--">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
-<h4>byAsc</h4>
-<pre>public&nbsp;<a href="../../../../../io/sphere/sdk/search/SortExpression.html" title="interface in io.sphere.sdk.search">SortExpression</a>&lt;<a href="../../../../../io/sphere/sdk/search/model/SingleValueSortSearchModel.html" title="type parameter in SingleValueSortSearchModel">T</a>&gt;&nbsp;byAsc()</pre>
+<h4>asc</h4>
+<pre>public&nbsp;<a href="../../../../../io/sphere/sdk/search/SortExpression.html" title="interface in io.sphere.sdk.search">SortExpression</a>&lt;<a href="../../../../../io/sphere/sdk/search/model/SingleValueSortSearchModel.html" title="type parameter in SingleValueSortSearchModel">T</a>&gt;&nbsp;asc()</pre>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../../io/sphere/sdk/search/model/SortSearchModel.html#byAsc--">byAsc</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../io/sphere/sdk/search/model/SortSearchModel.html" title="interface in io.sphere.sdk.search.model">SortSearchModel</a>&lt;<a href="../../../../../io/sphere/sdk/search/model/SingleValueSortSearchModel.html" title="type parameter in SingleValueSortSearchModel">T</a>&gt;</code></dd>
+<dd><code><a href="../../../../../io/sphere/sdk/search/model/SortSearchModel.html#asc--">asc</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../io/sphere/sdk/search/model/SortSearchModel.html" title="interface in io.sphere.sdk.search.model">SortSearchModel</a>&lt;<a href="../../../../../io/sphere/sdk/search/model/SingleValueSortSearchModel.html" title="type parameter in SingleValueSortSearchModel">T</a>&gt;</code></dd>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>the ascending sort direction</dd>
 </dl>
 </li>
 </ul>
-<a name="byDesc--">
+<a name="desc--">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
-<h4>byDesc</h4>
-<pre>public&nbsp;<a href="../../../../../io/sphere/sdk/search/SortExpression.html" title="interface in io.sphere.sdk.search">SortExpression</a>&lt;<a href="../../../../../io/sphere/sdk/search/model/SingleValueSortSearchModel.html" title="type parameter in SingleValueSortSearchModel">T</a>&gt;&nbsp;byDesc()</pre>
+<h4>desc</h4>
+<pre>public&nbsp;<a href="../../../../../io/sphere/sdk/search/SortExpression.html" title="interface in io.sphere.sdk.search">SortExpression</a>&lt;<a href="../../../../../io/sphere/sdk/search/model/SingleValueSortSearchModel.html" title="type parameter in SingleValueSortSearchModel">T</a>&gt;&nbsp;desc()</pre>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../../io/sphere/sdk/search/model/SortSearchModel.html#byDesc--">byDesc</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../io/sphere/sdk/search/model/SortSearchModel.html" title="interface in io.sphere.sdk.search.model">SortSearchModel</a>&lt;<a href="../../../../../io/sphere/sdk/search/model/SingleValueSortSearchModel.html" title="type parameter in SingleValueSortSearchModel">T</a>&gt;</code></dd>
+<dd><code><a href="../../../../../io/sphere/sdk/search/model/SortSearchModel.html#desc--">desc</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../io/sphere/sdk/search/model/SortSearchModel.html" title="interface in io.sphere.sdk.search.model">SortSearchModel</a>&lt;<a href="../../../../../io/sphere/sdk/search/model/SingleValueSortSearchModel.html" title="type parameter in SingleValueSortSearchModel">T</a>&gt;</code></dd>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>the descending sort direction</dd>
 </dl>

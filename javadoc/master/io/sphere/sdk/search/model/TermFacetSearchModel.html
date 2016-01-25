@@ -48,7 +48,7 @@ var activeTableTab = "activeTableTab";
 </div>
 <div class="subNav">
 <ul class="navList">
-<li><a href="../../../../../io/sphere/sdk/search/model/TermFacetAndFilterSearchModel.html" title="class in io.sphere.sdk.search.model"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
+<li><a href="../../../../../io/sphere/sdk/search/model/TermFacetedSearchSearchModel.html" title="class in io.sphere.sdk.search.model"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
 <li><a href="../../../../../io/sphere/sdk/search/model/TermFilterSearchModel.html" title="class in io.sphere.sdk.search.model"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">
@@ -309,7 +309,6 @@ protected final&nbsp;java.lang.String alias</pre>
 <li class="blockList">
 <h4>withAlias</h4>
 <pre>public&nbsp;<a href="../../../../../io/sphere/sdk/search/model/TermFacetSearchModel.html" title="class in io.sphere.sdk.search.model">TermFacetSearchModel</a>&lt;<a href="../../../../../io/sphere/sdk/search/model/TermFacetSearchModel.html" title="type parameter in TermFacetSearchModel">T</a>,<a href="../../../../../io/sphere/sdk/search/model/TermFacetSearchModel.html" title="type parameter in TermFacetSearchModel">V</a>&gt;&nbsp;withAlias(java.lang.String&nbsp;alias)</pre>
-<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../../io/sphere/sdk/search/model/FacetSearchModel.html#withAlias-java.lang.String-">FacetSearchModel</a></code></span></div>
 <div class="block">Allows to set an alias to identify the facet.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
@@ -326,7 +325,6 @@ protected final&nbsp;java.lang.String alias</pre>
 <li class="blockList">
 <h4>allTerms</h4>
 <pre>public&nbsp;<a href="../../../../../io/sphere/sdk/search/TermFacetExpression.html" title="interface in io.sphere.sdk.search">TermFacetExpression</a>&lt;<a href="../../../../../io/sphere/sdk/search/model/TermFacetSearchModel.html" title="type parameter in TermFacetSearchModel">T</a>&gt;&nbsp;allTerms()</pre>
-<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../../io/sphere/sdk/search/model/FacetSearchModel.html#allTerms--">FacetSearchModel</a></code></span></div>
 <div class="block">Generates an expression to obtain the facets of the attribute for all values.
  For example: a possible faceted classification could be ["red": 4, "yellow": 2, "blue": 1].</div>
 <dl>
@@ -346,7 +344,6 @@ protected final&nbsp;java.lang.String alias</pre>
 <li class="blockList">
 <h4>onlyTerm</h4>
 <pre>public&nbsp;<a href="../../../../../io/sphere/sdk/search/FilteredFacetExpression.html" title="interface in io.sphere.sdk.search">FilteredFacetExpression</a>&lt;<a href="../../../../../io/sphere/sdk/search/model/TermFacetSearchModel.html" title="type parameter in TermFacetSearchModel">T</a>&gt;&nbsp;onlyTerm(<a href="../../../../../io/sphere/sdk/search/model/TermFacetSearchModel.html" title="type parameter in TermFacetSearchModel">V</a>&nbsp;value)</pre>
-<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../../io/sphere/sdk/search/model/FacetSearchModel.html#onlyTerm-V-">FacetSearchModel</a></code></span></div>
 <div class="block">Generates an expression to obtain the facet of the attribute for only the given value.
  For example: a possible faceted classification for "red" could be ["red": 4].</div>
 <dl>
@@ -366,7 +363,6 @@ protected final&nbsp;java.lang.String alias</pre>
 <li class="blockList">
 <h4>onlyTerm</h4>
 <pre>public&nbsp;<a href="../../../../../io/sphere/sdk/search/FilteredFacetExpression.html" title="interface in io.sphere.sdk.search">FilteredFacetExpression</a>&lt;<a href="../../../../../io/sphere/sdk/search/model/TermFacetSearchModel.html" title="type parameter in TermFacetSearchModel">T</a>&gt;&nbsp;onlyTerm(java.lang.Iterable&lt;<a href="../../../../../io/sphere/sdk/search/model/TermFacetSearchModel.html" title="type parameter in TermFacetSearchModel">V</a>&gt;&nbsp;values)</pre>
-<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../../io/sphere/sdk/search/model/FacetSearchModel.html#onlyTerm-java.lang.Iterable-">FacetSearchModel</a></code></span></div>
 <div class="block">Generates an expression to obtain the facets of the attribute for only the given values.
  For example: a possible faceted classification for ["red", "blue"] could be ["red": 4, "blue": 1].</div>
 <dl>
@@ -408,7 +404,6 @@ protected final&nbsp;java.lang.String alias</pre>
 <h4>getAlias</h4>
 <pre>@Nullable
 public&nbsp;java.lang.String&nbsp;getAlias()</pre>
-<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../../io/sphere/sdk/search/model/FacetSearchModel.html#getAlias--">FacetSearchModel</a></code></span></div>
 <div class="block">The alias related to the facet.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
@@ -425,7 +420,6 @@ public&nbsp;java.lang.String&nbsp;getAlias()</pre>
 <li class="blockList">
 <h4>onlyTermAsString</h4>
 <pre>public&nbsp;<a href="../../../../../io/sphere/sdk/search/FilteredFacetExpression.html" title="interface in io.sphere.sdk.search">FilteredFacetExpression</a>&lt;T&gt;&nbsp;onlyTermAsString(java.lang.Iterable&lt;java.lang.String&gt;&nbsp;values)</pre>
-<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../../io/sphere/sdk/search/model/FacetSearchModel.html#onlyTermAsString-java.lang.Iterable-">FacetSearchModel</a></code></span></div>
 <div class="block">Generates an expression to obtain the facets of the attribute for only the given values.
  For example: a possible faceted classification for ["red", "blue"] could be ["red": 4, "blue": 1].</div>
 <dl>
@@ -522,7 +516,7 @@ public&nbsp;<a href="../../../../../io/sphere/sdk/search/FilteredFacetExpression
 </div>
 <div class="subNav">
 <ul class="navList">
-<li><a href="../../../../../io/sphere/sdk/search/model/TermFacetAndFilterSearchModel.html" title="class in io.sphere.sdk.search.model"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
+<li><a href="../../../../../io/sphere/sdk/search/model/TermFacetedSearchSearchModel.html" title="class in io.sphere.sdk.search.model"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
 <li><a href="../../../../../io/sphere/sdk/search/model/TermFilterSearchModel.html" title="class in io.sphere.sdk.search.model"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">

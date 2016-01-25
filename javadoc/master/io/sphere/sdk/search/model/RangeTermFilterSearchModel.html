@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":42,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10,"i10":10,"i11":10,"i12":10,"i13":10,"i14":10,"i15":9};
+var methods = {"i0":42,"i1":42,"i2":42,"i3":42,"i4":42,"i5":42,"i6":42,"i7":42,"i8":42,"i9":42,"i10":10,"i11":10,"i12":10,"i13":10,"i14":10,"i15":10,"i16":10,"i17":10,"i18":10,"i19":10,"i20":10,"i21":10,"i22":10,"i23":10,"i24":10,"i25":9};
 var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"],32:["t6","Deprecated Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -49,7 +49,7 @@ var activeTableTab = "activeTableTab";
 <div class="subNav">
 <ul class="navList">
 <li><a href="../../../../../io/sphere/sdk/search/model/RangeTermFacetSearchModel.html" title="class in io.sphere.sdk.search.model"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
-<li><a href="../../../../../io/sphere/sdk/search/model/ReferenceFacetAndFilterSearchModel.html" title="class in io.sphere.sdk.search.model"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
+<li><a href="../../../../../io/sphere/sdk/search/model/ReferenceFacetedSearchSearchModel.html" title="class in io.sphere.sdk.search.model"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">
 <li><a href="../../../../../index.html?io/sphere/sdk/search/model/RangeTermFilterSearchModel.html" target="_top">Frames</a></li>
@@ -170,96 +170,173 @@ extends <a href="../../../../../io/sphere/sdk/models/Base.html" title="class in 
 <td class="colFirst"><code>java.util.List&lt;<a href="../../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;T&gt;&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/search/model/RangeTermFilterSearchModel.html#by-java.lang.Iterable-">by</a></span>(java.lang.Iterable&lt;V&gt;&nbsp;values)</code>
 <div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;
-<div class="block"><span class="deprecationComment">use <code>TermFilterBaseSearchModel.byAny(java.lang.Iterable&lt;V&gt;)</code> instead</span></div>
+<div class="block"><span class="deprecationComment">use <code>TermFilterBaseSearchModel.containsAny(java.lang.Iterable&lt;V&gt;)</code> instead</span></div>
 </div>
 </td>
 </tr>
 <tr id="i1" class="rowColor">
-<td class="colFirst"><code>java.util.List&lt;<a href="../../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../../io/sphere/sdk/search/model/RangeTermFilterSearchModel.html" title="type parameter in RangeTermFilterSearchModel">T</a>&gt;&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/search/model/RangeTermFilterSearchModel.html#by-V-">by</a></span>(<a href="../../../../../io/sphere/sdk/search/model/RangeTermFilterSearchModel.html" title="type parameter in RangeTermFilterSearchModel">V</a>&nbsp;value)</code>
-<div class="block">Generates an expression to select all elements with the given attribute value.</div>
+<td class="colFirst"><code>java.util.List&lt;<a href="../../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;T&gt;&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/search/model/RangeTermFilterSearchModel.html#byAllRanges-java.lang.Iterable-">byAllRanges</a></span>(java.lang.Iterable&lt;<a href="../../../../../io/sphere/sdk/search/model/FilterRange.html" title="class in io.sphere.sdk.search.model">FilterRange</a>&lt;V&gt;&gt;&nbsp;ranges)</code>
+<div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;
+<div class="block"><span class="deprecationComment">use <a href="../../../../../io/sphere/sdk/search/model/RangeTermFilterSearchModel.html#isBetweenAll-java.lang.Iterable-"><code>isBetweenAll(Iterable)</code></a> instead</span></div>
+</div>
 </td>
 </tr>
 <tr id="i2" class="altColor">
-<td class="colFirst"><code>java.util.List&lt;<a href="../../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../../io/sphere/sdk/search/model/RangeTermFilterSearchModel.html" title="type parameter in RangeTermFilterSearchModel">T</a>&gt;&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/search/model/RangeTermFilterSearchModel.html#byAll-java.lang.Iterable-">byAll</a></span>(java.lang.Iterable&lt;<a href="../../../../../io/sphere/sdk/search/model/RangeTermFilterSearchModel.html" title="type parameter in RangeTermFilterSearchModel">V</a>&gt;&nbsp;values)</code>
-<div class="block">Generates an expression to select all elements with attributes matching all the given values.</div>
+<td class="colFirst"><code>java.util.List&lt;<a href="../../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;T&gt;&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/search/model/RangeTermFilterSearchModel.html#byAllRangesAsString-java.lang.Iterable-">byAllRangesAsString</a></span>(java.lang.Iterable&lt;<a href="../../../../../io/sphere/sdk/search/model/FilterRange.html" title="class in io.sphere.sdk.search.model">FilterRange</a>&lt;java.lang.String&gt;&gt;&nbsp;ranges)</code>
+<div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;
+<div class="block"><span class="deprecationComment">use <a href="../../../../../io/sphere/sdk/search/model/RangeTermFilterSearchModel.html#isBetweenAllAsString-java.lang.Iterable-"><code>isBetweenAllAsString(Iterable)</code></a> instead</span></div>
+</div>
 </td>
 </tr>
 <tr id="i3" class="rowColor">
 <td class="colFirst"><code>java.util.List&lt;<a href="../../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;T&gt;&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/search/model/RangeTermFilterSearchModel.html#byAllAsString-java.lang.Iterable-">byAllAsString</a></span>(java.lang.Iterable&lt;java.lang.String&gt;&nbsp;values)</code>
-<div class="block">Generates an expression to select all elements with attributes matching all the given values.</div>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/search/model/RangeTermFilterSearchModel.html#byAnyRange-java.lang.Iterable-">byAnyRange</a></span>(java.lang.Iterable&lt;<a href="../../../../../io/sphere/sdk/search/model/FilterRange.html" title="class in io.sphere.sdk.search.model">FilterRange</a>&lt;V&gt;&gt;&nbsp;ranges)</code>
+<div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;
+<div class="block"><span class="deprecationComment">use <a href="../../../../../io/sphere/sdk/search/model/RangeTermFilterSearchModel.html#isBetweenAny-java.lang.Iterable-"><code>isBetweenAny(Iterable)</code></a> instead</span></div>
+</div>
 </td>
 </tr>
 <tr id="i4" class="altColor">
-<td class="colFirst"><code>java.util.List&lt;<a href="../../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../../io/sphere/sdk/search/model/RangeTermFilterSearchModel.html" title="type parameter in RangeTermFilterSearchModel">T</a>&gt;&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/search/model/RangeTermFilterSearchModel.html#byAllRanges-java.lang.Iterable-">byAllRanges</a></span>(java.lang.Iterable&lt;<a href="../../../../../io/sphere/sdk/search/model/FilterRange.html" title="class in io.sphere.sdk.search.model">FilterRange</a>&lt;<a href="../../../../../io/sphere/sdk/search/model/RangeTermFilterSearchModel.html" title="type parameter in RangeTermFilterSearchModel">V</a>&gt;&gt;&nbsp;filterRanges)</code>
-<div class="block">Generates an expression to select all elements with an attribute value within all the given ranges.</div>
+<td class="colFirst"><code>java.util.List&lt;<a href="../../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;T&gt;&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/search/model/RangeTermFilterSearchModel.html#byAnyRangeAsString-java.lang.Iterable-">byAnyRangeAsString</a></span>(java.lang.Iterable&lt;<a href="../../../../../io/sphere/sdk/search/model/FilterRange.html" title="class in io.sphere.sdk.search.model">FilterRange</a>&lt;java.lang.String&gt;&gt;&nbsp;ranges)</code>
+<div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;
+<div class="block"><span class="deprecationComment">use <a href="../../../../../io/sphere/sdk/search/model/RangeTermFilterSearchModel.html#isBetweenAnyAsString-java.lang.Iterable-"><code>isBetweenAnyAsString(Iterable)</code></a> instead</span></div>
+</div>
 </td>
 </tr>
 <tr id="i5" class="rowColor">
 <td class="colFirst"><code>java.util.List&lt;<a href="../../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;T&gt;&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/search/model/RangeTermFilterSearchModel.html#byAllRangesAsString-java.lang.Iterable-">byAllRangesAsString</a></span>(java.lang.Iterable&lt;<a href="../../../../../io/sphere/sdk/search/model/FilterRange.html" title="class in io.sphere.sdk.search.model">FilterRange</a>&lt;java.lang.String&gt;&gt;&nbsp;ranges)</code>
-<div class="block">Generates an expression to select all elements with an attribute value within all the given ranges.</div>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/search/model/RangeTermFilterSearchModel.html#byGreaterThanOrEqualTo-V-">byGreaterThanOrEqualTo</a></span>(V&nbsp;value)</code>
+<div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;
+<div class="block"><span class="deprecationComment">use <a href="../../../../../io/sphere/sdk/search/model/RangeTermFilterSearchModel.html#isGreaterThanOrEqualTo-V-"><code>isGreaterThanOrEqualTo(Comparable)</code></a> instead</span></div>
+</div>
 </td>
 </tr>
 <tr id="i6" class="altColor">
-<td class="colFirst"><code>java.util.List&lt;<a href="../../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../../io/sphere/sdk/search/model/RangeTermFilterSearchModel.html" title="type parameter in RangeTermFilterSearchModel">T</a>&gt;&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/search/model/RangeTermFilterSearchModel.html#byAny-java.lang.Iterable-">byAny</a></span>(java.lang.Iterable&lt;<a href="../../../../../io/sphere/sdk/search/model/RangeTermFilterSearchModel.html" title="type parameter in RangeTermFilterSearchModel">V</a>&gt;&nbsp;values)</code>
-<div class="block">Generates an expression to select all elements with attributes matching any of the given values.</div>
+<td class="colFirst"><code>java.util.List&lt;<a href="../../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;T&gt;&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/search/model/RangeTermFilterSearchModel.html#byLessThanOrEqualTo-V-">byLessThanOrEqualTo</a></span>(V&nbsp;value)</code>
+<div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;
+<div class="block"><span class="deprecationComment">use <a href="../../../../../io/sphere/sdk/search/model/RangeTermFilterSearchModel.html#isLessThanOrEqualTo-V-"><code>isLessThanOrEqualTo(Comparable)</code></a> instead</span></div>
+</div>
 </td>
 </tr>
 <tr id="i7" class="rowColor">
 <td class="colFirst"><code>java.util.List&lt;<a href="../../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;T&gt;&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/search/model/RangeTermFilterSearchModel.html#byAnyAsString-java.lang.Iterable-">byAnyAsString</a></span>(java.lang.Iterable&lt;java.lang.String&gt;&nbsp;values)</code>
-<div class="block">Generates an expression to select all elements with attributes matching any of the given values.</div>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/search/model/RangeTermFilterSearchModel.html#byRange-io.sphere.sdk.search.model.FilterRange-">byRange</a></span>(<a href="../../../../../io/sphere/sdk/search/model/FilterRange.html" title="class in io.sphere.sdk.search.model">FilterRange</a>&lt;V&gt;&nbsp;range)</code>
+<div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;
+<div class="block"><span class="deprecationComment">use <a href="../../../../../io/sphere/sdk/search/model/RangeTermFilterSearchModel.html#isBetween-io.sphere.sdk.search.model.FilterRange-"><code>isBetween(FilterRange)</code></a> instead</span></div>
+</div>
 </td>
 </tr>
 <tr id="i8" class="altColor">
-<td class="colFirst"><code>java.util.List&lt;<a href="../../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../../io/sphere/sdk/search/model/RangeTermFilterSearchModel.html" title="type parameter in RangeTermFilterSearchModel">T</a>&gt;&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/search/model/RangeTermFilterSearchModel.html#byAnyRange-java.lang.Iterable-">byAnyRange</a></span>(java.lang.Iterable&lt;<a href="../../../../../io/sphere/sdk/search/model/FilterRange.html" title="class in io.sphere.sdk.search.model">FilterRange</a>&lt;<a href="../../../../../io/sphere/sdk/search/model/RangeTermFilterSearchModel.html" title="type parameter in RangeTermFilterSearchModel">V</a>&gt;&gt;&nbsp;filterRanges)</code>
-<div class="block">Generates an expression to select all elements with an attribute value within any of the given ranges.</div>
+<td class="colFirst"><code>java.util.List&lt;<a href="../../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;T&gt;&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/search/model/RangeTermFilterSearchModel.html#byRange-V-V-">byRange</a></span>(V&nbsp;lowerEndpoint,
+       V&nbsp;upperEndpoint)</code>
+<div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;
+<div class="block"><span class="deprecationComment">use <a href="../../../../../io/sphere/sdk/search/model/RangeTermFilterSearchModel.html#isBetween-V-V-"><code>isBetween(Comparable, Comparable)</code></a> instead</span></div>
+</div>
 </td>
 </tr>
 <tr id="i9" class="rowColor">
 <td class="colFirst"><code>java.util.List&lt;<a href="../../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;T&gt;&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/search/model/RangeTermFilterSearchModel.html#byAnyRangeAsString-java.lang.Iterable-">byAnyRangeAsString</a></span>(java.lang.Iterable&lt;<a href="../../../../../io/sphere/sdk/search/model/FilterRange.html" title="class in io.sphere.sdk.search.model">FilterRange</a>&lt;java.lang.String&gt;&gt;&nbsp;ranges)</code>
-<div class="block">Generates an expression to select all elements with an attribute value within any of the given ranges.</div>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/search/model/RangeTermFilterSearchModel.html#byRangeAsString-io.sphere.sdk.search.model.FilterRange-">byRangeAsString</a></span>(<a href="../../../../../io/sphere/sdk/search/model/FilterRange.html" title="class in io.sphere.sdk.search.model">FilterRange</a>&lt;java.lang.String&gt;&nbsp;range)</code>
+<div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;
+<div class="block"><span class="deprecationComment">use <a href="../../../../../io/sphere/sdk/search/model/RangeTermFilterSearchModel.html#isBetweenAsString-io.sphere.sdk.search.model.FilterRange-"><code>isBetweenAsString(FilterRange)</code></a> instead</span></div>
+</div>
 </td>
 </tr>
 <tr id="i10" class="altColor">
 <td class="colFirst"><code>java.util.List&lt;<a href="../../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../../io/sphere/sdk/search/model/RangeTermFilterSearchModel.html" title="type parameter in RangeTermFilterSearchModel">T</a>&gt;&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/search/model/RangeTermFilterSearchModel.html#byGreaterThanOrEqualTo-V-">byGreaterThanOrEqualTo</a></span>(<a href="../../../../../io/sphere/sdk/search/model/RangeTermFilterSearchModel.html" title="type parameter in RangeTermFilterSearchModel">V</a>&nbsp;value)</code>
-<div class="block">Generates an expression to select all elements with an attribute value greater than or equal to the given value.</div>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/search/model/RangeTermFilterSearchModel.html#containsAll-java.lang.Iterable-">containsAll</a></span>(java.lang.Iterable&lt;<a href="../../../../../io/sphere/sdk/search/model/RangeTermFilterSearchModel.html" title="type parameter in RangeTermFilterSearchModel">V</a>&gt;&nbsp;values)</code>
+<div class="block">Generates an expression to select all elements with attributes matching all the given values.</div>
 </td>
 </tr>
 <tr id="i11" class="rowColor">
-<td class="colFirst"><code>java.util.List&lt;<a href="../../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../../io/sphere/sdk/search/model/RangeTermFilterSearchModel.html" title="type parameter in RangeTermFilterSearchModel">T</a>&gt;&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/search/model/RangeTermFilterSearchModel.html#byLessThanOrEqualTo-V-">byLessThanOrEqualTo</a></span>(<a href="../../../../../io/sphere/sdk/search/model/RangeTermFilterSearchModel.html" title="type parameter in RangeTermFilterSearchModel">V</a>&nbsp;value)</code>
-<div class="block">Generates an expression to select all elements with an attribute value less than or equal to the given value.</div>
+<td class="colFirst"><code>java.util.List&lt;<a href="../../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;T&gt;&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/search/model/RangeTermFilterSearchModel.html#containsAllAsString-java.lang.Iterable-">containsAllAsString</a></span>(java.lang.Iterable&lt;java.lang.String&gt;&nbsp;values)</code>
+<div class="block">Generates an expression to select all elements with attributes matching all the given values.</div>
 </td>
 </tr>
 <tr id="i12" class="altColor">
 <td class="colFirst"><code>java.util.List&lt;<a href="../../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../../io/sphere/sdk/search/model/RangeTermFilterSearchModel.html" title="type parameter in RangeTermFilterSearchModel">T</a>&gt;&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/search/model/RangeTermFilterSearchModel.html#byRange-io.sphere.sdk.search.model.FilterRange-">byRange</a></span>(<a href="../../../../../io/sphere/sdk/search/model/FilterRange.html" title="class in io.sphere.sdk.search.model">FilterRange</a>&lt;<a href="../../../../../io/sphere/sdk/search/model/RangeTermFilterSearchModel.html" title="type parameter in RangeTermFilterSearchModel">V</a>&gt;&nbsp;range)</code>
-<div class="block">Generates an expression to select all elements with an attribute value within the given range.</div>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/search/model/RangeTermFilterSearchModel.html#containsAny-java.lang.Iterable-">containsAny</a></span>(java.lang.Iterable&lt;<a href="../../../../../io/sphere/sdk/search/model/RangeTermFilterSearchModel.html" title="type parameter in RangeTermFilterSearchModel">V</a>&gt;&nbsp;values)</code>
+<div class="block">Generates an expression to select all elements with attributes matching any of the given values.</div>
 </td>
 </tr>
 <tr id="i13" class="rowColor">
-<td class="colFirst"><code>java.util.List&lt;<a href="../../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../../io/sphere/sdk/search/model/RangeTermFilterSearchModel.html" title="type parameter in RangeTermFilterSearchModel">T</a>&gt;&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/search/model/RangeTermFilterSearchModel.html#byRange-V-V-">byRange</a></span>(<a href="../../../../../io/sphere/sdk/search/model/RangeTermFilterSearchModel.html" title="type parameter in RangeTermFilterSearchModel">V</a>&nbsp;lowerEndpoint,
-       <a href="../../../../../io/sphere/sdk/search/model/RangeTermFilterSearchModel.html" title="type parameter in RangeTermFilterSearchModel">V</a>&nbsp;upperEndpoint)</code>
-<div class="block">Generates an expression to select all elements with an attribute value within the range defined by the given endpoints.</div>
+<td class="colFirst"><code>java.util.List&lt;<a href="../../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;T&gt;&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/search/model/RangeTermFilterSearchModel.html#containsAnyAsString-java.lang.Iterable-">containsAnyAsString</a></span>(java.lang.Iterable&lt;java.lang.String&gt;&nbsp;values)</code>
+<div class="block">Generates an expression to select all elements with attributes matching any of the given values.</div>
 </td>
 </tr>
 <tr id="i14" class="altColor">
-<td class="colFirst"><code>java.util.List&lt;<a href="../../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;T&gt;&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/search/model/RangeTermFilterSearchModel.html#byRangeAsString-io.sphere.sdk.search.model.FilterRange-">byRangeAsString</a></span>(<a href="../../../../../io/sphere/sdk/search/model/FilterRange.html" title="class in io.sphere.sdk.search.model">FilterRange</a>&lt;java.lang.String&gt;&nbsp;range)</code>
-<div class="block">Generates an expression to select all elements with an attribute value within the given range.</div>
+<td class="colFirst"><code>java.util.List&lt;<a href="../../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../../io/sphere/sdk/search/model/RangeTermFilterSearchModel.html" title="type parameter in RangeTermFilterSearchModel">T</a>&gt;&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/search/model/RangeTermFilterSearchModel.html#is-V-">is</a></span>(<a href="../../../../../io/sphere/sdk/search/model/RangeTermFilterSearchModel.html" title="type parameter in RangeTermFilterSearchModel">V</a>&nbsp;value)</code>
+<div class="block">Generates an expression to select all elements with the given attribute value.</div>
 </td>
 </tr>
 <tr id="i15" class="rowColor">
+<td class="colFirst"><code>java.util.List&lt;<a href="../../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../../io/sphere/sdk/search/model/RangeTermFilterSearchModel.html" title="type parameter in RangeTermFilterSearchModel">T</a>&gt;&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/search/model/RangeTermFilterSearchModel.html#isBetween-io.sphere.sdk.search.model.FilterRange-">isBetween</a></span>(<a href="../../../../../io/sphere/sdk/search/model/FilterRange.html" title="class in io.sphere.sdk.search.model">FilterRange</a>&lt;<a href="../../../../../io/sphere/sdk/search/model/RangeTermFilterSearchModel.html" title="type parameter in RangeTermFilterSearchModel">V</a>&gt;&nbsp;range)</code>
+<div class="block">Generates an expression to select all elements with an attribute value within the given range.</div>
+</td>
+</tr>
+<tr id="i16" class="altColor">
+<td class="colFirst"><code>java.util.List&lt;<a href="../../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../../io/sphere/sdk/search/model/RangeTermFilterSearchModel.html" title="type parameter in RangeTermFilterSearchModel">T</a>&gt;&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/search/model/RangeTermFilterSearchModel.html#isBetween-V-V-">isBetween</a></span>(<a href="../../../../../io/sphere/sdk/search/model/RangeTermFilterSearchModel.html" title="type parameter in RangeTermFilterSearchModel">V</a>&nbsp;lowerEndpoint,
+         <a href="../../../../../io/sphere/sdk/search/model/RangeTermFilterSearchModel.html" title="type parameter in RangeTermFilterSearchModel">V</a>&nbsp;upperEndpoint)</code>
+<div class="block">Generates an expression to select all elements with an attribute value within the range defined by the given endpoints.</div>
+</td>
+</tr>
+<tr id="i17" class="rowColor">
+<td class="colFirst"><code>java.util.List&lt;<a href="../../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../../io/sphere/sdk/search/model/RangeTermFilterSearchModel.html" title="type parameter in RangeTermFilterSearchModel">T</a>&gt;&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/search/model/RangeTermFilterSearchModel.html#isBetweenAll-java.lang.Iterable-">isBetweenAll</a></span>(java.lang.Iterable&lt;<a href="../../../../../io/sphere/sdk/search/model/FilterRange.html" title="class in io.sphere.sdk.search.model">FilterRange</a>&lt;<a href="../../../../../io/sphere/sdk/search/model/RangeTermFilterSearchModel.html" title="type parameter in RangeTermFilterSearchModel">V</a>&gt;&gt;&nbsp;filterRanges)</code>
+<div class="block">Generates an expression to select all elements with an attribute value within all the given ranges.</div>
+</td>
+</tr>
+<tr id="i18" class="altColor">
+<td class="colFirst"><code>java.util.List&lt;<a href="../../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;T&gt;&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/search/model/RangeTermFilterSearchModel.html#isBetweenAllAsString-java.lang.Iterable-">isBetweenAllAsString</a></span>(java.lang.Iterable&lt;<a href="../../../../../io/sphere/sdk/search/model/FilterRange.html" title="class in io.sphere.sdk.search.model">FilterRange</a>&lt;java.lang.String&gt;&gt;&nbsp;ranges)</code>
+<div class="block">Generates an expression to select all elements with an attribute value within all the given ranges.</div>
+</td>
+</tr>
+<tr id="i19" class="rowColor">
+<td class="colFirst"><code>java.util.List&lt;<a href="../../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../../io/sphere/sdk/search/model/RangeTermFilterSearchModel.html" title="type parameter in RangeTermFilterSearchModel">T</a>&gt;&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/search/model/RangeTermFilterSearchModel.html#isBetweenAny-java.lang.Iterable-">isBetweenAny</a></span>(java.lang.Iterable&lt;<a href="../../../../../io/sphere/sdk/search/model/FilterRange.html" title="class in io.sphere.sdk.search.model">FilterRange</a>&lt;<a href="../../../../../io/sphere/sdk/search/model/RangeTermFilterSearchModel.html" title="type parameter in RangeTermFilterSearchModel">V</a>&gt;&gt;&nbsp;filterRanges)</code>
+<div class="block">Generates an expression to select all elements with an attribute value within any of the given ranges.</div>
+</td>
+</tr>
+<tr id="i20" class="altColor">
+<td class="colFirst"><code>java.util.List&lt;<a href="../../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;T&gt;&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/search/model/RangeTermFilterSearchModel.html#isBetweenAnyAsString-java.lang.Iterable-">isBetweenAnyAsString</a></span>(java.lang.Iterable&lt;<a href="../../../../../io/sphere/sdk/search/model/FilterRange.html" title="class in io.sphere.sdk.search.model">FilterRange</a>&lt;java.lang.String&gt;&gt;&nbsp;ranges)</code>
+<div class="block">Generates an expression to select all elements with an attribute value within any of the given ranges.</div>
+</td>
+</tr>
+<tr id="i21" class="rowColor">
+<td class="colFirst"><code>java.util.List&lt;<a href="../../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;T&gt;&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/search/model/RangeTermFilterSearchModel.html#isBetweenAsString-io.sphere.sdk.search.model.FilterRange-">isBetweenAsString</a></span>(<a href="../../../../../io/sphere/sdk/search/model/FilterRange.html" title="class in io.sphere.sdk.search.model">FilterRange</a>&lt;java.lang.String&gt;&nbsp;range)</code>
+<div class="block">Generates an expression to select all elements with an attribute value within the given range.</div>
+</td>
+</tr>
+<tr id="i22" class="altColor">
+<td class="colFirst"><code>java.util.List&lt;<a href="../../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../../io/sphere/sdk/search/model/RangeTermFilterSearchModel.html" title="type parameter in RangeTermFilterSearchModel">T</a>&gt;&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/search/model/RangeTermFilterSearchModel.html#isGreaterThanOrEqualTo-V-">isGreaterThanOrEqualTo</a></span>(<a href="../../../../../io/sphere/sdk/search/model/RangeTermFilterSearchModel.html" title="type parameter in RangeTermFilterSearchModel">V</a>&nbsp;value)</code>
+<div class="block">Generates an expression to select all elements with an attribute value greater than or equal to the given value.</div>
+</td>
+</tr>
+<tr id="i23" class="rowColor">
+<td class="colFirst"><code>java.util.List&lt;<a href="../../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../../io/sphere/sdk/search/model/RangeTermFilterSearchModel.html" title="type parameter in RangeTermFilterSearchModel">T</a>&gt;&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/search/model/RangeTermFilterSearchModel.html#isIn-java.lang.Iterable-">isIn</a></span>(java.lang.Iterable&lt;<a href="../../../../../io/sphere/sdk/search/model/RangeTermFilterSearchModel.html" title="type parameter in RangeTermFilterSearchModel">V</a>&gt;&nbsp;values)</code></td>
+</tr>
+<tr id="i24" class="altColor">
+<td class="colFirst"><code>java.util.List&lt;<a href="../../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../../io/sphere/sdk/search/model/RangeTermFilterSearchModel.html" title="type parameter in RangeTermFilterSearchModel">T</a>&gt;&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/search/model/RangeTermFilterSearchModel.html#isLessThanOrEqualTo-V-">isLessThanOrEqualTo</a></span>(<a href="../../../../../io/sphere/sdk/search/model/RangeTermFilterSearchModel.html" title="type parameter in RangeTermFilterSearchModel">V</a>&nbsp;value)</code>
+<div class="block">Generates an expression to select all elements with an attribute value less than or equal to the given value.</div>
+</td>
+</tr>
+<tr id="i25" class="rowColor">
 <td class="colFirst"><code>static &lt;T,V extends java.lang.Comparable&lt;? super V&gt;&gt;<br><a href="../../../../../io/sphere/sdk/search/model/RangeTermFilterSearchModel.html" title="class in io.sphere.sdk.search.model">RangeTermFilterSearchModel</a>&lt;T,V&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/search/model/RangeTermFilterSearchModel.html#of-java.lang.String-java.util.function.Function-">of</a></span>(java.lang.String&nbsp;attributePath,
   java.util.function.Function&lt;V,java.lang.String&gt;&nbsp;typeSerializer)</code>
@@ -280,6 +357,13 @@ extends <a href="../../../../../io/sphere/sdk/models/Base.html" title="class in 
 </a>
 <h3>Methods inherited from class&nbsp;java.lang.Object</h3>
 <code>clone, finalize, getClass, notify, notifyAll, wait, wait, wait</code></li>
+</ul>
+<ul class="blockList">
+<li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.search.model.FilterSearchModel">
+<!--   -->
+</a>
+<h3>Methods inherited from interface&nbsp;io.sphere.sdk.search.model.<a href="../../../../../io/sphere/sdk/search/model/FilterSearchModel.html" title="interface in io.sphere.sdk.search.model">FilterSearchModel</a></h3>
+<code><a href="../../../../../io/sphere/sdk/search/model/FilterSearchModel.html#by-V-">by</a>, <a href="../../../../../io/sphere/sdk/search/model/FilterSearchModel.html#byAll-java.lang.Iterable-">byAll</a>, <a href="../../../../../io/sphere/sdk/search/model/FilterSearchModel.html#byAllAsString-java.lang.Iterable-">byAllAsString</a>, <a href="../../../../../io/sphere/sdk/search/model/FilterSearchModel.html#byAny-java.lang.Iterable-">byAny</a>, <a href="../../../../../io/sphere/sdk/search/model/FilterSearchModel.html#byAnyAsString-java.lang.Iterable-">byAnyAsString</a></code></li>
 </ul>
 </li>
 </ul>
@@ -321,21 +405,20 @@ extends <a href="../../../../../io/sphere/sdk/models/Base.html" title="class in 
 <!--   -->
 </a>
 <h3>Method Detail</h3>
-<a name="by-java.lang.Comparable-">
+<a name="is-java.lang.Comparable-">
 <!--   -->
-</a><a name="by-V-">
+</a><a name="is-V-">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
-<h4>by</h4>
-<pre>public&nbsp;java.util.List&lt;<a href="../../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../../io/sphere/sdk/search/model/RangeTermFilterSearchModel.html" title="type parameter in RangeTermFilterSearchModel">T</a>&gt;&gt;&nbsp;by(<a href="../../../../../io/sphere/sdk/search/model/RangeTermFilterSearchModel.html" title="type parameter in RangeTermFilterSearchModel">V</a>&nbsp;value)</pre>
-<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../../io/sphere/sdk/search/model/FilterSearchModel.html#by-V-">FilterSearchModel</a></code></span></div>
+<h4>is</h4>
+<pre>public&nbsp;java.util.List&lt;<a href="../../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../../io/sphere/sdk/search/model/RangeTermFilterSearchModel.html" title="type parameter in RangeTermFilterSearchModel">T</a>&gt;&gt;&nbsp;is(<a href="../../../../../io/sphere/sdk/search/model/RangeTermFilterSearchModel.html" title="type parameter in RangeTermFilterSearchModel">V</a>&nbsp;value)</pre>
 <div class="block">Generates an expression to select all elements with the given attribute value.
  For example: filtering by "red" would select only those elements with "red" value.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../../io/sphere/sdk/search/model/FilterSearchModel.html#by-V-">by</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../io/sphere/sdk/search/model/FilterSearchModel.html" title="interface in io.sphere.sdk.search.model">FilterSearchModel</a>&lt;<a href="../../../../../io/sphere/sdk/search/model/RangeTermFilterSearchModel.html" title="type parameter in RangeTermFilterSearchModel">T</a>,<a href="../../../../../io/sphere/sdk/search/model/RangeTermFilterSearchModel.html" title="type parameter in RangeTermFilterSearchModel">V</a> extends java.lang.Comparable&lt;? super <a href="../../../../../io/sphere/sdk/search/model/RangeTermFilterSearchModel.html" title="type parameter in RangeTermFilterSearchModel">V</a>&gt;&gt;</code></dd>
+<dd><code><a href="../../../../../io/sphere/sdk/search/model/FilterSearchModel.html#is-V-">is</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../io/sphere/sdk/search/model/FilterSearchModel.html" title="interface in io.sphere.sdk.search.model">FilterSearchModel</a>&lt;<a href="../../../../../io/sphere/sdk/search/model/RangeTermFilterSearchModel.html" title="type parameter in RangeTermFilterSearchModel">T</a>,<a href="../../../../../io/sphere/sdk/search/model/RangeTermFilterSearchModel.html" title="type parameter in RangeTermFilterSearchModel">V</a> extends java.lang.Comparable&lt;? super <a href="../../../../../io/sphere/sdk/search/model/RangeTermFilterSearchModel.html" title="type parameter in RangeTermFilterSearchModel">V</a>&gt;&gt;</code></dd>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>value</code> - the value to filter by</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
@@ -343,19 +426,31 @@ extends <a href="../../../../../io/sphere/sdk/models/Base.html" title="class in 
 </dl>
 </li>
 </ul>
-<a name="byAny-java.lang.Iterable-">
+<a name="isIn-java.lang.Iterable-">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
-<h4>byAny</h4>
-<pre>public&nbsp;java.util.List&lt;<a href="../../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../../io/sphere/sdk/search/model/RangeTermFilterSearchModel.html" title="type parameter in RangeTermFilterSearchModel">T</a>&gt;&gt;&nbsp;byAny(java.lang.Iterable&lt;<a href="../../../../../io/sphere/sdk/search/model/RangeTermFilterSearchModel.html" title="type parameter in RangeTermFilterSearchModel">V</a>&gt;&nbsp;values)</pre>
-<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../../io/sphere/sdk/search/model/FilterSearchModel.html#byAny-java.lang.Iterable-">FilterSearchModel</a></code></span></div>
+<h4>isIn</h4>
+<pre>public&nbsp;java.util.List&lt;<a href="../../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../../io/sphere/sdk/search/model/RangeTermFilterSearchModel.html" title="type parameter in RangeTermFilterSearchModel">T</a>&gt;&gt;&nbsp;isIn(java.lang.Iterable&lt;<a href="../../../../../io/sphere/sdk/search/model/RangeTermFilterSearchModel.html" title="type parameter in RangeTermFilterSearchModel">V</a>&gt;&nbsp;values)</pre>
+<dl>
+<dt><span class="seeLabel">See Also:</span></dt>
+<dd><a href="../../../../../io/sphere/sdk/search/model/FilterSearchModel.html#containsAny-java.lang.Iterable-"><code>FilterSearchModel.containsAny(Iterable)</code></a></dd>
+</dl>
+</li>
+</ul>
+<a name="containsAny-java.lang.Iterable-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>containsAny</h4>
+<pre>public&nbsp;java.util.List&lt;<a href="../../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../../io/sphere/sdk/search/model/RangeTermFilterSearchModel.html" title="type parameter in RangeTermFilterSearchModel">T</a>&gt;&gt;&nbsp;containsAny(java.lang.Iterable&lt;<a href="../../../../../io/sphere/sdk/search/model/RangeTermFilterSearchModel.html" title="type parameter in RangeTermFilterSearchModel">V</a>&gt;&nbsp;values)</pre>
 <div class="block">Generates an expression to select all elements with attributes matching any of the given values.
  For example: filtering by ["red", "blue"] would select only those elements with either "red" or "blue" value.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../../io/sphere/sdk/search/model/FilterSearchModel.html#byAny-java.lang.Iterable-">byAny</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../io/sphere/sdk/search/model/FilterSearchModel.html" title="interface in io.sphere.sdk.search.model">FilterSearchModel</a>&lt;<a href="../../../../../io/sphere/sdk/search/model/RangeTermFilterSearchModel.html" title="type parameter in RangeTermFilterSearchModel">T</a>,<a href="../../../../../io/sphere/sdk/search/model/RangeTermFilterSearchModel.html" title="type parameter in RangeTermFilterSearchModel">V</a> extends java.lang.Comparable&lt;? super <a href="../../../../../io/sphere/sdk/search/model/RangeTermFilterSearchModel.html" title="type parameter in RangeTermFilterSearchModel">V</a>&gt;&gt;</code></dd>
+<dd><code><a href="../../../../../io/sphere/sdk/search/model/FilterSearchModel.html#containsAny-java.lang.Iterable-">containsAny</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../io/sphere/sdk/search/model/FilterSearchModel.html" title="interface in io.sphere.sdk.search.model">FilterSearchModel</a>&lt;<a href="../../../../../io/sphere/sdk/search/model/RangeTermFilterSearchModel.html" title="type parameter in RangeTermFilterSearchModel">T</a>,<a href="../../../../../io/sphere/sdk/search/model/RangeTermFilterSearchModel.html" title="type parameter in RangeTermFilterSearchModel">V</a> extends java.lang.Comparable&lt;? super <a href="../../../../../io/sphere/sdk/search/model/RangeTermFilterSearchModel.html" title="type parameter in RangeTermFilterSearchModel">V</a>&gt;&gt;</code></dd>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>values</code> - the values to filter by</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
@@ -363,19 +458,18 @@ extends <a href="../../../../../io/sphere/sdk/models/Base.html" title="class in 
 </dl>
 </li>
 </ul>
-<a name="byAll-java.lang.Iterable-">
+<a name="containsAll-java.lang.Iterable-">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
-<h4>byAll</h4>
-<pre>public&nbsp;java.util.List&lt;<a href="../../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../../io/sphere/sdk/search/model/RangeTermFilterSearchModel.html" title="type parameter in RangeTermFilterSearchModel">T</a>&gt;&gt;&nbsp;byAll(java.lang.Iterable&lt;<a href="../../../../../io/sphere/sdk/search/model/RangeTermFilterSearchModel.html" title="type parameter in RangeTermFilterSearchModel">V</a>&gt;&nbsp;values)</pre>
-<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../../io/sphere/sdk/search/model/FilterSearchModel.html#byAll-java.lang.Iterable-">FilterSearchModel</a></code></span></div>
+<h4>containsAll</h4>
+<pre>public&nbsp;java.util.List&lt;<a href="../../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../../io/sphere/sdk/search/model/RangeTermFilterSearchModel.html" title="type parameter in RangeTermFilterSearchModel">T</a>&gt;&gt;&nbsp;containsAll(java.lang.Iterable&lt;<a href="../../../../../io/sphere/sdk/search/model/RangeTermFilterSearchModel.html" title="type parameter in RangeTermFilterSearchModel">V</a>&gt;&nbsp;values)</pre>
 <div class="block">Generates an expression to select all elements with attributes matching all the given values.
  For example: filtering by ["red", "blue"] would select only those elements with both "red" and "blue" values.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../../io/sphere/sdk/search/model/FilterSearchModel.html#byAll-java.lang.Iterable-">byAll</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../io/sphere/sdk/search/model/FilterSearchModel.html" title="interface in io.sphere.sdk.search.model">FilterSearchModel</a>&lt;<a href="../../../../../io/sphere/sdk/search/model/RangeTermFilterSearchModel.html" title="type parameter in RangeTermFilterSearchModel">T</a>,<a href="../../../../../io/sphere/sdk/search/model/RangeTermFilterSearchModel.html" title="type parameter in RangeTermFilterSearchModel">V</a> extends java.lang.Comparable&lt;? super <a href="../../../../../io/sphere/sdk/search/model/RangeTermFilterSearchModel.html" title="type parameter in RangeTermFilterSearchModel">V</a>&gt;&gt;</code></dd>
+<dd><code><a href="../../../../../io/sphere/sdk/search/model/FilterSearchModel.html#containsAll-java.lang.Iterable-">containsAll</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../io/sphere/sdk/search/model/FilterSearchModel.html" title="interface in io.sphere.sdk.search.model">FilterSearchModel</a>&lt;<a href="../../../../../io/sphere/sdk/search/model/RangeTermFilterSearchModel.html" title="type parameter in RangeTermFilterSearchModel">T</a>,<a href="../../../../../io/sphere/sdk/search/model/RangeTermFilterSearchModel.html" title="type parameter in RangeTermFilterSearchModel">V</a> extends java.lang.Comparable&lt;? super <a href="../../../../../io/sphere/sdk/search/model/RangeTermFilterSearchModel.html" title="type parameter in RangeTermFilterSearchModel">V</a>&gt;&gt;</code></dd>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>values</code> - the values to filter by</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
@@ -383,13 +477,13 @@ extends <a href="../../../../../io/sphere/sdk/models/Base.html" title="class in 
 </dl>
 </li>
 </ul>
-<a name="byRange-io.sphere.sdk.search.model.FilterRange-">
+<a name="isBetween-io.sphere.sdk.search.model.FilterRange-">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
-<h4>byRange</h4>
-<pre>public&nbsp;java.util.List&lt;<a href="../../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../../io/sphere/sdk/search/model/RangeTermFilterSearchModel.html" title="type parameter in RangeTermFilterSearchModel">T</a>&gt;&gt;&nbsp;byRange(<a href="../../../../../io/sphere/sdk/search/model/FilterRange.html" title="class in io.sphere.sdk.search.model">FilterRange</a>&lt;<a href="../../../../../io/sphere/sdk/search/model/RangeTermFilterSearchModel.html" title="type parameter in RangeTermFilterSearchModel">V</a>&gt;&nbsp;range)</pre>
+<h4>isBetween</h4>
+<pre>public&nbsp;java.util.List&lt;<a href="../../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../../io/sphere/sdk/search/model/RangeTermFilterSearchModel.html" title="type parameter in RangeTermFilterSearchModel">T</a>&gt;&gt;&nbsp;isBetween(<a href="../../../../../io/sphere/sdk/search/model/FilterRange.html" title="class in io.sphere.sdk.search.model">FilterRange</a>&lt;<a href="../../../../../io/sphere/sdk/search/model/RangeTermFilterSearchModel.html" title="type parameter in RangeTermFilterSearchModel">V</a>&gt;&nbsp;range)</pre>
 <div class="block">Generates an expression to select all elements with an attribute value within the given range.
  For example: filtering by [3, 7] would select only those elements with values between 3 and 7, inclusive.</div>
 <dl>
@@ -400,50 +494,16 @@ extends <a href="../../../../../io/sphere/sdk/models/Base.html" title="class in 
 </dl>
 </li>
 </ul>
-<a name="byAnyRange-java.lang.Iterable-">
+<a name="isBetween-java.lang.Comparable-java.lang.Comparable-">
+<!--   -->
+</a><a name="isBetween-V-V-">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
-<h4>byAnyRange</h4>
-<pre>public&nbsp;java.util.List&lt;<a href="../../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../../io/sphere/sdk/search/model/RangeTermFilterSearchModel.html" title="type parameter in RangeTermFilterSearchModel">T</a>&gt;&gt;&nbsp;byAnyRange(java.lang.Iterable&lt;<a href="../../../../../io/sphere/sdk/search/model/FilterRange.html" title="class in io.sphere.sdk.search.model">FilterRange</a>&lt;<a href="../../../../../io/sphere/sdk/search/model/RangeTermFilterSearchModel.html" title="type parameter in RangeTermFilterSearchModel">V</a>&gt;&gt;&nbsp;filterRanges)</pre>
-<div class="block">Generates an expression to select all elements with an attribute value within any of the given ranges.
- For example: filtering by [[3, 7], [5, 9]] would select only those elements with values within 3 and 7, or within 5 and 9, both inclusive.</div>
-<dl>
-<dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>filterRanges</code> - the ranges of values to filter by</dd>
-<dt><span class="returnLabel">Returns:</span></dt>
-<dd>a filter expression for the given ranges</dd>
-</dl>
-</li>
-</ul>
-<a name="byAllRanges-java.lang.Iterable-">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>byAllRanges</h4>
-<pre>public&nbsp;java.util.List&lt;<a href="../../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../../io/sphere/sdk/search/model/RangeTermFilterSearchModel.html" title="type parameter in RangeTermFilterSearchModel">T</a>&gt;&gt;&nbsp;byAllRanges(java.lang.Iterable&lt;<a href="../../../../../io/sphere/sdk/search/model/FilterRange.html" title="class in io.sphere.sdk.search.model">FilterRange</a>&lt;<a href="../../../../../io/sphere/sdk/search/model/RangeTermFilterSearchModel.html" title="type parameter in RangeTermFilterSearchModel">V</a>&gt;&gt;&nbsp;filterRanges)</pre>
-<div class="block">Generates an expression to select all elements with an attribute value within all the given ranges.
- For example: filtering by [[3, 7], [5, 9]] would select only those elements with values within the range intersection [5, 7], inclusive.</div>
-<dl>
-<dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>filterRanges</code> - the ranges of values to filter by</dd>
-<dt><span class="returnLabel">Returns:</span></dt>
-<dd>a filter expression for the given ranges</dd>
-</dl>
-</li>
-</ul>
-<a name="byRange-java.lang.Comparable-java.lang.Comparable-">
-<!--   -->
-</a><a name="byRange-V-V-">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>byRange</h4>
-<pre>public&nbsp;java.util.List&lt;<a href="../../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../../io/sphere/sdk/search/model/RangeTermFilterSearchModel.html" title="type parameter in RangeTermFilterSearchModel">T</a>&gt;&gt;&nbsp;byRange(<a href="../../../../../io/sphere/sdk/search/model/RangeTermFilterSearchModel.html" title="type parameter in RangeTermFilterSearchModel">V</a>&nbsp;lowerEndpoint,
-                                                   <a href="../../../../../io/sphere/sdk/search/model/RangeTermFilterSearchModel.html" title="type parameter in RangeTermFilterSearchModel">V</a>&nbsp;upperEndpoint)</pre>
+<h4>isBetween</h4>
+<pre>public&nbsp;java.util.List&lt;<a href="../../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../../io/sphere/sdk/search/model/RangeTermFilterSearchModel.html" title="type parameter in RangeTermFilterSearchModel">T</a>&gt;&gt;&nbsp;isBetween(<a href="../../../../../io/sphere/sdk/search/model/RangeTermFilterSearchModel.html" title="type parameter in RangeTermFilterSearchModel">V</a>&nbsp;lowerEndpoint,
+                                                     <a href="../../../../../io/sphere/sdk/search/model/RangeTermFilterSearchModel.html" title="type parameter in RangeTermFilterSearchModel">V</a>&nbsp;upperEndpoint)</pre>
 <div class="block">Generates an expression to select all elements with an attribute value within the range defined by the given endpoints.
  For example: filtering by [3, 5] would select only those elements with values between 3 and 5, inclusive.</div>
 <dl>
@@ -455,15 +515,49 @@ extends <a href="../../../../../io/sphere/sdk/models/Base.html" title="class in 
 </dl>
 </li>
 </ul>
-<a name="byGreaterThanOrEqualTo-java.lang.Comparable-">
-<!--   -->
-</a><a name="byGreaterThanOrEqualTo-V-">
+<a name="isBetweenAny-java.lang.Iterable-">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
-<h4>byGreaterThanOrEqualTo</h4>
-<pre>public&nbsp;java.util.List&lt;<a href="../../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../../io/sphere/sdk/search/model/RangeTermFilterSearchModel.html" title="type parameter in RangeTermFilterSearchModel">T</a>&gt;&gt;&nbsp;byGreaterThanOrEqualTo(<a href="../../../../../io/sphere/sdk/search/model/RangeTermFilterSearchModel.html" title="type parameter in RangeTermFilterSearchModel">V</a>&nbsp;value)</pre>
+<h4>isBetweenAny</h4>
+<pre>public&nbsp;java.util.List&lt;<a href="../../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../../io/sphere/sdk/search/model/RangeTermFilterSearchModel.html" title="type parameter in RangeTermFilterSearchModel">T</a>&gt;&gt;&nbsp;isBetweenAny(java.lang.Iterable&lt;<a href="../../../../../io/sphere/sdk/search/model/FilterRange.html" title="class in io.sphere.sdk.search.model">FilterRange</a>&lt;<a href="../../../../../io/sphere/sdk/search/model/RangeTermFilterSearchModel.html" title="type parameter in RangeTermFilterSearchModel">V</a>&gt;&gt;&nbsp;filterRanges)</pre>
+<div class="block">Generates an expression to select all elements with an attribute value within any of the given ranges.
+ For example: filtering by [[3, 7], [5, 9]] would select only those elements with values within 3 and 7, or within 5 and 9, both inclusive.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>filterRanges</code> - the ranges of values to filter by</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>a filter expression for the given ranges</dd>
+</dl>
+</li>
+</ul>
+<a name="isBetweenAll-java.lang.Iterable-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>isBetweenAll</h4>
+<pre>public&nbsp;java.util.List&lt;<a href="../../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../../io/sphere/sdk/search/model/RangeTermFilterSearchModel.html" title="type parameter in RangeTermFilterSearchModel">T</a>&gt;&gt;&nbsp;isBetweenAll(java.lang.Iterable&lt;<a href="../../../../../io/sphere/sdk/search/model/FilterRange.html" title="class in io.sphere.sdk.search.model">FilterRange</a>&lt;<a href="../../../../../io/sphere/sdk/search/model/RangeTermFilterSearchModel.html" title="type parameter in RangeTermFilterSearchModel">V</a>&gt;&gt;&nbsp;filterRanges)</pre>
+<div class="block">Generates an expression to select all elements with an attribute value within all the given ranges.
+ For example: filtering by [[3, 7], [5, 9]] would select only those elements with values within the range intersection [5, 7], inclusive.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>filterRanges</code> - the ranges of values to filter by</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>a filter expression for the given ranges</dd>
+</dl>
+</li>
+</ul>
+<a name="isGreaterThanOrEqualTo-java.lang.Comparable-">
+<!--   -->
+</a><a name="isGreaterThanOrEqualTo-V-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>isGreaterThanOrEqualTo</h4>
+<pre>public&nbsp;java.util.List&lt;<a href="../../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../../io/sphere/sdk/search/model/RangeTermFilterSearchModel.html" title="type parameter in RangeTermFilterSearchModel">T</a>&gt;&gt;&nbsp;isGreaterThanOrEqualTo(<a href="../../../../../io/sphere/sdk/search/model/RangeTermFilterSearchModel.html" title="type parameter in RangeTermFilterSearchModel">V</a>&nbsp;value)</pre>
 <div class="block">Generates an expression to select all elements with an attribute value greater than or equal to the given value.
  For example: filtering by [3, +∞) would select only those elements with values greater than or equal to 3.</div>
 <dl>
@@ -474,15 +568,15 @@ extends <a href="../../../../../io/sphere/sdk/models/Base.html" title="class in 
 </dl>
 </li>
 </ul>
-<a name="byLessThanOrEqualTo-java.lang.Comparable-">
+<a name="isLessThanOrEqualTo-java.lang.Comparable-">
 <!--   -->
-</a><a name="byLessThanOrEqualTo-V-">
+</a><a name="isLessThanOrEqualTo-V-">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
-<h4>byLessThanOrEqualTo</h4>
-<pre>public&nbsp;java.util.List&lt;<a href="../../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../../io/sphere/sdk/search/model/RangeTermFilterSearchModel.html" title="type parameter in RangeTermFilterSearchModel">T</a>&gt;&gt;&nbsp;byLessThanOrEqualTo(<a href="../../../../../io/sphere/sdk/search/model/RangeTermFilterSearchModel.html" title="type parameter in RangeTermFilterSearchModel">V</a>&nbsp;value)</pre>
+<h4>isLessThanOrEqualTo</h4>
+<pre>public&nbsp;java.util.List&lt;<a href="../../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../../io/sphere/sdk/search/model/RangeTermFilterSearchModel.html" title="type parameter in RangeTermFilterSearchModel">T</a>&gt;&gt;&nbsp;isLessThanOrEqualTo(<a href="../../../../../io/sphere/sdk/search/model/RangeTermFilterSearchModel.html" title="type parameter in RangeTermFilterSearchModel">V</a>&nbsp;value)</pre>
 <div class="block">Generates an expression to select all elements with an attribute value less than or equal to the given value.
  For example: filtering by (-∞, 5] would select only those elements with values less than or equal to 5.</div>
 <dl>
@@ -514,13 +608,13 @@ extends <a href="../../../../../io/sphere/sdk/models/Base.html" title="class in 
 </dl>
 </li>
 </ul>
-<a name="byRangeAsString-io.sphere.sdk.search.model.FilterRange-">
+<a name="isBetweenAsString-io.sphere.sdk.search.model.FilterRange-">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
-<h4>byRangeAsString</h4>
-<pre>public&nbsp;java.util.List&lt;<a href="../../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;T&gt;&gt;&nbsp;byRangeAsString(<a href="../../../../../io/sphere/sdk/search/model/FilterRange.html" title="class in io.sphere.sdk.search.model">FilterRange</a>&lt;java.lang.String&gt;&nbsp;range)</pre>
+<h4>isBetweenAsString</h4>
+<pre>public&nbsp;java.util.List&lt;<a href="../../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;T&gt;&gt;&nbsp;isBetweenAsString(<a href="../../../../../io/sphere/sdk/search/model/FilterRange.html" title="class in io.sphere.sdk.search.model">FilterRange</a>&lt;java.lang.String&gt;&nbsp;range)</pre>
 <div class="block">Generates an expression to select all elements with an attribute value within the given range.
  For example: filtering by [3, 7] would select only those elements with values between 3 and 7, inclusive.</div>
 <dl>
@@ -531,13 +625,13 @@ extends <a href="../../../../../io/sphere/sdk/models/Base.html" title="class in 
 </dl>
 </li>
 </ul>
-<a name="byAnyRangeAsString-java.lang.Iterable-">
+<a name="isBetweenAnyAsString-java.lang.Iterable-">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
-<h4>byAnyRangeAsString</h4>
-<pre>public&nbsp;java.util.List&lt;<a href="../../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;T&gt;&gt;&nbsp;byAnyRangeAsString(java.lang.Iterable&lt;<a href="../../../../../io/sphere/sdk/search/model/FilterRange.html" title="class in io.sphere.sdk.search.model">FilterRange</a>&lt;java.lang.String&gt;&gt;&nbsp;ranges)</pre>
+<h4>isBetweenAnyAsString</h4>
+<pre>public&nbsp;java.util.List&lt;<a href="../../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;T&gt;&gt;&nbsp;isBetweenAnyAsString(java.lang.Iterable&lt;<a href="../../../../../io/sphere/sdk/search/model/FilterRange.html" title="class in io.sphere.sdk.search.model">FilterRange</a>&lt;java.lang.String&gt;&gt;&nbsp;ranges)</pre>
 <div class="block">Generates an expression to select all elements with an attribute value within any of the given ranges.
  For example: filtering by [[3, 7], [5, 9]] would select only those elements with values within 3 and 7, or within 5 and 9, both inclusive.</div>
 <dl>
@@ -548,13 +642,13 @@ extends <a href="../../../../../io/sphere/sdk/models/Base.html" title="class in 
 </dl>
 </li>
 </ul>
-<a name="byAllRangesAsString-java.lang.Iterable-">
+<a name="isBetweenAllAsString-java.lang.Iterable-">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
-<h4>byAllRangesAsString</h4>
-<pre>public&nbsp;java.util.List&lt;<a href="../../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;T&gt;&gt;&nbsp;byAllRangesAsString(java.lang.Iterable&lt;<a href="../../../../../io/sphere/sdk/search/model/FilterRange.html" title="class in io.sphere.sdk.search.model">FilterRange</a>&lt;java.lang.String&gt;&gt;&nbsp;ranges)</pre>
+<h4>isBetweenAllAsString</h4>
+<pre>public&nbsp;java.util.List&lt;<a href="../../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;T&gt;&gt;&nbsp;isBetweenAllAsString(java.lang.Iterable&lt;<a href="../../../../../io/sphere/sdk/search/model/FilterRange.html" title="class in io.sphere.sdk.search.model">FilterRange</a>&lt;java.lang.String&gt;&gt;&nbsp;ranges)</pre>
 <div class="block">Generates an expression to select all elements with an attribute value within all the given ranges.
  For example: filtering by [[3, 7], [5, 9]] would select only those elements with values within the range intersection [5, 7], inclusive.</div>
 <dl>
@@ -565,19 +659,124 @@ extends <a href="../../../../../io/sphere/sdk/models/Base.html" title="class in 
 </dl>
 </li>
 </ul>
-<a name="byAnyAsString-java.lang.Iterable-">
+<a name="byRange-io.sphere.sdk.search.model.FilterRange-">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
-<h4>byAnyAsString</h4>
-<pre>public&nbsp;java.util.List&lt;<a href="../../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;T&gt;&gt;&nbsp;byAnyAsString(java.lang.Iterable&lt;java.lang.String&gt;&nbsp;values)</pre>
-<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../../io/sphere/sdk/search/model/FilterSearchModel.html#byAnyAsString-java.lang.Iterable-">FilterSearchModel</a></code></span></div>
+<h4>byRange</h4>
+<pre>@Deprecated
+public&nbsp;java.util.List&lt;<a href="../../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;T&gt;&gt;&nbsp;byRange(<a href="../../../../../io/sphere/sdk/search/model/FilterRange.html" title="class in io.sphere.sdk.search.model">FilterRange</a>&lt;V&gt;&nbsp;range)</pre>
+<div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;<span class="deprecationComment">use <a href="../../../../../io/sphere/sdk/search/model/RangeTermFilterSearchModel.html#isBetween-io.sphere.sdk.search.model.FilterRange-"><code>isBetween(FilterRange)</code></a> instead</span></div>
+</li>
+</ul>
+<a name="byRange-java.lang.Comparable-java.lang.Comparable-">
+<!--   -->
+</a><a name="byRange-V-V-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>byRange</h4>
+<pre>@Deprecated
+public&nbsp;java.util.List&lt;<a href="../../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;T&gt;&gt;&nbsp;byRange(V&nbsp;lowerEndpoint,
+                                                               V&nbsp;upperEndpoint)</pre>
+<div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;<span class="deprecationComment">use <a href="../../../../../io/sphere/sdk/search/model/RangeTermFilterSearchModel.html#isBetween-V-V-"><code>isBetween(Comparable, Comparable)</code></a> instead</span></div>
+</li>
+</ul>
+<a name="byAnyRange-java.lang.Iterable-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>byAnyRange</h4>
+<pre>@Deprecated
+public&nbsp;java.util.List&lt;<a href="../../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;T&gt;&gt;&nbsp;byAnyRange(java.lang.Iterable&lt;<a href="../../../../../io/sphere/sdk/search/model/FilterRange.html" title="class in io.sphere.sdk.search.model">FilterRange</a>&lt;V&gt;&gt;&nbsp;ranges)</pre>
+<div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;<span class="deprecationComment">use <a href="../../../../../io/sphere/sdk/search/model/RangeTermFilterSearchModel.html#isBetweenAny-java.lang.Iterable-"><code>isBetweenAny(Iterable)</code></a> instead</span></div>
+</li>
+</ul>
+<a name="byAllRanges-java.lang.Iterable-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>byAllRanges</h4>
+<pre>@Deprecated
+public&nbsp;java.util.List&lt;<a href="../../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;T&gt;&gt;&nbsp;byAllRanges(java.lang.Iterable&lt;<a href="../../../../../io/sphere/sdk/search/model/FilterRange.html" title="class in io.sphere.sdk.search.model">FilterRange</a>&lt;V&gt;&gt;&nbsp;ranges)</pre>
+<div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;<span class="deprecationComment">use <a href="../../../../../io/sphere/sdk/search/model/RangeTermFilterSearchModel.html#isBetweenAll-java.lang.Iterable-"><code>isBetweenAll(Iterable)</code></a> instead</span></div>
+</li>
+</ul>
+<a name="byGreaterThanOrEqualTo-java.lang.Comparable-">
+<!--   -->
+</a><a name="byGreaterThanOrEqualTo-V-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>byGreaterThanOrEqualTo</h4>
+<pre>@Deprecated
+public&nbsp;java.util.List&lt;<a href="../../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;T&gt;&gt;&nbsp;byGreaterThanOrEqualTo(V&nbsp;value)</pre>
+<div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;<span class="deprecationComment">use <a href="../../../../../io/sphere/sdk/search/model/RangeTermFilterSearchModel.html#isGreaterThanOrEqualTo-V-"><code>isGreaterThanOrEqualTo(Comparable)</code></a> instead</span></div>
+</li>
+</ul>
+<a name="byLessThanOrEqualTo-java.lang.Comparable-">
+<!--   -->
+</a><a name="byLessThanOrEqualTo-V-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>byLessThanOrEqualTo</h4>
+<pre>@Deprecated
+public&nbsp;java.util.List&lt;<a href="../../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;T&gt;&gt;&nbsp;byLessThanOrEqualTo(V&nbsp;value)</pre>
+<div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;<span class="deprecationComment">use <a href="../../../../../io/sphere/sdk/search/model/RangeTermFilterSearchModel.html#isLessThanOrEqualTo-V-"><code>isLessThanOrEqualTo(Comparable)</code></a> instead</span></div>
+</li>
+</ul>
+<a name="byRangeAsString-io.sphere.sdk.search.model.FilterRange-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>byRangeAsString</h4>
+<pre>@Deprecated
+public&nbsp;java.util.List&lt;<a href="../../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;T&gt;&gt;&nbsp;byRangeAsString(<a href="../../../../../io/sphere/sdk/search/model/FilterRange.html" title="class in io.sphere.sdk.search.model">FilterRange</a>&lt;java.lang.String&gt;&nbsp;range)</pre>
+<div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;<span class="deprecationComment">use <a href="../../../../../io/sphere/sdk/search/model/RangeTermFilterSearchModel.html#isBetweenAsString-io.sphere.sdk.search.model.FilterRange-"><code>isBetweenAsString(FilterRange)</code></a> instead</span></div>
+</li>
+</ul>
+<a name="byAnyRangeAsString-java.lang.Iterable-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>byAnyRangeAsString</h4>
+<pre>@Deprecated
+public&nbsp;java.util.List&lt;<a href="../../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;T&gt;&gt;&nbsp;byAnyRangeAsString(java.lang.Iterable&lt;<a href="../../../../../io/sphere/sdk/search/model/FilterRange.html" title="class in io.sphere.sdk.search.model">FilterRange</a>&lt;java.lang.String&gt;&gt;&nbsp;ranges)</pre>
+<div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;<span class="deprecationComment">use <a href="../../../../../io/sphere/sdk/search/model/RangeTermFilterSearchModel.html#isBetweenAnyAsString-java.lang.Iterable-"><code>isBetweenAnyAsString(Iterable)</code></a> instead</span></div>
+</li>
+</ul>
+<a name="byAllRangesAsString-java.lang.Iterable-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>byAllRangesAsString</h4>
+<pre>@Deprecated
+public&nbsp;java.util.List&lt;<a href="../../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;T&gt;&gt;&nbsp;byAllRangesAsString(java.lang.Iterable&lt;<a href="../../../../../io/sphere/sdk/search/model/FilterRange.html" title="class in io.sphere.sdk.search.model">FilterRange</a>&lt;java.lang.String&gt;&gt;&nbsp;ranges)</pre>
+<div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;<span class="deprecationComment">use <a href="../../../../../io/sphere/sdk/search/model/RangeTermFilterSearchModel.html#isBetweenAllAsString-java.lang.Iterable-"><code>isBetweenAllAsString(Iterable)</code></a> instead</span></div>
+</li>
+</ul>
+<a name="containsAnyAsString-java.lang.Iterable-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>containsAnyAsString</h4>
+<pre>public&nbsp;java.util.List&lt;<a href="../../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;T&gt;&gt;&nbsp;containsAnyAsString(java.lang.Iterable&lt;java.lang.String&gt;&nbsp;values)</pre>
 <div class="block">Generates an expression to select all elements with attributes matching any of the given values.
  For example: filtering by ["red", "blue"] would select only those elements with either "red" or "blue" value.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../../io/sphere/sdk/search/model/FilterSearchModel.html#byAnyAsString-java.lang.Iterable-">byAnyAsString</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../io/sphere/sdk/search/model/FilterSearchModel.html" title="interface in io.sphere.sdk.search.model">FilterSearchModel</a>&lt;T,V&gt;</code></dd>
+<dd><code><a href="../../../../../io/sphere/sdk/search/model/FilterSearchModel.html#containsAnyAsString-java.lang.Iterable-">containsAnyAsString</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../io/sphere/sdk/search/model/FilterSearchModel.html" title="interface in io.sphere.sdk.search.model">FilterSearchModel</a>&lt;T,V&gt;</code></dd>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>values</code> - the values to filter by</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
@@ -585,19 +784,18 @@ extends <a href="../../../../../io/sphere/sdk/models/Base.html" title="class in 
 </dl>
 </li>
 </ul>
-<a name="byAllAsString-java.lang.Iterable-">
+<a name="containsAllAsString-java.lang.Iterable-">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
-<h4>byAllAsString</h4>
-<pre>public&nbsp;java.util.List&lt;<a href="../../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;T&gt;&gt;&nbsp;byAllAsString(java.lang.Iterable&lt;java.lang.String&gt;&nbsp;values)</pre>
-<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../../io/sphere/sdk/search/model/FilterSearchModel.html#byAllAsString-java.lang.Iterable-">FilterSearchModel</a></code></span></div>
+<h4>containsAllAsString</h4>
+<pre>public&nbsp;java.util.List&lt;<a href="../../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;T&gt;&gt;&nbsp;containsAllAsString(java.lang.Iterable&lt;java.lang.String&gt;&nbsp;values)</pre>
 <div class="block">Generates an expression to select all elements with attributes matching all the given values.
  For example: filtering by ["red", "blue"] would select only those elements with both "red" and "blue" values.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../../io/sphere/sdk/search/model/FilterSearchModel.html#byAllAsString-java.lang.Iterable-">byAllAsString</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../io/sphere/sdk/search/model/FilterSearchModel.html" title="interface in io.sphere.sdk.search.model">FilterSearchModel</a>&lt;T,V&gt;</code></dd>
+<dd><code><a href="../../../../../io/sphere/sdk/search/model/FilterSearchModel.html#containsAllAsString-java.lang.Iterable-">containsAllAsString</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../io/sphere/sdk/search/model/FilterSearchModel.html" title="interface in io.sphere.sdk.search.model">FilterSearchModel</a>&lt;T,V&gt;</code></dd>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>values</code> - the values to filter by</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
@@ -613,7 +811,7 @@ extends <a href="../../../../../io/sphere/sdk/models/Base.html" title="class in 
 <h4>by</h4>
 <pre>@Deprecated
 public&nbsp;java.util.List&lt;<a href="../../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;T&gt;&gt;&nbsp;by(java.lang.Iterable&lt;V&gt;&nbsp;values)</pre>
-<div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;<span class="deprecationComment">use <code>TermFilterBaseSearchModel.byAny(java.lang.Iterable&lt;V&gt;)</code> instead</span></div>
+<div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;<span class="deprecationComment">use <code>TermFilterBaseSearchModel.containsAny(java.lang.Iterable&lt;V&gt;)</code> instead</span></div>
 <div class="block">Generates an expression to select all elements with attributes matching any of the given values.
  For example: filtering by ["red", "blue"] would select only those elements with either "red" or "blue" value.</div>
 <dl>
@@ -652,7 +850,7 @@ public&nbsp;java.util.List&lt;<a href="../../../../../io/sphere/sdk/search/Filte
 <div class="subNav">
 <ul class="navList">
 <li><a href="../../../../../io/sphere/sdk/search/model/RangeTermFacetSearchModel.html" title="class in io.sphere.sdk.search.model"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
-<li><a href="../../../../../io/sphere/sdk/search/model/ReferenceFacetAndFilterSearchModel.html" title="class in io.sphere.sdk.search.model"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
+<li><a href="../../../../../io/sphere/sdk/search/model/ReferenceFacetedSearchSearchModel.html" title="class in io.sphere.sdk.search.model"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">
 <li><a href="../../../../../index.html?io/sphere/sdk/search/model/RangeTermFilterSearchModel.html" target="_top">Frames</a></li>
