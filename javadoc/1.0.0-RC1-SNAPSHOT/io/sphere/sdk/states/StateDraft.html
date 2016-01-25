@@ -18,8 +18,8 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":9,"i8":10,"i9":10,"i10":10,"i11":10,"i12":10,"i13":10};
-var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
+var methods = {"i0":6,"i1":6,"i2":6,"i3":6,"i4":6,"i5":6,"i6":6,"i7":17};
+var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],2:["t2","Instance Methods"],4:["t3","Abstract Methods"],16:["t5","Default Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
 var tableTab = "tableTab";
@@ -92,29 +92,19 @@ var activeTableTab = "activeTableTab";
 <!-- ======== START OF CLASS DATA ======== -->
 <div class="header">
 <div class="subTitle">io.sphere.sdk.states</div>
-<h2 title="Class StateDraft" class="title">Class StateDraft</h2>
+<h2 title="Interface StateDraft" class="title">Interface StateDraft</h2>
 </div>
 <div class="contentContainer">
-<ul class="inheritance">
-<li>java.lang.Object</li>
-<li>
-<ul class="inheritance">
-<li><a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.sphere.sdk.models">io.sphere.sdk.models.Base</a></li>
-<li>
-<ul class="inheritance">
-<li>io.sphere.sdk.states.StateDraft</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
 <div class="description">
 <ul class="blockList">
 <li class="blockList">
+<dl>
+<dt>All Known Implementing Classes:</dt>
+<dd><a href="../../../../io/sphere/sdk/states/StateDraftDsl.html" title="class in io.sphere.sdk.states">StateDraftDsl</a></dd>
+</dl>
 <hr>
 <br>
-<pre>public class <span class="typeNameLabel">StateDraft</span>
-extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.sphere.sdk.models">Base</a></pre>
+<pre>public interface <span class="typeNameLabel">StateDraft</span></pre>
 <div class="block">Template to create a new State.</div>
 <dl>
 <dt><span class="seeLabel">See Also:</span></dt>
@@ -133,7 +123,7 @@ extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.
 </a>
 <h3>Method Summary</h3>
 <table class="memberSummary" border="0" cellpadding="3" cellspacing="0" summary="Method Summary table, listing methods, and an explanation">
-<caption><span id="t0" class="activeTableTab"><span>All Methods</span><span class="tabEnd">&nbsp;</span></span><span id="t1" class="tableTab"><span><a href="javascript:show(1);">Static Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t2" class="tableTab"><span><a href="javascript:show(2);">Instance Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t4" class="tableTab"><span><a href="javascript:show(8);">Concrete Methods</a></span><span class="tabEnd">&nbsp;</span></span></caption>
+<caption><span id="t0" class="activeTableTab"><span>All Methods</span><span class="tabEnd">&nbsp;</span></span><span id="t1" class="tableTab"><span><a href="javascript:show(1);">Static Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t2" class="tableTab"><span><a href="javascript:show(2);">Instance Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t3" class="tableTab"><span><a href="javascript:show(4);">Abstract Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t5" class="tableTab"><span><a href="javascript:show(16);">Default Methods</a></span><span class="tabEnd">&nbsp;</span></span></caption>
 <tr>
 <th class="colFirst" scope="col">Modifier and Type</th>
 <th class="colLast" scope="col">Method and Description</th>
@@ -167,49 +157,11 @@ extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/states/StateDraft.html#isInitial--">isInitial</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i7" class="rowColor">
-<td class="colFirst"><code>static <a href="../../../../io/sphere/sdk/states/StateDraft.html" title="class in io.sphere.sdk.states">StateDraft</a></code></td>
+<td class="colFirst"><code>static <a href="../../../../io/sphere/sdk/states/StateDraftDsl.html" title="class in io.sphere.sdk.states">StateDraftDsl</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/states/StateDraft.html#of-java.lang.String-io.sphere.sdk.states.StateType-">of</a></span>(java.lang.String&nbsp;key,
   <a href="../../../../io/sphere/sdk/states/StateType.html" title="enum in io.sphere.sdk.states">StateType</a>&nbsp;type)</code>&nbsp;</td>
 </tr>
-<tr id="i8" class="altColor">
-<td class="colFirst"><code><a href="../../../../io/sphere/sdk/states/StateDraft.html" title="class in io.sphere.sdk.states">StateDraft</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/states/StateDraft.html#withDescription-io.sphere.sdk.models.LocalizedString-">withDescription</a></span>(<a href="../../../../io/sphere/sdk/models/LocalizedString.html" title="class in io.sphere.sdk.models">LocalizedString</a>&nbsp;description)</code>&nbsp;</td>
-</tr>
-<tr id="i9" class="rowColor">
-<td class="colFirst"><code><a href="../../../../io/sphere/sdk/states/StateDraft.html" title="class in io.sphere.sdk.states">StateDraft</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/states/StateDraft.html#withInitial-boolean-">withInitial</a></span>(boolean&nbsp;initial)</code>&nbsp;</td>
-</tr>
-<tr id="i10" class="altColor">
-<td class="colFirst"><code><a href="../../../../io/sphere/sdk/states/StateDraft.html" title="class in io.sphere.sdk.states">StateDraft</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/states/StateDraft.html#withName-io.sphere.sdk.models.LocalizedString-">withName</a></span>(<a href="../../../../io/sphere/sdk/models/LocalizedString.html" title="class in io.sphere.sdk.models">LocalizedString</a>&nbsp;name)</code>&nbsp;</td>
-</tr>
-<tr id="i11" class="rowColor">
-<td class="colFirst"><code><a href="../../../../io/sphere/sdk/states/StateDraft.html" title="class in io.sphere.sdk.states">StateDraft</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/states/StateDraft.html#withRoles-java.util.Set-">withRoles</a></span>(java.util.Set&lt;<a href="../../../../io/sphere/sdk/states/StateRole.html" title="enum in io.sphere.sdk.states">StateRole</a>&gt;&nbsp;roles)</code>&nbsp;</td>
-</tr>
-<tr id="i12" class="altColor">
-<td class="colFirst"><code><a href="../../../../io/sphere/sdk/states/StateDraft.html" title="class in io.sphere.sdk.states">StateDraft</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/states/StateDraft.html#withRoles-io.sphere.sdk.states.StateRole-">withRoles</a></span>(<a href="../../../../io/sphere/sdk/states/StateRole.html" title="enum in io.sphere.sdk.states">StateRole</a>&nbsp;role)</code>&nbsp;</td>
-</tr>
-<tr id="i13" class="rowColor">
-<td class="colFirst"><code><a href="../../../../io/sphere/sdk/states/StateDraft.html" title="class in io.sphere.sdk.states">StateDraft</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/states/StateDraft.html#withTransitions-java.util.Set-">withTransitions</a></span>(java.util.Set&lt;<a href="../../../../io/sphere/sdk/models/Reference.html" title="interface in io.sphere.sdk.models">Reference</a>&lt;<a href="../../../../io/sphere/sdk/states/State.html" title="interface in io.sphere.sdk.states">State</a>&gt;&gt;&nbsp;transitions)</code>&nbsp;</td>
-</tr>
 </table>
-<ul class="blockList">
-<li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.models.Base">
-<!--   -->
-</a>
-<h3>Methods inherited from class&nbsp;io.sphere.sdk.models.<a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.sphere.sdk.models">Base</a></h3>
-<code><a href="../../../../io/sphere/sdk/models/Base.html#equals-java.lang.Object-">equals</a>, <a href="../../../../io/sphere/sdk/models/Base.html#hashCode--">hashCode</a>, <a href="../../../../io/sphere/sdk/models/Base.html#toString--">toString</a></code></li>
-</ul>
-<ul class="blockList">
-<li class="blockList"><a name="methods.inherited.from.class.java.lang.Object">
-<!--   -->
-</a>
-<h3>Methods inherited from class&nbsp;java.lang.Object</h3>
-<code>clone, finalize, getClass, notify, notifyAll, wait, wait, wait</code></li>
-</ul>
 </li>
 </ul>
 </li>
@@ -224,23 +176,13 @@ extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.
 <!--   -->
 </a>
 <h3>Method Detail</h3>
-<a name="of-java.lang.String-io.sphere.sdk.states.StateType-">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>of</h4>
-<pre>public static&nbsp;<a href="../../../../io/sphere/sdk/states/StateDraft.html" title="class in io.sphere.sdk.states">StateDraft</a>&nbsp;of(java.lang.String&nbsp;key,
-                            <a href="../../../../io/sphere/sdk/states/StateType.html" title="enum in io.sphere.sdk.states">StateType</a>&nbsp;type)</pre>
-</li>
-</ul>
 <a name="getKey--">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
 <h4>getKey</h4>
-<pre>public&nbsp;java.lang.String&nbsp;getKey()</pre>
+<pre>java.lang.String&nbsp;getKey()</pre>
 </li>
 </ul>
 <a name="getType--">
@@ -249,7 +191,7 @@ extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.
 <ul class="blockList">
 <li class="blockList">
 <h4>getType</h4>
-<pre>public&nbsp;<a href="../../../../io/sphere/sdk/states/StateType.html" title="enum in io.sphere.sdk.states">StateType</a>&nbsp;getType()</pre>
+<pre><a href="../../../../io/sphere/sdk/states/StateType.html" title="enum in io.sphere.sdk.states">StateType</a>&nbsp;getType()</pre>
 </li>
 </ul>
 <a name="getName--">
@@ -259,7 +201,7 @@ extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.
 <li class="blockList">
 <h4>getName</h4>
 <pre>@Nullable
-public&nbsp;<a href="../../../../io/sphere/sdk/models/LocalizedString.html" title="class in io.sphere.sdk.models">LocalizedString</a>&nbsp;getName()</pre>
+<a href="../../../../io/sphere/sdk/models/LocalizedString.html" title="class in io.sphere.sdk.models">LocalizedString</a>&nbsp;getName()</pre>
 </li>
 </ul>
 <a name="getDescription--">
@@ -269,7 +211,7 @@ public&nbsp;<a href="../../../../io/sphere/sdk/models/LocalizedString.html" titl
 <li class="blockList">
 <h4>getDescription</h4>
 <pre>@Nullable
-public&nbsp;<a href="../../../../io/sphere/sdk/models/LocalizedString.html" title="class in io.sphere.sdk.models">LocalizedString</a>&nbsp;getDescription()</pre>
+<a href="../../../../io/sphere/sdk/models/LocalizedString.html" title="class in io.sphere.sdk.models">LocalizedString</a>&nbsp;getDescription()</pre>
 </li>
 </ul>
 <a name="isInitial--">
@@ -279,7 +221,7 @@ public&nbsp;<a href="../../../../io/sphere/sdk/models/LocalizedString.html" titl
 <li class="blockList">
 <h4>isInitial</h4>
 <pre>@Nullable
-public&nbsp;java.lang.Boolean&nbsp;isInitial()</pre>
+java.lang.Boolean&nbsp;isInitial()</pre>
 </li>
 </ul>
 <a name="getTransitions--">
@@ -289,7 +231,7 @@ public&nbsp;java.lang.Boolean&nbsp;isInitial()</pre>
 <li class="blockList">
 <h4>getTransitions</h4>
 <pre>@Nullable
-public&nbsp;java.util.Set&lt;<a href="../../../../io/sphere/sdk/models/Reference.html" title="interface in io.sphere.sdk.models">Reference</a>&lt;<a href="../../../../io/sphere/sdk/states/State.html" title="interface in io.sphere.sdk.states">State</a>&gt;&gt;&nbsp;getTransitions()</pre>
+java.util.Set&lt;<a href="../../../../io/sphere/sdk/models/Reference.html" title="interface in io.sphere.sdk.models">Reference</a>&lt;<a href="../../../../io/sphere/sdk/states/State.html" title="interface in io.sphere.sdk.states">State</a>&gt;&gt;&nbsp;getTransitions()</pre>
 </li>
 </ul>
 <a name="getRoles--">
@@ -299,62 +241,17 @@ public&nbsp;java.util.Set&lt;<a href="../../../../io/sphere/sdk/models/Reference
 <li class="blockList">
 <h4>getRoles</h4>
 <pre>@Nullable
-public&nbsp;java.util.Set&lt;<a href="../../../../io/sphere/sdk/states/StateRole.html" title="enum in io.sphere.sdk.states">StateRole</a>&gt;&nbsp;getRoles()</pre>
+java.util.Set&lt;<a href="../../../../io/sphere/sdk/states/StateRole.html" title="enum in io.sphere.sdk.states">StateRole</a>&gt;&nbsp;getRoles()</pre>
 </li>
 </ul>
-<a name="withName-io.sphere.sdk.models.LocalizedString-">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>withName</h4>
-<pre>public&nbsp;<a href="../../../../io/sphere/sdk/states/StateDraft.html" title="class in io.sphere.sdk.states">StateDraft</a>&nbsp;withName(<a href="../../../../io/sphere/sdk/models/LocalizedString.html" title="class in io.sphere.sdk.models">LocalizedString</a>&nbsp;name)</pre>
-</li>
-</ul>
-<a name="withDescription-io.sphere.sdk.models.LocalizedString-">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>withDescription</h4>
-<pre>public&nbsp;<a href="../../../../io/sphere/sdk/states/StateDraft.html" title="class in io.sphere.sdk.states">StateDraft</a>&nbsp;withDescription(<a href="../../../../io/sphere/sdk/models/LocalizedString.html" title="class in io.sphere.sdk.models">LocalizedString</a>&nbsp;description)</pre>
-</li>
-</ul>
-<a name="withTransitions-java.util.Set-">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>withTransitions</h4>
-<pre>public&nbsp;<a href="../../../../io/sphere/sdk/states/StateDraft.html" title="class in io.sphere.sdk.states">StateDraft</a>&nbsp;withTransitions(@Nullable
-                                  java.util.Set&lt;<a href="../../../../io/sphere/sdk/models/Reference.html" title="interface in io.sphere.sdk.models">Reference</a>&lt;<a href="../../../../io/sphere/sdk/states/State.html" title="interface in io.sphere.sdk.states">State</a>&gt;&gt;&nbsp;transitions)</pre>
-</li>
-</ul>
-<a name="withInitial-boolean-">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>withInitial</h4>
-<pre>public&nbsp;<a href="../../../../io/sphere/sdk/states/StateDraft.html" title="class in io.sphere.sdk.states">StateDraft</a>&nbsp;withInitial(boolean&nbsp;initial)</pre>
-</li>
-</ul>
-<a name="withRoles-java.util.Set-">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>withRoles</h4>
-<pre>public&nbsp;<a href="../../../../io/sphere/sdk/states/StateDraft.html" title="class in io.sphere.sdk.states">StateDraft</a>&nbsp;withRoles(java.util.Set&lt;<a href="../../../../io/sphere/sdk/states/StateRole.html" title="enum in io.sphere.sdk.states">StateRole</a>&gt;&nbsp;roles)</pre>
-</li>
-</ul>
-<a name="withRoles-io.sphere.sdk.states.StateRole-">
+<a name="of-java.lang.String-io.sphere.sdk.states.StateType-">
 <!--   -->
 </a>
 <ul class="blockListLast">
 <li class="blockList">
-<h4>withRoles</h4>
-<pre>public&nbsp;<a href="../../../../io/sphere/sdk/states/StateDraft.html" title="class in io.sphere.sdk.states">StateDraft</a>&nbsp;withRoles(<a href="../../../../io/sphere/sdk/states/StateRole.html" title="enum in io.sphere.sdk.states">StateRole</a>&nbsp;role)</pre>
+<h4>of</h4>
+<pre>static&nbsp;<a href="../../../../io/sphere/sdk/states/StateDraftDsl.html" title="class in io.sphere.sdk.states">StateDraftDsl</a>&nbsp;of(java.lang.String&nbsp;key,
+                        <a href="../../../../io/sphere/sdk/states/StateType.html" title="enum in io.sphere.sdk.states">StateType</a>&nbsp;type)</pre>
 </li>
 </ul>
 </li>

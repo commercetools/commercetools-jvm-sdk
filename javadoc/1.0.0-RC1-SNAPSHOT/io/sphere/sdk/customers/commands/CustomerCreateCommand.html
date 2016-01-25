@@ -119,7 +119,7 @@ final String companyName = "ct";
 final String vatId = "123456";
 final boolean emailVerified = true;
 final List&lt;Address&gt; addresses = asList(Address.of(DE), Address.of(GB));
-final CustomerDraft draft = CustomerDraft.of(name, email, password)
+final CustomerDraft draft = CustomerDraftDsl.of(name, email, password)
         .withExternalId(externalId)
         .withDateOfBirth(dateOfBirth)
         .withCompanyName(companyName)
@@ -160,7 +160,7 @@ assertThat(customer.getCustomerGroup().getObj())
  <h3 id="create-customer-with-cart">Example for creating a customer with a cart</h3>
  <div id="io-sphere-sdk-customers-commands-CustomerCreateCommandTest-createCustomerWithCart--%s" class=code-example><pre><code class='java'>final Cart cart = client().executeBlocking(CartCreateCommand.of(CartDraft.of(EUR)));//could of course be filled with products
 final String email = randomEmail(CustomerCreateCommandTest.class);
-final CustomerDraft draft = CustomerDraft.of(CUSTOMER_NAME, email, PASSWORD).withCart(cart);
+final CustomerDraft draft = CustomerDraftDsl.of(CUSTOMER_NAME, email, PASSWORD).withCart(cart);
 final CustomerSignInResult result = client().executeBlocking(CustomerCreateCommand.of(draft));
 assertThat(result.getCart()).isNotNull();
 assertThat(result.getCart().getId()).isEqualTo(cart.getId());
@@ -189,7 +189,7 @@ assertThat(result.getCart().getId()).isEqualTo(cart.getId());
 </tr>
 <tr id="i0" class="altColor">
 <td class="colFirst"><code>static <a href="../../../../../io/sphere/sdk/customers/commands/CustomerCreateCommand.html" title="interface in io.sphere.sdk.customers.commands">CustomerCreateCommand</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/customers/commands/CustomerCreateCommand.html#of-io.sphere.sdk.customers.CustomerDraft-">of</a></span>(<a href="../../../../../io/sphere/sdk/customers/CustomerDraft.html" title="class in io.sphere.sdk.customers">CustomerDraft</a>&nbsp;draft)</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/customers/commands/CustomerCreateCommand.html#of-io.sphere.sdk.customers.CustomerDraft-">of</a></span>(<a href="../../../../../io/sphere/sdk/customers/CustomerDraft.html" title="interface in io.sphere.sdk.customers">CustomerDraft</a>&nbsp;draft)</code>&nbsp;</td>
 </tr>
 </table>
 <ul class="blockList">
@@ -240,7 +240,7 @@ assertThat(result.getCart().getId()).isEqualTo(cart.getId());
 <ul class="blockListLast">
 <li class="blockList">
 <h4>of</h4>
-<pre>static&nbsp;<a href="../../../../../io/sphere/sdk/customers/commands/CustomerCreateCommand.html" title="interface in io.sphere.sdk.customers.commands">CustomerCreateCommand</a>&nbsp;of(<a href="../../../../../io/sphere/sdk/customers/CustomerDraft.html" title="class in io.sphere.sdk.customers">CustomerDraft</a>&nbsp;draft)</pre>
+<pre>static&nbsp;<a href="../../../../../io/sphere/sdk/customers/commands/CustomerCreateCommand.html" title="interface in io.sphere.sdk.customers.commands">CustomerCreateCommand</a>&nbsp;of(<a href="../../../../../io/sphere/sdk/customers/CustomerDraft.html" title="interface in io.sphere.sdk.customers">CustomerDraft</a>&nbsp;draft)</pre>
 </li>
 </ul>
 </li>

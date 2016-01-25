@@ -18,8 +18,8 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10};
-var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
+var methods = {"i0":6,"i1":6,"i2":6,"i3":6,"i4":6};
+var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],4:["t3","Abstract Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
 var tableTab = "tableTab";
@@ -92,29 +92,19 @@ var activeTableTab = "activeTableTab";
 <!-- ======== START OF CLASS DATA ======== -->
 <div class="header">
 <div class="subTitle">io.sphere.sdk.payments</div>
-<h2 title="Class TransactionDraft" class="title">Class TransactionDraft</h2>
+<h2 title="Interface TransactionDraft" class="title">Interface TransactionDraft</h2>
 </div>
 <div class="contentContainer">
-<ul class="inheritance">
-<li>java.lang.Object</li>
-<li>
-<ul class="inheritance">
-<li><a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.sphere.sdk.models">io.sphere.sdk.models.Base</a></li>
-<li>
-<ul class="inheritance">
-<li>io.sphere.sdk.payments.TransactionDraft</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
 <div class="description">
 <ul class="blockList">
 <li class="blockList">
 <hr>
 <br>
-<pre>public final class <span class="typeNameLabel">TransactionDraft</span>
-extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.sphere.sdk.models">Base</a></pre>
+<pre>public interface <span class="typeNameLabel">TransactionDraft</span></pre>
+<dl>
+<dt><span class="seeLabel">See Also:</span></dt>
+<dd><a href="../../../../io/sphere/sdk/payments/TransactionDraftBuilder.html" title="class in io.sphere.sdk.payments"><code>TransactionDraftBuilder</code></a></dd>
+</dl>
 </li>
 </ul>
 </div>
@@ -128,7 +118,7 @@ extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.
 </a>
 <h3>Method Summary</h3>
 <table class="memberSummary" border="0" cellpadding="3" cellspacing="0" summary="Method Summary table, listing methods, and an explanation">
-<caption><span id="t0" class="activeTableTab"><span>All Methods</span><span class="tabEnd">&nbsp;</span></span><span id="t2" class="tableTab"><span><a href="javascript:show(2);">Instance Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t4" class="tableTab"><span><a href="javascript:show(8);">Concrete Methods</a></span><span class="tabEnd">&nbsp;</span></span></caption>
+<caption><span id="t0" class="activeTableTab"><span>All Methods</span><span class="tabEnd">&nbsp;</span></span><span id="t2" class="tableTab"><span><a href="javascript:show(2);">Instance Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t3" class="tableTab"><span><a href="javascript:show(4);">Abstract Methods</a></span><span class="tabEnd">&nbsp;</span></span></caption>
 <tr>
 <th class="colFirst" scope="col">Modifier and Type</th>
 <th class="colLast" scope="col">Method and Description</th>
@@ -154,20 +144,6 @@ extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/payments/TransactionDraft.html#getType--">getType</a></span>()</code>&nbsp;</td>
 </tr>
 </table>
-<ul class="blockList">
-<li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.models.Base">
-<!--   -->
-</a>
-<h3>Methods inherited from class&nbsp;io.sphere.sdk.models.<a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.sphere.sdk.models">Base</a></h3>
-<code><a href="../../../../io/sphere/sdk/models/Base.html#equals-java.lang.Object-">equals</a>, <a href="../../../../io/sphere/sdk/models/Base.html#hashCode--">hashCode</a>, <a href="../../../../io/sphere/sdk/models/Base.html#toString--">toString</a></code></li>
-</ul>
-<ul class="blockList">
-<li class="blockList"><a name="methods.inherited.from.class.java.lang.Object">
-<!--   -->
-</a>
-<h3>Methods inherited from class&nbsp;java.lang.Object</h3>
-<code>clone, finalize, getClass, notify, notifyAll, wait, wait, wait</code></li>
-</ul>
 </li>
 </ul>
 </li>
@@ -189,7 +165,7 @@ extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.
 <li class="blockList">
 <h4>getTimestamp</h4>
 <pre>@Nullable
-public&nbsp;java.time.ZonedDateTime&nbsp;getTimestamp()</pre>
+java.time.ZonedDateTime&nbsp;getTimestamp()</pre>
 </li>
 </ul>
 <a name="getType--">
@@ -198,7 +174,7 @@ public&nbsp;java.time.ZonedDateTime&nbsp;getTimestamp()</pre>
 <ul class="blockList">
 <li class="blockList">
 <h4>getType</h4>
-<pre>public&nbsp;<a href="../../../../io/sphere/sdk/payments/TransactionType.html" title="enum in io.sphere.sdk.payments">TransactionType</a>&nbsp;getType()</pre>
+<pre><a href="../../../../io/sphere/sdk/payments/TransactionType.html" title="enum in io.sphere.sdk.payments">TransactionType</a>&nbsp;getType()</pre>
 </li>
 </ul>
 <a name="getAmount--">
@@ -207,7 +183,7 @@ public&nbsp;java.time.ZonedDateTime&nbsp;getTimestamp()</pre>
 <ul class="blockList">
 <li class="blockList">
 <h4>getAmount</h4>
-<pre>public&nbsp;javax.money.MonetaryAmount&nbsp;getAmount()</pre>
+<pre>javax.money.MonetaryAmount&nbsp;getAmount()</pre>
 </li>
 </ul>
 <a name="getInteractionId--">
@@ -217,7 +193,7 @@ public&nbsp;java.time.ZonedDateTime&nbsp;getTimestamp()</pre>
 <li class="blockList">
 <h4>getInteractionId</h4>
 <pre>@Nullable
-public&nbsp;java.lang.String&nbsp;getInteractionId()</pre>
+java.lang.String&nbsp;getInteractionId()</pre>
 </li>
 </ul>
 <a name="getState--">
@@ -227,7 +203,7 @@ public&nbsp;java.lang.String&nbsp;getInteractionId()</pre>
 <li class="blockList">
 <h4>getState</h4>
 <pre>@Nullable
-public&nbsp;<a href="../../../../io/sphere/sdk/payments/TransactionState.html" title="enum in io.sphere.sdk.payments">TransactionState</a>&nbsp;getState()</pre>
+<a href="../../../../io/sphere/sdk/payments/TransactionState.html" title="enum in io.sphere.sdk.payments">TransactionState</a>&nbsp;getState()</pre>
 </li>
 </ul>
 </li>

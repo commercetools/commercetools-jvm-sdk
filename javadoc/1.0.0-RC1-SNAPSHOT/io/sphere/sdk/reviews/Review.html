@@ -117,10 +117,7 @@ extends <a href="../../../../io/sphere/sdk/models/Resource.html" title="interfac
  <p>First of all, once per commercetools project, we create the approved state. Then we create the initial to-approve state, which has a possible transition to the approved state:</p>
 
  <div id="io-sphere-sdk-reviews-approvaldemo-CreateReviewStates%s" class=code-example><button type='button' style='display: none;' class='reveal-imports'>show/hide imports</button><pre class='hide code-example-imports'><code class='java'>import io.sphere.sdk.client.BlockingSphereClient;
-import io.sphere.sdk.states.State;
-import io.sphere.sdk.states.StateDraft;
-import io.sphere.sdk.states.StateRole;
-import io.sphere.sdk.states.StateType;
+import io.sphere.sdk.states.*;
 import io.sphere.sdk.states.commands.StateCreateCommand;
 import java.util.List;
 import static java.util.Arrays.asList;
@@ -128,11 +125,11 @@ import static java.util.Collections.singleton;
 </code></pre><pre><code class='java'>public class CreateReviewStates {
     public static List&lt;State&gt; createStates(final BlockingSphereClient client) {
         final StateDraft approvedStateDraft =
-                StateDraft.of("approved", StateType.REVIEW_STATE).withRoles(StateRole.REVIEW_INCLUDED_IN_STATISTICS);
+                StateDraftDsl.of("approved", StateType.REVIEW_STATE).withRoles(StateRole.REVIEW_INCLUDED_IN_STATISTICS);
         final State approvedState = client.executeBlocking(StateCreateCommand.of(approvedStateDraft));
 
         final StateDraft initialStateDraft =
-                StateDraft.of("to-approve", StateType.REVIEW_STATE)
+                StateDraftDsl.of("to-approve", StateType.REVIEW_STATE)
                         .withInitial(true)
                         .withTransitions(singleton(approvedState.toReference()));
         final State initialState = client.executeBlocking(StateCreateCommand.of(initialStateDraft));

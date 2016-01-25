@@ -18,8 +18,8 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10};
-var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
+var methods = {"i0":6,"i1":6,"i2":6,"i3":6,"i4":6,"i5":6,"i6":6};
+var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],4:["t3","Abstract Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
 var tableTab = "tableTab";
@@ -92,34 +92,20 @@ var activeTableTab = "activeTableTab";
 <!-- ======== START OF CLASS DATA ======== -->
 <div class="header">
 <div class="subTitle">io.sphere.sdk.categories</div>
-<h2 title="Class CategoryDraft" class="title">Class CategoryDraft</h2>
+<h2 title="Interface CategoryDraft" class="title">Interface CategoryDraft</h2>
 </div>
 <div class="contentContainer">
-<ul class="inheritance">
-<li>java.lang.Object</li>
-<li>
-<ul class="inheritance">
-<li><a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.sphere.sdk.models">io.sphere.sdk.models.Base</a></li>
-<li>
-<ul class="inheritance">
-<li>io.sphere.sdk.categories.CategoryDraft</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
 <div class="description">
 <ul class="blockList">
 <li class="blockList">
 <dl>
-<dt>All Implemented Interfaces:</dt>
-<dd><a href="../../../../io/sphere/sdk/models/WithLocalizedSlug.html" title="interface in io.sphere.sdk.models">WithLocalizedSlug</a>, <a href="../../../../io/sphere/sdk/types/CustomDraft.html" title="interface in io.sphere.sdk.types">CustomDraft</a></dd>
+<dt>All Superinterfaces:</dt>
+<dd><a href="../../../../io/sphere/sdk/types/CustomDraft.html" title="interface in io.sphere.sdk.types">CustomDraft</a>, <a href="../../../../io/sphere/sdk/models/WithLocalizedSlug.html" title="interface in io.sphere.sdk.models">WithLocalizedSlug</a></dd>
 </dl>
 <hr>
 <br>
-<pre>public class <span class="typeNameLabel">CategoryDraft</span>
-extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.sphere.sdk.models">Base</a>
-implements <a href="../../../../io/sphere/sdk/models/WithLocalizedSlug.html" title="interface in io.sphere.sdk.models">WithLocalizedSlug</a>, <a href="../../../../io/sphere/sdk/types/CustomDraft.html" title="interface in io.sphere.sdk.types">CustomDraft</a></pre>
+<pre>public interface <span class="typeNameLabel">CategoryDraft</span>
+extends <a href="../../../../io/sphere/sdk/types/CustomDraft.html" title="interface in io.sphere.sdk.types">CustomDraft</a>, <a href="../../../../io/sphere/sdk/models/WithLocalizedSlug.html" title="interface in io.sphere.sdk.models">WithLocalizedSlug</a></pre>
 <div class="block">Template for a new category.
 
  <p>For construction see <a href="../../../../io/sphere/sdk/categories/CategoryDraftBuilder.html" title="class in io.sphere.sdk.categories"><code>CategoryDraftBuilder</code></a>.</p></div>
@@ -136,13 +122,13 @@ implements <a href="../../../../io/sphere/sdk/models/WithLocalizedSlug.html" tit
 </a>
 <h3>Method Summary</h3>
 <table class="memberSummary" border="0" cellpadding="3" cellspacing="0" summary="Method Summary table, listing methods, and an explanation">
-<caption><span id="t0" class="activeTableTab"><span>All Methods</span><span class="tabEnd">&nbsp;</span></span><span id="t2" class="tableTab"><span><a href="javascript:show(2);">Instance Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t4" class="tableTab"><span><a href="javascript:show(8);">Concrete Methods</a></span><span class="tabEnd">&nbsp;</span></span></caption>
+<caption><span id="t0" class="activeTableTab"><span>All Methods</span><span class="tabEnd">&nbsp;</span></span><span id="t2" class="tableTab"><span><a href="javascript:show(2);">Instance Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t3" class="tableTab"><span><a href="javascript:show(4);">Abstract Methods</a></span><span class="tabEnd">&nbsp;</span></span></caption>
 <tr>
 <th class="colFirst" scope="col">Modifier and Type</th>
 <th class="colLast" scope="col">Method and Description</th>
 </tr>
 <tr id="i0" class="altColor">
-<td class="colFirst"><code><a href="../../../../io/sphere/sdk/types/CustomFieldsDraft.html" title="class in io.sphere.sdk.types">CustomFieldsDraft</a></code></td>
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/types/CustomFieldsDraft.html" title="interface in io.sphere.sdk.types">CustomFieldsDraft</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/categories/CategoryDraft.html#getCustom--">getCustom</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i1" class="rowColor">
@@ -170,20 +156,6 @@ implements <a href="../../../../io/sphere/sdk/models/WithLocalizedSlug.html" tit
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/categories/CategoryDraft.html#getSlug--">getSlug</a></span>()</code>&nbsp;</td>
 </tr>
 </table>
-<ul class="blockList">
-<li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.models.Base">
-<!--   -->
-</a>
-<h3>Methods inherited from class&nbsp;io.sphere.sdk.models.<a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.sphere.sdk.models">Base</a></h3>
-<code><a href="../../../../io/sphere/sdk/models/Base.html#equals-java.lang.Object-">equals</a>, <a href="../../../../io/sphere/sdk/models/Base.html#hashCode--">hashCode</a>, <a href="../../../../io/sphere/sdk/models/Base.html#toString--">toString</a></code></li>
-</ul>
-<ul class="blockList">
-<li class="blockList"><a name="methods.inherited.from.class.java.lang.Object">
-<!--   -->
-</a>
-<h3>Methods inherited from class&nbsp;java.lang.Object</h3>
-<code>clone, finalize, getClass, notify, notifyAll, wait, wait, wait</code></li>
-</ul>
 </li>
 </ul>
 </li>
@@ -204,7 +176,7 @@ implements <a href="../../../../io/sphere/sdk/models/WithLocalizedSlug.html" tit
 <ul class="blockList">
 <li class="blockList">
 <h4>getName</h4>
-<pre>public&nbsp;<a href="../../../../io/sphere/sdk/models/LocalizedString.html" title="class in io.sphere.sdk.models">LocalizedString</a>&nbsp;getName()</pre>
+<pre><a href="../../../../io/sphere/sdk/models/LocalizedString.html" title="class in io.sphere.sdk.models">LocalizedString</a>&nbsp;getName()</pre>
 </li>
 </ul>
 <a name="getSlug--">
@@ -213,7 +185,7 @@ implements <a href="../../../../io/sphere/sdk/models/WithLocalizedSlug.html" tit
 <ul class="blockList">
 <li class="blockList">
 <h4>getSlug</h4>
-<pre>public&nbsp;<a href="../../../../io/sphere/sdk/models/LocalizedString.html" title="class in io.sphere.sdk.models">LocalizedString</a>&nbsp;getSlug()</pre>
+<pre><a href="../../../../io/sphere/sdk/models/LocalizedString.html" title="class in io.sphere.sdk.models">LocalizedString</a>&nbsp;getSlug()</pre>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="../../../../io/sphere/sdk/models/WithLocalizedSlug.html#getSlug--">getSlug</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/models/WithLocalizedSlug.html" title="interface in io.sphere.sdk.models">WithLocalizedSlug</a></code></dd>
@@ -227,7 +199,7 @@ implements <a href="../../../../io/sphere/sdk/models/WithLocalizedSlug.html" tit
 <li class="blockList">
 <h4>getDescription</h4>
 <pre>@Nullable
-public&nbsp;<a href="../../../../io/sphere/sdk/models/LocalizedString.html" title="class in io.sphere.sdk.models">LocalizedString</a>&nbsp;getDescription()</pre>
+<a href="../../../../io/sphere/sdk/models/LocalizedString.html" title="class in io.sphere.sdk.models">LocalizedString</a>&nbsp;getDescription()</pre>
 </li>
 </ul>
 <a name="getParent--">
@@ -237,7 +209,7 @@ public&nbsp;<a href="../../../../io/sphere/sdk/models/LocalizedString.html" titl
 <li class="blockList">
 <h4>getParent</h4>
 <pre>@Nullable
-public&nbsp;<a href="../../../../io/sphere/sdk/models/Reference.html" title="interface in io.sphere.sdk.models">Reference</a>&lt;<a href="../../../../io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories">Category</a>&gt;&nbsp;getParent()</pre>
+<a href="../../../../io/sphere/sdk/models/Reference.html" title="interface in io.sphere.sdk.models">Reference</a>&lt;<a href="../../../../io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories">Category</a>&gt;&nbsp;getParent()</pre>
 </li>
 </ul>
 <a name="getOrderHint--">
@@ -247,7 +219,7 @@ public&nbsp;<a href="../../../../io/sphere/sdk/models/Reference.html" title="int
 <li class="blockList">
 <h4>getOrderHint</h4>
 <pre>@Nullable
-public&nbsp;java.lang.String&nbsp;getOrderHint()</pre>
+java.lang.String&nbsp;getOrderHint()</pre>
 </li>
 </ul>
 <a name="getExternalId--">
@@ -257,7 +229,7 @@ public&nbsp;java.lang.String&nbsp;getOrderHint()</pre>
 <li class="blockList">
 <h4>getExternalId</h4>
 <pre>@Nullable
-public&nbsp;java.lang.String&nbsp;getExternalId()</pre>
+java.lang.String&nbsp;getExternalId()</pre>
 </li>
 </ul>
 <a name="getCustom--">
@@ -267,7 +239,7 @@ public&nbsp;java.lang.String&nbsp;getExternalId()</pre>
 <li class="blockList">
 <h4>getCustom</h4>
 <pre>@Nullable
-public&nbsp;<a href="../../../../io/sphere/sdk/types/CustomFieldsDraft.html" title="class in io.sphere.sdk.types">CustomFieldsDraft</a>&nbsp;getCustom()</pre>
+<a href="../../../../io/sphere/sdk/types/CustomFieldsDraft.html" title="interface in io.sphere.sdk.types">CustomFieldsDraft</a>&nbsp;getCustom()</pre>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="../../../../io/sphere/sdk/types/CustomDraft.html#getCustom--">getCustom</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/types/CustomDraft.html" title="interface in io.sphere.sdk.types">CustomDraft</a></code></dd>

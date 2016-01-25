@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":9,"i6":9,"i7":9,"i8":9,"i9":9,"i10":9,"i11":9,"i12":9,"i13":9,"i14":10};
+var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":9,"i6":9,"i7":9,"i8":9,"i9":9,"i10":9,"i11":9,"i12":9,"i13":9};
 var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -117,7 +117,7 @@ var activeTableTab = "activeTableTab";
 </dl>
 <hr>
 <br>
-<pre>public class <span class="typeNameLabel">CustomObjectDraft&lt;T&gt;</span>
+<pre>public final class <span class="typeNameLabel">CustomObjectDraft&lt;T&gt;</span>
 extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.sphere.sdk.models">Base</a></pre>
 <div class="block">A draft for creating or updating custom objects.</div>
 <dl>
@@ -239,12 +239,6 @@ extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.
                  java.lang.Long&nbsp;version,
                  com.fasterxml.jackson.core.type.TypeReference&lt;T&gt;&nbsp;valueTypeReference)</code>
 <div class="block">Creates a draft for creating or updating a custom object.</div>
-</td>
-</tr>
-<tr id="i14" class="altColor">
-<td class="colFirst"><code><a href="../../../../io/sphere/sdk/customobjects/CustomObjectDraft.html" title="class in io.sphere.sdk.customobjects">CustomObjectDraft</a>&lt;<a href="../../../../io/sphere/sdk/customobjects/CustomObjectDraft.html" title="type parameter in CustomObjectDraft">T</a>&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/customobjects/CustomObjectDraft.html#withVersion-java.lang.Long-">withVersion</a></span>(java.lang.Long&nbsp;version)</code>
-<div class="block">Copies this <a href="../../../../io/sphere/sdk/customobjects/CustomObjectDraft.html" title="class in io.sphere.sdk.customobjects"><code>CustomObjectDraft</code></a> and sets the version to <code>version</code> to use optimistic locking.</div>
 </td>
 </tr>
 </table>
@@ -521,22 +515,6 @@ extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.
 <h4>getVersion</h4>
 <pre>@Nullable
 public&nbsp;java.lang.Long&nbsp;getVersion()</pre>
-</li>
-</ul>
-<a name="withVersion-java.lang.Long-">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>withVersion</h4>
-<pre>public&nbsp;<a href="../../../../io/sphere/sdk/customobjects/CustomObjectDraft.html" title="class in io.sphere.sdk.customobjects">CustomObjectDraft</a>&lt;<a href="../../../../io/sphere/sdk/customobjects/CustomObjectDraft.html" title="type parameter in CustomObjectDraft">T</a>&gt;&nbsp;withVersion(java.lang.Long&nbsp;version)</pre>
-<div class="block">Copies this <a href="../../../../io/sphere/sdk/customobjects/CustomObjectDraft.html" title="class in io.sphere.sdk.customobjects"><code>CustomObjectDraft</code></a> and sets the version to <code>version</code> to use optimistic locking.</div>
-<dl>
-<dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>version</code> - the version of the current stored custom object in SPHERE.IO.</dd>
-<dt><span class="returnLabel">Returns:</span></dt>
-<dd>a draft which provides optimistic locking</dd>
-</dl>
 </li>
 </ul>
 <a name="getContainer--">
