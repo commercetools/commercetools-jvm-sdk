@@ -14,7 +14,6 @@ import io.sphere.sdk.producttypes.commands.ProductTypeDeleteCommand;
 import io.sphere.sdk.producttypes.queries.ProductTypeQuery;
 import io.sphere.sdk.queries.Query;
 import io.sphere.sdk.utils.MoneyImpl;
-import io.sphere.sdk.utils.SphereInternalUtils;
 
 import javax.money.MonetaryAmount;
 import java.math.BigDecimal;

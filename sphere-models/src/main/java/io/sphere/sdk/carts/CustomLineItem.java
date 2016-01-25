@@ -23,7 +23,7 @@ import java.util.Set;
  <p>Example for adding a {@link CustomLineItem} to a {@link Cart}:</p>
  {@include.example io.sphere.sdk.carts.commands.CartUpdateCommandTest#addCustomLineItem()}
 
- @see CustomLineItemDraft
+ @see CustomLineItemDraftImpl
  @see io.sphere.sdk.carts.commands.updateactions.AddCustomLineItem
  @see io.sphere.sdk.carts.commands.updateactions.RemoveCustomLineItem
  @see Order#getCustomLineItems()

@@ -6,12 +6,11 @@ import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Reference;
 
 import javax.annotation.Nullable;
-import java.util.Collections;
 import java.util.Set;
 
 import static java.util.Collections.singleton;
 
-public final class StateDraftBuilder extends Base implements Builder<StateDraft> {
+public final class StateDraftBuilder extends Base implements Builder<StateDraftDsl> {
     private final String key;
     private StateType type;
     @Nullable
@@ -68,8 +67,8 @@ public final class StateDraftBuilder extends Base implements Builder<StateDraft>
     }
 
     @Override
-    public StateDraft build() {
-        return new StateDraft(key, type, name, description, initial, transitions, roles);
+    public StateDraftDsl build() {
+        return new StateDraftDsl(key, type, name, description, initial, transitions, roles);
     }
 
     public StateDraftBuilder roles(final Set<StateRole> roles) {

@@ -1,7 +1,6 @@
 package io.sphere.sdk.cartdiscounts;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import io.sphere.sdk.models.Base;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import io.sphere.sdk.models.LocalizedString;
 
 import javax.annotation.Nullable;
@@ -11,75 +10,28 @@ import java.time.ZonedDateTime;
  *
  * @see CartDiscountDraftBuilder
  */
-public class CartDiscountDraft extends Base {
-    private final LocalizedString name;
-    @Nullable
-    private final LocalizedString description;
-    private final CartDiscountValue value;
-    private final String cartPredicate;
-    private final CartDiscountTarget target;
-    private final String sortOrder;
-    private final Boolean isActive;
-    @Nullable
-    private final ZonedDateTime validFrom;
-    @Nullable
-    private final ZonedDateTime validUntil;
-    private final Boolean requiresDiscountCode;
-
-    @JsonCreator
-    CartDiscountDraft(final LocalizedString name, final String cartPredicate, @Nullable final LocalizedString description, final CartDiscountValue value, final CartDiscountTarget target, final String sortOrder, final Boolean isActive, @Nullable final ZonedDateTime validFrom, @Nullable final ZonedDateTime validUntil, final Boolean requiresDiscountCode) {
-        this.cartPredicate = cartPredicate;
-        this.name = name;
-        this.description = description;
-        this.value = value;
-        this.target = target;
-        this.sortOrder = sortOrder;
-        this.isActive = isActive;
-        this.validFrom = validFrom;
-        this.validUntil = validUntil;
-        this.requiresDiscountCode = requiresDiscountCode;
-    }
-
-    public String getCartPredicate() {
-        return cartPredicate;
-    }
+@JsonDeserialize(as = CartDiscountDraftImpl.class)
+public interface CartDiscountDraft {
+    String getCartPredicate();
 
     @Nullable
-    public LocalizedString getDescription() {
-        return description;
-    }
+    LocalizedString getDescription();
 
-    public Boolean isActive() {
-        return isActive;
-    }
+    Boolean isActive();
 
-    public LocalizedString getName() {
-        return name;
-    }
+    LocalizedString getName();
 
-    public Boolean isRequiresDiscountCode() {
-        return requiresDiscountCode;
-    }
+    Boolean isRequiresDiscountCode();
 
-    public String getSortOrder() {
-        return sortOrder;
-    }
+    String getSortOrder();
 
-    public CartDiscountTarget getTarget() {
-        return target;
-    }
+    CartDiscountTarget getTarget();
 
     @Nullable
-    public ZonedDateTime getValidFrom() {
-        return validFrom;
-    }
+    ZonedDateTime getValidFrom();
 
     @Nullable
-    public ZonedDateTime getValidUntil() {
-        return validUntil;
-    }
+    ZonedDateTime getValidUntil();
 
-    public CartDiscountValue getValue() {
-        return value;
-    }
+    CartDiscountValue getValue();
 }

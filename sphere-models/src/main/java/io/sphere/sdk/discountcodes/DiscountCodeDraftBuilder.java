@@ -9,7 +9,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
-public class DiscountCodeDraftBuilder extends Base implements Builder<DiscountCodeDraft> {
+public class DiscountCodeDraftBuilder extends Base implements Builder<DiscountCodeDraftDsl> {
     @Nullable
     private LocalizedString name;
     @Nullable
@@ -88,7 +88,7 @@ public class DiscountCodeDraftBuilder extends Base implements Builder<DiscountCo
     }
 
     @Override
-    public DiscountCodeDraft build() {
-        return new DiscountCodeDraft(cartDiscounts, name, description, code, Optional.ofNullable(cartPredicate).map(CartDiscountPredicate::toSphereCartPredicate).orElse(null), isActive, maxApplications, maxApplicationsPerCustomer);
+    public DiscountCodeDraftDsl build() {
+        return new DiscountCodeDraftDsl(cartDiscounts, name, description, code, Optional.ofNullable(cartPredicate).map(CartDiscountPredicate::toSphereCartPredicate).orElse(null), isActive, maxApplications, maxApplicationsPerCustomer);
     }
 }

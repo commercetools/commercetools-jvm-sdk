@@ -5,10 +5,7 @@ import io.sphere.sdk.carts.*;
 import io.sphere.sdk.models.Address;
 import io.sphere.sdk.test.IntegrationTest;
 import io.sphere.sdk.test.JsonNodeReferenceResolver;
-import io.sphere.sdk.types.CustomFieldsDraft;
-import io.sphere.sdk.types.FieldDefinition;
-import io.sphere.sdk.types.StringFieldType;
-import io.sphere.sdk.types.TypeFixtures;
+import io.sphere.sdk.types.*;
 import io.sphere.sdk.types.commands.TypeDeleteCommand;
 import io.sphere.sdk.types.queries.TypeQuery;
 import org.junit.BeforeClass;
@@ -59,7 +56,7 @@ public class CartCreateCommandTest extends IntegrationTest {
                     withTaxedProduct(client(), product -> {
                         final List<LineItemDraft> lineItems = singletonList(LineItemDraft.of(product, 1, 15));
 
-                        final List<CustomLineItemDraft> customLineItems = singletonList(CustomLineItemDraft.of(randomSlug(), "foo-bar", EURO_5, product.getTaxCategory(), 1L));
+                        final List<CustomLineItemDraft> customLineItems = singletonList(CustomLineItemDraft.of(randomSlug(), "foo-bar", EURO_5, product.getTaxCategory(), 1L, null));
 
                         final CartDraft cartDraft = CartDraft.of(EUR)
                                 .withCountry(DE)

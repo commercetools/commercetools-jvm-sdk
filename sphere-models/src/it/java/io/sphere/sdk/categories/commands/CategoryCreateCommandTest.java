@@ -1,9 +1,6 @@
 package io.sphere.sdk.categories.commands;
 
-import io.sphere.sdk.categories.Category;
-import io.sphere.sdk.categories.CategoryDraft;
-import io.sphere.sdk.categories.CategoryDraftBuilder;
-import io.sphere.sdk.categories.CategoryFixtures;
+import io.sphere.sdk.categories.*;
 import io.sphere.sdk.categories.queries.CategoryQuery;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.test.IntegrationTest;

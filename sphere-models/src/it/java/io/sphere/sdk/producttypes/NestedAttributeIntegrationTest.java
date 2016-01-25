@@ -4,7 +4,6 @@ import io.sphere.sdk.products.attributes.*;
 import io.sphere.sdk.models.Referenceable;
 import io.sphere.sdk.products.*;
 import io.sphere.sdk.test.IntegrationTest;
-import io.sphere.sdk.utils.SphereInternalUtils;
 import org.junit.Test;
 
 import java.util.*;
@@ -127,8 +126,7 @@ public final class NestedAttributeIntegrationTest extends IntegrationTest {
     }
 
     private ProductTypeDraft createNutrientInformation() {
-        return ProductTypeDraft.of(randomKey(), "NutrientInformation", "NutrientInformation",
-                asList(
+        return ProductTypeDraft.of(randomKey(), "NutrientInformation", "NutrientInformation", asList(
                         AttributeDefinitionBuilder.of(NutrientInfo.quantityContainedUOM.getName(),
                                 en(NutrientInfo.quantityContainedUOM.getName()), StringAttributeType.of()).build(),
                         AttributeDefinitionBuilder.of(NutrientInfo.quantityContained.getName(),
@@ -140,8 +138,7 @@ public final class NestedAttributeIntegrationTest extends IntegrationTest {
     }
 
     private ProductTypeDraft createNutrient(final Referenceable<ProductType> nutrientInformationType) {
-        return ProductTypeDraft.of(randomKey(),"Nutrient", "Nutrient",
-                asList(
+        return ProductTypeDraft.of(randomKey(), "Nutrient", "Nutrient", asList(
                         AttributeDefinitionBuilder.of(Nutrient.servingSizeUOM.getName(),
                                 en(Nutrient.servingSizeUOM.getName()), StringAttributeType.of()).build(),
                         AttributeDefinitionBuilder.of(Nutrient.servingSize.getName(),
@@ -151,8 +148,7 @@ public final class NestedAttributeIntegrationTest extends IntegrationTest {
     }
 
     private ProductTypeDraft createBanana(Referenceable<ProductType> nutrientType) {
-        return ProductTypeDraft.of(randomKey(), "Banana", "Banana",
-                asList(
+        return ProductTypeDraft.of(randomKey(), "Banana", "Banana", asList(
                         AttributeDefinitionBuilder.of(Banana.bananaColor.getName(),
                                 en(Banana.bananaColor.getName()), StringAttributeType.of()).build(),
                         AttributeDefinitionBuilder.of(Banana.nutrients.getName(),

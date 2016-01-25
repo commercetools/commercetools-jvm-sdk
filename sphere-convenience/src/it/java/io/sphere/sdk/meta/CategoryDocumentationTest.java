@@ -30,7 +30,6 @@ import io.sphere.sdk.queries.ExperimentalReactiveStreamUtils;
 import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.queries.QueryPredicate;
 import io.sphere.sdk.test.IntegrationTest;
-import io.sphere.sdk.utils.SphereInternalUtils;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.reactivestreams.Publisher;

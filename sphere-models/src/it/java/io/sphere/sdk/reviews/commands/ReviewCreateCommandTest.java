@@ -13,9 +13,9 @@ import io.sphere.sdk.reviews.ReviewDraft;
 import io.sphere.sdk.reviews.ReviewDraftBuilder;
 import io.sphere.sdk.reviews.ReviewFixtures;
 import io.sphere.sdk.reviews.messages.ReviewCreatedMessage;
-import io.sphere.sdk.reviews.queries.ReviewByKeyGet;
 import io.sphere.sdk.states.State;
 import io.sphere.sdk.states.StateDraft;
+import io.sphere.sdk.states.StateDraftDsl;
 import io.sphere.sdk.states.StateType;
 import io.sphere.sdk.states.commands.StateDeleteCommand;
 import io.sphere.sdk.states.queries.StateQuery;
@@ -55,9 +55,8 @@ public class ReviewCreateCommandTest extends IntegrationTest {
             withCustomer(client(), (Customer customer) -> {
                 withProduct(client(), (Product product) -> {
                     withState(client(), StateDraft.of("initial-review-state", StateType.REVIEW_STATE), (State state) -> {
-                        final CustomFieldsDraft extraFields = CustomFieldsDraft.ofTypeKeyAndObjects(type.getKey(),
-                                singletonMap("screenshotUrls",
-                                        Collections.singleton("http://www.commercetools.com/assets/img/CT-logo.svg")));
+                        final CustomFieldsDraft extraFields = CustomFieldsDraft.ofTypeKeyAndObjects(type.getKey(), singletonMap("screenshotUrls",
+                                Collections.singleton("http://www.commercetools.com/assets/img/CT-logo.svg")));
                         final ReviewDraft reviewDraft = ReviewDraftBuilder.ofTitle("Commercetools rocks")
                                 .authorName("John Smith")
                                 .text("It is great.")

@@ -28,10 +28,12 @@ public class RulesMain {
                 new QueryAndCommandsAreCompleteRule(),
                 new ReferenceableResourceCanCreateReferenceRule(),
                 new QueryEndpointsHaveAlsoABuilderRule(),
-                new QueryModelsAreInterfacesRule()
+                new QueryModelsAreInterfacesRule(),
+                new DraftsAreInterfacesRule()
         );
         final boolean allIsOk = rules.stream()
                 .map(rule -> {
+                    System.err.println("running rule " + rule);
                     final RulesReport report = rule.check(classes);
                     if (!report.isOk()) {
                         System.err.println(report);

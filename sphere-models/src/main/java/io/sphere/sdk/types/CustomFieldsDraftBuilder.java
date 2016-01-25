@@ -58,6 +58,6 @@ public class CustomFieldsDraftBuilder extends Base implements Builder<CustomFiel
 
     @Override
     public CustomFieldsDraft build() {
-        return new CustomFieldsDraft(typeId, typeKey, fields);
+        return new CustomFieldsDraftImpl(typeId, typeKey, fields);
     }
 }

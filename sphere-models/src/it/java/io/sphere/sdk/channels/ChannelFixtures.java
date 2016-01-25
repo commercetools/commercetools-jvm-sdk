@@ -25,7 +25,7 @@ public class ChannelFixtures {
     }
 
     public static void withChannelOfRole(final BlockingSphereClient client, final ChannelRole channelRole, final Consumer<Channel> f) {
-        final Channel channel = client.executeBlocking(ChannelCreateCommand.of(ChannelDraft.of(randomString()).withRoles(channelRole)));
+        final Channel channel = client.executeBlocking(ChannelCreateCommand.of(ChannelDraftDsl.of(randomString()).withRoles(channelRole)));
         f.accept(channel);
         client.executeBlocking(ChannelDeleteCommand.of(channel));
     }
@@ -35,7 +35,7 @@ public class ChannelFixtures {
     }
 
     public static void withUpdatableChannelOfRole(final BlockingSphereClient client, final Set<ChannelRole> roles, final Function<Channel, Channel> f) {
-        final Channel channel = client.executeBlocking(ChannelCreateCommand.of(ChannelDraft.of(randomString()).withRoles(roles)));
+        final Channel channel = client.executeBlocking(ChannelCreateCommand.of(ChannelDraftDsl.of(randomString()).withRoles(roles)));
         final Channel updateChannel = f.apply(channel);
         client.executeBlocking(ChannelDeleteCommand.of(updateChannel));
     }
@@ -68,7 +68,7 @@ public class ChannelFixtures {
     private static Channel getOrCreateChannel(final BlockingSphereClient client, final String key, final ChannelRole roles) {
         return client.executeBlocking(ChannelQuery.of().byKey(key)).head().orElseGet(() -> {
             final ChannelCreateCommand channelCreateCommand =
-                    ChannelCreateCommand.of(ChannelDraft.of(key).withRoles(roles));
+                    ChannelCreateCommand.of(ChannelDraftDsl.of(key).withRoles(roles));
             return client.executeBlocking(channelCreateCommand);
         });
     }

@@ -3,7 +3,6 @@ package io.sphere.sdk.products.commands;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.ResourceIdentifiable;
 import io.sphere.sdk.products.*;
-import io.sphere.sdk.products.queries.ProductProjectionQuery;
 import io.sphere.sdk.producttypes.ProductType;
 import io.sphere.sdk.producttypes.ProductTypeFixtures;
 import io.sphere.sdk.search.SearchKeyword;

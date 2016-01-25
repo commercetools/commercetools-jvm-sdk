@@ -1,8 +1,8 @@
 package io.sphere.sdk.meta;
 
-import io.sphere.sdk.products.attributes.AttributeAccess;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.products.ProductVariantDraftBuilder;
+import io.sphere.sdk.products.attributes.AttributeAccess;
 
 /**
  <h3 id="intro">Introduction</h3>

@@ -11,7 +11,7 @@ import java.util.Set;
 /**
  * Builder for {@link ChannelDraft}.
  */
-public class ChannelDraftBuilder extends Base implements Builder<ChannelDraft> {
+public class ChannelDraftBuilder extends Base implements Builder<ChannelDraftDsl> {
     private final String key;
     private Set<ChannelRole> roles = Collections.emptySet();
     @Nullable
@@ -50,7 +50,7 @@ public class ChannelDraftBuilder extends Base implements Builder<ChannelDraft> {
     }
 
     @Override
-    public ChannelDraft build() {
-        return new ChannelDraft(key, roles, name, description);
+    public ChannelDraftDsl build() {
+        return new ChannelDraftDsl(key, roles, name, description);
     }
 }

@@ -35,6 +35,7 @@ import io.sphere.sdk.products.commands.updateactions.SetMetaTitle;
 import io.sphere.sdk.products.expansion.ProductProjectionExpansionModel;
 import io.sphere.sdk.products.queries.*;
 import io.sphere.sdk.producttypes.ProductType;
+import io.sphere.sdk.producttypes.ProductTypeDraft;
 import io.sphere.sdk.projects.Project;
 import io.sphere.sdk.queries.Get;
 import io.sphere.sdk.queries.QueryDsl;
@@ -42,7 +43,6 @@ import io.sphere.sdk.queries.QueryPredicate;
 import io.sphere.sdk.search.SearchKeywords;
 import io.sphere.sdk.taxcategories.TaxRate;
 import io.sphere.sdk.types.CustomFields;
-import io.sphere.sdk.types.CustomFieldsDraft;
 import io.sphere.sdk.types.FieldType;
 
 import javax.money.CurrencyUnit;
@@ -200,7 +200,7 @@ import java.util.function.Function;
  <li class=change-in-release>Renamed {@code Range} filter/facet search models to {@code RangeTerm} to emphasize that you can build both range and term oriented search expressions with them.</li>
  <li class=new-in-release>ExpansionPath for shippingInfo fields: {@link CartExpansionModel#shippingInfo()} and {@link OrderExpansionModel#shippingInfo()}</li>
  <li class=new-in-release>{@link ProductType#getKey()}</li>
- <li class=change-in-release>{@link io.sphere.sdk.producttypes.ProductTypeDraft#of(String, String, List)} has been deprecated in favor of {@link io.sphere.sdk.producttypes.ProductTypeDraft#of(String, String, String, List)} since it is a very good practice to create a {@link ProductType} with a key.</li>
+ <li class=change-in-release>{@link ProductTypeDraft#of(String, String, List)} has been deprecated in favor of {@link ProductTypeDraft#of(String, String, String, List)} since it is a very good practice to create a {@link ProductType} with a key.</li>
  <li class=new-in-release>{@link SetShippingMethod#ofRemove()} to be able to remove a {@link io.sphere.sdk.shippingmethods.ShippingMethod} from a {@link io.sphere.sdk.carts.Cart}</li>
  <li class=new-in-release>{@link io.sphere.sdk.orders.commands.OrderFromCartCreateCommand} contains an example</li>
  <li class=new-in-release>Support for currencies like Yen.</li>
@@ -276,7 +276,7 @@ import java.util.function.Function;
  <li class=change-in-release>Deprecated {@link LineItem#getDiscountedPrice()} and {@link CustomLineItem#getDiscountedPrice()} since they are deprecated in the HTTP API</li>
  <li class=new-in-release>Improved documentation of {@link io.sphere.sdk.models.Versioned}.</li>
  <li class=new-in-release>Added {@link io.sphere.sdk.payments.Payment}.</li>
- <li class=change-in-release>Deprecated typo method {@link io.sphere.sdk.carts.CartDraft#witCustom(CustomFieldsDraft)}, use {@link io.sphere.sdk.carts.CartDraft#withCustom(CustomFieldsDraft)} instead.</li>
+ <li class=change-in-release>Deprecated typo method {@code io.sphere.sdk.carts.CartDraft#witCustom(CustomFieldsDraft)}, use {@code io.sphere.sdk.carts.CartDraft#withCustom(CustomFieldsDraft)} instead.</li>
  <li class=change-in-release>Deprecated {@link io.sphere.sdk.customers.queries.CustomerByTokenGet}, use {@link io.sphere.sdk.customers.queries.CustomerByPasswordTokenGet} instead.</li>
  <li class=new-in-release>Added {@link io.sphere.sdk.customobjects.queries.CustomObjectByIdGet} and {@link CustomObjectDeleteCommand#of(String, Long, Class)} which can delete a {@link CustomObject} by ID.</li>
  <li class=change-in-release>Simplified CustomObject endpoints. Instead of a {@link com.fasterxml.jackson.core.type.TypeReference} for the endpoint result only the class of the value of the custom object needs to be provided.
@@ -646,9 +646,9 @@ import java.util.function.Function;
 
  <ul>
  <li>Incompatible change: Classes to create templates for new entries in SPHERE.IO like {@code NewCategory} have been renamed to {@link io.sphere.sdk.categories.CategoryDraft}. </li>
- <li>Incompatible change: {@link io.sphere.sdk.producttypes.ProductTypeDraft} has now only
+ <li>Incompatible change: {@link ProductTypeDraft} has now only
  factory methods with an explicit parameter for the attribute declarations to prevent to use
- the getter {@link io.sphere.sdk.producttypes.ProductTypeDraft#getAttributes()} and list add operations. </li>
+ the getter {@link ProductTypeDraft#getAttributes()} and list add operations. </li>
  <li>Incompatible change: {@code LocalizedString} has been renamed to {@link LocalizedString}, since it is not a container for one string and a locale, but for multiple strings of different locals. It is like a map.</li>
  <li>Incompatible change: The {@link Get} classes have been renamed. From FetchRESOURCEByWhatever to RESOURCEFetchByWhatever</li>
  <li>Moved Scala and Play clients out of the Git repository to <a href="https://github.com/sphereio/sphere-jvm-sdk-scala-add-ons">https://github.com/sphereio/sphere-jvm-sdk-scala-add-ons</a>. The artifact ID changed.</li>

@@ -14,7 +14,7 @@ import io.sphere.sdk.carts.commands.updateactions.*;
 import io.sphere.sdk.client.BlockingSphereClient;
 import io.sphere.sdk.customers.Customer;
 import io.sphere.sdk.discountcodes.DiscountCode;
-import io.sphere.sdk.discountcodes.DiscountCodeDraft;
+import io.sphere.sdk.discountcodes.DiscountCodeDraftDsl;
 import io.sphere.sdk.discountcodes.commands.DiscountCodeCreateCommand;
 import io.sphere.sdk.discountcodes.commands.DiscountCodeDeleteCommand;
 import io.sphere.sdk.models.Address;
@@ -136,7 +136,7 @@ public class CartFixtures {
             final MonetaryAmount money = MoneyImpl.of("23.50", EUR);
             final String slug = "thing-slug";
             final LocalizedString name = en("thing");
-            final CustomLineItemDraft item = CustomLineItemDraft.of(name, slug, money, product.getTaxCategory(), 5L);
+            final CustomLineItemDraft item = CustomLineItemDraft.of(name, slug, money, product.getTaxCategory(), 5L, null);
             final AddCustomLineItem addCustomLineItemAction = AddCustomLineItem.of(item);
 
             final Cart updatedCart = client.executeBlocking(CartUpdateCommand.of(cart, asList(addLineItemAction, addCustomLineItemAction)));
@@ -158,7 +158,7 @@ public class CartFixtures {
                     .validUntil(null)
                     .build();
             final CartDiscount cartDiscount = client.executeBlocking(CartDiscountCreateCommand.of(draft));
-            final DiscountCode discountCode = client.executeBlocking(DiscountCodeCreateCommand.of(DiscountCodeDraft.of(randomKey(), cartDiscount)));
+            final DiscountCode discountCode = client.executeBlocking(DiscountCodeCreateCommand.of(DiscountCodeDraftDsl.of(randomKey(), cartDiscount)));
             final Cart updatedCart = user.apply(cart, discountCode);
             client.executeBlocking(CartDeleteCommand.of(updatedCart));
             client.executeBlocking(DiscountCodeDeleteCommand.of(discountCode));

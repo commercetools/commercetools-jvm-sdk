@@ -9,13 +9,13 @@ public class CustomerDraftBuilderTest {
     @Test
     public void toStringDoesNotIncludeThePassword() throws Exception {
         final String secret = "123456";
-        final CustomerDraft draft = CustomerDraft.of(CustomerName.ofFirstAndLastName("hello", "world"), randomString(), secret);
+        final CustomerDraft draft = CustomerDraftDsl.of(CustomerName.ofFirstAndLastName("hello", "world"), randomString(), secret);
         assertThat(CustomerDraftBuilder.of(draft).toString()).doesNotContain(secret);
     }
 
     @Test
     public void constructionWithoutName() {
-        final CustomerDraft customerDraft = CustomerDraft.of(randomString(), "password");
+        final CustomerDraft customerDraft = CustomerDraftDsl.of(randomString(), "password");
         assertThat(customerDraft.getLastName()).isNull();
         assertThat(customerDraft.getFirstName()).isNull();
         assertThat(customerDraft.getName().getLastName()).isNull();

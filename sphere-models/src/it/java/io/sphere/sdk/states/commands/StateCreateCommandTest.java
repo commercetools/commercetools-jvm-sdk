@@ -1,10 +1,7 @@
 package io.sphere.sdk.states.commands;
 
 import io.sphere.sdk.models.LocalizedString;
-import io.sphere.sdk.states.State;
-import io.sphere.sdk.states.StateDraft;
-import io.sphere.sdk.states.StateFixtures;
-import io.sphere.sdk.states.StateType;
+import io.sphere.sdk.states.*;
 import io.sphere.sdk.test.IntegrationTest;
 import io.sphere.sdk.test.JsonNodeReferenceResolver;
 import org.junit.After;

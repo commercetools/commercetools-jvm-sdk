@@ -60,6 +60,6 @@ public class CategoryDraftBuilder extends Base implements Builder<CategoryDraft>
     }
 
     public CategoryDraft build() {
-        return new CategoryDraft(name, slug, description, parent, orderHint, externalId, custom);
+        return new CategoryDraftImpl(name, slug, description, parent, orderHint, externalId, custom);
     }
 }

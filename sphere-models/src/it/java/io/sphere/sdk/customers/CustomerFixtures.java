@@ -72,6 +72,6 @@ public class CustomerFixtures {
     }
 
     public static CustomerDraft newCustomerDraft() {
-        return CustomerDraft.of(CUSTOMER_NAME, randomEmail(CustomerFixtures.class), PASSWORD);
+        return CustomerDraftDsl.of(CUSTOMER_NAME, randomEmail(CustomerFixtures.class), PASSWORD);
     }
 }

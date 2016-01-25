@@ -1,9 +1,8 @@
 package io.sphere.sdk.products.attributes;
 
-
 import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import io.sphere.sdk.json.SphereJsonUtils;
-import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.EnumValue;
 import io.sphere.sdk.models.LocalizedEnumValue;
 import io.sphere.sdk.models.WithKey;
@@ -12,16 +11,13 @@ import java.util.Set;
 
 import static java.util.stream.Collectors.toSet;
 
-public class AttributeDraft extends Base {
-    private final String name;
-    private final JsonNode value;
+@JsonDeserialize(as = AttributeDraftImpl.class)
+public interface AttributeDraft {
+    String getName();
 
-    private AttributeDraft(final String name, final JsonNode value) {
-        this.name = name;
-        this.value = value;
-    }
+    JsonNode getValue();
 
-    public static <T> AttributeDraft of(final String name, final T value) {
+    static <T> AttributeDraft of(final String name, final T value) {
         final AttributeDraft result;
         if (value instanceof LocalizedEnumValue) {
             result = of(name, ((LocalizedEnumValue) value).getKey());
@@ -47,24 +43,16 @@ public class AttributeDraft extends Base {
         return result;
     }
 
-    public static AttributeDraft of(final String name, final JsonNode value) {
-        return new AttributeDraft(name, value);
+    static AttributeDraft of(final String name, final JsonNode value) {
+        return new AttributeDraftImpl(name, value);
     }
 
-    public static <T> AttributeDraft of(final String name, final AttributeAccess<T> access, final T value) {
+    static <T> AttributeDraft of(final String name, final AttributeAccess<T> access, final T value) {
         return of(access.ofName(name), value);
     }
 
-    public static <T> AttributeDraft of(final NamedAttributeAccess<T> namedAccess, final T value) {
+    static <T> AttributeDraft of(final NamedAttributeAccess<T> namedAccess, final T value) {
         final JsonNode jsonNode = namedAccess.attributeMapper().serialize(value);
         return of(namedAccess.getName(), jsonNode);
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public JsonNode getValue() {
-        return value;
     }
 }

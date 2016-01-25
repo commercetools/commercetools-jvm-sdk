@@ -8,7 +8,6 @@ import io.sphere.sdk.states.commands.StateDeleteCommand;
 import io.sphere.sdk.states.commands.StateUpdateCommand;
 import io.sphere.sdk.states.commands.updateactions.SetTransitions;
 import io.sphere.sdk.states.queries.StateQuery;
-import io.sphere.sdk.utils.SphereInternalUtils;
 
 import java.util.Optional;
 import java.util.Set;
@@ -33,7 +32,7 @@ public class StateFixtures {
     }
 
     private static StateDraft createStateDraft(final String key) {
-        return StateDraft.of(key, StateType.LINE_ITEM_STATE)
+        return StateDraftDsl.of(key, StateType.LINE_ITEM_STATE)
                 .withDescription(LocalizedString.of(ENGLISH, "description"))
                 .withName(LocalizedString.of(ENGLISH, "name"))
                 .withInitial(Boolean.TRUE);

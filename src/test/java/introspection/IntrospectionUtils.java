@@ -24,6 +24,7 @@ public class IntrospectionUtils {
     public static List<Class<?>> publicClassesOfProject() throws IOException {
         try {
             return readClassNames()
+                    .filter(name -> !name.contains("io.sphere.sdk.client.metrics."))
                     .map(name -> {
                         try {
                             return Class.forName(name);

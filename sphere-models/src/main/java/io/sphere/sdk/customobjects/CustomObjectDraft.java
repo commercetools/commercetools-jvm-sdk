@@ -18,7 +18,7 @@ import static io.sphere.sdk.json.SphereJsonUtils.convertToJavaType;
  * @see io.sphere.sdk.customobjects.commands.CustomObjectUpsertCommand
  * @see CustomObject
  */
-public class CustomObjectDraft<T> extends Base {
+public final class CustomObjectDraft<T> extends Base {
 
     private final T value;
     @Nullable
@@ -180,16 +180,6 @@ public class CustomObjectDraft<T> extends Base {
     @Nullable
     public Long getVersion() {
         return version;
-    }
-
-    /**
-     * Copies this {@link io.sphere.sdk.customobjects.CustomObjectDraft} and sets the version to {@code version} to use optimistic locking.
-     *
-     * @param version the version of the current stored custom object in SPHERE.IO.
-     * @return a draft which provides optimistic locking
-     */
-    public CustomObjectDraft<T> withVersion(final Long version) {
-        return new CustomObjectDraft<>(getContainer(), getKey(), getValue(), version, javaType);
     }
 
     public String getContainer() {

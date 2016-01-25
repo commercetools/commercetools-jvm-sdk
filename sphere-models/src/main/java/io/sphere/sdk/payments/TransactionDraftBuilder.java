@@ -72,6 +72,6 @@ public final class TransactionDraftBuilder extends Base implements Builder<Trans
 
     @Override
     public TransactionDraft build() {
-        return new TransactionDraft(timestamp, type, amount, interactionId, state);
+        return new TransactionDraftImpl(timestamp, type, amount, interactionId, state);
     }
 }

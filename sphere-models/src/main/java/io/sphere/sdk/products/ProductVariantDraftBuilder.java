@@ -4,7 +4,6 @@ import io.sphere.sdk.products.attributes.AttributeDraft;
 import io.sphere.sdk.products.attributes.NamedAttributeAccess;
 import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.Builder;
-import io.sphere.sdk.utils.SphereInternalUtils;
 
 import javax.annotation.Nullable;
 import java.util.Collections;

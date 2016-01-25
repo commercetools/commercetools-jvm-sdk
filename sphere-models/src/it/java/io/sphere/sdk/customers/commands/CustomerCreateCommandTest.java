@@ -42,7 +42,7 @@ public class CustomerCreateCommandTest extends CustomerIntegrationTest {
         final String vatId = "123456";
         final boolean emailVerified = true;
         final List<Address> addresses = asList(Address.of(DE), Address.of(GB));
-        final CustomerDraft draft = CustomerDraft.of(name, email, password)
+        final CustomerDraft draft = CustomerDraftDsl.of(name, email, password)
                 .withExternalId(externalId)
                 .withDateOfBirth(dateOfBirth)
                 .withCompanyName(companyName)
@@ -84,7 +84,7 @@ public class CustomerCreateCommandTest extends CustomerIntegrationTest {
     public void createCustomerWithCart() throws Exception {
         final Cart cart = client().executeBlocking(CartCreateCommand.of(CartDraft.of(EUR)));//could of course be filled with products
         final String email = randomEmail(CustomerCreateCommandTest.class);
-        final CustomerDraft draft = CustomerDraft.of(CUSTOMER_NAME, email, PASSWORD).withCart(cart);
+        final CustomerDraft draft = CustomerDraftDsl.of(CUSTOMER_NAME, email, PASSWORD).withCart(cart);
         final CustomerSignInResult result = client().executeBlocking(CustomerCreateCommand.of(draft));
         assertThat(result.getCart()).isNotNull();
         assertThat(result.getCart().getId()).isEqualTo(cart.getId());
@@ -95,7 +95,7 @@ public class CustomerCreateCommandTest extends CustomerIntegrationTest {
         final JsonNodeReferenceResolver referenceResolver = new JsonNodeReferenceResolver();
         withB2cCustomerGroup(client(), customerGroup -> {
             referenceResolver.addResourceByKey("b2c", customerGroup);
-            final CustomerDraft customerDraft = draftFromJsonResource("drafts-tests/customer.json", CustomerDraft.class, referenceResolver);
+            final CustomerDraft customerDraft = draftFromJsonResource("drafts-tests/customer.json", CustomerDraftDsl.class, referenceResolver);
             CustomerFixtures.withCustomer(client(), customerDraft, customer -> {
                 assertThat(customer.getLastName()).isEqualTo("Osgood");
                 assertThat(customer.getCustomerGroup()).isEqualTo(customerGroup.toReference());
