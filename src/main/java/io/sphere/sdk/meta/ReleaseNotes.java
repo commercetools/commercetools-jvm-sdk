@@ -200,7 +200,7 @@ import java.util.function.Function;
  <li class=change-in-release>Renamed {@code Range} filter/facet search models to {@code RangeTerm} to emphasize that you can build both range and term oriented search expressions with them.</li>
  <li class=new-in-release>ExpansionPath for shippingInfo fields: {@link CartExpansionModel#shippingInfo()} and {@link OrderExpansionModel#shippingInfo()}</li>
  <li class=new-in-release>{@link ProductType#getKey()}</li>
- <li class=change-in-release>{@link ProductTypeDraft#of(String, String, List)} has been deprecated in favor of {@link ProductTypeDraftImpl#of(String, String, String, List)} since it is a very good practice to create a {@link ProductType} with a key.</li>
+ <li class=change-in-release>{@link ProductTypeDraft#of(String, String, List)} has been deprecated in favor of {@link ProductTypeDraft#of(String, String, String, List)} since it is a very good practice to create a {@link ProductType} with a key.</li>
  <li class=new-in-release>{@link SetShippingMethod#ofRemove()} to be able to remove a {@link io.sphere.sdk.shippingmethods.ShippingMethod} from a {@link io.sphere.sdk.carts.Cart}</li>
  <li class=new-in-release>{@link io.sphere.sdk.orders.commands.OrderFromCartCreateCommand} contains an example</li>
  <li class=new-in-release>Support for currencies like Yen.</li>
