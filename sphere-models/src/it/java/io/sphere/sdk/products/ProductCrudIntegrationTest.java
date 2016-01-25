@@ -2,6 +2,7 @@ package io.sphere.sdk.products;
 
 import io.sphere.sdk.channels.Channel;
 import io.sphere.sdk.channels.ChannelDraft;
+import io.sphere.sdk.channels.ChannelDraftDsl;
 import io.sphere.sdk.channels.commands.ChannelCreateCommand;
 import io.sphere.sdk.products.commands.ProductCreateCommand;
 import io.sphere.sdk.products.commands.ProductDeleteCommand;
