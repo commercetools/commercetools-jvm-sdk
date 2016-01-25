@@ -3,7 +3,6 @@ package io.sphere.sdk.customers;
 import io.sphere.sdk.customergroups.CustomerGroup;
 import io.sphere.sdk.models.*;
 import io.sphere.sdk.types.CustomFieldsDraft;
-import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import javax.annotation.Nullable;
 import java.time.LocalDate;
@@ -15,10 +14,10 @@ import java.util.Optional;
  * Builder for creating a customer.
  *
  * @see Customer
- * @see CustomerDraft
+ * @see CustomerDraftDsl
  * @see io.sphere.sdk.customers.commands.CustomerCreateCommand
  */
-public class CustomerDraftBuilder extends Base implements Builder<CustomerDraft> {
+public class CustomerDraftBuilder extends Base implements Builder<CustomerDraftDsl> {
     @Nullable
     private String customerNumber;
     private String email;
@@ -76,7 +75,7 @@ public class CustomerDraftBuilder extends Base implements Builder<CustomerDraft>
                 .dateOfBirth(template.getDateOfBirth())
                 .companyName(template.getCompanyName())
                 .vatId(template.getVatId())
-                .emailVerified(template.IsEmailVerified())
+                .emailVerified(template.isEmailVerified())
                 .customerGroup(template.getCustomerGroup())
                 .addresses(template.getAddresses())
                 .defaultBillingAddress(template.getDefaultBillingAddress())
@@ -185,7 +184,7 @@ public class CustomerDraftBuilder extends Base implements Builder<CustomerDraft>
     }
 
     @Override
-    public CustomerDraft build() {
-        return new CustomerDraft(customerNumber, email, firstName, lastName, middleName, password, title, externalId, anonymousCartId, dateOfBirth, companyName, vatId, emailVerified, customerGroup, defaultBillingAddress, defaultShippingAddress, addresses, custom);
+    public CustomerDraftDsl build() {
+        return new CustomerDraftDsl(customerNumber, email, firstName, lastName, middleName, password, title, externalId, anonymousCartId, dateOfBirth, companyName, vatId, emailVerified, customerGroup, defaultBillingAddress, defaultShippingAddress, addresses, custom);
     }
 }

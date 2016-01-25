@@ -1,9 +1,6 @@
 package io.sphere.sdk.customers.queries;
 
-import io.sphere.sdk.customers.Customer;
-import io.sphere.sdk.customers.CustomerDraft;
-import io.sphere.sdk.customers.CustomerName;
-import io.sphere.sdk.customers.CustomerSignInResult;
+import io.sphere.sdk.customers.*;
 import io.sphere.sdk.customers.commands.CustomerCreateCommand;
 import io.sphere.sdk.customers.commands.CustomerUpdateCommand;
 import io.sphere.sdk.customers.commands.updateactions.AddAddress;
@@ -120,7 +117,7 @@ public class CustomerQueryTest extends IntegrationTest {
 
     private static Customer createCustomer(final String firstName, final String lastName) {
         final CustomerName customerName = CustomerName.ofFirstAndLastName(firstName, lastName);
-        final CustomerDraft draft = CustomerDraft.of(customerName, randomEmail(CustomerQueryTest.class), "secret")
+        final CustomerDraft draft = CustomerDraftDsl.of(customerName, randomEmail(CustomerQueryTest.class), "secret")
                 .withExternalId(randomString()+firstName);
         final CustomerSignInResult signInResult = client().executeBlocking(CustomerCreateCommand.of(draft));
         final Customer initialCustomer = signInResult.getCustomer();
