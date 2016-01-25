@@ -1,6 +1,5 @@
 package io.sphere.sdk.producttypes.commands;
 
-import com.fasterxml.jackson.core.type.TypeReference;
 import io.sphere.sdk.json.SphereJsonUtils;
 import io.sphere.sdk.models.TextInputHint;
 import io.sphere.sdk.products.attributes.*;
@@ -10,7 +9,6 @@ import io.sphere.sdk.producttypes.ProductType;
 import io.sphere.sdk.producttypes.ProductTypeDraft;
 import io.sphere.sdk.producttypes.queries.ProductTypeQuery;
 import io.sphere.sdk.test.IntegrationTest;
-import io.sphere.sdk.test.SphereTestUtils;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

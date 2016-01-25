@@ -3,7 +3,6 @@ package io.sphere.sdk.reviews;
 import io.sphere.sdk.client.SphereClientUtils;
 import io.sphere.sdk.products.*;
 import io.sphere.sdk.products.commands.ProductCreateCommand;
-import io.sphere.sdk.products.queries.ProductByIdGet;
 import io.sphere.sdk.products.search.ProductProjectionSearch;
 import io.sphere.sdk.products.search.ProductProjectionSearchModel;
 import io.sphere.sdk.products.search.ProductProjectionSortSearchModel;

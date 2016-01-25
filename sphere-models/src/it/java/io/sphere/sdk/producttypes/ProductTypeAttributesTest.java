@@ -17,7 +17,6 @@ import io.sphere.sdk.queries.QueryPredicate;
 import io.sphere.sdk.test.IntegrationTest;
 import io.sphere.sdk.test.SphereTestUtils;
 import io.sphere.sdk.utils.MoneyImpl;
-import io.sphere.sdk.utils.SphereInternalUtils;
 import org.junit.Test;
 
 import java.time.LocalDate;
@@ -55,10 +54,9 @@ public final class ProductTypeAttributesTest extends IntegrationTest {
         final NamedAttributeAccess<Double> sizeAttr = AttributeAccess.ofDouble().ofName("size-nested");
         final NamedAttributeAccess<String> brandAttr = AttributeAccess.ofString().ofName("brand-nested");
 
-        final ProductTypeDraft productTypeDraft = ProductTypeDraft.of(randomKey(), "test-sub-attribute", "nested attribute test",
-                asList(
-                        AttributeDefinitionBuilder.of(sizeAttr.getName(), LocalizedString.of(Locale.ENGLISH, "Size"), NumberAttributeType.of()).build(),
-                        AttributeDefinitionBuilder.of(brandAttr.getName(), LocalizedString.of(Locale.ENGLISH, "Brand"), StringAttributeType.of()).build()));
+        final ProductTypeDraft productTypeDraft = ProductTypeDraft.of(randomKey(), "test-sub-attribute", "nested attribute test", asList(
+                AttributeDefinitionBuilder.of(sizeAttr.getName(), LocalizedString.of(Locale.ENGLISH, "Size"), NumberAttributeType.of()).build(),
+                AttributeDefinitionBuilder.of(brandAttr.getName(), LocalizedString.of(Locale.ENGLISH, "Brand"), StringAttributeType.of()).build()));
 
         withProductType(client(), () -> productTypeDraft, nestedProductType -> {
             final AttributeContainer adidas = AttributeContainer.of(

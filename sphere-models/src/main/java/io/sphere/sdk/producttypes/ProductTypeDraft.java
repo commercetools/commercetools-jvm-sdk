@@ -1,7 +1,6 @@
 package io.sphere.sdk.producttypes;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import io.sphere.sdk.models.Base;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import io.sphere.sdk.products.attributes.AttributeDefinition;
 
 import javax.annotation.Nullable;
@@ -10,37 +9,16 @@ import java.util.List;
 /**
  * @see io.sphere.sdk.producttypes.commands.ProductTypeCreateCommand
  */
-public class ProductTypeDraft extends Base {
-    @Nullable
-    private final String key;
-    private final String name;
-    private final String description;
-    private final List<AttributeDefinition> attributes;
+@JsonDeserialize(as = ProductTypeDraftImpl.class)
+public interface ProductTypeDraft {
+    String getName();
 
-    @JsonCreator
-    ProductTypeDraft(@Nullable final String key, final String name, final String description, final List<AttributeDefinition> attributes) {
-        this.key = key;
-        this.name = name;
-        this.description = description;
-        this.attributes = attributes;
-    }
+    String getDescription();
 
-    public String getName() {
-        return name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public List<AttributeDefinition> getAttributes() {
-        return attributes;
-    }
+    List<AttributeDefinition> getAttributes();
 
     @Nullable
-    public String getKey() {
-        return key;
-    }
+    String getKey();
 
     /**
      * Creates a input object to create a {@link ProductType}.
@@ -52,7 +30,7 @@ public class ProductTypeDraft extends Base {
      * @deprecated use {@link #of(String, String, String, List)} since new product types should include a key
      */
     @Deprecated
-    public static ProductTypeDraft of(final String name, final String description, final List<AttributeDefinition> attributes) {
+    static ProductTypeDraft of(final String name, final String description, final List<AttributeDefinition> attributes) {
         return of(null, name, description, attributes);
     }
 
@@ -65,7 +43,7 @@ public class ProductTypeDraft extends Base {
      * @param attributes definitions of attributes for the product type
      * @return draft for a product type
      */
-    public static ProductTypeDraft of(@Nullable final String key, final String name, final String description, final List<AttributeDefinition> attributes) {
-        return new ProductTypeDraft(key, name, description, attributes);
+    static ProductTypeDraft of(@Nullable final String key, final String name, final String description, final List<AttributeDefinition> attributes) {
+        return new ProductTypeDraftImpl(key, name, description, attributes);
     }
 }
