@@ -121,10 +121,22 @@ var activeTableTab = "activeTableTab";
 extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.sphere.sdk.models">Base</a>
 implements <a href="../../../../io/sphere/sdk/productdiscounts/ProductDiscountValue.html" title="interface in io.sphere.sdk.productdiscounts">ProductDiscountValue</a></pre>
 <div class="block">An absolute discount reduces the matching price by a fixed amount (for example 10€ off).
- If more than one product discount matches a price, the discount sort order determines which one will be applied.</div>
+ If more than one product discount matches a price, the discount sort order determines which one will be applied.
+
+ <div id="io-sphere-sdk-productdiscounts-commands-ProductDiscountUpdateCommandTest-changeValue--%s" class=code-example><pre><code class='java'>withUpdateableProductDiscount(client(), discount -&gt; {
+    final ProductDiscountValue productDiscountValue = AbsoluteProductDiscountValue.of(EURO_30);
+
+    final ProductDiscount updatedDiscount = client().executeBlocking(ProductDiscountUpdateCommand.of(discount, ChangeValue.of(productDiscountValue)));
+
+    assertThat(updatedDiscount.getValue()).isEqualTo(productDiscountValue);
+    return updatedDiscount;
+});
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/productdiscounts/commands/ProductDiscountUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 <dl>
 <dt><span class="seeLabel">See Also:</span></dt>
-<dd><a href="../../../../io/sphere/sdk/productdiscounts/ProductDiscount.html" title="interface in io.sphere.sdk.productdiscounts"><code>ProductDiscount</code></a></dd>
+<dd><a href="../../../../io/sphere/sdk/productdiscounts/ProductDiscount.html" title="interface in io.sphere.sdk.productdiscounts"><code>ProductDiscount</code></a>, 
+<a href="../../../../io/sphere/sdk/productdiscounts/ProductDiscount.html#getValue--"><code>ProductDiscount.getValue()</code></a>, 
+<a href="../../../../io/sphere/sdk/productdiscounts/commands/updateactions/ChangeValue.html" title="class in io.sphere.sdk.productdiscounts.commands.updateactions"><code>ChangeValue</code></a></dd>
 </dl>
 </li>
 </ul>
