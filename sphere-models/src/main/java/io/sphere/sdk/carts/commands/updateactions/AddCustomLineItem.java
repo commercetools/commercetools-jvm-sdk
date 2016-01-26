@@ -23,6 +23,9 @@ import javax.money.MonetaryAmount;
 
  <p>Add a {@link io.sphere.sdk.carts.CustomLineItem} with {@link io.sphere.sdk.types.CustomFields}:</p>
  {@include.example io.sphere.sdk.carts.CustomLineItemCustomFieldsTest#creation()}
+
+ @see Cart#getCustomLineItems()
+ @see RemoveCustomLineItem
  */
 public class AddCustomLineItem extends UpdateActionImpl<Cart> implements CustomDraft {
     private final LocalizedString name;
