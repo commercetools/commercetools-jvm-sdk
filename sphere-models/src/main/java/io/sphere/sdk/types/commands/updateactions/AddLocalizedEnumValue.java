@@ -11,6 +11,8 @@ import io.sphere.sdk.types.Type;
  {@doc.gen intro}
 
  {@include.example io.sphere.sdk.types.commands.TypeUpdateCommandTest#addLocalizedEnumValue()}
+
+ @see LocalizedEnumFieldType#getValues()
  */
 public class AddLocalizedEnumValue extends UpdateActionImpl<Type> {
     private final String fieldName;
