@@ -11,6 +11,8 @@ import io.sphere.sdk.types.Type;
  {@doc.gen intro}
 
  {@include.example io.sphere.sdk.types.commands.TypeUpdateCommandTest#addEnumValue()}
+
+ @see EnumFieldType#getValues()
  */
 public class AddEnumValue extends UpdateActionImpl<Type> {
     private final String fieldName;
