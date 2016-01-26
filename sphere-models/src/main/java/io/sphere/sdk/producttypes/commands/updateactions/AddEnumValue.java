@@ -2,6 +2,7 @@ package io.sphere.sdk.producttypes.commands.updateactions;
 
 import io.sphere.sdk.commands.UpdateActionImpl;
 import io.sphere.sdk.models.EnumValue;
+import io.sphere.sdk.products.attributes.EnumAttributeType;
 import io.sphere.sdk.producttypes.ProductType;
 
 /**
@@ -10,6 +11,8 @@ import io.sphere.sdk.producttypes.ProductType;
  * {@doc.gen intro}
  *
  * {@include.example io.sphere.sdk.producttypes.commands.ProductTypeUpdateCommandTest#addEnumValue()}
+ *
+ * @see EnumAttributeType#getValues()
  */
 public class AddEnumValue extends UpdateActionImpl<ProductType> {
     private final String attributeName;
