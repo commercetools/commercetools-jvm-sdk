@@ -5,11 +5,15 @@ import io.sphere.sdk.types.FieldDefinition;
 import io.sphere.sdk.types.Type;
 
 /**
-    Adds another field definition.
+    Adds another field definition to a {@link Type} (NOT {@link io.sphere.sdk.producttypes.ProductType}).
 
  {@doc.gen intro}
 
  {@include.example io.sphere.sdk.types.commands.TypeUpdateCommandTest#addFieldDefinition()}
+
+ @see Type#getFieldDefinitions()
+ @see Type#getFieldDefinitionByName(String)
+ @see RemoveFieldDefinition
  */
 public class AddFieldDefinition extends UpdateActionImpl<Type> {
     private final FieldDefinition fieldDefinition;
