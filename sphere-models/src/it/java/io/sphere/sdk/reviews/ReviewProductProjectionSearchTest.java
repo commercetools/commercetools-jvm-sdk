@@ -48,7 +48,6 @@ public class ReviewProductProjectionSearchTest extends IntegrationTest {
     public static final int LOWEST_RATING = 0;
     public static Product product;
 
-    @BeforeClass
     @AfterClass
     public static void cleanUp() {
         ReviewFixtures.deleteReviews(client());
@@ -61,7 +60,7 @@ public class ReviewProductProjectionSearchTest extends IntegrationTest {
      */
     @BeforeClass
     public static void prepareData() throws Exception {
-
+        cleanUp();
         final ProductTypeDraft productTypeDraft = ProductTypeDraft.of(PRODUCT_TYPE_KEY, PRODUCT_TYPE_KEY, randomKey(), emptyList());
         final ProductType productType = client().executeBlocking(ProductTypeCreateCommand.of(productTypeDraft));
         final List<CompletionStage<Product>> productStages = new LinkedList<>();
