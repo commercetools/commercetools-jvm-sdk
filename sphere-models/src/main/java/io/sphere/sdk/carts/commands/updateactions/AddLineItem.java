@@ -18,6 +18,11 @@ import javax.annotation.Nullable;
     {@doc.gen intro}
 
     {@include.example io.sphere.sdk.carts.commands.CartUpdateCommandTest#addLineItem()}
+
+ @see Cart#getLineItems()
+ @see io.sphere.sdk.orders.Order#getLineItems()
+ @see RemoveLineItem
+ @see ChangeLineItemQuantity
  */
 public class AddLineItem extends UpdateActionImpl<Cart> implements CustomDraft {
     private final String productId;
