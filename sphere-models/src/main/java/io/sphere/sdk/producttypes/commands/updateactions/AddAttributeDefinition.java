@@ -10,6 +10,9 @@ import io.sphere.sdk.producttypes.ProductType;
  * {@doc.gen intro}
  *
  * {@include.example io.sphere.sdk.producttypes.commands.ProductTypeUpdateCommandTest#addAttributeDefinition()}
+ *
+ * @see ProductType#getAttributes()
+ * @see io.sphere.sdk.products.ProductVariant#getAttributes()
  */
 public class AddAttributeDefinition extends UpdateActionImpl<ProductType> {
     private final AttributeDefinition attribute;
