@@ -3,6 +3,7 @@ package io.sphere.sdk.products.commands.updateactions;
 import io.sphere.sdk.commands.UpdateActionImpl;
 import io.sphere.sdk.products.Image;
 import io.sphere.sdk.products.Product;
+import io.sphere.sdk.products.ProductVariant;
 
 /**
  *  Adds external image url with meta-information to the product variant.
@@ -10,6 +11,9 @@ import io.sphere.sdk.products.Product;
  *  {@doc.gen intro}
  *
  *  {@include.example io.sphere.sdk.products.commands.ProductUpdateCommandTest#addExternalImage()}
+ *
+ *  @see ProductVariant#getImages()
+ *  @see RemoveImage
  */
 public class AddExternalImage extends UpdateActionImpl<Product> {
     private final Integer variantId;
