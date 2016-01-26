@@ -1,5 +1,6 @@
 package io.sphere.sdk.carts.commands.updateactions;
 
+import io.sphere.sdk.cartdiscounts.CartDiscount;
 import io.sphere.sdk.carts.Cart;
 import io.sphere.sdk.commands.UpdateActionImpl;
 import io.sphere.sdk.discountcodes.DiscountCode;
@@ -10,6 +11,9 @@ import io.sphere.sdk.discountcodes.DiscountCode;
  *  {@doc.gen intro}
  *
  *  {@include.example io.sphere.sdk.carts.commands.CartUpdateCommandTest#removeDiscountCode()}
+ *
+ *  @see Cart#getDiscountCodes()
+ *  @see CartDiscount#isRequiringDiscountCode()
  */
 public class AddDiscountCode extends UpdateActionImpl<Cart> {
     private final String code;
