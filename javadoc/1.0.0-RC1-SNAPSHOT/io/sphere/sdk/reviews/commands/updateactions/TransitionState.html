@@ -133,6 +133,8 @@ extends <a href="../../../../../../io/sphere/sdk/states/relatedupdateactions/Tra
  If the existing state has transitions set, there must be a direct transition to the new state.
  If transitions is not set, no validation is performed.
 
+ <p>See also <a href="../ReviewUpdateCommand.html">ReviewUpdateCommand</a>.<p>
+
  <div id="io-sphere-sdk-reviews-commands-ReviewUpdateCommandTest-transitionState--%s" class=code-example><pre><code class='java'>withChannelOfRole(client(), ChannelRole.INVENTORY_SUPPLY, channel -&gt; {
     withStateByBuilder(client(), stateBuilder -&gt; stateBuilder.initial(true).type(REVIEW_STATE).roles(REVIEW_INCLUDED_IN_STATISTICS), newState -&gt; {
         withStateByBuilder(client(), stateBuilder -&gt; stateBuilder.type(REVIEW_STATE).transitions(singleton(newState.toReference())).roles(REVIEW_INCLUDED_IN_STATISTICS), oldState -&gt; {

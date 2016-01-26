@@ -143,7 +143,7 @@
 </dd>
 <dt><a href="io/sphere/sdk/types/commands/updateactions/AddFieldDefinition.html" title="class in io.sphere.sdk.types.commands.updateactions"><span class="typeNameLink">AddFieldDefinition</span></a> - Class in <a href="io/sphere/sdk/types/commands/updateactions/package-summary.html">io.sphere.sdk.types.commands.updateactions</a></dt>
 <dd>
-<div class="block">Adds another field definition.</div>
+<div class="block">Adds another field definition to a <a href="io/sphere/sdk/types/Type.html" title="interface in io.sphere.sdk.types"><code>Type</code></a> (NOT <a href="io/sphere/sdk/producttypes/ProductType.html" title="interface in io.sphere.sdk.producttypes"><code>ProductType</code></a>).</div>
 </dd>
 <dt><a href="io/sphere/sdk/payments/commands/updateactions/AddInterfaceInteraction.html" title="class in io.sphere.sdk.payments.commands.updateactions"><span class="typeNameLink">AddInterfaceInteraction</span></a> - Class in <a href="io/sphere/sdk/payments/commands/updateactions/package-summary.html">io.sphere.sdk.payments.commands.updateactions</a></dt>
 <dd>
@@ -1198,16 +1198,7 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 </dd>
 <dt><a href="io/sphere/sdk/states/commands/updateactions/ChangeInitial.html" title="class in io.sphere.sdk.states.commands.updateactions"><span class="typeNameLink">ChangeInitial</span></a> - Class in <a href="io/sphere/sdk/states/commands/updateactions/package-summary.html">io.sphere.sdk.states.commands.updateactions</a></dt>
 <dd>
-<div class="block"><div id="io-sphere-sdk-states-commands-StateUpdateCommandTest-changeInitial--%s" class=code-example><pre><code class='java'>withUpdateableState(client(), state -&gt; {
-    final boolean oldIsInitial = state.isInitial();
-    final boolean newIsInitial = !oldIsInitial;
-
-    final StateUpdateCommand command = StateUpdateCommand.of(state, ChangeInitial.of(newIsInitial));
-    final State updatedState = client().executeBlocking(command);
-    assertThat(updatedState.isInitial()).isEqualTo(newIsInitial);
-    return updatedState;
-});
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/states/commands/StateUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+<div class="block">Configures if a state can be an initial state.</div>
 </dd>
 <dt><a href="io/sphere/sdk/cartdiscounts/commands/updateactions/ChangeIsActive.html" title="class in io.sphere.sdk.cartdiscounts.commands.updateactions"><span class="typeNameLink">ChangeIsActive</span></a> - Class in <a href="io/sphere/sdk/cartdiscounts/commands/updateactions/package-summary.html">io.sphere.sdk.cartdiscounts.commands.updateactions</a></dt>
 <dd>
@@ -1227,15 +1218,7 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 </dd>
 <dt><a href="io/sphere/sdk/states/commands/updateactions/ChangeKey.html" title="class in io.sphere.sdk.states.commands.updateactions"><span class="typeNameLink">ChangeKey</span></a> - Class in <a href="io/sphere/sdk/states/commands/updateactions/package-summary.html">io.sphere.sdk.states.commands.updateactions</a></dt>
 <dd>
-<div class="block"><div id="io-sphere-sdk-states-commands-StateUpdateCommandTest-changeKey--%s" class=code-example><pre><code class='java'>withUpdateableState(client(), state -&gt; {
-    final String newKey = randomKey();
-
-    final StateUpdateCommand command = StateUpdateCommand.of(state, ChangeKey.of(newKey));
-    final State updatedState = client().executeBlocking(command);
-    assertThat(updatedState.getKey()).isEqualTo(newKey);
-    return updatedState;
-});
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/states/commands/StateUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+<div class="block">Changes the key of a state.</div>
 </dd>
 <dt><a href="io/sphere/sdk/carts/commands/updateactions/ChangeLineItemQuantity.html" title="class in io.sphere.sdk.carts.commands.updateactions"><span class="typeNameLink">ChangeLineItemQuantity</span></a> - Class in <a href="io/sphere/sdk/carts/commands/updateactions/package-summary.html">io.sphere.sdk.carts.commands.updateactions</a></dt>
 <dd>
@@ -1358,7 +1341,9 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <div class="block">Changes timestamp of a transaction.</div>
 </dd>
 <dt><a href="io/sphere/sdk/states/commands/updateactions/ChangeType.html" title="class in io.sphere.sdk.states.commands.updateactions"><span class="typeNameLink">ChangeType</span></a> - Class in <a href="io/sphere/sdk/states/commands/updateactions/package-summary.html">io.sphere.sdk.states.commands.updateactions</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Changes the type for which the state can be used.</div>
+</dd>
 <dt><a href="io/sphere/sdk/cartdiscounts/commands/updateactions/ChangeValue.html" title="class in io.sphere.sdk.cartdiscounts.commands.updateactions"><span class="typeNameLink">ChangeValue</span></a> - Class in <a href="io/sphere/sdk/cartdiscounts/commands/updateactions/package-summary.html">io.sphere.sdk.cartdiscounts.commands.updateactions</a></dt>
 <dd>
 <div class="block">Changes the value of the discount.</div>
@@ -3850,7 +3835,9 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/commands/updateactions/TransitionCustomLineItemState.html#getCustomLineItemId--">getCustomLineItemId()</a></span> - Method in class io.sphere.sdk.orders.commands.updateactions.<a href="io/sphere/sdk/orders/commands/updateactions/TransitionCustomLineItemState.html" title="class in io.sphere.sdk.orders.commands.updateactions">TransitionCustomLineItemState</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/Cart.html#getCustomLineItems--">getCustomLineItems()</a></span> - Method in interface io.sphere.sdk.carts.<a href="io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts">Cart</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">The custom line items of this cart.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/CartDraft.html#getCustomLineItems--">getCustomLineItems()</a></span> - Method in interface io.sphere.sdk.carts.<a href="io/sphere/sdk/carts/CartDraft.html" title="interface in io.sphere.sdk.carts">CartDraft</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/CartDraftBuilder.html#getCustomLineItems--">getCustomLineItems()</a></span> - Method in class io.sphere.sdk.carts.<a href="io/sphere/sdk/carts/CartDraftBuilder.html" title="class in io.sphere.sdk.carts">CartDraftBuilder</a></dt>
@@ -13593,7 +13580,9 @@ CompletionStage&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execu
 <div class="block">Sets the cart predicate.</div>
 </dd>
 <dt><a href="io/sphere/sdk/products/commands/updateactions/SetCategoryOrderHint.html" title="class in io.sphere.sdk.products.commands.updateactions"><span class="typeNameLink">SetCategoryOrderHint</span></a> - Class in <a href="io/sphere/sdk/products/commands/updateactions/package-summary.html">io.sphere.sdk.products.commands.updateactions</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Sets/unsets the category order hint which can be used to sort products.</div>
+</dd>
 <dt><a href="io/sphere/sdk/customers/commands/updateactions/SetCompanyName.html" title="class in io.sphere.sdk.customers.commands.updateactions"><span class="typeNameLink">SetCompanyName</span></a> - Class in <a href="io/sphere/sdk/customers/commands/updateactions/package-summary.html">io.sphere.sdk.customers.commands.updateactions</a></dt>
 <dd>
 <div class="block">Sets a new company name for the customer.</div>
@@ -13685,7 +13674,9 @@ CompletionStage&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execu
 <div class="block">Sets or removes a custom type.</div>
 </dd>
 <dt><a href="io/sphere/sdk/customers/commands/updateactions/SetCustomType.html" title="class in io.sphere.sdk.customers.commands.updateactions"><span class="typeNameLink">SetCustomType</span></a> - Class in <a href="io/sphere/sdk/customers/commands/updateactions/package-summary.html">io.sphere.sdk.customers.commands.updateactions</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Sets/unsets the custom type.</div>
+</dd>
 <dt><a href="io/sphere/sdk/orders/commands/updateactions/SetCustomType.html" title="class in io.sphere.sdk.orders.commands.updateactions"><span class="typeNameLink">SetCustomType</span></a> - Class in <a href="io/sphere/sdk/orders/commands/updateactions/package-summary.html">io.sphere.sdk.orders.commands.updateactions</a></dt>
 <dd>
 <div class="block">Sets or removes a custom type.</div>
@@ -13737,7 +13728,9 @@ CompletionStage&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execu
 <div class="block">Sets the description.</div>
 </dd>
 <dt><a href="io/sphere/sdk/states/commands/updateactions/SetDescription.html" title="class in io.sphere.sdk.states.commands.updateactions"><span class="typeNameLink">SetDescription</span></a> - Class in <a href="io/sphere/sdk/states/commands/updateactions/package-summary.html">io.sphere.sdk.states.commands.updateactions</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Sets the description of a state.</div>
+</dd>
 <dt><a href="io/sphere/sdk/taxcategories/commands/updateactions/SetDescription.html" title="class in io.sphere.sdk.taxcategories.commands.updateactions"><span class="typeNameLink">SetDescription</span></a> - Class in <a href="io/sphere/sdk/taxcategories/commands/updateactions/package-summary.html">io.sphere.sdk.taxcategories.commands.updateactions</a></dt>
 <dd>
 <div class="block">Updates the description of a tax category.</div>
@@ -13777,6 +13770,8 @@ CompletionStage&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execu
 <dt><a href="io/sphere/sdk/reviews/commands/updateactions/SetKey.html" title="class in io.sphere.sdk.reviews.commands.updateactions"><span class="typeNameLink">SetKey</span></a> - Class in <a href="io/sphere/sdk/reviews/commands/updateactions/package-summary.html">io.sphere.sdk.reviews.commands.updateactions</a></dt>
 <dd>
 <div class="block">Sets/unsets the key of a review
+
+ <p>See also <a href="../ReviewUpdateCommand.html">ReviewUpdateCommand</a>.<p>
 
  <div id="io-sphere-sdk-reviews-commands-ReviewUpdateCommandTest-setKey--%s" class=code-example><pre><code class='java'>withUpdateableReview(client(), (Review review) -&gt; {
     final String key = randomKey();
@@ -13867,15 +13862,7 @@ CompletionStage&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execu
 </dd>
 <dt><a href="io/sphere/sdk/states/commands/updateactions/SetName.html" title="class in io.sphere.sdk.states.commands.updateactions"><span class="typeNameLink">SetName</span></a> - Class in <a href="io/sphere/sdk/states/commands/updateactions/package-summary.html">io.sphere.sdk.states.commands.updateactions</a></dt>
 <dd>
-<div class="block"><div id="io-sphere-sdk-states-commands-StateUpdateCommandTest-setName--%s" class=code-example><pre><code class='java'>withUpdateableState(client(), state -&gt; {
-    final LocalizedString newName = randomSlug();
-
-    final StateUpdateCommand command = StateUpdateCommand.of(state, SetName.of(newName));
-    final State updatedState = client().executeBlocking(command);
-    assertThat(updatedState.getName()).isEqualTo(newName);
-    return updatedState;
-});
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/states/commands/StateUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+<div class="block">Sets/unsets the name of a state.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/utils/SetUtils.html#setOf-T-java.util.Set-">setOf(T, Set&lt;T&gt;)</a></span> - Static method in class io.sphere.sdk.utils.<a href="io/sphere/sdk/utils/SetUtils.html" title="class in io.sphere.sdk.utils">SetUtils</a></dt>
 <dd>
@@ -13969,6 +13956,8 @@ CompletionStage&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execu
 <dd>
 <div class="block">Sets/unsets the title of a review
 
+ <p>See also <a href="../ReviewUpdateCommand.html">ReviewUpdateCommand</a>.<p>
+
  <div id="io-sphere-sdk-reviews-commands-ReviewUpdateCommandTest-setTitle--%s" class=code-example><pre><code class='java'>withUpdateableReview(client(), (Review review) -&gt; {
     final String title = randomKey();
     final Review updatedReview =
@@ -13982,27 +13971,7 @@ CompletionStage&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execu
 </dd>
 <dt><a href="io/sphere/sdk/states/commands/updateactions/SetTransitions.html" title="class in io.sphere.sdk.states.commands.updateactions"><span class="typeNameLink">SetTransitions</span></a> - Class in <a href="io/sphere/sdk/states/commands/updateactions/package-summary.html">io.sphere.sdk.states.commands.updateactions</a></dt>
 <dd>
-<div class="block"><div id="io-sphere-sdk-states-commands-StateUpdateCommandTest-setTransitions--%s" class=code-example><pre><code class='java'>withUpdateableState(client(), stateA -&gt; {
-    withUpdateableState(client(), stateB -&gt; {
-        final Set&lt;Reference&lt;State&gt;&gt; transitions = asSet(stateA.toReference());
-        final StateUpdateCommand command = StateUpdateCommand.of(stateB, SetTransitions.of(transitions));
-        final State updatedStateB = client().executeBlocking(command);
-        assertThat(updatedStateB.getTransitions()).isEqualTo(transitions);
-
-        //check reference expansion
-        final StateByIdGet stateByIdGet = StateByIdGet.of(stateB).withExpansionPaths(m -&gt; m.transitions());
-        final State loadedStateB = client().executeBlocking(stateByIdGet);
-        final Reference&lt;State&gt; stateReference = new LinkedList&lt;&gt;(loadedStateB.getTransitions()).getFirst();
-        assertThat(stateReference.getObj()).isNotNull();
-
-        final State updatedStateBWithoutTransitions = client().executeBlocking(StateUpdateCommand.of(updatedStateB, SetTransitions.of(null)));
-        assertThat(updatedStateBWithoutTransitions.getTransitions()).isNull();
-
-        return updatedStateBWithoutTransitions;
-    });
-    return stateA;
-});
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/states/commands/StateUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+<div class="block">Configures the allowed transitions to the next state.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/SphereException.html#setUnderlyingHttpResponse-io.sphere.sdk.http.HttpResponse-">setUnderlyingHttpResponse(HttpResponse)</a></span> - Method in exception io.sphere.sdk.models.<a href="io/sphere/sdk/models/SphereException.html" title="class in io.sphere.sdk.models">SphereException</a></dt>
 <dd>&nbsp;</dd>

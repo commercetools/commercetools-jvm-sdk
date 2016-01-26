@@ -126,6 +126,8 @@ var activeTableTab = "activeTableTab";
 extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html" title="class in io.sphere.sdk.commands">UpdateActionImpl</a>&lt;<a href="../../../../../../io/sphere/sdk/taxcategories/TaxCategory.html" title="interface in io.sphere.sdk.taxcategories">TaxCategory</a>&gt;</pre>
 <div class="block">Updates the description of a tax category.
 
+ <p>See also <a href="../TaxCategoryUpdateCommand.html">TaxCategoryUpdateCommand</a>.<p>
+
  <div id="io-sphere-sdk-taxcategories-commands-TaxCategoryUpdateCommandTest-setDescription--%s" class=code-example><pre><code class='java'>withUpdateableTaxCategory(client(), taxCategory -&gt; {
     final String newDescription = randomKey();
     final TaxCategory updatedTaxCategory = client().executeBlocking(TaxCategoryUpdateCommand.of(taxCategory, SetDescription.of(newDescription)));

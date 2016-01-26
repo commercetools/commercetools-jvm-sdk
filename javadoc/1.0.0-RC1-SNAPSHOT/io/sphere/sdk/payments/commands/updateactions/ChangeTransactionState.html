@@ -126,6 +126,8 @@ var activeTableTab = "activeTableTab";
 extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html" title="class in io.sphere.sdk.commands">UpdateActionImpl</a>&lt;<a href="../../../../../../io/sphere/sdk/payments/Payment.html" title="interface in io.sphere.sdk.payments">Payment</a>&gt;</pre>
 <div class="block">Changes state of a transaction. If a transaction has been executed asynchronously, it’s state can be updated. E.g. if a Refund was executed, the state can be set to Success.
 
+ <p>See also <a href="../PaymentUpdateCommand.html">PaymentUpdateCommand</a>.<p>
+
  <div id="io-sphere-sdk-payments-commands-PaymentUpdateCommandTest-changeTransactionState--%s" class=code-example><pre><code class='java'>withPaymentTransaction(client(), (Payment payment, Transaction transaction) -&gt; {
     assertThat(transaction.getState()).isEqualTo(TransactionState.PENDING);
     final TransactionState transactionState = TransactionState.SUCCESS;

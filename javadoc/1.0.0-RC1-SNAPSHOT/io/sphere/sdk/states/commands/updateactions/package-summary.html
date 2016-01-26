@@ -88,78 +88,37 @@
 <tr class="altColor">
 <td class="colFirst"><a href="../../../../../../io/sphere/sdk/states/commands/updateactions/ChangeInitial.html" title="class in io.sphere.sdk.states.commands.updateactions">ChangeInitial</a></td>
 <td class="colLast">
-<div class="block"><div id="io-sphere-sdk-states-commands-StateUpdateCommandTest-changeInitial--%s" class=code-example><pre><code class='java'>withUpdateableState(client(), state -&gt; {
-    final boolean oldIsInitial = state.isInitial();
-    final boolean newIsInitial = !oldIsInitial;
-
-    final StateUpdateCommand command = StateUpdateCommand.of(state, ChangeInitial.of(newIsInitial));
-    final State updatedState = client().executeBlocking(command);
-    assertThat(updatedState.isInitial()).isEqualTo(newIsInitial);
-    return updatedState;
-});
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/states/commands/StateUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+<div class="block">Configures if a state can be an initial state.</div>
 </td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><a href="../../../../../../io/sphere/sdk/states/commands/updateactions/ChangeKey.html" title="class in io.sphere.sdk.states.commands.updateactions">ChangeKey</a></td>
 <td class="colLast">
-<div class="block"><div id="io-sphere-sdk-states-commands-StateUpdateCommandTest-changeKey--%s" class=code-example><pre><code class='java'>withUpdateableState(client(), state -&gt; {
-    final String newKey = randomKey();
-
-    final StateUpdateCommand command = StateUpdateCommand.of(state, ChangeKey.of(newKey));
-    final State updatedState = client().executeBlocking(command);
-    assertThat(updatedState.getKey()).isEqualTo(newKey);
-    return updatedState;
-});
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/states/commands/StateUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+<div class="block">Changes the key of a state.</div>
 </td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><a href="../../../../../../io/sphere/sdk/states/commands/updateactions/ChangeType.html" title="class in io.sphere.sdk.states.commands.updateactions">ChangeType</a></td>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Changes the type for which the state can be used.</div>
+</td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><a href="../../../../../../io/sphere/sdk/states/commands/updateactions/SetDescription.html" title="class in io.sphere.sdk.states.commands.updateactions">SetDescription</a></td>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Sets the description of a state.</div>
+</td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><a href="../../../../../../io/sphere/sdk/states/commands/updateactions/SetName.html" title="class in io.sphere.sdk.states.commands.updateactions">SetName</a></td>
 <td class="colLast">
-<div class="block"><div id="io-sphere-sdk-states-commands-StateUpdateCommandTest-setName--%s" class=code-example><pre><code class='java'>withUpdateableState(client(), state -&gt; {
-    final LocalizedString newName = randomSlug();
-
-    final StateUpdateCommand command = StateUpdateCommand.of(state, SetName.of(newName));
-    final State updatedState = client().executeBlocking(command);
-    assertThat(updatedState.getName()).isEqualTo(newName);
-    return updatedState;
-});
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/states/commands/StateUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+<div class="block">Sets/unsets the name of a state.</div>
 </td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><a href="../../../../../../io/sphere/sdk/states/commands/updateactions/SetTransitions.html" title="class in io.sphere.sdk.states.commands.updateactions">SetTransitions</a></td>
 <td class="colLast">
-<div class="block"><div id="io-sphere-sdk-states-commands-StateUpdateCommandTest-setTransitions--%s" class=code-example><pre><code class='java'>withUpdateableState(client(), stateA -&gt; {
-    withUpdateableState(client(), stateB -&gt; {
-        final Set&lt;Reference&lt;State&gt;&gt; transitions = asSet(stateA.toReference());
-        final StateUpdateCommand command = StateUpdateCommand.of(stateB, SetTransitions.of(transitions));
-        final State updatedStateB = client().executeBlocking(command);
-        assertThat(updatedStateB.getTransitions()).isEqualTo(transitions);
-
-        //check reference expansion
-        final StateByIdGet stateByIdGet = StateByIdGet.of(stateB).withExpansionPaths(m -&gt; m.transitions());
-        final State loadedStateB = client().executeBlocking(stateByIdGet);
-        final Reference&lt;State&gt; stateReference = new LinkedList&lt;&gt;(loadedStateB.getTransitions()).getFirst();
-        assertThat(stateReference.getObj()).isNotNull();
-
-        final State updatedStateBWithoutTransitions = client().executeBlocking(StateUpdateCommand.of(updatedStateB, SetTransitions.of(null)));
-        assertThat(updatedStateBWithoutTransitions.getTransitions()).isNull();
-
-        return updatedStateBWithoutTransitions;
-    });
-    return stateA;
-});
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/states/commands/StateUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+<div class="block">Configures the allowed transitions to the next state.</div>
 </td>
 </tr>
 </tbody>

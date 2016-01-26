@@ -126,6 +126,8 @@ var activeTableTab = "activeTableTab";
 extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html" title="class in io.sphere.sdk.commands">UpdateActionImpl</a>&lt;<a href="../../../../../../io/sphere/sdk/payments/Payment.html" title="interface in io.sphere.sdk.payments">Payment</a>&gt;</pre>
 <div class="block">Changes the interactionId of a transaction. It should correspond to an Id of an interface interaction.
 
+ <p>See also <a href="../PaymentUpdateCommand.html">PaymentUpdateCommand</a>.<p>
+
  <div id="io-sphere-sdk-payments-commands-PaymentUpdateCommandTest-changeTransactionInteractionId--%s" class=code-example><pre><code class='java'>withPaymentTransaction(client(), (Payment payment, Transaction transaction) -&gt; {
     final String newInteractionId = RandomStringUtils.randomAlphanumeric(32);
 
