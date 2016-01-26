@@ -9,6 +9,13 @@ import javax.annotation.Nullable;
 import java.util.Set;
 
 /**
+ * Configures the allowed transitions to the next state.
+ *Transitions are a way to describe possible transformations of the current state to other states of the same type (e.g.: Initial to Shipped). When performing a transitionState update action and transitions is set, the currently referenced state must have a transition to the new state.
+ If transitions is an empty list, it means the current state is a final state and no further transitions are allowed.
+ If transitions is not set, the validation is turned off. When performing a transitionState update action, any other state of the same type can be transitioned to.
+ *
+ * {@doc.gen intro}
+ *
  * {@include.example io.sphere.sdk.states.commands.StateUpdateCommandTest#setTransitions()}
  */
 public class SetTransitions extends UpdateActionImpl<State> {

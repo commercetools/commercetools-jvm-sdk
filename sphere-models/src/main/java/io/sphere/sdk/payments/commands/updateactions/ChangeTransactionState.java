@@ -8,6 +8,8 @@ import io.sphere.sdk.payments.TransactionState;
 /**
  * Changes state of a transaction. If a transaction has been executed asynchronously, it’s state can be updated. E.g. if a Refund was executed, the state can be set to Success.
  *
+ * {@doc.gen intro}
+ *
  * {@include.example io.sphere.sdk.payments.commands.PaymentUpdateCommandTest#changeTransactionState()}
  *
  */

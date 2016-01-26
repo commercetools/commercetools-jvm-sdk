@@ -13,6 +13,8 @@ import java.util.Optional;
 /**
  * Sets/unsets the customer belonging to a review.
  *
+ * {@doc.gen intro}
+ *
  * {@include.example io.sphere.sdk.reviews.commands.ReviewUpdateCommandTest#setCustomer()}
  */
 public class SetCustomer extends UpdateActionImpl<Review> {

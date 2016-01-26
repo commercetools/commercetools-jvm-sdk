@@ -8,6 +8,8 @@ import javax.annotation.Nullable;
 /**
  * Updates the description of a tax category.
  *
+ * {@doc.gen intro}
+ *
  * {@include.example io.sphere.sdk.taxcategories.commands.TaxCategoryUpdateCommandTest#setDescription()}
  */
 public class SetDescription extends UpdateActionImpl<TaxCategory> {

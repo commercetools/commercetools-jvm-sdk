@@ -6,6 +6,8 @@ import io.sphere.sdk.payments.Payment;
 /**
  * Changes the interactionId of a transaction. It should correspond to an Id of an interface interaction.
  *
+ * {@doc.gen intro}
+ *
  * {@include.example io.sphere.sdk.payments.commands.PaymentUpdateCommandTest#changeTransactionInteractionId()}
  */
 public class ChangeTransactionInteractionId extends UpdateActionImpl<Payment> {

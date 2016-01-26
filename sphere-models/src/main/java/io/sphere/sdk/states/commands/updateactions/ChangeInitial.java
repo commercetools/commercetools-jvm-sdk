@@ -5,6 +5,10 @@ import io.sphere.sdk.states.State;
 
 
 /**
+ * Configures if a state can be an initial state.
+ *
+ * {@doc.gen intro}
+ *
  * {@include.example io.sphere.sdk.states.commands.StateUpdateCommandTest#changeInitial()}
  */
 public class ChangeInitial extends UpdateActionImpl<State> {

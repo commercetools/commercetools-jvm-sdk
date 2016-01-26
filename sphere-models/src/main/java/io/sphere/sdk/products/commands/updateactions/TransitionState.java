@@ -10,6 +10,8 @@ import javax.annotation.Nullable;
 /**
  * Transition to a new state. If there is no state yet, the new state must be an initial state. If the existing state has transitions set, there must be a direct transition to the new state. If transitions is not set, no validation is performed.
  *
+ * {@doc.gen intro}
+ *
  * {@include.example io.sphere.sdk.products.commands.ProductUpdateCommandTest#transitionState()}
  *
  * @see Product

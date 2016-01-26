@@ -11,6 +11,8 @@ import java.util.Map;
 /**
  * Sets or removes a custom type in a price.
  *
+ * {@doc.gen intro}
+ *
  * {@include.example io.sphere.sdk.products.commands.ProductUpdateCommandTest#setProductPriceCustomTypeAndsetProductPriceCustomField()}
  *
  * @see io.sphere.sdk.types.Custom

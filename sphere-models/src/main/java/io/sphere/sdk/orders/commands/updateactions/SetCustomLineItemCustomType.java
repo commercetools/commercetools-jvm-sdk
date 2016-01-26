@@ -11,6 +11,8 @@ import java.util.Map;
 /**
  * Sets or removes a custom type in a custom line item.
  *
+ * {@doc.gen intro}
+ *
  * @see io.sphere.sdk.types.Custom
  */
 public class SetCustomLineItemCustomType extends SetCustomTypeBase<Order> {

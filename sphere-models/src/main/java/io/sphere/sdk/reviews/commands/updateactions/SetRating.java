@@ -8,6 +8,8 @@ import javax.annotation.Nullable;
 /**
  * Sets/unsets the rating of a review.
  *
+ * {@doc.gen intro}
+ *
  * {@include.example io.sphere.sdk.reviews.commands.ReviewUpdateCommandTest#setRating()}
  */
 public class SetRating extends UpdateActionImpl<Review> {

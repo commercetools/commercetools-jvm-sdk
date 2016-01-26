@@ -8,6 +8,8 @@ import javax.annotation.Nullable;
 /**
  * Sets/unsets the key of a review
  *
+ * {@doc.gen intro}
+ *
  * {@include.example io.sphere.sdk.reviews.commands.ReviewUpdateCommandTest#setKey()}
  */
 public class SetKey extends UpdateActionImpl<Review> {

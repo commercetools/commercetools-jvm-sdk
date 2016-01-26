@@ -8,6 +8,8 @@ import io.sphere.sdk.types.customupdateactions.SetCustomFieldBase;
 /**
  * Updates a custom field in a line item.
  *
+ * {@doc.gen intro}
+ *
  * @see io.sphere.sdk.types.Custom
  */
 public class SetLineItemCustomField extends SetCustomFieldBase<Order> {

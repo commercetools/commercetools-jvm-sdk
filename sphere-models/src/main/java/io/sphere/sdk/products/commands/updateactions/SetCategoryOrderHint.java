@@ -5,6 +5,12 @@ import io.sphere.sdk.products.Product;
 
 import javax.annotation.Nullable;
 
+/**
+ * Sets/unsets the category order hint which can be used to sort products.
+ *
+ * {@doc.gen intro}
+ *
+ */
 public class SetCategoryOrderHint extends UpdateActionImpl<Product> {
     private final String categoryId;
     @Nullable

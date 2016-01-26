@@ -4,6 +4,11 @@ import io.sphere.sdk.commands.UpdateActionImpl;
 import io.sphere.sdk.states.State;
 import io.sphere.sdk.states.StateType;
 
+/**
+ * Changes the type for which the state can be used.
+ *
+ * {@doc.gen intro}
+ */
 public class ChangeType extends UpdateActionImpl<State> {
     private final StateType type;
 

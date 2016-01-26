@@ -9,6 +9,8 @@ import static java.util.Objects.requireNonNull;
 /**
  * Adds a tax rate.
  *
+ * {@doc.gen intro}
+ *
  * {@include.example io.sphere.sdk.taxcategories.commands.TaxCategoryUpdateCommandTest#addTaxRate()}
  */
 public class AddTaxRate extends UpdateActionImpl<TaxCategory> {

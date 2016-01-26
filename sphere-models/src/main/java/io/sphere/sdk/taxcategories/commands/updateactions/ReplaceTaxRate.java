@@ -9,6 +9,8 @@ import static java.util.Objects.requireNonNull;
 /**
  * Replaces a tax rate.
  *
+ * {@doc.gen intro}
+ *
  * {@include.example io.sphere.sdk.taxcategories.commands.TaxCategoryUpdateCommandTest#replaceTaxRate()}
  */
 public class ReplaceTaxRate extends UpdateActionImpl<TaxCategory> {

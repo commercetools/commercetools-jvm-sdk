@@ -8,6 +8,8 @@ import java.time.ZonedDateTime;
 /**
  *Changes timestamp of a transaction. If this transaction represents an action at the PSP, the time returned by the PSP should be used.
  *
+ * {@doc.gen intro}
+ *
  * {@include.example io.sphere.sdk.payments.commands.PaymentUpdateCommandTest#changeTransactionTimestamp()}
  *
  */

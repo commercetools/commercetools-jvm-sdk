@@ -8,6 +8,8 @@ import io.sphere.sdk.orders.ReturnPaymentState;
 /**
  Sets the return payment state.
 
+ {@doc.gen intro}
+
  {@include.example io.sphere.sdk.orders.commands.OrderUpdateCommandTest#setReturnPaymentState()}
  */
 public class SetReturnPaymentState extends UpdateActionImpl<Order> {

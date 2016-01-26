@@ -11,6 +11,8 @@ import java.util.Optional;
 /**
  * Sets/unsets the target of a review.
  *
+ * {@doc.gen intro}
+ *
  * {@include.example io.sphere.sdk.reviews.commands.ReviewUpdateCommandTest#setTarget()}
  */
 public class SetTarget extends UpdateActionImpl<Review> {

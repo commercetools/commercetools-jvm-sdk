@@ -7,6 +7,13 @@ import io.sphere.sdk.types.customupdateactions.SetCustomTypeBase;
 import javax.annotation.Nullable;
 import java.util.Map;
 
+/**
+ *
+ * Sets/unsets the custom type.
+ *
+ * {@doc.gen intro}
+ *
+ */
 public class SetCustomType extends SetCustomTypeBase<Customer> {
     private SetCustomType(@Nullable final String typeId, @Nullable final String typeKey, @Nullable final Map<String, JsonNode> fields) {
         super(typeId, typeKey, fields);

@@ -10,6 +10,8 @@ import java.util.Map;
 /**
  * Sets or removes a custom type.
  *
+ * {@doc.gen intro}
+ *
  * {@include.example io.sphere.sdk.reviews.commands.ReviewUpdateCommandTest#setCustomType()}
  *
  * @see io.sphere.sdk.types.Custom

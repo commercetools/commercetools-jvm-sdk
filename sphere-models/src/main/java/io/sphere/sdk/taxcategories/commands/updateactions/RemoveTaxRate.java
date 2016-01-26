@@ -8,6 +8,8 @@ import static java.util.Objects.requireNonNull;
 /**
  * Removes a tax rate.
  *
+ * {@doc.gen intro}
+ *
  * {@include.example io.sphere.sdk.taxcategories.commands.TaxCategoryUpdateCommandTest#addTaxRate()}
  */
 public class RemoveTaxRate extends UpdateActionImpl<TaxCategory> {

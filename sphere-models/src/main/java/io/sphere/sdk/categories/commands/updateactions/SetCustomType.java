@@ -10,6 +10,8 @@ import java.util.Map;
 /**
  * Sets or removes a custom type.
  *
+ * {@doc.gen intro}
+ *
  * @see io.sphere.sdk.types.Custom
  */
 public class SetCustomType extends SetCustomTypeBase<Category> {

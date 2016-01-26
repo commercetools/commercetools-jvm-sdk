@@ -9,6 +9,8 @@ import java.util.Locale;
 /**
  * Sets/unsets the locale of a review.
  *
+ * {@doc.gen intro}
+ *
  * {@include.example io.sphere.sdk.reviews.commands.ReviewUpdateCommandTest#setLocale()}
  */
 public class SetLocale extends UpdateActionImpl<Review> {

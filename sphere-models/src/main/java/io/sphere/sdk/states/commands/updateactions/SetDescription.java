@@ -4,6 +4,11 @@ import io.sphere.sdk.commands.UpdateActionImpl;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.states.State;
 
+/**
+ * Sets the description of a state.
+ *
+ * {@doc.gen intro}
+ */
 public class SetDescription extends UpdateActionImpl<State> {
     private final LocalizedString description;
 

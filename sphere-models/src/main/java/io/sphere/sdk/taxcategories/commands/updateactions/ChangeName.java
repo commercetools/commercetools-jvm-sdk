@@ -6,6 +6,8 @@ import io.sphere.sdk.taxcategories.TaxCategory;
 /**
  * Updates the name of a tax category.
  *
+ * {@doc.gen intro}
+ *
  * {@include.example io.sphere.sdk.taxcategories.commands.TaxCategoryUpdateCommandTest#changeName()}
  */
 public class ChangeName extends UpdateActionImpl<TaxCategory> {

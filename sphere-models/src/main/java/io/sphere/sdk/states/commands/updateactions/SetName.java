@@ -7,6 +7,10 @@ import io.sphere.sdk.states.State;
 import javax.annotation.Nullable;
 
 /**
+ * Sets/unsets the name of a state.
+ *
+ * {@doc.gen intro}
+ *
  * {@include.example io.sphere.sdk.states.commands.StateUpdateCommandTest#setName()}
  */
 public class SetName extends UpdateActionImpl<State> {

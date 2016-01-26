@@ -12,6 +12,8 @@ import javax.annotation.Nullable;
  * If the existing state has transitions set, there must be a direct transition to the new state.
  * If transitions is not set, no validation is performed.
  *
+ * {@doc.gen intro}
+ *
  * {@include.example io.sphere.sdk.reviews.commands.ReviewUpdateCommandTest#transitionState()}
  */
 public class TransitionState extends TransitionStateBase<Review> {

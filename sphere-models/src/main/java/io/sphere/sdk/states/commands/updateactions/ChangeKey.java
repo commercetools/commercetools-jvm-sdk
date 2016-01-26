@@ -4,6 +4,11 @@ import io.sphere.sdk.commands.UpdateActionImpl;
 import io.sphere.sdk.states.State;
 
 /**
+ *
+ * Changes the key of a state.
+ *
+ * {@doc.gen intro}
+ *
  * {@include.example io.sphere.sdk.states.commands.StateUpdateCommandTest#changeKey()}
  */
 public class ChangeKey extends UpdateActionImpl<State> {

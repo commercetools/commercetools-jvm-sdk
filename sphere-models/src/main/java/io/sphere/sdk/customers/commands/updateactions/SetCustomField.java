@@ -8,6 +8,8 @@ import io.sphere.sdk.types.customupdateactions.SetCustomFieldBase;
 /**
  * Updates a custom field.
  *
+ * {@doc.gen intro}
+ *
  * @see io.sphere.sdk.types.Custom
  */
 public class SetCustomField extends SetCustomFieldBase<Customer> {
