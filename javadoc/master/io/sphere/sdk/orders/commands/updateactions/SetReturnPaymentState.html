@@ -126,6 +126,8 @@ var activeTableTab = "activeTableTab";
 extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html" title="class in io.sphere.sdk.commands">UpdateActionImpl</a>&lt;<a href="../../../../../../io/sphere/sdk/orders/Order.html" title="interface in io.sphere.sdk.orders">Order</a>&gt;</pre>
 <div class="block">Sets the return payment state.
 
+ <p>See also <a href="../OrderUpdateCommand.html">OrderUpdateCommand</a>.<p>
+
  <div id="io-sphere-sdk-orders-commands-OrderUpdateCommandTest-setReturnPaymentState--%s" class=code-example><pre><code class='java'>withOrderAndReturnInfo(client(), (order, returnInfo) -&gt; {
     final ReturnItem returnItem = returnInfo.getItems().get(0);
     final ReturnPaymentState newPaymentState = ReturnPaymentState.REFUNDED;

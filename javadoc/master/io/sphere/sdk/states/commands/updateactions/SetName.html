@@ -124,7 +124,11 @@ var activeTableTab = "activeTableTab";
 <br>
 <pre>public class <span class="typeNameLabel">SetName</span>
 extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html" title="class in io.sphere.sdk.commands">UpdateActionImpl</a>&lt;<a href="../../../../../../io/sphere/sdk/states/State.html" title="interface in io.sphere.sdk.states">State</a>&gt;</pre>
-<div class="block"><div id="io-sphere-sdk-states-commands-StateUpdateCommandTest-setName--%s" class=code-example><pre><code class='java'>withUpdateableState(client(), state -&gt; {
+<div class="block">Sets/unsets the name of a state.
+
+ <p>See also <a href="../StateUpdateCommand.html">StateUpdateCommand</a>.<p>
+
+ <div id="io-sphere-sdk-states-commands-StateUpdateCommandTest-setName--%s" class=code-example><pre><code class='java'>withUpdateableState(client(), state -&gt; {
     final LocalizedString newName = randomSlug();
 
     final StateUpdateCommand command = StateUpdateCommand.of(state, SetName.of(newName));

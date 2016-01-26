@@ -131,6 +131,8 @@ var activeTableTab = "activeTableTab";
 extends <a href="../../../../../../io/sphere/sdk/types/customupdateactions/SetCustomTypeBase.html" title="class in io.sphere.sdk.types.customupdateactions">SetCustomTypeBase</a>&lt;<a href="../../../../../../io/sphere/sdk/products/Product.html" title="interface in io.sphere.sdk.products">Product</a>&gt;</pre>
 <div class="block">Sets or removes a custom type in a price.
 
+ <p>See also <a href="../ProductUpdateCommand.html">ProductUpdateCommand</a>.<p>
+
  <div id="io-sphere-sdk-products-commands-ProductUpdateCommandTest-setProductPriceCustomTypeAndsetProductPriceCustomField--%s" class=code-example><pre><code class='java'>withUpdateableType(client(), type -&gt; {
     withUpdateablePricedProduct(client(), product -&gt; {
         final String priceId = getFirstPrice(product).getId();

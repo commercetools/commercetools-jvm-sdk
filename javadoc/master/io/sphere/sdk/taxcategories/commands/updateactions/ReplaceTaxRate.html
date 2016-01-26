@@ -126,6 +126,8 @@ var activeTableTab = "activeTableTab";
 extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html" title="class in io.sphere.sdk.commands">UpdateActionImpl</a>&lt;<a href="../../../../../../io/sphere/sdk/taxcategories/TaxCategory.html" title="interface in io.sphere.sdk.taxcategories">TaxCategory</a>&gt;</pre>
 <div class="block">Replaces a tax rate.
 
+ <p>See also <a href="../TaxCategoryUpdateCommand.html">TaxCategoryUpdateCommand</a>.<p>
+
  <div id="io-sphere-sdk-taxcategories-commands-TaxCategoryUpdateCommandTest-replaceTaxRate--%s" class=code-example><pre><code class='java'>withUpdateableTaxCategory(client(), taxCategory -&gt; {
     final TaxRate old = taxCategory.getTaxRates().get(0);
     final double newAmount = old.getAmount() * 2;
