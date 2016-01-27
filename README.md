@@ -58,6 +58,12 @@ Users gain type-safety, encapsulation, IDE auto completion and an internal domai
 
 see https://github.com/sphereio/sphere-jvm-sdk-scala-add-ons
 
+### JVM SDK Contrib
+
+Useful code from external developers
+
+* https://github.com/sphereio/commercetools-jvm-sdk-contrib
+
 ### Experimental Add-Ons
 * ProductImageUploadCommand from http://dev.sphere.io/http-api-projects-products.html#upload-product-image
 
