@@ -16,6 +16,11 @@ import java.time.LocalTime;
 import java.time.ZonedDateTime;
 import java.util.Set;
 
+/**
+ * Single product attribute which contains a name (key semantic) and a value.
+ *
+ * <p>Attributes are documented <a href="{@docRoot}/io/sphere/sdk/meta/ProductAttributeDocumentation.html">here</a>.</p>
+ */
 @JsonDeserialize(as = AttributeImpl.class)
 public interface Attribute {
     String getName();
