@@ -15,6 +15,8 @@ import java.util.List;
     {@doc.gen intro}
 
     {@include.example io.sphere.sdk.orders.commands.OrderUpdateCommandTest#addReturnInfo()}
+
+ @see Order#getReturnInfo()
  */
 public class AddReturnInfo extends UpdateActionImpl<Order> {
     @Nullable
