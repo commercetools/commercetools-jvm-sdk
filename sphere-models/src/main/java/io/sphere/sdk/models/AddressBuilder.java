@@ -6,7 +6,7 @@ import javax.annotation.Nullable;
 import java.util.Objects;
 
 /**
- * Builds Address instances using the Builder pattern (a stateful object).
+ * Builds {@link Address} instances using the Builder pattern (a stateful object).
  *
  * <p>Create an entire new address:</p>
  *
