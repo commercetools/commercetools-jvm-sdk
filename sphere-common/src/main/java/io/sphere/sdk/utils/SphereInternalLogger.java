@@ -104,15 +104,14 @@ public final class SphereInternalLogger {
     }
 
     public static SphereInternalLogger getLogger(final HttpRequest httpRequest) {
-        final HttpMethod httpMethod = httpRequest.getHttpMethod();
-        return getLogger(getPathElement(httpRequest) + ".requests." + requestOrCommandScopeSegment(httpMethod));
+        return getLogger(getPathElement(httpRequest) + ".requests." + requestOrCommandScopeSegment(httpRequest));
     }
 
     public static SphereInternalLogger getLogger(final HttpResponse response) {
         final String firstPathElement = Optional.ofNullable(response.getAssociatedRequest())
                 .map(r -> getPathElement(r)).orElse("endpoint-unknown");
         final String lastPathElement = Optional.ofNullable(response.getAssociatedRequest())
-                .map(r -> requestOrCommandScopeSegment(r.getHttpMethod())).orElse("execution-type-unknown");
+                .map(r -> requestOrCommandScopeSegment(r)).orElse("execution-type-unknown");
         return getLogger(firstPathElement + ".responses." + lastPathElement);
     }
 
@@ -130,7 +129,11 @@ public final class SphereInternalLogger {
         return pathElements.length >= 5 ? pathElements[4] : "project";
     }
 
-    private static String requestOrCommandScopeSegment(final HttpMethod httpMethod) {
-        return httpMethod == HttpMethod.GET ? "queries" : "commands";
+    private static String requestOrCommandScopeSegment(final HttpRequest httpRequest) {
+        return (httpRequest.getHttpMethod() == HttpMethod.GET || isPostSearch(httpRequest)) ? "queries" : "commands";
+    }
+
+    private static boolean isPostSearch(final HttpRequest httpRequest) {
+        return httpRequest.getHttpMethod() == HttpMethod.POST && httpRequest.getUrl().contains("/product-projections/search");
     }
 }

@@ -1,5 +1,6 @@
 package io.sphere.sdk.products.search;
 
+import io.sphere.sdk.http.StringHttpRequestBody;
 import io.sphere.sdk.products.ProductProjection;
 import io.sphere.sdk.search.*;
 import io.sphere.sdk.search.model.*;
@@ -193,8 +194,9 @@ public class ProductProjectionSearchTest {
 
     @Test
     public void unicode() throws Exception {
-        final String path = ProductProjectionSearch.ofStaged().withText(GERMAN, "öón").httpRequestIntent().getPath();
-        final String expected = "/product-projections/search?text.de=%C3%B6%C3%B3n&staged=true";
+        final StringHttpRequestBody body = (StringHttpRequestBody) ProductProjectionSearch.ofStaged().withText(GERMAN, "öón").httpRequestIntent().getBody();
+        final String path = body.getString();
+        final String expected = "text.de=%C3%B6%C3%B3n&staged=true";
         assertThat(path).isEqualTo(expected);
     }
 
