@@ -3,7 +3,7 @@ package io.sphere.sdk.http;
 import com.ning.http.client.*;
 
 /**
- * Adapter to use {@link AsyncHttpClient} version 1.9.x as {@link HttpClient}.
+ * Adapter to use {@code AsyncHttpClient} (version 1.9.x) as {@code HttpClient}.
  */
 public interface AsyncHttpClientAdapter extends HttpClient {
 
