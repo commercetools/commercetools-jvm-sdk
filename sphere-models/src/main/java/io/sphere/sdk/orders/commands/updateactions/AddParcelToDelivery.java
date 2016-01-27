@@ -11,6 +11,8 @@ import javax.annotation.Nullable;
     {@doc.gen intro}
 
     {@include.example io.sphere.sdk.orders.commands.OrderUpdateCommandTest#addParcelToDelivery()}
+
+ @see Delivery#getParcels()
  */
 public class AddParcelToDelivery extends UpdateActionImpl<Order> {
     private final String deliveryId;
