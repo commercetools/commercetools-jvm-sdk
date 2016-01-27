@@ -1,5 +1,6 @@
 package io.sphere.sdk.customers.queries;
 
+import com.neovisionaries.i18n.CountryCode;
 import io.sphere.sdk.customers.*;
 import io.sphere.sdk.customers.commands.CustomerCreateCommand;
 import io.sphere.sdk.customers.commands.CustomerUpdateCommand;
@@ -7,6 +8,7 @@ import io.sphere.sdk.customers.commands.updateactions.AddAddress;
 import io.sphere.sdk.customers.commands.updateactions.SetCustomerGroup;
 import io.sphere.sdk.customers.commands.updateactions.SetDefaultBillingAddress;
 import io.sphere.sdk.customers.commands.updateactions.SetDefaultShippingAddress;
+import io.sphere.sdk.models.AddressBuilder;
 import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.queries.Query;
 import io.sphere.sdk.queries.QueryPredicate;
@@ -122,7 +124,7 @@ public class CustomerQueryTest extends IntegrationTest {
         final CustomerSignInResult signInResult = client().executeBlocking(CustomerCreateCommand.of(draft));
         final Customer initialCustomer = signInResult.getCustomer();
 
-        final Customer updatedCustomer = client().executeBlocking(CustomerUpdateCommand.of(initialCustomer, asList(AddAddress.of(randomAddress()), SetCustomerGroup.of(b2cCustomerGroup(client())))));
+        final Customer updatedCustomer = client().executeBlocking(CustomerUpdateCommand.of(initialCustomer, asList(AddAddress.of(AddressBuilder.of(CountryCode.DE).city(randomString()).build()), SetCustomerGroup.of(b2cCustomerGroup(client())))));
 
         final SetDefaultShippingAddress shippingAddressAction = SetDefaultShippingAddress.ofAddress(updatedCustomer.getAddresses().get(0));
         final SetDefaultBillingAddress billingAddressAction = SetDefaultBillingAddress.ofAddress(updatedCustomer.getAddresses().get(0));

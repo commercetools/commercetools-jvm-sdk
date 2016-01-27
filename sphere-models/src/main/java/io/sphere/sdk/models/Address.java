@@ -3,6 +3,8 @@ package io.sphere.sdk.models;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.neovisionaries.i18n.CountryCode;
+import io.sphere.sdk.carts.Cart;
+import io.sphere.sdk.customers.Customer;
 
 import javax.annotation.Nullable;
 import java.util.Objects;
@@ -15,6 +17,21 @@ import java.util.Objects;
  * <p>You can alternatively create a copy of an address with changed values by using the {@code with}-methods:</p>
  *
  * {@include.example example.AddressExample#withMethods()}
+ *
+ * @see Cart#getBillingAddress()
+ * @see Cart#getShippingAddress()
+ * @see io.sphere.sdk.orders.Order#getBillingAddress()
+ * @see io.sphere.sdk.orders.Order#getShippingAddress()
+ * @see Customer#getAddresses()
+ * @see Customer#getDefaultBillingAddress()
+ * @see Customer#getDefaultShippingAddress()
+ * @see io.sphere.sdk.customers.commands.updateactions.AddAddress
+ * @see io.sphere.sdk.customers.commands.updateactions.ChangeAddress
+ * @see io.sphere.sdk.customers.commands.updateactions.RemoveAddress
+ * @see io.sphere.sdk.customers.commands.updateactions.SetDefaultBillingAddress
+ * @see io.sphere.sdk.customers.commands.updateactions.SetDefaultShippingAddress
+ * @see io.sphere.sdk.carts.commands.updateactions.SetBillingAddress
+ * @see io.sphere.sdk.carts.commands.updateactions.SetShippingAddress
  */
 public class Address extends Base {
 

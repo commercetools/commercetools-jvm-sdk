@@ -5,10 +5,7 @@ import io.sphere.sdk.cartdiscounts.DiscountedLineItemPrice;
 import io.sphere.sdk.cartdiscounts.DiscountedLineItemPriceForQuantity;
 import io.sphere.sdk.carts.*;
 import io.sphere.sdk.channels.ChannelRole;
-import io.sphere.sdk.models.Address;
-import io.sphere.sdk.models.DefaultCurrencyUnits;
-import io.sphere.sdk.models.LocalizedString;
-import io.sphere.sdk.models.Reference;
+import io.sphere.sdk.models.*;
 import io.sphere.sdk.orders.*;
 import io.sphere.sdk.products.*;
 import io.sphere.sdk.products.attributes.Attribute;
@@ -309,7 +306,7 @@ public class OrderImportCommandTest extends IntegrationTest {
 
     @Test
     public void shippingAddress() throws Exception {
-        final Address address = randomAddress().withApartment(randomKey());
+        final Address address = AddressBuilder.of(CountryCode.DE).city(randomString()).build().withApartment(randomKey());
         testOrderAspect(
                 builder -> builder.shippingAddress(address),
                 order -> assertThat(order.getShippingAddress()).isEqualTo(address)
@@ -368,7 +365,7 @@ public class OrderImportCommandTest extends IntegrationTest {
 
     @Test
     public void billingAddress() throws Exception {
-        final Address billingAddress = randomAddress();
+        final Address billingAddress = AddressBuilder.of(CountryCode.DE).city(randomString()).build();
         testOrderAspect(builder -> builder.billingAddress(billingAddress),
                 order -> assertThat(order.getBillingAddress()).isEqualTo(billingAddress));
     }

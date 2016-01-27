@@ -35,7 +35,7 @@ public interface InventoryEntry extends Resource<InventoryEntry> {
 
     /**
      * The time period in days, that tells how often this inventory entry is restocked.
-     * @returntime in days or null
+     * @return time in days or null
      */
     @Nullable
     Integer getRestockableInDays();

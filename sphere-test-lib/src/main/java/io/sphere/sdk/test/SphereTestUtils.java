@@ -82,10 +82,6 @@ public final class SphereTestUtils {
         return LocalizedString.of(Locale.ENGLISH, randomKey());
     }
 
-    public static Address randomAddress() {
-        return AddressBuilder.of(CountryCode.DE).city(randomString()).build();
-    }
-
     public static String randomSortOrder() {
         final int append = 5;//hack to not have a trailing 0 which is not accepted in sphere
         return  "0." + randomInt() + append;
