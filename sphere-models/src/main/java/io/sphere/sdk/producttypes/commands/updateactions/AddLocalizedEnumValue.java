@@ -2,14 +2,17 @@ package io.sphere.sdk.producttypes.commands.updateactions;
 
 import io.sphere.sdk.commands.UpdateActionImpl;
 import io.sphere.sdk.models.LocalizedEnumValue;
+import io.sphere.sdk.products.attributes.LocalizedEnumAttributeType;
 import io.sphere.sdk.producttypes.ProductType;
 
 /**
- * Adds a localized enum value to the attribute definition.
+ * Adds a localized enum value to the product attribute definition.
  *
  * {@doc.gen intro}
  *
  * {@include.example io.sphere.sdk.producttypes.commands.ProductTypeUpdateCommandTest#addLocalizedEnumValue()}
+ *
+ * @see LocalizedEnumAttributeType#getValues()
  */
 public class AddLocalizedEnumValue extends UpdateActionImpl<ProductType> {
     private final String attributeName;
