@@ -5,10 +5,7 @@ import io.sphere.sdk.client.HttpRequestIntent;
 import io.sphere.sdk.client.SphereRequestUtils;
 import io.sphere.sdk.expansion.ExpansionPath;
 import io.sphere.sdk.expansion.ExpansionPathContainer;
-import io.sphere.sdk.http.HttpMethod;
-import io.sphere.sdk.http.HttpQueryParameter;
-import io.sphere.sdk.http.HttpResponse;
-import io.sphere.sdk.http.UrlQueryBuilder;
+import io.sphere.sdk.http.*;
 import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.LocalizedStringEntry;
 
@@ -418,7 +415,7 @@ public abstract class MetaModelSearchDslImpl<T, C extends MetaModelSearchDsl<T, 
     @Override
     public HttpRequestIntent httpRequestIntent() {
         final String additions = queryParametersToString(true);
-        return HttpRequestIntent.of(HttpMethod.GET, endpoint + (additions.length() > 1 ? additions : ""));
+        return HttpRequestIntent.of(HttpMethod.POST, endpoint, HttpHeaders.of(HttpHeaders.CONTENT_TYPE, "application/x-www-form-urlencoded"), StringHttpRequestBody.of(additions));
     }
 
     @Override
@@ -449,7 +446,7 @@ public abstract class MetaModelSearchDslImpl<T, C extends MetaModelSearchDsl<T, 
         Optional.ofNullable(offset()).ifPresent(o -> builder.add(OFFSET, o.toString(), urlEncoded));
         expansionPaths().forEach(path -> builder.add(EXPAND, path.toSphereExpand(), urlEncoded));
         additionalQueryParameters().forEach(p -> builder.add(p.getKey(), p.getValue(), urlEncoded));
-        return builder.toStringWithOptionalQuestionMark();
+        return builder.build();
     }
 
     @Override
