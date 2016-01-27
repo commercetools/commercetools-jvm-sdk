@@ -8,6 +8,15 @@ import java.util.Optional;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
+/**
+ * Helper class to create mapping from product attribute values to a target type.
+ *
+ * <p>This is a functional approach, {@link LocalizedToStringProductAttributeConverter} provides an object oriented way to achieve the same.</p>
+ *
+ * <p>A possible use case is documented <a href="{@docRoot}/io/sphere/sdk/meta/ProductAttributeDocumentation.html#attribute-table-creation">here</a>.</p>
+ *
+ * @param <T> the type of the target value which should be extracted from the attribute value. Most likely this will be {@link String}.
+ */
 public final class AttributeExtraction<T> extends Base {
     @Nullable
     private final AttributeDefinition attributeDefinition;
