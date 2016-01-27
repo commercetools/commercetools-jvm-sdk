@@ -18,8 +18,8 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":10,"i1":10,"i2":10,"i3":42,"i4":42,"i5":10,"i6":10,"i7":10,"i8":10};
-var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"],32:["t6","Deprecated Methods"]};
+var methods = {"i0":6,"i1":6,"i2":6,"i3":38,"i4":38,"i5":6,"i6":6,"i7":6,"i8":6};
+var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],4:["t3","Abstract Methods"],32:["t6","Deprecated Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
 var tableTab = "tableTab";
@@ -92,29 +92,16 @@ var activeTableTab = "activeTableTab";
 <!-- ======== START OF CLASS DATA ======== -->
 <div class="header">
 <div class="subTitle">io.sphere.sdk.products.attributes</div>
-<h2 title="Class AttributeDefinition" class="title">Class AttributeDefinition</h2>
+<h2 title="Interface AttributeDefinition" class="title">Interface AttributeDefinition</h2>
 </div>
 <div class="contentContainer">
-<ul class="inheritance">
-<li>java.lang.Object</li>
-<li>
-<ul class="inheritance">
-<li><a href="../../../../../io/sphere/sdk/models/Base.html" title="class in io.sphere.sdk.models">io.sphere.sdk.models.Base</a></li>
-<li>
-<ul class="inheritance">
-<li>io.sphere.sdk.products.attributes.AttributeDefinition</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
 <div class="description">
 <ul class="blockList">
 <li class="blockList">
 <hr>
 <br>
-<pre>public class <span class="typeNameLabel">AttributeDefinition</span>
-extends <a href="../../../../../io/sphere/sdk/models/Base.html" title="class in io.sphere.sdk.models">Base</a></pre>
+<pre>public interface <span class="typeNameLabel">AttributeDefinition</span></pre>
+<div class="block">Attribute definitions describe a product attribute and allow you to define some meta-information associated with the attribute (like whether it should be searchable or its constraints).</div>
 <dl>
 <dt><span class="seeLabel">See Also:</span></dt>
 <dd><a href="../../../../../io/sphere/sdk/products/attributes/AttributeDefinitionBuilder.html" title="class in io.sphere.sdk.products.attributes"><code>AttributeDefinitionBuilder</code></a></dd>
@@ -132,7 +119,7 @@ extends <a href="../../../../../io/sphere/sdk/models/Base.html" title="class in 
 </a>
 <h3>Method Summary</h3>
 <table class="memberSummary" border="0" cellpadding="3" cellspacing="0" summary="Method Summary table, listing methods, and an explanation">
-<caption><span id="t0" class="activeTableTab"><span>All Methods</span><span class="tabEnd">&nbsp;</span></span><span id="t2" class="tableTab"><span><a href="javascript:show(2);">Instance Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t4" class="tableTab"><span><a href="javascript:show(8);">Concrete Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t6" class="tableTab"><span><a href="javascript:show(32);">Deprecated Methods</a></span><span class="tabEnd">&nbsp;</span></span></caption>
+<caption><span id="t0" class="activeTableTab"><span>All Methods</span><span class="tabEnd">&nbsp;</span></span><span id="t2" class="tableTab"><span><a href="javascript:show(2);">Instance Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t3" class="tableTab"><span><a href="javascript:show(4);">Abstract Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t6" class="tableTab"><span><a href="javascript:show(32);">Deprecated Methods</a></span><span class="tabEnd">&nbsp;</span></span></caption>
 <tr>
 <th class="colFirst" scope="col">Modifier and Type</th>
 <th class="colLast" scope="col">Method and Description</th>
@@ -194,20 +181,6 @@ extends <a href="../../../../../io/sphere/sdk/models/Base.html" title="class in 
 </td>
 </tr>
 </table>
-<ul class="blockList">
-<li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.models.Base">
-<!--   -->
-</a>
-<h3>Methods inherited from class&nbsp;io.sphere.sdk.models.<a href="../../../../../io/sphere/sdk/models/Base.html" title="class in io.sphere.sdk.models">Base</a></h3>
-<code><a href="../../../../../io/sphere/sdk/models/Base.html#equals-java.lang.Object-">equals</a>, <a href="../../../../../io/sphere/sdk/models/Base.html#hashCode--">hashCode</a>, <a href="../../../../../io/sphere/sdk/models/Base.html#toString--">toString</a></code></li>
-</ul>
-<ul class="blockList">
-<li class="blockList"><a name="methods.inherited.from.class.java.lang.Object">
-<!--   -->
-</a>
-<h3>Methods inherited from class&nbsp;java.lang.Object</h3>
-<code>clone, finalize, getClass, notify, notifyAll, wait, wait, wait</code></li>
-</ul>
 </li>
 </ul>
 </li>
@@ -228,7 +201,7 @@ extends <a href="../../../../../io/sphere/sdk/models/Base.html" title="class in 
 <ul class="blockList">
 <li class="blockList">
 <h4>getAttributeType</h4>
-<pre>public&nbsp;<a href="../../../../../io/sphere/sdk/products/attributes/AttributeType.html" title="interface in io.sphere.sdk.products.attributes">AttributeType</a>&nbsp;getAttributeType()</pre>
+<pre><a href="../../../../../io/sphere/sdk/products/attributes/AttributeType.html" title="interface in io.sphere.sdk.products.attributes">AttributeType</a>&nbsp;getAttributeType()</pre>
 <div class="block">Describes the type of the attribute.</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
@@ -242,7 +215,7 @@ extends <a href="../../../../../io/sphere/sdk/models/Base.html" title="class in 
 <ul class="blockList">
 <li class="blockList">
 <h4>getName</h4>
-<pre>public&nbsp;java.lang.String&nbsp;getName()</pre>
+<pre>java.lang.String&nbsp;getName()</pre>
 <div class="block">The unique name of the attribute used in the API.</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
@@ -256,7 +229,7 @@ extends <a href="../../../../../io/sphere/sdk/models/Base.html" title="class in 
 <ul class="blockList">
 <li class="blockList">
 <h4>getLabel</h4>
-<pre>public&nbsp;<a href="../../../../../io/sphere/sdk/models/LocalizedString.html" title="class in io.sphere.sdk.models">LocalizedString</a>&nbsp;getLabel()</pre>
+<pre><a href="../../../../../io/sphere/sdk/models/LocalizedString.html" title="class in io.sphere.sdk.models">LocalizedString</a>&nbsp;getLabel()</pre>
 <div class="block">A human-readable label for the attribute.</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
@@ -271,7 +244,7 @@ extends <a href="../../../../../io/sphere/sdk/models/Base.html" title="class in 
 <li class="blockList">
 <h4>getIsRequired</h4>
 <pre>@Deprecated
-public&nbsp;java.lang.Boolean&nbsp;getIsRequired()</pre>
+java.lang.Boolean&nbsp;getIsRequired()</pre>
 <div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;<span class="deprecationComment">use <a href="../../../../../io/sphere/sdk/products/attributes/AttributeDefinition.html#isRequired--"><code>isRequired()</code></a> instead</span></div>
 <div class="block">Whether the attribute is required to have a value.</div>
 <dl>
@@ -286,7 +259,7 @@ public&nbsp;java.lang.Boolean&nbsp;getIsRequired()</pre>
 <ul class="blockList">
 <li class="blockList">
 <h4>isRequired</h4>
-<pre>public&nbsp;java.lang.Boolean&nbsp;isRequired()</pre>
+<pre>java.lang.Boolean&nbsp;isRequired()</pre>
 <div class="block">Whether the attribute is required to have a value.</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
@@ -300,7 +273,7 @@ public&nbsp;java.lang.Boolean&nbsp;getIsRequired()</pre>
 <ul class="blockList">
 <li class="blockList">
 <h4>getAttributeConstraint</h4>
-<pre>public&nbsp;<a href="../../../../../io/sphere/sdk/products/attributes/AttributeConstraint.html" title="enum in io.sphere.sdk.products.attributes">AttributeConstraint</a>&nbsp;getAttributeConstraint()</pre>
+<pre><a href="../../../../../io/sphere/sdk/products/attributes/AttributeConstraint.html" title="enum in io.sphere.sdk.products.attributes">AttributeConstraint</a>&nbsp;getAttributeConstraint()</pre>
 <div class="block">Describes how an attribute or a set of attributes should be validated across all variants of a product.</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
@@ -315,7 +288,7 @@ public&nbsp;java.lang.Boolean&nbsp;getIsRequired()</pre>
 <li class="blockList">
 <h4>getIsSearchable</h4>
 <pre>@Deprecated
-public&nbsp;java.lang.Boolean&nbsp;getIsSearchable()</pre>
+java.lang.Boolean&nbsp;getIsSearchable()</pre>
 <div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;<span class="deprecationComment">use <a href="../../../../../io/sphere/sdk/products/attributes/AttributeDefinition.html#isSearchable--"><code>isSearchable()</code></a> instead</span></div>
 <div class="block">Whether the attribute's values should generally be enabled in product search.
  The exact features that are enabled/disabled with this flag depend on the concrete attribute type and are described there.</div>
@@ -331,7 +304,7 @@ public&nbsp;java.lang.Boolean&nbsp;getIsSearchable()</pre>
 <ul class="blockList">
 <li class="blockList">
 <h4>isSearchable</h4>
-<pre>public&nbsp;java.lang.Boolean&nbsp;isSearchable()</pre>
+<pre>java.lang.Boolean&nbsp;isSearchable()</pre>
 <div class="block">Whether the attribute's values should generally be enabled in product search.
  The exact features that are enabled/disabled with this flag depend on the concrete attribute type and are described there.</div>
 <dl>
@@ -346,7 +319,7 @@ public&nbsp;java.lang.Boolean&nbsp;getIsSearchable()</pre>
 <ul class="blockListLast">
 <li class="blockList">
 <h4>getInputHint</h4>
-<pre>public&nbsp;<a href="../../../../../io/sphere/sdk/models/TextInputHint.html" title="enum in io.sphere.sdk.models">TextInputHint</a>&nbsp;getInputHint()</pre>
+<pre><a href="../../../../../io/sphere/sdk/models/TextInputHint.html" title="enum in io.sphere.sdk.models">TextInputHint</a>&nbsp;getInputHint()</pre>
 </li>
 </ul>
 </li>
