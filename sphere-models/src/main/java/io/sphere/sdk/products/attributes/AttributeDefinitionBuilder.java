@@ -63,7 +63,7 @@ public class AttributeDefinitionBuilder extends Base implements Builder<Attribut
 
     @Override
     public AttributeDefinition build() {
-        return new AttributeDefinition(attributeType, name, label, isRequired, attributeConstraint, isSearchable, inputHint);
+        return new AttributeDefinitionImpl(attributeType, name, label, isRequired, attributeConstraint, isSearchable, inputHint);
     }
 
     public static AttributeDefinitionBuilder of(final String name, final LocalizedString label, final AttributeType attributeType) {

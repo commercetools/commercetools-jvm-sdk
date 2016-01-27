@@ -1,58 +1,91 @@
 package io.sphere.sdk.products.attributes;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.TextInputHint;
 
-/**
- * Attribute definitions describe a product attribute and allow you to define some meta-information associated with the attribute (like whether it should be searchable or its constraints).
- *
- * @see AttributeDefinitionBuilder
- */
-@JsonDeserialize(as = AttributeDefinitionImpl.class)
-public interface AttributeDefinition {
+final class AttributeDefinitionImpl extends Base implements AttributeDefinition {
+    private final AttributeType attributeType;
+    private final String name;
+    private final LocalizedString label;
+    private final Boolean isRequired;
+    private final AttributeConstraint attributeConstraint;
+    private final Boolean isSearchable;
+    private final TextInputHint inputHint;
+
+    @JsonCreator
+    AttributeDefinitionImpl(AttributeType attributeType, String name, LocalizedString label, Boolean isRequired,
+                            AttributeConstraint attributeConstraint, Boolean isSearchable, TextInputHint inputHint) {
+        this.attributeType = attributeType;
+        this.name = name;
+        this.label = label;
+        this.isRequired = isRequired;
+        this.attributeConstraint = attributeConstraint;
+        this.isSearchable = isSearchable;
+        this.inputHint = inputHint;
+    }
+
     /**
      * Describes the type of the attribute.
      * @return the type of the attribute
      */
+    @Override
     @JsonProperty("type")
-    AttributeType getAttributeType();
+    public AttributeType getAttributeType() {
+        return attributeType;
+    }
 
     /**
      * The unique name of the attribute used in the API.
      * @return name of the attribute
      */
-    String getName();
+    @Override
+    public String getName() {
+        return name;
+    }
 
     /**
      * A human-readable label for the attribute.
      * @return label for the attribute
      */
-    LocalizedString getLabel();
+    @Override
+    public LocalizedString getLabel() {
+        return label;
+    }
 
     /**
      * Whether the attribute is required to have a value.
      * @return true if required else false
      * @deprecated use {@link #isRequired()} instead
      */
+    @Override
     @Deprecated
     @JsonIgnore
-    Boolean getIsRequired();
+    public Boolean getIsRequired() {
+        return isRequired;
+    }
 
     /**
      * Whether the attribute is required to have a value.
      * @return true if required else false
      */
+    @Override
     @JsonProperty("isRequired")
-    Boolean isRequired();
+    public Boolean isRequired() {
+        return isRequired;
+    }
 
     /**
      * Describes how an attribute or a set of attributes should be validated across all variants of a product.
      * @return definition of validation logic
      */
-    AttributeConstraint getAttributeConstraint();
+    @Override
+    public AttributeConstraint getAttributeConstraint() {
+        return attributeConstraint;
+    }
 
     /**
      * Whether the attribute's values should generally be enabled in product search.
@@ -61,9 +94,12 @@ public interface AttributeDefinition {
      * @return true if searchable, false if not
      * @deprecated use {@link #isSearchable()} instead
      */
+    @Override
     @Deprecated
     @JsonIgnore
-    Boolean getIsSearchable();
+    public Boolean getIsSearchable() {
+        return isSearchable;
+    }
 
     /**
      * Whether the attribute's values should generally be enabled in product search.
@@ -71,9 +107,15 @@ public interface AttributeDefinition {
      *
      * @return true if searchable, false if not
      */
+    @Override
     @JsonProperty("isSearchable")
-    Boolean isSearchable();
+    public Boolean isSearchable() {
+        return isSearchable;
+    }
 
+    @Override
     @JsonProperty("inputHint")
-    TextInputHint getInputHint();
+    public TextInputHint getInputHint() {
+        return inputHint;
+    }
 }
