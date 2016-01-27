@@ -9,20 +9,43 @@ import io.sphere.sdk.models.Reference;
 import javax.annotation.Nullable;
 import java.time.ZonedDateTime;
 
+/**
+ * nventory allows you to track stock quantity per SKU and optionally per supply {@link Channel}.
+ */
 @JsonDeserialize(as = InventoryEntryImpl.class)
 public interface InventoryEntry extends Resource<InventoryEntry> {
+    /**
+     * Available amount of stock. (available means: quantityOnStock - reserved quantity)
+     * @return quantity
+     */
     Long getAvailableQuantity();
 
+    /**
+     * The date and time of the next restock.
+     * @return date time or null
+     */
     @Nullable
     ZonedDateTime getExpectedDelivery();
 
+    /**
+     * Overall amount of stock. (available + reserved)
+     * @return quantity
+     */
     Long getQuantityOnStock();
 
+    /**
+     * The time period in days, that tells how often this inventory entry is restocked.
+     * @returntime in days or null
+     */
     @Nullable
     Integer getRestockableInDays();
 
     String getSku();
 
+    /**
+     * Optional connection to particular supplier.
+     * @return channel or null
+     */
     @Nullable
     Reference<Channel> getSupplyChannel();
 
