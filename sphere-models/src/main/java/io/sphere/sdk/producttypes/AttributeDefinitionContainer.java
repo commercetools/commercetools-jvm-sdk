@@ -7,6 +7,9 @@ import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Interface for classes which have a list of {@link AttributeDefinition}s.
+ */
 public interface AttributeDefinitionContainer {
     List<AttributeDefinition> getAttributes();
 
