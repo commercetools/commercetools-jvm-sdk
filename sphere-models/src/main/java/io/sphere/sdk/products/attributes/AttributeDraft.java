@@ -11,6 +11,14 @@ import java.util.Set;
 
 import static java.util.stream.Collectors.toSet;
 
+/**
+ * Input object to create a product attribute.
+ *
+ * {@include.example io.sphere.sdk.products.commands.ProductUpdateCommandTest#addVariant()}
+ *
+ * @see io.sphere.sdk.products.commands.updateactions.AddVariant
+ * @see io.sphere.sdk.products.ProductVariantDraft
+ */
 @JsonDeserialize(as = AttributeDraftImpl.class)
 public interface AttributeDraft {
     String getName();
