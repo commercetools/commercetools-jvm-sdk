@@ -10,6 +10,8 @@ import io.sphere.sdk.zones.Zone;
  * {@doc.gen intro}
  *
  * {@include.example io.sphere.sdk.zones.commands.ZoneUpdateCommandTest#addLocationAndRemoveLocation()}
+ *
+ * @see Zone#getLocations()
  */
 public class AddLocation extends UpdateActionImpl<Zone> {
     private final Location location;
