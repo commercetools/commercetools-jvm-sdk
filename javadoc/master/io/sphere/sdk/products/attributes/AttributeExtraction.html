@@ -111,10 +111,19 @@ var activeTableTab = "activeTableTab";
 <div class="description">
 <ul class="blockList">
 <li class="blockList">
+<dl>
+<dt><span class="paramLabel">Type Parameters:</span></dt>
+<dd><code>T</code> - the type of the target value which should be extracted from the attribute value. Most likely this will be <code>String</code>.</dd>
+</dl>
 <hr>
 <br>
 <pre>public final class <span class="typeNameLabel">AttributeExtraction&lt;T&gt;</span>
 extends <a href="../../../../../io/sphere/sdk/models/Base.html" title="class in io.sphere.sdk.models">Base</a></pre>
+<div class="block">Helper class to create mapping from product attribute values to a target type.
+
+ <p>This is a functional approach, <a href="../../../../../io/sphere/sdk/products/attributes/LocalizedToStringProductAttributeConverter.html" title="class in io.sphere.sdk.products.attributes"><code>LocalizedToStringProductAttributeConverter</code></a> provides an object oriented way to achieve the same.</p>
+
+ <p>A possible use case is documented <a href="../../../../../io/sphere/sdk/meta/ProductAttributeDocumentation.html#attribute-table-creation">here</a>.</p></div>
 </li>
 </ul>
 </div>
@@ -159,7 +168,7 @@ extends <a href="../../../../../io/sphere/sdk/models/Base.html" title="class in 
 </tr>
 <tr id="i5" class="rowColor">
 <td class="colFirst"><code>static &lt;T&gt;&nbsp;<a href="../../../../../io/sphere/sdk/products/attributes/AttributeExtraction.html" title="class in io.sphere.sdk.products.attributes">AttributeExtraction</a>&lt;T&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/products/attributes/AttributeExtraction.html#of-io.sphere.sdk.products.attributes.AttributeDefinition-io.sphere.sdk.products.attributes.Attribute-">of</a></span>(<a href="../../../../../io/sphere/sdk/products/attributes/AttributeDefinition.html" title="class in io.sphere.sdk.products.attributes">AttributeDefinition</a>&nbsp;attributeDefinition,
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/products/attributes/AttributeExtraction.html#of-io.sphere.sdk.products.attributes.AttributeDefinition-io.sphere.sdk.products.attributes.Attribute-">of</a></span>(<a href="../../../../../io/sphere/sdk/products/attributes/AttributeDefinition.html" title="interface in io.sphere.sdk.products.attributes">AttributeDefinition</a>&nbsp;attributeDefinition,
   <a href="../../../../../io/sphere/sdk/products/attributes/Attribute.html" title="interface in io.sphere.sdk.products.attributes">Attribute</a>&nbsp;attribute)</code>&nbsp;</td>
 </tr>
 <tr id="i6" class="altColor">
@@ -212,7 +221,7 @@ extends <a href="../../../../../io/sphere/sdk/models/Base.html" title="class in 
 <ul class="blockList">
 <li class="blockList">
 <h4>of</h4>
-<pre>public static&nbsp;&lt;T&gt;&nbsp;<a href="../../../../../io/sphere/sdk/products/attributes/AttributeExtraction.html" title="class in io.sphere.sdk.products.attributes">AttributeExtraction</a>&lt;T&gt;&nbsp;of(<a href="../../../../../io/sphere/sdk/products/attributes/AttributeDefinition.html" title="class in io.sphere.sdk.products.attributes">AttributeDefinition</a>&nbsp;attributeDefinition,
+<pre>public static&nbsp;&lt;T&gt;&nbsp;<a href="../../../../../io/sphere/sdk/products/attributes/AttributeExtraction.html" title="class in io.sphere.sdk.products.attributes">AttributeExtraction</a>&lt;T&gt;&nbsp;of(<a href="../../../../../io/sphere/sdk/products/attributes/AttributeDefinition.html" title="interface in io.sphere.sdk.products.attributes">AttributeDefinition</a>&nbsp;attributeDefinition,
                                             <a href="../../../../../io/sphere/sdk/products/attributes/Attribute.html" title="interface in io.sphere.sdk.products.attributes">Attribute</a>&nbsp;attribute)</pre>
 </li>
 </ul>

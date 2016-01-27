@@ -107,7 +107,7 @@ extends java.lang.Object</pre>
 <div class="block"><h3 id="intro">Introduction</h3>
  <h3 id="product-type-creation">ProductType Creation</h3>
  <p>A <a href="../../../../io/sphere/sdk/producttypes/ProductType.html" title="interface in io.sphere.sdk.producttypes"><code>ProductType</code></a> is like a schema that defines how the product attributes are structured.</p>
- <p><a href="../../../../io/sphere/sdk/producttypes/ProductType.html" title="interface in io.sphere.sdk.producttypes"><code>ProductType</code></a>s contain a list of <a href="../../../../io/sphere/sdk/products/attributes/AttributeDefinition.html" title="class in io.sphere.sdk.products.attributes"><code>AttributeDefinition</code></a>s which corresponds to the name and type of each attribute, along with some additional information".
+ <p><a href="../../../../io/sphere/sdk/producttypes/ProductType.html" title="interface in io.sphere.sdk.producttypes"><code>ProductType</code></a>s contain a list of <a href="../../../../io/sphere/sdk/products/attributes/AttributeDefinition.html" title="interface in io.sphere.sdk.products.attributes"><code>AttributeDefinition</code></a>s which corresponds to the name and type of each attribute, along with some additional information".
  Each name/type pair must be unique across a SPHERE.IO project, so if you create an attribute "foo" of type String, you cannot create
  another <a href="../../../../io/sphere/sdk/producttypes/ProductType.html" title="interface in io.sphere.sdk.producttypes"><code>ProductType</code></a> where "foo" has another type (e.g. <a href="../../../../io/sphere/sdk/models/LocalizedString.html" title="class in io.sphere.sdk.models"><code>LocalizedString</code></a>). If you do it anyway you get an error message like:</p>
 

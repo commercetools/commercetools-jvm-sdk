@@ -101,6 +101,47 @@ var activeTableTab = "activeTableTab";
 <hr>
 <br>
 <pre>public interface <span class="typeNameLabel">AttributeDraft</span></pre>
+<div class="block">Input object to create a product attribute.
+
+ <div id="io-sphere-sdk-products-commands-ProductUpdateCommandTest-addVariant--%s" class=code-example><pre><code class='java'>final NamedAttributeAccess&lt;MonetaryAmount&gt; moneyAttribute =
+        AttributeAccess.ofMoney().ofName(MONEY_ATTRIBUTE_NAME);
+final AttributeDraft moneyAttributeValue = AttributeDraft.of(moneyAttribute, EURO_10);
+
+final NamedAttributeAccess&lt;LocalizedEnumValue&gt; colorAttribute = Colors.ATTRIBUTE;
+final LocalizedEnumValue color = Colors.RED;
+final AttributeDraft colorAttributeValue = AttributeDraft.of(colorAttribute, color);
+
+final NamedAttributeAccess&lt;EnumValue&gt; sizeAttribute = Sizes.ATTRIBUTE;
+final AttributeDraft sizeValue = AttributeDraft.of(sizeAttribute, Sizes.M);
+
+
+withUpdateableProduct(client(), product -&gt; {
+    assertThat(product.getMasterData().getStaged().getVariants()).isEmpty();
+
+    final PriceDraft price = PriceDraft.of(MoneyImpl.of(new BigDecimal("12.34"), EUR)).withCountry(DE);
+    final List&lt;PriceDraft&gt; prices = asList(price);
+    final List&lt;AttributeDraft&gt; attributeValues = asList(moneyAttributeValue, colorAttributeValue, sizeValue);
+    final ProductUpdateCommand addVariantCommand =
+            ProductUpdateCommand.of(product, AddVariant.of(attributeValues, prices, randomKey()));
+
+    final Product productWithVariant = client().executeBlocking(addVariantCommand);
+    final ProductVariant variant = productWithVariant.getMasterData().getStaged().getVariants().get(0);
+    assertThat(variant.getId()).isEqualTo(2);
+    assertThat(variant.findAttribute(moneyAttribute).get()).isEqualTo(EURO_10);
+    assertThat(variant.findAttribute(colorAttribute).get()).isEqualTo(color);
+    assertThat(variant.findAttribute(sizeAttribute).get()).isEqualTo(Sizes.M);
+
+    final Product productWithoutVariant = client().executeBlocking(ProductUpdateCommand.of(productWithVariant, RemoveVariant.of(variant)));
+    assertThat(productWithoutVariant.getMasterData().getStaged().getVariants()).isEmpty();
+
+    return productWithoutVariant;
+});
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/products/commands/ProductUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+<dl>
+<dt><span class="seeLabel">See Also:</span></dt>
+<dd><a href="../../../../../io/sphere/sdk/products/commands/updateactions/AddVariant.html" title="class in io.sphere.sdk.products.commands.updateactions"><code>AddVariant</code></a>, 
+<a href="../../../../../io/sphere/sdk/products/ProductVariantDraft.html" title="interface in io.sphere.sdk.products"><code>ProductVariantDraft</code></a></dd>
+</dl>
 </li>
 </ul>
 </div>
