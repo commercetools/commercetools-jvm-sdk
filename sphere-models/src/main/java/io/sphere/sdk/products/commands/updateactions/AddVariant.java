@@ -3,6 +3,7 @@ package io.sphere.sdk.products.commands.updateactions;
 import io.sphere.sdk.commands.UpdateActionImpl;
 import io.sphere.sdk.products.PriceDraft;
 import io.sphere.sdk.products.Product;
+import io.sphere.sdk.products.ProductData;
 import io.sphere.sdk.products.attributes.AttributeDraft;
 
 import javax.annotation.Nullable;
@@ -16,6 +17,12 @@ import java.util.List;
  * {@include.example io.sphere.sdk.products.commands.ProductUpdateCommandTest#addVariant()}
  *
  * @see io.sphere.sdk.products.commands.updateactions.RemoveVariant
+ * @see ProductData#getAllVariants()
+ * @see ProductData#getMasterVariant()
+ * @see ProductData#getVariants()
+ * @see io.sphere.sdk.products.ProductProjection#getAllVariants()
+ * @see io.sphere.sdk.products.ProductProjection#getMasterVariant()
+ * @see io.sphere.sdk.products.ProductProjection#getVariants()
  */
 public class AddVariant extends UpdateActionImpl<Product> {
     @Nullable
