@@ -22,8 +22,11 @@ import java.util.Set;
 import static io.sphere.sdk.json.TypeReferences.*;
 
 /**
+ * Container which has strategies to serialize/deserialize attribute values.
  *
- * @param <T> the type of the attribute
+ * <p>Product attributes are documented <a href="{@docRoot}/io/sphere/sdk/meta/ProductAttributeDocumentation.html">here</a>.</p>
+ *
+ * @param <T> the type of the attribute value
  * @see NamedAttributeAccess
  */
 public interface AttributeAccess<T> {
