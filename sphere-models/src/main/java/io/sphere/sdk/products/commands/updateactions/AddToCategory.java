@@ -5,6 +5,7 @@ import io.sphere.sdk.commands.UpdateActionImpl;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Referenceable;
 import io.sphere.sdk.products.Product;
+import io.sphere.sdk.products.ProductProjection;
 
 import javax.annotation.Nullable;
 
@@ -16,6 +17,8 @@ import javax.annotation.Nullable;
  * {@include.example io.sphere.sdk.products.commands.ProductUpdateCommandTest#addToCategory()}
  *
  * @see io.sphere.sdk.products.commands.updateactions.RemoveFromCategory
+ * @see ProductProjection#getCategories()
+ * @see io.sphere.sdk.products.ProductData#getCategories()
  */
 public class AddToCategory extends UpdateActionImpl<Product> {
     private final Reference<Category> category;
