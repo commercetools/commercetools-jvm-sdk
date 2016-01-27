@@ -12,6 +12,8 @@ import io.sphere.sdk.zones.Zone;
  * {@doc.gen intro}
  *
  * {@include.example io.sphere.sdk.shippingmethods.commands.ShippingMethodUpdateCommandTest#workingWithZones()}
+ *
+ * @see ShippingMethod#getZones()
  */
 public class AddZone extends UpdateActionImpl<ShippingMethod> {
     private final Reference<Zone> zone;
