@@ -14,7 +14,7 @@ import static io.sphere.sdk.categories.CategoryFixtures.withCategory;
 import static io.sphere.sdk.test.SphereTestUtils.*;
 import static org.assertj.core.api.Assertions.*;
 
-public class CategoryCreateCommandTest extends IntegrationTest {
+public class CategoryCreateCommandIntegrationTest extends IntegrationTest {
     @BeforeClass
     public static void clean() {
         client().executeBlocking(CategoryQuery.of().bySlug(Locale.ENGLISH, "example-category"))

@@ -1,6 +1,6 @@
 package io.sphere.sdk.customobjects.commands;
 
-import io.sphere.sdk.commands.CreateCommand;
+import io.sphere.sdk.commands.DraftBasedCreateCommand;
 import io.sphere.sdk.customobjects.CustomObject;
 import io.sphere.sdk.customobjects.CustomObjectDraft;
 
@@ -13,7 +13,7 @@ import io.sphere.sdk.customobjects.CustomObjectDraft;
  @param <T> the type of the value in the custom object
  @see CustomObject
  */
-public interface CustomObjectUpsertCommand<T> extends CreateCommand<CustomObject<T>> {
+public interface CustomObjectUpsertCommand<T> extends DraftBasedCreateCommand<CustomObject<T>, CustomObjectDraft<T>> {
 
     static <T> CustomObjectUpsertCommand<T> of(final CustomObjectDraft<T> draft) {
         return new CustomObjectUpsertCommandImpl<>(draft);

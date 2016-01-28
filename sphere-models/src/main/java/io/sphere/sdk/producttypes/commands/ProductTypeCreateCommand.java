@@ -1,6 +1,6 @@
 package io.sphere.sdk.producttypes.commands;
 
-import io.sphere.sdk.commands.CreateCommand;
+import io.sphere.sdk.commands.DraftBasedCreateCommand;
 import io.sphere.sdk.expansion.MetaModelReferenceExpansionDsl;
 import io.sphere.sdk.producttypes.ProductType;
 import io.sphere.sdk.producttypes.ProductTypeDraft;
@@ -21,7 +21,7 @@ import io.sphere.sdk.producttypes.expansion.ProductTypeExpansionModel;
   <p>To create attribute definitions refer to {@link io.sphere.sdk.products.attributes.AttributeDefinition}.</p>
 
  */
-public interface ProductTypeCreateCommand extends CreateCommand<ProductType>, MetaModelReferenceExpansionDsl<ProductType, ProductTypeCreateCommand, ProductTypeExpansionModel<ProductType>> {
+public interface ProductTypeCreateCommand extends DraftBasedCreateCommand<ProductType, ProductTypeDraft>, MetaModelReferenceExpansionDsl<ProductType, ProductTypeCreateCommand, ProductTypeExpansionModel<ProductType>> {
 
     static ProductTypeCreateCommand of(final ProductTypeDraft draft) {
         return new ProductTypeCreateCommandImpl(draft);

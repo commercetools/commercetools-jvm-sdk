@@ -26,7 +26,7 @@ import static java.util.Objects.requireNonNull;
  * @param <D> type of the draft object
  * @param <E> type of the expansion model
  */
-public abstract class MetaModelCreateCommandImpl<T, C, D, E> extends CommandImpl<T> implements CreateCommand<T>, MetaModelExpansionDslExpansionModelRead<T, C, E> {
+public abstract class MetaModelCreateCommandImpl<T, C, D, E> extends CommandImpl<T> implements DraftBasedCreateCommand<T, D>, MetaModelExpansionDslExpansionModelRead<T, C, E> {
 
     final D body;
     final E expansionModel;
@@ -115,6 +115,11 @@ public abstract class MetaModelCreateCommandImpl<T, C, D, E> extends CommandImpl
     @Override
     public E expansionModel() {
         return expansionModel;
+    }
+
+    @Override
+    public D getDraft() {
+        return body;
     }
 
     protected MetaModelCreateCommandBuilder<T, C, D, E> copyBuilder() {
