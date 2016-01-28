@@ -4,7 +4,7 @@ import io.sphere.sdk.channels.Channel;
 import io.sphere.sdk.channels.ChannelDraft;
 import io.sphere.sdk.channels.ChannelDraftDsl;
 import io.sphere.sdk.channels.expansion.ChannelExpansionModel;
-import io.sphere.sdk.commands.CreateCommand;
+import io.sphere.sdk.commands.DraftBasedCreateCommand;
 import io.sphere.sdk.expansion.MetaModelReferenceExpansionDsl;
 
 /**
@@ -17,7 +17,7 @@ import io.sphere.sdk.expansion.MetaModelReferenceExpansionDsl;
  * @see ChannelDraft
  * @see ChannelDraftDsl
  */
-public interface ChannelCreateCommand extends CreateCommand<Channel>, MetaModelReferenceExpansionDsl<Channel, ChannelCreateCommand, ChannelExpansionModel<Channel>> {
+public interface ChannelCreateCommand extends DraftBasedCreateCommand<Channel, ChannelDraft>, MetaModelReferenceExpansionDsl<Channel, ChannelCreateCommand, ChannelExpansionModel<Channel>> {
     static ChannelCreateCommand of(final ChannelDraft draft) {
         return new ChannelCreateCommandImpl(draft);
     }

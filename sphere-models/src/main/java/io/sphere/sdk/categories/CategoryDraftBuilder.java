@@ -9,7 +9,7 @@ import java.util.Optional;
 /**
  * <p>Creates templates for new categories.</p>
  *
- *  {@include.example io.sphere.sdk.categories.commands.CategoryCreateCommandTest#execution()}
+ *  {@include.example io.sphere.sdk.categories.commands.CategoryCreateCommandIntegrationTest#execution()}
  */
 public class CategoryDraftBuilder extends Base implements Builder<CategoryDraft> {
     private final LocalizedString name;
