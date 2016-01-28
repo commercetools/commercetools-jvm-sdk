@@ -3,6 +3,11 @@ package io.sphere.sdk.cartdiscounts;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
+/**
+ * Defines what part of the cart will be discounted.
+ *
+ * @see CartDiscount
+ */
 @JsonTypeInfo(
         use = JsonTypeInfo.Id.NAME,
         include = JsonTypeInfo.As.PROPERTY,
