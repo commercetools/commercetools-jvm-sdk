@@ -2,6 +2,11 @@ package io.sphere.sdk.products.attributes;
 
 import com.fasterxml.jackson.annotation.*;
 
+/**
+ * Type of a product attribute.
+ *
+ * <p>Product attributes are documented <a href="{@docRoot}/io/sphere/sdk/meta/ProductAttributeDocumentation.html">here</a>.</p>
+ */
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "name", visible = true)
 @JsonSubTypes({
     @JsonSubTypes.Type(value = StringAttributeType.class, name = "text"),
