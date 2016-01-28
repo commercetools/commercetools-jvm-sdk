@@ -9,6 +9,8 @@ import io.sphere.sdk.queries.MetaModelGetDsl;
 import java.util.List;
 
 /**
+ * Gets a {@link CartDiscount} by a known ID.
+ *
  * {@include.example io.sphere.sdk.cartdiscounts.queries.CartDiscountByIdGetTest#execution()}
  */
 public interface CartDiscountByIdGet extends MetaModelGetDsl<CartDiscount, CartDiscount, CartDiscountByIdGet, CartDiscountExpansionModel<CartDiscount>> {
