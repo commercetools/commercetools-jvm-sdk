@@ -10,6 +10,11 @@ import io.sphere.sdk.queries.ResourceMetaModelQueryDslBuilderImpl;
 import java.util.List;
 import java.util.function.Function;
 
+/**
+
+ {@doc.gen summary }
+
+ */
 public class CustomerQueryBuilder extends ResourceMetaModelQueryDslBuilderImpl<CustomerQueryBuilder, Customer, CustomerQuery, CustomerQueryModel, CustomerExpansionModel<Customer>> {
 
     private CustomerQueryBuilder(final CustomerQuery template) {

@@ -10,6 +10,11 @@ import io.sphere.sdk.queries.ResourceMetaModelQueryDslBuilderImpl;
 import java.util.List;
 import java.util.function.Function;
 
+/**
+
+ {@doc.gen summary }
+
+ */
 public class MessageQueryBuilder extends ResourceMetaModelQueryDslBuilderImpl<MessageQueryBuilder, Message, MessageQuery, MessageQueryModel, MessageExpansionModel<Message>> {
 
     private MessageQueryBuilder(final MessageQuery template) {

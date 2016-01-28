@@ -10,6 +10,11 @@ import io.sphere.sdk.zones.expansion.ZoneExpansionModel;
 import java.util.List;
 import java.util.function.Function;
 
+/**
+
+ {@doc.gen summary zones}
+
+ */
 public class ZoneQueryBuilder extends ResourceMetaModelQueryDslBuilderImpl<ZoneQueryBuilder, Zone, ZoneQuery, ZoneQueryModel, ZoneExpansionModel<Zone>> {
 
     private ZoneQueryBuilder(final ZoneQuery template) {

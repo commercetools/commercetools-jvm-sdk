@@ -10,6 +10,11 @@ import io.sphere.sdk.queries.ResourceMetaModelQueryDslBuilderImpl;
 import java.util.List;
 import java.util.function.Function;
 
+/**
+
+ {@doc.gen summary cart discounts}
+
+ */
 public class CartDiscountQueryBuilder extends ResourceMetaModelQueryDslBuilderImpl<CartDiscountQueryBuilder, CartDiscount, CartDiscountQuery, CartDiscountQueryModel, CartDiscountExpansionModel<CartDiscount>> {
 
     private CartDiscountQueryBuilder(final CartDiscountQuery template) {

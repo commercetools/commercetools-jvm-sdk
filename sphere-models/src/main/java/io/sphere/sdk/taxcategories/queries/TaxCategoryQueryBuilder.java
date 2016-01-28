@@ -10,6 +10,11 @@ import io.sphere.sdk.taxcategories.expansion.TaxCategoryExpansionModel;
 import java.util.List;
 import java.util.function.Function;
 
+/**
+
+ {@doc.gen summary tax categories}
+
+ */
 public class TaxCategoryQueryBuilder extends ResourceMetaModelQueryDslBuilderImpl<TaxCategoryQueryBuilder, TaxCategory, TaxCategoryQuery, TaxCategoryQueryModel, TaxCategoryExpansionModel<TaxCategory>> {
 
     private TaxCategoryQueryBuilder(final TaxCategoryQuery template) {

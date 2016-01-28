@@ -10,6 +10,11 @@ import io.sphere.sdk.queries.ResourceMetaModelQueryDslBuilderImpl;
 import java.util.List;
 import java.util.function.Function;
 
+/**
+
+ {@doc.gen summary }
+
+ */
 public class ChannelQueryBuilder extends ResourceMetaModelQueryDslBuilderImpl<ChannelQueryBuilder, Channel, ChannelQuery, ChannelQueryModel, ChannelExpansionModel<Channel>> {
 
     private ChannelQueryBuilder(final ChannelQuery template) {

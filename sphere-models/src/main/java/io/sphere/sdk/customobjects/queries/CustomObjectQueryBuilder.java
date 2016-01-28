@@ -13,6 +13,11 @@ import io.sphere.sdk.queries.ResourceMetaModelQueryDslBuilderImpl;
 import java.util.List;
 import java.util.function.Function;
 
+/**
+
+ {@doc.gen summary }
+
+ */
 public class CustomObjectQueryBuilder<T> extends ResourceMetaModelQueryDslBuilderImpl<CustomObjectQueryBuilder<T>, CustomObject<T>, CustomObjectQuery<T>, CustomObjectQueryModel<CustomObject<T>>, CustomObjectExpansionModel<CustomObject<T>>> {
 
     private CustomObjectQueryBuilder(final CustomObjectQuery<T> template) {

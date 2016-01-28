@@ -99,6 +99,9 @@ public class DocumentationTaglet implements Taglet {
             result = format("Provides a QueryDsl for %s to formulate predicates, search expressions and reference expansion path expressions. " +
                     "<p>For further information how to use the query API to consult the <a href='" + relativeUrlTo(tag, "io.sphere.sdk.meta.QueryDocumentation") +
                     "'>Query API documentation</a>.</p>", furtherArgs(tag));
+        } else if (isEntityQueryClassBuilder(tag)) {
+            final String queryClassSimpleName = getClassName(tag).replace("Builder", "");
+            result = format("A Builder for <a href='%s.html'>%s</a>.", queryClassSimpleName, queryClassSimpleName);
         } else if (isQueryModelClass(tag)) {
             result = format("Provides a domain specific language to formulate predicates and search expressions for querying %s.", furtherArgs(tag));
         } else if (isUpdateCommandClass(tag) && tag.text().contains("list actions")) {
@@ -152,6 +155,11 @@ public class DocumentationTaglet implements Taglet {
             throw new RuntimeException(tag.name() + " is not prepared to be used here: " + tag.position());
         }
         return result;
+    }
+
+    private boolean isEntityQueryClassBuilder(final Tag tag) {
+        final String className = getClassName(tag);
+        return className.endsWith("QueryBuilder");
     }
 
     private String renderIntro(final Tag tag) {

@@ -10,6 +10,11 @@ import io.sphere.sdk.types.expansion.TypeExpansionModel;
 import java.util.List;
 import java.util.function.Function;
 
+/**
+
+ {@doc.gen summary types}
+
+ */
 public class TypeQueryBuilder extends ResourceMetaModelQueryDslBuilderImpl<TypeQueryBuilder, Type, TypeQuery, TypeQueryModel, TypeExpansionModel<Type>> {
 
     private TypeQueryBuilder(final TypeQuery template) {

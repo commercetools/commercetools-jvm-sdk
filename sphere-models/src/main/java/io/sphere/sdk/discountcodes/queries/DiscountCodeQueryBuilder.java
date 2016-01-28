@@ -10,6 +10,11 @@ import io.sphere.sdk.queries.ResourceMetaModelQueryDslBuilderImpl;
 import java.util.List;
 import java.util.function.Function;
 
+/**
+
+ {@doc.gen summary }
+
+ */
 public class DiscountCodeQueryBuilder extends ResourceMetaModelQueryDslBuilderImpl<DiscountCodeQueryBuilder, DiscountCode, DiscountCodeQuery, DiscountCodeQueryModel, DiscountCodeExpansionModel<DiscountCode>> {
 
     private DiscountCodeQueryBuilder(final DiscountCodeQuery template) {

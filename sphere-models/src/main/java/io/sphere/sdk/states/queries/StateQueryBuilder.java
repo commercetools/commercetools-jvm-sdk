@@ -10,6 +10,11 @@ import io.sphere.sdk.states.expansion.StateExpansionModel;
 import java.util.List;
 import java.util.function.Function;
 
+/**
+
+ {@doc.gen summary}
+
+ */
 public class StateQueryBuilder extends ResourceMetaModelQueryDslBuilderImpl<StateQueryBuilder, State, StateQuery, StateQueryModel, StateExpansionModel<State>> {
 
     private StateQueryBuilder(final StateQuery template) {

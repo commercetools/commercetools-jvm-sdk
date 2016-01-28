@@ -10,6 +10,11 @@ import io.sphere.sdk.queries.ResourceMetaModelQueryDslBuilderImpl;
 import java.util.List;
 import java.util.function.Function;
 
+/**
+
+ {@doc.gen summary }
+
+ */
 public class ProductQueryBuilder extends ResourceMetaModelQueryDslBuilderImpl<ProductQueryBuilder, Product, ProductQuery, ProductQueryModel, ProductExpansionModel<Product>> {
 
     private ProductQueryBuilder(final ProductQuery template) {

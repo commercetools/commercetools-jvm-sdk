@@ -10,6 +10,11 @@ import io.sphere.sdk.queries.ResourceMetaModelQueryDslBuilderImpl;
 import java.util.List;
 import java.util.function.Function;
 
+/**
+
+ {@doc.gen summary }
+
+ */
 public class OrderQueryBuilder extends ResourceMetaModelQueryDslBuilderImpl<OrderQueryBuilder, Order, OrderQuery, OrderQueryModel, OrderExpansionModel<Order>> {
 
     private OrderQueryBuilder(final OrderQuery template) {
