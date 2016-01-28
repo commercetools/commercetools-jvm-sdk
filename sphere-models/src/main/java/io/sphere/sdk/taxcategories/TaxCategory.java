@@ -2,19 +2,28 @@ package io.sphere.sdk.taxcategories;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import io.sphere.sdk.carts.CartShippingInfo;
+import io.sphere.sdk.carts.CustomLineItem;
 import io.sphere.sdk.models.Resource;
 import io.sphere.sdk.models.Reference;
+import io.sphere.sdk.products.Product;
 
 import javax.annotation.Nullable;
 import java.util.List;
 
 /** Tax Categories define how products are to be taxed in different countries.
 
-@see io.sphere.sdk.taxcategories.queries.TaxCategoryByIdGet
-@see io.sphere.sdk.taxcategories.queries.TaxCategoryQuery
-@see io.sphere.sdk.taxcategories.commands.TaxCategoryCreateCommand
-@see io.sphere.sdk.taxcategories.commands.TaxCategoryUpdateCommand
-@see io.sphere.sdk.taxcategories.commands.TaxCategoryDeleteCommand
+ @see io.sphere.sdk.taxcategories.commands.TaxCategoryCreateCommand
+ @see io.sphere.sdk.taxcategories.commands.TaxCategoryUpdateCommand
+ @see io.sphere.sdk.taxcategories.commands.TaxCategoryDeleteCommand
+ @see io.sphere.sdk.taxcategories.queries.TaxCategoryByIdGet
+ @see io.sphere.sdk.taxcategories.queries.TaxCategoryQuery
+ @see CartShippingInfo#getTaxCategory()
+ @see io.sphere.sdk.orders.OrderShippingInfo#getTaxCategory()
+ @see CustomLineItem#getTaxCategory()
+ @see Product#getTaxCategory()
+ @see io.sphere.sdk.products.ProductProjection#getTaxCategory()
+ @see io.sphere.sdk.shippingmethods.ShippingMethod#getTaxCategory()
  */
 @JsonDeserialize(as=TaxCategoryImpl.class)
 public interface TaxCategory extends Resource<TaxCategory> {

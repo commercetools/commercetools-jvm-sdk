@@ -4,6 +4,8 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 import io.sphere.sdk.models.*;
+import io.sphere.sdk.products.ProductData;
+import io.sphere.sdk.products.ProductProjection;
 import io.sphere.sdk.types.Custom;
 import io.sphere.sdk.types.CustomFields;
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -18,14 +20,19 @@ import static io.sphere.sdk.utils.SphereInternalUtils.join;
  *
  *  <p>A category can have {@link io.sphere.sdk.types.Custom custom fields}.</p>
  *
- * <p id="operations">Operations:</p>
- * <ul>
- *     <li>Create a category with {@link io.sphere.sdk.categories.commands.CategoryCreateCommand}.</li>
- *     <li>Update a category with {@link io.sphere.sdk.categories.commands.CategoryUpdateCommand}.</li>
- *     <li>Delete a category with {@link io.sphere.sdk.categories.commands.CategoryDeleteCommand}.</li>
- * </ul>
- *
  * <p>Consult the documentation for <a href="{@docRoot}/io/sphere/sdk/meta/CategoryDocumentation.html">categories</a> for more information.</p>
+ * @see io.sphere.sdk.categories.commands.CategoryCreateCommand
+ * @see io.sphere.sdk.categories.commands.CategoryUpdateCommand
+ * @see io.sphere.sdk.categories.commands.CategoryDeleteCommand
+ * @see io.sphere.sdk.categories.queries.CategoryQuery
+ * @see io.sphere.sdk.categories.queries.CategoryByIdGet
+ * @see CategoryTree
+ * @see ProductData#getCategories()
+ * @see ProductData#getCategoryOrderHints()
+ * @see ProductProjection#getCategories()
+ * @see ProductProjection#getCategoryOrderHints()
+ * @see io.sphere.sdk.products.commands.updateactions.AddToCategory
+ * @see io.sphere.sdk.products.commands.updateactions.RemoveFromCategory
  */
 @JsonDeserialize(as=CategoryImpl.class)
 public interface Category extends Resource<Category>, WithLocalizedSlug, MetaAttributes, Custom {

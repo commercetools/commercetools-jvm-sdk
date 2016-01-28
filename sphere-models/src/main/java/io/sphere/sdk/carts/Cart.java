@@ -27,6 +27,7 @@ import java.util.List;
  @see io.sphere.sdk.carts.queries.CartByCustomerIdGet
  @see io.sphere.sdk.carts.queries.CartByIdGet
  @see io.sphere.sdk.orders.Order
+ @see Order#getCart()
  */
 @JsonDeserialize(as=CartImpl.class)
 public interface Cart extends CartLike<Cart> {

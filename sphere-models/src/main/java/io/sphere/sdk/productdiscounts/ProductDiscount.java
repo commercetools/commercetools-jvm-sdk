@@ -10,6 +10,15 @@ import io.sphere.sdk.models.Reference;
 import javax.annotation.Nullable;
 import java.util.List;
 
+/**
+ * Product discounts are used to change certain product prices.
+ *
+ * @see io.sphere.sdk.productdiscounts.commands.ProductDiscountCreateCommand
+ * @see io.sphere.sdk.productdiscounts.commands.ProductDiscountUpdateCommand
+ * @see io.sphere.sdk.productdiscounts.commands.ProductDiscountDeleteCommand
+ * @see io.sphere.sdk.productdiscounts.queries.ProductDiscountQuery
+ * @see io.sphere.sdk.productdiscounts.queries.ProductDiscountByIdGet
+ */
 @JsonDeserialize(as=ProductDiscountImpl.class)
 public interface ProductDiscount extends Resource<ProductDiscount> {
 

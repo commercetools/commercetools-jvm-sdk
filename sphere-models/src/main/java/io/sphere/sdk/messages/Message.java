@@ -6,6 +6,11 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import io.sphere.sdk.models.Resource;
 import io.sphere.sdk.models.Reference;
 
+/**
+ * A message represents a change or an action performed on a resource (like an Order or a Product). Messages can be seen as a subset of the change history for a resource inside a project. It is a subset because not all changes on resources result in messages.
+ *
+ * Consult {@link io.sphere.sdk.messages.queries.MessageQuery} how to use messages.
+ */
 @JsonDeserialize(as = MessageImpl.class)
 public interface Message extends Resource<Message> {
     static String referenceTypeId() {

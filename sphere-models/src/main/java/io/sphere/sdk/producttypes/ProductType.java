@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Resource;
+import io.sphere.sdk.products.Product;
 import io.sphere.sdk.products.attributes.AttributeDefinition;
 
 import javax.annotation.Nullable;
@@ -18,6 +19,7 @@ import java.util.Optional;
  @see io.sphere.sdk.producttypes.queries.ProductTypeQuery
  @see io.sphere.sdk.producttypes.queries.ProductTypeByIdGet
  @see io.sphere.sdk.producttypes.queries.ProductTypeByKeyGet
+ @see Product#getProductType()
  */
 @JsonDeserialize(as=ProductTypeImpl.class)
 public interface ProductType extends Resource<ProductType>, AttributeDefinitionContainer {

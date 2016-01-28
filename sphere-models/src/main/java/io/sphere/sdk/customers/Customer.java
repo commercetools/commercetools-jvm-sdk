@@ -2,12 +2,15 @@ package io.sphere.sdk.customers;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import io.sphere.sdk.carts.Cart;
 import io.sphere.sdk.customergroups.CustomerGroup;
 import io.sphere.sdk.customers.commands.CustomerCreatePasswordTokenCommand;
 import io.sphere.sdk.customers.commands.CustomerPasswordResetCommand;
 import io.sphere.sdk.models.Address;
 import io.sphere.sdk.models.Resource;
 import io.sphere.sdk.models.Reference;
+import io.sphere.sdk.payments.Payment;
+import io.sphere.sdk.reviews.Review;
 import io.sphere.sdk.types.Custom;
 
 import javax.annotation.Nullable;
@@ -96,6 +99,13 @@ import java.util.Optional;
  * @see io.sphere.sdk.customers.queries.CustomerByIdGet
  * @see io.sphere.sdk.customers.queries.CustomerByTokenGet
  * @see io.sphere.sdk.customers.queries.CustomerQuery
+ * @see CustomerGroup
+ * @see Cart#getCustomerId()
+ * @see io.sphere.sdk.orders.Order#getCustomerId()
+ * @see Payment#getCustomer()
+ * @see io.sphere.sdk.payments.commands.updateactions.SetCustomer
+ * @see Review#getCustomer()
+ * @see io.sphere.sdk.reviews.commands.updateactions.SetCustomer
  */
 @JsonDeserialize(as = CustomerImpl.class)
 public interface Customer extends Resource<Customer>, Custom {

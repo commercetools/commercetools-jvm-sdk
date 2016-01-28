@@ -2,6 +2,7 @@ package io.sphere.sdk.customergroups;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import io.sphere.sdk.carts.Cart;
 import io.sphere.sdk.customers.Customer;
 import io.sphere.sdk.models.Resource;
 import io.sphere.sdk.models.Reference;
@@ -14,8 +15,11 @@ import io.sphere.sdk.models.Reference;
  * @see io.sphere.sdk.customergroups.commands.CustomerGroupDeleteCommand
  * @see io.sphere.sdk.customergroups.queries.CustomerGroupQuery
  * @see io.sphere.sdk.customergroups.queries.CustomerGroupByIdGet
- * @see io.sphere.sdk.customers.commands.updateactions.SetCustomerGroup
  * @see Customer#getCustomerGroup()
+ * @see io.sphere.sdk.customers.commands.updateactions.SetCustomerGroup
+ * @see Cart#getCustomerGroup()
+ * @see io.sphere.sdk.orders.Order#getCustomerGroup()
+ * @see io.sphere.sdk.products.Price#getCustomerGroup()
  */
 @JsonDeserialize(as = CustomerGroupImpl.class)
 public interface CustomerGroup extends Resource<CustomerGroup> {

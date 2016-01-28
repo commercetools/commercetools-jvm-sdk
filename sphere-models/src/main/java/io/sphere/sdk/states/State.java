@@ -3,6 +3,7 @@ package io.sphere.sdk.states;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import io.sphere.sdk.carts.ItemState;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Resource;
 import io.sphere.sdk.models.Reference;
@@ -14,12 +15,16 @@ import java.util.Set;
     by defining transitions between each state, thus allowing to create work-flows.
     Each project has by default an initial LineItemState (inherited also by custom Line Items)
 
- <p id=operations>Operations:</p>
- <ul>
- <li>Create a state with {@link io.sphere.sdk.states.commands.StateCreateCommand}.</li>
- <li>Query a state with {@link io.sphere.sdk.states.queries.StateQuery}.</li>
- <li>Delete a channel with {@link io.sphere.sdk.states.commands.StateDeleteCommand}.</li>
- </ul>
+ @see io.sphere.sdk.states.commands.StateCreateCommand
+ @see io.sphere.sdk.states.commands.StateUpdateCommand
+ @see io.sphere.sdk.states.commands.StateDeleteCommand
+ @see io.sphere.sdk.states.queries.StateQuery
+ @see io.sphere.sdk.states.queries.StateByIdGet
+ @see ItemState#getState()
+ @see io.sphere.sdk.orders.Order#getState()
+ @see io.sphere.sdk.payments.PaymentStatus#getState()
+ @see io.sphere.sdk.products.Product#getState()
+ @see io.sphere.sdk.reviews.Review#getState()
  */
 @JsonDeserialize(as = StateImpl.class)
 public interface State extends Resource<State> {

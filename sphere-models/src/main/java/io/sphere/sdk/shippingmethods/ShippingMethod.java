@@ -2,6 +2,7 @@ package io.sphere.sdk.shippingmethods;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import io.sphere.sdk.carts.CartShippingInfo;
 import io.sphere.sdk.models.Resource;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Referenceable;
@@ -15,6 +16,18 @@ import java.util.List;
 import static java.util.stream.Collectors.toList;
 
 
+/**
+ * Shipping Methods define where orders can be shipped and what the costs are.
+ *
+ *
+ * @see io.sphere.sdk.shippingmethods.commands.ShippingMethodCreateCommand
+ * @see io.sphere.sdk.shippingmethods.commands.ShippingMethodUpdateCommand
+ * @see io.sphere.sdk.shippingmethods.commands.ShippingMethodDeleteCommand
+ * @see io.sphere.sdk.shippingmethods.queries.ShippingMethodQuery
+ * @see io.sphere.sdk.shippingmethods.queries.ShippingMethodByIdGet
+ * @see CartShippingInfo#getShippingMethod()
+ * @see io.sphere.sdk.orders.OrderShippingInfo#getShippingMethod()
+ */
 @JsonDeserialize(as = ShippingMethodImpl.class)
 public interface ShippingMethod extends Resource<ShippingMethod> {
     String getName();

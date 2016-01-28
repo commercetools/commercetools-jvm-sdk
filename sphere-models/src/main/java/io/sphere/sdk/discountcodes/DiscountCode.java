@@ -11,6 +11,13 @@ import io.sphere.sdk.models.Reference;
 import javax.annotation.Nullable;
 import java.util.List;
 
+/**
+ * Discount codes can be added to a cart to enable certain cart discounts.
+ *
+ * @see io.sphere.sdk.discountcodes.commands.DiscountCodeCreateCommand
+ * @see io.sphere.sdk.discountcodes.commands.DiscountCodeCreateCommand
+ * @see CartDiscount#isRequiringDiscountCode()
+ */
 @JsonDeserialize(as = DiscountCodeImpl.class)
 public interface DiscountCode extends Resource<DiscountCode> {
     List<Reference<CartDiscount>> getCartDiscounts();

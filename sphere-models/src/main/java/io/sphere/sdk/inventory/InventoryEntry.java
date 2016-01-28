@@ -10,7 +10,13 @@ import javax.annotation.Nullable;
 import java.time.ZonedDateTime;
 
 /**
- * nventory allows you to track stock quantity per SKU and optionally per supply {@link Channel}.
+ * Inventory allows you to track stock quantity per SKU and optionally per supply {@link Channel}.
+ *
+ * @see io.sphere.sdk.inventory.commands.InventoryEntryCreateCommand
+ * @see io.sphere.sdk.inventory.commands.InventoryEntryUpdateCommand
+ * @see io.sphere.sdk.inventory.commands.InventoryEntryDeleteCommand
+ * @see io.sphere.sdk.inventory.queries.InventoryEntryQuery
+ * @see io.sphere.sdk.inventory.queries.InventoryEntryByIdGet
  */
 @JsonDeserialize(as = InventoryEntryImpl.class)
 public interface InventoryEntry extends Resource<InventoryEntry> {

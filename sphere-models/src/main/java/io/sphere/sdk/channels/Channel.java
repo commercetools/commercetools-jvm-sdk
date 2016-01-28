@@ -2,9 +2,12 @@ package io.sphere.sdk.channels;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import io.sphere.sdk.carts.LineItem;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Resource;
 import io.sphere.sdk.models.Reference;
+import io.sphere.sdk.orders.SyncInfo;
+import io.sphere.sdk.reviews.Review;
 import io.sphere.sdk.reviews.ReviewRatingStatistics;
 
 import javax.annotation.Nullable;
@@ -12,12 +15,16 @@ import java.util.Set;
 
 /** Channels represent a source or destination of different entities.
 
-    <p id=operations>Operations:</p>
-    <ul>
-        <li>Create a channel with {@link io.sphere.sdk.channels.commands.ChannelCreateCommand}.</li>
-        <li>Query a channel with {@link io.sphere.sdk.channels.queries.ChannelQuery}.</li>
-        <li>Delete a channel with {@link io.sphere.sdk.channels.commands.ChannelDeleteCommand}.</li>
-    </ul>
+ @see io.sphere.sdk.channels.commands.ChannelCreateCommand
+ @see io.sphere.sdk.channels.commands.ChannelUpdateCommand
+ @see io.sphere.sdk.channels.commands.ChannelDeleteCommand
+ @see io.sphere.sdk.channels.queries.ChannelQuery
+ @see io.sphere.sdk.channels.queries.ChannelByIdGet
+ @see LineItem#getSupplyChannel()
+ @see io.sphere.sdk.inventory.InventoryEntry#getSupplyChannel()
+ @see SyncInfo#getChannel()
+ @see io.sphere.sdk.products.Price#getChannel()
+ @see Review#getTarget()
  */
 @JsonDeserialize(as = ChannelImpl.class)
 public interface Channel extends Resource<Channel> {

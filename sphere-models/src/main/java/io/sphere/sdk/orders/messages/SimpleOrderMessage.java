@@ -5,6 +5,9 @@ import io.sphere.sdk.messages.GenericMessage;
 import io.sphere.sdk.messages.MessageDerivateHint;
 import io.sphere.sdk.orders.Order;
 
+/**
+ * Messages for a an {@link Order}.
+ */
 @JsonDeserialize(as = SimpleOrderMessageImpl.class)
 public interface SimpleOrderMessage extends GenericMessage<Order> {
         MessageDerivateHint<SimpleOrderMessage> MESSAGE_HINT =

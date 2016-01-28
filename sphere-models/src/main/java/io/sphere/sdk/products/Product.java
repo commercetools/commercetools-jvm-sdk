@@ -5,6 +5,8 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import java.util.Optional;
 import io.sphere.sdk.models.Resource;
 import io.sphere.sdk.models.Reference;
+import io.sphere.sdk.productdiscounts.ProductDiscount;
+import io.sphere.sdk.reviews.Review;
 import io.sphere.sdk.reviews.ReviewRatingStatistics;
 import io.sphere.sdk.states.State;
 
@@ -14,20 +16,20 @@ import javax.annotation.Nullable;
 
  <p>A sellable good.</p>
 
- <p> id=operationsOperations:</p>
- <ul>
-    <li>Create a product in SPHERE.IO with {@link io.sphere.sdk.products.commands.ProductCreateCommand}.</li>
-    <li>Query a product with {@link io.sphere.sdk.products.queries.ProductQuery}.</li>
-    <li>Update a product with {@link io.sphere.sdk.products.commands.ProductUpdateCommand}.</li>
-    <li>Delete a product with {@link io.sphere.sdk.products.commands.ProductDeleteCommand}.</li>
- </ul>
-
  <p>Consider to use {@link io.sphere.sdk.products.ProductProjection} for queries if you don't need the whole product data so you can safe traffic and memory.</p>
 
+ @see io.sphere.sdk.products.commands.ProductCreateCommand
+ @see io.sphere.sdk.products.commands.ProductUpdateCommand
+ @see io.sphere.sdk.products.commands.ProductDeleteCommand
+ @see io.sphere.sdk.products.queries.ProductQuery
+ @see io.sphere.sdk.products.queries.ProductByIdGet
  @see io.sphere.sdk.products.ProductProjection
  @see io.sphere.sdk.categories.Category
  @see io.sphere.sdk.producttypes.ProductType
  @see io.sphere.sdk.productdiscounts.ProductDiscount
+ @see ProductDiscount#getReferences()
+ @see io.sphere.sdk.productdiscounts.DiscountedPrice
+ @see Review#getTarget()
  */
 @JsonDeserialize(as=ProductImpl.class)
 public interface Product extends ProductLike<Product, Product>, Resource<Product> {

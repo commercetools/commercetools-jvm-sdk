@@ -5,12 +5,22 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.neovisionaries.i18n.CountryCode;
 import io.sphere.sdk.models.Resource;
 import io.sphere.sdk.models.Reference;
+import io.sphere.sdk.shippingmethods.ShippingMethod;
+import io.sphere.sdk.shippingmethods.ZoneRate;
 
 import javax.annotation.Nullable;
 import java.util.Set;
 
 /**
  * Zones define Shipping Rates for a set of Locations.
+ *
+ * @see io.sphere.sdk.zones.commands.ZoneCreateCommand
+ * @see io.sphere.sdk.zones.commands.ZoneUpdateCommand
+ * @see io.sphere.sdk.zones.commands.ZoneDeleteCommand
+ * @see io.sphere.sdk.zones.queries.ZoneQuery
+ * @see io.sphere.sdk.zones.queries.ZoneByIdGet
+ * @see ShippingMethod#getZones()
+ * @see ZoneRate#getZone()
  */
 @JsonDeserialize(as = ZoneImpl.class)
 public interface Zone extends Resource<Zone> {

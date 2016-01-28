@@ -11,7 +11,17 @@ import java.util.List;
 import java.util.Set;
 
 /**
-@see Custom
+ *
+ * Types define custom fields that are used to enhance resources as you need.
+ *
+ *
+    @see Custom
+    @see io.sphere.sdk.types.commands.TypeCreateCommand
+    @see io.sphere.sdk.types.commands.TypeUpdateCommand
+    @see io.sphere.sdk.types.commands.TypeDeleteCommand
+    @see io.sphere.sdk.types.queries.TypeQuery
+    @see io.sphere.sdk.types.queries.TypeByIdGet
+
  */
 @JsonDeserialize(as = TypeImpl.class)
 public interface Type extends Resource<Type> {
