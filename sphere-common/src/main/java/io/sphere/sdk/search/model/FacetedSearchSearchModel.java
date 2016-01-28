@@ -23,7 +23,13 @@ public interface FacetedSearchSearchModel<T> {
     TermFacetedSearchExpression<T> is(final String value);
 
     /**
-     * @see #containsAny(Iterable)
+     * Generates an expression to select all elements with attributes matching any of the given values, along with the facet for all terms for this attribute.
+     * For example: filtering by ["red", "blue"] color would select only those elements with either "red" or "blue" value, while the color facet would contain all possible values.
+     *
+     * <p>Alias for {@link #containsAny(Iterable)}.</p>
+     *
+     * @param values the values to filter by
+     * @return a bundle of the filter expressions for the given values and a facet expression for all terms
      */
     default TermFacetedSearchExpression<T> isIn(final Iterable<String> values) {
         return containsAny(values);
@@ -47,6 +53,8 @@ public interface FacetedSearchSearchModel<T> {
 
     /**
      * @deprecated use {@link #is(String)} instead
+     * @param value deprecated
+     * @return deprecated
      */
     @Deprecated
     default TermFacetedSearchExpression<T> by(final String value) {
@@ -55,6 +63,8 @@ public interface FacetedSearchSearchModel<T> {
 
     /**
      * @deprecated use {@link #containsAny(Iterable)} instead
+     * @param values deprecated
+     * @return deprecated
      */
     @Deprecated
     default TermFacetedSearchExpression<T> byAny(final Iterable<String> values) {
@@ -63,6 +73,8 @@ public interface FacetedSearchSearchModel<T> {
 
     /**
      * @deprecated use {@link #containsAll(Iterable)} instead
+     * @param values deprecated
+     * @return deprecated
      */
     @Deprecated
     default TermFacetedSearchExpression<T> byAll(final Iterable<String> values) {

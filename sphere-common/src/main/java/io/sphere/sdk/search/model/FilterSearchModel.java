@@ -20,7 +20,13 @@ public interface FilterSearchModel<T, V> {
     List<FilterExpression<T>> is(final V value);
 
     /**
-     * @see #containsAny(Iterable)
+     * Generates an expression to select all elements with attributes matching any of the given values.
+     * For example: filtering by ["red", "blue"] would select only those elements with either "red" or "blue" value.
+     *
+     * <p>Alias for {@link #containsAny(Iterable)}.</p>
+     *
+     * @param values the values to filter by
+     * @return a filter expression for the given values
      */
     default List<FilterExpression<T>> isIn(final Iterable<V> values) {
         return containsAny(values);
@@ -60,6 +66,8 @@ public interface FilterSearchModel<T, V> {
 
     /**
      * @deprecated use {@link #is(Object)} instead
+     * @param value deprecated
+     * @return deprecated
      */
     @Deprecated
     default List<FilterExpression<T>> by(final V value) {
@@ -69,6 +77,8 @@ public interface FilterSearchModel<T, V> {
 
     /**
      * @deprecated use {@link #containsAny(Iterable)} instead
+     * @param values deprecated
+     * @return deprecated
      */
     @Deprecated
     default List<FilterExpression<T>> byAny(final Iterable<V> values) {
@@ -77,6 +87,8 @@ public interface FilterSearchModel<T, V> {
 
     /**
      * @deprecated use {@link #containsAll(Iterable)} instead
+     * @param values deprecated
+     * @return deprecated
      */
     @Deprecated
     default List<FilterExpression<T>> byAll(final Iterable<V> values) {
@@ -85,6 +97,8 @@ public interface FilterSearchModel<T, V> {
 
     /**
      * @deprecated use {@link #containsAnyAsString(Iterable)} instead
+     * @param values deprecated
+     * @return deprecated
      */
     @Deprecated
     default List<FilterExpression<T>> byAnyAsString(final Iterable<String> values) {
@@ -93,6 +107,8 @@ public interface FilterSearchModel<T, V> {
 
     /**
      * @deprecated use {@link #containsAllAsString(Iterable)} instead
+     * @param values deprecated
+     * @return deprecated
      */
     @Deprecated
     default List<FilterExpression<T>> byAllAsString(final Iterable<String> values) {

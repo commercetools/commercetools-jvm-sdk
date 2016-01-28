@@ -50,6 +50,7 @@ public class MultiValueSortSearchModel<T> extends SortSearchModelImpl<T> {
 
     /**
      * @deprecated use {@link #ascWithMaxValue()} instead
+     * @return deprecated
      */
     @Deprecated
     public SortExpression<T> byAscWithMax() {
@@ -58,6 +59,7 @@ public class MultiValueSortSearchModel<T> extends SortSearchModelImpl<T> {
 
     /**
      * @deprecated use {@link #descWithMinValue()} instead
+     * @return deprecated
      */
     @Deprecated
     public SortExpression<T> byDescWithMin() {

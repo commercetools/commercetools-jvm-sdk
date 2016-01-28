@@ -64,6 +64,8 @@ abstract class RangeTermFacetedSearchBaseSearchModel<T> extends TermFacetedSearc
 
     /**
      * @deprecated use {@link #isBetween(FilterRange)} instead
+     * @param range deprecated
+     * @return deprecated
      */
     @Deprecated
     public RangeFacetedSearchExpression<T> byRange(final FilterRange<String> range) {
@@ -72,6 +74,8 @@ abstract class RangeTermFacetedSearchBaseSearchModel<T> extends TermFacetedSearc
 
     /**
      * @deprecated use {@link #isBetweenAny(Iterable)} instead
+     * @param ranges deprecated
+     * @return deprecated
      */
     @Deprecated
     public RangeFacetedSearchExpression<T> byAnyRange(final Iterable<FilterRange<String>> ranges) {
@@ -80,6 +84,8 @@ abstract class RangeTermFacetedSearchBaseSearchModel<T> extends TermFacetedSearc
 
     /**
      * @deprecated use {@link #isBetweenAll(Iterable)}  instead
+     * @param ranges deprecated
+     * @return deprecated
      */
     @Deprecated
     public RangeFacetedSearchExpression<T> byAllRanges(final Iterable<FilterRange<String>> ranges) {

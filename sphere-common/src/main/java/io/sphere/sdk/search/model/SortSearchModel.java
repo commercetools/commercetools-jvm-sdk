@@ -22,6 +22,7 @@ public interface SortSearchModel<T> {
 
     /**
      * @deprecated use {@link #asc()} instead
+     * @return deprecated
      */
     @Deprecated
     default SortExpression<T> byAsc() {
@@ -30,6 +31,7 @@ public interface SortSearchModel<T> {
 
     /**
      * @deprecated use {@link #desc()} instead
+     * @return deprecated
      */
     @Deprecated
     default SortExpression<T> byDesc() {

@@ -33,37 +33,22 @@ public class PagedSearchResult<T> extends PagedResult<T> {
         return facets.get(facetResultPath);
     }
 
-    /**
-     * @see #getFacetResult(String)
-     */
     public TermFacetResult getFacetResult(final TermFacetExpression<T> facetExpression) {
         return getTermFacetResult(facetExpression.resultPath());
     }
 
-    /**
-     * @see #getFacetResult(String)
-     */
     public RangeFacetResult getFacetResult(final RangeFacetExpression<T> facetExpression) {
         return getRangeFacetResult(facetExpression.resultPath());
     }
 
-    /**
-     * @see #getFacetResult(String)
-     */
     public FilteredFacetResult getFacetResult(final FilteredFacetExpression<T> facetExpression) {
         return getFilteredFacetResult(facetExpression.resultPath());
     }
 
-    /**
-     * @see #getFacetResult(String)
-     */
     public TermFacetResult getFacetResult(final TermFacetedSearchExpression<T> facetedSearchExpression) {
         return getFacetResult(facetedSearchExpression.facetExpression());
     }
 
-    /**
-     * @see #getFacetResult(String)
-     */
     public RangeFacetResult getFacetResult(final RangeFacetedSearchExpression<T> facetedSearchExpression) {
         return getFacetResult(facetedSearchExpression.facetExpression());
     }
@@ -88,9 +73,6 @@ public class PagedSearchResult<T> extends PagedResult<T> {
         }
     }
 
-    /**
-     * @see #getRangeStatsOfAllRanges(RangeFacetedSearchExpression)
-     */
     public SimpleRangeStats getRangeStatsOfAllRanges(final RangeFacetedSearchExpression<T> facetedSearchExpression) {
         return getRangeStatsOfAllRanges(facetedSearchExpression.facetExpression());
     }
@@ -127,6 +109,8 @@ public class PagedSearchResult<T> extends PagedResult<T> {
 
     /**
      * @deprecated use {@link #getFacetResult(TermFacetExpression)} instead
+     * @param facetExpression deprecated
+     * @return deprecated
      */
     @Deprecated
     public TermFacetResult getTermFacetResult(final TermFacetExpression<T> facetExpression) {
@@ -135,6 +119,8 @@ public class PagedSearchResult<T> extends PagedResult<T> {
 
     /**
      * @deprecated use {@link #getFacetResult(RangeFacetExpression)} instead
+     * @param facetExpression deprecated
+     * @return deprecated
      */
     @Deprecated
     public RangeFacetResult getRangeFacetResult(final RangeFacetExpression<T> facetExpression) {
@@ -143,6 +129,8 @@ public class PagedSearchResult<T> extends PagedResult<T> {
 
     /**
      * @deprecated use {@link #getFacetResult(FilteredFacetExpression)} instead
+     * @param facetExpression deprecated
+     * @return deprecated
      */
     @Deprecated
     public FilteredFacetResult getFilteredFacetResult(final FilteredFacetExpression<T> facetExpression) {

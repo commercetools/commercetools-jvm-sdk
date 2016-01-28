@@ -118,6 +118,8 @@ abstract class RangeTermFilterBaseSearchModel<T, V extends Comparable<? super V>
 
     /**
      * @deprecated use {@link #isBetween(FilterRange)} instead
+     * @param range deprecated
+     * @return deprecated
      */
     @Deprecated
     public List<FilterExpression<T>> byRange(final FilterRange<V> range) {
@@ -126,6 +128,9 @@ abstract class RangeTermFilterBaseSearchModel<T, V extends Comparable<? super V>
 
     /**
      * @deprecated use {@link #isBetween(Comparable, Comparable)} instead
+     * @param lowerEndpoint deprecated
+     * @param upperEndpoint deprecated
+     * @return deprecated
      */
     @Deprecated
     public List<FilterExpression<T>> byRange(final V lowerEndpoint, final V upperEndpoint) {
@@ -134,6 +139,8 @@ abstract class RangeTermFilterBaseSearchModel<T, V extends Comparable<? super V>
 
     /**
      * @deprecated use {@link #isBetweenAny(Iterable)} instead
+     * @param ranges deprecated
+     * @return deprecated
      */
     @Deprecated
     public List<FilterExpression<T>> byAnyRange(final Iterable<FilterRange<V>> ranges) {
@@ -142,6 +149,8 @@ abstract class RangeTermFilterBaseSearchModel<T, V extends Comparable<? super V>
 
     /**
      * @deprecated use {@link #isBetweenAll(Iterable)} instead
+     * @param ranges deprecated
+     * @return deprecated
      */
     @Deprecated
     public List<FilterExpression<T>> byAllRanges(final Iterable<FilterRange<V>> ranges) {
@@ -150,6 +159,8 @@ abstract class RangeTermFilterBaseSearchModel<T, V extends Comparable<? super V>
 
     /**
      * @deprecated use {@link #isGreaterThanOrEqualTo(Comparable)} instead
+     * @param value deprecated
+     * @return deprecated
      */
     @Deprecated
     public List<FilterExpression<T>> byGreaterThanOrEqualTo(final V value) {
@@ -158,6 +169,8 @@ abstract class RangeTermFilterBaseSearchModel<T, V extends Comparable<? super V>
 
     /**
      * @deprecated use {@link #isLessThanOrEqualTo(Comparable)} instead
+     * @param value deprecated
+     * @return deprecated
      */
     @Deprecated
     public List<FilterExpression<T>> byLessThanOrEqualTo(final V value) {
@@ -166,6 +179,8 @@ abstract class RangeTermFilterBaseSearchModel<T, V extends Comparable<? super V>
 
     /**
      * @deprecated use {@link #isBetweenAsString(FilterRange)} instead
+     * @param range deprecated
+     * @return deprecated
      */
     @Deprecated
     public List<FilterExpression<T>> byRangeAsString(final FilterRange<String> range) {
@@ -174,6 +189,8 @@ abstract class RangeTermFilterBaseSearchModel<T, V extends Comparable<? super V>
 
     /**
      * @deprecated use {@link #isBetweenAnyAsString(Iterable)} instead
+     * @param ranges deprecated
+     * @return deprecated
      */
     @Deprecated
     public List<FilterExpression<T>> byAnyRangeAsString(final Iterable<FilterRange<String>> ranges) {
@@ -182,6 +199,8 @@ abstract class RangeTermFilterBaseSearchModel<T, V extends Comparable<? super V>
 
     /**
      * @deprecated use {@link #isBetweenAllAsString(Iterable)} instead
+     * @param ranges deprecated
+     * @return deprecated
      */
     @Deprecated
     public List<FilterExpression<T>> byAllRangesAsString(final Iterable<FilterRange<String>> ranges) {
