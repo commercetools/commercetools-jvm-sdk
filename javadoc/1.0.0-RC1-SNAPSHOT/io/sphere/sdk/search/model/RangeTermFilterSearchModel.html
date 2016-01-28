@@ -328,7 +328,9 @@ extends <a href="../../../../../io/sphere/sdk/models/Base.html" title="class in 
 </tr>
 <tr id="i23" class="rowColor">
 <td class="colFirst"><code>java.util.List&lt;<a href="../../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../../io/sphere/sdk/search/model/RangeTermFilterSearchModel.html" title="type parameter in RangeTermFilterSearchModel">T</a>&gt;&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/search/model/RangeTermFilterSearchModel.html#isIn-java.lang.Iterable-">isIn</a></span>(java.lang.Iterable&lt;<a href="../../../../../io/sphere/sdk/search/model/RangeTermFilterSearchModel.html" title="type parameter in RangeTermFilterSearchModel">V</a>&gt;&nbsp;values)</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/search/model/RangeTermFilterSearchModel.html#isIn-java.lang.Iterable-">isIn</a></span>(java.lang.Iterable&lt;<a href="../../../../../io/sphere/sdk/search/model/RangeTermFilterSearchModel.html" title="type parameter in RangeTermFilterSearchModel">V</a>&gt;&nbsp;values)</code>
+<div class="block">Generates an expression to select all elements with attributes matching any of the given values.</div>
+</td>
 </tr>
 <tr id="i24" class="altColor">
 <td class="colFirst"><code>java.util.List&lt;<a href="../../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../../io/sphere/sdk/search/model/RangeTermFilterSearchModel.html" title="type parameter in RangeTermFilterSearchModel">T</a>&gt;&gt;</code></td>
@@ -433,9 +435,15 @@ extends <a href="../../../../../io/sphere/sdk/models/Base.html" title="class in 
 <li class="blockList">
 <h4>isIn</h4>
 <pre>public&nbsp;java.util.List&lt;<a href="../../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../../io/sphere/sdk/search/model/RangeTermFilterSearchModel.html" title="type parameter in RangeTermFilterSearchModel">T</a>&gt;&gt;&nbsp;isIn(java.lang.Iterable&lt;<a href="../../../../../io/sphere/sdk/search/model/RangeTermFilterSearchModel.html" title="type parameter in RangeTermFilterSearchModel">V</a>&gt;&nbsp;values)</pre>
+<div class="block">Generates an expression to select all elements with attributes matching any of the given values.
+ For example: filtering by ["red", "blue"] would select only those elements with either "red" or "blue" value.
+
+ <p>Alias for <a href="../../../../../io/sphere/sdk/search/model/FilterSearchModel.html#containsAny-java.lang.Iterable-"><code>FilterSearchModel.containsAny(Iterable)</code></a>.</p></div>
 <dl>
-<dt><span class="seeLabel">See Also:</span></dt>
-<dd><a href="../../../../../io/sphere/sdk/search/model/FilterSearchModel.html#containsAny-java.lang.Iterable-"><code>FilterSearchModel.containsAny(Iterable)</code></a></dd>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>values</code> - the values to filter by</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>a filter expression for the given values</dd>
 </dl>
 </li>
 </ul>
@@ -668,6 +676,12 @@ extends <a href="../../../../../io/sphere/sdk/models/Base.html" title="class in 
 <pre>@Deprecated
 public&nbsp;java.util.List&lt;<a href="../../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;T&gt;&gt;&nbsp;byRange(<a href="../../../../../io/sphere/sdk/search/model/FilterRange.html" title="class in io.sphere.sdk.search.model">FilterRange</a>&lt;V&gt;&nbsp;range)</pre>
 <div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;<span class="deprecationComment">use <a href="../../../../../io/sphere/sdk/search/model/RangeTermFilterSearchModel.html#isBetween-io.sphere.sdk.search.model.FilterRange-"><code>isBetween(FilterRange)</code></a> instead</span></div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>range</code> - deprecated</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>deprecated</dd>
+</dl>
 </li>
 </ul>
 <a name="byRange-java.lang.Comparable-java.lang.Comparable-">
@@ -682,6 +696,13 @@ public&nbsp;java.util.List&lt;<a href="../../../../../io/sphere/sdk/search/Filte
 public&nbsp;java.util.List&lt;<a href="../../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;T&gt;&gt;&nbsp;byRange(V&nbsp;lowerEndpoint,
                                                                V&nbsp;upperEndpoint)</pre>
 <div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;<span class="deprecationComment">use <a href="../../../../../io/sphere/sdk/search/model/RangeTermFilterSearchModel.html#isBetween-V-V-"><code>isBetween(Comparable, Comparable)</code></a> instead</span></div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>lowerEndpoint</code> - deprecated</dd>
+<dd><code>upperEndpoint</code> - deprecated</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>deprecated</dd>
+</dl>
 </li>
 </ul>
 <a name="byAnyRange-java.lang.Iterable-">
@@ -693,6 +714,12 @@ public&nbsp;java.util.List&lt;<a href="../../../../../io/sphere/sdk/search/Filte
 <pre>@Deprecated
 public&nbsp;java.util.List&lt;<a href="../../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;T&gt;&gt;&nbsp;byAnyRange(java.lang.Iterable&lt;<a href="../../../../../io/sphere/sdk/search/model/FilterRange.html" title="class in io.sphere.sdk.search.model">FilterRange</a>&lt;V&gt;&gt;&nbsp;ranges)</pre>
 <div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;<span class="deprecationComment">use <a href="../../../../../io/sphere/sdk/search/model/RangeTermFilterSearchModel.html#isBetweenAny-java.lang.Iterable-"><code>isBetweenAny(Iterable)</code></a> instead</span></div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>ranges</code> - deprecated</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>deprecated</dd>
+</dl>
 </li>
 </ul>
 <a name="byAllRanges-java.lang.Iterable-">
@@ -704,6 +731,12 @@ public&nbsp;java.util.List&lt;<a href="../../../../../io/sphere/sdk/search/Filte
 <pre>@Deprecated
 public&nbsp;java.util.List&lt;<a href="../../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;T&gt;&gt;&nbsp;byAllRanges(java.lang.Iterable&lt;<a href="../../../../../io/sphere/sdk/search/model/FilterRange.html" title="class in io.sphere.sdk.search.model">FilterRange</a>&lt;V&gt;&gt;&nbsp;ranges)</pre>
 <div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;<span class="deprecationComment">use <a href="../../../../../io/sphere/sdk/search/model/RangeTermFilterSearchModel.html#isBetweenAll-java.lang.Iterable-"><code>isBetweenAll(Iterable)</code></a> instead</span></div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>ranges</code> - deprecated</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>deprecated</dd>
+</dl>
 </li>
 </ul>
 <a name="byGreaterThanOrEqualTo-java.lang.Comparable-">
@@ -717,6 +750,12 @@ public&nbsp;java.util.List&lt;<a href="../../../../../io/sphere/sdk/search/Filte
 <pre>@Deprecated
 public&nbsp;java.util.List&lt;<a href="../../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;T&gt;&gt;&nbsp;byGreaterThanOrEqualTo(V&nbsp;value)</pre>
 <div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;<span class="deprecationComment">use <a href="../../../../../io/sphere/sdk/search/model/RangeTermFilterSearchModel.html#isGreaterThanOrEqualTo-V-"><code>isGreaterThanOrEqualTo(Comparable)</code></a> instead</span></div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>value</code> - deprecated</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>deprecated</dd>
+</dl>
 </li>
 </ul>
 <a name="byLessThanOrEqualTo-java.lang.Comparable-">
@@ -730,6 +769,12 @@ public&nbsp;java.util.List&lt;<a href="../../../../../io/sphere/sdk/search/Filte
 <pre>@Deprecated
 public&nbsp;java.util.List&lt;<a href="../../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;T&gt;&gt;&nbsp;byLessThanOrEqualTo(V&nbsp;value)</pre>
 <div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;<span class="deprecationComment">use <a href="../../../../../io/sphere/sdk/search/model/RangeTermFilterSearchModel.html#isLessThanOrEqualTo-V-"><code>isLessThanOrEqualTo(Comparable)</code></a> instead</span></div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>value</code> - deprecated</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>deprecated</dd>
+</dl>
 </li>
 </ul>
 <a name="byRangeAsString-io.sphere.sdk.search.model.FilterRange-">
@@ -741,6 +786,12 @@ public&nbsp;java.util.List&lt;<a href="../../../../../io/sphere/sdk/search/Filte
 <pre>@Deprecated
 public&nbsp;java.util.List&lt;<a href="../../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;T&gt;&gt;&nbsp;byRangeAsString(<a href="../../../../../io/sphere/sdk/search/model/FilterRange.html" title="class in io.sphere.sdk.search.model">FilterRange</a>&lt;java.lang.String&gt;&nbsp;range)</pre>
 <div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;<span class="deprecationComment">use <a href="../../../../../io/sphere/sdk/search/model/RangeTermFilterSearchModel.html#isBetweenAsString-io.sphere.sdk.search.model.FilterRange-"><code>isBetweenAsString(FilterRange)</code></a> instead</span></div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>range</code> - deprecated</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>deprecated</dd>
+</dl>
 </li>
 </ul>
 <a name="byAnyRangeAsString-java.lang.Iterable-">
@@ -752,6 +803,12 @@ public&nbsp;java.util.List&lt;<a href="../../../../../io/sphere/sdk/search/Filte
 <pre>@Deprecated
 public&nbsp;java.util.List&lt;<a href="../../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;T&gt;&gt;&nbsp;byAnyRangeAsString(java.lang.Iterable&lt;<a href="../../../../../io/sphere/sdk/search/model/FilterRange.html" title="class in io.sphere.sdk.search.model">FilterRange</a>&lt;java.lang.String&gt;&gt;&nbsp;ranges)</pre>
 <div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;<span class="deprecationComment">use <a href="../../../../../io/sphere/sdk/search/model/RangeTermFilterSearchModel.html#isBetweenAnyAsString-java.lang.Iterable-"><code>isBetweenAnyAsString(Iterable)</code></a> instead</span></div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>ranges</code> - deprecated</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>deprecated</dd>
+</dl>
 </li>
 </ul>
 <a name="byAllRangesAsString-java.lang.Iterable-">
@@ -763,6 +820,12 @@ public&nbsp;java.util.List&lt;<a href="../../../../../io/sphere/sdk/search/Filte
 <pre>@Deprecated
 public&nbsp;java.util.List&lt;<a href="../../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;T&gt;&gt;&nbsp;byAllRangesAsString(java.lang.Iterable&lt;<a href="../../../../../io/sphere/sdk/search/model/FilterRange.html" title="class in io.sphere.sdk.search.model">FilterRange</a>&lt;java.lang.String&gt;&gt;&nbsp;ranges)</pre>
 <div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;<span class="deprecationComment">use <a href="../../../../../io/sphere/sdk/search/model/RangeTermFilterSearchModel.html#isBetweenAllAsString-java.lang.Iterable-"><code>isBetweenAllAsString(Iterable)</code></a> instead</span></div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>ranges</code> - deprecated</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>deprecated</dd>
+</dl>
 </li>
 </ul>
 <a name="containsAnyAsString-java.lang.Iterable-">

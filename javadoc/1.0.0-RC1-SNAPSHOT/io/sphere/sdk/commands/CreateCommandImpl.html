@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":10,"i1":10,"i2":10,"i3":10};
+var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -92,7 +92,7 @@ var activeTableTab = "activeTableTab";
 <!-- ======== START OF CLASS DATA ======== -->
 <div class="header">
 <div class="subTitle">io.sphere.sdk.commands</div>
-<h2 title="Class CreateCommandImpl" class="title">Class CreateCommandImpl&lt;T,C&gt;</h2>
+<h2 title="Class CreateCommandImpl" class="title">Class CreateCommandImpl&lt;T,D&gt;</h2>
 </div>
 <div class="contentContainer">
 <ul class="inheritance">
@@ -105,7 +105,7 @@ var activeTableTab = "activeTableTab";
 <li><a href="../../../../io/sphere/sdk/commands/CommandImpl.html" title="class in io.sphere.sdk.commands">io.sphere.sdk.commands.CommandImpl</a>&lt;T&gt;</li>
 <li>
 <ul class="inheritance">
-<li>io.sphere.sdk.commands.CreateCommandImpl&lt;T,C&gt;</li>
+<li>io.sphere.sdk.commands.CreateCommandImpl&lt;T,D&gt;</li>
 </ul>
 </li>
 </ul>
@@ -119,17 +119,17 @@ var activeTableTab = "activeTableTab";
 <dl>
 <dt><span class="paramLabel">Type Parameters:</span></dt>
 <dd><code>T</code> - the type of the result of the command, most likely the updated resource without expanded references</dd>
-<dd><code>C</code> - class which will serialized as JSON command body, most likely a template</dd>
+<dd><code>D</code> - class which will serialized as JSON command body, most likely a template</dd>
 </dl>
 <dl>
 <dt>All Implemented Interfaces:</dt>
-<dd><a href="../../../../io/sphere/sdk/client/SphereRequest.html" title="interface in io.sphere.sdk.client">SphereRequest</a>&lt;T&gt;, <a href="../../../../io/sphere/sdk/commands/Command.html" title="interface in io.sphere.sdk.commands">Command</a>&lt;T&gt;, <a href="../../../../io/sphere/sdk/commands/CreateCommand.html" title="interface in io.sphere.sdk.commands">CreateCommand</a>&lt;T&gt;</dd>
+<dd><a href="../../../../io/sphere/sdk/client/SphereRequest.html" title="interface in io.sphere.sdk.client">SphereRequest</a>&lt;T&gt;, <a href="../../../../io/sphere/sdk/commands/Command.html" title="interface in io.sphere.sdk.commands">Command</a>&lt;T&gt;, <a href="../../../../io/sphere/sdk/commands/CreateCommand.html" title="interface in io.sphere.sdk.commands">CreateCommand</a>&lt;T&gt;, <a href="../../../../io/sphere/sdk/commands/DraftBasedCreateCommand.html" title="interface in io.sphere.sdk.commands">DraftBasedCreateCommand</a>&lt;T,D&gt;</dd>
 </dl>
 <hr>
 <br>
-<pre>public abstract class <span class="typeNameLabel">CreateCommandImpl&lt;T,C&gt;</span>
+<pre>public abstract class <span class="typeNameLabel">CreateCommandImpl&lt;T,D&gt;</span>
 extends <a href="../../../../io/sphere/sdk/commands/CommandImpl.html" title="class in io.sphere.sdk.commands">CommandImpl</a>&lt;T&gt;
-implements <a href="../../../../io/sphere/sdk/commands/CreateCommand.html" title="interface in io.sphere.sdk.commands">CreateCommand</a>&lt;T&gt;</pre>
+implements <a href="../../../../io/sphere/sdk/commands/DraftBasedCreateCommand.html" title="interface in io.sphere.sdk.commands">DraftBasedCreateCommand</a>&lt;T,D&gt;</pre>
 <div class="block">Base class to implement commands which create an resource in SPHERE.IO.</div>
 </li>
 </ul>
@@ -149,7 +149,7 @@ implements <a href="../../../../io/sphere/sdk/commands/CreateCommand.html" title
 <th class="colOne" scope="col">Constructor and Description</th>
 </tr>
 <tr class="altColor">
-<td class="colOne"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/commands/CreateCommandImpl.html#CreateCommandImpl-C-java.lang.String-com.fasterxml.jackson.databind.JavaType-">CreateCommandImpl</a></span>(<a href="../../../../io/sphere/sdk/commands/CreateCommandImpl.html" title="type parameter in CreateCommandImpl">C</a>&nbsp;draft,
+<td class="colOne"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/commands/CreateCommandImpl.html#CreateCommandImpl-D-java.lang.String-com.fasterxml.jackson.databind.JavaType-">CreateCommandImpl</a></span>(<a href="../../../../io/sphere/sdk/commands/CreateCommandImpl.html" title="type parameter in CreateCommandImpl">D</a>&nbsp;draft,
                  java.lang.String&nbsp;path,
                  com.fasterxml.jackson.databind.JavaType&nbsp;javaType)</code>&nbsp;</td>
 </tr>
@@ -169,20 +169,24 @@ implements <a href="../../../../io/sphere/sdk/commands/CreateCommand.html" title
 <th class="colLast" scope="col">Method and Description</th>
 </tr>
 <tr id="i0" class="altColor">
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/commands/CreateCommandImpl.html" title="type parameter in CreateCommandImpl">D</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/commands/CreateCommandImpl.html#getDraft--">getDraft</a></span>()</code>&nbsp;</td>
+</tr>
+<tr id="i1" class="rowColor">
 <td class="colFirst"><code>protected java.lang.String</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/commands/CreateCommandImpl.html#httpBody--">httpBody</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i1" class="rowColor">
+<tr id="i2" class="altColor">
 <td class="colFirst"><code>protected <a href="../../../../io/sphere/sdk/http/HttpMethod.html" title="enum in io.sphere.sdk.http">HttpMethod</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/commands/CreateCommandImpl.html#httpMethod--">httpMethod</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i2" class="altColor">
+<tr id="i3" class="rowColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/client/HttpRequestIntent.html" title="class in io.sphere.sdk.client">HttpRequestIntent</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/commands/CreateCommandImpl.html#httpRequestIntent--">httpRequestIntent</a></span>()</code>
 <div class="block">Provides an http request intent, this does not include the execution of it.</div>
 </td>
 </tr>
-<tr id="i3" class="rowColor">
+<tr id="i4" class="altColor">
 <td class="colFirst"><code>protected com.fasterxml.jackson.databind.JavaType</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/commands/CreateCommandImpl.html#jacksonJavaType--">jacksonJavaType</a></span>()</code>&nbsp;</td>
 </tr>
@@ -231,13 +235,13 @@ implements <a href="../../../../io/sphere/sdk/commands/CreateCommand.html" title
 <h3>Constructor Detail</h3>
 <a name="CreateCommandImpl-java.lang.Object-java.lang.String-com.fasterxml.jackson.databind.JavaType-">
 <!--   -->
-</a><a name="CreateCommandImpl-C-java.lang.String-com.fasterxml.jackson.databind.JavaType-">
+</a><a name="CreateCommandImpl-D-java.lang.String-com.fasterxml.jackson.databind.JavaType-">
 <!--   -->
 </a>
 <ul class="blockListLast">
 <li class="blockList">
 <h4>CreateCommandImpl</h4>
-<pre>public&nbsp;CreateCommandImpl(<a href="../../../../io/sphere/sdk/commands/CreateCommandImpl.html" title="type parameter in CreateCommandImpl">C</a>&nbsp;draft,
+<pre>public&nbsp;CreateCommandImpl(<a href="../../../../io/sphere/sdk/commands/CreateCommandImpl.html" title="type parameter in CreateCommandImpl">D</a>&nbsp;draft,
                          java.lang.String&nbsp;path,
                          com.fasterxml.jackson.databind.JavaType&nbsp;javaType)</pre>
 </li>
@@ -288,13 +292,26 @@ implements <a href="../../../../io/sphere/sdk/commands/CreateCommand.html" title
 <a name="jacksonJavaType--">
 <!--   -->
 </a>
-<ul class="blockListLast">
+<ul class="blockList">
 <li class="blockList">
 <h4>jacksonJavaType</h4>
 <pre>protected&nbsp;com.fasterxml.jackson.databind.JavaType&nbsp;jacksonJavaType()</pre>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="../../../../io/sphere/sdk/commands/CommandImpl.html#jacksonJavaType--">jacksonJavaType</a></code>&nbsp;in class&nbsp;<code><a href="../../../../io/sphere/sdk/commands/CommandImpl.html" title="class in io.sphere.sdk.commands">CommandImpl</a>&lt;<a href="../../../../io/sphere/sdk/commands/CreateCommandImpl.html" title="type parameter in CreateCommandImpl">T</a>&gt;</code></dd>
+</dl>
+</li>
+</ul>
+<a name="getDraft--">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>getDraft</h4>
+<pre>public&nbsp;<a href="../../../../io/sphere/sdk/commands/CreateCommandImpl.html" title="type parameter in CreateCommandImpl">D</a>&nbsp;getDraft()</pre>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../io/sphere/sdk/commands/DraftBasedCreateCommand.html#getDraft--">getDraft</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/commands/DraftBasedCreateCommand.html" title="interface in io.sphere.sdk.commands">DraftBasedCreateCommand</a>&lt;<a href="../../../../io/sphere/sdk/commands/CreateCommandImpl.html" title="type parameter in CreateCommandImpl">T</a>,<a href="../../../../io/sphere/sdk/commands/CreateCommandImpl.html" title="type parameter in CreateCommandImpl">D</a>&gt;</code></dd>
 </dl>
 </li>
 </ul>

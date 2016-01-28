@@ -178,7 +178,9 @@ var activeTableTab = "activeTableTab";
 </tr>
 <tr id="i7" class="rowColor">
 <td class="colFirst"><code>default <a href="../../../../../io/sphere/sdk/search/TermFacetedSearchExpression.html" title="interface in io.sphere.sdk.search">TermFacetedSearchExpression</a>&lt;<a href="../../../../../io/sphere/sdk/search/model/FacetedSearchSearchModel.html" title="type parameter in FacetedSearchSearchModel">T</a>&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/search/model/FacetedSearchSearchModel.html#isIn-java.lang.Iterable-">isIn</a></span>(java.lang.Iterable&lt;java.lang.String&gt;&nbsp;values)</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/search/model/FacetedSearchSearchModel.html#isIn-java.lang.Iterable-">isIn</a></span>(java.lang.Iterable&lt;java.lang.String&gt;&nbsp;values)</code>
+<div class="block">Generates an expression to select all elements with attributes matching any of the given values, along with the facet for all terms for this attribute.</div>
+</td>
 </tr>
 </table>
 </li>
@@ -233,9 +235,15 @@ var activeTableTab = "activeTableTab";
 <li class="blockList">
 <h4>isIn</h4>
 <pre>default&nbsp;<a href="../../../../../io/sphere/sdk/search/TermFacetedSearchExpression.html" title="interface in io.sphere.sdk.search">TermFacetedSearchExpression</a>&lt;<a href="../../../../../io/sphere/sdk/search/model/FacetedSearchSearchModel.html" title="type parameter in FacetedSearchSearchModel">T</a>&gt;&nbsp;isIn(java.lang.Iterable&lt;java.lang.String&gt;&nbsp;values)</pre>
+<div class="block">Generates an expression to select all elements with attributes matching any of the given values, along with the facet for all terms for this attribute.
+ For example: filtering by ["red", "blue"] color would select only those elements with either "red" or "blue" value, while the color facet would contain all possible values.
+
+ <p>Alias for <a href="../../../../../io/sphere/sdk/search/model/FacetedSearchSearchModel.html#containsAny-java.lang.Iterable-"><code>containsAny(Iterable)</code></a>.</p></div>
 <dl>
-<dt><span class="seeLabel">See Also:</span></dt>
-<dd><a href="../../../../../io/sphere/sdk/search/model/FacetedSearchSearchModel.html#containsAny-java.lang.Iterable-"><code>containsAny(Iterable)</code></a></dd>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>values</code> - the values to filter by</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>a bundle of the filter expressions for the given values and a facet expression for all terms</dd>
 </dl>
 </li>
 </ul>
@@ -282,6 +290,12 @@ var activeTableTab = "activeTableTab";
 <pre>@Deprecated
 default&nbsp;<a href="../../../../../io/sphere/sdk/search/TermFacetedSearchExpression.html" title="interface in io.sphere.sdk.search">TermFacetedSearchExpression</a>&lt;<a href="../../../../../io/sphere/sdk/search/model/FacetedSearchSearchModel.html" title="type parameter in FacetedSearchSearchModel">T</a>&gt;&nbsp;by(java.lang.String&nbsp;value)</pre>
 <div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;<span class="deprecationComment">use <a href="../../../../../io/sphere/sdk/search/model/FacetedSearchSearchModel.html#is-java.lang.String-"><code>is(String)</code></a> instead</span></div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>value</code> - deprecated</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>deprecated</dd>
+</dl>
 </li>
 </ul>
 <a name="byAny-java.lang.Iterable-">
@@ -293,6 +307,12 @@ default&nbsp;<a href="../../../../../io/sphere/sdk/search/TermFacetedSearchExpre
 <pre>@Deprecated
 default&nbsp;<a href="../../../../../io/sphere/sdk/search/TermFacetedSearchExpression.html" title="interface in io.sphere.sdk.search">TermFacetedSearchExpression</a>&lt;<a href="../../../../../io/sphere/sdk/search/model/FacetedSearchSearchModel.html" title="type parameter in FacetedSearchSearchModel">T</a>&gt;&nbsp;byAny(java.lang.Iterable&lt;java.lang.String&gt;&nbsp;values)</pre>
 <div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;<span class="deprecationComment">use <a href="../../../../../io/sphere/sdk/search/model/FacetedSearchSearchModel.html#containsAny-java.lang.Iterable-"><code>containsAny(Iterable)</code></a> instead</span></div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>values</code> - deprecated</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>deprecated</dd>
+</dl>
 </li>
 </ul>
 <a name="byAll-java.lang.Iterable-">
@@ -304,6 +324,12 @@ default&nbsp;<a href="../../../../../io/sphere/sdk/search/TermFacetedSearchExpre
 <pre>@Deprecated
 default&nbsp;<a href="../../../../../io/sphere/sdk/search/TermFacetedSearchExpression.html" title="interface in io.sphere.sdk.search">TermFacetedSearchExpression</a>&lt;<a href="../../../../../io/sphere/sdk/search/model/FacetedSearchSearchModel.html" title="type parameter in FacetedSearchSearchModel">T</a>&gt;&nbsp;byAll(java.lang.Iterable&lt;java.lang.String&gt;&nbsp;values)</pre>
 <div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;<span class="deprecationComment">use <a href="../../../../../io/sphere/sdk/search/model/FacetedSearchSearchModel.html#containsAll-java.lang.Iterable-"><code>containsAll(Iterable)</code></a> instead</span></div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>values</code> - deprecated</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>deprecated</dd>
+</dl>
 </li>
 </ul>
 </li>

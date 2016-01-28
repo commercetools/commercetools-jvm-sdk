@@ -104,12 +104,12 @@ var activeTableTab = "activeTableTab";
 </dl>
 <dl>
 <dt>All Superinterfaces:</dt>
-<dd><a href="../../../../../io/sphere/sdk/commands/Command.html" title="interface in io.sphere.sdk.commands">Command</a>&lt;<a href="../../../../../io/sphere/sdk/customobjects/CustomObject.html" title="interface in io.sphere.sdk.customobjects">CustomObject</a>&lt;T&gt;&gt;, <a href="../../../../../io/sphere/sdk/commands/CreateCommand.html" title="interface in io.sphere.sdk.commands">CreateCommand</a>&lt;<a href="../../../../../io/sphere/sdk/customobjects/CustomObject.html" title="interface in io.sphere.sdk.customobjects">CustomObject</a>&lt;T&gt;&gt;, <a href="../../../../../io/sphere/sdk/client/SphereRequest.html" title="interface in io.sphere.sdk.client">SphereRequest</a>&lt;<a href="../../../../../io/sphere/sdk/customobjects/CustomObject.html" title="interface in io.sphere.sdk.customobjects">CustomObject</a>&lt;T&gt;&gt;</dd>
+<dd><a href="../../../../../io/sphere/sdk/commands/Command.html" title="interface in io.sphere.sdk.commands">Command</a>&lt;<a href="../../../../../io/sphere/sdk/customobjects/CustomObject.html" title="interface in io.sphere.sdk.customobjects">CustomObject</a>&lt;T&gt;&gt;, <a href="../../../../../io/sphere/sdk/commands/CreateCommand.html" title="interface in io.sphere.sdk.commands">CreateCommand</a>&lt;<a href="../../../../../io/sphere/sdk/customobjects/CustomObject.html" title="interface in io.sphere.sdk.customobjects">CustomObject</a>&lt;T&gt;&gt;, <a href="../../../../../io/sphere/sdk/commands/DraftBasedCreateCommand.html" title="interface in io.sphere.sdk.commands">DraftBasedCreateCommand</a>&lt;<a href="../../../../../io/sphere/sdk/customobjects/CustomObject.html" title="interface in io.sphere.sdk.customobjects">CustomObject</a>&lt;T&gt;,<a href="../../../../../io/sphere/sdk/customobjects/CustomObjectDraft.html" title="class in io.sphere.sdk.customobjects">CustomObjectDraft</a>&lt;T&gt;&gt;, <a href="../../../../../io/sphere/sdk/client/SphereRequest.html" title="interface in io.sphere.sdk.client">SphereRequest</a>&lt;<a href="../../../../../io/sphere/sdk/customobjects/CustomObject.html" title="interface in io.sphere.sdk.customobjects">CustomObject</a>&lt;T&gt;&gt;</dd>
 </dl>
 <hr>
 <br>
 <pre>public interface <span class="typeNameLabel">CustomObjectUpsertCommand&lt;T&gt;</span>
-extends <a href="../../../../../io/sphere/sdk/commands/CreateCommand.html" title="interface in io.sphere.sdk.commands">CreateCommand</a>&lt;<a href="../../../../../io/sphere/sdk/customobjects/CustomObject.html" title="interface in io.sphere.sdk.customobjects">CustomObject</a>&lt;T&gt;&gt;</pre>
+extends <a href="../../../../../io/sphere/sdk/commands/DraftBasedCreateCommand.html" title="interface in io.sphere.sdk.commands">DraftBasedCreateCommand</a>&lt;<a href="../../../../../io/sphere/sdk/customobjects/CustomObject.html" title="interface in io.sphere.sdk.customobjects">CustomObject</a>&lt;T&gt;,<a href="../../../../../io/sphere/sdk/customobjects/CustomObjectDraft.html" title="class in io.sphere.sdk.customobjects">CustomObjectDraft</a>&lt;T&gt;&gt;</pre>
 <div class="block"><p>Command for creating or updating a custom object.</p>
  Upsert is a synthetic word which has its origins from "update" and "insert".
 
@@ -151,6 +151,13 @@ assertThat(loadedValue).isEqualTo(value);
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/customobjects/commands/CustomObjectUpsertCommand.html#of-io.sphere.sdk.customobjects.CustomObjectDraft-">of</a></span>(<a href="../../../../../io/sphere/sdk/customobjects/CustomObjectDraft.html" title="class in io.sphere.sdk.customobjects">CustomObjectDraft</a>&lt;T&gt;&nbsp;draft)</code>&nbsp;</td>
 </tr>
 </table>
+<ul class="blockList">
+<li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.commands.DraftBasedCreateCommand">
+<!--   -->
+</a>
+<h3>Methods inherited from interface&nbsp;io.sphere.sdk.commands.<a href="../../../../../io/sphere/sdk/commands/DraftBasedCreateCommand.html" title="interface in io.sphere.sdk.commands">DraftBasedCreateCommand</a></h3>
+<code><a href="../../../../../io/sphere/sdk/commands/DraftBasedCreateCommand.html#getDraft--">getDraft</a></code></li>
+</ul>
 <ul class="blockList">
 <li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.client.SphereRequest">
 <!--   -->

@@ -122,7 +122,7 @@ extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.
 implements <a href="../../../../io/sphere/sdk/models/Builder.html" title="interface in io.sphere.sdk.models">Builder</a>&lt;<a href="../../../../io/sphere/sdk/categories/CategoryDraft.html" title="interface in io.sphere.sdk.categories">CategoryDraft</a>&gt;</pre>
 <div class="block"><p>Creates templates for new categories.</p>
 
-  <div id="io-sphere-sdk-categories-commands-CategoryCreateCommandTest-execution--%s" class=code-example><pre><code class='java'>final LocalizedString name = LocalizedString.of(Locale.ENGLISH, "winter clothing");
+  <div id="io-sphere-sdk-categories-commands-CategoryCreateCommandIntegrationTest-execution--%s" class=code-example><pre><code class='java'>final LocalizedString name = LocalizedString.of(Locale.ENGLISH, "winter clothing");
 final LocalizedString slug = name.slugifiedUnique();
 final String externalId = randomKey();
 final CategoryDraft categoryDraft = CategoryDraftBuilder.of(name, slug).externalId(externalId).build();
@@ -130,7 +130,7 @@ final Category category = client().executeBlocking(CategoryCreateCommand.of(cate
 assertThat(category.getName()).isEqualTo(name);
 assertThat(category.getSlug()).isEqualTo(slug);
 assertThat(category.getExternalId()).contains(externalId);
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/categories/commands/CategoryCreateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/categories/commands/CategoryCreateCommandIntegrationTest.java" target="_blank">test code</a>.</pre></div></div>
 </li>
 </ul>
 </div>
