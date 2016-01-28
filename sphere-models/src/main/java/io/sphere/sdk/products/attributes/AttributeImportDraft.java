@@ -5,7 +5,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import io.sphere.sdk.json.SphereJsonUtils;
 
 @JsonDeserialize(as = AttributeImportDraftImpl.class)
-        public interface AttributeImportDraft {
+public interface AttributeImportDraft {
     String getName();
 
     static AttributeImportDraft of(final String name, final JsonNode jsonNode) {

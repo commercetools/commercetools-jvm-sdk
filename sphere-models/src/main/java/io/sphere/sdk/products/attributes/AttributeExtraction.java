@@ -16,6 +16,8 @@ import java.util.function.Supplier;
  * <p>A possible use case is documented <a href="{@docRoot}/io/sphere/sdk/meta/ProductAttributeDocumentation.html#attribute-table-creation">here</a>.</p>
  *
  * @param <T> the type of the target value which should be extracted from the attribute value. Most likely this will be {@link String}.
+ *
+ * @see Attribute
  */
 public final class AttributeExtraction<T> extends Base {
     @Nullable

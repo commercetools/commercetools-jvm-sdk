@@ -5,9 +5,11 @@ import com.fasterxml.jackson.databind.JsonNode;
 import io.sphere.sdk.models.LocalizedString;
 
 /**
+ * Converts an attribute of a specific type to JSON and back.
  *
  * @param <T> the result type of the attribute, e.g., {@link LocalizedString}
  *
+ * @see Attribute
  */
 public interface AttributeMapper<T> {
 
