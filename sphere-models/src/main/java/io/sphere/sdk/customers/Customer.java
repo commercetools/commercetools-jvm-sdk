@@ -109,6 +109,16 @@ import java.util.Optional;
  */
 @JsonDeserialize(as = CustomerImpl.class)
 public interface Customer extends Resource<Customer>, Custom {
+    /**
+     * Gets the ID of this customer.
+     *
+     * @see io.sphere.sdk.customers.queries.CustomerByIdGet
+     * @see io.sphere.sdk.carts.queries.CartByCustomerIdGet
+     * @return ID
+     */
+    @Override
+    String getId();
+
     @Nullable
     String getCustomerNumber();
 

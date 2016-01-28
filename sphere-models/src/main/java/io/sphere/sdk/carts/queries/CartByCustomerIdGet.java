@@ -13,6 +13,8 @@ import java.util.List;
  * Gets a cart by the customer id.
  *
  * {@include.example io.sphere.sdk.carts.queries.CartByCustomerIdGetTest#execution()}
+ *
+ * @see Customer#getId()
  */
 public interface CartByCustomerIdGet extends MetaModelGetDsl<Cart, Cart, CartByCustomerIdGet, CartExpansionModel<Cart>> {
     static CartByCustomerIdGet of(final Identifiable<Customer> customer) {
