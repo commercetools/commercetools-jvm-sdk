@@ -1,5 +1,6 @@
 package io.sphere.sdk.carts;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.neovisionaries.i18n.CountryCode;
 import io.sphere.sdk.customergroups.CustomerGroup;
 import io.sphere.sdk.discountcodes.DiscountCodeInfo;
@@ -75,6 +76,7 @@ public interface CartLike<T> extends Resource<T>, Custom {
     @Nullable
     PaymentInfo getPaymentInfo();
 
+    @JsonIgnore
     default CurrencyUnit getCurrency() {
         return getTotalPrice().getCurrency();
     }
