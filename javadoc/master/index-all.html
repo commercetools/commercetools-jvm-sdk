@@ -936,56 +936,32 @@
 </dd>
 <dt><a href="io/sphere/sdk/cartdiscounts/queries/CartDiscountByIdGet.html" title="interface in io.sphere.sdk.cartdiscounts.queries"><span class="typeNameLink">CartDiscountByIdGet</span></a> - Interface in <a href="io/sphere/sdk/cartdiscounts/queries/package-summary.html">io.sphere.sdk.cartdiscounts.queries</a></dt>
 <dd>
-<div class="block"><div id="io-sphere-sdk-cartdiscounts-queries-CartDiscountByIdGetTest-execution--%s" class=code-example><pre><code class='java'>withPersistentCartDiscount(client(), cartDiscount -&gt; {
-    final CartDiscount fetchedDiscount = client().executeBlocking(CartDiscountByIdGet.of(cartDiscount));
-    assertThat(fetchedDiscount.getId()).isEqualTo(cartDiscount.getId());
-});
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/cartdiscounts/queries/CartDiscountByIdGetTest.java" target="_blank">test code</a>.</pre></div></div>
+<div class="block">Gets a <a href="io/sphere/sdk/cartdiscounts/CartDiscount.html" title="interface in io.sphere.sdk.cartdiscounts"><code>CartDiscount</code></a> by a known ID.</div>
 </dd>
 <dt><a href="io/sphere/sdk/cartdiscounts/commands/CartDiscountCreateCommand.html" title="interface in io.sphere.sdk.cartdiscounts.commands"><span class="typeNameLink">CartDiscountCreateCommand</span></a> - Interface in <a href="io/sphere/sdk/cartdiscounts/commands/package-summary.html">io.sphere.sdk.cartdiscounts.commands</a></dt>
 <dd>
-<div class="block"><div id="io-sphere-sdk-cartdiscounts-commands-CartDiscountCreateCommandTest-execution--%s" class=code-example><pre><code class='java'>final ZonedDateTime validFrom = SphereTestUtils.now();
-final ZonedDateTime validUntil = validFrom.plusSeconds(8000);
-final LocalizedString name = en("discount name");
-final LocalizedString description = en("discount descriptions");
-final String predicate = "totalPrice &gt; \"800.00 EUR\"";
-final AbsoluteCartDiscountValue value = CartDiscountValue.ofAbsolute(MoneyImpl.of(10, EUR));
-final LineItemsTarget target = LineItemsTarget.of("1 = 1");
-final String sortOrder = "0.54";
-final boolean requiresDiscountCode = false;
-final CartDiscountDraft discountDraft = CartDiscountDraftBuilder.of(name, CartDiscountPredicate.of(predicate),
-        value, target, sortOrder, requiresDiscountCode)
-        .validFrom(validFrom)
-        .validUntil(validUntil)
-        .description(description)
-        .isActive(false)
-        .build();
-
-cartDiscount = client().executeBlocking(CartDiscountCreateCommand.of(discountDraft));
-assertThat(cartDiscount.getName()).isEqualTo(name);
-assertThat(cartDiscount.getCartPredicate()).isEqualTo(predicate);
-assertThat(cartDiscount.getValue()).isEqualTo(value);
-assertThat(cartDiscount.getTarget()).isEqualTo(target);
-assertThat(cartDiscount.getSortOrder()).isEqualTo(sortOrder);
-assertThat(cartDiscount.isRequiringDiscountCode()).isEqualTo(requiresDiscountCode);
-assertThat(cartDiscount.getValidFrom()).isEqualTo(validFrom);
-assertThat(cartDiscount.getValidUntil()).isEqualTo(validUntil);
-assertThat(cartDiscount.getDescription()).isEqualTo(description);
-assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/cartdiscounts/commands/CartDiscountCreateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+<div class="block">Creates a <a href="io/sphere/sdk/cartdiscounts/CartDiscount.html" title="interface in io.sphere.sdk.cartdiscounts"><code>CartDiscount</code></a>.</div>
 </dd>
 <dt><a href="io/sphere/sdk/cartdiscounts/commands/CartDiscountDeleteCommand.html" title="interface in io.sphere.sdk.cartdiscounts.commands"><span class="typeNameLink">CartDiscountDeleteCommand</span></a> - Interface in <a href="io/sphere/sdk/cartdiscounts/commands/package-summary.html">io.sphere.sdk.cartdiscounts.commands</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Deletes a <a href="io/sphere/sdk/cartdiscounts/CartDiscount.html" title="interface in io.sphere.sdk.cartdiscounts"><code>CartDiscount</code></a>.</div>
+</dd>
 <dt><a href="io/sphere/sdk/cartdiscounts/CartDiscountDraft.html" title="interface in io.sphere.sdk.cartdiscounts"><span class="typeNameLink">CartDiscountDraft</span></a> - Interface in <a href="io/sphere/sdk/cartdiscounts/package-summary.html">io.sphere.sdk.cartdiscounts</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Draft to create a <a href="io/sphere/sdk/cartdiscounts/CartDiscount.html" title="interface in io.sphere.sdk.cartdiscounts"><code>CartDiscount</code></a>.</div>
+</dd>
 <dt><a href="io/sphere/sdk/cartdiscounts/CartDiscountDraftBuilder.html" title="class in io.sphere.sdk.cartdiscounts"><span class="typeNameLink">CartDiscountDraftBuilder</span></a> - Class in <a href="io/sphere/sdk/cartdiscounts/package-summary.html">io.sphere.sdk.cartdiscounts</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Builder for creating a <a href="io/sphere/sdk/cartdiscounts/CartDiscountDraft.html" title="interface in io.sphere.sdk.cartdiscounts"><code>CartDiscountDraft</code></a>.</div>
+</dd>
 <dt><a href="io/sphere/sdk/cartdiscounts/expansion/CartDiscountExpansionModel.html" title="class in io.sphere.sdk.cartdiscounts.expansion"><span class="typeNameLink">CartDiscountExpansionModel</span></a>&lt;<a href="io/sphere/sdk/cartdiscounts/expansion/CartDiscountExpansionModel.html" title="type parameter in CartDiscountExpansionModel">T</a>&gt; - Class in <a href="io/sphere/sdk/cartdiscounts/expansion/package-summary.html">io.sphere.sdk.cartdiscounts.expansion</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/cartdiscounts/expansion/CartDiscountExpansionModel.html#CartDiscountExpansionModel--">CartDiscountExpansionModel()</a></span> - Constructor for class io.sphere.sdk.cartdiscounts.expansion.<a href="io/sphere/sdk/cartdiscounts/expansion/CartDiscountExpansionModel.html" title="class in io.sphere.sdk.cartdiscounts.expansion">CartDiscountExpansionModel</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/cartdiscounts/CartDiscountPredicate.html" title="interface in io.sphere.sdk.cartdiscounts"><span class="typeNameLink">CartDiscountPredicate</span></a> - Interface in <a href="io/sphere/sdk/cartdiscounts/package-summary.html">io.sphere.sdk.cartdiscounts</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">The predicate offers a flexible way to define whether the discount can be applied to a cart.</div>
+</dd>
 <dt><a href="io/sphere/sdk/cartdiscounts/queries/CartDiscountQuery.html" title="interface in io.sphere.sdk.cartdiscounts.queries"><span class="typeNameLink">CartDiscountQuery</span></a> - Interface in <a href="io/sphere/sdk/cartdiscounts/queries/package-summary.html">io.sphere.sdk.cartdiscounts.queries</a></dt>
 <dd>
 <div class="block">Provides a QueryDsl for  cart discounts to formulate predicates, search expressions and reference expansion path expressions. <p>For further information how to use the query API to consult the <a href='../../../../../io/sphere/sdk/meta/QueryDocumentation.html'>Query API documentation</a>.</p></div>
@@ -4272,6 +4248,10 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/customers/commands/CustomerVerifyEmailCommand.html#getId--">getId()</a></span> - Method in class io.sphere.sdk.customers.commands.<a href="io/sphere/sdk/customers/commands/CustomerVerifyEmailCommand.html" title="class in io.sphere.sdk.customers.commands">CustomerVerifyEmailCommand</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/customers/Customer.html#getId--">getId()</a></span> - Method in interface io.sphere.sdk.customers.<a href="io/sphere/sdk/customers/Customer.html" title="interface in io.sphere.sdk.customers">Customer</a></dt>
+<dd>
+<div class="block">Gets the ID of this customer.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/customers/CustomerToken.html#getId--">getId()</a></span> - Method in interface io.sphere.sdk.customers.<a href="io/sphere/sdk/customers/CustomerToken.html" title="interface in io.sphere.sdk.customers">CustomerToken</a></dt>
 <dd>
 <div class="block">The ID of the token.</div>
@@ -14146,7 +14126,9 @@ CompletionStage&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execu
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/queries/CartShippingInfoQueryModel.html#shippingMethodName--">shippingMethodName()</a></span> - Method in interface io.sphere.sdk.carts.queries.<a href="io/sphere/sdk/carts/queries/CartShippingInfoQueryModel.html" title="interface in io.sphere.sdk.carts.queries">CartShippingInfoQueryModel</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/shippingmethods/queries/ShippingMethodQuery.html" title="interface in io.sphere.sdk.shippingmethods.queries"><span class="typeNameLink">ShippingMethodQuery</span></a> - Interface in <a href="io/sphere/sdk/shippingmethods/queries/package-summary.html">io.sphere.sdk.shippingmethods.queries</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Provides a QueryDsl for  shipping methods to formulate predicates, search expressions and reference expansion path expressions. <p>For further information how to use the query API to consult the <a href='../../../../../io/sphere/sdk/meta/QueryDocumentation.html'>Query API documentation</a>.</p></div>
+</dd>
 <dt><a href="io/sphere/sdk/shippingmethods/queries/ShippingMethodQueryBuilder.html" title="class in io.sphere.sdk.shippingmethods.queries"><span class="typeNameLink">ShippingMethodQueryBuilder</span></a> - Class in <a href="io/sphere/sdk/shippingmethods/queries/package-summary.html">io.sphere.sdk.shippingmethods.queries</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/shippingmethods/queries/ShippingMethodQueryModel.html" title="interface in io.sphere.sdk.shippingmethods.queries"><span class="typeNameLink">ShippingMethodQueryModel</span></a> - Interface in <a href="io/sphere/sdk/shippingmethods/queries/package-summary.html">io.sphere.sdk.shippingmethods.queries</a></dt>
@@ -14784,7 +14766,9 @@ CompletionStage&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execu
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/states/expansion/StateExpansionModel.html#StateExpansionModel-java.lang.String-java.lang.String-">StateExpansionModel(String, String)</a></span> - Constructor for class io.sphere.sdk.states.expansion.<a href="io/sphere/sdk/states/expansion/StateExpansionModel.html" title="class in io.sphere.sdk.states.expansion">StateExpansionModel</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/states/queries/StateQuery.html" title="interface in io.sphere.sdk.states.queries"><span class="typeNameLink">StateQuery</span></a> - Interface in <a href="io/sphere/sdk/states/queries/package-summary.html">io.sphere.sdk.states.queries</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Provides a QueryDsl for  states to formulate predicates, search expressions and reference expansion path expressions. <p>For further information how to use the query API to consult the <a href='../../../../../io/sphere/sdk/meta/QueryDocumentation.html'>Query API documentation</a>.</p></div>
+</dd>
 <dt><a href="io/sphere/sdk/states/queries/StateQueryBuilder.html" title="class in io.sphere.sdk.states.queries"><span class="typeNameLink">StateQueryBuilder</span></a> - Class in <a href="io/sphere/sdk/states/queries/package-summary.html">io.sphere.sdk.states.queries</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/states/queries/StateQueryModel.html" title="interface in io.sphere.sdk.states.queries"><span class="typeNameLink">StateQueryModel</span></a> - Interface in <a href="io/sphere/sdk/states/queries/package-summary.html">io.sphere.sdk.states.queries</a></dt>
@@ -15469,7 +15453,9 @@ assertThat(type.getFieldDefinitions()).containsExactly(stringFieldDefinition);
 </div>
 </dd>
 <dt><a href="io/sphere/sdk/types/queries/TypeQuery.html" title="interface in io.sphere.sdk.types.queries"><span class="typeNameLink">TypeQuery</span></a> - Interface in <a href="io/sphere/sdk/types/queries/package-summary.html">io.sphere.sdk.types.queries</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Provides a QueryDsl for  types to formulate predicates, search expressions and reference expansion path expressions. <p>For further information how to use the query API to consult the <a href='../../../../../io/sphere/sdk/meta/QueryDocumentation.html'>Query API documentation</a>.</p></div>
+</dd>
 <dt><a href="io/sphere/sdk/types/queries/TypeQueryBuilder.html" title="class in io.sphere.sdk.types.queries"><span class="typeNameLink">TypeQueryBuilder</span></a> - Class in <a href="io/sphere/sdk/types/queries/package-summary.html">io.sphere.sdk.types.queries</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/types/queries/TypeQueryModel.html" title="interface in io.sphere.sdk.types.queries"><span class="typeNameLink">TypeQueryModel</span></a> - Interface in <a href="io/sphere/sdk/types/queries/package-summary.html">io.sphere.sdk.types.queries</a></dt>
@@ -16704,7 +16690,9 @@ the order they are declared.</div>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/zones/expansion/ZoneExpansionModel.html#ZoneExpansionModel-java.lang.String-java.lang.String-">ZoneExpansionModel(String, String)</a></span> - Constructor for class io.sphere.sdk.zones.expansion.<a href="io/sphere/sdk/zones/expansion/ZoneExpansionModel.html" title="class in io.sphere.sdk.zones.expansion">ZoneExpansionModel</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/zones/queries/ZoneQuery.html" title="interface in io.sphere.sdk.zones.queries"><span class="typeNameLink">ZoneQuery</span></a> - Interface in <a href="io/sphere/sdk/zones/queries/package-summary.html">io.sphere.sdk.zones.queries</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Provides a QueryDsl for  zones to formulate predicates, search expressions and reference expansion path expressions. <p>For further information how to use the query API to consult the <a href='../../../../../io/sphere/sdk/meta/QueryDocumentation.html'>Query API documentation</a>.</p></div>
+</dd>
 <dt><a href="io/sphere/sdk/zones/queries/ZoneQueryBuilder.html" title="class in io.sphere.sdk.zones.queries"><span class="typeNameLink">ZoneQueryBuilder</span></a> - Class in <a href="io/sphere/sdk/zones/queries/package-summary.html">io.sphere.sdk.zones.queries</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/zones/queries/ZoneQueryModel.html" title="interface in io.sphere.sdk.zones.queries"><span class="typeNameLink">ZoneQueryModel</span></a> - Interface in <a href="io/sphere/sdk/zones/queries/package-summary.html">io.sphere.sdk.zones.queries</a></dt>

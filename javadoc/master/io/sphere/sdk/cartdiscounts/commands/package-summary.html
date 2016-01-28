@@ -84,40 +84,14 @@
 <tr class="altColor">
 <td class="colFirst"><a href="../../../../../io/sphere/sdk/cartdiscounts/commands/CartDiscountCreateCommand.html" title="interface in io.sphere.sdk.cartdiscounts.commands">CartDiscountCreateCommand</a></td>
 <td class="colLast">
-<div class="block"><div id="io-sphere-sdk-cartdiscounts-commands-CartDiscountCreateCommandTest-execution--%s" class=code-example><pre><code class='java'>final ZonedDateTime validFrom = SphereTestUtils.now();
-final ZonedDateTime validUntil = validFrom.plusSeconds(8000);
-final LocalizedString name = en("discount name");
-final LocalizedString description = en("discount descriptions");
-final String predicate = "totalPrice &gt; \"800.00 EUR\"";
-final AbsoluteCartDiscountValue value = CartDiscountValue.ofAbsolute(MoneyImpl.of(10, EUR));
-final LineItemsTarget target = LineItemsTarget.of("1 = 1");
-final String sortOrder = "0.54";
-final boolean requiresDiscountCode = false;
-final CartDiscountDraft discountDraft = CartDiscountDraftBuilder.of(name, CartDiscountPredicate.of(predicate),
-        value, target, sortOrder, requiresDiscountCode)
-        .validFrom(validFrom)
-        .validUntil(validUntil)
-        .description(description)
-        .isActive(false)
-        .build();
-
-cartDiscount = client().executeBlocking(CartDiscountCreateCommand.of(discountDraft));
-assertThat(cartDiscount.getName()).isEqualTo(name);
-assertThat(cartDiscount.getCartPredicate()).isEqualTo(predicate);
-assertThat(cartDiscount.getValue()).isEqualTo(value);
-assertThat(cartDiscount.getTarget()).isEqualTo(target);
-assertThat(cartDiscount.getSortOrder()).isEqualTo(sortOrder);
-assertThat(cartDiscount.isRequiringDiscountCode()).isEqualTo(requiresDiscountCode);
-assertThat(cartDiscount.getValidFrom()).isEqualTo(validFrom);
-assertThat(cartDiscount.getValidUntil()).isEqualTo(validUntil);
-assertThat(cartDiscount.getDescription()).isEqualTo(description);
-assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/cartdiscounts/commands/CartDiscountCreateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+<div class="block">Creates a <a href="../../../../../io/sphere/sdk/cartdiscounts/CartDiscount.html" title="interface in io.sphere.sdk.cartdiscounts"><code>CartDiscount</code></a>.</div>
 </td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><a href="../../../../../io/sphere/sdk/cartdiscounts/commands/CartDiscountDeleteCommand.html" title="interface in io.sphere.sdk.cartdiscounts.commands">CartDiscountDeleteCommand</a></td>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Deletes a <a href="../../../../../io/sphere/sdk/cartdiscounts/CartDiscount.html" title="interface in io.sphere.sdk.cartdiscounts"><code>CartDiscount</code></a>.</div>
+</td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><a href="../../../../../io/sphere/sdk/cartdiscounts/commands/CartDiscountUpdateCommand.html" title="interface in io.sphere.sdk.cartdiscounts.commands">CartDiscountUpdateCommand</a></td>
