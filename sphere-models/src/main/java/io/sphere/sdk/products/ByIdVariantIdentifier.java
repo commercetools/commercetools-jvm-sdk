@@ -5,6 +5,8 @@ import io.sphere.sdk.models.Referenceable;
 
 /**
  * Identifies a {@link io.sphere.sdk.products.ProductVariant} by product ID and variant ID.
+ *
+ * @see ProductVariant#getIdentifier()
  */
 public interface ByIdVariantIdentifier extends VariantIdentifier {
     String getProductId();

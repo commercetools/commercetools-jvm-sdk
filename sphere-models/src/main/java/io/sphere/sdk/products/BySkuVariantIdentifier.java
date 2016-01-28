@@ -1,5 +1,10 @@
 package io.sphere.sdk.products;
 
+/**
+ * Identifies a {@link ProductVariant} by its SKU.
+ *
+ *
+ */
 public interface BySkuVariantIdentifier extends VariantIdentifier {
     String getSku();
 
