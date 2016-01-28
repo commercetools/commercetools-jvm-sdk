@@ -24,6 +24,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.math.BigDecimal;
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -151,7 +152,7 @@ public class ReviewProductProjectionSearchTest extends IntegrationTest {
                 .plusFacets(m -> m.reviewRatingStatistics().highestRating().allRanges())
                 .plusFacets(m -> m.reviewRatingStatistics().lowestRating().allRanges())
                 ;
-        assertEventually(() -> {
+        assertEventually(Duration.ofSeconds(45), Duration.ofMillis(100), () -> {
             softAssert(soft -> {
                 final PagedSearchResult<ProductProjection> res = client().executeBlocking(projectionSearch);
                 soft.assertThat(res.size()).isGreaterThanOrEqualTo(3);
@@ -169,7 +170,7 @@ public class ReviewProductProjectionSearchTest extends IntegrationTest {
     public void sortByAverageRating() {
         checkSorting(
                 m -> m.reviewRatingStatistics().averageRating().desc(),
-                p -> assertThat(p.getReviewRatingStatistics().getAverageRating()).isBetween(2.70D, 2.73D)
+                p -> assertThat(p.getReviewRatingStatistics().getAverageRating()).isBetween(2.70D, 2.74D)
         );
     }
 
