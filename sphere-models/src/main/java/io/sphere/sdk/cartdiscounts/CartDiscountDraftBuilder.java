@@ -7,6 +7,11 @@ import io.sphere.sdk.models.LocalizedString;
 import javax.annotation.Nullable;
 import java.time.ZonedDateTime;
 
+/**
+ * Builder for creating a {@link CartDiscountDraft}.
+ *
+ * @see CartDiscountDraft
+ */
 public class CartDiscountDraftBuilder extends Base implements Builder<CartDiscountDraft> {
     private LocalizedString name;
     @Nullable

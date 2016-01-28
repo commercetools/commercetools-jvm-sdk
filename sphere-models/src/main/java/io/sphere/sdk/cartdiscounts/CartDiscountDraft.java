@@ -7,7 +7,7 @@ import javax.annotation.Nullable;
 import java.time.ZonedDateTime;
 
 /**
- *
+ * Draft to create a {@link CartDiscount}.
  * @see CartDiscountDraftBuilder
  */
 @JsonDeserialize(as = CartDiscountDraftImpl.class)
