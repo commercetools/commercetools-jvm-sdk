@@ -11,6 +11,9 @@ import io.sphere.sdk.zones.expansion.ZoneExpansionModel;
 
 import java.util.Optional;
 
+/**
+ * {@doc.gen summary zones}
+ */
 public interface ZoneQuery extends MetaModelQueryDsl<Zone, ZoneQuery, ZoneQueryModel, ZoneExpansionModel<Zone>> {
     static TypeReference<PagedQueryResult<Zone>> resultTypeReference() {
         return new TypeReference<PagedQueryResult<Zone>>(){

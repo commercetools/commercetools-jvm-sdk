@@ -6,7 +6,9 @@ import io.sphere.sdk.queries.MetaModelQueryDsl;
 import io.sphere.sdk.types.Type;
 import io.sphere.sdk.types.expansion.TypeExpansionModel;
 
-
+/**
+ * {@doc.gen summary types}
+ */
 public interface TypeQuery extends MetaModelQueryDsl<Type, TypeQuery, TypeQueryModel, TypeExpansionModel<Type>> {
     static TypeReference<PagedQueryResult<Type>> resultTypeReference() {
         return new TypeReference<PagedQueryResult<Type>>(){

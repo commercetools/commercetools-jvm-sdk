@@ -8,6 +8,9 @@ import io.sphere.sdk.shippingmethods.ShippingMethod;
 import io.sphere.sdk.shippingmethods.expansion.ShippingMethodExpansionModel;
 import io.sphere.sdk.taxcategories.TaxCategory;
 
+/**
+ * {@doc.gen summary shipping methods}
+ */
 public interface ShippingMethodQuery extends MetaModelQueryDsl<ShippingMethod, ShippingMethodQuery, ShippingMethodQueryModel, ShippingMethodExpansionModel<ShippingMethod>> {
     static TypeReference<PagedQueryResult<ShippingMethod>> resultTypeReference() {
         return new TypeReference<PagedQueryResult<ShippingMethod>>(){
