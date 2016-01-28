@@ -18,8 +18,8 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":10,"i1":9};
-var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
+var methods = {"i0":6,"i1":6,"i2":6,"i3":6,"i4":6,"i5":6,"i6":6,"i7":17};
+var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],2:["t2","Instance Methods"],4:["t3","Abstract Methods"],16:["t5","Default Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
 var tableTab = "tableTab";
@@ -92,34 +92,20 @@ var activeTableTab = "activeTableTab";
 <!-- ======== START OF CLASS DATA ======== -->
 <div class="header">
 <div class="subTitle">io.sphere.sdk.orders</div>
-<h2 title="Class OrderShippingInfo" class="title">Class OrderShippingInfo</h2>
+<h2 title="Interface OrderShippingInfo" class="title">Interface OrderShippingInfo</h2>
 </div>
 <div class="contentContainer">
-<ul class="inheritance">
-<li>java.lang.Object</li>
-<li>
-<ul class="inheritance">
-<li><a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.sphere.sdk.models">io.sphere.sdk.models.Base</a></li>
-<li>
-<ul class="inheritance">
-<li><a href="../../../../io/sphere/sdk/carts/CartShippingInfo.html" title="class in io.sphere.sdk.carts">io.sphere.sdk.carts.CartShippingInfo</a></li>
-<li>
-<ul class="inheritance">
-<li>io.sphere.sdk.orders.OrderShippingInfo</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
 <div class="description">
 <ul class="blockList">
 <li class="blockList">
+<dl>
+<dt>All Superinterfaces:</dt>
+<dd><a href="../../../../io/sphere/sdk/carts/CartShippingInfo.html" title="interface in io.sphere.sdk.carts">CartShippingInfo</a></dd>
+</dl>
 <hr>
 <br>
-<pre>public class <span class="typeNameLabel">OrderShippingInfo</span>
-extends <a href="../../../../io/sphere/sdk/carts/CartShippingInfo.html" title="class in io.sphere.sdk.carts">CartShippingInfo</a></pre>
+<pre>public interface <span class="typeNameLabel">OrderShippingInfo</span>
+extends <a href="../../../../io/sphere/sdk/carts/CartShippingInfo.html" title="interface in io.sphere.sdk.carts">CartShippingInfo</a></pre>
 </li>
 </ul>
 </div>
@@ -133,7 +119,7 @@ extends <a href="../../../../io/sphere/sdk/carts/CartShippingInfo.html" title="c
 </a>
 <h3>Method Summary</h3>
 <table class="memberSummary" border="0" cellpadding="3" cellspacing="0" summary="Method Summary table, listing methods, and an explanation">
-<caption><span id="t0" class="activeTableTab"><span>All Methods</span><span class="tabEnd">&nbsp;</span></span><span id="t1" class="tableTab"><span><a href="javascript:show(1);">Static Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t2" class="tableTab"><span><a href="javascript:show(2);">Instance Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t4" class="tableTab"><span><a href="javascript:show(8);">Concrete Methods</a></span><span class="tabEnd">&nbsp;</span></span></caption>
+<caption><span id="t0" class="activeTableTab"><span>All Methods</span><span class="tabEnd">&nbsp;</span></span><span id="t1" class="tableTab"><span><a href="javascript:show(1);">Static Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t2" class="tableTab"><span><a href="javascript:show(2);">Instance Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t3" class="tableTab"><span><a href="javascript:show(4);">Abstract Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t5" class="tableTab"><span><a href="javascript:show(16);">Default Methods</a></span><span class="tabEnd">&nbsp;</span></span></caption>
 <tr>
 <th class="colFirst" scope="col">Modifier and Type</th>
 <th class="colLast" scope="col">Method and Description</th>
@@ -143,37 +129,42 @@ extends <a href="../../../../io/sphere/sdk/carts/CartShippingInfo.html" title="c
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/orders/OrderShippingInfo.html#getDeliveries--">getDeliveries</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i1" class="rowColor">
-<td class="colFirst"><code>static <a href="../../../../io/sphere/sdk/orders/OrderShippingInfo.html" title="class in io.sphere.sdk.orders">OrderShippingInfo</a></code></td>
+<td class="colFirst"><code>javax.money.MonetaryAmount</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/orders/OrderShippingInfo.html#getPrice--">getPrice</a></span>()</code>&nbsp;</td>
+</tr>
+<tr id="i2" class="altColor">
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/models/Reference.html" title="interface in io.sphere.sdk.models">Reference</a>&lt;<a href="../../../../io/sphere/sdk/shippingmethods/ShippingMethod.html" title="interface in io.sphere.sdk.shippingmethods">ShippingMethod</a>&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/orders/OrderShippingInfo.html#getShippingMethod--">getShippingMethod</a></span>()</code>&nbsp;</td>
+</tr>
+<tr id="i3" class="rowColor">
+<td class="colFirst"><code>java.lang.String</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/orders/OrderShippingInfo.html#getShippingMethodName--">getShippingMethodName</a></span>()</code>&nbsp;</td>
+</tr>
+<tr id="i4" class="altColor">
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/shippingmethods/ShippingRate.html" title="class in io.sphere.sdk.shippingmethods">ShippingRate</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/orders/OrderShippingInfo.html#getShippingRate--">getShippingRate</a></span>()</code>&nbsp;</td>
+</tr>
+<tr id="i5" class="rowColor">
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/models/Reference.html" title="interface in io.sphere.sdk.models">Reference</a>&lt;<a href="../../../../io/sphere/sdk/taxcategories/TaxCategory.html" title="interface in io.sphere.sdk.taxcategories">TaxCategory</a>&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/orders/OrderShippingInfo.html#getTaxCategory--">getTaxCategory</a></span>()</code>&nbsp;</td>
+</tr>
+<tr id="i6" class="altColor">
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/taxcategories/TaxRate.html" title="interface in io.sphere.sdk.taxcategories">TaxRate</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/orders/OrderShippingInfo.html#getTaxRate--">getTaxRate</a></span>()</code>&nbsp;</td>
+</tr>
+<tr id="i7" class="rowColor">
+<td class="colFirst"><code>static <a href="../../../../io/sphere/sdk/orders/OrderShippingInfo.html" title="interface in io.sphere.sdk.orders">OrderShippingInfo</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/orders/OrderShippingInfo.html#of-java.lang.String-javax.money.MonetaryAmount-io.sphere.sdk.shippingmethods.ShippingRate-io.sphere.sdk.taxcategories.TaxRate-io.sphere.sdk.models.Reference-io.sphere.sdk.models.Reference-java.util.List-">of</a></span>(java.lang.String&nbsp;shippingMethodName,
   javax.money.MonetaryAmount&nbsp;price,
   <a href="../../../../io/sphere/sdk/shippingmethods/ShippingRate.html" title="class in io.sphere.sdk.shippingmethods">ShippingRate</a>&nbsp;shippingRate,
   <a href="../../../../io/sphere/sdk/taxcategories/TaxRate.html" title="interface in io.sphere.sdk.taxcategories">TaxRate</a>&nbsp;taxRate,
   <a href="../../../../io/sphere/sdk/models/Reference.html" title="interface in io.sphere.sdk.models">Reference</a>&lt;<a href="../../../../io/sphere/sdk/taxcategories/TaxCategory.html" title="interface in io.sphere.sdk.taxcategories">TaxCategory</a>&gt;&nbsp;taxCategory,
   <a href="../../../../io/sphere/sdk/models/Reference.html" title="interface in io.sphere.sdk.models">Reference</a>&lt;<a href="../../../../io/sphere/sdk/shippingmethods/ShippingMethod.html" title="interface in io.sphere.sdk.shippingmethods">ShippingMethod</a>&gt;&nbsp;shippingMethod,
-  java.util.List&lt;<a href="../../../../io/sphere/sdk/orders/Delivery.html" title="class in io.sphere.sdk.orders">Delivery</a>&gt;&nbsp;deliveries)</code>&nbsp;</td>
+  java.util.List&lt;<a href="../../../../io/sphere/sdk/orders/Delivery.html" title="class in io.sphere.sdk.orders">Delivery</a>&gt;&nbsp;deliveries)</code>
+<div class="block">Creates an <a href="../../../../io/sphere/sdk/orders/OrderShippingInfo.html" title="interface in io.sphere.sdk.orders"><code>OrderShippingInfo</code></a> for the <a href="../../../../io/sphere/sdk/orders/OrderImportDraft.html" title="interface in io.sphere.sdk.orders"><code>OrderImportDraft</code></a>.</div>
+</td>
 </tr>
 </table>
-<ul class="blockList">
-<li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.carts.CartShippingInfo">
-<!--   -->
-</a>
-<h3>Methods inherited from class&nbsp;io.sphere.sdk.carts.<a href="../../../../io/sphere/sdk/carts/CartShippingInfo.html" title="class in io.sphere.sdk.carts">CartShippingInfo</a></h3>
-<code><a href="../../../../io/sphere/sdk/carts/CartShippingInfo.html#getPrice--">getPrice</a>, <a href="../../../../io/sphere/sdk/carts/CartShippingInfo.html#getShippingMethod--">getShippingMethod</a>, <a href="../../../../io/sphere/sdk/carts/CartShippingInfo.html#getShippingMethodName--">getShippingMethodName</a>, <a href="../../../../io/sphere/sdk/carts/CartShippingInfo.html#getShippingRate--">getShippingRate</a>, <a href="../../../../io/sphere/sdk/carts/CartShippingInfo.html#getTaxCategory--">getTaxCategory</a>, <a href="../../../../io/sphere/sdk/carts/CartShippingInfo.html#getTaxRate--">getTaxRate</a>, <a href="../../../../io/sphere/sdk/carts/CartShippingInfo.html#of-java.lang.String-javax.money.MonetaryAmount-io.sphere.sdk.shippingmethods.ShippingRate-io.sphere.sdk.taxcategories.TaxRate-io.sphere.sdk.models.Reference-io.sphere.sdk.models.Reference-">of</a></code></li>
-</ul>
-<ul class="blockList">
-<li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.models.Base">
-<!--   -->
-</a>
-<h3>Methods inherited from class&nbsp;io.sphere.sdk.models.<a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.sphere.sdk.models">Base</a></h3>
-<code><a href="../../../../io/sphere/sdk/models/Base.html#equals-java.lang.Object-">equals</a>, <a href="../../../../io/sphere/sdk/models/Base.html#hashCode--">hashCode</a>, <a href="../../../../io/sphere/sdk/models/Base.html#toString--">toString</a></code></li>
-</ul>
-<ul class="blockList">
-<li class="blockList"><a name="methods.inherited.from.class.java.lang.Object">
-<!--   -->
-</a>
-<h3>Methods inherited from class&nbsp;java.lang.Object</h3>
-<code>clone, finalize, getClass, notify, notifyAll, wait, wait, wait</code></li>
-</ul>
 </li>
 </ul>
 </li>
@@ -188,28 +179,120 @@ extends <a href="../../../../io/sphere/sdk/carts/CartShippingInfo.html" title="c
 <!--   -->
 </a>
 <h3>Method Detail</h3>
-<a name="of-java.lang.String-javax.money.MonetaryAmount-io.sphere.sdk.shippingmethods.ShippingRate-io.sphere.sdk.taxcategories.TaxRate-io.sphere.sdk.models.Reference-io.sphere.sdk.models.Reference-java.util.List-">
+<a name="getDeliveries--">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
-<h4>of</h4>
-<pre>public static&nbsp;<a href="../../../../io/sphere/sdk/orders/OrderShippingInfo.html" title="class in io.sphere.sdk.orders">OrderShippingInfo</a>&nbsp;of(java.lang.String&nbsp;shippingMethodName,
-                                   javax.money.MonetaryAmount&nbsp;price,
-                                   <a href="../../../../io/sphere/sdk/shippingmethods/ShippingRate.html" title="class in io.sphere.sdk.shippingmethods">ShippingRate</a>&nbsp;shippingRate,
-                                   <a href="../../../../io/sphere/sdk/taxcategories/TaxRate.html" title="interface in io.sphere.sdk.taxcategories">TaxRate</a>&nbsp;taxRate,
-                                   <a href="../../../../io/sphere/sdk/models/Reference.html" title="interface in io.sphere.sdk.models">Reference</a>&lt;<a href="../../../../io/sphere/sdk/taxcategories/TaxCategory.html" title="interface in io.sphere.sdk.taxcategories">TaxCategory</a>&gt;&nbsp;taxCategory,
-                                   <a href="../../../../io/sphere/sdk/models/Reference.html" title="interface in io.sphere.sdk.models">Reference</a>&lt;<a href="../../../../io/sphere/sdk/shippingmethods/ShippingMethod.html" title="interface in io.sphere.sdk.shippingmethods">ShippingMethod</a>&gt;&nbsp;shippingMethod,
-                                   java.util.List&lt;<a href="../../../../io/sphere/sdk/orders/Delivery.html" title="class in io.sphere.sdk.orders">Delivery</a>&gt;&nbsp;deliveries)</pre>
+<h4>getDeliveries</h4>
+<pre>java.util.List&lt;<a href="../../../../io/sphere/sdk/orders/Delivery.html" title="class in io.sphere.sdk.orders">Delivery</a>&gt;&nbsp;getDeliveries()</pre>
 </li>
 </ul>
-<a name="getDeliveries--">
+<a name="getPrice--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getPrice</h4>
+<pre>javax.money.MonetaryAmount&nbsp;getPrice()</pre>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../io/sphere/sdk/carts/CartShippingInfo.html#getPrice--">getPrice</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/carts/CartShippingInfo.html" title="interface in io.sphere.sdk.carts">CartShippingInfo</a></code></dd>
+</dl>
+</li>
+</ul>
+<a name="getShippingMethod--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getShippingMethod</h4>
+<pre>@Nullable
+<a href="../../../../io/sphere/sdk/models/Reference.html" title="interface in io.sphere.sdk.models">Reference</a>&lt;<a href="../../../../io/sphere/sdk/shippingmethods/ShippingMethod.html" title="interface in io.sphere.sdk.shippingmethods">ShippingMethod</a>&gt;&nbsp;getShippingMethod()</pre>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../io/sphere/sdk/carts/CartShippingInfo.html#getShippingMethod--">getShippingMethod</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/carts/CartShippingInfo.html" title="interface in io.sphere.sdk.carts">CartShippingInfo</a></code></dd>
+</dl>
+</li>
+</ul>
+<a name="getShippingMethodName--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getShippingMethodName</h4>
+<pre>java.lang.String&nbsp;getShippingMethodName()</pre>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../io/sphere/sdk/carts/CartShippingInfo.html#getShippingMethodName--">getShippingMethodName</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/carts/CartShippingInfo.html" title="interface in io.sphere.sdk.carts">CartShippingInfo</a></code></dd>
+</dl>
+</li>
+</ul>
+<a name="getShippingRate--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getShippingRate</h4>
+<pre><a href="../../../../io/sphere/sdk/shippingmethods/ShippingRate.html" title="class in io.sphere.sdk.shippingmethods">ShippingRate</a>&nbsp;getShippingRate()</pre>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../io/sphere/sdk/carts/CartShippingInfo.html#getShippingRate--">getShippingRate</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/carts/CartShippingInfo.html" title="interface in io.sphere.sdk.carts">CartShippingInfo</a></code></dd>
+</dl>
+</li>
+</ul>
+<a name="getTaxCategory--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getTaxCategory</h4>
+<pre><a href="../../../../io/sphere/sdk/models/Reference.html" title="interface in io.sphere.sdk.models">Reference</a>&lt;<a href="../../../../io/sphere/sdk/taxcategories/TaxCategory.html" title="interface in io.sphere.sdk.taxcategories">TaxCategory</a>&gt;&nbsp;getTaxCategory()</pre>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../io/sphere/sdk/carts/CartShippingInfo.html#getTaxCategory--">getTaxCategory</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/carts/CartShippingInfo.html" title="interface in io.sphere.sdk.carts">CartShippingInfo</a></code></dd>
+</dl>
+</li>
+</ul>
+<a name="getTaxRate--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getTaxRate</h4>
+<pre><a href="../../../../io/sphere/sdk/taxcategories/TaxRate.html" title="interface in io.sphere.sdk.taxcategories">TaxRate</a>&nbsp;getTaxRate()</pre>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../io/sphere/sdk/carts/CartShippingInfo.html#getTaxRate--">getTaxRate</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/carts/CartShippingInfo.html" title="interface in io.sphere.sdk.carts">CartShippingInfo</a></code></dd>
+</dl>
+</li>
+</ul>
+<a name="of-java.lang.String-javax.money.MonetaryAmount-io.sphere.sdk.shippingmethods.ShippingRate-io.sphere.sdk.taxcategories.TaxRate-io.sphere.sdk.models.Reference-io.sphere.sdk.models.Reference-java.util.List-">
 <!--   -->
 </a>
 <ul class="blockListLast">
 <li class="blockList">
-<h4>getDeliveries</h4>
-<pre>public&nbsp;java.util.List&lt;<a href="../../../../io/sphere/sdk/orders/Delivery.html" title="class in io.sphere.sdk.orders">Delivery</a>&gt;&nbsp;getDeliveries()</pre>
+<h4>of</h4>
+<pre>static&nbsp;<a href="../../../../io/sphere/sdk/orders/OrderShippingInfo.html" title="interface in io.sphere.sdk.orders">OrderShippingInfo</a>&nbsp;of(java.lang.String&nbsp;shippingMethodName,
+                            javax.money.MonetaryAmount&nbsp;price,
+                            <a href="../../../../io/sphere/sdk/shippingmethods/ShippingRate.html" title="class in io.sphere.sdk.shippingmethods">ShippingRate</a>&nbsp;shippingRate,
+                            <a href="../../../../io/sphere/sdk/taxcategories/TaxRate.html" title="interface in io.sphere.sdk.taxcategories">TaxRate</a>&nbsp;taxRate,
+                            <a href="../../../../io/sphere/sdk/models/Reference.html" title="interface in io.sphere.sdk.models">Reference</a>&lt;<a href="../../../../io/sphere/sdk/taxcategories/TaxCategory.html" title="interface in io.sphere.sdk.taxcategories">TaxCategory</a>&gt;&nbsp;taxCategory,
+                            <a href="../../../../io/sphere/sdk/models/Reference.html" title="interface in io.sphere.sdk.models">Reference</a>&lt;<a href="../../../../io/sphere/sdk/shippingmethods/ShippingMethod.html" title="interface in io.sphere.sdk.shippingmethods">ShippingMethod</a>&gt;&nbsp;shippingMethod,
+                            java.util.List&lt;<a href="../../../../io/sphere/sdk/orders/Delivery.html" title="class in io.sphere.sdk.orders">Delivery</a>&gt;&nbsp;deliveries)</pre>
+<div class="block">Creates an <a href="../../../../io/sphere/sdk/orders/OrderShippingInfo.html" title="interface in io.sphere.sdk.orders"><code>OrderShippingInfo</code></a> for the <a href="../../../../io/sphere/sdk/orders/OrderImportDraft.html" title="interface in io.sphere.sdk.orders"><code>OrderImportDraft</code></a>.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>shippingMethodName</code> - shippingMethodName</dd>
+<dd><code>price</code> - price</dd>
+<dd><code>shippingRate</code> - shippingRate</dd>
+<dd><code>taxRate</code> - taxRate</dd>
+<dd><code>taxCategory</code> - taxCategory</dd>
+<dd><code>shippingMethod</code> - shippingMethod</dd>
+<dd><code>deliveries</code> - deliveries</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>OrderShippingInfo</dd>
+</dl>
 </li>
 </ul>
 </li>
