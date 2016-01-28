@@ -108,14 +108,20 @@ var activeTableTab = "activeTableTab";
 extends <a href="../../../../io/sphere/sdk/models/Resource.html" title="interface in io.sphere.sdk.models">Resource</a>&lt;<a href="../../../../io/sphere/sdk/states/State.html" title="interface in io.sphere.sdk.states">State</a>&gt;</pre>
 <div class="block">A State represents a state of a particular resource (defines a finite state machine). States can be combined together
     by defining transitions between each state, thus allowing to create work-flows.
-    Each project has by default an initial LineItemState (inherited also by custom Line Items)
-
- <p id=operations>Operations:</p>
- <ul>
- <li>Create a state with <a href="../../../../io/sphere/sdk/states/commands/StateCreateCommand.html" title="interface in io.sphere.sdk.states.commands"><code>StateCreateCommand</code></a>.</li>
- <li>Query a state with <a href="../../../../io/sphere/sdk/states/queries/StateQuery.html" title="interface in io.sphere.sdk.states.queries"><code>StateQuery</code></a>.</li>
- <li>Delete a channel with <a href="../../../../io/sphere/sdk/states/commands/StateDeleteCommand.html" title="interface in io.sphere.sdk.states.commands"><code>StateDeleteCommand</code></a>.</li>
- </ul></div>
+    Each project has by default an initial LineItemState (inherited also by custom Line Items)</div>
+<dl>
+<dt><span class="seeLabel">See Also:</span></dt>
+<dd><a href="../../../../io/sphere/sdk/states/commands/StateCreateCommand.html" title="interface in io.sphere.sdk.states.commands"><code>StateCreateCommand</code></a>, 
+<a href="../../../../io/sphere/sdk/states/commands/StateUpdateCommand.html" title="interface in io.sphere.sdk.states.commands"><code>StateUpdateCommand</code></a>, 
+<a href="../../../../io/sphere/sdk/states/commands/StateDeleteCommand.html" title="interface in io.sphere.sdk.states.commands"><code>StateDeleteCommand</code></a>, 
+<a href="../../../../io/sphere/sdk/states/queries/StateQuery.html" title="interface in io.sphere.sdk.states.queries"><code>StateQuery</code></a>, 
+<a href="../../../../io/sphere/sdk/states/queries/StateByIdGet.html" title="interface in io.sphere.sdk.states.queries"><code>StateByIdGet</code></a>, 
+<a href="../../../../io/sphere/sdk/carts/ItemState.html#getState--"><code>ItemState.getState()</code></a>, 
+<a href="../../../../io/sphere/sdk/orders/Order.html#getState--"><code>Order.getState()</code></a>, 
+<a href="../../../../io/sphere/sdk/payments/PaymentStatus.html#getState--"><code>PaymentStatus.getState()</code></a>, 
+<a href="../../../../io/sphere/sdk/products/Product.html#getState--"><code>Product.getState()</code></a>, 
+<a href="../../../../io/sphere/sdk/reviews/Review.html#getState--"><code>Review.getState()</code></a></dd>
+</dl>
 </li>
 </ul>
 </div>

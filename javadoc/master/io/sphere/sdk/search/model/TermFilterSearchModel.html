@@ -206,7 +206,9 @@ extends <a href="../../../../../io/sphere/sdk/models/Base.html" title="class in 
 </tr>
 <tr id="i6" class="altColor">
 <td class="colFirst"><code>java.util.List&lt;<a href="../../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../../io/sphere/sdk/search/model/TermFilterSearchModel.html" title="type parameter in TermFilterSearchModel">T</a>&gt;&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/search/model/TermFilterSearchModel.html#isIn-java.lang.Iterable-">isIn</a></span>(java.lang.Iterable&lt;<a href="../../../../../io/sphere/sdk/search/model/TermFilterSearchModel.html" title="type parameter in TermFilterSearchModel">V</a>&gt;&nbsp;values)</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/search/model/TermFilterSearchModel.html#isIn-java.lang.Iterable-">isIn</a></span>(java.lang.Iterable&lt;<a href="../../../../../io/sphere/sdk/search/model/TermFilterSearchModel.html" title="type parameter in TermFilterSearchModel">V</a>&gt;&nbsp;values)</code>
+<div class="block">Generates an expression to select all elements with attributes matching any of the given values.</div>
+</td>
 </tr>
 <tr id="i7" class="rowColor">
 <td class="colFirst"><code>static &lt;T,V&gt;&nbsp;<a href="../../../../../io/sphere/sdk/search/model/TermFilterSearchModel.html" title="class in io.sphere.sdk.search.model">TermFilterSearchModel</a>&lt;T,V&gt;</code></td>
@@ -305,9 +307,15 @@ extends <a href="../../../../../io/sphere/sdk/models/Base.html" title="class in 
 <li class="blockList">
 <h4>isIn</h4>
 <pre>public&nbsp;java.util.List&lt;<a href="../../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../../io/sphere/sdk/search/model/TermFilterSearchModel.html" title="type parameter in TermFilterSearchModel">T</a>&gt;&gt;&nbsp;isIn(java.lang.Iterable&lt;<a href="../../../../../io/sphere/sdk/search/model/TermFilterSearchModel.html" title="type parameter in TermFilterSearchModel">V</a>&gt;&nbsp;values)</pre>
+<div class="block">Generates an expression to select all elements with attributes matching any of the given values.
+ For example: filtering by ["red", "blue"] would select only those elements with either "red" or "blue" value.
+
+ <p>Alias for <a href="../../../../../io/sphere/sdk/search/model/FilterSearchModel.html#containsAny-java.lang.Iterable-"><code>FilterSearchModel.containsAny(Iterable)</code></a>.</p></div>
 <dl>
-<dt><span class="seeLabel">See Also:</span></dt>
-<dd><a href="../../../../../io/sphere/sdk/search/model/FilterSearchModel.html#containsAny-java.lang.Iterable-"><code>FilterSearchModel.containsAny(Iterable)</code></a></dd>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>values</code> - the values to filter by</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>a filter expression for the given values</dd>
 </dl>
 </li>
 </ul>

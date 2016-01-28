@@ -877,7 +877,9 @@
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/queries/ProductQuery.html#bySku-java.lang.String-io.sphere.sdk.products.ProductProjectionType-">bySku(String, ProductProjectionType)</a></span> - Method in interface io.sphere.sdk.products.queries.<a href="io/sphere/sdk/products/queries/ProductQuery.html" title="interface in io.sphere.sdk.products.queries">ProductQuery</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/products/BySkuVariantIdentifier.html" title="interface in io.sphere.sdk.products"><span class="typeNameLink">BySkuVariantIdentifier</span></a> - Interface in <a href="io/sphere/sdk/products/package-summary.html">io.sphere.sdk.products</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Identifies a <a href="io/sphere/sdk/products/ProductVariant.html" title="interface in io.sphere.sdk.products"><code>ProductVariant</code></a> by its SKU.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/categories/queries/CategoryQuery.html#bySlug-java.util.Locale-java.lang.String-">bySlug(Locale, String)</a></span> - Method in interface io.sphere.sdk.categories.queries.<a href="io/sphere/sdk/categories/queries/CategoryQuery.html" title="interface in io.sphere.sdk.categories.queries">CategoryQuery</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/queries/ProductProjectionQuery.html#bySlug-java.util.Locale-java.lang.String-">bySlug(Locale, String)</a></span> - Method in interface io.sphere.sdk.products.queries.<a href="io/sphere/sdk/products/queries/ProductProjectionQuery.html" title="interface in io.sphere.sdk.products.queries">ProductProjectionQuery</a></dt>
@@ -929,7 +931,9 @@
 <div class="block">Deletes a cart in SPHERE.IO.</div>
 </dd>
 <dt><a href="io/sphere/sdk/cartdiscounts/CartDiscount.html" title="interface in io.sphere.sdk.cartdiscounts"><span class="typeNameLink">CartDiscount</span></a> - Interface in <a href="io/sphere/sdk/cartdiscounts/package-summary.html">io.sphere.sdk.cartdiscounts</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Cart discounts are used to change the prices of different elements within a cart like Line Items.</div>
+</dd>
 <dt><a href="io/sphere/sdk/cartdiscounts/queries/CartDiscountByIdGet.html" title="interface in io.sphere.sdk.cartdiscounts.queries"><span class="typeNameLink">CartDiscountByIdGet</span></a> - Interface in <a href="io/sphere/sdk/cartdiscounts/queries/package-summary.html">io.sphere.sdk.cartdiscounts.queries</a></dt>
 <dd>
 <div class="block"><div id="io-sphere-sdk-cartdiscounts-queries-CartDiscountByIdGetTest-execution--%s" class=code-example><pre><code class='java'>withPersistentCartDiscount(client(), cartDiscount -&gt; {
@@ -1830,11 +1834,11 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dd>
 <div class="block">Command to create a resource in SPHERE.IO.</div>
 </dd>
-<dt><a href="io/sphere/sdk/commands/CreateCommandImpl.html" title="class in io.sphere.sdk.commands"><span class="typeNameLink">CreateCommandImpl</span></a>&lt;<a href="io/sphere/sdk/commands/CreateCommandImpl.html" title="type parameter in CreateCommandImpl">T</a>,<a href="io/sphere/sdk/commands/CreateCommandImpl.html" title="type parameter in CreateCommandImpl">C</a>&gt; - Class in <a href="io/sphere/sdk/commands/package-summary.html">io.sphere.sdk.commands</a></dt>
+<dt><a href="io/sphere/sdk/commands/CreateCommandImpl.html" title="class in io.sphere.sdk.commands"><span class="typeNameLink">CreateCommandImpl</span></a>&lt;<a href="io/sphere/sdk/commands/CreateCommandImpl.html" title="type parameter in CreateCommandImpl">T</a>,<a href="io/sphere/sdk/commands/CreateCommandImpl.html" title="type parameter in CreateCommandImpl">D</a>&gt; - Class in <a href="io/sphere/sdk/commands/package-summary.html">io.sphere.sdk.commands</a></dt>
 <dd>
 <div class="block">Base class to implement commands which create an resource in SPHERE.IO.</div>
 </dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/commands/CreateCommandImpl.html#CreateCommandImpl-C-java.lang.String-com.fasterxml.jackson.databind.JavaType-">CreateCommandImpl(C, String, JavaType)</a></span> - Constructor for class io.sphere.sdk.commands.<a href="io/sphere/sdk/commands/CreateCommandImpl.html" title="class in io.sphere.sdk.commands">CreateCommandImpl</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/commands/CreateCommandImpl.html#CreateCommandImpl-D-java.lang.String-com.fasterxml.jackson.databind.JavaType-">CreateCommandImpl(D, String, JavaType)</a></span> - Constructor for class io.sphere.sdk.commands.<a href="io/sphere/sdk/commands/CreateCommandImpl.html" title="class in io.sphere.sdk.commands">CreateCommandImpl</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/http/HttpStatusCode.html#CREATED_201">CREATED_201</a></span> - Static variable in class io.sphere.sdk.http.<a href="io/sphere/sdk/http/HttpStatusCode.html" title="class in io.sphere.sdk.http">HttpStatusCode</a></dt>
 <dd>&nbsp;</dd>
@@ -2395,7 +2399,9 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/queries/DiscountCodeInfoCollectionQueryModel.html#discountCode--">discountCode()</a></span> - Method in interface io.sphere.sdk.carts.queries.<a href="io/sphere/sdk/carts/queries/DiscountCodeInfoCollectionQueryModel.html" title="interface in io.sphere.sdk.carts.queries">DiscountCodeInfoCollectionQueryModel</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/discountcodes/DiscountCode.html" title="interface in io.sphere.sdk.discountcodes"><span class="typeNameLink">DiscountCode</span></a> - Interface in <a href="io/sphere/sdk/discountcodes/package-summary.html">io.sphere.sdk.discountcodes</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Discount codes can be added to a cart to enable certain cart discounts.</div>
+</dd>
 <dt><a href="io/sphere/sdk/discountcodes/queries/DiscountCodeByIdGet.html" title="interface in io.sphere.sdk.discountcodes.queries"><span class="typeNameLink">DiscountCodeByIdGet</span></a> - Interface in <a href="io/sphere/sdk/discountcodes/queries/package-summary.html">io.sphere.sdk.discountcodes.queries</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/discountcodes/commands/DiscountCodeCreateCommand.html" title="interface in io.sphere.sdk.discountcodes.commands"><span class="typeNameLink">DiscountCodeCreateCommand</span></a> - Interface in <a href="io/sphere/sdk/discountcodes/commands/package-summary.html">io.sphere.sdk.discountcodes.commands</a></dt>
@@ -2545,6 +2551,10 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/json/TypeReferences.html#doubleTypeReference--">doubleTypeReference()</a></span> - Static method in class io.sphere.sdk.json.<a href="io/sphere/sdk/json/TypeReferences.html" title="class in io.sphere.sdk.json">TypeReferences</a></dt>
 <dd>&nbsp;</dd>
+<dt><a href="io/sphere/sdk/commands/DraftBasedCreateCommand.html" title="interface in io.sphere.sdk.commands"><span class="typeNameLink">DraftBasedCreateCommand</span></a>&lt;<a href="io/sphere/sdk/commands/DraftBasedCreateCommand.html" title="type parameter in DraftBasedCreateCommand">T</a>,<a href="io/sphere/sdk/commands/DraftBasedCreateCommand.html" title="type parameter in DraftBasedCreateCommand">D</a>&gt; - Interface in <a href="io/sphere/sdk/commands/package-summary.html">io.sphere.sdk.commands</a></dt>
+<dd>
+<div class="block">Command to create a resource in commercetools based on a draft object.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/attributes/NamedAttributeAccess.html#draftOf-T-">draftOf(T)</a></span> - Method in interface io.sphere.sdk.products.attributes.<a href="io/sphere/sdk/products/attributes/NamedAttributeAccess.html" title="interface in io.sphere.sdk.products.attributes">NamedAttributeAccess</a></dt>
 <dd>&nbsp;</dd>
 </dl>
@@ -3265,7 +3275,9 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/client/GatewayTimeoutException.html#GatewayTimeoutException--">GatewayTimeoutException()</a></span> - Constructor for exception io.sphere.sdk.client.<a href="io/sphere/sdk/client/GatewayTimeoutException.html" title="class in io.sphere.sdk.client">GatewayTimeoutException</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/messages/GenericMessage.html" title="interface in io.sphere.sdk.messages"><span class="typeNameLink">GenericMessage</span></a>&lt;<a href="io/sphere/sdk/messages/GenericMessage.html" title="type parameter in GenericMessage">T</a>&gt; - Interface in <a href="io/sphere/sdk/messages/package-summary.html">io.sphere.sdk.messages</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Message for a certain Java type.</div>
+</dd>
 <dt><a href="io/sphere/sdk/messages/GenericMessageImpl.html" title="class in io.sphere.sdk.messages"><span class="typeNameLink">GenericMessageImpl</span></a>&lt;<a href="io/sphere/sdk/messages/GenericMessageImpl.html" title="type parameter in GenericMessageImpl">R</a>&gt; - Class in <a href="io/sphere/sdk/messages/package-summary.html">io.sphere.sdk.messages</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/messages/GenericMessageImpl.html#GenericMessageImpl-java.lang.String-java.lang.Long-java.time.ZonedDateTime-java.time.ZonedDateTime-com.fasterxml.jackson.databind.JsonNode-java.lang.Long-java.lang.Long-java.lang.String-java.lang.Class-">GenericMessageImpl(String, Long, ZonedDateTime, ZonedDateTime, JsonNode, Long, Long, String, Class&lt;R&gt;)</a></span> - Constructor for class io.sphere.sdk.messages.<a href="io/sphere/sdk/messages/GenericMessageImpl.html" title="class in io.sphere.sdk.messages">GenericMessageImpl</a></dt>
@@ -4043,6 +4055,12 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/LineItemDraft.html#getDistributionChannel--">getDistributionChannel()</a></span> - Method in interface io.sphere.sdk.carts.<a href="io/sphere/sdk/carts/LineItemDraft.html" title="interface in io.sphere.sdk.carts">LineItemDraft</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/LineItemDraftDsl.html#getDistributionChannel--">getDistributionChannel()</a></span> - Method in class io.sphere.sdk.carts.<a href="io/sphere/sdk/carts/LineItemDraftDsl.html" title="class in io.sphere.sdk.carts">LineItemDraftDsl</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/commands/CreateCommandImpl.html#getDraft--">getDraft()</a></span> - Method in class io.sphere.sdk.commands.<a href="io/sphere/sdk/commands/CreateCommandImpl.html" title="class in io.sphere.sdk.commands">CreateCommandImpl</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/commands/DraftBasedCreateCommand.html#getDraft--">getDraft()</a></span> - Method in interface io.sphere.sdk.commands.<a href="io/sphere/sdk/commands/DraftBasedCreateCommand.html" title="interface in io.sphere.sdk.commands">DraftBasedCreateCommand</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/commands/MetaModelCreateCommandImpl.html#getDraft--">getDraft()</a></span> - Method in class io.sphere.sdk.commands.<a href="io/sphere/sdk/commands/MetaModelCreateCommandImpl.html" title="class in io.sphere.sdk.commands">MetaModelCreateCommandImpl</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/queries/GetDsl.html" title="interface in io.sphere.sdk.queries"><span class="typeNameLink">GetDsl</span></a>&lt;<a href="io/sphere/sdk/queries/GetDsl.html" title="type parameter in GetDsl">R</a>,<a href="io/sphere/sdk/queries/GetDsl.html" title="type parameter in GetDsl">T</a>,<a href="io/sphere/sdk/queries/GetDsl.html" title="type parameter in GetDsl">C</a>&gt; - Interface in <a href="io/sphere/sdk/queries/package-summary.html">io.sphere.sdk.queries</a></dt>
 <dd>&nbsp;</dd>
@@ -6436,7 +6454,7 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/inventory/InventoryEntry.html" title="interface in io.sphere.sdk.inventory"><span class="typeNameLink">InventoryEntry</span></a> - Interface in <a href="io/sphere/sdk/inventory/package-summary.html">io.sphere.sdk.inventory</a></dt>
 <dd>
-<div class="block">nventory allows you to track stock quantity per SKU and optionally per supply <a href="io/sphere/sdk/channels/Channel.html" title="interface in io.sphere.sdk.channels"><code>Channel</code></a>.</div>
+<div class="block">Inventory allows you to track stock quantity per SKU and optionally per supply <a href="io/sphere/sdk/channels/Channel.html" title="interface in io.sphere.sdk.channels"><code>Channel</code></a>.</div>
 </dd>
 <dt><a href="io/sphere/sdk/inventory/queries/InventoryEntryByIdGet.html" title="interface in io.sphere.sdk.inventory.queries"><span class="typeNameLink">InventoryEntryByIdGet</span></a> - Interface in <a href="io/sphere/sdk/inventory/queries/package-summary.html">io.sphere.sdk.inventory.queries</a></dt>
 <dd>&nbsp;</dd>
@@ -7180,12 +7198,25 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/TimestampSortingModel.html#isIn-java.lang.Iterable-">isIn(Iterable&lt;ZonedDateTime&gt;)</a></span> - Method in interface io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/TimestampSortingModel.html" title="interface in io.sphere.sdk.queries">TimestampSortingModel</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/search/model/FacetedSearchSearchModel.html#isIn-java.lang.Iterable-">isIn(Iterable&lt;String&gt;)</a></span> - Method in interface io.sphere.sdk.search.model.<a href="io/sphere/sdk/search/model/FacetedSearchSearchModel.html" title="interface in io.sphere.sdk.search.model">FacetedSearchSearchModel</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Generates an expression to select all elements with attributes matching any of the given values, along with the facet for all terms for this attribute.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/search/model/FilterSearchModel.html#isIn-java.lang.Iterable-">isIn(Iterable&lt;V&gt;)</a></span> - Method in interface io.sphere.sdk.search.model.<a href="io/sphere/sdk/search/model/FilterSearchModel.html" title="interface in io.sphere.sdk.search.model">FilterSearchModel</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Generates an expression to select all elements with attributes matching any of the given values.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/search/model/RangeTermFacetedSearchSearchModel.html#isIn-java.lang.Iterable-">isIn(Iterable&lt;String&gt;)</a></span> - Method in class io.sphere.sdk.search.model.<a href="io/sphere/sdk/search/model/RangeTermFacetedSearchSearchModel.html" title="class in io.sphere.sdk.search.model">RangeTermFacetedSearchSearchModel</a></dt>
+<dd>
+<div class="block">Generates an expression to select all elements with attributes matching any of the given values, along with the facet for all terms for this attribute.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/search/model/RangeTermFilterSearchModel.html#isIn-java.lang.Iterable-">isIn(Iterable&lt;V&gt;)</a></span> - Method in class io.sphere.sdk.search.model.<a href="io/sphere/sdk/search/model/RangeTermFilterSearchModel.html" title="class in io.sphere.sdk.search.model">RangeTermFilterSearchModel</a></dt>
+<dd>
+<div class="block">Generates an expression to select all elements with attributes matching any of the given values.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/search/model/TermFilterSearchModel.html#isIn-java.lang.Iterable-">isIn(Iterable&lt;V&gt;)</a></span> - Method in class io.sphere.sdk.search.model.<a href="io/sphere/sdk/search/model/TermFilterSearchModel.html" title="class in io.sphere.sdk.search.model">TermFilterSearchModel</a></dt>
+<dd>
+<div class="block">Generates an expression to select all elements with attributes matching any of the given values.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/taxcategories/TaxRate.html#isIncludedInPrice--">isIncludedInPrice()</a></span> - Method in interface io.sphere.sdk.taxcategories.<a href="io/sphere/sdk/taxcategories/TaxRate.html" title="interface in io.sphere.sdk.taxcategories">TaxRate</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/reviews/messages/ReviewRatingSetMessage.html#isIncludedInStatistics--">isIncludedInStatistics()</a></span> - Method in class io.sphere.sdk.reviews.messages.<a href="io/sphere/sdk/reviews/messages/ReviewRatingSetMessage.html" title="class in io.sphere.sdk.reviews.messages">ReviewRatingSetMessage</a></dt>
@@ -8012,7 +8043,9 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/discountcodes/DiscountCodeDraftBuilder.html#maxApplicationsPerCustomer-java.lang.Long-">maxApplicationsPerCustomer(Long)</a></span> - Method in class io.sphere.sdk.discountcodes.<a href="io/sphere/sdk/discountcodes/DiscountCodeDraftBuilder.html" title="class in io.sphere.sdk.discountcodes">DiscountCodeDraftBuilder</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/messages/Message.html" title="interface in io.sphere.sdk.messages"><span class="typeNameLink">Message</span></a> - Interface in <a href="io/sphere/sdk/messages/package-summary.html">io.sphere.sdk.messages</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">A message represents a change or an action performed on a resource (like an Order or a Product).</div>
+</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/messages/DeliveryAddedMessage.html#MESSAGE_HINT">MESSAGE_HINT</a></span> - Static variable in class io.sphere.sdk.orders.messages.<a href="io/sphere/sdk/orders/messages/DeliveryAddedMessage.html" title="class in io.sphere.sdk.orders.messages">DeliveryAddedMessage</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/messages/OrderCreatedMessage.html#MESSAGE_HINT">MESSAGE_HINT</a></span> - Static variable in class io.sphere.sdk.orders.messages.<a href="io/sphere/sdk/orders/messages/OrderCreatedMessage.html" title="class in io.sphere.sdk.orders.messages">OrderCreatedMessage</a></dt>
@@ -12457,7 +12490,9 @@ final CompletionStage&lt;Product&gt; deletedProduct = client.execute(command);
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/products/ProductDeleteExample.java" target="_blank">test code</a>.</pre></div></div>
 </dd>
 <dt><a href="io/sphere/sdk/productdiscounts/ProductDiscount.html" title="interface in io.sphere.sdk.productdiscounts"><span class="typeNameLink">ProductDiscount</span></a> - Interface in <a href="io/sphere/sdk/productdiscounts/package-summary.html">io.sphere.sdk.productdiscounts</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Product discounts are used to change certain product prices.</div>
+</dd>
 <dt><a href="io/sphere/sdk/productdiscounts/queries/ProductDiscountByIdGet.html" title="interface in io.sphere.sdk.productdiscounts.queries"><span class="typeNameLink">ProductDiscountByIdGet</span></a> - Interface in <a href="io/sphere/sdk/productdiscounts/queries/package-summary.html">io.sphere.sdk.productdiscounts.queries</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/productdiscounts/commands/ProductDiscountCreateCommand.html" title="interface in io.sphere.sdk.productdiscounts.commands"><span class="typeNameLink">ProductDiscountCreateCommand</span></a> - Interface in <a href="io/sphere/sdk/productdiscounts/commands/package-summary.html">io.sphere.sdk.productdiscounts.commands</a></dt>
@@ -14087,7 +14122,9 @@ CompletionStage&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execu
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/queries/CartShippingInfoQueryModel.html#shippingMethod--">shippingMethod()</a></span> - Method in interface io.sphere.sdk.carts.queries.<a href="io/sphere/sdk/carts/queries/CartShippingInfoQueryModel.html" title="interface in io.sphere.sdk.carts.queries">CartShippingInfoQueryModel</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/shippingmethods/ShippingMethod.html" title="interface in io.sphere.sdk.shippingmethods"><span class="typeNameLink">ShippingMethod</span></a> - Interface in <a href="io/sphere/sdk/shippingmethods/package-summary.html">io.sphere.sdk.shippingmethods</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Shipping Methods define where orders can be shipped and what the costs are.</div>
+</dd>
 <dt><a href="io/sphere/sdk/shippingmethods/queries/ShippingMethodByIdGet.html" title="interface in io.sphere.sdk.shippingmethods.queries"><span class="typeNameLink">ShippingMethodByIdGet</span></a> - Interface in <a href="io/sphere/sdk/shippingmethods/queries/package-summary.html">io.sphere.sdk.shippingmethods.queries</a></dt>
 <dd>
 <div class="block">Fetches a shipping method by ID.</div>
@@ -14136,7 +14173,9 @@ CompletionStage&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execu
  as well as the time waiting for the response of the commercetools platform.</div>
 </dd>
 <dt><a href="io/sphere/sdk/orders/messages/SimpleOrderMessage.html" title="interface in io.sphere.sdk.orders.messages"><span class="typeNameLink">SimpleOrderMessage</span></a> - Interface in <a href="io/sphere/sdk/orders/messages/package-summary.html">io.sphere.sdk.orders.messages</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Messages for a an <a href="io/sphere/sdk/orders/Order.html" title="interface in io.sphere.sdk.orders"><code>Order</code></a>.</div>
+</dd>
 <dt><a href="io/sphere/sdk/search/model/SimpleRangeStats.html" title="class in io.sphere.sdk.search.model"><span class="typeNameLink">SimpleRangeStats</span></a> - Class in <a href="io/sphere/sdk/search/model/package-summary.html">io.sphere.sdk.search.model</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/search/model/SingleValueSortSearchModel.html" title="class in io.sphere.sdk.search.model"><span class="typeNameLink">SingleValueSortSearchModel</span></a>&lt;<a href="io/sphere/sdk/search/model/SingleValueSortSearchModel.html" title="type parameter in SingleValueSortSearchModel">T</a>&gt; - Class in <a href="io/sphere/sdk/search/model/package-summary.html">io.sphere.sdk.search.model</a></dt>
@@ -15283,7 +15322,9 @@ CompletionStage&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execu
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/types/queries/FieldDefinitionCollectionQueryModel.html#type--">type()</a></span> - Method in interface io.sphere.sdk.types.queries.<a href="io/sphere/sdk/types/queries/FieldDefinitionCollectionQueryModel.html" title="interface in io.sphere.sdk.types.queries">FieldDefinitionCollectionQueryModel</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/types/Type.html" title="interface in io.sphere.sdk.types"><span class="typeNameLink">Type</span></a> - Interface in <a href="io/sphere/sdk/types/package-summary.html">io.sphere.sdk.types</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Types define custom fields that are used to enhance resources as you need.</div>
+</dd>
 <dt><a href="io/sphere/sdk/types/queries/TypeByIdGet.html" title="interface in io.sphere.sdk.types.queries"><span class="typeNameLink">TypeByIdGet</span></a> - Interface in <a href="io/sphere/sdk/types/queries/package-summary.html">io.sphere.sdk.types.queries</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/types/commands/TypeCreateCommand.html" title="interface in io.sphere.sdk.types.commands"><span class="typeNameLink">TypeCreateCommand</span></a> - Interface in <a href="io/sphere/sdk/types/commands/package-summary.html">io.sphere.sdk.types.commands</a></dt>
