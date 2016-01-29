@@ -24,6 +24,13 @@ import io.sphere.sdk.models.Reference;
 @JsonDeserialize(as = CustomerGroupImpl.class)
 public interface CustomerGroup extends Resource<CustomerGroup> {
 
+    /**
+     * The name of the customer group.
+     *
+     * @see io.sphere.sdk.customergroups.commands.updateactions.ChangeName
+     *
+     * @return name
+     */
     String getName();
 
     @Override
