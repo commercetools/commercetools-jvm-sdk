@@ -6,7 +6,7 @@ public class QueryEndpointsHaveAlsoABuilderRule extends ClassStrategyRule {
         try {
             baseClass = Class.forName("io.sphere.sdk.queries.MetaModelQueryDsl");
         } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
     }
 
@@ -24,5 +24,3 @@ public class QueryEndpointsHaveAlsoABuilderRule extends ClassStrategyRule {
         }
     }
 }
-
-//MetaModelQueryDsl

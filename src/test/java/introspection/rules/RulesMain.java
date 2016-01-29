@@ -32,7 +32,8 @@ public class RulesMain {
                 new DraftsAreInterfacesRule(),
                 new MethodsStartWithLowercaseRule(),
                 new EveryObjectHasAGoodBaseClass(),
-                new UtilClassesEndWithUtilsRule()
+                new UtilClassesEndWithUtilsRule(),
+                new ResourceClassesWithTypeReferenceMethod()
         );
         final boolean allIsOk = rules.stream()
                 .map(rule -> {

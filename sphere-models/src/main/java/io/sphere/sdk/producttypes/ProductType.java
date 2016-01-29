@@ -76,6 +76,16 @@ public interface ProductType extends Resource<ProductType>, AttributeDefinitionC
         return Reference.of(referenceTypeId(), id);
     }
 
+    /**
+     * Creates a container which contains the full Java type information to deserialize this class from JSON.
+     *
+     * @see io.sphere.sdk.json.SphereJsonUtils#readObject(byte[], TypeReference)
+     * @see io.sphere.sdk.json.SphereJsonUtils#readObject(String, TypeReference)
+     * @see io.sphere.sdk.json.SphereJsonUtils#readObject(com.fasterxml.jackson.databind.JsonNode, TypeReference)
+     * @see io.sphere.sdk.json.SphereJsonUtils#readObjectFromResource(String, TypeReference)
+     *
+     * @return type reference
+     */
     static TypeReference<ProductType> typeReference() {
         return new TypeReference<ProductType>(){
             @Override
