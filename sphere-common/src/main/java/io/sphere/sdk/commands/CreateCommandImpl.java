@@ -10,7 +10,7 @@ import static java.util.Objects.requireNonNull;
 /**
  * Base class to implement commands which create an resource in SPHERE.IO.
  *
- * @param <T> the type of the result of the command, most likely the updated resource without expanded references
+ * @param <T> the type of the result of the command
  * @param <D> class which will serialized as JSON command body, most likely a template
  */
 public abstract class CreateCommandImpl<T, D> extends CommandImpl<T> implements DraftBasedCreateCommand<T, D> {

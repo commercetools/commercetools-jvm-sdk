@@ -10,6 +10,9 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
+/**
+ * Tools to simplify the work with {@link CompletionStage} and {@link CompletableFuture}.
+ */
 public final class CompletableFutureUtils {
     private CompletableFutureUtils() {
     }

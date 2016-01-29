@@ -8,7 +8,7 @@ import io.sphere.sdk.models.Base;
 /**
  * Base class to implement commands using the Jackson JSON mapper.
  *
- * @param <T> the type of the result of the command, most likely the updated resource without expanded references
+ * @param <T> the type of the result of the command
  *
  */
 public abstract class CommandImpl<T> extends Base implements Command<T> {
