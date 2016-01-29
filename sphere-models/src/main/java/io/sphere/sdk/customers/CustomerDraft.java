@@ -12,6 +12,13 @@ import javax.annotation.Nullable;
 import java.time.LocalDate;
 import java.util.List;
 
+/**
+ * Input object for a new {@link Customer}.
+ *
+ * @see CustomerDraftDsl
+ * @see CustomerDraftBuilder
+ *
+ */
 @JsonDeserialize(as = CustomerDraftDsl.class)
 public interface CustomerDraft extends CustomDraft {
     @Nullable
