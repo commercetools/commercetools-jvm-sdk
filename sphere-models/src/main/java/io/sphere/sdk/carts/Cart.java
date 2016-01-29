@@ -43,6 +43,11 @@ public interface Cart extends CartLike<Cart> {
         return "order";//sic http://dev.sphere.io/http-api-projects-custom-fields.html#customizable-resource
     }
 
+    /**
+     * A type hint for references which resource type is linked in a reference.
+     * @see Reference#getTypeId()
+     * @return type hint
+     */
     static String referenceTypeId() {
         return "cart";
     }

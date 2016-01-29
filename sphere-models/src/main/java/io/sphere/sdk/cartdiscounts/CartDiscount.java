@@ -49,6 +49,11 @@ public interface CartDiscount extends Resource<CartDiscount> {
 
     CartDiscountValue getValue();
 
+    /**
+     * A type hint for references which resource type is linked in a reference.
+     * @see Reference#getTypeId()
+     * @return type hint
+     */
     static String referenceTypeId() {
         return "cart-discount";
     }

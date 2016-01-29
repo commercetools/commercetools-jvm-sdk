@@ -197,6 +197,11 @@ public interface CustomObject<T> extends ResourceView<CustomObject<T>, CustomObj
         return Reference.of(referenceTypeId(), getId());//not possible to provide filled reference since type can be different
     }
 
+    /**
+     * A type hint for references which resource type is linked in a reference.
+     * @see Reference#getTypeId()
+     * @return type hint
+     */
     static String referenceTypeId() {
         return "key-value-document";
     }

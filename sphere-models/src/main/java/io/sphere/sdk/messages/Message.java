@@ -13,6 +13,11 @@ import io.sphere.sdk.models.Reference;
  */
 @JsonDeserialize(as = MessageImpl.class)
 public interface Message extends Resource<Message> {
+    /**
+     * A type hint for references which resource type is linked in a reference.
+     * @see Reference#getTypeId()
+     * @return type hint
+     */
     static String referenceTypeId() {
         return "message";
     }

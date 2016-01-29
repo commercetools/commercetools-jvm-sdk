@@ -86,6 +86,11 @@ public interface Category extends Resource<Category>, WithLocalizedSlug, MetaAtt
         return "category";
     }
 
+    /**
+     * A type hint for references which resource type is linked in a reference.
+     * @see Reference#getTypeId()
+     * @return type hint
+     */
     static String referenceTypeId() {
         return "category";
     }

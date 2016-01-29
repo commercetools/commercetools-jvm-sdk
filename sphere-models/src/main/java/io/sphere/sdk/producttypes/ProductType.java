@@ -49,6 +49,11 @@ public interface ProductType extends Resource<ProductType>, AttributeDefinitionC
         return reference(this);
     }
 
+    /**
+     * A type hint for references which resource type is linked in a reference.
+     * @see Reference#getTypeId()
+     * @return type hint
+     */
     static String referenceTypeId() {
         return "product-type";
     }
