@@ -51,6 +51,16 @@ final class SuggestionResultImpl extends Base implements SuggestionResult {
         return new SuggestionResultImpl(suggestionMap);
     }
 
+    /**
+     * Creates a container which contains the full Java type information to deserialize this class from JSON.
+     *
+     * @see io.sphere.sdk.json.SphereJsonUtils#readObject(byte[], TypeReference)
+     * @see io.sphere.sdk.json.SphereJsonUtils#readObject(String, TypeReference)
+     * @see io.sphere.sdk.json.SphereJsonUtils#readObject(com.fasterxml.jackson.databind.JsonNode, TypeReference)
+     * @see io.sphere.sdk.json.SphereJsonUtils#readObjectFromResource(String, TypeReference)
+     *
+     * @return type reference
+     */
     public static TypeReference<SuggestionResult> typeReference() {
         return new TypeReference<SuggestionResult>() {
             @Override
