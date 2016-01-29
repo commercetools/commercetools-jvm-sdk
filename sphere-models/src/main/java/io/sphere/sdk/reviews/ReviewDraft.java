@@ -41,7 +41,7 @@ public interface ReviewDraft {
 
     /**
      * Target of this review. Currently are only {@link io.sphere.sdk.products.Product}s and {@link io.sphere.sdk.channels.Channel}s supported.
-     * @return
+     * @return target
      */
     @Nullable
     ResourceIdentifier<?> getTarget();

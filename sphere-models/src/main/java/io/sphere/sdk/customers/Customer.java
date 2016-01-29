@@ -121,27 +121,94 @@ public interface Customer extends Resource<Customer>, Custom {
     @Override
     String getId();
 
+    /**
+     * The customer number can be used to create a more human-readable (in contrast to ID) identifier for the customer.
+     * It should be unique across a project. Once the field was set it cannot be changed anymore.
+     *
+     * @see io.sphere.sdk.customers.commands.updateactions.SetCustomerNumber
+     *
+     * @return customer number or null
+     */
     @Nullable
     String getCustomerNumber();
 
+    /**
+     * Customer’s email address that must be unique across a project.
+     *
+     * @see io.sphere.sdk.customers.commands.updateactions.ChangeEmail
+     *
+     * @return email
+     */
     String getEmail();
 
+    /**
+     * First name of the customer.
+     *
+     * @see io.sphere.sdk.customers.commands.updateactions.ChangeName
+     * @see io.sphere.sdk.customers.commands.updateactions.SetFirstName
+     *
+     * @return first name or null
+     */
     @Nullable
     String getFirstName();
 
+    /**
+     * Last name of the customer.
+     *
+     * @see io.sphere.sdk.customers.commands.updateactions.ChangeName
+     * @see io.sphere.sdk.customers.commands.updateactions.SetLastName
+     *
+     * @return last name
+     */
     @Nullable
     String getLastName();
 
     String getPassword();
 
+    /**
+     * Middle name of the customer.
+     *
+     * @see io.sphere.sdk.customers.commands.updateactions.ChangeName
+     * @see io.sphere.sdk.customers.commands.updateactions.SetMiddleName
+     *
+     * @return middle name
+     */
     @Nullable
     String getMiddleName();
 
+    /**
+     * Title of the customer.
+     *
+     * @see io.sphere.sdk.customers.commands.updateactions.ChangeName
+     * @see io.sphere.sdk.customers.commands.updateactions.SetTitle
+     *
+     * @return title
+     */
     @Nullable
     String getTitle();
 
+    /**
+     * Addresses related to this customer.
+     *
+     * @see io.sphere.sdk.customers.commands.updateactions.AddAddress
+     * @see io.sphere.sdk.customers.commands.updateactions.ChangeAddress
+     * @see io.sphere.sdk.customers.commands.updateactions.RemoveAddress
+     * @see io.sphere.sdk.customers.commands.updateactions.SetDefaultBillingAddress
+     * @see io.sphere.sdk.customers.commands.updateactions.SetDefaultShippingAddress
+     *
+     * @return addressbook
+     */
     List<Address> getAddresses();
 
+    /**
+     * ID of an address in {@link #getAddresses()} which contains the standard shipping address.
+     *
+     * <p>Access to the default shipping address is also possible with {@link #getDefaultShippingAddress()}.</p>
+     *
+     * @see io.sphere.sdk.customers.commands.updateactions.SetDefaultShippingAddress
+     *
+     * @return ID or null
+     */
     @Nullable
     String getDefaultShippingAddressId();
 
@@ -156,6 +223,15 @@ public interface Customer extends Resource<Customer>, Custom {
         return findDefaultShippingAddress().orElse(null);
     }
 
+    /**
+     * ID of an address in {@link #getAddresses()} which contains the standard billing address.
+     *
+     * <p>Access to the default billing address is also possible with {@link #getDefaultBillingAddress()}.</p>
+     *
+     * @see io.sphere.sdk.customers.commands.updateactions.SetDefaultBillingAddress
+     *
+     * @return ID or null
+     */
     @Nullable
     String getDefaultBillingAddressId();
 
@@ -174,9 +250,23 @@ public interface Customer extends Resource<Customer>, Custom {
 
     Boolean isEmailVerified();
 
+    /**
+     * ID of an external system for this customer.
+     *
+     * @see io.sphere.sdk.customers.commands.updateactions.SetExternalId
+     *
+     * @return ID or null
+     */
     @Nullable
     String getExternalId();
 
+    /**
+     * The customer group of the customer.
+     *
+     * @see io.sphere.sdk.customers.commands.updateactions.SetCustomerGroup
+     *
+     * @return group or null
+     */
     @Nullable
     Reference<CustomerGroup> getCustomerGroup();
 
@@ -184,12 +274,33 @@ public interface Customer extends Resource<Customer>, Custom {
         return CustomerName.of(getTitle(), getFirstName(), getMiddleName(), getLastName());
     }
 
+    /**
+     * Name of the company this customer belongs to.
+     *
+     * @see io.sphere.sdk.customers.commands.updateactions.SetCompanyName
+     *
+     * @return name or null
+     */
     @Nullable
     String getCompanyName();
 
+    /**
+     * Value added tax identification number.
+     *
+     * @see io.sphere.sdk.customers.commands.updateactions.SetVatId
+     *
+     * @return vat ID or null
+     */
     @Nullable
     String getVatId();
 
+    /**
+     * The date of birth for this customer.
+     *
+     * @see io.sphere.sdk.customers.commands.updateactions.SetDateOfBirth
+     *
+     * @return date of birth or null
+     */
     @Nullable
     LocalDate getDateOfBirth();
 
@@ -262,4 +373,8 @@ public interface Customer extends Resource<Customer>, Custom {
     static Reference<Customer> referenceOfId(final String id) {
         return Reference.of(referenceTypeId(), id);
     }
+
+    @Nullable
+    @Override
+    CustomFields getCustom();
 }
