@@ -24,29 +24,102 @@ import java.util.List;
  */
 @JsonDeserialize(as=CartDiscountImpl.class)
 public interface CartDiscount extends Resource<CartDiscount> {
+    /**
+     * Predicate where the discounts should be applied to.
+     *
+     * @see #isRequiringDiscountCode()
+     * @see CartDiscountPredicate
+     *
+     * @return predicate
+     */
     String getCartPredicate();
 
+    /**
+     * Description of this cart discount.
+     *
+     * @see io.sphere.sdk.discountcodes.commands.updateactions.SetDescription
+     *
+     * @return description or null
+     */
     @Nullable
     LocalizedString getDescription();
 
+    /**
+     * Flag if the discount is active.
+     *
+     * @see io.sphere.sdk.cartdiscounts.commands.updateactions.ChangeIsActive
+     *
+     * @return true if active
+     */
     Boolean isActive();
 
+    /**
+     * Name of this discount.
+     *
+     * @see io.sphere.sdk.cartdiscounts.commands.updateactions.ChangeName
+     *
+     * @return name
+     */
     LocalizedString getName();
 
     List<Reference<JsonNode>> getReferences();
 
+    /**
+     * States whether the the discount code can only be used in a connection with a {@link DiscountCode}.
+     *
+     * @see io.sphere.sdk.cartdiscounts.commands.updateactions.ChangeRequiresDiscountCode
+     *
+     * @return true if requires a discount code
+     */
     Boolean isRequiringDiscountCode();
 
+    /**
+     * Determinates the order of multiple cart discounts.
+     *
+     * The string must contain a number between 0 and 1. All matching cart discounts are applied to a cart in the order defined by this field. The sortOrder must be unambiguous among all cart discounts.
+     *
+     * @see io.sphere.sdk.cartdiscounts.commands.updateactions.ChangeSortOrder
+     *
+     * @return sort order
+     */
     String getSortOrder();
 
+    /**
+     * Defines what part of the cart will be discounted.
+     *
+     * @see io.sphere.sdk.cartdiscounts.commands.updateactions.ChangeTarget
+     *
+     * @return target
+     */
     CartDiscountTarget getTarget();
 
+    /**
+     * Lower bound of the validity period.
+     *
+     * @see io.sphere.sdk.cartdiscounts.commands.updateactions.SetValidFrom
+     *
+     * @return valid from date or null
+     */
     @Nullable
     ZonedDateTime getValidFrom();
 
+    /**
+     * Upper bound of the validity period.
+     *
+     * @see io.sphere.sdk.cartdiscounts.commands.updateactions.SetValidUntil
+     *
+     * @return valid to date or null
+     */
     @Nullable
     ZonedDateTime getValidUntil();
 
+    /**
+     * The value of the discount (determines the reduced price).
+     *
+     * @see io.sphere.sdk.cartdiscounts.commands.updateactions.ChangeValue
+     *
+     * @return value
+     */
     CartDiscountValue getValue();
 
     /**
