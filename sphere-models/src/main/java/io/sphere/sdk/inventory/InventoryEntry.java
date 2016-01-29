@@ -90,7 +90,7 @@ public interface InventoryEntry extends Resource<InventoryEntry> {
      *
      * @return type reference
      */
-    static TypeReference<InventoryEntry> typeReference(){
+    static TypeReference<InventoryEntry> typeReference() {
         return new TypeReference<InventoryEntry>() {
             @Override
             public String toString() {

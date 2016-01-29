@@ -190,7 +190,7 @@ public interface Review extends Resource<Review>, Custom {
      *
      * @return type reference
      */
-    static TypeReference<Review> typeReference(){
+    static TypeReference<Review> typeReference() {
         return new TypeReference<Review>() {
             @Override
             public String toString() {

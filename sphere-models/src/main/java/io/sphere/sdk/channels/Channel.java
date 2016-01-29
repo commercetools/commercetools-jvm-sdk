@@ -75,7 +75,7 @@ public interface Channel extends Resource<Channel> {
      *
      * @return type reference
      */
-    static TypeReference<Channel> typeReference(){
+    static TypeReference<Channel> typeReference() {
         return new TypeReference<Channel>() {
             @Override
             public String toString() {

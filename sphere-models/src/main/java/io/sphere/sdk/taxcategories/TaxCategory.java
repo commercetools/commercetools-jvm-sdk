@@ -44,7 +44,7 @@ public interface TaxCategory extends Resource<TaxCategory> {
      *
      * @return type reference
      */
-    static TypeReference<TaxCategory> typeReference(){
+    static TypeReference<TaxCategory> typeReference() {
         return new TypeReference<TaxCategory>() {
             @Override
             public String toString() {

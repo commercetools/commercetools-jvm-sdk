@@ -42,7 +42,7 @@ public interface Message extends Resource<Message> {
      *
      * @return type reference
      */
-    static TypeReference<Message> typeReference(){
+    static TypeReference<Message> typeReference() {
         return new TypeReference<Message>() {
             @Override
             public String toString() {

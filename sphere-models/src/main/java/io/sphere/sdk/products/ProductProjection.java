@@ -60,7 +60,7 @@ public interface ProductProjection extends ProductLike<ProductProjection, Produc
      *
      * @return type reference
      */
-    static TypeReference<ProductProjection> typeReference(){
+    static TypeReference<ProductProjection> typeReference() {
         return new TypeReference<ProductProjection>() {
             @Override
             public String toString() {

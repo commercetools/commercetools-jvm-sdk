@@ -56,7 +56,7 @@ public interface Product extends ProductLike<Product, Product>, Resource<Product
      *
      * @return type reference
      */
-    static TypeReference<Product> typeReference(){
+    static TypeReference<Product> typeReference() {
         return new TypeReference<Product>() {
             @Override
             public String toString() {

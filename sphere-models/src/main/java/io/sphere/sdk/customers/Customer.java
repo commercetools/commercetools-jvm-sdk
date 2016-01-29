@@ -237,7 +237,7 @@ public interface Customer extends Resource<Customer>, Custom {
      *
      * @return type reference
      */
-    static TypeReference<Customer> typeReference(){
+    static TypeReference<Customer> typeReference() {
         return new TypeReference<Customer>() {
             @Override
             public String toString() {

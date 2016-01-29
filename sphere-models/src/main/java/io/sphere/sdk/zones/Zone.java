@@ -66,7 +66,7 @@ public interface Zone extends Resource<Zone> {
      *
      * @return type reference
      */
-    static TypeReference<Zone> typeReference(){
+    static TypeReference<Zone> typeReference() {
         return new TypeReference<Zone>() {
             @Override
             public String toString() {

@@ -79,7 +79,7 @@ public interface State extends Resource<State> {
      *
      * @return type reference
      */
-    static TypeReference<State> typeReference(){
+    static TypeReference<State> typeReference() {
         return new TypeReference<State>() {
             @Override
             public String toString() {

@@ -66,7 +66,7 @@ public interface ProductDiscount extends Resource<ProductDiscount> {
      *
      * @return type reference
      */
-    static TypeReference<ProductDiscount> typeReference(){
+    static TypeReference<ProductDiscount> typeReference() {
         return new TypeReference<ProductDiscount>() {
             @Override
             public String toString() {

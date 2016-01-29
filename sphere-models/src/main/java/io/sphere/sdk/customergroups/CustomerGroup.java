@@ -60,7 +60,7 @@ public interface CustomerGroup extends Resource<CustomerGroup> {
      *
      * @return type reference
      */
-    static TypeReference<CustomerGroup> typeReference(){
+    static TypeReference<CustomerGroup> typeReference() {
         return new TypeReference<CustomerGroup>() {
             @Override
             public String toString() {
