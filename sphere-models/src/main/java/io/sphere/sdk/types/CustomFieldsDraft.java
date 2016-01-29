@@ -10,6 +10,12 @@ import java.util.Map;
 import static io.sphere.sdk.types.CustomFieldsDraftImpl.mapObjectToJsonMap;
 import static java.util.Objects.requireNonNull;
 
+/**
+ * Draft for {@link CustomFields}.
+ *
+ * @see CustomFieldsDraftBuilder
+ *
+ */
 @JsonDeserialize(as = CustomFieldsDraftImpl.class)
 public interface CustomFieldsDraft {
     ResourceIdentifier<Type> getType();
