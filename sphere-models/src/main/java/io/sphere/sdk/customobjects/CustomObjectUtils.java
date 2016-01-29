@@ -10,7 +10,7 @@ public final class CustomObjectUtils {
     private CustomObjectUtils() {
     }
 
-    public static<T> JavaType getCustomObjectJavaTypeForValue(final JavaType javaType) {
+    public static JavaType getCustomObjectJavaTypeForValue(final JavaType javaType) {
         final TypeFactory typeFactory = TypeFactory.defaultInstance();
         return typeFactory.constructParametrizedType(CustomObject.class, CustomObject.class, javaType);
     }
