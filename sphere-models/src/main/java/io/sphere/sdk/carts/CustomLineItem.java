@@ -8,6 +8,7 @@ import io.sphere.sdk.orders.Order;
 import io.sphere.sdk.taxcategories.TaxCategory;
 import io.sphere.sdk.taxcategories.TaxRate;
 import io.sphere.sdk.types.CustomFields;
+import io.sphere.sdk.types.TypeDraft;
 
 import javax.annotation.Nullable;
 import javax.money.MonetaryAmount;
@@ -59,6 +60,12 @@ public interface CustomLineItem extends LineItemLike {
     @Override
     List<DiscountedLineItemPriceForQuantity> getDiscountedPricePerQuantity();
 
+    /**
+     * An identifier for this resource which supports {@link CustomFields}.
+     * @see TypeDraft#getResourceTypeIds()
+     * @see io.sphere.sdk.types.Custom
+     * @return ID of this resource type
+     */
     static String resourceTypeId() {
         return "custom-line-item";
     }

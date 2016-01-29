@@ -12,6 +12,8 @@ import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.payments.Payment;
 import io.sphere.sdk.reviews.Review;
 import io.sphere.sdk.types.Custom;
+import io.sphere.sdk.types.CustomFields;
+import io.sphere.sdk.types.TypeDraft;
 
 import javax.annotation.Nullable;
 import java.time.LocalDate;
@@ -196,6 +198,12 @@ public interface Customer extends Resource<Customer>, Custom {
         return Reference.of(referenceTypeId(), getId(), this);
     }
 
+    /**
+     * An identifier for this resource which supports {@link CustomFields}.
+     * @see TypeDraft#getResourceTypeIds()
+     * @see io.sphere.sdk.types.Custom
+     * @return ID of this resource type
+     */
     static String resourceTypeId(){
         return "customer";
     }

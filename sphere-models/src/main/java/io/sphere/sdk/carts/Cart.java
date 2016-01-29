@@ -9,6 +9,7 @@ import io.sphere.sdk.models.Address;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.orders.Order;
 import io.sphere.sdk.types.CustomFields;
+import io.sphere.sdk.types.TypeDraft;
 
 import javax.annotation.Nullable;
 import javax.money.MonetaryAmount;
@@ -32,6 +33,12 @@ import java.util.List;
 @JsonDeserialize(as=CartImpl.class)
 public interface Cart extends CartLike<Cart> {
 
+    /**
+     * An identifier for this resource which supports {@link CustomFields}.
+     * @see TypeDraft#getResourceTypeIds()
+     * @see io.sphere.sdk.types.Custom
+     * @return ID of this resource type
+     */
     static String resourceTypeId() {
         return "order";//sic http://dev.sphere.io/http-api-projects-custom-fields.html#customizable-resource
     }

@@ -8,6 +8,7 @@ import io.sphere.sdk.models.Resource;
 import io.sphere.sdk.states.State;
 import io.sphere.sdk.types.Custom;
 import io.sphere.sdk.types.CustomFields;
+import io.sphere.sdk.types.TypeDraft;
 
 import javax.annotation.Nullable;
 import java.util.Locale;
@@ -164,6 +165,12 @@ public interface Review extends Resource<Review>, Custom {
         return "review";
     }
 
+    /**
+     * An identifier for this resource which supports {@link CustomFields}.
+     * @see TypeDraft#getResourceTypeIds()
+     * @see io.sphere.sdk.types.Custom
+     * @return ID of this resource type
+     */
     static String resourceTypeId() {
         return "review";
     }

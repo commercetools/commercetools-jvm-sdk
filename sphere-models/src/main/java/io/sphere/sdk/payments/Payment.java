@@ -8,6 +8,7 @@ import io.sphere.sdk.models.Resource;
 import io.sphere.sdk.orders.Order;
 import io.sphere.sdk.types.Custom;
 import io.sphere.sdk.types.CustomFields;
+import io.sphere.sdk.types.TypeDraft;
 
 import javax.annotation.Nullable;
 import javax.money.MonetaryAmount;
@@ -81,6 +82,12 @@ public interface Payment extends Resource<Payment>, Custom {
         };
     }
 
+    /**
+     * An identifier for this resource which supports {@link CustomFields}.
+     * @see TypeDraft#getResourceTypeIds()
+     * @see io.sphere.sdk.types.Custom
+     * @return ID of this resource type
+     */
     static String resourceTypeId() {
         return "payment";
     }

@@ -24,7 +24,7 @@ public class AddInterfaceInteraction extends SetCustomTypeBase<Payment> {
     /**
      * Gets the resource type id for the custom field creation.
      *
-     * @return resource id
+     * @return resource ID
      *
      * @see io.sphere.sdk.types.TypeDraft#getResourceTypeIds()
      * @see io.sphere.sdk.types.Custom

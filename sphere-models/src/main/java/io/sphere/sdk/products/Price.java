@@ -11,6 +11,7 @@ import io.sphere.sdk.models.Referenceable;
 import io.sphere.sdk.productdiscounts.DiscountedPrice;
 import io.sphere.sdk.types.Custom;
 import io.sphere.sdk.types.CustomFields;
+import io.sphere.sdk.types.TypeDraft;
 import io.sphere.sdk.utils.MoneyImpl;
 
 import javax.annotation.Nullable;
@@ -169,6 +170,12 @@ public class Price extends Base implements Custom {
         return price != null && withId(null).equals(price.withId(null));
     }
 
+    /**
+     * An identifier for this resource which supports {@link CustomFields}.
+     * @see TypeDraft#getResourceTypeIds()
+     * @see io.sphere.sdk.types.Custom
+     * @return ID of this resource type
+     */
     public static String resourceTypeId() {
         return "product-price";
     }
