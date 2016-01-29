@@ -83,6 +83,18 @@ public class CategoryUpdateCommandTest extends IntegrationTest {
     }
 
     @Test
+    public void setExternalId() throws Exception {
+        withCategory(client(), category -> {
+            final String newExternalId = randomKey();
+            final CategoryUpdateCommand command = CategoryUpdateCommand.of(category, SetExternalId.of(newExternalId));
+
+            final Category updatedCategory = client().executeBlocking(command);
+
+            assertThat(updatedCategory.getExternalId()).isEqualTo(newExternalId);
+        });
+    }
+
+    @Test
     public void setMetaDescription() throws Exception {
         withPersistentCategory(client(), category -> {
             final LocalizedString newValue = randomSlug();

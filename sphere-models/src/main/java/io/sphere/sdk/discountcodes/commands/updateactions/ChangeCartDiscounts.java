@@ -14,7 +14,10 @@ import java.util.List;
  *
  * {@doc.gen intro}
  *
+ *
  * {@include.example io.sphere.sdk.discountcodes.commands.DiscountCodeUpdateCommandTest#changeCartDiscounts()}
+ *
+ * @see DiscountCode#getCartDiscounts()
  */
 public class ChangeCartDiscounts extends UpdateActionImpl<DiscountCode> {
     private final List<Reference<CartDiscount>> cartDiscounts;

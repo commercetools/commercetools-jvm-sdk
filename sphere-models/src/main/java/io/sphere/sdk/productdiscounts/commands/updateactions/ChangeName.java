@@ -6,7 +6,7 @@ import io.sphere.sdk.productdiscounts.ProductDiscount;
 
 
 /**
- Changes the  name.
+ Changes the name.
 
  {@doc.gen intro}
 

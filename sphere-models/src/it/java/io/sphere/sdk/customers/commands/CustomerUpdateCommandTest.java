@@ -24,6 +24,16 @@ public class CustomerUpdateCommandTest extends CustomerIntegrationTest {
     @Test
     public void changeName() throws Exception {
         withCustomer(client(), customer -> {
+            final CustomerName newName = CustomerName.ofTitleFirstAndLastName("Mister", "John", "Smith");
+            assertThat(customer.getName()).isNotEqualTo(newName);
+            final Customer updatedCustomer = client().executeBlocking(CustomerUpdateCommand.of(customer, ChangeName.of(newName)));
+            assertThat(updatedCustomer.getName()).isEqualTo(newName);
+        });
+    }
+
+    @Test
+    public void nameUpdates() throws Exception {
+        withCustomer(client(), customer -> {
             final List<UpdateAction<Customer>> updateActions = asList(
                     SetTitle.of("Dr."),
                     SetFirstName.of("Petronella"),
