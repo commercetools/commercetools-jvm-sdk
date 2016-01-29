@@ -139,7 +139,9 @@ extends <a href="../../../../io/sphere/sdk/carts/CartLike.html" title="interface
 </tr>
 <tr id="i0" class="altColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/models/Address.html" title="class in io.sphere.sdk.models">Address</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/orders/Order.html#getBillingAddress--">getBillingAddress</a></span>()</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/orders/Order.html#getBillingAddress--">getBillingAddress</a></span>()</code>
+<div class="block">Address for the bill.</div>
+</td>
 </tr>
 <tr id="i1" class="rowColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/models/Reference.html" title="interface in io.sphere.sdk.models">Reference</a>&lt;<a href="../../../../io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts">Cart</a>&gt;</code></td>
@@ -161,7 +163,9 @@ extends <a href="../../../../io/sphere/sdk/carts/CartLike.html" title="interface
 </tr>
 <tr id="i5" class="rowColor">
 <td class="colFirst"><code>java.lang.String</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/orders/Order.html#getCustomerEmail--">getCustomerEmail</a></span>()</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/orders/Order.html#getCustomerEmail--">getCustomerEmail</a></span>()</code>
+<div class="block">The email of the customer which should be used for this cart/order.</div>
+</td>
 </tr>
 <tr id="i6" class="altColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/models/Reference.html" title="interface in io.sphere.sdk.models">Reference</a>&lt;<a href="../../../../io/sphere/sdk/customergroups/CustomerGroup.html" title="interface in io.sphere.sdk.customergroups">CustomerGroup</a>&gt;</code></td>
@@ -171,15 +175,21 @@ extends <a href="../../../../io/sphere/sdk/carts/CartLike.html" title="interface
 </tr>
 <tr id="i7" class="rowColor">
 <td class="colFirst"><code>java.lang.String</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/orders/Order.html#getCustomerId--">getCustomerId</a></span>()</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/orders/Order.html#getCustomerId--">getCustomerId</a></span>()</code>
+<div class="block">The ID of the customer to which this cart/order belongs to.</div>
+</td>
 </tr>
 <tr id="i8" class="altColor">
 <td class="colFirst"><code>java.util.List&lt;<a href="../../../../io/sphere/sdk/carts/CustomLineItem.html" title="interface in io.sphere.sdk.carts">CustomLineItem</a>&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/orders/Order.html#getCustomLineItems--">getCustomLineItems</a></span>()</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/orders/Order.html#getCustomLineItems--">getCustomLineItems</a></span>()</code>
+<div class="block">Custom goods, fees or discounts added to the cart.</div>
+</td>
 </tr>
 <tr id="i9" class="rowColor">
 <td class="colFirst"><code>java.util.List&lt;<a href="../../../../io/sphere/sdk/discountcodes/DiscountCodeInfo.html" title="class in io.sphere.sdk.discountcodes">DiscountCodeInfo</a>&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/orders/Order.html#getDiscountCodes--">getDiscountCodes</a></span>()</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/orders/Order.html#getDiscountCodes--">getDiscountCodes</a></span>()</code>
+<div class="block">Discount codes belonging to this cart.</div>
+</td>
 </tr>
 <tr id="i10" class="altColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/carts/InventoryMode.html" title="enum in io.sphere.sdk.carts">InventoryMode</a></code></td>
@@ -191,7 +201,9 @@ extends <a href="../../../../io/sphere/sdk/carts/CartLike.html" title="interface
 </tr>
 <tr id="i12" class="altColor">
 <td class="colFirst"><code>java.util.List&lt;<a href="../../../../io/sphere/sdk/carts/LineItem.html" title="interface in io.sphere.sdk.carts">LineItem</a>&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/orders/Order.html#getLineItems--">getLineItems</a></span>()</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/orders/Order.html#getLineItems--">getLineItems</a></span>()</code>
+<div class="block">Snapshots of the products added to the cart.</div>
+</td>
 </tr>
 <tr id="i13" class="rowColor">
 <td class="colFirst"><code>java.lang.String</code></td>
@@ -221,11 +233,15 @@ extends <a href="../../../../io/sphere/sdk/carts/CartLike.html" title="interface
 </tr>
 <tr id="i19" class="rowColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/models/Address.html" title="class in io.sphere.sdk.models">Address</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/orders/Order.html#getShippingAddress--">getShippingAddress</a></span>()</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/orders/Order.html#getShippingAddress--">getShippingAddress</a></span>()</code>
+<div class="block">Address to ship the goods.</div>
+</td>
 </tr>
 <tr id="i20" class="altColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/orders/OrderShippingInfo.html" title="interface in io.sphere.sdk.orders">OrderShippingInfo</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/orders/Order.html#getShippingInfo--">getShippingInfo</a></span>()</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/orders/Order.html#getShippingInfo--">getShippingInfo</a></span>()</code>
+<div class="block">Information about shipping set by the backend once the shipping method is set.</div>
+</td>
 </tr>
 <tr id="i21" class="rowColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/models/Reference.html" title="interface in io.sphere.sdk.models">Reference</a>&lt;<a href="../../../../io/sphere/sdk/states/State.html" title="interface in io.sphere.sdk.states">State</a>&gt;</code></td>
@@ -239,7 +255,9 @@ extends <a href="../../../../io/sphere/sdk/carts/CartLike.html" title="interface
 </tr>
 <tr id="i23" class="rowColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/carts/TaxedPrice.html" title="class in io.sphere.sdk.carts">TaxedPrice</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/orders/Order.html#getTaxedPrice--">getTaxedPrice</a></span>()</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/orders/Order.html#getTaxedPrice--">getTaxedPrice</a></span>()</code>
+<div class="block">The taxed price.</div>
+</td>
 </tr>
 <tr id="i24" class="altColor">
 <td class="colFirst"><code>javax.money.MonetaryAmount</code></td>
@@ -247,20 +265,26 @@ extends <a href="../../../../io/sphere/sdk/carts/CartLike.html" title="interface
 </tr>
 <tr id="i25" class="rowColor">
 <td class="colFirst"><code>static <a href="../../../../io/sphere/sdk/models/Reference.html" title="interface in io.sphere.sdk.models">Reference</a>&lt;<a href="../../../../io/sphere/sdk/orders/Order.html" title="interface in io.sphere.sdk.orders">Order</a>&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/orders/Order.html#referenceOfId-java.lang.String-">referenceOfId</a></span>(java.lang.String&nbsp;id)</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/orders/Order.html#referenceOfId-java.lang.String-">referenceOfId</a></span>(java.lang.String&nbsp;id)</code>
+<div class="block">Creates a reference for one item of this class by a known ID.</div>
+</td>
 </tr>
 <tr id="i26" class="altColor">
 <td class="colFirst"><code>static java.lang.String</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/orders/Order.html#referenceTypeId--">referenceTypeId</a></span>()</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/orders/Order.html#referenceTypeId--">referenceTypeId</a></span>()</code>
+<div class="block">A type hint for references which resource type is linked in a reference.</div>
+</td>
 </tr>
 <tr id="i27" class="rowColor">
 <td class="colFirst"><code>static java.lang.String</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/orders/Order.html#resourceTypeId--">resourceTypeId</a></span>()</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/orders/Order.html#resourceTypeId--">resourceTypeId</a></span>()</code>
+<div class="block">An identifier for this resource which supports <a href="../../../../io/sphere/sdk/types/CustomFields.html" title="class in io.sphere.sdk.types"><code>CustomFields</code></a>.</div>
+</td>
 </tr>
 <tr id="i28" class="altColor">
 <td class="colFirst"><code>default <a href="../../../../io/sphere/sdk/models/Reference.html" title="interface in io.sphere.sdk.models">Reference</a>&lt;<a href="../../../../io/sphere/sdk/orders/Order.html" title="interface in io.sphere.sdk.orders">Order</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/orders/Order.html#toReference--">toReference</a></span>()</code>
-<div class="block">Creates a reference which is not necessarily filled.</div>
+<div class="block">Creates a reference to this resource, the reference may not be filled.</div>
 </td>
 </tr>
 <tr id="i29" class="rowColor">
@@ -273,7 +297,9 @@ extends <a href="../../../../io/sphere/sdk/carts/CartLike.html" title="interface
 </tr>
 <tr id="i30" class="altColor">
 <td class="colFirst"><code>static com.fasterxml.jackson.core.type.TypeReference&lt;<a href="../../../../io/sphere/sdk/orders/Order.html" title="interface in io.sphere.sdk.orders">Order</a>&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/orders/Order.html#typeReference--">typeReference</a></span>()</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/orders/Order.html#typeReference--">typeReference</a></span>()</code>
+<div class="block">Creates a container which contains the full Java type information to deserialize this class from JSON.</div>
+</td>
 </tr>
 </table>
 <ul class="blockList">
@@ -325,6 +351,14 @@ extends <a href="../../../../io/sphere/sdk/carts/CartLike.html" title="interface
 <li class="blockList">
 <h4>resourceTypeId</h4>
 <pre>static&nbsp;java.lang.String&nbsp;resourceTypeId()</pre>
+<div class="block">An identifier for this resource which supports <a href="../../../../io/sphere/sdk/types/CustomFields.html" title="class in io.sphere.sdk.types"><code>CustomFields</code></a>.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>ID of this resource type</dd>
+<dt><span class="seeLabel">See Also:</span></dt>
+<dd><a href="../../../../io/sphere/sdk/types/TypeDraft.html#getResourceTypeIds--"><code>TypeDraft.getResourceTypeIds()</code></a>, 
+<a href="../../../../io/sphere/sdk/types/Custom.html" title="interface in io.sphere.sdk.types"><code>Custom</code></a></dd>
+</dl>
 </li>
 </ul>
 <a name="referenceTypeId--">
@@ -334,6 +368,13 @@ extends <a href="../../../../io/sphere/sdk/carts/CartLike.html" title="interface
 <li class="blockList">
 <h4>referenceTypeId</h4>
 <pre>static&nbsp;java.lang.String&nbsp;referenceTypeId()</pre>
+<div class="block">A type hint for references which resource type is linked in a reference.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>type hint</dd>
+<dt><span class="seeLabel">See Also:</span></dt>
+<dd><a href="../../../../io/sphere/sdk/models/Reference.html#getTypeId--"><code>Reference.getTypeId()</code></a></dd>
+</dl>
 </li>
 </ul>
 <a name="typeId--">
@@ -358,6 +399,16 @@ static&nbsp;java.lang.String&nbsp;typeId()</pre>
 <li class="blockList">
 <h4>typeReference</h4>
 <pre>static&nbsp;com.fasterxml.jackson.core.type.TypeReference&lt;<a href="../../../../io/sphere/sdk/orders/Order.html" title="interface in io.sphere.sdk.orders">Order</a>&gt;&nbsp;typeReference()</pre>
+<div class="block">Creates a container which contains the full Java type information to deserialize this class from JSON.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>type reference</dd>
+<dt><span class="seeLabel">See Also:</span></dt>
+<dd><a href="../../../../io/sphere/sdk/json/SphereJsonUtils.html#readObject-byte:A-com.fasterxml.jackson.core.type.TypeReference-"><code>SphereJsonUtils.readObject(byte[], TypeReference)</code></a>, 
+<a href="../../../../io/sphere/sdk/json/SphereJsonUtils.html#readObject-java.lang.String-com.fasterxml.jackson.core.type.TypeReference-"><code>SphereJsonUtils.readObject(String, TypeReference)</code></a>, 
+<a href="../../../../io/sphere/sdk/json/SphereJsonUtils.html#readObject-com.fasterxml.jackson.databind.JsonNode-com.fasterxml.jackson.core.type.TypeReference-"><code>SphereJsonUtils.readObject(com.fasterxml.jackson.databind.JsonNode, TypeReference)</code></a>, 
+<a href="../../../../io/sphere/sdk/json/SphereJsonUtils.html#readObjectFromResource-java.lang.String-com.fasterxml.jackson.core.type.TypeReference-"><code>SphereJsonUtils.readObjectFromResource(String, TypeReference)</code></a></dd>
+</dl>
 </li>
 </ul>
 <a name="toReference--">
@@ -368,7 +419,7 @@ static&nbsp;java.lang.String&nbsp;typeId()</pre>
 <h4>toReference</h4>
 <pre>default&nbsp;<a href="../../../../io/sphere/sdk/models/Reference.html" title="interface in io.sphere.sdk.models">Reference</a>&lt;<a href="../../../../io/sphere/sdk/orders/Order.html" title="interface in io.sphere.sdk.orders">Order</a>&gt;&nbsp;toReference()</pre>
 <div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../io/sphere/sdk/models/Referenceable.html#toReference--">Referenceable</a></code></span></div>
-<div class="block">Creates a reference which is not necessarily filled.</div>
+<div class="block">Creates a reference to this resource, the reference may not be filled.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="../../../../io/sphere/sdk/models/Referenceable.html#toReference--">toReference</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/models/Referenceable.html" title="interface in io.sphere.sdk.models">Referenceable</a>&lt;<a href="../../../../io/sphere/sdk/orders/Order.html" title="interface in io.sphere.sdk.orders">Order</a>&gt;</code></dd>
@@ -435,9 +486,17 @@ java.lang.String&nbsp;getOrderNumber()</pre>
 <h4>getShippingInfo</h4>
 <pre>@Nullable
 <a href="../../../../io/sphere/sdk/orders/OrderShippingInfo.html" title="interface in io.sphere.sdk.orders">OrderShippingInfo</a>&nbsp;getShippingInfo()</pre>
+<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../io/sphere/sdk/carts/CartLike.html#getShippingInfo--">CartLike</a></code></span></div>
+<div class="block">Information about shipping set by the backend once the shipping method is set.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="../../../../io/sphere/sdk/carts/CartLike.html#getShippingInfo--">getShippingInfo</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/carts/CartLike.html" title="interface in io.sphere.sdk.carts">CartLike</a>&lt;<a href="../../../../io/sphere/sdk/orders/Order.html" title="interface in io.sphere.sdk.orders">Order</a>&gt;</code></dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>shipping info</dd>
+<dt><span class="seeLabel">See Also:</span></dt>
+<dd><a href="../../../../io/sphere/sdk/carts/commands/updateactions/SetShippingMethod.html" title="class in io.sphere.sdk.carts.commands.updateactions"><code>SetShippingMethod</code></a>, 
+<a href="../../../../io/sphere/sdk/carts/commands/updateactions/SetCustomShippingMethod.html" title="class in io.sphere.sdk.carts.commands.updateactions"><code>SetCustomShippingMethod</code></a>, 
+<a href="../../../../io/sphere/sdk/orders/commands/updateactions/AddDelivery.html" title="class in io.sphere.sdk.orders.commands.updateactions"><code>AddDelivery</code></a></dd>
 </dl>
 </li>
 </ul>
@@ -476,9 +535,15 @@ java.lang.String&nbsp;getOrderNumber()</pre>
 <h4>getBillingAddress</h4>
 <pre>@Nullable
 <a href="../../../../io/sphere/sdk/models/Address.html" title="class in io.sphere.sdk.models">Address</a>&nbsp;getBillingAddress()</pre>
+<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../io/sphere/sdk/carts/CartLike.html#getBillingAddress--">CartLike</a></code></span></div>
+<div class="block">Address for the bill.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="../../../../io/sphere/sdk/carts/CartLike.html#getBillingAddress--">getBillingAddress</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/carts/CartLike.html" title="interface in io.sphere.sdk.carts">CartLike</a>&lt;<a href="../../../../io/sphere/sdk/orders/Order.html" title="interface in io.sphere.sdk.orders">Order</a>&gt;</code></dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>address or null</dd>
+<dt><span class="seeLabel">See Also:</span></dt>
+<dd><a href="../../../../io/sphere/sdk/carts/commands/updateactions/SetBillingAddress.html" title="class in io.sphere.sdk.carts.commands.updateactions"><code>SetBillingAddress</code></a></dd>
 </dl>
 </li>
 </ul>
@@ -504,9 +569,15 @@ com.neovisionaries.i18n.CountryCode&nbsp;getCountry()</pre>
 <h4>getCustomerEmail</h4>
 <pre>@Nullable
 java.lang.String&nbsp;getCustomerEmail()</pre>
+<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../io/sphere/sdk/carts/CartLike.html#getCustomerEmail--">CartLike</a></code></span></div>
+<div class="block">The email of the customer which should be used for this cart/order. It can differ from <a href="../../../../io/sphere/sdk/customers/Customer.html#getEmail--"><code>Customer.getEmail()</code></a>.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="../../../../io/sphere/sdk/carts/CartLike.html#getCustomerEmail--">getCustomerEmail</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/carts/CartLike.html" title="interface in io.sphere.sdk.carts">CartLike</a>&lt;<a href="../../../../io/sphere/sdk/orders/Order.html" title="interface in io.sphere.sdk.orders">Order</a>&gt;</code></dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>email</dd>
+<dt><span class="seeLabel">See Also:</span></dt>
+<dd><a href="../../../../io/sphere/sdk/carts/commands/updateactions/SetCustomerEmail.html" title="class in io.sphere.sdk.carts.commands.updateactions"><code>SetCustomerEmail</code></a></dd>
 </dl>
 </li>
 </ul>
@@ -524,7 +595,7 @@ java.lang.String&nbsp;getCustomerEmail()</pre>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="../../../../io/sphere/sdk/carts/CartLike.html#getCustomerGroup--">getCustomerGroup</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/carts/CartLike.html" title="interface in io.sphere.sdk.carts">CartLike</a>&lt;<a href="../../../../io/sphere/sdk/orders/Order.html" title="interface in io.sphere.sdk.orders">Order</a>&gt;</code></dd>
 <dt><span class="returnLabel">Returns:</span></dt>
-<dd>optional reference of a customer group</dd>
+<dd>reference of a customer group or null</dd>
 </dl>
 </li>
 </ul>
@@ -536,9 +607,16 @@ java.lang.String&nbsp;getCustomerEmail()</pre>
 <h4>getCustomerId</h4>
 <pre>@Nullable
 java.lang.String&nbsp;getCustomerId()</pre>
+<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../io/sphere/sdk/carts/CartLike.html#getCustomerId--">CartLike</a></code></span></div>
+<div class="block">The ID of the customer to which this cart/order belongs to.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="../../../../io/sphere/sdk/carts/CartLike.html#getCustomerId--">getCustomerId</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/carts/CartLike.html" title="interface in io.sphere.sdk.carts">CartLike</a>&lt;<a href="../../../../io/sphere/sdk/orders/Order.html" title="interface in io.sphere.sdk.orders">Order</a>&gt;</code></dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>id of the customer or null</dd>
+<dt><span class="seeLabel">See Also:</span></dt>
+<dd><a href="../../../../io/sphere/sdk/customers/commands/CustomerSignInCommand.html" title="class in io.sphere.sdk.customers.commands"><code>CustomerSignInCommand</code></a>, 
+<a href="../../../../io/sphere/sdk/carts/commands/updateactions/SetCustomerId.html" title="class in io.sphere.sdk.carts.commands.updateactions"><code>SetCustomerId</code></a></dd>
 </dl>
 </li>
 </ul>
@@ -549,9 +627,16 @@ java.lang.String&nbsp;getCustomerId()</pre>
 <li class="blockList">
 <h4>getCustomLineItems</h4>
 <pre>java.util.List&lt;<a href="../../../../io/sphere/sdk/carts/CustomLineItem.html" title="interface in io.sphere.sdk.carts">CustomLineItem</a>&gt;&nbsp;getCustomLineItems()</pre>
+<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../io/sphere/sdk/carts/CartLike.html#getCustomLineItems--">CartLike</a></code></span></div>
+<div class="block">Custom goods, fees or discounts added to the cart.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="../../../../io/sphere/sdk/carts/CartLike.html#getCustomLineItems--">getCustomLineItems</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/carts/CartLike.html" title="interface in io.sphere.sdk.carts">CartLike</a>&lt;<a href="../../../../io/sphere/sdk/orders/Order.html" title="interface in io.sphere.sdk.orders">Order</a>&gt;</code></dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>custom line items</dd>
+<dt><span class="seeLabel">See Also:</span></dt>
+<dd><a href="../../../../io/sphere/sdk/carts/commands/updateactions/AddCustomLineItem.html" title="class in io.sphere.sdk.carts.commands.updateactions"><code>AddCustomLineItem</code></a>, 
+<a href="../../../../io/sphere/sdk/carts/commands/updateactions/RemoveCustomLineItem.html" title="class in io.sphere.sdk.carts.commands.updateactions"><code>RemoveCustomLineItem</code></a></dd>
 </dl>
 </li>
 </ul>
@@ -562,9 +647,17 @@ java.lang.String&nbsp;getCustomerId()</pre>
 <li class="blockList">
 <h4>getLineItems</h4>
 <pre>java.util.List&lt;<a href="../../../../io/sphere/sdk/carts/LineItem.html" title="interface in io.sphere.sdk.carts">LineItem</a>&gt;&nbsp;getLineItems()</pre>
+<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../io/sphere/sdk/carts/CartLike.html#getLineItems--">CartLike</a></code></span></div>
+<div class="block">Snapshots of the products added to the cart.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="../../../../io/sphere/sdk/carts/CartLike.html#getLineItems--">getLineItems</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/carts/CartLike.html" title="interface in io.sphere.sdk.carts">CartLike</a>&lt;<a href="../../../../io/sphere/sdk/orders/Order.html" title="interface in io.sphere.sdk.orders">Order</a>&gt;</code></dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>line items</dd>
+<dt><span class="seeLabel">See Also:</span></dt>
+<dd><a href="../../../../io/sphere/sdk/carts/commands/updateactions/AddLineItem.html" title="class in io.sphere.sdk.carts.commands.updateactions"><code>AddLineItem</code></a>, 
+<a href="../../../../io/sphere/sdk/carts/commands/updateactions/ChangeLineItemQuantity.html" title="class in io.sphere.sdk.carts.commands.updateactions"><code>ChangeLineItemQuantity</code></a>, 
+<a href="../../../../io/sphere/sdk/carts/commands/updateactions/RemoveLineItem.html" title="class in io.sphere.sdk.carts.commands.updateactions"><code>RemoveLineItem</code></a></dd>
 </dl>
 </li>
 </ul>
@@ -576,9 +669,16 @@ java.lang.String&nbsp;getCustomerId()</pre>
 <h4>getShippingAddress</h4>
 <pre>@Nullable
 <a href="../../../../io/sphere/sdk/models/Address.html" title="class in io.sphere.sdk.models">Address</a>&nbsp;getShippingAddress()</pre>
+<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../io/sphere/sdk/carts/CartLike.html#getShippingAddress--">CartLike</a></code></span></div>
+<div class="block">Address to ship the goods.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="../../../../io/sphere/sdk/carts/CartLike.html#getShippingAddress--">getShippingAddress</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/carts/CartLike.html" title="interface in io.sphere.sdk.carts">CartLike</a>&lt;<a href="../../../../io/sphere/sdk/orders/Order.html" title="interface in io.sphere.sdk.orders">Order</a>&gt;</code></dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>address or null</dd>
+<dt><span class="seeLabel">See Also:</span></dt>
+<dd><a href="../../../../io/sphere/sdk/carts/commands/updateactions/SetShippingAddress.html" title="class in io.sphere.sdk.carts.commands.updateactions"><code>SetShippingAddress</code></a>, 
+<a href="../../../../io/sphere/sdk/carts/CartLike.html#getTaxedPrice--"><code>CartLike.getTaxedPrice()</code></a></dd>
 </dl>
 </li>
 </ul>
@@ -590,9 +690,15 @@ java.lang.String&nbsp;getCustomerId()</pre>
 <h4>getTaxedPrice</h4>
 <pre>@Nullable
 <a href="../../../../io/sphere/sdk/carts/TaxedPrice.html" title="class in io.sphere.sdk.carts">TaxedPrice</a>&nbsp;getTaxedPrice()</pre>
+<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../io/sphere/sdk/carts/CartLike.html#getTaxedPrice--">CartLike</a></code></span></div>
+<div class="block">The taxed price.
+
+ The shipping address (<a href="../../../../io/sphere/sdk/carts/CartLike.html#getShippingAddress--"><code>CartLike.getShippingAddress()</code></a>) is used to determine tax rate of the line items.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="../../../../io/sphere/sdk/carts/CartLike.html#getTaxedPrice--">getTaxedPrice</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/carts/CartLike.html" title="interface in io.sphere.sdk.carts">CartLike</a>&lt;<a href="../../../../io/sphere/sdk/orders/Order.html" title="interface in io.sphere.sdk.orders">Order</a>&gt;</code></dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>taxed price or null</dd>
 </dl>
 </li>
 </ul>
@@ -640,9 +746,15 @@ java.lang.String&nbsp;getCustomerId()</pre>
 <li class="blockList">
 <h4>getDiscountCodes</h4>
 <pre>java.util.List&lt;<a href="../../../../io/sphere/sdk/discountcodes/DiscountCodeInfo.html" title="class in io.sphere.sdk.discountcodes">DiscountCodeInfo</a>&gt;&nbsp;getDiscountCodes()</pre>
+<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../io/sphere/sdk/carts/CartLike.html#getDiscountCodes--">CartLike</a></code></span></div>
+<div class="block">Discount codes belonging to this cart.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="../../../../io/sphere/sdk/carts/CartLike.html#getDiscountCodes--">getDiscountCodes</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/carts/CartLike.html" title="interface in io.sphere.sdk.carts">CartLike</a>&lt;<a href="../../../../io/sphere/sdk/orders/Order.html" title="interface in io.sphere.sdk.orders">Order</a>&gt;</code></dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>discount codes</dd>
+<dt><span class="seeLabel">See Also:</span></dt>
+<dd><a href="../../../../io/sphere/sdk/carts/commands/updateactions/AddDiscountCode.html" title="class in io.sphere.sdk.carts.commands.updateactions"><code>AddDiscountCode</code></a></dd>
 </dl>
 </li>
 </ul>
@@ -706,6 +818,26 @@ java.lang.String&nbsp;getCustomerId()</pre>
 <li class="blockList">
 <h4>referenceOfId</h4>
 <pre>static&nbsp;<a href="../../../../io/sphere/sdk/models/Reference.html" title="interface in io.sphere.sdk.models">Reference</a>&lt;<a href="../../../../io/sphere/sdk/orders/Order.html" title="interface in io.sphere.sdk.orders">Order</a>&gt;&nbsp;referenceOfId(java.lang.String&nbsp;id)</pre>
+<div class="block">Creates a reference for one item of this class by a known ID.
+
+ <p>An example for categories but this applies for other resources, too:</p>
+ <div id="io-sphere-sdk-categories-CategoryTest-referenceOfId--%s" class=code-example><pre><code class='java'>final String categoryIdFromFormOrSession = "84ac4271-0fec-49d0-9fee-55586c565c58";
+final Reference&lt;Category&gt; categoryReference = Category.referenceOfId(categoryIdFromFormOrSession);
+assertThat(categoryReference.getId()).isEqualTo(categoryIdFromFormOrSession);
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/test/java/io/sphere/sdk/categories/CategoryTest.java" target="_blank">test code</a>.</pre></div>
+
+ <p>If you already have a resource object, then use <a href="../../../../io/sphere/sdk/orders/Order.html#toReference--"><code>toReference()</code></a> instead:</p>
+
+ <div id="io-sphere-sdk-categories-CategoryTest-toReference--%s" class=code-example><pre><code class='java'>final Category category = getCategory();
+final Reference&lt;Category&gt; categoryReference = category.toReference();
+assertThat(category.getId()).isEqualTo(categoryReference.getId());
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/test/java/io/sphere/sdk/categories/CategoryTest.java" target="_blank">test code</a>.</pre></div></div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>id</code> - the ID of the resource which should be referenced.</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>reference</dd>
+</dl>
 </li>
 </ul>
 </li>

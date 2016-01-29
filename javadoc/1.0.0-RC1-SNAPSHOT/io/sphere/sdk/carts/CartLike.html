@@ -137,15 +137,21 @@ extends <a href="../../../../io/sphere/sdk/models/Resource.html" title="interfac
 </tr>
 <tr id="i0" class="altColor">
 <td class="colFirst"><code>default java.util.Optional&lt;<a href="../../../../io/sphere/sdk/carts/CustomLineItem.html" title="interface in io.sphere.sdk.carts">CustomLineItem</a>&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/carts/CartLike.html#findCustomLineItem-java.lang.String-">findCustomLineItem</a></span>(java.lang.String&nbsp;customLineItemId)</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/carts/CartLike.html#findCustomLineItem-java.lang.String-">findCustomLineItem</a></span>(java.lang.String&nbsp;customLineItemId)</code>
+<div class="block">Searches for custom line items by ID of a custom line item.</div>
+</td>
 </tr>
 <tr id="i1" class="rowColor">
 <td class="colFirst"><code>default java.util.Optional&lt;<a href="../../../../io/sphere/sdk/carts/LineItem.html" title="interface in io.sphere.sdk.carts">LineItem</a>&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/carts/CartLike.html#findLineItem-java.lang.String-">findLineItem</a></span>(java.lang.String&nbsp;lineItemId)</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/carts/CartLike.html#findLineItem-java.lang.String-">findLineItem</a></span>(java.lang.String&nbsp;lineItemId)</code>
+<div class="block">Searches for line items by ID of a line item.</div>
+</td>
 </tr>
 <tr id="i2" class="altColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/models/Address.html" title="class in io.sphere.sdk.models">Address</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/carts/CartLike.html#getBillingAddress--">getBillingAddress</a></span>()</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/carts/CartLike.html#getBillingAddress--">getBillingAddress</a></span>()</code>
+<div class="block">Address for the bill.</div>
+</td>
 </tr>
 <tr id="i3" class="rowColor">
 <td class="colFirst"><code>com.neovisionaries.i18n.CountryCode</code></td>
@@ -153,7 +159,9 @@ extends <a href="../../../../io/sphere/sdk/models/Resource.html" title="interfac
 </tr>
 <tr id="i4" class="altColor">
 <td class="colFirst"><code>default javax.money.CurrencyUnit</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/carts/CartLike.html#getCurrency--">getCurrency</a></span>()</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/carts/CartLike.html#getCurrency--">getCurrency</a></span>()</code>
+<div class="block">The currency of this cart/order.</div>
+</td>
 </tr>
 <tr id="i5" class="rowColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/types/CustomFields.html" title="class in io.sphere.sdk.types">CustomFields</a></code></td>
@@ -161,7 +169,9 @@ extends <a href="../../../../io/sphere/sdk/models/Resource.html" title="interfac
 </tr>
 <tr id="i6" class="altColor">
 <td class="colFirst"><code>java.lang.String</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/carts/CartLike.html#getCustomerEmail--">getCustomerEmail</a></span>()</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/carts/CartLike.html#getCustomerEmail--">getCustomerEmail</a></span>()</code>
+<div class="block">The email of the customer which should be used for this cart/order.</div>
+</td>
 </tr>
 <tr id="i7" class="rowColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/models/Reference.html" title="interface in io.sphere.sdk.models">Reference</a>&lt;<a href="../../../../io/sphere/sdk/customergroups/CustomerGroup.html" title="interface in io.sphere.sdk.customergroups">CustomerGroup</a>&gt;</code></td>
@@ -171,35 +181,51 @@ extends <a href="../../../../io/sphere/sdk/models/Resource.html" title="interfac
 </tr>
 <tr id="i8" class="altColor">
 <td class="colFirst"><code>java.lang.String</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/carts/CartLike.html#getCustomerId--">getCustomerId</a></span>()</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/carts/CartLike.html#getCustomerId--">getCustomerId</a></span>()</code>
+<div class="block">The ID of the customer to which this cart/order belongs to.</div>
+</td>
 </tr>
 <tr id="i9" class="rowColor">
 <td class="colFirst"><code>java.util.List&lt;<a href="../../../../io/sphere/sdk/carts/CustomLineItem.html" title="interface in io.sphere.sdk.carts">CustomLineItem</a>&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/carts/CartLike.html#getCustomLineItems--">getCustomLineItems</a></span>()</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/carts/CartLike.html#getCustomLineItems--">getCustomLineItems</a></span>()</code>
+<div class="block">Custom goods, fees or discounts added to the cart.</div>
+</td>
 </tr>
 <tr id="i10" class="altColor">
 <td class="colFirst"><code>java.util.List&lt;<a href="../../../../io/sphere/sdk/discountcodes/DiscountCodeInfo.html" title="class in io.sphere.sdk.discountcodes">DiscountCodeInfo</a>&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/carts/CartLike.html#getDiscountCodes--">getDiscountCodes</a></span>()</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/carts/CartLike.html#getDiscountCodes--">getDiscountCodes</a></span>()</code>
+<div class="block">Discount codes belonging to this cart.</div>
+</td>
 </tr>
 <tr id="i11" class="rowColor">
 <td class="colFirst"><code>java.util.List&lt;<a href="../../../../io/sphere/sdk/carts/LineItem.html" title="interface in io.sphere.sdk.carts">LineItem</a>&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/carts/CartLike.html#getLineItems--">getLineItems</a></span>()</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/carts/CartLike.html#getLineItems--">getLineItems</a></span>()</code>
+<div class="block">Snapshots of the products added to the cart.</div>
+</td>
 </tr>
 <tr id="i12" class="altColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/carts/PaymentInfo.html" title="class in io.sphere.sdk.carts">PaymentInfo</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/carts/CartLike.html#getPaymentInfo--">getPaymentInfo</a></span>()</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/carts/CartLike.html#getPaymentInfo--">getPaymentInfo</a></span>()</code>
+<div class="block">Get associated payments.</div>
+</td>
 </tr>
 <tr id="i13" class="rowColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/models/Address.html" title="class in io.sphere.sdk.models">Address</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/carts/CartLike.html#getShippingAddress--">getShippingAddress</a></span>()</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/carts/CartLike.html#getShippingAddress--">getShippingAddress</a></span>()</code>
+<div class="block">Address to ship the goods.</div>
+</td>
 </tr>
 <tr id="i14" class="altColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/carts/CartShippingInfo.html" title="interface in io.sphere.sdk.carts">CartShippingInfo</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/carts/CartLike.html#getShippingInfo--">getShippingInfo</a></span>()</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/carts/CartLike.html#getShippingInfo--">getShippingInfo</a></span>()</code>
+<div class="block">Information about shipping set by the backend once the shipping method is set.</div>
+</td>
 </tr>
 <tr id="i15" class="rowColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/carts/TaxedPrice.html" title="class in io.sphere.sdk.carts">TaxedPrice</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/carts/CartLike.html#getTaxedPrice--">getTaxedPrice</a></span>()</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/carts/CartLike.html#getTaxedPrice--">getTaxedPrice</a></span>()</code>
+<div class="block">The taxed price.</div>
+</td>
 </tr>
 <tr id="i16" class="altColor">
 <td class="colFirst"><code>javax.money.MonetaryAmount</code></td>
@@ -249,6 +275,14 @@ extends <a href="../../../../io/sphere/sdk/models/Resource.html" title="interfac
 <h4>getCustomerId</h4>
 <pre>@Nullable
 java.lang.String&nbsp;getCustomerId()</pre>
+<div class="block">The ID of the customer to which this cart/order belongs to.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>id of the customer or null</dd>
+<dt><span class="seeLabel">See Also:</span></dt>
+<dd><a href="../../../../io/sphere/sdk/customers/commands/CustomerSignInCommand.html" title="class in io.sphere.sdk.customers.commands"><code>CustomerSignInCommand</code></a>, 
+<a href="../../../../io/sphere/sdk/carts/commands/updateactions/SetCustomerId.html" title="class in io.sphere.sdk.carts.commands.updateactions"><code>SetCustomerId</code></a></dd>
+</dl>
 </li>
 </ul>
 <a name="getCustomerEmail--">
@@ -259,6 +293,13 @@ java.lang.String&nbsp;getCustomerId()</pre>
 <h4>getCustomerEmail</h4>
 <pre>@Nullable
 java.lang.String&nbsp;getCustomerEmail()</pre>
+<div class="block">The email of the customer which should be used for this cart/order. It can differ from <a href="../../../../io/sphere/sdk/customers/Customer.html#getEmail--"><code>Customer.getEmail()</code></a>.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>email</dd>
+<dt><span class="seeLabel">See Also:</span></dt>
+<dd><a href="../../../../io/sphere/sdk/carts/commands/updateactions/SetCustomerEmail.html" title="class in io.sphere.sdk.carts.commands.updateactions"><code>SetCustomerEmail</code></a></dd>
+</dl>
 </li>
 </ul>
 <a name="getLineItems--">
@@ -268,6 +309,15 @@ java.lang.String&nbsp;getCustomerEmail()</pre>
 <li class="blockList">
 <h4>getLineItems</h4>
 <pre>java.util.List&lt;<a href="../../../../io/sphere/sdk/carts/LineItem.html" title="interface in io.sphere.sdk.carts">LineItem</a>&gt;&nbsp;getLineItems()</pre>
+<div class="block">Snapshots of the products added to the cart.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>line items</dd>
+<dt><span class="seeLabel">See Also:</span></dt>
+<dd><a href="../../../../io/sphere/sdk/carts/commands/updateactions/AddLineItem.html" title="class in io.sphere.sdk.carts.commands.updateactions"><code>AddLineItem</code></a>, 
+<a href="../../../../io/sphere/sdk/carts/commands/updateactions/ChangeLineItemQuantity.html" title="class in io.sphere.sdk.carts.commands.updateactions"><code>ChangeLineItemQuantity</code></a>, 
+<a href="../../../../io/sphere/sdk/carts/commands/updateactions/RemoveLineItem.html" title="class in io.sphere.sdk.carts.commands.updateactions"><code>RemoveLineItem</code></a></dd>
+</dl>
 </li>
 </ul>
 <a name="getCustomLineItems--">
@@ -277,6 +327,14 @@ java.lang.String&nbsp;getCustomerEmail()</pre>
 <li class="blockList">
 <h4>getCustomLineItems</h4>
 <pre>java.util.List&lt;<a href="../../../../io/sphere/sdk/carts/CustomLineItem.html" title="interface in io.sphere.sdk.carts">CustomLineItem</a>&gt;&nbsp;getCustomLineItems()</pre>
+<div class="block">Custom goods, fees or discounts added to the cart.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>custom line items</dd>
+<dt><span class="seeLabel">See Also:</span></dt>
+<dd><a href="../../../../io/sphere/sdk/carts/commands/updateactions/AddCustomLineItem.html" title="class in io.sphere.sdk.carts.commands.updateactions"><code>AddCustomLineItem</code></a>, 
+<a href="../../../../io/sphere/sdk/carts/commands/updateactions/RemoveCustomLineItem.html" title="class in io.sphere.sdk.carts.commands.updateactions"><code>RemoveCustomLineItem</code></a></dd>
+</dl>
 </li>
 </ul>
 <a name="findCustomLineItem-java.lang.String-">
@@ -286,6 +344,13 @@ java.lang.String&nbsp;getCustomerEmail()</pre>
 <li class="blockList">
 <h4>findCustomLineItem</h4>
 <pre>default&nbsp;java.util.Optional&lt;<a href="../../../../io/sphere/sdk/carts/CustomLineItem.html" title="interface in io.sphere.sdk.carts">CustomLineItem</a>&gt;&nbsp;findCustomLineItem(java.lang.String&nbsp;customLineItemId)</pre>
+<div class="block">Searches for custom line items by ID of a custom line item.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>customLineItemId</code> - the ID of the custom line item to search for.</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>optional custom line item</dd>
+</dl>
 </li>
 </ul>
 <a name="findLineItem-java.lang.String-">
@@ -295,6 +360,13 @@ java.lang.String&nbsp;getCustomerEmail()</pre>
 <li class="blockList">
 <h4>findLineItem</h4>
 <pre>default&nbsp;java.util.Optional&lt;<a href="../../../../io/sphere/sdk/carts/LineItem.html" title="interface in io.sphere.sdk.carts">LineItem</a>&gt;&nbsp;findLineItem(java.lang.String&nbsp;lineItemId)</pre>
+<div class="block">Searches for line items by ID of a line item.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>lineItemId</code> - the ID of the line item to search for.</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>optional line item</dd>
+</dl>
 </li>
 </ul>
 <a name="getTotalPrice--">
@@ -314,6 +386,13 @@ java.lang.String&nbsp;getCustomerEmail()</pre>
 <h4>getTaxedPrice</h4>
 <pre>@Nullable
 <a href="../../../../io/sphere/sdk/carts/TaxedPrice.html" title="class in io.sphere.sdk.carts">TaxedPrice</a>&nbsp;getTaxedPrice()</pre>
+<div class="block">The taxed price.
+
+ The shipping address (<a href="../../../../io/sphere/sdk/carts/CartLike.html#getShippingAddress--"><code>getShippingAddress()</code></a>) is used to determine tax rate of the line items.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>taxed price or null</dd>
+</dl>
 </li>
 </ul>
 <a name="getShippingAddress--">
@@ -324,6 +403,14 @@ java.lang.String&nbsp;getCustomerEmail()</pre>
 <h4>getShippingAddress</h4>
 <pre>@Nullable
 <a href="../../../../io/sphere/sdk/models/Address.html" title="class in io.sphere.sdk.models">Address</a>&nbsp;getShippingAddress()</pre>
+<div class="block">Address to ship the goods.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>address or null</dd>
+<dt><span class="seeLabel">See Also:</span></dt>
+<dd><a href="../../../../io/sphere/sdk/carts/commands/updateactions/SetShippingAddress.html" title="class in io.sphere.sdk.carts.commands.updateactions"><code>SetShippingAddress</code></a>, 
+<a href="../../../../io/sphere/sdk/carts/CartLike.html#getTaxedPrice--"><code>getTaxedPrice()</code></a></dd>
+</dl>
 </li>
 </ul>
 <a name="getBillingAddress--">
@@ -334,6 +421,13 @@ java.lang.String&nbsp;getCustomerEmail()</pre>
 <h4>getBillingAddress</h4>
 <pre>@Nullable
 <a href="../../../../io/sphere/sdk/models/Address.html" title="class in io.sphere.sdk.models">Address</a>&nbsp;getBillingAddress()</pre>
+<div class="block">Address for the bill.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>address or null</dd>
+<dt><span class="seeLabel">See Also:</span></dt>
+<dd><a href="../../../../io/sphere/sdk/carts/commands/updateactions/SetBillingAddress.html" title="class in io.sphere.sdk.carts.commands.updateactions"><code>SetBillingAddress</code></a></dd>
+</dl>
 </li>
 </ul>
 <a name="getCustomerGroup--">
@@ -347,7 +441,7 @@ java.lang.String&nbsp;getCustomerEmail()</pre>
 <div class="block">In the order context the customer group can only be expanded if the customer was in a group before creating the order.</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
-<dd>optional reference of a customer group</dd>
+<dd>reference of a customer group or null</dd>
 </dl>
 </li>
 </ul>
@@ -368,6 +462,13 @@ com.neovisionaries.i18n.CountryCode&nbsp;getCountry()</pre>
 <li class="blockList">
 <h4>getDiscountCodes</h4>
 <pre>java.util.List&lt;<a href="../../../../io/sphere/sdk/discountcodes/DiscountCodeInfo.html" title="class in io.sphere.sdk.discountcodes">DiscountCodeInfo</a>&gt;&nbsp;getDiscountCodes()</pre>
+<div class="block">Discount codes belonging to this cart.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>discount codes</dd>
+<dt><span class="seeLabel">See Also:</span></dt>
+<dd><a href="../../../../io/sphere/sdk/carts/commands/updateactions/AddDiscountCode.html" title="class in io.sphere.sdk.carts.commands.updateactions"><code>AddDiscountCode</code></a></dd>
+</dl>
 </li>
 </ul>
 <a name="getCustom--">
@@ -392,6 +493,15 @@ com.neovisionaries.i18n.CountryCode&nbsp;getCountry()</pre>
 <h4>getShippingInfo</h4>
 <pre>@Nullable
 <a href="../../../../io/sphere/sdk/carts/CartShippingInfo.html" title="interface in io.sphere.sdk.carts">CartShippingInfo</a>&nbsp;getShippingInfo()</pre>
+<div class="block">Information about shipping set by the backend once the shipping method is set.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>shipping info</dd>
+<dt><span class="seeLabel">See Also:</span></dt>
+<dd><a href="../../../../io/sphere/sdk/carts/commands/updateactions/SetShippingMethod.html" title="class in io.sphere.sdk.carts.commands.updateactions"><code>SetShippingMethod</code></a>, 
+<a href="../../../../io/sphere/sdk/carts/commands/updateactions/SetCustomShippingMethod.html" title="class in io.sphere.sdk.carts.commands.updateactions"><code>SetCustomShippingMethod</code></a>, 
+<a href="../../../../io/sphere/sdk/orders/commands/updateactions/AddDelivery.html" title="class in io.sphere.sdk.orders.commands.updateactions"><code>AddDelivery</code></a></dd>
+</dl>
 </li>
 </ul>
 <a name="getPaymentInfo--">
@@ -402,6 +512,16 @@ com.neovisionaries.i18n.CountryCode&nbsp;getCountry()</pre>
 <h4>getPaymentInfo</h4>
 <pre>@Nullable
 <a href="../../../../io/sphere/sdk/carts/PaymentInfo.html" title="class in io.sphere.sdk.carts">PaymentInfo</a>&nbsp;getPaymentInfo()</pre>
+<div class="block">Get associated payments.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>payments</dd>
+<dt><span class="seeLabel">See Also:</span></dt>
+<dd><a href="../../../../io/sphere/sdk/carts/commands/updateactions/AddPayment.html" title="class in io.sphere.sdk.carts.commands.updateactions"><code>AddPayment</code></a>, 
+<a href="../../../../io/sphere/sdk/carts/commands/updateactions/RemovePayment.html" title="class in io.sphere.sdk.carts.commands.updateactions"><code>RemovePayment</code></a>, 
+<a href="../../../../io/sphere/sdk/orders/commands/updateactions/AddPayment.html" title="class in io.sphere.sdk.orders.commands.updateactions"><code>AddPayment</code></a>, 
+<a href="../../../../io/sphere/sdk/orders/commands/updateactions/RemovePayment.html" title="class in io.sphere.sdk.orders.commands.updateactions"><code>RemovePayment</code></a></dd>
+</dl>
 </li>
 </ul>
 <a name="getCurrency--">
@@ -411,6 +531,11 @@ com.neovisionaries.i18n.CountryCode&nbsp;getCountry()</pre>
 <li class="blockList">
 <h4>getCurrency</h4>
 <pre>default&nbsp;javax.money.CurrencyUnit&nbsp;getCurrency()</pre>
+<div class="block">The currency of this cart/order.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>currency</dd>
+</dl>
 </li>
 </ul>
 </li>
