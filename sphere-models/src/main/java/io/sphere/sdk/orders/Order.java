@@ -183,6 +183,19 @@ public interface Order extends CartLike<Order> {
     @Override
     PaymentInfo getPaymentInfo();
 
+    /**
+     * Creates a reference for one item of this class by a known ID.
+     *
+     * <p>An example for categories but this applies for other resources, too:</p>
+     * {@include.example io.sphere.sdk.categories.CategoryTest#referenceOfId()}
+     *
+     * <p>If you already have a resource object, then use {@link #toReference()} instead:</p>
+     *
+     * {@include.example io.sphere.sdk.categories.CategoryTest#toReference()}
+     *
+     * @param id the ID of the resource which should be referenced.
+     * @return reference
+     */
     static Reference<Order> referenceOfId(final String id) {
         return Reference.of(referenceTypeId(), id);
     }
