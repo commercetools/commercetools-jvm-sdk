@@ -126,7 +126,18 @@ var activeTableTab = "activeTableTab";
 extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html" title="class in io.sphere.sdk.commands">UpdateActionImpl</a>&lt;<a href="../../../../../../io/sphere/sdk/states/State.html" title="interface in io.sphere.sdk.states">State</a>&gt;</pre>
 <div class="block">Changes the type for which the state can be used.
 
- <p>See also <a href="../StateUpdateCommand.html">StateUpdateCommand</a>.<p></div>
+ <p>See also <a href="../StateUpdateCommand.html">StateUpdateCommand</a>.<p>
+
+ <div id="io-sphere-sdk-states-commands-StateUpdateCommandTest-changeType--%s" class=code-example><pre><code class='java'>withUpdateableState(client(), builder -&gt; builder.type(StateType.REVIEW_STATE), state -&gt; {
+    final StateType newStateType = StateType.ORDER_STATE;
+
+    final State updatedState = client().executeBlocking(StateUpdateCommand.of(state, ChangeType.of(newStateType)));
+
+    assertThat(updatedState.getType()).isEqualTo(newStateType);
+
+    return updatedState;
+});
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/states/commands/StateUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 </li>
 </ul>
 </div>

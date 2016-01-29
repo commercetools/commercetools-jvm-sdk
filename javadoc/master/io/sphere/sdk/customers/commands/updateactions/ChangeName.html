@@ -129,17 +129,10 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html"
   <p>See also <a href="../CustomerUpdateCommand.html">CustomerUpdateCommand</a>.<p>
 
  <div id="io-sphere-sdk-customers-commands-CustomerUpdateCommandTest-changeName--%s" class=code-example><pre><code class='java'>withCustomer(client(), customer -&gt; {
-    final List&lt;UpdateAction&lt;Customer&gt;&gt; updateActions = asList(
-            SetTitle.of("Dr."),
-            SetFirstName.of("Petronella"),
-            SetMiddleName.of("M."),
-            SetLastName.of("Osgood")
-    );
-    final Customer updatedCustomer = client().executeBlocking(CustomerUpdateCommand.of(customer, updateActions));
-    assertThat(updatedCustomer.getTitle()).isEqualTo("Dr.");
-    assertThat(updatedCustomer.getFirstName()).isEqualTo("Petronella");
-    assertThat(updatedCustomer.getMiddleName()).isEqualTo("M.");
-    assertThat(updatedCustomer.getLastName()).isEqualTo("Osgood");
+    final CustomerName newName = CustomerName.ofTitleFirstAndLastName("Mister", "John", "Smith");
+    assertThat(customer.getName()).isNotEqualTo(newName);
+    final Customer updatedCustomer = client().executeBlocking(CustomerUpdateCommand.of(customer, ChangeName.of(newName)));
+    assertThat(updatedCustomer.getName()).isEqualTo(newName);
 });
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/customers/commands/CustomerUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 <dl>
