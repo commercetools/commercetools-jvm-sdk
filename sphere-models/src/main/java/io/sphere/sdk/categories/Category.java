@@ -38,36 +38,108 @@ import static io.sphere.sdk.utils.SphereInternalUtils.join;
 @JsonDeserialize(as=CategoryImpl.class)
 public interface Category extends Resource<Category>, WithLocalizedSlug, MetaAttributes, Custom {
 
+    /**
+     * Name of this category.
+     *
+     * @see io.sphere.sdk.categories.commands.updateactions.ChangeName
+     *
+     * @return name
+     */
     LocalizedString getName();
 
+    /**
+     * Human-readable identifier usually used as deep-link URL part.
+     *
+     * @see io.sphere.sdk.categories.commands.updateactions.ChangeSlug
+     *
+     * @return slug
+     */
     LocalizedString getSlug();
 
+    /**
+     * Description for this category.
+     *
+     * @see io.sphere.sdk.categories.commands.updateactions.SetDescription
+     *
+     * @return description or null
+     */
     @Nullable
     LocalizedString getDescription();
 
     List<Reference<Category>> getAncestors();
 
+    /**
+     * Reference to the parent category.
+     *
+     * @see io.sphere.sdk.categories.commands.updateactions.ChangeParent
+     *
+     * @return parent reference or null
+     */
     @Nullable
     Reference<Category> getParent();
 
+    /**
+     * An attribute as base for a custom category order in one level.
+     *
+     * @see io.sphere.sdk.categories.commands.updateactions.ChangeOrderHint
+     *
+     * @return order hint or null
+     */
     @Nullable
     String getOrderHint();
 
+    /**
+     * ID which can be used as additional identifier for external Systems like CRM or ERP.
+     *
+     * @see io.sphere.sdk.categories.commands.updateactions.SetExternalId
+     *
+     * @return external ID or null
+     */
     @Nullable
     String getExternalId();
 
+    /**
+     * SEO meta title.
+     *
+     * @see io.sphere.sdk.categories.commands.updateactions.SetMetaTitle
+     *
+     * @return SEO meta title.
+     */
     @Nullable
     @Override
     LocalizedString getMetaTitle();
 
+    /**
+     * SEO meta description.
+     *
+     * @see io.sphere.sdk.categories.commands.updateactions.SetMetaDescription
+     *
+     * @return SEO meta description.
+     */
     @Nullable
     @Override
     LocalizedString getMetaDescription();
 
+    /**
+     * SEO meta keywords.
+     *
+     * @see io.sphere.sdk.categories.commands.updateactions.SetMetaKeywords
+     *
+     * @return SEO meta keywords.
+     */
     @Nullable
     @Override
     LocalizedString getMetaKeywords();
 
+    /**
+     * Custom fields.
+     *
+     * @see Custom
+     * @see io.sphere.sdk.categories.commands.updateactions.SetCustomField
+     * @see io.sphere.sdk.categories.commands.updateactions.SetCustomType
+     *
+     * @return custom fields
+     */
     @Nullable
     CustomFields getCustom();
 

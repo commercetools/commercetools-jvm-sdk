@@ -13,9 +13,7 @@ import java.util.List;
 
 import static io.sphere.sdk.categories.CategoryFixtures.withCategory;
 import static io.sphere.sdk.categories.CategoryFixtures.withPersistentCategory;
-import static io.sphere.sdk.test.SphereTestUtils.ENGLISH;
-import static io.sphere.sdk.test.SphereTestUtils.asList;
-import static io.sphere.sdk.test.SphereTestUtils.randomSlug;
+import static io.sphere.sdk.test.SphereTestUtils.*;
 import static java.util.Collections.singletonList;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -45,6 +43,42 @@ public class CategoryUpdateCommandTest extends IntegrationTest {
             final Category updatedCategory = client().executeBlocking(command);
 
             assertThat(updatedCategory.getName()).isEqualTo(newName);
+        });
+    }
+
+    @Test
+    public void changeSlug() throws Exception {
+        withCategory(client(), category -> {
+            final LocalizedString newSug = randomSlug();
+            final CategoryUpdateCommand command = CategoryUpdateCommand.of(category, ChangeSlug.of(newSug));
+
+            final Category updatedCategory = client().executeBlocking(command);
+
+            assertThat(updatedCategory.getSlug()).isEqualTo(newSug);
+        });
+    }
+
+    @Test
+    public void setDescription() throws Exception {
+        withCategory(client(), category -> {
+            final LocalizedString newDescription = randomSlug();
+            final CategoryUpdateCommand command = CategoryUpdateCommand.of(category, SetDescription.of(newDescription));
+
+            final Category updatedCategory = client().executeBlocking(command);
+
+            assertThat(updatedCategory.getDescription()).isEqualTo(newDescription);
+        });
+    }
+
+    @Test
+    public void changeOrderHint() throws Exception {
+        withCategory(client(), category -> {
+            final String newOrderHint = randomSortOrder();
+            final CategoryUpdateCommand command = CategoryUpdateCommand.of(category, ChangeOrderHint.of(newOrderHint));
+
+            final Category updatedCategory = client().executeBlocking(command);
+
+            assertThat(updatedCategory.getOrderHint()).isEqualTo(newOrderHint);
         });
     }
 
