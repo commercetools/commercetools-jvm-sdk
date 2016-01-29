@@ -8,6 +8,8 @@ import io.sphere.sdk.states.StateType;
  * Changes the type for which the state can be used.
  *
  * {@doc.gen intro}
+ *
+ * {@include.example io.sphere.sdk.states.commands.StateUpdateCommandTest#changeType()}
  */
 public class ChangeType extends UpdateActionImpl<State> {
     private final StateType type;

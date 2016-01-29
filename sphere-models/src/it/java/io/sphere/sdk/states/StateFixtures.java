@@ -81,6 +81,14 @@ public class StateFixtures {
         consumer.accept(stateA, stateB);
     }
 
+    public static void withUpdateableState(final BlockingSphereClient client, final UnaryOperator<StateDraftBuilder> b, final UnaryOperator<State> f) {
+        final StateDraftBuilder builder = StateDraftBuilder.of(randomKey(), StateType.LINE_ITEM_STATE);
+        final StateDraft draft = b.apply(builder).build();
+        final State state = client.executeBlocking(StateCreateCommand.of(draft));
+        final State updatedState = f.apply(state);
+        client.executeBlocking(StateDeleteCommand.of(updatedState));
+    }
+
     public static void withUpdateableState(final BlockingSphereClient client, final Function<State, State> f) {
         final State state = createStateByKey(client, randomKey());
         final State updatedState = f.apply(state);

@@ -3,10 +3,8 @@ package io.sphere.sdk.states.commands;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.states.State;
-import io.sphere.sdk.states.commands.updateactions.ChangeInitial;
-import io.sphere.sdk.states.commands.updateactions.ChangeKey;
-import io.sphere.sdk.states.commands.updateactions.SetName;
-import io.sphere.sdk.states.commands.updateactions.SetTransitions;
+import io.sphere.sdk.states.StateType;
+import io.sphere.sdk.states.commands.updateactions.*;
 import io.sphere.sdk.states.queries.StateByIdGet;
 import io.sphere.sdk.test.IntegrationTest;
 import org.junit.Test;
@@ -79,6 +77,19 @@ public class StateUpdateCommandTest extends IntegrationTest {
                 return updatedStateBWithoutTransitions;
             });
             return stateA;
+        });
+    }
+
+    @Test
+    public void changeType() {
+        withUpdateableState(client(), builder -> builder.type(StateType.REVIEW_STATE), state -> {
+            final StateType newStateType = StateType.ORDER_STATE;
+
+            final State updatedState = client().executeBlocking(StateUpdateCommand.of(state, ChangeType.of(newStateType)));
+
+            assertThat(updatedState.getType()).isEqualTo(newStateType);
+
+            return updatedState;
         });
     }
 }
