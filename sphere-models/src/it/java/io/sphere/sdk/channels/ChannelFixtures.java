@@ -53,7 +53,7 @@ public class ChannelFixtures {
     public static void withChannel(final BlockingSphereClient client, final ChannelDraft channelDraft, final Consumer<Channel> f) {
         final Channel channel = client.executeBlocking(ChannelCreateCommand.of(channelDraft));
         f.accept(channel);
-        client.execute(ChannelDeleteCommand.of(channel));
+        client.executeBlocking(ChannelDeleteCommand.of(channel));
     }
 
     private static void withPersistent(final BlockingSphereClient client, final String key, final ChannelRole roles, final Consumer<Channel> f) {
