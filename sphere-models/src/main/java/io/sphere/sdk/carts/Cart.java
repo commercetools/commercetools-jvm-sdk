@@ -86,10 +86,19 @@ public interface Cart extends CartLike<Cart> {
         return Reference.of(referenceTypeId(), getId(), this);
     }
 
+    /**
+     * State in the perspective if the cart is active, merged with another cart or ordered.
+     *
+     * @see io.sphere.sdk.customers.commands.CustomerSignInCommand
+     * @see io.sphere.sdk.orders.commands.OrderFromCartCreateCommand
+     *
+     * @return state
+     */
     CartState getCartState();
 
     InventoryMode getInventoryMode();
 
+    @Override
     @Nullable
     CartShippingInfo getShippingInfo();
 
@@ -149,13 +158,6 @@ public interface Cart extends CartLike<Cart> {
     @Override
     CustomFields getCustom();
 
-    /**
-     * Get associated payments.
-     *
-     * @return payments
-     * @see io.sphere.sdk.carts.commands.updateactions.AddPayment
-     * @see io.sphere.sdk.carts.commands.updateactions.RemovePayment
-     */
     @Nullable
     @Override
     PaymentInfo getPaymentInfo();

@@ -8,7 +8,8 @@ package io.sphere.sdk.models;
  */
 public interface Referenceable<T> extends ResourceIdentifiable<T> {
     /**
-     * Creates a reference which is not necessarily filled.
+     * Creates a reference to this resource, the reference may not be filled.
+     *
      * @return reference
      */
     Reference<T> toReference();
