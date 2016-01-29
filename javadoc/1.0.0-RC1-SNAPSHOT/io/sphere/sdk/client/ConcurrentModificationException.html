@@ -138,7 +138,59 @@
 <br>
 <pre>public class <span class="typeNameLabel">ConcurrentModificationException</span>
 extends <a href="../../../../io/sphere/sdk/client/ClientErrorException.html" title="class in io.sphere.sdk.client">ClientErrorException</a></pre>
-<div class="block">HTTP code 409 response from SPHERE.IO.</div>
+<div class="block">HTTP code 409 response from SPHERE.IO.
+
+ <p>This error occurs if you try to update or delete a resource using an outdated version (<a href="../../../../io/sphere/sdk/models/Versioned.html#getVersion--"><code>Versioned.getVersion()</code></a>).</p>
+
+ <p>Do not confuse it with <code>java.util.ConcurrentModificationException</code>, especially in imports.</p>
+
+ <p>Example how this could happen:</p>
+
+ <div id="io-sphere-sdk-errors-SphereExceptionIntegrationTest-demoForFailing409IsGood--%s" class=code-example><pre><code class='java'>//Given we have a product
+withTaxedProduct(client(), product -&gt; {
+    //And given we have an empty cart
+    withCart(client(), cart -&gt; {
+        //when a customer clicks enter to cart
+        final int variantId = 1;
+        final int quantity = 2;
+        final CartUpdateCommand cartUpdateCommand =  CartUpdateCommand.of(cart, AddLineItem.of(product, variantId, quantity));
+        final Cart successfulUpdatedCart = client().executeBlocking(cartUpdateCommand);
+        assertThat(successfulUpdatedCart.getVersion()).isGreaterThan(cart.getVersion());
+
+        //and by accident again
+        final Throwable throwable = catchThrowable(() -&gt; client().executeBlocking(cartUpdateCommand));
+
+        assertThat(throwable).isInstanceOf(ConcurrentModificationException.class);
+
+        return successfulUpdatedCart;
+    });
+});
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/errors/SphereExceptionIntegrationTest.java" target="_blank">test code</a>.</pre></div>
+
+ <p>In case the update or deletion shoulx executed in the same shape anyway you could get the current version and try to execute again:</p>
+ <div id="io-sphere-sdk-errors-SphereExceptionIntegrationTest-demoForBruteForceSolveTheVersionConflict--%s" class=code-example><pre><code class='java'>withTaxedProduct(client(), product -&gt; {
+    withCart(client(), cart -&gt; {
+        //when a customer clicks enter to cart
+        final int variantId = 1;
+        final int quantity = 2;
+        final CartUpdateCommand cartUpdateCommand =  CartUpdateCommand.of(cart, AddLineItem.of(product, variantId, quantity));
+        client().executeBlocking(cartUpdateCommand);//successful attempt in another thread/machine/container/tab
+        //the operation will increase the version number of the cart
+
+        //warning: ignoring version conflicts can be very poor behaviour on some use cases
+        //we show this here if you want to execute the command anyway
+        Cart updated2;
+        try {
+            updated2 = client().executeBlocking(cartUpdateCommand);
+        } catch (final ConcurrentModificationException e) {
+            final Cart cartWithCurrentVersion = client().executeBlocking(CartByIdGet.of(cart));
+            final CartUpdateCommand commandWithCurrentCartVersion = cartUpdateCommand.withVersion(cartWithCurrentVersion);
+            updated2 = client().executeBlocking(commandWithCurrentCartVersion);
+        }
+        return updated2;
+    });
+});
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/errors/SphereExceptionIntegrationTest.java" target="_blank">test code</a>.</pre></div></div>
 <dl>
 <dt><span class="seeLabel">See Also:</span></dt>
 <dd><a href="../../../../serialized-form.html#io.sphere.sdk.client.ConcurrentModificationException">Serialized Form</a></dd>
