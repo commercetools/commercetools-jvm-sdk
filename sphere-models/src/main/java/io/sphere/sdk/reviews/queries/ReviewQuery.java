@@ -13,6 +13,16 @@ import io.sphere.sdk.reviews.expansion.ReviewExpansionModel;
     @see Review
  */
 public interface ReviewQuery extends MetaModelQueryDsl<Review, ReviewQuery, ReviewQueryModel, ReviewExpansionModel<Review>> {
+    /**
+     * Creates a container which contains the full Java type information to deserialize the query result (NOT this class) from JSON.
+     *
+     * @see io.sphere.sdk.json.SphereJsonUtils#readObject(byte[], TypeReference)
+     * @see io.sphere.sdk.json.SphereJsonUtils#readObject(String, TypeReference)
+     * @see io.sphere.sdk.json.SphereJsonUtils#readObject(com.fasterxml.jackson.databind.JsonNode, TypeReference)
+     * @see io.sphere.sdk.json.SphereJsonUtils#readObjectFromResource(String, TypeReference)
+     *
+     * @return type reference
+     */
     static TypeReference<PagedQueryResult<Review>> resultTypeReference() {
         return new TypeReference<PagedQueryResult<Review>>(){
             @Override

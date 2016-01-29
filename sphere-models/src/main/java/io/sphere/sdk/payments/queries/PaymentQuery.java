@@ -14,7 +14,16 @@ import io.sphere.sdk.queries.PagedQueryResult;
  *
  */
 public interface PaymentQuery extends MetaModelQueryDsl<Payment, PaymentQuery, PaymentQueryModel, PaymentExpansionModel<Payment>> {
-
+    /**
+     * Creates a container which contains the full Java type information to deserialize the query result (NOT this class) from JSON.
+     *
+     * @see io.sphere.sdk.json.SphereJsonUtils#readObject(byte[], TypeReference)
+     * @see io.sphere.sdk.json.SphereJsonUtils#readObject(String, TypeReference)
+     * @see io.sphere.sdk.json.SphereJsonUtils#readObject(com.fasterxml.jackson.databind.JsonNode, TypeReference)
+     * @see io.sphere.sdk.json.SphereJsonUtils#readObjectFromResource(String, TypeReference)
+     *
+     * @return type reference
+     */
     static TypeReference<PagedQueryResult<Payment>> resultTypeReference() {
         return new TypeReference<PagedQueryResult<Payment>>() {
             @Override

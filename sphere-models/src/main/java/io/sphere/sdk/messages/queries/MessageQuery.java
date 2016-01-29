@@ -29,6 +29,16 @@ import io.sphere.sdk.queries.Query;
 
  */
 public interface MessageQuery extends MetaModelQueryDsl<Message, MessageQuery, MessageQueryModel, MessageExpansionModel<Message>> {
+    /**
+     * Creates a container which contains the full Java type information to deserialize the query result (NOT this class) from JSON.
+     *
+     * @see io.sphere.sdk.json.SphereJsonUtils#readObject(byte[], TypeReference)
+     * @see io.sphere.sdk.json.SphereJsonUtils#readObject(String, TypeReference)
+     * @see io.sphere.sdk.json.SphereJsonUtils#readObject(com.fasterxml.jackson.databind.JsonNode, TypeReference)
+     * @see io.sphere.sdk.json.SphereJsonUtils#readObjectFromResource(String, TypeReference)
+     *
+     * @return type reference
+     */
     static TypeReference<PagedQueryResult<Message>> resultTypeReference() {
         return new TypeReference<PagedQueryResult<Message>>(){
             @Override

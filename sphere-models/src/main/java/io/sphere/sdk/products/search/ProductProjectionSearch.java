@@ -21,6 +21,16 @@ import java.util.function.Function;
 public interface ProductProjectionSearch extends MetaModelSearchDsl<ProductProjection, ProductProjectionSearch, ProductProjectionSortSearchModel,
         ProductProjectionFilterSearchModel, ProductProjectionFacetSearchModel, ProductProjectionExpansionModel<ProductProjection>> {
 
+    /**
+     * Creates a container which contains the full Java type information to deserialize the query result (NOT this class) from JSON.
+     *
+     * @see io.sphere.sdk.json.SphereJsonUtils#readObject(byte[], TypeReference)
+     * @see io.sphere.sdk.json.SphereJsonUtils#readObject(String, TypeReference)
+     * @see io.sphere.sdk.json.SphereJsonUtils#readObject(com.fasterxml.jackson.databind.JsonNode, TypeReference)
+     * @see io.sphere.sdk.json.SphereJsonUtils#readObjectFromResource(String, TypeReference)
+     *
+     * @return type reference
+     */
     static TypeReference<PagedSearchResult<ProductProjection>> resultTypeReference() {
         return new TypeReference<PagedSearchResult<ProductProjection>>(){
             @Override

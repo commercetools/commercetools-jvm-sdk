@@ -14,8 +14,14 @@ import io.sphere.sdk.queries.MetaModelQueryDsl;
 public interface CartDiscountQuery extends MetaModelQueryDsl<CartDiscount, CartDiscountQuery, CartDiscountQueryModel, CartDiscountExpansionModel<CartDiscount>> {
 
     /**
+     * Creates a container which contains the full Java type information to deserialize the query result (NOT this class) from JSON.
      *
-     * @return
+     * @see io.sphere.sdk.json.SphereJsonUtils#readObject(byte[], TypeReference)
+     * @see io.sphere.sdk.json.SphereJsonUtils#readObject(String, TypeReference)
+     * @see io.sphere.sdk.json.SphereJsonUtils#readObject(com.fasterxml.jackson.databind.JsonNode, TypeReference)
+     * @see io.sphere.sdk.json.SphereJsonUtils#readObjectFromResource(String, TypeReference)
+     *
+     * @return type reference
      */
     static TypeReference<PagedQueryResult<CartDiscount>> resultTypeReference() {
         return new TypeReference<PagedQueryResult<CartDiscount>>(){
