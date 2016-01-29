@@ -3,7 +3,6 @@ package io.sphere.sdk.products.queries;
 import io.sphere.sdk.customergroups.CustomerGroup;
 import io.sphere.sdk.queries.*;
 import io.sphere.sdk.types.queries.CustomQueryModel;
-import io.sphere.sdk.types.queries.CustomQueryModelImpl;
 
 import javax.annotation.Nullable;
 
@@ -56,7 +55,7 @@ final class PriceCollectionQueryModelImpl<T> extends QueryModelImpl<T> implement
 
     @Override
     public CustomQueryModel<T> custom() {
-        return new CustomQueryModelImpl<>(this, "custom");
+        return CustomQueryModel.of(this, "custom");
     }
 }
 

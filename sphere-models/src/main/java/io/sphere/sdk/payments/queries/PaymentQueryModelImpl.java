@@ -4,7 +4,6 @@ import io.sphere.sdk.customers.Customer;
 import io.sphere.sdk.payments.Payment;
 import io.sphere.sdk.queries.*;
 import io.sphere.sdk.types.queries.CustomQueryModel;
-import io.sphere.sdk.types.queries.CustomQueryModelImpl;
 import io.sphere.sdk.types.queries.CustomResourceQueryModelImpl;
 
 final class PaymentQueryModelImpl extends CustomResourceQueryModelImpl<Payment> implements PaymentQueryModel {
@@ -15,7 +14,7 @@ final class PaymentQueryModelImpl extends CustomResourceQueryModelImpl<Payment> 
 
     @Override
     public CustomQueryModel<Payment> custom() {
-        return new CustomQueryModelImpl<>(this, "custom");
+        return CustomQueryModel.of(this, "custom");
     }
 
     @Override

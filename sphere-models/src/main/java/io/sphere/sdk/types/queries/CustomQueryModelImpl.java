@@ -7,8 +7,8 @@ import io.sphere.sdk.types.Type;
 
 import javax.annotation.Nullable;
 
-public final class CustomQueryModelImpl<T> extends QueryModelImpl<T> implements CustomQueryModel<T> {
-    public CustomQueryModelImpl(@Nullable final QueryModel<T> parent, @Nullable final String pathSegment) {
+final class CustomQueryModelImpl<T> extends QueryModelImpl<T> implements CustomQueryModel<T> {
+    CustomQueryModelImpl(@Nullable final QueryModel<T> parent, @Nullable final String pathSegment) {
         super(parent, pathSegment);
     }
 

@@ -10,6 +10,6 @@ public abstract class CustomResourceQueryModelImpl<T> extends ResourceQueryModel
 
     @Override
     public CustomQueryModel<T> custom() {
-        return new CustomQueryModelImpl<>(this, "custom");
+        return CustomQueryModel.of(this, "custom");
     }
 }
