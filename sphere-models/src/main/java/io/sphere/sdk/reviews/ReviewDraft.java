@@ -39,6 +39,10 @@ public interface ReviewDraft {
     @Nullable
     ResourceIdentifier<State> getState();
 
+    /**
+     * Target of this review. Currently are only {@link io.sphere.sdk.products.Product}s and {@link io.sphere.sdk.channels.Channel}s supported.
+     * @return
+     */
     @Nullable
     ResourceIdentifier<?> getTarget();
 

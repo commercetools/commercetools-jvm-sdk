@@ -8,8 +8,10 @@ import io.sphere.sdk.models.Resource;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.orders.SyncInfo;
 import io.sphere.sdk.reviews.Review;
+import io.sphere.sdk.reviews.ReviewDraft;
 import io.sphere.sdk.reviews.ReviewRatingStatistics;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.Set;
 
@@ -28,16 +30,55 @@ import java.util.Set;
  */
 @JsonDeserialize(as = ChannelImpl.class)
 public interface Channel extends Resource<Channel> {
+    /**
+     * Any arbitrary string key that unique identifies this channel within the project.
+     *
+     * @see io.sphere.sdk.channels.commands.updateactions.ChangeKey
+     *
+     * @return key
+     */
     String getKey();
 
+    /**
+     * The roles of this channel. Each channel must have at least one role.
+     *
+     * @see io.sphere.sdk.channels.commands.updateactions.SetRoles
+     * @see io.sphere.sdk.channels.commands.updateactions.AddRoles
+     * @see io.sphere.sdk.channels.commands.updateactions.RemoveRoles
+     *
+     * @return roles
+     */
+    @Nonnull
     Set<ChannelRole> getRoles();
 
+    /**
+     * Name of this channel.
+     *
+     * @see io.sphere.sdk.channels.commands.updateactions.ChangeName
+     *
+     * @return name
+     */
     @Nullable
     LocalizedString getName();
 
+    /**
+     * Description of this channel.
+     *
+     * @see io.sphere.sdk.channels.commands.updateactions.ChangeDescription
+     *
+     * @return description
+     */
     @Nullable
     LocalizedString getDescription();
 
+    /**
+     * The {@link Review} ratings of this channel.
+     *
+     * @see Review
+     * @see ReviewDraft#getTarget()
+     *
+     * @return ratings or null
+     */
     @Nullable
     ReviewRatingStatistics getReviewRatingStatistics();
 
