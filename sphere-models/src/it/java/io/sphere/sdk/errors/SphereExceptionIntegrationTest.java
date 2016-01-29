@@ -1,5 +1,9 @@
 package io.sphere.sdk.errors;
 
+import io.sphere.sdk.carts.Cart;
+import io.sphere.sdk.carts.commands.CartUpdateCommand;
+import io.sphere.sdk.carts.commands.updateactions.AddLineItem;
+import io.sphere.sdk.carts.queries.CartByIdGet;
 import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.categories.CategoryDraft;
 import io.sphere.sdk.categories.CategoryDraftBuilder;
@@ -14,7 +18,10 @@ import io.sphere.sdk.commands.UpdateActionImpl;
 import io.sphere.sdk.http.HttpResponse;
 import io.sphere.sdk.http.HttpStatusCode;
 import io.sphere.sdk.meta.BuildInfo;
-import io.sphere.sdk.models.*;
+import io.sphere.sdk.models.Base;
+import io.sphere.sdk.models.LocalizedString;
+import io.sphere.sdk.models.SphereException;
+import io.sphere.sdk.models.Versioned;
 import io.sphere.sdk.models.errors.InvalidJsonInputError;
 import io.sphere.sdk.models.errors.SphereError;
 import io.sphere.sdk.queries.PagedQueryResult;
@@ -25,15 +32,17 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import java.util.Collections;
-import java.util.concurrent.CompletionStage;
 import java.util.concurrent.CompletionException;
+import java.util.concurrent.CompletionStage;
 import java.util.function.Supplier;
 
+import static io.sphere.sdk.carts.CartFixtures.withCart;
 import static io.sphere.sdk.categories.CategoryFixtures.withCategory;
 import static io.sphere.sdk.http.HttpMethod.POST;
-import static org.assertj.core.api.Assertions.assertThat;
-import static io.sphere.sdk.test.SphereTestUtils.*;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static io.sphere.sdk.products.ProductFixtures.withTaxedProduct;
+import static io.sphere.sdk.test.SphereTestUtils.asList;
+import static io.sphere.sdk.test.SphereTestUtils.randomSlug;
+import static org.assertj.core.api.Assertions.*;
 import static org.junit.Assert.fail;
 
 public class SphereExceptionIntegrationTest extends IntegrationTest {
@@ -139,6 +148,55 @@ public class SphereExceptionIntegrationTest extends IntegrationTest {
             final CategoryUpdateCommand cmd = CategoryUpdateCommand.of(cat, asList(ChangeName.of(LocalizedString.ofEnglish("new name"))));
             client().executeBlocking(cmd);
             client().executeBlocking(cmd);
+        });
+    }
+
+    @Test
+    public void demoForFailing409IsGood() {
+        //Given we have a product
+        withTaxedProduct(client(), product -> {
+            //And given we have an empty cart
+            withCart(client(), cart -> {
+                //when a customer clicks enter to cart
+                final int variantId = 1;
+                final int quantity = 2;
+                final CartUpdateCommand cartUpdateCommand =  CartUpdateCommand.of(cart, AddLineItem.of(product, variantId, quantity));
+                final Cart successfulUpdatedCart = client().executeBlocking(cartUpdateCommand);
+                assertThat(successfulUpdatedCart.getVersion()).isGreaterThan(cart.getVersion());
+
+                //and by accident again
+                final Throwable throwable = catchThrowable(() -> client().executeBlocking(cartUpdateCommand));
+
+                assertThat(throwable).isInstanceOf(ConcurrentModificationException.class);
+
+                return successfulUpdatedCart;
+            });
+        });
+    }
+
+    @Test
+    public void demoForBruteForceSolveTheVersionConflict() {
+        withTaxedProduct(client(), product -> {
+            withCart(client(), cart -> {
+                //when a customer clicks enter to cart
+                final int variantId = 1;
+                final int quantity = 2;
+                final CartUpdateCommand cartUpdateCommand =  CartUpdateCommand.of(cart, AddLineItem.of(product, variantId, quantity));
+                client().executeBlocking(cartUpdateCommand);//successful attempt in another thread/machine/container/tab
+                //the operation will increase the version number of the cart
+
+                //warning: ignoring version conflicts can be very poor behaviour on some use cases
+                //we show this here if you want to execute the command anyway
+                Cart updated2;
+                try {
+                    updated2 = client().executeBlocking(cartUpdateCommand);
+                } catch (final ConcurrentModificationException e) {
+                    final Cart cartWithCurrentVersion = client().executeBlocking(CartByIdGet.of(cart));
+                    final CartUpdateCommand commandWithCurrentCartVersion = cartUpdateCommand.withVersion(cartWithCurrentVersion);
+                    updated2 = client().executeBlocking(commandWithCurrentCartVersion);
+                }
+                return updated2;
+            });
         });
     }
 
