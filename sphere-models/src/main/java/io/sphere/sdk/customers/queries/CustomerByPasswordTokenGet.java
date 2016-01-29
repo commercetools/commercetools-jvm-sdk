@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.function.Function;
 
 /**
- * Fetches a cusomter by a known passwort reset token.
+ * Fetches a cusomter by a known password reset token.
  *
  * {@include.example io.sphere.sdk.customers.commands.CustomerPasswordResetCommandTest#execution()}
  *
