@@ -1,26 +1,31 @@
 package io.sphere.sdk.search.tokenizer;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import io.sphere.sdk.models.Base;
 
 import java.util.Collections;
 import java.util.List;
 
-/**
- * Custom tokenizer allows to define arbitrary tokens which are used to match the input.
- */
-@JsonDeserialize(as = CustomSuggestTokenizerImpl.class)
-public interface CustomSuggestTokenizer extends SuggestTokenizer {
-    List<String> getInputs();
+public class CustomSuggestTokenizer extends Base implements SuggestTokenizer {
+    private final List<String> inputs;
 
+    @JsonCreator
+    private CustomSuggestTokenizer(final List<String> inputs) {
+        this.inputs = inputs;
+    }
+
+    public List<String> getInputs() {
+        return inputs;
+    }
 
     @JsonIgnore
-    static CustomSuggestTokenizer of(final String input) {
+    public static CustomSuggestTokenizer of(final String input) {
         return of(Collections.singletonList(input));
     }
 
     @JsonIgnore
-    static CustomSuggestTokenizer of(final List<String> inputs) {
-        return new CustomSuggestTokenizerImpl(inputs);
+    public static CustomSuggestTokenizer of(final List<String> inputs) {
+        return new CustomSuggestTokenizer(inputs);
     }
 }
