@@ -122,7 +122,7 @@ var activeTableTab = "activeTableTab";
 </dl>
 <hr>
 <br>
-<pre>public class <span class="typeNameLabel">AddTransaction</span>
+<pre>public final class <span class="typeNameLabel">AddTransaction</span>
 extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html" title="class in io.sphere.sdk.commands">UpdateActionImpl</a>&lt;<a href="../../../../../../io/sphere/sdk/payments/Payment.html" title="interface in io.sphere.sdk.payments">Payment</a>&gt;</pre>
 <div class="block">Adds a new financial transaction. Transactions should only be set if a notification from the PSP was received that a transaction was completed successfully. E.g. in the case of a refund, the transaction is not added when the refund-request is being sent to the PSP or the PSP acknowledges the request (the interfaceInteractions may be used for these), but when the PSP sends a notification that the refund has been executed.
 
