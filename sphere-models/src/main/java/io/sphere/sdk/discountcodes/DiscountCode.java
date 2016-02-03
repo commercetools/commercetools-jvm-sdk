@@ -15,32 +15,83 @@ import java.util.List;
  * Discount codes can be added to a cart to enable certain cart discounts.
  *
  * @see io.sphere.sdk.discountcodes.commands.DiscountCodeCreateCommand
- * @see io.sphere.sdk.discountcodes.commands.DiscountCodeCreateCommand
+ * @see io.sphere.sdk.discountcodes.commands.DiscountCodeUpdateCommand
+ * @see io.sphere.sdk.discountcodes.commands.DiscountCodeDeleteCommand
+ * @see io.sphere.sdk.discountcodes.queries.DiscountCodeQuery
+ * @see io.sphere.sdk.discountcodes.queries.DiscountCodeByIdGet
  * @see CartDiscount#isRequiringDiscountCode()
  */
 @JsonDeserialize(as = DiscountCodeImpl.class)
 public interface DiscountCode extends Resource<DiscountCode> {
+    /**
+     * The referenced matching cart discounts can be applied to the cart once the discount code is added ({@link io.sphere.sdk.carts.commands.updateactions.AddDiscountCode}).
+     * @return cart discounts
+     * @see io.sphere.sdk.discountcodes.commands.updateactions.ChangeCartDiscounts
+     */
     List<Reference<CartDiscount>> getCartDiscounts();
 
+    /**
+     * The discount code can only be applied to carts that match this predicate.
+     *
+     * @return predicate or null
+     * @see io.sphere.sdk.discountcodes.commands.updateactions.SetCartPredicate
+     */
     @Nullable
     String getCartPredicate();
 
+    /**
+     * Unique identifier of this discount code. This value is added to the cart ({@link io.sphere.sdk.carts.commands.updateactions.AddDiscountCode}) to enable the related cart discounts in the cart.
+     * @return code
+     */
     String getCode();
 
+    /**
+     * Description of this discount code.
+     * @return description or null
+     *
+     * @see io.sphere.sdk.discountcodes.commands.updateactions.SetDescription
+     */
     @Nullable
     LocalizedString getDescription();
 
+    /**
+     * Flag if this cart discount is enabled
+     *
+     * @return
+     * @see io.sphere.sdk.cartdiscounts.commands.updateactions.ChangeIsActive
+     */
     Boolean isActive();
 
+    /**
+     * The discount code can only be applied maxApplications times.
+     * @return max applications or null
+     * @see io.sphere.sdk.discountcodes.commands.updateactions.SetMaxApplications
+     */
     @Nullable
     Long getMaxApplications();
 
+    /**
+     * The discount code can only be applied maxApplicationsPerCustomer times per customer.
+     * @return max applications or null
+     * @see io.sphere.sdk.discountcodes.commands.updateactions.SetMaxApplicationsPerCustomer
+     */
     @Nullable
     Long getMaxApplicationsPerCustomer();
 
+    /**
+     * Name of this discount code.
+     *
+     * @return name or null
+     *
+     * @see io.sphere.sdk.discountcodes.commands.updateactions.SetName
+     */
     @Nullable
     LocalizedString getName();
 
+    /**
+     * The backend will generate this array from the cartPredicate. It contains the references of all the resources that are addressed in the predicate.
+     * @return references
+     */
     List<Reference<JsonNode>> getReferences();
 
     @Override
