@@ -207,11 +207,15 @@ extends <a href="../../../../io/sphere/sdk/carts/CartLike.html" title="interface
 </tr>
 <tr id="i13" class="rowColor">
 <td class="colFirst"><code>java.lang.String</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/orders/Order.html#getOrderNumber--">getOrderNumber</a></span>()</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/orders/Order.html#getOrderNumber--">getOrderNumber</a></span>()</code>
+<div class="block">String that uniquely identifies an order.</div>
+</td>
 </tr>
 <tr id="i14" class="altColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/orders/OrderState.html" title="enum in io.sphere.sdk.orders">OrderState</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/orders/Order.html#getOrderState--">getOrderState</a></span>()</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/orders/Order.html#getOrderState--">getOrderState</a></span>()</code>
+<div class="block">State of this order.</div>
+</td>
 </tr>
 <tr id="i15" class="rowColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/carts/PaymentInfo.html" title="class in io.sphere.sdk.carts">PaymentInfo</a></code></td>
@@ -221,7 +225,9 @@ extends <a href="../../../../io/sphere/sdk/carts/CartLike.html" title="interface
 </tr>
 <tr id="i16" class="altColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/orders/PaymentState.html" title="enum in io.sphere.sdk.orders">PaymentState</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/orders/Order.html#getPaymentState--">getPaymentState</a></span>()</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/orders/Order.html#getPaymentState--">getPaymentState</a></span>()</code>
+<div class="block">Payment state of this order.</div>
+</td>
 </tr>
 <tr id="i17" class="rowColor">
 <td class="colFirst"><code>java.util.List&lt;<a href="../../../../io/sphere/sdk/orders/ReturnInfo.html" title="class in io.sphere.sdk.orders">ReturnInfo</a>&gt;</code></td>
@@ -229,7 +235,9 @@ extends <a href="../../../../io/sphere/sdk/carts/CartLike.html" title="interface
 </tr>
 <tr id="i18" class="altColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/orders/ShipmentState.html" title="enum in io.sphere.sdk.orders">ShipmentState</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/orders/Order.html#getShipmentState--">getShipmentState</a></span>()</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/orders/Order.html#getShipmentState--">getShipmentState</a></span>()</code>
+<div class="block">Shipment state of this order.</div>
+</td>
 </tr>
 <tr id="i19" class="rowColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/models/Address.html" title="class in io.sphere.sdk.models">Address</a></code></td>
@@ -251,7 +259,9 @@ extends <a href="../../../../io/sphere/sdk/carts/CartLike.html" title="interface
 </tr>
 <tr id="i22" class="altColor">
 <td class="colFirst"><code>java.util.Set&lt;<a href="../../../../io/sphere/sdk/orders/SyncInfo.html" title="class in io.sphere.sdk.orders">SyncInfo</a>&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/orders/Order.html#getSyncInfo--">getSyncInfo</a></span>()</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/orders/Order.html#getSyncInfo--">getSyncInfo</a></span>()</code>
+<div class="block">Sync info of this order.</div>
+</td>
 </tr>
 <tr id="i23" class="rowColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/carts/TaxedPrice.html" title="class in io.sphere.sdk.carts">TaxedPrice</a></code></td>
@@ -438,6 +448,11 @@ static&nbsp;java.lang.String&nbsp;typeId()</pre>
 <h4>getOrderNumber</h4>
 <pre>@Nullable
 java.lang.String&nbsp;getOrderNumber()</pre>
+<div class="block">String that uniquely identifies an order. It can be used to create more human-readable (in contrast to ID) identifier for the order. It should be unique across a project. Once it’s set it cannot be changed.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>order number or null</dd>
+</dl>
 </li>
 </ul>
 <a name="getInventoryMode--">
@@ -456,6 +471,13 @@ java.lang.String&nbsp;getOrderNumber()</pre>
 <li class="blockList">
 <h4>getOrderState</h4>
 <pre><a href="../../../../io/sphere/sdk/orders/OrderState.html" title="enum in io.sphere.sdk.orders">OrderState</a>&nbsp;getOrderState()</pre>
+<div class="block">State of this order.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>state</dd>
+<dt><span class="seeLabel">See Also:</span></dt>
+<dd><a href="../../../../io/sphere/sdk/orders/commands/updateactions/ChangeOrderState.html" title="class in io.sphere.sdk.orders.commands.updateactions"><code>ChangeOrderState</code></a></dd>
+</dl>
 </li>
 </ul>
 <a name="getShipmentState--">
@@ -466,6 +488,13 @@ java.lang.String&nbsp;getOrderNumber()</pre>
 <h4>getShipmentState</h4>
 <pre>@Nullable
 <a href="../../../../io/sphere/sdk/orders/ShipmentState.html" title="enum in io.sphere.sdk.orders">ShipmentState</a>&nbsp;getShipmentState()</pre>
+<div class="block">Shipment state of this order.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>shipment state or null</dd>
+<dt><span class="seeLabel">See Also:</span></dt>
+<dd><a href="../../../../io/sphere/sdk/orders/commands/updateactions/ChangeShipmentState.html" title="class in io.sphere.sdk.orders.commands.updateactions"><code>ChangeShipmentState</code></a></dd>
+</dl>
 </li>
 </ul>
 <a name="getPaymentState--">
@@ -476,6 +505,13 @@ java.lang.String&nbsp;getOrderNumber()</pre>
 <h4>getPaymentState</h4>
 <pre>@Nullable
 <a href="../../../../io/sphere/sdk/orders/PaymentState.html" title="enum in io.sphere.sdk.orders">PaymentState</a>&nbsp;getPaymentState()</pre>
+<div class="block">Payment state of this order.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>payment state or null</dd>
+<dt><span class="seeLabel">See Also:</span></dt>
+<dd><a href="../../../../io/sphere/sdk/orders/commands/updateactions/ChangePaymentState.html" title="class in io.sphere.sdk.orders.commands.updateactions"><code>ChangePaymentState</code></a></dd>
+</dl>
 </li>
 </ul>
 <a name="getShippingInfo--">
@@ -507,6 +543,13 @@ java.lang.String&nbsp;getOrderNumber()</pre>
 <li class="blockList">
 <h4>getSyncInfo</h4>
 <pre>java.util.Set&lt;<a href="../../../../io/sphere/sdk/orders/SyncInfo.html" title="class in io.sphere.sdk.orders">SyncInfo</a>&gt;&nbsp;getSyncInfo()</pre>
+<div class="block">Sync info of this order.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>sync infos</dd>
+<dt><span class="seeLabel">See Also:</span></dt>
+<dd><a href="../../../../io/sphere/sdk/orders/commands/updateactions/UpdateSyncInfo.html" title="class in io.sphere.sdk.orders.commands.updateactions"><code>UpdateSyncInfo</code></a></dd>
+</dl>
 </li>
 </ul>
 <a name="getReturnInfo--">
