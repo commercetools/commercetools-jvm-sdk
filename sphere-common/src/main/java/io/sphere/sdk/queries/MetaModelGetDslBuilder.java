@@ -3,7 +3,7 @@ package io.sphere.sdk.queries;
 import com.fasterxml.jackson.databind.JavaType;
 import io.sphere.sdk.client.JsonEndpoint;
 import io.sphere.sdk.expansion.ExpansionPath;
-import io.sphere.sdk.http.HttpQueryParameter;
+import io.sphere.sdk.http.NameValuePair;
 import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.Builder;
 
@@ -23,7 +23,7 @@ public final class MetaModelGetDslBuilder<R, T, C extends MetaModelGetDsl<R, T, 
     String endpoint;
     String identifierToSearchFor;
     List<ExpansionPath<T>> expansionPaths;
-    List<HttpQueryParameter> additionalParameters;
+    List<NameValuePair> additionalParameters;
     E expansionModel;
     Function<MetaModelGetDslBuilder<R, T, C, E>, C> builderFunction;
 

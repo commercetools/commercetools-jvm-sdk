@@ -9,7 +9,7 @@ import io.sphere.sdk.expansion.ExpansionPath;
 import io.sphere.sdk.expansion.ExpansionPathContainer;
 import io.sphere.sdk.expansion.MetaModelExpansionDslExpansionModelRead;
 import io.sphere.sdk.http.HttpMethod;
-import io.sphere.sdk.http.HttpQueryParameter;
+import io.sphere.sdk.http.NameValuePair;
 import io.sphere.sdk.http.HttpResponse;
 import io.sphere.sdk.http.UrlQueryBuilder;
 import io.sphere.sdk.json.SphereJsonUtils;
@@ -41,11 +41,11 @@ public abstract class MetaModelGetDslImpl<R, T, C extends MetaModelGetDsl<R, T, 
      */
     final String identifierToSearchFor;
     final List<ExpansionPath<T>> expansionPaths;
-    final List<HttpQueryParameter> additionalParameters;
+    final List<NameValuePair> additionalParameters;
     final E expansionModel;
     final Function<MetaModelGetDslBuilder<R, T, C, E>, C> builderFunction;
 
-    protected MetaModelGetDslImpl(final JsonEndpoint<R> endpoint, final String identifierToSearchFor, final E expansionModel, final Function<MetaModelGetDslBuilder<R, T, C, E>, C> builderFunction, final List<HttpQueryParameter> additionalParameters) {
+    protected MetaModelGetDslImpl(final JsonEndpoint<R> endpoint, final String identifierToSearchFor, final E expansionModel, final Function<MetaModelGetDslBuilder<R, T, C, E>, C> builderFunction, final List<NameValuePair> additionalParameters) {
         this(SphereJsonUtils.convertToJavaType(endpoint.typeReference()), endpoint.endpoint(), identifierToSearchFor, Collections.emptyList(), expansionModel, builderFunction, additionalParameters);
     }
 
@@ -57,7 +57,7 @@ public abstract class MetaModelGetDslImpl<R, T, C extends MetaModelGetDsl<R, T, 
         this(builder.javaType, builder.endpoint, builder.identifierToSearchFor, builder.expansionPaths, builder.expansionModel, builder.builderFunction, builder.additionalParameters);
     }
 
-    protected MetaModelGetDslImpl(final JavaType javaType, final String endpoint, final String identifierToSearchFor, final List<ExpansionPath<T>> expansionPaths, final E expansionModel, final Function<MetaModelGetDslBuilder<R, T, C, E>, C> builderFunction, final List<HttpQueryParameter> additionalParameters) {
+    protected MetaModelGetDslImpl(final JavaType javaType, final String endpoint, final String identifierToSearchFor, final List<ExpansionPath<T>> expansionPaths, final E expansionModel, final Function<MetaModelGetDslBuilder<R, T, C, E>, C> builderFunction, final List<NameValuePair> additionalParameters) {
         this.javaType = requireNonNull(javaType);
         this.endpoint = requireNonNull(endpoint);
         this.identifierToSearchFor = requireNonNull(identifierToSearchFor);
@@ -95,7 +95,7 @@ public abstract class MetaModelGetDslImpl<R, T, C extends MetaModelGetDsl<R, T, 
     }
 
 
-    protected List<HttpQueryParameter> additionalQueryParameters() {
+    protected List<NameValuePair> additionalQueryParameters() {
         return additionalParameters;
     }
 

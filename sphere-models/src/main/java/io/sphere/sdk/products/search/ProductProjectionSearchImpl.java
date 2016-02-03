@@ -5,7 +5,7 @@ import io.sphere.sdk.products.ProductProjectionType;
 import io.sphere.sdk.products.expansion.ProductProjectionExpansionModel;
 import io.sphere.sdk.search.MetaModelSearchDslBuilder;
 import io.sphere.sdk.search.MetaModelSearchDslImpl;
-import io.sphere.sdk.http.HttpQueryParameter;
+import io.sphere.sdk.http.NameValuePair;
 
 import java.util.List;
 
@@ -25,7 +25,7 @@ final class ProductProjectionSearchImpl extends MetaModelSearchDslImpl<ProductPr
         super(builder);
     }
 
-    private static List<HttpQueryParameter> additionalParametersOf(final ProductProjectionType productProjectionType) {
-        return singletonList(HttpQueryParameter.of("staged", productProjectionType.isStaged().toString()));
+    private static List<NameValuePair> additionalParametersOf(final ProductProjectionType productProjectionType) {
+        return singletonList(NameValuePair.of("staged", productProjectionType.isStaged().toString()));
     }
 }

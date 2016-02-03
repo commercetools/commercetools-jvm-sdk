@@ -1,6 +1,6 @@
 package io.sphere.sdk.products.queries;
 
-import io.sphere.sdk.http.HttpQueryParameter;
+import io.sphere.sdk.http.NameValuePair;
 import io.sphere.sdk.products.ProductProjection;
 import io.sphere.sdk.products.ProductProjectionType;
 import io.sphere.sdk.products.expansion.ProductProjectionExpansionModel;
@@ -24,8 +24,8 @@ final class ProductProjectionQueryImpl extends MetaModelQueryDslImpl<ProductProj
         super(builder);
     }
 
-    private static List<HttpQueryParameter> additionalParametersOf(final ProductProjectionType productProjectionType) {
-        return singletonList(HttpQueryParameter.of("staged", productProjectionType.isStaged().toString()));
+    private static List<NameValuePair> additionalParametersOf(final ProductProjectionType productProjectionType) {
+        return singletonList(NameValuePair.of("staged", productProjectionType.isStaged().toString()));
     }
 
 }

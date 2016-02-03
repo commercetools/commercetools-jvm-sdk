@@ -47,7 +47,7 @@ public abstract class MetaModelSearchDslImpl<T, C extends MetaModelSearchDsl<T, 
     @Nullable
     final Long offset;
     final List<ExpansionPath<T>> expansionPaths;
-    final List<HttpQueryParameter> additionalQueryParameters;
+    final List<NameValuePair> additionalQueryParameters;
     final String endpoint;
     final S sortModel;
     final L filterModel;
@@ -62,7 +62,7 @@ public abstract class MetaModelSearchDslImpl<T, C extends MetaModelSearchDsl<T, 
                                   final List<FacetedSearchExpression<T>> facetedSearch,
                                   final List<SortExpression<T>> sort, @Nullable final Long limit, @Nullable final Long offset,
                                   final String endpoint, final Function<HttpResponse, PagedSearchResult<T>> resultMapper,
-                                  final List<ExpansionPath<T>> expansionPaths, final List<HttpQueryParameter> additionalQueryParameters,
+                                  final List<ExpansionPath<T>> expansionPaths, final List<NameValuePair> additionalQueryParameters,
                                   final S sortModel, final L filterModel, final F facetModel, final E expansionModel, final Function<MetaModelSearchDslBuilder<T, C, S, L, F, E>, C> searchDslBuilderFunction) {
         Optional.ofNullable(offset).ifPresent(presentOffset -> {
             if (presentOffset < MIN_OFFSET || presentOffset > MAX_OFFSET) {
@@ -92,7 +92,7 @@ public abstract class MetaModelSearchDslImpl<T, C extends MetaModelSearchDsl<T, 
 
     public MetaModelSearchDslImpl(final String endpoint, final TypeReference<PagedSearchResult<T>> pagedSearchResultTypeReference,
                                   final S sortModel, final L filterModel, final F facetModel, final E expansionModel, final Function<MetaModelSearchDslBuilder<T, C, S, L, F, E>, C> searchDslBuilderFunction,
-                                  final List<HttpQueryParameter> additionalQueryParameters) {
+                                  final List<NameValuePair> additionalQueryParameters) {
         this(null, null, emptyList(), emptyList(), emptyList(), emptyList(), emptyList(), emptyList(), null, null, endpoint, httpResponse -> SphereRequestUtils.deserialize(httpResponse, pagedSearchResultTypeReference),
                 emptyList(), additionalQueryParameters, sortModel, filterModel, facetModel, expansionModel, searchDslBuilderFunction);
     }
@@ -404,7 +404,7 @@ public abstract class MetaModelSearchDslImpl<T, C extends MetaModelSearchDsl<T, 
         return fuzzy;
     }
 
-    protected List<HttpQueryParameter> additionalQueryParameters() {
+    protected List<NameValuePair> additionalQueryParameters() {
         return additionalQueryParameters;
     }
 

@@ -8,7 +8,7 @@ import io.sphere.sdk.client.SphereRequestUtils;
 import io.sphere.sdk.expansion.ExpansionPath;
 import io.sphere.sdk.expansion.ExpansionPathContainer;
 import io.sphere.sdk.http.HttpMethod;
-import io.sphere.sdk.http.HttpQueryParameter;
+import io.sphere.sdk.http.NameValuePair;
 import io.sphere.sdk.http.HttpResponse;
 import io.sphere.sdk.http.UrlQueryBuilder;
 import io.sphere.sdk.models.Base;
@@ -43,7 +43,7 @@ public abstract class MetaModelQueryDslImpl<T, C extends MetaModelQueryDsl<T, C,
     @Nullable
     final Long offset;
     final List<ExpansionPath<T>> expansionPaths;
-    final List<HttpQueryParameter> additionalHttpQueryParameters;
+    final List<NameValuePair> additionalHttpQueryParameters;
     final String endpoint;
     final Q queryModel;
     final E expansionModel;
@@ -53,7 +53,7 @@ public abstract class MetaModelQueryDslImpl<T, C extends MetaModelQueryDsl<T, C,
     public MetaModelQueryDslImpl(final List<QueryPredicate<T>> predicate, final List<QuerySort<T>> sort, @Nullable final Boolean fetchTotal, @Nullable final Long limit,
                                  @Nullable final Long offset, final String endpoint,
                                  final Function<HttpResponse, PagedQueryResult<T>> resultMapper,
-                                 final List<ExpansionPath<T>> expansionPaths, final List<HttpQueryParameter> additionalHttpQueryParameters,
+                                 final List<ExpansionPath<T>> expansionPaths, final List<NameValuePair> additionalHttpQueryParameters,
                                  final Q queryModel, final E expansionModel, final Function<MetaModelQueryDslBuilder<T, C, Q, E>, C> queryDslBuilderFunction) {
         Optional.ofNullable(offset).ifPresent(presentOffset -> {
             if (presentOffset < MIN_OFFSET || presentOffset > MAX_OFFSET) {
@@ -77,7 +77,7 @@ public abstract class MetaModelQueryDslImpl<T, C extends MetaModelQueryDsl<T, C,
     //uses typeReference of whole result
     public MetaModelQueryDslImpl(final String endpoint, final TypeReference<PagedQueryResult<T>> pagedQueryResultTypeReference,
                                  final Q queryModel, final E expansionModel, final Function<MetaModelQueryDslBuilder<T, C, Q, E>, C> queryDslBuilderFunction,
-                                 final List<HttpQueryParameter> additionalHttpQueryParameters) {
+                                 final List<NameValuePair> additionalHttpQueryParameters) {
         this(emptyList(), emptyList(), null, null, null, endpoint, httpResponse -> SphereRequestUtils.deserialize(httpResponse, pagedQueryResultTypeReference),
                 emptyList(), additionalHttpQueryParameters, queryModel, expansionModel, queryDslBuilderFunction);
     }
@@ -85,9 +85,9 @@ public abstract class MetaModelQueryDslImpl<T, C extends MetaModelQueryDsl<T, C,
     //uses typeReference of the fetched objects
     public MetaModelQueryDslImpl(final String endpoint, final JavaType singleElementJavatype,
                                  final Q queryModel, final E expansionModel, final Function<MetaModelQueryDslBuilder<T, C, Q, E>, C> queryDslBuilderFunction,
-                                 final List<HttpQueryParameter> additionalHttpQueryParameters) {
+                                 final List<NameValuePair> additionalNameValuePairs) {
         this(emptyList(), emptyList(), null, null, null, endpoint, httpResponse -> SphereRequestUtils.deserialize(httpResponse, resolveJavaType(singleElementJavatype)),
-                emptyList(), additionalHttpQueryParameters, queryModel, expansionModel, queryDslBuilderFunction);
+                emptyList(), additionalNameValuePairs, queryModel, expansionModel, queryDslBuilderFunction);
     }
 
     //uses typeReference of the fetched objects
@@ -257,7 +257,7 @@ public abstract class MetaModelQueryDslImpl<T, C extends MetaModelQueryDsl<T, C,
         return expansionPaths;
     }
 
-    protected List<HttpQueryParameter> additionalHttpQueryParameters() {
+    protected List<NameValuePair> additionalHttpQueryParameters() {
         return additionalHttpQueryParameters;
     }
 

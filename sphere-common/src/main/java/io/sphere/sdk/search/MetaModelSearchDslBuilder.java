@@ -1,7 +1,7 @@
 package io.sphere.sdk.search;
 
 import io.sphere.sdk.expansion.ExpansionPath;
-import io.sphere.sdk.http.HttpQueryParameter;
+import io.sphere.sdk.http.NameValuePair;
 import io.sphere.sdk.http.HttpResponse;
 import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.Builder;
@@ -38,7 +38,7 @@ public final class MetaModelSearchDslBuilder<T, C extends MetaModelSearchDsl<T, 
     @Nullable
     protected Long offset;
     protected List<ExpansionPath<T>> expansionPaths = emptyList();
-    protected List<HttpQueryParameter> additionalQueryParameters = emptyList();
+    protected List<NameValuePair> additionalQueryParameters = emptyList();
     protected final String endpoint;
     protected final Function<HttpResponse, PagedSearchResult<T>> resultMapper;
     protected final S sortModel;
@@ -127,7 +127,7 @@ public final class MetaModelSearchDslBuilder<T, C extends MetaModelSearchDsl<T, 
         return this;
     }
 
-    public MetaModelSearchDslBuilder<T, C, S, L, F, E> additionalQueryParameters(final List<HttpQueryParameter> additionalQueryParameters) {
+    public MetaModelSearchDslBuilder<T, C, S, L, F, E> additionalQueryParameters(final List<NameValuePair> additionalQueryParameters) {
         this.additionalQueryParameters = additionalQueryParameters;
         return this;
     }

@@ -1,7 +1,7 @@
 package io.sphere.sdk.queries;
 
 import io.sphere.sdk.expansion.ExpansionPath;
-import io.sphere.sdk.http.HttpQueryParameter;
+import io.sphere.sdk.http.NameValuePair;
 import io.sphere.sdk.http.HttpResponse;
 import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.Builder;
@@ -29,7 +29,7 @@ public final class MetaModelQueryDslBuilder<T, C extends MetaModelQueryDsl<T, C,
     @Nullable
     protected Long offset;
     protected List<ExpansionPath<T>> expansionPaths = Collections.emptyList();
-    protected List<HttpQueryParameter> additionalHttpQueryParameters = Collections.emptyList();
+    protected List<NameValuePair> additionalHttpQueryParameters = Collections.emptyList();
     protected final String endpoint;
     protected final Function<HttpResponse, PagedQueryResult<T>> resultMapper;
     protected final Q queryModel;
@@ -86,7 +86,7 @@ public final class MetaModelQueryDslBuilder<T, C extends MetaModelQueryDsl<T, C,
         return this;
     }
 
-    public MetaModelQueryDslBuilder<T, C, Q, E> additionalHttpQueryParameters(final List<HttpQueryParameter> additionalQueryParameters) {
+    public MetaModelQueryDslBuilder<T, C, Q, E> additionalHttpQueryParameters(final List<NameValuePair> additionalQueryParameters) {
         this.additionalHttpQueryParameters = additionalQueryParameters;
         return this;
     }
