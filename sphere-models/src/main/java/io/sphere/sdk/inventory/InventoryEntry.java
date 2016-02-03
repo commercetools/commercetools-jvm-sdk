@@ -23,12 +23,16 @@ public interface InventoryEntry extends Resource<InventoryEntry> {
     /**
      * Available amount of stock. (available means: quantityOnStock - reserved quantity)
      * @return quantity
+     * @see io.sphere.sdk.inventory.commands.updateactions.AddQuantity
+     * @see io.sphere.sdk.inventory.commands.updateactions.RemoveQuantity
+     * @see io.sphere.sdk.inventory.commands.updateactions.ChangeQuantity
      */
     Long getAvailableQuantity();
 
     /**
      * The date and time of the next restock.
      * @return date time or null
+     * @see io.sphere.sdk.inventory.commands.updateactions.SetExpectedDelivery
      */
     @Nullable
     ZonedDateTime getExpectedDelivery();
@@ -36,12 +40,16 @@ public interface InventoryEntry extends Resource<InventoryEntry> {
     /**
      * Overall amount of stock. (available + reserved)
      * @return quantity
+     * @see io.sphere.sdk.inventory.commands.updateactions.AddQuantity
+     * @see io.sphere.sdk.inventory.commands.updateactions.RemoveQuantity
+     * @see io.sphere.sdk.inventory.commands.updateactions.ChangeQuantity
      */
     Long getQuantityOnStock();
 
     /**
      * The time period in days, that tells how often this inventory entry is restocked.
      * @return time in days or null
+     * @see io.sphere.sdk.inventory.commands.updateactions.SetRestockableInDays
      */
     @Nullable
     Integer getRestockableInDays();
@@ -51,6 +59,7 @@ public interface InventoryEntry extends Resource<InventoryEntry> {
     /**
      * Optional connection to particular supplier.
      * @return channel or null
+     * @see io.sphere.sdk.inventory.commands.updateactions.SetSupplyChannel
      */
     @Nullable
     Reference<Channel> getSupplyChannel();

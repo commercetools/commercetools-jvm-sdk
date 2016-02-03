@@ -1,5 +1,7 @@
 package io.sphere.sdk.inventory.commands;
 
+import io.sphere.sdk.channels.ChannelFixtures;
+import io.sphere.sdk.channels.ChannelRole;
 import io.sphere.sdk.commands.UpdateAction;
 import io.sphere.sdk.inventory.InventoryEntry;
 import io.sphere.sdk.inventory.commands.updateactions.*;
@@ -11,6 +13,7 @@ import java.time.ZonedDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.Optional;
 
+import static io.sphere.sdk.channels.ChannelFixtures.withChannelOfRole;
 import static io.sphere.sdk.inventory.InventoryEntryFixtures.withUpdateableInventoryEntry;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -44,6 +47,18 @@ public class InventoryEntryUpdateCommandTest extends IntegrationTest {
             final InventoryEntry updatedEntry = client().executeBlocking(InventoryEntryUpdateCommand.of(entry, action));
             assertThat(updatedEntry.getQuantityOnStock()).isEqualTo(entry.getQuantityOnStock() - removingQuantity);
             return updatedEntry;
+        });
+    }
+
+    @Test
+    public void setSupplyChannel() throws Exception {
+        withChannelOfRole(client(), ChannelRole.INVENTORY_SUPPLY, channel -> {
+            withUpdateableInventoryEntry(client(), entry -> {
+                final UpdateAction<InventoryEntry> action = SetSupplyChannel.of(channel);
+                final InventoryEntry updatedEntry = client().executeBlocking(InventoryEntryUpdateCommand.of(entry, action));
+                assertThat(updatedEntry.getSupplyChannel()).isEqualTo(channel.toReference());
+                return updatedEntry;
+            });
         });
     }
 
