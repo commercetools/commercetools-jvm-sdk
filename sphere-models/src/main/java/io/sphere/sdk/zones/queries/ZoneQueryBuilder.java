@@ -15,7 +15,7 @@ import java.util.function.Function;
  {@doc.gen summary zones}
 
  */
-public class ZoneQueryBuilder extends ResourceMetaModelQueryDslBuilderImpl<ZoneQueryBuilder, Zone, ZoneQuery, ZoneQueryModel, ZoneExpansionModel<Zone>> {
+public final class ZoneQueryBuilder extends ResourceMetaModelQueryDslBuilderImpl<ZoneQueryBuilder, Zone, ZoneQuery, ZoneQueryModel, ZoneExpansionModel<Zone>> {
 
     private ZoneQueryBuilder(final ZoneQuery template) {
         super(template);

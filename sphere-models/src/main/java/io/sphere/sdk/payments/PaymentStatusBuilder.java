@@ -9,7 +9,7 @@ import io.sphere.sdk.states.State;
 import javax.annotation.Nullable;
 import java.util.Optional;
 
-public class PaymentStatusBuilder extends Base implements Builder<PaymentStatus> {
+public final class PaymentStatusBuilder extends Base implements Builder<PaymentStatus> {
     @Nullable
     private String interfaceCode;
     @Nullable

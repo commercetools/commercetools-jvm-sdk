@@ -15,7 +15,7 @@ import static java.lang.String.format;
  *
  * @see Customer
  */
-public class RemoveAddress extends UpdateActionImpl<Customer> {
+public final class RemoveAddress extends UpdateActionImpl<Customer> {
     private final String addressId;
 
     private RemoveAddress(final String addressId) {

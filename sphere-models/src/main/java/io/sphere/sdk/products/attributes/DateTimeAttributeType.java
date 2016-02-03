@@ -2,7 +2,7 @@ package io.sphere.sdk.products.attributes;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-public class DateTimeAttributeType extends AttributeTypeBase {
+public final class DateTimeAttributeType extends AttributeTypeBase {
     private DateTimeAttributeType() {}
 
     @JsonIgnore

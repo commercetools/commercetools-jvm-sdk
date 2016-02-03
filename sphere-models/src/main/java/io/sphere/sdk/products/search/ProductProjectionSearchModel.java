@@ -6,7 +6,7 @@ import io.sphere.sdk.models.Base;
  * EXPERIMENTAL model to easily build product projection search requests.
  * Being it experimental, it can be modified in future releases therefore introducing breaking changes.
  */
-public class ProductProjectionSearchModel extends Base {
+public final class ProductProjectionSearchModel extends Base {
 
     public ProductProjectionFilterSearchModel filter() {
         return new ProductProjectionFilterSearchModel(null, null);

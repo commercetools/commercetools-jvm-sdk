@@ -4,7 +4,7 @@ import io.sphere.sdk.models.Base;
 
 import java.util.concurrent.CompletionStage;
 
-public class SphereClientDecorator extends Base implements SphereClient {
+public abstract class SphereClientDecorator extends Base implements SphereClient {
     private final SphereClient delegate;
 
     protected SphereClientDecorator(final SphereClient delegate) {

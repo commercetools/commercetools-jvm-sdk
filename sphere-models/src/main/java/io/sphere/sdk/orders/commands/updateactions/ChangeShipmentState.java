@@ -11,7 +11,7 @@ import io.sphere.sdk.orders.ShipmentState;
 
  {@include.example io.sphere.sdk.orders.commands.OrderUpdateCommandTest#changeShipmentState()}
  */
-public class ChangeShipmentState extends UpdateActionImpl<Order> {
+public final class ChangeShipmentState extends UpdateActionImpl<Order> {
     private final ShipmentState shipmentState;
 
     private ChangeShipmentState(final ShipmentState shipmentState) {

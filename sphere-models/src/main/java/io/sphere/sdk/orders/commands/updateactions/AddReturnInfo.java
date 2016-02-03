@@ -18,7 +18,7 @@ import java.util.List;
 
  @see Order#getReturnInfo()
  */
-public class AddReturnInfo extends UpdateActionImpl<Order> {
+public final class AddReturnInfo extends UpdateActionImpl<Order> {
     @Nullable
     private final ZonedDateTime returnDate;
     @Nullable

@@ -5,7 +5,7 @@ import io.sphere.sdk.expansion.ExpansionModel;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class ProductVariantExpansionModel<T> extends ExpansionModel<T> {
+public final class ProductVariantExpansionModel<T> extends ExpansionModel<T> {
     ProductVariantExpansionModel(@Nullable final List<String> parentPath, final String paths) {
         super(parentPath, paths);
     }

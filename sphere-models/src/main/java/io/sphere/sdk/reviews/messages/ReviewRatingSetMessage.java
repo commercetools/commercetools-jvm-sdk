@@ -18,7 +18,7 @@ import java.time.ZonedDateTime;
  * @see Review#getRating()
  */
 @JsonDeserialize(as = ReviewRatingSetMessage.class)//important to override annotation in Message class
-public class ReviewRatingSetMessage extends GenericMessageImpl<Review> {
+public final class ReviewRatingSetMessage extends GenericMessageImpl<Review> {
     public static final String MESSAGE_TYPE = "ReviewRatingSet";
     public static final MessageDerivateHint<ReviewRatingSetMessage> MESSAGE_HINT =
             MessageDerivateHint.ofSingleMessageType(MESSAGE_TYPE, ReviewRatingSetMessage.class);

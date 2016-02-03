@@ -8,7 +8,7 @@ import io.sphere.sdk.expansion.ExpansionPathContainer;
  *
  * @param <T> the context type
  */
-public class CartExpansionModel<T> extends CartLikeExpansionModel<T> {
+public final class CartExpansionModel<T> extends CartLikeExpansionModel<T> {
     private CartExpansionModel() {
         super();
     }

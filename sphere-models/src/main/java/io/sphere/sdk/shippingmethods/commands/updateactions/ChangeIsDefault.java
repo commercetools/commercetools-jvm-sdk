@@ -11,7 +11,7 @@ import io.sphere.sdk.shippingmethods.ShippingMethod;
  *
  * {@include.example io.sphere.sdk.shippingmethods.commands.ShippingMethodUpdateCommandTest#changeIsDefault()}
  */
-public class ChangeIsDefault extends UpdateActionImpl<ShippingMethod> {
+public final class ChangeIsDefault extends UpdateActionImpl<ShippingMethod> {
     private final boolean isDefault;
 
     private ChangeIsDefault(final boolean isDefault) {

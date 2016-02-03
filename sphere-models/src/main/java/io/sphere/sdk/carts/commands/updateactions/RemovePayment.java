@@ -20,7 +20,7 @@ import java.util.Optional;
  * @see Cart#getPaymentInfo()
  * @see AddPayment
  */
-public class RemovePayment extends UpdateActionImpl<Cart> {
+public final class RemovePayment extends UpdateActionImpl<Cart> {
     private final Reference<Payment> payment;
 
     private RemovePayment(final Reference<Payment> payment) {

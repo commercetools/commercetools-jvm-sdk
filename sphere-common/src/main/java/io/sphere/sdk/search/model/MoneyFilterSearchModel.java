@@ -3,7 +3,7 @@ package io.sphere.sdk.search.model;
 import javax.annotation.Nullable;
 import javax.money.CurrencyUnit;
 
-public class MoneyFilterSearchModel<T> extends SearchModelImpl<T> {
+public final class MoneyFilterSearchModel<T> extends SearchModelImpl<T> {
 
     MoneyFilterSearchModel(@Nullable final SearchModel<T> parent, @Nullable final String pathSegment) {
         super(parent, pathSegment);

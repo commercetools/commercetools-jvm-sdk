@@ -17,7 +17,7 @@ import javax.money.MonetaryAmount;
  *
  *
  */
-public class SetAmountPaid extends UpdateActionImpl<Payment> {
+public final class SetAmountPaid extends UpdateActionImpl<Payment> {
     @Nullable
     private final MonetaryAmount amount;
 

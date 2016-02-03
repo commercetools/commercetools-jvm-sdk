@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 /**
  * @see Custom
  */
-public class TimeFieldType extends FieldTypeBase {
+public final class TimeFieldType extends FieldTypeBase {
 
     @JsonCreator
     private TimeFieldType() {

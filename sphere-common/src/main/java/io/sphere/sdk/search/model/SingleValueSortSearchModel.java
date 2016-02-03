@@ -6,7 +6,7 @@ import io.sphere.sdk.search.SortExpression;
  * A sort model to decide the direction of a model with just one value per resource
  * @see SingleValueSortSearchModelFactory to instantiate this class
  */
-public class SingleValueSortSearchModel<T> extends SortSearchModelImpl<T> {
+public final class SingleValueSortSearchModel<T> extends SortSearchModelImpl<T> {
 
     SingleValueSortSearchModel(final SearchModel<T> searchModel) {
         super(searchModel);

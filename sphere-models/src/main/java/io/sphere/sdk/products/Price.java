@@ -33,7 +33,7 @@ import java.util.Optional;
  * @see io.sphere.sdk.products.commands.updateactions.RemovePrice
  * @see ProductVariant#getPrices()
  */
-public class Price extends Base implements Custom {
+public final class Price extends Base implements Custom {
     private final MonetaryAmount value;
     @Nullable
     private final CountryCode country;

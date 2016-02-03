@@ -12,7 +12,7 @@ import io.sphere.sdk.payments.Payment;
  *
  * @see Payment
  */
-public class SetInterfaceId extends UpdateActionImpl<Payment> {
+public final class SetInterfaceId extends UpdateActionImpl<Payment> {
 
     private final String interfaceId;
 

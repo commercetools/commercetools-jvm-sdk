@@ -14,7 +14,7 @@ import io.sphere.sdk.types.Type;
 
  @see EnumFieldType#getValues()
  */
-public class AddEnumValue extends UpdateActionImpl<Type> {
+public final class AddEnumValue extends UpdateActionImpl<Type> {
     private final String fieldName;
     private final EnumValue value;
 

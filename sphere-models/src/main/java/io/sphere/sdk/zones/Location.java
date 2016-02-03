@@ -11,7 +11,7 @@ import javax.annotation.Nullable;
 /**
  * A geographical location representing a country with an optional state.
  */
-public class Location extends Base {
+public final class Location extends Base {
     private final CountryCode country;
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     @Nullable

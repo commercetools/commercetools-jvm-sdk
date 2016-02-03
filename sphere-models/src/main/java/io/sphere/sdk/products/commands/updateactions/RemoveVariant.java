@@ -13,7 +13,7 @@ import io.sphere.sdk.products.ProductVariant;
  *
  * @see io.sphere.sdk.products.commands.updateactions.AddVariant
  */
-public class RemoveVariant extends UpdateActionImpl<Product> {
+public final class RemoveVariant extends UpdateActionImpl<Product> {
     private final Integer id;
 
     private RemoveVariant(final Integer id) {

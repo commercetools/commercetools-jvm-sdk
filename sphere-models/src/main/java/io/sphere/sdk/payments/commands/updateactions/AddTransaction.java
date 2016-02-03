@@ -14,7 +14,7 @@ import io.sphere.sdk.payments.TransactionDraft;
  *  @see Payment#getTransactions()
  *  @see io.sphere.sdk.payments.messages.PaymentTransactionAddedMessage
  */
-public class AddTransaction extends UpdateActionImpl<Payment> {
+public final class AddTransaction extends UpdateActionImpl<Payment> {
     private final TransactionDraft transaction;
 
     private AddTransaction(final TransactionDraft transaction) {

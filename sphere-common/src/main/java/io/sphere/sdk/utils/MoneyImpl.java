@@ -9,7 +9,7 @@ import javax.money.*;
 import java.math.BigDecimal;
 import java.util.Optional;
 
-final public class MoneyImpl extends Base implements MonetaryAmount {
+public final class MoneyImpl extends Base implements MonetaryAmount {
     private final MonetaryAmount money;
 
     private MoneyImpl(final MonetaryAmount money) {

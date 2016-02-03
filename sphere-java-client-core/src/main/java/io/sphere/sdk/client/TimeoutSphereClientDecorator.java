@@ -7,7 +7,7 @@ import java.util.concurrent.*;
 /**
  * Wraps a {@link SphereClient} to add timeouts. There are no guarantees that the timeout will be after the exact duration.
  */
-public class TimeoutSphereClientDecorator extends SphereClientDecorator implements SphereClient {
+public final class TimeoutSphereClientDecorator extends SphereClientDecorator implements SphereClient {
     private final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
     private final long delay;
     private final TimeUnit timeUnit;

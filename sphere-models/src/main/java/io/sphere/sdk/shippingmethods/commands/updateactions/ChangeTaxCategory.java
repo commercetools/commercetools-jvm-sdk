@@ -14,7 +14,7 @@ import io.sphere.sdk.taxcategories.TaxCategory;
  *
  * {@include.example io.sphere.sdk.shippingmethods.commands.ShippingMethodUpdateCommandTest#changeTaxCategory()}
  */
-public class ChangeTaxCategory extends UpdateActionImpl<ShippingMethod> {
+public final class ChangeTaxCategory extends UpdateActionImpl<ShippingMethod> {
     private final Reference<TaxCategory> taxCategory;
 
     private ChangeTaxCategory(final Reference<TaxCategory> taxCategory) {

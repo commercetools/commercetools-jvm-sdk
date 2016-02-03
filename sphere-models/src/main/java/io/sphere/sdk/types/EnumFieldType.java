@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * @see Custom
  */
-public class EnumFieldType extends FieldTypeBase {
+public final class EnumFieldType extends FieldTypeBase {
     private final List<EnumValue> values;
 
     @JsonCreator

@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 /**
  * Invalid JSON was sent to SPHERE.IO.
  */
-public class InvalidJsonInputError extends SphereError {
+public final class InvalidJsonInputError extends SphereError {
     private final String detailedErrorMessage;
 
     public static final String CODE = "InvalidJsonInput";

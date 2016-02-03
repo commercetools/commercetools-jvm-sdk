@@ -12,7 +12,7 @@ import java.time.ZonedDateTime;
  *
  * @see CartDiscountDraft
  */
-public class CartDiscountDraftBuilder extends Base implements Builder<CartDiscountDraft> {
+public final class CartDiscountDraftBuilder extends Base implements Builder<CartDiscountDraft> {
     private LocalizedString name;
     @Nullable
     private LocalizedString description;

@@ -11,7 +11,7 @@ import java.util.Set;
 
 import static io.sphere.sdk.utils.SphereInternalUtils.asSet;
 
-public class ChannelDraftDsl extends Base implements ChannelDraft {
+public final class ChannelDraftDsl extends Base implements ChannelDraft {
     private final String key;
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     @Nullable

@@ -2,7 +2,7 @@ package io.sphere.sdk.reviews.queries;
 
 import io.sphere.sdk.queries.*;
 
-public class ReviewRatingStatisticsQueryModelImpl<T> extends QueryModelImpl<T> implements ReviewRatingStatisticsQueryModel<T> {
+final class ReviewRatingStatisticsQueryModelImpl<T> extends QueryModelImpl<T> implements ReviewRatingStatisticsQueryModel<T> {
     public ReviewRatingStatisticsQueryModelImpl(final QueryModel<T> parent, final String pathSegment) {
         super(parent, pathSegment);
     }

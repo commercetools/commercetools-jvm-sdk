@@ -17,7 +17,7 @@ import io.sphere.sdk.zones.Zone;
  * @see ShippingMethod#getShippingRatesForZone(Referenceable)
  * @see ShippingMethod#getZoneRates()
  */
-public class AddShippingRate extends UpdateActionImpl<ShippingMethod> {
+public final class AddShippingRate extends UpdateActionImpl<ShippingMethod> {
     private final Reference<Zone> zone;
     private final ShippingRate shippingRate;
 

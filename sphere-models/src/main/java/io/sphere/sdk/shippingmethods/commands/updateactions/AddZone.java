@@ -15,7 +15,7 @@ import io.sphere.sdk.zones.Zone;
  *
  * @see ShippingMethod#getZones()
  */
-public class AddZone extends UpdateActionImpl<ShippingMethod> {
+public final class AddZone extends UpdateActionImpl<ShippingMethod> {
     private final Reference<Zone> zone;
 
     private AddZone(final Reference<Zone> zone) {

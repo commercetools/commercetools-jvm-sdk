@@ -19,7 +19,7 @@ import java.util.Optional;
  *  @see Payment
  *  @see io.sphere.sdk.payments.messages.PaymentStatusStateTransitionMessage
  */
-public class TransitionState extends UpdateActionImpl<Payment> {
+public final class TransitionState extends UpdateActionImpl<Payment> {
     @Nullable
     private final Reference<State> state;
 

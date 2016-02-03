@@ -15,7 +15,7 @@ import java.util.function.Function;
  {@doc.gen summary }
 
  */
-public class CategoryQueryBuilder extends ResourceMetaModelQueryDslBuilderImpl<CategoryQueryBuilder, Category, CategoryQuery, CategoryQueryModel, CategoryExpansionModel<Category>> {
+public final class CategoryQueryBuilder extends ResourceMetaModelQueryDslBuilderImpl<CategoryQueryBuilder, Category, CategoryQuery, CategoryQueryModel, CategoryExpansionModel<Category>> {
 
     private CategoryQueryBuilder(final CategoryQuery template) {
         super(template);

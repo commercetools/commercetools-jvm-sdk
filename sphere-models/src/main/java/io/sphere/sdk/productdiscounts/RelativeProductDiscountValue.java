@@ -7,7 +7,7 @@ import io.sphere.sdk.models.Base;
 /**
  * A relative product discount with the corresponding basis point value.
  */
-public class RelativeProductDiscountValue extends Base implements ProductDiscountValue {
+public final class RelativeProductDiscountValue extends Base implements ProductDiscountValue {
     private final Integer permyriad;
 
     @JsonCreator

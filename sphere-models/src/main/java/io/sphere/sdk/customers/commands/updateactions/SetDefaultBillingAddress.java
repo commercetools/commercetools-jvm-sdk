@@ -16,7 +16,7 @@ import static java.lang.String.format;
  * {@include.example io.sphere.sdk.customers.commands.CustomerUpdateCommandTest#setDefaultBillingAddress()}
  * @see Customer
  */
-public class SetDefaultBillingAddress extends UpdateActionImpl<Customer> {
+public final class SetDefaultBillingAddress extends UpdateActionImpl<Customer> {
     private final String addressId;
 
     private SetDefaultBillingAddress(@Nullable final String addressId) {

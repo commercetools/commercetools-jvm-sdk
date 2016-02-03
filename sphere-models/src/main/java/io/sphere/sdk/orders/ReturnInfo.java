@@ -7,7 +7,7 @@ import javax.annotation.Nullable;
 import java.time.ZonedDateTime;
 import java.util.List;
 
-public class ReturnInfo extends Base {
+public final class ReturnInfo extends Base {
     private final List<ReturnItem> items;
     @Nullable
     private final String returnTrackingId;

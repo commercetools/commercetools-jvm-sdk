@@ -14,7 +14,7 @@ import io.sphere.sdk.producttypes.ProductType;
  * @see ProductType#getAttributes()
  * @see io.sphere.sdk.products.ProductVariant#getAttributes()
  */
-public class AddAttributeDefinition extends UpdateActionImpl<ProductType> {
+public final class AddAttributeDefinition extends UpdateActionImpl<ProductType> {
     private final AttributeDefinition attribute;
 
     private AddAttributeDefinition(final AttributeDefinition attributeDefinition) {

@@ -15,7 +15,7 @@ import static java.util.Arrays.asList;
 import static java.util.stream.Collectors.toList;
 
 //see http://docs.oracle.com/javase/8/docs/jdk/api/javadoc/doclet/com/sun/javadoc/Tag.html
-public class DocumentationTaglet implements Taglet {
+public final class DocumentationTaglet implements Taglet {
 
     public static final String FILE_SEPERATOR = System.getProperty("file.separator");
     public static final String UPDATEACTIONS_PACKAGE = "updateactions";

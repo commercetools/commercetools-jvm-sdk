@@ -12,7 +12,7 @@ import java.util.List;
 
  @param <T> the type for which the expansion path is
  */
-public class ShippingMethodExpansionModel<T> extends ExpandedModel<T> {
+public final class ShippingMethodExpansionModel<T> extends ExpandedModel<T> {
     public ShippingMethodExpansionModel(final List<String> parentPath, @Nullable final String path) {
         super(parentPath, path);
     }

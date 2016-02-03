@@ -14,7 +14,7 @@ import javax.annotation.Nullable;
  *
  * @see Customer
  */
-public class SetCompanyName extends UpdateActionImpl<Customer> {
+public final class SetCompanyName extends UpdateActionImpl<Customer> {
     @Nullable
     private final String companyName;
 

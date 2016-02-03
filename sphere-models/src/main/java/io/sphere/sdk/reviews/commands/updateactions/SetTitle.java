@@ -12,7 +12,7 @@ import javax.annotation.Nullable;
  *
  * {@include.example io.sphere.sdk.reviews.commands.ReviewUpdateCommandTest#setTitle()}
  */
-public class SetTitle extends UpdateActionImpl<Review> {
+public final class SetTitle extends UpdateActionImpl<Review> {
     @Nullable
     private final String title;
 

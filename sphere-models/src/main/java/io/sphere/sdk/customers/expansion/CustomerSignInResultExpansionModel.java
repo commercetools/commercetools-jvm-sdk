@@ -3,7 +3,7 @@ package io.sphere.sdk.customers.expansion;
 import io.sphere.sdk.customers.CustomerSignInResult;
 import io.sphere.sdk.expansion.ExpansionModel;
 
-public class CustomerSignInResultExpansionModel<T> extends ExpansionModel<T> {
+public final class CustomerSignInResultExpansionModel<T> extends ExpansionModel<T> {
     private CustomerSignInResultExpansionModel() {
         super();
     }

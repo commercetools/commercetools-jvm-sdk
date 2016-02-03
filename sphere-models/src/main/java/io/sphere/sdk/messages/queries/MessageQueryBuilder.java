@@ -15,7 +15,7 @@ import java.util.function.Function;
  {@doc.gen summary }
 
  */
-public class MessageQueryBuilder extends ResourceMetaModelQueryDslBuilderImpl<MessageQueryBuilder, Message, MessageQuery, MessageQueryModel, MessageExpansionModel<Message>> {
+public final class MessageQueryBuilder extends ResourceMetaModelQueryDslBuilderImpl<MessageQueryBuilder, Message, MessageQuery, MessageQueryModel, MessageExpansionModel<Message>> {
 
     private MessageQueryBuilder(final MessageQuery template) {
         super(template);

@@ -6,7 +6,7 @@ import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Referenceable;
 import io.sphere.sdk.producttypes.ProductType;
 
-public class NestedAttributeType extends AttributeTypeBase {
+public final class NestedAttributeType extends AttributeTypeBase {
     private final Reference<ProductType> typeReference;
 
     @JsonCreator

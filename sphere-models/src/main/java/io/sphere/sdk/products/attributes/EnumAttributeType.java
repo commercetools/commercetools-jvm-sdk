@@ -8,7 +8,7 @@ import java.util.List;
 
 import static io.sphere.sdk.utils.SphereInternalUtils.listOf;
 
-public class EnumAttributeType extends AttributeTypeBase {
+public final class EnumAttributeType extends AttributeTypeBase {
     private final List<EnumValue> values;
 
     @JsonCreator

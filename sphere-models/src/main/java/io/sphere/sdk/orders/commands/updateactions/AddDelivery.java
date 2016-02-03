@@ -19,7 +19,7 @@ import java.util.List;
  @see OrderShippingInfo#getDeliveries()
  @see io.sphere.sdk.orders.messages.DeliveryAddedMessage
  */
-public class AddDelivery extends UpdateActionImpl<Order> {
+public final class AddDelivery extends UpdateActionImpl<Order> {
     private final List<DeliveryItem> items;
     private final List<ParcelDraft> parcels;
 

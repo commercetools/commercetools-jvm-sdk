@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 /**
  * @see io.sphere.sdk.client.ErrorResponseException
  */
-public class InvalidField extends SphereError {
+public final class InvalidField extends SphereError {
 
     public static final String CODE = "InvalidField";
 

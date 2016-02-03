@@ -13,7 +13,7 @@ import io.sphere.sdk.zones.Zone;
  *
  * @see Zone#getLocations()
  */
-public class AddLocation extends UpdateActionImpl<Zone> {
+public final class AddLocation extends UpdateActionImpl<Zone> {
     private final Location location;
 
     private AddLocation(final Location location) {

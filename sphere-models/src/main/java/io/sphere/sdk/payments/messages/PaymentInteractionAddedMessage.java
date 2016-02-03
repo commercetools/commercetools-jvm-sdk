@@ -19,7 +19,7 @@ import java.time.ZonedDateTime;
  * @see io.sphere.sdk.payments.commands.updateactions.AddInterfaceInteraction
  */
 @JsonDeserialize(as = PaymentInteractionAddedMessage.class)//important to override annotation in Message class
-public class PaymentInteractionAddedMessage extends GenericMessageImpl<Payment> {
+public final class PaymentInteractionAddedMessage extends GenericMessageImpl<Payment> {
     public static final String MESSAGE_TYPE = "PaymentInteractionAdded";
     public static final MessageDerivateHint<PaymentInteractionAddedMessage> MESSAGE_HINT =
             MessageDerivateHint.ofSingleMessageType(MESSAGE_TYPE, PaymentInteractionAddedMessage.class);

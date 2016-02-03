@@ -14,7 +14,7 @@ import java.util.Optional;
  *
  * {@include.example io.sphere.sdk.products.commands.ProductUpdateCommandTest#changePrice()}
  */
-public class ChangePrice extends UpdateActionImpl<Product> {
+public final class ChangePrice extends UpdateActionImpl<Product> {
     private final PriceDraft price;
     private final String priceId;
 

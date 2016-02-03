@@ -11,7 +11,7 @@ Changes the name of the type.
 
  {@include.example io.sphere.sdk.types.commands.TypeUpdateCommandTest#changeName()}
  */
-public class ChangeName extends UpdateActionImpl<Type> {
+public final class ChangeName extends UpdateActionImpl<Type> {
     private final LocalizedString name;
 
     private ChangeName(final LocalizedString name) {

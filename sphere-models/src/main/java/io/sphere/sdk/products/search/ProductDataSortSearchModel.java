@@ -6,7 +6,7 @@ import io.sphere.sdk.search.model.*;
 
 import javax.annotation.Nullable;
 
-public class ProductDataSortSearchModel extends SortableSearchModel<ProductProjection, SingleValueSortSearchModel<ProductProjection>> {
+public abstract class ProductDataSortSearchModel extends SortableSearchModel<ProductProjection, SingleValueSortSearchModel<ProductProjection>> {
 
     ProductDataSortSearchModel(@Nullable final SearchModel<ProductProjection> parent, @Nullable final String pathSegment) {
         super(parent, pathSegment, SingleValueSortSearchModelFactory.of());

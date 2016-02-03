@@ -6,7 +6,7 @@ import javax.annotation.Nullable;
  * Facet ranges should be of the form [a, b), (-∞, b) or [a, +∞).
  * @param <T> type of the range domain.
  */
-public class FacetRange<T extends Comparable<? super T>> extends Range<T> {
+public final class FacetRange<T extends Comparable<? super T>> extends Range<T> {
 
     private FacetRange(@Nullable final Bound<T> lowerBound, final Bound<T> upperBound) {
         super(lowerBound, upperBound);

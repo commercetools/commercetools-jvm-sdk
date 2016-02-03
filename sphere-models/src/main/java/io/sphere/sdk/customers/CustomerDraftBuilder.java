@@ -17,7 +17,7 @@ import java.util.Optional;
  * @see CustomerDraftDsl
  * @see io.sphere.sdk.customers.commands.CustomerCreateCommand
  */
-public class CustomerDraftBuilder extends Base implements Builder<CustomerDraftDsl> {
+public final class CustomerDraftBuilder extends Base implements Builder<CustomerDraftDsl> {
     @Nullable
     private String customerNumber;
     private String email;

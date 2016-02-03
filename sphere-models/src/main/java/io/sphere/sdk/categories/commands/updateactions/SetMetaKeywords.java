@@ -13,7 +13,7 @@ import javax.annotation.Nullable;
  *
  * {@include.example io.sphere.sdk.categories.commands.CategoryUpdateCommandTest#setMetaKeywords()}
  */
-public class SetMetaKeywords extends UpdateActionImpl<Category> {
+public final class SetMetaKeywords extends UpdateActionImpl<Category> {
     @Nullable
     private final LocalizedString metaKeywords;
 

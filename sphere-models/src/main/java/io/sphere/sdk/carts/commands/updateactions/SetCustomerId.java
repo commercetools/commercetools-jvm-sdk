@@ -16,7 +16,7 @@ import java.util.Optional;
 
  {@include.example io.sphere.sdk.carts.commands.CartUpdateCommandTest#setCustomerId()}
  */
-public class SetCustomerId extends UpdateActionImpl<Cart> {
+public final class SetCustomerId extends UpdateActionImpl<Cart> {
     @Nullable
     private final String customerId;
 

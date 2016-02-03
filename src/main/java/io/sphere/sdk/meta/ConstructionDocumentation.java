@@ -67,7 +67,7 @@ import io.sphere.sdk.models.LocalizedString;
  </ul>
  *
  */
-public class ConstructionDocumentation {
+public final class ConstructionDocumentation {
     private ConstructionDocumentation() {
     }
 }

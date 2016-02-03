@@ -2,7 +2,7 @@ package io.sphere.sdk.models;
 
 import java.util.Locale;
 
-public class LocalizedStringEntry extends Base {
+public final class LocalizedStringEntry extends Base {
     private final Locale locale;
     private final String value;
 

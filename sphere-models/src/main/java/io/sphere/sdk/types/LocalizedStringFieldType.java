@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 /**
  * @see Custom
  */
-public class LocalizedStringFieldType extends FieldTypeBase {
+public final class LocalizedStringFieldType extends FieldTypeBase {
 
     @JsonCreator
     private LocalizedStringFieldType() {

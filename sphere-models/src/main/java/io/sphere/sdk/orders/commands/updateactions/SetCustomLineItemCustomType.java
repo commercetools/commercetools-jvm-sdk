@@ -15,7 +15,7 @@ import java.util.Map;
  *
  * @see io.sphere.sdk.types.Custom
  */
-public class SetCustomLineItemCustomType extends SetCustomTypeBase<Order> {
+public final class SetCustomLineItemCustomType extends SetCustomTypeBase<Order> {
     private final String customLineItemId;
 
     private SetCustomLineItemCustomType(@Nullable final String typeId, @Nullable final String typeKey, @Nullable final Map<String, JsonNode> fields, final String customLineItemId) {

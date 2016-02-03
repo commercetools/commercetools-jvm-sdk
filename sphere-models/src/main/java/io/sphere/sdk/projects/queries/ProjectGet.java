@@ -9,7 +9,7 @@ import io.sphere.sdk.json.SphereJsonUtils;
 
 import static io.sphere.sdk.http.HttpMethod.GET;
 
-public class ProjectGet extends Base implements SphereRequest<Project> {
+public final class ProjectGet extends Base implements SphereRequest<Project> {
     private ProjectGet() {
     }
 

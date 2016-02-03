@@ -3,7 +3,7 @@ package io.sphere.sdk.cartdiscounts;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import io.sphere.sdk.models.Base;
 
-public class CustomLineItemsTarget extends Base implements CartDiscountTarget {
+public final class CustomLineItemsTarget extends Base implements CartDiscountTarget {
     private final String predicate;
 
     @JsonCreator

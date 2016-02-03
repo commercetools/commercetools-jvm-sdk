@@ -13,7 +13,7 @@ import java.time.ZonedDateTime;
  *
  * {@include.example io.sphere.sdk.inventory.commands.InventoryEntryUpdateCommandTest#setExpectedDelivery()}
  */
-public class SetExpectedDelivery extends UpdateActionImpl<InventoryEntry> {
+public final class SetExpectedDelivery extends UpdateActionImpl<InventoryEntry> {
     @Nullable
     private final ZonedDateTime expectedDelivery;
 

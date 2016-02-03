@@ -6,7 +6,7 @@ import io.sphere.sdk.models.Base;
  * Represents one of the two possible bounds of a range or interval.
  * @param <T> type of the endpoint contained in the bound.
  */
-public class Bound<T extends Comparable<? super T>> extends Base {
+public final class Bound<T extends Comparable<? super T>> extends Base {
     private final T endpoint;
     private final BoundType type;
 

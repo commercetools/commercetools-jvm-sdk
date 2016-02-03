@@ -15,7 +15,7 @@ import static java.util.Objects.requireNonNull;
 /**
  * Internal class.
  */
-public class MetaModelUpdateCommandDslBuilder<T extends ResourceView<T, T>, C extends UpdateCommandDsl<T, C>, E> extends Base implements Builder<C>{
+public final class MetaModelUpdateCommandDslBuilder<T extends ResourceView<T, T>, C extends UpdateCommandDsl<T, C>, E> extends Base implements Builder<C>{
     Versioned<T> versioned;
     List<? extends UpdateAction<T>> updateActions;
     JavaType javaType;

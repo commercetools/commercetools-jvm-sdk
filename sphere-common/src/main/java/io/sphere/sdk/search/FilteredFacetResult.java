@@ -3,7 +3,7 @@ package io.sphere.sdk.search;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import io.sphere.sdk.models.Base;
 
-public class FilteredFacetResult extends Base implements FacetResult {
+public final class FilteredFacetResult extends Base implements FacetResult {
     private final Long count;
 
     @JsonCreator

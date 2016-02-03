@@ -18,7 +18,7 @@ import java.util.Set;
  *
  * {@include.example io.sphere.sdk.states.commands.StateUpdateCommandTest#setTransitions()}
  */
-public class SetTransitions extends UpdateActionImpl<State> {
+public final class SetTransitions extends UpdateActionImpl<State> {
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     @Nullable
     private final Set<Reference<State>> transitions;

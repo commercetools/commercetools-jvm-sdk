@@ -6,7 +6,7 @@ import io.sphere.sdk.expansion.ExpansionPathContainer;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class PaymentInfoExpansionModel<T> extends ExpansionModel<T> {
+public final class PaymentInfoExpansionModel<T> extends ExpansionModel<T> {
     public PaymentInfoExpansionModel(final List<String> parentPath, @Nullable final String path) {
         super(parentPath, path);
     }

@@ -9,7 +9,7 @@ import java.util.function.Function;
  * @deprecated This is an internal class.
  */
 @Deprecated
-public class PatternMatcher<T> extends Base {
+public final class PatternMatcher<T> extends Base {
     private final Object thing;
     @Nullable
     private final T result;

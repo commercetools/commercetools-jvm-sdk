@@ -4,7 +4,7 @@ import java.util.*;
 
 import static java.util.Collections.unmodifiableMap;
 
-public class HttpHeaders extends Base {
+public final class HttpHeaders extends Base {
     public static final String ACCEPT_ENCODING = "Accept-Encoding";
     public static final String AUTHORIZATION = "Authorization";
     public static final String USER_AGENT = "User-Agent";

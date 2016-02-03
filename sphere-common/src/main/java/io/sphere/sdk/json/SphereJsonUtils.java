@@ -24,7 +24,7 @@ import java.util.Map;
  * {@include.example io.sphere.sdk.json.SphereJsonUtilsTest#exceptionHandling()}
  *
  */
-final public class SphereJsonUtils {
+public final class SphereJsonUtils {
     private static final ObjectMapper objectMapper = newObjectMapper();
 
     private SphereJsonUtils() {

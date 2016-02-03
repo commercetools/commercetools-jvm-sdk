@@ -15,7 +15,7 @@ import java.util.function.Function;
  {@doc.gen summary types}
 
  */
-public class TypeQueryBuilder extends ResourceMetaModelQueryDslBuilderImpl<TypeQueryBuilder, Type, TypeQuery, TypeQueryModel, TypeExpansionModel<Type>> {
+public final class TypeQueryBuilder extends ResourceMetaModelQueryDslBuilderImpl<TypeQueryBuilder, Type, TypeQuery, TypeQueryModel, TypeExpansionModel<Type>> {
 
     private TypeQueryBuilder(final TypeQuery template) {
         super(template);

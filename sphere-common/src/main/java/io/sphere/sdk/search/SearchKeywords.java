@@ -10,7 +10,7 @@ import java.util.*;
 
 import static io.sphere.sdk.utils.SphereInternalUtils.*;
 
-public class SearchKeywords extends Base {
+public final class SearchKeywords extends Base {
     @JsonIgnore
     private final Map<Locale, List<SearchKeyword>> content;
 

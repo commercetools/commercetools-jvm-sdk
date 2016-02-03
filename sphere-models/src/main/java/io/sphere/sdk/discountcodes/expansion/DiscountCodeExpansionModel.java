@@ -7,7 +7,7 @@ import io.sphere.sdk.expansion.ExpansionPathContainer;
 
 import javax.annotation.Nullable;
 
-public class DiscountCodeExpansionModel<T> extends ExpansionModel<T> {
+public final class DiscountCodeExpansionModel<T> extends ExpansionModel<T> {
     private DiscountCodeExpansionModel(@Nullable final String parentPath, @Nullable final String path) {
         super(parentPath, path);
     }

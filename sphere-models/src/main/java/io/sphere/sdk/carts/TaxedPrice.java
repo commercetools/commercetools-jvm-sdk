@@ -6,7 +6,7 @@ import io.sphere.sdk.models.Base;
 import javax.money.MonetaryAmount;
 import java.util.List;
 
-public class TaxedPrice extends Base {
+public final class TaxedPrice extends Base {
     private final MonetaryAmount totalNet;
     private final MonetaryAmount totalGross;
     private final List<TaxPortion> taxPortions;

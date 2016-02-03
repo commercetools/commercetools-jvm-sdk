@@ -2,7 +2,7 @@ package io.sphere.sdk.products.attributes;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-public class MoneyAttributeType extends AttributeTypeBase {
+public final class MoneyAttributeType extends AttributeTypeBase {
     private MoneyAttributeType() {}
 
     @JsonIgnore

@@ -27,7 +27,7 @@ import static java.util.stream.Collectors.joining;
  *
  * {@include.example io.sphere.sdk.models.LocalizedStringTest#defaultUseCases()}
  */
-public class LocalizedString extends Base {
+public final class LocalizedString extends Base {
 
     private static final Comparator<Map.Entry<Locale, String>> BY_LOCALE_COMPARATOR = (left, right) -> left.getKey().toString().compareTo(right.getKey().toString());
 

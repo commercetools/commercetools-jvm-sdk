@@ -18,7 +18,7 @@ import java.util.function.Function;
  * @param <Q> type of the query model
  * @param <E> type of the expansion model
  */
-public class MetaModelQueryDslBuilder<T, C extends MetaModelQueryDsl<T, C, Q, E>, Q, E> extends Base implements Builder<C> {
+public final class MetaModelQueryDslBuilder<T, C extends MetaModelQueryDsl<T, C, Q, E>, Q, E> extends Base implements Builder<C> {
 
     protected List<QueryPredicate<T>> predicate = Collections.emptyList();
     protected List<QuerySort<T>> sort = Collections.emptyList();

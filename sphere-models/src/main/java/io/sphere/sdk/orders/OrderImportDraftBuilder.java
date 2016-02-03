@@ -12,7 +12,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
-public class OrderImportDraftBuilder extends Base implements Builder<OrderImportDraft> {
+public final class OrderImportDraftBuilder extends Base implements Builder<OrderImportDraft> {
     @Nullable
     private String orderNumber;
     @Nullable

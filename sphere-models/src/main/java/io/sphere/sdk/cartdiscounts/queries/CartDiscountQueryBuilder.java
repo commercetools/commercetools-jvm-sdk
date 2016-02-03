@@ -15,7 +15,7 @@ import java.util.function.Function;
  {@doc.gen summary cart discounts}
 
  */
-public class CartDiscountQueryBuilder extends ResourceMetaModelQueryDslBuilderImpl<CartDiscountQueryBuilder, CartDiscount, CartDiscountQuery, CartDiscountQueryModel, CartDiscountExpansionModel<CartDiscount>> {
+public final class CartDiscountQueryBuilder extends ResourceMetaModelQueryDslBuilderImpl<CartDiscountQueryBuilder, CartDiscount, CartDiscountQuery, CartDiscountQueryModel, CartDiscountExpansionModel<CartDiscount>> {
 
     private CartDiscountQueryBuilder(final CartDiscountQuery template) {
         super(template);

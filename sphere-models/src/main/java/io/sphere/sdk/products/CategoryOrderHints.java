@@ -10,7 +10,7 @@ import io.sphere.sdk.utils.SphereInternalUtils;
 import javax.annotation.Nullable;
 import java.util.*;
 
-public class CategoryOrderHints extends Base {
+public final class CategoryOrderHints extends Base {
     @JsonIgnore
     private final Map<String, String> orderHints;
 

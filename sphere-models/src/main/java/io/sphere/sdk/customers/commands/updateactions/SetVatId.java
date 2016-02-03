@@ -14,7 +14,7 @@ import javax.annotation.Nullable;
  *
  *  @see Customer
  */
-public class SetVatId extends UpdateActionImpl<Customer> {
+public final class SetVatId extends UpdateActionImpl<Customer> {
     @Nullable
     private final String vatId;
 

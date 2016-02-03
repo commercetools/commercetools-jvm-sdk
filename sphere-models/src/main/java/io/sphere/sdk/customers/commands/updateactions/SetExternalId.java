@@ -14,7 +14,7 @@ import javax.annotation.Nullable;
  *
  * @see Customer
  */
-public class SetExternalId extends UpdateActionImpl<Customer> {
+public final class SetExternalId extends UpdateActionImpl<Customer> {
     @Nullable
     private final String externalId;
 

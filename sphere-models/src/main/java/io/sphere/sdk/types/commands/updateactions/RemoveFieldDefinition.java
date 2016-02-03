@@ -10,7 +10,7 @@ import io.sphere.sdk.types.Type;
 
  {@include.example io.sphere.sdk.types.commands.TypeUpdateCommandTest#addFieldDefinition()}
  */
-public class RemoveFieldDefinition extends UpdateActionImpl<Type> {
+public final class RemoveFieldDefinition extends UpdateActionImpl<Type> {
     private final String fieldName;
 
     public static RemoveFieldDefinition of(final String fieldName) {

@@ -20,7 +20,7 @@ import java.util.Map;
  * @see Payment#getInterfaceInteractions()
  * @see io.sphere.sdk.payments.messages.PaymentInteractionAddedMessage
  */
-public class AddInterfaceInteraction extends SetCustomTypeBase<Payment> {
+public final class AddInterfaceInteraction extends SetCustomTypeBase<Payment> {
     /**
      * Gets the resource type id for the custom field creation.
      *

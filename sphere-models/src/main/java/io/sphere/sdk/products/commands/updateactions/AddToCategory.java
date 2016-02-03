@@ -20,7 +20,7 @@ import javax.annotation.Nullable;
  * @see ProductProjection#getCategories()
  * @see io.sphere.sdk.products.ProductData#getCategories()
  */
-public class AddToCategory extends UpdateActionImpl<Product> {
+public final class AddToCategory extends UpdateActionImpl<Product> {
     private final Reference<Category> category;
     @Nullable
     private final String orderHint;

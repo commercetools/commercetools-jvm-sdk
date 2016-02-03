@@ -15,7 +15,7 @@ import io.sphere.sdk.types.Type;
  @see Type#getFieldDefinitionByName(String)
  @see RemoveFieldDefinition
  */
-public class AddFieldDefinition extends UpdateActionImpl<Type> {
+public final class AddFieldDefinition extends UpdateActionImpl<Type> {
     private final FieldDefinition fieldDefinition;
 
     public static AddFieldDefinition of(final FieldDefinition fieldDefinition) {

@@ -9,7 +9,7 @@ import io.sphere.sdk.zones.Zone;
 
 import java.util.List;
 
-public class ZoneRate extends Base {
+public final class ZoneRate extends Base {
     private final Reference<Zone> zone;
     private final List<ShippingRate> shippingRates;
 

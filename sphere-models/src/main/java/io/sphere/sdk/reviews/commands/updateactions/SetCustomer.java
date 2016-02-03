@@ -17,7 +17,7 @@ import java.util.Optional;
  *
  * {@include.example io.sphere.sdk.reviews.commands.ReviewUpdateCommandTest#setCustomer()}
  */
-public class SetCustomer extends UpdateActionImpl<Review> {
+public final class SetCustomer extends UpdateActionImpl<Review> {
     @Nullable
     private final ResourceIdentifier<Customer> customer;
 

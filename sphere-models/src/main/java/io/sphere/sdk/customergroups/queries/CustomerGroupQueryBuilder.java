@@ -15,7 +15,7 @@ import java.util.function.Function;
  {@doc.gen summary }
 
  */
-public class CustomerGroupQueryBuilder extends ResourceMetaModelQueryDslBuilderImpl<CustomerGroupQueryBuilder, CustomerGroup, CustomerGroupQuery, CustomerGroupQueryModel, CustomerGroupExpansionModel<CustomerGroup>> {
+public final class CustomerGroupQueryBuilder extends ResourceMetaModelQueryDslBuilderImpl<CustomerGroupQueryBuilder, CustomerGroup, CustomerGroupQuery, CustomerGroupQueryModel, CustomerGroupExpansionModel<CustomerGroup>> {
 
     private CustomerGroupQueryBuilder(final CustomerGroupQuery template) {
         super(template);

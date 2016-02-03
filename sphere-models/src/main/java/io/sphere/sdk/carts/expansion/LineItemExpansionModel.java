@@ -5,7 +5,7 @@ import io.sphere.sdk.expansion.ExpansionPathContainer;
 
 import java.util.List;
 
-public class LineItemExpansionModel<T> extends ExpansionModel<T> {
+public final class LineItemExpansionModel<T> extends ExpansionModel<T> {
     LineItemExpansionModel(final List<String> parentPath, final String path) {
         super(parentPath, path);
     }

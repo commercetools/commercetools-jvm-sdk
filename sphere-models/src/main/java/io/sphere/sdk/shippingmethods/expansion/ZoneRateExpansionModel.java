@@ -5,7 +5,7 @@ import io.sphere.sdk.expansion.ExpansionPathContainer;
 
 import java.util.List;
 
-public class ZoneRateExpansionModel<T> extends ExpansionModel<T> {
+public final class ZoneRateExpansionModel<T> extends ExpansionModel<T> {
     ZoneRateExpansionModel(final List<String> parentPath, final String path) {
         super(parentPath, path);
     }

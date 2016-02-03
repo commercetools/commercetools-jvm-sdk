@@ -13,7 +13,7 @@ import javax.annotation.Nullable;
  *
  * {@include.example io.sphere.sdk.productdiscounts.commands.ProductDiscountUpdateCommandTest#setDescription()}
  */
-public class SetDescription extends UpdateActionImpl<ProductDiscount> {
+public final class SetDescription extends UpdateActionImpl<ProductDiscount> {
     @Nullable
     private final LocalizedString description;
 

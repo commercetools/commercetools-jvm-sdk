@@ -14,7 +14,7 @@ import java.util.Map;
  *
  * @see io.sphere.sdk.types.Custom
  */
-public class SetCustomType extends SetCustomTypeBase<Order> {
+public final class SetCustomType extends SetCustomTypeBase<Order> {
     private SetCustomType(@Nullable final String typeId, @Nullable final String typeKey, @Nullable final Map<String, JsonNode> fields) {
         super(typeId, typeKey, fields);
     }

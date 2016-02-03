@@ -18,7 +18,7 @@ import java.util.Optional;
  *
  * @see Customer
  */
-public class SetCustomerGroup extends UpdateActionImpl<Customer> {
+public final class SetCustomerGroup extends UpdateActionImpl<Customer> {
     @Nullable
     private final Reference<CustomerGroup> customerGroup;
 

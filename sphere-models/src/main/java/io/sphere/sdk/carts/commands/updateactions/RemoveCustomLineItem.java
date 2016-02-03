@@ -12,7 +12,7 @@ import io.sphere.sdk.commands.UpdateActionImpl;
  {@include.example io.sphere.sdk.carts.commands.CartUpdateCommandTest#removeCustomLineItem()}
 
  */
-public class RemoveCustomLineItem extends UpdateActionImpl<Cart> {
+public final class RemoveCustomLineItem extends UpdateActionImpl<Cart> {
     private final String customLineItemId;
 
     private RemoveCustomLineItem(final String customLineItemId) {

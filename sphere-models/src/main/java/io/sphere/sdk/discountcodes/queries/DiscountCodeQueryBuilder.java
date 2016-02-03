@@ -15,7 +15,7 @@ import java.util.function.Function;
  {@doc.gen summary }
 
  */
-public class DiscountCodeQueryBuilder extends ResourceMetaModelQueryDslBuilderImpl<DiscountCodeQueryBuilder, DiscountCode, DiscountCodeQuery, DiscountCodeQueryModel, DiscountCodeExpansionModel<DiscountCode>> {
+public final class DiscountCodeQueryBuilder extends ResourceMetaModelQueryDslBuilderImpl<DiscountCodeQueryBuilder, DiscountCode, DiscountCodeQuery, DiscountCodeQueryModel, DiscountCodeExpansionModel<DiscountCode>> {
 
     private DiscountCodeQueryBuilder(final DiscountCodeQuery template) {
         super(template);

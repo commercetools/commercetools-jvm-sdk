@@ -6,7 +6,7 @@ import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Referenceable;
 import io.sphere.sdk.states.State;
 
-public class ItemState extends Base {
+public final class ItemState extends Base {
     private final Reference<State> state;
     private final Long quantity;
 

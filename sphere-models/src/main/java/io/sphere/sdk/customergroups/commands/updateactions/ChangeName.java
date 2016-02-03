@@ -13,7 +13,7 @@ import io.sphere.sdk.customergroups.CustomerGroup;
 
  @see CustomerGroup
  */
-public class ChangeName extends UpdateActionImpl<CustomerGroup> {
+public final class ChangeName extends UpdateActionImpl<CustomerGroup> {
     private final String name;
 
     private ChangeName(final String name) {

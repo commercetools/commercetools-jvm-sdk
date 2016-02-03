@@ -14,7 +14,7 @@ import io.sphere.sdk.types.customupdateactions.SetCustomFieldBase;
  *
  * @see io.sphere.sdk.types.Custom
  */
-public class SetProductPriceCustomField extends SetCustomFieldBase<Product> {
+public final class SetProductPriceCustomField extends SetCustomFieldBase<Product> {
     private final String priceId;
 
     private SetProductPriceCustomField(final String name, final JsonNode value, final String priceId) {

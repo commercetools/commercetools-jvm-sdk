@@ -3,7 +3,7 @@ package io.sphere.sdk.products.attributes;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-public class SetAttributeType extends AttributeTypeBase {
+public final class SetAttributeType extends AttributeTypeBase {
     private final AttributeType elementType;
 
     @JsonCreator

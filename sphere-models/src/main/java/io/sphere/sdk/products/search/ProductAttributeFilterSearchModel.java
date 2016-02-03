@@ -9,7 +9,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.ZonedDateTime;
 
-public class ProductAttributeFilterSearchModel extends SearchModelImpl<ProductProjection> {
+public final class ProductAttributeFilterSearchModel extends SearchModelImpl<ProductProjection> {
 
     ProductAttributeFilterSearchModel(@Nullable final SearchModel<ProductProjection> parent, @Nullable final String pathSegment) {
         super(parent, pathSegment);

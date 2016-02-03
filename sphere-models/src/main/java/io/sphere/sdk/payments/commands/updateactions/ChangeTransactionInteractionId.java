@@ -10,7 +10,7 @@ import io.sphere.sdk.payments.Payment;
  *
  * {@include.example io.sphere.sdk.payments.commands.PaymentUpdateCommandTest#changeTransactionInteractionId()}
  */
-public class ChangeTransactionInteractionId extends UpdateActionImpl<Payment> {
+public final class ChangeTransactionInteractionId extends UpdateActionImpl<Payment> {
     private String interactionId;
     private String transactionId;
 

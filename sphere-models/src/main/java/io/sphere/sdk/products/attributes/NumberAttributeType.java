@@ -2,7 +2,7 @@ package io.sphere.sdk.products.attributes;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-public class NumberAttributeType extends AttributeTypeBase {
+public final class NumberAttributeType extends AttributeTypeBase {
     private NumberAttributeType() {}
 
     @JsonIgnore

@@ -4,7 +4,7 @@ import io.sphere.sdk.expansion.ExpansionModel;
 import io.sphere.sdk.expansion.ExpansionPathContainer;
 import io.sphere.sdk.messages.Message;
 
-public class MessageExpansionModel<T>  extends ExpansionModel<T> {
+public final class MessageExpansionModel<T>  extends ExpansionModel<T> {
     public static MessageExpansionModel<Message> of() {
         return new MessageExpansionModel<>();
     }

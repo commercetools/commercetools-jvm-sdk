@@ -7,7 +7,7 @@ import io.sphere.sdk.search.model.*;
 import javax.annotation.Nullable;
 import java.time.ZonedDateTime;
 
-public class ProductDataFilterSearchModel extends SearchModelImpl<ProductProjection> {
+public abstract class ProductDataFilterSearchModel extends SearchModelImpl<ProductProjection> {
 
     ProductDataFilterSearchModel(@Nullable final SearchModel<ProductProjection> parent, @Nullable final String pathSegment) {
         super(parent, pathSegment);

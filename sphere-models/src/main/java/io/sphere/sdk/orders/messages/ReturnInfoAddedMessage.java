@@ -11,7 +11,7 @@ import io.sphere.sdk.orders.ReturnInfo;
 import java.time.ZonedDateTime;
 
 @JsonDeserialize(as = ReturnInfoAddedMessage.class)//important to override annotation in Message class
-public class ReturnInfoAddedMessage extends GenericMessageImpl<Order> {
+public final class ReturnInfoAddedMessage extends GenericMessageImpl<Order> {
     public static final String MESSAGE_TYPE = "ReturnInfoAdded";
     public static final MessageDerivateHint<ReturnInfoAddedMessage> MESSAGE_HINT =
             MessageDerivateHint.ofSingleMessageType(MESSAGE_TYPE, ReturnInfoAddedMessage.class);

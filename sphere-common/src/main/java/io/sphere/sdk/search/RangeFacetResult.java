@@ -6,7 +6,7 @@ import io.sphere.sdk.search.model.RangeStats;
 
 import java.util.List;
 
-public class RangeFacetResult extends Base implements FacetResult {
+public final class RangeFacetResult extends Base implements FacetResult {
     private final List<RangeStats> ranges;
 
     @JsonCreator

@@ -21,7 +21,7 @@ import java.time.ZonedDateTime;
  * @see io.sphere.sdk.orders.commands.updateactions.TransitionState
  */
 @JsonDeserialize(as = OrderStateTransitionMessage.class)//important to override annotation in Message class
-public class OrderStateTransitionMessage extends GenericMessageImpl<Order> {
+public final class OrderStateTransitionMessage extends GenericMessageImpl<Order> {
     public static final String MESSAGE_TYPE = "OrderStateTransition";
     public static final MessageDerivateHint<OrderStateTransitionMessage> MESSAGE_HINT =
             MessageDerivateHint.ofSingleMessageType(MESSAGE_TYPE, OrderStateTransitionMessage.class);

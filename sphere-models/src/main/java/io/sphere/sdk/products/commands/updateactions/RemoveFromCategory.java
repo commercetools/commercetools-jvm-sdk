@@ -15,7 +15,7 @@ import io.sphere.sdk.products.Product;
  *
  * @see io.sphere.sdk.products.commands.updateactions.AddToCategory
  */
-public class RemoveFromCategory extends UpdateActionImpl<Product> {
+public final class RemoveFromCategory extends UpdateActionImpl<Product> {
     private final Reference<Category> category;
 
     private RemoveFromCategory(final Reference<Category> category) {

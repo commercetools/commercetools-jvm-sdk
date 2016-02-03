@@ -11,7 +11,7 @@ import io.sphere.sdk.commands.UpdateActionImpl;
  *
  * {@include.example io.sphere.sdk.cartdiscounts.commands.CartDiscountUpdateCommandTest#changeIsActive()}
  */
-public class ChangeIsActive extends UpdateActionImpl<CartDiscount> {
+public final class ChangeIsActive extends UpdateActionImpl<CartDiscount> {
     private final boolean isActive;
 
     private ChangeIsActive(final boolean isActive) {

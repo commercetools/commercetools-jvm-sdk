@@ -14,7 +14,7 @@ import java.util.Set;
  *
  * {@include.example io.sphere.sdk.orders.commands.OrderUpdateCommandTest#importCustomLineItemState()}
  */
-public class ImportCustomLineItemState extends UpdateActionImpl<Order> {
+public final class ImportCustomLineItemState extends UpdateActionImpl<Order> {
     private final String customLineItemId;
     private final Set<ItemState> state;
 

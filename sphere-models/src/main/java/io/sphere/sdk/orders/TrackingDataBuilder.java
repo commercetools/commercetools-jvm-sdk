@@ -5,7 +5,7 @@ import io.sphere.sdk.models.Builder;
 
 import javax.annotation.Nullable;
 
-public class TrackingDataBuilder extends Base implements Builder<TrackingData> {
+public final class TrackingDataBuilder extends Base implements Builder<TrackingData> {
     @Nullable
     private String trackingId;
     @Nullable

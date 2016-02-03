@@ -6,7 +6,7 @@ import java.util.List;
 import static io.sphere.sdk.http.UrlUtils.urlEncode;
 import static java.util.stream.Collectors.joining;
 
-public class UrlQueryBuilder extends Base {
+public final class UrlQueryBuilder extends Base {
     final List<String> elements = new LinkedList<>();
 
     private UrlQueryBuilder() {

@@ -10,7 +10,7 @@ import io.sphere.sdk.shippingmethods.ShippingMethod;
  *
  * {@include.example io.sphere.sdk.shippingmethods.commands.ShippingMethodUpdateCommandTest#changeName()}
  */
-public class ChangeName extends UpdateActionImpl<ShippingMethod> {
+public final class ChangeName extends UpdateActionImpl<ShippingMethod> {
     private final String name;
 
     private ChangeName(final String name) {

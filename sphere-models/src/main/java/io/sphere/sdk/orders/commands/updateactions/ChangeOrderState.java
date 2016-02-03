@@ -11,7 +11,7 @@ import io.sphere.sdk.orders.OrderState;
 
  {@include.example io.sphere.sdk.orders.commands.OrderUpdateCommandTest#changeOrderState()}
  */
-public class ChangeOrderState extends UpdateActionImpl<Order> {
+public final class ChangeOrderState extends UpdateActionImpl<Order> {
     private final OrderState orderState;
 
     private ChangeOrderState(final OrderState orderState) {

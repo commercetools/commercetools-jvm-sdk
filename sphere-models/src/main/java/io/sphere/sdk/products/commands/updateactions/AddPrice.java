@@ -14,7 +14,7 @@ import io.sphere.sdk.products.ProductVariant;
  *
  * @see ProductVariant#getPrices()
  */
-public class AddPrice extends UpdateActionImpl<Product> {
+public final class AddPrice extends UpdateActionImpl<Product> {
     private final Integer variantId;
     private final PriceDraft price;
 

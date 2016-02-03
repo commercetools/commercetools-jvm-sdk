@@ -13,7 +13,7 @@ import javax.annotation.Nullable;
  *
  * {@include.example io.sphere.sdk.states.commands.StateUpdateCommandTest#setName()}
  */
-public class SetName extends UpdateActionImpl<State> {
+public final class SetName extends UpdateActionImpl<State> {
     @Nullable
     private final LocalizedString name;
 

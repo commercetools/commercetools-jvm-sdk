@@ -11,7 +11,7 @@ Changes the label.
 
  {@include.example io.sphere.sdk.types.commands.TypeUpdateCommandTest#changeLabel()}
  */
-public class ChangeFieldDefinitionLabel extends UpdateActionImpl<Type> {
+public final class ChangeFieldDefinitionLabel extends UpdateActionImpl<Type> {
     private final String fieldName;
     private final LocalizedString label;
 

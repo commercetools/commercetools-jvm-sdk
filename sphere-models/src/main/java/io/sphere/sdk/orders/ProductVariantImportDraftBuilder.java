@@ -12,7 +12,7 @@ import java.util.Objects;
 
 import static java.util.Arrays.asList;
 
-public class ProductVariantImportDraftBuilder extends Base implements Builder<ProductVariantImportDraft> {
+public final class ProductVariantImportDraftBuilder extends Base implements Builder<ProductVariantImportDraft> {
 
     @Nullable
     private final Integer id;

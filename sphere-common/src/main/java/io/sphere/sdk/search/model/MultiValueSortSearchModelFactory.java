@@ -4,7 +4,7 @@ package io.sphere.sdk.search.model;
  * Instantiates {@link MultiValueSortSearchModel} class
  * @param <T> type of the resource to sort by
  */
-public class MultiValueSortSearchModelFactory<T> implements SearchSortFactory<T, MultiValueSortSearchModel<T>> {
+public final class MultiValueSortSearchModelFactory<T> implements SearchSortFactory<T, MultiValueSortSearchModel<T>> {
 
     private MultiValueSortSearchModelFactory() {
     }

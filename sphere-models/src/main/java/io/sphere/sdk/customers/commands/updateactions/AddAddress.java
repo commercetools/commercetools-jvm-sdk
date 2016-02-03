@@ -16,7 +16,7 @@ import io.sphere.sdk.models.Address;
  * @see Customer#getDefaultBillingAddress()
  * @see Customer#getDefaultShippingAddress()
  */
-public class AddAddress extends UpdateActionImpl<Customer> {
+public final class AddAddress extends UpdateActionImpl<Customer> {
     private final Address address;
 
     private AddAddress(final Address address) {

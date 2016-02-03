@@ -2,7 +2,7 @@ package io.sphere.sdk.products.expansion;
 
 import io.sphere.sdk.expansion.ExpansionModel;
 
-public class ProductCatalogExpansionModel<T> extends ExpansionModel<T> {
+public final class ProductCatalogExpansionModel<T> extends ExpansionModel<T> {
     ProductCatalogExpansionModel(final String parentPath, final String path) {
         super(parentPath, path);
     }

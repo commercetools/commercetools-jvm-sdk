@@ -17,7 +17,7 @@ import javax.annotation.Nullable;
  *
  *
  */
-public class SetMethodInfoMethod extends UpdateActionImpl<Payment> {
+public final class SetMethodInfoMethod extends UpdateActionImpl<Payment> {
 
     @Nullable
     private final String method;

@@ -15,7 +15,7 @@ import java.util.Set;
  *
  *  @see Channel#getRoles()
  */
-public class AddRoles extends UpdateActionImpl<Channel> {
+public final class AddRoles extends UpdateActionImpl<Channel> {
     private final Set<ChannelRole> roles;
 
     private AddRoles(final Set<ChannelRole> roles) {

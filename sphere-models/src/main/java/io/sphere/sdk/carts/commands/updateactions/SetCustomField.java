@@ -12,7 +12,7 @@ import io.sphere.sdk.types.customupdateactions.SetCustomFieldBase;
  *
  * @see io.sphere.sdk.types.Custom
  */
-public class SetCustomField extends SetCustomFieldBase<Cart> {
+public final class SetCustomField extends SetCustomFieldBase<Cart> {
     private SetCustomField(final String name, final JsonNode value) {
         super(name, value);
     }

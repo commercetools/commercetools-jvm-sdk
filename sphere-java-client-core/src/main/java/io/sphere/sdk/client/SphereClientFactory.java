@@ -19,7 +19,7 @@ import static io.sphere.sdk.utils.CompletableFutureUtils.successful;
  *
  * {@include.example example.JavaClientInstantiationExample}
  */
-public class SphereClientFactory extends Base {
+public final class SphereClientFactory extends Base {
     private final Supplier<HttpClient> httpClientSupplier;
 
     private SphereClientFactory(final Supplier<HttpClient> httpClientSupplier) {

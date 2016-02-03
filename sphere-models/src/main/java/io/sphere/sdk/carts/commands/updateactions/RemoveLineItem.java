@@ -13,7 +13,7 @@ import javax.annotation.Nullable;
 
  {@include.example io.sphere.sdk.carts.commands.CartUpdateCommandTest#removeLineItem()}
  */
-public class RemoveLineItem extends UpdateActionImpl<Cart> {
+public final class RemoveLineItem extends UpdateActionImpl<Cart> {
     private final String lineItemId;
     @Nullable
     private final Long quantity;

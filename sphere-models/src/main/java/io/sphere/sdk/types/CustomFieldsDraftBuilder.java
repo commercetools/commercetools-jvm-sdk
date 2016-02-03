@@ -15,7 +15,7 @@ import static java.util.Objects.requireNonNull;
  * @see Custom
  * @see CustomFieldsDraft
  */
-public class CustomFieldsDraftBuilder extends Base implements Builder<CustomFieldsDraft> {
+public final class CustomFieldsDraftBuilder extends Base implements Builder<CustomFieldsDraft> {
     @Nullable
     private final String typeId;
     @Nullable

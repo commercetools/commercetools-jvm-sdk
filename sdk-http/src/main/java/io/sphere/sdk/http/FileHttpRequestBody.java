@@ -2,7 +2,7 @@ package io.sphere.sdk.http;
 
 import java.io.File;
 
-public class FileHttpRequestBody extends Base implements HttpRequestBody {
+public final class FileHttpRequestBody extends Base implements HttpRequestBody {
     private final File body;
 
     private FileHttpRequestBody(final File body) {

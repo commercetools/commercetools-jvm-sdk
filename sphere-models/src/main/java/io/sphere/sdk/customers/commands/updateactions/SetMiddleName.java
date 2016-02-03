@@ -16,7 +16,7 @@ import javax.annotation.Nullable;
  * @see io.sphere.sdk.customers.commands.CustomerUpdateCommand
  * @see Customer#getMiddleName() 
  */
-public class SetMiddleName extends UpdateActionImpl<Customer> {
+public final class SetMiddleName extends UpdateActionImpl<Customer> {
     @Nullable
     private final String middleName;
 

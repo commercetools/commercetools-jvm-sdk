@@ -8,7 +8,7 @@ import java.util.List;
 
 import static io.sphere.sdk.utils.SphereInternalUtils.listOf;
 
-public class LocalizedEnumAttributeType extends AttributeTypeBase {
+public final class LocalizedEnumAttributeType extends AttributeTypeBase {
     private final List<LocalizedEnumValue> values;
 
     @JsonCreator

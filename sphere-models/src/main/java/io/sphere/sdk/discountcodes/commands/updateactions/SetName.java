@@ -13,7 +13,7 @@ import javax.annotation.Nullable;
  *
  * {@include.example io.sphere.sdk.discountcodes.commands.DiscountCodeUpdateCommandTest#setName()}
  */
-public class SetName extends UpdateActionImpl<DiscountCode> {
+public final class SetName extends UpdateActionImpl<DiscountCode> {
     @Nullable
     private final LocalizedString name;
 

@@ -5,7 +5,7 @@ import io.sphere.sdk.expansion.ExpansionPathContainer;
 
 import java.util.List;
 
-public class DiscountCodeInfoExpansionModel<T> extends ExpansionModel<T> {
+public final class DiscountCodeInfoExpansionModel<T> extends ExpansionModel<T> {
     DiscountCodeInfoExpansionModel(final List<String> parentPath, final String path) {
         super(parentPath, path);
     }

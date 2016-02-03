@@ -72,7 +72,7 @@ Then we can write some script to parse the csv and create them in sphere:
 
 
  */
-public class CategoryDocumentation {
+public final class CategoryDocumentation {
     private CategoryDocumentation() {
     }
 }

@@ -12,7 +12,7 @@ import io.sphere.sdk.orders.ReturnShipmentState;
 
  {@include.example io.sphere.sdk.orders.commands.OrderUpdateCommandTest#setReturnShipmentState()}
  */
-public class SetReturnShipmentState extends UpdateActionImpl<Order> {
+public final class SetReturnShipmentState extends UpdateActionImpl<Order> {
     private final String returnItemId;
     private final ReturnShipmentState shipmentState;
 

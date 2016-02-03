@@ -13,7 +13,7 @@ import io.sphere.sdk.productdiscounts.ProductDiscount;
  {@include.example io.sphere.sdk.productdiscounts.commands.ProductDiscountUpdateCommandTest#changeName()}
 
  */
-public class ChangeName extends UpdateActionImpl<ProductDiscount> {
+public final class ChangeName extends UpdateActionImpl<ProductDiscount> {
     private final LocalizedString name;
 
     private ChangeName(final LocalizedString name) {

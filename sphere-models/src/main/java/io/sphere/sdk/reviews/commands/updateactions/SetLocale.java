@@ -13,7 +13,7 @@ import java.util.Locale;
  *
  * {@include.example io.sphere.sdk.reviews.commands.ReviewUpdateCommandTest#setLocale()}
  */
-public class SetLocale extends UpdateActionImpl<Review> {
+public final class SetLocale extends UpdateActionImpl<Review> {
     @Nullable
     private final Locale locale;
 

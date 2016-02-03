@@ -14,7 +14,7 @@ import javax.annotation.Nullable;
  {@include.example io.sphere.sdk.carts.commands.CartUpdateCommandTest#setCountry()}
 
  */
-public class SetCountry extends UpdateActionImpl<Cart> {
+public final class SetCountry extends UpdateActionImpl<Cart> {
     @Nullable
     private final CountryCode country;
 

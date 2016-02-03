@@ -4,7 +4,7 @@ import io.sphere.sdk.models.Base;
 
 import javax.annotation.Nullable;
 
-public class SimpleRangeStats extends Base {
+public final class SimpleRangeStats extends Base {
     @Nullable
     private final String lowerEndpoint;
     @Nullable

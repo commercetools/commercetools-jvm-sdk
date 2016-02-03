@@ -11,7 +11,7 @@ import io.sphere.sdk.zones.Zone;
  *
  * {@include.example io.sphere.sdk.zones.commands.ZoneUpdateCommandTest#addLocationAndRemoveLocation()}
  */
-public class RemoveLocation extends UpdateActionImpl<Zone> {
+public final class RemoveLocation extends UpdateActionImpl<Zone> {
     private final Location location;
 
     private RemoveLocation(final Location location) {

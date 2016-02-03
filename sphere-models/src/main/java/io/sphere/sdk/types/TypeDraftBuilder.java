@@ -15,7 +15,7 @@ import static io.sphere.sdk.utils.SphereInternalUtils.listOf;
  * @see Custom
  * @see TypeDraft
  */
-public class TypeDraftBuilder extends Base implements Builder<TypeDraft> {
+public final class TypeDraftBuilder extends Base implements Builder<TypeDraft> {
 
     private String key;
     private LocalizedString name;

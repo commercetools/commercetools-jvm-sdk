@@ -9,7 +9,7 @@ import java.util.function.Function;
  * @param <T> type of the resource
  * @param <V> type of the value
  */
-public class RangeTermFacetSearchModel<T, V extends Comparable<? super V>> extends RangeTermFacetBaseSearchModel<T, V> {
+public final class RangeTermFacetSearchModel<T, V extends Comparable<? super V>> extends RangeTermFacetBaseSearchModel<T, V> {
 
     RangeTermFacetSearchModel(final SearchModel<T> searchModel, final Function<V, String> typeSerializer, final String alias) {
         super(searchModel, typeSerializer, alias);

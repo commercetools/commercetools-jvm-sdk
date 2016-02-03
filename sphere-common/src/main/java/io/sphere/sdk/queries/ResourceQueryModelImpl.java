@@ -2,7 +2,7 @@ package io.sphere.sdk.queries;
 
 import io.sphere.sdk.models.Identifiable;
 
-public class ResourceQueryModelImpl<T> extends QueryModelImpl<T> implements ResourceQueryModel<T> {
+public abstract class ResourceQueryModelImpl<T> extends QueryModelImpl<T> implements ResourceQueryModel<T> {
     protected ResourceQueryModelImpl(final QueryModel<T> parent, final String pathSegment) {
         super(parent, pathSegment);
     }

@@ -11,7 +11,7 @@ import io.sphere.sdk.products.Product;
  *
  * {@include.example io.sphere.sdk.products.commands.ProductUpdateCommandTest#changeSlug()}
  */
-public class ChangeSlug extends UpdateActionImpl<Product> {
+public final class ChangeSlug extends UpdateActionImpl<Product> {
     private final LocalizedString slug;
 
     private ChangeSlug(final LocalizedString slug) {

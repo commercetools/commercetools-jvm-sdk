@@ -10,7 +10,7 @@ import javax.annotation.Nullable;
 import java.util.Optional;
 import java.util.Set;
 
-public class LineItemImportDraftBuilder extends Base implements Builder<LineItemImportDraft> {
+public final class LineItemImportDraftBuilder extends Base implements Builder<LineItemImportDraft> {
     @Nullable
     private final String productId;
     private final LocalizedString name;

@@ -12,7 +12,7 @@ import io.sphere.sdk.types.customupdateactions.SetCustomFieldBase;
  *
  * @see io.sphere.sdk.types.Custom
  */
-public class SetLineItemCustomField extends SetCustomFieldBase<Order> {
+public final class SetLineItemCustomField extends SetCustomFieldBase<Order> {
     private final String lineItemId;
 
     private SetLineItemCustomField(final String name, final JsonNode value, final String lineItemId) {

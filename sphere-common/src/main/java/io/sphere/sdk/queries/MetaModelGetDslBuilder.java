@@ -17,7 +17,7 @@ import java.util.function.Function;
  * @param <C> type of the class implementing this class
  * @param <E> type of the expansion model
  */
-public class MetaModelGetDslBuilder<R, T, C extends MetaModelGetDsl<R, T, C, E>, E> extends Base implements Builder<C> {
+public final class MetaModelGetDslBuilder<R, T, C extends MetaModelGetDsl<R, T, C, E>, E> extends Base implements Builder<C> {
 
     JavaType javaType;
     String endpoint;

@@ -6,7 +6,7 @@ import io.sphere.sdk.models.Base;
 
 import javax.annotation.Nullable;
 
-public class TrackingData extends Base {
+public final class TrackingData extends Base {
     @Nullable
     private final String trackingId;
     @Nullable

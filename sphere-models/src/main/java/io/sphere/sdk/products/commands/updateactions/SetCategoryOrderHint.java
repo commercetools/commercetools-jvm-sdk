@@ -11,7 +11,7 @@ import javax.annotation.Nullable;
  * {@doc.gen intro}
  *
  */
-public class SetCategoryOrderHint extends UpdateActionImpl<Product> {
+public final class SetCategoryOrderHint extends UpdateActionImpl<Product> {
     private final String categoryId;
     @Nullable
     private final String orderHint;

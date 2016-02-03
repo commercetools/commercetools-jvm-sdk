@@ -10,7 +10,7 @@ import io.sphere.sdk.products.Product;
 import java.time.ZonedDateTime;
 
 @JsonDeserialize(as = ProductUnpublishedMessage.class)//important to override annotation in Message class
-public class ProductUnpublishedMessage extends GenericMessageImpl<Product> {
+public final class ProductUnpublishedMessage extends GenericMessageImpl<Product> {
     public static final String MESSAGE_TYPE = "ProductUnpublished";
     public static final MessageDerivateHint<ProductUnpublishedMessage> MESSAGE_HINT =
             MessageDerivateHint.ofSingleMessageType(MESSAGE_TYPE, ProductUnpublishedMessage.class);

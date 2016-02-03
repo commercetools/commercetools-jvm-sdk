@@ -20,7 +20,7 @@ import java.time.ZonedDateTime;
  @see io.sphere.sdk.payments.commands.updateactions.TransitionState
  */
 @JsonDeserialize(as = PaymentStatusStateTransitionMessage.class)//important to override annotation in Message class
-public class PaymentStatusStateTransitionMessage extends GenericMessageImpl<Payment> {
+public final class PaymentStatusStateTransitionMessage extends GenericMessageImpl<Payment> {
     public static final String MESSAGE_TYPE = "PaymentStatusStateTransition";
     public static final MessageDerivateHint<PaymentStatusStateTransitionMessage> MESSAGE_HINT =
             MessageDerivateHint.ofSingleMessageType(MESSAGE_TYPE, PaymentStatusStateTransitionMessage.class);

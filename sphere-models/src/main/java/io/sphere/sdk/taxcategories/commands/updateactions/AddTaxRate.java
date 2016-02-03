@@ -17,7 +17,7 @@ import static java.util.Objects.requireNonNull;
  * @see RemoveTaxRate
  * @see ReplaceTaxRate
  */
-public class AddTaxRate extends UpdateActionImpl<TaxCategory> {
+public final class AddTaxRate extends UpdateActionImpl<TaxCategory> {
     private final TaxRate taxRate;
 
     private AddTaxRate(final TaxRate taxRate) {

@@ -10,7 +10,7 @@ import javax.annotation.Nullable;
 import javax.money.MonetaryAmount;
 import java.util.Set;
 
-public class CustomLineItemImportDraftBuilder extends Base implements Builder<CustomLineItemImportDraft> {
+public final class CustomLineItemImportDraftBuilder extends Base implements Builder<CustomLineItemImportDraft> {
     private String id = RandomStringUtils.randomAlphanumeric(20);
     private final LocalizedString name;
     private final MonetaryAmount money;

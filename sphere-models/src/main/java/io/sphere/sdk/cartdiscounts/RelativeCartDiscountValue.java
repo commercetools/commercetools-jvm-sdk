@@ -3,7 +3,7 @@ package io.sphere.sdk.cartdiscounts;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import io.sphere.sdk.models.Base;
 
-public class RelativeCartDiscountValue extends Base implements CartDiscountValue {
+public final class RelativeCartDiscountValue extends Base implements CartDiscountValue {
     private final Integer permyriad;
 
     @JsonCreator

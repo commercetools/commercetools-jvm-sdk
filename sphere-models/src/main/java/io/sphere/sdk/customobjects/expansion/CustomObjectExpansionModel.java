@@ -8,7 +8,7 @@ import io.sphere.sdk.expansion.ExpansionModel;
  *
  * @param <T> The type of the value of this custom object.
  */
-public class CustomObjectExpansionModel<T> extends ExpansionModel<T> {
+public final class CustomObjectExpansionModel<T> extends ExpansionModel<T> {
     private CustomObjectExpansionModel() {
         super();
     }

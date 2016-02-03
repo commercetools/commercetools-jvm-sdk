@@ -57,7 +57,7 @@ public interface DiscountCode extends Resource<DiscountCode> {
     /**
      * Flag if this cart discount is enabled
      *
-     * @return
+     * @return true if enabled
      * @see io.sphere.sdk.cartdiscounts.commands.updateactions.ChangeIsActive
      */
     Boolean isActive();

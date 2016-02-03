@@ -7,7 +7,7 @@ import io.sphere.sdk.models.Base;
 import javax.annotation.Nullable;
 import javax.money.MonetaryAmount;
 
-public class ShippingRate extends Base {
+public final class ShippingRate extends Base {
     private final MonetaryAmount price;
 
     @JsonInclude(JsonInclude.Include.NON_EMPTY)

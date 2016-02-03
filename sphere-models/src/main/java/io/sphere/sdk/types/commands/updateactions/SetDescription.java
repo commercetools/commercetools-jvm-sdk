@@ -13,7 +13,7 @@ import javax.annotation.Nullable;
 
  {@include.example io.sphere.sdk.types.commands.TypeUpdateCommandTest#setDescription()}
  */
-public class SetDescription extends UpdateActionImpl<Type> {
+public final class SetDescription extends UpdateActionImpl<Type> {
     @Nullable
     private final LocalizedString description;
 

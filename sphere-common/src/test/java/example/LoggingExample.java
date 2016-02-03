@@ -4,7 +4,7 @@ import io.sphere.sdk.utils.SphereInternalLogger;
 
 import static io.sphere.sdk.utils.SphereInternalLogger.getLogger;
 
-public class LoggingExample {
+public final class LoggingExample {
     //replace topic with the related endpoint path segment, like categories or product-types.
     private static final SphereInternalLogger LOGGER = getLogger("topic.objects");
 

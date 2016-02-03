@@ -12,7 +12,7 @@ import io.sphere.sdk.inventory.InventoryEntry;
  *
  * @see InventoryEntry#getQuantityOnStock()
  */
-public class AddQuantity extends UpdateActionImpl<InventoryEntry> {
+public final class AddQuantity extends UpdateActionImpl<InventoryEntry> {
     private final Long quantity;
 
     private AddQuantity(final Long quantity) {

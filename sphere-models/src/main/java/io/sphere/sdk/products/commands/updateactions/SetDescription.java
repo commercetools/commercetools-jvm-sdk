@@ -11,7 +11,7 @@ import io.sphere.sdk.products.Product;
  *
  * {@include.example io.sphere.sdk.products.commands.ProductUpdateCommandTest#setDescription()}
  */
-public class SetDescription extends UpdateActionImpl<Product> {
+public final class SetDescription extends UpdateActionImpl<Product> {
     private final LocalizedString description;
 
     private SetDescription(final LocalizedString description) {

@@ -77,6 +77,11 @@ public class CategoryDocumentationTest extends IntegrationTest {
                 ExperimentalReactiveStreamUtils.publisherOf(CategoryQuery.of(), sphereClient());
         final CompletionStage<List<Category>> categoriesStage =
                 ExperimentalReactiveStreamUtils.collectAll(categoryPublisher);
+
+
+
+
+
         final List<Category> categories = categoriesStage.toCompletableFuture().join();
         assertThat(categories)
                 .hasSize(15)
@@ -330,10 +335,14 @@ public class CategoryDocumentationTest extends IntegrationTest {
     }
 
     private static void deleteAllCategories() {
-        final Publisher<Category> publisher = ExperimentalReactiveStreamUtils.publisherOf(CategoryQuery.of().byIsRoot(), sphereClient());
-        final CategoryDeleteSubscriber subscriber = new CategoryDeleteSubscriber();
-        publisher.subscribe(subscriber);
-        subscriber.getFuture().join();
+        final CategoryQuery categoryQuery = CategoryQuery.of().byIsRoot().withLimit(500);
+        final PagedQueryResult<Category> categoryPagedQueryResult = client().executeBlocking(categoryQuery);
+        categoryPagedQueryResult.getResults()
+                .forEach(cat -> client().executeBlocking(CategoryDeleteCommand.of(cat)));
+        //delete also corrupt category nodes
+        client().executeBlocking(CategoryQuery.of().withLimit(500))
+                .getResults()
+                .forEach(cat -> client().executeBlocking(CategoryDeleteCommand.of(cat)));
     }
 
     private static List<Category> setUpData() throws IOException {

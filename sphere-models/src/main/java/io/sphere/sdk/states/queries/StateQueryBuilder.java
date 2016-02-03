@@ -15,7 +15,7 @@ import java.util.function.Function;
  {@doc.gen summary}
 
  */
-public class StateQueryBuilder extends ResourceMetaModelQueryDslBuilderImpl<StateQueryBuilder, State, StateQuery, StateQueryModel, StateExpansionModel<State>> {
+public final class StateQueryBuilder extends ResourceMetaModelQueryDslBuilderImpl<StateQueryBuilder, State, StateQuery, StateQueryModel, StateExpansionModel<State>> {
 
     private StateQueryBuilder(final StateQuery template) {
         super(template);

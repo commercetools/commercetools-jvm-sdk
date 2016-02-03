@@ -15,7 +15,7 @@ import java.util.Optional;
  *
  * {@include.example io.sphere.sdk.reviews.commands.ReviewUpdateCommandTest#setTarget()}
  */
-public class SetTarget extends UpdateActionImpl<Review> {
+public final class SetTarget extends UpdateActionImpl<Review> {
     @Nullable
     private final ResourceIdentifier<?> target;
 

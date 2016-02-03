@@ -14,7 +14,7 @@ import javax.annotation.Nullable;
  *
  *  @see Payment
  */
-public class SetStatusInterfaceText extends UpdateActionImpl<Payment> {
+public final class SetStatusInterfaceText extends UpdateActionImpl<Payment> {
 
     @Nullable
     private final String interfaceText;

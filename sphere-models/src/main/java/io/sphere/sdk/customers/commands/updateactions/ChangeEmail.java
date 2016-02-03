@@ -11,7 +11,7 @@ import io.sphere.sdk.customers.Customer;
  * {@include.example io.sphere.sdk.customers.commands.CustomerUpdateCommandTest#changeEmail()}
  *  @see Customer
  */
-public class ChangeEmail extends UpdateActionImpl<Customer> {
+public final class ChangeEmail extends UpdateActionImpl<Customer> {
     private final String email;
 
     private ChangeEmail(final String email) {

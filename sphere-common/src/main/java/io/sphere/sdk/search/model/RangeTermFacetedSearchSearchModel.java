@@ -7,7 +7,7 @@ import io.sphere.sdk.search.TermFacetedSearchExpression;
  * Model to build range and term facets and filters.
  * @param <T> type of the resource
  */
-public class RangeTermFacetedSearchSearchModel<T> extends RangeTermFacetedSearchBaseSearchModel<T> {
+public final class RangeTermFacetedSearchSearchModel<T> extends RangeTermFacetedSearchBaseSearchModel<T> {
 
     RangeTermFacetedSearchSearchModel(final SearchModel<T> searchModel) {
         super(searchModel);

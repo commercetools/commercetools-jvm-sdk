@@ -5,7 +5,7 @@ import io.sphere.sdk.expansion.ExpansionPathContainer;
 import io.sphere.sdk.payments.Payment;
 
 
-public class PaymentExpansionModel<T> extends ExpansionModel<T> {
+public final class PaymentExpansionModel<T> extends ExpansionModel<T> {
     PaymentExpansionModel() {
         super();
     }

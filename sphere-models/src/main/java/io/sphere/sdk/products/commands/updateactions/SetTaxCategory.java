@@ -17,7 +17,7 @@ import java.util.Optional;
  * {@include.example io.sphere.sdk.products.commands.ProductUpdateCommandTest#setTaxCategory()}
  *
  */
-public class SetTaxCategory extends UpdateActionImpl<Product> {
+public final class SetTaxCategory extends UpdateActionImpl<Product> {
     @Nullable
     private final Reference<TaxCategory> taxCategory;
 

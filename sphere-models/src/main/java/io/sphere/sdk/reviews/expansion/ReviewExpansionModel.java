@@ -9,7 +9,7 @@ import io.sphere.sdk.reviews.Review;
 
  @param <T> the type for which the expansion path is
  */
-public class ReviewExpansionModel<T> extends ExpansionModel<T> {
+public final class ReviewExpansionModel<T> extends ExpansionModel<T> {
     public ReviewExpansionModel(final String parentPath, final String path) {
         super(parentPath, path);
     }

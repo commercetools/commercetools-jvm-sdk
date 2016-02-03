@@ -18,7 +18,7 @@ import javax.annotation.Nullable;
  * @see io.sphere.sdk.orders.messages.OrderStateTransitionMessage
  *
  */
-public class TransitionState extends TransitionStateBase<Order> {
+public final class TransitionState extends TransitionStateBase<Order> {
     private TransitionState(final @Nullable Referenceable<State> state) {
         super(state);
     }

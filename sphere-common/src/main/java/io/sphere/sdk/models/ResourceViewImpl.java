@@ -2,7 +2,7 @@ package io.sphere.sdk.models;
 
 import java.time.ZonedDateTime;
 
-public class ResourceViewImpl<T, O> extends Base implements ResourceView<T, O> {
+public abstract class ResourceViewImpl<T, O> extends Base implements ResourceView<T, O> {
     private final String id;
     private final Long version;
     private final ZonedDateTime createdAt;

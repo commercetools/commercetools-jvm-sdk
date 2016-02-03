@@ -15,7 +15,7 @@ import io.sphere.sdk.payments.Payment;
  *
  *
  */
-public class SetMethodInfoInterface extends UpdateActionImpl<Payment> {
+public final class SetMethodInfoInterface extends UpdateActionImpl<Payment> {
 
     private final String _interface;//sic! interface is keyword in Java
 

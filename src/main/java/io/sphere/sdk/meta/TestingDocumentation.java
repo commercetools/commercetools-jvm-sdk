@@ -35,7 +35,7 @@ package io.sphere.sdk.meta;
 
 
  */
-public class TestingDocumentation {
+public final class TestingDocumentation {
     private TestingDocumentation() {
     }
 }

@@ -2,7 +2,7 @@ package io.sphere.sdk.search.model;
 
 import javax.annotation.Nullable;
 
-public class EnumFilterSearchModel<T> extends SearchModelImpl<T> {
+public final class EnumFilterSearchModel<T> extends SearchModelImpl<T> {
 
     EnumFilterSearchModel(@Nullable final SearchModel<T> parent, @Nullable final String pathSegment) {
         super(parent, pathSegment);

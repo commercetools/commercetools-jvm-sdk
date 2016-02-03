@@ -20,7 +20,7 @@ import javax.money.MonetaryAmount;
  *
  *
  */
-public class SetAmountRefunded extends UpdateActionImpl<Payment> {
+public final class SetAmountRefunded extends UpdateActionImpl<Payment> {
     @Nullable
     private final MonetaryAmount amount;
 

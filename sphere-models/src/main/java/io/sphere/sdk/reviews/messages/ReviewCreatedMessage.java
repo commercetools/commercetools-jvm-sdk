@@ -18,7 +18,7 @@ import java.time.ZonedDateTime;
  * @see io.sphere.sdk.reviews.commands.ReviewCreateCommand
  */
 @JsonDeserialize(as = ReviewCreatedMessage.class)//important to override annotation in Message class
-public class ReviewCreatedMessage extends GenericMessageImpl<Review> {
+public final class ReviewCreatedMessage extends GenericMessageImpl<Review> {
     public static final String MESSAGE_TYPE = "ReviewCreated";
     public static final MessageDerivateHint<ReviewCreatedMessage> MESSAGE_HINT =
             MessageDerivateHint.ofSingleMessageType(MESSAGE_TYPE, ReviewCreatedMessage.class);

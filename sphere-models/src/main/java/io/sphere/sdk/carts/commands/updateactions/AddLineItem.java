@@ -24,7 +24,7 @@ import javax.annotation.Nullable;
  @see RemoveLineItem
  @see ChangeLineItemQuantity
  */
-public class AddLineItem extends UpdateActionImpl<Cart> implements CustomDraft {
+public final class AddLineItem extends UpdateActionImpl<Cart> implements CustomDraft {
     private final String productId;
     private final Integer variantId;
     private final Long quantity;

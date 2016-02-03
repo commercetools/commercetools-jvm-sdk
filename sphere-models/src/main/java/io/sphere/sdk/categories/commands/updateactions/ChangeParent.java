@@ -14,7 +14,7 @@ import io.sphere.sdk.models.Referenceable;
 
  <p>Consult the documentation for <a href="{@docRoot}/io/sphere/sdk/meta/CategoryDocumentation.html#category-tree-changes">categories</a> for more information.</p>
  */
-public class ChangeParent extends UpdateActionImpl<Category> {
+public final class ChangeParent extends UpdateActionImpl<Category> {
     private final Reference<Category> parent;
 
     private ChangeParent(final Referenceable<Category> parent) {

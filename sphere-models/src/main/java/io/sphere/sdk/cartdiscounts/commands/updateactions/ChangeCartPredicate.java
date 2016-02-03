@@ -11,7 +11,7 @@ import io.sphere.sdk.commands.UpdateActionImpl;
  *
  * {@include.example io.sphere.sdk.cartdiscounts.commands.CartDiscountUpdateCommandTest#changeCartPredicate()}
  */
-public class ChangeCartPredicate extends UpdateActionImpl<CartDiscount> {
+public final class ChangeCartPredicate extends UpdateActionImpl<CartDiscount> {
     private final String cartPredicate;
 
     private ChangeCartPredicate(final String cartPredicate) {

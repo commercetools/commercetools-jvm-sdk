@@ -15,7 +15,7 @@ import io.sphere.sdk.products.ProductVariant;
  *  @see ProductVariant#getImages()
  *  @see RemoveImage
  */
-public class AddExternalImage extends UpdateActionImpl<Product> {
+public final class AddExternalImage extends UpdateActionImpl<Product> {
     private final Integer variantId;
     private final Image image;
 

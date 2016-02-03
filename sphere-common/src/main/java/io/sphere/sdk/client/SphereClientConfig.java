@@ -12,7 +12,7 @@ import static io.sphere.sdk.client.ClientPackage.requireNonBlank;
  * The full configuration for a SPHERE.IO client.
  *
  */
-public class SphereClientConfig extends Base implements SphereAuthConfig, SphereApiConfig {
+public final class SphereClientConfig extends Base implements SphereAuthConfig, SphereApiConfig {
     public static final String ENVIRONMENT_VARIABLE_API_URL_SUFFIX = "API_URL";
     public static final String ENVIRONMENT_VARIABLE_AUTH_URL_SUFFIX = "AUTH_URL";
     public static final String ENVIRONMENT_VARIABLE_PROJECT_KEY_SUFFIX = "PROJECT_KEY";

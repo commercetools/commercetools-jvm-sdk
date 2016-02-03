@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.sphere.sdk.models.Base;
 
-public class ImageDimensions extends Base {
+public final class ImageDimensions extends Base {
     @JsonProperty("w")
     private final Integer width;
     @JsonProperty("h")

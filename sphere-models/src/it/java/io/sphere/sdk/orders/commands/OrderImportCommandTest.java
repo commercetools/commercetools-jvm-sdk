@@ -32,7 +32,7 @@ import java.util.UUID;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
-import static io.sphere.sdk.channels.ChannelFixtures.withPersistentChannel;
+import static io.sphere.sdk.channels.ChannelFixtures.*;
 import static io.sphere.sdk.customers.CustomerFixtures.withCustomer;
 import static io.sphere.sdk.customers.CustomerFixtures.withCustomerInGroup;
 import static io.sphere.sdk.models.DefaultCurrencyUnits.EUR;

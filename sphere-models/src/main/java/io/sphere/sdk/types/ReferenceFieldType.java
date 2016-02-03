@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 /**
  * @see Custom
  */
-public class ReferenceFieldType extends FieldTypeBase {
+public final class ReferenceFieldType extends FieldTypeBase {
     private final String referenceTypeId;
 
     @JsonCreator

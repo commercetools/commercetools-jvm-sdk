@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-public class PagedSearchResult<T> extends PagedResult<T> {
+public final class PagedSearchResult<T> extends PagedResult<T> {
 
     private final Map<String, FacetResult> facets;
 

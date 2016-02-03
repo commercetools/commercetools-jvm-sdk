@@ -13,7 +13,7 @@ import io.sphere.sdk.payments.TransactionState;
  * {@include.example io.sphere.sdk.payments.commands.PaymentUpdateCommandTest#changeTransactionState()}
  *
  */
-public class ChangeTransactionState extends UpdateActionImpl<Payment> {
+public final class ChangeTransactionState extends UpdateActionImpl<Payment> {
     private final TransactionState state;
     private final String transactionId;
 

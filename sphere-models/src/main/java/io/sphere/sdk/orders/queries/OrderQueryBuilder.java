@@ -15,7 +15,7 @@ import java.util.function.Function;
  {@doc.gen summary }
 
  */
-public class OrderQueryBuilder extends ResourceMetaModelQueryDslBuilderImpl<OrderQueryBuilder, Order, OrderQuery, OrderQueryModel, OrderExpansionModel<Order>> {
+public final class OrderQueryBuilder extends ResourceMetaModelQueryDslBuilderImpl<OrderQueryBuilder, Order, OrderQuery, OrderQueryModel, OrderExpansionModel<Order>> {
 
     private OrderQueryBuilder(final OrderQuery template) {
         super(template);

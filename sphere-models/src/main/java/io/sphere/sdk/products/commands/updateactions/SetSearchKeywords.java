@@ -11,7 +11,7 @@ import io.sphere.sdk.search.SearchKeywords;
  *
  * {@include.example io.sphere.sdk.products.commands.ProductUpdateCommandTest#setSearchKeywords()}
  */
-public class SetSearchKeywords extends UpdateActionImpl<Product> {
+public final class SetSearchKeywords extends UpdateActionImpl<Product> {
     private final SearchKeywords searchKeywords;
 
     private SetSearchKeywords(final SearchKeywords searchKeywords) {

@@ -16,7 +16,7 @@ import java.util.function.Function;
  {@doc.gen summary }
 
  */
-public class ProductProjectionQueryBuilder extends ResourceMetaModelQueryDslBuilderImpl<ProductProjectionQueryBuilder, ProductProjection, ProductProjectionQuery, ProductProjectionQueryModel, ProductProjectionExpansionModel<ProductProjection>> {
+public final class ProductProjectionQueryBuilder extends ResourceMetaModelQueryDslBuilderImpl<ProductProjectionQueryBuilder, ProductProjection, ProductProjectionQuery, ProductProjectionQueryModel, ProductProjectionExpansionModel<ProductProjection>> {
 
     private ProductProjectionQueryBuilder(final ProductProjectionQuery template) {
         super(template);

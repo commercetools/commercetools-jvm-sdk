@@ -16,7 +16,7 @@ import javax.annotation.Nullable;
  *
  * {@include.example io.sphere.sdk.reviews.commands.ReviewUpdateCommandTest#transitionState()}
  */
-public class TransitionState extends TransitionStateBase<Review> {
+public final class TransitionState extends TransitionStateBase<Review> {
     private TransitionState(final @Nullable ResourceIdentifiable<State> state) {
         super(state);
     }

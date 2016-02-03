@@ -11,7 +11,7 @@ import java.time.ZonedDateTime;
  * EXPERIMENTAL model to easily build product projection sort requests.
  * Being it experimental, it can be modified in future releases therefore introducing breaking changes.
  */
-public class ProductProjectionSortSearchModel extends ProductDataSortSearchModel {
+public final class ProductProjectionSortSearchModel extends ProductDataSortSearchModel {
 
     ProductProjectionSortSearchModel(@Nullable final SearchModel<ProductProjection> parent, @Nullable final String pathSegment) {
         super(parent, pathSegment);

@@ -5,7 +5,7 @@ import io.sphere.sdk.expansion.ExpansionPathContainer;
 
 import java.util.List;
 
-public class PriceExpansionModel<T> extends ExpansionModel<T> {
+public final class PriceExpansionModel<T> extends ExpansionModel<T> {
     PriceExpansionModel(final List<String> parentPath, final String path) {
         super(parentPath, path);
     }

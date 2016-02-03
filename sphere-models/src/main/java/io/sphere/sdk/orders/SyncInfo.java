@@ -9,7 +9,7 @@ import io.sphere.sdk.models.Referenceable;
 import javax.annotation.Nullable;
 import java.time.ZonedDateTime;
 
-public class SyncInfo extends Base {
+public final class SyncInfo extends Base {
     private final Reference<Channel> channel;
     @Nullable
     private final String externalId;

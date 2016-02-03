@@ -7,7 +7,6 @@ import io.sphere.sdk.products.ProductProjection;
 import io.sphere.sdk.producttypes.ProductType;
 import io.sphere.sdk.queries.*;
 import io.sphere.sdk.reviews.queries.ReviewRatingStatisticsQueryModel;
-import io.sphere.sdk.reviews.queries.ReviewRatingStatisticsQueryModelImpl;
 
 final class ProductProjectionQueryModelImpl extends ProductDataQueryModelBaseImpl<ProductProjection> implements ProductProjectionQueryModel {
 
@@ -82,7 +81,7 @@ final class ProductProjectionQueryModelImpl extends ProductDataQueryModelBaseImp
 
     @Override
     public ReviewRatingStatisticsQueryModel<ProductProjection> reviewRatingStatistics() {
-        return new ReviewRatingStatisticsQueryModelImpl<>(this, "reviewRatingStatistics");
+        return ReviewRatingStatisticsQueryModel.of(this, "reviewRatingStatistics");
     }
 
     @Override

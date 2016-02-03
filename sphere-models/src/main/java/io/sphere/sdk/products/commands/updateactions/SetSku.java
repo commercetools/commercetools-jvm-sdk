@@ -15,7 +15,7 @@ import javax.annotation.Nullable;
  *
  * {@include.example io.sphere.sdk.products.queries.ProductProjectionQueryTest#queryBySku()}
  */
-public class SetSku extends UpdateActionImpl<Product> {
+public final class SetSku extends UpdateActionImpl<Product> {
     private final Integer variantId;
     @Nullable
     private final String sku;

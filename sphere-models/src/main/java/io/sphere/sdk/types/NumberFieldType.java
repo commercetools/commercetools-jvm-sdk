@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 /**
  * @see Custom
  */
-public class NumberFieldType extends FieldTypeBase {
+public final class NumberFieldType extends FieldTypeBase {
 
     @JsonCreator
     private NumberFieldType() {

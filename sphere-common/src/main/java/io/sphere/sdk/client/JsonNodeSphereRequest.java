@@ -11,7 +11,7 @@ import io.sphere.sdk.models.Base;
 import javax.annotation.Nullable;
 import java.util.Optional;
 
-public class JsonNodeSphereRequest extends Base implements SphereRequest<JsonNode> {
+public final class JsonNodeSphereRequest extends Base implements SphereRequest<JsonNode> {
     private final HttpRequestIntent httpRequestIntent;
 
     protected JsonNodeSphereRequest(final HttpRequestIntent httpRequestIntent) {

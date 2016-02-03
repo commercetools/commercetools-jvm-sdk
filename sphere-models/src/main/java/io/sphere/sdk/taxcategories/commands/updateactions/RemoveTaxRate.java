@@ -12,7 +12,7 @@ import static java.util.Objects.requireNonNull;
  *
  * {@include.example io.sphere.sdk.taxcategories.commands.TaxCategoryUpdateCommandTest#addTaxRate()}
  */
-public class RemoveTaxRate extends UpdateActionImpl<TaxCategory> {
+public final class RemoveTaxRate extends UpdateActionImpl<TaxCategory> {
     private final String taxRateId;
 
     private RemoveTaxRate(final String taxRateId) {

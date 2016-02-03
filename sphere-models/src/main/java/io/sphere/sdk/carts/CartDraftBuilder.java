@@ -16,7 +16,7 @@ import java.util.Optional;
  *  <p>Example of creating a cart with custom fields:</p>
  * {@include.example io.sphere.sdk.carts.CartsCustomFieldsTest#createCartWithCustomType()}
  */
-public class CartDraftBuilder extends Base implements Builder<CartDraftDsl> {
+public final class CartDraftBuilder extends Base implements Builder<CartDraftDsl> {
     private final CurrencyUnit currency;
     @Nullable
     private String customerId;    

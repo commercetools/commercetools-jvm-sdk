@@ -16,7 +16,7 @@ import java.util.Objects;
  *
  * {@include.example example.AddressExample#buildByExistingAddress()}
  */
-public class AddressBuilder extends Base implements Builder<Address> {
+public final class AddressBuilder extends Base implements Builder<Address> {
     CountryCode country;
     @Nullable
     String id;

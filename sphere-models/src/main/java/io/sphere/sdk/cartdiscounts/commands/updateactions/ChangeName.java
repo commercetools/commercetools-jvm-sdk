@@ -11,7 +11,7 @@ import io.sphere.sdk.models.LocalizedString;
  *
  * {@include.example io.sphere.sdk.cartdiscounts.commands.CartDiscountUpdateCommandTest#changeName()}
  */
-public class ChangeName extends UpdateActionImpl<CartDiscount> {
+public final class ChangeName extends UpdateActionImpl<CartDiscount> {
     private final LocalizedString name;
 
     private ChangeName(final LocalizedString name) {

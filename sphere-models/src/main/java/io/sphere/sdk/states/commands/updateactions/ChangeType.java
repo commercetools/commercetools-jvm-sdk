@@ -11,7 +11,7 @@ import io.sphere.sdk.states.StateType;
  *
  * {@include.example io.sphere.sdk.states.commands.StateUpdateCommandTest#changeType()}
  */
-public class ChangeType extends UpdateActionImpl<State> {
+public final class ChangeType extends UpdateActionImpl<State> {
     private final StateType type;
 
     private ChangeType(final StateType type) {

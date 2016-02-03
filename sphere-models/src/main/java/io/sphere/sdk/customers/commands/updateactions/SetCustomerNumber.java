@@ -12,7 +12,7 @@ import io.sphere.sdk.customers.Customer;
  *
  * @see Customer
  */
-public class SetCustomerNumber extends UpdateActionImpl<Customer> {
+public final class SetCustomerNumber extends UpdateActionImpl<Customer> {
     private final String customerNumber;
 
     private SetCustomerNumber(final String customerNumber) {

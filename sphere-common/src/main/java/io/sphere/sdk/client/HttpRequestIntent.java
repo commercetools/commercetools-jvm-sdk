@@ -8,7 +8,7 @@ import java.io.File;
 
 import static io.sphere.sdk.http.HttpHeaders.CONTENT_TYPE;
 
-public class HttpRequestIntent extends Base {
+public final class HttpRequestIntent extends Base {
     private final HttpMethod httpMethod;
     private final String path;
     private final HttpHeaders headers;

@@ -17,7 +17,7 @@ import io.sphere.sdk.models.TextInputHint;
  *
  *
  */
-public class AttributeDefinitionBuilder extends Base implements Builder<AttributeDefinition> {
+public final class AttributeDefinitionBuilder extends Base implements Builder<AttributeDefinition> {
     private final String name;
     private final LocalizedString label;
     private final AttributeType attributeType;

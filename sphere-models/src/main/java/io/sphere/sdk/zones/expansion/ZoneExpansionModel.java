@@ -8,7 +8,7 @@ import io.sphere.sdk.zones.Zone;
 
  @param <T> the type for which the expansion path is
  */
-public class ZoneExpansionModel<T> extends ExpansionModel<T> {
+public final class ZoneExpansionModel<T> extends ExpansionModel<T> {
     public ZoneExpansionModel(final String parentPath, final String path) {
         super(parentPath, path);
     }

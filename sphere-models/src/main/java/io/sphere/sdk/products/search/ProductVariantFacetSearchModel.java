@@ -7,7 +7,7 @@ import io.sphere.sdk.search.model.MoneyFacetSearchModel;
 
 import javax.annotation.Nullable;
 
-public class ProductVariantFacetSearchModel extends SearchModelImpl<ProductProjection> {
+public final class ProductVariantFacetSearchModel extends SearchModelImpl<ProductProjection> {
 
     ProductVariantFacetSearchModel(@Nullable final SearchModel<ProductProjection> parent, @Nullable final String pathSegment) {
         super(parent, pathSegment);

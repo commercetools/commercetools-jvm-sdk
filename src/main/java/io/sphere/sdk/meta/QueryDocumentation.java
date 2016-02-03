@@ -202,7 +202,7 @@ Like for predicates, you can traverse the query model tree in the same way to sp
 
  {@link ReferenceExpansionDocumentation The documentation for reference expansion have been moved to ReferenceExpansionDocumentation} since was also enabled for search and commands.
  */
-public class QueryDocumentation extends Base {
+public final class QueryDocumentation extends Base {
     private QueryDocumentation() {
     }
 }

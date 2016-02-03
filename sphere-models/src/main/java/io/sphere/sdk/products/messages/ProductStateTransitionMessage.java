@@ -19,7 +19,7 @@ import java.time.ZonedDateTime;
  * @see io.sphere.sdk.products.commands.updateactions.TransitionState
  */
 @JsonDeserialize(as = ProductStateTransitionMessage.class)//important to override annotation in Message class
-public class ProductStateTransitionMessage extends GenericMessageImpl<Product> {
+public final class ProductStateTransitionMessage extends GenericMessageImpl<Product> {
     public static final String MESSAGE_TYPE = "ProductStateTransition";
     public static final MessageDerivateHint<ProductStateTransitionMessage> MESSAGE_HINT =
             MessageDerivateHint.ofSingleMessageType(MESSAGE_TYPE, ProductStateTransitionMessage.class);

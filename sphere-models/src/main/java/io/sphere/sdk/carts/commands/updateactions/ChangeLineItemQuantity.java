@@ -12,7 +12,7 @@ import io.sphere.sdk.commands.UpdateActionImpl;
 
  {@include.example io.sphere.sdk.carts.commands.CartUpdateCommandTest#changeLineItemQuantity()}
  */
-public class ChangeLineItemQuantity extends UpdateActionImpl<Cart> {
+public final class ChangeLineItemQuantity extends UpdateActionImpl<Cart> {
     private final String lineItemId;
     private final Long quantity;
 

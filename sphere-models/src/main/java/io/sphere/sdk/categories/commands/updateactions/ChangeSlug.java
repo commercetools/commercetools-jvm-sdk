@@ -11,7 +11,7 @@ import io.sphere.sdk.models.LocalizedString;
  *
  *  {@include.example io.sphere.sdk.categories.commands.CategoryUpdateCommandTest#changeSlug()}
  */
-public class ChangeSlug extends UpdateActionImpl<Category> {
+public final class ChangeSlug extends UpdateActionImpl<Category> {
     private final LocalizedString slug;
 
     private ChangeSlug(final LocalizedString slug) {

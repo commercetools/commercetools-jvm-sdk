@@ -15,7 +15,7 @@ import io.sphere.sdk.reviews.Review;
 import java.util.HashSet;
 import java.util.Set;
 
-public class ResourceTypeIdsSetBuilder extends Base implements Builder<Set<String>> {
+public final class ResourceTypeIdsSetBuilder extends Base implements Builder<Set<String>> {
     private final Set<String> resourceTypeIds = new HashSet<>();
 
     private ResourceTypeIdsSetBuilder() {

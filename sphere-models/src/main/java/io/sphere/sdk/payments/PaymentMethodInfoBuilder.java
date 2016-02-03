@@ -6,7 +6,7 @@ import io.sphere.sdk.models.LocalizedString;
 
 import javax.annotation.Nullable;
 
-public class PaymentMethodInfoBuilder extends Base implements Builder<PaymentMethodInfo> {
+public final class PaymentMethodInfoBuilder extends Base implements Builder<PaymentMethodInfo> {
     @Nullable
     private String paymentInterface;
     @Nullable

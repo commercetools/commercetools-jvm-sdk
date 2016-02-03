@@ -14,7 +14,7 @@ import io.sphere.sdk.producttypes.ProductType;
  *
  * @see LocalizedEnumAttributeType#getValues()
  */
-public class AddLocalizedEnumValue extends UpdateActionImpl<ProductType> {
+public final class AddLocalizedEnumValue extends UpdateActionImpl<ProductType> {
     private final String attributeName;
     private final LocalizedEnumValue value;
 

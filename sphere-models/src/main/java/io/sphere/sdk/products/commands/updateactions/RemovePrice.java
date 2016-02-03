@@ -13,7 +13,7 @@ import java.util.Optional;
  *
  * {@include.example io.sphere.sdk.products.commands.ProductUpdateCommandTest#removePrice()}
  */
-public class RemovePrice extends UpdateActionImpl<Product> {
+public final class RemovePrice extends UpdateActionImpl<Product> {
     private final String priceId;
 
     private RemovePrice(final String priceId) {

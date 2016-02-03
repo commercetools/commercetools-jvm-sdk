@@ -2,7 +2,7 @@ package io.sphere.sdk.http;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
-public class StringHttpRequestBody extends Base implements HttpRequestBody {
+public final class StringHttpRequestBody extends Base implements HttpRequestBody {
     private final String body;
 
     private StringHttpRequestBody(final String body) {

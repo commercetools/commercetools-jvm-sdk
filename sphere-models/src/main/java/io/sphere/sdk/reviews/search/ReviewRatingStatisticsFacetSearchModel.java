@@ -6,7 +6,7 @@ import io.sphere.sdk.search.model.SearchModelImpl;
 
 import java.math.BigDecimal;
 
-public class ReviewRatingStatisticsFacetSearchModel<T> extends SearchModelImpl<T> {
+public final class ReviewRatingStatisticsFacetSearchModel<T> extends SearchModelImpl<T> {
     public ReviewRatingStatisticsFacetSearchModel(final SearchModel<T> parent, final String pathSegment) {
         super(parent, pathSegment);
     }

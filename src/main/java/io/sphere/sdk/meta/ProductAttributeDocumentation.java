@@ -187,7 +187,7 @@ import io.sphere.sdk.products.attributes.AttributeAccess;
 
  <p>A general explanation can be found in the  <a href="http://dev.sphere.io/tutorials-nested-types.html">HTTP API tutorial</a>.</p>
  */
-public class ProductAttributeDocumentation {
+public final class ProductAttributeDocumentation {
     private ProductAttributeDocumentation() {
     }
 }

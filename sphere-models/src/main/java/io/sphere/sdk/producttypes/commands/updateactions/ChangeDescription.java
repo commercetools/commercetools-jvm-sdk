@@ -10,7 +10,7 @@ import io.sphere.sdk.producttypes.ProductType;
  *
  * {@include.example io.sphere.sdk.producttypes.commands.ProductTypeUpdateCommandTest#changeDescription()}
  */
-public class ChangeDescription extends UpdateActionImpl<ProductType> {
+public final class ChangeDescription extends UpdateActionImpl<ProductType> {
     private final String description;
 
     private ChangeDescription(final String description) {

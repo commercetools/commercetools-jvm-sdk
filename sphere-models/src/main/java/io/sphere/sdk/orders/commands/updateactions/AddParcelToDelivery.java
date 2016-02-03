@@ -14,7 +14,7 @@ import javax.annotation.Nullable;
 
  @see Delivery#getParcels()
  */
-public class AddParcelToDelivery extends UpdateActionImpl<Order> {
+public final class AddParcelToDelivery extends UpdateActionImpl<Order> {
     private final String deliveryId;
     @Nullable
     private final ParcelMeasurements measurements;

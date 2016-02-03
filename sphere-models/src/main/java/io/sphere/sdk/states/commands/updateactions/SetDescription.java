@@ -9,7 +9,7 @@ import io.sphere.sdk.states.State;
  *
  * {@doc.gen intro}
  */
-public class SetDescription extends UpdateActionImpl<State> {
+public final class SetDescription extends UpdateActionImpl<State> {
     private final LocalizedString description;
 
     private SetDescription(final LocalizedString description) {

@@ -11,7 +11,7 @@ import io.sphere.sdk.products.Product;
  *
  * {@include.example io.sphere.sdk.products.commands.ProductUpdateCommandTest#changeName()}
  */
-public class ChangeName extends UpdateActionImpl<Product> {
+public final class ChangeName extends UpdateActionImpl<Product> {
     private final LocalizedString name;
 
     private ChangeName(final LocalizedString name) {

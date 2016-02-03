@@ -13,7 +13,7 @@ import java.time.ZonedDateTime;
  *
  * {@include.example io.sphere.sdk.cartdiscounts.commands.CartDiscountUpdateCommandTest#setValidFrom()}
  */
-public class SetValidFrom extends UpdateActionImpl<CartDiscount> {
+public final class SetValidFrom extends UpdateActionImpl<CartDiscount> {
     @Nullable
     private final ZonedDateTime validFrom;
 

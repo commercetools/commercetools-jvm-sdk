@@ -7,7 +7,7 @@ import io.sphere.sdk.models.Timestamped;
 import javax.annotation.Nullable;
 import java.time.ZonedDateTime;
 
-public class ReturnItem extends Base implements Timestamped {
+public final class ReturnItem extends Base implements Timestamped {
     private final String id;
     private final Long quantity;
     private final String lineItemId;

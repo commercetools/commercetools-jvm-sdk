@@ -7,7 +7,7 @@ import io.sphere.sdk.models.Base;
 import java.util.Collections;
 import java.util.List;
 
-public class CustomSuggestTokenizer extends Base implements SuggestTokenizer {
+public final class CustomSuggestTokenizer extends Base implements SuggestTokenizer {
     private final List<String> inputs;
 
     @JsonCreator

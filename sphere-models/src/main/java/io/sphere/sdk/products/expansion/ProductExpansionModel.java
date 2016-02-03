@@ -4,7 +4,7 @@ import io.sphere.sdk.expansion.ExpansionModel;
 import io.sphere.sdk.expansion.ExpansionPathContainer;
 import io.sphere.sdk.products.Product;
 
-public class ProductExpansionModel<T> extends ExpansionModel<T> {
+public final class ProductExpansionModel<T> extends ExpansionModel<T> {
     ProductExpansionModel() {
     }
 

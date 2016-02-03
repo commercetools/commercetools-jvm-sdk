@@ -4,7 +4,7 @@ import io.sphere.sdk.search.model.RangeTermFacetedSearchSearchModel;
 import io.sphere.sdk.search.model.SearchModel;
 import io.sphere.sdk.search.model.SearchModelImpl;
 
-public class ReviewRatingStatisticsFacetedSearchSearchModel<T> extends SearchModelImpl<T> {
+public final class ReviewRatingStatisticsFacetedSearchSearchModel<T> extends SearchModelImpl<T> {
     public ReviewRatingStatisticsFacetedSearchSearchModel(final SearchModel<T> parent, final String pathSegment) {
         super(parent, pathSegment);
     }

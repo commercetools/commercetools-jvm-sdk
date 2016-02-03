@@ -5,7 +5,7 @@ import io.sphere.sdk.models.Base;
 
 import java.util.List;
 
-public class TermFacetResult extends Base implements FacetResult {
+public final class TermFacetResult extends Base implements FacetResult {
     private final Long missing;
     private final Long total;
     private final Long other;

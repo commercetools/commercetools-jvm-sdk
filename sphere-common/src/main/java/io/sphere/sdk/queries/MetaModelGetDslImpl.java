@@ -32,7 +32,7 @@ import static java.util.Objects.requireNonNull;
  * @param <C> type of the class implementing this class
  * @param <E> type of the expansion model
  */
-public class MetaModelGetDslImpl<R, T, C extends MetaModelGetDsl<R, T, C, E>, E> extends Base implements MetaModelGetDsl<R, T, C, E>, MetaModelExpansionDslExpansionModelRead<T, C, E> {
+public abstract class MetaModelGetDslImpl<R, T, C extends MetaModelGetDsl<R, T, C, E>, E> extends Base implements MetaModelGetDsl<R, T, C, E>, MetaModelExpansionDslExpansionModelRead<T, C, E> {
 
     final JavaType javaType;
     final String endpoint;

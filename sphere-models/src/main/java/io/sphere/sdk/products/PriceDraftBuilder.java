@@ -16,7 +16,7 @@ import javax.money.MonetaryAmount;
 import java.time.ZonedDateTime;
 import java.util.Optional;
 
-public class PriceDraftBuilder extends Base implements Builder<PriceDraft>, CustomDraft {
+public final class PriceDraftBuilder extends Base implements Builder<PriceDraft>, CustomDraft {
     private MonetaryAmount value;
     @Nullable
     private CountryCode country;

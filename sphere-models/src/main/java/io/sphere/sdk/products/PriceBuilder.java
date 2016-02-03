@@ -15,7 +15,7 @@ import javax.money.MonetaryAmount;
 import java.time.ZonedDateTime;
 import java.util.Optional;
 
-public class PriceBuilder extends Base implements Builder<Price> {
+public final class PriceBuilder extends Base implements Builder<Price> {
     private MonetaryAmount value;
     @Nullable
     private CountryCode country;

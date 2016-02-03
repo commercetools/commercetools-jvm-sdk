@@ -10,7 +10,7 @@ import java.util.function.Function;
  * @param <T> type of the resource
  * @param <V> type of the value
  */
-public class RangeTermFilterSearchModel<T, V extends Comparable<? super V>> extends RangeTermFilterBaseSearchModel<T, V> {
+public final class RangeTermFilterSearchModel<T, V extends Comparable<? super V>> extends RangeTermFilterBaseSearchModel<T, V> {
 
     RangeTermFilterSearchModel(final SearchModel<T> searchModel, final Function<V, String> typeSerializer) {
         super(searchModel, typeSerializer);

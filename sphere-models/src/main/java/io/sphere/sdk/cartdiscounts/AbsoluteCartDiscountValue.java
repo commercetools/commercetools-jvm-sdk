@@ -17,7 +17,7 @@ import java.util.List;
  * @see io.sphere.sdk.cartdiscounts.commands.updateactions.ChangeValue
  *
  */
-public class AbsoluteCartDiscountValue extends Base implements CartDiscountValue {
+public final class AbsoluteCartDiscountValue extends Base implements CartDiscountValue {
     private final List<MonetaryAmount> money;
 
     @JsonCreator

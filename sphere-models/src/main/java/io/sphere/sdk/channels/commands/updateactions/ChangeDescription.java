@@ -11,7 +11,7 @@ import io.sphere.sdk.models.LocalizedString;
  *
  * {@include.example io.sphere.sdk.channels.commands.ChannelUpdateCommandTest#changeDescription()}
  */
-public class ChangeDescription extends UpdateActionImpl<Channel> {
+public final class ChangeDescription extends UpdateActionImpl<Channel> {
     private final LocalizedString description;
 
     private ChangeDescription(final LocalizedString description) {

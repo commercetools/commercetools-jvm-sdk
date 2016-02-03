@@ -15,7 +15,7 @@ import java.util.function.Function;
  {@doc.gen summary }
 
  */
-public class ShippingMethodQueryBuilder extends ResourceMetaModelQueryDslBuilderImpl<ShippingMethodQueryBuilder, ShippingMethod, ShippingMethodQuery, ShippingMethodQueryModel, ShippingMethodExpansionModel<ShippingMethod>> {
+public final class ShippingMethodQueryBuilder extends ResourceMetaModelQueryDslBuilderImpl<ShippingMethodQueryBuilder, ShippingMethod, ShippingMethodQuery, ShippingMethodQueryModel, ShippingMethodExpansionModel<ShippingMethod>> {
 
     private ShippingMethodQueryBuilder(final ShippingMethodQuery template) {
         super(template);

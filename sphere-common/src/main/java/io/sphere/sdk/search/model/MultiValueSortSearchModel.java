@@ -8,7 +8,7 @@ import static io.sphere.sdk.search.SearchSortDirection.*;
  * A sort model to decide the direction of a model with multiple values per resource.
  * @see MultiValueSortSearchModelFactory to instantiate this class
  */
-public class MultiValueSortSearchModel<T> extends SortSearchModelImpl<T> {
+public final class MultiValueSortSearchModel<T> extends SortSearchModelImpl<T> {
 
     MultiValueSortSearchModel(final SearchModel<T> searchModel) {
         super(searchModel);

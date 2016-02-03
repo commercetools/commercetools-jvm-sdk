@@ -11,7 +11,7 @@ import java.util.List;
 import static io.sphere.sdk.utils.SphereInternalUtils.listOf;
 import static java.util.stream.Collectors.toList;
 
-public class JsonNodeExpansionModel<T> extends ExpansionModel<T> {
+public final class JsonNodeExpansionModel<T> extends ExpansionModel<T> {
     public static JsonNodeExpansionModel<JsonNode> of() {
         return new JsonNodeExpansionModel<>();
     }

@@ -4,7 +4,6 @@ import io.sphere.sdk.channels.Channel;
 import io.sphere.sdk.queries.QueryModel;
 import io.sphere.sdk.queries.StringQuerySortingModel;
 import io.sphere.sdk.reviews.queries.ReviewRatingStatisticsQueryModel;
-import io.sphere.sdk.reviews.queries.ReviewRatingStatisticsQueryModelImpl;
 import io.sphere.sdk.types.queries.CustomResourceQueryModelImpl;
 
 final class ChannelQueryModelImpl extends CustomResourceQueryModelImpl<Channel> implements ChannelQueryModel {
@@ -19,6 +18,6 @@ final class ChannelQueryModelImpl extends CustomResourceQueryModelImpl<Channel> 
 
     @Override
     public ReviewRatingStatisticsQueryModel<Channel> reviewRatingStatistics() {
-        return new ReviewRatingStatisticsQueryModelImpl<>(this, "reviewRatingStatistics");
+        return ReviewRatingStatisticsQueryModel.of(this, "reviewRatingStatistics");
     }
 }

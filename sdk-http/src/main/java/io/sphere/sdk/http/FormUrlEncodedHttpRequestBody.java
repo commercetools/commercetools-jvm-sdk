@@ -4,7 +4,7 @@ import java.util.*;
 
 import static java.util.Collections.unmodifiableList;
 
-public class FormUrlEncodedHttpRequestBody extends Base implements HttpRequestBody {
+public final class FormUrlEncodedHttpRequestBody extends Base implements HttpRequestBody {
     private final List<NameValuePair> data;
 
     private FormUrlEncodedHttpRequestBody(final List<NameValuePair> data) {

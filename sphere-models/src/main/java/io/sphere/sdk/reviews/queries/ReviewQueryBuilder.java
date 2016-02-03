@@ -15,7 +15,7 @@ import java.util.function.Function;
  {@doc.gen summary }
 
  */
-public class ReviewQueryBuilder extends ResourceMetaModelQueryDslBuilderImpl<ReviewQueryBuilder, Review, ReviewQuery, ReviewQueryModel, ReviewExpansionModel<Review>> {
+public final class ReviewQueryBuilder extends ResourceMetaModelQueryDslBuilderImpl<ReviewQueryBuilder, Review, ReviewQuery, ReviewQueryModel, ReviewExpansionModel<Review>> {
 
     private ReviewQueryBuilder(final ReviewQuery template) {
         super(template);

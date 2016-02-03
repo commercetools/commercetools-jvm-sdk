@@ -14,7 +14,7 @@ import javax.annotation.Nullable;
  *
  * {@include.example io.sphere.sdk.discountcodes.commands.DiscountCodeUpdateCommandTest#setDescription()}
  */
-public class SetDescription extends UpdateActionImpl<DiscountCode> {
+public final class SetDescription extends UpdateActionImpl<DiscountCode> {
     @Nullable
     private final LocalizedString description;
 

@@ -10,7 +10,7 @@ import io.sphere.sdk.products.Product;
  *
  * {@include.example io.sphere.sdk.products.commands.ProductUpdateCommandTest#publish()}
  */
-public class Unpublish extends UpdateActionImpl<Product> {
+public final class Unpublish extends UpdateActionImpl<Product> {
     private Unpublish() {
         super("unpublish");
     }

@@ -15,7 +15,7 @@ import java.util.function.Function;
  {@doc.gen summary }
 
  */
-public class CartQueryBuilder extends ResourceMetaModelQueryDslBuilderImpl<CartQueryBuilder, Cart, CartQuery, CartQueryModel, CartExpansionModel<Cart>> {
+public final class CartQueryBuilder extends ResourceMetaModelQueryDslBuilderImpl<CartQueryBuilder, Cart, CartQuery, CartQueryModel, CartExpansionModel<Cart>> {
 
     private CartQueryBuilder(final CartQuery template) {
         super(template);

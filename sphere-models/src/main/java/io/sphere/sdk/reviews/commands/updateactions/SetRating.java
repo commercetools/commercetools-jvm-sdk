@@ -12,7 +12,7 @@ import javax.annotation.Nullable;
  *
  * {@include.example io.sphere.sdk.reviews.commands.ReviewUpdateCommandTest#setRating()}
  */
-public class SetRating extends UpdateActionImpl<Review> {
+public final class SetRating extends UpdateActionImpl<Review> {
     @Nullable
     private final Integer rating;
 

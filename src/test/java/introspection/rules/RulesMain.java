@@ -33,7 +33,8 @@ public class RulesMain {
                 new MethodsStartWithLowercaseRule(),
                 new EveryObjectHasAGoodBaseClass(),
                 new UtilClassesEndWithUtilsRule(),
-                new ResourceClassesWithTypeReferenceMethod()
+                new ResourceClassesWithTypeReferenceMethod(),
+                new ClassesAreFinalRule()
         );
         final boolean allIsOk = rules.stream()
                 .map(rule -> {

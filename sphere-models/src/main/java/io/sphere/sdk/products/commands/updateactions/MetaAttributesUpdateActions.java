@@ -16,7 +16,7 @@ import static java.util.Arrays.asList;
  *
  * {@doc.gen intro}
  */
-public class MetaAttributesUpdateActions extends Base {
+public final class MetaAttributesUpdateActions extends Base {
     private MetaAttributesUpdateActions() {
     }
 

@@ -11,7 +11,7 @@ import java.util.List;
 
  @param <T> the type for which the expansion path is
  */
-public class SyncInfoExpansionModel<T> extends ExpansionModel<T> {
+public final class SyncInfoExpansionModel<T> extends ExpansionModel<T> {
     SyncInfoExpansionModel(final List<String> parentPath, @Nullable final String path) {
         super(parentPath, path);
     }

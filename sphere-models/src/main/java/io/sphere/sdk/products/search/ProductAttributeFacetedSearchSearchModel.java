@@ -5,7 +5,7 @@ import io.sphere.sdk.search.model.*;
 
 import javax.annotation.Nullable;
 
-public class ProductAttributeFacetedSearchSearchModel extends SearchModelImpl<ProductProjection> {
+public final class ProductAttributeFacetedSearchSearchModel extends SearchModelImpl<ProductProjection> {
 
     ProductAttributeFacetedSearchSearchModel(@Nullable final SearchModel<ProductProjection> parent, @Nullable final String pathSegment) {
         super(parent, pathSegment);

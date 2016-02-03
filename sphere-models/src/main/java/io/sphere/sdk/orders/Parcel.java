@@ -7,7 +7,7 @@ import io.sphere.sdk.models.CreationTimestamped;
 import javax.annotation.Nullable;
 import java.time.ZonedDateTime;
 
-public class Parcel extends Base implements CreationTimestamped {
+public final class Parcel extends Base implements CreationTimestamped {
     private final String id;
     private final ZonedDateTime createdAt;
     @Nullable

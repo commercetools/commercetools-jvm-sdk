@@ -14,7 +14,7 @@ import io.sphere.sdk.producttypes.ProductType;
  *
  * @see AttributeDefinition#getLabel()
  */
-public class ChangeAttributeDefinitionLabel extends UpdateActionImpl<ProductType> {
+public final class ChangeAttributeDefinitionLabel extends UpdateActionImpl<ProductType> {
     private final String attributeName;
     private final LocalizedString label;
 

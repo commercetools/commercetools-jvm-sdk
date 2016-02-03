@@ -6,7 +6,7 @@ import io.sphere.sdk.search.tokenizer.SuggestTokenizer;
 
 import javax.annotation.Nullable;
 
-public class SearchKeyword extends Base {
+public final class SearchKeyword extends Base {
     private final String text;
     @Nullable
     private final SuggestTokenizer suggestTokenizer;

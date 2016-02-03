@@ -22,7 +22,7 @@ import java.time.ZonedDateTime;
  * @see io.sphere.sdk.reviews.commands.updateactions.TransitionState
  */
 @JsonDeserialize(as = ReviewStateTransitionMessage.class)//important to override annotation in Message class
-public class ReviewStateTransitionMessage  extends GenericMessageImpl<Review> {
+public final class ReviewStateTransitionMessage  extends GenericMessageImpl<Review> {
     public static final String MESSAGE_TYPE = "ReviewStateTransition";
     public static final MessageDerivateHint<ReviewStateTransitionMessage> MESSAGE_HINT =
             MessageDerivateHint.ofSingleMessageType(MESSAGE_TYPE, ReviewStateTransitionMessage.class);

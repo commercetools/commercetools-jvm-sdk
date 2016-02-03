@@ -33,7 +33,7 @@ import java.util.Objects;
  * @see io.sphere.sdk.carts.commands.updateactions.SetBillingAddress
  * @see io.sphere.sdk.carts.commands.updateactions.SetShippingAddress
  */
-public class Address extends Base {
+public final class Address extends Base {
 
     @Nullable
     final CountryCode country;

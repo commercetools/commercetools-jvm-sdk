@@ -3,7 +3,7 @@ package io.sphere.sdk.search;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import io.sphere.sdk.models.Base;
 
-public class TermStats extends Base {
+public final class TermStats extends Base {
     private final String term;
     private final Long count;
 

@@ -12,7 +12,7 @@ import javax.annotation.Nullable;
  *
  * {@include.example io.sphere.sdk.reviews.commands.ReviewUpdateCommandTest#setKey()}
  */
-public class SetKey extends UpdateActionImpl<Review> {
+public final class SetKey extends UpdateActionImpl<Review> {
     @Nullable
     private final String key;
 

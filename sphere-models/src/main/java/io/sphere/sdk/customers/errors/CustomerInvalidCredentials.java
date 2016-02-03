@@ -8,7 +8,7 @@ import io.sphere.sdk.models.errors.SphereError;
  *
  * {@include.example io.sphere.sdk.customers.commands.CustomerChangePasswordCommandTest#execution()}
  */
-public class CustomerInvalidCredentials extends SphereError {
+public final class CustomerInvalidCredentials extends SphereError {
     public static final String CODE = "InvalidCredentials";
 
     @JsonCreator

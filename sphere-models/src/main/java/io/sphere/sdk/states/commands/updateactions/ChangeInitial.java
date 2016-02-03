@@ -11,7 +11,7 @@ import io.sphere.sdk.states.State;
  *
  * {@include.example io.sphere.sdk.states.commands.StateUpdateCommandTest#changeInitial()}
  */
-public class ChangeInitial extends UpdateActionImpl<State> {
+public final class ChangeInitial extends UpdateActionImpl<State> {
     private final boolean inital;
 
     private ChangeInitial(final boolean initial) {

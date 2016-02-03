@@ -15,7 +15,7 @@ import java.util.function.Function;
  {@doc.gen summary }
 
  */
-public class PaymentQueryBuilder extends ResourceMetaModelQueryDslBuilderImpl<PaymentQueryBuilder, Payment, PaymentQuery, PaymentQueryModel, PaymentExpansionModel<Payment>> {
+public final class PaymentQueryBuilder extends ResourceMetaModelQueryDslBuilderImpl<PaymentQueryBuilder, Payment, PaymentQuery, PaymentQueryModel, PaymentExpansionModel<Payment>> {
 
     private PaymentQueryBuilder(final PaymentQuery template) {
         super(template);

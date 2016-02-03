@@ -14,7 +14,7 @@ import java.util.Optional;
  *
  * {@include.example io.sphere.sdk.discountcodes.commands.DiscountCodeUpdateCommandTest#setCartPredicate()}
  */
-public class SetCartPredicate extends UpdateActionImpl<DiscountCode> {
+public final class SetCartPredicate extends UpdateActionImpl<DiscountCode> {
     @Nullable
     private final String cartPredicate;
 

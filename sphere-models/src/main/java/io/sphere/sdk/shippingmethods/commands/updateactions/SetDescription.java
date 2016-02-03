@@ -12,7 +12,7 @@ import javax.annotation.Nullable;
  *
  * {@include.example io.sphere.sdk.shippingmethods.commands.ShippingMethodUpdateCommandTest#setDescription()}
  */
-public class SetDescription extends UpdateActionImpl<ShippingMethod> {
+public final class SetDescription extends UpdateActionImpl<ShippingMethod> {
     @Nullable
     private final String description;
 

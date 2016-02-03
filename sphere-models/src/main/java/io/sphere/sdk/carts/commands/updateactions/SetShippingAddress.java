@@ -15,7 +15,7 @@ import javax.annotation.Nullable;
 
  {@include.example io.sphere.sdk.carts.commands.CartUpdateCommandTest#setShippingAddress()}
  */
-public class SetShippingAddress extends UpdateActionImpl<Cart> {
+public final class SetShippingAddress extends UpdateActionImpl<Cart> {
     @Nullable
     private final Address address;
 

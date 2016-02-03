@@ -16,7 +16,7 @@ import java.time.ZonedDateTime;
 
  {@include.example io.sphere.sdk.orders.commands.OrderUpdateCommandTest#updateSyncInfo()}
  */
-public class UpdateSyncInfo extends UpdateActionImpl<Order> {
+public final class UpdateSyncInfo extends UpdateActionImpl<Order> {
     private final Reference<Channel> channel;
     @Nullable
     private final String externalId;

@@ -64,7 +64,7 @@ import io.sphere.sdk.client.SphereRequest;
  <p>For configuration parameters refer to <a href="https://github.com/AsyncHttpClient/async-http-client">github.com/AsyncHttpClient/async-http-client</a>.</p>
 
   */
-public class SphereClientTuningDocumentation {
+public final class SphereClientTuningDocumentation {
     private SphereClientTuningDocumentation() {
     }
 }

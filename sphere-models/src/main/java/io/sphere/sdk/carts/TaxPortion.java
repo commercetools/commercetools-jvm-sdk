@@ -5,7 +5,7 @@ import io.sphere.sdk.models.Base;
 
 import javax.money.MonetaryAmount;
 
-public class TaxPortion extends Base {
+public final class TaxPortion extends Base {
     private final Double rate;
     private final MonetaryAmount amount;
 

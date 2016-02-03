@@ -8,7 +8,7 @@ import io.sphere.sdk.producttypes.ProductType;
 
  @param <T> the type for which the expansion path is
  */
-public class ProductTypeExpansionModel<T> extends ExpansionModel<T> {
+public final class ProductTypeExpansionModel<T> extends ExpansionModel<T> {
     private ProductTypeExpansionModel() {
     }
 

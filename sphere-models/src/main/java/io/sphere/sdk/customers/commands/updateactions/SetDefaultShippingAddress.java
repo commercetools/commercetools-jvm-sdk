@@ -17,7 +17,7 @@ import static java.lang.String.format;
  *
  *  @see Customer
  */
-public class SetDefaultShippingAddress extends UpdateActionImpl<Customer> {
+public final class SetDefaultShippingAddress extends UpdateActionImpl<Customer> {
     @Nullable
     private final String addressId;
 

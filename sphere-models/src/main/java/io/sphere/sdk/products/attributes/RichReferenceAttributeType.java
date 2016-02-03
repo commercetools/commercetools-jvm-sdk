@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.core.type.TypeReference;
 import io.sphere.sdk.models.Reference;
 
-public class RichReferenceAttributeType<T> extends ReferenceAttributeType {
+public final class RichReferenceAttributeType<T> extends ReferenceAttributeType {
     private final TypeReference<Reference<T>> typeReference;
 
     @JsonCreator

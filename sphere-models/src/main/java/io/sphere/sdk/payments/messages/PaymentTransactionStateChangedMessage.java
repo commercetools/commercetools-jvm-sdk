@@ -17,7 +17,7 @@ import java.time.ZonedDateTime;
  *
  */
 @JsonDeserialize(as = PaymentTransactionStateChangedMessage.class)//important to override annotation in Message class
-public class PaymentTransactionStateChangedMessage extends GenericMessageImpl<Payment> {
+public final class PaymentTransactionStateChangedMessage extends GenericMessageImpl<Payment> {
     public static final String MESSAGE_TYPE = "PaymentTransactionStateChanged";
     public static final MessageDerivateHint<PaymentTransactionStateChangedMessage> MESSAGE_HINT =
             MessageDerivateHint.ofSingleMessageType(MESSAGE_TYPE, PaymentTransactionStateChangedMessage.class);

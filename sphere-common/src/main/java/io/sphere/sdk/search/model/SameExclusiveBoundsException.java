@@ -1,6 +1,6 @@
 package io.sphere.sdk.search.model;
 
-public class SameExclusiveBoundsException extends InvalidRangeException {
+public final class SameExclusiveBoundsException extends InvalidRangeException {
     private static final long serialVersionUID = -2217525602650171975L;
 
     public SameExclusiveBoundsException() {

@@ -17,7 +17,7 @@ import static java.util.Objects.requireNonNull;
  @param <T> the type of the result of the command
  @param <E> the type of the expansion model
  */
-public class MetaModelByIdDeleteCommandBuilder<T extends ResourceView<T, T>, C, E> extends Base implements Builder<C> {
+public final class MetaModelByIdDeleteCommandBuilder<T extends ResourceView<T, T>, C, E> extends Base implements Builder<C> {
     final Versioned<T> versioned;
     final JavaType javaType;
     final String endpoint;

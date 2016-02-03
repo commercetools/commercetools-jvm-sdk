@@ -10,7 +10,7 @@ import io.sphere.sdk.products.Product;
  *
  * {@include.example io.sphere.sdk.products.commands.ProductUpdateCommandTest#revertStagedChanges()}
  */
-public class RevertStagedChanges extends UpdateActionImpl<Product> {
+public final class RevertStagedChanges extends UpdateActionImpl<Product> {
     private RevertStagedChanges() {
         super("revertStagedChanges");
     }

@@ -17,7 +17,7 @@ import javax.annotation.Nullable;
  *
  * @see SetAttributeInAllVariants
  */
-public class SetAttribute extends UpdateActionImpl<Product> {
+public final class SetAttribute extends UpdateActionImpl<Product> {
     private final Integer variantId;
     private final String name;
     @Nullable

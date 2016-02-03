@@ -15,7 +15,7 @@ import javax.annotation.Nullable;
  *
  * {@include.example io.sphere.sdk.carts.commands.CartUpdateCommandTest#setShippingMethod()}
  */
-public class SetShippingMethod extends UpdateActionImpl<Cart> {
+public final class SetShippingMethod extends UpdateActionImpl<Cart> {
     @Nullable
     private final Reference<ShippingMethod> shippingMethod;
 

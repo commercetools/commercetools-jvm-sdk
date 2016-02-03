@@ -91,7 +91,7 @@ import java.time.format.DateTimeFormatter;
  *
  *
  */
-public class FormattingDocumentation {
+public final class FormattingDocumentation {
     private FormattingDocumentation() {
     }
 }

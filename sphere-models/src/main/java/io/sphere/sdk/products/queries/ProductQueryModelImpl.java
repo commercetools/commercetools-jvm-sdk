@@ -4,7 +4,6 @@ import io.sphere.sdk.products.Product;
 import io.sphere.sdk.producttypes.ProductType;
 import io.sphere.sdk.queries.*;
 import io.sphere.sdk.reviews.queries.ReviewRatingStatisticsQueryModel;
-import io.sphere.sdk.reviews.queries.ReviewRatingStatisticsQueryModelImpl;
 import io.sphere.sdk.states.State;
 
 import javax.annotation.Nullable;
@@ -33,6 +32,6 @@ final class ProductQueryModelImpl extends ResourceQueryModelImpl<Product> implem
 
     @Override
     public ReviewRatingStatisticsQueryModel<Product> reviewRatingStatistics() {
-        return new ReviewRatingStatisticsQueryModelImpl<>(this, "reviewRatingStatistics");
+        return ReviewRatingStatisticsQueryModel.of(this, "reviewRatingStatistics");
     }
 }

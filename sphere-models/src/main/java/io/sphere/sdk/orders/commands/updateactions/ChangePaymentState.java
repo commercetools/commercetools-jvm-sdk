@@ -11,7 +11,7 @@ import io.sphere.sdk.orders.PaymentState;
 
  {@include.example io.sphere.sdk.orders.commands.OrderUpdateCommandTest#changePaymentState()}
  */
-public class ChangePaymentState extends UpdateActionImpl<Order> {
+public final class ChangePaymentState extends UpdateActionImpl<Order> {
     private final PaymentState paymentState;
 
     private ChangePaymentState(final PaymentState paymentState) {

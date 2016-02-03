@@ -11,7 +11,7 @@ import java.util.Optional;
  *
  *  {@include.example io.sphere.sdk.categories.commands.CategoryCreateCommandIntegrationTest#execution()}
  */
-public class CategoryDraftBuilder extends Base implements Builder<CategoryDraft> {
+public final class CategoryDraftBuilder extends Base implements Builder<CategoryDraft> {
     private final LocalizedString name;
     private final LocalizedString slug;
     @Nullable

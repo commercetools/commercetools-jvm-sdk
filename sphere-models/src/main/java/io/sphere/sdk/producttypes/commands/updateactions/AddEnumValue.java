@@ -14,7 +14,7 @@ import io.sphere.sdk.producttypes.ProductType;
  *
  * @see EnumAttributeType#getValues()
  */
-public class AddEnumValue extends UpdateActionImpl<ProductType> {
+public final class AddEnumValue extends UpdateActionImpl<ProductType> {
     private final String attributeName;
     private final EnumValue value;
 

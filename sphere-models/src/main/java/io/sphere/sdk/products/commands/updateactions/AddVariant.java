@@ -24,7 +24,7 @@ import java.util.List;
  * @see io.sphere.sdk.products.ProductProjection#getMasterVariant()
  * @see io.sphere.sdk.products.ProductProjection#getVariants()
  */
-public class AddVariant extends UpdateActionImpl<Product> {
+public final class AddVariant extends UpdateActionImpl<Product> {
     @Nullable
     private final String sku;
     private final List<PriceDraft> prices;

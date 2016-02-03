@@ -4,7 +4,7 @@ package io.sphere.sdk.search.model;
  * Filter ranges should be of the form [a, b], (-∞, b] or [a, +∞).
  * @param <T> type of the range domain.
  */
-public class FilterRange<T extends Comparable<? super T>> extends Range<T> {
+public final class FilterRange<T extends Comparable<? super T>> extends Range<T> {
 
     private FilterRange(final Bound<T> lowerBound, final Bound<T> upperBound) {
         super(lowerBound, upperBound);

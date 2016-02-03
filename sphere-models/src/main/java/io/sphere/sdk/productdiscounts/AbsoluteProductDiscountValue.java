@@ -18,7 +18,7 @@ import java.util.List;
  * @see ProductDiscount#getValue()
  * @see io.sphere.sdk.productdiscounts.commands.updateactions.ChangeValue
  */
-public class AbsoluteProductDiscountValue extends Base implements ProductDiscountValue {
+public final class AbsoluteProductDiscountValue extends Base implements ProductDiscountValue {
     private final List<MonetaryAmount> money;
 
     @JsonCreator

@@ -15,7 +15,7 @@ import static java.lang.String.format;
  *
  * @see Customer
  */
-public class ChangeAddress extends UpdateActionImpl<Customer> {
+public final class ChangeAddress extends UpdateActionImpl<Customer> {
     private final Address address;
     private final String addressId;
 

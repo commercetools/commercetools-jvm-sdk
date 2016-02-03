@@ -8,7 +8,7 @@ import io.sphere.sdk.types.Type;
 
  @param <T> the type for which the expansion path is
  */
-public class TypeExpansionModel<T> extends ExpansionModel<T> {
+public final class TypeExpansionModel<T> extends ExpansionModel<T> {
     public TypeExpansionModel(final String parentPath, final String path) {
         super(parentPath, path);
     }

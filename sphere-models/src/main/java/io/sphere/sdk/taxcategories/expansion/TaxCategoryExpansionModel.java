@@ -8,7 +8,7 @@ import io.sphere.sdk.taxcategories.TaxCategory;
 
  @param <T> the type for which the expansion path is
  */
-public class TaxCategoryExpansionModel<T> extends ExpansionModel<T> {
+public final class TaxCategoryExpansionModel<T> extends ExpansionModel<T> {
     public TaxCategoryExpansionModel(final String parentPath, final String path) {
         super(parentPath, path);
     }

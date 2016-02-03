@@ -11,7 +11,7 @@ import io.sphere.sdk.productdiscounts.ProductDiscountPredicate;
  *
  * {@include.example io.sphere.sdk.productdiscounts.commands.ProductDiscountUpdateCommandTest#changePredicate()}
  */
-public class ChangePredicate extends UpdateActionImpl<ProductDiscount> {
+public final class ChangePredicate extends UpdateActionImpl<ProductDiscount> {
     private final String predicate;
 
     private ChangePredicate(final ProductDiscountPredicate predicate) {

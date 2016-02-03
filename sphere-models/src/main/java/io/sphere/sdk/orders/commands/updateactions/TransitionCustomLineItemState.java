@@ -15,7 +15,7 @@ import java.time.ZonedDateTime;
  *
  * {@include.example io.sphere.sdk.orders.commands.OrderUpdateCommandTest#transitionCustomLineItemState()}
  */
-public class TransitionCustomLineItemState extends TransitionLineItemLikeState {
+public final class TransitionCustomLineItemState extends TransitionLineItemLikeState {
 
     private final String customLineItemId;
 

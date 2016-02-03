@@ -15,7 +15,7 @@ import javax.annotation.Nullable;
  * @see io.sphere.sdk.customers.commands.updateactions.SetTitle
  * @see CustomerDraftBuilder
  */
-public class CustomerName extends Base {
+public final class CustomerName extends Base {
     @Nullable
     private final String title;
     @Nullable

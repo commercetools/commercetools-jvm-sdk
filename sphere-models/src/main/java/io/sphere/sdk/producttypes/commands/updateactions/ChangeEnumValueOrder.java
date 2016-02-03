@@ -13,7 +13,7 @@ import java.util.List;
  *
  * {@include.example io.sphere.sdk.producttypes.commands.ProductTypeUpdateCommandTest#changeEnumValueOrder()}
  */
-public class ChangeEnumValueOrder extends UpdateActionImpl<ProductType> {
+public final class ChangeEnumValueOrder extends UpdateActionImpl<ProductType> {
     private final String attributeName;
     private final List<EnumValue> values;
 

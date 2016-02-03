@@ -27,7 +27,7 @@ import javax.money.MonetaryAmount;
  @see Cart#getCustomLineItems()
  @see RemoveCustomLineItem
  */
-public class AddCustomLineItem extends UpdateActionImpl<Cart> implements CustomDraft {
+public final class AddCustomLineItem extends UpdateActionImpl<Cart> implements CustomDraft {
     private final LocalizedString name;
     private final Long quantity;
     private final MonetaryAmount money;

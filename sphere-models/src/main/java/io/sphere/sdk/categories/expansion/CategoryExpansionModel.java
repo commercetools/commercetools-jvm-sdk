@@ -10,7 +10,7 @@ import java.util.List;
 
  @param <T> the type for which the expansion path is
  */
-public class CategoryExpansionModel<T> extends ExpandedModel<T> {
+public final class CategoryExpansionModel<T> extends ExpandedModel<T> {
     public CategoryExpansionModel(final List<String> parentPath, final String path) {
         super(parentPath, path);
     }

@@ -9,7 +9,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
-public class DiscountCodeDraftBuilder extends Base implements Builder<DiscountCodeDraftDsl> {
+public final class DiscountCodeDraftBuilder extends Base implements Builder<DiscountCodeDraftDsl> {
     @Nullable
     private LocalizedString name;
     @Nullable

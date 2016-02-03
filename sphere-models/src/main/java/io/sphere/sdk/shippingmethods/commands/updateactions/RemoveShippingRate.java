@@ -14,7 +14,7 @@ import io.sphere.sdk.zones.Zone;
  *
  * {@include.example io.sphere.sdk.shippingmethods.commands.ShippingMethodUpdateCommandTest#workingWithZones()}
  */
-public class RemoveShippingRate extends UpdateActionImpl<ShippingMethod> {
+public final class RemoveShippingRate extends UpdateActionImpl<ShippingMethod> {
     private final Reference<Zone> zone;
     private final ShippingRate shippingRate;
 

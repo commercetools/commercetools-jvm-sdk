@@ -2,7 +2,7 @@ package io.sphere.sdk.queries;
 
 import java.util.Optional;
 
-public class SphereQuerySort<T> extends QuerySortBase<T> {
+public final class SphereQuerySort<T> extends QuerySortBase<T> {
     private final QueryModel<T> path;
     private final QuerySortDirection direction;
 

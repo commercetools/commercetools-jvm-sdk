@@ -7,7 +7,7 @@ import io.sphere.sdk.shippingmethods.expansion.ShippingMethodExpansionModel;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class ShippingInfoExpansionModel<T> extends ExpansionModel<T> {
+public final class ShippingInfoExpansionModel<T> extends ExpansionModel<T> {
     public ShippingInfoExpansionModel(final List<String> parentPath, @Nullable final String path) {
         super(parentPath, path);
     }

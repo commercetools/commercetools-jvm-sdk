@@ -3,7 +3,7 @@ package io.sphere.sdk.orders;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import io.sphere.sdk.models.Base;
 
-public class ParcelMeasurements extends Base {
+public final class ParcelMeasurements extends Base {
     private final Integer heightInMillimeter;
     private final Integer lengthInMillimeter;
     private final Integer widthInMillimeter;

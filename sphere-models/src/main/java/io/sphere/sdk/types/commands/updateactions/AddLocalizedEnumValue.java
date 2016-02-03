@@ -14,7 +14,7 @@ import io.sphere.sdk.types.Type;
 
  @see LocalizedEnumFieldType#getValues()
  */
-public class AddLocalizedEnumValue extends UpdateActionImpl<Type> {
+public final class AddLocalizedEnumValue extends UpdateActionImpl<Type> {
     private final String fieldName;
     private final LocalizedEnumValue value;
 

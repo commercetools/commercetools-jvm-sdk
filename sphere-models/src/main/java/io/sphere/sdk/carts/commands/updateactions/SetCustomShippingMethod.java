@@ -14,7 +14,7 @@ import io.sphere.sdk.taxcategories.TaxCategory;
 
  {@include.example io.sphere.sdk.carts.commands.CartUpdateCommandTest#setCustomShippingMethod()}
  */
-public class SetCustomShippingMethod extends UpdateActionImpl<Cart> {
+public final class SetCustomShippingMethod extends UpdateActionImpl<Cart> {
 
     private final String shippingMethodName;
     private final ShippingRate shippingRate;

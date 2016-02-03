@@ -9,7 +9,7 @@ import javax.annotation.Nullable;
  * EXPERIMENTAL model to easily build product projection faceted search requests.
  * Being it experimental, it can be modified in future releases therefore introducing breaking changes.
  */
-public class ProductProjectionFacetedSearchSearchModel extends ProductDataFacetedSearchSearchModel {
+public final class ProductProjectionFacetedSearchSearchModel extends ProductDataFacetedSearchSearchModel {
 
     ProductProjectionFacetedSearchSearchModel(@Nullable final SearchModel<ProductProjection> parent, @Nullable final String pathSegment) {
         super(parent, pathSegment);

@@ -2,7 +2,7 @@ package io.sphere.sdk.search.model;
 
 import javax.annotation.Nullable;
 
-public class EnumSortSearchModel<T, S extends SortSearchModel<T>> extends SortableSearchModel<T, S> {
+public final class EnumSortSearchModel<T, S extends SortSearchModel<T>> extends SortableSearchModel<T, S> {
 
     EnumSortSearchModel(@Nullable final SearchModel<T> parent, @Nullable final String pathSegment, final SearchSortFactory<T, S> searchSortFactory) {
         super(parent, pathSegment, searchSortFactory);

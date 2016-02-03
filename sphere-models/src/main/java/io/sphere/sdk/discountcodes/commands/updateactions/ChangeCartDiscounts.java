@@ -19,7 +19,7 @@ import java.util.List;
  *
  * @see DiscountCode#getCartDiscounts()
  */
-public class ChangeCartDiscounts extends UpdateActionImpl<DiscountCode> {
+public final class ChangeCartDiscounts extends UpdateActionImpl<DiscountCode> {
     private final List<Reference<CartDiscount>> cartDiscounts;
 
     private ChangeCartDiscounts(final List<Reference<CartDiscount>> cartDiscounts) {

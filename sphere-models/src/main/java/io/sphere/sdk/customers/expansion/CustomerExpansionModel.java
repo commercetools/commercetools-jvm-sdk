@@ -6,7 +6,7 @@ import io.sphere.sdk.expansion.ExpansionPathContainer;
 
 import javax.annotation.Nullable;
 
-public class CustomerExpansionModel<T> extends ExpansionModel<T> {
+public final class CustomerExpansionModel<T> extends ExpansionModel<T> {
     private CustomerExpansionModel() {
         super();
     }

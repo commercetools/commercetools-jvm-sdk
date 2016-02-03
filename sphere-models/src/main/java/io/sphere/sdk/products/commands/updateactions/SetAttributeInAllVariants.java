@@ -17,7 +17,7 @@ import javax.annotation.Nullable;
  *
  * @see io.sphere.sdk.products.commands.updateactions.SetAttribute
  */
-public class SetAttributeInAllVariants extends UpdateActionImpl<Product> {
+public final class SetAttributeInAllVariants extends UpdateActionImpl<Product> {
     private final String name;
     @Nullable
     private final JsonNode value;

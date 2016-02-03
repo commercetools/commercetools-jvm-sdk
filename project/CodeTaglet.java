@@ -8,7 +8,7 @@ import java.util.*;
 
 import static java.lang.String.format;
 
-public class CodeTaglet implements Taglet {
+public final class CodeTaglet implements Taglet {
 
     /**
      * Generates the String output for a tag

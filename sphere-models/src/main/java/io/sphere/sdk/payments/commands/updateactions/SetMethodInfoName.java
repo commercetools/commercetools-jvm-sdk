@@ -18,7 +18,7 @@ import javax.annotation.Nullable;
  *
  *
  */
-public class SetMethodInfoName extends UpdateActionImpl<Payment> {
+public final class SetMethodInfoName extends UpdateActionImpl<Payment> {
 
     @Nullable
     private final LocalizedString name;

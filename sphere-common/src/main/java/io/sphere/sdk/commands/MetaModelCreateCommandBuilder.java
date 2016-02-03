@@ -12,7 +12,7 @@ import java.util.function.Function;
 
 Internal builder.
  */
-public class MetaModelCreateCommandBuilder<T, C, D, E> extends Base implements Builder<C> {
+public final class MetaModelCreateCommandBuilder<T, C, D, E> extends Base implements Builder<C> {
     final D body;
     final E expansionModel;
     final JavaType javaType;

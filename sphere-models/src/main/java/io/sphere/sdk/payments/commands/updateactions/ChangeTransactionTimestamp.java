@@ -13,7 +13,7 @@ import java.time.ZonedDateTime;
  * {@include.example io.sphere.sdk.payments.commands.PaymentUpdateCommandTest#changeTransactionTimestamp()}
  *
  */
-public class ChangeTransactionTimestamp extends UpdateActionImpl<Payment> {
+public final class ChangeTransactionTimestamp extends UpdateActionImpl<Payment> {
     private final ZonedDateTime timestamp;
     private final String transactionId;
 

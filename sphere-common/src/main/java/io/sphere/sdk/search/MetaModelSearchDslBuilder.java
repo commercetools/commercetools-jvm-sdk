@@ -21,7 +21,7 @@ import static java.util.Collections.emptyList;
  * @param <F> type of the facet model
  * @param <E> type of the expansion model
  */
-public class MetaModelSearchDslBuilder<T, C extends MetaModelSearchDsl<T, C, S, L, F, E>, S, L, F, E> extends Base implements Builder<C> {
+public final class MetaModelSearchDslBuilder<T, C extends MetaModelSearchDsl<T, C, S, L, F, E>, S, L, F, E> extends Base implements Builder<C> {
 
     @Nullable
     protected LocalizedStringEntry text;

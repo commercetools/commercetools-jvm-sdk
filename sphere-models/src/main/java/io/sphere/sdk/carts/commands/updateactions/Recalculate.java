@@ -10,7 +10,7 @@ import io.sphere.sdk.commands.UpdateActionImpl;
 
  {@include.example io.sphere.sdk.carts.commands.CartUpdateCommandTest#recalculate()}
  */
-public class Recalculate extends UpdateActionImpl<Cart> {
+public final class Recalculate extends UpdateActionImpl<Cart> {
     private Recalculate() {
         super("recalculate");
     }

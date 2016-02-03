@@ -13,7 +13,7 @@ import io.sphere.sdk.products.Product;
  *
  * {@include.example io.sphere.sdk.products.commands.ProductUpdateCommandTest#removeImage()}
  */
-public class RemoveImage extends UpdateActionImpl<Product> {
+public final class RemoveImage extends UpdateActionImpl<Product> {
     private final Integer variantId;
     private final String imageUrl;
 
