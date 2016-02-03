@@ -115,11 +115,16 @@ extends <a href="../../../../../io/sphere/sdk/commands/DraftBasedCreateCommand.h
             .withIsActive(false)
             .withMaxApplications(5L)
             .withMaxApplicationsPerCustomer(1L);
-    final DiscountCode discountCode = client().executeBlocking(DiscountCodeCreateCommand.of(draft));
+    final DiscountCodeCreateCommand createCommand = DiscountCodeCreateCommand.of(draft)
+            .plusExpansionPaths(m -&gt; m.cartDiscounts());
+    final DiscountCode discountCode = client().executeBlocking(createCommand);
     assertThat(discountCode.getCode()).isEqualTo(code);
     assertThat(discountCode.getName()).isEqualTo(en(DiscountCodeCreateCommandTest.class.getName()));
     assertThat(discountCode.getDescription()).isEqualTo(en("sample discount code descr."));
-    assertThat(discountCode.getCartDiscounts()).isEqualTo(asList(cartDiscount.toReference()));
+    final Reference&lt;CartDiscount&gt; cartDiscountReference = discountCode.getCartDiscounts().get(0);
+    assertThat(cartDiscountReference)
+            .isEqualTo(cartDiscount.toReference())
+            .is(expanded());
     assertThat(discountCode.getCartPredicate()).contains("1 = 1");
     assertThat(discountCode.isActive()).isEqualTo(false);
     assertThat(discountCode.getMaxApplications()).isEqualTo(5L);
