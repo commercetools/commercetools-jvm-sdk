@@ -3,7 +3,6 @@ package io.sphere.sdk.client;
 import io.sphere.sdk.http.HttpClient;
 import io.sphere.sdk.http.HttpRequest;
 import io.sphere.sdk.http.HttpResponse;
-import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.SphereException;
 
 import java.lang.reflect.InvocationTargetException;
@@ -19,42 +18,8 @@ import static io.sphere.sdk.utils.CompletableFutureUtils.successful;
  *
  * {@include.example example.JavaClientInstantiationExample}
  */
-public final class SphereClientFactory extends Base {
-    private final Supplier<HttpClient> httpClientSupplier;
-
-    private SphereClientFactory(final Supplier<HttpClient> httpClientSupplier) {
-        this.httpClientSupplier = httpClientSupplier;
-    }
-
-    public static SphereClientFactory of(final Supplier<HttpClient> httpClientSupplier) {
-        return new SphereClientFactory(httpClientSupplier);
-    }
-
-    public static SphereClientFactory of() {
-        try {
-            Class<?> clazz;
-            try {
-                clazz = Class.forName("io.sphere.sdk.client.SphereAsyncHttpClientFactory");
-            } catch (final ClassNotFoundException e) {
-                clazz = Class.forName("io.sphere.sdk.client.SphereApacheHttpClientFactory");
-            }
-            final Method create = clazz.getMethod("create");
-            final Supplier<HttpClient> supplier = () -> {
-                try {
-                    return  (HttpClient) create.invoke(null);
-                } catch (IllegalAccessException | InvocationTargetException e) {
-                    throw new SphereException(e);
-                }
-            };
-            return of(supplier);
-        } catch (ClassNotFoundException | NoSuchMethodException e) {
-            throw new SphereException(e);
-        }
-    }
-
-    public HttpClient createHttpClient() {
-        return httpClientSupplier.get();
-    }
+public interface SphereClientFactory {
+    HttpClient createHttpClient();
 
     /**
      * Creates a standard client with configurable service URLs. Intended for commercetools staff
@@ -63,7 +28,7 @@ public final class SphereClientFactory extends Base {
      * @param config configuration for the client
      * @return client
      */
-    public SphereClient createClient(final SphereClientConfig config) {
+    default SphereClient createClient(SphereClientConfig config) {
         final HttpClient httpClient = createHttpClient();
         final SphereAccessTokenSupplier tokenSupplier = SphereAccessTokenSupplier.ofAutoRefresh(config, httpClient, false);
         return SphereClient.of(config, httpClient, tokenSupplier);
@@ -75,7 +40,7 @@ public final class SphereClientFactory extends Base {
      * @param tokenSupplier a service which provides tokens
      * @return client
      */
-    public SphereClient createClient(final SphereApiConfig config, final SphereAccessTokenSupplier tokenSupplier) {
+    default SphereClient createClient(SphereApiConfig config, SphereAccessTokenSupplier tokenSupplier) {
         return SphereClient.of(config, createHttpClient(), tokenSupplier);
     }
 
@@ -88,7 +53,7 @@ public final class SphereClientFactory extends Base {
      * @param clientSecret password
      * @return sphere client
      */
-    public SphereClient createClient(final String projectKey, final String clientId, final String clientSecret) {
+    default SphereClient createClient(String projectKey, String clientId, String clientSecret) {
         return createClient(SphereClientConfig.of(projectKey, clientId, clientSecret));
     }
 
@@ -103,7 +68,7 @@ public final class SphereClientFactory extends Base {
      * @param httpClient the http client used for performing requests
      * @return client
      */
-    public SphereClient createClientOfApiConfigAndAccessToken(final SphereApiConfig config, final String accessToken, final HttpClient httpClient) {
+    default SphereClient createClientOfApiConfigAndAccessToken(SphereApiConfig config, String accessToken, HttpClient httpClient) {
         final HttpClient uncloseableHttpClient = new HttpClient() {
             @Override
             public CompletionStage<HttpResponse> execute(final HttpRequest httpRequest) {
@@ -126,7 +91,7 @@ public final class SphereClientFactory extends Base {
      * @param accessToken the token belonging to the project in {@code config}
      * @return client
      */
-    public SphereClient createClientOfApiConfigAndAccessToken(final SphereApiConfig config, final String accessToken) {
+    default SphereClient createClientOfApiConfigAndAccessToken(SphereApiConfig config, String accessToken) {
         return SphereClient.of(config, createHttpClient(), SphereAccessTokenSupplier.ofConstantToken(accessToken));
     }
 
@@ -137,7 +102,7 @@ public final class SphereClientFactory extends Base {
      * @return test double
      */
     @Deprecated
-    public static SphereClient createHttpTestDouble(final Function<HttpRequestIntent, HttpResponse> function) {
+    static SphereClient createHttpTestDouble(final Function<HttpRequestIntent, HttpResponse> function) {
         return TestDoubleSphereClientFactory.createHttpTestDouble(function);
     }
 
@@ -149,7 +114,7 @@ public final class SphereClientFactory extends Base {
      */
     @Deprecated
     @SuppressWarnings("unchecked")
-    public static SphereClient createObjectTestDouble(final Function<HttpRequestIntent, Object> function) {
+    static SphereClient createObjectTestDouble(final Function<HttpRequestIntent, Object> function) {
         return new SphereClient() {
             @Override
             public <T> CompletionStage<T> execute(final SphereRequest<T> sphereRequest) {
@@ -166,5 +131,32 @@ public final class SphereClientFactory extends Base {
                 return "SphereClientObjectTestDouble";
             }
         };
+    }
+
+
+    static SphereClientFactory of(final Supplier<HttpClient> httpClientSupplier) {
+        return new SphereClientFactoryImpl(httpClientSupplier);
+    }
+
+    static SphereClientFactory of() {
+        try {
+            Class<?> clazz;
+            try {
+                clazz = Class.forName("io.sphere.sdk.client.SphereAsyncHttpClientFactory");
+            } catch (final ClassNotFoundException e) {
+                clazz = Class.forName("io.sphere.sdk.client.SphereApacheHttpClientFactory");
+            }
+            final Method create = clazz.getMethod("create");
+            final Supplier<HttpClient> supplier = () -> {
+                try {
+                    return  (HttpClient) create.invoke(null);
+                } catch (IllegalAccessException | InvocationTargetException e) {
+                    throw new SphereException(e);
+                }
+            };
+            return of(supplier);
+        } catch (ClassNotFoundException | NoSuchMethodException e) {
+            throw new SphereException(e);
+        }
     }
 }
