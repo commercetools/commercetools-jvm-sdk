@@ -18,8 +18,8 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":10,"i1":10,"i2":9,"i3":9,"i4":9,"i5":9};
-var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
+var methods = {"i0":6,"i1":6,"i2":17,"i3":17,"i4":17,"i5":17};
+var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],2:["t2","Instance Methods"],4:["t3","Abstract Methods"],16:["t5","Default Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
 var tableTab = "tableTab";
@@ -48,7 +48,7 @@ var activeTableTab = "activeTableTab";
 </div>
 <div class="subNav">
 <ul class="navList">
-<li><a href="../../../../io/sphere/sdk/orders/Delivery.html" title="class in io.sphere.sdk.orders"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
+<li><a href="../../../../io/sphere/sdk/orders/Delivery.html" title="interface in io.sphere.sdk.orders"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
 <li><a href="../../../../io/sphere/sdk/orders/LineItemImportDraft.html" title="interface in io.sphere.sdk.orders"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">
@@ -92,29 +92,56 @@ var activeTableTab = "activeTableTab";
 <!-- ======== START OF CLASS DATA ======== -->
 <div class="header">
 <div class="subTitle">io.sphere.sdk.orders</div>
-<h2 title="Class DeliveryItem" class="title">Class DeliveryItem</h2>
+<h2 title="Interface DeliveryItem" class="title">Interface DeliveryItem</h2>
 </div>
 <div class="contentContainer">
-<ul class="inheritance">
-<li>java.lang.Object</li>
-<li>
-<ul class="inheritance">
-<li><a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.sphere.sdk.models">io.sphere.sdk.models.Base</a></li>
-<li>
-<ul class="inheritance">
-<li>io.sphere.sdk.orders.DeliveryItem</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
 <div class="description">
 <ul class="blockList">
 <li class="blockList">
 <hr>
 <br>
-<pre>public class <span class="typeNameLabel">DeliveryItem</span>
-extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.sphere.sdk.models">Base</a></pre>
+<pre>public interface <span class="typeNameLabel">DeliveryItem</span></pre>
+<div class="block">Identifies line items or custom line items and they quanity for a <a href="../../../../io/sphere/sdk/orders/Delivery.html" title="interface in io.sphere.sdk.orders"><code>Delivery</code></a>.
+
+ <div id="io-sphere-sdk-orders-commands-OrderUpdateCommandTest-addDelivery--%s" class=code-example><pre><code class='java'>withOrder(client(), order -&gt; {
+    assertThat(order.getShippingInfo().getDeliveries()).isEmpty();
+    final List&lt;ParcelDraft&gt; parcels = asList(ParcelDraft.of(PARCEL_MEASUREMENTS, TRACKING_DATA));
+    final LineItem lineItem = order.getLineItems().get(0);
+    final long availableItemsToShip = 1;
+    final List&lt;DeliveryItem&gt; items = asList(DeliveryItem.of(lineItem, availableItemsToShip));
+    final Order updatedOrder = client().executeBlocking(OrderUpdateCommand.of(order, AddDelivery.of(items, parcels)));
+    final Delivery delivery = updatedOrder.getShippingInfo().getDeliveries().get(0);
+    assertThat(delivery.getItems()).isEqualTo(items);
+    final Parcel parcel = delivery.getParcels().get(0);
+    assertThat(parcel.getMeasurements()).isEqualTo(PARCEL_MEASUREMENTS);
+    assertThat(parcel.getTrackingData()).isEqualTo(TRACKING_DATA);
+
+    //you can observe a message
+    final Query&lt;DeliveryAddedMessage&gt; messageQuery = MessageQuery.of()
+            .withPredicates(m -&gt; m.resource().is(order))
+            .forMessageType(DeliveryAddedMessage.MESSAGE_HINT);
+    assertEventually(() -&gt; {
+        final Optional&lt;DeliveryAddedMessage&gt; deliveryAddedMessageOptional =
+                client().executeBlocking(messageQuery).head();
+        assertThat(deliveryAddedMessageOptional).isPresent();
+        final DeliveryAddedMessage deliveryAddedMessage = deliveryAddedMessageOptional.get();
+        final Delivery deliveryFromMessage = deliveryAddedMessage.getDelivery();
+        assertThat(deliveryFromMessage.getId()).isEqualTo(delivery.getId());
+        assertThat(deliveryFromMessage.getCreatedAt()).isEqualTo(delivery.getCreatedAt());
+        assertThat(deliveryFromMessage.getParcels())
+                .as("warning initial parcels are not contained in the message!")
+                .isNotEqualTo(delivery.getParcels())
+                .isEmpty();
+        assertThat(deliveryFromMessage.getItems()).isEqualTo(delivery.getItems());
+    });
+
+    return updatedOrder;
+});
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/orders/commands/OrderUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+<dl>
+<dt><span class="seeLabel">See Also:</span></dt>
+<dd><a href="../../../../io/sphere/sdk/orders/commands/updateactions/AddDelivery.html" title="class in io.sphere.sdk.orders.commands.updateactions"><code>AddDelivery</code></a></dd>
+</dl>
 </li>
 </ul>
 </div>
@@ -128,53 +155,43 @@ extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.
 </a>
 <h3>Method Summary</h3>
 <table class="memberSummary" border="0" cellpadding="3" cellspacing="0" summary="Method Summary table, listing methods, and an explanation">
-<caption><span id="t0" class="activeTableTab"><span>All Methods</span><span class="tabEnd">&nbsp;</span></span><span id="t1" class="tableTab"><span><a href="javascript:show(1);">Static Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t2" class="tableTab"><span><a href="javascript:show(2);">Instance Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t4" class="tableTab"><span><a href="javascript:show(8);">Concrete Methods</a></span><span class="tabEnd">&nbsp;</span></span></caption>
+<caption><span id="t0" class="activeTableTab"><span>All Methods</span><span class="tabEnd">&nbsp;</span></span><span id="t1" class="tableTab"><span><a href="javascript:show(1);">Static Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t2" class="tableTab"><span><a href="javascript:show(2);">Instance Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t3" class="tableTab"><span><a href="javascript:show(4);">Abstract Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t5" class="tableTab"><span><a href="javascript:show(16);">Default Methods</a></span><span class="tabEnd">&nbsp;</span></span></caption>
 <tr>
 <th class="colFirst" scope="col">Modifier and Type</th>
 <th class="colLast" scope="col">Method and Description</th>
 </tr>
 <tr id="i0" class="altColor">
 <td class="colFirst"><code>java.lang.String</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/orders/DeliveryItem.html#getId--">getId</a></span>()</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/orders/DeliveryItem.html#getId--">getId</a></span>()</code>
+<div class="block">The ID of a <a href="../../../../io/sphere/sdk/carts/LineItem.html" title="interface in io.sphere.sdk.carts"><code>LineItem</code></a> or a <a href="../../../../io/sphere/sdk/carts/CustomLineItem.html" title="interface in io.sphere.sdk.carts"><code>CustomLineItem</code></a>.</div>
+</td>
 </tr>
 <tr id="i1" class="rowColor">
 <td class="colFirst"><code>java.lang.Long</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/orders/DeliveryItem.html#getQuantity--">getQuantity</a></span>()</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/orders/DeliveryItem.html#getQuantity--">getQuantity</a></span>()</code>
+<div class="block">The amount of items of with ID <a href="../../../../io/sphere/sdk/orders/DeliveryItem.html#getId--"><code>getId()</code></a> in a <a href="../../../../io/sphere/sdk/orders/Delivery.html" title="interface in io.sphere.sdk.orders"><code>Delivery</code></a>.</div>
+</td>
 </tr>
 <tr id="i2" class="altColor">
-<td class="colFirst"><code>static <a href="../../../../io/sphere/sdk/orders/DeliveryItem.html" title="class in io.sphere.sdk.orders">DeliveryItem</a></code></td>
+<td class="colFirst"><code>static <a href="../../../../io/sphere/sdk/orders/DeliveryItem.html" title="interface in io.sphere.sdk.orders">DeliveryItem</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/orders/DeliveryItem.html#of-io.sphere.sdk.carts.LineItemLike-">of</a></span>(<a href="../../../../io/sphere/sdk/carts/LineItemLike.html" title="interface in io.sphere.sdk.carts">LineItemLike</a>&nbsp;lineItem)</code>&nbsp;</td>
 </tr>
 <tr id="i3" class="rowColor">
-<td class="colFirst"><code>static <a href="../../../../io/sphere/sdk/orders/DeliveryItem.html" title="class in io.sphere.sdk.orders">DeliveryItem</a></code></td>
+<td class="colFirst"><code>static <a href="../../../../io/sphere/sdk/orders/DeliveryItem.html" title="interface in io.sphere.sdk.orders">DeliveryItem</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/orders/DeliveryItem.html#of-io.sphere.sdk.carts.LineItemLike-java.lang.Long-">of</a></span>(<a href="../../../../io/sphere/sdk/carts/LineItemLike.html" title="interface in io.sphere.sdk.carts">LineItemLike</a>&nbsp;lineItem,
   java.lang.Long&nbsp;quantity)</code>&nbsp;</td>
 </tr>
 <tr id="i4" class="altColor">
-<td class="colFirst"><code>static <a href="../../../../io/sphere/sdk/orders/DeliveryItem.html" title="class in io.sphere.sdk.orders">DeliveryItem</a></code></td>
+<td class="colFirst"><code>static <a href="../../../../io/sphere/sdk/orders/DeliveryItem.html" title="interface in io.sphere.sdk.orders">DeliveryItem</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/orders/DeliveryItem.html#of-java.lang.String-long-">of</a></span>(java.lang.String&nbsp;id,
   long&nbsp;quantity)</code>&nbsp;</td>
 </tr>
 <tr id="i5" class="rowColor">
-<td class="colFirst"><code>static <a href="../../../../io/sphere/sdk/orders/DeliveryItem.html" title="class in io.sphere.sdk.orders">DeliveryItem</a></code></td>
+<td class="colFirst"><code>static <a href="../../../../io/sphere/sdk/orders/DeliveryItem.html" title="interface in io.sphere.sdk.orders">DeliveryItem</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/orders/DeliveryItem.html#of-java.lang.String-java.lang.Long-">of</a></span>(java.lang.String&nbsp;id,
   java.lang.Long&nbsp;quantity)</code>&nbsp;</td>
 </tr>
 </table>
-<ul class="blockList">
-<li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.models.Base">
-<!--   -->
-</a>
-<h3>Methods inherited from class&nbsp;io.sphere.sdk.models.<a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.sphere.sdk.models">Base</a></h3>
-<code><a href="../../../../io/sphere/sdk/models/Base.html#equals-java.lang.Object-">equals</a>, <a href="../../../../io/sphere/sdk/models/Base.html#hashCode--">hashCode</a>, <a href="../../../../io/sphere/sdk/models/Base.html#toString--">toString</a></code></li>
-</ul>
-<ul class="blockList">
-<li class="blockList"><a name="methods.inherited.from.class.java.lang.Object">
-<!--   -->
-</a>
-<h3>Methods inherited from class&nbsp;java.lang.Object</h3>
-<code>clone, finalize, getClass, notify, notifyAll, wait, wait, wait</code></li>
-</ul>
 </li>
 </ul>
 </li>
@@ -195,7 +212,12 @@ extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.
 <ul class="blockList">
 <li class="blockList">
 <h4>getId</h4>
-<pre>public&nbsp;java.lang.String&nbsp;getId()</pre>
+<pre>java.lang.String&nbsp;getId()</pre>
+<div class="block">The ID of a <a href="../../../../io/sphere/sdk/carts/LineItem.html" title="interface in io.sphere.sdk.carts"><code>LineItem</code></a> or a <a href="../../../../io/sphere/sdk/carts/CustomLineItem.html" title="interface in io.sphere.sdk.carts"><code>CustomLineItem</code></a>.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>ID</dd>
+</dl>
 </li>
 </ul>
 <a name="getQuantity--">
@@ -204,7 +226,12 @@ extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.
 <ul class="blockList">
 <li class="blockList">
 <h4>getQuantity</h4>
-<pre>public&nbsp;java.lang.Long&nbsp;getQuantity()</pre>
+<pre>java.lang.Long&nbsp;getQuantity()</pre>
+<div class="block">The amount of items of with ID <a href="../../../../io/sphere/sdk/orders/DeliveryItem.html#getId--"><code>getId()</code></a> in a <a href="../../../../io/sphere/sdk/orders/Delivery.html" title="interface in io.sphere.sdk.orders"><code>Delivery</code></a>.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>quantity</dd>
+</dl>
 </li>
 </ul>
 <a name="of-java.lang.String-long-">
@@ -213,8 +240,8 @@ extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.
 <ul class="blockList">
 <li class="blockList">
 <h4>of</h4>
-<pre>public static&nbsp;<a href="../../../../io/sphere/sdk/orders/DeliveryItem.html" title="class in io.sphere.sdk.orders">DeliveryItem</a>&nbsp;of(java.lang.String&nbsp;id,
-                              long&nbsp;quantity)</pre>
+<pre>static&nbsp;<a href="../../../../io/sphere/sdk/orders/DeliveryItem.html" title="interface in io.sphere.sdk.orders">DeliveryItem</a>&nbsp;of(java.lang.String&nbsp;id,
+                       long&nbsp;quantity)</pre>
 </li>
 </ul>
 <a name="of-java.lang.String-java.lang.Long-">
@@ -223,8 +250,8 @@ extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.
 <ul class="blockList">
 <li class="blockList">
 <h4>of</h4>
-<pre>public static&nbsp;<a href="../../../../io/sphere/sdk/orders/DeliveryItem.html" title="class in io.sphere.sdk.orders">DeliveryItem</a>&nbsp;of(java.lang.String&nbsp;id,
-                              java.lang.Long&nbsp;quantity)</pre>
+<pre>static&nbsp;<a href="../../../../io/sphere/sdk/orders/DeliveryItem.html" title="interface in io.sphere.sdk.orders">DeliveryItem</a>&nbsp;of(java.lang.String&nbsp;id,
+                       java.lang.Long&nbsp;quantity)</pre>
 </li>
 </ul>
 <a name="of-io.sphere.sdk.carts.LineItemLike-java.lang.Long-">
@@ -233,8 +260,8 @@ extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.
 <ul class="blockList">
 <li class="blockList">
 <h4>of</h4>
-<pre>public static&nbsp;<a href="../../../../io/sphere/sdk/orders/DeliveryItem.html" title="class in io.sphere.sdk.orders">DeliveryItem</a>&nbsp;of(<a href="../../../../io/sphere/sdk/carts/LineItemLike.html" title="interface in io.sphere.sdk.carts">LineItemLike</a>&nbsp;lineItem,
-                              java.lang.Long&nbsp;quantity)</pre>
+<pre>static&nbsp;<a href="../../../../io/sphere/sdk/orders/DeliveryItem.html" title="interface in io.sphere.sdk.orders">DeliveryItem</a>&nbsp;of(<a href="../../../../io/sphere/sdk/carts/LineItemLike.html" title="interface in io.sphere.sdk.carts">LineItemLike</a>&nbsp;lineItem,
+                       java.lang.Long&nbsp;quantity)</pre>
 </li>
 </ul>
 <a name="of-io.sphere.sdk.carts.LineItemLike-">
@@ -243,7 +270,7 @@ extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.
 <ul class="blockListLast">
 <li class="blockList">
 <h4>of</h4>
-<pre>public static&nbsp;<a href="../../../../io/sphere/sdk/orders/DeliveryItem.html" title="class in io.sphere.sdk.orders">DeliveryItem</a>&nbsp;of(<a href="../../../../io/sphere/sdk/carts/LineItemLike.html" title="interface in io.sphere.sdk.carts">LineItemLike</a>&nbsp;lineItem)</pre>
+<pre>static&nbsp;<a href="../../../../io/sphere/sdk/orders/DeliveryItem.html" title="interface in io.sphere.sdk.orders">DeliveryItem</a>&nbsp;of(<a href="../../../../io/sphere/sdk/carts/LineItemLike.html" title="interface in io.sphere.sdk.carts">LineItemLike</a>&nbsp;lineItem)</pre>
 </li>
 </ul>
 </li>
@@ -273,7 +300,7 @@ extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.
 </div>
 <div class="subNav">
 <ul class="navList">
-<li><a href="../../../../io/sphere/sdk/orders/Delivery.html" title="class in io.sphere.sdk.orders"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
+<li><a href="../../../../io/sphere/sdk/orders/Delivery.html" title="interface in io.sphere.sdk.orders"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
 <li><a href="../../../../io/sphere/sdk/orders/LineItemImportDraft.html" title="interface in io.sphere.sdk.orders"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">

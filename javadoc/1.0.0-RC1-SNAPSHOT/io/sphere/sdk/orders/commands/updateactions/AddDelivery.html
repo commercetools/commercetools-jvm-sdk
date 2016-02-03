@@ -141,12 +141,32 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html"
     assertThat(parcel.getMeasurements()).isEqualTo(PARCEL_MEASUREMENTS);
     assertThat(parcel.getTrackingData()).isEqualTo(TRACKING_DATA);
 
+    //you can observe a message
+    final Query&lt;DeliveryAddedMessage&gt; messageQuery = MessageQuery.of()
+            .withPredicates(m -&gt; m.resource().is(order))
+            .forMessageType(DeliveryAddedMessage.MESSAGE_HINT);
+    assertEventually(() -&gt; {
+        final Optional&lt;DeliveryAddedMessage&gt; deliveryAddedMessageOptional =
+                client().executeBlocking(messageQuery).head();
+        assertThat(deliveryAddedMessageOptional).isPresent();
+        final DeliveryAddedMessage deliveryAddedMessage = deliveryAddedMessageOptional.get();
+        final Delivery deliveryFromMessage = deliveryAddedMessage.getDelivery();
+        assertThat(deliveryFromMessage.getId()).isEqualTo(delivery.getId());
+        assertThat(deliveryFromMessage.getCreatedAt()).isEqualTo(delivery.getCreatedAt());
+        assertThat(deliveryFromMessage.getParcels())
+                .as("warning initial parcels are not contained in the message!")
+                .isNotEqualTo(delivery.getParcels())
+                .isEmpty();
+        assertThat(deliveryFromMessage.getItems()).isEqualTo(delivery.getItems());
+    });
+
     return updatedOrder;
 });
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/orders/commands/OrderUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 <dl>
 <dt><span class="seeLabel">See Also:</span></dt>
-<dd><a href="../../../../../../io/sphere/sdk/orders/OrderShippingInfo.html#getDeliveries--"><code>OrderShippingInfo.getDeliveries()</code></a></dd>
+<dd><a href="../../../../../../io/sphere/sdk/orders/OrderShippingInfo.html#getDeliveries--"><code>OrderShippingInfo.getDeliveries()</code></a>, 
+<a href="../../../../../../io/sphere/sdk/orders/messages/DeliveryAddedMessage.html" title="class in io.sphere.sdk.orders.messages"><code>DeliveryAddedMessage</code></a></dd>
 </dl>
 </li>
 </ul>
@@ -167,7 +187,7 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html"
 <th class="colLast" scope="col">Method and Description</th>
 </tr>
 <tr id="i0" class="altColor">
-<td class="colFirst"><code>java.util.List&lt;<a href="../../../../../../io/sphere/sdk/orders/DeliveryItem.html" title="class in io.sphere.sdk.orders">DeliveryItem</a>&gt;</code></td>
+<td class="colFirst"><code>java.util.List&lt;<a href="../../../../../../io/sphere/sdk/orders/DeliveryItem.html" title="interface in io.sphere.sdk.orders">DeliveryItem</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../io/sphere/sdk/orders/commands/updateactions/AddDelivery.html#getItems--">getItems</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i1" class="rowColor">
@@ -176,11 +196,11 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html"
 </tr>
 <tr id="i2" class="altColor">
 <td class="colFirst"><code>static <a href="../../../../../../io/sphere/sdk/orders/commands/updateactions/AddDelivery.html" title="class in io.sphere.sdk.orders.commands.updateactions">AddDelivery</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../io/sphere/sdk/orders/commands/updateactions/AddDelivery.html#of-java.util.List-">of</a></span>(java.util.List&lt;<a href="../../../../../../io/sphere/sdk/orders/DeliveryItem.html" title="class in io.sphere.sdk.orders">DeliveryItem</a>&gt;&nbsp;items)</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../io/sphere/sdk/orders/commands/updateactions/AddDelivery.html#of-java.util.List-">of</a></span>(java.util.List&lt;<a href="../../../../../../io/sphere/sdk/orders/DeliveryItem.html" title="interface in io.sphere.sdk.orders">DeliveryItem</a>&gt;&nbsp;items)</code>&nbsp;</td>
 </tr>
 <tr id="i3" class="rowColor">
 <td class="colFirst"><code>static <a href="../../../../../../io/sphere/sdk/orders/commands/updateactions/AddDelivery.html" title="class in io.sphere.sdk.orders.commands.updateactions">AddDelivery</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../io/sphere/sdk/orders/commands/updateactions/AddDelivery.html#of-java.util.List-java.util.List-">of</a></span>(java.util.List&lt;<a href="../../../../../../io/sphere/sdk/orders/DeliveryItem.html" title="class in io.sphere.sdk.orders">DeliveryItem</a>&gt;&nbsp;items,
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../io/sphere/sdk/orders/commands/updateactions/AddDelivery.html#of-java.util.List-java.util.List-">of</a></span>(java.util.List&lt;<a href="../../../../../../io/sphere/sdk/orders/DeliveryItem.html" title="interface in io.sphere.sdk.orders">DeliveryItem</a>&gt;&nbsp;items,
   java.util.List&lt;<a href="../../../../../../io/sphere/sdk/orders/ParcelDraft.html" title="interface in io.sphere.sdk.orders">ParcelDraft</a>&gt;&nbsp;parcels)</code>&nbsp;</td>
 </tr>
 </table>
@@ -225,7 +245,7 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html"
 <ul class="blockList">
 <li class="blockList">
 <h4>of</h4>
-<pre>public static&nbsp;<a href="../../../../../../io/sphere/sdk/orders/commands/updateactions/AddDelivery.html" title="class in io.sphere.sdk.orders.commands.updateactions">AddDelivery</a>&nbsp;of(java.util.List&lt;<a href="../../../../../../io/sphere/sdk/orders/DeliveryItem.html" title="class in io.sphere.sdk.orders">DeliveryItem</a>&gt;&nbsp;items,
+<pre>public static&nbsp;<a href="../../../../../../io/sphere/sdk/orders/commands/updateactions/AddDelivery.html" title="class in io.sphere.sdk.orders.commands.updateactions">AddDelivery</a>&nbsp;of(java.util.List&lt;<a href="../../../../../../io/sphere/sdk/orders/DeliveryItem.html" title="interface in io.sphere.sdk.orders">DeliveryItem</a>&gt;&nbsp;items,
                              java.util.List&lt;<a href="../../../../../../io/sphere/sdk/orders/ParcelDraft.html" title="interface in io.sphere.sdk.orders">ParcelDraft</a>&gt;&nbsp;parcels)</pre>
 </li>
 </ul>
@@ -235,7 +255,7 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html"
 <ul class="blockList">
 <li class="blockList">
 <h4>of</h4>
-<pre>public static&nbsp;<a href="../../../../../../io/sphere/sdk/orders/commands/updateactions/AddDelivery.html" title="class in io.sphere.sdk.orders.commands.updateactions">AddDelivery</a>&nbsp;of(java.util.List&lt;<a href="../../../../../../io/sphere/sdk/orders/DeliveryItem.html" title="class in io.sphere.sdk.orders">DeliveryItem</a>&gt;&nbsp;items)</pre>
+<pre>public static&nbsp;<a href="../../../../../../io/sphere/sdk/orders/commands/updateactions/AddDelivery.html" title="class in io.sphere.sdk.orders.commands.updateactions">AddDelivery</a>&nbsp;of(java.util.List&lt;<a href="../../../../../../io/sphere/sdk/orders/DeliveryItem.html" title="interface in io.sphere.sdk.orders">DeliveryItem</a>&gt;&nbsp;items)</pre>
 </li>
 </ul>
 <a name="getItems--">
@@ -244,7 +264,7 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html"
 <ul class="blockList">
 <li class="blockList">
 <h4>getItems</h4>
-<pre>public&nbsp;java.util.List&lt;<a href="../../../../../../io/sphere/sdk/orders/DeliveryItem.html" title="class in io.sphere.sdk.orders">DeliveryItem</a>&gt;&nbsp;getItems()</pre>
+<pre>public&nbsp;java.util.List&lt;<a href="../../../../../../io/sphere/sdk/orders/DeliveryItem.html" title="interface in io.sphere.sdk.orders">DeliveryItem</a>&gt;&nbsp;getItems()</pre>
 </li>
 </ul>
 <a name="getParcels--">

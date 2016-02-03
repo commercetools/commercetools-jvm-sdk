@@ -134,6 +134,43 @@ var activeTableTab = "activeTableTab";
 <br>
 <pre>public class <span class="typeNameLabel">DeliveryAddedMessage</span>
 extends <a href="../../../../../io/sphere/sdk/messages/GenericMessageImpl.html" title="class in io.sphere.sdk.messages">GenericMessageImpl</a>&lt;<a href="../../../../../io/sphere/sdk/orders/Order.html" title="interface in io.sphere.sdk.orders">Order</a>&gt;</pre>
+<div class="block">This message is the result of the <a href="../../../../../io/sphere/sdk/orders/commands/updateactions/AddDelivery.html" title="class in io.sphere.sdk.orders.commands.updateactions"><code>AddDelivery</code></a> update action.
+
+ <div id="io-sphere-sdk-orders-commands-OrderUpdateCommandTest-addDelivery--%s" class=code-example><pre><code class='java'>withOrder(client(), order -&gt; {
+    assertThat(order.getShippingInfo().getDeliveries()).isEmpty();
+    final List&lt;ParcelDraft&gt; parcels = asList(ParcelDraft.of(PARCEL_MEASUREMENTS, TRACKING_DATA));
+    final LineItem lineItem = order.getLineItems().get(0);
+    final long availableItemsToShip = 1;
+    final List&lt;DeliveryItem&gt; items = asList(DeliveryItem.of(lineItem, availableItemsToShip));
+    final Order updatedOrder = client().executeBlocking(OrderUpdateCommand.of(order, AddDelivery.of(items, parcels)));
+    final Delivery delivery = updatedOrder.getShippingInfo().getDeliveries().get(0);
+    assertThat(delivery.getItems()).isEqualTo(items);
+    final Parcel parcel = delivery.getParcels().get(0);
+    assertThat(parcel.getMeasurements()).isEqualTo(PARCEL_MEASUREMENTS);
+    assertThat(parcel.getTrackingData()).isEqualTo(TRACKING_DATA);
+
+    //you can observe a message
+    final Query&lt;DeliveryAddedMessage&gt; messageQuery = MessageQuery.of()
+            .withPredicates(m -&gt; m.resource().is(order))
+            .forMessageType(DeliveryAddedMessage.MESSAGE_HINT);
+    assertEventually(() -&gt; {
+        final Optional&lt;DeliveryAddedMessage&gt; deliveryAddedMessageOptional =
+                client().executeBlocking(messageQuery).head();
+        assertThat(deliveryAddedMessageOptional).isPresent();
+        final DeliveryAddedMessage deliveryAddedMessage = deliveryAddedMessageOptional.get();
+        final Delivery deliveryFromMessage = deliveryAddedMessage.getDelivery();
+        assertThat(deliveryFromMessage.getId()).isEqualTo(delivery.getId());
+        assertThat(deliveryFromMessage.getCreatedAt()).isEqualTo(delivery.getCreatedAt());
+        assertThat(deliveryFromMessage.getParcels())
+                .as("warning initial parcels are not contained in the message!")
+                .isNotEqualTo(delivery.getParcels())
+                .isEmpty();
+        assertThat(deliveryFromMessage.getItems()).isEqualTo(delivery.getItems());
+    });
+
+    return updatedOrder;
+});
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/orders/commands/OrderUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 </li>
 </ul>
 </div>
@@ -183,7 +220,7 @@ extends <a href="../../../../../io/sphere/sdk/messages/GenericMessageImpl.html" 
 <th class="colLast" scope="col">Method and Description</th>
 </tr>
 <tr id="i0" class="altColor">
-<td class="colFirst"><code><a href="../../../../../io/sphere/sdk/orders/Delivery.html" title="class in io.sphere.sdk.orders">Delivery</a></code></td>
+<td class="colFirst"><code><a href="../../../../../io/sphere/sdk/orders/Delivery.html" title="interface in io.sphere.sdk.orders">Delivery</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/orders/messages/DeliveryAddedMessage.html#getDelivery--">getDelivery</a></span>()</code>&nbsp;</td>
 </tr>
 </table>
@@ -293,7 +330,7 @@ extends <a href="../../../../../io/sphere/sdk/messages/GenericMessageImpl.html" 
 <ul class="blockListLast">
 <li class="blockList">
 <h4>getDelivery</h4>
-<pre>public&nbsp;<a href="../../../../../io/sphere/sdk/orders/Delivery.html" title="class in io.sphere.sdk.orders">Delivery</a>&nbsp;getDelivery()</pre>
+<pre>public&nbsp;<a href="../../../../../io/sphere/sdk/orders/Delivery.html" title="interface in io.sphere.sdk.orders">Delivery</a>&nbsp;getDelivery()</pre>
 </li>
 </ul>
 </li>
