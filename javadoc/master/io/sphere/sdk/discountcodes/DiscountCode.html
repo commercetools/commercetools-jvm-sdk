@@ -110,7 +110,10 @@ extends <a href="../../../../io/sphere/sdk/models/Resource.html" title="interfac
 <dl>
 <dt><span class="seeLabel">See Also:</span></dt>
 <dd><a href="../../../../io/sphere/sdk/discountcodes/commands/DiscountCodeCreateCommand.html" title="interface in io.sphere.sdk.discountcodes.commands"><code>DiscountCodeCreateCommand</code></a>, 
-<a href="../../../../io/sphere/sdk/discountcodes/commands/DiscountCodeCreateCommand.html" title="interface in io.sphere.sdk.discountcodes.commands"><code>DiscountCodeCreateCommand</code></a>, 
+<a href="../../../../io/sphere/sdk/discountcodes/commands/DiscountCodeUpdateCommand.html" title="interface in io.sphere.sdk.discountcodes.commands"><code>DiscountCodeUpdateCommand</code></a>, 
+<a href="../../../../io/sphere/sdk/discountcodes/commands/DiscountCodeDeleteCommand.html" title="interface in io.sphere.sdk.discountcodes.commands"><code>DiscountCodeDeleteCommand</code></a>, 
+<a href="../../../../io/sphere/sdk/discountcodes/queries/DiscountCodeQuery.html" title="interface in io.sphere.sdk.discountcodes.queries"><code>DiscountCodeQuery</code></a>, 
+<a href="../../../../io/sphere/sdk/discountcodes/queries/DiscountCodeByIdGet.html" title="interface in io.sphere.sdk.discountcodes.queries"><code>DiscountCodeByIdGet</code></a>, 
 <a href="../../../../io/sphere/sdk/cartdiscounts/CartDiscount.html#isRequiringDiscountCode--"><code>CartDiscount.isRequiringDiscountCode()</code></a></dd>
 </dl>
 </li>
@@ -133,39 +136,57 @@ extends <a href="../../../../io/sphere/sdk/models/Resource.html" title="interfac
 </tr>
 <tr id="i0" class="altColor">
 <td class="colFirst"><code>java.util.List&lt;<a href="../../../../io/sphere/sdk/models/Reference.html" title="interface in io.sphere.sdk.models">Reference</a>&lt;<a href="../../../../io/sphere/sdk/cartdiscounts/CartDiscount.html" title="interface in io.sphere.sdk.cartdiscounts">CartDiscount</a>&gt;&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/discountcodes/DiscountCode.html#getCartDiscounts--">getCartDiscounts</a></span>()</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/discountcodes/DiscountCode.html#getCartDiscounts--">getCartDiscounts</a></span>()</code>
+<div class="block">The referenced matching cart discounts can be applied to the cart once the discount code is added (<a href="../../../../io/sphere/sdk/carts/commands/updateactions/AddDiscountCode.html" title="class in io.sphere.sdk.carts.commands.updateactions"><code>AddDiscountCode</code></a>).</div>
+</td>
 </tr>
 <tr id="i1" class="rowColor">
 <td class="colFirst"><code>java.lang.String</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/discountcodes/DiscountCode.html#getCartPredicate--">getCartPredicate</a></span>()</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/discountcodes/DiscountCode.html#getCartPredicate--">getCartPredicate</a></span>()</code>
+<div class="block">The discount code can only be applied to carts that match this predicate.</div>
+</td>
 </tr>
 <tr id="i2" class="altColor">
 <td class="colFirst"><code>java.lang.String</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/discountcodes/DiscountCode.html#getCode--">getCode</a></span>()</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/discountcodes/DiscountCode.html#getCode--">getCode</a></span>()</code>
+<div class="block">Unique identifier of this discount code.</div>
+</td>
 </tr>
 <tr id="i3" class="rowColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/models/LocalizedString.html" title="class in io.sphere.sdk.models">LocalizedString</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/discountcodes/DiscountCode.html#getDescription--">getDescription</a></span>()</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/discountcodes/DiscountCode.html#getDescription--">getDescription</a></span>()</code>
+<div class="block">Description of this discount code.</div>
+</td>
 </tr>
 <tr id="i4" class="altColor">
 <td class="colFirst"><code>java.lang.Long</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/discountcodes/DiscountCode.html#getMaxApplications--">getMaxApplications</a></span>()</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/discountcodes/DiscountCode.html#getMaxApplications--">getMaxApplications</a></span>()</code>
+<div class="block">The discount code can only be applied maxApplications times.</div>
+</td>
 </tr>
 <tr id="i5" class="rowColor">
 <td class="colFirst"><code>java.lang.Long</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/discountcodes/DiscountCode.html#getMaxApplicationsPerCustomer--">getMaxApplicationsPerCustomer</a></span>()</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/discountcodes/DiscountCode.html#getMaxApplicationsPerCustomer--">getMaxApplicationsPerCustomer</a></span>()</code>
+<div class="block">The discount code can only be applied maxApplicationsPerCustomer times per customer.</div>
+</td>
 </tr>
 <tr id="i6" class="altColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/models/LocalizedString.html" title="class in io.sphere.sdk.models">LocalizedString</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/discountcodes/DiscountCode.html#getName--">getName</a></span>()</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/discountcodes/DiscountCode.html#getName--">getName</a></span>()</code>
+<div class="block">Name of this discount code.</div>
+</td>
 </tr>
 <tr id="i7" class="rowColor">
 <td class="colFirst"><code>java.util.List&lt;<a href="../../../../io/sphere/sdk/models/Reference.html" title="interface in io.sphere.sdk.models">Reference</a>&lt;com.fasterxml.jackson.databind.JsonNode&gt;&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/discountcodes/DiscountCode.html#getReferences--">getReferences</a></span>()</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/discountcodes/DiscountCode.html#getReferences--">getReferences</a></span>()</code>
+<div class="block">The backend will generate this array from the cartPredicate.</div>
+</td>
 </tr>
 <tr id="i8" class="altColor">
 <td class="colFirst"><code>java.lang.Boolean</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/discountcodes/DiscountCode.html#isActive--">isActive</a></span>()</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/discountcodes/DiscountCode.html#isActive--">isActive</a></span>()</code>
+<div class="block">Flag if this cart discount is enabled</div>
+</td>
 </tr>
 <tr id="i9" class="rowColor">
 <td class="colFirst"><code>static <a href="../../../../io/sphere/sdk/models/Reference.html" title="interface in io.sphere.sdk.models">Reference</a>&lt;<a href="../../../../io/sphere/sdk/discountcodes/DiscountCode.html" title="interface in io.sphere.sdk.discountcodes">DiscountCode</a>&gt;</code></td>
@@ -242,6 +263,13 @@ extends <a href="../../../../io/sphere/sdk/models/Resource.html" title="interfac
 <li class="blockList">
 <h4>getCartDiscounts</h4>
 <pre>java.util.List&lt;<a href="../../../../io/sphere/sdk/models/Reference.html" title="interface in io.sphere.sdk.models">Reference</a>&lt;<a href="../../../../io/sphere/sdk/cartdiscounts/CartDiscount.html" title="interface in io.sphere.sdk.cartdiscounts">CartDiscount</a>&gt;&gt;&nbsp;getCartDiscounts()</pre>
+<div class="block">The referenced matching cart discounts can be applied to the cart once the discount code is added (<a href="../../../../io/sphere/sdk/carts/commands/updateactions/AddDiscountCode.html" title="class in io.sphere.sdk.carts.commands.updateactions"><code>AddDiscountCode</code></a>).</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>cart discounts</dd>
+<dt><span class="seeLabel">See Also:</span></dt>
+<dd><a href="../../../../io/sphere/sdk/discountcodes/commands/updateactions/ChangeCartDiscounts.html" title="class in io.sphere.sdk.discountcodes.commands.updateactions"><code>ChangeCartDiscounts</code></a></dd>
+</dl>
 </li>
 </ul>
 <a name="getCartPredicate--">
@@ -252,6 +280,13 @@ extends <a href="../../../../io/sphere/sdk/models/Resource.html" title="interfac
 <h4>getCartPredicate</h4>
 <pre>@Nullable
 java.lang.String&nbsp;getCartPredicate()</pre>
+<div class="block">The discount code can only be applied to carts that match this predicate.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>predicate or null</dd>
+<dt><span class="seeLabel">See Also:</span></dt>
+<dd><a href="../../../../io/sphere/sdk/discountcodes/commands/updateactions/SetCartPredicate.html" title="class in io.sphere.sdk.discountcodes.commands.updateactions"><code>SetCartPredicate</code></a></dd>
+</dl>
 </li>
 </ul>
 <a name="getCode--">
@@ -261,6 +296,11 @@ java.lang.String&nbsp;getCartPredicate()</pre>
 <li class="blockList">
 <h4>getCode</h4>
 <pre>java.lang.String&nbsp;getCode()</pre>
+<div class="block">Unique identifier of this discount code. This value is added to the cart (<a href="../../../../io/sphere/sdk/carts/commands/updateactions/AddDiscountCode.html" title="class in io.sphere.sdk.carts.commands.updateactions"><code>AddDiscountCode</code></a>) to enable the related cart discounts in the cart.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>code</dd>
+</dl>
 </li>
 </ul>
 <a name="getDescription--">
@@ -271,6 +311,13 @@ java.lang.String&nbsp;getCartPredicate()</pre>
 <h4>getDescription</h4>
 <pre>@Nullable
 <a href="../../../../io/sphere/sdk/models/LocalizedString.html" title="class in io.sphere.sdk.models">LocalizedString</a>&nbsp;getDescription()</pre>
+<div class="block">Description of this discount code.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>description or null</dd>
+<dt><span class="seeLabel">See Also:</span></dt>
+<dd><a href="../../../../io/sphere/sdk/discountcodes/commands/updateactions/SetDescription.html" title="class in io.sphere.sdk.discountcodes.commands.updateactions"><code>SetDescription</code></a></dd>
+</dl>
 </li>
 </ul>
 <a name="isActive--">
@@ -280,6 +327,12 @@ java.lang.String&nbsp;getCartPredicate()</pre>
 <li class="blockList">
 <h4>isActive</h4>
 <pre>java.lang.Boolean&nbsp;isActive()</pre>
+<div class="block">Flag if this cart discount is enabled</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dt><span class="seeLabel">See Also:</span></dt>
+<dd><a href="../../../../io/sphere/sdk/cartdiscounts/commands/updateactions/ChangeIsActive.html" title="class in io.sphere.sdk.cartdiscounts.commands.updateactions"><code>ChangeIsActive</code></a></dd>
+</dl>
 </li>
 </ul>
 <a name="getMaxApplications--">
@@ -290,6 +343,13 @@ java.lang.String&nbsp;getCartPredicate()</pre>
 <h4>getMaxApplications</h4>
 <pre>@Nullable
 java.lang.Long&nbsp;getMaxApplications()</pre>
+<div class="block">The discount code can only be applied maxApplications times.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>max applications or null</dd>
+<dt><span class="seeLabel">See Also:</span></dt>
+<dd><a href="../../../../io/sphere/sdk/discountcodes/commands/updateactions/SetMaxApplications.html" title="class in io.sphere.sdk.discountcodes.commands.updateactions"><code>SetMaxApplications</code></a></dd>
+</dl>
 </li>
 </ul>
 <a name="getMaxApplicationsPerCustomer--">
@@ -300,6 +360,13 @@ java.lang.Long&nbsp;getMaxApplications()</pre>
 <h4>getMaxApplicationsPerCustomer</h4>
 <pre>@Nullable
 java.lang.Long&nbsp;getMaxApplicationsPerCustomer()</pre>
+<div class="block">The discount code can only be applied maxApplicationsPerCustomer times per customer.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>max applications or null</dd>
+<dt><span class="seeLabel">See Also:</span></dt>
+<dd><a href="../../../../io/sphere/sdk/discountcodes/commands/updateactions/SetMaxApplicationsPerCustomer.html" title="class in io.sphere.sdk.discountcodes.commands.updateactions"><code>SetMaxApplicationsPerCustomer</code></a></dd>
+</dl>
 </li>
 </ul>
 <a name="getName--">
@@ -310,6 +377,13 @@ java.lang.Long&nbsp;getMaxApplicationsPerCustomer()</pre>
 <h4>getName</h4>
 <pre>@Nullable
 <a href="../../../../io/sphere/sdk/models/LocalizedString.html" title="class in io.sphere.sdk.models">LocalizedString</a>&nbsp;getName()</pre>
+<div class="block">Name of this discount code.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>name or null</dd>
+<dt><span class="seeLabel">See Also:</span></dt>
+<dd><a href="../../../../io/sphere/sdk/discountcodes/commands/updateactions/SetName.html" title="class in io.sphere.sdk.discountcodes.commands.updateactions"><code>SetName</code></a></dd>
+</dl>
 </li>
 </ul>
 <a name="getReferences--">
@@ -319,6 +393,11 @@ java.lang.Long&nbsp;getMaxApplicationsPerCustomer()</pre>
 <li class="blockList">
 <h4>getReferences</h4>
 <pre>java.util.List&lt;<a href="../../../../io/sphere/sdk/models/Reference.html" title="interface in io.sphere.sdk.models">Reference</a>&lt;com.fasterxml.jackson.databind.JsonNode&gt;&gt;&nbsp;getReferences()</pre>
+<div class="block">The backend will generate this array from the cartPredicate. It contains the references of all the resources that are addressed in the predicate.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>references</dd>
+</dl>
 </li>
 </ul>
 <a name="toReference--">
