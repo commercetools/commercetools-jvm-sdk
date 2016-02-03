@@ -8,6 +8,9 @@ import io.sphere.sdk.models.Identifiable;
 import java.time.ZonedDateTime;
 import java.util.List;
 
+/**
+ * Deliveries are compilations of information on how the articles are being shipped to the customers. A delivery can contain multiple items. All items in a delivery can be shipped with several parcels. To create a delivery, it is necessary to have a shipment method assigned to the order. A sample use case for a delivery object is to create a delivery note.
+ */
 public class Delivery extends Base implements Identifiable<Delivery>, CreationTimestamped {
     private final String id;
     private final ZonedDateTime createdAt;
