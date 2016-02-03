@@ -155,7 +155,7 @@
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/MetaModelQueryDslBuilder.html#additionalHttpQueryParameters">additionalHttpQueryParameters</a></span> - Variable in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/MetaModelQueryDslBuilder.html" title="class in io.sphere.sdk.queries">MetaModelQueryDslBuilder</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/MetaModelQueryDslBuilder.html#additionalHttpQueryParameters-java.util.List-">additionalHttpQueryParameters(List&lt;HttpQueryParameter&gt;)</a></span> - Method in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/MetaModelQueryDslBuilder.html" title="class in io.sphere.sdk.queries">MetaModelQueryDslBuilder</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/MetaModelQueryDslBuilder.html#additionalHttpQueryParameters-java.util.List-">additionalHttpQueryParameters(List&lt;NameValuePair&gt;)</a></span> - Method in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/MetaModelQueryDslBuilder.html" title="class in io.sphere.sdk.queries">MetaModelQueryDslBuilder</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/MetaModelQueryDslImpl.html#additionalHttpQueryParameters--">additionalHttpQueryParameters()</a></span> - Method in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="class in io.sphere.sdk.queries">MetaModelQueryDslImpl</a></dt>
 <dd>&nbsp;</dd>
@@ -163,7 +163,7 @@
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/search/MetaModelSearchDslBuilder.html#additionalQueryParameters">additionalQueryParameters</a></span> - Variable in class io.sphere.sdk.search.<a href="io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="class in io.sphere.sdk.search">MetaModelSearchDslBuilder</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/search/MetaModelSearchDslBuilder.html#additionalQueryParameters-java.util.List-">additionalQueryParameters(List&lt;HttpQueryParameter&gt;)</a></span> - Method in class io.sphere.sdk.search.<a href="io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="class in io.sphere.sdk.search">MetaModelSearchDslBuilder</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/search/MetaModelSearchDslBuilder.html#additionalQueryParameters-java.util.List-">additionalQueryParameters(List&lt;NameValuePair&gt;)</a></span> - Method in class io.sphere.sdk.search.<a href="io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="class in io.sphere.sdk.search">MetaModelSearchDslBuilder</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/search/MetaModelSearchDslImpl.html#additionalQueryParameters--">additionalQueryParameters()</a></span> - Method in class io.sphere.sdk.search.<a href="io/sphere/sdk/search/MetaModelSearchDslImpl.html" title="class in io.sphere.sdk.search">MetaModelSearchDslImpl</a></dt>
 <dd>&nbsp;</dd>
@@ -1806,23 +1806,23 @@
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/client/SphereAsyncHttpClientFactory.html#create--">create()</a></span> - Static method in class io.sphere.sdk.client.<a href="io/sphere/sdk/client/SphereAsyncHttpClientFactory.html" title="class in io.sphere.sdk.client">SphereAsyncHttpClientFactory</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/client/SphereClientFactory.html#createClient-io.sphere.sdk.client.SphereClientConfig-">createClient(SphereClientConfig)</a></span> - Method in class io.sphere.sdk.client.<a href="io/sphere/sdk/client/SphereClientFactory.html" title="class in io.sphere.sdk.client">SphereClientFactory</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/client/SphereClientFactory.html#createClient-io.sphere.sdk.client.SphereClientConfig-">createClient(SphereClientConfig)</a></span> - Method in interface io.sphere.sdk.client.<a href="io/sphere/sdk/client/SphereClientFactory.html" title="interface in io.sphere.sdk.client">SphereClientFactory</a></dt>
 <dd>
 <div class="block">Creates a standard client with configurable service URLs.</div>
 </dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/client/SphereClientFactory.html#createClient-io.sphere.sdk.client.SphereApiConfig-io.sphere.sdk.client.SphereAccessTokenSupplier-">createClient(SphereApiConfig, SphereAccessTokenSupplier)</a></span> - Method in class io.sphere.sdk.client.<a href="io/sphere/sdk/client/SphereClientFactory.html" title="class in io.sphere.sdk.client">SphereClientFactory</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/client/SphereClientFactory.html#createClient-io.sphere.sdk.client.SphereApiConfig-io.sphere.sdk.client.SphereAccessTokenSupplier-">createClient(SphereApiConfig, SphereAccessTokenSupplier)</a></span> - Method in interface io.sphere.sdk.client.<a href="io/sphere/sdk/client/SphereClientFactory.html" title="interface in io.sphere.sdk.client">SphereClientFactory</a></dt>
 <dd>
 <div class="block">Creates a client with a custom service to provide access tokens.</div>
 </dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/client/SphereClientFactory.html#createClient-java.lang.String-java.lang.String-java.lang.String-">createClient(String, String, String)</a></span> - Method in class io.sphere.sdk.client.<a href="io/sphere/sdk/client/SphereClientFactory.html" title="class in io.sphere.sdk.client">SphereClientFactory</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/client/SphereClientFactory.html#createClient-java.lang.String-java.lang.String-java.lang.String-">createClient(String, String, String)</a></span> - Method in interface io.sphere.sdk.client.<a href="io/sphere/sdk/client/SphereClientFactory.html" title="interface in io.sphere.sdk.client">SphereClientFactory</a></dt>
 <dd>
 <div class="block">Creates a standard client suitable for online shops.</div>
 </dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/client/SphereClientFactory.html#createClientOfApiConfigAndAccessToken-io.sphere.sdk.client.SphereApiConfig-java.lang.String-io.sphere.sdk.http.HttpClient-">createClientOfApiConfigAndAccessToken(SphereApiConfig, String, HttpClient)</a></span> - Method in class io.sphere.sdk.client.<a href="io/sphere/sdk/client/SphereClientFactory.html" title="class in io.sphere.sdk.client">SphereClientFactory</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/client/SphereClientFactory.html#createClientOfApiConfigAndAccessToken-io.sphere.sdk.client.SphereApiConfig-java.lang.String-io.sphere.sdk.http.HttpClient-">createClientOfApiConfigAndAccessToken(SphereApiConfig, String, HttpClient)</a></span> - Method in interface io.sphere.sdk.client.<a href="io/sphere/sdk/client/SphereClientFactory.html" title="interface in io.sphere.sdk.client">SphereClientFactory</a></dt>
 <dd>
 <div class="block">Creates a client which relies on an access token and does not refresh it, it reuses an existing http client.</div>
 </dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/client/SphereClientFactory.html#createClientOfApiConfigAndAccessToken-io.sphere.sdk.client.SphereApiConfig-java.lang.String-">createClientOfApiConfigAndAccessToken(SphereApiConfig, String)</a></span> - Method in class io.sphere.sdk.client.<a href="io/sphere/sdk/client/SphereClientFactory.html" title="class in io.sphere.sdk.client">SphereClientFactory</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/client/SphereClientFactory.html#createClientOfApiConfigAndAccessToken-io.sphere.sdk.client.SphereApiConfig-java.lang.String-">createClientOfApiConfigAndAccessToken(SphereApiConfig, String)</a></span> - Method in interface io.sphere.sdk.client.<a href="io/sphere/sdk/client/SphereClientFactory.html" title="interface in io.sphere.sdk.client">SphereClientFactory</a></dt>
 <dd>
 <div class="block">Creates a client which relies on an access token and does not refresh it.</div>
 </dd>
@@ -1858,9 +1858,9 @@
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/ResourceQueryModelImpl.html#createdAt--">createdAt()</a></span> - Method in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/ResourceQueryModelImpl.html" title="class in io.sphere.sdk.queries">ResourceQueryModelImpl</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/client/SphereClientFactory.html#createHttpClient--">createHttpClient()</a></span> - Method in class io.sphere.sdk.client.<a href="io/sphere/sdk/client/SphereClientFactory.html" title="class in io.sphere.sdk.client">SphereClientFactory</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/client/SphereClientFactory.html#createHttpClient--">createHttpClient()</a></span> - Method in interface io.sphere.sdk.client.<a href="io/sphere/sdk/client/SphereClientFactory.html" title="interface in io.sphere.sdk.client">SphereClientFactory</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/client/SphereClientFactory.html#createHttpTestDouble-java.util.function.Function-">createHttpTestDouble(Function&lt;HttpRequestIntent, HttpResponse&gt;)</a></span> - Static method in class io.sphere.sdk.client.<a href="io/sphere/sdk/client/SphereClientFactory.html" title="class in io.sphere.sdk.client">SphereClientFactory</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/client/SphereClientFactory.html#createHttpTestDouble-java.util.function.Function-">createHttpTestDouble(Function&lt;HttpRequestIntent, HttpResponse&gt;)</a></span> - Static method in interface io.sphere.sdk.client.<a href="io/sphere/sdk/client/SphereClientFactory.html" title="interface in io.sphere.sdk.client">SphereClientFactory</a></dt>
 <dd>
 <div class="block"><span class="deprecatedLabel">Deprecated.</span>
 <div class="block"><span class="deprecationComment">use <a href="io/sphere/sdk/client/TestDoubleSphereClientFactory.html#createHttpTestDouble-java.util.function.Function-"><code>TestDoubleSphereClientFactory.createHttpTestDouble(Function)</code></a></span></div>
@@ -1870,7 +1870,7 @@
 <dd>
 <div class="block">Creates a test double for a SPHERE.IO client which enables to fake http responses from SPHERE.IO.</div>
 </dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/client/SphereClientFactory.html#createObjectTestDouble-java.util.function.Function-">createObjectTestDouble(Function&lt;HttpRequestIntent, Object&gt;)</a></span> - Static method in class io.sphere.sdk.client.<a href="io/sphere/sdk/client/SphereClientFactory.html" title="class in io.sphere.sdk.client">SphereClientFactory</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/client/SphereClientFactory.html#createObjectTestDouble-java.util.function.Function-">createObjectTestDouble(Function&lt;HttpRequestIntent, Object&gt;)</a></span> - Static method in interface io.sphere.sdk.client.<a href="io/sphere/sdk/client/SphereClientFactory.html" title="interface in io.sphere.sdk.client">SphereClientFactory</a></dt>
 <dd>
 <div class="block"><span class="deprecatedLabel">Deprecated.</span>
 <div class="block"><span class="deprecationComment">use <a href="io/sphere/sdk/client/TestDoubleSphereClientFactory.html#createObjectTestDouble-java.util.function.Function-"><code>TestDoubleSphereClientFactory.createObjectTestDouble(Function)</code></a></span></div>
@@ -4523,8 +4523,6 @@
 </dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/customobjects/CustomObjectDraft.html#getKey--">getKey()</a></span> - Method in class io.sphere.sdk.customobjects.<a href="io/sphere/sdk/customobjects/CustomObjectDraft.html" title="class in io.sphere.sdk.customobjects">CustomObjectDraft</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/http/HttpQueryParameter.html#getKey--">getKey()</a></span> - Method in class io.sphere.sdk.http.<a href="io/sphere/sdk/http/HttpQueryParameter.html" title="class in io.sphere.sdk.http">HttpQueryParameter</a></dt>
-<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/EnumValue.html#getKey--">getKey()</a></span> - Method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/EnumValue.html" title="class in io.sphere.sdk.models">EnumValue</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/LocalizedEnumValue.html#getKey--">getKey()</a></span> - Method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/LocalizedEnumValue.html" title="class in io.sphere.sdk.models">LocalizedEnumValue</a></dt>
@@ -5050,7 +5048,9 @@
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/commands/updateactions/SetOrderNumber.html#getOrderNumber--">getOrderNumber()</a></span> - Method in class io.sphere.sdk.orders.commands.updateactions.<a href="io/sphere/sdk/orders/commands/updateactions/SetOrderNumber.html" title="class in io.sphere.sdk.orders.commands.updateactions">SetOrderNumber</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/Order.html#getOrderNumber--">getOrderNumber()</a></span> - Method in interface io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/Order.html" title="interface in io.sphere.sdk.orders">Order</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">String that uniquely identifies an order.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/OrderFromCartDraft.html#getOrderNumber--">getOrderNumber()</a></span> - Method in interface io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/OrderFromCartDraft.html" title="interface in io.sphere.sdk.orders">OrderFromCartDraft</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/OrderImportDraft.html#getOrderNumber--">getOrderNumber()</a></span> - Method in interface io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/OrderImportDraft.html" title="interface in io.sphere.sdk.orders">OrderImportDraft</a></dt>
@@ -5060,7 +5060,9 @@
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/messages/OrderStateChangedMessage.html#getOrderState--">getOrderState()</a></span> - Method in class io.sphere.sdk.orders.messages.<a href="io/sphere/sdk/orders/messages/OrderStateChangedMessage.html" title="class in io.sphere.sdk.orders.messages">OrderStateChangedMessage</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/Order.html#getOrderState--">getOrderState()</a></span> - Method in interface io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/Order.html" title="interface in io.sphere.sdk.orders">Order</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">State of this order.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/OrderImportDraft.html#getOrderState--">getOrderState()</a></span> - Method in interface io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/OrderImportDraft.html" title="interface in io.sphere.sdk.orders">OrderImportDraft</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/utils/MapUtils.html#getOrThrow-java.util.Map-K-java.util.function.Supplier-">getOrThrow(Map&lt;K, V&gt;, K, Supplier&lt;E&gt;)</a></span> - Static method in class io.sphere.sdk.utils.<a href="io/sphere/sdk/utils/MapUtils.html" title="class in io.sphere.sdk.utils">MapUtils</a></dt>
@@ -5158,7 +5160,9 @@
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/commands/updateactions/SetReturnPaymentState.html#getPaymentState--">getPaymentState()</a></span> - Method in class io.sphere.sdk.orders.commands.updateactions.<a href="io/sphere/sdk/orders/commands/updateactions/SetReturnPaymentState.html" title="class in io.sphere.sdk.orders.commands.updateactions">SetReturnPaymentState</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/Order.html#getPaymentState--">getPaymentState()</a></span> - Method in interface io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/Order.html" title="interface in io.sphere.sdk.orders">Order</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Payment state of this order.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/OrderFromCartDraft.html#getPaymentState--">getPaymentState()</a></span> - Method in interface io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/OrderFromCartDraft.html" title="interface in io.sphere.sdk.orders">OrderFromCartDraft</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/OrderImportDraft.html#getPaymentState--">getPaymentState()</a></span> - Method in interface io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/OrderImportDraft.html" title="interface in io.sphere.sdk.orders">OrderImportDraft</a></dt>
@@ -5474,7 +5478,9 @@
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/commands/updateactions/SetReturnShipmentState.html#getShipmentState--">getShipmentState()</a></span> - Method in class io.sphere.sdk.orders.commands.updateactions.<a href="io/sphere/sdk/orders/commands/updateactions/SetReturnShipmentState.html" title="class in io.sphere.sdk.orders.commands.updateactions">SetReturnShipmentState</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/Order.html#getShipmentState--">getShipmentState()</a></span> - Method in interface io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/Order.html" title="interface in io.sphere.sdk.orders">Order</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Shipment state of this order.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/OrderImportDraft.html#getShipmentState--">getShipmentState()</a></span> - Method in interface io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/OrderImportDraft.html" title="interface in io.sphere.sdk.orders">OrderImportDraft</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/ReturnItem.html#getShipmentState--">getShipmentState()</a></span> - Method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/ReturnItem.html" title="class in io.sphere.sdk.orders">ReturnItem</a></dt>
@@ -5703,6 +5709,8 @@
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/LineItemDraftDsl.html#getSupplyChannel--">getSupplyChannel()</a></span> - Method in class io.sphere.sdk.carts.<a href="io/sphere/sdk/carts/LineItemDraftDsl.html" title="class in io.sphere.sdk.carts">LineItemDraftDsl</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/inventory/commands/updateactions/SetSupplyChannel.html#getSupplyChannel--">getSupplyChannel()</a></span> - Method in class io.sphere.sdk.inventory.commands.updateactions.<a href="io/sphere/sdk/inventory/commands/updateactions/SetSupplyChannel.html" title="class in io.sphere.sdk.inventory.commands.updateactions">SetSupplyChannel</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/inventory/InventoryEntry.html#getSupplyChannel--">getSupplyChannel()</a></span> - Method in interface io.sphere.sdk.inventory.<a href="io/sphere/sdk/inventory/InventoryEntry.html" title="interface in io.sphere.sdk.inventory">InventoryEntry</a></dt>
 <dd>
 <div class="block">Optional connection to particular supplier.</div>
@@ -5718,7 +5726,9 @@
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/SyncInfo.html#getSyncedAt--">getSyncedAt()</a></span> - Method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/SyncInfo.html" title="class in io.sphere.sdk.orders">SyncInfo</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/Order.html#getSyncInfo--">getSyncInfo()</a></span> - Method in interface io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/Order.html" title="interface in io.sphere.sdk.orders">Order</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Sync info of this order.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/cartdiscounts/CartDiscount.html#getTarget--">getTarget()</a></span> - Method in interface io.sphere.sdk.cartdiscounts.<a href="io/sphere/sdk/cartdiscounts/CartDiscount.html" title="interface in io.sphere.sdk.cartdiscounts">CartDiscount</a></dt>
 <dd>
 <div class="block">Defines what part of the cart will be discounted.</div>
@@ -6119,8 +6129,6 @@
 </dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/customobjects/CustomObjectDraft.html#getValue--">getValue()</a></span> - Method in class io.sphere.sdk.customobjects.<a href="io/sphere/sdk/customobjects/CustomObjectDraft.html" title="class in io.sphere.sdk.customobjects">CustomObjectDraft</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/http/HttpQueryParameter.html#getValue--">getValue()</a></span> - Method in class io.sphere.sdk.http.<a href="io/sphere/sdk/http/HttpQueryParameter.html" title="class in io.sphere.sdk.http">HttpQueryParameter</a></dt>
-<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/http/NameValuePair.html#getValue--">getValue()</a></span> - Method in interface io.sphere.sdk.http.<a href="io/sphere/sdk/http/NameValuePair.html" title="interface in io.sphere.sdk.http">NameValuePair</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/LocalizedStringEntry.html#getValue--">getValue()</a></span> - Method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/LocalizedStringEntry.html" title="class in io.sphere.sdk.models">LocalizedStringEntry</a></dt>
@@ -6403,8 +6411,6 @@
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/http/HttpMethod.html" title="enum in io.sphere.sdk.http"><span class="typeNameLink">HttpMethod</span></a> - Enum in <a href="io/sphere/sdk/http/package-summary.html">io.sphere.sdk.http</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="io/sphere/sdk/http/HttpQueryParameter.html" title="class in io.sphere.sdk.http"><span class="typeNameLink">HttpQueryParameter</span></a> - Class in <a href="io/sphere/sdk/http/package-summary.html">io.sphere.sdk.http</a></dt>
-<dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/http/HttpRequest.html" title="interface in io.sphere.sdk.http"><span class="typeNameLink">HttpRequest</span></a> - Interface in <a href="io/sphere/sdk/http/package-summary.html">io.sphere.sdk.http</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/http/HttpRequestBody.html" title="interface in io.sphere.sdk.http"><span class="typeNameLink">HttpRequestBody</span></a> - Interface in <a href="io/sphere/sdk/http/package-summary.html">io.sphere.sdk.http</a></dt>
@@ -6615,10 +6621,6 @@
 <dd>
 <div class="block">Invalid JSON was sent to SPHERE.IO.</div>
 </dd>
-<dt><a href="io/sphere/sdk/queries/InvalidQueryOffsetException.html" title="class in io.sphere.sdk.queries"><span class="typeNameLink">InvalidQueryOffsetException</span></a> - Exception in <a href="io/sphere/sdk/queries/package-summary.html">io.sphere.sdk.queries</a></dt>
-<dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/InvalidQueryOffsetException.html#InvalidQueryOffsetException-java.lang.Long-">InvalidQueryOffsetException(Long)</a></span> - Constructor for exception io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/InvalidQueryOffsetException.html" title="class in io.sphere.sdk.queries">InvalidQueryOffsetException</a></dt>
-<dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/search/model/InvalidRangeException.html" title="class in io.sphere.sdk.search.model"><span class="typeNameLink">InvalidRangeException</span></a> - Exception in <a href="io/sphere/sdk/search/model/package-summary.html">io.sphere.sdk.search.model</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/search/model/InvalidRangeException.html#InvalidRangeException--">InvalidRangeException()</a></span> - Constructor for exception io.sphere.sdk.search.model.<a href="io/sphere/sdk/search/model/InvalidRangeException.html" title="class in io.sphere.sdk.search.model">InvalidRangeException</a></dt>
@@ -6684,7 +6686,7 @@
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/inventory/commands/InventoryEntryUpdateCommand.html" title="interface in io.sphere.sdk.inventory.commands"><span class="typeNameLink">InventoryEntryUpdateCommand</span></a> - Interface in <a href="io/sphere/sdk/inventory/commands/package-summary.html">io.sphere.sdk.inventory.commands</a></dt>
 <dd>
-<div class="block"><p id=update-actions>Known UpdateActions</p><ul><li><a href="updateactions/AddQuantity.html">AddQuantity</a></li><li><a href="updateactions/ChangeQuantity.html">ChangeQuantity</a></li><li><a href="updateactions/RemoveQuantity.html">RemoveQuantity</a></li><li><a href="updateactions/SetExpectedDelivery.html">SetExpectedDelivery</a></li><li><a href="updateactions/SetRestockableInDays.html">SetRestockableInDays</a></li></ul></div>
+<div class="block"><p id=update-actions>Known UpdateActions</p><ul><li><a href="updateactions/AddQuantity.html">AddQuantity</a></li><li><a href="updateactions/ChangeQuantity.html">ChangeQuantity</a></li><li><a href="updateactions/RemoveQuantity.html">RemoveQuantity</a></li><li><a href="updateactions/SetExpectedDelivery.html">SetExpectedDelivery</a></li><li><a href="updateactions/SetRestockableInDays.html">SetRestockableInDays</a></li><li><a href="updateactions/SetSupplyChannel.html">SetSupplyChannel</a></li></ul></div>
 </dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/CartDraftBuilder.html#inventoryMode-io.sphere.sdk.carts.InventoryMode-">inventoryMode(InventoryMode)</a></span> - Method in class io.sphere.sdk.carts.<a href="io/sphere/sdk/carts/CartDraftBuilder.html" title="class in io.sphere.sdk.carts">CartDraftBuilder</a></dt>
 <dd>&nbsp;</dd>
@@ -8401,13 +8403,13 @@
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/queries/MetaModelGetDslImpl.html" title="class in io.sphere.sdk.queries"><span class="typeNameLink">MetaModelGetDslImpl</span></a>&lt;<a href="io/sphere/sdk/queries/MetaModelGetDslImpl.html" title="type parameter in MetaModelGetDslImpl">R</a>,<a href="io/sphere/sdk/queries/MetaModelGetDslImpl.html" title="type parameter in MetaModelGetDslImpl">T</a>,<a href="io/sphere/sdk/queries/MetaModelGetDslImpl.html" title="type parameter in MetaModelGetDslImpl">C</a> extends <a href="io/sphere/sdk/queries/MetaModelGetDsl.html" title="interface in io.sphere.sdk.queries">MetaModelGetDsl</a>&lt;<a href="io/sphere/sdk/queries/MetaModelGetDslImpl.html" title="type parameter in MetaModelGetDslImpl">R</a>,<a href="io/sphere/sdk/queries/MetaModelGetDslImpl.html" title="type parameter in MetaModelGetDslImpl">T</a>,<a href="io/sphere/sdk/queries/MetaModelGetDslImpl.html" title="type parameter in MetaModelGetDslImpl">C</a>,<a href="io/sphere/sdk/queries/MetaModelGetDslImpl.html" title="type parameter in MetaModelGetDslImpl">E</a>&gt;,<a href="io/sphere/sdk/queries/MetaModelGetDslImpl.html" title="type parameter in MetaModelGetDslImpl">E</a>&gt; - Class in <a href="io/sphere/sdk/queries/package-summary.html">io.sphere.sdk.queries</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/MetaModelGetDslImpl.html#MetaModelGetDslImpl-io.sphere.sdk.client.JsonEndpoint-java.lang.String-E-java.util.function.Function-java.util.List-">MetaModelGetDslImpl(JsonEndpoint&lt;R&gt;, String, E, Function&lt;MetaModelGetDslBuilder&lt;R, T, C, E&gt;, C&gt;, List&lt;HttpQueryParameter&gt;)</a></span> - Constructor for class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/MetaModelGetDslImpl.html" title="class in io.sphere.sdk.queries">MetaModelGetDslImpl</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/MetaModelGetDslImpl.html#MetaModelGetDslImpl-io.sphere.sdk.client.JsonEndpoint-java.lang.String-E-java.util.function.Function-java.util.List-">MetaModelGetDslImpl(JsonEndpoint&lt;R&gt;, String, E, Function&lt;MetaModelGetDslBuilder&lt;R, T, C, E&gt;, C&gt;, List&lt;NameValuePair&gt;)</a></span> - Constructor for class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/MetaModelGetDslImpl.html" title="class in io.sphere.sdk.queries">MetaModelGetDslImpl</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/MetaModelGetDslImpl.html#MetaModelGetDslImpl-java.lang.String-io.sphere.sdk.client.JsonEndpoint-E-java.util.function.Function-">MetaModelGetDslImpl(String, JsonEndpoint&lt;R&gt;, E, Function&lt;MetaModelGetDslBuilder&lt;R, T, C, E&gt;, C&gt;)</a></span> - Constructor for class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/MetaModelGetDslImpl.html" title="class in io.sphere.sdk.queries">MetaModelGetDslImpl</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/MetaModelGetDslImpl.html#MetaModelGetDslImpl-io.sphere.sdk.queries.MetaModelGetDslBuilder-">MetaModelGetDslImpl(MetaModelGetDslBuilder&lt;R, T, C, E&gt;)</a></span> - Constructor for class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/MetaModelGetDslImpl.html" title="class in io.sphere.sdk.queries">MetaModelGetDslImpl</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/MetaModelGetDslImpl.html#MetaModelGetDslImpl-com.fasterxml.jackson.databind.JavaType-java.lang.String-java.lang.String-java.util.List-E-java.util.function.Function-java.util.List-">MetaModelGetDslImpl(JavaType, String, String, List&lt;ExpansionPath&lt;T&gt;&gt;, E, Function&lt;MetaModelGetDslBuilder&lt;R, T, C, E&gt;, C&gt;, List&lt;HttpQueryParameter&gt;)</a></span> - Constructor for class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/MetaModelGetDslImpl.html" title="class in io.sphere.sdk.queries">MetaModelGetDslImpl</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/MetaModelGetDslImpl.html#MetaModelGetDslImpl-com.fasterxml.jackson.databind.JavaType-java.lang.String-java.lang.String-java.util.List-E-java.util.function.Function-java.util.List-">MetaModelGetDslImpl(JavaType, String, String, List&lt;ExpansionPath&lt;T&gt;&gt;, E, Function&lt;MetaModelGetDslBuilder&lt;R, T, C, E&gt;, C&gt;, List&lt;NameValuePair&gt;)</a></span> - Constructor for class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/MetaModelGetDslImpl.html" title="class in io.sphere.sdk.queries">MetaModelGetDslImpl</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/queries/MetaModelQueryDsl.html" title="interface in io.sphere.sdk.queries"><span class="typeNameLink">MetaModelQueryDsl</span></a>&lt;<a href="io/sphere/sdk/queries/MetaModelQueryDsl.html" title="type parameter in MetaModelQueryDsl">T</a>,<a href="io/sphere/sdk/queries/MetaModelQueryDsl.html" title="type parameter in MetaModelQueryDsl">C</a> extends <a href="io/sphere/sdk/queries/MetaModelQueryDsl.html" title="interface in io.sphere.sdk.queries">MetaModelQueryDsl</a>&lt;<a href="io/sphere/sdk/queries/MetaModelQueryDsl.html" title="type parameter in MetaModelQueryDsl">T</a>,<a href="io/sphere/sdk/queries/MetaModelQueryDsl.html" title="type parameter in MetaModelQueryDsl">C</a>,<a href="io/sphere/sdk/queries/MetaModelQueryDsl.html" title="type parameter in MetaModelQueryDsl">Q</a>,<a href="io/sphere/sdk/queries/MetaModelQueryDsl.html" title="type parameter in MetaModelQueryDsl">E</a>&gt;,<a href="io/sphere/sdk/queries/MetaModelQueryDsl.html" title="type parameter in MetaModelQueryDsl">Q</a>,<a href="io/sphere/sdk/queries/MetaModelQueryDsl.html" title="type parameter in MetaModelQueryDsl">E</a>&gt; - Interface in <a href="io/sphere/sdk/queries/package-summary.html">io.sphere.sdk.queries</a></dt>
 <dd>
@@ -8419,11 +8421,11 @@
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="class in io.sphere.sdk.queries"><span class="typeNameLink">MetaModelQueryDslImpl</span></a>&lt;<a href="io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">T</a>,<a href="io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">C</a> extends <a href="io/sphere/sdk/queries/MetaModelQueryDsl.html" title="interface in io.sphere.sdk.queries">MetaModelQueryDsl</a>&lt;<a href="io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">T</a>,<a href="io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">C</a>,<a href="io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">Q</a>,<a href="io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">E</a>&gt;,<a href="io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">Q</a>,<a href="io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">E</a>&gt; - Class in <a href="io/sphere/sdk/queries/package-summary.html">io.sphere.sdk.queries</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/MetaModelQueryDslImpl.html#MetaModelQueryDslImpl-java.util.List-java.util.List-java.lang.Boolean-java.lang.Long-java.lang.Long-java.lang.String-java.util.function.Function-java.util.List-java.util.List-Q-E-java.util.function.Function-">MetaModelQueryDslImpl(List&lt;QueryPredicate&lt;T&gt;&gt;, List&lt;QuerySort&lt;T&gt;&gt;, Boolean, Long, Long, String, Function&lt;HttpResponse, PagedQueryResult&lt;T&gt;&gt;, List&lt;ExpansionPath&lt;T&gt;&gt;, List&lt;HttpQueryParameter&gt;, Q, E, Function&lt;MetaModelQueryDslBuilder&lt;T, C, Q, E&gt;, C&gt;)</a></span> - Constructor for class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="class in io.sphere.sdk.queries">MetaModelQueryDslImpl</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/MetaModelQueryDslImpl.html#MetaModelQueryDslImpl-java.util.List-java.util.List-java.lang.Boolean-java.lang.Long-java.lang.Long-java.lang.String-java.util.function.Function-java.util.List-java.util.List-Q-E-java.util.function.Function-">MetaModelQueryDslImpl(List&lt;QueryPredicate&lt;T&gt;&gt;, List&lt;QuerySort&lt;T&gt;&gt;, Boolean, Long, Long, String, Function&lt;HttpResponse, PagedQueryResult&lt;T&gt;&gt;, List&lt;ExpansionPath&lt;T&gt;&gt;, List&lt;NameValuePair&gt;, Q, E, Function&lt;MetaModelQueryDslBuilder&lt;T, C, Q, E&gt;, C&gt;)</a></span> - Constructor for class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="class in io.sphere.sdk.queries">MetaModelQueryDslImpl</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/MetaModelQueryDslImpl.html#MetaModelQueryDslImpl-java.lang.String-com.fasterxml.jackson.core.type.TypeReference-Q-E-java.util.function.Function-java.util.List-">MetaModelQueryDslImpl(String, TypeReference&lt;PagedQueryResult&lt;T&gt;&gt;, Q, E, Function&lt;MetaModelQueryDslBuilder&lt;T, C, Q, E&gt;, C&gt;, List&lt;HttpQueryParameter&gt;)</a></span> - Constructor for class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="class in io.sphere.sdk.queries">MetaModelQueryDslImpl</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/MetaModelQueryDslImpl.html#MetaModelQueryDslImpl-java.lang.String-com.fasterxml.jackson.core.type.TypeReference-Q-E-java.util.function.Function-java.util.List-">MetaModelQueryDslImpl(String, TypeReference&lt;PagedQueryResult&lt;T&gt;&gt;, Q, E, Function&lt;MetaModelQueryDslBuilder&lt;T, C, Q, E&gt;, C&gt;, List&lt;NameValuePair&gt;)</a></span> - Constructor for class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="class in io.sphere.sdk.queries">MetaModelQueryDslImpl</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/MetaModelQueryDslImpl.html#MetaModelQueryDslImpl-java.lang.String-com.fasterxml.jackson.databind.JavaType-Q-E-java.util.function.Function-java.util.List-">MetaModelQueryDslImpl(String, JavaType, Q, E, Function&lt;MetaModelQueryDslBuilder&lt;T, C, Q, E&gt;, C&gt;, List&lt;HttpQueryParameter&gt;)</a></span> - Constructor for class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="class in io.sphere.sdk.queries">MetaModelQueryDslImpl</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/MetaModelQueryDslImpl.html#MetaModelQueryDslImpl-java.lang.String-com.fasterxml.jackson.databind.JavaType-Q-E-java.util.function.Function-java.util.List-">MetaModelQueryDslImpl(String, JavaType, Q, E, Function&lt;MetaModelQueryDslBuilder&lt;T, C, Q, E&gt;, C&gt;, List&lt;NameValuePair&gt;)</a></span> - Constructor for class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="class in io.sphere.sdk.queries">MetaModelQueryDslImpl</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/MetaModelQueryDslImpl.html#MetaModelQueryDslImpl-java.lang.String-com.fasterxml.jackson.databind.JavaType-Q-E-java.util.function.Function-">MetaModelQueryDslImpl(String, JavaType, Q, E, Function&lt;MetaModelQueryDslBuilder&lt;T, C, Q, E&gt;, C&gt;)</a></span> - Constructor for class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="class in io.sphere.sdk.queries">MetaModelQueryDslImpl</a></dt>
 <dd>&nbsp;</dd>
@@ -8443,9 +8445,9 @@
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/search/MetaModelSearchDslImpl.html" title="class in io.sphere.sdk.search"><span class="typeNameLink">MetaModelSearchDslImpl</span></a>&lt;<a href="io/sphere/sdk/search/MetaModelSearchDslImpl.html" title="type parameter in MetaModelSearchDslImpl">T</a>,<a href="io/sphere/sdk/search/MetaModelSearchDslImpl.html" title="type parameter in MetaModelSearchDslImpl">C</a> extends <a href="io/sphere/sdk/search/MetaModelSearchDsl.html" title="interface in io.sphere.sdk.search">MetaModelSearchDsl</a>&lt;<a href="io/sphere/sdk/search/MetaModelSearchDslImpl.html" title="type parameter in MetaModelSearchDslImpl">T</a>,<a href="io/sphere/sdk/search/MetaModelSearchDslImpl.html" title="type parameter in MetaModelSearchDslImpl">C</a>,<a href="io/sphere/sdk/search/MetaModelSearchDslImpl.html" title="type parameter in MetaModelSearchDslImpl">S</a>,<a href="io/sphere/sdk/search/MetaModelSearchDslImpl.html" title="type parameter in MetaModelSearchDslImpl">L</a>,<a href="io/sphere/sdk/search/MetaModelSearchDslImpl.html" title="type parameter in MetaModelSearchDslImpl">F</a>,<a href="io/sphere/sdk/search/MetaModelSearchDslImpl.html" title="type parameter in MetaModelSearchDslImpl">E</a>&gt;,<a href="io/sphere/sdk/search/MetaModelSearchDslImpl.html" title="type parameter in MetaModelSearchDslImpl">S</a>,<a href="io/sphere/sdk/search/MetaModelSearchDslImpl.html" title="type parameter in MetaModelSearchDslImpl">L</a>,<a href="io/sphere/sdk/search/MetaModelSearchDslImpl.html" title="type parameter in MetaModelSearchDslImpl">F</a>,<a href="io/sphere/sdk/search/MetaModelSearchDslImpl.html" title="type parameter in MetaModelSearchDslImpl">E</a>&gt; - Class in <a href="io/sphere/sdk/search/package-summary.html">io.sphere.sdk.search</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/search/MetaModelSearchDslImpl.html#MetaModelSearchDslImpl-io.sphere.sdk.models.LocalizedStringEntry-java.lang.Boolean-java.util.List-java.util.List-java.util.List-java.util.List-java.util.List-java.util.List-java.lang.Long-java.lang.Long-java.lang.String-java.util.function.Function-java.util.List-java.util.List-S-L-F-E-java.util.function.Function-">MetaModelSearchDslImpl(LocalizedStringEntry, Boolean, List&lt;FacetExpression&lt;T&gt;&gt;, List&lt;FilterExpression&lt;T&gt;&gt;, List&lt;FilterExpression&lt;T&gt;&gt;, List&lt;FilterExpression&lt;T&gt;&gt;, List&lt;FacetedSearchExpression&lt;T&gt;&gt;, List&lt;SortExpression&lt;T&gt;&gt;, Long, Long, String, Function&lt;HttpResponse, PagedSearchResult&lt;T&gt;&gt;, List&lt;ExpansionPath&lt;T&gt;&gt;, List&lt;HttpQueryParameter&gt;, S, L, F, E, Function&lt;MetaModelSearchDslBuilder&lt;T, C, S, L, F, E&gt;, C&gt;)</a></span> - Constructor for class io.sphere.sdk.search.<a href="io/sphere/sdk/search/MetaModelSearchDslImpl.html" title="class in io.sphere.sdk.search">MetaModelSearchDslImpl</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/search/MetaModelSearchDslImpl.html#MetaModelSearchDslImpl-io.sphere.sdk.models.LocalizedStringEntry-java.lang.Boolean-java.util.List-java.util.List-java.util.List-java.util.List-java.util.List-java.util.List-java.lang.Long-java.lang.Long-java.lang.String-java.util.function.Function-java.util.List-java.util.List-S-L-F-E-java.util.function.Function-">MetaModelSearchDslImpl(LocalizedStringEntry, Boolean, List&lt;FacetExpression&lt;T&gt;&gt;, List&lt;FilterExpression&lt;T&gt;&gt;, List&lt;FilterExpression&lt;T&gt;&gt;, List&lt;FilterExpression&lt;T&gt;&gt;, List&lt;FacetedSearchExpression&lt;T&gt;&gt;, List&lt;SortExpression&lt;T&gt;&gt;, Long, Long, String, Function&lt;HttpResponse, PagedSearchResult&lt;T&gt;&gt;, List&lt;ExpansionPath&lt;T&gt;&gt;, List&lt;NameValuePair&gt;, S, L, F, E, Function&lt;MetaModelSearchDslBuilder&lt;T, C, S, L, F, E&gt;, C&gt;)</a></span> - Constructor for class io.sphere.sdk.search.<a href="io/sphere/sdk/search/MetaModelSearchDslImpl.html" title="class in io.sphere.sdk.search">MetaModelSearchDslImpl</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/search/MetaModelSearchDslImpl.html#MetaModelSearchDslImpl-java.lang.String-com.fasterxml.jackson.core.type.TypeReference-S-L-F-E-java.util.function.Function-java.util.List-">MetaModelSearchDslImpl(String, TypeReference&lt;PagedSearchResult&lt;T&gt;&gt;, S, L, F, E, Function&lt;MetaModelSearchDslBuilder&lt;T, C, S, L, F, E&gt;, C&gt;, List&lt;HttpQueryParameter&gt;)</a></span> - Constructor for class io.sphere.sdk.search.<a href="io/sphere/sdk/search/MetaModelSearchDslImpl.html" title="class in io.sphere.sdk.search">MetaModelSearchDslImpl</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/search/MetaModelSearchDslImpl.html#MetaModelSearchDslImpl-java.lang.String-com.fasterxml.jackson.core.type.TypeReference-S-L-F-E-java.util.function.Function-java.util.List-">MetaModelSearchDslImpl(String, TypeReference&lt;PagedSearchResult&lt;T&gt;&gt;, S, L, F, E, Function&lt;MetaModelSearchDslBuilder&lt;T, C, S, L, F, E&gt;, C&gt;, List&lt;NameValuePair&gt;)</a></span> - Constructor for class io.sphere.sdk.search.<a href="io/sphere/sdk/search/MetaModelSearchDslImpl.html" title="class in io.sphere.sdk.search">MetaModelSearchDslImpl</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/search/MetaModelSearchDslImpl.html#MetaModelSearchDslImpl-java.lang.String-com.fasterxml.jackson.core.type.TypeReference-S-L-F-E-java.util.function.Function-">MetaModelSearchDslImpl(String, TypeReference&lt;PagedSearchResult&lt;T&gt;&gt;, S, L, F, E, Function&lt;MetaModelSearchDslBuilder&lt;T, C, S, L, F, E&gt;, C&gt;)</a></span> - Constructor for class io.sphere.sdk.search.<a href="io/sphere/sdk/search/MetaModelSearchDslImpl.html" title="class in io.sphere.sdk.search">MetaModelSearchDslImpl</a></dt>
 <dd>&nbsp;</dd>
@@ -8993,9 +8995,9 @@
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/client/SphereClientConfig.html#of-java.lang.String-java.lang.String-java.lang.String-java.lang.String-java.lang.String-">of(String, String, String, String, String)</a></span> - Static method in class io.sphere.sdk.client.<a href="io/sphere/sdk/client/SphereClientConfig.html" title="class in io.sphere.sdk.client">SphereClientConfig</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/client/SphereClientFactory.html#of-java.util.function.Supplier-">of(Supplier&lt;HttpClient&gt;)</a></span> - Static method in class io.sphere.sdk.client.<a href="io/sphere/sdk/client/SphereClientFactory.html" title="class in io.sphere.sdk.client">SphereClientFactory</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/client/SphereClientFactory.html#of-java.util.function.Supplier-">of(Supplier&lt;HttpClient&gt;)</a></span> - Static method in interface io.sphere.sdk.client.<a href="io/sphere/sdk/client/SphereClientFactory.html" title="interface in io.sphere.sdk.client">SphereClientFactory</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/client/SphereClientFactory.html#of--">of()</a></span> - Static method in class io.sphere.sdk.client.<a href="io/sphere/sdk/client/SphereClientFactory.html" title="class in io.sphere.sdk.client">SphereClientFactory</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/client/SphereClientFactory.html#of--">of()</a></span> - Static method in interface io.sphere.sdk.client.<a href="io/sphere/sdk/client/SphereClientFactory.html" title="interface in io.sphere.sdk.client">SphereClientFactory</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/client/TimeoutSphereClientDecorator.html#of-io.sphere.sdk.client.SphereClient-long-java.util.concurrent.TimeUnit-">of(SphereClient, long, TimeUnit)</a></span> - Static method in class io.sphere.sdk.client.<a href="io/sphere/sdk/client/TimeoutSphereClientDecorator.html" title="class in io.sphere.sdk.client">TimeoutSphereClientDecorator</a></dt>
 <dd>&nbsp;</dd>
@@ -9287,8 +9289,6 @@
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/http/HttpHeaders.html#of--">of()</a></span> - Static method in class io.sphere.sdk.http.<a href="io/sphere/sdk/http/HttpHeaders.html" title="class in io.sphere.sdk.http">HttpHeaders</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/http/HttpQueryParameter.html#of-java.lang.String-java.lang.String-">of(String, String)</a></span> - Static method in class io.sphere.sdk.http.<a href="io/sphere/sdk/http/HttpQueryParameter.html" title="class in io.sphere.sdk.http">HttpQueryParameter</a></dt>
-<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/http/HttpRequest.html#of-io.sphere.sdk.http.HttpMethod-java.lang.String-">of(HttpMethod, String)</a></span> - Static method in interface io.sphere.sdk.http.<a href="io/sphere/sdk/http/HttpRequest.html" title="interface in io.sphere.sdk.http">HttpRequest</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/http/HttpRequest.html#of-io.sphere.sdk.http.HttpMethod-java.lang.String-io.sphere.sdk.http.HttpHeaders-io.sphere.sdk.http.HttpRequestBody-">of(HttpMethod, String, HttpHeaders, HttpRequestBody)</a></span> - Static method in interface io.sphere.sdk.http.<a href="io/sphere/sdk/http/HttpRequest.html" title="interface in io.sphere.sdk.http">HttpRequest</a></dt>
@@ -9332,6 +9332,8 @@
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/inventory/commands/updateactions/SetExpectedDelivery.html#of-java.time.ZonedDateTime-">of(ZonedDateTime)</a></span> - Static method in class io.sphere.sdk.inventory.commands.updateactions.<a href="io/sphere/sdk/inventory/commands/updateactions/SetExpectedDelivery.html" title="class in io.sphere.sdk.inventory.commands.updateactions">SetExpectedDelivery</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/inventory/commands/updateactions/SetRestockableInDays.html#of-java.lang.Integer-">of(Integer)</a></span> - Static method in class io.sphere.sdk.inventory.commands.updateactions.<a href="io/sphere/sdk/inventory/commands/updateactions/SetRestockableInDays.html" title="class in io.sphere.sdk.inventory.commands.updateactions">SetRestockableInDays</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/inventory/commands/updateactions/SetSupplyChannel.html#of-io.sphere.sdk.models.Referenceable-">of(Referenceable&lt;Channel&gt;)</a></span> - Static method in class io.sphere.sdk.inventory.commands.updateactions.<a href="io/sphere/sdk/inventory/commands/updateactions/SetSupplyChannel.html" title="class in io.sphere.sdk.inventory.commands.updateactions">SetSupplyChannel</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/inventory/expansion/InventoryEntryExpansionModel.html#of--">of()</a></span> - Static method in class io.sphere.sdk.inventory.expansion.<a href="io/sphere/sdk/inventory/expansion/InventoryEntryExpansionModel.html" title="class in io.sphere.sdk.inventory.expansion">InventoryEntryExpansionModel</a></dt>
 <dd>&nbsp;</dd>
@@ -14368,6 +14370,10 @@ CompletionStage&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execu
 <dd>
 <div class="block">Sets a text, given by the PSP, that describes the current status.</div>
 </dd>
+<dt><a href="io/sphere/sdk/inventory/commands/updateactions/SetSupplyChannel.html" title="class in io.sphere.sdk.inventory.commands.updateactions"><span class="typeNameLink">SetSupplyChannel</span></a> - Class in <a href="io/sphere/sdk/inventory/commands/updateactions/package-summary.html">io.sphere.sdk.inventory.commands.updateactions</a></dt>
+<dd>
+<div class="block">Sets/unsets the supply channel.</div>
+</dd>
 <dt><a href="io/sphere/sdk/reviews/commands/updateactions/SetTarget.html" title="class in io.sphere.sdk.reviews.commands.updateactions"><span class="typeNameLink">SetTarget</span></a> - Class in <a href="io/sphere/sdk/reviews/commands/updateactions/package-summary.html">io.sphere.sdk.reviews.commands.updateactions</a></dt>
 <dd>
 <div class="block">Sets/unsets the target of a review.</div>
@@ -14909,7 +14915,7 @@ CompletionStage&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execu
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/client/SphereClientDecorator.html#SphereClientDecorator-io.sphere.sdk.client.SphereClient-">SphereClientDecorator(SphereClient)</a></span> - Constructor for class io.sphere.sdk.client.<a href="io/sphere/sdk/client/SphereClientDecorator.html" title="class in io.sphere.sdk.client">SphereClientDecorator</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="io/sphere/sdk/client/SphereClientFactory.html" title="class in io.sphere.sdk.client"><span class="typeNameLink">SphereClientFactory</span></a> - Class in <a href="io/sphere/sdk/client/package-summary.html">io.sphere.sdk.client</a></dt>
+<dt><a href="io/sphere/sdk/client/SphereClientFactory.html" title="interface in io.sphere.sdk.client"><span class="typeNameLink">SphereClientFactory</span></a> - Interface in <a href="io/sphere/sdk/client/package-summary.html">io.sphere.sdk.client</a></dt>
 <dd>
 <div class="block">A factory to instantiate SPHERE.IO Java clients which use <code>CompletionStage</code> as future implementation.</div>
 </dd>
