@@ -956,8 +956,6 @@
 </dd>
 <dt><a href="io/sphere/sdk/cartdiscounts/expansion/CartDiscountExpansionModel.html" title="class in io.sphere.sdk.cartdiscounts.expansion"><span class="typeNameLink">CartDiscountExpansionModel</span></a>&lt;<a href="io/sphere/sdk/cartdiscounts/expansion/CartDiscountExpansionModel.html" title="type parameter in CartDiscountExpansionModel">T</a>&gt; - Class in <a href="io/sphere/sdk/cartdiscounts/expansion/package-summary.html">io.sphere.sdk.cartdiscounts.expansion</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/cartdiscounts/expansion/CartDiscountExpansionModel.html#CartDiscountExpansionModel--">CartDiscountExpansionModel()</a></span> - Constructor for class io.sphere.sdk.cartdiscounts.expansion.<a href="io/sphere/sdk/cartdiscounts/expansion/CartDiscountExpansionModel.html" title="class in io.sphere.sdk.cartdiscounts.expansion">CartDiscountExpansionModel</a></dt>
-<dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/cartdiscounts/CartDiscountPredicate.html" title="interface in io.sphere.sdk.cartdiscounts"><span class="typeNameLink">CartDiscountPredicate</span></a> - Interface in <a href="io/sphere/sdk/cartdiscounts/package-summary.html">io.sphere.sdk.cartdiscounts</a></dt>
 <dd>
 <div class="block">The predicate offers a flexible way to define whether the discount can be applied to a cart.</div>
@@ -973,6 +971,8 @@
 <dt><a href="io/sphere/sdk/cartdiscounts/queries/CartDiscountQueryModel.html" title="interface in io.sphere.sdk.cartdiscounts.queries"><span class="typeNameLink">CartDiscountQueryModel</span></a> - Interface in <a href="io/sphere/sdk/cartdiscounts/queries/package-summary.html">io.sphere.sdk.cartdiscounts.queries</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/discountcodes/DiscountCodeDraftBuilder.html#cartDiscounts-java.util.List-">cartDiscounts(List&lt;Reference&lt;CartDiscount&gt;&gt;)</a></span> - Method in class io.sphere.sdk.discountcodes.<a href="io/sphere/sdk/discountcodes/DiscountCodeDraftBuilder.html" title="class in io.sphere.sdk.discountcodes">DiscountCodeDraftBuilder</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/discountcodes/expansion/DiscountCodeExpansionModel.html#cartDiscounts--">cartDiscounts()</a></span> - Method in class io.sphere.sdk.discountcodes.expansion.<a href="io/sphere/sdk/discountcodes/expansion/DiscountCodeExpansionModel.html" title="class in io.sphere.sdk.discountcodes.expansion">DiscountCodeExpansionModel</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/cartdiscounts/CartDiscountTarget.html" title="interface in io.sphere.sdk.cartdiscounts"><span class="typeNameLink">CartDiscountTarget</span></a> - Interface in <a href="io/sphere/sdk/cartdiscounts/package-summary.html">io.sphere.sdk.cartdiscounts</a></dt>
 <dd>
@@ -2435,11 +2435,16 @@
             .withIsActive(false)
             .withMaxApplications(5L)
             .withMaxApplicationsPerCustomer(1L);
-    final DiscountCode discountCode = client().executeBlocking(DiscountCodeCreateCommand.of(draft));
+    final DiscountCodeCreateCommand createCommand = DiscountCodeCreateCommand.of(draft)
+            .plusExpansionPaths(m -&gt; m.cartDiscounts());
+    final DiscountCode discountCode = client().executeBlocking(createCommand);
     assertThat(discountCode.getCode()).isEqualTo(code);
     assertThat(discountCode.getName()).isEqualTo(en(DiscountCodeCreateCommandTest.class.getName()));
     assertThat(discountCode.getDescription()).isEqualTo(en("sample discount code descr."));
-    assertThat(discountCode.getCartDiscounts()).isEqualTo(asList(cartDiscount.toReference()));
+    final Reference&lt;CartDiscount&gt; cartDiscountReference = discountCode.getCartDiscounts().get(0);
+    assertThat(cartDiscountReference)
+            .isEqualTo(cartDiscount.toReference())
+            .is(expanded());
     assertThat(discountCode.getCartPredicate()).contains("1 = 1");
     assertThat(discountCode.isActive()).isEqualTo(false);
     assertThat(discountCode.getMaxApplications()).isEqualTo(5L);
@@ -2458,8 +2463,6 @@
 <dt><a href="io/sphere/sdk/discountcodes/DiscountCodeDraftDsl.html" title="class in io.sphere.sdk.discountcodes"><span class="typeNameLink">DiscountCodeDraftDsl</span></a> - Class in <a href="io/sphere/sdk/discountcodes/package-summary.html">io.sphere.sdk.discountcodes</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/discountcodes/expansion/DiscountCodeExpansionModel.html" title="class in io.sphere.sdk.discountcodes.expansion"><span class="typeNameLink">DiscountCodeExpansionModel</span></a>&lt;<a href="io/sphere/sdk/discountcodes/expansion/DiscountCodeExpansionModel.html" title="type parameter in DiscountCodeExpansionModel">T</a>&gt; - Class in <a href="io/sphere/sdk/discountcodes/expansion/package-summary.html">io.sphere.sdk.discountcodes.expansion</a></dt>
-<dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/discountcodes/expansion/DiscountCodeExpansionModel.html#DiscountCodeExpansionModel-java.lang.String-java.lang.String-">DiscountCodeExpansionModel(String, String)</a></span> - Constructor for class io.sphere.sdk.discountcodes.expansion.<a href="io/sphere/sdk/discountcodes/expansion/DiscountCodeExpansionModel.html" title="class in io.sphere.sdk.discountcodes.expansion">DiscountCodeExpansionModel</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/discountcodes/DiscountCodeInfo.html" title="class in io.sphere.sdk.discountcodes"><span class="typeNameLink">DiscountCodeInfo</span></a> - Class in <a href="io/sphere/sdk/discountcodes/package-summary.html">io.sphere.sdk.discountcodes</a></dt>
 <dd>&nbsp;</dd>
@@ -8744,6 +8747,8 @@
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/cartdiscounts/expansion/CartDiscountExpansionModel.html#of--">of()</a></span> - Static method in class io.sphere.sdk.cartdiscounts.expansion.<a href="io/sphere/sdk/cartdiscounts/expansion/CartDiscountExpansionModel.html" title="class in io.sphere.sdk.cartdiscounts.expansion">CartDiscountExpansionModel</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/cartdiscounts/expansion/CartDiscountExpansionModel.html#of-java.util.List-java.lang.String-">of(List&lt;String&gt;, String)</a></span> - Static method in class io.sphere.sdk.cartdiscounts.expansion.<a href="io/sphere/sdk/cartdiscounts/expansion/CartDiscountExpansionModel.html" title="class in io.sphere.sdk.cartdiscounts.expansion">CartDiscountExpansionModel</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/cartdiscounts/LineItemsTarget.html#of-java.lang.String-">of(String)</a></span> - Static method in class io.sphere.sdk.cartdiscounts.<a href="io/sphere/sdk/cartdiscounts/LineItemsTarget.html" title="class in io.sphere.sdk.cartdiscounts">LineItemsTarget</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/cartdiscounts/queries/CartDiscountByIdGet.html#of-io.sphere.sdk.models.Identifiable-">of(Identifiable&lt;CartDiscount&gt;)</a></span> - Static method in interface io.sphere.sdk.cartdiscounts.queries.<a href="io/sphere/sdk/cartdiscounts/queries/CartDiscountByIdGet.html" title="interface in io.sphere.sdk.cartdiscounts.queries">CartDiscountByIdGet</a></dt>
@@ -13341,6 +13346,8 @@ CompletionStage&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execu
 <dt><a href="io/sphere/sdk/queries/ReferenceOptionalQueryModel.html" title="interface in io.sphere.sdk.queries"><span class="typeNameLink">ReferenceOptionalQueryModel</span></a>&lt;<a href="io/sphere/sdk/queries/ReferenceOptionalQueryModel.html" title="type parameter in ReferenceOptionalQueryModel">T</a>,<a href="io/sphere/sdk/queries/ReferenceOptionalQueryModel.html" title="type parameter in ReferenceOptionalQueryModel">R</a>&gt; - Interface in <a href="io/sphere/sdk/queries/package-summary.html">io.sphere.sdk.queries</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/queries/ReferenceQueryModel.html" title="interface in io.sphere.sdk.queries"><span class="typeNameLink">ReferenceQueryModel</span></a>&lt;<a href="io/sphere/sdk/queries/ReferenceQueryModel.html" title="type parameter in ReferenceQueryModel">T</a>,<a href="io/sphere/sdk/queries/ReferenceQueryModel.html" title="type parameter in ReferenceQueryModel">R</a>&gt; - Interface in <a href="io/sphere/sdk/queries/package-summary.html">io.sphere.sdk.queries</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/discountcodes/expansion/DiscountCodeExpansionModel.html#references--">references()</a></span> - Method in class io.sphere.sdk.discountcodes.expansion.<a href="io/sphere/sdk/discountcodes/expansion/DiscountCodeExpansionModel.html" title="class in io.sphere.sdk.discountcodes.expansion">DiscountCodeExpansionModel</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/productdiscounts/expansion/ProductDiscountExpansionModel.html#references--">references()</a></span> - Method in class io.sphere.sdk.productdiscounts.expansion.<a href="io/sphere/sdk/productdiscounts/expansion/ProductDiscountExpansionModel.html" title="class in io.sphere.sdk.productdiscounts.expansion">ProductDiscountExpansionModel</a></dt>
 <dd>&nbsp;</dd>
