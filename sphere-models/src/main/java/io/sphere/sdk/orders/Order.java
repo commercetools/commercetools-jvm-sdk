@@ -86,22 +86,49 @@ public interface Order extends CartLike<Order> {
         return Reference.of(referenceTypeId(), getId(), this);
     }
 
+    /**
+     * String that uniquely identifies an order. It can be used to create more human-readable (in contrast to ID) identifier for the order. It should be unique across a project. Once it’s set it cannot be changed.
+     * @return order number or null
+     */
     @Nullable
     String getOrderNumber();
 
     InventoryMode getInventoryMode();
 
+    /**
+     * State of this order.
+     * @return state
+     * @see io.sphere.sdk.orders.commands.updateactions.ChangeOrderState
+     */
     OrderState getOrderState();
 
+    /**
+     * Shipment state of this order.
+     *
+     * @return shipment state or null
+     * @see io.sphere.sdk.orders.commands.updateactions.ChangeShipmentState
+     */
     @Nullable
     ShipmentState getShipmentState();
 
+    /**
+     * Payment state of this order.
+     *
+     *
+     * @return payment state or null
+     * @see io.sphere.sdk.orders.commands.updateactions.ChangePaymentState
+     */
     @Nullable
     PaymentState getPaymentState();
 
     @Nullable
     OrderShippingInfo getShippingInfo();
 
+    /**
+     *Sync info of this order.
+     * @return sync infos
+     * @see io.sphere.sdk.orders.commands.updateactions.UpdateSyncInfo
+     */
     Set<SyncInfo> getSyncInfo();
 
     List<ReturnInfo> getReturnInfo();
