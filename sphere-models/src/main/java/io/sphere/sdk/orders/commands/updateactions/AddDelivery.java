@@ -17,6 +17,7 @@ import java.util.List;
  {@include.example io.sphere.sdk.orders.commands.OrderUpdateCommandTest#addDelivery()}
 
  @see OrderShippingInfo#getDeliveries()
+ @see io.sphere.sdk.orders.messages.DeliveryAddedMessage
  */
 public class AddDelivery extends UpdateActionImpl<Order> {
     private final List<DeliveryItem> items;

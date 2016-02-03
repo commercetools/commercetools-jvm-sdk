@@ -9,11 +9,13 @@ import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Referenceable;
 import io.sphere.sdk.orders.*;
 import io.sphere.sdk.orders.commands.updateactions.*;
+import io.sphere.sdk.orders.messages.DeliveryAddedMessage;
 import io.sphere.sdk.orders.messages.OrderStateTransitionMessage;
 import io.sphere.sdk.orders.queries.OrderByIdGet;
 import io.sphere.sdk.orders.queries.OrderQuery;
 import io.sphere.sdk.payments.Payment;
 import io.sphere.sdk.queries.PagedQueryResult;
+import io.sphere.sdk.queries.Query;
 import io.sphere.sdk.states.State;
 import io.sphere.sdk.states.StateType;
 import io.sphere.sdk.test.IntegrationTest;
@@ -23,10 +25,7 @@ import org.assertj.core.api.Condition;
 import org.junit.Test;
 
 import java.time.ZonedDateTime;
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 import static io.sphere.sdk.channels.ChannelFixtures.withOrderExportChannel;
 import static io.sphere.sdk.orders.OrderFixtures.*;
@@ -34,6 +33,7 @@ import static io.sphere.sdk.payments.PaymentFixtures.withPayment;
 import static io.sphere.sdk.states.StateFixtures.withStandardStates;
 import static io.sphere.sdk.states.StateFixtures.withStateByBuilder;
 import static io.sphere.sdk.test.SphereTestUtils.asList;
+import static io.sphere.sdk.test.SphereTestUtils.assertEventually;
 import static io.sphere.sdk.test.SphereTestUtils.randomString;
 import static io.sphere.sdk.utils.SphereInternalUtils.asSet;
 import static io.sphere.sdk.utils.SphereInternalUtils.setOf;
@@ -99,6 +99,25 @@ public class OrderUpdateCommandTest extends IntegrationTest {
             final Parcel parcel = delivery.getParcels().get(0);
             assertThat(parcel.getMeasurements()).isEqualTo(PARCEL_MEASUREMENTS);
             assertThat(parcel.getTrackingData()).isEqualTo(TRACKING_DATA);
+
+            //you can observe a message
+            final Query<DeliveryAddedMessage> messageQuery = MessageQuery.of()
+                    .withPredicates(m -> m.resource().is(order))
+                    .forMessageType(DeliveryAddedMessage.MESSAGE_HINT);
+            assertEventually(() -> {
+                final Optional<DeliveryAddedMessage> deliveryAddedMessageOptional =
+                        client().executeBlocking(messageQuery).head();
+                assertThat(deliveryAddedMessageOptional).isPresent();
+                final DeliveryAddedMessage deliveryAddedMessage = deliveryAddedMessageOptional.get();
+                final Delivery deliveryFromMessage = deliveryAddedMessage.getDelivery();
+                assertThat(deliveryFromMessage.getId()).isEqualTo(delivery.getId());
+                assertThat(deliveryFromMessage.getCreatedAt()).isEqualTo(delivery.getCreatedAt());
+                assertThat(deliveryFromMessage.getParcels())
+                        .as("warning initial parcels are not contained in the message!")
+                        .isNotEqualTo(delivery.getParcels())
+                        .isEmpty();
+                assertThat(deliveryFromMessage.getItems()).isEqualTo(delivery.getItems());
+            });
 
             return updatedOrder;
         });

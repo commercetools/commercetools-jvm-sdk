@@ -10,6 +10,12 @@ import io.sphere.sdk.orders.Order;
 
 import java.time.ZonedDateTime;
 
+/**
+ * This message is the result of the {@link io.sphere.sdk.orders.commands.updateactions.AddDelivery} update action.
+ *
+ * {@include.example io.sphere.sdk.orders.commands.OrderUpdateCommandTest#addDelivery()}
+ *
+ */
 @JsonDeserialize(as = DeliveryAddedMessage.class)//important to override annotation in Message class
 public class DeliveryAddedMessage extends GenericMessageImpl<Order> {
     public static final String MESSAGE_TYPE = "DeliveryAdded";
