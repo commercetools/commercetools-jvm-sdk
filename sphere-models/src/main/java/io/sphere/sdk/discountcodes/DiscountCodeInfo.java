@@ -5,7 +5,7 @@ import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Referenceable;
 
-public class DiscountCodeInfo extends Base {
+public final class DiscountCodeInfo extends Base {
     private final Reference<DiscountCode> discountCode;
     private final DiscountCodeState state;
 
