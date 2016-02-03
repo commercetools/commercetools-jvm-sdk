@@ -12,7 +12,6 @@ import io.sphere.sdk.http.HttpQueryParameter;
 import io.sphere.sdk.http.HttpResponse;
 import io.sphere.sdk.http.UrlQueryBuilder;
 import io.sphere.sdk.models.Base;
-import io.sphere.sdk.utils.SphereInternalUtils;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -285,7 +284,7 @@ public abstract class MetaModelQueryDslImpl<T, C extends MetaModelQueryDsl<T, C,
         Optional.ofNullable(offset()).ifPresent(offset -> builder.add(OFFSET, offset.toString(), urlEncoded));
         Optional.ofNullable(fetchTotal()).ifPresent(withTotal -> builder.add(WITH_TOTAL, withTotal.toString(), urlEncoded));
         expansionPaths().forEach(path -> builder.add(EXPAND, path.toSphereExpand(), urlEncoded));
-        additionalHttpQueryParameters().forEach(parameter -> builder.add(parameter.getKey(), parameter.getValue(), urlEncoded));
+        additionalHttpQueryParameters().forEach(parameter -> builder.add(parameter.getName(), parameter.getValue(), urlEncoded));
         return builder.toStringWithOptionalQuestionMark();
     }
 

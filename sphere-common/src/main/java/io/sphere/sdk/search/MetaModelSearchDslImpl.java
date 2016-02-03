@@ -445,7 +445,7 @@ public abstract class MetaModelSearchDslImpl<T, C extends MetaModelSearchDsl<T, 
         Optional.ofNullable(limit()).ifPresent(l -> builder.add(LIMIT, l.toString(), urlEncoded));
         Optional.ofNullable(offset()).ifPresent(o -> builder.add(OFFSET, o.toString(), urlEncoded));
         expansionPaths().forEach(path -> builder.add(EXPAND, path.toSphereExpand(), urlEncoded));
-        additionalQueryParameters().forEach(p -> builder.add(p.getKey(), p.getValue(), urlEncoded));
+        additionalQueryParameters().forEach(p -> builder.add(p.getName(), p.getValue(), urlEncoded));
         return builder.build();
     }
 

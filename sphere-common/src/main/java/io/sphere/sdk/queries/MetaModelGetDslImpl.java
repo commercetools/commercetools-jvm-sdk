@@ -84,7 +84,7 @@ public abstract class MetaModelGetDslImpl<R, T, C extends MetaModelGetDsl<R, T, 
         final boolean urlEncoded = true;
         final UrlQueryBuilder builder = UrlQueryBuilder.of();
         expansionPaths().forEach(path -> builder.add(EXPAND, path.toSphereExpand(), urlEncoded));
-        additionalQueryParameters().forEach(parameter -> builder.add(parameter.getKey(), parameter.getValue(), urlEncoded));
+        additionalQueryParameters().forEach(parameter -> builder.add(parameter.getName(), parameter.getValue(), urlEncoded));
         final String queryParameters = builder.toStringWithOptionalQuestionMark();
         final String path = endpoint + "/" + identifierToSearchFor + (queryParameters.length() > 1 ? queryParameters : "");
         return HttpRequestIntent.of(HttpMethod.GET, path);
