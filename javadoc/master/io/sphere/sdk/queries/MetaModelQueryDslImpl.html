@@ -168,7 +168,7 @@ implements <a href="../../../../io/sphere/sdk/queries/MetaModelQueryDsl.html" ti
                      java.lang.String&nbsp;endpoint,
                      java.util.function.Function&lt;<a href="../../../../io/sphere/sdk/http/HttpResponse.html" title="interface in io.sphere.sdk.http">HttpResponse</a>,<a href="../../../../io/sphere/sdk/queries/PagedQueryResult.html" title="class in io.sphere.sdk.queries">PagedQueryResult</a>&lt;<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">T</a>&gt;&gt;&nbsp;resultMapper,
                      java.util.List&lt;<a href="../../../../io/sphere/sdk/expansion/ExpansionPath.html" title="interface in io.sphere.sdk.expansion">ExpansionPath</a>&lt;<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">T</a>&gt;&gt;&nbsp;expansionPaths,
-                     java.util.List&lt;<a href="../../../../io/sphere/sdk/http/HttpQueryParameter.html" title="class in io.sphere.sdk.http">HttpQueryParameter</a>&gt;&nbsp;additionalHttpQueryParameters,
+                     java.util.List&lt;<a href="../../../../io/sphere/sdk/http/NameValuePair.html" title="interface in io.sphere.sdk.http">NameValuePair</a>&gt;&nbsp;additionalHttpQueryParameters,
                      <a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">Q</a>&nbsp;queryModel,
                      <a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">E</a>&nbsp;expansionModel,
                      java.util.function.Function&lt;<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslBuilder.html" title="class in io.sphere.sdk.queries">MetaModelQueryDslBuilder</a>&lt;<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">T</a>,<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">C</a>,<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">Q</a>,<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">E</a>&gt;,<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">C</a>&gt;&nbsp;queryDslBuilderFunction)</code>&nbsp;</td>
@@ -189,7 +189,7 @@ implements <a href="../../../../io/sphere/sdk/queries/MetaModelQueryDsl.html" ti
                      <a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">Q</a>&nbsp;queryModel,
                      <a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">E</a>&nbsp;expansionModel,
                      java.util.function.Function&lt;<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslBuilder.html" title="class in io.sphere.sdk.queries">MetaModelQueryDslBuilder</a>&lt;<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">T</a>,<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">C</a>,<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">Q</a>,<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">E</a>&gt;,<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">C</a>&gt;&nbsp;queryDslBuilderFunction,
-                     java.util.List&lt;<a href="../../../../io/sphere/sdk/http/HttpQueryParameter.html" title="class in io.sphere.sdk.http">HttpQueryParameter</a>&gt;&nbsp;additionalHttpQueryParameters)</code>&nbsp;</td>
+                     java.util.List&lt;<a href="../../../../io/sphere/sdk/http/NameValuePair.html" title="interface in io.sphere.sdk.http">NameValuePair</a>&gt;&nbsp;additionalNameValuePairs)</code>&nbsp;</td>
 </tr>
 <tr class="altColor">
 <td class="colOne"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html#MetaModelQueryDslImpl-java.lang.String-com.fasterxml.jackson.core.type.TypeReference-Q-E-java.util.function.Function-">MetaModelQueryDslImpl</a></span>(java.lang.String&nbsp;endpoint,
@@ -204,7 +204,7 @@ implements <a href="../../../../io/sphere/sdk/queries/MetaModelQueryDsl.html" ti
                      <a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">Q</a>&nbsp;queryModel,
                      <a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">E</a>&nbsp;expansionModel,
                      java.util.function.Function&lt;<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslBuilder.html" title="class in io.sphere.sdk.queries">MetaModelQueryDslBuilder</a>&lt;<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">T</a>,<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">C</a>,<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">Q</a>,<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">E</a>&gt;,<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">C</a>&gt;&nbsp;queryDslBuilderFunction,
-                     java.util.List&lt;<a href="../../../../io/sphere/sdk/http/HttpQueryParameter.html" title="class in io.sphere.sdk.http">HttpQueryParameter</a>&gt;&nbsp;additionalHttpQueryParameters)</code>&nbsp;</td>
+                     java.util.List&lt;<a href="../../../../io/sphere/sdk/http/NameValuePair.html" title="interface in io.sphere.sdk.http">NameValuePair</a>&gt;&nbsp;additionalHttpQueryParameters)</code>&nbsp;</td>
 </tr>
 </table>
 </li>
@@ -222,7 +222,7 @@ implements <a href="../../../../io/sphere/sdk/queries/MetaModelQueryDsl.html" ti
 <th class="colLast" scope="col">Method and Description</th>
 </tr>
 <tr id="i0" class="altColor">
-<td class="colFirst"><code>protected java.util.List&lt;<a href="../../../../io/sphere/sdk/http/HttpQueryParameter.html" title="class in io.sphere.sdk.http">HttpQueryParameter</a>&gt;</code></td>
+<td class="colFirst"><code>protected java.util.List&lt;<a href="../../../../io/sphere/sdk/http/NameValuePair.html" title="interface in io.sphere.sdk.http">NameValuePair</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html#additionalHttpQueryParameters--">additionalHttpQueryParameters</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i1" class="rowColor">
@@ -482,7 +482,7 @@ implements <a href="../../../../io/sphere/sdk/queries/MetaModelQueryDsl.html" ti
                              java.lang.String&nbsp;endpoint,
                              java.util.function.Function&lt;<a href="../../../../io/sphere/sdk/http/HttpResponse.html" title="interface in io.sphere.sdk.http">HttpResponse</a>,<a href="../../../../io/sphere/sdk/queries/PagedQueryResult.html" title="class in io.sphere.sdk.queries">PagedQueryResult</a>&lt;<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">T</a>&gt;&gt;&nbsp;resultMapper,
                              java.util.List&lt;<a href="../../../../io/sphere/sdk/expansion/ExpansionPath.html" title="interface in io.sphere.sdk.expansion">ExpansionPath</a>&lt;<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">T</a>&gt;&gt;&nbsp;expansionPaths,
-                             java.util.List&lt;<a href="../../../../io/sphere/sdk/http/HttpQueryParameter.html" title="class in io.sphere.sdk.http">HttpQueryParameter</a>&gt;&nbsp;additionalHttpQueryParameters,
+                             java.util.List&lt;<a href="../../../../io/sphere/sdk/http/NameValuePair.html" title="interface in io.sphere.sdk.http">NameValuePair</a>&gt;&nbsp;additionalHttpQueryParameters,
                              <a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">Q</a>&nbsp;queryModel,
                              <a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">E</a>&nbsp;expansionModel,
                              java.util.function.Function&lt;<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslBuilder.html" title="class in io.sphere.sdk.queries">MetaModelQueryDslBuilder</a>&lt;<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">T</a>,<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">C</a>,<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">Q</a>,<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">E</a>&gt;,<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">C</a>&gt;&nbsp;queryDslBuilderFunction)</pre>
@@ -501,7 +501,7 @@ implements <a href="../../../../io/sphere/sdk/queries/MetaModelQueryDsl.html" ti
                              <a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">Q</a>&nbsp;queryModel,
                              <a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">E</a>&nbsp;expansionModel,
                              java.util.function.Function&lt;<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslBuilder.html" title="class in io.sphere.sdk.queries">MetaModelQueryDslBuilder</a>&lt;<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">T</a>,<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">C</a>,<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">Q</a>,<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">E</a>&gt;,<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">C</a>&gt;&nbsp;queryDslBuilderFunction,
-                             java.util.List&lt;<a href="../../../../io/sphere/sdk/http/HttpQueryParameter.html" title="class in io.sphere.sdk.http">HttpQueryParameter</a>&gt;&nbsp;additionalHttpQueryParameters)</pre>
+                             java.util.List&lt;<a href="../../../../io/sphere/sdk/http/NameValuePair.html" title="interface in io.sphere.sdk.http">NameValuePair</a>&gt;&nbsp;additionalHttpQueryParameters)</pre>
 </li>
 </ul>
 <a name="MetaModelQueryDslImpl-java.lang.String-com.fasterxml.jackson.databind.JavaType-java.lang.Object-java.lang.Object-java.util.function.Function-java.util.List-">
@@ -517,7 +517,7 @@ implements <a href="../../../../io/sphere/sdk/queries/MetaModelQueryDsl.html" ti
                              <a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">Q</a>&nbsp;queryModel,
                              <a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">E</a>&nbsp;expansionModel,
                              java.util.function.Function&lt;<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslBuilder.html" title="class in io.sphere.sdk.queries">MetaModelQueryDslBuilder</a>&lt;<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">T</a>,<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">C</a>,<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">Q</a>,<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">E</a>&gt;,<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">C</a>&gt;&nbsp;queryDslBuilderFunction,
-                             java.util.List&lt;<a href="../../../../io/sphere/sdk/http/HttpQueryParameter.html" title="class in io.sphere.sdk.http">HttpQueryParameter</a>&gt;&nbsp;additionalHttpQueryParameters)</pre>
+                             java.util.List&lt;<a href="../../../../io/sphere/sdk/http/NameValuePair.html" title="interface in io.sphere.sdk.http">NameValuePair</a>&gt;&nbsp;additionalNameValuePairs)</pre>
 </li>
 </ul>
 <a name="MetaModelQueryDslImpl-java.lang.String-com.fasterxml.jackson.databind.JavaType-java.lang.Object-java.lang.Object-java.util.function.Function-">
@@ -1215,7 +1215,7 @@ public&nbsp;java.lang.Long&nbsp;offset()</pre>
 <ul class="blockList">
 <li class="blockList">
 <h4>additionalHttpQueryParameters</h4>
-<pre>protected&nbsp;java.util.List&lt;<a href="../../../../io/sphere/sdk/http/HttpQueryParameter.html" title="class in io.sphere.sdk.http">HttpQueryParameter</a>&gt;&nbsp;additionalHttpQueryParameters()</pre>
+<pre>protected&nbsp;java.util.List&lt;<a href="../../../../io/sphere/sdk/http/NameValuePair.html" title="interface in io.sphere.sdk.http">NameValuePair</a>&gt;&nbsp;additionalHttpQueryParameters()</pre>
 </li>
 </ul>
 <a name="copyBuilder--">
