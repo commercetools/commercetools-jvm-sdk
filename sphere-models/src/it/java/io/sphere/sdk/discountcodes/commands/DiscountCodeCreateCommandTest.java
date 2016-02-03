@@ -1,10 +1,11 @@
 package io.sphere.sdk.discountcodes.commands;
 
-import io.sphere.sdk.cartdiscounts.CartDiscountFixtures;
+import io.sphere.sdk.cartdiscounts.CartDiscount;
 import io.sphere.sdk.cartdiscounts.CartDiscountPredicate;
 import io.sphere.sdk.discountcodes.DiscountCode;
 import io.sphere.sdk.discountcodes.DiscountCodeDraft;
 import io.sphere.sdk.discountcodes.queries.DiscountCodeQuery;
+import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.test.IntegrationTest;
 import io.sphere.sdk.test.JsonNodeReferenceResolver;
 import org.junit.BeforeClass;
@@ -37,11 +38,16 @@ public class DiscountCodeCreateCommandTest extends IntegrationTest {
                     .withIsActive(false)
                     .withMaxApplications(5L)
                     .withMaxApplicationsPerCustomer(1L);
-            final DiscountCode discountCode = client().executeBlocking(DiscountCodeCreateCommand.of(draft));
+            final DiscountCodeCreateCommand createCommand = DiscountCodeCreateCommand.of(draft)
+                    .plusExpansionPaths(m -> m.cartDiscounts());
+            final DiscountCode discountCode = client().executeBlocking(createCommand);
             assertThat(discountCode.getCode()).isEqualTo(code);
             assertThat(discountCode.getName()).isEqualTo(en(DiscountCodeCreateCommandTest.class.getName()));
             assertThat(discountCode.getDescription()).isEqualTo(en("sample discount code descr."));
-            assertThat(discountCode.getCartDiscounts()).isEqualTo(asList(cartDiscount.toReference()));
+            final Reference<CartDiscount> cartDiscountReference = discountCode.getCartDiscounts().get(0);
+            assertThat(cartDiscountReference)
+                    .isEqualTo(cartDiscount.toReference())
+                    .is(expanded());
             assertThat(discountCode.getCartPredicate()).contains("1 = 1");
             assertThat(discountCode.isActive()).isEqualTo(false);
             assertThat(discountCode.getMaxApplications()).isEqualTo(5L);
