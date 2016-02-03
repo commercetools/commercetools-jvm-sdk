@@ -3,7 +3,7 @@ package io.sphere.sdk.cartdiscounts;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import io.sphere.sdk.models.Base;
 
-public class DiscountedLineItemPriceForQuantity extends Base {
+public final class DiscountedLineItemPriceForQuantity extends Base {
     private final Long quantity;
     private final DiscountedLineItemPrice discountedPrice;
 

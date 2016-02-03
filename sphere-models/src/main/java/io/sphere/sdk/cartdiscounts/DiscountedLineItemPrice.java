@@ -6,7 +6,7 @@ import io.sphere.sdk.models.Base;
 import javax.money.MonetaryAmount;
 import java.util.List;
 
-public class DiscountedLineItemPrice extends Base {
+public final class DiscountedLineItemPrice extends Base {
     private final MonetaryAmount value;
     private final List<DiscountedLineItemPortion> includedDiscounts;
 

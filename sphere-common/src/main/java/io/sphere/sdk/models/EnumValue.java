@@ -3,7 +3,7 @@ package io.sphere.sdk.models;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.core.type.TypeReference;
 
-public class EnumValue extends Base implements WithKey {
+public final class EnumValue extends Base implements WithKey {
     private final String key;
     private final String label;
 

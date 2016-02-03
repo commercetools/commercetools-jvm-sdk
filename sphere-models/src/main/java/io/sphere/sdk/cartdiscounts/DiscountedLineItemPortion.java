@@ -7,7 +7,7 @@ import io.sphere.sdk.models.Referenceable;
 
 import javax.money.MonetaryAmount;
 
-public class DiscountedLineItemPortion extends Base {
+public final class DiscountedLineItemPortion extends Base {
     private final Reference<CartDiscount> discount;
     private final MonetaryAmount discountedAmount;
 

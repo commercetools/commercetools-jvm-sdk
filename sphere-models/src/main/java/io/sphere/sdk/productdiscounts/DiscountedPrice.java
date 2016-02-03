@@ -6,7 +6,7 @@ import io.sphere.sdk.models.Reference;
 
 import javax.money.MonetaryAmount;
 
-public class DiscountedPrice extends Base {
+public final class DiscountedPrice extends Base {
     private final MonetaryAmount value;
     private final Reference<ProductDiscount> discount;
 
