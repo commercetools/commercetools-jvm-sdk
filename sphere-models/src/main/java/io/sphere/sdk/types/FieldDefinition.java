@@ -11,7 +11,7 @@ import javax.annotation.Nullable;
 /**
  * @see Custom
  */
-public class FieldDefinition extends Base {
+public final class FieldDefinition extends Base {
     private final FieldType type;
     private final String name;
     private final LocalizedString label;
