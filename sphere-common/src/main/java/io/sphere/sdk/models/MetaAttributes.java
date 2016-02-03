@@ -13,11 +13,11 @@ public interface MetaAttributes {
     @Nullable
     LocalizedString getMetaKeywords();
 
-    static MetaAttributes metaAttributesOf(@Nullable final LocalizedString metaTitle, @Nullable final LocalizedString metaDescription, @Nullable final LocalizedString metaKeywords) {
+    static MetaAttributesDsl metaAttributesOf(@Nullable final LocalizedString metaTitle, @Nullable final LocalizedString metaDescription, @Nullable final LocalizedString metaKeywords) {
         return new MetaAttributesDslImpl(metaTitle, metaDescription, metaKeywords);
     }
 
-    static MetaAttributes metaAttributesOf(final Locale locale, final String metaTitle, final String metaDescription, final String metaKeywords) {
+    static MetaAttributesDsl metaAttributesOf(final Locale locale, final String metaTitle, final String metaDescription, final String metaKeywords) {
         return MetaAttributesDsl.of()
                 .withTitle(LocalizedString.of(locale, metaTitle))
                 .withDescription(LocalizedString.of(locale, metaDescription))
