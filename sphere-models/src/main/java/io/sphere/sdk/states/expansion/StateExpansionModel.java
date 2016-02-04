@@ -28,7 +28,7 @@ public final class StateExpansionModel<T> extends ExpandedModel<T> {
         return new StateExpansionModel<>(parentPath, path);
     }
 
-    public ExpansionPathContainer<T> transitions() {
-        return expansionPath("transitions[*]");
+    public StateExpansionModel<T> transitions() {
+        return StateExpansionModel.of(buildPathExpression(), "transitions[*]");
     }
 }
