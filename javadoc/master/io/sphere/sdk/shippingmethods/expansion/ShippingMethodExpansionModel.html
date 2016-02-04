@@ -49,7 +49,7 @@ var activeTableTab = "activeTableTab";
 <div class="subNav">
 <ul class="navList">
 <li>Prev&nbsp;Class</li>
-<li><a href="../../../../../io/sphere/sdk/shippingmethods/expansion/ZoneRateExpansionModel.html" title="class in io.sphere.sdk.shippingmethods.expansion"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
+<li><a href="../../../../../io/sphere/sdk/shippingmethods/expansion/ZoneRateExpansionModel.html" title="interface in io.sphere.sdk.shippingmethods.expansion"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">
 <li><a href="../../../../../index.html?io/sphere/sdk/shippingmethods/expansion/ShippingMethodExpansionModel.html" target="_top">Frames</a></li>
@@ -132,7 +132,8 @@ var activeTableTab = "activeTableTab";
 <hr>
 <br>
 <pre>public final class <span class="typeNameLabel">ShippingMethodExpansionModel&lt;T&gt;</span>
-extends <a href="../../../../../io/sphere/sdk/expansion/ExpandedModel.html" title="class in io.sphere.sdk.expansion">ExpandedModel</a>&lt;T&gt;</pre>
+extends <a href="../../../../../io/sphere/sdk/expansion/ExpandedModel.html" title="class in io.sphere.sdk.expansion">ExpandedModel</a>&lt;T&gt;
+implements <a href="../../../../../io/sphere/sdk/expansion/ExpansionPathContainer.html" title="interface in io.sphere.sdk.expansion">ExpansionPathContainer</a>&lt;T&gt;</pre>
 <div class="block">DSL class to create expansion path expressions.</div>
 </li>
 </ul>
@@ -179,19 +180,19 @@ extends <a href="../../../../../io/sphere/sdk/expansion/ExpandedModel.html" titl
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/shippingmethods/expansion/ShippingMethodExpansionModel.html#taxCategory--">taxCategory</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i2" class="altColor">
-<td class="colFirst"><code><a href="../../../../../io/sphere/sdk/shippingmethods/expansion/ZoneRateExpansionModel.html" title="class in io.sphere.sdk.shippingmethods.expansion">ZoneRateExpansionModel</a>&lt;<a href="../../../../../io/sphere/sdk/shippingmethods/expansion/ShippingMethodExpansionModel.html" title="type parameter in ShippingMethodExpansionModel">T</a>&gt;</code></td>
+<td class="colFirst"><code><a href="../../../../../io/sphere/sdk/shippingmethods/expansion/ZoneRateExpansionModel.html" title="interface in io.sphere.sdk.shippingmethods.expansion">ZoneRateExpansionModel</a>&lt;<a href="../../../../../io/sphere/sdk/shippingmethods/expansion/ShippingMethodExpansionModel.html" title="type parameter in ShippingMethodExpansionModel">T</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/shippingmethods/expansion/ShippingMethodExpansionModel.html#zoneRates--">zoneRates</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i3" class="rowColor">
-<td class="colFirst"><code><a href="../../../../../io/sphere/sdk/shippingmethods/expansion/ZoneRateExpansionModel.html" title="class in io.sphere.sdk.shippingmethods.expansion">ZoneRateExpansionModel</a>&lt;<a href="../../../../../io/sphere/sdk/shippingmethods/expansion/ShippingMethodExpansionModel.html" title="type parameter in ShippingMethodExpansionModel">T</a>&gt;</code></td>
+<td class="colFirst"><code><a href="../../../../../io/sphere/sdk/shippingmethods/expansion/ZoneRateExpansionModel.html" title="interface in io.sphere.sdk.shippingmethods.expansion">ZoneRateExpansionModel</a>&lt;<a href="../../../../../io/sphere/sdk/shippingmethods/expansion/ShippingMethodExpansionModel.html" title="type parameter in ShippingMethodExpansionModel">T</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/shippingmethods/expansion/ShippingMethodExpansionModel.html#zoneRates-int-">zoneRates</a></span>(int&nbsp;index)</code>&nbsp;</td>
 </tr>
 <tr id="i4" class="altColor">
-<td class="colFirst"><code><a href="../../../../../io/sphere/sdk/expansion/ExpansionPathContainer.html" title="interface in io.sphere.sdk.expansion">ExpansionPathContainer</a>&lt;<a href="../../../../../io/sphere/sdk/shippingmethods/expansion/ShippingMethodExpansionModel.html" title="type parameter in ShippingMethodExpansionModel">T</a>&gt;</code></td>
+<td class="colFirst"><code><a href="../../../../../io/sphere/sdk/zones/expansion/ZoneExpansionModel.html" title="interface in io.sphere.sdk.zones.expansion">ZoneExpansionModel</a>&lt;<a href="../../../../../io/sphere/sdk/shippingmethods/expansion/ShippingMethodExpansionModel.html" title="type parameter in ShippingMethodExpansionModel">T</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/shippingmethods/expansion/ShippingMethodExpansionModel.html#zones--">zones</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i5" class="rowColor">
-<td class="colFirst"><code><a href="../../../../../io/sphere/sdk/expansion/ExpansionPathContainer.html" title="interface in io.sphere.sdk.expansion">ExpansionPathContainer</a>&lt;<a href="../../../../../io/sphere/sdk/shippingmethods/expansion/ShippingMethodExpansionModel.html" title="type parameter in ShippingMethodExpansionModel">T</a>&gt;</code></td>
+<td class="colFirst"><code><a href="../../../../../io/sphere/sdk/zones/expansion/ZoneExpansionModel.html" title="interface in io.sphere.sdk.zones.expansion">ZoneExpansionModel</a>&lt;<a href="../../../../../io/sphere/sdk/shippingmethods/expansion/ShippingMethodExpansionModel.html" title="type parameter in ShippingMethodExpansionModel">T</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/shippingmethods/expansion/ShippingMethodExpansionModel.html#zones-int-">zones</a></span>(int&nbsp;index)</code>&nbsp;</td>
 </tr>
 </table>
@@ -207,7 +208,7 @@ extends <a href="../../../../../io/sphere/sdk/expansion/ExpandedModel.html" titl
 <!--   -->
 </a>
 <h3>Methods inherited from class&nbsp;io.sphere.sdk.expansion.<a href="../../../../../io/sphere/sdk/expansion/ExpansionModel.html" title="class in io.sphere.sdk.expansion">ExpansionModel</a></h3>
-<code><a href="../../../../../io/sphere/sdk/expansion/ExpansionModel.html#buildPathExpression--">buildPathExpression</a>, <a href="../../../../../io/sphere/sdk/expansion/ExpansionModel.html#expansionPath-java.lang.String-">expansionPath</a>, <a href="../../../../../io/sphere/sdk/expansion/ExpansionModel.html#pathExpression--">pathExpression</a></code></li>
+<code><a href="../../../../../io/sphere/sdk/expansion/ExpansionModel.html#buildExpansionPaths--">buildExpansionPaths</a>, <a href="../../../../../io/sphere/sdk/expansion/ExpansionModel.html#buildPathExpression--">buildPathExpression</a>, <a href="../../../../../io/sphere/sdk/expansion/ExpansionModel.html#expansionPath-java.lang.String-">expansionPath</a>, <a href="../../../../../io/sphere/sdk/expansion/ExpansionModel.html#pathExpression--">pathExpression</a></code></li>
 </ul>
 <ul class="blockList">
 <li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.models.Base">
@@ -222,6 +223,13 @@ extends <a href="../../../../../io/sphere/sdk/expansion/ExpandedModel.html" titl
 </a>
 <h3>Methods inherited from class&nbsp;java.lang.Object</h3>
 <code>clone, finalize, getClass, notify, notifyAll, wait, wait, wait</code></li>
+</ul>
+<ul class="blockList">
+<li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.expansion.ExpansionPathContainer">
+<!--   -->
+</a>
+<h3>Methods inherited from interface&nbsp;io.sphere.sdk.expansion.<a href="../../../../../io/sphere/sdk/expansion/ExpansionPathContainer.html" title="interface in io.sphere.sdk.expansion">ExpansionPathContainer</a></h3>
+<code><a href="../../../../../io/sphere/sdk/expansion/ExpansionPathContainer.html#expansionPaths--">expansionPaths</a></code></li>
 </ul>
 </li>
 </ul>
@@ -271,7 +279,7 @@ extends <a href="../../../../../io/sphere/sdk/expansion/ExpandedModel.html" titl
 <ul class="blockList">
 <li class="blockList">
 <h4>zoneRates</h4>
-<pre>public&nbsp;<a href="../../../../../io/sphere/sdk/shippingmethods/expansion/ZoneRateExpansionModel.html" title="class in io.sphere.sdk.shippingmethods.expansion">ZoneRateExpansionModel</a>&lt;<a href="../../../../../io/sphere/sdk/shippingmethods/expansion/ShippingMethodExpansionModel.html" title="type parameter in ShippingMethodExpansionModel">T</a>&gt;&nbsp;zoneRates()</pre>
+<pre>public&nbsp;<a href="../../../../../io/sphere/sdk/shippingmethods/expansion/ZoneRateExpansionModel.html" title="interface in io.sphere.sdk.shippingmethods.expansion">ZoneRateExpansionModel</a>&lt;<a href="../../../../../io/sphere/sdk/shippingmethods/expansion/ShippingMethodExpansionModel.html" title="type parameter in ShippingMethodExpansionModel">T</a>&gt;&nbsp;zoneRates()</pre>
 </li>
 </ul>
 <a name="zoneRates-int-">
@@ -280,7 +288,7 @@ extends <a href="../../../../../io/sphere/sdk/expansion/ExpandedModel.html" titl
 <ul class="blockList">
 <li class="blockList">
 <h4>zoneRates</h4>
-<pre>public&nbsp;<a href="../../../../../io/sphere/sdk/shippingmethods/expansion/ZoneRateExpansionModel.html" title="class in io.sphere.sdk.shippingmethods.expansion">ZoneRateExpansionModel</a>&lt;<a href="../../../../../io/sphere/sdk/shippingmethods/expansion/ShippingMethodExpansionModel.html" title="type parameter in ShippingMethodExpansionModel">T</a>&gt;&nbsp;zoneRates(int&nbsp;index)</pre>
+<pre>public&nbsp;<a href="../../../../../io/sphere/sdk/shippingmethods/expansion/ZoneRateExpansionModel.html" title="interface in io.sphere.sdk.shippingmethods.expansion">ZoneRateExpansionModel</a>&lt;<a href="../../../../../io/sphere/sdk/shippingmethods/expansion/ShippingMethodExpansionModel.html" title="type parameter in ShippingMethodExpansionModel">T</a>&gt;&nbsp;zoneRates(int&nbsp;index)</pre>
 </li>
 </ul>
 <a name="zones--">
@@ -289,7 +297,7 @@ extends <a href="../../../../../io/sphere/sdk/expansion/ExpandedModel.html" titl
 <ul class="blockList">
 <li class="blockList">
 <h4>zones</h4>
-<pre>public&nbsp;<a href="../../../../../io/sphere/sdk/expansion/ExpansionPathContainer.html" title="interface in io.sphere.sdk.expansion">ExpansionPathContainer</a>&lt;<a href="../../../../../io/sphere/sdk/shippingmethods/expansion/ShippingMethodExpansionModel.html" title="type parameter in ShippingMethodExpansionModel">T</a>&gt;&nbsp;zones()</pre>
+<pre>public&nbsp;<a href="../../../../../io/sphere/sdk/zones/expansion/ZoneExpansionModel.html" title="interface in io.sphere.sdk.zones.expansion">ZoneExpansionModel</a>&lt;<a href="../../../../../io/sphere/sdk/shippingmethods/expansion/ShippingMethodExpansionModel.html" title="type parameter in ShippingMethodExpansionModel">T</a>&gt;&nbsp;zones()</pre>
 </li>
 </ul>
 <a name="zones-int-">
@@ -298,7 +306,7 @@ extends <a href="../../../../../io/sphere/sdk/expansion/ExpandedModel.html" titl
 <ul class="blockList">
 <li class="blockList">
 <h4>zones</h4>
-<pre>public&nbsp;<a href="../../../../../io/sphere/sdk/expansion/ExpansionPathContainer.html" title="interface in io.sphere.sdk.expansion">ExpansionPathContainer</a>&lt;<a href="../../../../../io/sphere/sdk/shippingmethods/expansion/ShippingMethodExpansionModel.html" title="type parameter in ShippingMethodExpansionModel">T</a>&gt;&nbsp;zones(int&nbsp;index)</pre>
+<pre>public&nbsp;<a href="../../../../../io/sphere/sdk/zones/expansion/ZoneExpansionModel.html" title="interface in io.sphere.sdk.zones.expansion">ZoneExpansionModel</a>&lt;<a href="../../../../../io/sphere/sdk/shippingmethods/expansion/ShippingMethodExpansionModel.html" title="type parameter in ShippingMethodExpansionModel">T</a>&gt;&nbsp;zones(int&nbsp;index)</pre>
 </li>
 </ul>
 <a name="of--">
@@ -338,7 +346,7 @@ extends <a href="../../../../../io/sphere/sdk/expansion/ExpandedModel.html" titl
 <div class="subNav">
 <ul class="navList">
 <li>Prev&nbsp;Class</li>
-<li><a href="../../../../../io/sphere/sdk/shippingmethods/expansion/ZoneRateExpansionModel.html" title="class in io.sphere.sdk.shippingmethods.expansion"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
+<li><a href="../../../../../io/sphere/sdk/shippingmethods/expansion/ZoneRateExpansionModel.html" title="interface in io.sphere.sdk.shippingmethods.expansion"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">
 <li><a href="../../../../../index.html?io/sphere/sdk/shippingmethods/expansion/ShippingMethodExpansionModel.html" target="_top">Frames</a></li>

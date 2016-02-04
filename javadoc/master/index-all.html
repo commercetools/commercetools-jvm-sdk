@@ -303,7 +303,7 @@
 <dd>
 <div class="block">Generates an expression to obtain the facets of the attribute for all values.</div>
 </dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/expansion/ProductProjectionExpansionModel.html#allVariants--">allVariants()</a></span> - Method in class io.sphere.sdk.products.expansion.<a href="io/sphere/sdk/products/expansion/ProductProjectionExpansionModel.html" title="class in io.sphere.sdk.products.expansion">ProductProjectionExpansionModel</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/expansion/ProductProjectionExpansionModel.html#allVariants--">allVariants()</a></span> - Method in interface io.sphere.sdk.products.expansion.<a href="io/sphere/sdk/products/expansion/ProductProjectionExpansionModel.html" title="interface in io.sphere.sdk.products.expansion">ProductProjectionExpansionModel</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/queries/ProductDataQueryModel.html#allVariants--">allVariants()</a></span> - Method in interface io.sphere.sdk.products.queries.<a href="io/sphere/sdk/products/queries/ProductDataQueryModel.html" title="interface in io.sphere.sdk.products.queries">ProductDataQueryModel</a></dt>
 <dd>&nbsp;</dd>
@@ -732,6 +732,8 @@
 <div class="block">A <a href="io/sphere/sdk/models/Builder.html" title="interface in io.sphere.sdk.models"><code>Builder</code></a> is a mutable data container to
  create an immutable instance of another type.</div>
 </dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/expansion/ExpansionModel.html#buildExpansionPaths--">buildExpansionPaths()</a></span> - Method in class io.sphere.sdk.expansion.<a href="io/sphere/sdk/expansion/ExpansionModel.html" title="class in io.sphere.sdk.expansion">ExpansionModel</a></dt>
+<dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/meta/BuildInfo.html" title="class in io.sphere.sdk.meta"><span class="typeNameLink">BuildInfo</span></a> - Class in <a href="io/sphere/sdk/meta/package-summary.html">io.sphere.sdk.meta</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/AddressBuilder.html#building-java.lang.String-">building(String)</a></span> - Method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/AddressBuilder.html" title="class in io.sphere.sdk.models">AddressBuilder</a></dt>
@@ -908,7 +910,7 @@
 <dd>
 <div class="block">A shopping cart holds product variants and can be ordered.</div>
 </dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/expansion/OrderExpansionModel.html#cart--">cart()</a></span> - Method in class io.sphere.sdk.orders.expansion.<a href="io/sphere/sdk/orders/expansion/OrderExpansionModel.html" title="class in io.sphere.sdk.orders.expansion">OrderExpansionModel</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/expansion/OrderExpansionModel.html#cart--">cart()</a></span> - Method in interface io.sphere.sdk.orders.expansion.<a href="io/sphere/sdk/orders/expansion/OrderExpansionModel.html" title="interface in io.sphere.sdk.orders.expansion">OrderExpansionModel</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/queries/OrderQueryModel.html#cart--">cart()</a></span> - Method in interface io.sphere.sdk.orders.queries.<a href="io/sphere/sdk/orders/queries/OrderQueryModel.html" title="interface in io.sphere.sdk.orders.queries">OrderQueryModel</a></dt>
 <dd>&nbsp;</dd>
@@ -994,23 +996,25 @@
 </dd>
 <dt><a href="io/sphere/sdk/carts/CartDraftDsl.html" title="class in io.sphere.sdk.carts"><span class="typeNameLink">CartDraftDsl</span></a> - Class in <a href="io/sphere/sdk/carts/package-summary.html">io.sphere.sdk.carts</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="io/sphere/sdk/carts/expansion/CartExpansionModel.html" title="class in io.sphere.sdk.carts.expansion"><span class="typeNameLink">CartExpansionModel</span></a>&lt;<a href="io/sphere/sdk/carts/expansion/CartExpansionModel.html" title="type parameter in CartExpansionModel">T</a>&gt; - Class in <a href="io/sphere/sdk/carts/expansion/package-summary.html">io.sphere.sdk.carts.expansion</a></dt>
+<dt><a href="io/sphere/sdk/carts/expansion/CartExpansionModel.html" title="interface in io.sphere.sdk.carts.expansion"><span class="typeNameLink">CartExpansionModel</span></a>&lt;<a href="io/sphere/sdk/carts/expansion/CartExpansionModel.html" title="type parameter in CartExpansionModel">T</a>&gt; - Interface in <a href="io/sphere/sdk/carts/expansion/package-summary.html">io.sphere.sdk.carts.expansion</a></dt>
 <dd>
 <div class="block">Model to explore reference fields in a cart that can be expanded.</div>
 </dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/expansion/CartExpansionModel.html#CartExpansionModel-java.lang.String-java.lang.String-">CartExpansionModel(String, String)</a></span> - Constructor for class io.sphere.sdk.carts.expansion.<a href="io/sphere/sdk/carts/expansion/CartExpansionModel.html" title="class in io.sphere.sdk.carts.expansion">CartExpansionModel</a></dt>
-<dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/carts/CartLike.html" title="interface in io.sphere.sdk.carts"><span class="typeNameLink">CartLike</span></a>&lt;<a href="io/sphere/sdk/carts/CartLike.html" title="type parameter in CartLike">T</a>&gt; - Interface in <a href="io/sphere/sdk/carts/package-summary.html">io.sphere.sdk.carts</a></dt>
 <dd>
 <div class="block">Interface to collect the common stuff between carts and orders.</div>
 </dd>
-<dt><a href="io/sphere/sdk/carts/expansion/CartLikeExpansionModel.html" title="class in io.sphere.sdk.carts.expansion"><span class="typeNameLink">CartLikeExpansionModel</span></a>&lt;<a href="io/sphere/sdk/carts/expansion/CartLikeExpansionModel.html" title="type parameter in CartLikeExpansionModel">T</a>&gt; - Class in <a href="io/sphere/sdk/carts/expansion/package-summary.html">io.sphere.sdk.carts.expansion</a></dt>
+<dt><a href="io/sphere/sdk/carts/expansion/CartLikeExpansionModel.html" title="interface in io.sphere.sdk.carts.expansion"><span class="typeNameLink">CartLikeExpansionModel</span></a>&lt;<a href="io/sphere/sdk/carts/expansion/CartLikeExpansionModel.html" title="type parameter in CartLikeExpansionModel">T</a>&gt; - Interface in <a href="io/sphere/sdk/carts/expansion/package-summary.html">io.sphere.sdk.carts.expansion</a></dt>
+<dd>
+<div class="block">Internal base interface</div>
+</dd>
+<dt><a href="io/sphere/sdk/carts/expansion/CartLikeExpansionModelImpl.html" title="class in io.sphere.sdk.carts.expansion"><span class="typeNameLink">CartLikeExpansionModelImpl</span></a>&lt;<a href="io/sphere/sdk/carts/expansion/CartLikeExpansionModelImpl.html" title="type parameter in CartLikeExpansionModelImpl">T</a>&gt; - Class in <a href="io/sphere/sdk/carts/expansion/package-summary.html">io.sphere.sdk.carts.expansion</a></dt>
 <dd>
 <div class="block">Internal base class</div>
 </dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/expansion/CartLikeExpansionModel.html#CartLikeExpansionModel-java.lang.String-java.lang.String-">CartLikeExpansionModel(String, String)</a></span> - Constructor for class io.sphere.sdk.carts.expansion.<a href="io/sphere/sdk/carts/expansion/CartLikeExpansionModel.html" title="class in io.sphere.sdk.carts.expansion">CartLikeExpansionModel</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/expansion/CartLikeExpansionModelImpl.html#CartLikeExpansionModelImpl-java.util.List-java.lang.String-">CartLikeExpansionModelImpl(List&lt;String&gt;, String)</a></span> - Constructor for class io.sphere.sdk.carts.expansion.<a href="io/sphere/sdk/carts/expansion/CartLikeExpansionModelImpl.html" title="class in io.sphere.sdk.carts.expansion">CartLikeExpansionModelImpl</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/expansion/CartLikeExpansionModel.html#CartLikeExpansionModel--">CartLikeExpansionModel()</a></span> - Constructor for class io.sphere.sdk.carts.expansion.<a href="io/sphere/sdk/carts/expansion/CartLikeExpansionModel.html" title="class in io.sphere.sdk.carts.expansion">CartLikeExpansionModel</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/expansion/CartLikeExpansionModelImpl.html#CartLikeExpansionModelImpl--">CartLikeExpansionModelImpl()</a></span> - Constructor for class io.sphere.sdk.carts.expansion.<a href="io/sphere/sdk/carts/expansion/CartLikeExpansionModelImpl.html" title="class in io.sphere.sdk.carts.expansion">CartLikeExpansionModelImpl</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/carts/queries/CartLikeQueryModel.html" title="interface in io.sphere.sdk.carts.queries"><span class="typeNameLink">CartLikeQueryModel</span></a>&lt;<a href="io/sphere/sdk/carts/queries/CartLikeQueryModel.html" title="type parameter in CartLikeQueryModel">T</a>&gt; - Interface in <a href="io/sphere/sdk/carts/queries/package-summary.html">io.sphere.sdk.carts.queries</a></dt>
 <dd>&nbsp;</dd>
@@ -1056,9 +1060,9 @@
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/expansion/ProductDataExpansionModel.html#categories--">categories()</a></span> - Method in class io.sphere.sdk.products.expansion.<a href="io/sphere/sdk/products/expansion/ProductDataExpansionModel.html" title="class in io.sphere.sdk.products.expansion">ProductDataExpansionModel</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/expansion/ProductProjectionExpansionModel.html#categories-int-">categories(int)</a></span> - Method in class io.sphere.sdk.products.expansion.<a href="io/sphere/sdk/products/expansion/ProductProjectionExpansionModel.html" title="class in io.sphere.sdk.products.expansion">ProductProjectionExpansionModel</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/expansion/ProductProjectionExpansionModel.html#categories-int-">categories(int)</a></span> - Method in interface io.sphere.sdk.products.expansion.<a href="io/sphere/sdk/products/expansion/ProductProjectionExpansionModel.html" title="interface in io.sphere.sdk.products.expansion">ProductProjectionExpansionModel</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/expansion/ProductProjectionExpansionModel.html#categories--">categories()</a></span> - Method in class io.sphere.sdk.products.expansion.<a href="io/sphere/sdk/products/expansion/ProductProjectionExpansionModel.html" title="class in io.sphere.sdk.products.expansion">ProductProjectionExpansionModel</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/expansion/ProductProjectionExpansionModel.html#categories--">categories()</a></span> - Method in interface io.sphere.sdk.products.expansion.<a href="io/sphere/sdk/products/expansion/ProductProjectionExpansionModel.html" title="interface in io.sphere.sdk.products.expansion">ProductProjectionExpansionModel</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/queries/PartialProductDataQueryModel.html#categories--">categories()</a></span> - Method in interface io.sphere.sdk.products.queries.<a href="io/sphere/sdk/products/queries/PartialProductDataQueryModel.html" title="interface in io.sphere.sdk.products.queries">PartialProductDataQueryModel</a></dt>
 <dd>&nbsp;</dd>
@@ -2031,9 +2035,11 @@
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/customers/expansion/CustomerExpansionModel.html" title="class in io.sphere.sdk.customers.expansion"><span class="typeNameLink">CustomerExpansionModel</span></a>&lt;<a href="io/sphere/sdk/customers/expansion/CustomerExpansionModel.html" title="type parameter in CustomerExpansionModel">T</a>&gt; - Class in <a href="io/sphere/sdk/customers/expansion/package-summary.html">io.sphere.sdk.customers.expansion</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/expansion/CartExpansionModel.html#customerGroup--">customerGroup()</a></span> - Method in class io.sphere.sdk.carts.expansion.<a href="io/sphere/sdk/carts/expansion/CartExpansionModel.html" title="class in io.sphere.sdk.carts.expansion">CartExpansionModel</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/expansion/CartExpansionModel.html#customerGroup--">customerGroup()</a></span> - Method in interface io.sphere.sdk.carts.expansion.<a href="io/sphere/sdk/carts/expansion/CartExpansionModel.html" title="interface in io.sphere.sdk.carts.expansion">CartExpansionModel</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/expansion/CartLikeExpansionModel.html#customerGroup--">customerGroup()</a></span> - Method in class io.sphere.sdk.carts.expansion.<a href="io/sphere/sdk/carts/expansion/CartLikeExpansionModel.html" title="class in io.sphere.sdk.carts.expansion">CartLikeExpansionModel</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/expansion/CartLikeExpansionModel.html#customerGroup--">customerGroup()</a></span> - Method in interface io.sphere.sdk.carts.expansion.<a href="io/sphere/sdk/carts/expansion/CartLikeExpansionModel.html" title="interface in io.sphere.sdk.carts.expansion">CartLikeExpansionModel</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/expansion/CartLikeExpansionModelImpl.html#customerGroup--">customerGroup()</a></span> - Method in class io.sphere.sdk.carts.expansion.<a href="io/sphere/sdk/carts/expansion/CartLikeExpansionModelImpl.html" title="class in io.sphere.sdk.carts.expansion">CartLikeExpansionModelImpl</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/queries/CartLikeQueryModel.html#customerGroup--">customerGroup()</a></span> - Method in interface io.sphere.sdk.carts.queries.<a href="io/sphere/sdk/carts/queries/CartLikeQueryModel.html" title="interface in io.sphere.sdk.carts.queries">CartLikeQueryModel</a></dt>
 <dd>&nbsp;</dd>
@@ -2051,7 +2057,7 @@
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/customers/queries/CustomerQueryModel.html#customerGroup--">customerGroup()</a></span> - Method in interface io.sphere.sdk.customers.queries.<a href="io/sphere/sdk/customers/queries/CustomerQueryModel.html" title="interface in io.sphere.sdk.customers.queries">CustomerQueryModel</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/expansion/OrderExpansionModel.html#customerGroup--">customerGroup()</a></span> - Method in class io.sphere.sdk.orders.expansion.<a href="io/sphere/sdk/orders/expansion/OrderExpansionModel.html" title="class in io.sphere.sdk.orders.expansion">OrderExpansionModel</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/expansion/OrderExpansionModel.html#customerGroup--">customerGroup()</a></span> - Method in interface io.sphere.sdk.orders.expansion.<a href="io/sphere/sdk/orders/expansion/OrderExpansionModel.html" title="interface in io.sphere.sdk.orders.expansion">OrderExpansionModel</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/OrderImportDraftBuilder.html#customerGroup-io.sphere.sdk.models.Referenceable-">customerGroup(Referenceable&lt;CustomerGroup&gt;)</a></span> - Method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/OrderImportDraftBuilder.html" title="class in io.sphere.sdk.orders">OrderImportDraftBuilder</a></dt>
 <dd>&nbsp;</dd>
@@ -2087,7 +2093,7 @@
 <dd>
 <div class="block">DSL class to create expansion path expressions.</div>
 </dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/customergroups/expansion/CustomerGroupExpansionModel.html#CustomerGroupExpansionModel-java.lang.String-java.lang.String-">CustomerGroupExpansionModel(String, String)</a></span> - Constructor for class io.sphere.sdk.customergroups.expansion.<a href="io/sphere/sdk/customergroups/expansion/CustomerGroupExpansionModel.html" title="class in io.sphere.sdk.customergroups.expansion">CustomerGroupExpansionModel</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/customergroups/expansion/CustomerGroupExpansionModel.html#CustomerGroupExpansionModel-java.util.List-java.lang.String-">CustomerGroupExpansionModel(List&lt;String&gt;, String)</a></span> - Constructor for class io.sphere.sdk.customergroups.expansion.<a href="io/sphere/sdk/customergroups/expansion/CustomerGroupExpansionModel.html" title="class in io.sphere.sdk.customergroups.expansion">CustomerGroupExpansionModel</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/customergroups/queries/CustomerGroupQuery.html" title="interface in io.sphere.sdk.customergroups.queries"><span class="typeNameLink">CustomerGroupQuery</span></a> - Interface in <a href="io/sphere/sdk/customergroups/queries/package-summary.html">io.sphere.sdk.customergroups.queries</a></dt>
 <dd>
@@ -2476,13 +2482,17 @@
 </dd>
 <dt><a href="io/sphere/sdk/discountcodes/queries/DiscountCodeQueryModel.html" title="interface in io.sphere.sdk.discountcodes.queries"><span class="typeNameLink">DiscountCodeQueryModel</span></a> - Interface in <a href="io/sphere/sdk/discountcodes/queries/package-summary.html">io.sphere.sdk.discountcodes.queries</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/expansion/CartExpansionModel.html#discountCodes--">discountCodes()</a></span> - Method in class io.sphere.sdk.carts.expansion.<a href="io/sphere/sdk/carts/expansion/CartExpansionModel.html" title="class in io.sphere.sdk.carts.expansion">CartExpansionModel</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/expansion/CartExpansionModel.html#discountCodes--">discountCodes()</a></span> - Method in interface io.sphere.sdk.carts.expansion.<a href="io/sphere/sdk/carts/expansion/CartExpansionModel.html" title="interface in io.sphere.sdk.carts.expansion">CartExpansionModel</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/expansion/CartExpansionModel.html#discountCodes-int-">discountCodes(int)</a></span> - Method in class io.sphere.sdk.carts.expansion.<a href="io/sphere/sdk/carts/expansion/CartExpansionModel.html" title="class in io.sphere.sdk.carts.expansion">CartExpansionModel</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/expansion/CartExpansionModel.html#discountCodes-int-">discountCodes(int)</a></span> - Method in interface io.sphere.sdk.carts.expansion.<a href="io/sphere/sdk/carts/expansion/CartExpansionModel.html" title="interface in io.sphere.sdk.carts.expansion">CartExpansionModel</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/expansion/CartLikeExpansionModel.html#discountCodes--">discountCodes()</a></span> - Method in class io.sphere.sdk.carts.expansion.<a href="io/sphere/sdk/carts/expansion/CartLikeExpansionModel.html" title="class in io.sphere.sdk.carts.expansion">CartLikeExpansionModel</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/expansion/CartLikeExpansionModel.html#discountCodes--">discountCodes()</a></span> - Method in interface io.sphere.sdk.carts.expansion.<a href="io/sphere/sdk/carts/expansion/CartLikeExpansionModel.html" title="interface in io.sphere.sdk.carts.expansion">CartLikeExpansionModel</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/expansion/CartLikeExpansionModel.html#discountCodes-int-">discountCodes(int)</a></span> - Method in class io.sphere.sdk.carts.expansion.<a href="io/sphere/sdk/carts/expansion/CartLikeExpansionModel.html" title="class in io.sphere.sdk.carts.expansion">CartLikeExpansionModel</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/expansion/CartLikeExpansionModel.html#discountCodes-int-">discountCodes(int)</a></span> - Method in interface io.sphere.sdk.carts.expansion.<a href="io/sphere/sdk/carts/expansion/CartLikeExpansionModel.html" title="interface in io.sphere.sdk.carts.expansion">CartLikeExpansionModel</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/expansion/CartLikeExpansionModelImpl.html#discountCodes--">discountCodes()</a></span> - Method in class io.sphere.sdk.carts.expansion.<a href="io/sphere/sdk/carts/expansion/CartLikeExpansionModelImpl.html" title="class in io.sphere.sdk.carts.expansion">CartLikeExpansionModelImpl</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/expansion/CartLikeExpansionModelImpl.html#discountCodes-int-">discountCodes(int)</a></span> - Method in class io.sphere.sdk.carts.expansion.<a href="io/sphere/sdk/carts/expansion/CartLikeExpansionModelImpl.html" title="class in io.sphere.sdk.carts.expansion">CartLikeExpansionModelImpl</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/queries/CartLikeQueryModel.html#discountCodes--">discountCodes()</a></span> - Method in interface io.sphere.sdk.carts.queries.<a href="io/sphere/sdk/carts/queries/CartLikeQueryModel.html" title="interface in io.sphere.sdk.carts.queries">CartLikeQueryModel</a></dt>
 <dd>&nbsp;</dd>
@@ -2490,9 +2500,9 @@
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/queries/CartQueryModel.html#discountCodes--">discountCodes()</a></span> - Method in interface io.sphere.sdk.carts.queries.<a href="io/sphere/sdk/carts/queries/CartQueryModel.html" title="interface in io.sphere.sdk.carts.queries">CartQueryModel</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/expansion/OrderExpansionModel.html#discountCodes--">discountCodes()</a></span> - Method in class io.sphere.sdk.orders.expansion.<a href="io/sphere/sdk/orders/expansion/OrderExpansionModel.html" title="class in io.sphere.sdk.orders.expansion">OrderExpansionModel</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/expansion/OrderExpansionModel.html#discountCodes--">discountCodes()</a></span> - Method in interface io.sphere.sdk.orders.expansion.<a href="io/sphere/sdk/orders/expansion/OrderExpansionModel.html" title="interface in io.sphere.sdk.orders.expansion">OrderExpansionModel</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/expansion/OrderExpansionModel.html#discountCodes-int-">discountCodes(int)</a></span> - Method in class io.sphere.sdk.orders.expansion.<a href="io/sphere/sdk/orders/expansion/OrderExpansionModel.html" title="class in io.sphere.sdk.orders.expansion">OrderExpansionModel</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/expansion/OrderExpansionModel.html#discountCodes-int-">discountCodes(int)</a></span> - Method in interface io.sphere.sdk.orders.expansion.<a href="io/sphere/sdk/orders/expansion/OrderExpansionModel.html" title="interface in io.sphere.sdk.orders.expansion">OrderExpansionModel</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/queries/OrderQueryModel.html#discountCodes--">discountCodes()</a></span> - Method in interface io.sphere.sdk.orders.queries.<a href="io/sphere/sdk/orders/queries/OrderQueryModel.html" title="interface in io.sphere.sdk.orders.queries">OrderQueryModel</a></dt>
 <dd>&nbsp;</dd>
@@ -2919,6 +2929,8 @@
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/types/queries/TypeByIdGet.html#expansionPaths--">expansionPaths()</a></span> - Method in interface io.sphere.sdk.types.queries.<a href="io/sphere/sdk/types/queries/TypeByIdGet.html" title="interface in io.sphere.sdk.types.queries">TypeByIdGet</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/types/queries/TypeQueryBuilder.html#expansionPaths-java.util.function.Function-">expansionPaths(Function&lt;TypeExpansionModel&lt;Type&gt;, ExpansionPathContainer&lt;Type&gt;&gt;)</a></span> - Method in class io.sphere.sdk.types.queries.<a href="io/sphere/sdk/types/queries/TypeQueryBuilder.html" title="class in io.sphere.sdk.types.queries">TypeQueryBuilder</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/zones/expansion/ZoneExpansionModelImpl.html#expansionPaths--">expansionPaths()</a></span> - Method in class io.sphere.sdk.zones.expansion.<a href="io/sphere/sdk/zones/expansion/ZoneExpansionModelImpl.html" title="class in io.sphere.sdk.zones.expansion">ZoneExpansionModelImpl</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/zones/queries/ZoneByIdGet.html#expansionPaths--">expansionPaths()</a></span> - Method in interface io.sphere.sdk.zones.queries.<a href="io/sphere/sdk/zones/queries/ZoneByIdGet.html" title="interface in io.sphere.sdk.zones.queries">ZoneByIdGet</a></dt>
 <dd>&nbsp;</dd>
@@ -8014,13 +8026,17 @@
 </dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/CartDraftBuilder.html#lineItems-java.util.List-">lineItems(List&lt;LineItemDraft&gt;)</a></span> - Method in class io.sphere.sdk.carts.<a href="io/sphere/sdk/carts/CartDraftBuilder.html" title="class in io.sphere.sdk.carts">CartDraftBuilder</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/expansion/CartExpansionModel.html#lineItems--">lineItems()</a></span> - Method in class io.sphere.sdk.carts.expansion.<a href="io/sphere/sdk/carts/expansion/CartExpansionModel.html" title="class in io.sphere.sdk.carts.expansion">CartExpansionModel</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/expansion/CartExpansionModel.html#lineItems--">lineItems()</a></span> - Method in interface io.sphere.sdk.carts.expansion.<a href="io/sphere/sdk/carts/expansion/CartExpansionModel.html" title="interface in io.sphere.sdk.carts.expansion">CartExpansionModel</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/expansion/CartExpansionModel.html#lineItems-int-">lineItems(int)</a></span> - Method in class io.sphere.sdk.carts.expansion.<a href="io/sphere/sdk/carts/expansion/CartExpansionModel.html" title="class in io.sphere.sdk.carts.expansion">CartExpansionModel</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/expansion/CartExpansionModel.html#lineItems-int-">lineItems(int)</a></span> - Method in interface io.sphere.sdk.carts.expansion.<a href="io/sphere/sdk/carts/expansion/CartExpansionModel.html" title="interface in io.sphere.sdk.carts.expansion">CartExpansionModel</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/expansion/CartLikeExpansionModel.html#lineItems--">lineItems()</a></span> - Method in class io.sphere.sdk.carts.expansion.<a href="io/sphere/sdk/carts/expansion/CartLikeExpansionModel.html" title="class in io.sphere.sdk.carts.expansion">CartLikeExpansionModel</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/expansion/CartLikeExpansionModel.html#lineItems--">lineItems()</a></span> - Method in interface io.sphere.sdk.carts.expansion.<a href="io/sphere/sdk/carts/expansion/CartLikeExpansionModel.html" title="interface in io.sphere.sdk.carts.expansion">CartLikeExpansionModel</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/expansion/CartLikeExpansionModel.html#lineItems-int-">lineItems(int)</a></span> - Method in class io.sphere.sdk.carts.expansion.<a href="io/sphere/sdk/carts/expansion/CartLikeExpansionModel.html" title="class in io.sphere.sdk.carts.expansion">CartLikeExpansionModel</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/expansion/CartLikeExpansionModel.html#lineItems-int-">lineItems(int)</a></span> - Method in interface io.sphere.sdk.carts.expansion.<a href="io/sphere/sdk/carts/expansion/CartLikeExpansionModel.html" title="interface in io.sphere.sdk.carts.expansion">CartLikeExpansionModel</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/expansion/CartLikeExpansionModelImpl.html#lineItems--">lineItems()</a></span> - Method in class io.sphere.sdk.carts.expansion.<a href="io/sphere/sdk/carts/expansion/CartLikeExpansionModelImpl.html" title="class in io.sphere.sdk.carts.expansion">CartLikeExpansionModelImpl</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/expansion/CartLikeExpansionModelImpl.html#lineItems-int-">lineItems(int)</a></span> - Method in class io.sphere.sdk.carts.expansion.<a href="io/sphere/sdk/carts/expansion/CartLikeExpansionModelImpl.html" title="class in io.sphere.sdk.carts.expansion">CartLikeExpansionModelImpl</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/queries/CartLikeQueryModel.html#lineItems--">lineItems()</a></span> - Method in interface io.sphere.sdk.carts.queries.<a href="io/sphere/sdk/carts/queries/CartLikeQueryModel.html" title="interface in io.sphere.sdk.carts.queries">CartLikeQueryModel</a></dt>
 <dd>&nbsp;</dd>
@@ -8028,9 +8044,9 @@
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/queries/CartQueryModel.html#lineItems--">lineItems()</a></span> - Method in interface io.sphere.sdk.carts.queries.<a href="io/sphere/sdk/carts/queries/CartQueryModel.html" title="interface in io.sphere.sdk.carts.queries">CartQueryModel</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/expansion/OrderExpansionModel.html#lineItems--">lineItems()</a></span> - Method in class io.sphere.sdk.orders.expansion.<a href="io/sphere/sdk/orders/expansion/OrderExpansionModel.html" title="class in io.sphere.sdk.orders.expansion">OrderExpansionModel</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/expansion/OrderExpansionModel.html#lineItems--">lineItems()</a></span> - Method in interface io.sphere.sdk.orders.expansion.<a href="io/sphere/sdk/orders/expansion/OrderExpansionModel.html" title="interface in io.sphere.sdk.orders.expansion">OrderExpansionModel</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/expansion/OrderExpansionModel.html#lineItems-int-">lineItems(int)</a></span> - Method in class io.sphere.sdk.orders.expansion.<a href="io/sphere/sdk/orders/expansion/OrderExpansionModel.html" title="class in io.sphere.sdk.orders.expansion">OrderExpansionModel</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/expansion/OrderExpansionModel.html#lineItems-int-">lineItems(int)</a></span> - Method in interface io.sphere.sdk.orders.expansion.<a href="io/sphere/sdk/orders/expansion/OrderExpansionModel.html" title="interface in io.sphere.sdk.orders.expansion">OrderExpansionModel</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/OrderImportDraftBuilder.html#lineItems-java.util.List-">lineItems(List&lt;LineItemImportDraft&gt;)</a></span> - Method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/OrderImportDraftBuilder.html" title="class in io.sphere.sdk.orders">OrderImportDraftBuilder</a></dt>
 <dd>&nbsp;</dd>
@@ -8207,7 +8223,7 @@
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/expansion/ProductDataExpansionModel.html#masterVariant--">masterVariant()</a></span> - Method in class io.sphere.sdk.products.expansion.<a href="io/sphere/sdk/products/expansion/ProductDataExpansionModel.html" title="class in io.sphere.sdk.products.expansion">ProductDataExpansionModel</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/expansion/ProductProjectionExpansionModel.html#masterVariant--">masterVariant()</a></span> - Method in class io.sphere.sdk.products.expansion.<a href="io/sphere/sdk/products/expansion/ProductProjectionExpansionModel.html" title="class in io.sphere.sdk.products.expansion">ProductProjectionExpansionModel</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/expansion/ProductProjectionExpansionModel.html#masterVariant--">masterVariant()</a></span> - Method in interface io.sphere.sdk.products.expansion.<a href="io/sphere/sdk/products/expansion/ProductProjectionExpansionModel.html" title="interface in io.sphere.sdk.products.expansion">ProductProjectionExpansionModel</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/ProductDraftBuilder.html#masterVariant-io.sphere.sdk.products.ProductVariantDraft-">masterVariant(ProductVariantDraft)</a></span> - Method in class io.sphere.sdk.products.<a href="io/sphere/sdk/products/ProductDraftBuilder.html" title="class in io.sphere.sdk.products">ProductDraftBuilder</a></dt>
 <dd>&nbsp;</dd>
@@ -8825,7 +8841,9 @@
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/CustomLineItemDraft.html#of-io.sphere.sdk.models.LocalizedString-java.lang.String-javax.money.MonetaryAmount-io.sphere.sdk.models.Referenceable-long-io.sphere.sdk.types.CustomFieldsDraft-">of(LocalizedString, String, MonetaryAmount, Referenceable&lt;TaxCategory&gt;, long, CustomFieldsDraft)</a></span> - Static method in interface io.sphere.sdk.carts.<a href="io/sphere/sdk/carts/CustomLineItemDraft.html" title="interface in io.sphere.sdk.carts">CustomLineItemDraft</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/expansion/CartExpansionModel.html#of--">of()</a></span> - Static method in class io.sphere.sdk.carts.expansion.<a href="io/sphere/sdk/carts/expansion/CartExpansionModel.html" title="class in io.sphere.sdk.carts.expansion">CartExpansionModel</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/expansion/CartExpansionModel.html#of--">of()</a></span> - Static method in interface io.sphere.sdk.carts.expansion.<a href="io/sphere/sdk/carts/expansion/CartExpansionModel.html" title="interface in io.sphere.sdk.carts.expansion">CartExpansionModel</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/expansion/CartExpansionModel.html#of-java.util.List-java.lang.String-">of(List&lt;String&gt;, String)</a></span> - Static method in interface io.sphere.sdk.carts.expansion.<a href="io/sphere/sdk/carts/expansion/CartExpansionModel.html" title="interface in io.sphere.sdk.carts.expansion">CartExpansionModel</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/ItemState.html#of-io.sphere.sdk.models.Referenceable-long-">of(Referenceable&lt;State&gt;, long)</a></span> - Static method in class io.sphere.sdk.carts.<a href="io/sphere/sdk/carts/ItemState.html" title="class in io.sphere.sdk.carts">ItemState</a></dt>
 <dd>&nbsp;</dd>
@@ -9018,6 +9036,8 @@
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/customergroups/CustomerGroupDraft.html#of-java.lang.String-">of(String)</a></span> - Static method in interface io.sphere.sdk.customergroups.<a href="io/sphere/sdk/customergroups/CustomerGroupDraft.html" title="interface in io.sphere.sdk.customergroups">CustomerGroupDraft</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/customergroups/expansion/CustomerGroupExpansionModel.html#of--">of()</a></span> - Static method in class io.sphere.sdk.customergroups.expansion.<a href="io/sphere/sdk/customergroups/expansion/CustomerGroupExpansionModel.html" title="class in io.sphere.sdk.customergroups.expansion">CustomerGroupExpansionModel</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/customergroups/expansion/CustomerGroupExpansionModel.html#of-java.util.List-java.lang.String-">of(List&lt;String&gt;, String)</a></span> - Static method in class io.sphere.sdk.customergroups.expansion.<a href="io/sphere/sdk/customergroups/expansion/CustomerGroupExpansionModel.html" title="class in io.sphere.sdk.customergroups.expansion">CustomerGroupExpansionModel</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/customergroups/queries/CustomerGroupByIdGet.html#of-io.sphere.sdk.models.Identifiable-">of(Identifiable&lt;CustomerGroup&gt;)</a></span> - Static method in interface io.sphere.sdk.customergroups.queries.<a href="io/sphere/sdk/customergroups/queries/CustomerGroupByIdGet.html" title="interface in io.sphere.sdk.customergroups.queries">CustomerGroupByIdGet</a></dt>
 <dd>&nbsp;</dd>
@@ -9505,7 +9525,7 @@
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/DeliveryItem.html#of-io.sphere.sdk.carts.LineItemLike-">of(LineItemLike)</a></span> - Static method in interface io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/DeliveryItem.html" title="interface in io.sphere.sdk.orders">DeliveryItem</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/expansion/OrderExpansionModel.html#of--">of()</a></span> - Static method in class io.sphere.sdk.orders.expansion.<a href="io/sphere/sdk/orders/expansion/OrderExpansionModel.html" title="class in io.sphere.sdk.orders.expansion">OrderExpansionModel</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/expansion/OrderExpansionModel.html#of--">of()</a></span> - Static method in interface io.sphere.sdk.orders.expansion.<a href="io/sphere/sdk/orders/expansion/OrderExpansionModel.html" title="interface in io.sphere.sdk.orders.expansion">OrderExpansionModel</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/expansion/SyncInfoExpansionModel.html#of--">of()</a></span> - Static method in class io.sphere.sdk.orders.expansion.<a href="io/sphere/sdk/orders/expansion/SyncInfoExpansionModel.html" title="class in io.sphere.sdk.orders.expansion">SyncInfoExpansionModel</a></dt>
 <dd>&nbsp;</dd>
@@ -9837,7 +9857,7 @@
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/expansion/ProductExpansionModel.html#of--">of()</a></span> - Static method in class io.sphere.sdk.products.expansion.<a href="io/sphere/sdk/products/expansion/ProductExpansionModel.html" title="class in io.sphere.sdk.products.expansion">ProductExpansionModel</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/expansion/ProductProjectionExpansionModel.html#of--">of()</a></span> - Static method in class io.sphere.sdk.products.expansion.<a href="io/sphere/sdk/products/expansion/ProductProjectionExpansionModel.html" title="class in io.sphere.sdk.products.expansion">ProductProjectionExpansionModel</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/expansion/ProductProjectionExpansionModel.html#of--">of()</a></span> - Static method in interface io.sphere.sdk.products.expansion.<a href="io/sphere/sdk/products/expansion/ProductProjectionExpansionModel.html" title="interface in io.sphere.sdk.products.expansion">ProductProjectionExpansionModel</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/Image.html#of-java.lang.String-io.sphere.sdk.products.ImageDimensions-java.lang.String-">of(String, ImageDimensions, String)</a></span> - Static method in interface io.sphere.sdk.products.<a href="io/sphere/sdk/products/Image.html" title="interface in io.sphere.sdk.products">Image</a></dt>
 <dd>&nbsp;</dd>
@@ -9945,7 +9965,9 @@
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/producttypes/commands/updateactions/RemoveAttributeDefinition.html#of-java.lang.String-">of(String)</a></span> - Static method in class io.sphere.sdk.producttypes.commands.updateactions.<a href="io/sphere/sdk/producttypes/commands/updateactions/RemoveAttributeDefinition.html" title="class in io.sphere.sdk.producttypes.commands.updateactions">RemoveAttributeDefinition</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/producttypes/expansion/ProductTypeExpansionModel.html#of--">of()</a></span> - Static method in class io.sphere.sdk.producttypes.expansion.<a href="io/sphere/sdk/producttypes/expansion/ProductTypeExpansionModel.html" title="class in io.sphere.sdk.producttypes.expansion">ProductTypeExpansionModel</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/producttypes/expansion/ProductTypeExpansionModel.html#of--">of()</a></span> - Static method in interface io.sphere.sdk.producttypes.expansion.<a href="io/sphere/sdk/producttypes/expansion/ProductTypeExpansionModel.html" title="interface in io.sphere.sdk.producttypes.expansion">ProductTypeExpansionModel</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/producttypes/expansion/ProductTypeExpansionModel.html#of-java.util.List-java.lang.String-">of(List&lt;String&gt;, String)</a></span> - Static method in interface io.sphere.sdk.producttypes.expansion.<a href="io/sphere/sdk/producttypes/expansion/ProductTypeExpansionModel.html" title="interface in io.sphere.sdk.producttypes.expansion">ProductTypeExpansionModel</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/producttypes/MetaProductType.html#of-java.util.List-">of(List&lt;AttributeDefinition&gt;)</a></span> - Static method in interface io.sphere.sdk.producttypes.<a href="io/sphere/sdk/producttypes/MetaProductType.html" title="interface in io.sphere.sdk.producttypes">MetaProductType</a></dt>
 <dd>&nbsp;</dd>
@@ -10237,6 +10259,8 @@
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/taxcategories/expansion/TaxCategoryExpansionModel.html#of--">of()</a></span> - Static method in class io.sphere.sdk.taxcategories.expansion.<a href="io/sphere/sdk/taxcategories/expansion/TaxCategoryExpansionModel.html" title="class in io.sphere.sdk.taxcategories.expansion">TaxCategoryExpansionModel</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/taxcategories/expansion/TaxCategoryExpansionModel.html#of-java.util.List-java.lang.String-">of(List&lt;String&gt;, String)</a></span> - Static method in class io.sphere.sdk.taxcategories.expansion.<a href="io/sphere/sdk/taxcategories/expansion/TaxCategoryExpansionModel.html" title="class in io.sphere.sdk.taxcategories.expansion">TaxCategoryExpansionModel</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/taxcategories/queries/TaxCategoryByIdGet.html#of-io.sphere.sdk.models.Identifiable-">of(Identifiable&lt;TaxCategory&gt;)</a></span> - Static method in interface io.sphere.sdk.taxcategories.queries.<a href="io/sphere/sdk/taxcategories/queries/TaxCategoryByIdGet.html" title="interface in io.sphere.sdk.taxcategories.queries">TaxCategoryByIdGet</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/taxcategories/queries/TaxCategoryByIdGet.html#of-java.lang.String-">of(String)</a></span> - Static method in interface io.sphere.sdk.taxcategories.queries.<a href="io/sphere/sdk/taxcategories/queries/TaxCategoryByIdGet.html" title="interface in io.sphere.sdk.taxcategories.queries">TaxCategoryByIdGet</a></dt>
@@ -10355,7 +10379,9 @@
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/zones/commands/ZoneUpdateCommand.html#of-io.sphere.sdk.models.Versioned-java.util.List-">of(Versioned&lt;Zone&gt;, List&lt;? extends UpdateAction&lt;Zone&gt;&gt;)</a></span> - Static method in interface io.sphere.sdk.zones.commands.<a href="io/sphere/sdk/zones/commands/ZoneUpdateCommand.html" title="interface in io.sphere.sdk.zones.commands">ZoneUpdateCommand</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/zones/expansion/ZoneExpansionModel.html#of--">of()</a></span> - Static method in class io.sphere.sdk.zones.expansion.<a href="io/sphere/sdk/zones/expansion/ZoneExpansionModel.html" title="class in io.sphere.sdk.zones.expansion">ZoneExpansionModel</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/zones/expansion/ZoneExpansionModel.html#of--">of()</a></span> - Static method in interface io.sphere.sdk.zones.expansion.<a href="io/sphere/sdk/zones/expansion/ZoneExpansionModel.html" title="interface in io.sphere.sdk.zones.expansion">ZoneExpansionModel</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/zones/expansion/ZoneExpansionModel.html#of-java.util.List-java.lang.String-">of(List&lt;String&gt;, String)</a></span> - Static method in interface io.sphere.sdk.zones.expansion.<a href="io/sphere/sdk/zones/expansion/ZoneExpansionModel.html" title="interface in io.sphere.sdk.zones.expansion">ZoneExpansionModel</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/zones/Location.html#of-com.neovisionaries.i18n.CountryCode-java.lang.String-">of(CountryCode, String)</a></span> - Static method in class io.sphere.sdk.zones.<a href="io/sphere/sdk/zones/Location.html" title="class in io.sphere.sdk.zones">Location</a></dt>
 <dd>&nbsp;</dd>
@@ -11348,7 +11374,7 @@
 <dd>
 <div class="block">Deletes an order in SPHERE.IO.</div>
 </dd>
-<dt><a href="io/sphere/sdk/orders/expansion/OrderExpansionModel.html" title="class in io.sphere.sdk.orders.expansion"><span class="typeNameLink">OrderExpansionModel</span></a>&lt;<a href="io/sphere/sdk/orders/expansion/OrderExpansionModel.html" title="type parameter in OrderExpansionModel">T</a>&gt; - Class in <a href="io/sphere/sdk/orders/expansion/package-summary.html">io.sphere.sdk.orders.expansion</a></dt>
+<dt><a href="io/sphere/sdk/orders/expansion/OrderExpansionModel.html" title="interface in io.sphere.sdk.orders.expansion"><span class="typeNameLink">OrderExpansionModel</span></a>&lt;<a href="io/sphere/sdk/orders/expansion/OrderExpansionModel.html" title="type parameter in OrderExpansionModel">T</a>&gt; - Interface in <a href="io/sphere/sdk/orders/expansion/package-summary.html">io.sphere.sdk.orders.expansion</a></dt>
 <dd>
 <div class="block">DSL class to create expansion path expressions.</div>
 </dd>
@@ -11496,9 +11522,11 @@
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/payments/expansion/PaymentExpansionModel.html" title="class in io.sphere.sdk.payments.expansion"><span class="typeNameLink">PaymentExpansionModel</span></a>&lt;<a href="io/sphere/sdk/payments/expansion/PaymentExpansionModel.html" title="type parameter in PaymentExpansionModel">T</a>&gt; - Class in <a href="io/sphere/sdk/payments/expansion/package-summary.html">io.sphere.sdk.payments.expansion</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/expansion/CartExpansionModel.html#paymentInfo--">paymentInfo()</a></span> - Method in class io.sphere.sdk.carts.expansion.<a href="io/sphere/sdk/carts/expansion/CartExpansionModel.html" title="class in io.sphere.sdk.carts.expansion">CartExpansionModel</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/expansion/CartExpansionModel.html#paymentInfo--">paymentInfo()</a></span> - Method in interface io.sphere.sdk.carts.expansion.<a href="io/sphere/sdk/carts/expansion/CartExpansionModel.html" title="interface in io.sphere.sdk.carts.expansion">CartExpansionModel</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/expansion/CartLikeExpansionModel.html#paymentInfo--">paymentInfo()</a></span> - Method in class io.sphere.sdk.carts.expansion.<a href="io/sphere/sdk/carts/expansion/CartLikeExpansionModel.html" title="class in io.sphere.sdk.carts.expansion">CartLikeExpansionModel</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/expansion/CartLikeExpansionModel.html#paymentInfo--">paymentInfo()</a></span> - Method in interface io.sphere.sdk.carts.expansion.<a href="io/sphere/sdk/carts/expansion/CartLikeExpansionModel.html" title="interface in io.sphere.sdk.carts.expansion">CartLikeExpansionModel</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/expansion/CartLikeExpansionModelImpl.html#paymentInfo--">paymentInfo()</a></span> - Method in class io.sphere.sdk.carts.expansion.<a href="io/sphere/sdk/carts/expansion/CartLikeExpansionModelImpl.html" title="class in io.sphere.sdk.carts.expansion">CartLikeExpansionModelImpl</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/carts/PaymentInfo.html" title="class in io.sphere.sdk.carts"><span class="typeNameLink">PaymentInfo</span></a> - Class in <a href="io/sphere/sdk/carts/package-summary.html">io.sphere.sdk.carts</a></dt>
 <dd>&nbsp;</dd>
@@ -11508,7 +11536,7 @@
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/queries/CartQueryModel.html#paymentInfo--">paymentInfo()</a></span> - Method in interface io.sphere.sdk.carts.queries.<a href="io/sphere/sdk/carts/queries/CartQueryModel.html" title="interface in io.sphere.sdk.carts.queries">CartQueryModel</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/expansion/OrderExpansionModel.html#paymentInfo--">paymentInfo()</a></span> - Method in class io.sphere.sdk.orders.expansion.<a href="io/sphere/sdk/orders/expansion/OrderExpansionModel.html" title="class in io.sphere.sdk.orders.expansion">OrderExpansionModel</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/expansion/OrderExpansionModel.html#paymentInfo--">paymentInfo()</a></span> - Method in interface io.sphere.sdk.orders.expansion.<a href="io/sphere/sdk/orders/expansion/OrderExpansionModel.html" title="interface in io.sphere.sdk.orders.expansion">OrderExpansionModel</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/carts/expansion/PaymentInfoExpansionModel.html" title="class in io.sphere.sdk.carts.expansion"><span class="typeNameLink">PaymentInfoExpansionModel</span></a>&lt;<a href="io/sphere/sdk/carts/expansion/PaymentInfoExpansionModel.html" title="type parameter in PaymentInfoExpansionModel">T</a>&gt; - Class in <a href="io/sphere/sdk/carts/expansion/package-summary.html">io.sphere.sdk.carts.expansion</a></dt>
 <dd>&nbsp;</dd>
@@ -12784,7 +12812,7 @@ assertEventually(() -&gt; {
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/products/ProductProjectionComparators.html" title="class in io.sphere.sdk.products"><span class="typeNameLink">ProductProjectionComparators</span></a> - Class in <a href="io/sphere/sdk/products/package-summary.html">io.sphere.sdk.products</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="io/sphere/sdk/products/expansion/ProductProjectionExpansionModel.html" title="class in io.sphere.sdk.products.expansion"><span class="typeNameLink">ProductProjectionExpansionModel</span></a>&lt;<a href="io/sphere/sdk/products/expansion/ProductProjectionExpansionModel.html" title="type parameter in ProductProjectionExpansionModel">T</a>&gt; - Class in <a href="io/sphere/sdk/products/expansion/package-summary.html">io.sphere.sdk.products.expansion</a></dt>
+<dt><a href="io/sphere/sdk/products/expansion/ProductProjectionExpansionModel.html" title="interface in io.sphere.sdk.products.expansion"><span class="typeNameLink">ProductProjectionExpansionModel</span></a>&lt;<a href="io/sphere/sdk/products/expansion/ProductProjectionExpansionModel.html" title="type parameter in ProductProjectionExpansionModel">T</a>&gt; - Interface in <a href="io/sphere/sdk/products/expansion/package-summary.html">io.sphere.sdk.products.expansion</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/products/search/ProductProjectionFacetedSearchSearchModel.html" title="class in io.sphere.sdk.products.search"><span class="typeNameLink">ProductProjectionFacetedSearchSearchModel</span></a> - Class in <a href="io/sphere/sdk/products/search/package-summary.html">io.sphere.sdk.products.search</a></dt>
 <dd>
@@ -12844,7 +12872,7 @@ assertEventually(() -&gt; {
 </dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/expansion/ProductExpansionModel.html#productType--">productType()</a></span> - Method in class io.sphere.sdk.products.expansion.<a href="io/sphere/sdk/products/expansion/ProductExpansionModel.html" title="class in io.sphere.sdk.products.expansion">ProductExpansionModel</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/expansion/ProductProjectionExpansionModel.html#productType--">productType()</a></span> - Method in class io.sphere.sdk.products.expansion.<a href="io/sphere/sdk/products/expansion/ProductProjectionExpansionModel.html" title="class in io.sphere.sdk.products.expansion">ProductProjectionExpansionModel</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/expansion/ProductProjectionExpansionModel.html#productType--">productType()</a></span> - Method in interface io.sphere.sdk.products.expansion.<a href="io/sphere/sdk/products/expansion/ProductProjectionExpansionModel.html" title="interface in io.sphere.sdk.products.expansion">ProductProjectionExpansionModel</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/queries/ProductProjectionQueryModel.html#productType--">productType()</a></span> - Method in interface io.sphere.sdk.products.queries.<a href="io/sphere/sdk/products/queries/ProductProjectionQueryModel.html" title="interface in io.sphere.sdk.products.queries">ProductProjectionQueryModel</a></dt>
 <dd>&nbsp;</dd>
@@ -12884,7 +12912,7 @@ assertEventually(() -&gt; {
 </dd>
 <dt><a href="io/sphere/sdk/producttypes/ProductTypeDraft.html" title="interface in io.sphere.sdk.producttypes"><span class="typeNameLink">ProductTypeDraft</span></a> - Interface in <a href="io/sphere/sdk/producttypes/package-summary.html">io.sphere.sdk.producttypes</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="io/sphere/sdk/producttypes/expansion/ProductTypeExpansionModel.html" title="class in io.sphere.sdk.producttypes.expansion"><span class="typeNameLink">ProductTypeExpansionModel</span></a>&lt;<a href="io/sphere/sdk/producttypes/expansion/ProductTypeExpansionModel.html" title="type parameter in ProductTypeExpansionModel">T</a>&gt; - Class in <a href="io/sphere/sdk/producttypes/expansion/package-summary.html">io.sphere.sdk.producttypes.expansion</a></dt>
+<dt><a href="io/sphere/sdk/producttypes/expansion/ProductTypeExpansionModel.html" title="interface in io.sphere.sdk.producttypes.expansion"><span class="typeNameLink">ProductTypeExpansionModel</span></a>&lt;<a href="io/sphere/sdk/producttypes/expansion/ProductTypeExpansionModel.html" title="type parameter in ProductTypeExpansionModel">T</a>&gt; - Interface in <a href="io/sphere/sdk/producttypes/expansion/package-summary.html">io.sphere.sdk.producttypes.expansion</a></dt>
 <dd>
 <div class="block">DSL class to create expansion path expressions.</div>
 </dd>
@@ -14464,9 +14492,11 @@ CompletionStage&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execu
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/cartdiscounts/ShippingCostTarget.html" title="class in io.sphere.sdk.cartdiscounts"><span class="typeNameLink">ShippingCostTarget</span></a> - Class in <a href="io/sphere/sdk/cartdiscounts/package-summary.html">io.sphere.sdk.cartdiscounts</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/expansion/CartExpansionModel.html#shippingInfo--">shippingInfo()</a></span> - Method in class io.sphere.sdk.carts.expansion.<a href="io/sphere/sdk/carts/expansion/CartExpansionModel.html" title="class in io.sphere.sdk.carts.expansion">CartExpansionModel</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/expansion/CartExpansionModel.html#shippingInfo--">shippingInfo()</a></span> - Method in interface io.sphere.sdk.carts.expansion.<a href="io/sphere/sdk/carts/expansion/CartExpansionModel.html" title="interface in io.sphere.sdk.carts.expansion">CartExpansionModel</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/expansion/CartLikeExpansionModel.html#shippingInfo--">shippingInfo()</a></span> - Method in class io.sphere.sdk.carts.expansion.<a href="io/sphere/sdk/carts/expansion/CartLikeExpansionModel.html" title="class in io.sphere.sdk.carts.expansion">CartLikeExpansionModel</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/expansion/CartLikeExpansionModel.html#shippingInfo--">shippingInfo()</a></span> - Method in interface io.sphere.sdk.carts.expansion.<a href="io/sphere/sdk/carts/expansion/CartLikeExpansionModel.html" title="interface in io.sphere.sdk.carts.expansion">CartLikeExpansionModel</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/expansion/CartLikeExpansionModelImpl.html#shippingInfo--">shippingInfo()</a></span> - Method in class io.sphere.sdk.carts.expansion.<a href="io/sphere/sdk/carts/expansion/CartLikeExpansionModelImpl.html" title="class in io.sphere.sdk.carts.expansion">CartLikeExpansionModelImpl</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/queries/CartLikeQueryModel.html#shippingInfo--">shippingInfo()</a></span> - Method in interface io.sphere.sdk.carts.queries.<a href="io/sphere/sdk/carts/queries/CartLikeQueryModel.html" title="interface in io.sphere.sdk.carts.queries">CartLikeQueryModel</a></dt>
 <dd>&nbsp;</dd>
@@ -14474,7 +14504,7 @@ CompletionStage&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execu
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/queries/CartQueryModel.html#shippingInfo--">shippingInfo()</a></span> - Method in interface io.sphere.sdk.carts.queries.<a href="io/sphere/sdk/carts/queries/CartQueryModel.html" title="interface in io.sphere.sdk.carts.queries">CartQueryModel</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/expansion/OrderExpansionModel.html#shippingInfo--">shippingInfo()</a></span> - Method in class io.sphere.sdk.orders.expansion.<a href="io/sphere/sdk/orders/expansion/OrderExpansionModel.html" title="class in io.sphere.sdk.orders.expansion">OrderExpansionModel</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/expansion/OrderExpansionModel.html#shippingInfo--">shippingInfo()</a></span> - Method in interface io.sphere.sdk.orders.expansion.<a href="io/sphere/sdk/orders/expansion/OrderExpansionModel.html" title="interface in io.sphere.sdk.orders.expansion">OrderExpansionModel</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/OrderImportDraftBuilder.html#shippingInfo-io.sphere.sdk.orders.OrderShippingInfo-">shippingInfo(OrderShippingInfo)</a></span> - Method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/OrderImportDraftBuilder.html" title="class in io.sphere.sdk.orders">OrderImportDraftBuilder</a></dt>
 <dd>&nbsp;</dd>
@@ -15248,7 +15278,7 @@ CompletionStage&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execu
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/queries/SyncInfoQueryModel.html#syncedAt--">syncedAt()</a></span> - Method in interface io.sphere.sdk.orders.queries.<a href="io/sphere/sdk/orders/queries/SyncInfoQueryModel.html" title="interface in io.sphere.sdk.orders.queries">SyncInfoQueryModel</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/expansion/OrderExpansionModel.html#syncInfo--">syncInfo()</a></span> - Method in class io.sphere.sdk.orders.expansion.<a href="io/sphere/sdk/orders/expansion/OrderExpansionModel.html" title="class in io.sphere.sdk.orders.expansion">OrderExpansionModel</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/expansion/OrderExpansionModel.html#syncInfo--">syncInfo()</a></span> - Method in interface io.sphere.sdk.orders.expansion.<a href="io/sphere/sdk/orders/expansion/OrderExpansionModel.html" title="interface in io.sphere.sdk.orders.expansion">OrderExpansionModel</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/queries/OrderQueryModel.html#syncInfo--">syncInfo()</a></span> - Method in interface io.sphere.sdk.orders.queries.<a href="io/sphere/sdk/orders/queries/OrderQueryModel.html" title="interface in io.sphere.sdk.orders.queries">OrderQueryModel</a></dt>
 <dd>&nbsp;</dd>
@@ -15278,7 +15308,7 @@ CompletionStage&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execu
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/expansion/ProductExpansionModel.html#taxCategory--">taxCategory()</a></span> - Method in class io.sphere.sdk.products.expansion.<a href="io/sphere/sdk/products/expansion/ProductExpansionModel.html" title="class in io.sphere.sdk.products.expansion">ProductExpansionModel</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/expansion/ProductProjectionExpansionModel.html#taxCategory--">taxCategory()</a></span> - Method in class io.sphere.sdk.products.expansion.<a href="io/sphere/sdk/products/expansion/ProductProjectionExpansionModel.html" title="class in io.sphere.sdk.products.expansion">ProductProjectionExpansionModel</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/expansion/ProductProjectionExpansionModel.html#taxCategory--">taxCategory()</a></span> - Method in interface io.sphere.sdk.products.expansion.<a href="io/sphere/sdk/products/expansion/ProductProjectionExpansionModel.html" title="interface in io.sphere.sdk.products.expansion">ProductProjectionExpansionModel</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/shippingmethods/expansion/ShippingMethodExpansionModel.html#taxCategory--">taxCategory()</a></span> - Method in class io.sphere.sdk.shippingmethods.expansion.<a href="io/sphere/sdk/shippingmethods/expansion/ShippingMethodExpansionModel.html" title="class in io.sphere.sdk.shippingmethods.expansion">ShippingMethodExpansionModel</a></dt>
 <dd>&nbsp;</dd>
@@ -15308,7 +15338,7 @@ CompletionStage&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execu
 <dd>
 <div class="block">DSL class to create expansion path expressions.</div>
 </dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/taxcategories/expansion/TaxCategoryExpansionModel.html#TaxCategoryExpansionModel-java.lang.String-java.lang.String-">TaxCategoryExpansionModel(String, String)</a></span> - Constructor for class io.sphere.sdk.taxcategories.expansion.<a href="io/sphere/sdk/taxcategories/expansion/TaxCategoryExpansionModel.html" title="class in io.sphere.sdk.taxcategories.expansion">TaxCategoryExpansionModel</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/taxcategories/expansion/TaxCategoryExpansionModel.html#TaxCategoryExpansionModel-java.util.List-java.lang.String-">TaxCategoryExpansionModel(List&lt;String&gt;, String)</a></span> - Constructor for class io.sphere.sdk.taxcategories.expansion.<a href="io/sphere/sdk/taxcategories/expansion/TaxCategoryExpansionModel.html" title="class in io.sphere.sdk.taxcategories.expansion">TaxCategoryExpansionModel</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/taxcategories/queries/TaxCategoryQuery.html" title="interface in io.sphere.sdk.taxcategories.queries"><span class="typeNameLink">TaxCategoryQuery</span></a> - Interface in <a href="io/sphere/sdk/taxcategories/queries/package-summary.html">io.sphere.sdk.taxcategories.queries</a></dt>
 <dd>
@@ -16268,7 +16298,7 @@ the order they are declared.</div>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/expansion/ProductDataExpansionModel.html#variants--">variants()</a></span> - Method in class io.sphere.sdk.products.expansion.<a href="io/sphere/sdk/products/expansion/ProductDataExpansionModel.html" title="class in io.sphere.sdk.products.expansion">ProductDataExpansionModel</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/expansion/ProductProjectionExpansionModel.html#variants--">variants()</a></span> - Method in class io.sphere.sdk.products.expansion.<a href="io/sphere/sdk/products/expansion/ProductProjectionExpansionModel.html" title="class in io.sphere.sdk.products.expansion">ProductProjectionExpansionModel</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/expansion/ProductProjectionExpansionModel.html#variants--">variants()</a></span> - Method in interface io.sphere.sdk.products.expansion.<a href="io/sphere/sdk/products/expansion/ProductProjectionExpansionModel.html" title="interface in io.sphere.sdk.products.expansion">ProductProjectionExpansionModel</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/ProductDraftBuilder.html#variants-java.util.List-">variants(List&lt;ProductVariantDraft&gt;)</a></span> - Method in class io.sphere.sdk.products.<a href="io/sphere/sdk/products/ProductDraftBuilder.html" title="class in io.sphere.sdk.products">ProductDraftBuilder</a></dt>
 <dd>&nbsp;</dd>
@@ -17114,7 +17144,7 @@ the order they are declared.</div>
 </a>
 <h2 class="title">Z</h2>
 <dl>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/shippingmethods/expansion/ZoneRateExpansionModel.html#zone--">zone()</a></span> - Method in class io.sphere.sdk.shippingmethods.expansion.<a href="io/sphere/sdk/shippingmethods/expansion/ZoneRateExpansionModel.html" title="class in io.sphere.sdk.shippingmethods.expansion">ZoneRateExpansionModel</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/shippingmethods/expansion/ZoneRateExpansionModel.html#zone--">zone()</a></span> - Method in interface io.sphere.sdk.shippingmethods.expansion.<a href="io/sphere/sdk/shippingmethods/expansion/ZoneRateExpansionModel.html" title="interface in io.sphere.sdk.shippingmethods.expansion">ZoneRateExpansionModel</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/shippingmethods/queries/ZoneRateCollectionQueryModel.html#zone--">zone()</a></span> - Method in interface io.sphere.sdk.shippingmethods.queries.<a href="io/sphere/sdk/shippingmethods/queries/ZoneRateCollectionQueryModel.html" title="interface in io.sphere.sdk.shippingmethods.queries">ZoneRateCollectionQueryModel</a></dt>
 <dd>&nbsp;</dd>
@@ -17136,11 +17166,11 @@ the order they are declared.</div>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/zones/ZoneDraft.html" title="interface in io.sphere.sdk.zones"><span class="typeNameLink">ZoneDraft</span></a> - Interface in <a href="io/sphere/sdk/zones/package-summary.html">io.sphere.sdk.zones</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="io/sphere/sdk/zones/expansion/ZoneExpansionModel.html" title="class in io.sphere.sdk.zones.expansion"><span class="typeNameLink">ZoneExpansionModel</span></a>&lt;<a href="io/sphere/sdk/zones/expansion/ZoneExpansionModel.html" title="type parameter in ZoneExpansionModel">T</a>&gt; - Class in <a href="io/sphere/sdk/zones/expansion/package-summary.html">io.sphere.sdk.zones.expansion</a></dt>
+<dt><a href="io/sphere/sdk/zones/expansion/ZoneExpansionModel.html" title="interface in io.sphere.sdk.zones.expansion"><span class="typeNameLink">ZoneExpansionModel</span></a>&lt;<a href="io/sphere/sdk/zones/expansion/ZoneExpansionModel.html" title="type parameter in ZoneExpansionModel">T</a>&gt; - Interface in <a href="io/sphere/sdk/zones/expansion/package-summary.html">io.sphere.sdk.zones.expansion</a></dt>
 <dd>
 <div class="block">DSL class to create expansion path expressions.</div>
 </dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/zones/expansion/ZoneExpansionModel.html#ZoneExpansionModel-java.lang.String-java.lang.String-">ZoneExpansionModel(String, String)</a></span> - Constructor for class io.sphere.sdk.zones.expansion.<a href="io/sphere/sdk/zones/expansion/ZoneExpansionModel.html" title="class in io.sphere.sdk.zones.expansion">ZoneExpansionModel</a></dt>
+<dt><a href="io/sphere/sdk/zones/expansion/ZoneExpansionModelImpl.html" title="class in io.sphere.sdk.zones.expansion"><span class="typeNameLink">ZoneExpansionModelImpl</span></a>&lt;<a href="io/sphere/sdk/zones/expansion/ZoneExpansionModelImpl.html" title="type parameter in ZoneExpansionModelImpl">T</a>&gt; - Class in <a href="io/sphere/sdk/zones/expansion/package-summary.html">io.sphere.sdk.zones.expansion</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/zones/queries/ZoneQuery.html" title="interface in io.sphere.sdk.zones.queries"><span class="typeNameLink">ZoneQuery</span></a> - Interface in <a href="io/sphere/sdk/zones/queries/package-summary.html">io.sphere.sdk.zones.queries</a></dt>
 <dd>
@@ -17156,7 +17186,7 @@ the order they are declared.</div>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/shippingmethods/queries/ZoneRateCollectionQueryModel.html" title="interface in io.sphere.sdk.shippingmethods.queries"><span class="typeNameLink">ZoneRateCollectionQueryModel</span></a>&lt;<a href="io/sphere/sdk/shippingmethods/queries/ZoneRateCollectionQueryModel.html" title="type parameter in ZoneRateCollectionQueryModel">T</a>&gt; - Interface in <a href="io/sphere/sdk/shippingmethods/queries/package-summary.html">io.sphere.sdk.shippingmethods.queries</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="io/sphere/sdk/shippingmethods/expansion/ZoneRateExpansionModel.html" title="class in io.sphere.sdk.shippingmethods.expansion"><span class="typeNameLink">ZoneRateExpansionModel</span></a>&lt;<a href="io/sphere/sdk/shippingmethods/expansion/ZoneRateExpansionModel.html" title="type parameter in ZoneRateExpansionModel">T</a>&gt; - Class in <a href="io/sphere/sdk/shippingmethods/expansion/package-summary.html">io.sphere.sdk.shippingmethods.expansion</a></dt>
+<dt><a href="io/sphere/sdk/shippingmethods/expansion/ZoneRateExpansionModel.html" title="interface in io.sphere.sdk.shippingmethods.expansion"><span class="typeNameLink">ZoneRateExpansionModel</span></a>&lt;<a href="io/sphere/sdk/shippingmethods/expansion/ZoneRateExpansionModel.html" title="type parameter in ZoneRateExpansionModel">T</a>&gt; - Interface in <a href="io/sphere/sdk/shippingmethods/expansion/package-summary.html">io.sphere.sdk.shippingmethods.expansion</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/shippingmethods/expansion/ShippingMethodExpansionModel.html#zoneRates--">zoneRates()</a></span> - Method in class io.sphere.sdk.shippingmethods.expansion.<a href="io/sphere/sdk/shippingmethods/expansion/ShippingMethodExpansionModel.html" title="class in io.sphere.sdk.shippingmethods.expansion">ShippingMethodExpansionModel</a></dt>
 <dd>&nbsp;</dd>
