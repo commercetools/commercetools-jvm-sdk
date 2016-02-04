@@ -26,7 +26,7 @@ final class ProductVariantExpansionModelImpl<T> extends ExpansionModel<T> implem
     }
 
     private PriceExpansionModel<T> prices(final String index) {
-        return new PriceExpansionModel<>(pathExpression(), "prices[" + index + "]");
+        return new PriceExpansionModelImpl<>(pathExpression(), "prices[" + index + "]");
     }
 }
 
