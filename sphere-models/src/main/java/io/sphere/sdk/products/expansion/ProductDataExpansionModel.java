@@ -20,11 +20,11 @@ public final class ProductDataExpansionModel<T> extends ExpansionModel<T> {
     }
 
     public ProductVariantExpansionModel<T> masterVariant() {
-        return new ProductVariantExpansionModel<>(pathExpression(), "masterVariant");
+        return new ProductVariantExpansionModelImpl<>(pathExpression(), "masterVariant");
     }
 
     public ProductVariantExpansionModel<T> variants() {
-        return new ProductVariantExpansionModel<>(pathExpression(), "variants[*]");
+        return new ProductVariantExpansionModelImpl<>(pathExpression(), "variants[*]");
     }
 }
 

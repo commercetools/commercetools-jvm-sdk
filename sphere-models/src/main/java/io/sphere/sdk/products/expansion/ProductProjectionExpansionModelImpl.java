@@ -42,12 +42,12 @@ final class ProductProjectionExpansionModelImpl<T> extends ExpansionModel<T> imp
 
     @Override
     public ProductVariantExpansionModel<T> masterVariant() {
-        return new ProductVariantExpansionModel<>(pathExpression(), MASTER_VARIANT);
+        return new ProductVariantExpansionModelImpl<>(pathExpression(), MASTER_VARIANT);
     }
 
     @Override
     public ProductVariantExpansionModel<T> variants() {
-        return new ProductVariantExpansionModel<>(pathExpression(), VARIANTS);
+        return new ProductVariantExpansionModelImpl<>(pathExpression(), VARIANTS);
     }
 
     @Override
@@ -61,6 +61,6 @@ final class ProductProjectionExpansionModelImpl<T> extends ExpansionModel<T> imp
             paths = parents.stream().flatMap(p -> currentPaths.stream().map(c -> (isEmpty(p) ? "" : p + ".") + c)).collect(Collectors.toList());
         }
 
-        return new ProductVariantExpansionModel<>(paths, null);
+        return new ProductVariantExpansionModelImpl<>(paths, null);
     }
 }
