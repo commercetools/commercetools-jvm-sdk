@@ -2,69 +2,41 @@ package io.sphere.sdk.orders.expansion;
 
 import io.sphere.sdk.carts.expansion.*;
 import io.sphere.sdk.customergroups.expansion.CustomerGroupExpansionModel;
+import io.sphere.sdk.expansion.ExpansionPathContainer;
 import io.sphere.sdk.orders.Order;
 
-import java.util.List;
-
 /**
-  DSL class to create expansion path expressions.
+ DSL class to create expansion path expressions.
 
  @param <T> the type for which the expansion path is
  */
-public final class OrderExpansionModel<T> extends CartLikeExpansionModelImpl<T> {
-    private OrderExpansionModel(final List<String> parentPath, final String path) {
-        super(parentPath, path);
-    }
+public interface OrderExpansionModel<T> extends ExpansionPathContainer<T>, CartLikeExpansionModel<T> {
+    SyncInfoExpansionModel<T> syncInfo();
 
-    OrderExpansionModel() {
-        super();
-    }
-
-    public SyncInfoExpansionModel<T> syncInfo() {
-        //since it is a set, there is no method with index access
-        return new SyncInfoExpansionModel<>(pathExpression(), "syncInfo[*]");
-    }
-
-    public CartExpansionModel<T> cart() {
-        return CartExpansionModel.of(pathExpression(), "cart");
-    }
-
-    public static OrderExpansionModel<Order> of() {
-        return new OrderExpansionModel<>();
-    }
+    CartExpansionModel<T> cart();
 
     @Override
-    public CustomerGroupExpansionModel<T> customerGroup() {
-        return super.customerGroup();
-    }
+    CustomerGroupExpansionModel<T> customerGroup();
 
     @Override
-    public DiscountCodeInfoExpansionModel<T> discountCodes() {
-        return super.discountCodes();
-    }
+    DiscountCodeInfoExpansionModel<T> discountCodes();
 
     @Override
-    public DiscountCodeInfoExpansionModel<T> discountCodes(final int index) {
-        return super.discountCodes(index);
-    }
+    DiscountCodeInfoExpansionModel<T> discountCodes(int index);
 
     @Override
-    public LineItemExpansionModel<T> lineItems() {
-        return super.lineItems();
-    }
+    LineItemExpansionModel<T> lineItems();
 
     @Override
-    public LineItemExpansionModel<T> lineItems(final int index) {
-        return super.lineItems(index);
-    }
+    LineItemExpansionModel<T> lineItems(int index);
 
     @Override
-    public PaymentInfoExpansionModel<T> paymentInfo() {
-        return super.paymentInfo();
-    }
+    PaymentInfoExpansionModel<T> paymentInfo();
 
     @Override
-    public ShippingInfoExpansionModel<T> shippingInfo() {
-        return super.shippingInfo();
+    ShippingInfoExpansionModel<T> shippingInfo();
+
+    static OrderExpansionModel<Order> of() {
+        return new OrderExpansionModelImpl<>();
     }
 }
