@@ -49,7 +49,7 @@ public abstract class CartLikeExpansionModelImpl<T> extends ExpandedModel<T> imp
     }
 
     private DiscountCodeInfoExpansionModel<T> discountCodes(final String s) {
-        return new DiscountCodeInfoExpansionModel<>(pathExpression(), "discountCodes[" + s + "]");
+        return new DiscountCodeInfoExpansionModelImpl<>(pathExpression(), "discountCodes[" + s + "]");
     }
 
     @Override
