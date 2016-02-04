@@ -17,7 +17,7 @@ final class OrderExpansionModelImpl<T> extends CartLikeExpansionModelImpl<T> imp
     @Override
     public SyncInfoExpansionModel<T> syncInfo() {
         //since it is a set, there is no method with index access
-        return new SyncInfoExpansionModel<>(pathExpression(), "syncInfo[*]");
+        return new SyncInfoExpansionModelImpl<>(pathExpression(), "syncInfo[*]");
     }
 
     @Override
