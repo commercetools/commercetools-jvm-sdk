@@ -8,7 +8,7 @@ import io.sphere.sdk.customergroups.expansion.CustomerGroupExpansionModel;
  *
  * @param <T> the context type
  */
-public final class CartExpansionModel<T> extends CartLikeExpansionModel<T> {
+public final class CartExpansionModel<T> extends CartLikeExpansionModelImpl<T> {
     private CartExpansionModel() {
         super();
     }

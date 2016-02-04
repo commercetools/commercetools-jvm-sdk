@@ -10,7 +10,7 @@ import io.sphere.sdk.orders.Order;
 
  @param <T> the type for which the expansion path is
  */
-public final class OrderExpansionModel<T> extends CartLikeExpansionModel<T> {
+public final class OrderExpansionModel<T> extends CartLikeExpansionModelImpl<T> {
     private OrderExpansionModel(final String parentPath, final String path) {
         super(parentPath, path);
     }

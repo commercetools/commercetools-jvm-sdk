@@ -1,50 +1,23 @@
 package io.sphere.sdk.carts.expansion;
 
 import io.sphere.sdk.customergroups.expansion.CustomerGroupExpansionModel;
-import io.sphere.sdk.expansion.ExpansionModel;
 
 /**
- * Internal base class
+ * Internal base interface
  * @param <T> context of the reference expansion
  */
-public abstract class CartLikeExpansionModel<T> extends ExpansionModel<T> {
-    protected CartLikeExpansionModel(final String parentPath, final String path) {
-        super(parentPath, path);
-    }
+public interface CartLikeExpansionModel<T> {
+    CustomerGroupExpansionModel<T> customerGroup();
 
-    protected CartLikeExpansionModel() {
-        super();
-    }
+    DiscountCodeInfoExpansionModel<T> discountCodes();
 
-    public CustomerGroupExpansionModel<T> customerGroup() {
-        return CustomerGroupExpansionModel.of(buildPathExpression(), "customerGroup");
-    }
+    DiscountCodeInfoExpansionModel<T> discountCodes(int index);
 
-    public DiscountCodeInfoExpansionModel<T> discountCodes() {
-        return discountCodes("*");
-    }
+    LineItemExpansionModel<T> lineItems();
 
-    public DiscountCodeInfoExpansionModel<T> discountCodes(final int index) {
-        return discountCodes("" + index);
-    }
+    LineItemExpansionModel<T> lineItems(int index);
 
-    public LineItemExpansionModel<T> lineItems() {
-        return new LineItemExpansionModel<>(pathExpression(), "lineItems[*]");
-    }
+    PaymentInfoExpansionModel<T> paymentInfo();
 
-    public LineItemExpansionModel<T> lineItems(final int index) {
-        return new LineItemExpansionModel<>(pathExpression(), "lineItems[" + index + "]");
-    }
-
-    public PaymentInfoExpansionModel<T> paymentInfo() {
-        return new PaymentInfoExpansionModel<>(buildPathExpression(), "paymentInfo");
-    }
-
-    private DiscountCodeInfoExpansionModel<T> discountCodes(final String s) {
-        return new DiscountCodeInfoExpansionModel<>(pathExpression(), "discountCodes[" + s + "]");
-    }
-
-    public ShippingInfoExpansionModel<T> shippingInfo() {
-        return new ShippingInfoExpansionModel<>(pathExpression(), "shippingInfo");
-    }
+    ShippingInfoExpansionModel<T> shippingInfo();
 }
