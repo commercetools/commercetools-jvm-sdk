@@ -1,6 +1,6 @@
 package io.sphere.sdk.shippingmethods.expansion;
 
-import io.sphere.sdk.expansion.ExpansionModel;
+import io.sphere.sdk.expansion.ExpansionModelImpl;
 import io.sphere.sdk.taxcategories.expansion.TaxCategoryExpansionModel;
 import io.sphere.sdk.zones.expansion.ZoneExpansionModel;
 
@@ -12,7 +12,7 @@ import java.util.List;
 
  @param <T> the type for which the expansion path is
  */
-final class ShippingMethodExpansionModelImpl<T> extends ExpansionModel<T> implements ShippingMethodExpansionModel<T> {
+final class ShippingMethodExpansionModelImpl<T> extends ExpansionModelImpl<T> implements ShippingMethodExpansionModel<T> {
     ShippingMethodExpansionModelImpl(final List<String> parentPath, @Nullable final String path) {
         super(parentPath, path);
     }

@@ -17,7 +17,7 @@ public class ImplClassesAreForPackageScopeRule extends ClassStrategyRule {
                     "ResourceMetaModelQueryDslBuilderImpl," +
                     "ResourceMetaModelSearchDslBuilderImpl," +
                     "ReviewRatingStatisticsQueryModelImpl,CartLikeQueryModelImpl,CartShippingInfoImpl," +
-                    "CartLikeExpansionModelImpl").split(","));
+                    "CartLikeExpansionModelImpl,ExpansionModelImpl").split(","));
 
 
     @Override

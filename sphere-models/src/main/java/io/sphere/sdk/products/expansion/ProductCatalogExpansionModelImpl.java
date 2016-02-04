@@ -1,8 +1,8 @@
 package io.sphere.sdk.products.expansion;
 
-import io.sphere.sdk.expansion.ExpansionModel;
+import io.sphere.sdk.expansion.ExpansionModelImpl;
 
-final class ProductCatalogExpansionModelImpl<T> extends ExpansionModel<T> implements ProductCatalogExpansionModel<T> {
+final class ProductCatalogExpansionModelImpl<T> extends ExpansionModelImpl<T> implements ProductCatalogExpansionModel<T> {
     ProductCatalogExpansionModelImpl(final String parentPath, final String path) {
         super(parentPath, path);
     }

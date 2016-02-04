@@ -1,11 +1,11 @@
 package io.sphere.sdk.payments.expansion;
 
 import io.sphere.sdk.customers.expansion.CustomerExpansionModel;
-import io.sphere.sdk.expansion.ExpansionModel;
+import io.sphere.sdk.expansion.ExpansionModelImpl;
 
 import java.util.List;
 
-final class PaymentExpansionModelImpl<T> extends ExpansionModel<T> implements PaymentExpansionModel<T> {
+final class PaymentExpansionModelImpl<T> extends ExpansionModelImpl<T> implements PaymentExpansionModel<T> {
     PaymentExpansionModelImpl() {
         super();
     }

@@ -1,10 +1,10 @@
 package io.sphere.sdk.producttypes.expansion;
 
-import io.sphere.sdk.expansion.ExpansionModel;
+import io.sphere.sdk.expansion.ExpansionModelImpl;
 
 import java.util.List;
 
-final class ProductTypeExpansionModelImpl<T> extends ExpansionModel<T> implements ProductTypeExpansionModel<T> {
+final class ProductTypeExpansionModelImpl<T> extends ExpansionModelImpl<T> implements ProductTypeExpansionModel<T> {
     ProductTypeExpansionModelImpl() {
     }
 

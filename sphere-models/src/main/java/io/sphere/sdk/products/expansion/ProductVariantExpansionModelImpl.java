@@ -1,11 +1,11 @@
 package io.sphere.sdk.products.expansion;
 
-import io.sphere.sdk.expansion.ExpansionModel;
+import io.sphere.sdk.expansion.ExpansionModelImpl;
 
 import javax.annotation.Nullable;
 import java.util.List;
 
-final class ProductVariantExpansionModelImpl<T> extends ExpansionModel<T> implements ProductVariantExpansionModel<T> {
+final class ProductVariantExpansionModelImpl<T> extends ExpansionModelImpl<T> implements ProductVariantExpansionModel<T> {
     ProductVariantExpansionModelImpl(@Nullable final List<String> parentPath, final String paths) {
         super(parentPath, paths);
     }

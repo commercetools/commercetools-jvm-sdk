@@ -1,8 +1,8 @@
 package io.sphere.sdk.customers.expansion;
 
-import io.sphere.sdk.expansion.ExpansionModel;
+import io.sphere.sdk.expansion.ExpansionModelImpl;
 
-final class CustomerSignInResultExpansionModelImpl<T> extends ExpansionModel<T> implements CustomerSignInResultExpansionModel<T> {
+final class CustomerSignInResultExpansionModelImpl<T> extends ExpansionModelImpl<T> implements CustomerSignInResultExpansionModel<T> {
     CustomerSignInResultExpansionModelImpl() {
         super();
     }

@@ -1,10 +1,10 @@
 package io.sphere.sdk.categories.expansion;
 
-import io.sphere.sdk.expansion.ExpansionModel;
+import io.sphere.sdk.expansion.ExpansionModelImpl;
 
 import java.util.List;
 
-final class CategoryExpansionModelImpl<T> extends ExpansionModel<T> implements CategoryExpansionModel<T> {
+final class CategoryExpansionModelImpl<T> extends ExpansionModelImpl<T> implements CategoryExpansionModel<T> {
     CategoryExpansionModelImpl(final List<String> parentPath, final String path) {
         super(parentPath, path);
     }

@@ -12,10 +12,14 @@ import java.util.stream.Collectors;
 import static java.util.stream.Collectors.toList;
 import static org.apache.commons.lang3.StringUtils.isEmpty;
 
-public class ExpansionModel<T> extends Base implements ExpansionPathContainer<T> {
+/**
+ * Internal base class
+ * @param <T> context type
+ */
+public class ExpansionModelImpl<T> extends Base implements ExpansionPathContainer<T> {
     private final List<String> pathExpressions;
 
-    protected ExpansionModel(@Nullable final String parentPath, final List<String> paths) {
+    protected ExpansionModelImpl(@Nullable final String parentPath, final List<String> paths) {
         pathExpressions = paths.stream()
                 .map(path ->
                 Optional.ofNullable(parentPath)
@@ -23,15 +27,15 @@ public class ExpansionModel<T> extends Base implements ExpansionPathContainer<T>
                 .collect(toList());
     }
 
-    protected ExpansionModel(@Nullable final String parentPath, @Nullable final String path) {
+    protected ExpansionModelImpl(@Nullable final String parentPath, @Nullable final String path) {
         this(parentPath, Collections.singletonList(path));
     }
 
-    public ExpansionModel() {
+    public ExpansionModelImpl() {
         this("", "");
     }
 
-    public ExpansionModel(final List<String> parentExpressions, final String path) {
+    public ExpansionModelImpl(final List<String> parentExpressions, final String path) {
         this.pathExpressions = !isEmpty(path) ? parentExpressions.stream()
                 .map(p -> isEmpty(p) ? path : p + "." + path)
                 .collect(Collectors.toList()) : parentExpressions;
@@ -54,7 +58,7 @@ public class ExpansionModel<T> extends Base implements ExpansionPathContainer<T>
     }
 
     protected final ExpansionPathContainer<T> expansionPath(final String path) {
-        return new ExpansionModel<>(buildPathExpression(), path);
+        return new ExpansionModelImpl<>(buildPathExpression(), path);
     }
 
     protected static String collection(final String segmentName, final Integer index) {

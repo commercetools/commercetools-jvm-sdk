@@ -1,12 +1,12 @@
 package io.sphere.sdk.orders.expansion;
 
 import io.sphere.sdk.channels.expansion.ChannelExpansionModel;
-import io.sphere.sdk.expansion.ExpansionModel;
+import io.sphere.sdk.expansion.ExpansionModelImpl;
 
 import javax.annotation.Nullable;
 import java.util.List;
 
-final class SyncInfoExpansionModelImpl<T> extends ExpansionModel<T> implements SyncInfoExpansionModel<T> {
+final class SyncInfoExpansionModelImpl<T> extends ExpansionModelImpl<T> implements SyncInfoExpansionModel<T> {
     SyncInfoExpansionModelImpl(final List<String> parentPath, @Nullable final String path) {
         super(parentPath, path);
     }

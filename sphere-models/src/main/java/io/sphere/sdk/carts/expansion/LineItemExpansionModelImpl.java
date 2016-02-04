@@ -1,11 +1,11 @@
 package io.sphere.sdk.carts.expansion;
 
 import io.sphere.sdk.channels.expansion.ChannelExpansionModel;
-import io.sphere.sdk.expansion.ExpansionModel;
+import io.sphere.sdk.expansion.ExpansionModelImpl;
 
 import java.util.List;
 
-final class LineItemExpansionModelImpl<T> extends ExpansionModel<T> implements LineItemExpansionModel<T> {
+final class LineItemExpansionModelImpl<T> extends ExpansionModelImpl<T> implements LineItemExpansionModel<T> {
     LineItemExpansionModelImpl(final List<String> parentPath, final String path) {
         super(parentPath, path);
     }

@@ -1,7 +1,7 @@
 package io.sphere.sdk.products.expansion;
 
 import io.sphere.sdk.categories.expansion.CategoryExpansionModel;
-import io.sphere.sdk.expansion.ExpansionModel;
+import io.sphere.sdk.expansion.ExpansionModelImpl;
 import io.sphere.sdk.products.ProductProjection;
 import io.sphere.sdk.producttypes.expansion.ProductTypeExpansionModel;
 import io.sphere.sdk.taxcategories.expansion.TaxCategoryExpansionModel;
@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 import static java.util.Arrays.asList;
 import static org.apache.commons.lang3.StringUtils.isEmpty;
 
-final class ProductProjectionExpansionModelImpl<T> extends ExpansionModel<T> implements ProductProjectionExpansionModel<T> {
+final class ProductProjectionExpansionModelImpl<T> extends ExpansionModelImpl<T> implements ProductProjectionExpansionModel<T> {
 
     private static final String VARIANTS = "variants[*]";
     private static final String MASTER_VARIANT = "masterVariant";

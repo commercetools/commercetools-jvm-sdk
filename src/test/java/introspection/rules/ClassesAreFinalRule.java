@@ -10,7 +10,7 @@ public class ClassesAreFinalRule extends ClassStrategyRule {
             asList(("ReferenceAttributeType, CartShippingInfoImpl, ExpansionModel, MessageImpl," +
                     ".LocalizedToStringProductAttributeConverter, MetaModelUpdateCommandDslImpl," +
                     "PagedQueryResult, SortableSearchModel, QueryModelImpl, SearchModelImpl," +
-                    "SphereError, LocalizedToStringProductAttributeConverter").split(",( )?"));
+                    "SphereError, LocalizedToStringProductAttributeConverter,ExpansionModelImpl").split(",( )?"));
 
 
     @Override

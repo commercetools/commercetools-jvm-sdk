@@ -1,10 +1,9 @@
 package io.sphere.sdk.inventory.expansion;
 
 import io.sphere.sdk.channels.expansion.ChannelExpansionModel;
-import io.sphere.sdk.expansion.ExpansionModel;
-import io.sphere.sdk.inventory.InventoryEntry;
+import io.sphere.sdk.expansion.ExpansionModelImpl;
 
-final class InventoryEntryExpansionModelImpl<T> extends ExpansionModel<T> implements InventoryEntryExpansionModel<T> {
+final class InventoryEntryExpansionModelImpl<T> extends ExpansionModelImpl<T> implements InventoryEntryExpansionModel<T> {
 
     InventoryEntryExpansionModelImpl() {
     }

@@ -2,11 +2,11 @@ package io.sphere.sdk.products.expansion;
 
 import io.sphere.sdk.channels.expansion.ChannelExpansionModel;
 import io.sphere.sdk.customergroups.expansion.CustomerGroupExpansionModel;
-import io.sphere.sdk.expansion.ExpansionModel;
+import io.sphere.sdk.expansion.ExpansionModelImpl;
 
 import java.util.List;
 
-final class PriceExpansionModelImpl<T> extends ExpansionModel<T> implements PriceExpansionModel<T> {
+final class PriceExpansionModelImpl<T> extends ExpansionModelImpl<T> implements PriceExpansionModel<T> {
     PriceExpansionModelImpl(final List<String> parentPath, final String path) {
         super(parentPath, path);
     }

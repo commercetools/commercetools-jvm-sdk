@@ -1,11 +1,11 @@
 package io.sphere.sdk.zones.expansion;
 
-import io.sphere.sdk.expansion.ExpansionModel;
+import io.sphere.sdk.expansion.ExpansionModelImpl;
 import io.sphere.sdk.expansion.ExpansionPath;
 
 import java.util.List;
 
-final class ZoneExpansionModelImpl<T> extends ExpansionModel<T> implements ZoneExpansionModel<T> {
+final class ZoneExpansionModelImpl<T> extends ExpansionModelImpl<T> implements ZoneExpansionModel<T> {
     ZoneExpansionModelImpl(final List<String> parentPath, final String path) {
         super(parentPath, path);
     }

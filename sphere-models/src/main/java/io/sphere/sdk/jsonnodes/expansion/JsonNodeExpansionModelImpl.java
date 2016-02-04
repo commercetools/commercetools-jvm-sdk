@@ -1,6 +1,6 @@
 package io.sphere.sdk.jsonnodes.expansion;
 
-import io.sphere.sdk.expansion.ExpansionModel;
+import io.sphere.sdk.expansion.ExpansionModelImpl;
 import io.sphere.sdk.expansion.ExpansionPath;
 import io.sphere.sdk.expansion.ExpansionPathContainer;
 import io.sphere.sdk.models.Base;
@@ -10,7 +10,7 @@ import java.util.List;
 import static io.sphere.sdk.utils.SphereInternalUtils.listOf;
 import static java.util.stream.Collectors.toList;
 
-final class JsonNodeExpansionModelImpl<T> extends ExpansionModel<T> implements JsonNodeExpansionModel<T> {
+final class JsonNodeExpansionModelImpl<T> extends ExpansionModelImpl<T> implements JsonNodeExpansionModel<T> {
     @Override
     public ExpansionPathContainer<T> paths(final List<String> expansionPaths) {
         final List<ExpansionPath<T>> expansionPathList = expansionPaths.stream()

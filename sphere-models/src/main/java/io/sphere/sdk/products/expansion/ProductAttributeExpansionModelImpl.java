@@ -1,6 +1,6 @@
 package io.sphere.sdk.products.expansion;
 
-import io.sphere.sdk.expansion.ExpansionModel;
+import io.sphere.sdk.expansion.ExpansionModelImpl;
 import io.sphere.sdk.expansion.ExpansionPath;
 import io.sphere.sdk.expansion.ExpansionPathContainer;
 import io.sphere.sdk.models.LocalizedString;
@@ -8,7 +8,7 @@ import io.sphere.sdk.models.LocalizedString;
 import javax.annotation.Nullable;
 import java.util.List;
 
-final class ProductAttributeExpansionModelImpl<T> extends ExpansionModel<T> implements ProductAttributeExpansionModel<T> {
+final class ProductAttributeExpansionModelImpl<T> extends ExpansionModelImpl<T> implements ProductAttributeExpansionModel<T> {
     ProductAttributeExpansionModelImpl(final List<String> parentPath, @Nullable final String path) {
         super(parentPath, path);
     }
