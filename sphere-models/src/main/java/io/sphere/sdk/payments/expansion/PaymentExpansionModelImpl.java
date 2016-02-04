@@ -21,6 +21,6 @@ final class PaymentExpansionModelImpl<T> extends ExpandedModel<T> implements Pay
 
     @Override
     public PaymentStatusExpansionModel<T> paymentStatus() {
-        return new PaymentStatusExpansionModel<>(buildPathExpression(), "paymentStatus");
+        return new PaymentStatusExpansionModelImpl<>(buildPathExpression(), "paymentStatus");
     }
 }
