@@ -17,6 +17,6 @@ public final class ShippingInfoExpansionModel<T> extends ExpansionModel<T> {
     }
 
     public ShippingMethodExpansionModel<T> shippingMethod() {
-        return new ShippingMethodExpansionModel<>(buildPathExpression(), "shippingMethod");
+        return ShippingMethodExpansionModel.of(buildPathExpression(), "shippingMethod");
     }
 }
