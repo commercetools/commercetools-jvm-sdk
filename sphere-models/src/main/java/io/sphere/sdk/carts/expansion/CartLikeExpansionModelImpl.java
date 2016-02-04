@@ -54,6 +54,6 @@ public abstract class CartLikeExpansionModelImpl<T> extends ExpandedModel<T> imp
 
     @Override
     public ShippingInfoExpansionModel<T> shippingInfo() {
-        return new ShippingInfoExpansionModel<>(pathExpression(), "shippingInfo");
+        return new ShippingInfoExpansionModelImpl<>(pathExpression(), "shippingInfo");
     }
 }
