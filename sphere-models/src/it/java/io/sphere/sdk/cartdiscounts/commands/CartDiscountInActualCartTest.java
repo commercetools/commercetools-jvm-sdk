@@ -1,6 +1,7 @@
 package io.sphere.sdk.cartdiscounts.commands;
 
 import io.sphere.sdk.cartdiscounts.*;
+import io.sphere.sdk.cartdiscounts.queries.CartDiscountByIdGet;
 import io.sphere.sdk.carts.Cart;
 import io.sphere.sdk.carts.LineItem;
 import io.sphere.sdk.carts.commands.CartUpdateCommand;
@@ -83,6 +84,16 @@ public class CartDiscountInActualCartTest extends IntegrationTest {
                                 .plusPredicates(m -> m.lineItems().discountedPricePerQuantity().quantity().is(lineItemWithDiscount.getDiscountedPricePerQuantity().get(0).getQuantity()))
                                 .plusPredicates(m -> m.id().is(cart.getId()));
                         assertThat(client().executeBlocking(cartQuery).head().get().getId()).as("line item queries").isEqualTo(cart.getId());
+
+
+                        //Cart Discount knows cart
+                        assertEventually(() -> {
+                            final CartDiscountByIdGet discountByIdGet =
+                                    CartDiscountByIdGet.of(cartDiscount).withExpansionPaths(m -> m.references());
+                            final CartDiscount loadedCartDiscount = client().executeBlocking(discountByIdGet);
+                            assertThat(loadedCartDiscount.getReferences()).hasSize(1);
+                            assertThat(loadedCartDiscount.getReferences().get(0)).is(expanded());
+                        });
 
                         //clean up
                         client().executeBlocking(CartDiscountDeleteCommand.of(cartDiscount));
