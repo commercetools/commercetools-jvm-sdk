@@ -75,7 +75,7 @@ public class ExpansionPathBaseTest {
         }
     }
 
-    private static class CategoryDummyExpansionModel<T> extends ExpandedModel<T> {
+    private static class CategoryDummyExpansionModel<T> extends ExpansionModel<T> {
 
         public CategoryDummyExpansionModel(final List<String> parentPath, final String path) {
             super(parentPath, path);
@@ -94,7 +94,7 @@ public class ExpansionPathBaseTest {
         }
     }
 
-    private static class ProductProjectionDummyExpansionModel<T> extends ExpandedModel<T> {
+    private static class ProductProjectionDummyExpansionModel<T> extends ExpansionModel<T> {
         public CategoryDummyExpansionModelDsl<T> categories() {
             return new CategoryDummyExpansionModelDsl<>(pathExpression(), "categories[*]");
         }

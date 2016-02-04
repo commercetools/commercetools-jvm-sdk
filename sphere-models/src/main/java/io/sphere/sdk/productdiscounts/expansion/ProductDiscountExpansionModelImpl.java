@@ -1,11 +1,11 @@
 package io.sphere.sdk.productdiscounts.expansion;
 
-import io.sphere.sdk.expansion.ExpandedModel;
+import io.sphere.sdk.expansion.ExpansionModel;
 import io.sphere.sdk.expansion.ExpansionPathContainer;
 
 import java.util.List;
 
-final class ProductDiscountExpansionModelImpl<T> extends ExpandedModel<T> implements ProductDiscountExpansionModel<T> {
+final class ProductDiscountExpansionModelImpl<T> extends ExpansionModel<T> implements ProductDiscountExpansionModel<T> {
     ProductDiscountExpansionModelImpl() {
     }
 

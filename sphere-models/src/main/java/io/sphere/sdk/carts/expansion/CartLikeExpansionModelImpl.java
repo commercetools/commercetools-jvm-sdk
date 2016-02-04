@@ -1,7 +1,7 @@
 package io.sphere.sdk.carts.expansion;
 
 import io.sphere.sdk.customergroups.expansion.CustomerGroupExpansionModel;
-import io.sphere.sdk.expansion.ExpandedModel;
+import io.sphere.sdk.expansion.ExpansionModel;
 
 import java.util.List;
 
@@ -9,7 +9,7 @@ import java.util.List;
  * Internal base class
  * @param <T> context type like {@link io.sphere.sdk.orders.Order} or {@link io.sphere.sdk.carts.Cart}
  */
-public abstract class CartLikeExpansionModelImpl<T> extends ExpandedModel<T> implements CartLikeExpansionModel<T> {
+public abstract class CartLikeExpansionModelImpl<T> extends ExpansionModel<T> implements CartLikeExpansionModel<T> {
     protected CartLikeExpansionModelImpl(final List<String> parentPath, final String path) {
         super(parentPath, path);
     }

@@ -10,7 +10,7 @@ public class PublicConstructorsAreTheExceptionRule extends ConstructorStrategyRu
             asList(("io.sphere.sdk.models.Base," +
                     "io.sphere.sdk.customobjects.queries.CustomObjectCustomJsonMappingByKeyGet," +
                     "io.sphere.sdk.customobjects.commands.CustomObjectCustomJsonMappingUpsertCommand," +
-                    "io.sphere.sdk.expansion.ExpandedModel," +
+                    "io.sphere.sdk.expansion.ExpansionModel," +
                     "io.sphere.sdk.carts.queries.TaxRateQueryModelImpl," +
                     "io.sphere.sdk.products.queries.PriceCollectionQueryModel," +
                     "io.sphere.sdk.products.queries.ProductVariantQueryModel," +

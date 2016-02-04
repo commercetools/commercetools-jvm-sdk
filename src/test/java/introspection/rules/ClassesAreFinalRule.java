@@ -7,7 +7,7 @@ import static java.util.Arrays.asList;
 
 public class ClassesAreFinalRule extends ClassStrategyRule {
     private final List<String> classNamesWhiteList =
-            asList(("ReferenceAttributeType, CartShippingInfoImpl, ExpandedModel, ExpansionModel, MessageImpl," +
+            asList(("ReferenceAttributeType, CartShippingInfoImpl, ExpansionModel, MessageImpl," +
                     ".LocalizedToStringProductAttributeConverter, MetaModelUpdateCommandDslImpl," +
                     "PagedQueryResult, SortableSearchModel, QueryModelImpl, SearchModelImpl," +
                     "SphereError, LocalizedToStringProductAttributeConverter").split(",( )?"));

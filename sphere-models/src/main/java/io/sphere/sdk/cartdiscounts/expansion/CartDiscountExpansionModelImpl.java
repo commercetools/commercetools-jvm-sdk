@@ -1,12 +1,12 @@
 package io.sphere.sdk.cartdiscounts.expansion;
 
-import io.sphere.sdk.expansion.ExpandedModel;
+import io.sphere.sdk.expansion.ExpansionModel;
 import io.sphere.sdk.expansion.ExpansionPathContainer;
 
 import javax.annotation.Nullable;
 import java.util.List;
 
-final class CartDiscountExpansionModelImpl<T> extends ExpandedModel<T> implements CartDiscountExpansionModel<T> {
+final class CartDiscountExpansionModelImpl<T> extends ExpansionModel<T> implements CartDiscountExpansionModel<T> {
 
     CartDiscountExpansionModelImpl() {
     }

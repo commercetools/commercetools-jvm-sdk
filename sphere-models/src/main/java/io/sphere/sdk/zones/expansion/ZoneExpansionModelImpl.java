@@ -5,7 +5,7 @@ import io.sphere.sdk.expansion.ExpansionPath;
 
 import java.util.List;
 
-public final class ZoneExpansionModelImpl<T> extends ExpansionModel<T> implements ZoneExpansionModel<T> {
+final class ZoneExpansionModelImpl<T> extends ExpansionModel<T> implements ZoneExpansionModel<T> {
     ZoneExpansionModelImpl(final List<String> parentPath, final String path) {
         super(parentPath, path);
     }
@@ -13,7 +13,6 @@ public final class ZoneExpansionModelImpl<T> extends ExpansionModel<T> implement
     ZoneExpansionModelImpl() {
         super();
     }
-
 
     @Override
     public List<ExpansionPath<T>> expansionPaths() {

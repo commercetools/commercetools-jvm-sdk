@@ -54,7 +54,7 @@ public class ExpansionModel<T> extends Base implements ExpansionPathContainer<T>
     }
 
     protected final ExpansionPathContainer<T> expansionPath(final String path) {
-        return new ExpandedModel<>(buildPathExpression(), path);
+        return new ExpansionModel<>(buildPathExpression(), path);
     }
 
     protected static String collection(final String segmentName, final Integer index) {
