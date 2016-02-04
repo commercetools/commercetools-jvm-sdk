@@ -1,7 +1,7 @@
 package io.sphere.sdk.carts.expansion;
 
+import io.sphere.sdk.customergroups.expansion.CustomerGroupExpansionModel;
 import io.sphere.sdk.expansion.ExpansionModel;
-import io.sphere.sdk.expansion.ExpansionPathContainer;
 
 /**
  * Internal base class
@@ -16,8 +16,8 @@ public abstract class CartLikeExpansionModel<T> extends ExpansionModel<T> {
         super();
     }
 
-    public ExpansionPathContainer<T> customerGroup() {
-        return expansionPath("customerGroup");
+    public CustomerGroupExpansionModel<T> customerGroup() {
+        return CustomerGroupExpansionModel.of(buildPathExpression(), "customerGroup");
     }
 
     public DiscountCodeInfoExpansionModel<T> discountCodes() {

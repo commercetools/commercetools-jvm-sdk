@@ -1,7 +1,7 @@
 package io.sphere.sdk.carts.expansion;
 
 import io.sphere.sdk.carts.Cart;
-import io.sphere.sdk.expansion.ExpansionPathContainer;
+import io.sphere.sdk.customergroups.expansion.CustomerGroupExpansionModel;
 
 /**
  * Model to explore reference fields in a cart that can be expanded.
@@ -22,7 +22,7 @@ public final class CartExpansionModel<T> extends CartLikeExpansionModel<T> {
     }
 
     @Override
-    public ExpansionPathContainer<T> customerGroup() {
+    public CustomerGroupExpansionModel<T> customerGroup() {
         return super.customerGroup();
     }
 
