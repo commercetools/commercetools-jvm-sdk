@@ -3,6 +3,7 @@ package io.sphere.sdk.carts.expansion;
 import io.sphere.sdk.expansion.ExpansionModel;
 import io.sphere.sdk.expansion.ExpansionPathContainer;
 import io.sphere.sdk.shippingmethods.expansion.ShippingMethodExpansionModel;
+import io.sphere.sdk.taxcategories.expansion.TaxCategoryExpansionModel;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -12,8 +13,8 @@ public final class ShippingInfoExpansionModel<T> extends ExpansionModel<T> {
         super(parentPath, path);
     }
 
-    public ExpansionPathContainer<T> taxCategory() {
-        return expansionPath("taxCategory");
+    public TaxCategoryExpansionModel<T> taxCategory() {
+        return TaxCategoryExpansionModel.of(buildPathExpression(), "taxCategory");
     }
 
     public ShippingMethodExpansionModel<T> shippingMethod() {
