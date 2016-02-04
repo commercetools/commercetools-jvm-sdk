@@ -42,7 +42,7 @@ public final class ShippingMethodExpansionModel<T> extends ExpandedModel<T> {
     }
 
     private ZoneRateExpansionModel<T> zoneRates(final String s) {
-        return new ZoneRateExpansionModel<>(pathExpression(), "zoneRates[" + s + "]");
+        return new ZoneRateExpansionModelImpl<>(pathExpression(), "zoneRates[" + s + "]");
     }
 
     public static ShippingMethodExpansionModel<ShippingMethod> of() {
