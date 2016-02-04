@@ -1,5 +1,6 @@
 package io.sphere.sdk.orders.expansion;
 
+import io.sphere.sdk.channels.expansion.ChannelExpansionModel;
 import io.sphere.sdk.expansion.ExpansionModel;
 import io.sphere.sdk.expansion.ExpansionPathContainer;
 
@@ -24,7 +25,7 @@ public final class SyncInfoExpansionModel<T> extends ExpansionModel<T> {
         return new SyncInfoExpansionModel<>();
     }
 
-    public ExpansionPathContainer<T> channel() {
-        return expansionPath("channel");
+    public ChannelExpansionModel<T> channel() {
+        return ChannelExpansionModel.of(buildPathExpression(), "channel");
     }
 }
