@@ -17,7 +17,7 @@ public final class ProductExpansionModel<T> extends ExpansionModel<T> {
     }
 
     public ProductCatalogExpansionModel<T> masterData() {
-        return new ProductCatalogExpansionModel<>(null, "masterData");
+        return new ProductCatalogExpansionModelImpl<>(null, "masterData");
     }
 
     public static ProductExpansionModel<Product> of() {
