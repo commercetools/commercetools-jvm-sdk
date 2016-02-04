@@ -1,11 +1,12 @@
 package io.sphere.sdk.payments.expansion;
 
 import io.sphere.sdk.customers.expansion.CustomerExpansionModel;
+import io.sphere.sdk.expansion.ExpansionPathContainer;
 import io.sphere.sdk.payments.Payment;
 
 import java.util.List;
 
-public interface PaymentExpansionModel<T> {
+public interface PaymentExpansionModel<T> extends ExpansionPathContainer<T> {
     CustomerExpansionModel<T> customer();
 
     PaymentStatusExpansionModel<T> paymentStatus();

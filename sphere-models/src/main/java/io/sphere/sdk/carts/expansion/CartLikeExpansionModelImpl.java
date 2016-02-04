@@ -45,7 +45,7 @@ public abstract class CartLikeExpansionModelImpl<T> extends ExpandedModel<T> imp
 
     @Override
     public PaymentInfoExpansionModel<T> paymentInfo() {
-        return new PaymentInfoExpansionModel<>(buildPathExpression(), "paymentInfo");
+        return new PaymentInfoExpansionModelImpl<>(buildPathExpression(), "paymentInfo");
     }
 
     private DiscountCodeInfoExpansionModel<T> discountCodes(final String s) {
