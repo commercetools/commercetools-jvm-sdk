@@ -22,7 +22,7 @@ final class ProductVariantExpansionModelImpl<T> extends ExpansionModel<T> implem
 
     @Override
     public ProductAttributeExpansionModel<T> attributes() {
-        return new ProductAttributeExpansionModel<>(pathExpression(), "attributes[*]");
+        return new ProductAttributeExpansionModelImpl<>(pathExpression(), "attributes[*]");
     }
 
     private PriceExpansionModel<T> prices(final String index) {
