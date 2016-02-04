@@ -1,5 +1,6 @@
 package io.sphere.sdk.carts.expansion;
 
+import io.sphere.sdk.channels.expansion.ChannelExpansionModel;
 import io.sphere.sdk.expansion.ExpansionModel;
 import io.sphere.sdk.expansion.ExpansionPathContainer;
 
@@ -10,12 +11,8 @@ public final class LineItemExpansionModel<T> extends ExpansionModel<T> {
         super(parentPath, path);
     }
 
-    LineItemExpansionModel() {
-        super();
-    }
-
-    public ExpansionPathContainer<T> supplyChannel() {
-        return expansionPath("supplyChannel");
+    public ChannelExpansionModel<T> supplyChannel() {
+        return ChannelExpansionModel.of(buildPathExpression(), "supplyChannel");
     }
 
     public ExpansionPathContainer<T> distributionChannel() {
