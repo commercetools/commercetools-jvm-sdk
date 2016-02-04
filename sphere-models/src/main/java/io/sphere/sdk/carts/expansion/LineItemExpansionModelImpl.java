@@ -31,6 +31,6 @@ final class LineItemExpansionModelImpl<T> extends ExpansionModel<T> implements L
     }
 
     private ItemStateExpansionModel<T> state(final String s) {
-        return new ItemStateExpansionModel<>(pathExpression(), "state[" + s + "]");
+        return new ItemStateExpansionModelImpl<>(pathExpression(), "state[" + s + "]");
     }
 }
