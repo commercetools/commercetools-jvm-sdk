@@ -19,7 +19,7 @@ public final class PriceExpansionModel<T> extends ExpansionModel<T> {
     }
 
     public DiscountedPriceExpansionModel<T> discounted() {
-        return new DiscountedPriceExpansionModel<>(pathExpression(), "discounted");
+        return new DiscountedPriceExpansionModelImpl<>(pathExpression(), "discounted");
     }
 }
 

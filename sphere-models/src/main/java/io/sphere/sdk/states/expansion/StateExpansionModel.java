@@ -1,6 +1,6 @@
 package io.sphere.sdk.states.expansion;
 
-import io.sphere.sdk.expansion.ExpansionModel;
+import io.sphere.sdk.expansion.ExpandedModel;
 import io.sphere.sdk.expansion.ExpansionPathContainer;
 import io.sphere.sdk.states.State;
 
@@ -11,7 +11,7 @@ import java.util.List;
 
  @param <T> the type for which the expansion path is
  */
-public final class StateExpansionModel<T> extends ExpansionModel<T> {
+public final class StateExpansionModel<T> extends ExpandedModel<T> {
     public StateExpansionModel(final List<String> parentPath, final String path) {
         super(parentPath, path);
     }
