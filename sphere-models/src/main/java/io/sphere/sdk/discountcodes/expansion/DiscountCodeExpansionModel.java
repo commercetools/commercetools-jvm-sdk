@@ -2,13 +2,14 @@ package io.sphere.sdk.discountcodes.expansion;
 
 import io.sphere.sdk.cartdiscounts.expansion.CartDiscountExpansionModel;
 import io.sphere.sdk.discountcodes.DiscountCode;
-import io.sphere.sdk.expansion.ExpansionModel;
+import io.sphere.sdk.expansion.ExpandedModel;
 import io.sphere.sdk.expansion.ExpansionPathContainer;
 
 import javax.annotation.Nullable;
+import java.util.List;
 
-public final class DiscountCodeExpansionModel<T> extends ExpansionModel<T> {
-    private DiscountCodeExpansionModel(@Nullable final String parentPath, @Nullable final String path) {
+public final class DiscountCodeExpansionModel<T> extends ExpandedModel<T> {
+    private DiscountCodeExpansionModel(@Nullable final List<String> parentPath, @Nullable final String path) {
         super(parentPath, path);
     }
 
@@ -18,6 +19,10 @@ public final class DiscountCodeExpansionModel<T> extends ExpansionModel<T> {
 
     public static DiscountCodeExpansionModel<DiscountCode> of() {
         return new DiscountCodeExpansionModel<>();
+    }
+
+    public static <T> DiscountCodeExpansionModel<T> of(final List<String> parentPath, final String path) {
+        return new DiscountCodeExpansionModel<>(parentPath, path);
     }
 
     public CartDiscountExpansionModel<T> cartDiscounts() {

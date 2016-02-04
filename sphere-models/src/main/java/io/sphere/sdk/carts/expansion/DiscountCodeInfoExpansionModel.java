@@ -1,7 +1,7 @@
 package io.sphere.sdk.carts.expansion;
 
+import io.sphere.sdk.discountcodes.expansion.DiscountCodeExpansionModel;
 import io.sphere.sdk.expansion.ExpansionModel;
-import io.sphere.sdk.expansion.ExpansionPathContainer;
 
 import java.util.List;
 
@@ -10,7 +10,7 @@ public final class DiscountCodeInfoExpansionModel<T> extends ExpansionModel<T> {
         super(parentPath, path);
     }
 
-    public ExpansionPathContainer<T> discountCode() {
-        return expansionPath("discountCode");
+    public DiscountCodeExpansionModel<T> discountCode() {
+        return DiscountCodeExpansionModel.of(buildPathExpression(), "discountCode");
     }
 }
