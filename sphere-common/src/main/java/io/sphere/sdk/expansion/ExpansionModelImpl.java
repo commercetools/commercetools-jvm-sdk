@@ -20,11 +20,11 @@ public class ExpansionModelImpl<T> extends Base implements ExpansionPathContaine
     private final List<String> pathExpressions;
 
     protected ExpansionModelImpl(@Nullable final String parentPath, final List<String> paths) {
-        pathExpressions = paths.stream()
+        this(paths.stream()
                 .map(path ->
                 Optional.ofNullable(parentPath)
                         .filter(p -> !isEmpty(p)).map(p -> p + ".").orElse("") + Optional.ofNullable(path).orElse(""))
-                .collect(toList());
+                .collect(toList()), null);
     }
 
     protected ExpansionModelImpl(@Nullable final String parentPath, @Nullable final String path) {
@@ -32,13 +32,14 @@ public class ExpansionModelImpl<T> extends Base implements ExpansionPathContaine
     }
 
     public ExpansionModelImpl() {
-        this("", "");
+        this((List<String>) null, null);
     }
 
     public ExpansionModelImpl(final List<String> parentExpressions, final String path) {
-        this.pathExpressions = !isEmpty(path) ? parentExpressions.stream()
+        final List<String> nullSafeParentExpressions = parentExpressions == null ? Collections.singletonList("") : parentExpressions;
+        this.pathExpressions = !isEmpty(path) ? nullSafeParentExpressions.stream()
                 .map(p -> isEmpty(p) ? path : p + "." + path)
-                .collect(Collectors.toList()) : parentExpressions;
+                .collect(Collectors.toList()) : nullSafeParentExpressions;
     }
 
     protected final List<String> buildPathExpression() {
