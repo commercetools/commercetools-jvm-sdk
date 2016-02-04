@@ -3,7 +3,6 @@ package io.sphere.sdk.queries;
 import io.sphere.sdk.client.QueueSphereClientDecorator;
 import io.sphere.sdk.client.SphereClient;
 import io.sphere.sdk.models.Base;
-import io.sphere.sdk.utils.SphereInternalUtils;
 import org.reactivestreams.Subscriber;
 
 import java.util.LinkedList;
@@ -65,10 +64,8 @@ class RunningSubscription<T, C extends QueryDsl<T, C>> extends Base implements S
         try {
             final List<T> results = sphereClient.execute(query).toCompletableFuture().join().getResults();
             if (results.size() == 0) {
-                executor.execute(() -> {
-                    subscriber.onComplete();
-                    cancel();
-                });
+                subscriber.onComplete();
+                cancel();
             } else {
                 final T t = results.get(results.size() - 1);
                 lastId = idExtractor.apply(t);
