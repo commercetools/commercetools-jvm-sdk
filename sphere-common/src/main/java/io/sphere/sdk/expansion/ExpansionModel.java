@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 import static java.util.stream.Collectors.toList;
 import static org.apache.commons.lang3.StringUtils.isEmpty;
 
-public class ExpansionModel<T> extends Base {
+public class ExpansionModel<T> extends Base implements ExpansionPathContainer<T> {
     private final List<String> pathExpressions;
 
     protected ExpansionModel(@Nullable final String parentPath, final List<String> paths) {
@@ -55,5 +55,14 @@ public class ExpansionModel<T> extends Base {
 
     protected final ExpansionPathContainer<T> expansionPath(final String path) {
         return new ExpandedModel<>(buildPathExpression(), path);
+    }
+
+    protected static String collection(final String segmentName, final Integer index) {
+        return String.format("%s[%d]", segmentName, index);
+    }
+
+    @Override
+    public List<ExpansionPath<T>> expansionPaths() {
+        return buildPathExpression().stream().map(ExpansionPath::<T>of).collect(toList());
     }
 }
