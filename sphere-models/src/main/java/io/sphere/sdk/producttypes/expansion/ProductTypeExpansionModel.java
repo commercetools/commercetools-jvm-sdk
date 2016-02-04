@@ -2,7 +2,6 @@ package io.sphere.sdk.producttypes.expansion;
 
 import io.sphere.sdk.expansion.ExpansionPathContainer;
 import io.sphere.sdk.producttypes.ProductType;
-import io.sphere.sdk.zones.expansion.ZoneExpansionModelImpl;
 
 import java.util.List;
 

@@ -2,9 +2,9 @@ package io.sphere.sdk.products.expansion;
 
 import io.sphere.sdk.categories.expansion.CategoryExpansionModel;
 import io.sphere.sdk.expansion.ExpansionModel;
-import io.sphere.sdk.expansion.ExpansionPathContainer;
 import io.sphere.sdk.products.ProductProjection;
 import io.sphere.sdk.producttypes.expansion.ProductTypeExpansionModel;
+import io.sphere.sdk.taxcategories.expansion.TaxCategoryExpansionModel;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -24,8 +24,8 @@ public final class ProductProjectionExpansionModel<T> extends ExpansionModel<T> 
         return ProductTypeExpansionModel.of(buildPathExpression(), "productType");
     }
 
-    public ExpansionPathContainer<T> taxCategory() {
-        return expansionPath("taxCategory");
+    public TaxCategoryExpansionModel<T> taxCategory() {
+        return TaxCategoryExpansionModel.of(buildPathExpression(), "taxCategory");
     }
 
     public CategoryExpansionModel<ProductProjection> categories(final int index) {
