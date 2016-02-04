@@ -1,7 +1,8 @@
 package io.sphere.sdk.products.expansion;
 
+import io.sphere.sdk.channels.expansion.ChannelExpansionModel;
+import io.sphere.sdk.customergroups.expansion.CustomerGroupExpansionModel;
 import io.sphere.sdk.expansion.ExpansionModel;
-import io.sphere.sdk.expansion.ExpansionPathContainer;
 
 import java.util.List;
 
@@ -10,12 +11,12 @@ public final class PriceExpansionModel<T> extends ExpansionModel<T> {
         super(parentPath, path);
     }
 
-    public ExpansionPathContainer<T> customerGroup() {
-        return expansionPath("customerGroup");
+    public CustomerGroupExpansionModel<T> customerGroup() {
+        return CustomerGroupExpansionModel.of(buildPathExpression(), "customerGroup");
     }
 
-    public ExpansionPathContainer<T> channel() {
-        return expansionPath("channel");
+    public ChannelExpansionModel<T> channel() {
+        return ChannelExpansionModel.of(buildPathExpression(), "channel");
     }
 
     public DiscountedPriceExpansionModel<T> discounted() {
