@@ -18,8 +18,8 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":10};
-var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
+var methods = {"i0":6};
+var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],4:["t3","Abstract Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
 var tableTab = "tableTab";
@@ -49,7 +49,7 @@ var activeTableTab = "activeTableTab";
 <div class="subNav">
 <ul class="navList">
 <li><a href="../../../../../io/sphere/sdk/carts/expansion/CartLikeExpansionModelImpl.html" title="class in io.sphere.sdk.carts.expansion"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
-<li><a href="../../../../../io/sphere/sdk/carts/expansion/ItemStateExpansionModel.html" title="class in io.sphere.sdk.carts.expansion"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
+<li><a href="../../../../../io/sphere/sdk/carts/expansion/ItemStateExpansionModel.html" title="interface in io.sphere.sdk.carts.expansion"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">
 <li><a href="../../../../../index.html?io/sphere/sdk/carts/expansion/DiscountCodeInfoExpansionModel.html" target="_top">Frames</a></li>
@@ -92,34 +92,15 @@ var activeTableTab = "activeTableTab";
 <!-- ======== START OF CLASS DATA ======== -->
 <div class="header">
 <div class="subTitle">io.sphere.sdk.carts.expansion</div>
-<h2 title="Class DiscountCodeInfoExpansionModel" class="title">Class DiscountCodeInfoExpansionModel&lt;T&gt;</h2>
+<h2 title="Interface DiscountCodeInfoExpansionModel" class="title">Interface DiscountCodeInfoExpansionModel&lt;T&gt;</h2>
 </div>
 <div class="contentContainer">
-<ul class="inheritance">
-<li>java.lang.Object</li>
-<li>
-<ul class="inheritance">
-<li><a href="../../../../../io/sphere/sdk/models/Base.html" title="class in io.sphere.sdk.models">io.sphere.sdk.models.Base</a></li>
-<li>
-<ul class="inheritance">
-<li><a href="../../../../../io/sphere/sdk/expansion/ExpansionModel.html" title="class in io.sphere.sdk.expansion">io.sphere.sdk.expansion.ExpansionModel</a>&lt;T&gt;</li>
-<li>
-<ul class="inheritance">
-<li>io.sphere.sdk.carts.expansion.DiscountCodeInfoExpansionModel&lt;T&gt;</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
 <div class="description">
 <ul class="blockList">
 <li class="blockList">
 <hr>
 <br>
-<pre>public final class <span class="typeNameLabel">DiscountCodeInfoExpansionModel&lt;T&gt;</span>
-extends <a href="../../../../../io/sphere/sdk/expansion/ExpansionModel.html" title="class in io.sphere.sdk.expansion">ExpansionModel</a>&lt;T&gt;</pre>
+<pre>public interface <span class="typeNameLabel">DiscountCodeInfoExpansionModel&lt;T&gt;</span></pre>
 </li>
 </ul>
 </div>
@@ -133,37 +114,16 @@ extends <a href="../../../../../io/sphere/sdk/expansion/ExpansionModel.html" tit
 </a>
 <h3>Method Summary</h3>
 <table class="memberSummary" border="0" cellpadding="3" cellspacing="0" summary="Method Summary table, listing methods, and an explanation">
-<caption><span id="t0" class="activeTableTab"><span>All Methods</span><span class="tabEnd">&nbsp;</span></span><span id="t2" class="tableTab"><span><a href="javascript:show(2);">Instance Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t4" class="tableTab"><span><a href="javascript:show(8);">Concrete Methods</a></span><span class="tabEnd">&nbsp;</span></span></caption>
+<caption><span id="t0" class="activeTableTab"><span>All Methods</span><span class="tabEnd">&nbsp;</span></span><span id="t2" class="tableTab"><span><a href="javascript:show(2);">Instance Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t3" class="tableTab"><span><a href="javascript:show(4);">Abstract Methods</a></span><span class="tabEnd">&nbsp;</span></span></caption>
 <tr>
 <th class="colFirst" scope="col">Modifier and Type</th>
 <th class="colLast" scope="col">Method and Description</th>
 </tr>
 <tr id="i0" class="altColor">
-<td class="colFirst"><code><a href="../../../../../io/sphere/sdk/expansion/ExpansionPathContainer.html" title="interface in io.sphere.sdk.expansion">ExpansionPathContainer</a>&lt;<a href="../../../../../io/sphere/sdk/carts/expansion/DiscountCodeInfoExpansionModel.html" title="type parameter in DiscountCodeInfoExpansionModel">T</a>&gt;</code></td>
+<td class="colFirst"><code><a href="../../../../../io/sphere/sdk/discountcodes/expansion/DiscountCodeExpansionModel.html" title="interface in io.sphere.sdk.discountcodes.expansion">DiscountCodeExpansionModel</a>&lt;<a href="../../../../../io/sphere/sdk/carts/expansion/DiscountCodeInfoExpansionModel.html" title="type parameter in DiscountCodeInfoExpansionModel">T</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/carts/expansion/DiscountCodeInfoExpansionModel.html#discountCode--">discountCode</a></span>()</code>&nbsp;</td>
 </tr>
 </table>
-<ul class="blockList">
-<li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.expansion.ExpansionModel">
-<!--   -->
-</a>
-<h3>Methods inherited from class&nbsp;io.sphere.sdk.expansion.<a href="../../../../../io/sphere/sdk/expansion/ExpansionModel.html" title="class in io.sphere.sdk.expansion">ExpansionModel</a></h3>
-<code><a href="../../../../../io/sphere/sdk/expansion/ExpansionModel.html#buildExpansionPaths--">buildExpansionPaths</a>, <a href="../../../../../io/sphere/sdk/expansion/ExpansionModel.html#buildPathExpression--">buildPathExpression</a>, <a href="../../../../../io/sphere/sdk/expansion/ExpansionModel.html#expansionPath-java.lang.String-">expansionPath</a>, <a href="../../../../../io/sphere/sdk/expansion/ExpansionModel.html#pathExpression--">pathExpression</a></code></li>
-</ul>
-<ul class="blockList">
-<li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.models.Base">
-<!--   -->
-</a>
-<h3>Methods inherited from class&nbsp;io.sphere.sdk.models.<a href="../../../../../io/sphere/sdk/models/Base.html" title="class in io.sphere.sdk.models">Base</a></h3>
-<code><a href="../../../../../io/sphere/sdk/models/Base.html#equals-java.lang.Object-">equals</a>, <a href="../../../../../io/sphere/sdk/models/Base.html#hashCode--">hashCode</a>, <a href="../../../../../io/sphere/sdk/models/Base.html#toString--">toString</a></code></li>
-</ul>
-<ul class="blockList">
-<li class="blockList"><a name="methods.inherited.from.class.java.lang.Object">
-<!--   -->
-</a>
-<h3>Methods inherited from class&nbsp;java.lang.Object</h3>
-<code>clone, finalize, getClass, notify, notifyAll, wait, wait, wait</code></li>
-</ul>
 </li>
 </ul>
 </li>
@@ -184,7 +144,7 @@ extends <a href="../../../../../io/sphere/sdk/expansion/ExpansionModel.html" tit
 <ul class="blockListLast">
 <li class="blockList">
 <h4>discountCode</h4>
-<pre>public&nbsp;<a href="../../../../../io/sphere/sdk/expansion/ExpansionPathContainer.html" title="interface in io.sphere.sdk.expansion">ExpansionPathContainer</a>&lt;<a href="../../../../../io/sphere/sdk/carts/expansion/DiscountCodeInfoExpansionModel.html" title="type parameter in DiscountCodeInfoExpansionModel">T</a>&gt;&nbsp;discountCode()</pre>
+<pre><a href="../../../../../io/sphere/sdk/discountcodes/expansion/DiscountCodeExpansionModel.html" title="interface in io.sphere.sdk.discountcodes.expansion">DiscountCodeExpansionModel</a>&lt;<a href="../../../../../io/sphere/sdk/carts/expansion/DiscountCodeInfoExpansionModel.html" title="type parameter in DiscountCodeInfoExpansionModel">T</a>&gt;&nbsp;discountCode()</pre>
 </li>
 </ul>
 </li>
@@ -215,7 +175,7 @@ extends <a href="../../../../../io/sphere/sdk/expansion/ExpansionModel.html" tit
 <div class="subNav">
 <ul class="navList">
 <li><a href="../../../../../io/sphere/sdk/carts/expansion/CartLikeExpansionModelImpl.html" title="class in io.sphere.sdk.carts.expansion"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
-<li><a href="../../../../../io/sphere/sdk/carts/expansion/ItemStateExpansionModel.html" title="class in io.sphere.sdk.carts.expansion"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
+<li><a href="../../../../../io/sphere/sdk/carts/expansion/ItemStateExpansionModel.html" title="interface in io.sphere.sdk.carts.expansion"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">
 <li><a href="../../../../../index.html?io/sphere/sdk/carts/expansion/DiscountCodeInfoExpansionModel.html" target="_top">Frames</a></li>
