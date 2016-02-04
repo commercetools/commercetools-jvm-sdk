@@ -1,12 +1,13 @@
 package io.sphere.sdk.carts.expansion;
 
 import io.sphere.sdk.customergroups.expansion.CustomerGroupExpansionModel;
+import io.sphere.sdk.expansion.ExpansionPathContainer;
 
 /**
  * Internal base interface
  * @param <T> context of the reference expansion
  */
-public interface CartLikeExpansionModel<T> {
+public interface CartLikeExpansionModel<T> extends ExpansionPathContainer<T> {
     CustomerGroupExpansionModel<T> customerGroup();
 
     DiscountCodeInfoExpansionModel<T> discountCodes();

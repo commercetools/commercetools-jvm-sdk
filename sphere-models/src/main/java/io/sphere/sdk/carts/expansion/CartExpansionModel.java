@@ -3,6 +3,8 @@ package io.sphere.sdk.carts.expansion;
 import io.sphere.sdk.carts.Cart;
 import io.sphere.sdk.customergroups.expansion.CustomerGroupExpansionModel;
 
+import java.util.List;
+
 /**
  * Model to explore reference fields in a cart that can be expanded.
  *
@@ -32,5 +34,9 @@ public interface CartExpansionModel<T> extends CartLikeExpansionModel<T> {
 
     static CartExpansionModel<Cart> of() {
         return new CartExpansionModelImpl<>();
+    }
+
+    static <T> CartExpansionModel<T> of(final List<String> parentPath, final String path) {
+        return new CartExpansionModelImpl<>(parentPath, path);
     }
 }

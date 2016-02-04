@@ -2,12 +2,14 @@ package io.sphere.sdk.carts.expansion;
 
 import io.sphere.sdk.customergroups.expansion.CustomerGroupExpansionModel;
 
+import java.util.List;
+
 final class CartExpansionModelImpl<T> extends CartLikeExpansionModelImpl<T> implements CartExpansionModel<T> {
     CartExpansionModelImpl() {
         super();
     }
 
-    CartExpansionModelImpl(final String parentPath, final String path) {
+    CartExpansionModelImpl(final List<String> parentPath, final String path) {
         super(parentPath, path);
     }
 

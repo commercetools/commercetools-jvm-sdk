@@ -2,8 +2,9 @@ package io.sphere.sdk.orders.expansion;
 
 import io.sphere.sdk.carts.expansion.*;
 import io.sphere.sdk.customergroups.expansion.CustomerGroupExpansionModel;
-import io.sphere.sdk.expansion.ExpansionPathContainer;
 import io.sphere.sdk.orders.Order;
+
+import java.util.List;
 
 /**
   DSL class to create expansion path expressions.
@@ -11,7 +12,7 @@ import io.sphere.sdk.orders.Order;
  @param <T> the type for which the expansion path is
  */
 public final class OrderExpansionModel<T> extends CartLikeExpansionModelImpl<T> {
-    private OrderExpansionModel(final String parentPath, final String path) {
+    private OrderExpansionModel(final List<String> parentPath, final String path) {
         super(parentPath, path);
     }
 
@@ -24,8 +25,8 @@ public final class OrderExpansionModel<T> extends CartLikeExpansionModelImpl<T> 
         return new SyncInfoExpansionModel<>(pathExpression(), "syncInfo[*]");
     }
 
-    public ExpansionPathContainer<T> cart() {
-        return expansionPath("cart");
+    public CartExpansionModel<T> cart() {
+        return CartExpansionModel.of(pathExpression(), "cart");
     }
 
     public static OrderExpansionModel<Order> of() {
