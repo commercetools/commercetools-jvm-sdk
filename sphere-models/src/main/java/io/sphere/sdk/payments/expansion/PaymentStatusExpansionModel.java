@@ -1,7 +1,7 @@
 package io.sphere.sdk.payments.expansion;
 
-import io.sphere.sdk.expansion.ExpansionPathContainer;
+import io.sphere.sdk.states.expansion.StateExpansionModel;
 
 public interface PaymentStatusExpansionModel<T> {
-    ExpansionPathContainer<T> state();
+    StateExpansionModel<T> state();
 }
