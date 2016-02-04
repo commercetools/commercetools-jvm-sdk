@@ -1,6 +1,7 @@
 package io.sphere.sdk.expansion;
 
 import io.sphere.sdk.models.Base;
+import org.apache.commons.lang3.ObjectUtils;
 
 import javax.annotation.Nullable;
 import java.util.Collections;
@@ -43,6 +44,13 @@ public class ExpansionModel<T> extends Base {
     @Nullable
     protected final List<String> pathExpression() {
         return buildPathExpression();
+    }
+
+    protected List<ExpansionPath<T>> buildExpansionPaths() {
+        final List<String> paths = ObjectUtils.defaultIfNull(buildPathExpression(), Collections.<String>emptyList());
+        return paths.stream()
+                .map((sphereExpansionPathExpression) -> ExpansionPath.<T>of(sphereExpansionPathExpression))
+                .collect(toList());
     }
 
     protected final ExpansionPathContainer<T> expansionPath(final String path) {

@@ -3,6 +3,7 @@ package io.sphere.sdk.shippingmethods.expansion;
 import io.sphere.sdk.expansion.ExpandedModel;
 import io.sphere.sdk.expansion.ExpansionPathContainer;
 import io.sphere.sdk.shippingmethods.ShippingMethod;
+import io.sphere.sdk.zones.expansion.ZoneExpansionModel;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -12,7 +13,7 @@ import java.util.List;
 
  @param <T> the type for which the expansion path is
  */
-public final class ShippingMethodExpansionModel<T> extends ExpandedModel<T> {
+public final class ShippingMethodExpansionModel<T> extends ExpandedModel<T> implements ExpansionPathContainer<T> {
     public ShippingMethodExpansionModel(final List<String> parentPath, @Nullable final String path) {
         super(parentPath, path);
     }
@@ -33,11 +34,11 @@ public final class ShippingMethodExpansionModel<T> extends ExpandedModel<T> {
         return zoneRates("" + index);
     }
 
-    public ExpansionPathContainer<T> zones() {
+    public ZoneExpansionModel<T> zones() {
         return zoneRates().zone();
     }
 
-    public ExpansionPathContainer<T> zones(final int index) {
+    public ZoneExpansionModel<T> zones(final int index) {
         return zoneRates(index).zone();
     }
 

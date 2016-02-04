@@ -1,7 +1,7 @@
 package io.sphere.sdk.shippingmethods.expansion;
 
-import io.sphere.sdk.expansion.ExpansionPathContainer;
+import io.sphere.sdk.zones.expansion.ZoneExpansionModel;
 
 public interface ZoneRateExpansionModel<T> {
-    ExpansionPathContainer<T> zone();
+    ZoneExpansionModel<T> zone();
 }

@@ -1,7 +1,8 @@
 package io.sphere.sdk.shippingmethods.expansion;
 
 import io.sphere.sdk.expansion.ExpansionModel;
-import io.sphere.sdk.expansion.ExpansionPathContainer;
+import io.sphere.sdk.expansion.ExpansionPath;
+import io.sphere.sdk.zones.expansion.ZoneExpansionModel;
 
 import java.util.List;
 
@@ -11,7 +12,7 @@ final class ZoneRateExpansionModelImpl<T> extends ExpansionModel<T> implements Z
     }
 
     @Override
-    public ExpansionPathContainer<T> zone() {
-        return expansionPath("zone");
+    public ZoneExpansionModel<T> zone() {
+        return ZoneExpansionModel.of(pathExpression(), "zone");
     }
 }
