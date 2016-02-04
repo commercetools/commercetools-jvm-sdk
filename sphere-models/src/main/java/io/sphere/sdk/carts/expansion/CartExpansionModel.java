@@ -8,51 +8,29 @@ import io.sphere.sdk.customergroups.expansion.CustomerGroupExpansionModel;
  *
  * @param <T> the context type
  */
-public final class CartExpansionModel<T> extends CartLikeExpansionModelImpl<T> {
-    private CartExpansionModel() {
-        super();
-    }
-
-    public static CartExpansionModel<Cart> of() {
-        return new CartExpansionModel<>();
-    }
-
-    protected CartExpansionModel(final String parentPath, final String path) {
-        super(parentPath, path);
-    }
+public interface CartExpansionModel<T> extends CartLikeExpansionModel<T> {
+    @Override
+    CustomerGroupExpansionModel<T> customerGroup();
 
     @Override
-    public CustomerGroupExpansionModel<T> customerGroup() {
-        return super.customerGroup();
-    }
+    DiscountCodeInfoExpansionModel<T> discountCodes();
 
     @Override
-    public DiscountCodeInfoExpansionModel<T> discountCodes() {
-        return super.discountCodes();
-    }
+    DiscountCodeInfoExpansionModel<T> discountCodes(int index);
 
     @Override
-    public DiscountCodeInfoExpansionModel<T> discountCodes(final int index) {
-        return super.discountCodes(index);
-    }
+    LineItemExpansionModel<T> lineItems();
 
     @Override
-    public LineItemExpansionModel<T> lineItems() {
-        return super.lineItems();
-    }
+    LineItemExpansionModel<T> lineItems(int index);
 
     @Override
-    public LineItemExpansionModel<T> lineItems(final int index) {
-        return super.lineItems(index);
-    }
+    PaymentInfoExpansionModel<T> paymentInfo();
 
     @Override
-    public PaymentInfoExpansionModel<T> paymentInfo() {
-        return super.paymentInfo();
-    }
+    ShippingInfoExpansionModel<T> shippingInfo();
 
-    @Override
-    public ShippingInfoExpansionModel<T> shippingInfo() {
-        return super.shippingInfo();
+    static CartExpansionModel<Cart> of() {
+        return new CartExpansionModelImpl<>();
     }
 }
