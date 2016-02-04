@@ -78,4 +78,13 @@ public final class HttpHeaders extends Base {
         }
         return newMap.toString();
     }
+
+    public static HttpHeaders of(final List<Map.Entry<String, String>> entries) {
+        final Map<String, List<String>> headers = new HashMap<>();
+        entries.forEach(entry -> {
+            final List<String> headersForKey = headers.computeIfAbsent(entry.getKey(), key -> new LinkedList<>());
+            headersForKey.add(entry.getValue());
+        });
+        return HttpHeaders.of(headers);
+    }
 }

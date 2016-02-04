@@ -28,6 +28,7 @@ trait json {
 trait http {
   val `async-http-client-1.8` = "com.ning" % "async-http-client" % "1.8.16"
   val `async-http-client-1.9` = "com.ning" % "async-http-client" % "1.9.30"
+  val `async-http-client-2.0` = "org.asynchttpclient" % "async-http-client" % "2.0.0-RC8"
   val `apache-httpasyncclient` = "org.apache.httpcomponents" % "httpasyncclient" % "4.1"
 }
 

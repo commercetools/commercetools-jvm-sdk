@@ -1,8 +1,13 @@
 package io.sphere.sdk.client;
 
-import com.ning.http.client.AsyncHttpClient;
-import com.ning.http.client.AsyncHttpClientConfig;
-import io.sphere.sdk.http.*;
+import io.sphere.sdk.http.AsyncHttpClientAdapter;
+import io.sphere.sdk.http.HttpClient;
+import io.sphere.sdk.http.HttpRequest;
+import io.sphere.sdk.http.HttpResponse;
+import org.asynchttpclient.AsyncHttpClient;
+import org.asynchttpclient.AsyncHttpClientConfig;
+import org.asynchttpclient.DefaultAsyncHttpClient;
+import org.asynchttpclient.DefaultAsyncHttpClientConfig;
 import org.junit.Test;
 
 import java.util.concurrent.CompletionStage;
@@ -16,14 +21,14 @@ public class CustomClientConfigDemoTest {
      * @return new http client with custom settings
      */
     public static HttpClient createCustomHttpClient() {
-        final AsyncHttpClientConfig httpClientConfig = new AsyncHttpClientConfig.Builder()
+        final AsyncHttpClientConfig httpClientConfig = new DefaultAsyncHttpClientConfig.Builder()
                 .setEnabledProtocols(new String[]{"TLSv1.2"})//required
                 //examples for configuration
                 .setMaxConnections(500)
                 .setConnectTimeout(100)
 //                .setProxyServer(proxy)
                 .build();
-        final AsyncHttpClient asyncHttpClient = new AsyncHttpClient(httpClientConfig);
+        final AsyncHttpClient asyncHttpClient = new DefaultAsyncHttpClient(httpClientConfig);
         return AsyncHttpClientAdapter.of(asyncHttpClient);
     }
 
