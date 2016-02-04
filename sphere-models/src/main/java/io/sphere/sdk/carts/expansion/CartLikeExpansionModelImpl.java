@@ -35,12 +35,12 @@ public abstract class CartLikeExpansionModelImpl<T> extends ExpandedModel<T> imp
 
     @Override
     public LineItemExpansionModel<T> lineItems() {
-        return new LineItemExpansionModel<>(pathExpression(), "lineItems[*]");
+        return new LineItemExpansionModelImpl<>(pathExpression(), "lineItems[*]");
     }
 
     @Override
     public LineItemExpansionModel<T> lineItems(final int index) {
-        return new LineItemExpansionModel<>(pathExpression(), "lineItems[" + index + "]");
+        return new LineItemExpansionModelImpl<>(pathExpression(), "lineItems[" + index + "]");
     }
 
     @Override
