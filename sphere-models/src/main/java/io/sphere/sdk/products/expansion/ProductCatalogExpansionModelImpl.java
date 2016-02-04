@@ -18,6 +18,6 @@ final class ProductCatalogExpansionModelImpl<T> extends ExpansionModel<T> implem
     }
 
     private ProductDataExpansionModel<T> productDataExpansion(final String segment) {
-        return new ProductDataExpansionModel<>(pathExpression(), segment);
+        return new ProductDataExpansionModelImpl<>(pathExpression(), segment);
     }
 }
