@@ -21,9 +21,7 @@ public final class FormUrlEncodedHttpRequestBody extends Base implements HttpReq
      * @return FormUrlEncodedHttpRequestBody
      */
     public static FormUrlEncodedHttpRequestBody of(final Map<String, String> data) {
-        final List<NameValuePair> list = new ArrayList<>(data.size());
-        data.forEach((key, value) -> list.add(NameValuePair.of(key, value)));
-        return of(list);
+        return of(NameValuePair.convertStringMapToList(data));
     }
 
     /**
@@ -32,9 +30,7 @@ public final class FormUrlEncodedHttpRequestBody extends Base implements HttpReq
      */
     @Deprecated
     public Map<String, String> getData() {
-        final Map<String, String> map = new HashMap<>();
-        getParameters().forEach(pair -> map.put(pair.getName(), pair.getValue()));
-        return map;
+        return NameValuePair.convertToStringMap(getParameters());
     }
 
     public List<NameValuePair> getParameters() {

@@ -9,12 +9,12 @@ import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ForkJoinPool;
 
-final class DefaultAsyncHttpClientAdapterImpl implements AsyncHttpClientAdapter {
-    private static final Logger LOGGER = LoggerFactory.getLogger(DefaultAsyncHttpClientAdapterImpl.class);
+final class DefaultAsyncHttpClient2_0AdapterImpl implements AsyncHttpClientAdapter {
+    private static final Logger LOGGER = LoggerFactory.getLogger(DefaultAsyncHttpClient2_0AdapterImpl.class);
     private final AsyncHttpClient asyncHttpClient;
     private final ForkJoinPool threadPool = new ForkJoinPool();
 
-    private DefaultAsyncHttpClientAdapterImpl(final AsyncHttpClient asyncHttpClient) {
+    private DefaultAsyncHttpClient2_0AdapterImpl(final AsyncHttpClient asyncHttpClient) {
         this.asyncHttpClient = asyncHttpClient;
     }
 
@@ -46,7 +46,7 @@ final class DefaultAsyncHttpClientAdapterImpl implements AsyncHttpClientAdapter 
         });
         return future.thenApplyAsync(response -> {
             final byte[] responseBodyAsBytes = getResponseBodyAsBytes(response);
-            final HttpResponse httpResponse = HttpResponse.of(response.getStatusCode(), responseBodyAsBytes, httpRequest, HttpHeaders.of(response.getHeaders().entries()));
+            final HttpResponse httpResponse = HttpResponse.of(response.getStatusCode(), responseBodyAsBytes, httpRequest, HttpHeaders.ofMapEntryList(response.getHeaders().entries()));
             if (LOGGER.isDebugEnabled()) {
                 LOGGER.debug("response " + httpResponse);
             }
@@ -98,8 +98,8 @@ final class DefaultAsyncHttpClientAdapterImpl implements AsyncHttpClientAdapter 
         }
     }
 
-    public static DefaultAsyncHttpClientAdapterImpl of(final AsyncHttpClient asyncHttpClient) {
-        return new DefaultAsyncHttpClientAdapterImpl(asyncHttpClient);
+    public static AsyncHttpClientAdapter of(final AsyncHttpClient asyncHttpClient) {
+        return new DefaultAsyncHttpClient2_0AdapterImpl(asyncHttpClient);
     }
 
 }

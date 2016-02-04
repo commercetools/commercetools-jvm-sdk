@@ -37,9 +37,9 @@ trait other {
   val `commons-lang3` = "org.apache.commons" % "commons-lang3" % "3.4"
   val `commons-io` = "commons-io" % "commons-io" % "2.4"
   val `moneta` = "org.javamoney" % "moneta" % "1.0"
-  val `slf4j-api` = "org.slf4j" % "slf4j-api" % "1.7.12"
+  val `slf4j-api` = "org.slf4j" % "slf4j-api" % "1.7.14"
   val `logback-classic` = "ch.qos.logback" % "logback-classic" % "1.1.3"
-  val `jul-to-slf4j` = "org.slf4j" % "jul-to-slf4j" % "1.7.12"
+  val `jul-to-slf4j` = "org.slf4j" % "jul-to-slf4j" % "1.7.14"
   val `jsr305` =  "com.google.code.findbugs" % "jsr305" % "3.0.0"
   val `reactive-streams` =  "org.reactivestreams" % "reactive-streams" % "1.0.0"
 }

@@ -1,7 +1,7 @@
 package io.sphere.sdk.meta;
 
-import com.ning.http.client.AsyncHttpClient;
 import io.sphere.sdk.client.SphereRequest;
+import org.asynchttpclient.AsyncHttpClient;
 
 /**
  <h3 id=blocking-client>Blocking Client</h3>
@@ -55,7 +55,7 @@ import io.sphere.sdk.client.SphereRequest;
 
  {@link io.sphere.sdk.http.HttpClient} is an abstraction to perform http requests.
 
- <p>{@link io.sphere.sdk.http.AsyncHttpClientAdapter#of(AsyncHttpClient)} wraps a ning {@link AsyncHttpClient} as {@link io.sphere.sdk.http.HttpClient}.</p>
+ <p>{@code io.sphere.sdk.http.AsyncHttpClientAdapter#of(AsyncHttpClient)} wraps an {@code AsyncHttpClient} as {@link io.sphere.sdk.http.HttpClient}.</p>
 
  <p>The following example creates a configured HTTP client and initializes a {@link io.sphere.sdk.client.SphereClient} with it.</p>
 
