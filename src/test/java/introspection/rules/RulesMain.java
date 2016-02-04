@@ -34,7 +34,8 @@ public class RulesMain {
                 new EveryObjectHasAGoodBaseClass(),
                 new UtilClassesEndWithUtilsRule(),
                 new ResourceClassesWithTypeReferenceMethod(),
-                new ClassesAreFinalRule()
+                new ClassesAreFinalRule(),
+                new ExpansionModelsAreInterfacesRule()
         );
         final boolean allIsOk = rules.stream()
                 .map(rule -> {
