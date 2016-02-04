@@ -32,12 +32,12 @@ final class ProductProjectionExpansionModelImpl<T> extends ExpansionModel<T> imp
 
     @Override
     public CategoryExpansionModel<ProductProjection> categories(final int index) {
-        return new CategoryExpansionModel<>(pathExpression(), "categories[" + index + "]");
+        return CategoryExpansionModel.of(pathExpression(), "categories[" + index + "]");
     }
 
     @Override
     public CategoryExpansionModel<ProductProjection> categories() {
-        return new CategoryExpansionModel<>(pathExpression(), "categories[*]");
+        return CategoryExpansionModel.of(pathExpression(), "categories[*]");
     }
 
     @Override

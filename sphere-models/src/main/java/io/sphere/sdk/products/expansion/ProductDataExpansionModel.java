@@ -12,11 +12,11 @@ public final class ProductDataExpansionModel<T> extends ExpansionModel<T> {
     }
 
     public CategoryExpansionModel<T> categories(final Integer index) {
-        return new CategoryExpansionModel<>(pathExpression(), "categories[" + index + "]");
+        return CategoryExpansionModel.of(pathExpression(), "categories[" + index + "]");
     }
 
     public CategoryExpansionModel<T> categories() {
-        return new CategoryExpansionModel<>(pathExpression(), "categories[*]");
+        return CategoryExpansionModel.of(pathExpression(), "categories[*]");
     }
 
     public ProductVariantExpansionModel<T> masterVariant() {
