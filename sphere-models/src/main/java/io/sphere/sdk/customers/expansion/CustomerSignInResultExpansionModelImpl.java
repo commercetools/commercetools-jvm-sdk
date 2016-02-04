@@ -9,6 +9,6 @@ final class CustomerSignInResultExpansionModelImpl<T> extends ExpansionModel<T> 
 
     @Override
     public CustomerExpansionModel<T> customer() {
-        return new CustomerExpansionModel<>(null, "customer");
+        return CustomerExpansionModel.of(null, "customer");
     }
 }
