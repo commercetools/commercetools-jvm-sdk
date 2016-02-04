@@ -1,12 +1,12 @@
 package io.sphere.sdk.customers.expansion;
 
 import io.sphere.sdk.customergroups.expansion.CustomerGroupExpansionModel;
-import io.sphere.sdk.expansion.ExpansionModel;
+import io.sphere.sdk.expansion.ExpandedModel;
 
 import javax.annotation.Nullable;
 import java.util.List;
 
-final class CustomerExpansionModelImpl<T> extends ExpansionModel<T> implements CustomerExpansionModel<T> {
+final class CustomerExpansionModelImpl<T> extends ExpandedModel<T> implements CustomerExpansionModel<T> {
     CustomerExpansionModelImpl() {
         super();
     }

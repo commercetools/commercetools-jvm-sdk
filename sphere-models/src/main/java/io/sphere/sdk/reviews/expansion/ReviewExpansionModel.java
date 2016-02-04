@@ -1,8 +1,10 @@
 package io.sphere.sdk.reviews.expansion;
 
+import io.sphere.sdk.customers.expansion.CustomerExpansionModel;
 import io.sphere.sdk.expansion.ExpansionModel;
 import io.sphere.sdk.expansion.ExpansionPathContainer;
 import io.sphere.sdk.reviews.Review;
+import io.sphere.sdk.states.expansion.StateExpansionModel;
 
 /**
   DSL class to create expansion path expressions.
@@ -22,12 +24,12 @@ public final class ReviewExpansionModel<T> extends ExpansionModel<T> {
         return new ReviewExpansionModel<>();
     }
 
-    public ExpansionPathContainer<T> customer() {
-        return expansionPath("customer");
+    public CustomerExpansionModel<T> customer() {
+        return CustomerExpansionModel.of(buildPathExpression(), "customer");
     }
 
-    public ExpansionPathContainer<T> state() {
-        return expansionPath("state");
+    public StateExpansionModel<T> state() {
+        return StateExpansionModel.of(buildPathExpression(), "state");
     }
 
     public ExpansionPathContainer<T> target() {
