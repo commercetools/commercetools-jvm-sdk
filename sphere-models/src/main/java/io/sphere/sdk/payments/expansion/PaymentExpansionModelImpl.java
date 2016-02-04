@@ -3,9 +3,15 @@ package io.sphere.sdk.payments.expansion;
 import io.sphere.sdk.customers.expansion.CustomerExpansionModel;
 import io.sphere.sdk.expansion.ExpansionModel;
 
+import java.util.List;
+
 final class PaymentExpansionModelImpl<T> extends ExpansionModel<T> implements PaymentExpansionModel<T> {
     PaymentExpansionModelImpl() {
         super();
+    }
+
+    public PaymentExpansionModelImpl(final List<String> parentPath, final String path) {
+        super(parentPath, path);
     }
 
     @Override
