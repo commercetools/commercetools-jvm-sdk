@@ -2,6 +2,8 @@ package io.sphere.sdk.client;
 
 import io.sphere.sdk.utils.CompletableFutureUtils;
 
+import java.time.Duration;
+import java.time.temporal.ChronoUnit;
 import java.util.concurrent.*;
 
 /**
@@ -20,6 +22,10 @@ public final class TimeoutSphereClientDecorator extends SphereClientDecorator im
 
     public static SphereClient of(final SphereClient delegate, final long delay, final TimeUnit timeUnit) {
         return new TimeoutSphereClientDecorator(delegate, delay, timeUnit);
+    }
+
+    public static SphereClient of(final SphereClient delegate, final Duration duration) {
+        return of(delegate, duration.get(ChronoUnit.NANOS), TimeUnit.NANOSECONDS);
     }
 
     @Override
