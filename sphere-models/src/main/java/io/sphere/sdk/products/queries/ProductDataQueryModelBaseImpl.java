@@ -6,16 +6,16 @@ import io.sphere.sdk.queries.*;
 import javax.annotation.Nullable;
 import java.util.function.Function;
 
-class ProductDataQueryModelBaseImpl<T> extends ResourceQueryModelImpl<T> implements ProductDataQueryModelBase<T> {
+class ProductDataQueryModelBaseImpl<T> extends ResourceQueryModelImpl<T> implements WithEmbeddedSharedProductProjectionProductDataQueryModel<T> {
 
     @Override
-    public QueryPredicate<T> where(final QueryPredicate<PartialProductDataQueryModel> embeddedPredicate) {
+    public QueryPredicate<T> where(final QueryPredicate<EmbeddedProductDataQueryModel> embeddedPredicate) {
         return embedPredicate(embeddedPredicate);
     }
 
     @Override
-    public QueryPredicate<T> where(final Function<PartialProductDataQueryModel, QueryPredicate<PartialProductDataQueryModel>> embeddedPredicate) {
-        return where(embeddedPredicate.apply(PartialProductDataQueryModel.of()));
+    public QueryPredicate<T> where(final Function<EmbeddedProductDataQueryModel, QueryPredicate<EmbeddedProductDataQueryModel>> embeddedPredicate) {
+        return where(embeddedPredicate.apply(EmbeddedProductDataQueryModel.of()));
     }
 
     ProductDataQueryModelBaseImpl(@Nullable final QueryModel<T> parent, @Nullable final String pathSegment) {

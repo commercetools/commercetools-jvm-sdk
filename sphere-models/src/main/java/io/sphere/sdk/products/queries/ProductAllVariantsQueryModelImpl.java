@@ -16,7 +16,7 @@ final class ProductAllVariantsQueryModelImpl<T> extends QueryModelImpl<T> implem
 
     @SuppressWarnings("unchecked")
     private QueryPredicate<T> where(final QueryPredicate<PartialProductVariantQueryModel> embeddedPredicate) {
-        final ProductDataQueryModelBase<T> parent = Optional.ofNullable((ProductDataQueryModelBase<T>) getParent())
+        final WithEmbeddedSharedProductProjectionProductDataQueryModel<T> parent = Optional.ofNullable((WithEmbeddedSharedProductProjectionProductDataQueryModel<T>) getParent())
                 .orElseThrow(() -> new UnsupportedOperationException("A proper parent model is required."));
         return parent.where(m -> m.masterVariant().where(embeddedPredicate).or(m.variants().where(embeddedPredicate)));
     }

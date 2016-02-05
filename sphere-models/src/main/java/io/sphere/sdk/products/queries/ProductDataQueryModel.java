@@ -3,9 +3,12 @@ package io.sphere.sdk.products.queries;
 import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.queries.LocalizedStringQueryModel;
 import io.sphere.sdk.queries.LocalizedStringQuerySortingModel;
+import io.sphere.sdk.queries.QueryPredicate;
 import io.sphere.sdk.queries.ReferenceCollectionQueryModel;
 
-public interface ProductDataQueryModel<T> extends ProductDataQueryModelBase<T> {
+import java.util.function.Function;
+
+public interface ProductDataQueryModel<T> extends WithEmbeddedSharedProductProjectionProductDataQueryModel<T> {
     ReferenceCollectionQueryModel<T, Category> categories();
 
     LocalizedStringQueryModel<T> description();
@@ -27,4 +30,10 @@ public interface ProductDataQueryModel<T> extends ProductDataQueryModelBase<T> {
     ProductVariantQueryModel<T> variants();
 
     CategoryOrderHintsQueryModel<T> categoryOrderHints();
+
+    @Override
+    QueryPredicate<T> where(Function<EmbeddedProductDataQueryModel, QueryPredicate<EmbeddedProductDataQueryModel>> embeddedPredicate);
+
+    @Override
+    QueryPredicate<T> where(QueryPredicate<EmbeddedProductDataQueryModel> embeddedPredicate);
 }
