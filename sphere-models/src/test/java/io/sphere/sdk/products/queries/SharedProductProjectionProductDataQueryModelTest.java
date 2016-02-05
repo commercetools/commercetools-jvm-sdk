@@ -7,7 +7,7 @@ import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class ProductDataQueryModelBaseTest {
+public class SharedProductProjectionProductDataQueryModelTest {
     private static final String embeddedProductProjectionPredicate = "masterVariant(sku=\"bar\") or variants(sku=\"bar\")";
     private static final String embeddedProductPredicate = "masterData(current(" + embeddedProductProjectionPredicate + "))";
 

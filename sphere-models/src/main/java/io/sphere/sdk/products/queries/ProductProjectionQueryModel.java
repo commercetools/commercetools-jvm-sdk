@@ -8,7 +8,7 @@ import io.sphere.sdk.producttypes.ProductType;
 import io.sphere.sdk.queries.*;
 import io.sphere.sdk.reviews.queries.ReviewRatingStatisticsQueryModel;
 
-public interface ProductProjectionQueryModel extends ResourceQueryModel<ProductProjection>, ProductDataQueryModelBase<ProductProjection> {
+public interface ProductProjectionQueryModel extends ResourceQueryModel<ProductProjection>, WithEmbeddedSharedProductProjectionProductDataQueryModel<ProductProjection> {
     ReferenceQueryModel<ProductProjection, ProductType> productType();
 
     BooleanQueryModel<ProductProjection> hasStagedChanges();
