@@ -102,7 +102,6 @@ object Build extends Build {
   lazy val `sphere-convenience` = project.configs(IntegrationTest)
     .dependsOn(`sphere-common`, `sphere-java-client-core`, `sphere-test-lib` % "test,it", `sphere-models` % "test,it")
     .settings(commonSettings:_*)
-    .settings(libraryDependencies += `reactive-streams`)
 
   lazy val `sphere-test-lib` = project.configs(IntegrationTest).dependsOn(`sphere-java-client`, `sphere-common`).settings(commonSettings:_*)
     .settings(

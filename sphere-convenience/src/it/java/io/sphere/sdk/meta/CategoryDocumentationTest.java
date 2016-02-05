@@ -26,15 +26,12 @@ import io.sphere.sdk.producttypes.ProductType;
 import io.sphere.sdk.producttypes.ProductTypeDraft;
 import io.sphere.sdk.producttypes.commands.ProductTypeCreateCommand;
 import io.sphere.sdk.producttypes.commands.ProductTypeDeleteCommand;
-import io.sphere.sdk.queries.ExperimentalReactiveStreamUtils;
 import io.sphere.sdk.queries.PagedQueryResult;
+import io.sphere.sdk.queries.QueryExecutionUtils;
 import io.sphere.sdk.queries.QueryPredicate;
 import io.sphere.sdk.test.IntegrationTest;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.reactivestreams.Publisher;
-import org.reactivestreams.Subscriber;
-import org.reactivestreams.Subscription;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -73,15 +70,7 @@ public class CategoryDocumentationTest extends IntegrationTest {
 
     @Test
     public void fetchAll() throws Exception {
-        final Publisher<Category> categoryPublisher =
-                ExperimentalReactiveStreamUtils.publisherOf(CategoryQuery.of(), sphereClient());
-        final CompletionStage<List<Category>> categoriesStage =
-                ExperimentalReactiveStreamUtils.collectAll(categoryPublisher);
-
-
-
-
-
+        final CompletionStage<List<Category>> categoriesStage = QueryExecutionUtils.queryAll(client(), CategoryQuery.of(), 500);
         final List<Category> categories = categoriesStage.toCompletableFuture().join();
         assertThat(categories)
                 .hasSize(15)
@@ -89,10 +78,7 @@ public class CategoryDocumentationTest extends IntegrationTest {
     }
     @Test
     public void fetchAllAsJson() throws Exception {
-        final Publisher<JsonNode> categoryPublisher =
-                ExperimentalReactiveStreamUtils.publisherOf(JsonNodeQuery.of("/categories"), (JsonNode jsonNode) -> jsonNode.get("id").asText(), sphereClient());
-        final CompletionStage<List<JsonNode>> categoriesStage =
-                ExperimentalReactiveStreamUtils.collectAll(categoryPublisher);
+        final CompletionStage<List<JsonNode>> categoriesStage = QueryExecutionUtils.queryAll(client(), JsonNodeQuery.of("/categories"), 500);;
         final List<JsonNode> categories = categoriesStage.toCompletableFuture().join();
         assertThat(categories)
                 .hasSize(15)
@@ -102,10 +88,7 @@ public class CategoryDocumentationTest extends IntegrationTest {
     @Test
     public void fetchRoots() throws Exception {
         final CategoryQuery seedQuery = CategoryQuery.of().withPredicates(m -> m.parent().isNotPresent());
-        final Publisher<Category> categoryPublisher =
-                ExperimentalReactiveStreamUtils.publisherOf(seedQuery, sphereClient());
-        final CompletionStage<List<Category>> categoriesStage =
-                ExperimentalReactiveStreamUtils.collectAll(categoryPublisher);
+        final CompletionStage<List<Category>> categoriesStage = QueryExecutionUtils.queryAll(client(), seedQuery);
         final List<Category> rootCategories = categoriesStage.toCompletableFuture().join();
         assertThat(rootCategories.stream().allMatch(cat -> cat.getParent() == null))
                 .overridingErrorMessage("fetched only root categories")
@@ -313,20 +296,14 @@ public class CategoryDocumentationTest extends IntegrationTest {
     }
 
     private static CategoryTree fetchCurrentTree() {
-        final Publisher<Category> categoryPublisher =
-                ExperimentalReactiveStreamUtils.publisherOf(CategoryQuery.of(), sphereClient());
-        final CompletionStage<List<Category>> categoriesStage =
-                ExperimentalReactiveStreamUtils.collectAll(categoryPublisher);
+        final CompletionStage<List<Category>> categoriesStage = QueryExecutionUtils.queryAll(client(), CategoryQuery.of());
         final List<Category> categories = categoriesStage.toCompletableFuture().join();
         return CategoryTree.of(categories);
     }
 
     private CategoryTree createCategoryTree() {
         //stuff from previous example
-        final Publisher<Category> categoryPublisher =
-                ExperimentalReactiveStreamUtils.publisherOf(CategoryQuery.of(), sphereClient());
-        final CompletionStage<List<Category>> categoriesStage =
-                ExperimentalReactiveStreamUtils.collectAll(categoryPublisher);
+        final CompletionStage<List<Category>> categoriesStage = QueryExecutionUtils.queryAll(client(), CategoryQuery.of());
         final List<Category> categories = categoriesStage.toCompletableFuture().join();
 
         //creation of a category tree
@@ -378,42 +355,6 @@ public class CategoryDocumentationTest extends IntegrationTest {
                     return categories;
                 }
             }
-        }
-    }
-
-    private static class CategoryDeleteSubscriber implements Subscriber<Category> {
-        private final CompletableFuture<Void> future = new CompletableFuture<>();
-        private Subscription subscription;
-
-        @Override
-        public void onSubscribe(final Subscription subscription) {
-            this.subscription = subscription;
-            requestElements();
-        }
-
-        private void requestElements() {
-            subscription.request(1);
-        }
-
-        @Override
-        public void onNext(final Category category) {
-            client().execute(CategoryDeleteCommand.of(category)).whenComplete((c, t) -> {
-                requestElements();
-            });
-        }
-
-        @Override
-        public void onError(final Throwable throwable) {
-            future.completeExceptionally(throwable);
-        }
-
-        @Override
-        public void onComplete() {
-            future.complete(null);
-        }
-
-        public CompletableFuture<Void> getFuture() {
-            return future;
         }
     }
 }

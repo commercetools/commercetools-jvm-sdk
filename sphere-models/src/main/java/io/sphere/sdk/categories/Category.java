@@ -201,6 +201,7 @@ public interface Category extends Resource<Category>, WithLocalizedSlug, MetaAtt
     }
 
     static String toString(final Category category) {
+        final List<Reference<Category>> ancestors = category.getAncestors();
         return new ToStringBuilder(category, SdkDefaults.TO_STRING_STYLE)
                 .append("id", category.getId())
                 .append("version", category.getVersion())
@@ -209,7 +210,7 @@ public interface Category extends Resource<Category>, WithLocalizedSlug, MetaAtt
                 .append("name", category.getName())
                 .append("slug", category.getSlug())
                 .append("description", category.getDescription())
-                .append("ancestors", join(category.getAncestors()))
+                .append("ancestors", ancestors == null ? null : join(ancestors))
                 .append("parent", category.getParent())
                 .append("orderHint", category.getOrderHint())
                 .toString();
