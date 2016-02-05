@@ -23,7 +23,7 @@ class ProductVariantQueryModelImpl<T> extends QueryModelImpl<T> implements Produ
 
     @Override
     public QueryPredicate<T> where(final Function<EmbeddedProductVariantQueryModel, QueryPredicate<EmbeddedProductVariantQueryModel>> embeddedPredicate) {
-        return where(embeddedPredicate.apply(PartialProductVariantQueryModelImpl.of()));
+        return where(embeddedPredicate.apply(EmbeddedProductVariantQueryModelImpl.of()));
     }
 
     @Override
