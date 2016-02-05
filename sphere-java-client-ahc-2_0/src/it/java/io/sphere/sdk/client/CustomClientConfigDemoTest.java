@@ -44,8 +44,9 @@ public class CustomClientConfigDemoTest {
     public void customClient() {
         final HttpClient httpClient = createCustomHttpClient();
         final CompletionStage<HttpResponse> completionStage =
-                httpClient.execute(HttpRequest.of(GET, "https://auth.sphere.io"));
+                httpClient.execute(HttpRequest.of(GET, "http://commercetools.com"));
         final HttpResponse httpResponse = completionStage.toCompletableFuture().join();
-        assertThat(httpResponse.getStatusCode()).isEqualTo(200);
+        assertThat(httpResponse.getStatusCode()).isLessThanOrEqualTo(302);
+        httpClient.close();
     }
 }

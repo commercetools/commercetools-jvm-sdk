@@ -87,12 +87,8 @@ public abstract class IntegrationTest {
     }
 
     private static SphereClient withMaybeDeprecationWarnTool(final SphereClient underlying) {
-        if ("true".equals(System.getenv("JVM_SDK_IT_DEPRECATION"))) {
-            return DeprecationExceptionSphereClientDecorator.of(underlying);
-        } else {
-            LoggerFactory.getLogger(IntegrationTest.class).info("Deprecation client deactivated.");
-            return underlying;
-        }
+        //deprecation was disabled for RC1
+        return underlying;
     }
 
     protected static HttpClient newHttpClient() {
