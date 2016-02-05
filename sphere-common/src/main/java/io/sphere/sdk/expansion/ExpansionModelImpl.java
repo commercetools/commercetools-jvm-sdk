@@ -2,13 +2,14 @@ package io.sphere.sdk.expansion;
 
 import io.sphere.sdk.models.Base;
 import org.apache.commons.lang3.ObjectUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import javax.annotation.Nullable;
 import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
+import static java.util.Collections.singletonList;
 import static java.util.stream.Collectors.toList;
 import static org.apache.commons.lang3.StringUtils.isEmpty;
 
@@ -19,27 +20,42 @@ import static org.apache.commons.lang3.StringUtils.isEmpty;
 public class ExpansionModelImpl<T> extends Base implements ExpansionPathContainer<T> {
     private final List<String> pathExpressions;
 
-    protected ExpansionModelImpl(@Nullable final String parentPath, final List<String> paths) {
-        this(paths.stream()
-                .map(path ->
-                Optional.ofNullable(parentPath)
-                        .filter(p -> !isEmpty(p)).map(p -> p + ".").orElse("") + Optional.ofNullable(path).orElse(""))
-                .collect(toList()), null);
+    //this is the primary constructor
+    protected ExpansionModelImpl(@Nullable final List<String> nullableParentExpressions, @Nullable final List<String> nullablePaths) {
+        final List<String> parentExpressions = nullableParentExpressions != null && !nullableParentExpressions.isEmpty() ? nullableParentExpressions : singletonList("");
+        final List<String> paths = nullablePaths != null && !nullablePaths.isEmpty() ? nullablePaths : Collections.singletonList("");
+        pathExpressions = parentExpressions.stream()
+                .flatMap(parent -> paths.stream().map(path -> {
+                    final boolean parentPresent = !isEmpty(parent);
+                    final boolean pathPresent = !isEmpty(path);
+                    if (parentPresent && pathPresent) {
+                        return parent + "." + path;
+                    } else if (parentPresent) {
+                        return parent;
+                    } else if (pathPresent) {
+                        return path;
+                    } else {
+                        return "";
+                    }
+                }).filter(StringUtils::isNotBlank))
+                .filter(StringUtils::isNotBlank)
+                .collect(Collectors.toList());
+    }
+
+    protected ExpansionModelImpl(@Nullable final String parentPath, @Nullable final List<String> paths) {
+        this(parentPath != null ? singletonList(parentPath) : null, paths);
     }
 
     protected ExpansionModelImpl(@Nullable final String parentPath, @Nullable final String path) {
-        this(parentPath, Collections.singletonList(path));
+        this(parentPath, singletonList(path));
     }
 
     public ExpansionModelImpl() {
-        this((List<String>) null, null);
+        this((List<String>) null, (List<String>) null);
     }
 
-    public ExpansionModelImpl(final List<String> parentExpressions, final String path) {
-        final List<String> nullSafeParentExpressions = parentExpressions == null ? Collections.singletonList("") : parentExpressions;
-        this.pathExpressions = !isEmpty(path) ? nullSafeParentExpressions.stream()
-                .map(p -> isEmpty(p) ? path : p + "." + path)
-                .collect(Collectors.toList()) : nullSafeParentExpressions;
+    public ExpansionModelImpl(@Nullable final List<String> parentExpressions, @Nullable final String path) {
+        this(parentExpressions, path != null ? singletonList(path) : null);
     }
 
     protected final List<String> buildPathExpression() {

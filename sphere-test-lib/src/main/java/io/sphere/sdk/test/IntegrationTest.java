@@ -146,7 +146,7 @@ public abstract class IntegrationTest {
     }
 
     protected static <T extends Reference<?>> Condition<T> expanded() {
-        return new Condition<T>("is expanded") {
+        return new Condition<T>("expanded") {
             @Override
             public boolean matches(final T value) {
                 return value.getObj() != null;
