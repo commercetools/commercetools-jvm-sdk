@@ -575,6 +575,10 @@
 <dd>
 <div class="block">A client for commercetools which provides thread blocking and non-blocking methods to execute a request.</div>
 </dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/client/SphereClientUtils.html#blockingWait-java.util.concurrent.CompletionStage-java.time.Duration-">blockingWait(CompletionStage&lt;T&gt;, Duration)</a></span> - Static method in class io.sphere.sdk.client.<a href="io/sphere/sdk/client/SphereClientUtils.html" title="class in io.sphere.sdk.client">SphereClientUtils</a></dt>
+<dd>
+<div class="block">Waits with a timeout for RESPONSES of a commercetools client wrapped in a <code>CompletionStage</code>.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/client/SphereClientUtils.html#blockingWait-java.util.concurrent.CompletionStage-long-java.util.concurrent.TimeUnit-">blockingWait(CompletionStage&lt;T&gt;, long, TimeUnit)</a></span> - Static method in class io.sphere.sdk.client.<a href="io/sphere/sdk/client/SphereClientUtils.html" title="class in io.sphere.sdk.client">SphereClientUtils</a></dt>
 <dd>
 <div class="block">Waits with a timeout for RESPONSES of a commercetools client wrapped in a <code>CompletionStage</code>.</div>
@@ -2727,6 +2731,10 @@
 <div class="block">Executes a request and blocks the caller thread until the response is available or a client specific timeout occurs.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/client/BlockingSphereClient.html#executeBlocking-io.sphere.sdk.client.SphereRequest-long-java.util.concurrent.TimeUnit-">executeBlocking(SphereRequest&lt;T&gt;, long, TimeUnit)</a></span> - Method in interface io.sphere.sdk.client.<a href="io/sphere/sdk/client/BlockingSphereClient.html" title="interface in io.sphere.sdk.client">BlockingSphereClient</a></dt>
+<dd>
+<div class="block">Executes a request and blocks the caller thread until the response is available or a request specific timeout occurs.</div>
+</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/client/BlockingSphereClient.html#executeBlocking-io.sphere.sdk.client.SphereRequest-java.time.Duration-">executeBlocking(SphereRequest&lt;T&gt;, Duration)</a></span> - Method in interface io.sphere.sdk.client.<a href="io/sphere/sdk/client/BlockingSphereClient.html" title="interface in io.sphere.sdk.client">BlockingSphereClient</a></dt>
 <dd>
 <div class="block">Executes a request and blocks the caller thread until the response is available or a request specific timeout occurs.</div>
 </dd>
@@ -8951,6 +8959,10 @@
 <dd>
 <div class="block">Creates a blocking client with a configured default timeout for blocking requests.</div>
 </dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/client/BlockingSphereClient.html#of-io.sphere.sdk.client.SphereClient-java.time.Duration-">of(SphereClient, Duration)</a></span> - Static method in interface io.sphere.sdk.client.<a href="io/sphere/sdk/client/BlockingSphereClient.html" title="interface in io.sphere.sdk.client">BlockingSphereClient</a></dt>
+<dd>
+<div class="block">Creates a blocking client with a configured default timeout for blocking requests.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/client/DeprecationExceptionSphereClientDecorator.html#of-io.sphere.sdk.client.SphereClient-">of(SphereClient)</a></span> - Static method in class io.sphere.sdk.client.<a href="io/sphere/sdk/client/DeprecationExceptionSphereClientDecorator.html" title="class in io.sphere.sdk.client">DeprecationExceptionSphereClientDecorator</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/client/HttpRequestIntent.html#of-io.sphere.sdk.http.HttpMethod-java.lang.String-">of(HttpMethod, String)</a></span> - Static method in class io.sphere.sdk.client.<a href="io/sphere/sdk/client/HttpRequestIntent.html" title="class in io.sphere.sdk.client">HttpRequestIntent</a></dt>
@@ -9006,6 +9018,8 @@
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/client/SphereClientFactory.html#of--">of()</a></span> - Static method in interface io.sphere.sdk.client.<a href="io/sphere/sdk/client/SphereClientFactory.html" title="interface in io.sphere.sdk.client">SphereClientFactory</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/client/TimeoutSphereClientDecorator.html#of-io.sphere.sdk.client.SphereClient-long-java.util.concurrent.TimeUnit-">of(SphereClient, long, TimeUnit)</a></span> - Static method in class io.sphere.sdk.client.<a href="io/sphere/sdk/client/TimeoutSphereClientDecorator.html" title="class in io.sphere.sdk.client">TimeoutSphereClientDecorator</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/client/TimeoutSphereClientDecorator.html#of-io.sphere.sdk.client.SphereClient-java.time.Duration-">of(SphereClient, Duration)</a></span> - Static method in class io.sphere.sdk.client.<a href="io/sphere/sdk/client/TimeoutSphereClientDecorator.html" title="class in io.sphere.sdk.client">TimeoutSphereClientDecorator</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/client/TokensSupplier.html#of-io.sphere.sdk.client.SphereAuthConfig-io.sphere.sdk.http.HttpClient-boolean-">of(SphereAuthConfig, HttpClient, boolean)</a></span> - Static method in interface io.sphere.sdk.client.<a href="io/sphere/sdk/client/TokensSupplier.html" title="interface in io.sphere.sdk.client">TokensSupplier</a></dt>
 <dd>&nbsp;</dd>
