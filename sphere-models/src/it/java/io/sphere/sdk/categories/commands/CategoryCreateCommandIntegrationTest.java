@@ -41,7 +41,7 @@ public class CategoryCreateCommandIntegrationTest extends IntegrationTest {
         final CategoryDraft categoryDraft = CategoryDraftBuilder.of(randomSlug(), randomSlug()).parent(parent).build();
         final CategoryCreateCommand createCommand = CategoryCreateCommand.of(categoryDraft).withExpansionPaths(m -> m.parent());
         final Category category = client().executeBlocking(createCommand);
-        assertThat(category.getParent().getObj()).isNotNull();
+        assertThat(category.getParent()).is(expanded());
         client().executeBlocking(CategoryDeleteCommand.of(parent));
     }
 
