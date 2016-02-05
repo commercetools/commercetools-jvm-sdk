@@ -59,6 +59,10 @@ Users gain type-safety, encapsulation, IDE auto completion and an internal domai
 
 see https://github.com/sphereio/sphere-jvm-sdk-scala-add-ons
 
+### reactive streams
+* since RC1-SNAPSHOT, formerly in sphere-convenience-module
+* https://github.com/sphereio/commercetools-jvm-sdk-reactive-streams-addons
+
 ### JVM SDK Contrib
 
 Useful code from external developers
