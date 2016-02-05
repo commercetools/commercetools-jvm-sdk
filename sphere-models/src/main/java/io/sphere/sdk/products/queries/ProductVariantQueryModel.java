@@ -7,13 +7,15 @@ import io.sphere.sdk.queries.StringQueryModel;
 import javax.annotation.Nullable;
 import java.util.function.Function;
 
-public interface ProductVariantQueryModel<T> {
+public interface ProductVariantQueryModel<T> extends CoreProductVariantQueryModel<T> {
+    @Override
     StringQueryModel<T> sku();
 
-    QueryPredicate<T> where(QueryPredicate<PartialProductVariantQueryModel> embeddedPredicate);
+    QueryPredicate<T> where(QueryPredicate<EmbeddedProductVariantQueryModel> embeddedPredicate);
 
-    QueryPredicate<T> where(Function<PartialProductVariantQueryModel, QueryPredicate<PartialProductVariantQueryModel>> embeddedPredicate);
+    QueryPredicate<T> where(Function<EmbeddedProductVariantQueryModel, QueryPredicate<EmbeddedProductVariantQueryModel>> embeddedPredicate);
 
+    @Override
     PriceCollectionQueryModel<T> prices();
 
     static <T> ProductVariantQueryModel<T> of(@Nullable final QueryModel<T> parent, @Nullable final String pathSegment) {

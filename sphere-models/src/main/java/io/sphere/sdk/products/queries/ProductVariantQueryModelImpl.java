@@ -17,12 +17,12 @@ class ProductVariantQueryModelImpl<T> extends QueryModelImpl<T> implements Produ
     }
 
     @Override
-    public QueryPredicate<T> where(final QueryPredicate<PartialProductVariantQueryModel> embeddedPredicate) {
+    public QueryPredicate<T> where(final QueryPredicate<EmbeddedProductVariantQueryModel> embeddedPredicate) {
         return embedPredicate(embeddedPredicate);
     }
 
     @Override
-    public QueryPredicate<T> where(final Function<PartialProductVariantQueryModel, QueryPredicate<PartialProductVariantQueryModel>> embeddedPredicate) {
+    public QueryPredicate<T> where(final Function<EmbeddedProductVariantQueryModel, QueryPredicate<EmbeddedProductVariantQueryModel>> embeddedPredicate) {
         return where(embeddedPredicate.apply(PartialProductVariantQueryModelImpl.of()));
     }
 
