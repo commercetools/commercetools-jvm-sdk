@@ -2,6 +2,7 @@ package io.sphere.sdk.products;
 
 import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.client.BlockingSphereClient;
+import io.sphere.sdk.client.SphereClientUtils;
 import io.sphere.sdk.productdiscounts.commands.ProductDiscountDeleteCommand;
 import io.sphere.sdk.productdiscounts.queries.ProductDiscountQuery;
 import io.sphere.sdk.products.attributes.AttributeDraft;
@@ -28,9 +29,12 @@ import io.sphere.sdk.taxcategories.TaxCategoryFixtures;
 import io.sphere.sdk.utils.MoneyImpl;
 
 import java.math.BigDecimal;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
+import java.util.concurrent.CompletionStage;
+import java.util.concurrent.TimeUnit;
 import java.util.function.*;
 
 import static io.sphere.sdk.categories.CategoryFixtures.withCategory;
@@ -160,9 +164,17 @@ public class ProductFixtures {
                             }
                         }
                 ).collect(toList());
+
+                final List<CompletionStage<Product>> stages = new LinkedList<>();
+
                 unpublishedProducts.forEach(
-                        product -> client.executeBlocking(ProductDeleteCommand.of(product))
+                        product -> {
+                            final CompletionStage<Product> completionStage = client.execute(ProductDeleteCommand.of(product));
+                            stages.add(completionStage);
+                        }
                 );
+                stages.forEach(stage -> SphereClientUtils.blockingWait(stage, 30, TimeUnit.SECONDS));
+
                 deleteProductType(client, productType);
             } while (client.executeBlocking(productsOfProductTypeQuery).size() > 0);
         }
