@@ -253,13 +253,18 @@ public class WrappedClientDemo implements SphereClient {
 
  <a href="../../../../io/sphere/sdk/http/HttpClient.html" title="interface in io.sphere.sdk.http"><code>HttpClient</code></a> is an abstraction to perform http requests.
 
- <p><a href="../../../../io/sphere/sdk/http/AsyncHttpClientAdapter.html#of-com.ning.http.client.AsyncHttpClient-"><code>AsyncHttpClientAdapter.of(AsyncHttpClient)</code></a> wraps a ning <code>AsyncHttpClient</code> as <a href="../../../../io/sphere/sdk/http/HttpClient.html" title="interface in io.sphere.sdk.http"><code>HttpClient</code></a>.</p>
+ <p><code>io.sphere.sdk.http.AsyncHttpClientAdapter#of(AsyncHttpClient)</code> wraps an <code>AsyncHttpClient</code> as <a href="../../../../io/sphere/sdk/http/HttpClient.html" title="interface in io.sphere.sdk.http"><code>HttpClient</code></a>.</p>
 
  <p>The following example creates a configured HTTP client and initializes a <a href="../../../../io/sphere/sdk/client/SphereClient.html" title="interface in io.sphere.sdk.client"><code>SphereClient</code></a> with it.</p>
 
-  <div id="io-sphere-sdk-client-CustomClientConfigDemoTest%s" class=code-example><button type='button' style='display: none;' class='reveal-imports'>show/hide imports</button><pre class='hide code-example-imports'><code class='java'>import com.ning.http.client.AsyncHttpClient;
-import com.ning.http.client.AsyncHttpClientConfig;
-import io.sphere.sdk.http.*;
+  <div id="io-sphere-sdk-client-CustomClientConfigDemoTest%s" class=code-example><button type='button' style='display: none;' class='reveal-imports'>show/hide imports</button><pre class='hide code-example-imports'><code class='java'>import io.sphere.sdk.http.AsyncHttpClientAdapter;
+import io.sphere.sdk.http.HttpClient;
+import io.sphere.sdk.http.HttpRequest;
+import io.sphere.sdk.http.HttpResponse;
+import org.asynchttpclient.AsyncHttpClient;
+import org.asynchttpclient.AsyncHttpClientConfig;
+import org.asynchttpclient.DefaultAsyncHttpClient;
+import org.asynchttpclient.DefaultAsyncHttpClientConfig;
 import org.junit.Test;
 import java.util.concurrent.CompletionStage;
 import static io.sphere.sdk.http.HttpMethod.GET;
@@ -270,14 +275,14 @@ import static org.assertj.core.api.Assertions.assertThat;
      * @return new http client with custom settings
      */
     public static HttpClient createCustomHttpClient() {
-        final AsyncHttpClientConfig httpClientConfig = new AsyncHttpClientConfig.Builder()
+        final AsyncHttpClientConfig httpClientConfig = new DefaultAsyncHttpClientConfig.Builder()
                 .setEnabledProtocols(new String[]{"TLSv1.2"})//required
                 //examples for configuration
                 .setMaxConnections(500)
-                .setConnectTimeout(100)
+                .setConnectTimeout(10000)
 //                .setProxyServer(proxy)
                 .build();
-        final AsyncHttpClient asyncHttpClient = new AsyncHttpClient(httpClientConfig);
+        final AsyncHttpClient asyncHttpClient = new DefaultAsyncHttpClient(httpClientConfig);
         return AsyncHttpClientAdapter.of(asyncHttpClient);
     }
 
@@ -293,12 +298,13 @@ import static org.assertj.core.api.Assertions.assertThat;
     public void customClient() {
         final HttpClient httpClient = createCustomHttpClient();
         final CompletionStage&lt;HttpResponse&gt; completionStage =
-                httpClient.execute(HttpRequest.of(GET, "https://auth.sphere.io"));
+                httpClient.execute(HttpRequest.of(GET, "http://commercetools.com"));
         final HttpResponse httpResponse = completionStage.toCompletableFuture().join();
-        assertThat(httpResponse.getStatusCode()).isEqualTo(200);
+        assertThat(httpResponse.getStatusCode()).isLessThanOrEqualTo(302);
+        httpClient.close();
     }
 }
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-java-client-ahc-1_9/src/it/java/io/sphere/sdk/client/CustomClientConfigDemoTest.java" target="_blank">test code</a>.</pre></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-java-client-ahc-2_0/src/it/java/io/sphere/sdk/client/CustomClientConfigDemoTest.java" target="_blank">test code</a>.</pre></div>
 
  <p>For configuration parameters refer to <a href="https://github.com/AsyncHttpClient/async-http-client">github.com/AsyncHttpClient/async-http-client</a>.</p></div>
 </li>
