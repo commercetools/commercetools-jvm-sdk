@@ -152,16 +152,21 @@ implements <a href="../../../../io/sphere/sdk/expansion/ExpansionPathContainer.h
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/expansion/ExpansionModelImpl.html#ExpansionModelImpl--">ExpansionModelImpl</a></span>()</code>&nbsp;</td>
 </tr>
 <tr class="rowColor">
+<td class="colFirst"><code>protected </code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/expansion/ExpansionModelImpl.html#ExpansionModelImpl-java.util.List-java.util.List-">ExpansionModelImpl</a></span>(java.util.List&lt;java.lang.String&gt;&nbsp;nullableParentExpressions,
+                  java.util.List&lt;java.lang.String&gt;&nbsp;nullablePaths)</code>&nbsp;</td>
+</tr>
+<tr class="altColor">
 <td class="colFirst"><code>&nbsp;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/expansion/ExpansionModelImpl.html#ExpansionModelImpl-java.util.List-java.lang.String-">ExpansionModelImpl</a></span>(java.util.List&lt;java.lang.String&gt;&nbsp;parentExpressions,
                   java.lang.String&nbsp;path)</code>&nbsp;</td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code>protected </code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/expansion/ExpansionModelImpl.html#ExpansionModelImpl-java.lang.String-java.util.List-">ExpansionModelImpl</a></span>(java.lang.String&nbsp;parentPath,
                   java.util.List&lt;java.lang.String&gt;&nbsp;paths)</code>&nbsp;</td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><code>protected </code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/expansion/ExpansionModelImpl.html#ExpansionModelImpl-java.lang.String-java.lang.String-">ExpansionModelImpl</a></span>(java.lang.String&nbsp;parentPath,
                   java.lang.String&nbsp;path)</code>&nbsp;</td>
@@ -235,6 +240,18 @@ implements <a href="../../../../io/sphere/sdk/expansion/ExpansionPathContainer.h
 <!--   -->
 </a>
 <h3>Constructor Detail</h3>
+<a name="ExpansionModelImpl-java.util.List-java.util.List-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>ExpansionModelImpl</h4>
+<pre>protected&nbsp;ExpansionModelImpl(@Nullable
+                             java.util.List&lt;java.lang.String&gt;&nbsp;nullableParentExpressions,
+                             @Nullable
+                             java.util.List&lt;java.lang.String&gt;&nbsp;nullablePaths)</pre>
+</li>
+</ul>
 <a name="ExpansionModelImpl-java.lang.String-java.util.List-">
 <!--   -->
 </a>
@@ -243,6 +260,7 @@ implements <a href="../../../../io/sphere/sdk/expansion/ExpansionPathContainer.h
 <h4>ExpansionModelImpl</h4>
 <pre>protected&nbsp;ExpansionModelImpl(@Nullable
                              java.lang.String&nbsp;parentPath,
+                             @Nullable
                              java.util.List&lt;java.lang.String&gt;&nbsp;paths)</pre>
 </li>
 </ul>
@@ -273,7 +291,9 @@ implements <a href="../../../../io/sphere/sdk/expansion/ExpansionPathContainer.h
 <ul class="blockListLast">
 <li class="blockList">
 <h4>ExpansionModelImpl</h4>
-<pre>public&nbsp;ExpansionModelImpl(java.util.List&lt;java.lang.String&gt;&nbsp;parentExpressions,
+<pre>public&nbsp;ExpansionModelImpl(@Nullable
+                          java.util.List&lt;java.lang.String&gt;&nbsp;parentExpressions,
+                          @Nullable
                           java.lang.String&nbsp;path)</pre>
 </li>
 </ul>
