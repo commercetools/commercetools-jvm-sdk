@@ -2,7 +2,9 @@ package io.sphere.sdk.http;
 
 import java.util.*;
 
-import static java.util.Collections.unmodifiableMap;
+import static java.util.Collections.emptyList;
+import static java.util.Collections.unmodifiableList;
+import static java.util.stream.Collectors.toList;
 
 public final class HttpHeaders extends Base {
     public static final String ACCEPT_ENCODING = "Accept-Encoding";
@@ -11,20 +13,27 @@ public final class HttpHeaders extends Base {
     public static final String CONTENT_ENCODING = "Content-Encoding";
     public static final String CONTENT_TYPE = "Content-Type";
     public static final String CONTENT_LENGTH = "Content-Length";
-    private final Map<String, List<String>> headers;
+    private final List<NameValuePair> data;
 
-    private HttpHeaders(final Map<String, List<String>> headers) {
-        this.headers = unmodifiableMap(headers);
+    private HttpHeaders(final List<NameValuePair> data) {
+        this.data = unmodifiableList(data);
+    }
+
+    public static HttpHeaders of(final List<NameValuePair> headers) {
+        return new HttpHeaders(headers);
     }
 
     public static HttpHeaders of(final Map<String, List<String>> headers) {
-        return new HttpHeaders(headers);
+        return new HttpHeaders(NameValuePair.convertStringListMapToList(headers));
     }
 
     public static HttpHeaders of(final String key, final String value) {
-        final Map<String, List<String>> headers = new HashMap<>();
-        headers.put(key, Collections.singletonList(value));
-        return new HttpHeaders(headers);
+        final NameValuePair nameValuePair = NameValuePair.of(key, value);
+        return of(nameValuePair);
+    }
+
+    private static HttpHeaders of(final NameValuePair nameValuePair) {
+        return new HttpHeaders(Collections.singletonList(nameValuePair));
     }
 
     public static HttpHeaders empty() {
@@ -32,7 +41,7 @@ public final class HttpHeaders extends Base {
     }
 
     public static HttpHeaders of() {
-        return new HttpHeaders(Collections.emptyMap());
+        return new HttpHeaders(emptyList());
     }
 
     /**
@@ -41,7 +50,10 @@ public final class HttpHeaders extends Base {
      * @return empty or filled list of header values
      */
     public List<String> getHeader(final String key) {
-        return Optional.ofNullable(headers.get(key)).orElse(Collections.emptyList());
+        return data.stream()
+                .filter(entry -> entry.getName().equals(key))
+                .map(entry -> entry.getValue())
+                .collect(toList());
     }
 
     /**
@@ -54,28 +66,30 @@ public final class HttpHeaders extends Base {
     }
 
     public Map<String, List<String>> getHeadersAsMap() {
-        return headers;
+        return NameValuePair.convertToStringListMap(data);
     }
 
     public HttpHeaders plus(final String key, final String value) {
-        final List<String> currentValues = headers.getOrDefault(key, Collections.emptyList());
-        final List<String> newValues = new ArrayList<>(currentValues.size() + 1);
-        newValues.addAll(currentValues);
-        newValues.add(value);
-
-        final Map<String, List<String>> newMap = new HashMap<>();
-        newMap.putAll(headers);
-        newMap.put(key, newValues);
-        return HttpHeaders.of(newMap);
+        final List<NameValuePair> list = new ArrayList<>(data.size() + 1);
+        list.addAll(data);
+        list.add(NameValuePair.of(key, value));
+        return HttpHeaders.of(list);
     }
 
     @Override
     public final String toString() {
         final Map<String, List<String>> newMap = new HashMap<>();
-        newMap.putAll(headers);
+        newMap.putAll(getHeadersAsMap());
         if (newMap.containsKey(AUTHORIZATION)) {
             newMap.put(AUTHORIZATION, Collections.singletonList("**removed from output**"));
         }
         return newMap.toString();
+    }
+
+    public static HttpHeaders ofMapEntryList(final List<Map.Entry<String, String>> entries) {
+        final List<NameValuePair> nameValuePairList = entries.stream()
+                .map(element -> NameValuePair.of(element.getKey(), element.getValue()))
+                .collect(toList());
+        return HttpHeaders.of(nameValuePairList);
     }
 }

@@ -48,10 +48,11 @@ Users gain type-safety, encapsulation, IDE auto completion and an internal domai
 * http://search.maven.org/#artifactdetails%7Cio.sphere.sdk.jvm%7Csphere-convenience%7C1.0.0-M26%7Cjar
 
 ### Modules
-* `sphere-java-client`: alias for sphere-java-client-ahc-1_9
+* `sphere-java-client`: alias for sphere-java-client-ahc-2_0
 * `sphere-java-client-apache-async`: uses Apache HTTP client
-* `sphere-java-client-ahc-1_8`: uses Ning async HTTP client 1.8
-* `sphere-java-client-ahc-1_9`: uses Ning async HTTP client 1.9 (AHC 1.9 is incompatible to AHC 1.8)
+* `sphere-java-client-ahc-1_8`: uses async HTTP client 1.8
+* `sphere-java-client-ahc-1_9`: uses async HTTP client 1.9 (AHC 1.9 is incompatible to AHC 1.8)
+* `sphere-java-client-ahc-2_0`: uses async HTTP client 2.0 (do not mix it with the other AHC modules)
 * `sphere-models`: models which do not depend to a client implementation
 
 ### Play/Scala SDK with SBT

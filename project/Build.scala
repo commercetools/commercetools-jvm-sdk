@@ -37,11 +37,11 @@ object Build extends Build {
   lazy val `sphere-jvm-sdk` = (project in file(".")).configs(IntegrationTest)
     .settings(unidocSettings:_*)
     .settings(javaUnidocSettings:_*)
-    .settings(unidocProjectFilter in (JavaUnidoc, unidoc) := inAnyProject -- inProjects(`sphere-test-lib`, `sphere-java-client-ahc-1_8`, `sphere-java-client-internal-test`))//need to exclude duplicated classes or "javadoc: error - com.sun.tools.doclets.internal.toolkit.util.DocletAbortException: java.lang.NullPointerException" appears
+    .settings(unidocProjectFilter in (JavaUnidoc, unidoc) := inAnyProject -- inProjects(`sphere-test-lib`, `sphere-java-client-ahc-1_8`, `sphere-java-client-ahc-1_9`, `sphere-java-client-apache-async`, `sphere-java-client-internal-test`))//need to exclude duplicated classes or "javadoc: error - com.sun.tools.doclets.internal.toolkit.util.DocletAbortException: java.lang.NullPointerException" appears
     .settings(documentationSettings:_*)
     .settings(commonSettings:_*)
-    .aggregate(`sdk-http-ahc-1_8`, `sdk-http-ahc-1_9`, `sdk-http-apache-async`, `sdk-http`, `sphere-common`, `sphere-convenience`, `sphere-java-client`, `sphere-java-client-core`, `sphere-java-client-apache-async`, `sphere-models`, `sphere-test-lib`, `sphere-java-client-ahc-1_8`, `sphere-java-client-ahc-1_9`)
-    .dependsOn(`sdk-http-ahc-1_8`, `sdk-http-ahc-1_9`, `sdk-http-apache-async`, `sdk-http`, `sphere-common`, `sphere-convenience`, `sphere-java-client`, `sphere-java-client-core`, `sphere-java-client-apache-async`, `sphere-models`, `sphere-test-lib`)
+    .aggregate(`sdk-http-ahc-1_8`, `sdk-http-ahc-1_9`, `sdk-http-ahc-2_0`, `sdk-http-apache-async`, `sdk-http`, `sphere-common`, `sphere-convenience`, `sphere-java-client`, `sphere-java-client-core`, `sphere-java-client-apache-async`, `sphere-models`, `sphere-test-lib`, `sphere-java-client-ahc-1_8`, `sphere-java-client-ahc-1_9`, `sphere-java-client-ahc-2_0`)
+    .dependsOn(`sdk-http-ahc-2_0`, `sdk-http-apache-async`, `sdk-http`, `sphere-common`, `sphere-convenience`, `sphere-java-client`, `sphere-java-client-core`, `sphere-java-client-apache-async`, `sphere-models`, `sphere-test-lib`, `sphere-java-client-ahc-2_0` % "test")
     .settings(libraryDependencies += "net.sourceforge.plantuml" % "plantuml" % "8019" % "test")
 
   lazy val `sphere-java-client-core` = project.configs(IntegrationTest).dependsOn(`sphere-common`).settings(commonSettings:_*)
@@ -52,12 +52,15 @@ object Build extends Build {
     libraryDependencies += `commons-io`
   ).configs(IntegrationTest)
 
-  lazy val `sphere-java-client` = project.configs(IntegrationTest).dependsOn(`sphere-java-client-ahc-1_9`).settings(commonSettings:_*)
+  lazy val `sphere-java-client` = project.configs(IntegrationTest).dependsOn(`sphere-java-client-ahc-2_0`).settings(commonSettings:_*)
 
   lazy val `sphere-java-client-ahc-1_8` = project.configs(IntegrationTest).dependsOn(`sdk-http-ahc-1_8`, `sphere-java-client-core`, `sphere-java-client-internal-test` % "test,it", `sphere-models` % "test,it", `sphere-test-lib` % "test,it").settings(commonSettings:_*)
     .settings(libraryDependencies += Libs.`async-http-client-1.8` % "test,it" force()).configs(IntegrationTest)
 
   lazy val `sphere-java-client-ahc-1_9` = project.configs(IntegrationTest).dependsOn(`sdk-http-ahc-1_9`, `sphere-java-client-core`, `sphere-java-client-internal-test` % "test,it").settings(commonSettings:_*)
+    .settings().configs(IntegrationTest)
+
+  lazy val `sphere-java-client-ahc-2_0` = project.configs(IntegrationTest).dependsOn(`sdk-http-ahc-2_0`, `sphere-java-client-core`, `sphere-java-client-internal-test` % "test,it").settings(commonSettings:_*)
     .settings().configs(IntegrationTest)
 
   lazy val `sphere-java-client-apache-async` = project.configs(IntegrationTest).dependsOn(`sdk-http-apache-async`, `sphere-java-client-core`, `sphere-java-client-internal-test` % "test,it").settings(commonSettings:_*)
@@ -68,6 +71,9 @@ object Build extends Build {
 
   lazy val `sdk-http-ahc-1_9` = project.configs(IntegrationTest).dependsOn(`sdk-http`, `sphere-java-client-internal-test` % "test,it").settings(commonSettings:_*)
     .settings(libraryDependencies += `async-http-client-1.9`).configs(IntegrationTest)
+
+  lazy val `sdk-http-ahc-2_0` = project.configs(IntegrationTest).dependsOn(`sdk-http`, `sphere-java-client-internal-test` % "test,it").settings(commonSettings:_*)
+    .settings(libraryDependencies += `async-http-client-2.0`).configs(IntegrationTest)
 
   lazy val `sdk-http-apache-async` = project.configs(IntegrationTest).dependsOn(`sdk-http`, `sphere-java-client-internal-test` % "test,it").settings(commonSettings:_*)
     .settings(libraryDependencies ++= `apache-httpasyncclient` :: `commons-io` :: Nil).configs(IntegrationTest)

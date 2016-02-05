@@ -1,6 +1,6 @@
 package io.sphere.sdk.meta;
 
-import com.ning.http.client.Response;
+import org.asynchttpclient.Response;
 import org.junit.Test;
 
 import java.util.concurrent.CompletableFuture;

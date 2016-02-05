@@ -14,7 +14,7 @@ public class MainMethodThreadLeakTest {
      * @param args unused command line parameters
      */
     public static void main(String[] args) throws InterruptedException, ExecutionException, TimeoutException {
-        final SphereClient client = SphereClientFactory.of(SphereAsyncHttpClientFactory::create)
+        final SphereClient client = SphereClientFactory.of()
                 .createClient(SphereClientConfig.ofEnvironmentVariables("JVM_SDK_IT"));
 
         client.execute(ProductProjectionQuery.ofStaged()).toCompletableFuture().join();
