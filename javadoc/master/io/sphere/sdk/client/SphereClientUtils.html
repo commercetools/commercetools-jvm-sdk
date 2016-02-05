@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":9};
+var methods = {"i0":9,"i1":9};
 var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -130,6 +130,13 @@ extends java.lang.Object</pre>
 </tr>
 <tr id="i0" class="altColor">
 <td class="colFirst"><code>static &lt;T&gt;&nbsp;T</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/client/SphereClientUtils.html#blockingWait-java.util.concurrent.CompletionStage-java.time.Duration-">blockingWait</a></span>(java.util.concurrent.CompletionStage&lt;T&gt;&nbsp;completionStage,
+            java.time.Duration&nbsp;duration)</code>
+<div class="block">Waits with a timeout for RESPONSES of a commercetools client wrapped in a <code>CompletionStage</code>.</div>
+</td>
+</tr>
+<tr id="i1" class="rowColor">
+<td class="colFirst"><code>static &lt;T&gt;&nbsp;T</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/client/SphereClientUtils.html#blockingWait-java.util.concurrent.CompletionStage-long-java.util.concurrent.TimeUnit-">blockingWait</a></span>(java.util.concurrent.CompletionStage&lt;T&gt;&nbsp;completionStage,
             long&nbsp;timeout,
             java.util.concurrent.TimeUnit&nbsp;unit)</code>
@@ -158,6 +165,29 @@ extends java.lang.Object</pre>
 <!--   -->
 </a>
 <h3>Method Detail</h3>
+<a name="blockingWait-java.util.concurrent.CompletionStage-java.time.Duration-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>blockingWait</h4>
+<pre>public static&nbsp;&lt;T&gt;&nbsp;T&nbsp;blockingWait(java.util.concurrent.CompletionStage&lt;T&gt;&nbsp;completionStage,
+                                 java.time.Duration&nbsp;duration)</pre>
+<div class="block">Waits with a timeout for RESPONSES of a commercetools client wrapped in a <code>CompletionStage</code>.
+ This method should not be used for other <code>CompletionStage</code>s since it is throwing <a href="../../../../io/sphere/sdk/models/SphereException.html" title="class in io.sphere.sdk.models"><code>SphereException</code></a>s.</div>
+<dl>
+<dt><span class="paramLabel">Type Parameters:</span></dt>
+<dd><code>T</code> - type of the result for the request</dd>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>completionStage</code> - the future monad to wait for</dd>
+<dd><code>duration</code> - the maximum duration to wait for this single request</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>the wrapped value of <code>completionStage</code></dd>
+<dt><span class="throwsLabel">Throws:</span></dt>
+<dd><code><a href="../../../../io/sphere/sdk/client/SphereTimeoutException.html" title="class in io.sphere.sdk.client">SphereTimeoutException</a></code> - if a timeout occurs</dd>
+</dl>
+</li>
+</ul>
 <a name="blockingWait-java.util.concurrent.CompletionStage-long-java.util.concurrent.TimeUnit-">
 <!--   -->
 </a>

@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":6,"i1":6,"i2":6,"i3":6,"i4":17};
+var methods = {"i0":6,"i1":6,"i2":6,"i3":6,"i4":6,"i5":17,"i6":17};
 var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],2:["t2","Instance Methods"],4:["t3","Abstract Methods"],16:["t5","Default Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -217,13 +217,27 @@ import static org.assertj.core.api.Assertions.catchThrowable;
 </tr>
 <tr id="i3" class="rowColor">
 <td class="colFirst"><code>&lt;T&gt;&nbsp;T</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/client/BlockingSphereClient.html#executeBlocking-io.sphere.sdk.client.SphereRequest-java.time.Duration-">executeBlocking</a></span>(<a href="../../../../io/sphere/sdk/client/SphereRequest.html" title="interface in io.sphere.sdk.client">SphereRequest</a>&lt;T&gt;&nbsp;sphereRequest,
+               java.time.Duration&nbsp;duration)</code>
+<div class="block">Executes a request and blocks the caller thread until the response is available or a request specific timeout occurs.</div>
+</td>
+</tr>
+<tr id="i4" class="altColor">
+<td class="colFirst"><code>&lt;T&gt;&nbsp;T</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/client/BlockingSphereClient.html#executeBlocking-io.sphere.sdk.client.SphereRequest-long-java.util.concurrent.TimeUnit-">executeBlocking</a></span>(<a href="../../../../io/sphere/sdk/client/SphereRequest.html" title="interface in io.sphere.sdk.client">SphereRequest</a>&lt;T&gt;&nbsp;sphereRequest,
                long&nbsp;timeout,
                java.util.concurrent.TimeUnit&nbsp;unit)</code>
 <div class="block">Executes a request and blocks the caller thread until the response is available or a request specific timeout occurs.</div>
 </td>
 </tr>
-<tr id="i4" class="altColor">
+<tr id="i5" class="rowColor">
+<td class="colFirst"><code>static <a href="../../../../io/sphere/sdk/client/BlockingSphereClient.html" title="interface in io.sphere.sdk.client">BlockingSphereClient</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/client/BlockingSphereClient.html#of-io.sphere.sdk.client.SphereClient-java.time.Duration-">of</a></span>(<a href="../../../../io/sphere/sdk/client/SphereClient.html" title="interface in io.sphere.sdk.client">SphereClient</a>&nbsp;delegate,
+  java.time.Duration&nbsp;defaultTimeout)</code>
+<div class="block">Creates a blocking client with a configured default timeout for blocking requests.</div>
+</td>
+</tr>
+<tr id="i6" class="altColor">
 <td class="colFirst"><code>static <a href="../../../../io/sphere/sdk/client/BlockingSphereClient.html" title="interface in io.sphere.sdk.client">BlockingSphereClient</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/client/BlockingSphereClient.html#of-io.sphere.sdk.client.SphereClient-long-java.util.concurrent.TimeUnit-">of</a></span>(<a href="../../../../io/sphere/sdk/client/SphereClient.html" title="interface in io.sphere.sdk.client">SphereClient</a>&nbsp;delegate,
   long&nbsp;defaultTimeout,
@@ -335,10 +349,32 @@ import static org.assertj.core.api.Assertions.catchThrowable;
 </dl>
 </li>
 </ul>
+<a name="executeBlocking-io.sphere.sdk.client.SphereRequest-java.time.Duration-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>executeBlocking</h4>
+<pre>&lt;T&gt;&nbsp;T&nbsp;executeBlocking(<a href="../../../../io/sphere/sdk/client/SphereRequest.html" title="interface in io.sphere.sdk.client">SphereRequest</a>&lt;T&gt;&nbsp;sphereRequest,
+                      java.time.Duration&nbsp;duration)</pre>
+<div class="block">Executes a request and blocks the caller thread until the response is available or a request specific timeout occurs.</div>
+<dl>
+<dt><span class="paramLabel">Type Parameters:</span></dt>
+<dd><code>T</code> - type of the result for the request</dd>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>sphereRequest</code> - request to commercetools to perfom</dd>
+<dd><code>duration</code> - the maximum duration to wait for this single request</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>result for the request to commercetools</dd>
+<dt><span class="throwsLabel">Throws:</span></dt>
+<dd><code><a href="../../../../io/sphere/sdk/client/SphereTimeoutException.html" title="class in io.sphere.sdk.client">SphereTimeoutException</a></code> - if a timeout occurs</dd>
+</dl>
+</li>
+</ul>
 <a name="of-io.sphere.sdk.client.SphereClient-long-java.util.concurrent.TimeUnit-">
 <!--   -->
 </a>
-<ul class="blockListLast">
+<ul class="blockList">
 <li class="blockList">
 <h4>of</h4>
 <pre>static&nbsp;<a href="../../../../io/sphere/sdk/client/BlockingSphereClient.html" title="interface in io.sphere.sdk.client">BlockingSphereClient</a>&nbsp;of(<a href="../../../../io/sphere/sdk/client/SphereClient.html" title="interface in io.sphere.sdk.client">SphereClient</a>&nbsp;delegate,
@@ -351,6 +387,25 @@ import static org.assertj.core.api.Assertions.catchThrowable;
 <dd><code>delegate</code> - underlying sphere client which may be initialized with the <a href="../../../../io/sphere/sdk/client/SphereClientFactory.html" title="interface in io.sphere.sdk.client"><code>SphereClientFactory</code></a>.</dd>
 <dd><code>defaultTimeout</code> - the default maximum time to wait (to block the thread) which should be greater than the timeout of the underlying HTTP client</dd>
 <dd><code>unit</code> - the time unit of the defaultTimeout argument</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>wrapped client which can perform blocking calls.</dd>
+</dl>
+</li>
+</ul>
+<a name="of-io.sphere.sdk.client.SphereClient-java.time.Duration-">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>of</h4>
+<pre>static&nbsp;<a href="../../../../io/sphere/sdk/client/BlockingSphereClient.html" title="interface in io.sphere.sdk.client">BlockingSphereClient</a>&nbsp;of(<a href="../../../../io/sphere/sdk/client/SphereClient.html" title="interface in io.sphere.sdk.client">SphereClient</a>&nbsp;delegate,
+                               java.time.Duration&nbsp;defaultTimeout)</pre>
+<div class="block">Creates a blocking client with a configured default timeout for blocking requests.
+ The asynchronous calls won't have a timeout by default.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>delegate</code> - underlying sphere client which may be initialized with the <a href="../../../../io/sphere/sdk/client/SphereClientFactory.html" title="interface in io.sphere.sdk.client"><code>SphereClientFactory</code></a>.</dd>
+<dd><code>defaultTimeout</code> - the default maximum duration to wait (to block the thread) which should be greater than the timeout of the underlying HTTP client</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>wrapped client which can perform blocking calls.</dd>
 </dl>
