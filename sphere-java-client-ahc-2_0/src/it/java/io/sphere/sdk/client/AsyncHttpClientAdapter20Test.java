@@ -12,6 +12,6 @@ public class AsyncHttpClientAdapter20Test extends HttpClientAdapterTest {
 
     @Override
     protected int port() {
-        return 5013;
+        return 5015;
     }
 }
