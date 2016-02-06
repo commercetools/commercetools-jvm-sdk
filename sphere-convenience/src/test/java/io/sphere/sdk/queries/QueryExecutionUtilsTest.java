@@ -51,7 +51,7 @@ public class QueryExecutionUtilsTest {
     }
 
     private void withClient(final SphereClient client, final Consumer<List<Category>> test) {
-        final List<Category> elements = QueryExecutionUtils.queryAll(client, CategoryQuery.of())
+        final List<Category> elements = QueryExecutionUtils.queryAll(client, CategoryQuery.of(), PAGE_SIZE)
                 .toCompletableFuture().join();
         test.accept(elements);
     }
@@ -84,7 +84,8 @@ public class QueryExecutionUtilsTest {
                             throw new CompletionException(e);
                         }
                     }
-                    return (T) generatePagedQueryResult(offset);
+                    final T pagedQueryResult = (T) generatePagedQueryResult(offset);
+                    return pagedQueryResult;
                 });
             }
 
@@ -103,7 +104,7 @@ public class QueryExecutionUtilsTest {
 
             private List<Category> generateSortedResultList(final long offset, final long count) {
                 return LongStream.range(offset, offset + count)
-                        .mapToObj(i -> SphereJsonUtils.readObject(String.format("{ \"slug\" : {\"en\": %d} }", i), Category.class))
+                        .mapToObj(i -> SphereJsonUtils.readObject(String.format("{ \"slug\" : {\"en\": \"category-%04d\"} }", i), Category.class))
                         .collect(toList());
             }
         };
