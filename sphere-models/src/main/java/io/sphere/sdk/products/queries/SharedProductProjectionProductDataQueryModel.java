@@ -8,7 +8,7 @@ import io.sphere.sdk.queries.ReferenceCollectionQueryModel;
 /**
  * internal interface for queryable fields which are in {@link io.sphere.sdk.products.ProductProjection} AND {@link io.sphere.sdk.products.ProductData}.
  *
- * @param <T>
+ * @param <T> context type
  */
 interface SharedProductProjectionProductDataQueryModel<T> {
     LocalizedStringQuerySortingModel<T> name();
