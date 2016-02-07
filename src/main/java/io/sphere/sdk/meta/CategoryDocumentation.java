@@ -1,6 +1,8 @@
 package io.sphere.sdk.meta;
 
 
+import io.sphere.sdk.queries.QueryExecutionUtils;
+
 /**
  <h3 id="category-creation">Create a tree of categories</h3>
  Lets suppose we want to create this category tree (the number before the name is the externalId):
@@ -17,7 +19,7 @@ Then we can write some script to parse the csv and create them in sphere:
  <h3 id="read-categories">Fetch all categories</h3>
 <h4>Fetch all</h4>
  If categories don't change often it is a good idea to just cache them.
- You can use {@link io.sphere.sdk.queries.ExperimentalReactiveStreamUtils} to do this:
+ You can use {@link QueryExecutionUtils} to do this:
 
  {@include.example io.sphere.sdk.meta.CategoryDocumentationTest#fetchAll()}
  <h4>Fetch all with predicate</h4>
