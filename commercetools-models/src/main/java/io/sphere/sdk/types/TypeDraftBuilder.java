@@ -3,6 +3,7 @@ package io.sphere.sdk.types;
 import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.Builder;
 import io.sphere.sdk.models.LocalizedString;
+import io.sphere.sdk.models.WithKey;
 
 import javax.annotation.Nullable;
 import java.util.Collections;
@@ -15,7 +16,7 @@ import static io.sphere.sdk.utils.SphereInternalUtils.listOf;
  * @see Custom
  * @see TypeDraft
  */
-public final class TypeDraftBuilder extends Base implements Builder<TypeDraft> {
+public final class TypeDraftBuilder extends Base implements Builder<TypeDraft>, WithKey {
 
     private String key;
     private LocalizedString name;

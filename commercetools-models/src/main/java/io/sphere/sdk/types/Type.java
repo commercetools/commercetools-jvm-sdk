@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Resource;
+import io.sphere.sdk.models.WithKey;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -24,7 +25,7 @@ import java.util.Set;
 
  */
 @JsonDeserialize(as = TypeImpl.class)
-public interface Type extends Resource<Type> {
+public interface Type extends Resource<Type>, WithKey {
     String getKey();
 
     LocalizedString getName();

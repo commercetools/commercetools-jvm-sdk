@@ -3,6 +3,7 @@ package io.sphere.sdk.states;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Reference;
+import io.sphere.sdk.models.WithKey;
 
 import javax.annotation.Nullable;
 import java.util.Set;
@@ -13,7 +14,7 @@ import java.util.Set;
  * @see StateDraftBuilder
  */
 @JsonDeserialize(as = StateDraftDsl.class)
-public interface StateDraft {
+public interface StateDraft extends WithKey {
     String getKey();
 
     StateType getType();

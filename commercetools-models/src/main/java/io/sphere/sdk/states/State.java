@@ -7,6 +7,7 @@ import io.sphere.sdk.carts.ItemState;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Resource;
 import io.sphere.sdk.models.Reference;
+import io.sphere.sdk.models.WithKey;
 
 import javax.annotation.Nullable;
 import java.util.Set;
@@ -27,7 +28,7 @@ import java.util.Set;
  @see io.sphere.sdk.reviews.Review#getState()
  */
 @JsonDeserialize(as = StateImpl.class)
-public interface State extends Resource<State> {
+public interface State extends Resource<State>, WithKey {
 
     String getKey();
 
