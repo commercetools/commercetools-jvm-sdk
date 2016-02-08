@@ -35,7 +35,8 @@ public class RulesMain {
                 new UtilClassesEndWithUtilsRule(),
                 new ResourceClassesWithTypeReferenceMethod(),
                 new ClassesAreFinalRule(),
-                new ExpansionModelsAreInterfacesRule()
+                new ExpansionModelsAreInterfacesRule(),
+                new ResourceWhichExtendsCustomHasWithCustomQueryModel()
         );
         final boolean allIsOk = rules.stream()
                 .map(rule -> {
