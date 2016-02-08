@@ -8,8 +8,8 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 /**
- * Queries for entities with getters and copy functions for where, sort, limit and offset
- * @param <T> Interface of the resource, i.e., Category interface
+ * Queries for resources.
+ * @param <T> type of the resource, i.e., Category
  */
 public interface ResourceQuery<T> extends Query<T>, ExpansionPathContainer<T> {
     /**
