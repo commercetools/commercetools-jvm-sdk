@@ -111,7 +111,7 @@ object Build extends Build {
 
   lazy val `commercetools-test-lib` = project.configs(IntegrationTest).dependsOn(`commercetools-java-client`, `commercetools-sdk-base`).settings(commonSettings:_*)
     .settings(
-      libraryDependencies ++= allTestLibs ++ (`commons-io` :: Nil)
+      libraryDependencies ++= allTestLibs ++ (`commons-io` :: netty :: Nil)
     )
 
   val genDoc = taskKey[Seq[File]]("generates the documentation")

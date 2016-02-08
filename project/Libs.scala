@@ -30,6 +30,7 @@ trait http {
   val `async-http-client-1.9` = "com.ning" % "async-http-client" % "1.9.30"
   val `async-http-client-2.0` = "org.asynchttpclient" % "async-http-client" % "2.0.0-RC8"
   val `apache-httpasyncclient` = "org.apache.httpcomponents" % "httpasyncclient" % "4.1"
+  val netty = "io.netty" % "netty-all" % "4.1.0.CR2"
 }
 
 trait other {
