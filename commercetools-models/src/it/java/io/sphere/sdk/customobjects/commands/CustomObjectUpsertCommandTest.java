@@ -57,7 +57,7 @@ public class CustomObjectUpsertCommandTest extends IntegrationTest {
     @Test
     public void storyBinaryData() throws Exception {
         final String name = "hello.pdf";
-        final File file = new File(".", "sphere-models/src/it/resources/" + name);
+        final File file = new File(".", "commercetools-models/src/it/resources/" + name);
         final byte[] bytes = FileUtils.readFileToByteArray(file);
         final BinaryData value = new BinaryData(name, bytes);
         final String key = "storyBinaryData";
