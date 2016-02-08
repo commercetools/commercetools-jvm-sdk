@@ -1150,7 +1150,7 @@
     final Category actual = client().executeBlocking(query).head().get();
     assertThat(actual).isEqualTo(category);
 });
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/categories/queries/CategoryQueryTest.java" target="_blank">test code</a>.</pre></div></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/commercetools-models/src/it/java/io/sphere/sdk/categories/queries/CategoryQueryTest.java" target="_blank">test code</a>.</pre></div></div>
 </dd>
 <dt><a href="io/sphere/sdk/categories/queries/CategoryQueryBuilder.html" title="class in io.sphere.sdk.categories.queries"><span class="typeNameLink">CategoryQueryBuilder</span></a> - Class in <a href="io/sphere/sdk/categories/queries/package-summary.html">io.sphere.sdk.categories.queries</a></dt>
 <dd>
@@ -1489,8 +1489,6 @@
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/errors/InvalidJsonInputError.html#CODE">CODE</a></span> - Static variable in class io.sphere.sdk.models.errors.<a href="io/sphere/sdk/models/errors/InvalidJsonInputError.html" title="class in io.sphere.sdk.models.errors">InvalidJsonInputError</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/errors/RequiredField.html#CODE">CODE</a></span> - Static variable in class io.sphere.sdk.models.errors.<a href="io/sphere/sdk/models/errors/RequiredField.html" title="class in io.sphere.sdk.models.errors">RequiredField</a></dt>
-<dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/ExperimentalReactiveStreamUtils.html#collectAll-org.reactivestreams.Publisher-">collectAll(Publisher&lt;T&gt;)</a></span> - Static method in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/ExperimentalReactiveStreamUtils.html" title="class in io.sphere.sdk.queries">ExperimentalReactiveStreamUtils</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/expansion/ExpansionModelImpl.html#collection-java.lang.String-java.lang.Integer-">collection(String, Integer)</a></span> - Static method in class io.sphere.sdk.expansion.<a href="io/sphere/sdk/expansion/ExpansionModelImpl.html" title="class in io.sphere.sdk.expansion">ExpansionModelImpl</a></dt>
 <dd>&nbsp;</dd>
@@ -2307,6 +2305,8 @@
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/utils/SphereInternalLogger.html#debug-java.util.function.Supplier-">debug(Supplier&lt;Object&gt;)</a></span> - Method in class io.sphere.sdk.utils.<a href="io/sphere/sdk/utils/SphereInternalLogger.html" title="class in io.sphere.sdk.utils">SphereInternalLogger</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/QueryExecutionUtils.html#DEFAULT_PAGE_SIZE">DEFAULT_PAGE_SIZE</a></span> - Static variable in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/QueryExecutionUtils.html" title="class in io.sphere.sdk.queries">QueryExecutionUtils</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/customers/CustomerDraftBuilder.html#defaultBillingAddress-java.lang.Integer-">defaultBillingAddress(Integer)</a></span> - Method in class io.sphere.sdk.customers.<a href="io/sphere/sdk/customers/CustomerDraftBuilder.html" title="class in io.sphere.sdk.customers">CustomerDraftBuilder</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/customers/queries/CustomerQueryModel.html#defaultBillingAddressId--">defaultBillingAddressId()</a></span> - Method in interface io.sphere.sdk.customers.queries.<a href="io/sphere/sdk/customers/queries/CustomerQueryModel.html" title="interface in io.sphere.sdk.customers.queries">CustomerQueryModel</a></dt>
@@ -2458,7 +2458,7 @@
     //clean up
     client().executeBlocking(DiscountCodeDeleteCommand.of(discountCode));
 });
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/discountcodes/commands/DiscountCodeCreateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/commercetools-models/src/it/java/io/sphere/sdk/discountcodes/commands/DiscountCodeCreateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 </dd>
 <dt><a href="io/sphere/sdk/discountcodes/commands/DiscountCodeDeleteCommand.html" title="interface in io.sphere.sdk.discountcodes.commands"><span class="typeNameLink">DiscountCodeDeleteCommand</span></a> - Interface in <a href="io/sphere/sdk/discountcodes/commands/package-summary.html">io.sphere.sdk.discountcodes.commands</a></dt>
 <dd>&nbsp;</dd>
@@ -2942,10 +2942,6 @@
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/zones/queries/ZoneQueryBuilder.html#expansionPaths-java.util.function.Function-">expansionPaths(Function&lt;ZoneExpansionModel&lt;Zone&gt;, ExpansionPathContainer&lt;Zone&gt;&gt;)</a></span> - Method in class io.sphere.sdk.zones.queries.<a href="io/sphere/sdk/zones/queries/ZoneQueryBuilder.html" title="class in io.sphere.sdk.zones.queries">ZoneQueryBuilder</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="io/sphere/sdk/queries/ExperimentalReactiveStreamUtils.html" title="class in io.sphere.sdk.queries"><span class="typeNameLink">ExperimentalReactiveStreamUtils</span></a> - Class in <a href="io/sphere/sdk/queries/package-summary.html">io.sphere.sdk.queries</a></dt>
-<dd>
-<div class="block">Utils to work with <a href="https://github.com/reactive-streams/reactive-streams-jvm" target="_blank">Reactive Streams</a>.</div>
-</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/search/SearchExpression.html#expression--">expression()</a></span> - Method in interface io.sphere.sdk.search.<a href="io/sphere/sdk/search/SearchExpression.html" title="interface in io.sphere.sdk.search">SearchExpression</a></dt>
 <dd>
 <div class="block">Returns a search expression.</div>
@@ -6682,7 +6678,7 @@
     final DeleteCommand&lt;InventoryEntry&gt; deleteCommand = InventoryEntryDeleteCommand.of(inventoryEntry);
     final InventoryEntry deletedEntry = client().executeBlocking(deleteCommand);
 });
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/inventory/commands/InventoryEntryCreateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/commercetools-models/src/it/java/io/sphere/sdk/inventory/commands/InventoryEntryCreateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 </dd>
 <dt><a href="io/sphere/sdk/inventory/commands/InventoryEntryDeleteCommand.html" title="interface in io.sphere.sdk.inventory.commands"><span class="typeNameLink">InventoryEntryDeleteCommand</span></a> - Interface in <a href="io/sphere/sdk/inventory/commands/package-summary.html">io.sphere.sdk.inventory.commands</a></dt>
 <dd>&nbsp;</dd>
@@ -8328,7 +8324,7 @@
 
     return order;
 }));
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/messages/queries/MessageByIdGetTest.java" target="_blank">test code</a>.</pre></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/commercetools-models/src/it/java/io/sphere/sdk/messages/queries/MessageByIdGetTest.java" target="_blank">test code</a>.</pre></div>
 
  If you need to receive one specific message class, like <a href="io/sphere/sdk/orders/messages/DeliveryAddedMessage.html" title="class in io.sphere.sdk.orders.messages"><code>DeliveryAddedMessage</code></a>,
  use <a href="io/sphere/sdk/messages/queries/MessageQuery.html" title="interface in io.sphere.sdk.messages.queries"><code>MessageQuery</code></a> with a predicate by id.</div>
@@ -12730,7 +12726,7 @@
 <dd>
 <div class="block"><div id="io-sphere-sdk-products-ProductDeleteExample-delete--%s" class=code-example><pre><code class='java'>final DeleteCommand&lt;Product&gt; command = ProductDeleteCommand.of(product);
 final CompletionStage&lt;Product&gt; deletedProduct = client.execute(command);
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/products/ProductDeleteExample.java" target="_blank">test code</a>.</pre></div></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/commercetools-models/src/it/java/io/sphere/sdk/products/ProductDeleteExample.java" target="_blank">test code</a>.</pre></div></div>
 </dd>
 <dt><a href="io/sphere/sdk/productdiscounts/ProductDiscount.html" title="interface in io.sphere.sdk.productdiscounts"><span class="typeNameLink">ProductDiscount</span></a> - Interface in <a href="io/sphere/sdk/productdiscounts/package-summary.html">io.sphere.sdk.productdiscounts</a></dt>
 <dd>
@@ -12774,7 +12770,7 @@ assertEventually(() -&gt; {
     // clean up test
     client().executeBlocking(ProductDiscountDeleteCommand.of(productDiscount));
 });
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/productdiscounts/commands/ProductDiscountCreateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/commercetools-models/src/it/java/io/sphere/sdk/productdiscounts/commands/ProductDiscountCreateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 </dd>
 <dt><a href="io/sphere/sdk/productdiscounts/commands/ProductDiscountDeleteCommand.html" title="interface in io.sphere.sdk.productdiscounts.commands"><span class="typeNameLink">ProductDiscountDeleteCommand</span></a> - Interface in <a href="io/sphere/sdk/productdiscounts/commands/package-summary.html">io.sphere.sdk.productdiscounts.commands</a></dt>
 <dd>&nbsp;</dd>
@@ -13085,14 +13081,6 @@ CompletionStage&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execu
 </dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/queries/ProductCatalogDataQueryModel.html#published--">published()</a></span> - Method in interface io.sphere.sdk.products.queries.<a href="io/sphere/sdk/products/queries/ProductCatalogDataQueryModel.html" title="interface in io.sphere.sdk.products.queries">ProductCatalogDataQueryModel</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/ExperimentalReactiveStreamUtils.html#publisherOf-io.sphere.sdk.queries.QueryDsl-io.sphere.sdk.client.SphereClient-">publisherOf(QueryDsl&lt;T, C&gt;, SphereClient)</a></span> - Static method in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/ExperimentalReactiveStreamUtils.html" title="class in io.sphere.sdk.queries">ExperimentalReactiveStreamUtils</a></dt>
-<dd>
-<div class="block">Creates a <code>Publisher</code> for fetching all resources (except <a href="io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products"><code>ProductProjection</code></a> and <code>JsonNode</code>, see <a href="io/sphere/sdk/queries/ExperimentalReactiveStreamUtils.html#publisherOf-io.sphere.sdk.queries.QueryDsl-java.util.function.Function-io.sphere.sdk.client.SphereClient-"><code>ExperimentalReactiveStreamUtils.publisherOf(QueryDsl, Function, SphereClient)</code></a>) matching a predicate.</div>
-</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/ExperimentalReactiveStreamUtils.html#publisherOf-io.sphere.sdk.queries.QueryDsl-java.util.function.Function-io.sphere.sdk.client.SphereClient-">publisherOf(QueryDsl&lt;T, C&gt;, Function&lt;T, String&gt;, SphereClient)</a></span> - Static method in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/ExperimentalReactiveStreamUtils.html" title="class in io.sphere.sdk.queries">ExperimentalReactiveStreamUtils</a></dt>
-<dd>
-<div class="block">Creates a <code>Publisher</code> for fetching all resources matching a predicate including <a href="io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products"><code>ProductProjection</code></a> and <code>JsonNode</code>.</div>
-</dd>
 </dl>
 <a name="I:Q">
 <!--   -->
@@ -13117,6 +13105,14 @@ CompletionStage&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execu
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/utils/MoneyImpl.html#query-javax.money.MonetaryQuery-">query(MonetaryQuery&lt;R&gt;)</a></span> - Method in class io.sphere.sdk.utils.<a href="io/sphere/sdk/utils/MoneyImpl.html" title="class in io.sphere.sdk.utils">MoneyImpl</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/QueryExecutionUtils.html#queryAll-io.sphere.sdk.client.SphereClient-io.sphere.sdk.queries.QueryDsl-">queryAll(SphereClient, QueryDsl&lt;T, C&gt;)</a></span> - Static method in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/QueryExecutionUtils.html" title="class in io.sphere.sdk.queries">QueryExecutionUtils</a></dt>
+<dd>
+<div class="block">Queries all elements matching a query by using an offset based pagination with page size <a href="io/sphere/sdk/queries/QueryExecutionUtils.html#DEFAULT_PAGE_SIZE">500</a>.</div>
+</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/QueryExecutionUtils.html#queryAll-io.sphere.sdk.client.SphereClient-io.sphere.sdk.queries.QueryDsl-int-">queryAll(SphereClient, QueryDsl&lt;T, C&gt;, int)</a></span> - Static method in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/QueryExecutionUtils.html" title="class in io.sphere.sdk.queries">QueryExecutionUtils</a></dt>
+<dd>
+<div class="block">Queries all elements matching a query by using an offset based pagination.</div>
+</dd>
 <dt><a href="io/sphere/sdk/meta/QueryDocumentation.html" title="class in io.sphere.sdk.meta"><span class="typeNameLink">QueryDocumentation</span></a> - Class in <a href="io/sphere/sdk/meta/package-summary.html">io.sphere.sdk.meta</a></dt>
 <dd>
 <div class="block">The Query API is for reading specific resources from SPHERE.IO.</div>
@@ -13127,6 +13123,10 @@ CompletionStage&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execu
 </dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/MetaModelQueryDslBuilder.html#queryDslBuilderFunction">queryDslBuilderFunction</a></span> - Variable in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/MetaModelQueryDslBuilder.html" title="class in io.sphere.sdk.queries">MetaModelQueryDslBuilder</a></dt>
 <dd>&nbsp;</dd>
+<dt><a href="io/sphere/sdk/queries/QueryExecutionUtils.html" title="class in io.sphere.sdk.queries"><span class="typeNameLink">QueryExecutionUtils</span></a> - Class in <a href="io/sphere/sdk/queries/package-summary.html">io.sphere.sdk.queries</a></dt>
+<dd>
+<div class="block">Provides facilities to fetch all elements matching a query predicate.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/search/ProductProjectionSearchBuilder.html#queryFilters-java.util.List-">queryFilters(List&lt;FilterExpression&lt;ProductProjection&gt;&gt;)</a></span> - Method in class io.sphere.sdk.products.search.<a href="io/sphere/sdk/products/search/ProductProjectionSearchBuilder.html" title="class in io.sphere.sdk.products.search">ProductProjectionSearchBuilder</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/search/ProductProjectionSearchBuilder.html#queryFilters-java.util.function.Function-">queryFilters(Function&lt;ProductProjectionFilterSearchModel, List&lt;FilterExpression&lt;ProductProjection&gt;&gt;&gt;)</a></span> - Method in class io.sphere.sdk.products.search.<a href="io/sphere/sdk/products/search/ProductProjectionSearchBuilder.html" title="class in io.sphere.sdk.products.search">ProductProjectionSearchBuilder</a></dt>
@@ -13622,7 +13622,7 @@ CompletionStage&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execu
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/queries/ResourceQuery.html" title="interface in io.sphere.sdk.queries"><span class="typeNameLink">ResourceQuery</span></a>&lt;<a href="io/sphere/sdk/queries/ResourceQuery.html" title="type parameter in ResourceQuery">T</a>&gt; - Interface in <a href="io/sphere/sdk/queries/package-summary.html">io.sphere.sdk.queries</a></dt>
 <dd>
-<div class="block">Queries for entities with getters and copy functions for where, sort, limit and offset</div>
+<div class="block">Queries for resources.</div>
 </dd>
 <dt><a href="io/sphere/sdk/queries/ResourceQueryModel.html" title="interface in io.sphere.sdk.queries"><span class="typeNameLink">ResourceQueryModel</span></a>&lt;<a href="io/sphere/sdk/queries/ResourceQueryModel.html" title="type parameter in ResourceQueryModel">T</a>&gt; - Interface in <a href="io/sphere/sdk/queries/package-summary.html">io.sphere.sdk.queries</a></dt>
 <dd>&nbsp;</dd>
@@ -14256,7 +14256,7 @@ CompletionStage&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execu
 
     return updatedReview;
 });
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/reviews/commands/ReviewUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/commercetools-models/src/it/java/io/sphere/sdk/reviews/commands/ReviewUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 </dd>
 <dt><a href="io/sphere/sdk/customers/commands/updateactions/SetLastName.html" title="class in io.sphere.sdk.customers.commands.updateactions"><span class="typeNameLink">SetLastName</span></a> - Class in <a href="io/sphere/sdk/customers/commands/updateactions/package-summary.html">io.sphere.sdk.customers.commands.updateactions</a></dt>
 <dd>
@@ -14445,7 +14445,7 @@ CompletionStage&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execu
 
     return updatedReview;
 });
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/reviews/commands/ReviewUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/commercetools-models/src/it/java/io/sphere/sdk/reviews/commands/ReviewUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 </dd>
 <dt><a href="io/sphere/sdk/states/commands/updateactions/SetTransitions.html" title="class in io.sphere.sdk.states.commands.updateactions"><span class="typeNameLink">SetTransitions</span></a> - Class in <a href="io/sphere/sdk/states/commands/updateactions/package-summary.html">io.sphere.sdk.states.commands.updateactions</a></dt>
 <dd>
@@ -14482,7 +14482,7 @@ CompletionStage&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execu
 
     assertThat(updatedCustomer.getVatId()).isEqualTo(vatId);
 });
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/customers/commands/CustomerUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/commercetools-models/src/it/java/io/sphere/sdk/customers/commands/CustomerUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 </dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/OrderImportDraftBuilder.html#shipmentState-io.sphere.sdk.orders.ShipmentState-">shipmentState(ShipmentState)</a></span> - Method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/OrderImportDraftBuilder.html" title="class in io.sphere.sdk.orders">OrderImportDraftBuilder</a></dt>
 <dd>&nbsp;</dd>
@@ -15676,7 +15676,7 @@ CompletionStage&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execu
         return updatedOrder;
     })
 );
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/orders/commands/OrderUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/commercetools-models/src/it/java/io/sphere/sdk/orders/commands/OrderUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 </dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/states/expansion/StateExpansionModel.html#transitions--">transitions()</a></span> - Method in interface io.sphere.sdk.states.expansion.<a href="io/sphere/sdk/states/expansion/StateExpansionModel.html" title="interface in io.sphere.sdk.states.expansion">StateExpansionModel</a></dt>
 <dd>&nbsp;</dd>
@@ -15747,7 +15747,7 @@ assertThat(type.getName()).isEqualTo(en("name of the custom type"));
 assertThat(type.getResourceTypeIds()).containsExactly(Category.referenceTypeId());
 assertThat(type.getDescription()).isEqualTo(en("description"));
 assertThat(type.getFieldDefinitions()).containsExactly(stringFieldDefinition);
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/types/commands/TypeCreateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/commercetools-models/src/it/java/io/sphere/sdk/types/commands/TypeCreateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 </dd>
 <dt><a href="io/sphere/sdk/types/commands/TypeDeleteCommand.html" title="interface in io.sphere.sdk.types.commands"><span class="typeNameLink">TypeDeleteCommand</span></a> - Interface in <a href="io/sphere/sdk/types/commands/package-summary.html">io.sphere.sdk.types.commands</a></dt>
 <dd>&nbsp;</dd>

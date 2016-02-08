@@ -135,7 +135,7 @@ final GsonFooCustomObjectUpsertCommand command = new GsonFooCustomObjectUpsertCo
 final CustomObject&lt;GsonFoo&gt; customObject = client().executeBlocking(command);
 final GsonFoo actualValue = customObject.getValue();
 assertThat(actualValue).isEqualTo(value);
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/customobjects/commands/CustomObjectCustomJsonMappingUpsertCommandTest.java" target="_blank">test code</a>.</pre></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/commercetools-models/src/it/java/io/sphere/sdk/customobjects/commands/CustomObjectCustomJsonMappingUpsertCommandTest.java" target="_blank">test code</a>.</pre></div>
 
  <p>The command class:</p>
  <div id="io-sphere-sdk-customobjects-demo-GsonFooCustomObjectUpsertCommand%s" class=code-example><button type='button' style='display: none;' class='reveal-imports'>show/hide imports</button><pre class='hide code-example-imports'><code class='java'>import com.google.gson.Gson;
@@ -163,7 +163,7 @@ import io.sphere.sdk.http.HttpResponse;
         return gson.fromJson(jsonAsString, GsonFooCustomObject.class);
     }
 }
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/customobjects/demo/GsonFooCustomObjectUpsertCommand.java" target="_blank">test code</a>.</pre></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/commercetools-models/src/it/java/io/sphere/sdk/customobjects/demo/GsonFooCustomObjectUpsertCommand.java" target="_blank">test code</a>.</pre></div>
 
  <p>The draft containing container, key and value:</p>
  <div id="io-sphere-sdk-customobjects-demo-GsonFooCustomObjectDraft%s" class=code-example><button type='button' style='display: none;' class='reveal-imports'>show/hide imports</button><pre class='hide code-example-imports'><code class='java'></code></pre><pre><code class='java'>public class GsonFooCustomObjectDraft {
@@ -177,7 +177,7 @@ import io.sphere.sdk.http.HttpResponse;
         this.key = key;
     }
 }
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/customobjects/demo/GsonFooCustomObjectDraft.java" target="_blank">test code</a>.</pre></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/commercetools-models/src/it/java/io/sphere/sdk/customobjects/demo/GsonFooCustomObjectDraft.java" target="_blank">test code</a>.</pre></div>
 
  <p>The resulting custom object class:</p>
  <div id="io-sphere-sdk-customobjects-demo-GsonFooCustomObject%s" class=code-example><button type='button' style='display: none;' class='reveal-imports'>show/hide imports</button><pre class='hide code-example-imports'><code class='java'>import io.sphere.sdk.customobjects.CustomObject;
@@ -232,7 +232,7 @@ import java.time.ZonedDateTime;
         return version;
     }
 }
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/customobjects/demo/GsonFooCustomObject.java" target="_blank">test code</a>.</pre></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/commercetools-models/src/it/java/io/sphere/sdk/customobjects/demo/GsonFooCustomObject.java" target="_blank">test code</a>.</pre></div>
 
  <p>The class of the value:</p>
  <div id="io-sphere-sdk-customobjects-demo-GsonFoo%s" class=code-example><button type='button' style='display: none;' class='reveal-imports'>show/hide imports</button><pre class='hide code-example-imports'><code class='java'>import io.sphere.sdk.models.Base;
@@ -254,7 +254,7 @@ import java.time.ZonedDateTime;
         return baz;
     }
 }
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/customobjects/demo/GsonFoo.java" target="_blank">test code</a>.</pre></div></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/commercetools-models/src/it/java/io/sphere/sdk/customobjects/demo/GsonFoo.java" target="_blank">test code</a>.</pre></div></div>
 <dl>
 <dt><span class="seeLabel">See Also:</span></dt>
 <dd><a href="../../../../../io/sphere/sdk/customobjects/CustomObject.html" title="interface in io.sphere.sdk.customobjects"><code>CustomObject</code></a></dd>

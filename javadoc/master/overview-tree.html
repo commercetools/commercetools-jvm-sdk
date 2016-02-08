@@ -815,7 +815,6 @@
 <li type="circle">io.sphere.sdk.models.<a href="io/sphere/sdk/models/DefaultCurrencyUnits.html" title="class in io.sphere.sdk.models"><span class="typeNameLink">DefaultCurrencyUnits</span></a></li>
 <li type="circle">io.sphere.sdk.meta.<a href="io/sphere/sdk/meta/ExceptionDocumentation.html" title="class in io.sphere.sdk.meta"><span class="typeNameLink">ExceptionDocumentation</span></a></li>
 <li type="circle">io.sphere.sdk.expansion.<a href="io/sphere/sdk/expansion/ExpansionDslUtils.html" title="class in io.sphere.sdk.expansion"><span class="typeNameLink">ExpansionDslUtils</span></a></li>
-<li type="circle">io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/ExperimentalReactiveStreamUtils.html" title="class in io.sphere.sdk.queries"><span class="typeNameLink">ExperimentalReactiveStreamUtils</span></a></li>
 <li type="circle">io.sphere.sdk.http.<a href="io/sphere/sdk/http/FileHttpRequestBody.html" title="class in io.sphere.sdk.http"><span class="typeNameLink">FileHttpRequestBody</span></a> (implements io.sphere.sdk.http.<a href="io/sphere/sdk/http/HttpRequestBody.html" title="interface in io.sphere.sdk.http">HttpRequestBody</a>)</li>
 <li type="circle">io.sphere.sdk.meta.<a href="io/sphere/sdk/meta/FormattingDocumentation.html" title="class in io.sphere.sdk.meta"><span class="typeNameLink">FormattingDocumentation</span></a></li>
 <li type="circle">io.sphere.sdk.http.<a href="io/sphere/sdk/http/FormUrlEncodedHttpRequestBody.html" title="class in io.sphere.sdk.http"><span class="typeNameLink">FormUrlEncodedHttpRequestBody</span></a> (implements io.sphere.sdk.http.<a href="io/sphere/sdk/http/HttpRequestBody.html" title="interface in io.sphere.sdk.http">HttpRequestBody</a>)</li>
@@ -827,6 +826,7 @@
 <li type="circle">io.sphere.sdk.search.model.<a href="io/sphere/sdk/search/model/MultiValueSortSearchModelFactory.html" title="class in io.sphere.sdk.search.model"><span class="typeNameLink">MultiValueSortSearchModelFactory</span></a>&lt;T&gt;</li>
 <li type="circle">io.sphere.sdk.meta.<a href="io/sphere/sdk/meta/ProductAttributeDocumentation.html" title="class in io.sphere.sdk.meta"><span class="typeNameLink">ProductAttributeDocumentation</span></a></li>
 <li type="circle">io.sphere.sdk.products.<a href="io/sphere/sdk/products/ProductProjectionComparators.html" title="class in io.sphere.sdk.products"><span class="typeNameLink">ProductProjectionComparators</span></a></li>
+<li type="circle">io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/QueryExecutionUtils.html" title="class in io.sphere.sdk.queries"><span class="typeNameLink">QueryExecutionUtils</span></a></li>
 <li type="circle">io.sphere.sdk.meta.<a href="io/sphere/sdk/meta/ReferenceExpansionDocumentation.html" title="class in io.sphere.sdk.meta"><span class="typeNameLink">ReferenceExpansionDocumentation</span></a></li>
 <li type="circle">io.sphere.sdk.meta.<a href="io/sphere/sdk/meta/ReleaseNotes.html" title="class in io.sphere.sdk.meta"><span class="typeNameLink">ReleaseNotes</span></a></li>
 <li type="circle">io.sphere.sdk.models.<a href="io/sphere/sdk/models/SdkDefaults.html" title="class in io.sphere.sdk.models"><span class="typeNameLink">SdkDefaults</span></a></li>
@@ -5832,10 +5832,6 @@
 <ul>
 <li type="circle">java.lang.Enum&lt;E&gt; (implements java.lang.Comparable&lt;T&gt;, java.io.Serializable)
 <ul>
-<li type="circle">io.sphere.sdk.http.<a href="io/sphere/sdk/http/HttpMethod.html" title="enum in io.sphere.sdk.http"><span class="typeNameLink">HttpMethod</span></a></li>
-<li type="circle">io.sphere.sdk.models.<a href="io/sphere/sdk/models/TextInputHint.html" title="enum in io.sphere.sdk.models"><span class="typeNameLink">TextInputHint</span></a> (implements io.sphere.sdk.models.<a href="io/sphere/sdk/models/SphereEnumeration.html" title="interface in io.sphere.sdk.models">SphereEnumeration</a>)</li>
-<li type="circle">io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/QuerySortDirection.html" title="enum in io.sphere.sdk.queries"><span class="typeNameLink">QuerySortDirection</span></a></li>
-<li type="circle">io.sphere.sdk.search.<a href="io/sphere/sdk/search/SearchSortDirection.html" title="enum in io.sphere.sdk.search"><span class="typeNameLink">SearchSortDirection</span></a></li>
 <li type="circle">io.sphere.sdk.carts.<a href="io/sphere/sdk/carts/CartState.html" title="enum in io.sphere.sdk.carts"><span class="typeNameLink">CartState</span></a> (implements io.sphere.sdk.models.<a href="io/sphere/sdk/models/SphereEnumeration.html" title="interface in io.sphere.sdk.models">SphereEnumeration</a>)</li>
 <li type="circle">io.sphere.sdk.carts.<a href="io/sphere/sdk/carts/InventoryMode.html" title="enum in io.sphere.sdk.carts"><span class="typeNameLink">InventoryMode</span></a> (implements io.sphere.sdk.models.<a href="io/sphere/sdk/models/SphereEnumeration.html" title="interface in io.sphere.sdk.models">SphereEnumeration</a>)</li>
 <li type="circle">io.sphere.sdk.channels.<a href="io/sphere/sdk/channels/ChannelRole.html" title="enum in io.sphere.sdk.channels"><span class="typeNameLink">ChannelRole</span></a> (implements io.sphere.sdk.models.<a href="io/sphere/sdk/models/SphereEnumeration.html" title="interface in io.sphere.sdk.models">SphereEnumeration</a>)</li>
@@ -5851,6 +5847,10 @@
 <li type="circle">io.sphere.sdk.products.attributes.<a href="io/sphere/sdk/products/attributes/AttributeConstraint.html" title="enum in io.sphere.sdk.products.attributes"><span class="typeNameLink">AttributeConstraint</span></a> (implements io.sphere.sdk.models.<a href="io/sphere/sdk/models/SphereEnumeration.html" title="interface in io.sphere.sdk.models">SphereEnumeration</a>)</li>
 <li type="circle">io.sphere.sdk.states.<a href="io/sphere/sdk/states/StateRole.html" title="enum in io.sphere.sdk.states"><span class="typeNameLink">StateRole</span></a> (implements io.sphere.sdk.models.<a href="io/sphere/sdk/models/SphereEnumeration.html" title="interface in io.sphere.sdk.models">SphereEnumeration</a>)</li>
 <li type="circle">io.sphere.sdk.states.<a href="io/sphere/sdk/states/StateType.html" title="enum in io.sphere.sdk.states"><span class="typeNameLink">StateType</span></a> (implements io.sphere.sdk.models.<a href="io/sphere/sdk/models/SphereEnumeration.html" title="interface in io.sphere.sdk.models">SphereEnumeration</a>)</li>
+<li type="circle">io.sphere.sdk.models.<a href="io/sphere/sdk/models/TextInputHint.html" title="enum in io.sphere.sdk.models"><span class="typeNameLink">TextInputHint</span></a> (implements io.sphere.sdk.models.<a href="io/sphere/sdk/models/SphereEnumeration.html" title="interface in io.sphere.sdk.models">SphereEnumeration</a>)</li>
+<li type="circle">io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/QuerySortDirection.html" title="enum in io.sphere.sdk.queries"><span class="typeNameLink">QuerySortDirection</span></a></li>
+<li type="circle">io.sphere.sdk.search.<a href="io/sphere/sdk/search/SearchSortDirection.html" title="enum in io.sphere.sdk.search"><span class="typeNameLink">SearchSortDirection</span></a></li>
+<li type="circle">io.sphere.sdk.http.<a href="io/sphere/sdk/http/HttpMethod.html" title="enum in io.sphere.sdk.http"><span class="typeNameLink">HttpMethod</span></a></li>
 </ul>
 </li>
 </ul>

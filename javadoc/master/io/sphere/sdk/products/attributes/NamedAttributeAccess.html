@@ -116,7 +116,7 @@ extends <a href="../../../../../io/sphere/sdk/products/attributes/AttributeAcces
 
  <div id="io-sphere-sdk-products-attributeaccess-staticmethodstyle-Usage-demo--%s" class=code-example><pre><code class='java'>ProductVariant variant = getProductVariantSomeHow();
 Optional&lt;LocalizedString&gt; longDescription = variant.findAttribute(TShirt.longDescription());
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/test/java/io/sphere/sdk/products/attributeaccess/staticmethodstyle/Usage.java" target="_blank">test code</a>.</pre></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/commercetools-models/src/test/java/io/sphere/sdk/products/attributeaccess/staticmethodstyle/Usage.java" target="_blank">test code</a>.</pre></div>
  <p>The declaration:</p>
 
  <div id="io-sphere-sdk-products-attributeaccess-staticmethodstyle-TShirt%s" class=code-example><button type='button' style='display: none;' class='reveal-imports'>show/hide imports</button><pre class='hide code-example-imports'><code class='java'>import io.sphere.sdk.products.attributes.AttributeAccess;
@@ -127,7 +127,7 @@ import io.sphere.sdk.models.LocalizedString;
         return AttributeAccess.ofLocalizedString().ofName("longDescription");
     }
 }
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/test/java/io/sphere/sdk/products/attributeaccess/staticmethodstyle/TShirt.java" target="_blank">test code</a>.</pre></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/commercetools-models/src/test/java/io/sphere/sdk/products/attributeaccess/staticmethodstyle/TShirt.java" target="_blank">test code</a>.</pre></div>
 
 
 
@@ -140,7 +140,7 @@ import io.sphere.sdk.models.LocalizedString;
 
  <div id="io-sphere-sdk-products-attributeaccess-staticattributestyle-Usage-demo--%s" class=code-example><pre><code class='java'>ProductVariant variant = getProductVariantSomeHow();
 Optional&lt;LocalizedString&gt; longDescription = variant.findAttribute(TShirt.LONG_DESCRIPTION);
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/test/java/io/sphere/sdk/products/attributeaccess/staticattributestyle/Usage.java" target="_blank">test code</a>.</pre></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/commercetools-models/src/test/java/io/sphere/sdk/products/attributeaccess/staticattributestyle/Usage.java" target="_blank">test code</a>.</pre></div>
 
 
  <p>The declaration:</p>
@@ -151,7 +151,7 @@ import io.sphere.sdk.models.LocalizedString;
 </code></pre><pre><code class='java'>public class TShirt {
     public static final NamedAttributeAccess&lt;LocalizedString&gt; LONG_DESCRIPTION = AttributeAccess.ofLocalizedString().ofName("longDescription");
 }
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/test/java/io/sphere/sdk/products/attributeaccess/staticattributestyle/TShirt.java" target="_blank">test code</a>.</pre></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/commercetools-models/src/test/java/io/sphere/sdk/products/attributeaccess/staticattributestyle/TShirt.java" target="_blank">test code</a>.</pre></div>
 
 
 
@@ -164,7 +164,7 @@ import io.sphere.sdk.models.LocalizedString;
 
  <div id="io-sphere-sdk-products-attributeaccess-interfacesstaticmethodstyle-Usage-demo--%s" class=code-example><pre><code class='java'>ProductVariant variant = getProductVariantSomeHow();
 Optional&lt;LocalizedString&gt; longDescription = variant.findAttribute(TShirt.attributes().longDescription());
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/test/java/io/sphere/sdk/products/attributeaccess/interfacesstaticmethodstyle/Usage.java" target="_blank">test code</a>.</pre></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/commercetools-models/src/test/java/io/sphere/sdk/products/attributeaccess/interfacesstaticmethodstyle/Usage.java" target="_blank">test code</a>.</pre></div>
 
  <p>The declaration:</p>
 
@@ -177,7 +177,7 @@ import io.sphere.sdk.models.LocalizedString;
         return AttributeAccess.ofLocalizedString().ofName("longDescription");
     }
 }
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/test/java/io/sphere/sdk/products/attributeaccess/interfacesstaticmethodstyle/WithLongDescription.java" target="_blank">test code</a>.</pre></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/commercetools-models/src/test/java/io/sphere/sdk/products/attributeaccess/interfacesstaticmethodstyle/WithLongDescription.java" target="_blank">test code</a>.</pre></div>
  <div id="io-sphere-sdk-products-attributeaccess-interfacesstaticmethodstyle-WithColor%s" class=code-example><button type='button' style='display: none;' class='reveal-imports'>show/hide imports</button><pre class='hide code-example-imports'><code class='java'>import io.sphere.sdk.products.attributes.AttributeAccess;
 import io.sphere.sdk.products.attributes.NamedAttributeAccess;
 </code></pre><pre><code class='java'>public interface WithColor {
@@ -189,7 +189,7 @@ import io.sphere.sdk.products.attributes.NamedAttributeAccess;
         return AttributeAccess.ofDouble().ofName("rgb");
     }
 }
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/test/java/io/sphere/sdk/products/attributeaccess/interfacesstaticmethodstyle/WithColor.java" target="_blank">test code</a>.</pre></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/commercetools-models/src/test/java/io/sphere/sdk/products/attributeaccess/interfacesstaticmethodstyle/WithColor.java" target="_blank">test code</a>.</pre></div>
  <div id="io-sphere-sdk-products-attributeaccess-interfacesstaticmethodstyle-WithPromoMoney%s" class=code-example><button type='button' style='display: none;' class='reveal-imports'>show/hide imports</button><pre class='hide code-example-imports'><code class='java'>import io.sphere.sdk.products.attributes.AttributeAccess;
 import io.sphere.sdk.products.attributes.NamedAttributeAccess;
 import javax.money.MonetaryAmount;
@@ -198,7 +198,7 @@ import javax.money.MonetaryAmount;
         return AttributeAccess.ofMoney().ofName("promo-money");
     }
 }
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/test/java/io/sphere/sdk/products/attributeaccess/interfacesstaticmethodstyle/WithPromoMoney.java" target="_blank">test code</a>.</pre></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/commercetools-models/src/test/java/io/sphere/sdk/products/attributeaccess/interfacesstaticmethodstyle/WithPromoMoney.java" target="_blank">test code</a>.</pre></div>
 
  <p>Mixin the the attributes:</p>
  <div id="io-sphere-sdk-products-attributeaccess-interfacesstaticmethodstyle-TShirt%s" class=code-example><button type='button' style='display: none;' class='reveal-imports'>show/hide imports</button><pre class='hide code-example-imports'><code class='java'></code></pre><pre><code class='java'>public final class TShirt implements WithPromoMoney, WithLongDescription, WithColor {
@@ -206,7 +206,7 @@ import javax.money.MonetaryAmount;
         return new TShirt();
     }
 }
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/test/java/io/sphere/sdk/products/attributeaccess/interfacesstaticmethodstyle/TShirt.java" target="_blank">test code</a>.</pre></div></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/commercetools-models/src/test/java/io/sphere/sdk/products/attributeaccess/interfacesstaticmethodstyle/TShirt.java" target="_blank">test code</a>.</pre></div></div>
 </li>
 </ul>
 </div>

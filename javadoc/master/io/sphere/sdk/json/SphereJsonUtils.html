@@ -117,7 +117,7 @@ extends java.lang.Object</pre>
  <div id="io-sphere-sdk-json-SphereJsonUtilsTest-exceptionHandling--%s" class=code-example><pre><code class='java'>final String brokenJsonString = "{\"de\":\",]]]]";
 assertThatThrownBy(() -&gt; SphereJsonUtils.readObject(brokenJsonString, LocalizedString.typeReference()))
 .isInstanceOf(JsonException.class);
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-common/src/test/java/io/sphere/sdk/json/SphereJsonUtilsTest.java" target="_blank">test code</a>.</pre></div></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/commercetools-sdk-base/src/test/java/io/sphere/sdk/json/SphereJsonUtilsTest.java" target="_blank">test code</a>.</pre></div></div>
 </li>
 </ul>
 </div>
@@ -298,7 +298,7 @@ assertThatThrownBy(() -&gt; SphereJsonUtils.readObject(brokenJsonString, Localiz
  <div id="io-sphere-sdk-json-SphereJsonUtilsTest-toJsonString--%s" class=code-example><pre><code class='java'>final LocalizedString value = LocalizedString.of(ENGLISH, "dog food", GERMAN, "Hundefutter");
 final JsonNode actual = SphereJsonUtils.toJsonNode(value);
 assertThat(actual).isEqualTo(SphereJsonUtils.parse("{\"de\":\"Hundefutter\",\"en\":\"dog food\"}"));
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-common/src/test/java/io/sphere/sdk/json/SphereJsonUtilsTest.java" target="_blank">test code</a>.</pre></div></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/commercetools-sdk-base/src/test/java/io/sphere/sdk/json/SphereJsonUtilsTest.java" target="_blank">test code</a>.</pre></div></div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>value</code> - the object to convert</dd>
@@ -322,7 +322,7 @@ assertThat(actual).isEqualTo(SphereJsonUtils.parse("{\"de\":\"Hundefutter\",\"en
 final JsonNode actual = SphereJsonUtils.toJsonNode(value);
 assertThat(actual.get("de").asText()).isEqualTo("Hundefutter");
 assertThat(actual.get("en").asText()).isEqualTo("dog food");
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-common/src/test/java/io/sphere/sdk/json/SphereJsonUtilsTest.java" target="_blank">test code</a>.</pre></div></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/commercetools-sdk-base/src/test/java/io/sphere/sdk/json/SphereJsonUtilsTest.java" target="_blank">test code</a>.</pre></div></div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>value</code> - the object to convert</dd>
@@ -346,7 +346,7 @@ final ObjectNode expected = SphereJsonUtils.newObjectNode();
 expected.put("de", "Hundefutter");
 expected.put("en", "dog food");
 assertThat(actual).isEqualTo(expected);
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-common/src/test/java/io/sphere/sdk/json/SphereJsonUtilsTest.java" target="_blank">test code</a>.</pre></div></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/commercetools-sdk-base/src/test/java/io/sphere/sdk/json/SphereJsonUtilsTest.java" target="_blank">test code</a>.</pre></div></div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>jsonAsString</code> - json data</dd>
@@ -387,7 +387,7 @@ assertThat(actual).isEqualTo("{\n" +
                 "  \"en\" : \"dog food\"\n" +
                 "}"
 );
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-common/src/test/java/io/sphere/sdk/json/SphereJsonUtilsTest.java" target="_blank">test code</a>.</pre></div></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/commercetools-sdk-base/src/test/java/io/sphere/sdk/json/SphereJsonUtilsTest.java" target="_blank">test code</a>.</pre></div></div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>json</code> - JSON code as String which should be formatted</dd>
@@ -459,7 +459,7 @@ assertThat(actual).isEqualTo("{\n" +
 final LocalizedString actual =
         SphereJsonUtils.readObject(jsonString, LocalizedString.typeReference());
 assertThat(actual).isEqualTo(LocalizedString.of(ENGLISH, "dog food", GERMAN, "Hundefutter"));
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-common/src/test/java/io/sphere/sdk/json/SphereJsonUtilsTest.java" target="_blank">test code</a>.</pre></div></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/commercetools-sdk-base/src/test/java/io/sphere/sdk/json/SphereJsonUtilsTest.java" target="_blank">test code</a>.</pre></div></div>
 <dl>
 <dt><span class="paramLabel">Type Parameters:</span></dt>
 <dd><code>T</code> - the type of the result</dd>
@@ -497,7 +497,7 @@ jsonNode.put("en", "dog food");
 final LocalizedString actual =
         SphereJsonUtils.readObject(jsonNode, LocalizedString.typeReference());
 assertThat(actual).isEqualTo(LocalizedString.of(ENGLISH, "dog food", GERMAN, "Hundefutter"));
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-common/src/test/java/io/sphere/sdk/json/SphereJsonUtilsTest.java" target="_blank">test code</a>.</pre></div></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/commercetools-sdk-base/src/test/java/io/sphere/sdk/json/SphereJsonUtilsTest.java" target="_blank">test code</a>.</pre></div></div>
 <dl>
 <dt><span class="paramLabel">Type Parameters:</span></dt>
 <dd><code>T</code> - the type of the result</dd>
@@ -525,7 +525,7 @@ jsonNode.put("en", "dog food");
 final LocalizedString actual =
         SphereJsonUtils.readObject(jsonNode, LocalizedString.class);
 assertThat(actual).isEqualTo(LocalizedString.of(ENGLISH, "dog food", GERMAN, "Hundefutter"));
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-common/src/test/java/io/sphere/sdk/json/SphereJsonUtilsTest.java" target="_blank">test code</a>.</pre></div></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/commercetools-sdk-base/src/test/java/io/sphere/sdk/json/SphereJsonUtilsTest.java" target="_blank">test code</a>.</pre></div></div>
 <dl>
 <dt><span class="paramLabel">Type Parameters:</span></dt>
 <dd><code>T</code> - the type of the result</dd>
@@ -563,7 +563,7 @@ jsonNode.put("en", "dog food");
 final LocalizedString actual =
         SphereJsonUtils.readObject(jsonNode, LocalizedString.class);
 assertThat(actual).isEqualTo(LocalizedString.of(ENGLISH, "dog food", GERMAN, "Hundefutter"));
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-common/src/test/java/io/sphere/sdk/json/SphereJsonUtilsTest.java" target="_blank">test code</a>.</pre></div></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/commercetools-sdk-base/src/test/java/io/sphere/sdk/json/SphereJsonUtilsTest.java" target="_blank">test code</a>.</pre></div></div>
 <dl>
 <dt><span class="paramLabel">Type Parameters:</span></dt>
 <dd><code>T</code> - the type of the result</dd>
@@ -600,7 +600,7 @@ jsonNode.put("en", "dog food");
 final LocalizedString actual =
         SphereJsonUtils.readObject(jsonNode, LocalizedString.class);
 assertThat(actual).isEqualTo(LocalizedString.of(ENGLISH, "dog food", GERMAN, "Hundefutter"));
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-common/src/test/java/io/sphere/sdk/json/SphereJsonUtilsTest.java" target="_blank">test code</a>.</pre></div></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/commercetools-sdk-base/src/test/java/io/sphere/sdk/json/SphereJsonUtilsTest.java" target="_blank">test code</a>.</pre></div></div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>new node</dd>

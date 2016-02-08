@@ -161,7 +161,7 @@ public class Foo extends Base {
         return baz;
     }
 }
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/customobjects/demo/Foo.java" target="_blank">test code</a>.</pre></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/commercetools-models/src/it/java/io/sphere/sdk/customobjects/demo/Foo.java" target="_blank">test code</a>.</pre></div>
 
 <h4 id=pojo-create-custom-objects>Create Custom Objects</h4>
 
@@ -177,7 +177,7 @@ assertThat(customObject.getContainer()).isEqualTo(container);
 assertThat(customObject.getKey()).isEqualTo(key);
 final Foo loadedValue = customObject.getValue();
 assertThat(loadedValue).isEqualTo(value);
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/customobjects/CustomObjectFixtures.java" target="_blank">test code</a>.</pre></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/commercetools-models/src/it/java/io/sphere/sdk/customobjects/CustomObjectFixtures.java" target="_blank">test code</a>.</pre></div>
 
 <h4 id=pojo-update-custom-objects>Update Custom Objects</h4>
 
@@ -193,7 +193,7 @@ to use optimistic concurrency control as in here:
     final CustomObject&lt;Foo&gt; updatedCustomObject = client().executeBlocking(command);
     final Foo loadedValue = updatedCustomObject.getValue();
     assertThat(loadedValue).isEqualTo(newValue);
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/customobjects/commands/CustomObjectUpsertCommandTest.java" target="_blank">test code</a>.</pre></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/commercetools-models/src/it/java/io/sphere/sdk/customobjects/commands/CustomObjectUpsertCommandTest.java" target="_blank">test code</a>.</pre></div>
 
 Or you can just override the value using <a href="../../../../io/sphere/sdk/customobjects/CustomObjectDraft.html#ofUnversionedUpdate-io.sphere.sdk.customobjects.CustomObject-T-com.fasterxml.jackson.core.type.TypeReference-"><code>CustomObjectDraft.ofUnversionedUpdate(io.sphere.sdk.customobjects.CustomObject, Object, com.fasterxml.jackson.core.type.TypeReference)</code></a>
 
@@ -205,7 +205,7 @@ Or you can just override the value using <a href="../../../../io/sphere/sdk/cust
     final Foo loadedValue = updatedCustomObject.getValue();
     assertThat(loadedValue).isEqualTo(newValue);
 });
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/customobjects/commands/CustomObjectUpsertCommandTest.java" target="_blank">test code</a>.</pre></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/commercetools-models/src/it/java/io/sphere/sdk/customobjects/commands/CustomObjectUpsertCommandTest.java" target="_blank">test code</a>.</pre></div>
 
 <h3 id=pure-json-mapping>Custom objects with direct Jackson JsonNode</h3>
 
@@ -221,7 +221,7 @@ final CustomObjectUpsertCommand&lt;JsonNode&gt; command =
 final CustomObject&lt;JsonNode&gt; customObject = client().executeBlocking(command);
 assertThat(customObject.getValue().get("bar").asText("default value")).isEqualTo(" a string");
 assertThat(customObject.getValue().get("baz").asLong(0)).isEqualTo(5);
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/customobjects/commands/CustomObjectUpsertCommandTest.java" target="_blank">test code</a>.</pre></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/commercetools-models/src/it/java/io/sphere/sdk/customobjects/commands/CustomObjectUpsertCommandTest.java" target="_blank">test code</a>.</pre></div>
 
 <h4 id=direct-json-fetch>Fetch custom objects</h4>
 
@@ -236,7 +236,7 @@ assertThat(customObject.getValue().get("baz").asLong(0)).isEqualTo(5);
     final String actual = value.get("bar").asText("it is not present");
     assertThat(actual).isEqualTo(expected);
 });
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/customobjects/queries/CustomObjectByKeyGetTest.java" target="_blank">test code</a>.</pre></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/commercetools-models/src/it/java/io/sphere/sdk/customobjects/queries/CustomObjectByKeyGetTest.java" target="_blank">test code</a>.</pre></div>
 
 <h4 id=direct-json-query>Query custom objects</h4>
 
@@ -252,7 +252,7 @@ assertThat(customObject.getValue().get("baz").asLong(0)).isEqualTo(5);
     final String actual = jsonNode.get("bar").asText("it is not present");
     assertThat(actual).isEqualTo(expected);
 });
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/customobjects/queries/CustomObjectQueryTest.java" target="_blank">test code</a>.</pre></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/commercetools-models/src/it/java/io/sphere/sdk/customobjects/queries/CustomObjectQueryTest.java" target="_blank">test code</a>.</pre></div>
 
 <h3 id=custom-json-mapper>Custom Objects with a custom JSON mapper</h3>
 
@@ -269,7 +269,7 @@ assertThat(customObject.getValue().get("baz").asLong(0)).isEqualTo(5);
         this.key = key;
     }
 }
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/customobjects/demo/GsonFooCustomObjectDraft.java" target="_blank">test code</a>.</pre></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/commercetools-models/src/it/java/io/sphere/sdk/customobjects/demo/GsonFooCustomObjectDraft.java" target="_blank">test code</a>.</pre></div>
 <div id="io-sphere-sdk-customobjects-demo-GsonFoo%s" class=code-example><button type='button' style='display: none;' class='reveal-imports'>show/hide imports</button><pre class='hide code-example-imports'><code class='java'>import io.sphere.sdk.models.Base;
 </code></pre><pre><code class='java'>public class GsonFoo extends Base {
 
@@ -289,7 +289,7 @@ assertThat(customObject.getValue().get("baz").asLong(0)).isEqualTo(5);
         return baz;
     }
 }
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/customobjects/demo/GsonFoo.java" target="_blank">test code</a>.</pre></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/commercetools-models/src/it/java/io/sphere/sdk/customobjects/demo/GsonFoo.java" target="_blank">test code</a>.</pre></div>
 
 <h4>Create and update with a custom JSON mapper</h4>
 <p>Extend <a href="../../../../io/sphere/sdk/customobjects/commands/CustomObjectCustomJsonMappingUpsertCommand.html" title="class in io.sphere.sdk.customobjects.commands"><code>CustomObjectCustomJsonMappingUpsertCommand</code></a> to create or update a custom object with <a href="https://code.google.com/p/google-gson/">Google Gson</a>:</p>
@@ -319,7 +319,7 @@ import io.sphere.sdk.http.HttpResponse;
         return gson.fromJson(jsonAsString, GsonFooCustomObject.class);
     }
 }
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/customobjects/demo/GsonFooCustomObjectUpsertCommand.java" target="_blank">test code</a>.</pre></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/commercetools-models/src/it/java/io/sphere/sdk/customobjects/demo/GsonFooCustomObjectUpsertCommand.java" target="_blank">test code</a>.</pre></div>
 
 <h4>Fetch by container and key</h4>
 
@@ -340,7 +340,7 @@ import io.sphere.sdk.http.HttpResponse;
         return new Gson().fromJson(jsonAsString, GsonFooCustomObject.class);
     }
 }
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/customobjects/demo/GsonFooCustomObjectByKeyGet.java" target="_blank">test code</a>.</pre></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/commercetools-models/src/it/java/io/sphere/sdk/customobjects/demo/GsonFooCustomObjectByKeyGet.java" target="_blank">test code</a>.</pre></div>
 <div id="io-sphere-sdk-customobjects-queries-CustomObjectCustomJsonMappingByKeyGetTest-execution--%s" class=code-example><pre><code class='java'>CustomObjectFixtures.withCustomObject(client(), co -&gt; {
     final String container = co.getContainer();
     final String key = co.getKey();
@@ -351,7 +351,7 @@ import io.sphere.sdk.http.HttpResponse;
     final GsonFoo value = customObject.getValue();
     assertThat(value).isEqualTo(new GsonFoo("aString", 5L));
 });
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/customobjects/queries/CustomObjectCustomJsonMappingByKeyGetTest.java" target="_blank">test code</a>.</pre></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/commercetools-models/src/it/java/io/sphere/sdk/customobjects/queries/CustomObjectCustomJsonMappingByKeyGetTest.java" target="_blank">test code</a>.</pre></div>
 
 <h3 id=increment-example>Using Optimistic Concurrency Control</h3>
 
@@ -380,7 +380,7 @@ import io.sphere.sdk.models.Base;
         return customerId;
     }
 }
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/customobjects/occexample/CustomerNumberCounter.java" target="_blank">test code</a>.</pre></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/commercetools-models/src/it/java/io/sphere/sdk/customobjects/occexample/CustomerNumberCounter.java" target="_blank">test code</a>.</pre></div>
 
 <p>Imagine, the customer number should start at 1000, so we do the following request for the initialization of the counter:</p>
 
@@ -406,7 +406,7 @@ try {
 } catch (final ConcurrentModificationException e) {
     assertThat(true).overridingErrorMessage("Even in a distributed system the nodes will not override existing values with the initial value.").isTrue();
 }
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/customobjects/occexample/FlowTest.java" target="_blank">test code</a>.</pre></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/commercetools-models/src/it/java/io/sphere/sdk/customobjects/occexample/FlowTest.java" target="_blank">test code</a>.</pre></div>
 
 <p>An update works this way then:</p>
 <div id="io-sphere-sdk-customobjects-occexample-FlowTest-doAnUpdate--%s" class=code-example><pre><code class='java'>final CustomObjectByKeyGet&lt;CustomerNumberCounter&gt; fetch =
@@ -428,7 +428,7 @@ try {
     //start again at the top
     assertThat(true).overridingErrorMessage("If other nodes have same version saved, they have to fetch again the object and use the new version number").isTrue();
 }
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/customobjects/occexample/FlowTest.java" target="_blank">test code</a>.</pre></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/commercetools-models/src/it/java/io/sphere/sdk/customobjects/occexample/FlowTest.java" target="_blank">test code</a>.</pre></div>
 
 <h3 id=migrations>Migrations</h3>
 
@@ -452,7 +452,7 @@ import io.sphere.sdk.models.Base;
         return foo;
     }
 }
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/customobjects/migrations/version1/Xyz.java" target="_blank">test code</a>.</pre></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/commercetools-models/src/it/java/io/sphere/sdk/customobjects/migrations/version1/Xyz.java" target="_blank">test code</a>.</pre></div>
 
 <p>After adding the field:</p>
 
@@ -479,11 +479,11 @@ import javax.annotation.Nullable;
         return bar;
     }
 }
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/customobjects/migrations/version2/Xyz.java" target="_blank">test code</a>.</pre></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/commercetools-models/src/it/java/io/sphere/sdk/customobjects/migrations/version2/Xyz.java" target="_blank">test code</a>.</pre></div>
 
 <div id="io-sphere-sdk-customobjects-migrations-CustomObjectsMigrationsTest-optionalExample--%s" class=code-example><pre><code class='java'>final io.sphere.sdk.customobjects.migrations.version2.Xyz xyz = new io.sphere.sdk.customobjects.migrations.version2.Xyz("foo", "bar");
 final String bar = Optional.ofNullable(xyz.getBar()).orElse("default value");
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/customobjects/migrations/CustomObjectsMigrationsTest.java" target="_blank">test code</a>.</pre></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/commercetools-models/src/it/java/io/sphere/sdk/customobjects/migrations/CustomObjectsMigrationsTest.java" target="_blank">test code</a>.</pre></div>
 
 <h4 id=migrations-removing-fields>Removing fields</h4>
 
@@ -514,7 +514,7 @@ import javax.annotation.Nullable;
         return bar;
     }
 }
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/customobjects/migrations/version2/Xyz.java" target="_blank">test code</a>.</pre></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/commercetools-models/src/it/java/io/sphere/sdk/customobjects/migrations/version2/Xyz.java" target="_blank">test code</a>.</pre></div>
 
 If you don't want to use it anymore, remove it from the JSON mapping:
 
@@ -535,7 +535,7 @@ import javax.annotation.Nullable;
         return bar;
     }
 }
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/customobjects/migrations/version3/Xyz.java" target="_blank">test code</a>.</pre></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/commercetools-models/src/it/java/io/sphere/sdk/customobjects/migrations/version3/Xyz.java" target="_blank">test code</a>.</pre></div>
 
 Next time you'll save this object the field will be no more in the JSON.
 
@@ -562,7 +562,7 @@ Suppose you have this data model:
         return anotherField;
     }
 }
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/customobjects/migrations/version1/Uvw.java" target="_blank">test code</a>.</pre></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/commercetools-models/src/it/java/io/sphere/sdk/customobjects/migrations/version1/Uvw.java" target="_blank">test code</a>.</pre></div>
 
 And you want to make 'foo' not a String, but an object with members 'a' and 'b'.
 
@@ -603,7 +603,7 @@ And you want to make 'foo' not a String, but an object with members 'a' and 'b'.
         }
     }
 }
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/customobjects/migrations/version2/Uvw.java" target="_blank">test code</a>.</pre></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/commercetools-models/src/it/java/io/sphere/sdk/customobjects/migrations/version2/Uvw.java" target="_blank">test code</a>.</pre></div>
 
 And let's say, for simplicity you can directly migrate the String to the object by splitting the String the right way.
 
@@ -629,7 +629,7 @@ public interface Uvw {
         return new UvwSchemaVersion2(foo, anotherField);
     }
 }
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/customobjects/migrations/version3/Uvw.java" target="_blank">test code</a>.</pre></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/commercetools-models/src/it/java/io/sphere/sdk/customobjects/migrations/version3/Uvw.java" target="_blank">test code</a>.</pre></div>
 
 For the two incarnations you create a class for each. The newest class contains all the field plus the schema version and it implements the interface:
 
@@ -657,7 +657,7 @@ For the two incarnations you create a class for each. The newest class contains 
         return schemaVersion;
     }
 }
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/customobjects/migrations/version3/UvwSchemaVersion2.java" target="_blank">test code</a>.</pre></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/commercetools-models/src/it/java/io/sphere/sdk/customobjects/migrations/version3/UvwSchemaVersion2.java" target="_blank">test code</a>.</pre></div>
 
 The previous data model versions contain no fields but extend the most recent class. The old versions get the old data
 as constructor parameters and pass the transformed values to the constructor of the superclass.
@@ -679,12 +679,12 @@ as constructor parameters and pass the transformed values to the constructor of 
         return new Foo(a, b);
     }
 }
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/customobjects/migrations/version3/UvwSchemaVersion1.java" target="_blank">test code</a>.</pre></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/commercetools-models/src/it/java/io/sphere/sdk/customobjects/migrations/version3/UvwSchemaVersion1.java" target="_blank">test code</a>.</pre></div>
 
 As a result you only work with the interface making it transparent if it is an old or new version:
 
 <div id="io-sphere-sdk-customobjects-migrations-CustomObjectsMigrationsTest-exampleForMigrationCall--%s" class=code-example><pre><code class='java'>final CustomObjectByKeyGet&lt;Uvw&gt; fetch = CustomObjectByKeyGet.of("container", "key", Uvw.class);
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/customobjects/migrations/CustomObjectsMigrationsTest.java" target="_blank">test code</a>.</pre></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/commercetools-models/src/it/java/io/sphere/sdk/customobjects/migrations/CustomObjectsMigrationsTest.java" target="_blank">test code</a>.</pre></div>
 
 
 <h3 id="traps">Traps</h3>
@@ -693,7 +693,7 @@ As a result you only work with the interface making it transparent if it is an o
 Notice that it is necessary to explicitly declare the type when requesting the query model, as shown in the following examples:</p>
 <div id="io-sphere-sdk-customobjects-queries-CustomObjectQueryTest-demoModelTypeParameter--%s" class=code-example><pre><code class='java'>final QuerySort&lt;CustomObject&lt;JsonNode&gt;&gt; sort = CustomObjectQueryModel.&lt;CustomObject&lt;JsonNode&gt;&gt;of().createdAt().sort().desc();
 final QuerySort&lt;CustomObject&lt;Foo&gt;&gt; fooSort = CustomObjectQueryModel.&lt;CustomObject&lt;Foo&gt;&gt;of().createdAt().sort().desc();
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/customobjects/queries/CustomObjectQueryTest.java" target="_blank">test code</a>.</pre></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/commercetools-models/src/it/java/io/sphere/sdk/customobjects/queries/CustomObjectQueryTest.java" target="_blank">test code</a>.</pre></div>
 
 <a href="#page-toc" class="theme-btn">back to top</a></div>
 </li>

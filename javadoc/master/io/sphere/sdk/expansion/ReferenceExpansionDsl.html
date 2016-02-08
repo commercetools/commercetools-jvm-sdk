@@ -225,7 +225,7 @@ assertThat(fetch.expansionPaths()).overridingErrorMessage("old object is unchang
         .isEqualTo(asList(ExpansionPath.of("categories[*]")));
 assertThat(fetch2.expansionPaths()).isEqualTo(asList(ExpansionPath.of("productType")));
 assertThat(fetch2).isNotSameAs(fetch);
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/test/java/io/sphere/sdk/products/expansion/ProductProjectionExpansionModelTest.java" target="_blank">test code</a>.</pre></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/commercetools-models/src/test/java/io/sphere/sdk/products/expansion/ProductProjectionExpansionModelTest.java" target="_blank">test code</a>.</pre></div>
 
  <p>This method also can be used to use the same expansions as in another request:</p>
  <div id="io-sphere-sdk-products-expansion-ProductProjectionExpansionModelTest-useExpansionPathsOfOtherRequest--%s" class=code-example><pre><code class='java'>final ProductProjectionQuery query = ProductProjectionQuery.ofCurrent().withExpansionPaths(m -&gt; m.categories());
@@ -234,7 +234,7 @@ assertThat(query.expansionPaths())
         .hasSize(1)
         .as("reuse expansion spec from other request")
         .isEqualTo(search.expansionPaths());
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/test/java/io/sphere/sdk/products/expansion/ProductProjectionExpansionModelTest.java" target="_blank">test code</a>.</pre></div></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/commercetools-models/src/test/java/io/sphere/sdk/products/expansion/ProductProjectionExpansionModelTest.java" target="_blank">test code</a>.</pre></div></div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>expansionPath</code> - the new expansion paths</dd>
@@ -279,7 +279,7 @@ final ProductProjectionByIdGet fetch2 =
 assertThat(fetch.expansionPaths()).overridingErrorMessage("old object is unchanged").isEmpty();
 assertThat(fetch2.expansionPaths()).isEqualTo(asList(ExpansionPath.of("categories[*]")));
 assertThat(fetch2).isNotSameAs(fetch);
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/test/java/io/sphere/sdk/products/expansion/ProductProjectionExpansionModelTest.java" target="_blank">test code</a>.</pre></div></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/commercetools-models/src/test/java/io/sphere/sdk/products/expansion/ProductProjectionExpansionModelTest.java" target="_blank">test code</a>.</pre></div></div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>expansionPath</code> - the new expansion path to add to the existing ones</dd>

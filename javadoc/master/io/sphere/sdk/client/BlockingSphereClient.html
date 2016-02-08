@@ -160,7 +160,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 final Throwable throwable = catchThrowable(() -&gt; blockingSphereClient.executeBlocking(DummySphereRequest.of()));
 
 assertThat(throwable).isInstanceOf(SphereTimeoutException.class);
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-java-client-core/src/test/java/io/sphere/sdk/client/BlockingSphereClientTest.java" target="_blank">test code</a>.</pre></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/commercetools-java-client-core/src/test/java/io/sphere/sdk/client/BlockingSphereClientTest.java" target="_blank">test code</a>.</pre></div>
  <p>In case of errors sphere exceptions are directly thrown:</p>
  <div id="io-sphere-sdk-client-BlockingClientSphereExceptionDemo%s" class=code-example><button type='button' style='display: none;' class='reveal-imports'>show/hide imports</button><pre class='hide code-example-imports'><code class='java'>import io.sphere.sdk.carts.CartDraft;
 import io.sphere.sdk.carts.commands.CartCreateCommand;

@@ -201,7 +201,7 @@ final ProductProjectionByIdGet fetchB = ProductProjectionByIdGet.of("id", Produc
                 .withExpansionPaths(asList(categoryExpand, productTypeExpand));
 assertThat(fetchB.expansionPaths())
         .isEqualTo(asList(ExpansionPath.of("categories[*]"), ExpansionPath.of("productType")));
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/test/java/io/sphere/sdk/products/expansion/ProductProjectionExpansionModelTest.java" target="_blank">test code</a>.</pre></div></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/commercetools-models/src/test/java/io/sphere/sdk/products/expansion/ProductProjectionExpansionModelTest.java" target="_blank">test code</a>.</pre></div></div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>m</code> - function to use the meta model for expansions to create an expansion path</dd>
@@ -233,7 +233,7 @@ assertThat(fetch.expansionPaths()).overridingErrorMessage("old object is unchang
         .isEqualTo(asList(ExpansionPath.of("categories[*]")));
 assertThat(fetch2.expansionPaths()).isEqualTo(asList(ExpansionPath.of("productType")));
 assertThat(fetch2).isNotSameAs(fetch);
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/test/java/io/sphere/sdk/products/expansion/ProductProjectionExpansionModelTest.java" target="_blank">test code</a>.</pre></div></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/commercetools-models/src/test/java/io/sphere/sdk/products/expansion/ProductProjectionExpansionModelTest.java" target="_blank">test code</a>.</pre></div></div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>m</code> - function to use the meta model for expansions to create an expansion path</dd>

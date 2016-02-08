@@ -116,7 +116,7 @@ client().executeBlocking(ProductTypeDeleteCommand.of(productType));
 final Query&lt;ProductType&gt; query = ProductTypeQuery.of()
         .withPredicates(m -&gt; m.id().is(productType.getId()));
 assertThat(client().executeBlocking(query).head()).isEmpty();
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/producttypes/commands/ProductTypeDeleteCommandTest.java" target="_blank">test code</a>.</pre></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/commercetools-models/src/it/java/io/sphere/sdk/producttypes/commands/ProductTypeDeleteCommandTest.java" target="_blank">test code</a>.</pre></div>
  <p>Delete by key:</p>
  <div id="io-sphere-sdk-producttypes-commands-ProductTypeDeleteCommandTest-executionByKey--%s" class=code-example><pre><code class='java'>final ProductType productType = client().executeBlocking(ProductTypeCreateCommand.of(getDraft()));
 
@@ -125,7 +125,7 @@ client().executeBlocking(ProductTypeDeleteCommand.ofKey(productType.getKey(), pr
 final Query&lt;ProductType&gt; query = ProductTypeQuery.of()
         .withPredicates(m -&gt; m.id().is(productType.getId()));
 assertThat(client().executeBlocking(query).head()).isEmpty();
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/producttypes/commands/ProductTypeDeleteCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/commercetools-models/src/it/java/io/sphere/sdk/producttypes/commands/ProductTypeDeleteCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 </li>
 </ul>
 </div>

@@ -130,12 +130,12 @@ final ProductType productType = client().executeBlocking(ProductTypeCreateComman
 assertThat(productType.getName()).isEqualTo(name);
 assertThat(productType.getDescription()).isEqualTo("a 'T' shaped cloth");
 assertThat(productType.getAttributes()).contains(sizeAttributeDefinition);
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/producttypes/commands/ProductTypeCreateCommandTest.java" target="_blank">test code</a>.</pre></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/commercetools-models/src/it/java/io/sphere/sdk/producttypes/commands/ProductTypeCreateCommandTest.java" target="_blank">test code</a>.</pre></div>
 
   <div id="io-sphere-sdk-producttypes-Example-createDemo--%s" class=code-example><pre><code class='java'>final ProductTypeCreateCommand command = ProductTypeCreateCommand.of(new TShirtProductTypeDraftSupplier("product-type-name").get());
 final ProductType productType = client().executeBlocking(command);
 
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/producttypes/Example.java" target="_blank">test code</a>.</pre></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/commercetools-models/src/it/java/io/sphere/sdk/producttypes/Example.java" target="_blank">test code</a>.</pre></div>
 
   <div id="io-sphere-sdk-suppliers-TShirtProductTypeDraftSupplier%s" class=code-example><button type='button' style='display: none;' class='reveal-imports'>show/hide imports</button><pre class='hide code-example-imports'><code class='java'>import io.sphere.sdk.products.attributes.*;
 import io.sphere.sdk.models.EnumValue;
@@ -210,7 +210,7 @@ import static java.util.Locale.GERMAN;
     }
 }
 
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/suppliers/TShirtProductTypeDraftSupplier.java" target="_blank">test code</a>.</pre></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/commercetools-models/src/it/java/io/sphere/sdk/suppliers/TShirtProductTypeDraftSupplier.java" target="_blank">test code</a>.</pre></div>
 
   <p>To create attribute definitions refer to <a href="../../../../../io/sphere/sdk/products/attributes/AttributeDefinition.html" title="interface in io.sphere.sdk.products.attributes"><code>AttributeDefinition</code></a>.</p></div>
 </li>
