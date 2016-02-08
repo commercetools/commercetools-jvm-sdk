@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.function.Function;
 
 /**
- * Query request interface for immutable value classes which can copy themselves with modified fields providing a meta model for convenient creation of expressions.
+ * Internal query request interface for immutable value classes which can copy themselves with modified fields providing a meta model for convenient creation of expressions.
  *
  * @param <T> type of the query result
  * @param <C> type of the class implementing this class
