@@ -34,51 +34,51 @@ object Build extends Build {
     )
 
   //the project definition have to be in .scala files for the module dependency graph
-  lazy val `sphere-jvm-sdk` = (project in file(".")).configs(IntegrationTest)
+  lazy val `commercetools-jvm-sdk` = (project in file(".")).configs(IntegrationTest)
     .settings(unidocSettings:_*)
     .settings(javaUnidocSettings:_*)
-    .settings(unidocProjectFilter in (JavaUnidoc, unidoc) := inAnyProject -- inProjects(`sphere-test-lib`, `sphere-java-client-ahc-1_8`, `sphere-java-client-ahc-1_9`, `sphere-java-client-apache-async`, `sphere-java-client-internal-test`))//need to exclude duplicated classes or "javadoc: error - com.sun.tools.doclets.internal.toolkit.util.DocletAbortException: java.lang.NullPointerException" appears
+    .settings(unidocProjectFilter in (JavaUnidoc, unidoc) := inAnyProject -- inProjects(`commercetools-test-lib`, `commercetools-java-client-ahc-1_8`, `commercetools-java-client-ahc-1_9`, `commercetools-java-client-apache-async`, `commercetools-java-client-internal-test`))//need to exclude duplicated classes or "javadoc: error - com.sun.tools.doclets.internal.toolkit.util.DocletAbortException: java.lang.NullPointerException" appears
     .settings(documentationSettings:_*)
     .settings(commonSettings:_*)
-    .aggregate(`sdk-http-ahc-1_8`, `sdk-http-ahc-1_9`, `sdk-http-ahc-2_0`, `sdk-http-apache-async`, `sdk-http`, `sphere-common`, `sphere-convenience`, `sphere-java-client`, `sphere-java-client-core`, `sphere-java-client-apache-async`, `sphere-models`, `sphere-test-lib`, `sphere-java-client-ahc-1_8`, `sphere-java-client-ahc-1_9`, `sphere-java-client-ahc-2_0`)
-    .dependsOn(`sdk-http-ahc-2_0`, `sdk-http-apache-async`, `sdk-http`, `sphere-common`, `sphere-convenience`, `sphere-java-client`, `sphere-java-client-core`, `sphere-java-client-apache-async`, `sphere-models`, `sphere-test-lib`, `sphere-java-client-ahc-2_0` % "test")
+    .aggregate(`sdk-http-ahc-1_8`, `sdk-http-ahc-1_9`, `sdk-http-ahc-2_0`, `sdk-http-apache-async`, `sdk-http`, `commercetools-sdk-base`, `commercetools-convenience`, `commercetools-java-client`, `commercetools-java-client-core`, `commercetools-java-client-apache-async`, `commercetools-models`, `commercetools-test-lib`, `commercetools-java-client-ahc-1_8`, `commercetools-java-client-ahc-1_9`, `commercetools-java-client-ahc-2_0`)
+    .dependsOn(`sdk-http-ahc-2_0`, `sdk-http-apache-async`, `sdk-http`, `commercetools-sdk-base`, `commercetools-convenience`, `commercetools-java-client`, `commercetools-java-client-core`, `commercetools-java-client-apache-async`, `commercetools-models`, `commercetools-test-lib`, `commercetools-java-client-ahc-2_0` % "test")
     .settings(libraryDependencies += "net.sourceforge.plantuml" % "plantuml" % "8019" % "test")
 
-  lazy val `sphere-java-client-core` = project.configs(IntegrationTest).dependsOn(`sphere-common`).settings(commonSettings:_*)
+  lazy val `commercetools-java-client-core` = project.configs(IntegrationTest).dependsOn(`commercetools-sdk-base`).settings(commonSettings:_*)
     .settings(libraryDependencies ++= allTestLibs.map(_ % "test,it"))
 
-  lazy val `sphere-java-client-internal-test` = project.dependsOn(`sphere-java-client-core`).settings(commonSettings:_*).settings(
+  lazy val `commercetools-java-client-internal-test` = project.dependsOn(`commercetools-java-client-core`).settings(commonSettings:_*).settings(
     libraryDependencies ++= allTestLibs,
     libraryDependencies += `commons-io`
   ).configs(IntegrationTest)
 
-  lazy val `sphere-java-client` = project.configs(IntegrationTest).dependsOn(`sphere-java-client-ahc-2_0`).settings(commonSettings:_*)
+  lazy val `commercetools-java-client` = project.configs(IntegrationTest).dependsOn(`commercetools-java-client-ahc-2_0`).settings(commonSettings:_*)
 
-  lazy val `sphere-java-client-ahc-1_8` = project.configs(IntegrationTest).dependsOn(`sdk-http-ahc-1_8`, `sphere-java-client-core`, `sphere-java-client-internal-test` % "test,it", `sphere-models` % "test,it", `sphere-test-lib` % "test,it").settings(commonSettings:_*)
+  lazy val `commercetools-java-client-ahc-1_8` = project.configs(IntegrationTest).dependsOn(`sdk-http-ahc-1_8`, `commercetools-java-client-core`, `commercetools-java-client-internal-test` % "test,it", `commercetools-models` % "test,it", `commercetools-test-lib` % "test,it").settings(commonSettings:_*)
     .settings(libraryDependencies += Libs.`async-http-client-1.8` % "test,it" force()).configs(IntegrationTest)
 
-  lazy val `sphere-java-client-ahc-1_9` = project.configs(IntegrationTest).dependsOn(`sdk-http-ahc-1_9`, `sphere-java-client-core`, `sphere-java-client-internal-test` % "test,it").settings(commonSettings:_*)
+  lazy val `commercetools-java-client-ahc-1_9` = project.configs(IntegrationTest).dependsOn(`sdk-http-ahc-1_9`, `commercetools-java-client-core`, `commercetools-java-client-internal-test` % "test,it").settings(commonSettings:_*)
     .settings().configs(IntegrationTest)
 
-  lazy val `sphere-java-client-ahc-2_0` = project.configs(IntegrationTest).dependsOn(`sdk-http-ahc-2_0`, `sphere-java-client-core`, `sphere-java-client-internal-test` % "test,it").settings(commonSettings:_*)
+  lazy val `commercetools-java-client-ahc-2_0` = project.configs(IntegrationTest).dependsOn(`sdk-http-ahc-2_0`, `commercetools-java-client-core`, `commercetools-java-client-internal-test` % "test,it").settings(commonSettings:_*)
     .settings().configs(IntegrationTest)
 
-  lazy val `sphere-java-client-apache-async` = project.configs(IntegrationTest).dependsOn(`sdk-http-apache-async`, `sphere-java-client-core`, `sphere-java-client-internal-test` % "test,it").settings(commonSettings:_*)
+  lazy val `commercetools-java-client-apache-async` = project.configs(IntegrationTest).dependsOn(`sdk-http-apache-async`, `commercetools-java-client-core`, `commercetools-java-client-internal-test` % "test,it").settings(commonSettings:_*)
     .settings().configs(IntegrationTest)
 
-  lazy val `sdk-http-ahc-1_8` = project.configs(IntegrationTest).dependsOn(`sdk-http`, `sphere-java-client-internal-test` % "test,it").settings(commonSettings:_*)
+  lazy val `sdk-http-ahc-1_8` = project.configs(IntegrationTest).dependsOn(`sdk-http`, `commercetools-java-client-internal-test` % "test,it").settings(commonSettings:_*)
     .settings(libraryDependencies ++= Seq(`async-http-client-1.8`, `commons-io`)).configs(IntegrationTest)
 
-  lazy val `sdk-http-ahc-1_9` = project.configs(IntegrationTest).dependsOn(`sdk-http`, `sphere-java-client-internal-test` % "test,it").settings(commonSettings:_*)
+  lazy val `sdk-http-ahc-1_9` = project.configs(IntegrationTest).dependsOn(`sdk-http`, `commercetools-java-client-internal-test` % "test,it").settings(commonSettings:_*)
     .settings(libraryDependencies += `async-http-client-1.9`).configs(IntegrationTest)
 
-  lazy val `sdk-http-ahc-2_0` = project.configs(IntegrationTest).dependsOn(`sdk-http`, `sphere-java-client-internal-test` % "test,it").settings(commonSettings:_*)
+  lazy val `sdk-http-ahc-2_0` = project.configs(IntegrationTest).dependsOn(`sdk-http`, `commercetools-java-client-internal-test` % "test,it").settings(commonSettings:_*)
     .settings(libraryDependencies += `async-http-client-2.0`).configs(IntegrationTest)
 
-  lazy val `sdk-http-apache-async` = project.configs(IntegrationTest).dependsOn(`sdk-http`, `sphere-java-client-internal-test` % "test,it").settings(commonSettings:_*)
+  lazy val `sdk-http-apache-async` = project.configs(IntegrationTest).dependsOn(`sdk-http`, `commercetools-java-client-internal-test` % "test,it").settings(commonSettings:_*)
     .settings(libraryDependencies ++= `apache-httpasyncclient` :: `commons-io` :: Nil).configs(IntegrationTest)
 
-  lazy val `sphere-common` = project.configs(IntegrationTest).dependsOn(`sdk-http`)
+  lazy val `commercetools-sdk-base` = project.configs(IntegrationTest).dependsOn(`sdk-http`)
     .settings(writeVersionSettings: _*)
     .settings(commonSettings:_*)
     .settings(libraryDependencies ++= `jackson` ++ allTestLibs.map(_ % "test,it") ++
@@ -100,16 +100,16 @@ object Build extends Build {
      Nil)
     )
 
-  lazy val `sphere-models` = project.configs(IntegrationTest)
-    .dependsOn(`sphere-common`, `sphere-java-client-apache-async` % "test,it", `sphere-test-lib` % "test,it")
+  lazy val `commercetools-models` = project.configs(IntegrationTest)
+    .dependsOn(`commercetools-sdk-base`, `commercetools-java-client-apache-async` % "test,it", `commercetools-test-lib` % "test,it")
     .settings(commonSettings:_*)
     .settings(libraryDependencies += `gson` % "test,it")
 
-  lazy val `sphere-convenience` = project.configs(IntegrationTest)
-    .dependsOn(`sphere-common`, `sphere-java-client-core`, `sphere-test-lib` % "test,it", `sphere-models` % "test,it")
+  lazy val `commercetools-convenience` = project.configs(IntegrationTest)
+    .dependsOn(`commercetools-sdk-base`, `commercetools-java-client-core`, `commercetools-test-lib` % "test,it", `commercetools-models` % "test,it")
     .settings(commonSettings:_*)
 
-  lazy val `sphere-test-lib` = project.configs(IntegrationTest).dependsOn(`sphere-java-client`, `sphere-common`).settings(commonSettings:_*)
+  lazy val `commercetools-test-lib` = project.configs(IntegrationTest).dependsOn(`commercetools-java-client`, `commercetools-sdk-base`).settings(commonSettings:_*)
     .settings(
       libraryDependencies ++= allTestLibs ++ (`commons-io` :: Nil)
     )
@@ -162,10 +162,10 @@ object Build extends Build {
       }.toList
       val x = projectToDependencies.map { case (id, deps) =>
         deps.map(dep => '"' + id + '"' + "->" + '"' + dep + '"').filterNot(s =>
-          s == "\"" + `sphere-models`.id +  "\"->\"" + `sphere-java-client-apache-async`.id + "\""
-            || s.startsWith('"' + `sphere-java-client-internal-test`.id)
-            || s.startsWith("\"" + `sphere-test-lib`.id)
-            || s.startsWith("\"" + `sphere-jvm-sdk`.id)).mkString("\n")
+          s == "\"" + `commercetools-models`.id +  "\"->\"" + `commercetools-java-client-apache-async`.id + "\""
+            || s.startsWith('"' + `commercetools-java-client-internal-test`.id)
+            || s.startsWith("\"" + `commercetools-test-lib`.id)
+            || s.startsWith("\"" + `commercetools-jvm-sdk`.id)).mkString("\n")
       }.mkString("\n")
       val content = s"""digraph TrafficLights {
                           |$x
