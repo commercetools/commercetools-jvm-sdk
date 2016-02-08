@@ -115,7 +115,7 @@ extends <a href="../../../../../io/sphere/sdk/commands/DraftBasedCreateCommand.h
  <div id="io-sphere-sdk-products-CreateProductExamples-createWithClient--%s" class=code-example><pre><code class='java'>final ProductDraft productTemplate = new SimpleCottonTShirtProductDraftSupplier(productType, "demo product").get();
 final ProductCreateCommand command = ProductCreateCommand.of(productTemplate);
 final CompletionStage&lt;Product&gt; result = client.execute(command);
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/products/CreateProductExamples.java" target="_blank">test code</a>.</pre></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/commercetools-models/src/it/java/io/sphere/sdk/products/CreateProductExamples.java" target="_blank">test code</a>.</pre></div>
 
  Create a <a href="../../../../../io/sphere/sdk/products/ProductDraft.html" title="interface in io.sphere.sdk.products"><code>ProductDraft</code></a> instance:
  <div id="io-sphere-sdk-suppliers-SimpleCottonTShirtProductDraftSupplier%s" class=code-example><button type='button' style='display: none;' class='reveal-imports'>show/hide imports</button><pre class='hide code-example-imports'><code class='java'>import io.sphere.sdk.models.LocalizedString;
@@ -156,7 +156,7 @@ import java.util.function.Supplier;
         return LocalizedString.of(Locale.ENGLISH, value);
     }
 }
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/suppliers/SimpleCottonTShirtProductDraftSupplier.java" target="_blank">test code</a>.</pre></div></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/commercetools-models/src/it/java/io/sphere/sdk/suppliers/SimpleCottonTShirtProductDraftSupplier.java" target="_blank">test code</a>.</pre></div></div>
 </li>
 </ul>
 </div>

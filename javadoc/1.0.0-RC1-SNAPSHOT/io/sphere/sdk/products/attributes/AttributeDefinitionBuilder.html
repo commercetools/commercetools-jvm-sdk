@@ -131,7 +131,7 @@ implements <a href="../../../../../io/sphere/sdk/models/Builder.html" title="int
 
 final ProductTypeDraft productTypeDraft = ProductTypeDraft.of(randomKey(), BOOK_PRODUCT_TYPE_NAME, "books", asList(isbn));
 final ProductType productType = client().executeBlocking(ProductTypeCreateCommand.of(productTypeDraft));
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/attributestutorial/ProductTypeCreationDemoTest.java" target="_blank">test code</a>.</pre></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/commercetools-models/src/it/java/io/sphere/sdk/attributestutorial/ProductTypeCreationDemoTest.java" target="_blank">test code</a>.</pre></div>
  <p>long example:</p>
  <div id="io-sphere-sdk-attributestutorial-ProductTypeCreationDemoTest-createProductType--%s" class=code-example><pre><code class='java'>final LocalizedEnumValue green = LocalizedEnumValue.of("green",
         LocalizedString.of(ENGLISH, "green").plus(GERMAN, "grün"));
@@ -180,7 +180,7 @@ final List&lt;AttributeDefinition&gt; attributes = asList(color, size, laundrySy
         matchingProducts, rrp, availableSince);
 final ProductTypeDraft productTypeDraft = ProductTypeDraft.of(randomKey(), PRODUCT_TYPE_NAME, "a 'T' shaped cloth", attributes);
 final ProductType productType = client().executeBlocking(ProductTypeCreateCommand.of(productTypeDraft));
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/attributestutorial/ProductTypeCreationDemoTest.java" target="_blank">test code</a>.</pre></div></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/commercetools-models/src/it/java/io/sphere/sdk/attributestutorial/ProductTypeCreationDemoTest.java" target="_blank">test code</a>.</pre></div></div>
 </li>
 </ul>
 </div>

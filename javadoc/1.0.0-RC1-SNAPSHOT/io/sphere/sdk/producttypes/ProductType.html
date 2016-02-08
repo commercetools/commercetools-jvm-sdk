@@ -403,14 +403,14 @@ static&nbsp;java.lang.String&nbsp;typeId()</pre>
  <div id="io-sphere-sdk-categories-CategoryTest-referenceOfId--%s" class=code-example><pre><code class='java'>final String categoryIdFromFormOrSession = "84ac4271-0fec-49d0-9fee-55586c565c58";
 final Reference&lt;Category&gt; categoryReference = Category.referenceOfId(categoryIdFromFormOrSession);
 assertThat(categoryReference.getId()).isEqualTo(categoryIdFromFormOrSession);
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/test/java/io/sphere/sdk/categories/CategoryTest.java" target="_blank">test code</a>.</pre></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/commercetools-models/src/test/java/io/sphere/sdk/categories/CategoryTest.java" target="_blank">test code</a>.</pre></div>
 
  <p>If you already have a resource object, then use <a href="../../../../io/sphere/sdk/producttypes/ProductType.html#toReference--"><code>toReference()</code></a> instead:</p>
 
  <div id="io-sphere-sdk-categories-CategoryTest-toReference--%s" class=code-example><pre><code class='java'>final Category category = getCategory();
 final Reference&lt;Category&gt; categoryReference = category.toReference();
 assertThat(category.getId()).isEqualTo(categoryReference.getId());
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/test/java/io/sphere/sdk/categories/CategoryTest.java" target="_blank">test code</a>.</pre></div></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/commercetools-models/src/test/java/io/sphere/sdk/categories/CategoryTest.java" target="_blank">test code</a>.</pre></div></div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>id</code> - the ID of the resource which should be referenced.</dd>

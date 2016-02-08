@@ -179,39 +179,28 @@ try (final InputStream resourceAsStream = Thread.currentThread().getContextClass
         }
     }
 }
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-convenience/src/it/java/io/sphere/sdk/meta/CategoryDocumentationTest.java" target="_blank">test code</a>.</pre></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/commercetools-convenience/src/it/java/io/sphere/sdk/meta/CategoryDocumentationTest.java" target="_blank">test code</a>.</pre></div>
 
  <h3 id="read-categories">Fetch all categories</h3>
 <h4>Fetch all</h4>
  If categories don't change often it is a good idea to just cache them.
- You can use <a href="../../../../io/sphere/sdk/queries/ExperimentalReactiveStreamUtils.html" title="class in io.sphere.sdk.queries"><code>ExperimentalReactiveStreamUtils</code></a> to do this:
+ You can use <a href="../../../../io/sphere/sdk/queries/QueryExecutionUtils.html" title="class in io.sphere.sdk.queries"><code>QueryExecutionUtils</code></a> to do this:
 
- <div id="io-sphere-sdk-meta-CategoryDocumentationTest-fetchAll--%s" class=code-example><pre><code class='java'>final Publisher&lt;Category&gt; categoryPublisher =
-        ExperimentalReactiveStreamUtils.publisherOf(CategoryQuery.of(), sphereClient());
-final CompletionStage&lt;List&lt;Category&gt;&gt; categoriesStage =
-        ExperimentalReactiveStreamUtils.collectAll(categoryPublisher);
-
-
-
-
-
+ <div id="io-sphere-sdk-meta-CategoryDocumentationTest-fetchAll--%s" class=code-example><pre><code class='java'>final CompletionStage&lt;List&lt;Category&gt;&gt; categoriesStage = QueryExecutionUtils.queryAll(client(), CategoryQuery.of(), 500);
 final List&lt;Category&gt; categories = categoriesStage.toCompletableFuture().join();
 assertThat(categories)
         .hasSize(15)
         .matches(cats -&gt; cats.parallelStream().anyMatch(cat -&gt; cat.getSlug().get(ENGLISH).equals("boots-women")));
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-convenience/src/it/java/io/sphere/sdk/meta/CategoryDocumentationTest.java" target="_blank">test code</a>.</pre></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/commercetools-convenience/src/it/java/io/sphere/sdk/meta/CategoryDocumentationTest.java" target="_blank">test code</a>.</pre></div>
  <h4>Fetch all with predicate</h4>
  Sometimes you want to fetch just the root categories to delete them all:
  <div id="io-sphere-sdk-meta-CategoryDocumentationTest-fetchRoots--%s" class=code-example><pre><code class='java'>final CategoryQuery seedQuery = CategoryQuery.of().withPredicates(m -&gt; m.parent().isNotPresent());
-final Publisher&lt;Category&gt; categoryPublisher =
-        ExperimentalReactiveStreamUtils.publisherOf(seedQuery, sphereClient());
-final CompletionStage&lt;List&lt;Category&gt;&gt; categoriesStage =
-        ExperimentalReactiveStreamUtils.collectAll(categoryPublisher);
+final CompletionStage&lt;List&lt;Category&gt;&gt; categoriesStage = QueryExecutionUtils.queryAll(client(), seedQuery);
 final List&lt;Category&gt; rootCategories = categoriesStage.toCompletableFuture().join();
 assertThat(rootCategories.stream().allMatch(cat -&gt; cat.getParent() == null))
         .overridingErrorMessage("fetched only root categories")
         .isTrue();
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-convenience/src/it/java/io/sphere/sdk/meta/CategoryDocumentationTest.java" target="_blank">test code</a>.</pre></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/commercetools-convenience/src/it/java/io/sphere/sdk/meta/CategoryDocumentationTest.java" target="_blank">test code</a>.</pre></div>
 
 
  <h3 id="category-tree">Work with a cached tree of categories</h3>
@@ -220,16 +209,13 @@ assertThat(rootCategories.stream().allMatch(cat -&gt; cat.getParent() == null))
  The list of all categories is required to form a category tree:
 
  <div id="io-sphere-sdk-meta-CategoryDocumentationTest-createCategoryTree--%s" class=code-example><pre><code class='java'>//stuff from previous example
-final Publisher&lt;Category&gt; categoryPublisher =
-        ExperimentalReactiveStreamUtils.publisherOf(CategoryQuery.of(), sphereClient());
-final CompletionStage&lt;List&lt;Category&gt;&gt; categoriesStage =
-        ExperimentalReactiveStreamUtils.collectAll(categoryPublisher);
+final CompletionStage&lt;List&lt;Category&gt;&gt; categoriesStage = QueryExecutionUtils.queryAll(client(), CategoryQuery.of());
 final List&lt;Category&gt; categories = categoriesStage.toCompletableFuture().join();
 
 //creation of a category tree
 final CategoryTree categoryTree = CategoryTree.of(categories);
 return categoryTree;
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-convenience/src/it/java/io/sphere/sdk/meta/CategoryDocumentationTest.java" target="_blank">test code</a>.</pre></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/commercetools-convenience/src/it/java/io/sphere/sdk/meta/CategoryDocumentationTest.java" target="_blank">test code</a>.</pre></div>
 
  With a <a href="../../../../io/sphere/sdk/categories/CategoryTree.html" title="interface in io.sphere.sdk.categories"><code>CategoryTree</code></a> you can find categories by slug, by ID and search categories by their parent.
 
@@ -254,7 +240,7 @@ final List&lt;String&gt; names = clothingWomenSubcategories.stream()
         .sorted()
         .collect(toList());
 assertThat(names).contains("jeans", "t-shirts");
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-convenience/src/it/java/io/sphere/sdk/meta/CategoryDocumentationTest.java" target="_blank">test code</a>.</pre></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/commercetools-convenience/src/it/java/io/sphere/sdk/meta/CategoryDocumentationTest.java" target="_blank">test code</a>.</pre></div>
 
  <h4>Render a whole tree</h4>
  <div id="io-sphere-sdk-meta-CategoryTreeTextRepresentation%s" class=code-example><button type='button' style='display: none;' class='reveal-imports'>show/hide imports</button><pre class='hide code-example-imports'><code class='java'>import io.sphere.sdk.categories.Category;
@@ -309,7 +295,7 @@ import static org.assertj.core.api.Assertions.assertThat;
                 .forEach(child -&gt; appendToBuilder(child, stringBuilder, categoryTree, level + 1));
     }
 }
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-convenience/src/it/java/io/sphere/sdk/meta/CategoryTreeTextRepresentation.java" target="_blank">test code</a>.</pre></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/commercetools-convenience/src/it/java/io/sphere/sdk/meta/CategoryTreeTextRepresentation.java" target="_blank">test code</a>.</pre></div>
 
  <h4>Render a breadcrumb</h4>
 
@@ -327,7 +313,7 @@ final String ancestorCategoriesString = ancestorReferences.stream()
         .collect(joining(" &gt; "));
 final String actual = ancestorCategoriesString + " &gt; " + formatCategory.apply(currentCategory);
 assertThat(actual).isEqualTo("1 men &gt; 3 clothing &gt; 7 t-shirts");
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-convenience/src/it/java/io/sphere/sdk/meta/CategoryDocumentationTest.java" target="_blank">test code</a>.</pre></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/commercetools-convenience/src/it/java/io/sphere/sdk/meta/CategoryDocumentationTest.java" target="_blank">test code</a>.</pre></div>
 
  <h4>Render a partial tree</h4>
  <div id="io-sphere-sdk-meta-RenderAPartialTree%s" class=code-example><button type='button' style='display: none;' class='reveal-imports'>show/hide imports</button><pre class='hide code-example-imports'><code class='java'>import io.sphere.sdk.categories.Category;
@@ -391,7 +377,7 @@ import static org.assertj.core.api.Assertions.assertThat;
                 .forEach(child -&gt; appendToBuilder(child, stringBuilder, categoryTree, level + 1, selectedCategory));
     }
 }
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-convenience/src/it/java/io/sphere/sdk/meta/RenderAPartialTree.java" target="_blank">test code</a>.</pre></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/commercetools-convenience/src/it/java/io/sphere/sdk/meta/RenderAPartialTree.java" target="_blank">test code</a>.</pre></div>
 
 
 
@@ -431,7 +417,7 @@ assertThat(actual).isEqualTo(
                 "        6 shoes\n" +
                 "            13 sandals\n" +
                 "            14 boots\n");
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-convenience/src/it/java/io/sphere/sdk/meta/CategoryDocumentationTest.java" target="_blank">test code</a>.</pre></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/commercetools-convenience/src/it/java/io/sphere/sdk/meta/CategoryDocumentationTest.java" target="_blank">test code</a>.</pre></div>
 
  <h3 id="category-tree-changes">Change the category tree</h3>
 
@@ -483,7 +469,7 @@ assertThat(actual).isEqualTo(
                 "    3 clothing\n" +
                 "        7 t-shirts\n" +
                 "        8 jeans\n");
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-convenience/src/it/java/io/sphere/sdk/meta/CategoryDocumentationTest.java" target="_blank">test code</a>.</pre></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/commercetools-convenience/src/it/java/io/sphere/sdk/meta/CategoryDocumentationTest.java" target="_blank">test code</a>.</pre></div>
 
 
  <h3 id="find-product-by-category">Find products in a category tree</h3>
@@ -536,7 +522,7 @@ withProductInCategory(client(), jeansCategory, jeansProduct -&gt; {
                         .anyMatch(product -&gt; product.getCategories().contains(tshirtCategory.toReference())));
     });
 });
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-convenience/src/it/java/io/sphere/sdk/meta/CategoryDocumentationTest.java" target="_blank">test code</a>.</pre></div></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/commercetools-convenience/src/it/java/io/sphere/sdk/meta/CategoryDocumentationTest.java" target="_blank">test code</a>.</pre></div></div>
 </li>
 </ul>
 </div>

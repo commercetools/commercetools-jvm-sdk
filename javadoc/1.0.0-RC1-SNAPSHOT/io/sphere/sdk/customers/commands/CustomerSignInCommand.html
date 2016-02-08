@@ -139,7 +139,7 @@ extends <a href="../../../../../io/sphere/sdk/commands/CommandImpl.html" title="
     final CustomerSignInResult result = client().executeBlocking(CustomerSignInCommand.of(customer.getEmail(), PASSWORD));
     assertThat(result.getCustomer()).isEqualTo(customer);
 });
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/customers/commands/CustomerSignInCommandTest.java" target="_blank">test code</a>.</pre></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/commercetools-models/src/it/java/io/sphere/sdk/customers/commands/CustomerSignInCommandTest.java" target="_blank">test code</a>.</pre></div>
 
  <p>Example for a signin where the customer has a cart and signs in with an anonymous cart</p>
  <div id="io-sphere-sdk-customers-commands-CustomerSignInCommandTest-signInWithAnonymousCart--%s" class=code-example><pre><code class='java'>withCustomerCustomerCartAndAnonymousCart(client(), customer -&gt; customersCart -&gt; anonymousCart -&gt; {
@@ -174,7 +174,7 @@ extends <a href="../../../../../io/sphere/sdk/commands/CommandImpl.html" title="
     final Cart abandonedCart = client().executeBlocking(CartByIdGet.of(anonymousCart.getId()));
     assertThat(abandonedCart.getCartState()).isEqualTo(CartState.MERGED);
 });
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/customers/commands/CustomerSignInCommandTest.java" target="_blank">test code</a>.</pre></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/commercetools-models/src/it/java/io/sphere/sdk/customers/commands/CustomerSignInCommandTest.java" target="_blank">test code</a>.</pre></div>
 
   <p>Example for invalid credentials:</p>
  <div id="io-sphere-sdk-customers-commands-CustomerSignInCommandTest-executionWithInvalidEmail--%s" class=code-example><pre><code class='java'>withCustomer(client(), customer -&gt; {
@@ -182,7 +182,7 @@ extends <a href="../../../../../io/sphere/sdk/commands/CommandImpl.html" title="
             .isInstanceOf(ErrorResponseException.class)
             .matches(e -&gt; ((ErrorResponseException) e).hasErrorCode(CustomerInvalidCredentials.CODE));
 });
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/customers/commands/CustomerSignInCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/commercetools-models/src/it/java/io/sphere/sdk/customers/commands/CustomerSignInCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 <dl>
 <dt><span class="seeLabel">See Also:</span></dt>
 <dd><a href="../../../../../io/sphere/sdk/customers/Customer.html" title="interface in io.sphere.sdk.customers"><code>Customer</code></a>, 

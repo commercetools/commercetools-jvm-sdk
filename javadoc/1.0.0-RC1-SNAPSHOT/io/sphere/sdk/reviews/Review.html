@@ -136,7 +136,7 @@ import static java.util.Collections.singleton;
         return asList(initialState, approvedState);
     }
 }
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/reviews/approvaldemo/CreateReviewStates.java" target="_blank">test code</a>.</pre></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/commercetools-models/src/it/java/io/sphere/sdk/reviews/approvaldemo/CreateReviewStates.java" target="_blank">test code</a>.</pre></div>
 
  Only states with <a href="../../../../io/sphere/sdk/states/StateRole.html#REVIEW_INCLUDED_IN_STATISTICS"><code>StateRole.REVIEW_INCLUDED_IN_STATISTICS</code></a> makes review ratings count in statistics.
 
@@ -166,7 +166,7 @@ import static org.assertj.core.api.Assertions.assertThat;
         return review;
     }
 }
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/reviews/approvaldemo/CreateReviewToApprove.java" target="_blank">test code</a>.</pre></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/commercetools-models/src/it/java/io/sphere/sdk/reviews/approvaldemo/CreateReviewToApprove.java" target="_blank">test code</a>.</pre></div>
 
  <h4 id=query-to-approve-reviews>Querying which reviews should be approved</h4>
 
@@ -190,7 +190,7 @@ import static org.assertj.core.api.Assertions.assertThat;
         return reviewsToApprove;
     }
 }
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/reviews/approvaldemo/QueryReviewsToApprove.java" target="_blank">test code</a>.</pre></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/commercetools-models/src/it/java/io/sphere/sdk/reviews/approvaldemo/QueryReviewsToApprove.java" target="_blank">test code</a>.</pre></div>
 
  <h4 id=approve-a-review>Approving a review</h4>
 
@@ -211,7 +211,7 @@ import static org.assertj.core.api.Assertions.assertThat;
         return approvedReview;
     }
 }
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/reviews/approvaldemo/ApprovingAReview.java" target="_blank">test code</a>.</pre></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/commercetools-models/src/it/java/io/sphere/sdk/reviews/approvaldemo/ApprovingAReview.java" target="_blank">test code</a>.</pre></div>
 
 <h3 id=displaying-products>Displaying Products</h3>
 <h4 id=search-products-for-minimal-rating>Searching for Products with a Minimal Rating</h4>
@@ -241,7 +241,7 @@ assertEventually(() -&gt; {
     assertThat(facetResult.getRanges().get(2)).isEqualTo(RangeStats.of("2.0", "3.0", 2L, "2.2", "2.7", "4.9", 2.45));
 
 });
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/reviews/ReviewProductProjectionSearchTest.java" target="_blank">test code</a>.</pre></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/commercetools-models/src/it/java/io/sphere/sdk/reviews/ReviewProductProjectionSearchTest.java" target="_blank">test code</a>.</pre></div>
 
  <h4 id=query-approved-reviews-for-one-product>Getting reviews for one product (only approved)</h4>
  <div id="io-sphere-sdk-reviews-ReviewProductProjectionSearchTest-getApprovedReviewsForOneProduct--%s" class=code-example><pre><code class='java'>final String productId = product.getId();
@@ -253,7 +253,7 @@ final List&lt;Review&gt; reviews = client().executeBlocking(reviewQuery).getResu
 assertThat(reviews).hasSize(REVIEWS_PER_PRODUCT);
 assertThat(reviews).extracting(r -&gt; r.getTarget().getId()).containsOnlyElementsOf(singletonList(productId));
 assertThat(reviews).extracting(r -&gt; r.isIncludedInStatistics()).containsOnlyElementsOf(singletonList(true));
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/reviews/ReviewProductProjectionSearchTest.java" target="_blank">test code</a>.</pre></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/commercetools-models/src/it/java/io/sphere/sdk/reviews/ReviewProductProjectionSearchTest.java" target="_blank">test code</a>.</pre></div>
 
  <h4 id=query-reviews-for-one-product>Getting reviews for one product</h4>
  <div id="io-sphere-sdk-reviews-ReviewProductProjectionSearchTest-getReviewsForOneProduct--%s" class=code-example><pre><code class='java'>final String productId = product.getId();
@@ -264,7 +264,7 @@ final ReviewQuery reviewQuery = ReviewQuery.of()
 final List&lt;Review&gt; reviews = client().executeBlocking(reviewQuery).getResults();
 assertThat(reviews).hasSize(REVIEWS_PER_PRODUCT);
 assertThat(reviews).extracting(r -&gt; r.getTarget().getId()).containsOnlyElementsOf(singletonList(productId));
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/reviews/ReviewProductProjectionSearchTest.java" target="_blank">test code</a>.</pre></div></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/commercetools-models/src/it/java/io/sphere/sdk/reviews/ReviewProductProjectionSearchTest.java" target="_blank">test code</a>.</pre></div></div>
 <dl>
 <dt><span class="seeLabel">See Also:</span></dt>
 <dd><a href="../../../../io/sphere/sdk/reviews/commands/ReviewCreateCommand.html" title="interface in io.sphere.sdk.reviews.commands"><code>ReviewCreateCommand</code></a>, 
@@ -690,14 +690,14 @@ java.lang.String&nbsp;getUniquenessValue()</pre>
  <div id="io-sphere-sdk-categories-CategoryTest-referenceOfId--%s" class=code-example><pre><code class='java'>final String categoryIdFromFormOrSession = "84ac4271-0fec-49d0-9fee-55586c565c58";
 final Reference&lt;Category&gt; categoryReference = Category.referenceOfId(categoryIdFromFormOrSession);
 assertThat(categoryReference.getId()).isEqualTo(categoryIdFromFormOrSession);
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/test/java/io/sphere/sdk/categories/CategoryTest.java" target="_blank">test code</a>.</pre></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/commercetools-models/src/test/java/io/sphere/sdk/categories/CategoryTest.java" target="_blank">test code</a>.</pre></div>
 
  <p>If you already have a resource object, then use <a href="../../../../io/sphere/sdk/reviews/Review.html#toReference--"><code>toReference()</code></a> instead:</p>
 
  <div id="io-sphere-sdk-categories-CategoryTest-toReference--%s" class=code-example><pre><code class='java'>final Category category = getCategory();
 final Reference&lt;Category&gt; categoryReference = category.toReference();
 assertThat(category.getId()).isEqualTo(categoryReference.getId());
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/test/java/io/sphere/sdk/categories/CategoryTest.java" target="_blank">test code</a>.</pre></div></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/commercetools-models/src/test/java/io/sphere/sdk/categories/CategoryTest.java" target="_blank">test code</a>.</pre></div></div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>id</code> - the ID of the resource which should be referenced.</dd>
