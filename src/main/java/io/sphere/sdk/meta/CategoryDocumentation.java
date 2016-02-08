@@ -6,11 +6,11 @@ import io.sphere.sdk.queries.QueryExecutionUtils;
 /**
  <h3 id="category-creation">Create a tree of categories</h3>
  Lets suppose we want to create this category tree (the number before the name is the externalId):
- <pre><code>{@doc.gen include file sphere-convenience/src/it/resources/category-tree-1.txt}</code></pre>
+ <pre><code>{@doc.gen include file commercetools-convenience/src/it/resources/category-tree-1.txt}</code></pre>
 
  To define the category tree in a CSV format we start with the top level categories so that each parent category appears before its child categories:
 
- <pre><code>{@doc.gen include file sphere-convenience/src/it/resources/category-import-1.csv}</code></pre>
+ <pre><code>{@doc.gen include file commercetools-convenience/src/it/resources/category-import-1.csv}</code></pre>
 
 Then we can write some script to parse the csv and create them in sphere:
 

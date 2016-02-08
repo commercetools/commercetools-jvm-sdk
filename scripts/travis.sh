@@ -17,7 +17,7 @@ msct/jvmsdktest"
 eval "$cmd sh -c './sbt genDoc test it:test'"
 test_result=$?
 eval "$cmd sh -c 'bash scripts/publish-javadoc-branch-folder.sh > /dev/null 2> /dev/null'"
-eval "$cmd sh -c './sbt \"sphere-models/it:test::runMain io.sphere.sdk.client.MainMethodThreadLeakTest\"'"
+eval "$cmd sh -c './sbt \"commercetools-models/it:test::runMain io.sphere.sdk.client.MainMethodThreadLeakTest\"'"
 eval "$cmd sh -c './sbt \"test:runMain introspection.rules.RulesMain\"'"
 if [ $test_result -eq 0 ]; then
   eval "$cmd sh -c 'bash scripts/publish-javadoc-version-folder.sh > /dev/null 2> /dev/null'"

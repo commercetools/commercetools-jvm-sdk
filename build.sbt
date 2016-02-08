@@ -1,6 +1,6 @@
 import Build._
 
-organization in ThisBuild := "io.sphere.sdk.jvm"
+organization in ThisBuild := "com.commercetools.sdk.jvm.core"
 
 autoScalaLibrary in ThisBuild := false // no dependency to Scala standard library
 

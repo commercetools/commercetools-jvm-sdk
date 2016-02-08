@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if [ "$TRAVIS_PULL_REQUEST" = "false" ]; then ./sbt -J-Xmx512m "sphere-jvm-sdk/gitPublish target/javaunidoc
+if [ "$TRAVIS_PULL_REQUEST" = "false" ]; then ./sbt -J-Xmx512m "commercetools-jvm-sdk/gitPublish target/javaunidoc
   https://$GH_TOKEN:x-oauth-basic@github.com/$TRAVIS_REPO_SLUG.git \"javadoc/$TRAVIS_BRANCH\"
   sphere-oss automation@commercetools.de"
 fi
