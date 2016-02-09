@@ -91,7 +91,6 @@
 </ul>
 <h2 title="Interface Hierarchy">Interface Hierarchy</h2>
 <ul>
-<li type="circle">io.sphere.sdk.channels.<a href="../../../../io/sphere/sdk/channels/ChannelDraft.html" title="interface in io.sphere.sdk.channels"><span class="typeNameLink">ChannelDraft</span></a></li>
 <li type="circle">io.sphere.sdk.models.<a href="../../../../io/sphere/sdk/models/CreationTimestamped.html" title="interface in io.sphere.sdk.models"><span class="typeNameLink">CreationTimestamped</span></a>
 <ul>
 <li type="circle">io.sphere.sdk.models.<a href="../../../../io/sphere/sdk/models/Timestamped.html" title="interface in io.sphere.sdk.models"><span class="typeNameLink">Timestamped</span></a>
@@ -100,7 +99,7 @@
 <ul>
 <li type="circle">io.sphere.sdk.models.<a href="../../../../io/sphere/sdk/models/Resource.html" title="interface in io.sphere.sdk.models"><span class="typeNameLink">Resource</span></a>&lt;T&gt; (also extends io.sphere.sdk.models.<a href="../../../../io/sphere/sdk/models/Referenceable.html" title="interface in io.sphere.sdk.models">Referenceable</a>&lt;T&gt;, io.sphere.sdk.models.<a href="../../../../io/sphere/sdk/models/Versioned.html" title="interface in io.sphere.sdk.models">Versioned</a>&lt;T&gt;)
 <ul>
-<li type="circle">io.sphere.sdk.channels.<a href="../../../../io/sphere/sdk/channels/Channel.html" title="interface in io.sphere.sdk.channels"><span class="typeNameLink">Channel</span></a></li>
+<li type="circle">io.sphere.sdk.channels.<a href="../../../../io/sphere/sdk/channels/Channel.html" title="interface in io.sphere.sdk.channels"><span class="typeNameLink">Channel</span></a> (also extends io.sphere.sdk.models.<a href="../../../../io/sphere/sdk/models/WithKey.html" title="interface in io.sphere.sdk.models">WithKey</a>)</li>
 </ul>
 </li>
 </ul>
@@ -115,14 +114,14 @@
 <ul>
 <li type="circle">io.sphere.sdk.models.<a href="../../../../io/sphere/sdk/models/Resource.html" title="interface in io.sphere.sdk.models"><span class="typeNameLink">Resource</span></a>&lt;T&gt; (also extends io.sphere.sdk.models.<a href="../../../../io/sphere/sdk/models/Referenceable.html" title="interface in io.sphere.sdk.models">Referenceable</a>&lt;T&gt;, io.sphere.sdk.models.<a href="../../../../io/sphere/sdk/models/ResourceView.html" title="interface in io.sphere.sdk.models">ResourceView</a>&lt;T,O&gt;)
 <ul>
-<li type="circle">io.sphere.sdk.channels.<a href="../../../../io/sphere/sdk/channels/Channel.html" title="interface in io.sphere.sdk.channels"><span class="typeNameLink">Channel</span></a></li>
+<li type="circle">io.sphere.sdk.channels.<a href="../../../../io/sphere/sdk/channels/Channel.html" title="interface in io.sphere.sdk.channels"><span class="typeNameLink">Channel</span></a> (also extends io.sphere.sdk.models.<a href="../../../../io/sphere/sdk/models/WithKey.html" title="interface in io.sphere.sdk.models">WithKey</a>)</li>
 </ul>
 </li>
 <li type="circle">io.sphere.sdk.models.<a href="../../../../io/sphere/sdk/models/ResourceView.html" title="interface in io.sphere.sdk.models"><span class="typeNameLink">ResourceView</span></a>&lt;T,O&gt; (also extends io.sphere.sdk.models.<a href="../../../../io/sphere/sdk/models/Timestamped.html" title="interface in io.sphere.sdk.models">Timestamped</a>)
 <ul>
 <li type="circle">io.sphere.sdk.models.<a href="../../../../io/sphere/sdk/models/Resource.html" title="interface in io.sphere.sdk.models"><span class="typeNameLink">Resource</span></a>&lt;T&gt; (also extends io.sphere.sdk.models.<a href="../../../../io/sphere/sdk/models/Referenceable.html" title="interface in io.sphere.sdk.models">Referenceable</a>&lt;T&gt;, io.sphere.sdk.models.<a href="../../../../io/sphere/sdk/models/Versioned.html" title="interface in io.sphere.sdk.models">Versioned</a>&lt;T&gt;)
 <ul>
-<li type="circle">io.sphere.sdk.channels.<a href="../../../../io/sphere/sdk/channels/Channel.html" title="interface in io.sphere.sdk.channels"><span class="typeNameLink">Channel</span></a></li>
+<li type="circle">io.sphere.sdk.channels.<a href="../../../../io/sphere/sdk/channels/Channel.html" title="interface in io.sphere.sdk.channels"><span class="typeNameLink">Channel</span></a> (also extends io.sphere.sdk.models.<a href="../../../../io/sphere/sdk/models/WithKey.html" title="interface in io.sphere.sdk.models">WithKey</a>)</li>
 </ul>
 </li>
 </ul>
@@ -137,11 +136,17 @@
 <ul>
 <li type="circle">io.sphere.sdk.models.<a href="../../../../io/sphere/sdk/models/Resource.html" title="interface in io.sphere.sdk.models"><span class="typeNameLink">Resource</span></a>&lt;T&gt; (also extends io.sphere.sdk.models.<a href="../../../../io/sphere/sdk/models/ResourceView.html" title="interface in io.sphere.sdk.models">ResourceView</a>&lt;T,O&gt;, io.sphere.sdk.models.<a href="../../../../io/sphere/sdk/models/Versioned.html" title="interface in io.sphere.sdk.models">Versioned</a>&lt;T&gt;)
 <ul>
-<li type="circle">io.sphere.sdk.channels.<a href="../../../../io/sphere/sdk/channels/Channel.html" title="interface in io.sphere.sdk.channels"><span class="typeNameLink">Channel</span></a></li>
+<li type="circle">io.sphere.sdk.channels.<a href="../../../../io/sphere/sdk/channels/Channel.html" title="interface in io.sphere.sdk.channels"><span class="typeNameLink">Channel</span></a> (also extends io.sphere.sdk.models.<a href="../../../../io/sphere/sdk/models/WithKey.html" title="interface in io.sphere.sdk.models">WithKey</a>)</li>
 </ul>
 </li>
 </ul>
 </li>
+</ul>
+</li>
+<li type="circle">io.sphere.sdk.models.<a href="../../../../io/sphere/sdk/models/WithKey.html" title="interface in io.sphere.sdk.models"><span class="typeNameLink">WithKey</span></a>
+<ul>
+<li type="circle">io.sphere.sdk.channels.<a href="../../../../io/sphere/sdk/channels/Channel.html" title="interface in io.sphere.sdk.channels"><span class="typeNameLink">Channel</span></a> (also extends io.sphere.sdk.models.<a href="../../../../io/sphere/sdk/models/Resource.html" title="interface in io.sphere.sdk.models">Resource</a>&lt;T&gt;)</li>
+<li type="circle">io.sphere.sdk.channels.<a href="../../../../io/sphere/sdk/channels/ChannelDraft.html" title="interface in io.sphere.sdk.channels"><span class="typeNameLink">ChannelDraft</span></a></li>
 </ul>
 </li>
 </ul>

@@ -99,12 +99,17 @@ var activeTableTab = "activeTableTab";
 <ul class="blockList">
 <li class="blockList">
 <dl>
+<dt>All Superinterfaces:</dt>
+<dd><a href="../../../../io/sphere/sdk/models/WithKey.html" title="interface in io.sphere.sdk.models">WithKey</a></dd>
+</dl>
+<dl>
 <dt>All Known Implementing Classes:</dt>
 <dd><a href="../../../../io/sphere/sdk/channels/ChannelDraftDsl.html" title="class in io.sphere.sdk.channels">ChannelDraftDsl</a></dd>
 </dl>
 <hr>
 <br>
-<pre>public interface <span class="typeNameLabel">ChannelDraft</span></pre>
+<pre>public interface <span class="typeNameLabel">ChannelDraft</span>
+extends <a href="../../../../io/sphere/sdk/models/WithKey.html" title="interface in io.sphere.sdk.models">WithKey</a></pre>
 <div class="block">Template to create a new Channel.
 
  <div id="io-sphere-sdk-channels-commands-ChannelCreateCommandTest-execution--%s" class=code-example><pre><code class='java'>final String key = "demo-key";
@@ -183,6 +188,10 @@ assertThat(channel.getRoles()).isEqualTo(asSet(ChannelRole.INVENTORY_SUPPLY));
 <li class="blockList">
 <h4>getKey</h4>
 <pre>java.lang.String&nbsp;getKey()</pre>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../io/sphere/sdk/models/WithKey.html#getKey--">getKey</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/models/WithKey.html" title="interface in io.sphere.sdk.models">WithKey</a></code></dd>
+</dl>
 </li>
 </ul>
 <a name="getRoles--">

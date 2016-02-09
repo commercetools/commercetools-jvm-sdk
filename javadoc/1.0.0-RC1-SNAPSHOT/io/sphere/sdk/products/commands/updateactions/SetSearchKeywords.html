@@ -129,7 +129,7 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html"
  <p>See also <a href="../ProductUpdateCommand.html">ProductUpdateCommand</a>.<p>
 
  <div id="io-sphere-sdk-products-commands-ProductUpdateCommandTest-setSearchKeywords--%s" class=code-example><pre><code class='java'>withUpdateableProduct(client(), product -&gt; {
-    final SearchKeywords searchKeywords = SearchKeywords.of(Locale.ENGLISH, asList(SearchKeyword.of("foo bar baz", CustomSuggestTokenizer.of(asList("foo, baz")))));
+    final SearchKeywords searchKeywords = SearchKeywords.of(Locale.ENGLISH, asList(SearchKeyword.of("Raider", CustomSuggestTokenizer.of(singletonList("Twix")))));
     final ProductUpdateCommand command = ProductUpdateCommand.of(product, SetSearchKeywords.of(searchKeywords));
     final Product updatedProduct = client().executeBlocking(command);
 

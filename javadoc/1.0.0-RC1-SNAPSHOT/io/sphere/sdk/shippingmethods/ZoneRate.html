@@ -115,6 +115,12 @@ var activeTableTab = "activeTableTab";
 <br>
 <pre>public final class <span class="typeNameLabel">ZoneRate</span>
 extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.sphere.sdk.models">Base</a></pre>
+<div class="block">Defines shipping rates (prices) for a specific zone.</div>
+<dl>
+<dt><span class="seeLabel">See Also:</span></dt>
+<dd><a href="../../../../io/sphere/sdk/shippingmethods/ShippingMethod.html#getZoneRates--"><code>ShippingMethod.getZoneRates()</code></a>, 
+<a href="../../../../io/sphere/sdk/shippingmethods/ShippingMethodDraft.html#getZoneRates--"><code>ShippingMethodDraft.getZoneRates()</code></a></dd>
+</dl>
 </li>
 </ul>
 </div>
@@ -144,7 +150,9 @@ extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.
 <tr id="i2" class="altColor">
 <td class="colFirst"><code>static <a href="../../../../io/sphere/sdk/shippingmethods/ZoneRate.html" title="class in io.sphere.sdk.shippingmethods">ZoneRate</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/shippingmethods/ZoneRate.html#of-io.sphere.sdk.models.Referenceable-java.util.List-">of</a></span>(<a href="../../../../io/sphere/sdk/models/Referenceable.html" title="interface in io.sphere.sdk.models">Referenceable</a>&lt;<a href="../../../../io/sphere/sdk/zones/Zone.html" title="interface in io.sphere.sdk.zones">Zone</a>&gt;&nbsp;zone,
-  java.util.List&lt;<a href="../../../../io/sphere/sdk/shippingmethods/ShippingRate.html" title="class in io.sphere.sdk.shippingmethods">ShippingRate</a>&gt;&nbsp;shippingRates)</code>&nbsp;</td>
+  java.util.List&lt;<a href="../../../../io/sphere/sdk/shippingmethods/ShippingRate.html" title="class in io.sphere.sdk.shippingmethods">ShippingRate</a>&gt;&nbsp;shippingRates)</code>
+<div class="block">Creates a new <a href="../../../../io/sphere/sdk/shippingmethods/ZoneRate.html" title="class in io.sphere.sdk.shippingmethods"><code>ZoneRate</code></a>.</div>
+</td>
 </tr>
 </table>
 <ul class="blockList">
@@ -183,6 +191,14 @@ extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.
 <h4>of</h4>
 <pre>public static&nbsp;<a href="../../../../io/sphere/sdk/shippingmethods/ZoneRate.html" title="class in io.sphere.sdk.shippingmethods">ZoneRate</a>&nbsp;of(<a href="../../../../io/sphere/sdk/models/Referenceable.html" title="interface in io.sphere.sdk.models">Referenceable</a>&lt;<a href="../../../../io/sphere/sdk/zones/Zone.html" title="interface in io.sphere.sdk.zones">Zone</a>&gt;&nbsp;zone,
                           java.util.List&lt;<a href="../../../../io/sphere/sdk/shippingmethods/ShippingRate.html" title="class in io.sphere.sdk.shippingmethods">ShippingRate</a>&gt;&nbsp;shippingRates)</pre>
+<div class="block">Creates a new <a href="../../../../io/sphere/sdk/shippingmethods/ZoneRate.html" title="class in io.sphere.sdk.shippingmethods"><code>ZoneRate</code></a>.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>zone</code> - zone for the rates to apply</dd>
+<dd><code>shippingRates</code> - costs for different currencies</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>zone rate</dd>
+</dl>
 </li>
 </ul>
 <a name="getZone--">

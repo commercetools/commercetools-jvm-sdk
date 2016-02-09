@@ -125,6 +125,9 @@ var activeTableTab = "activeTableTab";
 <pre>public final class <span class="typeNameLabel">QueueSphereClientDecorator</span>
 extends <a href="../../../../io/sphere/sdk/client/SphereClientDecorator.html" title="class in io.sphere.sdk.client">SphereClientDecorator</a>
 implements <a href="../../../../io/sphere/sdk/client/SphereClient.html" title="interface in io.sphere.sdk.client">SphereClient</a></pre>
+<div class="block">Decorates a <a href="../../../../io/sphere/sdk/client/SphereClient.html" title="interface in io.sphere.sdk.client"><code>SphereClient</code></a> to limit the amount of parallel requests which await an answer.
+ If <code>maxParallelRequests</code> are waiting for a response every further request will be added to an unbound queue.
+ Then the next answer will cause that the first request in the queue will be executed.</div>
 </li>
 </ul>
 </div>
