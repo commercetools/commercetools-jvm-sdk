@@ -7,7 +7,10 @@ import java.time.temporal.ChronoUnit;
 import java.util.concurrent.*;
 
 /**
- * Wraps a {@link SphereClient} to add timeouts. There are no guarantees that the timeout will be after the exact duration.
+ * Wraps a {@link SphereClient} to add timeouts.
+ * There are no guarantees that the timeout will be after the exact duration.
+ * The underlying HTTP client most likely will have a timeout and you may consider to implement it there.
+ * If the timeout occurs a {@link SphereTimeoutException} will be thrown.
  */
 public final class TimeoutSphereClientDecorator extends SphereClientDecorator implements SphereClient {
     private final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
