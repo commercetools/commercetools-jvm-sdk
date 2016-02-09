@@ -17,7 +17,7 @@ public interface ProductCatalogDataQueryModel<M> {
 
     BooleanQueryModel<M> published();
 
-    QueryPredicate<M> where(QueryPredicate<PartialProductCatalogDataQueryModel> embeddedPredicate);
+    QueryPredicate<M> where(QueryPredicate<EmbeddedProductCatalogDataQueryModel> embeddedPredicate);
 
-    QueryPredicate<M> where(Function<PartialProductCatalogDataQueryModel, QueryPredicate<PartialProductCatalogDataQueryModel>> embeddedPredicate);
+    QueryPredicate<M> where(Function<EmbeddedProductCatalogDataQueryModel, QueryPredicate<EmbeddedProductCatalogDataQueryModel>> embeddedPredicate);
 }
