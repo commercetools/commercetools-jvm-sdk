@@ -2,6 +2,7 @@ package io.sphere.sdk.categories;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import io.sphere.sdk.client.HttpRequestIntent;
+import io.sphere.sdk.client.SphereRequestUtils;
 import io.sphere.sdk.http.HttpResponse;
 import io.sphere.sdk.models.Base;
 import io.sphere.sdk.queries.*;
@@ -10,7 +11,7 @@ import io.sphere.sdk.json.SphereJsonUtils;
 
 import java.util.Locale;
 
-import static io.sphere.sdk.http.UrlUtils.urlEncode;
+import static io.sphere.sdk.client.SphereRequestUtils.urlEncode;
 
 /**
  * This is an example of hard coding queries without using helper classes.

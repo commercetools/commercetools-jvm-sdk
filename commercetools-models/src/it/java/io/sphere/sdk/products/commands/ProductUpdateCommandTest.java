@@ -44,6 +44,7 @@ import static io.sphere.sdk.test.SphereTestUtils.*;
 import static io.sphere.sdk.test.SphereTestUtils.MASTER_VARIANT_ID;
 import static io.sphere.sdk.types.TypeFixtures.STRING_FIELD_NAME;
 import static io.sphere.sdk.types.TypeFixtures.withUpdateableType;
+import static java.util.Collections.singletonList;
 import static java.util.Locale.ENGLISH;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -415,7 +416,7 @@ public class ProductUpdateCommandTest extends IntegrationTest {
     @Test
     public void setSearchKeywords() throws Exception {
         withUpdateableProduct(client(), product -> {
-            final SearchKeywords searchKeywords = SearchKeywords.of(Locale.ENGLISH, asList(SearchKeyword.of("foo bar baz", CustomSuggestTokenizer.of(asList("foo, baz")))));
+            final SearchKeywords searchKeywords = SearchKeywords.of(Locale.ENGLISH, asList(SearchKeyword.of("Raider", CustomSuggestTokenizer.of(singletonList("Twix")))));
             final ProductUpdateCommand command = ProductUpdateCommand.of(product, SetSearchKeywords.of(searchKeywords));
             final Product updatedProduct = client().executeBlocking(command);
 

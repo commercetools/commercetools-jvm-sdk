@@ -6,6 +6,7 @@ import io.sphere.sdk.carts.LineItem;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Resource;
 import io.sphere.sdk.models.Reference;
+import io.sphere.sdk.models.WithKey;
 import io.sphere.sdk.orders.SyncInfo;
 import io.sphere.sdk.reviews.Review;
 import io.sphere.sdk.reviews.ReviewDraft;
@@ -29,7 +30,7 @@ import java.util.Set;
  @see Review#getTarget()
  */
 @JsonDeserialize(as = ChannelImpl.class)
-public interface Channel extends Resource<Channel> {
+public interface Channel extends Resource<Channel>, WithKey {
     /**
      * Any arbitrary string key that unique identifies this channel within the project.
      *

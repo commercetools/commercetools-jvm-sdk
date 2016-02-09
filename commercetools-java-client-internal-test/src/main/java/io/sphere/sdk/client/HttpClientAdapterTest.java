@@ -60,7 +60,7 @@ public abstract class HttpClientAdapterTest {
         final Map<String, String> map = new HashMap<>();
         map.put("key1", "value1");
 
-        final HttpRequestBody requestBody = FormUrlEncodedHttpRequestBody.of(map);
+        final HttpRequestBody requestBody = FormUrlEncodedHttpRequestBody.ofStringMap(map);
         final int length = 11;
 
         checkBodyRequest(port() + 200, requestBody, length);

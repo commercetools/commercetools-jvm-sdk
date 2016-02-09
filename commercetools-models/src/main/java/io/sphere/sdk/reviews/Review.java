@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import io.sphere.sdk.customers.Customer;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Resource;
+import io.sphere.sdk.models.WithKey;
 import io.sphere.sdk.states.State;
 import io.sphere.sdk.types.Custom;
 import io.sphere.sdk.types.CustomFields;
@@ -67,7 +68,7 @@ import java.util.Locale;
  @see io.sphere.sdk.reviews.queries.ReviewByKeyGet
  */
 @JsonDeserialize(as = ReviewImpl.class)
-public interface Review extends Resource<Review>, Custom {
+public interface Review extends Resource<Review>, Custom, WithKey {
     /**
      * The name of the author which created this review or null.
      *

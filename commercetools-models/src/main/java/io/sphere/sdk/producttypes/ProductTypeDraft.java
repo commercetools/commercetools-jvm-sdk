@@ -1,6 +1,7 @@
 package io.sphere.sdk.producttypes;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import io.sphere.sdk.models.WithKey;
 import io.sphere.sdk.products.attributes.AttributeDefinition;
 
 import javax.annotation.Nullable;
@@ -10,7 +11,7 @@ import java.util.List;
  * @see io.sphere.sdk.producttypes.commands.ProductTypeCreateCommand
  */
 @JsonDeserialize(as = ProductTypeDraftImpl.class)
-public interface ProductTypeDraft {
+public interface ProductTypeDraft extends WithKey {
     String getName();
 
     String getDescription();

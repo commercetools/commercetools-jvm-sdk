@@ -9,6 +9,12 @@ import io.sphere.sdk.zones.Zone;
 
 import java.util.List;
 
+/**
+ * Defines shipping rates (prices) for a specific zone.
+ *
+ * @see ShippingMethod#getZoneRates()
+ * @see ShippingMethodDraft#getZoneRates()
+ */
 public final class ZoneRate extends Base {
     private final Reference<Zone> zone;
     private final List<ShippingRate> shippingRates;
@@ -19,6 +25,13 @@ public final class ZoneRate extends Base {
         this.shippingRates = shippingRates;
     }
 
+    /**
+     * Creates a new {@link ZoneRate}.
+     *
+     * @param zone zone for the rates to apply
+     * @param shippingRates costs for different currencies
+     * @return zone rate
+     */
     @JsonIgnore
     public static ZoneRate of(final Referenceable<Zone> zone, final List<ShippingRate> shippingRates) {
         return new ZoneRate(zone.toReference(), shippingRates);

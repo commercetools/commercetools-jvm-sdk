@@ -47,12 +47,12 @@ class ProductCatalogDataQueryModelImpl<M> extends QueryModelImpl<M> implements P
     }
 
     @Override
-    public QueryPredicate<M> where(final QueryPredicate<PartialProductCatalogDataQueryModel> embeddedPredicate) {
+    public QueryPredicate<M> where(final QueryPredicate<EmbeddedProductCatalogDataQueryModel> embeddedPredicate) {
         return embedPredicate(embeddedPredicate);
     }
 
     @Override
-    public QueryPredicate<M> where(final Function<PartialProductCatalogDataQueryModel, QueryPredicate<PartialProductCatalogDataQueryModel>> embeddedPredicate) {
-        return where(embeddedPredicate.apply(PartialProductCatalogDataQueryModel.of()));
+    public QueryPredicate<M> where(final Function<EmbeddedProductCatalogDataQueryModel, QueryPredicate<EmbeddedProductCatalogDataQueryModel>> embeddedPredicate) {
+        return where(embeddedPredicate.apply(EmbeddedProductCatalogDataQueryModel.of()));
     }
 }

@@ -6,6 +6,12 @@ import io.sphere.sdk.utils.CompletableFutureUtils;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionStage;
 
+/**
+ * Decorates a {@link SphereClient} to limit the amount of parallel requests which await an answer.
+ * If {@code maxParallelRequests} are waiting for a response every further request will be added to an unbound queue.
+ * Then the next answer will cause that the first request in the queue will be executed.
+ *
+ */
 public final class QueueSphereClientDecorator extends SphereClientDecorator implements SphereClient {
     private final Actor actor;
     private final boolean closeUnderlyingClient;

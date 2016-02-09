@@ -1,39 +1,18 @@
 package io.sphere.sdk.orders;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import io.sphere.sdk.models.Base;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
-public final class ParcelMeasurements extends Base {
-    private final Integer heightInMillimeter;
-    private final Integer lengthInMillimeter;
-    private final Integer widthInMillimeter;
-    private final Integer weightInGram;
+@JsonDeserialize(as = ParcelMeasurementsImpl.class)
+public interface ParcelMeasurements {
+    Integer getHeightInMillimeter();
 
-    @JsonCreator
-    private ParcelMeasurements(final Integer lengthInMillimeter, final Integer widthInMillimeter, final Integer heightInMillimeter, final Integer weightInGram) {
-        this.heightInMillimeter = heightInMillimeter;
-        this.lengthInMillimeter = lengthInMillimeter;
-        this.widthInMillimeter = widthInMillimeter;
-        this.weightInGram = weightInGram;
-    }
+    Integer getLengthInMillimeter();
 
-    public static ParcelMeasurements of(final Integer lengthInMillimeter, final Integer widthInMillimeter, final Integer heightInMillimeter, final Integer weightInGram) {
-        return new ParcelMeasurements(lengthInMillimeter, widthInMillimeter, heightInMillimeter, weightInGram);
-    }
+    Integer getWidthInMillimeter();
 
-    public Integer getHeightInMillimeter() {
-        return heightInMillimeter;
-    }
+    Integer getWeightInGram();
 
-    public Integer getLengthInMillimeter() {
-        return lengthInMillimeter;
-    }
-
-    public Integer getWidthInMillimeter() {
-        return widthInMillimeter;
-    }
-
-    public Integer getWeightInGram() {
-        return weightInGram;
+    static ParcelMeasurements of(final Integer lengthInMillimeter, final Integer widthInMillimeter, final Integer heightInMillimeter, final Integer weightInGram) {
+        return new ParcelMeasurementsImpl(lengthInMillimeter, widthInMillimeter, heightInMillimeter, weightInGram);
     }
 }

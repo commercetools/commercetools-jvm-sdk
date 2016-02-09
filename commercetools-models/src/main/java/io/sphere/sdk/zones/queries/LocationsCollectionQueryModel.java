@@ -6,12 +6,14 @@ import io.sphere.sdk.queries.StringQueryModel;
 
 import java.util.function.Function;
 
-public interface LocationsCollectionQueryModel<T> {
+public interface LocationsCollectionQueryModel<T> extends SharedLocationsCollectionQueryModel<T> {
+    @Override
     CountryQueryModel<T> country();
 
+    @Override
     StringQueryModel<T> state();
 
-    QueryPredicate<T> where(QueryPredicate<PartialLocationsCollectionQueryModel> embeddedPredicate);
+    QueryPredicate<T> where(QueryPredicate<EmbeddedLocationsCollectionQueryModel> embeddedPredicate);
 
-    QueryPredicate<T> where(Function<PartialLocationsCollectionQueryModel, QueryPredicate<PartialLocationsCollectionQueryModel>> embeddedPredicate);
+    QueryPredicate<T> where(Function<EmbeddedLocationsCollectionQueryModel, QueryPredicate<EmbeddedLocationsCollectionQueryModel>> embeddedPredicate);
 }

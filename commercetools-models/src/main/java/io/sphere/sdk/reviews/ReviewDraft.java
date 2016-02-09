@@ -3,6 +3,7 @@ package io.sphere.sdk.reviews;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import io.sphere.sdk.customers.Customer;
 import io.sphere.sdk.models.ResourceIdentifier;
+import io.sphere.sdk.models.WithKey;
 import io.sphere.sdk.states.State;
 import io.sphere.sdk.types.CustomFieldsDraft;
 
@@ -17,7 +18,7 @@ import java.util.Locale;
  * @see io.sphere.sdk.reviews.commands.ReviewCreateCommand
  */
 @JsonDeserialize(as = ReviewDraftImpl.class)
-public interface ReviewDraft {
+public interface ReviewDraft extends WithKey {
     @Nullable
     String getAuthorName();
 

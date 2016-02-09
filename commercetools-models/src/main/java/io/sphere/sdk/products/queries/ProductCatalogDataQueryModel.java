@@ -6,18 +6,23 @@ import io.sphere.sdk.queries.QueryPredicate;
 
 import java.util.function.Function;
 
-public interface ProductCatalogDataQueryModel<M> {
-    ProductDataQueryModel<M> forProjection(ProductProjectionType type);
+public interface ProductCatalogDataQueryModel<T> extends SharedProductCatalogDataQueryModel<T> {
+    @Override
+    ProductDataQueryModel<T> current();
 
-    ProductDataQueryModel<M> current();
+    @Override
+    ProductDataQueryModel<T> forProjection(ProductProjectionType type);
 
-    ProductDataQueryModel<M> staged();
+    @Override
+    BooleanQueryModel<T> isPublished();
 
-    BooleanQueryModel<M> isPublished();
+    @Override
+    BooleanQueryModel<T> published();
 
-    BooleanQueryModel<M> published();
+    @Override
+    ProductDataQueryModel<T> staged();
 
-    QueryPredicate<M> where(QueryPredicate<PartialProductCatalogDataQueryModel> embeddedPredicate);
+    QueryPredicate<T> where(QueryPredicate<EmbeddedProductCatalogDataQueryModel> embeddedPredicate);
 
-    QueryPredicate<M> where(Function<PartialProductCatalogDataQueryModel, QueryPredicate<PartialProductCatalogDataQueryModel>> embeddedPredicate);
+    QueryPredicate<T> where(Function<EmbeddedProductCatalogDataQueryModel, QueryPredicate<EmbeddedProductCatalogDataQueryModel>> embeddedPredicate);
 }

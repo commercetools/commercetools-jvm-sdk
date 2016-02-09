@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.neovisionaries.i18n.CountryCode;
 import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.CreationTimestamped;
+import io.sphere.sdk.models.WithKey;
 
 import javax.money.CurrencyUnit;
 import javax.money.Monetary;
@@ -15,7 +16,7 @@ import java.util.Locale;
 
 import static java.util.stream.Collectors.toList;
 
-public final class Project extends Base implements CreationTimestamped {
+public final class Project extends Base implements CreationTimestamped, WithKey {
     private final String key;
     private final String name;
     private final List<CountryCode> countries;

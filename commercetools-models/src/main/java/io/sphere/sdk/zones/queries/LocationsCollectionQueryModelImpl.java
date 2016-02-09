@@ -20,12 +20,12 @@ class LocationsCollectionQueryModelImpl<T> extends QueryModelImpl<T> implements 
     }
 
     @Override
-    public QueryPredicate<T> where(final QueryPredicate<PartialLocationsCollectionQueryModel> embeddedPredicate) {
+    public QueryPredicate<T> where(final QueryPredicate<EmbeddedLocationsCollectionQueryModel> embeddedPredicate) {
         return embedPredicate(embeddedPredicate);
     }
 
     @Override
-    public QueryPredicate<T> where(final Function<PartialLocationsCollectionQueryModel, QueryPredicate<PartialLocationsCollectionQueryModel>> embeddedPredicate) {
-        return where(embeddedPredicate.apply(PartialLocationsCollectionQueryModelImpl.of()));
+    public QueryPredicate<T> where(final Function<EmbeddedLocationsCollectionQueryModel, QueryPredicate<EmbeddedLocationsCollectionQueryModel>> embeddedPredicate) {
+        return where(embeddedPredicate.apply(EmbeddedLocationsCollectionQueryModelImpl.of()));
     }
 }

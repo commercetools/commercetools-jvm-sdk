@@ -12,19 +12,19 @@ import io.sphere.sdk.queries.Query;
 
  {@doc.gen summary messages}
 
- <p>Query for any message:</p>
+ <h3 id="query-any-message">Query for any message</h3>
  {@include.example io.sphere.sdk.messages.queries.MessageQueryTest#queryForAllMessages()}
 
- <p>Query for a specific message class:</p>
+ <h3 id="query-specific-message-classes">Query for a specific message class</h3>
  {@include.example io.sphere.sdk.messages.queries.MessageQueryTest#queryForASpecificMessage()}
 
-<p>Query for any message and then convert into specific messages:</p>
+ <h3 id="query-any-message-convert-to-specific-message">Query for any message and then convert into specific messages</h3>
  {@include.example io.sphere.sdk.messages.queries.MessageQueryTest#convertAfterQueryToSpecificMessageClasses()}
 
-<p>Query for any message for a specific resource like orders:</p>
+ <h3 id="query-for-specific-resource">Query for any message for a specific resource like orders</h3>
  {@include.example io.sphere.sdk.messages.queries.MessageQueryTest#queryForASpecificResource()}
 
-<p>If you convert a message to the wrong class the behaviour is undefined, but then still null pointer exceptions can occur:</p>
+ <h3 id="class-converting-errors">If you convert a message to the wrong class the behaviour is undefined, but then still null pointer exceptions can occur</h3>
  {@include.example io.sphere.sdk.messages.queries.MessageQueryTest#convertAfterQueryToSpecificMessageClassesButToTheWrongOne()}
 
  */
