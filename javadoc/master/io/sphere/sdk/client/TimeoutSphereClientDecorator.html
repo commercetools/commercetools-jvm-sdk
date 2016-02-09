@@ -125,7 +125,10 @@ var activeTableTab = "activeTableTab";
 <pre>public final class <span class="typeNameLabel">TimeoutSphereClientDecorator</span>
 extends <a href="../../../../io/sphere/sdk/client/SphereClientDecorator.html" title="class in io.sphere.sdk.client">SphereClientDecorator</a>
 implements <a href="../../../../io/sphere/sdk/client/SphereClient.html" title="interface in io.sphere.sdk.client">SphereClient</a></pre>
-<div class="block">Wraps a <a href="../../../../io/sphere/sdk/client/SphereClient.html" title="interface in io.sphere.sdk.client"><code>SphereClient</code></a> to add timeouts. There are no guarantees that the timeout will be after the exact duration.</div>
+<div class="block">Wraps a <a href="../../../../io/sphere/sdk/client/SphereClient.html" title="interface in io.sphere.sdk.client"><code>SphereClient</code></a> to add timeouts.
+ There are no guarantees that the timeout will be after the exact duration.
+ The underlying HTTP client most likely will have a timeout and you may consider to implement it there.
+ If the timeout occurs a <a href="../../../../io/sphere/sdk/client/SphereTimeoutException.html" title="class in io.sphere.sdk.client"><code>SphereTimeoutException</code></a> will be thrown.</div>
 </li>
 </ul>
 </div>
