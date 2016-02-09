@@ -91,6 +91,8 @@ public final class DocumentationTaglet implements Taglet {
                     result = format("Provides the possible operations which can be performed on update commands for %s.", furtherArgs(tag));
                 } else if (isQueriesPackage(tag)) {
                     result = format("Provides types to retrieve the state of %s.", furtherArgs(tag));
+                } else if (isExpansionPackage(tag)) {
+                    result = format("Provides reference expansion models for %s.", furtherArgs(tag));
                 } else {//model package
                     result = format("Provides model classes and builders for %s.", furtherArgs(tag));
                 }
@@ -314,6 +316,10 @@ public final class DocumentationTaglet implements Taglet {
 
     private boolean isCommandPackage(final Tag tag) {
         return getLastPackageName(tag).equals("commands");
+    }
+
+    private boolean isExpansionPackage(final Tag tag) {
+        return getLastPackageName(tag).equals("expansion");
     }
 
     private boolean isQueriesPackage(final Tag tag) {
