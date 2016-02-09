@@ -6,7 +6,6 @@ import io.sphere.sdk.json.JsonException;
 import io.sphere.sdk.json.SphereJsonUtils;
 import io.sphere.sdk.meta.BuildInfo;
 import io.sphere.sdk.models.SphereException;
-import io.sphere.sdk.utils.SphereInternalUtils;
 
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
@@ -78,7 +77,7 @@ final class TokensSupplierImpl extends AutoCloseableService implements TokensSup
                 .of(HttpHeaders.AUTHORIZATION, "Basic " + encodedString)
                 .plus(HttpHeaders.USER_AGENT, BuildInfo.userAgent())
                 .plus(HttpHeaders.CONTENT_TYPE, "application/x-www-form-urlencoded");
-        final FormUrlEncodedHttpRequestBody body = FormUrlEncodedHttpRequestBody.of(mapOf("grant_type", "client_credentials", "scope", format("manage_project:%s", config.getProjectKey())));
+        final FormUrlEncodedHttpRequestBody body = FormUrlEncodedHttpRequestBody.ofStringMap(mapOf("grant_type", "client_credentials", "scope", format("manage_project:%s", config.getProjectKey())));
         return HttpRequest.of(POST, config.getAuthUrl() + "/oauth/token", httpHeaders, body);
     }
 

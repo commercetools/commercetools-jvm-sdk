@@ -20,8 +20,17 @@ public final class FormUrlEncodedHttpRequestBody extends Base implements HttpReq
      * @param data name value pairs for the body
      * @return FormUrlEncodedHttpRequestBody
      */
-    public static FormUrlEncodedHttpRequestBody of(final Map<String, String> data) {
+    public static FormUrlEncodedHttpRequestBody ofStringMap(final Map<String, String> data) {
         return of(NameValuePair.convertStringMapToList(data));
+    }
+
+    /**
+     * Creator if the order does not matter and there are no duplicates.
+     * @param data name value pairs for the body
+     * @return FormUrlEncodedHttpRequestBody
+     */
+    public static FormUrlEncodedHttpRequestBody of(final Map<String, List<String>> data) {
+        return of(NameValuePair.convertStringListMapToList(data));
     }
 
     /**
