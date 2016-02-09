@@ -200,13 +200,14 @@ assertThat(query.withLimit(30L).limit()).isEqualTo(Optional.of(30));
 
  <div id="io-sphere-sdk-categories-CategoryByNameQuery%s" class=code-example><button type='button' style='display: none;' class='reveal-imports'>show/hide imports</button><pre class='hide code-example-imports'><code class='java'>import com.fasterxml.jackson.core.type.TypeReference;
 import io.sphere.sdk.client.HttpRequestIntent;
+import io.sphere.sdk.client.SphereRequestUtils;
 import io.sphere.sdk.http.HttpResponse;
 import io.sphere.sdk.models.Base;
 import io.sphere.sdk.queries.*;
 import io.sphere.sdk.http.HttpMethod;
 import io.sphere.sdk.json.SphereJsonUtils;
 import java.util.Locale;
-import static io.sphere.sdk.http.UrlUtils.urlEncode;
+import static io.sphere.sdk.client.SphereRequestUtils.urlEncode;
 </code></pre><pre><code class='java'>/**
  * This is an example of hard coding queries without using helper classes.
  * It is better to use the helpers concerning existing parts and escaping.
