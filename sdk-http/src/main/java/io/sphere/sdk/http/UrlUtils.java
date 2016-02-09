@@ -4,6 +4,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.concurrent.CompletionException;
 
+@Deprecated
 public final class UrlUtils {
     private UrlUtils() {
     }
@@ -13,6 +14,7 @@ public final class UrlUtils {
      * @param s String which should be URL encoded
      * @return url encoded s
      */
+    @Deprecated
     public static String urlEncode(final String s) {
         final String encoding = "UTF-8";
         try {
