@@ -17,7 +17,7 @@ import java.util.Iterator;
 import java.util.Map;
 
 /**
- * Internal utility class to work with JSON from SPHERE.IO.
+ * Public utility class to work with JSON from SPHERE.IO.
  *
  * <p>If an error occurs, the {@link JsonException} (a {@link RuntimeException}) will be thrown:</p>
  *
