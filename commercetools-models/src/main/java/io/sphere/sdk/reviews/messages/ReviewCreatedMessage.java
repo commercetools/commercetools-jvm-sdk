@@ -21,7 +21,7 @@ import java.time.ZonedDateTime;
 public final class ReviewCreatedMessage extends GenericMessageImpl<Review> {
     public static final String MESSAGE_TYPE = "ReviewCreated";
     public static final MessageDerivateHint<ReviewCreatedMessage> MESSAGE_HINT =
-            MessageDerivateHint.ofSingleMessageType(MESSAGE_TYPE, ReviewCreatedMessage.class);
+            MessageDerivateHint.ofSingleMessageType(MESSAGE_TYPE, ReviewCreatedMessage.class, Review.referenceTypeId());
 
     private final Review review;
 

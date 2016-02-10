@@ -23,7 +23,7 @@ import java.time.ZonedDateTime;
 public final class PaymentStatusStateTransitionMessage extends GenericMessageImpl<Payment> {
     public static final String MESSAGE_TYPE = "PaymentStatusStateTransition";
     public static final MessageDerivateHint<PaymentStatusStateTransitionMessage> MESSAGE_HINT =
-            MessageDerivateHint.ofSingleMessageType(MESSAGE_TYPE, PaymentStatusStateTransitionMessage.class);
+            MessageDerivateHint.ofSingleMessageType(MESSAGE_TYPE, PaymentStatusStateTransitionMessage.class, Payment.referenceTypeId());
 
     private final Reference<State> state;
 

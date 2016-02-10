@@ -22,7 +22,7 @@ import java.time.ZonedDateTime;
 public final class ProductStateTransitionMessage extends GenericMessageImpl<Product> {
     public static final String MESSAGE_TYPE = "ProductStateTransition";
     public static final MessageDerivateHint<ProductStateTransitionMessage> MESSAGE_HINT =
-            MessageDerivateHint.ofSingleMessageType(MESSAGE_TYPE, ProductStateTransitionMessage.class);
+            MessageDerivateHint.ofSingleMessageType(MESSAGE_TYPE, ProductStateTransitionMessage.class, Product.referenceTypeId());
 
 
     private final Reference<State> state;

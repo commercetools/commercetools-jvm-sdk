@@ -14,7 +14,7 @@ import java.time.ZonedDateTime;
 public final class OrderCreatedMessage extends GenericMessageImpl<Order> {
     public static final String MESSAGE_TYPE = "OrderCreated";
     public static final MessageDerivateHint<OrderCreatedMessage> MESSAGE_HINT =
-            MessageDerivateHint.ofSingleMessageType(MESSAGE_TYPE, OrderCreatedMessage.class);
+            MessageDerivateHint.ofSingleMessageType(MESSAGE_TYPE, OrderCreatedMessage.class, Order.referenceTypeId());
 
     private final Order order;
 
