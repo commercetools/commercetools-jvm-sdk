@@ -1,22 +1,39 @@
 package io.sphere.sdk.messages.queries;
 
+import io.sphere.sdk.client.SphereRequest;
+import io.sphere.sdk.messages.GenericMessageImpl;
 import io.sphere.sdk.messages.Message;
+import io.sphere.sdk.messages.MessageDerivateHint;
 import io.sphere.sdk.orders.Order;
 import io.sphere.sdk.orders.messages.DeliveryAddedMessage;
 import io.sphere.sdk.orders.messages.ReturnInfoAddedMessage;
 import io.sphere.sdk.orders.messages.SimpleOrderMessage;
+import io.sphere.sdk.products.Product;
+import io.sphere.sdk.products.ProductFixtures;
+import io.sphere.sdk.products.commands.ProductUpdateCommand;
+import io.sphere.sdk.products.commands.updateactions.Publish;
+import io.sphere.sdk.products.commands.updateactions.Unpublish;
+import io.sphere.sdk.products.messages.ProductCreatedMessage;
+import io.sphere.sdk.products.messages.ProductPublishedMessage;
+import io.sphere.sdk.products.messages.ProductUnpublishedMessage;
+import io.sphere.sdk.products.messages.SimpleProductMessage;
 import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.queries.Query;
 import io.sphere.sdk.test.IntegrationTest;
+import org.assertj.core.api.iterable.Extractor;
 import org.junit.Test;
 
 import java.util.List;
 import java.util.Optional;
 
 import static io.sphere.sdk.orders.OrderFixtures.withOrderAndReturnInfo;
+import static io.sphere.sdk.test.SphereTestUtils.assertEventually;
+import static java.util.Arrays.asList;
+import static java.util.stream.Collectors.toList;
 import static org.assertj.core.api.Assertions.*;
 
 public class MessageQueryTest extends IntegrationTest {
+
     @Test
     public void convertAfterQueryToSpecificMessageClasses() throws Exception {
         withOrderAndReturnInfo(client(), ((order, returnInfo) -> {
@@ -87,6 +104,55 @@ public class MessageQueryTest extends IntegrationTest {
 
             return order;
         }));
+    }
+
+    @Test
+    public void queryForMultipleSpecificMessageClasses() throws Exception {
+        ProductFixtures.withUpdateableProduct(client(), product -> {
+            //create some messages apart from ProductCreatedMessage
+            final Product publishedProduct = client().executeBlocking(ProductUpdateCommand.of(product, Publish.of()));
+            final Product unpublishedProduct = client().executeBlocking(ProductUpdateCommand.of(publishedProduct, Unpublish.of()));
+
+            //these are the classes which are expected as message
+            final List<MessageDerivateHint<? extends Message>> messageHints =
+                    asList(ProductCreatedMessage.MESSAGE_HINT,
+                            ProductPublishedMessage.MESSAGE_HINT,
+                            //as fallback for other product messages
+                            SimpleProductMessage.MESSAGE_HINT);
+
+            final Query<Message> query = MessageQuery.of()
+                    .withPredicates(m -> m.resource().is(product))
+                    .withSort(m -> m.createdAt().sort().asc())
+                    .withExpansionPaths(m -> m.resource())
+                    .forMessageTypes(messageHints);
+
+            assertEventually(() -> {
+                final List<Message> messages = client().executeBlocking(query).getResults();
+                assertThat(messages).hasSize(3);
+                assertThat(messages.get(0)).isInstanceOf(ProductCreatedMessage.class);
+                assertThat(messages.get(1)).isInstanceOf(ProductPublishedMessage.class);
+                assertThat(messages.get(2)).isInstanceOf(SimpleProductMessage.class);
+
+                //use some kind of pattern matching
+                messages.stream()
+                        .forEachOrdered(message -> {
+                            if (message instanceof ProductCreatedMessage) {
+                                final ProductCreatedMessage m = (ProductCreatedMessage) message;
+                                assertThat(m.getResource()).isEqualTo(product.toReference());
+                            } else if (message instanceof ProductPublishedMessage) {
+                                final ProductPublishedMessage m = (ProductPublishedMessage) message;
+                                assertThat(m.getResource()).isEqualTo(product.toReference());
+                            } else if (message instanceof SimpleProductMessage) {
+                                final SimpleProductMessage m = (SimpleProductMessage) message;
+                                assertThat(m.getResource()).isEqualTo(product.toReference());
+                                assertThat(m.getType()).isEqualTo("ProductUnpublished");
+                            } else {
+                                throw new RuntimeException("unexpected type of " + message);
+                            }
+                        });
+            });
+            return unpublishedProduct;
+        });
     }
 
     @Test

@@ -17,6 +17,8 @@ import io.sphere.sdk.products.expansion.ProductExpansionModel;
 
  Create a {@link io.sphere.sdk.products.ProductDraft} instance:
  {@include.example io.sphere.sdk.suppliers.SimpleCottonTShirtProductDraftSupplier}
+
+ @see io.sphere.sdk.products.messages.ProductCreatedMessage
  */
 public interface ProductCreateCommand extends DraftBasedCreateCommand<Product, ProductDraft>, MetaModelReferenceExpansionDsl<Product, ProductCreateCommand, ProductExpansionModel<Product>> {
     static ProductCreateCommand of(final ProductDraft draft) {

@@ -9,6 +9,8 @@ import io.sphere.sdk.products.Product;
  * {@doc.gen intro}
  *
  * {@include.example io.sphere.sdk.products.commands.ProductUpdateCommandTest#publish()}
+ *
+ * @see io.sphere.sdk.products.messages.ProductPublishedMessage
  */
 public final class Publish extends UpdateActionImpl<Product> {
     private Publish() {

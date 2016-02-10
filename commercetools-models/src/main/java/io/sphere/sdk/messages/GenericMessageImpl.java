@@ -78,7 +78,7 @@ public abstract class GenericMessageImpl<R> extends ResourceImpl<Message> implem
     }
 
     @Override
-    public <T extends Message> T as(final Class<T> messageClass) {
+    public <T> T as(final Class<T> messageClass) {
         final ObjectMapper objectMapper = SphereJsonUtils.newObjectMapper();
         final ObjectNode jsonNode = objectMapper.createObjectNode()
                 .put("id", getId())

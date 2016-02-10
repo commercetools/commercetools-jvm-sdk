@@ -7,6 +7,7 @@ import io.sphere.sdk.messages.queries.MessageQueryModel;
 import io.sphere.sdk.models.Base;
 import io.sphere.sdk.queries.QueryPredicate;
 
+import javax.annotation.Nullable;
 import java.util.function.Supplier;
 
 /**
@@ -14,32 +15,54 @@ import java.util.function.Supplier;
  * @param <T> the type of the message the type hint is about
  * @see MessageQuery#forMessageType(io.sphere.sdk.messages.MessageDerivateHint)
  */
-public final class MessageDerivateHint<T> extends Base {
+public final class MessageDerivateHint<T extends Message> extends Base {
     private final JavaType javaType;
+    private final Class<? extends Message> clazz;
     private final Supplier<QueryPredicate<Message>> predicateSupplier;
+    @Nullable
+    private final String typeString;
+    @Nullable
+    private final String referenceTypeId;
 
-    private MessageDerivateHint(final JavaType javaType, final Supplier<QueryPredicate<Message>> predicateSupplier) {
+    private MessageDerivateHint(final JavaType javaType, final Supplier<QueryPredicate<Message>> predicateSupplier, final Class<? extends Message> clazz, final String typeString, final String referenceTypeId) {
         this.javaType = javaType;
         this.predicateSupplier = predicateSupplier;
+        this.clazz = clazz;
+        this.typeString = typeString;
+        this.referenceTypeId = referenceTypeId;
     }
 
     public QueryPredicate<Message> predicate() {
         return predicateSupplier.get();
     }
 
-    private static <T> MessageDerivateHint<T> ofSingleMessageType(final String type, final JavaType javaType) {
-        return new MessageDerivateHint<>(javaType, () -> MessageQueryModel.of().type().is(type));
+    private static <T extends Message> MessageDerivateHint<T> ofSingleMessageType(final String type, final JavaType javaType, final Class<T> clazz) {
+        return new MessageDerivateHint<>(javaType, () -> MessageQueryModel.of().type().is(type), clazz, type, /*referenceTypeId*/ null);
     }
 
-    public static <T> MessageDerivateHint<T> ofSingleMessageType(final String type, final Class<T> clazz) {
-        return ofSingleMessageType(type, SphereJsonUtils.convertToJavaType(clazz));
+    public static <T extends Message> MessageDerivateHint<T> ofSingleMessageType(final String type, final Class<T> clazz) {
+        return ofSingleMessageType(type, SphereJsonUtils.convertToJavaType(clazz), clazz);
     }
 
-    public static <T> MessageDerivateHint<T> ofResourceType(final String resourceId, final Class<T> clazz) {
-        return new MessageDerivateHint<>(SphereJsonUtils.convertToJavaType(clazz), () -> MessageQueryModel.of().resource().typeId().is(resourceId));
+    public static <T extends Message> MessageDerivateHint<T> ofResourceType(final String resourceId, final Class<T> clazz, final String referenceTypeId) {
+        return new MessageDerivateHint<>(SphereJsonUtils.convertToJavaType(clazz), () -> MessageQueryModel.of().resource().typeId().is(resourceId), clazz, null, referenceTypeId);
     }
 
     public JavaType javaType() {
         return javaType;
+    }
+
+    public Class<? extends Message> clazz() {
+        return clazz;
+    }
+
+    @Nullable
+    public String typeString() {
+        return typeString;
+    }
+
+    @Nullable
+    public String resourceReferenceTypeId() {
+        return referenceTypeId;
     }
 }

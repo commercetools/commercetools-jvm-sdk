@@ -70,7 +70,7 @@ public interface Message extends Resource<Message> {
         return Reference.of(Message.referenceTypeId(), getId());
     }
 
-    <T extends Message> T as(final Class<T> messageClass);
+    <T> T as(final Class<T> messageClass);
 
     /**
      * Creates a reference for one item of this class by a known ID.
