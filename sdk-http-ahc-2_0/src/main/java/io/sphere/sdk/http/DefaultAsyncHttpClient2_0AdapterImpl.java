@@ -10,7 +10,7 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ForkJoinPool;
 
 final class DefaultAsyncHttpClient2_0AdapterImpl implements AsyncHttpClientAdapter {
-    private static final Logger LOGGER = LoggerFactory.getLogger(DefaultAsyncHttpClient2_0AdapterImpl.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(HttpClient.class);
     private final AsyncHttpClient asyncHttpClient;
     private final ForkJoinPool threadPool = new ForkJoinPool();
 
@@ -20,8 +20,10 @@ final class DefaultAsyncHttpClient2_0AdapterImpl implements AsyncHttpClientAdapt
 
     @Override
     public CompletableFuture<HttpResponse> execute(final HttpRequest httpRequest) {
-        if (LOGGER.isDebugEnabled()) {
+        if (LOGGER.isTraceEnabled()) {
             LOGGER.debug("executing " + httpRequest);
+        } else if (LOGGER.isDebugEnabled()) {
+            LOGGER.debug("{} {}", httpRequest.getHttpMethod(), httpRequest.getUrl());
         }
         final Request request = asAhcRequest(httpRequest);
         final CompletableFuture<Response> future = new CompletableFuture<>();
@@ -47,7 +49,7 @@ final class DefaultAsyncHttpClient2_0AdapterImpl implements AsyncHttpClientAdapt
         return future.thenApplyAsync(response -> {
             final byte[] responseBodyAsBytes = getResponseBodyAsBytes(response);
             final HttpResponse httpResponse = HttpResponse.of(response.getStatusCode(), responseBodyAsBytes, httpRequest, HttpHeaders.ofMapEntryList(response.getHeaders().entries()));
-            if (LOGGER.isDebugEnabled()) {
+            if (LOGGER.isTraceEnabled()) {
                 LOGGER.debug("response " + httpResponse);
             }
             return httpResponse;

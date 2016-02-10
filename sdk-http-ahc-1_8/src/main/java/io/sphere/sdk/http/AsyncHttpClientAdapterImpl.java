@@ -16,7 +16,7 @@ import java.util.concurrent.*;
 import java.util.zip.GZIPInputStream;
 
 final class AsyncHttpClientAdapterImpl extends Base implements AsyncHttpClientAdapter {
-    private static final Logger LOGGER = LoggerFactory.getLogger(AsyncHttpClientAdapterImpl.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(HttpClient.class);
     private final AsyncHttpClient asyncHttpClient;
     private final ForkJoinPool threadPool = new ForkJoinPool();
 
