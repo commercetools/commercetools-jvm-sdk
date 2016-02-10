@@ -14,7 +14,7 @@ import java.util.Optional;
 import static org.apache.commons.lang3.StringUtils.isEmpty;
 
 /** OAuth tokens returned by the authorization server. */
-final class Tokens extends Base {
+public final class Tokens extends Base {
     @JsonProperty("access_token")
     private final String accessToken;
     @JsonProperty("refresh_token")
