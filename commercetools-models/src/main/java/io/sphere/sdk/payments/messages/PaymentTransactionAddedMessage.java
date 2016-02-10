@@ -22,7 +22,7 @@ import java.time.ZonedDateTime;
 public final class PaymentTransactionAddedMessage extends GenericMessageImpl<Payment> {
     public static final String MESSAGE_TYPE = "PaymentTransactionAdded";
     public static final MessageDerivateHint<PaymentTransactionAddedMessage> MESSAGE_HINT =
-            MessageDerivateHint.ofSingleMessageType(MESSAGE_TYPE, PaymentTransactionAddedMessage.class);
+            MessageDerivateHint.ofSingleMessageType(MESSAGE_TYPE, PaymentTransactionAddedMessage.class, Payment.referenceTypeId());
 
     private final Transaction transaction;
 

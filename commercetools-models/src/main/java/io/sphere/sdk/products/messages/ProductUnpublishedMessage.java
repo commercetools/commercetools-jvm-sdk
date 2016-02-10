@@ -13,7 +13,7 @@ import java.time.ZonedDateTime;
 public final class ProductUnpublishedMessage extends GenericMessageImpl<Product> {
     public static final String MESSAGE_TYPE = "ProductUnpublished";
     public static final MessageDerivateHint<ProductUnpublishedMessage> MESSAGE_HINT =
-            MessageDerivateHint.ofSingleMessageType(MESSAGE_TYPE, ProductUnpublishedMessage.class);
+            MessageDerivateHint.ofSingleMessageType(MESSAGE_TYPE, ProductUnpublishedMessage.class, Product.referenceTypeId());
 
     @JsonCreator
     private ProductUnpublishedMessage(final String id, final Long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt, final JsonNode resource, final Long sequenceNumber, final Long resourceVersion, final String type) {

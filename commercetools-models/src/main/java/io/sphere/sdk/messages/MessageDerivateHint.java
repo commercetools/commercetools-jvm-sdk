@@ -36,12 +36,12 @@ public final class MessageDerivateHint<T extends Message> extends Base {
         return predicateSupplier.get();
     }
 
-    private static <T extends Message> MessageDerivateHint<T> ofSingleMessageType(final String type, final JavaType javaType, final Class<T> clazz) {
-        return new MessageDerivateHint<>(javaType, () -> MessageQueryModel.of().type().is(type), clazz, type, /*referenceTypeId*/ null);
+    private static <T extends Message> MessageDerivateHint<T> ofSingleMessageType(final String type, final JavaType javaType, final Class<T> clazz, final String referenceTypeId) {
+        return new MessageDerivateHint<>(javaType, () -> MessageQueryModel.of().type().is(type), clazz, type, referenceTypeId);
     }
 
-    public static <T extends Message> MessageDerivateHint<T> ofSingleMessageType(final String type, final Class<T> clazz) {
-        return ofSingleMessageType(type, SphereJsonUtils.convertToJavaType(clazz), clazz);
+    public static <T extends Message> MessageDerivateHint<T> ofSingleMessageType(final String type, final Class<T> clazz, final String referenceTypeId) {
+        return ofSingleMessageType(type, SphereJsonUtils.convertToJavaType(clazz), clazz, referenceTypeId);
     }
 
     public static <T extends Message> MessageDerivateHint<T> ofResourceType(final String resourceId, final Class<T> clazz, final String referenceTypeId) {

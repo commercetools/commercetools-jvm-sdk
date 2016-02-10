@@ -14,7 +14,7 @@ import java.time.ZonedDateTime;
 public final class ReturnInfoAddedMessage extends GenericMessageImpl<Order> {
     public static final String MESSAGE_TYPE = "ReturnInfoAdded";
     public static final MessageDerivateHint<ReturnInfoAddedMessage> MESSAGE_HINT =
-            MessageDerivateHint.ofSingleMessageType(MESSAGE_TYPE, ReturnInfoAddedMessage.class);
+            MessageDerivateHint.ofSingleMessageType(MESSAGE_TYPE, ReturnInfoAddedMessage.class, Order.referenceTypeId());
 
     private final ReturnInfo returnInfo;
 

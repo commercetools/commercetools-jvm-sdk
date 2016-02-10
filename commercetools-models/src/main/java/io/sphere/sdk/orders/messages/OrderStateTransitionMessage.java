@@ -24,7 +24,7 @@ import java.time.ZonedDateTime;
 public final class OrderStateTransitionMessage extends GenericMessageImpl<Order> {
     public static final String MESSAGE_TYPE = "OrderStateTransition";
     public static final MessageDerivateHint<OrderStateTransitionMessage> MESSAGE_HINT =
-            MessageDerivateHint.ofSingleMessageType(MESSAGE_TYPE, OrderStateTransitionMessage.class);
+            MessageDerivateHint.ofSingleMessageType(MESSAGE_TYPE, OrderStateTransitionMessage.class, Order.referenceTypeId());
 
 
     private final Reference<State> state;

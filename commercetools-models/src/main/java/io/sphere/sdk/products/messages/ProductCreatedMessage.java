@@ -14,7 +14,7 @@ import java.time.ZonedDateTime;
 public final class ProductCreatedMessage extends GenericMessageImpl<Product> {
     public static final String MESSAGE_TYPE = "ProductCreated";
     public static final MessageDerivateHint<ProductCreatedMessage> MESSAGE_HINT =
-            MessageDerivateHint.ofSingleMessageType(MESSAGE_TYPE, ProductCreatedMessage.class);
+            MessageDerivateHint.ofSingleMessageType(MESSAGE_TYPE, ProductCreatedMessage.class, Product.referenceTypeId());
 
     private final ProductProjection productProjection;
 

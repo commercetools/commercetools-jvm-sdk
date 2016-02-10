@@ -25,7 +25,7 @@ import java.time.ZonedDateTime;
 public final class ReviewStateTransitionMessage  extends GenericMessageImpl<Review> {
     public static final String MESSAGE_TYPE = "ReviewStateTransition";
     public static final MessageDerivateHint<ReviewStateTransitionMessage> MESSAGE_HINT =
-            MessageDerivateHint.ofSingleMessageType(MESSAGE_TYPE, ReviewStateTransitionMessage.class);
+            MessageDerivateHint.ofSingleMessageType(MESSAGE_TYPE, ReviewStateTransitionMessage.class, Review.referenceTypeId());
 
     @Nullable
     private final Reference<State> oldState;

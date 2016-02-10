@@ -14,7 +14,7 @@ import java.time.ZonedDateTime;
 public final class OrderStateChangedMessage extends GenericMessageImpl<Order> {
     public static final String MESSAGE_TYPE = "OrderStateChanged";
     public static final MessageDerivateHint<OrderStateChangedMessage> MESSAGE_HINT =
-            MessageDerivateHint.ofSingleMessageType(MESSAGE_TYPE, OrderStateChangedMessage.class);
+            MessageDerivateHint.ofSingleMessageType(MESSAGE_TYPE, OrderStateChangedMessage.class, Order.referenceTypeId());
 
     private final OrderState orderState;
 
