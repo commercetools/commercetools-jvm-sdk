@@ -5,6 +5,7 @@ import io.sphere.sdk.models.Base;
 
 import java.util.function.Supplier;
 
+@Deprecated
 public final class SphereAccessTokenSupplierFactory extends Base {
     private final Supplier<HttpClient> httpClientSupplier;
 
