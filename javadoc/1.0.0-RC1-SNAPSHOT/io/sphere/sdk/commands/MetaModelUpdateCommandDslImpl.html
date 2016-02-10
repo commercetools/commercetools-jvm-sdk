@@ -191,7 +191,9 @@ implements <a href="../../../../io/sphere/sdk/commands/UpdateCommandDsl.html" ti
 </tr>
 <tr id="i3" class="rowColor">
 <td class="colFirst"><code>java.util.List&lt;? extends <a href="../../../../io/sphere/sdk/commands/UpdateAction.html" title="interface in io.sphere.sdk.commands">UpdateAction</a>&lt;<a href="../../../../io/sphere/sdk/commands/MetaModelUpdateCommandDslImpl.html" title="type parameter in MetaModelUpdateCommandDslImpl">T</a>&gt;&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/commands/MetaModelUpdateCommandDslImpl.html#getUpdateActions--">getUpdateActions</a></span>()</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/commands/MetaModelUpdateCommandDslImpl.html#getUpdateActions--">getUpdateActions</a></span>()</code>
+<div class="block">Gets the list of updates which should be applied to the object</div>
+</td>
 </tr>
 <tr id="i4" class="altColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/models/Versioned.html" title="interface in io.sphere.sdk.models">Versioned</a>&lt;<a href="../../../../io/sphere/sdk/commands/MetaModelUpdateCommandDslImpl.html" title="type parameter in MetaModelUpdateCommandDslImpl">T</a>&gt;</code></td>
@@ -245,7 +247,9 @@ implements <a href="../../../../io/sphere/sdk/commands/UpdateCommandDsl.html" ti
 </tr>
 <tr id="i13" class="rowColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/commands/MetaModelUpdateCommandDslImpl.html" title="type parameter in MetaModelUpdateCommandDslImpl">C</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/commands/MetaModelUpdateCommandDslImpl.html#withVersion-io.sphere.sdk.models.Versioned-">withVersion</a></span>(<a href="../../../../io/sphere/sdk/models/Versioned.html" title="interface in io.sphere.sdk.models">Versioned</a>&lt;<a href="../../../../io/sphere/sdk/commands/MetaModelUpdateCommandDslImpl.html" title="type parameter in MetaModelUpdateCommandDslImpl">T</a>&gt;&nbsp;newVersioned)</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/commands/MetaModelUpdateCommandDslImpl.html#withVersion-io.sphere.sdk.models.Versioned-">withVersion</a></span>(<a href="../../../../io/sphere/sdk/models/Versioned.html" title="interface in io.sphere.sdk.models">Versioned</a>&lt;<a href="../../../../io/sphere/sdk/commands/MetaModelUpdateCommandDslImpl.html" title="type parameter in MetaModelUpdateCommandDslImpl">T</a>&gt;&nbsp;newVersioned)</code>
+<div class="block">Creates a copy of this update command with a different value for version.</div>
+</td>
 </tr>
 </table>
 <ul class="blockList">
@@ -366,9 +370,15 @@ implements <a href="../../../../io/sphere/sdk/commands/UpdateCommandDsl.html" ti
 <li class="blockList">
 <h4>withVersion</h4>
 <pre>public&nbsp;<a href="../../../../io/sphere/sdk/commands/MetaModelUpdateCommandDslImpl.html" title="type parameter in MetaModelUpdateCommandDslImpl">C</a>&nbsp;withVersion(<a href="../../../../io/sphere/sdk/models/Versioned.html" title="interface in io.sphere.sdk.models">Versioned</a>&lt;<a href="../../../../io/sphere/sdk/commands/MetaModelUpdateCommandDslImpl.html" title="type parameter in MetaModelUpdateCommandDslImpl">T</a>&gt;&nbsp;newVersioned)</pre>
+<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../io/sphere/sdk/commands/UpdateCommandDsl.html#withVersion-io.sphere.sdk.models.Versioned-">UpdateCommandDsl</a></code></span></div>
+<div class="block">Creates a copy of this update command with a different value for version.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="../../../../io/sphere/sdk/commands/UpdateCommandDsl.html#withVersion-io.sphere.sdk.models.Versioned-">withVersion</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/commands/UpdateCommandDsl.html" title="interface in io.sphere.sdk.commands">UpdateCommandDsl</a>&lt;<a href="../../../../io/sphere/sdk/commands/MetaModelUpdateCommandDslImpl.html" title="type parameter in MetaModelUpdateCommandDslImpl">T</a> extends <a href="../../../../io/sphere/sdk/models/ResourceView.html" title="interface in io.sphere.sdk.models">ResourceView</a>&lt;<a href="../../../../io/sphere/sdk/commands/MetaModelUpdateCommandDslImpl.html" title="type parameter in MetaModelUpdateCommandDslImpl">T</a>,<a href="../../../../io/sphere/sdk/commands/MetaModelUpdateCommandDslImpl.html" title="type parameter in MetaModelUpdateCommandDslImpl">T</a>&gt;,<a href="../../../../io/sphere/sdk/commands/MetaModelUpdateCommandDslImpl.html" title="type parameter in MetaModelUpdateCommandDslImpl">C</a> extends <a href="../../../../io/sphere/sdk/commands/UpdateCommandDsl.html" title="interface in io.sphere.sdk.commands">UpdateCommandDsl</a>&lt;<a href="../../../../io/sphere/sdk/commands/MetaModelUpdateCommandDslImpl.html" title="type parameter in MetaModelUpdateCommandDslImpl">T</a>,<a href="../../../../io/sphere/sdk/commands/MetaModelUpdateCommandDslImpl.html" title="type parameter in MetaModelUpdateCommandDslImpl">C</a>&gt;&gt;</code></dd>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>newVersioned</code> - the new versioned parameter which is expected to contain the most recent version of the resource, do not change the ID</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>the new update command</dd>
 </dl>
 </li>
 </ul>
@@ -388,9 +398,13 @@ implements <a href="../../../../io/sphere/sdk/commands/UpdateCommandDsl.html" ti
 <li class="blockList">
 <h4>getUpdateActions</h4>
 <pre>public&nbsp;java.util.List&lt;? extends <a href="../../../../io/sphere/sdk/commands/UpdateAction.html" title="interface in io.sphere.sdk.commands">UpdateAction</a>&lt;<a href="../../../../io/sphere/sdk/commands/MetaModelUpdateCommandDslImpl.html" title="type parameter in MetaModelUpdateCommandDslImpl">T</a>&gt;&gt;&nbsp;getUpdateActions()</pre>
+<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../io/sphere/sdk/commands/UpdateCommand.html#getUpdateActions--">UpdateCommand</a></code></span></div>
+<div class="block">Gets the list of updates which should be applied to the object</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="../../../../io/sphere/sdk/commands/UpdateCommand.html#getUpdateActions--">getUpdateActions</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/commands/UpdateCommand.html" title="interface in io.sphere.sdk.commands">UpdateCommand</a>&lt;<a href="../../../../io/sphere/sdk/commands/MetaModelUpdateCommandDslImpl.html" title="type parameter in MetaModelUpdateCommandDslImpl">T</a> extends <a href="../../../../io/sphere/sdk/models/ResourceView.html" title="interface in io.sphere.sdk.models">ResourceView</a>&lt;<a href="../../../../io/sphere/sdk/commands/MetaModelUpdateCommandDslImpl.html" title="type parameter in MetaModelUpdateCommandDslImpl">T</a>,<a href="../../../../io/sphere/sdk/commands/MetaModelUpdateCommandDslImpl.html" title="type parameter in MetaModelUpdateCommandDslImpl">T</a>&gt;&gt;</code></dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>update actions</dd>
 </dl>
 </li>
 </ul>

@@ -161,7 +161,9 @@ extends <a href="../../../../../io/sphere/sdk/commands/UpdateCommandDsl.html" ti
 </tr>
 <tr id="i6" class="altColor">
 <td class="colFirst"><code><a href="../../../../../io/sphere/sdk/types/commands/TypeUpdateCommand.html" title="interface in io.sphere.sdk.types.commands">TypeUpdateCommand</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/types/commands/TypeUpdateCommand.html#withVersion-io.sphere.sdk.models.Versioned-">withVersion</a></span>(<a href="../../../../../io/sphere/sdk/models/Versioned.html" title="interface in io.sphere.sdk.models">Versioned</a>&lt;<a href="../../../../../io/sphere/sdk/types/Type.html" title="interface in io.sphere.sdk.types">Type</a>&gt;&nbsp;versioned)</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/types/commands/TypeUpdateCommand.html#withVersion-io.sphere.sdk.models.Versioned-">withVersion</a></span>(<a href="../../../../../io/sphere/sdk/models/Versioned.html" title="interface in io.sphere.sdk.models">Versioned</a>&lt;<a href="../../../../../io/sphere/sdk/types/Type.html" title="interface in io.sphere.sdk.types">Type</a>&gt;&nbsp;versioned)</code>
+<div class="block">Creates a copy of this update command with a different value for version.</div>
+</td>
 </tr>
 </table>
 <ul class="blockList">
@@ -354,9 +356,15 @@ assertThat(fetch2).isNotSameAs(fetch);
 <li class="blockList">
 <h4>withVersion</h4>
 <pre><a href="../../../../../io/sphere/sdk/types/commands/TypeUpdateCommand.html" title="interface in io.sphere.sdk.types.commands">TypeUpdateCommand</a>&nbsp;withVersion(<a href="../../../../../io/sphere/sdk/models/Versioned.html" title="interface in io.sphere.sdk.models">Versioned</a>&lt;<a href="../../../../../io/sphere/sdk/types/Type.html" title="interface in io.sphere.sdk.types">Type</a>&gt;&nbsp;versioned)</pre>
+<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../../io/sphere/sdk/commands/UpdateCommandDsl.html#withVersion-io.sphere.sdk.models.Versioned-">UpdateCommandDsl</a></code></span></div>
+<div class="block">Creates a copy of this update command with a different value for version.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="../../../../../io/sphere/sdk/commands/UpdateCommandDsl.html#withVersion-io.sphere.sdk.models.Versioned-">withVersion</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../io/sphere/sdk/commands/UpdateCommandDsl.html" title="interface in io.sphere.sdk.commands">UpdateCommandDsl</a>&lt;<a href="../../../../../io/sphere/sdk/types/Type.html" title="interface in io.sphere.sdk.types">Type</a>,<a href="../../../../../io/sphere/sdk/types/commands/TypeUpdateCommand.html" title="interface in io.sphere.sdk.types.commands">TypeUpdateCommand</a>&gt;</code></dd>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>versioned</code> - the new versioned parameter which is expected to contain the most recent version of the resource, do not change the ID</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>the new update command</dd>
 </dl>
 </li>
 </ul>

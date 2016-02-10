@@ -1450,6 +1450,8 @@
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/AddressQueryModel.html#city--">city()</a></span> - Method in interface io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/AddressQueryModel.html" title="interface in io.sphere.sdk.queries">AddressQueryModel</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/messages/MessageDerivateHint.html#clazz--">clazz()</a></span> - Method in class io.sphere.sdk.messages.<a href="io/sphere/sdk/messages/MessageDerivateHint.html" title="class in io.sphere.sdk.messages">MessageDerivateHint</a></dt>
+<dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/client/ClientErrorException.html" title="class in io.sphere.sdk.client"><span class="typeNameLink">ClientErrorException</span></a> - Exception in <a href="io/sphere/sdk/client/package-summary.html">io.sphere.sdk.client</a></dt>
 <dd>
 <div class="block">Exceptions for SPHERE.IO http responses with an error code 4xx.</div>
@@ -1894,15 +1896,19 @@
 </dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/client/SphereAccessTokenSupplierFactory.html#createSupplierOfAutoRefresh-io.sphere.sdk.client.SphereAuthConfig-">createSupplierOfAutoRefresh(SphereAuthConfig)</a></span> - Method in class io.sphere.sdk.client.<a href="io/sphere/sdk/client/SphereAccessTokenSupplierFactory.html" title="class in io.sphere.sdk.client">SphereAccessTokenSupplierFactory</a></dt>
 <dd>
+<div class="block"><span class="deprecatedLabel">Deprecated.</span></div>
 <div class="block">Provides a token generator which tries to always provide a valid token.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/client/SphereAccessTokenSupplierFactory.html#createSupplierOfFixedToken-java.lang.String-">createSupplierOfFixedToken(String)</a></span> - Static method in class io.sphere.sdk.client.<a href="io/sphere/sdk/client/SphereAccessTokenSupplierFactory.html" title="class in io.sphere.sdk.client">SphereAccessTokenSupplierFactory</a></dt>
 <dd>
+<div class="block"><span class="deprecatedLabel">Deprecated.</span></div>
 <div class="block">Provides a token generator which just returns a fixed token, so the client is usable
  for the live time of this token.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/client/SphereAccessTokenSupplierFactory.html#createSupplierOfOneTimeFetchingToken-io.sphere.sdk.client.SphereAuthConfig-">createSupplierOfOneTimeFetchingToken(SphereAuthConfig)</a></span> - Method in class io.sphere.sdk.client.<a href="io/sphere/sdk/client/SphereAccessTokenSupplierFactory.html" title="class in io.sphere.sdk.client">SphereAccessTokenSupplierFactory</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block"><span class="deprecatedLabel">Deprecated.</span></div>
+&nbsp;</dd>
 <dt><a href="io/sphere/sdk/models/CreationTimestamped.html" title="interface in io.sphere.sdk.models"><span class="typeNameLink">CreationTimestamped</span></a> - Interface in <a href="io/sphere/sdk/models/package-summary.html">io.sphere.sdk.models</a></dt>
 <dd>
 <div class="block">Interface for objects which have a timestamp for their creation time.</div>
@@ -2347,8 +2353,7 @@
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/client/DeprecationExceptionSphereClientDecorator.html" title="class in io.sphere.sdk.client"><span class="typeNameLink">DeprecationExceptionSphereClientDecorator</span></a> - Class in <a href="io/sphere/sdk/client/package-summary.html">io.sphere.sdk.client</a></dt>
 <dd>
-<div class="block">If SPHERE.IO returns a <a href="io/sphere/sdk/client/SphereHttpHeaders.html#X_DEPRECATION_NOTICE">"X-DEPRECATION-NOTICE"</a> header field,
- it does not deserialize the response object in <a href="io/sphere/sdk/client/SphereRequest.html#deserialize-io.sphere.sdk.http.HttpResponse-"><code>SphereRequest.deserialize(HttpResponse)</code></a> but throws a <a href="io/sphere/sdk/client/SphereDeprecationException.html" title="class in io.sphere.sdk.client"><code>SphereDeprecationException</code></a>.</div>
+<div class="block">Decorator for <a href="io/sphere/sdk/client/SphereClient.html" title="interface in io.sphere.sdk.client"><code>SphereClient</code></a>s to throw exceptions on deprecated http calls.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/DirectionlessQuerySort.html#desc--">desc()</a></span> - Method in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/DirectionlessQuerySort.html" title="class in io.sphere.sdk.queries">DirectionlessQuerySort</a></dt>
 <dd>&nbsp;</dd>
@@ -3082,6 +3087,12 @@
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/utils/CompletableFutureUtils.html#failed-java.lang.Throwable-">failed(Throwable)</a></span> - Static method in class io.sphere.sdk.utils.<a href="io/sphere/sdk/utils/CompletableFutureUtils.html" title="class in io.sphere.sdk.utils">CompletableFutureUtils</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/client/TokensFacade.html#fetchAccessToken-io.sphere.sdk.client.SphereAuthConfig-">fetchAccessToken(SphereAuthConfig)</a></span> - Static method in class io.sphere.sdk.client.<a href="io/sphere/sdk/client/TokensFacade.html" title="class in io.sphere.sdk.client">TokensFacade</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/client/TokensFacade.html#fetchTokens-io.sphere.sdk.client.SphereAuthConfig-">fetchTokens(SphereAuthConfig)</a></span> - Static method in class io.sphere.sdk.client.<a href="io/sphere/sdk/client/TokensFacade.html" title="class in io.sphere.sdk.client">TokensFacade</a></dt>
+<dd>
+<div class="block">Fetches a new access token.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/cartdiscounts/queries/CartDiscountQueryBuilder.html#fetchTotal-boolean-">fetchTotal(boolean)</a></span> - Method in class io.sphere.sdk.cartdiscounts.queries.<a href="io/sphere/sdk/cartdiscounts/queries/CartDiscountQueryBuilder.html" title="class in io.sphere.sdk.cartdiscounts.queries">CartDiscountQueryBuilder</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/queries/CartQueryBuilder.html#fetchTotal-boolean-">fetchTotal(boolean)</a></span> - Method in class io.sphere.sdk.carts.queries.<a href="io/sphere/sdk/carts/queries/CartQueryBuilder.html" title="class in io.sphere.sdk.carts.queries">CartQueryBuilder</a></dt>
@@ -3286,6 +3297,8 @@
 <dd>
 <div class="block">Creates a new query that queries only for messages that can be mapped to a certain Java type.</div>
 </dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/messages/queries/MessageQuery.html#forMessageTypes-java.util.List-">forMessageTypes(List&lt;MessageDerivateHint&lt;? extends Message&gt;&gt;)</a></span> - Method in interface io.sphere.sdk.messages.queries.<a href="io/sphere/sdk/messages/queries/MessageQuery.html" title="interface in io.sphere.sdk.messages.queries">MessageQuery</a></dt>
+<dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/http/FormUrlEncodedHttpRequestBody.html" title="class in io.sphere.sdk.http"><span class="typeNameLink">FormUrlEncodedHttpRequestBody</span></a> - Class in <a href="io/sphere/sdk/http/package-summary.html">io.sphere.sdk.http</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/queries/ProductCatalogDataQueryModel.html#forProjection-io.sphere.sdk.products.ProductProjectionType-">forProjection(ProductProjectionType)</a></span> - Method in interface io.sphere.sdk.products.queries.<a href="io/sphere/sdk/products/queries/ProductCatalogDataQueryModel.html" title="interface in io.sphere.sdk.products.queries">ProductCatalogDataQueryModel</a></dt>
@@ -3348,6 +3361,8 @@
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/ProductCatalogData.html#get-io.sphere.sdk.products.ProductProjectionType-">get(ProductProjectionType)</a></span> - Method in interface io.sphere.sdk.products.<a href="io/sphere/sdk/products/ProductCatalogData.html" title="interface in io.sphere.sdk.products">ProductCatalogData</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/queries/Get.html" title="interface in io.sphere.sdk.queries"><span class="typeNameLink">Get</span></a>&lt;<a href="io/sphere/sdk/queries/Get.html" title="type parameter in Get">T</a>&gt; - Interface in <a href="io/sphere/sdk/queries/package-summary.html">io.sphere.sdk.queries</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/client/Tokens.html#getAccessToken--">getAccessToken()</a></span> - Method in class io.sphere.sdk.client.<a href="io/sphere/sdk/client/Tokens.html" title="class in io.sphere.sdk.client">Tokens</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/commands/UpdateAction.html#getAction--">getAction()</a></span> - Method in interface io.sphere.sdk.commands.<a href="io/sphere/sdk/commands/UpdateAction.html" title="interface in io.sphere.sdk.commands">UpdateAction</a></dt>
 <dd>&nbsp;</dd>
@@ -4200,6 +4215,8 @@
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/inventory/InventoryEntryDraft.html#getExpectedDelivery--">getExpectedDelivery()</a></span> - Method in interface io.sphere.sdk.inventory.<a href="io/sphere/sdk/inventory/InventoryEntryDraft.html" title="interface in io.sphere.sdk.inventory">InventoryEntryDraft</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/inventory/InventoryEntryDraftDsl.html#getExpectedDelivery--">getExpectedDelivery()</a></span> - Method in class io.sphere.sdk.inventory.<a href="io/sphere/sdk/inventory/InventoryEntryDraftDsl.html" title="class in io.sphere.sdk.inventory">InventoryEntryDraftDsl</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/client/Tokens.html#getExpiresIn--">getExpiresIn()</a></span> - Method in class io.sphere.sdk.client.<a href="io/sphere/sdk/client/Tokens.html" title="class in io.sphere.sdk.client">Tokens</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/categories/Category.html#getExternalId--">getExternalId()</a></span> - Method in interface io.sphere.sdk.categories.<a href="io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories">Category</a></dt>
 <dd>
@@ -5265,6 +5282,10 @@
 </dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/ByIdVariantIdentifier.html#getProductId--">getProductId()</a></span> - Method in interface io.sphere.sdk.products.<a href="io/sphere/sdk/products/ByIdVariantIdentifier.html" title="interface in io.sphere.sdk.products">ByIdVariantIdentifier</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/messages/ProductCreatedMessage.html#getProductProjection--">getProductProjection()</a></span> - Method in class io.sphere.sdk.products.messages.<a href="io/sphere/sdk/products/messages/ProductCreatedMessage.html" title="class in io.sphere.sdk.products.messages">ProductCreatedMessage</a></dt>
+<dd>
+<div class="block">The staged projection of the product at the time of creation.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/messages/ProductPublishedMessage.html#getProductProjection--">getProductProjection()</a></span> - Method in class io.sphere.sdk.products.messages.<a href="io/sphere/sdk/products/messages/ProductPublishedMessage.html" title="class in io.sphere.sdk.products.messages">ProductPublishedMessage</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/LineItem.html#getProductSlug--">getProductSlug()</a></span> - Method in interface io.sphere.sdk.carts.<a href="io/sphere/sdk/carts/LineItem.html" title="interface in io.sphere.sdk.carts">LineItem</a></dt>
@@ -5376,6 +5397,8 @@
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/attributes/ReferenceAttributeType.html#getReferenceTypeId--">getReferenceTypeId()</a></span> - Method in class io.sphere.sdk.products.attributes.<a href="io/sphere/sdk/products/attributes/ReferenceAttributeType.html" title="class in io.sphere.sdk.products.attributes">ReferenceAttributeType</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/types/ReferenceFieldType.html#getReferenceTypeId--">getReferenceTypeId()</a></span> - Method in class io.sphere.sdk.types.<a href="io/sphere/sdk/types/ReferenceFieldType.html" title="class in io.sphere.sdk.types">ReferenceFieldType</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/client/Tokens.html#getRefreshToken--">getRefreshToken()</a></span> - Method in class io.sphere.sdk.client.<a href="io/sphere/sdk/client/Tokens.html" title="class in io.sphere.sdk.client">Tokens</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/Address.html#getRegion--">getRegion()</a></span> - Method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/Address.html" title="class in io.sphere.sdk.models">Address</a></dt>
 <dd>&nbsp;</dd>
@@ -6084,7 +6107,9 @@
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/commands/MetaModelUpdateCommandDslImpl.html#getUpdateActions--">getUpdateActions()</a></span> - Method in class io.sphere.sdk.commands.<a href="io/sphere/sdk/commands/MetaModelUpdateCommandDslImpl.html" title="class in io.sphere.sdk.commands">MetaModelUpdateCommandDslImpl</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/commands/UpdateCommand.html#getUpdateActions--">getUpdateActions()</a></span> - Method in interface io.sphere.sdk.commands.<a href="io/sphere/sdk/commands/UpdateCommand.html" title="interface in io.sphere.sdk.commands">UpdateCommand</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Gets the list of updates which should be applied to the object</div>
+</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/search/model/RangeStats.html#getUpperEndpoint--">getUpperEndpoint()</a></span> - Method in class io.sphere.sdk.search.model.<a href="io/sphere/sdk/search/model/RangeStats.html" title="class in io.sphere.sdk.search.model">RangeStats</a></dt>
 <dd>
 <div class="block">Upper endpoint of the range.</div>
@@ -6436,7 +6461,9 @@
 <dt><a href="io/sphere/sdk/http/HttpRequestBody.html" title="interface in io.sphere.sdk.http"><span class="typeNameLink">HttpRequestBody</span></a> - Interface in <a href="io/sphere/sdk/http/package-summary.html">io.sphere.sdk.http</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/client/HttpRequestIntent.html" title="class in io.sphere.sdk.client"><span class="typeNameLink">HttpRequestIntent</span></a> - Class in <a href="io/sphere/sdk/client/package-summary.html">io.sphere.sdk.client</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Expresses the http request domain model form commercetools platform as a draft for <a href="io/sphere/sdk/http/HttpRequest.html" title="interface in io.sphere.sdk.http"><code>HttpRequest</code></a>.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/client/JsonNodeSphereRequest.html#httpRequestIntent--">httpRequestIntent()</a></span> - Method in class io.sphere.sdk.client.<a href="io/sphere/sdk/client/JsonNodeSphereRequest.html" title="class in io.sphere.sdk.client">JsonNodeSphereRequest</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/client/SphereRequest.html#httpRequestIntent--">httpRequestIntent()</a></span> - Method in interface io.sphere.sdk.client.<a href="io/sphere/sdk/client/SphereRequest.html" title="interface in io.sphere.sdk.client">SphereRequest</a></dt>
@@ -6719,15 +6746,25 @@
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/search/model/InvertedBoundsException.html#InvertedBoundsException-io.sphere.sdk.search.model.Range-">InvertedBoundsException(Range&lt;T&gt;)</a></span> - Constructor for exception io.sphere.sdk.search.model.<a href="io/sphere/sdk/search/model/InvertedBoundsException.html" title="class in io.sphere.sdk.search.model">InvertedBoundsException</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/cartdiscounts/package-summary.html">io.sphere.sdk.cartdiscounts</a> - package io.sphere.sdk.cartdiscounts</dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Provides model classes and builders for  cart discounts.</div>
+</dd>
 <dt><a href="io/sphere/sdk/cartdiscounts/commands/package-summary.html">io.sphere.sdk.cartdiscounts.commands</a> - package io.sphere.sdk.cartdiscounts.commands</dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Provides types to change the state of  cart discounts.</div>
+</dd>
 <dt><a href="io/sphere/sdk/cartdiscounts/commands/updateactions/package-summary.html">io.sphere.sdk.cartdiscounts.commands.updateactions</a> - package io.sphere.sdk.cartdiscounts.commands.updateactions</dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Provides the possible operations which can be performed on update commands for  cart discounts.</div>
+</dd>
 <dt><a href="io/sphere/sdk/cartdiscounts/expansion/package-summary.html">io.sphere.sdk.cartdiscounts.expansion</a> - package io.sphere.sdk.cartdiscounts.expansion</dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Provides reference expansion models for  cart discounts.</div>
+</dd>
 <dt><a href="io/sphere/sdk/cartdiscounts/queries/package-summary.html">io.sphere.sdk.cartdiscounts.queries</a> - package io.sphere.sdk.cartdiscounts.queries</dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Provides types to retrieve the state of  cart discounts.</div>
+</dd>
 <dt><a href="io/sphere/sdk/carts/package-summary.html">io.sphere.sdk.carts</a> - package io.sphere.sdk.carts</dt>
 <dd>
 <div class="block">Provides model classes and builders for  carts.</div>
@@ -6741,7 +6778,9 @@
 <div class="block">Provides the possible operations which can be performed on update commands for  carts.</div>
 </dd>
 <dt><a href="io/sphere/sdk/carts/expansion/package-summary.html">io.sphere.sdk.carts.expansion</a> - package io.sphere.sdk.carts.expansion</dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Provides reference expansion models for  carts.</div>
+</dd>
 <dt><a href="io/sphere/sdk/carts/queries/package-summary.html">io.sphere.sdk.carts.queries</a> - package io.sphere.sdk.carts.queries</dt>
 <dd>
 <div class="block">Provides types to retrieve the state of  carts.</div>
@@ -6759,7 +6798,9 @@
 <div class="block">Provides the possible operations which can be performed on update commands for  categories.</div>
 </dd>
 <dt><a href="io/sphere/sdk/categories/expansion/package-summary.html">io.sphere.sdk.categories.expansion</a> - package io.sphere.sdk.categories.expansion</dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Provides reference expansion models for  categories.</div>
+</dd>
 <dt><a href="io/sphere/sdk/categories/queries/package-summary.html">io.sphere.sdk.categories.queries</a> - package io.sphere.sdk.categories.queries</dt>
 <dd>
 <div class="block">Provides types to retrieve the state of  categories.</div>
@@ -6777,7 +6818,9 @@
 <div class="block">Provides the possible operations which can be performed on update commands for  channels.</div>
 </dd>
 <dt><a href="io/sphere/sdk/channels/expansion/package-summary.html">io.sphere.sdk.channels.expansion</a> - package io.sphere.sdk.channels.expansion</dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Provides reference expansion models for  channels.</div>
+</dd>
 <dt><a href="io/sphere/sdk/channels/queries/package-summary.html">io.sphere.sdk.channels.queries</a> - package io.sphere.sdk.channels.queries</dt>
 <dd>
 <div class="block">Provides types to retrieve the state of  channels.</div>
@@ -6787,7 +6830,9 @@
 <div class="block">Provides types to connect to SPHERE.IO via HTTPS.</div>
 </dd>
 <dt><a href="io/sphere/sdk/client/metrics/package-summary.html">io.sphere.sdk.client.metrics</a> - package io.sphere.sdk.client.metrics</dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Provides classes to collect metrics about a <a href="io/sphere/sdk/client/SphereClient.html" title="interface in io.sphere.sdk.client"><code>SphereClient</code></a>.</div>
+</dd>
 <dt><a href="io/sphere/sdk/commands/package-summary.html">io.sphere.sdk.commands</a> - package io.sphere.sdk.commands</dt>
 <dd>
 <div class="block">This package provide tools to change objects in the SPHERE.IO backend.</div>
@@ -6805,7 +6850,9 @@
 <div class="block">Provides the possible operations which can be performed on update commands for  customer groups.</div>
 </dd>
 <dt><a href="io/sphere/sdk/customergroups/expansion/package-summary.html">io.sphere.sdk.customergroups.expansion</a> - package io.sphere.sdk.customergroups.expansion</dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Provides reference expansion models for  customer groups.</div>
+</dd>
 <dt><a href="io/sphere/sdk/customergroups/queries/package-summary.html">io.sphere.sdk.customergroups.queries</a> - package io.sphere.sdk.customergroups.queries</dt>
 <dd>
 <div class="block">Provides types to retrieve the state of  customer groups.</div>
@@ -6823,9 +6870,13 @@
 <div class="block">Provides the possible operations which can be performed on update commands for  customers.</div>
 </dd>
 <dt><a href="io/sphere/sdk/customers/errors/package-summary.html">io.sphere.sdk.customers.errors</a> - package io.sphere.sdk.customers.errors</dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Errors related to <a href="io/sphere/sdk/customers/Customer.html" title="interface in io.sphere.sdk.customers"><code>Customer</code></a> operations.</div>
+</dd>
 <dt><a href="io/sphere/sdk/customers/expansion/package-summary.html">io.sphere.sdk.customers.expansion</a> - package io.sphere.sdk.customers.expansion</dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Provides reference expansion models for  customers.</div>
+</dd>
 <dt><a href="io/sphere/sdk/customers/queries/package-summary.html">io.sphere.sdk.customers.queries</a> - package io.sphere.sdk.customers.queries</dt>
 <dd>
 <div class="block">Provides types to retrieve the state of  customers.</div>
@@ -6839,23 +6890,37 @@
 <div class="block">Provides types to change the state of  custom objects.</div>
 </dd>
 <dt><a href="io/sphere/sdk/customobjects/expansion/package-summary.html">io.sphere.sdk.customobjects.expansion</a> - package io.sphere.sdk.customobjects.expansion</dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Provides reference expansion models for  custom objects.</div>
+</dd>
 <dt><a href="io/sphere/sdk/customobjects/queries/package-summary.html">io.sphere.sdk.customobjects.queries</a> - package io.sphere.sdk.customobjects.queries</dt>
 <dd>
 <div class="block">Provides types to retrieve the state of  custom objects.</div>
 </dd>
 <dt><a href="io/sphere/sdk/discountcodes/package-summary.html">io.sphere.sdk.discountcodes</a> - package io.sphere.sdk.discountcodes</dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Provides model classes and builders for  discount codes.</div>
+</dd>
 <dt><a href="io/sphere/sdk/discountcodes/commands/package-summary.html">io.sphere.sdk.discountcodes.commands</a> - package io.sphere.sdk.discountcodes.commands</dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Provides types to change the state of  discount codes.</div>
+</dd>
 <dt><a href="io/sphere/sdk/discountcodes/commands/updateactions/package-summary.html">io.sphere.sdk.discountcodes.commands.updateactions</a> - package io.sphere.sdk.discountcodes.commands.updateactions</dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Provides the possible operations which can be performed on update commands for  discount codes.</div>
+</dd>
 <dt><a href="io/sphere/sdk/discountcodes/expansion/package-summary.html">io.sphere.sdk.discountcodes.expansion</a> - package io.sphere.sdk.discountcodes.expansion</dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Provides reference expansion models for  discount codes.</div>
+</dd>
 <dt><a href="io/sphere/sdk/discountcodes/queries/package-summary.html">io.sphere.sdk.discountcodes.queries</a> - package io.sphere.sdk.discountcodes.queries</dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Provides types to retrieve the state of  discount codes.</div>
+</dd>
 <dt><a href="io/sphere/sdk/expansion/package-summary.html">io.sphere.sdk.expansion</a> - package io.sphere.sdk.expansion</dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Provides classes to describe reference expansion paths and their models.</div>
+</dd>
 <dt><a href="io/sphere/sdk/http/package-summary.html">io.sphere.sdk.http</a> - package io.sphere.sdk.http</dt>
 <dd>
 <div class="block">Provides types to deal with HTTP.</div>
@@ -6873,7 +6938,9 @@
 <div class="block">Provides the possible operations which can be performed on update commands for  inventory entries.</div>
 </dd>
 <dt><a href="io/sphere/sdk/inventory/expansion/package-summary.html">io.sphere.sdk.inventory.expansion</a> - package io.sphere.sdk.inventory.expansion</dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Provides reference expansion models for  inventory entries.</div>
+</dd>
 <dt><a href="io/sphere/sdk/inventory/queries/package-summary.html">io.sphere.sdk.inventory.queries</a> - package io.sphere.sdk.inventory.queries</dt>
 <dd>
 <div class="block">Provides types to retrieve the state of  inventory entries.</div>
@@ -6883,15 +6950,25 @@
 <div class="block">Provides utils the JSON mapping from and to SPHERE.IO.</div>
 </dd>
 <dt><a href="io/sphere/sdk/jsonnodes/expansion/package-summary.html">io.sphere.sdk.jsonnodes.expansion</a> - package io.sphere.sdk.jsonnodes.expansion</dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Provides reference expansion models for  json nodes.</div>
+</dd>
 <dt><a href="io/sphere/sdk/jsonnodes/queries/package-summary.html">io.sphere.sdk.jsonnodes.queries</a> - package io.sphere.sdk.jsonnodes.queries</dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Provides types to retrieve the state of  json nodes.</div>
+</dd>
 <dt><a href="io/sphere/sdk/messages/package-summary.html">io.sphere.sdk.messages</a> - package io.sphere.sdk.messages</dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Provides model classes and builders for  messages.</div>
+</dd>
 <dt><a href="io/sphere/sdk/messages/expansion/package-summary.html">io.sphere.sdk.messages.expansion</a> - package io.sphere.sdk.messages.expansion</dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Provides reference expansion models for  messages.</div>
+</dd>
 <dt><a href="io/sphere/sdk/messages/queries/package-summary.html">io.sphere.sdk.messages.queries</a> - package io.sphere.sdk.messages.queries</dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Provides types to retrieve the state of  messages.</div>
+</dd>
 <dt><a href="io/sphere/sdk/meta/package-summary.html">io.sphere.sdk.meta</a> - package io.sphere.sdk.meta</dt>
 <dd>
 <div class="block">Serves as documentation pages about the SDK itself, classes should not be in the classpath.</div>
@@ -6901,7 +6978,9 @@
 <div class="block">Provides the common API types of SPHERE.IO.</div>
 </dd>
 <dt><a href="io/sphere/sdk/models/errors/package-summary.html">io.sphere.sdk.models.errors</a> - package io.sphere.sdk.models.errors</dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Provides base classes for errors related to the commercetools platform.</div>
+</dd>
 <dt><a href="io/sphere/sdk/orders/package-summary.html">io.sphere.sdk.orders</a> - package io.sphere.sdk.orders</dt>
 <dd>
 <div class="block">Provides model classes and builders for  orders.</div>
@@ -6915,37 +6994,61 @@
 <div class="block">Provides the possible operations which can be performed on update commands for  orders.</div>
 </dd>
 <dt><a href="io/sphere/sdk/orders/expansion/package-summary.html">io.sphere.sdk.orders.expansion</a> - package io.sphere.sdk.orders.expansion</dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Provides reference expansion models for  orders.</div>
+</dd>
 <dt><a href="io/sphere/sdk/orders/messages/package-summary.html">io.sphere.sdk.orders.messages</a> - package io.sphere.sdk.orders.messages</dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Provides model classes and builders for  orders.</div>
+</dd>
 <dt><a href="io/sphere/sdk/orders/queries/package-summary.html">io.sphere.sdk.orders.queries</a> - package io.sphere.sdk.orders.queries</dt>
 <dd>
 <div class="block">Provides types to retrieve the state of  orders.</div>
 </dd>
 <dt><a href="io/sphere/sdk/payments/package-summary.html">io.sphere.sdk.payments</a> - package io.sphere.sdk.payments</dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Provides model classes and builders for  payments.</div>
+</dd>
 <dt><a href="io/sphere/sdk/payments/commands/package-summary.html">io.sphere.sdk.payments.commands</a> - package io.sphere.sdk.payments.commands</dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Provides types to change the state of  payments.</div>
+</dd>
 <dt><a href="io/sphere/sdk/payments/commands/updateactions/package-summary.html">io.sphere.sdk.payments.commands.updateactions</a> - package io.sphere.sdk.payments.commands.updateactions</dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Provides the possible operations which can be performed on update commands for  payments.</div>
+</dd>
 <dt><a href="io/sphere/sdk/payments/expansion/package-summary.html">io.sphere.sdk.payments.expansion</a> - package io.sphere.sdk.payments.expansion</dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Provides reference expansion models for  payments.</div>
+</dd>
 <dt><a href="io/sphere/sdk/payments/messages/package-summary.html">io.sphere.sdk.payments.messages</a> - package io.sphere.sdk.payments.messages</dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Provides model classes and builders for  payments.</div>
+</dd>
 <dt><a href="io/sphere/sdk/payments/queries/package-summary.html">io.sphere.sdk.payments.queries</a> - package io.sphere.sdk.payments.queries</dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Provides types to retrieve the state of  payments.</div>
+</dd>
 <dt><a href="io/sphere/sdk/productdiscounts/package-summary.html">io.sphere.sdk.productdiscounts</a> - package io.sphere.sdk.productdiscounts</dt>
 <dd>
 <div class="block">Provides model classes and builders for  product discounts.</div>
 </dd>
 <dt><a href="io/sphere/sdk/productdiscounts/commands/package-summary.html">io.sphere.sdk.productdiscounts.commands</a> - package io.sphere.sdk.productdiscounts.commands</dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Provides types to change the state of  product discounts.</div>
+</dd>
 <dt><a href="io/sphere/sdk/productdiscounts/commands/updateactions/package-summary.html">io.sphere.sdk.productdiscounts.commands.updateactions</a> - package io.sphere.sdk.productdiscounts.commands.updateactions</dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Provides the possible operations which can be performed on update commands for  product discounts.</div>
+</dd>
 <dt><a href="io/sphere/sdk/productdiscounts/expansion/package-summary.html">io.sphere.sdk.productdiscounts.expansion</a> - package io.sphere.sdk.productdiscounts.expansion</dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Provides reference expansion models for  product discounts.</div>
+</dd>
 <dt><a href="io/sphere/sdk/productdiscounts/queries/package-summary.html">io.sphere.sdk.productdiscounts.queries</a> - package io.sphere.sdk.productdiscounts.queries</dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Provides types to retrieve the state of  product discounts.</div>
+</dd>
 <dt><a href="io/sphere/sdk/products/package-summary.html">io.sphere.sdk.products</a> - package io.sphere.sdk.products</dt>
 <dd>
 <div class="block">Provides model classes and builders for  products.</div>
@@ -6963,9 +7066,13 @@
 <div class="block">Provides the possible operations which can be performed on update commands for  products.</div>
 </dd>
 <dt><a href="io/sphere/sdk/products/expansion/package-summary.html">io.sphere.sdk.products.expansion</a> - package io.sphere.sdk.products.expansion</dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Provides reference expansion models for  products.</div>
+</dd>
 <dt><a href="io/sphere/sdk/products/messages/package-summary.html">io.sphere.sdk.products.messages</a> - package io.sphere.sdk.products.messages</dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Provides model classes and builders for  products.</div>
+</dd>
 <dt><a href="io/sphere/sdk/products/queries/package-summary.html">io.sphere.sdk.products.queries</a> - package io.sphere.sdk.products.queries</dt>
 <dd>
 <div class="block">Provides types to retrieve the state of  products.</div>
@@ -6983,9 +7090,13 @@
 <div class="block">Provides types to change the state of  product types.</div>
 </dd>
 <dt><a href="io/sphere/sdk/producttypes/commands/updateactions/package-summary.html">io.sphere.sdk.producttypes.commands.updateactions</a> - package io.sphere.sdk.producttypes.commands.updateactions</dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Provides the possible operations which can be performed on update commands for  product types.</div>
+</dd>
 <dt><a href="io/sphere/sdk/producttypes/expansion/package-summary.html">io.sphere.sdk.producttypes.expansion</a> - package io.sphere.sdk.producttypes.expansion</dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Provides reference expansion models for  product types.</div>
+</dd>
 <dt><a href="io/sphere/sdk/producttypes/queries/package-summary.html">io.sphere.sdk.producttypes.queries</a> - package io.sphere.sdk.producttypes.queries</dt>
 <dd>
 <div class="block">Provides types to retrieve the state of  product types.</div>
@@ -7016,7 +7127,7 @@
 </dd>
 <dt><a href="io/sphere/sdk/reviews/expansion/package-summary.html">io.sphere.sdk.reviews.expansion</a> - package io.sphere.sdk.reviews.expansion</dt>
 <dd>
-<div class="block">Provides model classes and builders for  reviews.</div>
+<div class="block">Provides reference expansion models for  reviews.</div>
 </dd>
 <dt><a href="io/sphere/sdk/reviews/messages/package-summary.html">io.sphere.sdk.reviews.messages</a> - package io.sphere.sdk.reviews.messages</dt>
 <dd>
@@ -7035,7 +7146,9 @@
 <div class="block">Provides types to perform searches.</div>
 </dd>
 <dt><a href="io/sphere/sdk/search/model/package-summary.html">io.sphere.sdk.search.model</a> - package io.sphere.sdk.search.model</dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Models to support using search endpoints.</div>
+</dd>
 <dt><a href="io/sphere/sdk/search/tokenizer/package-summary.html">io.sphere.sdk.search.tokenizer</a> - package io.sphere.sdk.search.tokenizer</dt>
 <dd>
 <div class="block">Provides Tokenizers for the search endpoint.</div>
@@ -7053,7 +7166,9 @@
 <div class="block">Provides the possible operations which can be performed on update commands for  shipping methods.</div>
 </dd>
 <dt><a href="io/sphere/sdk/shippingmethods/expansion/package-summary.html">io.sphere.sdk.shippingmethods.expansion</a> - package io.sphere.sdk.shippingmethods.expansion</dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Provides reference expansion models for  shipping methods.</div>
+</dd>
 <dt><a href="io/sphere/sdk/shippingmethods/queries/package-summary.html">io.sphere.sdk.shippingmethods.queries</a> - package io.sphere.sdk.shippingmethods.queries</dt>
 <dd>
 <div class="block">Provides types to retrieve the state of  shipping methods.</div>
@@ -7071,13 +7186,17 @@
 <div class="block">Provides the possible operations which can be performed on update commands for  states.</div>
 </dd>
 <dt><a href="io/sphere/sdk/states/expansion/package-summary.html">io.sphere.sdk.states.expansion</a> - package io.sphere.sdk.states.expansion</dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Provides reference expansion models for  states.</div>
+</dd>
 <dt><a href="io/sphere/sdk/states/queries/package-summary.html">io.sphere.sdk.states.queries</a> - package io.sphere.sdk.states.queries</dt>
 <dd>
 <div class="block">Provides types to retrieve the state of  states.</div>
 </dd>
 <dt><a href="io/sphere/sdk/states/relatedupdateactions/package-summary.html">io.sphere.sdk.states.relatedupdateactions</a> - package io.sphere.sdk.states.relatedupdateactions</dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Provides model classes and builders for  states.</div>
+</dd>
 <dt><a href="io/sphere/sdk/taxcategories/package-summary.html">io.sphere.sdk.taxcategories</a> - package io.sphere.sdk.taxcategories</dt>
 <dd>
 <div class="block">Provides model classes and builders for  tax categories.</div>
@@ -7087,25 +7206,37 @@
 <div class="block">Provides types to change the state of  tax categories.</div>
 </dd>
 <dt><a href="io/sphere/sdk/taxcategories/commands/updateactions/package-summary.html">io.sphere.sdk.taxcategories.commands.updateactions</a> - package io.sphere.sdk.taxcategories.commands.updateactions</dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Provides the possible operations which can be performed on update commands for  tax categories.</div>
+</dd>
 <dt><a href="io/sphere/sdk/taxcategories/expansion/package-summary.html">io.sphere.sdk.taxcategories.expansion</a> - package io.sphere.sdk.taxcategories.expansion</dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Provides reference expansion models for  tax categories.</div>
+</dd>
 <dt><a href="io/sphere/sdk/taxcategories/queries/package-summary.html">io.sphere.sdk.taxcategories.queries</a> - package io.sphere.sdk.taxcategories.queries</dt>
 <dd>
 <div class="block">Provides types to retrieve the state of  tax categories.</div>
 </dd>
 <dt><a href="io/sphere/sdk/types/package-summary.html">io.sphere.sdk.types</a> - package io.sphere.sdk.types</dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Provides model classes and builders for  types.</div>
+</dd>
 <dt><a href="io/sphere/sdk/types/commands/package-summary.html">io.sphere.sdk.types.commands</a> - package io.sphere.sdk.types.commands</dt>
 <dd>
 <div class="block">Provides types to change the state of  types.</div>
 </dd>
 <dt><a href="io/sphere/sdk/types/commands/updateactions/package-summary.html">io.sphere.sdk.types.commands.updateactions</a> - package io.sphere.sdk.types.commands.updateactions</dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Provides the possible operations which can be performed on update commands for  types.</div>
+</dd>
 <dt><a href="io/sphere/sdk/types/customupdateactions/package-summary.html">io.sphere.sdk.types.customupdateactions</a> - package io.sphere.sdk.types.customupdateactions</dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Provides update actions to update fields of resources implementing <a href="io/sphere/sdk/types/Custom.html" title="interface in io.sphere.sdk.types"><code>Custom</code></a>.</div>
+</dd>
 <dt><a href="io/sphere/sdk/types/expansion/package-summary.html">io.sphere.sdk.types.expansion</a> - package io.sphere.sdk.types.expansion</dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Provides reference expansion models for  types.</div>
+</dd>
 <dt><a href="io/sphere/sdk/types/queries/package-summary.html">io.sphere.sdk.types.queries</a> - package io.sphere.sdk.types.queries</dt>
 <dd>
 <div class="block">Provides types to retrieve the state of  types.</div>
@@ -7131,7 +7262,9 @@
 <div class="block">Provides the possible operations which can be performed on update commands for  zones.</div>
 </dd>
 <dt><a href="io/sphere/sdk/zones/expansion/package-summary.html">io.sphere.sdk.zones.expansion</a> - package io.sphere.sdk.zones.expansion</dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Provides reference expansion models for  zones.</div>
+</dd>
 <dt><a href="io/sphere/sdk/zones/queries/package-summary.html">io.sphere.sdk.zones.queries</a> - package io.sphere.sdk.zones.queries</dt>
 <dd>
 <div class="block">Provides types to retrieve the state of  zones.</div>
@@ -7751,7 +7884,9 @@
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/utils/SphereInternalUtils.html#join-java.util.List-">join(List&lt;T&gt;)</a></span> - Static method in class io.sphere.sdk.utils.<a href="io/sphere/sdk/utils/SphereInternalUtils.html" title="class in io.sphere.sdk.utils">SphereInternalUtils</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/client/JsonEndpoint.html" title="class in io.sphere.sdk.client"><span class="typeNameLink">JsonEndpoint</span></a>&lt;<a href="io/sphere/sdk/client/JsonEndpoint.html" title="type parameter in JsonEndpoint">T</a>&gt; - Class in <a href="io/sphere/sdk/client/package-summary.html">io.sphere.sdk.client</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Internal class.</div>
+</dd>
 <dt><a href="io/sphere/sdk/json/JsonException.html" title="class in io.sphere.sdk.json"><span class="typeNameLink">JsonException</span></a> - Exception in <a href="io/sphere/sdk/json/package-summary.html">io.sphere.sdk.json</a></dt>
 <dd>
 <div class="block">Exception concerning JSON.</div>
@@ -7769,7 +7904,9 @@
 <dt><a href="io/sphere/sdk/jsonnodes/queries/JsonNodeQueryModel.html" title="interface in io.sphere.sdk.jsonnodes.queries"><span class="typeNameLink">JsonNodeQueryModel</span></a> - Interface in <a href="io/sphere/sdk/jsonnodes/queries/package-summary.html">io.sphere.sdk.jsonnodes.queries</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/client/JsonNodeSphereRequest.html" title="class in io.sphere.sdk.client"><span class="typeNameLink">JsonNodeSphereRequest</span></a> - Class in <a href="io/sphere/sdk/client/package-summary.html">io.sphere.sdk.client</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">A <a href="io/sphere/sdk/client/SphereRequest.html" title="interface in io.sphere.sdk.client"><code>SphereRequest</code></a> which returns <code>JsonNode</code> instances instead of deserialized Java domain model classes.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/client/JsonNodeSphereRequest.html#JsonNodeSphereRequest-io.sphere.sdk.client.HttpRequestIntent-">JsonNodeSphereRequest(HttpRequestIntent)</a></span> - Constructor for class io.sphere.sdk.client.<a href="io/sphere/sdk/client/JsonNodeSphereRequest.html" title="class in io.sphere.sdk.client">JsonNodeSphereRequest</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/json/TypeReferences.html#jsonNodeTypeReference--">jsonNodeTypeReference()</a></span> - Static method in class io.sphere.sdk.json.<a href="io/sphere/sdk/json/TypeReferences.html" title="class in io.sphere.sdk.json">TypeReferences</a></dt>
@@ -8271,11 +8408,15 @@
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/payments/messages/PaymentTransactionStateChangedMessage.html#MESSAGE_HINT">MESSAGE_HINT</a></span> - Static variable in class io.sphere.sdk.payments.messages.<a href="io/sphere/sdk/payments/messages/PaymentTransactionStateChangedMessage.html" title="class in io.sphere.sdk.payments.messages">PaymentTransactionStateChangedMessage</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/messages/ProductCreatedMessage.html#MESSAGE_HINT">MESSAGE_HINT</a></span> - Static variable in class io.sphere.sdk.products.messages.<a href="io/sphere/sdk/products/messages/ProductCreatedMessage.html" title="class in io.sphere.sdk.products.messages">ProductCreatedMessage</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/messages/ProductPublishedMessage.html#MESSAGE_HINT">MESSAGE_HINT</a></span> - Static variable in class io.sphere.sdk.products.messages.<a href="io/sphere/sdk/products/messages/ProductPublishedMessage.html" title="class in io.sphere.sdk.products.messages">ProductPublishedMessage</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/messages/ProductStateTransitionMessage.html#MESSAGE_HINT">MESSAGE_HINT</a></span> - Static variable in class io.sphere.sdk.products.messages.<a href="io/sphere/sdk/products/messages/ProductStateTransitionMessage.html" title="class in io.sphere.sdk.products.messages">ProductStateTransitionMessage</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/messages/ProductUnpublishedMessage.html#MESSAGE_HINT">MESSAGE_HINT</a></span> - Static variable in class io.sphere.sdk.products.messages.<a href="io/sphere/sdk/products/messages/ProductUnpublishedMessage.html" title="class in io.sphere.sdk.products.messages">ProductUnpublishedMessage</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/messages/SimpleProductMessage.html#MESSAGE_HINT">MESSAGE_HINT</a></span> - Static variable in interface io.sphere.sdk.products.messages.<a href="io/sphere/sdk/products/messages/SimpleProductMessage.html" title="interface in io.sphere.sdk.products.messages">SimpleProductMessage</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/reviews/messages/ReviewCreatedMessage.html#MESSAGE_HINT">MESSAGE_HINT</a></span> - Static variable in class io.sphere.sdk.reviews.messages.<a href="io/sphere/sdk/reviews/messages/ReviewCreatedMessage.html" title="class in io.sphere.sdk.reviews.messages">ReviewCreatedMessage</a></dt>
 <dd>&nbsp;</dd>
@@ -8302,6 +8443,8 @@
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/payments/messages/PaymentTransactionAddedMessage.html#MESSAGE_TYPE">MESSAGE_TYPE</a></span> - Static variable in class io.sphere.sdk.payments.messages.<a href="io/sphere/sdk/payments/messages/PaymentTransactionAddedMessage.html" title="class in io.sphere.sdk.payments.messages">PaymentTransactionAddedMessage</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/payments/messages/PaymentTransactionStateChangedMessage.html#MESSAGE_TYPE">MESSAGE_TYPE</a></span> - Static variable in class io.sphere.sdk.payments.messages.<a href="io/sphere/sdk/payments/messages/PaymentTransactionStateChangedMessage.html" title="class in io.sphere.sdk.payments.messages">PaymentTransactionStateChangedMessage</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/messages/ProductCreatedMessage.html#MESSAGE_TYPE">MESSAGE_TYPE</a></span> - Static variable in class io.sphere.sdk.products.messages.<a href="io/sphere/sdk/products/messages/ProductCreatedMessage.html" title="class in io.sphere.sdk.products.messages">ProductCreatedMessage</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/messages/ProductPublishedMessage.html#MESSAGE_TYPE">MESSAGE_TYPE</a></span> - Static variable in class io.sphere.sdk.products.messages.<a href="io/sphere/sdk/products/messages/ProductPublishedMessage.html" title="class in io.sphere.sdk.products.messages">ProductPublishedMessage</a></dt>
 <dd>&nbsp;</dd>
@@ -8335,7 +8478,7 @@
  If you need to receive one specific message class, like <a href="io/sphere/sdk/orders/messages/DeliveryAddedMessage.html" title="class in io.sphere.sdk.orders.messages"><code>DeliveryAddedMessage</code></a>,
  use <a href="io/sphere/sdk/messages/queries/MessageQuery.html" title="interface in io.sphere.sdk.messages.queries"><code>MessageQuery</code></a> with a predicate by id.</div>
 </dd>
-<dt><a href="io/sphere/sdk/messages/MessageDerivateHint.html" title="class in io.sphere.sdk.messages"><span class="typeNameLink">MessageDerivateHint</span></a>&lt;<a href="io/sphere/sdk/messages/MessageDerivateHint.html" title="type parameter in MessageDerivateHint">T</a>&gt; - Class in <a href="io/sphere/sdk/messages/package-summary.html">io.sphere.sdk.messages</a></dt>
+<dt><a href="io/sphere/sdk/messages/MessageDerivateHint.html" title="class in io.sphere.sdk.messages"><span class="typeNameLink">MessageDerivateHint</span></a>&lt;<a href="io/sphere/sdk/messages/MessageDerivateHint.html" title="type parameter in MessageDerivateHint">T</a> extends <a href="io/sphere/sdk/messages/Message.html" title="interface in io.sphere.sdk.messages">Message</a>&gt; - Class in <a href="io/sphere/sdk/messages/package-summary.html">io.sphere.sdk.messages</a></dt>
 <dd>
 <div class="block">TypeReference container used by query to get only messages of a certain type.</div>
 </dd>
@@ -9000,7 +9143,9 @@
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/client/QueueSphereClientDecorator.html#of-io.sphere.sdk.client.SphereClient-int-">of(SphereClient, int)</a></span> - Static method in class io.sphere.sdk.client.<a href="io/sphere/sdk/client/QueueSphereClientDecorator.html" title="class in io.sphere.sdk.client">QueueSphereClientDecorator</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/client/SphereAccessTokenSupplierFactory.html#of-java.util.function.Supplier-">of(Supplier&lt;HttpClient&gt;)</a></span> - Static method in class io.sphere.sdk.client.<a href="io/sphere/sdk/client/SphereAccessTokenSupplierFactory.html" title="class in io.sphere.sdk.client">SphereAccessTokenSupplierFactory</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block"><span class="deprecatedLabel">Deprecated.</span></div>
+&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/client/SphereApiConfig.html#of-java.lang.String-">of(String)</a></span> - Static method in interface io.sphere.sdk.client.<a href="io/sphere/sdk/client/SphereApiConfig.html" title="interface in io.sphere.sdk.client">SphereApiConfig</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/client/SphereApiConfig.html#of-java.lang.String-java.lang.String-">of(String, String)</a></span> - Static method in interface io.sphere.sdk.client.<a href="io/sphere/sdk/client/SphereApiConfig.html" title="interface in io.sphere.sdk.client">SphereApiConfig</a></dt>
@@ -9024,6 +9169,8 @@
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/client/TimeoutSphereClientDecorator.html#of-io.sphere.sdk.client.SphereClient-long-java.util.concurrent.TimeUnit-">of(SphereClient, long, TimeUnit)</a></span> - Static method in class io.sphere.sdk.client.<a href="io/sphere/sdk/client/TimeoutSphereClientDecorator.html" title="class in io.sphere.sdk.client">TimeoutSphereClientDecorator</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/client/TimeoutSphereClientDecorator.html#of-io.sphere.sdk.client.SphereClient-java.time.Duration-">of(SphereClient, Duration)</a></span> - Static method in class io.sphere.sdk.client.<a href="io/sphere/sdk/client/TimeoutSphereClientDecorator.html" title="class in io.sphere.sdk.client">TimeoutSphereClientDecorator</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/client/Tokens.html#of-java.lang.String-java.lang.String-java.lang.Long-">of(String, String, Long)</a></span> - Static method in class io.sphere.sdk.client.<a href="io/sphere/sdk/client/Tokens.html" title="class in io.sphere.sdk.client">Tokens</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/client/TokensSupplier.html#of-io.sphere.sdk.client.SphereAuthConfig-io.sphere.sdk.http.HttpClient-boolean-">of(SphereAuthConfig, HttpClient, boolean)</a></span> - Static method in interface io.sphere.sdk.client.<a href="io/sphere/sdk/client/TokensSupplier.html" title="interface in io.sphere.sdk.client">TokensSupplier</a></dt>
 <dd>&nbsp;</dd>
@@ -9437,7 +9584,7 @@
 </dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/LocalizedString.html#of-java.util.Map-">of(Map&lt;Locale, String&gt;)</a></span> - Static method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/LocalizedString.html" title="class in io.sphere.sdk.models">LocalizedString</a></dt>
 <dd>
-<div class="block">Creates an instance by supplying a map.</div>
+<div class="block">Creates an instance by supplying a map of <code>Locale</code> and <code>String</code>.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/LocalizedStringEntry.html#of-java.util.Locale-java.lang.String-">of(Locale, String)</a></span> - Static method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/LocalizedStringEntry.html" title="class in io.sphere.sdk.models">LocalizedStringEntry</a></dt>
 <dd>&nbsp;</dd>
@@ -11020,9 +11167,9 @@
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/reviews/commands/updateactions/SetCustomType.html#ofRemoveType--">ofRemoveType()</a></span> - Static method in class io.sphere.sdk.reviews.commands.updateactions.<a href="io/sphere/sdk/reviews/commands/updateactions/SetCustomType.html" title="class in io.sphere.sdk.reviews.commands.updateactions">SetCustomType</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/messages/MessageDerivateHint.html#ofResourceType-java.lang.String-java.lang.Class-">ofResourceType(String, Class&lt;T&gt;)</a></span> - Static method in class io.sphere.sdk.messages.<a href="io/sphere/sdk/messages/MessageDerivateHint.html" title="class in io.sphere.sdk.messages">MessageDerivateHint</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/messages/MessageDerivateHint.html#ofResourceType-java.lang.String-java.lang.Class-java.lang.String-">ofResourceType(String, Class&lt;T&gt;, String)</a></span> - Static method in class io.sphere.sdk.messages.<a href="io/sphere/sdk/messages/MessageDerivateHint.html" title="class in io.sphere.sdk.messages">MessageDerivateHint</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/messages/MessageDerivateHint.html#ofSingleMessageType-java.lang.String-java.lang.Class-">ofSingleMessageType(String, Class&lt;T&gt;)</a></span> - Static method in class io.sphere.sdk.messages.<a href="io/sphere/sdk/messages/MessageDerivateHint.html" title="class in io.sphere.sdk.messages">MessageDerivateHint</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/messages/MessageDerivateHint.html#ofSingleMessageType-java.lang.String-java.lang.Class-java.lang.String-">ofSingleMessageType(String, Class&lt;T&gt;, String)</a></span> - Static method in class io.sphere.sdk.messages.<a href="io/sphere/sdk/messages/MessageDerivateHint.html" title="class in io.sphere.sdk.messages">MessageDerivateHint</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/ProductVariantImportDraftBuilder.html#ofSku-java.lang.String-">ofSku(String)</a></span> - Static method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/ProductVariantImportDraftBuilder.html" title="class in io.sphere.sdk.orders">ProductVariantImportDraftBuilder</a></dt>
 <dd>&nbsp;</dd>
@@ -11094,6 +11241,10 @@
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/search/ProductAttributeSortSearchModel.html#ofStringSet-java.lang.String-">ofStringSet(String)</a></span> - Method in class io.sphere.sdk.products.search.<a href="io/sphere/sdk/products/search/ProductAttributeSortSearchModel.html" title="class in io.sphere.sdk.products.search">ProductAttributeSortSearchModel</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/models/LocalizedString.html#ofStringToStringMap-java.util.Map-">ofStringToStringMap(Map&lt;String, String&gt;)</a></span> - Static method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/LocalizedString.html" title="class in io.sphere.sdk.models">LocalizedString</a></dt>
+<dd>
+<div class="block">Creates an instance by supplying a map of <code>String</code> the language tag and <code>String</code>.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/attributes/AttributeAccess.html#ofText--">ofText()</a></span> - Static method in interface io.sphere.sdk.products.attributes.<a href="io/sphere/sdk/products/attributes/AttributeAccess.html" title="interface in io.sphere.sdk.products.attributes">AttributeAccess</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/reviews/ReviewDraftBuilder.html#ofText-java.lang.String-">ofText(String)</a></span> - Static method in class io.sphere.sdk.reviews.<a href="io/sphere/sdk/reviews/ReviewDraftBuilder.html" title="class in io.sphere.sdk.reviews">ReviewDraftBuilder</a></dt>
@@ -12714,6 +12865,8 @@
 <dd>
 <div class="block">Creates a product.</div>
 </dd>
+<dt><a href="io/sphere/sdk/products/messages/ProductCreatedMessage.html" title="class in io.sphere.sdk.products.messages"><span class="typeNameLink">ProductCreatedMessage</span></a> - Class in <a href="io/sphere/sdk/products/messages/package-summary.html">io.sphere.sdk.products.messages</a></dt>
+<dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/products/ProductData.html" title="interface in io.sphere.sdk.products"><span class="typeNameLink">ProductData</span></a> - Interface in <a href="io/sphere/sdk/products/package-summary.html">io.sphere.sdk.products</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/products/expansion/ProductDataExpansionModel.html" title="interface in io.sphere.sdk.products.expansion"><span class="typeNameLink">ProductDataExpansionModel</span></a>&lt;<a href="io/sphere/sdk/products/expansion/ProductDataExpansionModel.html" title="type parameter in ProductDataExpansionModel">T</a>&gt; - Interface in <a href="io/sphere/sdk/products/expansion/package-summary.html">io.sphere.sdk.products.expansion</a></dt>
@@ -13641,6 +13794,8 @@ CompletionStage&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execu
 <dt><a href="io/sphere/sdk/queries/ResourceQueryModelImpl.html" title="class in io.sphere.sdk.queries"><span class="typeNameLink">ResourceQueryModelImpl</span></a>&lt;<a href="io/sphere/sdk/queries/ResourceQueryModelImpl.html" title="type parameter in ResourceQueryModelImpl">T</a>&gt; - Class in <a href="io/sphere/sdk/queries/package-summary.html">io.sphere.sdk.queries</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/ResourceQueryModelImpl.html#ResourceQueryModelImpl-io.sphere.sdk.queries.QueryModel-java.lang.String-">ResourceQueryModelImpl(QueryModel&lt;T&gt;, String)</a></span> - Constructor for class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/ResourceQueryModelImpl.html" title="class in io.sphere.sdk.queries">ResourceQueryModelImpl</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/messages/MessageDerivateHint.html#resourceReferenceTypeId--">resourceReferenceTypeId()</a></span> - Method in class io.sphere.sdk.messages.<a href="io/sphere/sdk/messages/MessageDerivateHint.html" title="class in io.sphere.sdk.messages">MessageDerivateHint</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/search/ResourceSearch.html" title="interface in io.sphere.sdk.search"><span class="typeNameLink">ResourceSearch</span></a>&lt;<a href="io/sphere/sdk/search/ResourceSearch.html" title="type parameter in ResourceSearch">T</a>&gt; - Interface in <a href="io/sphere/sdk/search/package-summary.html">io.sphere.sdk.search</a></dt>
 <dd>&nbsp;</dd>
@@ -14595,7 +14750,11 @@ CompletionStage&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execu
 </dd>
 <dt><a href="io/sphere/sdk/orders/messages/SimpleOrderMessage.html" title="interface in io.sphere.sdk.orders.messages"><span class="typeNameLink">SimpleOrderMessage</span></a> - Interface in <a href="io/sphere/sdk/orders/messages/package-summary.html">io.sphere.sdk.orders.messages</a></dt>
 <dd>
-<div class="block">Messages for a an <a href="io/sphere/sdk/orders/Order.html" title="interface in io.sphere.sdk.orders"><code>Order</code></a>.</div>
+<div class="block">Messages for an <a href="io/sphere/sdk/orders/Order.html" title="interface in io.sphere.sdk.orders"><code>Order</code></a>.</div>
+</dd>
+<dt><a href="io/sphere/sdk/products/messages/SimpleProductMessage.html" title="interface in io.sphere.sdk.products.messages"><span class="typeNameLink">SimpleProductMessage</span></a> - Interface in <a href="io/sphere/sdk/products/messages/package-summary.html">io.sphere.sdk.products.messages</a></dt>
+<dd>
+<div class="block">Messages for a <a href="io/sphere/sdk/products/Product.html" title="interface in io.sphere.sdk.products"><code>Product</code></a>.</div>
 </dd>
 <dt><a href="io/sphere/sdk/search/model/SimpleRangeStats.html" title="class in io.sphere.sdk.search.model"><span class="typeNameLink">SimpleRangeStats</span></a> - Class in <a href="io/sphere/sdk/search/model/package-summary.html">io.sphere.sdk.search.model</a></dt>
 <dd>&nbsp;</dd>
@@ -14936,13 +15095,17 @@ CompletionStage&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execu
 <div class="block">Provides an OAuth token for accessing protected Sphere HTTP API endpoints.</div>
 </dd>
 <dt><a href="io/sphere/sdk/client/SphereAccessTokenSupplierFactory.html" title="class in io.sphere.sdk.client"><span class="typeNameLink">SphereAccessTokenSupplierFactory</span></a> - Class in <a href="io/sphere/sdk/client/package-summary.html">io.sphere.sdk.client</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block"><span class="deprecatedLabel">Deprecated.</span></div>
+</dd>
 <dt><a href="io/sphere/sdk/client/SphereApiConfig.html" title="interface in io.sphere.sdk.client"><span class="typeNameLink">SphereApiConfig</span></a> - Interface in <a href="io/sphere/sdk/client/package-summary.html">io.sphere.sdk.client</a></dt>
 <dd>
 <div class="block">Configuration to make request for a SPHERE.IO web service, does not include authentication configuration or tokens.</div>
 </dd>
 <dt><a href="io/sphere/sdk/client/SphereAsyncHttpClientFactory.html" title="class in io.sphere.sdk.client"><span class="typeNameLink">SphereAsyncHttpClientFactory</span></a> - Class in <a href="io/sphere/sdk/client/package-summary.html">io.sphere.sdk.client</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Creates an <a href="io/sphere/sdk/http/HttpClient.html" title="interface in io.sphere.sdk.http"><code>HttpClient</code></a> with a commercetools configured underlying <code>AsyncHttpClient</code>.</div>
+</dd>
 <dt><a href="io/sphere/sdk/client/SphereAuthConfig.html" title="interface in io.sphere.sdk.client"><span class="typeNameLink">SphereAuthConfig</span></a> - Interface in <a href="io/sphere/sdk/client/package-summary.html">io.sphere.sdk.client</a></dt>
 <dd>
 <div class="block">Contains the configuration to fetch access keys for SPHERE.IO.</div>
@@ -14953,10 +15116,12 @@ CompletionStage&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execu
 </dd>
 <dt><a href="io/sphere/sdk/client/SphereClientConfig.html" title="class in io.sphere.sdk.client"><span class="typeNameLink">SphereClientConfig</span></a> - Class in <a href="io/sphere/sdk/client/package-summary.html">io.sphere.sdk.client</a></dt>
 <dd>
-<div class="block">The full configuration for a SPHERE.IO client.</div>
+<div class="block">The full api and auth configuration for a commercetools client.</div>
 </dd>
 <dt><a href="io/sphere/sdk/client/SphereClientDecorator.html" title="class in io.sphere.sdk.client"><span class="typeNameLink">SphereClientDecorator</span></a> - Class in <a href="io/sphere/sdk/client/package-summary.html">io.sphere.sdk.client</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">A public base class to decorate <a href="io/sphere/sdk/client/SphereClient.html" title="interface in io.sphere.sdk.client"><code>SphereClient</code></a>s.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/client/SphereClientDecorator.html#SphereClientDecorator-io.sphere.sdk.client.SphereClient-">SphereClientDecorator(SphereClient)</a></span> - Constructor for class io.sphere.sdk.client.<a href="io/sphere/sdk/client/SphereClientDecorator.html" title="class in io.sphere.sdk.client">SphereClientDecorator</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/client/SphereClientFactory.html" title="interface in io.sphere.sdk.client"><span class="typeNameLink">SphereClientFactory</span></a> - Interface in <a href="io/sphere/sdk/client/package-summary.html">io.sphere.sdk.client</a></dt>
@@ -14996,7 +15161,9 @@ CompletionStage&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execu
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/SphereException.html#SphereException-java.lang.Throwable-">SphereException(Throwable)</a></span> - Constructor for exception io.sphere.sdk.models.<a href="io/sphere/sdk/models/SphereException.html" title="class in io.sphere.sdk.models">SphereException</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/client/SphereHttpHeaders.html" title="class in io.sphere.sdk.client"><span class="typeNameLink">SphereHttpHeaders</span></a> - Class in <a href="io/sphere/sdk/client/package-summary.html">io.sphere.sdk.client</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Holds the names of commercetools proprietary HTTP headers.</div>
+</dd>
 <dt><a href="io/sphere/sdk/utils/SphereInternalLogger.html" title="class in io.sphere.sdk.utils"><span class="typeNameLink">SphereInternalLogger</span></a> - Class in <a href="io/sphere/sdk/utils/package-summary.html">io.sphere.sdk.utils</a></dt>
 <dd>
 <div class="block">Internal logging used by the sphere Java client itself.</div>
@@ -15016,11 +15183,15 @@ CompletionStage&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execu
 <div class="block">An argument for a sphere client to execute an HTTP API call on the level of one SPHERE.IO project.</div>
 </dd>
 <dt><a href="io/sphere/sdk/client/SphereRequestDecorator.html" title="class in io.sphere.sdk.client"><span class="typeNameLink">SphereRequestDecorator</span></a>&lt;<a href="io/sphere/sdk/client/SphereRequestDecorator.html" title="type parameter in SphereRequestDecorator">T</a>&gt; - Class in <a href="io/sphere/sdk/client/package-summary.html">io.sphere.sdk.client</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Public available base class to decorate the behaviour of <a href="io/sphere/sdk/client/SphereRequest.html" title="interface in io.sphere.sdk.client"><code>SphereRequest</code></a>s.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/client/SphereRequestDecorator.html#SphereRequestDecorator-io.sphere.sdk.client.SphereRequest-">SphereRequestDecorator(SphereRequest&lt;T&gt;)</a></span> - Constructor for class io.sphere.sdk.client.<a href="io/sphere/sdk/client/SphereRequestDecorator.html" title="class in io.sphere.sdk.client">SphereRequestDecorator</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/client/SphereRequestUtils.html" title="class in io.sphere.sdk.client"><span class="typeNameLink">SphereRequestUtils</span></a> - Class in <a href="io/sphere/sdk/client/package-summary.html">io.sphere.sdk.client</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Utils for common behaviour of <a href="io/sphere/sdk/client/SphereRequest.html" title="interface in io.sphere.sdk.client"><code>SphereRequest</code></a>s.</div>
+</dd>
 <dt><a href="io/sphere/sdk/meta/SphereResources.html" title="class in io.sphere.sdk.meta"><span class="typeNameLink">SphereResources</span></a> - Class in <a href="io/sphere/sdk/meta/package-summary.html">io.sphere.sdk.meta</a></dt>
 <dd>
 <div class="block"><table border=1><tr><th>resource</th><th>accesors</th><th>mutators</th></tr><tr><td rowspan="3">cartdiscounts</td><td><a href='../../../..//io/sphere/sdk/cartdiscounts/queries/CartDiscountByIdGet.html'>CartDiscountByIdGet</a></td><td><a href='../../../..//io/sphere/sdk/cartdiscounts/commands/CartDiscountDeleteCommand.html'>CartDiscountDeleteCommand</a></td></tr>
@@ -15060,9 +15231,10 @@ CompletionStage&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execu
 <tr><td><a href='../../../..//io/sphere/sdk/inventory/queries/InventoryEntryByIdGet.html'>InventoryEntryByIdGet</a></td><td><a href='../../../..//io/sphere/sdk/inventory/commands/InventoryEntryDeleteCommand.html'>InventoryEntryDeleteCommand</a></td></tr>
 <tr><td></td><td><a href='../../../..//io/sphere/sdk/inventory/commands/InventoryEntryCreateCommand.html'>InventoryEntryCreateCommand</a></td></tr>
 <tr><td rowspan="1">jsonnodes</td><td><a href='../../../..//io/sphere/sdk/jsonnodes/queries/JsonNodeQuery.html'>JsonNodeQuery</a></td><td></td></tr>
-<tr><td rowspan="3">messages</td><td><a href='../../../..//io/sphere/sdk/messages/queries/MessageByIdGet.html'>MessageByIdGet</a></td><td></td></tr>
+<tr><td rowspan="4">messages</td><td><a href='../../../..//io/sphere/sdk/messages/queries/MessageByIdGet.html'>MessageByIdGet</a></td><td></td></tr>
 <tr><td><a href='../../../..//io/sphere/sdk/messages/queries/MessageQuery.html'>MessageQuery</a></td><td></td></tr>
 <tr><td><a href='../../../..//io/sphere/sdk/messages/queries/TypedMessageQuery.html'>TypedMessageQuery</a></td><td></td></tr>
+<tr><td><a href='../../../..//io/sphere/sdk/messages/queries/MultiTypedMessageQuery.html'>MultiTypedMessageQuery</a></td><td></td></tr>
 <tr><td rowspan="4">orders</td><td><a href='../../../..//io/sphere/sdk/orders/queries/OrderQuery.html'>OrderQuery</a></td><td><a href='../../../..//io/sphere/sdk/orders/commands/OrderUpdateCommand.html'>OrderUpdateCommand</a></td></tr>
 <tr><td><a href='../../../..//io/sphere/sdk/orders/queries/OrderByIdGet.html'>OrderByIdGet</a></td><td><a href='../../../..//io/sphere/sdk/orders/commands/OrderImportCommand.html'>OrderImportCommand</a></td></tr>
 <tr><td></td><td><a href='../../../..//io/sphere/sdk/orders/commands/OrderDeleteCommand.html'>OrderDeleteCommand</a></td></tr>
@@ -15420,7 +15592,7 @@ CompletionStage&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execu
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/client/TestDoubleSphereClientFactory.html" title="class in io.sphere.sdk.client"><span class="typeNameLink">TestDoubleSphereClientFactory</span></a> - Class in <a href="io/sphere/sdk/client/package-summary.html">io.sphere.sdk.client</a></dt>
 <dd>
-<div class="block">A factory to instantiate SPHERE.IO Java clients which use <code>CompletionStage</code> as future implementation.</div>
+<div class="block">A factory to instantiate test double <a href="io/sphere/sdk/client/SphereClient.html" title="interface in io.sphere.sdk.client"><code>SphereClient</code></a>s clients which use <code>CompletionStage</code> as future implementation.</div>
 </dd>
 <dt><a href="io/sphere/sdk/meta/TestingDocumentation.html" title="class in io.sphere.sdk.meta"><span class="typeNameLink">TestingDocumentation</span></a> - Class in <a href="io/sphere/sdk/meta/package-summary.html">io.sphere.sdk.meta</a></dt>
 <dd>
@@ -15500,8 +15672,18 @@ CompletionStage&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execu
 <dd>
 <div class="block">Converts a SPHERE.IO Java object to JSON as String.</div>
 </dd>
+<dt><a href="io/sphere/sdk/client/Tokens.html" title="class in io.sphere.sdk.client"><span class="typeNameLink">Tokens</span></a> - Class in <a href="io/sphere/sdk/client/package-summary.html">io.sphere.sdk.client</a></dt>
+<dd>
+<div class="block">OAuth tokens returned by the authorization server.</div>
+</dd>
+<dt><a href="io/sphere/sdk/client/TokensFacade.html" title="class in io.sphere.sdk.client"><span class="typeNameLink">TokensFacade</span></a> - Class in <a href="io/sphere/sdk/client/package-summary.html">io.sphere.sdk.client</a></dt>
+<dd>
+<div class="block">Provides facilities to fetch commercetools access and refresh tokens.</div>
+</dd>
 <dt><a href="io/sphere/sdk/client/TokensSupplier.html" title="interface in io.sphere.sdk.client"><span class="typeNameLink">TokensSupplier</span></a> - Interface in <a href="io/sphere/sdk/client/package-summary.html">io.sphere.sdk.client</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Component that asynchronous retrieves tokens.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/utils/IterableUtils.html#toList-java.lang.Iterable-">toList(Iterable&lt;T&gt;)</a></span> - Static method in class io.sphere.sdk.utils.<a href="io/sphere/sdk/utils/IterableUtils.html" title="class in io.sphere.sdk.utils">IterableUtils</a></dt>
 <dd>
 <div class="block"><span class="deprecatedLabel">Deprecated.</span></div>
@@ -15913,6 +16095,10 @@ assertThat(type.getFieldDefinitions()).containsExactly(stringFieldDefinition);
 </dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/client/JsonEndpoint.html#typeReference--">typeReference()</a></span> - Method in class io.sphere.sdk.client.<a href="io/sphere/sdk/client/JsonEndpoint.html" title="class in io.sphere.sdk.client">JsonEndpoint</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/client/Tokens.html#typeReference--">typeReference()</a></span> - Static method in class io.sphere.sdk.client.<a href="io/sphere/sdk/client/Tokens.html" title="class in io.sphere.sdk.client">Tokens</a></dt>
+<dd>
+<div class="block">Creates a container which contains the full Java type information to deserialize this class from JSON.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/customergroups/CustomerGroup.html#typeReference--">typeReference()</a></span> - Static method in interface io.sphere.sdk.customergroups.<a href="io/sphere/sdk/customergroups/CustomerGroup.html" title="interface in io.sphere.sdk.customergroups">CustomerGroup</a></dt>
 <dd>
 <div class="block">Creates a container which contains the full Java type information to deserialize this class from JSON.</div>
@@ -16017,6 +16203,8 @@ assertThat(type.getFieldDefinitions()).containsExactly(stringFieldDefinition);
 </dd>
 <dt><a href="io/sphere/sdk/json/TypeReferences.html" title="class in io.sphere.sdk.json"><span class="typeNameLink">TypeReferences</span></a> - Class in <a href="io/sphere/sdk/json/package-summary.html">io.sphere.sdk.json</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/messages/MessageDerivateHint.html#typeString--">typeString()</a></span> - Method in class io.sphere.sdk.messages.<a href="io/sphere/sdk/messages/MessageDerivateHint.html" title="class in io.sphere.sdk.messages">MessageDerivateHint</a></dt>
+<dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/types/commands/TypeUpdateCommand.html" title="interface in io.sphere.sdk.types.commands"><span class="typeNameLink">TypeUpdateCommand</span></a> - Interface in <a href="io/sphere/sdk/types/commands/package-summary.html">io.sphere.sdk.types.commands</a></dt>
 <dd>
 <div class="block"><p id=update-actions>Known UpdateActions</p><ul><li><a href="updateactions/AddEnumValue.html">AddEnumValue</a></li><li><a href="updateactions/AddFieldDefinition.html">AddFieldDefinition</a></li><li><a href="updateactions/AddLocalizedEnumValue.html">AddLocalizedEnumValue</a></li><li><a href="updateactions/ChangeFieldDefinitionLabel.html">ChangeFieldDefinitionLabel</a></li><li><a href="updateactions/ChangeName.html">ChangeName</a></li><li><a href="updateactions/RemoveFieldDefinition.html">RemoveFieldDefinition</a></li><li><a href="updateactions/SetDescription.html">SetDescription</a></li></ul></div>
@@ -16062,9 +16250,13 @@ assertThat(type.getFieldDefinitions()).containsExactly(stringFieldDefinition);
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/commands/UpdateActionImpl.html#UpdateActionImpl-java.lang.String-">UpdateActionImpl(String)</a></span> - Constructor for class io.sphere.sdk.commands.<a href="io/sphere/sdk/commands/UpdateActionImpl.html" title="class in io.sphere.sdk.commands">UpdateActionImpl</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/commands/UpdateCommand.html" title="interface in io.sphere.sdk.commands"><span class="typeNameLink">UpdateCommand</span></a>&lt;<a href="io/sphere/sdk/commands/UpdateCommand.html" title="type parameter in UpdateCommand">T</a>&gt; - Interface in <a href="io/sphere/sdk/commands/package-summary.html">io.sphere.sdk.commands</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Command which updates a commercetools resource based on a list of update actions.</div>
+</dd>
 <dt><a href="io/sphere/sdk/commands/UpdateCommandDsl.html" title="interface in io.sphere.sdk.commands"><span class="typeNameLink">UpdateCommandDsl</span></a>&lt;<a href="io/sphere/sdk/commands/UpdateCommandDsl.html" title="type parameter in UpdateCommandDsl">T</a> extends <a href="io/sphere/sdk/models/ResourceView.html" title="interface in io.sphere.sdk.models">ResourceView</a>&lt;<a href="io/sphere/sdk/commands/UpdateCommandDsl.html" title="type parameter in UpdateCommandDsl">T</a>,<a href="io/sphere/sdk/commands/UpdateCommandDsl.html" title="type parameter in UpdateCommandDsl">T</a>&gt;,<a href="io/sphere/sdk/commands/UpdateCommandDsl.html" title="type parameter in UpdateCommandDsl">C</a> extends <a href="io/sphere/sdk/commands/UpdateCommandDsl.html" title="interface in io.sphere.sdk.commands">UpdateCommandDsl</a>&lt;<a href="io/sphere/sdk/commands/UpdateCommandDsl.html" title="type parameter in UpdateCommandDsl">T</a>,<a href="io/sphere/sdk/commands/UpdateCommandDsl.html" title="type parameter in UpdateCommandDsl">C</a>&gt;&gt; - Interface in <a href="io/sphere/sdk/commands/package-summary.html">io.sphere.sdk.commands</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Subinterface for update commands which supports updating the version for retries on <a href="io/sphere/sdk/client/ConcurrentModificationException.html" title="class in io.sphere.sdk.client"><code>ConcurrentModificationException</code></a>s</div>
+</dd>
 <dt><a href="io/sphere/sdk/orders/commands/updateactions/UpdateSyncInfo.html" title="class in io.sphere.sdk.orders.commands.updateactions"><span class="typeNameLink">UpdateSyncInfo</span></a> - Class in <a href="io/sphere/sdk/orders/commands/updateactions/package-summary.html">io.sphere.sdk.orders.commands.updateactions</a></dt>
 <dd>
 <div class="block">Updates the synchronization info.</div>
@@ -17139,7 +17331,9 @@ the order they are declared.</div>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/commands/MetaModelUpdateCommandDslImpl.html#withVersion-io.sphere.sdk.models.Versioned-">withVersion(Versioned&lt;T&gt;)</a></span> - Method in class io.sphere.sdk.commands.<a href="io/sphere/sdk/commands/MetaModelUpdateCommandDslImpl.html" title="class in io.sphere.sdk.commands">MetaModelUpdateCommandDslImpl</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/commands/UpdateCommandDsl.html#withVersion-io.sphere.sdk.models.Versioned-">withVersion(Versioned&lt;T&gt;)</a></span> - Method in interface io.sphere.sdk.commands.<a href="io/sphere/sdk/commands/UpdateCommandDsl.html" title="interface in io.sphere.sdk.commands">UpdateCommandDsl</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Creates a copy of this update command with a different value for version.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/payments/commands/PaymentUpdateCommand.html#withVersion-io.sphere.sdk.models.Versioned-">withVersion(Versioned&lt;Payment&gt;)</a></span> - Method in interface io.sphere.sdk.payments.commands.<a href="io/sphere/sdk/payments/commands/PaymentUpdateCommand.html" title="interface in io.sphere.sdk.payments.commands">PaymentUpdateCommand</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/types/commands/TypeUpdateCommand.html#withVersion-io.sphere.sdk.models.Versioned-">withVersion(Versioned&lt;Type&gt;)</a></span> - Method in interface io.sphere.sdk.types.commands.<a href="io/sphere/sdk/types/commands/TypeUpdateCommand.html" title="interface in io.sphere.sdk.types.commands">TypeUpdateCommand</a></dt>
@@ -17151,7 +17345,9 @@ the order they are declared.</div>
 <h2 class="title">X</h2>
 <dl>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/client/SphereHttpHeaders.html#X_DEPRECATION_NOTICE">X_DEPRECATION_NOTICE</a></span> - Static variable in class io.sphere.sdk.client.<a href="io/sphere/sdk/client/SphereHttpHeaders.html" title="class in io.sphere.sdk.client">SphereHttpHeaders</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Used for http requests which are deprecated on the commercetools platform.</div>
+</dd>
 </dl>
 <a name="I:Z">
 <!--   -->
