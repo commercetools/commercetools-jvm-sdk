@@ -6,7 +6,7 @@ import static java.util.Arrays.asList;
 
 public class ResourceClassesWithTypeReferenceMethod extends ClassStrategyRule {
     private final List<String> simpleClassNamesWhiteList =
-            asList(("CartLike, GenericMessage, Resource, SimpleOrderMessage").split(",( )?"));
+            asList(("CartLike, GenericMessage, Resource").split(",( )?"));
 
     private static Class<?> baseClass;
     static {
@@ -19,7 +19,9 @@ public class ResourceClassesWithTypeReferenceMethod extends ClassStrategyRule {
 
     @Override
     protected boolean classIsIncludedInRule(final Class<?> clazz) {
-        return clazz.isInterface() && isSubTypeOf(clazz, baseClass) && !simpleClassNamesWhiteList.contains(clazz.getSimpleName());
+        return clazz.isInterface() && isSubTypeOf(clazz, baseClass)
+                && !simpleClassNamesWhiteList.contains(clazz.getSimpleName())
+                && !clazz.getSimpleName().matches("Simple.*Message");
     }
 
     @Override
