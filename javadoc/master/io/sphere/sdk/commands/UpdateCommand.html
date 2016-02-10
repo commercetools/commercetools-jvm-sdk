@@ -99,6 +99,10 @@ var activeTableTab = "activeTableTab";
 <ul class="blockList">
 <li class="blockList">
 <dl>
+<dt><span class="paramLabel">Type Parameters:</span></dt>
+<dd><code>T</code> - type of the updated object</dd>
+</dl>
+<dl>
 <dt>All Superinterfaces:</dt>
 <dd><a href="../../../../io/sphere/sdk/commands/Command.html" title="interface in io.sphere.sdk.commands">Command</a>&lt;T&gt;, <a href="../../../../io/sphere/sdk/client/SphereRequest.html" title="interface in io.sphere.sdk.client">SphereRequest</a>&lt;T&gt;</dd>
 </dl>
@@ -114,6 +118,7 @@ var activeTableTab = "activeTableTab";
 <br>
 <pre>public interface <span class="typeNameLabel">UpdateCommand&lt;T&gt;</span>
 extends <a href="../../../../io/sphere/sdk/commands/Command.html" title="interface in io.sphere.sdk.commands">Command</a>&lt;T&gt;</pre>
+<div class="block">Command which updates a commercetools resource based on a list of update actions.</div>
 </li>
 </ul>
 </div>
@@ -134,7 +139,9 @@ extends <a href="../../../../io/sphere/sdk/commands/Command.html" title="interfa
 </tr>
 <tr id="i0" class="altColor">
 <td class="colFirst"><code>java.util.List&lt;? extends <a href="../../../../io/sphere/sdk/commands/UpdateAction.html" title="interface in io.sphere.sdk.commands">UpdateAction</a>&lt;<a href="../../../../io/sphere/sdk/commands/UpdateCommand.html" title="type parameter in UpdateCommand">T</a>&gt;&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/commands/UpdateCommand.html#getUpdateActions--">getUpdateActions</a></span>()</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/commands/UpdateCommand.html#getUpdateActions--">getUpdateActions</a></span>()</code>
+<div class="block">Gets the list of updates which should be applied to the object</div>
+</td>
 </tr>
 </table>
 <ul class="blockList">
@@ -165,6 +172,11 @@ extends <a href="../../../../io/sphere/sdk/commands/Command.html" title="interfa
 <li class="blockList">
 <h4>getUpdateActions</h4>
 <pre>java.util.List&lt;? extends <a href="../../../../io/sphere/sdk/commands/UpdateAction.html" title="interface in io.sphere.sdk.commands">UpdateAction</a>&lt;<a href="../../../../io/sphere/sdk/commands/UpdateCommand.html" title="type parameter in UpdateCommand">T</a>&gt;&gt;&nbsp;getUpdateActions()</pre>
+<div class="block">Gets the list of updates which should be applied to the object</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>update actions</dd>
+</dl>
 </li>
 </ul>
 </li>

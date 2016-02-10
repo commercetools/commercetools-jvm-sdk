@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":10,"i1":9,"i2":9,"i3":10};
+var methods = {"i0":10,"i1":10,"i2":9,"i3":9,"i4":10,"i5":10,"i6":10};
 var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -92,7 +92,7 @@ var activeTableTab = "activeTableTab";
 <!-- ======== START OF CLASS DATA ======== -->
 <div class="header">
 <div class="subTitle">io.sphere.sdk.messages</div>
-<h2 title="Class MessageDerivateHint" class="title">Class MessageDerivateHint&lt;T&gt;</h2>
+<h2 title="Class MessageDerivateHint" class="title">Class MessageDerivateHint&lt;T extends <a href="../../../../io/sphere/sdk/messages/Message.html" title="interface in io.sphere.sdk.messages">Message</a>&gt;</h2>
 </div>
 <div class="contentContainer">
 <ul class="inheritance">
@@ -117,7 +117,7 @@ var activeTableTab = "activeTableTab";
 </dl>
 <hr>
 <br>
-<pre>public final class <span class="typeNameLabel">MessageDerivateHint&lt;T&gt;</span>
+<pre>public final class <span class="typeNameLabel">MessageDerivateHint&lt;T extends <a href="../../../../io/sphere/sdk/messages/Message.html" title="interface in io.sphere.sdk.messages">Message</a>&gt;</span>
 extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.sphere.sdk.models">Base</a></pre>
 <div class="block">TypeReference container used by query to get only messages of a certain type.</div>
 <dl>
@@ -143,22 +143,36 @@ extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.
 <th class="colLast" scope="col">Method and Description</th>
 </tr>
 <tr id="i0" class="altColor">
+<td class="colFirst"><code>java.lang.Class&lt;? extends <a href="../../../../io/sphere/sdk/messages/Message.html" title="interface in io.sphere.sdk.messages">Message</a>&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/messages/MessageDerivateHint.html#clazz--">clazz</a></span>()</code>&nbsp;</td>
+</tr>
+<tr id="i1" class="rowColor">
 <td class="colFirst"><code>com.fasterxml.jackson.databind.JavaType</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/messages/MessageDerivateHint.html#javaType--">javaType</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i1" class="rowColor">
-<td class="colFirst"><code>static &lt;T&gt;&nbsp;<a href="../../../../io/sphere/sdk/messages/MessageDerivateHint.html" title="class in io.sphere.sdk.messages">MessageDerivateHint</a>&lt;T&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/messages/MessageDerivateHint.html#ofResourceType-java.lang.String-java.lang.Class-">ofResourceType</a></span>(java.lang.String&nbsp;resourceId,
-              java.lang.Class&lt;T&gt;&nbsp;clazz)</code>&nbsp;</td>
-</tr>
 <tr id="i2" class="altColor">
-<td class="colFirst"><code>static &lt;T&gt;&nbsp;<a href="../../../../io/sphere/sdk/messages/MessageDerivateHint.html" title="class in io.sphere.sdk.messages">MessageDerivateHint</a>&lt;T&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/messages/MessageDerivateHint.html#ofSingleMessageType-java.lang.String-java.lang.Class-">ofSingleMessageType</a></span>(java.lang.String&nbsp;type,
-                   java.lang.Class&lt;T&gt;&nbsp;clazz)</code>&nbsp;</td>
+<td class="colFirst"><code>static &lt;T extends <a href="../../../../io/sphere/sdk/messages/Message.html" title="interface in io.sphere.sdk.messages">Message</a>&gt;<br><a href="../../../../io/sphere/sdk/messages/MessageDerivateHint.html" title="class in io.sphere.sdk.messages">MessageDerivateHint</a>&lt;T&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/messages/MessageDerivateHint.html#ofResourceType-java.lang.String-java.lang.Class-java.lang.String-">ofResourceType</a></span>(java.lang.String&nbsp;resourceId,
+              java.lang.Class&lt;T&gt;&nbsp;clazz,
+              java.lang.String&nbsp;referenceTypeId)</code>&nbsp;</td>
 </tr>
 <tr id="i3" class="rowColor">
+<td class="colFirst"><code>static &lt;T extends <a href="../../../../io/sphere/sdk/messages/Message.html" title="interface in io.sphere.sdk.messages">Message</a>&gt;<br><a href="../../../../io/sphere/sdk/messages/MessageDerivateHint.html" title="class in io.sphere.sdk.messages">MessageDerivateHint</a>&lt;T&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/messages/MessageDerivateHint.html#ofSingleMessageType-java.lang.String-java.lang.Class-java.lang.String-">ofSingleMessageType</a></span>(java.lang.String&nbsp;type,
+                   java.lang.Class&lt;T&gt;&nbsp;clazz,
+                   java.lang.String&nbsp;referenceTypeId)</code>&nbsp;</td>
+</tr>
+<tr id="i4" class="altColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/queries/QueryPredicate.html" title="interface in io.sphere.sdk.queries">QueryPredicate</a>&lt;<a href="../../../../io/sphere/sdk/messages/Message.html" title="interface in io.sphere.sdk.messages">Message</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/messages/MessageDerivateHint.html#predicate--">predicate</a></span>()</code>&nbsp;</td>
+</tr>
+<tr id="i5" class="rowColor">
+<td class="colFirst"><code>java.lang.String</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/messages/MessageDerivateHint.html#resourceReferenceTypeId--">resourceReferenceTypeId</a></span>()</code>&nbsp;</td>
+</tr>
+<tr id="i6" class="altColor">
+<td class="colFirst"><code>java.lang.String</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/messages/MessageDerivateHint.html#typeString--">typeString</a></span>()</code>&nbsp;</td>
 </tr>
 </table>
 <ul class="blockList">
@@ -198,33 +212,64 @@ extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.
 <pre>public&nbsp;<a href="../../../../io/sphere/sdk/queries/QueryPredicate.html" title="interface in io.sphere.sdk.queries">QueryPredicate</a>&lt;<a href="../../../../io/sphere/sdk/messages/Message.html" title="interface in io.sphere.sdk.messages">Message</a>&gt;&nbsp;predicate()</pre>
 </li>
 </ul>
-<a name="ofSingleMessageType-java.lang.String-java.lang.Class-">
+<a name="ofSingleMessageType-java.lang.String-java.lang.Class-java.lang.String-">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
 <h4>ofSingleMessageType</h4>
-<pre>public static&nbsp;&lt;T&gt;&nbsp;<a href="../../../../io/sphere/sdk/messages/MessageDerivateHint.html" title="class in io.sphere.sdk.messages">MessageDerivateHint</a>&lt;T&gt;&nbsp;ofSingleMessageType(java.lang.String&nbsp;type,
-                                                             java.lang.Class&lt;T&gt;&nbsp;clazz)</pre>
+<pre>public static&nbsp;&lt;T extends <a href="../../../../io/sphere/sdk/messages/Message.html" title="interface in io.sphere.sdk.messages">Message</a>&gt;&nbsp;<a href="../../../../io/sphere/sdk/messages/MessageDerivateHint.html" title="class in io.sphere.sdk.messages">MessageDerivateHint</a>&lt;T&gt;&nbsp;ofSingleMessageType(java.lang.String&nbsp;type,
+                                                                             java.lang.Class&lt;T&gt;&nbsp;clazz,
+                                                                             java.lang.String&nbsp;referenceTypeId)</pre>
 </li>
 </ul>
-<a name="ofResourceType-java.lang.String-java.lang.Class-">
+<a name="ofResourceType-java.lang.String-java.lang.Class-java.lang.String-">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
 <h4>ofResourceType</h4>
-<pre>public static&nbsp;&lt;T&gt;&nbsp;<a href="../../../../io/sphere/sdk/messages/MessageDerivateHint.html" title="class in io.sphere.sdk.messages">MessageDerivateHint</a>&lt;T&gt;&nbsp;ofResourceType(java.lang.String&nbsp;resourceId,
-                                                        java.lang.Class&lt;T&gt;&nbsp;clazz)</pre>
+<pre>public static&nbsp;&lt;T extends <a href="../../../../io/sphere/sdk/messages/Message.html" title="interface in io.sphere.sdk.messages">Message</a>&gt;&nbsp;<a href="../../../../io/sphere/sdk/messages/MessageDerivateHint.html" title="class in io.sphere.sdk.messages">MessageDerivateHint</a>&lt;T&gt;&nbsp;ofResourceType(java.lang.String&nbsp;resourceId,
+                                                                        java.lang.Class&lt;T&gt;&nbsp;clazz,
+                                                                        java.lang.String&nbsp;referenceTypeId)</pre>
 </li>
 </ul>
 <a name="javaType--">
 <!--   -->
 </a>
-<ul class="blockListLast">
+<ul class="blockList">
 <li class="blockList">
 <h4>javaType</h4>
 <pre>public&nbsp;com.fasterxml.jackson.databind.JavaType&nbsp;javaType()</pre>
+</li>
+</ul>
+<a name="clazz--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>clazz</h4>
+<pre>public&nbsp;java.lang.Class&lt;? extends <a href="../../../../io/sphere/sdk/messages/Message.html" title="interface in io.sphere.sdk.messages">Message</a>&gt;&nbsp;clazz()</pre>
+</li>
+</ul>
+<a name="typeString--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>typeString</h4>
+<pre>@Nullable
+public&nbsp;java.lang.String&nbsp;typeString()</pre>
+</li>
+</ul>
+<a name="resourceReferenceTypeId--">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>resourceReferenceTypeId</h4>
+<pre>@Nullable
+public&nbsp;java.lang.String&nbsp;resourceReferenceTypeId()</pre>
 </li>
 </ul>
 </li>

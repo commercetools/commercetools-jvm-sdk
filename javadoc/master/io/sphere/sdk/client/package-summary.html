@@ -129,7 +129,9 @@
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><a href="../../../../io/sphere/sdk/client/TokensSupplier.html" title="interface in io.sphere.sdk.client">TokensSupplier</a></td>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Component that asynchronous retrieves tokens.</div>
+</td>
 </tr>
 </tbody>
 </table>
@@ -145,21 +147,26 @@
 <tr class="altColor">
 <td class="colFirst"><a href="../../../../io/sphere/sdk/client/DeprecationExceptionSphereClientDecorator.html" title="class in io.sphere.sdk.client">DeprecationExceptionSphereClientDecorator</a></td>
 <td class="colLast">
-<div class="block">If SPHERE.IO returns a <a href="../../../../io/sphere/sdk/client/SphereHttpHeaders.html#X_DEPRECATION_NOTICE">"X-DEPRECATION-NOTICE"</a> header field,
- it does not deserialize the response object in <a href="../../../../io/sphere/sdk/client/SphereRequest.html#deserialize-io.sphere.sdk.http.HttpResponse-"><code>SphereRequest.deserialize(HttpResponse)</code></a> but throws a <a href="../../../../io/sphere/sdk/client/SphereDeprecationException.html" title="class in io.sphere.sdk.client"><code>SphereDeprecationException</code></a>.</div>
+<div class="block">Decorator for <a href="../../../../io/sphere/sdk/client/SphereClient.html" title="interface in io.sphere.sdk.client"><code>SphereClient</code></a>s to throw exceptions on deprecated http calls.</div>
 </td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><a href="../../../../io/sphere/sdk/client/HttpRequestIntent.html" title="class in io.sphere.sdk.client">HttpRequestIntent</a></td>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Expresses the http request domain model form commercetools platform as a draft for <a href="../../../../io/sphere/sdk/http/HttpRequest.html" title="interface in io.sphere.sdk.http"><code>HttpRequest</code></a>.</div>
+</td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><a href="../../../../io/sphere/sdk/client/JsonEndpoint.html" title="class in io.sphere.sdk.client">JsonEndpoint</a>&lt;T&gt;</td>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Internal class.</div>
+</td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><a href="../../../../io/sphere/sdk/client/JsonNodeSphereRequest.html" title="class in io.sphere.sdk.client">JsonNodeSphereRequest</a></td>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">A <a href="../../../../io/sphere/sdk/client/SphereRequest.html" title="interface in io.sphere.sdk.client"><code>SphereRequest</code></a> which returns <code>JsonNode</code> instances instead of deserialized Java domain model classes.</div>
+</td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><a href="../../../../io/sphere/sdk/client/QueueSphereClientDecorator.html" title="class in io.sphere.sdk.client">QueueSphereClientDecorator</a></td>
@@ -169,21 +176,25 @@
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><a href="../../../../io/sphere/sdk/client/SphereAccessTokenSupplierFactory.html" title="class in io.sphere.sdk.client">SphereAccessTokenSupplierFactory</a></td>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">Deprecated</td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><a href="../../../../io/sphere/sdk/client/SphereAsyncHttpClientFactory.html" title="class in io.sphere.sdk.client">SphereAsyncHttpClientFactory</a></td>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Creates an <a href="../../../../io/sphere/sdk/http/HttpClient.html" title="interface in io.sphere.sdk.http"><code>HttpClient</code></a> with a commercetools configured underlying <code>AsyncHttpClient</code>.</div>
+</td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><a href="../../../../io/sphere/sdk/client/SphereClientConfig.html" title="class in io.sphere.sdk.client">SphereClientConfig</a></td>
 <td class="colLast">
-<div class="block">The full configuration for a SPHERE.IO client.</div>
+<div class="block">The full api and auth configuration for a commercetools client.</div>
 </td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><a href="../../../../io/sphere/sdk/client/SphereClientDecorator.html" title="class in io.sphere.sdk.client">SphereClientDecorator</a></td>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">A public base class to decorate <a href="../../../../io/sphere/sdk/client/SphereClient.html" title="interface in io.sphere.sdk.client"><code>SphereClient</code></a>s.</div>
+</td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><a href="../../../../io/sphere/sdk/client/SphereClientUtils.html" title="class in io.sphere.sdk.client">SphereClientUtils</a></td>
@@ -191,26 +202,44 @@
 </tr>
 <tr class="altColor">
 <td class="colFirst"><a href="../../../../io/sphere/sdk/client/SphereHttpHeaders.html" title="class in io.sphere.sdk.client">SphereHttpHeaders</a></td>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Holds the names of commercetools proprietary HTTP headers.</div>
+</td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><a href="../../../../io/sphere/sdk/client/SphereRequestDecorator.html" title="class in io.sphere.sdk.client">SphereRequestDecorator</a>&lt;T&gt;</td>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Public available base class to decorate the behaviour of <a href="../../../../io/sphere/sdk/client/SphereRequest.html" title="interface in io.sphere.sdk.client"><code>SphereRequest</code></a>s.</div>
+</td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><a href="../../../../io/sphere/sdk/client/SphereRequestUtils.html" title="class in io.sphere.sdk.client">SphereRequestUtils</a></td>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Utils for common behaviour of <a href="../../../../io/sphere/sdk/client/SphereRequest.html" title="interface in io.sphere.sdk.client"><code>SphereRequest</code></a>s.</div>
+</td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><a href="../../../../io/sphere/sdk/client/TestDoubleSphereClientFactory.html" title="class in io.sphere.sdk.client">TestDoubleSphereClientFactory</a></td>
 <td class="colLast">
-<div class="block">A factory to instantiate SPHERE.IO Java clients which use <code>CompletionStage</code> as future implementation.</div>
+<div class="block">A factory to instantiate test double <a href="../../../../io/sphere/sdk/client/SphereClient.html" title="interface in io.sphere.sdk.client"><code>SphereClient</code></a>s clients which use <code>CompletionStage</code> as future implementation.</div>
 </td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><a href="../../../../io/sphere/sdk/client/TimeoutSphereClientDecorator.html" title="class in io.sphere.sdk.client">TimeoutSphereClientDecorator</a></td>
 <td class="colLast">
 <div class="block">Wraps a <a href="../../../../io/sphere/sdk/client/SphereClient.html" title="interface in io.sphere.sdk.client"><code>SphereClient</code></a> to add timeouts.</div>
+</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><a href="../../../../io/sphere/sdk/client/Tokens.html" title="class in io.sphere.sdk.client">Tokens</a></td>
+<td class="colLast">
+<div class="block">OAuth tokens returned by the authorization server.</div>
+</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><a href="../../../../io/sphere/sdk/client/TokensFacade.html" title="class in io.sphere.sdk.client">TokensFacade</a></td>
+<td class="colLast">
+<div class="block">Provides facilities to fetch commercetools access and refresh tokens.</div>
 </td>
 </tr>
 </tbody>

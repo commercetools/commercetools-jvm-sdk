@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":9,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":9,"i9":9,"i10":9,"i11":9,"i12":9,"i13":41,"i14":10,"i15":10,"i16":10,"i17":10,"i18":9,"i19":10,"i20":9};
+var methods = {"i0":9,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":9,"i9":9,"i10":9,"i11":9,"i12":9,"i13":41,"i14":9,"i15":10,"i16":10,"i17":10,"i18":10,"i19":9,"i20":10,"i21":9};
 var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"],32:["t6","Deprecated Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -220,7 +220,7 @@ assertThat(slugifiedUnique.get(Locale.ENGLISH)).matches("dog-food-\\d+");
 <tr id="i11" class="rowColor">
 <td class="colFirst"><code>static <a href="../../../../io/sphere/sdk/models/LocalizedString.html" title="class in io.sphere.sdk.models">LocalizedString</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/models/LocalizedString.html#of-java.util.Map-">of</a></span>(java.util.Map&lt;java.util.Locale,java.lang.String&gt;&nbsp;translations)</code>
-<div class="block">Creates an instance by supplying a map.</div>
+<div class="block">Creates an instance by supplying a map of <code>Locale</code> and <code>String</code>.</div>
 </td>
 </tr>
 <tr id="i12" class="altColor">
@@ -236,41 +236,47 @@ assertThat(slugifiedUnique.get(Locale.ENGLISH)).matches("dog-food-\\d+");
 </td>
 </tr>
 <tr id="i14" class="altColor">
+<td class="colFirst"><code>static <a href="../../../../io/sphere/sdk/models/LocalizedString.html" title="class in io.sphere.sdk.models">LocalizedString</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/models/LocalizedString.html#ofStringToStringMap-java.util.Map-">ofStringToStringMap</a></span>(java.util.Map&lt;java.lang.String,java.lang.String&gt;&nbsp;translations)</code>
+<div class="block">Creates an instance by supplying a map of <code>String</code> the language tag and <code>String</code>.</div>
+</td>
+</tr>
+<tr id="i15" class="rowColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/models/LocalizedString.html" title="class in io.sphere.sdk.models">LocalizedString</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/models/LocalizedString.html#plus-java.util.Locale-java.lang.String-">plus</a></span>(java.util.Locale&nbsp;locale,
     java.lang.String&nbsp;value)</code>
 <div class="block">Creates a new <a href="../../../../io/sphere/sdk/models/LocalizedString.html" title="class in io.sphere.sdk.models"><code>LocalizedString</code></a> containing the given entries and the new one.</div>
 </td>
 </tr>
-<tr id="i15" class="rowColor">
+<tr id="i16" class="altColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/models/LocalizedString.html" title="class in io.sphere.sdk.models">LocalizedString</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/models/LocalizedString.html#slugified--">slugified</a></span>()</code>
 <div class="block">Creates a new <a href="../../../../io/sphere/sdk/models/LocalizedString.html" title="class in io.sphere.sdk.models"><code>LocalizedString</code></a> where all translations are slugified (remove whitespace, etc.).</div>
 </td>
 </tr>
-<tr id="i16" class="altColor">
+<tr id="i17" class="rowColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/models/LocalizedString.html" title="class in io.sphere.sdk.models">LocalizedString</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/models/LocalizedString.html#slugifiedUnique--">slugifiedUnique</a></span>()</code>
 <div class="block">Creates a new <a href="../../../../io/sphere/sdk/models/LocalizedString.html" title="class in io.sphere.sdk.models"><code>LocalizedString</code></a> where all translations are slugified (remove whitespace, etc.) and a random supplement is added.</div>
 </td>
 </tr>
-<tr id="i17" class="rowColor">
+<tr id="i18" class="altColor">
 <td class="colFirst"><code>java.util.stream.Stream&lt;<a href="../../../../io/sphere/sdk/models/LocalizedStringEntry.html" title="class in io.sphere.sdk.models">LocalizedStringEntry</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/models/LocalizedString.html#stream--">stream</a></span>()</code>
 <div class="block">Creates a new Stream of entries.</div>
 </td>
 </tr>
-<tr id="i18" class="altColor">
+<tr id="i19" class="rowColor">
 <td class="colFirst"><code>static java.util.stream.Collector&lt;<a href="../../../../io/sphere/sdk/models/LocalizedStringEntry.html" title="class in io.sphere.sdk.models">LocalizedStringEntry</a>,?,<a href="../../../../io/sphere/sdk/models/LocalizedString.html" title="class in io.sphere.sdk.models">LocalizedString</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/models/LocalizedString.html#streamCollector--">streamCollector</a></span>()</code>
 <div class="block">Collector to collect a stream of <a href="../../../../io/sphere/sdk/models/LocalizedStringEntry.html" title="class in io.sphere.sdk.models"><code>LocalizedStringEntry</code></a>s to one <a href="../../../../io/sphere/sdk/models/LocalizedString.html" title="class in io.sphere.sdk.models"><code>LocalizedString</code></a>.</div>
 </td>
 </tr>
-<tr id="i19" class="rowColor">
+<tr id="i20" class="altColor">
 <td class="colFirst"><code>java.lang.String</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/models/LocalizedString.html#toString--">toString</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i20" class="altColor">
+<tr id="i21" class="rowColor">
 <td class="colFirst"><code>static com.fasterxml.jackson.core.type.TypeReference&lt;<a href="../../../../io/sphere/sdk/models/LocalizedString.html" title="class in io.sphere.sdk.models">LocalizedString</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/models/LocalizedString.html#typeReference--">typeReference</a></span>()</code>
 <div class="block">Creates a container which contains the full Java type information to deserialize this class from JSON.</div>
@@ -392,7 +398,7 @@ assertThat(ls.get(Locale.ENGLISH)).isEqualTo("dog food");
 <li class="blockList">
 <h4>of</h4>
 <pre>public static&nbsp;<a href="../../../../io/sphere/sdk/models/LocalizedString.html" title="class in io.sphere.sdk.models">LocalizedString</a>&nbsp;of(java.util.Map&lt;java.util.Locale,java.lang.String&gt;&nbsp;translations)</pre>
-<div class="block">Creates an instance by supplying a map. Changes to the map won't affect the instance.
+<div class="block">Creates an instance by supplying a map of <code>Locale</code> and <code>String</code>. Changes to the map won't affect the instance.
 
  <div id="io-sphere-sdk-models-LocalizedStringTest-createByMap--%s" class=code-example><pre><code class='java'>final Map&lt;Locale, String&gt; map = new HashMap&lt;&gt;();
 map.put(Locale.GERMAN, "Hundefutter");
@@ -410,6 +416,34 @@ assertThat(ls.getLocales())
         .containsExactly(Locale.GERMAN, Locale.ENGLISH);
 assertThat(ls).isEqualTo(LocalizedString.of(Locale.GERMAN, "Hundefutter", Locale.ENGLISH, "dog food"));
 assertThat(ls.get(Locale.GERMAN)).isEqualTo("Hundefutter");
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/commercetools-sdk-base/src/test/java/io/sphere/sdk/models/LocalizedStringTest.java" target="_blank">test code</a>.</pre></div></div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>translations</code> - the key value pairs for the translation</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>a new instance which has the same key value pairs as <code>translation</code> at creation time</dd>
+</dl>
+</li>
+</ul>
+<a name="ofStringToStringMap-java.util.Map-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>ofStringToStringMap</h4>
+<pre>public static&nbsp;<a href="../../../../io/sphere/sdk/models/LocalizedString.html" title="class in io.sphere.sdk.models">LocalizedString</a>&nbsp;ofStringToStringMap(java.util.Map&lt;java.lang.String,java.lang.String&gt;&nbsp;translations)</pre>
+<div class="block">Creates an instance by supplying a map of <code>String</code> the language tag and <code>String</code>. Changes to the map won't affect the instance.
+
+ <div id="io-sphere-sdk-models-LocalizedStringTest-ofStringToStringMap--%s" class=code-example><pre><code class='java'>final Map&lt;String, String&gt; map = new HashMap&lt;&gt;();
+map.put("de", "Jacken");
+map.put("en", "Jackets");
+map.put("it", "Giacche");
+final LocalizedString actual = LocalizedString.ofStringToStringMap(map);
+final LocalizedString expected = LocalizedString
+        .of(Locale.GERMAN, "Jacken")
+        .plus(Locale.ENGLISH, "Jackets")
+        .plus(Locale.ITALIAN, "Giacche");
+assertThat(actual).isEqualTo(expected);
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/commercetools-sdk-base/src/test/java/io/sphere/sdk/models/LocalizedStringTest.java" target="_blank">test code</a>.</pre></div></div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
