@@ -191,10 +191,12 @@ extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.
 <pre>public static&nbsp;java.util.concurrent.CompletionStage&lt;<a href="../../../../io/sphere/sdk/client/Tokens.html" title="class in io.sphere.sdk.client">Tokens</a>&gt;&nbsp;fetchTokens(<a href="../../../../io/sphere/sdk/client/SphereAuthConfig.html" title="interface in io.sphere.sdk.client">SphereAuthConfig</a>&nbsp;authConfig)</pre>
 <div class="block">Fetches a new access token.
 
- <div id="io-sphere-sdk-client-TokensFacadeTest-fetchAccessToken--%s" class=code-example><pre><code class='java'>final SphereAuthConfig config = getSphereClientConfig();
-final CompletionStage&lt;String&gt; stringCompletionStage = TokensFacade.fetchAccessToken(config);
-final String accessToken = SphereClientUtils.blockingWait(stringCompletionStage, 2, TimeUnit.SECONDS);
-assertThat(accessToken).isNotEmpty();
+ <div id="io-sphere-sdk-client-TokensFacadeTest-fetchAccessToken--%s" class=code-example><pre><code class='java'>if (!"false".equals(System.getenv("JVM_SDK_IT_SSL_VALIDATION"))) {
+    final SphereAuthConfig config = getSphereClientConfig();
+    final CompletionStage&lt;String&gt; stringCompletionStage = TokensFacade.fetchAccessToken(config);
+    final String accessToken = SphereClientUtils.blockingWait(stringCompletionStage, 2, TimeUnit.SECONDS);
+    assertThat(accessToken).isNotEmpty();
+}
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/commercetools-models/src/it/java/io/sphere/sdk/client/TokensFacadeTest.java" target="_blank">test code</a>.</pre></div></div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
