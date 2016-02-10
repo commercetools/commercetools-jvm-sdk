@@ -8,6 +8,8 @@ import java.util.function.Supplier;
 /** Provides an OAuth token for accessing protected Sphere HTTP API endpoints.
  *
  * There a no guarantees concerning the token providing mechanism.
+ *
+ * <p>See also {@link TokensFacade} if you just want to fetch an access token for one time.</p>
  */
 public interface SphereAccessTokenSupplier extends AutoCloseable, Supplier<CompletionStage<String>> {
     /** Returns the OAuth access token. */

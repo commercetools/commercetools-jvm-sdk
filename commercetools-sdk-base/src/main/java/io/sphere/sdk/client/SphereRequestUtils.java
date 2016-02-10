@@ -12,6 +12,9 @@ import java.nio.charset.StandardCharsets;
 import java.util.Optional;
 import java.util.concurrent.CompletionException;
 
+/**
+ * Utils for common behaviour of {@link SphereRequest}s.
+ */
 public final class SphereRequestUtils {
     private SphereRequestUtils() {
     }

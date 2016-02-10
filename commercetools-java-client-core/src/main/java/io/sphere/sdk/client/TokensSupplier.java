@@ -5,6 +5,9 @@ import io.sphere.sdk.http.HttpClient;
 import java.util.concurrent.CompletionStage;
 import java.util.function.Supplier;
 
+/**
+ * Component that asynchronous retrieves tokens.
+ */
 public interface TokensSupplier extends AutoCloseable, Supplier<CompletionStage<Tokens>> {
     @Override
     CompletionStage<Tokens> get();

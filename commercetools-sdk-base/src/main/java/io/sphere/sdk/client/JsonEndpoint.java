@@ -3,6 +3,10 @@ package io.sphere.sdk.client;
 import com.fasterxml.jackson.core.type.TypeReference;
 import io.sphere.sdk.models.Base;
 
+/**
+ * Internal class.
+ * @param <T> resource type
+ */
 public final class JsonEndpoint<T> extends Base {
     private final TypeReference<T> typeReference;
     private final String endpoint;

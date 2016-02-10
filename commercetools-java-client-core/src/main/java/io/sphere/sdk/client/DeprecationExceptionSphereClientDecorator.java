@@ -8,8 +8,10 @@ import java.util.List;
 import java.util.concurrent.CompletionStage;
 
 /**
- * If SPHERE.IO returns a {@value io.sphere.sdk.client.SphereHttpHeaders#X_DEPRECATION_NOTICE} header field,
- * it does not deserialize the response object in {@link SphereRequest#deserialize(HttpResponse)} but throws a {@link SphereDeprecationException}.
+ * Decorator for {@link SphereClient}s to throw exceptions on deprecated http calls.
+ *
+ * <p>If SPHERE.IO returns a {@value io.sphere.sdk.client.SphereHttpHeaders#X_DEPRECATION_NOTICE} header field,
+ * it does not deserialize the response object in {@link SphereRequest#deserialize(HttpResponse)} but throws a {@link SphereDeprecationException}.</p>
  */
 public final class DeprecationExceptionSphereClientDecorator extends SphereClientDecorator implements SphereClient {
 

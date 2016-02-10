@@ -3,6 +3,10 @@ package io.sphere.sdk.client;
 import io.sphere.sdk.http.HttpResponse;
 import io.sphere.sdk.models.Base;
 
+/**
+ * Public available base class to decorate the behaviour of {@link SphereRequest}s.
+ * @param <T> the type of the result of this request
+ */
 public abstract class SphereRequestDecorator<T> extends Base implements SphereRequest<T> {
     protected final SphereRequest<T> delegate;
 

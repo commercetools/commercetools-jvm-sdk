@@ -11,6 +11,9 @@ import io.sphere.sdk.models.Base;
 import javax.annotation.Nullable;
 import java.util.Optional;
 
+/**
+ * A {@link SphereRequest} which returns {@link JsonNode} instances instead of deserialized Java domain model classes.
+ */
 public final class JsonNodeSphereRequest extends Base implements SphereRequest<JsonNode> {
     private final HttpRequestIntent httpRequestIntent;
 

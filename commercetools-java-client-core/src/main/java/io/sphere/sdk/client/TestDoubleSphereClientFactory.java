@@ -12,7 +12,7 @@ import java.util.function.Function;
 import static io.sphere.sdk.utils.CompletableFutureUtils.successful;
 
 /**
- * A factory to instantiate SPHERE.IO Java clients which use {@link CompletionStage} as future implementation.
+ * A factory to instantiate test double {@link SphereClient}s clients which use {@link CompletionStage} as future implementation.
 
  */
 public final class TestDoubleSphereClientFactory extends Base {

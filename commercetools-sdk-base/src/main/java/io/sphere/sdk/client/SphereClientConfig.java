@@ -9,7 +9,7 @@ import static io.sphere.sdk.client.ClientPackage.AUTH_URL;
 import static io.sphere.sdk.client.ClientPackage.requireNonBlank;
 
 /**
- * The full configuration for a SPHERE.IO client.
+ * The full api and auth configuration for a commercetools client.
  *
  */
 public final class SphereClientConfig extends Base implements SphereAuthConfig, SphereApiConfig {

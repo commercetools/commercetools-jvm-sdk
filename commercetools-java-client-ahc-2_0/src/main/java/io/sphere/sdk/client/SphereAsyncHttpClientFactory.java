@@ -6,6 +6,9 @@ import io.sphere.sdk.models.Base;
 import org.asynchttpclient.DefaultAsyncHttpClient;
 import org.asynchttpclient.DefaultAsyncHttpClientConfig;
 
+/**
+ * Creates an {@link HttpClient} with a commercetools configured underlying {@link org.asynchttpclient.AsyncHttpClient}.
+ */
 public final class SphereAsyncHttpClientFactory extends Base {
     private SphereAsyncHttpClientFactory() {
     }
