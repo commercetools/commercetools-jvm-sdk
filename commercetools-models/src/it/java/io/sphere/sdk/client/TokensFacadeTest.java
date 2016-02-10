@@ -12,9 +12,11 @@ public class TokensFacadeTest extends IntegrationTest {
 
     @Test
     public void fetchAccessToken() {
-        final SphereAuthConfig config = getSphereClientConfig();
-        final CompletionStage<String> stringCompletionStage = TokensFacade.fetchAccessToken(config);
-        final String accessToken = SphereClientUtils.blockingWait(stringCompletionStage, 2, TimeUnit.SECONDS);
-        assertThat(accessToken).isNotEmpty();
+        if (!"false".equals(System.getenv("JVM_SDK_IT_SSL_VALIDATION"))) {
+            final SphereAuthConfig config = getSphereClientConfig();
+            final CompletionStage<String> stringCompletionStage = TokensFacade.fetchAccessToken(config);
+            final String accessToken = SphereClientUtils.blockingWait(stringCompletionStage, 2, TimeUnit.SECONDS);
+            assertThat(accessToken).isNotEmpty();
+        }
     }
 }
