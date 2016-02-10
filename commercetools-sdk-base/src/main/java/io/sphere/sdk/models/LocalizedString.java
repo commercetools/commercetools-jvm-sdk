@@ -92,7 +92,7 @@ public final class LocalizedString extends Base {
     }
 
     /**
-     * Creates an instance by supplying a map. Changes to the map won't affect the instance.
+     * Creates an instance by supplying a map of {@link Locale} and {@link String}. Changes to the map won't affect the instance.
      *
      * {@include.example io.sphere.sdk.models.LocalizedStringTest#createByMap()}
      *
@@ -103,6 +103,25 @@ public final class LocalizedString extends Base {
     public static LocalizedString of(final Map<Locale, String> translations) {
         requireNonNull(translations);
         return new LocalizedString(translations);
+    }
+
+    /**
+     * Creates an instance by supplying a map of {@link String} the language tag and {@link String}. Changes to the map won't affect the instance.
+     *
+     * {@include.example io.sphere.sdk.models.LocalizedStringTest#ofStringToStringMap()}
+     *
+     * @param translations the key value pairs for the translation
+     * @return a new instance which has the same key value pairs as {@code translation} at creation time
+     */
+    @JsonIgnore
+    public static LocalizedString ofStringToStringMap(final Map<String, String> translations) {
+        requireNonNull(translations);
+        return translations.entrySet().stream()
+                .map(localeEntry -> {
+                    final Locale locale = Locale.forLanguageTag(localeEntry.getKey());
+                    return LocalizedStringEntry.of(locale, localeEntry.getValue());
+                })
+                .collect(LocalizedString.streamCollector());
     }
 
     /**

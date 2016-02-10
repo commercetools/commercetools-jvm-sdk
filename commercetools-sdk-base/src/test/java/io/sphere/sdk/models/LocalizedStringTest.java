@@ -296,4 +296,18 @@ public class LocalizedStringTest {
         final LocalizedString localizedString = LocalizedString.of(Locale.US, "kids", Locale.UK, "children");
         assertThat(SphereJsonUtils.toJsonNode(localizedString)).isEqualTo(SphereJsonUtils.parse(FULL_LOCALE_JSON_STRING));
     }
+
+    @Test
+    public void ofStringToStringMap() {
+        final Map<String, String> map = new HashMap<>();
+        map.put("de", "Jacken");
+        map.put("en", "Jackets");
+        map.put("it", "Giacche");
+        final LocalizedString actual = LocalizedString.ofStringToStringMap(map);
+        final LocalizedString expected = LocalizedString
+                .of(Locale.GERMAN, "Jacken")
+                .plus(Locale.ENGLISH, "Jackets")
+                .plus(Locale.ITALIAN, "Giacche");
+        assertThat(actual).isEqualTo(expected);
+    }
 }
