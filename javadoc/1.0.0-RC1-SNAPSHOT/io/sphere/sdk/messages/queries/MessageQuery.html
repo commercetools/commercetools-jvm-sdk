@@ -301,7 +301,9 @@ extends <a href="../../../../../io/sphere/sdk/queries/MetaModelQueryDsl.html" ti
 </tr>
 <tr id="i1" class="rowColor">
 <td class="colFirst"><code>default <a href="../../../../../io/sphere/sdk/queries/Query.html" title="interface in io.sphere.sdk.queries">Query</a>&lt;<a href="../../../../../io/sphere/sdk/messages/Message.html" title="interface in io.sphere.sdk.messages">Message</a>&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/messages/queries/MessageQuery.html#forMessageTypes-java.util.List-">forMessageTypes</a></span>(java.util.List&lt;<a href="../../../../../io/sphere/sdk/messages/MessageDerivateHint.html" title="class in io.sphere.sdk.messages">MessageDerivateHint</a>&lt;? extends <a href="../../../../../io/sphere/sdk/messages/Message.html" title="interface in io.sphere.sdk.messages">Message</a>&gt;&gt;&nbsp;messageHints)</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/messages/queries/MessageQuery.html#forMessageTypes-java.util.List-">forMessageTypes</a></span>(java.util.List&lt;<a href="../../../../../io/sphere/sdk/messages/MessageDerivateHint.html" title="class in io.sphere.sdk.messages">MessageDerivateHint</a>&lt;? extends <a href="../../../../../io/sphere/sdk/messages/Message.html" title="interface in io.sphere.sdk.messages">Message</a>&gt;&gt;&nbsp;messageHints)</code>
+<div class="block">Creates a new query that queries only for messages that can be mapped to certain Java types.</div>
+</td>
 </tr>
 <tr id="i2" class="altColor">
 <td class="colFirst"><code>static <a href="../../../../../io/sphere/sdk/messages/queries/MessageQuery.html" title="interface in io.sphere.sdk.messages.queries">MessageQuery</a></code></td>
@@ -448,6 +450,60 @@ extends <a href="../../../../../io/sphere/sdk/queries/MetaModelQueryDsl.html" ti
 <li class="blockList">
 <h4>forMessageTypes</h4>
 <pre>default&nbsp;<a href="../../../../../io/sphere/sdk/queries/Query.html" title="interface in io.sphere.sdk.queries">Query</a>&lt;<a href="../../../../../io/sphere/sdk/messages/Message.html" title="interface in io.sphere.sdk.messages">Message</a>&gt;&nbsp;forMessageTypes(java.util.List&lt;<a href="../../../../../io/sphere/sdk/messages/MessageDerivateHint.html" title="class in io.sphere.sdk.messages">MessageDerivateHint</a>&lt;? extends <a href="../../../../../io/sphere/sdk/messages/Message.html" title="interface in io.sphere.sdk.messages">Message</a>&gt;&gt;&nbsp;messageHints)</pre>
+<div class="block">Creates a new query that queries only for messages that can be mapped to certain Java types. This is a terminal operation so no changes can be done on the query.
+
+ <div id="io-sphere-sdk-messages-queries-MessageQueryTest-queryForMultipleSpecificMessageClasses--%s" class=code-example><pre><code class='java'>ProductFixtures.withUpdateableProduct(client(), product -&gt; {
+    //create some messages apart from ProductCreatedMessage
+    final Product publishedProduct = client().executeBlocking(ProductUpdateCommand.of(product, Publish.of()));
+    final Product unpublishedProduct = client().executeBlocking(ProductUpdateCommand.of(publishedProduct, Unpublish.of()));
+
+    //these are the classes which are expected as message
+    final List&lt;MessageDerivateHint&lt;? extends Message&gt;&gt; messageHints =
+            asList(ProductCreatedMessage.MESSAGE_HINT,
+                    ProductPublishedMessage.MESSAGE_HINT,
+                    //as fallback for other product messages
+                    SimpleProductMessage.MESSAGE_HINT);
+
+    final Query&lt;Message&gt; query = MessageQuery.of()
+            .withPredicates(m -&gt; m.resource().is(product))
+            .withSort(m -&gt; m.createdAt().sort().asc())
+            .withExpansionPaths(m -&gt; m.resource())
+            .forMessageTypes(messageHints);
+
+    assertEventually(() -&gt; {
+        final List&lt;Message&gt; messages = client().executeBlocking(query).getResults();
+        assertThat(messages).hasSize(3);
+        assertThat(messages.get(0)).isInstanceOf(ProductCreatedMessage.class);
+        assertThat(messages.get(1)).isInstanceOf(ProductPublishedMessage.class);
+        assertThat(messages.get(2)).isInstanceOf(SimpleProductMessage.class);
+
+        //use some kind of pattern matching
+        messages.stream()
+                .forEachOrdered(message -&gt; {
+                    if (message instanceof ProductCreatedMessage) {
+                        final ProductCreatedMessage m = (ProductCreatedMessage) message;
+                        assertThat(m.getResource()).isEqualTo(product.toReference());
+                    } else if (message instanceof ProductPublishedMessage) {
+                        final ProductPublishedMessage m = (ProductPublishedMessage) message;
+                        assertThat(m.getResource()).isEqualTo(product.toReference());
+                    } else if (message instanceof SimpleProductMessage) {
+                        final SimpleProductMessage m = (SimpleProductMessage) message;
+                        assertThat(m.getResource()).isEqualTo(product.toReference());
+                        assertThat(m.getType()).isEqualTo("ProductUnpublished");
+                    } else {
+                        throw new RuntimeException("unexpected type of " + message);
+                    }
+                });
+    });
+    return unpublishedProduct;
+});
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/commercetools-models/src/it/java/io/sphere/sdk/messages/queries/MessageQueryTest.java" target="_blank">test code</a>.</pre></div></div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>messageHints</code> - internal containers which register the known messages</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>new query</dd>
+</dl>
 </li>
 </ul>
 </li>
