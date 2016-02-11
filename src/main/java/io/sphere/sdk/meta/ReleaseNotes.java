@@ -109,7 +109,7 @@ import java.util.function.Function;
  <li class=removed-in-release>{@code InvalidQueryOffsetException}</li>
  
  <li class=change-in-release>align {@link io.sphere.sdk.products.search.ProductProjectionSearchModel} methods with the Query DSL, e.g. {@code is} instead of {@code by}, {@code isIn} instead of {@code byAny} and {@code isBetween} instead of {@code byRange}</li>
- <li class=change-in-release>unify methods to extract {@code TermFacetResult}, {@code RangeFacetResult} and {@code FilteredFacetResult} to the same method name {@code getFacetResult}</li>
+ <li class=change-in-release>unify methods to extract {@code TermFacetResult}, {@code RangeFacetResult} and {@code FilteredFacetResult} into the same method name {@code getFacetResult}</li>
  <li class=change-in-release>{@code FacetAndFilter} Expression and its Search Model have been renamed to {@code FacetedSearch} to better reflect the use case</li>
  </ul>
 
