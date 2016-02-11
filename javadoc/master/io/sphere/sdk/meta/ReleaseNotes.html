@@ -122,6 +122,44 @@ extends java.lang.Object</pre>
  </ul>
  -->
 
+ <h3 class=released-version id="v1_0_0_RC1">1.0.0-RC1 (12.02.2016)</h3>
+ <a class="theme-btn expand-all">Expand all</a>
+
+ <br>
+ <br>
+ <ul>
+ <li class=new-in-release>use a new groupId as well as artifactId for the JVM SDK, have a look at the <a href="https://github.com/sphereio/sphere-jvm-sdk#sphereio-jvm-sdk">GitHub readme</a></li>
+ <li class=new-in-release>in commercetools-convenience module: <a href="../../../../io/sphere/sdk/client/metrics/SimpleMetricsSphereClient.html" title="class in io.sphere.sdk.client.metrics"><code>SimpleMetricsSphereClient</code></a> makes durations for requests observable</li>
+ <li class=new-in-release>add <a href="../../../../io/sphere/sdk/jsonnodes/queries/JsonNodeQuery.html" title="interface in io.sphere.sdk.jsonnodes.queries"><code>JsonNodeQuery</code></a> to use the query endpoints and get directly <code>JsonNode</code> instances</li>
+ <li class=new-in-release>add draft getters to create commands</li>
+ <li class=new-in-release>a lot of new documentation in the classes</li>
+ <li class=new-in-release>cross reference expansion for a lot of endpoints, so for example expand of a review its current state and of this state the possible transition states</li>
+ <li class=new-in-release>add <code>Duration</code> API for <a href="../../../../io/sphere/sdk/client/SphereClientUtils.html#blockingWait-java.util.concurrent.CompletionStage-java.time.Duration-"><code>SphereClientUtils.blockingWait(CompletionStage, Duration)</code></a> and <a href="../../../../io/sphere/sdk/client/BlockingSphereClient.html#of-io.sphere.sdk.client.SphereClient-java.time.Duration-"><code>BlockingSphereClient.of(SphereClient, Duration)</code></a>  </li>
+
+ <li class=new-in-release>add <a href="../../../../io/sphere/sdk/models/LocalizedString.html#ofStringToStringMap-java.util.Map-"><code>LocalizedString.ofStringToStringMap(Map)</code></a> </li>
+ <li class=new-in-release>add <a href="../../../../io/sphere/sdk/client/TokensFacade.html" title="class in io.sphere.sdk.client"><code>TokensFacade</code></a> to conveniently just get an access token
+ <li class=new-in-release>add <a href="../../../../io/sphere/sdk/messages/queries/MessageQuery.html#forMessageTypes-java.util.List-"><code>MessageQuery.forMessageTypes(List)</code></a></li>
+ <li class=new-in-release>use <code>io.sphere.sdk.http.HttpClient</code> as logger name with debug level to log the http method and the path (currently works only for the default HTTP client)</li>
+
+ <li class=change-in-release>deprecate <code>LocalizedString#ofEnglishLocale(String)</code>, use  <a href="../../../../io/sphere/sdk/models/LocalizedString.html#ofEnglish-java.lang.String-"><code>LocalizedString.ofEnglish(String)</code></a> instead</li>
+ <li class=change-in-release><code>VariantIdentifier</code> became <a href="../../../../io/sphere/sdk/products/ByIdVariantIdentifier.html" title="interface in io.sphere.sdk.products"><code>ByIdVariantIdentifier</code></a> and use <a href="../../../../io/sphere/sdk/products/VariantIdentifier.html" title="interface in io.sphere.sdk.products"><code>VariantIdentifier</code></a> as super interface for <a href="../../../../io/sphere/sdk/products/ByIdVariantIdentifier.html" title="interface in io.sphere.sdk.products"><code>ByIdVariantIdentifier</code></a> and <a href="../../../../io/sphere/sdk/products/BySkuVariantIdentifier.html" title="interface in io.sphere.sdk.products"><code>BySkuVariantIdentifier</code></a></li>
+ <li class=change-in-release>drafts are interfaces</li>
+ <li class=change-in-release><a href="../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html" title="interface in io.sphere.sdk.products.search"><code>ProductProjectionSearch</code></a> uses POST instead of GET</li>
+ <li class=change-in-release>set the default HTTP client to Async Http Client to 2.0.0-RC9</li>
+ <li class=change-in-release>deprecate <code>io.sphere.sdk.client.SphereAccessTokenSupplierFactory</code>, use <a href="../../../../io/sphere/sdk/client/SphereAccessTokenSupplier.html" title="interface in io.sphere.sdk.client"><code>SphereAccessTokenSupplier</code></a> methods instead</li>
+
+ <li class=removed-in-release>class <code>SphereRequestBase</code>, use <a href="../../../../io/sphere/sdk/client/SphereRequestUtils.html" title="class in io.sphere.sdk.client"><code>SphereRequestUtils</code></a> instead</li>
+ <li class=removed-in-release><code>ExperimentalReactiveStreamUtils</code> is not experimental anymore and has been moved out of commercetools-convenience to a separate repository: <a href="https://github.com/sphereio/commercetools-jvm-sdk-reactive-streams-add-ons" target="_blank">https://github.com/sphereio/commercetools-jvm-sdk-reactive-streams-add-ons</a></li>
+ <li class=removed-in-release>some internal util classes (StringUtils, IterableUtils, MapUtils, SetUtils, TriFunction, PatternMatcher, UrlUtils)</li>
+ <li class=removed-in-release><code>CustomObjectDraft#withVersion(String, String, JsonNode)</code></li>
+ <li class=removed-in-release><code>HttpQueryParameter</code> class</li>
+ <li class=removed-in-release><code>InvalidQueryOffsetException</code></li>
+
+ </ul>
+
+
+
+
  <h3 class=released-version id="v1_0_0_M26">1.0.0-M26 (20.01.2016)</h3>
  <a class="theme-btn expand-all">Expand all</a>
 
