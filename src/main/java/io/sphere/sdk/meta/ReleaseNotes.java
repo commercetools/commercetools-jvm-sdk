@@ -29,6 +29,7 @@ import io.sphere.sdk.products.attributes.Attribute;
 import io.sphere.sdk.products.attributes.AttributeAccess;
 import io.sphere.sdk.products.attributes.AttributeDefinition;
 import io.sphere.sdk.products.attributes.LocalizedToStringProductAttributeConverter;
+import io.sphere.sdk.products.commands.ProductCreateCommand;
 import io.sphere.sdk.products.commands.updateactions.SetMetaDescription;
 import io.sphere.sdk.products.commands.updateactions.SetMetaKeywords;
 import io.sphere.sdk.products.commands.updateactions.SetMetaTitle;
@@ -46,7 +47,9 @@ import io.sphere.sdk.types.CustomFields;
 import io.sphere.sdk.types.FieldType;
 
 import javax.money.CurrencyUnit;
+import java.time.Duration;
 import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 import java.util.concurrent.CompletionStage;
 import java.util.concurrent.TimeUnit;
@@ -71,6 +74,44 @@ import java.util.function.Function;
  <li class=fixed-in-release></li>
  </ul>
  -->
+
+ <h3 class=released-version id="v1_0_0_RC1">1.0.0-RC1 (12.02.2016)</h3>
+ <a class="theme-btn expand-all">Expand all</a>
+
+ <br>
+ <br>
+ <ul>
+ <li class=new-in-release>use a new groupId as well as artifactId for the JVM SDK, have a look at the <a href="https://github.com/sphereio/sphere-jvm-sdk#sphereio-jvm-sdk">GitHub readme</a></li>
+ <li class=new-in-release>in commercetools-convenience module: {@link io.sphere.sdk.client.metrics.SimpleMetricsSphereClient} makes durations for requests observable</li>
+ <li class=new-in-release>add {@link io.sphere.sdk.jsonnodes.queries.JsonNodeQuery} to use the query endpoints and get directly {@link com.fasterxml.jackson.databind.JsonNode} instances</li>
+ <li class=new-in-release>add draft getters to create commands</li>
+ <li class=new-in-release>a lot of new documentation in the classes</li>
+ <li class=new-in-release>cross reference expansion for a lot of endpoints, so for example expand of a review its current state and of this state the possible transition states</li>
+ <li class=new-in-release>add {@link java.time.Duration} API for {@link io.sphere.sdk.client.SphereClientUtils#blockingWait(CompletionStage, Duration)} and {@link io.sphere.sdk.client.BlockingSphereClient#of(SphereClient, Duration)}  </li>
+
+ <li class=new-in-release>add {@link LocalizedString#ofStringToStringMap(Map)} </li>
+ <li class=new-in-release>add {@link io.sphere.sdk.client.TokensFacade} to conveniently just get an access token
+ <li class=new-in-release>add {@link io.sphere.sdk.messages.queries.MessageQuery#forMessageTypes(List)}</li>
+ <li class=new-in-release>use {@code io.sphere.sdk.http.HttpClient} as logger name with debug level to log the http method and the path (currently works only for the default HTTP client)</li>
+
+ <li class=change-in-release>deprecate {@code LocalizedString#ofEnglishLocale(String)}, use  {@link LocalizedString#ofEnglish(String)} instead</li>
+ <li class=change-in-release>{@code VariantIdentifier} became {@link ByIdVariantIdentifier} and use {@link VariantIdentifier} as super interface for {@link ByIdVariantIdentifier} and {@link BySkuVariantIdentifier}</li>
+ <li class=change-in-release>drafts are interfaces</li>
+ <li class=change-in-release>{@link io.sphere.sdk.products.search.ProductProjectionSearch} uses POST instead of GET</li>
+ <li class=change-in-release>set the default HTTP client to Async Http Client to 2.0.0-RC9</li>
+ <li class=change-in-release>deprecate {@code io.sphere.sdk.client.SphereAccessTokenSupplierFactory}, use {@link io.sphere.sdk.client.SphereAccessTokenSupplier} methods instead</li>
+
+ <li class=removed-in-release>class {@code SphereRequestBase}, use {@link io.sphere.sdk.client.SphereRequestUtils} instead</li>
+ <li class=removed-in-release>{@code ExperimentalReactiveStreamUtils} is not experimental anymore and has been moved out of commercetools-convenience to a separate repository: <a href="https://github.com/sphereio/commercetools-jvm-sdk-reactive-streams-add-ons" target="_blank">https://github.com/sphereio/commercetools-jvm-sdk-reactive-streams-add-ons</a></li>
+ <li class=removed-in-release>some internal util classes (StringUtils, IterableUtils, MapUtils, SetUtils, TriFunction, PatternMatcher, UrlUtils)</li>
+ <li class=removed-in-release>{@code CustomObjectDraft#withVersion(String, String, JsonNode)}</li>
+ <li class=removed-in-release>{@code HttpQueryParameter} class</li>
+ <li class=removed-in-release>{@code InvalidQueryOffsetException}</li>
+
+ </ul>
+
+
+
 
  <h3 class=released-version id="v1_0_0_M26">1.0.0-M26 (20.01.2016)</h3>
  <a class="theme-btn expand-all">Expand all</a>

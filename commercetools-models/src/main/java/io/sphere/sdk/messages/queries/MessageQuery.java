@@ -77,6 +77,14 @@ public interface MessageQuery extends MetaModelQueryDsl<Message, MessageQuery, M
         return new TypedMessageQuery<>(queryWithPredicateForType.httpRequestIntent(), hint.javaType());
     }
 
+    /**
+     * Creates a new query that queries only for messages that can be mapped to certain Java types. This is a terminal operation so no changes can be done on the query.
+     *
+     * {@include.example io.sphere.sdk.messages.queries.MessageQueryTest#queryForMultipleSpecificMessageClasses()}
+     *
+     * @param messageHints internal containers which register the known messages
+     * @return new query
+     */
     default Query<Message> forMessageTypes(final List<MessageDerivateHint<? extends Message>> messageHints) {
         final MessageQuery queryWithPredicateForType = messageHints.stream()
                 .map(hint -> hint.predicate())

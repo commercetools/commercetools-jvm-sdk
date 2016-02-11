@@ -10,13 +10,18 @@ import static org.assertj.core.api.Assertions.*;
 
 public class TokensFacadeTest extends IntegrationTest {
 
+    @Test//workaround to not put the if into the demo code
+    public void testFetchAccessToken() {
+        if (!"false".equals(System.getenv("JVM_SDK_IT_SSL_VALIDATION"))) {
+            fetchAccessToken();
+        }
+    }
+
     @Test
     public void fetchAccessToken() {
-        if (!"false".equals(System.getenv("JVM_SDK_IT_SSL_VALIDATION"))) {
-            final SphereAuthConfig config = getSphereClientConfig();
-            final CompletionStage<String> stringCompletionStage = TokensFacade.fetchAccessToken(config);
-            final String accessToken = SphereClientUtils.blockingWait(stringCompletionStage, 2, TimeUnit.SECONDS);
-            assertThat(accessToken).isNotEmpty();
-        }
+        final SphereAuthConfig config = getSphereClientConfig();
+        final CompletionStage<String> stringCompletionStage = TokensFacade.fetchAccessToken(config);
+        final String accessToken = SphereClientUtils.blockingWait(stringCompletionStage, 2, TimeUnit.SECONDS);
+        assertThat(accessToken).isNotEmpty();
     }
 }
