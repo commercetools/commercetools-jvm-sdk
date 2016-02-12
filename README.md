@@ -39,7 +39,7 @@ Users gain type-safety, encapsulation, IDE auto completion and an internal domai
 <!-- experimental -->
 <dependency>
   <groupId>com.commercetools.sdk.jvm.core</groupId>
-  <artifactId>sphere-convenience</artifactId>
+  <artifactId>commercetools-convenience</artifactId>
   <version>1.0.0-RC1</version>
 </dependency>
 ````
