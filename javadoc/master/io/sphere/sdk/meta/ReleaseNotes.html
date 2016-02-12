@@ -154,7 +154,10 @@ extends java.lang.Object</pre>
  <li class=removed-in-release><code>CustomObjectDraft#withVersion(String, String, JsonNode)</code></li>
  <li class=removed-in-release><code>HttpQueryParameter</code> class</li>
  <li class=removed-in-release><code>InvalidQueryOffsetException</code></li>
-
+ 
+ <li class=change-in-release>align <a href="../../../../io/sphere/sdk/products/search/ProductProjectionSearchModel.html" title="class in io.sphere.sdk.products.search"><code>ProductProjectionSearchModel</code></a> methods with the Query DSL, e.g. <code>is</code> instead of <code>by</code>, <code>isIn</code> instead of <code>byAny</code> and <code>isBetween</code> instead of <code>byRange</code></li>
+ <li class=change-in-release>unify methods to extract <code>TermFacetResult</code>, <code>RangeFacetResult</code> and <code>FilteredFacetResult</code> into the same method name <code>getFacetResult</code></li>
+ <li class=change-in-release><code>FacetAndFilter</code> Expression and its Search Model have been renamed to <code>FacetedSearch</code> to better reflect the use case</li>
  </ul>
 
 
