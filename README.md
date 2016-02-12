@@ -26,34 +26,34 @@ Users gain type-safety, encapsulation, IDE auto completion and an internal domai
 
 ````xml
 <dependency>
-  <groupId>io.sphere.sdk.jvm</groupId>
-  <artifactId>sphere-models</artifactId>
+  <groupId>com.commercetools.sdk.jvm.core</groupId>
+  <artifactId>commercetools-models</artifactId>
   <version>1.0.0-RC1</version>
 </dependency>
 <dependency>
-  <groupId>io.sphere.sdk.jvm</groupId>
-  <artifactId>sphere-java-client</artifactId>
+  <groupId>com.commercetools.sdk.jvm.core</groupId>
+  <artifactId>commercetools-java-client</artifactId>
   <version>1.0.0-RC1</version>
 </dependency>
 
-<!-- experimental, includes for example reactive streams support -->
+<!-- experimental -->
 <dependency>
-  <groupId>io.sphere.sdk.jvm</groupId>
+  <groupId>com.commercetools.sdk.jvm.core</groupId>
   <artifactId>sphere-convenience</artifactId>
   <version>1.0.0-RC1</version>
 </dependency>
 ````
-* http://search.maven.org/#artifactdetails%7Cio.sphere.sdk.jvm%7Csphere-models%7C1.0.0-RC1%7Cjar
-* http://search.maven.org/#artifactdetails%7Cio.sphere.sdk.jvm%7Csphere-java-client%7C1.0.0-RC1%7Cjar
-* http://search.maven.org/#artifactdetails%7Cio.sphere.sdk.jvm%7Csphere-convenience%7C1.0.0-RC1%7Cjar
+* http://search.maven.org/#artifactdetails%7Cicom.commercetools.sdk.jvm.core%7Ccommercetools-models%7C1.0.0-RC1%7Cjar
+* http://search.maven.org/#artifactdetails%7Ccom.commercetools.sdk.jvm.core%7Ccommercetools-java-client%7C1.0.0-RC1%7Cjar
+* http://search.maven.org/#artifactdetails%7Ccom.commercetools.sdk.jvm.core%7Ccommercetools-convenience%7C1.0.0-RC1%7Cjar
 
 ### Modules
-* `sphere-java-client`: alias for sphere-java-client-ahc-2_0
-* `sphere-java-client-apache-async`: uses Apache HTTP client
-* `sphere-java-client-ahc-1_8`: uses async HTTP client 1.8
-* `sphere-java-client-ahc-1_9`: uses async HTTP client 1.9 (AHC 1.9 is incompatible to AHC 1.8)
-* `sphere-java-client-ahc-2_0`: uses async HTTP client 2.0 (do not mix it with the other AHC modules)
-* `sphere-models`: models which do not depend to a client implementation
+* `commercetools-java-client`: alias for sphere-java-client-ahc-2_0
+* `commercetools-java-client-apache-async`: uses Apache HTTP client
+* `commercetools-java-client-ahc-1_8`: uses async HTTP client 1.8
+* `commercetools-java-client-ahc-1_9`: uses async HTTP client 1.9 (AHC 1.9 is incompatible to AHC 1.8)
+* `commercetools-java-client-ahc-2_0`: uses async HTTP client 2.0 (do not mix it with the other AHC modules)
+* `commercetools-models`: models which do not depend to a client implementation
 
 ### Play/Scala SDK with SBT
 
@@ -74,18 +74,12 @@ Useful code from external developers
 
 see https://github.com/sphereio/sphere-jvm-sdk-experimental-java-add-ons
 
-### Snapshots
-
-* experimental, risk of breaking changes, no support, snapshots can vanish
-* look at https://oss.sonatype.org/content/repositories/snapshots/io/sphere/sdk/jvm/models/ for new snapshots, they are ordered by next version and date
-* add resolver "Sonatype OSS Snapshots" at "https://oss.sonatype.org/content/repositories/snapshots"
-
 ## Short-term roadmap
 * https://github.com/sphereio/sphere-jvm-sdk/milestones
 * https://waffle.io/sphereio/sphere-jvm-sdk
 
 ## Open Source Examples
-* [Sunrise Java](https://github.com/sphereio/sphere-sunrise) - a shop using Play Framework 2.x with Handlebars.java as template engine, Google Guice for DI
+* [Sunrise Java](https://github.com/sphereio/commercetools-sunrise-java) - a shop using Play Framework 2.x with Handlebars.java as template engine, Google Guice for DI
 * [Donut](https://github.com/commercetools/sphere-donut) - single product subscription shop example with Play Framework 2.x and Twirl (Plays default) as template engine
 * [commercetools Spring MVC archetype](https://github.com/sphereio/commercetools-spring-mvc-archetype) - template integrating the SDK with Spring DI and Spring MVC and showing just some products, thymeleaf template engine
 
@@ -134,8 +128,8 @@ authUrl=https://auth.sphere.io
 [travis]:https://travis-ci.org/sphereio/sphere-jvm-sdk
 [travis img]:https://travis-ci.org/sphereio/sphere-jvm-sdk.svg?branch=master
 
-[maven]:http://search.maven.org/#search|gav|1|g:"io.sphere.sdk.jvm"%20AND%20a:"sphere-jvm-sdk"
-[maven img]:https://maven-badges.herokuapp.com/maven-central/io.sphere.sdk.jvm/sphere-jvm-sdk/badge.svg
+[maven]:http://search.maven.org/#search|gav|1|g:"com.commercetools.sdk.jvm.core"%20AND%20a:"commercetools-jvm-sdk"
+[maven img]:https://maven-badges.herokuapp.com/maven-central/com.commercetools.sdk.jvm.core/commercetools-jvm-sdk/badge.svg
 
 [license]:LICENSE.md
 [license img]:https://img.shields.io/badge/License-Apache%202-blue.svg
