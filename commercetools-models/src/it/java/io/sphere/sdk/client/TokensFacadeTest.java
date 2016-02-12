@@ -17,7 +17,6 @@ public class TokensFacadeTest extends IntegrationTest {
         }
     }
 
-    @Test
     public void fetchAccessToken() {
         final SphereAuthConfig config = getSphereClientConfig();
         final CompletionStage<String> stringCompletionStage = TokensFacade.fetchAccessToken(config);
