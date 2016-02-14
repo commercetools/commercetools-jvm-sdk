@@ -69,6 +69,7 @@
         <jsr305.version>3.0.1</jsr305.version>
         <junit.version>4.12</junit.version>
         <assertj.version>3.3.0</assertj.version>
+        <commercetools-taglets.version>0.6.3-SNAPSHOT</commercetools-taglets.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>1.8</java.version>
     </properties>
@@ -135,6 +136,11 @@
                         <compilerArguments>
                             <Werror />
                             <Xlint:all />
+                            <!--<arg>-Xlint:unchecked</arg>-->
+                            <!--<arg>-Xlint:-options</arg>-->
+                            <!--<arg>-Xlint:-path</arg>-->
+                            <!--<arg>-parameters</arg>-->
+                            <parameters/>
                         </compilerArguments>
                     </configuration>
                 </plugin>
@@ -142,7 +148,52 @@
                     <artifactId>maven-javadoc-plugin</artifactId>
                     <version>2.10.3</version>
                     <configuration>
+                        <docfilessubdirs>true</docfilessubdirs>
                         <excludePackageNames>*.internal:*.priv</excludePackageNames>
+                        <!--<quiet/>-->
+                        <notimestamp/>
+                        <bottom><![CDATA[
+                            <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.8.0/styles/default.min.css'>
+                            <script src='https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.8.0/highlight.min.js'></script>
+                            <script>hljs.initHighlightingOnLoad();</script>
+                            <script src='https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js'></script>
+                            <span id='custom-javascripts'></span>
+                            <script>
+                                var pathPrefix = $(".navList a[href$='index-all.html']").attr("href").replace("index-all.html", "");
+                                var closingScriptTag = "</" + "script>";
+                                $('#custom-javascripts').append("<script src='{@docRoot}/resources/javascripts/main.js'>" + closingScriptTag + "<link rel='stylesheet' href='{@docRoot}/resources/stylesheets/main.css'>");
+                                </script>
+                        ]]></bottom>
+                        <encoding>${project.build.sourceEncoding}</encoding>
+                        <charset>${project.build.sourceEncoding}</charset>
+                        <docencoding>${project.build.sourceEncoding}</docencoding>
+                        <additionalparam>-Xdoclint:missing,syntax,accessibility,reference</additionalparam>
+                        <taglets>
+                            <taglet>
+                                <tagletClass>com.commercetools.sdk.jvm.taglets.DocumentationTaglet</tagletClass>
+                                <tagletArtifact>
+                                    <groupId>com.commercetools.build.taglets</groupId>
+                                    <artifactId>commercetools-taglets</artifactId>
+                                    <version>${commercetools-taglets.version}</version>
+                                </tagletArtifact>
+                            </taglet>
+                            <taglet>
+                                <tagletClass>com.commercetools.sdk.jvm.taglets.CodeTaglet</tagletClass>
+                                <tagletArtifact>
+                                    <groupId>com.commercetools.build.taglets</groupId>
+                                    <artifactId>commercetools-taglets</artifactId>
+                                    <version>${commercetools-taglets.version}</version>
+                                </tagletArtifact>
+                            </taglet>
+                            <taglet>
+                                <tagletClass>com.commercetools.build.taglets.FileIncludeTaglet</tagletClass>
+                                <tagletArtifact>
+                                    <groupId>com.commercetools.build.taglets</groupId>
+                                    <artifactId>commercetools-taglets</artifactId>
+                                    <version>${commercetools-taglets.version}</version>
+                                </tagletArtifact>
+                            </taglet>
+                        </taglets>
                     </configuration>
                 </plugin>
             </plugins>
