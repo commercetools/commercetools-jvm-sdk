@@ -7,9 +7,9 @@ import io.sphere.sdk.models.errors.InvalidJsonInputError;
  *
  * <h3>Exceptions</h3>
  *
- * <img src="{@docRoot}/documentation-resources/images/uml/exception-hierarchy.svg" alt="visualization of the exception hierarchy">
+ * <img src="{@docRoot}/resources/images/uml/exception-hierarchy.svg" alt="visualization of the exception hierarchy">
  *
- * <p>Open the <a href="{@docRoot}/documentation-resources/images/uml/exception-hierarchy.svg" target="_blank">exception hierarchy image in a new tab</a>.</p>
+ * <p>Open the <a href="{@docRoot}/resources/images/uml/exception-hierarchy.svg" target="_blank">exception hierarchy image in a new tab</a>.</p>
  *
  * The JVM SDK makes use of exceptions of the Java JDK, such as {@link java.lang.IllegalArgumentException}, and provides own exceptions which all inherit from {@link io.sphere.sdk.models.SphereException}.
  *

@@ -7,14 +7,14 @@ import io.sphere.sdk.models.Base;
  *
  * <p>The JVM SDK consists of a lot of <a href="http://www.scala-sbt.org/0.13/tutorial/Multi-Project.html" target="_blank">SBT modules:</a></p>
  *
- * <img src="{@docRoot}/documentation-resources/architecture/deps.png" alt="diagram the shows the dependencies between the SBT modules">
+ * <img src="{@docRoot}/resources/architecture/deps.png" alt="diagram the shows the dependencies between the SBT modules">
  *
  * <p>(The picture is maybe outdated, but it is good enough to show the idea.)</p>
  *
  * <p>Modules which do not depend on each other can be compiled and tested in parallel. The build is faster since all available processors can be used instead of working with just one processor.</p>
  * <p>The middle area in the graphs of the following CPU diagram shows the CPU usage at the time of executing tests in a clean project:</p>
  *
- * <img src="{@docRoot}/documentation-resources/architecture/cpu-usage-diagram.png" alt="diagram that shows CPU cores are almost equaly used in the middle">
+ * <img src="{@docRoot}/resources/architecture/cpu-usage-diagram.png" alt="diagram that shows CPU cores are almost equaly used in the middle">
  *
  * <p>A highly modular architecture makes sure that the SDK is easily extensible. The SDK's classes are not unnecessarily coupled to each other.
  * For example, the client modules do not "know" the model modules (containing queries and commands) and vice versa.

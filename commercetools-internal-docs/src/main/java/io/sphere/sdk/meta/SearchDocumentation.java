@@ -142,7 +142,7 @@ import io.sphere.sdk.models.Base;
 
  <p>When searching for products, there are three stages of the process where filters can be applied, as shown in the following drawing:</p>
 
- <img class="theme-img" src="{@docRoot}/documentation-resources/images/search/search-phases.png" alt="Filter types">
+ <img class="theme-img" src="{@docRoot}/resources/images/search/search-phases.png" alt="Filter types">
  <p class="image-caption">Filter types</p>
 
  <dl>

@@ -27,7 +27,7 @@ import io.sphere.sdk.models.Base;
 
  <p>This is an example for the client credentials page (client secret has been modified):</p>
 
- <img src="{@docRoot}/documentation-resources/images/merchant-center/project-credentials.png" alt="Merchant Center with project credentials view">
+ <img src="{@docRoot}/resources/images/merchant-center/project-credentials.png" alt="Merchant Center with project credentials view">
 
  <p>For this example the configuration values are:</p>
 
