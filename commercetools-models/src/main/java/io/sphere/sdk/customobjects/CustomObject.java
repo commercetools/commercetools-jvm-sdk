@@ -48,21 +48,21 @@ In this case you use also {@link io.sphere.sdk.customobjects.commands.CustomObje
 For update operations you can use {@link io.sphere.sdk.customobjects.CustomObjectDraft#ofVersionedUpdate(io.sphere.sdk.customobjects.CustomObject, Object, com.fasterxml.jackson.core.type.TypeReference)}
 to use optimistic concurrency control as in here:
 
-{@include.example io.sphere.sdk.customobjects.commands.CustomObjectUpsertCommandTest#updateWithVersion()}
+{@include.example io.sphere.sdk.customobjects.commands.CustomObjectUpsertCommandIntegrationTest#updateWithVersion()}
 
 Or you can just override the value using {@link io.sphere.sdk.customobjects.CustomObjectDraft#ofUnversionedUpdate(io.sphere.sdk.customobjects.CustomObject, Object, com.fasterxml.jackson.core.type.TypeReference)}
 
-{@include.example io.sphere.sdk.customobjects.commands.CustomObjectUpsertCommandTest#updateWithoutVersion()}
+{@include.example io.sphere.sdk.customobjects.commands.CustomObjectUpsertCommandIntegrationTest#updateWithoutVersion()}
 
 <h3 id=pure-json-mapping>Custom objects with direct Jackson JsonNode</h3>
 
 <h4 id=direct-json-creation>Create and update custom objects</h4>
 
-{@include.example io.sphere.sdk.customobjects.commands.CustomObjectUpsertCommandTest#pureJson()}
+{@include.example io.sphere.sdk.customobjects.commands.CustomObjectUpsertCommandIntegrationTest#pureJson()}
 
 <h4 id=direct-json-fetch>Fetch custom objects</h4>
 
-{@include.example io.sphere.sdk.customobjects.queries.CustomObjectByKeyGetTest#executionForPureJson()}
+{@include.example io.sphere.sdk.customobjects.queries.CustomObjectByKeyGetIntegrationTest#executionForPureJson()}
 
 <h4 id=direct-json-query>Query custom objects</h4>
 
@@ -83,7 +83,7 @@ Or you can just override the value using {@link io.sphere.sdk.customobjects.Cust
 <h4>Fetch by container and key</h4>
 
 {@include.example io.sphere.sdk.customobjects.demo.GsonFooCustomObjectByKeyGet}
-{@include.example io.sphere.sdk.customobjects.queries.CustomObjectCustomJsonMappingByKeyGetTest#execution()}
+{@include.example io.sphere.sdk.customobjects.queries.CustomObjectCustomJsonMappingByKeyGetIntegrationTest#execution()}
 
 <h3 id=increment-example>Using Optimistic Concurrency Control</h3>
 
@@ -96,10 +96,10 @@ The data model contains the last number and the last SPHERE.IO customer ID (just
 
 <p>Imagine, the customer number should start at 1000, so we do the following request for the initialization of the counter:</p>
 
-{@include.example io.sphere.sdk.customobjects.occexample.FlowTest#setupInitialValue()}
+{@include.example io.sphere.sdk.customobjects.occexample.FlowIntegrationTest#setupInitialValue()}
 
 <p>An update works this way then:</p>
-{@include.example io.sphere.sdk.customobjects.occexample.FlowTest#doAnUpdate()}
+{@include.example io.sphere.sdk.customobjects.occexample.FlowIntegrationTest#doAnUpdate()}
 
 <h3 id=migrations>Migrations</h3>
 
@@ -115,7 +115,7 @@ For new fields you can add an {@link java.util.Optional} to make it obvious to c
 
 {@include.example io.sphere.sdk.customobjects.migrations.version2.Xyz}
 
-{@include.example io.sphere.sdk.customobjects.migrations.CustomObjectsMigrationsTest#optionalExample()}
+{@include.example io.sphere.sdk.customobjects.migrations.CustomObjectsMigrationsIntegrationTest#optionalExample()}
 
 <h4 id=migrations-removing-fields>Removing fields</h4>
 
@@ -158,7 +158,7 @@ as constructor parameters and pass the transformed values to the constructor of 
 
 As a result you only work with the interface making it transparent if it is an old or new version:
 
-{@include.example io.sphere.sdk.customobjects.migrations.CustomObjectsMigrationsTest#exampleForMigrationCall()}
+{@include.example io.sphere.sdk.customobjects.migrations.CustomObjectsMigrationsIntegrationTest#exampleForMigrationCall()}
 
 
 <h3 id="traps">Traps</h3>

@@ -18,7 +18,7 @@ import io.sphere.sdk.queries.Get;
  * {@include.example io.sphere.sdk.customobjects.demo.GsonFooCustomObjectByKeyGet}
  *
  * <p>An execution example:</p>
- * {@include.example io.sphere.sdk.customobjects.queries.CustomObjectCustomJsonMappingByKeyGetTest#execution()}
+ * {@include.example io.sphere.sdk.customobjects.queries.CustomObjectCustomJsonMappingByKeyGetIntegrationTest#execution()}
  * @param <T> The type of the value of the custom object.
  * @see CustomObject
  */

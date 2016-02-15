@@ -13,7 +13,7 @@ import java.util.function.Function;
 /**
  * Fetches a cusomter by a known password reset token.
  *
- * {@include.example io.sphere.sdk.customers.commands.CustomerPasswordResetCommandTest#execution()}
+ * {@include.example io.sphere.sdk.customers.commands.CustomerPasswordResetCommandIntegrationTest#execution()}
  *
  * @see io.sphere.sdk.types.Custom
  * @see io.sphere.sdk.customers.commands.CustomerCreatePasswordTokenCommand

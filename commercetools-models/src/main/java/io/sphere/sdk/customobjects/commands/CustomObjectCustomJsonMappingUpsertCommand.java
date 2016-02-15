@@ -13,7 +13,7 @@ import io.sphere.sdk.models.Base;
  <p>Example using Google GSON (multiple code snippets):</p>
 
  <p>The execution of the command:</p>
- {@include.example io.sphere.sdk.customobjects.commands.CustomObjectCustomJsonMappingUpsertCommandTest#execution()}
+ {@include.example io.sphere.sdk.customobjects.commands.CustomObjectCustomJsonMappingUpsertCommandIntegrationTest#execution()}
 
  <p>The command class:</p>
  {@include.example io.sphere.sdk.customobjects.demo.GsonFooCustomObjectUpsertCommand}

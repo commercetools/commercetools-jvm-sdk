@@ -12,7 +12,7 @@ import static io.sphere.sdk.http.HttpMethod.POST;
 /**
  * Creates a token to reset the customer password with {@link CustomerPasswordResetCommand}.
  *
- * {@include.example io.sphere.sdk.customers.commands.CustomerPasswordResetCommandTest#execution()}
+ * {@include.example io.sphere.sdk.customers.commands.CustomerPasswordResetCommandIntegrationTest#execution()}
  *
  * @see io.sphere.sdk.customers.Customer
  * @see io.sphere.sdk.customers.commands.CustomerPasswordResetCommand

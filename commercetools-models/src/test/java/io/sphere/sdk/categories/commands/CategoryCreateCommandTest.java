@@ -7,7 +7,7 @@ import org.junit.Test;
 import static io.sphere.sdk.test.SphereTestUtils.randomSlug;
 import static org.assertj.core.api.Assertions.*;
 
-public class CategoryCreateCommandTest {
+public class CategoryCreateCommandIntegrationTest {
     @Test
     public void containsDraftGetter() {
         final CategoryDraft categoryDraft = CategoryDraftBuilder.of(randomSlug(), randomSlug()).build();
