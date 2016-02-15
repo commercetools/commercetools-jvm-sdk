@@ -118,7 +118,7 @@ public class MessageQueryIntegrationTest extends IntegrationTest {
 
             final Query<Message> query = MessageQuery.of()
                     .withPredicates(m -> m.resource().is(product))
-                    .withSort(m -> m.createdAt().sort().asc())
+                    .withSort(m -> m.type().sort().asc())
                     .withExpansionPaths(m -> m.resource())
                     .forMessageTypes(messageHints);
 
