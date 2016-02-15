@@ -158,11 +158,8 @@
                             <script>hljs.initHighlightingOnLoad();</script>
                             <script src='https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js'></script>
                             <span id='custom-javascripts'></span>
-                            <script>
-                                var pathPrefix = $(".navList a[href$='index-all.html']").attr("href").replace("index-all.html", "");
-                                var closingScriptTag = "</" + "script>";
-                                $('#custom-javascripts').append("<script src='{@docRoot}/resources/javascripts/main.js'>" + closingScriptTag + "<link rel='stylesheet' href='{@docRoot}/resources/stylesheets/main.css'>");
-                                </script>
+                            <script src='{@docRoot}/resources/javascripts/main.js'></script>
+                            <link rel='stylesheet' href='{@docRoot}/resources/stylesheets/main.css'>
                         ]]></bottom>
                         <encoding>${project.build.sourceEncoding}</encoding>
                         <charset>${project.build.sourceEncoding}</charset>
