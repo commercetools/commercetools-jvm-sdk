@@ -46,6 +46,9 @@
             <plugin>
                 <artifactId>maven-javadoc-plugin</artifactId>
             </plugin>
+            <plugin>
+                <artifactId>maven-failsafe-plugin</artifactId>
+            </plugin>
         </plugins>
     </build>
 </project>

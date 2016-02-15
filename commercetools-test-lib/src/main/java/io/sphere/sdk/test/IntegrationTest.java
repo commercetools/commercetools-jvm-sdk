@@ -17,6 +17,7 @@ import org.assertj.core.api.SoftAssertions;
 import org.asynchttpclient.AsyncHttpClient;
 import org.asynchttpclient.DefaultAsyncHttpClient;
 import org.asynchttpclient.DefaultAsyncHttpClientConfig;
+import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.slf4j.LoggerFactory;
 
@@ -54,6 +55,13 @@ public abstract class IntegrationTest {
             final SphereClient underlying1 = withMaybeDeprecationWarnTool(underlying);
             client = BlockingSphereClient.of(underlying1, 20, TimeUnit.SECONDS);
             assertProjectSettingsAreFine(client);
+        }
+    }
+
+    @AfterClass
+    public static void closeClient() {
+        if (client != null) {
+            client.close();
         }
     }
 

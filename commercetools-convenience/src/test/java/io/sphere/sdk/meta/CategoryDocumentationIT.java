@@ -38,7 +38,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.*;
-import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionStage;
 import java.util.function.Consumer;
 import java.util.function.Function;
@@ -55,7 +54,7 @@ import static java.util.stream.Collectors.toList;
 import static org.apache.commons.lang3.StringUtils.defaultString;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class CategoryDocumentationTest extends IntegrationTest {
+public class CategoryDocumentationIT extends IntegrationTest {
 
     private static final Comparator<Category> EXTERNALID_COMPARATOR = Comparator.comparing(c -> Integer.parseInt(c.getExternalId()));
     private static List<Category> categories;
@@ -66,6 +65,12 @@ public class CategoryDocumentationTest extends IntegrationTest {
         deleteAllCategories();
         categories = setUpData();
         tree = CategoryTree.of(categories);
+    }
+
+    @Test
+    public void name() {
+        throw new RuntimeException("fail on purpose");
+
     }
 
     @Test
@@ -287,7 +292,7 @@ public class CategoryDocumentationTest extends IntegrationTest {
 
 
     private static void withProductInCategory(final BlockingSphereClient client, final Referenceable<Category> category, final Consumer<Product> user) {
-        final ProductType productType = client.executeBlocking(ProductTypeCreateCommand.of(ProductTypeDraft.of(randomKey(), CategoryDocumentationTest.class.getSimpleName(), "", asList())));
+        final ProductType productType = client.executeBlocking(ProductTypeCreateCommand.of(ProductTypeDraft.of(randomKey(), CategoryDocumentationIT.class.getSimpleName(), "", asList())));
         final LocalizedString name = LocalizedString.of(ENGLISH, "foo");
         final Product product = client.executeBlocking(ProductCreateCommand.of(ProductDraftBuilder.of(productType, name, name.slugifiedUnique(), ProductVariantDraftBuilder.of().build()).categories(asSet(category.toReference())).build()));
         user.accept(product);
