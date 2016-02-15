@@ -52,13 +52,13 @@ import java.util.Locale;
  <li>sorted by average ratings</li>
  </ul>
 
- {@include.example io.sphere.sdk.reviews.ReviewProductProjectionSearchTest#searchForReviewsWithAverageRatingGreaterThan2()}
+ {@include.example io.sphere.sdk.reviews.ReviewProductProjectionSearchIntegrationTest#searchForReviewsWithAverageRatingGreaterThan2()}
 
  <h4 id=query-approved-reviews-for-one-product>Getting reviews for one product (only approved)</h4>
- {@include.example io.sphere.sdk.reviews.ReviewProductProjectionSearchTest#getApprovedReviewsForOneProduct()}
+ {@include.example io.sphere.sdk.reviews.ReviewProductProjectionSearchIntegrationTest#getApprovedReviewsForOneProduct()}
 
  <h4 id=query-reviews-for-one-product>Getting reviews for one product</h4>
- {@include.example io.sphere.sdk.reviews.ReviewProductProjectionSearchTest#getReviewsForOneProduct()}
+ {@include.example io.sphere.sdk.reviews.ReviewProductProjectionSearchIntegrationTest#getReviewsForOneProduct()}
 
  @see io.sphere.sdk.reviews.commands.ReviewCreateCommand
  @see io.sphere.sdk.reviews.commands.ReviewUpdateCommand

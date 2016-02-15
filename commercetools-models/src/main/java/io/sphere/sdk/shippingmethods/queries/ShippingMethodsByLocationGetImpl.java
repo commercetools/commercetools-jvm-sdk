@@ -19,7 +19,7 @@ import static java.util.Objects.requireNonNull;
  * Retrieves all the shipping methods that can ship to the given location.
  * If the currency parameter is given, then the shipping methods must also have a rate defined in the specified currency.
  *
- * {@include.example io.sphere.sdk.shippingmethods.queries.ShippingMethodsByLocationGetTest#execution()}
+ * {@include.example io.sphere.sdk.shippingmethods.queries.ShippingMethodsByLocationGetIntegrationTest#execution()}
  */
 final class ShippingMethodsByLocationGetImpl extends MetaModelGetDslImpl<List<ShippingMethod>, ShippingMethod, ShippingMethodsByLocationGetImpl, ShippingMethodExpansionModel<ShippingMethod>> implements ShippingMethodsByLocationGet {
     ShippingMethodsByLocationGetImpl(final CountryCode country, @Nullable final String state, @Nullable final CurrencyUnit currency) {
