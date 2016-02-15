@@ -9,7 +9,7 @@ import io.sphere.sdk.queries.Get;
 /**
  * {@link io.sphere.sdk.client.SphereRequest} to fetch one {@link CustomObject} by id.
  *
- * {@include.example io.sphere.sdk.customobjects.queries.CustomObjectByIdGetTest#execution()}
+ * {@include.example io.sphere.sdk.customobjects.queries.CustomObjectByIdGetIntegrationTest#execution()}
  *
  * @param <T> The type of the value of the custom object.
  * @see CustomObject

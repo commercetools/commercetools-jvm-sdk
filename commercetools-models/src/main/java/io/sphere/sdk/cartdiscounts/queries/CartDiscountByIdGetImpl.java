@@ -6,7 +6,7 @@ import io.sphere.sdk.queries.MetaModelGetDslBuilder;
 import io.sphere.sdk.queries.MetaModelGetDslImpl;
 
 /**
- * {@include.example io.sphere.sdk.cartdiscounts.queries.CartDiscountByIdGetTest#execution()}
+ * {@include.example io.sphere.sdk.cartdiscounts.queries.CartDiscountByIdGetIntegrationTest#execution()}
  */
 final class CartDiscountByIdGetImpl extends MetaModelGetDslImpl<CartDiscount, CartDiscount, CartDiscountByIdGet, CartDiscountExpansionModel<CartDiscount>> implements CartDiscountByIdGet {
     CartDiscountByIdGetImpl(final String id) {

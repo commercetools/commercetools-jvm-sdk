@@ -12,7 +12,7 @@ import java.util.function.Function;
 /**
  * Fetches a customer group based on a known ID.
  *
- * {@include.example io.sphere.sdk.customergroups.queries.CustomerGroupByIdGetTest#execution()}
+ * {@include.example io.sphere.sdk.customergroups.queries.CustomerGroupByIdGetIntegrationTest#execution()}
  *
  * @see CustomerGroup
  */

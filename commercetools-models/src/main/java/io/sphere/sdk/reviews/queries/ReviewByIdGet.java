@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * Retrieves a review by a known ID.
  *
- * {@include.example io.sphere.sdk.reviews.queries.ReviewByIdGetTest#execution()}
+ * {@include.example io.sphere.sdk.reviews.queries.ReviewByIdGetIntegrationTest#execution()}
  */
 public interface ReviewByIdGet extends MetaModelGetDsl<Review, Review, ReviewByIdGet, ReviewExpansionModel<Review>> {
     static ReviewByIdGet of(final Identifiable<Review> productType) {

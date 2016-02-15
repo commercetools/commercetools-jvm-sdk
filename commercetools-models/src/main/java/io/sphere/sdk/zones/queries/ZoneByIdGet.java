@@ -12,7 +12,7 @@ import java.util.function.Function;
 /**
  Gets a zone by ID.
 
- {@include.example io.sphere.sdk.zones.queries.ZoneByIdGetTest#fetchById()}
+ {@include.example io.sphere.sdk.zones.queries.ZoneByIdGetIntegrationTest#fetchById()}
  */
 public interface ZoneByIdGet extends MetaModelGetDsl<Zone, Zone, ZoneByIdGet, ZoneExpansionModel<Zone>> {
     static ZoneByIdGet of(final Identifiable<Zone> zone) {

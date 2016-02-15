@@ -12,7 +12,7 @@ import java.util.function.Function;
 /**
  * Retrieves a payment by a known ID.
  *
- * {@include.example io.sphere.sdk.payments.queries.PaymentByIdGetTest#execution()}
+ * {@include.example io.sphere.sdk.payments.queries.PaymentByIdGetIntegrationTest#execution()}
  */
 public interface PaymentByIdGet extends MetaModelGetDsl<Payment, Payment, PaymentByIdGet, PaymentExpansionModel<Payment>> {
     static PaymentByIdGet of(final Identifiable<Payment> Payment) {

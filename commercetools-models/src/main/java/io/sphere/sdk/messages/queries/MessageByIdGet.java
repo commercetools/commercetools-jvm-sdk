@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.function.Function;
 
 /**
- * {@include.example io.sphere.sdk.messages.queries.MessageByIdGetTest#execution()}
+ * {@include.example io.sphere.sdk.messages.queries.MessageByIdGetIntegrationTest#execution()}
  *
  * If you need to receive one specific message class, like {@link io.sphere.sdk.orders.messages.DeliveryAddedMessage},
  * use {@link MessageQuery} with a predicate by id.

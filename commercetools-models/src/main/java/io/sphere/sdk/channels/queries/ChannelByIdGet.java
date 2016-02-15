@@ -12,7 +12,7 @@ import java.util.function.Function;
 /**
  * Fetches a channel by a known ID.
  *
- * {@include.example io.sphere.sdk.channels.queries.ChannelByIdGetTest#execution()}
+ * {@include.example io.sphere.sdk.channels.queries.ChannelByIdGetIntegrationTest#execution()}
  */
 public interface ChannelByIdGet extends MetaModelGetDsl<Channel, Channel, ChannelByIdGet, ChannelExpansionModel<Channel>> {
     static ChannelByIdGet of(final Identifiable<Channel> channel) {

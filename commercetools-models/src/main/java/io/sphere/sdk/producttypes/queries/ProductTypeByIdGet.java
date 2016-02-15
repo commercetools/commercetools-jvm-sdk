@@ -12,7 +12,7 @@ import java.util.function.Function;
 /**
  * Retrieves a product type by a known ID.
  *
- * {@include.example io.sphere.sdk.producttypes.queries.ProductTypeByIdGetTest#execution()}
+ * {@include.example io.sphere.sdk.producttypes.queries.ProductTypeByIdGetIntegrationTest#execution()}
  */
 public interface ProductTypeByIdGet extends MetaModelGetDsl<ProductType, ProductType, ProductTypeByIdGet, ProductTypeExpansionModel<ProductType>> {
     static ProductTypeByIdGet of(final Identifiable<ProductType> productType) {
