@@ -15,7 +15,7 @@ import java.util.concurrent.CompletionStage;
 import static io.sphere.sdk.http.HttpMethod.GET;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class CustomClientConfigDemoTest {
+public class CustomClientConfigDemoIntegrationTest {
     /**
      * Creates a {@link HttpClient} that can be used by the {@link SphereClient}.
      * @return new http client with custom settings
@@ -36,7 +36,7 @@ public class CustomClientConfigDemoTest {
      * Shows the initialization of a {@link SphereClient} with a custom {@link HttpClient} provider.
      */
     private void demoCreateClient() {
-        final SphereClient sphereClient = SphereClientFactory.of(CustomClientConfigDemoTest::createCustomHttpClient)
+        final SphereClient sphereClient = SphereClientFactory.of(CustomClientConfigDemoIntegrationTest::createCustomHttpClient)
                 .createClient("your projectKey", "your clientId", "your clientSecret");
     }
 

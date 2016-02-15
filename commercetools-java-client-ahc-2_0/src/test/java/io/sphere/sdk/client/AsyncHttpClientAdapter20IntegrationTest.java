@@ -4,7 +4,7 @@ import io.sphere.sdk.http.AsyncHttpClientAdapter;
 import io.sphere.sdk.http.HttpClient;
 import org.asynchttpclient.DefaultAsyncHttpClient;
 
-public class AsyncHttpClientAdapter20Test extends HttpClientAdapterTest {
+public class AsyncHttpClientAdapter20IntegrationTest extends HttpClientAdapterTest {
     @Override
     protected HttpClient createClient() {
         return AsyncHttpClientAdapter.of(new DefaultAsyncHttpClient());

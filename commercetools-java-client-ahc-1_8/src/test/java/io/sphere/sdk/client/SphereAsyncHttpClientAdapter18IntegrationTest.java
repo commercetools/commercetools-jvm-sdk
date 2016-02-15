@@ -12,7 +12,7 @@ import java.util.concurrent.TimeUnit;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class SphereAsyncHttpClientAdapter18Test {
+public class SphereAsyncHttpClientAdapter18IntegrationTest {
     @Test
     public void integrationTest() {
         final HttpClient httpClient = AsyncHttpClientAdapter.of(new AsyncHttpClient());

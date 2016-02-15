@@ -11,7 +11,7 @@ import java.util.concurrent.CompletionException;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.catchThrowable;
 
-public class SphereClientFactoryApacheInitTest {
+public class SphereClientFactoryApacheInitIntegrationTest {
     @Test
     public void create() {
         //we cannot check this in TeamCity with sphere CI, but with travis

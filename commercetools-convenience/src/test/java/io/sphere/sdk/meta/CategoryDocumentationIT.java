@@ -68,12 +68,6 @@ public class CategoryDocumentationIT extends IntegrationTest {
     }
 
     @Test
-    public void name() {
-        throw new RuntimeException("fail on purpose");
-
-    }
-
-    @Test
     public void fetchAll() throws Exception {
         final CompletionStage<List<Category>> categoriesStage = QueryExecutionUtils.queryAll(client(), CategoryQuery.of(), 500);
         final List<Category> categories = categoriesStage.toCompletableFuture().join();

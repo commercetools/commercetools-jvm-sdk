@@ -59,7 +59,7 @@ import org.asynchttpclient.AsyncHttpClient;
 
  <p>The following example creates a configured HTTP client and initializes a {@link io.sphere.sdk.client.SphereClient} with it.</p>
 
-  {@include.example io.sphere.sdk.client.CustomClientConfigDemoTest}
+  {@include.example io.sphere.sdk.client.CustomClientConfigDemoIntegrationTest}
 
  <p>For configuration parameters refer to <a href="https://github.com/AsyncHttpClient/async-http-client">github.com/AsyncHttpClient/async-http-client</a>.</p>
 

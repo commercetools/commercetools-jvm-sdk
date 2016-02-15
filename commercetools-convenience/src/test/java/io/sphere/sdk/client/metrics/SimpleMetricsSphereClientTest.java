@@ -65,7 +65,7 @@ public class SimpleMetricsSphereClientTest {
         softly.assertThat(deserializationDuration.getCorrelationId()).as("total correlationId").isEqualTo(CORRELATION_ID);
         final ObservedTotalDuration totalDuration = metricObserver.get(ObservedTotalDuration.class);
         softly.assertThat(totalDuration.getRequest()).as("total request").isEqualTo(sphereRequest);
-        softly.assertThat(totalDuration.getDurationInMilliseconds()).as("total duration").isBetween((long) MINIMUM_WAIT_IN_MILLISECONDS, MINIMUM_WAIT_IN_MILLISECONDS + 5L);
+        softly.assertThat(totalDuration.getDurationInMilliseconds()).as("total duration").isBetween((long) MINIMUM_WAIT_IN_MILLISECONDS, MINIMUM_WAIT_IN_MILLISECONDS + 8L);
         softly.assertThat(totalDuration.getRequestId()).as("total id").isEqualTo(requestId);
         softly.assertThat(totalDuration.getTopic()).as("total topic").isEqualTo("ObservedTotalDuration");
         softly.assertThat(totalDuration.getCorrelationId()).as("total correlationId").isEqualTo(CORRELATION_ID);
