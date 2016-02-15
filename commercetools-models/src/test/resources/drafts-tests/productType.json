@@ -1,5 +1,5 @@
 {
-  "name": "ProductTypeCreateCommandTest",
+  "name": "ProductTypeCreateCommandIntegrationTest",
   "key": "product-type-from-json",
   "description": "product type from json",
   "attributes": [
