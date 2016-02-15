@@ -11,7 +11,7 @@ import java.util.List;
 /**
  Gets a cart by ID.
 
- {@include.example io.sphere.sdk.carts.queries.CartByIdGetTest#fetchById()}
+ {@include.example io.sphere.sdk.carts.queries.CartByIdGetIntegrationTest#fetchById()}
  */
 public interface CartByIdGet extends MetaModelGetDsl<Cart, Cart, CartByIdGet, CartExpansionModel<Cart>> {
     static CartByIdGet of(final Identifiable<Cart> cart) {
