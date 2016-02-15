@@ -9,7 +9,7 @@ import io.sphere.sdk.models.Versioned;
 /**
  * Deletes a customer group.
  *
- * {@include.example io.sphere.sdk.customergroups.commands.CustomerGroupDeleteCommandTest#execution()}
+ * {@include.example io.sphere.sdk.customergroups.commands.CustomerGroupDeleteCommandIntegrationTest#execution()}
  *
  * @see CustomerGroup
  */

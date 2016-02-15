@@ -22,7 +22,7 @@ import javax.money.MonetaryAmount;
  {@include.example io.sphere.sdk.carts.commands.CartUpdateCommandIntegrationTest#addCustomLineItem()}
 
  <p>Add a {@link io.sphere.sdk.carts.CustomLineItem} with {@link io.sphere.sdk.types.CustomFields}:</p>
- {@include.example io.sphere.sdk.carts.CustomLineItemCustomFieldsTest#creation()}
+ {@include.example io.sphere.sdk.carts.CustomLineItemCustomFieldsIntegrationTest#creation()}
 
  @see Cart#getCustomLineItems()
  @see RemoveCustomLineItem

@@ -14,7 +14,7 @@ import java.util.Optional;
  * <p>Builder to create {@link CartDraft}s.</p>
  *
  *  <p>Example of creating a cart with custom fields:</p>
- * {@include.example io.sphere.sdk.carts.CartsCustomFieldsTest#createCartWithCustomType()}
+ * {@include.example io.sphere.sdk.carts.CartsCustomFieldsIntegrationTest#createCartWithCustomType()}
  */
 public final class CartDraftBuilder extends Base implements Builder<CartDraftDsl> {
     private final CurrencyUnit currency;

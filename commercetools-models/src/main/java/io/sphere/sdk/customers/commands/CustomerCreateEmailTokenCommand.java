@@ -13,7 +13,7 @@ import static io.sphere.sdk.http.HttpMethod.POST;
 /**
  Creates a token for verifying the customer's email.
 
- {@include.example io.sphere.sdk.customers.commands.CustomerCreateEmailTokenCommandTest#execution()}
+ {@include.example io.sphere.sdk.customers.commands.CustomerCreateEmailTokenCommandIntegrationTest#execution()}
 
  @see Customer
  @see Customer#isEmailVerified()

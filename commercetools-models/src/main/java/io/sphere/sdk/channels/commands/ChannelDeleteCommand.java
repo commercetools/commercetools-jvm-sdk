@@ -9,7 +9,7 @@ import io.sphere.sdk.models.Versioned;
 /** Deletes a channel.
 
  <p>Example:</p>
- {@include.example io.sphere.sdk.channels.commands.ChannelDeleteCommandTest#execution()}
+ {@include.example io.sphere.sdk.channels.commands.ChannelDeleteCommandIntegrationTest#execution()}
  */
 public interface ChannelDeleteCommand extends MetaModelReferenceExpansionDsl<Channel, ChannelDeleteCommand, ChannelExpansionModel<Channel>>, DeleteCommand<Channel> {
     static ChannelDeleteCommand of(final Versioned<Channel> versioned) {

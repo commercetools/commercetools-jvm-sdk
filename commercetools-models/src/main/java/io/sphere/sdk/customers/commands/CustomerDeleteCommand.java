@@ -9,7 +9,7 @@ import io.sphere.sdk.models.Versioned;
 /**
  * Deletes a customer.
  *
- * {@include.example io.sphere.sdk.customers.commands.CustomerDeleteCommandTest#execution()}
+ * {@include.example io.sphere.sdk.customers.commands.CustomerDeleteCommandIntegrationTest#execution()}
  *
  * @see Customer
  */
