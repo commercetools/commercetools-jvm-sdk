@@ -9,7 +9,7 @@ import io.sphere.sdk.commands.UpdateActionImpl;
  *
  *  {@doc.gen intro}
  *
- * {@include.example io.sphere.sdk.cartdiscounts.commands.CartDiscountUpdateCommandTest#changeIsActive()}
+ * {@include.example io.sphere.sdk.cartdiscounts.commands.CartDiscountUpdateCommandIntegrationTest#changeIsActive()}
  */
 public final class ChangeIsActive extends UpdateActionImpl<CartDiscount> {
     private final boolean isActive;

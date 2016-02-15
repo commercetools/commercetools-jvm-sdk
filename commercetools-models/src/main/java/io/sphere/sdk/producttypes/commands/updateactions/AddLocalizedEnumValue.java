@@ -10,7 +10,7 @@ import io.sphere.sdk.producttypes.ProductType;
  *
  * {@doc.gen intro}
  *
- * {@include.example io.sphere.sdk.producttypes.commands.ProductTypeUpdateCommandTest#addLocalizedEnumValue()}
+ * {@include.example io.sphere.sdk.producttypes.commands.ProductTypeUpdateCommandIntegrationTest#addLocalizedEnumValue()}
  *
  * @see LocalizedEnumAttributeType#getValues()
  */

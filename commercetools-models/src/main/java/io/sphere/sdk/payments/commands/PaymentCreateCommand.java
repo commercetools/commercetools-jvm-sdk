@@ -9,7 +9,7 @@ import io.sphere.sdk.payments.expansion.PaymentExpansionModel;
 /**
  * Creates a payment.
  *
- * {@include.example io.sphere.sdk.payments.commands.PaymentCreateCommandTest#payingPerCreditCart()}
+ * {@include.example io.sphere.sdk.payments.commands.PaymentCreateCommandIntegrationTest#payingPerCreditCart()}
  *
  * @see Payment
  * @see io.sphere.sdk.payments.messages.PaymentCreatedMessage

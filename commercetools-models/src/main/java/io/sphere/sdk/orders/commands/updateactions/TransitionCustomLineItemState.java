@@ -13,7 +13,7 @@ import java.time.ZonedDateTime;
  *
  * {@doc.gen intro}
  *
- * {@include.example io.sphere.sdk.orders.commands.OrderUpdateCommandTest#transitionCustomLineItemState()}
+ * {@include.example io.sphere.sdk.orders.commands.OrderUpdateCommandIntegrationTest#transitionCustomLineItemState()}
  */
 public final class TransitionCustomLineItemState extends TransitionLineItemLikeState {
 

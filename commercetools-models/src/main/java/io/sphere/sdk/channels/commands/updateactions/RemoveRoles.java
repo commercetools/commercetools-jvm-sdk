@@ -11,7 +11,7 @@ import java.util.Set;
  *
  *  {@doc.gen intro}
  *
- * {@include.example io.sphere.sdk.channels.commands.ChannelUpdateCommandTest#removeRoles()}
+ * {@include.example io.sphere.sdk.channels.commands.ChannelUpdateCommandIntegrationTest#removeRoles()}
  */
 public final class RemoveRoles extends UpdateActionImpl<Channel> {
     private final Set<ChannelRole> roles;

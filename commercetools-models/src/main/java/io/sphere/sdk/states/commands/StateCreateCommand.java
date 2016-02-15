@@ -9,7 +9,7 @@ import io.sphere.sdk.states.expansion.StateExpansionModel;
 /** Creates a state.
 
  <p>Example:</p>
- {@include.example io.sphere.sdk.states.commands.StateCreateCommandTest#execution()}
+ {@include.example io.sphere.sdk.states.commands.StateCreateCommandIntegrationTest#execution()}
 
  @see io.sphere.sdk.states.StateDraftBuilder
  */

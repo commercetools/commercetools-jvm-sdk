@@ -8,7 +8,7 @@ import io.sphere.sdk.products.Product;
  *
  * {@doc.gen intro}
  *
- * {@include.example io.sphere.sdk.products.commands.ProductUpdateCommandTest#publish()}
+ * {@include.example io.sphere.sdk.products.commands.ProductUpdateCommandIntegrationTest#publish()}
  *
  * @see io.sphere.sdk.products.messages.ProductUnpublishedMessage
  */

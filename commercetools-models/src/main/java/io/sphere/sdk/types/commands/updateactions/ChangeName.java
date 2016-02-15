@@ -9,7 +9,7 @@ Changes the name of the type.
 
  {@doc.gen intro}
 
- {@include.example io.sphere.sdk.types.commands.TypeUpdateCommandTest#changeName()}
+ {@include.example io.sphere.sdk.types.commands.TypeUpdateCommandIntegrationTest#changeName()}
  */
 public final class ChangeName extends UpdateActionImpl<Type> {
     private final LocalizedString name;

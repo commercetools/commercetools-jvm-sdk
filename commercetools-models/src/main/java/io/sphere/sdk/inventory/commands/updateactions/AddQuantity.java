@@ -8,7 +8,7 @@ import io.sphere.sdk.inventory.InventoryEntry;
  *
  * {@doc.gen intro}
  *
- * {@include.example io.sphere.sdk.inventory.commands.InventoryEntryUpdateCommandTest#addQuantity()}
+ * {@include.example io.sphere.sdk.inventory.commands.InventoryEntryUpdateCommandIntegrationTest#addQuantity()}
  *
  * @see InventoryEntry#getQuantityOnStock()
  */

@@ -8,7 +8,7 @@ import io.sphere.sdk.producttypes.ProductType;
  *
  * {@doc.gen intro}
  *
- * {@include.example io.sphere.sdk.producttypes.commands.ProductTypeUpdateCommandTest#addAttributeDefinition()}
+ * {@include.example io.sphere.sdk.producttypes.commands.ProductTypeUpdateCommandIntegrationTest#addAttributeDefinition()}
  */
 public final class RemoveAttributeDefinition extends UpdateActionImpl<ProductType> {
     private final String name;

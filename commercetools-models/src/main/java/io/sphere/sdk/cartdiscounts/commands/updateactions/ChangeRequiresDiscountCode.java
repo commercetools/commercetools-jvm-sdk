@@ -9,7 +9,7 @@ import io.sphere.sdk.commands.UpdateActionImpl;
  *
  *  {@doc.gen intro}
  *
- * {@include.example io.sphere.sdk.cartdiscounts.commands.CartDiscountUpdateCommandTest#changeRequiresDiscountCode()}
+ * {@include.example io.sphere.sdk.cartdiscounts.commands.CartDiscountUpdateCommandIntegrationTest#changeRequiresDiscountCode()}
  */
 public final class ChangeRequiresDiscountCode extends UpdateActionImpl<CartDiscount> {
     private final boolean requiresDiscountCode;

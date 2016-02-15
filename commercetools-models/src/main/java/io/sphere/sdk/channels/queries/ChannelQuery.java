@@ -11,7 +11,7 @@ import io.sphere.sdk.queries.MetaModelQueryDsl;
  *
  {@doc.gen summary channels}
 
- {@include.example io.sphere.sdk.channels.queries.ChannelQueryTest#execution()}
+ {@include.example io.sphere.sdk.channels.queries.ChannelQueryIntegrationTest#execution()}
  */
 public interface ChannelQuery extends MetaModelQueryDsl<Channel, ChannelQuery, ChannelQueryModel, ChannelExpansionModel<Channel>> {
     /**

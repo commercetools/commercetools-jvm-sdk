@@ -8,7 +8,7 @@ import io.sphere.sdk.orders.Order;
 
  {@doc.gen intro}
 
- {@include.example io.sphere.sdk.orders.commands.OrderUpdateCommandTest#setOrderNumber()}
+ {@include.example io.sphere.sdk.orders.commands.OrderUpdateCommandIntegrationTest#setOrderNumber()}
  */
 public final class SetOrderNumber extends UpdateActionImpl<Order> {
     private final String orderNumber;

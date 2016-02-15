@@ -11,7 +11,7 @@ import io.sphere.sdk.queries.MetaModelQueryDsl;
 
   <p>Example for query a cart by customer email:</p>
 
- {@include.example io.sphere.sdk.carts.queries.CartQueryTest#byCustomerEmail()}
+ {@include.example io.sphere.sdk.carts.queries.CartQueryIntegrationTest#byCustomerEmail()}
  */
 public interface CartQuery extends MetaModelQueryDsl<Cart, CartQuery, CartQueryModel, CartExpansionModel<Cart>> {
 

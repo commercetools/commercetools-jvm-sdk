@@ -11,7 +11,7 @@ import javax.annotation.Nullable;
  *
  * {@doc.gen intro}
  *
- * {@include.example io.sphere.sdk.discountcodes.commands.DiscountCodeUpdateCommandTest#setName()}
+ * {@include.example io.sphere.sdk.discountcodes.commands.DiscountCodeUpdateCommandIntegrationTest#setName()}
  */
 public final class SetName extends UpdateActionImpl<DiscountCode> {
     @Nullable

@@ -11,9 +11,9 @@ import io.sphere.sdk.models.TextInputHint;
  * <p>For {@link AttributeType}s use the Javadoc page of {@link AttributeType}s.</p>
  *
  * <p>brief example:</p>
- * {@include.example io.sphere.sdk.attributestutorial.ProductTypeCreationDemoTest#createBookProductType()}
+ * {@include.example io.sphere.sdk.attributestutorial.ProductTypeCreationDemoIntegrationTest#createBookProductType()}
  * <p>long example:</p>
- * {@include.example io.sphere.sdk.attributestutorial.ProductTypeCreationDemoTest#createProductType()}
+ * {@include.example io.sphere.sdk.attributestutorial.ProductTypeCreationDemoIntegrationTest#createProductType()}
  *
  *
  */

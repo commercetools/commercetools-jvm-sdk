@@ -12,7 +12,7 @@ import javax.annotation.Nullable;
  *
  * {@doc.gen intro}
  *
- * {@include.example io.sphere.sdk.discountcodes.commands.DiscountCodeUpdateCommandTest#setDescription()}
+ * {@include.example io.sphere.sdk.discountcodes.commands.DiscountCodeUpdateCommandIntegrationTest#setDescription()}
  */
 public final class SetDescription extends UpdateActionImpl<DiscountCode> {
     @Nullable

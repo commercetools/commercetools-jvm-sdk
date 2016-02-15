@@ -38,10 +38,10 @@ import io.sphere.sdk.products.attributes.AttributeAccess;
  <p>All available attribute types you can find here: {@link io.sphere.sdk.products.attributes.AttributeType} in "All Known Implementing Classes".</p>
 
 <p>The code for the creation of the book {@link io.sphere.sdk.producttypes.ProductType}:</p>
- {@include.example io.sphere.sdk.attributestutorial.ProductTypeCreationDemoTest#createBookProductType()}
+ {@include.example io.sphere.sdk.attributestutorial.ProductTypeCreationDemoIntegrationTest#createBookProductType()}
 
 <p>The code for the creation of the tshirt {@link io.sphere.sdk.producttypes.ProductType}:</p>
- {@include.example io.sphere.sdk.attributestutorial.ProductTypeCreationDemoTest#createProductType()}
+ {@include.example io.sphere.sdk.attributestutorial.ProductTypeCreationDemoIntegrationTest#createProductType()}
 
 
 
@@ -53,27 +53,27 @@ import io.sphere.sdk.products.attributes.AttributeAccess;
  <p>To create a product you need to reference the product type. Since the {@link io.sphere.sdk.producttypes.ProductType}
  ID of the development system will not be the ID of the production system it is necessary to find the product type by name:</p>
 
- {@include.example io.sphere.sdk.attributestutorial.ProductTypeCreationDemoTest#fetchProductTypeByName()}
+ {@include.example io.sphere.sdk.attributestutorial.ProductTypeCreationDemoIntegrationTest#fetchProductTypeByName()}
 
  The simplest way of adding attributes to a {@link io.sphere.sdk.products.ProductVariant} is to use
  {@link ProductVariantDraftBuilder#plusAttribute(java.lang.String, java.lang.Object)} which enables you to directly
  put the value of the attribute to the draft. But it cannot check if you put the right objects and types in it.
 
  <p>A book example:</p>
- {@include.example io.sphere.sdk.attributestutorial.ProductTypeCreationDemoTest#createBookProduct()}
+ {@include.example io.sphere.sdk.attributestutorial.ProductTypeCreationDemoIntegrationTest#createBookProduct()}
 
  <p>A tshirt example:</p>
- {@include.example io.sphere.sdk.attributestutorial.ProductTypeCreationDemoTest#createProduct()}
+ {@include.example io.sphere.sdk.attributestutorial.ProductTypeCreationDemoIntegrationTest#createProduct()}
 
  A wrong value for a field or an invalid type will cause an {@link io.sphere.sdk.client.ErrorResponseException}
  with an error code of {@value io.sphere.sdk.models.errors.InvalidField#CODE}.
 
- {@include.example io.sphere.sdk.attributestutorial.ProductTypeCreationDemoTest#invalidTypeCausesException()}
+ {@include.example io.sphere.sdk.attributestutorial.ProductTypeCreationDemoIntegrationTest#invalidTypeCausesException()}
 
  As alternative you could declare your attributes at the same place and use these to read and write
  attribute values:
 
- {@include.example io.sphere.sdk.attributestutorial.ProductTypeCreationDemoTest#productCreationWithGetterSetter()}
+ {@include.example io.sphere.sdk.attributestutorial.ProductTypeCreationDemoIntegrationTest#productCreationWithGetterSetter()}
 
 
  <h3 id="attribute-access-without-product-type">Reading Attributes</h3>
@@ -83,24 +83,24 @@ import io.sphere.sdk.products.attributes.AttributeAccess;
 
  <p>You can reuse the {@link io.sphere.sdk.products.attributes.NamedAttributeAccess} declaration if you want to:</p>
 
- {@include.example io.sphere.sdk.attributestutorial.ProductTypeCreationDemoTest#readAttributeWithoutProductTypeWithNamedAccess()}
+ {@include.example io.sphere.sdk.attributestutorial.ProductTypeCreationDemoIntegrationTest#readAttributeWithoutProductTypeWithNamedAccess()}
 
  <p>Or you can access it on the fly:</p>
 
- {@include.example io.sphere.sdk.attributestutorial.ProductTypeCreationDemoTest#readAttributeWithoutProductTypeWithName()}
+ {@include.example io.sphere.sdk.attributestutorial.ProductTypeCreationDemoIntegrationTest#readAttributeWithoutProductTypeWithName()}
 
  <p>Or you can access it as {@link com.fasterxml.jackson.databind.JsonNode}, for example if you don't know the type or the SDK does not support it yet:</p>
 
- {@include.example io.sphere.sdk.attributestutorial.ProductTypeCreationDemoTest#readAttributeWithoutProductTypeWithJson()}
+ {@include.example io.sphere.sdk.attributestutorial.ProductTypeCreationDemoIntegrationTest#readAttributeWithoutProductTypeWithJson()}
 
 
  <p>If the attribute is not present in the {@link io.sphere.sdk.products.AttributeContainer} then the {@link java.util.Optional} will be empty:</p>
 
- {@include.example io.sphere.sdk.attributestutorial.ProductTypeCreationDemoTest#notPresentAttributeRead()}
+ {@include.example io.sphere.sdk.attributestutorial.ProductTypeCreationDemoIntegrationTest#notPresentAttributeRead()}
 
  <p>If you provide a wrong type, the code will throw a {@link io.sphere.sdk.json.JsonException}:</p>
 
- {@include.example io.sphere.sdk.attributestutorial.ProductTypeCreationDemoTest#readAttributeWithoutProductTypeWithNamedAccessWithWrongType()}
+ {@include.example io.sphere.sdk.attributestutorial.ProductTypeCreationDemoIntegrationTest#readAttributeWithoutProductTypeWithNamedAccessWithWrongType()}
 
 
 
@@ -125,7 +125,7 @@ import io.sphere.sdk.products.attributes.AttributeAccess;
  <p>In this example the left column is the label of
  the attribute from the product type and the right column is the formatted value from the product:</p>
 
- {@include.example io.sphere.sdk.attributestutorial.ProductTypeCreationDemoTest#showProductAttributeTable()}
+ {@include.example io.sphere.sdk.attributestutorial.ProductTypeCreationDemoIntegrationTest#showProductAttributeTable()}
 
  <!-- it is easy to mix uo product and product type with autocomplete and using the non set variant where set is expected -->
 
@@ -136,22 +136,22 @@ import io.sphere.sdk.products.attributes.AttributeAccess;
 
 
 <p>Example for books:</p>
- {@include.example io.sphere.sdk.attributestutorial.ProductTypeCreationDemoTest#updateAttributesBooks()}
+ {@include.example io.sphere.sdk.attributestutorial.ProductTypeCreationDemoIntegrationTest#updateAttributesBooks()}
 
  <p>Example for tshirts:</p>
- {@include.example io.sphere.sdk.attributestutorial.ProductTypeCreationDemoTest#updateAttributes()}
+ {@include.example io.sphere.sdk.attributestutorial.ProductTypeCreationDemoIntegrationTest#updateAttributes()}
 
  A wrong value for a field or an invalid type (like flat value instead of set) will cause an {@link io.sphere.sdk.client.ErrorResponseException}
  with an error code of {@value io.sphere.sdk.models.errors.InvalidField#CODE}.
 
- {@include.example io.sphere.sdk.attributestutorial.ProductTypeCreationDemoTest#updateWithWrongType()}
+ {@include.example io.sphere.sdk.attributestutorial.ProductTypeCreationDemoIntegrationTest#updateWithWrongType()}
 
  <h3 id="attribute-stubs-for-tests">Create attribute stubs for unit tests</h3>
 
  <p>For unit tests you can create an {@link io.sphere.sdk.products.attributes.Attribute} with a
  static factory method such as {@link io.sphere.sdk.products.attributes.Attribute#of(String, AttributeAccess, Object)}:</p>
 
- {@include.example io.sphere.sdk.attributestutorial.ProductTypeCreationDemoTest#attributesForUnitTests()}
+ {@include.example io.sphere.sdk.attributestutorial.ProductTypeCreationDemoIntegrationTest#attributesForUnitTests()}
 
  <h3 id="attributes-in-order-import">Create attributes for importing orders</h3>
 
@@ -161,7 +161,7 @@ import io.sphere.sdk.products.attributes.AttributeAccess;
 
  <p>Example:</p>
 
- {@include.example io.sphere.sdk.attributestutorial.ProductTypeCreationDemoTest#orderImportExample()}
+ {@include.example io.sphere.sdk.attributestutorial.ProductTypeCreationDemoIntegrationTest#orderImportExample()}
 
 
 

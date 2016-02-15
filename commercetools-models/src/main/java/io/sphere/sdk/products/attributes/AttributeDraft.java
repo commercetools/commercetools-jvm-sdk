@@ -14,7 +14,7 @@ import static java.util.stream.Collectors.toSet;
 /**
  * Input object to create a product attribute.
  *
- * {@include.example io.sphere.sdk.products.commands.ProductUpdateCommandTest#addVariant()}
+ * {@include.example io.sphere.sdk.products.commands.ProductUpdateCommandIntegrationTest#addVariant()}
  *
  * @see io.sphere.sdk.products.commands.updateactions.AddVariant
  * @see io.sphere.sdk.products.ProductVariantDraft

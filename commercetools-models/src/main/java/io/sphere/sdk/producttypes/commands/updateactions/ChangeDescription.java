@@ -8,7 +8,7 @@ import io.sphere.sdk.producttypes.ProductType;
  *
  * {@doc.gen intro}
  *
- * {@include.example io.sphere.sdk.producttypes.commands.ProductTypeUpdateCommandTest#changeDescription()}
+ * {@include.example io.sphere.sdk.producttypes.commands.ProductTypeUpdateCommandIntegrationTest#changeDescription()}
  */
 public final class ChangeDescription extends UpdateActionImpl<ProductType> {
     private final String description;

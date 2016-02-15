@@ -14,7 +14,7 @@ import java.util.Optional;
  *
  * {@doc.gen intro}
  *
- * {@include.example io.sphere.sdk.carts.commands.CartUpdateCommandTest#addPayment()}
+ * {@include.example io.sphere.sdk.carts.commands.CartUpdateCommandIntegrationTest#addPayment()}
  *
  * @see Payment
  * @see Cart#getPaymentInfo()

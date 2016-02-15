@@ -9,7 +9,7 @@ import io.sphere.sdk.models.Address;
  *
  *  {@doc.gen intro}
  *
- * {@include.example io.sphere.sdk.customers.commands.CustomerUpdateCommandTest#addAddress()}
+ * {@include.example io.sphere.sdk.customers.commands.CustomerUpdateCommandIntegrationTest#addAddress()}
  *
  * @see Customer
  * @see Customer#getAddresses()

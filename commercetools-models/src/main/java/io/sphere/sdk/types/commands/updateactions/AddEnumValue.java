@@ -10,7 +10,7 @@ import io.sphere.sdk.types.Type;
 
  {@doc.gen intro}
 
- {@include.example io.sphere.sdk.types.commands.TypeUpdateCommandTest#addEnumValue()}
+ {@include.example io.sphere.sdk.types.commands.TypeUpdateCommandIntegrationTest#addEnumValue()}
 
  @see EnumFieldType#getValues()
  */

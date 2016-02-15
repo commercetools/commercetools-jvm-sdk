@@ -11,7 +11,7 @@ import io.sphere.sdk.orders.expansion.OrderExpansionModel;
 /**
  * Orders a cart.
  *
- * {@include.example io.sphere.sdk.orders.commands.OrderFromCartCreateCommandTest#execution()}
+ * {@include.example io.sphere.sdk.orders.commands.OrderFromCartCreateCommandIntegrationTest#execution()}
  */
 public interface OrderFromCartCreateCommand extends DraftBasedCreateCommand<Order, OrderFromCartDraft>, MetaModelReferenceExpansionDsl<Order, OrderFromCartCreateCommand, OrderExpansionModel<Order>> {
     static OrderFromCartCreateCommand of(final OrderFromCartDraft draft) {

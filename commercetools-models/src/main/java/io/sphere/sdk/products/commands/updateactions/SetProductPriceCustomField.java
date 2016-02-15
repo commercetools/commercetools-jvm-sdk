@@ -10,7 +10,7 @@ import io.sphere.sdk.types.customupdateactions.SetCustomFieldBase;
  *
  * {@doc.gen intro}
  *
- * {@include.example io.sphere.sdk.products.commands.ProductUpdateCommandTest#setProductPriceCustomTypeAndsetProductPriceCustomField()}
+ * {@include.example io.sphere.sdk.products.commands.ProductUpdateCommandIntegrationTest#setProductPriceCustomTypeAndsetProductPriceCustomField()}
  *
  * @see io.sphere.sdk.types.Custom
  */

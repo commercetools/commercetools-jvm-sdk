@@ -9,7 +9,7 @@ import io.sphere.sdk.queries.StringQuerySortingModel;
  *
  *
  * <p>Example:</p>
- * {@include.example io.sphere.sdk.customobjects.queries.CustomObjectQueryTest#queryWithClass()}
+ * {@include.example io.sphere.sdk.customobjects.queries.CustomObjectQueryIntegrationTest#queryWithClass()}
  *
  * @param <T> The type of the value of the custom object.
  * @see CustomObject

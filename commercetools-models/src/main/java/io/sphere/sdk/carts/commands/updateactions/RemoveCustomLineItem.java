@@ -9,7 +9,7 @@ import io.sphere.sdk.commands.UpdateActionImpl;
 
  {@doc.gen intro}
 
- {@include.example io.sphere.sdk.carts.commands.CartUpdateCommandTest#removeCustomLineItem()}
+ {@include.example io.sphere.sdk.carts.commands.CartUpdateCommandIntegrationTest#removeCustomLineItem()}
 
  */
 public final class RemoveCustomLineItem extends UpdateActionImpl<Cart> {

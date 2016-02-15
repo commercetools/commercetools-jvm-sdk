@@ -8,7 +8,7 @@ import io.sphere.sdk.types.Type;
 
  {@doc.gen intro}
 
- {@include.example io.sphere.sdk.types.commands.TypeUpdateCommandTest#addFieldDefinition()}
+ {@include.example io.sphere.sdk.types.commands.TypeUpdateCommandIntegrationTest#addFieldDefinition()}
  */
 public final class RemoveFieldDefinition extends UpdateActionImpl<Type> {
     private final String fieldName;

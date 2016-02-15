@@ -11,7 +11,7 @@ import io.sphere.sdk.expansion.MetaModelReferenceExpansionDsl;
  * Creates a channel.
  *
  * <p>Example:</p>
- * {@include.example io.sphere.sdk.channels.commands.ChannelCreateCommandTest#execution()}
+ * {@include.example io.sphere.sdk.channels.commands.ChannelCreateCommandIntegrationTest#execution()}
  *
  * @see io.sphere.sdk.channels.ChannelDraftBuilder
  * @see ChannelDraft

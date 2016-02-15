@@ -8,7 +8,7 @@ import io.sphere.sdk.commands.UpdateActionImpl;
  *
  *  {@doc.gen intro}
  *
- * {@include.example io.sphere.sdk.cartdiscounts.commands.CartDiscountUpdateCommandTest#changeSortOrder()}
+ * {@include.example io.sphere.sdk.cartdiscounts.commands.CartDiscountUpdateCommandIntegrationTest#changeSortOrder()}
  */
 public final class ChangeSortOrder extends UpdateActionImpl<CartDiscount> {
     private final String sortOrder;

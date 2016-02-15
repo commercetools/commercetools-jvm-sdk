@@ -10,7 +10,7 @@ import java.util.Set;
 /**
  * Template to create a new Channel.
  *
- * {@include.example io.sphere.sdk.channels.commands.ChannelCreateCommandTest#execution()}
+ * {@include.example io.sphere.sdk.channels.commands.ChannelCreateCommandIntegrationTest#execution()}
  *
  * @see ChannelDraftBuilder
  * @see ChannelDraftDsl

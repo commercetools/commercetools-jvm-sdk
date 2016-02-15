@@ -11,7 +11,7 @@ import javax.annotation.Nullable;
 
  {@doc.gen intro}
 
- {@include.example io.sphere.sdk.carts.commands.CartUpdateCommandTest#removeLineItem()}
+ {@include.example io.sphere.sdk.carts.commands.CartUpdateCommandIntegrationTest#removeLineItem()}
  */
 public final class RemoveLineItem extends UpdateActionImpl<Cart> {
     private final String lineItemId;

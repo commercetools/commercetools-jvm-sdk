@@ -9,7 +9,7 @@ import io.sphere.sdk.commands.UpdateActionImpl;
  *
  *  {@doc.gen intro}
  *
- * {@include.example io.sphere.sdk.cartdiscounts.commands.CartDiscountUpdateCommandTest#changeTarget()}
+ * {@include.example io.sphere.sdk.cartdiscounts.commands.CartDiscountUpdateCommandIntegrationTest#changeTarget()}
  */
 public final class ChangeTarget extends UpdateActionImpl<CartDiscount> {
     private final CartDiscountTarget target;

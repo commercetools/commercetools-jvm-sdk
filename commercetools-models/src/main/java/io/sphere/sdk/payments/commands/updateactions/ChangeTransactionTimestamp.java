@@ -10,7 +10,7 @@ import java.time.ZonedDateTime;
  *
  * {@doc.gen intro}
  *
- * {@include.example io.sphere.sdk.payments.commands.PaymentUpdateCommandTest#changeTransactionTimestamp()}
+ * {@include.example io.sphere.sdk.payments.commands.PaymentUpdateCommandIntegrationTest#changeTransactionTimestamp()}
  *
  */
 public final class ChangeTransactionTimestamp extends UpdateActionImpl<Payment> {

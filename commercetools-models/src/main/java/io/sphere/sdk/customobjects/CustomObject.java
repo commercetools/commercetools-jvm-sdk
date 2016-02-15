@@ -66,7 +66,7 @@ Or you can just override the value using {@link io.sphere.sdk.customobjects.Cust
 
 <h4 id=direct-json-query>Query custom objects</h4>
 
-{@include.example io.sphere.sdk.customobjects.queries.CustomObjectQueryTest#queryPureJson()}
+{@include.example io.sphere.sdk.customobjects.queries.CustomObjectQueryIntegrationTest#queryPureJson()}
 
 <h3 id=custom-json-mapper>Custom Objects with a custom JSON mapper</h3>
 
@@ -165,7 +165,7 @@ As a result you only work with the interface making it transparent if it is an o
 
 <p>Unlike other query models, {@link CustomObjectQueryModel#of()} takes a type parameter of the result type of the custom object.
 Notice that it is necessary to explicitly declare the type when requesting the query model, as shown in the following examples:</p>
-{@include.example io.sphere.sdk.customobjects.queries.CustomObjectQueryTest#demoModelTypeParameter()}
+{@include.example io.sphere.sdk.customobjects.queries.CustomObjectQueryIntegrationTest#demoModelTypeParameter()}
 
 <a href="#page-toc" class="theme-btn">back to top</a>
 

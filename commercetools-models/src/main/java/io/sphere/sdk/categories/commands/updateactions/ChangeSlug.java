@@ -9,7 +9,7 @@ import io.sphere.sdk.models.LocalizedString;
  *
  *  {@doc.gen intro}
  *
- *  {@include.example io.sphere.sdk.categories.commands.CategoryUpdateCommandTest#changeSlug()}
+ *  {@include.example io.sphere.sdk.categories.commands.CategoryUpdateCommandIntegrationTest#changeSlug()}
  */
 public final class ChangeSlug extends UpdateActionImpl<Category> {
     private final LocalizedString slug;

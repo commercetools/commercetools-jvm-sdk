@@ -8,7 +8,7 @@ import io.sphere.sdk.inventory.InventoryEntry;
  *
  * {@doc.gen intro}
  *
- * {@include.example io.sphere.sdk.inventory.commands.InventoryEntryUpdateCommandTest#removeQuantity()}
+ * {@include.example io.sphere.sdk.inventory.commands.InventoryEntryUpdateCommandIntegrationTest#removeQuantity()}
  */
 public final class RemoveQuantity extends UpdateActionImpl<InventoryEntry> {
     private final Long quantity;

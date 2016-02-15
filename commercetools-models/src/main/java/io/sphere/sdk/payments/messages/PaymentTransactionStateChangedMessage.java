@@ -13,7 +13,7 @@ import java.time.ZonedDateTime;
 /**
  * This message is the result of the {@link io.sphere.sdk.payments.commands.updateactions.ChangeTransactionState} update action.
  *
- * {@include.example io.sphere.sdk.payments.commands.PaymentUpdateCommandTest#changeTransactionState()}
+ * {@include.example io.sphere.sdk.payments.commands.PaymentUpdateCommandIntegrationTest#changeTransactionState()}
  *
  */
 @JsonDeserialize(as = PaymentTransactionStateChangedMessage.class)//important to override annotation in Message class

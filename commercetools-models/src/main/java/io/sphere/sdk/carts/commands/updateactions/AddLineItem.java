@@ -17,7 +17,7 @@ import javax.annotation.Nullable;
 
     {@doc.gen intro}
 
-    {@include.example io.sphere.sdk.carts.commands.CartUpdateCommandTest#addLineItem()}
+    {@include.example io.sphere.sdk.carts.commands.CartUpdateCommandIntegrationTest#addLineItem()}
 
  @see Cart#getLineItems()
  @see io.sphere.sdk.orders.Order#getLineItems()

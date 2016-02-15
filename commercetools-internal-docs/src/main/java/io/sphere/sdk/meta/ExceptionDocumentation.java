@@ -29,7 +29,7 @@ import io.sphere.sdk.models.errors.InvalidJsonInputError;
  * The JVM SDK will then put a {@link io.sphere.sdk.client.ErrorResponseException} into a {@link java.util.concurrent.CompletionStage}.
  *
  * The following example shows how to distinguish errors by error code:
- * {@include.example io.sphere.sdk.customers.commands.CustomerChangePasswordCommandTest#demo()}
+ * {@include.example io.sphere.sdk.customers.commands.CustomerChangePasswordCommandIntegrationTest#demo()}
  *
  * Errors can contain extra information like {@link InvalidJsonInputError} hinting to the problem with the JSON:
  *

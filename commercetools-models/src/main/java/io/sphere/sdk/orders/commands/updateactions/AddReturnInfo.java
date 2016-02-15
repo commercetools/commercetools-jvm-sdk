@@ -14,7 +14,7 @@ import java.util.List;
 
     {@doc.gen intro}
 
-    {@include.example io.sphere.sdk.orders.commands.OrderUpdateCommandTest#addReturnInfo()}
+    {@include.example io.sphere.sdk.orders.commands.OrderUpdateCommandIntegrationTest#addReturnInfo()}
 
  @see Order#getReturnInfo()
  */

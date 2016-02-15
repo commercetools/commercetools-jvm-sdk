@@ -12,7 +12,7 @@ import io.sphere.sdk.zones.Zone;
  *
  * {@doc.gen intro}
  *
- * {@include.example io.sphere.sdk.shippingmethods.commands.ShippingMethodUpdateCommandTest#workingWithZones()}
+ * {@include.example io.sphere.sdk.shippingmethods.commands.ShippingMethodUpdateCommandIntegrationTest#workingWithZones()}
  */
 public final class RemoveShippingRate extends UpdateActionImpl<ShippingMethod> {
     private final Reference<Zone> zone;

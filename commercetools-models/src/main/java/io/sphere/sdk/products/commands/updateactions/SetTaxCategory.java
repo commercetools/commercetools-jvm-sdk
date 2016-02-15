@@ -14,7 +14,7 @@ import java.util.Optional;
  *
  * {@doc.gen intro}
  *
- * {@include.example io.sphere.sdk.products.commands.ProductUpdateCommandTest#setTaxCategory()}
+ * {@include.example io.sphere.sdk.products.commands.ProductUpdateCommandIntegrationTest#setTaxCategory()}
  *
  */
 public final class SetTaxCategory extends UpdateActionImpl<Product> {

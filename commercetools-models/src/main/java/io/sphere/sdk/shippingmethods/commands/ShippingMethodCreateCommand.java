@@ -9,7 +9,7 @@ import io.sphere.sdk.shippingmethods.expansion.ShippingMethodExpansionModel;
 /**
  * Creates a {@link io.sphere.sdk.shippingmethods.ShippingMethod} in SPHERE.IO.
  *
- * {@include.example io.sphere.sdk.shippingmethods.commands.ShippingMethodCreateCommandTest#execution()}
+ * {@include.example io.sphere.sdk.shippingmethods.commands.ShippingMethodCreateCommandIntegrationTest#execution()}
  */
 public interface ShippingMethodCreateCommand extends DraftBasedCreateCommand<ShippingMethod, ShippingMethodDraft>, MetaModelReferenceExpansionDsl<ShippingMethod, ShippingMethodCreateCommand, ShippingMethodExpansionModel<ShippingMethod>> {
     static ShippingMethodCreateCommand of(final ShippingMethodDraft draft) {

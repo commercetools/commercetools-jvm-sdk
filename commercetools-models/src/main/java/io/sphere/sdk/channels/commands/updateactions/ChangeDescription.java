@@ -9,7 +9,7 @@ import io.sphere.sdk.models.LocalizedString;
  *
  *  {@doc.gen intro}
  *
- * {@include.example io.sphere.sdk.channels.commands.ChannelUpdateCommandTest#changeDescription()}
+ * {@include.example io.sphere.sdk.channels.commands.ChannelUpdateCommandIntegrationTest#changeDescription()}
  */
 public final class ChangeDescription extends UpdateActionImpl<Channel> {
     private final LocalizedString description;

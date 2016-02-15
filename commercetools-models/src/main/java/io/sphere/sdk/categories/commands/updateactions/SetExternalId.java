@@ -8,7 +8,7 @@ import javax.annotation.Nullable;
 /**
  * Changes the external id of a category.
  *
- * {@include.example io.sphere.sdk.categories.commands.CategoryUpdateCommandTest#setExternalId()}
+ * {@include.example io.sphere.sdk.categories.commands.CategoryUpdateCommandIntegrationTest#setExternalId()}
  */
 public final class SetExternalId extends UpdateActionImpl<Category> {
     @Nullable

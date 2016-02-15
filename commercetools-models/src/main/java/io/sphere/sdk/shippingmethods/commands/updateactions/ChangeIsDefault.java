@@ -9,7 +9,7 @@ import io.sphere.sdk.shippingmethods.ShippingMethod;
  *
  * {@doc.gen intro}
  *
- * {@include.example io.sphere.sdk.shippingmethods.commands.ShippingMethodUpdateCommandTest#changeIsDefault()}
+ * {@include.example io.sphere.sdk.shippingmethods.commands.ShippingMethodUpdateCommandIntegrationTest#changeIsDefault()}
  */
 public final class ChangeIsDefault extends UpdateActionImpl<ShippingMethod> {
     private final boolean isDefault;

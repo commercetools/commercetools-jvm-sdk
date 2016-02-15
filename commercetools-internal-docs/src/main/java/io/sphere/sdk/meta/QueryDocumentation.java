@@ -196,7 +196,7 @@ Like for predicates, you can traverse the query model tree in the same way to sp
 
  <p>For some cases, like iterating through a whole collection for imports/exports the offset parameter can be avoided by using a predicate id &gt; $lastId.</p>
 
- {@include.example io.sphere.sdk.products.queries.QueryAllTest}
+ {@include.example io.sphere.sdk.products.queries.QueryAllIntegrationTest}
 
  <h3 id=reference-expansion>Reference expansion</h3>
 

@@ -11,7 +11,7 @@ import io.sphere.sdk.queries.MetaModelQueryDsl;
 
  {@doc.gen summary customer groups}
 
- {@include.example io.sphere.sdk.customergroups.queries.CustomerGroupQueryTest#byNames()}
+ {@include.example io.sphere.sdk.customergroups.queries.CustomerGroupQueryIntegrationTest#byNames()}
 
  @see CustomerGroup
  */

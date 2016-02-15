@@ -8,7 +8,7 @@ import io.sphere.sdk.commands.UpdateActionImpl;
 
  {@doc.gen intro}
 
- {@include.example io.sphere.sdk.carts.commands.CartUpdateCommandTest#recalculate()}
+ {@include.example io.sphere.sdk.carts.commands.CartUpdateCommandIntegrationTest#recalculate()}
  */
 public final class Recalculate extends UpdateActionImpl<Cart> {
     private Recalculate() {

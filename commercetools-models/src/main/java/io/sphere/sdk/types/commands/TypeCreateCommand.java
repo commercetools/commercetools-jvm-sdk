@@ -7,7 +7,7 @@ import io.sphere.sdk.types.TypeDraft;
 import io.sphere.sdk.types.expansion.TypeExpansionModel;
 
 /**
- * {@include.example io.sphere.sdk.types.commands.TypeCreateCommandTest#execution()}
+ * {@include.example io.sphere.sdk.types.commands.TypeCreateCommandIntegrationTest#execution()}
  *
  * @see io.sphere.sdk.types.Custom
  */

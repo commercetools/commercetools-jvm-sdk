@@ -13,7 +13,7 @@ import static java.lang.String.format;
  *
  *  {@doc.gen intro}
  *
- * {@include.example io.sphere.sdk.customers.commands.CustomerUpdateCommandTest#setDefaultBillingAddress()}
+ * {@include.example io.sphere.sdk.customers.commands.CustomerUpdateCommandIntegrationTest#setDefaultBillingAddress()}
  * @see Customer
  */
 public final class SetDefaultBillingAddress extends UpdateActionImpl<Customer> {

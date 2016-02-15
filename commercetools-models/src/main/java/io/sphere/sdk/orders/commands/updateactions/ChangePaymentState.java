@@ -9,7 +9,7 @@ import io.sphere.sdk.orders.PaymentState;
 
  {@doc.gen intro}
 
- {@include.example io.sphere.sdk.orders.commands.OrderUpdateCommandTest#changePaymentState()}
+ {@include.example io.sphere.sdk.orders.commands.OrderUpdateCommandIntegrationTest#changePaymentState()}
  */
 public final class ChangePaymentState extends UpdateActionImpl<Order> {
     private final PaymentState paymentState;

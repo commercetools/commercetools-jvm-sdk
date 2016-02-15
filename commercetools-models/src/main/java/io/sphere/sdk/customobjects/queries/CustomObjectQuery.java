@@ -13,7 +13,7 @@ import io.sphere.sdk.queries.MetaModelQueryDsl;
  *
  *
  *
- * {@include.example io.sphere.sdk.customobjects.queries.CustomObjectQueryTest#queryByContainer()}
+ * {@include.example io.sphere.sdk.customobjects.queries.CustomObjectQueryIntegrationTest#queryByContainer()}
  *
  * @param <T> The type of the value of this custom object.
  * @see CustomObject

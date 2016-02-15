@@ -12,7 +12,7 @@ import static java.util.Collections.singletonList;
 /**
  * Query search keywords to implement a basic auto-complete functionality.
  *
- * {@include.example io.sphere.sdk.products.queries.SuggestQueryTest#suggestionForMultipleLanguages()}
+ * {@include.example io.sphere.sdk.products.queries.SuggestQueryIntegrationTest#suggestionForMultipleLanguages()}
  */
 public interface SuggestQuery extends SphereRequest<SuggestionResult> {
 

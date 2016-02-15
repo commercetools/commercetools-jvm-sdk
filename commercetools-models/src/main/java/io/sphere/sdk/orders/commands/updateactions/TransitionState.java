@@ -12,7 +12,7 @@ import javax.annotation.Nullable;
  *
  * {@doc.gen intro}
  *
- * {@include.example io.sphere.sdk.orders.commands.OrderUpdateCommandTest#transitionState()}
+ * {@include.example io.sphere.sdk.orders.commands.OrderUpdateCommandIntegrationTest#transitionState()}
  *
  * @see Order
  * @see io.sphere.sdk.orders.messages.OrderStateTransitionMessage

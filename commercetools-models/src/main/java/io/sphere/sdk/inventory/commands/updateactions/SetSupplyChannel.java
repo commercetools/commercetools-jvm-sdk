@@ -14,7 +14,7 @@ import java.util.Optional;
  *
  * {@doc.gen intro}
  *
- * {@include.example io.sphere.sdk.inventory.commands.InventoryEntryUpdateCommandTest#setSupplyChannel()}
+ * {@include.example io.sphere.sdk.inventory.commands.InventoryEntryUpdateCommandIntegrationTest#setSupplyChannel()}
  */
 public final class SetSupplyChannel extends UpdateActionImpl<InventoryEntry> {
     @Nullable

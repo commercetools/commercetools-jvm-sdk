@@ -10,7 +10,7 @@ import io.sphere.sdk.products.ProductVariant;
  *
  *  {@doc.gen intro}
  *
- *  {@include.example io.sphere.sdk.products.commands.ProductUpdateCommandTest#addExternalImage()}
+ *  {@include.example io.sphere.sdk.products.commands.ProductUpdateCommandIntegrationTest#addExternalImage()}
  *
  *  @see ProductVariant#getImages()
  *  @see RemoveImage

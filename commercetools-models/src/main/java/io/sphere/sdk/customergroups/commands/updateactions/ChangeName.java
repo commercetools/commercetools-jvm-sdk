@@ -9,7 +9,7 @@ import io.sphere.sdk.customergroups.CustomerGroup;
 
  {@doc.gen intro}
 
- {@include.example io.sphere.sdk.customergroups.commands.CustomerGroupUpdateCommandTest#changeName()}
+ {@include.example io.sphere.sdk.customergroups.commands.CustomerGroupUpdateCommandIntegrationTest#changeName()}
 
  @see CustomerGroup
  */

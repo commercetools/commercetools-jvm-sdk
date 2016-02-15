@@ -8,7 +8,7 @@ import io.sphere.sdk.zones.Zone;
  *
  * {@doc.gen intro}
  *
- * {@include.example io.sphere.sdk.zones.commands.ZoneUpdateCommandTest#changeName()}
+ * {@include.example io.sphere.sdk.zones.commands.ZoneUpdateCommandIntegrationTest#changeName()}
  */
 public final class ChangeName extends UpdateActionImpl<Zone> {
     private final String name;

@@ -12,7 +12,7 @@ import java.util.Set;
  *
  * {@doc.gen intro}
  *
- * {@include.example io.sphere.sdk.orders.commands.OrderUpdateCommandTest#importLineItemState()}
+ * {@include.example io.sphere.sdk.orders.commands.OrderUpdateCommandIntegrationTest#importLineItemState()}
  */
 public final class ImportLineItemState extends UpdateActionImpl<Order> {
     private final String lineItemId;

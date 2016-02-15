@@ -10,7 +10,7 @@ import io.sphere.sdk.reviews.expansion.ReviewExpansionModel;
  * Creates a review.
  *
  * <p>Example:</p>
- * {@include.example io.sphere.sdk.reviews.commands.ReviewCreateCommandTest#createByCode()}
+ * {@include.example io.sphere.sdk.reviews.commands.ReviewCreateCommandIntegrationTest#createByCode()}
  *
  * @see io.sphere.sdk.reviews.ReviewDraftBuilder
  * @see io.sphere.sdk.reviews.ReviewDraft

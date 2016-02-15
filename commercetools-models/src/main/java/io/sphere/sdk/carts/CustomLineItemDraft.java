@@ -15,7 +15,7 @@ import javax.money.MonetaryAmount;
  * <p>Draft for adding a custom line item to the cart.</p>
  *
  *  <p>Example for adding a {@link CustomLineItem} to a {@link Cart}:</p>
- {@include.example io.sphere.sdk.carts.commands.CartUpdateCommandTest#addCustomLineItem()}
+ {@include.example io.sphere.sdk.carts.commands.CartUpdateCommandIntegrationTest#addCustomLineItem()}
 
  @see CustomLineItem
  */

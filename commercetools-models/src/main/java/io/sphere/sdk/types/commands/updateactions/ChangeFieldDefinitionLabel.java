@@ -9,7 +9,7 @@ Changes the label.
 
  {@doc.gen intro}
 
- {@include.example io.sphere.sdk.types.commands.TypeUpdateCommandTest#changeLabel()}
+ {@include.example io.sphere.sdk.types.commands.TypeUpdateCommandIntegrationTest#changeLabel()}
  */
 public final class ChangeFieldDefinitionLabel extends UpdateActionImpl<Type> {
     private final String fieldName;

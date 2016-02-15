@@ -10,7 +10,7 @@ import javax.annotation.Nullable;
  *
  * {@doc.gen intro}
  *
- * {@include.example io.sphere.sdk.zones.commands.ZoneUpdateCommandTest#setDescription()}
+ * {@include.example io.sphere.sdk.zones.commands.ZoneUpdateCommandIntegrationTest#setDescription()}
  */
 public final class SetDescription extends UpdateActionImpl<Zone> {
     @Nullable

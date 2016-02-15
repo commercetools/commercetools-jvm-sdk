@@ -8,7 +8,7 @@ import io.sphere.sdk.customers.Customer;
  *
  *  {@doc.gen intro}
  *
- * {@include.example io.sphere.sdk.customers.commands.CustomerUpdateCommandTest#setCustomerNumber()}
+ * {@include.example io.sphere.sdk.customers.commands.CustomerUpdateCommandIntegrationTest#setCustomerNumber()}
  *
  * @see Customer
  */

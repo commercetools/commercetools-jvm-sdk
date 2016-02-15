@@ -7,7 +7,7 @@ import io.sphere.sdk.productdiscounts.ProductDiscountDraft;
 import io.sphere.sdk.productdiscounts.expansion.ProductDiscountExpansionModel;
 
 /**
- * {@include.example io.sphere.sdk.productdiscounts.commands.ProductDiscountCreateCommandTest#execution()}
+ * {@include.example io.sphere.sdk.productdiscounts.commands.ProductDiscountCreateCommandIntegrationTest#execution()}
  */
 public interface ProductDiscountCreateCommand extends DraftBasedCreateCommand<ProductDiscount, ProductDiscountDraft>, MetaModelReferenceExpansionDsl<ProductDiscount, ProductDiscountCreateCommand, ProductDiscountExpansionModel<ProductDiscount>> {
     static ProductDiscountCreateCommand of(final ProductDiscountDraft draft) {

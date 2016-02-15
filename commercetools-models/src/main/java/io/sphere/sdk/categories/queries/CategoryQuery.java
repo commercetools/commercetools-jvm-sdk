@@ -16,7 +16,7 @@ import java.util.function.Function;
 /**
  * {@doc.gen summary categories}
  *
- * {@include.example io.sphere.sdk.categories.queries.CategoryQueryTest#queryByExternalId()}
+ * {@include.example io.sphere.sdk.categories.queries.CategoryQueryIntegrationTest#queryByExternalId()}
  *
  */
 public interface CategoryQuery extends MetaModelQueryDsl<Category, CategoryQuery, CategoryQueryModel, CategoryExpansionModel<Category>> {

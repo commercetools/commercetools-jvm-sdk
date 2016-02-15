@@ -11,7 +11,7 @@ import io.sphere.sdk.products.Product;
  *
  * {@doc.gen intro}
  *
- * {@include.example io.sphere.sdk.products.commands.ProductUpdateCommandTest#addToCategory()}
+ * {@include.example io.sphere.sdk.products.commands.ProductUpdateCommandIntegrationTest#addToCategory()}
  *
  * @see io.sphere.sdk.products.commands.updateactions.AddToCategory
  */

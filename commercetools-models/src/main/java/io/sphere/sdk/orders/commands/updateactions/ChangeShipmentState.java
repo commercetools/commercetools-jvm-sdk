@@ -9,7 +9,7 @@ import io.sphere.sdk.orders.ShipmentState;
 
  {@doc.gen intro}
 
- {@include.example io.sphere.sdk.orders.commands.OrderUpdateCommandTest#changeShipmentState()}
+ {@include.example io.sphere.sdk.orders.commands.OrderUpdateCommandIntegrationTest#changeShipmentState()}
  */
 public final class ChangeShipmentState extends UpdateActionImpl<Order> {
     private final ShipmentState shipmentState;

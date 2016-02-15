@@ -10,7 +10,7 @@ import io.sphere.sdk.models.Referenceable;
 
  {@doc.gen intro}
 
- {@include.example io.sphere.sdk.categories.commands.CategoryUpdateCommandTest#changeParent()}
+ {@include.example io.sphere.sdk.categories.commands.CategoryUpdateCommandIntegrationTest#changeParent()}
 
  <p>Consult the documentation for <a href="{@docRoot}/io/sphere/sdk/meta/CategoryDocumentation.html#category-tree-changes">categories</a> for more information.</p>
  */

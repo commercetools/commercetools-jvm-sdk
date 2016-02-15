@@ -9,7 +9,7 @@ import io.sphere.sdk.expansion.MetaModelReferenceExpansionDsl;
 /**
  * <p>Creates a new customer group</p>
  *
- * {@include.example io.sphere.sdk.customergroups.commands.CustomerGroupCreateCommandTest#execution()}
+ * {@include.example io.sphere.sdk.customergroups.commands.CustomerGroupCreateCommandIntegrationTest#execution()}
  *
  * @see CustomerGroup
  */

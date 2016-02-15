@@ -13,7 +13,7 @@ import static java.lang.String.format;
  *
  *  {@doc.gen intro}
  *
- *  {@include.example io.sphere.sdk.customers.commands.CustomerUpdateCommandTest#setDefaultShippingAddress()}
+ *  {@include.example io.sphere.sdk.customers.commands.CustomerUpdateCommandIntegrationTest#setDefaultShippingAddress()}
  *
  *  @see Customer
  */

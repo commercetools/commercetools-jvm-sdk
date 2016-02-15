@@ -9,7 +9,7 @@ import io.sphere.sdk.products.Product;
  *
  * {@doc.gen intro}
  *
- * {@include.example io.sphere.sdk.products.commands.ProductUpdateCommandTest#changeName()}
+ * {@include.example io.sphere.sdk.products.commands.ProductUpdateCommandIntegrationTest#changeName()}
  */
 public final class ChangeName extends UpdateActionImpl<Product> {
     private final LocalizedString name;

@@ -55,7 +55,7 @@ public class PagedQueryResult<T> extends PagedResult<T> {
      * This field is returned by default.
      * For improved performance, calculating this field can be deactivated by using {@link QueryDsl#withFetchTotal(boolean)} and {@code false}.
      *
-     * {@include.example io.sphere.sdk.categories.queries.CategoryQueryTest#withFetchTotalFalseRemovesTotalFromOutput()}
+     * {@include.example io.sphere.sdk.categories.queries.CategoryQueryIntegrationTest#withFetchTotalFalseRemovesTotalFromOutput()}
      *
      * @return total or null
      */

@@ -33,10 +33,10 @@ import java.util.Optional;
  * and another field "cart" which can optionally have a cart if in the customer creation the cart id has been used.
  *
  * <p>An example for creating a customer without a cart:</p>
- * {@include.example io.sphere.sdk.customers.commands.CustomerCreateCommandTest#createCustomer()}
+ * {@include.example io.sphere.sdk.customers.commands.CustomerCreateCommandIntegrationTest#createCustomer()}
  *
  * <p>Example for creating a customer with a cart:</p>
- * {@include.example io.sphere.sdk.customers.commands.CustomerCreateCommandTest#createCustomerWithCart()}
+ * {@include.example io.sphere.sdk.customers.commands.CustomerCreateCommandIntegrationTest#createCustomerWithCart()}
  * <h3 id="verify-email">Verify the customers email address</h3>
  *
  * The customer contains the property {@link Customer#isEmailVerified()}, which is by default false.

@@ -9,7 +9,7 @@ import io.sphere.sdk.search.SearchKeywords;
  *
  * {@doc.gen intro}
  *
- * {@include.example io.sphere.sdk.products.commands.ProductUpdateCommandTest#setSearchKeywords()}
+ * {@include.example io.sphere.sdk.products.commands.ProductUpdateCommandIntegrationTest#setSearchKeywords()}
  */
 public final class SetSearchKeywords extends UpdateActionImpl<Product> {
     private final SearchKeywords searchKeywords;

@@ -12,7 +12,7 @@ import io.sphere.sdk.taxcategories.TaxCategory;
 
  {@doc.gen intro}
 
- {@include.example io.sphere.sdk.carts.commands.CartUpdateCommandTest#setCustomShippingMethod()}
+ {@include.example io.sphere.sdk.carts.commands.CartUpdateCommandIntegrationTest#setCustomShippingMethod()}
  */
 public final class SetCustomShippingMethod extends UpdateActionImpl<Cart> {
 

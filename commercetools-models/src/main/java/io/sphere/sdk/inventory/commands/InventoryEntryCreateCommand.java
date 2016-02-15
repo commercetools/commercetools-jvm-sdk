@@ -7,7 +7,7 @@ import io.sphere.sdk.inventory.InventoryEntryDraft;
 import io.sphere.sdk.inventory.expansion.InventoryEntryExpansionModel;
 
 /**
- * {@include.example io.sphere.sdk.inventory.commands.InventoryEntryCreateCommandTest#execution()}
+ * {@include.example io.sphere.sdk.inventory.commands.InventoryEntryCreateCommandIntegrationTest#execution()}
  */
 public interface InventoryEntryCreateCommand extends DraftBasedCreateCommand<InventoryEntry, InventoryEntryDraft>, MetaModelReferenceExpansionDsl<InventoryEntry, InventoryEntryCreateCommand, InventoryEntryExpansionModel<InventoryEntry>> {
     static InventoryEntryCreateCommand of(final InventoryEntryDraft body) {

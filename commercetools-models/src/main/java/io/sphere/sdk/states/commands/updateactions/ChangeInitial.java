@@ -9,7 +9,7 @@ import io.sphere.sdk.states.State;
  *
  * {@doc.gen intro}
  *
- * {@include.example io.sphere.sdk.states.commands.StateUpdateCommandTest#changeInitial()}
+ * {@include.example io.sphere.sdk.states.commands.StateUpdateCommandIntegrationTest#changeInitial()}
  */
 public final class ChangeInitial extends UpdateActionImpl<State> {
     private final boolean inital;

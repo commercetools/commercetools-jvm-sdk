@@ -59,7 +59,7 @@ import javax.annotation.Nullable;
 
  Example for updating the description:
 
- {@include.example io.sphere.sdk.types.commands.TypeUpdateCommandTest#setDescription()}
+ {@include.example io.sphere.sdk.types.commands.TypeUpdateCommandIntegrationTest#setDescription()}
 
  <h3 id="delete-type">Delete a type</h3>
 

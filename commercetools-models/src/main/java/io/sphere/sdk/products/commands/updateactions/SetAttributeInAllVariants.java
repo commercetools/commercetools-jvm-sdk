@@ -13,7 +13,7 @@ import javax.annotation.Nullable;
  *
  * {@doc.gen intro}
  *
- * {@include.example io.sphere.sdk.products.commands.ProductUpdateCommandTest#setAttributeInAllVariants()}
+ * {@include.example io.sphere.sdk.products.commands.ProductUpdateCommandIntegrationTest#setAttributeInAllVariants()}
  *
  * @see io.sphere.sdk.products.commands.updateactions.SetAttribute
  */

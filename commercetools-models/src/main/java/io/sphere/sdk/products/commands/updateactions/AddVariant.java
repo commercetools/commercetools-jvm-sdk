@@ -14,7 +14,7 @@ import java.util.List;
  *
  * {@doc.gen intro}
  *
- * {@include.example io.sphere.sdk.products.commands.ProductUpdateCommandTest#addVariant()}
+ * {@include.example io.sphere.sdk.products.commands.ProductUpdateCommandIntegrationTest#addVariant()}
  *
  * @see io.sphere.sdk.products.commands.updateactions.RemoveVariant
  * @see ProductData#getAllVariants()

@@ -10,7 +10,7 @@ import javax.annotation.Nullable;
  *
  *  {@doc.gen intro}
  *
- * {@include.example io.sphere.sdk.customers.commands.CustomerUpdateCommandTest#nameUpdates()}
+ * {@include.example io.sphere.sdk.customers.commands.CustomerUpdateCommandIntegrationTest#nameUpdates()}
  *
  * @see Customer
  * @see io.sphere.sdk.customers.commands.CustomerUpdateCommand

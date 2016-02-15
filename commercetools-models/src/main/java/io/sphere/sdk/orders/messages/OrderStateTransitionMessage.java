@@ -14,7 +14,7 @@ import java.time.ZonedDateTime;
 /**
  * This message is the result of the {@link io.sphere.sdk.products.commands.updateactions.TransitionState} update action.
  *
- * {@include.example io.sphere.sdk.orders.commands.OrderUpdateCommandTest#transitionState()}
+ * {@include.example io.sphere.sdk.orders.commands.OrderUpdateCommandIntegrationTest#transitionState()}
  *
  * @see io.sphere.sdk.orders.Order
  * @see Order#getState()

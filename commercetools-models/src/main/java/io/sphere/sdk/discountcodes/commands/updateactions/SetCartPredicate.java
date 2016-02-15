@@ -12,7 +12,7 @@ import java.util.Optional;
  *
  * {@doc.gen intro}
  *
- * {@include.example io.sphere.sdk.discountcodes.commands.DiscountCodeUpdateCommandTest#setCartPredicate()}
+ * {@include.example io.sphere.sdk.discountcodes.commands.DiscountCodeUpdateCommandIntegrationTest#setCartPredicate()}
  */
 public final class SetCartPredicate extends UpdateActionImpl<DiscountCode> {
     @Nullable

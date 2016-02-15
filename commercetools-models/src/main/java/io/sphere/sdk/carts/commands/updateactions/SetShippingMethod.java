@@ -13,7 +13,7 @@ import javax.annotation.Nullable;
  *
  *  {@doc.gen intro}
  *
- * {@include.example io.sphere.sdk.carts.commands.CartUpdateCommandTest#setShippingMethod()}
+ * {@include.example io.sphere.sdk.carts.commands.CartUpdateCommandIntegrationTest#setShippingMethod()}
  */
 public final class SetShippingMethod extends UpdateActionImpl<Cart> {
     @Nullable

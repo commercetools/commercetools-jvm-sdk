@@ -9,7 +9,7 @@ import io.sphere.sdk.payments.TransactionDraft;
  *
  * {@doc.gen intro}
  *
- * {@include.example io.sphere.sdk.payments.commands.PaymentUpdateCommandTest#transActions()}
+ * {@include.example io.sphere.sdk.payments.commands.PaymentUpdateCommandIntegrationTest#transActions()}
  *
  *  @see Payment#getTransactions()
  *  @see io.sphere.sdk.payments.messages.PaymentTransactionAddedMessage

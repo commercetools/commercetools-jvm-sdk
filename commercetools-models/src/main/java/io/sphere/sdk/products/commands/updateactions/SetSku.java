@@ -13,7 +13,7 @@ import javax.annotation.Nullable;
  *
  * {@doc.gen intro}
  *
- * {@include.example io.sphere.sdk.products.queries.ProductProjectionQueryTest#queryBySku()}
+ * {@include.example io.sphere.sdk.products.queries.ProductProjectionQueryIntegrationTest#queryBySku()}
  */
 public final class SetSku extends UpdateActionImpl<Product> {
     private final Integer variantId;
