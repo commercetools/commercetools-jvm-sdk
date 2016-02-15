@@ -32,6 +32,12 @@
             <version>${project.version}</version>
             <scope>compile</scope>
         </dependency>
+        <dependency>
+            <groupId>net.sourceforge.plantuml</groupId>
+            <artifactId>plantuml</artifactId>
+            <version>8019</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
     <build>
         <plugins>
