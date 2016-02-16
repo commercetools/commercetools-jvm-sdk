@@ -12,6 +12,9 @@ import org.apache.commons.lang3.StringUtils;
 
 import javax.annotation.Nullable;
 import java.nio.charset.StandardCharsets;
+import java.time.ZoneOffset;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
@@ -36,6 +39,7 @@ public class SphereException extends RuntimeException {
     @Nullable
     private HttpRequestIntent httpRequestIntent;
     private List<String> additionalNotes = new LinkedList<>();
+    private final String dateAsString = DateTimeFormatter.ISO_INSTANT.format(ZonedDateTime.now().withZoneSameInstant(ZoneOffset.UTC));
 
     public SphereException(final String message, final Throwable cause) {
         super(message, cause);
@@ -101,7 +105,6 @@ public class SphereException extends RuntimeException {
                 .append(Optional.ofNullable(getSphereRequest()).map(x -> x.httpRequestIntent()).map(x -> "" + x.getHttpMethod() + " " + x.getPath()).map(x -> "endpoint: " + x + "\n").orElse(""))
                 .append("Java: ").append(System.getProperty("java.version")).append("\n")
                 .append("cwd: ").append(System.getProperty("user.dir")).append("\n")
-                .append("date: ").append(new Date()).append("\n")
                 .append("sphere request: ").append(Optional.ofNullable(getSphereRequest()).map(Object::toString).orElse("<unknown>")).append("\n")
                         //duplicated in case SphereRequest does not implement a proper to String
                 .append(httpRequestLine())
@@ -146,6 +149,8 @@ public class SphereException extends RuntimeException {
                         .append(" failed ")
                         .append(responseCode)
                         .append(correlationId)
+                        .append(" on ")
+                        .append(dateAsString)
                         .append("\n");
             }
             return builder.toString();
