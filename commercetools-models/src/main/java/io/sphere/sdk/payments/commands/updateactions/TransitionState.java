@@ -14,7 +14,7 @@ import java.util.Optional;
  *
  * {@doc.gen intro}
  *
- * {@include.example io.sphere.sdk.payments.commands.PaymentUpdateCommandTest#transitionState()}
+ * {@include.example io.sphere.sdk.payments.commands.PaymentUpdateCommandIntegrationTest#transitionState()}
  *
  *  @see Payment
  *  @see io.sphere.sdk.payments.messages.PaymentStatusStateTransitionMessage

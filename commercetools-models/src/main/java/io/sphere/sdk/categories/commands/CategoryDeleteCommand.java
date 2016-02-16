@@ -9,7 +9,7 @@ import io.sphere.sdk.models.Versioned;
 /**
  * Deletes a category in SPHERE.IO.
  *
- * {@include.example io.sphere.sdk.categories.commands.CategoryDeleteCommandTest#execution()}
+ * {@include.example io.sphere.sdk.categories.commands.CategoryDeleteCommandIntegrationTest#execution()}
  */
 public interface CategoryDeleteCommand extends MetaModelReferenceExpansionDsl<Category, CategoryDeleteCommand, CategoryExpansionModel<Category>>, DeleteCommand<Category> {
 

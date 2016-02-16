@@ -177,4 +177,13 @@ public class QueryModelImpl<T> extends Base implements QueryModel<T> {
         return toStream(items)
                 .map(StringQuerySortingModel::normalize).collect(toList());
     }
+
+    @Deprecated
+    public QuerySort<T> sort(final QuerySortDirection sortDirection) {
+        return new SphereQuerySort<>(this, sortDirection);
+    }
+
+    public DirectionlessQuerySort<T> sort() {
+        return new DirectionlessQuerySort<>(this);
+    }
 }

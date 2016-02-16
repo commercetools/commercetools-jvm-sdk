@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * Retrieves all the shipping methods that can ship to the shipping address of the given cart.
  *
- * {@include.example io.sphere.sdk.shippingmethods.queries.ShippingMethodsByCartGetTest#execution()}
+ * {@include.example io.sphere.sdk.shippingmethods.queries.ShippingMethodsByCartGetIntegrationTest#execution()}
  */
 public interface ShippingMethodsByCartGet extends SphereRequest<List<ShippingMethod>> {
     static ShippingMethodsByCartGet of(final Referenceable<Cart> cart) {

@@ -12,7 +12,7 @@ import io.sphere.sdk.queries.MetaModelQueryDsl;
  * {@doc.gen summary customers}
  *
  * <p>Example for fetching a customer by id and expand the customer group:</p>
- * {@include.example io.sphere.sdk.customers.queries.CustomerQueryTest#customerGroupReferenceExpansion()}
+ * {@include.example io.sphere.sdk.customers.queries.CustomerQueryIntegrationTest#customerGroupReferenceExpansion()}
  */
 public interface CustomerQuery extends MetaModelQueryDsl<Customer, CustomerQuery, CustomerQueryModel, CustomerExpansionModel<Customer>> {
     /**

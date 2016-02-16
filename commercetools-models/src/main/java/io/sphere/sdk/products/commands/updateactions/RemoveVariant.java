@@ -9,7 +9,7 @@ import io.sphere.sdk.products.ProductVariant;
  *
  * {@doc.gen intro}
  *
- * {@include.example io.sphere.sdk.products.commands.ProductUpdateCommandTest#addVariant()}
+ * {@include.example io.sphere.sdk.products.commands.ProductUpdateCommandIntegrationTest#addVariant()}
  *
  * @see io.sphere.sdk.products.commands.updateactions.AddVariant
  */

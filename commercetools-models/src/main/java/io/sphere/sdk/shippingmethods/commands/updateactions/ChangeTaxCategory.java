@@ -12,7 +12,7 @@ import io.sphere.sdk.taxcategories.TaxCategory;
  *
  * {@doc.gen intro}
  *
- * {@include.example io.sphere.sdk.shippingmethods.commands.ShippingMethodUpdateCommandTest#changeTaxCategory()}
+ * {@include.example io.sphere.sdk.shippingmethods.commands.ShippingMethodUpdateCommandIntegrationTest#changeTaxCategory()}
  */
 public final class ChangeTaxCategory extends UpdateActionImpl<ShippingMethod> {
     private final Reference<TaxCategory> taxCategory;

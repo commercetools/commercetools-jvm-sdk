@@ -11,7 +11,7 @@ import javax.annotation.Nullable;
  *
  * {@doc.gen intro}
  *
- * {@include.example io.sphere.sdk.payments.commands.PaymentUpdateCommandTest#setMethodInfoName()}
+ * {@include.example io.sphere.sdk.payments.commands.PaymentUpdateCommandIntegrationTest#setMethodInfoName()}
  *
  *
  * @see Payment

@@ -11,7 +11,7 @@ import java.time.LocalDate;
  *
  *  {@doc.gen intro}
  *
- * {@include.example io.sphere.sdk.customers.commands.CustomerUpdateCommandTest#setDateOfBirth()}
+ * {@include.example io.sphere.sdk.customers.commands.CustomerUpdateCommandIntegrationTest#setDateOfBirth()}
  */
 public final class SetDateOfBirth extends UpdateActionImpl<Customer> {
     @Nullable

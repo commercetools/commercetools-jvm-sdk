@@ -10,7 +10,7 @@ import javax.annotation.Nullable;
  *
  * {@doc.gen intro}
  *
- * {@include.example io.sphere.sdk.reviews.commands.ReviewUpdateCommandTest#setRating()}
+ * {@include.example io.sphere.sdk.reviews.commands.ReviewUpdateCommandIntegrationTest#setRating()}
  */
 public final class SetRating extends UpdateActionImpl<Review> {
     @Nullable

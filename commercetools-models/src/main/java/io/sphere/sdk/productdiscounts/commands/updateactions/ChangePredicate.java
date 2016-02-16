@@ -9,7 +9,7 @@ import io.sphere.sdk.productdiscounts.ProductDiscountPredicate;
  *
  * {@doc.gen intro}
  *
- * {@include.example io.sphere.sdk.productdiscounts.commands.ProductDiscountUpdateCommandTest#changePredicate()}
+ * {@include.example io.sphere.sdk.productdiscounts.commands.ProductDiscountUpdateCommandIntegrationTest#changePredicate()}
  */
 public final class ChangePredicate extends UpdateActionImpl<ProductDiscount> {
     private final String predicate;

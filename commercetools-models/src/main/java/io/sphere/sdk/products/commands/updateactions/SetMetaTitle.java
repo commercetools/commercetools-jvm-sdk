@@ -11,10 +11,10 @@ import javax.annotation.Nullable;
  *
  * {@doc.gen intro}
  *
- * {@include.example io.sphere.sdk.products.commands.ProductUpdateCommandTest#setMetaTitle()}
+ * {@include.example io.sphere.sdk.products.commands.ProductUpdateCommandIntegrationTest#setMetaTitle()}
  *
  * <p>Create update actions to set the SEO attributes title, description and keywords altogether:</p>
- * {@include.example io.sphere.sdk.products.commands.ProductUpdateCommandTest#setMetaAttributes()}
+ * {@include.example io.sphere.sdk.products.commands.ProductUpdateCommandIntegrationTest#setMetaAttributes()}
  */
 public final class SetMetaTitle extends UpdateActionImpl<Product> {
     @Nullable

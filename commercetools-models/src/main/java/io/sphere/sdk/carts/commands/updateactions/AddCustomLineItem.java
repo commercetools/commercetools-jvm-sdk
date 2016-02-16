@@ -19,10 +19,10 @@ import javax.money.MonetaryAmount;
  {@doc.gen intro}
 
  <p>Add a simple {@link io.sphere.sdk.carts.CustomLineItem}:</p>
- {@include.example io.sphere.sdk.carts.commands.CartUpdateCommandTest#addCustomLineItem()}
+ {@include.example io.sphere.sdk.carts.commands.CartUpdateCommandIntegrationTest#addCustomLineItem()}
 
  <p>Add a {@link io.sphere.sdk.carts.CustomLineItem} with {@link io.sphere.sdk.types.CustomFields}:</p>
- {@include.example io.sphere.sdk.carts.CustomLineItemCustomFieldsTest#creation()}
+ {@include.example io.sphere.sdk.carts.CustomLineItemCustomFieldsIntegrationTest#creation()}
 
  @see Cart#getCustomLineItems()
  @see RemoveCustomLineItem

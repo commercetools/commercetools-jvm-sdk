@@ -6,7 +6,7 @@ import io.sphere.sdk.commands.UpdateActionImpl;
 /**
  * Changes the order hint of a category.
  *
- * {@include.example io.sphere.sdk.categories.commands.CategoryUpdateCommandTest#changeOrderHint()}
+ * {@include.example io.sphere.sdk.categories.commands.CategoryUpdateCommandIntegrationTest#changeOrderHint()}
  */
 public final class ChangeOrderHint extends UpdateActionImpl<Category> {
     private final String orderHint;

@@ -2,9 +2,7 @@ package io.sphere.sdk.messages.queries;
 
 import io.sphere.sdk.messages.Message;
 import io.sphere.sdk.messages.MessageDerivateHint;
-import io.sphere.sdk.queries.QueryModel;
-import io.sphere.sdk.queries.QueryModelImpl;
-import io.sphere.sdk.queries.QueryPredicate;
+import io.sphere.sdk.queries.*;
 
 final class MessageTypeQueryModelImpl extends QueryModelImpl<Message> implements MessageTypeQueryModel {
     public MessageTypeQueryModelImpl(final QueryModel<Message> parent, final String pathSegment) {

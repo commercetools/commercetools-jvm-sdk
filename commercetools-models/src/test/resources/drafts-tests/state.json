@@ -1,0 +1,11 @@
+{
+  "key": "StateCreateCommandIntegrationTest",
+  "type": "ProductState",
+  "initial": true,
+  "transitions": [
+    {
+      "typeId": "state",
+      "id": "other-state"
+    }
+  ]
+}

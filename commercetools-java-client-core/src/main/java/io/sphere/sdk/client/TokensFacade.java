@@ -18,7 +18,7 @@ public final class TokensFacade extends Base {
     /**
      * Fetches a new access token.
      *
-     * {@include.example io.sphere.sdk.client.TokensFacadeTest#fetchAccessToken()}
+     * {@include.example io.sphere.sdk.client.TokensFacadeIntegrationTest#fetchAccessToken()}
      *
      * @param authConfig the commercetools project which the token should belong to
      * @return token

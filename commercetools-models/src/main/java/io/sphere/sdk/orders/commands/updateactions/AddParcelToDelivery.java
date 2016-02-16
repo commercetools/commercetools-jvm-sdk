@@ -10,7 +10,7 @@ import javax.annotation.Nullable;
 
     {@doc.gen intro}
 
-    {@include.example io.sphere.sdk.orders.commands.OrderUpdateCommandTest#addParcelToDelivery()}
+    {@include.example io.sphere.sdk.orders.commands.OrderUpdateCommandIntegrationTest#addParcelToDelivery()}
 
  @see Delivery#getParcels()
  */

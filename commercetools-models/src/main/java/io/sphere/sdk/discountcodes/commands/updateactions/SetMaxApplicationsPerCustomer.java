@@ -10,7 +10,7 @@ import javax.annotation.Nullable;
  *
  * {@doc.gen intro}
  *
- * {@include.example io.sphere.sdk.discountcodes.commands.DiscountCodeUpdateCommandTest#setMaxApplicationsPerCustomer()}
+ * {@include.example io.sphere.sdk.discountcodes.commands.DiscountCodeUpdateCommandIntegrationTest#setMaxApplicationsPerCustomer()}
  */
 public final class SetMaxApplicationsPerCustomer extends UpdateActionImpl<DiscountCode> {
     @Nullable

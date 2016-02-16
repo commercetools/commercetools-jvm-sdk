@@ -10,7 +10,7 @@ import javax.annotation.Nullable;
  *
  * {@doc.gen intro}
  *
- * {@include.example io.sphere.sdk.payments.commands.PaymentUpdateCommandTest#setMethodInfoMethod()}
+ * {@include.example io.sphere.sdk.payments.commands.PaymentUpdateCommandIntegrationTest#setMethodInfoMethod()}
  *
  *
  * @see Payment

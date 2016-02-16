@@ -9,7 +9,7 @@ import io.sphere.sdk.producttypes.ProductType;
  *
  * {@doc.gen intro}
  *
- * {@include.example io.sphere.sdk.producttypes.commands.ProductTypeUpdateCommandTest#addAttributeDefinition()}
+ * {@include.example io.sphere.sdk.producttypes.commands.ProductTypeUpdateCommandIntegrationTest#addAttributeDefinition()}
  *
  * @see ProductType#getAttributes()
  * @see io.sphere.sdk.products.ProductVariant#getAttributes()

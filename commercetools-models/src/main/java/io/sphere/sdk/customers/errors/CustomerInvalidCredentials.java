@@ -6,7 +6,7 @@ import io.sphere.sdk.models.errors.SphereError;
 /**
  * A customer endpoint specific error, the account with the given credentials have not been found.
  *
- * {@include.example io.sphere.sdk.customers.commands.CustomerChangePasswordCommandTest#execution()}
+ * {@include.example io.sphere.sdk.customers.commands.CustomerChangePasswordCommandIntegrationTest#execution()}
  */
 public final class CustomerInvalidCredentials extends SphereError {
     public static final String CODE = "InvalidCredentials";

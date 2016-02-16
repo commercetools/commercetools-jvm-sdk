@@ -22,13 +22,13 @@ import static io.sphere.sdk.http.HttpMethod.POST;
  * If the customer forgot the password reset it with {@link CustomerCreatePasswordTokenCommand}.
  *
  * <p>Example for a simple sign in without any carts involved:</p>
- * {@include.example io.sphere.sdk.customers.commands.CustomerSignInCommandTest#execution()}
+ * {@include.example io.sphere.sdk.customers.commands.CustomerSignInCommandIntegrationTest#execution()}
  *
  * <p>Example for a signin where the customer has a cart and signs in with an anonymous cart</p>
- * {@include.example io.sphere.sdk.customers.commands.CustomerSignInCommandTest#signInWithAnonymousCart()}
+ * {@include.example io.sphere.sdk.customers.commands.CustomerSignInCommandIntegrationTest#signInWithAnonymousCart()}
  *
  *  <p>Example for invalid credentials:</p>
- * {@include.example io.sphere.sdk.customers.commands.CustomerSignInCommandTest#executionWithInvalidEmail()}
+ * {@include.example io.sphere.sdk.customers.commands.CustomerSignInCommandIntegrationTest#executionWithInvalidEmail()}
  *
  * @see io.sphere.sdk.customers.Customer
  * @see CustomerCreatePasswordTokenCommand

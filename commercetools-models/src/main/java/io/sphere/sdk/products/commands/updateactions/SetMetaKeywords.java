@@ -11,9 +11,9 @@ import javax.annotation.Nullable;
  *
  * {@doc.gen intro}
  *
- * {@include.example io.sphere.sdk.products.commands.ProductUpdateCommandTest#setMetaKeywords()}
+ * {@include.example io.sphere.sdk.products.commands.ProductUpdateCommandIntegrationTest#setMetaKeywords()}
  *  <p>Create update actions to set the SEO attributes title, description and keywords altogether:</p>
- * {@include.example io.sphere.sdk.products.commands.ProductUpdateCommandTest#setMetaAttributes()}
+ * {@include.example io.sphere.sdk.products.commands.ProductUpdateCommandIntegrationTest#setMetaAttributes()}
  */
 public final class SetMetaKeywords extends UpdateActionImpl<Product> {
     @Nullable

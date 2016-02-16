@@ -9,8 +9,8 @@ import io.sphere.sdk.expansion.MetaModelReferenceExpansionDsl;
 /**
  * Creates a cart.
  *
- * {@include.example io.sphere.sdk.carts.commands.CartCreateCommandTest#execution()}
- * {@include.example io.sphere.sdk.carts.commands.CartCreateCommandTest#fullExample()}
+ * {@include.example io.sphere.sdk.carts.commands.CartCreateCommandIntegrationTest#execution()}
+ * {@include.example io.sphere.sdk.carts.commands.CartCreateCommandIntegrationTest#fullExample()}
  */
 public interface CartCreateCommand extends DraftBasedCreateCommand<Cart, CartDraft>, MetaModelReferenceExpansionDsl<Cart, CartCreateCommand, CartExpansionModel<Cart>> {
     static CartCreateCommand of(final CartDraft draft) {

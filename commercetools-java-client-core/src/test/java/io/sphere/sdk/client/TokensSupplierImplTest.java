@@ -23,7 +23,7 @@ public class TokensSupplierImplTest {
                 .contains(expectedValue);
         assertThat(expectedValue)
                 .contains("JVM")
-                .contains("SPHERE");
+                .contains("commercetools");
     }
 
     private static class RecordHttpClient implements HttpClient {

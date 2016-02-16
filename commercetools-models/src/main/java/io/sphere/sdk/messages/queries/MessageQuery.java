@@ -20,22 +20,22 @@ import static java.util.stream.Collectors.toList;
  {@doc.gen summary messages}
 
  <h3 id="query-any-message">Query for any message</h3>
- {@include.example io.sphere.sdk.messages.queries.MessageQueryTest#queryForAllMessages()}
+ {@include.example io.sphere.sdk.messages.queries.MessageQueryIntegrationTest#queryForAllMessages()}
 
  <h3 id="query-one-specific-message-class">Query for a specific message class</h3>
- {@include.example io.sphere.sdk.messages.queries.MessageQueryTest#queryForASpecificMessage()}
+ {@include.example io.sphere.sdk.messages.queries.MessageQueryIntegrationTest#queryForASpecificMessage()}
 
  <h3 id="query-multiple-specific-message-classes">Query for multiple specific message classes</h3>
- {@include.example io.sphere.sdk.messages.queries.MessageQueryTest#queryForMultipleSpecificMessageClasses()}
+ {@include.example io.sphere.sdk.messages.queries.MessageQueryIntegrationTest#queryForMultipleSpecificMessageClasses()}
 
  <h3 id="query-any-message-convert-to-specific-message">Query for any message and then convert into specific messages</h3>
- {@include.example io.sphere.sdk.messages.queries.MessageQueryTest#convertAfterQueryToSpecificMessageClasses()}
+ {@include.example io.sphere.sdk.messages.queries.MessageQueryIntegrationTest#convertAfterQueryToSpecificMessageClasses()}
 
  <h3 id="query-for-specific-resource">Query for any message for a specific resource like orders</h3>
- {@include.example io.sphere.sdk.messages.queries.MessageQueryTest#queryForASpecificResource()}
+ {@include.example io.sphere.sdk.messages.queries.MessageQueryIntegrationTest#queryForASpecificResource()}
 
  <h3 id="class-converting-errors">If you convert a message to the wrong class the behaviour is undefined, but then still null pointer exceptions can occur</h3>
- {@include.example io.sphere.sdk.messages.queries.MessageQueryTest#convertAfterQueryToSpecificMessageClassesButToTheWrongOne()}
+ {@include.example io.sphere.sdk.messages.queries.MessageQueryIntegrationTest#convertAfterQueryToSpecificMessageClassesButToTheWrongOne()}
 
  */
 public interface MessageQuery extends MetaModelQueryDsl<Message, MessageQuery, MessageQueryModel, MessageExpansionModel<Message>> {
@@ -65,7 +65,7 @@ public interface MessageQuery extends MetaModelQueryDsl<Message, MessageQuery, M
     /**
      * Creates a new query that queries only for messages that can be mapped to a certain Java type. This is a terminal operation so no changes can be done on the query.
      *
-     * {@include.example io.sphere.sdk.messages.queries.MessageQueryTest#queryForASpecificMessage()}
+     * {@include.example io.sphere.sdk.messages.queries.MessageQueryIntegrationTest#queryForASpecificMessage()}
      *
      * @param hint a container containing the message type and type references. You can find it as static field on the message you want, e.g., {@link io.sphere.sdk.orders.messages.DeliveryAddedMessage#MESSAGE_HINT}.
      * @param <T> the type of a single message that should be the outcome of a query.
@@ -80,7 +80,7 @@ public interface MessageQuery extends MetaModelQueryDsl<Message, MessageQuery, M
     /**
      * Creates a new query that queries only for messages that can be mapped to certain Java types. This is a terminal operation so no changes can be done on the query.
      *
-     * {@include.example io.sphere.sdk.messages.queries.MessageQueryTest#queryForMultipleSpecificMessageClasses()}
+     * {@include.example io.sphere.sdk.messages.queries.MessageQueryIntegrationTest#queryForMultipleSpecificMessageClasses()}
      *
      * @param messageHints internal containers which register the known messages
      * @return new query

@@ -11,7 +11,7 @@ import io.sphere.sdk.zones.expansion.ZoneExpansionModel;
 /**
  * Creates a zone in SPHERE.IO.
  *
- * {@include.example io.sphere.sdk.zones.commands.ZoneCreateCommandTest#execution()}
+ * {@include.example io.sphere.sdk.zones.commands.ZoneCreateCommandIntegrationTest#execution()}
  */
 public interface ZoneCreateCommand extends DraftBasedCreateCommand<Zone, ZoneDraft>, MetaModelReferenceExpansionDsl<Zone, ZoneCreateCommand, ZoneExpansionModel<Zone>> {
 

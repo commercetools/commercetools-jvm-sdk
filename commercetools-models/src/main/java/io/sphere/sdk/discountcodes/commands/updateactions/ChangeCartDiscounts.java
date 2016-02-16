@@ -15,7 +15,7 @@ import java.util.List;
  * {@doc.gen intro}
  *
  *
- * {@include.example io.sphere.sdk.discountcodes.commands.DiscountCodeUpdateCommandTest#changeCartDiscounts()}
+ * {@include.example io.sphere.sdk.discountcodes.commands.DiscountCodeUpdateCommandIntegrationTest#changeCartDiscounts()}
  *
  * @see DiscountCode#getCartDiscounts()
  */

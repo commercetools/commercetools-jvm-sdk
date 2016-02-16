@@ -10,7 +10,7 @@ import io.sphere.sdk.models.LocalizedString;
  *
  *  {@doc.gen intro}
  *
- * {@include.example io.sphere.sdk.channels.commands.ChannelUpdateCommandTest#changeName()}
+ * {@include.example io.sphere.sdk.channels.commands.ChannelUpdateCommandIntegrationTest#changeName()}
  */
 public final class ChangeName extends UpdateActionImpl<Channel> {
     private final LocalizedString name;

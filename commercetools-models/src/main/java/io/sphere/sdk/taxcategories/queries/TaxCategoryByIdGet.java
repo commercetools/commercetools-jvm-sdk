@@ -12,7 +12,7 @@ import java.util.function.Function;
 /**
  * Fetches a tax category by a known ID.
  *
- * {@include.example io.sphere.sdk.taxcategories.queries.TaxCategoryByIdGetTest#execution()}
+ * {@include.example io.sphere.sdk.taxcategories.queries.TaxCategoryByIdGetIntegrationTest#execution()}
  */
 public interface TaxCategoryByIdGet extends MetaModelGetDsl<TaxCategory, TaxCategory, TaxCategoryByIdGet, TaxCategoryExpansionModel<TaxCategory>> {
     static TaxCategoryByIdGet of(final Identifiable<TaxCategory> taxCategoryIdentifiable) {

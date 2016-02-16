@@ -9,7 +9,7 @@ import io.sphere.sdk.expansion.MetaModelReferenceExpansionDsl;
 /**
  * Creates a {@link CartDiscount}.
  *
- * {@include.example io.sphere.sdk.cartdiscounts.commands.CartDiscountCreateCommandTest#execution()}
+ * {@include.example io.sphere.sdk.cartdiscounts.commands.CartDiscountCreateCommandIntegrationTest#execution()}
  */
 public interface CartDiscountCreateCommand extends DraftBasedCreateCommand<CartDiscount, CartDiscountDraft>, MetaModelReferenceExpansionDsl<CartDiscount, CartDiscountCreateCommand, CartDiscountExpansionModel<CartDiscount>> {
     static CartDiscountCreateCommand of(final CartDiscountDraft draft) {

@@ -8,7 +8,7 @@ import io.sphere.sdk.zones.expansion.ZoneExpansionModel;
 /**
  Gets a zone by ID.
 
- {@include.example io.sphere.sdk.zones.queries.ZoneByIdGetTest#fetchById()}
+ {@include.example io.sphere.sdk.zones.queries.ZoneByIdGetIntegrationTest#fetchById()}
  */
 final class ZoneByIdGetImpl extends MetaModelGetDslImpl<Zone, Zone, ZoneByIdGet, ZoneExpansionModel<Zone>> implements ZoneByIdGet {
     ZoneByIdGetImpl(final String id) {

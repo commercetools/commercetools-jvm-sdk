@@ -9,7 +9,7 @@ import io.sphere.sdk.types.Type;
 
  {@doc.gen intro}
 
- {@include.example io.sphere.sdk.types.commands.TypeUpdateCommandTest#addFieldDefinition()}
+ {@include.example io.sphere.sdk.types.commands.TypeUpdateCommandIntegrationTest#addFieldDefinition()}
 
  @see Type#getFieldDefinitions()
  @see Type#getFieldDefinitionByName(String)

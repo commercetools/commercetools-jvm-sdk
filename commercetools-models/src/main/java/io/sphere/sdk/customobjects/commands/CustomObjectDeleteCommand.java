@@ -9,7 +9,7 @@ import io.sphere.sdk.json.TypeReferences;
 /**
  * <p>Deletes a custom object in SPHERE.IO.</p>
  *
- * {@include.example io.sphere.sdk.customobjects.commands.CustomObjectDeleteCommandTest#demo()}
+ * {@include.example io.sphere.sdk.customobjects.commands.CustomObjectDeleteCommandIntegrationTest#demo()}
  *
  * @param <T> type of the value of the custom object
  * @see CustomObject
@@ -132,7 +132,7 @@ public interface CustomObjectDeleteCommand<T> extends DeleteCommand<CustomObject
     /**
      * Deletes a custom object by id with optimistic concurrency control and returns the old custom object with the in {@code valueClass} specified value type.
      *
-     * {@include.example io.sphere.sdk.customobjects.commands.CustomObjectDeleteCommandTest#demoById()}
+     * {@include.example io.sphere.sdk.customobjects.commands.CustomObjectDeleteCommandIntegrationTest#demoById()}
      *
      * @param id the id of the custom object to delete
      * @param version the version of the custom object to delete

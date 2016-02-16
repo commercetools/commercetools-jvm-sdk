@@ -9,7 +9,7 @@ import io.sphere.sdk.orders.OrderState;
 
  {@doc.gen intro}
 
- {@include.example io.sphere.sdk.orders.commands.OrderUpdateCommandTest#changeOrderState()}
+ {@include.example io.sphere.sdk.orders.commands.OrderUpdateCommandIntegrationTest#changeOrderState()}
  */
 public final class ChangeOrderState extends UpdateActionImpl<Order> {
     private final OrderState orderState;

@@ -13,7 +13,7 @@ import java.time.ZonedDateTime;
 /**
  * This message is the result of the create review request.
  *
- * {@include.example io.sphere.sdk.reviews.commands.ReviewCreateCommandTest#createByCode()}
+ * {@include.example io.sphere.sdk.reviews.commands.ReviewCreateCommandIntegrationTest#createByCode()}
  *
  * @see io.sphere.sdk.reviews.commands.ReviewCreateCommand
  */

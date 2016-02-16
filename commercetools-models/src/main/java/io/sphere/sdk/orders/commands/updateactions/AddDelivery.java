@@ -14,7 +14,7 @@ import java.util.List;
 
  {@doc.gen intro}
 
- {@include.example io.sphere.sdk.orders.commands.OrderUpdateCommandTest#addDelivery()}
+ {@include.example io.sphere.sdk.orders.commands.OrderUpdateCommandIntegrationTest#addDelivery()}
 
  @see OrderShippingInfo#getDeliveries()
  @see io.sphere.sdk.orders.messages.DeliveryAddedMessage

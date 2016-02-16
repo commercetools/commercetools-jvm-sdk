@@ -8,7 +8,7 @@ import io.sphere.sdk.payments.Payment;
  *
  * {@doc.gen intro}
  *
- * {@include.example io.sphere.sdk.payments.commands.PaymentUpdateCommandTest#setInterfaceId()}
+ * {@include.example io.sphere.sdk.payments.commands.PaymentUpdateCommandIntegrationTest#setInterfaceId()}
  *
  * @see Payment
  */

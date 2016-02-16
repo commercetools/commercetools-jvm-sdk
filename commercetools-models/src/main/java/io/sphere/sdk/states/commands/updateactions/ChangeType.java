@@ -9,7 +9,7 @@ import io.sphere.sdk.states.StateType;
  *
  * {@doc.gen intro}
  *
- * {@include.example io.sphere.sdk.states.commands.StateUpdateCommandTest#changeType()}
+ * {@include.example io.sphere.sdk.states.commands.StateUpdateCommandIntegrationTest#changeType()}
  */
 public final class ChangeType extends UpdateActionImpl<State> {
     private final StateType type;

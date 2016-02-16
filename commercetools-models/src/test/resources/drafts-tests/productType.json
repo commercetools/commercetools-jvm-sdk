@@ -1,0 +1,21 @@
+{
+  "name": "ProductTypeCreateCommandIntegrationTest",
+  "key": "product-type-from-json",
+  "description": "product type from json",
+  "attributes": [
+    {
+      "type": {
+        "name": "text"
+      },
+      "name": "string-attribute-from-json",
+      "label": {
+        "en": "an attribute from JSON",
+        "de": "ein Attribut von JSON"
+      },
+      "isRequired": true,
+      "attributeConstraint": "None",
+      "inputHint": "SingleLine",
+      "isSearchable": true
+    }
+  ]
+}

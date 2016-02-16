@@ -13,7 +13,7 @@ import java.util.Optional;
  *
  * {@doc.gen intro}
  *
- * {@include.example io.sphere.sdk.reviews.commands.ReviewUpdateCommandTest#setTarget()}
+ * {@include.example io.sphere.sdk.reviews.commands.ReviewUpdateCommandIntegrationTest#setTarget()}
  */
 public final class SetTarget extends UpdateActionImpl<Review> {
     @Nullable

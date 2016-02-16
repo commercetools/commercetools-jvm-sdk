@@ -10,7 +10,7 @@ import io.sphere.sdk.types.customupdateactions.SetCustomFieldBase;
  *
  * {@doc.gen intro}
  *
- * {@include.example io.sphere.sdk.reviews.commands.ReviewUpdateCommandTest#setCustomType()}
+ * {@include.example io.sphere.sdk.reviews.commands.ReviewUpdateCommandIntegrationTest#setCustomType()}
  *
  * @see io.sphere.sdk.types.Custom
  */

@@ -11,10 +11,10 @@ import io.sphere.sdk.expansion.MetaModelReferenceExpansionDsl;
  * Creates/signs up a customer.
  *
  * <h3 id="create-customer-without-cart">Example for creating a customer without a cart</h3>
- * {@include.example io.sphere.sdk.customers.commands.CustomerCreateCommandTest#createCustomer()}
+ * {@include.example io.sphere.sdk.customers.commands.CustomerCreateCommandIntegrationTest#createCustomer()}
  *
  * <h3 id="create-customer-with-cart">Example for creating a customer with a cart</h3>
- * {@include.example io.sphere.sdk.customers.commands.CustomerCreateCommandTest#createCustomerWithCart()}
+ * {@include.example io.sphere.sdk.customers.commands.CustomerCreateCommandIntegrationTest#createCustomerWithCart()}
  *
  * @see Customer
  */

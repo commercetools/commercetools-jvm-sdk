@@ -11,10 +11,10 @@ import javax.money.MonetaryAmount;
  *
  * {@doc.gen intro}
  *
- * {@include.example io.sphere.sdk.payments.commands.PaymentUpdateCommandTest#refunded()}
+ * {@include.example io.sphere.sdk.payments.commands.PaymentUpdateCommandIntegrationTest#refunded()}
  *
  * <p>Example with multiple refunds:</p>
- * {@include.example io.sphere.sdk.payments.commands.PaymentUpdateCommandTest#multiRefund()}
+ * {@include.example io.sphere.sdk.payments.commands.PaymentUpdateCommandIntegrationTest#multiRefund()}
  *
  * @see Payment
  *

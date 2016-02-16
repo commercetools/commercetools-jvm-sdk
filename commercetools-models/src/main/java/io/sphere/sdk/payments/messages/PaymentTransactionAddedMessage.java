@@ -13,7 +13,7 @@ import java.time.ZonedDateTime;
 /**
  * This message is the result of the {@link io.sphere.sdk.payments.commands.updateactions.AddTransaction} update action.
  *
- * {@include.example io.sphere.sdk.payments.commands.PaymentUpdateCommandTest#transActions()}
+ * {@include.example io.sphere.sdk.payments.commands.PaymentUpdateCommandIntegrationTest#transActions()}
  *
  * @see io.sphere.sdk.payments.Payment
  * @see io.sphere.sdk.payments.commands.updateactions.AddTransaction

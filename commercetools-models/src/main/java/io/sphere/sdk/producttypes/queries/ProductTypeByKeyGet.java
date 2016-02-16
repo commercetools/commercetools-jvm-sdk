@@ -6,12 +6,11 @@ import io.sphere.sdk.producttypes.expansion.ProductTypeExpansionModel;
 import io.sphere.sdk.queries.MetaModelGetDsl;
 
 import java.util.List;
-import java.util.function.Function;
 
 /**
  * Retrieves a product type by a known key.
  *
- * {@include.example io.sphere.sdk.producttypes.queries.ProductTypeByKeyGetTest#execution()}
+ * {@include.example io.sphere.sdk.producttypes.queries.ProductTypeByKeyGetIntegrationTest#execution()}
  */
 public interface ProductTypeByKeyGet extends MetaModelGetDsl<ProductType, ProductType, ProductTypeByKeyGet, ProductTypeExpansionModel<ProductType>> {
     static ProductTypeByKeyGet of(final String key) {

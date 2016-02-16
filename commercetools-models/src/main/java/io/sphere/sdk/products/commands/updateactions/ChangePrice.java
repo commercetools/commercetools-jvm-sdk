@@ -12,7 +12,7 @@ import java.util.Optional;
  *
  * {@doc.gen intro}
  *
- * {@include.example io.sphere.sdk.products.commands.ProductUpdateCommandTest#changePrice()}
+ * {@include.example io.sphere.sdk.products.commands.ProductUpdateCommandIntegrationTest#changePrice()}
  */
 public final class ChangePrice extends UpdateActionImpl<Product> {
     private final PriceDraft price;

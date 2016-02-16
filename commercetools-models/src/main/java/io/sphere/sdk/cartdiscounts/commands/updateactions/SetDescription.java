@@ -11,7 +11,7 @@ import javax.annotation.Nullable;
  *
  *  {@doc.gen intro}
  *
- * {@include.example io.sphere.sdk.cartdiscounts.commands.CartDiscountUpdateCommandTest#setDescription()}
+ * {@include.example io.sphere.sdk.cartdiscounts.commands.CartDiscountUpdateCommandIntegrationTest#setDescription()}
  */
 public final class SetDescription extends UpdateActionImpl<CartDiscount> {
     @Nullable

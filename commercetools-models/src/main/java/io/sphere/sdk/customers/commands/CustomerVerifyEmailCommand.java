@@ -14,7 +14,7 @@ import static io.sphere.sdk.http.HttpMethod.POST;
 
  Verifies customer's email using a token.
 
- {@include.example io.sphere.sdk.customers.commands.CustomerCreateEmailTokenCommandTest#execution()}
+ {@include.example io.sphere.sdk.customers.commands.CustomerCreateEmailTokenCommandIntegrationTest#execution()}
 
  @see Customer
  @see Customer#isEmailVerified()

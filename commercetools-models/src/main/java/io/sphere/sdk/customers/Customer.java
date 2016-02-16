@@ -33,10 +33,10 @@ import java.util.Optional;
  * and another field "cart" which can optionally have a cart if in the customer creation the cart id has been used.
  *
  * <p>An example for creating a customer without a cart:</p>
- * {@include.example io.sphere.sdk.customers.commands.CustomerCreateCommandTest#createCustomer()}
+ * {@include.example io.sphere.sdk.customers.commands.CustomerCreateCommandIntegrationTest#createCustomer()}
  *
  * <p>Example for creating a customer with a cart:</p>
- * {@include.example io.sphere.sdk.customers.commands.CustomerCreateCommandTest#createCustomerWithCart()}
+ * {@include.example io.sphere.sdk.customers.commands.CustomerCreateCommandIntegrationTest#createCustomerWithCart()}
  * <h3 id="verify-email">Verify the customers email address</h3>
  *
  * The customer contains the property {@link Customer#isEmailVerified()}, which is by default false.
@@ -51,7 +51,7 @@ import java.util.Optional;
  *
  * <p>Example</p>
  *
- * {@include.example io.sphere.sdk.customers.commands.CustomerCreateEmailTokenCommandTest#execution()}
+ * {@include.example io.sphere.sdk.customers.commands.CustomerCreateEmailTokenCommandIntegrationTest#execution()}
  *
  * <h3 id="sign-in">Sign-in a customer</h3>
  *
@@ -66,10 +66,10 @@ import java.util.Optional;
  * and the optional cart.</p>
  *
  * <p>Example for a successful sign in:</p>
- * {@include.example io.sphere.sdk.customers.commands.CustomerSignInCommandTest#execution()}
+ * {@include.example io.sphere.sdk.customers.commands.CustomerSignInCommandIntegrationTest#execution()}
  *
  *  <p>Example for invalid credentials:</p>
- * {@include.example io.sphere.sdk.customers.commands.CustomerSignInCommandTest#executionWithInvalidEmail()}
+ * {@include.example io.sphere.sdk.customers.commands.CustomerSignInCommandIntegrationTest#executionWithInvalidEmail()}
  *
  * <h3 id="password-change">Changing the password of a customer</h3>
  * This covers the case that the customer forgot the password or just want to change it.
@@ -79,7 +79,7 @@ import java.util.Optional;
  * The customer receives the token and can submit it to the shop including the new password. To change then the password in the commercetools platform use {@link CustomerPasswordResetCommand}.
  * The result of the command is the updated customer, so if the customer needs to sign in after the password change the command {@link io.sphere.sdk.customers.commands.CustomerSignInCommand} is required.
  *
- * {@include.example io.sphere.sdk.customers.commands.CustomerPasswordResetCommandTest#execution()}
+ * {@include.example io.sphere.sdk.customers.commands.CustomerPasswordResetCommandIntegrationTest#execution()}
  *
  * <h3 id="update-customer">Update customer data</h3>
  *

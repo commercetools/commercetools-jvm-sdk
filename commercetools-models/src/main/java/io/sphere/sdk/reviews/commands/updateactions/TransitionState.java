@@ -14,7 +14,7 @@ import javax.annotation.Nullable;
  *
  * {@doc.gen intro}
  *
- * {@include.example io.sphere.sdk.reviews.commands.ReviewUpdateCommandTest#transitionState()}
+ * {@include.example io.sphere.sdk.reviews.commands.ReviewUpdateCommandIntegrationTest#transitionState()}
  */
 public final class TransitionState extends TransitionStateBase<Review> {
     private TransitionState(final @Nullable ResourceIdentifiable<State> state) {

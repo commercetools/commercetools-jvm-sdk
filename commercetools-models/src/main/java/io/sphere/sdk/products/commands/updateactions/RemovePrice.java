@@ -11,7 +11,7 @@ import java.util.Optional;
  *
  * {@doc.gen intro}
  *
- * {@include.example io.sphere.sdk.products.commands.ProductUpdateCommandTest#removePrice()}
+ * {@include.example io.sphere.sdk.products.commands.ProductUpdateCommandIntegrationTest#removePrice()}
  */
 public final class RemovePrice extends UpdateActionImpl<Product> {
     private final String priceId;

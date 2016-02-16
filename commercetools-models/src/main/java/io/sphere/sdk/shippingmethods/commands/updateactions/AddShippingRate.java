@@ -12,7 +12,7 @@ import io.sphere.sdk.zones.Zone;
  *
  * {@doc.gen intro}
  *
- * {@include.example io.sphere.sdk.shippingmethods.commands.ShippingMethodUpdateCommandTest#workingWithZones()}
+ * {@include.example io.sphere.sdk.shippingmethods.commands.ShippingMethodUpdateCommandIntegrationTest#workingWithZones()}
  *
  * @see ShippingMethod#getShippingRatesForZone(Referenceable)
  * @see ShippingMethod#getZoneRates()

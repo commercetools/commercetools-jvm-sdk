@@ -10,7 +10,7 @@ import io.sphere.sdk.payments.TransactionState;
  *
  * {@doc.gen intro}
  *
- * {@include.example io.sphere.sdk.payments.commands.PaymentUpdateCommandTest#changeTransactionState()}
+ * {@include.example io.sphere.sdk.payments.commands.PaymentUpdateCommandIntegrationTest#changeTransactionState()}
  *
  */
 public final class ChangeTransactionState extends UpdateActionImpl<Payment> {

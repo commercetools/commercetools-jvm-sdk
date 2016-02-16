@@ -14,7 +14,7 @@ import java.util.Optional;
 
  {@doc.gen intro}
 
- {@include.example io.sphere.sdk.carts.commands.CartUpdateCommandTest#setCustomerId()}
+ {@include.example io.sphere.sdk.carts.commands.CartUpdateCommandIntegrationTest#setCustomerId()}
  */
 public final class SetCustomerId extends UpdateActionImpl<Cart> {
     @Nullable

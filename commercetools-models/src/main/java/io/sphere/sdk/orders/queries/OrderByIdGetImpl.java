@@ -8,7 +8,7 @@ import io.sphere.sdk.queries.MetaModelGetDslImpl;
 /**
  Gets an order by ID.
 
- {@include.example io.sphere.sdk.orders.commands.OrderFromCartCreateCommandTest#execution()}
+ {@include.example io.sphere.sdk.orders.commands.OrderFromCartCreateCommandIntegrationTest#execution()}
  */
 final class OrderByIdGetImpl extends MetaModelGetDslImpl<Order, Order, OrderByIdGet, OrderExpansionModel<Order>> implements OrderByIdGet {
     OrderByIdGetImpl(final String id) {

@@ -12,7 +12,7 @@ import java.util.function.Function;
 /**
  * Fetches a customer by a known ID.
  *
- * {@include.example io.sphere.sdk.customers.queries.CustomerByIdGetTest#execution()}
+ * {@include.example io.sphere.sdk.customers.queries.CustomerByIdGetIntegrationTest#execution()}
  */
 public interface CustomerByIdGet extends MetaModelGetDsl<Customer, Customer, CustomerByIdGet, CustomerExpansionModel<Customer>> {
     static CustomerByIdGet of(final Identifiable<Customer> customer) {

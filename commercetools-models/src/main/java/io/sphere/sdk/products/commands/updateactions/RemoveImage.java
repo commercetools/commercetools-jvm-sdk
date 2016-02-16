@@ -11,7 +11,7 @@ import io.sphere.sdk.products.Product;
  *
  * {@doc.gen intro}
  *
- * {@include.example io.sphere.sdk.products.commands.ProductUpdateCommandTest#removeImage()}
+ * {@include.example io.sphere.sdk.products.commands.ProductUpdateCommandIntegrationTest#removeImage()}
  */
 public final class RemoveImage extends UpdateActionImpl<Product> {
     private final Integer variantId;

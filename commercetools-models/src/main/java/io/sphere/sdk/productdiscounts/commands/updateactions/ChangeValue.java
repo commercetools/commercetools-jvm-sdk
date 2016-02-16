@@ -9,7 +9,7 @@ import io.sphere.sdk.productdiscounts.ProductDiscountValue;
  *
  * {@doc.gen intro}
  *
- * {@include.example io.sphere.sdk.productdiscounts.commands.ProductDiscountUpdateCommandTest#changeValue()}
+ * {@include.example io.sphere.sdk.productdiscounts.commands.ProductDiscountUpdateCommandIntegrationTest#changeValue()}
  */
 public final class ChangeValue extends UpdateActionImpl<ProductDiscount> {
     private final ProductDiscountValue value;

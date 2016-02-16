@@ -8,7 +8,7 @@ import io.sphere.sdk.shippingmethods.ShippingMethod;
  *
  * {@doc.gen intro}
  *
- * {@include.example io.sphere.sdk.shippingmethods.commands.ShippingMethodUpdateCommandTest#changeName()}
+ * {@include.example io.sphere.sdk.shippingmethods.commands.ShippingMethodUpdateCommandIntegrationTest#changeName()}
  */
 public final class ChangeName extends UpdateActionImpl<ShippingMethod> {
     private final String name;

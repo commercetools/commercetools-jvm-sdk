@@ -9,7 +9,7 @@ import io.sphere.sdk.states.expansion.StateExpansionModel;
 /** Deletes a state.
 
  <p>Example:</p>
- {@include.example io.sphere.sdk.states.commands.StateDeleteCommandTest#execution()}
+ {@include.example io.sphere.sdk.states.commands.StateDeleteCommandIntegrationTest#execution()}
  */
 public interface StateDeleteCommand extends MetaModelReferenceExpansionDsl<State, StateDeleteCommand, StateExpansionModel<State>>, DeleteCommand<State> {
     static StateDeleteCommand of(final Versioned<State> versioned) {

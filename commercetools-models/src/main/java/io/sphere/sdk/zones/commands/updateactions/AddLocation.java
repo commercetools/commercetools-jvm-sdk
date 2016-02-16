@@ -9,7 +9,7 @@ import io.sphere.sdk.zones.Zone;
  *
  * {@doc.gen intro}
  *
- * {@include.example io.sphere.sdk.zones.commands.ZoneUpdateCommandTest#addLocationAndRemoveLocation()}
+ * {@include.example io.sphere.sdk.zones.commands.ZoneUpdateCommandIntegrationTest#addLocationAndRemoveLocation()}
  *
  * @see Zone#getLocations()
  */

@@ -8,7 +8,7 @@ import io.sphere.sdk.taxcategories.TaxCategory;
  *
  * {@doc.gen intro}
  *
- * {@include.example io.sphere.sdk.taxcategories.commands.TaxCategoryUpdateCommandTest#changeName()}
+ * {@include.example io.sphere.sdk.taxcategories.commands.TaxCategoryUpdateCommandIntegrationTest#changeName()}
  */
 public final class ChangeName extends UpdateActionImpl<TaxCategory> {
     private final String name;

@@ -12,7 +12,7 @@ import java.util.function.Function;
 /**
  Gets an order by ID.
 
- {@include.example io.sphere.sdk.orders.commands.OrderFromCartCreateCommandTest#execution()}
+ {@include.example io.sphere.sdk.orders.commands.OrderFromCartCreateCommandIntegrationTest#execution()}
  */
 public interface OrderByIdGet extends MetaModelGetDsl<Order, Order, OrderByIdGet, OrderExpansionModel<Order>> {
     static OrderByIdGet of(final Identifiable<Order> order) {

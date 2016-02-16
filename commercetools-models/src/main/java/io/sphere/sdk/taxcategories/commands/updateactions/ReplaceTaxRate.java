@@ -11,7 +11,7 @@ import static java.util.Objects.requireNonNull;
  *
  * {@doc.gen intro}
  *
- * {@include.example io.sphere.sdk.taxcategories.commands.TaxCategoryUpdateCommandTest#replaceTaxRate()}
+ * {@include.example io.sphere.sdk.taxcategories.commands.TaxCategoryUpdateCommandIntegrationTest#replaceTaxRate()}
  */
 public final class ReplaceTaxRate extends UpdateActionImpl<TaxCategory> {
     private final TaxRate taxRate;

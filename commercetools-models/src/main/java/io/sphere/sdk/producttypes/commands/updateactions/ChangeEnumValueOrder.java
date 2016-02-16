@@ -11,7 +11,7 @@ import java.util.List;
  *
  * {@doc.gen intro}
  *
- * {@include.example io.sphere.sdk.producttypes.commands.ProductTypeUpdateCommandTest#changeEnumValueOrder()}
+ * {@include.example io.sphere.sdk.producttypes.commands.ProductTypeUpdateCommandIntegrationTest#changeEnumValueOrder()}
  */
 public final class ChangeEnumValueOrder extends UpdateActionImpl<ProductType> {
     private final String attributeName;

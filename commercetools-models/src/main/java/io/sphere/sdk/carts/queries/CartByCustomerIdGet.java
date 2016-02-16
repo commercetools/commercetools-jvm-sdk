@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * Gets a cart by the customer id.
  *
- * {@include.example io.sphere.sdk.carts.queries.CartByCustomerIdGetTest#execution()}
+ * {@include.example io.sphere.sdk.carts.queries.CartByCustomerIdGetIntegrationTest#execution()}
  *
  * @see Customer#getId()
  */

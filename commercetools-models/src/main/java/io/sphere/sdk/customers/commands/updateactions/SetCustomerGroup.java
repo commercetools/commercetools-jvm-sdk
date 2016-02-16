@@ -14,7 +14,7 @@ import java.util.Optional;
  *
  *  {@doc.gen intro}
  *
- * {@include.example io.sphere.sdk.customers.commands.CustomerUpdateCommandTest#setCustomerGroup()}
+ * {@include.example io.sphere.sdk.customers.commands.CustomerUpdateCommandIntegrationTest#setCustomerGroup()}
  *
  * @see Customer
  */

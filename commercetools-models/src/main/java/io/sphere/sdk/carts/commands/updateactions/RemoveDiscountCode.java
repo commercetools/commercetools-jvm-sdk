@@ -11,7 +11,7 @@ import io.sphere.sdk.models.Referenceable;
  *
  *  {@doc.gen intro}
  *
- * {@include.example io.sphere.sdk.carts.commands.CartUpdateCommandTest#removeDiscountCode()}
+ * {@include.example io.sphere.sdk.carts.commands.CartUpdateCommandIntegrationTest#removeDiscountCode()}
  */
 public final class RemoveDiscountCode extends UpdateActionImpl<Cart> {
     private final Reference<DiscountCode> discountCode;

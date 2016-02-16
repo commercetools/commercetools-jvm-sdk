@@ -11,7 +11,7 @@ import javax.annotation.Nullable;
  *
  * {@doc.gen intro}
  *
- * {@include.example io.sphere.sdk.states.commands.StateUpdateCommandTest#setName()}
+ * {@include.example io.sphere.sdk.states.commands.StateUpdateCommandIntegrationTest#setName()}
  */
 public final class SetName extends UpdateActionImpl<State> {
     @Nullable

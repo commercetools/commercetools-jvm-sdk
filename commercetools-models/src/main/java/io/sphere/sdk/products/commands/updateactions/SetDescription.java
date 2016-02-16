@@ -9,7 +9,7 @@ import io.sphere.sdk.products.Product;
  *
  * {@doc.gen intro}
  *
- * {@include.example io.sphere.sdk.products.commands.ProductUpdateCommandTest#setDescription()}
+ * {@include.example io.sphere.sdk.products.commands.ProductUpdateCommandIntegrationTest#setDescription()}
  */
 public final class SetDescription extends UpdateActionImpl<Product> {
     private final LocalizedString description;

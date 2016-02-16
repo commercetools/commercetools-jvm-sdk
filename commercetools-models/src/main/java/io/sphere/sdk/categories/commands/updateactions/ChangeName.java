@@ -9,7 +9,7 @@ import io.sphere.sdk.models.LocalizedString;
  *
  *  {@doc.gen intro}
  *
- *  {@include.example io.sphere.sdk.categories.commands.CategoryUpdateCommandTest#changeName()}
+ *  {@include.example io.sphere.sdk.categories.commands.CategoryUpdateCommandIntegrationTest#changeName()}
  */
 public final class ChangeName extends UpdateActionImpl<Category> {
     private final LocalizedString name;

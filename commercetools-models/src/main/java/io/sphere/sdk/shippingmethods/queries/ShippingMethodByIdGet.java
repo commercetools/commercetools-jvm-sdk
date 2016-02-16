@@ -12,7 +12,7 @@ import java.util.function.Function;
 /**
  * Fetches a shipping method by ID.
  *
- * {@include.example io.sphere.sdk.shippingmethods.queries.ShippingMethodByIdGetTest#execution()}
+ * {@include.example io.sphere.sdk.shippingmethods.queries.ShippingMethodByIdGetIntegrationTest#execution()}
  */
 public interface ShippingMethodByIdGet extends MetaModelGetDsl<ShippingMethod, ShippingMethod, ShippingMethodByIdGet, ShippingMethodExpansionModel<ShippingMethod>> {
     static ShippingMethodByIdGet of(final Identifiable<ShippingMethod> shippingMethod) {

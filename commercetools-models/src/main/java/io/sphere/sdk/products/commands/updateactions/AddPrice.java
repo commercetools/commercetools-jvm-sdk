@@ -10,7 +10,7 @@ import io.sphere.sdk.products.ProductVariant;
  *
  * {@doc.gen intro}
  *
- * {@include.example io.sphere.sdk.products.commands.ProductUpdateCommandTest#addPrice()}
+ * {@include.example io.sphere.sdk.products.commands.ProductUpdateCommandIntegrationTest#addPrice()}
  *
  * @see ProductVariant#getPrices()
  */

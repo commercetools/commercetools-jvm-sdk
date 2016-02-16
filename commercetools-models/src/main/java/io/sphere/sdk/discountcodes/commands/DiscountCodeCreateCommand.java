@@ -7,7 +7,7 @@ import io.sphere.sdk.discountcodes.expansion.DiscountCodeExpansionModel;
 import io.sphere.sdk.expansion.MetaModelReferenceExpansionDsl;
 
 /**
- * {@include.example io.sphere.sdk.discountcodes.commands.DiscountCodeCreateCommandTest#execution()}
+ * {@include.example io.sphere.sdk.discountcodes.commands.DiscountCodeCreateCommandIntegrationTest#execution()}
  */
 public interface DiscountCodeCreateCommand extends DraftBasedCreateCommand<DiscountCode, DiscountCodeDraft>, MetaModelReferenceExpansionDsl<DiscountCode, DiscountCodeCreateCommand, DiscountCodeExpansionModel<DiscountCode>> {
 

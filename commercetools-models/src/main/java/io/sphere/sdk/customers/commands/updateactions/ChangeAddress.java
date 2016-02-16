@@ -11,7 +11,7 @@ import static java.lang.String.format;
  *
  *  {@doc.gen intro}
  *
- * {@include.example io.sphere.sdk.customers.commands.CustomerUpdateCommandTest#changeAddress()}
+ * {@include.example io.sphere.sdk.customers.commands.CustomerUpdateCommandIntegrationTest#changeAddress()}
  *
  * @see Customer
  */

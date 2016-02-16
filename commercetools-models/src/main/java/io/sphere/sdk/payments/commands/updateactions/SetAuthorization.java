@@ -12,7 +12,7 @@ import java.time.ZonedDateTime;
  *
  * {@doc.gen intro}
  *
- * {@include.example io.sphere.sdk.payments.commands.PaymentUpdateCommandTest#setAuthorization()}
+ * {@include.example io.sphere.sdk.payments.commands.PaymentUpdateCommandIntegrationTest#setAuthorization()}
  *
  * @see Payment
  *

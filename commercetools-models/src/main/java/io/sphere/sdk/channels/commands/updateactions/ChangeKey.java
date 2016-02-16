@@ -8,7 +8,7 @@ import io.sphere.sdk.commands.UpdateActionImpl;
  *
  *  {@doc.gen intro}
  *
- * {@include.example io.sphere.sdk.channels.commands.ChannelUpdateCommandTest#changeKey()}
+ * {@include.example io.sphere.sdk.channels.commands.ChannelUpdateCommandIntegrationTest#changeKey()}
  */
 public final class ChangeKey extends UpdateActionImpl<Channel> {
     private final String key;

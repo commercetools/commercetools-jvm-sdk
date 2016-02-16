@@ -14,7 +14,7 @@ import java.util.Map;
  *
  * {@doc.gen intro}
  *
- * {@include.example io.sphere.sdk.payments.commands.PaymentUpdateCommandTest#addInterfaceInteraction()}
+ * {@include.example io.sphere.sdk.payments.commands.PaymentUpdateCommandIntegrationTest#addInterfaceInteraction()}
  *
  * @see Payment
  * @see Payment#getInterfaceInteractions()

@@ -15,7 +15,7 @@ import java.util.Optional;
  *
  * {@doc.gen intro}
  *
- * {@include.example io.sphere.sdk.reviews.commands.ReviewUpdateCommandTest#setCustomer()}
+ * {@include.example io.sphere.sdk.reviews.commands.ReviewUpdateCommandIntegrationTest#setCustomer()}
  */
 public final class SetCustomer extends UpdateActionImpl<Review> {
     @Nullable

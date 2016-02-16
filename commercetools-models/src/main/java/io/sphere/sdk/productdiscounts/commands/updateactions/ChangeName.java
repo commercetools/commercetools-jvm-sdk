@@ -10,7 +10,7 @@ import io.sphere.sdk.productdiscounts.ProductDiscount;
 
  {@doc.gen intro}
 
- {@include.example io.sphere.sdk.productdiscounts.commands.ProductDiscountUpdateCommandTest#changeName()}
+ {@include.example io.sphere.sdk.productdiscounts.commands.ProductDiscountUpdateCommandIntegrationTest#changeName()}
 
  */
 public final class ChangeName extends UpdateActionImpl<ProductDiscount> {

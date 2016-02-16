@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * Retrieves a category by a known ID.
  *
- * {@include.example io.sphere.sdk.categories.queries.CategoryByIdGetTest#execution()}
+ * {@include.example io.sphere.sdk.categories.queries.CategoryByIdGetIntegrationTest#execution()}
  */
 public interface CategoryByIdGet extends MetaModelGetDsl<Category, Category, CategoryByIdGet, CategoryExpansionModel<Category>> {
     static CategoryByIdGet of(final Identifiable<Category> category) {

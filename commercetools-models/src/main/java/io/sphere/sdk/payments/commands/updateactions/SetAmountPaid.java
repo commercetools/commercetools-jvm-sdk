@@ -11,7 +11,7 @@ import javax.money.MonetaryAmount;
  *
  * {@doc.gen intro}
  *
- * {@include.example io.sphere.sdk.payments.commands.PaymentUpdateCommandTest#setAuthorization()} <!-- sic! -->
+ * {@include.example io.sphere.sdk.payments.commands.PaymentUpdateCommandIntegrationTest#setAuthorization()} <!-- sic! -->
  *
  * @see Payment
  *

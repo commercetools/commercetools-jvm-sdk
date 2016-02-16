@@ -8,7 +8,7 @@ import io.sphere.sdk.products.Product;
  *
  * {@doc.gen intro}
  *
- * {@include.example io.sphere.sdk.products.commands.ProductUpdateCommandTest#revertStagedChanges()}
+ * {@include.example io.sphere.sdk.products.commands.ProductUpdateCommandIntegrationTest#revertStagedChanges()}
  */
 public final class RevertStagedChanges extends UpdateActionImpl<Product> {
     private RevertStagedChanges() {

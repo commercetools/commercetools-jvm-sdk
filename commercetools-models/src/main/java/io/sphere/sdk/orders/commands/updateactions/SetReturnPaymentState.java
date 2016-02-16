@@ -10,7 +10,7 @@ import io.sphere.sdk.orders.ReturnPaymentState;
 
  {@doc.gen intro}
 
- {@include.example io.sphere.sdk.orders.commands.OrderUpdateCommandTest#setReturnPaymentState()}
+ {@include.example io.sphere.sdk.orders.commands.OrderUpdateCommandIntegrationTest#setReturnPaymentState()}
  */
 public final class SetReturnPaymentState extends UpdateActionImpl<Order> {
     private final String returnItemId;

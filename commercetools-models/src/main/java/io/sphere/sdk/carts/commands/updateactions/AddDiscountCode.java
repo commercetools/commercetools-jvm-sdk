@@ -10,7 +10,7 @@ import io.sphere.sdk.discountcodes.DiscountCode;
  *
  *  {@doc.gen intro}
  *
- *  {@include.example io.sphere.sdk.carts.commands.CartUpdateCommandTest#removeDiscountCode()}
+ *  {@include.example io.sphere.sdk.carts.commands.CartUpdateCommandIntegrationTest#removeDiscountCode()}
  *
  *  @see Cart#getDiscountCodes()
  *  @see CartDiscount#isRequiringDiscountCode()

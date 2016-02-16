@@ -11,7 +11,7 @@ import java.util.Set;
  *
  *  {@doc.gen intro}
  *
- *  {@include.example io.sphere.sdk.channels.commands.ChannelUpdateCommandTest#addRoles()}
+ *  {@include.example io.sphere.sdk.channels.commands.ChannelUpdateCommandIntegrationTest#addRoles()}
  *
  *  @see Channel#getRoles()
  */

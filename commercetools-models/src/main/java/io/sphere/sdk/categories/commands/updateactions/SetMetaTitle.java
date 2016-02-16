@@ -11,7 +11,7 @@ import javax.annotation.Nullable;
  *
  *  {@doc.gen intro}
  *
- * {@include.example io.sphere.sdk.categories.commands.CategoryUpdateCommandTest#setMetaTitle()}
+ * {@include.example io.sphere.sdk.categories.commands.CategoryUpdateCommandIntegrationTest#setMetaTitle()}
  */
 public final class SetMetaTitle extends UpdateActionImpl<Category> {
     @Nullable

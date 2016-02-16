@@ -9,7 +9,7 @@ import io.sphere.sdk.states.State;
  *
  * {@doc.gen intro}
  *
- * {@include.example io.sphere.sdk.states.commands.StateUpdateCommandTest#changeKey()}
+ * {@include.example io.sphere.sdk.states.commands.StateUpdateCommandIntegrationTest#changeKey()}
  */
 public final class ChangeKey extends UpdateActionImpl<State> {
     private final String key;

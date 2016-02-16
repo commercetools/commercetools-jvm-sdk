@@ -7,7 +7,7 @@ import io.sphere.sdk.carts.LineItemLike;
 /**
  * Identifies line items or custom line items and they quanity for a {@link Delivery}.
  *
- * {@include.example io.sphere.sdk.orders.commands.OrderUpdateCommandTest#addDelivery()}
+ * {@include.example io.sphere.sdk.orders.commands.OrderUpdateCommandIntegrationTest#addDelivery()}
  *
  * @see io.sphere.sdk.orders.commands.updateactions.AddDelivery
  */

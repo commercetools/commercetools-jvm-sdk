@@ -10,7 +10,7 @@ import javax.annotation.Nullable;
  *
  * {@doc.gen intro}
  *
- * {@include.example io.sphere.sdk.taxcategories.commands.TaxCategoryUpdateCommandTest#setDescription()}
+ * {@include.example io.sphere.sdk.taxcategories.commands.TaxCategoryUpdateCommandIntegrationTest#setDescription()}
  */
 public final class SetDescription extends UpdateActionImpl<TaxCategory> {
     @Nullable

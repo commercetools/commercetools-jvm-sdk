@@ -10,7 +10,7 @@ import io.sphere.sdk.types.Type;
 
  {@doc.gen intro}
 
- {@include.example io.sphere.sdk.types.commands.TypeUpdateCommandTest#addLocalizedEnumValue()}
+ {@include.example io.sphere.sdk.types.commands.TypeUpdateCommandIntegrationTest#addLocalizedEnumValue()}
 
  @see LocalizedEnumFieldType#getValues()
  */

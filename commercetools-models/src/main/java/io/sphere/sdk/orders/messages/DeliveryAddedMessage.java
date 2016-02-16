@@ -13,7 +13,7 @@ import java.time.ZonedDateTime;
 /**
  * This message is the result of the {@link io.sphere.sdk.orders.commands.updateactions.AddDelivery} update action.
  *
- * {@include.example io.sphere.sdk.orders.commands.OrderUpdateCommandTest#addDelivery()}
+ * {@include.example io.sphere.sdk.orders.commands.OrderUpdateCommandIntegrationTest#addDelivery()}
  *
  */
 @JsonDeserialize(as = DeliveryAddedMessage.class)//important to override annotation in Message class
