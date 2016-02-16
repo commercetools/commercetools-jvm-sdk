@@ -63,6 +63,10 @@ import java.util.function.Supplier;
  <h3 id="ning-logger">Remove the chatty output of the Ning HTTP client</h3>
  The current Java client uses internally ning and it logs by default a lot, so you need to set the loglevel in your log configuration.
  For logback with {@code logback.xml} or {@code logback-test.xml} the setting is {@code <logger name="com.ning.http.client" level="WARN"/>}.
+
+ <h3 id="using-loggers-to-reproduce-problems">Use the logger to reproduce problems</h3>
+
+ Have a look at the <a href="https://github.com/sphereio/commercetools-jvm-sdk-reproducer-example" target="_blank">sphereio/commercetools-jvm-sdk-reproducer-example</a>.
  */
 public final class SphereInternalLogger {
     private final Logger underlyingLogger;
