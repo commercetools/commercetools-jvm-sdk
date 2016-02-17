@@ -6,6 +6,7 @@ cache:
     - $HOME/.m2/repository
 script:
   - mvn clean test verify javadoc:aggregate
+  - mvn exec:java -pl commercetools-models -Dexec.mainClass="io.sphere.sdk.client.MainMethodThreadLeakTest" -Dexec.classpathScope="test"
 env:
   global:
   - secure: NtzrTSpGRmHIeK+Ojhv/xrHE+3k2iq36MnS04hwoJJRtlA1sSCs6Wrw+JKWcIfdscPSxqCZy9UkLVUvSm05Qav4mcsDhQ/hdHc7htqT1+mQ1bFs0HdvYUGJsYpL1yV/fd9vZPBKyfbkIPv4+5luYhbGUG5+0mv8PflcO+rCDGH8=
@@ -15,3 +16,7 @@ env:
   - secure: gYLjISYqlAe0A14uJDLZRgjN0sTCVpzwhdAQZtmr0RXONIlmV3S8RnfbkxgCkru5ApY0ctrmvZEq4Ky2uc8meP9YNjnz/JnFjpS27A4UBqybjvzv6TMsH+Pb+NCI5MHUi4Kkl0xSVEUGlUbpv4rP2cABu7WWA+FOc6NH2BlZ9/k=
   - secure: FgdPUoLle3yRY6EprUBqJqLLxiFkwSipECRINFY64Z4voVXwqUT91d6FRYckAHK+DzkeblCyk2oWfsOcqpEyJe6mNpK2ln3TFF+KjdWl3wk43zFdBaKS8fIJuktMRyTLp4a9yX1XLY082jzR/Ff3lj1QQHf11nAqvgc3ZR+hnpw=
   - secure: kqkIyANMlXgdfW0/SwMAV5CqE3PZm6s4k/5ZuYwgD4JWTmqdIitQ9GqW/1NUBe4jzLirRLdq+WNzLd/LnbuwWeiXBJJ3jlbHa9mtftQdOAFLtBRqTva6IKuIYl9SVJ5/IM5TFgbsoXYV+KK+ZfZcENTGUn0jEj89oA7ntYdtM6U=
+notifications:
+  email:
+    on_success: change
+    on_failure: change
