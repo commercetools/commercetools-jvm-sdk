@@ -1,8 +1,12 @@
 package io.sphere.sdk.client;
 
+import io.sphere.sdk.products.ProductProjection;
 import io.sphere.sdk.products.queries.ProductProjectionQuery;
+import io.sphere.sdk.queries.PagedQueryResult;
 
+import java.util.concurrent.CompletionStage;
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
 public class MainMethodThreadLeakTest {
@@ -16,9 +20,8 @@ public class MainMethodThreadLeakTest {
     public static void main(String[] args) throws InterruptedException, ExecutionException, TimeoutException {
         final SphereClient client = SphereClientFactory.of()
                 .createClient(SphereClientConfig.ofEnvironmentVariables("JVM_SDK_IT"));
-
-        client.execute(ProductProjectionQuery.ofStaged()).toCompletableFuture().join();
-
+        final CompletionStage<PagedQueryResult<ProductProjection>> stage = client.execute(ProductProjectionQuery.ofStaged());
+        stage.toCompletableFuture().get(10, TimeUnit.SECONDS);
         client.close();
     }
 }
