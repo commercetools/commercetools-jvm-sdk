@@ -72,6 +72,7 @@
         <commercetools-taglets.version>0.7.0</commercetools-taglets.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>1.8</java.version>
+        <jacoco.version>0.7.5.201505241946</jacoco.version>
     </properties>
     <dependencyManagement>
         <dependencies>
@@ -221,6 +222,59 @@
                             <goals>
                                 <goal>integration-test</goal>
                                 <goal>verify</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+                <plugin>
+                    <groupId>org.jacoco</groupId>
+                    <artifactId>jacoco-maven-plugin</artifactId>
+                    <version>${jacoco.version}</version>
+
+                    <executions>
+                        <execution>
+                            <id>pre-integration-test</id>
+                            <phase>pre-integration-test</phase>
+                            <goals>
+                                <goal>prepare-agent</goal>
+                            </goals>
+                            <configuration>
+                                <destFile>${project.build.directory}/coverage-reports/jacoco-it.exec</destFile>
+                                <propertyName>failsafeArgLine</propertyName>
+                            </configuration>
+                        </execution>
+                        <execution>
+                            <id>post-integration-test</id>
+                            <phase>post-integration-test</phase>
+                            <goals>
+                                <goal>report</goal>
+                            </goals>
+                            <configuration>
+                                <dataFile>${project.build.directory}/coverage-reports/jacoco-it.exec</dataFile>
+                                <outputDirectory>${project.reporting.outputDirectory}/jacoco-it</outputDirectory>
+                            </configuration>
+                        </execution>
+                        <execution>
+                            <id>default-prepare-agent</id>
+                            <goals><goal>prepare-agent</goal></goals>
+                        </execution>
+                        <execution>
+                            <id>default-prepare-agent-integration</id>
+                            <goals>
+                                <goal>prepare-agent-integration</goal>
+                            </goals>
+                        </execution>
+                        <execution>
+                            <id>default-report</id>
+                            <phase>prepare-package</phase>
+                            <goals>
+                                <goal>report</goal>
+                            </goals>
+                        </execution>
+                        <execution>
+                            <id>default-report-integration</id>
+                            <goals>
+                                <goal>report-integration</goal>
                             </goals>
                         </execution>
                     </executions>
