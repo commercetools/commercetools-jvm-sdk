@@ -1,6 +1,5 @@
 package io.sphere.sdk.json;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.*;
@@ -38,7 +37,7 @@ public final class SphereJsonUtils {
     public static ObjectMapper newObjectMapper() {
         return new ObjectMapper()
                 .registerModule(new LocaleModule())
-                .registerModule(new ParameterNamesModule(JsonCreator.Mode.PROPERTIES))
+                .registerModule(new ParameterNamesModule())
                 .registerModule(new JavaTimeModule())
                 .registerModule(new DateTimeDeserializationModule())
                 .registerModule(new DateTimeSerializationModule())
