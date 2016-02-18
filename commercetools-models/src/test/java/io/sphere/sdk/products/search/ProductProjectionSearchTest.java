@@ -14,6 +14,8 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.ZonedDateTime;
 
+import static io.sphere.sdk.test.SphereTestUtils.DE;
+import static io.sphere.sdk.test.SphereTestUtils.EUR;
 import static java.math.BigDecimal.valueOf;
 import static java.util.Locale.ENGLISH;
 import static java.util.Locale.GERMAN;
@@ -26,6 +28,12 @@ public class ProductProjectionSearchTest {
     private static final ProductAttributeFilterSearchModel FILTER_ATTR = ProductProjectionSearchModel.of().filter().allVariants().attribute();
     private static final ProductAttributeFacetSearchModel FACET_ATTR = ProductProjectionSearchModel.of().facet().allVariants().attribute();
     private static final ProductAttributeSortSearchModel SORT_ATTR = ProductProjectionSearchModel.of().sort().allVariants().attribute();
+    public static final PriceSelectionDsl FULL_PRICE_SELECTION = PriceSelectionBuilder.of(EUR)
+            .priceChannelId("channel-id")
+            .priceCustomerGroupId("customer-group-id")
+            .priceCountry(DE)
+            .build();
+    public static final ProductProjectionSearch SEARCH_WITH_FULL_PRICE_SELECTION = ProductProjectionSearch.ofStaged().withPriceSelection(FULL_PRICE_SELECTION);
 
     @Test
     public void canAccessProductName() throws Exception {
@@ -200,7 +208,32 @@ public class ProductProjectionSearchTest {
         assertThat(path).isEqualTo(expected);
     }
 
-//    @Test
+    @Test
+    public void priceSelectionParameterCanBeAdded() {
+        assertThat(SEARCH_WITH_FULL_PRICE_SELECTION.httpRequestIntent().getBody().toString())
+                .contains("priceCurrency=EUR&priceCountry=DE&priceCustomerGroup=customer-group-id&priceChannel=channel-id");
+        assertThat(SEARCH_WITH_FULL_PRICE_SELECTION.getPriceSelection()).isEqualTo(FULL_PRICE_SELECTION);
+    }
+
+    @Test
+    public void priceSelectionCanBeRefined() {
+        final PriceSelectionDsl priceSelectionWithoutCustomerGroup = FULL_PRICE_SELECTION.withPriceCustomerGroup(null);
+        final ProductProjectionSearch priceSearchWithoutCustomer =
+                SEARCH_WITH_FULL_PRICE_SELECTION.withPriceSelection(priceSelectionWithoutCustomerGroup);
+        assertThat(priceSearchWithoutCustomer.httpRequestIntent().getBody().toString())
+                .contains("priceCurrency=EUR&priceCountry=DE&priceChannel=channel-id")
+                .doesNotContain("priceCustomerGroup").doesNotContain("customer-group-id");
+        assertThat(priceSearchWithoutCustomer.getPriceSelection()).isEqualTo(priceSelectionWithoutCustomerGroup);
+    }
+
+    @Test
+    public void removePriceSelection() {
+        final ProductProjectionSearch priceSelectionRemoved = SEARCH_WITH_FULL_PRICE_SELECTION.withPriceSelection(null);
+        assertThat(priceSelectionRemoved.httpRequestIntent().getBody().toString()).doesNotContain("price");
+        assertThat(priceSelectionRemoved.getPriceSelection()).isNull();
+    }
+
+    //    @Test
 //    public void canCreateFacetedSearchExpressions() throws Exception {
 //        final FacetAndFilterSearchExpression<ProductProjection> facetedSearch = attributeModel().ofDate("expirationDate").facetedAndFiltered().by("2001-09-11");
 //        assertThat(facetedSearch.facetExpression().expression()).isEqualTo("variants.attributes.expirationDate");

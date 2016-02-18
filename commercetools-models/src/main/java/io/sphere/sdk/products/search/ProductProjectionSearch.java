@@ -6,9 +6,11 @@ import io.sphere.sdk.expansion.ExpansionPathContainer;
 import io.sphere.sdk.models.LocalizedStringEntry;
 import io.sphere.sdk.products.ProductProjection;
 import io.sphere.sdk.products.ProductProjectionType;
+import io.sphere.sdk.products.ProductVariant;
 import io.sphere.sdk.products.expansion.ProductProjectionExpansionModel;
 import io.sphere.sdk.search.*;
 
+import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Locale;
 import java.util.function.Function;
@@ -183,4 +185,24 @@ public interface ProductProjectionSearch extends MetaModelSearchDsl<ProductProje
 
     @Override
     ProductProjectionSearch withSort(final List<SortExpression<ProductProjection>> sortExpressions);
+
+    /**
+     * Uses the cart price selection logic to retrieve the prices for product variants.
+     *
+     * <p>Example for selecting just a currency</p>
+     *
+     * {@include.example io.sphere.sdk.products.search.PriceSelectionIntegrationTest#selectAPriceByCurrency()}
+     *
+     * <p>Examples for different scenarios</p>
+     *
+     * {@include.example io.sphere.sdk.products.search.PriceSelectionIntegrationTest#verboseTest()}
+     *
+     * @param priceSelection parameters for the price selection, using null deletes the values
+     * @return search request with new parameters
+     * @see ProductVariant#getPrice()
+     */
+    ProductProjectionSearch withPriceSelection(@Nullable final PriceSelection priceSelection);
+
+    @Nullable
+    PriceSelection getPriceSelection();
 }

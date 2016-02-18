@@ -23,11 +23,14 @@ class ProductVariantImpl extends AttributeContainerImpl implements ProductVarian
     private final ProductVariantAvailability availability;
     @Nullable
     private final Boolean isMatchingVariant;
+    @Nullable
+    private final Price price;
 
     @JsonCreator
     ProductVariantImpl(final Integer id, @Nullable final String sku, final List<Price> prices, final List<Attribute> attributes,
                        final List<Image> images, @Nullable final ProductVariantAvailability availability,
-                       @Nullable final Boolean isMatchingVariant, @Nullable final String productId) {
+                       @Nullable final Boolean isMatchingVariant, @Nullable final String productId,
+                       @Nullable final Price price) {
         super(attributes);
         this.id = id;
         this.sku = sku;
@@ -36,6 +39,7 @@ class ProductVariantImpl extends AttributeContainerImpl implements ProductVarian
         this.availability = availability;
         this.isMatchingVariant = isMatchingVariant;
         this.productId = productId;
+        this.price = price;
     }
 
     @Override
@@ -69,6 +73,12 @@ class ProductVariantImpl extends AttributeContainerImpl implements ProductVarian
     @Nullable
     public Boolean isMatchingVariant() {
         return isMatchingVariant;
+    }
+
+    @Override
+    @Nullable
+    public Price getPrice() {
+        return price;
     }
 
     @Override
