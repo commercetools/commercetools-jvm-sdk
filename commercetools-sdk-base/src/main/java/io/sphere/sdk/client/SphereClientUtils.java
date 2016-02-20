@@ -2,7 +2,14 @@ package io.sphere.sdk.client;
 
 import java.time.Duration;
 import java.time.temporal.ChronoUnit;
+import java.util.List;
 import java.util.concurrent.*;
+import java.util.function.Function;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+import static java.util.stream.Collectors.toList;
 
 public final class SphereClientUtils {
     private SphereClientUtils() {
@@ -45,5 +52,32 @@ public final class SphereClientUtils {
         } catch (final TimeoutException e) {
             throw new SphereTimeoutException(e);
         }
+    }
+
+    public static <T> List<T> blockingWaitForEach(final Stream<? extends CompletionStage<T>> stream, final Duration duration) {
+        return blockingWaitForEach(stream, duration.get(ChronoUnit.NANOS), TimeUnit.NANOSECONDS);
+    }
+
+    public static <T> List<T> blockingWaitForEach(final Stream<? extends CompletionStage<T>> stream, final long timeout, final TimeUnit unit) {
+        return stream
+                .map(stage -> blockingWait(stage, timeout, unit))
+                .collect(toList());
+    }
+
+    public static <T> List<T> blockingWaitForEach(final List<? extends CompletionStage<T>> list, final Duration duration) {
+        return blockingWaitForEach(list, duration.get(ChronoUnit.NANOS), TimeUnit.NANOSECONDS);
+    }
+
+    public static <T> List<T> blockingWaitForEach(final List<? extends CompletionStage<T>> list, final long timeout, final TimeUnit unit) {
+        return blockingWaitForEach(list.stream(), timeout, unit);
+    }
+
+    public static <T> Collector<? extends CompletionStage<T>, ?, List<T>> blockingWaitForEachCollector(final long timeout, final TimeUnit unit) {
+        final Function<CompletionStage<T>, T> mapper = stage -> blockingWait(stage, timeout, unit);
+        return Collectors.mapping(mapper, toList());
+    }
+
+    public static <T> Collector<? extends CompletionStage<T>, ?, List<T>> blockingWaitForEachCollector(final Duration duration) {
+        return blockingWaitForEachCollector(duration.get(ChronoUnit.NANOS), TimeUnit.NANOSECONDS);
     }
 }
