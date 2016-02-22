@@ -91,6 +91,10 @@ public final class PriceDraftDsl extends Base implements PriceDraft {
         return PriceDraftBuilder.of(this).customerGroup(Optional.ofNullable(customerGroup).map(c -> c.toReference()).orElse(null)).build();
     }
 
+    public PriceDraftDsl withCustomerGroupId(@Nullable final String customerGroupId) {
+        return PriceDraftBuilder.of(this).customerGroupId(customerGroupId).build();
+    }
+
     public PriceDraftDsl withCountryCode(@Nullable final String countryCode) {
         return PriceDraftBuilder.of(this).countryCode(countryCode).build();
     }

@@ -12,4 +12,11 @@ public class PriceDraftDslTest {
         final PriceDraft draft = PriceDraftDsl.of(MoneyImpl.ofCents(123, "EUR")).withCountryCode("DE");
         assertThat(draft.getCountry()).isEqualTo(CountryCode.DE);
     }
+
+    @Test
+    public void withCustomerGroupId() {
+        final String customerGroupId = "foo";
+        final PriceDraft draft = PriceDraftDsl.of(MoneyImpl.ofCents(123, "EUR")).withCustomerGroupId(customerGroupId);
+        assertThat(draft.getCustomerGroup().getId()).isEqualTo(customerGroupId);
+    }
 }

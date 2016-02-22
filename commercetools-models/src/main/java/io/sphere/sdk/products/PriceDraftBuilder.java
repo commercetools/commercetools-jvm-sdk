@@ -58,6 +58,11 @@ public final class PriceDraftBuilder extends Base implements Builder<PriceDraftD
         return this;
     }
 
+    public PriceDraftBuilder customerGroupId(@Nullable final String customerGroupId) {
+        this.customerGroup = Optional.ofNullable(customerGroupId).map(id -> CustomerGroup.referenceOfId(customerGroupId)).orElse(null);
+        return this;
+    }
+
     public PriceDraftBuilder customerGroup(@Nullable final Referenceable<CustomerGroup> customerGroup) {
         this.customerGroup = Optional.ofNullable(customerGroup).map(Referenceable::toReference).orElse(null);
         return this;
