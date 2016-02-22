@@ -72,12 +72,12 @@ public final class SphereClientUtils {
         return blockingWaitForEach(list.stream(), timeout, unit);
     }
 
-    public static <T> Collector<? extends CompletionStage<T>, ?, List<T>> blockingWaitForEachCollector(final long timeout, final TimeUnit unit) {
+    public static <S extends CompletionStage<T>, T> Collector<S, ?, List<T>> blockingWaitForEachCollector(final long timeout, final TimeUnit unit) {
         final Function<CompletionStage<T>, T> mapper = stage -> blockingWait(stage, timeout, unit);
         return Collectors.mapping(mapper, toList());
     }
 
-    public static <T> Collector<? extends CompletionStage<T>, ?, List<T>> blockingWaitForEachCollector(final Duration duration) {
+    public static <S extends CompletionStage<T>, T> Collector<S, ?, List<T>> blockingWaitForEachCollector(final Duration duration) {
         return blockingWaitForEachCollector(duration.get(ChronoUnit.NANOS), TimeUnit.NANOSECONDS);
     }
 }

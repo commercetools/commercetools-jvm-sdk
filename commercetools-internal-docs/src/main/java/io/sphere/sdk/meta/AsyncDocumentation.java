@@ -36,6 +36,10 @@ import java.util.function.Supplier;
 
  {@include.example io.sphere.sdk.meta.AsyncDocumentationTest#firstAsyncThenSync()}
 
+ Also for a group of commercetools requests they can be executed in parallel and then collected:
+
+ {@include.example io.sphere.sdk.meta.AsyncCollectorDemo}
+
  <!--
  <h3 id="what">What</h3>
 
