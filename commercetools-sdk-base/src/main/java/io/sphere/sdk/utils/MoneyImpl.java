@@ -267,6 +267,17 @@ public final class MoneyImpl extends Base implements MonetaryAmount {
         return of(new BigDecimal(amount), currencyUnit);
     }
 
+    /**
+     * Creates a {@link MonetaryAmount} from a cent amount as String and a currencyUnit as String.
+     *
+     * @param amount the amount in cents which consists just of numbers
+     * @param currencyCode the currency code as String like "EUR" for EURO
+     * @return amount
+     */
+    public static MonetaryAmount ofCentsAndCurrencyUnit(final String amount, final String currencyCode) {
+        return ofCents(Long.parseLong(amount), currencyCode);
+    }
+
     public static MonetaryAmount ofCents(final long centAmount, final String currencyCode) {
         return ofCents(centAmount, createCurrencyByCode(currencyCode));
     }
