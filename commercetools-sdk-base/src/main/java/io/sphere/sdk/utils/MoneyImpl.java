@@ -274,7 +274,7 @@ public final class MoneyImpl extends Base implements MonetaryAmount {
      * @param currencyCode the currency code as String like "EUR" for EURO
      * @return amount
      */
-    public static MonetaryAmount ofCentsAndCurrencyUnit(final String amount, final String currencyCode) {
+    public static MonetaryAmount ofCentsAndCurrencyCode(final String amount, final String currencyCode) {
         return ofCents(Long.parseLong(amount), currencyCode);
     }
 
