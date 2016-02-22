@@ -340,6 +340,10 @@ public abstract class MetaModelSearchDslImpl<T, C extends MetaModelSearchDsl<T, 
         return plusFacetFilters(singletonList(filterExpression));
     }
 
+    protected C withAdditionalQueryParameters(final List<NameValuePair> pairs) {
+        return copyBuilder().additionalQueryParameters(pairs).build();
+    }
+
     @Override
     @Nullable
     public LocalizedStringEntry text() {

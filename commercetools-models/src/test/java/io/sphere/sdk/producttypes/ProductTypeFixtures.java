@@ -8,6 +8,7 @@ import io.sphere.sdk.products.Product;
 import io.sphere.sdk.products.queries.ProductQuery;
 import io.sphere.sdk.producttypes.commands.ProductTypeCreateCommand;
 import io.sphere.sdk.producttypes.commands.ProductTypeDeleteCommand;
+import io.sphere.sdk.producttypes.queries.ProductTypeByKeyGet;
 import io.sphere.sdk.producttypes.queries.ProductTypeQuery;
 import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.suppliers.TShirtProductTypeDraftSupplier;
@@ -30,7 +31,11 @@ public final class ProductTypeFixtures {
     }
 
     public static void withEmptyProductType(final BlockingSphereClient client, final Consumer<ProductType> user) {
-        withProductType(client, () -> ProductTypeDraft.of(randomKey(), randomKey(), "desc", Collections.emptyList()), user);
+        withProductType(client, () -> newEmptyProductDraft(), user);
+    }
+
+    public static ProductTypeDraft newEmptyProductDraft() {
+        return ProductTypeDraft.of(randomKey(), randomKey(), "desc", Collections.emptyList());
     }
 
     public static void withEmptyProductType(final BlockingSphereClient client, final String name, final Consumer<ProductType> user) {
@@ -107,5 +112,12 @@ public final class ProductTypeFixtures {
         final ProductTypeDraft productTypeDraft = ProductTypeDraft.of(randomKey(), name, "", asList());
         return client.executeBlocking(ProductTypeQuery.of().byName(name)).head()
                 .orElseGet(() -> client.executeBlocking(ProductTypeCreateCommand.of(productTypeDraft)));
+    }
+
+    public static void removeProductTypeByKey(final BlockingSphereClient client, final String productTypeKey) {
+        final ProductType productType = client.executeBlocking(ProductTypeByKeyGet.of(productTypeKey));
+        if (productType != null) {
+            client.executeBlocking(ProductTypeDeleteCommand.of(productType));
+        }
     }
 }

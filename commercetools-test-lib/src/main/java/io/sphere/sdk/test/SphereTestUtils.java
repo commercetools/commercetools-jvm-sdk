@@ -48,6 +48,9 @@ public final class SphereTestUtils {
     public static final MonetaryAmount EURO_10 = MoneyImpl.of(10, EUR);
     public static final MonetaryAmount EURO_20 = MoneyImpl.of(20, EUR);
     public static final MonetaryAmount EURO_30 = MoneyImpl.of(30, EUR);
+    public static final MonetaryAmount EURO_40 = MoneyImpl.of(40, EUR);
+    public static final MonetaryAmount USD_30 = MoneyImpl.of(30, USD);
+    public static final MonetaryAmount USD_20 = MoneyImpl.of(20, USD);
 
     public static ZonedDateTime now() {
         return ZonedDateTime. now().withZoneSameInstant(ZoneOffset.UTC);

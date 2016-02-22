@@ -1,6 +1,7 @@
 package io.sphere.sdk.products;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import io.sphere.sdk.products.search.PriceSelection;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -12,7 +13,26 @@ public interface ProductVariant extends AttributeContainer {
     @Nullable
     String getSku();
 
+    /**
+     * Gets all prices for this product variant.
+     *
+     * For a price matching a currency/country/channel/customer group context consider the use of
+     * {@link io.sphere.sdk.products.search.ProductProjectionSearch} with {@link io.sphere.sdk.products.search.ProductProjectionSearch#withPriceSelection(PriceSelection)}.
+     *
+     * @return prices
+     * @see #getPrices()
+     */
     List<Price> getPrices();
+
+    /**
+     * Optional price from the price selection in the search endpoint.
+     * By default this price is null but it can be filled by using {@link io.sphere.sdk.products.search.ProductProjectionSearch#withPriceSelection(PriceSelection)}.
+     *
+     * @return selected price or null
+     * @see #getPrices() 
+     */
+    @Nullable
+    Price getPrice();
 
     List<Image> getImages();
 
