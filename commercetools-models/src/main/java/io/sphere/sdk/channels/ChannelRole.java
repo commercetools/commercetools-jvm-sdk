@@ -6,6 +6,8 @@ import io.sphere.sdk.models.SphereEnumeration;
 /**
  * Role of a channel.
  *
+ * For the import and the export of values see also {@link SphereEnumeration}.
+ *
  * @see io.sphere.sdk.channels.commands.updateactions.AddRoles
  * @see io.sphere.sdk.channels.commands.updateactions.SetRoles
  * @see io.sphere.sdk.channels.commands.updateactions.RemoveRoles

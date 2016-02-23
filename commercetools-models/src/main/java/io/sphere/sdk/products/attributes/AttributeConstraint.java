@@ -5,6 +5,8 @@ import io.sphere.sdk.models.SphereEnumeration;
 
 /**
  * AttributeConstraint enum tells how an attribute or a set of attributes should be validated across all variants of a product.
+ *
+ * For the import and the export of values see also {@link SphereEnumeration}.
  */
 public enum AttributeConstraint implements SphereEnumeration {
     /**

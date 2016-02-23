@@ -3,6 +3,19 @@ package io.sphere.sdk.models;
 import java.util.Arrays;
 import java.util.Optional;
 
+/**
+ * Set of enum constants in the commercetools platform.
+ *
+ * <p>Hints for importing {@link SphereEnumeration}s:</p>
+ *
+ * {@include.example io.sphere.sdk.products.attributes.AttributeConstraintTest#demoImportSphereValue()}
+ * {@include.example io.sphere.sdk.products.attributes.AttributeConstraintTest#demoImportUpperCase()}
+ *
+ * <p>Hints for exporting {@link SphereEnumeration}s:</p>
+ *
+ * {@include.example io.sphere.sdk.products.attributes.AttributeConstraintTest#demoExportSphereValue()}
+ * {@include.example io.sphere.sdk.products.attributes.AttributeConstraintTest#demoExportUpperCase()}
+ */
 public interface SphereEnumeration {
     String name();
 

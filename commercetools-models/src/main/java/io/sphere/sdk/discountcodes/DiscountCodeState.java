@@ -3,6 +3,11 @@ package io.sphere.sdk.discountcodes;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import io.sphere.sdk.models.SphereEnumeration;
 
+/**
+ * DiscountCodeState.
+ *
+ * For the import and the export of values see also {@link SphereEnumeration}.
+ */
 public enum DiscountCodeState implements SphereEnumeration {
     /** The discount code is not active or it does not contain any active and valid cart discounts. */
     NOT_ACTIVE,
