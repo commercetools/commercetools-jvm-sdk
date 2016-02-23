@@ -238,6 +238,11 @@ public final class MoneyImpl extends Base implements MonetaryAmount {
         return asMoney().hashCode();
     }
 
+    @Override
+    public String toString() {
+        return money.toString();
+    }
+
     public static MonetaryAmount of(final MonetaryAmount money) {
         return new MoneyImpl(money);
     }
