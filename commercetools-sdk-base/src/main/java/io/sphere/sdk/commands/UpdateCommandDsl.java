@@ -19,4 +19,6 @@ public interface UpdateCommandDsl<T extends ResourceView<T, T>, C extends Update
      * @return the new update command
      */
     C withVersion(final Versioned<T> versioned);
+
+    C withVersion(final Long version);
 }

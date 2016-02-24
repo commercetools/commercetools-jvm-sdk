@@ -89,6 +89,11 @@ public class MetaModelUpdateCommandDslImpl<T extends ResourceView<T, T>, C exten
         return copyBuilder().versioned(newVersioned).build();
     }
 
+    @Override
+    public C withVersion(final Long version) {
+        return withVersion(Versioned.of(getVersioned().getId(), version));
+    }
+
     public Versioned<T> getVersioned() {
         return versioned;
     }
