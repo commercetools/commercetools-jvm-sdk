@@ -6,7 +6,7 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 import javax.annotation.Nullable;
 
-final class ReferenceImpl<T> implements Reference<T> {
+final class ReferenceImpl<T> extends Base implements Reference<T> {
     private final String typeId;
     private final String id;
     @Nullable

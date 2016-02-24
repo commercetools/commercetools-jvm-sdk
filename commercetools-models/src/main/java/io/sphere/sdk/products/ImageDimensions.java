@@ -29,4 +29,9 @@ public final class ImageDimensions extends Base {
     public static ImageDimensions of(final Integer width, final Integer height) {
         return new ImageDimensions(width, height);
     }
+
+    @JsonIgnore
+    public static ImageDimensions ofWidthAndHeight(final Integer width, final Integer height) {
+        return of(width, height);
+    }
 }

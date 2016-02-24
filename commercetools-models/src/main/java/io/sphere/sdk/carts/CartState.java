@@ -3,6 +3,11 @@ package io.sphere.sdk.carts;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import io.sphere.sdk.models.SphereEnumeration;
 
+/**
+ * CartState.
+ *
+ * For the import and the export of values see also {@link SphereEnumeration}.
+ */
 public enum CartState implements SphereEnumeration {
     /**
      The cart can be updated and ordered. It is the default state.

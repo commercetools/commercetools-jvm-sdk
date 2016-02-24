@@ -16,7 +16,7 @@ import javax.money.MonetaryAmount;
 import java.time.ZonedDateTime;
 import java.util.Optional;
 
-public final class PriceDraftBuilder extends Base implements Builder<PriceDraft>, CustomDraft {
+public final class PriceDraftBuilder extends Base implements Builder<PriceDraftDsl>, CustomDraft {
     private MonetaryAmount value;
     @Nullable
     private CountryCode country;
@@ -49,8 +49,17 @@ public final class PriceDraftBuilder extends Base implements Builder<PriceDraft>
                 .custom(template.getCustom());
     }
 
+    public PriceDraftBuilder countryCode(@Nullable final String countryCode) {
+        return country(Optional.ofNullable(countryCode).map(CountryCode::valueOf).orElse(null));
+    }
+
     public PriceDraftBuilder country(@Nullable final CountryCode country) {
         this.country = country;
+        return this;
+    }
+
+    public PriceDraftBuilder customerGroupId(@Nullable final String customerGroupId) {
+        this.customerGroup = Optional.ofNullable(customerGroupId).map(id -> CustomerGroup.referenceOfId(customerGroupId)).orElse(null);
         return this;
     }
 

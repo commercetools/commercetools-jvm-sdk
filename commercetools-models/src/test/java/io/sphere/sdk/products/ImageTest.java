@@ -12,7 +12,7 @@ public class ImageTest {
     public void testOfWidthAndHeight() throws Exception {
         final Image image = Image.ofWidthAndHeight("http://domain.tld/image.png", 400, 300, "foo");
         assertThat(image.getUrl()).isEqualTo("http://domain.tld/image.png");
-        assertThat(image.getDimensions()).isEqualTo(ImageDimensions.of(400, 300));
+        assertThat(image.getDimensions()).isEqualTo(ImageDimensions.ofWidthAndHeight(400, 300));
         assertThat(image.getLabel()).isEqualTo("foo");
     }
 
