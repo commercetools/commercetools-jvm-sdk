@@ -61,8 +61,12 @@ public class QueryModelImpl<T> extends Base implements QueryModel<T> {
         return new SphereEnumerationQueryModelImpl<>(this, pathSegment);
     }
 
+    protected StringQuerySortingModel<T> stringModel(@Nullable final QueryModel<T> parent, final String pathSegment) {
+        return new StringQuerySortingModelImpl<>(parent, pathSegment);
+    }
+
     protected StringQuerySortingModel<T> stringModel(final String pathSegment) {
-        return new StringQuerySortingModelImpl<>(this, pathSegment);
+        return stringModel(this, pathSegment);
     }
 
     protected StringCollectionQueryModel<T> stringCollectionModel(final String pathSegment) {

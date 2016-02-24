@@ -1,8 +1,13 @@
 package io.sphere.sdk.customobjects.queries;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import io.sphere.sdk.customobjects.CustomObject;
+import io.sphere.sdk.customobjects.CustomObjectDraft;
 import io.sphere.sdk.customobjects.CustomObjectFixtures;
+import io.sphere.sdk.customobjects.commands.CustomObjectUpsertCommand;
 import io.sphere.sdk.customobjects.demo.Foo;
 import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.queries.QuerySort;
@@ -13,6 +18,7 @@ import org.junit.Test;
 import java.util.List;
 
 import static io.sphere.sdk.customobjects.CustomObjectFixtures.withCustomObject;
+import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class CustomObjectQueryIntegrationTest extends IntegrationTest {
@@ -74,6 +80,51 @@ public class CustomObjectQueryIntegrationTest extends IntegrationTest {
             final String actual = jsonNode.get("bar").asText("it is not present");
             assertThat(actual).isEqualTo(expected);
         });
+    }
+
+    @Test
+    public void queryByAsValue() {
+        final CustomObjectDraft<String> draft = CustomObjectDraft.ofUnversionedUpsert("CustomObjectQueryIntegrationTest", "queryByAsValue", "hello", String.class);
+        client().executeBlocking(CustomObjectUpsertCommand.of(draft));
+        final CustomObjectQuery<JsonNode> query = CustomObjectQuery.ofJsonNode()
+                .plusPredicates(m -> m.value().ofValue().ofString().is("hello"))
+                .plusPredicates(m -> m.container().is("CustomObjectQueryIntegrationTest"))
+                .plusPredicates(m -> m.key().is("queryByAsValue"))
+                ;
+        assertThat(client().executeBlocking(query).getResults()).hasSize(1);
+    }
+
+    @Test
+    public void queryByValueAsObject() {
+        final ObjectMapper mapper = new ObjectMapper();
+        final ObjectNode rootNode = mapper.createObjectNode();
+        rootNode.put("s", "s value");
+        final ObjectNode sub = mapper.createObjectNode();
+        sub.put("sub-number", 5);
+        sub.put("sub-s", "sub s value");
+        sub.set("sub-nullable", sub.nullNode());
+        sub.put("sub-boolean", true);
+        final ArrayNode arrayNode = mapper.createArrayNode();
+        arrayNode.add("foo");
+        arrayNode.add("bar");
+        arrayNode.add("baz");
+        sub.set("arrno", arrayNode);
+        rootNode.set("sub", sub);
+
+        final CustomObjectDraft<JsonNode> draft = CustomObjectDraft.ofUnversionedUpsert("CustomObjectQueryIntegrationTest", "queryByValueAsObject", rootNode);
+        client().executeBlocking(CustomObjectUpsertCommand.of(draft));
+
+        final CustomObjectQuery<JsonNode> query = CustomObjectQuery.ofJsonNode()
+                .plusPredicates(m -> m.value().ofObject().ofString("s").is("s value"))
+                .plusPredicates(m -> m.value().ofObject().ofObject("sub").ofString("sub-s").is("sub s value"))
+                .plusPredicates(m -> m.value().ofObject().ofObject("sub").ofString("sub-nullable").isNotPresent())
+                .plusPredicates(m -> m.value().ofObject().ofObject("sub").ofBoolean("sub-boolean").is(true))
+                .plusPredicates(m -> m.value().ofObject().ofObject("sub").ofStringCollection("arrno").containsAll(asList("foo", "bar")))
+                .plusPredicates(m -> m.container().is("CustomObjectQueryIntegrationTest"))
+                .plusPredicates(m -> m.key().is("queryByValueAsObject"))
+                ;
+        final PagedQueryResult<CustomObject<JsonNode>> queryResult = client().executeBlocking(query);
+        assertThat(queryResult.head()).isPresent();
     }
 
     public void demoModelTypeParameter() {
