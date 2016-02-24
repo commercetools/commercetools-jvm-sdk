@@ -1,8 +1,7 @@
 package io.sphere.sdk.client;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
 import io.sphere.sdk.models.Versioned;
-import io.sphere.sdk.models.errors.ConcurrentModification;
+import io.sphere.sdk.models.errors.ConcurrentModificationError;
 import io.sphere.sdk.models.errors.ErrorResponse;
 import io.sphere.sdk.models.errors.SphereError;
 import org.apache.commons.lang3.ObjectUtils;
@@ -66,8 +65,8 @@ public class ConcurrentModificationException extends ClientErrorException implem
         final List<? extends SphereError> errors = getErrors();
         return ObjectUtils.defaultIfNull(errors, Collections.emptyList()).stream()
                 .map(errror -> (SphereError) errror)
-                .filter(error -> ConcurrentModification.CODE.equals(error.getCode()))
-                .map(error -> error.as(ConcurrentModification.class).getCurrentVersion())
+                .filter(error -> ConcurrentModificationError.CODE.equals(error.getCode()))
+                .map(error -> error.as(ConcurrentModificationError.class).getCurrentVersion())
                 .findFirst()
                 .orElse(null);
     }
