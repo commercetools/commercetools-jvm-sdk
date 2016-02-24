@@ -1,6 +1,7 @@
 package io.sphere.sdk.customobjects;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -190,6 +191,7 @@ public final class CustomObjectDraft<T> extends Base {
         return key;
     }
 
+    @JsonIgnore
     public JavaType getJavaType() {
         return javaType;
     }
