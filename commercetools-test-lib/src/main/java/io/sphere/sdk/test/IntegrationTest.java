@@ -119,7 +119,8 @@ public abstract class IntegrationTest {
     }
 
     public static SphereClientConfig getSphereClientConfig() {
-        final File file = new File("integrationtest.properties");
+        File file = new File("integrationtest.properties");
+        file = file.exists() ? file : new File("../integrationtest.properties");//test runner is maybe in subproject
         return file.exists() ? loadViaProperties(file) : loadViaEnvironmentArgs();
     }
 
