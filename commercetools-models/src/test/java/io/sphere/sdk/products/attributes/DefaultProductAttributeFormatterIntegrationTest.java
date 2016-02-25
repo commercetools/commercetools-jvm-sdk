@@ -19,7 +19,7 @@ import static java.util.Collections.singletonList;
 import static io.sphere.sdk.products.ProductsScenario1Fixtures.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class LocalizedToStringProductAttributeConverterIntegrationTest extends IntegrationTest {
+public class DefaultProductAttributeFormatterIntegrationTest extends IntegrationTest {
 
     private static ProductsScenario1Fixtures.Data data;
     private static Product product;
@@ -33,7 +33,7 @@ public class LocalizedToStringProductAttributeConverterIntegrationTest extends I
         data = ProductsScenario1Fixtures.createScenario(client());
         product = data.getProduct1();
         productType = data.getProductType();
-        numberAsIntegerMapper = new LocalizedToStringProductAttributeConverter(singletonList(productType), asList(Locale.GERMANY, Locale.ENGLISH)) {
+        numberAsIntegerMapper = new DefaultProductAttributeFormatter(singletonList(productType), asList(Locale.GERMANY, Locale.ENGLISH)) {
             @Override
             protected Collection<String> integerAttributes() {
                 return singletonList(ATTR_NAME_NUMBER);
@@ -44,7 +44,7 @@ public class LocalizedToStringProductAttributeConverterIntegrationTest extends I
                 return singleton(ATTR_NAME_NUMBER_SET);
             }
         };
-        numberAsLongMapper = new LocalizedToStringProductAttributeConverter(singletonList(productType), asList(Locale.GERMANY, Locale.ENGLISH)) {
+        numberAsLongMapper = new DefaultProductAttributeFormatter(singletonList(productType), asList(Locale.GERMANY, Locale.ENGLISH)) {
             @Override
             protected Collection<String> longAttributes() {
                 return singletonList(ATTR_NAME_NUMBER);
@@ -55,7 +55,7 @@ public class LocalizedToStringProductAttributeConverterIntegrationTest extends I
                 return singleton(ATTR_NAME_NUMBER_SET);
             }
         };
-        numberAsDoubleMapper = new LocalizedToStringProductAttributeConverter(singletonList(productType), asList(Locale.GERMANY, Locale.ENGLISH));
+        numberAsDoubleMapper = new DefaultProductAttributeFormatter(singletonList(productType), asList(Locale.GERMANY, Locale.ENGLISH));
     }
 
     @AfterClass
