@@ -28,7 +28,7 @@ public final class TimeoutSphereClientDecorator extends SphereClientDecorator im
     }
 
     public static SphereClient of(final SphereClient delegate, final Duration duration) {
-        return of(delegate, duration.get(ChronoUnit.NANOS), TimeUnit.NANOSECONDS);
+        return of(delegate, duration.toMillis(), TimeUnit.MILLISECONDS);
     }
 
     @Override
