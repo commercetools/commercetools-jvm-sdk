@@ -2,12 +2,8 @@ package io.sphere.sdk.meta;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import io.sphere.sdk.customobjects.queries.CustomObjectQuery;
-import io.sphere.sdk.products.attributes.Attribute;
-import io.sphere.sdk.products.attributes.AttributeAccess;
-import io.sphere.sdk.products.attributes.LocalizedToStringProductAttributeConverter;
 import io.sphere.sdk.products.search.ProductProjectionSearch;
 import io.sphere.sdk.products.search.ProductProjectionSearchBuilder;
-import io.sphere.sdk.utils.MoneyImpl;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.annotation.Nullable;

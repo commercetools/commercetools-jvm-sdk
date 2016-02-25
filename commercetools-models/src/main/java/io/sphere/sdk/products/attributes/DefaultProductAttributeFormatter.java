@@ -22,21 +22,22 @@ import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.joining;
 
-public class LocalizedToStringProductAttributeConverter extends ProductAttributeConverterBase<String> implements ProductAttributeConverter<String> {
+public class DefaultProductAttributeFormatter extends ProductAttributeConverterBase<String> implements ProductAttributeConverter<String> {
     private final List<Locale> locales;
 
-    public LocalizedToStringProductAttributeConverter(final ProductTypeLocalRepository productTypes, final List<Locale> locales) {
+    public DefaultProductAttributeFormatter(final ProductTypeLocalRepository productTypes, final List<Locale> locales) {
         super(productTypes);
         this.locales = locales;
     }
 
-    public LocalizedToStringProductAttributeConverter(final Collection<ProductType> productTypes, final List<Locale> locales) {
+    public DefaultProductAttributeFormatter(final Collection<ProductType> productTypes, final List<Locale> locales) {
         this(ProductTypeLocalRepository.of(productTypes), locales);
     }
 
     /**
-     Formats a product attribute as String. The product type reference should be extracted using
-     {@link Product#getProductType()}.
+     Formats a product attribute as String. The product type reference is typically extracted using
+     {@link io.sphere.sdk.products.ProductProjection#getProductType()} or
+     {@link io.sphere.sdk.products.Product#getProductType()}.
 
      @param attribute the attribute which should be formatted
      @param productType the reference of the product type of this attribute, it is not necessary to expand the reference
@@ -46,6 +47,21 @@ public class LocalizedToStringProductAttributeConverter extends ProductAttribute
     @Override
     public String convert(final Attribute attribute, final Referenceable<ProductType> productType) {
         return super.convert(attribute, productType);
+    }
+
+    /**
+     Formats a product attribute as String, alias of {@link #convert(Attribute, Referenceable)}.
+     The product type reference is typically extracted using
+     {@link io.sphere.sdk.products.ProductProjection#getProductType()} or
+     {@link io.sphere.sdk.products.Product#getProductType()}.
+
+     @param attribute the attribute which should be formatted
+     @param productType the reference of the product type of this attribute, it is not necessary to expand the reference
+     @return formatted attribute or null
+     */
+    @Nullable
+    public String format(final Attribute attribute, final Referenceable<ProductType> productType) {
+        return convert(attribute, productType);
     }
 
     protected Locale locale() {
