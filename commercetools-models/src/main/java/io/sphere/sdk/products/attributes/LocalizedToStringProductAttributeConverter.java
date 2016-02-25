@@ -25,12 +25,12 @@ import static java.util.stream.Collectors.joining;
 public class LocalizedToStringProductAttributeConverter extends ProductAttributeConverterBase<String> implements ProductAttributeConverter<String> {
     private final List<Locale> locales;
 
-    protected LocalizedToStringProductAttributeConverter(final ProductTypeLocalRepository productTypes, final List<Locale> locales) {
+    public LocalizedToStringProductAttributeConverter(final ProductTypeLocalRepository productTypes, final List<Locale> locales) {
         super(productTypes);
         this.locales = locales;
     }
 
-    protected LocalizedToStringProductAttributeConverter(final Collection<ProductType> productTypes, final List<Locale> locales) {
+    public LocalizedToStringProductAttributeConverter(final Collection<ProductType> productTypes, final List<Locale> locales) {
         this(ProductTypeLocalRepository.of(productTypes), locales);
     }
 
