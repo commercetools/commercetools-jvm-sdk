@@ -34,6 +34,20 @@ public class LocalizedToStringProductAttributeConverter extends ProductAttribute
         this(ProductTypeLocalRepository.of(productTypes), locales);
     }
 
+    /**
+     Formats a product attribute as String. The product type reference should be extracted using
+     {@link Product#getProductType()}.
+
+     @param attribute the attribute which should be formatted
+     @param productType the reference of the product type of this attribute, it is not necessary to expand the reference
+     @return formatted attribute or null
+     */
+    @Nullable
+    @Override
+    public String convert(final Attribute attribute, final Referenceable<ProductType> productType) {
+        return super.convert(attribute, productType);
+    }
+
     protected Locale locale() {
         return getLocales().get(0);
     }
