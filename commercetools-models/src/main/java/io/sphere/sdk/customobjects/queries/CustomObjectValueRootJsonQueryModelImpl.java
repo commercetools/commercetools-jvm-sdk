@@ -5,13 +5,16 @@ import io.sphere.sdk.queries.*;
 import javax.annotation.Nullable;
 
 final class CustomObjectValueRootJsonQueryModelImpl<T> extends QueryModelImpl<T> implements RootJsonQueryModel<T>, JsonQueryModel<T>, JsonValueQueryModel<T> {
+
+    public static final String VALUE = "value";
+
     CustomObjectValueRootJsonQueryModelImpl(@Nullable final QueryModel<T> parent, @Nullable final String pathSegment) {
         super(parent, pathSegment);
     }
 
     @Override
     public JsonQueryModel<T> ofObject() {
-        return new CustomObjectValueRootJsonQueryModelImpl<>(null, "value");
+        return new CustomObjectValueRootJsonQueryModelImpl<>(null, VALUE);
     }
 
     @Override
@@ -41,6 +44,21 @@ final class CustomObjectValueRootJsonQueryModelImpl<T> extends QueryModelImpl<T>
 
     @Override
     public StringQueryModel<T> ofString() {
-        return stringModel(null, "value");
+        return stringModel(null, VALUE);
+    }
+
+    @Override
+    public IntegerQueryModel<T> ofInteger() {
+        return integerModel(null, VALUE);
+    }
+
+    @Override
+    public LongQueryModel<T> ofLong() {
+        return longModel(null, VALUE);
+    }
+
+    @Override
+    public BooleanQueryModel<T> ofBoolean() {
+        return booleanModel(null, VALUE);
     }
 }

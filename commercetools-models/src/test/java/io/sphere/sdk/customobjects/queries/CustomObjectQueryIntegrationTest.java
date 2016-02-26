@@ -10,12 +10,16 @@ import io.sphere.sdk.customobjects.CustomObjectFixtures;
 import io.sphere.sdk.customobjects.commands.CustomObjectUpsertCommand;
 import io.sphere.sdk.customobjects.demo.Foo;
 import io.sphere.sdk.queries.PagedQueryResult;
+import io.sphere.sdk.queries.QueryPredicate;
 import io.sphere.sdk.queries.QuerySort;
 import io.sphere.sdk.test.IntegrationTest;
+import org.assertj.core.api.AbstractIterableAssert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.util.List;
+import java.util.function.Consumer;
+import java.util.function.Function;
 
 import static io.sphere.sdk.customobjects.CustomObjectFixtures.withCustomObject;
 import static java.util.Arrays.asList;
@@ -83,15 +87,50 @@ public class CustomObjectQueryIntegrationTest extends IntegrationTest {
     }
 
     @Test
-    public void queryByAsValue() {
-        final CustomObjectDraft<String> draft = CustomObjectDraft.ofUnversionedUpsert("CustomObjectQueryIntegrationTest", "queryByAsValue", "hello", String.class);
+    public void queryByPlainStringValue() {
+        final String value = "hello";
+        checkSimpleQuery(value, String.class,
+                m -> m.value().ofValue().ofString().is(value),
+                jsonNode -> assertThat(jsonNode.textValue()).isEqualTo(value));
+    }
+
+    @Test
+    public void queryByPlainIntegerValue() {
+        final int value = 1;
+        checkSimpleQuery(value, Integer.class,
+                m -> m.value().ofValue().ofInteger().is(value),
+                jsonNode -> assertThat(jsonNode.asInt()).isEqualTo(value));
+    }
+
+    @Test
+    public void queryByPlainLongValue() {
+        final long value = 2L;
+        checkSimpleQuery(value, Long.class,
+                m -> m.value().ofValue().ofLong().is(value),
+                jsonNode -> assertThat(jsonNode.asLong()).isEqualTo(value));
+    }
+
+    @Test
+    public void queryByPlainBooleanValue() {
+        final boolean value = true;
+        checkSimpleQuery(value, Boolean.class,
+                m -> m.value().ofValue().ofBoolean().is(value),
+                jsonNode -> assertThat(jsonNode.asBoolean()).isEqualTo(value));
+    }
+
+    private <T> void checkSimpleQuery(final T value, final Class<T> valueClass,
+                                      final Function<CustomObjectQueryModel<CustomObject<JsonNode>>, QueryPredicate<CustomObject<JsonNode>>> predicateFunction,
+                                      final Consumer<JsonNode> assertion) {
+        final CustomObjectDraft<T> draft = CustomObjectDraft.ofUnversionedUpsert("CustomObjectQueryIntegrationTest", "queryByAsValue", value, valueClass);
         client().executeBlocking(CustomObjectUpsertCommand.of(draft));
         final CustomObjectQuery<JsonNode> query = CustomObjectQuery.ofJsonNode()
-                .plusPredicates(m -> m.value().ofValue().ofString().is("hello"))
+                .plusPredicates(m -> predicateFunction.apply(m))
                 .plusPredicates(m -> m.container().is("CustomObjectQueryIntegrationTest"))
                 .plusPredicates(m -> m.key().is("queryByAsValue"))
                 ;
-        assertThat(client().executeBlocking(query).getResults()).hasSize(1);
+        final List<CustomObject<JsonNode>> results = client().executeBlocking(query).getResults();
+        assertThat(results).hasSize(1);
+        assertion.accept(results.get(0).getValue());
     }
 
     @Test
