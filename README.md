@@ -15,10 +15,10 @@ Users gain type-safety, encapsulation, IDE auto completion and an internal domai
 
 ## Using the SDK 
 * install [Java 8](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)
-* <strong>Javadoc</strong> [(latest release)](http://sphereio.github.io/sphere-jvm-sdk/javadoc/v1.0.0-RC1/index.html) or [(master)](http://sphereio.github.io/sphere-jvm-sdk/javadoc/master/index.html)</strong>, there you find also code snippets and insights
-    * [Getting Started](http://sphereio.github.io/sphere-jvm-sdk/javadoc/v1.0.0-RC1/io/sphere/sdk/meta/GettingStarted.html)
-    * [Release Notes](http://sphereio.github.io/sphere-jvm-sdk/javadoc/v1.0.0-RC1/io/sphere/sdk/meta/ReleaseNotes.html)
-    * [Contributing](http://sphereio.github.io/sphere-jvm-sdk/javadoc/v1.0.0-RC1/io/sphere/sdk/meta/ContributorDocumentation.html)
+* (since Feb 26, 2016 new link) [<strong>Javadoc</strong>](http://sphereio.github.io/sphere-jvm-sdk/apidocs/index.html), there you find also code snippets and insights
+    * [Getting Started](http://sphereio.github.io/sphere-jvm-sdk/apidocs/io/sphere/sdk/meta/GettingStarted.html)
+    * [Release Notes](http://sphereio.github.io/sphere-jvm-sdk/apidocs/io/sphere/sdk/meta/ReleaseNotes.html)
+    * [Contributing](http://sphereio.github.io/sphere-jvm-sdk/apidocs/io/sphere/sdk/meta/ContributorDocumentation.html)
  
 ## Installation
 
