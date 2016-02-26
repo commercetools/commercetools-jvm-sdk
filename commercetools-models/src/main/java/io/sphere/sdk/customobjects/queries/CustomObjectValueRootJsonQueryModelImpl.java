@@ -43,6 +43,16 @@ final class CustomObjectValueRootJsonQueryModelImpl<T> extends QueryModelImpl<T>
     }
 
     @Override
+    public IntegerQueryModel<T> ofInteger(final String fieldName) {
+        return integerModel(fieldName);
+    }
+
+    @Override
+    public LongQueryModel<T> ofLong(final String fieldName) {
+        return longModel(fieldName);
+    }
+
+    @Override
     public StringQueryModel<T> ofString() {
         return stringModel(null, VALUE);
     }

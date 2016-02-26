@@ -158,6 +158,8 @@ public class CustomObjectQueryIntegrationTest extends IntegrationTest {
                 .plusPredicates(m -> m.value().ofObject().ofObject("sub").ofString("sub-s").is("sub s value"))
                 .plusPredicates(m -> m.value().ofObject().ofObject("sub").ofString("sub-nullable").isNotPresent())
                 .plusPredicates(m -> m.value().ofObject().ofObject("sub").ofBoolean("sub-boolean").is(true))
+                .plusPredicates(m -> m.value().ofObject().ofObject("sub").ofInteger("sub-number").is(5))
+                .plusPredicates(m -> m.value().ofObject().ofObject("sub").ofLong("sub-number").is(5L))
                 .plusPredicates(m -> m.value().ofObject().ofObject("sub").ofStringCollection("arrno").containsAll(asList("foo", "bar")))
                 .plusPredicates(m -> m.container().is("CustomObjectQueryIntegrationTest"))
                 .plusPredicates(m -> m.key().is("queryByValueAsObject"))
