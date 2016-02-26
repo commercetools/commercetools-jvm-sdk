@@ -337,7 +337,7 @@
 
                         https://maven.apache.org/plugins/maven-scm-publish-plugin/
 
-                        mvn clean javadoc:javadoc scm-publish:publish-scm
+                        mvn clean javadoc:aggregate scm-publish:publish-scm
                         -->
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-scm-publish-plugin</artifactId>
