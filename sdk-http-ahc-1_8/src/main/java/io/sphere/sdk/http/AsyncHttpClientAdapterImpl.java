@@ -4,47 +4,41 @@ import com.ning.http.client.*;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.io.input.AutoCloseInputStream;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.Optional;
-import java.util.concurrent.*;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.CompletionStage;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Executor;
 import java.util.zip.GZIPInputStream;
 
-final class AsyncHttpClientAdapterImpl extends Base implements AsyncHttpClientAdapter {
-    private static final Logger LOGGER = LoggerFactory.getLogger(HttpClient.class);
+final class AsyncHttpClientAdapterImpl extends HttpClientAdapterBase {
     private final AsyncHttpClient asyncHttpClient;
-    private final ForkJoinPool threadPool = new ForkJoinPool();
 
-    private AsyncHttpClientAdapterImpl(final AsyncHttpClient asyncHttpClient) {
+    AsyncHttpClientAdapterImpl(final AsyncHttpClient asyncHttpClient) {
         this.asyncHttpClient = asyncHttpClient;
     }
 
     @Override
-    public CompletionStage<HttpResponse> execute(final HttpRequest httpRequest) {
-        if (LOGGER.isDebugEnabled()) {
-            LOGGER.debug("executing " + httpRequest);
-        }
+    protected CompletionStage<HttpResponse> executeDelegate(final HttpRequest httpRequest) {
         final Request request = asAhcRequest(httpRequest);
         try {
             final CompletionStage<Response> future = wrap(asyncHttpClient.executeRequest(request));
-            return future.thenApply((Response response) -> {
-                final byte[] responseBodyAsBytes = getResponseBodyAsBytes(response);
-                final HttpResponse httpResponse = HttpResponse.of(response.getStatusCode(), responseBodyAsBytes, httpRequest, HttpHeaders.of(response.getHeaders()));
-                if (LOGGER.isDebugEnabled()) {
-                    LOGGER.debug("response " + httpResponse);
-                }
-                return httpResponse;
-            });
+            return future.thenApplyAsync(response -> convert(httpRequest, response), threadPool());
         } catch (final IOException e) {
             final CompletableFuture<HttpResponse> future = new CompletableFuture<>();
             future.completeExceptionally(new HttpException(e));
             return future;
         }
+    }
+
+    private HttpResponse convert(final HttpRequest httpRequest, final Response response) {
+        final byte[] responseBodyAsBytes = getResponseBodyAsBytes(response);
+        return HttpResponse.of(response.getStatusCode(), responseBodyAsBytes, httpRequest, HttpHeaders.of(response.getHeaders()));
     }
 
     private byte[] getResponseBodyAsBytes(final Response response) {
@@ -65,7 +59,7 @@ final class AsyncHttpClientAdapterImpl extends Base implements AsyncHttpClientAd
     }
 
     /* package scope for testing */
-    <T> Request asAhcRequest(final HttpRequest request) {
+    Request asAhcRequest(final HttpRequest request) {
         final RequestBuilder builder = new RequestBuilder()
                 .setUrl(request.getUrl())
                 .setMethod(request.getHttpMethod().toString());
@@ -91,13 +85,8 @@ final class AsyncHttpClientAdapterImpl extends Base implements AsyncHttpClientAd
     }
 
     @Override
-    public void close() {
+    protected void closeDelegate() {
         asyncHttpClient.close();
-        threadPool.shutdown();
-    }
-
-    public static AsyncHttpClientAdapterImpl of(final AsyncHttpClient asyncHttpClient) {
-        return new AsyncHttpClientAdapterImpl(asyncHttpClient);
     }
 
     /**
@@ -122,6 +111,6 @@ final class AsyncHttpClientAdapterImpl extends Base implements AsyncHttpClientAd
     }
 
     private CompletionStage<Response> wrap(final ListenableFuture<Response> listenableFuture) {
-        return wrap(listenableFuture, threadPool);
+        return wrap(listenableFuture, threadPool());
     }
 }

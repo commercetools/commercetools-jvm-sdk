@@ -14,7 +14,6 @@ import org.apache.http.message.BasicNameValuePair;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.UncheckedIOException;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
 import java.util.Map;
@@ -27,7 +26,7 @@ import java.util.zip.GZIPInputStream;
 
 import static java.util.Arrays.asList;
 
-final class ApacheHttpClientAdapterImpl extends Base implements ApacheHttpClientAdapter {
+final class ApacheHttpClientAdapterImpl extends HttpClientAdapterBase {
     private final CloseableHttpAsyncClient apacheHttpClient;
 
     private ApacheHttpClientAdapterImpl(final CloseableHttpAsyncClient apacheHttpClient) {
@@ -42,16 +41,12 @@ final class ApacheHttpClientAdapterImpl extends Base implements ApacheHttpClient
     }
 
     @Override
-    public void close() {
-        try {
-            apacheHttpClient.close();
-        } catch (IOException e) {
-            throw new UncheckedIOException(e);
-        }
+    protected void closeDelegate() throws IOException {
+        apacheHttpClient.close();
     }
 
     @Override
-    public CompletionStage<HttpResponse> execute(final HttpRequest httpRequest) {
+    protected CompletionStage<HttpResponse> executeDelegate(final HttpRequest httpRequest) throws Throwable {
         final HttpUriRequest realHttpRequest = toApacheRequest(httpRequest);
         final CompletableFuture<org.apache.http.HttpResponse> apacheResponseFuture = new CompletableFuture<>();
         apacheHttpClient.execute(realHttpRequest, new CompletableFutureCallbackAdapter<>(apacheResponseFuture));
@@ -89,7 +84,7 @@ final class ApacheHttpClientAdapterImpl extends Base implements ApacheHttpClient
         return HttpResponse.of(statusCode, bodyNullable, httpRequest, HttpHeaders.of(headers));
     }
 
-    private HttpUriRequest toApacheRequest(final HttpRequest httpRequest) {
+    private HttpUriRequest toApacheRequest(final HttpRequest httpRequest) throws UnsupportedEncodingException {
         final String method = httpRequest.getHttpMethod().toString();
         final String uri = httpRequest.getUrl();
         final RequestBuilder builder = RequestBuilder
@@ -114,23 +109,15 @@ final class ApacheHttpClientAdapterImpl extends Base implements ApacheHttpClient
         return builder.build();
     }
 
-    private static HttpEntity urlEncodedOf(final FormUrlEncodedHttpRequestBody body) {
+    private static HttpEntity urlEncodedOf(final FormUrlEncodedHttpRequestBody body) throws UnsupportedEncodingException {
         final List<BasicNameValuePair> values = body.getParameters()
                 .stream()
                 .map(entry -> new BasicNameValuePair(entry.getName(), entry.getValue()))
                 .collect(Collectors.toList());
-        try {
-            return new UrlEncodedFormEntity(values);
-        } catch (final UnsupportedEncodingException e) {
-            throw new HttpException(e);
-        }
+        return new UrlEncodedFormEntity(values);
     }
 
-    private static HttpEntity stringEntityOf(final String body) {
-        try {
-            return new StringEntity(body);
-        } catch (final UnsupportedEncodingException e) {
-            throw new HttpException(e);
-        }
+    private static HttpEntity stringEntityOf(final String body) throws UnsupportedEncodingException {
+        return new StringEntity(body);
     }
 }

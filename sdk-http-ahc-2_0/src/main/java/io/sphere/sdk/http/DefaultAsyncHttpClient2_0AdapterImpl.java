@@ -1,71 +1,39 @@
 package io.sphere.sdk.http;
 
 import org.asynchttpclient.*;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
-import java.io.IOException;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ForkJoinPool;
+import java.util.concurrent.CompletionStage;
 
-final class DefaultAsyncHttpClient2_0AdapterImpl implements AsyncHttpClientAdapter {
-    private static final Logger LOGGER = LoggerFactory.getLogger(HttpClient.class);
+final class DefaultAsyncHttpClient2_0AdapterImpl extends HttpClientAdapterBase {
     private final AsyncHttpClient asyncHttpClient;
-    private final ForkJoinPool threadPool = new ForkJoinPool();
 
-    private DefaultAsyncHttpClient2_0AdapterImpl(final AsyncHttpClient asyncHttpClient) {
+    DefaultAsyncHttpClient2_0AdapterImpl(final AsyncHttpClient asyncHttpClient) {
         this.asyncHttpClient = asyncHttpClient;
     }
 
     @Override
-    public CompletableFuture<HttpResponse> execute(final HttpRequest httpRequest) {
-        if (LOGGER.isTraceEnabled()) {
-            LOGGER.debug("executing " + httpRequest);
-        } else if (LOGGER.isDebugEnabled()) {
-            LOGGER.debug("{} {}", httpRequest.getHttpMethod(), httpRequest.getUrl());
-        }
+    protected CompletionStage<HttpResponse> executeDelegate(final HttpRequest httpRequest) {
         final Request request = asAhcRequest(httpRequest);
         final CompletableFuture<Response> future = new CompletableFuture<>();
-        asyncHttpClient.executeRequest(request, new AsyncCompletionHandler<Response>() {
-            @Override
-            public Response onCompleted(final Response response) throws Exception {
-                    future.complete(response);
-                return response;
-            }
+        asyncHttpClient.executeRequest(request, new ResponseAsyncCompletionHandler(future));
+        return future.thenApplyAsync(response -> convert(httpRequest, response), threadPool());
+    }
 
-            @Override
-            public void onThrowable(final Throwable t) {
-                //nginx does not send status code so this http client explodes
-                final boolean maybeUriTooLongErrorFromNgingx = t.getMessage().contains("invalid version format: <HTML>");
-                final String message = maybeUriTooLongErrorFromNgingx
-                        ? "There is a problem, maybe the request URI was too long due to an inefficient query."
-                        : "The underlying HTTP client detected a problem.";
-                future.completeExceptionally(new HttpException(message, t));
-                super.onThrowable(t);
-
-            }
-        });
-        return future.thenApplyAsync(response -> {
-            final byte[] responseBodyAsBytes = getResponseBodyAsBytes(response);
-            final HttpResponse httpResponse = HttpResponse.of(response.getStatusCode(), responseBodyAsBytes, httpRequest, HttpHeaders.ofMapEntryList(response.getHeaders().entries()));
-            if (LOGGER.isTraceEnabled()) {
-                LOGGER.debug("response " + httpResponse);
-            }
-            return httpResponse;
-        }, threadPool);
+    private HttpResponse convert(final HttpRequest httpRequest, final Response response) {
+        final byte[] responseBodyAsBytes = getResponseBodyAsBytes(response);
+        final int statusCode = response.getStatusCode();
+        final HttpHeaders headers = HttpHeaders.ofMapEntryList(response.getHeaders().entries());
+        return HttpResponse.of(statusCode, responseBodyAsBytes, httpRequest, headers);
     }
 
     private byte[] getResponseBodyAsBytes(final Response response) {
-        try {
-            return response.getResponseBodyAsBytes();
-        } catch (final Exception e) {
-            throw new HttpException(e);
-        }
+        return response.getResponseBodyAsBytes();
     }
 
     /* package scope for testing */
-    <T> Request asAhcRequest(final HttpRequest request) {
+    Request asAhcRequest(final HttpRequest request) {
         final RequestBuilder builder = new RequestBuilder()
                 .setUrl(request.getUrl())
                 .setMethod(request.getHttpMethod().toString());
@@ -86,22 +54,11 @@ final class DefaultAsyncHttpClient2_0AdapterImpl implements AsyncHttpClientAdapt
                 formUrlEncodedHttpRequestBody.getParameters().forEach(pair -> builder.addFormParam(pair.getName(), pair.getValue()));
             }
         });
-        final Request build = builder.build();
-        return build;
+        return builder.build();
     }
 
     @Override
-    public void close() {
-        threadPool.shutdown();
-        try {
-            asyncHttpClient.close();
-        } catch (final IOException e) {
-            throw new HttpException(e);
-        }
+    protected void closeDelegate() throws Throwable {
+        asyncHttpClient.close();
     }
-
-    public static AsyncHttpClientAdapter of(final AsyncHttpClient asyncHttpClient) {
-        return new DefaultAsyncHttpClient2_0AdapterImpl(asyncHttpClient);
-    }
-
 }
