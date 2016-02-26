@@ -69,7 +69,7 @@
         <jsr305.version>3.0.1</jsr305.version>
         <junit.version>4.12</junit.version>
         <assertj.version>3.3.0</assertj.version>
-        <commercetools-taglets.version>0.7.0</commercetools-taglets.version>
+        <commercetools-taglets.version>0.7.2</commercetools-taglets.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>1.8</java.version>
         <jacoco.version>0.7.5.201505241946</jacoco.version>
@@ -357,7 +357,7 @@
                         <version>1.6.6</version>
                         <extensions>true</extensions>
                         <configuration>
-                            <serverId>sonatype-nexus-staging</serverId>
+                            <serverId>ossrh</serverId>
                             <nexusUrl>https://oss.sonatype.org</nexusUrl>
                         </configuration>
                     </plugin>
