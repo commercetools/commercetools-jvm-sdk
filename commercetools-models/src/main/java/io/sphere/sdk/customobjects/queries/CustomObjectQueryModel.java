@@ -24,5 +24,12 @@ public interface CustomObjectQueryModel<T extends CustomObject<?>> extends Resou
         return new CustomObjectQueryModelImpl<>(null, null);
     }
 
+    /**
+     * Query model for {@link CustomObject#getValue()}.
+     *
+     * {@include.example io.sphere.sdk.customobjects.queries.CustomObjectQueryIntegrationTest#demoQueryByValue()}
+     *
+     * @return query model
+     */
     RootJsonQueryModel<T> value();
 }

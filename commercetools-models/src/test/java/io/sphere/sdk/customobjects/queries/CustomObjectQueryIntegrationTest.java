@@ -26,6 +26,7 @@ import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class CustomObjectQueryIntegrationTest extends IntegrationTest {
+    private static final ObjectMapper objectMapper = new ObjectMapper();
 
     @BeforeClass
     public static void cleanCustomObjects() throws Exception {
@@ -131,6 +132,40 @@ public class CustomObjectQueryIntegrationTest extends IntegrationTest {
         final List<CustomObject<JsonNode>> results = client().executeBlocking(query).getResults();
         assertThat(results).hasSize(1);
         assertion.accept(results.get(0).getValue());
+    }
+
+    @Test
+    public void demoQueryByValue() {
+        /*
+        the custom object will look like:
+        {
+            "container":"CustomObjectQueryIntegrationTest",
+            "key":"demoQueryByValue",
+            "value": {
+                "foo": "bar",
+                "count": 5
+            }
+        }
+         */
+        final ObjectNode value = objectMapper.createObjectNode();
+        value.put("foo", "bar");
+        value.put("count", 5);
+        final String container = "CustomObjectQueryIntegrationTest";
+        final String key = "demoQueryByValue";
+        final CustomObjectUpsertCommand<JsonNode> cmd =
+                CustomObjectUpsertCommand.of(CustomObjectDraft.ofUnversionedUpsert(container, key, value));
+        client().executeBlocking(cmd);
+
+        final CustomObjectQuery<JsonNode> query = CustomObjectQuery.ofJsonNode()
+                .plusPredicates(m -> m.container().is(container))
+                .plusPredicates(m -> m.key().is(key))
+                .plusPredicates(m -> m.value().ofObject().ofString("foo").is("bar"))
+                .plusPredicates(m -> m.value().ofObject().ofInteger("count").isGreaterThan(4));
+        final PagedQueryResult<CustomObject<JsonNode>> pagedQueryResult = client().executeBlocking(query);
+
+        final List<CustomObject<JsonNode>> results = pagedQueryResult.getResults();
+        assertThat(results).hasSize(1);
+        assertThat(results.get(0).getKey()).isEqualTo(key);
     }
 
     @Test
