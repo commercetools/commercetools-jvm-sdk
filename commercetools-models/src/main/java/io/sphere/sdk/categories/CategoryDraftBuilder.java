@@ -25,9 +25,23 @@ public final class CategoryDraftBuilder extends Base implements Builder<Category
     @Nullable
     private CustomFieldsDraft custom;
 
+    private CategoryDraftBuilder(final CategoryDraft d) {
+        name = d.getName();
+        slug = d.getSlug();
+        description = d.getDescription();
+        parent = d.getParent();
+        orderHint = d.getOrderHint();
+        externalId = d.getExternalId();
+        custom = d.getCustom();
+    }
+
     private CategoryDraftBuilder(final LocalizedString name, final LocalizedString slug) {
         this.name = name;
         this.slug = slug;
+    }
+
+    public static CategoryDraftBuilder of(final CategoryDraft categoryDraft) {
+        return new CategoryDraftBuilder(categoryDraft);
     }
 
     public static CategoryDraftBuilder of(final LocalizedString name, final LocalizedString slug) {

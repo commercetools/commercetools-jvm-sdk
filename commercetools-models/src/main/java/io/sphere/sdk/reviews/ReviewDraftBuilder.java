@@ -55,6 +55,21 @@ public final class ReviewDraftBuilder extends Base implements Builder<ReviewDraf
         return new ReviewDraftBuilder().rating(rating);
     }
 
+    public static ReviewDraftBuilder of(final ReviewDraft reviewDraft) {
+        return new ReviewDraftBuilder()
+                .key(reviewDraft.getKey())
+                .uniquenessValue(reviewDraft.getUniquenessValue())
+                .authorName(reviewDraft.getAuthorName())
+                .text(reviewDraft.getText())
+                .title(reviewDraft.getTitle())
+                .locale(reviewDraft.getLocale())
+                .target(reviewDraft.getTarget())
+                .state(reviewDraft.getState())
+                .rating(reviewDraft.getRating())
+                .customer(reviewDraft.getCustomer())
+                .custom(reviewDraft.getCustom());
+    }
+
     ReviewDraftBuilder() {
     }
 
