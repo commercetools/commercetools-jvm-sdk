@@ -18,19 +18,21 @@
             <groupId>${project.groupId}</groupId>
             <artifactId>commercetools-models</artifactId>
             <version>${project.version}</version>
-            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>commercetools-test-lib</artifactId>
             <version>${project.version}</version>
-            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>commercetools-convenience</artifactId>
             <version>${project.version}</version>
-            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>commercetools-java-client-apache-async</artifactId>
+            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>net.sourceforge.plantuml</groupId>

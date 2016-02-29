@@ -196,6 +196,12 @@
                                 </tagletArtifact>
                             </taglet>
                         </taglets>
+                        <excludedocfilessubdir>commercetools-internal-docs:commercetools-java-client-internal-test:commercetools-test-lib</excludedocfilessubdir>
+                        <excludePackageNames>test</excludePackageNames>
+                        <sourceFileExcludes>
+                            <sourceFileExclude>**/*Test.java</sourceFileExclude>
+                            <sourceFileExclude>**/test/*.java</sourceFileExclude>
+                        </sourceFileExcludes>
                     </configuration>
                 </plugin>
                 <plugin>

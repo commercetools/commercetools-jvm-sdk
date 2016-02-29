@@ -6,6 +6,7 @@ cache:
     - $HOME/.m2/repository
 script:
   - mvn clean test verify javadoc:aggregate
+  - mvn exec:java -pl commercetools-internal-docs -Dexec.mainClass="introspection.rules.RulesMain" -Dexec.classpathScope="test"
   - mvn exec:java -pl commercetools-models -Dexec.mainClass="io.sphere.sdk.client.MainMethodThreadLeakTest" -Dexec.classpathScope="test"
 env:
   global:
