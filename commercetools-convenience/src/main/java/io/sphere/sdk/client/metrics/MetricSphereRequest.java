@@ -38,7 +38,7 @@ final class MetricSphereRequest<T> extends SphereRequestDecorator<T> {
         final long stopTimestamp = System.currentTimeMillis();
         final long duration = stopTimestamp - startTimestamp;
         correlationId = httpResponse.getHeaders().findFlatHeader("X-Correlation-ID").orElse(null);
-        observable.notifyObservers(ObservedDeserializationDuration.of(duration, id, delegate, correlationId));
+        observable.notifyObservers(ObservedDeserializationDuration.of(duration, id, delegate, correlationId, httpResponse, result));
         return result;
     }
 

@@ -30,9 +30,11 @@ public class SimpleMetricsSphereClientTest {
 
         metricClient.execute(ProjectGet.of()).toCompletableFuture().join();
         assertThat(Logger.getAndClear()).matches("observed: ObservedSerializationDuration\\[requestId=1,durationInMilliseconds=\\d+,request=ProjectGet\\[\\]\\]\n" +
-                "observed: ObservedDeserializationDuration\\[correlationId=ID-123456,requestId=1,durationInMilliseconds=\\d+,request=ProjectGet\\[\\]\\]\n" +
-                "observed: ObservedTotalDuration\\[correlationId=ID-123456,requestId=1,durationInMilliseconds=\\d+,request=ProjectGet\\[\\]\\]");
+                "observed: ObservedDeserializationDuration\\[correlationId=ID-123456,httpResponse=.*,result=.*,requestId=1,durationInMilliseconds=\\d+,request=ProjectGet\\[\\]\\]\n" +
+                "observed: ObservedTotalDuration\\[correlationId=ID-123456,successResult=Project\\[key=<null>,name=<null>,countries=<null>,languages=<null>,currencies=<null>,createdAt=<null>,trialUntil=<null>\\],errorResult=<null>,requestId=1,durationInMilliseconds=\\d+,request=ProjectGet\\[\\]\\]");
     }
+
+
 
     @Test
     public void testAll() {
@@ -69,6 +71,8 @@ public class SimpleMetricsSphereClientTest {
         softly.assertThat(totalDuration.getRequestId()).as("total id").isEqualTo(requestId);
         softly.assertThat(totalDuration.getTopic()).as("total topic").isEqualTo("ObservedTotalDuration");
         softly.assertThat(totalDuration.getCorrelationId()).as("total correlationId").isEqualTo(CORRELATION_ID);
+        softly.assertThat(totalDuration.getSuccessResult()).as("getSuccessResult").isNotNull().isInstanceOf(Project.class);
+        softly.assertThat(totalDuration.getErrorResult()).as("getErrorResult").isNull();
         final ObservedSerializationDuration serializationDuration = metricObserver.get(ObservedSerializationDuration.class);
         softly.assertThat(serializationDuration.getRequest()).as("ser request").isEqualTo(sphereRequest);
         softly.assertThat(serializationDuration.getDurationInMilliseconds()).as("ser duration").isBetween(0L, 4L);
