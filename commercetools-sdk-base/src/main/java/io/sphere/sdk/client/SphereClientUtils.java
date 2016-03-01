@@ -26,7 +26,7 @@ public final class SphereClientUtils {
      * @throws SphereTimeoutException if a timeout occurs
      */
     public static <T> T blockingWait(final CompletionStage<T> completionStage, final Duration duration) {
-        return blockingWait(completionStage, duration.get(ChronoUnit.NANOS), TimeUnit.NANOSECONDS);
+        return blockingWait(completionStage, duration.toMillis(), TimeUnit.MILLISECONDS);
     }
 
     /**
@@ -55,7 +55,7 @@ public final class SphereClientUtils {
     }
 
     public static <T> List<T> blockingWaitForEach(final Stream<? extends CompletionStage<T>> stream, final Duration duration) {
-        return blockingWaitForEach(stream, duration.get(ChronoUnit.NANOS), TimeUnit.NANOSECONDS);
+        return blockingWaitForEach(stream, duration.toMillis(), TimeUnit.MILLISECONDS);
     }
 
     public static <T> List<T> blockingWaitForEach(final Stream<? extends CompletionStage<T>> stream, final long timeout, final TimeUnit unit) {
@@ -65,7 +65,7 @@ public final class SphereClientUtils {
     }
 
     public static <T> List<T> blockingWaitForEach(final List<? extends CompletionStage<T>> list, final Duration duration) {
-        return blockingWaitForEach(list, duration.get(ChronoUnit.NANOS), TimeUnit.NANOSECONDS);
+        return blockingWaitForEach(list, duration.toMillis(), TimeUnit.MILLISECONDS);
     }
 
     public static <T> List<T> blockingWaitForEach(final List<? extends CompletionStage<T>> list, final long timeout, final TimeUnit unit) {
@@ -78,6 +78,6 @@ public final class SphereClientUtils {
     }
 
     public static <S extends CompletionStage<T>, T> Collector<S, ?, List<T>> blockingWaitForEachCollector(final Duration duration) {
-        return blockingWaitForEachCollector(duration.get(ChronoUnit.NANOS), TimeUnit.NANOSECONDS);
+        return blockingWaitForEachCollector(duration.toMillis(), TimeUnit.MILLISECONDS);
     }
 }

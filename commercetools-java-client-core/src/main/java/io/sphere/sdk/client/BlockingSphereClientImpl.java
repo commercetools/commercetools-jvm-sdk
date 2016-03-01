@@ -43,6 +43,6 @@ final class BlockingSphereClientImpl extends Base implements BlockingSphereClien
 
     @Override
     public <T> T executeBlocking(final SphereRequest<T> sphereRequest, final Duration duration) {
-        return executeBlocking(sphereRequest, duration.get(ChronoUnit.NANOS), TimeUnit.NANOSECONDS);
+        return executeBlocking(sphereRequest, duration.toMillis(), TimeUnit.MILLISECONDS);
     }
 }
