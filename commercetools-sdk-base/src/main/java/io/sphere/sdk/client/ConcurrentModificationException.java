@@ -44,7 +44,6 @@ public class ConcurrentModificationException extends ClientErrorException implem
 
     ConcurrentModificationException(final Integer statusCode, final String message, final List<? extends SphereError> errors) {
         super(message, statusCode);
-        System.err.println(errors);
         this.errors = errors == null ? Collections.<SphereError>emptyList() : errors;
     }
 
