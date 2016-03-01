@@ -40,7 +40,6 @@ import static io.sphere.sdk.carts.CartFixtures.withCart;
 import static io.sphere.sdk.categories.CategoryFixtures.withCategory;
 import static io.sphere.sdk.http.HttpMethod.POST;
 import static io.sphere.sdk.products.ProductFixtures.withTaxedProduct;
-import static io.sphere.sdk.test.SphereTestUtils.asList;
 import static io.sphere.sdk.test.SphereTestUtils.randomSlug;
 import static org.assertj.core.api.Assertions.*;
 import static org.junit.Assert.fail;
@@ -142,12 +141,16 @@ public class SphereExceptionIntegrationTest extends IntegrationTest {
 
     }
 
-    @Test(expected = ConcurrentModificationException.class)
+    @Test
     public void concurrentModification() throws Exception {
         withCategory(client(), cat -> {
-            final CategoryUpdateCommand cmd = CategoryUpdateCommand.of(cat, asList(ChangeName.of(LocalizedString.ofEnglish("new name"))));
-            client().executeBlocking(cmd);
-            client().executeBlocking(cmd);
+            final CategoryUpdateCommand cmd = CategoryUpdateCommand.of(cat, ChangeName.of(LocalizedString.ofEnglish("new")));
+            final Category successfulUpdatedCategory = client().executeBlocking(cmd);
+            final Throwable throwable = catchThrowable(() -> client().executeBlocking(cmd));//same command twice
+            assertThat(throwable).isInstanceOf(ConcurrentModificationException.class);
+            final ConcurrentModificationException exception = (ConcurrentModificationException) throwable;
+            assertThat(exception.getCurrentVersion())
+                    .isGreaterThanOrEqualTo(successfulUpdatedCategory.getVersion());
         });
     }
 
@@ -193,6 +196,31 @@ public class SphereExceptionIntegrationTest extends IntegrationTest {
                 } catch (final ConcurrentModificationException e) {
                     final Cart cartWithCurrentVersion = client().executeBlocking(CartByIdGet.of(cart));
                     final CartUpdateCommand commandWithCurrentCartVersion = cartUpdateCommand.withVersion(cartWithCurrentVersion);
+                    updated2 = client().executeBlocking(commandWithCurrentCartVersion);
+                }
+                return updated2;
+            });
+        });
+    }
+
+    @Test
+    public void demoForBruteForceSolveTheVersionConflictWithExceptionCurrentVersion() {
+        withTaxedProduct(client(), product -> {
+            withCart(client(), cart -> {
+                //when a customer clicks enter to cart
+                final int variantId = 1;
+                final int quantity = 2;
+                final CartUpdateCommand cartUpdateCommand =  CartUpdateCommand.of(cart, AddLineItem.of(product, variantId, quantity));
+                client().executeBlocking(cartUpdateCommand);//successful attempt in another thread/machine/container/tab
+                //the operation will increase the version number of the cart
+
+                //warning: ignoring version conflicts can be very poor behaviour on some use cases
+                //we show this here if you want to execute the command anyway
+                Cart updated2;
+                try {
+                    updated2 = client().executeBlocking(cartUpdateCommand);
+                } catch (final ConcurrentModificationException e) {
+                    final CartUpdateCommand commandWithCurrentCartVersion = cartUpdateCommand.withVersion(e.getCurrentVersion());
                     updated2 = client().executeBlocking(commandWithCurrentCartVersion);
                 }
                 return updated2;
