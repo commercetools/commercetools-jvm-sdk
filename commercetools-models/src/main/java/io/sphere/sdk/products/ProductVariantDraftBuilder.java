@@ -25,6 +25,14 @@ public final class ProductVariantDraftBuilder extends Base implements Builder<Pr
     private ProductVariantDraftBuilder() {
     }
 
+    public static ProductVariantDraftBuilder of(final ProductVariantDraft productVariantDraft) {
+        return of()
+                .sku(productVariantDraft.getSku())
+                .prices(productVariantDraft.getPrices())
+                .attributes(productVariantDraft.getAttributes())
+                .images(productVariantDraft.getImages());
+    }
+
     public static ProductVariantDraftBuilder of() {
         return new ProductVariantDraftBuilder();
     }
@@ -35,7 +43,7 @@ public final class ProductVariantDraftBuilder extends Base implements Builder<Pr
     }
 
     public ProductVariantDraftBuilder images(final List<Image> images) {
-        this.images = images;
+        this.images = images != null ? images : Collections.emptyList();
         return this;
     }
 
@@ -44,7 +52,7 @@ public final class ProductVariantDraftBuilder extends Base implements Builder<Pr
     }
 
     public ProductVariantDraftBuilder prices(final List<PriceDraft> prices) {
-        this.prices = prices;
+        this.prices = prices != null ? prices : Collections.emptyList();
         return this;
     }
 
@@ -57,7 +65,7 @@ public final class ProductVariantDraftBuilder extends Base implements Builder<Pr
     }
 
     public ProductVariantDraftBuilder attributes(final List<AttributeDraft> attributes) {
-        this.attributes = attributes;
+        this.attributes = attributes != null ? attributes : Collections.emptyList();
         return this;
     }
 

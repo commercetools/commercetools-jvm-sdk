@@ -28,6 +28,11 @@ public final class TransactionDraftBuilder extends Base implements Builder<Trans
         return of(type, amount, null);
     }
 
+    public static TransactionDraftBuilder of(final TransactionDraft transactionDraft) {
+        return new TransactionDraftBuilder(transactionDraft.getType(), transactionDraft.getAmount(), transactionDraft.getTimestamp(), transactionDraft.getState())
+                .interactionId(transactionDraft.getInteractionId());
+    }
+
     public static TransactionDraftBuilder of(final TransactionType type, final MonetaryAmount amount, @Nullable final ZonedDateTime timestamp) {
         return new TransactionDraftBuilder(type, amount, timestamp, null);
     }
