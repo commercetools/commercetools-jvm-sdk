@@ -1,14 +1,23 @@
 package io.sphere.sdk.categories;
 
+import io.sphere.sdk.categories.queries.CategoryQuery;
+import io.sphere.sdk.json.SphereJsonUtils;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Reference;
+import io.sphere.sdk.models.Resource;
 import org.junit.Test;
 
 import java.util.*;
+import java.util.function.Consumer;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 import static java.util.Arrays.asList;
+import static java.util.Collections.singletonList;
 import static java.util.stream.Collectors.toList;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class CategoryTreeTest {
     private static final Comparator<Category> byNameComparator = (Category left, Category right) -> left.getName().get(Locale.ENGLISH).compareTo(right.getName().get(Locale.ENGLISH));
@@ -16,10 +25,150 @@ public class CategoryTreeTest {
     private final List<String> rootIds = asList("0", "1", "2", "3");
     private final List<String> childIds = asList("a", "b", "c", "d", "e");
     private final List<String> grandchildIds = asList("u", "v", "w", "x");
+    private static final CategoryTree CATEGORY_TREE = CategoryTree.of(SphereJsonUtils.readObjectFromResource("categoryQueryResult.json", CategoryQuery.resultTypeReference()).getResults());
+    private static final Category handBags = CATEGORY_TREE.findById("9a584ee8-a45a-44e8-b9ec-e11439084687").get();
+    private static final Category clutches = CATEGORY_TREE.findById("a9c9ebd8-e6ff-41a6-be8e-baa07888c9bd").get();
+    private static final Category satchels = CATEGORY_TREE.findById("30d79426-a17a-4e63-867e-ec31a1a33416").get();
+    private static final Category shoppers = CATEGORY_TREE.findById("bd83e288-77de-4c3a-a26c-8384af715bbb").get();
+    private static final Category wallets = CATEGORY_TREE.findById("d2f9a2da-db3e-4ee8-8192-134ebbc7fe4a").get();
+    private static final Category backpacks = CATEGORY_TREE.findById("46249239-8f0f-48a9-b0a0-d29b37fc617f").get();
+    private static final Category slingBags = CATEGORY_TREE.findById("8e052705-7810-4528-ba77-00094b87a69a").get();
 
     @Test(expected = NullPointerException.class)
     public void checkForNonNullArgumentsInFactoryMethod() throws Exception {
         CategoryTree.of(null);
+    }
+
+    @Test
+    public void demoGetRoots() {
+        final CategoryTree tree = createAbcCategoryTree();
+        assertThat(tree.getRoots()).extracting(Resource::getId).containsOnly("A", "B", "C");
+    }
+
+    @Test
+    public void getAllAsFlatList() {
+        final CategoryTree tree = createAbcCategoryTree();
+        assertThat(tree.getAllAsFlatList())
+            .hasSize(39)
+            .extracting(cat -> cat.getId())
+                //don't rely on the order!
+            .containsOnly("A", "B", "C",
+                    "A-1", "A-2", "A-3",
+                    "B-1", "B-2", "B-3",
+                    "C-1", "C-2", "C-3",
+                    "A-1-1", "A-1-2", "A-1-3",
+                    "A-2-1", "A-2-2", "A-2-3",
+                    "A-3-1", "A-3-2", "A-3-3",
+                    "B-1-1", "B-1-2", "B-1-3",
+                    "B-2-1", "B-2-2", "B-2-3",
+                    "B-3-1", "B-3-2", "B-3-3",
+                    "C-1-1", "C-1-2", "C-1-3",
+                    "C-2-1", "C-2-2", "C-2-3",
+                    "C-3-1", "C-3-2", "C-3-3");
+    }
+
+    @Test
+    public void getSiblings() {
+        final CategoryTree tree = createAbcCategoryTree();
+        final Category b2 = tree.findById("B-2").get();
+        final Category b1 = tree.findById("B-1").get();
+        final Category c2 = tree.findById("C-2").get();
+        final Category c21 = tree.findById("C-2-1").get();
+        final Category c22 = tree.findById("C-2-2").get();
+        final Category c23 = tree.findById("C-2-3").get();
+        final Category b = tree.findById("B").get();
+        final Category a = tree.findById("A").get();
+        assertThat(tree.getSiblings(singletonList(b2)))
+                .extracting(c -> c.getId())
+                .as("one category will provide all its siblings (no recursion) without including itself")
+                .containsOnly("B-1", "B-3");
+        assertThat(tree.getSiblings(asList(b1, b2))).extracting(c -> c.getId())
+                .as("providing multiple categories which are siblings exclude themselves from the result list")
+                .containsOnly("B-3");
+        assertThat(tree.getSiblings(asList(b2, c2))).extracting(c -> c.getId())
+                .as("using non-sibling categories as arguments results in getting all their siblings in one list")
+                .containsOnly("B-1", "B-3", "C-1", "C-3");
+        assertThat(tree.getSiblings(asList(b, b1))).extracting(c -> c.getId())
+                .as("even on different levels it will provide the siblings and will filter out all input categories")
+                .containsOnly("A", "C", "B-2", "B-3");
+        assertThat(tree.getSiblings(asList(a, b))).extracting(c -> c.getId()).containsOnly("C");
+        assertThat(tree.getSiblings(asList(c21, c22, c23))).extracting(c -> c.getId())
+                .as("if there are no siblings available")
+                .isEmpty();
+    }
+
+    @Test
+    public void getSubtreeFromRootCategory() {
+        final CategoryTree tree = createAbcCategoryTree();
+        final Category category = tree.findById("B").get();
+
+        final CategoryTree subtree = tree.getSubtree(singletonList(category));
+
+        assertThat(subtree.getAllAsFlatList()).hasSize(13);
+        assertThat(subtree.findById(category.getId())).isPresent();
+        assertThat(subtree.getRoots()).hasSize(1);
+        assertThat(subtree.getSubtreeRoots()).isEqualTo(subtree.getRoots());
+        assertThat(subtree.findById("B-1")).isPresent();
+        assertThat(subtree.findById("C-1")).isEmpty();
+    }
+
+    @Test
+    public void getSubtree() {
+        final CategoryTree tree = createAbcCategoryTree();
+        final Category a = tree.findById("A").get();
+        final Category b1 = tree.findById("B-1").get();
+        final Category c22 = tree.findById("C-2-2").get();
+
+        final CategoryTree subtree = tree.getSubtree(asList(a, b1, c22));
+//TODO assertions
+//   TODO for 2 cats on same level     tree.getSubtree()
+//   TODO for 2 cats on different level     tree.getSubtree()
+    }
+
+    @Test
+    public void findChildren() {
+        final CategoryTree tree = createAbcCategoryTree();
+        final Category category = tree.findById("B").get();
+        final List<Category> children = tree.findChildren(category);
+        assertThat(children).extracting(Resource::getId)
+                .as("only direct children are present")
+                .containsOnly("B-1", "B-2", "B-3");
+    }
+
+    @Test
+    public void findChildrenLeaf() {
+        final CategoryTree tree = createAbcCategoryTree();
+        final Category category = tree.findById("B-1-1").get();
+        final List<Category> children = tree.findChildren(category);
+        assertThat(children).as("leaf notes produce empty lists").isEmpty();
+    }
+
+    @Test
+    public void findByExternalId() {
+        final CategoryTree tree = createAbcCategoryTree();
+        final Category category = tree.findById("B-2-3").get();
+        final String externalId = "external-id-B-2-3";
+        assertThat(category.getExternalId()).isEqualTo(externalId);
+
+        final Optional<Category> optional = tree.findByExternalId(externalId);
+        assertThat(optional).isPresent().contains(category);
+    }
+
+    @Test
+    public void demoFindByIdFound() {
+        final CategoryTree tree = createAbcCategoryTree();
+        final Optional<Category> optional = tree.findById("B-2-3");
+        assertThat(optional).isPresent();
+        assertThat(optional.get().getId()).isEqualTo("B-2-3");
+    }
+
+    @Test
+    public void demoFindByIdNotFound() {
+        final CategoryTree tree = createAbcCategoryTree();
+        final Optional<Category> optional = tree.findById("id-which-does-not-exist");
+        assertThat(optional).isEmpty();
+
+        assertThatThrownBy(() -> optional.get()).isInstanceOf(NoSuchElementException.class);
     }
 
     @Test
@@ -72,6 +221,32 @@ public class CategoryTreeTest {
         assertThat(tree.findBySlug(absentLocale, "slug-0bu")).isEqualTo(Optional.empty());
     }
 
+    @Test
+    public void siblingsOfShoulderBags() throws Exception {
+        test(singletonList(satchels.toReference()),
+                siblings -> assertThat(siblings).containsExactly(clutches, shoppers, handBags, wallets, backpacks, slingBags));
+    }
+
+    @Test
+    public void siblingsOfHandBags() throws Exception {
+        test(singletonList(handBags.toReference()),
+                siblings -> assertThat(siblings).containsExactly(clutches, satchels, shoppers, wallets, backpacks, slingBags));
+    }
+
+    @Test
+    public void siblingsOfCombined() throws Exception {
+        test(asList(satchels.toReference(), handBags.toReference()),
+                siblings -> assertThat(siblings).containsExactly(clutches, shoppers, wallets, backpacks, slingBags));
+    }
+
+    private void test(final List<Reference<Category>> categoryRefs, final Consumer<List<Category>> test) {
+        final List<Category> categories = categoryRefs.stream()
+                .map(c -> CATEGORY_TREE.findById(c.getId()).get())
+                .collect(toList());
+        final List<Category> siblings = CATEGORY_TREE.getSiblings(categories);
+        test.accept(siblings);
+    }
+
     public List<Category> createCategoryHierarchyAsFlatList() {
         final List<Category> rootCategories = rootIds.stream().map(id -> newOrphanCategory(id)).collect(toList());
         final List<Category> children = createChildren(childIds, rootCategories);
@@ -119,5 +294,34 @@ public class CategoryTreeTest {
 
     private List<Category> byNameSorted(final CategoryTree tree1) {
         return tree1.getRoots().stream().sorted(byNameComparator).collect(toList());
+    }
+
+    private static CategoryTree createAbcCategoryTree() {
+        final List<Category> rootCategories = Stream.of("A", "B", "C")
+                .map(id -> CategoryBuilder.of(id, en("name " + id), en("slug-" + id)).externalId("external-id-" + id).build())
+                .collect(toList());
+        final List<Category> secondLevelCategories = rootCategories.stream()
+                .flatMap(parent -> IntStream.range(1, 4)
+                        .mapToObj(i -> {
+                            final String id = parent.getId() + "-" + i;
+                            return CategoryBuilder.of(id, en("name " + id), en("slug-" + id)).parent(parent).ancestors(singletonList(parent.toReference())).externalId("external-id-" + id).build();
+                        }))
+                .collect(Collectors.toList());
+        final List<Category> thirdLevelCategories = secondLevelCategories.stream()
+                .flatMap(parent -> IntStream.range(1, 4)
+                        .mapToObj(i -> {
+                            final List<Reference<Category>> ancestors = new LinkedList<Reference<Category>>();
+                            ancestors.addAll(parent.getAncestors());
+                            ancestors.add(parent.toReference());
+                            final String id = parent.getId() + "-" + i;
+                            return CategoryBuilder.of(id, en("name " + id), en("slug-" + id)).parent(parent).ancestors(ancestors).externalId("external-id-" + id).build();
+                        }))
+                .collect(Collectors.toList());
+        final List<Category> all = new LinkedList<>();
+        all.addAll(rootCategories);
+        all.addAll(secondLevelCategories);
+        all.addAll(thirdLevelCategories);
+        assertThat(all).hasSize(39);
+        return CategoryTree.of(all);
     }
 }
