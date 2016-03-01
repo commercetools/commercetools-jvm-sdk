@@ -8,6 +8,6 @@ import org.asynchttpclient.AsyncHttpClient;
 public interface AsyncHttpClientAdapter extends HttpClient {
 
     static HttpClient of(final AsyncHttpClient asyncHttpClient) {
-        return DefaultAsyncHttpClient2_0AdapterImpl.of(asyncHttpClient);
+        return new DefaultAsyncHttpClient2_0AdapterImpl(asyncHttpClient);
     }
 }

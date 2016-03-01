@@ -10,17 +10,17 @@ import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ForkJoinPool;
 
-final class DefaultAsyncHttpClientAdapterImpl implements AsyncHttpClientAdapter {
+final class DefaultAsyncHttpClientAdapterImpl extends HttpClientAdapterBase {
     private static final Logger LOGGER = LoggerFactory.getLogger(HttpClient.class);
     private final AsyncHttpClient asyncHttpClient;
     private final ForkJoinPool threadPool = new ForkJoinPool();
 
-    private DefaultAsyncHttpClientAdapterImpl(final AsyncHttpClient asyncHttpClient) {
+    DefaultAsyncHttpClientAdapterImpl(final AsyncHttpClient asyncHttpClient) {
         this.asyncHttpClient = asyncHttpClient;
     }
 
     @Override
-    public CompletableFuture<HttpResponse> execute(final HttpRequest httpRequest) {
+    protected CompletableFuture<HttpResponse> executeDelegate(final HttpRequest httpRequest) {
         if (LOGGER.isTraceEnabled()) {
             LOGGER.debug("executing " + httpRequest);
         } else if (LOGGER.isDebugEnabled()) {
@@ -89,13 +89,7 @@ final class DefaultAsyncHttpClientAdapterImpl implements AsyncHttpClientAdapter 
     }
 
     @Override
-    public void close() {
+    protected void closeDelegate() {
         asyncHttpClient.close();
-        threadPool.shutdown();
     }
-
-    public static DefaultAsyncHttpClientAdapterImpl of(final AsyncHttpClient asyncHttpClient) {
-        return new DefaultAsyncHttpClientAdapterImpl(asyncHttpClient);
-    }
-
 }

@@ -211,7 +211,6 @@
                         <excludes>
                             <exclude>**/*IntegrationTest*</exclude>
                         </excludes>
-                        <skipTests>true</skipTests>
                     </configuration>
                 </plugin>
                 <plugin>
@@ -223,7 +222,6 @@
                             <include>**/*IntegrationTest.java</include>
                             <include>**/*IT.java</include>
                         </includes>
-                        <skipTests>true</skipTests>
                     </configuration>
                     <executions>
                         <execution>
