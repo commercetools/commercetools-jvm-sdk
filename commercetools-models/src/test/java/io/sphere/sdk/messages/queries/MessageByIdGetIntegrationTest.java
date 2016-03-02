@@ -4,6 +4,8 @@ import io.sphere.sdk.messages.Message;
 import io.sphere.sdk.test.IntegrationTest;
 import org.junit.Test;
 
+import java.time.Duration;
+
 import static io.sphere.sdk.orders.OrderFixtures.withOrderAndReturnInfo;
 import static org.assertj.core.api.Assertions.*;
 
@@ -18,7 +20,7 @@ public class MessageByIdGetIntegrationTest extends IntegrationTest {
                     .withLimit(1L);
             final Message messageFromQueryEndpoint = client().executeBlocking(query).head().get();
 
-            final Message message = client().executeBlocking(MessageByIdGet.of(messageFromQueryEndpoint));
+            final Message message = client().executeBlocking(MessageByIdGet.of(messageFromQueryEndpoint), Duration.ofSeconds(30));
             assertThat(message).isEqualTo(messageFromQueryEndpoint);
 
             return order;

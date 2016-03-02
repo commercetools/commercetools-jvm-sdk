@@ -1,6 +1,7 @@
 package io.sphere.sdk.customobjects.queries;
 
 import io.sphere.sdk.customobjects.CustomObject;
+import io.sphere.sdk.queries.RootJsonQueryModel;
 import io.sphere.sdk.queries.ResourceQueryModel;
 import io.sphere.sdk.queries.StringQuerySortingModel;
 
@@ -22,4 +23,16 @@ public interface CustomObjectQueryModel<T extends CustomObject<?>> extends Resou
     static <T extends CustomObject<?>> CustomObjectQueryModel<T> of() {
         return new CustomObjectQueryModelImpl<>(null, null);
     }
+
+    /**
+     * Query model for {@link CustomObject#getValue()}.
+     *
+     * <p>Example fur custom objects which contain nested objects as value:</p>
+     * {@include.example io.sphere.sdk.customobjects.queries.CustomObjectQueryIntegrationTest#demoQueryByNestedValue()}
+     * <p>Example fur custom objects which contain just a scalar value like a String or a an Integer:</p>
+     * {@include.example io.sphere.sdk.customobjects.queries.CustomObjectQueryIntegrationTest#demoQueryByFlatValue()}
+     *
+     * @return query model
+     */
+    RootJsonQueryModel<T> value();
 }

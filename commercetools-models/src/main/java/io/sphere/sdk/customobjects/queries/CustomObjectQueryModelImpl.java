@@ -1,6 +1,7 @@
 package io.sphere.sdk.customobjects.queries;
 
 import io.sphere.sdk.customobjects.CustomObject;
+import io.sphere.sdk.queries.RootJsonQueryModel;
 import io.sphere.sdk.queries.QueryModel;
 import io.sphere.sdk.queries.ResourceQueryModelImpl;
 import io.sphere.sdk.queries.StringQuerySortingModel;
@@ -20,5 +21,10 @@ final class CustomObjectQueryModelImpl<T extends CustomObject<?>> extends Resour
     @Override
     public StringQuerySortingModel<T> key() {
         return stringModel("key");
+    }
+
+    @Override
+    public RootJsonQueryModel<T> value() {
+        return new CustomObjectValueRootJsonObjectQueryModelImpl<>(null, "value");
     }
 }

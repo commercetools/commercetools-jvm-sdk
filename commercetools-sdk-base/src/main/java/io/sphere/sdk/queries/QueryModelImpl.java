@@ -61,28 +61,44 @@ public class QueryModelImpl<T> extends Base implements QueryModel<T> {
         return new SphereEnumerationQueryModelImpl<>(this, pathSegment);
     }
 
+    protected StringQuerySortingModel<T> stringModel(@Nullable final QueryModel<T> parent, final String pathSegment) {
+        return new StringQuerySortingModelImpl<>(parent, pathSegment);
+    }
+
     protected StringQuerySortingModel<T> stringModel(final String pathSegment) {
-        return new StringQuerySortingModelImpl<>(this, pathSegment);
+        return stringModel(this, pathSegment);
     }
 
     protected StringCollectionQueryModel<T> stringCollectionModel(final String pathSegment) {
         return new StringCollectionQueryModelImpl<>(this, pathSegment);
     }
 
+    protected BooleanQueryModel<T> booleanModel(@Nullable final QueryModel<T> parent, final String pathSegment) {
+        return new BooleanQueryModelImpl<>(parent, pathSegment);
+    }
+
     protected BooleanQueryModel<T> booleanModel(final String pathSegment) {
-        return new BooleanQueryModelImpl<>(this, pathSegment);
+        return booleanModel(this, pathSegment);
     }
 
     protected CountryQueryModel<T> countryQueryModel(final String pathSegment) {
         return new CountryQueryModelImpl<>(this, pathSegment);
     }
 
+    protected LongQuerySortingModel<T> longModel(@Nullable final QueryModel<T> parent, final String pathSegment) {
+        return new LongQuerySortingModelImpl<>(parent, pathSegment);
+    }
+
     protected LongQuerySortingModel<T> longModel(final String pathSegment) {
-        return new LongQuerySortingModelImpl<>(this, pathSegment);
+        return longModel(this, pathSegment);
     }
 
     protected IntegerQuerySortingModel<T> integerModel(final String pathSegment) {
-        return new IntegerQuerySortingModelImpl<>(this, pathSegment);
+        return integerModel(this, pathSegment);
+    }
+
+    protected IntegerQuerySortingModel<T> integerModel(@Nullable final QueryModel<T> parent, final String pathSegment) {
+        return new IntegerQuerySortingModelImpl<>(parent, pathSegment);
     }
 
     protected DoubleQuerySortingModel<T> doubleModel(final String pathSegment) {
