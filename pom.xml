@@ -1,11 +1,9 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xmlns:Xlint="http://www.w3.org/2001/XMLSchema"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Xlint="http://www.w3.org/2001/XMLSchema" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.commercetools.sdk.jvm.core</groupId>
     <artifactId>commercetools-jvm-sdk</artifactId>
     <packaging>pom</packaging>
-    <version>1.0.0-RC2-SNAPSHOT</version>
+    <version>1.0.0-RC2</version>
     <name>commercetools JVM SDK</name>
     <description>Java bindings for the commercetools platform</description>
     <url>https://github.com/sphereio/sphere-jvm-sdk</url>
@@ -50,7 +48,8 @@
     <scm>
         <url>git@github.com:sphereio/sphere-jvm-sdk.git</url>
         <connection>scm:git:git@github.com:sphereio/sphere-jvm-sdk.git</connection>
-    </scm>
+      <tag>commercetools-jvm-sdk-1.0.0-RC2</tag>
+  </scm>
     <properties>
         <jackson.version>2.6.5</jackson.version>
         <gson.version>2.5</gson.version>
@@ -144,7 +143,7 @@
                         <target>${java.version}</target>
                         <encoding>${project.build.sourceEncoding}</encoding>
                         <compilerArguments>
-                            <parameters/>
+                            <parameters />
                             <Werror />
                             <Xlint:all />
                             <!--<arg>-Xlint:unchecked</arg>-->
@@ -161,8 +160,8 @@
                     <configuration>
                         <docfilessubdirs>true</docfilessubdirs>
                         <excludePackageNames>*.internal:*.priv</excludePackageNames>
-                        <!--<quiet/>-->
-                        <notimestamp/>
+                        <!--<quiet />-->
+                        <notimestamp />
                         <bottom><![CDATA[
                             <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.8.0/styles/default.min.css'>
                             <script src='https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.8.0/highlight.min.js'></script>
