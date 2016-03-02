@@ -116,7 +116,6 @@ io.sphere.sdk.taxcategories.commands
 io.sphere.sdk.taxcategories.commands.updateactions
 io.sphere.sdk.taxcategories.expansion
 io.sphere.sdk.taxcategories.queries
-io.sphere.sdk.test
 io.sphere.sdk.types
 io.sphere.sdk.types.commands
 io.sphere.sdk.types.commands.updateactions
