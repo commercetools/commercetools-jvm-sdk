@@ -13,7 +13,6 @@ import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.queries.QueryPredicate;
 import io.sphere.sdk.queries.QuerySort;
 import io.sphere.sdk.test.IntegrationTest;
-import org.assertj.core.api.AbstractIterableAssert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -91,7 +90,7 @@ public class CustomObjectQueryIntegrationTest extends IntegrationTest {
     public void queryByPlainStringValue() {
         final String value = "hello";
         checkSimpleQuery(value, String.class,
-                m -> m.value().ofValue().ofString().is(value),
+                m -> m.value().ofJsonValue().ofString().is(value),
                 jsonNode -> assertThat(jsonNode.textValue()).isEqualTo(value));
     }
 
@@ -99,7 +98,7 @@ public class CustomObjectQueryIntegrationTest extends IntegrationTest {
     public void queryByPlainIntegerValue() {
         final int value = 1;
         checkSimpleQuery(value, Integer.class,
-                m -> m.value().ofValue().ofInteger().is(value),
+                m -> m.value().ofJsonValue().ofInteger().is(value),
                 jsonNode -> assertThat(jsonNode.asInt()).isEqualTo(value));
     }
 
@@ -107,7 +106,7 @@ public class CustomObjectQueryIntegrationTest extends IntegrationTest {
     public void queryByPlainLongValue() {
         final long value = 2L;
         checkSimpleQuery(value, Long.class,
-                m -> m.value().ofValue().ofLong().is(value),
+                m -> m.value().ofJsonValue().ofLong().is(value),
                 jsonNode -> assertThat(jsonNode.asLong()).isEqualTo(value));
     }
 
@@ -115,7 +114,7 @@ public class CustomObjectQueryIntegrationTest extends IntegrationTest {
     public void queryByPlainBooleanValue() {
         final boolean value = true;
         checkSimpleQuery(value, Boolean.class,
-                m -> m.value().ofValue().ofBoolean().is(value),
+                m -> m.value().ofJsonValue().ofBoolean().is(value),
                 jsonNode -> assertThat(jsonNode.asBoolean()).isEqualTo(value));
     }
 
@@ -159,8 +158,8 @@ public class CustomObjectQueryIntegrationTest extends IntegrationTest {
         final CustomObjectQuery<JsonNode> query = CustomObjectQuery.ofJsonNode()
                 .plusPredicates(m -> m.container().is(container))
                 .plusPredicates(m -> m.key().is(key))
-                .plusPredicates(m -> m.value().ofObject().ofString("foo").is("bar"))
-                .plusPredicates(m -> m.value().ofObject().ofInteger("count").isGreaterThan(4));
+                .plusPredicates(m -> m.value().ofJsonObject().ofString("foo").is("bar"))
+                .plusPredicates(m -> m.value().ofJsonObject().ofInteger("count").isGreaterThan(4));
         final PagedQueryResult<CustomObject<JsonNode>> pagedQueryResult = client().executeBlocking(query);
 
         final List<CustomObject<JsonNode>> results = pagedQueryResult.getResults();
@@ -189,13 +188,13 @@ public class CustomObjectQueryIntegrationTest extends IntegrationTest {
         client().executeBlocking(CustomObjectUpsertCommand.of(draft));
 
         final CustomObjectQuery<JsonNode> query = CustomObjectQuery.ofJsonNode()
-                .plusPredicates(m -> m.value().ofObject().ofString("s").is("s value"))
-                .plusPredicates(m -> m.value().ofObject().ofObject("sub").ofString("sub-s").is("sub s value"))
-                .plusPredicates(m -> m.value().ofObject().ofObject("sub").ofString("sub-nullable").isNotPresent())
-                .plusPredicates(m -> m.value().ofObject().ofObject("sub").ofBoolean("sub-boolean").is(true))
-                .plusPredicates(m -> m.value().ofObject().ofObject("sub").ofInteger("sub-number").is(5))
-                .plusPredicates(m -> m.value().ofObject().ofObject("sub").ofLong("sub-number").is(5L))
-                .plusPredicates(m -> m.value().ofObject().ofObject("sub").ofStringCollection("arrno").containsAll(asList("foo", "bar")))
+                .plusPredicates(m -> m.value().ofJsonObject().ofString("s").is("s value"))
+                .plusPredicates(m -> m.value().ofJsonObject().ofJsonObject("sub").ofString("sub-s").is("sub s value"))
+                .plusPredicates(m -> m.value().ofJsonObject().ofJsonObject("sub").ofString("sub-nullable").isNotPresent())
+                .plusPredicates(m -> m.value().ofJsonObject().ofJsonObject("sub").ofBoolean("sub-boolean").is(true))
+                .plusPredicates(m -> m.value().ofJsonObject().ofJsonObject("sub").ofInteger("sub-number").is(5))
+                .plusPredicates(m -> m.value().ofJsonObject().ofJsonObject("sub").ofLong("sub-number").is(5L))
+                .plusPredicates(m -> m.value().ofJsonObject().ofJsonObject("sub").ofStringCollection("arrno").containsAll(asList("foo", "bar")))
                 .plusPredicates(m -> m.container().is("CustomObjectQueryIntegrationTest"))
                 .plusPredicates(m -> m.key().is("queryByValueAsObject"))
                 ;

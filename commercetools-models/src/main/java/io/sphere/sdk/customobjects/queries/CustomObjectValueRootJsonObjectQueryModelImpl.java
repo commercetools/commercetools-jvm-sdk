@@ -4,22 +4,22 @@ import io.sphere.sdk.queries.*;
 
 import javax.annotation.Nullable;
 
-final class CustomObjectValueRootJsonQueryModelImpl<T> extends QueryModelImpl<T> implements RootJsonQueryModel<T>, JsonQueryModel<T>, JsonValueQueryModel<T> {
+final class CustomObjectValueRootJsonObjectQueryModelImpl<T> extends QueryModelImpl<T> implements RootJsonQueryModel<T>, JsonObjectQueryModel<T>, JsonValueQueryModel<T> {
 
     public static final String VALUE = "value";
 
-    CustomObjectValueRootJsonQueryModelImpl(@Nullable final QueryModel<T> parent, @Nullable final String pathSegment) {
+    CustomObjectValueRootJsonObjectQueryModelImpl(@Nullable final QueryModel<T> parent, @Nullable final String pathSegment) {
         super(parent, pathSegment);
     }
 
     @Override
-    public JsonQueryModel<T> ofObject() {
-        return new CustomObjectValueRootJsonQueryModelImpl<>(null, VALUE);
+    public JsonObjectQueryModel<T> ofJsonObject() {
+        return new CustomObjectValueRootJsonObjectQueryModelImpl<>(null, VALUE);
     }
 
     @Override
-    public JsonValueQueryModel<T> ofValue() {
-        return new CustomObjectValueRootJsonQueryModelImpl<>(null, null);
+    public JsonValueQueryModel<T> ofJsonValue() {
+        return new CustomObjectValueRootJsonObjectQueryModelImpl<>(null, null);
     }
 
     @Override
@@ -28,8 +28,8 @@ final class CustomObjectValueRootJsonQueryModelImpl<T> extends QueryModelImpl<T>
     }
 
     @Override
-    public JsonQueryModel<T> ofObject(final String fieldName) {
-        return new CustomObjectValueRootJsonQueryModelImpl<>(this, fieldName);
+    public JsonObjectQueryModel<T> ofJsonObject(final String fieldName) {
+        return new CustomObjectValueRootJsonObjectQueryModelImpl<>(this, fieldName);
     }
 
     @Override

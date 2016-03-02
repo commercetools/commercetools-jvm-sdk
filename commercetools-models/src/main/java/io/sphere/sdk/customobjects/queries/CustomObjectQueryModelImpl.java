@@ -25,6 +25,6 @@ final class CustomObjectQueryModelImpl<T extends CustomObject<?>> extends Resour
 
     @Override
     public RootJsonQueryModel<T> value() {
-        return new CustomObjectValueRootJsonQueryModelImpl<>(null, "value");
+        return new CustomObjectValueRootJsonObjectQueryModelImpl<>(null, "value");
     }
 }

@@ -1,7 +1,7 @@
 package io.sphere.sdk.queries;
 
 public interface RootJsonQueryModel<T> {
-    JsonQueryModel<T> ofObject();
+    JsonObjectQueryModel<T> ofJsonObject();
 
-    JsonValueQueryModel<T> ofValue();
+    JsonValueQueryModel<T> ofJsonValue();
 }

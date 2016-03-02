@@ -12,16 +12,16 @@ import static org.assertj.core.api.Assertions.*;
 public class CustomObjectQueryModelTest {
     @Test
     public void objectNodeInValue() {
-        assertResult(m -> m.value().ofObject().ofString("s").is("s value"), "value(s=\"s value\")");
-        assertResult(m -> m.value().ofObject().ofObject("sub").ofString("sub-s").is("sub s value"), "value(sub(sub-s=\"sub s value\"))");
-        assertResult(m -> m.value().ofObject().ofObject("sub").ofString("sub-nullable").isNotPresent(), "value(sub(sub-nullable is not defined))");
-        assertResult(m -> m.value().ofObject().ofObject("sub").ofBoolean("sub-boolean").is(true), "value(sub(sub-boolean=true))");
-        assertResult(m -> m.value().ofObject().ofObject("sub").ofStringCollection("arrno").containsAll(asList("foo", "bar")), "value(sub(arrno contains all (\"foo\", \"bar\")))");
+        assertResult(m -> m.value().ofJsonObject().ofString("s").is("s value"), "value(s=\"s value\")");
+        assertResult(m -> m.value().ofJsonObject().ofJsonObject("sub").ofString("sub-s").is("sub s value"), "value(sub(sub-s=\"sub s value\"))");
+        assertResult(m -> m.value().ofJsonObject().ofJsonObject("sub").ofString("sub-nullable").isNotPresent(), "value(sub(sub-nullable is not defined))");
+        assertResult(m -> m.value().ofJsonObject().ofJsonObject("sub").ofBoolean("sub-boolean").is(true), "value(sub(sub-boolean=true))");
+        assertResult(m -> m.value().ofJsonObject().ofJsonObject("sub").ofStringCollection("arrno").containsAll(asList("foo", "bar")), "value(sub(arrno contains all (\"foo\", \"bar\")))");
     }
 
     @Test
     public void valueInValue() {
-        assertResult(m -> m.value().ofValue().ofString().is("hello"), "value=\"hello\"");
+        assertResult(m -> m.value().ofJsonValue().ofString().is("hello"), "value=\"hello\"");
     }
 
     private void assertResult(final Function<CustomObjectQueryModel<CustomObject<Void>>, QueryPredicate<CustomObject<Void>>> f, final String expected) {

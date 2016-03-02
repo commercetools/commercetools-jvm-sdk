@@ -1,9 +1,9 @@
 package io.sphere.sdk.queries;
 
-public interface JsonQueryModel<T> {
+public interface JsonObjectQueryModel<T> {
     StringQueryModel<T> ofString(String fieldName);
 
-    JsonQueryModel<T> ofObject(String fieldName);
+    JsonObjectQueryModel<T> ofJsonObject(String fieldName);
 
     BooleanQueryModel<T> ofBoolean(String fieldName);
 
