@@ -120,9 +120,45 @@ public class CategoryTreeTest {
         final Category c22 = tree.findById("C-2-2").get();
 
         final CategoryTree subtree = tree.getSubtree(asList(a, b1, c22));
-//TODO assertions
-//   TODO for 2 cats on same level     tree.getSubtree()
-//   TODO for 2 cats on different level     tree.getSubtree()
+        assertThat(subtree.getRoots()).extracting(c -> c.getId())
+                .as("roots are still categories which have no parent and included in this tree")
+                .containsOnly("A")
+                .doesNotContain("B-1", "C-2-2", "B", "C");
+        assertThat(subtree.getSubtreeRoots()).extracting(c -> c.getId())
+                .as("subtree rootes are the categories at the top," +
+                        "no matter if they have a parent reference")
+                .containsOnly("A", "B-1", "C-2-2")
+                .doesNotContain("B", "C", "B-2");
+
+        assertThat(subtree.findById("A")).isPresent();
+        assertThat(subtree.findById("B-1")).isPresent();
+        assertThat(subtree.findById("C-2-2")).isPresent();
+        assertThat(subtree.findById("B-1-2")).isPresent();
+        assertThat(subtree.findById("C")).isEmpty();
+        assertThat(subtree.findById("B-2")).isEmpty();
+
+        assertThat(subtree.findByExternalId("external-id-C-2-2")).isPresent();
+        assertThat(subtree.findByExternalId("external-id-B-2")).isEmpty();
+
+        assertThat(subtree.findBySlug(Locale.ENGLISH, "slug-C-2-2")).isPresent();
+        assertThat(subtree.findBySlug(Locale.ENGLISH, "slug-B-2")).isEmpty();
+
+        assertThat(subtree.getAllAsFlatList()).hasSize(18);
+
+        assertThat(subtree.findChildren(b1)).hasSize(3);
+        assertThat(subtree.findChildren(tree.findById("C").get())).hasSize(0);
+        assertThat(subtree.findChildren(tree.findById("C-2").get()))
+                .as("C-2 is not included in the tree but its direct child C-2-2")
+                .hasSize(1);
+
+        assertThat(subtree.getSiblings(singletonList(a))).hasSize(0);
+        assertThat(subtree.getSiblings(singletonList(c22))).hasSize(0);
+        assertThat(subtree.getSiblings(singletonList(tree.findById("B-1-1").get()))).hasSize(2);
+
+        final CategoryTree b1Subtree = subtree.getSubtree(singletonList(b1));
+        assertThat(b1Subtree.getAllAsFlatList()).hasSize(4);
+        assertThat(b1Subtree.getRoots()).hasSize(0);
+        assertThat(b1Subtree.getSubtreeRoots()).hasSize(1);
     }
 
     @Test
