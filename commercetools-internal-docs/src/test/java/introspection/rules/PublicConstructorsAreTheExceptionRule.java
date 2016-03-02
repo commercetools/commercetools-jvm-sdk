@@ -15,7 +15,8 @@ public class PublicConstructorsAreTheExceptionRule extends ConstructorStrategyRu
                     "io.sphere.sdk.products.queries.PriceCollectionQueryModel," +
                     "io.sphere.sdk.products.queries.ProductVariantQueryModel," +
                     "io.sphere.sdk.search.MetaModelSearchDslBuilder," +
-                    "ResourceMetaModelSearchDslBuilderImpl").split(",( )?"));
+                    "ResourceMetaModelSearchDslBuilderImpl," +
+                    "io.sphere.sdk.http.HttpClientAdapterBase").split(",( )?"));
 
     @Override
     protected boolean classIsIncludedInRule(final Class<?> clazz) {
