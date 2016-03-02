@@ -3,6 +3,7 @@ package io.sphere.sdk.customobjects.queries;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.fasterxml.jackson.databind.node.IntNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import io.sphere.sdk.customobjects.CustomObject;
 import io.sphere.sdk.customobjects.CustomObjectDraft;
@@ -134,23 +135,60 @@ public class CustomObjectQueryIntegrationTest extends IntegrationTest {
     }
 
     @Test
-    public void demoQueryByValue() {
+    public void demoQueryByNestedValue() {
         /*
         the custom object will look like:
         {
             "container":"CustomObjectQueryIntegrationTest",
-            "key":"demoQueryByValue",
+            "key":"demoQueryByNestedValue",
             "value": {
                 "foo": "bar",
+                "baz": {
+                    "x": "y"
+                },
                 "count": 5
             }
         }
          */
-        final ObjectNode value = objectMapper.createObjectNode();
-        value.put("foo", "bar");
-        value.put("count", 5);
+        final ObjectNode valueAsJsonObjectNode = objectMapper.createObjectNode();
+        valueAsJsonObjectNode.put("foo", "bar");
+        final ObjectNode bazNode = objectMapper.createObjectNode();
+        bazNode.put("x", "y");
+        valueAsJsonObjectNode.set("baz", bazNode);
+        valueAsJsonObjectNode.put("count", 5);
+
         final String container = "CustomObjectQueryIntegrationTest";
-        final String key = "demoQueryByValue";
+        final String key = "demoQueryByNestedValue";
+        final CustomObjectUpsertCommand<JsonNode> cmd =
+                CustomObjectUpsertCommand.of(CustomObjectDraft.ofUnversionedUpsert(container, key, valueAsJsonObjectNode));
+        client().executeBlocking(cmd);
+
+        final CustomObjectQuery<JsonNode> query = CustomObjectQuery.ofJsonNode()
+                .plusPredicates(m -> m.container().is(container))
+                .plusPredicates(m -> m.key().is(key))
+                .plusPredicates(m -> m.value().ofJsonObject().ofString("foo").is("bar"))
+                .plusPredicates(m -> m.value().ofJsonObject().ofJsonObject("baz").ofString("x").is("y"))
+                .plusPredicates(m -> m.value().ofJsonObject().ofInteger("count").isGreaterThan(4));
+        final PagedQueryResult<CustomObject<JsonNode>> pagedQueryResult = client().executeBlocking(query);
+
+        final List<CustomObject<JsonNode>> results = pagedQueryResult.getResults();
+        assertThat(results).hasSize(1);
+        assertThat(results.get(0).getKey()).isEqualTo(key);
+    }
+
+    @Test
+    public void demoQueryByFlatValue() {
+        /*
+        the custom object will look like:
+        {
+            "container":"CustomObjectQueryIntegrationTest",
+            "key":"demoQueryByFlatValue",
+            "value": 4
+        }
+         */
+        final JsonNode value = new IntNode(4);
+        final String container = "CustomObjectQueryIntegrationTest";
+        final String key = "demoQueryByFlatValue";
         final CustomObjectUpsertCommand<JsonNode> cmd =
                 CustomObjectUpsertCommand.of(CustomObjectDraft.ofUnversionedUpsert(container, key, value));
         client().executeBlocking(cmd);
@@ -158,8 +196,7 @@ public class CustomObjectQueryIntegrationTest extends IntegrationTest {
         final CustomObjectQuery<JsonNode> query = CustomObjectQuery.ofJsonNode()
                 .plusPredicates(m -> m.container().is(container))
                 .plusPredicates(m -> m.key().is(key))
-                .plusPredicates(m -> m.value().ofJsonObject().ofString("foo").is("bar"))
-                .plusPredicates(m -> m.value().ofJsonObject().ofInteger("count").isGreaterThan(4));
+                .plusPredicates(m -> m.value().ofJsonValue().ofInteger().isGreaterThan(3));
         final PagedQueryResult<CustomObject<JsonNode>> pagedQueryResult = client().executeBlocking(query);
 
         final List<CustomObject<JsonNode>> results = pagedQueryResult.getResults();

@@ -27,7 +27,10 @@ public interface CustomObjectQueryModel<T extends CustomObject<?>> extends Resou
     /**
      * Query model for {@link CustomObject#getValue()}.
      *
-     * {@include.example io.sphere.sdk.customobjects.queries.CustomObjectQueryIntegrationTest#demoQueryByValue()}
+     * <p>Example fur custom objects which contain nested objects as value:</p>
+     * {@include.example io.sphere.sdk.customobjects.queries.CustomObjectQueryIntegrationTest#demoQueryByNestedValue()}
+     * <p>Example fur custom objects which contain just a scalar value like a String or a an Integer:</p>
+     * {@include.example io.sphere.sdk.customobjects.queries.CustomObjectQueryIntegrationTest#demoQueryByFlatValue()}
      *
      * @return query model
      */
