@@ -92,7 +92,7 @@ public interface CategoryTree {
      * @param categoryIds Categories for which the sibling categories should be fetched
      * @return a list of sibling categories
      */
-    List<Category> getSiblings(final Collection<? extends Identifiable<Category>> categoryIds);
+    List<Category> findSiblings(final Collection<? extends Identifiable<Category>> categoryIds);
 
     /**
      * Gets the subtree of the given parent categories.
@@ -109,11 +109,26 @@ public interface CategoryTree {
 
     /**
      * For a given category searches the ancestor that is in root level.
+     *
+     * <p>The examples use the <a href="https://gist.github.com/schleichardt/7f0d023b815206cb2a57" target="_blank">ABC example set</a>.</p>
+     *
+     * {@include.example io.sphere.sdk.categories.CategoryTreeTest#getRootAncestor()}
+     *
      * @param category the category which to find the root ancestor
      * @return the root ancestor of the category or the same category in case it is a root itself
      */
     Category getRootAncestor(final Identifiable<Category> category);
 
+    /**
+     * For a subtree the categories which are at the top level.
+     * <p>Unlike {@link #getRoots()} this does ignore the parent reference.</p>
+     *
+     * <p>The examples use the <a href="https://gist.github.com/schleichardt/7f0d023b815206cb2a57" target="_blank">ABC example set</a>.</p>
+     *
+     * {@include.example io.sphere.sdk.categories.CategoryTreeTest#getSubtreeRoots()}
+     *
+     * @return subtree roots
+     */
     List<Category> getSubtreeRoots();
 
     /**

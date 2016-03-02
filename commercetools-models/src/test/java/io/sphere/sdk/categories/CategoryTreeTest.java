@@ -78,21 +78,21 @@ public class CategoryTreeTest {
         final Category c23 = tree.findById("C-2-3").get();
         final Category b = tree.findById("B").get();
         final Category a = tree.findById("A").get();
-        assertThat(tree.getSiblings(singletonList(b2)))
+        assertThat(tree.findSiblings(singletonList(b2)))
                 .extracting(c -> c.getId())
                 .as("one category will provide all its siblings (no recursion) without including itself")
                 .containsOnly("B-1", "B-3");
-        assertThat(tree.getSiblings(asList(b1, b2))).extracting(c -> c.getId())
+        assertThat(tree.findSiblings(asList(b1, b2))).extracting(c -> c.getId())
                 .as("providing multiple categories which are siblings exclude themselves from the result list")
                 .containsOnly("B-3");
-        assertThat(tree.getSiblings(asList(b2, c2))).extracting(c -> c.getId())
+        assertThat(tree.findSiblings(asList(b2, c2))).extracting(c -> c.getId())
                 .as("using non-sibling categories as arguments results in getting all their siblings in one list")
                 .containsOnly("B-1", "B-3", "C-1", "C-3");
-        assertThat(tree.getSiblings(asList(b, b1))).extracting(c -> c.getId())
+        assertThat(tree.findSiblings(asList(b, b1))).extracting(c -> c.getId())
                 .as("even on different levels it will provide the siblings and will filter out all input categories")
                 .containsOnly("A", "C", "B-2", "B-3");
-        assertThat(tree.getSiblings(asList(a, b))).extracting(c -> c.getId()).containsOnly("C");
-        assertThat(tree.getSiblings(asList(c21, c22, c23))).extracting(c -> c.getId())
+        assertThat(tree.findSiblings(asList(a, b))).extracting(c -> c.getId()).containsOnly("C");
+        assertThat(tree.findSiblings(asList(c21, c22, c23))).extracting(c -> c.getId())
                 .as("if there are no siblings available")
                 .isEmpty();
     }
@@ -113,6 +113,17 @@ public class CategoryTreeTest {
     }
 
     @Test
+    public void getSubtreeForRecursiveProblem() {
+        final CategoryTree tree = createAbcCategoryTree();
+        final Category a = tree.findById("A").get();
+        final Category b = tree.findById("B").get();
+        final Category b1 = tree.findById("B-1").get();
+        assertThatThrownBy(() -> tree.getSubtree(asList(a, b, b1)))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("category of ID [B-1] cannot be subtree root and decedent of [B]");
+    }
+
+    @Test
     public void getSubtree() {
         final CategoryTree tree = createAbcCategoryTree();
         final Category a = tree.findById("A").get();
@@ -121,7 +132,7 @@ public class CategoryTreeTest {
 
         final CategoryTree subtree = tree.getSubtree(asList(a, b1, c22));
         assertThat(subtree.getRoots()).extracting(c -> c.getId())
-                .as("roots are still categories which have no parent and included in this tree")
+                .as("roots are still categories which have no parent and are included in this tree")
                 .containsOnly("A")
                 .doesNotContain("B-1", "C-2-2", "B", "C");
         assertThat(subtree.getSubtreeRoots()).extracting(c -> c.getId())
@@ -151,14 +162,33 @@ public class CategoryTreeTest {
                 .as("C-2 is not included in the tree but its direct child C-2-2")
                 .hasSize(1);
 
-        assertThat(subtree.getSiblings(singletonList(a))).hasSize(0);
-        assertThat(subtree.getSiblings(singletonList(c22))).hasSize(0);
-        assertThat(subtree.getSiblings(singletonList(tree.findById("B-1-1").get()))).hasSize(2);
+        assertThat(subtree.findSiblings(singletonList(a))).hasSize(0);
+        assertThat(subtree.findSiblings(singletonList(c22))).hasSize(0);
+        assertThat(subtree.findSiblings(singletonList(tree.findById("B-1-1").get()))).hasSize(2);
 
         final CategoryTree b1Subtree = subtree.getSubtree(singletonList(b1));
         assertThat(b1Subtree.getAllAsFlatList()).hasSize(4);
         assertThat(b1Subtree.getRoots()).hasSize(0);
         assertThat(b1Subtree.getSubtreeRoots()).hasSize(1);
+    }
+
+    @Test
+    public void getSubtreeRoots() {
+        final CategoryTree tree = createAbcCategoryTree();
+        final Category a = tree.findById("A").get();
+        final Category b1 = tree.findById("B-1").get();
+        final Category c22 = tree.findById("C-2-2").get();
+
+        final CategoryTree subtree = tree.getSubtree(asList(a, b1, c22));
+        assertThat(subtree.getRoots()).extracting(c -> c.getId())
+                .as("roots are still categories which have no parent and are included in this tree")
+                .containsOnly("A")
+                .doesNotContain("B-1", "C-2-2", "B", "C");
+        assertThat(subtree.getSubtreeRoots()).extracting(c -> c.getId())
+                .as("subtree rootes are the categories at the top," +
+                        "no matter if they have a parent reference")
+                .containsOnly("A", "B-1", "C-2-2")
+                .doesNotContain("B", "C", "B-2");
     }
 
     @Test
@@ -243,6 +273,17 @@ public class CategoryTreeTest {
     }
 
     @Test
+    public void getRootAncestor() throws Exception {
+        final CategoryTree tree = createAbcCategoryTree();
+        final Category a = tree.findById("A").get();
+        final Category a1 = tree.findById("A-1").get();
+        final Category a23 = tree.findById("A-2-3").get();
+        assertThat(tree.getRootAncestor(a)).isEqualTo(a);
+        assertThat(tree.getRootAncestor(a1)).isEqualTo(a);
+        assertThat(tree.getRootAncestor(a23)).isEqualTo(a);
+    }
+
+    @Test
     public void searchById() throws Exception {
         final CategoryTree tree = CategoryTree.of(createCategoryHierarchyAsFlatList());
         assertThat(tree.findById("0bu").get().getId()).isEqualTo("0bu");
@@ -279,7 +320,7 @@ public class CategoryTreeTest {
         final List<Category> categories = categoryRefs.stream()
                 .map(c -> CATEGORY_TREE.findById(c.getId()).get())
                 .collect(toList());
-        final List<Category> siblings = CATEGORY_TREE.getSiblings(categories);
+        final List<Category> siblings = CATEGORY_TREE.findSiblings(categories);
         test.accept(siblings);
     }
 

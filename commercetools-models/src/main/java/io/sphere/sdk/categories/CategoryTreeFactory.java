@@ -78,6 +78,19 @@ final class CategoryTreeFactory {
                 .map(identifiable -> getCategoryOrThrow(identifiable, categoryTree))
                 .collect(toList());
 
+        final List<String> subtreeRootIds = subtreeRoots.parallelStream().map(Identifiable::getId).collect(toList());
+
+        subtreeRootsCategories.forEach(subtreeRoot -> {
+            final Optional<String> rootAncestorOptional = subtreeRoot.getAncestors()
+                    .stream()
+                    .map(x -> x.getId())
+                    .filter(ancestorId -> subtreeRootIds.contains(ancestorId))
+                    .findFirst();
+            if (rootAncestorOptional.isPresent()) {
+                throw new IllegalArgumentException(String.format("category of ID [%s] cannot be subtree root and decedent of [%s]", subtreeRoot.getId(), rootAncestorOptional.get()));
+            }
+        });
+
         final List<Category> includedCategories = new LinkedList<>();
         subtreeRootsCategories.forEach(parentCategory -> {
             includedCategories.add(parentCategory);

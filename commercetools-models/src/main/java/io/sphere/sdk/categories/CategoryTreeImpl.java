@@ -75,7 +75,7 @@ class CategoryTreeImpl extends Base implements CategoryTree {
     }
 
     @Override
-    public List<Category> getSiblings(final Collection<? extends Identifiable<Category>> categoryIdentifiables) {
+    public List<Category> findSiblings(final Collection<? extends Identifiable<Category>> categoryIdentifiables) {
         return categoryIdentifiables.stream()
                 .flatMap(category -> getSiblings(CategoryTreeUtils.getCategoryOrThrow(category, this)).stream())
                 .distinct()
