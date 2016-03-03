@@ -167,7 +167,7 @@
                     <configuration>
                         <docfilessubdirs>true</docfilessubdirs>
                         <excludePackageNames>*.internal:*.priv</excludePackageNames>
-                        <!--<quiet />-->
+                        <quiet />
                         <notimestamp />
                         <bottom><![CDATA[
                             <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.8.0/styles/default.min.css'>
