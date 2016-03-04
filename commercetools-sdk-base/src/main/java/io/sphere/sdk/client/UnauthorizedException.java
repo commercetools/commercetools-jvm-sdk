@@ -1,5 +1,10 @@
 package io.sphere.sdk.client;
 
+/**
+ * Unauthorized access to the commercetools platform wither through invalid client credentials or tokens.
+ * Most likely the subclass exceptions {@link InvalidClientCredentialsException} and {@link InvalidTokenException} will be thrown.
+ *
+ */
 public class UnauthorizedException extends ClientErrorException {
     private static final long serialVersionUID = 0L;
 
