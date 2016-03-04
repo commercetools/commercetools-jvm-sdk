@@ -7,6 +7,7 @@ import java.util.Collections;
 import java.util.List;
 
 /**
+ Typical exception for bad requests containing error information.
 
  <h3 id="error-codes">Error Codes</h3>
 

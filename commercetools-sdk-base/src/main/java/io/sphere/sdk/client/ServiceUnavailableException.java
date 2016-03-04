@@ -3,6 +3,8 @@ package io.sphere.sdk.client;
 /**
  * The SPHERE.IO API is currently not available.
  *
+ * <p>To simulate for tests this exception see {@link SphereServiceException}.</p>
+ *
  */
 public class ServiceUnavailableException extends ServerErrorException {
     private static final long serialVersionUID = 0L;

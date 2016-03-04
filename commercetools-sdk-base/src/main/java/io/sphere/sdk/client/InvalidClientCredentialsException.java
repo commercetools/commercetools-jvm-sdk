@@ -1,5 +1,8 @@
 package io.sphere.sdk.client;
 
+/**
+ * Exception for the case that projectKey/cliendId/clientSecret are invalid.
+ */
 public class InvalidClientCredentialsException extends UnauthorizedException {
     private static final long serialVersionUID = 0L;
 

@@ -5,7 +5,7 @@ package io.sphere.sdk.client;
  * Known causes:
  *
  * <ul>
- *     <li>Updating a object which does not exist (anymore)</li>
+ *     <li>Updating an object which does not exist (anymore)</li>
  * </ul>
  *
  *
