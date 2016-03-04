@@ -20,7 +20,7 @@ public class MessageByIdGetIntegrationTest extends IntegrationTest {
                     .withLimit(1L);
             final Message messageFromQueryEndpoint = client().executeBlocking(query).head().get();
 
-            final Message message = client().executeBlocking(MessageByIdGet.of(messageFromQueryEndpoint), Duration.ofSeconds(30));
+            final Message message = client().executeBlocking(MessageByIdGet.of(messageFromQueryEndpoint), Duration.ofSeconds(45));
             assertThat(message).isEqualTo(messageFromQueryEndpoint);
 
             return order;
