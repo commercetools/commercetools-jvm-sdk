@@ -1,7 +1,7 @@
 package io.sphere.sdk.client;
 
 /**
- * Unauthorized access to the commercetools platform wither through invalid client credentials or tokens.
+ * Unauthorized access to the commercetools platform with either invalid client credentials or tokens.
  * Most likely the subclass exceptions {@link InvalidClientCredentialsException} and {@link InvalidTokenException} will be thrown.
  *
  */
