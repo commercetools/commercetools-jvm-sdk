@@ -7,12 +7,9 @@ import java.util.Collections;
 import java.util.List;
 
 /**
+ Typical exception for bad requests containing error information.
 
- <h3 id="error-codes">Error Codes</h3>
-
- <h4 id="InvalidField">InvalidField</h4>
- <p>One possible cause could be, that you try to set the value of a product attribute and the type is not matching or you have an enum field and the key is wrong.</p>
-Example: <code>{"statusCode":400,"message":"The value '2' is not valid for field 'fieldNameExample'. Allowed values are: \"red\",\"green\". ","errors":[{"code":"InvalidField","message":"The value '2' is not valid for field 'fieldNameExample'. Allowed values are: \"red\",\"green\". ","invalidValue":2,"allowedValues":["red","green"],"field":"fieldNameExample"}]}</code>
+ <p>A <a href="http://dev.commercetools.com/http-api-errors.html#general-400-bad-request" target="_blank">list of error codes</a> can be found on the commercetools website.</p>
 
  */
 public class ErrorResponseException extends BadRequestException implements ErrorResponse {

@@ -1,6 +1,12 @@
 package io.sphere.sdk.search.model;
 
-public class InvalidRangeException extends RuntimeException {
+/**
+ * Exception for invalid {@link Range}s.
+ *
+ * @see InvertedBoundsException
+ * @see SameExclusiveBoundsException
+ */
+public class InvalidRangeException extends IllegalArgumentException {
     private static final long serialVersionUID = 1098946885116985560L;
 
     public InvalidRangeException() {

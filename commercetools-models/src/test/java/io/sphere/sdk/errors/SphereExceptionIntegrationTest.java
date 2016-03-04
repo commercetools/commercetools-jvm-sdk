@@ -50,6 +50,13 @@ public class SphereExceptionIntegrationTest extends IntegrationTest {
     public ExpectedException thrown = ExpectedException.none();
 
     @Test
+    public void demoExceptionForCode() {
+        final int statusCode = 500;
+        final SphereClient httpTestDouble = TestDoubleSphereClientFactory.createHttpTestDouble(intent -> HttpResponse.of(statusCode));
+
+    }
+
+    @Test
     public void invalidJsonInHttpRequestIntent() throws Throwable {
         executing(() -> TestSphereRequest.of(HttpRequestIntent.of(POST, "/categories", "{invalidJson :)")))
                 .resultsInA(ErrorResponseException.class, InvalidJsonInputError.class);

@@ -22,7 +22,7 @@ import java.util.Optional;
 import java.util.regex.Pattern;
 
 /**
- * <span id="exception-summary">Base class for all exceptions related to the SDK.</span>
+ * <span id="exception-summary">Base class for exceptions related to the SDK.</span>
  *
  */
 public class SphereException extends RuntimeException {

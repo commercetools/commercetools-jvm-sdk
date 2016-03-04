@@ -3,6 +3,7 @@ package io.sphere.sdk.search.model;
 import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class RangeTest {
 
@@ -62,14 +63,18 @@ public class RangeTest {
         assertThat(range(Bound.exclusive(4), Bound.inclusive(4)).isEmpty()).isTrue();
     }
 
-    @Test(expected = InvertedBoundsException.class)
+    @Test
     public void isInvalidWhenBoundsAreInverted() throws Exception {
-        range(Bound.exclusive(5), Bound.exclusive(4));
+        final Bound<Integer> lowerBound = Bound.exclusive(5);
+        final Bound<Integer> upperBound = Bound.exclusive(4);
+        assertThatThrownBy(() -> range(lowerBound, upperBound)).isInstanceOf(InvertedBoundsException.class);
     }
 
-    @Test(expected = SameExclusiveBoundsException.class)
+    @Test
     public void isInvalidWhenBoundsAreEqualAndExclusive() throws Exception {
-        range(Bound.exclusive(4), Bound.exclusive(4));
+        final Bound<Integer> lowerBound = Bound.exclusive(4);
+        final Bound<Integer> upperBound = lowerBound;
+        assertThatThrownBy(() -> range(lowerBound, upperBound)).isInstanceOf(SameExclusiveBoundsException.class);
     }
 
     @Test
