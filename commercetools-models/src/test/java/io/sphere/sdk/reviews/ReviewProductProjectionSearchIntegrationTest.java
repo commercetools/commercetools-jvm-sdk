@@ -106,7 +106,7 @@ public class ReviewProductProjectionSearchIntegrationTest extends IntegrationTes
                 .withFacets(m -> m.reviewRatingStatistics().averageRating().onlyRange(facetRanges))
                 .withSort(m -> m.reviewRatingStatistics().averageRating().desc());
 
-        assertEventually(() -> {
+        assertEventually(Duration.ofSeconds(60), Duration.ofMillis(100), () -> {
             final PagedSearchResult<ProductProjection> result = client().executeBlocking(searchRequest);
             assertThat(result.getResults()).hasSize(2);
             final ProductProjection productProjection = result.getResults().get(0);
@@ -152,7 +152,7 @@ public class ReviewProductProjectionSearchIntegrationTest extends IntegrationTes
                 .plusFacets(m -> m.reviewRatingStatistics().highestRating().allRanges())
                 .plusFacets(m -> m.reviewRatingStatistics().lowestRating().allRanges())
                 ;
-        assertEventually(Duration.ofSeconds(45), Duration.ofMillis(100), () -> {
+        assertEventually(Duration.ofSeconds(60), Duration.ofMillis(100), () -> {
             softAssert(soft -> {
                 final PagedSearchResult<ProductProjection> res = client().executeBlocking(projectionSearch);
                 soft.assertThat(res.size()).isGreaterThanOrEqualTo(3);
