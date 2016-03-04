@@ -1,22 +1,22 @@
 package io.sphere.sdk.producttypes.commands;
 
-import io.sphere.sdk.products.attributes.*;
 import io.sphere.sdk.models.EnumValue;
 import io.sphere.sdk.models.LocalizedEnumValue;
 import io.sphere.sdk.models.LocalizedString;
+import io.sphere.sdk.products.attributes.*;
 import io.sphere.sdk.producttypes.ProductType;
+import io.sphere.sdk.producttypes.ProductTypeDraft;
 import io.sphere.sdk.producttypes.commands.updateactions.*;
 import io.sphere.sdk.test.IntegrationTest;
-import io.sphere.sdk.utils.SphereInternalUtils;
 import org.junit.Test;
 
 import java.util.List;
 import java.util.Locale;
 
-import static io.sphere.sdk.producttypes.ProductTypeFixtures.*;
-import static io.sphere.sdk.test.SphereTestUtils.ENGLISH;
-import static io.sphere.sdk.test.SphereTestUtils.randomKey;
+import static io.sphere.sdk.producttypes.ProductTypeFixtures.withUpdateableProductType;
+import static io.sphere.sdk.test.SphereTestUtils.*;
 import static io.sphere.sdk.utils.SphereInternalUtils.reverse;
+import static java.util.Collections.singletonList;
 import static java.util.Locale.GERMAN;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -171,6 +171,28 @@ public class ProductTypeUpdateCommandIntegrationTest extends IntegrationTest {
             final LocalizedEnumAttributeType updatedType = (LocalizedEnumAttributeType) updatedProductType.getAttribute(attributeName)
                     .getAttributeType();
             assertThat(updatedType.getValues()).isEqualTo(values);
+
+            return updatedProductType;
+        });
+    }
+
+    @Test
+    public void changeIsSearchable() throws Exception {
+        final String key = randomKey();
+        final String attributeName = "stringattribute";
+        final AttributeDefinition attributeDefinition = AttributeDefinitionBuilder
+                .of(attributeName, randomSlug(), StringAttributeType.of())
+                .isSearchable(false)
+                .build();
+        final List<AttributeDefinition> attributes = singletonList(attributeDefinition);
+        withUpdateableProductType(client(), () -> ProductTypeDraft.of(key, key, key, attributes), productType -> {
+            assertThat(productType.getAttribute(attributeName).isSearchable()).isFalse();
+
+            final ProductTypeUpdateCommand cmd =
+                    ProductTypeUpdateCommand.of(productType, ChangeIsSearchable.of(attributeName, true));
+            final ProductType updatedProductType = client().executeBlocking(cmd);
+
+            assertThat(updatedProductType.getAttribute(attributeName).isSearchable()).isTrue();
 
             return updatedProductType;
         });
