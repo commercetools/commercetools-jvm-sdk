@@ -87,7 +87,7 @@ final class CategoryTreeFactory {
                     .filter(ancestorId -> subtreeRootIds.contains(ancestorId))
                     .findFirst();
             if (rootAncestorOptional.isPresent()) {
-                throw new IllegalArgumentException(String.format("category of ID [%s] cannot be subtree root and decedent of [%s]", subtreeRoot.getId(), rootAncestorOptional.get()));
+                throw new IllegalArgumentException(String.format("category of ID [%s] cannot be subtree root and descendant of [%s]", subtreeRoot.getId(), rootAncestorOptional.get()));
             }
         });
 

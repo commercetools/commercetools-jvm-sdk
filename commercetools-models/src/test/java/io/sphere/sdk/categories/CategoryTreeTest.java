@@ -136,7 +136,7 @@ public class CategoryTreeTest {
                 .containsOnly("A")
                 .doesNotContain("B-1", "C-2-2", "B", "C");
         assertThat(subtree.getSubtreeRoots()).extracting(c -> c.getId())
-                .as("subtree rootes are the categories at the top," +
+                .as("subtree roots are the categories at the top," +
                         "no matter if they have a parent reference")
                 .containsOnly("A", "B-1", "C-2-2")
                 .doesNotContain("B", "C", "B-2");
@@ -185,7 +185,7 @@ public class CategoryTreeTest {
                 .containsOnly("A")
                 .doesNotContain("B-1", "C-2-2", "B", "C");
         assertThat(subtree.getSubtreeRoots()).extracting(c -> c.getId())
-                .as("subtree rootes are the categories at the top," +
+                .as("subtree roots are the categories at the top," +
                         "no matter if they have a parent reference")
                 .containsOnly("A", "B-1", "C-2-2")
                 .doesNotContain("B", "C", "B-2");
@@ -206,7 +206,7 @@ public class CategoryTreeTest {
         final CategoryTree tree = createAbcCategoryTree();
         final Category category = tree.findById("B-1-1").get();
         final List<Category> children = tree.findChildren(category);
-        assertThat(children).as("leaf notes produce empty lists").isEmpty();
+        assertThat(children).as("leaf nodes produce empty lists").isEmpty();
     }
 
     @Test
