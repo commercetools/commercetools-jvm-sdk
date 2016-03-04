@@ -161,6 +161,7 @@ public class CategoriesCustomFieldsIntegrationTest extends IntegrationTest {
                         .plusPredicates(m -> m.custom().fields().ofString(STRING_FIELD_NAME).is("foo"))
                         .plusPredicates(m -> m.custom().fields().ofString("njetpresent").isNotPresent())
                         .plusPredicates(m -> m.custom().fields().ofLocalizedString(LOC_STRING_FIELD_NAME).locale(ENGLISH).is("bar"));
+
                 assertThat(client().executeBlocking(categoryQuery).head()).contains(updatedCategory);
             });
             return type;

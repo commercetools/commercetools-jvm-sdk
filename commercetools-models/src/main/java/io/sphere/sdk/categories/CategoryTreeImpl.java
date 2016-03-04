@@ -6,10 +6,13 @@ import io.sphere.sdk.models.LocalizedStringEntry;
 
 import java.util.*;
 
-import static io.sphere.sdk.utils.SphereInternalUtils.*;
+import static io.sphere.sdk.utils.SphereInternalUtils.immutableCopyOf;
+import static java.util.Objects.requireNonNull;
+import static java.util.stream.Collectors.toList;
 
 class CategoryTreeImpl extends Base implements CategoryTree {
     private final List<Category> roots;
+    private final List<Category> subtreeRoots;
     private final List<Category> allAsFlatList;
     final Map<LocalizedStringEntry, Category> categoriesByLocaleAndSlug;
     final Map<String, Category> categoriesById;
@@ -19,9 +22,10 @@ class CategoryTreeImpl extends Base implements CategoryTree {
                      final List<Category> allAsFlatList,
                      final Map<LocalizedStringEntry, Category> categoriesByLocaleAndSlug,
                      final Map<String, Category> categoriesById,
-                     final Map<String, List<Category>> childrenByParentId) {
+                     final Map<String, List<Category>> childrenByParentId, final List<Category> subtreeRoots) {
         this.childrenByParentId = childrenByParentId;
         this.roots = immutableCopyOf(roots);
+        this.subtreeRoots = roots == subtreeRoots ? this.roots : immutableCopyOf(subtreeRoots);
         this.allAsFlatList = immutableCopyOf(allAsFlatList);
         this.categoriesByLocaleAndSlug = immutableCopyOf(categoriesByLocaleAndSlug);
         this.categoriesById = immutableCopyOf(categoriesById);
@@ -58,5 +62,41 @@ class CategoryTreeImpl extends Base implements CategoryTree {
     public List<Category> findChildren(final Identifiable<Category> category) {
         final String categoryId = category.getId();
         return childrenByParentId.getOrDefault(categoryId, Collections.emptyList());
+    }
+
+    @Override
+    public Category getRootAncestor(final Identifiable<Category> category) {
+        requireNonNull(category);
+        final Category theCategory = CategoryTreeUtils.getCategoryOrThrow(category, this);
+        return theCategory
+                .getAncestors().stream().findFirst()
+                .flatMap(root -> findById(root.getId()))
+                .orElse(theCategory);
+    }
+
+    @Override
+    public List<Category> findSiblings(final Collection<? extends Identifiable<Category>> categoryIdentifiables) {
+        return categoryIdentifiables.stream()
+                .flatMap(category -> getSiblings(CategoryTreeUtils.getCategoryOrThrow(category, this)).stream())
+                .distinct()
+                .filter(sibling -> !categoryIdentifiables.stream().anyMatch(c -> sibling.getId().equals(c.getId())))
+                .collect(toList());
+    }
+
+    private List<Category> getSiblings(final Category category) {
+        return Optional.ofNullable(category.getParent())
+                .map(this::findChildren)
+                .orElseGet(this::getRoots);
+    }
+
+    @Override
+    public CategoryTree getSubtree(final Collection<? extends Identifiable<Category>> parentCategories) {
+        requireNonNull(parentCategories);
+        return CategoryTreeFactory.of().createSubtree(this, parentCategories);
+    }
+
+    @Override
+    public List<Category> getSubtreeRoots() {
+        return subtreeRoots;
     }
 }
