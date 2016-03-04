@@ -120,7 +120,7 @@ public class CategoryTreeTest {
         final Category b1 = tree.findById("B-1").get();
         assertThatThrownBy(() -> tree.getSubtree(asList(a, b, b1)))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("category of ID [B-1] cannot be subtree root and decedent of [B]");
+                .hasMessage("category of ID [B-1] cannot be subtree root and descendant of [B]");
     }
 
     @Test
