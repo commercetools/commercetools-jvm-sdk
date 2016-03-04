@@ -64,6 +64,10 @@ public final class CartDraftBuilder extends Base implements Builder<CartDraftDsl
         this(template.getCurrency(), template.getCustomerId(), template.getCountry(), template.getInventoryMode(), template.getCustom(), template.getCustomerEmail(), template.getLineItems(), template.getCustomLineItems(), template.getShippingAddress(), template.getBillingAddress(), template.getShippingMethod());
     }
 
+    public static CartDraftBuilder of(final CartDraft template) {
+        return new CartDraftBuilder(template);
+    }
+
     public static CartDraftBuilder of(final CurrencyUnit currency) {
         return new CartDraftBuilder(CartDraft.of(currency));
     }

@@ -8,6 +8,6 @@ import com.ning.http.client.*;
 public interface AsyncHttpClientAdapter extends HttpClient {
 
     static HttpClient of(final AsyncHttpClient asyncHttpClient) {
-        return DefaultAsyncHttpClientAdapterImpl.of(asyncHttpClient);
+        return new DefaultAsyncHttpClientAdapterImpl(asyncHttpClient);
     }
 }

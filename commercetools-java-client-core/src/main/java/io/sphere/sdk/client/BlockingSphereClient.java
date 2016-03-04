@@ -84,6 +84,6 @@ public interface BlockingSphereClient extends SphereClient {
      * @return wrapped client which can perform blocking calls.
      */
     static BlockingSphereClient of(final SphereClient delegate, final Duration defaultTimeout) {
-        return of(delegate, defaultTimeout.get(ChronoUnit.NANOS), TimeUnit.NANOSECONDS);
+        return of(delegate, defaultTimeout.toMillis(), TimeUnit.MILLISECONDS);
     }
 }

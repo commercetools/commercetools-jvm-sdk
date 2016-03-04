@@ -17,7 +17,7 @@ import static java.util.stream.Collectors.toList;
 
 public class IntrospectionUtils {
     public static Stream<String> readClassNames() throws IOException {
-        final String javadocAllClassesFrameHtmlContent = new String(Files.readAllBytes(Paths.get("target/javaunidoc/allclasses-frame.html")));
+        final String javadocAllClassesFrameHtmlContent = new String(Files.readAllBytes(Paths.get("target/site/apidocs/allclasses-frame.html")));
         return streamClassNames(Pattern.compile("title=\"[^ ]+ in ([^\"]+)\" target=\"classFrame\">(?:<span class=\"interfaceName\">)?([^<]+)(?:</span>)?</a>").matcher(javadocAllClassesFrameHtmlContent));
     }
 
@@ -25,13 +25,19 @@ public class IntrospectionUtils {
         try {
             return readClassNames()
                     .filter(name -> !name.contains("io.sphere.sdk.client.metrics."))
+                    .filter(name -> !name.contains("DefaultProductAttributeFormatter"))
                     .map(name -> {
                         try {
                             return Class.forName(name);
                         } catch (ClassNotFoundException e) {
-                            throw new RuntimeException(e);
+                            if (!name.endsWith("Test")) {
+                                throw new RuntimeException(e);
+                            } else {
+                                return null;
+                            }
                         }
                     })
+                    .filter(x -> x != null)
                     .collect(toList());
         } catch (final FileNotFoundException e) {
             throw new IOException("Generate Javadoc first.", e);

@@ -43,6 +43,10 @@ public final class TypeDraftBuilder extends Base implements Builder<TypeDraft>, 
         return new TypeDraftBuilder(key, name, null, resourceTypeIds, null);
     }
 
+    public static TypeDraftBuilder of(final TypeDraft typeDraft) {
+        return new TypeDraftBuilder(typeDraft.getKey(), typeDraft.getName(), typeDraft.getDescription(), typeDraft.getResourceTypeIds(), typeDraft.getFieldDefinitions());
+    }
+
     public TypeDraftBuilder key(final String key) {
         this.key = key;
         return this;

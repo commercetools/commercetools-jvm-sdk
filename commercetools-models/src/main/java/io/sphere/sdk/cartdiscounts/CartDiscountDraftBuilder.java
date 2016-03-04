@@ -19,7 +19,7 @@ public final class CartDiscountDraftBuilder extends Base implements Builder<Cart
     private CartDiscountValue value;
     private CartDiscountPredicate cartPredicate;
     private CartDiscountTarget target;
-    private final String sortOrder;
+    private String sortOrder;
     private Boolean isActive = true;
     @Nullable
     private ZonedDateTime validFrom;
@@ -36,6 +36,14 @@ public final class CartDiscountDraftBuilder extends Base implements Builder<Cart
         this.requiresDiscountCode = requiresDiscountCode;
     }
 
+    public static CartDiscountDraftBuilder of(final CartDiscountDraft cartDiscountDraft) {
+        return of(cartDiscountDraft.getName(), CartDiscountPredicate.of(cartDiscountDraft.getCartPredicate()), cartDiscountDraft.getValue(), cartDiscountDraft.getTarget(), cartDiscountDraft.getSortOrder(), cartDiscountDraft.isRequiresDiscountCode())
+                .description(cartDiscountDraft.getDescription())
+                .isActive(cartDiscountDraft.isActive())
+                .validFrom(cartDiscountDraft.getValidFrom())
+                .validUntil(cartDiscountDraft.getValidUntil());
+    }
+
     public static CartDiscountDraftBuilder of(final LocalizedString name, final CartDiscountPredicate cartPredicate, final CartDiscountValue value, final CartDiscountTarget target, final String sortOrder, final boolean requiresDiscountCode) {
         return new CartDiscountDraftBuilder(name, cartPredicate, value, target, sortOrder, requiresDiscountCode);
     }
@@ -47,6 +55,11 @@ public final class CartDiscountDraftBuilder extends Base implements Builder<Cart
 
     public CartDiscountDraftBuilder requiresDiscountCode(final boolean requiresDiscountCode) {
         this.requiresDiscountCode = requiresDiscountCode;
+        return this;
+    }
+
+    public CartDiscountDraftBuilder sortOrder(final String sortOrder) {
+        this.sortOrder = sortOrder;
         return this;
     }
 

@@ -7,6 +7,8 @@ import io.sphere.sdk.meta.BuildInfo;
 import io.sphere.sdk.models.SphereException;
 import io.sphere.sdk.json.SphereJsonUtils;
 import io.sphere.sdk.utils.SphereInternalLogger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.List;
 import java.util.Optional;
@@ -18,6 +20,7 @@ import static java.lang.String.format;
 import static java.util.Arrays.asList;
 
 final class SphereClientImpl extends AutoCloseableService implements SphereClient {
+    private static final Logger classLogger = LoggerFactory.getLogger(SphereClient.class);
     private final ObjectMapper objectMapper = SphereJsonUtils.newObjectMapper();
     private final HttpClient httpClient;
     private final SphereApiConfig config;
@@ -43,6 +46,7 @@ final class SphereClientImpl extends AutoCloseableService implements SphereClien
         logger.debug(() -> sphereRequest);
         logger.trace(() -> {
             final String output;
+            final String httpMethodAndUrl = httpRequest.getHttpMethod() + " " + httpRequest.getUrl();
             if (httpRequest.getBody() != null && httpRequest.getBody() instanceof StringHttpRequestBody) {
                 final StringHttpRequestBody body = (StringHttpRequestBody) httpRequest.getBody();
                 final String unformattedBody = body.getSecuredBody();
@@ -52,14 +56,15 @@ final class SphereClientImpl extends AutoCloseableService implements SphereClien
                     try {
                         prettyPrint = SphereJsonUtils.prettyPrint(unformattedBody);
                     } catch (final JsonException e) {
-                        prettyPrint = "pretty print failed";
+                        classLogger.warn("pretty print failed", e);
+                        prettyPrint = unformattedBody;
                     }
-                    output = "send: " + unformattedBody + "\nformatted: " + prettyPrint;
+                    output = "send: " + httpMethodAndUrl + "\nformatted: " + prettyPrint;
                 } else {
-                    output = "send: " + unformattedBody;
+                    output = "send: " + httpRequest.getHttpMethod() + " " + httpRequest.getUrl() + " " + unformattedBody;
                 }
             } else {
-                output = "no request body present";
+                output = httpMethodAndUrl + " <no body>";
             }
             return output;
         });
@@ -86,7 +91,7 @@ final class SphereClientImpl extends AutoCloseableService implements SphereClien
     private static <T> T processHttpResponse(final SphereRequest<T> sphereRequest, final ObjectMapper objectMapper, final SphereApiConfig config, final HttpResponse httpResponse) {
         final SphereInternalLogger logger = getLogger(httpResponse);
         logger.debug(() -> httpResponse);
-        logger.trace(() -> httpResponse.getStatusCode() + "\n" + Optional.ofNullable(httpResponse.getResponseBody()).map(body -> SphereJsonUtils.prettyPrint(bytesToString(body))).orElse("No body present.") + "\n");
+        logger.trace(() -> httpResponse.getStatusCode() + "\n" + Optional.ofNullable(httpResponse.getResponseBody()).map(body -> SphereJsonUtils.prettyPrint(bytesToString(body))).orElse("No body present."));
         final List<String> notices = httpResponse.getHeaders().getHeadersAsMap().get(SphereHttpHeaders.X_DEPRECATION_NOTICE);
         if (notices != null) {
             notices.stream().forEach(message -> logger.warn(() -> "Deprecation notice : " + message));

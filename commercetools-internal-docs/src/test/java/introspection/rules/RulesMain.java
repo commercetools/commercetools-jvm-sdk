@@ -7,7 +7,7 @@ import java.util.List;
 
 import static java.util.Arrays.asList;
 
-//test:runMain introspection.rules.RulesMain
+//mvn test javadoc:aggregate && mvn exec:java -pl commercetools-internal-docs -Dexec.mainClass="introspection.rules.RulesMain" -Dexec.classpathScope="test"
 public class RulesMain {
     public static void main(String[] args) throws IOException {
         final List<Class<?>> classes = IntrospectionUtils.publicClassesOfProject();
@@ -36,7 +36,8 @@ public class RulesMain {
                 new ResourceClassesWithTypeReferenceMethod(),
                 new ClassesAreFinalRule(),
                 new ExpansionModelsAreInterfacesRule(),
-                new ResourceWhichExtendsCustomHasWithCustomQueryModel()
+                new ResourceWhichExtendsCustomHasWithCustomQueryModel(),
+                new ResourceDraftBuildersCanBeCreatedByDrafts()
         );
         final boolean allIsOk = rules.stream()
                 .map(rule -> {

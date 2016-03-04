@@ -24,6 +24,11 @@ public final class ProductDraftBuilder extends ProductDataProductDraftBuilderBas
         this.masterVariant = masterVariant;
     }
 
+    public static ProductDraftBuilder of(final ProductDraft productDraft) {
+        return of(productDraft.getProductType(), productDraft.getName(), productDraft.getSlug(), productDraft.getMasterVariant())
+                .variants(productDraft.getVariants());
+    }
+
     public static ProductDraftBuilder of(final ResourceIdentifiable<ProductType> productType, final LocalizedString name, final LocalizedString slug, final ProductVariantDraft masterVariant) {
         return new ProductDraftBuilder(productType.toResourceIdentifier(), name, slug, masterVariant);
     }
@@ -39,7 +44,9 @@ public final class ProductDraftBuilder extends ProductDataProductDraftBuilderBas
     }
 
     public ProductDraftBuilder variants(final List<ProductVariantDraft> variants) {
-        this.variants = Collections.unmodifiableList(new ArrayList<>(variants));
+        this.variants = variants != null
+                ? Collections.unmodifiableList(new ArrayList<>(variants))
+                : Collections.emptyList();
         return getThis();
     }
 

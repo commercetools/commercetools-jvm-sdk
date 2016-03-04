@@ -20,11 +20,18 @@ public final class CustomFieldsDraftBuilder extends Base implements Builder<Cust
     private final String typeId;
     @Nullable
     private final String typeKey;
-    private final Map<String, JsonNode> fields = new HashMap<>();
+    private final Map<String, JsonNode> fields;
 
     private CustomFieldsDraftBuilder(@Nullable final String typeId, @Nullable final String typeKey) {
         this.typeId = typeId;
         this.typeKey = typeKey;
+        fields = new HashMap<>();
+    }
+
+    private CustomFieldsDraftBuilder(final CustomFieldsDraft customFieldsDraft) {
+        typeId = customFieldsDraft.getType().getTypeId();
+        typeKey = customFieldsDraft.getType().getKey();
+        fields = customFieldsDraft.getFields();
     }
 
     public static CustomFieldsDraftBuilder ofTypeId(final String typeId) {
@@ -39,6 +46,10 @@ public final class CustomFieldsDraftBuilder extends Base implements Builder<Cust
 
     public static CustomFieldsDraftBuilder ofType(final Type type) {
         return ofTypeId(type.getId());
+    }
+
+    public static CustomFieldsDraftBuilder of(final CustomFieldsDraft customFieldsDraft) {
+        return new CustomFieldsDraftBuilder(customFieldsDraft);
     }
 
     public CustomFieldsDraftBuilder addObject(final String fieldName, final Object object) {

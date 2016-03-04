@@ -51,6 +51,22 @@ public final class PaymentDraftBuilder extends Base implements Builder<PaymentDr
         return new PaymentDraftBuilder(amountPlanned);
     }
 
+    public static PaymentDraftBuilder of(final PaymentDraft paymentDraft) {
+        return of(paymentDraft.getAmountPlanned())
+                .customer(paymentDraft.getCustomer())
+                .externalId(paymentDraft.getExternalId())
+                .interfaceId(paymentDraft.getInterfaceId())
+                .amountAuthorized(paymentDraft.getAmountAuthorized())
+                .authorizedUntil(paymentDraft.getAuthorizedUntil())
+                .amountPaid(paymentDraft.getAmountPaid())
+                .amountRefunded(paymentDraft.getAmountRefunded())
+                .paymentMethodInfo(paymentDraft.getPaymentMethodInfo())
+                .custom(paymentDraft.getCustom())
+                .paymentStatus(paymentDraft.getPaymentStatus())
+                .transactions(paymentDraft.getTransactions())
+                .interfaceInteractions(paymentDraft.getInterfaceInteractions());
+    }
+
     public PaymentDraftBuilder customer(@Nullable final Referenceable<Customer> customer) {
         this.customer = Optional.ofNullable(customer).map(x -> x.toReference()).orElse(null);
         return this;
