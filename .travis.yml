@@ -9,12 +9,6 @@ script:
 env:
   global:
   - secure: NtzrTSpGRmHIeK+Ojhv/xrHE+3k2iq36MnS04hwoJJRtlA1sSCs6Wrw+JKWcIfdscPSxqCZy9UkLVUvSm05Qav4mcsDhQ/hdHc7htqT1+mQ1bFs0HdvYUGJsYpL1yV/fd9vZPBKyfbkIPv4+5luYhbGUG5+0mv8PflcO+rCDGH8=
-  - secure: DZZGcVUDjrPWVMsnYLBTa/EFu/JPeAdEiom8zbu7osoPXv+A7VKVCCXctHjPdmHI2I+ZofyFyqy4cZmC2815jfFhm5BanpH5VIHWYOUPgxGImC0oQVOv/gY/W5LwaYXhfQqYOXRPBU7DDdLOJZysuCJStq5Tq69KKlnsQ5gckXo=
-  - secure: Mj6qzyFFpHE+I4tFMz5TNyICK7oVrKAVfM02HG+HHQ5J6hvt0ucGpzL98GPz9OA3Urz6iVicHWxOKzXG6AxxS0OJbYHR018Va7KnViSKMbdtZGvJWRSksg5+Y3ZYqqL0fujrDse+2fjQQ0hNqgfHcE3QR1gAjDCEEU2KCqMp5M0=
-  - secure: nNwX73JcizyR78K0aPFvdNWEJDfkOzd9VsSOzXUaPPtZTQXMGs2fKi0fd9PtzCezE6iIg4NU5IzSdXI8fxcVxfzBXseYKEB80UqW/n+3iwYXOxtxxni/EjRIKu24RI9vERGyUGypmnP+jPQ8uhVU950KoeVjuSjauqPx+JRUJAY=
-  - secure: gYLjISYqlAe0A14uJDLZRgjN0sTCVpzwhdAQZtmr0RXONIlmV3S8RnfbkxgCkru5ApY0ctrmvZEq4Ky2uc8meP9YNjnz/JnFjpS27A4UBqybjvzv6TMsH+Pb+NCI5MHUi4Kkl0xSVEUGlUbpv4rP2cABu7WWA+FOc6NH2BlZ9/k=
-  - secure: FgdPUoLle3yRY6EprUBqJqLLxiFkwSipECRINFY64Z4voVXwqUT91d6FRYckAHK+DzkeblCyk2oWfsOcqpEyJe6mNpK2ln3TFF+KjdWl3wk43zFdBaKS8fIJuktMRyTLp4a9yX1XLY082jzR/Ff3lj1QQHf11nAqvgc3ZR+hnpw=
-  - secure: kqkIyANMlXgdfW0/SwMAV5CqE3PZm6s4k/5ZuYwgD4JWTmqdIitQ9GqW/1NUBe4jzLirRLdq+WNzLd/LnbuwWeiXBJJ3jlbHa9mtftQdOAFLtBRqTva6IKuIYl9SVJ5/IM5TFgbsoXYV+KK+ZfZcENTGUn0jEj89oA7ntYdtM6U=
 notifications:
   email:
     on_success: change
