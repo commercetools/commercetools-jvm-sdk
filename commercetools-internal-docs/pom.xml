@@ -3,12 +3,12 @@
     <parent>
         <groupId>com.commercetools.sdk.jvm.core</groupId>
         <artifactId>commercetools-jvm-sdk</artifactId>
-        <version>1.0.0-RC2-SNAPSHOT</version>
+        <version>1.0.0-RC3-SNAPSHOT</version>
     </parent>
     <groupId>com.commercetools.sdk.jvm.core</groupId>
     <artifactId>commercetools-internal-docs</artifactId>
     <packaging>jar</packaging>
-    <version>1.0.0-RC2-SNAPSHOT</version>
+    <version>1.0.0-RC3-SNAPSHOT</version>
     <dependencyManagement>
         <dependencies>
         </dependencies>
@@ -84,7 +84,7 @@
                         </goals>
                         <configuration>
                             <rules>
-                                <DependencyConvergence/>
+                                <DependencyConvergence />
                             </rules>
                             <fail>true</fail>
                         </configuration>

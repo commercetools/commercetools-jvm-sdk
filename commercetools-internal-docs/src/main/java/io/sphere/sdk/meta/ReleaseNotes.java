@@ -1,5 +1,7 @@
 package io.sphere.sdk.meta;
 
+import io.sphere.sdk.cartdiscounts.CartDiscountDraft;
+import io.sphere.sdk.carts.CartDraft;
 import io.sphere.sdk.carts.CartLike;
 import io.sphere.sdk.carts.CustomLineItem;
 import io.sphere.sdk.carts.LineItem;
@@ -7,6 +9,7 @@ import io.sphere.sdk.carts.commands.updateactions.SetShippingMethod;
 import io.sphere.sdk.carts.expansion.CartExpansionModel;
 import io.sphere.sdk.carts.queries.CartByIdGet;
 import io.sphere.sdk.categories.Category;
+import io.sphere.sdk.categories.CategoryDraft;
 import io.sphere.sdk.channels.queries.ChannelByIdGet;
 import io.sphere.sdk.client.SphereApiConfig;
 import io.sphere.sdk.client.SphereClient;
@@ -17,12 +20,15 @@ import io.sphere.sdk.customobjects.CustomObject;
 import io.sphere.sdk.customobjects.commands.CustomObjectDeleteCommand;
 import io.sphere.sdk.customobjects.queries.CustomObjectByKeyGet;
 import io.sphere.sdk.customobjects.queries.CustomObjectQuery;
+import io.sphere.sdk.customobjects.queries.CustomObjectQueryModel;
 import io.sphere.sdk.expansion.ExpansionPath;
 import io.sphere.sdk.http.*;
 import io.sphere.sdk.models.*;
 import io.sphere.sdk.orders.Order;
 import io.sphere.sdk.orders.expansion.OrderExpansionModel;
+import io.sphere.sdk.payments.PaymentDraft;
 import io.sphere.sdk.payments.Transaction;
+import io.sphere.sdk.payments.TransactionDraft;
 import io.sphere.sdk.productdiscounts.queries.ProductDiscountByIdGet;
 import io.sphere.sdk.products.*;
 import io.sphere.sdk.products.attributes.Attribute;
@@ -33,16 +39,20 @@ import io.sphere.sdk.products.commands.updateactions.SetMetaKeywords;
 import io.sphere.sdk.products.commands.updateactions.SetMetaTitle;
 import io.sphere.sdk.products.expansion.ProductProjectionExpansionModel;
 import io.sphere.sdk.products.queries.*;
+import io.sphere.sdk.products.search.PriceSelection;
 import io.sphere.sdk.producttypes.ProductType;
 import io.sphere.sdk.producttypes.ProductTypeDraft;
+import io.sphere.sdk.producttypes.ProductTypeLocalRepository;
 import io.sphere.sdk.projects.Project;
 import io.sphere.sdk.queries.Get;
 import io.sphere.sdk.queries.QueryDsl;
 import io.sphere.sdk.queries.QueryPredicate;
+import io.sphere.sdk.reviews.ReviewDraft;
 import io.sphere.sdk.search.SearchKeywords;
 import io.sphere.sdk.taxcategories.TaxRate;
 import io.sphere.sdk.types.CustomFields;
 import io.sphere.sdk.types.FieldType;
+import io.sphere.sdk.types.TypeDraft;
 
 import javax.money.CurrencyUnit;
 import java.time.Duration;
@@ -72,6 +82,59 @@ import java.util.function.Function;
  <li class=fixed-in-release></li>
  </ul>
  -->
+
+ <h3 class=released-version id="v1_0_0_RC2">1.0.0-RC2 (02.03.2016)</h3>
+
+ <ul>
+ <li class=new-in-release>create DraftBuilders from Draft objects:
+   <ul>
+     <li>{@link io.sphere.sdk.cartdiscounts.CartDiscountDraftBuilder#of(CartDiscountDraft)}</li>
+     <li>{@link io.sphere.sdk.carts.CartDraftBuilder#of(CartDraft)}</li>
+     <li>{@link io.sphere.sdk.categories.CategoryDraftBuilder#of(CategoryDraft)}</li>
+     <li>{@link io.sphere.sdk.payments.PaymentDraftBuilder#of(PaymentDraft)}</li>
+     <li>{@link io.sphere.sdk.payments.TransactionDraftBuilder#of(TransactionDraft)}</li>
+     <li>{@link ProductDraftBuilder#of(ProductDraft)}</li>
+     <li>{@link ProductVariantDraftBuilder#of(ProductVariantDraft)}</li>
+     <li>{@link io.sphere.sdk.reviews.ReviewDraftBuilder#of(ReviewDraft)}</li>
+     <li>{@link io.sphere.sdk.types.CustomFieldsDraftBuilder}</li>
+     <li>{@link io.sphere.sdk.types.TypeDraftBuilder#of(TypeDraft)}</li>
+   </ul>
+ </li>
+ <li class=new-in-release>{@link CustomObject}s can be queried by value, see {@link CustomObjectQueryModel#value()}</li>
+ <li class=new-in-release>{@link io.sphere.sdk.client.metrics.ObservedTotalDuration#getErrorResult()},
+ {@link io.sphere.sdk.client.metrics.ObservedTotalDuration#getSuccessResult()},
+ {@link io.sphere.sdk.client.metrics.ObservedDeserializationDuration#getHttpResponse()}
+ and {@link io.sphere.sdk.client.metrics.ObservedDeserializationDuration#getResult()}
+ for better analysis of metrics with the
+ {@link io.sphere.sdk.client.metrics.SimpleMetricsSphereClient}</li>
+
+
+ <li class=new-in-release>add alias
+ {@link io.sphere.sdk.products.attributes.DefaultProductAttributeFormatter#format(Attribute, Referenceable)}
+ for
+ {@link io.sphere.sdk.products.attributes.DefaultProductAttributeFormatter#convert(Attribute, Referenceable)}</li>
+
+ <li class=new-in-release>{@link PriceDraftBuilder#countryCode(String)}, {@link PriceDraftBuilder#customerGroupId(String)}</li>
+ <li class=new-in-release>{@link io.sphere.sdk.producttypes.ProductTypeLocalRepository#findByKey(String)} and {@link ProductTypeLocalRepository#getAll()} </li>
+ <li class=new-in-release>{@link io.sphere.sdk.client.SphereClientUtils} supports methods to collect async results, for example {@link io.sphere.sdk.client.SphereClientUtils#blockingWaitForEach(List, Duration)} </li>
+ <li class=new-in-release>{@link LocalizedStringEntry#of(String, String)} </li>
+ <li class=new-in-release>support for price selection, see {@link ProductVariant#getPrice()} and
+ {@link io.sphere.sdk.products.search.ProductProjectionSearch#withPriceSelection(PriceSelection)}</li>
+ <li class=new-in-release>{@link io.sphere.sdk.client.ConcurrentModificationException#getCurrentVersion()}
+ and {@link io.sphere.sdk.models.errors.ConcurrentModificationError}
+ to get the current version number when a version conflict occurs</li>
+ <li class=change-in-release>rename {@code LocalizedToStringProductAttributeConverter}
+ to {@link io.sphere.sdk.products.attributes.DefaultProductAttributeFormatter}</li>
+ <li class=change-in-release>make constructors of
+ {@link io.sphere.sdk.products.attributes.DefaultProductAttributeFormatter} public</li>
+ <li class=change-in-release>{@link io.sphere.sdk.utils.MoneyImpl}s toString method has been altered</li>
+ <li class=change-in-release>it should not affect production code, we use now Maven as build tool instead of sbt</li>
+ <li class=change-in-release>all http client implementations use the logger io.sphere.sdk.http.HttpClient for logging requests/responses</li>
+ <li class=fixed-in-release>the {@link Duration} using methods did not use the correct timeout,
+ for example {@link io.sphere.sdk.client.SphereClientUtils#blockingWait(CompletionStage, Duration)}
+ and {@link io.sphere.sdk.client.BlockingSphereClient#of(SphereClient, Duration)} were affected</li>
+ </ul>
+
 
  <h3 class=released-version id="v1_0_0_RC1">1.0.0-RC1 (12.02.2016)</h3>
  <a class="theme-btn expand-all">Expand all</a>

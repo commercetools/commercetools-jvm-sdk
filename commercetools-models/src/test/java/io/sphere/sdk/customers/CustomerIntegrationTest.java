@@ -5,6 +5,7 @@ import ch.qos.logback.classic.Logger;
 import ch.qos.logback.classic.spi.ILoggingEvent;
 import ch.qos.logback.core.AppenderBase;
 import io.sphere.sdk.test.IntegrationTest;
+import logger.ThresholdLoggerFilter;
 import org.junit.After;
 import org.junit.Before;
 import org.slf4j.LoggerFactory;
@@ -24,6 +25,8 @@ public class CustomerIntegrationTest extends IntegrationTest {
     public void setupLogger() {
         final Logger logger = getLogger();
         oldLogLevel = logger.getLevel();
+        ThresholdLoggerFilter.getInstance().setLevel(oldLogLevel);
+
         logger.setLevel(Level.ALL);
         final AppenderBase<ILoggingEvent> appender = new AppenderBase<ILoggingEvent>() {
             @Override
@@ -53,6 +56,6 @@ public class CustomerIntegrationTest extends IntegrationTest {
             throw new RuntimeException("password logged in " + problemLogs);
         }
         logStatements.clear();
-
+        ThresholdLoggerFilter.getInstance().setLevel(null);
     }
 }

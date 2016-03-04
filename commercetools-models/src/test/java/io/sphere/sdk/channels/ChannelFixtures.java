@@ -6,6 +6,7 @@ import io.sphere.sdk.channels.queries.ChannelQuery;
 import io.sphere.sdk.client.BlockingSphereClient;
 
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.UnaryOperator;
@@ -74,7 +75,7 @@ public class ChannelFixtures {
     }
 
     public static void cleanUpChannelByKey(final BlockingSphereClient client, final String channelKey) {
-        client.executeBlocking(ChannelQuery.of().byKey(channelKey)).head()
-                .ifPresent(channel -> client.executeBlocking(ChannelDeleteCommand.of(channel)));
+        client.executeBlocking(ChannelQuery.of().byKey(channelKey), 45, TimeUnit.SECONDS).head()
+                .ifPresent(channel -> client.executeBlocking(ChannelDeleteCommand.of(channel), 45, TimeUnit.SECONDS));
     }
 }

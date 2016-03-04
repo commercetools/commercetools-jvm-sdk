@@ -1,6 +1,6 @@
 package io.sphere.sdk.queries;
 
-public interface IntegerQuerySortingModel<T> extends QueryModel<T>, QuerySortingModel<T>, IntegerQueryModel<T> {
+public interface IntegerQueryModel<T> extends QueryModel<T>, OptionalQueryModel<T>, EqualityQueryModel<T, Integer>, NotEqualQueryModel<T, Integer>, IsInQueryModel<T, Integer>, IsNotInQueryModel<T, Integer>, InequalityQueryModel<T, Integer> {
     @Override
     QueryPredicate<T> is(Integer i);
 
@@ -30,8 +30,4 @@ public interface IntegerQuerySortingModel<T> extends QueryModel<T>, QuerySorting
 
     @Override
     QueryPredicate<T> isPresent();
-
-    @Deprecated
-    @Override
-    QuerySort<T> sort(QuerySortDirection sortDirection);
 }
