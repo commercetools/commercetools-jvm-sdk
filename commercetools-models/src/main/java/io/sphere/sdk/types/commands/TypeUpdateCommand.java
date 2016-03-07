@@ -23,6 +23,15 @@ public interface TypeUpdateCommand extends UpdateCommandDsl<Type, TypeUpdateComm
         return new TypeUpdateCommandImpl(versioned, updateActions);
     }
 
+    static TypeUpdateCommand ofKey(final String key, final Long version, final List<? extends UpdateAction<Type>> updateActions) {
+        final Versioned<Type> versioned = Versioned.of("key=" + key, version);//hack for simple reuse
+        return of(versioned, updateActions);
+    }
+
+    static TypeUpdateCommand ofKey(final String key, final Long version, final UpdateAction<Type> updateAction) {
+        return ofKey(key, version, Collections.singletonList(updateAction));
+    }
+
     @Override
     TypeUpdateCommand withExpansionPaths(final List<ExpansionPath<Type>> expansionPaths);
 

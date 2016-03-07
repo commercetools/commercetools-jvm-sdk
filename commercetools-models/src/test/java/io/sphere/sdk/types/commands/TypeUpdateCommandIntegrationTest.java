@@ -86,4 +86,16 @@ public class TypeUpdateCommandIntegrationTest extends IntegrationTest {
             return updatedType;
         });
     }
+
+    @Test
+    public void updateByKey() {
+        withUpdateableType(client(), (Type type) -> {
+            final LocalizedString newName = randomSlug();
+            final String key = type.getKey();
+            final Long version = type.getVersion();
+            final Type updatedType = client().executeBlocking(TypeUpdateCommand.ofKey(key, version, ChangeName.of(newName)));
+            assertThat(updatedType.getName()).isEqualTo(newName);
+            return updatedType;
+        });
+    }
 }
