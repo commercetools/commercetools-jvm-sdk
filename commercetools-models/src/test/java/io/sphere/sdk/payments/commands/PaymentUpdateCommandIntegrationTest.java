@@ -336,4 +336,18 @@ public class PaymentUpdateCommandIntegrationTest extends IntegrationTest {
             return updatedPayment;
         });
     }
+
+    @Test
+    public void changeAmountPlanned() {
+        withPayment(client(), (Payment payment) -> {
+            assertThat(payment.getAmountPlanned()).isEqualTo(EURO_20);
+
+            final PaymentUpdateCommand cmd = PaymentUpdateCommand.of(payment, ChangeAmountPlanned.of(EURO_10));
+            final Payment updatedPayment = client().executeBlocking(cmd);
+
+            assertThat(updatedPayment.getAmountPlanned()).isEqualTo(EURO_10);
+
+            return updatedPayment;
+        });
+    }
 }
