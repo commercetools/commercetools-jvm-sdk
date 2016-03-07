@@ -14,6 +14,14 @@ public final class SphereAsyncHttpClientFactory extends Base {
     }
 
     public static HttpClient create() {
-        return AsyncHttpClientAdapter.of(new DefaultAsyncHttpClient(new DefaultAsyncHttpClientConfig.Builder().setEnabledProtocols(new String[]{"TLSv1.1", "TLSv1.2"}).build()));
+        /*
+        http://static.javadoc.io/org.asynchttpclient/async-http-client/2.0.0-RC9/org/asynchttpclient/AsyncHttpClientConfig.html
+         */
+        final DefaultAsyncHttpClientConfig config = new DefaultAsyncHttpClientConfig.Builder()
+                .setEnabledProtocols(new String[]{"TLSv1.1", "TLSv1.2"})
+                .setReadTimeout(121000)
+                .setRequestTimeout(121000)
+                .build();
+        return AsyncHttpClientAdapter.of(new DefaultAsyncHttpClient(config));
     }
 }
