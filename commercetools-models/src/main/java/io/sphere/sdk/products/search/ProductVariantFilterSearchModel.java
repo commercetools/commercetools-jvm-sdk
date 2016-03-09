@@ -20,4 +20,8 @@ public final class ProductVariantFilterSearchModel extends SearchModelImpl<Produ
     public MoneyFilterSearchModel<ProductProjection> price() {
         return moneyFilterSearchModel("price");
     }
+
+    public ScopedPriceFilterSearchModel<ProductProjection> scopedPrice() {
+        return new ScopedPriceFilterSearchModel<>(this, "scopedPrice");
+    }
 }
