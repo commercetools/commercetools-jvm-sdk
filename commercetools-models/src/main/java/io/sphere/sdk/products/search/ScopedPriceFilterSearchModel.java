@@ -21,22 +21,4 @@ public final class ScopedPriceFilterSearchModel<T> extends SearchModelImpl<T> {
     public MoneyFilterSearchModel<T> currentValue() {
         return moneyFilterSearchModel("currentValue");
     }
-
-    //TODO country?
-
-    public ReferenceFilterSearchModel<T> customerGroup() {
-        return referenceFilterSearchModel("customerGroup");
-    }
-
-    public ReferenceFilterSearchModel<T> channel() {
-        return referenceFilterSearchModel("channel");
-    }
-
-    public DateTimeSearchModel<T> validFrom() {
-        return datetimeSearchModel("validFrom");
-    }
-
-    public DateTimeSearchModel<T> validUntil() {
-        return datetimeSearchModel("validUntil");
-    }
 }

@@ -34,6 +34,9 @@ public interface ProductVariant extends AttributeContainer {
     @Nullable
     Price getPrice();
 
+    @Nullable
+    ScopedPrice getScopedPrice();
+
     List<Image> getImages();
 
     /**
