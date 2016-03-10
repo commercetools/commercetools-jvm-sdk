@@ -1,7 +1,6 @@
 package io.sphere.sdk.client;
 
 import java.time.Duration;
-import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.concurrent.*;
 import java.util.function.Function;
@@ -13,6 +12,21 @@ import static java.util.stream.Collectors.toList;
 
 public final class SphereClientUtils {
     private SphereClientUtils() {
+    }
+
+    /**
+     * Waits with a timeout for RESPONSES of a commercetools client wrapped in a {@link CompletionStage}.
+     * This method should not be used for other {@link CompletionStage}s since it is throwing {@link io.sphere.sdk.models.SphereException}s.
+     *
+     * @param completionStage the future monad to wait for
+     * @param sphereRequest the request belonging to the completionStage
+     * @param duration the maximum duration to wait for this single request
+     * @param <T> type of the result for the request
+     * @return the wrapped value of {@code completionStage}
+     * @throws SphereTimeoutException if a timeout occurs
+     */
+    public static <T> T blockingWait(final CompletionStage<T> completionStage, final SphereRequest<T> sphereRequest, final Duration duration) {
+        return blockingWait(completionStage, sphereRequest, duration.toMillis(), TimeUnit.MILLISECONDS);
     }
 
     /**
@@ -41,6 +55,22 @@ public final class SphereClientUtils {
      * @throws SphereTimeoutException if a timeout occurs
      */
     public static <T> T blockingWait(final CompletionStage<T> completionStage, final long timeout, final TimeUnit unit) {
+        return blockingWait(completionStage, null, timeout, unit);
+    }
+
+    /**
+     * Waits with a timeout for RESPONSES of a commercetools client wrapped in a {@link CompletionStage}.
+     * This method should not be used for other {@link CompletionStage}s since it is throwing {@link io.sphere.sdk.models.SphereException}s.
+     *
+     * @param completionStage the future monad to wait for
+     * @param sphereRequest the request belonging to the completionStage
+     * @param timeout the maximum time to wait for this single request
+     * @param unit the time unit of the timeout argument
+     * @param <T> type of the result for the request
+     * @return the wrapped value of {@code completionStage}
+     * @throws SphereTimeoutException if a timeout occurs
+     */
+    public static <T> T blockingWait(final CompletionStage<T> completionStage, final SphereRequest<T> sphereRequest, final long timeout, final TimeUnit unit) {
         try {
             return completionStage.toCompletableFuture().get(timeout, unit);
         } catch (InterruptedException | ExecutionException e) {
@@ -50,7 +80,11 @@ public final class SphereClientUtils {
                             : e;
             throw cause instanceof RuntimeException? (RuntimeException) cause : new CompletionException(cause);
         } catch (final TimeoutException e) {
-            throw new SphereTimeoutException(e);
+            final SphereTimeoutException sphereTimeoutException = new SphereTimeoutException(e);
+            if (sphereRequest != null) {
+                sphereTimeoutException.setSphereRequest(sphereRequest);
+            }
+            throw sphereTimeoutException;
         }
     }
 

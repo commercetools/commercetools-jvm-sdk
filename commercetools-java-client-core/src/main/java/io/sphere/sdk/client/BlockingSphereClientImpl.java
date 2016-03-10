@@ -3,8 +3,8 @@ package io.sphere.sdk.client;
 import io.sphere.sdk.models.Base;
 
 import java.time.Duration;
-import java.time.temporal.ChronoUnit;
-import java.util.concurrent.*;
+import java.util.concurrent.CompletionStage;
+import java.util.concurrent.TimeUnit;
 
 import static io.sphere.sdk.client.SphereClientUtils.blockingWait;
 
@@ -38,7 +38,7 @@ final class BlockingSphereClientImpl extends Base implements BlockingSphereClien
     @Override
     public <T> T executeBlocking(final SphereRequest<T> sphereRequest, final long timeout, final TimeUnit unit) {
         final CompletionStage<T> completionStage = execute(sphereRequest);
-        return blockingWait(completionStage, timeout, unit);
+        return blockingWait(completionStage, sphereRequest, timeout, unit);
     }
 
     @Override

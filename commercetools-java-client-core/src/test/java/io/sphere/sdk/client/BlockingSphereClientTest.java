@@ -48,6 +48,7 @@ public class BlockingSphereClientTest {
         final Throwable throwable = catchThrowable(() -> blockingSphereClient.executeBlocking(DummySphereRequest.of(), 1, TimeUnit.NANOSECONDS));
 
         assertThat(throwable).isInstanceOf(SphereTimeoutException.class);
+        assertThat(throwable).hasMessageContaining("sphere request: DummySphereRequest");
     }
 
     private BlockingSphereClient createBlockingSphereClient() {
