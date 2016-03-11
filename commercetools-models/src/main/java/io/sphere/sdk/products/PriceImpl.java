@@ -14,18 +14,6 @@ import javax.annotation.Nullable;
 import javax.money.MonetaryAmount;
 import java.time.ZonedDateTime;
 
-/**
- * Amount that must be paid when buying goods.
- *
- * <p>A Price can have {@link io.sphere.sdk.types.Custom custom fields}.</p>
- *
- * For construction use a {@link PriceBuilder}.
- *
- * @see io.sphere.sdk.products.commands.updateactions.AddPrice
- * @see io.sphere.sdk.products.commands.updateactions.ChangePrice
- * @see io.sphere.sdk.products.commands.updateactions.RemovePrice
- * @see ProductVariant#getPrices()
- */
 final class PriceImpl extends Base implements Price, ScopedPrice {
     @Nullable
     private final MonetaryAmount currentValue;
