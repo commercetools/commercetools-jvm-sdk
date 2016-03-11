@@ -3,7 +3,7 @@
     <groupId>com.commercetools.sdk.jvm.core</groupId>
     <artifactId>commercetools-jvm-sdk</artifactId>
     <packaging>pom</packaging>
-    <version>1.0.0-RC3-SNAPSHOT</version>
+    <version>1.0.0-RC3</version>
     <name>commercetools JVM SDK</name>
     <description>Java bindings for the commercetools platform</description>
     <url>https://github.com/sphereio/sphere-jvm-sdk</url>
@@ -48,7 +48,8 @@
     <scm>
         <url>git@github.com:sphereio/sphere-jvm-sdk.git</url>
         <connection>scm:git:git@github.com:sphereio/sphere-jvm-sdk.git</connection>
-    </scm>
+      <tag>v1.0.0-RC3</tag>
+  </scm>
     <properties>
         <jackson.version>2.6.5</jackson.version>
         <gson.version>2.5</gson.version>
