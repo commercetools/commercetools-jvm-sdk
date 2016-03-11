@@ -6,6 +6,7 @@ import org.junit.Test;
 
 import static io.sphere.sdk.search.model.FilterRange.atLeast;
 import static io.sphere.sdk.search.model.FilterRange.atMost;
+import static io.sphere.sdk.test.SphereTestUtils.assertEventually;
 import static java.math.BigDecimal.valueOf;
 import static java.util.Arrays.asList;
 import static java.util.Collections.singletonList;
@@ -65,15 +66,19 @@ public class ProductProjectionSearchFiltersIntegrationTest extends ProductProjec
     public void filterByEvilCharacterWord() throws Exception {
         final ProductProjectionSearch search = ProductProjectionSearch.ofStaged()
                 .plusQueryFilters(productModel -> productModel.allVariants().attribute().ofString(ATTR_NAME_EVIL).is(EVIL_CHARACTER_WORD));
-        final PagedSearchResult<ProductProjection> result = executeEvilSearch(search);
-        assertThat(result.getTotal()).isEqualTo(1);
+        assertEventually(() -> {
+            final PagedSearchResult<ProductProjection> result = executeEvilSearch(search);
+            assertThat(result.getTotal()).isEqualTo(1);
+        });
     }
 
     @Test
     public void filterByValueAsString() throws Exception {
         final ProductProjectionSearch search = ProductProjectionSearch.ofStaged()
                 .plusQueryFilters(productModel -> productModel.allVariants().attribute().ofNumber(ATTR_NAME_SIZE).containsAnyAsString(asList("36", "38")));
-        final PagedSearchResult<ProductProjection> result = executeSearch(search);
-        assertThat(resultsToIds(result)).containsOnly(product1.getId(), product2.getId());
+        assertEventually(() -> {
+            final PagedSearchResult<ProductProjection> result = executeSearch(search);
+            assertThat(resultsToIds(result)).containsOnly(product1.getId(), product2.getId());
+        });
     }
 }
