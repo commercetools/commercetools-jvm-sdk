@@ -10,7 +10,7 @@ import io.sphere.sdk.models.SphereEnumeration;
  */
 public enum ShipmentState implements SphereEnumeration {
 
-    SHIPPED, READY, PENDING, PARTIAL, BACKORDER;
+    SHIPPED, READY, PENDING, PARTIAL, BACKORDER, DELAYED;
 
     @JsonCreator
     public static ShipmentState ofSphereValue(final String value) {
