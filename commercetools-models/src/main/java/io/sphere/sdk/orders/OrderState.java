@@ -10,7 +10,7 @@ import io.sphere.sdk.models.SphereEnumeration;
  *
  */
 public enum OrderState implements SphereEnumeration {
-    OPEN, COMPLETE, CANCELLED;
+    OPEN, COMPLETE, CANCELLED, CONFIRMED;
 
     @JsonCreator
     public static OrderState ofSphereValue(final String value) {
