@@ -12,6 +12,10 @@ import javax.annotation.Nullable;
 import javax.money.MonetaryAmount;
 import java.time.ZonedDateTime;
 
+/**
+ * Interface for common methods in {@link Price} and {@link ScopedPrice}.
+ *
+ */
 public interface PriceLike extends Custom {
     MonetaryAmount getValue();
 

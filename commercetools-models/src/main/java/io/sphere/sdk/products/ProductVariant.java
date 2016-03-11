@@ -20,7 +20,8 @@ public interface ProductVariant extends AttributeContainer {
      * {@link io.sphere.sdk.products.search.ProductProjectionSearch} with {@link io.sphere.sdk.products.search.ProductProjectionSearch#withPriceSelection(PriceSelection)}.
      *
      * @return prices
-     * @see #getPrices()
+     * @see #getPrice()
+     * @see #getScopedPrice()
      */
     List<Price> getPrices();
 
@@ -30,10 +31,19 @@ public interface ProductVariant extends AttributeContainer {
      *
      * @return selected price or null
      * @see #getPrices() 
+     * @see #getScopedPrice()
      */
     @Nullable
     Price getPrice();
 
+    /**
+     * Optional price from the price selection in the search endpoint.
+     * By default this price is null but it can be filled by using {@link io.sphere.sdk.products.search.ProductVariantFilterSearchModel#scopedPrice()}.
+     *
+     * @return scoped price or null
+     * @see #getPrices()
+     * @see #getPrice()
+     */
     @Nullable
     ScopedPrice getScopedPrice();
 
