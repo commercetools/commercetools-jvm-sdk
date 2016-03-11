@@ -13,6 +13,7 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.ZonedDateTime;
+import java.util.List;
 
 import static io.sphere.sdk.test.SphereTestUtils.DE;
 import static io.sphere.sdk.test.SphereTestUtils.EUR;
@@ -231,6 +232,12 @@ public class ProductProjectionSearchTest {
         final ProductProjectionSearch priceSelectionRemoved = SEARCH_WITH_FULL_PRICE_SELECTION.withPriceSelection(null);
         assertThat(priceSelectionRemoved.httpRequestIntent().getBody().toString()).doesNotContain("price");
         assertThat(priceSelectionRemoved.getPriceSelection()).isNull();
+    }
+
+    @Test
+    public void existFilter() {
+        final List<FilterExpression<ProductProjection>> exists = FILTER_MODEL.categories().exists();
+        assertThat(exists).extracting(expression()).containsExactly("categories:exists");
     }
 
     //    @Test

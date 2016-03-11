@@ -1,8 +1,13 @@
 package io.sphere.sdk.search.model;
 
 import io.sphere.sdk.models.Base;
+import io.sphere.sdk.search.FilterExpression;
 
 import javax.annotation.Nullable;
+import java.util.Collections;
+import java.util.List;
+
+import static java.util.stream.Collectors.toList;
 
 public class SearchModelImpl<T> extends Base implements SearchModel<T> {
     @Nullable
@@ -122,5 +127,17 @@ public class SearchModelImpl<T> extends Base implements SearchModel<T> {
 
     protected ReferenceFacetedSearchSearchModel<T> referenceFacetedSearchSearchModel(final String pathSegment) {
         return new ReferenceFacetedSearchSearchModel<>(this, pathSegment);
+    }
+
+    protected List<FilterExpression<T>> missingFilters() {
+        return verbFilter("missing");
+    }
+
+    protected List<FilterExpression<T>> existsFilters() {
+        return verbFilter("exists");
+    }
+
+    private List<FilterExpression<T>> verbFilter(final String verb) {
+        return buildPath().stream().map(path -> FilterExpression.<T>of(path + (":" + verb))).collect(toList());
     }
 }
