@@ -37,7 +37,7 @@ public interface ProductVariant extends AttributeContainer {
     Price getPrice();
 
     /**
-     * Optional price from the price selection in the search endpoint.
+     * Optional price from the price scoped filtering in the search endpoint.
      * By default this price is null but it can be filled by using {@link io.sphere.sdk.products.search.ProductVariantFilterSearchModel#scopedPrice()}.
      *
      * @return scoped price or null
