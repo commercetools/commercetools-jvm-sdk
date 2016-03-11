@@ -5,8 +5,7 @@ import static io.sphere.sdk.client.ClientPackage.AUTH_URL;
 /**
  * Contains the configuration to fetch access keys for SPHERE.IO.
  */
-public interface
-SphereAuthConfig {
+public interface SphereAuthConfig {
     String getAuthUrl();
 
     String getClientId();
