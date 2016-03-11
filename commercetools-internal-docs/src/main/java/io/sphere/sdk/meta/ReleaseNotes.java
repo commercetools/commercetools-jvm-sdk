@@ -40,6 +40,7 @@ import io.sphere.sdk.products.commands.updateactions.SetMetaTitle;
 import io.sphere.sdk.products.expansion.ProductProjectionExpansionModel;
 import io.sphere.sdk.products.queries.*;
 import io.sphere.sdk.products.search.PriceSelection;
+import io.sphere.sdk.products.search.ProductVariantFilterSearchModel;
 import io.sphere.sdk.producttypes.ProductType;
 import io.sphere.sdk.producttypes.ProductTypeDraft;
 import io.sphere.sdk.producttypes.ProductTypeLocalRepository;
@@ -56,6 +57,7 @@ import io.sphere.sdk.types.TypeDraft;
 
 import javax.money.CurrencyUnit;
 import java.time.Duration;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
@@ -82,6 +84,25 @@ import java.util.function.Function;
  <li class=fixed-in-release></li>
  </ul>
  -->
+
+ <h3 class=released-version id="v1_0_0_RC3">1.0.0-RC3 (11.03.2016)</h3>
+
+ <ul>
+ <li class=new-in-release>filter by scoped prices, see {@link ProductVariantFilterSearchModel#scopedPrice()} </li>
+ <li class=new-in-release>{@link io.sphere.sdk.producttypes.commands.updateactions.ChangeIsSearchable}</li>
+ <li class=new-in-release>improved Exception classes documentation</li>
+ <li class=new-in-release>
+ {@link io.sphere.sdk.categories.CategoryTree#findSiblings(Collection)},
+ {@link io.sphere.sdk.categories.CategoryTree#getSubtree(Collection)},
+ {@link io.sphere.sdk.categories.CategoryTree#getSubtreeRoots()} and
+ {@link io.sphere.sdk.categories.CategoryTree#getRootAncestor(Identifiable)}</li>
+ <li class=new-in-release>set default timeout for HTTP client in {@code commercetools-java-client} to 121 seconds so {@link io.sphere.sdk.client.GatewayTimeoutException} can occur</li>
+ <li class=new-in-release>{@link io.sphere.sdk.payments.commands.updateactions.ChangeAmountPlanned}</li>
+ <li class=new-in-release>{@link io.sphere.sdk.types.commands.TypeDeleteCommand#ofKey(String, Long)} and {@link io.sphere.sdk.types.commands.TypeUpdateCommand#ofKey(String, Long, List)} </li>
+ <li class=new-in-release>{@link io.sphere.sdk.orders.OrderState#CONFIRMED} and {@link io.sphere.sdk.orders.ShipmentState#DELAYED}</li>
+ <li class=new-in-release>improve timeout stacktraces of {@link io.sphere.sdk.client.BlockingSphereClient} by including the corresponding {@link SphereRequest} into the message</li>
+ <li class=change-in-release>should be source code compatible but still a binary incompatibility: {@link Price} is now an interface instead of a final class</li>
+ </ul>
 
  <h3 class=released-version id="v1_0_0_RC2">1.0.0-RC2 (02.03.2016)</h3>
 
