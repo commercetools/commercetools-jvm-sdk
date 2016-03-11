@@ -39,28 +39,26 @@ public class ScopedPriceSearchIntegrationTest extends IntegrationTest {
 
     @Test
     public void filterByCurrentValueCentAmountAndCountry() {
-        withProductOfPrices(asList(PriceDraft.of(EURO_20), PriceDraft.of(EURO_30).withCountry(DE)), product -> {
-            final ProductProjectionSearch baseSphereRequest = ProductProjectionSearch.ofStaged()
-                    .withPriceSelection(PriceSelection.of(EUR).withPriceCountry(DE))
-                    .plusQueryFilters(m -> m.id().is(product.getId()));
-            final ProductProjectionSearch positiveSearchRequest = baseSphereRequest
-                    .plusQueryFilters(m -> m.allVariants().scopedPrice().currentValue()
-                            .centAmount().isGreaterThanOrEqualTo(3000L));
-            final ProductProjectionSearch negativeSearchRequest = baseSphereRequest
-                    .plusQueryFilters(m -> m.allVariants().scopedPrice().currentValue()
-                            .centAmount().isGreaterThanOrEqualTo(3001L));
-            assertEventually(() -> {
-                assertThat(client().executeBlocking(negativeSearchRequest).getTotal()).isEqualTo(0);
-                final PagedSearchResult<ProductProjection> result = client().executeBlocking(positiveSearchRequest);
-                assertThat(result.getResults()).extracting(ResourceView::getId)
-                        .as("product included").contains(product.getId());
-                final ProductVariant masterVariant = result.getResults().get(0).getMasterVariant();
-                final Price price = masterVariant.getPrice();
-                assertThat(price).as("price").isNotNull();
-                assertThat(price.getValue()).isEqualTo(EURO_30);
-                assertThat(masterVariant.getScopedPrice()).isNotNull();
-                assertThat(masterVariant.getScopedPrice().getValue()).as("scopedPrice").isEqualTo(EURO_30);
+        withProductOfPrices(asList(PriceDraft.of(EURO_20), PriceDraft.of(EURO_30).withCountry(DE)), product1 -> {
+            withProductOfPrices(asList(PriceDraft.of(EURO_30), PriceDraft.of(EURO_40).withCountry(DE)), product2 -> {
+                final ProductProjectionSearch search = ProductProjectionSearch.ofStaged()
+                        .withPriceSelection(PriceSelection.of(EUR).withPriceCountry(DE))
+                        .plusQueryFilters(m -> m.id().isIn(asList(product1.getId(), product2.getId())))
+                        .plusQueryFilters(m -> m.allVariants().scopedPrice().currentValue()
+                                .centAmount().isLessThanOrEqualTo(3000L));
+                assertEventually(() -> {
+                    final PagedSearchResult<ProductProjection> result = client().executeBlocking(search);
+                    assertThat(result.getResults()).extracting(ResourceView::getId)
+                            .as("product1 with small price included").contains(product1.getId())
+                            .as("product2 is expensive, not included").doesNotContain(product2.getId());
+                    final ProductVariant masterVariant = result.getResults().get(0).getMasterVariant();
+                    final Price price = masterVariant.getPrice();
+                    assertThat(price).as("price").isNotNull();
+                    assertThat(price.getValue()).isEqualTo(EURO_30);
+                    assertThat(masterVariant.getScopedPrice()).isNotNull();
+                    assertThat(masterVariant.getScopedPrice().getValue()).as("scopedPrice").isEqualTo(EURO_30);
             });
+        });
         });
     }
 
