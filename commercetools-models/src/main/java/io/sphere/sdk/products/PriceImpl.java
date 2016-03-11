@@ -26,7 +26,7 @@ import java.time.ZonedDateTime;
  * @see io.sphere.sdk.products.commands.updateactions.RemovePrice
  * @see ProductVariant#getPrices()
  */
-public final class PriceBase extends Base implements Price, ScopedPrice {
+final class PriceImpl extends Base implements Price, ScopedPrice {
     @Nullable
     private final MonetaryAmount currentValue;
     private final MonetaryAmount value;
@@ -48,7 +48,7 @@ public final class PriceBase extends Base implements Price, ScopedPrice {
     private final CustomFields custom;
 
     @JsonCreator
-    PriceBase(final MonetaryAmount value, @Nullable final CountryCode country,
+    PriceImpl(final MonetaryAmount value, @Nullable final CountryCode country,
               @Nullable final Reference<CustomerGroup> customerGroup, @Nullable final Reference<Channel> channel,
               @Nullable final DiscountedPrice discounted,
               @Nullable final ZonedDateTime validFrom, @Nullable final ZonedDateTime validUntil, @Nullable final String id,
@@ -133,7 +133,7 @@ public final class PriceBase extends Base implements Price, ScopedPrice {
         return currentValue;
     }
 
-    public boolean equalsIgnoreId(final PriceBase price) {
+    public boolean equalsIgnoreId(final PriceImpl price) {
         return price != null && withId(null).equals(price.withId(null));
     }
 

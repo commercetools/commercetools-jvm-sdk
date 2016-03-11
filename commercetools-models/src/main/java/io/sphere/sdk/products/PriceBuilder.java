@@ -93,6 +93,6 @@ public final class PriceBuilder extends Base implements Builder<Price> {
 
     @Override
     public Price build() {
-        return new PriceBase(value, country, customerGroup, channel, discounted, validFrom, validUntil, id, null, null);
+        return new PriceImpl(value, country, customerGroup, channel, discounted, validFrom, validUntil, id, null, null);
     }
 }

@@ -12,7 +12,7 @@ import javax.annotation.Nullable;
 import javax.money.MonetaryAmount;
 import java.time.ZonedDateTime;
 
-@JsonDeserialize(as = PriceBase.class)
+@JsonDeserialize(as = PriceImpl.class)
 public interface ScopedPrice extends PriceLike {
     @Nullable
     @Override

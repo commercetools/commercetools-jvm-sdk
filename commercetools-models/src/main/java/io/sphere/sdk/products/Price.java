@@ -31,7 +31,7 @@ import java.util.Optional;
  * @see io.sphere.sdk.products.commands.updateactions.RemovePrice
  * @see ProductVariant#getPrices()
  */
-@JsonDeserialize(as = PriceBase.class)
+@JsonDeserialize(as = PriceImpl.class)
 public interface Price extends PriceLike {
     @Nullable
     @Override
