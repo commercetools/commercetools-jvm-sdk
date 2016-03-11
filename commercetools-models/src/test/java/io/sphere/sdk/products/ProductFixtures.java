@@ -2,7 +2,9 @@ package io.sphere.sdk.products;
 
 import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.client.BlockingSphereClient;
+import io.sphere.sdk.client.ConcurrentModificationException;
 import io.sphere.sdk.client.SphereClientUtils;
+import io.sphere.sdk.models.Versioned;
 import io.sphere.sdk.productdiscounts.commands.ProductDiscountDeleteCommand;
 import io.sphere.sdk.productdiscounts.queries.ProductDiscountQuery;
 import io.sphere.sdk.products.attributes.AttributeDraft;
@@ -27,6 +29,8 @@ import io.sphere.sdk.suppliers.TShirtProductTypeDraftSupplier;
 import io.sphere.sdk.taxcategories.TaxCategory;
 import io.sphere.sdk.taxcategories.TaxCategoryFixtures;
 import io.sphere.sdk.utils.MoneyImpl;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.math.BigDecimal;
 import java.util.LinkedList;
@@ -46,6 +50,7 @@ import static java.util.Collections.singletonList;
 import static java.util.stream.Collectors.toList;
 
 public class ProductFixtures {
+    private static final Logger logger = LoggerFactory.getLogger(ProductFixtures.class);
     public static final PriceDraft PRICE = PriceDraft.of(MoneyImpl.of(new BigDecimal("12.34"), EUR)).withCountry(DE);
     private static final int MASTER_VARIANT_ID = 1;
 
@@ -131,7 +136,11 @@ public class ProductFixtures {
             } else {
                 unPublishedProduct = loadedProduct;
             }
-            client.executeBlocking(ProductDeleteCommand.of(unPublishedProduct));
+            try {
+                client.executeBlocking(ProductDeleteCommand.of(unPublishedProduct));
+            } catch(final ConcurrentModificationException e) {
+                client.executeBlocking(ProductDeleteCommand.of(Versioned.of(unPublishedProduct.getId(), e.getCurrentVersion())));
+            }
         });
     }
 

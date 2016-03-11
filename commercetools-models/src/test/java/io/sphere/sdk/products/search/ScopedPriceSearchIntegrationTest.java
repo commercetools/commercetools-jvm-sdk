@@ -17,6 +17,7 @@ import java.util.List;
 import java.util.function.Consumer;
 
 import static io.sphere.sdk.productdiscounts.ProductDiscountFixtures.withProductDiscount;
+import static io.sphere.sdk.products.ProductFixtures.withProduct;
 import static io.sphere.sdk.test.SphereTestUtils.*;
 import static java.util.Arrays.asList;
 import static java.util.Collections.emptyList;
@@ -131,6 +132,6 @@ public class ScopedPriceSearchIntegrationTest extends IntegrationTest {
                 .build();
         final ProductDraft productDraft = ProductDraftBuilder.of(productType,  randomSlug(),  randomSlug(), masterVariant)
                 .build();
-        ProductFixtures.withProduct(client(), () -> productDraft, productConsumer);
+        withProduct(client(), () -> productDraft, productConsumer);
     }
 }
