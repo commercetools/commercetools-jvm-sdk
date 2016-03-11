@@ -42,7 +42,7 @@ public class ScopedPriceSearchIntegrationTest extends IntegrationTest {
     }
 
     @Test
-    public void filterByCurrentValueCentAmountAndCountry() {
+    public void filterByValueCentAmountAndCountry() {
         withProductOfPrices(asList(PriceDraft.of(EURO_20), PriceDraft.of(EURO_30).withCountry(DE)), product1 -> {
             withProductOfPrices(asList(PriceDraft.of(EURO_30), PriceDraft.of(EURO_40).withCountry(DE)), product2 -> {
                 final ProductProjectionSearch search = ProductProjectionSearch.ofStaged()

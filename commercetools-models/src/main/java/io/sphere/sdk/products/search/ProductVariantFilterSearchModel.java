@@ -25,7 +25,7 @@ public final class ProductVariantFilterSearchModel extends SearchModelImpl<Produ
      * Provides filters for scoped prices.
      *
      * <p>Simple example:</p>
-     * {@include.example io.sphere.sdk.products.search.ScopedPriceSearchIntegrationTest#filterByCurrentValueCentAmountAndCountry()}
+     * {@include.example io.sphere.sdk.products.search.ScopedPriceSearchIntegrationTest#filterByValueCentAmountAndCountry()}
      *
      * <p>Example with a discount:</p>
      * {@include.example io.sphere.sdk.products.search.ScopedPriceSearchIntegrationTest#discounts()}
