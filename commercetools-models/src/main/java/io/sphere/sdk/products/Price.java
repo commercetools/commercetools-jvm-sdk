@@ -1,15 +1,13 @@
 package io.sphere.sdk.products;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.neovisionaries.i18n.CountryCode;
 import io.sphere.sdk.channels.Channel;
 import io.sphere.sdk.customergroups.CustomerGroup;
-import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Referenceable;
 import io.sphere.sdk.productdiscounts.DiscountedPrice;
-import io.sphere.sdk.types.Custom;
 import io.sphere.sdk.types.CustomFields;
 import io.sphere.sdk.types.TypeDraft;
 import io.sphere.sdk.utils.MoneyImpl;
@@ -33,140 +31,87 @@ import java.util.Optional;
  * @see io.sphere.sdk.products.commands.updateactions.RemovePrice
  * @see ProductVariant#getPrices()
  */
-public final class Price extends Base implements Custom {
-    private final MonetaryAmount value;
+@JsonDeserialize(as = PriceImpl.class)
+public interface Price extends PriceLike {
     @Nullable
-    private final CountryCode country;
-    @Nullable
-    private final Reference<CustomerGroup> customerGroup;
-    @Nullable
-    private final Reference<Channel> channel;
-    @Nullable
-    private final DiscountedPrice discounted;
-    @Nullable
-    private final ZonedDateTime validFrom;
-    @Nullable
-    private final ZonedDateTime validUntil;
-    @Nullable
-    private final String id;
-    @Nullable
-    private final CustomFields custom;
-
-    @JsonCreator
-    Price(final MonetaryAmount value, @Nullable final CountryCode country,
-          @Nullable final Reference<CustomerGroup> customerGroup, @Nullable final Reference<Channel> channel,
-          @Nullable final DiscountedPrice discounted,
-          @Nullable final ZonedDateTime validFrom, @Nullable final ZonedDateTime validUntil, @Nullable final String id,
-          @Nullable final CustomFields custom) {
-        this.value = value;
-        this.country = country;
-        this.customerGroup = customerGroup;
-        this.channel = channel;
-        this.discounted = discounted;
-        this.validFrom = validFrom;
-        this.validUntil = validUntil;
-        this.id = id;
-        this.custom = custom;
-    }
-
-    public MonetaryAmount getValue() {
-        return value;
-    }
+    @Override
+    Reference<Channel> getChannel();
 
     @Nullable
-    public CountryCode getCountry() {
-        return country;
-    }
+    @Override
+    CountryCode getCountry();
 
     @Nullable
-    public Reference<CustomerGroup> getCustomerGroup() {
-        return customerGroup;
-    }
+    @Override
+    CustomFields getCustom();
 
     @Nullable
-    public Reference<Channel> getChannel() {
-        return channel;
-    }
-
-    /**
-     * Supplies a discount if there is any.
-     * Beware that another discount can win and in here is another discount than you expect.
-     * @return discount data
-     */
-    @Nullable
-    public DiscountedPrice getDiscounted() {
-        return discounted;
-    }
+    @Override
+    Reference<CustomerGroup> getCustomerGroup();
 
     @Nullable
-    public ZonedDateTime getValidFrom() {
-        return validFrom;
-    }
+    @Override
+    DiscountedPrice getDiscounted();
 
     @Nullable
-    public ZonedDateTime getValidUntil() {
-        return validUntil;
-    }
+    @Override
+    String getId();
 
-    /**
-     * The unique ID of this price. Only read only.
-     * @return price id
-     */
     @Nullable
-    public String getId() {
-        return id;
-    }
+    @Override
+    ZonedDateTime getValidFrom();
+
+    @Nullable
+    @Override
+    ZonedDateTime getValidUntil();
 
     @Override
-    @Nullable
-    public CustomFields getCustom() {
-        return custom;
-    }
+    MonetaryAmount getValue();
 
-    public Price withCustomerGroup(@Nullable final Referenceable<CustomerGroup> customerGroup) {
+    default Price withCustomerGroup(@Nullable final Referenceable<CustomerGroup> customerGroup) {
         return PriceBuilder.of(this).customerGroup(Optional.ofNullable(customerGroup).map(c -> c.toReference()).orElse(null)).build();
     }
 
-    public Price withCountry(@Nullable final CountryCode country) {
+    default Price withCountry(@Nullable final CountryCode country) {
         return PriceBuilder.of(this).country(country).build();
     }
 
-    public Price withChannel(@Nullable final Referenceable<Channel> channel) {
+    default Price withChannel(@Nullable final Referenceable<Channel> channel) {
         final Reference<Channel> channelReference = Optional.ofNullable(channel).map(Referenceable::toReference).orElse(null);
         return PriceBuilder.of(this).channel(channelReference).build();
     }
-    
-    public Price withDiscounted(@Nullable final DiscountedPrice discounted) {
+
+    default Price withDiscounted(@Nullable final DiscountedPrice discounted) {
         return PriceBuilder.of(this).discounted(discounted).build();
     }
 
-    public Price withValue(final MonetaryAmount value) {
+    default Price withValue(final MonetaryAmount value) {
         return PriceBuilder.of(this).value(value).build();
     }
 
-    public Price withValidFrom(final ZonedDateTime validFrom) {
+    default Price withValidFrom(final ZonedDateTime validFrom) {
         return PriceBuilder.of(this).validFrom(validFrom).build();
     }
 
-    public Price withValidUntil(final ZonedDateTime validUntil) {
+    default Price withValidUntil(final ZonedDateTime validUntil) {
         return PriceBuilder.of(this).validUntil(validUntil).build();
     }
 
-    public Price withId(@Nullable final String id) {
+    default Price withId(@Nullable final String id) {
         return PriceBuilder.of(this).id(id).build();
     }
 
     @JsonIgnore
-    public static Price of(final MonetaryAmount money) {
+    static Price of(final MonetaryAmount money) {
         return PriceBuilder.of(money).build();
     }
 
     @JsonIgnore
-    public static Price of(final BigDecimal amount, final CurrencyUnit currencyUnit) {
+    static Price of(final BigDecimal amount, final CurrencyUnit currencyUnit) {
         return of(MoneyImpl.of(amount, currencyUnit));
     }
 
-    public boolean equalsIgnoreId(final Price price) {
+    default boolean equalsIgnoreId(final Price price) {
         return price != null && withId(null).equals(price.withId(null));
     }
 
@@ -176,7 +121,7 @@ public final class Price extends Base implements Custom {
      * @see io.sphere.sdk.types.Custom
      * @return ID of this resource type
      */
-    public static String resourceTypeId() {
+    static String resourceTypeId() {
         return "product-price";
     }
 }

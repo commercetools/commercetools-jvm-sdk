@@ -465,9 +465,10 @@ public abstract class MetaModelSearchDslImpl<T, C extends MetaModelSearchDsl<T, 
 
     @Override
     public String toString() {
-        final String readablePath = endpoint + queryParametersToString(false);
+        final String readablePath = queryParametersToString(false);
 
-        return "SearchDslImpl{" +
+        return getClass().getSimpleName() + "{" +
+                "body=" + readablePath +
                 ", text=" + text +
                 ", fuzzy=" + fuzzy +
                 ", facets=" + facets +
@@ -481,7 +482,6 @@ public abstract class MetaModelSearchDslImpl<T, C extends MetaModelSearchDsl<T, 
                 ", offset=" + offset +
                 ", endpoint='" + endpoint + '\'' +
                 ", resultMapper=" + resultMapper +
-                ", readablePath=" + readablePath +
                 ", request=" + httpRequestIntent() +
                 '}';
     }

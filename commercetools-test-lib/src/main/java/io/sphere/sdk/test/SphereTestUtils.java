@@ -8,6 +8,7 @@ import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.utils.MoneyImpl;
 import io.sphere.sdk.utils.SphereInternalUtils;
 import org.apache.commons.io.IOUtils;
+import org.assertj.core.api.SoftAssertions;
 
 import javax.money.CurrencyUnit;
 import javax.money.MonetaryAmount;
@@ -46,7 +47,9 @@ public final class SphereTestUtils {
     public static final MonetaryAmount EURO_1 = MoneyImpl.of(1, EUR);
     public static final MonetaryAmount EURO_5 = MoneyImpl.of(5, EUR);
     public static final MonetaryAmount EURO_10 = MoneyImpl.of(10, EUR);
+    public static final MonetaryAmount EURO_15 = MoneyImpl.of(15, EUR);
     public static final MonetaryAmount EURO_20 = MoneyImpl.of(20, EUR);
+    public static final MonetaryAmount EURO_25 = MoneyImpl.of(25, EUR);
     public static final MonetaryAmount EURO_30 = MoneyImpl.of(30, EUR);
     public static final MonetaryAmount EURO_40 = MoneyImpl.of(40, EUR);
     public static final MonetaryAmount USD_30 = MoneyImpl.of(30, USD);
@@ -184,6 +187,15 @@ public final class SphereTestUtils {
                 throw new RuntimeException(e);
             }
         }
+    }
+
+    public static void assertEventually(final Consumer<SoftAssertions> assertionsConsumer) {
+        final Runnable block = () -> {
+            final SoftAssertions softly = new SoftAssertions();
+            assertionsConsumer.accept(softly);
+            softly.assertAll();
+        };
+        assertEventually(block);
     }
 
     public static void assertEventually(final Runnable block) {

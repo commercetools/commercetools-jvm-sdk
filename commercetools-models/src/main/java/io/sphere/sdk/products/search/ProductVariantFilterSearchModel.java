@@ -20,4 +20,19 @@ public final class ProductVariantFilterSearchModel extends SearchModelImpl<Produ
     public MoneyFilterSearchModel<ProductProjection> price() {
         return moneyFilterSearchModel("price");
     }
+
+    /**
+     * Provides filters for scoped prices.
+     *
+     * <p>Simple example:</p>
+     * {@include.example io.sphere.sdk.products.search.ScopedPriceSearchIntegrationTest#filterByCurrentValueCentAmountAndCountry()}
+     *
+     * <p>Example with a discount:</p>
+     * {@include.example io.sphere.sdk.products.search.ScopedPriceSearchIntegrationTest#discounts()}
+     *
+     * @return objects helping to create filters for scoped prices
+     */
+    public ScopedPriceFilterSearchModel<ProductProjection> scopedPrice() {
+        return new ScopedPriceFilterSearchModel<>(this, "scopedPrice");
+    }
 }
