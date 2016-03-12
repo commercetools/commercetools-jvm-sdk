@@ -61,4 +61,8 @@ public final class ProductProjectionFilterSearchModel extends ProductDataFilterS
     public ExistsAndMissingFilterSearchModelSupport<ProductProjection> taxCategory() {
         return super.taxCategory();
     }
+
+    public ExistsAndMissingFilterSearchModelSupport<ProductProjection> state() {
+        return existsAndMissingFilterSearchModelSupport("state");
+    }
 }

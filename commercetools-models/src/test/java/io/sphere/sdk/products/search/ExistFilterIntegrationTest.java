@@ -19,6 +19,7 @@ import java.util.function.UnaryOperator;
 
 import static io.sphere.sdk.categories.CategoryFixtures.withCategory;
 import static io.sphere.sdk.products.ProductFixtures.withProduct;
+import static io.sphere.sdk.states.StateFixtures.withState;
 import static io.sphere.sdk.taxcategories.TaxCategoryFixtures.withTaxCategory;
 import static io.sphere.sdk.test.SphereTestUtils.*;
 import static java.util.Collections.singleton;
@@ -49,6 +50,13 @@ public class ExistFilterIntegrationTest extends IntegrationTest {
     public void categories() {
         withCategory(client(), category -> {
             checkFilter(builder -> builder.categories(singleton(category.toReference())), m -> m.categories());
+        });
+    }
+
+    @Test
+    public void state() {
+        withState(client(), draft -> draft, state -> {
+            checkFilter(builder -> builder.state(state), m -> m.state());
         });
     }
 
@@ -89,6 +97,5 @@ public class ExistFilterIntegrationTest extends IntegrationTest {
         });
     }
 
-    //state
     //custom attribute
 }
