@@ -56,4 +56,9 @@ public final class ProductProjectionFilterSearchModel extends ProductDataFilterS
     public ReviewRatingStatisticsFilterSearchModel<ProductProjection> reviewRatingStatistics() {
         return super.reviewRatingStatistics();
     }
+
+    @Override
+    public ExistsAndMissingFilterSearchModelSupport<ProductProjection> taxCategory() {
+        return super.taxCategory();
+    }
 }

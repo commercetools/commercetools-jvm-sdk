@@ -1,8 +1,6 @@
 package io.sphere.sdk.products.search;
 
-import io.sphere.sdk.products.ProductDraftBuilder;
-import io.sphere.sdk.products.ProductFixtures;
-import io.sphere.sdk.products.ProductProjection;
+import io.sphere.sdk.products.*;
 import io.sphere.sdk.products.attributes.AttributeDefinition;
 import io.sphere.sdk.products.attributes.AttributeDefinitionBuilder;
 import io.sphere.sdk.products.attributes.StringAttributeType;
@@ -21,6 +19,7 @@ import java.util.function.UnaryOperator;
 
 import static io.sphere.sdk.categories.CategoryFixtures.withCategory;
 import static io.sphere.sdk.products.ProductFixtures.withProduct;
+import static io.sphere.sdk.taxcategories.TaxCategoryFixtures.withTaxCategory;
 import static io.sphere.sdk.test.SphereTestUtils.*;
 import static java.util.Collections.singleton;
 import static java.util.Collections.singletonList;
@@ -51,8 +50,26 @@ public class ExistFilterIntegrationTest extends IntegrationTest {
         withCategory(client(), category -> {
             checkFilter(builder -> builder.categories(singleton(category.toReference())), m -> m.categories());
         });
-
     }
+
+    @Test
+    public void taxCategory() {
+        withTaxCategory(client(), taxCategory -> {
+            checkFilter(builder -> builder.taxCategory(taxCategory), m -> m.taxCategory());
+        });
+    }
+
+    @Test
+    public void sku() {
+        checkFilter(builder -> {
+            final ProductVariantDraft masterVariant = ProductVariantDraftBuilder.of(builder.getMasterVariant())
+                    .sku("sku-of-master")
+                    .build();
+            return builder.masterVariant(masterVariant);
+        }, m -> m.allVariants().sku());
+    }
+
+    //TODO for prices, not clear when it is price and prices
 
     private void checkFilter(final UnaryOperator<ProductDraftBuilder> productDraftBuilderUnaryOperator, final Function<ProductProjectionFilterSearchModel, ExistsAndMissingFilterSearchModelSupport<ProductProjection>> dsl) {
         withProduct(client(), productDraftBuilderUnaryOperator, productWith -> {
@@ -72,10 +89,6 @@ public class ExistFilterIntegrationTest extends IntegrationTest {
         });
     }
 
-    //categories
-    //prices
-    //sku
-    //taxcategory
     //state
     //custom attribute
 }
