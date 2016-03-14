@@ -322,6 +322,7 @@
                     <useReleaseProfile>false</useReleaseProfile>
                     <releaseProfiles>release</releaseProfiles>
                     <goals>deploy scm-publish:publish-scm</goals>
+                    <tagNameFormat>v@{project.version}</tagNameFormat>
                 </configuration>
             </plugin>
         </plugins>
