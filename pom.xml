@@ -360,26 +360,6 @@
                         </executions>
                     </plugin>
                     <plugin>
-                        <!--
-                        idea source: http://blog.progs.be/517/publishing-javadoc-to-github-using-maven
-
-                        https://maven.apache.org/plugins/maven-scm-publish-plugin/
-
-                        mvn clean javadoc:aggregate scm-publish:publish-scm
-                        -->
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-scm-publish-plugin</artifactId>
-                        <version>${maven-scm-publish-plugin.version}</version>
-                        <configuration>
-                            <checkoutDirectory>${project.build.directory}/javadoc-stage</checkoutDirectory>
-                            <checkinComment>publishing Javadoc for ${project.artifactId}:${project.version}</checkinComment>
-                            <content>${project.build.directory}/site</content>
-                            <skipDeletedFiles>false</skipDeletedFiles>
-                            <pubScmUrl>${maven-scm-publish-plugin.scm.url}</pubScmUrl>
-                            <scmBranch>gh-pages</scmBranch>
-                        </configuration>
-                    </plugin>
-                    <plugin>
                         <groupId>org.sonatype.plugins</groupId>
                         <artifactId>nexus-staging-maven-plugin</artifactId>
                         <version>${nexus-staging-maven-plugin.version}</version>

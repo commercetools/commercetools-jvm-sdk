@@ -5,6 +5,7 @@
 ## Release without rerunning the tests
 1. `mvn release:prepare -Darguments="-DskipTests" -DskipTests #Total time: 02:13 min`
 1. `mvn release:perform -Darguments="-DskipTests" -DskipTests #should take 5 min`
+1. checkout the tag version and `mvn clean javadoc:aggregate scm-publish:publish-scm -P publish-site`
 1. update GitHub release on https://github.com/sphereio/sphere-jvm-sdk/releases
 
 
