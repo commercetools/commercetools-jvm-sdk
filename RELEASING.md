@@ -1,0 +1,14 @@
+## Test first
+1. `mvn install` to install it locally and run tests/integration tests, runs about 15 min
+1. use the new version as snapshot dependency for sunrise and run it: `sbt clean fullClasspath run`, the categories and the products should appear with prices
+
+## Release without rerunning the tests
+1. `mvn release:prepare -Darguments="-DskipTests" -DskipTests #Total time: 02:13 min`
+1. `mvn release:perform -Darguments="-DskipTests" -DskipTests #should take 5 min`
+1. update GitHub release on https://github.com/sphereio/sphere-jvm-sdk/releases
+
+
+## Failures
+1. `mvn release:rollback`
+1.  may remove tag (example): `git tag -d v1.0.0-RC3 && git push origin :refs/tags/v1.0.0-RC3`
+1. `mvn release:clean`
