@@ -7,6 +7,7 @@
 1. `mvn release:perform -Darguments="-DskipTests" -DskipTests #should take 5 min`
 1. checkout the tag version and `git checkout $(git describe --abbrev=0 --tags) && mvn clean javadoc:aggregate scm-publish:publish-scm -P publish-site && git checkout master`
 1. update GitHub release on https://github.com/sphereio/sphere-jvm-sdk/releases
+1. add version badges to http://dev.commercetools.com/release-notes.html
 
 
 ## Rollback on failures
