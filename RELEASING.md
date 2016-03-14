@@ -8,7 +8,7 @@
 1. update GitHub release on https://github.com/sphereio/sphere-jvm-sdk/releases
 
 
-## Failures
+## Rollback on failures
 1. `mvn release:rollback`
 1.  may remove tag (example): `git tag -d v1.0.0-RC3 && git push origin :refs/tags/v1.0.0-RC3`
 1. `mvn release:clean`
