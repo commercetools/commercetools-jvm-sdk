@@ -98,4 +98,14 @@ public class TypeUpdateCommandIntegrationTest extends IntegrationTest {
             return updatedType;
         });
     }
+
+    @Test
+    public void changeKey() {
+        withUpdateableType(client(), type -> {
+            final String key = randomKey();
+            final Type updatedType = client().executeBlocking(TypeUpdateCommand.of(type, ChangeKey.of(key)));
+            assertThat(updatedType.getKey()).isEqualTo(key);
+            return updatedType;
+        });
+    }
 }
