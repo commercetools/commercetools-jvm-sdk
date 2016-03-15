@@ -11,11 +11,13 @@ import io.sphere.sdk.products.attributes.AttributeAccess;
 import io.sphere.sdk.products.attributes.AttributeDraft;
 import io.sphere.sdk.products.attributes.NamedAttributeAccess;
 import io.sphere.sdk.products.commands.updateactions.*;
+import io.sphere.sdk.products.messages.ProductSlugChangedMessage;
 import io.sphere.sdk.products.messages.ProductStateTransitionMessage;
 import io.sphere.sdk.products.queries.ProductByIdGet;
 import io.sphere.sdk.products.queries.ProductProjectionByIdGet;
 import io.sphere.sdk.products.queries.ProductQuery;
 import io.sphere.sdk.queries.PagedQueryResult;
+import io.sphere.sdk.queries.Query;
 import io.sphere.sdk.search.SearchKeyword;
 import io.sphere.sdk.search.SearchKeywords;
 import io.sphere.sdk.search.tokenizer.CustomSuggestTokenizer;
@@ -53,7 +55,7 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
 
     @Test
     public void addExternalImage() throws Exception {
-        withUpdateableProduct(client(), product -> {
+        withUpdateableProduct(client(), (Product product) -> {
             assertThat(product.getMasterData().getStaged().getMasterVariant().getImages()).hasSize(0);
 
             final Image image = Image.ofWidthAndHeight("http://www.commercetools.com/assets/img/ct_logo_farbe.gif", 460, 102, "commercetools logo");
@@ -168,6 +170,19 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
             final Product updatedProduct = client().executeBlocking(ProductUpdateCommand.of(product, ChangeSlug.of(newSlug)));
 
             assertThat(updatedProduct.getMasterData().getStaged().getSlug()).isEqualTo(newSlug);
+
+            //query message
+            assertEventually(() -> {
+                final Query<ProductSlugChangedMessage> query = MessageQuery.of()
+                        .withPredicates(m -> m.resource().is(product))
+                        .forMessageType(ProductSlugChangedMessage.MESSAGE_HINT);
+                final List<ProductSlugChangedMessage> results =
+                        client().executeBlocking(query).getResults();
+                assertThat(results).hasSize(1);
+                final ProductSlugChangedMessage message = results.get(0);
+                assertThat(message.getSlug()).isEqualTo(newSlug);
+            });
+
             return updatedProduct;
         });
     }
@@ -533,24 +548,24 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
     public void transitionStateAndForce() {
         Set<Reference<State>> notTransitions = emptySet();
         withStateByBuilder(client(), builder -> builder.type(PRODUCT_STATE).transitions(notTransitions), stateA -> {
-        withStateByBuilder(client(), builder -> builder.type(PRODUCT_STATE), stateB -> {
-            withUpdateableProduct(client(), product -> {
-                assertThat(product.getState()).isNull();
+            withStateByBuilder(client(), builder -> builder.type(PRODUCT_STATE), stateB -> {
+                withUpdateableProduct(client(), product -> {
+                    assertThat(product.getState()).isNull();
 
-                final Product productInStateA = client().executeBlocking(ProductUpdateCommand.of(product, TransitionState.of(stateA)));
+                    final Product productInStateA = client().executeBlocking(ProductUpdateCommand.of(product, TransitionState.of(stateA)));
 
-                //no force usage
-                assertThatThrownBy(() -> client().executeBlocking(ProductUpdateCommand.of(productInStateA, TransitionState.of(stateB))))
-                .hasMessageContaining("InvalidOperation");
+                    //no force usage
+                    assertThatThrownBy(() -> client().executeBlocking(ProductUpdateCommand.of(productInStateA, TransitionState.of(stateB))))
+                            .hasMessageContaining("InvalidOperation");
 
-                final ProductUpdateCommand cmd = ProductUpdateCommand.of(productInStateA, TransitionState.of(stateB, true));
-                final Product productInStateB = client().executeBlocking(cmd);
+                    final ProductUpdateCommand cmd = ProductUpdateCommand.of(productInStateA, TransitionState.of(stateB, true));
+                    final Product productInStateB = client().executeBlocking(cmd);
 
-                assertThat(productInStateB.getState()).isEqualTo(stateB.toReference());
+                    assertThat(productInStateB.getState()).isEqualTo(stateB.toReference());
 
-                return productInStateA;
+                    return productInStateA;
+                });
             });
-        });
         });
     }
 
