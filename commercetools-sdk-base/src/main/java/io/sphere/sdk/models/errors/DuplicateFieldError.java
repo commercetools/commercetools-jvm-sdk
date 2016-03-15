@@ -12,7 +12,7 @@ import javax.annotation.Nullable;
  *
  * @see io.sphere.sdk.client.ErrorResponseException
  */
-public class DuplicateFieldError extends SphereError {
+public final class DuplicateFieldError extends SphereError {
     public static final String CODE = "DuplicateField";
     private final String duplicateValue;
     private final String field;
