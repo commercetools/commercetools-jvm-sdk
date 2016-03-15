@@ -19,6 +19,7 @@ import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.search.SearchKeyword;
 import io.sphere.sdk.search.SearchKeywords;
 import io.sphere.sdk.search.tokenizer.CustomSuggestTokenizer;
+import io.sphere.sdk.states.State;
 import io.sphere.sdk.suppliers.TShirtProductTypeDraftSupplier.Colors;
 import io.sphere.sdk.suppliers.TShirtProductTypeDraftSupplier.Sizes;
 import io.sphere.sdk.taxcategories.TaxCategoryFixtures;
@@ -30,10 +31,7 @@ import org.junit.Test;
 import javax.money.MonetaryAmount;
 import java.math.BigDecimal;
 import java.time.ZoneOffset;
-import java.util.Collections;
-import java.util.List;
-import java.util.Locale;
-import java.util.Random;
+import java.util.*;
 
 import static io.sphere.sdk.models.DefaultCurrencyUnits.EUR;
 import static io.sphere.sdk.products.ProductFixtures.*;
@@ -44,9 +42,11 @@ import static io.sphere.sdk.test.SphereTestUtils.*;
 import static io.sphere.sdk.test.SphereTestUtils.MASTER_VARIANT_ID;
 import static io.sphere.sdk.types.TypeFixtures.STRING_FIELD_NAME;
 import static io.sphere.sdk.types.TypeFixtures.withUpdateableType;
+import static java.util.Collections.emptySet;
 import static java.util.Collections.singletonList;
 import static java.util.Locale.ENGLISH;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
     public static final Random RANDOM = new Random();
@@ -526,6 +526,31 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
 
                 return updatedProduct;
             });
+        });
+    }
+
+    @Test
+    public void transitionStateAndForce() {
+        Set<Reference<State>> notTransitions = emptySet();
+        withStateByBuilder(client(), builder -> builder.type(PRODUCT_STATE).transitions(notTransitions), stateA -> {
+        withStateByBuilder(client(), builder -> builder.type(PRODUCT_STATE), stateB -> {
+            withUpdateableProduct(client(), product -> {
+                assertThat(product.getState()).isNull();
+
+                final Product productInStateA = client().executeBlocking(ProductUpdateCommand.of(product, TransitionState.of(stateA)));
+
+                //no force usage
+                assertThatThrownBy(() -> client().executeBlocking(ProductUpdateCommand.of(productInStateA, TransitionState.of(stateB))))
+                .hasMessageContaining("InvalidOperation");
+
+                final ProductUpdateCommand cmd = ProductUpdateCommand.of(productInStateA, TransitionState.of(stateB, true));
+                final Product productInStateB = client().executeBlocking(cmd);
+
+                assertThat(productInStateB.getState()).isEqualTo(stateB.toReference());
+
+                return productInStateA;
+            });
+        });
         });
     }
 

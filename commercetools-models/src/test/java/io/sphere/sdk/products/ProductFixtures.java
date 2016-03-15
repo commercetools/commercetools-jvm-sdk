@@ -54,6 +54,19 @@ public class ProductFixtures {
     public static final PriceDraft PRICE = PriceDraft.of(MoneyImpl.of(new BigDecimal("12.34"), EUR)).withCountry(DE);
     private static final int MASTER_VARIANT_ID = 1;
 
+    public static void withUpdateableProduct(final BlockingSphereClient client,
+                                             final UnaryOperator<ProductDraftBuilder> builderOp,
+                                             final Function<Product, Product> f) {
+        withEmptyProductType(client, productType -> {
+            final ProductVariantDraft masterVariant = ProductVariantDraftBuilder.of().build();
+            final ProductDraftBuilder builder = ProductDraftBuilder.of(productType, randomSlug(), randomSlug(), masterVariant);
+            final ProductDraft productDraft = builderOp.apply(builder).build();
+            final Product product = client.executeBlocking(ProductCreateCommand.of(productDraft));
+            final Product productToDelete = f.apply(product);
+            client.executeBlocking(ProductDeleteCommand.of(productToDelete));
+        });
+    }
+
     public static void withUpdateableProduct(final BlockingSphereClient client, final Function<Product, Product> f) {
         withUpdateableProduct(client, randomString(), f);
     }
