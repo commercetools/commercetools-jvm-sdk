@@ -6,54 +6,13 @@ import com.neovisionaries.i18n.CountryCode;
 import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.commands.UpdateAction;
 import io.sphere.sdk.messages.queries.MessageQuery;
-import io.sphere.sdk.models.Base;
-import io.sphere.sdk.models.EnumValue;
-import io.sphere.sdk.models.LocalizedEnumValue;
-import io.sphere.sdk.models.LocalizedString;
-import io.sphere.sdk.models.MetaAttributes;
-import io.sphere.sdk.models.Reference;
-import io.sphere.sdk.products.CategoryOrderHints;
-import io.sphere.sdk.products.Image;
-import io.sphere.sdk.products.Price;
-import io.sphere.sdk.products.PriceDraft;
-import io.sphere.sdk.products.Product;
-import io.sphere.sdk.products.ProductData;
-import io.sphere.sdk.products.ProductProjection;
-import io.sphere.sdk.products.ProductProjectionType;
-import io.sphere.sdk.products.ProductVariant;
+import io.sphere.sdk.models.*;
+import io.sphere.sdk.products.*;
 import io.sphere.sdk.products.attributes.AttributeAccess;
 import io.sphere.sdk.products.attributes.AttributeDraft;
 import io.sphere.sdk.products.attributes.NamedAttributeAccess;
 import io.sphere.sdk.products.commands.updateactions.*;
 import io.sphere.sdk.products.messages.ProductSlugChangedMessage;
-import io.sphere.sdk.products.commands.updateactions.AddExternalImage;
-import io.sphere.sdk.products.commands.updateactions.AddPrice;
-import io.sphere.sdk.products.commands.updateactions.AddToCategory;
-import io.sphere.sdk.products.commands.updateactions.AddVariant;
-import io.sphere.sdk.products.commands.updateactions.ChangeName;
-import io.sphere.sdk.products.commands.updateactions.ChangePrice;
-import io.sphere.sdk.products.commands.updateactions.ChangeSlug;
-import io.sphere.sdk.products.commands.updateactions.MetaAttributesUpdateActions;
-import io.sphere.sdk.products.commands.updateactions.Publish;
-import io.sphere.sdk.products.commands.updateactions.RemoveFromCategory;
-import io.sphere.sdk.products.commands.updateactions.RemoveImage;
-import io.sphere.sdk.products.commands.updateactions.RemovePrice;
-import io.sphere.sdk.products.commands.updateactions.RemoveVariant;
-import io.sphere.sdk.products.commands.updateactions.RevertStagedChanges;
-import io.sphere.sdk.products.commands.updateactions.SetAttribute;
-import io.sphere.sdk.products.commands.updateactions.SetAttributeInAllVariants;
-import io.sphere.sdk.products.commands.updateactions.SetCategoryOrderHint;
-import io.sphere.sdk.products.commands.updateactions.SetDescription;
-import io.sphere.sdk.products.commands.updateactions.SetMetaDescription;
-import io.sphere.sdk.products.commands.updateactions.SetMetaKeywords;
-import io.sphere.sdk.products.commands.updateactions.SetMetaTitle;
-import io.sphere.sdk.products.commands.updateactions.SetPrices;
-import io.sphere.sdk.products.commands.updateactions.SetProductPriceCustomField;
-import io.sphere.sdk.products.commands.updateactions.SetProductPriceCustomType;
-import io.sphere.sdk.products.commands.updateactions.SetSearchKeywords;
-import io.sphere.sdk.products.commands.updateactions.SetTaxCategory;
-import io.sphere.sdk.products.commands.updateactions.TransitionState;
-import io.sphere.sdk.products.commands.updateactions.Unpublish;
 import io.sphere.sdk.products.messages.ProductStateTransitionMessage;
 import io.sphere.sdk.products.queries.ProductByIdGet;
 import io.sphere.sdk.products.queries.ProductProjectionByIdGet;
@@ -76,26 +35,22 @@ import javax.money.MonetaryAmount;
 import java.math.BigDecimal;
 import java.time.ZoneOffset;
 import java.util.*;
+import java.util.stream.Collectors;
 
 import static io.sphere.sdk.models.DefaultCurrencyUnits.EUR;
-import static io.sphere.sdk.products.ProductFixtures.withProductAndUnconnectedCategory;
-import static io.sphere.sdk.products.ProductFixtures.withProductInCategory;
-import static io.sphere.sdk.products.ProductFixtures.withUpdateablePricedProduct;
-import static io.sphere.sdk.products.ProductFixtures.withUpdateableProduct;
+import static io.sphere.sdk.products.ProductFixtures.*;
 import static io.sphere.sdk.states.StateFixtures.withStateByBuilder;
 import static io.sphere.sdk.states.StateType.PRODUCT_STATE;
 import static io.sphere.sdk.suppliers.TShirtProductTypeDraftSupplier.MONEY_ATTRIBUTE_NAME;
-import static io.sphere.sdk.test.SphereTestUtils.DE;
-import static io.sphere.sdk.test.SphereTestUtils.EURO_10;
+import static io.sphere.sdk.test.SphereTestUtils.*;
 import static io.sphere.sdk.test.SphereTestUtils.MASTER_VARIANT_ID;
-import static io.sphere.sdk.test.SphereTestUtils.asList;
-import static io.sphere.sdk.test.SphereTestUtils.randomKey;
-import static io.sphere.sdk.test.SphereTestUtils.randomSlug;
 import static io.sphere.sdk.types.TypeFixtures.STRING_FIELD_NAME;
 import static io.sphere.sdk.types.TypeFixtures.withUpdateableType;
+import static java.util.Collections.emptyList;
 import static java.util.Collections.emptySet;
 import static java.util.Collections.singletonList;
 import static java.util.Locale.ENGLISH;
+import static java.util.stream.Collectors.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -154,22 +109,17 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
     @Test
     public void setPrices() throws Exception {
         final PriceDraft expectedPrice1 = PriceDraft.of(MoneyImpl.of(123, EUR));
-        final PriceDraft expectedPrice2 = PriceDraft.of(MoneyImpl.of(123, EUR)).withCountry(CountryCode.DE);
-        final List<PriceDraft> expectedPriceList = new ArrayList<>();
-        expectedPriceList.add(expectedPrice1);
-        expectedPriceList.add(expectedPrice2);
+        final PriceDraft expectedPrice2 = PriceDraft.of(MoneyImpl.of(123, EUR)).withCountry(DE);
+        final List<PriceDraft> expectedPriceList = asList(expectedPrice1, expectedPrice2);
 
         withUpdateableProduct(client(), product -> {
             final Product updatedProduct = client()
                     .executeBlocking(ProductUpdateCommand.of(product, SetPrices.of(1, expectedPriceList)));
 
-
             final List<Price> prices = updatedProduct.getMasterData().getStaged().getMasterVariant().getPrices();
             assertThat(prices).hasSize(2);
-
-            List<PriceDraft> draftPricesList = prices.stream().map(PriceDraft::of).collect(Collectors.toList());
-
-            assertThat(draftPricesList).contains(expectedPrice1, expectedPrice2);
+            List<PriceDraft> draftPricesList = prices.stream().map(PriceDraft::of).collect(toList());
+            assertThat(draftPricesList).containsOnly(expectedPrice1, expectedPrice2);
 
             return updatedProduct;
         });
@@ -179,20 +129,18 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
     public void setPricesWithAlreadyExisting() {
         final PriceDraft expectedPrice1 = PriceDraft.of(MoneyImpl.of(123, EUR));
         final PriceDraft expectedPrice2 = PriceDraft.of(MoneyImpl.of(123, EUR)).withCountry(CountryCode.DE);
-        final List<PriceDraft> expectedPriceList = new ArrayList<>();
-        expectedPriceList.add(expectedPrice1);
-        expectedPriceList.add(expectedPrice2);
+        final List<PriceDraft> expectedPriceList = asList(expectedPrice1, expectedPrice2);
+
         withUpdateablePricedProduct(client(), expectedPrice1, product -> {
             Price oldPrice = product.getMasterData().getStaged().getMasterVariant().getPrices().get(0);
             final Product updatedProduct = client()
                     .executeBlocking(ProductUpdateCommand.of(product, SetPrices.of(1, expectedPriceList)));
 
-
             final List<Price> newPrices = updatedProduct.getMasterData().getStaged().getMasterVariant().getPrices();
             assertThat(newPrices).hasSize(2);
             assertThat(newPrices).doesNotContain(oldPrice);
 
-            List<PriceDraft> draftPricesList = newPrices.stream().map(PriceDraft::of).collect(Collectors.toList());
+            List<PriceDraft> draftPricesList = newPrices.stream().map(PriceDraft::of).collect(toList());
 
             assertThat(draftPricesList).contains(expectedPrice1, expectedPrice2);
 
@@ -202,11 +150,9 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
 
     @Test
     public void setPricesEmptyList() {
-        final List<PriceDraft> expectedPriceList = new ArrayList<>();
         withUpdateablePricedProduct(client(), product -> {
             final Product updatedProduct = client()
-                    .executeBlocking(ProductUpdateCommand.of(product, SetPrices.of(1, expectedPriceList)));
-
+                    .executeBlocking(ProductUpdateCommand.of(product, SetPrices.of(1, emptyList())));
 
             final List<Price> newPrices = updatedProduct.getMasterData().getStaged().getMasterVariant().getPrices();
             assertThat(newPrices).isEmpty();
