@@ -30,6 +30,7 @@ import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.queries.QueryExecutionUtils;
 import io.sphere.sdk.queries.QueryPredicate;
 import io.sphere.sdk.test.IntegrationTest;
+import net.jcip.annotations.NotThreadSafe;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -54,6 +55,7 @@ import static java.util.stream.Collectors.toList;
 import static org.apache.commons.lang3.StringUtils.defaultString;
 import static org.assertj.core.api.Assertions.assertThat;
 
+@NotThreadSafe
 public class CategoryDocumentationIntegrationTest extends IntegrationTest {
 
     private static final Comparator<Category> EXTERNALID_COMPARATOR = Comparator.comparing(c -> Integer.parseInt(c.getExternalId()));
