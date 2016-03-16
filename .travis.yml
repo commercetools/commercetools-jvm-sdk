@@ -17,3 +17,4 @@ notifications:
 branches:
   only:
     - master
+    - build/1063/parallelize-tests
