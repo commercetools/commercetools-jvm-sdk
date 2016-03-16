@@ -6,6 +6,8 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.TextInputHint;
 
+import javax.annotation.Nullable;
+
 /**
  * Attribute definitions describe a product attribute and allow you to define some meta-information associated with the attribute (like whether it should be searchable or its constraints).
  *
@@ -76,4 +78,11 @@ public interface AttributeDefinition {
 
     @JsonProperty("inputHint")
     TextInputHint getInputHint();
+
+    /**
+     * Additional information about the attribute that aids content managers when setting product details.
+     * @return input tip
+     */
+    @Nullable
+    LocalizedString getInputTip();
 }

@@ -1,6 +1,7 @@
 package io.sphere.sdk.carts.queries;
 
 import io.sphere.sdk.carts.Cart;
+import io.sphere.sdk.carts.CartState;
 import io.sphere.sdk.customergroups.CustomerGroup;
 import io.sphere.sdk.queries.*;
 import io.sphere.sdk.types.queries.WithCustomQueryModel;
@@ -32,6 +33,8 @@ public interface CartQueryModel extends ResourceQueryModel<Cart>, WithCustomQuer
 
     @Override
     PaymentInfoQueryModel<Cart> paymentInfo();
+
+    SphereEnumerationQueryModel<Cart, CartState> cartState();
 
     static CartQueryModel of() {
         return new CartQueryModelImpl(null, null);

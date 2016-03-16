@@ -37,7 +37,8 @@ public class RulesMain {
                 new ClassesAreFinalRule(),
                 new ExpansionModelsAreInterfacesRule(),
                 new ResourceWhichExtendsCustomHasWithCustomQueryModel(),
-                new ResourceDraftBuildersCanBeCreatedByDrafts()
+                new ResourceDraftBuildersCanBeCreatedByDrafts(),
+                new MessagesHaveSuffixMessage()
         );
         final boolean allIsOk = rules.stream()
                 .map(rule -> {

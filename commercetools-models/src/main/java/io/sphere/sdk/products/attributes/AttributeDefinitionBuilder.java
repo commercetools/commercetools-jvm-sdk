@@ -5,6 +5,8 @@ import io.sphere.sdk.models.Builder;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.TextInputHint;
 
+import javax.annotation.Nullable;
+
 /**
  * Builder to create an attribute definition for product types.
  *
@@ -18,8 +20,10 @@ import io.sphere.sdk.models.TextInputHint;
  *
  */
 public final class AttributeDefinitionBuilder extends Base implements Builder<AttributeDefinition> {
-    private final String name;
-    private final LocalizedString label;
+    private String name;
+    private LocalizedString label;
+    @Nullable
+    private LocalizedString inputTip;
     private final AttributeType attributeType;
 
     private AttributeConstraint attributeConstraint = AttributeConstraint.NONE;
@@ -43,6 +47,21 @@ public final class AttributeDefinitionBuilder extends Base implements Builder<At
         return this;
     }
 
+    public AttributeDefinitionBuilder label(final LocalizedString label) {
+        this.label = label;
+        return this;
+    }
+
+    public AttributeDefinitionBuilder name(final String name) {
+        this.name = name;
+        return this;
+    }
+
+    public AttributeDefinitionBuilder inputTip(final LocalizedString inputTip) {
+        this.inputTip = inputTip;
+        return this;
+    }
+
     public AttributeDefinitionBuilder required(final boolean isRequired) {
         this.isRequired = isRequired;
         return this;
@@ -63,10 +82,43 @@ public final class AttributeDefinitionBuilder extends Base implements Builder<At
 
     @Override
     public AttributeDefinition build() {
-        return new AttributeDefinitionImpl(attributeType, name, label, isRequired, attributeConstraint, isSearchable, inputHint);
+        return new AttributeDefinitionImpl(attributeType, name, label, isRequired, attributeConstraint, isSearchable, inputHint, inputTip);
     }
 
     public static AttributeDefinitionBuilder of(final String name, final LocalizedString label, final AttributeType attributeType) {
         return new AttributeDefinitionBuilder(name, label, attributeType);
+    }
+
+    public AttributeConstraint getAttributeConstraint() {
+        return attributeConstraint;
+    }
+
+    public AttributeType getAttributeType() {
+        return attributeType;
+    }
+
+    public TextInputHint getInputHint() {
+        return inputHint;
+    }
+
+    @Nullable
+    public LocalizedString getInputTip() {
+        return inputTip;
+    }
+
+    public Boolean isRequired() {
+        return isRequired;
+    }
+
+    public Boolean isSearchable() {
+        return isSearchable;
+    }
+
+    public LocalizedString getLabel() {
+        return label;
+    }
+
+    public String getName() {
+        return name;
     }
 }

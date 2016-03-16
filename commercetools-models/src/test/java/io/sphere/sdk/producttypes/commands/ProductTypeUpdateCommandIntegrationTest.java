@@ -197,4 +197,15 @@ public class ProductTypeUpdateCommandIntegrationTest extends IntegrationTest {
             return updatedProductType;
         });
     }
+
+    @Test
+    public void setKey() throws Exception {
+        withUpdateableProductType(client(), productType -> {
+            final String newKey = randomKey();
+            final ProductType updatedProductType =
+                    client().executeBlocking(ProductTypeUpdateCommand.of(productType, SetKey.of(newKey)));
+            assertThat(updatedProductType.getKey()).isEqualTo(newKey);
+            return updatedProductType;
+        });
+    }
 }
