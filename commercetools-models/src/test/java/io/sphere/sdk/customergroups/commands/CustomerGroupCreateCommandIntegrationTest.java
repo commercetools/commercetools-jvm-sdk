@@ -7,6 +7,7 @@ import io.sphere.sdk.customergroups.queries.CustomerGroupQuery;
 import io.sphere.sdk.json.SphereJsonUtils;
 import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.test.IntegrationTest;
+import net.jcip.annotations.NotThreadSafe;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -15,6 +16,7 @@ import org.junit.Test;
 import static io.sphere.sdk.customergroups.CustomerGroupFixtures.withCustomerGroup;
 import static org.assertj.core.api.Assertions.assertThat;
 
+@NotThreadSafe
 public class CustomerGroupCreateCommandIntegrationTest extends IntegrationTest {
     @BeforeClass
     public static void clean() {

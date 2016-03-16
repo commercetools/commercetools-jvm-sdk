@@ -9,6 +9,7 @@ import io.sphere.sdk.producttypes.ProductType;
 import io.sphere.sdk.producttypes.ProductTypeDraft;
 import io.sphere.sdk.producttypes.queries.ProductTypeQuery;
 import io.sphere.sdk.test.IntegrationTest;
+import net.jcip.annotations.NotThreadSafe;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -21,6 +22,7 @@ import static java.util.Locale.ENGLISH;
 import static java.util.Locale.GERMAN;
 import static org.assertj.core.api.Assertions.*;
 
+@NotThreadSafe
 public class ProductTypeCreateCommandIntegrationTest extends IntegrationTest {
     @Before
     @After

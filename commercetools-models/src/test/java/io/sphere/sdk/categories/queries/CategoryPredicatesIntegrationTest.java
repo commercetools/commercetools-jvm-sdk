@@ -5,6 +5,7 @@ import io.sphere.sdk.categories.CategoryDraftBuilder;
 import io.sphere.sdk.queries.Query;
 import io.sphere.sdk.queries.QueryPredicate;
 import io.sphere.sdk.test.IntegrationTest;
+import net.jcip.annotations.NotThreadSafe;
 import org.junit.Test;
 
 import java.util.List;
@@ -17,6 +18,7 @@ import static java.util.Arrays.asList;
 import static java.util.stream.Collectors.toList;
 import static org.assertj.core.api.Assertions.assertThat;
 
+@NotThreadSafe
 public class CategoryPredicatesIntegrationTest extends IntegrationTest {
     @Test
     public void isLessThanComparisonPredicate() throws Exception {

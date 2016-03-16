@@ -4,6 +4,7 @@ import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.states.*;
 import io.sphere.sdk.test.IntegrationTest;
 import io.sphere.sdk.test.JsonNodeReferenceResolver;
+import net.jcip.annotations.NotThreadSafe;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -15,6 +16,7 @@ import static io.sphere.sdk.test.SphereTestUtils.draftFromJsonResource;
 import static java.util.Locale.ENGLISH;
 import static org.assertj.core.api.Assertions.assertThat;
 
+@NotThreadSafe
 public class StateCreateCommandIntegrationTest extends IntegrationTest {
 
     public static final String KEY = StateCreateCommandIntegrationTest.class.getSimpleName();

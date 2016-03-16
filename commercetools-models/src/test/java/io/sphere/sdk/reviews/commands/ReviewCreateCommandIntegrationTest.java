@@ -21,6 +21,7 @@ import io.sphere.sdk.states.queries.StateQuery;
 import io.sphere.sdk.test.IntegrationTest;
 import io.sphere.sdk.test.JsonNodeReferenceResolver;
 import io.sphere.sdk.types.*;
+import net.jcip.annotations.NotThreadSafe;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -37,6 +38,7 @@ import static io.sphere.sdk.test.SphereTestUtils.draftFromJsonResource;
 import static java.util.Collections.singletonMap;
 import static org.assertj.core.api.Assertions.assertThat;
 
+@NotThreadSafe
 public class ReviewCreateCommandIntegrationTest extends IntegrationTest {
     @Before
     public void clean() throws Exception {

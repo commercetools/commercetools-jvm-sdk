@@ -26,6 +26,7 @@ import io.sphere.sdk.producttypes.commands.ProductTypeDeleteCommand;
 import io.sphere.sdk.producttypes.queries.ProductTypeQuery;
 import io.sphere.sdk.test.IntegrationTest;
 import io.sphere.sdk.utils.MoneyImpl;
+import net.jcip.annotations.NotThreadSafe;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 import org.junit.AfterClass;
@@ -52,6 +53,7 @@ import static java.util.stream.Collectors.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+@NotThreadSafe
 public class ProductTypeCreationDemoIntegrationTest extends IntegrationTest {
 
     private static final String PRODUCT_TYPE_NAME = "tshirt-product-attribute-tutorial";
