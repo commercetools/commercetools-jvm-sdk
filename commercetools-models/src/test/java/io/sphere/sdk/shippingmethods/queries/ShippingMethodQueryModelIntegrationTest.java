@@ -3,11 +3,13 @@ package io.sphere.sdk.shippingmethods.queries;
 import io.sphere.sdk.queries.QuerySort;
 import io.sphere.sdk.shippingmethods.ShippingMethod;
 import io.sphere.sdk.test.IntegrationTest;
+import net.jcip.annotations.NotThreadSafe;
 import org.junit.Test;
 
 import static io.sphere.sdk.shippingmethods.ShippingMethodFixtures.withShippingMethod;
 import static org.assertj.core.api.Assertions.assertThat;
 
+@NotThreadSafe
 public class ShippingMethodQueryModelIntegrationTest extends IntegrationTest {
 
     public static final QuerySort<ShippingMethod> BY_CREATED_AT_DESC = ShippingMethodQueryModel.of().createdAt().sort().desc();

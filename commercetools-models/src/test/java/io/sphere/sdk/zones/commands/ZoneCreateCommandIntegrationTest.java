@@ -8,6 +8,7 @@ import io.sphere.sdk.zones.Location;
 import io.sphere.sdk.zones.Zone;
 import io.sphere.sdk.zones.ZoneDraft;
 import io.sphere.sdk.zones.ZoneFixtures;
+import net.jcip.annotations.NotThreadSafe;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -18,6 +19,7 @@ import static io.sphere.sdk.utils.SphereInternalUtils.asSet;
 import static io.sphere.sdk.zones.ZoneFixtures.withZone;
 import static org.assertj.core.api.Assertions.assertThat;
 
+@NotThreadSafe
 public class ZoneCreateCommandIntegrationTest extends IntegrationTest {
     @Before
     public void deleteRemainingZone() throws Exception {
