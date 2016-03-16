@@ -7,6 +7,7 @@ import io.sphere.sdk.commands.UpdateCommand;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Versioned;
 import io.sphere.sdk.test.IntegrationTest;
+import net.jcip.annotations.NotThreadSafe;
 import org.junit.Test;
 
 import java.util.List;
@@ -17,6 +18,7 @@ import static io.sphere.sdk.test.SphereTestUtils.*;
 import static java.util.Collections.singletonList;
 import static org.assertj.core.api.Assertions.assertThat;
 
+@NotThreadSafe
 public class CategoryUpdateCommandIntegrationTest extends IntegrationTest {
     @Test
     public void updateCommandDsl() throws Exception {
