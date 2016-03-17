@@ -35,7 +35,6 @@ import javax.money.MonetaryAmount;
 import java.math.BigDecimal;
 import java.time.ZoneOffset;
 import java.util.*;
-import java.util.stream.Collectors;
 
 import static io.sphere.sdk.models.DefaultCurrencyUnits.EUR;
 import static io.sphere.sdk.products.ProductFixtures.*;
@@ -70,10 +69,23 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
         });
     }
 
+    //do not inline, it is example code
     @Test
     public void addPrice() throws Exception {
         final PriceDraft expectedPrice = PriceDraft.of(MoneyImpl.of(123, EUR));
-        testAddPrice(expectedPrice);
+        withUpdateableProduct(client(), product -> {
+            final Product updatedProduct = client()
+                    .executeBlocking(ProductUpdateCommand.of(product, AddPrice.of(1, expectedPrice)));
+
+
+            final List<Price> prices = updatedProduct.getMasterData().getStaged().getMasterVariant().getPrices();
+            assertThat(prices).hasSize(1);
+            final Price actualPrice = prices.get(0);
+
+            assertThat(expectedPrice).isEqualTo(PriceDraft.of(actualPrice));
+
+            return updatedProduct;
+        });
     }
 
     @Test
