@@ -48,7 +48,6 @@
     <scm>
         <url>git@github.com:sphereio/sphere-jvm-sdk.git</url>
         <connection>scm:git:git@github.com:sphereio/sphere-jvm-sdk.git</connection>
-      <tag>HEAD</tag>
   </scm>
     <properties>
         <jackson.version>2.6.5</jackson.version>
@@ -68,7 +67,7 @@
         <jsr305.version>3.0.1</jsr305.version>
         <junit.version>4.12</junit.version>
         <assertj.version>3.3.0</assertj.version>
-        <commercetools-taglets.version>0.7.2</commercetools-taglets.version>
+        <commercetools-taglets.version>0.7.3</commercetools-taglets.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>1.8</java.version>
         <jacoco.version>0.7.5.201505241946</jacoco.version>
@@ -329,7 +328,7 @@
                     <autoVersionSubmodules>true</autoVersionSubmodules>
                     <useReleaseProfile>false</useReleaseProfile>
                     <releaseProfiles>release</releaseProfiles>
-                    <goals>deploy scm-publish:publish-scm</goals>
+                    <goals>deploy</goals>
                     <tagNameFormat>v@{project.version}</tagNameFormat>
                 </configuration>
             </plugin>

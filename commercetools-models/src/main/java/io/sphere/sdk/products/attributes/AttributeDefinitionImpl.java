@@ -7,6 +7,8 @@ import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.TextInputHint;
 
+import javax.annotation.Nullable;
+
 final class AttributeDefinitionImpl extends Base implements AttributeDefinition {
     private final AttributeType attributeType;
     private final String name;
@@ -15,10 +17,12 @@ final class AttributeDefinitionImpl extends Base implements AttributeDefinition 
     private final AttributeConstraint attributeConstraint;
     private final Boolean isSearchable;
     private final TextInputHint inputHint;
+    @Nullable
+    private final LocalizedString inputTip;
 
     @JsonCreator
     AttributeDefinitionImpl(AttributeType attributeType, String name, LocalizedString label, Boolean isRequired,
-                            AttributeConstraint attributeConstraint, Boolean isSearchable, TextInputHint inputHint) {
+                            AttributeConstraint attributeConstraint, Boolean isSearchable, TextInputHint inputHint, @Nullable final LocalizedString inputTip) {
         this.attributeType = attributeType;
         this.name = name;
         this.label = label;
@@ -26,6 +30,7 @@ final class AttributeDefinitionImpl extends Base implements AttributeDefinition 
         this.attributeConstraint = attributeConstraint;
         this.isSearchable = isSearchable;
         this.inputHint = inputHint;
+        this.inputTip = inputTip;
     }
 
     /**
@@ -117,5 +122,11 @@ final class AttributeDefinitionImpl extends Base implements AttributeDefinition 
     @JsonProperty("inputHint")
     public TextInputHint getInputHint() {
         return inputHint;
+    }
+
+    @Override
+    @Nullable
+    public LocalizedString getInputTip() {
+        return inputTip;
     }
 }

@@ -42,6 +42,7 @@ public class ProductTypeCreateCommandIntegrationTest extends IntegrationTest {
                 AttributeDefinitionBuilder.of("size", sizeAttributeLabel, EnumAttributeType.of(values))
                 .required(true)
                 .attributeConstraint(AttributeConstraint.COMBINATION_UNIQUE)
+                .inputTip(LocalizedString.ofEnglish("size as enum"))
                 .build();
 
         final String name = getName();
@@ -51,6 +52,9 @@ public class ProductTypeCreateCommandIntegrationTest extends IntegrationTest {
         assertThat(productType.getName()).isEqualTo(name);
         assertThat(productType.getDescription()).isEqualTo("a 'T' shaped cloth");
         assertThat(productType.getAttributes()).contains(sizeAttributeDefinition);
+        assertThat(productType.getAttributes()).hasSize(1);
+        assertThat(productType.getAttributes().get(0).getInputTip())
+                .isEqualTo(LocalizedString.ofEnglish("size as enum"));
     }
 
     @Test

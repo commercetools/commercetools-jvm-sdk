@@ -19,11 +19,15 @@ import javax.annotation.Nullable;
  *
  */
 public final class TransitionState extends TransitionStateBase<Order> {
-    private TransitionState(final @Nullable Referenceable<State> state) {
-        super(state);
+    private TransitionState(final @Nullable Referenceable<State> state, @Nullable final Boolean force) {
+        super(state, force);
     }
 
     public static TransitionState of(final @Nullable Referenceable<State> state) {
-        return new TransitionState(state);
+        return new TransitionState(state, null);
+    }
+
+    public static TransitionState of(final @Nullable Referenceable<State> state, @Nullable final Boolean force) {
+        return new TransitionState(state, force);
     }
 }

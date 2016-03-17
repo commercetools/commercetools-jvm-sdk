@@ -2,6 +2,7 @@ package io.sphere.sdk.products.commands;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonUnwrapped;
+import com.neovisionaries.i18n.CountryCode;
 import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.commands.UpdateAction;
 import io.sphere.sdk.messages.queries.MessageQuery;
@@ -11,14 +12,17 @@ import io.sphere.sdk.products.attributes.AttributeAccess;
 import io.sphere.sdk.products.attributes.AttributeDraft;
 import io.sphere.sdk.products.attributes.NamedAttributeAccess;
 import io.sphere.sdk.products.commands.updateactions.*;
+import io.sphere.sdk.products.messages.ProductSlugChangedMessage;
 import io.sphere.sdk.products.messages.ProductStateTransitionMessage;
 import io.sphere.sdk.products.queries.ProductByIdGet;
 import io.sphere.sdk.products.queries.ProductProjectionByIdGet;
 import io.sphere.sdk.products.queries.ProductQuery;
 import io.sphere.sdk.queries.PagedQueryResult;
+import io.sphere.sdk.queries.Query;
 import io.sphere.sdk.search.SearchKeyword;
 import io.sphere.sdk.search.SearchKeywords;
 import io.sphere.sdk.search.tokenizer.CustomSuggestTokenizer;
+import io.sphere.sdk.states.State;
 import io.sphere.sdk.suppliers.TShirtProductTypeDraftSupplier.Colors;
 import io.sphere.sdk.suppliers.TShirtProductTypeDraftSupplier.Sizes;
 import io.sphere.sdk.taxcategories.TaxCategoryFixtures;
@@ -30,10 +34,7 @@ import org.junit.Test;
 import javax.money.MonetaryAmount;
 import java.math.BigDecimal;
 import java.time.ZoneOffset;
-import java.util.Collections;
-import java.util.List;
-import java.util.Locale;
-import java.util.Random;
+import java.util.*;
 
 import static io.sphere.sdk.models.DefaultCurrencyUnits.EUR;
 import static io.sphere.sdk.products.ProductFixtures.*;
@@ -44,16 +45,20 @@ import static io.sphere.sdk.test.SphereTestUtils.*;
 import static io.sphere.sdk.test.SphereTestUtils.MASTER_VARIANT_ID;
 import static io.sphere.sdk.types.TypeFixtures.STRING_FIELD_NAME;
 import static io.sphere.sdk.types.TypeFixtures.withUpdateableType;
+import static java.util.Collections.emptyList;
+import static java.util.Collections.emptySet;
 import static java.util.Collections.singletonList;
 import static java.util.Locale.ENGLISH;
+import static java.util.stream.Collectors.*;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
     public static final Random RANDOM = new Random();
 
     @Test
     public void addExternalImage() throws Exception {
-        withUpdateableProduct(client(), product -> {
+        withUpdateableProduct(client(), (Product product) -> {
             assertThat(product.getMasterData().getStaged().getMasterVariant().getImages()).hasSize(0);
 
             final Image image = Image.ofWidthAndHeight("http://www.commercetools.com/assets/img/ct_logo_farbe.gif", 460, 102, "commercetools logo");
@@ -64,10 +69,23 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
         });
     }
 
+    //do not inline, it is example code
     @Test
     public void addPrice() throws Exception {
         final PriceDraft expectedPrice = PriceDraft.of(MoneyImpl.of(123, EUR));
-        testAddPrice(expectedPrice);
+        withUpdateableProduct(client(), product -> {
+            final Product updatedProduct = client()
+                    .executeBlocking(ProductUpdateCommand.of(product, AddPrice.of(1, expectedPrice)));
+
+
+            final List<Price> prices = updatedProduct.getMasterData().getStaged().getMasterVariant().getPrices();
+            assertThat(prices).hasSize(1);
+            final Price actualPrice = prices.get(0);
+
+            assertThat(expectedPrice).isEqualTo(PriceDraft.of(actualPrice));
+
+            return updatedProduct;
+        });
     }
 
     @Test
@@ -95,6 +113,61 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
             final Price actualPrice = prices.get(0);
 
             assertThat(expectedPrice).isEqualTo(PriceDraft.of(actualPrice));
+
+            return updatedProduct;
+        });
+    }
+
+    @Test
+    public void setPrices() throws Exception {
+        final PriceDraft expectedPrice1 = PriceDraft.of(MoneyImpl.of(123, EUR));
+        final PriceDraft expectedPrice2 = PriceDraft.of(MoneyImpl.of(123, EUR)).withCountry(DE);
+        final List<PriceDraft> expectedPriceList = asList(expectedPrice1, expectedPrice2);
+
+        withUpdateableProduct(client(), product -> {
+            final Product updatedProduct = client()
+                    .executeBlocking(ProductUpdateCommand.of(product, SetPrices.of(1, expectedPriceList)));
+
+            final List<Price> prices = updatedProduct.getMasterData().getStaged().getMasterVariant().getPrices();
+            assertThat(prices).hasSize(2);
+            List<PriceDraft> draftPricesList = prices.stream().map(PriceDraft::of).collect(toList());
+            assertThat(draftPricesList).containsOnly(expectedPrice1, expectedPrice2);
+
+            return updatedProduct;
+        });
+    }
+
+    @Test
+    public void setPricesWithAlreadyExisting() {
+        final PriceDraft expectedPrice1 = PriceDraft.of(MoneyImpl.of(123, EUR));
+        final PriceDraft expectedPrice2 = PriceDraft.of(MoneyImpl.of(123, EUR)).withCountry(CountryCode.DE);
+        final List<PriceDraft> expectedPriceList = asList(expectedPrice1, expectedPrice2);
+
+        withUpdateablePricedProduct(client(), expectedPrice1, product -> {
+            Price oldPrice = product.getMasterData().getStaged().getMasterVariant().getPrices().get(0);
+            final Product updatedProduct = client()
+                    .executeBlocking(ProductUpdateCommand.of(product, SetPrices.of(1, expectedPriceList)));
+
+            final List<Price> newPrices = updatedProduct.getMasterData().getStaged().getMasterVariant().getPrices();
+            assertThat(newPrices).hasSize(2);
+            assertThat(newPrices).doesNotContain(oldPrice);
+
+            List<PriceDraft> draftPricesList = newPrices.stream().map(PriceDraft::of).collect(toList());
+
+            assertThat(draftPricesList).contains(expectedPrice1, expectedPrice2);
+
+            return updatedProduct;
+        });
+    }
+
+    @Test
+    public void setPricesEmptyList() {
+        withUpdateablePricedProduct(client(), product -> {
+            final Product updatedProduct = client()
+                    .executeBlocking(ProductUpdateCommand.of(product, SetPrices.of(1, emptyList())));
+
+            final List<Price> newPrices = updatedProduct.getMasterData().getStaged().getMasterVariant().getPrices();
+            assertThat(newPrices).isEmpty();
 
             return updatedProduct;
         });
@@ -168,6 +241,19 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
             final Product updatedProduct = client().executeBlocking(ProductUpdateCommand.of(product, ChangeSlug.of(newSlug)));
 
             assertThat(updatedProduct.getMasterData().getStaged().getSlug()).isEqualTo(newSlug);
+
+            //query message
+            assertEventually(() -> {
+                final Query<ProductSlugChangedMessage> query = MessageQuery.of()
+                        .withPredicates(m -> m.resource().is(product))
+                        .forMessageType(ProductSlugChangedMessage.MESSAGE_HINT);
+                final List<ProductSlugChangedMessage> results =
+                        client().executeBlocking(query).getResults();
+                assertThat(results).hasSize(1);
+                final ProductSlugChangedMessage message = results.get(0);
+                assertThat(message.getSlug()).isEqualTo(newSlug);
+            });
+
             return updatedProduct;
         });
     }
@@ -525,6 +611,31 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
                 assertThat(productByState).isEqualTo(updatedProduct);
 
                 return updatedProduct;
+            });
+        });
+    }
+
+    @Test
+    public void transitionStateAndForce() {
+        Set<Reference<State>> notTransitions = emptySet();
+        withStateByBuilder(client(), builder -> builder.type(PRODUCT_STATE).transitions(notTransitions), stateA -> {
+            withStateByBuilder(client(), builder -> builder.type(PRODUCT_STATE), stateB -> {
+                withUpdateableProduct(client(), product -> {
+                    assertThat(product.getState()).isNull();
+
+                    final Product productInStateA = client().executeBlocking(ProductUpdateCommand.of(product, TransitionState.of(stateA)));
+
+                    //no force usage
+                    assertThatThrownBy(() -> client().executeBlocking(ProductUpdateCommand.of(productInStateA, TransitionState.of(stateB))))
+                            .hasMessageContaining("InvalidOperation");
+
+                    final ProductUpdateCommand cmd = ProductUpdateCommand.of(productInStateA, TransitionState.of(stateB, true));
+                    final Product productInStateB = client().executeBlocking(cmd);
+
+                    assertThat(productInStateB.getState()).isEqualTo(stateB.toReference());
+
+                    return productInStateA;
+                });
             });
         });
     }

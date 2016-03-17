@@ -1,6 +1,7 @@
 package io.sphere.sdk.carts.queries;
 
 import io.sphere.sdk.carts.Cart;
+import io.sphere.sdk.carts.CartState;
 import io.sphere.sdk.customergroups.CustomerGroup;
 import io.sphere.sdk.queries.*;
 
@@ -68,5 +69,10 @@ final class CartQueryModelImpl extends CartLikeQueryModelImpl<Cart> implements C
     @Override
     public CartShippingInfoQueryModel<Cart> shippingInfo() {
         return super.shippingInfo();
+    }
+
+    @Override
+    public SphereEnumerationQueryModel<Cart, CartState> cartState() {
+        return enumerationQueryModel("cartState");
     }
 }

@@ -1,17 +1,13 @@
 package io.sphere.sdk.carts.queries;
 
-import io.sphere.sdk.carts.Cart;
-import io.sphere.sdk.carts.CartShippingInfo;
-import io.sphere.sdk.carts.ItemState;
-import io.sphere.sdk.carts.LineItem;
+import io.sphere.sdk.carts.*;
 import io.sphere.sdk.carts.commands.CartUpdateCommand;
 import io.sphere.sdk.carts.commands.updateactions.AddDiscountCode;
 import io.sphere.sdk.carts.commands.updateactions.RemoveDiscountCode;
 import io.sphere.sdk.carts.commands.updateactions.SetShippingMethod;
-import io.sphere.sdk.client.SphereRequest;
 import io.sphere.sdk.discountcodes.DiscountCodeInfo;
+import io.sphere.sdk.orders.OrderFixtures;
 import io.sphere.sdk.products.Price;
-import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.test.IntegrationTest;
 import io.sphere.sdk.utils.MoneyImpl;
 import net.jcip.annotations.NotThreadSafe;
@@ -19,6 +15,7 @@ import org.javamoney.moneta.function.MonetaryUtil;
 import org.junit.Test;
 
 import javax.money.MonetaryAmount;
+import java.util.List;
 import java.util.Locale;
 
 import static io.sphere.sdk.carts.CartFixtures.*;
@@ -178,6 +175,19 @@ public class CartQueryIntegrationTest extends IntegrationTest {
 
                 return cartWithShippingMethod;
             });
+        });
+    }
+
+    @Test
+    public void cartState() {
+        OrderFixtures.withOrder(client(), order -> {
+            final CartQuery query = CartQuery.of()
+                    .plusPredicates(m -> m.cartState().is(CartState.ORDERED))
+                    .plusPredicates(m -> m.is(order.getCart()));
+            final List<Cart> results = client().executeBlocking(query).getResults();
+            assertThat(results).hasSize(1);
+            assertThat(results.get(0).getId()).isEqualTo(order.getCart().getId());
+            return order;
         });
     }
 }

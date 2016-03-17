@@ -17,11 +17,15 @@ import javax.annotation.Nullable;
  * {@include.example io.sphere.sdk.reviews.commands.ReviewUpdateCommandIntegrationTest#transitionState()}
  */
 public final class TransitionState extends TransitionStateBase<Review> {
-    private TransitionState(final @Nullable ResourceIdentifiable<State> state) {
-        super(state);
+    private TransitionState(final @Nullable ResourceIdentifiable<State> state, @Nullable final Boolean force) {
+        super(state, force);
     }
 
     public static TransitionState of(final @Nullable ResourceIdentifiable<State> state) {
-        return new TransitionState(state);
+        return new TransitionState(state, null);
+    }
+
+    public static TransitionState of(final @Nullable ResourceIdentifiable<State> state, @Nullable final Boolean force) {
+        return new TransitionState(state, force);
     }
 }
