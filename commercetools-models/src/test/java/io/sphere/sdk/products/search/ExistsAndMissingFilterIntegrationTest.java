@@ -1,17 +1,10 @@
 package io.sphere.sdk.products.search;
 
 import io.sphere.sdk.products.*;
-import io.sphere.sdk.products.attributes.AttributeDefinition;
-import io.sphere.sdk.products.attributes.AttributeDefinitionBuilder;
 import io.sphere.sdk.products.attributes.AttributeDraft;
-import io.sphere.sdk.products.attributes.StringAttributeType;
-import io.sphere.sdk.producttypes.ProductType;
-import io.sphere.sdk.producttypes.ProductTypeDraft;
-import io.sphere.sdk.producttypes.commands.ProductTypeCreateCommand;
+import io.sphere.sdk.search.FilterExpression;
 import io.sphere.sdk.search.model.ExistsAndMissingFilterSearchModelSupport;
 import io.sphere.sdk.test.IntegrationTest;
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.util.List;
@@ -27,30 +20,44 @@ import static java.util.Collections.singleton;
 import static java.util.Collections.singletonList;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class ExistFilterIntegrationTest extends IntegrationTest {
-    public static final String PRODUCT_TYPE_KEY = ExistFilterIntegrationTest.class.getSimpleName();
-    private static ProductType productType;
-
-    @AfterClass
-    public static void delete() {
-        ProductFixtures.deleteProductsAndProductTypes(client());
-        productType = null;
-    }
-
-    @BeforeClass
-    public static void createData() {
-        ProductFixtures.deleteProductsAndProductTypes(client());
-        final String stringattribute = "stringattribute";
-        final List<AttributeDefinition> attributes = singletonList(AttributeDefinitionBuilder.of(stringattribute, randomSlug(), StringAttributeType.of()).build());
-        final ProductTypeDraft productTypeDraft =
-                ProductTypeDraft.of(PRODUCT_TYPE_KEY, PRODUCT_TYPE_KEY, PRODUCT_TYPE_KEY, attributes);
-        productType = client().executeBlocking(ProductTypeCreateCommand.of(productTypeDraft));
+public class ExistsAndMissingFilterIntegrationTest extends IntegrationTest {
+    @Test
+    public void categoriesExists() {
+        withCategory(client(), category -> {
+            withProduct(client(), builder -> builder.categories(singleton(category.toReference())), productWithCategories -> {
+                withProduct(client(), productWithoutCategories -> {
+                    final List<String> productIds = asList(productWithCategories.getId(), productWithoutCategories.getId());
+                    final ProductProjectionSearch exists = ProductProjectionSearch.ofStaged()
+                            .withQueryFilters(m -> m.id().isIn(productIds))//for test isolation
+                            .plusQueryFilters(m -> m.categories().exists());
+                    assertEventually(() -> {
+                        final List<ProductProjection> results = client().executeBlocking(exists).getResults();
+                        assertThat(results)
+                                .hasSize(1)
+                                .extracting(s -> s.getId()).containsExactly(productWithCategories.getId());
+                    });
+                });
+            });
+        });
     }
 
     @Test
-    public void categories() {
+    public void categoriesMissing() {
         withCategory(client(), category -> {
-            checkFilter(builder -> builder.categories(singleton(category.toReference())), m -> m.categories());
+            withProduct(client(), builder -> builder.categories(singleton(category.toReference())), productWithCategories -> {
+                withProduct(client(), productWithoutCategories -> {
+                    final List<String> productIds = asList(productWithCategories.getId(), productWithoutCategories.getId());
+                    final ProductProjectionSearch missing = ProductProjectionSearch.ofStaged()
+                            .withQueryFilters(m -> m.id().isIn(productIds))//for test isolation
+                            .plusQueryFilters(m -> m.categories().missing());
+                   assertEventually(() -> {
+                       final List<ProductProjection> results = client().executeBlocking(missing).getResults();
+                       assertThat(results)
+                               .hasSize(1)
+                               .extracting(s -> s.getId()).containsExactly(productWithoutCategories.getId());
+                   });
+                });
+            });
         });
     }
 
