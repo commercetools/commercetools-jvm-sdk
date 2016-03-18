@@ -8,6 +8,7 @@ import io.sphere.sdk.carts.LineItem;
 import io.sphere.sdk.carts.commands.updateactions.SetShippingMethod;
 import io.sphere.sdk.carts.expansion.CartExpansionModel;
 import io.sphere.sdk.carts.queries.CartByIdGet;
+import io.sphere.sdk.carts.queries.CartQueryModel;
 import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.categories.CategoryDraft;
 import io.sphere.sdk.channels.queries.ChannelByIdGet;
@@ -84,6 +85,20 @@ import java.util.function.Function;
  <li class=fixed-in-release></li>
  </ul>
  -->
+
+ <h3 class=released-version id="v1_0_0_RC4">1.0.0-RC4 (18.03.2016)</h3>
+
+ <ul>
+ <li class=new-in-release>{@link io.sphere.sdk.products.commands.updateactions.SetPrices} to update all prices in a {@link ProductVariant}</li>
+ <li class=new-in-release>force parameter to products, reviews and orders transition state action ({@link io.sphere.sdk.products.commands.updateactions.TransitionState}, {@link io.sphere.sdk.orders.commands.updateactions.TransitionState}, {@link io.sphere.sdk.orders.commands.updateactions.TransitionState})</li>
+ <li class=new-in-release>query {@link io.sphere.sdk.carts.Cart}s by {@link CartQueryModel#cartState()} </li>
+ <li class=new-in-release>{@link io.sphere.sdk.models.errors.DuplicateFieldError}</li>
+ <li class=new-in-release>{@link io.sphere.sdk.producttypes.commands.updateactions.SetKey} to update the key of a {@link ProductType}</li>
+ <li class=new-in-release>{@link io.sphere.sdk.types.commands.updateactions.ChangeKey} to update the key of a {@link io.sphere.sdk.types.Type}</li>
+ <li class=new-in-release>{@link AttributeDefinition#getInputHint()} and {@link io.sphere.sdk.products.attributes.AttributeDefinitionBuilder#inputTip(LocalizedString)} </li>
+ <li class=new-in-release>{@link io.sphere.sdk.products.messages.ProductSlugChangedMessage}</li>
+ <li class=fixed-in-release>The documentation of {@link SphereResources} was empty after the migration from SBT to Maven.</li>
+ </ul>
 
  <h3 class=released-version id="v1_0_0_RC3">1.0.0-RC3 (11.03.2016)</h3>
 
