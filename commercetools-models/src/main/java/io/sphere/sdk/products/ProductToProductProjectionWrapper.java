@@ -128,4 +128,10 @@ class ProductToProductProjectionWrapper implements ProductProjection {
     public ReviewRatingStatistics getReviewRatingStatistics() {
         return product.getReviewRatingStatistics();
     }
+
+    @Nullable
+    @Override
+    public Set<Reference<Category>> getCategoriesWithAncestors() {
+        return null;
+    }
 }

@@ -38,6 +38,11 @@ public final class ProductProjectionFilterSearchModel extends ProductDataFilterS
     }
 
     @Override
+    public ReferenceFilterSearchModel<ProductProjection> categoriesWithAncestors() {
+        return super.categoriesWithAncestors();
+    }
+
+    @Override
     public ReferenceFilterSearchModel<ProductProjection> productType() {
         return super.productType();
     }
