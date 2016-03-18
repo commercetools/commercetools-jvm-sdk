@@ -27,16 +27,12 @@ abstract class TermFilterBaseSearchModel<T, V> extends Base implements FilterSea
 
     @Override
     public List<FilterExpression<T>> exists() {
-        return verbFilter("exists");
+        return ExistsAndMissingFilterSearchModelSupportUtils.exists(searchModel);
     }
 
     @Override
     public List<FilterExpression<T>> missing() {
-        return verbFilter("missing");
-    }
-
-    private List<FilterExpression<T>> verbFilter(final String verb) {
-        return searchModel.buildPath().stream().map(path -> FilterExpression.<T>of(path + (":" + verb))).collect(toList());
+        return ExistsAndMissingFilterSearchModelSupportUtils.exists(searchModel);
     }
 
     /**

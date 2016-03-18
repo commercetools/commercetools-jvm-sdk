@@ -131,4 +131,12 @@ public class SearchModelImpl<T> extends Base implements SearchModel<T> {
     protected ExistsAndMissingFilterSearchModelSupport<T> existsAndMissingFilterSearchModelSupport(final String fieldName) {
         return new ExistsAndMissingFilterSearchModelSupportImpl<T>(this, fieldName);
     }
+
+    protected List<FilterExpression<T>> existsFilters() {
+        return ExistsAndMissingFilterSearchModelSupportUtils.exists(this);
+    }
+
+    protected List<FilterExpression<T>> missingFilters() {
+        return ExistsAndMissingFilterSearchModelSupportUtils.missing(this);
+    }
 }

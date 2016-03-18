@@ -44,6 +44,7 @@ public interface Product extends ProductLike<Product, Product>, Resource<Product
      * @see io.sphere.sdk.products.commands.updateactions.TransitionState
      */
     @Nullable
+    @Override
     Reference<State> getState();
 
     /**

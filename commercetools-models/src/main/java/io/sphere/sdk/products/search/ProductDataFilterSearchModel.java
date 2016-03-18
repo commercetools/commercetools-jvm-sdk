@@ -45,7 +45,11 @@ public abstract class ProductDataFilterSearchModel extends SearchModelImpl<Produ
         return new ReviewRatingStatisticsFilterSearchModel<>(this, "reviewRatingStatistics");
     }
 
-    public ExistsAndMissingFilterSearchModelSupport<ProductProjection> taxCategory() {
-        return existsAndMissingFilterSearchModelSupport("taxCategory");
+    public ReferenceFilterSearchModel<ProductProjection> taxCategory() {
+        return referenceFilterSearchModel("taxCategory");
+    }
+
+    public ReferenceFilterSearchModel<ProductProjection> state() {
+        return referenceFilterSearchModel("state");
     }
 }
