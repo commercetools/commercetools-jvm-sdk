@@ -6,7 +6,7 @@
 1. `mvn release:prepare -Darguments="-DskipTests" -DskipTests`
     * ~ 2 min
 1. `mvn release:perform -Darguments="-DskipTests" -DskipTests`
-    * ~ 5 min
+    * ~ 10 min
 1. https://oss.sonatype.org/ release
 1. checkout the tag version and `git checkout $(git describe --abbrev=0 --tags) && mvn clean javadoc:aggregate scm-publish:publish-scm -P publish-site && git checkout master`
 1. update GitHub release on https://github.com/sphereio/sphere-jvm-sdk/releases
