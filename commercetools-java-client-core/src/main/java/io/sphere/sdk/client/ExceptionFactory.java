@@ -62,7 +62,7 @@ final class ExceptionFactory {
         return exceptionFactory;
     }
 
-    //hack since backend returns in same error conditions responce code 500 but with the message Service unavailable
+    //hack since backend returns in same error conditions response code 500 but with the message Service unavailable
     private static boolean isServiceNotAvailable(final HttpResponse httpResponse) {
         return httpResponse.getStatusCode() == 503 || Optional.ofNullable(httpResponse.getResponseBody()).map(b -> bytesToString(b)).map(s -> s.contains("<h2>Service Unavailable</h2>")).orElse(false);
     }
