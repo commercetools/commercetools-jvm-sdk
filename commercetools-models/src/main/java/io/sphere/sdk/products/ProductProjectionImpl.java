@@ -10,6 +10,7 @@ import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.producttypes.ProductType;
 import io.sphere.sdk.reviews.ReviewRatingStatistics;
 import io.sphere.sdk.search.SearchKeywords;
+import io.sphere.sdk.states.State;
 import io.sphere.sdk.taxcategories.TaxCategory;
 
 import javax.annotation.Nullable;
@@ -20,6 +21,8 @@ import java.util.Set;
 
 class ProductProjectionImpl extends ResourceViewImpl<ProductProjection, Product> implements ProductProjection {
     private final Reference<ProductType> productType;
+    @Nullable
+    private final Reference<State> state;
     @Nullable
     private final Reference<TaxCategory> taxCategory;
     @JsonProperty("published")
@@ -48,7 +51,7 @@ class ProductProjectionImpl extends ResourceViewImpl<ProductProjection, Product>
 
     @JsonCreator
     ProductProjectionImpl(final String id, final Long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt,
-                          final Reference<ProductType> productType, @Nullable final Reference<TaxCategory> taxCategory,
+                          final Reference<ProductType> productType, @Nullable final Reference<State> state, @Nullable final Reference<TaxCategory> taxCategory,
                           final Boolean hasStagedChanges, final LocalizedString name,
                           final Set<Reference<Category>> categories, @Nullable final LocalizedString description,
                           final LocalizedString slug, @Nullable final LocalizedString metaTitle,
@@ -59,6 +62,7 @@ class ProductProjectionImpl extends ResourceViewImpl<ProductProjection, Product>
                           @Nullable final ReviewRatingStatistics reviewRatingStatistics) {
         super(id, version, createdAt, lastModifiedAt);
         this.productType = productType;
+        this.state = state;
         this.taxCategory = taxCategory;
         this.hasStagedChanges = hasStagedChanges;
         this.name = name;
@@ -163,5 +167,11 @@ class ProductProjectionImpl extends ResourceViewImpl<ProductProjection, Product>
     @Nullable
     public ReviewRatingStatistics getReviewRatingStatistics() {
         return reviewRatingStatistics;
+    }
+
+    @Override
+    @Nullable
+    public Reference<State> getState() {
+        return state;
     }
 }

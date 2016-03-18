@@ -9,6 +9,7 @@ import io.sphere.sdk.models.Referenceable;
 import io.sphere.sdk.products.queries.ProductProjectionByIdGet;
 import io.sphere.sdk.reviews.ReviewRatingStatistics;
 import io.sphere.sdk.search.SearchKeywords;
+import io.sphere.sdk.states.State;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -170,4 +171,8 @@ public interface ProductProjection extends ProductLike<ProductProjection, Produc
     @Nullable
     @Override
     ReviewRatingStatistics getReviewRatingStatistics();
+
+    @Nullable
+    @Override
+    Reference<State> getState();
 }

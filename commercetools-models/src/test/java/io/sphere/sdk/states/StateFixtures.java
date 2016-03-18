@@ -21,6 +21,7 @@ import static io.sphere.sdk.test.SphereTestUtils.randomKey;
 import static io.sphere.sdk.utils.SphereInternalUtils.asSet;
 import static io.sphere.sdk.utils.SphereInternalUtils.setOf;
 import static java.util.Locale.ENGLISH;
+import static java.util.Locale.PRC;
 
 public class StateFixtures {
     private StateFixtures() {
@@ -46,6 +47,13 @@ public class StateFixtures {
         final StateDraftBuilder stateDraftBuilder = StateDraftBuilder.of(createStateDraft(randomKey()));
         final StateDraft stateDraft = drafting.apply(stateDraftBuilder).build();
         withState(client, stateDraft, consumer);
+    }
+
+    public static void withState(final BlockingSphereClient client, final UnaryOperator<StateDraftBuilder> builderUnaryOperator, final Consumer<State> consumer) {
+        withUpdateableState(client, builderUnaryOperator, state -> {
+            consumer.accept(state);
+            return state;
+        });
     }
 
     public static void withState(final BlockingSphereClient client, final StateDraft stateDraft, final Consumer<State> consumer) {

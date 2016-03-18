@@ -70,9 +70,9 @@ final class SphereClientImpl extends AutoCloseableService implements SphereClien
         });
         return httpClient.execute(httpRequest).thenApply(httpResponse -> {
             try {
-                return processHttpResponse(sphereRequest, objectMapper, config, httpResponse);
+                return processHttpResponse(sphereRequest, objectMapper, config, httpResponse, httpRequest);
             } catch (final SphereException e) {
-                fillExceptionWithData(sphereRequest, httpResponse, e, config);
+                fillExceptionWithData(sphereRequest, httpResponse, e, config, httpRequest);
                 throw e;
             }
         });
@@ -88,7 +88,7 @@ final class SphereClientImpl extends AutoCloseableService implements SphereClien
                 .toHttpRequest(config.getApiUrl());
     }
 
-    private static <T> T processHttpResponse(final SphereRequest<T> sphereRequest, final ObjectMapper objectMapper, final SphereApiConfig config, final HttpResponse httpResponse) {
+    private static <T> T processHttpResponse(final SphereRequest<T> sphereRequest, final ObjectMapper objectMapper, final SphereApiConfig config, final HttpResponse httpResponse, final HttpRequest httpRequest) {
         final SphereInternalLogger logger = getLogger(httpResponse);
         logger.debug(() -> httpResponse);
         logger.trace(() -> httpResponse.getStatusCode() + "\n" + Optional.ofNullable(httpResponse.getResponseBody()).map(body -> SphereJsonUtils.prettyPrint(bytesToString(body))).orElse("No body present."));
@@ -96,13 +96,13 @@ final class SphereClientImpl extends AutoCloseableService implements SphereClien
         if (notices != null) {
             notices.stream().forEach(message -> logger.warn(() -> "Deprecation notice : " + message));
         }
-        return parse(sphereRequest, objectMapper, config, httpResponse);
+        return parse(sphereRequest, objectMapper, config, httpResponse, httpRequest);
     }
 
-    static <T> T parse(final SphereRequest<T> sphereRequest, final ObjectMapper objectMapper, final SphereApiConfig config, final HttpResponse httpResponse) {
+    static <T> T parse(final SphereRequest<T> sphereRequest, final ObjectMapper objectMapper, final SphereApiConfig config, final HttpResponse httpResponse, final HttpRequest httpRequest) {
         final T result;
         if (!sphereRequest.canDeserialize(httpResponse)) {
-            final SphereException sphereException = createExceptionFor(httpResponse, sphereRequest, objectMapper, config);
+            final SphereException sphereException = createExceptionFor(httpResponse, sphereRequest, objectMapper, config, httpRequest);
             throw sphereException;
         } else {
             try {
@@ -116,16 +116,17 @@ final class SphereClientImpl extends AutoCloseableService implements SphereClien
         return result;
     }
 
-    private static <T> SphereException createExceptionFor(final HttpResponse httpResponse, final SphereRequest<T> sphereRequest, final ObjectMapper objectMapper, final SphereApiConfig config) {
+    private static <T> SphereException createExceptionFor(final HttpResponse httpResponse, final SphereRequest<T> sphereRequest, final ObjectMapper objectMapper, final SphereApiConfig config, final HttpRequest httpRequest) {
         final SphereException sphereException = ExceptionFactory.of().createException(httpResponse, sphereRequest, objectMapper);
-        fillExceptionWithData(sphereRequest, httpResponse, sphereException, config);
+        fillExceptionWithData(sphereRequest, httpResponse, sphereException, config, httpRequest);
         return sphereException;
     }
 
-    private static <T> void fillExceptionWithData(final SphereRequest<T> sphereRequest, final HttpResponse httpResponse, final SphereException exception, final SphereApiConfig config) {
+    private static <T> void fillExceptionWithData(final SphereRequest<T> sphereRequest, final HttpResponse httpResponse, final SphereException exception, final SphereApiConfig config, final HttpRequest httpRequest) {
         exception.setSphereRequest(sphereRequest);
         exception.setUnderlyingHttpResponse(httpResponse);
         exception.setProjectKey(config.getProjectKey());
+        exception.setHttpRequest(httpRequest);
 
         final List<String> errorMessagesDueToMappingError = asList("SearchPhaseExecutionException", "query_fetch", "RemoteTransportException", "SearchParseException", "search/phase/query+fetch");
         Optional.ofNullable(httpResponse.getResponseBody())

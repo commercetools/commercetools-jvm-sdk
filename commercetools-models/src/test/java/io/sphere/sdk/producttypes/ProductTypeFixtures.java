@@ -5,6 +5,7 @@ import io.sphere.sdk.products.attributes.AttributeDefinition;
 import io.sphere.sdk.products.attributes.AttributeDefinitionBuilder;
 import io.sphere.sdk.products.attributes.ReferenceAttributeType;
 import io.sphere.sdk.products.Product;
+import io.sphere.sdk.products.attributes.StringAttributeType;
 import io.sphere.sdk.products.queries.ProductQuery;
 import io.sphere.sdk.producttypes.commands.ProductTypeCreateCommand;
 import io.sphere.sdk.producttypes.commands.ProductTypeDeleteCommand;
@@ -32,6 +33,15 @@ public final class ProductTypeFixtures {
 
     public static void withEmptyProductType(final BlockingSphereClient client, final Consumer<ProductType> user) {
         withProductType(client, () -> newEmptyProductDraft(), user);
+    }
+
+    public static void withAttributesProductType(final BlockingSphereClient client, final Consumer<ProductType> user) {
+        withProductType(client, () -> {
+            final AttributeDefinition stringAttribute = AttributeDefinitionBuilder
+                    .of("stringfield", randomSlug(), StringAttributeType.of())
+                    .build();
+            return ProductTypeDraft.of(randomKey(), randomKey(), "desc", Collections.singletonList(stringAttribute));
+        }, user);
     }
 
     public static ProductTypeDraft newEmptyProductDraft() {
