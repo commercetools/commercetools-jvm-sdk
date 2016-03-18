@@ -1,8 +1,12 @@
 package io.sphere.sdk.products.search;
 
+import io.sphere.sdk.products.Product;
 import io.sphere.sdk.products.ProductProjection;
 import io.sphere.sdk.search.*;
 import org.junit.Test;
+
+import java.util.List;
+import java.util.stream.Stream;
 
 import static io.sphere.sdk.search.model.FilterRange.atLeast;
 import static io.sphere.sdk.search.model.FilterRange.atMost;
@@ -10,6 +14,7 @@ import static io.sphere.sdk.test.SphereTestUtils.assertEventually;
 import static java.math.BigDecimal.valueOf;
 import static java.util.Arrays.asList;
 import static java.util.Collections.singletonList;
+import static java.util.stream.Collectors.toList;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class ProductProjectionSearchFiltersIntegrationTest extends ProductProjectionSearchIntegrationTest {
@@ -79,6 +84,20 @@ public class ProductProjectionSearchFiltersIntegrationTest extends ProductProjec
         assertEventually(() -> {
             final PagedSearchResult<ProductProjection> result = executeSearch(search);
             assertThat(resultsToIds(result)).containsOnly(product1.getId(), product2.getId());
+        });
+    }
+
+    @Test
+    public void filterBySku() {
+        final List<String> skus = Stream.of(product1, product2)
+                .map(product -> product.getMasterData().getStaged().getMasterVariant().getSku())
+                .collect(toList());
+        final ProductProjectionSearch search = ProductProjectionSearch.ofStaged()
+                .plusQueryFilters(m -> m.allVariants().sku().isIn(skus));
+        assertEventually(() -> {
+            assertThat(client().executeBlocking(search).getResults())
+            .extracting(m -> m.getMasterVariant().getSku())
+            .containsOnly(skus.get(0), skus.get(1));
         });
     }
 }

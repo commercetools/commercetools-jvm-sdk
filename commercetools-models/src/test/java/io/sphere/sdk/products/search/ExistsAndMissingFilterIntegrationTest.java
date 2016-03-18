@@ -36,7 +36,9 @@ public class ExistsAndMissingFilterIntegrationTest extends IntegrationTest {
                         final List<ProductProjection> results = client().executeBlocking(exists).getResults();
                         assertThat(results)
                                 .hasSize(1)
-                                .extracting(s -> s.getId()).containsExactly(productWithCategories.getId());
+                                .extracting(s -> s.getId())
+                                .containsExactly(productWithCategories.getId())
+                                .doesNotContain(productWithoutCategories.getId());
                     });
                 });
             });
@@ -56,7 +58,9 @@ public class ExistsAndMissingFilterIntegrationTest extends IntegrationTest {
                        final List<ProductProjection> results = client().executeBlocking(missing).getResults();
                        assertThat(results)
                                .hasSize(1)
-                               .extracting(s -> s.getId()).containsExactly(productWithoutCategories.getId());
+                               .extracting(s -> s.getId())
+                               .containsExactly(productWithoutCategories.getId())
+                               .doesNotContain(productWithCategories.getId());
                    });
                 });
             });

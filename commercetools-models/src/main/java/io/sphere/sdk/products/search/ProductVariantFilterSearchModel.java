@@ -38,6 +38,13 @@ public final class ProductVariantFilterSearchModel extends SearchModelImpl<Produ
         return existsAndMissingFilterSearchModelSupport("prices");
     }
 
+    /**
+     * Creates filters for the sku property of a product variant.
+     *
+     * {@include.example io.sphere.sdk.products.search.ProductProjectionSearchFiltersIntegrationTest#filterBySku()}
+     *
+     * @return filters model
+     */
     public TermFilterSearchModel<ProductProjection, String> sku() {
         return stringSearchModel("sku").filtered();
     }

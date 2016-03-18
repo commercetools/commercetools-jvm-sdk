@@ -51,6 +51,8 @@ import io.sphere.sdk.queries.QueryDsl;
 import io.sphere.sdk.queries.QueryPredicate;
 import io.sphere.sdk.reviews.ReviewDraft;
 import io.sphere.sdk.search.SearchKeywords;
+import io.sphere.sdk.search.model.ExistsFilterSearchModelSupport;
+import io.sphere.sdk.search.model.MissingFilterSearchModelSupport;
 import io.sphere.sdk.taxcategories.TaxRate;
 import io.sphere.sdk.types.CustomFields;
 import io.sphere.sdk.types.FieldType;
@@ -90,6 +92,10 @@ import java.util.function.Function;
 
  <ul>
  <li class=new-in-release>{@link io.sphere.sdk.products.commands.updateactions.SetPrices} to update all prices in a {@link ProductVariant}</li>
+ <li class=new-in-release>{@link MissingFilterSearchModelSupport#missing() missing filters for product search} </li>
+ <li class=new-in-release>{@link ExistsFilterSearchModelSupport#exists()  exists filters for product search} </li>
+ <li class=new-in-release>{@link ProductVariantFilterSearchModel#sku()}</li>
+ <li class=new-in-release>{@link ProductProjection#getState()} </li>
  <li class=new-in-release>force parameter to products, reviews and orders transition state action ({@link io.sphere.sdk.products.commands.updateactions.TransitionState}, {@link io.sphere.sdk.orders.commands.updateactions.TransitionState}, {@link io.sphere.sdk.orders.commands.updateactions.TransitionState})</li>
  <li class=new-in-release>query {@link io.sphere.sdk.carts.Cart}s by {@link CartQueryModel#cartState()} </li>
  <li class=new-in-release>{@link io.sphere.sdk.models.errors.DuplicateFieldError}</li>
