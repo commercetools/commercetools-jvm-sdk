@@ -128,18 +128,6 @@ public class SearchModelImpl<T> extends Base implements SearchModel<T> {
         return new ReferenceFacetedSearchSearchModel<>(this, pathSegment);
     }
 
-    protected List<FilterExpression<T>> missingFilters() {
-        return verbFilter("missing");
-    }
-
-    protected List<FilterExpression<T>> existsFilters() {
-        return verbFilter("exists");
-    }
-
-    private List<FilterExpression<T>> verbFilter(final String verb) {
-        return buildPath().stream().map(path -> FilterExpression.<T>of(path + (":" + verb))).collect(toList());
-    }
-
     protected ExistsAndMissingFilterSearchModelSupport<T> existsAndMissingFilterSearchModelSupport(final String fieldName) {
         return new ExistsAndMissingFilterSearchModelSupportImpl<T>(this, fieldName);
     }

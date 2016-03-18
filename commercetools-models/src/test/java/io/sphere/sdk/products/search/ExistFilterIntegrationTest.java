@@ -3,6 +3,7 @@ package io.sphere.sdk.products.search;
 import io.sphere.sdk.products.*;
 import io.sphere.sdk.products.attributes.AttributeDefinition;
 import io.sphere.sdk.products.attributes.AttributeDefinitionBuilder;
+import io.sphere.sdk.products.attributes.AttributeDraft;
 import io.sphere.sdk.products.attributes.StringAttributeType;
 import io.sphere.sdk.producttypes.ProductType;
 import io.sphere.sdk.producttypes.ProductTypeDraft;
@@ -77,7 +78,26 @@ public class ExistFilterIntegrationTest extends IntegrationTest {
         }, m -> m.allVariants().sku());
     }
 
-    //TODO for prices, not clear when it is price and prices
+    @Test
+    public void prices() {
+        checkFilter(builder -> {
+            final ProductVariantDraft oldMaster = builder.getMasterVariant();
+            final ProductVariantDraft masterWithPrices = ProductVariantDraftBuilder.of(oldMaster)
+                    .prices(singletonList(PriceDraft.of(EURO_1)))
+                    .build();
+            return builder.masterVariant(masterWithPrices);
+        }, m -> m.allVariants().prices());
+    }
+
+    @Test
+    public void productAttribute() {
+        checkFilter(builder -> {
+            final ProductVariantDraft masterVariant = ProductVariantDraftBuilder.of(builder.getMasterVariant())
+                    .attributes(AttributeDraft.of("stringfield", "hello"))
+                    .build();
+            return builder.masterVariant(masterVariant);
+        }, m -> m.allVariants().attribute().ofString("stringfield"));
+    }
 
     private void checkFilter(final UnaryOperator<ProductDraftBuilder> productDraftBuilderUnaryOperator, final Function<ProductProjectionFilterSearchModel, ExistsAndMissingFilterSearchModelSupport<ProductProjection>> dsl) {
         withProduct(client(), productDraftBuilderUnaryOperator, productWith -> {
@@ -96,6 +116,4 @@ public class ExistFilterIntegrationTest extends IntegrationTest {
             });
         });
     }
-
-    //custom attribute
 }

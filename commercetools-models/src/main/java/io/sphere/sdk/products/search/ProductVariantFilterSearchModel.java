@@ -1,10 +1,7 @@
 package io.sphere.sdk.products.search;
 
 import io.sphere.sdk.products.ProductProjection;
-import io.sphere.sdk.search.model.ExistsAndMissingFilterSearchModelSupport;
-import io.sphere.sdk.search.model.MoneyFilterSearchModel;
-import io.sphere.sdk.search.model.SearchModel;
-import io.sphere.sdk.search.model.SearchModelImpl;
+import io.sphere.sdk.search.model.*;
 
 import javax.annotation.Nullable;
 
@@ -22,8 +19,12 @@ public final class ProductVariantFilterSearchModel extends SearchModelImpl<Produ
         return moneyFilterSearchModel("price");
     }
 
-    public ExistsAndMissingFilterSearchModelSupport<ProductProjection> sku() {
-        return existsAndMissingFilterSearchModelSupport("sku");
+    public ExistsAndMissingFilterSearchModelSupport<ProductProjection> prices() {
+        return existsAndMissingFilterSearchModelSupport("prices");
+    }
+
+    public TermFilterSearchModel<ProductProjection, String> sku() {
+        return stringSearchModel("sku").filtered();
     }
 
 }

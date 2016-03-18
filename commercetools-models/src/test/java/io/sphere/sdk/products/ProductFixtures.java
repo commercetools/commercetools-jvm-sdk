@@ -100,7 +100,7 @@ public class ProductFixtures {
     }
 
     public static void withProduct(final BlockingSphereClient client, final UnaryOperator<ProductDraftBuilder> builderMapper, final Consumer<Product> productConsumer) {
-        withEmptyProductType(client, productType -> {
+        withAttributesProductType(client, productType -> {
             final ProductDraftBuilder builder = ProductDraftBuilder.of(productType, randomSlug(), randomSlug(), ProductVariantDraftBuilder.of().build());
             final ProductDraftBuilder updatedBuilder = builderMapper.apply(builder);
             final Product product = client.executeBlocking(ProductCreateCommand.of(updatedBuilder.build()));

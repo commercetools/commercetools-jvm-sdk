@@ -16,13 +16,27 @@ import static java.util.stream.Collectors.toList;
  * @param <T> type of the resource
  * @param <V> type of the value
  */
-abstract class TermFilterBaseSearchModel<T, V> extends Base implements FilterSearchModel<T, V> {
+abstract class TermFilterBaseSearchModel<T, V> extends Base implements FilterSearchModel<T, V>, ExistsAndMissingFilterSearchModelSupport<T> {
     protected final SearchModel<T> searchModel;
     protected final Function<V, String> typeSerializer;
 
     TermFilterBaseSearchModel(final SearchModel<T> searchModel, final Function<V, String> typeSerializer) {
         this.searchModel = searchModel;
         this.typeSerializer = typeSerializer;
+    }
+
+    @Override
+    public List<FilterExpression<T>> exists() {
+        return verbFilter("exists");
+    }
+
+    @Override
+    public List<FilterExpression<T>> missing() {
+        return verbFilter("missing");
+    }
+
+    private List<FilterExpression<T>> verbFilter(final String verb) {
+        return searchModel.buildPath().stream().map(path -> FilterExpression.<T>of(path + (":" + verb))).collect(toList());
     }
 
     /**
