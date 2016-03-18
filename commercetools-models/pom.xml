@@ -3,12 +3,12 @@
     <parent>
         <groupId>com.commercetools.sdk.jvm.core</groupId>
         <artifactId>commercetools-jvm-sdk</artifactId>
-        <version>1.0.0-RC4-SNAPSHOT</version>
+        <version>1.0.0-RC4</version>
     </parent>
     <groupId>com.commercetools.sdk.jvm.core</groupId>
     <artifactId>commercetools-models</artifactId>
     <packaging>jar</packaging>
-    <version>1.0.0-RC4-SNAPSHOT</version>
+    <version>1.0.0-RC4</version>
     <dependencyManagement>
         <dependencies>
         </dependencies>
