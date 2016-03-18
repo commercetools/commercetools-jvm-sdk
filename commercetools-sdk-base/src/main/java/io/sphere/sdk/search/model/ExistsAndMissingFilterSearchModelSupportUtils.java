@@ -2,8 +2,11 @@ package io.sphere.sdk.search.model;
 
 import io.sphere.sdk.search.FilterExpression;
 
+import java.util.Collections;
 import java.util.List;
 
+import static java.util.Collections.singletonList;
+import static java.util.stream.Collectors.joining;
 import static java.util.stream.Collectors.toList;
 
 final class ExistsAndMissingFilterSearchModelSupportUtils {
@@ -19,6 +22,7 @@ final class ExistsAndMissingFilterSearchModelSupportUtils {
     }
 
     private static <T> List<FilterExpression<T>> verbFilter(final SearchModel<T> model, final String verb) {
-        return model.buildPath().stream().map(path -> FilterExpression.<T>of(path + (":" + verb))).collect(toList());
+        final String path = model.buildPath().stream().collect(joining("."));
+        return singletonList(FilterExpression.of(path + ":" + verb));
     }
 }

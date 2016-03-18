@@ -2,7 +2,6 @@ package io.sphere.sdk.products.search;
 
 import io.sphere.sdk.products.*;
 import io.sphere.sdk.products.attributes.AttributeDraft;
-import io.sphere.sdk.search.FilterExpression;
 import io.sphere.sdk.search.model.ExistsAndMissingFilterSearchModelSupport;
 import io.sphere.sdk.test.IntegrationTest;
 import org.junit.Test;
@@ -14,6 +13,7 @@ import java.util.function.UnaryOperator;
 import static io.sphere.sdk.categories.CategoryFixtures.withCategory;
 import static io.sphere.sdk.products.ProductFixtures.withProduct;
 import static io.sphere.sdk.states.StateFixtures.withState;
+import static io.sphere.sdk.states.StateType.PRODUCT_STATE;
 import static io.sphere.sdk.taxcategories.TaxCategoryFixtures.withTaxCategory;
 import static io.sphere.sdk.test.SphereTestUtils.*;
 import static java.util.Collections.singleton;
@@ -63,8 +63,27 @@ public class ExistsAndMissingFilterIntegrationTest extends IntegrationTest {
 
     @Test
     public void state() {
-        withState(client(), draft -> draft, state -> {
+        withState(client(), draft -> draft.type(PRODUCT_STATE), state -> {
             checkFilter(builder -> builder.state(state), m -> m.state());
+        });
+    }
+
+    @Test
+    public void forId() {
+        final Function<ProductProjectionFilterSearchModel, ExistsAndMissingFilterSearchModelSupport<ProductProjection>> dsl = m -> m.state();
+        withProduct(client(), product -> {
+                final ProductProjectionSearch baseRequest = ProductProjectionSearch.ofStaged()
+                        .withQueryFilters(m1 -> {
+                            final List<String> productIds = singletonList(product.getId());
+                            return m1.id().isIn(productIds);
+                        });
+                final ProductProjectionSearch exists = baseRequest.plusQueryFilters(m -> m.id().exists());
+                final ProductProjectionSearch missing = baseRequest.plusQueryFilters(m -> m.id().missing());
+               assertEventually(() -> {
+                   assertThat(client().executeBlocking(exists).getResults()).hasSize(1)
+                           .extracting(s -> s.getId()).as("exists").containsExactly(product.getId());
+                   assertThat(client().executeBlocking(missing).getResults()).isEmpty();
+               });
         });
     }
 
@@ -79,7 +98,7 @@ public class ExistsAndMissingFilterIntegrationTest extends IntegrationTest {
     public void sku() {
         checkFilter(builder -> {
             final ProductVariantDraft masterVariant = ProductVariantDraftBuilder.of(builder.getMasterVariant())
-                    .sku("sku-of-master")
+                    .sku("sku-test-" + randomKey())
                     .build();
             return builder.masterVariant(masterVariant);
         }, m -> m.allVariants().sku());
@@ -108,7 +127,8 @@ public class ExistsAndMissingFilterIntegrationTest extends IntegrationTest {
 
     private void checkFilter(final UnaryOperator<ProductDraftBuilder> productDraftBuilderUnaryOperator, final Function<ProductProjectionFilterSearchModel, ExistsAndMissingFilterSearchModelSupport<ProductProjection>> dsl) {
         withProduct(client(), productDraftBuilderUnaryOperator, productWith -> {
-            withProduct(client(), productWithout -> {
+            withProduct(client(), builder -> builder.masterVariant(ProductVariantDraftBuilder.of(builder.getMasterVariant()).sku(null).build()), productWithout -> {
+                assertThat(productWithout.getMasterData().getStaged().getMasterVariant().getSku()).as("sku for productWithout is missing").isNull();
                 final ProductProjectionSearch baseRequest = ProductProjectionSearch.ofStaged()
                         .withQueryFilters(m -> {
                             final List<String> productIds = asList(productWith.getId(), productWithout.getId());
@@ -117,8 +137,8 @@ public class ExistsAndMissingFilterIntegrationTest extends IntegrationTest {
                 final ProductProjectionSearch exists = baseRequest.plusQueryFilters(m -> dsl.apply(m).exists());
                 final ProductProjectionSearch missing = baseRequest.plusQueryFilters(m -> dsl.apply(m).missing());
                assertEventually(() -> {
-                   assertThat(client().executeBlocking(exists).getResults()).hasSize(1).extracting(s -> s.getId()).containsExactly(productWith.getId());
-                   assertThat(client().executeBlocking(missing).getResults()).hasSize(1).extracting(s -> s.getId()).containsExactly(productWithout.getId());
+                   assertThat(client().executeBlocking(exists).getResults()).hasSize(1).extracting(s -> s.getId()).as("exists").containsExactly(productWith.getId());
+                   assertThat(client().executeBlocking(missing).getResults()).hasSize(1).extracting(s -> s.getId()).as("missing").containsExactly(productWithout.getId());
                });
             });
         });
