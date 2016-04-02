@@ -139,6 +139,12 @@
             <artifactId>commons-io</artifactId>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>net.jcip</groupId>
+            <artifactId>jcip-annotations</artifactId>
+            <version>1.0</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
     <build>
         <pluginManagement>
@@ -245,6 +251,8 @@
                             <include>**/*IntegrationTest.java</include>
                             <include>**/*IT.java</include>
                         </includes>
+                        <parallel>methods</parallel>
+                        <threadCount>10</threadCount>
                     </configuration>
                     <executions>
                         <execution>

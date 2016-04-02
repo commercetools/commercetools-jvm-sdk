@@ -7,6 +7,7 @@ import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.test.IntegrationTest;
 import io.sphere.sdk.test.SphereTestUtils;
 import io.sphere.sdk.utils.MoneyImpl;
+import net.jcip.annotations.NotThreadSafe;
 import org.junit.Test;
 
 import java.time.ZonedDateTime;
@@ -19,6 +20,7 @@ import static io.sphere.sdk.test.SphereTestUtils.*;
 import static java.lang.String.format;
 import static org.assertj.core.api.Assertions.assertThat;
 
+@NotThreadSafe
 public class CartDiscountUpdateCommandIntegrationTest extends IntegrationTest {
     @Test
     public void changeValue() throws Exception {

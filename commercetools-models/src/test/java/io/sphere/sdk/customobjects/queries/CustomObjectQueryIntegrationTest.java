@@ -14,6 +14,7 @@ import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.queries.QueryPredicate;
 import io.sphere.sdk.queries.QuerySort;
 import io.sphere.sdk.test.IntegrationTest;
+import net.jcip.annotations.NotThreadSafe;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -25,6 +26,7 @@ import static io.sphere.sdk.customobjects.CustomObjectFixtures.withCustomObject;
 import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
 
+@NotThreadSafe
 public class CustomObjectQueryIntegrationTest extends IntegrationTest {
     private static final ObjectMapper objectMapper = new ObjectMapper();
 

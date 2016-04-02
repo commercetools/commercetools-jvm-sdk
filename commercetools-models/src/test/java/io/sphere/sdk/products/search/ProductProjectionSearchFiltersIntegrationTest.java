@@ -7,6 +7,7 @@ import org.junit.Test;
 
 import java.util.List;
 import java.util.stream.Stream;
+import java.time.Duration;
 
 import static io.sphere.sdk.search.model.FilterRange.atLeast;
 import static io.sphere.sdk.search.model.FilterRange.atMost;
@@ -71,7 +72,7 @@ public class ProductProjectionSearchFiltersIntegrationTest extends ProductProjec
     public void filterByEvilCharacterWord() throws Exception {
         final ProductProjectionSearch search = ProductProjectionSearch.ofStaged()
                 .plusQueryFilters(productModel -> productModel.allVariants().attribute().ofString(ATTR_NAME_EVIL).is(EVIL_CHARACTER_WORD));
-        assertEventually(() -> {
+        assertEventually(Duration.ofSeconds(45), Duration.ofMillis(200), () -> {
             final PagedSearchResult<ProductProjection> result = executeEvilSearch(search);
             assertThat(result.getTotal()).isEqualTo(1);
         });

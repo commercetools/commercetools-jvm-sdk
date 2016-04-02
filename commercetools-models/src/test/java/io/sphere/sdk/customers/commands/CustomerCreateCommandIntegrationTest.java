@@ -9,6 +9,7 @@ import io.sphere.sdk.customers.*;
 import io.sphere.sdk.customers.queries.CustomerQuery;
 import io.sphere.sdk.models.Address;
 import io.sphere.sdk.test.JsonNodeReferenceResolver;
+import net.jcip.annotations.NotThreadSafe;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -22,6 +23,7 @@ import static io.sphere.sdk.test.SphereTestUtils.*;
 import static java.util.stream.Collectors.toList;
 import static org.assertj.core.api.Assertions.assertThat;
 
+@NotThreadSafe
 public class CustomerCreateCommandIntegrationTest extends CustomerIntegrationTest {
     @BeforeClass
     public static void clean() {

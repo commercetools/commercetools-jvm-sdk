@@ -20,6 +20,7 @@ import io.sphere.sdk.states.State;
 import io.sphere.sdk.states.StateType;
 import io.sphere.sdk.test.IntegrationTest;
 import io.sphere.sdk.test.SphereTestUtils;
+import net.jcip.annotations.NotThreadSafe;
 import org.assertj.core.api.Assertions;
 import org.assertj.core.api.Condition;
 import org.junit.Test;
@@ -40,6 +41,7 @@ import static io.sphere.sdk.utils.SphereInternalUtils.setOf;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.condition.Not.not;
 
+@NotThreadSafe
 public class OrderUpdateCommandIntegrationTest extends IntegrationTest {
 
     public static final TrackingData TRACKING_DATA = TrackingData.of()

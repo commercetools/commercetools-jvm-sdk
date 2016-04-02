@@ -7,6 +7,7 @@ import io.sphere.sdk.customobjects.CustomObjectDraft;
 import io.sphere.sdk.customobjects.demo.Foo;
 import io.sphere.sdk.customobjects.queries.CustomObjectByKeyGet;
 import io.sphere.sdk.test.IntegrationTest;
+import net.jcip.annotations.NotThreadSafe;
 import org.junit.Test;
 
 import java.util.function.Function;
@@ -14,6 +15,7 @@ import java.util.function.Function;
 import static io.sphere.sdk.test.SphereTestUtils.randomKey;
 import static org.assertj.core.api.Assertions.assertThat;
 
+@NotThreadSafe
 public class CustomObjectDeleteCommandIntegrationTest extends IntegrationTest {
 
     public static final String CONTAINER = CustomObjectDeleteCommandIntegrationTest.class.getSimpleName();

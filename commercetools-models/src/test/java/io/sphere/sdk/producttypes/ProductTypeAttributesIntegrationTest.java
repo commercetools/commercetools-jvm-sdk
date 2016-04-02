@@ -17,6 +17,7 @@ import io.sphere.sdk.queries.QueryPredicate;
 import io.sphere.sdk.test.IntegrationTest;
 import io.sphere.sdk.test.SphereTestUtils;
 import io.sphere.sdk.utils.MoneyImpl;
+import net.jcip.annotations.NotThreadSafe;
 import org.junit.Test;
 
 import java.time.LocalDate;
@@ -35,6 +36,7 @@ import static java.util.Arrays.asList;
 import static java.util.Locale.ENGLISH;
 import static org.assertj.core.api.Assertions.assertThat;
 
+@NotThreadSafe
 public final class ProductTypeAttributesIntegrationTest extends IntegrationTest {
     public static final List<LocalizedEnumValue> LOCALIZED_ENUM_VALUES = asList(LocalizedEnumValue.of("key1", en("value1")), LocalizedEnumValue.of("key2", en("value2")));
     public static final TextInputHint TEXT_INPUT_HINT = TextInputHint.MULTI_LINE;

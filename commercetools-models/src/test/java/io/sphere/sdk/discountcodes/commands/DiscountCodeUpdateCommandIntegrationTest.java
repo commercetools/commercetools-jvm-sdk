@@ -7,6 +7,7 @@ import io.sphere.sdk.discountcodes.commands.updateactions.*;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.test.IntegrationTest;
+import net.jcip.annotations.NotThreadSafe;
 import org.junit.Test;
 
 import java.util.List;
@@ -18,6 +19,7 @@ import static io.sphere.sdk.test.SphereTestUtils.*;
 import static io.sphere.sdk.utils.SphereInternalUtils.listOf;
 import static org.assertj.core.api.Assertions.*;
 
+@NotThreadSafe
 public class DiscountCodeUpdateCommandIntegrationTest extends IntegrationTest {
     @Test
     public void setName() throws Exception {

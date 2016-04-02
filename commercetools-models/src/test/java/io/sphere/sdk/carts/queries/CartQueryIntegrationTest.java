@@ -10,6 +10,7 @@ import io.sphere.sdk.orders.OrderFixtures;
 import io.sphere.sdk.products.Price;
 import io.sphere.sdk.test.IntegrationTest;
 import io.sphere.sdk.utils.MoneyImpl;
+import net.jcip.annotations.NotThreadSafe;
 import org.javamoney.moneta.function.MonetaryUtil;
 import org.junit.Test;
 
@@ -24,6 +25,7 @@ import static io.sphere.sdk.test.SphereTestUtils.ENGLISH;
 import static io.sphere.sdk.test.SphereTestUtils.EUR;
 import static org.assertj.core.api.Assertions.assertThat;
 
+@NotThreadSafe
 public class CartQueryIntegrationTest extends IntegrationTest {
     @Test
     public void expandDiscountCodeReference() throws Exception {

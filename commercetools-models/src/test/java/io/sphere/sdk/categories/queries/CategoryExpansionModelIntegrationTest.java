@@ -8,6 +8,7 @@ import io.sphere.sdk.expansion.ExpansionPath;
 import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.queries.Query;
 import io.sphere.sdk.test.IntegrationTest;
+import net.jcip.annotations.NotThreadSafe;
 import org.junit.Test;
 
 import java.util.List;
@@ -18,6 +19,7 @@ import static java.util.Arrays.asList;
 import static java.util.stream.Collectors.toList;
 import static org.assertj.core.api.Assertions.*;
 
+@NotThreadSafe
 public class CategoryExpansionModelIntegrationTest extends IntegrationTest {
 
     @Test

@@ -7,6 +7,7 @@ import io.sphere.sdk.test.IntegrationTest;
 import io.sphere.sdk.types.FieldDefinition;
 import io.sphere.sdk.types.*;
 import io.sphere.sdk.types.queries.TypeQuery;
+import net.jcip.annotations.NotThreadSafe;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -18,6 +19,7 @@ import static java.util.Collections.singleton;
 import static java.util.Collections.singletonList;
 import static org.assertj.core.api.Assertions.assertThat;
 
+@NotThreadSafe
 public class TypeCreateCommandIntegrationTest extends IntegrationTest {
     @Test
     public void execution() {

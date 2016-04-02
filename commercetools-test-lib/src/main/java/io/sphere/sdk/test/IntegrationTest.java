@@ -17,10 +17,10 @@ import org.assertj.core.api.SoftAssertions;
 import org.asynchttpclient.AsyncHttpClient;
 import org.asynchttpclient.DefaultAsyncHttpClient;
 import org.asynchttpclient.DefaultAsyncHttpClientConfig;
-import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
-import org.slf4j.LoggerFactory;
+import org.junit.Rule;
+import org.junit.rules.Timeout;
 
 import javax.annotation.Nullable;
 import javax.money.CurrencyUnit;
@@ -36,10 +36,11 @@ import java.util.concurrent.TimeUnit;
 import java.util.function.Consumer;
 
 import static io.sphere.sdk.utils.SphereInternalUtils.listOf;
-import static io.sphere.sdk.utils.SphereInternalUtils.toList;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public abstract class IntegrationTest {
+    @Rule
+    public Timeout globalTimeout = Timeout.seconds(180);
 
     private static BlockingSphereClient client;
 
