@@ -4,6 +4,7 @@ import io.sphere.sdk.models.ResourceView;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.producttypes.ProductType;
 import io.sphere.sdk.reviews.ReviewRatingStatistics;
+import io.sphere.sdk.states.State;
 import io.sphere.sdk.taxcategories.TaxCategory;
 
 import javax.annotation.Nullable;
@@ -16,5 +17,8 @@ interface ProductLike<T, O> extends ResourceView<T, O>, ProductIdentifiable {
 
     @Nullable
     ReviewRatingStatistics getReviewRatingStatistics();
+
+    @Nullable
+    Reference<State> getState();
 
 }

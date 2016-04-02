@@ -62,4 +62,16 @@ public final class ProductDraftBuilder extends ProductDataProductDraftBuilderBas
         this.masterVariant = masterVariant;
         return getThis();
     }
+
+    public ProductVariantDraft getMasterVariant() {
+        return masterVariant;
+    }
+
+    public ResourceIdentifier<ProductType> getProductType() {
+        return productType;
+    }
+
+    public List<ProductVariantDraft> getVariants() {
+        return variants;
+    }
 }

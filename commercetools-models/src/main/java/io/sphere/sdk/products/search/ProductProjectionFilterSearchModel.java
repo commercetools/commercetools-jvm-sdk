@@ -56,4 +56,14 @@ public final class ProductProjectionFilterSearchModel extends ProductDataFilterS
     public ReviewRatingStatisticsFilterSearchModel<ProductProjection> reviewRatingStatistics() {
         return super.reviewRatingStatistics();
     }
+
+    @Override
+    public ReferenceFilterSearchModel<ProductProjection> taxCategory() {
+        return super.taxCategory();
+    }
+
+    @Override
+    public ReferenceFilterSearchModel<ProductProjection> state() {
+        return super.state();
+    }
 }

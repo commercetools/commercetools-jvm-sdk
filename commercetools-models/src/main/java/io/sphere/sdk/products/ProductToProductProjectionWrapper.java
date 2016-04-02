@@ -6,6 +6,7 @@ import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.producttypes.ProductType;
 import io.sphere.sdk.reviews.ReviewRatingStatistics;
 import io.sphere.sdk.search.SearchKeywords;
+import io.sphere.sdk.states.State;
 import io.sphere.sdk.taxcategories.TaxCategory;
 
 import javax.annotation.Nullable;
@@ -127,5 +128,11 @@ class ProductToProductProjectionWrapper implements ProductProjection {
     @Override
     public ReviewRatingStatistics getReviewRatingStatistics() {
         return product.getReviewRatingStatistics();
+    }
+
+    @Nullable
+    @Override
+    public Reference<State> getState() {
+        return product.getState();
     }
 }
