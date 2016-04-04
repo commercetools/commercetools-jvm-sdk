@@ -602,6 +602,7 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
                                     .withPredicates(m -> m.resource().is(product))
                                     .forMessageType(ProductStateTransitionMessage.MESSAGE_HINT));
 
+                    assertThat(messageQueryResult.getResults()).isNotEmpty();
                     final ProductStateTransitionMessage message = messageQueryResult.head().get();
                     assertThat(message.getState()).isEqualTo(state.toReference());
                 });
