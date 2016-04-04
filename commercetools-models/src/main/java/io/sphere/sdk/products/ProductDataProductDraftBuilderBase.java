@@ -123,7 +123,7 @@ abstract class ProductDataProductDraftBuilderBase<T extends ProductDataProductDr
     }
 
     public T taxCategory(final Referenceable<TaxCategory> taxCategory) {
-        this.taxCategory = taxCategory.toReference();
+        this.taxCategory = taxCategory != null ? taxCategory.toReference() : null;
         return getThis();
     }
 
