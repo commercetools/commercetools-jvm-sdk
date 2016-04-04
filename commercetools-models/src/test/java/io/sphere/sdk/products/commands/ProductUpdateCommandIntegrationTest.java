@@ -35,6 +35,7 @@ import javax.money.MonetaryAmount;
 import java.math.BigDecimal;
 import java.time.ZoneOffset;
 import java.util.*;
+import java.util.function.Function;
 
 import static io.sphere.sdk.models.DefaultCurrencyUnits.EUR;
 import static io.sphere.sdk.products.ProductFixtures.*;
@@ -663,6 +664,39 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
                 return updated2;
             });
             return type;
+        });
+    }
+
+    @Test
+    public void setSku() throws Exception {
+        final String oldSku = randomKey();
+        withProductOfSku(oldSku, (Product product) -> {
+            assertThat(product.getMasterData().getStaged().getMasterVariant().getSku()).isEqualTo(oldSku);
+            assertThat(product.getMasterData().getCurrent().getMasterVariant().getSku()).isEqualTo(oldSku);
+
+            final String newSku = randomKey();
+
+            final ProductUpdateCommand cmd = ProductUpdateCommand.of(product, SetSku.of(MASTER_VARIANT_ID, newSku));
+            final Product updatedProduct = client().executeBlocking(cmd);
+
+            assertThat(updatedProduct.getMasterData().getStaged().getMasterVariant().getSku())
+                    .as("update action updates SKU in staged")
+                    .isEqualTo(newSku);
+            assertThat(updatedProduct.getMasterData().getCurrent().getMasterVariant().getSku())
+                    .as("update action updates NOT directly in current")
+                    .isEqualTo(oldSku)
+                    .isNotEqualTo(newSku);
+            return updatedProduct;
+        });
+    }
+
+    private void withProductOfSku(final String sku, final Function<Product, Product> productProductFunction) {
+        withUpdateableProduct(client(), builder -> {
+            return builder.masterVariant(ProductVariantDraftBuilder.of(builder.getMasterVariant()).sku(sku).build());
+        }, product -> {
+            final ProductUpdateCommand productUpdateCommand = ProductUpdateCommand.of(product, Publish.of());
+            final Product publishedProduct = client().executeBlocking(productUpdateCommand);
+            return productProductFunction.apply(publishedProduct);
         });
     }
 

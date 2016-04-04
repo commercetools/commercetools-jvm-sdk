@@ -62,7 +62,10 @@ public class ProductFixtures {
             final ProductDraftBuilder builder = ProductDraftBuilder.of(productType, randomSlug(), randomSlug(), masterVariant);
             final ProductDraft productDraft = builderOp.apply(builder).build();
             final Product product = client.executeBlocking(ProductCreateCommand.of(productDraft));
-            final Product productToDelete = f.apply(product);
+            Product productToDelete = f.apply(product);
+            if (productToDelete.getMasterData().isPublished()) {
+                productToDelete = client.executeBlocking(ProductUpdateCommand.of(productToDelete, Unpublish.of()));
+            }
             client.executeBlocking(ProductDeleteCommand.of(productToDelete));
         });
     }
