@@ -20,7 +20,7 @@ public class CustomerCreateEmailTokenCommandIntegrationTest extends CustomerInte
             final CustomerToken customerToken = client().executeBlocking(createTokenCommand);
             final String tokenValue = customerToken.getValue();//this token needs to be sent via email to the customer
 
-            final Command<Customer> verifyEmailCommand = CustomerVerifyEmailCommand.of(customer, tokenValue);
+            final Command<Customer> verifyEmailCommand = CustomerVerifyEmailCommand.ofTokenValue(tokenValue);
             final Customer loadedCustomer = client().executeBlocking(verifyEmailCommand);
             assertThat(loadedCustomer.isEmailVerified()).isTrue();
         });
