@@ -596,12 +596,15 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
 
                 assertThat(updatedProduct.getState()).isEqualTo(state.toReference());
 
-                final PagedQueryResult<ProductStateTransitionMessage> messageQueryResult = client().executeBlocking(MessageQuery.of()
-                        .withPredicates(m -> m.resource().is(product))
-                        .forMessageType(ProductStateTransitionMessage.MESSAGE_HINT));
+                assertEventually(() -> {
+                    final PagedQueryResult<ProductStateTransitionMessage> messageQueryResult =
+                            client().executeBlocking(MessageQuery.of()
+                                    .withPredicates(m -> m.resource().is(product))
+                                    .forMessageType(ProductStateTransitionMessage.MESSAGE_HINT));
 
-                final ProductStateTransitionMessage message = messageQueryResult.head().get();
-                assertThat(message.getState()).isEqualTo(state.toReference());
+                    final ProductStateTransitionMessage message = messageQueryResult.head().get();
+                    assertThat(message.getState()).isEqualTo(state.toReference());
+                });
 
                 //check query model
                 final ProductQuery query = ProductQuery.of()
