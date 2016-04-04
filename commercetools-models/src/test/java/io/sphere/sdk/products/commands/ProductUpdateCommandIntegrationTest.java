@@ -620,8 +620,8 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
 
     @Test
     public void transitionStateAndForce() {
-        Set<Reference<State>> notTransitions = emptySet();
-        withStateByBuilder(client(), builder -> builder.type(PRODUCT_STATE).transitions(notTransitions), stateA -> {
+        Set<Reference<State>> noTransitions = emptySet();
+        withStateByBuilder(client(), builder -> builder.type(PRODUCT_STATE).transitions(noTransitions), stateA -> {
             withStateByBuilder(client(), builder -> builder.type(PRODUCT_STATE), stateB -> {
                 withUpdateableProduct(client(), product -> {
                     assertThat(product.getState()).isNull();
