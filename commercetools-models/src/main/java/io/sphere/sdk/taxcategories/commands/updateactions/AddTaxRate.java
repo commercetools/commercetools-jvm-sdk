@@ -2,7 +2,7 @@ package io.sphere.sdk.taxcategories.commands.updateactions;
 
 import io.sphere.sdk.commands.UpdateActionImpl;
 import io.sphere.sdk.taxcategories.TaxCategory;
-import io.sphere.sdk.taxcategories.TaxRate;
+import io.sphere.sdk.taxcategories.TaxRateDraft;
 
 import static java.util.Objects.requireNonNull;
 
@@ -18,18 +18,18 @@ import static java.util.Objects.requireNonNull;
  * @see ReplaceTaxRate
  */
 public final class AddTaxRate extends UpdateActionImpl<TaxCategory> {
-    private final TaxRate taxRate;
+    private final TaxRateDraft taxRate;
 
-    private AddTaxRate(final TaxRate taxRate) {
+    private AddTaxRate(final TaxRateDraft taxRate) {
         super("addTaxRate");
         this.taxRate = requireNonNull(taxRate);
     }
 
-    public static AddTaxRate of(final TaxRate taxRate) {
+    public static AddTaxRate of(final TaxRateDraft taxRate) {
         return new AddTaxRate(taxRate);
     }
 
-    public TaxRate getTaxRate() {
+    public TaxRateDraft getTaxRate() {
         return taxRate;
     }
 }

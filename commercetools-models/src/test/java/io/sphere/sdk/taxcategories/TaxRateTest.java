@@ -8,7 +8,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class TaxRateTest {
     @Test
     public void equalsIgnoreId() {
-        final TaxRateBuilder builder = TaxRateBuilder.of("name", 0.2, true, CountryCode.DE);
+        final TaxRateDraftBuilder builder = TaxRateDraftBuilder.of("name", 0.2, true, CountryCode.DE);
         final TaxRate taxRateWithoutId = builder.build();
         final TaxRate taxRateWithId = builder.id("foo").build();
         assertThat(taxRateWithoutId)

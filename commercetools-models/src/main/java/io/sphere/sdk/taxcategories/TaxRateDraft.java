@@ -6,10 +6,11 @@ import com.neovisionaries.i18n.CountryCode;
 import javax.annotation.Nullable;
 import java.util.List;
 
-@JsonDeserialize(as=TaxRateImpl.class)
-public interface TaxRate {
-    String getId();
-
+/**
+ * @see TaxRateDraftBuilder
+ */
+@JsonDeserialize(as=TaxRateDraftImpl.class)
+public interface TaxRateDraft {
     String getName();
 
     Double getAmount();
@@ -21,10 +22,9 @@ public interface TaxRate {
     @Nullable
     String getState();
 
-    //TODO check if nullable
     List<SubRate> getSubRates();
 
-    Boolean isExternallySet();
-
-    boolean equalsIgnoreId(TaxRate other);
+    static TaxRateDraft of(final String name, final double amount, final boolean includedInPrice, final CountryCode country) {
+        return TaxRateDraftBuilder.of(name, amount, includedInPrice, country).build();
+    }
 }

@@ -48,7 +48,7 @@ public final class TaxCategoryFixtures {
     }
 
     public static void withTaxCategory(final BlockingSphereClient client, final String name, final Consumer<TaxCategory> user) {
-        final TaxCategoryDraft de19 = TaxCategoryDraft.of(name, asList(TaxRateBuilder.of("de19", 0.19, true, CountryCode.DE).build()));
+        final TaxCategoryDraft de19 = TaxCategoryDraft.of(name, asList(TaxRateDraftBuilder.of("de19", 0.19, true, CountryCode.DE).build()));
         withTaxCategory(client, de19, user);
     }
 
@@ -62,7 +62,7 @@ public final class TaxCategoryFixtures {
     }
 
     public static void withUpdateableTaxCategory(final BlockingSphereClient client, final UnaryOperator<TaxCategory> testApplicationFunction) {
-        final TaxCategoryDraft draft = TaxCategoryDraft.of(randomKey(), asList(TaxRateBuilder.of("de19", 0.19, true, CountryCode.DE).build()));
+        final TaxCategoryDraft draft = TaxCategoryDraft.of(randomKey(), asList(TaxRateDraftBuilder.of("de19", 0.19, true, CountryCode.DE).build()));
         final PagedQueryResult<TaxCategory> results = client.executeBlocking(TaxCategoryQuery.of().byName(draft.getName()));
         results.getResults().forEach(tc -> client.executeBlocking(TaxCategoryDeleteCommand.of(tc)));
         final TaxCategory taxCategory = client.executeBlocking(TaxCategoryCreateCommand.of(draft));

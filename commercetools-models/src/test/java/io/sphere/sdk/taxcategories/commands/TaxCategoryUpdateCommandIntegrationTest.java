@@ -3,7 +3,7 @@ package io.sphere.sdk.taxcategories.commands;
 import com.neovisionaries.i18n.CountryCode;
 import io.sphere.sdk.taxcategories.TaxCategory;
 import io.sphere.sdk.taxcategories.TaxRate;
-import io.sphere.sdk.taxcategories.TaxRateBuilder;
+import io.sphere.sdk.taxcategories.TaxRateDraftBuilder;
 import io.sphere.sdk.taxcategories.commands.updateactions.*;
 import io.sphere.sdk.test.IntegrationTest;
 import org.junit.Test;
@@ -39,7 +39,7 @@ public class TaxCategoryUpdateCommandIntegrationTest extends IntegrationTest {
             //add tax rate
             final String name = "ag7";
             final CountryCode countryCode = CountryCode.AG;
-            final TaxRate de7 = TaxRateBuilder.of(name, 0.07, true, countryCode).build();
+            final TaxRate de7 = TaxRateDraftBuilder.of(name, 0.07, true, countryCode).build();
             final TaxCategory taxCategoryWithTaRate = client().executeBlocking(TaxCategoryUpdateCommand.of(taxCategory, AddTaxRate.of(de7)));
             final TaxRate actual = taxCategoryWithTaRate.getTaxRates().stream().filter(rate -> name.equals(rate.getName())).findFirst().get();
             assertThat(actual.getCountry()).isEqualTo(countryCode);
@@ -66,7 +66,7 @@ public class TaxCategoryUpdateCommandIntegrationTest extends IntegrationTest {
         withUpdateableTaxCategory(client(), taxCategory -> {
             final TaxRate old = taxCategory.getTaxRates().get(0);
             final double newAmount = old.getAmount() * 2;
-            final TaxRate newTaxRate = TaxRateBuilder.of(old).amount(newAmount).build();
+            final TaxRate newTaxRate = TaxRateDraftBuilder.of(old).amount(newAmount).build();
 
             final TaxCategory updatedTaxCategory = client().executeBlocking(TaxCategoryUpdateCommand.of(taxCategory, ReplaceTaxRate.of(old.getId(), newTaxRate)));
             final TaxRate actual = updatedTaxCategory.getTaxRates().get(0);

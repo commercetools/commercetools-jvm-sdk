@@ -4,7 +4,7 @@ import com.neovisionaries.i18n.CountryCode;
 import io.sphere.sdk.json.SphereJsonUtils;
 import io.sphere.sdk.taxcategories.TaxCategoryDraft;
 import io.sphere.sdk.taxcategories.TaxRate;
-import io.sphere.sdk.taxcategories.TaxRateBuilder;
+import io.sphere.sdk.taxcategories.TaxRateDraftBuilder;
 import io.sphere.sdk.test.IntegrationTest;
 import org.junit.Test;
 
@@ -18,7 +18,7 @@ public class TaxCategoryCreateCommandIntegrationTest extends IntegrationTest {
         withTaxCategory(client(), draft, taxCategory -> {
             assertThat(taxCategory.getName()).isEqualTo("a tax category");
             final TaxRate taxRate = taxCategory.getTaxRates().get(0);
-            final TaxRate expectedTaxRate = TaxRateBuilder.of("default-tax", 0.19, true, CountryCode.DE).id(taxRate.getId()).build();
+            final TaxRate expectedTaxRate = TaxRateDraftBuilder.of("default-tax", 0.19, true, CountryCode.DE).id(taxRate.getId()).build();
             assertThat(taxRate).isEqualTo(expectedTaxRate);
         });
 
