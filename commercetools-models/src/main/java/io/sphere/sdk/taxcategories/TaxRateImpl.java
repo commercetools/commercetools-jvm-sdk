@@ -73,9 +73,8 @@ final class TaxRateImpl extends Base implements TaxRate {
         return externallySet;
     }
 
-    @Override
     public boolean equalsIgnoreId(final TaxRate other) {
         return other != null
-                && TaxRateDraftBuilder.of(other).id(null).build().equals(TaxRateDraftBuilder.of(this).id(null).build());
+                && TaxRateDraftBuilder.of(other).build().equals(TaxRateDraftBuilder.of(this).build());
     }
 }

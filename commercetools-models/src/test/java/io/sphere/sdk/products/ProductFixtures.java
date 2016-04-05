@@ -260,4 +260,15 @@ public class ProductFixtures {
         final List<ProductType> productTypes = client.executeBlocking(ProductTypeQuery.of().withLimit(500L)).getResults();
         productTypes.forEach(productType -> deleteProductsProductTypeAndProductDiscounts(client, productType));
     }
+
+    public static void withProductOfPrices(final BlockingSphereClient client, final List<PriceDraft> priceDrafts, final Consumer<Product> productConsumer) {
+        withEmptyProductType(client, randomKey(), productType -> {
+            final ProductVariantDraft masterVariant = ProductVariantDraftBuilder.of()
+                    .prices(priceDrafts)
+                    .build();
+            final ProductDraft productDraft = ProductDraftBuilder.of(productType,  randomSlug(),  randomSlug(), masterVariant)
+                    .build();
+            ProductFixtures.withProduct(client, () -> productDraft, productConsumer);
+        });
+    }
 }

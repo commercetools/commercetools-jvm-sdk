@@ -9,8 +9,6 @@ import java.util.Collections;
 import java.util.List;
 
 public final class TaxRateDraftBuilder extends Base implements Builder<TaxRateDraft> {
-    @Nullable
-    private String id;
     private final String name;
     private Double amount;
     private final boolean includedInPrice;
@@ -28,7 +26,6 @@ public final class TaxRateDraftBuilder extends Base implements Builder<TaxRateDr
 
     public static TaxRateDraftBuilder of(final TaxRate taxRate) {
         return of(taxRate.getName(), taxRate.getAmount(), taxRate.isIncludedInPrice(), taxRate.getCountry())
-                .id(taxRate.getId())
                 .state(taxRate.getState())
                 .subRates(taxRate.getSubRates());
     }
@@ -41,11 +38,6 @@ public final class TaxRateDraftBuilder extends Base implements Builder<TaxRateDr
 
     public static TaxRateDraftBuilder of(final String name, final double amount, final boolean includedInPrice, final CountryCode country) {
         return new TaxRateDraftBuilder(name, amount, includedInPrice, country);
-    }
-
-    public TaxRateDraftBuilder id(@Nullable final String id) {
-        this.id = id;
-        return this;
     }
 
     public TaxRateDraftBuilder state(@Nullable final String state) {
