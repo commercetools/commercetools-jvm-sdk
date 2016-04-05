@@ -40,6 +40,7 @@ public interface CustomLineItem extends LineItemLike {
 
     Set<ItemState> getState();
 
+    @Nullable
     Reference<TaxCategory> getTaxCategory();
 
     @Nullable

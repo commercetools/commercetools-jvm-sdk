@@ -3,7 +3,7 @@ package io.sphere.sdk.taxcategories;
 import com.neovisionaries.i18n.CountryCode;
 import org.junit.Test;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class TaxRateTest {
     @Test
