@@ -3,7 +3,6 @@ package io.sphere.sdk.taxcategories;
 import com.neovisionaries.i18n.CountryCode;
 
 import javax.annotation.Nullable;
-import java.math.BigDecimal;
 import java.util.List;
 
 public interface ExternalTaxRateDraft {
@@ -14,7 +13,7 @@ public interface ExternalTaxRateDraft {
      * @return amount or null
      */
     @Nullable
-    BigDecimal getAmount();
+    Double getAmount();
 
     CountryCode getCountry();
 
