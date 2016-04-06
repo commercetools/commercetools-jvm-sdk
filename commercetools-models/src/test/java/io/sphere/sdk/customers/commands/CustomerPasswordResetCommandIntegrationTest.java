@@ -5,7 +5,6 @@ import io.sphere.sdk.customers.Customer;
 import io.sphere.sdk.customers.CustomerIntegrationTest;
 import io.sphere.sdk.customers.CustomerSignInResult;
 import io.sphere.sdk.customers.CustomerToken;
-import io.sphere.sdk.customers.queries.CustomerByPasswordTokenGet;
 import org.junit.Test;
 
 import static io.sphere.sdk.customers.CustomerFixtures.withCustomer;
@@ -20,12 +19,12 @@ public class CustomerPasswordResetCommandIntegrationTest extends CustomerIntegra
             final CustomerToken token = client().executeBlocking(CustomerCreatePasswordTokenCommand.of(email));
             final String tokenValue = token.getValue();//this may need to be sent by email to the customer
 
-            final Customer customerByToken = client().executeBlocking(CustomerByPasswordTokenGet.of(tokenValue));
             final String newPassword = "newPassword";
             final Customer updatedCustomer =
-                    client().executeBlocking(CustomerPasswordResetCommand.of(customerByToken, tokenValue, newPassword));
+                    client().executeBlocking(CustomerPasswordResetCommand.ofTokenAndPassword(tokenValue, newPassword));
 
-            final CustomerSignInResult signInResult = client().executeBlocking(CustomerSignInCommand.of(email, newPassword));
+            final CustomerSignInResult signInResult =
+                    client().executeBlocking(CustomerSignInCommand.of(email, newPassword));
             assertThat(signInResult.getCustomer().getId())
                     .describedAs("customer can sign in with the new password")
                     .isEqualTo(customer.getId());
@@ -37,7 +36,9 @@ public class CustomerPasswordResetCommandIntegrationTest extends CustomerIntegra
         withCustomer(client(), customer -> {
             final String tokenValue = "wrong-token-value";
 
-            final Throwable throwable = catchThrowable(() -> client().executeBlocking(CustomerPasswordResetCommand.of(customer, tokenValue, "newPassword")));
+            final CustomerPasswordResetCommand cmd =
+                    CustomerPasswordResetCommand.ofTokenAndPassword(tokenValue, "newPassword");
+            final Throwable throwable = catchThrowable(() -> client().executeBlocking(cmd));
 
             assertThat(throwable).isInstanceOf(ClientErrorException.class);
         });
