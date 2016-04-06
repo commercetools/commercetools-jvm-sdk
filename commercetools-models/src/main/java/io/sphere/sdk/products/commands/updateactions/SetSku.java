@@ -6,14 +6,21 @@ import io.sphere.sdk.products.Product;
 import javax.annotation.Nullable;
 
 /**
- * Adds, changes or removes an SKU on a product variant.
- * An SKU can only be changed or removed from a variant through this operation
+ * Adds, changes or removes a SKU on a product variant.
+ *
+ * A SKU can only be changed or removed from a variant through this operation
  * if there is no inventory entry associated with that SKU.
- * This change can never be staged and is thus immediately visible in published products.
+ * This change is staged and needs to be published.
  *
  * {@doc.gen intro}
  *
- * {@include.example io.sphere.sdk.products.queries.ProductProjectionQueryIntegrationTest#queryBySku()}
+ * {@include.example io.sphere.sdk.products.commands.ProductUpdateCommandIntegrationTest#setSku()}
+ *
+ *
+ * Since version 1.0.0-RC5 this class executes the action {@code setSku} which is staged,
+ * previous to this version it was {@code setSKU} (upper case 'K' and 'U')
+ * which updates in staged and current and has been moved to the deprecated class {@link LegacySetSku}.
+ * See also <a href="http://dev.commercetools.com/http-api-projects-products.html#set-sku" target="_blank">the HTTP API doc of SetSku.</a>
  */
 public final class SetSku extends UpdateActionImpl<Product> {
     private final Integer variantId;
@@ -21,7 +28,7 @@ public final class SetSku extends UpdateActionImpl<Product> {
     private final String sku;
 
     private SetSku(final Integer variantId, @Nullable final String sku) {
-        super("setSKU");
+        super("setSku");
         this.variantId = variantId;
         this.sku = sku;
     }
