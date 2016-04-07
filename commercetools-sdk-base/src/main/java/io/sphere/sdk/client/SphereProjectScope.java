@@ -1,6 +1,6 @@
 package io.sphere.sdk.client;
 
-public enum ProjectScopes {
+public enum SphereProjectScope implements SphereScope {
 
     /**Grants full access to the APIs for the specified project.*/
     MANAGE_PROJECT,
@@ -40,4 +40,13 @@ public enum ProjectScopes {
 
     /** Grants access to the APIs for viewing anything related to payments in a project.*/
     VIEW_PAYMENTS;
+
+    @Override
+    public String toScopeString() {
+        return name().toLowerCase();
+    }
+
+    public static SphereProjectScope ofScopeString(final String scope) {
+        return valueOf(scope.toUpperCase());
+    }
 }

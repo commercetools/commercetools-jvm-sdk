@@ -16,6 +16,7 @@ import static io.sphere.sdk.client.SphereAuth.AUTH_LOGGER;
 import static io.sphere.sdk.http.HttpMethod.POST;
 import static io.sphere.sdk.utils.SphereInternalUtils.mapOf;
 import static java.lang.String.format;
+import static java.util.stream.Collectors.joining;
 
 /**
  * Component that can fetch SPHERE.IO access tokens.
@@ -77,7 +78,11 @@ final class TokensSupplierImpl extends AutoCloseableService implements TokensSup
                 .of(HttpHeaders.AUTHORIZATION, "Basic " + encodedString)
                 .plus(HttpHeaders.USER_AGENT, BuildInfo.userAgent())
                 .plus(HttpHeaders.CONTENT_TYPE, "application/x-www-form-urlencoded");
-        final FormUrlEncodedHttpRequestBody body = FormUrlEncodedHttpRequestBody.ofStringMap(mapOf("grant_type", "client_credentials", "scope", format("manage_project:%s", config.getProjectKey())));
+        final String projectKey = config.getProjectKey();
+        final String scopeValue = config.getScopes().stream()
+                .map(scope -> format("%s:%s", scope, projectKey))
+                .collect(joining(" "));
+        final FormUrlEncodedHttpRequestBody body = FormUrlEncodedHttpRequestBody.ofStringMap(mapOf("grant_type", "client_credentials", "scope", scopeValue));
         return HttpRequest.of(POST, config.getAuthUrl() + "/oauth/token", httpHeaders, body);
     }
 
