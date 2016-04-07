@@ -176,6 +176,8 @@ public class ProductProjectionSearchModelSortIntegrationTest extends ProductProj
                                        final Consumer<List<String>> test) {
         final ProductProjectionSearch search = ProductProjectionSearch.ofStaged().withSort(sortExpr);
         final List<ProductProjection> results = executeSearch(search).getResults();
-        test.accept(toIds(results));
+        assertEventually(() -> {
+            test.accept(toIds(results));
+        });
     }
 }
