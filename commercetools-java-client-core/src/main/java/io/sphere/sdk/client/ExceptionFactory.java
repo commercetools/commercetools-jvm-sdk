@@ -42,6 +42,7 @@ final class ExceptionFactory {
                     final String body = extractBody(r);
                     return body.contains("invalid_token") ? new InvalidTokenException() : new UnauthorizedException(body);
                 })
+                .whenStatus(403, r -> new ForbiddenException(extractBody(r)))
                 .whenStatus(500, r -> new InternalServerErrorException(extractBody(r)))
                 .whenStatus(502, r -> new BadGatewayException(extractBody(r)))
                 .whenStatus(503, r -> new ServiceUnavailableException(extractBody(r)))
