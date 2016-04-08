@@ -386,7 +386,7 @@ public class SphereExceptionIntegrationTest extends IntegrationTest {
 
     @Test
     public void permissionsExceeded() {
-        final List<SphereScope> scopes = singletonList(SphereProjectScope.MANAGE_PRODUCTS);
+        final List<SphereScope> scopes = singletonList(SphereProjectScope.VIEW_PRODUCTS);
         try(final SphereClient client = createClientWithScopes(scopes)) {
             assertThatThrownBy(() -> {
                 final CustomerQuery request = CustomerQuery.of();
