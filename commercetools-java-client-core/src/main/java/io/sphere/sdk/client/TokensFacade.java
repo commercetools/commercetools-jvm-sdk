@@ -16,7 +16,7 @@ public final class TokensFacade extends Base {
     }
 
     /**
-     * Fetches a new access token.
+     * Fetches a new access token using the client credentials flow.
      *
      * {@include.example io.sphere.sdk.client.TokensFacadeIntegrationTest#fetchAccessToken()}
      *
@@ -25,5 +25,17 @@ public final class TokensFacade extends Base {
      */
     public static CompletionStage<Tokens> fetchTokens(final SphereAuthConfig authConfig) {
         return TokensSupplier.of(authConfig, SphereClientFactory.of().createHttpClient(), true).get();
+    }
+
+    /**
+     * Fetches a new access token using the customer password flow.
+     *
+     * {@include.example io.sphere.sdk.client.TokensFacadeIntegrationTest#passwordFlowDemo()}
+     *
+     * @param
+     * @return token
+     */
+    public static CompletionStage<Tokens> fetchCustomerPasswordFlowTokens(final SphereAuthConfig authConfig, final String email, final String password) {
+        return TokensSupplier.ofCustomerPasswordFlowTokens(authConfig, email, password, SphereClientFactory.of().createHttpClient(), true).get();
     }
 }

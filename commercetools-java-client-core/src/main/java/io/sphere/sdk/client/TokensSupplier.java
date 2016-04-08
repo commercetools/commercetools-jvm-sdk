@@ -18,4 +18,8 @@ public interface TokensSupplier extends AutoCloseable, Supplier<CompletionStage<
     static TokensSupplier of(final SphereAuthConfig config, final HttpClient httpClient, final boolean closeHttpClient) {
         return TokensSupplierImpl.of(config, httpClient, closeHttpClient);
     }
+
+    static TokensSupplier ofCustomerPasswordFlowTokens(final SphereAuthConfig authConfig, final String email, final String password, final HttpClient httpClient, final boolean closeHttpClient) {
+        return TokensSupplierImpl.ofCustomerPasswordFlowTokensImpl(authConfig, email, password, httpClient, closeHttpClient);
+    }
 }

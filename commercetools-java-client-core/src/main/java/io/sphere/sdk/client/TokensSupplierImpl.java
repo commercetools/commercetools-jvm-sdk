@@ -7,14 +7,16 @@ import io.sphere.sdk.json.SphereJsonUtils;
 import io.sphere.sdk.meta.BuildInfo;
 import io.sphere.sdk.models.SphereException;
 
+import javax.annotation.Nullable;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.CompletionStage;
 
 import static io.sphere.sdk.client.SphereAuth.AUTH_LOGGER;
 import static io.sphere.sdk.http.HttpMethod.POST;
-import static io.sphere.sdk.utils.SphereInternalUtils.mapOf;
 import static java.lang.String.format;
 import static java.util.stream.Collectors.joining;
 
@@ -28,6 +30,10 @@ final class TokensSupplierImpl extends AutoCloseableService implements TokensSup
     private final HttpClient httpClient;
     private final boolean closeHttpClient;
     private boolean isClosed = false;
+    @Nullable
+    private String username;//only for password flow required
+    @Nullable
+    private String password;//only for password flow required
 
     private TokensSupplierImpl(final SphereAuthConfig config, final HttpClient httpClient, final boolean closeHttpClient) {
         this.config = config;
@@ -45,12 +51,16 @@ final class TokensSupplierImpl extends AutoCloseableService implements TokensSup
      */
     @Override
     public CompletionStage<Tokens> get() {
-        AUTH_LOGGER.debug(() -> "Fetching new token.");
+        AUTH_LOGGER.debug(() -> isPasswordFlow() ? "Fetching new password flow token." : "Fetching new client credentials flow token.");
         final HttpRequest httpRequest = newRequest();
         final CompletionStage<HttpResponse> httpResponseStage = httpClient.execute(httpRequest);
         final CompletionStage<Tokens> result = httpResponseStage.thenApply((response) -> parseResponse(response, httpRequest));
         result.whenCompleteAsync(this::logTokenResult);
         return result;
+    }
+
+    private boolean isPasswordFlow() {
+        return username != null;
     }
 
     private void logTokenResult(final Tokens nullableTokens, final Throwable nullableThrowable) {
@@ -79,10 +89,17 @@ final class TokensSupplierImpl extends AutoCloseableService implements TokensSup
                 .plus(HttpHeaders.USER_AGENT, BuildInfo.userAgent())
                 .plus(HttpHeaders.CONTENT_TYPE, "application/x-www-form-urlencoded");
         final String projectKey = config.getProjectKey();
+        final Map<String, String> data = new HashMap();
+        data.put("grant_type", isPasswordFlow() ? "password" : "client_credentials");
         final String scopeValue = config.getScopes().stream()
                 .map(scope -> format("%s:%s", scope, projectKey))
                 .collect(joining(" "));
-        final FormUrlEncodedHttpRequestBody body = FormUrlEncodedHttpRequestBody.ofStringMap(mapOf("grant_type", "client_credentials", "scope", scopeValue));
+        data.put("scope", scopeValue);
+        if (isPasswordFlow()) {
+            data.put("username", username);
+            data.put("password", password);
+        }
+        final FormUrlEncodedHttpRequestBody body = FormUrlEncodedHttpRequestBody.ofStringMap(data);
         return HttpRequest.of(POST, config.getAuthUrl() + "/oauth/token", httpHeaders, body);
     }
 
@@ -118,5 +135,14 @@ final class TokensSupplierImpl extends AutoCloseableService implements TokensSup
             exception.setHttpRequest(httpRequest);
             throw exception;
         }
+    }
+
+    public static TokensSupplier ofCustomerPasswordFlowTokensImpl(final SphereAuthConfig authConfig, final String email,
+                                                                  final String password, final HttpClient httpClient,
+                                                                  final boolean closeHttpClient) {
+        final TokensSupplierImpl tokensSupplier = new TokensSupplierImpl(authConfig, httpClient, closeHttpClient);
+        tokensSupplier.username = email;
+        tokensSupplier.password = password;
+        return tokensSupplier;
     }
 }
