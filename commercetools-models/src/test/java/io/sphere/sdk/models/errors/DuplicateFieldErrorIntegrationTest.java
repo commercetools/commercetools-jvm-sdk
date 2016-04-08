@@ -26,7 +26,7 @@ public class DuplicateFieldErrorIntegrationTest extends IntegrationTest {
             final ErrorResponseException e = (ErrorResponseException) throwable;
             assertThat(e.getErrors().get(0).getCode()).isEqualTo(DuplicateFieldError.CODE);
             final DuplicateFieldError error = e.getErrors().get(0).as(DuplicateFieldError.class);
-            assertThat(error.getDuplicateValue()).isEqualTo(email);
+            assertThat(error.getDuplicateValue().toLowerCase()).isEqualTo(email);
             assertThat(error.getField()).isEqualTo("email");
         });
     }
