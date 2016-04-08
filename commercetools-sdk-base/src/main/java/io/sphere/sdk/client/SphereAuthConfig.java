@@ -27,6 +27,10 @@ public interface SphereAuthConfig {
      *
      * {@include.example io.sphere.sdk.client.SphereAuthConfigBuilderTest#scopes()}
      *
+     * <p>On insufficient permissions on executing requests {@link ForbiddenException} will be thrown:</p>
+     *
+     * {@include.example io.sphere.sdk.errors.SphereExceptionIntegrationTest#permissionsExceeded()}
+     *
      * @return scopes
      */
     default List<String> getScopes() {
