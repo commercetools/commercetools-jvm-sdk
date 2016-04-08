@@ -25,13 +25,23 @@ public final class SphereAuthConfigBuilder extends Base implements Builder<Spher
         return builder;
     }
 
+    public static SphereAuthConfigBuilder ofAuthConfig(final SphereAuthConfig template) {
+        return ofKeyIdSecret(template.getProjectKey(), template.getClientId(), template.getClientSecret())
+                .authUrl(template.getAuthUrl())
+                .scopeStrings(template.getScopes());
+    }
+
     public SphereAuthConfigBuilder authUrl(final String authUrl) {
         this.authUrl = authUrl;
         return this;
     }
 
     public SphereAuthConfigBuilder scopes(final List<SphereScope> scopes) {
-        this.scopes = transformEnumScopeListToStringList(scopes);
+        return scopeStrings(transformEnumScopeListToStringList(scopes));
+    }
+
+    public SphereAuthConfigBuilder scopeStrings(final List<String> scopes) {
+        this.scopes = scopes;
         return this;
     }
 

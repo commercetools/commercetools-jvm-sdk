@@ -2,15 +2,15 @@ package io.sphere.sdk.client;
 
 import org.apache.commons.lang3.tuple.ImmutablePair;
 
-import java.util.Map;
-import java.util.Objects;
-import java.util.Properties;
+import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
+import static io.sphere.sdk.client.ClientPackage.API_URL;
+import static io.sphere.sdk.client.ClientPackage.AUTH_URL;
 import static io.sphere.sdk.client.SphereClientConfig.*;
-import static io.sphere.sdk.client.ClientPackage.*;
 import static java.util.Arrays.asList;
+import static org.apache.commons.lang3.StringUtils.isEmpty;
 
 final class SphereClientConfigUtils {
     private SphereClientConfigUtils() {
@@ -35,8 +35,14 @@ final class SphereClientConfigUtils {
         final String clientSecret = configMap.computeIfAbsent(ENVIRONMENT_VARIABLE_CLIENT_SECRET_SUFFIX, throwExceptionOnAbsent);
         final String apiUrl = configMap.getOrDefault(ENVIRONMENT_VARIABLE_API_URL_SUFFIX, API_URL);
         final String authUrl = configMap.getOrDefault(ENVIRONMENT_VARIABLE_AUTH_URL_SUFFIX, AUTH_URL);
+        final String scopesAsString = configMap.getOrDefault(ENVIRONMENT_VARIABLE_SCOPES_SUFFIX, "");
+        final List<SphereScope> scopes = scopesAsCommaSeparatedStringsToList(scopesAsString);
 
-        return SphereClientConfig.of(projectKey, clientId, clientSecret).withApiUrl(apiUrl).withAuthUrl(authUrl);
+        return SphereClientConfigBuilder.ofKeyIdSecret(projectKey, clientId, clientSecret)
+                .apiUrl(apiUrl)
+                .authUrl(authUrl)
+                .scopes(scopes)
+                .build();
     }
 
     private static String throwEnvException(final String prefix, final String missingKey) {
@@ -48,7 +54,8 @@ final class SphereClientConfigUtils {
                         "export " + buildEnvKey(prefix, ENVIRONMENT_VARIABLE_CLIENT_SECRET_SUFFIX) + "=\"YOUR client secret\"\n" +
                         "#optional:\n" +
                         "export " + buildEnvKey(prefix, ENVIRONMENT_VARIABLE_API_URL_SUFFIX) + "=\"https://api.sphere.io\"\n" +
-                        "export " + buildEnvKey(prefix, ENVIRONMENT_VARIABLE_AUTH_URL_SUFFIX) + "=\"https://auth.sphere.io\""
+                        "export " + buildEnvKey(prefix, ENVIRONMENT_VARIABLE_AUTH_URL_SUFFIX) + "=\"https://auth.sphere.io\"" +
+                        "export " + buildEnvKey(prefix, ENVIRONMENT_VARIABLE_SCOPES_SUFFIX) + "=\"manage_project\""
         );
     }
 
@@ -66,7 +73,21 @@ final class SphereClientConfigUtils {
         final String clientSecret = extract(properties, prefix, PROPERTIES_KEY_CLIENT_SECRET_SUFFIX);
         final String apiUrl = extract(properties, prefix, PROPERTIES_KEY_API_URL_SUFFIX, API_URL);
         final String authUrl = extract(properties, prefix, PROPERTIES_KEY_AUTH_URL_SUFFIX, AUTH_URL);
-        return SphereClientConfig.of(projectKey, clientId, clientSecret).withApiUrl(apiUrl).withAuthUrl(authUrl);
+        final String scopesAsString = extract(properties, prefix, PROPERTIES_KEY_SCOPES_SUFFIX, "");
+        final List<SphereScope> scopes = scopesAsCommaSeparatedStringsToList(scopesAsString);
+        return SphereClientConfigBuilder.ofKeyIdSecret(projectKey, clientId, clientSecret)
+                .apiUrl(apiUrl)
+                .authUrl(authUrl)
+                .scopes(scopes)
+                .build();
+    }
+
+    private static List<SphereScope> scopesAsCommaSeparatedStringsToList(final String scopesAsString) {
+        return isEmpty(scopesAsString)
+                    ? ClientPackage.DEFAULT_PROJECT_SCOPES
+                    : Arrays.stream(scopesAsString.split(","))
+                    .map(SphereProjectScope::ofScopeString)
+                    .collect(Collectors.toList());
     }
 
     private static String extract(final Properties properties, final String prefix, final String suffix, final String defaultValue) {
@@ -88,6 +109,7 @@ final class SphereClientConfigUtils {
                         "#optional:\n" +
                         "" + buildPropKey(prefix, PROPERTIES_KEY_API_URL_SUFFIX) + "=https://api.sphere.io\n" +
                         "" + buildPropKey(prefix, PROPERTIES_KEY_AUTH_URL_SUFFIX) + "=https://auth.sphere.io" +
+                        "" + buildPropKey(prefix, PROPERTIES_KEY_SCOPES_SUFFIX) + "=manage_project" +
                         "#don't use quotes for the property values\n"
         );
     }

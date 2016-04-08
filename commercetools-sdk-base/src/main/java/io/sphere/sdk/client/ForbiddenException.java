@@ -5,6 +5,7 @@ package io.sphere.sdk.client;
  *
  * For example it happens if an access token has been received to view products but a request to the customers endpoint is requested.
  *
+ * {@include.example io.sphere.sdk.errors.SphereExceptionIntegrationTest#permissionsExceeded()}
  */
 public class ForbiddenException extends ClientErrorException {
     private static final int STATUS_CODE = 403;

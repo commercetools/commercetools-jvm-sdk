@@ -15,6 +15,7 @@ import io.sphere.sdk.categories.commands.updateactions.ChangeName;
 import io.sphere.sdk.categories.queries.CategoryQuery;
 import io.sphere.sdk.client.*;
 import io.sphere.sdk.commands.UpdateActionImpl;
+import io.sphere.sdk.customers.queries.CustomerQuery;
 import io.sphere.sdk.http.HttpResponse;
 import io.sphere.sdk.http.HttpStatusCode;
 import io.sphere.sdk.meta.BuildInfo;
@@ -31,9 +32,12 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+import java.io.IOException;
 import java.util.Collections;
+import java.util.List;
 import java.util.concurrent.CompletionException;
 import java.util.concurrent.CompletionStage;
+import java.util.concurrent.TimeUnit;
 import java.util.function.Supplier;
 
 import static io.sphere.sdk.carts.CartFixtures.withCart;
@@ -41,6 +45,8 @@ import static io.sphere.sdk.categories.CategoryFixtures.withCategory;
 import static io.sphere.sdk.http.HttpMethod.POST;
 import static io.sphere.sdk.products.ProductFixtures.withTaxedProduct;
 import static io.sphere.sdk.test.SphereTestUtils.randomSlug;
+import static java.util.Collections.singletonList;
+import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.assertj.core.api.Assertions.*;
 import static org.junit.Assert.fail;
 
@@ -376,5 +382,26 @@ public class SphereExceptionIntegrationTest extends IntegrationTest {
         assertThatThrownBy(() -> client.execute(CategoryQuery.of()).toCompletableFuture().join())
                 .hasCauseInstanceOf(SphereException.class)
                 .matches(e -> ((SphereException) e.getCause()).getAdditionalNotes().stream().allMatch(s -> !s.contains("reindex")));
+    }
+
+    @Test
+    public void permissionsExceeded() {
+        final List<SphereScope> scopes = singletonList(SphereProjectScope.MANAGE_PRODUCTS);
+        try(final SphereClient client = createClientWithScopes(scopes)) {
+            assertThatThrownBy(() -> {
+                final CustomerQuery request = CustomerQuery.of();
+                SphereClientUtils.blockingWait(client.execute(request), 5, SECONDS);
+            })
+            .as("since the allowed scope is only to view products, customer data should not be loadable")
+            .isInstanceOf(ForbiddenException.class);
+        }
+    }
+
+    private SphereClient createClientWithScopes(final List<SphereScope> scopes) {
+        final SphereClientConfig config = SphereClientConfigBuilder.ofClientConfig(getSphereClientConfig())
+                .scopes(scopes)
+                .build();
+        return SphereClientFactory.of(IntegrationTest::newHttpClient)
+                .createClient(config);
     }
 }

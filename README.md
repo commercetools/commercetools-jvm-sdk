@@ -105,6 +105,7 @@ see https://github.com/sphereio/sphere-jvm-sdk-experimental-java-add-ons
 
 ## Executing integration tests
 
+1. create an API client in the Merchant Center with all available permissions (at the time of writing it is manage_payments manage_my_profile manage_orders view_products view_customers view_payments view_types manage_my_orders manage_types manage_customers manage_products view_orders manage_project)
 1. create a file "integrationtest.properties" inside the project root
 1. fill it with the credentials of a new empty commercetools project which is for testing;
 

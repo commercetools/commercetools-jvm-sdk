@@ -6,6 +6,8 @@ import static io.sphere.sdk.client.ClientPackage.*;
 
 /**
  * Contains the configuration to fetch access keys for the commercetools platform.
+ *
+ * @see SphereAuthConfigBuilder
  */
 public interface SphereAuthConfig {
     /**

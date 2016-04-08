@@ -18,6 +18,13 @@ public final class SphereClientConfigBuilder extends Base implements Builder<Sph
     private SphereClientConfigBuilder() {
     }
 
+    public static SphereClientConfigBuilder ofClientConfig(final SphereClientConfig config) {
+        return ofKeyIdSecret(config.getProjectKey(), config.getClientId(), config.getClientSecret())
+                .authUrl(config.getAuthUrl())
+                .apiUrl(config.getApiUrl())
+                .scopeStrings(config.getScopes());
+    }
+
     public static SphereClientConfigBuilder ofKeyIdSecret(final String projectKey, final String clientId, final String clientSecret) {
         final SphereClientConfigBuilder builder = new SphereClientConfigBuilder();
         builder.clientId = clientId;
@@ -37,7 +44,11 @@ public final class SphereClientConfigBuilder extends Base implements Builder<Sph
     }
 
     public SphereClientConfigBuilder scopes(final List<SphereScope> scopes) {
-        this.scopes = transformEnumScopeListToStringList(scopes);
+        return scopeStrings(transformEnumScopeListToStringList(scopes));
+    }
+
+    public SphereClientConfigBuilder scopeStrings(final List<String> scopes) {
+        this.scopes = scopes;
         return this;
     }
 

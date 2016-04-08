@@ -26,4 +26,10 @@ final class ClientPackage {
                 .map(scope -> scope.toScopeString())
                 .collect(Collectors.toList()));
     }
+
+    public static List<SphereScope> transformStringListToEnumScopeList(final List<String> scopes) {
+        return Collections.unmodifiableList(scopes.stream()
+                .map(SphereProjectScope::ofScopeString)
+                .collect(Collectors.toList()));
+    }
 }
