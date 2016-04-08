@@ -20,7 +20,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class TokensFacadeIntegrationTest extends IntegrationTest {
 
-    @Test//workaround to not put the into the demo code
+    @Test//workaround to not put the if condition into the demo code
     public void testFetchAccessToken() {
         if (!"false".equals(System.getenv("JVM_SDK_IT_SSL_VALIDATION"))) {
             fetchAccessToken();
