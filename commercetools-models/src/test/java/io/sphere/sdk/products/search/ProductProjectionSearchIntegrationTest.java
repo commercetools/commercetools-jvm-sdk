@@ -62,9 +62,6 @@ public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
     protected static final String ATTR_NAME_SIZE = ("Size" + TEST_CLASS_NAME).substring(0, min(20, TEST_CLASS_NAME.length()));
     protected static final String ATTR_NAME_EVIL = ("Evil" + TEST_CLASS_NAME).substring(0, min(20, TEST_CLASS_NAME.length()));
 
-    @Rule
-    public RetryIntegrationTest retry = new RetryIntegrationTest(10, 10000, LoggerFactory.getLogger(this.getClass()));
-
     @BeforeClass
     public static void setupProducts() {
         productType = client().executeBlocking(ProductTypeQuery.of().byName(PRODUCT_TYPE_NAME)).head()

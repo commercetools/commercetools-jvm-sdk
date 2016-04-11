@@ -12,10 +12,12 @@ import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.List;
+import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
 import static io.sphere.sdk.test.SphereTestUtils.ENGLISH;
+import static io.sphere.sdk.test.SphereTestUtils.assertEventually;
 import static java.lang.Math.max;
 import static java.lang.Math.min;
 import static java.util.Arrays.asList;
@@ -31,18 +33,19 @@ public class ProductProjectionSearchMainIntegrationTest extends ProductProjectio
     @Test
     public void searchByTextInACertainLanguage() throws Exception {
         final ProductProjectionSearch search = ProductProjectionSearch.ofStaged().withText(ENGLISH, "shoe");
-        final PagedSearchResult<ProductProjection> result = executeSearch(search);
-        assertThat(resultsToIds(result)).containsOnly(product1.getId());
+        testResultIds(search, resultIds ->
+                assertThat(resultIds).containsOnly(product1.getId()));
     }
 
     @Test
     public void resultsArePaginated() throws Exception {
-        final PagedSearchResult<ProductProjection> result = executeSearch(ProductProjectionSearch.ofStaged()
+        final ProductProjectionSearch search = ProductProjectionSearch.ofStaged()
                 .plusQueryFilters(productModel -> productModel.allVariants().attribute().ofString(ATTR_NAME_COLOR).isIn(asList("blue", "red")))
                 .withSort(sort -> sort.name().locale(ENGLISH).desc())
                 .withOffset(1L)
-                .withLimit(1L));
-        assertThat(resultsToIds(result)).containsOnly(product2.getId());
+                .withLimit(1L);
+        testResultIds(search, resultIds ->
+                assertThat(resultIds).containsOnly(product2.getId()));
     }
 
     @Test
@@ -52,19 +55,21 @@ public class ProductProjectionSearchMainIntegrationTest extends ProductProjectio
         final ProductProjectionSearch search = ProductProjectionSearch.ofStaged()
                 .withOffset(offset)
                 .withLimit(limit);
-        final PagedSearchResult<ProductProjection> result = executeSearch(search);
-        final long remainingProducts = max(result.getTotal() - offset, 0);
-        final long expectedProducts = min(limit, remainingProducts);
-        assertThat(result.size()).as("size").isEqualTo(expectedProducts);
-        assertThat(result.getOffset()).as("offset").isEqualTo(offset);
+        testResult(search, result -> {
+            final long remainingProducts = max(result.getTotal() - offset, 0);
+            final long expectedProducts = min(limit, remainingProducts);
+            assertThat(result.size()).as("size").isEqualTo(expectedProducts);
+            assertThat(result.getOffset()).as("offset").isEqualTo(offset);
+        });
     }
 
     @Test
     public void allowsExpansion() throws Exception {
         final ProductProjectionSearch search = ProductProjectionSearch.ofStaged().withLimit(1L);
-        assertThat(executeSearch(search).getResults().get(0).getProductType().getObj()).isNull();
-        final PagedSearchResult<ProductProjection> result = executeSearch(search.withExpansionPaths(product -> product.productType()));
-        assertThat(result.getResults().get(0).getProductType().getObj()).isEqualTo(productType);
+        testResult(search, result ->
+                assertThat(result.getResults().get(0).getProductType().getObj()).isNull());
+        testResult(search.withExpansionPaths(product -> product.productType()), result ->
+                assertThat(result.getResults().get(0).getProductType().getObj()).isEqualTo(productType));
     }
 
     @Test
@@ -72,8 +77,10 @@ public class ProductProjectionSearchMainIntegrationTest extends ProductProjectio
         final ProductProjectionSearch search = ProductProjectionSearch.ofStaged()
                 .withText(ENGLISH, "short")
                 .withQueryFilters(productModel -> productModel.productType().id().is(productType.getId()));
-        assertThat(client().executeBlocking(search).getResults()).matches(containsIdentifiable(product2).negate(), "not included");
-        assertThat(client().executeBlocking(search.withFuzzy(true)).getResults()).matches(containsIdentifiable(product2), "included");
+        assertEventually(() ->
+                assertThat(client().executeBlocking(search).getResults()).matches(containsIdentifiable(product2).negate(), "not included"));
+        assertEventually(() ->
+                assertThat(client().executeBlocking(search.withFuzzy(true)).getResults()).matches(containsIdentifiable(product2), "included"));
     }
 
     @Test
@@ -91,7 +98,8 @@ public class ProductProjectionSearchMainIntegrationTest extends ProductProjectio
     public void findMatchingVariantBySort() throws Exception {
         final ProductProjectionSearch search = ProductProjectionSearch.ofStaged()
                 .withSort(productModel -> productModel.allVariants().attribute().ofNumber(ATTR_NAME_SIZE).ascWithMaxValue());
-        assertThat(executeSearch(search).getResults()).are(productWithMatchingVariantsHavingMaxSize());
+        testResult(search, result ->
+                assertThat(result.getResults()).are(productWithMatchingVariantsHavingMaxSize()));
     }
 
     @Ignore // HTTP API doesn't mark the correct variant as true when the searched info is inside the variant
@@ -125,24 +133,26 @@ public class ProductProjectionSearchMainIntegrationTest extends ProductProjectio
 
     private void testBlueFilter(final Function<List<FilterExpression<ProductProjection>>, ProductProjectionSearch> createSearch) {
         final ProductProjectionSearch search = createSearch.apply(PRODUCT_MODEL.allVariants().attribute().ofString(ATTR_NAME_COLOR).is("blue"));
-        final List<ProductProjection> results = executeSearch(search).getResults();
+        testResult(search, result -> {
+            final List<ProductProjection> results = result.getResults();
+            final Predicate<ProductVariant> isBlue = variant -> variant.findAttribute(COLOR_ATTRIBUTE_ACCESS)
+                    .map(color -> color.equals("blue"))
+                    .orElse(false);
+            final Condition<ProductVariant> blueVariant = new Condition<>(isBlue, "variant is blue");
 
-        final Predicate<ProductVariant> isBlue = variant -> variant.findAttribute(COLOR_ATTRIBUTE_ACCESS)
-                .map(color -> color.equals("blue"))
-                .orElse(false);
-        final Condition<ProductVariant> blueVariant = new Condition<>(isBlue, "variant is blue");
+            assertThat(results)
+                    .flatExtracting(ProductProjection::getAllVariants)
+                    .areAtLeastOne(notMatching(blueVariant))
+                    .areAtLeastOne(blueVariant);
+            final List<ProductVariant> allMatchingVariants = results.stream()
+                    .flatMap(r -> r.findMatchingVariants().stream())
+                    .collect(toList());
+            assertThat(allMatchingVariants).are(blueVariant);
+            assertThat(results)
+                    .extracting(r -> r.findFirstMatchingVariant().get())
+                    .containsOnlyElementsOf(allMatchingVariants);
 
-        assertThat(results)
-                .flatExtracting(result -> result.getAllVariants())
-                .areAtLeastOne(notMatching(blueVariant))
-                .areAtLeastOne(blueVariant);
-        final List<ProductVariant> allMatchingVariants = results.stream()
-                .flatMap(r -> r.findMatchingVariants().stream())
-                .collect(toList());
-        assertThat(allMatchingVariants).are(blueVariant);
-        assertThat(results)
-                .extracting(r -> r.findFirstMatchingVariant().get())
-                .containsOnlyElementsOf(allMatchingVariants);
+        });
     }
 
     private <T> Condition<T> notMatching(final Condition<T> matchingCondition) {
@@ -153,4 +163,14 @@ public class ProductProjectionSearchMainIntegrationTest extends ProductProjectio
         return list -> list.stream().anyMatch(element -> element.getId().equals(identifiable.getId()));
     }
 
+    private static void testResultIds(final ProductProjectionSearch search, final Consumer<List<String>> test) {
+        assertEventually(() -> {
+            final PagedSearchResult<ProductProjection> result = executeSearch(search);
+            test.accept(resultsToIds(result));
+        });
+    }
+
+    private static void testResult(final ProductProjectionSearch search, final Consumer<PagedSearchResult<ProductProjection>> test) {
+        assertEventually(() -> test.accept(executeSearch(search)));
+    }
 }

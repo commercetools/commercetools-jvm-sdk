@@ -94,9 +94,11 @@ public class ProductProjectionSearchFacetedSearchIntegrationTest extends Product
                                    final Consumer<List<String>> testFilter,
                                    final Consumer<List<TermStats>> testColors,
                                    final Consumer<List<TermStats>> testSizes) {
-        final PagedSearchResult<ProductProjection> result = executeSearch(search);
-        testFilter.accept(toIds(result.getResults()));
-        testColors.accept(result.getFacetResult(COLOR_FACETED_SEARCH).getTerms());
-        testSizes.accept(result.getFacetResult(SIZE_FACETED_SEARCH).getTerms());
+        assertEventually(() -> {
+            final PagedSearchResult<ProductProjection> result = executeSearch(search);
+            testFilter.accept(toIds(result.getResults()));
+            testColors.accept(result.getFacetResult(COLOR_FACETED_SEARCH).getTerms());
+            testSizes.accept(result.getFacetResult(SIZE_FACETED_SEARCH).getTerms());
+        });
     }
 }
