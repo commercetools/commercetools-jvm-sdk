@@ -19,6 +19,11 @@ abstract class SortSearchModelImpl<T> extends Base implements SortSearchModel<T>
         this.searchModel = searchModel;
     }
 
+    @Override
+    public SearchModel<T> getSearchModel() {
+        return searchModel;
+    }
+
     public SortExpression<T> by(final SearchSortDirection direction) {
         return new SortExpressionImpl<>(searchModel, direction);
     }

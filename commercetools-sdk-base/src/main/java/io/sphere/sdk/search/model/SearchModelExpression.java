@@ -6,9 +6,7 @@ import javax.annotation.Nullable;
 import java.util.Optional;
 import java.util.function.Function;
 
-import static io.sphere.sdk.utils.SphereInternalUtils.toStream;
 import static java.util.Objects.requireNonNull;
-import static java.util.stream.Collectors.joining;
 
 abstract class SearchModelExpression<T, V> extends Base {
     private final SearchModel<T> searchModel;
@@ -23,15 +21,15 @@ abstract class SearchModelExpression<T, V> extends Base {
     }
 
     public final String expression() {
-        return attributePath() + Optional.ofNullable(value()).orElse("") + Optional.ofNullable(alias).map(a -> " as " + a).orElse("");
+        return searchModel.attributePath() + Optional.ofNullable(value()).orElse("") + Optional.ofNullable(alias).map(a -> " as " + a).orElse("");
     }
 
     public final String attributePath() {
-        return toStream(searchModel.buildPath()).collect(joining("."));
+        return searchModel.attributePath();
     }
 
     public final String resultPath() {
-        return Optional.ofNullable(alias).orElse(attributePath());
+        return Optional.ofNullable(alias).orElse(searchModel.attributePath());
     }
 
     @Nullable

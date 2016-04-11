@@ -8,6 +8,12 @@ import io.sphere.sdk.search.SortExpression;
  */
 public interface SortSearchModel<T> {
 
+    /**
+     * The search model for the facet.
+     * @return the facet search model
+     */
+    SearchModel<T> getSearchModel();
+
     SortExpression<T> by(final SearchSortDirection direction);
 
     /**

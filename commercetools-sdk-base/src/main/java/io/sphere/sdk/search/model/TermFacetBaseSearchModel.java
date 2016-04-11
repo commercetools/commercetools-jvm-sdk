@@ -1,10 +1,10 @@
 package io.sphere.sdk.search.model;
 
 import io.sphere.sdk.models.Base;
-import io.sphere.sdk.search.*;
+import io.sphere.sdk.search.FilteredFacetExpression;
+import io.sphere.sdk.search.TermFacetExpression;
 
 import javax.annotation.Nullable;
-
 import java.util.function.Function;
 
 import static java.util.Collections.singletonList;
@@ -38,6 +38,11 @@ abstract class TermFacetBaseSearchModel<T, V> extends Base implements FacetSearc
     @Nullable
     public String getAlias() {
         return alias;
+    }
+
+    @Override
+    public SearchModel<T> getSearchModel() {
+        return searchModel;
     }
 
     /**

@@ -27,6 +27,11 @@ abstract class TermFacetedSearchBaseSearchModel<T> extends Base implements Facet
         this.filterSearchModel = new TermFilterSearchModel<>(searchModel, TYPE_SERIALIZER);
     }
 
+    @Override
+    public SearchModel<T> getSearchModel() {
+        return searchModel;
+    }
+
     /**
      * {@inheritDoc}
      */

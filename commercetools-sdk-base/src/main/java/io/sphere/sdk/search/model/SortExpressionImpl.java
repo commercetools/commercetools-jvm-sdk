@@ -4,9 +4,7 @@ import io.sphere.sdk.models.Base;
 import io.sphere.sdk.search.SearchSortDirection;
 import io.sphere.sdk.search.SortExpression;
 
-import static io.sphere.sdk.utils.SphereInternalUtils.toStream;
 import static java.util.Objects.requireNonNull;
-import static java.util.stream.Collectors.joining;
 
 class SortExpressionImpl<T> extends Base implements SortExpression<T> {
     private final SearchModel<T> searchModel;
@@ -29,7 +27,7 @@ class SortExpressionImpl<T> extends Base implements SortExpression<T> {
 
     @Override
     public final String attributePath() {
-        return toStream(searchModel.buildPath()).collect(joining("."));
+        return searchModel.attributePath();
     }
 
     @Override
