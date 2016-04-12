@@ -23,6 +23,6 @@ public class SearchModelTest {
     @Test
     public void buildsSegmentPath() throws Exception {
         SearchModelImpl<Object> model = new SearchModelImpl<>("variants").appended("price").appended("centAmount");
-        assertThat(model.buildPath()).isEqualTo(asList("variants", "price", "centAmount"));
+        assertThat(model.attributePath()).isEqualTo("variants.price.centAmount");
     }
 }

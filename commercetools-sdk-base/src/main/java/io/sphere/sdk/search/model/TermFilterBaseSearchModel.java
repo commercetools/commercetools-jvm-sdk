@@ -26,6 +26,11 @@ abstract class TermFilterBaseSearchModel<T, V> extends Base implements FilterSea
     }
 
     @Override
+    public SearchModel<T> getSearchModel() {
+        return searchModel;
+    }
+
+    @Override
     public List<FilterExpression<T>> exists() {
         return ExistsAndMissingFilterSearchModelSupportUtils.exists(searchModel);
     }

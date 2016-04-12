@@ -9,6 +9,12 @@ import io.sphere.sdk.search.TermFacetedSearchExpression;
 public interface FacetedSearchSearchModel<T> {
 
     /**
+     * The search model for the faceted search.
+     * @return the faceted search model
+     */
+    SearchModel<T> getSearchModel();
+
+    /**
      * Generates an expression to select all elements, without filtering, along with the facet for all terms for this attribute.
      * @return a bundle of an empty filter expression and a facet expression for all terms
      */

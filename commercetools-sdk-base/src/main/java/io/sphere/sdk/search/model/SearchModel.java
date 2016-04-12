@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import static io.sphere.sdk.utils.SphereInternalUtils.toStream;
+import static java.util.stream.Collectors.joining;
+
 public interface SearchModel<T> {
 
     @Nullable
@@ -12,6 +15,10 @@ public interface SearchModel<T> {
 
     @Nullable
     SearchModel<T> getParent();
+
+    default String attributePath() {
+        return toStream(buildPath()).collect(joining("."));
+    }
 
     default List<String> buildPath() {
         final List<String> pathSegments = new ArrayList<>();
