@@ -4,6 +4,7 @@ import io.sphere.sdk.products.*;
 import io.sphere.sdk.search.*;
 import org.junit.Test;
 
+import java.time.Duration;
 import java.util.List;
 import java.util.function.Consumer;
 
@@ -94,7 +95,7 @@ public class ProductProjectionSearchFacetedSearchIntegrationTest extends Product
                                    final Consumer<List<String>> testFilter,
                                    final Consumer<List<TermStats>> testColors,
                                    final Consumer<List<TermStats>> testSizes) {
-        assertEventually(() -> {
+        assertEventually(Duration.ofSeconds(45), Duration.ofMillis(200), () -> {
             final PagedSearchResult<ProductProjection> result = executeSearch(search);
             testFilter.accept(toIds(result.getResults()));
             testColors.accept(result.getFacetResult(COLOR_FACETED_SEARCH).getTerms());

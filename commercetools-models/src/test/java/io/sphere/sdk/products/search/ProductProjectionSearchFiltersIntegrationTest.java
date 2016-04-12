@@ -94,7 +94,7 @@ public class ProductProjectionSearchFiltersIntegrationTest extends ProductProjec
                 .collect(toList());
         final ProductProjectionSearch search = ProductProjectionSearch.ofStaged()
                 .plusQueryFilters(m -> m.allVariants().sku().isIn(skus));
-        assertEventually(() -> {
+        assertEventually(Duration.ofSeconds(45), Duration.ofMillis(200), () -> {
             assertThat(client().executeBlocking(search).getResults())
             .extracting(m -> m.getMasterVariant().getSku())
             .containsOnly(skus.get(0), skus.get(1));
@@ -102,7 +102,7 @@ public class ProductProjectionSearchFiltersIntegrationTest extends ProductProjec
     }
 
     private static void testResultIds(final ProductProjectionSearch search, final Consumer<List<String>> test) {
-        assertEventually(() -> {
+        assertEventually(Duration.ofSeconds(45), Duration.ofMillis(200), () -> {
             final PagedSearchResult<ProductProjection> result = executeSearch(search);
             test.accept(resultsToIds(result));
         });
