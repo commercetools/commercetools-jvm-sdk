@@ -66,10 +66,18 @@ public class ProductProjectionSearchMainIntegrationTest extends ProductProjectio
     @Test
     public void allowsExpansion() throws Exception {
         final ProductProjectionSearch search = ProductProjectionSearch.ofStaged().withLimit(1L);
-        testResult(search, result ->
-                assertThat(result.getResults().get(0).getProductType().getObj()).isNull());
-        testResult(search.withExpansionPaths(product -> product.productType()), result ->
-                assertThat(result.getResults().get(0).getProductType().getObj()).isEqualTo(productType));
+        testResult(search, result -> {
+            final List<ProductProjection> results = result.getResults();
+            assertThat(results).isNotEmpty();
+            assertThat(results.get(0).getProductType().getObj()).isNull();
+        });
+        testResult(search.withExpansionPaths(product -> {
+            return product.productType();
+        }), result -> {
+            final List<ProductProjection> results = result.getResults();
+            assertThat(results).isNotEmpty();
+            assertThat(results.get(0).getProductType().getObj()).isEqualTo(productType);
+        });
     }
 
     @Test
