@@ -5,6 +5,7 @@ import io.sphere.sdk.search.*;
 import io.sphere.sdk.search.model.RangeStats;
 import org.junit.Test;
 
+import java.time.Duration;
 import java.util.function.Consumer;
 
 import static io.sphere.sdk.test.SphereTestUtils.assertEventually;
@@ -134,6 +135,6 @@ public class ProductProjectionSearchFacetsIntegrationTest extends ProductProject
 
 
     private static void testResult(final ProductProjectionSearch search, final Consumer<PagedSearchResult<ProductProjection>> test) {
-        assertEventually(() -> test.accept(executeSearch(search)));
+        assertEventually(Duration.ofSeconds(45), Duration.ofMillis(200), () -> test.accept(executeSearch(search)));
     }
 }

@@ -5,6 +5,7 @@ import io.sphere.sdk.search.PagedSearchResult;
 import io.sphere.sdk.search.SortExpression;
 import org.junit.Test;
 
+import java.time.Duration;
 import java.util.List;
 import java.util.function.Consumer;
 
@@ -69,7 +70,7 @@ public class ProductProjectionSearchSortIntegrationTest extends ProductProjectio
     }
 
     private static void testResultIds(final ProductProjectionSearch search, final Consumer<List<String>> test) {
-        assertEventually(() -> {
+        assertEventually(Duration.ofSeconds(45), Duration.ofMillis(200), () -> {
             final PagedSearchResult<ProductProjection> result = executeSearch(search);
             test.accept(resultsToIds(result));
         });

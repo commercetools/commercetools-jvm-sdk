@@ -11,6 +11,7 @@ import org.assertj.core.api.Condition;
 import org.junit.Ignore;
 import org.junit.Test;
 
+import java.time.Duration;
 import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Function;
@@ -77,9 +78,9 @@ public class ProductProjectionSearchMainIntegrationTest extends ProductProjectio
         final ProductProjectionSearch search = ProductProjectionSearch.ofStaged()
                 .withText(ENGLISH, "short")
                 .withQueryFilters(productModel -> productModel.productType().id().is(productType.getId()));
-        assertEventually(() ->
+        assertEventually(Duration.ofSeconds(45), Duration.ofMillis(200), () ->
                 assertThat(client().executeBlocking(search).getResults()).matches(containsIdentifiable(product2).negate(), "not included"));
-        assertEventually(() ->
+        assertEventually(Duration.ofSeconds(45), Duration.ofMillis(200), () ->
                 assertThat(client().executeBlocking(search.withFuzzy(true)).getResults()).matches(containsIdentifiable(product2), "included"));
     }
 
@@ -164,13 +165,13 @@ public class ProductProjectionSearchMainIntegrationTest extends ProductProjectio
     }
 
     private static void testResultIds(final ProductProjectionSearch search, final Consumer<List<String>> test) {
-        assertEventually(() -> {
+        assertEventually(Duration.ofSeconds(45), Duration.ofMillis(200), () -> {
             final PagedSearchResult<ProductProjection> result = executeSearch(search);
             test.accept(resultsToIds(result));
         });
     }
 
     private static void testResult(final ProductProjectionSearch search, final Consumer<PagedSearchResult<ProductProjection>> test) {
-        assertEventually(() -> test.accept(executeSearch(search)));
+        assertEventually(Duration.ofSeconds(45), Duration.ofMillis(200), () -> test.accept(executeSearch(search)));
     }
 }
