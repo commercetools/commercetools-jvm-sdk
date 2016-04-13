@@ -15,6 +15,10 @@ public final class ProductVariantFilterSearchModel extends SearchModelImpl<Produ
         return new ProductAttributeFilterSearchModel(this, "attributes");
     }
 
+    public ProductVariantAvailabilityFilterSearchModel availability() {
+        return new ProductVariantAvailabilityFilterSearchModelImpl(this, "availability");
+    }
+
     public MoneyFilterSearchModel<ProductProjection> price() {
         return moneyFilterSearchModel("price");
     }

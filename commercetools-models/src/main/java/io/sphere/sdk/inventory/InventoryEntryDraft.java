@@ -27,7 +27,7 @@ public interface InventoryEntryDraft {
         return of(sku, quantityOnStock, null, null, null);
     }
 
-    static InventoryEntryDraftDsl of(final String sku, final long quantityOnStock, final ZonedDateTime expectedDelivery, @Nullable final Integer restockableInDays, final Reference<Channel> supplyChannel) {
+    static InventoryEntryDraftDsl of(final String sku, final long quantityOnStock, @Nullable final ZonedDateTime expectedDelivery, @Nullable final Integer restockableInDays, final Reference<Channel> supplyChannel) {
         return new InventoryEntryDraftDsl(sku, quantityOnStock, expectedDelivery, restockableInDays, supplyChannel);
     }
 }

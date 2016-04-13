@@ -1,9 +1,14 @@
 package io.sphere.sdk.products;
 
 import io.sphere.sdk.categories.Category;
+import io.sphere.sdk.channels.Channel;
 import io.sphere.sdk.client.BlockingSphereClient;
 import io.sphere.sdk.client.ConcurrentModificationException;
 import io.sphere.sdk.client.SphereClientUtils;
+import io.sphere.sdk.inventory.InventoryEntryDraft;
+import io.sphere.sdk.inventory.commands.InventoryEntryCreateCommand;
+import io.sphere.sdk.models.Reference;
+import io.sphere.sdk.models.Referenceable;
 import io.sphere.sdk.models.Versioned;
 import io.sphere.sdk.productdiscounts.commands.ProductDiscountDeleteCommand;
 import io.sphere.sdk.productdiscounts.queries.ProductDiscountQuery;
@@ -32,6 +37,7 @@ import io.sphere.sdk.utils.MoneyImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.annotation.Nullable;
 import java.math.BigDecimal;
 import java.util.LinkedList;
 import java.util.List;
@@ -262,5 +268,19 @@ public class ProductFixtures {
     public static void deleteProductsAndProductTypes(final BlockingSphereClient client) {
         final List<ProductType> productTypes = client.executeBlocking(ProductTypeQuery.of().withLimit(500L)).getResults();
         productTypes.forEach(productType -> deleteProductsProductTypeAndProductDiscounts(client, productType));
+    }
+
+
+    public static void withProductOfStock(final BlockingSphereClient client, final int availableQuantity, final Consumer<Product> productConsumer) {
+        withProductOfStockAndChannel(client, availableQuantity, null, productConsumer);
+    }
+
+    public static void withProductOfStockAndChannel(final BlockingSphereClient client, final int availableQuantity, @Nullable final Referenceable<Channel> channelReferenceable, final Consumer<Product> productConsumer) {
+        final Reference<Channel> channelReference = Optional.ofNullable(channelReferenceable).map(Referenceable::toReference).orElse(null);
+        ProductFixtures.withProduct(client, product -> {
+            final String sku = product.getMasterData().getStaged().getMasterVariant().getSku();
+            client.executeBlocking(InventoryEntryCreateCommand.of(InventoryEntryDraft.of(sku, availableQuantity, null, null, channelReference)));
+            productConsumer.accept(product);
+        });
     }
 }
