@@ -385,7 +385,13 @@ public class SphereExceptionIntegrationTest extends IntegrationTest {
     }
 
     @Test
-    public void permissionsExceeded() {
+    public void permissionsExceededImpl() {
+        if (!"false".equals(System.getenv("JVM_SDK_IT_SSL_VALIDATION"))) {
+            permissionsExceeded();
+        }
+    }
+
+    private void permissionsExceeded() {
         final List<SphereScope> scopes = singletonList(SphereProjectScope.VIEW_PRODUCTS);
         try(final SphereClient client = createClientWithScopes(scopes)) {
             assertThatThrownBy(() -> {
