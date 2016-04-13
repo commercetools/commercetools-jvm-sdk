@@ -81,9 +81,9 @@ public class ProductProjectionSearchFiltersIntegrationTest extends ProductProjec
     public void filterByEvilCharacterWord() throws Exception {
         final ProductProjectionSearch search = ProductProjectionSearch.ofStaged()
                 .plusQueryFilters(productModel -> productModel.allVariants().attribute().ofString(ATTR_NAME_EVIL).is(EVIL_CHARACTER_WORD));
-        assertEventually(Duration.ofSeconds(45), Duration.ofMillis(200), () -> {
+        assertEventually(Duration.ofSeconds(60), Duration.ofMillis(200), () -> {
             final PagedSearchResult<ProductProjection> result = executeEvilSearch(search);
-            assertThat(result.getTotal()).isEqualTo(1);
+            assertThat(result.getTotal()).as("total").isEqualTo(1);
         });
     }
 
