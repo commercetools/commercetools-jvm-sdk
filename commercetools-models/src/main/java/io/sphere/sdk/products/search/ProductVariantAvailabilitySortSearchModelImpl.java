@@ -7,7 +7,7 @@ import io.sphere.sdk.search.model.SortableSearchModel;
 
 import javax.annotation.Nullable;
 
-final class ProductVariantAvailabilitySortSearchModelImpl<T> extends SortableSearchModel<T, MultiValueSortSearchModel<T>> implements ProductVariantAvailabilitySortSearchModel<T> {
+final class ProductVariantAvailabilitySortSearchModelImpl<T> extends SortableSearchModel<T, MultiValueSortSearchModel<T>> implements ProductVariantAvailabilitySortSearchModel<T>, ChannelProductVariantAvailabilitySortSearchModel<T> {
     ProductVariantAvailabilitySortSearchModelImpl(@Nullable final SearchModel<T> parent, @Nullable final String pathSegment) {
         super(parent, pathSegment, MultiValueSortSearchModelFactory.of());
     }
@@ -15,5 +15,10 @@ final class ProductVariantAvailabilitySortSearchModelImpl<T> extends SortableSea
     @Override
     public MultiValueSortSearchModel<T> restockableInDays() {
         return searchModel("restockableInDays").sorted();
+    }
+
+    @Override
+    public ChannelsProductVariantAvailabilitySortSearchModel<T> channels() {
+        return new ChannelsProductVariantAvailabilitySortSearchModelImpl<>(this, "channels");
     }
 }

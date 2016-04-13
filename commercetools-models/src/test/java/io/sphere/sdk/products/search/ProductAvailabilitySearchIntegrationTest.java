@@ -106,4 +106,30 @@ public class ProductAvailabilitySearchIntegrationTest extends IntegrationTest {
             });
         });
     }
+
+    @Test
+    public void sortByRestockableInDaysWithSupplyChannel() {
+        withChannelOfRole(client(), ChannelRole.INVENTORY_SUPPLY, channel -> {
+            withProductOfRestockableInDaysAndChannel(client(), 4, channel, product4 -> {
+                withProductOfRestockableInDaysAndChannel(client(), 9, channel, product9 -> {
+                    final ProductProjectionSearch request = ProductProjectionSearch.ofStaged()
+                            .plusQueryFilters(m -> m.id().isIn(asList(product4.getId(), product9.getId())))
+                            .plusSort(m -> m.allVariants().availability().channels().channelId(channel.getId()).restockableInDays().asc());
+                    assertEventually(() -> {
+                        final PagedSearchResult<ProductProjection> res = client().executeBlocking(request);
+                        assertThat(res.getResults()).hasSize(2);
+                        assertThat(res.getResults().get(0).getId())
+                                .isEqualTo(product4.getId());
+                    });
+                });
+            });
+        });
+    }
+
+    @Test
+    public void channelsRestockableSortDsl() {
+        final StringHttpRequestBody body = (StringHttpRequestBody) ProductProjectionSearch.ofStaged().
+        plusSort(m -> m.allVariants().availability().channels().channelId("channel-id-500").restockableInDays().asc()).httpRequestIntent().getBody();
+        assertThat(body.getString()).contains("sort=variants.availability.channels.channel-id-500.restockableInDays+asc");
+    }
 }
