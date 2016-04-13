@@ -21,4 +21,9 @@ final class ProductVariantAvailabilitySortSearchModelImpl<T> extends SortableSea
     public ChannelsProductVariantAvailabilitySortSearchModel<T> channels() {
         return new ChannelsProductVariantAvailabilitySortSearchModelImpl<>(this, "channels");
     }
+
+    @Override
+    public MultiValueSortSearchModel<T> availableQuantity() {
+        return searchModel("availableQuantity").sorted();
+    }
 }

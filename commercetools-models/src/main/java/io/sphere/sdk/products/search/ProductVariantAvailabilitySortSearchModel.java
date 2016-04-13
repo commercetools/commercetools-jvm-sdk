@@ -6,5 +6,8 @@ public interface ProductVariantAvailabilitySortSearchModel<T> extends ProductVar
     @Override
     MultiValueSortSearchModel<T> restockableInDays();
 
+    @Override
+    MultiValueSortSearchModel<T> availableQuantity();
+
     ChannelsProductVariantAvailabilitySortSearchModel<T> channels();
 }

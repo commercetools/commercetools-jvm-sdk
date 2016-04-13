@@ -127,6 +127,25 @@ public class ProductAvailabilitySearchIntegrationTest extends IntegrationTest {
     }
 
     @Test
+    public void sortByAvailableQuantityWithSupplyChannel() {
+        withChannelOfRole(client(), ChannelRole.INVENTORY_SUPPLY, channel -> {
+            withProductOfStockAndChannel(client(), 10, channel, productWith10Items -> {*
+                withProductOfStockAndChannel(client(), 5, channel, productWith5Items -> {
+                    final ProductProjectionSearch request = ProductProjectionSearch.ofStaged()
+                            .plusQueryFilters(m -> m.id().isIn(asList(productWith5Items.getId(), productWith10Items.getId())))
+                            .plusSort(m -> m.allVariants().availability().channels().channelId(channel.getId()).availableQuantity().asc());
+                    assertEventually(() -> {
+                        final PagedSearchResult<ProductProjection> res = client().executeBlocking(request);
+                        assertThat(res.getResults()).hasSize(2);
+                        assertThat(res.getResults().get(0).getId())
+                                .isEqualTo(productWith5Items.getId());
+                    });
+                });
+            });
+        });
+    }
+
+    @Test
     public void channelsRestockableSortDsl() {
         final StringHttpRequestBody body = (StringHttpRequestBody) ProductProjectionSearch.ofStaged().
         plusSort(m -> m.allVariants().availability().channels().channelId("channel-id-500").restockableInDays().asc()).httpRequestIntent().getBody();
