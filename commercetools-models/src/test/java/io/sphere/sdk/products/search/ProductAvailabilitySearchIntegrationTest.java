@@ -1,13 +1,26 @@
 package io.sphere.sdk.products.search;
 
 import io.sphere.sdk.channels.ChannelRole;
+import io.sphere.sdk.client.BlockingSphereClient;
 import io.sphere.sdk.http.StringHttpRequestBody;
+import io.sphere.sdk.inventory.AvailabilityInfo;
+import io.sphere.sdk.inventory.AvailabilityInfoBuilder;
+import io.sphere.sdk.inventory.InventoryEntry;
+import io.sphere.sdk.inventory.InventoryEntryDraft;
+import io.sphere.sdk.inventory.commands.InventoryEntryCreateCommand;
+import io.sphere.sdk.inventory.commands.InventoryEntryDeleteCommand;
+import io.sphere.sdk.products.ProductFixtures;
 import io.sphere.sdk.products.ProductProjection;
+import io.sphere.sdk.products.ProductVariantAvailability;
 import io.sphere.sdk.search.PagedSearchResult;
 import io.sphere.sdk.test.IntegrationTest;
 import org.junit.Test;
 
 import java.math.BigDecimal;
+import java.time.ZonedDateTime;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import static io.sphere.sdk.channels.ChannelFixtures.withChannelOfRole;
 import static io.sphere.sdk.products.ProductFixtures.*;
@@ -167,5 +180,43 @@ public class ProductAvailabilitySearchIntegrationTest extends IntegrationTest {
         final StringHttpRequestBody body = (StringHttpRequestBody) ProductProjectionSearch.ofStaged().
         plusSort(m -> m.allVariants().availability().channels().channelId("channel-id-500").restockableInDays().asc()).httpRequestIntent().getBody();
         assertThat(body.getString()).contains("sort=variants.availability.channels.channel-id-500.restockableInDays+asc");
+    }
+
+    @Test
+    public void newProductVariantFields() {
+        withChannelOfRole(client(), ChannelRole.INVENTORY_SUPPLY, channel1 -> {
+            withChannelOfRole(client(), ChannelRole.INVENTORY_SUPPLY, channel2 -> {
+                final BlockingSphereClient client = client();
+                ProductFixtures.withProduct(client, product -> {
+                    final String sku = product.getMasterData().getStaged().getMasterVariant().getSku();
+                    final InventoryEntry inventoryEntry1 = client.executeBlocking(InventoryEntryCreateCommand.of(InventoryEntryDraft.of(sku, 4, null, 6, channel1)));
+                    final InventoryEntry inventoryEntry2 = client.executeBlocking(InventoryEntryCreateCommand.of(InventoryEntryDraft.of(sku, 2, ZonedDateTime.now().plusDays(3), 40, channel2)));
+                    final InventoryEntry inventoryEntry3 = client.executeBlocking(InventoryEntryCreateCommand.of(InventoryEntryDraft.of(sku, 3, ZonedDateTime.now().plusDays(7), 80, null)));
+
+                    final ProductProjectionSearch search = ProductProjectionSearch.ofStaged()
+                            .withQueryFilters(m -> m.id().is(product.getId()));
+                    assertEventually(() -> {
+                        final List<ProductProjection> results = client.executeBlocking(search).getResults();
+                        assertThat(results).hasSize(1);
+                        final ProductProjection productProjection = results.get(0);
+                        final ProductVariantAvailability availability = productProjection.getMasterVariant().getAvailability();
+                        assertThat(availability).isNotNull();
+                        assertThat(availability.isOnStock()).as("isOnStock").isTrue();
+                        assertThat(availability.getRestockableInDays()).as("getRestockableInDays").isEqualTo(80);
+                        assertThat(availability.getAvailableQuantity()).as("getAvailableQuantity").isEqualTo(3);
+                        final AvailabilityInfo availabilityInfo1 = AvailabilityInfoBuilder.of().availableQuantity(4L).isOnStock(true).restockableInDays(6).build();
+                        final AvailabilityInfo availabilityInfo2 = AvailabilityInfoBuilder.of().availableQuantity(2L).isOnStock(true).restockableInDays(40).build();
+                        final Map<String, AvailabilityInfo> channels = new HashMap<>();
+                        channels.put(channel1.getId(), availabilityInfo1);
+                        channels.put(channel2.getId(), availabilityInfo2);
+                        assertThat(availability.getChannels()).as("channels").isEqualTo(channels);
+
+                    });
+                    client.executeBlocking(InventoryEntryDeleteCommand.of(inventoryEntry1));
+                    client.executeBlocking(InventoryEntryDeleteCommand.of(inventoryEntry2));
+                    client.executeBlocking(InventoryEntryDeleteCommand.of(inventoryEntry3));
+                });
+            });
+        });
     }
 }

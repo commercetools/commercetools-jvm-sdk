@@ -52,7 +52,6 @@ public interface ProductVariant extends AttributeContainer {
     /**
      * The availability is set if the variant is tracked by the inventory. The field might not contain the latest
      * inventory state (it is eventually consistent) and can be used as an optimization to reduce calls to the inventory service.
-     * Notice that availability is not set when using the ProductProjection Search endpoint.
      *
      * @return availability
      */
