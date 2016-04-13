@@ -18,4 +18,8 @@ public final class ProductVariantSortSearchModel extends SortableSearchModel<Pro
     public MultiValueSortSearchModel<ProductProjection> price() {
         return searchModel(/*sic! price is at top level*/null, "price").sorted();
     }
+
+    public ProductVariantAvailabilitySortSearchModel<ProductProjection> availability() {
+        return new ProductVariantAvailabilitySortSearchModelImpl<>(this, "availability");
+    }
 }

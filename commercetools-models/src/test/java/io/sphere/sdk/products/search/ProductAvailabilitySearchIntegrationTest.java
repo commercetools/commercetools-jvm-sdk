@@ -10,8 +10,7 @@ import org.junit.Test;
 import java.math.BigDecimal;
 
 import static io.sphere.sdk.channels.ChannelFixtures.withChannelOfRole;
-import static io.sphere.sdk.products.ProductFixtures.withProductOfStock;
-import static io.sphere.sdk.products.ProductFixtures.withProductOfStockAndChannel;
+import static io.sphere.sdk.products.ProductFixtures.*;
 import static io.sphere.sdk.test.SphereTestUtils.assertEventually;
 import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -89,5 +88,22 @@ public class ProductAvailabilitySearchIntegrationTest extends IntegrationTest {
                 m.allVariants().availability().channels().channelId("channel-id-12")
                         .availableQuantity().isGreaterThanOrEqualTo(new BigDecimal(3))).httpRequestIntent().getBody();
         assertThat(body.getString()).contains("filter.query=variants.availability.channels.channel-id-12.availableQuantity%3Arange%283+to+*%29");
+    }
+
+    @Test
+    public void sortByRestockableInDays() {
+        withProductOfRestockableInDaysAndChannel(client(), 4, null, product4 -> {
+            withProductOfRestockableInDaysAndChannel(client(), 9, null, product9 -> {
+                final ProductProjectionSearch request = ProductProjectionSearch.ofStaged()
+                        .plusQueryFilters(m -> m.id().isIn(asList(product4.getId(), product9.getId())))
+                        .plusSort(m -> m.allVariants().availability().restockableInDays().asc());
+                assertEventually(() -> {
+                    final PagedSearchResult<ProductProjection> res = client().executeBlocking(request);
+                    assertThat(res.getResults()).hasSize(2);
+                    assertThat(res.getResults().get(0).getId())
+                            .isEqualTo(product4.getId());
+                });
+            });
+        });
     }
 }

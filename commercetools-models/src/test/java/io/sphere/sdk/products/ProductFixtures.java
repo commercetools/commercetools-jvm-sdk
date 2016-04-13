@@ -286,4 +286,14 @@ public class ProductFixtures {
             client.executeBlocking(InventoryEntryDeleteCommand.of(inventoryEntry));
         });
     }
+
+    public static void withProductOfRestockableInDaysAndChannel(final BlockingSphereClient client, final int restockableInDays, @Nullable final Referenceable<Channel> channelReferenceable, final Consumer<Product> productConsumer) {
+        final Reference<Channel> channelReference = Optional.ofNullable(channelReferenceable).map(Referenceable::toReference).orElse(null);
+        ProductFixtures.withProduct(client, product -> {
+            final String sku = product.getMasterData().getStaged().getMasterVariant().getSku();
+            final InventoryEntry inventoryEntry = client.executeBlocking(InventoryEntryCreateCommand.of(InventoryEntryDraft.of(sku, 5, null, restockableInDays, channelReference)));
+            productConsumer.accept(product);
+            client.executeBlocking(InventoryEntryDeleteCommand.of(inventoryEntry));
+        });
+    }
 }
