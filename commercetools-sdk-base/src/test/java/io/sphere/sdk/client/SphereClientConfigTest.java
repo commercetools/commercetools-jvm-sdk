@@ -5,7 +5,8 @@ import org.junit.Test;
 import java.util.HashMap;
 import java.util.Map;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class SphereClientConfigTest {
     @Test
@@ -83,7 +84,8 @@ public class SphereClientConfigTest {
                 "export foo_CLIENT_SECRET=\"YOUR client secret\"\n" +
                 "#optional:\n" +
                 "export foo_API_URL=\"https://api.sphere.io\"\n" +
-                "export foo_AUTH_URL=\"https://auth.sphere.io\"";
+                "export foo_AUTH_URL=\"https://auth.sphere.io\"\n" +
+                "export foo_SCOPES=\"manage_project\"";
         assertThatThrownBy(() -> SphereClientConfigUtils.ofEnvironmentVariables("foo", key -> null))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(expectedMessage);

@@ -1,6 +1,7 @@
 package io.sphere.sdk.client;
 
 import io.sphere.sdk.customers.Customer;
+import io.sphere.sdk.customers.CustomerFixtures;
 import io.sphere.sdk.customers.queries.CustomerQuery;
 import io.sphere.sdk.products.ProductProjection;
 import io.sphere.sdk.products.queries.ProductProjectionQuery;
@@ -72,7 +73,8 @@ public class TokensFacadeIntegrationTest extends IntegrationTest {
                     .scopes(singletonList(SphereProjectScope.VIEW_PRODUCTS))
                     .build();
             final String email = customer.getEmail();
-            final String pw = customer.getPassword();
+//            final String pw = customer.getPassword();//won;t work since it is obfusciated
+            final String pw = CustomerFixtures.PASSWORD;
             final Tokens tokens = blockingWait(TokensFacade.
                     fetchCustomerPasswordFlowTokens(authConfig, email, pw), 2, SECONDS);
             final String accessToken = tokens.getAccessToken();

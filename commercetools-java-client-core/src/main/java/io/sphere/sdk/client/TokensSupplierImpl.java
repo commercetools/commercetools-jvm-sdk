@@ -100,7 +100,11 @@ final class TokensSupplierImpl extends AutoCloseableService implements TokensSup
             data.put("password", password);
         }
         final FormUrlEncodedHttpRequestBody body = FormUrlEncodedHttpRequestBody.ofStringMap(data);
-        return HttpRequest.of(POST, config.getAuthUrl() + "/oauth/token", httpHeaders, body);
+        final String url = isPasswordFlow()
+                ? config.getAuthUrl() + "/oauth/" + projectKey + "/customers/token"
+                : config.getAuthUrl() + "/oauth/token";
+        final HttpRequest httpRequest = HttpRequest.of(POST, url, httpHeaders, body);
+        return httpRequest;
     }
 
     /** Parses Tokens from a response from the backend authorization service.
