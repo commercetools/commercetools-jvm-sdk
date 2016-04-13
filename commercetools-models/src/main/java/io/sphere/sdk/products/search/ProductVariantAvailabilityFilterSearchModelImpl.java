@@ -9,19 +9,19 @@ import io.sphere.sdk.search.model.TermFilterSearchModel;
 import javax.annotation.Nullable;
 import java.math.BigDecimal;
 
-final class ProductVariantAvailabilityFilterSearchModelImpl extends SearchModelImpl<ProductProjection> implements ProductVariantAvailabilityFilterSearchModel {
+final class ProductVariantAvailabilityFilterSearchModelImpl<T> extends SearchModelImpl<T> implements ProductVariantAvailabilityFilterSearchModel<T> {
 
-    ProductVariantAvailabilityFilterSearchModelImpl(@Nullable final SearchModel<ProductProjection> parent, @Nullable final String pathSegment) {
+    ProductVariantAvailabilityFilterSearchModelImpl(@Nullable final SearchModel<T> parent, @Nullable final String pathSegment) {
         super(parent, pathSegment);
     }
 
     @Override
-    public TermFilterSearchModel<ProductProjection, Boolean> isOnStock() {
+    public TermFilterSearchModel<T, Boolean> isOnStock() {
         return booleanSearchModel("isOnStock").filtered();
     }
 
     @Override
-    public RangeTermFilterSearchModel<ProductProjection, BigDecimal> availableQuantity() {
+    public RangeTermFilterSearchModel<T, BigDecimal> availableQuantity() {
         return numberSearchModel("availableQuantity").filtered();
     }
 }
