@@ -8,9 +8,7 @@
 
 [](the link definitions are at the bottom)
 
-[SPHERE.IO](http://sphere.io) is the first Platform-as-a-Service solution for eCommerce.
-
-The JVM SDK enables developers to use Java 8 methods and objects to communicate with SPHERE.IO rather than using plain HTTP calls.
+The JVM SDK enables developers to use Java 8 methods and objects to communicate with the [commercetools platform](http://www.commercetools.com/) rather than using plain HTTP calls.
 Users gain type-safety, encapsulation, IDE auto completion and an internal domain specific language to discover and formulate valid requests.
 
 ## Using the SDK 

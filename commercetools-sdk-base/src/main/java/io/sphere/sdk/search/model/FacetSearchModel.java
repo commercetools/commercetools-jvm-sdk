@@ -13,6 +13,12 @@ import javax.annotation.Nullable;
 public interface FacetSearchModel<T, V> {
 
     /**
+     * The search model for the facet.
+     * @return the facet search model
+     */
+    SearchModel<T> getSearchModel();
+
+    /**
      * The alias related to the facet.
      * @return the facet alias
      */

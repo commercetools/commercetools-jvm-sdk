@@ -12,6 +12,12 @@ import java.util.List;
 public interface FilterSearchModel<T, V> {
 
     /**
+     * The search model for the filter.
+     * @return the filter search model
+     */
+    SearchModel<T> getSearchModel();
+
+    /**
      * Generates an expression to select all elements with the given attribute value.
      * For example: filtering by "red" would select only those elements with "red" value.
      * @param value the value to filter by
