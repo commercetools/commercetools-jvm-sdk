@@ -5,8 +5,10 @@ import io.sphere.sdk.channels.Channel;
 import io.sphere.sdk.client.BlockingSphereClient;
 import io.sphere.sdk.client.ConcurrentModificationException;
 import io.sphere.sdk.client.SphereClientUtils;
+import io.sphere.sdk.inventory.InventoryEntry;
 import io.sphere.sdk.inventory.InventoryEntryDraft;
 import io.sphere.sdk.inventory.commands.InventoryEntryCreateCommand;
+import io.sphere.sdk.inventory.commands.InventoryEntryDeleteCommand;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Referenceable;
 import io.sphere.sdk.models.Versioned;
@@ -279,8 +281,9 @@ public class ProductFixtures {
         final Reference<Channel> channelReference = Optional.ofNullable(channelReferenceable).map(Referenceable::toReference).orElse(null);
         ProductFixtures.withProduct(client, product -> {
             final String sku = product.getMasterData().getStaged().getMasterVariant().getSku();
-            client.executeBlocking(InventoryEntryCreateCommand.of(InventoryEntryDraft.of(sku, availableQuantity, null, null, channelReference)));
+            final InventoryEntry inventoryEntry = client.executeBlocking(InventoryEntryCreateCommand.of(InventoryEntryDraft.of(sku, availableQuantity, null, null, channelReference)));
             productConsumer.accept(product);
+            client.executeBlocking(InventoryEntryDeleteCommand.of(inventoryEntry));
         });
     }
 }

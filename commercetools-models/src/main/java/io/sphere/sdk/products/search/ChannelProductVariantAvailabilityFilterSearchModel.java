@@ -5,11 +5,9 @@ import io.sphere.sdk.search.model.TermFilterSearchModel;
 
 import java.math.BigDecimal;
 
-public interface ProductVariantAvailabilityFilterSearchModel<T> extends ProductVariantAvailabilityFilterSearchModelCommon<T> {
+public interface ChannelProductVariantAvailabilityFilterSearchModel<T> extends ProductVariantAvailabilityFilterSearchModelCommon<T> {
 
     TermFilterSearchModel<T, Boolean> isOnStock();
 
     RangeTermFilterSearchModel<T, BigDecimal> availableQuantity();
-
-    ChannelsProductVariantAvailabilityFilterSearchModel<T> channels();
 }

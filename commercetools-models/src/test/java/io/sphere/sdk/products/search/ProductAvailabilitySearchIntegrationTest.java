@@ -1,5 +1,7 @@
 package io.sphere.sdk.products.search;
 
+import io.sphere.sdk.channels.ChannelRole;
+import io.sphere.sdk.http.StringHttpRequestBody;
 import io.sphere.sdk.products.ProductProjection;
 import io.sphere.sdk.search.PagedSearchResult;
 import io.sphere.sdk.test.IntegrationTest;
@@ -7,7 +9,9 @@ import org.junit.Test;
 
 import java.math.BigDecimal;
 
+import static io.sphere.sdk.channels.ChannelFixtures.withChannelOfRole;
 import static io.sphere.sdk.products.ProductFixtures.withProductOfStock;
+import static io.sphere.sdk.products.ProductFixtures.withProductOfStockAndChannel;
 import static io.sphere.sdk.test.SphereTestUtils.assertEventually;
 import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -55,5 +59,35 @@ public class ProductAvailabilitySearchIntegrationTest extends IntegrationTest {
             });
         });
         });
+    }
+
+    @Test
+    public void searchForAvailableQuantityRangesInChannels() {
+        withChannelOfRole(client(), ChannelRole.INVENTORY_SUPPLY, channel -> {
+            withProductOfStockAndChannel(client(), 10, channel, productWith10Items -> {
+                withProductOfStockAndChannel(client(), 5, channel, productWith5Items -> {
+                    final ProductProjectionSearch request = ProductProjectionSearch.ofStaged()
+                            .plusQueryFilters(m -> m.id().isIn(asList(productWith10Items.getId(), productWith5Items.getId())))
+                            .plusQueryFilters(m ->
+                                    m.allVariants().availability().channels().channelId(channel.getId())
+                                            .availableQuantity().isGreaterThanOrEqualTo(new BigDecimal(6)));
+                    assertEventually(() -> {
+                        final PagedSearchResult<ProductProjection> res = client().executeBlocking(request);
+                        assertThat(res.getResults()).hasSize(1);
+                        assertThat(res.getResults().get(0).getId())
+                                .as("finds only the product with the sufficient amount stocked")
+                                .isEqualTo(productWith10Items.getId());
+                    });
+                });
+            });
+        });
+    }
+
+    @Test
+    public void channelsFilterDsl() {
+        final StringHttpRequestBody body = (StringHttpRequestBody) ProductProjectionSearch.ofStaged().plusQueryFilters(m ->
+                m.allVariants().availability().channels().channelId("channel-id-12")
+                        .availableQuantity().isGreaterThanOrEqualTo(new BigDecimal(3))).httpRequestIntent().getBody();
+        assertThat(body.getString()).contains("filter.query=variants.availability.channels.channel-id-12.availableQuantity%3Arange%283+to+*%29");
     }
 }
