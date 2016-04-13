@@ -1,11 +1,13 @@
 package io.sphere.sdk.products.search;
 
 import io.sphere.sdk.products.ProductProjection;
+import io.sphere.sdk.search.model.RangeTermFilterSearchModel;
 import io.sphere.sdk.search.model.SearchModel;
 import io.sphere.sdk.search.model.SearchModelImpl;
 import io.sphere.sdk.search.model.TermFilterSearchModel;
 
 import javax.annotation.Nullable;
+import java.math.BigDecimal;
 
 final class ProductVariantAvailabilityFilterSearchModelImpl extends SearchModelImpl<ProductProjection> implements ProductVariantAvailabilityFilterSearchModel {
 
@@ -16,5 +18,10 @@ final class ProductVariantAvailabilityFilterSearchModelImpl extends SearchModelI
     @Override
     public TermFilterSearchModel<ProductProjection, Boolean> isOnStock() {
         return booleanSearchModel("isOnStock").filtered();
+    }
+
+    @Override
+    public RangeTermFilterSearchModel<ProductProjection, BigDecimal> availableQuantity() {
+        return numberSearchModel("availableQuantity").filtered();
     }
 }
