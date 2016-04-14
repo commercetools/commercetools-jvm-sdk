@@ -17,4 +17,4 @@ notifications:
 branches:
   only:
     - master
-    - build/1063/parallelize-tests
+    - feature/1089/product-availability-per-channel
