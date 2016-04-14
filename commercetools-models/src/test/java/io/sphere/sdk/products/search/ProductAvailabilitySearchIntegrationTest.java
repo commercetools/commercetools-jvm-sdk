@@ -43,6 +43,22 @@ public class ProductAvailabilitySearchIntegrationTest extends IntegrationTest {
     }
 
     @Test
+    public void searchForIsOnStockWithChannel() {
+        withChannelOfRole(client(), ChannelRole.INVENTORY_SUPPLY, channel -> {
+            withProductOfStockAndChannel(client(), 2, channel, product -> {
+                final ProductProjectionSearch request = ProductProjectionSearch.ofStaged()
+                        .plusQueryFilters(m -> m.id().is(product.getId()))
+                        .plusQueryFilters(m -> m.allVariants().availability()
+                                .channels().channelId(channel.getId()).isOnStock().is(true));
+                assertEventually(() -> {
+                    final PagedSearchResult<ProductProjection> res = client().executeBlocking(request);
+                    assertThat(res.getResults()).hasSize(1);
+                });
+            });
+        });
+    }
+
+    @Test
     public void searchForIsNotOnStock() {
         withProductOfStock(client(), 0, product -> {
             final ProductProjectionSearch request = ProductProjectionSearch.ofStaged()
@@ -58,18 +74,18 @@ public class ProductAvailabilitySearchIntegrationTest extends IntegrationTest {
     @Test
     public void searchForAvailableQuantityRanges() {
         withProductOfStock(client(), 10, productWith10Items -> {
-        withProductOfStock(client(), 5, productWith5Items -> {
-            final ProductProjectionSearch request = ProductProjectionSearch.ofStaged()
-                    .plusQueryFilters(m -> m.id().isIn(asList(productWith10Items.getId(), productWith5Items.getId())))
-                    .plusQueryFilters(m -> m.allVariants().availability().availableQuantity().isGreaterThanOrEqualTo(new BigDecimal(6)));
-            assertEventually(() -> {
-                final PagedSearchResult<ProductProjection> res = client().executeBlocking(request);
-                assertThat(res.getResults()).hasSize(1);
-                assertThat(res.getResults().get(0).getId())
-                        .as("finds only the product with the sufficient amount stocked")
-                        .isEqualTo(productWith10Items.getId());
+            withProductOfStock(client(), 5, productWith5Items -> {
+                final ProductProjectionSearch request = ProductProjectionSearch.ofStaged()
+                        .plusQueryFilters(m -> m.id().isIn(asList(productWith10Items.getId(), productWith5Items.getId())))
+                        .plusQueryFilters(m -> m.allVariants().availability().availableQuantity().isGreaterThanOrEqualTo(new BigDecimal(6)));
+                assertEventually(() -> {
+                    final PagedSearchResult<ProductProjection> res = client().executeBlocking(request);
+                    assertThat(res.getResults()).hasSize(1);
+                    assertThat(res.getResults().get(0).getId())
+                            .as("finds only the product with the sufficient amount stocked")
+                            .isEqualTo(productWith10Items.getId());
+                });
             });
-        });
         });
     }
 

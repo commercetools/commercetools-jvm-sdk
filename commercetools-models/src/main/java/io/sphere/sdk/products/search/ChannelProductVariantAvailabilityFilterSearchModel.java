@@ -7,7 +7,9 @@ import java.math.BigDecimal;
 
 public interface ChannelProductVariantAvailabilityFilterSearchModel<T> extends ProductVariantAvailabilityFilterSearchModelCommon<T> {
 
+    @Override
     TermFilterSearchModel<T, Boolean> isOnStock();
 
+    @Override
     RangeTermFilterSearchModel<T, BigDecimal> availableQuantity();
 }
