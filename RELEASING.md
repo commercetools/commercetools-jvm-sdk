@@ -17,3 +17,7 @@
 1. `mvn release:rollback`
 1.  may remove tag (example): `git tag -d v1.0.0-RC3 && git push origin :refs/tags/v1.0.0-RC3`
 1. `mvn release:clean`
+
+## location of artefacts
+* https://oss.sonatype.org/content/repositories/snapshots/com/commercetools/sdk/jvm/core/commercetools-models/
+* http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22commercetools-models%22
