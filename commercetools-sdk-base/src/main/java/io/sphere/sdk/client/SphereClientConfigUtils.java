@@ -19,7 +19,7 @@ final class SphereClientConfigUtils {
     public static SphereClientConfig ofEnvironmentVariables(final String prefix, final Function<String, String> getEnvironmentVariable) {
         Objects.requireNonNull(prefix);
 
-        final Map<String, String> configMap = asList(ENVIRONMENT_VARIABLE_API_URL_SUFFIX, ENVIRONMENT_VARIABLE_AUTH_URL_SUFFIX, ENVIRONMENT_VARIABLE_PROJECT_KEY_SUFFIX, ENVIRONMENT_VARIABLE_CLIENT_ID_SUFFIX, ENVIRONMENT_VARIABLE_CLIENT_SECRET_SUFFIX).stream()
+        final Map<String, String> configMap = asList(ENVIRONMENT_VARIABLE_API_URL_SUFFIX, ENVIRONMENT_VARIABLE_AUTH_URL_SUFFIX, ENVIRONMENT_VARIABLE_PROJECT_KEY_SUFFIX, ENVIRONMENT_VARIABLE_CLIENT_ID_SUFFIX, ENVIRONMENT_VARIABLE_CLIENT_SECRET_SUFFIX, ENVIRONMENT_VARIABLE_SCOPES_SUFFIX).stream()
                 .map(suffix -> {
                     final String key = buildEnvKey(prefix, suffix);
                     final String nullableValue = getEnvironmentVariable.apply(key);
