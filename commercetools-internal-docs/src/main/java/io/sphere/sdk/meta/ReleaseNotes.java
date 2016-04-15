@@ -39,7 +39,6 @@ import io.sphere.sdk.products.*;
 import io.sphere.sdk.products.attributes.Attribute;
 import io.sphere.sdk.products.attributes.AttributeAccess;
 import io.sphere.sdk.products.attributes.AttributeDefinition;
-import io.sphere.sdk.products.commands.updateactions.LegacySetSku;
 import io.sphere.sdk.products.commands.updateactions.SetMetaDescription;
 import io.sphere.sdk.products.commands.updateactions.SetMetaKeywords;
 import io.sphere.sdk.products.commands.updateactions.SetMetaTitle;
@@ -104,7 +103,7 @@ import java.util.function.Function;
  <li class=new-in-release>product search sort expressions for product availability, see {@link ProductVariantAvailabilitySortSearchModel#restockableInDays()} and {@link ProductVariantAvailabilitySortSearchModel#availableQuantity()}</li>
  <li class=change-in-release>The class {@link io.sphere.sdk.products.commands.updateactions.SetSku} executes the action {@code setSku} which is staged,
   previous to this version it was {@code setSKU} (upper case 'K' and 'U')
-  which updates in staged and current and has been moved to the deprecated class {@link LegacySetSku}.
+  which updates in staged and current and has been moved to the deprecated class {@code LegacySetSku}.
   See also <a href="http://dev.commercetools.com/http-api-projects-products.html#set-sku" target="_blank">the HTTP API doc of SetSku.</a></li>
  <li class=change-in-release>{@link io.sphere.sdk.customers.commands.CustomerCreateEmailTokenCommand}, {@link io.sphere.sdk.customers.commands.CustomerVerifyEmailCommand} and {@link io.sphere.sdk.customers.commands.CustomerPasswordResetCommand} do not use anymore optimistic concurrency control,
  so it won't fail with {@link io.sphere.sdk.client.ConcurrentModificationException} and it is not necessary to load the customer version.
