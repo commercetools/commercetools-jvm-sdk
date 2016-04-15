@@ -13,10 +13,14 @@ import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.categories.CategoryDraft;
 import io.sphere.sdk.channels.queries.ChannelByIdGet;
 import io.sphere.sdk.client.SphereApiConfig;
+import io.sphere.sdk.client.SphereAuthConfig;
 import io.sphere.sdk.client.SphereClient;
 import io.sphere.sdk.client.SphereRequest;
 import io.sphere.sdk.commands.UpdateActionImpl;
 import io.sphere.sdk.commands.UpdateCommand;
+import io.sphere.sdk.customers.commands.CustomerCreateEmailTokenCommand;
+import io.sphere.sdk.customers.commands.CustomerPasswordResetCommand;
+import io.sphere.sdk.customers.commands.CustomerVerifyEmailCommand;
 import io.sphere.sdk.customobjects.CustomObject;
 import io.sphere.sdk.customobjects.commands.CustomObjectDeleteCommand;
 import io.sphere.sdk.customobjects.queries.CustomObjectByKeyGet;
@@ -35,12 +39,15 @@ import io.sphere.sdk.products.*;
 import io.sphere.sdk.products.attributes.Attribute;
 import io.sphere.sdk.products.attributes.AttributeAccess;
 import io.sphere.sdk.products.attributes.AttributeDefinition;
+import io.sphere.sdk.products.commands.updateactions.LegacySetSku;
 import io.sphere.sdk.products.commands.updateactions.SetMetaDescription;
 import io.sphere.sdk.products.commands.updateactions.SetMetaKeywords;
 import io.sphere.sdk.products.commands.updateactions.SetMetaTitle;
 import io.sphere.sdk.products.expansion.ProductProjectionExpansionModel;
 import io.sphere.sdk.products.queries.*;
 import io.sphere.sdk.products.search.PriceSelection;
+import io.sphere.sdk.products.search.ProductVariantAvailabilityFilterSearchModel;
+import io.sphere.sdk.products.search.ProductVariantAvailabilitySortSearchModel;
 import io.sphere.sdk.products.search.ProductVariantFilterSearchModel;
 import io.sphere.sdk.producttypes.ProductType;
 import io.sphere.sdk.producttypes.ProductTypeDraft;
@@ -87,6 +94,35 @@ import java.util.function.Function;
  <li class=fixed-in-release></li>
  </ul>
  -->
+
+ <h3 class=released-version id="v1_0_0_RC5">1.0.0-RC5 (15.04.2016)</h3>
+ <ul>
+ <li class=new-in-release>Add getter in Facet, Filter and FacetedSearch models to access the internal {@link io.sphere.sdk.search.model.SearchModel}.</li>
+ <li class=new-in-release>{@link io.sphere.sdk.client.TokensFacade#fetchCustomerPasswordFlowTokens(SphereAuthConfig, String, String)} to get the access token for a customer for example to give the token to a mobile app</li>
+ <li class=new-in-release>{@link SphereAuthConfig#getScopes()} to configure the scope of the access token</li>
+ <li class=new-in-release>product search filters for product availability, see {@link io.sphere.sdk.products.search.ProductVariantAvailabilityFilterSearchModel#isOnStock()} and  {@link io.sphere.sdk.products.search.ProductVariantAvailabilityFilterSearchModel#availableQuantity()}</li>
+ <li class=new-in-release>product search sort expressions for product availability, see {@link ProductVariantAvailabilitySortSearchModel#restockableInDays()} and {@link ProductVariantAvailabilitySortSearchModel#availableQuantity()}</li>
+ <li class=change-in-release>The class {@link io.sphere.sdk.products.commands.updateactions.SetSku} executes the action {@code setSku} which is staged,
+  previous to this version it was {@code setSKU} (upper case 'K' and 'U')
+  which updates in staged and current and has been moved to the deprecated class {@link LegacySetSku}.
+  See also <a href="http://dev.commercetools.com/http-api-projects-products.html#set-sku" target="_blank">the HTTP API doc of SetSku.</a></li>
+ <li class=change-in-release>{@link io.sphere.sdk.customers.commands.CustomerCreateEmailTokenCommand}, {@link io.sphere.sdk.customers.commands.CustomerVerifyEmailCommand} and {@link io.sphere.sdk.customers.commands.CustomerPasswordResetCommand} do not use anymore optimistic concurrency control,
+ so it won't fail with {@link io.sphere.sdk.client.ConcurrentModificationException} and it is not necessary to load the customer version.
+ <br>Deprecated methods:
+ <ul>
+ <li>{@link CustomerCreateEmailTokenCommand#getVersion()}</li>
+ <li>{@link io.sphere.sdk.customers.commands.CustomerPasswordResetCommand#of(io.sphere.sdk.models.Versioned, java.lang.String, java.lang.String)}</li>
+ <li>{@link CustomerPasswordResetCommand#of(io.sphere.sdk.models.Versioned, io.sphere.sdk.customers.CustomerToken, java.lang.String)}</li>
+ <li>{@link CustomerPasswordResetCommand#getId()}</li>
+ <li>{@link CustomerPasswordResetCommand#getVersion()}</li>
+ <li>{@link CustomerVerifyEmailCommand#of(io.sphere.sdk.models.Versioned, java.lang.String)}</li>
+ <li>{@link CustomerVerifyEmailCommand#of(io.sphere.sdk.models.Versioned, io.sphere.sdk.customers.CustomerToken)}</li>
+ <li>{@link CustomerVerifyEmailCommand#getId()}</li>
+ <li>{@link CustomerVerifyEmailCommand#getVersion()}</li>
+ </ul>
+ <br>We don't intend to delete these methods soon (later after 1.0.0).</li>
+ <li class=fixed-in-release>{@link io.sphere.sdk.producttypes.queries.ProductTypeQueryBuilder} was a builder for {@link io.sphere.sdk.categories.queries.CategoryQuery}, it builds now {@link io.sphere.sdk.producttypes.queries.ProductTypeQuery}.</li>
+ </ul>
 
  <h3 class=released-version id="v1_0_0_RC4">1.0.0-RC4 (18.03.2016)</h3>
 
@@ -596,7 +632,7 @@ import java.util.function.Function;
 
  <h3 class=released-version id=v1_0_0_M14>1.0.0-M14 (27.05.2015)</h3>
  <ul>
- <li class=new-in-release>New fields in {@link io.sphere.sdk.products.Price}: {@link io.sphere.sdk.products.Price#validFrom} and {@link io.sphere.sdk.products.Price#validUntil}.</li>
+ <li class=new-in-release>New fields in {@link io.sphere.sdk.products.Price}: {@link Price#getValidFrom()} and {@link Price#getValidUntil()}.</li>
  <li class=new-in-release>Use {@link io.sphere.sdk.products.queries.ProductProjectionQueryModel#allVariants()} to formulate a predicate for all variants. In SPHERE.IO the json fields masterVariant (object) and variants (array of objects) together contain all variants.</li>
  <li class=new-in-release>Using {@link ProductProjectionQuery#ofCurrent()} and {@link ProductProjectionQuery#ofStaged()} saves you the import of {@link ProductProjectionType}.</li>
  <li class=new-in-release>{@link CompletionStage} does not support by default timeouts which are quite important in a reactive application so you can decorate the {@link io.sphere.sdk.client.SphereClient} with {@link io.sphere.sdk.client.TimeoutSphereClientDecorator} to get a {@link java.util.concurrent.TimeoutException} after a certain amount of time. But this does NOT cancel the request to SPHERE.IO.</li>
