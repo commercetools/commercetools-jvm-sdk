@@ -227,10 +227,10 @@ public class ProductAvailabilitySearchIntegrationTest extends IntegrationTest {
                         channels.put(channel2.getId(), availabilityInfo2);
                         assertThat(availability.getChannels()).as("channels").isEqualTo(channels);
 
+                        client.executeBlocking(InventoryEntryDeleteCommand.of(inventoryEntry1));
+                        client.executeBlocking(InventoryEntryDeleteCommand.of(inventoryEntry2));
+                        client.executeBlocking(InventoryEntryDeleteCommand.of(inventoryEntry3));
                     });
-                    client.executeBlocking(InventoryEntryDeleteCommand.of(inventoryEntry1));
-                    client.executeBlocking(InventoryEntryDeleteCommand.of(inventoryEntry2));
-                    client.executeBlocking(InventoryEntryDeleteCommand.of(inventoryEntry3));
                 });
             });
         });
