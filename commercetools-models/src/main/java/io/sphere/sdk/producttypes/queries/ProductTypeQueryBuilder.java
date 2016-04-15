@@ -1,10 +1,8 @@
 package io.sphere.sdk.producttypes.queries;
 
-import io.sphere.sdk.categories.Category;
-import io.sphere.sdk.categories.expansion.CategoryExpansionModel;
-import io.sphere.sdk.categories.queries.CategoryQuery;
-import io.sphere.sdk.categories.queries.CategoryQueryModel;
 import io.sphere.sdk.expansion.ExpansionPathContainer;
+import io.sphere.sdk.producttypes.ProductType;
+import io.sphere.sdk.producttypes.expansion.ProductTypeExpansionModel;
 import io.sphere.sdk.queries.QueryPredicate;
 import io.sphere.sdk.queries.QuerySort;
 import io.sphere.sdk.queries.ResourceMetaModelQueryDslBuilderImpl;
@@ -17,14 +15,14 @@ import java.util.function.Function;
  {@doc.gen summary }
 
  */
-public final class ProductTypeQueryBuilder extends ResourceMetaModelQueryDslBuilderImpl<ProductTypeQueryBuilder, Category, CategoryQuery, CategoryQueryModel, CategoryExpansionModel<Category>> {
+public final class ProductTypeQueryBuilder extends ResourceMetaModelQueryDslBuilderImpl<ProductTypeQueryBuilder, ProductType, ProductTypeQuery, ProductTypeQueryModel, ProductTypeExpansionModel<ProductType>> {
 
-    private ProductTypeQueryBuilder(final CategoryQuery template) {
+    private ProductTypeQueryBuilder(final ProductTypeQuery template) {
         super(template);
     }
 
     public static ProductTypeQueryBuilder of() {
-        return new ProductTypeQueryBuilder(CategoryQuery.of());
+        return new ProductTypeQueryBuilder(ProductTypeQuery.of());
     }
 
     @Override
@@ -33,7 +31,7 @@ public final class ProductTypeQueryBuilder extends ResourceMetaModelQueryDslBuil
     }
 
     @Override
-    public CategoryQuery build() {
+    public ProductTypeQuery build() {
         return super.build();
     }
 
@@ -63,77 +61,77 @@ public final class ProductTypeQueryBuilder extends ResourceMetaModelQueryDslBuil
     }
 
     @Override
-    public ProductTypeQueryBuilder plusExpansionPaths(final Function<CategoryExpansionModel<Category>, ExpansionPathContainer<Category>> m) {
+    public ProductTypeQueryBuilder plusExpansionPaths(final Function<ProductTypeExpansionModel<ProductType>, ExpansionPathContainer<ProductType>> m) {
         return super.plusExpansionPaths(m);
     }
 
     @Override
-    public ProductTypeQueryBuilder plusPredicates(final Function<CategoryQueryModel, QueryPredicate<Category>> m) {
+    public ProductTypeQueryBuilder plusPredicates(final Function<ProductTypeQueryModel, QueryPredicate<ProductType>> m) {
         return super.plusPredicates(m);
     }
 
     @Override
-    public ProductTypeQueryBuilder plusPredicates(final QueryPredicate<Category> queryPredicate) {
+    public ProductTypeQueryBuilder plusPredicates(final QueryPredicate<ProductType> queryPredicate) {
         return super.plusPredicates(queryPredicate);
     }
 
     @Override
-    public ProductTypeQueryBuilder plusPredicates(final List<QueryPredicate<Category>> queryPredicates) {
+    public ProductTypeQueryBuilder plusPredicates(final List<QueryPredicate<ProductType>> queryPredicates) {
         return super.plusPredicates(queryPredicates);
     }
 
     @Override
-    public ProductTypeQueryBuilder plusSort(final Function<CategoryQueryModel, QuerySort<Category>> m) {
+    public ProductTypeQueryBuilder plusSort(final Function<ProductTypeQueryModel, QuerySort<ProductType>> m) {
         return super.plusSort(m);
     }
 
     @Override
-    public ProductTypeQueryBuilder plusSort(final List<QuerySort<Category>> sort) {
+    public ProductTypeQueryBuilder plusSort(final List<QuerySort<ProductType>> sort) {
         return super.plusSort(sort);
     }
 
     @Override
-    public ProductTypeQueryBuilder plusSort(final QuerySort<Category> sort) {
+    public ProductTypeQueryBuilder plusSort(final QuerySort<ProductType> sort) {
         return super.plusSort(sort);
     }
 
     @Override
-    public ProductTypeQueryBuilder predicates(final Function<CategoryQueryModel, QueryPredicate<Category>> m) {
+    public ProductTypeQueryBuilder predicates(final Function<ProductTypeQueryModel, QueryPredicate<ProductType>> m) {
         return super.predicates(m);
     }
 
     @Override
-    public ProductTypeQueryBuilder predicates(final QueryPredicate<Category> queryPredicate) {
+    public ProductTypeQueryBuilder predicates(final QueryPredicate<ProductType> queryPredicate) {
         return super.predicates(queryPredicate);
     }
 
     @Override
-    public ProductTypeQueryBuilder predicates(final List<QueryPredicate<Category>> queryPredicates) {
+    public ProductTypeQueryBuilder predicates(final List<QueryPredicate<ProductType>> queryPredicates) {
         return super.predicates(queryPredicates);
     }
 
     @Override
-    public ProductTypeQueryBuilder sort(final Function<CategoryQueryModel, QuerySort<Category>> m) {
+    public ProductTypeQueryBuilder sort(final Function<ProductTypeQueryModel, QuerySort<ProductType>> m) {
         return super.sort(m);
     }
 
     @Override
-    public ProductTypeQueryBuilder sort(final List<QuerySort<Category>> sort) {
+    public ProductTypeQueryBuilder sort(final List<QuerySort<ProductType>> sort) {
         return super.sort(sort);
     }
 
     @Override
-    public ProductTypeQueryBuilder sort(final QuerySort<Category> sort) {
+    public ProductTypeQueryBuilder sort(final QuerySort<ProductType> sort) {
         return super.sort(sort);
     }
 
     @Override
-    public ProductTypeQueryBuilder sortMulti(final Function<CategoryQueryModel, List<QuerySort<Category>>> m) {
+    public ProductTypeQueryBuilder sortMulti(final Function<ProductTypeQueryModel, List<QuerySort<ProductType>>> m) {
         return super.sortMulti(m);
     }
 
     @Override
-    public ProductTypeQueryBuilder expansionPaths(final Function<CategoryExpansionModel<Category>, ExpansionPathContainer<Category>> m) {
+    public ProductTypeQueryBuilder expansionPaths(final Function<ProductTypeExpansionModel<ProductType>, ExpansionPathContainer<ProductType>> m) {
         return super.expansionPaths(m);
     }
 }
