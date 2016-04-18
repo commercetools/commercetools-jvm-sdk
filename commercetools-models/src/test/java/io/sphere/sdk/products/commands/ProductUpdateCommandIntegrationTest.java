@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonUnwrapped;
 import com.neovisionaries.i18n.CountryCode;
 import io.sphere.sdk.categories.Category;
+import io.sphere.sdk.client.BlockingSphereClient;
 import io.sphere.sdk.commands.UpdateAction;
 import io.sphere.sdk.messages.queries.MessageQuery;
 import io.sphere.sdk.models.*;
@@ -16,6 +17,7 @@ import io.sphere.sdk.products.messages.ProductSlugChangedMessage;
 import io.sphere.sdk.products.messages.ProductStateTransitionMessage;
 import io.sphere.sdk.products.queries.ProductByIdGet;
 import io.sphere.sdk.products.queries.ProductProjectionByIdGet;
+import io.sphere.sdk.products.queries.ProductProjectionQuery;
 import io.sphere.sdk.products.queries.ProductQuery;
 import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.queries.Query;
@@ -23,6 +25,7 @@ import io.sphere.sdk.search.SearchKeyword;
 import io.sphere.sdk.search.SearchKeywords;
 import io.sphere.sdk.search.tokenizer.CustomSuggestTokenizer;
 import io.sphere.sdk.states.State;
+import io.sphere.sdk.suppliers.TShirtProductTypeDraftSupplier;
 import io.sphere.sdk.suppliers.TShirtProductTypeDraftSupplier.Colors;
 import io.sphere.sdk.suppliers.TShirtProductTypeDraftSupplier.Sizes;
 import io.sphere.sdk.taxcategories.TaxCategoryFixtures;
@@ -36,9 +39,11 @@ import java.math.BigDecimal;
 import java.time.ZoneOffset;
 import java.util.*;
 import java.util.function.Function;
+import java.util.stream.Collectors;
 
 import static io.sphere.sdk.models.DefaultCurrencyUnits.EUR;
 import static io.sphere.sdk.products.ProductFixtures.*;
+import static io.sphere.sdk.products.ProductProjectionType.STAGED;
 import static io.sphere.sdk.states.StateFixtures.withStateByBuilder;
 import static io.sphere.sdk.states.StateType.PRODUCT_STATE;
 import static io.sphere.sdk.suppliers.TShirtProductTypeDraftSupplier.MONEY_ATTRIBUTE_NAME;
@@ -46,11 +51,9 @@ import static io.sphere.sdk.test.SphereTestUtils.*;
 import static io.sphere.sdk.test.SphereTestUtils.MASTER_VARIANT_ID;
 import static io.sphere.sdk.types.TypeFixtures.STRING_FIELD_NAME;
 import static io.sphere.sdk.types.TypeFixtures.withUpdateableType;
-import static java.util.Collections.emptyList;
-import static java.util.Collections.emptySet;
-import static java.util.Collections.singletonList;
+import static java.util.Collections.*;
 import static java.util.Locale.ENGLISH;
-import static java.util.stream.Collectors.*;
+import static java.util.stream.Collectors.toList;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -387,7 +390,7 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
             final List<UpdateAction<Product>> updateActions =
                     MetaAttributesUpdateActions.of(metaAttributes);
 
-            final ProductProjection productProjection = client().executeBlocking(ProductProjectionByIdGet.of(product, ProductProjectionType.STAGED));
+            final ProductProjection productProjection = client().executeBlocking(ProductProjectionByIdGet.of(product, STAGED));
 
             final Product updatedProduct = client().executeBlocking(ProductUpdateCommand.of(productProjection, updateActions));
 
@@ -550,6 +553,66 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
         });
     }
 
+    @Test
+    public void changeMasterVariantWithVariantId() {
+        withUpdateableProductProjectionOfMultipleVariants(client(), (ProductProjection productProjection) -> {
+            //given
+            final String sizeAttributeName = Sizes.ATTRIBUTE.getName();
+            final List<EnumValue> allVariantsSizeValues = productProjection.getAllVariants()
+                    .stream()
+                    .map(variant -> variant.getAttribute(sizeAttributeName).getValueAsEnumValue())
+                    .collect(Collectors.toList());
+            assertThat(allVariantsSizeValues)
+                    .as("master variant is of size M")
+                    .containsExactly(Sizes.M, Sizes.S, Sizes.X);
+
+            //when
+            final Integer variantIdOfSizeX = productProjection.getAllVariants().get(2).getId();
+            final ChangeMasterVariant updateAction =
+                    ChangeMasterVariant.ofVariantId(variantIdOfSizeX);
+            client().executeBlocking(ProductUpdateCommand.of(productProjection, updateAction));
+
+            //then
+            final ProductProjection productProjectionWithNewMasterVariant =
+                    client().executeBlocking(ProductProjectionByIdGet.of(productProjection, STAGED));
+            final ProductVariant newMasterVariant = productProjectionWithNewMasterVariant.getMasterVariant();
+            assertThat(newMasterVariant)
+                    .as("third variant is now the master variant")
+                    .isEqualTo(productProjection.getAllVariants().get(2));
+            assertThat(newMasterVariant.getAttribute(sizeAttributeName).getValueAsEnumValue())
+            .isEqualTo(Sizes.X);
+            final List<EnumValue> reorderedVariantsSizeValues = productProjectionWithNewMasterVariant.getAllVariants()
+                    .stream()
+                    .map(variant -> variant.getAttribute(sizeAttributeName).getValueAsEnumValue())
+                    .collect(Collectors.toList());
+            assertThat(reorderedVariantsSizeValues).containsExactly(Sizes.X, Sizes.S, Sizes.M);
+
+            return productProjectionWithNewMasterVariant;
+        });
+    }
+
+    @Test
+    public void changeMasterVariantWithSku() {
+        withUpdateableProductProjectionOfMultipleVariants(client(), (ProductProjection productProjection) -> {
+            final int originalMasterVariantId = productProjection.getMasterVariant().getId();
+            final ProductVariant variantSupposedToBeMaster = productProjection.getAllVariants().get(2);
+            final String sku = variantSupposedToBeMaster.getSku();
+
+            final ChangeMasterVariant updateAction = ChangeMasterVariant.ofSku(sku);
+            client().executeBlocking(ProductUpdateCommand.of(productProjection, updateAction));
+
+            final ProductProjection productProjectionWithNewMasterVariant =
+                    client().executeBlocking(ProductProjectionByIdGet.of(productProjection, STAGED));
+            assertThat(productProjectionWithNewMasterVariant.getMasterVariant().getSku()).isEqualTo(sku);
+            assertThat(productProjectionWithNewMasterVariant.getMasterVariant().getId())
+                    .as("variant IDs don't change in reordering")
+                    .isNotEqualTo(originalMasterVariantId)
+                    .isEqualTo(variantSupposedToBeMaster.getId());
+
+            return productProjectionWithNewMasterVariant;
+        });
+    }
+
     private static class StagedWrapper extends Base implements UpdateAction<Product> {
         private final UpdateAction<Product> delegate;
         @JsonProperty("staged")
@@ -703,5 +766,15 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
 
     private Price getFirstPrice(final Product product) {
         return product.getMasterData().getStaged().getMasterVariant().getPrices().get(0);
+    }
+
+    private static void withUpdateableProductProjectionOfMultipleVariants(final BlockingSphereClient client,
+                                                                          final Function<ProductProjection, Versioned<Product>> f) {
+        withUpdateableProductOfMultipleVariants(client(), product -> {
+            //given
+            final ProductProjection productProjection =
+                    client().executeBlocking(ProductProjectionByIdGet.of(product, STAGED));
+            return f.apply(productProjection);
+        });
     }
 }

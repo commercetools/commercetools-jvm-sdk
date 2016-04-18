@@ -5,6 +5,7 @@ import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.MetaAttributes;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.WithLocalizedSlug;
+import io.sphere.sdk.products.commands.updateactions.ChangeMasterVariant;
 import io.sphere.sdk.search.SearchKeywords;
 
 import javax.annotation.Nullable;
@@ -35,6 +36,7 @@ interface ProductDataLike extends WithLocalizedSlug, MetaAttributes {
      *
      * @see #getAllVariants()
      * @see #getVariants()
+     * @see ChangeMasterVariant
      * @return the main variant in the product
      */
     ProductVariant getMasterVariant();
