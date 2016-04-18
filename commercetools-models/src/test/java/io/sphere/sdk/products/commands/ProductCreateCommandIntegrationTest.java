@@ -3,8 +3,11 @@ package io.sphere.sdk.products.commands;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.ResourceIdentifiable;
 import io.sphere.sdk.products.*;
+import io.sphere.sdk.products.commands.updateactions.Unpublish;
+import io.sphere.sdk.products.search.ProductProjectionSearch;
 import io.sphere.sdk.producttypes.ProductType;
 import io.sphere.sdk.producttypes.ProductTypeFixtures;
+import io.sphere.sdk.search.PagedSearchResult;
 import io.sphere.sdk.search.SearchKeyword;
 import io.sphere.sdk.search.SearchKeywords;
 import io.sphere.sdk.search.tokenizer.CustomSuggestTokenizer;
@@ -91,6 +94,32 @@ public class ProductCreateCommandIntegrationTest extends IntegrationTest {
     }
 
     @Test
+    public void createPublishedProduct() {
+        withEmptyProductType(client(), randomKey(), productType -> {
+            final ProductVariantDraft masterVariant = ProductVariantDraftBuilder.of().build();
+            final LocalizedString name = randomSlug();
+            final LocalizedString slug = randomSlug();
+            final ProductDraft productDraft = ProductDraftBuilder.of(productType, name, slug, masterVariant)
+                    .publish(true)
+                    .build();
+
+            final Product product = client().executeBlocking(ProductCreateCommand.of(productDraft));
+            assertThat(product.getMasterData().isPublished()).isTrue();
+            assertThat(product.getMasterData().getCurrent().getSlug()).isEqualTo(slug);
+
+            assertEventually(() -> {
+                final ProductProjectionSearch search = ProductProjectionSearch.ofCurrent()
+                        .withQueryFilters(m -> m.id().is(product.getId()));
+                final PagedSearchResult<ProductProjection> searchResult = client().executeBlocking(search);
+                assertThat(searchResult.getResults()).hasSize(1);
+            });
+
+            unpublishAndDelete(product);
+        });
+
+    }
+
+    @Test
     public void createProductByProductTypeKeyIdentifiable() {
         withEmptyProductType(client(), productType -> {
             final ProductVariantDraft masterVariant = ProductVariantDraftBuilder.of().build();
@@ -131,6 +160,7 @@ public class ProductCreateCommandIntegrationTest extends IntegrationTest {
         });
     }
 
-
-
+    private void unpublishAndDelete(final Product product) {
+        client().executeBlocking(ProductDeleteCommand.of(client().executeBlocking(ProductUpdateCommand.of(product, Unpublish.of()))));
+    }
 }

@@ -59,4 +59,14 @@ public interface ProductDraft extends WithLocalizedSlug, MetaAttributes {
 
     @Nullable
     Reference<State> getState();
+
+    /**
+     * Flag for publishing the product immediately.
+     *
+     * {@include.example io.sphere.sdk.products.commands.ProductCreateCommandIntegrationTest#createPublishedProduct()}
+     *
+     * @return true if product should be published
+     */
+    @Nullable
+    Boolean isPublish();
 }
