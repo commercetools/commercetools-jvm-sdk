@@ -23,6 +23,7 @@ public class ProductPublishedMessageIntegrationTest extends IntegrationTest {
                     .withExpansionPaths(m -> m.resource())
                     .withLimit(1L)
                     .forMessageType(ProductPublishedMessage.MESSAGE_HINT));
+            assertThat(queryResult.head()).isPresent();
             final ProductPublishedMessage message = queryResult.head().get();
             assertThat(message.getResource().getId()).isEqualTo(product.getId());
             assertThat(message.getProductProjection().getMasterVariant()).isEqualTo(publishedProduct.getMasterData().getCurrent().getMasterVariant());
