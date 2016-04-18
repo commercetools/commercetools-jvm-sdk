@@ -28,6 +28,7 @@ public class ProductUnpublishedMessageIntegrationTest extends IntegrationTest {
                                 .withExpansionPaths(m -> m.resource())
                                 .withLimit(1L)
                                 .forMessageType(ProductUnpublishedMessage.MESSAGE_HINT));
+                assertThat(queryResult.head()).isPresent();
                 final ProductUnpublishedMessage message = queryResult.head().get();
                 assertThat(message.getResource().getId()).as("productId").isEqualTo(product.getId());
                 assertThat(message.getResource().getObj().getMasterData().isPublished()).isFalse();
