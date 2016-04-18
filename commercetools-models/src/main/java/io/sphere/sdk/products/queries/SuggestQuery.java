@@ -27,4 +27,6 @@ public interface SuggestQuery extends SphereRequest<SuggestionResult> {
     SuggestQuery withLimit(final Integer limit);
 
     SuggestQuery withStaged(final boolean staged);
+
+    SuggestQuery withFuzzy(final boolean fuzzy);
 }

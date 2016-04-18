@@ -22,25 +22,33 @@ final class SuggestQueryImpl extends Base implements SuggestQuery {
     private final Integer limit;
     @Nullable
     private final Boolean staged;
+    @Nullable
+    private final Boolean fuzzy;
 
     public SuggestQueryImpl(final List<LocalizedStringEntry> searchKeywords) {
-        this(searchKeywords, null, null);
+        this(searchKeywords, null, null, null);
     }
 
-    private SuggestQueryImpl(final List<LocalizedStringEntry> searchKeywords, @Nullable final Integer limit, @Nullable final Boolean staged) {
+    private SuggestQueryImpl(final List<LocalizedStringEntry> searchKeywords, @Nullable final Integer limit, @Nullable final Boolean staged, @Nullable final Boolean fuzzy) {
         this.searchKeywords = searchKeywords;
         this.limit = limit;
         this.staged = staged;
+        this.fuzzy = fuzzy;
     }
 
     @Override
     public SuggestQuery withLimit(final Integer limit) {
-        return new SuggestQueryImpl(searchKeywords, limit, staged);
+        return new SuggestQueryImpl(searchKeywords, limit, staged, fuzzy);
     }
 
     @Override
     public SuggestQuery withStaged(final boolean staged) {
-        return new SuggestQueryImpl(searchKeywords, limit, staged);
+        return new SuggestQueryImpl(searchKeywords, limit, staged, fuzzy);
+    }
+
+    @Override
+    public SuggestQuery withFuzzy(final boolean fuzzy) {
+        return new SuggestQueryImpl(searchKeywords, limit, staged, fuzzy);
     }
 
     @Override
@@ -63,6 +71,7 @@ final class SuggestQueryImpl extends Base implements SuggestQuery {
         searchKeywords.forEach(entry ->  builder.add("searchKeywords." + entry.getLocale().toLanguageTag(), entry.getValue(), urlEncoded));
         Optional.ofNullable(limit).ifPresent(presentLimit -> builder.add("limit", Integer.toString(presentLimit), urlEncoded));
         Optional.ofNullable(staged).ifPresent(presentStaged -> builder.add("staged", Boolean.toString(presentStaged), urlEncoded));
+        Optional.ofNullable(fuzzy).ifPresent(presentStaged -> builder.add("fuzzy", Boolean.toString(presentStaged), urlEncoded));
         return builder.build();
     }
 
@@ -72,6 +81,7 @@ final class SuggestQueryImpl extends Base implements SuggestQuery {
                 .append("searchKeywords", searchKeywords)
                 .append("limit", limit)
                 .append("staged", staged)
+                .append("fuzzy", fuzzy)
                 //extra
                 .append("readablePath", queryParametersToString(false))
                 .toString();

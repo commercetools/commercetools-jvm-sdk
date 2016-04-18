@@ -97,4 +97,28 @@ public class SuggestQueryIntegrationTest extends IntegrationTest {
             });
         });
     }
+
+    @Test
+    public void fuzzy() {
+        withSuggestProduct(client(), product -> {
+            final SearchKeywords searchKeywords = SearchKeywords.of(
+                    Locale.ENGLISH, asList(SearchKeyword.of("Multi tool"),
+                            SearchKeyword.of("Swiss Army Knife", WhiteSpaceSuggestTokenizer.of())),
+                    Locale.GERMAN, singletonList(SearchKeyword.of("Schweizer Messer",
+                            CustomSuggestTokenizer.of(asList("schweizer messer", "offiziersmesser", "sackmesser"))))
+            );
+            assertThat(product.getMasterData().getStaged().getSearchKeywords()).isEqualTo(searchKeywords);
+
+            final SuggestQuery suggestQuery = SuggestQuery.of(LocalizedStringEntry.of(Locale.ENGLISH, "knive"))
+                    .withStaged(true).withFuzzy(true);
+
+            assertEventually(() -> {
+                final SuggestionResult suggestionResult = client().executeBlocking(suggestQuery);
+
+                assertThat(suggestionResult.getSuggestionsForLocale(Locale.ENGLISH))
+                        .matches(suggestionsList -> suggestionsList.stream()
+                                .anyMatch(suggestion -> suggestion.getText().equals("Swiss Army Knife")));
+            });
+        });
+    }
 }
