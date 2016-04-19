@@ -51,7 +51,10 @@ final class ProductProjectionExpansionModelImpl<T> extends ExpansionModelImpl<T>
 
     @Override
     public ProductVariantExpansionModel<T> allVariants() {
-        final List<String> parents = pathExpression();
+        return getProductVariantExpansionModel(pathExpression());
+    }
+
+    static <T> ProductVariantExpansionModel<T> getProductVariantExpansionModel(final List<String> parents) {
         final List<String> currentPaths = asList(MASTER_VARIANT, VARIANTS);
         final List<String> paths;
         if (parents.isEmpty()) {

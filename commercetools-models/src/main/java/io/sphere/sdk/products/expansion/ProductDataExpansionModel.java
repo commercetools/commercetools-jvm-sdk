@@ -10,4 +10,6 @@ public interface ProductDataExpansionModel<T> {
     ProductVariantExpansionModel<T> masterVariant();
 
     ProductVariantExpansionModel<T> variants();
+
+    ProductVariantExpansionModel<T> allVariants();
 }
