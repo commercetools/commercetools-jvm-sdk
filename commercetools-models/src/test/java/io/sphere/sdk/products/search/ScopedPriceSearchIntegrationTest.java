@@ -93,6 +93,7 @@ public class ScopedPriceSearchIntegrationTest extends IntegrationTest {
                     .as("or the discounted fallback price").isNotEqualTo(EURO_15);
                     s.assertThat(matchingVariant.getScopedPrice().getDiscounted().getDiscount())
                             .isEqualTo(productDiscount.toReference());
+                    s.assertThat(matchingVariant.isScopedPriceDiscounted()).isTrue();
                     s.assertThat(matchingVariant.getScopedPrice()).isNotNull();
                     s.assertThat(matchingVariant.getScopedPrice().getCurrentValue())
                             .as("currentValue").isEqualTo(discountedValue);
