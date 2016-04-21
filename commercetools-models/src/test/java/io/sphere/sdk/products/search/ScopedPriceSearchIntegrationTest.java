@@ -7,6 +7,7 @@ import io.sphere.sdk.producttypes.ProductType;
 import io.sphere.sdk.producttypes.ProductTypeDraft;
 import io.sphere.sdk.producttypes.commands.ProductTypeCreateCommand;
 import io.sphere.sdk.search.PagedSearchResult;
+import io.sphere.sdk.search.SortExpression;
 import io.sphere.sdk.test.IntegrationTest;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
@@ -61,6 +62,46 @@ public class ScopedPriceSearchIntegrationTest extends IntegrationTest {
                     assertThat(price.getValue()).isEqualTo(EURO_30);
                     assertThat(masterVariant.getScopedPrice()).isNotNull();
                     assertThat(masterVariant.getScopedPrice().getValue()).as("scopedPrice").isEqualTo(EURO_30);
+                });
+            });
+        });
+    }
+
+    @Test
+    public void sortByCurrentScopedPrice() {
+        final List<PriceDraft> prices1 = asList(PriceDraft.of(EURO_20), PriceDraft.of(EURO_30).withCountry(DE));
+        final List<PriceDraft> prices2 = asList(PriceDraft.of(EURO_30), PriceDraft.of(EURO_40).withCountry(DE));
+        final SortExpression<ProductProjection> sortExpression = ProductProjectionSearchModel.of().sort().allVariants().scopedPrice().currentValue().centAmount().asc();
+        sortCheck(prices1, prices2, sortExpression);
+    }
+
+    @Test
+    public void sortByValueScopedPrice() {
+        final List<PriceDraft> prices1 = asList(PriceDraft.of(EURO_20), PriceDraft.of(EURO_30).withCountry(DE));
+        final List<PriceDraft> prices2 = asList(PriceDraft.of(EURO_30), PriceDraft.of(EURO_40).withCountry(DE));
+        final SortExpression<ProductProjection> sortExpression = ProductProjectionSearchModel.of().sort().allVariants().scopedPrice().value().centAmount().asc();
+        sortCheck(prices1, prices2, sortExpression);
+    }
+
+    @Test
+    public void sortByDiscountedScopedPrice() {
+        final List<PriceDraft> prices1 = asList(PriceDraft.of(EURO_20), PriceDraft.of(EURO_30).withCountry(DE));
+        final List<PriceDraft> prices2 = asList(PriceDraft.of(EURO_30), PriceDraft.of(EURO_40).withCountry(DE));
+        final SortExpression<ProductProjection> sortExpression = ProductProjectionSearchModel.of().sort().allVariants().scopedPrice().discounted().value().centAmount().asc();
+        sortCheck(prices1, prices2, sortExpression);
+    }
+
+    private void sortCheck(final List<PriceDraft> prices1, final List<PriceDraft> prices2, final SortExpression<ProductProjection> sortExpression) {
+        withProductOfPrices(prices1, product1 -> {
+            withProductOfPrices(prices2, product2 -> {
+                final ProductProjectionSearch search = ProductProjectionSearch.ofStaged()
+                        .withPriceSelection(PriceSelection.of(EUR).withPriceCountry(DE))
+                        .plusQueryFilters(m -> m.id().isIn(asList(product1.getId(), product2.getId())))
+                        .plusSort(sortExpression);
+                assertEventually(() -> {
+                    final PagedSearchResult<ProductProjection> result = client().executeBlocking(search);
+                    assertThat(result.getResults()).extracting(ResourceView::getId)
+                            .as("product1 with small price included").containsExactly(product1.getId(), product2.getId());
                 });
             });
         });
