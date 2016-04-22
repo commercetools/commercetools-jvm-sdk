@@ -42,6 +42,7 @@ import io.sphere.sdk.products.attributes.AttributeDefinition;
 import io.sphere.sdk.products.commands.updateactions.SetMetaDescription;
 import io.sphere.sdk.products.commands.updateactions.SetMetaKeywords;
 import io.sphere.sdk.products.commands.updateactions.SetMetaTitle;
+import io.sphere.sdk.products.expansion.ProductDataExpansionModel;
 import io.sphere.sdk.products.expansion.ProductProjectionExpansionModel;
 import io.sphere.sdk.products.queries.*;
 import io.sphere.sdk.products.search.PriceSelection;
@@ -93,6 +94,16 @@ import java.util.function.Function;
  <li class=fixed-in-release></li>
  </ul>
  -->
+
+ <h3 class=released-version id="v1_0_0_RC6">1.0.0-RC6 (22.04.2016)</h3>
+
+ <ul>
+ <li class=new-in-release>expand all variants in products with {@link ProductDataExpansionModel#allVariants()}</li>
+ <li class=new-in-release>add facets for product availability, {@link io.sphere.sdk.products.search.ProductVariantAvailabilityFacetSearchModel}</li>
+ <li class=new-in-release>fuzzy suggest query {@link SuggestQuery#withFuzzy(boolean)} </li>
+ <li class=new-in-release>{@link io.sphere.sdk.products.commands.updateactions.ChangeMasterVariant}</li>
+ <li class=new-in-release>{@link ProductDraftBuilder#publish(Boolean)} to create published products</li>
+ </ul>
 
  <h3 class=released-version id="v1_0_0_RC5">1.0.0-RC5 (15.04.2016)</h3>
  <ul>
