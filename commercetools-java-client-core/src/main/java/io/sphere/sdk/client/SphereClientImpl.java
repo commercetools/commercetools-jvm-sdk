@@ -127,16 +127,6 @@ final class SphereClientImpl extends AutoCloseableService implements SphereClien
         exception.setUnderlyingHttpResponse(httpResponse);
         exception.setProjectKey(config.getProjectKey());
         exception.setHttpRequest(httpRequest);
-
-        final List<String> errorMessagesDueToMappingError = asList("SearchPhaseExecutionException", "query_fetch", "RemoteTransportException", "SearchParseException", "search/phase/query+fetch");
-        Optional.ofNullable(httpResponse.getResponseBody())
-                .map(bytes -> bytesToString(bytes))
-                .map(body -> errorMessagesDueToMappingError.stream().anyMatch(errorWord -> body.contains(errorWord)) && body.toLowerCase().contains("product"))
-                .ifPresent(containsTerm -> {
-                    if (containsTerm) {
-                        exception.addNote(format("Maybe it helps to reindex the products https://admin.sphere.io/%s/developers/danger but this may take a while.", config.getProjectKey()));
-                    }
-                });
     }
 
     @Override
