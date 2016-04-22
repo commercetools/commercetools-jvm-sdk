@@ -6,6 +6,8 @@ import io.sphere.sdk.expansion.ExpansionModelImpl;
 import javax.annotation.Nullable;
 import java.util.List;
 
+import static io.sphere.sdk.products.expansion.ProductProjectionExpansionModelImpl.*;
+
 final class ProductDataExpansionModelImpl<T> extends ExpansionModelImpl<T> implements ProductDataExpansionModel<T> {
     ProductDataExpansionModelImpl(final List<String> parentPath, @Nullable final String path) {
         super(parentPath, path);
@@ -29,6 +31,11 @@ final class ProductDataExpansionModelImpl<T> extends ExpansionModelImpl<T> imple
     @Override
     public ProductVariantExpansionModel<T> variants() {
         return new ProductVariantExpansionModelImpl<>(pathExpression(), "variants[*]");
+    }
+
+    @Override
+    public ProductVariantExpansionModel<T> allVariants() {
+        return getProductVariantExpansionModel(pathExpression());
     }
 }
 

@@ -30,6 +30,8 @@ public final class ProductDraftBuilder extends Base implements Builder<ProductDr
     private Reference<State> state;
     @Nullable
     private CategoryOrderHints categoryOrderHints;
+    @Nullable
+    private Boolean publish;
 
     private ProductDraftBuilder(final ResourceIdentifier<ProductType> productType, final LocalizedString name, final LocalizedString slug, final ProductVariantDraft masterVariant) {
         this.name = name;
@@ -49,7 +51,7 @@ public final class ProductDraftBuilder extends Base implements Builder<ProductDr
 
     @Override
     public ProductDraft build() {
-        return new ProductDraftImpl(productType, getName(), getSlug(), getDescription(), getCategories(), getMetaTitle(), getMetaDescription(), getMetaKeywords(), masterVariant, variants, getTaxCategory(), getSearchKeywords(), getState(), getCategoryOrderHints());
+        return new ProductDraftImpl(productType, getName(), getSlug(), getDescription(), getCategories(), getMetaTitle(), getMetaDescription(), getMetaKeywords(), masterVariant, variants, getTaxCategory(), getSearchKeywords(), getState(), getCategoryOrderHints(), publish);
     }
 
     protected ProductDraftBuilder getThis() {
@@ -187,6 +189,11 @@ public final class ProductDraftBuilder extends Base implements Builder<ProductDr
         return getThis();
     }
 
+    public ProductDraftBuilder publish(@Nullable final Boolean publish) {
+        this.publish = publish;
+        return getThis();
+    }
+
     @Nullable
     public Reference<State> getState() {
         return state;
@@ -195,5 +202,10 @@ public final class ProductDraftBuilder extends Base implements Builder<ProductDr
     @Nullable
     public CategoryOrderHints getCategoryOrderHints() {
         return categoryOrderHints;
+    }
+
+    @Nullable
+    public Boolean isPublish() {
+        return publish;
     }
 }

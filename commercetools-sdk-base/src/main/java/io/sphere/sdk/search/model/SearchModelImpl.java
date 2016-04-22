@@ -6,8 +6,6 @@ import io.sphere.sdk.search.FilterExpression;
 import javax.annotation.Nullable;
 import java.util.List;
 
-import static java.util.stream.Collectors.toList;
-
 public class SearchModelImpl<T> extends Base implements SearchModel<T> {
     @Nullable
     private final SearchModel<T> parent;

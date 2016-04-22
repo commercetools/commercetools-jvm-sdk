@@ -10,15 +10,15 @@ public interface ProductProjectionExpansionModel<T> {
 
     TaxCategoryExpansionModel<T> taxCategory();
 
-    CategoryExpansionModel<ProductProjection> categories(int index);
+    CategoryExpansionModel<T> categories(int index);
 
-    CategoryExpansionModel<ProductProjection> categories();
+    CategoryExpansionModel<T> categories();
 
     ProductVariantExpansionModel<T> masterVariant();
 
     ProductVariantExpansionModel<T> variants();
 
-    ProductVariantExpansionModel<ProductProjection> allVariants();
+    ProductVariantExpansionModel<T> allVariants();
 
     static ProductProjectionExpansionModel<ProductProjection> of() {
         return new ProductProjectionExpansionModelImpl<>();

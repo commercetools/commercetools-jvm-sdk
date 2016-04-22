@@ -20,4 +20,8 @@ public final class ProductVariantFacetSearchModel extends SearchModelImpl<Produc
     public MoneyFacetSearchModel<ProductProjection> price() {
         return moneyFacetSearchModel("price");
     }
+
+    public ProductVariantAvailabilityFacetSearchModel<ProductProjection> availability() {
+        return new ProductVariantAvailabilityFacetSearchModelImpl<>(this, "availability");
+    }
 }

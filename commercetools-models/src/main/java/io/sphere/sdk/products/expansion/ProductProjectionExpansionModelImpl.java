@@ -2,7 +2,6 @@ package io.sphere.sdk.products.expansion;
 
 import io.sphere.sdk.categories.expansion.CategoryExpansionModel;
 import io.sphere.sdk.expansion.ExpansionModelImpl;
-import io.sphere.sdk.products.ProductProjection;
 import io.sphere.sdk.producttypes.expansion.ProductTypeExpansionModel;
 import io.sphere.sdk.taxcategories.expansion.TaxCategoryExpansionModel;
 
@@ -31,12 +30,12 @@ final class ProductProjectionExpansionModelImpl<T> extends ExpansionModelImpl<T>
     }
 
     @Override
-    public CategoryExpansionModel<ProductProjection> categories(final int index) {
+    public CategoryExpansionModel<T> categories(final int index) {
         return CategoryExpansionModel.of(pathExpression(), "categories[" + index + "]");
     }
 
     @Override
-    public CategoryExpansionModel<ProductProjection> categories() {
+    public CategoryExpansionModel<T> categories() {
         return CategoryExpansionModel.of(pathExpression(), "categories[*]");
     }
 
@@ -51,8 +50,11 @@ final class ProductProjectionExpansionModelImpl<T> extends ExpansionModelImpl<T>
     }
 
     @Override
-    public ProductVariantExpansionModel<ProductProjection> allVariants() {
-        final List<String> parents = pathExpression();
+    public ProductVariantExpansionModel<T> allVariants() {
+        return getProductVariantExpansionModel(pathExpression());
+    }
+
+    static <T> ProductVariantExpansionModel<T> getProductVariantExpansionModel(final List<String> parents) {
         final List<String> currentPaths = asList(MASTER_VARIANT, VARIANTS);
         final List<String> paths;
         if (parents.isEmpty()) {

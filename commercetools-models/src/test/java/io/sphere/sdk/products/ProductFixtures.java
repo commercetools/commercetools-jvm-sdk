@@ -48,6 +48,7 @@ import java.util.Optional;
 import java.util.concurrent.CompletionStage;
 import java.util.concurrent.TimeUnit;
 import java.util.function.*;
+import java.util.stream.Stream;
 
 import static io.sphere.sdk.categories.CategoryFixtures.withCategory;
 import static io.sphere.sdk.models.DefaultCurrencyUnits.EUR;
@@ -74,6 +75,32 @@ public class ProductFixtures {
             if (productToDelete.getMasterData().isPublished()) {
                 productToDelete = client.executeBlocking(ProductUpdateCommand.of(productToDelete, Unpublish.of()));
             }
+            client.executeBlocking(ProductDeleteCommand.of(productToDelete));
+        });
+    }
+
+    public static void withUpdateableProductOfMultipleVariants(final BlockingSphereClient client,
+                                             final Function<Product, Versioned<Product>> f) {
+        withProductType(client, randomKey(), productType -> {
+            final AttributeDraft greenColor = AttributeDraft.of(TShirtProductTypeDraftSupplier.Colors.ATTRIBUTE, TShirtProductTypeDraftSupplier.Colors.GREEN);
+            final ProductVariantDraft masterVariant = ProductVariantDraftBuilder.of()
+                    .attributes(AttributeDraft.of(TShirtProductTypeDraftSupplier.Sizes.ATTRIBUTE, TShirtProductTypeDraftSupplier.Sizes.M),
+                            greenColor)
+                    .sku(randomKey())
+                    .build();
+            final List<ProductVariantDraft> variants = Stream.of(TShirtProductTypeDraftSupplier.Sizes.S, TShirtProductTypeDraftSupplier.Sizes.X)
+                    .map(size -> AttributeDraft.of(TShirtProductTypeDraftSupplier.Sizes.ATTRIBUTE, size))
+                    .map(attrDraft -> ProductVariantDraftBuilder.of()
+                            .attributes(attrDraft, greenColor)
+                            .sku(randomKey())
+                            .build())
+                    .collect(toList());
+
+            final ProductDraftBuilder builder = ProductDraftBuilder.of(productType, randomSlug(), randomSlug(), masterVariant)
+                    .variants(variants);
+            final ProductDraft productDraft = builder.build();
+            final Product product = client.executeBlocking(ProductCreateCommand.of(productDraft));
+            Versioned<Product> productToDelete = f.apply(product);
             client.executeBlocking(ProductDeleteCommand.of(productToDelete));
         });
     }

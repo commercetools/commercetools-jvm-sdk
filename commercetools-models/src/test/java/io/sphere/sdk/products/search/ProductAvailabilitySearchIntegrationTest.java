@@ -12,7 +12,8 @@ import io.sphere.sdk.inventory.commands.InventoryEntryDeleteCommand;
 import io.sphere.sdk.products.ProductFixtures;
 import io.sphere.sdk.products.ProductProjection;
 import io.sphere.sdk.products.ProductVariantAvailability;
-import io.sphere.sdk.search.PagedSearchResult;
+import io.sphere.sdk.search.*;
+import io.sphere.sdk.search.model.RangeTermFacetSearchModel;
 import io.sphere.sdk.test.IntegrationTest;
 import org.junit.Test;
 
@@ -21,6 +22,7 @@ import java.time.ZonedDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Function;
 
 import static io.sphere.sdk.channels.ChannelFixtures.withChannelOfRole;
 import static io.sphere.sdk.products.ProductFixtures.*;
@@ -75,15 +77,22 @@ public class ProductAvailabilitySearchIntegrationTest extends IntegrationTest {
     public void searchForAvailableQuantityRanges() {
         withProductOfStock(client(), 10, productWith10Items -> {
             withProductOfStock(client(), 5, productWith5Items -> {
+                final RangeFacetExpression<ProductProjection> productProjectionRangeFacetExpression
+                        = ProductProjectionSearchModel.of()
+                        .facet().allVariants().availability().availableQuantity().onlyGreaterThanOrEqualTo(new BigDecimal(1));
                 final ProductProjectionSearch request = ProductProjectionSearch.ofStaged()
                         .plusQueryFilters(m -> m.id().isIn(asList(productWith10Items.getId(), productWith5Items.getId())))
-                        .plusQueryFilters(m -> m.allVariants().availability().availableQuantity().isGreaterThanOrEqualTo(new BigDecimal(6)));
+                        .plusQueryFilters(m -> m.allVariants().availability().availableQuantity().isGreaterThanOrEqualTo(new BigDecimal(6)))
+                        .plusFacets(productProjectionRangeFacetExpression);
                 assertEventually(() -> {
                     final PagedSearchResult<ProductProjection> res = client().executeBlocking(request);
                     assertThat(res.getResults()).hasSize(1);
                     assertThat(res.getResults().get(0).getId())
                             .as("finds only the product with the sufficient amount stocked")
                             .isEqualTo(productWith10Items.getId());
+                    final RangeFacetResult facetResult = res.getFacetResult(productProjectionRangeFacetExpression);
+                    assertThat(facetResult.getRanges().get(0).getMax())
+                            .isEqualTo("10.0");
                 });
             });
         });
@@ -94,17 +103,24 @@ public class ProductAvailabilitySearchIntegrationTest extends IntegrationTest {
         withChannelOfRole(client(), ChannelRole.INVENTORY_SUPPLY, channel -> {
             withProductOfStockAndChannel(client(), 10, channel, productWith10Items -> {
                 withProductOfStockAndChannel(client(), 5, channel, productWith5Items -> {
+                    final RangeFacetExpression<ProductProjection> facet = ProductProjectionSearchModel.of()
+                            .facet().allVariants().availability().channels().channelId(channel.getId())
+                            .availableQuantity().onlyGreaterThanOrEqualTo(new BigDecimal(1));
                     final ProductProjectionSearch request = ProductProjectionSearch.ofStaged()
                             .plusQueryFilters(m -> m.id().isIn(asList(productWith10Items.getId(), productWith5Items.getId())))
                             .plusQueryFilters(m ->
                                     m.allVariants().availability().channels().channelId(channel.getId())
-                                            .availableQuantity().isGreaterThanOrEqualTo(new BigDecimal(6)));
+                                            .availableQuantity().isGreaterThanOrEqualTo(new BigDecimal(6)))
+                            .plusFacets(facet);
                     assertEventually(() -> {
                         final PagedSearchResult<ProductProjection> res = client().executeBlocking(request);
                         assertThat(res.getResults()).hasSize(1);
                         assertThat(res.getResults().get(0).getId())
                                 .as("finds only the product with the sufficient amount stocked")
                                 .isEqualTo(productWith10Items.getId());
+                        final RangeFacetResult facetResult =  res.getFacetResult(facet);
+                        assertThat(facetResult.getRanges().get(0).getMax())
+                                .isEqualTo("10.0");
                     });
                 });
             });
