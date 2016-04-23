@@ -26,7 +26,7 @@ public abstract class HttpClientAdapterTest {
     @Test
     public final void testConnection() {
         final HttpClient client = createClient();
-        final HttpResponse response = client.execute(HttpRequest.of(HttpMethod.GET, "http://www.commercetools.com/de/")).toCompletableFuture().join();
+        final HttpResponse response = client.execute(HttpRequest.of(HttpMethod.GET, "http://dev.commercetools.com")).toCompletableFuture().join();
         client.close();
         final String body = new String(response.getResponseBody());
         final Integer statusCode = response.getStatusCode();
