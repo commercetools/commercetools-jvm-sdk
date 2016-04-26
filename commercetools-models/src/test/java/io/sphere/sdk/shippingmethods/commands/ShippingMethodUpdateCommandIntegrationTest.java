@@ -80,7 +80,7 @@ public class ShippingMethodUpdateCommandIntegrationTest extends IntegrationTest 
             final ShippingMethod updatedShippingMethod = client().executeBlocking(cmd);
             assertThat(updatedShippingMethod.isDefault()).isTrue();
 
-            final Long defaultShippingMethods = client().executeBlocking(ShippingMethodQuery.of().byIsDefault()).size();
+            final Long defaultShippingMethods = client().executeBlocking(ShippingMethodQuery.of().byIsDefault()).getCount();
             assertThat(defaultShippingMethods).isEqualTo(1);
 
             return client().executeBlocking(ShippingMethodUpdateCommand.of(updatedShippingMethod, ChangeIsDefault.toFalse()));
