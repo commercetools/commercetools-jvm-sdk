@@ -9,6 +9,8 @@ import java.time.ZonedDateTime;
 /**
  * EXPERIMENTAL model to easily build product projection facet requests.
  * Being it experimental, it can be modified in future releases therefore introducing breaking changes.
+ *
+ * For creation use {@link ProductProjectionSearchModel#facet()}.
  */
 public final class ProductProjectionFacetSearchModel extends ProductDataFacetSearchModel {
 

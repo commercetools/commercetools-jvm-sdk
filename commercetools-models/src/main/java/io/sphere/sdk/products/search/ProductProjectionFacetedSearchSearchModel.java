@@ -8,6 +8,8 @@ import javax.annotation.Nullable;
 /**
  * EXPERIMENTAL model to easily build product projection faceted search requests.
  * Being it experimental, it can be modified in future releases therefore introducing breaking changes.
+ *
+ * For creation use {@link ProductProjectionSearchModel#facetedSearch()}.
  */
 public final class ProductProjectionFacetedSearchSearchModel extends ProductDataFacetedSearchSearchModel {
 

@@ -2,14 +2,17 @@ package io.sphere.sdk.products.search;
 
 import io.sphere.sdk.products.ProductProjection;
 import io.sphere.sdk.reviews.search.ReviewRatingStatisticsSortSearchModel;
-import io.sphere.sdk.search.model.*;
+import io.sphere.sdk.search.model.LocalizedStringSortSearchModel;
+import io.sphere.sdk.search.model.SearchModel;
+import io.sphere.sdk.search.model.SingleValueSortSearchModel;
 
 import javax.annotation.Nullable;
-import java.time.ZonedDateTime;
 
 /**
  * EXPERIMENTAL model to easily build product projection sort requests.
  * Being it experimental, it can be modified in future releases therefore introducing breaking changes.
+ *
+ * For creation use {@link ProductProjectionSearchModel#sort()}.
  */
 public final class ProductProjectionSortSearchModel extends ProductDataSortSearchModel {
 
