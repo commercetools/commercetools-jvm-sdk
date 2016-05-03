@@ -4,6 +4,7 @@ import io.sphere.sdk.carts.Cart;
 import io.sphere.sdk.carts.CustomLineItem;
 import io.sphere.sdk.carts.LineItem;
 import io.sphere.sdk.categories.Category;
+import io.sphere.sdk.channels.Channel;
 import io.sphere.sdk.client.BlockingSphereClient;
 import io.sphere.sdk.customers.Customer;
 import io.sphere.sdk.models.EnumValue;
@@ -39,7 +40,7 @@ public class TypeFixtures {
     public static final String ENUM_FIELD_NAME = "enum-field-name";
     public static final String CAT_REFERENCE_FIELD_NAME = "catref";
     public static final String LOCALIZED_ENUM_FIELD_NAME = "localized-enum-field-name";
-    public static final Set<String> TYPE_IDS = new HashSet<>(asList(Category.resourceTypeId(), Customer.resourceTypeId(), Cart.resourceTypeId(), Order.resourceTypeId(), LineItem.resourceTypeId(), CustomLineItem.resourceTypeId(), Payment.resourceTypeId(), AddInterfaceInteraction.resourceTypeId(), Price.resourceTypeId(), Review.resourceTypeId()));
+    public static final Set<String> TYPE_IDS = new HashSet<>(asList(Category.resourceTypeId(), Customer.resourceTypeId(), Cart.resourceTypeId(), Order.resourceTypeId(), LineItem.resourceTypeId(), CustomLineItem.resourceTypeId(), Payment.resourceTypeId(), AddInterfaceInteraction.resourceTypeId(), Price.resourceTypeId(), Review.resourceTypeId(), Channel.referenceTypeId()));
     public static final String STRING_FIELD_NAME = "string-field-name";
     public static final String TYPE_NAME = "name of the custom type";
 

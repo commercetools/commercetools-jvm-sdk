@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.LocalizedString;
+import io.sphere.sdk.types.CustomFieldsDraft;
 
 import javax.annotation.Nullable;
 import java.util.Collections;
@@ -21,16 +22,21 @@ public final class ChannelDraftDsl extends Base implements ChannelDraft {
     @Nullable
     private final LocalizedString description;
 
+    @Nullable
+    private final CustomFieldsDraft custom;
+
     @JsonCreator
-    ChannelDraftDsl(final String key, @Nullable final Set<ChannelRole> roles, @Nullable final LocalizedString name, @Nullable final LocalizedString description) {
+    ChannelDraftDsl(final String key, @Nullable final Set<ChannelRole> roles, @Nullable final LocalizedString name,
+                    @Nullable final LocalizedString description, @Nullable final CustomFieldsDraft custom) {
         this.key = key;
         this.roles = roles;
         this.name = name;
         this.description = description;
+        this.custom = custom;
     }
 
     public static ChannelDraftDsl of(final String key) {
-        return new ChannelDraftDsl(key, Collections.emptySet(), null, null);
+        return new ChannelDraftDsl(key, Collections.emptySet(), null, null, null);
     }
 
     @Override
@@ -55,7 +61,12 @@ public final class ChannelDraftDsl extends Base implements ChannelDraft {
     public LocalizedString getDescription() {
         return description;
     }
-    
+
+    @Nullable
+    public CustomFieldsDraft getCustom() {
+        return custom;
+    }
+
     public ChannelDraftDsl withRoles(@Nullable final Set<ChannelRole> roles) {
         return newBuilder().roles(roles).build();
     }
@@ -66,6 +77,10 @@ public final class ChannelDraftDsl extends Base implements ChannelDraft {
     
     public ChannelDraftDsl withName(@Nullable final LocalizedString name) {
         return newBuilder().name(name).build();
+    }
+
+    public ChannelDraftDsl withCustom(@Nullable final CustomFieldsDraft custom) {
+        return newBuilder().custom(custom).build();
     }
 
     private ChannelDraftBuilder newBuilder() {

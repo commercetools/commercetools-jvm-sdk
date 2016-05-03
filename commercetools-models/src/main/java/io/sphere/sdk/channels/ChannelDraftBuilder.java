@@ -3,6 +3,7 @@ package io.sphere.sdk.channels;
 import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.Builder;
 import io.sphere.sdk.models.LocalizedString;
+import io.sphere.sdk.types.CustomFieldsDraft;
 
 import javax.annotation.Nullable;
 import java.util.Collections;
@@ -18,6 +19,8 @@ public final class ChannelDraftBuilder extends Base implements Builder<ChannelDr
     private LocalizedString name;
     @Nullable
     private LocalizedString description;
+    @Nullable
+    private CustomFieldsDraft custom;
 
     private ChannelDraftBuilder(final String key) {
         this.key = key;
@@ -31,7 +34,8 @@ public final class ChannelDraftBuilder extends Base implements Builder<ChannelDr
         return new ChannelDraftBuilder(template.getKey())
                 .roles(template.getRoles())
                 .name(template.getName())
-                .description(template.getDescription());
+                .description(template.getDescription())
+                .custom(template.getCustom());
     }
 
     public ChannelDraftBuilder description(@Nullable final LocalizedString description) {
@@ -49,8 +53,13 @@ public final class ChannelDraftBuilder extends Base implements Builder<ChannelDr
         return this;
     }
 
+    public ChannelDraftBuilder custom(@Nullable final CustomFieldsDraft custom) {
+        this.custom = custom;
+        return this;
+    }
+
     @Override
     public ChannelDraftDsl build() {
-        return new ChannelDraftDsl(key, roles, name, description);
+        return new ChannelDraftDsl(key, roles, name, description, custom);
     }
 }
