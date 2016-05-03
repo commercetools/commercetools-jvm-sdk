@@ -202,4 +202,12 @@ public class QueryModelImpl<T> extends Base implements QueryModel<T> {
     public DirectionlessQuerySort<T> sort() {
         return new DirectionlessQuerySort<>(this);
     }
+
+    protected EnumQueryModel<T> enumQueryModel(final String name) {
+        return new EnumQueryModelImpl<>(this, name);
+    }
+
+    protected LocalizedEnumQueryModel<T> localizedEnumQueryModel(final String name) {
+        return new LocalizedEnumQueryModelImpl<>(this, name);
+    }
 }
