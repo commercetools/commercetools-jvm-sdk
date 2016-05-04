@@ -1,11 +1,14 @@
 package io.sphere.sdk.types;
 
 import io.sphere.sdk.categories.Category;
-import io.sphere.sdk.categories.CategoryFixtures;
-import io.sphere.sdk.categories.commands.CategoryUpdateCommand;
-import io.sphere.sdk.categories.commands.updateactions.SetCustomType;
+import io.sphere.sdk.categories.CategoryDraft;
+import io.sphere.sdk.categories.CategoryDraftBuilder;
+import io.sphere.sdk.categories.commands.CategoryCreateCommand;
+import io.sphere.sdk.categories.commands.CategoryDeleteCommand;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.test.IntegrationTest;
+import io.sphere.sdk.types.commands.TypeCreateCommand;
+import io.sphere.sdk.types.commands.TypeDeleteCommand;
 import io.sphere.sdk.utils.MoneyImpl;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
@@ -19,8 +22,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static io.sphere.sdk.test.SphereTestUtils.*;
-import static org.assertj.core.api.Assertions.assertThat;
 import static io.sphere.sdk.types.TypeFixtures.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class CustomFieldsIntegrationTest extends IntegrationTest {
     public static final LocalDate DATE = LocalDate.now().minusDays(1);
@@ -35,36 +38,49 @@ public class CustomFieldsIntegrationTest extends IntegrationTest {
     public static final String STRING = "dfsdsfs";
     public static final LocalTime TIME = LocalTime.now().plusHours(4);
     private static CustomFields custom;
+    private static Type type;
+    private static Category category;
 
     @BeforeClass
     public static void setUp() throws Exception {
-        TypeFixtures.withUpdateableType(client(), type -> {
-            CategoryFixtures.withCategory(client(), category -> {
-                final Map<String, Object> fields = new HashMap<>();
-
-                fields.put(BOOLEAN_FIELD_NAME, BOOLEAN);
-                fields.put(DATE_FIELD_NAME, DATE);
-                fields.put(DATETIME_FIELD_NAME, ZONED_DATE_TIME);
-                fields.put(DOUBLE_FIELD_NAME, DOUBLE);
-                fields.put(ENUM_FIELD_NAME, ENUM_KEY);
-                fields.put(INT_FIELD_NAME, INT);
-                fields.put(LOCALIZED_ENUM_FIELD_NAME, LOC_ENUM_KEY);
-                fields.put(LOC_STRING_FIELD_NAME, LOCALIZED_STRING);
-                fields.put(MONEY_FIELD_NAME, MONETARY_AMOUNT);
-                fields.put(STRING_FIELD_NAME, STRING);
-                fields.put(TIME_FIELD_NAME, TIME);
-
-                final Category updatedCategory = client().executeBlocking(CategoryUpdateCommand.of(category, SetCustomType.ofTypeIdAndObjects(type.getId(), fields)));
-
-                custom = updatedCategory.getCustom();
-            });
-            return type;
-        });
+        createType();
+        createCategory();
+        custom = category.getCustom();
     }
 
     @AfterClass
     public static void cleanUp() {
+        client().executeBlocking(CategoryDeleteCommand.of(category));
+        category = null;
+        client().executeBlocking(TypeDeleteCommand.of(type));
+        type = null;
         custom = null;
+    }
+
+    private static void createCategory() {
+        final Map<String, Object> fields = new HashMap<>();
+        fields.put(BOOLEAN_FIELD_NAME, BOOLEAN);
+        fields.put(DATE_FIELD_NAME, DATE);
+        fields.put(DATETIME_FIELD_NAME, ZONED_DATE_TIME);
+        fields.put(DOUBLE_FIELD_NAME, DOUBLE);
+        fields.put(ENUM_FIELD_NAME, ENUM_KEY);
+        fields.put(INT_FIELD_NAME, INT);
+        fields.put(LOCALIZED_ENUM_FIELD_NAME, LOC_ENUM_KEY);
+        fields.put(LOC_STRING_FIELD_NAME, LOCALIZED_STRING);
+        fields.put(MONEY_FIELD_NAME, MONETARY_AMOUNT);
+        fields.put(STRING_FIELD_NAME, STRING);
+        fields.put(TIME_FIELD_NAME, TIME);
+        final CategoryDraft categoryDraft = CategoryDraftBuilder.of(randomSlug(), randomSlug())
+                .custom(CustomFieldsDraft.ofTypeIdAndObjects(type.getId(), fields))
+                .build();
+        category = client().executeBlocking(CategoryCreateCommand.of(categoryDraft));
+    }
+
+    private static void createType() {
+        final TypeDraftBuilder typeDraftBuilder = createTypeDraftBuilder();
+        final TypeDraft typeDraft = typeDraftBuilder
+                .build();
+        type = client().executeBlocking(TypeCreateCommand.of(typeDraft));
     }
 
     @Test

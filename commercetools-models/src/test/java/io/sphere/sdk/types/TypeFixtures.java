@@ -64,7 +64,7 @@ public class TypeFixtures {
         client.executeBlocking(TypeDeleteCommand.of(updatedType));
     }
 
-    private static TypeDraftBuilder createTypeDraftBuilder() {
+    public static TypeDraftBuilder createTypeDraftBuilder() {
         final String typeKey = randomKey();
         return TypeDraftBuilder.of(typeKey, en(TYPE_NAME), TYPE_IDS)
                 .description(en("description"))
