@@ -17,11 +17,10 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.ZonedDateTime;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 
-import static io.sphere.sdk.test.SphereTestUtils.EUR;
-import static io.sphere.sdk.test.SphereTestUtils.en;
-import static io.sphere.sdk.test.SphereTestUtils.randomSlug;
+import static io.sphere.sdk.test.SphereTestUtils.*;
 import static io.sphere.sdk.types.TypeFixtures.*;
 import static io.sphere.sdk.types.TypeFixtures.TIME_FIELD_NAME;
 import static io.sphere.sdk.types.TypeFixtures.createTypeDraftBuilder;
@@ -41,6 +40,7 @@ public class TypeFixtureRule extends ExternalResource {
     public static final MonetaryAmount MONETARY_AMOUNT = MoneyImpl.ofCents(1234, EUR);
     public static final String STRING = "dfsdsfs";
     public static final LocalTime TIME = LocalTime.now().plusHours(4);
+    public static final HashSet<String> STRING_SET = new HashSet<>(asList("s1", "s2"));
     private Type type;
     private Category category;
     private final BlockingSphereClient client;
@@ -76,6 +76,7 @@ public class TypeFixtureRule extends ExternalResource {
         fields.put(MONEY_FIELD_NAME, MONETARY_AMOUNT);
         fields.put(STRING_FIELD_NAME, STRING);
         fields.put(TIME_FIELD_NAME, TIME);
+        fields.put(STRING_SET_FIELD_NAME, STRING_SET);
         final CategoryDraft categoryDraft = CategoryDraftBuilder.of(randomSlug(), randomSlug())
                 .custom(CustomFieldsDraft.ofTypeIdAndObjects(type.getId(), fields))
                 .build();

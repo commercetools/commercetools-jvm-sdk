@@ -204,10 +204,10 @@ public class QueryModelImpl<T> extends Base implements QueryModel<T> {
     }
 
     protected EnumQueryModel<T> enumQueryModel(final String name) {
-        return new EnumQueryModelImpl<>(this, name);
+        return new EnumLikeQueryModelImpl<>(this, name);
     }
 
     protected LocalizedEnumQueryModel<T> localizedEnumQueryModel(final String name) {
-        return new LocalizedEnumQueryModelImpl<>(this, name);
+        return new EnumLikeQueryModelImpl<>(this, name);
     }
 }

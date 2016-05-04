@@ -41,6 +41,7 @@ public class TypeFixtures {
     public static final String LOCALIZED_ENUM_FIELD_NAME = "localized-enum-field-name";
     public static final Set<String> TYPE_IDS = new HashSet<>(asList(Category.resourceTypeId(), Customer.resourceTypeId(), Cart.resourceTypeId(), Order.resourceTypeId(), LineItem.resourceTypeId(), CustomLineItem.resourceTypeId(), Payment.resourceTypeId(), AddInterfaceInteraction.resourceTypeId(), Price.resourceTypeId(), Review.resourceTypeId()));
     public static final String STRING_FIELD_NAME = "string-field-name";
+    public static final String STRING_SET_FIELD_NAME = "string-set-field-name";
     public static final String TYPE_NAME = "name of the custom type";
 
     public static void withType(final BlockingSphereClient client, final UnaryOperator<TypeDraftBuilder> b, final Consumer<Type> consumer) {
@@ -70,7 +71,11 @@ public class TypeFixtures {
                 .description(en("description"))
                 .fieldDefinitions(asList(stringfieldDefinition(), enumFieldDefinition(), localizedEnumFieldDefinition(), catRefDefinition(),
                         booleanDefinition(), LocalizedStringDefinition(), intDefinition(), doubleDefinition(), moneyDefinition(),
-                        dateDefinition(), dateTimeDefinition(), timeDefinition()));
+                        dateDefinition(), dateTimeDefinition(), timeDefinition(), stringSetDefinition()));
+    }
+
+    private static FieldDefinition stringSetDefinition() {
+        return fieldDefinition(SetFieldType.of(StringFieldType.of()), STRING_SET_FIELD_NAME);
     }
 
     private static FieldDefinition dateDefinition() {
