@@ -236,7 +236,7 @@ public class ProductFixtures {
                 stages.forEach(stage -> SphereClientUtils.blockingWait(stage, 30, TimeUnit.SECONDS));
 
                 deleteProductType(client, productType);
-            } while (client.executeBlocking(productsOfProductTypeQuery).size() > 0);
+            } while (client.executeBlocking(productsOfProductTypeQuery).getCount() > 0);
         }
     }
 

@@ -155,7 +155,7 @@ public class ReviewProductProjectionSearchIntegrationTest extends IntegrationTes
         assertEventually(Duration.ofSeconds(60), Duration.ofMillis(100), () -> {
             softAssert(soft -> {
                 final PagedSearchResult<ProductProjection> res = client().executeBlocking(projectionSearch);
-                soft.assertThat(res.size()).isGreaterThanOrEqualTo(3);
+                soft.assertThat(res.getCount()).isGreaterThanOrEqualTo(3);
                 final RangeFacetResult countFacets = (RangeFacetResult) res.getFacetResult("reviewRatingStatistics.count");
                 soft.assertThat(countFacets.getRanges().get(1).getSum()).as("count facets").isEqualTo("60.0");
                 final RangeFacetResult lowestRatingFacets = (RangeFacetResult) res.getFacetResult("reviewRatingStatistics.lowestRating");

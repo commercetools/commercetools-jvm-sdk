@@ -9,11 +9,13 @@ public abstract class PagedResult<T> extends Base {
     protected final Long offset;
     protected final Long total;
     protected final List<T> results;
+    protected final Long count;
 
-    protected PagedResult(final Long offset, final Long total, final List<T> results) {
+    protected PagedResult(final Long offset, final Long total, final List<T> results, final Long count) {
         this.offset = offset;
         this.total = total;
         this.results = results;
+        this.count = count;
     }
 
     /**
@@ -25,12 +27,22 @@ public abstract class PagedResult<T> extends Base {
      }
 
     /**
-      * The actual number of results returned.
-      * @return the number of elements in this container
-      */
-     public Long size() {
-         return (long) results.size();
-     }
+     * The actual number of results returned.
+     * @return the number of elements in this container
+     * @deprecated use {@link #getCount()} instead
+     */
+    @Deprecated//don't remove soon!!!
+    public Long size() {
+        return (long) results.size();
+    }
+
+    /**
+     * The actual number of results returned.
+     * @return the number of elements in this container
+     */
+    public Long getCount() {
+        return count;
+    }
 
     /**
       * The total number of results matching the request.
@@ -42,10 +54,10 @@ public abstract class PagedResult<T> extends Base {
      }
 
     /**
-      * List of results. If {@link io.sphere.sdk.queries.PagedResult#size()} is not equal
+      * List of results. If {@link io.sphere.sdk.queries.PagedResult#getCount()} is not equal
       * to {@link io.sphere.sdk.queries.PagedResult#getTotal()} the container contains only a subset of all
       * elements that match the request.
-      * @return {@link io.sphere.sdk.queries.PagedResult#size()} elements matching the request
+      * @return {@link io.sphere.sdk.queries.PagedResult#getCount()} elements matching the request
       */
      public List<T> getResults() {
          return results;
@@ -81,6 +93,6 @@ public abstract class PagedResult<T> extends Base {
          }
          //currently counting the total amount is performed in a second database call, so it is possible
          //that the left side can be greater than total
-         return getOffset() + size() >= getTotal();
+         return getOffset() + getCount() >= getTotal();
      }
 }

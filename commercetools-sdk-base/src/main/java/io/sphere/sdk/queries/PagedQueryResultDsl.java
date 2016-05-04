@@ -3,8 +3,8 @@ package io.sphere.sdk.queries;
 import java.util.List;
 
 public final class PagedQueryResultDsl<T> extends PagedQueryResult<T> {
-    PagedQueryResultDsl(final Long offset, final Long total, final List<T> results) {
-        super(offset, total, results);
+    PagedQueryResultDsl(final Long offset, final Long total, final List<T> results, final Long count) {
+        super(offset, total, results, count);
     }
 
     /**
