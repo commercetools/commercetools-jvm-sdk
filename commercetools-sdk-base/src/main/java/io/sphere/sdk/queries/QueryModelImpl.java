@@ -5,7 +5,6 @@ import io.sphere.sdk.models.SphereEnumeration;
 
 import javax.annotation.Nullable;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static io.sphere.sdk.queries.StringQuerySortingModel.normalize;
 import static io.sphere.sdk.utils.SphereInternalUtils.toStream;
@@ -58,7 +57,7 @@ public class QueryModelImpl<T> extends Base implements QueryModel<T> {
         return new ReferenceCollectionQueryModelImpl<>(this, pathSegment);
     }
 
-    protected <E extends SphereEnumeration> SphereEnumerationQueryModelImpl<T, E> enumerationQueryModel(final String pathSegment) {
+    protected <E extends SphereEnumeration> SphereEnumerationOptionalQueryModel<T, E> enumerationQueryModel(final String pathSegment) {
         return new SphereEnumerationQueryModelImpl<>(this, pathSegment);
     }
 
