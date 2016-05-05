@@ -3,6 +3,7 @@ package io.sphere.sdk.channels;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.WithKey;
+import io.sphere.sdk.types.CustomFieldsDraft;
 
 import javax.annotation.Nullable;
 import java.util.Set;
@@ -27,6 +28,9 @@ public interface ChannelDraft extends WithKey {
 
     @Nullable
     LocalizedString getDescription();
+
+    @Nullable
+    CustomFieldsDraft getCustom();
 
     static ChannelDraftDsl of(final String key) {
         return ChannelDraftDsl.of(key);

@@ -13,6 +13,10 @@ import io.sphere.sdk.expansion.MetaModelReferenceExpansionDsl;
  * <p>Example:</p>
  * {@include.example io.sphere.sdk.channels.commands.ChannelCreateCommandIntegrationTest#execution()}
  *
+ *
+ <p>Example for creation a channel with custom fields:</p>
+ {@include.example io.sphere.sdk.channels.ChannelCustomFieldsIntegrationTest#createChannelWithCustomType()}
+ *
  * @see io.sphere.sdk.channels.ChannelDraftBuilder
  * @see ChannelDraft
  * @see ChannelDraftDsl

@@ -11,12 +11,17 @@ import io.sphere.sdk.orders.SyncInfo;
 import io.sphere.sdk.reviews.Review;
 import io.sphere.sdk.reviews.ReviewDraft;
 import io.sphere.sdk.reviews.ReviewRatingStatistics;
+import io.sphere.sdk.types.Custom;
+import io.sphere.sdk.types.CustomFields;
+import io.sphere.sdk.types.TypeDraft;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.Set;
 
 /** Channels represent a source or destination of different entities.
+
+ <p>A Customer can have {@link io.sphere.sdk.types.Custom custom fields}.</p>
 
  @see io.sphere.sdk.channels.commands.ChannelCreateCommand
  @see io.sphere.sdk.channels.commands.ChannelUpdateCommand
@@ -30,7 +35,7 @@ import java.util.Set;
  @see Review#getTarget()
  */
 @JsonDeserialize(as = ChannelImpl.class)
-public interface Channel extends Resource<Channel>, WithKey {
+public interface Channel extends Resource<Channel>, WithKey, Custom {
     /**
      * Any arbitrary string key that unique identifies this channel within the project.
      *
@@ -142,4 +147,18 @@ public interface Channel extends Resource<Channel>, WithKey {
     static Reference<Channel> referenceOfId(final String id) {
         return Reference.of(referenceTypeId(), id);
     }
+
+    /**
+     * An identifier for this resource which supports {@link CustomFields}.
+     * @see TypeDraft#getResourceTypeIds()
+     * @see io.sphere.sdk.types.Custom
+     * @return ID of this resource type
+     */
+    static String resourceTypeId(){
+        return "channel";
+    }
+
+    @Nullable
+    @Override
+    CustomFields getCustom();
 }
