@@ -24,15 +24,15 @@ public final class CustomObjectQueryBuilder<T> extends ResourceMetaModelQueryDsl
         super(template);
     }
 
-    static <T> CustomObjectQueryBuilder<T> of(final TypeReference<T> valueTypeReference) {
+    public static <T> CustomObjectQueryBuilder<T> of(final TypeReference<T> valueTypeReference) {
         return new CustomObjectQueryBuilder<>(CustomObjectQuery.of(valueTypeReference));
     }
 
-    static <T> CustomObjectQueryBuilder<T> of(final Class<T> valueClass) {
+    public static <T> CustomObjectQueryBuilder<T> of(final Class<T> valueClass) {
         return new CustomObjectQueryBuilder<>(CustomObjectQuery.of(valueClass));
     }
 
-    static CustomObjectQueryBuilder<JsonNode> ofJsonNode() {
+    public static CustomObjectQueryBuilder<JsonNode> ofJsonNode() {
         return of(TypeReferences.jsonNodeTypeReference());
     }
 

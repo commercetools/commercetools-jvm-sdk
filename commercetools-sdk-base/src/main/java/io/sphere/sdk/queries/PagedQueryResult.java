@@ -14,8 +14,8 @@ import java.util.Optional;
 public class PagedQueryResult<T> extends PagedResult<T> {
 
     @JsonCreator
-    PagedQueryResult(final Long offset, final Long total, final List<T> results) {
-        super(offset, total, results);
+    PagedQueryResult(final Long offset, final Long total, final List<T> results, final Long count) {
+        super(offset, total, results, count);
     }
 
     /**
@@ -24,11 +24,11 @@ public class PagedQueryResult<T> extends PagedResult<T> {
      * @return an empty {@code PagedQueryResult}
      */
     public static <T> PagedQueryResultDsl<T> empty() {
-        return new PagedQueryResultDsl<>(0L, 0L, Collections.<T>emptyList());
+        return new PagedQueryResultDsl<>(0L, 0L, Collections.<T>emptyList(), 0L);
     }
 
     public static <T> PagedQueryResultDsl<T> of(final Long offset, final Long total, final List<T> results) {
-        return new PagedQueryResultDsl<>(offset, total, results);
+        return new PagedQueryResultDsl<>(offset, total, results, (long) results.size());
     }
 
     public static <T> PagedQueryResultDsl<T> of(final List<T> results) {
@@ -80,7 +80,7 @@ public class PagedQueryResult<T> extends PagedResult<T> {
     }
 
     @Override
-    public Long size() {
-        return super.size();
+    public Long getCount() {
+        return super.getCount();
     }
 }

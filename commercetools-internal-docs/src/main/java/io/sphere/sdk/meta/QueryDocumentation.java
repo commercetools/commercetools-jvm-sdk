@@ -182,7 +182,7 @@ Like for predicates, you can traverse the query model tree in the same way to sp
 
  <ul>
  <li>{@link io.sphere.sdk.queries.PagedQueryResult#getResults()} contains all fetched elements.</li>
- <li>The number of fetched elements can be obtained with {@link io.sphere.sdk.queries.PagedQueryResult#size()}.</li>
+ <li>The number of fetched elements can be obtained with {@code io.sphere.sdk.queries.PagedQueryResult#size()}.</li>
  <li>{@link io.sphere.sdk.queries.PagedQueryResult#getOffset()} corresponds to the offset of the query.</li>
  <li>{@link io.sphere.sdk.queries.PagedQueryResult#getTotal()} is the amount of resources matching the query but do not necessarily need to be included in the {@link io.sphere.sdk.queries.PagedQueryResult}.</li>
  </ul>

@@ -55,7 +55,7 @@ public class PriceSelectionIntegrationTest extends IntegrationTest {
                     .withPriceSelection(PriceSelection.of(EUR));//price selection config
             assertEventually(() -> {
                 final PagedSearchResult<ProductProjection> result = client().executeBlocking(searchRequest);
-                assertThat(result.size()).isEqualTo(1);
+                assertThat(result.getCount()).isEqualTo(1);
                 final ProductVariant masterVariant = result.getResults().get(0).getMasterVariant();
                 assertThat(masterVariant.getPrice()).isNotNull().has(price(PriceDraft.of(EURO_30)));
             });
@@ -118,7 +118,7 @@ public class PriceSelectionIntegrationTest extends IntegrationTest {
                 .withQueryFilters(m -> m.id().is(product.getId()))//to limit the test scope
                 .withPriceSelection(selection);//price selection config
         final PagedSearchResult<ProductProjection> searchResult = client().executeBlocking(searchRequest);
-        assertThat(searchResult.size()).isEqualTo(1);
+        assertThat(searchResult.getCount()).isEqualTo(1);
         return searchResult.head().get().getMasterVariant().getPrice();
     }
 

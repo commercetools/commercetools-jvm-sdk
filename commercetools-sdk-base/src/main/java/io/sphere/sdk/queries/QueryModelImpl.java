@@ -203,6 +203,13 @@ public class QueryModelImpl<T> extends Base implements QueryModel<T> {
         return new DirectionlessQuerySort<>(this);
     }
 
+    protected  <E extends SphereEnumeration> List<String> transformSphereEnumeration(final Iterable<E> items) {
+        return toStream(items)
+                .map(enumValue -> enumValue.toSphereName())
+                .map(StringQuerySortingModel::normalize)
+                .collect(Collectors.toList());
+    }
+
     protected EnumQueryModel<T> enumQueryModel(final String name) {
         return new EnumLikeQueryModelImpl<>(this, name);
     }

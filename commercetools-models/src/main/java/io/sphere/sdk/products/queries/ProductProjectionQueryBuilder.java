@@ -22,15 +22,15 @@ public final class ProductProjectionQueryBuilder extends ResourceMetaModelQueryD
         super(template);
     }
 
-    static ProductProjectionQueryBuilder ofStaged() {
+    public static ProductProjectionQueryBuilder ofStaged() {
         return of(ProductProjectionType.STAGED);
     }
 
-    static ProductProjectionQueryBuilder ofCurrent() {
+    public static ProductProjectionQueryBuilder ofCurrent() {
         return of(ProductProjectionType.CURRENT);
     }
 
-    static ProductProjectionQueryBuilder of(final ProductProjectionType productProjectionType) {
+    public static ProductProjectionQueryBuilder of(final ProductProjectionType productProjectionType) {
         return new ProductProjectionQueryBuilder(ProductProjectionQuery.of(productProjectionType));
     }
 

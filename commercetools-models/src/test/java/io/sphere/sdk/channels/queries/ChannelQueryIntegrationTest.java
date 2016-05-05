@@ -1,16 +1,24 @@
 package io.sphere.sdk.channels.queries;
 
 import io.sphere.sdk.channels.Channel;
+import io.sphere.sdk.channels.ChannelDraft;
+import io.sphere.sdk.channels.ChannelDraftDsl;
 import io.sphere.sdk.channels.ChannelRole;
+import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.test.IntegrationTest;
 import org.junit.Test;
 
 import java.util.List;
 
+import static io.sphere.sdk.channels.ChannelFixtures.withChannel;
 import static io.sphere.sdk.channels.ChannelFixtures.withChannelOfRole;
 import static io.sphere.sdk.channels.ChannelFixtures.withUpdatableChannelOfRole;
 import static io.sphere.sdk.reviews.ReviewFixtures.withReview;
+import static io.sphere.sdk.test.SphereTestUtils.ENGLISH;
+import static io.sphere.sdk.test.SphereTestUtils.randomKey;
+import static io.sphere.sdk.test.SphereTestUtils.randomSlug;
+import static java.util.Collections.singleton;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class ChannelQueryIntegrationTest extends IntegrationTest {
@@ -27,20 +35,50 @@ public class ChannelQueryIntegrationTest extends IntegrationTest {
 
     @Test
     public void queryByReviewRating() {
-        withChannelOfRole(client(), ChannelRole.PRIMARY ,product -> {
-            withReview(client(), b -> b.target(product).rating(1), review1 -> {
-                withReview(client(), b -> b.target(product).rating(3), review2 -> {
+        withChannelOfRole(client(), ChannelRole.PRIMARY , channel -> {
+            withReview(client(), b -> b.target(channel).rating(1), review1 -> {
+                withReview(client(), b -> b.target(channel).rating(3), review2 -> {
                     final ChannelQuery query = ChannelQuery.of()
                             .withPredicates(m -> m.reviewRatingStatistics().averageRating().is(2.0))
                             .plusPredicates(m -> m.reviewRatingStatistics().count().is(2))
-                            .plusPredicates(m -> m.is(product));
+                            .plusPredicates(m -> m.is(channel));
                     final List<Channel> results = client().executeBlocking(query).getResults();
                     assertThat(results).hasSize(1);
-                    final Channel channel = results.get(0);
-                    assertThat(channel.getId()).isEqualTo(product.getId());
-                    assertThat(channel.getReviewRatingStatistics().getCount()).isEqualTo(2);
+                    final Channel loadedChannel = results.get(0);
+                    assertThat(loadedChannel.getId()).isEqualTo(channel.getId());
+                    assertThat(loadedChannel.getReviewRatingStatistics().getCount()).isEqualTo(2);
                 });
             });
+        });
+    }
+
+    @Test
+    public void queryByRole() {
+        final ChannelRole channelRole = ChannelRole.PRODUCT_DISTRIBUTION;
+        withChannelOfRole(client(), channelRole, channel -> {
+            final ChannelQuery query = ChannelQuery.of()
+                    .plusPredicates(m -> m.roles().containsAny(singleton(channelRole)))
+                    .plusPredicates(m -> m.is(channel));
+            final List<Channel> results = client().executeBlocking(query).getResults();
+            assertThat(results).hasSize(1);
+        });
+    }
+
+    @Test
+    public void queryByNameAndDescription() {
+        final LocalizedString name = randomSlug();
+        final LocalizedString description = randomSlug();
+        final ChannelDraft channelDraft =
+                ChannelDraft.of(randomKey())
+                .withName(name)
+                .withDescription(description);
+        withChannel(client(), channelDraft, channel -> {
+            final ChannelQuery query = ChannelQuery.of()
+                    .plusPredicates(m -> m.is(channel))
+                    .plusPredicates(m -> m.name().locale(ENGLISH).is(name.get(ENGLISH)))
+                    .plusPredicates(m -> m.description().locale(ENGLISH).is(description.get(ENGLISH)));
+            final List<Channel> results = client().executeBlocking(query).getResults();
+            assertThat(results).hasSize(1);
         });
     }
 }
