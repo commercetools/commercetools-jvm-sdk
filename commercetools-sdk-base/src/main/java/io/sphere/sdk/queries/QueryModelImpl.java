@@ -5,6 +5,7 @@ import io.sphere.sdk.models.SphereEnumeration;
 
 import javax.annotation.Nullable;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static io.sphere.sdk.queries.StringQuerySortingModel.normalize;
 import static io.sphere.sdk.utils.SphereInternalUtils.toStream;
@@ -57,7 +58,7 @@ public class QueryModelImpl<T> extends Base implements QueryModel<T> {
         return new ReferenceCollectionQueryModelImpl<>(this, pathSegment);
     }
 
-    protected <E extends SphereEnumeration> SphereEnumerationOptionalQueryModel<T, E> enumerationQueryModel(final String pathSegment) {
+    protected <E extends SphereEnumeration> SphereEnumerationQueryModelImpl<T, E> enumerationQueryModel(final String pathSegment) {
         return new SphereEnumerationQueryModelImpl<>(this, pathSegment);
     }
 
@@ -201,5 +202,20 @@ public class QueryModelImpl<T> extends Base implements QueryModel<T> {
 
     public DirectionlessQuerySort<T> sort() {
         return new DirectionlessQuerySort<>(this);
+    }
+
+    protected  <E extends SphereEnumeration> List<String> transformSphereEnumeration(final Iterable<E> items) {
+        return toStream(items)
+                .map(enumValue -> enumValue.toSphereName())
+                .map(StringQuerySortingModel::normalize)
+                .collect(Collectors.toList());
+    }
+
+    protected EnumQueryModel<T> enumQueryModel(final String name) {
+        return new EnumLikeQueryModelImpl<>(this, name);
+    }
+
+    protected LocalizedEnumQueryModel<T> localizedEnumQueryModel(final String name) {
+        return new EnumLikeQueryModelImpl<>(this, name);
     }
 }

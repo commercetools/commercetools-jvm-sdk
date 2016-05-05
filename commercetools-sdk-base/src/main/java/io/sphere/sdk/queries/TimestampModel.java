@@ -2,13 +2,9 @@ package io.sphere.sdk.queries;
 
 import java.time.ZonedDateTime;
 
-public interface TimestampSortingModel<T> extends QuerySortingModel<T>, TimestampModel<T> {
-    @Deprecated
-    @Override
-    QuerySort<T> sort(QuerySortDirection sortDirection);
-
-    @Override
-    DirectionlessQuerySort<T> sort();
+public interface TimestampModel<T> extends EqualityQueryModel<T, ZonedDateTime> ,
+        NotEqualQueryModel<T, ZonedDateTime>, IsInQueryModel<T, ZonedDateTime>, InequalityQueryModel<T, ZonedDateTime>,
+        IsNotInQueryModel<T, ZonedDateTime> {
 
     @Override
     QueryPredicate<T> is(final ZonedDateTime value);
