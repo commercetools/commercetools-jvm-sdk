@@ -30,8 +30,4 @@ public interface IntegerQuerySortingModel<T> extends QueryModel<T>, QuerySorting
 
     @Override
     QueryPredicate<T> isPresent();
-
-    @Deprecated
-    @Override
-    QuerySort<T> sort(QuerySortDirection sortDirection);
 }

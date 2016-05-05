@@ -195,11 +195,6 @@ public class QueryModelImpl<T> extends Base implements QueryModel<T> {
                 .map(StringQuerySortingModel::normalize).collect(toList());
     }
 
-    @Deprecated
-    public QuerySort<T> sort(final QuerySortDirection sortDirection) {
-        return new SphereQuerySort<>(this, sortDirection);
-    }
-
     public DirectionlessQuerySort<T> sort() {
         return new DirectionlessQuerySort<>(this);
     }

@@ -53,9 +53,7 @@ import io.sphere.sdk.producttypes.ProductType;
 import io.sphere.sdk.producttypes.ProductTypeDraft;
 import io.sphere.sdk.producttypes.ProductTypeLocalRepository;
 import io.sphere.sdk.projects.Project;
-import io.sphere.sdk.queries.Get;
-import io.sphere.sdk.queries.QueryDsl;
-import io.sphere.sdk.queries.QueryPredicate;
+import io.sphere.sdk.queries.*;
 import io.sphere.sdk.reviews.ReviewDraft;
 import io.sphere.sdk.search.SearchKeywords;
 import io.sphere.sdk.search.model.ExistsFilterSearchModelSupport;
@@ -94,6 +92,19 @@ import java.util.function.Function;
  <li class=fixed-in-release></li>
  </ul>
  -->
+
+ <h3 class=released-version id="v1_0_0_RC7">1.0.0-RC7 (05.05.2016)</h3>
+
+ <ul>
+ <li class=removed-in-release>{@code QuerySortingModel#sort(io.sphere.sdk.queries.QuerySortDirection), use {@link QuerySortingModel#sort()} and then {@link DirectionlessQuerySort#asc()}/{@link DirectionlessQuerySort#desc()} instead</li>
+ <li class=new-in-release>improved {@link io.sphere.sdk.types.queries.FieldsQueryModel} to support the more field types</li>
+ <li class=new-in-release>added custom fields for {@link io.sphere.sdk.channels.Channel}</li>
+ <li class=new-in-release>added missing fields for {@link io.sphere.sdk.channels.queries.ChannelQueryModel} so channels can be queried by roles</li>
+ <li class=new-in-release>{@link PagedResult#getCount()} </li>
+ <li class=change-in-release>deprecated {@code PagedResult#size()} in favor of {@link PagedResult#getCount()}</li>
+ <li class=fixed-in-release>made factory methods of {@link ProductProjectionQueryBuilder} public (was not possible to instantiate)</li>
+ </ul>
+
 
  <h3 class=released-version id="v1_0_0_RC6">1.0.0-RC6 (22.04.2016)</h3>
 

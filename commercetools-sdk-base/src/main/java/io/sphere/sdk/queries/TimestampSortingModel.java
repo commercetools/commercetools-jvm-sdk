@@ -3,9 +3,6 @@ package io.sphere.sdk.queries;
 import java.time.ZonedDateTime;
 
 public interface TimestampSortingModel<T> extends QuerySortingModel<T>, TimestampModel<T> {
-    @Deprecated
-    @Override
-    QuerySort<T> sort(QuerySortDirection sortDirection);
 
     @Override
     DirectionlessQuerySort<T> sort();

@@ -36,10 +36,4 @@ final class LocaleQuerySortingModelImpl<T> extends QueryModelImpl<T> implements 
     public DirectionlessQuerySort<T> sort() {
         return new DirectionlessQuerySort<>(this);
     }
-
-    @Deprecated
-    @Override
-    public QuerySort<T> sort(final QuerySortDirection sortDirection) {
-        return new SphereQuerySort<>(this, sortDirection);
-    }
 }

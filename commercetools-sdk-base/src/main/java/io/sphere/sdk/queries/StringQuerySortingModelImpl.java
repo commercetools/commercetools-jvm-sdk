@@ -11,12 +11,6 @@ final class StringQuerySortingModelImpl<T> extends QueryModelImpl<T> implements 
         super(parent, pathSegment);
     }
 
-    @Deprecated
-    @Override
-    public QuerySort<T> sort(final QuerySortDirection sortDirection) {
-        return new SphereQuerySort<>(this, sortDirection);
-    }
-
     @Override
     public DirectionlessQuerySort<T> sort() {
         return new DirectionlessQuerySort<>(this);
