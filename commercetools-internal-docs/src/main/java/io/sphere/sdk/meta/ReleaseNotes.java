@@ -93,7 +93,7 @@ import java.util.function.Function;
  </ul>
  -->
 
- <h3 class=released-version id="v1_0_0_RC7">1.0.0-RC7 (05.05.2016)</h3>
+ <h3 class=released-version id="v1_0_0_RC7">1.0.0-RC7 (06.05.2016)</h3>
 
  <ul>
  <li class=removed-in-release>{@code QuerySortingModel#sort(io.sphere.sdk.queries.QuerySortDirection), use {@link QuerySortingModel#sort()} and then {@link DirectionlessQuerySort#asc()}/{@link DirectionlessQuerySort#desc()} instead</li>
