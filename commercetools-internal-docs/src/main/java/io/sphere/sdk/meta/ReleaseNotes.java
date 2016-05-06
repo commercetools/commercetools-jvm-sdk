@@ -96,7 +96,7 @@ import java.util.function.Function;
  <h3 class=released-version id="v1_0_0_RC7">1.0.0-RC7 (06.05.2016)</h3>
 
  <ul>
- <li class=removed-in-release>{@code QuerySortingModel#sort(io.sphere.sdk.queries.QuerySortDirection), use {@link QuerySortingModel#sort()} and then {@link DirectionlessQuerySort#asc()}/{@link DirectionlessQuerySort#desc()} instead</li>
+ <li class=removed-in-release>{@code QuerySortingModel#sort(io.sphere.sdk.queries.QuerySortDirection)}, use {@link QuerySortingModel#sort()} and then {@link DirectionlessQuerySort#asc()}/{@link DirectionlessQuerySort#desc()} instead</li>
  <li class=new-in-release>improved {@link io.sphere.sdk.types.queries.FieldsQueryModel} to support the more field types</li>
  <li class=new-in-release>added custom fields for {@link io.sphere.sdk.channels.Channel}</li>
  <li class=new-in-release>added missing fields for {@link io.sphere.sdk.channels.queries.ChannelQueryModel} so channels can be queried by roles</li>
