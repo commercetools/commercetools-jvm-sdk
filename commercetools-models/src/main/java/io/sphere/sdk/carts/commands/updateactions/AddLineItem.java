@@ -84,6 +84,11 @@ public final class AddLineItem extends UpdateActionImpl<Cart> implements CustomD
         return custom;
     }
 
+    @Nullable
+    public ExternalTaxRateDraft getExternalTaxRate() {
+        return externalTaxRate;
+    }
+
     public AddLineItem withSupplyChannel(final Referenceable<Channel> supplyChannel) {
         return new AddLineItem(getProductId(), getVariantId(), getQuantity(), supplyChannel.toReference(), getDistributionChannel(), getCustom(), externalTaxRate);
     }

@@ -87,6 +87,7 @@ public final class AddCustomLineItem extends UpdateActionImpl<Cart> implements C
         return slug;
     }
 
+    @Nullable
     public Reference<TaxCategory> getTaxCategory() {
         return taxCategory;
     }
