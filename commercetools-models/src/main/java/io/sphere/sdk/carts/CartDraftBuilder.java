@@ -3,6 +3,7 @@ package io.sphere.sdk.carts;
 import com.neovisionaries.i18n.CountryCode;
 import io.sphere.sdk.models.*;
 import io.sphere.sdk.shippingmethods.ShippingMethod;
+import io.sphere.sdk.taxcategories.TaxMode;
 import io.sphere.sdk.types.CustomFieldsDraft;
 
 import javax.annotation.Nullable;
@@ -38,6 +39,8 @@ public final class CartDraftBuilder extends Base implements Builder<CartDraftDsl
     private Address billingAddress;
     @Nullable
     private Reference<ShippingMethod> shippingMethod;
+    @Nullable
+    private TaxMode taxMode;
 
     CartDraftBuilder(final CurrencyUnit currency, @Nullable final String customerId,
                      @Nullable final CountryCode country, @Nullable final InventoryMode inventoryMode,
@@ -46,7 +49,7 @@ public final class CartDraftBuilder extends Base implements Builder<CartDraftDsl
                      @Nullable final List<CustomLineItemDraft> customLineItems,
                      @Nullable final Address shippingAddress,
                      @Nullable final Address billingAddress,
-                     @Nullable final Reference<ShippingMethod> shippingMethod) {
+                     @Nullable final Reference<ShippingMethod> shippingMethod, final TaxMode taxMode) {
         this.currency = currency;
         this.customerId = customerId;
         this.country = country;
@@ -58,10 +61,11 @@ public final class CartDraftBuilder extends Base implements Builder<CartDraftDsl
         this.shippingAddress = shippingAddress;
         this.billingAddress = billingAddress;
         this.shippingMethod = shippingMethod;
+        this.taxMode = taxMode;
     }
 
     CartDraftBuilder(final CartDraft template) {
-        this(template.getCurrency(), template.getCustomerId(), template.getCountry(), template.getInventoryMode(), template.getCustom(), template.getCustomerEmail(), template.getLineItems(), template.getCustomLineItems(), template.getShippingAddress(), template.getBillingAddress(), template.getShippingMethod());
+        this(template.getCurrency(), template.getCustomerId(), template.getCountry(), template.getInventoryMode(), template.getCustom(), template.getCustomerEmail(), template.getLineItems(), template.getCustomLineItems(), template.getShippingAddress(), template.getBillingAddress(), template.getShippingMethod(), template.getTaxMode());
     }
 
     public static CartDraftBuilder of(final CartDraft template) {
@@ -94,7 +98,7 @@ public final class CartDraftBuilder extends Base implements Builder<CartDraftDsl
 
     @Override
     public CartDraftDsl build() {
-        return new CartDraftDsl(currency, customerId, country, inventoryMode, custom, customerEmail, lineItems, customLineItems, shippingAddress, billingAddress, shippingMethod);
+        return new CartDraftDsl(currency, customerId, country, inventoryMode, custom, customerEmail, lineItems, customLineItems, shippingAddress, billingAddress, shippingMethod, taxMode);
     }
 
     public CartDraftBuilder custom(@Nullable final CustomFieldsDraft custom) {
@@ -119,6 +123,11 @@ public final class CartDraftBuilder extends Base implements Builder<CartDraftDsl
 
     public CartDraftBuilder billingAddress(@Nullable final Address billingAddress) {
         this.billingAddress = billingAddress;
+        return this;
+    }
+
+    public CartDraftBuilder taxMode(@Nullable final TaxMode taxMode) {
+        this.taxMode = taxMode;
         return this;
     }
 
@@ -182,5 +191,10 @@ public final class CartDraftBuilder extends Base implements Builder<CartDraftDsl
     @Nullable
     public Reference<ShippingMethod> getShippingMethod() {
         return shippingMethod;
+    }
+
+    @Nullable
+    public TaxMode getTaxMode() {
+        return taxMode;
     }
 }

@@ -5,6 +5,7 @@ import com.neovisionaries.i18n.CountryCode;
 import io.sphere.sdk.models.Address;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.shippingmethods.ShippingMethod;
+import io.sphere.sdk.taxcategories.TaxMode;
 import io.sphere.sdk.types.CustomDraft;
 import io.sphere.sdk.types.CustomFieldsDraft;
 
@@ -51,6 +52,9 @@ public interface CartDraft extends CustomDraft {
 
     @Nullable
     CustomFieldsDraft getCustom();
+
+    @Nullable
+    TaxMode getTaxMode();
 
     static CartDraftDsl of(final CurrencyUnit currency) {
         return CartDraftDsl.of(currency);

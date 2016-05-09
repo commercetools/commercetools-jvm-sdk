@@ -9,6 +9,7 @@ import io.sphere.sdk.models.Address;
 import io.sphere.sdk.models.ResourceImpl;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.states.State;
+import io.sphere.sdk.taxcategories.TaxMode;
 import io.sphere.sdk.types.CustomFields;
 
 import javax.annotation.Nullable;
@@ -58,9 +59,10 @@ final class OrderImpl extends ResourceImpl<Order> implements Order {
     private final Reference<State> state;
     @Nullable
     private final PaymentInfo paymentInfo;
+    private final TaxMode taxMode;
 
     @JsonCreator
-    protected OrderImpl(final String id, final Long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt, @Nullable final Address billingAddress, @Nullable final CountryCode country, @Nullable final String customerEmail, @Nullable final Reference<CustomerGroup> customerGroup, @Nullable final String customerId, final List<CustomLineItem> customLineItems, final InventoryMode inventoryMode, final Long lastMessageSequenceNumber, final List<LineItem> lineItems, @Nullable final String orderNumber, final OrderState orderState, final List<ReturnInfo> returnInfo, @Nullable final ShipmentState shipmentState, @Nullable final Address shippingAddress, @Nullable final OrderShippingInfo shippingInfo, final Set<SyncInfo> syncInfo, @Nullable final TaxedPrice taxedPrice, final MonetaryAmount totalPrice, @Nullable final PaymentState paymentState, @Nullable final ZonedDateTime completedAt, final List<DiscountCodeInfo> discountCodes, @Nullable final Reference<Cart> cart, @Nullable final CustomFields custom, @Nullable final Reference<State> state, @Nullable final PaymentInfo paymentInfo) {
+    protected OrderImpl(final String id, final Long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt, @Nullable final Address billingAddress, @Nullable final CountryCode country, @Nullable final String customerEmail, @Nullable final Reference<CustomerGroup> customerGroup, @Nullable final String customerId, final List<CustomLineItem> customLineItems, final InventoryMode inventoryMode, final Long lastMessageSequenceNumber, final List<LineItem> lineItems, @Nullable final String orderNumber, final OrderState orderState, final List<ReturnInfo> returnInfo, @Nullable final ShipmentState shipmentState, @Nullable final Address shippingAddress, @Nullable final OrderShippingInfo shippingInfo, final Set<SyncInfo> syncInfo, @Nullable final TaxedPrice taxedPrice, final MonetaryAmount totalPrice, @Nullable final PaymentState paymentState, @Nullable final ZonedDateTime completedAt, final List<DiscountCodeInfo> discountCodes, @Nullable final Reference<Cart> cart, @Nullable final CustomFields custom, @Nullable final Reference<State> state, @Nullable final PaymentInfo paymentInfo, final TaxMode taxMode) {
         super(id, version, createdAt, lastModifiedAt);
         this.billingAddress = billingAddress;
         this.country = country;
@@ -87,6 +89,7 @@ final class OrderImpl extends ResourceImpl<Order> implements Order {
         this.custom = custom;
         this.state = state;
         this.paymentInfo = paymentInfo;
+        this.taxMode = taxMode;
     }
 
     @Override
@@ -228,5 +231,10 @@ final class OrderImpl extends ResourceImpl<Order> implements Order {
     @Nullable
     public PaymentInfo getPaymentInfo() {
         return paymentInfo;
+    }
+
+    @Override
+    public TaxMode getTaxMode() {
+        return taxMode;
     }
 }

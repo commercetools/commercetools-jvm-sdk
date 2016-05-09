@@ -8,6 +8,7 @@ import io.sphere.sdk.discountcodes.DiscountCodeInfo;
 import io.sphere.sdk.models.Address;
 import io.sphere.sdk.models.Resource;
 import io.sphere.sdk.models.Reference;
+import io.sphere.sdk.taxcategories.TaxMode;
 import io.sphere.sdk.types.Custom;
 import io.sphere.sdk.types.CustomFields;
 
@@ -168,6 +169,8 @@ public interface CartLike<T> extends Resource<T>, Custom {
      */
     @Nullable
     PaymentInfo getPaymentInfo();
+
+    TaxMode getTaxMode();
 
     /**
      * The currency of this cart/order.
