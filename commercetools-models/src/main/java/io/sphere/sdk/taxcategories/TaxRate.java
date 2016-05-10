@@ -9,6 +9,7 @@ import java.util.List;
 
 @JsonDeserialize(as=TaxRateImpl.class)
 public interface TaxRate {
+    @Nullable
     String getId();
 
     String getName();
