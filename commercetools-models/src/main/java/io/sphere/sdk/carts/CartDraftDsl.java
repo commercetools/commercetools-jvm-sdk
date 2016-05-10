@@ -7,7 +7,6 @@ import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Referenceable;
 import io.sphere.sdk.shippingmethods.ShippingMethod;
-import io.sphere.sdk.taxcategories.TaxMode;
 import io.sphere.sdk.types.CustomFieldsDraft;
 
 import javax.annotation.Nullable;

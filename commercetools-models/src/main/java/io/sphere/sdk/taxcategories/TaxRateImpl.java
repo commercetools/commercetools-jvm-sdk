@@ -17,11 +17,10 @@ final class TaxRateImpl extends Base implements TaxRate {
     @Nullable
     private final String state;
     private final List<SubRate> subRates;
-    private final Boolean externallySet;
 
     @JsonCreator
     TaxRateImpl(@Nullable final String id, final String name, final Double amount, final Boolean includedInPrice,
-                final CountryCode country, @Nullable final String state, final List<SubRate> subRates, final Boolean externallySet) {
+                final CountryCode country, @Nullable final String state, final List<SubRate> subRates) {
         this.id = id;
         this.name = name;
         this.amount = amount;
@@ -29,7 +28,6 @@ final class TaxRateImpl extends Base implements TaxRate {
         this.country = country;
         this.state = state;
         this.subRates = subRates;
-        this.externallySet = externallySet;
     }
 
     @Override
@@ -67,10 +65,6 @@ final class TaxRateImpl extends Base implements TaxRate {
     @Override
     public List<SubRate> getSubRates() {
         return subRates;
-    }
-
-    public Boolean isExternallySet() {
-        return externallySet;
     }
 
     @Deprecated

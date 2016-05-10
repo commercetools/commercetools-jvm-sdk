@@ -7,7 +7,6 @@ import io.sphere.sdk.discountcodes.DiscountCodeInfo;
 import io.sphere.sdk.models.Address;
 import io.sphere.sdk.models.ResourceImpl;
 import io.sphere.sdk.models.Reference;
-import io.sphere.sdk.taxcategories.TaxMode;
 import io.sphere.sdk.types.CustomFields;
 
 import javax.annotation.Nullable;

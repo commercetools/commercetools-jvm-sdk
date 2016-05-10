@@ -25,8 +25,6 @@ public interface TaxRate {
     @Nonnull
     List<SubRate> getSubRates();
 
-    Boolean isExternallySet();
-
     /**
      * compares tax categories by all fields except by ID
      *

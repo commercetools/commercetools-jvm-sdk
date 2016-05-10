@@ -2,7 +2,7 @@ package io.sphere.sdk.carts.commands.updateactions;
 
 import io.sphere.sdk.carts.Cart;
 import io.sphere.sdk.commands.UpdateActionImpl;
-import io.sphere.sdk.taxcategories.TaxMode;
+import io.sphere.sdk.carts.TaxMode;
 
 import javax.annotation.Nullable;
 

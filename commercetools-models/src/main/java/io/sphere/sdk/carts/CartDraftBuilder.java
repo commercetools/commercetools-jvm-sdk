@@ -3,7 +3,6 @@ package io.sphere.sdk.carts;
 import com.neovisionaries.i18n.CountryCode;
 import io.sphere.sdk.models.*;
 import io.sphere.sdk.shippingmethods.ShippingMethod;
-import io.sphere.sdk.taxcategories.TaxMode;
 import io.sphere.sdk.types.CustomFieldsDraft;
 
 import javax.annotation.Nullable;

@@ -64,6 +64,12 @@ public class CartFixtures {
         });
     }
 
+    public static void withCartDraft(final BlockingSphereClient client, final CartDraft draft, final Function<Cart, CartLike<?>> operator) {
+        final Cart cart = client.executeBlocking(CartCreateCommand.of(draft));
+        delete(client, operator.apply(cart));
+    }
+
+
     public static void withCart(final BlockingSphereClient client, final UnaryOperator<Cart> operator) {
         final Cart cart = createCartWithCountry(client);
         final Cart cartToDelete = operator.apply(cart);

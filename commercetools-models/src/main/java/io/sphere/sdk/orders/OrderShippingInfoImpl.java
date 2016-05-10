@@ -16,7 +16,7 @@ final class OrderShippingInfoImpl extends CartShippingInfoImpl implements OrderS
 
     @JsonCreator
     OrderShippingInfoImpl(final String shippingMethodName, final MonetaryAmount price, final ShippingRate shippingRate, final TaxRate taxRate, final Reference<TaxCategory> taxCategory, final Reference<ShippingMethod> shippingMethod, final List<Delivery> deliveries) {
-        super(shippingMethodName, price, shippingRate, taxRate, taxCategory, shippingMethod);
+        super(shippingMethodName, price, shippingRate, taxRate, taxCategory, shippingMethod, taxedPrice);
         this.deliveries = deliveries;
     }
 

@@ -1,6 +1,8 @@
 package io.sphere.sdk.taxcategories;
 
-final class SubRateImpl implements SubRate {
+import io.sphere.sdk.models.Base;
+
+final class SubRateImpl extends Base implements SubRate {
     private final String name;
     private final Double amount;
 
