@@ -16,29 +16,43 @@ public enum TaxMode implements SphereEnumeration {
      * <h3 id="create-cart-with-external-tax-mode">Create a cart with external tax mode</h3>
      *
      * <p>Cart creation with line item</p>
+     *
      * {@include.example io.sphere.sdk.carts.ExternalTaxRatesIntegrationTest#createCartWithALineItemWithAnExternalTaxRate()}
      *
      * <p>Create empty cart</p>
      *
      * {@include.example io.sphere.sdk.carts.ExternalTaxRatesIntegrationTest#createEmptyCart()}
      *
-     * <h3 id="add-line-item-with-external-tax-mode">Add a LineItem</h3>
+     * <h3 id="add-line-item-with-external-tax-mode">Add a LineItem with an external tax rate</h3>
      *
      * {@include.example io.sphere.sdk.carts.ExternalTaxRatesIntegrationTest#addLineItem()}
      *
+     * <p>Error case when the cart does not have the external tax but a line item is added</p>
+     *
+     * {@include.example io.sphere.sdk.carts.ExternalTaxRatesIntegrationTest#addLineItemOnPlatformCart()}
+     *
+     * <h3 id="add-line-item-with-delayed-external-tax-rate">Add a LineItem with an external tax rate</h3>
+     *
+     * <h3 id="add-custom-line-item-with-external-tax-mode">Add a CustomLineItem with an external tax rate</h3>
+     *
+     * {@include.example io.sphere.sdk.carts.ExternalTaxRatesIntegrationTest#addCustomLineItem()}
+     *
+     * <h3 id="add-custom-shipping-method-with-external-tax-mode">Add a custom shipping method with an external tax rate</h3>
+     *
+     * {@include.example io.sphere.sdk.carts.ExternalTaxRatesIntegrationTest#addCustomShippingMethod()}
      *
      *
      *
      *
-     * {@include.example }
+     *
+     *
      * {@include.example }
      *
      * <!--
-     *
-     * - fill this cart with line item and custom rate
-     *   - error case, cart with platform mode and then add line item with tax rate
-     * - fill custom line item
-     * - set custom shipping method
+     * - it is possible with external mode to add items without tax yet and then update
+     *  - lineitem without
+     *  - custom line item without
+     *  - shipping method without
      * - update line item rate
      * - update custom line item rate
      * - update shipping method rate

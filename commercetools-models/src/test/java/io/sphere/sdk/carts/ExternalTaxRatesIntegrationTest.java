@@ -2,22 +2,34 @@ package io.sphere.sdk.carts;
 
 import io.sphere.sdk.carts.commands.CartCreateCommand;
 import io.sphere.sdk.carts.commands.CartUpdateCommand;
+import io.sphere.sdk.carts.commands.updateactions.AddCustomLineItem;
 import io.sphere.sdk.carts.commands.updateactions.AddLineItem;
+import io.sphere.sdk.carts.commands.updateactions.SetCustomShippingMethod;
+import io.sphere.sdk.carts.queries.CartQuery;
+import io.sphere.sdk.client.ErrorResponseException;
+import io.sphere.sdk.json.SphereJsonUtils;
 import io.sphere.sdk.models.Address;
+import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.products.PriceDraft;
 import io.sphere.sdk.products.Product;
+import io.sphere.sdk.shippingmethods.ShippingRate;
 import io.sphere.sdk.taxcategories.*;
 import io.sphere.sdk.test.IntegrationTest;
 import io.sphere.sdk.utils.MoneyImpl;
 import org.junit.Test;
 
+import javax.money.MonetaryAmount;
 import java.util.List;
+import java.util.Set;
 
+import static io.sphere.sdk.carts.CartFixtures.createCartWithCountry;
+import static io.sphere.sdk.carts.CartFixtures.withCartDraft;
 import static io.sphere.sdk.products.ProductFixtures.withProduct;
 import static io.sphere.sdk.products.ProductFixtures.withProductOfPrices;
 import static io.sphere.sdk.test.SphereTestUtils.*;
 import static java.util.Collections.singletonList;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.catchThrowable;
 
 public class ExternalTaxRatesIntegrationTest extends IntegrationTest {
 
@@ -35,14 +47,14 @@ public class ExternalTaxRatesIntegrationTest extends IntegrationTest {
     public void addLineItem() {
         withProductOfPrices(client(), singletonList(PriceDraft.of(EURO_10)), (Product product) -> {
             final CartDraft draft = CartDraft.of(EUR).withTaxMode(TaxMode.EXTERNAL);
-            CartFixtures.withCartDraft(client(), draft, (Cart cart) -> {
+            withCartDraft(client(), draft, (Cart cart) -> {
                 final int quantity = 3;
                 final int variantId = product.getMasterData().getStaged().getMasterVariant().getId();
                 final String taxRateName = "special tax";
-                final double amount = 0.20;
+                final double rate = 0.20;
                 final List<SubRate> subRates = asList(SubRate.of("foo", 0.11), SubRate.of("bar", 0.09));
                 final ExternalTaxRateDraft externalTaxRate =
-                        ExternalTaxRateDraftBuilder.ofAmount(amount, taxRateName, DE)
+                        ExternalTaxRateDraftBuilder.ofAmount(rate, taxRateName, DE)
                                 .subRates(subRates)
                                 .build();
                 final AddLineItem updateAction = AddLineItem.of(product, variantId, quantity)
@@ -67,12 +79,96 @@ public class ExternalTaxRatesIntegrationTest extends IntegrationTest {
     }
 
     @Test
+    public void addCustomLineItem() {
+        final CartDraft draft = CartDraft.of(EUR)
+                .withTaxMode(TaxMode.EXTERNAL)
+                .withShippingAddress(Address.of(DE));
+        withCartDraft(client(), draft, (Cart cart) -> {
+            final MonetaryAmount money = MoneyImpl.of("23.50", EUR);
+            final String slug = "thing-slug";
+            final LocalizedString name = en("thing");
+            final long quantity = 5;
+            final String taxRateName = "special tax";
+            final double taxRate = 0.20;
+            final ExternalTaxRateDraft externalTaxRate =
+                    ExternalTaxRateDraftBuilder.ofAmount(taxRate, taxRateName, DE).build();
+            final CustomLineItemDraft item = CustomLineItemDraft.of(name, slug, money, externalTaxRate, quantity);
+
+            final Cart cartWithCustomLineItems = client().executeBlocking(CartUpdateCommand.of(cart, AddCustomLineItem.of(item)));
+            assertThat(cartWithCustomLineItems.getCustomLineItems()).hasSize(1);
+            final CustomLineItem customLineItem = cartWithCustomLineItems.getCustomLineItems().get(0);
+
+            assertThat(customLineItem.getTaxCategory()).isNull();
+            assertThat(customLineItem.getTaxedPrice().getTotalNet()).isEqualTo(MoneyImpl.of("117.50", EUR));
+            assertThat(customLineItem.getTaxedPrice().getTotalGross()).isEqualTo(MoneyImpl.of("141.00", EUR));
+            assertThat(customLineItem.getTaxRate().getName()).isEqualTo(taxRateName);
+
+            return cartWithCustomLineItems;
+        });
+    }
+
+    @Test
+    public void addCustomShippingMethod() {
+        final CartDraft draft = CartDraft.of(EUR)
+                .withTaxMode(TaxMode.EXTERNAL)
+                .withShippingAddress(Address.of(DE));
+        withCartDraft(client(), draft, (Cart cart) -> {
+            final String taxRateName = "special tax";
+            final double taxRate = 0.20;
+            final ExternalTaxRateDraft externalTaxRate =
+                    ExternalTaxRateDraftBuilder.ofAmount(taxRate, taxRateName, DE).build();
+            final ShippingRate shippingRate = ShippingRate.of(EURO_10);
+            final SetCustomShippingMethod action =
+                    SetCustomShippingMethod.of("name", shippingRate, externalTaxRate);
+
+            final Cart cartWithShippingMethod = client().executeBlocking(CartUpdateCommand.of(cart, action));
+
+            final CartShippingInfo shippingInfo = cartWithShippingMethod.getShippingInfo();
+            assertThat(shippingInfo).isNotNull();
+            assertThat(shippingInfo.getShippingRate()).isEqualTo(shippingRate);
+            assertThat(shippingInfo.getTaxCategory()).isNull();
+            assertThat(shippingInfo.getTaxedPrice().getTotalNet()).isEqualTo(EURO_10);
+            assertThat(shippingInfo.getTaxedPrice().getTotalGross()).isEqualTo(EURO_12);
+            assertThat(shippingInfo.getTaxRate().getName()).isEqualTo(taxRateName);
+
+            return cartWithShippingMethod;
+        });
+    }
+
+    @Test
+    public void addLineItemOnPlatformCart() {
+        withProductOfPrices(client(), singletonList(PriceDraft.of(EURO_10)), (Product product) -> {
+            final CartDraft draft = CartDraft.of(EUR);//uses by default platform!
+            withCartDraft(client(), draft, (Cart cart) -> {
+                final int quantity = 3;
+                final int variantId = product.getMasterData().getStaged().getMasterVariant().getId();
+                final String taxRateName = "special tax";
+                final double taxRate = 0.20;
+                final List<SubRate> subRates = asList(SubRate.of("foo", 0.11), SubRate.of("bar", 0.09));
+                final ExternalTaxRateDraft externalTaxRate =
+                        ExternalTaxRateDraftBuilder.ofAmount(taxRate, taxRateName, DE)
+                                .subRates(subRates)
+                                .build();
+                final AddLineItem updateAction = AddLineItem.of(product, variantId, quantity)
+                        .withExternalTaxRate(externalTaxRate);
+
+                final Throwable throwable = catchThrowable(() -> client().executeBlocking(CartUpdateCommand.of(cart, updateAction)));
+
+                //the error message is sth. like "Cannot set an external tax rate on a cart with taxMode 'Platform'."
+                assertThat(throwable).isInstanceOf(ErrorResponseException.class);
+
+                return cart;
+            });
+        });
+    }
+
+    @Test
     public void createCartWithALineItemWithAnExternalTaxRate() {
         withProductOfPrices(client(), singletonList(PriceDraft.of(EURO_10)), (Product product) -> {
             final String taxRateName = "special tax";
-            final double amount = 0.20;
+            final double rate = 0.20;
             final ExternalTaxRateDraft externalTaxRate =
-                    ExternalTaxRateDraftBuilder.ofAmount(amount, taxRateName, DE).build();
+                    ExternalTaxRateDraftBuilder.ofAmount(rate, taxRateName, DE).build();
             final int quantity = 22;
             final int variantId = 1;
             final LineItemDraft itemDraft = LineItemDraft.of(product, variantId, quantity)
@@ -92,7 +188,7 @@ public class ExternalTaxRatesIntegrationTest extends IntegrationTest {
             softAssert(s -> {
                 final TaxRate taxRate = lineItem.getTaxRate();
                 s.assertThat(taxRate.getName()).isEqualTo(taxRateName);
-                s.assertThat(taxRate.getAmount()).isEqualTo(amount);
+                s.assertThat(taxRate.getAmount()).isEqualTo(taxRate);
                 s.assertThat(taxRate.getCountry()).isEqualTo(DE);
                 s.assertThat(taxRate.getId()).as("tax rate id").isNull();
                 s.assertThat(taxRate.getSubRates()).as("sub rates").isEmpty();

@@ -67,8 +67,8 @@ public final class AddCustomLineItem extends UpdateActionImpl<Cart> implements C
     }
 
     public static AddCustomLineItem of(final CustomLineItemDraft draft) {
-        return of(draft.getName(), draft.getSlug(), draft.getMoney(),
-                draft.getTaxCategory(), draft.getQuantity(), draft.getCustom());
+        return new AddCustomLineItem(draft.getName(), draft.getSlug(), draft.getMoney(),
+                draft.getTaxCategory(), draft.getQuantity(), draft.getCustom(), draft.getExternalTaxRate());
     }
 
     public LocalizedString getName() {
