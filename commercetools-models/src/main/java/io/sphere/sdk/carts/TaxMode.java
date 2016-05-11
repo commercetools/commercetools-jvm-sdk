@@ -31,11 +31,17 @@ public enum TaxMode implements SphereEnumeration {
      *
      * {@include.example io.sphere.sdk.carts.ExternalTaxRatesIntegrationTest#addLineItemOnPlatformCart()}
      *
-     * <h3 id="add-line-item-with-delayed-external-tax-rate">Add a LineItem with an external tax rate</h3>
+     * <h3 id="add-line-item-with-delayed-external-tax-rate">Add a LineItem and add the external tax rate later</h3>
+     *
+     * {@include.example io.sphere.sdk.carts.ExternalTaxRatesIntegrationTest#setLineItemTaxRate()}
      *
      * <h3 id="add-custom-line-item-with-external-tax-mode">Add a CustomLineItem with an external tax rate</h3>
      *
      * {@include.example io.sphere.sdk.carts.ExternalTaxRatesIntegrationTest#addCustomLineItem()}
+     *
+     * <h3 id="add-line-item-with-delayed-external-tax-rate">Add a CustomLineItem and add the external tax rate later</h3>
+     *
+     * {@include.example }
      *
      * <h3 id="add-custom-shipping-method-with-external-tax-mode">Add a custom shipping method with an external tax rate</h3>
      *

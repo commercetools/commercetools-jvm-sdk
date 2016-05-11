@@ -2,12 +2,8 @@ package io.sphere.sdk.carts;
 
 import io.sphere.sdk.carts.commands.CartCreateCommand;
 import io.sphere.sdk.carts.commands.CartUpdateCommand;
-import io.sphere.sdk.carts.commands.updateactions.AddCustomLineItem;
-import io.sphere.sdk.carts.commands.updateactions.AddLineItem;
-import io.sphere.sdk.carts.commands.updateactions.SetCustomShippingMethod;
-import io.sphere.sdk.carts.queries.CartQuery;
+import io.sphere.sdk.carts.commands.updateactions.*;
 import io.sphere.sdk.client.ErrorResponseException;
-import io.sphere.sdk.json.SphereJsonUtils;
 import io.sphere.sdk.models.Address;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.products.PriceDraft;
@@ -20,9 +16,7 @@ import org.junit.Test;
 
 import javax.money.MonetaryAmount;
 import java.util.List;
-import java.util.Set;
 
-import static io.sphere.sdk.carts.CartFixtures.createCartWithCountry;
 import static io.sphere.sdk.carts.CartFixtures.withCartDraft;
 import static io.sphere.sdk.products.ProductFixtures.withProduct;
 import static io.sphere.sdk.products.ProductFixtures.withProductOfPrices;
@@ -79,6 +73,42 @@ public class ExternalTaxRatesIntegrationTest extends IntegrationTest {
     }
 
     @Test
+    public void setLineItemTaxRate() {
+        withProductOfPrices(client(), singletonList(PriceDraft.of(EURO_10)), (Product product) -> {
+            final CartDraft draft = CartDraft.of(EUR).withTaxMode(TaxMode.EXTERNAL);
+            withCartDraft(client(), draft, (Cart cart) -> {
+                final int quantity = 3;
+                final int variantId = product.getMasterData().getStaged().getMasterVariant().getId();
+                final AddLineItem updateAction = AddLineItem.of(product, variantId, quantity);
+                final Cart cartWithLineItem = client().executeBlocking(CartUpdateCommand.of(cart, updateAction));
+
+                final LineItem lineItem = cartWithLineItem.getLineItems().get(0);
+                assertThat(lineItem.getTaxRate()).isNull();
+                assertThat(lineItem.getTotalPrice()).isEqualTo(EURO_30);
+                assertThat(lineItem.getTaxedPrice()).isNull();
+
+                //now add the taxes
+                final String taxRateName = "special tax";
+                final double taxRate = 0.20;
+                final ExternalTaxRateDraft externalTaxRate =
+                        ExternalTaxRateDraftBuilder.ofAmount(taxRate, taxRateName, DE).build();
+
+                final SetLineItemTaxRate setLineItemTaxRate = SetLineItemTaxRate.of(lineItem.getId(), externalTaxRate);
+                final Cart cartWithTaxedLineItem =
+                        client().executeBlocking(CartUpdateCommand.of(cartWithLineItem, setLineItemTaxRate));
+
+                final LineItem taxedLineItem = cartWithTaxedLineItem.getLineItems().get(0);
+                assertThat(taxedLineItem.getTaxRate().getName()).isEqualTo(taxRateName);
+                assertThat(taxedLineItem.getTotalPrice()).isEqualTo(EURO_30);
+                assertThat(taxedLineItem.getTaxedPrice().getTotalGross()).isEqualTo(EURO_36);
+                assertThat(taxedLineItem.getTaxedPrice().getTotalNet()).isEqualTo(EURO_30);
+
+                return cartWithTaxedLineItem;
+            });
+        });
+    }
+
+    @Test
     public void addCustomLineItem() {
         final CartDraft draft = CartDraft.of(EUR)
                 .withTaxMode(TaxMode.EXTERNAL)
@@ -92,6 +122,34 @@ public class ExternalTaxRatesIntegrationTest extends IntegrationTest {
             final double taxRate = 0.20;
             final ExternalTaxRateDraft externalTaxRate =
                     ExternalTaxRateDraftBuilder.ofAmount(taxRate, taxRateName, DE).build();
+            final CustomLineItemDraft item = CustomLineItemDraft.ofExternalTaxCalculation(name, slug, money, externalTaxRate, quantity);
+
+            final Cart cartWithCustomLineItems = client().executeBlocking(CartUpdateCommand.of(cart, AddCustomLineItem.of(item)));
+            assertThat(cartWithCustomLineItems.getCustomLineItems()).hasSize(1);
+            final CustomLineItem customLineItem = cartWithCustomLineItems.getCustomLineItems().get(0);
+
+            assertThat(customLineItem.getTaxCategory()).isNull();
+            assertThat(customLineItem.getTaxedPrice().getTotalNet()).isEqualTo(MoneyImpl.of("117.50", EUR));
+            assertThat(customLineItem.getTaxedPrice().getTotalGross()).isEqualTo(MoneyImpl.of("141.00", EUR));
+            assertThat(customLineItem.getTaxRate().getName()).isEqualTo(taxRateName);
+
+            return cartWithCustomLineItems;
+        });
+    }
+
+    @Test
+    public void setCustomLineItemTaxRate() {
+        final CartDraft draft = CartDraft.of(EUR)
+                .withTaxMode(TaxMode.EXTERNAL)
+                .withShippingAddress(Address.of(DE));
+        withCartDraft(client(), draft, (Cart cart) -> {
+            final MonetaryAmount money = MoneyImpl.of("23.50", EUR);
+            final String slug = "thing-slug";
+            final LocalizedString name = en("thing");
+            final long quantity = 5;
+
+
+
             final CustomLineItemDraft item = CustomLineItemDraft.of(name, slug, money, externalTaxRate, quantity);
 
             final Cart cartWithCustomLineItems = client().executeBlocking(CartUpdateCommand.of(cart, AddCustomLineItem.of(item)));
@@ -102,6 +160,12 @@ public class ExternalTaxRatesIntegrationTest extends IntegrationTest {
             assertThat(customLineItem.getTaxedPrice().getTotalNet()).isEqualTo(MoneyImpl.of("117.50", EUR));
             assertThat(customLineItem.getTaxedPrice().getTotalGross()).isEqualTo(MoneyImpl.of("141.00", EUR));
             assertThat(customLineItem.getTaxRate().getName()).isEqualTo(taxRateName);
+
+
+            final String taxRateName = "special tax";
+            final double taxRate = 0.20;
+            final ExternalTaxRateDraft externalTaxRate =
+                    ExternalTaxRateDraftBuilder.ofAmount(taxRate, taxRateName, DE).build();
 
             return cartWithCustomLineItems;
         });

@@ -92,9 +92,22 @@ public interface CustomLineItemDraft extends CustomDraft {
      * @param quantity the count of items of this line item in the cart
      * @return draft
      */
-    static CustomLineItemDraft of(final LocalizedString name, final String slug, final MonetaryAmount money,
-                                  final ExternalTaxRateDraft externalTaxRate, final long quantity) {
+    static CustomLineItemDraft ofExternalTaxCalculation(final LocalizedString name, final String slug, final MonetaryAmount money,
+                                                        final ExternalTaxRateDraft externalTaxRate, final long quantity) {
         return new CustomLineItemDraftImpl(name, slug, money, null, quantity, null, externalTaxRate);
+    }
+
+    /**
+     * Creates a draft having no tax rate (for external tax calculation) and no custom fields.
+     * @param name the display name of the custom line item (corresponds to a product name)
+     * @param slug unique field in the cart which is intended to identify the custom line item (not translated)
+     * @param money the amount of the custom line item
+     * @param quantity the count of items of this line item in the cart
+     * @return draft
+     */
+    static CustomLineItemDraft ofExternalTaxCalculation(final LocalizedString name, final String slug, final MonetaryAmount money,
+                                                        final long quantity) {
+        return new CustomLineItemDraftImpl(name, slug, money, null, quantity, null, null);
     }
 
     /**
@@ -107,9 +120,26 @@ public interface CustomLineItemDraft extends CustomDraft {
      * @param custom custom fields for the custom line item
      * @return draft
      */
-    static CustomLineItemDraft of(final LocalizedString name, final String slug, final MonetaryAmount money,
-                                  final ExternalTaxRateDraft externalTaxRate, final long quantity,
-                                  @Nullable final CustomFieldsDraft custom) {
+    static CustomLineItemDraft ofExternalTaxCalculation(final LocalizedString name, final String slug, final MonetaryAmount money,
+                                                        final ExternalTaxRateDraft externalTaxRate, final long quantity,
+                                                        @Nullable final CustomFieldsDraft custom) {
         return new CustomLineItemDraftImpl(name, slug, money, null, quantity, custom, externalTaxRate);
+    }
+
+    /**
+     * Creates a draft having no tax rate (for external tax calculation) and custom fields.
+     * @param name the display name of the custom line item (corresponds to a product name)
+     * @param slug unique field in the cart which is intended to identify the custom line item (not translated)
+     * @param money the amount of the custom line item
+     * @param quantity the count of items of this line item in the cart
+     * @param custom custom fields for the custom line item
+     * @return draft
+     *
+     * @see io.sphere.sdk.carts.commands.updateactions.SetCustomLineItemTaxRate
+     */
+    static CustomLineItemDraft ofExternalTaxCalculation(final LocalizedString name, final String slug, final MonetaryAmount money,
+                                                        final long quantity,
+                                                        @Nullable final CustomFieldsDraft custom) {
+        return new CustomLineItemDraftImpl(name, slug, money, null, quantity, custom, null);
     }
 }
