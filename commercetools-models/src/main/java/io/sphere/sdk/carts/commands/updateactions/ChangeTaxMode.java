@@ -15,15 +15,14 @@ import javax.annotation.Nullable;
 
  */
 public final class ChangeTaxMode extends UpdateActionImpl<Cart> {
-    @Nullable
     private final TaxMode taxMode;
 
-    private ChangeTaxMode(@Nullable final TaxMode taxMode) {
-        super("setShippingMethodTaxRate");
+    private ChangeTaxMode(final TaxMode taxMode) {
+        super("changeTaxMode");
         this.taxMode = taxMode;
     }
 
-    public static ChangeTaxMode of(@Nullable final TaxMode taxMode) {
+    public static ChangeTaxMode of(final TaxMode taxMode) {
         return new ChangeTaxMode(taxMode);
     }
 

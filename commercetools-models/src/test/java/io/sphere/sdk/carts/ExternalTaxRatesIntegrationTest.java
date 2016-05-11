@@ -3,14 +3,16 @@ package io.sphere.sdk.carts;
 import io.sphere.sdk.carts.commands.CartCreateCommand;
 import io.sphere.sdk.carts.commands.CartUpdateCommand;
 import io.sphere.sdk.carts.commands.updateactions.*;
-import io.sphere.sdk.categories.queries.CategoryQuery;
 import io.sphere.sdk.client.ErrorResponseException;
 import io.sphere.sdk.models.Address;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.products.PriceDraft;
 import io.sphere.sdk.products.Product;
 import io.sphere.sdk.shippingmethods.ShippingRate;
-import io.sphere.sdk.taxcategories.*;
+import io.sphere.sdk.taxcategories.ExternalTaxRateDraft;
+import io.sphere.sdk.taxcategories.ExternalTaxRateDraftBuilder;
+import io.sphere.sdk.taxcategories.SubRate;
+import io.sphere.sdk.taxcategories.TaxRate;
 import io.sphere.sdk.test.IntegrationTest;
 import io.sphere.sdk.utils.MoneyImpl;
 import org.junit.Test;
@@ -19,7 +21,6 @@ import javax.money.MonetaryAmount;
 import java.util.List;
 
 import static io.sphere.sdk.carts.CartFixtures.withCartDraft;
-import static io.sphere.sdk.products.ProductFixtures.withProduct;
 import static io.sphere.sdk.products.ProductFixtures.withProductOfPrices;
 import static io.sphere.sdk.test.SphereTestUtils.*;
 import static java.util.Collections.singletonList;
@@ -36,6 +37,21 @@ public class ExternalTaxRatesIntegrationTest extends IntegrationTest {
         final Cart cart = client().executeBlocking(CartCreateCommand.of(cartDraft));
 
         assertThat(cart.getTaxMode()).isEqualTo(TaxMode.EXTERNAL);
+    }
+
+    @Test
+    public void changeTaxMode() {
+        final CartDraftDsl cartDraft = CartDraft.of(EUR)
+                .withTaxMode(TaxMode.EXTERNAL);//important
+
+        final Cart externalTaxModeCart = client().executeBlocking(CartCreateCommand.of(cartDraft));
+
+        assertThat(externalTaxModeCart.getTaxMode()).isEqualTo(TaxMode.EXTERNAL);
+
+        final Cart platformTaxModeCart =
+                client().executeBlocking(CartUpdateCommand.of(externalTaxModeCart, ChangeTaxMode.of(TaxMode.PLATFORM)));
+
+        assertThat(platformTaxModeCart.getTaxMode()).isEqualTo(TaxMode.PLATFORM);
     }
 
     @Test
@@ -67,6 +83,45 @@ public class ExternalTaxRatesIntegrationTest extends IntegrationTest {
                 assertThat(lineItem.getTotalPrice()).isEqualTo(MoneyImpl.ofCents(3000, "EUR"));
                 assertThat(lineItem.getTaxedPrice().getTotalNet()).isEqualTo(MoneyImpl.ofCents(3000, "EUR"));
                 assertThat(lineItem.getTaxedPrice().getTotalGross()).isEqualTo(MoneyImpl.ofCents(3600, "EUR"));
+
+                final Cart platformTaxModeCart =
+                        client().executeBlocking(CartUpdateCommand.of(cartWithLineItem, ChangeTaxMode.of(TaxMode.PLATFORM)));
+
+                return platformTaxModeCart;
+            });
+        });
+    }
+
+    @Test
+    public void errorMovingFromExternalToPlatformTaxMode() {
+        withProductOfPrices(client(), singletonList(PriceDraft.of(EURO_10)), (Product product) -> {
+            final CartDraft draft = CartDraft.of(EUR).withTaxMode(TaxMode.EXTERNAL);
+            withCartDraft(client(), draft, (Cart cart) -> {
+                final int quantity = 3;
+                final int variantId = product.getMasterData().getStaged().getMasterVariant().getId();
+                final String taxRateName = "special tax";
+                final double rate = 0.20;
+                final List<SubRate> subRates = asList(SubRate.of("foo", 0.11), SubRate.of("bar", 0.09));
+                final ExternalTaxRateDraft externalTaxRate =
+                        ExternalTaxRateDraftBuilder.ofAmount(rate, taxRateName, DE)
+                                .subRates(subRates)
+                                .build();
+                final AddLineItem updateAction = AddLineItem.of(product, variantId, quantity)
+                        .withExternalTaxRate(externalTaxRate);
+                final Cart cartWithLineItem = client().executeBlocking(CartUpdateCommand.of(cart, updateAction));
+
+                final LineItem lineItem = cartWithLineItem.getLineItems().get(0);
+                final TaxRate taxRate = lineItem.getTaxRate();
+                assertThat(taxRate.getName()).isEqualTo(taxRateName);
+
+                final CartUpdateCommand setTaxModeCmd =
+                        CartUpdateCommand.of(cartWithLineItem, ChangeTaxMode.of(TaxMode.PLATFORM));
+                final Throwable throwable = catchThrowable(() -> client().executeBlocking(setTaxModeCmd));
+
+                assertThat(throwable)
+                        .as("it is not possible to change the cart to platform tax mode, " +
+                                "if the product does not have a tax category")
+                        .isInstanceOf(ErrorResponseException.class);
 
                 return cartWithLineItem;
             });
@@ -313,11 +368,5 @@ public class ExternalTaxRatesIntegrationTest extends IntegrationTest {
                 s.assertThat(taxedPrice.getTotalNet()).as("net").isEqualTo(MoneyImpl.of(220, EUR));
             });
         });
-
     }
-
-    //TODO check with subRates
-    //TODO check with states
-    //test io.sphere.sdk.taxcategories.TaxRate.getSubRates() not null
-    //remove external tag rate from custom line item without taxcat
 }

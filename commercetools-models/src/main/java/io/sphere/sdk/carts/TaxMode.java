@@ -51,22 +51,17 @@ public enum TaxMode implements SphereEnumeration {
      *
      * {@include.example io.sphere.sdk.carts.ExternalTaxRatesIntegrationTest#setShippingMethodTaxRate()}
      *
+     * <h3 id="change-the-tax-mode-of-a-cart">Change the tax mode of a cart</h3>
+     * <p>Example</p>
+     * {@include.example io.sphere.sdk.carts.ExternalTaxRatesIntegrationTest#changeTaxMode()}
      *
+     * <p>It fails if the products does not have a tax category set</p>
+     * {@include.example io.sphere.sdk.carts.ExternalTaxRatesIntegrationTest#errorMovingFromExternalToPlatformTaxMode()}
      *
-     *
-     *
-     *
-     * {@include.example }
-     *
-     * <!--
-     * - update line item rate
-     * - update custom line item rate
-     * - update shipping method rate
-     *   - also for normal one?
-     *   - check taxedPrice
-     * - change tax mode for the cart
-     *
-     * -->
+     * <p>In case you use {@link CustomLineItem}s as well as external and the platform tax mode it is advised to
+     * add the tax category at the time of the creation of the custom line item if you don't know which tax mode will be used later.
+     * A cart with an external tax mode having a custom line item without a tax category cannot transformed into a cart with platform tax calculation,
+     * to recover from this the custom object needs to be removed and added with a tax category.</p>
      *
      */
     EXTERNAL,
