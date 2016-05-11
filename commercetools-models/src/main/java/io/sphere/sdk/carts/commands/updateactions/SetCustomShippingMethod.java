@@ -40,9 +40,13 @@ public final class SetCustomShippingMethod extends UpdateActionImpl<Cart> {
         return new SetCustomShippingMethod(shippingMethodName, shippingRate, taxCategory, null);
     }
 
-    public static SetCustomShippingMethod of(final String shippingMethodName, final ShippingRate shippingRate,
-                                             final ExternalTaxRateDraft externalTaxRate) {
+    public static SetCustomShippingMethod ofExternalTaxCalculation(final String shippingMethodName, final ShippingRate shippingRate,
+                                                                   final ExternalTaxRateDraft externalTaxRate) {
         return new SetCustomShippingMethod(shippingMethodName, shippingRate, null, externalTaxRate);
+    }
+
+    public static SetCustomShippingMethod ofExternalTaxCalculation(final String shippingMethodName, final ShippingRate shippingRate) {
+        return new SetCustomShippingMethod(shippingMethodName, shippingRate, null, null);
     }
 
     public String getShippingMethodName() {

@@ -11,7 +11,7 @@ import javax.annotation.Nullable;
 
  {@doc.gen intro}
 
- {@include.example }
+ {@include.example io.sphere.sdk.carts.ExternalTaxRatesIntegrationTest#setCustomLineItemTaxRate()}
 
  */
 public final class SetCustomLineItemTaxRate extends UpdateActionImpl<Cart> {
@@ -20,7 +20,7 @@ public final class SetCustomLineItemTaxRate extends UpdateActionImpl<Cart> {
     private final String customLineItemId;
 
     private SetCustomLineItemTaxRate(final String customLineItemId, @Nullable final ExternalTaxRateDraft externalTaxRate) {
-        super("setLineItemTaxRate");
+        super("setCustomLineItemTaxRate");
         this.externalTaxRate = externalTaxRate;
         this.customLineItemId = customLineItemId;
     }

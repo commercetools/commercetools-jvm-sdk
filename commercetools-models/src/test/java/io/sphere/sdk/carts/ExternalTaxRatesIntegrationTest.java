@@ -3,6 +3,7 @@ package io.sphere.sdk.carts;
 import io.sphere.sdk.carts.commands.CartCreateCommand;
 import io.sphere.sdk.carts.commands.CartUpdateCommand;
 import io.sphere.sdk.carts.commands.updateactions.*;
+import io.sphere.sdk.categories.queries.CategoryQuery;
 import io.sphere.sdk.client.ErrorResponseException;
 import io.sphere.sdk.models.Address;
 import io.sphere.sdk.models.LocalizedString;
@@ -147,27 +148,33 @@ public class ExternalTaxRatesIntegrationTest extends IntegrationTest {
             final String slug = "thing-slug";
             final LocalizedString name = en("thing");
             final long quantity = 5;
+            final CustomLineItemDraft item = CustomLineItemDraft.ofExternalTaxCalculation(name, slug, money, quantity);
 
-
-
-            final CustomLineItemDraft item = CustomLineItemDraft.of(name, slug, money, externalTaxRate, quantity);
-
-            final Cart cartWithCustomLineItems = client().executeBlocking(CartUpdateCommand.of(cart, AddCustomLineItem.of(item)));
-            assertThat(cartWithCustomLineItems.getCustomLineItems()).hasSize(1);
-            final CustomLineItem customLineItem = cartWithCustomLineItems.getCustomLineItems().get(0);
+            final Cart cartWithCustomLineItem = client().executeBlocking(CartUpdateCommand.of(cart, AddCustomLineItem.of(item)));
+            assertThat(cartWithCustomLineItem.getCustomLineItems()).hasSize(1);
+            final CustomLineItem customLineItem = cartWithCustomLineItem.getCustomLineItems().get(0);
 
             assertThat(customLineItem.getTaxCategory()).isNull();
-            assertThat(customLineItem.getTaxedPrice().getTotalNet()).isEqualTo(MoneyImpl.of("117.50", EUR));
-            assertThat(customLineItem.getTaxedPrice().getTotalGross()).isEqualTo(MoneyImpl.of("141.00", EUR));
-            assertThat(customLineItem.getTaxRate().getName()).isEqualTo(taxRateName);
-
+            assertThat(customLineItem.getTaxedPrice()).isNull();
+            assertThat(customLineItem.getTaxRate())
+                    .as("custom line item does not have tax information yet")
+                    .isNull();
 
             final String taxRateName = "special tax";
             final double taxRate = 0.20;
             final ExternalTaxRateDraft externalTaxRate =
                     ExternalTaxRateDraftBuilder.ofAmount(taxRate, taxRateName, DE).build();
 
-            return cartWithCustomLineItems;
+            final SetCustomLineItemTaxRate updateAction = SetCustomLineItemTaxRate.of(customLineItem.getId(), externalTaxRate);
+            final Cart cartWithTaxedLineItem = client().executeBlocking(CartUpdateCommand.of(cartWithCustomLineItem, updateAction));
+
+            final CustomLineItem taxedCustomLineItem = cartWithTaxedLineItem.getCustomLineItems().get(0);
+            assertThat(taxedCustomLineItem.getTaxCategory()).isNull();
+            assertThat(taxedCustomLineItem.getTaxedPrice().getTotalNet()).isEqualTo(MoneyImpl.of("117.50", EUR));
+            assertThat(taxedCustomLineItem.getTaxedPrice().getTotalGross()).isEqualTo(MoneyImpl.of("141.00", EUR));
+            assertThat(taxedCustomLineItem.getTaxRate().getName()).isEqualTo(taxRateName);
+
+            return cartWithTaxedLineItem;
         });
     }
 
@@ -183,7 +190,7 @@ public class ExternalTaxRatesIntegrationTest extends IntegrationTest {
                     ExternalTaxRateDraftBuilder.ofAmount(taxRate, taxRateName, DE).build();
             final ShippingRate shippingRate = ShippingRate.of(EURO_10);
             final SetCustomShippingMethod action =
-                    SetCustomShippingMethod.of("name", shippingRate, externalTaxRate);
+                    SetCustomShippingMethod.ofExternalTaxCalculation("name", shippingRate, externalTaxRate);
 
             final Cart cartWithShippingMethod = client().executeBlocking(CartUpdateCommand.of(cart, action));
 
@@ -196,6 +203,47 @@ public class ExternalTaxRatesIntegrationTest extends IntegrationTest {
             assertThat(shippingInfo.getTaxRate().getName()).isEqualTo(taxRateName);
 
             return cartWithShippingMethod;
+        });
+    }
+
+    @Test
+    public void setShippingMethodTaxRate() {
+        final CartDraft draft = CartDraft.of(EUR)
+                .withTaxMode(TaxMode.EXTERNAL)
+                .withShippingAddress(Address.of(DE));
+        withCartDraft(client(), draft, (Cart cart) -> {
+            final ShippingRate shippingRate = ShippingRate.of(EURO_10);
+            final SetCustomShippingMethod action =
+                    SetCustomShippingMethod.ofExternalTaxCalculation("name", shippingRate);
+
+            final Cart cartWithShippingMethod = client().executeBlocking(CartUpdateCommand.of(cart, action));
+
+            final CartShippingInfo shippingInfo = cartWithShippingMethod.getShippingInfo();
+            assertThat(shippingInfo).isNotNull();
+            assertThat(shippingInfo.getShippingRate()).isEqualTo(shippingRate);
+            assertThat(shippingInfo.getTaxCategory()).isNull();
+            assertThat(shippingInfo.getTaxedPrice()).isNull();
+            assertThat(shippingInfo.getTaxRate()).isNull();
+
+
+            final String taxRateName = "special tax";
+            final double taxRate = 0.20;
+            final ExternalTaxRateDraft externalTaxRate =
+                    ExternalTaxRateDraftBuilder.ofAmount(taxRate, taxRateName, DE).build();
+
+            final CartUpdateCommand cmd =
+                    CartUpdateCommand.of(cartWithShippingMethod, SetShippingMethodTaxRate.of(externalTaxRate));
+            final Cart cartWithTaxedShippingMethod = client().executeBlocking(cmd);
+
+            final CartShippingInfo taxedShippingInfo = cartWithTaxedShippingMethod.getShippingInfo();
+            assertThat(taxedShippingInfo).isNotNull();
+            assertThat(taxedShippingInfo.getShippingRate()).isEqualTo(shippingRate);
+            assertThat(taxedShippingInfo.getTaxCategory()).isNull();
+            assertThat(taxedShippingInfo.getTaxedPrice().getTotalNet()).isEqualTo(EURO_10);
+            assertThat(taxedShippingInfo.getTaxedPrice().getTotalGross()).isEqualTo(EURO_12);
+            assertThat(taxedShippingInfo.getTaxRate().getName()).isEqualTo(taxRateName);
+
+            return cartWithTaxedShippingMethod;
         });
     }
 

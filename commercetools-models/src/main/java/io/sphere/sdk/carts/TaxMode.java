@@ -41,11 +41,15 @@ public enum TaxMode implements SphereEnumeration {
      *
      * <h3 id="add-line-item-with-delayed-external-tax-rate">Add a CustomLineItem and add the external tax rate later</h3>
      *
-     * {@include.example }
+     * {@include.example io.sphere.sdk.carts.ExternalTaxRatesIntegrationTest#setCustomLineItemTaxRate()}
      *
      * <h3 id="add-custom-shipping-method-with-external-tax-mode">Add a custom shipping method with an external tax rate</h3>
      *
      * {@include.example io.sphere.sdk.carts.ExternalTaxRatesIntegrationTest#addCustomShippingMethod()}
+     *
+     * <h3 id="add-custom-shipping-method-with-delayed-external-tax-mode">Add a custom shipping method and add the external tax rate later</h3>
+     *
+     * {@include.example io.sphere.sdk.carts.ExternalTaxRatesIntegrationTest#setShippingMethodTaxRate()}
      *
      *
      *
@@ -55,10 +59,6 @@ public enum TaxMode implements SphereEnumeration {
      * {@include.example }
      *
      * <!--
-     * - it is possible with external mode to add items without tax yet and then update
-     *  - lineitem without
-     *  - custom line item without
-     *  - shipping method without
      * - update line item rate
      * - update custom line item rate
      * - update shipping method rate
