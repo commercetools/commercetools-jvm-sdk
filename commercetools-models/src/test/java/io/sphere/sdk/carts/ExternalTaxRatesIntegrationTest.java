@@ -84,10 +84,7 @@ public class ExternalTaxRatesIntegrationTest extends IntegrationTest {
                 assertThat(lineItem.getTaxedPrice().getTotalNet()).isEqualTo(MoneyImpl.ofCents(3000, "EUR"));
                 assertThat(lineItem.getTaxedPrice().getTotalGross()).isEqualTo(MoneyImpl.ofCents(3600, "EUR"));
 
-                final Cart platformTaxModeCart =
-                        client().executeBlocking(CartUpdateCommand.of(cartWithLineItem, ChangeTaxMode.of(TaxMode.PLATFORM)));
-
-                return platformTaxModeCart;
+                return cartWithLineItem;
             });
         });
     }
@@ -355,15 +352,13 @@ public class ExternalTaxRatesIntegrationTest extends IntegrationTest {
             softAssert(s -> {
                 final TaxRate taxRate = lineItem.getTaxRate();
                 s.assertThat(taxRate.getName()).isEqualTo(taxRateName);
-                s.assertThat(taxRate.getAmount()).isEqualTo(taxRate);
+                s.assertThat(taxRate.getAmount()).isEqualTo(rate);
                 s.assertThat(taxRate.getCountry()).isEqualTo(DE);
                 s.assertThat(taxRate.getId()).as("tax rate id").isNull();
                 s.assertThat(taxRate.getSubRates()).as("sub rates").isEmpty();
                 s.assertThat(lineItem.getTotalPrice()).as("lineItem totalPrice").isEqualTo(MoneyImpl.of(220, EUR));
                 s.assertThat(cart.getTotalPrice()).as("cart totalPrice").isEqualTo(MoneyImpl.of(220, EUR));
                 final TaxedPrice taxedPrice = cart.getTaxedPrice();
-                System.err.println("taxedPrice " + taxedPrice);
-                System.err.println(cart);
                 s.assertThat(taxedPrice.getTotalGross()).as("gross").isEqualTo(MoneyImpl.of(264, EUR));
                 s.assertThat(taxedPrice.getTotalNet()).as("net").isEqualTo(MoneyImpl.of(220, EUR));
             });
