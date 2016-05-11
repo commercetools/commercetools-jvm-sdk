@@ -33,6 +33,7 @@ public interface CustomLineItemDraft extends CustomDraft {
      * It can be null if an external tax rate ({@link #getExternalTaxRate()}) is set.
      *
      * @return tax category or null
+     * @see TaxMode
      */
     @Nullable
     Reference<TaxCategory> getTaxCategory();
@@ -43,6 +44,7 @@ public interface CustomLineItemDraft extends CustomDraft {
      *
      * @return external tax rate or null
      * @see #getTaxCategory()
+     * @see TaxMode
      */
     @Nullable
     ExternalTaxRateDraft getExternalTaxRate();
@@ -136,6 +138,7 @@ public interface CustomLineItemDraft extends CustomDraft {
      * @return draft
      *
      * @see io.sphere.sdk.carts.commands.updateactions.SetCustomLineItemTaxRate
+     * @see CustomLineItemDraft
      */
     static CustomLineItemDraft ofExternalTaxCalculation(final LocalizedString name, final String slug, final MonetaryAmount money,
                                                         final long quantity,

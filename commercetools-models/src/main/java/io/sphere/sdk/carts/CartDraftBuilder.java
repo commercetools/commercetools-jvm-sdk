@@ -48,7 +48,8 @@ public final class CartDraftBuilder extends Base implements Builder<CartDraftDsl
                      @Nullable final List<CustomLineItemDraft> customLineItems,
                      @Nullable final Address shippingAddress,
                      @Nullable final Address billingAddress,
-                     @Nullable final Reference<ShippingMethod> shippingMethod, final TaxMode taxMode) {
+                     @Nullable final Reference<ShippingMethod> shippingMethod,
+                     @Nullable final TaxMode taxMode) {
         this.currency = currency;
         this.customerId = customerId;
         this.country = country;
