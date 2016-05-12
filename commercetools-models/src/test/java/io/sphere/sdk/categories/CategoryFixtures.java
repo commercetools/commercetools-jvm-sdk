@@ -66,4 +66,15 @@ public class CategoryFixtures {
         final CategoryDraft categoryDraft = CategoryDraftBuilder.of(randomSlug(), randomSlug()).build();
         return client.executeBlocking(CategoryCreateCommand.of(categoryDraft));
     }
+
+    public static void deleteAll(final BlockingSphereClient client) {
+        delete(client, CategoryQuery.of().byIsRoot());
+        delete(client, CategoryQuery.of());
+    }
+
+    private static void delete(final BlockingSphereClient client, final CategoryQuery categoryQuery) {
+        client.executeBlocking(categoryQuery.withLimit(500)).getResults().forEach(cat -> {
+            client.executeBlocking(CategoryDeleteCommand.of(cat));
+        });
+    }
 }

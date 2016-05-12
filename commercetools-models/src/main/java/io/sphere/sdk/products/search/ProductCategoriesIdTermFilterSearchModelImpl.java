@@ -10,8 +10,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.function.Function;
 
-import static java.util.Collections.emptyList;
-import static java.util.Collections.singletonList;
+import static java.util.Collections.*;
 
 public class ProductCategoriesIdTermFilterSearchModelImpl<T> extends TermFilterSearchModelImpl<T, String> implements ProductCategoriesIdTermFilterSearchModel<T> {
     public ProductCategoriesIdTermFilterSearchModelImpl(final SearchModel<T> searchModel, final Function<String, String> typeSerializer) {
@@ -20,16 +19,23 @@ public class ProductCategoriesIdTermFilterSearchModelImpl<T> extends TermFilterS
 
     @Override
     public List<FilterExpression<T>> containsAnyIncludingSubtrees(final Iterable<String> categoryIds) {
-        return isSubtreeRootOrInCategory(categoryIds, emptyList());
+        return isInSubtreeOrInCategory(categoryIds, emptyList());
     }
 
     @Override
-    public List<FilterExpression<T>> isIncludingSubtree(final String categoryId) {
+    public List<FilterExpression<T>> containsAllIncludingSubtrees(final Iterable<String> categoryIds) {
+        final List<FilterExpression<T>> result = new LinkedList<>();
+        categoryIds.forEach(id -> result.addAll(isInSubtree(id)));
+        return unmodifiableList(result);
+    }
+
+    @Override
+    public List<FilterExpression<T>> isInSubtree(final String categoryId) {
         return containsAnyIncludingSubtrees(singletonList(categoryId));
     }
 
     @Override
-    public List<FilterExpression<T>> isSubtreeRootOrInCategory(final Iterable<String> categoryIdsSubtree, final Iterable<String> categoryIdsDirectly) {
+    public List<FilterExpression<T>> isInSubtreeOrInCategory(final Iterable<String> categoryIdsSubtree, final Iterable<String> categoryIdsDirectly) {
         final List<String> list = new LinkedList<>();
         categoryIdsSubtree.forEach(subtreeId -> list.add(String.format("subtree(\"%s\")", subtreeId)));
         categoryIdsDirectly.forEach(id -> list.add(String.format("\"%s\"", id)));

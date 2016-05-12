@@ -243,7 +243,7 @@ public class ProductProjectionSearchTest {
 
         assertThat(expressionsWithoutSubtrees.get(0)).isEqualTo("categories.id:\"id1\",\"id2\"");
 
-        final List<FilterExpression<ProductProjection>> filterExpressions = ProductProjectionSearch.ofStaged().withQueryFilters(m -> m.categories().id().isSubtreeRootOrInCategory(asList("id1", "id2"), asList("id3", "id4"))).queryFilters();
+        final List<FilterExpression<ProductProjection>> filterExpressions = ProductProjectionSearch.ofStaged().withQueryFilters(m -> m.categories().id().isInSubtreeOrInCategory(asList("id1", "id2"), asList("id3", "id4"))).queryFilters();
         final List<String> collect = filterExpressions.stream().map(e -> e.expression()).collect(Collectors.toList());
 
         final String expected = "categories.id:subtree(\"id1\"),subtree(\"id2\"),\"id3\",\"id4\"";

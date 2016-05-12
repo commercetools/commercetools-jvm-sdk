@@ -1,5 +1,6 @@
 package io.sphere.sdk.products.search;
 
+import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.products.ProductProjection;
 import io.sphere.sdk.test.IntegrationTest;
 import org.junit.Test;
@@ -14,8 +15,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class CategoriesWithAncestorsIntegrationTest extends IntegrationTest {
     @Test
-    public void execute() {
-        withCategoryAndParentCategory(client(), (cat, parent) -> {
+    public void isInSubtree() {
+        withCategoryAndParentCategory(client(), (Category cat, Category parent) -> {
             withProduct(client(), builder -> builder.categoriesObjects(singletonList(cat)), product -> {
                 final String parentId = parent.getId();
                 assertThat(product.getMasterData().getStaged().getCategories())
@@ -30,7 +31,7 @@ public class CategoriesWithAncestorsIntegrationTest extends IntegrationTest {
 
                     //search for products in parent category or its descendants
                     final ProductProjectionSearch requestForTree = ProductProjectionSearch.ofStaged()
-                            .withQueryFilters(m -> m.categories().id().isIncludingSubtree(parentId));
+                            .withQueryFilters(m -> m.categories().id().isInSubtree(parentId));
                     final List<ProductProjection> results = client().executeBlocking(requestForTree).getResults();
                     assertThat(results).hasSize(1);
                 });

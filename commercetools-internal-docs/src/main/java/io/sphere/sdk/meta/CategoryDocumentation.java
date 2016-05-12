@@ -72,6 +72,8 @@ Then we can write some script to parse the csv and create them in sphere:
 
  {@include.example io.sphere.sdk.meta.CategoryDocumentationIntegrationTest#demoForFindProducts()}
 
+ <p>A detailed explanation how to search for products in categories can be found in {@link io.sphere.sdk.products.search.ProductCategoriesIdTermFilterSearchModel}.</p>
+
 
  */
 public final class CategoryDocumentation {
