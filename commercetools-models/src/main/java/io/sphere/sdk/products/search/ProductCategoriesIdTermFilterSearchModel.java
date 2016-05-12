@@ -30,6 +30,8 @@ public interface ProductCategoriesIdTermFilterSearchModel<T> extends TermFilterS
      * <p>Creates filters for a product which needs to be in any of the given categories directly ({@code categoryIds}). Does not include the child categories.</p>
      * Alias for {@link #isIn(Iterable)}.
      *
+     * {@include.example io.sphere.sdk.products.search.ProductCategoriesIdTermFilterSearchModelIntegrationTest#containsAny()}
+     *
      * @param categoryIds the IDs of categories which the product should belong to at least to one of them
      * @return filter expressions
      * @see #isIn(Iterable)
@@ -41,6 +43,7 @@ public interface ProductCategoriesIdTermFilterSearchModel<T> extends TermFilterS
      * <p>Creates filters for a product which should directly belong to the given category in {@code categoryId}.</p>
      *
      * {@include.example io.sphere.sdk.products.search.CategoriesWithAncestorsIntegrationTest#isInSubtree()}
+     * {@include.example io.sphere.sdk.products.search.ProductCategoriesIdTermFilterSearchModelIntegrationTest#is()}
      *
      * @param categoryId the ID of the category which the products belong to including subcategories
      * @return filter expressions
@@ -50,7 +53,9 @@ public interface ProductCategoriesIdTermFilterSearchModel<T> extends TermFilterS
 
     /**
      * <p>Creates filters for a product which needs to be in any of the given categories directly ({@code categoryIds}). Does not include the child categories.</p>
-     * Alias for {@link #isIn(Iterable)}.
+     * Alias for {@link #containsAny(Iterable)}.
+     *
+     * {@include.example io.sphere.sdk.products.search.ProductCategoriesIdTermFilterSearchModelIntegrationTest#containsAny()}
      *
      * @param categoryIds the IDs of categories which the product should belong to at least to one of them
      * @return filter expressions
@@ -62,6 +67,8 @@ public interface ProductCategoriesIdTermFilterSearchModel<T> extends TermFilterS
     /**
      * <p>Creates filters for a product which needs to be in any of the given categories or its descendants.</p>
      *
+     * {@include.example io.sphere.sdk.products.search.ProductCategoriesIdTermFilterSearchModelIntegrationTest#containsAnyIncludingSubtrees()}
+     *
      * @param categoryIds the IDs of categories which the product should belong to at least to one of them
      * @return filter expressions
      * @see #isIn(Iterable)
@@ -70,6 +77,8 @@ public interface ProductCategoriesIdTermFilterSearchModel<T> extends TermFilterS
 
     /**
      * <p>Creates filters for a product which needs to be in all categories or its descendants.</p>
+     *
+     * {@include.example io.sphere.sdk.products.search.ProductCategoriesIdTermFilterSearchModelIntegrationTest#containsAllIncludingSubtrees()}
      *
      * @param categoryIds the ID of the category which the products belongs to including subcategories
      * @return filter expressions
@@ -80,6 +89,7 @@ public interface ProductCategoriesIdTermFilterSearchModel<T> extends TermFilterS
      * <p>Creates filters for a product which is in a category and its descendants.</p>
      *
      * {@include.example io.sphere.sdk.products.search.CategoriesWithAncestorsIntegrationTest#isInSubtree()}
+     * {@include.example io.sphere.sdk.products.search.ProductCategoriesIdTermFilterSearchModelIntegrationTest#isInSubtree()}
      *
      * @param categoryId the ID of the category which the products belong to including subcategories
      * @return filter expressions
@@ -88,6 +98,8 @@ public interface ProductCategoriesIdTermFilterSearchModel<T> extends TermFilterS
 
     /**
      * <p>Creates filters for a product which is in certain category trees ({@code categoryIdsSubtree}) or direct categories ({@code}).</p>
+     *
+     * {@include.example io.sphere.sdk.products.search.ProductCategoriesIdTermFilterSearchModelIntegrationTest#isInSubtreeOrInCategory()}
      *
      * @param categoryIdsSubtree IDs of categories which the product belongs directly or indirectly to
      * @param categoryIdsDirectly IDs of categories which the product belongs directly to

@@ -40,14 +40,132 @@ public class ProductCategoriesIdTermFilterSearchModelIntegrationTest extends Int
 
     @Test
     public void containsAll() {
-        final List<String> categoryIdsA = getCategoryIds("A", "B-1", "C-2-2");
-        final List<String> categoryIdsB = getCategoryIds("A", "B-1");
-        withProductInCategories(client(),  categoryIdsA, (Product productA) -> {
-            withProductInCategories(client(), categoryIdsB, (Product productB) -> {
-                assertEventually(() -> {
-                    final ProductProjectionSearch request = ProductProjectionSearch.ofStaged()
-                            .withQueryFilters(m -> m.categories().id().containsAll(categoryIdsA));
-                    assertThat(client().executeBlocking(request)).has(onlyProducts(productA));
+        final List<String> categoryIds1 = getCategoryIds("A", "B-1", "C-2-2");
+        final List<String> categoryIds2 = getCategoryIds("A", "B-1");
+        final List<String> categoryIds3 = getCategoryIds("A", "B", "C");
+        withProductInCategories(client(),  categoryIds1, (Product product1) -> {
+            withProductInCategories(client(), categoryIds2, (Product product2) -> {
+                withProductInCategories(client(), categoryIds3, (Product product3) -> {
+                    assertEventually(() -> {
+                        final ProductProjectionSearch request = ProductProjectionSearch.ofStaged()
+                                .withQueryFilters(m -> m.categories().id().containsAll(categoryIds1));
+                        assertThat(client().executeBlocking(request)).has(onlyProducts(product1));
+                    });
+                });
+            });
+        });
+    }
+
+    @Test
+    public void containsAny() {
+        final List<String> categoryIds1 = getCategoryIds("A", "B-1", "C-2-2");
+        final List<String> categoryIds2 = getCategoryIds("A", "B-1");
+        final List<String> categoryIds3 = getCategoryIds("A", "B", "C");
+        withProductInCategories(client(),  categoryIds1, (Product product1) -> {
+            withProductInCategories(client(), categoryIds2, (Product product2) -> {
+                withProductInCategories(client(), categoryIds3, (Product product3) -> {
+                    assertEventually(() -> {
+                        final ProductProjectionSearch request = ProductProjectionSearch.ofStaged()
+                                .withQueryFilters(m -> m.categories().id().containsAny(categoryIds1));
+                        assertThat(client().executeBlocking(request)).has(onlyProducts(product1, product2, product3));
+                    });
+                });
+            });
+        });
+    }
+
+    @Test
+    public void is() {
+        final List<String> categoryIds1 = getCategoryIds("A", "B-1", "C-2-2");
+        final List<String> categoryIds2 = getCategoryIds("A", "B-1");
+        final List<String> categoryIds3 = getCategoryIds("A", "B", "C");
+        withProductInCategories(client(),  categoryIds1, (Product product1) -> {
+            withProductInCategories(client(), categoryIds2, (Product product2) -> {
+                withProductInCategories(client(), categoryIds3, (Product product3) -> {
+                    assertEventually(() -> {
+                        final ProductProjectionSearch request = ProductProjectionSearch.ofStaged()
+                                .withQueryFilters(m -> m.categories().id().containsAny(getCategoryIds("B-1")));
+                        assertThat(client().executeBlocking(request)).has(onlyProducts(product1, product2));
+                    });
+                });
+            });
+        });
+    }
+
+     @Test
+    public void containsAnyIncludingSubtrees() {
+         final List<String> categoryIds1 = getCategoryIds("A", "B-1", "C-2-2");
+         final List<String> categoryIds2 = getCategoryIds("A", "B-1");
+         final List<String> categoryIds3 = getCategoryIds("A", "B", "C");
+         withProductInCategories(client(),  categoryIds1, (Product product1) -> {
+             withProductInCategories(client(), categoryIds2, (Product product2) -> {
+                 withProductInCategories(client(), categoryIds3, (Product product3) -> {
+                     assertEventually(() -> {
+                         final ProductProjectionSearch request = ProductProjectionSearch.ofStaged()
+                                 .withQueryFilters(m -> m.categories().id().containsAnyIncludingSubtrees(getCategoryIds("C-2")));
+                         assertThat(client().executeBlocking(request)).has(onlyProducts(product1));
+                     });
+                 });
+             });
+         });
+    }
+
+    @Test
+    public void containsAllIncludingSubtrees() {
+        final List<String> categoryIds1 = getCategoryIds("B-1", "C-2-2");
+        final List<String> categoryIds2 = getCategoryIds("B-1-2", "C-1-3");
+        final List<String> categoryIds3 = getCategoryIds("B-3", "C");
+        withProductInCategories(client(),  categoryIds1, (Product product1) -> {
+            withProductInCategories(client(), categoryIds2, (Product product2) -> {
+                withProductInCategories(client(), categoryIds3, (Product product3) -> {
+                    assertEventually(() -> {
+                        final ProductProjectionSearch request = ProductProjectionSearch.ofStaged()
+                                .withQueryFilters(m -> m.categories().id().containsAllIncludingSubtrees(getCategoryIds("C", "B-1")));
+                        assertThat(client().executeBlocking(request)).has(onlyProducts(product1, product2));
+                    });
+                });
+            });
+        });
+    }
+
+    @Test
+    public void isInSubtree() {
+        final List<String> categoryIds1 = getCategoryIds("B-1", "C-2-2");
+        final List<String> categoryIds2 = getCategoryIds("B-1-2", "C-1-3");
+        final List<String> categoryIds3 = getCategoryIds("B-3", "C");
+        withProductInCategories(client(),  categoryIds1, (Product product1) -> {
+            withProductInCategories(client(), categoryIds2, (Product product2) -> {
+                withProductInCategories(client(), categoryIds3, (Product product3) -> {
+                    assertEventually(() -> {
+                        final ProductProjectionSearch request = ProductProjectionSearch.ofStaged()
+                                .withQueryFilters(m -> {
+                                    final String categoryId = getCategoryIds("B-1").get(0);
+                                    return m.categories().id().isInSubtree(categoryId);
+                                });
+                        assertThat(client().executeBlocking(request)).has(onlyProducts(product1, product2));
+                    });
+                });
+            });
+        });
+    }
+
+    @Test
+    public void isInSubtreeOrInCategory() {
+        final List<String> categoryIds1 = getCategoryIds("C-2-2");
+        final List<String> categoryIds2 = getCategoryIds("C-1-3");
+        final List<String> categoryIds3 = getCategoryIds("B-3");
+        withProductInCategories(client(),  categoryIds1, (Product product1) -> {
+            withProductInCategories(client(), categoryIds2, (Product product2) -> {
+                withProductInCategories(client(), categoryIds3, (Product product3) -> {
+                    assertEventually(() -> {
+                        final ProductProjectionSearch request = ProductProjectionSearch.ofStaged()
+                                .withQueryFilters(m -> {
+                                    final List<String> categoryIdsSubtree = getCategoryIds("B");//somehow in B
+                                    final List<String> categoryIdsDirectly = getCategoryIds("C-1-3");//but directly in C-1-3
+                                    return m.categories().id().isInSubtreeOrInCategory(categoryIdsSubtree, categoryIdsDirectly);
+                                });
+                        assertThat(client().executeBlocking(request)).has(onlyProducts(product2, product3));
+                    });
                 });
             });
         });
@@ -66,7 +184,7 @@ public class ProductCategoriesIdTermFilterSearchModelIntegrationTest extends Int
 
     private List<String> getCategoryIds(final String ... names) {
         return Arrays.stream(names)
-                .map(name -> categoryTree.findByExternalId(getExternalId(name)).get().getId())
+                .map(name -> categoryTree.findByExternalId(name).get().getId())
                 .collect(Collectors.toList());
     }
 
@@ -77,44 +195,9 @@ public class ProductCategoriesIdTermFilterSearchModelIntegrationTest extends Int
         ProductFixtures.withProduct(client, builder -> builder.categories(categories), consumer);
     }
 
-    @Test
-    public void containsAny() {
-
-    }
-
-    @Test
-    public void is() {
-
-    }
-
-    @Test
-    public void isIn() {
-
-    }
-
-    @Test
-    public void containsAnyIncludingSubtrees() {
-
-    }
-
-    @Test
-    public void containsAllIncludingSubtrees() {
-
-    }
-
-    @Test
-    public void isInSubtree() {
-
-    }
-
-    @Test
-    public void isInSubtreeOrInCategory() {
-
-    }
-
     private static void setupCategories() {
         final List<Category> rootCategories = Stream.of("A", "B", "C")
-                .map(id -> CategoryDraftBuilder.of(en("name " + id), en("slug-" + id)).externalId(getExternalId(id)).build())
+                .map(id -> CategoryDraftBuilder.of(en("name " + id), en("slug-" + id)).externalId(id).build())
                 .map(createCategory())
                 .collect(toList());
         final List<Category> secondLevelCategories = rootCategories.stream()
@@ -122,7 +205,7 @@ public class ProductCategoriesIdTermFilterSearchModelIntegrationTest extends Int
                         .mapToObj(i -> {
                             final String id = parent.getExternalId() + "-" + i;
                             return CategoryDraftBuilder.of(en("name " + id), en("slug-" + id))
-                                    .parent(parent).externalId(getExternalId(id)).build();
+                                    .parent(parent).externalId(id).build();
                         })
                         .map(createCategory()))
                 .collect(Collectors.toList());
@@ -130,7 +213,7 @@ public class ProductCategoriesIdTermFilterSearchModelIntegrationTest extends Int
                 .flatMap(parent -> IntStream.range(1, 4)
                         .mapToObj(i -> {
                             final String id = parent.getExternalId() + "-" + i;
-                            return CategoryDraftBuilder.of(en("name " + id), en("slug-" + id)).parent(parent).externalId(getExternalId(id)).build();
+                            return CategoryDraftBuilder.of(en("name " + id), en("slug-" + id)).parent(parent).externalId(id).build();
                         })
                         .map(createCategory()))
                 .collect(Collectors.toList());
@@ -140,10 +223,6 @@ public class ProductCategoriesIdTermFilterSearchModelIntegrationTest extends Int
         all.addAll(thirdLevelCategories);
         assertThat(all).hasSize(39);
         categoryTree = CategoryTree.of(all);
-    }
-
-    private static String getExternalId(final String id) {
-        return id;
     }
 
     private static Function<CategoryDraft, Category> createCategory() {
