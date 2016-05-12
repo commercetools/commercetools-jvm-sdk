@@ -29,10 +29,6 @@ public abstract class ProductDataFilterSearchModel extends SearchModelImpl<Produ
         return referenceFilterSearchModel("categories");
     }
 
-    public ReferenceFilterSearchModel<ProductProjection> categoriesWithAncestors() {
-        return referenceFilterSearchModel("categoriesWithAncestors");
-    }
-
     public ReferenceFilterSearchModel<ProductProjection> productType() {
         return referenceFilterSearchModel("productType");
     }
