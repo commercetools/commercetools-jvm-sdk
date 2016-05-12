@@ -25,8 +25,8 @@ public abstract class ProductDataFacetSearchModel extends SearchModelImpl<Produc
         return localizedStringFacetSearchModel("name");
     }
 
-    public ReferenceFacetSearchModel<ProductProjection> categories() {
-        return referenceFacetSearchModel("categories");
+    public ProductCategoriesReferenceFacetSearchModel<ProductProjection> categories() {
+        return new ProductCategoriesReferenceFacetSearchModelImpl<>(this, "categories");
     }
 
     public ReferenceFacetSearchModel<ProductProjection> productType() {

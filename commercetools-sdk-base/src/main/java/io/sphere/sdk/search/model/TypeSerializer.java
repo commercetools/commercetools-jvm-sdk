@@ -28,6 +28,14 @@ public final class TypeSerializer<V> implements Function<V, String> {
     }
 
     /**
+     * Serializer to convert the given element to a formatted string with escaped characters.
+     * @return the serializer for text data.
+     */
+    public static <V> TypeSerializer<V> ofRawFunction(final Function<V, String> serializer) {
+        return new TypeSerializer<>(serializer);
+    }
+
+    /**
      * Serializer to convert the given text to a formatted string with escaped characters.
      * @return the serializer for text data.
      */

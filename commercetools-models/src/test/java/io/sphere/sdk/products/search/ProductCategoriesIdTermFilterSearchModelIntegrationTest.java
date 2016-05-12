@@ -171,6 +171,33 @@ public class ProductCategoriesIdTermFilterSearchModelIntegrationTest extends Int
         });
     }
 
+    @Test
+    public void facet() {
+        final List<String> categoryIds1 = getCategoryIds("A", "B-1", "C-2-2");
+        final List<String> categoryIds2 = getCategoryIds("A", "B-2-3");
+        final List<String> categoryIds3 = getCategoryIds("B", "C");
+        withProductInCategories(client(),  categoryIds1, (Product product1) -> {
+            withProductInCategories(client(), categoryIds2, (Product product2) -> {
+                withProductInCategories(client(), categoryIds3, (Product product3) -> {
+                    assertEventually(() -> {
+                        final ProductProjectionSearch request = ProductProjectionSearch.ofStaged()
+                                .plusFacets(m -> m.categories().id().withAlias("productsInA").onlyTermSubtree(getCategoryIds("A")))
+                                .plusFacets(m -> m.categories().id().withAlias("productsInB").onlyTermSubtree(getCategoryIds("B")))
+                                .plusFacets(m -> m.categories().id().withAlias("productsInAorB").onlyTermSubtree(getCategoryIds("A", "B")))
+                                .plusFacets(m -> m.categories().id().withAlias("productsInC2").onlyTermSubtree(getCategoryIds("C-2")));
+                        final PagedSearchResult<ProductProjection> pagedSearchResult = client().executeBlocking(request);
+
+                        assertThat(pagedSearchResult.getFilteredFacetResult("productsInA").getCount()).isEqualTo(2);
+                        assertThat(pagedSearchResult.getFilteredFacetResult("productsInB").getCount()).isEqualTo(3);
+                        assertThat(pagedSearchResult.getFilteredFacetResult("productsInAorB").getCount()).isEqualTo(3);
+                        assertThat(pagedSearchResult.getFilteredFacetResult("productsInC2").getCount()).isEqualTo(1);
+                    });
+                });
+            });
+        });
+
+    }
+
     private Condition<PagedSearchResult<ProductProjection>> onlyProducts(final Product ... products) {
         final Set<String> expectedIds = Arrays.stream(products).map(Product::getId).collect(Collectors.toSet());
         return new Condition<PagedSearchResult<ProductProjection>>() {

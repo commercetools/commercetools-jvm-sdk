@@ -72,7 +72,8 @@ Then we can write some script to parse the csv and create them in sphere:
 
  {@include.example io.sphere.sdk.meta.CategoryDocumentationIntegrationTest#demoForFindProducts()}
 
- <p>A detailed explanation how to search for products in categories can be found in {@link io.sphere.sdk.products.search.ProductCategoriesIdTermFilterSearchModel}.</p>
+ <p>A detailed explanation how to filter and facet for products in categories can be found in {@link io.sphere.sdk.products.search.ProductCategoriesIdTermFilterSearchModel}
+ and {@link io.sphere.sdk.products.search.ProductCategoriesIdTermFacetSearchModel}.</p>
 
 
  */

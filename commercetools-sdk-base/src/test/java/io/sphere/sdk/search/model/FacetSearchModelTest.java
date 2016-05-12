@@ -9,7 +9,7 @@ public class FacetSearchModelTest {
 
     @Test
     public void termFacetsAllowAlias() throws Exception {
-        final TermFacetSearchModel<Object, String> facetModel = new TermFacetSearchModel<>(null, ofString());
+        final TermFacetSearchModel<Object, String> facetModel = new TermFacetSearchModelImpl<>(null, ofString());
         assertThat(facetModel.getAlias()).isNull();
         assertThat(facetModel.withAlias("my-alias").getAlias()).isEqualTo("my-alias");
     }

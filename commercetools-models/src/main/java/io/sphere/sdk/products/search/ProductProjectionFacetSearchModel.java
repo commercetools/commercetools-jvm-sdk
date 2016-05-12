@@ -32,7 +32,7 @@ public final class ProductProjectionFacetSearchModel extends ProductDataFacetSea
     }
 
     @Override
-    public ReferenceFacetSearchModel<ProductProjection> categories() {
+    public ProductCategoriesReferenceFacetSearchModel<ProductProjection> categories() {
         return super.categories();
     }
 

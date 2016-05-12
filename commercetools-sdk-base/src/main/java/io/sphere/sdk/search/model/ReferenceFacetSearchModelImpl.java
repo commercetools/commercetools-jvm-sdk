@@ -2,9 +2,9 @@ package io.sphere.sdk.search.model;
 
 import javax.annotation.Nullable;
 
-final class ReferenceFacetSearchModelImpl<T> extends SearchModelImpl<T> implements ReferenceFacetSearchModel<T> {
+public class ReferenceFacetSearchModelImpl<T> extends SearchModelImpl<T> implements ReferenceFacetSearchModel<T> {
 
-    ReferenceFacetSearchModelImpl(@Nullable final SearchModel<T> parent, @Nullable final String pathSegment) {
+    protected ReferenceFacetSearchModelImpl(@Nullable final SearchModel<T> parent, @Nullable final String pathSegment) {
         super(parent, pathSegment);
     }
 
