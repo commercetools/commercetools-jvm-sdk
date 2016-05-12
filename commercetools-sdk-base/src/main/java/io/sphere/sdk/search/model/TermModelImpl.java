@@ -13,7 +13,7 @@ abstract class TermModelImpl<T, V> extends SearchModelImpl<T> implements TermMod
 
     @Override
     public TermFilterSearchModel<T, V> filtered() {
-        return new TermFilterSearchModel<>(this, typeSerializer);
+        return new TermFilterSearchModelImpl<>(this, typeSerializer);
     }
 
     @Override

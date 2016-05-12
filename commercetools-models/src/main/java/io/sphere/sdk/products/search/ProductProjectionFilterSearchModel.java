@@ -33,7 +33,7 @@ public final class ProductProjectionFilterSearchModel extends ProductDataFilterS
     }
 
     @Override
-    public ReferenceFilterSearchModel<ProductProjection> categories() {
+    public ProductCategoriesReferenceFilterSearchModel<ProductProjection> categories() {
         return super.categories();
     }
 

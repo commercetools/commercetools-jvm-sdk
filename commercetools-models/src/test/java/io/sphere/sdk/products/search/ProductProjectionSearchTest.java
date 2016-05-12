@@ -13,9 +13,12 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.ZonedDateTime;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import static io.sphere.sdk.test.SphereTestUtils.DE;
 import static io.sphere.sdk.test.SphereTestUtils.EUR;
+import static io.sphere.sdk.test.SphereTestUtils.asList;
 import static java.math.BigDecimal.valueOf;
 import static java.util.Locale.ENGLISH;
 import static java.util.Locale.GERMAN;
@@ -231,6 +234,22 @@ public class ProductProjectionSearchTest {
         final ProductProjectionSearch priceSelectionRemoved = SEARCH_WITH_FULL_PRICE_SELECTION.withPriceSelection(null);
         assertThat(priceSelectionRemoved.httpRequestIntent().getBody().toString()).doesNotContain("price");
         assertThat(priceSelectionRemoved.getPriceSelection()).isNull();
+    }
+
+    @Test
+    public void categorySubtree() {
+        final List<String> expressionsWithoutSubtrees =
+                ProductProjectionSearch.ofStaged().withQueryFilters(m -> m.categories().id().isIn(asList("id1", "id2"))).queryFilters().stream().map(e -> e.expression()).collect(Collectors.toList());
+
+        assertThat(expressionsWithoutSubtrees.get(0)).isEqualTo("categories.id:\"id1\",\"id2\"");
+
+        final List<FilterExpression<ProductProjection>> filterExpressions = ProductProjectionSearch.ofStaged().withQueryFilters(m -> m.categories().id().isSubtreeRootOrInCategory(asList("id1", "id2"), asList("id3", "id4"))).queryFilters();
+        final List<String> collect = filterExpressions.stream().map(e -> e.expression()).collect(Collectors.toList());
+
+        final String expected = "categories.id:subtree(\"id1\"),subtree(\"id2\"),\"id3\",\"id4\"";
+
+        assertThat(collect).hasSize(1);
+        assertThat(collect.get(0)).isEqualTo(expected);
     }
 
     //    @Test

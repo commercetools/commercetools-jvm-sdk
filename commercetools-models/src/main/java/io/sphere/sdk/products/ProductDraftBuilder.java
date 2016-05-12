@@ -1,5 +1,6 @@
 package io.sphere.sdk.products;
 
+import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.models.Builder;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.ResourceIdentifiable;
@@ -9,6 +10,7 @@ import io.sphere.sdk.producttypes.ProductType;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 import static io.sphere.sdk.utils.SphereInternalUtils.listOf;
 

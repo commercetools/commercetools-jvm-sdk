@@ -25,8 +25,8 @@ public abstract class ProductDataFilterSearchModel extends SearchModelImpl<Produ
         return localizedStringFilterSearchModel("name");
     }
 
-    public ReferenceFilterSearchModel<ProductProjection> categories() {
-        return referenceFilterSearchModel("categories");
+    public ProductCategoriesReferenceFilterSearchModel<ProductProjection> categories() {
+        return new ProductCategoriesReferenceFilterSearchModelImpl<>(this, "categories");
     }
 
     public ReferenceFilterSearchModel<ProductProjection> productType() {

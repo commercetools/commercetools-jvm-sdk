@@ -15,7 +15,7 @@ import static java.time.format.DateTimeFormatter.*;
  * Serializer to transform certain types to Commercetools Platform format on search endpoint.
  * @param <V> type of the data to transform.
  */
-class TypeSerializer<V> implements Function<V, String> {
+public final class TypeSerializer<V> implements Function<V, String> {
     private final Function<V, String> serializer;
 
     @Override
@@ -33,6 +33,14 @@ class TypeSerializer<V> implements Function<V, String> {
      */
     public static TypeSerializer<String> ofString() {
         return new TypeSerializer<>(v -> withQuotes(v.replace("\"", "\\\"")));
+    }
+
+    /**
+     * Serializer to convert the given text to a raw string without escaping characters or adding quotes.
+     * @return the serializer for raw text data.
+     */
+    public static TypeSerializer<String> ofRawString() {
+        return new TypeSerializer<>(v -> v);
     }
 
     /**

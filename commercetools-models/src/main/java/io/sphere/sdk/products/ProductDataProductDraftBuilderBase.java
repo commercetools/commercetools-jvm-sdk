@@ -12,6 +12,7 @@ import java.util.Optional;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 abstract class ProductDataProductDraftBuilderBase<T extends ProductDataProductDraftBuilderBase<T>> extends Base implements WithLocalizedSlug, MetaAttributes {
     private LocalizedString name;
@@ -70,6 +71,20 @@ abstract class ProductDataProductDraftBuilderBase<T extends ProductDataProductDr
 
     public T categories(final List<Reference<Category>> categories) {
         return categories(new LinkedHashSet<>(categories));
+    }
+
+    /**
+     * Adds categories to this product draft. Alias for {@link #categories(List)} which takes the o
+     *
+     * @param categories
+     * @return
+     */
+    public T categoriesObjects(final List<Category> categories) {
+        final List<Reference<Category>> referenceList = categories.stream()
+                .filter(x -> x != null)
+                .map(cat -> cat.toReference())
+                .collect(Collectors.toList());
+        return categories(referenceList);
     }
 
     public T searchKeywords(final SearchKeywords searchKeywords) {
