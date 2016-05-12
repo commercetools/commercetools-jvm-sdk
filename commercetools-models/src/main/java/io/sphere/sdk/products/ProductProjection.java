@@ -72,15 +72,6 @@ public interface ProductProjection extends ProductLike<ProductProjection, Produc
     @Override
     Set<Reference<Category>> getCategories();
 
-    /**
-     * Optional field which contains the references to all categories the product is
-     * directly in (see {@link #getCategories()} and the ancestor categories of the categories.
-     *
-     * @return null or all categories in the tree the product belongs to
-     */
-    @Nullable
-    Set<Reference<Category>> getCategoriesWithAncestors();
-
     @Override
     @Nullable
     LocalizedString getDescription();

@@ -29,8 +29,6 @@ class ProductProjectionImpl extends ResourceViewImpl<ProductProjection, Product>
     private final LocalizedString name;
     private final Set<Reference<Category>> categories;
     @Nullable
-    private final Set<Reference<Category>> categoriesWithAncestors;
-    @Nullable
     private final LocalizedString description;
     private final LocalizedString slug;
     @Nullable
@@ -52,7 +50,7 @@ class ProductProjectionImpl extends ResourceViewImpl<ProductProjection, Product>
     ProductProjectionImpl(final String id, final Long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt,
                           final Reference<ProductType> productType, @Nullable final Reference<TaxCategory> taxCategory,
                           final Boolean hasStagedChanges, final LocalizedString name,
-                          final Set<Reference<Category>> categories, @Nullable final Set<Reference<Category>> categoriesWithAncestors, @Nullable final LocalizedString description,
+                          final Set<Reference<Category>> categories, @Nullable final LocalizedString description,
                           final LocalizedString slug, @Nullable final LocalizedString metaTitle,
                           @Nullable final LocalizedString metaDescription, @Nullable final LocalizedString metaKeywords,
                           final ProductVariant masterVariant, final List<ProductVariant> variants,
@@ -65,7 +63,6 @@ class ProductProjectionImpl extends ResourceViewImpl<ProductProjection, Product>
         this.hasStagedChanges = hasStagedChanges;
         this.name = name;
         this.categories = categories;
-        this.categoriesWithAncestors = categoriesWithAncestors;
         this.description = description;
         this.slug = slug;
         this.metaTitle = metaTitle;
@@ -166,11 +163,5 @@ class ProductProjectionImpl extends ResourceViewImpl<ProductProjection, Product>
     @Nullable
     public ReviewRatingStatistics getReviewRatingStatistics() {
         return reviewRatingStatistics;
-    }
-
-    @Override
-    @Nullable
-    public Set<Reference<Category>> getCategoriesWithAncestors() {
-        return categoriesWithAncestors;
     }
 }
