@@ -41,7 +41,7 @@ Users gain type-safety, encapsulation, IDE auto completion and an internal domai
   <version>1.0.0-RC1</version>
 </dependency>
 ````
-* http://search.maven.org/#artifactdetails%7Cicom.commercetools.sdk.jvm.core%7Ccommercetools-models%7C1.0.0-RC1%7Cjar
+* http://search.maven.org/#artifactdetails%7Ccom.commercetools.sdk.jvm.core%7Ccommercetools-models%7C1.0.0-RC1%7Cjar
 * http://search.maven.org/#artifactdetails%7Ccom.commercetools.sdk.jvm.core%7Ccommercetools-java-client%7C1.0.0-RC1%7Cjar
 * http://search.maven.org/#artifactdetails%7Ccom.commercetools.sdk.jvm.core%7Ccommercetools-convenience%7C1.0.0-RC1%7Cjar
 
