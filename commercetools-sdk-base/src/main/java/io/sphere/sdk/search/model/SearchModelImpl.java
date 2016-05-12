@@ -117,7 +117,7 @@ public class SearchModelImpl<T> extends Base implements SearchModel<T> {
     }
 
     protected ReferenceFacetSearchModel<T> referenceFacetSearchModel(final String pathSegment) {
-        return new ReferenceFacetSearchModel<>(this, pathSegment);
+        return new ReferenceFacetSearchModelImpl<>(this, pathSegment);
     }
 
     protected ReferenceFacetedSearchSearchModel<T> referenceFacetedSearchSearchModel(final String pathSegment) {
