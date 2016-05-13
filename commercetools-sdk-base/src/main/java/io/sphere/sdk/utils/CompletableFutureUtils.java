@@ -125,7 +125,7 @@ public final class CompletableFutureUtils {
     }
 
     /**
-     * Creates a {@link CompletionStage} which may recovered from an occurred error. Alias for {@link CompletionStage#exceptionally(Function)}.
+     * Creates a {@link CompletionStage} which can be recovered if an error occurs. Alias for {@link CompletionStage#exceptionally(Function)}.
      * If the recovery function also requires to create a {@link CompletionStage} then use {@link #recoverWith(CompletionStage, Function)}.
      *
      * {@include.example io.sphere.sdk.utils.CompletableFutureUtilsTest#recoverFailure()}
@@ -133,14 +133,14 @@ public final class CompletableFutureUtils {
      * @param future future which may completes exceptionally
      * @param f function how the exception should be handled to create a successfully completed future, but it also can throw exceptions
      * @param <T> type of the value of the future
-     * @return a future which may recovered from errors
+     * @return a future which can be recovered from errors
      */
     public static <T> CompletionStage<T> recover(final CompletionStage<T> future, final Function<Throwable, ? extends T> f) {
         return future.exceptionally(f);
     }
 
     /**
-     * Creates a {@link CompletionStage} which may recovered from an occurred error.
+     * Creates a {@link CompletionStage} which can be recovered if an error occurs.
      * If the recovery function does not require to create a {@link CompletionStage} then use {@link #recover(CompletionStage, Function)}.
      *
      * {@include.example io.sphere.sdk.utils.CompletableFutureUtilsTest#recoverWithSuccessInSecond()}
@@ -148,14 +148,14 @@ public final class CompletableFutureUtils {
      * @param future future which may completes exceptionally
      * @param f function how the exception should be handled to create a successfully completed future
      * @param <T> type of the value of the future
-     * @return a future which may recovered from errors
+     * @return a future which can be recovered from errors
      */
     public static <T> CompletableFuture<T> recoverWith(final CompletionStage<T> future, final Function<? super Throwable, CompletionStage<T>> f) {
         return recoverWith(future, f, ForkJoinPool.commonPool());
     }
 
     /**
-     * Creates a {@link CompletionStage} which may recovered from an occurred error by excuting a function in a certain thread pool.
+     * Creates a {@link CompletionStage} which can be recovered if an error occurs by executing a function in a certain thread pool.
      * If the recovery does not require to create a {@link CompletionStage} then use {@link #recover(CompletionStage, Function)}.
      *
      * Have a look at {@link #recoverWith(CompletionStage, Function)} for an example without the thread pool.
@@ -188,12 +188,12 @@ public final class CompletableFutureUtils {
 
     /**
      *
-     * Tries to access the completed value of the future and returns it/or throws the exception inside the future if already available or throws the given exception.
+     * Tries to access the completed future if available and returns its value (or exception in case the future completed exceptionally), otherwise throws the given exception.
      *
      * {@include.example io.sphere.sdk.utils.CompletableFutureUtilsTest#orElseThrow()}
      *
      * @param stage the future
-     * @param exceptionSupplier code which should be executed when the value is not available yet or the future completed exceptionally
+     * @param exceptionSupplier code which should be executed if the future is not yet completed (either successfully or exceptionally)
      * @param <T> the type of the future value
      * @param <X> the type of the exception to be thrown if the value is absent
      * @return value
@@ -210,7 +210,7 @@ public final class CompletableFutureUtils {
 
     /**
      *
-     * Tries to access the completed value of the future and returns it/or throws the exception inside the future if already available or uses the supplier to get a default value.
+     * Tries to access the completed future if available and returns its value (or exception in case the future completed exceptionally), otherwise uses the supplier to get a default value.
      *
      * {@include.example io.sphere.sdk.utils.CompletableFutureUtilsTest#orElseGet()}
      *
