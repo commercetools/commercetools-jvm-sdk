@@ -28,6 +28,7 @@ import static io.sphere.sdk.products.ProductProjectionType.CURRENT;
 import static io.sphere.sdk.test.SphereTestUtils.*;
 import static java.util.stream.Collectors.toList;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.catchThrowable;
 
 public class AsyncDocumentationTest {
     @BeforeClass

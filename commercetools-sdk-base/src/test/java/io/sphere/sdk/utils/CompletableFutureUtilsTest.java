@@ -5,23 +5,27 @@ import org.junit.Test;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionStage;
+import java.util.function.Function;
 
 import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
 import static io.sphere.sdk.utils.CompletableFutureUtils.*;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.assertj.core.api.Assertions.catchThrowable;
 
 public class CompletableFutureUtilsTest {
 
     @Test
     public void testSuccessful() throws Exception {
-        assertThat(successful("hello").join()).isEqualTo("hello");
+        final CompletableFuture<String> future = successful("hello");
+        assertThat(future.join()).isEqualTo("hello");
     }
 
     @Test
     public void testFailed() throws Exception {
         final RuntimeException e = new RuntimeException();
-        assertThat(blockForFailure(failed(e))).isEqualTo(e);
+        final CompletableFuture<String> failed = failed(e);
+        assertThatThrownBy(() -> failed.join()).hasCause(e);
     }
 
     @Test
@@ -41,9 +45,17 @@ public class CompletableFutureUtilsTest {
     }
 
     @Test
+    public void testMap() throws Exception {
+        final CompletionStage<String> future = successful("hello");
+        final CompletionStage<Integer> result = map(future, s -> s.length());
+        assertThat(result.toCompletableFuture().join()).isEqualTo(5);
+    }
+
+    @Test
     public void testFlatMap() throws Exception {
         final CompletionStage<String> future = successful("hello");
-        final CompletionStage<Integer> result = flatMap(future, s -> successful(s.length()));
+        final Function<String, CompletionStage<Integer>> f = s -> successful(s.length());
+        final CompletionStage<Integer> result = flatMap(future, f);
         assertThat(result.toCompletableFuture().join()).isEqualTo(5);
     }
 
@@ -67,7 +79,10 @@ public class CompletableFutureUtilsTest {
 
     @Test
     public void recoverWithSuccessInSecond() throws Exception {
-        final String actual = recoverWithTestWithSuccessfulResult(failed(new RuntimeException()), successful("hi"));
+        final CompletableFuture<String> future = failed(new RuntimeException());
+        final Function<Throwable, CompletionStage<String>> recoverFunction = e -> delayedResult("hi");
+        final CompletableFuture<String> recoveredFuture = recoverWith(future, recoverFunction);
+        final String actual = recoveredFuture.join();
         assertThat(actual).isEqualTo("hi");
     }
 
@@ -98,6 +113,44 @@ public class CompletableFutureUtilsTest {
         final List<CompletableFuture<Integer>> completableFutures = asList(delayedResult(1), failed(exception), successful(3));
         final CompletableFuture<List<Integer>> sequence = CompletableFutureUtils.sequence(completableFutures);
         assertThatThrownBy(() -> sequence.join()).hasCause(exception);
+    }
+
+    @Test
+    public void onFailure() {
+        final RuntimeException e = new RuntimeException("foo");
+        final CompletableFuture<String> future = failed(e);
+        final Throwable[] state = {null};
+        CompletableFutureUtils.onFailure(future, exception -> state[0] = exception).toCompletableFuture().join();
+        assertThat(state[0]).isEqualTo(e);
+    }
+
+    @Test
+    public void onSuccess() {
+        final CompletableFuture<String> future = successful("hello");
+        final String[] state = {""};
+        CompletableFutureUtils.onSuccess(future, s -> state[0] = s).toCompletableFuture().join();
+        assertThat(state[0]).isEqualTo("hello");
+    }
+
+    @Test
+    public void orElseThrow() {
+        final CompletableFuture<String> incompleteFuture = new CompletableFuture<>();
+
+        final Throwable throwable = catchThrowable(() -> {
+            CompletableFutureUtils.orElseThrow(incompleteFuture,
+                    () -> new RuntimeException("I don't want to wait anymore and throw an exception"));
+        });
+
+        assertThat(throwable)
+                .isInstanceOf(RuntimeException.class)
+                .hasMessage("I don't want to wait anymore and throw an exception");
+    }
+
+    @Test
+    public void orElseGet() {
+        final CompletableFuture<Integer> incompleteFuture = new CompletableFuture<>();
+        final Integer result = CompletableFutureUtils.orElseGet(incompleteFuture, () -> 1 + 1);
+        assertThat(result).isEqualTo(2);
     }
 
     private <T> CompletableFuture<T> delayedResult(final T t) {
