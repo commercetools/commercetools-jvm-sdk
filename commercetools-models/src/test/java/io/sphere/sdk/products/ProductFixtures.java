@@ -323,4 +323,15 @@ public class ProductFixtures {
             client.executeBlocking(InventoryEntryDeleteCommand.of(inventoryEntry));
         });
     }
+
+    public static void withProductOfPrices(final BlockingSphereClient client, final List<PriceDraft> priceDrafts, final Consumer<Product> productConsumer) {
+        withEmptyProductType(client, randomKey(), productType -> {
+            final ProductVariantDraft masterVariant = ProductVariantDraftBuilder.of()
+                    .prices(priceDrafts)
+                    .build();
+            final ProductDraft productDraft = ProductDraftBuilder.of(productType,  randomSlug(),  randomSlug(), masterVariant)
+                    .build();
+            ProductFixtures.withProduct(client, () -> productDraft, productConsumer);
+        });
+    }
 }

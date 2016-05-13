@@ -20,14 +20,14 @@ public interface TaxCategoryDraft {
     String getDescription();
 
     @JsonProperty("rates")
-    List<TaxRate> getTaxRates();
+    List<TaxRateDraft> getTaxRates();
 
 
-    static TaxCategoryDraft of(final String name, final List<TaxRate> taxRates, @Nullable final String description) {
+    static TaxCategoryDraft of(final String name, final List<TaxRateDraft> taxRates, @Nullable final String description) {
         return new TaxCategoryDraftImpl(name, description, taxRates);
     }
 
-    static TaxCategoryDraft of(final String name, final List<TaxRate> taxRates) {
+    static TaxCategoryDraft of(final String name, final List<TaxRateDraft> taxRates) {
         return of(name, taxRates, null);
     }
 }

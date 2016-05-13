@@ -27,6 +27,8 @@ final class CustomLineItemImpl extends LineItemLikeImpl implements CustomLineIte
     private final CustomFields custom;
     private final MonetaryAmount totalPrice;
     private final List<DiscountedLineItemPriceForQuantity> discountedPricePerQuantity;
+    @Nullable
+    private final TaxedItemPrice taxedPrice;
 
 
     @JsonCreator
@@ -35,7 +37,8 @@ final class CustomLineItemImpl extends LineItemLikeImpl implements CustomLineIte
                        final Reference<TaxCategory> taxCategory, @Nullable final TaxRate taxRate,
                        @Nullable final DiscountedLineItemPrice discountedPrice, @Nullable final CustomFields custom,
                        final MonetaryAmount totalPrice,
-                       final List<DiscountedLineItemPriceForQuantity> discountedPricePerQuantity) {
+                       final List<DiscountedLineItemPriceForQuantity> discountedPricePerQuantity,
+                       @Nullable final TaxedItemPrice taxedPrice) {
         super(id, state, quantity, discountedPrice);
         this.name = name;
         this.money = money;
@@ -44,6 +47,7 @@ final class CustomLineItemImpl extends LineItemLikeImpl implements CustomLineIte
         this.taxRate = taxRate;
         this.custom = custom;
         this.totalPrice = totalPrice;
+        this.taxedPrice = taxedPrice;
         this.discountedPricePerQuantity = discountedPricePerQuantity != null ? discountedPricePerQuantity : emptyList();
     }
 
@@ -87,5 +91,11 @@ final class CustomLineItemImpl extends LineItemLikeImpl implements CustomLineIte
     @Override
     public List<DiscountedLineItemPriceForQuantity> getDiscountedPricePerQuantity() {
         return discountedPricePerQuantity;
+    }
+
+    @Override
+    @Nullable
+    public TaxedItemPrice getTaxedPrice() {
+        return taxedPrice;
     }
 }

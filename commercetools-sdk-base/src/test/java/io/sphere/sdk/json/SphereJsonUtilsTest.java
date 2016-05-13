@@ -42,8 +42,18 @@ public class SphereJsonUtilsTest {
     @Test
     public void toJsonString() throws Exception {
         final LocalizedString value = LocalizedString.of(ENGLISH, "dog food", GERMAN, "Hundefutter");
-        final JsonNode actual = SphereJsonUtils.toJsonNode(value);
-        assertThat(actual).isEqualTo(SphereJsonUtils.parse("{\"de\":\"Hundefutter\",\"en\":\"dog food\"}"));
+        assertThat(SphereJsonUtils.toJsonString(value))
+                .isEqualTo("{\"en\":\"dog food\",\"de\":\"Hundefutter\"}");
+    }
+
+    @Test
+    public void toPrettyJsonString() throws Exception {
+        final LocalizedString value = LocalizedString.of(ENGLISH, "dog food", GERMAN, "Hundefutter");
+        assertThat(SphereJsonUtils.toPrettyJsonString(value))
+                .isEqualTo("{\n" +
+                        "  \"en\" : \"dog food\",\n" +
+                        "  \"de\" : \"Hundefutter\"\n" +
+                        "}");
     }
 
     @Test

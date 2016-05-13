@@ -6,6 +6,7 @@ import io.sphere.sdk.commands.UpdateActionImpl;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Referenceable;
+import io.sphere.sdk.taxcategories.ExternalTaxRateDraft;
 import io.sphere.sdk.taxcategories.TaxCategory;
 import io.sphere.sdk.types.CustomDraft;
 import io.sphere.sdk.types.CustomFieldsDraft;
@@ -32,20 +33,25 @@ public final class AddCustomLineItem extends UpdateActionImpl<Cart> implements C
     private final Long quantity;
     private final MonetaryAmount money;
     private final String slug;
+    @Nullable
     private final Reference<TaxCategory> taxCategory;
     @Nullable
     private final CustomFieldsDraft custom;
+    @Nullable
+    private final ExternalTaxRateDraft externalTaxRate;
 
     private AddCustomLineItem(final LocalizedString name, final String slug,
-                              final MonetaryAmount money, final Referenceable<TaxCategory> taxCategory,
-                              final Long quantity, @Nullable final CustomFieldsDraft custom) {
+                              final MonetaryAmount money, @Nullable final Referenceable<TaxCategory> taxCategory,
+                              final Long quantity, @Nullable final CustomFieldsDraft custom,
+                              @Nullable final ExternalTaxRateDraft externalTaxRate) {
         super("addCustomLineItem");
         this.name = name;
         this.quantity = quantity;
         this.money = money;
         this.slug = slug;
         this.custom = custom;
-        this.taxCategory = taxCategory.toReference();
+        this.externalTaxRate = externalTaxRate;
+        this.taxCategory = taxCategory != null ? taxCategory.toReference() : null;
     }
 
     public static AddCustomLineItem of(final LocalizedString name, final String slug,
@@ -57,12 +63,12 @@ public final class AddCustomLineItem extends UpdateActionImpl<Cart> implements C
     public static AddCustomLineItem of(final LocalizedString name, final String slug,
                                        final MonetaryAmount money, final Referenceable<TaxCategory> taxCategory,
                                        final long quantity, @Nullable final CustomFieldsDraft custom) {
-        return new AddCustomLineItem(name, slug, money, taxCategory, quantity, custom);
+        return new AddCustomLineItem(name, slug, money, taxCategory, quantity, custom, null);
     }
 
     public static AddCustomLineItem of(final CustomLineItemDraft draft) {
-        return of(draft.getName(), draft.getSlug(), draft.getMoney(),
-                draft.getTaxCategory(), draft.getQuantity(), draft.getCustom());
+        return new AddCustomLineItem(draft.getName(), draft.getSlug(), draft.getMoney(),
+                draft.getTaxCategory(), draft.getQuantity(), draft.getCustom(), draft.getExternalTaxRate());
     }
 
     public LocalizedString getName() {
@@ -81,6 +87,7 @@ public final class AddCustomLineItem extends UpdateActionImpl<Cart> implements C
         return slug;
     }
 
+    @Nullable
     public Reference<TaxCategory> getTaxCategory() {
         return taxCategory;
     }
@@ -90,7 +97,16 @@ public final class AddCustomLineItem extends UpdateActionImpl<Cart> implements C
         return custom;
     }
 
+    @Nullable
+    public ExternalTaxRateDraft getExternalTaxRate() {
+        return externalTaxRate;
+    }
+
     public AddCustomLineItem withCustom(@Nullable final CustomFieldsDraft custom) {
-        return new AddCustomLineItem(getName(), getSlug(), getMoney(), getTaxCategory(), getQuantity(), custom);
+        return new AddCustomLineItem(getName(), getSlug(), getMoney(), getTaxCategory(), getQuantity(), custom, getExternalTaxRate());
+    }
+
+    public AddCustomLineItem withExternalTaxRate(@Nullable final ExternalTaxRateDraft externalTaxRate) {
+        return new AddCustomLineItem(getName(), getSlug(), getMoney(), getTaxCategory(), getQuantity(), getCustom(), externalTaxRate);
     }
 }

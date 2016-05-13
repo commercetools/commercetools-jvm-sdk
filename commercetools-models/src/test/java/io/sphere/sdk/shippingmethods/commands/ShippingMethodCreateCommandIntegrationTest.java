@@ -5,6 +5,7 @@ import io.sphere.sdk.shippingmethods.*;
 import io.sphere.sdk.shippingmethods.queries.ShippingMethodQuery;
 import io.sphere.sdk.taxcategories.TaxCategoryDraft;
 import io.sphere.sdk.taxcategories.TaxRate;
+import io.sphere.sdk.taxcategories.TaxRateDraft;
 import io.sphere.sdk.test.IntegrationTest;
 import io.sphere.sdk.test.JsonNodeReferenceResolver;
 import io.sphere.sdk.utils.MoneyImpl;
@@ -40,7 +41,7 @@ public class ShippingMethodCreateCommandIntegrationTest extends IntegrationTest 
     @Test
     public void execution() throws Exception {
         final CurrencyUnit currencyUnit = USD;
-        final TaxRate taxRate = TaxRate.of("x20", 0.20, true, COUNTRY_CODE);
+        final TaxRateDraft taxRate = TaxRateDraft.of("x20", 0.20, true, COUNTRY_CODE);
         withZone(client(), zone -> {
             withTaxCategory(client(), TaxCategoryDraft.of("taxcat", asList(taxRate)), taxCategory -> {
                 final ZoneRate zoneRate = ZoneRate.of(zone, asList(ShippingRate.of(MoneyImpl.of(30, currencyUnit))));

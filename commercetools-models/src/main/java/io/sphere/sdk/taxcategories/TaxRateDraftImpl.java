@@ -7,9 +7,7 @@ import io.sphere.sdk.models.Base;
 import javax.annotation.Nullable;
 import java.util.List;
 
-final class TaxRateImpl extends Base implements TaxRate {
-    @Nullable
-    private final String id;
+final class TaxRateDraftImpl extends Base implements TaxRateDraft {
     private final String name;
     private final Double amount;
     private final Boolean includedInPrice;
@@ -19,21 +17,14 @@ final class TaxRateImpl extends Base implements TaxRate {
     private final List<SubRate> subRates;
 
     @JsonCreator
-    TaxRateImpl(@Nullable final String id, final String name, final Double amount, final Boolean includedInPrice,
-                final CountryCode country, @Nullable final String state, final List<SubRate> subRates) {
-        this.id = id;
+    TaxRateDraftImpl(final String name, final Double amount, final Boolean includedInPrice,
+                     final CountryCode country, @Nullable final String state, final List<SubRate> subRates) {
         this.name = name;
         this.amount = amount;
         this.includedInPrice = includedInPrice;
         this.country = country;
         this.state = state;
         this.subRates = subRates;
-    }
-
-    @Override
-    @Nullable
-    public String getId() {
-        return id;
     }
 
     @Override
@@ -65,11 +56,5 @@ final class TaxRateImpl extends Base implements TaxRate {
     @Override
     public List<SubRate> getSubRates() {
         return subRates;
-    }
-
-    @Deprecated
-    public boolean equalsIgnoreId(final TaxRate other) {
-        return other != null
-                && TaxRateDraftBuilder.of(other).build().equals(TaxRateDraftBuilder.of(this).build());
     }
 }

@@ -2,6 +2,7 @@ package io.sphere.sdk.carts;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.neovisionaries.i18n.CountryCode;
+import io.sphere.sdk.carts.commands.updateactions.ChangeTaxMode;
 import io.sphere.sdk.customergroups.CustomerGroup;
 import io.sphere.sdk.customers.Customer;
 import io.sphere.sdk.discountcodes.DiscountCodeInfo;
@@ -168,6 +169,15 @@ public interface CartLike<T> extends Resource<T>, Custom {
      */
     @Nullable
     PaymentInfo getPaymentInfo();
+
+    /**
+     * Tax mode of this cart.
+     *
+     * @see ChangeTaxMode
+     *
+     * @return tax mode
+     */
+    TaxMode getTaxMode();
 
     /**
      * The currency of this cart/order.

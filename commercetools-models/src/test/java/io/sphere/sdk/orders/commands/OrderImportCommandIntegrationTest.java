@@ -23,6 +23,7 @@ import io.sphere.sdk.types.CustomFields;
 import io.sphere.sdk.utils.MoneyImpl;
 import org.junit.Test;
 
+import javax.annotation.Nullable;
 import javax.money.MonetaryAmount;
 import java.math.BigDecimal;
 import java.time.ZonedDateTime;
@@ -254,6 +255,12 @@ public class OrderImportCommandIntegrationTest extends IntegrationTest {
 
                     @Override
                     public MonetaryAmount getTotalPrice() {
+                        return null;
+                    }
+
+                    @Nullable
+                    @Override
+                    public TaxedItemPrice getTaxedPrice() {
                         return null;
                     }
 

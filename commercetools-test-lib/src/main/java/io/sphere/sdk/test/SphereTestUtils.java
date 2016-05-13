@@ -47,10 +47,12 @@ public final class SphereTestUtils {
     public static final MonetaryAmount EURO_1 = MoneyImpl.of(1, EUR);
     public static final MonetaryAmount EURO_5 = MoneyImpl.of(5, EUR);
     public static final MonetaryAmount EURO_10 = MoneyImpl.of(10, EUR);
+    public static final MonetaryAmount EURO_12 = MoneyImpl.of(12, EUR);
     public static final MonetaryAmount EURO_15 = MoneyImpl.of(15, EUR);
     public static final MonetaryAmount EURO_20 = MoneyImpl.of(20, EUR);
     public static final MonetaryAmount EURO_25 = MoneyImpl.of(25, EUR);
     public static final MonetaryAmount EURO_30 = MoneyImpl.of(30, EUR);
+    public static final MonetaryAmount EURO_36 = MoneyImpl.of(36, EUR);
     public static final MonetaryAmount EURO_40 = MoneyImpl.of(40, EUR);
     public static final MonetaryAmount USD_30 = MoneyImpl.of(30, USD);
     public static final MonetaryAmount USD_20 = MoneyImpl.of(20, USD);

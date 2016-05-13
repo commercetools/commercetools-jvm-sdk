@@ -3,17 +3,12 @@ package io.sphere.sdk.taxcategories;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.neovisionaries.i18n.CountryCode;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.util.List;
 
-/**
- * @see TaxRateBuilder
- */
 @JsonDeserialize(as=TaxRateImpl.class)
 public interface TaxRate {
-    /**
-     * The id is created by the backend, so will only be present if fetched from the backend.
-     * @return the id or absent
-     */
     @Nullable
     String getId();
 
@@ -28,9 +23,16 @@ public interface TaxRate {
     @Nullable
     String getState();
 
-    static TaxRate of(final String name, final double amount, final boolean includedInPrice, final CountryCode country) {
-        return TaxRateBuilder.of(name, amount, includedInPrice, country).build();
-    }
+    @Nonnull
+    List<SubRate> getSubRates();
 
+    /**
+     * compares tax categories by all fields except by ID
+     *
+     * @param other other
+     * @return boolean
+     * @deprecated try TaxRateDraftBuilder.of(other).build().equals(TaxRateDraftBuilder.of(this).build())
+     */
+    @Deprecated
     boolean equalsIgnoreId(TaxRate other);
 }

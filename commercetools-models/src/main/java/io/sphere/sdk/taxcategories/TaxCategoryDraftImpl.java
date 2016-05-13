@@ -11,10 +11,10 @@ final class TaxCategoryDraftImpl extends Base implements TaxCategoryDraft {
     private final String name;
     @Nullable
     private final String description;
-    private final List<TaxRate> taxRates;
+    private final List<TaxRateDraft> taxRates;
 
     @JsonCreator
-    TaxCategoryDraftImpl(final String name, @Nullable final String description, final List<TaxRate> taxRates) {
+    TaxCategoryDraftImpl(final String name, @Nullable final String description, final List<TaxRateDraft> taxRates) {
         this.name = name;
         this.description = description;
         this.taxRates = taxRates;
@@ -33,7 +33,7 @@ final class TaxCategoryDraftImpl extends Base implements TaxCategoryDraft {
 
     @Override
     @JsonProperty("rates")
-    public List<TaxRate> getTaxRates() {
+    public List<TaxRateDraft> getTaxRates() {
         return taxRates;
     }
 }

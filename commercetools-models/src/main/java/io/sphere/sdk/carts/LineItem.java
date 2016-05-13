@@ -68,6 +68,10 @@ public interface LineItem extends LineItemLike {
     @Override
     List<DiscountedLineItemPriceForQuantity> getDiscountedPricePerQuantity();
 
+    @Nullable
+    @Override
+    TaxedItemPrice getTaxedPrice();
+
     /**
      * An identifier for this resource which supports {@link CustomFields}.
      * @see TypeDraft#getResourceTypeIds()

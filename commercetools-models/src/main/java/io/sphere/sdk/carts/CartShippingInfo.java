@@ -28,5 +28,8 @@ public interface CartShippingInfo {
     Reference<TaxCategory> getTaxCategory();
 
     @Nullable
+    TaxedItemPrice getTaxedPrice();
+
+    @Nullable
     Reference<ShippingMethod> getShippingMethod();
 }

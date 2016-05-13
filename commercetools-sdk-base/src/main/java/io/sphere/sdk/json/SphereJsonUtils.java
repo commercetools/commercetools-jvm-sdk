@@ -49,7 +49,7 @@ public final class SphereJsonUtils {
     }
 
     /**
-     * Converts a SPHERE.IO Java object to JSON as String.
+     * Converts a SPHERE.IO Java object to JSON as String (one liner).
      *
      * {@include.example io.sphere.sdk.json.SphereJsonUtilsTest#toJsonString()}
      *
@@ -58,6 +58,18 @@ public final class SphereJsonUtils {
      */
     public static String toJsonString(final Object value) {
         return executing(() -> objectMapper.writeValueAsString(value));
+    }
+
+    /**
+     * Converts a SPHERE.IO Java object to JSON as String (pretty).
+     *
+     * {@include.example io.sphere.sdk.json.SphereJsonUtilsTest#toPrettyJsonString()}
+     *
+     * @param value the object to convert
+     * @return JSON string representation of the value
+     */
+    public static String toPrettyJsonString(final Object value) {
+        return prettyPrint(toJsonString(value));
     }
 
     /**

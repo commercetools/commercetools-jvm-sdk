@@ -40,6 +40,7 @@ public interface CustomLineItem extends LineItemLike {
 
     Set<ItemState> getState();
 
+    @Nullable
     Reference<TaxCategory> getTaxCategory();
 
     @Nullable
@@ -59,6 +60,10 @@ public interface CustomLineItem extends LineItemLike {
 
     @Override
     List<DiscountedLineItemPriceForQuantity> getDiscountedPricePerQuantity();
+
+    @Nullable
+    @Override
+    TaxedItemPrice getTaxedPrice();
 
     /**
      * An identifier for this resource which supports {@link CustomFields}.

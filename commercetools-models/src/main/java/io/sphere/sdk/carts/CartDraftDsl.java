@@ -39,6 +39,8 @@ public final class CartDraftDsl extends Base implements CartDraft {
     private final Address billingAddress;
     @Nullable
     private final Reference<ShippingMethod> shippingMethod;
+    @Nullable
+    private final TaxMode taxMode;
 
 
     CartDraftDsl(final CurrencyUnit currency,
@@ -51,7 +53,8 @@ public final class CartDraftDsl extends Base implements CartDraft {
                  @Nullable final List<CustomLineItemDraft> customLineItems,
                  @Nullable final Address shippingAddress,
                  @Nullable final Address billingAddress,
-                 @Nullable final Reference<ShippingMethod> shippingMethod) {
+                 @Nullable final Reference<ShippingMethod> shippingMethod,
+                 @Nullable final TaxMode taxMode) {
         this.currency = currency;
         this.customerId = customerId;
         this.country = country;
@@ -63,10 +66,11 @@ public final class CartDraftDsl extends Base implements CartDraft {
         this.shippingAddress = shippingAddress;
         this.billingAddress = billingAddress;
         this.shippingMethod = shippingMethod;
+        this.taxMode = taxMode;
     }
 
     public static CartDraftDsl of(final CurrencyUnit currency) {
-        return new CartDraftDsl(currency, null, null, null, null, null, null, null, null, null, null);
+        return new CartDraftDsl(currency, null, null, null, null, null, null, null, null, null, null, null);
     }
 
     @Override
@@ -182,5 +186,15 @@ public final class CartDraftDsl extends Base implements CartDraft {
     @Nullable
     public CustomFieldsDraft getCustom() {
         return custom;
+    }
+
+    @Override
+    @Nullable
+    public TaxMode getTaxMode() {
+        return taxMode;
+    }
+
+    public CartDraftDsl withTaxMode(@Nullable final TaxMode taxMode) {
+        return new CartDraftBuilder(this).taxMode(taxMode).build();
     }
 }

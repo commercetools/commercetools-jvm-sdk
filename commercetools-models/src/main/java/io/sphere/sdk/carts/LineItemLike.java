@@ -30,6 +30,9 @@ public interface LineItemLike extends Custom {
 
     MonetaryAmount getTotalPrice();
 
+    @Nullable
+    TaxedItemPrice getTaxedPrice();
+
     /**
      *
      * Gets discount information for groups of line items.
