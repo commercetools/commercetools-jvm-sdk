@@ -1,11 +1,15 @@
 package io.sphere.sdk.utils;
 
+import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.concurrent.*;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
+import java.util.stream.Collectors;
+
+import static java.util.stream.Collectors.toList;
 
 /**
  * Tools to simplify the work with {@link CompletionStage} and {@link CompletableFuture}.
@@ -108,10 +112,33 @@ public final class CompletableFutureUtils {
     }
 
     public static <T, U> CompletionStage<U> map(final CompletionStage<T> future, final Function<? super T,? extends U> f) {
-        return future.thenApply(f);
+        return future.thenApplyAsync(f);
     }
 
     public static <T, U> CompletionStage<U> flatMap(final CompletionStage<T> future, final Function<? super T, CompletionStage<U>> f) {
-        return future.thenCompose(f);
+        return future.thenComposeAsync(f);
+    }
+
+    /**
+     * Transforms a list of {@code CompletionStage} into a {@code CompletionStage} of a list,
+     * that will be completed once all the elements of the given list are completed.
+     * In case multiple stages end exceptionally only one error is kept.
+     * @param list list of {@code CompletionStage}
+     * @param <T> the element obtained from the list of {@code CompletionStage}
+     * @return the {@code CompletableFuture} of a list of elements
+     */
+    public static <T> CompletableFuture<List<T>> listOfFuturesToFutureOfList(final List<? extends CompletionStage<T>> list) {
+        final List<CompletableFuture<T>> futureList = list.stream()
+                .map(CompletionStage::toCompletableFuture)
+                .collect(toList());
+        final CompletableFuture[] futuresAsArray = futureList.toArray(new CompletableFuture[futureList.size()]);
+        return CompletableFuture.allOf(futuresAsArray)
+                .thenApplyAsync(x -> futureList.stream()
+                        .map(CompletableFuture::join)
+                        .collect(Collectors.toList()));
+    }
+
+    public static <T> CompletableFuture<List<T>> sequence(final List<? extends CompletionStage<T>> stageList) {
+        return listOfFuturesToFutureOfList(stageList);
     }
 }

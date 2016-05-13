@@ -2,11 +2,14 @@ package io.sphere.sdk.utils;
 
 import org.junit.Test;
 
+import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionStage;
 
+import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
 import static io.sphere.sdk.utils.CompletableFutureUtils.*;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class CompletableFutureUtilsTest {
 
@@ -78,5 +81,37 @@ public class CompletableFutureUtilsTest {
         final RuntimeException e2 = new RuntimeException();
         final CompletionStage<String> future = recoverWith(failed(e1), e -> failed(e2));
         assertThat(blockForFailure(future)).isEqualTo(e2);
+    }
+
+    @Test
+    public void sequence() {
+        final CompletableFuture<Integer> two = delayedResult(2);
+        final List<CompletableFuture<Integer>> completableFutures = asList(successful(1), two, successful(3));
+        final CompletionStage<List<Integer>> sequence = CompletableFutureUtils.sequence(completableFutures);
+        final List<Integer> actual = sequence.toCompletableFuture().join();
+        assertThat(actual).isEqualTo(asList(1, 2, 3));
+    }
+
+    @Test
+    public void sequenceErrorCase() {
+        final RuntimeException exception = new RuntimeException("failed");
+        final List<CompletableFuture<Integer>> completableFutures = asList(delayedResult(1), failed(exception), successful(3));
+        final CompletableFuture<List<Integer>> sequence = CompletableFutureUtils.sequence(completableFutures);
+        assertThatThrownBy(() -> sequence.join()).hasCause(exception);
+    }
+
+    private <T> CompletableFuture<T> delayedResult(final T t) {
+        return CompletableFuture.supplyAsync(() -> {
+            delay();
+            return t;
+        });
+    }
+
+    private void delay()  {
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
