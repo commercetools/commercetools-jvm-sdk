@@ -40,6 +40,7 @@ public class CompletableFutureUtilsTest {
         final CompletableFuture<String> future = new CompletableFuture<>();
         final RuntimeException e = new RuntimeException();
         transferResult(failed(e), future);
+        catchThrowable(() -> future.join());
         assertThat(future.isCompletedExceptionally()).isTrue();
         assertThat(blockForFailure(future)).isEqualTo(e);
     }
@@ -120,7 +121,7 @@ public class CompletableFutureUtilsTest {
         final RuntimeException e = new RuntimeException("foo");
         final CompletableFuture<String> future = failed(e);
         final Throwable[] state = {null};
-        CompletableFutureUtils.onFailure(future, exception -> state[0] = exception).toCompletableFuture().join();
+        catchThrowable(() -> CompletableFutureUtils.onFailure(future, exception -> state[0] = exception).toCompletableFuture().join());
         assertThat(state[0]).isEqualTo(e);
     }
 
