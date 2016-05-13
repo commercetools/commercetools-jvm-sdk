@@ -1,5 +1,6 @@
 package io.sphere.sdk.customers;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import io.sphere.sdk.carts.Cart;
@@ -140,6 +141,16 @@ public interface Customer extends Resource<Customer>, Custom {
      * @return email
      */
     String getEmail();
+
+    /**
+     * The customer's email address in lowercase.
+     *
+     * @return email in lowercase
+     */
+    @JsonIgnore
+    default String getLowercaseEmail() {
+        return getEmail().toLowerCase();
+    }
 
     /**
      * First name of the customer.

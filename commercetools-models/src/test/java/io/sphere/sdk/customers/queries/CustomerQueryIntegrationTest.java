@@ -56,8 +56,22 @@ public class CustomerQueryIntegrationTest extends IntegrationTest {
     }
 
     @Test
-    public void email() throws Exception {
+    public void byEmailMethod() throws Exception {
         final PagedQueryResult<Customer> result = client().executeBlocking(CustomerQuery.of().byEmail(customer.getEmail()));
+        assertThat(result.getResults().get(0).getEmail()).isEqualTo(customer.getEmail());
+    }
+
+    @Test
+    public void lowercaseEmail() throws Exception {
+        final PagedQueryResult<Customer> result = client().executeBlocking(CustomerQuery.of()
+                .withPredicates(m -> m.lowercaseEmail().is(customer.getLowercaseEmail())));
+        assertThat(result.getResults().get(0).getEmail()).isEqualTo(customer.getEmail());
+    }
+
+    @Test
+    public void email() throws Exception {
+        final PagedQueryResult<Customer> result = client().executeBlocking(CustomerQuery.of()
+                .withPredicates(m -> m.email().is(customer.getEmail())));
         assertThat(result.getResults().get(0).getEmail()).isEqualTo(customer.getEmail());
     }
 

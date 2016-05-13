@@ -29,6 +29,11 @@ final class CustomerQueryModelImpl extends CustomResourceQueryModelImpl<Customer
     }
 
     @Override
+    public StringQuerySortingModel<Customer> lowercaseEmail() {
+        return stringModel("lowercaseEmail");
+    }
+
+    @Override
     public StringQuerySortingModel<Customer> defaultShippingAddressId() {
         return stringModel("defaultShippingAddressId");
     }

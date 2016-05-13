@@ -39,7 +39,7 @@ public interface CustomerQuery extends MetaModelQueryDsl<Customer, CustomerQuery
     }
 
     default CustomerQuery byEmail(final String email) {
-        return withPredicates(m -> m.email().is(email));
+        return withPredicates(m -> m.lowercaseEmail().is(email.toLowerCase()));
     }
 
 }
