@@ -14,6 +14,16 @@ public interface CustomerQueryModel extends ResourceQueryModel<Customer>, WithCu
 
     StringQuerySortingModel<Customer> email();
 
+    //this is not a field in customer!
+    /**
+     * Creates a model for a query of the lowercase version of the customer's email address.
+     *
+     * {@include.example io.sphere.sdk.customers.queries.CustomerQueryIntegrationTest#lowercaseEmail()}
+     *
+     * @return model
+     */
+    StringQuerySortingModel<Customer> lowercaseEmail();
+
     StringQuerySortingModel<Customer> defaultShippingAddressId();
 
     StringQuerySortingModel<Customer> defaultBillingAddressId();
