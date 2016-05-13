@@ -45,10 +45,7 @@ import io.sphere.sdk.products.commands.updateactions.SetMetaTitle;
 import io.sphere.sdk.products.expansion.ProductDataExpansionModel;
 import io.sphere.sdk.products.expansion.ProductProjectionExpansionModel;
 import io.sphere.sdk.products.queries.*;
-import io.sphere.sdk.products.search.PriceSelection;
-import io.sphere.sdk.products.search.ProductVariantAvailabilityFilterSearchModel;
-import io.sphere.sdk.products.search.ProductVariantAvailabilitySortSearchModel;
-import io.sphere.sdk.products.search.ProductVariantFilterSearchModel;
+import io.sphere.sdk.products.search.*;
 import io.sphere.sdk.producttypes.ProductType;
 import io.sphere.sdk.producttypes.ProductTypeDraft;
 import io.sphere.sdk.producttypes.ProductTypeLocalRepository;
@@ -70,6 +67,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 import java.util.concurrent.CompletionStage;
+import java.util.concurrent.Executor;
 import java.util.concurrent.TimeUnit;
 import java.util.function.BiFunction;
 import java.util.function.Function;
@@ -92,6 +90,23 @@ import java.util.function.Function;
  <li class=fixed-in-release></li>
  </ul>
  -->
+
+ <h3 class=released-version id="v1_0_0_RC8">1.0.0-RC8 (13.05.2016)</h3>
+
+ <ul>
+ <li class=new-in-release>added {@link ProductDataFilterSearchModel#slug()} </li>
+ <li class=new-in-release>added {@link io.sphere.sdk.customers.queries.CustomerQueryModel#lowercaseEmail()}</li>
+ <li class=new-in-release>added {@link io.sphere.sdk.utils.CompletableFutureUtils#listOfFuturesToFutureOfList(List)},
+ {@link io.sphere.sdk.utils.CompletableFutureUtils#exceptionallyCompletedFuture(Throwable)} and
+ {@link io.sphere.sdk.utils.CompletableFutureUtils#recoverWith(CompletionStage, Function, Executor)} </li>
+ <li class=new-in-release>added {@link LineItem#getTaxedPrice()}, {@link CustomLineItem#getTaxedPrice()} and {@link io.sphere.sdk.carts.CartShippingInfo#getTaxedPrice()} </li>
+ <li class=new-in-release>added {@link io.sphere.sdk.products.search.ProductCategoriesIdTermFilterSearchModel}
+ and {@link io.sphere.sdk.products.search.ProductCategoriesIdTermFacetSearchModel} to filter and facet for products in category trees</li>
+ <li class=new-in-release>add {@link io.sphere.sdk.carts.TaxMode} to enable external tax calculation</li>
+ <li class=change-in-release>{@link TaxRate} has been split into {@link TaxRate} (response object) and {@link io.sphere.sdk.taxcategories.TaxRateDraft} (input object)</li>
+ <li class=fixed-in-release>{@link io.sphere.sdk.utils.CompletableFutureUtils#recoverWith(CompletionStage, Function)} could hang under some circumstances</li>
+ </ul>
+
 
  <h3 class=released-version id="v1_0_0_RC7">1.0.0-RC7 (06.05.2016)</h3>
 

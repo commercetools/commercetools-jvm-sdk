@@ -7,7 +7,7 @@ import io.sphere.sdk.models.Builder;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class ExternalTaxRateDraftBuilder extends Base implements Builder<ExternalTaxRateDraft> {
+public final class ExternalTaxRateDraftBuilder extends Base implements Builder<ExternalTaxRateDraft> {
     private String name;
     @Nullable
     private Double amount;
