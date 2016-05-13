@@ -1,5 +1,7 @@
 package io.sphere.sdk.search.model;
 
+import io.sphere.sdk.models.Base;
+
 import javax.money.CurrencyUnit;
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -15,7 +17,7 @@ import static java.time.format.DateTimeFormatter.*;
  * Serializer to transform certain types to Commercetools Platform format on search endpoint.
  * @param <V> type of the data to transform.
  */
-class TypeSerializer<V> implements Function<V, String> {
+public final class TypeSerializer<V> extends Base implements Function<V, String> {
     private final Function<V, String> serializer;
 
     @Override
@@ -28,11 +30,27 @@ class TypeSerializer<V> implements Function<V, String> {
     }
 
     /**
+     * Serializer to convert the given element to a formatted string with escaped characters.
+     * @return the serializer for text data.
+     */
+    public static <V> TypeSerializer<V> ofRawFunction(final Function<V, String> serializer) {
+        return new TypeSerializer<>(serializer);
+    }
+
+    /**
      * Serializer to convert the given text to a formatted string with escaped characters.
      * @return the serializer for text data.
      */
     public static TypeSerializer<String> ofString() {
         return new TypeSerializer<>(v -> withQuotes(v.replace("\"", "\\\"")));
+    }
+
+    /**
+     * Serializer to convert the given text to a raw string without escaping characters or adding quotes.
+     * @return the serializer for raw text data.
+     */
+    public static TypeSerializer<String> ofRawString() {
+        return new TypeSerializer<>(v -> v);
     }
 
     /**

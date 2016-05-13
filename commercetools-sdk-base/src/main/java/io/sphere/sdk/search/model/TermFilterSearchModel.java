@@ -10,43 +10,24 @@ import java.util.function.Function;
  * @param <T> type of the resource
  * @param <V> type of the value
  */
-public final class TermFilterSearchModel<T, V> extends TermFilterBaseSearchModel<T, V> {
-
-    TermFilterSearchModel(final SearchModel<T> searchModel, final Function<V, String> typeSerializer) {
-        super(searchModel, typeSerializer);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
+public interface TermFilterSearchModel<T, V> extends FilterSearchModel<T, V> {
     @Override
-    public List<FilterExpression<T>> is(final V value) {
-        return super.is(value);
-    }
+    List<FilterExpression<T>> containsAll(final Iterable<V> values);
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
-    public List<FilterExpression<T>> isIn(final Iterable<V> values) {
-        return super.isIn(values);
-    }
+    List<FilterExpression<T>> containsAllAsString(final Iterable<String> values);
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
-    public List<FilterExpression<T>> containsAny(final Iterable<V> values) {
-        return super.containsAny(values);
-    }
+    List<FilterExpression<T>> containsAny(final Iterable<V> values);
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
-    public List<FilterExpression<T>> containsAll(final Iterable<V> values) {
-        return super.containsAll(values);
-    }
+    List<FilterExpression<T>> containsAnyAsString(final Iterable<String> values);
+
+    @Override
+    List<FilterExpression<T>> is(final V value);
+
+    @Override
+    List<FilterExpression<T>> isIn(final Iterable<V> values);
 
     /**
      * Creates an instance of the search model to generate term filters.
@@ -56,7 +37,7 @@ public final class TermFilterSearchModel<T, V> extends TermFilterBaseSearchModel
      * @param <V> type of the value
      * @return new instance of TermFilterSearchModel
      */
-    public static <T, V> TermFilterSearchModel<T, V> of(final String attributePath, final Function<V, String> typeSerializer) {
-        return new TermFilterSearchModel<>(new SearchModelImpl<>(attributePath), typeSerializer);
+    static <T, V> TermFilterSearchModel<T, V> of(final String attributePath, final Function<V, String> typeSerializer) {
+        return new TermFilterSearchModelImpl<>(new SearchModelImpl<>(attributePath), typeSerializer);
     }
 }

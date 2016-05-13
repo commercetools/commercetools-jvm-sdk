@@ -3,6 +3,7 @@ package io.sphere.sdk.search.model;
 import io.sphere.sdk.search.FilteredFacetExpression;
 import io.sphere.sdk.search.TermFacetExpression;
 
+import javax.annotation.Nullable;
 import java.util.function.Function;
 
 /**
@@ -10,47 +11,19 @@ import java.util.function.Function;
  * @param <T> type of the resource
  * @param <V> type of the value
  */
-public final class TermFacetSearchModel<T, V> extends TermFacetBaseSearchModel<T, V> {
+public interface TermFacetSearchModel<T, V> extends FacetSearchModel<T, V> {
 
-    TermFacetSearchModel(final SearchModel<T> searchModel, final Function<V, String> typeSerializer, final String alias) {
-        super(searchModel, typeSerializer, alias);
-    }
-
-    TermFacetSearchModel(final SearchModel<T> searchModel, final Function<V, String> typeSerializer) {
-        super(searchModel, typeSerializer);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
     @Override
-    public TermFacetSearchModel<T, V> withAlias(final String alias) {
-        return new TermFacetSearchModel<>(searchModel, typeSerializer, alias);
-    }
+    FilteredFacetExpression<T> onlyTerm(final V value);
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
-    public TermFacetExpression<T> allTerms() {
-        return super.allTerms();
-    }
+    FilteredFacetExpression<T> onlyTerm(final Iterable<V> values);
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
-    public FilteredFacetExpression<T> onlyTerm(final V value) {
-        return super.onlyTerm(value);
-    }
+    FilteredFacetExpression<T> onlyTermAsString(final Iterable<String> values);
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
-    public FilteredFacetExpression<T> onlyTerm(final Iterable<V> values) {
-        return super.onlyTerm(values);
-    }
+    TermFacetSearchModel<T, V> withAlias(final String alias);
 
     /**
      * Creates an instance of the search model to generate term facet expressions.
@@ -60,7 +33,7 @@ public final class TermFacetSearchModel<T, V> extends TermFacetBaseSearchModel<T
      * @param <V> type of the value
      * @return new instance of TermFacetSearchModel
      */
-    public static <T, V> TermFacetSearchModel<T, V> of(final String attributePath, final Function<V, String> typeSerializer) {
-        return new TermFacetSearchModel<>(new SearchModelImpl<>(attributePath), typeSerializer);
+    static <T, V> TermFacetSearchModel<T, V> of(final String attributePath, final Function<V, String> typeSerializer) {
+        return new TermFacetSearchModelImpl<>(new SearchModelImpl<>(attributePath), typeSerializer);
     }
 }

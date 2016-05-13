@@ -12,7 +12,7 @@ public class SearchModelImpl<T> extends Base implements SearchModel<T> {
     @Nullable
     private final String pathSegment;
 
-    protected SearchModelImpl(@Nullable final SearchModel<T> parent, @Nullable final String pathSegment) {
+    public SearchModelImpl(@Nullable final SearchModel<T> parent, @Nullable final String pathSegment) {
         this.parent = parent;
         this.pathSegment = pathSegment;
     }
@@ -115,11 +115,11 @@ public class SearchModelImpl<T> extends Base implements SearchModel<T> {
     }
 
     protected ReferenceFilterSearchModel<T> referenceFilterSearchModel(final String pathSegment) {
-        return new ReferenceFilterSearchModel<>(this, pathSegment);
+        return new ReferenceFilterSearchModelImpl<>(this, pathSegment);
     }
 
     protected ReferenceFacetSearchModel<T> referenceFacetSearchModel(final String pathSegment) {
-        return new ReferenceFacetSearchModel<>(this, pathSegment);
+        return new ReferenceFacetSearchModelImpl<>(this, pathSegment);
     }
 
     protected ReferenceFacetedSearchSearchModel<T> referenceFacetedSearchSearchModel(final String pathSegment) {

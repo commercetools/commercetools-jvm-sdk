@@ -6,9 +6,9 @@ import java.util.function.Function;
 
 import static io.sphere.sdk.utils.SphereInternalUtils.requireNonEmpty;
 
-class TermFilterExpression<T, V> extends TermExpression<T, V> implements FilterExpression<T> {
+public class TermFilterExpression<T, V> extends TermExpression<T, V> implements FilterExpression<T> {
 
-    TermFilterExpression(final SearchModel<T> searchModel, final Function<V, String> typeSerializer, final Iterable<V> terms) {
+    public TermFilterExpression(final SearchModel<T> searchModel, final Function<V, String> typeSerializer, final Iterable<V> terms) {
         super(searchModel, typeSerializer, requireNonEmpty(terms), null);
     }
 

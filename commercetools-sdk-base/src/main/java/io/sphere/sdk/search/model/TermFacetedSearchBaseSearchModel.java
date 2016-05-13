@@ -23,8 +23,8 @@ abstract class TermFacetedSearchBaseSearchModel<T> extends Base implements Facet
 
     TermFacetedSearchBaseSearchModel(final SearchModel<T> searchModel) {
         this.searchModel = searchModel;
-        this.facetExpression = new TermFacetSearchModel<>(searchModel, TYPE_SERIALIZER).allTerms();
-        this.filterSearchModel = new TermFilterSearchModel<>(searchModel, TYPE_SERIALIZER);
+        this.facetExpression = new TermFacetSearchModelImpl<>(searchModel, TYPE_SERIALIZER).allTerms();
+        this.filterSearchModel = new TermFilterSearchModelImpl<>(searchModel, TYPE_SERIALIZER);
     }
 
     @Override
