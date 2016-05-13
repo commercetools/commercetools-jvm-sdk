@@ -1,10 +1,7 @@
 package io.sphere.sdk.utils;
 
 import java.util.NoSuchElementException;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.CompletionException;
-import java.util.concurrent.CompletionStage;
-import java.util.concurrent.ExecutionException;
+import java.util.concurrent.*;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 import java.util.function.Function;
@@ -69,22 +66,26 @@ public final class CompletableFutureUtils {
     }
 
     public static <T> CompletionStage<T> recoverWith(final CompletionStage<T> future, final Function<? super Throwable, CompletionStage<T>> f) {
+        return recoverWith(future, f, ForkJoinPool.commonPool());
+    }
+
+    public static <T> CompletionStage<T> recoverWith(final CompletionStage<T> future, final Function<? super Throwable, CompletionStage<T>> f, final Executor executor) {
         final CompletableFuture<T> result = new CompletableFuture<>();
         final BiConsumer<T, Throwable> action = (value, error) -> {
             if (value != null) {
                 result.complete(value);
             } else {
                 final CompletionStage<T> alternative = f.apply(error);
-                alternative.whenComplete((alternativeValue, alternativeError) -> {
+                alternative.whenCompleteAsync((alternativeValue, alternativeError) -> {
                     if (alternativeValue != null) {
                         result.complete(alternativeValue);
                     } else {
                         result.completeExceptionally(alternativeError);
                     }
-                });
+                }, executor);
             }
         };
-        future.whenComplete(action);
+        future.whenCompleteAsync(action, executor);
         return result;
     }
 
