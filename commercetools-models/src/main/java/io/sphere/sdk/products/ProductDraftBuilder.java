@@ -9,6 +9,7 @@ import io.sphere.sdk.taxcategories.TaxCategory;
 
 import javax.annotation.Nullable;
 import java.util.*;
+import java.util.stream.Collectors;
 
 import static io.sphere.sdk.utils.SphereInternalUtils.listOf;
 
@@ -127,6 +128,20 @@ public final class ProductDraftBuilder extends Base implements Builder<ProductDr
 
     public ProductDraftBuilder categories(final List<Reference<Category>> categories) {
         return categories(new LinkedHashSet<>(categories));
+    }
+
+    /**
+     * Adds categories to this product draft. Alias for {@link #categories(List)} which takes the category objects as parameter.
+     *
+     * @param categories categories which the product belongs to
+     * @return this builder
+     */
+    public ProductDraftBuilder categoriesAsObjectList(final List<Category> categories) {
+        final List<Reference<Category>> referenceList = categories.stream()
+                .filter(x -> x != null)
+                .map(cat -> cat.toReference())
+                .collect(Collectors.toList());
+        return categories(referenceList);
     }
 
     public ProductDraftBuilder searchKeywords(final SearchKeywords searchKeywords) {

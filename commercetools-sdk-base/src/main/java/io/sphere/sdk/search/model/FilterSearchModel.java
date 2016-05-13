@@ -9,7 +9,7 @@ import java.util.List;
  * @param <T> type of the resource
  * @param <V> type of the value
  */
-public interface FilterSearchModel<T, V> {
+public interface FilterSearchModel<T, V> extends ExistsAndMissingFilterSearchModelSupport<T> {
 
     /**
      * The search model for the filter.
