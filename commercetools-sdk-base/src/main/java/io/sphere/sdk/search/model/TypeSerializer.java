@@ -1,5 +1,7 @@
 package io.sphere.sdk.search.model;
 
+import io.sphere.sdk.models.Base;
+
 import javax.money.CurrencyUnit;
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -15,7 +17,7 @@ import static java.time.format.DateTimeFormatter.*;
  * Serializer to transform certain types to Commercetools Platform format on search endpoint.
  * @param <V> type of the data to transform.
  */
-public final class TypeSerializer<V> implements Function<V, String> {
+public final class TypeSerializer<V> extends Base implements Function<V, String> {
     private final Function<V, String> serializer;
 
     @Override

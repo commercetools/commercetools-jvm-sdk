@@ -12,7 +12,7 @@ import java.util.function.Function;
 
 import static java.util.Collections.*;
 
-public class ProductCategoriesIdTermFilterSearchModelImpl<T> extends TermFilterSearchModelImpl<T, String> implements ProductCategoriesIdTermFilterSearchModel<T> {
+final class ProductCategoriesIdTermFilterSearchModelImpl<T> extends TermFilterSearchModelImpl<T, String> implements ProductCategoriesIdTermFilterSearchModel<T> {
     public ProductCategoriesIdTermFilterSearchModelImpl(final SearchModel<T> searchModel, final Function<String, String> typeSerializer) {
         super(searchModel, typeSerializer);
     }

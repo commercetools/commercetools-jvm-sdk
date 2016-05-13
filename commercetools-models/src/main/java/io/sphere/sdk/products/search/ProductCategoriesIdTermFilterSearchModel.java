@@ -18,7 +18,7 @@ public interface ProductCategoriesIdTermFilterSearchModel<T> extends TermFilterS
     /**
      * <p>Creates filters for a product which needs to be in all categories directly ({@code categoryIds}). Does not include the child categories.</p>
      *
-     * {@include.example io.sphere.sdk.products.search.ProductCategoriesIdTermFilterSearchModel#containsAll(java.lang.Iterable)}
+     * {@include.example io.sphere.sdk.products.search.ProductCategoriesIdTermFilterSearchModelIntegrationTest#containsAll()}
      *
      * @param categoryIds the ID of the category which the products belongs to excluding subcategories
      * @return filter expressions
