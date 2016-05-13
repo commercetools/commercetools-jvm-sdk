@@ -27,6 +27,10 @@ public final class CompletableFutureUtils {
         }
     }
 
+    public static <T> CompletableFuture<T> exceptionallyCompletedFuture(final Throwable e) {
+        return failed(e);
+    }
+
     public static <T> CompletableFuture<T> failed(final Throwable e) {
         final CompletableFuture<T> future = new CompletableFuture<>();
         future.completeExceptionally(e);
