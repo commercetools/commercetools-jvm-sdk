@@ -35,6 +35,11 @@ public final class ProductProjectionFilterSearchModel extends ProductDataFilterS
     }
 
     @Override
+    public LocalizedStringFilterSearchModel<ProductProjection> slug() {
+        return super.slug();
+    }
+
+    @Override
     public ProductCategoriesReferenceFilterSearchModel<ProductProjection> categories() {
         return super.categories();
     }

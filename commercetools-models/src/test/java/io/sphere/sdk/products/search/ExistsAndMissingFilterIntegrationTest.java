@@ -117,6 +117,13 @@ public class ExistsAndMissingFilterIntegrationTest extends IntegrationTest {
     }
 
     @Test
+    public void slugLocale() {
+        final Locale locale = Locale.forLanguageTag("de-AT");
+        checkFilter(builder -> builder.slug(LocalizedString.of(locale, randomKey())),
+                m -> m.slug().locale(locale));
+    }
+
+    @Test
     public void prices() {
         checkFilter(builder -> {
             final ProductVariantDraft oldMaster = builder.getMasterVariant();
