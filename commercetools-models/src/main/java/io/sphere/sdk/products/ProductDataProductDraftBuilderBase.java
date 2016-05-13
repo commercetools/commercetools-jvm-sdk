@@ -74,12 +74,12 @@ abstract class ProductDataProductDraftBuilderBase<T extends ProductDataProductDr
     }
 
     /**
-     * Adds categories to this product draft. Alias for {@link #categories(List)} which takes the o
+     * Adds categories to this product draft. Alias for {@link #categories(List)} which takes the category objects as parameter.
      *
-     * @param categories
-     * @return
+     * @param categories categories which the product belongs to
+     * @return this builder
      */
-    public T categoriesObjects(final List<Category> categories) {
+    public T categoriesAsObjectList(final List<Category> categories) {
         final List<Reference<Category>> referenceList = categories.stream()
                 .filter(x -> x != null)
                 .map(cat -> cat.toReference())

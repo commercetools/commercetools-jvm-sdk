@@ -18,7 +18,7 @@ public class CategoriesWithAncestorsIntegrationTest extends IntegrationTest {
     @Test
     public void isInSubtree() {
         withCategoryAndParentCategory(client(), (Category cat, Category parent) -> {
-            withProduct(client(), builder -> builder.categoriesObjects(singletonList(cat)), product -> {
+            withProduct(client(), builder -> builder.categoriesAsObjectList(singletonList(cat)), product -> {
                 final String parentId = parent.getId();
                 assertThat(product.getMasterData().getStaged().getCategories())
                         .contains(cat.toReference())
