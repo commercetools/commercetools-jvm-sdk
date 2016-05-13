@@ -29,8 +29,7 @@ public interface CustomLineItemDraft extends CustomDraft {
     String getSlug();
 
     /**
-     * Gets the tax rate for this custom line item.
-     * It can be null if an external tax rate ({@link #getExternalTaxRate()}) is set.
+     * Gets the tax category for this custom line item.
      *
      * @return tax category or null
      * @see TaxMode

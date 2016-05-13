@@ -1,13 +1,14 @@
 package io.sphere.sdk.carts.commands.updateactions;
 
 import io.sphere.sdk.carts.Cart;
+import io.sphere.sdk.carts.TaxMode;
 import io.sphere.sdk.commands.UpdateActionImpl;
 import io.sphere.sdk.taxcategories.ExternalTaxRateDraft;
 
 import javax.annotation.Nullable;
 
 /**
- Sets a new tax rate that overrides the tax rate selected by the platform. If `externalTaxRate` is empty, the platform will select a tax rate as in {@link AddLineItem}.
+ Sets a tax rate for a line item if the cart has the tax mode {@link TaxMode#EXTERNAL}.
 
  {@doc.gen intro}
 

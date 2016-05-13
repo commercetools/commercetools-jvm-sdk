@@ -33,8 +33,9 @@ public interface LineItemDraft {
     Integer getVariantId();
 
     /**
-     * Possible custom tax rate.
-     * If set, this tax rate will override the tax rate selected by the platform.
+     * The optional external tax rate if the cart has the tax mode {@link TaxMode#EXTERNAL}.
+     *
+     * @see TaxMode
      *
      * @return external tax rate or null
      */

@@ -43,7 +43,7 @@ public class SphereJsonUtilsTest {
     public void toJsonString() throws Exception {
         final LocalizedString value = LocalizedString.of(ENGLISH, "dog food", GERMAN, "Hundefutter");
         assertThat(SphereJsonUtils.toJsonString(value))
-                .isEqualTo("{\"de\":\"Hundefutter\",\"en\":\"dog food\"}");
+                .isEqualTo("{\"en\":\"dog food\",\"de\":\"Hundefutter\"}");
     }
 
     @Test
