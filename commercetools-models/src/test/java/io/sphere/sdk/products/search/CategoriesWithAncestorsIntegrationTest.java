@@ -14,6 +14,7 @@ import static java.util.Collections.singletonList;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class CategoriesWithAncestorsIntegrationTest extends IntegrationTest {
+    @SuppressWarnings("unchecked")
     @Test
     public void isInSubtree() {
         withCategoryAndParentCategory(client(), (Category cat, Category parent) -> {
