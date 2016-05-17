@@ -1,41 +1,22 @@
 package io.sphere.sdk.orders;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import io.sphere.sdk.models.Base;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 import javax.annotation.Nullable;
 import java.time.ZonedDateTime;
 import java.util.List;
 
-public final class ReturnInfo extends Base {
-    private final List<ReturnItem> items;
-    @Nullable
-    private final String returnTrackingId;
-    @Nullable
-    private final ZonedDateTime returnDate;
-
-    @JsonCreator
-    private ReturnInfo(final List<ReturnItem> items, @Nullable final String returnTrackingId, @Nullable final ZonedDateTime returnDate) {
-        this.items = items;
-        this.returnTrackingId = returnTrackingId;
-        this.returnDate = returnDate;
+@JsonDeserialize(as = ReturnInfoImpl.class)
+public interface ReturnInfo {
+    static ReturnInfo of(final List<ReturnItem> items, @Nullable final String returnTrackingId, @Nullable final ZonedDateTime returnDate) {
+        return new ReturnInfoImpl(items, returnTrackingId, returnDate);
     }
 
-    public static ReturnInfo of(final List<ReturnItem> items, @Nullable final String returnTrackingId, @Nullable final ZonedDateTime returnDate) {
-        return new ReturnInfo(items, returnTrackingId, returnDate);
-    }
-
-    public List<ReturnItem> getItems() {
-        return items;
-    }
+    List<ReturnItem> getItems();
 
     @Nullable
-    public String getReturnTrackingId() {
-        return returnTrackingId;
-    }
+    String getReturnTrackingId();
 
     @Nullable
-    public ZonedDateTime getReturnDate() {
-        return returnDate;
-    }
+    ZonedDateTime getReturnDate();
 }
