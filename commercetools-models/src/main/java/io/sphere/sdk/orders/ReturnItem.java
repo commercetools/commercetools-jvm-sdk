@@ -1,72 +1,32 @@
 package io.sphere.sdk.orders;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.Timestamped;
 
 import javax.annotation.Nullable;
 import java.time.ZonedDateTime;
 
-public final class ReturnItem extends Base implements Timestamped {
-    private final String id;
-    private final Long quantity;
-    private final String lineItemId;
-    @Nullable
-    private final String comment;
-    private final ReturnShipmentState shipmentState;
-    private final ReturnPaymentState paymentState;
-    private final ZonedDateTime createdAt;
-    private final ZonedDateTime lastModifiedAt;
-
-    @JsonCreator
-    private ReturnItem(final String id, final Long quantity, final String lineItemId, @Nullable final String comment, final ReturnShipmentState shipmentState, final ReturnPaymentState paymentState, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt) {
-        this.id = id;
-        this.quantity = quantity;
-        this.lineItemId = lineItemId;
-        this.comment = comment;
-        this.shipmentState = shipmentState;
-        this.paymentState = paymentState;
-        this.createdAt = createdAt;
-        this.lastModifiedAt = lastModifiedAt;
-    }
-
-    public static ReturnItem of(final String id, final Long quantity, final String lineItemId, final String comment, final ReturnShipmentState shipmentState, final ReturnPaymentState paymentState, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt) {
-        return new ReturnItem(id, quantity, lineItemId, comment, shipmentState, paymentState, createdAt, lastModifiedAt);
+public interface ReturnItem extends Timestamped {
+    static ReturnItem of(final String id, final Long quantity, final String lineItemId, final String comment, final ReturnShipmentState shipmentState, final ReturnPaymentState paymentState, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt) {
+        return new ReturnItemImpl(id, quantity, lineItemId, comment, shipmentState, paymentState, createdAt, lastModifiedAt);
 
     }
 
-    public String getId() {
-        return id;
-    }
+    String getId();
 
-    public Long getQuantity() {
-        return quantity;
-    }
+    Long getQuantity();
 
-    public String getLineItemId() {
-        return lineItemId;
-    }
+    String getLineItemId();
 
     @Nullable
-    public String getComment() {
-        return comment;
-    }
+    String getComment();
 
-    public ReturnShipmentState getShipmentState() {
-        return shipmentState;
-    }
+    ReturnShipmentState getShipmentState();
 
-    public ReturnPaymentState getPaymentState() {
-        return paymentState;
-    }
+    ReturnPaymentState getPaymentState();
 
     @Override
-    public ZonedDateTime getCreatedAt() {
-        return createdAt;
-    }
+    ZonedDateTime getCreatedAt();
 
     @Override
-    public ZonedDateTime getLastModifiedAt() {
-        return lastModifiedAt;
-    }
+    ZonedDateTime getLastModifiedAt();
 }
