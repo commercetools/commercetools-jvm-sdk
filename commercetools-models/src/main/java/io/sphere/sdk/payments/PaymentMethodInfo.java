@@ -1,7 +1,6 @@
 package io.sphere.sdk.payments;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import io.sphere.sdk.models.Base;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import io.sphere.sdk.models.LocalizedString;
 
 import javax.annotation.Nullable;
@@ -9,33 +8,14 @@ import javax.annotation.Nullable;
 /**
  @see PaymentMethodInfoBuilder
  */
-public final class PaymentMethodInfo extends Base {
+@JsonDeserialize(as = PaymentMethodInfoImpl.class)
+public interface PaymentMethodInfo {
     @Nullable
-    private final String paymentInterface;
-    @Nullable
-    private final String method;
-    @Nullable
-    private final LocalizedString name;
-
-    @JsonCreator
-    PaymentMethodInfo(@Nullable final String paymentInterface, @Nullable final String method, @Nullable final LocalizedString name) {
-        this.paymentInterface = paymentInterface;
-        this.method = method;
-        this.name = name;
-    }
+    String getPaymentInterface();
 
     @Nullable
-    public String getPaymentInterface() {
-        return paymentInterface;
-    }
+    String getMethod();
 
     @Nullable
-    public String getMethod() {
-        return method;
-    }
-
-    @Nullable
-    public LocalizedString getName() {
-        return name;
-    }
+    LocalizedString getName();
 }

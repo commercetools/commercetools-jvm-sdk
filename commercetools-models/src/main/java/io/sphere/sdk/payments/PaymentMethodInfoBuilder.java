@@ -38,7 +38,7 @@ public final class PaymentMethodInfoBuilder extends Base implements Builder<Paym
 
     @Override
     public PaymentMethodInfo build() {
-        return new PaymentMethodInfo(paymentInterface, method, name);
+        return new PaymentMethodInfoImpl(paymentInterface, method, name);
     }
 
     @Nullable
