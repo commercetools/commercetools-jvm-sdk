@@ -206,7 +206,7 @@ public class ProductCategoriesIdTermFilterSearchModelIntegrationTest extends Int
                 final Set<String> actualIds = value.getResults().stream().map(ProductProjection::getId).collect(Collectors.toSet());
                 return expectedIds.equals(actualIds);
             }
-        }.describedAs(String.format("exprected %s", expectedIds));
+        }.describedAs(String.format("expected %s", expectedIds));
     }
 
     private List<String> getCategoryIds(final String ... names) {
