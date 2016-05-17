@@ -30,16 +30,6 @@ abstract class CustomObjectCustomJsonMappingByXGet<T> extends Base implements Ge
         return (httpResponse.getStatusCode() == NOT_FOUND_404) ? null : deserializeCustomObject(httpResponse);
     }
 
-    /**
-     *
-     * @deprecated override {@link #deserializeCustomObject(HttpResponse)} instead.
-     * @return function to deserialize custom object
-     */
-    @Deprecated
-    protected final Function<HttpResponse, CustomObject<T>> deserializeCustomObject() {
-        return httpResponse -> deserializeCustomObject(httpResponse);
-    }
-
     protected abstract CustomObject<T> deserializeCustomObject(final HttpResponse httpResponse);
 
     @Override

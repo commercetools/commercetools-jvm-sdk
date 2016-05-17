@@ -40,16 +40,6 @@ public interface CustomObjectQuery<T> extends MetaModelQueryDsl<CustomObject<T>,
         return new CustomObjectQueryImpl<>(valueClass);
     }
 
-    /**
-     *
-     * @deprecated use {@link #ofJsonNode()} instead
-     * @return CustomObjectQuery
-     */
-    @Deprecated
-    static CustomObjectQuery<JsonNode> of() {
-        return ofJsonNode();
-    }
-
     static CustomObjectQuery<JsonNode> ofJsonNode() {
         return of(TypeReferences.jsonNodeTypeReference());
     }

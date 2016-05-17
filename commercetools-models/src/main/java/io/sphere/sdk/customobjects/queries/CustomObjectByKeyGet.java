@@ -49,15 +49,4 @@ public interface CustomObjectByKeyGet<T> extends Get<CustomObject<T>> {
     static CustomObjectByKeyGet<JsonNode> ofJsonNode(final String container, final String key) {
         return of(container, key, TypeReferences.jsonNodeTypeReference());
     }
-
-    /**
-     * @deprecated use {@link #ofJsonNode(String, String)} instead
-     * @param container container
-     * @param key key
-     * @return CustomObjectByKeyGet
-     */
-    @Deprecated
-    static CustomObjectByKeyGet<JsonNode> of(final String container, final String key) {
-        return ofJsonNode(container, key);
-    }
 }
