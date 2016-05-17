@@ -171,17 +171,6 @@ public final class CartDraftDsl extends Base implements CartDraft {
         return new CartDraftBuilder(this).shippingMethod(shippingMethod).build();
     }
 
-    /**
-     *
-     * @deprecated use {@link #withCustom(CustomFieldsDraft)} instead
-     * @param custom draft for custom fields
-     * @return CartDraft with custom fields
-     */
-    @Deprecated
-    public CartDraftDsl witCustom(@Nullable final CustomFieldsDraft custom) {
-        return withCustom(custom);
-    }
-
     @Override
     @Nullable
     public CustomFieldsDraft getCustom() {
