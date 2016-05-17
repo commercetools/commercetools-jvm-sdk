@@ -80,16 +80,6 @@ public interface Product extends ProductLike<Product, Product>, Resource<Product
         return "product";
     }
 
-    /**
-     *
-     * @deprecated use {@link #referenceTypeId()} instead
-     * @return referenceTypeId
-     */
-    @Deprecated
-    static String typeId(){
-        return "product";
-    }
-
     static Reference<Product> reference(final Product product) {
         return Reference.of(referenceTypeId(), product.getId(), product);
     }

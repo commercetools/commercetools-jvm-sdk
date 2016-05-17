@@ -80,16 +80,6 @@ public interface InventoryEntry extends Resource<InventoryEntry> {
     }
 
     /**
-     *
-     * @deprecated use {@link #referenceTypeId()} instead
-     * @return referenceTypeId
-     */
-    @Deprecated
-    static String typeId(){
-        return "inventory-entry";
-    }
-
-    /**
      * Creates a container which contains the full Java type information to deserialize this class from JSON.
      *
      * @see io.sphere.sdk.json.SphereJsonUtils#readObject(byte[], TypeReference)

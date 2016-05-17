@@ -68,16 +68,6 @@ public interface TaxCategory extends Resource<TaxCategory> {
     }
 
     /**
-     *
-     * @deprecated use {@link #referenceTypeId()} instead
-     * @return referenceTypeId
-     */
-    @Deprecated
-    static String typeId(){
-        return "tax-category";
-    }
-
-    /**
      * Creates a reference for one item of this class by a known ID.
      *
      * <p>An example for categories but this applies for other resources, too:</p>

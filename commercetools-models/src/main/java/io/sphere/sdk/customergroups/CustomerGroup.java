@@ -48,16 +48,6 @@ public interface CustomerGroup extends Resource<CustomerGroup> {
     }
 
     /**
-     *
-     * @deprecated use {@link #referenceTypeId()} instead
-     * @return referenceTypeId
-     */
-    @Deprecated
-    static String typeId(){
-        return "customer-group";
-    }
-
-    /**
      * Creates a container which contains the full Java type information to deserialize this class from JSON.
      *
      * @see io.sphere.sdk.json.SphereJsonUtils#readObject(byte[], TypeReference)
