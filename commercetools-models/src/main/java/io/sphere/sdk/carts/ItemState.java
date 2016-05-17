@@ -1,30 +1,18 @@
 package io.sphere.sdk.carts;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Referenceable;
 import io.sphere.sdk.states.State;
 
-public final class ItemState extends Base {
-    private final Reference<State> state;
-    private final Long quantity;
-
-    @JsonCreator
-    private ItemState(final Reference<State> state, final Long quantity) {
-        this.state = state;
-        this.quantity = quantity;
+@JsonDeserialize(as = ItemStateImpl.class)
+public interface ItemState {
+    static ItemState of(final Referenceable<State> state, final long quantity) {
+        return new ItemStateImpl(state.toReference(), quantity);
     }
 
-    public static ItemState of(final Referenceable<State> state, final long quantity) {
-        return new ItemState(state.toReference(), quantity);
-    }
+    Long getQuantity();
 
-    public Long getQuantity() {
-        return quantity;
-    }
-
-    public Reference<State> getState() {
-        return state;
-    }
+    Reference<State> getState();
 }
