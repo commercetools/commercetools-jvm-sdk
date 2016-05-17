@@ -29,26 +29,6 @@ public abstract class SetCustomTypeBase<T> extends UpdateActionImpl<T> {
         this.fields = fields;
     }
 
-    /**
-     * @deprecated use {@link #getType()} instead
-     * @return id
-     */
-    @Deprecated
-    @Nullable
-    public String getTypeId() {
-        return Optional.ofNullable(type).map(t -> t.getId()).orElse(null);
-    }
-
-    /**
-     * @deprecated use {@link #getType()} instead
-     * @return key
-     */
-    @Nullable
-    @Deprecated
-    public String getTypeKey() {
-        return Optional.ofNullable(type).map(t -> t.getKey()).orElse(null);
-    }
-
     @Nullable
     public ResourceIdentifier<Type> getType() {
         return type;
