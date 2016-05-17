@@ -64,19 +64,6 @@ public final class CustomerCreateEmailTokenCommand extends CommandImpl<CustomerT
         return id;
     }
 
-    /**
-     * The version of the customer.
-     *
-     * @return version or null
-     * @deprecated optimistic concurrency control is dropped from this request
-     */
-    @Nullable
-    @Deprecated
-    @JsonIgnore
-    public Long getVersion() {
-        return version;
-    }
-
     public Integer getTtlMinutes() {
         return ttlMinutes;
     }
