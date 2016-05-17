@@ -94,7 +94,7 @@ import java.util.function.Function;
  <h3 class=released-version id="v1_0_0_RC8">1.0.0-RC8 (13.05.2016)</h3>
 
  <ul>
- <li class=new-in-release>added {@link ProductDataFilterSearchModel#slug()} </li>
+ <li class=new-in-release>added {@link ProductProjectionFilterSearchModel#slug()} </li>
  <li class=new-in-release>added {@link io.sphere.sdk.customers.queries.CustomerQueryModel#lowercaseEmail()}</li>
  <li class=new-in-release>added {@link io.sphere.sdk.utils.CompletableFutureUtils#listOfFuturesToFutureOfList(List)},
  {@link io.sphere.sdk.utils.CompletableFutureUtils#exceptionallyCompletedFuture(Throwable)} and

@@ -13,64 +13,53 @@ import java.time.ZonedDateTime;
  *
  * For creation use {@link ProductProjectionSearchModel#filter()}.
  */
-public final class ProductProjectionFilterSearchModel extends ProductDataFilterSearchModel {
+public final class ProductProjectionFilterSearchModel extends SearchModelImpl<ProductProjection> {
 
     ProductProjectionFilterSearchModel(@Nullable final SearchModel<ProductProjection> parent, @Nullable final String pathSegment) {
         super(parent, pathSegment);
     }
 
-    @Override
     public ProductVariantFilterSearchModel allVariants() {
-        return super.allVariants();
+        return new ProductVariantFilterSearchModel(this, "variants");
     }
 
-    @Override
     public TermFilterSearchModel<ProductProjection, String> id() {
-        return super.id();
+        return stringSearchModel("id").filtered();
     }
 
-    @Override
     public LocalizedStringFilterSearchModel<ProductProjection> name() {
-        return super.name();
+        return localizedStringFilterSearchModel("name");
     }
 
-    @Override
     public LocalizedStringFilterSearchModel<ProductProjection> slug() {
-        return super.slug();
+        return localizedStringFilterSearchModel("slug");
     }
 
-    @Override
     public ProductCategoriesReferenceFilterSearchModel<ProductProjection> categories() {
-        return super.categories();
+        return new ProductCategoriesReferenceFilterSearchModelImpl<>(this, "categories");
     }
 
-    @Override
     public ReferenceFilterSearchModel<ProductProjection> productType() {
-        return super.productType();
+        return referenceFilterSearchModel("productType");
     }
 
-    @Override
     public RangeTermFilterSearchModel<ProductProjection, ZonedDateTime> createdAt() {
-        return super.createdAt();
+        return datetimeSearchModel("createdAt").filtered();
     }
 
-    @Override
     public RangeTermFilterSearchModel<ProductProjection, ZonedDateTime> lastModifiedAt() {
-        return super.lastModifiedAt();
+        return datetimeSearchModel("lastModifiedAt").filtered();
     }
 
-    @Override
     public ReviewRatingStatisticsFilterSearchModel<ProductProjection> reviewRatingStatistics() {
-        return super.reviewRatingStatistics();
+        return new ReviewRatingStatisticsFilterSearchModel<>(this, "reviewRatingStatistics");
     }
 
-    @Override
     public ReferenceFilterSearchModel<ProductProjection> taxCategory() {
-        return super.taxCategory();
+        return referenceFilterSearchModel("taxCategory");
     }
 
-    @Override
     public ReferenceFilterSearchModel<ProductProjection> state() {
-        return super.state();
+        return referenceFilterSearchModel("state");
     }
 }

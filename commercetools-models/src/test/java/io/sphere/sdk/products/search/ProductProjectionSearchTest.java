@@ -25,7 +25,7 @@ import static java.util.Locale.GERMAN;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class ProductProjectionSearchTest {
-    private static final ProductDataFilterSearchModel FILTER_MODEL = ProductProjectionSearchModel.of().filter();
+    private static final ProductProjectionFilterSearchModel FILTER_MODEL = ProductProjectionSearchModel.of().filter();
     private static final ProductDataFacetSearchModel FACET_MODEL = ProductProjectionSearchModel.of().facet();
     private static final ProductDataSortSearchModel SORT_MODEL = ProductProjectionSearchModel.of().sort();
     private static final ProductAttributeFilterSearchModel FILTER_ATTR = ProductProjectionSearchModel.of().filter().allVariants().attribute();
