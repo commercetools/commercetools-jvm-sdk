@@ -98,26 +98,4 @@ public final class ProductAttributeFacetedSearchSearchModel extends SearchModelI
     public ReferenceFacetedSearchSearchModel<ProductProjection> ofReferenceSet(final String attributeName) {
         return ofReference(attributeName);
     }
-
-    /**
-     * deprecated
-     * @deprecated use {@link #ofLocalizedEnum(String)} instead
-     * @param attributeName deprecated
-     * @return deprecated
-     */
-    @Deprecated
-    public LocalizedEnumFacetedSearchSearchModel<ProductProjection> ofLocalizableEnum(final String attributeName) {
-        return localizedEnumFacetedSearchSearchModel(attributeName);
-    }
-
-    /**
-     * deprecated
-     * @deprecated use {@link #ofLocalizedEnumSet(String)} instead
-     * @param attributeName deprecated
-     * @return deprecated
-     */
-    @Deprecated
-    public LocalizedEnumFacetedSearchSearchModel<ProductProjection> ofLocalizableEnumSet(final String attributeName) {
-        return ofLocalizableEnum(attributeName);
-    }
 }

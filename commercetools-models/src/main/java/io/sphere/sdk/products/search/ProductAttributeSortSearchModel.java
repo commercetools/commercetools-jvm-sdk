@@ -90,26 +90,4 @@ public final class ProductAttributeSortSearchModel extends SortableSearchModel<P
     public MultiValueSortSearchModel<ProductProjection> ofDateTimeSet(final String attributeName) {
         return ofDateTime(attributeName);
     }
-
-    /**
-     * deprecated
-     * @param attributeName deprecated
-     * @return deprecated
-     * @deprecated use {@link #ofLocalizedEnum(String)} instead
-     */
-    @Deprecated
-    public LocalizedEnumSortSearchModel<ProductProjection, MultiValueSortSearchModel<ProductProjection>> ofLocalizableEnum(final String attributeName) {
-        return localizedEnumSortSearchModel(attributeName);
-    }
-
-    /**
-     * deprecated
-     * @param attributeName deprecated
-     * @return deprecated
-     * @deprecated use {@link #ofLocalizedEnumSet(String)} instead
-     */
-    @Deprecated
-    public LocalizedEnumSortSearchModel<ProductProjection, MultiValueSortSearchModel<ProductProjection>> ofLocalizableEnumSet(final String attributeName) {
-        return ofLocalizableEnum(attributeName);
-    }
 }
