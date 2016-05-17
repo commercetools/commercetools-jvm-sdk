@@ -304,42 +304,6 @@ public abstract class MetaModelSearchDslImpl<T, C extends MetaModelSearchDsl<T, 
         return plusExpansionPaths(m.apply(expansionModel).expansionPaths());
     }
 
-    @Deprecated
-    @Override
-    public C withResultFilters(final FilterExpression<T> filterExpression) {
-        return withResultFilters(singletonList(filterExpression));
-    }
-
-    @Deprecated
-    @Override
-    public C plusResultFilters(final FilterExpression<T> filterExpression) {
-        return plusResultFilters(singletonList(filterExpression));
-    }
-
-    @Deprecated
-    @Override
-    public C withQueryFilters(final FilterExpression<T> filterExpression) {
-        return withQueryFilters(singletonList(filterExpression));
-    }
-
-    @Deprecated
-    @Override
-    public C plusQueryFilters(final FilterExpression<T> filterExpression) {
-        return plusQueryFilters(singletonList(filterExpression));
-    }
-
-    @Deprecated
-    @Override
-    public C withFacetFilters(final FilterExpression<T> filterExpression) {
-        return withFacetFilters(singletonList(filterExpression));
-    }
-
-    @Deprecated
-    @Override
-    public C plusFacetFilters(final FilterExpression<T> filterExpression) {
-        return plusFacetFilters(singletonList(filterExpression));
-    }
-
     protected C withAdditionalQueryParameters(final List<NameValuePair> pairs) {
         return copyBuilder().additionalQueryParameters(pairs).build();
     }
