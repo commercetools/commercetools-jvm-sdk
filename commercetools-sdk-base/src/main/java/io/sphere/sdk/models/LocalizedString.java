@@ -125,21 +125,6 @@ public final class LocalizedString extends Base {
     }
 
     /**
-     * Creates an instance with one translation for English ({@link Locale#ENGLISH}).
-     *
-     * {@include.example io.sphere.sdk.models.LocalizedStringTest#ofEnglishLocale()}
-     *
-     * @param translationForEnglish the translation in English
-     * @return new instance with one key value pair
-     * @deprecated use {@link #ofEnglish(String)} instead
-     */
-    @Deprecated
-    @JsonIgnore
-    public static LocalizedString ofEnglishLocale(final String translationForEnglish) {
-        return LocalizedString.ofEnglish(translationForEnglish);
-    }
-
-    /**
      * Creates a new {@link LocalizedString} containing the given entries and the new one.
      * It is not allowed to override existing entries.
      *
