@@ -1,6 +1,7 @@
 package io.sphere.sdk.zones;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.neovisionaries.i18n.CountryCode;
 
 import javax.annotation.Nullable;
@@ -8,6 +9,7 @@ import javax.annotation.Nullable;
 /**
  * A geographical location representing a country with an optional state.
  */
+@JsonDeserialize(as = LocationImpl.class)
 public interface Location {
     CountryCode getCountry();
 

@@ -9,6 +9,7 @@ import io.sphere.sdk.products.ProductFixtures;
 import io.sphere.sdk.products.ProductProjection;
 import io.sphere.sdk.search.PagedSearchResult;
 import io.sphere.sdk.test.IntegrationTest;
+import net.jcip.annotations.NotThreadSafe;
 import org.assertj.core.api.Condition;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -28,6 +29,7 @@ import static io.sphere.sdk.test.SphereTestUtils.en;
 import static java.util.stream.Collectors.toList;
 import static org.assertj.core.api.Assertions.assertThat;
 
+@NotThreadSafe
 public class ProductCategoriesIdTermFilterSearchModelIntegrationTest extends IntegrationTest {
 
     private static CategoryTree categoryTree;
