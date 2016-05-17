@@ -1,30 +1,18 @@
 package io.sphere.sdk.models;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
-public final class LocalizedEnumValue extends Base implements WithKey {
-    private final String key;
-    private final LocalizedString label;
-
-    @JsonCreator
-    private LocalizedEnumValue(final String key, final LocalizedString label) {
-        this.key = key;
-        this.label = label;
-    }
-
-    public static LocalizedEnumValue of(final String key, final LocalizedString label) {
-        return new LocalizedEnumValue(key, label);
+@JsonDeserialize(as = LocalizedEnumValue.class)
+public interface LocalizedEnumValue extends WithKey {
+    static LocalizedEnumValue of(final String key, final LocalizedString label) {
+        return new LocalizedEnumValueImpl(key, label);
     }
 
     @Override
-    public String getKey() {
-        return key;
-    }
+    String getKey();
 
-    public LocalizedString getLabel() {
-        return label;
-    }
+    LocalizedString getLabel();
 
     /**
      * Creates a container which contains the full Java type information to deserialize this class from JSON.
@@ -36,7 +24,7 @@ public final class LocalizedEnumValue extends Base implements WithKey {
      *
      * @return type reference
      */
-    public static TypeReference<LocalizedEnumValue> typeReference() {
+    static TypeReference<LocalizedEnumValue> typeReference() {
         return new TypeReference<LocalizedEnumValue>() {
             @Override
             public String toString() {
