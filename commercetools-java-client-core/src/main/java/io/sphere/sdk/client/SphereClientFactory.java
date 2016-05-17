@@ -95,45 +95,6 @@ public interface SphereClientFactory {
         return SphereClient.of(config, createHttpClient(), SphereAccessTokenSupplier.ofConstantToken(accessToken));
     }
 
-    /**
-     * deprecated
-     * @deprecated use {@link TestDoubleSphereClientFactory#createHttpTestDouble(Function)}
-     * @param function mapping from intent to http response
-     * @return test double
-     */
-    @Deprecated
-    static SphereClient createHttpTestDouble(final Function<HttpRequestIntent, HttpResponse> function) {
-        return TestDoubleSphereClientFactory.createHttpTestDouble(function);
-    }
-
-    /**
-     * deprecated
-     * @deprecated use {@link TestDoubleSphereClientFactory#createObjectTestDouble(Function)}
-     * @param function a function which returns a matching http request for a SPHERE.IO request.
-     * @return sphere client test double
-     */
-    @Deprecated
-    @SuppressWarnings("unchecked")
-    static SphereClient createObjectTestDouble(final Function<HttpRequestIntent, Object> function) {
-        return new SphereClient() {
-            @Override
-            public <T> CompletionStage<T> execute(final SphereRequest<T> sphereRequest) {
-                final T result = (T) function.apply(sphereRequest.httpRequestIntent());
-                return successful(result);
-            }
-
-            @Override
-            public void close() {
-            }
-
-            @Override
-            public String toString() {
-                return "SphereClientObjectTestDouble";
-            }
-        };
-    }
-
-
     static SphereClientFactory of(final Supplier<HttpClient> httpClientSupplier) {
         return new SphereClientFactoryImpl(httpClientSupplier);
     }
