@@ -247,12 +247,6 @@ public class OrderImportCommandIntegrationTest extends IntegrationTest {
                         return 2L;
                     }
 
-                    @Deprecated
-                    @Override
-                    public DiscountedLineItemPrice getDiscountedPrice() {
-                        return null;
-                    }
-
                     @Override
                     public MonetaryAmount getTotalPrice() {
                         return null;
