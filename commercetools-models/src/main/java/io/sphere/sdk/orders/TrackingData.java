@@ -1,86 +1,52 @@
 package io.sphere.sdk.orders;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import io.sphere.sdk.models.Base;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 import javax.annotation.Nullable;
 
-public final class TrackingData extends Base {
-    @Nullable
-    private final String trackingId;
-    @Nullable
-    private final String carrier;
-    @Nullable
-    private final String provider;
-    @Nullable
-    private final String providerTransaction;
-    @Nullable
-    private final Boolean isReturn;
-
-    @JsonCreator
-    private TrackingData(@Nullable final String trackingId, @Nullable final String carrier, @Nullable final String provider, @Nullable final String providerTransaction, @Nullable final Boolean isReturn) {
-        this.trackingId = trackingId;
-        this.carrier = carrier;
-        this.provider = provider;
-        this.providerTransaction = providerTransaction;
-        this.isReturn = isReturn;
-    }
-
-    public static TrackingData of() {
+@JsonDeserialize(as = TrackingDataImpl.class)
+public interface TrackingData {
+    static TrackingData of() {
         return of(null, null, null, null, false);
     }
 
-    public static TrackingData of(final String trackingId, final String carrier, final String provider, final String providerTransaction, final boolean isReturn) {
-        return new TrackingData(trackingId, carrier, provider, providerTransaction, isReturn);
+    static TrackingData of(final String trackingId, final String carrier, final String provider, final String providerTransaction, final boolean isReturn) {
+        return new TrackingDataImpl(trackingId, carrier, provider, providerTransaction, isReturn);
     }
 
     @Nullable
-    public String getTrackingId() {
-        return trackingId;
-    }
+    String getTrackingId();
 
     @Nullable
-    public String getCarrier() {
-        return carrier;
-    }
+    String getCarrier();
 
     @Nullable
-    public String getProvider() {
-        return provider;
-    }
+    String getProvider();
 
     @Nullable
-    public String getProviderTransaction() {
-        return providerTransaction;
-    }
+    String getProviderTransaction();
 
     @JsonProperty("isReturn")
-    public Boolean isReturn() {
-        return isReturn;
+    Boolean isReturn();
+
+    default TrackingData withTrackingId(@Nullable final String trackingId) {
+        return TrackingDataBuilder.of(this).trackingId(trackingId).build();
     }
 
-    public TrackingData withTrackingId(@Nullable final String trackingId) {
-        return newBuilder().trackingId(trackingId).build();
+    default TrackingData withCarrier(@Nullable final String carrier) {
+        return TrackingDataBuilder.of(this).carrier(carrier).build();
     }
 
-    public TrackingData withCarrier(@Nullable final String carrier) {
-        return newBuilder().carrier(carrier).build();
+    default TrackingData withProvider(@Nullable final String provider) {
+        return TrackingDataBuilder.of(this).provider(provider).build();
     }
 
-    public TrackingData withProvider(@Nullable final String provider) {
-        return newBuilder().provider(provider).build();
+    default TrackingData withProviderTransaction(@Nullable final String providerTransaction) {
+        return TrackingDataBuilder.of(this).providerTransaction(providerTransaction).build();
     }
 
-    public TrackingData withProviderTransaction(@Nullable final String providerTransaction) {
-        return newBuilder().providerTransaction(providerTransaction).build();
-    }
-
-    public TrackingData withIsReturn(final boolean isReturn) {
-        return newBuilder().isReturn(isReturn).build();
-    }
-
-    private TrackingDataBuilder newBuilder() {
-        return TrackingDataBuilder.of(this);
+    default TrackingData withIsReturn(final boolean isReturn) {
+        return TrackingDataBuilder.of(this).isReturn(isReturn).build();
     }
 }
