@@ -64,18 +64,6 @@ final class AttributeDefinitionImpl extends Base implements AttributeDefinition 
     /**
      * Whether the attribute is required to have a value.
      * @return true if required else false
-     * @deprecated use {@link #isRequired()} instead
-     */
-    @Override
-    @Deprecated
-    @JsonIgnore
-    public Boolean getIsRequired() {
-        return isRequired;
-    }
-
-    /**
-     * Whether the attribute is required to have a value.
-     * @return true if required else false
      */
     @Override
     @JsonProperty("isRequired")
@@ -90,20 +78,6 @@ final class AttributeDefinitionImpl extends Base implements AttributeDefinition 
     @Override
     public AttributeConstraint getAttributeConstraint() {
         return attributeConstraint;
-    }
-
-    /**
-     * Whether the attribute's values should generally be enabled in product search.
-     * The exact features that are enabled/disabled with this flag depend on the concrete attribute type and are described there.
-     *
-     * @return true if searchable, false if not
-     * @deprecated use {@link #isSearchable()} instead
-     */
-    @Override
-    @Deprecated
-    @JsonIgnore
-    public Boolean getIsSearchable() {
-        return isSearchable;
     }
 
     /**

@@ -37,15 +37,6 @@ public interface AttributeDefinition {
     /**
      * Whether the attribute is required to have a value.
      * @return true if required else false
-     * @deprecated use {@link #isRequired()} instead
-     */
-    @Deprecated
-    @JsonIgnore
-    Boolean getIsRequired();
-
-    /**
-     * Whether the attribute is required to have a value.
-     * @return true if required else false
      */
     @JsonProperty("isRequired")
     Boolean isRequired();
@@ -55,17 +46,6 @@ public interface AttributeDefinition {
      * @return definition of validation logic
      */
     AttributeConstraint getAttributeConstraint();
-
-    /**
-     * Whether the attribute's values should generally be enabled in product search.
-     * The exact features that are enabled/disabled with this flag depend on the concrete attribute type and are described there.
-     *
-     * @return true if searchable, false if not
-     * @deprecated use {@link #isSearchable()} instead
-     */
-    @Deprecated
-    @JsonIgnore
-    Boolean getIsSearchable();
 
     /**
      * Whether the attribute's values should generally be enabled in product search.
