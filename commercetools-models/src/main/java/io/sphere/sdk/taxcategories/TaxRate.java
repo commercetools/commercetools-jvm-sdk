@@ -25,14 +25,4 @@ public interface TaxRate {
 
     @Nonnull
     List<SubRate> getSubRates();
-
-    /**
-     * compares tax categories by all fields except by ID
-     *
-     * @param other other
-     * @return boolean
-     * @deprecated try TaxRateDraftBuilder.of(other).build().equals(TaxRateDraftBuilder.of(this).build())
-     */
-    @Deprecated
-    boolean equalsIgnoreId(TaxRate other);
 }
