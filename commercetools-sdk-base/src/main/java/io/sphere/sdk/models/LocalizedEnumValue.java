@@ -3,7 +3,7 @@ package io.sphere.sdk.models;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
-@JsonDeserialize(as = LocalizedEnumValue.class)
+@JsonDeserialize(as = LocalizedEnumValueImpl.class)
 public interface LocalizedEnumValue extends WithKey {
     static LocalizedEnumValue of(final String key, final LocalizedString label) {
         return new LocalizedEnumValueImpl(key, label);

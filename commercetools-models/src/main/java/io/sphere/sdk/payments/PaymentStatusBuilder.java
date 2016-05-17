@@ -56,6 +56,6 @@ public final class PaymentStatusBuilder extends Base implements Builder<PaymentS
 
     @Override
     public PaymentStatus build() {
-        return new PaymentStatus(interfaceCode, interfaceText, state);
+        return new PaymentStatusImpl(interfaceCode, interfaceText, state);
     }
 }
