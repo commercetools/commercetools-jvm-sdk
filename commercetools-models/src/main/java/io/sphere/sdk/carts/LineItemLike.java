@@ -19,15 +19,6 @@ public interface LineItemLike extends Custom {
 
     Long getQuantity();
 
-    /**
-     *
-     * @deprecated use {@link #getDiscountedPricePerQuantity()} instead
-     * @return DiscountedLineItemPrice
-     */
-    @Nullable
-    @Deprecated
-    DiscountedLineItemPrice getDiscountedPrice();
-
     MonetaryAmount getTotalPrice();
 
     @Nullable
