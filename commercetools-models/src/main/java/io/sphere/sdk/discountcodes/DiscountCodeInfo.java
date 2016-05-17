@@ -1,29 +1,20 @@
 package io.sphere.sdk.discountcodes;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import io.sphere.sdk.models.Base;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Referenceable;
 
-public final class DiscountCodeInfo extends Base {
-    private final Reference<DiscountCode> discountCode;
-    private final DiscountCodeState state;
+import java.util.Optional;
 
-    @JsonCreator
-    private DiscountCodeInfo(final Reference<DiscountCode> discountCode, final DiscountCodeState state) {
-        this.discountCode = discountCode;
-        this.state = state;
-    }
+@JsonDeserialize(as = DiscountCodeInfoImpl.class)
+public interface DiscountCodeInfo {
+    Reference<DiscountCode> getDiscountCode();
 
-    public Reference<DiscountCode> getDiscountCode() {
-        return discountCode;
-    }
+    DiscountCodeState getState();
 
-    public DiscountCodeState getState() {
-        return state;
-    }
-
-    public static DiscountCodeInfo of(final Referenceable<DiscountCode> discountCode, final DiscountCodeState state) {
-        return new DiscountCodeInfo(discountCode.toReference(), state);
+    static DiscountCodeInfo of(final Referenceable<DiscountCode> discountCode, final DiscountCodeState state) {
+        final Reference<DiscountCode> discountCodeReference =
+                Optional.ofNullable(discountCode).map(d -> d.toReference()).orElse(null);
+        return new DiscountCodeInfoImpl(discountCodeReference, state);
     }
 }
