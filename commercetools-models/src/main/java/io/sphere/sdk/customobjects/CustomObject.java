@@ -206,16 +206,6 @@ public interface CustomObject<T> extends ResourceView<CustomObject<T>, CustomObj
         return "key-value-document";
     }
 
-    /**
-     *
-     * @deprecated use {@link #referenceTypeId()} instead
-     * @return referenceTypeId
-     */
-    @Deprecated
-    static String typeId() {
-        return "key-value-document";
-    }
-
     static String validatedKey(final String key) {
         return CustomObjectImpl.validatedKey("key", key);
     }
