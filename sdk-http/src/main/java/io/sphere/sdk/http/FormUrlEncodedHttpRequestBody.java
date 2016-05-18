@@ -33,15 +33,6 @@ public final class FormUrlEncodedHttpRequestBody extends Base implements HttpReq
         return of(NameValuePair.convertStringListMapToList(data));
     }
 
-    /**
-     * @return the unordered data without duplicate names
-     * @deprecated use {@link #getParameters()} instead
-     */
-    @Deprecated
-    public Map<String, String> getData() {
-        return NameValuePair.convertToStringMap(getParameters());
-    }
-
     public List<NameValuePair> getParameters() {
         return data;
     }

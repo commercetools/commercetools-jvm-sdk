@@ -56,34 +56,4 @@ public interface FacetedSearchSearchModel<T> {
      * @return a bundle of the filter expressions for the given values and a facet expression for all terms
      */
     TermFacetedSearchExpression<T> containsAll(final Iterable<String> values);
-
-    /**
-     * @deprecated use {@link #is(String)} instead
-     * @param value deprecated
-     * @return deprecated
-     */
-    @Deprecated
-    default TermFacetedSearchExpression<T> by(final String value) {
-        return is(value);
-    }
-
-    /**
-     * @deprecated use {@link #containsAny(Iterable)} instead
-     * @param values deprecated
-     * @return deprecated
-     */
-    @Deprecated
-    default TermFacetedSearchExpression<T> byAny(final Iterable<String> values) {
-        return containsAny(values);
-    }
-
-    /**
-     * @deprecated use {@link #containsAll(Iterable)} instead
-     * @param values deprecated
-     * @return deprecated
-     */
-    @Deprecated
-    default TermFacetedSearchExpression<T> byAll(final Iterable<String> values) {
-        return containsAll(values);
-    }
 }

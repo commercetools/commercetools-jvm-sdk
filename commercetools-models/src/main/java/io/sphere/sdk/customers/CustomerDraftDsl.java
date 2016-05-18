@@ -182,17 +182,6 @@ public final class CustomerDraftDsl extends Base implements CustomerDraft {
         return defaultShippingAddress;
     }
 
-    /**
-     * isEmailVerified
-     * @return isEmailVerified
-     * @deprecated use {@link #isEmailVerified()}
-     */
-    @JsonIgnore
-    @Deprecated
-    public Boolean IsEmailVerified() {
-        return emailVerified;
-    }
-
     @Override
     @JsonProperty("isEmailVerified")
     public Boolean isEmailVerified() {

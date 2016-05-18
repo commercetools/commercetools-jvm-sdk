@@ -66,10 +66,4 @@ final class TaxRateImpl extends Base implements TaxRate {
     public List<SubRate> getSubRates() {
         return subRates;
     }
-
-    @Deprecated
-    public boolean equalsIgnoreId(final TaxRate other) {
-        return other != null
-                && TaxRateDraftBuilder.of(other).build().equals(TaxRateDraftBuilder.of(this).build());
-    }
 }

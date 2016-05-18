@@ -167,16 +167,6 @@ public interface Category extends Resource<Category>, WithLocalizedSlug, MetaAtt
         return "category";
     }
 
-    /**
-     *
-     * @deprecated use {@link #referenceTypeId()} instead
-     * @return referenceTypeId
-     */
-    @Deprecated
-    static String typeId(){
-        return "category";
-    }
-
     static Reference<Category> reference(final String id) {
         return Reference.of(referenceTypeId(), id);
     }

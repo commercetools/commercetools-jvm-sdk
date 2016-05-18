@@ -107,37 +107,6 @@ public final class PagedSearchResult<T> extends PagedResult<T> {
         }).orElse(null);
     }
 
-    /**
-     * @deprecated use {@link #getFacetResult(TermFacetExpression)} instead
-     * @param facetExpression deprecated
-     * @return deprecated
-     */
-    @Deprecated
-    public TermFacetResult getTermFacetResult(final TermFacetExpression<T> facetExpression) {
-        return getFacetResult(facetExpression);
-    }
-
-    /**
-     * @deprecated use {@link #getFacetResult(RangeFacetExpression)} instead
-     * @param facetExpression deprecated
-     * @return deprecated
-     */
-    @Deprecated
-    public RangeFacetResult getRangeFacetResult(final RangeFacetExpression<T> facetExpression) {
-        return getFacetResult(facetExpression);
-    }
-
-    /**
-     * @deprecated use {@link #getFacetResult(FilteredFacetExpression)} instead
-     * @param facetExpression deprecated
-     * @return deprecated
-     */
-    @Deprecated
-    public FilteredFacetResult getFilteredFacetResult(final FilteredFacetExpression<T> facetExpression) {
-        return getFacetResult(facetExpression);
-    }
-
-
     private SimpleRangeStats getSimpleRangeStats(final List<RangeStats> ranges) {
         final RangeStats negativeRange = ranges.stream()
                 .filter(r -> r.getLowerEndpoint() == null)

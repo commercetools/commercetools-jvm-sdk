@@ -62,36 +62,6 @@ abstract class RangeTermFacetedSearchBaseSearchModel<T> extends TermFacetedSearc
         return buildExpression(filterSearchModel.isBetweenAllAsString(ranges));
     }
 
-    /**
-     * @deprecated use {@link #isBetween(FilterRange)} instead
-     * @param range deprecated
-     * @return deprecated
-     */
-    @Deprecated
-    public RangeFacetedSearchExpression<T> byRange(final FilterRange<String> range) {
-        return isBetween(range);
-    }
-
-    /**
-     * @deprecated use {@link #isBetweenAny(Iterable)} instead
-     * @param ranges deprecated
-     * @return deprecated
-     */
-    @Deprecated
-    public RangeFacetedSearchExpression<T> byAnyRange(final Iterable<FilterRange<String>> ranges) {
-        return isBetweenAny(ranges);
-    }
-
-    /**
-     * @deprecated use {@link #isBetweenAll(Iterable)}  instead
-     * @param ranges deprecated
-     * @return deprecated
-     */
-    @Deprecated
-    public RangeFacetedSearchExpression<T> byAllRanges(final Iterable<FilterRange<String>> ranges) {
-        return isBetweenAll(ranges);
-    }
-
     private RangeFacetedSearchExpression<T> buildExpression(final List<FilterExpression<T>> filterExpressions) {
         return RangeFacetedSearchExpression.of(facetExpression, filterExpressions);
     }

@@ -76,39 +76,4 @@ abstract class TermFacetBaseSearchModel<T, V> extends Base implements FacetSearc
     public FilteredFacetExpression<T> onlyTermAsString(final Iterable<String> values) {
         return new FilteredFacetExpressionImpl<>(searchModel, TypeSerializer.ofString(), values, alias);
     }
-
-    /**
-     * Generates an expression to obtain the facets of the attribute for all values.
-     * For example: a possible faceted classification could be ["red": 4, "yellow": 2, "blue": 1].
-     * @return a facet expression for all values
-     * @deprecated use {@link #allTerms()} instead
-     */
-    @Deprecated
-    public TermFacetExpression<T> byAllTerms() {
-        return new TermFacetExpressionImpl<>(searchModel, typeSerializer, alias);
-    }
-
-    /**
-     * Generates an expression to obtain the facet of the attribute for only the given value.
-     * For example: a possible faceted classification for "red" could be ["red": 4].
-     * @param value the value from which to obtain the facet
-     * @return a facet expression for only the given value
-     * @deprecated use {@link #onlyTerm(Object)}
-     */
-    @Deprecated
-    public FilteredFacetExpression<T> byTerm(final V value) {
-        return onlyTerm(singletonList(value));
-    }
-
-    /**
-     * Generates an expression to obtain the facets of the attribute for only the given values.
-     * For example: a possible faceted classification for ["red", "blue"] could be ["red": 4, "blue": 1].
-     * @param values the values from which to obtain the facets
-     * @return a facet expression for only the given values
-     * @deprecated use {@link #onlyTerm(Iterable)}
-     */
-    @Deprecated
-    public FilteredFacetExpression<T> byTerm(final Iterable<V> values) {
-        return new FilteredFacetExpressionImpl<>(searchModel, typeSerializer, values, alias);
-    }
 }

@@ -49,24 +49,6 @@ public final class MultiValueSortSearchModel<T> extends SortSearchModelImpl<T> {
     }
 
     /**
-     * @deprecated use {@link #ascWithMaxValue()} instead
-     * @return deprecated
-     */
-    @Deprecated
-    public SortExpression<T> byAscWithMax() {
-        return by(ASC_MAX);
-    }
-
-    /**
-     * @deprecated use {@link #descWithMinValue()} instead
-     * @return deprecated
-     */
-    @Deprecated
-    public SortExpression<T> byDescWithMin() {
-        return by(DESC_MIN);
-    }
-
-    /**
      * Creates an instance of the search model to generate multi-valued sort expressions.
      * @param attributePath the path of the attribute as expected by Commercetools Platform (e.g. "variants.attributes.color.key")
      * @param <T> type of the resource

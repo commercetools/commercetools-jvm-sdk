@@ -59,16 +59,6 @@ public interface ProductType extends Resource<ProductType>, AttributeDefinitionC
         return "product-type";
     }
 
-    /**
-     *
-     * @deprecated use {@link #referenceTypeId()} instead
-     * @return referenceTypeId
-     */
-    @Deprecated
-    static String typeId(){
-        return "product-type";
-    }
-
     static Reference<ProductType> reference(final ProductType productType) {
         return Reference.of(referenceTypeId(), productType.getId(), productType);
     }

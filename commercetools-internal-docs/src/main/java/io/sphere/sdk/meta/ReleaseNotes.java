@@ -537,7 +537,7 @@ import java.util.function.Function;
  <li class=new-in-release>Improved error reporting for status code 413 and 414.</li>
 
  <li class=change-in-release>{@link io.sphere.sdk.search.TermStats} contains not anymore "T" and "F" but "true" and "false".</li>
- <li class=change-in-release>deprecate {@link io.sphere.sdk.customers.commands.CustomerCreateTokenCommand}, use {@link io.sphere.sdk.customers.commands.CustomerCreatePasswordTokenCommand} instead</li>
+ <li class=change-in-release>deprecate {@code io.sphere.sdk.customers.commands.CustomerCreateTokenCommand}, use {@link io.sphere.sdk.customers.commands.CustomerCreatePasswordTokenCommand} instead</li>
  <li class=fixed-in-release>DiscountedLineItemPrice money field is called value not money. See <a href="https://github.com/sphereio/sphere-jvm-sdk/issues/711">711</a>.</li>
  </ul>
 
@@ -760,7 +760,7 @@ import java.util.function.Function;
             <li>{@link AsyncHttpClientAdapter} enables to use a custom underlying Ning HTTP client for settings like proxies or max connections per host.</li>
             <li>The new module {@code java-client-apache-async} contains an {@link ApacheHttpClientAdapter adapter} to use the Apache HTTP client instead of the current default client Ning.</li>
             <li>The {@link io.sphere.sdk.client.QueueSphereClientDecorator} enables to limit the amount of concurrent requests to SPHERE.IO with a task queue.</li>
-            <li>{@link io.sphere.sdk.client.SphereAccessTokenSupplierFactory} is a starting point to create custom access token suppliers for one token (either fetched from SPHERE.IO or as String) or auto refreshing for online shops.</li>
+            <li>{@code io.sphere.sdk.client.SphereAccessTokenSupplierFactory} is a starting point to create custom access token suppliers for one token (either fetched from SPHERE.IO or as String) or auto refreshing for online shops.</li>
         </ul>
     </li>
     <li class=new-in-release>Added {@link io.sphere.sdk.client.SphereRequestDecorator} to decorate {@link io.sphere.sdk.client.SphereRequest}s.</li>
