@@ -1,26 +1,13 @@
 package io.sphere.sdk.models;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
-public final class EnumValue extends Base implements WithKey {
-    private final String key;
-    private final String label;
+@JsonDeserialize(as = EnumValueImpl.class)
+public interface EnumValue extends WithKey {
+    String getKey();
 
-    @JsonCreator
-    private EnumValue(final String key, final String label) {
-        this.key = key;
-        this.label = label;
-    }
-
-    @Override
-    public String getKey() {
-        return key;
-    }
-
-    public String getLabel() {
-        return label;
-    }
+    String getLabel();
 
     /**
      *
@@ -28,8 +15,8 @@ public final class EnumValue extends Base implements WithKey {
      * @param label A descriptive label of the value.
      * @return EnumValue
      */
-    public static EnumValue of(final String key, final String label) {
-        return new EnumValue(key, label);
+    static EnumValue of(final String key, final String label) {
+        return new EnumValueImpl(key, label);
     }
 
     /**
@@ -42,7 +29,7 @@ public final class EnumValue extends Base implements WithKey {
      *
      * @return type reference
      */
-    public static TypeReference<EnumValue> typeReference() {
+    static TypeReference<EnumValue> typeReference() {
         return new TypeReference<EnumValue>() {
             @Override
             public String toString() {

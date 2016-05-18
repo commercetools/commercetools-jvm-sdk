@@ -1,27 +1,14 @@
 package io.sphere.sdk.search;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import io.sphere.sdk.models.Base;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
-public final class TermStats extends Base {
-    private final String term;
-    private final Long count;
+@JsonDeserialize(as = TermStatsImpl.class)
+public interface TermStats {
+    String getTerm();
 
-    @JsonCreator
-    private TermStats(final String term, final Long count) {
-        this.term = term;
-        this.count = count;
-    }
+    Long getCount();
 
-    public String getTerm() {
-        return term;
-    }
-
-    public Long getCount() {
-        return count;
-    }
-
-    public static TermStats of(final String term, final Long count) {
-        return new TermStats(term, count);
+    static TermStats of(final String term, final Long count) {
+        return new TermStatsImpl(term, count);
     }
 }

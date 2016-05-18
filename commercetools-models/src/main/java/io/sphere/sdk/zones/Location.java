@@ -1,44 +1,28 @@
 package io.sphere.sdk.zones;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.neovisionaries.i18n.CountryCode;
-import io.sphere.sdk.models.Base;
 
 import javax.annotation.Nullable;
 
 /**
  * A geographical location representing a country with an optional state.
  */
-public final class Location extends Base {
-    private final CountryCode country;
-    @JsonInclude(JsonInclude.Include.NON_EMPTY)
-    @Nullable
-    private final String state;
-
-    @JsonCreator
-    private Location(final CountryCode country, @Nullable final String state) {
-        this.country = country;
-        this.state = state;
-    }
-
-    public CountryCode getCountry() {
-        return country;
-    }
+@JsonDeserialize(as = LocationImpl.class)
+public interface Location {
+    CountryCode getCountry();
 
     @Nullable
-    public String getState() {
-        return state;
+    String getState();
+
+    @JsonIgnore
+    static Location of(final CountryCode countryCode, @Nullable final String state) {
+        return new LocationImpl(countryCode, state);
     }
 
     @JsonIgnore
-    public static Location of(final CountryCode countryCode, @Nullable final String state) {
-        return new Location(countryCode, state);
-    }
-
-    @JsonIgnore
-    public static Location of(final CountryCode countryCode) {
+    static Location of(final CountryCode countryCode) {
         return of(countryCode, null);
     }
 }

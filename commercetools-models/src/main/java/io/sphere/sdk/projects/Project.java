@@ -1,10 +1,8 @@
 package io.sphere.sdk.projects;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.neovisionaries.i18n.CountryCode;
-import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.CreationTimestamped;
 import io.sphere.sdk.models.WithKey;
 
@@ -16,94 +14,63 @@ import java.util.Locale;
 
 import static java.util.stream.Collectors.toList;
 
-public final class Project extends Base implements CreationTimestamped, WithKey {
-    private final String key;
-    private final String name;
-    private final List<CountryCode> countries;
-    private final List<String> languages;
-    private final List<String> currencies;
-    private final ZonedDateTime createdAt;
-    private final ZonedDateTime trialUntil;
-
-    @JsonCreator
-    private Project(final String key, final String name, final List<CountryCode> countries, final List<String> languages, final List<String> currencies, final ZonedDateTime createdAt, @JsonDeserialize(using = TrialUntilDeserializer.class) final ZonedDateTime trialUntil) {
-        this.key = key;
-        this.name = name;
-        this.countries = countries;
-        this.languages = languages;
-        this.currencies = currencies;
-        this.createdAt = createdAt;
-        this.trialUntil = trialUntil;
-    }
-
+@JsonDeserialize(as = ProjectImpl.class)
+public interface Project extends CreationTimestamped, WithKey {
     /**
      * The unique key of the project.
+     *
      * @return key
      */
-    public String getKey() {
-        return key;
-    }
+    String getKey();
 
     /**
      * The name of the project.
      * @return name
      */
-    public String getName() {
-        return name;
-    }
+    String getName();
 
     /**
      * Enabled countries.
      * @return countries
      */
-    public List<CountryCode> getCountries() {
-        return countries;
-    }
+    List<CountryCode> getCountries();
 
     /**
      * A two-digit language code as per ISO 3166-1 alpha-2 String.
      * @see #getLanguageLocales()
      * @return language
      */
-    public List<String> getLanguages() {
-        return languages;
-    }
+    List<String> getLanguages();
 
     /**
      * The languages as list of {@link Locale}s of this project.
      * @see #getLanguages()
      * @return languages
      */
-    public List<Locale> getLanguageLocales() {
+    default List<Locale> getLanguageLocales() {
         return getLanguages().stream()
                 .map(Locale::forLanguageTag)
                 .collect(toList());
     }
 
-    public ZonedDateTime getTrialUntil() {
-        return trialUntil;
-    }
+    ZonedDateTime getTrialUntil();
 
     @Override
-    public ZonedDateTime getCreatedAt() {
-        return createdAt;
-    }
+    ZonedDateTime getCreatedAt();
 
     /**
      * A three-digit currency code as per ISO 4217.
      * @see #getCurrencyUnits()
      * @return currency codes
      */
-    public List<String> getCurrencies() {
-        return currencies;
-    }
+    List<String> getCurrencies();
 
     /**
      * Currencies assigned to this project as {@link CurrencyUnit}.
      * @see #getCurrencies()
      * @return currencies
      */
-    public List<CurrencyUnit> getCurrencyUnits() {
+    default List<CurrencyUnit> getCurrencyUnits() {
         return getCurrencies().stream()
                 .map(Monetary::getCurrency)
                 .collect(toList());
@@ -119,7 +86,7 @@ public final class Project extends Base implements CreationTimestamped, WithKey 
      *
      * @return type reference
      */
-    public static TypeReference<Project> typeReference() {
+    static TypeReference<Project> typeReference() {
         return new TypeReference<Project>(){
             @Override
             public String toString() {
