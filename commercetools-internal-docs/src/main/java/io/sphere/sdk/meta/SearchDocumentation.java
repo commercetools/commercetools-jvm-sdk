@@ -215,7 +215,7 @@ import io.sphere.sdk.models.Base;
 
  <p>In order to build an expression, first you will be required to select the action to apply (i.e. {@link io.sphere.sdk.products.search.ProductProjectionSearchModel#filter}, {@link io.sphere.sdk.products.search.ProductProjectionSearchModel#facet} and {@link io.sphere.sdk.products.search.ProductProjectionSearchModel#sort}).</p>
 
- <p>Then you need to build the path of the attribute you want to apply that action to, for example {@link io.sphere.sdk.products.search.ProductDataFilterSearchModel#lastModifiedAt} represents the {@code lastModifiedAt} attribute on a product. In the case of custom attributes, you also need to provide the attribute name and select the primary type of the attribute.</p>
+ <p>Then you need to build the path of the attribute you want to apply that action to, for example {@link io.sphere.sdk.products.search.ProductProjectionFilterSearchModel#lastModifiedAt} represents the {@code lastModifiedAt} attribute on a product. In the case of custom attributes, you also need to provide the attribute name and select the primary type of the attribute.</p>
 
  <p>Finally, you need to indicate the criteria used for the desired operation. For example you would use {@link io.sphere.sdk.search.model.TermFilterSearchModel#isIn} if you want to filter by any of the given values.</p>
 
