@@ -256,7 +256,7 @@ import java.util.function.Function;
  <br>
  <br>
  <ul>
- <li class=new-in-release>use a new groupId as well as artifactId for the JVM SDK, have a look at the <a href="https://github.com/sphereio/sphere-jvm-sdk#sphereio-jvm-sdk">GitHub readme</a></li>
+ <li class=new-in-release>use a new groupId as well as artifactId for the JVM SDK, have a look at the <a href="https://github.com/commercetools/commercetools-jvm-sdk#commercetools-jvm-sdk">GitHub readme</a></li>
  <li class=new-in-release>in commercetools-convenience module: {@link io.sphere.sdk.client.metrics.SimpleMetricsSphereClient} makes durations for requests observable</li>
  <li class=new-in-release>add {@link io.sphere.sdk.jsonnodes.queries.JsonNodeQuery} to use the query endpoints and get directly {@link com.fasterxml.jackson.databind.JsonNode} instances</li>
  <li class=new-in-release>add draft getters to create commands</li>
@@ -277,7 +277,7 @@ import java.util.function.Function;
  <li class=change-in-release>deprecate {@code io.sphere.sdk.client.SphereAccessTokenSupplierFactory}, use {@link io.sphere.sdk.client.SphereAccessTokenSupplier} methods instead</li>
 
  <li class=removed-in-release>class {@code SphereRequestBase}, use {@link io.sphere.sdk.client.SphereRequestUtils} instead</li>
- <li class=removed-in-release>{@code ExperimentalReactiveStreamUtils} is not experimental anymore and has been moved out of commercetools-convenience to a separate repository: <a href="https://github.com/sphereio/commercetools-jvm-sdk-reactive-streams-add-ons" target="_blank">https://github.com/sphereio/commercetools-jvm-sdk-reactive-streams-add-ons</a></li>
+ <li class=removed-in-release>{@code ExperimentalReactiveStreamUtils} is not experimental anymore and has been moved out of commercetools-convenience to a separate repository: <a href="https://github.com/commercetools/commercetools-jvm-sdk-reactive-streams-add-ons" target="_blank">https://github.com/commercetools/commercetools-jvm-sdk-reactive-streams-add-ons</a></li>
  <li class=removed-in-release>some internal util classes (StringUtils, IterableUtils, MapUtils, SetUtils, TriFunction, PatternMatcher, UrlUtils)</li>
  <li class=removed-in-release>{@code CustomObjectDraft#withVersion(String, String, JsonNode)}</li>
  <li class=removed-in-release>{@code HttpQueryParameter} class</li>
@@ -334,7 +334,7 @@ import java.util.function.Function;
 
  <h3 class=released-version id="v1_0_0_M25">1.0.0-M25 (08.01.2016)</h3>
  <ul>
- <li class=fixed-in-release>Support full locales for search endpoint. See <a href="https://github.com/sphereio/sphere-jvm-sdk/issues/922" target="_blank">#922</a></li>
+ <li class=fixed-in-release>Support full locales for search endpoint. See <a href="https://github.com/commercetools/commercetools-jvm-sdk/issues/922" target="_blank">#922</a></li>
  </ul>
 
  <h3 class=released-version id="v1_0_0_M24">1.0.0-M24 (05.01.2016)</h3>
@@ -363,7 +363,7 @@ import java.util.function.Function;
  <li class=change-in-release>Renamed duplicated classes like "*Type" to "*AttributeType" and "*FieldType". (direct change, no deprecation possible)</li>
  <li class=change-in-release>Use {@link io.sphere.sdk.client.TestDoubleSphereClientFactory#createHttpTestDouble(Function)}
  and {@link io.sphere.sdk.client.TestDoubleSphereClientFactory#createObjectTestDouble(Function)} instead of methods from {@link io.sphere.sdk.client.SphereClientFactory} for test doubles.</li>
- <li class=fixed-in-release>In the properties config the default auth url is wrong. See <a href="https://github.com/sphereio/sphere-jvm-sdk/issues/889">889</a>.</li>
+ <li class=fixed-in-release>In the properties config the default auth url is wrong. See <a href="https://github.com/commercetools/commercetools-jvm-sdk/issues/889">889</a>.</li>
  <li class=removed-in-release>The review classes are removed.</li>
  </ul>
 
@@ -388,7 +388,7 @@ import java.util.function.Function;
  Use  {@link io.sphere.sdk.http.FormUrlEncodedHttpRequestBody#of(List)} for construction and {@link FormUrlEncodedHttpRequestBody#getParameters()} for getting the data.
  {@link FormUrlEncodedHttpRequestBody#getData()} is deprecated.</li>
  <li class=new-in-release>Added {@link io.sphere.sdk.client.SphereClientConfig#ofProperties(Properties, String)} to get the commercetools credentials form a properties file.</li>
- <li class=new-in-release>For SDK contributors: <a href="https://github.com/sphereio/sphere-jvm-sdk#executing-integration-tests" target="_blank">integration test credentials can be set via a properties file</a></li>
+ <li class=new-in-release>For SDK contributors: <a href="https://github.com/commercetools/commercetools-jvm-sdk#executing-integration-tests" target="_blank">integration test credentials can be set via a properties file</a></li>
  </ul>
 
  <h3 class=released-version id="v1_0_0_M22">1.0.0-M22 (01.12.2015)</h3>
@@ -443,10 +443,10 @@ import java.util.function.Function;
  <h3 class=released-version id="v1_0_0_M20">1.0.0-M20 (02.11.2015)</h3>
  <ul>
   <li class=change-in-release>{@code query.withSort(m -> m.createdAt().sort(DESC));} is deprecated, use it with {@code query.withSort(m -> m.createdAt().sort().desc());}</li>
-  <li class=fixed-in-release>Duplicates with {@code io.sphere.sdk.queries.ExperimentalReactiveStreamUtils#publisherOf(QueryDsl, SphereClient)} on multiple parallel request(n) calls. See <a href="https://github.com/sphereio/sphere-jvm-sdk/issues/809">809</a>.</li>
-  <li class=fixed-in-release>Logger name shows query string. See <a href="https://github.com/sphereio/sphere-jvm-sdk/issues/802">802</a>.</li>
-  <li class=fixed-in-release>Missing Content-Length header in Async HTTP Client. See <a href="https://github.com/sphereio/sphere-jvm-sdk/issues/799">799</a>.</li>
-  <li class=fixed-in-release>variantIdentifier in {@link LineItem} is null. See <a href="https://github.com/sphereio/sphere-jvm-sdk/issues/771">771</a>.</li>
+  <li class=fixed-in-release>Duplicates with {@code io.sphere.sdk.queries.ExperimentalReactiveStreamUtils#publisherOf(QueryDsl, SphereClient)} on multiple parallel request(n) calls. See <a href="https://github.com/commercetools/commercetools-jvm-sdk/issues/809">809</a>.</li>
+  <li class=fixed-in-release>Logger name shows query string. See <a href="https://github.com/commercetools/commercetools-jvm-sdk/issues/802">802</a>.</li>
+  <li class=fixed-in-release>Missing Content-Length header in Async HTTP Client. See <a href="https://github.com/commercetools/commercetools-jvm-sdk/issues/799">799</a>.</li>
+  <li class=fixed-in-release>variantIdentifier in {@link LineItem} is null. See <a href="https://github.com/commercetools/commercetools-jvm-sdk/issues/771">771</a>.</li>
  </ul>
 
 
@@ -523,7 +523,7 @@ import java.util.function.Function;
 
  </dl>
  </li>
- <li class=fixed-in-release>Don't include customer password in logs. See <a href="https://github.com/sphereio/sphere-jvm-sdk/issues/767">767</a>.</li>
+ <li class=fixed-in-release>Don't include customer password in logs. See <a href="https://github.com/commercetools/commercetools-jvm-sdk/issues/767">767</a>.</li>
  </ul>
 
 
@@ -538,7 +538,7 @@ import java.util.function.Function;
 
  <li class=change-in-release>{@link io.sphere.sdk.search.TermStats} contains not anymore "T" and "F" but "true" and "false".</li>
  <li class=change-in-release>deprecate {@code io.sphere.sdk.customers.commands.CustomerCreateTokenCommand}, use {@link io.sphere.sdk.customers.commands.CustomerCreatePasswordTokenCommand} instead</li>
- <li class=fixed-in-release>DiscountedLineItemPrice money field is called value not money. See <a href="https://github.com/sphereio/sphere-jvm-sdk/issues/711">711</a>.</li>
+ <li class=fixed-in-release>DiscountedLineItemPrice money field is called value not money. See <a href="https://github.com/commercetools/commercetools-jvm-sdk/issues/711">711</a>.</li>
  </ul>
 
 
@@ -608,8 +608,8 @@ import java.util.function.Function;
  <li class=removed-in-release>Builders for resources (read objects) have been removed. See {@link TestingDocumentation} to build the objects anyway.</li>
  <li class=removed-in-release>QueryToFetch adapter has been removed.</li>
 
- <li class=fixed-in-release>{@link io.sphere.sdk.queries.StringQueryModel#isGreaterThan(Object)} and other methods do not quote strings correctly. See <a href="https://github.com/sphereio/sphere-jvm-sdk/issues/558">558</a>.</li>
- <li class=fixed-in-release>Product variant expansion does not work. See <a href="https://github.com/sphereio/sphere-jvm-sdk/issues/631">631</a>.</li>
+ <li class=fixed-in-release>{@link io.sphere.sdk.queries.StringQueryModel#isGreaterThan(Object)} and other methods do not quote strings correctly. See <a href="https://github.com/commercetools/commercetools-jvm-sdk/issues/558">558</a>.</li>
+ <li class=fixed-in-release>Product variant expansion does not work. See <a href="https://github.com/commercetools/commercetools-jvm-sdk/issues/631">631</a>.</li>
 
  </ul>
 
@@ -658,9 +658,9 @@ import java.util.function.Function;
  <li class=change-in-release>{@link io.sphere.sdk.client.SphereClient} implements {@link AutoCloseable} instead of {@link java.io.Closeable}.</li>
  <li class=change-in-release>For timestamps we moved from {@link java.time.Instant} to {@link java.time.ZonedDateTime} since the latter also contains a timezone which better reflects SPHERE.IOs date time data.</li>
  <li class=change-in-release>Getting the child categories of a category is not in category anymore but in {@link io.sphere.sdk.categories.CategoryTree#findChildren(Identifiable)}.</li>
- <li class=fixed-in-release>Sphere client does not shutdown actors properly.  See <a target="_blank" href="https://github.com/sphereio/sphere-jvm-sdk/issues/491">#491</a>.</li>
+ <li class=fixed-in-release>Sphere client does not shutdown actors properly.  See <a target="_blank" href="https://github.com/commercetools/commercetools-jvm-sdk/issues/491">#491</a>.</li>
  <li class=removed-in-release>{@code Category#getPathInTree()}</li>
- <li class=removed-in-release>{@code ExperimentalProductImageUploadCommand}, but you can find a similar command here: <a href="https://github.com/sphereio/sphere-jvm-sdk-experimental-java-add-ons">https://github.com/sphereio/sphere-jvm-sdk-experimental-java-add-ons</a></li>
+ <li class=removed-in-release>{@code ExperimentalProductImageUploadCommand}, but you can find a similar command here: <a href="https://github.com/commercetools/commercetools-jvm-sdk-experimental-java-add-ons">https://github.com/commercetools/commercetools-jvm-sdk-experimental-java-add-ons</a></li>
  </ul>
 
 
@@ -691,7 +691,7 @@ import java.util.function.Function;
  </li>
  <li class=change-in-release>Update of the Java Money library to version 1.0 which has some breaking changes in comparison to the release candidates.</li>
  <li class=change-in-release>Some predicate methods have been renamed: "isOneOf" to "isIn", "isAnyOf" to "isIn", "isLessThanOrEquals" to "isLessThanOrEqualTo" (analog for greaterThan).</li>
- <li class=fixed-in-release>The exception for a failing {@link io.sphere.sdk.customers.commands.CustomerSignInCommand} shows more problem details. See <a href="https://github.com/sphereio/sphere-jvm-sdk/issues/397">#397</a>.</li>
+ <li class=fixed-in-release>The exception for a failing {@link io.sphere.sdk.customers.commands.CustomerSignInCommand} shows more problem details. See <a href="https://github.com/commercetools/commercetools-jvm-sdk/issues/397">#397</a>.</li>
  <li class=fixed-in-release>There has been a thread leak if {@code io.sphere.sdk.client.SphereClientFactory#createClient(io.sphere.sdk.client.SphereClientConfig)} was used.
  It created twice a http client instance and closed just one.</li>
  </ul>
@@ -729,7 +729,7 @@ import java.util.function.Function;
      <li class=change-in-release>{@link io.sphere.sdk.carts.LineItem#getState()} now returns a set instead of a list.</li>
      <li class=change-in-release>{@link io.sphere.sdk.products.ProductProjection#getCategories()} now returns a set instead of a list.</li>
 
-    <li class=fixed-in-release>URL encoding of parameters. See <a href="https://github.com/sphereio/sphere-jvm-sdk/issues/240">#240</a>.</li>
+    <li class=fixed-in-release>URL encoding of parameters. See <a href="https://github.com/commercetools/commercetools-jvm-sdk/issues/240">#240</a>.</li>
  </ul>
 
  <h3 class=released-version id=v1_0_0_M12>1.0.0-M12 (19.03.2015)</h3>
@@ -748,7 +748,7 @@ import java.util.function.Function;
  <li class=change-in-release>{@link io.sphere.sdk.http.HttpHeaders} allows reoccurring headers.</li>
  <li class=change-in-release>Use of a new toString style, from <pre>io.sphere.sdk.client.HttpRequestIntent@7308a939[httpMethod=POST,path=/categories,headers={},body=Optional[io.sphere.sdk.http.StringHttpRequestBody@216ec9be[body={invalidJson :)]]]</pre> to <pre>HttpRequestIntent[httpMethod=POST,path=/categories,headers={},body=Optional[StringHttpRequestBody[body={invalidJson :)]]]</pre></li>
  <li class=fixed-in-release>{@link io.sphere.sdk.client.ErrorResponseException#getMessage()} now returns also the project debug info.</li>
- <li class=fixed-in-release><a href="https://github.com/sphereio/sphere-jvm-sdk/issues/312">Incompatibility with Jackson 2.5.1</a> has been fixed. A cause message was "No suitable constructor found for type [simple type, class io.sphere.sdk.models.ImageImpl]: can not instantiate from JSON object (missing default constructor or creator, or perhaps need to add/enable type information?)"</li>
+ <li class=fixed-in-release><a href="https://github.com/commercetools/commercetools-jvm-sdk/issues/312">Incompatibility with Jackson 2.5.1</a> has been fixed. A cause message was "No suitable constructor found for type [simple type, class io.sphere.sdk.models.ImageImpl]: can not instantiate from JSON object (missing default constructor or creator, or perhaps need to add/enable type information?)"</li>
  </ul>
 
  <h3 class=released-version id=v1_0_0_M11>1.0.0-M11 (03.03.2015)</h3>
@@ -777,7 +777,7 @@ import java.util.function.Function;
     <li class=change-in-release>{@link Get} class names end now with Fetch for consistency, so for example {@code CartFetchById} is now {@link CartByIdGet}.</li>
     <li class=change-in-release>{@link io.sphere.sdk.commands.DeleteCommand} implementations don't have {@code ById} or {@code ByKey} in the class name and the {@code of} factory method returns the interface, not the implementation, example {@link io.sphere.sdk.categories.commands.CategoryDeleteCommand#of(io.sphere.sdk.models.Versioned)}.</li>
     <li class=change-in-release>LocalizedText* classes have been renamed to LocalizedString.</li>
-    <li class=fixed-in-release>Fixed: UnknownCurrencyException <a href="https://github.com/sphereio/sphere-jvm-sdk/issues/264">#264</a>.</li>
+    <li class=fixed-in-release>Fixed: UnknownCurrencyException <a href="https://github.com/commercetools/commercetools-jvm-sdk/issues/264">#264</a>.</li>
  </ul>
 
  <h4>States</h4>
@@ -870,7 +870,7 @@ import java.util.function.Function;
  the getter {@link ProductTypeDraft#getAttributes()} and list add operations. </li>
  <li>Incompatible change: {@code LocalizedString} has been renamed to {@link LocalizedString}, since it is not a container for one string and a locale, but for multiple strings of different locals. It is like a map.</li>
  <li>Incompatible change: The {@link Get} classes have been renamed. From FetchRESOURCEByWhatever to RESOURCEFetchByWhatever</li>
- <li>Moved Scala and Play clients out of the Git repository to <a href="https://github.com/sphereio/sphere-jvm-sdk-scala-add-ons">https://github.com/sphereio/sphere-jvm-sdk-scala-add-ons</a>. The artifact ID changed.</li>
+ <li>Moved Scala and Play clients out of the Git repository to <a href="https://github.com/commercetools/commercetools-jvm-sdk-scala-add-ons">https://github.com/commercetools/commercetools-jvm-sdk-scala-add-ons</a>. The artifact ID changed.</li>
  <li>{@link io.sphere.sdk.meta.SphereResources} contains now also a listing of queries and commands for the resources.</li>
  <li>Added {@link io.sphere.sdk.products.search.ProductProjectionSearch} for full-text, filtered and faceted search.</li>
  <li>Incompatible change: {@code io.sphere.sdk.products.ProductUpdateScope} makes it more visible that product update operations can be for only staged or for current and staged. The product update actions will be affected by that.</li>

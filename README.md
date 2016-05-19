@@ -13,10 +13,10 @@ Users gain type-safety, encapsulation, IDE auto completion and an internal domai
 
 ## Using the SDK 
 * install [Java 8](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)
-* (since Feb 26, 2016 new link) [<strong>Javadoc</strong>](http://sphereio.github.io/sphere-jvm-sdk/apidocs/index.html), there you find also code snippets and insights
-    * [Getting Started](http://sphereio.github.io/sphere-jvm-sdk/apidocs/io/sphere/sdk/meta/GettingStarted.html)
-    * [Release Notes](http://sphereio.github.io/sphere-jvm-sdk/apidocs/io/sphere/sdk/meta/ReleaseNotes.html)
-    * [Contributing](http://sphereio.github.io/sphere-jvm-sdk/apidocs/io/sphere/sdk/meta/ContributorDocumentation.html)
+* (since May 19, 2016 new link) [<strong>Javadoc</strong>](http://commercetools.github.io/commercetools-jvm-sdk/apidocs/index.html), there you find also code snippets and insights
+    * [Getting Started](http://commercetools.github.io/sphere-jvm-sdk/apidocs/io/sphere/sdk/meta/GettingStarted.html)
+    * [Release Notes](http://commercetools.github.io/sphere-jvm-sdk/apidocs/io/sphere/sdk/meta/ReleaseNotes.html)
+    * [Contributing](http://commercetools.github.io/sphere-jvm-sdk/apidocs/io/sphere/sdk/meta/ContributorDocumentation.html)
  
 ## Installation
 
@@ -55,32 +55,32 @@ Users gain type-safety, encapsulation, IDE auto completion and an internal domai
 
 ### Play/Scala SDK with SBT
 
-see https://github.com/sphereio/sphere-jvm-sdk-scala-add-ons
+see https://github.com/commercetools/commercetools-jvm-sdk-scala-add-ons
 
 ### reactive streams
 * since RC1-SNAPSHOT, formerly in sphere-convenience-module
-* https://github.com/sphereio/commercetools-jvm-sdk-reactive-streams-addons
+* https://github.com/commercetools/commercetools-jvm-sdk-reactive-streams-addons
 
 ### JVM SDK Contrib
 
 Useful code from external developers
 
-* https://github.com/sphereio/commercetools-jvm-sdk-contrib
+* https://github.com/commercetools/commercetools-jvm-sdk-contrib
 
 ### Experimental Add-Ons
 * ProductImageUploadCommand from http://dev.sphere.io/http-api-projects-products.html#upload-product-image
 
-see https://github.com/sphereio/sphere-jvm-sdk-experimental-java-add-ons
+see https://github.com/commercetools/commercetools-jvm-sdk-experimental-java-add-ons
 
 ## Short-term roadmap
-* https://github.com/sphereio/sphere-jvm-sdk/milestones
-* https://waffle.io/sphereio/sphere-jvm-sdk
+* https://github.com/commercetools/commercetools-jvm-sdk/milestones
+* https://waffle.io/commercetools/commercetools-jvm-sdk
 
 ## Open Source Examples
-* [Sunrise Java](https://github.com/sphereio/commercetools-sunrise-java) - a shop using Play Framework 2.x with Handlebars.java as template engine, Google Guice for DI
+* [Sunrise Java](https://github.com/commercetools/commercetools-sunrise-java) - a shop using Play Framework 2.x with Handlebars.java as template engine, Google Guice for DI
 * [Donut](https://github.com/commercetools/sphere-donut) - single product subscription shop example with Play Framework 2.x and Twirl (Plays default) as template engine
-* [commercetools Spring MVC archetype](https://github.com/sphereio/commercetools-spring-mvc-archetype) - template integrating the SDK with Spring DI and Spring MVC and showing just some products, thymeleaf template engine
-* [Reproducer Example](https://github.com/sphereio/commercetools-jvm-sdk-reproducer-example) - a demo which shows how to reproduce errors
+* [commercetools Spring MVC archetype](https://github.com/commercetools/commercetools-spring-mvc-archetype) - template integrating the SDK with Spring DI and Spring MVC and showing just some products, thymeleaf template engine
+* [Reproducer Example](https://github.com/commercetools/commercetools-jvm-sdk-reproducer-example) - a demo which shows how to reproduce errors
 
 ## Stability
 
@@ -123,8 +123,8 @@ authUrl=https://auth.sphere.io
 
 [](definitions for the top badges)
 
-[travis]:https://travis-ci.org/sphereio/sphere-jvm-sdk
-[travis img]:https://travis-ci.org/sphereio/sphere-jvm-sdk.svg?branch=master
+[travis]:https://travis-ci.org/commercetools/commercetools-jvm-sdk
+[travis img]:https://travis-ci.org/commercetools/commercetools-jvm-sdk.svg?branch=master
 
 [maven]:http://search.maven.org/#search|gav|1|g:"com.commercetools.sdk.jvm.core"%20AND%20a:"commercetools-jvm-sdk"
 [maven img]:https://maven-badges.herokuapp.com/maven-central/com.commercetools.sdk.jvm.core/commercetools-jvm-sdk/badge.svg

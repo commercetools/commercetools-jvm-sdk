@@ -6,7 +6,7 @@
     <version>1.0.0-RC9-SNAPSHOT</version>
     <name>commercetools JVM SDK</name>
     <description>Java bindings for the commercetools platform</description>
-    <url>https://github.com/sphereio/sphere-jvm-sdk</url>
+    <url>https://github.com/commercetools/commercetools-jvm-sdk</url>
     <licenses>
         <license>
             <name>Apache License, Version 2.0</name>
@@ -56,8 +56,8 @@
         <module>sdk-http-apache-async</module>
     </modules>
     <scm>
-        <url>git@github.com:sphereio/sphere-jvm-sdk.git</url>
-        <connection>scm:git:git@github.com:sphereio/sphere-jvm-sdk.git</connection>
+        <url>git@github.com:commercetools/commercetools-jvm-sdk.git</url>
+        <connection>scm:git:git@github.com:commercetools/commercetools-jvm-sdk.git</connection>
     <tag>HEAD</tag>
   </scm>
     <properties>
@@ -83,7 +83,7 @@
         <java.version>1.8</java.version>
         <jacoco.version>0.7.5.201505241946</jacoco.version>
         <maven-scm-publish-plugin.version>1.1</maven-scm-publish-plugin.version>
-        <maven-scm-publish-plugin.scm.url>scm:git:git@github.com:sphereio/sphere-jvm-sdk.git</maven-scm-publish-plugin.scm.url>
+        <maven-scm-publish-plugin.scm.url>scm:git:git@github.com:commercetools/commercetools-jvm-sdk.git</maven-scm-publish-plugin.scm.url>
         <maven-compiler-plugin.version>2.3</maven-compiler-plugin.version>
         <maven-javadoc-plugin.version>2.10.3</maven-javadoc-plugin.version>
         <maven-failsafe-plugin.version>2.19.1</maven-failsafe-plugin.version>

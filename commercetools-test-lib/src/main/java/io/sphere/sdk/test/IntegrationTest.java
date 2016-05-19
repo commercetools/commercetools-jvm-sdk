@@ -51,7 +51,7 @@ public abstract class IntegrationTest {
 
     @BeforeClass
     public static void warmUpJavaMoney() throws Exception {
-        final CurrencyUnit eur = DefaultCurrencyUnits.EUR;//workaround for https://github.com/sphereio/sphere-jvm-sdk/issues/779
+        final CurrencyUnit eur = DefaultCurrencyUnits.EUR;//workaround for https://github.com/commercetools/commercetools-jvm-sdk/issues/779
     }
 
     public static void setupClient() {

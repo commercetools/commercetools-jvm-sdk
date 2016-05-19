@@ -1,1 +1,1 @@
-see https://github.com/sphereio/sphere-sunrise/blob/master/CONTRIBUTING.md
+see https://github.com/commercetools/commercetools-sunrise/blob/master/CONTRIBUTING.md

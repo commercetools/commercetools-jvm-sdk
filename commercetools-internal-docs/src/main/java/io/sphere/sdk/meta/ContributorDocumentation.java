@@ -5,7 +5,7 @@ package io.sphere.sdk.meta;
 
 
  <ul>
-    <li>please follow the <a href="https://github.com/sphereio/sphere-sunrise/blob/master/CONTRIBUTING.md">Contribution Guidelines</a></li>
+    <li>please follow the <a href="https://github.com/commercetools/commercetools-sunrise-java/blob/master/CONTRIBUTING.md">Contribution Guidelines</a></li>
     <li>`sbt clean genDoc` creates Javadocs for all modules, it is available in target/javaunidoc/index.html</li>
     <li>opening the project with IntelliJ IDEA Ultimate might not work due to a bug, but using <a href="https://github.com/mpeltonen/sbt-idea">this solution</a> works</li>
  </ul>

@@ -15,8 +15,8 @@ import io.sphere.sdk.models.Base;
  <caption>Clients and future implementations</caption>
  <tr><th>Client</th><th>Future implementation</th></tr>
  <tr><td>{@link io.sphere.sdk.client.SphereClient} (default)</td><td>{@code java.util.concurrent.CompletionStage}</td></tr>
- <tr><td><a href=https://github.com/sphereio/sphere-jvm-sdk-scala-add-ons>SphereScalaClient</a></td><td>{@code scala.concurrent.Future}</td></tr>
- <tr><td><a href=https://github.com/sphereio/sphere-jvm-sdk-scala-add-ons>SpherePlayJavaClient</a></td><td>{@code play.libs.F.Promise}</td></tr>
+ <tr><td><a href=https://github.com/commercetools/commercetools-jvm-sdk-scala-add-ons>SphereScalaClient</a></td><td>{@code scala.concurrent.Future}</td></tr>
+ <tr><td><a href=https://github.com/commercetools/commercetools-jvm-sdk-scala-add-ons>SpherePlayJavaClient</a></td><td>{@code play.libs.F.Promise}</td></tr>
  </table>
 
  <h3 id=preparation>Preparation</h3>

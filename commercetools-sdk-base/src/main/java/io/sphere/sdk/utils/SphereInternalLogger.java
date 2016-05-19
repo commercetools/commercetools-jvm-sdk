@@ -66,7 +66,7 @@ import java.util.function.Supplier;
 
  <h3 id="using-loggers-to-reproduce-problems">Use the logger to reproduce problems</h3>
 
- Have a look at the <a href="https://github.com/sphereio/commercetools-jvm-sdk-reproducer-example" target="_blank">sphereio/commercetools-jvm-sdk-reproducer-example</a>.
+ Have a look at the <a href="https://github.com/commercetools/commercetools-jvm-sdk-reproducer-example" target="_blank">commercetools/commercetools-jvm-sdk-reproducer-example</a>.
  */
 public final class SphereInternalLogger {
     private final Logger underlyingLogger;
