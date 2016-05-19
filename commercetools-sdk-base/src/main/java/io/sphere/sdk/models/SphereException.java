@@ -110,7 +110,7 @@ public class SphereException extends RuntimeException {
                 .append(httpRequestLine())
                 .append(requestBodyFormatted())
                 .append("additional notes: ").append(additionalNotes).append("\n")
-                .append("Javadoc: ").append("http://commercetools.github.io/sphere-jvm-sdk/apidocs/").append(this.getClass().getCanonicalName().replace('.', '/')).append(".html").append("\n")
+                .append("Javadoc: ").append("http://commercetools.github.io/commercetools-jvm-sdk/apidocs/").append(this.getClass().getCanonicalName().replace('.', '/')).append(".html").append("\n")
                 .toString();
     }
 

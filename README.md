@@ -14,9 +14,9 @@ Users gain type-safety, encapsulation, IDE auto completion and an internal domai
 ## Using the SDK 
 * install [Java 8](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)
 * (since May 19, 2016 new link) [<strong>Javadoc</strong>](http://commercetools.github.io/commercetools-jvm-sdk/apidocs/index.html), there you find also code snippets and insights
-    * [Getting Started](http://commercetools.github.io/sphere-jvm-sdk/apidocs/io/sphere/sdk/meta/GettingStarted.html)
-    * [Release Notes](http://commercetools.github.io/sphere-jvm-sdk/apidocs/io/sphere/sdk/meta/ReleaseNotes.html)
-    * [Contributing](http://commercetools.github.io/sphere-jvm-sdk/apidocs/io/sphere/sdk/meta/ContributorDocumentation.html)
+    * [Getting Started](http://commercetools.github.io/commercetools-jvm-sdk/apidocs/io/sphere/sdk/meta/GettingStarted.html)
+    * [Release Notes](http://commercetools.github.io/commercetools-jvm-sdk/apidocs/io/sphere/sdk/meta/ReleaseNotes.html)
+    * [Contributing](http://commercetools.github.io/commercetools-jvm-sdk/apidocs/io/sphere/sdk/meta/ContributorDocumentation.html)
  
 ## Installation
 
