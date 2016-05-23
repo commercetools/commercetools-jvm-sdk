@@ -9,7 +9,6 @@ import io.sphere.sdk.products.ProductFixtures;
 import io.sphere.sdk.products.ProductProjection;
 import io.sphere.sdk.search.PagedSearchResult;
 import io.sphere.sdk.test.IntegrationTest;
-import net.jcip.annotations.NotThreadSafe;
 import org.assertj.core.api.Condition;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -24,12 +23,10 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
-import static io.sphere.sdk.test.SphereTestUtils.assertEventually;
-import static io.sphere.sdk.test.SphereTestUtils.en;
+import static io.sphere.sdk.test.SphereTestUtils.*;
 import static java.util.stream.Collectors.toList;
 import static org.assertj.core.api.Assertions.assertThat;
 
-@NotThreadSafe
 public class ProductCategoriesIdTermFilterSearchModelIntegrationTest extends IntegrationTest {
 
     private static CategoryTree categoryTree;
@@ -50,7 +47,8 @@ public class ProductCategoriesIdTermFilterSearchModelIntegrationTest extends Int
                 withProductInCategories(client(), categoryIds3, (Product product3) -> {
                     assertEventually(() -> {
                         final ProductProjectionSearch request = ProductProjectionSearch.ofStaged()
-                                .withQueryFilters(m -> m.categories().id().containsAll(categoryIds1));
+                                .withQueryFilters(m -> m.categories().id().containsAll(categoryIds1))
+                                .plusQueryFilters(m -> m.id().isIn(asList(product1.getId(), product2.getId(), product3.getId())));
                         assertThat(client().executeBlocking(request)).has(onlyProducts(product1));
                     });
                 });
@@ -68,7 +66,8 @@ public class ProductCategoriesIdTermFilterSearchModelIntegrationTest extends Int
                 withProductInCategories(client(), categoryIds3, (Product product3) -> {
                     assertEventually(() -> {
                         final ProductProjectionSearch request = ProductProjectionSearch.ofStaged()
-                                .withQueryFilters(m -> m.categories().id().containsAny(categoryIds1));
+                                .withQueryFilters(m -> m.categories().id().containsAny(categoryIds1))
+                                .plusQueryFilters(m -> m.id().isIn(asList(product1.getId(), product2.getId(), product3.getId())));
                         assertThat(client().executeBlocking(request)).has(onlyProducts(product1, product2, product3));
                     });
                 });
@@ -86,7 +85,8 @@ public class ProductCategoriesIdTermFilterSearchModelIntegrationTest extends Int
                 withProductInCategories(client(), categoryIds3, (Product product3) -> {
                     assertEventually(() -> {
                         final ProductProjectionSearch request = ProductProjectionSearch.ofStaged()
-                                .withQueryFilters(m -> m.categories().id().containsAny(getCategoryIds("B-1")));
+                                .withQueryFilters(m -> m.categories().id().containsAny(getCategoryIds("B-1")))
+                                .plusQueryFilters(m -> m.id().isIn(asList(product1.getId(), product2.getId(), product3.getId())));
                         assertThat(client().executeBlocking(request)).has(onlyProducts(product1, product2));
                     });
                 });
@@ -104,7 +104,8 @@ public class ProductCategoriesIdTermFilterSearchModelIntegrationTest extends Int
                  withProductInCategories(client(), categoryIds3, (Product product3) -> {
                      assertEventually(() -> {
                          final ProductProjectionSearch request = ProductProjectionSearch.ofStaged()
-                                 .withQueryFilters(m -> m.categories().id().containsAnyIncludingSubtrees(getCategoryIds("C-2")));
+                                 .withQueryFilters(m -> m.categories().id().containsAnyIncludingSubtrees(getCategoryIds("C-2")))
+                                 .plusQueryFilters(m -> m.id().isIn(asList(product1.getId(), product2.getId(), product3.getId())));
                          assertThat(client().executeBlocking(request)).has(onlyProducts(product1));
                      });
                  });
@@ -122,7 +123,8 @@ public class ProductCategoriesIdTermFilterSearchModelIntegrationTest extends Int
                 withProductInCategories(client(), categoryIds3, (Product product3) -> {
                     assertEventually(() -> {
                         final ProductProjectionSearch request = ProductProjectionSearch.ofStaged()
-                                .withQueryFilters(m -> m.categories().id().containsAllIncludingSubtrees(getCategoryIds("C", "B-1")));
+                                .withQueryFilters(m -> m.categories().id().containsAllIncludingSubtrees(getCategoryIds("C", "B-1")))
+                                .plusQueryFilters(m -> m.id().isIn(asList(product1.getId(), product2.getId(), product3.getId())));
                         assertThat(client().executeBlocking(request)).has(onlyProducts(product1, product2));
                     });
                 });
@@ -143,7 +145,8 @@ public class ProductCategoriesIdTermFilterSearchModelIntegrationTest extends Int
                                 .withQueryFilters(m -> {
                                     final String categoryId = getCategoryIds("B-1").get(0);
                                     return m.categories().id().isInSubtree(categoryId);
-                                });
+                                })
+                                .plusQueryFilters(m -> m.id().isIn(asList(product1.getId(), product2.getId(), product3.getId())));
                         assertThat(client().executeBlocking(request)).has(onlyProducts(product1, product2));
                     });
                 });
@@ -165,7 +168,8 @@ public class ProductCategoriesIdTermFilterSearchModelIntegrationTest extends Int
                                     final List<String> categoryIdsSubtree = getCategoryIds("B");//somehow in B
                                     final List<String> categoryIdsDirectly = getCategoryIds("C-1-3");//but directly in C-1-3
                                     return m.categories().id().isInSubtreeOrInCategory(categoryIdsSubtree, categoryIdsDirectly);
-                                });
+                                })
+                                .plusQueryFilters(m -> m.id().isIn(asList(product1.getId(), product2.getId(), product3.getId())));
                         assertThat(client().executeBlocking(request)).has(onlyProducts(product2, product3));
                     });
                 });
@@ -186,7 +190,8 @@ public class ProductCategoriesIdTermFilterSearchModelIntegrationTest extends Int
                                 .plusFacets(m -> m.categories().id().withAlias("productsInA").onlyTermSubtree(getCategoryIds("A")))
                                 .plusFacets(m -> m.categories().id().withAlias("productsInB").onlyTermSubtree(getCategoryIds("B")))
                                 .plusFacets(m -> m.categories().id().withAlias("productsInAorB").onlyTermSubtree(getCategoryIds("A", "B")))
-                                .plusFacets(m -> m.categories().id().withAlias("productsInC2").onlyTermSubtree(getCategoryIds("C-2")));
+                                .plusFacets(m -> m.categories().id().withAlias("productsInC2").onlyTermSubtree(getCategoryIds("C-2")))
+                                .plusQueryFilters(m -> m.id().isIn(asList(product1.getId(), product2.getId(), product3.getId())));
                         final PagedSearchResult<ProductProjection> pagedSearchResult = client().executeBlocking(request);
 
                         assertThat(pagedSearchResult.getFilteredFacetResult("productsInA").getCount()).isEqualTo(2);
