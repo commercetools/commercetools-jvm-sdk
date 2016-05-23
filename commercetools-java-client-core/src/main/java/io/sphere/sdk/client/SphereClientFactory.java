@@ -14,7 +14,7 @@ import java.util.function.Supplier;
 import static io.sphere.sdk.utils.CompletableFutureUtils.successful;
 
 /**
- * A factory to instantiate SPHERE.IO Java clients which use {@link CompletionStage} as future implementation.
+ * A factory to instantiate platform Java clients which use {@link CompletionStage} as future implementation.
  *
  * {@include.example example.JavaClientInstantiationExample}
  */
@@ -23,7 +23,7 @@ public interface SphereClientFactory {
 
     /**
      * Creates a standard client with configurable service URLs. Intended for commercetools staff
-     * developing with a custom SPHERE.IO instance.
+     * developing with a custom platform instance.
      *
      * @param config configuration for the client
      * @return client

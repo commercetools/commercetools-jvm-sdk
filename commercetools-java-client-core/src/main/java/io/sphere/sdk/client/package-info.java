@@ -1,4 +1,4 @@
 /**
- * Provides types to connect to SPHERE.IO via HTTPS.
+ * Provides types to connect to the platform via HTTPS.
  */
 package io.sphere.sdk.client;

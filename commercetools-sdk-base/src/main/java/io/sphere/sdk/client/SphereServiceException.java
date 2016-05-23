@@ -9,7 +9,7 @@ import java.util.Optional;
 
 /**
  *
- * <span id="exception-summary">Exception thrown when SPHERE.IO responds<br>with a status code other than HTTP 2xx.</span>
+ * <span id="exception-summary">Exception thrown when the platform responds<br>with a status code other than HTTP 2xx.</span>
  *
  * <p>For inspiration how to create exceptions in unit tests:</p>
  *

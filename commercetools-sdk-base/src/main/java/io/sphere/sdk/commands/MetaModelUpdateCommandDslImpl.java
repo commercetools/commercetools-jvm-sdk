@@ -22,7 +22,7 @@ import static io.sphere.sdk.utils.SphereInternalUtils.listOf;
 import static java.util.Objects.requireNonNull;
 
 /**
- Internal base class to implement commands that change one resource in SPHERE.IO.
+ Internal base class to implement commands that change one resource in the platform.
  @param <T> the type of the result of the command
  @param <C> class which will serialized as JSON command body, most likely a template
  @param <E> type of the expansion model */

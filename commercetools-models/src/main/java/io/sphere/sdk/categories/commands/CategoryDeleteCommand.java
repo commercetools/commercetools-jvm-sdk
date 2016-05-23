@@ -7,7 +7,7 @@ import io.sphere.sdk.expansion.MetaModelReferenceExpansionDsl;
 import io.sphere.sdk.models.Versioned;
 
 /**
- * Deletes a category in SPHERE.IO.
+ * Deletes a category.
  *
  * {@include.example io.sphere.sdk.categories.commands.CategoryDeleteCommandIntegrationTest#execution()}
  */

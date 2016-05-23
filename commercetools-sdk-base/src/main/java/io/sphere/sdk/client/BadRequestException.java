@@ -1,7 +1,7 @@
 package io.sphere.sdk.client;
 
 /**
- * HTTP code 400 response from SPHERE.IO.
+ * HTTP code 400 response from the platform.
  *
  * <p>Typically the subclass {@link ErrorResponseException} is thrown.</p>
  *

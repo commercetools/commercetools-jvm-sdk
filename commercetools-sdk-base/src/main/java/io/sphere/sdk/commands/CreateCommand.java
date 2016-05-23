@@ -1,7 +1,7 @@
 package io.sphere.sdk.commands;
 
 /**
- * Command to create a resource in SPHERE.IO.
+ * Command to create a resource in the platform.
  *
  * @param <T> the type of the result of the command
  *

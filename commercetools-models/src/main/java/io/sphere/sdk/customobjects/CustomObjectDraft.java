@@ -63,7 +63,7 @@ public final class CustomObjectDraft<T> extends Base {
      * Creates a draft for updating a custom object. Optimistic concurrency control is used.
      * @param customObject the custom object to override (provides key, container and version)
      * @param newValue the value which should be assigned to the custom object
-     * @param valueTypeReference the type reference to deserialize the updated custom object from the SPHERE.IO response
+     * @param valueTypeReference the type reference to deserialize the updated custom object from the platform response
      * @param <T>  The type of the value of the custom object.
      * @return the draft
      */
@@ -87,7 +87,7 @@ public final class CustomObjectDraft<T> extends Base {
      * Creates a draft for updating a custom object. Does not use optimistic concurrency control so the last update wins.
      * @param customObject the custom object to override (provides key, container and version)
      * @param newValue the value which should be assigned to the custom object
-     * @param valueTypeReference the type reference to deserialize the updated custom object from the SPHERE.IO response
+     * @param valueTypeReference the type reference to deserialize the updated custom object from the platform response
      * @param <T> The type of the value of the custom object.
      * @return the draft
      */
@@ -113,7 +113,7 @@ public final class CustomObjectDraft<T> extends Base {
      * @param container the container
      * @param key the key
      * @param value the value which should be assigned to the custom object
-     * @param valueTypeReference the type reference to deserialize the updated custom object from the SPHERE.IO response
+     * @param valueTypeReference the type reference to deserialize the updated custom object from the platform response
      * @param <T> The type of the value of the custom object.
      * @return the draft
      */
@@ -140,7 +140,7 @@ public final class CustomObjectDraft<T> extends Base {
      * @param key the key
      * @param value the value which should be assigned to the custom object
      * @param version the version for optimistic locking
-     * @param valueTypeReference the type reference to deserialize the updated custom object from the SPHERE.IO response
+     * @param valueTypeReference the type reference to deserialize the updated custom object from the platform response
      * @param <T> The type of the value of the custom object.
      * @return the draft
      */

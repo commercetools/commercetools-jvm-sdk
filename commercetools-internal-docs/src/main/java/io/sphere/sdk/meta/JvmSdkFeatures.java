@@ -20,7 +20,7 @@ import io.sphere.sdk.models.Base;
 
 <h3>Domain models are immutable</h3>
 <p>Domain models are no plain old Java objects since the client does not pose control over them, but needs to send
- update commands to SPHERE.IO. Thus setters, as provided by <em>other</em> cloud services are not applicable in SPHERE.IO.</p> 
+ update commands to commercetools. Thus setters, as provided by <em>other</em> cloud services are not applicable in the platform.</p>
  <p>The approach to synchronize the model in the background blocks the caller thread and makes it hard to impossible to tune error handling, timeouts and recover strategies.
  Our approach makes it explicit, that an operation can be performed in the background, that the operation takes time and that the operation might fail.</p>
 

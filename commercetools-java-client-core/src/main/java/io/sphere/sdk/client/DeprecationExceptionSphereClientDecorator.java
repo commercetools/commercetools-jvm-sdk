@@ -10,7 +10,7 @@ import java.util.concurrent.CompletionStage;
 /**
  * Decorator for {@link SphereClient}s to throw exceptions on deprecated http calls.
  *
- * <p>If SPHERE.IO returns a {@value io.sphere.sdk.client.SphereHttpHeaders#X_DEPRECATION_NOTICE} header field,
+ * <p>If the platform returns a {@value io.sphere.sdk.client.SphereHttpHeaders#X_DEPRECATION_NOTICE} header field,
  * it does not deserialize the response object in {@link SphereRequest#deserialize(HttpResponse)} but throws a {@link SphereDeprecationException}.</p>
  */
 public final class DeprecationExceptionSphereClientDecorator extends SphereClientDecorator implements SphereClient {

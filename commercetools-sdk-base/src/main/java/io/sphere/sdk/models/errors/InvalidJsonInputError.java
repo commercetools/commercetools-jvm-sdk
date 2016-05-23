@@ -3,7 +3,7 @@ package io.sphere.sdk.models.errors;
 import com.fasterxml.jackson.annotation.JsonCreator;
 
 /**
- * Invalid JSON was sent to SPHERE.IO.
+ * Invalid JSON was sent to the platform.
  */
 public final class InvalidJsonInputError extends SphereError {
     private final String detailedErrorMessage;

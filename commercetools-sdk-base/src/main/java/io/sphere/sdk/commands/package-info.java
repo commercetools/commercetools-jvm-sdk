@@ -1,4 +1,4 @@
 /**
- * This package provide tools to change objects in the SPHERE.IO backend.
+ * This package provide tools to change objects in the platform.
  */
 package io.sphere.sdk.commands;

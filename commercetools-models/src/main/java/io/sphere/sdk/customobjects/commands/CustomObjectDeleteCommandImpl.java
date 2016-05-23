@@ -12,7 +12,7 @@ import io.sphere.sdk.json.SphereJsonUtils;
 import static java.lang.String.format;
 
 /**
- * Deletes a custom object in SPHERE.IO.
+ * Deletes a custom object in the platform.
  *
  *
  */

@@ -7,7 +7,7 @@ import io.sphere.sdk.customobjects.CustomObject;
 import io.sphere.sdk.json.TypeReferences;
 
 /**
- * <p>Deletes a custom object in SPHERE.IO.</p>
+ * <p>Deletes a custom object in the platform.</p>
  *
  * {@include.example io.sphere.sdk.customobjects.commands.CustomObjectDeleteCommandIntegrationTest#demo()}
  *
@@ -18,7 +18,7 @@ public interface CustomObjectDeleteCommand<T> extends DeleteCommand<CustomObject
     /**
      * Deletes a custom object without optimistic concurrency control and uses the delete endpoint via container and key and returns the old custom object with the in {@code valueTypeReference}specified value type.
      * @param customObject the custom object to delete
-     * @param valueTypeReference the type reference to deserialize the updated custom object from the SPHERE.IO response
+     * @param valueTypeReference the type reference to deserialize the updated custom object from the platform response
      * @param <T> type of the value of the custom object
      * @return custom object
      */
@@ -41,7 +41,7 @@ public interface CustomObjectDeleteCommand<T> extends DeleteCommand<CustomObject
      * Deletes a custom object without optimistic concurrency control and uses the delete endpoint via container and key and returns the old custom object with the in {@code valueTypeReference}specified value type.
      * @param container the container name of the custom object to delete
      * @param key the key name of the custom object to delete
-     * @param valueTypeReference the type reference to deserialize the updated custom object from the SPHERE.IO response
+     * @param valueTypeReference the type reference to deserialize the updated custom object from the platform response
      * @param <T> type of the value of the custom object
      * @return custom object with a JsonNode value
      */
@@ -98,7 +98,7 @@ public interface CustomObjectDeleteCommand<T> extends DeleteCommand<CustomObject
      * Convenience method to not specify the {@link com.fasterxml.jackson.core.type.TypeReference} but lacking the accessible value in the result.
      * @param id the id of the custom object to delete
      * @param version the version of the custom object to delete
-     * @param valueTypeReference the type reference to deserialize the updated custom object from the SPHERE.IO response
+     * @param valueTypeReference the type reference to deserialize the updated custom object from the platform response
      * @param <T> type of the value of the custom object
      * @return custom object with a JsonNode value
      */

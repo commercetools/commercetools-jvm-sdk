@@ -25,16 +25,16 @@ import java.util.function.Supplier;
  *  <p>The child loggers of sphere are the endpoints, so for example {@code "sphere.categories"} for categories and
  *  {@code "sphere.product-types"} for product types.</p>
  *  <p>The grandchild loggers refer to the action. {@code "sphere.categories.requests"} refers to
- *  performing requests per HTTPS to SPHERE.IO for categories, {@code "sphere.categories.responses"} refers to the responses of SPHERE.IO.
+ *  performing requests per HTTPS to commercetools for categories, {@code "sphere.categories.responses"} refers to the responses of the platform.
  *  {@code "sphere.categories.objects"} is for non HTTP API stuff like local object creation.
  *  </p>
  *
  *  The logger makes use of different log levels, so for example {@code "sphere.categories.responses"} logs on debug level the
- *  http response from SPHERE.io (abbreviated example):
+ *  http response from the platform (abbreviated example):
  *
  *  <pre>10:59:18.623 [ForkJoinPool.commonPool-worker-3] DEBUG sphere.categories.responses - io.sphere.sdk.requests.HttpResponse@39984ae7[statusCode=200,responseBody={"offset":0,"count":4,"total":4,"results":[{"id":"2c41b33e-2d8e-415c-a4b7-f62628fa06e3","version":1,"name":{"en":"Hats"}, [...]</pre>
  *
- * {@code "sphere.categories.responses"} logs on trace level additional the formatted http response from SPHERE.io (abbreviated example):
+ * {@code "sphere.categories.responses"} logs on trace level additional the formatted http response from the platform (abbreviated example):
  *
  * <pre>10:59:18.657 [ForkJoinPool.commonPool-worker-3] TRACE sphere.categories.responses - 200
  {

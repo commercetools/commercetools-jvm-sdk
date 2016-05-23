@@ -4,7 +4,7 @@ import io.sphere.sdk.models.Base;
 import io.sphere.sdk.queries.QueryPredicate;
 
 /**
- <p>The Query API is for reading specific resources from SPHERE.IO.
+ <p>The Query API is for reading specific resources from the platform.
  The resources can be sorted and fetched in batches.</p>
 
  <p>First, you need to specify a query, for example:</p>
@@ -15,11 +15,11 @@ import io.sphere.sdk.queries.QueryPredicate;
 
  {@include.example io.sphere.sdk.queries.QueryDemo#executeQuery()}
 
- <p>The successful execution of a {@link io.sphere.sdk.queries.Query} results in {@link io.sphere.sdk.queries.PagedQueryResult} of a SPHERE.IO resource or view.
+ <p>The successful execution of a {@link io.sphere.sdk.queries.Query} results in {@link io.sphere.sdk.queries.PagedQueryResult} of a platform resource or view.
  While the {@link io.sphere.sdk.queries.Query} interface just contains information to execute a query,
  the interface {@link io.sphere.sdk.queries.QueryDsl} also provides a domain specific language to tune a query.</p>
 
- <p>For most of the SPHERE.IO resources you can find classes to support you in formulating valid queries (in a sub package queries).</p>
+ <p>For most of the platform resources you can find classes to support you in formulating valid queries (in a sub package queries).</p>
 
  <p>The following snippet creates a query which selects all products without a specific order.</p>
 
@@ -148,7 +148,7 @@ Like for predicates, you can traverse the query model tree in the same way to sp
 
  <p>Assumption: in a product query all products are sorted by ID by default.</p>
 
- A query might produce more results than you want to consume or SPHERE.IO lets you consume. At the time of
+ A query might produce more results than you want to consume or the platform lets you consume. At the time of
  writing you can only fetch up to 500 objects at once.
 
  <p>Imagine you have 15 products:</p>
@@ -160,7 +160,7 @@ Like for predicates, you can traverse the query model tree in the same way to sp
  {@include.example io.sphere.sdk.meta.QueryDocumentationTest#queryAllExampleInPaginationContext()}
 
  <p>As long as you do not specify a limitation of how many resources should be fetched with one query
- by {@link io.sphere.sdk.queries.QueryDsl#withLimit(Long)}, the SPHERE.IO backend will deliver up to 20 items so that as a result all (15 products) will be loaded.</p>
+ by {@link io.sphere.sdk.queries.QueryDsl#withLimit(Long)}, the platform will deliver up to 20 items so that as a result all (15 products) will be loaded.</p>
 
  <p>If you specify a limit of 4 to a query as shown below, this query will only load the first 4 products:</p>
  {@include.example io.sphere.sdk.meta.QueryDocumentationTest#limitProductQueryTo4()}

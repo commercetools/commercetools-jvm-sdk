@@ -17,7 +17,7 @@ import java.util.Iterator;
 import java.util.Map;
 
 /**
- * Public utility class to work with JSON from SPHERE.IO.
+ * Public utility class to work with JSON from the commercetools platform.
  *
  * <p>If an error occurs, the {@link JsonException} (a {@link RuntimeException}) will be thrown:</p>
  *
@@ -49,7 +49,7 @@ public final class SphereJsonUtils {
     }
 
     /**
-     * Converts a SPHERE.IO Java object to JSON as String (one liner).
+     * Converts a commercetools platform Java object to JSON as String (one liner).
      *
      * {@include.example io.sphere.sdk.json.SphereJsonUtilsTest#toJsonString()}
      *
@@ -61,7 +61,7 @@ public final class SphereJsonUtils {
     }
 
     /**
-     * Converts a SPHERE.IO Java object to JSON as String (pretty).
+     * Converts a commercetools platform Java object to JSON as String (pretty).
      *
      * {@include.example io.sphere.sdk.json.SphereJsonUtilsTest#toPrettyJsonString()}
      *
@@ -73,7 +73,7 @@ public final class SphereJsonUtils {
     }
 
     /**
-     * Converts a SPHERE.IO Java object to JSON as {@link JsonNode}.
+     * Converts a commercetools platform Java object to JSON as {@link JsonNode}.
      * <p>If {@code value} is of type String and contains JSON data, that will be ignored, {@code value} will be treated as just any String.
      * If you want to parse a JSON String to a JsonNode use {@link SphereJsonUtils#parse(java.lang.String)} instead.</p>
      *
@@ -226,7 +226,7 @@ public final class SphereJsonUtils {
     }
 
     /**
-     * Creates a new {@link ObjectNode} created by the SPHERE.IO object mapper.
+     * Creates a new {@link ObjectNode} created by the commercetools platform object mapper.
      *
      * {@include.example io.sphere.sdk.json.SphereJsonUtilsTest#readObjectFromJsonNodeWithClass()}
      *

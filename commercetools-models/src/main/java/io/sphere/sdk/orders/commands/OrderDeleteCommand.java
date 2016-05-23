@@ -7,7 +7,7 @@ import io.sphere.sdk.orders.Order;
 import io.sphere.sdk.orders.expansion.OrderExpansionModel;
 
 /**
- * Deletes an order in SPHERE.IO.
+ * Deletes an order.
  *
  */
 public interface OrderDeleteCommand extends MetaModelReferenceExpansionDsl<Order, OrderDeleteCommand, OrderExpansionModel<Order>>, DeleteCommand<Order> {

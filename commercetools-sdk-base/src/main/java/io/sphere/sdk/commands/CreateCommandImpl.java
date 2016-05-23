@@ -8,7 +8,7 @@ import static io.sphere.sdk.json.SphereJsonUtils.toJsonString;
 import static java.util.Objects.requireNonNull;
 
 /**
- * Base class to implement commands which create an resource in SPHERE.IO.
+ * Base class to implement commands which create a resource in the platform.
  *
  * @param <T> the type of the result of the command
  * @param <D> class which will serialized as JSON command body, most likely a template
