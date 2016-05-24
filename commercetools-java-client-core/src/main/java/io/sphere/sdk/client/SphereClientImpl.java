@@ -1,11 +1,11 @@
 package io.sphere.sdk.client;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import io.sphere.sdk.json.JsonException;
 import io.sphere.sdk.http.*;
+import io.sphere.sdk.json.JsonException;
+import io.sphere.sdk.json.SphereJsonUtils;
 import io.sphere.sdk.meta.BuildInfo;
 import io.sphere.sdk.models.SphereException;
-import io.sphere.sdk.json.SphereJsonUtils;
 import io.sphere.sdk.utils.SphereInternalLogger;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,8 +16,6 @@ import java.util.concurrent.CompletionStage;
 
 import static io.sphere.sdk.client.HttpResponseBodyUtils.bytesToString;
 import static io.sphere.sdk.utils.SphereInternalLogger.getLogger;
-import static java.lang.String.format;
-import static java.util.Arrays.asList;
 
 final class SphereClientImpl extends AutoCloseableService implements SphereClient {
     private static final Logger classLogger = LoggerFactory.getLogger(SphereClient.class);
@@ -40,6 +38,13 @@ final class SphereClientImpl extends AutoCloseableService implements SphereClien
     }
 
     private <T> CompletionStage<T> execute(final SphereRequest<T> sphereRequest, final String token) {
+
+
+        System.err.println(Thread.currentThread());
+        System.err.println(Thread.currentThread().getName());
+
+
+
         final HttpRequest httpRequest = createHttpRequest(sphereRequest, token);
 
         final SphereInternalLogger logger = getLogger(httpRequest);

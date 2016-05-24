@@ -6,12 +6,15 @@ import io.sphere.sdk.http.HttpClient;
 import io.sphere.sdk.http.HttpRequest;
 import io.sphere.sdk.http.HttpResponse;
 import io.sphere.sdk.json.JsonException;
+import io.sphere.sdk.projects.Project;
+import io.sphere.sdk.projects.queries.ProjectGet;
 import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.test.IntegrationTest;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+import java.time.Duration;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionException;
 import java.util.concurrent.CompletionStage;
@@ -24,6 +27,30 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 public class SphereAuthExceptionIntegrationTest extends IntegrationTest {
     @Rule
     public ExpectedException thrown = ExpectedException.none();
+
+    @Test
+    public void misconfigurationDomain() throws InterruptedException {
+        try(final HttpClient httpClient = newHttpClient()) {
+            final String authUrl = "http://sdfjifdsjifdsjfdsjdfsjidsfjidfs.de";
+            final String apiUrl = getSphereClientConfig().getApiUrl();
+            final SphereClientConfig config = SphereClientConfig.of("projectKey", "clientId", "clientSecret", authUrl, apiUrl);
+            try (final SphereClient client = SphereClientFactory.of().createClient(config)) {
+                System.err.println(client);
+                try {
+                    final Project project = SphereClientUtils.blockingWait(client.execute(ProjectGet.of()), Duration.ofMinutes(1000));
+
+                    System.err.println(project);
+                }catch (final Exception e) {
+                    System.err.println("e");
+                    System.err.println(e.getClass());
+                    System.err.println(e);
+                    e.printStackTrace();
+
+                    Thread.sleep(30000);
+                }
+            }
+        }
+    }
 
     @Test
     public void invalidCredentialsToGetToken() throws Throwable {
