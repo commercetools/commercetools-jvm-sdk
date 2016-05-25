@@ -15,7 +15,7 @@ final class RetryOutputImpl<P, R> extends Base implements RetryOutput<P, R> {
     }
 
     @Override
-    public P getParameterObject() {
+    public P getParameter() {
         return parameterObject;
     }
 

@@ -62,7 +62,7 @@ final class AsyncRetrySupervisorImpl extends Base implements AsyncRetrySuperviso
             output.getStage().whenComplete((res, error) -> {
                 final boolean isErrorCase = error != null;
                 if (isErrorCase) {
-                    final AttemptErrorResult<P> attemptErrorResult = new AttemptErrorResultImpl<>(error, Instant.now(), output.getParameterObject());
+                    final AttemptErrorResult<P> attemptErrorResult = new AttemptErrorResultImpl<>(error, Instant.now(), output.getParameter());
                     final RetryOperationContext<P, R> nextContext = getNextContext(attemptErrorResult, retryOperationContext);
                     handle(nextContext);
                 } else {

@@ -5,5 +5,5 @@ import java.util.concurrent.CompletionStage;
 public interface RetryOutput<P, R> {
     CompletionStage<R> getStage();
 
-    P getParameterObject();
+    P getParameter();
 }
