@@ -29,7 +29,7 @@ final class RetryOperationContextImpl<P, R> extends Base implements RetryOperati
     }
 
     @Override
-    public Long getAttemptCount() {
+    public Long getAttempt() {
         return attemptCount;
     }
 

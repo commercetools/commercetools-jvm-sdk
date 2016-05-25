@@ -90,7 +90,7 @@ public class AsyncRetrySupervisorTest {
     @Test
     public void scheduledRetry() throws Exception {
         try (final Service service = new Failing2TimesServiceImpl()) {
-            final List<RetryRule> retryRules = singletonList(RetryRule.ofOperation(RetryOperations.scheduledRetry(3, o -> Duration.ofMillis(o.getAttemptCount() * 100))));
+            final List<RetryRule> retryRules = singletonList(RetryRule.ofOperation(RetryOperations.scheduledRetry(3, o -> Duration.ofMillis(o.getAttempt() * 100))));
             try(final AsyncRetrySupervisor supervisor = AsyncRetrySupervisor.of(retryRules)) {
                 final CompletionStage<Integer> bar = supervisor.supervise(service, service::apply, "bar");
                 assertThat(waitAndGet(bar)).isEqualTo(3);

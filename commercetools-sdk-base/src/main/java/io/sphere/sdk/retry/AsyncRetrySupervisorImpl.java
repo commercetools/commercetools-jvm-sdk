@@ -21,7 +21,9 @@ final class AsyncRetrySupervisorImpl extends Base implements AsyncRetrySuperviso
     }
 
     @Override
-    public <P, R> CompletionStage<R> supervise(final AutoCloseable service, final Function<P, CompletionStage<R>> f, @Nullable final P parameterObject) {
+    public <P, R> CompletionStage<R> supervise(final AutoCloseable service,
+                                               final Function<P, CompletionStage<R>> f,
+                                               @Nullable final P parameterObject) {
         final CompletionStage<R> initialCompletionStage = f.apply(parameterObject);
         final CompletableFuture<R> result = new CompletableFuture<>();
         initialCompletionStage.whenComplete((res, firstError) -> {
@@ -54,7 +56,7 @@ final class AsyncRetrySupervisorImpl extends Base implements AsyncRetrySuperviso
     }
 
     private <P, R> void handle(final RetryOperationContext<P, R> retryOperationContext) {
-        final RetryOperation retryOperation = getRetryOperation(retryOperationContext);
+        final RetryOperation retryOperation = getRetryOperation(new RetryRuleContextImpl<>(retryOperationContext.getAttempt(), retryOperationContext.getLatest().getError(), retryOperationContext.getLatest().getParameter()));
         @Nullable final RetryOutput<P, R> output = retryOperation.handle(retryOperationContext);
         if (output != null) {
             output.getStage().whenComplete((res, error) -> {
@@ -70,16 +72,16 @@ final class AsyncRetrySupervisorImpl extends Base implements AsyncRetrySuperviso
         }
     }
 
-    private <P> RetryOperation getRetryOperation(final RetryContext<P> retryContext) {
+    private <P> RetryOperation getRetryOperation(final RetryRuleContext retryRuleContext) {
         return retryRules.stream()
-                .filter(rule -> rule.test(retryContext))
+                .filter(rule -> rule.test(retryRuleContext))
                 .findFirst()
-                .map(rule -> rule.selectRetryOperation(retryContext))
+                .map(rule -> rule.selectRetryOperation(retryRuleContext))
                 .orElseGet(() -> RetryOperations.giveUpAndSendLatestException());
     }
 
     private <P, R> RetryOperationContext<P, R> getNextContext(final AttemptErrorResult<P> attemptErrorResult, final RetryOperationContext<P, R> parentContext) {
-        final long attemptCount = parentContext.getAttemptCount() + 1;
+        final long attemptCount = parentContext.getAttempt() + 1;
         final AttemptErrorResult<P> firstAttemptErrorResult = parentContext.getFirst();
         return new RetryOperationContextImpl<>(attemptCount, firstAttemptErrorResult, attemptErrorResult, parentContext.getResult(), parentContext.getFunction(), parentContext.getService(), this::schedule);
     }

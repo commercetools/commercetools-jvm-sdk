@@ -4,11 +4,10 @@ import javax.annotation.Nullable;
 import java.time.Instant;
 
 public interface AttemptErrorResult<P> {
-    Throwable getThrowable();
+    Throwable getError();
 
     Instant getTimestamp();
 
     @Nullable
-    P getParameterObject();
-    //TODO check generics typing
+    P getParameter();
 }

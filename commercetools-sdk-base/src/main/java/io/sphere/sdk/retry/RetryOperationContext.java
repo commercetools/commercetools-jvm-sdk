@@ -6,16 +6,13 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionStage;
 import java.util.function.Function;
 
-public interface RetryOperationContext<P, R> extends RetryContext {
-    @Override
-    Long getAttemptCount();
+public interface RetryOperationContext<P, R> {
+    Long getAttempt();
 
     @Nonnull
-    @Override
     AttemptErrorResult<P> getFirst();
 
     @Nonnull
-    @Override
     AttemptErrorResult<P> getLatest();
 
     Function<P, CompletionStage<R>> getFunction();

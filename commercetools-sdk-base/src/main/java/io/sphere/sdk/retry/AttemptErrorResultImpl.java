@@ -15,11 +15,11 @@ final class AttemptErrorResultImpl<P> extends Base implements AttemptErrorResult
         this.parameterObject = parameterObject;
     }
 
-    public Throwable getThrowable() {
+    public Throwable getError() {
         return error;
     }
 
-    public P getParameterObject() {
+    public P getParameter() {
         return parameterObject;
     }
 

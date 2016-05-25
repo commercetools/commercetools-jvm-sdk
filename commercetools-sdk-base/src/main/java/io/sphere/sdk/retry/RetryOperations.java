@@ -18,12 +18,12 @@ public final class RetryOperations {
         return new RetryOperationImpl() {
             @Override
             public <P, R> RetryOutput<P, R> handle(final RetryOperationContext<P, R> retryOperationContext) {
-                if (retryOperationContext.getAttemptCount() > maxAttempts) {
-                    return giveUpUsingThrowable(retryOperationContext, retryOperationContext.getLatest().getThrowable());
+                if (retryOperationContext.getAttempt() > maxAttempts) {
+                    return giveUpUsingThrowable(retryOperationContext, retryOperationContext.getLatest().getError());
                 } else {
                     final Duration duration = f.apply(retryOperationContext);
                     final CompletableFuture<R> future = new CompletableFuture<>();
-                    final P parameterObject = retryOperationContext.getLatest().getParameterObject();
+                    final P parameterObject = retryOperationContext.getLatest().getParameter();
                     retryOperationContext.schedule(() -> {
                         final CompletionStage<R> completionStage = retryOperationContext.getFunction().apply(parameterObject);
                         CompletableFutureUtils.transferResult(completionStage, future);
@@ -49,7 +49,7 @@ public final class RetryOperations {
         return new RetryOperationImpl() {
             @Override
             public <P, R> RetryOutput<P, R> handle(final RetryOperationContext<P, R> retryOperationContext) {
-                shutdownAndThrow(retryOperationContext, retryOperationContext.getFirst().getThrowable());
+                shutdownAndThrow(retryOperationContext, retryOperationContext.getFirst().getError());
                 return null;
             }
 
@@ -64,7 +64,7 @@ public final class RetryOperations {
         return new RetryOperationImpl() {
             @Override
             public <P, R> RetryOutput<P, R> handle(final RetryOperationContext<P, R> retryOperationContext) {
-                shutdownAndThrow(retryOperationContext, retryOperationContext.getLatest().getThrowable());
+                shutdownAndThrow(retryOperationContext, retryOperationContext.getLatest().getError());
                 return null;
             }
 
@@ -79,7 +79,7 @@ public final class RetryOperations {
         return new RetryOperationImpl() {
             @Override
             public <P, R> RetryOutput<P, R> handle(final RetryOperationContext<P, R> retryOperationContext) {
-                return giveUpUsingThrowable(retryOperationContext, retryOperationContext.getFirst().getThrowable());
+                return giveUpUsingThrowable(retryOperationContext, retryOperationContext.getFirst().getError());
             }
 
             @Override
@@ -93,7 +93,7 @@ public final class RetryOperations {
         return new RetryOperationImpl() {
             @Override
             public <P, R> RetryOutput<P, R> handle(final RetryOperationContext<P, R> retryOperationContext) {
-                return giveUpUsingThrowable(retryOperationContext, retryOperationContext.getLatest().getThrowable());
+                return giveUpUsingThrowable(retryOperationContext, retryOperationContext.getLatest().getError());
             }
 
             @Override
@@ -109,10 +109,10 @@ public final class RetryOperations {
         return new RetryOperationImpl() {
             @Override
             public <P, R> RetryOutput<P, R> handle(final RetryOperationContext<P, R> retryOperationContext) {
-                if (retryOperationContext.getAttemptCount() > maxAttempts) {
-                    return giveUpUsingThrowable(retryOperationContext, retryOperationContext.getLatest().getThrowable());
+                if (retryOperationContext.getAttempt() > maxAttempts) {
+                    return giveUpUsingThrowable(retryOperationContext, retryOperationContext.getLatest().getError());
                 } else {
-                    final P parameterObject = retryOperationContext.getLatest().getParameterObject();
+                    final P parameterObject = retryOperationContext.getLatest().getParameter();
                     final CompletionStage<R> completionStage = retryOperationContext.getFunction().apply(parameterObject);
                     return new RetryOutputImpl<>(completionStage, parameterObject);
                 }
