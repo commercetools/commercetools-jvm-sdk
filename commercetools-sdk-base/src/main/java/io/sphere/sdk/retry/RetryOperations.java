@@ -1,10 +1,48 @@
 package io.sphere.sdk.retry;
 
+import io.sphere.sdk.utils.CompletableFutureUtils;
+
+import java.time.Duration;
+import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionStage;
+import java.util.function.Function;
 
 public final class RetryOperations {
 
     private RetryOperations() {
+    }
+
+    public static RetryOperation scheduledRetry(final long maxAttempts, final Function<RetryOperationContext, Duration> f) {
+        validateMaxAttempts(maxAttempts);
+
+        return new RetryOperationImpl() {
+            @Override
+            public <P, R> RetryOutput<P, R> handle(final RetryOperationContext<P, R> retryOperationContext) {
+                if (retryOperationContext.getAttemptCount() > maxAttempts) {
+                    return giveUpUsingThrowable(retryOperationContext, retryOperationContext.getLatest().getThrowable());
+                } else {
+                    final Duration duration = f.apply(retryOperationContext);
+                    final CompletableFuture<R> future = new CompletableFuture<>();
+                    final P parameterObject = retryOperationContext.getLatest().getParameterObject();
+                    retryOperationContext.schedule(() -> {
+                        final CompletionStage<R> completionStage = retryOperationContext.getFunction().apply(parameterObject);
+                        CompletableFutureUtils.transferResult(completionStage, future);
+                    }, duration);
+                    return new RetryOutputImpl<>(future, parameterObject);
+                }
+            }
+
+            @Override
+            protected String getDescription() {
+                return "schedule retry retry up to " + maxAttempts + " times";
+            }
+        };
+    }
+
+    private static void validateMaxAttempts(final long maxAttempts) {
+        if (maxAttempts < 1) {
+            throw new IllegalArgumentException("Max attempts must be greater than 0.");
+        }
     }
 
     public static RetryOperation shutdownServiceAndSendFirstException() {
@@ -41,8 +79,7 @@ public final class RetryOperations {
         return new RetryOperationImpl() {
             @Override
             public <P, R> RetryOutput<P, R> handle(final RetryOperationContext<P, R> retryOperationContext) {
-                giveUpUsingThrowable(retryOperationContext, retryOperationContext.getFirst().getThrowable());
-                return null;
+                return giveUpUsingThrowable(retryOperationContext, retryOperationContext.getFirst().getThrowable());
             }
 
             @Override
@@ -56,8 +93,7 @@ public final class RetryOperations {
         return new RetryOperationImpl() {
             @Override
             public <P, R> RetryOutput<P, R> handle(final RetryOperationContext<P, R> retryOperationContext) {
-                giveUpUsingThrowable(retryOperationContext, retryOperationContext.getLatest().getThrowable());
-                return null;
+                return giveUpUsingThrowable(retryOperationContext, retryOperationContext.getLatest().getThrowable());
             }
 
             @Override
@@ -67,17 +103,14 @@ public final class RetryOperations {
         };
     }
 
-    public static RetryOperation immediateRetries(final long maxAttempt) {
-        if (maxAttempt < 1) {
-            throw new IllegalArgumentException("Max attempts must be greater than 0.");
-        }
+    public static RetryOperation immediateRetries(final long maxAttempts) {
+        validateMaxAttempts(maxAttempts);
 
         return new RetryOperationImpl() {
             @Override
             public <P, R> RetryOutput<P, R> handle(final RetryOperationContext<P, R> retryOperationContext) {
-                if (retryOperationContext.getAttemptCount() > maxAttempt) {
-                    giveUpUsingThrowable(retryOperationContext, retryOperationContext.getLatest().getThrowable());
-                    return null;
+                if (retryOperationContext.getAttemptCount() > maxAttempts) {
+                    return giveUpUsingThrowable(retryOperationContext, retryOperationContext.getLatest().getThrowable());
                 } else {
                     final P parameterObject = retryOperationContext.getLatest().getParameterObject();
                     final CompletionStage<R> completionStage = retryOperationContext.getFunction().apply(parameterObject);
@@ -87,7 +120,7 @@ public final class RetryOperations {
 
             @Override
             protected String getDescription() {
-                return "immediate retry up to " + maxAttempt + " times";
+                return "immediate retry up to " + maxAttempts + " times";
             }
         };
     }

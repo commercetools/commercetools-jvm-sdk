@@ -1,6 +1,7 @@
 package io.sphere.sdk.retry;
 
 import javax.annotation.Nonnull;
+import java.time.Duration;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionStage;
 import java.util.function.Function;
@@ -22,4 +23,6 @@ public interface RetryOperationContext<P, R> extends RetryContext {
     CompletableFuture<R> getResult();
 
     AutoCloseable getService();
+
+    void schedule(final Runnable runnable, final Duration durationToWaitBeforeStarting);
 }

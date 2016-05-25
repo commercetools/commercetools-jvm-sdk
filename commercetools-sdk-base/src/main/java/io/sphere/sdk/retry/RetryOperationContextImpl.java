@@ -3,8 +3,10 @@ package io.sphere.sdk.retry;
 import io.sphere.sdk.models.Base;
 
 import javax.annotation.Nonnull;
+import java.time.Duration;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionStage;
+import java.util.function.BiConsumer;
 import java.util.function.Function;
 
 final class RetryOperationContextImpl<P, R> extends Base implements RetryOperationContext<P, R> {
@@ -14,14 +16,16 @@ final class RetryOperationContextImpl<P, R> extends Base implements RetryOperati
     final CompletableFuture<R> result;
     final Function<P, CompletionStage<R>> f;
     private final AutoCloseable closeable;
+    private final BiConsumer<Runnable, Duration> scheduler;
 
-    RetryOperationContextImpl(final Long attemptCount, final AttemptErrorResult first, final AttemptErrorResult latest, final CompletableFuture<R> result, final Function<P, CompletionStage<R>> f, final AutoCloseable closeable) {
+    RetryOperationContextImpl(final Long attemptCount, final AttemptErrorResult first, final AttemptErrorResult latest, final CompletableFuture<R> result, final Function<P, CompletionStage<R>> f, final AutoCloseable closeable, final BiConsumer<Runnable, Duration> scheduler) {
         this.first = first;
         this.latest = latest;
         this.attemptCount = attemptCount;
         this.result = result;
         this.f = f;
         this.closeable = closeable;
+        this.scheduler = scheduler;
     }
 
     @Override
@@ -51,5 +55,10 @@ final class RetryOperationContextImpl<P, R> extends Base implements RetryOperati
 
     public AutoCloseable getService() {
         return closeable;
+    }
+
+    @Override
+    public void schedule(final Runnable runnable, final Duration durationToWaitBeforeStarting) {
+        scheduler.accept(runnable, durationToWaitBeforeStarting);
     }
 }

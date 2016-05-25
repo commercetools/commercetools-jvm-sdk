@@ -5,6 +5,8 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.annotation.Nullable;
+
 abstract class RetryOperationImpl extends Base implements RetryOperation {
     private static final Logger logger = LoggerFactory.getLogger(RetryOperation.class);
 
@@ -15,20 +17,25 @@ abstract class RetryOperationImpl extends Base implements RetryOperation {
         return new ToStringBuilder(this).append("description", getDescription()).build();
     }
 
-    protected <P, R> void giveUpUsingThrowable(final RetryOperationContext<P, R> retryOperationContext, final Throwable throwable) {
+    @Nullable
+    protected <P, R> RetryOutput<P, R> giveUpUsingThrowable(final RetryOperationContext<P, R> retryOperationContext, final Throwable throwable) {
         retryOperationContext.getResult().completeExceptionally(throwable);
+        return null;
     }
 
-    protected <P, R> void shutdown(final RetryOperationContext<P, R> retryOperationContext) {
+    @Nullable
+    protected <P, R> RetryOutput<P, R> shutdown(final RetryOperationContext<P, R> retryOperationContext) {
         try {
             retryOperationContext.getService().close();
         } catch (Exception e) {
             logger.error("Error occurred while closing service in retry strategy.", e);
         }
+        return null;
     }
 
-    protected <P, R> void shutdownAndThrow(final RetryOperationContext<P, R> retryOperationContext, final Throwable throwable) {
+    @Nullable
+    protected <P, R> RetryOutput<P, R> shutdownAndThrow(final RetryOperationContext<P, R> retryOperationContext, final Throwable throwable) {
         shutdown(retryOperationContext);
-        giveUpUsingThrowable(retryOperationContext, throwable);
+        return giveUpUsingThrowable(retryOperationContext, throwable);
     }
 }
