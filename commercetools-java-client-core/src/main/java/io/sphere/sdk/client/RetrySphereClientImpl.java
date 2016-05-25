@@ -18,6 +18,6 @@ final class RetrySphereClientImpl extends SphereClientDecorator {
 
     @Override
     public <T> CompletionStage<T> execute(final SphereRequest<T> sphereRequest) {
-        return supervisor.supervise(super::execute, sphereRequest);
+        return supervisor.supervise(this, super::execute, sphereRequest);
     }
 }

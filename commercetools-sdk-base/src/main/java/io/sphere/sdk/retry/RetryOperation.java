@@ -5,5 +5,5 @@ import javax.annotation.Nullable;
 @FunctionalInterface
 public interface RetryOperation {
     @Nullable
-    <P> RetryBehaviour<P> handle(final RetryOperationContext<P> retryOperationContext);
+    <P> RetryBehaviour<P> selectBehaviour(final RetryOperationContext<P> retryOperationContext);
 }

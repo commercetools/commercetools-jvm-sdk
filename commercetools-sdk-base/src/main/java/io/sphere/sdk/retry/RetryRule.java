@@ -17,7 +17,7 @@ public interface RetryRule {
     }
 
     static RetryRule of(final Predicate<RetryContext> matches, final Function<RetryContext, RetryOperation> function) {
-        return new RetryRuleBase() {
+        return new RetryRuleImpl() {
             @Override
             public RetryOperation selectRetryOperation(final RetryContext retryContext) {
                 return function.apply(retryContext);

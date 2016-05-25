@@ -60,7 +60,7 @@ final class AsyncRetrySupervisorImpl extends Base implements AsyncRetrySuperviso
 
     private <P, R> void handle(final RetryOperationContextImpl<P, R> retryOperationContext) {
         final RetryOperation retryOperation = getRetryOperation(new RetryContextImpl<>(retryOperationContext.getAttempt(), retryOperationContext.getLatest().getError(), retryOperationContext.getLatest().getParameter()));
-        final RetryBehaviour<P> retryBehaviour = retryOperation.handle(retryOperationContext);
+        final RetryBehaviour<P> retryBehaviour = retryOperation.selectBehaviour(retryOperationContext);
         if (retryBehaviour.getStrategy() == RetryBehaviour.Strategy.RESUME) {
             retryOperationContext.getResult().completeExceptionally(retryBehaviour.getError());
         } else if (retryBehaviour.getStrategy() == RetryBehaviour.Strategy.STOP) {
