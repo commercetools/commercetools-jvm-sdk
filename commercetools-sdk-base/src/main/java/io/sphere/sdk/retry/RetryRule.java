@@ -4,28 +4,28 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 
 public interface RetryRule {
-    boolean test(RetryRuleContext retryRuleContext);
+    boolean test(RetryContext retryContext);
 
-    RetryOperation selectRetryOperation(RetryRuleContext retryRuleContext);
+    RetryOperation selectRetryOperation(RetryContext retryContext);
 
     static RetryRule ofOperation(final RetryOperation op) {
         return ofAllExceptions(c -> op);
     }
 
-    static RetryRule ofAllExceptions(final Function<RetryRuleContext, RetryOperation> function) {
+    static RetryRule ofAllExceptions(final Function<RetryContext, RetryOperation> function) {
         return of(c -> true, function);
     }
 
-    static RetryRule of(final Predicate<RetryRuleContext> matches, final Function<RetryRuleContext, RetryOperation> function) {
+    static RetryRule of(final Predicate<RetryContext> matches, final Function<RetryContext, RetryOperation> function) {
         return new RetryRuleBase() {
             @Override
-            public RetryOperation selectRetryOperation(final RetryRuleContext retryRuleContext) {
-                return function.apply(retryRuleContext);
+            public RetryOperation selectRetryOperation(final RetryContext retryContext) {
+                return function.apply(retryContext);
             }
 
             @Override
-            public boolean test(final RetryRuleContext retryRuleContext) {
-                return matches.test(retryRuleContext);
+            public boolean test(final RetryContext retryContext) {
+                return matches.test(retryContext);
             }
         };
     }

@@ -9,16 +9,16 @@ import java.util.concurrent.CompletionStage;
 import java.util.function.BiConsumer;
 import java.util.function.Function;
 
-final class RetryOperationContextImpl<P, R> extends Base implements RetryOperationContext<P, R> {
-    final AttemptErrorResult first;
-    final AttemptErrorResult latest;
+final class RetryOperationContextImpl<P, R> extends Base implements RetryOperationContext<P> {
+    final AttemptErrorResult<P> first;
+    final AttemptErrorResult<P> latest;
     final Long attemptCount;
     final CompletableFuture<R> result;
     final Function<P, CompletionStage<R>> f;
     private final AutoCloseable closeable;
     private final BiConsumer<Runnable, Duration> scheduler;
 
-    RetryOperationContextImpl(final Long attemptCount, final AttemptErrorResult first, final AttemptErrorResult latest, final CompletableFuture<R> result, final Function<P, CompletionStage<R>> f, final AutoCloseable closeable, final BiConsumer<Runnable, Duration> scheduler) {
+    RetryOperationContextImpl(final Long attemptCount, final AttemptErrorResult<P> first, final AttemptErrorResult<P> latest, final CompletableFuture<R> result, final Function<P, CompletionStage<R>> f, final AutoCloseable closeable, final BiConsumer<Runnable, Duration> scheduler) {
         this.first = first;
         this.latest = latest;
         this.attemptCount = attemptCount;
@@ -35,13 +35,13 @@ final class RetryOperationContextImpl<P, R> extends Base implements RetryOperati
 
     @Nonnull
     @Override
-    public AttemptErrorResult getFirst() {
+    public AttemptErrorResult<P> getFirst() {
         return first;
     }
 
     @Nonnull
     @Override
-    public AttemptErrorResult getLatest() {
+    public AttemptErrorResult<P> getLatest() {
         return latest;
     }
 
@@ -57,7 +57,6 @@ final class RetryOperationContextImpl<P, R> extends Base implements RetryOperati
         return closeable;
     }
 
-    @Override
     public void schedule(final Runnable runnable, final Duration durationToWaitBeforeStarting) {
         scheduler.accept(runnable, durationToWaitBeforeStarting);
     }
