@@ -39,7 +39,7 @@ public class AsyncRetrySupervisorTest {
     @Test
     public void immediateRetryRule() throws Exception {
         try (final Service service = new Failing2TimesServiceImpl()) {
-            final List<RetryRule> retryRules = singletonList(RetryRule.ofOperation(RetryOperations.immediateRetries(3)));
+            final List<RetryRule> retryRules = singletonList(RetryRule.ofOperation(RetryActions.immediateRetries(3)));
             try(final AsyncRetrySupervisor supervisor = AsyncRetrySupervisor.of(retryRules)) {
                 final CompletionStage<Integer> bar = supervisor.supervise(service, service::apply, "bar");
                 assertThat(waitAndGet(bar)).isEqualTo(3);
@@ -51,7 +51,7 @@ public class AsyncRetrySupervisorTest {
     @Test
     public void immediateRetryRuleNonSufficient() throws Exception {
         try (final Service service = new Failing2TimesServiceImpl()) {
-            final List<RetryRule> retryRules = singletonList(RetryRule.ofOperation(RetryOperations.immediateRetries(1)));
+            final List<RetryRule> retryRules = singletonList(RetryRule.ofOperation(RetryActions.immediateRetries(1)));
             try(final AsyncRetrySupervisor supervisor = AsyncRetrySupervisor.of(retryRules)) {
                 final CompletionStage<Integer> bar = supervisor.supervise(service, service::apply, "bar");
                 final Throwable throwable = catchThrowable(() -> waitAndGet(bar));
@@ -64,7 +64,7 @@ public class AsyncRetrySupervisorTest {
     @Test
     public void giveUpAndSendFirstException() throws Exception {
         try (final Service service = new Failing2TimesServiceImpl()) {
-            final List<RetryRule> retryRules = singletonList(RetryRule.ofOperation(RetryOperations.giveUpAndSendFirstException()));
+            final List<RetryRule> retryRules = singletonList(RetryRule.ofOperation(RetryActions.giveUpAndSendFirstException()));
             try(final AsyncRetrySupervisor supervisor = AsyncRetrySupervisor.of(retryRules)) {
                 final CompletionStage<Integer> bar = supervisor.supervise(service, service::apply, "bar");
                 final Throwable throwable = catchThrowable(() -> waitAndGet(bar));
@@ -77,7 +77,7 @@ public class AsyncRetrySupervisorTest {
     @Test
     public void shutdownServiceAndSendFirstException() throws Exception {
         try (final Service service = new Failing2TimesServiceImpl()) {
-            final List<RetryRule> retryRules = singletonList(RetryRule.ofOperation(RetryOperations.shutdownServiceAndSendFirstException()));
+            final List<RetryRule> retryRules = singletonList(RetryRule.ofOperation(RetryActions.shutdownServiceAndSendFirstException()));
             try(final AsyncRetrySupervisor supervisor = AsyncRetrySupervisor.of(retryRules)) {
                 final CompletionStage<Integer> bar = supervisor.supervise(service, service::apply, "bar");
                 final Throwable throwable = catchThrowable(() -> waitAndGet(bar));
@@ -90,7 +90,7 @@ public class AsyncRetrySupervisorTest {
     @Test
     public void scheduledRetry() throws Exception {
         try (final Service service = new Failing2TimesServiceImpl()) {
-            final List<RetryRule> retryRules = singletonList(RetryRule.ofOperation(RetryOperations.scheduledRetry(3, o -> Duration.ofMillis(o.getAttempt() * 100))));
+            final List<RetryRule> retryRules = singletonList(RetryRule.ofOperation(RetryActions.scheduledRetry(3, o -> Duration.ofMillis(o.getAttempt() * 100))));
             try(final AsyncRetrySupervisor supervisor = AsyncRetrySupervisor.of(retryRules)) {
                 final CompletionStage<Integer> bar = supervisor.supervise(service, service::apply, "bar");
                 assertThat(waitAndGet(bar)).isEqualTo(3);

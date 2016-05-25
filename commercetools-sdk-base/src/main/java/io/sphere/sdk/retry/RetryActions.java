@@ -3,9 +3,9 @@ package io.sphere.sdk.retry;
 import java.time.Duration;
 import java.util.function.Function;
 
-public final class RetryOperations {
+public final class RetryActions {
 
-    private RetryOperations() {
+    private RetryActions() {
     }
 
     private static RetryContext convert(final RetryOperationContext<?> c) {

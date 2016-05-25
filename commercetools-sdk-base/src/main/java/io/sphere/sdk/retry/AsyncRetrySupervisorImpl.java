@@ -105,7 +105,7 @@ final class AsyncRetrySupervisorImpl extends Base implements AsyncRetrySuperviso
                 .filter(rule -> rule.isApplicable(retryContext))
                 .findFirst()
                 .map(rule -> rule.apply(retryContext))
-                .orElseGet(() -> RetryOperations.giveUpAndSendLatestException());
+                .orElseGet(() -> RetryActions.giveUpAndSendLatestException());
     }
 
     private <P, R> RetryOperationContextImpl<P, R> getNextContext(final AttemptErrorResult<P> attemptErrorResult, final RetryOperationContextImpl<P, R> parentContext) {
