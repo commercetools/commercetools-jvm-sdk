@@ -6,28 +6,28 @@ import javax.annotation.Nullable;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.List;
-import java.util.concurrent.*;
-import java.util.function.BiConsumer;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.CompletionStage;
+import java.util.concurrent.ScheduledThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
 
 final class AsyncRetrySupervisorImpl extends Base implements AsyncRetrySupervisor {
-    private final AutoCloseable service;
     private final List<RetryRule> retryRules;
     private final ScheduledThreadPoolExecutor executor = new ScheduledThreadPoolExecutor(0);
 
-    AsyncRetrySupervisorImpl(final AutoCloseable service, final List<RetryRule> retryRules) {
-        this.service = service;
+    AsyncRetrySupervisorImpl(final List<RetryRule> retryRules) {
         this.retryRules = retryRules;
     }
 
     @Override
-    public <P, R> CompletionStage<R> supervise(final Function<P, CompletionStage<R>> f, @Nullable final P parameterObject) {
+    public <P, R> CompletionStage<R> supervise(final AutoCloseable service, final Function<P, CompletionStage<R>> f, @Nullable final P parameterObject) {
         final CompletionStage<R> initialCompletionStage = f.apply(parameterObject);
         final CompletableFuture<R> result = new CompletableFuture<>();
         initialCompletionStage.whenComplete((res, firstError) -> {
             final boolean isErrorCase = firstError != null;
             if (isErrorCase) {
-                final RetryOperationContext<P, R> retryOperationContext = createFirstRetryOperationContext(firstError, result, f, parameterObject);
+                final RetryOperationContext<P, R> retryOperationContext = createFirstRetryOperationContext(firstError, result, f, parameterObject, service);
                 handle(retryOperationContext);
             } else {
                 result.complete(res);
@@ -41,7 +41,7 @@ final class AsyncRetrySupervisorImpl extends Base implements AsyncRetrySuperviso
         executor.shutdownNow();
     }
 
-    private <P, R> RetryOperationContext<P, R> createFirstRetryOperationContext(final Throwable throwable, final CompletableFuture<R> result, final Function<P, CompletionStage<R>> f, final P parameterObject) {
+    private <P, R> RetryOperationContext<P, R> createFirstRetryOperationContext(final Throwable throwable, final CompletableFuture<R> result, final Function<P, CompletionStage<R>> f, final P parameterObject, final AutoCloseable service) {
         final long attemptCount = 1L;
         final Instant now = Instant.now();
         final AttemptErrorResult<P> firstAttemptErrorResult = new AttemptErrorResultImpl<>(throwable, now, parameterObject);
