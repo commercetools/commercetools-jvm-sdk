@@ -60,29 +60,29 @@ final class AsyncRetrySupervisorImpl extends Base implements AsyncRetrySuperviso
 
     private <P, R> void handle(final RetryOperationContextImpl<P, R> retryOperationContext) {
         final RetryAction retryAction = getRetryOperation(new RetryContextImpl<>(retryOperationContext.getAttempt(), retryOperationContext.getLatest().getError(), retryOperationContext.getLatest().getParameter()));
-        final RetryBehaviour<P> retryBehaviour = retryAction.selectBehaviour(retryOperationContext);
-        if (retryBehaviour.getStrategy() == RetryBehaviour.Strategy.RESUME) {
-            retryOperationContext.getResult().completeExceptionally(retryBehaviour.getError());
-        } else if (retryBehaviour.getStrategy() == RetryBehaviour.Strategy.STOP) {
+        final RetryResult<P> retryResult = retryAction.selectBehaviour(retryOperationContext);
+        if (retryResult.getStrategy() == RetryResult.Strategy.RESUME) {
+            retryOperationContext.getResult().completeExceptionally(retryResult.getError());
+        } else if (retryResult.getStrategy() == RetryResult.Strategy.STOP) {
             try {
                 retryOperationContext.getService().close();
             } catch (final Exception e) {
                 logger.error("Error occurred while closing service in retry strategy.", e);
             }
-            retryOperationContext.getResult().completeExceptionally(retryBehaviour.getError());
-        } else if (retryBehaviour.getStrategy() == RetryBehaviour.Strategy.RETRY_IMMEDIATELY) {
-            final P parameter = retryBehaviour.getParameter();
+            retryOperationContext.getResult().completeExceptionally(retryResult.getError());
+        } else if (retryResult.getStrategy() == RetryResult.Strategy.RETRY_IMMEDIATELY) {
+            final P parameter = retryResult.getParameter();
             final CompletionStage<R> completionStage = retryOperationContext.getFunction().apply(parameter);
             handleResultAndEnqueueErrorHandlingAgain(completionStage, parameter, retryOperationContext);
-        } else if (retryBehaviour.getStrategy() == RetryBehaviour.Strategy.RETRY_SCHEDULED) {
-            final Duration duration = retryBehaviour.getDuration();
+        } else if (retryResult.getStrategy() == RetryResult.Strategy.RETRY_SCHEDULED) {
+            final Duration duration = retryResult.getDuration();
             final P parameter = retryOperationContext.getLatest().getParameter();
             retryOperationContext.schedule(() -> {
                 final CompletionStage<R> completionStage = retryOperationContext.getFunction().apply(parameter);
                 handleResultAndEnqueueErrorHandlingAgain(completionStage, parameter, retryOperationContext);
             }, duration);
         } else {
-            throw new IllegalStateException("illegal state for " + retryBehaviour);
+            throw new IllegalStateException("illegal state for " + retryResult);
         }
     }
 
