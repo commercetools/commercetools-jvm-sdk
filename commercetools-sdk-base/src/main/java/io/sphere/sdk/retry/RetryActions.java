@@ -19,7 +19,7 @@ public final class RetryActions {
 
         return new RetryActionImpl() {
             @Override
-            public <P> RetryResult<P> selectBehaviour(final RetryOperationContext<P> retryOperationContext) {
+            public <P> RetryResult<P> apply(final RetryOperationContext<P> retryOperationContext) {
                 if (retryOperationContext.getAttempt() > maxAttempts) {
                     return RetryResult.resume(retryOperationContext.getLatest().getError());
                 } else {
@@ -45,7 +45,7 @@ public final class RetryActions {
     public static RetryAction shutdownServiceAndSendFirstException() {
         return new RetryActionImpl() {
             @Override
-            public <P> RetryResult<P> selectBehaviour(final RetryOperationContext<P> retryOperationContext) {
+            public <P> RetryResult<P> apply(final RetryOperationContext<P> retryOperationContext) {
                 return RetryResult.stop(retryOperationContext.getFirst().getError());
             }
 
@@ -59,7 +59,7 @@ public final class RetryActions {
     public static RetryAction shutdownServiceAndSendLatestException() {
         return new RetryActionImpl() {
             @Override
-            public <P> RetryResult<P> selectBehaviour(final RetryOperationContext<P> retryOperationContext) {
+            public <P> RetryResult<P> apply(final RetryOperationContext<P> retryOperationContext) {
                 return RetryResult.stop(retryOperationContext.getLatest().getError());
             }
 
@@ -73,7 +73,7 @@ public final class RetryActions {
     public static RetryAction giveUpAndSendFirstException() {
         return new RetryActionImpl() {
             @Override
-            public <P> RetryResult<P> selectBehaviour(final RetryOperationContext<P> retryOperationContext) {
+            public <P> RetryResult<P> apply(final RetryOperationContext<P> retryOperationContext) {
                 return RetryResult.resume(retryOperationContext.getFirst().getError());
             }
 
@@ -87,7 +87,7 @@ public final class RetryActions {
     public static RetryAction giveUpAndSendLatestException() {
         return new RetryActionImpl() {
             @Override
-            public <P> RetryResult<P> selectBehaviour(final RetryOperationContext<P> retryOperationContext) {
+            public <P> RetryResult<P> apply(final RetryOperationContext<P> retryOperationContext) {
                 return RetryResult.resume(retryOperationContext.getLatest().getError());
             }
 
@@ -103,7 +103,7 @@ public final class RetryActions {
 
         return new RetryActionImpl() {
             @Override
-            public <P> RetryResult<P> selectBehaviour(final RetryOperationContext<P> retryOperationContext) {
+            public <P> RetryResult<P> apply(final RetryOperationContext<P> retryOperationContext) {
                 if (retryOperationContext.getAttempt() > maxAttempts) {
                     return RetryResult.resume(retryOperationContext.getLatest().getError());
                 } else {
