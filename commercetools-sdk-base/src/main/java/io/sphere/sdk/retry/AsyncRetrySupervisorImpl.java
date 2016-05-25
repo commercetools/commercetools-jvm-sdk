@@ -15,7 +15,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
 
 final class AsyncRetrySupervisorImpl extends Base implements AsyncRetrySupervisor {
-    private static final Logger logger = LoggerFactory.getLogger(RetryOperation.class);
+    private static final Logger logger = LoggerFactory.getLogger(RetryAction.class);
     private final List<RetryRule> retryRules;
     private final ScheduledThreadPoolExecutor executor = new ScheduledThreadPoolExecutor(0);
 
@@ -59,8 +59,8 @@ final class AsyncRetrySupervisorImpl extends Base implements AsyncRetrySuperviso
     }
 
     private <P, R> void handle(final RetryOperationContextImpl<P, R> retryOperationContext) {
-        final RetryOperation retryOperation = getRetryOperation(new RetryContextImpl<>(retryOperationContext.getAttempt(), retryOperationContext.getLatest().getError(), retryOperationContext.getLatest().getParameter()));
-        final RetryBehaviour<P> retryBehaviour = retryOperation.selectBehaviour(retryOperationContext);
+        final RetryAction retryAction = getRetryOperation(new RetryContextImpl<>(retryOperationContext.getAttempt(), retryOperationContext.getLatest().getError(), retryOperationContext.getLatest().getParameter()));
+        final RetryBehaviour<P> retryBehaviour = retryAction.selectBehaviour(retryOperationContext);
         if (retryBehaviour.getStrategy() == RetryBehaviour.Strategy.RESUME) {
             retryOperationContext.getResult().completeExceptionally(retryBehaviour.getError());
         } else if (retryBehaviour.getStrategy() == RetryBehaviour.Strategy.STOP) {
@@ -100,11 +100,11 @@ final class AsyncRetrySupervisorImpl extends Base implements AsyncRetrySuperviso
         });
     }
 
-    private <P> RetryOperation getRetryOperation(final RetryContext retryContext) {
+    private <P> RetryAction getRetryOperation(final RetryContext retryContext) {
         return retryRules.stream()
-                .filter(rule -> rule.test(retryContext))
+                .filter(rule -> rule.isApplicable(retryContext))
                 .findFirst()
-                .map(rule -> rule.selectRetryOperation(retryContext))
+                .map(rule -> rule.apply(retryContext))
                 .orElseGet(() -> RetryOperations.giveUpAndSendLatestException());
     }
 

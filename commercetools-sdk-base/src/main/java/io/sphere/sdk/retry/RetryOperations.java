@@ -14,10 +14,10 @@ public final class RetryOperations {
 
 
     //TODO param??? maybe RetryRuleContext? rename parameter?
-    public static RetryOperation scheduledRetry(final long maxAttempts, final Function<RetryContext, Duration> f) {
+    public static RetryAction scheduledRetry(final long maxAttempts, final Function<RetryContext, Duration> f) {
         validateMaxAttempts(maxAttempts);
 
-        return new RetryOperationImpl() {
+        return new RetryActionImpl() {
             @Override
             public <P> RetryBehaviour<P> selectBehaviour(final RetryOperationContext<P> retryOperationContext) {
                 if (retryOperationContext.getAttempt() > maxAttempts) {
@@ -42,8 +42,8 @@ public final class RetryOperations {
         }
     }
 
-    public static RetryOperation shutdownServiceAndSendFirstException() {
-        return new RetryOperationImpl() {
+    public static RetryAction shutdownServiceAndSendFirstException() {
+        return new RetryActionImpl() {
             @Override
             public <P> RetryBehaviour<P> selectBehaviour(final RetryOperationContext<P> retryOperationContext) {
                 return RetryBehaviour.stop(retryOperationContext.getFirst().getError());
@@ -56,8 +56,8 @@ public final class RetryOperations {
         };
     }
 
-    public static RetryOperation shutdownServiceAndSendLatestException() {
-        return new RetryOperationImpl() {
+    public static RetryAction shutdownServiceAndSendLatestException() {
+        return new RetryActionImpl() {
             @Override
             public <P> RetryBehaviour<P> selectBehaviour(final RetryOperationContext<P> retryOperationContext) {
                 return RetryBehaviour.stop(retryOperationContext.getLatest().getError());
@@ -70,8 +70,8 @@ public final class RetryOperations {
         };
     }
 
-    public static RetryOperation giveUpAndSendFirstException() {
-        return new RetryOperationImpl() {
+    public static RetryAction giveUpAndSendFirstException() {
+        return new RetryActionImpl() {
             @Override
             public <P> RetryBehaviour<P> selectBehaviour(final RetryOperationContext<P> retryOperationContext) {
                 return RetryBehaviour.resume(retryOperationContext.getFirst().getError());
@@ -84,8 +84,8 @@ public final class RetryOperations {
         };
     }
 
-    public static RetryOperation giveUpAndSendLatestException() {
-        return new RetryOperationImpl() {
+    public static RetryAction giveUpAndSendLatestException() {
+        return new RetryActionImpl() {
             @Override
             public <P> RetryBehaviour<P> selectBehaviour(final RetryOperationContext<P> retryOperationContext) {
                 return RetryBehaviour.resume(retryOperationContext.getLatest().getError());
@@ -98,10 +98,10 @@ public final class RetryOperations {
         };
     }
 
-    public static RetryOperation immediateRetries(final long maxAttempts) {
+    public static RetryAction immediateRetries(final long maxAttempts) {
         validateMaxAttempts(maxAttempts);
 
-        return new RetryOperationImpl() {
+        return new RetryActionImpl() {
             @Override
             public <P> RetryBehaviour<P> selectBehaviour(final RetryOperationContext<P> retryOperationContext) {
                 if (retryOperationContext.getAttempt() > maxAttempts) {
