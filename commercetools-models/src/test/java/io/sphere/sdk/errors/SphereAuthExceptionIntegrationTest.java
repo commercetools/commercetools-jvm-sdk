@@ -15,10 +15,7 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import java.time.Duration;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.CompletionException;
-import java.util.concurrent.CompletionStage;
-import java.util.concurrent.TimeUnit;
+import java.util.concurrent.*;
 import java.util.function.Function;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -27,6 +24,29 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 public class SphereAuthExceptionIntegrationTest extends IntegrationTest {
     @Rule
     public ExpectedException thrown = ExpectedException.none();
+
+    @Test
+    public void misconfigurationDomainInAuth() throws Exception {
+        try(final HttpClient httpClient = newHttpClient()) {
+            final String authUrl = "http://sdfjifdsjifdsjfdsjdfsjidsfjidfs.de";
+            final String apiUrl = getSphereClientConfig().getApiUrl();
+            final SphereClientConfig config = SphereClientConfig.of("projectKey", "clientId", "clientSecret", authUrl, apiUrl);
+            try (final SphereAccessTokenSupplier supplier = SphereAccessTokenSupplier.ofAutoRefresh(config,httpClient,false)) {
+                supplier.close();
+                supplier.get().toCompletableFuture().get(200, TimeUnit.MILLISECONDS);
+            }
+
+        }
+    }
+
+    @Test
+    public void clientAlreadyClosed() throws Exception {
+        try(final SphereClient client = SphereClientFactory.of().createClient(getSphereClientConfig())) {
+            client.close();
+            assertThatThrownBy(() -> client.execute(ProjectGet.of()))
+                    .isInstanceOf(IllegalStateException.class);
+        }
+    }
 
     @Test
     public void misconfigurationDomain() throws InterruptedException {

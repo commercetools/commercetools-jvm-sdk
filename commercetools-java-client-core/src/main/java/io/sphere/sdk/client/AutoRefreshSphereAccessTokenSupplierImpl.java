@@ -30,6 +30,7 @@ final class AutoRefreshSphereAccessTokenSupplierImpl extends AutoCloseableServic
 
     @Override
     public CompletionStage<String> get() {
+        rejectExcutionIfClosed("Token supplier is already closed.");
         return currentAccessTokenFuture;
     }
 

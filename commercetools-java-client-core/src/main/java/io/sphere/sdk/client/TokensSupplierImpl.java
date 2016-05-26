@@ -51,6 +51,7 @@ final class TokensSupplierImpl extends AutoCloseableService implements TokensSup
      */
     @Override
     public CompletionStage<Tokens> get() {
+        rejectExcutionIfClosed("Token supplier is already closed.");
         AUTH_LOGGER.debug(() -> isPasswordFlow() ? "Fetching new password flow token." : "Fetching new client credentials flow token.");
         final HttpRequest httpRequest = newRequest();
         final CompletionStage<HttpResponse> httpResponseStage = httpClient.execute(httpRequest);

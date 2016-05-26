@@ -33,20 +33,14 @@ final class SphereClientImpl extends AutoCloseableService implements SphereClien
 
     @Override
     public <T> CompletionStage<T> execute(final SphereRequest<T> sphereRequest) {
+        rejectExcutionIfClosed("Client is already closed.");
+
         final CompletionStage<String> tokenFuture = tokenSupplier.get();
         return tokenFuture.thenCompose(token -> execute(sphereRequest, token));
     }
 
     private <T> CompletionStage<T> execute(final SphereRequest<T> sphereRequest, final String token) {
-
-
-        System.err.println(Thread.currentThread());
-        System.err.println(Thread.currentThread().getName());
-
-
-
         final HttpRequest httpRequest = createHttpRequest(sphereRequest, token);
-
         final SphereInternalLogger logger = getLogger(httpRequest);
         logger.debug(() -> sphereRequest);
         logger.trace(() -> {
