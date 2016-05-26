@@ -29,11 +29,9 @@ final class AuthActorProtocol {
 
     static class FailedTokenFetchMessage extends Base {
         final Throwable cause;
-        final long attempt;
 
-        public FailedTokenFetchMessage(final Throwable cause, final long attempt) {
+        public FailedTokenFetchMessage(final Throwable cause) {
             this.cause = cause;
-            this.attempt = attempt;
         }
     }
 

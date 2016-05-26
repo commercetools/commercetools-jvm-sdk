@@ -1,5 +1,7 @@
 package io.sphere.sdk.retry;
 
+import java.util.List;
+import java.util.Optional;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
@@ -28,5 +30,13 @@ public interface RetryRule {
                 return matches.test(retryContext);
             }
         };
+    }
+
+    //TODO revert extraction
+    static Optional<RetryAction> findMatchingRetryAction(final List<RetryRule> retryRules, final RetryContext retryContext) {
+        return retryRules.stream()
+                .filter(rule -> rule.isApplicable(retryContext))
+                .findFirst()
+                .map(rule -> rule.apply(retryContext));
     }
 }

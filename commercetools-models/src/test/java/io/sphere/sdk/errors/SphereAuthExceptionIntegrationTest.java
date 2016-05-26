@@ -3,6 +3,7 @@ package io.sphere.sdk.errors;
 import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.client.*;
 import io.sphere.sdk.http.HttpClient;
+import io.sphere.sdk.http.HttpException;
 import io.sphere.sdk.http.HttpRequest;
 import io.sphere.sdk.http.HttpResponse;
 import io.sphere.sdk.json.JsonException;
@@ -10,16 +11,20 @@ import io.sphere.sdk.projects.Project;
 import io.sphere.sdk.projects.queries.ProjectGet;
 import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.test.IntegrationTest;
+import org.assertj.core.api.Condition;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+import java.net.UnknownHostException;
 import java.time.Duration;
 import java.util.concurrent.*;
 import java.util.function.Function;
 
+import static io.sphere.sdk.client.SphereClientUtils.blockingWait;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.assertj.core.api.Assertions.catchThrowable;
 
 public class SphereAuthExceptionIntegrationTest extends IntegrationTest {
     @Rule
@@ -49,27 +54,50 @@ public class SphereAuthExceptionIntegrationTest extends IntegrationTest {
     }
 
     @Test
-    public void misconfigurationDomain() throws InterruptedException {
-        try(final HttpClient httpClient = newHttpClient()) {
-            final String authUrl = "http://sdfjifdsjifdsjfdsjdfsjidsfjidfs.de";
-            final String apiUrl = getSphereClientConfig().getApiUrl();
-            final SphereClientConfig config = SphereClientConfig.of("projectKey", "clientId", "clientSecret", authUrl, apiUrl);
-            try (final SphereClient client = SphereClientFactory.of().createClient(config)) {
-                System.err.println(client);
-                try {
-                    final Project project = SphereClientUtils.blockingWait(client.execute(ProjectGet.of()), Duration.ofMinutes(1000));
-
-                    System.err.println(project);
-                }catch (final Exception e) {
-                    System.err.println("e");
-                    System.err.println(e.getClass());
-                    System.err.println(e);
-                    e.printStackTrace();
-
-                    Thread.sleep(30000);
-                }
-            }
+    public void misconfiguredAuthUrl() throws Exception {
+        final String invalidAuthUrl = "http://sdfjifdsjifdsjfdsjdfsjidsfjidfs.de";
+        final SphereClientConfig config = getSphereClientConfig().withAuthUrl(invalidAuthUrl);
+        try (final SphereClient client = SphereClientFactory.of().createClient(config)) {
+            final Throwable throwable =
+                    catchThrowable(() -> blockingWait(client.execute(ProjectGet.of()), Duration.ofMillis(1000)));
+            assertThat(throwable).isInstanceOf(HttpException.class).hasCauseInstanceOf(UnknownHostException.class);
+            assertThat(client).isNot(closed());
         }
+    }
+
+    @Test
+    public void misconfiguredApiUrl() throws Exception {
+        final String invalidApiUrl = "http://sdfjifdsjifdsjfdsjdfsjidsfjidfs.de";
+        final SphereClientConfig config = getSphereClientConfig().withApiUrl(invalidApiUrl);
+        try (final SphereClient client = SphereClientFactory.of().createClient(config)) {
+            final Throwable throwable =
+                    catchThrowable(() -> blockingWait(client.execute(ProjectGet.of()), Duration.ofMillis(1000)));
+            assertThat(throwable).isInstanceOf(HttpException.class).hasCauseInstanceOf(UnknownHostException.class);
+            assertThat(client).isNot(closed());
+        }
+    }
+
+    @Test
+    public void invalidCredentialsClient() throws Exception {
+        final SphereClientConfig config = SphereClientConfigBuilder.ofClientConfig(getSphereClientConfig())
+                .clientSecret("wrong")
+                .build();
+        try (final SphereClient client = SphereClientFactory.of().createClient(config)) {
+            final Throwable throwable =
+                    catchThrowable(() -> blockingWait(client.execute(ProjectGet.of()), Duration.ofMillis(1000)));
+            assertThat(throwable).isInstanceOf(InvalidClientCredentialsException.class);
+            assertThat(client).is(closed());
+        }
+    }
+
+    private static Condition<SphereClient> closed() {
+        return new Condition<SphereClient>() {
+            @Override
+            public boolean matches(final SphereClient client) {
+                final Throwable throwable = catchThrowable(() -> blockingWait(client.execute(ProjectGet.of()), Duration.ofMillis(100)));
+                return throwable != null && throwable instanceof IllegalStateException;
+            }
+        }.describedAs("closed");
     }
 
     @Test

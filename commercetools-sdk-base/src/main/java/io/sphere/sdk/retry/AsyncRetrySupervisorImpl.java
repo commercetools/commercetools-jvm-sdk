@@ -103,11 +103,9 @@ final class AsyncRetrySupervisorImpl extends Base implements AsyncRetrySuperviso
         }, executor);
     }
 
-    private <P> RetryAction getRetryOperation(final RetryContext retryContext) {
-        return retryRules.stream()
-                .filter(rule -> rule.isApplicable(retryContext))
-                .findFirst()
-                .map(rule -> rule.apply(retryContext))
+    private RetryAction getRetryOperation(final RetryContext retryContext) {
+        return RetryRule.findMatchingRetryAction(retryRules, retryContext)
                 .orElseGet(() -> RetryAction.giveUpAndSendLatestException());
     }
+
 }

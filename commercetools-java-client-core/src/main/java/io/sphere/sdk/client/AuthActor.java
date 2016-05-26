@@ -7,11 +7,12 @@ import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.CompletionStage;
 import java.util.concurrent.TimeUnit;
+import java.util.function.Function;
+import java.util.function.Supplier;
 
 import static io.sphere.sdk.client.SphereAuth.AUTH_LOGGER;
 import static io.sphere.sdk.utils.CompletableFutureUtils.onFailure;
 import static io.sphere.sdk.utils.CompletableFutureUtils.onSuccess;
-import static java.util.concurrent.TimeUnit.MILLISECONDS;
 
 /**
  * Actor which takes care that only one token needs to be fetched for many requests.
@@ -19,12 +20,14 @@ import static java.util.concurrent.TimeUnit.MILLISECONDS;
 final class AuthActor extends Actor {
     private static final int DEFAULT_WAIT_TIME_UNTIL_RETRY_MILLISECONDS = 100;
     private final TokensSupplier internalTokensSupplier;
+    private final Function<Supplier<CompletionStage<Tokens>>, CompletionStage<Tokens>> supervisedTokenSupplier;
     private Optional<Tokens> tokensCache = Optional.empty();
     private boolean isWaitingForToken = false;
     private final List<Actor> subscribers = new LinkedList<>();
 
-    public AuthActor(final TokensSupplier internalTokensSupplier) {
+    public AuthActor(final TokensSupplier internalTokensSupplier, final Function<Supplier<CompletionStage<Tokens>>, CompletionStage<Tokens>> supervisedTokenSupplier) {
         this.internalTokensSupplier = internalTokensSupplier;
+        this.supervisedTokenSupplier = supervisedTokenSupplier;
     }
 
     @Override
@@ -50,9 +53,9 @@ final class AuthActor extends Actor {
     private void process(final FetchTokenFromSphereMessage m) {
         if (!isWaitingForToken) {
             isWaitingForToken = true;
-            final CompletionStage<Tokens> future = internalTokensSupplier.get();
+            final CompletionStage<Tokens> future = supervisedTokenSupplier.apply(() -> internalTokensSupplier.get());
             onSuccess(future, tokens -> tell(new SuccessfulTokenFetchMessage(tokens)));
-            onFailure(future, e -> tell(new FailedTokenFetchMessage(e, m.attempt + 1)));
+            onFailure(future, e -> tell(new FailedTokenFetchMessage(e)));
         }
     }
 
@@ -75,11 +78,7 @@ final class AuthActor extends Actor {
             subscribers.forEach(subscriber -> subscriber.tell(new TokenDeliveryFailedMessage(m.cause)));
         } else {
             AUTH_LOGGER.error(() -> "Can't fetch tokens.", m.cause);
-            final long tryAgainIn = m.attempt * DEFAULT_WAIT_TIME_UNTIL_RETRY_MILLISECONDS;
-            schedule(new FetchTokenFromSphereMessage(m.attempt), tryAgainIn, MILLISECONDS);
-            if (m.attempt > 2) {
-                subscribers.forEach(subscriber -> subscriber.tell(new TokenDeliveryFailedMessage(m.cause)));
-            }
+            subscribers.forEach(subscriber -> subscriber.tell(new TokenDeliveryFailedMessage(m.cause)));
         }
     }
 

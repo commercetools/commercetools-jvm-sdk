@@ -33,6 +33,21 @@ public final class SphereClientConfigBuilder extends Base implements Builder<Sph
         return builder;
     }
 
+    public SphereClientConfigBuilder projectKey(final String projectKey) {
+        this.projectKey = projectKey;
+        return this;
+    }
+
+    public SphereClientConfigBuilder clientId(final String clientId) {
+        this.clientId = clientId;
+        return this;
+    }
+
+    public SphereClientConfigBuilder clientSecret(final String clientSecret) {
+        this.clientSecret = clientSecret;
+        return this;
+    }
+
     public SphereClientConfigBuilder apiUrl(final String apiUrl) {
         this.apiUrl = apiUrl;
         return this;
