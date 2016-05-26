@@ -15,7 +15,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
 
 final class AsyncRetrySupervisorImpl extends Base implements AsyncRetrySupervisor {
-    private static final Logger logger = LoggerFactory.getLogger(RetryAction.class);
+    private static final Logger logger = LoggerFactory.getLogger(AsyncRetrySupervisor.class);
     private final List<RetryRule> retryRules;
     private final ScheduledThreadPoolExecutor executor = new ScheduledThreadPoolExecutor(1);
 
