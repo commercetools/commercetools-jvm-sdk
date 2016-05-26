@@ -9,6 +9,7 @@ import io.sphere.sdk.models.SphereException;
 import io.sphere.sdk.retry.AsyncRetrySupervisor;
 import io.sphere.sdk.retry.RetryAction;
 import io.sphere.sdk.retry.RetryRule;
+import io.sphere.sdk.utils.CompletableFutureUtils;
 import io.sphere.sdk.utils.SphereInternalLogger;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,6 +19,7 @@ import java.util.Optional;
 import java.util.concurrent.CompletionStage;
 
 import static io.sphere.sdk.client.HttpResponseBodyUtils.bytesToString;
+import static io.sphere.sdk.utils.CompletableFutureUtils.onFailure;
 import static io.sphere.sdk.utils.SphereInternalLogger.getLogger;
 import static java.util.Arrays.asList;
 
@@ -40,10 +42,25 @@ final class SphereClientImpl extends AutoCloseableService implements SphereClien
     @Override
     public <T> CompletionStage<T> execute(final SphereRequest<T> sphereRequest) {
         rejectExcutionIfClosed("Client is already closed.");
-        return supervisor.supervise(this, r -> {
+        try {
             final CompletionStage<String> tokenFuture = tokenSupplier.get();
-            return tokenFuture.thenCompose(token -> execute(sphereRequest, token));
-        }, sphereRequest);
+
+            onFailure(tokenFuture, e -> System.err.println("auth terminated with " + e));
+
+
+
+            final CompletionStage<T> completionStage = supervisor.supervise(this, r -> {
+                try {
+                    return tokenFuture.thenComposeAsync(token -> execute(sphereRequest, token));
+                } catch (final Throwable throwable) {
+                    return CompletableFutureUtils.failed(throwable);
+
+                }
+            }, sphereRequest);
+            return completionStage;
+        } catch (final Throwable throwable) {
+            return CompletableFutureUtils.failed(throwable);
+        }
     }
 
     private <T> CompletionStage<T> execute(final SphereRequest<T> sphereRequest, final String token) {
@@ -74,7 +91,7 @@ final class SphereClientImpl extends AutoCloseableService implements SphereClien
             }
             return output;
         });
-        return httpClient.execute(httpRequest).thenApply(httpResponse -> {
+        return httpClient.execute(httpRequest).thenApplyAsync(httpResponse -> {
             try {
                 return processHttpResponse(sphereRequest, objectMapper, config, httpResponse, httpRequest);
             } catch (final SphereException e) {
@@ -139,6 +156,7 @@ final class SphereClientImpl extends AutoCloseableService implements SphereClien
     protected void internalClose() {
         closeQuietly(tokenSupplier);
         closeQuietly(httpClient);
+        closeQuietly(supervisor);
     }
 
     public static SphereClient of(final SphereApiConfig config, final HttpClient httpClient, final SphereAccessTokenSupplier tokenSupplier) {

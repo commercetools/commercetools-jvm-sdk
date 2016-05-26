@@ -5,7 +5,13 @@ import java.util.concurrent.TimeUnit;
 import java.util.function.Consumer;
 
 abstract class Actor extends AutoCloseableService {
-    private final ScheduledThreadPoolExecutor executor = new ScheduledThreadPoolExecutor(1);//kind of mailbox
+    private final ScheduledThreadPoolExecutor executor = createExecutor();//kind of mailbox
+
+    private ScheduledThreadPoolExecutor createExecutor() {
+        final ScheduledThreadPoolExecutor executor = new ScheduledThreadPoolExecutor(0);
+        executor.setMaximumPoolSize(1);
+        return executor;
+    }
 
     public final void tell(final Object message) {
         executor.execute(() -> receive(message));

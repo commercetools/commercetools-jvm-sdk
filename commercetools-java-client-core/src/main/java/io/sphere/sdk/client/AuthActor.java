@@ -48,7 +48,10 @@ final class AuthActor extends Actor {
             isWaitingForToken = true;
             final CompletionStage<Tokens> future = supervisedTokenSupplier.apply(() -> internalTokensSupplier.get());
             onSuccess(future, tokens -> tell(new SuccessfulTokenFetchMessage(tokens)));
-            onFailure(future, e -> tell(new FailedTokenFetchMessage(e)));
+            onFailure(future, e -> {
+                requestUpdateFailedStatus.accept(e);
+                tell(new FailedTokenFetchMessage(e));
+            });
         }
     }
 

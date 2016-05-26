@@ -9,10 +9,7 @@ import java.time.Duration;
 import java.time.Instant;
 import java.util.List;
 import java.util.Optional;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.CompletionStage;
-import java.util.concurrent.ScheduledThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
+import java.util.concurrent.*;
 import java.util.function.Function;
 
 final class AsyncRetrySupervisorImpl extends Base implements AsyncRetrySupervisor {
@@ -28,17 +25,21 @@ final class AsyncRetrySupervisorImpl extends Base implements AsyncRetrySuperviso
     public <P, R> CompletionStage<R> supervise(final AutoCloseable service,
                                                final Function<P, CompletionStage<R>> f,
                                                @Nullable final P parameterObject) {
-        final CompletionStage<R> initialCompletionStage = f.apply(parameterObject);
         final CompletableFuture<R> result = new CompletableFuture<>();
-        initialCompletionStage.whenCompleteAsync((res, firstError) -> {
-            final boolean isErrorCase = firstError != null;
-            if (isErrorCase) {
-                final RetryContextImpl<P, R> retryOperationContext = createFirstRetryOperationContext(firstError, result, f, parameterObject, service);
-                handle(retryOperationContext);
-            } else {
-                result.complete(res);
-            }
-        }, executor);
+        try {
+            final CompletionStage<R> initialCompletionStage = f.apply(parameterObject);
+            initialCompletionStage.whenCompleteAsync((res, firstError) -> {
+                final boolean isErrorCase = firstError != null;
+                if (isErrorCase) {
+                    final RetryContextImpl<P, R> retryOperationContext = createFirstRetryOperationContext(firstError, result, f, parameterObject, service);
+                    handle(retryOperationContext);
+                } else {
+                    result.complete(res);
+                }
+            }, executor);
+        } catch (final Throwable e) {//necessary if f.apply() throws directly an exception
+            result.completeExceptionally(e);
+        }
         return result;
     }
 
@@ -62,7 +63,8 @@ final class AsyncRetrySupervisorImpl extends Base implements AsyncRetrySuperviso
         if (retryResult.getStrategy() == RetryResult.Strategy.RESUME) {
             retryContext.getResult().completeExceptionally(retryResult.getError());
         } else if (retryResult.getStrategy() == RetryResult.Strategy.STOP) {
-            retryContext.getResult().completeExceptionally(retryResult.getError());
+            final CompletableFuture<R> result = retryContext.getResult();
+            result.completeExceptionally(retryResult.getError());
             try {
                 retryContext.getService().close();
             } catch (final Exception e) {

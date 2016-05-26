@@ -22,6 +22,7 @@ import java.util.concurrent.*;
 import java.util.function.Function;
 
 import static io.sphere.sdk.client.SphereClientUtils.blockingWait;
+import static io.sphere.sdk.test.SphereTestUtils.assertEventually;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.assertj.core.api.Assertions.catchThrowable;
@@ -83,10 +84,12 @@ public class SphereAuthExceptionIntegrationTest extends IntegrationTest {
                 .clientSecret("wrong")
                 .build();
         try (final SphereClient client = SphereClientFactory.of().createClient(config)) {
-            final Throwable throwable =
-                    catchThrowable(() -> blockingWait(client.execute(ProjectGet.of()), Duration.ofMillis(10000)));
+            final CompletionStage<Project> completionStage = client.execute(ProjectGet.of());
+            final Throwable throwable = catchThrowable(() -> blockingWait(completionStage, Duration.ofMillis(5000)));
             assertThat(throwable).isInstanceOf(InvalidClientCredentialsException.class);
-            assertThat(client).is(closed());
+            assertEventually(() -> {
+                assertThat(client).is(closed());
+            });
         }
     }
 
@@ -141,7 +144,7 @@ public class SphereAuthExceptionIntegrationTest extends IntegrationTest {
         final Throwable throwable = catchThrowable(() -> authTokenSupplier.get().toCompletableFuture().get(20, TimeUnit.MILLISECONDS));
         assertThat(throwable)
                 .as("further requests get also an exception and do not hang")
-                .isInstanceOf(IllegalStateException.class);
+                .isInstanceOfAny(IllegalStateException.class, ExecutionException.class);
         authTokenSupplier.close();
     }
 
