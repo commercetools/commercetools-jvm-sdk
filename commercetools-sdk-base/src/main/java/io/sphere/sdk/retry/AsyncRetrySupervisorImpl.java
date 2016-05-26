@@ -32,7 +32,7 @@ final class AsyncRetrySupervisorImpl extends Base implements AsyncRetrySuperviso
         initialCompletionStage.whenComplete((res, firstError) -> {
             final boolean isErrorCase = firstError != null;
             if (isErrorCase) {
-                final RetryOperationContextImpl<P, R> retryOperationContext = createFirstRetryOperationContext(firstError, result, f, parameterObject, service);
+                final RetryContextImpl<P, R> retryOperationContext = createFirstRetryOperationContext(firstError, result, f, parameterObject, service);
                 handle(retryOperationContext);
             } else {
                 result.complete(res);
@@ -46,53 +46,58 @@ final class AsyncRetrySupervisorImpl extends Base implements AsyncRetrySuperviso
         executor.shutdownNow();
     }
 
-    private <P, R> RetryOperationContextImpl<P, R> createFirstRetryOperationContext(final Throwable throwable, final CompletableFuture<R> result, final Function<P, CompletionStage<R>> f, final P parameterObject, final AutoCloseable service) {
+    private <P, R> RetryContextImpl<P, R> createFirstRetryOperationContext(final Throwable throwable, final CompletableFuture<R> result, final Function<P, CompletionStage<R>> f, final P parameterObject, final AutoCloseable service) {
         final long attemptCount = 1L;
         final Instant now = Instant.now();
-        final AttemptErrorResult<P> firstAttemptErrorResult = new AttemptErrorResultImpl<>(throwable, now, parameterObject);
-        final AttemptErrorResult<P> latestErrorResult = firstAttemptErrorResult;
-        return new RetryOperationContextImpl<>(attemptCount, firstAttemptErrorResult, latestErrorResult, result, f, service, this::schedule);
+        return new RetryContextImpl<>(now, attemptCount, throwable, parameterObject, throwable, parameterObject, result, f, service, this::schedule);
     }
 
     private void schedule(final Runnable r, final Duration d) {
         executor.schedule(r, d.toMillis(), TimeUnit.MILLISECONDS);
     }
 
-    private <P, R> void handle(final RetryOperationContextImpl<P, R> retryOperationContext) {
-        final RetryAction retryAction = getRetryOperation(new RetryContextImpl<>(retryOperationContext.getAttempt(), retryOperationContext.getLatest().getError(), retryOperationContext.getLatest().getParameter()));
-        final RetryResult<P> retryResult = retryAction.apply(retryOperationContext);
+    private <P, R> void handle(final RetryContextImpl<P, R> retryContext) {
+        final RetryAction retryAction = getRetryOperation(retryContext);
+        final RetryResult retryResult = retryAction.apply(retryContext);
         if (retryResult.getStrategy() == RetryResult.Strategy.RESUME) {
-            retryOperationContext.getResult().completeExceptionally(retryResult.getError());
+            retryContext.getResult().completeExceptionally(retryResult.getError());
         } else if (retryResult.getStrategy() == RetryResult.Strategy.STOP) {
             try {
-                retryOperationContext.getService().close();
+                retryContext.getService().close();
             } catch (final Exception e) {
                 logger.error("Error occurred while closing service in retry strategy.", e);
             }
-            retryOperationContext.getResult().completeExceptionally(retryResult.getError());
-        } else if (retryResult.getStrategy() == RetryResult.Strategy.RETRY_IMMEDIATELY) {
-            final P parameter = retryResult.getParameter();
-            final CompletionStage<R> completionStage = retryOperationContext.getFunction().apply(parameter);
-            handleResultAndEnqueueErrorHandlingAgain(completionStage, parameter, retryOperationContext);
-        } else if (retryResult.getStrategy() == RetryResult.Strategy.RETRY_SCHEDULED) {
-            final Duration duration = retryResult.getDuration();
-            final P parameter = retryOperationContext.getLatest().getParameter();
-            retryOperationContext.schedule(() -> {
-                final CompletionStage<R> completionStage = retryOperationContext.getFunction().apply(parameter);
-                handleResultAndEnqueueErrorHandlingAgain(completionStage, parameter, retryOperationContext);
-            }, duration);
+            retryContext.getResult().completeExceptionally(retryResult.getError());
         } else {
-            throw new IllegalStateException("illegal state for " + retryResult);
+            final Function<P, CompletionStage<R>> function = retryContext.getFunction();
+            if (retryResult.getStrategy() == RetryResult.Strategy.RETRY_IMMEDIATELY) {
+                final Object parameter = retryResult.getParameter();
+                final CompletionStage<R> completionStage = forceApply(function, parameter);
+                handleResultAndEnqueueErrorHandlingAgain(completionStage, parameter, retryContext);
+            } else if (retryResult.getStrategy() == RetryResult.Strategy.RETRY_SCHEDULED) {
+                final Duration duration = retryResult.getDuration();
+                final Object parameter = retryContext.getLatestParameter();
+                retryContext.schedule(() -> {
+                    final CompletionStage<R> completionStage = forceApply(function, parameter);
+                    handleResultAndEnqueueErrorHandlingAgain(completionStage, parameter, retryContext);
+                }, duration);
+            } else {
+                throw new IllegalStateException("illegal state for " + retryResult);
+            }
         }
     }
 
-    private <P, R> void handleResultAndEnqueueErrorHandlingAgain(final CompletionStage<R> completionStage, final P parameter, final RetryOperationContextImpl<P, R> retryOperationContext) {
+    @SuppressWarnings("unchecked")
+    private <P, R> CompletionStage<R> forceApply(final Function<P, CompletionStage<R>> function, final Object parameter) {
+        return function.apply((P) parameter);
+    }
+
+    private <P, R> void handleResultAndEnqueueErrorHandlingAgain(final CompletionStage<R> completionStage, final Object parameter, final RetryContextImpl<P, R> retryOperationContext) {
         //todo use own thread pool
         completionStage.whenCompleteAsync((res, error) -> {
             final boolean isErrorCase = error != null;
             if (isErrorCase) {
-                final AttemptErrorResult<P> attemptErrorResult = new AttemptErrorResultImpl<>(error, Instant.now(), parameter);
-                final RetryOperationContextImpl<P, R> nextContext = getNextContext(attemptErrorResult, retryOperationContext);
+                final RetryContextImpl<P, R> nextContext = getNextContext(retryOperationContext, error, parameter);
                 handle(nextContext);
             } else {
                 retryOperationContext.getResult().complete(res);
@@ -105,12 +110,13 @@ final class AsyncRetrySupervisorImpl extends Base implements AsyncRetrySuperviso
                 .filter(rule -> rule.isApplicable(retryContext))
                 .findFirst()
                 .map(rule -> rule.apply(retryContext))
-                .orElseGet(() -> RetryActions.giveUpAndSendLatestException());
+                .orElseGet(() -> RetryAction.giveUpAndSendLatestException());
     }
 
-    private <P, R> RetryOperationContextImpl<P, R> getNextContext(final AttemptErrorResult<P> attemptErrorResult, final RetryOperationContextImpl<P, R> parentContext) {
+
+    //TODO move as wither to impl
+    private <P, R> RetryContextImpl<P, R> getNextContext(final RetryContextImpl<P, R> parentContext, final Throwable error, final Object parameter) {
         final long attemptCount = parentContext.getAttempt() + 1;
-        final AttemptErrorResult<P> firstAttemptErrorResult = parentContext.getFirst();
-        return new RetryOperationContextImpl<>(attemptCount, firstAttemptErrorResult, attemptErrorResult, parentContext.getResult(), parentContext.getFunction(), parentContext.getService(), this::schedule);
+        return new RetryContextImpl<>(parentContext.getStartTimestamp(), attemptCount, parentContext.getFirstError(), parentContext.getFirstParameter(), error, parameter, parentContext.getResult(), parentContext.getFunction(), parentContext.getService(), parentContext::schedule);
     }
 }

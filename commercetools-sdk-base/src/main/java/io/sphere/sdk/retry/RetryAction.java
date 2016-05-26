@@ -4,13 +4,12 @@ import javax.annotation.Nullable;
 import java.time.Duration;
 import java.util.function.Function;
 
-import static io.sphere.sdk.retry.RetryActions.convert;
 import static io.sphere.sdk.retry.RetryActions.validateMaxAttempts;
 
 @FunctionalInterface
 public interface RetryAction {
     @Nullable
-    <P> RetryResult<P> apply(final RetryOperationContext<P> retryOperationContext);
+    RetryResult apply(final RetryContext retryContext);
 
     //TODO param??? maybe RetryRuleContext? rename parameter?
     static RetryAction scheduledRetry(final long maxAttempts, final Function<RetryContext, Duration> f) {
@@ -18,12 +17,12 @@ public interface RetryAction {
 
         return new RetryActionImpl() {
             @Override
-            public <P> RetryResult<P> apply(final RetryOperationContext<P> retryOperationContext) {
+            public RetryResult apply(final RetryContext retryOperationContext) {
                 if (retryOperationContext.getAttempt() > maxAttempts) {
-                    return RetryResult.resume(retryOperationContext.getLatest().getError());
+                    return RetryResult.resume(retryOperationContext.getLatestError());
                 } else {
-                    final Duration duration = f.apply(convert(retryOperationContext));
-                    final P parameterObject = retryOperationContext.getLatest().getParameter();
+                    final Duration duration = f.apply(retryOperationContext);
+                    final Object parameterObject = retryOperationContext.getLatestParameter();
                     return RetryResult.retryScheduled(parameterObject, duration);
                 }
             }
@@ -38,8 +37,8 @@ public interface RetryAction {
     static RetryAction shutdownServiceAndSendFirstException() {
         return new RetryActionImpl() {
             @Override
-            public <P> RetryResult<P> apply(final RetryOperationContext<P> retryOperationContext) {
-                return RetryResult.stop(retryOperationContext.getFirst().getError());
+            public RetryResult apply(final RetryContext retryOperationContext) {
+                return RetryResult.stop(retryOperationContext.getFirstError());
             }
 
             @Override
@@ -52,8 +51,8 @@ public interface RetryAction {
     static RetryAction shutdownServiceAndSendLatestException() {
         return new RetryActionImpl() {
             @Override
-            public <P> RetryResult<P> apply(final RetryOperationContext<P> retryOperationContext) {
-                return RetryResult.stop(retryOperationContext.getLatest().getError());
+            public RetryResult apply(final RetryContext retryOperationContext) {
+                return RetryResult.stop(retryOperationContext.getLatestError());
             }
 
             @Override
@@ -66,8 +65,8 @@ public interface RetryAction {
     static RetryAction giveUpAndSendFirstException() {
         return new RetryActionImpl() {
             @Override
-            public <P> RetryResult<P> apply(final RetryOperationContext<P> retryOperationContext) {
-                return RetryResult.resume(retryOperationContext.getFirst().getError());
+            public RetryResult apply(final RetryContext retryOperationContext) {
+                return RetryResult.resume(retryOperationContext.getFirstError());
             }
 
             @Override
@@ -80,8 +79,8 @@ public interface RetryAction {
     static RetryAction giveUpAndSendLatestException() {
         return new RetryActionImpl() {
             @Override
-            public <P> RetryResult<P> apply(final RetryOperationContext<P> retryOperationContext) {
-                return RetryResult.resume(retryOperationContext.getLatest().getError());
+            public RetryResult apply(final RetryContext retryOperationContext) {
+                return RetryResult.resume(retryOperationContext.getLatestError());
             }
 
             @Override
@@ -96,11 +95,11 @@ public interface RetryAction {
 
         return new RetryActionImpl() {
             @Override
-            public <P> RetryResult<P> apply(final RetryOperationContext<P> retryOperationContext) {
+            public RetryResult apply(final RetryContext retryOperationContext) {
                 if (retryOperationContext.getAttempt() > maxAttempts) {
-                    return RetryResult.resume(retryOperationContext.getLatest().getError());
+                    return RetryResult.resume(retryOperationContext.getLatestError());
                 } else {
-                    final P parameterObject = retryOperationContext.getLatest().getParameter();
+                    final Object parameterObject = retryOperationContext.getLatestParameter();
                     return RetryResult.retryImmediately(parameterObject);
                 }
             }
