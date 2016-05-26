@@ -17,7 +17,7 @@ import java.util.function.Function;
 final class AsyncRetrySupervisorImpl extends Base implements AsyncRetrySupervisor {
     private static final Logger logger = LoggerFactory.getLogger(RetryAction.class);
     private final List<RetryRule> retryRules;
-    private final ScheduledThreadPoolExecutor executor = new ScheduledThreadPoolExecutor(0);
+    private final ScheduledThreadPoolExecutor executor = new ScheduledThreadPoolExecutor(1);
 
     AsyncRetrySupervisorImpl(final List<RetryRule> retryRules) {
         this.retryRules = retryRules;
@@ -29,7 +29,7 @@ final class AsyncRetrySupervisorImpl extends Base implements AsyncRetrySuperviso
                                                @Nullable final P parameterObject) {
         final CompletionStage<R> initialCompletionStage = f.apply(parameterObject);
         final CompletableFuture<R> result = new CompletableFuture<>();
-        initialCompletionStage.whenComplete((res, firstError) -> {
+        initialCompletionStage.whenCompleteAsync((res, firstError) -> {
             final boolean isErrorCase = firstError != null;
             if (isErrorCase) {
                 final RetryContextImpl<P, R> retryOperationContext = createFirstRetryOperationContext(firstError, result, f, parameterObject, service);
@@ -37,7 +37,7 @@ final class AsyncRetrySupervisorImpl extends Base implements AsyncRetrySuperviso
             } else {
                 result.complete(res);
             }
-        });
+        }, executor);
         return result;
     }
 
@@ -57,8 +57,7 @@ final class AsyncRetrySupervisorImpl extends Base implements AsyncRetrySuperviso
     }
 
     private <P, R> void handle(final RetryContextImpl<P, R> retryContext) {
-        final RetryAction retryAction = getRetryOperation(retryContext);
-        final RetryResult retryResult = retryAction.apply(retryContext);
+        final RetryResult retryResult = getRetryOperation(retryContext).apply(retryContext);
         if (retryResult.getStrategy() == RetryResult.Strategy.RESUME) {
             retryContext.getResult().completeExceptionally(retryResult.getError());
         } else if (retryResult.getStrategy() == RetryResult.Strategy.STOP) {
@@ -76,7 +75,7 @@ final class AsyncRetrySupervisorImpl extends Base implements AsyncRetrySuperviso
                 handleResultAndEnqueueErrorHandlingAgain(completionStage, parameter, retryContext);
             } else if (retryResult.getStrategy() == RetryResult.Strategy.RETRY_SCHEDULED) {
                 final Duration duration = retryResult.getDuration();
-                final Object parameter = retryContext.getLatestParameter();
+                final Object parameter = retryResult.getParameter();
                 retryContext.schedule(() -> {
                     final CompletionStage<R> completionStage = forceApply(function, parameter);
                     handleResultAndEnqueueErrorHandlingAgain(completionStage, parameter, retryContext);
@@ -93,16 +92,15 @@ final class AsyncRetrySupervisorImpl extends Base implements AsyncRetrySuperviso
     }
 
     private <P, R> void handleResultAndEnqueueErrorHandlingAgain(final CompletionStage<R> completionStage, final Object parameter, final RetryContextImpl<P, R> retryOperationContext) {
-        //todo use own thread pool
         completionStage.whenCompleteAsync((res, error) -> {
             final boolean isErrorCase = error != null;
             if (isErrorCase) {
-                final RetryContextImpl<P, R> nextContext = getNextContext(retryOperationContext, error, parameter);
+                final RetryContextImpl<P, R> nextContext = retryOperationContext.withNewFailedAttempt(error, parameter);
                 handle(nextContext);
             } else {
                 retryOperationContext.getResult().complete(res);
             }
-        });
+        }, executor);
     }
 
     private <P> RetryAction getRetryOperation(final RetryContext retryContext) {
@@ -111,12 +109,5 @@ final class AsyncRetrySupervisorImpl extends Base implements AsyncRetrySuperviso
                 .findFirst()
                 .map(rule -> rule.apply(retryContext))
                 .orElseGet(() -> RetryAction.giveUpAndSendLatestException());
-    }
-
-
-    //TODO move as wither to impl
-    private <P, R> RetryContextImpl<P, R> getNextContext(final RetryContextImpl<P, R> parentContext, final Throwable error, final Object parameter) {
-        final long attemptCount = parentContext.getAttempt() + 1;
-        return new RetryContextImpl<>(parentContext.getStartTimestamp(), attemptCount, parentContext.getFirstError(), parentContext.getFirstParameter(), error, parameter, parentContext.getResult(), parentContext.getFunction(), parentContext.getService(), parentContext::schedule);
     }
 }

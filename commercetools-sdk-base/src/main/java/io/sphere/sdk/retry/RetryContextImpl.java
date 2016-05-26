@@ -85,4 +85,9 @@ final class RetryContextImpl<P, R> extends Base implements RetryContext {
     void schedule(final Runnable runnable, final Duration durationToWaitBeforeStarting) {
         scheduler.accept(runnable, durationToWaitBeforeStarting);
     }
+
+    RetryContextImpl<P, R> withNewFailedAttempt(final Throwable error, final Object parameter) {
+        final long attemptCount = getAttempt() + 1;
+        return new RetryContextImpl<>(getStartTimestamp(), attemptCount, getFirstError(), getFirstParameter(), error, parameter, getResult(), getFunction(), getService(), this::schedule);
+    }
 }
