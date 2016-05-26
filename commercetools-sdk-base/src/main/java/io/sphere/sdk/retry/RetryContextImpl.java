@@ -6,6 +6,7 @@ import javax.annotation.Nullable;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.CompletionException;
 import java.util.concurrent.CompletionStage;
 import java.util.function.BiConsumer;
 import java.util.function.Function;
@@ -28,14 +29,18 @@ final class RetryContextImpl<P, R> extends Base implements RetryContext {
     public RetryContextImpl(final Instant startTimestamp, final Long attempt, final Throwable firstError, final Object firstParameter, final Throwable latestError, final Object latestParameter, final CompletableFuture<R> result, final Function<P, CompletionStage<R>> f, final AutoCloseable closeable, final BiConsumer<Runnable, Duration> scheduler) {
         this.attempt = attempt;
         this.startTimestamp = startTimestamp;
-        this.firstError = firstError;
-        this.latestError = latestError;
+        this.firstError = filterOutCompletionException(firstError);
+        this.latestError = filterOutCompletionException(latestError);
         this.firstParameter = firstParameter;
         this.latestParameter = latestParameter;
         this.result = result;
         this.f = f;
         this.closeable = closeable;
         this.scheduler = scheduler;
+    }
+
+    private static Throwable filterOutCompletionException(final Throwable throwable) {
+        return throwable instanceof CompletionException ? throwable.getCause() : throwable;
     }
 
     @Override

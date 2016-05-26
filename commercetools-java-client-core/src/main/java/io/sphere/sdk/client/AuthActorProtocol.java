@@ -3,30 +3,6 @@ package io.sphere.sdk.client;
 import io.sphere.sdk.models.Base;
 
 final class AuthActorProtocol {
-    static class TokenDeliveryFailedMessage extends Base {
-        final Throwable cause;
-
-        public TokenDeliveryFailedMessage(final Throwable cause) {
-            this.cause = cause;
-        }
-    }
-
-    static class TokenDeliveredMessage extends Base {
-        final Tokens tokens;
-
-        public TokenDeliveredMessage(final Tokens tokens) {
-            this.tokens = tokens;
-        }
-    }
-
-    static class SubscribeMessage extends Base {
-        final Actor subscriber;
-
-        public SubscribeMessage(final Actor subscriber) {
-            this.subscriber = subscriber;
-        }
-    }
-
     static class FailedTokenFetchMessage extends Base {
         final Throwable cause;
 

@@ -25,6 +25,7 @@ final class OneTimeSphereAccessTokenSupplier extends AutoCloseableService implem
 
     @Override
     public final synchronized CompletionStage<String> get() {
+        rejectExcutionIfClosed("token supplier already closed");
         final CompletionStage<String> future = tokenFuture.orElseGet(() -> {
             final CompletionStage<String> tokenFuture = fetchToken();
             this.tokenFuture = Optional.of(tokenFuture);

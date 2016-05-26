@@ -6,6 +6,9 @@ import io.sphere.sdk.json.JsonException;
 import io.sphere.sdk.json.SphereJsonUtils;
 import io.sphere.sdk.meta.BuildInfo;
 import io.sphere.sdk.models.SphereException;
+import io.sphere.sdk.retry.AsyncRetrySupervisor;
+import io.sphere.sdk.retry.RetryAction;
+import io.sphere.sdk.retry.RetryRule;
 import io.sphere.sdk.utils.SphereInternalLogger;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,6 +19,7 @@ import java.util.concurrent.CompletionStage;
 
 import static io.sphere.sdk.client.HttpResponseBodyUtils.bytesToString;
 import static io.sphere.sdk.utils.SphereInternalLogger.getLogger;
+import static java.util.Arrays.asList;
 
 final class SphereClientImpl extends AutoCloseableService implements SphereClient {
     private static final Logger classLogger = LoggerFactory.getLogger(SphereClient.class);
@@ -23,20 +27,23 @@ final class SphereClientImpl extends AutoCloseableService implements SphereClien
     private final HttpClient httpClient;
     private final SphereApiConfig config;
     private final SphereAccessTokenSupplier tokenSupplier;
+    private final AsyncRetrySupervisor supervisor;
 
 
-    private SphereClientImpl(final SphereApiConfig config, final SphereAccessTokenSupplier tokenSupplier, final HttpClient httpClient) {
+    private SphereClientImpl(final SphereApiConfig config, final SphereAccessTokenSupplier tokenSupplier, final HttpClient httpClient, final List<RetryRule> apiRetryRules) {
         this.httpClient = httpClient;
         this.config = config;
         this.tokenSupplier = tokenSupplier;
+        this.supervisor = AsyncRetrySupervisor.of(apiRetryRules);
     }
 
     @Override
     public <T> CompletionStage<T> execute(final SphereRequest<T> sphereRequest) {
         rejectExcutionIfClosed("Client is already closed.");
-
-        final CompletionStage<String> tokenFuture = tokenSupplier.get();
-        return tokenFuture.thenCompose(token -> execute(sphereRequest, token));
+        return supervisor.supervise(this, r -> {
+            final CompletionStage<String> tokenFuture = tokenSupplier.get();
+            return tokenFuture.thenCompose(token -> execute(sphereRequest, token));
+        }, sphereRequest);
     }
 
     private <T> CompletionStage<T> execute(final SphereRequest<T> sphereRequest, final String token) {
@@ -135,6 +142,15 @@ final class SphereClientImpl extends AutoCloseableService implements SphereClien
     }
 
     public static SphereClient of(final SphereApiConfig config, final HttpClient httpClient, final SphereAccessTokenSupplier tokenSupplier) {
-        return new SphereClientImpl(config, tokenSupplier, httpClient);
+        return of(config, httpClient, tokenSupplier, defaultRules());
+    }
+
+    private static List<RetryRule> defaultRules() {
+        final RetryRule invalidCredentialsCloseRetryRule = RetryRule.ofMatching(InvalidClientCredentialsException.class, c -> RetryAction.shutdownServiceAndSendLatestException());
+        return asList(invalidCredentialsCloseRetryRule);
+    }
+
+    public static SphereClient of(final SphereApiConfig config, final HttpClient httpClient, final SphereAccessTokenSupplier tokenSupplier, final List<RetryRule> apiRetryRules) {
+        return new SphereClientImpl(config, tokenSupplier, httpClient, apiRetryRules);
     }
 }

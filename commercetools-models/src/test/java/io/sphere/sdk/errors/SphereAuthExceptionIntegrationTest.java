@@ -36,9 +36,9 @@ public class SphereAuthExceptionIntegrationTest extends IntegrationTest {
             final String authUrl = "http://sdfjifdsjifdsjfdsjdfsjidsfjidfs.de";
             final String apiUrl = getSphereClientConfig().getApiUrl();
             final SphereClientConfig config = SphereClientConfig.of("projectKey", "clientId", "clientSecret", authUrl, apiUrl);
-            try (final SphereAccessTokenSupplier supplier = SphereAccessTokenSupplier.ofAutoRefresh(config,httpClient,false)) {
+            try (final SphereAccessTokenSupplier supplier = SphereAccessTokenSupplier.ofAutoRefresh(config, httpClient, false)) {
                 supplier.close();
-                supplier.get().toCompletableFuture().get(200, TimeUnit.MILLISECONDS);
+                assertThatThrownBy(() -> supplier.get()).isInstanceOf(IllegalStateException.class);
             }
 
         }
@@ -84,7 +84,7 @@ public class SphereAuthExceptionIntegrationTest extends IntegrationTest {
                 .build();
         try (final SphereClient client = SphereClientFactory.of().createClient(config)) {
             final Throwable throwable =
-                    catchThrowable(() -> blockingWait(client.execute(ProjectGet.of()), Duration.ofMillis(1000)));
+                    catchThrowable(() -> blockingWait(client.execute(ProjectGet.of()), Duration.ofMillis(10000)));
             assertThat(throwable).isInstanceOf(InvalidClientCredentialsException.class);
             assertThat(client).is(closed());
         }
@@ -138,9 +138,10 @@ public class SphereAuthExceptionIntegrationTest extends IntegrationTest {
         final SphereAccessTokenSupplier authTokenSupplier = authTokenSupplierSupplier.apply(config);
         assertThatThrownBy(() -> authTokenSupplier.get().toCompletableFuture().join())
                 .hasCauseInstanceOf(InvalidClientCredentialsException.class);
-        assertThatThrownBy(() -> authTokenSupplier.get().toCompletableFuture().get(20, TimeUnit.MILLISECONDS))
-                .overridingErrorMessage("further requests get also an exception and do not hang")
-                .hasCauseInstanceOf(InvalidClientCredentialsException.class);
+        final Throwable throwable = catchThrowable(() -> authTokenSupplier.get().toCompletableFuture().get(20, TimeUnit.MILLISECONDS));
+        assertThat(throwable)
+                .as("further requests get also an exception and do not hang")
+                .isInstanceOf(IllegalStateException.class);
         authTokenSupplier.close();
     }
 

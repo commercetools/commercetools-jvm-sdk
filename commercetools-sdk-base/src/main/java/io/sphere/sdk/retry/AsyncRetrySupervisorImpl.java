@@ -8,6 +8,7 @@ import javax.annotation.Nullable;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.List;
+import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionStage;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
@@ -61,12 +62,12 @@ final class AsyncRetrySupervisorImpl extends Base implements AsyncRetrySuperviso
         if (retryResult.getStrategy() == RetryResult.Strategy.RESUME) {
             retryContext.getResult().completeExceptionally(retryResult.getError());
         } else if (retryResult.getStrategy() == RetryResult.Strategy.STOP) {
+            retryContext.getResult().completeExceptionally(retryResult.getError());
             try {
                 retryContext.getService().close();
             } catch (final Exception e) {
                 logger.error("Error occurred while closing service in retry strategy.", e);
             }
-            retryContext.getResult().completeExceptionally(retryResult.getError());
         } else {
             final Function<P, CompletionStage<R>> function = retryContext.getFunction();
             if (retryResult.getStrategy() == RetryResult.Strategy.RETRY_IMMEDIATELY) {
@@ -104,7 +105,8 @@ final class AsyncRetrySupervisorImpl extends Base implements AsyncRetrySuperviso
     }
 
     private RetryAction getRetryOperation(final RetryContext retryContext) {
-        return RetryRule.findMatchingRetryAction(retryRules, retryContext)
+        final Optional<RetryAction> matchingRetryAction = RetryRule.findMatchingRetryAction(retryRules, retryContext);
+        return matchingRetryAction
                 .orElseGet(() -> RetryAction.giveUpAndSendLatestException());
     }
 

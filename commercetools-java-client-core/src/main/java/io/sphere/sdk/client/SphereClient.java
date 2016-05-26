@@ -1,7 +1,9 @@
 package io.sphere.sdk.client;
 
 import io.sphere.sdk.http.HttpClient;
+import io.sphere.sdk.retry.RetryRule;
 
+import java.util.List;
 import java.util.concurrent.CompletionStage;
 
 /**
@@ -44,5 +46,9 @@ public interface SphereClient extends AutoCloseable {
      */
     static SphereClient of(final SphereApiConfig config, final HttpClient httpClient, final SphereAccessTokenSupplier tokenSupplier) {
         return SphereClientImpl.of(config, httpClient, tokenSupplier);
+    }
+
+    static SphereClient of(SphereApiConfig config, HttpClient httpClient, SphereAccessTokenSupplier tokenSupplier, List<RetryRule> apiRetryRules) {
+        return SphereClientImpl.of(config, httpClient, tokenSupplier, apiRetryRules);
     }
 }

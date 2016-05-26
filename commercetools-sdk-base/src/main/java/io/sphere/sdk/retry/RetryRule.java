@@ -1,5 +1,7 @@
 package io.sphere.sdk.retry;
 
+import io.sphere.sdk.client.InvalidClientCredentialsException;
+
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Function;
@@ -38,5 +40,9 @@ public interface RetryRule {
                 .filter(rule -> rule.isApplicable(retryContext))
                 .findFirst()
                 .map(rule -> rule.apply(retryContext));
+    }
+
+    static RetryRule ofMatching(Class<? extends Throwable> errorClass, final Function<RetryContext, RetryAction> function) {
+        return RetryRule.of(c -> errorClass.isAssignableFrom(c.getLatestError().getClass()), function);
     }
 }
