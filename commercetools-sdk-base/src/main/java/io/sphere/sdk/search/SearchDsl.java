@@ -22,11 +22,21 @@ public interface SearchDsl<T, C extends SearchDsl<T, C>> extends ResourceSearch<
     C withText(final Locale locale, final String text);
 
     /**
-     * Returns an ResourceSearch with mofified fuzzyParameter.
+     * Returns an ResourceSearch with modified fuzzy parameter.
      * @param fuzzy a flag to indicate if fuzzy search is enabled (true) or not (false)
      * @return an ResourceSearch with the new fuzzy flag setting
      */
     C withFuzzy(final Boolean fuzzy);
+
+    /**
+     * Returns an ResourceSearch with modified fuzzyLevel parameter.
+     *
+     * {@include.example io.sphere.sdk.products.search.FuzzyLevelIntegrationTest#fuzzyLevel()}
+     *
+     * @param fuzzyLevel defines level of unsharpness of the search using the Damerau-Levenshtein distance
+     * @return an ResourceSearch with the new fuzzyLevel setting
+     */
+    C withFuzzyLevel(final Integer fuzzyLevel);
 
     /**
      * Returns a new object with the new limit.

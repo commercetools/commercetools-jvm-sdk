@@ -51,6 +51,11 @@ public abstract class ResourceMetaModelSearchDslBuilderImpl<B, T, C extends Meta
     }
 
     @Override
+    public B fuzzyLevel(final Integer fuzzyLevel) {
+        return op(d -> d.withFuzzyLevel(fuzzyLevel));
+    }
+
+    @Override
     public B facets(final List<FacetExpression<T>> facets) {
         return op(d -> d.withFacets(facets));
     }

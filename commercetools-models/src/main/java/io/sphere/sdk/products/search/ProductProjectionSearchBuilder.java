@@ -61,6 +61,11 @@ public final class ProductProjectionSearchBuilder extends ResourceMetaModelSearc
     }
 
     @Override
+    public ProductProjectionSearchBuilder fuzzyLevel(final Integer fuzzyLevel) {
+        return super.fuzzyLevel(fuzzyLevel);
+    }
+
+    @Override
     public ProductProjectionSearchBuilder limit(final Long limit) {
         return super.limit(limit);
     }
