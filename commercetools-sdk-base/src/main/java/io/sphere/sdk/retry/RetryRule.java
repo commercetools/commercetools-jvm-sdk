@@ -1,7 +1,5 @@
 package io.sphere.sdk.retry;
 
-import io.sphere.sdk.client.InvalidClientCredentialsException;
-
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Function;

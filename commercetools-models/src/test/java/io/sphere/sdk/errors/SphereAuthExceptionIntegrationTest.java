@@ -1,15 +1,14 @@
 package io.sphere.sdk.errors;
 
-import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.client.*;
 import io.sphere.sdk.http.HttpClient;
 import io.sphere.sdk.http.HttpException;
 import io.sphere.sdk.http.HttpRequest;
 import io.sphere.sdk.http.HttpResponse;
 import io.sphere.sdk.json.JsonException;
+import io.sphere.sdk.models.SphereException;
 import io.sphere.sdk.projects.Project;
 import io.sphere.sdk.projects.queries.ProjectGet;
-import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.test.IntegrationTest;
 import org.assertj.core.api.Condition;
 import org.junit.Rule;
@@ -18,18 +17,90 @@ import org.junit.rules.ExpectedException;
 
 import java.net.UnknownHostException;
 import java.time.Duration;
-import java.util.concurrent.*;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.CompletionStage;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Function;
 
 import static io.sphere.sdk.client.SphereClientUtils.blockingWait;
 import static io.sphere.sdk.test.SphereTestUtils.assertEventually;
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.assertj.core.api.Assertions.catchThrowable;
+import static org.assertj.core.api.Assertions.*;
 
 public class SphereAuthExceptionIntegrationTest extends IntegrationTest {
     @Rule
     public ExpectedException thrown = ExpectedException.none();
+
+    @Test
+    public void serverProblemsRecover() throws Exception {
+        final int failCount = 5;
+        final String token = "foo";
+        try(final HttpClient httpClient = newFailingThenSuccessfullHttpClient(failCount, token)) {
+            try (final SphereAccessTokenSupplier supplier = SphereAccessTokenSupplier.ofAutoRefresh(getSphereClientConfig(), httpClient, false)) {
+                final Throwable t = catchThrowable(() -> blockingWait(supplier.get(), 2000, TimeUnit.MILLISECONDS));
+                assertThat(t).isInstanceOf(SphereException.class).hasCauseInstanceOf(HttpException.class);
+                assertEventually(() -> {
+                    final CompletionStage<String> tokenStage = supplier.get();
+                    assertThat(tokenStage).is(successfullyCompletedWithin(2000, TimeUnit.MILLISECONDS));
+                    assertThat(tokenStage.toCompletableFuture().join()).isEqualTo(token);
+                });
+            }
+        }
+    }
+
+    private Condition<CompletionStage<String>> successfullyCompletedWithin(final long time, final TimeUnit timeUnit) {
+        return new Condition<CompletionStage<String>>() {
+
+            @Override
+            public boolean matches(final CompletionStage<String> value) {
+                boolean successful = true;
+                try {
+                    value.toCompletableFuture().get(time, timeUnit);
+                } catch (final Exception e) {
+                    successful = false;
+                }
+
+                return successful;
+            }
+        };
+    }
+
+    @Test
+    public void serverProblemsFail() throws Exception {
+        final int failCount = 9000;
+        final String token = "foo";
+        try(final HttpClient httpClient = newFailingThenSuccessfullHttpClient(failCount, token)) {
+            try (final SphereAccessTokenSupplier supplier = SphereAccessTokenSupplier.ofAutoRefresh(getSphereClientConfig(), httpClient, false)) {
+                final Throwable t = catchThrowable(() -> blockingWait(supplier.get(), 2000, TimeUnit.MILLISECONDS));
+                assertThat(t).isInstanceOf(SphereException.class).hasCauseInstanceOf(HttpException.class);
+            }
+        }
+    }
+
+    private HttpClient newFailingThenSuccessfullHttpClient(final int failCount, final String token) {
+        return new HttpClient() {
+            private final AtomicInteger counter = new AtomicInteger(0);
+
+            @Override
+            public CompletionStage<HttpResponse> execute(final HttpRequest httpRequest) {
+                return counter.incrementAndGet() > failCount ? successResponse() : failingResponse();
+            }
+
+            private CompletionStage<HttpResponse> failingResponse() {
+                return CompletableFuture.completedFuture(HttpResponse.of(502, "{}"));
+            }
+
+            private CompletionStage<HttpResponse> successResponse() {
+                return CompletableFuture.completedFuture(HttpResponse.of(200, "{\"access_token\": \"foo\"}"));
+            }
+
+            @Override
+            public void close() {
+
+            }
+        };
+    }
 
     @Test
     public void misconfigurationDomainInAuth() throws Exception {
@@ -41,7 +112,6 @@ public class SphereAuthExceptionIntegrationTest extends IntegrationTest {
                 supplier.close();
                 assertThatThrownBy(() -> supplier.get()).isInstanceOf(IllegalStateException.class);
             }
-
         }
     }
 
@@ -147,16 +217,4 @@ public class SphereAuthExceptionIntegrationTest extends IntegrationTest {
                 .isInstanceOfAny(IllegalStateException.class, ExecutionException.class);
         authTokenSupplier.close();
     }
-
-    private void expectExceptionAndClose(final SphereClient client, final Class<InvalidTokenException> exceptionClass, final CompletionStage<PagedQueryResult<Category>> stage) throws Throwable {
-        thrown.expect(exceptionClass);
-        try {
-            stage.toCompletableFuture().join();
-        } catch (final CompletionException e) {
-            client.close();
-            throw e.getCause();
-        }
-
-    }
-
 }

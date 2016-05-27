@@ -46,11 +46,15 @@ final class AuthActor extends Actor {
     private void process(final FetchTokenFromSphereMessage m) {
         if (!isWaitingForToken) {
             isWaitingForToken = true;
-            final CompletionStage<Tokens> future = supervisedTokenSupplier.apply(() -> internalTokensSupplier.get());
+            //for users it is fail fast but in the background it will be attempted again
+            final CompletionStage<Tokens> future = m.attempt > 0
+                    ? supervisedTokenSupplier.apply(() -> internalTokensSupplier.get())
+                    : internalTokensSupplier.get();
             onSuccess(future, tokens -> tell(new SuccessfulTokenFetchMessage(tokens)));
             onFailure(future, e -> {
                 requestUpdateFailedStatus.accept(e);
                 tell(new FailedTokenFetchMessage(e));
+                tell(new FetchTokenFromSphereMessage(1));
             });
         }
     }

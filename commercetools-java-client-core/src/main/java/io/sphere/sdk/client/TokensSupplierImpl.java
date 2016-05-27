@@ -126,6 +126,8 @@ final class TokensSupplierImpl extends AutoCloseableService implements TokensSup
                     exception = new UnauthorizedException(httpResponse.toString(), e);
                 }
                 throw exception;
+            } else if (httpResponse.getStatusCode() >= 300) {
+                throw new SphereException("negative HTTP response", new HttpException("status code is " + httpResponse.getStatusCode()));
             }
             try {
                 return SphereJsonUtils.readObject(httpResponse.getResponseBody(), Tokens.typeReference());

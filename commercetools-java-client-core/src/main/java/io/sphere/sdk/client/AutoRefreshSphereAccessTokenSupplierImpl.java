@@ -4,15 +4,18 @@ import io.sphere.sdk.http.HttpClient;
 import io.sphere.sdk.http.HttpException;
 import io.sphere.sdk.retry.AsyncRetrySupervisor;
 import io.sphere.sdk.retry.RetryAction;
+import io.sphere.sdk.retry.RetryContext;
 import io.sphere.sdk.retry.RetryRule;
 import io.sphere.sdk.utils.CompletableFutureUtils;
 
 import java.net.UnknownHostException;
+import java.time.Duration;
 import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionStage;
+import java.util.function.Predicate;
 import java.util.function.Supplier;
 
 import static java.util.Arrays.asList;
@@ -25,19 +28,25 @@ final class AutoRefreshSphereAccessTokenSupplierImpl extends AutoCloseableServic
     private volatile CompletableFuture<String> currentAccessTokenFuture = new CompletableFuture<>();
     private volatile Optional<Tokens> currentTokensOption = Optional.empty();
     private final Actor authActor;
-    private final List<RetryRule> retryRules = asList(RetryRule.of(r -> {
-        final Throwable latestError = r.getLatestError();
-        return latestError instanceof HttpException && latestError != null && latestError instanceof UnknownHostException;
-    }, c -> RetryAction.shutdownServiceAndSendLatestException()), RetryRule.of(r -> {
-        final Throwable latestError = r.getLatestError();
-        return latestError instanceof InvalidClientCredentialsException;
-    }, c -> RetryAction.shutdownServiceAndSendLatestException()));
+    private final List<RetryRule> retryRules = createRules();
     private final AsyncRetrySupervisor supervisor = AsyncRetrySupervisor.of(retryRules);
 
     private AutoRefreshSphereAccessTokenSupplierImpl(final SphereAuthConfig config, final HttpClient httpClient, final boolean closeHttpClient) {
         final TokensSupplier internalTokensSupplier = TokensSupplierImpl.of(config, httpClient, closeHttpClient);
         authActor = new AuthActor(internalTokensSupplier, this::supervisedTokenSupplier, this::requestUpdateTokens, this::requestUpdateFailedStatus);
         authActor.tell(new AuthActorProtocol.FetchTokenFromSphereMessage());
+    }
+
+    private List<RetryRule> createRules() {
+        final Predicate<RetryContext> isFatal = r -> {
+            final Throwable latestError = r.getLatestError();
+            final boolean unknownHost = latestError instanceof HttpException && latestError != null && latestError instanceof UnknownHostException;
+            final boolean unauthorized = latestError instanceof UnauthorizedException;
+            return unknownHost || unauthorized;
+        };
+        final RetryRule fatalRetryRule = RetryRule.of(isFatal, c -> RetryAction.shutdownServiceAndSendLatestException());
+        final RetryRule retryScheduledRetryRule = RetryRule.of(r -> true, c -> RetryAction.scheduledRetry(2, r -> Duration.ofMillis(r.getAttempt() * r.getAttempt() * 50)));
+        return asList(fatalRetryRule, retryScheduledRetryRule);
     }
 
     private CompletionStage<Tokens> supervisedTokenSupplier(final Supplier<CompletionStage<Tokens>> supplier) {
@@ -81,6 +90,7 @@ final class AutoRefreshSphereAccessTokenSupplierImpl extends AutoCloseableServic
             currentTokensOption = Optional.empty();
             currentAccessTokenFuture = CompletableFutureUtils.failed(error);
         }
+        authActor.tell(new AuthActorProtocol.FetchTokenFromSphereMessage());//
     }
 
     /**
