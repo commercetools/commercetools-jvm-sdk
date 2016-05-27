@@ -1,7 +1,7 @@
 package io.sphere.sdk.client;
 
 /**
- * The SPHERE.IO API is currently not available.
+ * The platform is currently not available.
  *
  * <p>To simulate for tests this exception see {@link SphereServiceException}.</p>
  *

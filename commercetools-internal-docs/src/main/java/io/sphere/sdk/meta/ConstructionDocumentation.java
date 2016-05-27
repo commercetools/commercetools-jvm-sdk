@@ -5,7 +5,7 @@ import io.sphere.sdk.models.LocalizedString;
 /**
  * This documentation is about creating objects.
  *
- * SPHERE.IO saves e-commerce data in the cloud. The JVM SDK is one way to read and write the data.
+ * The commercetools platform saves e-commerce data in the cloud. The JVM SDK is one way to read and write the data.
  * There can be other tools like the Merchant Center or product sync tools which can also change data.
  * As a result the data loaded with the JVM SDK is a record of the present or the
  * past since another tool might have changed the data just after loading the data .
@@ -54,8 +54,8 @@ import io.sphere.sdk.models.LocalizedString;
  *  <h3 id=persistent-objects>Persistent objects vs. local test doubles</h3>
  *
  *
- *  <p>For persistent changes you need to use a SPHERE.IO
- *  client and to execute a {@link io.sphere.sdk.commands.Command}. Available commands for the SPHERE.IO resources
+ *  <p>For persistent changes you need to use a commercetools platform
+ *  client and to execute a {@link io.sphere.sdk.commands.Command}. Available commands for the commercetools platform resources
  *  are listed in {@link io.sphere.sdk.meta.SphereResources}</p>
  *
  *  Typically there are three kinds of commands:

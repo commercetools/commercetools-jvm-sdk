@@ -5,7 +5,7 @@ import io.sphere.sdk.http.HttpClient;
 import java.util.concurrent.CompletionStage;
 
 /**
- * A client interface to perform requests to SPHERE.IO.
+ * A client interface to perform requests to the platform.
  *
  * <h3 id=instantiation>Instantiation</h3>
  *
@@ -15,7 +15,7 @@ import java.util.concurrent.CompletionStage;
  *
  * {@include.example example.TaxCategoryQueryExample#exampleQuery()}
  *
- * Refer to <a href="../meta/SphereResources.html">resources</a> for known SPHERE.IO requests.
+ * Refer to <a href="../meta/SphereResources.html">resources</a> for known platform requests.
  *
  */
 public interface SphereClient extends AutoCloseable {
@@ -37,7 +37,7 @@ public interface SphereClient extends AutoCloseable {
      * Raw client creation.
      * See also SphereClientFactory.
      *
-     * @param config SPHERE.IO project and location
+     * @param config platform project and location
      * @param httpClient client to execute requests
      * @param tokenSupplier delivery of access tokens
      * @return sphere client

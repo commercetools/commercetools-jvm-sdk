@@ -3,7 +3,7 @@ package io.sphere.sdk.commands;
 import io.sphere.sdk.client.SphereRequest;
 
 /**
- * A command represents a request to update the state of SPHERE.io entities.
+ * A command represents a request to update the state of platform entities.
  *
  * @param <T> the type of the result of the command
  *

@@ -9,7 +9,7 @@ import io.sphere.sdk.products.attributes.AttributeAccess;
  <h3 id="product-type-creation">ProductType Creation</h3>
  <p>A {@link io.sphere.sdk.producttypes.ProductType} is like a schema that defines how the product attributes are structured.</p>
  <p>{@link io.sphere.sdk.producttypes.ProductType}s contain a list of {@link io.sphere.sdk.products.attributes.AttributeDefinition}s which corresponds to the name and type of each attribute, along with some additional information".
- Each name/type pair must be unique across a SPHERE.IO project, so if you create an attribute "foo" of type String, you cannot create
+ Each name/type pair must be unique across a commercetools project, so if you create an attribute "foo" of type String, you cannot create
  another {@link io.sphere.sdk.producttypes.ProductType} where "foo" has another type (e.g. {@link LocalizedString}). If you do it anyway you get an error message like:</p>
 
 <pre>"The attribute with name 'foo' has a different type on product type 'exampleproducttype'."</pre>
@@ -185,7 +185,7 @@ import io.sphere.sdk.products.attributes.AttributeAccess;
 
  {@include.example io.sphere.sdk.producttypes.NestedAttributeIntegrationTest}
 
- <p>A general explanation can be found in the  <a href="http://dev.sphere.io/tutorials-nested-types.html">HTTP API tutorial</a>.</p>
+ <p>A general explanation can be found in the  <a href="http://dev.commercetools.io/tutorials-nested-types.html">HTTP API tutorial</a>.</p>
  */
 public final class ProductAttributeDocumentation {
     private ProductAttributeDocumentation() {

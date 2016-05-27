@@ -30,7 +30,7 @@ public interface ProductVariantImportDraft {
     String getSku();
 
     /**
-     * Field is not part of the SPHERE.IO API, it is used to initialize {@link LineItemImportDraftBuilder} correctly.
+     * Field is not part of the platform API, it is used to initialize {@link LineItemImportDraftBuilder} correctly.
      * @return the product ID
      */
     @Nullable

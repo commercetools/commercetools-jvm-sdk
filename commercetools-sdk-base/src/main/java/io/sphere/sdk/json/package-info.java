@@ -1,4 +1,4 @@
 /**
- * Provides utils the JSON mapping from and to SPHERE.IO.
+ * Provides utils the JSON mapping from and to the platform.
  */
 package io.sphere.sdk.json;

@@ -5,7 +5,7 @@ import io.sphere.sdk.http.HttpResponse;
 import javax.annotation.Nullable;
 
 /**
- An argument for a sphere client to execute an HTTP API call on the level of one SPHERE.IO project.
+ An argument for a sphere client to execute an HTTP API call on the level of one project.
 
  <p>Typical workflow: A client executes {@link #httpRequestIntent()} and creates a future of an http response. When the future redeems the client uses the http response and passes it as
  argument to {@link #canDeserialize(HttpResponse)}. If the call results in true, the client applies {@link #deserialize(HttpResponse)} to transform the http response into T.</p>
@@ -20,7 +20,7 @@ public interface SphereRequest<T> {
      Before calling this method, check with {@link #canDeserialize(HttpResponse)} if the response can be consumed.
 
      @return the deserialized object
-     @param httpResponse the http response of SPHERE.IO
+     @param httpResponse the http response of the platform
      */
     @Nullable
     T deserialize(final HttpResponse httpResponse);

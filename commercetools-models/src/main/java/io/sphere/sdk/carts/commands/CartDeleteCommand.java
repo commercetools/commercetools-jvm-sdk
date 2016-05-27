@@ -7,7 +7,7 @@ import io.sphere.sdk.expansion.MetaModelReferenceExpansionDsl;
 import io.sphere.sdk.models.Versioned;
 
 /**
- * Deletes a cart in SPHERE.IO.
+ * Deletes a cart.
  *
  */
 public interface CartDeleteCommand extends MetaModelReferenceExpansionDsl<Cart, CartDeleteCommand, CartExpansionModel<Cart>>, DeleteCommand<Cart> {

@@ -7,7 +7,7 @@ import io.sphere.sdk.shippingmethods.ShippingMethodDraft;
 import io.sphere.sdk.shippingmethods.expansion.ShippingMethodExpansionModel;
 
 /**
- * Creates a {@link ShippingMethod} in SPHERE.IO.
+ * Creates a {@link ShippingMethod}.
  *
  * {@include.example io.sphere.sdk.shippingmethods.commands.ShippingMethodCreateCommandIntegrationTest#execution()}
  */

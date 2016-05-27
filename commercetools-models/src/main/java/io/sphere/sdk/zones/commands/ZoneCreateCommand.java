@@ -9,7 +9,7 @@ import io.sphere.sdk.zones.expansion.ZoneExpansionModel;
 
 
 /**
- * Creates a zone in SPHERE.IO.
+ * Creates a zone.
  *
  * {@include.example io.sphere.sdk.zones.commands.ZoneCreateCommandIntegrationTest#execution()}
  */

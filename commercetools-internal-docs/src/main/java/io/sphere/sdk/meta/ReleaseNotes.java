@@ -656,7 +656,7 @@ import java.util.function.Function;
  <li class=new-in-release>{@link io.sphere.sdk.client.SphereClientConfig#ofEnvironmentVariables(String)} to get the </li>
  <li class=change-in-release>The product attributes have been refactored, look at the {@link ProductAttributeDocumentation} how it works now.</li>
  <li class=change-in-release>{@link io.sphere.sdk.client.SphereClient} implements {@link AutoCloseable} instead of {@link java.io.Closeable}.</li>
- <li class=change-in-release>For timestamps we moved from {@link java.time.Instant} to {@link java.time.ZonedDateTime} since the latter also contains a timezone which better reflects SPHERE.IOs date time data.</li>
+ <li class=change-in-release>For timestamps we moved from {@link java.time.Instant} to {@link java.time.ZonedDateTime} since the latter also contains a timezone which better reflects the platforms date time data.</li>
  <li class=change-in-release>Getting the child categories of a category is not in category anymore but in {@link io.sphere.sdk.categories.CategoryTree#findChildren(Identifiable)}.</li>
  <li class=fixed-in-release>Sphere client does not shutdown actors properly.  See <a target="_blank" href="https://github.com/commercetools/commercetools-jvm-sdk/issues/491">#491</a>.</li>
  <li class=removed-in-release>{@code Category#getPathInTree()}</li>
@@ -669,11 +669,11 @@ import java.util.function.Function;
  <h3 class=released-version id=v1_0_0_M14>1.0.0-M14 (27.05.2015)</h3>
  <ul>
  <li class=new-in-release>New fields in {@link io.sphere.sdk.products.Price}: {@link Price#getValidFrom()} and {@link Price#getValidUntil()}.</li>
- <li class=new-in-release>Use {@link io.sphere.sdk.products.queries.ProductProjectionQueryModel#allVariants()} to formulate a predicate for all variants. In SPHERE.IO the json fields masterVariant (object) and variants (array of objects) together contain all variants.</li>
+ <li class=new-in-release>Use {@link io.sphere.sdk.products.queries.ProductProjectionQueryModel#allVariants()} to formulate a predicate for all variants. In the platform the json fields masterVariant (object) and variants (array of objects) together contain all variants.</li>
  <li class=new-in-release>Using {@link ProductProjectionQuery#ofCurrent()} and {@link ProductProjectionQuery#ofStaged()} saves you the import of {@link ProductProjectionType}.</li>
- <li class=new-in-release>{@link CompletionStage} does not support by default timeouts which are quite important in a reactive application so you can decorate the {@link io.sphere.sdk.client.SphereClient} with {@link io.sphere.sdk.client.TimeoutSphereClientDecorator} to get a {@link java.util.concurrent.TimeoutException} after a certain amount of time. But this does NOT cancel the request to SPHERE.IO.</li>
+ <li class=new-in-release>{@link CompletionStage} does not support by default timeouts which are quite important in a reactive application so you can decorate the {@link io.sphere.sdk.client.SphereClient} with {@link io.sphere.sdk.client.TimeoutSphereClientDecorator} to get a {@link java.util.concurrent.TimeoutException} after a certain amount of time. But this does NOT cancel the request to the platform.</li>
  <li class=new-in-release>The {@code io.sphere.sdk.reviews.Review} endpoints and models are implemented, but we suggest to not use it, since {@code io.sphere.sdk.reviews.Review}s cannot be deleted or marked as hidden.</li>
- <li class=new-in-release>New endpoint: Use {@link io.sphere.sdk.projects.queries.ProjectGet} to get the currencies, countries and languages of the SPHERE.IO project.</li>
+ <li class=new-in-release>New endpoint: Use {@link io.sphere.sdk.projects.queries.ProjectGet} to get the currencies, countries and languages of the commercetools project.</li>
  <li class=new-in-release>Categories with SEO meta attributes {@link Category#getMetaTitle()}, {@link Category#getMetaDescription()} and {@link Category#getMetaKeywords()} and
  update actions {@link io.sphere.sdk.categories.commands.updateactions.SetMetaTitle}, {@link io.sphere.sdk.categories.commands.updateactions.SetMetaDescription} and {@link io.sphere.sdk.categories.commands.updateactions.SetMetaKeywords}.</li>
  <li class=new-in-release>Cart discounts: {@link io.sphere.sdk.cartdiscounts.commands.CartDiscountCreateCommand}.</li>
@@ -684,7 +684,7 @@ import java.util.function.Function;
  <li class=change-in-release>Sort related classes for the Query API have been renamed with a "Query" prefix, to distinguish them from the Search API sort classes.</li>
  <li class=change-in-release>{@code io.sphere.sdk.queries.Predicate} has been renamed to {@link io.sphere.sdk.queries.QueryPredicate}.</li>
  <li class=change-in-release>The JVM SDK itself uses for tests the <a href="http://joel-costigliola.github.io/assertj/">assertj</a> assertion methods instead of fest assertions.</li>
- <li class=change-in-release>{@code io.sphere.sdk.products.commands.updateactions.SetMetaAttributes} has been removed since it is deprecated in SPHERE.IO.
+ <li class=change-in-release>{@code io.sphere.sdk.products.commands.updateactions.SetMetaAttributes} has been removed since it is deprecated in the commercetools platform.
  Use {@link SetMetaTitle},
  {@link SetMetaDescription},
  {@link SetMetaKeywords} or {@link io.sphere.sdk.products.commands.updateactions.MetaAttributesUpdateActions} for all together.
@@ -736,7 +736,7 @@ import java.util.function.Function;
  <ul>
  <li class=new-in-release>Added the {@link io.sphere.sdk.orders.commands.OrderImportCommand}.</li>
  <li class=new-in-release>Added the nested attributes: {@code io.sphere.sdk.attributes.AttributeAccess#ofNested()} + {@code io.sphere.sdk.attributes.AttributeAccess#ofNestedSet()}.</li>
- <li class=new-in-release>The error JSON body from SPHERE.IO responses can be directly extracted as JSON with {@link io.sphere.sdk.client.SphereServiceException#getJsonBody()}.</li>
+ <li class=new-in-release>The error JSON body from the platform responses can be directly extracted as JSON with {@link io.sphere.sdk.client.SphereServiceException#getJsonBody()}.</li>
  <li class=new-in-release>{@link io.sphere.sdk.http.HttpResponse} also contains {@link io.sphere.sdk.http.HttpHeaders}.</li>
  <li class=new-in-release>Experimental search filter/facet/sort expression model {@code ProductProjectionSearchModel}. See also {@link io.sphere.sdk.meta.SearchDocumentation}.</li>
  <li class=change-in-release>The {@link io.sphere.sdk.producttypes.ProductType} creation has been simplified (TextAttributeDefinition, LocalizedStringsAttributeDefinition, ... are just AttributeDefinition), see {@link io.sphere.sdk.producttypes.commands.ProductTypeCreateCommand} how to create them.</li>
@@ -759,8 +759,8 @@ import java.util.function.Function;
         <ul>
             <li>{@link AsyncHttpClientAdapter} enables to use a custom underlying Ning HTTP client for settings like proxies or max connections per host.</li>
             <li>The new module {@code java-client-apache-async} contains an {@link ApacheHttpClientAdapter adapter} to use the Apache HTTP client instead of the current default client Ning.</li>
-            <li>The {@link io.sphere.sdk.client.QueueSphereClientDecorator} enables to limit the amount of concurrent requests to SPHERE.IO with a task queue.</li>
-            <li>{@code io.sphere.sdk.client.SphereAccessTokenSupplierFactory} is a starting point to create custom access token suppliers for one token (either fetched from SPHERE.IO or as String) or auto refreshing for online shops.</li>
+            <li>The {@link io.sphere.sdk.client.QueueSphereClientDecorator} enables to limit the amount of concurrent requests to the platform with a task queue.</li>
+            <li>{@code io.sphere.sdk.client.SphereAccessTokenSupplierFactory} is a starting point to create custom access token suppliers for one token (either fetched from commercetools or as String) or auto refreshing for online shops.</li>
         </ul>
     </li>
     <li class=new-in-release>Added {@link io.sphere.sdk.client.SphereRequestDecorator} to decorate {@link io.sphere.sdk.client.SphereRequest}s.</li>
@@ -816,8 +816,8 @@ import java.util.function.Function;
  <li class=new-in-release>Added {@link io.sphere.sdk.products.ProductProjection#getVariant(int)} and {@link io.sphere.sdk.products.ProductProjection#getVariantOrMaster(int)} to find a product variant by id.</li>
  <li class=new-in-release>Added {@code VariantIdentifier} to have a container to address product variants which needs a product ID and a variant ID.</li>
  <li class=new-in-release>added {@link io.sphere.sdk.customers.commands.CustomerDeleteCommand} to delete customers.</li>
- <li class=new-in-release>Added {@link io.sphere.sdk.products.commands.updateactions.AddExternalImage} to connect products with images not hosted by SPHERE.IO.</li>
- <li class=new-in-release>Added {@link io.sphere.sdk.products.commands.updateactions.RemoveImage} to disconnect images from a product (external images and SPHERE.IO hosted).</li>
+ <li class=new-in-release>Added {@link io.sphere.sdk.products.commands.updateactions.AddExternalImage} to connect products with images not hosted by the commercetools platform.</li>
+ <li class=new-in-release>Added {@link io.sphere.sdk.products.commands.updateactions.RemoveImage} to disconnect images from a product (external images and commercetools platform hosted).</li>
  <li class=new-in-release>Added {@link io.sphere.sdk.client.SphereAccessTokenSupplier} as authentication method in the {@link io.sphere.sdk.client.SphereClient}.
  It is possible to automatically refresh a token or just pass a token to the client, see {@link io.sphere.sdk.client.SphereClientFactory#createClient(io.sphere.sdk.client.SphereApiConfig, io.sphere.sdk.client.SphereAccessTokenSupplier)} and {@link io.sphere.sdk.client.SphereAccessTokenSupplier#ofConstantToken(String)}.</li>
 
@@ -864,7 +864,7 @@ import java.util.function.Function;
  <h3>1.0.0-M7</h3>
 
  <ul>
- <li>Incompatible change: Classes to create templates for new entries in SPHERE.IO like {@code NewCategory} have been renamed to {@link io.sphere.sdk.categories.CategoryDraft}. </li>
+ <li>Incompatible change: Classes to create templates for new entries in the platform like {@code NewCategory} have been renamed to {@link io.sphere.sdk.categories.CategoryDraft}. </li>
  <li>Incompatible change: {@link ProductTypeDraft} has now only
  factory methods with an explicit parameter for the attribute declarations to prevent to use
  the getter {@link ProductTypeDraft#getAttributes()} and list add operations. </li>

@@ -1,4 +1,4 @@
-# SPHERE.IO JVM SDK
+# commercetools JVM SDK
 
 ![SPHERE.IO icon](https://admin.sphere.io/assets/images/sphere_logo_rgb_long.png)
 
@@ -46,7 +46,7 @@ Users gain type-safety, encapsulation, IDE auto completion and an internal domai
 * http://search.maven.org/#artifactdetails%7Ccom.commercetools.sdk.jvm.core%7Ccommercetools-convenience%7C1.0.0-RC1%7Cjar
 
 ### Modules
-* `commercetools-java-client`: alias for sphere-java-client-ahc-2_0
+* `commercetools-java-client`: alias for commercetools-java-client-ahc-2_0
 * `commercetools-java-client-apache-async`: uses Apache HTTP client
 * `commercetools-java-client-ahc-1_8`: uses async HTTP client 1.8
 * `commercetools-java-client-ahc-1_9`: uses async HTTP client 1.9 (AHC 1.9 is incompatible to AHC 1.8)
@@ -58,7 +58,6 @@ Users gain type-safety, encapsulation, IDE auto completion and an internal domai
 see https://github.com/commercetools/commercetools-jvm-sdk-scala-add-ons
 
 ### reactive streams
-* since RC1-SNAPSHOT, formerly in sphere-convenience-module
 * https://github.com/commercetools/commercetools-jvm-sdk-reactive-streams-addons
 
 ### JVM SDK Contrib
@@ -68,7 +67,7 @@ Useful code from external developers
 * https://github.com/commercetools/commercetools-jvm-sdk-contrib
 
 ### Experimental Add-Ons
-* ProductImageUploadCommand from http://dev.sphere.io/http-api-projects-products.html#upload-product-image
+* ProductImageUploadCommand from http://dev.commercetools.io/http-api-projects-products.html#upload-product-image
 
 see https://github.com/commercetools/commercetools-jvm-sdk-experimental-java-add-ons
 
@@ -78,7 +77,7 @@ see https://github.com/commercetools/commercetools-jvm-sdk-experimental-java-add
 
 ## Open Source Examples
 * [Sunrise Java](https://github.com/commercetools/commercetools-sunrise-java) - a shop using Play Framework 2.x with Handlebars.java as template engine, Google Guice for DI
-* [Donut](https://github.com/commercetools/sphere-donut) - single product subscription shop example with Play Framework 2.x and Twirl (Plays default) as template engine
+* [Donut](https://github.com/commercetools/commercetools-donut) - single product subscription shop example with Play Framework 2.x and Twirl (Plays default) as template engine
 * [commercetools Spring MVC archetype](https://github.com/commercetools/commercetools-spring-mvc-archetype) - template integrating the SDK with Spring DI and Spring MVC and showing just some products, thymeleaf template engine
 * [Reproducer Example](https://github.com/commercetools/commercetools-jvm-sdk-reproducer-example) - a demo which shows how to reproduce errors
 

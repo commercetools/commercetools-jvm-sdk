@@ -8,7 +8,7 @@ package io.sphere.sdk.expansion;
 public interface ExpansionPath<I> {
 
     /**
-     * Returns a SPHERE.IO reference expansion path expression.
+     * Returns a platform reference expansion path expression.
      * @return String with unescaped expand path expression.
      */
     String toSphereExpand();

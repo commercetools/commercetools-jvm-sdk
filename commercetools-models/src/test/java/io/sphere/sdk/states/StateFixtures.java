@@ -73,7 +73,7 @@ public class StateFixtures {
      * @param consumer consumer which uses the two states
      */
     public static void withStandardStates(final BlockingSphereClient client, final BiConsumer<State, State> consumer) {
-        final String keyA = "Initial";//given from SPHERE.IO backend
+        final String keyA = "Initial";//given from the platform
         final String keyB = StateFixtures.class + "_B";
         final State stateB = client.executeBlocking(StateQuery.of().byKey(keyB)).head().orElseGet(() -> createStateByKey(client, keyB));
         final State stateA = client.executeBlocking(StateQuery.of().byKey(keyA)).head()

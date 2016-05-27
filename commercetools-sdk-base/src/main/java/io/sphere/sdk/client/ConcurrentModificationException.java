@@ -11,7 +11,7 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * HTTP code 409 response from SPHERE.IO.
+ * HTTP code 409 response.
  *
  * <p>This error occurs if you try to update or delete a resource using an outdated version ({@link Versioned#getVersion()}).</p>
  *
