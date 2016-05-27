@@ -1,9 +1,12 @@
 package io.sphere.sdk.retry;
 
+import io.sphere.sdk.client.SphereServiceException;
+
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Function;
 import java.util.function.Predicate;
+import java.util.stream.IntStream;
 
 public interface RetryRule {
     boolean isApplicable(RetryContext retryContext);
@@ -32,6 +35,10 @@ public interface RetryRule {
         };
     }
 
+    static RetryRule of(final Predicate<RetryContext> matches, final RetryAction retryAction) {
+        return of(matches, (RetryContext c) -> retryAction);
+    }
+
     //TODO revert extraction
     static Optional<RetryAction> findMatchingRetryAction(final List<RetryRule> retryRules, final RetryContext retryContext) {
         return retryRules.stream()
@@ -42,5 +49,14 @@ public interface RetryRule {
 
     static RetryRule ofMatching(Class<? extends Throwable> errorClass, final Function<RetryContext, RetryAction> function) {
         return RetryRule.of(c -> errorClass.isAssignableFrom(c.getLatestError().getClass()), function);
+    }
+
+    static Predicate<RetryContext> matchingResponseCodes(final int first, final int... more) {
+        return retryContext -> {
+            final Throwable latestError = retryContext.getLatestError();
+            final Integer statusCode = ((SphereServiceException) latestError).getStatusCode();
+            final boolean b = latestError instanceof SphereServiceException && IntStream.concat(IntStream.of(first), IntStream.of(more)).anyMatch(i -> i == statusCode);
+            return b;
+        };
     }
 }
