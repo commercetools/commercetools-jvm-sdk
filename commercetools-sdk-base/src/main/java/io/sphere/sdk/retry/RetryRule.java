@@ -18,10 +18,10 @@ public interface RetryRule {
     }
 
     static RetryRule ofAllExceptions(final Function<RetryContext, RetryAction> function) {
-        return of(c -> true, function);
+        return ofLambdaSyntax(c -> true, function);
     }
 
-    static RetryRule of(final Predicate<RetryContext> matches, final Function<RetryContext, RetryAction> function) {
+    static RetryRule ofLambdaSyntax(final Predicate<RetryContext> matches, final Function<RetryContext, RetryAction> function) {
         return new RetryRuleImpl() {
             @Override
             public RetryAction apply(final RetryContext retryContext) {
@@ -36,7 +36,7 @@ public interface RetryRule {
     }
 
     static RetryRule of(final Predicate<RetryContext> matches, final RetryAction retryAction) {
-        return of(matches, (RetryContext c) -> retryAction);
+        return ofLambdaSyntax(matches, (RetryContext c) -> retryAction);
     }
 
     //TODO revert extraction
@@ -48,7 +48,7 @@ public interface RetryRule {
     }
 
     static RetryRule ofMatching(Class<? extends Throwable> errorClass, final Function<RetryContext, RetryAction> function) {
-        return RetryRule.of(c -> errorClass.isAssignableFrom(c.getLatestError().getClass()), function);
+        return RetryRule.ofLambdaSyntax(c -> errorClass.isAssignableFrom(c.getLatestError().getClass()), function);
     }
 
     static Predicate<RetryContext> matchingResponseCodes(final int first, final int... more) {

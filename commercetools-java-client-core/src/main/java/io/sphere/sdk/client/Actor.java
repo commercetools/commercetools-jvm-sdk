@@ -8,7 +8,7 @@ abstract class Actor extends AutoCloseableService {
     private final ScheduledThreadPoolExecutor executor = createExecutor();//kind of mailbox
 
     private ScheduledThreadPoolExecutor createExecutor() {
-        final ScheduledThreadPoolExecutor executor = new ScheduledThreadPoolExecutor(0);
+        final ScheduledThreadPoolExecutor executor = new ScheduledThreadPoolExecutor(1);
         executor.setMaximumPoolSize(1);
         return executor;
     }

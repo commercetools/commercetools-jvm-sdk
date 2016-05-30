@@ -44,7 +44,7 @@ final class AsyncRetrySupervisorImpl extends Base implements AsyncRetrySuperviso
     }
 
     @Override
-    public void close() throws Exception {
+    public void close() {
         executor.shutdownNow();
     }
 

@@ -42,6 +42,10 @@ public final class HttpRequestIntent extends Base {
         return body;
     }
 
+    public HttpRequestIntent withPath(final String path) {
+        return HttpRequestIntent.of(getHttpMethod(), path, getHeaders(), getBody());
+    }
+
     public HttpRequestIntent plusHeader(final String name, final String value) {
         return HttpRequestIntent.of(getHttpMethod(), getPath(), getHeaders().plus(name, value), getBody());
     }
