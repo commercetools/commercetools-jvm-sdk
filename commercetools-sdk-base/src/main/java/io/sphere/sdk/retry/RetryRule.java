@@ -8,10 +8,6 @@ public interface RetryRule {
 
     RetryAction apply(RetryContext retryContext);
 
-    static RetryRule of(final RetryAction op) {
-        return of(RetryPredicate.ofAlwaysTrue(), c -> op);
-    }
-
     static RetryRule of(final Predicate<RetryContext> matches, final Function<RetryContext, RetryAction> function) {
         return new RetryRuleImpl() {
             @Override
