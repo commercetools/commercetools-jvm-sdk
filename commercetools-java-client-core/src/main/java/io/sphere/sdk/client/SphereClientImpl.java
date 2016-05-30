@@ -6,9 +6,7 @@ import io.sphere.sdk.json.JsonException;
 import io.sphere.sdk.json.SphereJsonUtils;
 import io.sphere.sdk.meta.BuildInfo;
 import io.sphere.sdk.models.SphereException;
-import io.sphere.sdk.retry.AsyncRetrySupervisor;
-import io.sphere.sdk.retry.RetryAction;
-import io.sphere.sdk.retry.RetryRule;
+import io.sphere.sdk.retry.*;
 import io.sphere.sdk.utils.CompletableFutureUtils;
 import io.sphere.sdk.utils.SphereInternalLogger;
 import org.slf4j.Logger;
@@ -17,6 +15,7 @@ import org.slf4j.LoggerFactory;
 import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.CompletionStage;
+import java.util.function.Function;
 
 import static io.sphere.sdk.client.HttpResponseBodyUtils.bytesToString;
 import static io.sphere.sdk.utils.CompletableFutureUtils.onFailure;
@@ -164,7 +163,8 @@ final class SphereClientImpl extends AutoCloseableService implements SphereClien
     }
 
     private static List<RetryRule> defaultRules() {
-        final RetryRule invalidCredentialsCloseRetryRule = RetryRule.ofMatching(InvalidClientCredentialsException.class, c -> RetryAction.shutdownServiceAndSendLatestException());
+        final Function<RetryContext,RetryAction> function = c -> RetryAction.ofShutdownServiceAndSendLatestException();
+        final RetryRule invalidCredentialsCloseRetryRule = RetryRule.of(RetryPredicate.ofMatchingErrors(InvalidClientCredentialsException.class), function);
         return asList(invalidCredentialsCloseRetryRule);
     }
 

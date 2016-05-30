@@ -11,8 +11,11 @@ public interface RetryAction {
     @Nullable
     RetryResult apply(final RetryContext retryContext);
 
-    //TODO param??? maybe RetryRuleContext? rename parameter?
-    static RetryAction scheduledRetry(final long maxAttempts, final Function<RetryContext, Duration> f) {
+    static RetryAction ofScheduledRetry(final long maxAttempts, final Duration duration) {
+        return ofScheduledRetry(maxAttempts, c -> duration);
+    }
+
+    static RetryAction ofScheduledRetry(final long maxAttempts, final Function<RetryContext, Duration> f) {
         validateMaxAttempts(maxAttempts);
 
         return new RetryActionImpl() {
@@ -34,7 +37,7 @@ public interface RetryAction {
         };
     }
 
-    static RetryAction shutdownServiceAndSendFirstException() {
+    static RetryAction ofShutdownServiceAndSendFirstException() {
         return new RetryActionImpl() {
             @Override
             public RetryResult apply(final RetryContext retryOperationContext) {
@@ -48,7 +51,7 @@ public interface RetryAction {
         };
     }
 
-    static RetryAction shutdownServiceAndSendLatestException() {
+    static RetryAction ofShutdownServiceAndSendLatestException() {
         return new RetryActionImpl() {
             @Override
             public RetryResult apply(final RetryContext retryOperationContext) {
@@ -62,7 +65,7 @@ public interface RetryAction {
         };
     }
 
-    static RetryAction giveUpAndSendFirstException() {
+    static RetryAction ofGiveUpAndSendFirstException() {
         return new RetryActionImpl() {
             @Override
             public RetryResult apply(final RetryContext retryOperationContext) {
@@ -76,7 +79,7 @@ public interface RetryAction {
         };
     }
 
-    static RetryAction giveUpAndSendLatestException() {
+    static RetryAction ofGiveUpAndSendLatestException() {
         return new RetryActionImpl() {
             @Override
             public RetryResult apply(final RetryContext retryOperationContext) {
@@ -90,7 +93,7 @@ public interface RetryAction {
         };
     }
 
-    static RetryAction immediateRetries(final long maxAttempts) {
+    static RetryAction ofImmediateRetries(final long maxAttempts) {
         validateMaxAttempts(maxAttempts);
 
         return new RetryActionImpl() {

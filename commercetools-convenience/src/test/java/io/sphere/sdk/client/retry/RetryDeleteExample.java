@@ -13,7 +13,7 @@ import static java.util.Collections.singletonList;
 
 public class RetryDeleteExample {
     public static SphereClient ofRetry(final SphereClient delegate) {
-        final List<RetryRule> retryRules = singletonList(RetryRule.ofLambdaSyntax(
+        final List<RetryRule> retryRules = singletonList(RetryRule.of(
                 retryContext -> {
                     boolean matches = false;
                     final Throwable error = retryContext.getLatestError();

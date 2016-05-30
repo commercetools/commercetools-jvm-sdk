@@ -4,7 +4,7 @@ import io.sphere.sdk.models.Base;
 
 abstract class RetryRuleImpl extends Base implements RetryRule {
     @Override
-    public boolean isApplicable(final RetryContext retryContext) {
+    public boolean test(final RetryContext retryContext) {
         return true;
     }
 

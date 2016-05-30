@@ -2,10 +2,7 @@ package io.sphere.sdk.client;
 
 import io.sphere.sdk.http.HttpClient;
 import io.sphere.sdk.http.HttpException;
-import io.sphere.sdk.retry.AsyncRetrySupervisor;
-import io.sphere.sdk.retry.RetryAction;
-import io.sphere.sdk.retry.RetryContext;
-import io.sphere.sdk.retry.RetryRule;
+import io.sphere.sdk.retry.*;
 import io.sphere.sdk.utils.CompletableFutureUtils;
 
 import java.net.UnknownHostException;
@@ -44,8 +41,8 @@ final class AutoRefreshSphereAccessTokenSupplierImpl extends AutoCloseableServic
             final boolean unauthorized = latestError instanceof UnauthorizedException;
             return unknownHost || unauthorized;
         };
-        final RetryRule fatalRetryRule = RetryRule.of(isFatal, RetryAction.shutdownServiceAndSendLatestException());
-        final RetryRule retryScheduledRetryRule = RetryRule.ofOperation(RetryAction.scheduledRetry(2, r -> Duration.ofMillis(r.getAttempt() * r.getAttempt() * 50)));
+        final RetryRule fatalRetryRule = RetryRule.of(isFatal, c -> RetryAction.ofShutdownServiceAndSendLatestException());
+        final RetryRule retryScheduledRetryRule = RetryRule.of(RetryPredicate.ofAlwaysTrue(), c -> RetryAction.ofScheduledRetry(2, r -> Duration.ofMillis(r.getAttempt() * r.getAttempt() * 50)));
         return asList(fatalRetryRule, retryScheduledRetryRule);
     }
 
