@@ -8,7 +8,7 @@
 
 [](the link definitions are at the bottom)
 
-The JVM SDK enables developers to use Java 8 methods and objects to communicate with the [commercetools platform](http://www.commercetools.com/) rather than using plain HTTP calls.
+The JVM SDK enables developers to use Java 8 methods and objects to communicate with the [commercetools platform](http://www.commercetools.com/) (formerly SPHERE.IO) rather than using plain HTTP calls.
 Users gain type-safety, encapsulation, IDE auto completion and an internal domain specific language to discover and formulate valid requests.
 
 ## Using the SDK 
@@ -85,19 +85,14 @@ see https://github.com/commercetools/commercetools-jvm-sdk-experimental-java-add
 
 1. Experimental features in the API are also experimental features of the SDK.
     * this includes for example
-        * cart discounts
-        * custom fields
-        * discount codes
-        * types endpoint/custom fields
         * payments
-        * nested product attribute
-    * the stable and unstable features can be mixed
-        * a cart contains the reference to its discounts
+        * nested product attributes
 1. The dependencies will only be updated in the next major version to improve stability. Of course, if bugs in libraries *occur*, we may need to update.
 1. JVM SDK test dependencies and build tools can be updated because they don't affect the production code.
 1. The JVM SDK has an abstract HTTP client layer so old or new http client versions can be used.
 1. order import is experimental
-1. getters of draft objects might change since the API allows in upgrades different objects
+1. the search methods with lambda parameters are beta `ProductProjectionSearch.ofCurrent().withQueryFilters(m -> m.categories().id().containsAll(categoryIds1))`
+1. getters of draft objects might change since new HTTP API features can introduce polymorphism
 1. final classes without public constructors can be transformed into an interface
 
 ## Executing integration tests
