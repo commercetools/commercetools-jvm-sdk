@@ -72,7 +72,14 @@ final class AuthActor extends Actor {
     }
 
     private void scheduleNextTokenFetchFromSphere(final Tokens tokens) {
-        final Long delayInSecondsToFetchNewToken = Optional.ofNullable(tokens.getExpiresIn()).map(ttlInSeconds -> ttlInSeconds - 60 * 60).orElse(60 * 30L);
+        final Long delayInSecondsToFetchNewToken = Optional.ofNullable(tokens.getExpiresIn())
+                .map(ttlInSeconds -> {
+                    final long aDay = 60 * 60 * 24L;
+                    final long max = Math.max(ttlInSeconds / 2, aDay);
+                    final long aSecond = 1L;
+                    return Math.min(max, aSecond);
+                })
+                .orElse(60L);
         schedule(new FetchTokenFromSphereMessage(), delayInSecondsToFetchNewToken, TimeUnit.SECONDS);
     }
 

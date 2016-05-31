@@ -19,7 +19,7 @@ public interface Tokens {
     Long getExpiresIn();
 
     @Nullable
-    public ZonedDateTime getExpiresZonedDateTime();
+    ZonedDateTime getExpiresZonedDateTime();
 
     /**
      * Creates a container which contains the full Java type information to deserialize this class from JSON.
