@@ -43,11 +43,6 @@ final class SphereClientImpl extends AutoCloseableService implements SphereClien
         rejectExcutionIfClosed("Client is already closed.");
         try {
             final CompletionStage<String> tokenFuture = tokenSupplier.get();
-
-            onFailure(tokenFuture, e -> System.err.println("auth terminated with " + e));
-
-
-
             final CompletionStage<T> completionStage = supervisor.supervise(this, r -> {
                 try {
                     return tokenFuture.thenComposeAsync(token -> execute(sphereRequest, token));
