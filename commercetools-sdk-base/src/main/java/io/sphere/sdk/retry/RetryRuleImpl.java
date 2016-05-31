@@ -7,5 +7,5 @@ abstract class RetryRuleImpl extends Base implements RetryRule {
     public abstract boolean test(final RetryContext retryContext);
 
     @Override
-    public abstract RetryAction apply(final RetryContext retryContext);
+    public abstract RetryStrategy apply(final RetryContext retryContext);
 }

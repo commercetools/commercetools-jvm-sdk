@@ -7,16 +7,10 @@ import java.util.function.Function;
 import static io.sphere.sdk.retry.RetryActions.validateMaxAttempts;
 
 /**
- * Selects for a {@link RetryContext} which error handling strategy ({@link RetryStrategy}) should be used like
- * resume (keep internal state and throw latest exception),
- * retry immediately,
- * retry scheduled
- * or stop the service (don't do it unless you have a really good reason).
- *
- * <p>The static methods in {@link RetryAction} should create actions for the simple typical cases.</p>
+ * Provides some default implementations for {@link RetryRule#apply(RetryContext)}.
  */
 @FunctionalInterface
-public interface RetryAction {
+public interface RetryAction extends Function<RetryContext, RetryStrategy> {
     @Nullable
     RetryStrategy apply(final RetryContext retryContext);
 

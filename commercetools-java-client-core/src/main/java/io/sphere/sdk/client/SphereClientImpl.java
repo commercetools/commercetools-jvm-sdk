@@ -158,8 +158,7 @@ final class SphereClientImpl extends AutoCloseableService implements SphereClien
     }
 
     private static List<RetryRule> defaultRules() {
-        final Function<RetryContext,RetryAction> function = c -> RetryAction.ofShutdownServiceAndSendLatestException();
-        final RetryRule invalidCredentialsCloseRetryRule = RetryRule.of(RetryPredicate.ofMatchingErrors(InvalidClientCredentialsException.class), function);
+        final RetryRule invalidCredentialsCloseRetryRule = RetryRule.of(RetryPredicate.ofMatchingErrors(InvalidClientCredentialsException.class), RetryAction.ofShutdownServiceAndSendLatestException());
         return asList(invalidCredentialsCloseRetryRule);
     }
 

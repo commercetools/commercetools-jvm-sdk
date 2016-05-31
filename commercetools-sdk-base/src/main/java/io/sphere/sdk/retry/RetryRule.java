@@ -14,6 +14,9 @@ import java.util.function.Predicate;
 public interface RetryRule {
     /**
      * Tests if this rule can be applied to the context.
+     *
+     * {@link RetryPredicate} provides some standard predicates.
+     *
      * @param retryContext the context to check if this rule can be applied
      * @return true if the rule can be applied, otherwise false
      */
@@ -23,15 +26,17 @@ public interface RetryRule {
      * Applies the retry rule.
      * Should not be called if {@link #test(RetryContext)} would yield false for {@code retryContext}.
      *
+     * {@link RetryAction} provides some standard implementations.
+     *
      * @param retryContext
      * @return
      */
-    RetryAction apply(RetryContext retryContext);
+    RetryStrategy apply(RetryContext retryContext);
 
-    static RetryRule of(final Predicate<RetryContext> matches, final Function<RetryContext, RetryAction> function) {
+    static RetryRule of(final Predicate<RetryContext> matches, final Function<RetryContext, RetryStrategy> function) {
         return new RetryRuleImpl() {
             @Override
-            public RetryAction apply(final RetryContext retryContext) {
+            public RetryStrategy apply(final RetryContext retryContext) {
                 return function.apply(retryContext);
             }
 

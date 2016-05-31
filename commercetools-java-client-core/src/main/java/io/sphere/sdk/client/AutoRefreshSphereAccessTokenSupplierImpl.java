@@ -41,8 +41,8 @@ final class AutoRefreshSphereAccessTokenSupplierImpl extends AutoCloseableServic
             final boolean unauthorized = latestError instanceof UnauthorizedException;
             return unknownHost || unauthorized;
         };
-        final RetryRule fatalRetryRule = RetryRule.of(isFatal, c -> RetryAction.ofShutdownServiceAndSendLatestException());
-        final RetryRule retryScheduledRetryRule = RetryRule.of(RetryPredicate.ofAlwaysTrue(), c -> RetryAction.ofScheduledRetry(2, r -> Duration.ofMillis(r.getAttempt() * r.getAttempt() * 50)));
+        final RetryRule fatalRetryRule = RetryRule.of(isFatal, RetryAction.ofShutdownServiceAndSendLatestException());
+        final RetryRule retryScheduledRetryRule = RetryRule.of(RetryPredicate.ofAlwaysTrue(), RetryAction.ofScheduledRetry(2, retryContext -> Duration.ofMillis(retryContext.getAttempt() * retryContext.getAttempt() * 50)));
         return asList(fatalRetryRule, retryScheduledRetryRule);
     }
 

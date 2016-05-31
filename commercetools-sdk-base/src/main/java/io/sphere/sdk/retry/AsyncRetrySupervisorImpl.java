@@ -60,7 +60,7 @@ final class AsyncRetrySupervisorImpl extends Base implements AsyncRetrySuperviso
     }
 
     private <P, R> void handle(final RetryContextImpl<P, R> retryContext) {
-        final RetryStrategy retryStrategy = getRetryAction(retryContext).apply(retryContext);
+        final RetryStrategy retryStrategy = applyContext(retryContext);
         final StrategyType strategyType = retryStrategy.getStrategyType();
         if (strategyType == StrategyType.RESUME || strategyType == StrategyType.STOP) {
             retryContext.getResult().completeExceptionally(retryStrategy.getError());
@@ -111,16 +111,16 @@ final class AsyncRetrySupervisorImpl extends Base implements AsyncRetrySuperviso
         }, executor);
     }
 
-    private RetryAction getRetryAction(final RetryContext retryContext) {
-        final Optional<RetryAction> matchingRetryAction = findMatchingRetryAction(retryRules, retryContext);
-        return matchingRetryAction
-                .orElseGet(() -> RetryAction.ofGiveUpAndSendLatestException());
+    private RetryStrategy applyContext(final RetryContext retryContext) {
+        final Optional<RetryRule> matchingRetryRuleOption = findMatchingRetryRule(retryRules, retryContext);
+        final RetryRule matchingRetryRule = matchingRetryRuleOption
+                .orElseGet(() -> RetryRule.of(RetryPredicate.ofAlwaysTrue(), RetryAction.ofGiveUpAndSendLatestException()));
+        return matchingRetryRule.apply(retryContext);
     }
 
-    private static Optional<RetryAction> findMatchingRetryAction(final List<RetryRule> retryRules, final RetryContext retryContext) {
+    private static Optional<RetryRule> findMatchingRetryRule(final List<RetryRule> retryRules, final RetryContext retryContext) {
         return retryRules.stream()
                 .filter(rule -> rule.test(retryContext))
-                .findFirst()
-                .map(rule -> rule.apply(retryContext));
+                .findFirst();
     }
 }
