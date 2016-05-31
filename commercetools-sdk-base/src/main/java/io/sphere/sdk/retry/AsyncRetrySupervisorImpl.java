@@ -59,12 +59,12 @@ final class AsyncRetrySupervisorImpl extends Base implements AsyncRetrySuperviso
     }
 
     private <P, R> void handle(final RetryContextImpl<P, R> retryContext) {
-        final RetryResult retryResult = getRetryOperation(retryContext).apply(retryContext);
-        if (retryResult.getStrategy() == RetryResult.Strategy.RESUME) {
-            retryContext.getResult().completeExceptionally(retryResult.getError());
-        } else if (retryResult.getStrategy() == RetryResult.Strategy.STOP) {
+        final RetryStrategy retryStrategy = getRetryOperation(retryContext).apply(retryContext);
+        if (retryStrategy.getStrategy() == RetryStrategy.Strategy.RESUME) {
+            retryContext.getResult().completeExceptionally(retryStrategy.getError());
+        } else if (retryStrategy.getStrategy() == RetryStrategy.Strategy.STOP) {
             final CompletableFuture<R> result = retryContext.getResult();
-            result.completeExceptionally(retryResult.getError());
+            result.completeExceptionally(retryStrategy.getError());
             try {
                 retryContext.getService().close();
             } catch (final Exception e) {
@@ -72,19 +72,19 @@ final class AsyncRetrySupervisorImpl extends Base implements AsyncRetrySuperviso
             }
         } else {
             final Function<P, CompletionStage<R>> function = retryContext.getFunction();
-            if (retryResult.getStrategy() == RetryResult.Strategy.RETRY_IMMEDIATELY) {
-                final Object parameter = retryResult.getParameter();
+            if (retryStrategy.getStrategy() == RetryStrategy.Strategy.RETRY_IMMEDIATELY) {
+                final Object parameter = retryStrategy.getParameter();
                 final CompletionStage<R> completionStage = forceApply(function, parameter);
                 handleResultAndEnqueueErrorHandlingAgain(completionStage, parameter, retryContext);
-            } else if (retryResult.getStrategy() == RetryResult.Strategy.RETRY_SCHEDULED) {
-                final Duration duration = retryResult.getDuration();
-                final Object parameter = retryResult.getParameter();
+            } else if (retryStrategy.getStrategy() == RetryStrategy.Strategy.RETRY_SCHEDULED) {
+                final Duration duration = retryStrategy.getDuration();
+                final Object parameter = retryStrategy.getParameter();
                 retryContext.schedule(() -> {
                     final CompletionStage<R> completionStage = forceApply(function, parameter);
                     handleResultAndEnqueueErrorHandlingAgain(completionStage, parameter, retryContext);
                 }, duration);
             } else {
-                throw new IllegalStateException("illegal state for " + retryResult);
+                throw new IllegalStateException("illegal state for " + retryStrategy);
             }
         }
     }

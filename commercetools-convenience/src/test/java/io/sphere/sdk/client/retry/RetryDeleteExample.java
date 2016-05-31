@@ -4,7 +4,7 @@ import io.sphere.sdk.client.*;
 import io.sphere.sdk.http.HttpMethod;
 import io.sphere.sdk.retry.RetryAction;
 import io.sphere.sdk.retry.RetryContext;
-import io.sphere.sdk.retry.RetryResult;
+import io.sphere.sdk.retry.RetryStrategy;
 import io.sphere.sdk.retry.RetryRule;
 
 import java.util.List;
@@ -15,7 +15,7 @@ import static java.util.Collections.singletonList;
 public class RetryDeleteExample {
     public static SphereClient ofRetry(final SphereClient delegate) {
         final List<RetryRule> retryRules = singletonList(RetryRule.of(isDeleteAndNewVersionIsKnown(), c -> retryWithNewVersion()));
-        return RetrySphereClient.of(delegate, retryRules);
+        return RetrySphereClientDecorator.of(delegate, retryRules);
     }
 
     private static Predicate<RetryContext> isDeleteAndNewVersionIsKnown() {
@@ -38,7 +38,7 @@ public class RetryDeleteExample {
                     return original.withPath(path);
                 }
             };
-            return RetryResult.retryImmediately(newParameter);
+            return RetryStrategy.retryImmediately(newParameter);
         };
     }
 }

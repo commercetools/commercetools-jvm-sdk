@@ -23,7 +23,7 @@ import static io.sphere.sdk.client.SphereClientUtils.blockingWait;
 import static io.sphere.sdk.http.HttpStatusCode.*;
 import static java.util.Arrays.asList;
 
-public class RetrySphereClientTest {
+public class RetrySphereClientDecoratorTest {
 
     public static final String RESULT = DummySphereRequest2.DEFAULT_RESPONSE_OBJECT;
 

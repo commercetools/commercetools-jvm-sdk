@@ -1,6 +1,6 @@
 package io.sphere.sdk.client.retry;
 
-import io.sphere.sdk.client.RetrySphereClient;
+import io.sphere.sdk.client.RetrySphereClientDecorator;
 import io.sphere.sdk.client.SphereClient;
 import io.sphere.sdk.retry.RetryAction;
 import io.sphere.sdk.retry.RetryPredicate;
@@ -21,6 +21,6 @@ public class RetryBadGatewayExample {
                 RetryPredicate.ofMatchingStatusCodes(BAD_GATEWAY_502, SERVICE_UNAVAILABLE_503, GATEWAY_TIMEOUT_504),
                 unused -> RetryAction.ofScheduledRetry(maxAttempts, context -> Duration.ofSeconds(context.getAttempt() * 2)))
         );
-        return RetrySphereClient.of(delegate, retryRules);
+        return RetrySphereClientDecorator.of(delegate, retryRules);
     }
 }
