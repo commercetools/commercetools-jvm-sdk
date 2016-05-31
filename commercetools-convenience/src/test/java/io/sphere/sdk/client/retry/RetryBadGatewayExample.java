@@ -16,10 +16,10 @@ import static java.util.Collections.singletonList;
 
 public class RetryBadGatewayExample {
     public static SphereClient ofRetry(final SphereClient delegate) {
-        final int maxAttempts = 10;
+        final int maxAttempts = 5;
         final List<RetryRule> retryRules = singletonList(RetryRule.of(
                 RetryPredicate.ofMatchingStatusCodes(BAD_GATEWAY_502, SERVICE_UNAVAILABLE_503, GATEWAY_TIMEOUT_504),
-                u -> RetryAction.ofScheduledRetry(maxAttempts, Duration.ofMillis(100)))
+                unused -> RetryAction.ofScheduledRetry(maxAttempts, context -> Duration.ofSeconds(context.getAttempt() * 2)))
         );
         return RetrySphereClient.of(delegate, retryRules);
     }

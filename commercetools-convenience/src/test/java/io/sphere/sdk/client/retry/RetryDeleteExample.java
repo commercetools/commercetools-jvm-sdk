@@ -8,36 +8,27 @@ import io.sphere.sdk.retry.RetryResult;
 import io.sphere.sdk.retry.RetryRule;
 
 import java.util.List;
+import java.util.function.Predicate;
 
 import static java.util.Collections.singletonList;
 
 public class RetryDeleteExample {
     public static SphereClient ofRetry(final SphereClient delegate) {
-        final List<RetryRule> retryRules = singletonList(RetryRule.of(
-                retryContext -> {
-                    boolean matches = false;
-                    final Throwable error = retryContext.getLatestError();
-                    if (error instanceof ConcurrentModificationException && ((ConcurrentModificationException) error).getCurrentVersion() != null) {
-                        final Object latestParameter = retryContext.getLatestParameter();
-                        if (latestParameter instanceof SphereRequest) {
-                            final SphereRequest sphereRequest = (SphereRequest) latestParameter;
-                            final HttpRequestIntent httpRequestIntent = sphereRequest.httpRequestIntent();
-                            if (httpRequestIntent.getHttpMethod() == HttpMethod.DELETE) {
-                                matches = true;
-                            }
-                        }
-                    }
-                    return matches;
-                },
-                c -> getRetryAction()));
+        final List<RetryRule> retryRules = singletonList(RetryRule.of(isDeleteAndNewVersionIsKnown(), c -> retryWithNewVersion()));
         return RetrySphereClient.of(delegate, retryRules);
     }
 
+    private static Predicate<RetryContext> isDeleteAndNewVersionIsKnown() {
+        return retryContext -> retryContext.getLatestError() instanceof ConcurrentModificationException
+                && ((ConcurrentModificationException) retryContext.getLatestError()).getCurrentVersion() != null
+                && retryContext.getLatestParameter() instanceof SphereRequest
+                && ((SphereRequest) retryContext.getLatestParameter()).httpRequestIntent().getHttpMethod() == HttpMethod.DELETE;
+    }
+
     @SuppressWarnings("unchecked")
-    private static RetryAction getRetryAction() {
+    private static RetryAction retryWithNewVersion() {
         return (RetryContext c) -> {
-            final Object latestParameter = c.getLatestParameter();
-            final SphereRequest sphereRequest = (SphereRequest) latestParameter;
+            final SphereRequest sphereRequest = (SphereRequest) c.getLatestParameter();
             final Object newParameter = new SphereRequestDecorator(sphereRequest) {
                 @Override
                 public HttpRequestIntent httpRequestIntent() {

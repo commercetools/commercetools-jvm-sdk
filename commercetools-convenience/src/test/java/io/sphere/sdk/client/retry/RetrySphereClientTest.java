@@ -10,7 +10,6 @@ import io.sphere.sdk.http.HttpClient;
 import io.sphere.sdk.http.HttpRequest;
 import io.sphere.sdk.http.HttpResponse;
 import io.sphere.sdk.models.Versioned;
-import io.sphere.sdk.utils.CompletableFutureUtils;
 import org.assertj.core.api.Assertions;
 import org.junit.Test;
 
@@ -23,8 +22,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 import static io.sphere.sdk.client.SphereClientUtils.blockingWait;
 import static io.sphere.sdk.http.HttpStatusCode.*;
 import static java.util.Arrays.asList;
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.catchThrowable;
 
 public class RetrySphereClientTest {
 
@@ -34,7 +31,7 @@ public class RetrySphereClientTest {
     public void retryOnGatewayProblems() {
         final SphereClient client = getSphereClient(getHttpClient());
         final SphereClient retryClient = RetryBadGatewayExample.ofRetry(client);
-        final String result = blockingWait(retryClient.execute(DummySphereRequest2.of()), 250, TimeUnit.MILLISECONDS);
+        final String result = blockingWait(retryClient.execute(DummySphereRequest2.of()), 16, TimeUnit.SECONDS);
         Assertions.assertThat(result).isEqualTo(RESULT);
     }
 
