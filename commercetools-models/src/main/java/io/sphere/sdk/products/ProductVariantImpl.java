@@ -27,12 +27,15 @@ class ProductVariantImpl extends AttributeContainerImpl implements ProductVarian
     private final Price price;
     @Nullable
     private final ScopedPrice scopedPrice;
+    @Nullable
+    private final Boolean scopedPriceDiscounted;
 
     @JsonCreator
     ProductVariantImpl(final Integer id, @Nullable final String sku, final List<Price> prices, final List<Attribute> attributes,
                        final List<Image> images, @Nullable final ProductVariantAvailability availability,
                        @Nullable final Boolean isMatchingVariant, @Nullable final String productId,
-                       @Nullable final Price price, @Nullable final ScopedPrice scopedPrice) {
+                       @Nullable final Price price, @Nullable final ScopedPrice scopedPrice,
+                       @Nullable final Boolean scopedPriceDiscounted) {
         super(attributes);
         this.id = id;
         this.sku = sku;
@@ -43,6 +46,7 @@ class ProductVariantImpl extends AttributeContainerImpl implements ProductVarian
         this.productId = productId;
         this.price = price;
         this.scopedPrice = scopedPrice;
+        this.scopedPriceDiscounted = scopedPriceDiscounted;
     }
 
     @Override
@@ -88,6 +92,12 @@ class ProductVariantImpl extends AttributeContainerImpl implements ProductVarian
     @Nullable
     public ScopedPrice getScopedPrice() {
         return scopedPrice;
+    }
+
+    @Nullable
+    @Override
+    public Boolean isScopedPriceDiscounted() {
+        return scopedPriceDiscounted;
     }
 
     @Override

@@ -19,6 +19,10 @@ public final class ProductVariantSortSearchModel extends SortableSearchModel<Pro
         return searchModel(/*sic! price is at top level*/null, "price").sorted();
     }
 
+    public ScopedPriceSortSearchModel<ProductProjection> scopedPrice() {
+        return new ScopedPriceSortSearchModelImpl<>(this, "scopedPrice");
+    }
+
     public ProductVariantAvailabilitySortSearchModel<ProductProjection> availability() {
         return new ProductVariantAvailabilitySortSearchModelImpl<>(this, "availability");
     }

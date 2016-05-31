@@ -47,6 +47,16 @@ public interface ProductVariant extends AttributeContainer {
     @Nullable
     ScopedPrice getScopedPrice();
 
+    /**
+     * Flag if scoped price is discounted.
+     *
+     * By default this flag is null but it can be filled by using {@link io.sphere.sdk.products.search.ProductVariantFilterSearchModel#scopedPrice()}.
+     *
+     * @return
+     */
+    @Nullable
+    Boolean isScopedPriceDiscounted();
+
     List<Image> getImages();
 
     /**
