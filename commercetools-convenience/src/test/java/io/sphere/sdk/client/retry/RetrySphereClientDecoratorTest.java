@@ -63,7 +63,7 @@ public class RetrySphereClientDecoratorTest {
                 } else if (httpRequest.getUrl().contains("version=7")) {
                     return CompletableFuture.completedFuture(HttpResponse.of(200, "{\"id\": \"some-id\", \"version\": 7}"));
                 } else {
-                    throw new IllegalArgumentException("unexcpected input");
+                    throw new IllegalArgumentException("unexpected input");
                 }
             }
 

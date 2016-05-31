@@ -14,11 +14,11 @@ import java.time.Duration;
  *
  */
 public final class RetryStrategy {
-    enum Strategy {
+    enum StrategyType {
         RESUME, STOP, RETRY_IMMEDIATELY, RETRY_SCHEDULED;
     }
 
-    private final Strategy strategy;
+    private final StrategyType strategyType;
     @Nullable
     private final Throwable error;
     @Nullable
@@ -26,8 +26,8 @@ public final class RetryStrategy {
     @Nullable
     private final Duration duration;
 
-    private RetryStrategy(final Strategy strategy, final Throwable error, final Object parameter, final Duration duration) {
-        this.strategy = strategy;
+    private RetryStrategy(final StrategyType strategyType, final Throwable error, final Object parameter, final Duration duration) {
+        this.strategyType = strategyType;
         this.duration = duration;
         this.error = error;
         this.parameter = parameter;
@@ -40,7 +40,7 @@ public final class RetryStrategy {
      * @return strategy
      */
     public static RetryStrategy resume(final Throwable error) {
-        return new RetryStrategy(Strategy.RESUME, error, null, null);
+        return new RetryStrategy(StrategyType.RESUME, error, null, null);
     }
 
     /**
@@ -49,7 +49,7 @@ public final class RetryStrategy {
      * @return strategy
      */
     public static RetryStrategy stop(final Throwable error) {
-        return new RetryStrategy(Strategy.STOP, error, null, null);
+        return new RetryStrategy(StrategyType.STOP, error, null, null);
     }
 
     /**
@@ -58,7 +58,7 @@ public final class RetryStrategy {
      * @return strategy
      */
     public static RetryStrategy retryImmediately(final Object parameter) {
-        return new RetryStrategy(Strategy.RETRY_IMMEDIATELY, null, parameter, null);
+        return new RetryStrategy(StrategyType.RETRY_IMMEDIATELY, null, parameter, null);
     }
 
     /**
@@ -68,7 +68,7 @@ public final class RetryStrategy {
      * @return strategy
      */
     public static RetryStrategy retryScheduled(final Object parameter, final Duration duration) {
-        return new RetryStrategy(Strategy.RETRY_SCHEDULED, null, parameter, duration);
+        return new RetryStrategy(StrategyType.RETRY_SCHEDULED, null, parameter, duration);
     }
 
     @Nullable
@@ -86,7 +86,7 @@ public final class RetryStrategy {
         return parameter;
     }
 
-    Strategy getStrategy() {
-        return strategy;
+    StrategyType getStrategyType() {
+        return strategyType;
     }
 }

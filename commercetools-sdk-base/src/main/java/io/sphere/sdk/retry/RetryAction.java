@@ -11,7 +11,7 @@ import static io.sphere.sdk.retry.RetryActions.validateMaxAttempts;
  * resume (keep internal state and throw latest exception),
  * retry immediately,
  * retry scheduled
- * or stop the service (don't do it if you really have a good reason).
+ * or stop the service (don't do it unless you have a really good reason).
  *
  * <p>The static methods in {@link RetryAction} should create actions for the simple typical cases.</p>
  */
@@ -58,7 +58,7 @@ public interface RetryAction {
 
             @Override
             protected String getDescription() {
-                return "schedule retry retry up to " + maxAttempts + " times";
+                return "schedule retry up to " + maxAttempts + " times";
             }
         };
     }

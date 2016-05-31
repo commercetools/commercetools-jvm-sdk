@@ -80,9 +80,9 @@ final class AuthActor extends Actor {
 
     static Long selectNextRetryTime(final Long ttlInSeconds) {
         final long aDay = 60 * 60 * 24L;
-        final long min = Math.min(ttlInSeconds / 2, aDay);
+        final long minimum = Math.min(ttlInSeconds / 2, aDay);
         final long aSecond = 1L;
-        return Math.max(min, aSecond);
+        return Math.max(minimum, aSecond);
     }
 
     @Override

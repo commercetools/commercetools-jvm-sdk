@@ -1,6 +1,7 @@
 package io.sphere.sdk.retry;
 
 import io.sphere.sdk.models.Base;
+import io.sphere.sdk.retry.RetryStrategy.StrategyType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -59,33 +60,37 @@ final class AsyncRetrySupervisorImpl extends Base implements AsyncRetrySuperviso
     }
 
     private <P, R> void handle(final RetryContextImpl<P, R> retryContext) {
-        final RetryStrategy retryStrategy = getRetryOperation(retryContext).apply(retryContext);
-        if (retryStrategy.getStrategy() == RetryStrategy.Strategy.RESUME) {
+        final RetryStrategy retryStrategy = getRetryAction(retryContext).apply(retryContext);
+        final StrategyType strategyType = retryStrategy.getStrategyType();
+        if (strategyType == StrategyType.RESUME || strategyType == StrategyType.STOP) {
             retryContext.getResult().completeExceptionally(retryStrategy.getError());
-        } else if (retryStrategy.getStrategy() == RetryStrategy.Strategy.STOP) {
-            final CompletableFuture<R> result = retryContext.getResult();
-            result.completeExceptionally(retryStrategy.getError());
-            try {
-                retryContext.getService().close();
-            } catch (final Exception e) {
-                logger.error("Error occurred while closing service in retry strategy.", e);
+            if (strategyType == StrategyType.STOP) {
+                closeService(retryContext);
             }
         } else {
             final Function<P, CompletionStage<R>> function = retryContext.getFunction();
-            if (retryStrategy.getStrategy() == RetryStrategy.Strategy.RETRY_IMMEDIATELY) {
-                final Object parameter = retryStrategy.getParameter();
-                final CompletionStage<R> completionStage = forceApply(function, parameter);
-                handleResultAndEnqueueErrorHandlingAgain(completionStage, parameter, retryContext);
-            } else if (retryStrategy.getStrategy() == RetryStrategy.Strategy.RETRY_SCHEDULED) {
+            final Object parameter = retryStrategy.getParameter();
+            if (strategyType == StrategyType.RETRY_IMMEDIATELY) {
+                retry(retryContext, function, parameter);
+            } else if (strategyType == StrategyType.RETRY_SCHEDULED) {
                 final Duration duration = retryStrategy.getDuration();
-                final Object parameter = retryStrategy.getParameter();
-                retryContext.schedule(() -> {
-                    final CompletionStage<R> completionStage = forceApply(function, parameter);
-                    handleResultAndEnqueueErrorHandlingAgain(completionStage, parameter, retryContext);
-                }, duration);
+                retryContext.schedule(() -> retry(retryContext, function, parameter), duration);
             } else {
                 throw new IllegalStateException("illegal state for " + retryStrategy);
             }
+        }
+    }
+
+    private <P, R> void retry(final RetryContextImpl<P, R> retryContext, final Function<P, CompletionStage<R>> function, final Object parameter) {
+        final CompletionStage<R> completionStage = forceApply(function, parameter);
+        handleResultAndEnqueueErrorHandlingAgain(completionStage, parameter, retryContext);
+    }
+
+    private <P, R> void closeService(final RetryContextImpl<P, R> retryContext) {
+        try {
+            retryContext.getService().close();
+        } catch (final Exception e) {
+            logger.error("Error occurred while closing service in retry strategy.", e);
         }
     }
 
@@ -106,7 +111,7 @@ final class AsyncRetrySupervisorImpl extends Base implements AsyncRetrySuperviso
         }, executor);
     }
 
-    private RetryAction getRetryOperation(final RetryContext retryContext) {
+    private RetryAction getRetryAction(final RetryContext retryContext) {
         final Optional<RetryAction> matchingRetryAction = findMatchingRetryAction(retryRules, retryContext);
         return matchingRetryAction
                 .orElseGet(() -> RetryAction.ofGiveUpAndSendLatestException());
