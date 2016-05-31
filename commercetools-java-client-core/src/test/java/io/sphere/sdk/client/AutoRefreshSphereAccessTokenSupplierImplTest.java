@@ -23,6 +23,14 @@ public class AutoRefreshSphereAccessTokenSupplierImplTest {
         }
     }
 
+    @Test
+    public void selectNextRetryTime() {
+        final long aDay = 60 * 60 * 24L;
+        assertThat(AuthActor.selectNextRetryTime(20 * aDay)).as("max one day").isEqualTo(aDay);
+        assertThat(AuthActor.selectNextRetryTime((long)(0.5 * aDay))).as("half the time of the expire time").isEqualTo(aDay / 4);
+        assertThat(AuthActor.selectNextRetryTime(-100L)).as("at least a second").isEqualTo(1L);
+    }
+
     private TestDoubleHttpClient getHttpClient() {
         return new TestDoubleHttpClient() {
             @Override
