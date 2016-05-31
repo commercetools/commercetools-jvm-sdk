@@ -2,7 +2,6 @@ package io.sphere.sdk.client.retry;
 
 import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.categories.commands.CategoryDeleteCommand;
-import io.sphere.sdk.client.DummySphereRequest2;
 import io.sphere.sdk.client.SphereAccessTokenSupplier;
 import io.sphere.sdk.client.SphereApiConfig;
 import io.sphere.sdk.client.SphereClient;
@@ -10,6 +9,8 @@ import io.sphere.sdk.http.HttpClient;
 import io.sphere.sdk.http.HttpRequest;
 import io.sphere.sdk.http.HttpResponse;
 import io.sphere.sdk.models.Versioned;
+import io.sphere.sdk.projects.Project;
+import io.sphere.sdk.projects.queries.ProjectGet;
 import org.assertj.core.api.Assertions;
 import org.junit.Test;
 
@@ -25,14 +26,12 @@ import static java.util.Arrays.asList;
 
 public class RetrySphereClientDecoratorTest {
 
-    public static final String RESULT = DummySphereRequest2.DEFAULT_RESPONSE_OBJECT;
-
     @Test
     public void retryOnGatewayProblems() {
         final SphereClient client = getSphereClient(getHttpClient());
         final SphereClient retryClient = RetryBadGatewayExample.ofRetry(client);
-        final String result = blockingWait(retryClient.execute(DummySphereRequest2.of()), 16, TimeUnit.SECONDS);
-        Assertions.assertThat(result).isEqualTo(RESULT);
+        final Project result = blockingWait(retryClient.execute(ProjectGet.of()), 16, TimeUnit.SECONDS);
+        Assertions.assertThat(result.getKey()).isEqualTo("foo");
     }
 
     private SphereClient getSphereClient(final HttpClient httpClient) {
@@ -84,7 +83,7 @@ public class RetrySphereClientDecoratorTest {
                 final int counterValue = counter.getAndIncrement();
                 final List<Integer> statusCodes = asList(BAD_GATEWAY_502, SERVICE_UNAVAILABLE_503, GATEWAY_TIMEOUT_504);
                 final int statusCode = counterValue >= statusCodes.size() ? OK_200 : statusCodes.get(counterValue);
-                return CompletableFuture.completedFuture(HttpResponse.of(statusCode, RESULT));
+                return CompletableFuture.completedFuture(HttpResponse.of(statusCode, "{\"key\": \"foo\"}"));
             }
 
             @Override
