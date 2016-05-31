@@ -13,6 +13,9 @@ public interface ResourceSearch<T> extends Search<T> {
     Boolean isFuzzy();
 
     @Nullable
+    Integer fuzzyLevel();
+
+    @Nullable
     Long limit();
 
     @Nullable

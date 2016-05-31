@@ -36,6 +36,8 @@ public abstract class MetaModelSearchDslImpl<T, C extends MetaModelSearchDsl<T, 
     final LocalizedStringEntry text;
     @Nullable
     final Boolean fuzzy;
+    @Nullable
+    final Integer fuzzyLevel;
     final List<FacetExpression<T>> facets;
     final List<FilterExpression<T>> resultFilters;
     final List<FilterExpression<T>> queryFilters;
@@ -56,7 +58,7 @@ public abstract class MetaModelSearchDslImpl<T, C extends MetaModelSearchDsl<T, 
     final Function<HttpResponse, PagedSearchResult<T>> resultMapper;
     final Function<MetaModelSearchDslBuilder<T, C, S, L, F, E>, C> searchDslBuilderFunction;
 
-    public MetaModelSearchDslImpl(@Nullable final LocalizedStringEntry text, @Nullable final Boolean fuzzy,
+    public MetaModelSearchDslImpl(@Nullable final LocalizedStringEntry text, @Nullable final Boolean fuzzy, @Nullable final Integer fuzzyLevel,
                                   final List<FacetExpression<T>> facets, final List<FilterExpression<T>> resultFilters,
                                   final List<FilterExpression<T>> queryFilters, final List<FilterExpression<T>> facetFilters,
                                   final List<FacetedSearchExpression<T>> facetedSearch,
@@ -72,6 +74,7 @@ public abstract class MetaModelSearchDslImpl<T, C extends MetaModelSearchDsl<T, 
         this.searchDslBuilderFunction = requireNonNull(searchDslBuilderFunction);
         this.text = text;
         this.fuzzy = fuzzy;
+        this.fuzzyLevel = fuzzyLevel;
         this.facets = requireNonNull(facets);
         this.resultFilters = requireNonNull(resultFilters);
         this.queryFilters = requireNonNull(queryFilters);
@@ -93,7 +96,7 @@ public abstract class MetaModelSearchDslImpl<T, C extends MetaModelSearchDsl<T, 
     public MetaModelSearchDslImpl(final String endpoint, final TypeReference<PagedSearchResult<T>> pagedSearchResultTypeReference,
                                   final S sortModel, final L filterModel, final F facetModel, final E expansionModel, final Function<MetaModelSearchDslBuilder<T, C, S, L, F, E>, C> searchDslBuilderFunction,
                                   final List<NameValuePair> additionalQueryParameters) {
-        this(null, null, emptyList(), emptyList(), emptyList(), emptyList(), emptyList(), emptyList(), null, null, endpoint, httpResponse -> SphereRequestUtils.deserialize(httpResponse, pagedSearchResultTypeReference),
+        this(null, null, null, emptyList(), emptyList(), emptyList(), emptyList(), emptyList(), emptyList(), null, null, endpoint, httpResponse -> SphereRequestUtils.deserialize(httpResponse, pagedSearchResultTypeReference),
                 emptyList(), additionalQueryParameters, sortModel, filterModel, facetModel, expansionModel, searchDslBuilderFunction);
     }
 
@@ -103,7 +106,7 @@ public abstract class MetaModelSearchDslImpl<T, C extends MetaModelSearchDsl<T, 
     }
 
     public MetaModelSearchDslImpl(final MetaModelSearchDslBuilder<T, C, S, L, F, E> builder) {
-        this(builder.text, builder.fuzzy, builder.facets, builder.resultFilters, builder.queryFilters, builder.facetFilters, builder.facetedSearch, builder.sort,
+        this(builder.text, builder.fuzzy, builder.fuzzyLevel, builder.facets, builder.resultFilters, builder.queryFilters, builder.facetFilters, builder.facetedSearch, builder.sort,
                 builder.limit, builder.offset, builder.endpoint, builder.resultMapper, builder.expansionPaths, builder.additionalQueryParameters,
                 builder.sortModel, builder.filterModel, builder.facetModel, builder.expansionModel, builder.searchDslBuilderFunction);
     }
@@ -122,6 +125,11 @@ public abstract class MetaModelSearchDslImpl<T, C extends MetaModelSearchDsl<T, 
     @Override
     public C withFuzzy(final Boolean fuzzy) {
         return copyBuilder().fuzzy(fuzzy).build();
+    }
+
+    @Override
+    public C withFuzzyLevel(final Integer fuzzyLevel) {
+        return copyBuilder().fuzzyLevel(fuzzyLevel).build();
     }
 
     @Override
@@ -372,6 +380,12 @@ public abstract class MetaModelSearchDslImpl<T, C extends MetaModelSearchDsl<T, 
         return fuzzy;
     }
 
+    @Nullable
+    @Override
+    public Integer fuzzyLevel() {
+        return fuzzyLevel;
+    }
+
     protected List<NameValuePair> additionalQueryParameters() {
         return additionalQueryParameters;
     }
@@ -396,6 +410,7 @@ public abstract class MetaModelSearchDslImpl<T, C extends MetaModelSearchDsl<T, 
         Optional.ofNullable(text()).ifPresent(t -> builder.add(TEXT + "." + t.getLocale().toLanguageTag(), t.getValue(), urlEncoded));
         facets().forEach(f -> builder.add(FACET, f.expression(), urlEncoded));
         Optional.ofNullable(isFuzzy()).ifPresent(b -> builder.add(FUZZY, b.toString(), urlEncoded));
+        Optional.ofNullable(fuzzyLevel()).ifPresent(b -> builder.add(FUZZY_LEVEL, b.toString(), urlEncoded));
         resultFilters().forEach(f -> builder.add(FILTER_RESULTS, f.expression(), urlEncoded));
         queryFilters().forEach(f -> builder.add(FILTER_QUERY, f.expression(), urlEncoded));
         facetFilters().forEach(f -> builder.add(FILTER_FACETS, f.expression(), urlEncoded));
@@ -435,6 +450,7 @@ public abstract class MetaModelSearchDslImpl<T, C extends MetaModelSearchDsl<T, 
                 "body=" + readablePath +
                 ", text=" + text +
                 ", fuzzy=" + fuzzy +
+                ", fuzzyLevel=" + fuzzyLevel +
                 ", facets=" + facets +
                 ", resultFilters=" + resultFilters +
                 ", queryFilters=" + queryFilters +
