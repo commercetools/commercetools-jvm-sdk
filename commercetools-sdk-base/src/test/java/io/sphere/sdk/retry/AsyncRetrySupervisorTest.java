@@ -82,6 +82,7 @@ public class AsyncRetrySupervisorTest {
                 final CompletionStage<Integer> bar = supervisor.supervise(service, service::apply, "bar");
                 final Throwable throwable = catchThrowable(() -> waitAndGet(bar));
                 assertThat(throwable.getCause()).hasMessage(Failing2TimesServiceImpl.ERROR_MESSAGE);
+                Thread.sleep(200);
                 assertThat(service.isClosed()).isTrue();
             }
         }
