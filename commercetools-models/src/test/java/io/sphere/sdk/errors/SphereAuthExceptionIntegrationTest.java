@@ -126,13 +126,15 @@ public class SphereAuthExceptionIntegrationTest extends IntegrationTest {
 
     @Test
     public void misconfiguredAuthUrl() throws Exception {
-        final String invalidAuthUrl = "http://sdfjifdsjifdsjfdsjdfsjidsfjidfs.de";
-        final SphereClientConfig config = getSphereClientConfig().withAuthUrl(invalidAuthUrl);
-        try (final SphereClient client = SphereClientFactory.of().createClient(config)) {
-            final Throwable throwable =
-                    catchThrowable(() -> blockingWait(client.execute(ProjectGet.of()), Duration.ofMillis(1000)));
-            assertThat(throwable).isInstanceOf(HttpException.class).hasCauseInstanceOf(UnknownHostException.class);
-            assertThat(client).isNot(closed());
+        if (!"false".equals(System.getenv("JVM_SDK_IT_SSL_VALIDATION"))) {
+            final String invalidAuthUrl = "http://sdfjifdsjifdsjfdsjdfsjidsfjidfs.de";
+            final SphereClientConfig config = getSphereClientConfig().withAuthUrl(invalidAuthUrl);
+            try (final SphereClient client = SphereClientFactory.of().createClient(config)) {
+                final Throwable throwable =
+                        catchThrowable(() -> blockingWait(client.execute(ProjectGet.of()), Duration.ofMillis(1000)));
+                assertThat(throwable).isInstanceOf(HttpException.class).hasCauseInstanceOf(UnknownHostException.class);
+                assertThat(client).isNot(closed());
+            }
         }
     }
 
@@ -150,16 +152,18 @@ public class SphereAuthExceptionIntegrationTest extends IntegrationTest {
 
     @Test
     public void invalidCredentialsClient() throws Exception {
-        final SphereClientConfig config = SphereClientConfigBuilder.ofClientConfig(getSphereClientConfig())
-                .clientSecret("wrong")
-                .build();
-        try (final SphereClient client = SphereClientFactory.of().createClient(config)) {
-            final CompletionStage<Project> completionStage = client.execute(ProjectGet.of());
-            final Throwable throwable = catchThrowable(() -> blockingWait(completionStage, Duration.ofMillis(5000)));
-            assertThat(throwable).isInstanceOf(InvalidClientCredentialsException.class);
-            assertEventually(() -> {
-                assertThat(client).is(closed());
-            });
+        if (!"false".equals(System.getenv("JVM_SDK_IT_SSL_VALIDATION"))) {
+            final SphereClientConfig config = SphereClientConfigBuilder.ofClientConfig(getSphereClientConfig())
+                    .clientSecret("wrong")
+                    .build();
+            try (final SphereClient client = SphereClientFactory.of().createClient(config)) {
+                final CompletionStage<Project> completionStage = client.execute(ProjectGet.of());
+                final Throwable throwable = catchThrowable(() -> blockingWait(completionStage, Duration.ofMillis(5000)));
+                assertThat(throwable).isInstanceOf(InvalidClientCredentialsException.class);
+                assertEventually(() -> {
+                    assertThat(client).is(closed());
+                });
+            }
         }
     }
 
@@ -190,7 +194,7 @@ public class SphereAuthExceptionIntegrationTest extends IntegrationTest {
         final SphereAccessTokenSupplier tokenSupplier = SphereAccessTokenSupplier.ofOneTimeFetchingToken(config, new HttpClient() {
             @Override
             public CompletionStage<HttpResponse> execute(final HttpRequest httpRequest) {
-                return CompletableFuture.completedFuture(HttpResponse.of(400, response));
+                return CompletableFuture.completedFuture(HttpResponse.of(200, response));
             }
 
             @Override

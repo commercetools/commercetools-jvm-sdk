@@ -83,14 +83,6 @@ public class ScopedPriceSearchIntegrationTest extends IntegrationTest {
         sortCheck(prices1, prices2, sortExpression);
     }
 
-    @Test
-    public void sortByDiscountedScopedPrice() {
-        final List<PriceDraft> prices1 = asList(PriceDraft.of(EURO_20), PriceDraft.of(EURO_30).withCountry(DE));
-        final List<PriceDraft> prices2 = asList(PriceDraft.of(EURO_30), PriceDraft.of(EURO_40).withCountry(DE));
-        final SortExpression<ProductProjection> sortExpression = ProductProjectionSearchModel.of().sort().allVariants().scopedPrice().discounted().value().centAmount().asc();
-        sortCheck(prices1, prices2, sortExpression);
-    }
-
     private void sortCheck(final List<PriceDraft> prices1, final List<PriceDraft> prices2, final SortExpression<ProductProjection> sortExpression) {
         withProductOfPrices(prices1, product1 -> {
             withProductOfPrices(prices2, product2 -> {
