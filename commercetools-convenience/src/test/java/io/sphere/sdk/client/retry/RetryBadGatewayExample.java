@@ -19,7 +19,7 @@ public class RetryBadGatewayExample {
         final int maxAttempts = 5;
         final List<RetryRule> retryRules = singletonList(RetryRule.of(
                 RetryPredicate.ofMatchingStatusCodes(BAD_GATEWAY_502, SERVICE_UNAVAILABLE_503, GATEWAY_TIMEOUT_504),
-                unused -> RetryAction.ofScheduledRetry(maxAttempts, context -> Duration.ofSeconds(context.getAttempt() * 2)))
+                RetryAction.ofScheduledRetry(maxAttempts, context -> Duration.ofSeconds(context.getAttempt() * 2)))
         );
         return RetrySphereClientDecorator.of(delegate, retryRules);
     }

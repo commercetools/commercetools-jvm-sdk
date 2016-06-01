@@ -14,7 +14,7 @@ import static java.util.Collections.singletonList;
 
 public class RetryDeleteExample {
     public static SphereClient ofRetry(final SphereClient delegate) {
-        final List<RetryRule> retryRules = singletonList(RetryRule.of(isDeleteAndNewVersionIsKnown(), c -> retryWithNewVersion()));
+        final List<RetryRule> retryRules = singletonList(RetryRule.of(isDeleteAndNewVersionIsKnown(), retryWithNewVersion()));
         return RetrySphereClientDecorator.of(delegate, retryRules);
     }
 

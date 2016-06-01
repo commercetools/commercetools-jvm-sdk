@@ -4,12 +4,9 @@ import io.sphere.sdk.client.BadRequestException;
 import io.sphere.sdk.client.GatewayTimeoutException;
 import org.junit.Test;
 
-import javax.annotation.Nullable;
-import java.time.Instant;
-
 import static io.sphere.sdk.http.HttpStatusCode.GATEWAY_TIMEOUT_504;
 import static io.sphere.sdk.http.HttpStatusCode.SERVICE_UNAVAILABLE_503;
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class RetryPredicateTest {
     @Test
