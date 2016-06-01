@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.CompletionException;
 import java.util.concurrent.CompletionStage;
 import java.util.concurrent.ForkJoinPool;
 
@@ -47,9 +48,10 @@ public abstract class HttpClientAdapterBase extends Base implements HttpClient {
                     final String message = maybeUriTooLongErrorFromNgingx
                             ? "There is a problem, maybe the request URI was too long due to an inefficient query."
                             : "The underlying HTTP client detected a problem.";
-                    final Throwable throwable = nullableThrowable instanceof HttpException
-                            ? nullableThrowable
-                            : new HttpException(message, nullableThrowable);
+                    Throwable throwable = nullableThrowable instanceof CompletionException ? nullableThrowable.getCause() : nullableThrowable;
+                    throwable = throwable instanceof HttpException
+                            ? throwable
+                            : new HttpException(message, throwable);
                     result.completeExceptionally(throwable);
                 } else {
                     result.complete(nullableHttpResponse);

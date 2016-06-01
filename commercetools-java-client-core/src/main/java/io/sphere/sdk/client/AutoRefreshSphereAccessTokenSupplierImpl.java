@@ -1,16 +1,21 @@
 package io.sphere.sdk.client;
 
-import io.sphere.sdk.client.AuthActorProtocol.*;
 import io.sphere.sdk.http.HttpClient;
+import io.sphere.sdk.http.HttpException;
+import io.sphere.sdk.retry.*;
 import io.sphere.sdk.utils.CompletableFutureUtils;
 
-
+import java.net.UnknownHostException;
+import java.time.Duration;
 import java.time.ZonedDateTime;
+import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionStage;
+import java.util.function.Predicate;
+import java.util.function.Supplier;
 
-import static io.sphere.sdk.client.SphereAuth.AUTH_LOGGER;
+import static java.util.Arrays.asList;
 
 /**
  *  Holds OAuth access tokenCache for accessing protected Sphere HTTP API endpoints.
@@ -19,56 +24,70 @@ import static io.sphere.sdk.client.SphereAuth.AUTH_LOGGER;
 final class AutoRefreshSphereAccessTokenSupplierImpl extends AutoCloseableService implements SphereAccessTokenSupplier {
     private volatile CompletableFuture<String> currentAccessTokenFuture = new CompletableFuture<>();
     private volatile Optional<Tokens> currentTokensOption = Optional.empty();
-    private final Actor tokenActor = new TokenActor();
     private final Actor authActor;
+    private final List<RetryRule> retryRules = createRules();
+    private final AsyncRetrySupervisor supervisor = AsyncRetrySupervisor.of(retryRules);
 
     private AutoRefreshSphereAccessTokenSupplierImpl(final SphereAuthConfig config, final HttpClient httpClient, final boolean closeHttpClient) {
         final TokensSupplier internalTokensSupplier = TokensSupplierImpl.of(config, httpClient, closeHttpClient);
-        authActor = new AuthActor(internalTokensSupplier);
-        authActor.tell(new SubscribeMessage(tokenActor));
+        authActor = new AuthActor(internalTokensSupplier, this::supervisedTokenSupplier, this::requestUpdateTokens, this::requestUpdateFailedStatus);
+        authActor.tell(new AuthActorProtocol.FetchTokenFromSphereMessage());
+    }
+
+    private List<RetryRule> createRules() {
+        final Predicate<RetryContext> isFatal = r -> {
+            final Throwable latestError = r.getLatestError();
+            final boolean unknownHost = latestError instanceof HttpException && latestError != null && latestError instanceof UnknownHostException;
+            final boolean unauthorized = latestError instanceof UnauthorizedException;
+            return unknownHost || unauthorized;
+        };
+        final RetryRule fatalRetryRule = RetryRule.of(isFatal, RetryAction.ofShutdownServiceAndSendLatestException());
+        final RetryRule retryScheduledRetryRule = RetryRule.of(RetryPredicate.ofAlwaysTrue(), RetryAction.ofScheduledRetry(2, retryContext -> Duration.ofMillis(retryContext.getAttempt() * retryContext.getAttempt() * 50)));
+        return asList(fatalRetryRule, retryScheduledRetryRule);
+    }
+
+    private CompletionStage<Tokens> supervisedTokenSupplier(final Supplier<CompletionStage<Tokens>> supplier) {
+        return supervisor.supervise(this, nullParameter -> supplier.get(), null);
     }
 
     @Override
     public CompletionStage<String> get() {
+        rejectExcutionIfClosed("Token supplier is already closed.");
         return currentAccessTokenFuture;
     }
 
     @Override
     protected void internalClose() {
+        closeQuietly(supervisor);
         closeQuietly(authActor);
-        closeQuietly(tokenActor);
     }
 
     public static SphereAccessTokenSupplier createAndBeginRefreshInBackground(final SphereAuthConfig config, final HttpClient httpClient, final boolean closeHttpClient) {
         return new AutoRefreshSphereAccessTokenSupplierImpl(config, httpClient, closeHttpClient);
     }
 
-    private class TokenActor extends Actor {
-        @Override
-        protected void receive(final Object message) {
-            receiveBuilder(message)
-                    .when(TokenDeliveredMessage.class, m -> {
-                        if (!currentTokensOption.isPresent() || currentTokenIsOlder(m.tokens)) {
-                            updateToken(m.tokens);
-                        }
-                    })
-                    .when(TokenDeliveryFailedMessage.class, m -> {
-                        final boolean hasInvalidCredentials = m.cause.getCause() != null && m.cause.getCause() instanceof InvalidClientCredentialsException;
-                        if (hasInvalidCredentials) {
-                            AUTH_LOGGER.error(() -> "Invalid client credentials shutting down.", m.cause);
-                            currentAccessTokenFuture.completeExceptionally(m.cause);//in case it is still empty
-                            currentAccessTokenFuture = CompletableFutureUtils.failed(m.cause);//in case it was not empty
-                            close();
-                        } else if (!currentTokensOption.isPresent()) {
-                            currentAccessTokenFuture.completeExceptionally(m.cause);
-                        } else if (lastTokenIsStillValid()) {
-                            //keep the old token
-                        } else {
-                            currentTokensOption = Optional.empty();
-                            currentAccessTokenFuture = CompletableFutureUtils.failed(m.cause);
-                        }
-                    });
+    private void requestUpdateTokens(final Tokens tokens) {
+        if (!currentTokensOption.isPresent() || currentTokenIsOlder(tokens)) {
+            currentTokensOption = Optional.ofNullable(tokens);
+            final String accessToken = tokens.getAccessToken();
+            if (currentAccessTokenFuture.isDone()) {
+                currentAccessTokenFuture = CompletableFutureUtils.successful(accessToken);
+            } else {
+                currentAccessTokenFuture.complete(accessToken);
+            }
         }
+    }
+
+    private void requestUpdateFailedStatus(final Throwable error) {
+        if (!currentTokensOption.isPresent()) {
+            currentAccessTokenFuture.completeExceptionally(error);
+        } else if (lastTokenIsStillValid()) {
+            //keep the old token
+        } else {
+            currentTokensOption = Optional.empty();
+            currentAccessTokenFuture = CompletableFutureUtils.failed(error);
+        }
+        authActor.tell(new AuthActorProtocol.FetchTokenFromSphereMessage());//
     }
 
     /**
@@ -94,15 +113,5 @@ final class AutoRefreshSphereAccessTokenSupplierImpl extends AutoCloseableServic
 
     private ZonedDateTime oldExpiringZonedDateTime() {
         return Optional.ofNullable(currentTokensOption.get().getExpiresZonedDateTime()).orElseGet(() -> ZonedDateTime.now());
-    }
-
-    private void updateToken(final Tokens tokens) {
-        currentTokensOption = Optional.of(tokens);
-        final String accessToken = tokens.getAccessToken();
-        if (currentAccessTokenFuture.isDone()) {
-            currentAccessTokenFuture = CompletableFutureUtils.successful(accessToken);
-        } else {
-            currentAccessTokenFuture.complete(accessToken);
-        }
     }
 }

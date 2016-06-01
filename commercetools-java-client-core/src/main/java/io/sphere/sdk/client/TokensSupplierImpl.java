@@ -51,6 +51,7 @@ final class TokensSupplierImpl extends AutoCloseableService implements TokensSup
      */
     @Override
     public CompletionStage<Tokens> get() {
+        rejectExcutionIfClosed("Token supplier is already closed.");
         AUTH_LOGGER.debug(() -> isPasswordFlow() ? "Fetching new password flow token." : "Fetching new client credentials flow token.");
         final HttpRequest httpRequest = newRequest();
         final CompletionStage<HttpResponse> httpResponseStage = httpClient.execute(httpRequest);
@@ -125,6 +126,8 @@ final class TokensSupplierImpl extends AutoCloseableService implements TokensSup
                     exception = new UnauthorizedException(httpResponse.toString(), e);
                 }
                 throw exception;
+            } else if (httpResponse.getStatusCode() >= 300) {
+                throw new SphereException("negative HTTP response", new HttpException("status code is " + httpResponse.getStatusCode()));
             }
             try {
                 return SphereJsonUtils.readObject(httpResponse.getResponseBody(), Tokens.typeReference());

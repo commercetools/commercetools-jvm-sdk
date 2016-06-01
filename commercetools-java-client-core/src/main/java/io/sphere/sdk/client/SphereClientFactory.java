@@ -4,9 +4,11 @@ import io.sphere.sdk.http.HttpClient;
 import io.sphere.sdk.http.HttpRequest;
 import io.sphere.sdk.http.HttpResponse;
 import io.sphere.sdk.models.SphereException;
+import io.sphere.sdk.retry.RetryRule;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.List;
 import java.util.concurrent.CompletionStage;
 import java.util.function.Function;
 import java.util.function.Supplier;
@@ -34,6 +36,12 @@ public interface SphereClientFactory {
         return SphereClient.of(config, httpClient, tokenSupplier);
     }
 
+    default SphereClient createClient(SphereClientConfig config, List<RetryRule> apiRetryRules) {
+        final HttpClient httpClient = createHttpClient();
+        final SphereAccessTokenSupplier tokenSupplier = SphereAccessTokenSupplier.ofAutoRefresh(config, httpClient, false);
+        return SphereClient.of(config, httpClient, tokenSupplier, apiRetryRules);
+    }
+
     /**
      * Creates a client with a custom service to provide access tokens.
      * @param config the configuration to use the API
@@ -42,6 +50,10 @@ public interface SphereClientFactory {
      */
     default SphereClient createClient(SphereApiConfig config, SphereAccessTokenSupplier tokenSupplier) {
         return SphereClient.of(config, createHttpClient(), tokenSupplier);
+    }
+
+    default SphereClient createClient(SphereApiConfig config, SphereAccessTokenSupplier tokenSupplier, List<RetryRule> apiRetryRules) {
+        return SphereClient.of(config, createHttpClient(), tokenSupplier, apiRetryRules);
     }
 
     /**
@@ -69,7 +81,7 @@ public interface SphereClientFactory {
      * @return client
      */
     default SphereClient createClientOfApiConfigAndAccessToken(SphereApiConfig config, String accessToken, HttpClient httpClient) {
-        final HttpClient uncloseableHttpClient = new HttpClient() {
+        final HttpClient uncloseableHttpClient = new HttpClient() {//httpClient should be closed from outside
             @Override
             public CompletionStage<HttpResponse> execute(final HttpRequest httpRequest) {
                 return httpClient.execute(httpRequest);

@@ -6,7 +6,6 @@ import java.util.concurrent.CompletionStage;
 
 final class OnDemandSphereAccessTokenSupplier extends AutoCloseableService implements SphereAccessTokenSupplier {
     private final TokensSupplier tokensSupplier;
-    private boolean isClosed = false;
 
     private OnDemandSphereAccessTokenSupplier(final SphereAuthConfig config, final HttpClient httpClient, final boolean closeHttpClient) {
         tokensSupplier = TokensSupplierImpl.of(config, httpClient, closeHttpClient);
@@ -14,14 +13,14 @@ final class OnDemandSphereAccessTokenSupplier extends AutoCloseableService imple
 
     @Override
     protected synchronized void internalClose() {
-        if (!isClosed) {
+        if (!isClosed()) {
             tokensSupplier.close();
-            isClosed = true;
         }
     }
 
     @Override
     public CompletionStage<String> get() {
+        rejectExcutionIfClosed("Token supplier is already closed.");
         return tokensSupplier.get().thenApply(Tokens::getAccessToken);
     }
 

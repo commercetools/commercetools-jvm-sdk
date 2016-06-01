@@ -1,91 +1,88 @@
 package io.sphere.sdk.client;
 
-import io.sphere.sdk.client.AuthActorProtocol.*;
+import io.sphere.sdk.client.AuthActorProtocol.FailedTokenFetchMessage;
+import io.sphere.sdk.client.AuthActorProtocol.FetchTokenFromSphereMessage;
+import io.sphere.sdk.client.AuthActorProtocol.SuccessfulTokenFetchMessage;
 
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.CompletionStage;
 import java.util.concurrent.TimeUnit;
+import java.util.function.Consumer;
+import java.util.function.Function;
+import java.util.function.Supplier;
 
 import static io.sphere.sdk.client.SphereAuth.AUTH_LOGGER;
 import static io.sphere.sdk.utils.CompletableFutureUtils.onFailure;
 import static io.sphere.sdk.utils.CompletableFutureUtils.onSuccess;
-import static java.util.concurrent.TimeUnit.MILLISECONDS;
 
 /**
  * Actor which takes care that only one token needs to be fetched for many requests.
  */
 final class AuthActor extends Actor {
-    private static final int DEFAULT_WAIT_TIME_UNTIL_RETRY_MILLISECONDS = 100;
     private final TokensSupplier internalTokensSupplier;
-    private Optional<Tokens> tokensCache = Optional.empty();
+    private final Function<Supplier<CompletionStage<Tokens>>, CompletionStage<Tokens>> supervisedTokenSupplier;
+    private final Consumer<Tokens> requestUpdateTokens;
+    private final Consumer<Throwable> requestUpdateFailedStatus;
     private boolean isWaitingForToken = false;
-    private final List<Actor> subscribers = new LinkedList<>();
 
-    public AuthActor(final TokensSupplier internalTokensSupplier) {
+    public AuthActor(final TokensSupplier internalTokensSupplier,
+                     final Function<Supplier<CompletionStage<Tokens>>, CompletionStage<Tokens>> supervisedTokenSupplier,
+                     final Consumer<Tokens> requestUpdateTokens,
+                     final Consumer<Throwable> requestUpdateFailedStatus) {
         this.internalTokensSupplier = internalTokensSupplier;
+        this.supervisedTokenSupplier = supervisedTokenSupplier;
+        this.requestUpdateTokens = requestUpdateTokens;
+        this.requestUpdateFailedStatus = requestUpdateFailedStatus;
     }
 
     @Override
     protected void receive(final Object message) {
         receiveBuilder(message)
-                .when(SubscribeMessage.class, this::process)
                 .when(FetchTokenFromSphereMessage.class, this::process)
                 .when(SuccessfulTokenFetchMessage.class, this::process)
                 .when(FailedTokenFetchMessage.class, this::process);
     }
 
-    private void process(final SubscribeMessage m) {
-        subscribers.add(m.subscriber);
-        if (tokensCache.isPresent()) {
-            tellSubscriberNewTokens(tokensCache.get(), m.subscriber);
-        } else if (!isWaitingForToken) {
-            tell(new FetchTokenFromSphereMessage());
-        } else {
-            //fetching token is in progress
-        }
-    }
-
     private void process(final FetchTokenFromSphereMessage m) {
         if (!isWaitingForToken) {
             isWaitingForToken = true;
-            final CompletionStage<Tokens> future = internalTokensSupplier.get();
+            //for users it is fail fast but in the background it will be attempted again
+            final CompletionStage<Tokens> future = m.attempt > 0
+                    ? supervisedTokenSupplier.apply(() -> internalTokensSupplier.get())
+                    : internalTokensSupplier.get();
             onSuccess(future, tokens -> tell(new SuccessfulTokenFetchMessage(tokens)));
-            onFailure(future, e -> tell(new FailedTokenFetchMessage(e, m.attempt + 1)));
+            onFailure(future, e -> {
+                requestUpdateFailedStatus.accept(e);
+                tell(new FailedTokenFetchMessage(e));
+                tell(new FetchTokenFromSphereMessage(1));
+            });
         }
     }
 
     private void process(final SuccessfulTokenFetchMessage m) {
         isWaitingForToken = false;
-        tokensCache = Optional.of(m.tokens);
-        subscribers.forEach(subscriber -> tellSubscriberNewTokens(m.tokens, subscriber));
+        requestUpdateTokens.accept(m.tokens);
         scheduleNextTokenFetchFromSphere(m.tokens);
-    }
-
-    private void tellSubscriberNewTokens(final Tokens tokens, final Actor subscriber) {
-        subscriber.tell(new TokenDeliveredMessage(tokens));
     }
 
     private void process(final FailedTokenFetchMessage m) {
         isWaitingForToken = false;
-        final boolean failReasonIsInvalidCredentials = m.cause.getCause() != null && m.cause.getCause() instanceof InvalidClientCredentialsException;
-        if (failReasonIsInvalidCredentials) {
-            AUTH_LOGGER.error(() -> "Can't fetch tokens due to invalid credentials.", m.cause);
-            subscribers.forEach(subscriber -> subscriber.tell(new TokenDeliveryFailedMessage(m.cause)));
-        } else {
-            AUTH_LOGGER.error(() -> "Can't fetch tokens.", m.cause);
-            final long tryAgainIn = m.attempt * DEFAULT_WAIT_TIME_UNTIL_RETRY_MILLISECONDS;
-            schedule(new FetchTokenFromSphereMessage(m.attempt), tryAgainIn, MILLISECONDS);
-            if (m.attempt > 2) {
-                subscribers.forEach(subscriber -> subscriber.tell(new TokenDeliveryFailedMessage(m.cause)));
-            }
-        }
+        AUTH_LOGGER.error(() -> "Can't fetch tokens.", m.cause);
+        requestUpdateFailedStatus.accept(m.cause);
     }
 
     private void scheduleNextTokenFetchFromSphere(final Tokens tokens) {
-        final Long delayInSecondsToFetchNewToken = Optional.ofNullable(tokens.getExpiresIn()).map(ttlInSeconds -> ttlInSeconds - 60 * 60).orElse(60 * 30L);
+        final Long delayInSecondsToFetchNewToken = Optional.ofNullable(tokens.getExpiresIn())
+                .map(ttlInSeconds -> selectNextRetryTime(ttlInSeconds))
+                .orElse(60L);
         schedule(new FetchTokenFromSphereMessage(), delayInSecondsToFetchNewToken, TimeUnit.SECONDS);
+    }
+
+    static Long selectNextRetryTime(final Long ttlInSeconds) {
+        final long aDay = 60 * 60 * 24L;
+        final long minimum = Math.min(ttlInSeconds / 2, aDay);
+        final long aSecond = 1L;
+        return Math.max(minimum, aSecond);
     }
 
     @Override
