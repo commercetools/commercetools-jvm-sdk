@@ -91,6 +91,83 @@ import java.util.function.Function;
  </ul>
  -->
 
+ <h3 class=released-version id="v1_0_0">1.0.0 (02.06.2016)</h3>
+ <ul>
+ <li class=new-in-release>a new commercetools landing page for the JVM SDK is available at <a href="https://dev.commercetools.com/jvm/">https://dev.commercetools.com/jvm/</a></li>
+ <li class=new-in-release>the GitHub repository has been relocated to <a href="https://github.com/commercetools/commercetools-jvm-sdk">https://github.com/commercetools/commercetools-jvm-sdk</a>, it was formerly under the SPHERE.IO branding</li>
+ <li class=new-in-release>{@link io.sphere.sdk.client.RetrySphereClientDecorator} to deal with server errors and retry requests</li>
+ <li class=new-in-release>{@link ProductProjectionSearch#withFuzzyLevel(java.lang.Integer)} to configure the fuzzy level in the product search</li>
+ <li class=change-in-release>a lot of classes without public available constructors have been converted to interfaces
+ <ul>
+  <li>{@link io.sphere.sdk.client.Tokens}</li>
+  <li>{@link io.sphere.sdk.cartdiscounts.DiscountedLineItemPortion}</li>
+  <li>{@link io.sphere.sdk.cartdiscounts.DiscountedLineItemPrice}</li>
+  <li>{@link io.sphere.sdk.cartdiscounts.DiscountedLineItemPriceForQuantity}</li>
+  <li>{@link io.sphere.sdk.carts.ItemState}</li>
+  <li>{@link io.sphere.sdk.carts.PaymentInfo}</li>
+  <li>{@link io.sphere.sdk.carts.TaxPortion}</li>
+  <li>{@link io.sphere.sdk.discountcodes.DiscountCodeInfo}</li>
+  <li>{@link io.sphere.sdk.orders.Parcel}</li>
+  <li>{@link io.sphere.sdk.orders.ReturnInfo}</li>
+  <li>{@link io.sphere.sdk.orders.ReturnItem}</li>
+  <li>{@link io.sphere.sdk.orders.SyncInfo}</li>
+  <li>{@link io.sphere.sdk.orders.TrackingData}</li>
+  <li>{@link io.sphere.sdk.payments.PaymentMethodInfo}</li>
+  <li>{@link io.sphere.sdk.payments.PaymentStatus}</li>
+  <li>{@link Transaction}</li>
+  <li>{@link io.sphere.sdk.productdiscounts.DiscountedPrice}</li>
+  <li>{@link Project}</li>
+  <li>{@link io.sphere.sdk.shippingmethods.ZoneRate}</li>
+  <li>{@link io.sphere.sdk.types.FieldDefinition}</li>
+  <li>{@link io.sphere.sdk.zones.Location}</li>
+  <li>{@link EnumValue}</li>
+  <li>{@link LocalizedEnumValue}</li>
+  <li>{@link PagedQueryResult}</li>
+  <li>{@link PagedResult}</li>
+  <li>{@link io.sphere.sdk.search.PagedSearchResult}</li>
+  <li>{@link io.sphere.sdk.search.SearchKeyword}</li>
+  <li>{@link SearchKeywords}</li>
+  <li>{@link io.sphere.sdk.search.TermStats}</li>
+ </ul>
+
+ </li>
+ <li class=removed-in-release>A lot of deprecated methods and classes has been removed, the previous release contains information what to use instead.</li>
+ <li class=removed-in-release>{@code io.sphere.sdk.customers.commands.CustomerCreateTokenCommand}, use {@link io.sphere.sdk.customers.commands.CustomerCreatePasswordTokenCommand} instead</li>
+ <li class=removed-in-release>{@code io.sphere.sdk.client.SphereAccessTokenSupplierFactory}, use static methods of {@link io.sphere.sdk.client.SphereAccessTokenSupplier} </li>
+ <li class=removed-in-release>test double methods in {@link io.sphere.sdk.client.SphereClientFactory}</li>
+ <li class=removed-in-release>the static method {@code typeId} in resources</li>
+ <li class=removed-in-release>{@code CartDraftDsl.witCustom}</li>
+ <li class=removed-in-release>{@code LineItem#getDiscountedPrice()} and {@code CustomLineItem#getDiscountedPrice()}</li>
+ <li class=removed-in-release>{@code getVersion()} in {@link CustomerCreateEmailTokenCommand}</li>
+ <li class=removed-in-release>{@code CustomerByTokenGet}</li>
+ <li class=removed-in-release>{@code CustomObjectDeleteCommand#of(CustomObject<?>)}</li>
+ <li class=removed-in-release>{@code CustomObjectDeleteCommand#of(String, String)}</li>
+ <li class=removed-in-release>{@code CustomObjectByKeyGet#of(String, String)}</li>
+ <li class=removed-in-release>{@code CustomObjectQuery#of()}</li>
+ <li class=removed-in-release>{@code ProductProjection#findVariantBySky}</li>
+ <li class=removed-in-release>{@code AttributeDefinition#getIsRequired}</li>
+ <li class=removed-in-release>{@code AttributeDefinition#getIsSearchable}</li>
+ <li class=removed-in-release>{@code ProductAttributeFacetSearchModel#ofLocalizableEnum(String)}</li>
+ <li class=removed-in-release>{@code ProductAttributeFacetSearchModel#ofLocalizableEnumSet(String)}</li>
+ <li class=removed-in-release>{@code ProductAttributeFacetedSearchSearchModel#ofLocalizableEnum(String)}</li>
+ <li class=removed-in-release>{@code ProductAttributeFacetedSearchSearchModel#ofLocalizableEnumSet(String)}</li>
+ <li class=removed-in-release>{@code ProductAttributeFilterSearchModel#ofLocalizableEnum(String)}</li>
+ <li class=removed-in-release>{@code ProductAttributeFilterSearchModel#ofLocalizableEnumSet(String)}</li>
+ <li class=removed-in-release>{@code ProductAttributeSortSearchModel#ofLocalizableEnum(String)}</li>
+ <li class=removed-in-release>{@code ProductAttributeSortSearchModel#ofLocalizableEnumSet(String)}</li>
+ <li class=removed-in-release>{@code ProductTypeDraft#of(String, String, List)}</li>
+ <li class=removed-in-release>{@code TaxRate#equalsIgnoreId(TaxRate)}</li>
+ <li class=removed-in-release>{@code SetCustomTypeBase#getTypeId()}</li>
+ <li class=removed-in-release>{@code SetCustomTypeBase#getTypeKey()}</li>
+ <li class=removed-in-release>{@code LocalizedString#ofEnglishLocale(String)}</li>
+ <li class=removed-in-release>{@link io.sphere.sdk.search.FilterDsl} <abbr title="copy methods starting with 'with'">withers</abbr> taking {@link io.sphere.sdk.search.FilterExpression} as argument</li>
+ <li class=removed-in-release>methods {@code getTermFacetResult(final TermFacetExpression<T> facetExpression)}, {@code getRangeFacetResult(final RangeFacetExpression<T> facetExpression)}, and {@code getFilteredFacetResult(final FilteredFacetExpression<T> facetExpression)} in {@link io.sphere.sdk.search.PagedSearchResult}</li>
+ <li class=removed-in-release>in search models the methods starting with {@code by}</li>
+ <li class=removed-in-release>internal utility classes {@code IterableUtils}, {@code MapUtils}, {@code SetUtils}, {@code StringUtils}, {@code PatternMatcher} and {@code UrlUtils}</li>
+ <li class=removed-in-release>{@code FormUrlEncodedHttpRequestBody#getData()}</li>
+ </ul>
+
+
  <h3 class=released-version id="v1_0_0_RC8">1.0.0-RC8 (13.05.2016)</h3>
 
  <ul>
