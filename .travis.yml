@@ -17,4 +17,4 @@ notifications:
 branches:
   only:
     - master
-    - feature/1089/product-availability-per-channel
+    - remove-direct-retry-rules-in-client
