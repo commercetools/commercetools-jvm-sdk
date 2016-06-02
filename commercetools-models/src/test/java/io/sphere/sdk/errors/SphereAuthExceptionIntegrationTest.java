@@ -104,23 +104,27 @@ public class SphereAuthExceptionIntegrationTest extends IntegrationTest {
 
     @Test
     public void misconfigurationDomainInAuth() throws Exception {
-        try(final HttpClient httpClient = newHttpClient()) {
-            final String authUrl = "http://sdfjifdsjifdsjfdsjdfsjidsfjidfs.de";
-            final String apiUrl = getSphereClientConfig().getApiUrl();
-            final SphereClientConfig config = SphereClientConfig.of("projectKey", "clientId", "clientSecret", authUrl, apiUrl);
-            try (final SphereAccessTokenSupplier supplier = SphereAccessTokenSupplier.ofAutoRefresh(config, httpClient, false)) {
-                supplier.close();
-                assertThatThrownBy(() -> supplier.get()).isInstanceOf(IllegalStateException.class);
+        if (!"false".equals(System.getenv("JVM_SDK_IT_SSL_VALIDATION"))) {
+            try(final HttpClient httpClient = newHttpClient()) {
+                final String authUrl = "http://sdfjifdsjifdsjfdsjdfsjidsfjidfs.de";
+                final String apiUrl = getSphereClientConfig().getApiUrl();
+                final SphereClientConfig config = SphereClientConfig.of("projectKey", "clientId", "clientSecret", authUrl, apiUrl);
+                try (final SphereAccessTokenSupplier supplier = SphereAccessTokenSupplier.ofAutoRefresh(config, httpClient, false)) {
+                    supplier.close();
+                    assertThatThrownBy(() -> supplier.get()).isInstanceOf(IllegalStateException.class);
+                }
             }
         }
     }
 
     @Test
     public void clientAlreadyClosed() throws Exception {
-        try(final SphereClient client = SphereClientFactory.of().createClient(getSphereClientConfig())) {
-            client.close();
-            assertThatThrownBy(() -> client.execute(ProjectGet.of()))
-                    .isInstanceOf(IllegalStateException.class);
+        if (!"false".equals(System.getenv("JVM_SDK_IT_SSL_VALIDATION"))) {
+            try (final SphereClient client = SphereClientFactory.of().createClient(getSphereClientConfig())) {
+                client.close();
+                assertThatThrownBy(() -> client.execute(ProjectGet.of()))
+                        .isInstanceOf(IllegalStateException.class);
+            }
         }
     }
 
@@ -140,13 +144,15 @@ public class SphereAuthExceptionIntegrationTest extends IntegrationTest {
 
     @Test
     public void misconfiguredApiUrl() throws Exception {
-        final String invalidApiUrl = "http://sdfjifdsjifdsjfdsjdfsjidsfjidfs.de";
-        final SphereClientConfig config = getSphereClientConfig().withApiUrl(invalidApiUrl);
-        try (final SphereClient client = SphereClientFactory.of().createClient(config)) {
-            final Throwable throwable =
-                    catchThrowable(() -> blockingWait(client.execute(ProjectGet.of()), Duration.ofMillis(1000)));
-            assertThat(throwable).isInstanceOf(HttpException.class).hasCauseInstanceOf(UnknownHostException.class);
-            assertThat(client).isNot(closed());
+        if (!"false".equals(System.getenv("JVM_SDK_IT_SSL_VALIDATION"))) {
+            final String invalidApiUrl = "http://sdfjifdsjifdsjfdsjdfsjidsfjidfs.de";
+            final SphereClientConfig config = getSphereClientConfig().withApiUrl(invalidApiUrl);
+            try (final SphereClient client = SphereClientFactory.of().createClient(config)) {
+                final Throwable throwable =
+                        catchThrowable(() -> blockingWait(client.execute(ProjectGet.of()), Duration.ofMillis(1000)));
+                assertThat(throwable).isInstanceOf(HttpException.class).hasCauseInstanceOf(UnknownHostException.class);
+                assertThat(client).isNot(closed());
+            }
         }
     }
 
