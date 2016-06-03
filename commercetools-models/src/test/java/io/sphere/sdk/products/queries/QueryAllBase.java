@@ -42,9 +42,8 @@ public abstract class QueryAllBase extends IntegrationTest {
 
     @AfterClass
     public static void deleteProducts() {
-        ProductTypeFixtures.deleteProductType(client(), productType);
+        ProductFixtures.deleteProductsAndProductTypes(client());
         productType = null;
-        createdProducts.forEach(p -> client().executeBlocking(ProductDeleteCommand.of(p)));
         createdProducts = null;
     }
 }
