@@ -91,7 +91,7 @@ import java.util.function.Function;
  </ul>
  -->
 
- <h3 class=released-version id="v1_0_0">1.0.0 (02.06.2016)</h3>
+ <h3 class=released-version id="v1_0_0">1.0.0 (03.06.2016)</h3>
  <ul>
  <li class=new-in-release>a new commercetools landing page for the JVM SDK is available at <a href="https://dev.commercetools.com/jvm/">https://dev.commercetools.com/jvm/</a></li>
  <li class=new-in-release>the GitHub repository has been relocated to <a href="https://github.com/commercetools/commercetools-jvm-sdk">https://github.com/commercetools/commercetools-jvm-sdk</a>, it was formerly under the SPHERE.IO branding</li>

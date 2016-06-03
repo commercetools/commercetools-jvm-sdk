@@ -17,6 +17,7 @@ public class PublicConstructorsAreTheExceptionRule extends ConstructorStrategyRu
                     "io.sphere.sdk.search.MetaModelSearchDslBuilder," +
                     "ResourceMetaModelSearchDslBuilderImpl," +
                     "io.sphere.sdk.http.HttpClientAdapterBase," +
+                    "io.sphere.sdk.products.attributes.DefaultProductAttributeFormatter," +
                     "io.sphere.sdk.search.model.TermFilterExpression").split(",( )?"));
 
     @Override

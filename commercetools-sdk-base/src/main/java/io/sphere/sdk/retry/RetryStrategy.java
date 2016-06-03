@@ -1,5 +1,7 @@
 package io.sphere.sdk.retry;
 
+import io.sphere.sdk.models.Base;
+
 import javax.annotation.Nullable;
 import java.time.Duration;
 
@@ -13,7 +15,7 @@ import java.time.Duration;
  * </ul>
  *
  */
-public final class RetryStrategy {
+public final class RetryStrategy extends Base {
     enum StrategyType {
         RESUME, STOP, RETRY_IMMEDIATELY, RETRY_SCHEDULED;
     }
