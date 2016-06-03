@@ -90,6 +90,7 @@ io.sphere.sdk.producttypes.queries
 io.sphere.sdk.projects
 io.sphere.sdk.projects.queries
 io.sphere.sdk.queries
+io.sphere.sdk.retry
 io.sphere.sdk.reviews
 io.sphere.sdk.reviews.commands
 io.sphere.sdk.reviews.commands.updateactions
@@ -123,7 +124,6 @@ io.sphere.sdk.types.customupdateactions
 io.sphere.sdk.types.expansion
 io.sphere.sdk.types.queries
 io.sphere.sdk.utils
-io.sphere.sdk.utils.functional
 io.sphere.sdk.zones
 io.sphere.sdk.zones.commands
 io.sphere.sdk.zones.commands.updateactions
