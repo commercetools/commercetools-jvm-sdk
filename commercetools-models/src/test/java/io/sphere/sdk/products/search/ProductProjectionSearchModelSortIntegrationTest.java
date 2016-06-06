@@ -1,9 +1,12 @@
 package io.sphere.sdk.products.search;
 
 import io.sphere.sdk.products.ProductProjection;
+import io.sphere.sdk.search.PagedSearchResult;
 import io.sphere.sdk.search.SortExpression;
 import org.junit.Test;
 
+import java.util.Collections;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.function.Consumer;
 
@@ -170,6 +173,23 @@ public class ProductProjectionSearchModelSortIntegrationTest extends ProductProj
     public void onDateTimeSetAttributes() throws Exception {
         testProductIds(PRODUCT_MODEL.allVariants().attribute().ofDateTimeSet(ATTR_NAME_DATE_TIME_SET).desc(),
                 ids -> assertThat(ids).containsExactly(product1.getId(), product2.getId()));
+    }
+
+    @Test
+    public void id() {
+        final ProductProjectionSearch baseRequest = ProductProjectionSearch.ofStaged()
+                .withQueryFilters(m -> m.id().isIn(getAllIds()));
+        final ProductProjectionSearch asc = baseRequest.withSort(m -> m.id().asc());
+        final ProductProjectionSearch desc = baseRequest.withSort(m -> m.id().desc());
+        assertEventually(() -> {
+            final PagedSearchResult<ProductProjection> ascResult = client().executeBlocking(asc);
+            assertThat(ascResult.getTotal()).isEqualTo(getAllIds().size());
+            final PagedSearchResult<ProductProjection> descResult = client().executeBlocking(desc);
+            assertThat(descResult.getTotal()).isEqualTo(getAllIds().size());
+            final LinkedList<ProductProjection> reversedDesc = new LinkedList<>(descResult.getResults());
+            Collections.reverse(reversedDesc);
+            assertThat(ascResult.getResults()).isEqualTo(reversedDesc);
+        });
     }
 
     private static void testProductIds(final SortExpression<ProductProjection> sortExpr,

@@ -14,6 +14,8 @@ import org.slf4j.LoggerFactory;
 import javax.money.MonetaryAmount;
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static io.sphere.sdk.products.ProductsScenario1Fixtures.Data;
 import static io.sphere.sdk.products.ProductsScenario1Fixtures.createScenario;
@@ -54,5 +56,9 @@ public abstract class ProductProjectionSearchModelIntegrationTest extends Integr
         final List<String> ids = asList(product1.getId(), product2.getId());
         final ProductProjectionSearch sphereRequest = search.plusQueryFilters(productModel -> productModel.id().isIn(ids));
         return client().executeBlocking(sphereRequest);
+    }
+
+    protected List<String> getAllIds() {
+        return Stream.of(product1, product2, productA, productB).map(p -> p.getId()).collect(Collectors.toList());
     }
 }
