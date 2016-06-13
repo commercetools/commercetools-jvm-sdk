@@ -1,14 +1,10 @@
 package io.sphere.sdk.products;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import io.sphere.sdk.products.attributes.Attribute;
-import io.sphere.sdk.products.attributes.AttributeAccess;
-import io.sphere.sdk.products.attributes.NamedAttributeAccess;
 import io.sphere.sdk.products.search.PriceSelection;
 
 import javax.annotation.Nullable;
 import java.util.List;
-import java.util.Optional;
 
 @JsonDeserialize(as = ProductVariantImpl.class)
 public interface ProductVariant extends AttributeContainer {
@@ -91,23 +87,4 @@ public interface ProductVariant extends AttributeContainer {
      * @throws UnsupportedOperationException if the operation is not available
      */
     ByIdVariantIdentifier getIdentifier();
-
-    @Override
-    <T> Optional<T> findAttribute(final NamedAttributeAccess<T> accessor);
-
-    @Override
-    <T> Optional<T> findAttribute(final String name, final AttributeAccess<T> accessor);
-
-    @Nullable
-    @Override
-    Attribute getAttribute(final String attributeName);
-
-    @Override
-    List<Attribute> getAttributes();
-
-    @Override
-    boolean hasAttribute(final String attributeName);
-
-    @Override
-    boolean hasAttribute(final NamedAttributeAccess<?> namedAccess);
 }
