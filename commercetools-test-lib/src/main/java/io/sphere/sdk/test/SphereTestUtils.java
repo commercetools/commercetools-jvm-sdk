@@ -2,6 +2,7 @@ package io.sphere.sdk.test;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.neovisionaries.i18n.CountryCode;
+import io.sphere.sdk.client.ErrorResponseException;
 import io.sphere.sdk.json.SphereJsonUtils;
 import io.sphere.sdk.models.*;
 import io.sphere.sdk.queries.PagedQueryResult;
@@ -177,7 +178,10 @@ public final class SphereTestUtils {
 
                 // the block executed without throwing an exception, return
                 return;
-            } catch (AssertionError e) {
+            } catch (AssertionError | ErrorResponseException e) {
+                if (e instanceof ErrorResponseException && !((ErrorResponseException) e).hasErrorCode("SearchFacetPathNotFound")) {
+                    throw e;
+                }
                 if (System.currentTimeMillis() > timeOutAt) {
                     throw e;
                 }
