@@ -42,7 +42,7 @@ public class RetrySphereClientDecoratorTest {
     public void retryDelete() throws InterruptedException {
         final SphereClient client = getSphereClient(getDeleteHttpClient());
         final SphereClient retryClient = RetryDeleteExample.ofRetry(client);
-        final Category result = blockingWait(retryClient.execute(CategoryDeleteCommand.of(Versioned.of("some-id", 5L))), 400, TimeUnit.MILLISECONDS);//thread pool needs warm-up
+        final Category result = blockingWait(retryClient.execute(CategoryDeleteCommand.of(Versioned.of("some-id", 5L))), 800, TimeUnit.MILLISECONDS);//thread pool needs warm-up
         Assertions.assertThat(result.getVersion()).isEqualTo(7L);
     }
 
