@@ -7,6 +7,7 @@ import org.junit.Test;
 import java.time.Duration;
 
 import static io.sphere.sdk.orders.OrderFixtures.withOrderAndReturnInfo;
+import static io.sphere.sdk.test.SphereTestUtils.assertEventually;
 import static org.assertj.core.api.Assertions.*;
 
 public class MessageByIdGetIntegrationTest extends IntegrationTest {
@@ -18,10 +19,12 @@ public class MessageByIdGetIntegrationTest extends IntegrationTest {
                     .withPredicates(m -> m.type().is("ReturnInfoAdded"))
                     .withSort(m -> m.createdAt().sort().desc())
                     .withLimit(1L);
-            final Message messageFromQueryEndpoint = client().executeBlocking(query).head().get();
+            assertEventually(() -> {
+                final Message messageFromQueryEndpoint = client().executeBlocking(query).head().get();
 
-            final Message message = client().executeBlocking(MessageByIdGet.of(messageFromQueryEndpoint), Duration.ofSeconds(45));
-            assertThat(message).isEqualTo(messageFromQueryEndpoint);
+                final Message message = client().executeBlocking(MessageByIdGet.of(messageFromQueryEndpoint), Duration.ofSeconds(45));
+                assertThat(message).isEqualTo(messageFromQueryEndpoint);
+            });
 
             return order;
         }));

@@ -37,21 +37,24 @@ public class MessageQueryIntegrationTest extends IntegrationTest {
                     .withPredicates(m -> m.resource().is(order))
                     .withSort(m -> m.createdAt().sort().desc())
                     .withExpansionPaths(m -> m.resource());
-            final List<Message> results = client().executeBlocking(query).getResults();
+            assertEventually(() -> {
+                final List<Message> results = client().executeBlocking(query).getResults();
 
-            final Message returnInfoAddedUntypedMessage = results.stream()
-                    .filter(m -> {
-                        final String messageType = ReturnInfoAddedMessage.MESSAGE_TYPE;
-                        return m.getType().equals(messageType);
-                    })
-                    .findFirst().get();
+                final Optional<Message> returnInfoAddedUntypedMessage = results.stream()
+                        .filter(m -> {
+                            final String messageType = ReturnInfoAddedMessage.MESSAGE_TYPE;
+                            return m.getType().equals(messageType);
+                        })
+                        .findFirst();
 
-            final ReturnInfoAddedMessage returnInfoAddedMessage =
-                    returnInfoAddedUntypedMessage.as(ReturnInfoAddedMessage.class);
+                assertThat(returnInfoAddedUntypedMessage).isPresent();
+                final ReturnInfoAddedMessage returnInfoAddedMessage =
+                        returnInfoAddedUntypedMessage.get().as(ReturnInfoAddedMessage.class);
 
-            assertThat(order.getReturnInfo()).contains(returnInfoAddedMessage.getReturnInfo());
-            final Order expandedOrder = returnInfoAddedMessage.getResource().getObj();
-            assertThat(expandedOrder.getCreatedAt()).isEqualTo(order.getCreatedAt());
+                assertThat(order.getReturnInfo()).contains(returnInfoAddedMessage.getReturnInfo());
+                final Order expandedOrder = returnInfoAddedMessage.getResource().getObj();
+                assertThat(expandedOrder.getCreatedAt()).isEqualTo(order.getCreatedAt());
+            });
 
             return order;
         }));
@@ -64,22 +67,24 @@ public class MessageQueryIntegrationTest extends IntegrationTest {
                     .withPredicates(m -> m.resource().id().is(order.getId()))
                     .withSort(m -> m.createdAt().sort().desc())
                     .withExpansionPaths(m -> m.resource());
-            final List<Message> results = client().executeBlocking(query).getResults();
+            assertEventually(() -> {
+                final List<Message> results = client().executeBlocking(query).getResults();
 
-            final Message returnInfoAddedUntypedMessage = results.stream()
-                    .filter(m -> {
-                        final String messageType = ReturnInfoAddedMessage.MESSAGE_TYPE;
-                        return m.getType().equals(messageType);
-                    })
-                    .findFirst().get();
+                final Optional<Message> returnInfoAddedUntypedMessage = results.stream()
+                        .filter(m -> {
+                            final String messageType = ReturnInfoAddedMessage.MESSAGE_TYPE;
+                            return m.getType().equals(messageType);
+                        })
+                        .findFirst();
 
-
-            final DeliveryAddedMessage deliveryAddedMessage
-                    //wrong cast, but may not explodes
-                    = returnInfoAddedUntypedMessage.as(DeliveryAddedMessage.class);
-            assertThat(deliveryAddedMessage.getDelivery())
-                    .overridingErrorMessage("with wrong cast, fields can be null")
-                    .isNull();
+                assertThat(returnInfoAddedUntypedMessage).isPresent();
+                final DeliveryAddedMessage deliveryAddedMessage
+                        //wrong cast, but may not explodes
+                        = returnInfoAddedUntypedMessage.get().as(DeliveryAddedMessage.class);
+                assertThat(deliveryAddedMessage.getDelivery())
+                        .overridingErrorMessage("with wrong cast, fields can be null")
+                        .isNull();
+            });
 
             return order;
         }));
@@ -93,10 +98,13 @@ public class MessageQueryIntegrationTest extends IntegrationTest {
                     .withSort(m -> m.createdAt().sort().desc())
                     .withExpansionPaths(m -> m.resource())
                     .forMessageType(SimpleOrderMessage.MESSAGE_HINT);
-            final List<SimpleOrderMessage> results = client().executeBlocking(query).getResults();
 
-            final Optional<Order> orderOptional = Optional.ofNullable(results.get(0).getResource().getObj());
-            assertThat(orderOptional.map(o -> o.getCreatedAt())).contains(order.getCreatedAt());
+            assertEventually(() -> {
+                final List<SimpleOrderMessage> results = client().executeBlocking(query).getResults();
+
+                final Optional<Order> orderOptional = Optional.ofNullable(results.get(0).getResource().getObj());
+                assertThat(orderOptional.map(o -> o.getCreatedAt())).contains(order.getCreatedAt());
+            });
 
             return order;
         }));
@@ -161,11 +169,16 @@ public class MessageQueryIntegrationTest extends IntegrationTest {
                             .withExpansionPaths(m -> m.resource())
                             .withLimit(1L)
                             .forMessageType(ReturnInfoAddedMessage.MESSAGE_HINT);
-            final PagedQueryResult<ReturnInfoAddedMessage> pagedQueryResult = client().executeBlocking(query);
-            final ReturnInfoAddedMessage message = pagedQueryResult.head().get();
-            assertThat(message.getReturnInfo()).isEqualTo(returnInfo);
-            assertThat(message.getResource().getObj()).isNotNull();
-            assertThat(message.getResource().getId()).isEqualTo(order.getId());
+
+            assertEventually(() -> {
+                final PagedQueryResult<ReturnInfoAddedMessage> pagedQueryResult = client().executeBlocking(query);
+                final Optional<ReturnInfoAddedMessage> message = pagedQueryResult.head();
+
+                assertThat(message).isPresent();
+                assertThat(message.get().getReturnInfo()).isEqualTo(returnInfo);
+                assertThat(message.get().getResource().getObj()).isNotNull();
+                assertThat(message.get().getResource().getId()).isEqualTo(order.getId());
+            });
 
             return order;
         }));
@@ -180,12 +193,16 @@ public class MessageQueryIntegrationTest extends IntegrationTest {
                             .withSort(m -> m.createdAt().sort().desc())
                             .withExpansionPaths(m -> m.resource())
                             .withLimit(1L);
-            final PagedQueryResult<Message> pagedQueryResult = client().executeBlocking(query);
-            final Message message = pagedQueryResult.head().get();
 
-            final String fetchedItemId = message.getPayload().get("returnInfo").get("items").get(0).get("id").asText();
-            final String actualItemId = returnInfo.getItems().get(0).getId();
-            assertThat(fetchedItemId).isEqualTo(actualItemId).isNotNull();
+            assertEventually(() -> {
+                final PagedQueryResult<Message> pagedQueryResult = client().executeBlocking(query);
+                final Optional<Message> message = pagedQueryResult.head();
+
+                assertThat(message).isPresent();
+                final String fetchedItemId = message.get().getPayload().get("returnInfo").get("items").get(0).get("id").asText();
+                final String actualItemId = returnInfo.getItems().get(0).getId();
+                assertThat(fetchedItemId).isEqualTo(actualItemId).isNotNull();
+            });
 
             return order;
         }));
@@ -200,10 +217,15 @@ public class MessageQueryIntegrationTest extends IntegrationTest {
                     .withSort(m -> m.createdAt().sort().desc())
                     .withExpansionPaths(m -> m.resource())
                     .withLimit(1L);
-            final Message message = client().executeBlocking(query).head().get();
-            assertThat(message.getResource().getObj()).isNotNull();
-            assertThat(message.getResource()).isEqualTo(order.toReference());
-            assertThat(message.getResource().getId()).isEqualTo(order.getId());
+
+            assertEventually(() -> {
+                final Optional<Message> message = client().executeBlocking(query).head();
+
+                assertThat(message).isPresent();
+                assertThat(message.get().getResource().getObj()).isNotNull();
+                assertThat(message.get().getResource()).isEqualTo(order.toReference());
+                assertThat(message.get().getResource().getId()).isEqualTo(order.getId());
+            });
 
             return order;
         }));

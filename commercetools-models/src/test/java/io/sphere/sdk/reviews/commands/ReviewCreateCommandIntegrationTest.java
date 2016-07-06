@@ -27,6 +27,7 @@ import org.junit.Test;
 
 import java.util.Collections;
 import java.util.Locale;
+import java.util.Optional;
 import java.util.function.Consumer;
 
 import static io.sphere.sdk.customers.CustomerFixtures.withCustomer;
@@ -100,9 +101,11 @@ public class ReviewCreateCommandIntegrationTest extends IntegrationTest {
                                     .withPredicates(m -> m.resource().is(review))
                                     .forMessageType(ReviewCreatedMessage.MESSAGE_HINT));
 
-                            final ReviewCreatedMessage paymentCreatedMessage = pagedQueryResult.head().get();
-                            assertThat(paymentCreatedMessage.getReview().getId()).isEqualTo(review.getId());
-                            assertThat(paymentCreatedMessage.getResource().getId()).isEqualTo(review.getId());
+                            final Optional<ReviewCreatedMessage> paymentCreatedMessage = pagedQueryResult.head();
+
+                            assertThat(paymentCreatedMessage).isPresent();
+                            assertThat(paymentCreatedMessage.get().getReview().getId()).isEqualTo(review.getId());
+                            assertThat(paymentCreatedMessage.get().getResource().getId()).isEqualTo(review.getId());
                         });
 
                         client().executeBlocking(ReviewDeleteCommand.of(review));
