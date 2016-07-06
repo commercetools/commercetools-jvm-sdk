@@ -48,6 +48,7 @@ public class PaymentCreateCommandIntegrationTest extends IntegrationTest {
                         .withPredicates(m -> m.resource().is(payment))
                         .forMessageType(PaymentCreatedMessage.MESSAGE_HINT));
 
+                assertThat(pagedQueryResult.head()).isPresent();
                 final PaymentCreatedMessage paymentCreatedMessage = pagedQueryResult.head().get();
                 assertThat(paymentCreatedMessage.getPayment().getId()).isEqualTo(payment.getId());
                 assertThat(paymentCreatedMessage.getResource().getId()).isEqualTo(payment.getId());
