@@ -15,9 +15,7 @@ import static io.sphere.sdk.channels.ChannelFixtures.withChannel;
 import static io.sphere.sdk.channels.ChannelFixtures.withChannelOfRole;
 import static io.sphere.sdk.channels.ChannelFixtures.withUpdatableChannelOfRole;
 import static io.sphere.sdk.reviews.ReviewFixtures.withReview;
-import static io.sphere.sdk.test.SphereTestUtils.ENGLISH;
-import static io.sphere.sdk.test.SphereTestUtils.randomKey;
-import static io.sphere.sdk.test.SphereTestUtils.randomSlug;
+import static io.sphere.sdk.test.SphereTestUtils.*;
 import static java.util.Collections.singleton;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -42,11 +40,13 @@ public class ChannelQueryIntegrationTest extends IntegrationTest {
                             .withPredicates(m -> m.reviewRatingStatistics().averageRating().is(2.0))
                             .plusPredicates(m -> m.reviewRatingStatistics().count().is(2))
                             .plusPredicates(m -> m.is(channel));
-                    final List<Channel> results = client().executeBlocking(query).getResults();
-                    assertThat(results).hasSize(1);
-                    final Channel loadedChannel = results.get(0);
-                    assertThat(loadedChannel.getId()).isEqualTo(channel.getId());
-                    assertThat(loadedChannel.getReviewRatingStatistics().getCount()).isEqualTo(2);
+                    assertEventually(() -> {
+                        final List<Channel> results = client().executeBlocking(query).getResults();
+                        assertThat(results).hasSize(1);
+                        final Channel loadedChannel = results.get(0);
+                        assertThat(loadedChannel.getId()).isEqualTo(channel.getId());
+                        assertThat(loadedChannel.getReviewRatingStatistics().getCount()).isEqualTo(2);
+                    });
                 });
             });
         });
