@@ -10,6 +10,8 @@ import io.sphere.sdk.queries.Query;
 import io.sphere.sdk.test.IntegrationTest;
 import org.junit.Test;
 
+import java.util.Optional;
+
 import static io.sphere.sdk.orders.OrderFixtures.withOrderAndReturnInfo;
 import static io.sphere.sdk.test.SphereTestUtils.assertEventually;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -27,10 +29,12 @@ public class OrderMessagesIntegrationTest extends IntegrationTest {
                             .forMessageType(OrderStateChangedMessage.MESSAGE_HINT);
             assertEventually(() -> {
                 final PagedQueryResult<OrderStateChangedMessage> pagedQueryResult = client().executeBlocking(query);
-                final OrderStateChangedMessage message = pagedQueryResult.head().get();
-                assertThat(message.getOrderState()).isEqualTo(OrderState.CANCELLED);
-                assertThat(message.getResource().getObj()).isNotNull();
-                assertThat(message.getResource().getId()).isEqualTo(order.getId());
+                final Optional<OrderStateChangedMessage> message = pagedQueryResult.head();
+
+                assertThat(message).isPresent();
+                assertThat(message.get().getOrderState()).isEqualTo(OrderState.CANCELLED);
+                assertThat(message.get().getResource().getObj()).isNotNull();
+                assertThat(message.get().getResource().getId()).isEqualTo(order.getId());
             });
 
             return updatedOrder;
@@ -47,11 +51,16 @@ public class OrderMessagesIntegrationTest extends IntegrationTest {
                             .withLimit(1L)
                             .withPredicates(m -> m.resource().is(order))
                             .forMessageType(OrderCreatedMessage.MESSAGE_HINT);
-            final PagedQueryResult<OrderCreatedMessage> pagedQueryResult = client().executeBlocking(query);
-            final OrderCreatedMessage message = pagedQueryResult.head().get();
-            assertThat(message.getOrder().getId()).isEqualTo(order.getId());
-            assertThat(message.getResource().getObj()).isNotNull();
-            assertThat(message.getResource().getId()).isEqualTo(order.getId());
+
+            assertEventually(() -> {
+                final PagedQueryResult<OrderCreatedMessage> pagedQueryResult = client().executeBlocking(query);
+                final Optional<OrderCreatedMessage> message = pagedQueryResult.head();
+
+                assertThat(message).isPresent();
+                assertThat(message.get().getOrder().getId()).isEqualTo(order.getId());
+                assertThat(message.get().getResource().getObj()).isNotNull();
+                assertThat(message.get().getResource().getId()).isEqualTo(order.getId());
+            });
 
             return order;
         }));

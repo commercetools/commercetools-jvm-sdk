@@ -283,10 +283,13 @@ public class PaymentUpdateCommandIntegrationTest extends IntegrationTest {
 
                 assertThat(updatedPayment.getInterfaceInteractions().get(0).getFieldAsString(STRING_FIELD_NAME)).isEqualTo("some id");
 
-                final PagedQueryResult<PaymentInteractionAddedMessage> pagedQueryResult = client().executeBlocking(MessageQuery.of()
-                        .withPredicates(m -> m.resource().is(payment))
-                        .forMessageType(PaymentInteractionAddedMessage.MESSAGE_HINT));
-                assertThat(pagedQueryResult.head().get().getInteraction().getFieldAsString(STRING_FIELD_NAME)).isEqualTo("some id");
+                assertEventually(() -> {
+                    final PagedQueryResult<PaymentInteractionAddedMessage> pagedQueryResult = client().executeBlocking(MessageQuery.of()
+                            .withPredicates(m -> m.resource().is(payment))
+                            .forMessageType(PaymentInteractionAddedMessage.MESSAGE_HINT));
+                    assertThat(pagedQueryResult.head()).isPresent();
+                    assertThat(pagedQueryResult.head().get().getInteraction().getFieldAsString(STRING_FIELD_NAME)).isEqualTo("some id");
+                });
 
                 return updatedPayment;
             });
@@ -334,10 +337,13 @@ public class PaymentUpdateCommandIntegrationTest extends IntegrationTest {
             assertThat(updatedTransaction.getState()).isEqualTo(transactionState);
 
             //check messages
-            final PagedQueryResult<PaymentTransactionStateChangedMessage> messageQueryResult = client().executeBlocking(MessageQuery.of()
-                    .withPredicates(m -> m.resource().is(payment))
-                    .forMessageType(PaymentTransactionStateChangedMessage.MESSAGE_HINT));
-            assertThat(messageQueryResult.head().get().getState()).isEqualTo(transactionState);
+            assertEventually(() -> {
+                final PagedQueryResult<PaymentTransactionStateChangedMessage> messageQueryResult = client().executeBlocking(MessageQuery.of()
+                        .withPredicates(m -> m.resource().is(payment))
+                        .forMessageType(PaymentTransactionStateChangedMessage.MESSAGE_HINT));
+                assertThat(messageQueryResult.head()).isPresent();
+                assertThat(messageQueryResult.head().get().getState()).isEqualTo(transactionState);
+            });
 
             return updatedPayment;
         });

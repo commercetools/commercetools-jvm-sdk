@@ -338,19 +338,24 @@ public class OrderUpdateCommandIntegrationTest extends IntegrationTest {
 
                 assertThat(updatedOrder.getState()).isEqualTo(state.toReference());
 
-                final PagedQueryResult<OrderStateTransitionMessage> messageQueryResult = client().executeBlocking(MessageQuery.of()
-                        .withPredicates(m -> m.resource().is(order))
-                        .forMessageType(OrderStateTransitionMessage.MESSAGE_HINT));
+                assertEventually(() -> {
 
-                final OrderStateTransitionMessage message = messageQueryResult.head().get();
-                assertThat(message.getState()).isEqualTo(state.toReference());
+                    final PagedQueryResult<OrderStateTransitionMessage> messageQueryResult = client().executeBlocking(MessageQuery.of()
+                            .withPredicates(m -> m.resource().is(order))
+                            .forMessageType(OrderStateTransitionMessage.MESSAGE_HINT));
 
-                //check query model
-                final OrderQuery orderQuery = OrderQuery.of()
-                        .withPredicates(m -> m.id().is(order.getId()).and(m.state().is(state)));
-                final Order orderByState = client().executeBlocking(orderQuery)
-                        .head().get();
-                assertThat(orderByState).isEqualTo(updatedOrder);
+                    final Optional<OrderStateTransitionMessage> message = messageQueryResult.head();
+
+                    assertThat(message).isPresent();
+                    assertThat(message.get().getState()).isEqualTo(state.toReference());
+
+                    //check query model
+                    final OrderQuery orderQuery = OrderQuery.of()
+                            .withPredicates(m -> m.id().is(order.getId()).and(m.state().is(state)));
+                    final Order orderByState = client().executeBlocking(orderQuery)
+                            .head().get();
+                    assertThat(orderByState).isEqualTo(updatedOrder);
+                });
 
                 return updatedOrder;
             });
