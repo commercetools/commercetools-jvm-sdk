@@ -127,10 +127,14 @@ public class PaymentUpdateCommandIntegrationTest extends IntegrationTest {
 
                 assertThat(updatedPayment.getPaymentStatus().getState()).isEqualTo(validNextStateForPaymentStatus.toReference());
 
-                final PagedQueryResult<PaymentStatusStateTransitionMessage> messageQueryResult = client().executeBlocking(MessageQuery.of()
-                        .withPredicates(m -> m.resource().is(payment))
-                        .forMessageType(PaymentStatusStateTransitionMessage.MESSAGE_HINT));
-                assertThat(messageQueryResult.head().get().getState()).isEqualTo(validNextStateForPaymentStatus.toReference());
+                assertEventually(() -> {
+                    final PagedQueryResult<PaymentStatusStateTransitionMessage> messageQueryResult = client().executeBlocking(MessageQuery.of()
+                            .withPredicates(m -> m.resource().is(payment))
+                            .forMessageType(PaymentStatusStateTransitionMessage.MESSAGE_HINT));
+
+                    assertThat(messageQueryResult.head()).isPresent();
+                    assertThat(messageQueryResult.head().get().getState()).isEqualTo(validNextStateForPaymentStatus.toReference());
+                });
 
                 return updatedPayment;
             });
