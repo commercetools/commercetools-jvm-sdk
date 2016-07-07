@@ -41,6 +41,8 @@ public final class CartDraftDsl extends Base implements CartDraft {
     private final Reference<ShippingMethod> shippingMethod;
     @Nullable
     private final TaxMode taxMode;
+    @Nullable
+    private final String anonymousId;
 
 
     CartDraftDsl(final CurrencyUnit currency,
@@ -54,7 +56,8 @@ public final class CartDraftDsl extends Base implements CartDraft {
                  @Nullable final Address shippingAddress,
                  @Nullable final Address billingAddress,
                  @Nullable final Reference<ShippingMethod> shippingMethod,
-                 @Nullable final TaxMode taxMode) {
+                 @Nullable final TaxMode taxMode,
+                 @Nullable final String anonymousId) {
         this.currency = currency;
         this.customerId = customerId;
         this.country = country;
@@ -67,10 +70,11 @@ public final class CartDraftDsl extends Base implements CartDraft {
         this.billingAddress = billingAddress;
         this.shippingMethod = shippingMethod;
         this.taxMode = taxMode;
+        this.anonymousId = anonymousId;
     }
 
     public static CartDraftDsl of(final CurrencyUnit currency) {
-        return new CartDraftDsl(currency, null, null, null, null, null, null, null, null, null, null, null);
+        return new CartDraftDsl(currency, null, null, null, null, null, null, null, null, null, null, null, null);
     }
 
     @Override
@@ -171,6 +175,10 @@ public final class CartDraftDsl extends Base implements CartDraft {
         return new CartDraftBuilder(this).shippingMethod(shippingMethod).build();
     }
 
+    public CartDraftDsl withAnonymousCartId(@Nullable final String anonymousId) {
+        return new CartDraftBuilder(this).anonymousId(anonymousId).build();
+    }
+
     @Override
     @Nullable
     public CustomFieldsDraft getCustom() {
@@ -181,6 +189,12 @@ public final class CartDraftDsl extends Base implements CartDraft {
     @Nullable
     public TaxMode getTaxMode() {
         return taxMode;
+    }
+
+    @Override
+    @Nullable
+    public String getAnonymousId() {
+        return anonymousId;
     }
 
     public CartDraftDsl withTaxMode(@Nullable final TaxMode taxMode) {

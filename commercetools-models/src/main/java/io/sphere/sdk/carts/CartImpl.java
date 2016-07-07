@@ -42,6 +42,8 @@ class CartImpl extends ResourceImpl<Cart> implements Cart {
     @Nullable
     private final PaymentInfo paymentInfo;
     private final TaxMode taxMode;
+    @Nullable
+    private final String anonymousId;
 
     @JsonCreator
     CartImpl(final String id, final Long version, final ZonedDateTime createdAt,
@@ -54,7 +56,7 @@ class CartImpl extends ResourceImpl<Cart> implements Cart {
              @Nullable final CountryCode country, @Nullable final CartShippingInfo shippingInfo,
              final List<DiscountCodeInfo> discountCodes, @Nullable final CustomFields custom,
              @Nullable final PaymentInfo paymentInfo,
-             final TaxMode taxMode) {
+             final TaxMode taxMode, @Nullable final String anonymousId) {
         super(id, version, createdAt, lastModifiedAt);
         this.customerId = customerId;
         this.customerEmail = customerEmail;
@@ -73,6 +75,7 @@ class CartImpl extends ResourceImpl<Cart> implements Cart {
         this.custom = custom;
         this.paymentInfo = paymentInfo;
         this.taxMode = taxMode;
+        this.anonymousId = anonymousId;
     }
 
     @Override
@@ -168,5 +171,11 @@ class CartImpl extends ResourceImpl<Cart> implements Cart {
     @Override
     public TaxMode getTaxMode() {
         return taxMode;
+    }
+
+    @Override
+    @Nullable
+    public String getAnonymousId() {
+        return anonymousId;
     }
 }
