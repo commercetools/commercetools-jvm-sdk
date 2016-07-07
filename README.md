@@ -99,6 +99,7 @@ see https://github.com/commercetools/commercetools-jvm-sdk-experimental-java-add
 
 1. create a NEW API client in the Admin Center (`https://admin.sphere.io/YOUR_PROJECT_KEY/developers/clients`) with all available permissions (at the time of writing it is manage_payments manage_my_profile manage_orders view_products view_customers view_payments view_types manage_my_orders manage_types manage_customers manage_products view_orders manage_project), the by default created client has just `manage_project`
 1. in the Admin Center in the "DANGER ZONE" activate the checkbox "ENABLE MESSAGES" within the "Messages Settings"
+1. set "de", "de-AT", "en" as languages in the Admin Center
 1. create a file "integrationtest.properties" inside the project root
 1. fill it with the credentials of a new empty commercetools project which is for testing;
 
