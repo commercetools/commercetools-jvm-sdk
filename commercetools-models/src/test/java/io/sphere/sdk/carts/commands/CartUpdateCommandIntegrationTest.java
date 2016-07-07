@@ -12,9 +12,11 @@ import io.sphere.sdk.discountcodes.DiscountCodeInfo;
 import io.sphere.sdk.models.*;
 import io.sphere.sdk.payments.Payment;
 import io.sphere.sdk.products.*;
+import io.sphere.sdk.products.attributes.NamedAttributeAccess;
 import io.sphere.sdk.products.commands.ProductUpdateCommand;
 import io.sphere.sdk.products.commands.updateactions.ChangePrice;
 import io.sphere.sdk.products.commands.updateactions.Publish;
+import io.sphere.sdk.products.commands.updateactions.SetAttribute;
 import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.shippingmethods.ShippingRate;
 import io.sphere.sdk.test.IntegrationTest;
@@ -24,6 +26,7 @@ import org.junit.Test;
 import javax.money.MonetaryAmount;
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -32,6 +35,7 @@ import static io.sphere.sdk.carts.CustomLineItemFixtures.createCustomLineItemDra
 import static io.sphere.sdk.customers.CustomerFixtures.withCustomer;
 import static io.sphere.sdk.payments.PaymentFixtures.withPayment;
 import static io.sphere.sdk.shippingmethods.ShippingMethodFixtures.withShippingMethodForGermany;
+import static io.sphere.sdk.suppliers.TShirtProductTypeDraftSupplier.*;
 import static io.sphere.sdk.taxcategories.TaxCategoryFixtures.withTaxCategory;
 import static io.sphere.sdk.test.SphereTestUtils.*;
 import static java.util.Collections.singletonList;
@@ -320,6 +324,35 @@ public class CartUpdateCommandIntegrationTest extends IntegrationTest {
             assertThat(recalculatedCart.getTotalPrice())
                     .as("recalculate also updated the total price of the cart")
                     .isEqualTo(priceDraft.getValue()).isNotEqualTo(cartWithLineItem.getTotalPrice());
+        });
+    }
+
+    @Test
+    public void recalculateAndUpdateProductData() throws Exception {
+        withEmptyCartAndProduct(client(), (emptyCart, product) -> {
+            //create cart with line item
+            final AddLineItem action = AddLineItem.of(product.getId(), MASTER_VARIANT_ID, 1L);
+            final Cart cartWithLineItem = client().executeBlocking(CartUpdateCommand.of(emptyCart, action));
+            final NamedAttributeAccess<LocalizedEnumValue> colorAttribute = Colors.ATTRIBUTE;
+            final LocalizedEnumValue oldColor = cartWithLineItem.getLineItems().get(0).getVariant().findAttribute(colorAttribute).get();
+
+            //update the product
+            final LocalizedEnumValue newValueForColor = Colors.RED;
+            final SetAttribute localizedEnumUpdate = SetAttribute.of(MASTER_VARIANT_ID, colorAttribute, newValueForColor);
+            final Product updatedProduct = client().executeBlocking(ProductUpdateCommand.of(product, asList(localizedEnumUpdate, Publish.of())));
+            assertThat(updatedProduct.getMasterData().getCurrent().getMasterVariant().findAttribute(colorAttribute)).contains(newValueForColor);
+
+            //check the line item in the cart, the product data will not be updated
+            final LineItem lineItemOfTheChangedProduct =
+                    client().executeBlocking(CartByIdGet.of(cartWithLineItem)).getLineItems().get(0);
+            assertThat(lineItemOfTheChangedProduct.getVariant().findAttribute(colorAttribute))
+                    .as("the new product attribute value is not automatically propagated to the line item in the cart")
+                    .contains(oldColor);
+
+            //use recalculate with updateProductData flag, the product data will be updated
+            final Cart recalculatedCart = client().executeBlocking(CartUpdateCommand.of(cartWithLineItem, Recalculate.of().withUpdateProductData(Boolean.TRUE)));
+            assertThat(recalculatedCart.getLineItems().get(0).getVariant().findAttribute(colorAttribute))
+                    .contains(newValueForColor);
         });
     }
 
