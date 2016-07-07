@@ -13,7 +13,7 @@ import javax.annotation.Nullable;
  {@include.example io.sphere.sdk.carts.commands.CartUpdateCommandIntegrationTest#recalculate()}
 
  <p>Update prices, taxes and product data</p>
- {@include.example io.sphere.sdk.carts.commands.CartUpdateCommandIntegrationTest#io.sphere.sdk.carts.commands.CartUpdateCommandIntegrationTest#recalculateAndUpdateProductData()}
+ {@include.example io.sphere.sdk.carts.commands.CartUpdateCommandIntegrationTest#recalculateAndUpdateProductData()}
  */
 public final class Recalculate extends UpdateActionImpl<Cart> {
     @Nullable
