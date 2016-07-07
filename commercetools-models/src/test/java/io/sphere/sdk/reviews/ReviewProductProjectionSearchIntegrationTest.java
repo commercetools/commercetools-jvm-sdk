@@ -227,7 +227,7 @@ public class ReviewProductProjectionSearchIntegrationTest extends IntegrationTes
         final ProductProjectionSearch productProjectionSearch = ProductProjectionSearch.ofStaged()
                 .withQueryFilters(m -> m.reviewRatingStatistics().count().isGreaterThanOrEqualTo(BigDecimal.ZERO))
                 .withSort(sortExpressionFunction);
-        assertEventually(Duration.ofSeconds(2), Duration.ofMillis(200), () -> {
+        assertEventually(Duration.ofSeconds(15), Duration.ofMillis(200), () -> {
             final List<ProductProjection> results = client().executeBlocking(productProjectionSearch).getResults();
             assertThat(results.size()).isGreaterThanOrEqualTo(3);
             final ProductProjection first = results.get(0);
