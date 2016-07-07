@@ -151,6 +151,12 @@ public interface Order extends CartLike<Order> {
     @Override
     List<LineItem> getLineItems();
 
+    /**
+     * The shipping address.
+     *
+     * @see io.sphere.sdk.orders.commands.updateactions.SetShippingAddress
+     * @return address or null
+     */
     @Override
     @Nullable
     Address getShippingAddress();

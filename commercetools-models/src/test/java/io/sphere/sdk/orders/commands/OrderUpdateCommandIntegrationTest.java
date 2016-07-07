@@ -5,12 +5,14 @@ import io.sphere.sdk.carts.ItemState;
 import io.sphere.sdk.carts.LineItem;
 import io.sphere.sdk.carts.LineItemLike;
 import io.sphere.sdk.messages.queries.MessageQuery;
+import io.sphere.sdk.models.Address;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Referenceable;
 import io.sphere.sdk.orders.*;
 import io.sphere.sdk.orders.commands.updateactions.*;
 import io.sphere.sdk.orders.messages.DeliveryAddedMessage;
 import io.sphere.sdk.orders.messages.OrderStateTransitionMessage;
+import io.sphere.sdk.orders.messages.ShippingAddressSetMessage;
 import io.sphere.sdk.orders.queries.OrderByIdGet;
 import io.sphere.sdk.orders.queries.OrderQuery;
 import io.sphere.sdk.payments.Payment;
@@ -384,5 +386,31 @@ public class OrderUpdateCommandIntegrationTest extends IntegrationTest {
             });
             return payment;
         });
+    }
+
+    @Test
+    public void setShippingAddress() {
+            withOrder(client(), order -> {
+                assertThat(order.getShippingAddress().getStreetNumber()).isNull();
+
+                final Address newAddress = order.getShippingAddress().withStreetNumber("5");
+                final Order updatedOrder = client().executeBlocking(OrderUpdateCommand.of(order, SetShippingAddress.of(newAddress)));
+
+                assertThat(updatedOrder.getShippingAddress().getStreetNumber()).isEqualTo("5");
+
+                //there is also a message
+                final Query<ShippingAddressSetMessage> messageQuery = MessageQuery.of()
+                        .withPredicates(m -> m.resource().is(order))
+                        .forMessageType(ShippingAddressSetMessage.MESSAGE_HINT);
+                assertEventually(() -> {
+                    final Optional<ShippingAddressSetMessage> shippingAddressSetMessageOptional =
+                            client().executeBlocking(messageQuery).head();
+                    assertThat(shippingAddressSetMessageOptional).isPresent();
+                    final ShippingAddressSetMessage shippingAddressSetMessage = shippingAddressSetMessageOptional.get();
+                    assertThat(shippingAddressSetMessage.getAddress()).isEqualTo(newAddress);
+                });
+
+                return updatedOrder;
+            });
     }
 }
