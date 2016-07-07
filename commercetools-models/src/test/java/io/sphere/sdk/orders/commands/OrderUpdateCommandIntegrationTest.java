@@ -10,6 +10,7 @@ import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Referenceable;
 import io.sphere.sdk.orders.*;
 import io.sphere.sdk.orders.commands.updateactions.*;
+import io.sphere.sdk.orders.messages.BillingAddressSetMessage;
 import io.sphere.sdk.orders.messages.DeliveryAddedMessage;
 import io.sphere.sdk.orders.messages.OrderStateTransitionMessage;
 import io.sphere.sdk.orders.messages.ShippingAddressSetMessage;
@@ -408,6 +409,32 @@ public class OrderUpdateCommandIntegrationTest extends IntegrationTest {
                 assertThat(shippingAddressSetMessageOptional).isPresent();
                 final ShippingAddressSetMessage shippingAddressSetMessage = shippingAddressSetMessageOptional.get();
                 assertThat(shippingAddressSetMessage.getAddress()).isEqualTo(newAddress);
+            });
+
+            return updatedOrder;
+        });
+    }
+    
+    @Test
+    public void setBillingAddress() {
+        withOrder(client(), order -> {
+            assertThat(order.getBillingAddress().getStreetNumber()).isNull();
+
+            final Address newAddress = order.getBillingAddress().withStreetNumber("5");
+            final Order updatedOrder = client().executeBlocking(OrderUpdateCommand.of(order, SetBillingAddress.of(newAddress)));
+
+            assertThat(updatedOrder.getBillingAddress().getStreetNumber()).isEqualTo("5");
+
+            //there is also a message
+            final Query<BillingAddressSetMessage> messageQuery = MessageQuery.of()
+                    .withPredicates(m -> m.resource().is(order))
+                    .forMessageType(BillingAddressSetMessage.MESSAGE_HINT);
+            assertEventually(() -> {
+                final Optional<BillingAddressSetMessage> billingAddressSetMessageOptional =
+                        client().executeBlocking(messageQuery).head();
+                assertThat(billingAddressSetMessageOptional).isPresent();
+                final BillingAddressSetMessage billingAddressSetMessage = billingAddressSetMessageOptional.get();
+                assertThat(billingAddressSetMessage.getAddress()).isEqualTo(newAddress);
             });
 
             return updatedOrder;
