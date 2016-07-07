@@ -340,7 +340,7 @@ public class CartUpdateCommandIntegrationTest extends IntegrationTest {
                     (colorAttribute);
 
             final SetAttribute localizedEnumUpdate = SetAttribute.of(MASTER_VARIANT_ID, colorAttribute, newValueForColor);
-            final Product updatedProduct = client().executeBlocking(ProductUpdateCommand.of(product, localizedEnumUpdate));
+            final Product updatedProduct = client().executeBlocking(ProductUpdateCommand.of(product, asList(localizedEnumUpdate, Publish.of())));
 
             final Optional<LocalizedEnumValue> newColor = updatedProduct.getMasterData().getCurrent().getMasterVariant().findAttribute(colorAttribute);
             final LineItem lineItemOfTheChangedProduct =
