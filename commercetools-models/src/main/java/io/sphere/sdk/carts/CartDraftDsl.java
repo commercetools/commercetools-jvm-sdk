@@ -175,7 +175,7 @@ public final class CartDraftDsl extends Base implements CartDraft {
         return new CartDraftBuilder(this).shippingMethod(shippingMethod).build();
     }
 
-    public CartDraftDsl withAnonymousCartId(@Nullable final String anonymousId) {
+    public CartDraftDsl withAnonymousId(@Nullable final String anonymousId) {
         return new CartDraftBuilder(this).anonymousId(anonymousId).build();
     }
 

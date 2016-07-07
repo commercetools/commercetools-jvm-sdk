@@ -150,11 +150,11 @@ public class CartCreateCommandIntegrationTest extends IntegrationTest {
 
     @Test
     public void anonymousCartId() throws Exception {
-        final String anonymousCartId = "1";
+        final String anonymousId = randomKey();
         final CartDraft cartDraft = CartDraft.of(EUR).withCountry(DE)
-                .withAnonymousCartId(anonymousCartId);
+                .withAnonymousId(anonymousId);
         final Cart cart = client().executeBlocking(CartCreateCommand.of(cartDraft));
-        assertThat(cart.getAnonymousId()).isEqualTo(anonymousCartId);
+        assertThat(cart.getAnonymousId()).isEqualTo(anonymousId);
     }
 
     private void testInventoryMode(final InventoryMode inventoryMode) {

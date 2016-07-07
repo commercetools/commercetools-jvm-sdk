@@ -1,20 +1,15 @@
 package io.sphere.sdk.customers.commands;
 
 import com.neovisionaries.i18n.CountryCode;
-import io.sphere.sdk.carts.Cart;
-import io.sphere.sdk.carts.CartFixtures;
-import io.sphere.sdk.carts.CartState;
-import io.sphere.sdk.carts.LineItem;
+import io.sphere.sdk.carts.*;
+import io.sphere.sdk.carts.commands.CartCreateCommand;
 import io.sphere.sdk.carts.commands.CartUpdateCommand;
 import io.sphere.sdk.carts.commands.updateactions.AddLineItem;
 import io.sphere.sdk.carts.commands.updateactions.SetCountry;
 import io.sphere.sdk.carts.queries.CartByIdGet;
 import io.sphere.sdk.client.BlockingSphereClient;
 import io.sphere.sdk.client.ErrorResponseException;
-import io.sphere.sdk.customers.Customer;
-import io.sphere.sdk.customers.CustomerFixtures;
-import io.sphere.sdk.customers.CustomerIntegrationTest;
-import io.sphere.sdk.customers.CustomerSignInResult;
+import io.sphere.sdk.customers.*;
 import io.sphere.sdk.customers.errors.CustomerInvalidCredentials;
 import io.sphere.sdk.products.ProductFixtures;
 import org.junit.Test;
@@ -24,6 +19,7 @@ import java.util.function.Function;
 
 import static io.sphere.sdk.customers.CustomerFixtures.PASSWORD;
 import static io.sphere.sdk.customers.CustomerFixtures.withCustomer;
+import static io.sphere.sdk.test.SphereTestUtils.*;
 import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -90,6 +86,22 @@ public class CustomerSignInCommandIntegrationTest extends CustomerIntegrationTes
             assertThatThrownBy(() -> client().executeBlocking(CustomerSignInCommand.of("notpresent@null.sphere.io", PASSWORD)))
                     .isInstanceOf(ErrorResponseException.class)
                     .matches(e -> ((ErrorResponseException) e).hasErrorCode(CustomerInvalidCredentials.CODE));
+        });
+    }
+
+    @Test
+    public void anonymousId() {
+        final String anonymousId = randomKey();
+        final CartDraft cartDraft = CartDraft.of(EUR).withCountry(DE).withAnonymousId(anonymousId);
+        final Cart cart = client().executeBlocking(CartCreateCommand.of(cartDraft));
+        withCustomer(client(), customer -> {
+            final CustomerSignInCommand cmd =
+                    CustomerSignInCommand.of(customer.getEmail(), CustomerFixtures.PASSWORD)
+                            .withAnonymousId(anonymousId);
+            final CustomerSignInResult customerSignInResult = client().executeBlocking(cmd);
+            assertThat(customerSignInResult.getCart().getId())
+                    .as("the customer gets the cart from the anonymous session assigned while on sign-in")
+                    .isEqualTo(cart.getId());
         });
     }
 }

@@ -46,6 +46,9 @@ public interface CustomerDraft extends CustomDraft {
     @Nullable
     String getAnonymousCartId();
 
+    @Nullable
+    String getAnonymousId();
+
     CustomerName getName();
 
     @Nullable
