@@ -49,4 +49,8 @@ public final class ProductProjectionSortSearchModel extends ProductDataSortSearc
     public ReviewRatingStatisticsSortSearchModel<ProductProjection> reviewRatingStatistics() {
         return super.reviewRatingStatistics();
     }
+
+    public SingleValueSortSearchModel<ProductProjection> id() {
+        return searchModel("id").sorted();
+    }
 }
