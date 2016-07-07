@@ -330,31 +330,29 @@ public class CartUpdateCommandIntegrationTest extends IntegrationTest {
     @Test
     public void recalculateAndUpdateProductData() throws Exception {
         withEmptyCartAndProduct(client(), (emptyCart, product) -> {
+            //create cart with line item
             final AddLineItem action = AddLineItem.of(product.getId(), MASTER_VARIANT_ID, 1L);
-
-            final NamedAttributeAccess<LocalizedEnumValue> colorAttribute = Colors.ATTRIBUTE;
-            final LocalizedEnumValue newValueForColor = Colors.RED;
-
             final Cart cartWithLineItem = client().executeBlocking(CartUpdateCommand.of(emptyCart, action));
-            final Optional<LocalizedEnumValue> oldColor = cartWithLineItem.getLineItems().get(0).getVariant().findAttribute
-                    (colorAttribute);
+            final NamedAttributeAccess<LocalizedEnumValue> colorAttribute = Colors.ATTRIBUTE;
+            final LocalizedEnumValue oldColor = cartWithLineItem.getLineItems().get(0).getVariant().findAttribute(colorAttribute).get();
 
+            //update the product
+            final LocalizedEnumValue newValueForColor = Colors.RED;
             final SetAttribute localizedEnumUpdate = SetAttribute.of(MASTER_VARIANT_ID, colorAttribute, newValueForColor);
             final Product updatedProduct = client().executeBlocking(ProductUpdateCommand.of(product, asList(localizedEnumUpdate, Publish.of())));
+            assertThat(updatedProduct.getMasterData().getCurrent().getMasterVariant().findAttribute(colorAttribute)).contains(newValueForColor);
 
-            final Optional<LocalizedEnumValue> newColor = updatedProduct.getMasterData().getCurrent().getMasterVariant().findAttribute(colorAttribute);
+            //check the line item in the cart, the product data will not be updated
             final LineItem lineItemOfTheChangedProduct =
                     client().executeBlocking(CartByIdGet.of(cartWithLineItem)).getLineItems().get(0);
             assertThat(lineItemOfTheChangedProduct.getVariant().findAttribute(colorAttribute))
                     .as("the new product attribute value is not automatically propagated to the line item in the cart")
-                    .contains(oldColor.get());
-            assertThat(newColor).contains(newValueForColor);
+                    .contains(oldColor);
 
-            final Cart recalculatedCart = client().executeBlocking(CartUpdateCommand.of(cartWithLineItem, Recalculate
-                    .of(Boolean.TRUE)));
-
-            final Optional<LocalizedEnumValue> updatedLineItem = recalculatedCart.getLineItems().get(0).getVariant().findAttribute(colorAttribute);
-            assertThat(updatedLineItem).contains(newValueForColor);
+            //use recalculate with updateProductData flag, the product data will be updated
+            final Cart recalculatedCart = client().executeBlocking(CartUpdateCommand.of(cartWithLineItem, Recalculate.of().withUpdateProductData(Boolean.TRUE)));
+            assertThat(recalculatedCart.getLineItems().get(0).getVariant().findAttribute(colorAttribute))
+                    .contains(newValueForColor);
         });
     }
 
