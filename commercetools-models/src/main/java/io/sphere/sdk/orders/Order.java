@@ -125,6 +125,12 @@ public interface Order extends CartLike<Order> {
 
     Long getLastMessageSequenceNumber();
 
+    /**
+     * The billing address.
+     * @return address or null
+     * @see io.sphere.sdk.orders.commands.updateactions.SetBillingAddress
+     * @see io.sphere.sdk.orders.messages.BillingAddressSetMessage
+     */
     @Override
     @Nullable
     Address getBillingAddress();
@@ -155,6 +161,7 @@ public interface Order extends CartLike<Order> {
      * The shipping address.
      *
      * @see io.sphere.sdk.orders.commands.updateactions.SetShippingAddress
+     * @see io.sphere.sdk.orders.messages.ShippingAddressSetMessage
      * @return address or null
      */
     @Override

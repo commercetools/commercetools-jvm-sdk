@@ -1,19 +1,20 @@
 package io.sphere.sdk.orders.commands;
 
-import io.sphere.sdk.carts.CustomLineItem;
-import io.sphere.sdk.carts.ItemState;
-import io.sphere.sdk.carts.LineItem;
-import io.sphere.sdk.carts.LineItemLike;
+import io.sphere.sdk.carts.*;
+import io.sphere.sdk.carts.commands.CartUpdateCommand;
+import io.sphere.sdk.carts.commands.updateactions.*;
 import io.sphere.sdk.messages.queries.MessageQuery;
 import io.sphere.sdk.models.Address;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Referenceable;
 import io.sphere.sdk.orders.*;
 import io.sphere.sdk.orders.commands.updateactions.*;
-import io.sphere.sdk.orders.messages.BillingAddressSetMessage;
-import io.sphere.sdk.orders.messages.DeliveryAddedMessage;
-import io.sphere.sdk.orders.messages.OrderStateTransitionMessage;
-import io.sphere.sdk.orders.messages.ShippingAddressSetMessage;
+import io.sphere.sdk.orders.commands.updateactions.AddPayment;
+import io.sphere.sdk.orders.commands.updateactions.RemovePayment;
+import io.sphere.sdk.orders.commands.updateactions.SetBillingAddress;
+import io.sphere.sdk.orders.commands.updateactions.SetCustomerEmail;
+import io.sphere.sdk.orders.commands.updateactions.SetShippingAddress;
+import io.sphere.sdk.orders.messages.*;
 import io.sphere.sdk.orders.queries.OrderByIdGet;
 import io.sphere.sdk.orders.queries.OrderQuery;
 import io.sphere.sdk.payments.Payment;
@@ -31,6 +32,7 @@ import org.junit.Test;
 import java.time.ZonedDateTime;
 import java.util.*;
 
+import static io.sphere.sdk.carts.CartFixtures.createCartWithCountry;
 import static io.sphere.sdk.channels.ChannelFixtures.withOrderExportChannel;
 import static io.sphere.sdk.orders.OrderFixtures.*;
 import static io.sphere.sdk.payments.PaymentFixtures.withPayment;
@@ -439,5 +441,31 @@ public class OrderUpdateCommandIntegrationTest extends IntegrationTest {
 
             return updatedOrder;
         });
+    }
+
+    @Test
+    public void setCustomerEmail() throws Exception {
+        withOrder(client(), order -> {
+            assertThat(order.getCustomerEmail()).isNotEmpty();
+            final String email = "info@commercetools.de";
+            final Order updatedOrder = client().executeBlocking(OrderUpdateCommand.of(order, SetCustomerEmail.of(email)));
+
+            assertThat(updatedOrder.getCustomerEmail()).contains(email);
+
+            //there is also a message
+            final Query<CustomerEmailSetMessage> messageQuery = MessageQuery.of()
+                    .withPredicates(m -> m.resource().is(order))
+                    .forMessageType(CustomerEmailSetMessage.MESSAGE_HINT);
+            assertEventually(() -> {
+                final Optional<CustomerEmailSetMessage> customerEmailSetMessageOptional =
+                        client().executeBlocking(messageQuery).head();
+                assertThat(customerEmailSetMessageOptional).isPresent();
+                final CustomerEmailSetMessage customerEmailSetMessage = customerEmailSetMessageOptional.get();
+                assertThat(customerEmailSetMessage.getEmail()).isEqualTo(email);
+            });
+
+            return updatedOrder;
+        });
+
     }
 }
