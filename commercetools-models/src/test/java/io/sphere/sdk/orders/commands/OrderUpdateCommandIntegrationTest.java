@@ -390,27 +390,27 @@ public class OrderUpdateCommandIntegrationTest extends IntegrationTest {
 
     @Test
     public void setShippingAddress() {
-            withOrder(client(), order -> {
-                assertThat(order.getShippingAddress().getStreetNumber()).isNull();
+        withOrder(client(), order -> {
+            assertThat(order.getShippingAddress().getStreetNumber()).isNull();
 
-                final Address newAddress = order.getShippingAddress().withStreetNumber("5");
-                final Order updatedOrder = client().executeBlocking(OrderUpdateCommand.of(order, SetShippingAddress.of(newAddress)));
+            final Address newAddress = order.getShippingAddress().withStreetNumber("5");
+            final Order updatedOrder = client().executeBlocking(OrderUpdateCommand.of(order, SetShippingAddress.of(newAddress)));
 
-                assertThat(updatedOrder.getShippingAddress().getStreetNumber()).isEqualTo("5");
+            assertThat(updatedOrder.getShippingAddress().getStreetNumber()).isEqualTo("5");
 
-                //there is also a message
-                final Query<ShippingAddressSetMessage> messageQuery = MessageQuery.of()
-                        .withPredicates(m -> m.resource().is(order))
-                        .forMessageType(ShippingAddressSetMessage.MESSAGE_HINT);
-                assertEventually(() -> {
-                    final Optional<ShippingAddressSetMessage> shippingAddressSetMessageOptional =
-                            client().executeBlocking(messageQuery).head();
-                    assertThat(shippingAddressSetMessageOptional).isPresent();
-                    final ShippingAddressSetMessage shippingAddressSetMessage = shippingAddressSetMessageOptional.get();
-                    assertThat(shippingAddressSetMessage.getAddress()).isEqualTo(newAddress);
-                });
-
-                return updatedOrder;
+            //there is also a message
+            final Query<ShippingAddressSetMessage> messageQuery = MessageQuery.of()
+                    .withPredicates(m -> m.resource().is(order))
+                    .forMessageType(ShippingAddressSetMessage.MESSAGE_HINT);
+            assertEventually(() -> {
+                final Optional<ShippingAddressSetMessage> shippingAddressSetMessageOptional =
+                        client().executeBlocking(messageQuery).head();
+                assertThat(shippingAddressSetMessageOptional).isPresent();
+                final ShippingAddressSetMessage shippingAddressSetMessage = shippingAddressSetMessageOptional.get();
+                assertThat(shippingAddressSetMessage.getAddress()).isEqualTo(newAddress);
             });
+
+            return updatedOrder;
+        });
     }
 }
