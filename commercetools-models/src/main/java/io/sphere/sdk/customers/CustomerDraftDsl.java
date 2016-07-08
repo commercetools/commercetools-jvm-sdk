@@ -1,6 +1,5 @@
 package io.sphere.sdk.customers;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.sphere.sdk.carts.Cart;
 import io.sphere.sdk.customergroups.CustomerGroup;
@@ -52,6 +51,8 @@ public final class CustomerDraftDsl extends Base implements CustomerDraft {
     private final List<Address> addresses;
     @Nullable
     private final CustomFieldsDraft custom;
+    @Nullable
+    private final String anonymousId;
 
 
     CustomerDraftDsl(@Nullable final String customerNumber, final String email,
@@ -62,7 +63,8 @@ public final class CustomerDraftDsl extends Base implements CustomerDraft {
                      @Nullable final String companyName, @Nullable final String vatId,
                      @Nullable final Boolean emailVerified, @Nullable final Reference<CustomerGroup> customerGroup,
                      @Nullable final Integer defaultBillingAddress, @Nullable final Integer defaultShippingAddress,
-                     final List<Address> addresses, @Nullable final CustomFieldsDraft custom) {
+                     final List<Address> addresses, @Nullable final CustomFieldsDraft custom,
+                     @Nullable final String anonymousId) {
         this.customerNumber = customerNumber;
         this.email = email;
         this.firstName = firstName;
@@ -79,6 +81,7 @@ public final class CustomerDraftDsl extends Base implements CustomerDraft {
         this.customerGroup = customerGroup;
         this.addresses = addresses;
         this.custom = custom;
+        this.anonymousId = anonymousId;
         if (!isValidAddressIndex(addresses, defaultBillingAddress)
                 || !isValidAddressIndex(addresses, defaultShippingAddress)) {
             throw new IllegalArgumentException("The defaultBillingAddress and defaultShippingAddress cannot contain an index which is not in the address list");
@@ -205,6 +208,11 @@ public final class CustomerDraftDsl extends Base implements CustomerDraft {
         return custom;
     }
 
+    @Nullable
+    public String getAnonymousId() {
+        return anonymousId;
+    }
+
     public CustomerDraftDsl withCustomerNumber(@Nullable final String customerNumber) {
         return newBuilder().customerNumber(customerNumber).build();
     }
@@ -215,6 +223,10 @@ public final class CustomerDraftDsl extends Base implements CustomerDraft {
     
     public CustomerDraftDsl withAnonymousCartId(@Nullable final String anonymousCartId) {
         return newBuilder().anonymousCartId(anonymousCartId).build();
+    }
+
+    public CustomerDraftDsl withAnonymousId(@Nullable final String anonymousId) {
+        return newBuilder().anonymousId(anonymousId).build();
     }
 
     public CustomerDraftDsl withPassword(final String password) {

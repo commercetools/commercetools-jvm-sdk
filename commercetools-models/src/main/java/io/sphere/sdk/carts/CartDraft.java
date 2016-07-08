@@ -55,6 +55,9 @@ public interface CartDraft extends CustomDraft {
     @Nullable
     TaxMode getTaxMode();
 
+    @Nullable
+    String getAnonymousId();
+
     static CartDraftDsl of(final CurrencyUnit currency) {
         return CartDraftDsl.of(currency);
     }

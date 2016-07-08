@@ -1,6 +1,7 @@
 package io.sphere.sdk.carts.queries;
 
 import io.sphere.sdk.carts.*;
+import io.sphere.sdk.carts.commands.CartCreateCommand;
 import io.sphere.sdk.carts.commands.CartUpdateCommand;
 import io.sphere.sdk.carts.commands.updateactions.AddDiscountCode;
 import io.sphere.sdk.carts.commands.updateactions.RemoveDiscountCode;
@@ -8,6 +9,7 @@ import io.sphere.sdk.carts.commands.updateactions.SetShippingMethod;
 import io.sphere.sdk.discountcodes.DiscountCodeInfo;
 import io.sphere.sdk.orders.OrderFixtures;
 import io.sphere.sdk.products.Price;
+import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.test.IntegrationTest;
 import io.sphere.sdk.utils.MoneyImpl;
 import net.jcip.annotations.NotThreadSafe;
@@ -21,8 +23,7 @@ import java.util.Locale;
 import static io.sphere.sdk.carts.CartFixtures.*;
 import static io.sphere.sdk.customers.CustomerFixtures.withCustomerAndCart;
 import static io.sphere.sdk.shippingmethods.ShippingMethodFixtures.withShippingMethodForGermany;
-import static io.sphere.sdk.test.SphereTestUtils.ENGLISH;
-import static io.sphere.sdk.test.SphereTestUtils.EUR;
+import static io.sphere.sdk.test.SphereTestUtils.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @NotThreadSafe
@@ -189,5 +190,15 @@ public class CartQueryIntegrationTest extends IntegrationTest {
             assertThat(results.get(0).getId()).isEqualTo(order.getCart().getId());
             return order;
         });
+    }
+
+    @Test
+    public void anonymousId() {
+        final String anonymousId = randomKey();
+        final CartDraft cartDraft = CartDraft.of(EUR).withCountry(DE).withAnonymousId(anonymousId);
+        final Cart cart = client().executeBlocking(CartCreateCommand.of(cartDraft));
+        final PagedQueryResult<Cart> result = client().executeBlocking(CartQuery.of().withPredicates(m -> m.anonymousId().is(anonymousId)));
+        assertThat(result.getResults()).hasSize(1);
+        assertThat(result.head().get().getId()).isEqualTo(cart.getId());
     }
 }

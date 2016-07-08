@@ -38,11 +38,14 @@ public final class CustomerSignInCommand extends CommandImpl<CustomerSignInResul
     private final String password;
     @Nullable
     private final String anonymousCartId;
+    @Nullable
+    private final String anonymousId;
 
-    private CustomerSignInCommand(final String email, final String password, @Nullable final String anonymousCartId) {
+    private CustomerSignInCommand(final String email, final String password, @Nullable final String anonymousCartId, @Nullable final String anonymousId) {
         this.email = email;
         this.password = password;
         this.anonymousCartId = anonymousCartId;
+        this.anonymousId = anonymousId;
     }
 
     public static CustomerSignInCommand of(final String email, final String password) {
@@ -50,7 +53,11 @@ public final class CustomerSignInCommand extends CommandImpl<CustomerSignInResul
     }
 
     public static CustomerSignInCommand of(final String email, final String password, @Nullable final String anonymousCartId) {
-        return new CustomerSignInCommand(email, password, anonymousCartId);
+        return new CustomerSignInCommand(email, password, anonymousCartId, null);
+    }
+
+    public CustomerSignInCommand withAnonymousId(@Nullable final String anonymousId) {
+        return new CustomerSignInCommand(email, password, anonymousCartId, anonymousId);
     }
 
     @Override
@@ -74,5 +81,10 @@ public final class CustomerSignInCommand extends CommandImpl<CustomerSignInResul
     @Nullable
     public String getAnonymousCartId() {
         return anonymousCartId;
+    }
+
+    @Nullable
+    public String getAnonymousId() {
+        return anonymousId;
     }
 }

@@ -107,4 +107,23 @@ public class CustomerCreateCommandIntegrationTest extends CustomerIntegrationTes
         });
 
     }
+
+    @Test
+    public void anonymousId() {
+        final String anonymousId = randomKey();
+        final CartDraft cartDraft = CartDraft.of(EUR).withCountry(DE).withAnonymousId(anonymousId);
+        final Cart cart = client().executeBlocking(CartCreateCommand.of(cartDraft));
+        final String email = randomEmail(CustomerCreateCommandIntegrationTest.class);
+        final CustomerDraft customerDraft = CustomerDraftBuilder
+                .of(email, "secret")
+                .anonymousId(anonymousId)
+                .build();
+
+        final CustomerSignInResult customerSignInResult = client().executeBlocking(CustomerCreateCommand.of(customerDraft));
+
+        assertThat(customerSignInResult.getCustomer().getEmail()).isEqualTo(email);
+        assertThat(customerSignInResult.getCart().getId())
+                .as("the customer gets the cart from the anonymous session assigned on sign-up")
+                .isEqualTo(cart.getId());
+    }
 }

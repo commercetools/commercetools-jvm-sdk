@@ -40,6 +40,8 @@ public final class CartDraftBuilder extends Base implements Builder<CartDraftDsl
     private Reference<ShippingMethod> shippingMethod;
     @Nullable
     private TaxMode taxMode;
+    @Nullable
+    private String anonymousId;
 
     CartDraftBuilder(final CurrencyUnit currency, @Nullable final String customerId,
                      @Nullable final CountryCode country, @Nullable final InventoryMode inventoryMode,
@@ -49,7 +51,8 @@ public final class CartDraftBuilder extends Base implements Builder<CartDraftDsl
                      @Nullable final Address shippingAddress,
                      @Nullable final Address billingAddress,
                      @Nullable final Reference<ShippingMethod> shippingMethod,
-                     @Nullable final TaxMode taxMode) {
+                     @Nullable final TaxMode taxMode,
+                     @Nullable String anonymousId) {
         this.currency = currency;
         this.customerId = customerId;
         this.country = country;
@@ -62,10 +65,11 @@ public final class CartDraftBuilder extends Base implements Builder<CartDraftDsl
         this.billingAddress = billingAddress;
         this.shippingMethod = shippingMethod;
         this.taxMode = taxMode;
+        this.anonymousId = anonymousId;
     }
 
     CartDraftBuilder(final CartDraft template) {
-        this(template.getCurrency(), template.getCustomerId(), template.getCountry(), template.getInventoryMode(), template.getCustom(), template.getCustomerEmail(), template.getLineItems(), template.getCustomLineItems(), template.getShippingAddress(), template.getBillingAddress(), template.getShippingMethod(), template.getTaxMode());
+        this(template.getCurrency(), template.getCustomerId(), template.getCountry(), template.getInventoryMode(), template.getCustom(), template.getCustomerEmail(), template.getLineItems(), template.getCustomLineItems(), template.getShippingAddress(), template.getBillingAddress(), template.getShippingMethod(), template.getTaxMode(), template.getAnonymousId());
     }
 
     public static CartDraftBuilder of(final CartDraft template) {
@@ -98,7 +102,7 @@ public final class CartDraftBuilder extends Base implements Builder<CartDraftDsl
 
     @Override
     public CartDraftDsl build() {
-        return new CartDraftDsl(currency, customerId, country, inventoryMode, custom, customerEmail, lineItems, customLineItems, shippingAddress, billingAddress, shippingMethod, taxMode);
+        return new CartDraftDsl(currency, customerId, country, inventoryMode, custom, customerEmail, lineItems, customLineItems, shippingAddress, billingAddress, shippingMethod, taxMode, anonymousId);
     }
 
     public CartDraftBuilder custom(@Nullable final CustomFieldsDraft custom) {
@@ -136,6 +140,11 @@ public final class CartDraftBuilder extends Base implements Builder<CartDraftDsl
                 .map(Referenceable::toReference)
                 .orElse(null);
         this.shippingMethod = reference;
+        return this;
+    }
+
+    public CartDraftBuilder anonymousId(@Nullable final String anonymousId) {
+        this.anonymousId = anonymousId;
         return this;
     }
 
@@ -196,5 +205,10 @@ public final class CartDraftBuilder extends Base implements Builder<CartDraftDsl
     @Nullable
     public TaxMode getTaxMode() {
         return taxMode;
+    }
+
+    @Nullable
+    public String getAnonymousId() {
+        return anonymousId;
     }
 }

@@ -187,4 +187,11 @@ public interface CartLike<T> extends Resource<T>, Custom {
     default CurrencyUnit getCurrency() {
         return getTotalPrice().getCurrency();
     }
+
+    /**
+     * Identifies carts and orders belonging to an anonymous session (the customer has not signed up/in yet).
+     * @return anonymousId
+     */
+    @Nullable
+    String getAnonymousId();
 }

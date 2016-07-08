@@ -5,7 +5,10 @@ import io.sphere.sdk.carts.*;
 import io.sphere.sdk.models.Address;
 import io.sphere.sdk.test.IntegrationTest;
 import io.sphere.sdk.test.JsonNodeReferenceResolver;
-import io.sphere.sdk.types.*;
+import io.sphere.sdk.types.CustomFieldsDraft;
+import io.sphere.sdk.types.FieldDefinition;
+import io.sphere.sdk.types.StringFieldType;
+import io.sphere.sdk.types.TypeFixtures;
 import io.sphere.sdk.types.commands.TypeDeleteCommand;
 import io.sphere.sdk.types.queries.TypeQuery;
 import org.junit.BeforeClass;
@@ -143,6 +146,15 @@ public class CartCreateCommandIntegrationTest extends IntegrationTest {
             });
         });
 
+    }
+
+    @Test
+    public void anonymousCartId() throws Exception {
+        final String anonymousId = randomKey();
+        final CartDraft cartDraft = CartDraft.of(EUR).withCountry(DE)
+                .withAnonymousId(anonymousId);
+        final Cart cart = client().executeBlocking(CartCreateCommand.of(cartDraft));
+        assertThat(cart.getAnonymousId()).isEqualTo(anonymousId);
     }
 
     private void testInventoryMode(final InventoryMode inventoryMode) {

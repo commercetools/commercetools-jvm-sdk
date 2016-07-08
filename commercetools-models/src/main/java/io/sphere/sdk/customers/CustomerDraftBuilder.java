@@ -49,6 +49,8 @@ public final class CustomerDraftBuilder extends Base implements Builder<Customer
     private List<Address> addresses = Collections.emptyList();
     @Nullable
     private CustomFieldsDraft custom;
+    @Nullable
+    private String anonymousId;
 
 
     public static CustomerDraftBuilder of(final String email, final String password) {
@@ -81,6 +83,7 @@ public final class CustomerDraftBuilder extends Base implements Builder<Customer
                 .defaultBillingAddress(template.getDefaultBillingAddress())
                 .defaultShippingAddress(template.getDefaultShippingAddress())
                 .custom(template.getCustom())
+                .anonymousId(template.getAnonymousId())
         ;
         return builder;
     }
@@ -131,6 +134,11 @@ public final class CustomerDraftBuilder extends Base implements Builder<Customer
 
     public CustomerDraftBuilder anonymousCartId(@Nullable final String anonymousCartId) {
         this.anonymousCartId = anonymousCartId;
+        return this;
+    }
+
+    public CustomerDraftBuilder anonymousId(@Nullable final String anonymousId) {
+        this.anonymousId = anonymousId;
         return this;
     }
 
@@ -185,6 +193,6 @@ public final class CustomerDraftBuilder extends Base implements Builder<Customer
 
     @Override
     public CustomerDraftDsl build() {
-        return new CustomerDraftDsl(customerNumber, email, firstName, lastName, middleName, password, title, externalId, anonymousCartId, dateOfBirth, companyName, vatId, emailVerified, customerGroup, defaultBillingAddress, defaultShippingAddress, addresses, custom);
+        return new CustomerDraftDsl(customerNumber, email, firstName, lastName, middleName, password, title, externalId, anonymousCartId, dateOfBirth, companyName, vatId, emailVerified, customerGroup, defaultBillingAddress, defaultShippingAddress, addresses, custom, anonymousId);
     }
 }
