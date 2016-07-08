@@ -147,4 +147,8 @@ public abstract class MetaModelGetDslImpl<R, T, C extends MetaModelGetDsl<R, T, 
     protected MetaModelGetDslBuilder<R, T, C, E> copyBuilder() {
         return new MetaModelGetDslBuilder<>(this);
     }
+
+    protected C withAdditionalQueryParameters(final List<NameValuePair> pairs) {
+        return copyBuilder().additionalQueryParameters(pairs).build();
+    }
 }
