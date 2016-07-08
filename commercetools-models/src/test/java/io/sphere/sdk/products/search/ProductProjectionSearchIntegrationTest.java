@@ -55,9 +55,12 @@ public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
     private static final String SKU_A = EVIL_PRODUCT_TYPE_NAME + "-skuA";
     private static final String SKU_B = EVIL_PRODUCT_TYPE_NAME + "-skuB";
     private static final String PRODUCT_TYPE_NAME = TEST_CLASS_NAME;
-    private static final String SKU1 = PRODUCT_TYPE_NAME + "-sku1";
-    private static final String SKU2 = PRODUCT_TYPE_NAME + "-sku2";
-    private static final String SKU3 = PRODUCT_TYPE_NAME + "-sku3";
+    protected static final String SKU1 = PRODUCT_TYPE_NAME + "-sku1";
+    protected static final String SKU2 = PRODUCT_TYPE_NAME + "-sku2";
+    protected static final String SKU3 = PRODUCT_TYPE_NAME + "-sku3";
+    protected static final String SLUG1 = PRODUCT_TYPE_NAME + "-slug1";
+    protected static final String SLUG2 = PRODUCT_TYPE_NAME + "-slug2";
+    protected static final String SLUG3 = PRODUCT_TYPE_NAME + "-slug3";
     protected static final String ATTR_NAME_COLOR = ("Color" + TEST_CLASS_NAME).substring(0, min(20, TEST_CLASS_NAME.length()));
     protected static final String ATTR_NAME_SIZE = ("Size" + TEST_CLASS_NAME).substring(0, min(20, TEST_CLASS_NAME.length()));
     protected static final String ATTR_NAME_EVIL = ("Evil" + TEST_CLASS_NAME).substring(0, min(20, TEST_CLASS_NAME.length()));
@@ -77,9 +80,9 @@ public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
         final Function<String, Optional<Product>> findBySku =
                 sku -> products.stream().filter(p -> sku.equals(p.getMasterData().getStaged().getMasterVariant().getSku())).findFirst();
 
-        product1 = findBySku.apply(SKU1).orElseGet(() -> createTestProduct(productType, "Schuh", "shoe", "blue", 38, 46, SKU1));
-        product2 = findBySku.apply(SKU2).orElseGet(() -> createTestProduct(productType, "Hemd", "shirt", "red", 36, 44, SKU2));
-        product3 = findBySku.apply(SKU3).orElseGet(() -> createTestProduct(productType, "Kleider", "dress", "blue", 40, 42, SKU3));
+        product1 = findBySku.apply(SKU1).orElseGet(() -> createTestProduct(productType, "Schuh", "shoe", "blue", 38, 46, SKU1, SLUG1));
+        product2 = findBySku.apply(SKU2).orElseGet(() -> createTestProduct(productType, "Hemd", "shirt", "red", 36, 44, SKU2, SLUG2));
+        product3 = findBySku.apply(SKU3).orElseGet(() -> createTestProduct(productType, "Kleider", "dress", "blue", 40, 42, SKU3, SLUG3));
         evilProduct1 = findBySku.apply(SKU_A).orElseGet(() -> createEvilTestProduct(evilProductType, EVIL_CHARACTER_WORD, EVIL_PRODUCT_TYPE_NAME + "foo", SKU_A));
         evilProduct2 = findBySku.apply(SKU_B).orElseGet(() -> createEvilTestProduct(evilProductType, EVIL_PRODUCT_TYPE_NAME + "bar", EVIL_CHARACTER_WORD, SKU_B));
     }
@@ -116,7 +119,7 @@ public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
     }
 
     private static Product createTestProduct(final ProductType productType, final String germanName, final String englishName,
-                                             final String color, final int size1, final int size2, final String sku) {
+                                             final String color, final int size1, final int size2, final String sku, final String slug) {
         final LocalizedString name = LocalizedString.of(GERMAN, germanName, ENGLISH, englishName);
         final ProductVariantDraft masterVariant = ProductVariantDraftBuilder.of()
                 .attributes(AttributeDraft.of(ATTR_NAME_SIZE, size1), AttributeDraft.of(ATTR_NAME_COLOR, color))
@@ -127,7 +130,7 @@ public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
                 .attributes(AttributeDraft.of(ATTR_NAME_SIZE, size2))
                 .price(PriceDraft.of(new BigDecimal("27.45"), EUR))
                 .build();
-        final ProductDraft productDraft = ProductDraftBuilder.of(productType, name, name.slugifiedUnique(), masterVariant)
+        final ProductDraft productDraft = ProductDraftBuilder.of(productType, name, LocalizedString.of(ENGLISH, slug), masterVariant)
                 .plusVariants(variant).build();
         return client().executeBlocking(ProductCreateCommand.of(productDraft));
     }

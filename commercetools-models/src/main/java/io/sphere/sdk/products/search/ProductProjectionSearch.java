@@ -69,6 +69,18 @@ public interface ProductProjectionSearch extends MetaModelSearchDsl<ProductProje
         return new ProductProjectionSearchImpl(productProjectionType);
     }
 
+    default ProductProjectionSearch bySlug(final Locale locale, final String slug) {
+        return withQueryFilters(m -> m.slug().locale(locale).is(slug));
+    }
+    
+    default ProductProjectionSearch bySku(final String sku) {
+        return withQueryFilters(m -> m.allVariants().sku().is(sku));
+    }
+    
+    default ProductProjectionSearch bySku(final List<String> skus) {
+        return withQueryFilters(m -> m.allVariants().sku().isIn(skus));
+    }
+
     @Override
     ProductProjectionSearch withText(final LocalizedStringEntry text);
 

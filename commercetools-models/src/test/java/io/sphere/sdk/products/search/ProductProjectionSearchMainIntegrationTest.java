@@ -126,6 +126,56 @@ public class ProductProjectionSearchMainIntegrationTest extends ProductProjectio
                 .flatExtracting(p -> p.getAllVariants())
                 .are(allMatchingVariants);
     }
+    
+    @Test
+    public void slugExistsExample() {
+        final ProductProjectionSearch search = ProductProjectionSearch.ofStaged().bySlug(ENGLISH, SLUG1);
+        testResult(search, result -> {
+            final List<ProductProjection> results = result.getResults();
+            assertThat(results.size()).isEqualTo(1);
+            assertThat(results.get(0).getSlug().get(ENGLISH)).isEqualTo(SLUG1);
+        });
+    }
+    
+    @Test
+    public void slugDontExistsExample() {
+        final ProductProjectionSearch search = ProductProjectionSearch.ofStaged().bySlug(ENGLISH, "blafasel");
+        testResult(search, result -> {
+            final List<ProductProjection> results = result.getResults();
+            assertThat(results).isEmpty();
+        });
+    }
+    
+    @Test
+    public void skuExistsExample() {
+        final ProductProjectionSearch search = ProductProjectionSearch.ofStaged().bySku(SKU1);
+        testResult(search, result -> {
+            final List<ProductProjection> results = result.getResults();
+            assertThat(results.size()).isEqualTo(1);
+            assertThat(results.get(0).getAllVariants().stream().anyMatch(variant -> SKU1.equals(variant.getSku()))).isEqualTo(true);
+            
+        });
+    }
+
+    
+    @Test
+    public void skuDontExistsExample() {
+        final ProductProjectionSearch search = ProductProjectionSearch.ofStaged().bySku("thisSKUshouldn't exist");
+        testResult(search, result -> {
+            final List<ProductProjection> results = result.getResults();
+            assertThat(results).isEmpty();
+        });
+    }
+    
+    @Test
+    public void multipleSKUsExistsExample() {
+        final ProductProjectionSearch search = ProductProjectionSearch.ofStaged().bySku(asList(SKU1, SKU2, SKU3, "thisSKUshouldn't exist"));
+        testResult(search, result -> {
+            final List<ProductProjection> results = result.getResults();
+            assertThat(results).hasSize(3);
+        });
+    }
+
 
     private Condition<ProductProjection> productWithMatchingVariantsHavingMaxSize() {
         final Predicate<ProductProjection> matchingVariantsHaveMaxSize = product -> {
