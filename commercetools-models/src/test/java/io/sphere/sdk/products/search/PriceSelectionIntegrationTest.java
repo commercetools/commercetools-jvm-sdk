@@ -5,6 +5,8 @@ import io.sphere.sdk.channels.Channel;
 import io.sphere.sdk.channels.ChannelRole;
 import io.sphere.sdk.customergroups.CustomerGroup;
 import io.sphere.sdk.products.*;
+import io.sphere.sdk.products.commands.ProductUpdateCommand;
+import io.sphere.sdk.products.commands.updateactions.SetPrices;
 import io.sphere.sdk.products.queries.ProductByIdGet;
 import io.sphere.sdk.products.queries.ProductProjectionByIdGet;
 import io.sphere.sdk.products.queries.ProductProjectionQuery;
@@ -101,6 +103,18 @@ public class PriceSelectionIntegrationTest extends IntegrationTest {
                     .withPriceSelection(PriceSelection.of(EUR));//price selection config
             final Product result = client().executeBlocking(request);
             final ProductVariant masterVariant = result.getMasterData().getStaged().getMasterVariant();
+            assertThat(masterVariant.getPrice()).isNotNull().has(price(PriceDraft.of(EURO_30)));
+        });
+    }
+
+    @Test
+    public void selectAPriceByCurrencyInProductUpdateCommand() {
+        ProductFixtures.withProduct(client(), product -> {
+            final List<PriceDraft> prices = asList(PriceDraft.of(EURO_30), PriceDraft.of(USD_20));
+            final ProductUpdateCommand cmd = ProductUpdateCommand.of(product, SetPrices.of(1, prices))
+                    .withPriceSelection(PriceSelection.of(EUR));
+            final Product updatedProduct = client().executeBlocking(cmd);
+            final ProductVariant masterVariant = updatedProduct.getMasterData().getStaged().getMasterVariant();
             assertThat(masterVariant.getPrice()).isNotNull().has(price(PriceDraft.of(EURO_30)));
         });
     }

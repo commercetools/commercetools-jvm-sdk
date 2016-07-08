@@ -22,7 +22,6 @@ final class ProductByIdGetImpl extends MetaModelGetDslImpl<Product, Product, Pro
         super(builder);
     }
 
-
     @Override
     public ProductByIdGet withPriceSelection(@Nullable final PriceSelection priceSelection) {
         final List<NameValuePair> resultingParameters = getQueryParametersWithPriceSelection(priceSelection, additionalQueryParameters());
