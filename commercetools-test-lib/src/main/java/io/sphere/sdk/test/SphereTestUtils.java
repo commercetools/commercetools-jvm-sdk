@@ -205,7 +205,8 @@ public final class SphereTestUtils {
     }
 
     public static void assertEventually(final Runnable block) {
-        final Duration maxWaitTime = Duration.ofSeconds(30);
+        final Boolean useLongTimeout = Optional.ofNullable(System.getenv("TRAVIS")).map(s -> "true".equals(s)).orElse(false);
+        final Duration maxWaitTime = Duration.ofSeconds(useLongTimeout ? 60 : 30);
         final Duration waitBeforeRetry = Duration.ofMillis(100);
         assertEventually(maxWaitTime, waitBeforeRetry, block);
     }
