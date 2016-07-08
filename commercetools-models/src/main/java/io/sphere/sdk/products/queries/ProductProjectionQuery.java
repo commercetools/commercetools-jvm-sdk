@@ -1,14 +1,19 @@
 package io.sphere.sdk.products.queries;
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import io.sphere.sdk.expansion.ExpansionPath;
 import io.sphere.sdk.models.Referenceable;
 import io.sphere.sdk.products.ProductProjection;
 import io.sphere.sdk.products.ProductProjectionType;
+import io.sphere.sdk.products.ProductVariant;
 import io.sphere.sdk.products.expansion.ProductProjectionExpansionModel;
+import io.sphere.sdk.products.search.PriceSelection;
 import io.sphere.sdk.producttypes.ProductType;
-import io.sphere.sdk.queries.*;
+import io.sphere.sdk.queries.MetaModelQueryDsl;
+import io.sphere.sdk.queries.PagedQueryResult;
+import io.sphere.sdk.queries.QueryPredicate;
+import io.sphere.sdk.queries.QuerySort;
 
+import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Locale;
 import java.util.function.Function;
@@ -100,4 +105,16 @@ public interface ProductProjectionQuery extends MetaModelQueryDsl<ProductProject
     @Override
     ProductProjectionQuery withSortMulti(final Function<ProductProjectionQueryModel, List<QuerySort<ProductProjection>>> m);
 
+    /**
+     * Uses the cart price selection logic to retrieve the prices for product variants.
+     *
+     * <p>Example for selecting just a currency</p>
+     *
+     * {@include.example io.sphere.sdk.products.search.PriceSelectionIntegrationTest#selectAPriceByCurrencyInProductProjectionQuery()}
+     *
+     * @param priceSelection parameters for the price selection, using null deletes the values
+     * @return request with new parameters
+     * @see ProductVariant#getPrice()
+     */
+    ProductProjectionQuery withPriceSelection(@Nullable final PriceSelection priceSelection);
 }

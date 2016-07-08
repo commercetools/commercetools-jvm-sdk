@@ -329,6 +329,10 @@ public abstract class MetaModelQueryDslImpl<T, C extends MetaModelQueryDsl<T, C,
         return resultMapper;
     }
 
+    protected C withAdditionalHttpQueryParameters(final List<NameValuePair> pairs) {
+        return copyBuilder().additionalHttpQueryParameters(pairs).build();
+    }
+
     private static <T> JavaType resolveJavaType(final TypeReference<T> typeReference) {
         final TypeFactory typeFactory = TypeFactory.defaultInstance();
         final JavaType typeParameterJavaType = typeFactory.constructType(typeReference);
