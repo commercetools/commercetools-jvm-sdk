@@ -38,7 +38,14 @@ public class ProductDiscountCreateCommandIntegrationTest extends IntegrationTest
         final boolean active = true;
         final String sortOrder = randomSortOrder();
         final ProductDiscountDraft discountDraft =
-                ProductDiscountDraft.of(name, description, predicate, discountValue, sortOrder, active);
+                ProductDiscountDraftBuilder.of()
+                    .name(name)
+                    .description(description)
+                    .predicate(predicate)
+                    .value(discountValue)
+                    .sortOrder(sortOrder)
+                    .isActive(active)
+                    .build();
 
         final ProductDiscount productDiscount = client().executeBlocking(ProductDiscountCreateCommand.of(discountDraft));
 
