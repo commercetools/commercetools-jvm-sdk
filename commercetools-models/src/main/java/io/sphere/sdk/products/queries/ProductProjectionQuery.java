@@ -7,6 +7,7 @@ import io.sphere.sdk.products.ProductProjectionType;
 import io.sphere.sdk.products.ProductVariant;
 import io.sphere.sdk.products.expansion.ProductProjectionExpansionModel;
 import io.sphere.sdk.products.search.PriceSelection;
+import io.sphere.sdk.products.search.PriceSelectionRequestDsl;
 import io.sphere.sdk.producttypes.ProductType;
 import io.sphere.sdk.queries.MetaModelQueryDsl;
 import io.sphere.sdk.queries.PagedQueryResult;
@@ -21,7 +22,7 @@ import java.util.function.Function;
 /**
  {@doc.gen summary product projections}
  */
-public interface ProductProjectionQuery extends MetaModelQueryDsl<ProductProjection, ProductProjectionQuery, ProductProjectionQueryModel, ProductProjectionExpansionModel<ProductProjection>> {
+public interface ProductProjectionQuery extends MetaModelQueryDsl<ProductProjection, ProductProjectionQuery, ProductProjectionQueryModel, ProductProjectionExpansionModel<ProductProjection>>, PriceSelectionRequestDsl<ProductProjectionQuery> {
     /**
      * Creates a container which contains the full Java type information to deserialize the query result (NOT this class) from JSON.
      *
@@ -116,5 +117,6 @@ public interface ProductProjectionQuery extends MetaModelQueryDsl<ProductProject
      * @return request with new parameters
      * @see ProductVariant#getPrice()
      */
+    @Override
     ProductProjectionQuery withPriceSelection(@Nullable final PriceSelection priceSelection);
 }

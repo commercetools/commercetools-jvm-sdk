@@ -5,6 +5,8 @@ import io.sphere.sdk.http.NameValuePair;
 import javax.annotation.Nullable;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 import static java.util.Arrays.asList;
 import static java.util.stream.Collectors.toList;
@@ -39,6 +41,26 @@ public final class PriceSelectionQueryParameters {
             addParamIfNotNull(resultingParameters, PRICE_CHANNEL, priceSelection.getPriceChannel());
         }
         return resultingParameters;
+    }
+
+    @Nullable
+    public static PriceSelection extractPriceSelectionFromHttpQueryParameters(final List<NameValuePair> additionalHttpQueryParameters) {
+        final List<NameValuePair> priceSelectionCandidates = additionalHttpQueryParameters
+                .stream()
+                .filter(pair -> ALL_PARAMETERS.contains(pair.getName()))
+                .collect(Collectors.toList());
+        final boolean containsPriceSelection = priceSelectionCandidates.stream()
+                .anyMatch(pair -> PRICE_CURRENCY.equals(pair.getName()));
+        return containsPriceSelection ? extractPriceSelection(priceSelectionCandidates) : null;
+    }
+
+    private static PriceSelection extractPriceSelection(final List<NameValuePair> priceSelectionCandidates) {
+        final Map<String, String> map = NameValuePair.convertToStringMap(priceSelectionCandidates);
+        return PriceSelectionBuilder.ofCurrencyCode(map.get(PRICE_CURRENCY))
+                .priceCountryCode(map.get(PRICE_COUNTRY))
+                .priceCustomerGroupId(map.get(PRICE_CUSTOMER_GROUP))
+                .priceChannelId(map.get(PRICE_CHANNEL))
+                .build();
     }
 
     private static void addParamIfNotNull(final List<NameValuePair> resultingParameters, final String name, final String value) {

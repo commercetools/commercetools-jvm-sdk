@@ -11,7 +11,7 @@ import io.sphere.sdk.queries.MetaModelQueryDslImpl;
 import javax.annotation.Nullable;
 import java.util.List;
 
-import static io.sphere.sdk.products.search.PriceSelectionQueryParameters.getQueryParametersWithPriceSelection;
+import static io.sphere.sdk.products.search.PriceSelectionQueryParameters.*;
 import static java.util.Collections.singletonList;
 
 /**
@@ -35,5 +35,11 @@ final class ProductProjectionQueryImpl extends MetaModelQueryDslImpl<ProductProj
     public ProductProjectionQuery withPriceSelection(@Nullable final PriceSelection priceSelection) {
         final List<NameValuePair> resultingParameters = getQueryParametersWithPriceSelection(priceSelection, additionalHttpQueryParameters());
         return withAdditionalHttpQueryParameters(resultingParameters);
+    }
+
+    @Nullable
+    @Override
+    public PriceSelection getPriceSelection() {
+        return extractPriceSelectionFromHttpQueryParameters(additionalHttpQueryParameters());
     }
 }

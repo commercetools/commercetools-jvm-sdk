@@ -42,21 +42,6 @@ final class ProductProjectionSearchImpl extends MetaModelSearchDslImpl<ProductPr
     @Nullable
     @Override
     public PriceSelection getPriceSelection() {
-        final List<NameValuePair> priceSelectionCandidates = additionalQueryParameters()
-                .stream()
-                .filter(pair -> ALL_PARAMETERS.contains(pair.getName()))
-                .collect(Collectors.toList());
-        final boolean containsPriceSelection = priceSelectionCandidates.stream()
-                .anyMatch(pair -> PRICE_CURRENCY.equals(pair.getName()));
-        return containsPriceSelection ? extractPriceSelection(priceSelectionCandidates) : null;
-    }
-
-    private PriceSelection extractPriceSelection(final List<NameValuePair> priceSelectionCandidates) {
-        final Map<String, String> map = NameValuePair.convertToStringMap(priceSelectionCandidates);
-        return PriceSelectionBuilder.ofCurrencyCode(map.get(PRICE_CURRENCY))
-                .priceCountryCode(map.get(PRICE_COUNTRY))
-                .priceCustomerGroupId(map.get(PRICE_CUSTOMER_GROUP))
-                .priceChannelId(map.get(PRICE_CHANNEL))
-                .build();
+        return extractPriceSelectionFromHttpQueryParameters(additionalQueryParameters());
     }
 }
