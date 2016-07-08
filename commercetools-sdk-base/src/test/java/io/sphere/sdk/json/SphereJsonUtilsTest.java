@@ -134,4 +134,13 @@ public class SphereJsonUtilsTest {
         final Locale locale = SphereJsonUtils.readObject(jsonString, TypeReferences.localeTypeReference());
         assertThat(locale).isEqualTo(Locale.US);
     }
+
+    @Test
+    public void doNotFailOnEmptyBeans() {
+        SphereJsonUtils.toJsonNode(new EmptyBean());
+    }
+
+    private static class EmptyBean {
+
+    }
 }

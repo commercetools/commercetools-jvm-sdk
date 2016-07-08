@@ -44,6 +44,7 @@ public final class SphereJsonUtils {
                 .registerModule(new JavaMoneyModule())
                 .registerModule(new SphereEnumModule())
                 .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
+                .configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false)
                 .configure(MapperFeature.USE_GETTERS_AS_SETTERS, false)
                 .setSerializationInclusion(JsonInclude.Include.NON_NULL);
     }
