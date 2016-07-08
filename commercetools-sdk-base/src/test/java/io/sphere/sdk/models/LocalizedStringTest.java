@@ -161,6 +161,22 @@ public class LocalizedStringTest {
 
         assertThat(ls.getTranslation(asList(Locale.UK, Locale.US, Locale.GERMAN)))
                 .isEqualTo(ls.get(asList(Locale.UK, Locale.ENGLISH, Locale.US, Locale.ENGLISH, Locale.GERMAN)));
+
+        assertThat(ls.get("en"))
+                .isEqualTo(ls.get(Locale.ENGLISH))
+                .isEqualTo(ls.get("en-***")) //-*** is illegal (ietf bcp 47) and will be ignored
+                .isNotEqualTo(ls.get(Locale.US));
+        assertThat(ls.get("de"))
+                .isEqualTo(ls.get(Locale.GERMAN))
+                .isNotEqualTo(ls.get("de-AT"));
+        assertThat(ls.get("en-US"))
+                .isEqualTo(ls.get(Locale.US))
+                .isEqualTo(ls.get("en-US-blub")) //-blub is illegal (ietf bcp 47) and will be ignored
+                .isNotEqualTo(ls.get("en-US-u-islamcal")); //-u-islamcal legal extension (ietf bcp 47)
+        assertThat(ls.get("en_US"))
+                .isNull();
+        assertThat(ls.get("xxx"))
+                .isNull();
     }
 
     @Test
