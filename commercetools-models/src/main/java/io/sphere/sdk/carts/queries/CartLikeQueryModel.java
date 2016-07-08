@@ -30,4 +30,6 @@ public interface CartLikeQueryModel<T> extends ResourceQueryModel<T>, WithCustom
     DiscountCodeInfoCollectionQueryModel<T> discountCodes();
 
     PaymentInfoQueryModel<T> paymentInfo();
+
+    StringQuerySortingModel<T> anonymousId();
 }

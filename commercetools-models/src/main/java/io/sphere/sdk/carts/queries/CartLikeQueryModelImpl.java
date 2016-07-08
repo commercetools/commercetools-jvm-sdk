@@ -77,4 +77,9 @@ public abstract class CartLikeQueryModelImpl<T> extends CustomResourceQueryModel
     public PaymentInfoQueryModel<T> paymentInfo() {
         return new PaymentInfoQueryModelImpl<>(this, "paymentInfo");
     }
+
+    @Override
+    public StringQuerySortingModel<T> anonymousId() {
+        return stringModel("anonymousId");
+    }
 }
