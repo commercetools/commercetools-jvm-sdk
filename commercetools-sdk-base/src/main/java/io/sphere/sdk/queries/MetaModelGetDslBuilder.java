@@ -46,4 +46,9 @@ public final class MetaModelGetDslBuilder<R, T, C extends MetaModelGetDsl<R, T, 
         this.expansionPaths = expansionPaths;
         return this;
     }
+
+    public MetaModelGetDslBuilder<R, T, C, E> additionalQueryParameters(final List<NameValuePair> additionalQueryParameters) {
+        this.additionalParameters = additionalQueryParameters;
+        return this;
+    }
 }

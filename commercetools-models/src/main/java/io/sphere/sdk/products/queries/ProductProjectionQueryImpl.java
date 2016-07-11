@@ -4,11 +4,14 @@ import io.sphere.sdk.http.NameValuePair;
 import io.sphere.sdk.products.ProductProjection;
 import io.sphere.sdk.products.ProductProjectionType;
 import io.sphere.sdk.products.expansion.ProductProjectionExpansionModel;
+import io.sphere.sdk.products.search.PriceSelection;
 import io.sphere.sdk.queries.MetaModelQueryDslBuilder;
 import io.sphere.sdk.queries.MetaModelQueryDslImpl;
 
+import javax.annotation.Nullable;
 import java.util.List;
 
+import static io.sphere.sdk.products.search.PriceSelectionQueryParameters.*;
 import static java.util.Collections.singletonList;
 
 /**
@@ -28,4 +31,15 @@ final class ProductProjectionQueryImpl extends MetaModelQueryDslImpl<ProductProj
         return singletonList(NameValuePair.of("staged", productProjectionType.isStaged().toString()));
     }
 
+    @Override
+    public ProductProjectionQuery withPriceSelection(@Nullable final PriceSelection priceSelection) {
+        final List<NameValuePair> resultingParameters = getQueryParametersWithPriceSelection(priceSelection, additionalHttpQueryParameters());
+        return withAdditionalHttpQueryParameters(resultingParameters);
+    }
+
+    @Nullable
+    @Override
+    public PriceSelection getPriceSelection() {
+        return extractPriceSelectionFromHttpQueryParameters(additionalHttpQueryParameters());
+    }
 }

@@ -1,14 +1,20 @@
 package io.sphere.sdk.products.queries;
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import io.sphere.sdk.expansion.ExpansionPath;
 import io.sphere.sdk.models.Referenceable;
 import io.sphere.sdk.products.ProductProjection;
 import io.sphere.sdk.products.ProductProjectionType;
+import io.sphere.sdk.products.ProductVariant;
 import io.sphere.sdk.products.expansion.ProductProjectionExpansionModel;
+import io.sphere.sdk.products.search.PriceSelection;
+import io.sphere.sdk.products.search.PriceSelectionRequestDsl;
 import io.sphere.sdk.producttypes.ProductType;
-import io.sphere.sdk.queries.*;
+import io.sphere.sdk.queries.MetaModelQueryDsl;
+import io.sphere.sdk.queries.PagedQueryResult;
+import io.sphere.sdk.queries.QueryPredicate;
+import io.sphere.sdk.queries.QuerySort;
 
+import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Locale;
 import java.util.function.Function;
@@ -16,7 +22,7 @@ import java.util.function.Function;
 /**
  {@doc.gen summary product projections}
  */
-public interface ProductProjectionQuery extends MetaModelQueryDsl<ProductProjection, ProductProjectionQuery, ProductProjectionQueryModel, ProductProjectionExpansionModel<ProductProjection>> {
+public interface ProductProjectionQuery extends MetaModelQueryDsl<ProductProjection, ProductProjectionQuery, ProductProjectionQueryModel, ProductProjectionExpansionModel<ProductProjection>>, PriceSelectionRequestDsl<ProductProjectionQuery> {
     /**
      * Creates a container which contains the full Java type information to deserialize the query result (NOT this class) from JSON.
      *
@@ -100,4 +106,17 @@ public interface ProductProjectionQuery extends MetaModelQueryDsl<ProductProject
     @Override
     ProductProjectionQuery withSortMulti(final Function<ProductProjectionQueryModel, List<QuerySort<ProductProjection>>> m);
 
+    /**
+     * Uses the cart price selection logic to retrieve the prices for product variants.
+     *
+     * <p>Example for selecting just a currency</p>
+     *
+     * {@include.example io.sphere.sdk.products.search.PriceSelectionIntegrationTest#selectAPriceByCurrencyInProductProjectionQuery()}
+     *
+     * @param priceSelection parameters for the price selection, using null deletes the values
+     * @return request with new parameters
+     * @see ProductVariant#getPrice()
+     */
+    @Override
+    ProductProjectionQuery withPriceSelection(@Nullable final PriceSelection priceSelection);
 }

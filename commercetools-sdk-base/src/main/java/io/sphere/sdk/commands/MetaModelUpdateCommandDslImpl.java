@@ -8,6 +8,7 @@ import io.sphere.sdk.expansion.ExpansionPath;
 import io.sphere.sdk.expansion.MetaModelExpansionDslExpansionModelRead;
 import io.sphere.sdk.expansion.ExpansionPathContainer;
 import io.sphere.sdk.http.HttpMethod;
+import io.sphere.sdk.http.NameValuePair;
 import io.sphere.sdk.http.UrlQueryBuilder;
 import io.sphere.sdk.json.SphereJsonUtils;
 import io.sphere.sdk.models.ResourceView;
@@ -34,6 +35,7 @@ public class MetaModelUpdateCommandDslImpl<T extends ResourceView<T, T>, C exten
     final Function<MetaModelUpdateCommandDslBuilder<T, C, E>, C> creationFunction;
     final E expansionModel;
     final List<ExpansionPath<T>> expansionPaths;
+    final List<NameValuePair> additionalHttpQueryParameters;
 
     private MetaModelUpdateCommandDslImpl(final Versioned<T> versioned,
                                           final List<? extends UpdateAction<T>> updateActions,
@@ -41,7 +43,8 @@ public class MetaModelUpdateCommandDslImpl<T extends ResourceView<T, T>, C exten
                                           final String baseEndpointWithoutId,
                                           final Function<MetaModelUpdateCommandDslBuilder<T, C, E>, C> creationFunction,
                                           final E expansionModel,
-                                          final List<ExpansionPath<T>> expansionPaths) {
+                                          final List<ExpansionPath<T>> expansionPaths,
+                                          final List<NameValuePair> additionalHttpQueryParameters) {
         this.expansionModel = requireNonNull(expansionModel);
         this.expansionPaths = requireNonNull(expansionPaths);
         this.creationFunction = requireNonNull(creationFunction);
@@ -49,6 +52,7 @@ public class MetaModelUpdateCommandDslImpl<T extends ResourceView<T, T>, C exten
         this.updateActions = requireNonNull(updateActions);
         this.javaType = requireNonNull(javaType);
         this.baseEndpointWithoutId = requireNonNull(baseEndpointWithoutId);
+        this.additionalHttpQueryParameters = requireNonNull(additionalHttpQueryParameters);
     }
 
     protected MetaModelUpdateCommandDslImpl(final Versioned<T> versioned,
@@ -56,11 +60,11 @@ public class MetaModelUpdateCommandDslImpl<T extends ResourceView<T, T>, C exten
                                             final JsonEndpoint<T> endpoint,
                                             final Function<MetaModelUpdateCommandDslBuilder<T, C, E>, C> creationFunction,
                                             final E expansionModel) {
-        this(versioned, updateActions, SphereJsonUtils.convertToJavaType(endpoint.typeReference()), endpoint.endpoint(), creationFunction, expansionModel, Collections.<ExpansionPath<T>>emptyList());
+        this(versioned, updateActions, SphereJsonUtils.convertToJavaType(endpoint.typeReference()), endpoint.endpoint(), creationFunction, expansionModel, Collections.emptyList(), Collections.emptyList());
     }
 
     protected MetaModelUpdateCommandDslImpl(final MetaModelUpdateCommandDslBuilder<T, C, E> builder) {
-        this(builder.getVersioned(), builder.getUpdateActions(), builder.getJacksonJavaType(), builder.getBaseEndpointWithoutId(), builder.getCreationFunction(), builder.expansionModel, builder.expansionPaths);
+        this(builder.getVersioned(), builder.getUpdateActions(), builder.getJacksonJavaType(), builder.getBaseEndpointWithoutId(), builder.getCreationFunction(), builder.expansionModel, builder.expansionPaths, builder.additionalHttpQueryParameters);
     }
 
     @Override
@@ -81,6 +85,7 @@ public class MetaModelUpdateCommandDslImpl<T extends ResourceView<T, T>, C exten
     private String queryParametersToString(final boolean urlEncoded) {
         final UrlQueryBuilder builder = UrlQueryBuilder.of();
         expansionPaths().forEach(path -> builder.add("expand", path.toSphereExpand(), urlEncoded));
+        additionalHttpQueryParameters().forEach(pair -> builder.add(pair.getName(), pair.getValue(), urlEncoded));
         return builder.toStringWithOptionalQuestionMark();
     }
 
@@ -152,5 +157,13 @@ public class MetaModelUpdateCommandDslImpl<T extends ResourceView<T, T>, C exten
     @Override
     public E expansionModel() {
         return expansionModel;
+    }
+
+    protected List<NameValuePair> additionalHttpQueryParameters() {
+        return additionalHttpQueryParameters;
+    }
+
+    protected C withAdditionalHttpQueryParameters(final List<NameValuePair> pairs) {
+        return copyBuilder().additionalHttpQueryParameters(pairs).build();
     }
 }

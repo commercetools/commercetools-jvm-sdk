@@ -6,6 +6,7 @@ import io.sphere.sdk.expansion.MetaModelReferenceExpansionDsl;
 import io.sphere.sdk.models.Versioned;
 import io.sphere.sdk.products.Product;
 import io.sphere.sdk.products.expansion.ProductExpansionModel;
+import io.sphere.sdk.products.search.PriceSelectionRequestDsl;
 
 import java.util.Collections;
 import java.util.List;
@@ -15,7 +16,7 @@ import java.util.List;
  {@doc.gen list actions}
 
  */
-public interface ProductUpdateCommand extends UpdateCommandDsl<Product, ProductUpdateCommand>, MetaModelReferenceExpansionDsl<Product, ProductUpdateCommand, ProductExpansionModel<Product>> {
+public interface ProductUpdateCommand extends UpdateCommandDsl<Product, ProductUpdateCommand>, MetaModelReferenceExpansionDsl<Product, ProductUpdateCommand, ProductExpansionModel<Product>>, PriceSelectionRequestDsl<ProductUpdateCommand> {
     static ProductUpdateCommand of(final Versioned<Product> versioned, final UpdateAction<Product> updateAction) {
         return of(versioned, Collections.singletonList(updateAction));
     }

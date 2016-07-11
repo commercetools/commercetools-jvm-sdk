@@ -5,6 +5,7 @@ import io.sphere.sdk.models.Referenceable;
 import io.sphere.sdk.products.Product;
 import io.sphere.sdk.products.ProductProjectionType;
 import io.sphere.sdk.products.expansion.ProductExpansionModel;
+import io.sphere.sdk.products.search.PriceSelectionRequestDsl;
 import io.sphere.sdk.producttypes.ProductType;
 import io.sphere.sdk.queries.*;
 
@@ -13,7 +14,7 @@ import java.util.Locale;
 /**
  {@doc.gen summary products}
  */
-public interface ProductQuery extends MetaModelQueryDsl<Product, ProductQuery, ProductQueryModel, ProductExpansionModel<Product>> {
+public interface ProductQuery extends MetaModelQueryDsl<Product, ProductQuery, ProductQueryModel, ProductExpansionModel<Product>>, PriceSelectionRequestDsl<ProductQuery> {
     /**
      * Creates a container which contains the full Java type information to deserialize the query result (NOT this class) from JSON.
      *

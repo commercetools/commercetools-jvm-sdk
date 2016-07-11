@@ -2,6 +2,7 @@ package io.sphere.sdk.commands;
 
 import com.fasterxml.jackson.databind.JavaType;
 import io.sphere.sdk.expansion.ExpansionPath;
+import io.sphere.sdk.http.NameValuePair;
 import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.Builder;
 import io.sphere.sdk.models.ResourceView;
@@ -23,6 +24,7 @@ public final class MetaModelUpdateCommandDslBuilder<T extends ResourceView<T, T>
     Function<MetaModelUpdateCommandDslBuilder<T, C, E>, C> creationFunction;
     final E expansionModel;
     List<ExpansionPath<T>> expansionPaths;
+    List<NameValuePair> additionalHttpQueryParameters;
 
     MetaModelUpdateCommandDslBuilder(final MetaModelUpdateCommandDslImpl<T, C, E> template) {
         this.expansionModel = requireNonNull(template.expansionModel);
@@ -32,6 +34,7 @@ public final class MetaModelUpdateCommandDslBuilder<T extends ResourceView<T, T>
         this.updateActions = requireNonNull(template.updateActions);
         this.javaType = requireNonNull(template.javaType);
         this.baseEndpointWithoutId = requireNonNull(template.baseEndpointWithoutId);
+        this.additionalHttpQueryParameters = requireNonNull(template.additionalHttpQueryParameters);
     }
 
     public MetaModelUpdateCommandDslBuilder<T, C, E> versioned(final Versioned<T> versioned) {
@@ -66,6 +69,11 @@ public final class MetaModelUpdateCommandDslBuilder<T extends ResourceView<T, T>
 
     MetaModelUpdateCommandDslBuilder<T, C, E> expansionPaths(final List<ExpansionPath<T>> expansionPaths) {
         this.expansionPaths = expansionPaths;
+        return this;
+    }
+
+    MetaModelUpdateCommandDslBuilder<T, C, E> additionalHttpQueryParameters(final List<NameValuePair> additionalHttpQueryParameters) {
+        this.additionalHttpQueryParameters = additionalHttpQueryParameters;
         return this;
     }
 }
