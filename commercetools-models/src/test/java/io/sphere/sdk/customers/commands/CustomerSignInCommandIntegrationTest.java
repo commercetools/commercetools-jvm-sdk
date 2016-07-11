@@ -109,8 +109,6 @@ public class CustomerSignInCommandIntegrationTest extends CustomerIntegrationTes
     @Test
     public void signInWithAnonymousCartUseAsNewActiveCustomerCart() throws Exception {
         withCustomerCustomerCartAndAnonymousCart(client(), customer -> customersCart -> anonymousCart -> {
-            assertThat(customersCart.getLineItems().get(0).getQuantity()).isEqualTo(3);
-            assertThat(anonymousCart.getLineItems().get(0).getQuantity()).isEqualTo(7);
             final CustomerSignInCommand cmd = CustomerSignInCommand
                     .of(customer.getEmail(), PASSWORD, anonymousCart.getId())
                     .withAnonymousCartSignInMode(USE_AS_NEW_ACTIVE_CUSTOMER_CART);
@@ -125,8 +123,6 @@ public class CustomerSignInCommandIntegrationTest extends CustomerIntegrationTes
     @Test
     public void signInWithAnonymousCartMergeWithExistingCustomerCart() throws Exception {
         withCustomerCustomerCartAndAnonymousCart(client(), customer -> customersCart -> anonymousCart -> {
-            assertThat(customersCart.getLineItems().get(0).getQuantity()).isEqualTo(3);
-            assertThat(anonymousCart.getLineItems().get(0).getQuantity()).isEqualTo(7);
             final CustomerSignInCommand cmd = CustomerSignInCommand
                     .of(customer.getEmail(), PASSWORD, anonymousCart.getId())
                     .withAnonymousCartSignInMode(MERGE_WITH_EXISTING_CUSTOMER_CART);
