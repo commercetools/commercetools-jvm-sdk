@@ -6,7 +6,7 @@ import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.Builder;
 import io.sphere.sdk.models.LocalizedString;
 
-public class ProductDiscountDraftBuilder extends Base implements Builder<ProductDiscountDraft> {
+public final class ProductDiscountDraftBuilder extends Base implements Builder<ProductDiscountDraft> {
 
     private LocalizedString name;
     @Nullable
@@ -14,7 +14,7 @@ public class ProductDiscountDraftBuilder extends Base implements Builder<Product
     private ProductDiscountValue value;
     private ProductDiscountPredicate predicate;
     private String sortOrder;
-    private Boolean isActive;
+    private Boolean active;
 
     private ProductDiscountDraftBuilder() {
     }
@@ -60,12 +60,16 @@ public class ProductDiscountDraftBuilder extends Base implements Builder<Product
     }
 
     public ProductDiscountDraftBuilder isActive(final Boolean isActive) {
-        this.isActive = isActive;
+        this.active = isActive;
         return this;
+    }
+    
+    public ProductDiscountDraftBuilder active(final Boolean active) {
+        return isActive(active);
     }
 
     @Override
     public ProductDiscountDraft build() {
-        return new ProductDiscountDraftImpl(name, description, predicate, value, sortOrder, isActive);
+        return new ProductDiscountDraftImpl(name, description, predicate, value, sortOrder, active);
     }
 }
