@@ -32,6 +32,8 @@ public final class TypeSerializer<V> extends Base implements Function<V, String>
     /**
      * Serializer to convert the given element to a formatted string with escaped characters.
      * @return the serializer for text data.
+     * @param serializer serializer
+     * @param <V> type of the data to transform.
      */
     public static <V> TypeSerializer<V> ofRawFunction(final Function<V, String> serializer) {
         return new TypeSerializer<>(serializer);

@@ -32,7 +32,9 @@ public final class TokensFacade extends Base {
      *
      * {@include.example io.sphere.sdk.client.TokensFacadeIntegrationTest#passwordFlowDemo()}
      *
-     * @param
+     * @param authConfig authConfig
+     * @param email email
+     * @param password password
      * @return token
      */
     public static CompletionStage<Tokens> fetchCustomerPasswordFlowTokens(final SphereAuthConfig authConfig, final String email, final String password) {
