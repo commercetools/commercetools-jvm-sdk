@@ -172,6 +172,19 @@ public final class LocalizedString extends Base {
     }
 
     /**
+     * Searches the translation for a locale specified in IETF BCP 47 by language tag string.
+     * If the specified language tag contains any ill-formed subtags, the first such subtag and all following subtags are ignored.
+     *
+     * @param languageTag the IETF language tag corresponding to an {@code Locale}
+     * @return the translation belonging to {@code languageTag} or {@code null} if the locale is not present.
+     */
+    @Nullable
+    public String get(final String languageTag){
+        final Locale locale = Locale.forLanguageTag(languageTag);
+        return get(locale);
+    }
+
+    /**
      * Searches the translation for some exact locales in the order they appear and returning the result in an {@link Optional}.
      *
      * {@include.example io.sphere.sdk.models.LocalizedStringTest#findByMultipleLocales()}
