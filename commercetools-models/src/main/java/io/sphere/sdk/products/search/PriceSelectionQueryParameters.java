@@ -1,6 +1,7 @@
 package io.sphere.sdk.products.search;
 
 import io.sphere.sdk.http.NameValuePair;
+import io.sphere.sdk.models.Base;
 
 import javax.annotation.Nullable;
 import java.util.LinkedList;
@@ -11,7 +12,7 @@ import java.util.stream.Collectors;
 import static java.util.Arrays.asList;
 import static java.util.stream.Collectors.toList;
 
-public final class PriceSelectionQueryParameters {
+public final class PriceSelectionQueryParameters extends Base {
     public static final String PRICE_CURRENCY = "priceCurrency";
     public static final String PRICE_COUNTRY = "priceCountry";
     public static final String PRICE_CUSTOMER_GROUP = "priceCustomerGroup";
