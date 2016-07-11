@@ -87,7 +87,7 @@ import java.util.function.Function;
  -->
 
  <h3 class=released-version id="v1_1_0">1.1.0 (11.07.2016)</h3>
- <p>Thanks to Sarah and Martin for contributions!</p>
+ <p>Thanks to Sarah and Martin for their contributions!</p>
 
  <ul>
  <li class=new-in-release>support {@link io.sphere.sdk.carts.AnonymousCartSignInMode}</li>
