@@ -17,6 +17,7 @@ import org.junit.Test;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
+import static io.sphere.sdk.carts.AnonymousCartSignInMode.*;
 import static io.sphere.sdk.customers.CustomerFixtures.PASSWORD;
 import static io.sphere.sdk.customers.CustomerFixtures.withCustomer;
 import static io.sphere.sdk.test.SphereTestUtils.*;
@@ -102,6 +103,38 @@ public class CustomerSignInCommandIntegrationTest extends CustomerIntegrationTes
             assertThat(customerSignInResult.getCart().getId())
                     .as("the customer gets the cart from the anonymous session assigned while on sign-in")
                     .isEqualTo(cart.getId());
+        });
+    }
+
+    @Test
+    public void signInWithAnonymousCartUseAsNewActiveCustomerCart() throws Exception {
+        withCustomerCustomerCartAndAnonymousCart(client(), customer -> customersCart -> anonymousCart -> {
+            assertThat(customersCart.getLineItems().get(0).getQuantity()).isEqualTo(3);
+            assertThat(anonymousCart.getLineItems().get(0).getQuantity()).isEqualTo(7);
+            final CustomerSignInCommand cmd = CustomerSignInCommand
+                    .of(customer.getEmail(), PASSWORD, anonymousCart.getId())
+                    .withAnonymousCartSignInMode(USE_AS_NEW_ACTIVE_CUSTOMER_CART);
+            final CustomerSignInResult result = client().executeBlocking(cmd);
+            final Cart resultingCart = result.getCart();
+            assertThat(resultingCart.getId())
+                    .as("anonymous cart becomes the new customer cart")
+                    .isEqualTo(anonymousCart.getId());
+        });
+    }
+
+    @Test
+    public void signInWithAnonymousCartMergeWithExistingCustomerCart() throws Exception {
+        withCustomerCustomerCartAndAnonymousCart(client(), customer -> customersCart -> anonymousCart -> {
+            assertThat(customersCart.getLineItems().get(0).getQuantity()).isEqualTo(3);
+            assertThat(anonymousCart.getLineItems().get(0).getQuantity()).isEqualTo(7);
+            final CustomerSignInCommand cmd = CustomerSignInCommand
+                    .of(customer.getEmail(), PASSWORD, anonymousCart.getId())
+                    .withAnonymousCartSignInMode(MERGE_WITH_EXISTING_CUSTOMER_CART);
+            final CustomerSignInResult result = client().executeBlocking(cmd);
+            final Cart resultingCart = result.getCart();
+            assertThat(resultingCart.getId())
+                    .as("the old customers cart stays the cart")
+                    .isEqualTo(customersCart.getId());
         });
     }
 }

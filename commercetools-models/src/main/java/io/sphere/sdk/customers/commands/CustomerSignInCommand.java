@@ -1,6 +1,7 @@
 package io.sphere.sdk.customers.commands;
 
 import com.fasterxml.jackson.databind.JavaType;
+import io.sphere.sdk.carts.AnonymousCartSignInMode;
 import io.sphere.sdk.client.HttpRequestIntent;
 import io.sphere.sdk.commands.CommandImpl;
 import io.sphere.sdk.customers.CustomerSignInResult;
@@ -40,12 +41,15 @@ public final class CustomerSignInCommand extends CommandImpl<CustomerSignInResul
     private final String anonymousCartId;
     @Nullable
     private final String anonymousId;
+    @Nullable
+    private final AnonymousCartSignInMode anonymousCartSignInMode;
 
-    private CustomerSignInCommand(final String email, final String password, @Nullable final String anonymousCartId, @Nullable final String anonymousId) {
+    private CustomerSignInCommand(final String email, final String password, @Nullable final String anonymousCartId, @Nullable final String anonymousId, final AnonymousCartSignInMode anonymousCartSignInMode) {
         this.email = email;
         this.password = password;
         this.anonymousCartId = anonymousCartId;
         this.anonymousId = anonymousId;
+        this.anonymousCartSignInMode = anonymousCartSignInMode;
     }
 
     public static CustomerSignInCommand of(final String email, final String password) {
@@ -53,11 +57,15 @@ public final class CustomerSignInCommand extends CommandImpl<CustomerSignInResul
     }
 
     public static CustomerSignInCommand of(final String email, final String password, @Nullable final String anonymousCartId) {
-        return new CustomerSignInCommand(email, password, anonymousCartId, null);
+        return new CustomerSignInCommand(email, password, anonymousCartId, null, null);
     }
 
     public CustomerSignInCommand withAnonymousId(@Nullable final String anonymousId) {
-        return new CustomerSignInCommand(email, password, anonymousCartId, anonymousId);
+        return new CustomerSignInCommand(email, password, anonymousCartId, anonymousId, anonymousCartSignInMode);
+    }
+
+    public CustomerSignInCommand withAnonymousCartSignInMode(@Nullable final AnonymousCartSignInMode anonymousCartSignInMode) {
+        return new CustomerSignInCommand(email, password, anonymousCartId, anonymousId, anonymousCartSignInMode);
     }
 
     @Override
@@ -86,5 +94,10 @@ public final class CustomerSignInCommand extends CommandImpl<CustomerSignInResul
     @Nullable
     public String getAnonymousId() {
         return anonymousId;
+    }
+
+    @Nullable
+    public AnonymousCartSignInMode getAnonymousCartSignInMode() {
+        return anonymousCartSignInMode;
     }
 }
