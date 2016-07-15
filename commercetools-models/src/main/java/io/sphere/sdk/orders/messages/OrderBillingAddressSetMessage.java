@@ -19,16 +19,16 @@ import java.time.ZonedDateTime;
  * @see Order#getBillingAddress()
  * @see io.sphere.sdk.orders.commands.updateactions.SetBillingAddress
  */
-@JsonDeserialize(as = BillingAddressSetMessage.class)//important to override annotation in Message class
-public final class BillingAddressSetMessage extends GenericMessageImpl<Order> {
-    public static final String MESSAGE_TYPE = "BillingAddressSet";
-    public static final MessageDerivateHint<BillingAddressSetMessage> MESSAGE_HINT = MessageDerivateHint.ofSingleMessageType(MESSAGE_TYPE, BillingAddressSetMessage.class, Order.referenceTypeId());
+@JsonDeserialize(as = OrderBillingAddressSetMessage.class)//important to override annotation in Message class
+public final class OrderBillingAddressSetMessage extends GenericMessageImpl<Order> {
+    public static final String MESSAGE_TYPE = "OrderBillingAddressSet";
+    public static final MessageDerivateHint<OrderBillingAddressSetMessage> MESSAGE_HINT = MessageDerivateHint.ofSingleMessageType(MESSAGE_TYPE, OrderBillingAddressSetMessage.class, Order.referenceTypeId());
 
     @Nullable
     private final Address address;
 
     @JsonCreator
-    private BillingAddressSetMessage(final String id, final Long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt, final JsonNode resource, final Long sequenceNumber, final Long resourceVersion, final String type, final Address address) {
+    private OrderBillingAddressSetMessage(final String id, final Long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt, final JsonNode resource, final Long sequenceNumber, final Long resourceVersion, final String type, final Address address) {
         super(id, version, createdAt, lastModifiedAt, resource, sequenceNumber, resourceVersion, type, Order.class);
         this.address = address;
     }

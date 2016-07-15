@@ -2,6 +2,7 @@ package io.sphere.sdk.orders.commands.updateactions;
 
 import io.sphere.sdk.commands.UpdateActionImpl;
 import io.sphere.sdk.orders.Order;
+import io.sphere.sdk.orders.messages.OrderCustomerEmailSetMessage;
 
 /**
   Sets the customer email.
@@ -11,7 +12,7 @@ import io.sphere.sdk.orders.Order;
  {@include.example io.sphere.sdk.orders.commands.OrderUpdateCommandIntegrationTest#setCustomerEmail()}
 
  @see Order#getCustomerEmail()
- @see io.sphere.sdk.orders.messages.CustomerEmailSetMessage
+ @see OrderCustomerEmailSetMessage
  */
 public final class SetCustomerEmail extends UpdateActionImpl<Order> {
     private final String email;

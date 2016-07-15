@@ -3,6 +3,7 @@ package io.sphere.sdk.orders.commands.updateactions;
 import io.sphere.sdk.commands.UpdateActionImpl;
 import io.sphere.sdk.models.Address;
 import io.sphere.sdk.orders.Order;
+import io.sphere.sdk.orders.messages.OrderShippingAddressSetMessage;
 
 import javax.annotation.Nullable;
 
@@ -14,7 +15,7 @@ import javax.annotation.Nullable;
  * {@include.example io.sphere.sdk.orders.commands.OrderUpdateCommandIntegrationTest#setShippingAddress()}
  *
  * @see Order#getShippingAddress()
- * @see io.sphere.sdk.orders.messages.ShippingAddressSetMessage
+ * @see OrderShippingAddressSetMessage
  */
 public final class SetShippingAddress extends UpdateActionImpl<Order> {
     @Nullable

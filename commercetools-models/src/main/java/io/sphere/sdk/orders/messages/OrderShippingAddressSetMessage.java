@@ -19,16 +19,16 @@ import java.time.ZonedDateTime;
  * @see Order#getShippingAddress()
  * @see io.sphere.sdk.orders.commands.updateactions.SetShippingAddress
  */
-@JsonDeserialize(as = ShippingAddressSetMessage.class)//important to override annotation in Message class
-public final class ShippingAddressSetMessage extends GenericMessageImpl<Order> {
-    public static final String MESSAGE_TYPE = "ShippingAddressSet";
-    public static final MessageDerivateHint<ShippingAddressSetMessage> MESSAGE_HINT = MessageDerivateHint.ofSingleMessageType(MESSAGE_TYPE, ShippingAddressSetMessage.class, Order.referenceTypeId());
+@JsonDeserialize(as = OrderShippingAddressSetMessage.class)//important to override annotation in Message class
+public final class OrderShippingAddressSetMessage extends GenericMessageImpl<Order> {
+    public static final String MESSAGE_TYPE = "OrderShippingAddressSet";
+    public static final MessageDerivateHint<OrderShippingAddressSetMessage> MESSAGE_HINT = MessageDerivateHint.ofSingleMessageType(MESSAGE_TYPE, OrderShippingAddressSetMessage.class, Order.referenceTypeId());
 
     @Nullable
     private final Address address;
 
     @JsonCreator
-    private ShippingAddressSetMessage(final String id, final Long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt, final JsonNode resource, final Long sequenceNumber, final Long resourceVersion, final String type, final Address address) {
+    private OrderShippingAddressSetMessage(final String id, final Long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt, final JsonNode resource, final Long sequenceNumber, final Long resourceVersion, final String type, final Address address) {
         super(id, version, createdAt, lastModifiedAt, resource, sequenceNumber, resourceVersion, type, Order.class);
         this.address = address;
     }
