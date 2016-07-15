@@ -1,16 +1,19 @@
 package io.sphere.sdk.orders.commands;
 
-import io.sphere.sdk.carts.CustomLineItem;
-import io.sphere.sdk.carts.ItemState;
-import io.sphere.sdk.carts.LineItem;
-import io.sphere.sdk.carts.LineItemLike;
+import com.neovisionaries.i18n.CountryCode;
+import io.sphere.sdk.carts.*;
 import io.sphere.sdk.messages.queries.MessageQuery;
+import io.sphere.sdk.models.Address;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Referenceable;
 import io.sphere.sdk.orders.*;
 import io.sphere.sdk.orders.commands.updateactions.*;
-import io.sphere.sdk.orders.messages.DeliveryAddedMessage;
-import io.sphere.sdk.orders.messages.OrderStateTransitionMessage;
+import io.sphere.sdk.orders.commands.updateactions.AddPayment;
+import io.sphere.sdk.orders.commands.updateactions.RemovePayment;
+import io.sphere.sdk.orders.commands.updateactions.SetBillingAddress;
+import io.sphere.sdk.orders.commands.updateactions.SetCustomerEmail;
+import io.sphere.sdk.orders.commands.updateactions.SetShippingAddress;
+import io.sphere.sdk.orders.messages.*;
 import io.sphere.sdk.orders.queries.OrderByIdGet;
 import io.sphere.sdk.orders.queries.OrderQuery;
 import io.sphere.sdk.payments.Payment;
@@ -21,13 +24,13 @@ import io.sphere.sdk.states.StateType;
 import io.sphere.sdk.test.IntegrationTest;
 import io.sphere.sdk.test.SphereTestUtils;
 import net.jcip.annotations.NotThreadSafe;
-import org.assertj.core.api.Assertions;
 import org.assertj.core.api.Condition;
 import org.junit.Test;
 
 import java.time.ZonedDateTime;
 import java.util.*;
 
+import static com.neovisionaries.i18n.CountryCode.DE;
 import static io.sphere.sdk.channels.ChannelFixtures.withOrderExportChannel;
 import static io.sphere.sdk.orders.OrderFixtures.*;
 import static io.sphere.sdk.payments.PaymentFixtures.withPayment;
@@ -384,5 +387,83 @@ public class OrderUpdateCommandIntegrationTest extends IntegrationTest {
             });
             return payment;
         });
+    }
+
+    @Test
+    public void setShippingAddress() {
+        withOrder(client(), order -> {
+            assertThat(order.getShippingAddress().getStreetNumber()).isNull();
+
+            final Address newAddress = order.getShippingAddress().withStreetNumber("5");
+            final Order updatedOrder = client().executeBlocking(OrderUpdateCommand.of(order, SetShippingAddress.of(newAddress)));
+
+            assertThat(updatedOrder.getShippingAddress().getStreetNumber()).isEqualTo("5");
+
+            //there is also a message
+            final Query<OrderShippingAddressSetMessage> messageQuery = MessageQuery.of()
+                    .withPredicates(m -> m.resource().is(order))
+                    .forMessageType(OrderShippingAddressSetMessage.MESSAGE_HINT);
+            assertEventually(() -> {
+                final Optional<OrderShippingAddressSetMessage> shippingAddressSetMessageOptional =
+                        client().executeBlocking(messageQuery).head();
+                assertThat(shippingAddressSetMessageOptional).isPresent();
+                final OrderShippingAddressSetMessage orderShippingAddressSetMessage = shippingAddressSetMessageOptional.get();
+                assertThat(orderShippingAddressSetMessage.getAddress()).isEqualTo(newAddress);
+            });
+
+            return updatedOrder;
+        });
+    }
+    
+    @Test
+    public void setBillingAddress() {
+        withOrder(client(), order -> {
+            assertThat(order.getBillingAddress()).isNull();
+
+            final Address newAddress = Address.of(DE).withStreetNumber("5");
+            final Order updatedOrder = client().executeBlocking(OrderUpdateCommand.of(order, SetBillingAddress.of(newAddress)));
+
+            assertThat(updatedOrder.getBillingAddress().getStreetNumber()).isEqualTo("5");
+
+            //there is also a message
+            final Query<OrderBillingAddressSetMessage> messageQuery = MessageQuery.of()
+                    .withPredicates(m -> m.resource().is(order))
+                    .forMessageType(OrderBillingAddressSetMessage.MESSAGE_HINT);
+            assertEventually(() -> {
+                final Optional<OrderBillingAddressSetMessage> billingAddressSetMessageOptional =
+                        client().executeBlocking(messageQuery).head();
+                assertThat(billingAddressSetMessageOptional).isPresent();
+                final OrderBillingAddressSetMessage orderBillingAddressSetMessage = billingAddressSetMessageOptional.get();
+                assertThat(orderBillingAddressSetMessage.getAddress()).isEqualTo(newAddress);
+            });
+
+            return updatedOrder;
+        });
+    }
+
+    @Test
+    public void setCustomerEmail() throws Exception {
+        withOrder(client(), order -> {
+            assertThat(order.getCustomerEmail()).isNotEmpty();
+            final String email = "info@commercetools.de";
+            final Order updatedOrder = client().executeBlocking(OrderUpdateCommand.of(order, SetCustomerEmail.of(email)));
+
+            assertThat(updatedOrder.getCustomerEmail()).contains(email);
+
+            //there is also a message
+            final Query<OrderCustomerEmailSetMessage> messageQuery = MessageQuery.of()
+                    .withPredicates(m -> m.resource().is(order))
+                    .forMessageType(OrderCustomerEmailSetMessage.MESSAGE_HINT);
+            assertEventually(() -> {
+                final Optional<OrderCustomerEmailSetMessage> customerEmailSetMessageOptional =
+                        client().executeBlocking(messageQuery).head();
+                assertThat(customerEmailSetMessageOptional).isPresent();
+                final OrderCustomerEmailSetMessage orderCustomerEmailSetMessage = customerEmailSetMessageOptional.get();
+                assertThat(orderCustomerEmailSetMessage.getEmail()).isEqualTo(email);
+            });
+
+            return updatedOrder;
+        });
+
     }
 }

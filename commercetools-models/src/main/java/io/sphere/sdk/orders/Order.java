@@ -8,6 +8,8 @@ import io.sphere.sdk.customergroups.CustomerGroup;
 import io.sphere.sdk.discountcodes.DiscountCodeInfo;
 import io.sphere.sdk.models.Address;
 import io.sphere.sdk.models.Reference;
+import io.sphere.sdk.orders.messages.OrderBillingAddressSetMessage;
+import io.sphere.sdk.orders.messages.OrderShippingAddressSetMessage;
 import io.sphere.sdk.states.State;
 import io.sphere.sdk.types.CustomFields;
 import io.sphere.sdk.types.TypeDraft;
@@ -125,6 +127,12 @@ public interface Order extends CartLike<Order> {
 
     Long getLastMessageSequenceNumber();
 
+    /**
+     * The billing address.
+     * @return address or null
+     * @see io.sphere.sdk.orders.commands.updateactions.SetBillingAddress
+     * @see OrderBillingAddressSetMessage
+     */
     @Override
     @Nullable
     Address getBillingAddress();
@@ -151,6 +159,13 @@ public interface Order extends CartLike<Order> {
     @Override
     List<LineItem> getLineItems();
 
+    /**
+     * The shipping address.
+     *
+     * @see io.sphere.sdk.orders.commands.updateactions.SetShippingAddress
+     * @see OrderShippingAddressSetMessage
+     * @return address or null
+     */
     @Override
     @Nullable
     Address getShippingAddress();
