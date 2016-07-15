@@ -31,7 +31,7 @@ public class SimpleMetricsSphereClientTest {
         metricClient.execute(ProjectGet.of()).toCompletableFuture().join();
         assertThat(Logger.getAndClear()).matches("observed: ObservedSerializationDuration\\[requestId=1,durationInMilliseconds=\\d+,request=ProjectGet\\[\\]\\]\n" +
                 "observed: ObservedDeserializationDuration\\[correlationId=ID-123456,httpResponse=.*,result=.*,requestId=1,durationInMilliseconds=\\d+,request=ProjectGet\\[\\]\\]\n" +
-                "observed: ObservedTotalDuration\\[correlationId=ID-123456,successResult=ProjectImpl\\[key=<null>,name=<null>,countries=<null>,languages=<null>,currencies=<null>,createdAt=<null>,trialUntil=<null>\\],errorResult=<null>,requestId=1,durationInMilliseconds=\\d+,request=ProjectGet\\[\\]\\]");
+                "observed: ObservedTotalDuration\\[correlationId=ID-123456,successResult=ProjectImpl\\[key=<null>,name=<null>,countries=<null>,languages=<null>,currencies=<null>,createdAt=<null>,trialUntil=<null>,messages=<null>\\],errorResult=<null>,requestId=1,durationInMilliseconds=\\d+,request=ProjectGet\\[\\]\\]");
     }
 
 
