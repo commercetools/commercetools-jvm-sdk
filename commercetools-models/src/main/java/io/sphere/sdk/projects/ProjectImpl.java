@@ -7,9 +7,6 @@ import io.sphere.sdk.models.Base;
 
 import java.time.ZonedDateTime;
 import java.util.List;
-import java.util.Locale;
-
-import static java.util.stream.Collectors.toList;
 
 final class ProjectImpl extends Base implements Project {
     private final String key;
@@ -19,9 +16,10 @@ final class ProjectImpl extends Base implements Project {
     private final List<String> currencies;
     private final ZonedDateTime createdAt;
     private final ZonedDateTime trialUntil;
+    private final MessagesConfiguration messages;
 
     @JsonCreator
-    ProjectImpl(final String key, final String name, final List<CountryCode> countries, final List<String> languages, final List<String> currencies, final ZonedDateTime createdAt, @JsonDeserialize(using = TrialUntilDeserializer.class) final ZonedDateTime trialUntil) {
+    ProjectImpl(final String key, final String name, final List<CountryCode> countries, final List<String> languages, final List<String> currencies, final ZonedDateTime createdAt, @JsonDeserialize(using = TrialUntilDeserializer.class) final ZonedDateTime trialUntil, final MessagesConfiguration messages) {
         this.key = key;
         this.name = name;
         this.countries = countries;
@@ -29,6 +27,7 @@ final class ProjectImpl extends Base implements Project {
         this.currencies = currencies;
         this.createdAt = createdAt;
         this.trialUntil = trialUntil;
+        this.messages = messages;
     }
 
     public String getKey() {
@@ -58,5 +57,10 @@ final class ProjectImpl extends Base implements Project {
 
     public List<String> getCurrencies() {
         return currencies;
+    }
+
+    @Override
+    public MessagesConfiguration getMessages() {
+        return messages;
     }
 }

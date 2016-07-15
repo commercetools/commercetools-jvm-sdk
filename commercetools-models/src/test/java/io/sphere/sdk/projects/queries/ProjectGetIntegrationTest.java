@@ -22,6 +22,7 @@ public class ProjectGetIntegrationTest extends IntegrationTest {
             soft.assertThat(project.getTrialUntil()).as("trialUntil").isNotNull();
             soft.assertThat(project.getCurrencies()).as("currencies").contains("EUR");
             soft.assertThat(project.getCurrencyUnits()).as("currencies as unit").contains(EUR);
+            soft.assertThat(project.getMessages().isEnabled()).isTrue();
         });
     }
 }

@@ -76,6 +76,8 @@ public interface Project extends CreationTimestamped, WithKey {
                 .collect(toList());
     }
 
+    MessagesConfiguration getMessages();
+
     /**
      * Creates a container which contains the full Java type information to deserialize this class from JSON.
      *
