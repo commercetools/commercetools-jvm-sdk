@@ -115,6 +115,7 @@ authUrl=https://auth.sphere.io
 1. use `mvn -Dit.test=*Product* -DfailIfNoTests=false verify` to execute all integration test classes which have "Product" in the class name
 1. for running the unit tests use `mvn test`
 1. alternatively use your IDE to execute the tests
+1. for some IDEs like IntelliJ IDEA you need to add the Javac flag "-parameters"
 
 
 [](definitions for the top badges)
