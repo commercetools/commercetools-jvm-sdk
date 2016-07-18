@@ -86,6 +86,21 @@ import java.util.function.Function;
  </ul>
  -->
 
+ <h3 class=released-version id="v1_2_0">1.2.0 (18.07.2016)</h3>
+ <p>Thanks to Cristian for his contributions!</p>
+ <ul>
+ <li class=new-in-release>{@link CategoryDraft} and {@link io.sphere.sdk.categories.CategoryDraftBuilder}
+ contain the fields "metaTitle", "metaDescription" and "metaKeywords".</li>
+ <li class=new-in-release>added {@link Project#getMessages()}</li>
+ <li class=new-in-release>added new update actions for {@link Order}:
+ {@link io.sphere.sdk.orders.commands.updateactions.SetCustomerEmail},
+ {@link io.sphere.sdk.orders.commands.updateactions.SetShippingAddress} and
+ {@link io.sphere.sdk.orders.commands.updateactions.SetBillingAddress}</li>
+ <li class=new-in-release>added new messages for {@link Order}: {@link io.sphere.sdk.orders.messages.OrderCustomerEmailSetMessage},
+ {@link io.sphere.sdk.orders.messages.OrderShippingAddressSetMessage} and
+ {@link io.sphere.sdk.orders.messages.OrderBillingAddressSetMessage}</li>
+ </ul>
+
  <h3 class=released-version id="v1_1_0">1.1.0 (11.07.2016)</h3>
  <p>Thanks to Sarah and Martin for their contributions!</p>
 
