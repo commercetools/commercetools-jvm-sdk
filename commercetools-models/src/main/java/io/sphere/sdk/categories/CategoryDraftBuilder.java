@@ -24,6 +24,12 @@ public final class CategoryDraftBuilder extends Base implements Builder<Category
     private String externalId;
     @Nullable
     private CustomFieldsDraft custom;
+    @Nullable
+    private LocalizedString metaTitle;
+    @Nullable
+    private LocalizedString metaDescription;
+    @Nullable
+    private LocalizedString metaKeywords;    
 
     private CategoryDraftBuilder(final CategoryDraft d) {
         name = d.getName();
@@ -33,6 +39,9 @@ public final class CategoryDraftBuilder extends Base implements Builder<Category
         orderHint = d.getOrderHint();
         externalId = d.getExternalId();
         custom = d.getCustom();
+        metaTitle = d.getMetaTitle();
+        metaDescription = d.getMetaDescription();
+        metaKeywords = d.getMetaKeywords();
     }
 
     private CategoryDraftBuilder(final LocalizedString name, final LocalizedString slug) {
@@ -73,7 +82,22 @@ public final class CategoryDraftBuilder extends Base implements Builder<Category
         return this;
     }
 
+    public CategoryDraftBuilder metaTitle(@Nullable final LocalizedString metaTitle) {
+        this.metaTitle = metaTitle;
+        return this;
+    }
+
+    public CategoryDraftBuilder metaDescription(@Nullable final LocalizedString metaDescription) {
+        this.metaDescription = metaDescription;
+        return this;
+    }
+
+    public CategoryDraftBuilder metaKeywords(@Nullable final LocalizedString metaKeywords) {
+        this.metaKeywords = metaKeywords;
+        return this;
+    }
+
     public CategoryDraft build() {
-        return new CategoryDraftImpl(name, slug, description, parent, orderHint, externalId, custom);
+        return new CategoryDraftImpl(name, slug, description, parent, orderHint, externalId, custom, metaTitle, metaDescription, metaKeywords);
     }
 }
