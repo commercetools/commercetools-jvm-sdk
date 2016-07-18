@@ -27,10 +27,20 @@ public class CategoryCreateCommandIntegrationTest extends IntegrationTest {
         final LocalizedString name = LocalizedString.of(Locale.ENGLISH, "winter clothing");
         final LocalizedString slug = name.slugifiedUnique();
         final String externalId = randomKey();
-        final CategoryDraft categoryDraft = CategoryDraftBuilder.of(name, slug).externalId(externalId).build();
+        final LocalizedString metaDescription = LocalizedString.of(Locale.ENGLISH, "winter clothing to keep you warm");
+        final LocalizedString metaTitle = LocalizedString.of(Locale.ENGLISH, "winter warm clothing");
+        final LocalizedString metaKeywords = LocalizedString.of(Locale.ENGLISH, "winter,clothes");
+        final CategoryDraft categoryDraft = CategoryDraftBuilder.of(name, slug)
+                .metaDescription(metaDescription)
+                .metaTitle(metaTitle)
+                .metaKeywords(metaKeywords)
+                .externalId(externalId).build();
         final Category category = client().executeBlocking(CategoryCreateCommand.of(categoryDraft));
         assertThat(category.getName()).isEqualTo(name);
         assertThat(category.getSlug()).isEqualTo(slug);
+        assertThat(category.getMetaTitle()).isEqualTo(metaTitle);
+        assertThat(category.getMetaDescription()).isEqualTo(metaDescription);
+        assertThat(category.getMetaKeywords()).isEqualTo(metaKeywords);
         assertThat(category.getExternalId()).contains(externalId);
     }
 
