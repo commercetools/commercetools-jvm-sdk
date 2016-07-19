@@ -12,6 +12,7 @@ io.sphere.sdk.categories
 io.sphere.sdk.categories.commands
 io.sphere.sdk.categories.commands.updateactions
 io.sphere.sdk.categories.expansion
+io.sphere.sdk.categories.messages
 io.sphere.sdk.categories.queries
 io.sphere.sdk.channels
 io.sphere.sdk.channels.commands
@@ -31,6 +32,7 @@ io.sphere.sdk.customers.commands
 io.sphere.sdk.customers.commands.updateactions
 io.sphere.sdk.customers.errors
 io.sphere.sdk.customers.expansion
+io.sphere.sdk.customers.messages
 io.sphere.sdk.customers.queries
 io.sphere.sdk.customobjects
 io.sphere.sdk.customobjects.commands
