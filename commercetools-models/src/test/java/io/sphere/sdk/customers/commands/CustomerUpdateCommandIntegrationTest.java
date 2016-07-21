@@ -12,6 +12,7 @@ import org.junit.Test;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Locale;
 import java.util.function.Predicate;
 
 import static io.sphere.sdk.customergroups.CustomerGroupFixtures.withB2cCustomerGroup;
@@ -221,6 +222,15 @@ public class CustomerUpdateCommandIntegrationTest extends CustomerIntegrationTes
                 final Customer updateCustomer = client().executeBlocking(CustomerUpdateCommand.of(customer, SetCustomerGroup.of(customerGroup)));
                 assertThat(updateCustomer.getCustomerGroup()).isEqualTo(customerGroup.toReference());
             });
+        });
+    }
+
+    @Test
+    public void locale() {
+        withCustomer(client(), customer -> {
+            assertThat(customer.getLocale()).isNull();
+            final Customer updatedCustomer = client().executeBlocking(CustomerUpdateCommand.of(customer, SetLocale.of(Locale.GERMAN)));
+            assertThat(updatedCustomer.getLocale()).isEqualTo(GERMAN);
         });
     }
 }
