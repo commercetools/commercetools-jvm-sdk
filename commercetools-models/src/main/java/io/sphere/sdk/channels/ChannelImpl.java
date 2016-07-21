@@ -1,6 +1,7 @@
 package io.sphere.sdk.channels;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import io.sphere.sdk.models.Address;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.ResourceImpl;
 import io.sphere.sdk.reviews.ReviewRatingStatistics;
@@ -21,12 +22,14 @@ class ChannelImpl extends ResourceImpl<Channel> implements Channel {
     private final ReviewRatingStatistics reviewRatingStatistics;
     @Nullable
     private final CustomFields custom;
+    @Nullable
+    private final Address address;
 
     @JsonCreator
     ChannelImpl(final String id, final Long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt,
                 final String key, final Set<ChannelRole> roles, @Nullable final LocalizedString name,
                 @Nullable final LocalizedString description, @Nullable final ReviewRatingStatistics reviewRatingStatistics,
-                @Nullable final CustomFields custom) {
+                @Nullable final CustomFields custom, @Nullable final Address address) {
         super(id, version, createdAt, lastModifiedAt);
         this.key = key;
         this.roles = roles;
@@ -34,6 +37,7 @@ class ChannelImpl extends ResourceImpl<Channel> implements Channel {
         this.description = description;
         this.reviewRatingStatistics = reviewRatingStatistics;
         this.custom = custom;
+        this.address = address;
     }
 
     public String getKey() {
@@ -64,5 +68,11 @@ class ChannelImpl extends ResourceImpl<Channel> implements Channel {
     @Nullable
     public CustomFields getCustom() {
         return custom;
+    }
+
+    @Override
+    @Nullable
+    public Address getAddress() {
+        return address;
     }
 }

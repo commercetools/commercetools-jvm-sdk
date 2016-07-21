@@ -3,6 +3,7 @@ package io.sphere.sdk.channels.commands;
 import io.sphere.sdk.channels.Channel;
 import io.sphere.sdk.channels.ChannelRole;
 import io.sphere.sdk.channels.commands.updateactions.*;
+import io.sphere.sdk.models.Address;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.test.IntegrationTest;
 import org.junit.Test;
@@ -11,6 +12,7 @@ import java.util.Set;
 
 import static io.sphere.sdk.channels.ChannelFixtures.withUpdatableChannelOfRole;
 import static io.sphere.sdk.channels.ChannelRole.*;
+import static io.sphere.sdk.test.SphereTestUtils.DE;
 import static io.sphere.sdk.test.SphereTestUtils.randomKey;
 import static io.sphere.sdk.test.SphereTestUtils.randomSlug;
 import static io.sphere.sdk.utils.SphereInternalUtils.asSet;
@@ -73,6 +75,16 @@ public class ChannelUpdateCommandIntegrationTest extends IntegrationTest {
             final Set<ChannelRole> roles = asSet(ORDER_IMPORT);
             final Channel updatedChannel = client().executeBlocking(ChannelUpdateCommand.of(channel, RemoveRoles.of(roles)));
             assertThat(updatedChannel.getRoles()).containsOnly(PRIMARY);
+            return updatedChannel;
+        });
+    }
+
+    @Test
+    public void setAddress() throws Exception {
+        withUpdatableChannelOfRole(client(), asSet(PRIMARY), channel -> {
+            final Address address = Address.of(DE).withCity("Berlin");
+            final Channel updatedChannel = client().executeBlocking(ChannelUpdateCommand.of(channel, SetAddress.of(address)));
+            assertThat(updatedChannel.getAddress()).isEqualTo(address);
             return updatedChannel;
         });
     }

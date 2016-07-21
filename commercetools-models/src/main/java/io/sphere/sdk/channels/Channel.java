@@ -3,10 +3,7 @@ package io.sphere.sdk.channels;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import io.sphere.sdk.carts.LineItem;
-import io.sphere.sdk.models.LocalizedString;
-import io.sphere.sdk.models.Resource;
-import io.sphere.sdk.models.Reference;
-import io.sphere.sdk.models.WithKey;
+import io.sphere.sdk.models.*;
 import io.sphere.sdk.orders.SyncInfo;
 import io.sphere.sdk.reviews.Review;
 import io.sphere.sdk.reviews.ReviewDraft;
@@ -151,4 +148,12 @@ public interface Channel extends Resource<Channel>, WithKey, Custom {
     @Nullable
     @Override
     CustomFields getCustom();
+
+    /**
+     * The address of a channel.
+     * @return null or address
+     * @see io.sphere.sdk.channels.commands.updateactions.SetAddress
+     */
+    @Nullable
+    Address getAddress();
 }

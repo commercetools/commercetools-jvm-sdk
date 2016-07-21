@@ -5,6 +5,7 @@ import io.sphere.sdk.channels.ChannelDraft;
 import io.sphere.sdk.channels.ChannelRole;
 import io.sphere.sdk.channels.queries.ChannelQuery;
 import io.sphere.sdk.json.SphereJsonUtils;
+import io.sphere.sdk.models.Address;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.test.IntegrationTest;
@@ -13,6 +14,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import static com.neovisionaries.i18n.CountryCode.DE;
 import static io.sphere.sdk.channels.ChannelFixtures.withChannel;
 import static io.sphere.sdk.utils.SphereInternalUtils.asSet;
 import static java.util.Arrays.asList;
@@ -34,15 +36,18 @@ public class ChannelCreateCommandIntegrationTest extends IntegrationTest {
     @Test
     public void execution() throws Exception {
         final String key = "demo-key";
+        final Address address = Address.of(DE).withCity("Berlin");
         final ChannelDraft channelDraft = ChannelDraft.of(key)
                 .withName(LocalizedString.of(ENGLISH, "name"))
                 .withDescription(LocalizedString.of(ENGLISH, "description"))
-                .withRoles(ChannelRole.INVENTORY_SUPPLY);
+                .withRoles(ChannelRole.INVENTORY_SUPPLY)
+                .withAddress(address);
         final Channel channel = client().executeBlocking(ChannelCreateCommand.of(channelDraft));
         assertThat(channel.getKey()).isEqualTo(key);
         assertThat(channel.getName()).isEqualTo(LocalizedString.of(ENGLISH, "name"));
         assertThat(channel.getDescription()).isEqualTo(LocalizedString.of(ENGLISH, "description"));
         assertThat(channel.getRoles()).isEqualTo(asSet(ChannelRole.INVENTORY_SUPPLY));
+        assertThat(channel.getAddress()).isEqualTo(address);
     }
 
     @Test

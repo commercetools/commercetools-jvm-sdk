@@ -2,6 +2,7 @@ package io.sphere.sdk.channels;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import io.sphere.sdk.models.Address;
 import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.types.CustomFieldsDraft;
@@ -21,22 +22,24 @@ public final class ChannelDraftDsl extends Base implements ChannelDraft {
     private final LocalizedString name;
     @Nullable
     private final LocalizedString description;
-
     @Nullable
     private final CustomFieldsDraft custom;
+    @Nullable
+    private final Address address;
 
     @JsonCreator
     ChannelDraftDsl(final String key, @Nullable final Set<ChannelRole> roles, @Nullable final LocalizedString name,
-                    @Nullable final LocalizedString description, @Nullable final CustomFieldsDraft custom) {
+                    @Nullable final LocalizedString description, @Nullable final CustomFieldsDraft custom, @Nullable final Address address) {
         this.key = key;
         this.roles = roles;
         this.name = name;
         this.description = description;
         this.custom = custom;
+        this.address = address;
     }
 
     public static ChannelDraftDsl of(final String key) {
-        return new ChannelDraftDsl(key, Collections.emptySet(), null, null, null);
+        return new ChannelDraftDsl(key, Collections.emptySet(), null, null, null, null);
     }
 
     @Override
@@ -67,6 +70,12 @@ public final class ChannelDraftDsl extends Base implements ChannelDraft {
         return custom;
     }
 
+    @Override
+    @Nullable
+    public Address getAddress() {
+        return address;
+    }
+
     public ChannelDraftDsl withRoles(@Nullable final Set<ChannelRole> roles) {
         return newBuilder().roles(roles).build();
     }
@@ -89,5 +98,9 @@ public final class ChannelDraftDsl extends Base implements ChannelDraft {
 
     public ChannelDraftDsl withDescription(@Nullable final LocalizedString description) {
         return newBuilder().description(description).build();
+    }
+
+    public ChannelDraftDsl withAddress(@Nullable final Address address) {
+        return newBuilder().address(address).build();
     }
 }
