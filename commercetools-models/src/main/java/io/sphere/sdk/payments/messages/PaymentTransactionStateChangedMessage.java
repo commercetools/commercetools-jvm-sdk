@@ -23,14 +23,20 @@ public final class PaymentTransactionStateChangedMessage extends GenericMessageI
             MessageDerivateHint.ofSingleMessageType(MESSAGE_TYPE, PaymentTransactionStateChangedMessage.class, Payment.referenceTypeId());
 
     private final TransactionState state;
+    private final String transactionId;
 
     @JsonCreator
-    private PaymentTransactionStateChangedMessage(final String id, final Long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt, final JsonNode resource, final Long sequenceNumber, final Long resourceVersion, final String type, final TransactionState state) {
+    private PaymentTransactionStateChangedMessage(final String id, final Long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt, final JsonNode resource, final Long sequenceNumber, final Long resourceVersion, final String type, final TransactionState state, final String transactionId) {
         super(id, version, createdAt, lastModifiedAt, resource, sequenceNumber, resourceVersion, type, Payment.class);
         this.state = state;
+        this.transactionId = transactionId;
     }
 
     public TransactionState getState() {
         return state;
+    }
+
+    public String getTransactionId() {
+        return transactionId;
     }
 }
