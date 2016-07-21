@@ -60,6 +60,8 @@ public final class AddressBuilder extends Base implements Builder<Address> {
     String email;
     @Nullable
     String additionalAddressInfo;
+    @Nullable
+    String fax;
 
 
     AddressBuilder(final CountryCode country) {
@@ -89,6 +91,7 @@ public final class AddressBuilder extends Base implements Builder<Address> {
         builder.mobile = address.mobile;
         builder.email = address.email;
         builder.additionalAddressInfo = address.additionalAddressInfo;
+        builder.fax = address.fax;
         return builder;
     }
 
@@ -209,6 +212,11 @@ public final class AddressBuilder extends Base implements Builder<Address> {
     
     public AddressBuilder additionalAddressInfo(@Nullable final String additionalAddressInfo) {
         this.additionalAddressInfo = additionalAddressInfo;
+        return this;
+    }
+
+    public AddressBuilder fax(@Nullable final String fax) {
+        this.fax = fax;
         return this;
     }
 }

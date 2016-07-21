@@ -14,4 +14,11 @@ public final class AddressTest {
                 .isNotEqualTo(addressWithId)
                 .matches(address -> address.equalsIgnoreId(addressWithId));
     }
+
+    @Test
+    public void fax() {
+        final String fax = "030000000";
+        final Address address = Address.of(CountryCode.DE).withFax(fax);
+        assertThat(address.getFax()).isEqualTo(fax);
+    }
 }
