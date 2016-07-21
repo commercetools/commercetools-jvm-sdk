@@ -11,7 +11,7 @@ import java.util.Locale;
  *
  * {@doc.gen intro}
  *
- * {@include.example }
+ * {@include.example io.sphere.sdk.customers.commands.CustomerUpdateCommandIntegrationTest#locale()}
  */
 public final class SetLocale extends UpdateActionImpl<Customer> {
     @Nullable
