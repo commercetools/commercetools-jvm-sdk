@@ -2,6 +2,7 @@ package io.sphere.sdk.carts.commands;
 
 import com.neovisionaries.i18n.CountryCode;
 import io.sphere.sdk.carts.*;
+import io.sphere.sdk.carts.queries.CartQuery;
 import io.sphere.sdk.models.Address;
 import io.sphere.sdk.test.IntegrationTest;
 import io.sphere.sdk.test.JsonNodeReferenceResolver;
@@ -32,7 +33,12 @@ public class CartCreateCommandIntegrationTest extends IntegrationTest {
     public static void prepare() {
         client().executeBlocking(TypeQuery.of().withPredicates(m -> m.key().is("json-demo-type-key")))
                 .getResults()
-                .forEach(type -> client().executeBlocking(TypeDeleteCommand.of(type)));
+                .forEach(type -> {
+                    client().executeBlocking(CartQuery.of().withPredicates(m -> m.custom().type().is(type)))
+                            .getResults()
+                            .forEach(cart -> client().executeBlocking(CartDeleteCommand.of(cart)));
+                    client().executeBlocking(TypeDeleteCommand.of(type));
+                });
     }
 
     @Test
@@ -139,7 +145,8 @@ public class CartCreateCommandIntegrationTest extends IntegrationTest {
                 assertThat(customLineItem.getMoney()).isEqualTo(EURO_20);
                 assertThat(customLineItem.getSlug()).isEqualTo("foo");
                 assertThat(customLineItem.getTaxCategory()).isEqualTo(product.getTaxCategory());
-                assertThat(cart.getShippingAddress()).isEqualTo(Address.of(DE).withLastName("Osgood"));
+                        final Address expectedAddress = Address.of(DE).withLastName("Osgood").withFax("0300000000");
+                        assertThat(cart.getShippingAddress()).isEqualTo(expectedAddress);
                 assertThat(cart.getCustom().getFieldAsString("stringField")).isEqualTo("bar");
 
                 client().executeBlocking(CartDeleteCommand.of(cart));
