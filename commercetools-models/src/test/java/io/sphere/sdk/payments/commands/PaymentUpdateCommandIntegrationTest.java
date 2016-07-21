@@ -346,7 +346,9 @@ public class PaymentUpdateCommandIntegrationTest extends IntegrationTest {
                         .withPredicates(m -> m.resource().is(payment))
                         .forMessageType(PaymentTransactionStateChangedMessage.MESSAGE_HINT));
                 assertThat(messageQueryResult.head()).isPresent();
-                assertThat(messageQueryResult.head().get().getState()).isEqualTo(transactionState);
+                final PaymentTransactionStateChangedMessage message = messageQueryResult.head().get();
+                assertThat(message.getState()).isEqualTo(transactionState);
+                assertThat(message.getTransactionId()).isEqualTo(transaction.getId());
             });
 
             return updatedPayment;
