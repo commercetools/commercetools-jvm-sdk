@@ -15,6 +15,7 @@ import org.junit.Test;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Locale;
 
 import static io.sphere.sdk.customergroups.CustomerGroupFixtures.withB2cCustomerGroup;
 import static io.sphere.sdk.customers.CustomerFixtures.CUSTOMER_NAME;
@@ -45,6 +46,7 @@ public class CustomerCreateCommandIntegrationTest extends CustomerIntegrationTes
         final boolean emailVerified = true;
         final List<Address> addresses = asList(Address.of(DE), Address.of(GB));
         final CustomerDraft draft = CustomerDraftDsl.of(name, email, password)
+                .withLocale(GERMAN)
                 .withExternalId(externalId)
                 .withDateOfBirth(dateOfBirth)
                 .withCompanyName(companyName)
@@ -68,6 +70,7 @@ public class CustomerCreateCommandIntegrationTest extends CustomerIntegrationTes
                 .as("password is not stored in clear text")
                 .isNotEqualTo(password);
         assertThat(customer.getExternalId()).contains(externalId);
+        assertThat(customer.getLocale()).isEqualTo(GERMAN);
         assertThat(cart).isNull();
         assertThat(customer.getDateOfBirth()).isEqualTo(dateOfBirth);
         assertThat(customer.getCompanyName()).contains(companyName);

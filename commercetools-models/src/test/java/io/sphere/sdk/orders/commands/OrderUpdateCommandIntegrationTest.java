@@ -36,9 +36,7 @@ import static io.sphere.sdk.orders.OrderFixtures.*;
 import static io.sphere.sdk.payments.PaymentFixtures.withPayment;
 import static io.sphere.sdk.states.StateFixtures.withStandardStates;
 import static io.sphere.sdk.states.StateFixtures.withStateByBuilder;
-import static io.sphere.sdk.test.SphereTestUtils.asList;
-import static io.sphere.sdk.test.SphereTestUtils.assertEventually;
-import static io.sphere.sdk.test.SphereTestUtils.randomString;
+import static io.sphere.sdk.test.SphereTestUtils.*;
 import static io.sphere.sdk.utils.SphereInternalUtils.asSet;
 import static io.sphere.sdk.utils.SphereInternalUtils.setOf;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -465,5 +463,15 @@ public class OrderUpdateCommandIntegrationTest extends IntegrationTest {
             return updatedOrder;
         });
 
+    }
+
+    @Test
+    public void locale() {
+        withOrder(client(), order -> {
+            assertThat(order.getLocale()).isNull();
+            final Order updatedOrder = client().executeBlocking(OrderUpdateCommand.of(order, SetLocale.of(Locale.GERMAN)));
+            assertThat(updatedOrder.getLocale()).isEqualTo(GERMAN);
+            return updatedOrder;
+        });
     }
 }

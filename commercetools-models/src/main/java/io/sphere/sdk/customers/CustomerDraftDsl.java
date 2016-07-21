@@ -1,5 +1,6 @@
 package io.sphere.sdk.customers;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.sphere.sdk.carts.Cart;
 import io.sphere.sdk.customergroups.CustomerGroup;
@@ -12,6 +13,7 @@ import io.sphere.sdk.types.CustomFieldsDraft;
 import javax.annotation.Nullable;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Locale;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -53,8 +55,10 @@ public final class CustomerDraftDsl extends Base implements CustomerDraft {
     private final CustomFieldsDraft custom;
     @Nullable
     private final String anonymousId;
+    @Nullable
+    private final Locale locale;
 
-
+    @JsonCreator
     CustomerDraftDsl(@Nullable final String customerNumber, final String email,
                      final String firstName, final String lastName, final String middleName,
                      final String password, final String title,
@@ -64,7 +68,8 @@ public final class CustomerDraftDsl extends Base implements CustomerDraft {
                      @Nullable final Boolean emailVerified, @Nullable final Reference<CustomerGroup> customerGroup,
                      @Nullable final Integer defaultBillingAddress, @Nullable final Integer defaultShippingAddress,
                      final List<Address> addresses, @Nullable final CustomFieldsDraft custom,
-                     @Nullable final String anonymousId) {
+                     @Nullable final String anonymousId,
+                     @Nullable final Locale locale) {
         this.customerNumber = customerNumber;
         this.email = email;
         this.firstName = firstName;
@@ -82,6 +87,7 @@ public final class CustomerDraftDsl extends Base implements CustomerDraft {
         this.addresses = addresses;
         this.custom = custom;
         this.anonymousId = anonymousId;
+        this.locale = locale;
         if (!isValidAddressIndex(addresses, defaultBillingAddress)
                 || !isValidAddressIndex(addresses, defaultShippingAddress)) {
             throw new IllegalArgumentException("The defaultBillingAddress and defaultShippingAddress cannot contain an index which is not in the address list");
@@ -213,6 +219,12 @@ public final class CustomerDraftDsl extends Base implements CustomerDraft {
         return anonymousId;
     }
 
+    @Override
+    @Nullable
+    public Locale getLocale() {
+        return locale;
+    }
+
     public CustomerDraftDsl withCustomerNumber(@Nullable final String customerNumber) {
         return newBuilder().customerNumber(customerNumber).build();
     }
@@ -282,6 +294,10 @@ public final class CustomerDraftDsl extends Base implements CustomerDraft {
 
     public CustomerDraftDsl withCustom(@Nullable final CustomFieldsDraft custom) {
         return newBuilder().custom(custom).build();
+    }
+
+    public CustomerDraftDsl withLocale(@Nullable final Locale locale) {
+        return newBuilder().locale(locale).build();
     }
 
     private CustomerDraftBuilder newBuilder() {

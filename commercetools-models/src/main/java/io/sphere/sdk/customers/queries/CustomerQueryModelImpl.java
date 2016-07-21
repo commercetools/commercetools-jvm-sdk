@@ -67,4 +67,9 @@ final class CustomerQueryModelImpl extends CustomResourceQueryModelImpl<Customer
     public QueryPredicate<Customer> is(final Identifiable<Customer> identifiable) {
         return super.is(identifiable);
     }
+
+    @Override
+    public LocaleQueryModel<Customer> locale() {
+        return localeQuerySortingModel("locale");
+    }
 }

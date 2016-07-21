@@ -11,6 +11,7 @@ import io.sphere.sdk.types.CustomFieldsDraft;
 import javax.annotation.Nullable;
 import javax.money.CurrencyUnit;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * <p>Draft for {@link Cart} creation.</p>
@@ -57,6 +58,9 @@ public interface CartDraft extends CustomDraft {
 
     @Nullable
     String getAnonymousId();
+
+    @Nullable
+    Locale getLocale();
 
     static CartDraftDsl of(final CurrencyUnit currency) {
         return CartDraftDsl.of(currency);

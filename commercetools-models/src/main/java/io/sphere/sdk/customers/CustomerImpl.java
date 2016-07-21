@@ -5,14 +5,13 @@ import io.sphere.sdk.customergroups.CustomerGroup;
 import io.sphere.sdk.models.Address;
 import io.sphere.sdk.models.ResourceImpl;
 import io.sphere.sdk.models.Reference;
-import io.sphere.sdk.models.SdkDefaults;
 import io.sphere.sdk.types.CustomFields;
-import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import javax.annotation.Nullable;
 import java.time.LocalDate;
 import java.time.ZonedDateTime;
 import java.util.List;
+import java.util.Locale;
 
 class CustomerImpl extends ResourceImpl<Customer> implements Customer {
     @Nullable
@@ -43,9 +42,11 @@ class CustomerImpl extends ResourceImpl<Customer> implements Customer {
     private final LocalDate dateOfBirth;
     @Nullable
     private final CustomFields custom;
+    @Nullable
+    private final Locale locale;
 
     @JsonCreator
-    public CustomerImpl(final String id, final Long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt, @Nullable final String customerNumber, final String email, final String firstName, final String lastName, final String password, @Nullable final String middleName, @Nullable final String title, final List<Address> addresses, @Nullable final String defaultShippingAddressId, @Nullable final String defaultBillingAddressId, final Boolean isEmailVerified, @Nullable final String externalId, @Nullable final Reference<CustomerGroup> customerGroup, @Nullable final String companyName, @Nullable final String vatId, @Nullable final LocalDate dateOfBirth, @Nullable final CustomFields custom) {
+    public CustomerImpl(final String id, final Long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt, @Nullable final String customerNumber, final String email, final String firstName, final String lastName, final String password, @Nullable final String middleName, @Nullable final String title, final List<Address> addresses, @Nullable final String defaultShippingAddressId, @Nullable final String defaultBillingAddressId, final Boolean isEmailVerified, @Nullable final String externalId, @Nullable final Reference<CustomerGroup> customerGroup, @Nullable final String companyName, @Nullable final String vatId, @Nullable final LocalDate dateOfBirth, @Nullable final CustomFields custom, @Nullable final Locale locale) {
         super(id, version, createdAt, lastModifiedAt);
         this.customerNumber = customerNumber;
         this.email = email;
@@ -64,6 +65,7 @@ class CustomerImpl extends ResourceImpl<Customer> implements Customer {
         this.vatId = vatId;
         this.dateOfBirth = dateOfBirth;
         this.custom = custom;
+        this.locale = locale;
     }
 
     @Nullable
@@ -160,5 +162,11 @@ class CustomerImpl extends ResourceImpl<Customer> implements Customer {
     @Nullable
     public CustomFields getCustom() {
         return custom;
+    }
+
+    @Override
+    @Nullable
+    public Locale getLocale() {
+        return locale;
     }
 }

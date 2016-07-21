@@ -26,6 +26,7 @@ import org.junit.Test;
 import javax.money.MonetaryAmount;
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Locale;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -406,6 +407,16 @@ public class CartUpdateCommandIntegrationTest extends IntegrationTest {
                 return cartWithoutPayment;
             });
             return payment;
+        });
+    }
+
+    @Test
+    public void locale() {
+        withCart(client(), cart -> {
+            assertThat(cart.getLocale()).isNull();
+            final Cart updatedCart = client().executeBlocking(CartUpdateCommand.of(cart, SetLocale.of(Locale.GERMAN)));
+            assertThat(updatedCart.getLocale()).isEqualTo(GERMAN);
+            return updatedCart;
         });
     }
 }

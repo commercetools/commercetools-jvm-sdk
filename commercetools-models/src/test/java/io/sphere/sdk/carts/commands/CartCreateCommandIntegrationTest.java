@@ -69,6 +69,7 @@ public class CartCreateCommandIntegrationTest extends IntegrationTest {
 
                         final CartDraft cartDraft = CartDraft.of(EUR)
                                 .withCountry(DE)
+                                .withLocale(Locale.GERMAN)
                                 .withCustomerId(customerId)
                                 .withCustomerEmail(customerEmail)
                                 .withLineItems(lineItems)
@@ -81,6 +82,7 @@ public class CartCreateCommandIntegrationTest extends IntegrationTest {
 
                         softAssert(s -> {
                             s.assertThat(cart.getCountry()).isEqualTo(DE);
+                            s.assertThat(cart.getLocale()).isEqualTo(Locale.GERMAN);
                             s.assertThat(cart.getTotalPrice().getCurrency()).isEqualTo(EUR);
                             s.assertThat(cart.getCurrency()).isEqualTo(EUR);
                             s.assertThat(cart.getCustomerId()).isEqualTo(customerId);

@@ -1,5 +1,6 @@
 package io.sphere.sdk.carts;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.neovisionaries.i18n.CountryCode;
 import io.sphere.sdk.models.Address;
@@ -12,6 +13,7 @@ import io.sphere.sdk.types.CustomFieldsDraft;
 import javax.annotation.Nullable;
 import javax.money.CurrencyUnit;
 import java.util.List;
+import java.util.Locale;
 
 
 public final class CartDraftDsl extends Base implements CartDraft {
@@ -43,8 +45,10 @@ public final class CartDraftDsl extends Base implements CartDraft {
     private final TaxMode taxMode;
     @Nullable
     private final String anonymousId;
+    @Nullable
+    private final Locale locale;
 
-
+    @JsonCreator
     CartDraftDsl(final CurrencyUnit currency,
                  @Nullable final String customerId,
                  @Nullable final CountryCode country,
@@ -57,7 +61,8 @@ public final class CartDraftDsl extends Base implements CartDraft {
                  @Nullable final Address billingAddress,
                  @Nullable final Reference<ShippingMethod> shippingMethod,
                  @Nullable final TaxMode taxMode,
-                 @Nullable final String anonymousId) {
+                 @Nullable final String anonymousId,
+                 @Nullable final Locale locale) {
         this.currency = currency;
         this.customerId = customerId;
         this.country = country;
@@ -71,10 +76,11 @@ public final class CartDraftDsl extends Base implements CartDraft {
         this.shippingMethod = shippingMethod;
         this.taxMode = taxMode;
         this.anonymousId = anonymousId;
+        this.locale = locale;
     }
 
     public static CartDraftDsl of(final CurrencyUnit currency) {
-        return new CartDraftDsl(currency, null, null, null, null, null, null, null, null, null, null, null, null);
+        return new CartDraftDsl(currency, null, null, null, null, null, null, null, null, null, null, null, null, null);
     }
 
     @Override
@@ -133,6 +139,12 @@ public final class CartDraftDsl extends Base implements CartDraft {
     @Nullable
     public Reference<ShippingMethod> getShippingMethod() {
         return shippingMethod;
+    }
+
+    @Override
+    @Nullable
+    public Locale getLocale() {
+        return locale;
     }
 
     public CartDraftDsl withCustomerId(@Nullable final String customerId) {
@@ -199,5 +211,9 @@ public final class CartDraftDsl extends Base implements CartDraft {
 
     public CartDraftDsl withTaxMode(@Nullable final TaxMode taxMode) {
         return new CartDraftBuilder(this).taxMode(taxMode).build();
+    }
+
+    public CartDraftDsl withLocale(@Nullable final Locale locale) {
+        return new CartDraftBuilder(this).locale(locale).build();
     }
 }

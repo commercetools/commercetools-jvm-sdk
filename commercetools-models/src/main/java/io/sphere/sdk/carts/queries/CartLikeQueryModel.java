@@ -32,4 +32,6 @@ public interface CartLikeQueryModel<T> extends ResourceQueryModel<T>, WithCustom
     PaymentInfoQueryModel<T> paymentInfo();
 
     StringQuerySortingModel<T> anonymousId();
+
+    LocaleQueryModel<T> locale();
 }

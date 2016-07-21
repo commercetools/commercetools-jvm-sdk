@@ -16,6 +16,7 @@ import javax.annotation.Nullable;
 import javax.money.MonetaryAmount;
 import java.time.ZonedDateTime;
 import java.util.List;
+import java.util.Locale;
 import java.util.Set;
 
 final class OrderImpl extends ResourceImpl<Order> implements Order {
@@ -62,9 +63,11 @@ final class OrderImpl extends ResourceImpl<Order> implements Order {
     private final TaxMode taxMode;
     @Nullable
     private final String anonymousId;
+    @Nullable
+    private final Locale locale;
 
     @JsonCreator
-    protected OrderImpl(final String id, final Long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt, @Nullable final Address billingAddress, @Nullable final CountryCode country, @Nullable final String customerEmail, @Nullable final Reference<CustomerGroup> customerGroup, @Nullable final String customerId, final List<CustomLineItem> customLineItems, final InventoryMode inventoryMode, final Long lastMessageSequenceNumber, final List<LineItem> lineItems, @Nullable final String orderNumber, final OrderState orderState, final List<ReturnInfo> returnInfo, @Nullable final ShipmentState shipmentState, @Nullable final Address shippingAddress, @Nullable final OrderShippingInfo shippingInfo, final Set<SyncInfo> syncInfo, @Nullable final TaxedPrice taxedPrice, final MonetaryAmount totalPrice, @Nullable final PaymentState paymentState, @Nullable final ZonedDateTime completedAt, final List<DiscountCodeInfo> discountCodes, @Nullable final Reference<Cart> cart, @Nullable final CustomFields custom, @Nullable final Reference<State> state, @Nullable final PaymentInfo paymentInfo, final TaxMode taxMode, @Nullable final String anonymousId) {
+    protected OrderImpl(final String id, final Long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt, @Nullable final Address billingAddress, @Nullable final CountryCode country, @Nullable final String customerEmail, @Nullable final Reference<CustomerGroup> customerGroup, @Nullable final String customerId, final List<CustomLineItem> customLineItems, final InventoryMode inventoryMode, final Long lastMessageSequenceNumber, final List<LineItem> lineItems, @Nullable final String orderNumber, final OrderState orderState, final List<ReturnInfo> returnInfo, @Nullable final ShipmentState shipmentState, @Nullable final Address shippingAddress, @Nullable final OrderShippingInfo shippingInfo, final Set<SyncInfo> syncInfo, @Nullable final TaxedPrice taxedPrice, final MonetaryAmount totalPrice, @Nullable final PaymentState paymentState, @Nullable final ZonedDateTime completedAt, final List<DiscountCodeInfo> discountCodes, @Nullable final Reference<Cart> cart, @Nullable final CustomFields custom, @Nullable final Reference<State> state, @Nullable final PaymentInfo paymentInfo, final TaxMode taxMode, @Nullable final String anonymousId, @Nullable final Locale locale) {
         super(id, version, createdAt, lastModifiedAt);
         this.billingAddress = billingAddress;
         this.country = country;
@@ -93,6 +96,7 @@ final class OrderImpl extends ResourceImpl<Order> implements Order {
         this.paymentInfo = paymentInfo;
         this.taxMode = taxMode;
         this.anonymousId = anonymousId;
+        this.locale = locale;
     }
 
     @Override
@@ -245,5 +249,11 @@ final class OrderImpl extends ResourceImpl<Order> implements Order {
     @Nullable
     public String getAnonymousId() {
         return anonymousId;
+    }
+
+    @Override
+    @Nullable
+    public Locale getLocale() {
+        return locale;
     }
 }

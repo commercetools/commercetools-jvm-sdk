@@ -8,8 +8,8 @@ import io.sphere.sdk.customergroups.CustomerGroup;
 import io.sphere.sdk.customers.commands.CustomerCreatePasswordTokenCommand;
 import io.sphere.sdk.customers.commands.CustomerPasswordResetCommand;
 import io.sphere.sdk.models.Address;
-import io.sphere.sdk.models.Resource;
 import io.sphere.sdk.models.Reference;
+import io.sphere.sdk.models.Resource;
 import io.sphere.sdk.payments.Payment;
 import io.sphere.sdk.reviews.Review;
 import io.sphere.sdk.types.Custom;
@@ -19,6 +19,7 @@ import io.sphere.sdk.types.TypeDraft;
 import javax.annotation.Nullable;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Locale;
 import java.util.Optional;
 
 /**
@@ -100,7 +101,6 @@ import java.util.Optional;
  * @see io.sphere.sdk.customers.commands.CustomerUpdateCommand
  * @see io.sphere.sdk.customers.commands.CustomerVerifyEmailCommand
  * @see io.sphere.sdk.customers.queries.CustomerByIdGet
- * @see io.sphere.sdk.customers.queries.CustomerByTokenGet
  * @see io.sphere.sdk.customers.queries.CustomerQuery
  * @see CustomerGroup
  * @see Cart#getCustomerId()
@@ -378,4 +378,7 @@ public interface Customer extends Resource<Customer>, Custom {
     @Nullable
     @Override
     CustomFields getCustom();
+
+    @Nullable
+    Locale getLocale();
 }

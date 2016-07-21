@@ -11,6 +11,7 @@ import io.sphere.sdk.types.CustomFieldsDraft;
 import javax.annotation.Nullable;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Input object for a new {@link Customer}.
@@ -77,4 +78,7 @@ public interface CustomerDraft extends CustomDraft {
 
     @Nullable
     CustomFieldsDraft getCustom();
+
+    @Nullable
+    Locale getLocale();
 }

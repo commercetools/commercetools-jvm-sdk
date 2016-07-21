@@ -40,6 +40,8 @@ public interface CustomerQueryModel extends ResourceQueryModel<Customer>, WithCu
     @Override
     QueryPredicate<Customer> is(Identifiable<Customer> identifiable);
 
+    LocaleQueryModel<Customer> locale();
+
     static CustomerQueryModel of() {
         return new CustomerQueryModelImpl(null, null);
     }

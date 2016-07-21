@@ -13,6 +13,7 @@ import javax.annotation.Nullable;
 import javax.money.MonetaryAmount;
 import java.time.ZonedDateTime;
 import java.util.List;
+import java.util.Locale;
 
 class CartImpl extends ResourceImpl<Cart> implements Cart {
     @Nullable
@@ -44,6 +45,8 @@ class CartImpl extends ResourceImpl<Cart> implements Cart {
     private final TaxMode taxMode;
     @Nullable
     private final String anonymousId;
+    @Nullable
+    private final Locale locale;
 
     @JsonCreator
     CartImpl(final String id, final Long version, final ZonedDateTime createdAt,
@@ -56,7 +59,8 @@ class CartImpl extends ResourceImpl<Cart> implements Cart {
              @Nullable final CountryCode country, @Nullable final CartShippingInfo shippingInfo,
              final List<DiscountCodeInfo> discountCodes, @Nullable final CustomFields custom,
              @Nullable final PaymentInfo paymentInfo,
-             final TaxMode taxMode, @Nullable final String anonymousId) {
+             final TaxMode taxMode, @Nullable final String anonymousId,
+             @Nullable final Locale locale) {
         super(id, version, createdAt, lastModifiedAt);
         this.customerId = customerId;
         this.customerEmail = customerEmail;
@@ -76,6 +80,7 @@ class CartImpl extends ResourceImpl<Cart> implements Cart {
         this.paymentInfo = paymentInfo;
         this.taxMode = taxMode;
         this.anonymousId = anonymousId;
+        this.locale = locale;
     }
 
     @Override
@@ -177,5 +182,11 @@ class CartImpl extends ResourceImpl<Cart> implements Cart {
     @Nullable
     public String getAnonymousId() {
         return anonymousId;
+    }
+
+    @Override
+    @Nullable
+    public Locale getLocale() {
+        return locale;
     }
 }
