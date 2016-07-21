@@ -201,4 +201,15 @@ public class CartQueryIntegrationTest extends IntegrationTest {
         assertThat(result.getResults()).hasSize(1);
         assertThat(result.head().get().getId()).isEqualTo(cart.getId());
     }
+
+    @Test
+    public void locale() {
+        final CartDraft cartDraft = CartDraft.of(EUR).withLocale(Locale.GERMAN);
+        final Cart cart = client().executeBlocking(CartCreateCommand.of(cartDraft));
+        final PagedQueryResult<Cart> result = client().executeBlocking(CartQuery.of()
+                .plusPredicates(m -> m.is(cart))
+        .plusPredicates(m -> m.locale().is(Locale.GERMAN)));
+        assertThat(result.getResults()).hasSize(1);
+        assertThat(result.head().get().getId()).isEqualTo(cart.getId());
+    }
 }

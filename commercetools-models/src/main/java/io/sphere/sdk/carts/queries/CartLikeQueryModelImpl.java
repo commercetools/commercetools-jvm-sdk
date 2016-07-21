@@ -82,4 +82,9 @@ public abstract class CartLikeQueryModelImpl<T> extends CustomResourceQueryModel
     public StringQuerySortingModel<T> anonymousId() {
         return stringModel("anonymousId");
     }
+
+    @Override
+    public LocaleQueryModel<T> locale() {
+        return localeQuerySortingModel("locale");
+    }
 }

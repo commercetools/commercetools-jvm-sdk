@@ -18,6 +18,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.util.List;
+import java.util.Locale;
 import java.util.function.Function;
 
 import static io.sphere.sdk.customergroups.CustomerGroupFixtures.b2cCustomerGroup;
@@ -115,6 +116,11 @@ public class CustomerQueryIntegrationTest extends IntegrationTest {
         check((model) -> model.customerGroup().is(customer.getCustomerGroup()), false);
     }
 
+    @Test
+    public void locale() {
+        check((model) -> model.locale().is(Locale.GERMAN));
+    }
+
     private void check(final Function<CustomerQueryModel, QueryPredicate<Customer>> f) {
         check(f, false);
     }
@@ -134,6 +140,7 @@ public class CustomerQueryIntegrationTest extends IntegrationTest {
     private static Customer createCustomer(final String firstName, final String lastName) {
         final CustomerName customerName = CustomerName.ofFirstAndLastName(firstName, lastName);
         final CustomerDraft draft = CustomerDraftDsl.of(customerName, randomEmail(CustomerQueryIntegrationTest.class), "secret")
+                .withLocale(Locale.GERMAN)
                 .withExternalId(randomString()+firstName);
         final CustomerSignInResult signInResult = client().executeBlocking(CustomerCreateCommand.of(draft));
         final Customer initialCustomer = signInResult.getCustomer();
