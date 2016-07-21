@@ -29,6 +29,7 @@
   ],
   "shippingAddress": {
     "lastName": "Osgood",
+    "fax": "0300000000",
     "country": "DE"
   },
   "custom": {
