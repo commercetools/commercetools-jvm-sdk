@@ -16,6 +16,7 @@ import javax.annotation.Nullable;
 import javax.money.CurrencyUnit;
 import javax.money.MonetaryAmount;
 import java.util.List;
+import java.util.Locale;
 import java.util.Optional;
 
 /**
@@ -194,4 +195,7 @@ public interface CartLike<T> extends Resource<T>, Custom {
      */
     @Nullable
     String getAnonymousId();
+
+    @Nullable
+    Locale getLocale();
 }

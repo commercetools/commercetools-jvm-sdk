@@ -8,6 +8,7 @@ import javax.annotation.Nullable;
 import java.time.LocalDate;
 import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
 import java.util.Optional;
 
 /**
@@ -51,6 +52,8 @@ public final class CustomerDraftBuilder extends Base implements Builder<Customer
     private CustomFieldsDraft custom;
     @Nullable
     private String anonymousId;
+    @Nullable
+    private Locale locale;
 
 
     public static CustomerDraftBuilder of(final String email, final String password) {
@@ -84,6 +87,7 @@ public final class CustomerDraftBuilder extends Base implements Builder<Customer
                 .defaultShippingAddress(template.getDefaultShippingAddress())
                 .custom(template.getCustom())
                 .anonymousId(template.getAnonymousId())
+                .locale(template.getLocale())
         ;
         return builder;
     }
@@ -191,8 +195,13 @@ public final class CustomerDraftBuilder extends Base implements Builder<Customer
         return this;
     }
 
+    public CustomerDraftBuilder locale(@Nullable final Locale locale) {
+        this.locale = locale;
+        return this;
+    }
+
     @Override
     public CustomerDraftDsl build() {
-        return new CustomerDraftDsl(customerNumber, email, firstName, lastName, middleName, password, title, externalId, anonymousCartId, dateOfBirth, companyName, vatId, emailVerified, customerGroup, defaultBillingAddress, defaultShippingAddress, addresses, custom, anonymousId);
+        return new CustomerDraftDsl(customerNumber, email, firstName, lastName, middleName, password, title, externalId, anonymousCartId, dateOfBirth, companyName, vatId, emailVerified, customerGroup, defaultBillingAddress, defaultShippingAddress, addresses, custom, anonymousId, locale);
     }
 }
