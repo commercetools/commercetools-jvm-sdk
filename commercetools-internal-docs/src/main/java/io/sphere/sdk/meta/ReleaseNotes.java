@@ -8,6 +8,7 @@ import io.sphere.sdk.carts.queries.CartByIdGet;
 import io.sphere.sdk.carts.queries.CartQueryModel;
 import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.categories.CategoryDraft;
+import io.sphere.sdk.channels.Channel;
 import io.sphere.sdk.channels.queries.ChannelByIdGet;
 import io.sphere.sdk.client.SphereApiConfig;
 import io.sphere.sdk.client.SphereAuthConfig;
@@ -32,6 +33,7 @@ import io.sphere.sdk.orders.expansion.OrderExpansionModel;
 import io.sphere.sdk.payments.PaymentDraft;
 import io.sphere.sdk.payments.Transaction;
 import io.sphere.sdk.payments.TransactionDraft;
+import io.sphere.sdk.payments.messages.PaymentTransactionStateChangedMessage;
 import io.sphere.sdk.productdiscounts.queries.ProductDiscountByIdGet;
 import io.sphere.sdk.products.*;
 import io.sphere.sdk.products.attributes.Attribute;
@@ -85,6 +87,16 @@ import java.util.function.Function;
  <li class=fixed-in-release></li>
  </ul>
  -->
+
+ <h3 class=released-version id="v1_3_0">1.3.0 (22.07.2016)</h3>
+
+ <ul>
+ <li class=new-in-release>added {@link Channel#getAddress()} and {@link io.sphere.sdk.channels.commands.updateactions.SetAddress}</li>
+ <li class=new-in-release>added field "locale" to {@link Order}, {@link Cart} and {@link io.sphere.sdk.customers.Customer}</li>
+ <li class=new-in-release>added {@link Address#getFax()} </li>
+ <li class=new-in-release>added {@link PaymentTransactionStateChangedMessage#getTransactionId()} </li>
+ </ul>
+
 
  <h3 class=released-version id="v1_2_0">1.2.0 (18.07.2016)</h3>
  <p>Thanks to Cristian for his contributions!</p>
