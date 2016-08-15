@@ -22,6 +22,7 @@ import io.sphere.sdk.utils.MoneyImpl;
 import org.junit.Test;
 
 import java.math.BigDecimal;
+import java.time.Duration;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -244,7 +245,7 @@ public class ProductProjectionQueryIntegrationTest extends IntegrationTest {
         withProduct(client(), product -> {
             withReview(client(), b -> b.target(product).rating(1), review1 -> {
                 withReview(client(), b -> b.target(product).rating(3), review2 -> {
-                    assertEventually(() -> {
+                    assertEventually(Duration.ofSeconds(45), Duration.ofMillis(200), () -> {
                         final ProductProjectionQuery query = ProductProjectionQuery.ofStaged()
                                 .withPredicates(m -> m.reviewRatingStatistics().averageRating().is(2.0))
                                 .plusPredicates(m -> m.reviewRatingStatistics().count().is(2))
