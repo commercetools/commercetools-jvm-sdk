@@ -65,7 +65,7 @@ see https://github.com/commercetools/commercetools-jvm-sdk-scala-add-ons
 Useful code from external developers
 
 * https://github.com/commercetools/commercetools-jvm-sdk-contrib
-* contains also ProductImageUploadCommand from http://dev.commercetools.com/http-api-projects-products.html#upload-product-image
+* contains also ProductImageUploadCommand from http://dev.commercetools.com/http-api-projects-products.html#upload-a-product-image
 
 
 ## Short-term roadmap
