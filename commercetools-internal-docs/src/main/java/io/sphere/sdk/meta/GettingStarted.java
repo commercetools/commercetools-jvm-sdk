@@ -15,8 +15,8 @@ import io.sphere.sdk.models.Base;
  <caption>Clients and future implementations</caption>
  <tr><th>Client</th><th>Future implementation</th></tr>
  <tr><td>{@link io.sphere.sdk.client.SphereClient} (default)</td><td>{@code java.util.concurrent.CompletionStage}</td></tr>
- <tr><td><a href=https://github.com/commercetools/commercetools-jvm-sdk-scala-add-ons>SphereScalaClient</a></td><td>{@code scala.concurrent.Future}</td></tr>
- <tr><td><a href=https://github.com/commercetools/commercetools-jvm-sdk-scala-add-ons>SpherePlayJavaClient</a></td><td>{@code play.libs.F.Promise}</td></tr>
+ <tr><td><a href=https://github.com/commercetools/commercetools-jvm-sdk-scala-add-ons#scala-client>SphereScalaClient</a></td><td>{@code scala.concurrent.Future}</td></tr>
+ <tr><td><a href=https://github.com/commercetools/commercetools-jvm-sdk-scala-add-ons>SpherePlayJavaClient</a></td><td>{@code play.libs.F.Promise} (deprecated in Play 2.5.x)</td></tr>
  </table>
 
  <h3 id=preparation>Preparation</h3>
@@ -37,15 +37,27 @@ client secret: 222222222222222222222222222222226</code></pre>
 
  <h3 id=instantiation>Instantiation</h3>
 
+ <p id=instantiation-simple>Simple instantiation:</p>
  {@include.example example.JavaClientInstantiationExample}
+
+ <p id=instantiation-blocking>Simple instantiation with blocking client:</p>
+ {@include.example example.BlockingJavaClientInstantiationExample}
+
+ <p id=instantiation-spring>Spring example</p>
+
+ <pre><code class=java>{@include.file commercetools-internal-docs/src/main/resources/SpringCommercetoolsConfig.java}</code></pre>
+
+ <p id=instantiation-spring-batch>Spring Batch example</p>
+
+ <pre><code class=java>{@include.file commercetools-internal-docs/src/main/resources/SpringBatchCommercetoolsClientConfiguration.java}</code></pre>
 
  <h3 id=perform-requests>Performing requests</h3>
 
  <p>A client works on the abstraction level of one HTTP request for one project.
- With one client you can start multiple requests in parallel, it is thread-safe.</p>
+ With one client you can start multiple requests in parallel, it is <strong>thread-safe</strong>.</p>
  <p>The client method {@link io.sphere.sdk.client.SphereClient#execute(io.sphere.sdk.client.SphereRequest)} takes a {@link io.sphere.sdk.client.SphereRequest} as parameter.</p>
 
- <p>You can create a {@link io.sphere.sdk.client.SphereRequest} yourself or use the predifined ones listed on {@link io.sphere.sdk.meta.SphereResources}.</p>
+ <p>You can create a {@link io.sphere.sdk.client.SphereRequest} yourself or use the predefined ones listed on {@link io.sphere.sdk.meta.SphereResources}.</p>
  <p>Example:</p>
 
  {@include.example example.TaxCategoryQueryExample#exampleQuery()}
@@ -56,7 +68,7 @@ client secret: 222222222222222222222222222222226</code></pre>
 
  <h3 id=further-client-infos>Further client information</h3>
  <ul>
- <li>{@link SphereClientTuningDocumentation Tuning the client} (blocking requests, timeouts, rate limiting)</li>
+ <li>{@link SphereClientTuningDocumentation Tuning the client} (blocking requests, timeouts, rate limiting, automatic error handling)</li>
  <li>{@link io.sphere.sdk.meta.TestingDocumentation Writing unit tests with the client}</li>
  </ul>
  */
