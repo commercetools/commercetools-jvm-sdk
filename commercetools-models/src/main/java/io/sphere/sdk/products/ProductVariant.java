@@ -87,4 +87,7 @@ public interface ProductVariant extends AttributeContainer {
      * @throws UnsupportedOperationException if the operation is not available
      */
     ByIdVariantIdentifier getIdentifier();
+
+    @Nullable
+    String getKey();
 }

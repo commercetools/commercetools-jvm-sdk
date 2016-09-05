@@ -29,13 +29,15 @@ class ProductVariantImpl extends AttributeContainerImpl implements ProductVarian
     private final ScopedPrice scopedPrice;
     @Nullable
     private final Boolean scopedPriceDiscounted;
+    @Nullable
+    private final String key;
 
     @JsonCreator
     ProductVariantImpl(final Integer id, @Nullable final String sku, final List<Price> prices, final List<Attribute> attributes,
                        final List<Image> images, @Nullable final ProductVariantAvailability availability,
                        @Nullable final Boolean isMatchingVariant, @Nullable final String productId,
                        @Nullable final Price price, @Nullable final ScopedPrice scopedPrice,
-                       @Nullable final Boolean scopedPriceDiscounted) {
+                       @Nullable final Boolean scopedPriceDiscounted, @Nullable final String key) {
         super(attributes);
         this.id = id;
         this.sku = sku;
@@ -47,6 +49,7 @@ class ProductVariantImpl extends AttributeContainerImpl implements ProductVarian
         this.price = price;
         this.scopedPrice = scopedPrice;
         this.scopedPriceDiscounted = scopedPriceDiscounted;
+        this.key = key;
     }
 
     @Override
@@ -103,6 +106,12 @@ class ProductVariantImpl extends AttributeContainerImpl implements ProductVarian
     @Override
     public ByIdVariantIdentifier getIdentifier() {
         return Optional.ofNullable(productId).map(pId -> ByIdVariantIdentifier.of(pId, getId())).orElseThrow(UnsupportedOperationException::new);
+    }
+
+    @Override
+    @Nullable
+    public String getKey() {
+        return key;
     }
 
     @Override
