@@ -69,4 +69,7 @@ public interface ProductDraft extends WithLocalizedSlug, MetaAttributes {
      */
     @Nullable
     Boolean isPublish();
+
+    @Nullable
+    String getKey();
 }
