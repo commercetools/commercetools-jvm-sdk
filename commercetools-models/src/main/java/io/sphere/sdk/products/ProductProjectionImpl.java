@@ -48,6 +48,8 @@ class ProductProjectionImpl extends ResourceViewImpl<ProductProjection, Product>
     private final CategoryOrderHints categoryOrderHints;
     @Nullable
     private final ReviewRatingStatistics reviewRatingStatistics;
+    @Nullable
+    private final String key;
 
     @JsonCreator
     ProductProjectionImpl(final String id, final Long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt,
@@ -59,7 +61,7 @@ class ProductProjectionImpl extends ResourceViewImpl<ProductProjection, Product>
                           final ProductVariant masterVariant, final List<ProductVariant> variants,
                           final Boolean isPublished, final SearchKeywords searchKeywords,
                           @Nullable @JsonInclude(JsonInclude.Include.NON_EMPTY) final CategoryOrderHints categoryOrderHints,
-                          @Nullable final ReviewRatingStatistics reviewRatingStatistics) {
+                          @Nullable final ReviewRatingStatistics reviewRatingStatistics, @Nullable final String key) {
         super(id, version, createdAt, lastModifiedAt);
         this.productType = productType;
         this.state = state;
@@ -78,6 +80,7 @@ class ProductProjectionImpl extends ResourceViewImpl<ProductProjection, Product>
         this.searchKeywords = searchKeywords;
         this.categoryOrderHints = categoryOrderHints;
         this.reviewRatingStatistics = reviewRatingStatistics;
+        this.key = key;
         getAllVariants().stream()
                 .filter(v -> v instanceof ProductVariantImpl)
                 .forEach(variant -> ((ProductVariantImpl)variant).setProductId(getId()));
@@ -173,5 +176,11 @@ class ProductProjectionImpl extends ResourceViewImpl<ProductProjection, Product>
     @Nullable
     public Reference<State> getState() {
         return state;
+    }
+
+    @Override
+    @Nullable
+    public String getKey() {
+        return key;
     }
 }

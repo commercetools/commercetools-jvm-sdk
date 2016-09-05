@@ -21,4 +21,6 @@ interface ProductLike<T, O> extends ResourceView<T, O>, ProductIdentifiable {
     @Nullable
     Reference<State> getState();
 
+    @Nullable
+    String getKey();
 }

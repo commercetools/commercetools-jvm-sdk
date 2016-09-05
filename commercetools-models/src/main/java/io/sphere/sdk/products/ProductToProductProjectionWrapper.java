@@ -135,4 +135,10 @@ class ProductToProductProjectionWrapper implements ProductProjection {
     public Reference<State> getState() {
         return product.getState();
     }
+
+    @Nullable
+    @Override
+    public String getKey() {
+        return product.getKey();
+    }
 }

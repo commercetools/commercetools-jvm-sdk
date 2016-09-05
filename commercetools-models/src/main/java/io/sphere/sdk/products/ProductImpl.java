@@ -22,18 +22,21 @@ class ProductImpl extends ResourceImpl<Product> implements Product {
     private final Reference<State> state;
     @Nullable
     private final ReviewRatingStatistics reviewRatingStatistics;
+    @Nullable
+    private final String key;
 
     @JsonCreator
     ProductImpl(final String id, final Long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt,
                 @Nullable final Reference<ProductType> productType, final ProductCatalogData masterData,
                 @Nullable final Reference<TaxCategory> taxCategory, @Nullable final Reference<State> state,
-                @Nullable final ReviewRatingStatistics reviewRatingStatistics) {
+                @Nullable final ReviewRatingStatistics reviewRatingStatistics, @Nullable final String key) {
         super(id, version, createdAt, lastModifiedAt);
         this.productType = productType;
         this.masterData = masterData;
         this.taxCategory = taxCategory;
         this.state = state;
         this.reviewRatingStatistics = reviewRatingStatistics;
+        this.key = key;
         Optional.of(masterData)
                 .filter(d -> d instanceof ProductCatalogDataImpl)
                 .ifPresent(d -> ((ProductCatalogDataImpl)d).setProductId(id));
@@ -65,5 +68,11 @@ class ProductImpl extends ResourceImpl<Product> implements Product {
     @Nullable
     public ReviewRatingStatistics getReviewRatingStatistics() {
         return reviewRatingStatistics;
+    }
+
+    @Override
+    @Nullable
+    public String getKey() {
+        return key;
     }
 }
