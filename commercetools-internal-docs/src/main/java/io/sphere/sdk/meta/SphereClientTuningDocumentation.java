@@ -32,6 +32,9 @@ import org.asynchttpclient.AsyncHttpClient;
  <h3 id=timeout-client>Timeout Client</h3>
  See {@link io.sphere.sdk.client.TimeoutSphereClientDecorator}.
 
+ <h3 id=retry-client>Retry Client</h3>
+ See {@link io.sphere.sdk.client.RetrySphereClientDecorator}.
+
  <h3 id=queue-client>Limit the amount of parallel requests</h3>
  See {@link io.sphere.sdk.client.QueueSphereClientDecorator}.
 
