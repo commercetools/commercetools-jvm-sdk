@@ -19,4 +19,7 @@ public interface ProductVariantDraft {
     List<AttributeDraft> getAttributes();
 
     List<Image> getImages();
+
+    @Nullable
+    String getKey();
 }
