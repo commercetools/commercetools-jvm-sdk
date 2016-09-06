@@ -549,8 +549,14 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
             final PriceDraft price = PriceDraft.of(MoneyImpl.of(new BigDecimal("12.34"), EUR)).withCountry(DE);
             final List<PriceDraft> prices = asList(price);
             final List<AttributeDraft> attributeValues = asList(moneyAttributeValue, colorAttributeValue, sizeValue);
+            final String sku = randomKey();
+            final String key = randomKey();
+            final Image image = Image.of("url", ImageDimensions.of(3, 5));
+            final AddVariant updateAction = AddVariant.of(attributeValues, prices, sku)
+                    .withKey(key)
+                    .withImages(singletonList(image));
             final ProductUpdateCommand addVariantCommand =
-                    ProductUpdateCommand.of(product, AddVariant.of(attributeValues, prices, randomKey()));
+                    ProductUpdateCommand.of(product, updateAction);
 
             final Product productWithVariant = client().executeBlocking(addVariantCommand);
             final ProductVariant variant = productWithVariant.getMasterData().getStaged().getVariants().get(0);
@@ -558,6 +564,9 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
             assertThat(variant.findAttribute(moneyAttribute).get()).isEqualTo(EURO_10);
             assertThat(variant.findAttribute(colorAttribute).get()).isEqualTo(color);
             assertThat(variant.findAttribute(sizeAttribute).get()).isEqualTo(Sizes.M);
+            assertThat(variant.getSku()).isEqualTo(sku);
+            assertThat(variant.getKey()).isEqualTo(key);
+            assertThat(variant.getImages()).containsExactly(image);
 
             final Product productWithoutVariant = client().executeBlocking(ProductUpdateCommand.of(productWithVariant, RemoveVariant.of(variant)));
             assertThat(productWithoutVariant.getMasterData().getStaged().getVariants()).isEmpty();
