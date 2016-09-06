@@ -24,4 +24,13 @@ public interface ProductUpdateCommand extends UpdateCommandDsl<Product, ProductU
     static ProductUpdateCommand of(final Versioned<Product> versioned, final List<? extends UpdateAction<Product>> updateActions) {
         return new ProductUpdateCommandImpl(versioned, updateActions);
     }
+
+    static ProductUpdateCommand ofKey(final String key, final Long version, final List<? extends UpdateAction<Product>> updateActions) {
+        final Versioned<Product> versioned = Versioned.of("key=" + key, version);//hack for simple reuse
+        return of(versioned, updateActions);
+    }
+
+    static ProductUpdateCommand ofKey(final String key, final Long version, final UpdateAction<Product> updateAction) {
+        return ofKey(key, version, Collections.singletonList(updateAction));
+    }
 }

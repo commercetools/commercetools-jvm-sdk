@@ -208,6 +208,21 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
     }
 
     @Test
+    public void productUpdateByKey() throws Exception {
+        final String key = randomKey();
+        withUpdateableProduct(client(), builder -> builder.key(key), product -> {
+            final LocalizedString newName = LocalizedString.ofEnglish("newName " + RANDOM.nextInt());
+            final ProductUpdateCommand cmd =
+                    ProductUpdateCommand.ofKey(key, product.getVersion(), ChangeName.of(newName));
+            final Product updatedProduct = client().executeBlocking(cmd);
+
+            assertThat(updatedProduct.getMasterData().getStaged().getName()).isEqualTo(newName);
+            assertThat(updatedProduct.getKey()).isEqualTo(key);
+            return updatedProduct;
+        });
+    }
+
+    @Test
     public void changeName() throws Exception {
         withUpdateableProduct(client(), product -> {
             final LocalizedString newName = LocalizedString.ofEnglish("newName " + RANDOM.nextInt());
