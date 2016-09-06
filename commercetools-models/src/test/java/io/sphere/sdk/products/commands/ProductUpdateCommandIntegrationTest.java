@@ -752,6 +752,28 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
         });
     }
 
+    @Test
+    public void setKey() throws Exception {
+        final String key = randomKey();
+        withProduct(client(), (Product product) -> {
+            final Product updatedProduct = client().executeBlocking(ProductUpdateCommand.of(product, SetKey.of(key)));
+            assertThat(updatedProduct.getKey()).isEqualTo(key);
+        });
+    }
+
+    @Test
+    public void setProductVariantKey() throws Exception {
+        final String key = randomKey();
+        withProduct(client(), (Product product) -> {
+            final Integer variantId = product.getMasterData().getStaged().getMasterVariant().getId();
+            final ProductUpdateCommand cmd =
+                    ProductUpdateCommand.of(product, SetProductVariantKey.ofKeyAndVariantId(key, variantId));
+            final Product updatedProduct = client().executeBlocking(cmd);
+            assertThat(updatedProduct.getMasterData().getStaged().getMasterVariant().getKey()).isEqualTo(key);
+            assertThat(updatedProduct.getKey()).isNotEqualTo(key);
+        });
+    }
+
     private void withProductOfSku(final String sku, final Function<Product, Product> productProductFunction) {
         withUpdateableProduct(client(), builder -> {
             return builder.masterVariant(ProductVariantDraftBuilder.of(builder.getMasterVariant()).sku(sku).build());
