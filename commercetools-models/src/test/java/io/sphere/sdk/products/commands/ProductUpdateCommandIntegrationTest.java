@@ -59,7 +59,7 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
     public static final Random RANDOM = new Random();
 
     @Test
-    public void moveImageToPosition() throws Exception {
+    public void moveImageToPositionByVariantId() throws Exception {
         final String url1 = "http://www.commercetools.com/ct_logo_farbe_1.gif";
         final String url2 = "http://www.commercetools.com/ct_logo_farbe_2.gif";
         final String url3 = "http://www.commercetools.com/ct_logo_farbe_3.gif";
@@ -72,7 +72,36 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
 
             final Integer position = 0;
             final List<Image> images = product.getMasterData().getStaged().getMasterVariant().getImages();
-            final ProductUpdateCommand cmd = ProductUpdateCommand.of(product, MoveImageToPosition.of(images.get(1).getUrl(), MASTER_VARIANT_ID, position));
+            final ProductUpdateCommand cmd = ProductUpdateCommand.of(product, MoveImageToPosition.ofImageUrlAndVariantId(images.get(1).getUrl(), MASTER_VARIANT_ID, position));
+
+            final Product updatedProduct = client().executeBlocking(cmd);
+
+            final List<String> urls = updatedProduct.getMasterData().getStaged().getMasterVariant().getImages()
+                    .stream()
+                    .map(image -> image.getUrl())
+                    .collect(toList());
+            assertThat(urls).containsExactly(url2, url1, url3);
+
+            return updatedProduct;
+        });
+    }
+
+    @Test
+    public void moveImageToPositionBySku() throws Exception {
+        final String url1 = "http://www.commercetools.com/ct_logo_farbe_1.gif";
+        final String url2 = "http://www.commercetools.com/ct_logo_farbe_2.gif";
+        final String url3 = "http://www.commercetools.com/ct_logo_farbe_3.gif";
+        withProductWithImages(client(), url1, url2, url3, (Product product) -> {
+            final List<String> oldImageOrderUrls = product.getMasterData().getStaged().getMasterVariant().getImages()
+                    .stream()
+                    .map(image -> image.getUrl())
+                    .collect(toList());
+            assertThat(oldImageOrderUrls).containsExactly(url1, url2, url3);
+
+            final Integer position = 0;
+            final ProductVariant masterVariant = product.getMasterData().getStaged().getMasterVariant();
+            final List<Image> images = masterVariant.getImages();
+            final ProductUpdateCommand cmd = ProductUpdateCommand.of(product, MoveImageToPosition.ofImageUrlAndSku(images.get(1).getUrl(), masterVariant.getSku(), position));
 
             final Product updatedProduct = client().executeBlocking(cmd);
 
@@ -813,6 +842,7 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
             final ProductVariantDraft oldMasterVariant = builder.getMasterVariant();
             final ProductVariantDraftBuilder variantDraftBuilder = ProductVariantDraftBuilder.of(oldMasterVariant);
             variantDraftBuilder.images(imagesList);
+            variantDraftBuilder.sku(randomKey());
             return builder.masterVariant(variantDraftBuilder.build());
         }, productProductFunction);
     }
