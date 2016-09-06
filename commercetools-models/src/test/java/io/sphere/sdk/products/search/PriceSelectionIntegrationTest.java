@@ -141,6 +141,16 @@ public class PriceSelectionIntegrationTest extends IntegrationTest {
     }
 
     @Test
+    public void selectAPriceByCurrencyInProductByKeyGet() {
+        final List<PriceDraft> prices = asList(PriceDraft.of(EURO_30), PriceDraft.of(USD_20));
+        withProductOfPrices(prices, product -> {
+            final Product loadedProduct = client().executeBlocking(ProductByKeyGet.of(product.getKey()).withPriceSelection(PriceSelection.of(EUR)));
+            final ProductVariant masterVariant = loadedProduct.getMasterData().getStaged().getMasterVariant();
+            assertThat(masterVariant.getPrice()).isNotNull().has(price(PriceDraft.of(EURO_30)));
+        });
+    }
+
+    @Test
     public void verboseTest() {
         withResources((CustomerGroup b2c) -> (CustomerGroup b2b) -> (Channel channel) -> {
             final PriceDraftDsl simplePriceInEuro = PriceDraft.of(EURO_30);
