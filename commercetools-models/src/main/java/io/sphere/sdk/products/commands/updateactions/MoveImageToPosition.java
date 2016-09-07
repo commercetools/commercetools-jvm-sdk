@@ -41,6 +41,7 @@ public final class MoveImageToPosition extends UpdateActionImpl<Product> {
         return new MoveImageToPosition(position, imageUrl, null, sku);
     }
 
+    @Nullable
     public Integer getVariantId() {
         return variantId;
     }
