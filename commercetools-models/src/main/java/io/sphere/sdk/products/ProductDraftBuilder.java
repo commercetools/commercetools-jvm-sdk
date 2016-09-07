@@ -43,7 +43,17 @@ public final class ProductDraftBuilder extends Base implements Builder<ProductDr
 
     public static ProductDraftBuilder of(final ProductDraft productDraft) {
         return of(productDraft.getProductType(), productDraft.getName(), productDraft.getSlug(), productDraft.getMasterVariant())
-                .variants(productDraft.getVariants());
+                .variants(productDraft.getVariants())
+                .description(productDraft.getDescription())
+                .metaTitle(productDraft.getMetaTitle())
+                .metaDescription(productDraft.getMetaDescription())
+                .metaKeywords(productDraft.getMetaKeywords())
+                .categories(productDraft.getCategories())
+                .searchKeywords(productDraft.getSearchKeywords())
+                .taxCategory(productDraft.getTaxCategory())
+                .state(productDraft.getState())
+                .categoryOrderHints(productDraft.getCategoryOrderHints())
+                .publish(productDraft.isPublish());
     }
 
     public static ProductDraftBuilder of(final ResourceIdentifiable<ProductType> productType, final LocalizedString name, final LocalizedString slug, final ProductVariantDraft masterVariant) {
