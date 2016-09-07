@@ -57,6 +57,15 @@ public interface ProductVariant extends AttributeContainer {
     @Nullable
     Boolean isScopedPriceDiscounted();
 
+    /**
+     *
+     * Product images
+     *
+     * @return Images
+     * @see io.sphere.sdk.products.commands.updateactions.MoveImageToPosition
+     * @see io.sphere.sdk.products.commands.updateactions.AddExternalImage
+     * @see io.sphere.sdk.products.commands.updateactions.RemoveImage
+     */
     List<Image> getImages();
 
     /**

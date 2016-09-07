@@ -59,6 +59,63 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
     public static final Random RANDOM = new Random();
 
     @Test
+    public void moveImageToPositionByVariantId() throws Exception {
+        final String url1 = "http://www.commercetools.com/ct_logo_farbe_1.gif";
+        final String url2 = "http://www.commercetools.com/ct_logo_farbe_2.gif";
+        final String url3 = "http://www.commercetools.com/ct_logo_farbe_3.gif";
+        withProductWithImages(client(), url1, url2, url3, (Product product) -> {
+            final List<String> oldImageOrderUrls = product.getMasterData().getStaged().getMasterVariant().getImages()
+                    .stream()
+                    .map(image -> image.getUrl())
+                    .collect(toList());
+            assertThat(oldImageOrderUrls).containsExactly(url1, url2, url3);
+
+            final Integer position = 0;
+            final List<Image> images = product.getMasterData().getStaged().getMasterVariant().getImages();
+            final ProductUpdateCommand cmd = ProductUpdateCommand.of(product, MoveImageToPosition.ofImageUrlAndVariantId(images.get(1).getUrl(), MASTER_VARIANT_ID, position));
+
+            final Product updatedProduct = client().executeBlocking(cmd);
+
+            final List<String> urls = updatedProduct.getMasterData().getStaged().getMasterVariant().getImages()
+                    .stream()
+                    .map(image -> image.getUrl())
+                    .collect(toList());
+            assertThat(urls).containsExactly(url2, url1, url3);
+
+            return updatedProduct;
+        });
+    }
+
+    @Test
+    public void moveImageToPositionBySku() throws Exception {
+        final String url1 = "http://www.commercetools.com/ct_logo_farbe_1.gif";
+        final String url2 = "http://www.commercetools.com/ct_logo_farbe_2.gif";
+        final String url3 = "http://www.commercetools.com/ct_logo_farbe_3.gif";
+        withProductWithImages(client(), url1, url2, url3, (Product product) -> {
+            final List<String> oldImageOrderUrls = product.getMasterData().getStaged().getMasterVariant().getImages()
+                    .stream()
+                    .map(image -> image.getUrl())
+                    .collect(toList());
+            assertThat(oldImageOrderUrls).containsExactly(url1, url2, url3);
+
+            final Integer position = 0;
+            final ProductVariant masterVariant = product.getMasterData().getStaged().getMasterVariant();
+            final List<Image> images = masterVariant.getImages();
+            final ProductUpdateCommand cmd = ProductUpdateCommand.of(product, MoveImageToPosition.ofImageUrlAndSku(images.get(1).getUrl(), masterVariant.getSku(), position));
+
+            final Product updatedProduct = client().executeBlocking(cmd);
+
+            final List<String> urls = updatedProduct.getMasterData().getStaged().getMasterVariant().getImages()
+                    .stream()
+                    .map(image -> image.getUrl())
+                    .collect(toList());
+            assertThat(urls).containsExactly(url2, url1, url3);
+
+            return updatedProduct;
+        });
+    }
+
+    @Test
     public void addExternalImage() throws Exception {
         withUpdateableProduct(client(), (Product product) -> {
             assertThat(product.getMasterData().getStaged().getMasterVariant().getImages()).hasSize(0);
@@ -102,22 +159,6 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
                 .withValidFrom(SphereTestUtils.now())
                 .withValidUntil(SphereTestUtils.now().withZoneSameLocal(ZoneOffset.UTC).plusHours(2));
         testAddPrice(expectedPrice);
-    }
-
-    private void testAddPrice(final PriceDraft expectedPrice) throws Exception {
-        withUpdateableProduct(client(), product -> {
-            final Product updatedProduct = client()
-                    .executeBlocking(ProductUpdateCommand.of(product, AddPrice.of(1, expectedPrice)));
-
-
-            final List<Price> prices = updatedProduct.getMasterData().getStaged().getMasterVariant().getPrices();
-            assertThat(prices).hasSize(1);
-            final Price actualPrice = prices.get(0);
-
-            assertThat(expectedPrice).isEqualTo(PriceDraft.of(actualPrice));
-
-            return updatedProduct;
-        });
     }
 
     @Test
@@ -775,4 +816,35 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
             return f.apply(productProjection);
         });
     }
+
+    private void testAddPrice(final PriceDraft expectedPrice) throws Exception {
+        withUpdateableProduct(client(), product -> {
+            final Product updatedProduct = client()
+                    .executeBlocking(ProductUpdateCommand.of(product, AddPrice.of(1, expectedPrice)));
+
+
+            final List<Price> prices = updatedProduct.getMasterData().getStaged().getMasterVariant().getPrices();
+            assertThat(prices).hasSize(1);
+            final Price actualPrice = prices.get(0);
+
+            assertThat(expectedPrice).isEqualTo(PriceDraft.of(actualPrice));
+
+            return updatedProduct;
+        });
+    }
+
+    private void withProductWithImages(final BlockingSphereClient client, final String url1, final String url2, final String url3, final Function<Product, Product> productProductFunction) {
+        withUpdateableProduct(client, builder -> {
+            List<Image> imagesList = new LinkedList<>();
+            imagesList.add(Image.ofWidthAndHeight(url1, 460, 102, "commercetools logo"));
+            imagesList.add(Image.ofWidthAndHeight(url2, 460, 102, "commercetools logo"));
+            imagesList.add(Image.ofWidthAndHeight(url3, 460, 102, "commercetools logo"));
+            final ProductVariantDraft oldMasterVariant = builder.getMasterVariant();
+            final ProductVariantDraftBuilder variantDraftBuilder = ProductVariantDraftBuilder.of(oldMasterVariant);
+            variantDraftBuilder.images(imagesList);
+            variantDraftBuilder.sku(randomKey());
+            return builder.masterVariant(variantDraftBuilder.build());
+        }, productProductFunction);
+    }
+
 }
