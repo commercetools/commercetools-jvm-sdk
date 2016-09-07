@@ -23,6 +23,7 @@ import javax.annotation.Nullable;
  @see io.sphere.sdk.products.commands.ProductDeleteCommand
  @see io.sphere.sdk.products.queries.ProductQuery
  @see io.sphere.sdk.products.queries.ProductByIdGet
+ @see io.sphere.sdk.products.queries.ProductByKeyGet
  @see io.sphere.sdk.products.ProductProjection
  @see io.sphere.sdk.categories.Category
  @see io.sphere.sdk.producttypes.ProductType

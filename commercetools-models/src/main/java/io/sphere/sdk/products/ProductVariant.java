@@ -88,6 +88,12 @@ public interface ProductVariant extends AttributeContainer {
      */
     ByIdVariantIdentifier getIdentifier();
 
+    /**
+     * Key of the variant.
+     * @return key
+     *
+     * @see io.sphere.sdk.products.commands.updateactions.SetProductVariantKey
+     */
     @Nullable
     String getKey();
 }

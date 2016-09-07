@@ -2,6 +2,7 @@ package io.sphere.sdk.products.commands.updateactions;
 
 import io.sphere.sdk.commands.UpdateActionImpl;
 import io.sphere.sdk.products.Product;
+import io.sphere.sdk.products.ProductProjection;
 
 import javax.annotation.Nullable;
 
@@ -12,6 +13,8 @@ import javax.annotation.Nullable;
  *
  * {@include.example io.sphere.sdk.products.commands.ProductUpdateCommandIntegrationTest#setKey()}
  *
+ * @see Product#getKey()
+ * @see ProductProjection#getKey()
  */
 public final class SetKey extends UpdateActionImpl<Product> {
     @Nullable

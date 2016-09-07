@@ -2,6 +2,7 @@ package io.sphere.sdk.products.commands.updateactions;
 
 import io.sphere.sdk.commands.UpdateActionImpl;
 import io.sphere.sdk.products.Product;
+import io.sphere.sdk.products.ProductVariant;
 
 import javax.annotation.Nullable;
 
@@ -11,6 +12,8 @@ import javax.annotation.Nullable;
  * {@doc.gen intro}
  *
  * {@include.example io.sphere.sdk.products.commands.ProductUpdateCommandIntegrationTest#setProductVariantKey()}
+ *
+ * @see ProductVariant#getKey()
  *
  */
 public final class SetProductVariantKey extends UpdateActionImpl<Product> {
