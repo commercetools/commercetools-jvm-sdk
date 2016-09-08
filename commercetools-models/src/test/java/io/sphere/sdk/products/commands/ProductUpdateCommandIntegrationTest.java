@@ -786,12 +786,25 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
     }
 
     @Test
-    public void setProductVariantKey() throws Exception {
+    public void setProductVariantKeyByVariantId() throws Exception {
         final String key = randomKey();
         withProduct(client(), (Product product) -> {
             final Integer variantId = product.getMasterData().getStaged().getMasterVariant().getId();
             final ProductUpdateCommand cmd =
                     ProductUpdateCommand.of(product, SetProductVariantKey.ofKeyAndVariantId(key, variantId));
+            final Product updatedProduct = client().executeBlocking(cmd);
+            assertThat(updatedProduct.getMasterData().getStaged().getMasterVariant().getKey()).isEqualTo(key);
+            assertThat(updatedProduct.getKey()).isNotEqualTo(key);
+        });
+    }
+
+    @Test
+    public void setProductVariantKeyBySku() throws Exception {
+        final String key = randomKey();
+        withProduct(client(), (Product product) -> {
+            final String sku = product.getMasterData().getStaged().getMasterVariant().getSku();
+            final ProductUpdateCommand cmd =
+                    ProductUpdateCommand.of(product, SetProductVariantKey.ofKeyAndSku(key, sku));
             final Product updatedProduct = client().executeBlocking(cmd);
             assertThat(updatedProduct.getMasterData().getStaged().getMasterVariant().getKey()).isEqualTo(key);
             assertThat(updatedProduct.getKey()).isNotEqualTo(key);

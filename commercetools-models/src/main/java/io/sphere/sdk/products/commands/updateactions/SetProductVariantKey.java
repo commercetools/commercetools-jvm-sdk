@@ -4,6 +4,7 @@ import io.sphere.sdk.commands.UpdateActionImpl;
 import io.sphere.sdk.products.Product;
 import io.sphere.sdk.products.ProductVariant;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 /**
@@ -11,7 +12,10 @@ import javax.annotation.Nullable;
  *
  * {@doc.gen intro}
  *
- * {@include.example io.sphere.sdk.products.commands.ProductUpdateCommandIntegrationTest#setProductVariantKey()}
+ * Use the variantId to select the variant
+ * {@include.example io.sphere.sdk.products.commands.ProductUpdateCommandIntegrationTest#setProductVariantKeyByVariantId()}
+ * or use the sku to select the variant
+ * {@include.example io.sphere.sdk.products.commands.ProductUpdateCommandIntegrationTest#setProductVariantKeyBySku()}
  *
  * @see ProductVariant#getKey()
  *
@@ -21,11 +25,14 @@ public final class SetProductVariantKey extends UpdateActionImpl<Product> {
     private final String key;
     @Nullable
     private final Integer variantId;
+    @Nullable
+    private final String sku;
 
-    private SetProductVariantKey(@Nullable final String key, @Nullable final Integer variantId) {
+    private SetProductVariantKey(@Nullable final String key, @Nullable final Integer variantId, @Nullable final String sku) {
         super("setProductVariantKey");
         this.key = key;
         this.variantId = variantId;
+        this.sku = sku;
     }
 
     @Nullable
@@ -38,7 +45,16 @@ public final class SetProductVariantKey extends UpdateActionImpl<Product> {
         return variantId;
     }
 
-    public static SetProductVariantKey ofKeyAndVariantId(@Nullable final String key, final Integer variantId) {
-        return new SetProductVariantKey(key, variantId);
+    @Nullable
+    public String getSku() {
+        return sku;
+    }
+
+    public static SetProductVariantKey ofKeyAndVariantId(@Nullable final String key, @Nonnull final Integer variantId) {
+        return new SetProductVariantKey(key, variantId, null);
+    }
+
+    public static SetProductVariantKey ofKeyAndSku(@Nullable final String key, @Nonnull final String sku) {
+        return new SetProductVariantKey(key, null, sku);
     }
 }
