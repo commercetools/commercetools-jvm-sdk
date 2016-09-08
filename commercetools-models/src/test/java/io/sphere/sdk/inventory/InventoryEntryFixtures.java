@@ -11,6 +11,7 @@ import java.time.ZonedDateTime;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 import java.util.function.Function;
+import java.util.function.UnaryOperator;
 
 import static io.sphere.sdk.channels.ChannelFixtures.withChannelOfRole;
 import static io.sphere.sdk.test.SphereTestUtils.*;
@@ -47,5 +48,10 @@ public class InventoryEntryFixtures extends Base {
         final InventoryEntry inventoryEntry = client.executeBlocking(InventoryEntryCreateCommand.of(draft));
         consumer.accept(inventoryEntry);
         client.executeBlocking(InventoryEntryDeleteCommand.of(inventoryEntry));
+    }
+
+    public static void withInventoryEntry(final BlockingSphereClient client, final UnaryOperator<InventoryEntry> op) {
+        final InventoryEntry inventoryEntry = client.executeBlocking(InventoryEntryCreateCommand.of(InventoryEntryDraft.of(randomKey(), 4)));
+        client.executeBlocking(InventoryEntryDeleteCommand.of(op.apply(inventoryEntry)));
     }
 }
