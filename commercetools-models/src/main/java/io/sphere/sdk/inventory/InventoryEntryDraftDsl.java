@@ -5,6 +5,7 @@ import io.sphere.sdk.channels.Channel;
 import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Referenceable;
+import io.sphere.sdk.types.CustomFieldsDraft;
 
 import javax.annotation.Nullable;
 import java.time.ZonedDateTime;
@@ -19,27 +20,34 @@ public final class InventoryEntryDraftDsl extends Base implements InventoryEntry
     private final ZonedDateTime expectedDelivery;
     @Nullable 
     private final Reference<Channel> supplyChannel;
+    @Nullable
+    private final CustomFieldsDraft custom;
 
     @JsonCreator
-    InventoryEntryDraftDsl(final String sku, final Long quantityOnStock, @Nullable final ZonedDateTime expectedDelivery, @Nullable final Integer restockableInDays, @Nullable final Reference<Channel> supplyChannel) {
+    InventoryEntryDraftDsl(final String sku, final Long quantityOnStock, @Nullable final ZonedDateTime expectedDelivery, @Nullable final Integer restockableInDays, @Nullable final Reference<Channel> supplyChannel, @Nullable final CustomFieldsDraft custom) {
         this.expectedDelivery = expectedDelivery;
         this.sku = sku;
         this.quantityOnStock = quantityOnStock;
         this.restockableInDays = restockableInDays;
         this.supplyChannel = supplyChannel;
+        this.custom = custom;
     }
 
     public InventoryEntryDraftDsl withExpectedDelivery(@Nullable final ZonedDateTime expectedDelivery) {
-        return of(sku, quantityOnStock, expectedDelivery, restockableInDays, supplyChannel);
+        return new InventoryEntryDraftDsl(sku, quantityOnStock, expectedDelivery, restockableInDays, supplyChannel, custom);
     }
 
     public InventoryEntryDraft withSupplyChannel(@Nullable final Referenceable<Channel> supplyChannel) {
         final Reference<Channel> channelReference = Optional.ofNullable(supplyChannel).map(x -> x.toReference()).orElse(null);
-        return of(sku, quantityOnStock, expectedDelivery, restockableInDays, channelReference);
+        return new InventoryEntryDraftDsl(sku, quantityOnStock, expectedDelivery, restockableInDays, channelReference, custom);
     }
 
     public InventoryEntryDraftDsl withRestockableInDays(@Nullable final Integer restockableInDays) {
-        return of(sku, quantityOnStock, expectedDelivery, restockableInDays, supplyChannel);
+        return new InventoryEntryDraftDsl(sku, quantityOnStock, expectedDelivery, restockableInDays, supplyChannel, custom);
+    }
+
+    public InventoryEntryDraftDsl withCustom(@Nullable final CustomFieldsDraft custom) {
+        return new InventoryEntryDraftDsl(sku, quantityOnStock, expectedDelivery, restockableInDays, supplyChannel, custom);
     }
 
     public static InventoryEntryDraftDsl of(final String sku, final long quantityOnStock) {
@@ -47,7 +55,7 @@ public final class InventoryEntryDraftDsl extends Base implements InventoryEntry
     }
 
     public static InventoryEntryDraftDsl of(final String sku, final long quantityOnStock, final ZonedDateTime expectedDelivery, @Nullable final Integer restockableInDays, final Reference<Channel> supplyChannel) {
-        return new InventoryEntryDraftDsl(sku, quantityOnStock, expectedDelivery, restockableInDays, supplyChannel);
+        return new InventoryEntryDraftDsl(sku, quantityOnStock, expectedDelivery, restockableInDays, supplyChannel, null);
     }
 
     @Override
@@ -77,5 +85,11 @@ public final class InventoryEntryDraftDsl extends Base implements InventoryEntry
     @Nullable
     public Reference<Channel> getSupplyChannel() {
         return supplyChannel;
+    }
+
+    @Override
+    @Nullable
+    public CustomFieldsDraft getCustom() {
+        return custom;
     }
 }

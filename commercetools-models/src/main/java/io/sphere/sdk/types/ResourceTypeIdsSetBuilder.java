@@ -6,6 +6,7 @@ import io.sphere.sdk.carts.LineItem;
 import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.channels.Channel;
 import io.sphere.sdk.customers.Customer;
+import io.sphere.sdk.inventory.InventoryEntry;
 import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.Builder;
 import io.sphere.sdk.payments.Payment;
@@ -69,6 +70,10 @@ public final class ResourceTypeIdsSetBuilder extends Base implements Builder<Set
 
     public ResourceTypeIdsSetBuilder addChannels() {
         return add(Channel.resourceTypeId());
+    }
+
+    public ResourceTypeIdsSetBuilder addInventoryEntries() {
+        return add(InventoryEntry.resourceTypeId());
     }
 
     @Override
