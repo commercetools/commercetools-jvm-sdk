@@ -6,6 +6,11 @@ import io.sphere.sdk.models.Builder;
 
 import java.math.BigInteger;
 
+/**
+ * Builds {@link CustomObjectBigIntegerNumberGeneratorConfig} instances using the Builder pattern.
+ *
+ */
+
 public class CustomObjectBigIntegerNumberGeneratorConfigBuilder extends Base implements Builder<CustomObjectBigIntegerNumberGeneratorConfig> {
 
     private SphereClient sphereClient;

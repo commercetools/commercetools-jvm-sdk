@@ -5,6 +5,12 @@ import io.sphere.sdk.models.Base;
 
 import java.math.BigInteger;
 
+/**
+ * Represents the configuration for the Sequential number generator .
+ *
+ * @see CustomObjectBigIntegerNumberGeneratorConfig
+ */
+
 public final class CustomObjectBigIntegerNumberGeneratorConfig extends Base {
 
     private final SphereClient sphereClient;

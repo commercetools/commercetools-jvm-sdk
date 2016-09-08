@@ -13,6 +13,29 @@ import org.slf4j.LoggerFactory;
 import java.math.BigInteger;
 import java.util.concurrent.CompletionStage;
 
+/**
+ Creates an incremental sequence of BigInteger numbers, storing the last used number in a CustomObject. It is thread safe, by using optimistic concurrency control based on the version of the CustomObject.
+ When there is a concurrency exception, it is automatically retried to generate the number (with a maximum number of retries configured in {@link CustomObjectBigIntegerNumberGeneratorConfig}).
+
+ <h3 id="create-type">Create number sequence starting with 1</h3>
+
+ <p>Execution example:</p>
+ {@include.example io.sphere.sdk.sequencegenerators.BigIntegerNumberGeneratorIntegrationTest#firstNumberIsOne()}
+
+ <h3 id="create-type">Create number sequence with a given initial value</h3>
+
+ <p>It is possible to assign an initial value for the sequence</p>
+
+ <p>Execution example:</p>
+ {@include.example io.sphere.sdk.sequencegenerators.BigIntegerNumberGeneratorIntegrationTest#firstNumberCanBeGiven()}
+
+ <h3 id="create-object-with-type">Create a sequence assigning the container and key for the custom object</h3>
+
+ <p>Execution example:</p>
+ {@include.example io.sphere.sdk.sequencegenerators.BigIntegerNumberGeneratorIntegrationTest#customObjectContainerAndKeyCanBeGiven()}
+
+ */
+
 public final class CustomObjectBigIntegerNumberGenerator extends Base implements BigIntegerNumberGenerator {
 
     private static final Logger logger = LoggerFactory.getLogger(CustomObjectBigIntegerNumberGenerator.class);

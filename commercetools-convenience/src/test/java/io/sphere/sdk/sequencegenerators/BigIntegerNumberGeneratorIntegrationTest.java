@@ -4,7 +4,6 @@ import io.sphere.sdk.customobjects.CustomObject;
 import io.sphere.sdk.customobjects.queries.CustomObjectByKeyGet;
 import io.sphere.sdk.test.IntegrationTest;
 import io.sphere.sdk.utils.CompletableFutureUtils;
-import org.assertj.core.api.AbstractBooleanAssert;
 import org.junit.Test;
 
 import java.math.BigInteger;
