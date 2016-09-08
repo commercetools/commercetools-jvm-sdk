@@ -4,6 +4,7 @@ import io.sphere.sdk.customobjects.CustomObject;
 import io.sphere.sdk.customobjects.queries.CustomObjectByKeyGet;
 import io.sphere.sdk.test.IntegrationTest;
 import io.sphere.sdk.utils.CompletableFutureUtils;
+import org.assertj.core.api.AbstractBooleanAssert;
 import org.junit.Test;
 
 import java.math.BigInteger;
@@ -35,7 +36,11 @@ public class BigIntegerNumberGeneratorIntegrationTest extends IntegrationTest {
     @Test
     public void firstNumberCanBeGiven() throws Exception {
         final BigInteger initialCounterValue = new BigInteger("5001");
-        final BigIntegerNumberGenerator generator = CustomObjectBigIntegerNumberGenerator.of(client(), randomKey(), randomKey(), initialCounterValue);
+        final CustomObjectBigIntegerNumberGeneratorConfigBuilder configBuilder = CustomObjectBigIntegerNumberGeneratorConfigBuilder.of(client(), randomKey());
+        configBuilder.container(randomKey());
+        configBuilder.initialValue(initialCounterValue);
+        final CustomObjectBigIntegerNumberGeneratorConfig config = configBuilder.build();
+        final BigIntegerNumberGenerator generator = CustomObjectBigIntegerNumberGenerator.of(config);
         final BigInteger firstNumber = generator.getNextNumber().toCompletableFuture().join();
         assertThat(firstNumber).isEqualTo(initialCounterValue);
     }
@@ -44,7 +49,10 @@ public class BigIntegerNumberGeneratorIntegrationTest extends IntegrationTest {
     public void customObjectContainerAndKeyCanBeGiven() throws Exception {
         final String container = randomKey();
         final String key = randomKey();
-        final BigIntegerNumberGenerator generator = CustomObjectBigIntegerNumberGenerator.of(client(), container, key);
+        final CustomObjectBigIntegerNumberGeneratorConfigBuilder configBuilder = CustomObjectBigIntegerNumberGeneratorConfigBuilder.of(client(), key);
+        configBuilder.container(container);
+        final CustomObjectBigIntegerNumberGeneratorConfig config = configBuilder.build();
+        final BigIntegerNumberGenerator generator = CustomObjectBigIntegerNumberGenerator.of(config);
         final BigInteger firstNumber = generator.getNextNumber().toCompletableFuture().join();
         assertThat(firstNumber).isEqualTo(BigInteger.ONE);
         final CustomObject<BigInteger> customObject = client().executeBlocking(CustomObjectByKeyGet.of(container, key, BigInteger.class));
@@ -56,16 +64,21 @@ public class BigIntegerNumberGeneratorIntegrationTest extends IntegrationTest {
 
     @Test
     public void concurrentUsageTest() throws Exception {
+        final int firstNumber = 1;
+        final int lastNumber = 20;
         final BigIntegerNumberGenerator generator = createGenerator();
-        final List<CompletionStage<BigInteger>> completionStages = IntStream.range(1, 20)
+        final List<CompletionStage<BigInteger>> completionStageNumbers = IntStream.range(firstNumber, lastNumber)
                 .mapToObj(i -> generator.getNextNumber())
                 .collect(Collectors.toList());
-        final List<BigInteger> numbers = CompletableFutureUtils.listOfFuturesToFutureOfList(completionStages).toCompletableFuture().join();
-
-        throw new RuntimeException();
+        final List<BigInteger> numbersGenerated = CompletableFutureUtils.listOfFuturesToFutureOfList(completionStageNumbers).toCompletableFuture().join();
+        final List<BigInteger> expectedNumbers = IntStream.range(firstNumber, lastNumber).mapToObj(i -> BigInteger.valueOf(i)).collect(Collectors.toList());
+        assertThat(numbersGenerated.containsAll(expectedNumbers)).isTrue();
     }
 
     private BigIntegerNumberGenerator createGenerator() {
-        return CustomObjectBigIntegerNumberGenerator.of(client(), randomKey(), randomKey());
+        final CustomObjectBigIntegerNumberGeneratorConfigBuilder configBuilder = CustomObjectBigIntegerNumberGeneratorConfigBuilder.of(client(), randomKey());
+        configBuilder.container(randomKey());
+        final CustomObjectBigIntegerNumberGeneratorConfig config = configBuilder.build();
+        return CustomObjectBigIntegerNumberGenerator.of(config);
     }
 }
