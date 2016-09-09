@@ -9,6 +9,7 @@ import io.sphere.sdk.products.ProductProjection;
 import io.sphere.sdk.types.Custom;
 import io.sphere.sdk.types.CustomFields;
 import io.sphere.sdk.types.TypeDraft;
+import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import javax.annotation.Nullable;
@@ -191,19 +192,8 @@ public interface Category extends Resource<Category>, WithLocalizedSlug, MetaAtt
     }
 
     static String toString(final Category category) {
-        final List<Reference<Category>> ancestors = category.getAncestors();
-        return new ToStringBuilder(category, SdkDefaults.TO_STRING_STYLE)
-                .append("id", category.getId())
-                .append("version", category.getVersion())
-                .append("createdAt", category.getCreatedAt())
-                .append("lastModifiedAt", category.getLastModifiedAt())
-                .append("name", category.getName())
-                .append("slug", category.getSlug())
-                .append("description", category.getDescription())
-                .append("ancestors", ancestors == null ? null : join(ancestors))
-                .append("parent", category.getParent())
-                .append("orderHint", category.getOrderHint())
-                .toString();
+        return new ReflectionToStringBuilder(category, SdkDefaults.TO_STRING_STYLE)
+                .build();
     }
 
     /**
