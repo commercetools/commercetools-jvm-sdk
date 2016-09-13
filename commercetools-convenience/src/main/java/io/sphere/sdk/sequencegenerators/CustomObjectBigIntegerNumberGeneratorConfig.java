@@ -9,37 +9,17 @@ import java.math.BigInteger;
 /**
  * Configuration for the Sequential number generator.
  *
+ * <h3 id="create-type">Set initial value and container example:</h3>
+ * {@include.example io.sphere.sdk.sequencegenerators.BigIntegerNumberGeneratorIntegrationTest#firstNumberCanBeGiven()}
+ *
  * @see CustomObjectBigIntegerNumberGeneratorConfigBuilder
  */
 public final class CustomObjectBigIntegerNumberGeneratorConfig extends Base {
 
     private final SphereClient sphereClient;
-
-    /**
-     *
-     * If there is a concurrency exception, the generator retries to generate the number. This parameter sets the maximum number of retries.
-     * (by default is is set to 100 in the config builder)
-     *
-     * @see CustomObjectBigIntegerNumberGeneratorConfigBuilder
-     */
     private final int maxRetryAttempts;
-
-    /**
-     *
-     * Container and key are namespaces like in a key-value store.
-     *
-     * @see CustomObject
-     */
     private final String container;
     private final String key;
-
-    /**
-     *
-     * initialValue allows to start the number sequence in a given number.
-     * (by default is is set to 1 in the config builder)
-     *
-     * @see CustomObjectBigIntegerNumberGeneratorConfigBuilder
-     */
     private final BigInteger initialValue;
 
     CustomObjectBigIntegerNumberGeneratorConfig(final SphereClient sphereClient, final int maxRetryAttempts, final String container, final String key, final BigInteger initialValue) {
