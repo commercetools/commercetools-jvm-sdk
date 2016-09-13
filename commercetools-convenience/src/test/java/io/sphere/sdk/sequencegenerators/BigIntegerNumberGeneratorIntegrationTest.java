@@ -35,10 +35,11 @@ public class BigIntegerNumberGeneratorIntegrationTest extends IntegrationTest {
     @Test
     public void firstNumberCanBeGiven() throws Exception {
         final BigInteger initialCounterValue = new BigInteger("5001");
-        final CustomObjectBigIntegerNumberGeneratorConfigBuilder configBuilder = CustomObjectBigIntegerNumberGeneratorConfigBuilder.of(client(), randomKey());
-        configBuilder.container(randomKey());
-        configBuilder.initialValue(initialCounterValue);
-        final CustomObjectBigIntegerNumberGeneratorConfig config = configBuilder.build();
+        final CustomObjectBigIntegerNumberGeneratorConfig config =
+                CustomObjectBigIntegerNumberGeneratorConfigBuilder.of(client(), randomKey())
+                        .container(randomKey())
+                        .initialValue(initialCounterValue)
+                        .build();
         final BigIntegerNumberGenerator generator = CustomObjectBigIntegerNumberGenerator.of(config);
         final BigInteger firstNumber = generator.getNextNumber().toCompletableFuture().join();
         assertThat(firstNumber).isEqualTo(initialCounterValue);
@@ -48,9 +49,10 @@ public class BigIntegerNumberGeneratorIntegrationTest extends IntegrationTest {
     public void customObjectContainerAndKeyCanBeGiven() throws Exception {
         final String container = randomKey();
         final String key = randomKey();
-        final CustomObjectBigIntegerNumberGeneratorConfigBuilder configBuilder = CustomObjectBigIntegerNumberGeneratorConfigBuilder.of(client(), key);
-        configBuilder.container(container);
-        final CustomObjectBigIntegerNumberGeneratorConfig config = configBuilder.build();
+        final CustomObjectBigIntegerNumberGeneratorConfig config =
+                CustomObjectBigIntegerNumberGeneratorConfigBuilder.of(client(), key)
+                        .container(container)
+                        .build();
         final BigIntegerNumberGenerator generator = CustomObjectBigIntegerNumberGenerator.of(config);
         final BigInteger firstNumber = generator.getNextNumber().toCompletableFuture().join();
         assertThat(firstNumber).isEqualTo(BigInteger.ONE);
@@ -75,9 +77,10 @@ public class BigIntegerNumberGeneratorIntegrationTest extends IntegrationTest {
     }
 
     private BigIntegerNumberGenerator createGenerator() {
-        final CustomObjectBigIntegerNumberGeneratorConfigBuilder configBuilder = CustomObjectBigIntegerNumberGeneratorConfigBuilder.of(client(), randomKey());
-        configBuilder.container(randomKey());
-        final CustomObjectBigIntegerNumberGeneratorConfig config = configBuilder.build();
+        final CustomObjectBigIntegerNumberGeneratorConfig config =
+                CustomObjectBigIntegerNumberGeneratorConfigBuilder.of(client(), randomKey())
+                        .container(randomKey())
+                        .build();
         return CustomObjectBigIntegerNumberGenerator.of(config);
     }
 }

@@ -35,7 +35,6 @@ import java.util.concurrent.CompletionStage;
  {@include.example io.sphere.sdk.sequencegenerators.BigIntegerNumberGeneratorIntegrationTest#customObjectContainerAndKeyCanBeGiven()}
 
  */
-
 public final class CustomObjectBigIntegerNumberGenerator extends Base implements BigIntegerNumberGenerator {
 
     private static final Logger logger = LoggerFactory.getLogger(CustomObjectBigIntegerNumberGenerator.class);
@@ -54,10 +53,10 @@ public final class CustomObjectBigIntegerNumberGenerator extends Base implements
     }
 
     private CompletionStage<BigInteger> tryGetNextNumber(final int timeToLive, final Throwable throwable) {
-        if (timeToLive > 0){
+        if (timeToLive > 0) {
             final CompletionStage<BigInteger> bigIntegerCompletionStage = incrementAndGetSequenceNumber();
             return CompletableFutureUtils.recoverWith(bigIntegerCompletionStage, (error) -> tryGetNextNumber(timeToLive - 1, error));
-        }else{
+        } else {
             return CompletableFutureUtils.failed(throwable);
         }
     }
