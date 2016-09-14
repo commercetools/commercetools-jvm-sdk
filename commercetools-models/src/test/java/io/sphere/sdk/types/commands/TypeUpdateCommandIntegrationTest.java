@@ -9,6 +9,11 @@ import io.sphere.sdk.types.*;
 import io.sphere.sdk.types.commands.updateactions.*;
 import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import static io.sphere.sdk.test.SphereTestUtils.*;
 import static io.sphere.sdk.types.TypeFixtures.withUpdateableType;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -62,6 +67,26 @@ public class TypeUpdateCommandIntegrationTest extends IntegrationTest {
     }
 
     @Test
+    public void changeFieldDefinitionOrder() {
+        withUpdateableType(client(), type -> {
+            final List<String> originalFieldDefinitionNames = type.getFieldDefinitions()
+                    .stream()
+                    .map(fieldDefinition -> fieldDefinition.getName())
+                    .collect(Collectors.toList());
+            List<String> reverseOrderFieldDefinitionNames = new ArrayList<String>(originalFieldDefinitionNames);
+            Collections.reverse(reverseOrderFieldDefinitionNames);
+            final Type updatedType = client().executeBlocking(TypeUpdateCommand.of(type, ChangeFieldDefinitionOrder.of(reverseOrderFieldDefinitionNames)));
+            final List<String> updatedFieldDefinitionNames = updatedType.getFieldDefinitions()
+                    .stream()
+                    .map(fieldDefinition -> fieldDefinition.getName())
+                    .collect(Collectors.toList());
+            assertThat(updatedFieldDefinitionNames.containsAll(originalFieldDefinitionNames));
+            assertThat(updatedFieldDefinitionNames.size()).isEqualTo(originalFieldDefinitionNames.size());
+            return updatedType;
+        });
+    }
+
+    @Test
     public void addEnumValue() {
         withUpdateableType(client(), type -> {
             final String name = TypeFixtures.ENUM_FIELD_NAME;
@@ -70,6 +95,26 @@ public class TypeUpdateCommandIntegrationTest extends IntegrationTest {
             assertThat(updatedType.getFieldDefinitionByName(name).getType())
                     .isInstanceOf(EnumFieldType.class)
                     .matches(fieldType -> ((EnumFieldType) fieldType).getValues().contains(newEnumValue), "contains the new enum value");
+            return updatedType;
+        });
+    }
+
+    @Test
+    public void changeEnumValueOrder() {
+        withUpdateableType(client(), type -> {
+            final String fieldName = TypeFixtures.ENUM_FIELD_NAME;
+            final FieldType fieldType = type.getFieldDefinitionByName(fieldName).getType();
+            final List<EnumValue> oldEnumValues = ((EnumFieldType) fieldType).getValues();
+            final List<String> enumKeys = oldEnumValues
+                    .stream()
+                    .map(enumValue -> enumValue.getKey())
+                    .collect(Collectors.toList());
+            Collections.reverse(enumKeys);
+            final Type updatedType = client().executeBlocking(TypeUpdateCommand.of(type, ChangeEnumValueOrder.of(fieldName, enumKeys)));
+            final FieldType updatedFieldType = updatedType.getFieldDefinitionByName(fieldName).getType();
+            final List<EnumValue> newEnumValues = ((EnumFieldType) updatedFieldType).getValues();
+            assertThat(newEnumValues).containsAll(oldEnumValues);
+            assertThat(newEnumValues.size()).isEqualTo(oldEnumValues.size());
             return updatedType;
         });
     }
