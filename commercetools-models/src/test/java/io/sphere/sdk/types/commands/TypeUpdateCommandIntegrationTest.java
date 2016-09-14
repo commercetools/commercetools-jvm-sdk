@@ -16,6 +16,7 @@ import java.util.stream.Collectors;
 
 import static io.sphere.sdk.test.SphereTestUtils.*;
 import static io.sphere.sdk.types.TypeFixtures.withUpdateableType;
+import static io.sphere.sdk.utils.SphereInternalUtils.reverse;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class TypeUpdateCommandIntegrationTest extends IntegrationTest {
@@ -73,15 +74,13 @@ public class TypeUpdateCommandIntegrationTest extends IntegrationTest {
                     .stream()
                     .map(fieldDefinition -> fieldDefinition.getName())
                     .collect(Collectors.toList());
-            List<String> reverseOrderFieldDefinitionNames = new ArrayList<String>(originalFieldDefinitionNames);
-            Collections.reverse(reverseOrderFieldDefinitionNames);
-            final Type updatedType = client().executeBlocking(TypeUpdateCommand.of(type, ChangeFieldDefinitionOrder.of(reverseOrderFieldDefinitionNames)));
-            final List<String> updatedFieldDefinitionNames = updatedType.getFieldDefinitions()
+            List<String> values = reverse(originalFieldDefinitionNames);
+            final Type updatedType = client().executeBlocking(TypeUpdateCommand.of(type, ChangeFieldDefinitionOrder.of(values)));
+            final List<String> updatedValues = updatedType.getFieldDefinitions()
                     .stream()
                     .map(fieldDefinition -> fieldDefinition.getName())
                     .collect(Collectors.toList());
-            assertThat(updatedFieldDefinitionNames.containsAll(originalFieldDefinitionNames));
-            assertThat(updatedFieldDefinitionNames.size()).isEqualTo(originalFieldDefinitionNames.size());
+            assertThat(updatedValues).isEqualTo(values);
             return updatedType;
         });
     }
@@ -105,11 +104,10 @@ public class TypeUpdateCommandIntegrationTest extends IntegrationTest {
             final String fieldName = TypeFixtures.ENUM_FIELD_NAME;
             final FieldType fieldType = type.getFieldDefinitionByName(fieldName).getType();
             final List<EnumValue> oldEnumValues = ((EnumFieldType) fieldType).getValues();
-            final List<String> enumKeys = oldEnumValues
-                    .stream()
+            final List<String> enumKeys = reverse(oldEnumValues.stream()
                     .map(enumValue -> enumValue.getKey())
-                    .collect(Collectors.toList());
-            Collections.reverse(enumKeys);
+                    .collect(Collectors.toList())
+            );
             final Type updatedType = client().executeBlocking(TypeUpdateCommand.of(type, ChangeEnumValueOrder.of(fieldName, enumKeys)));
             final FieldType updatedFieldType = updatedType.getFieldDefinitionByName(fieldName).getType();
             final List<EnumValue> newEnumValues = ((EnumFieldType) updatedFieldType).getValues();
@@ -128,6 +126,26 @@ public class TypeUpdateCommandIntegrationTest extends IntegrationTest {
             assertThat(updatedType.getFieldDefinitionByName(name).getType())
                     .isInstanceOf(LocalizedEnumFieldType.class)
                     .matches(fieldType -> ((LocalizedEnumFieldType) fieldType).getValues().contains(newLocalizedEnumValue), "contains the new enum value");
+            return updatedType;
+        });
+    }
+
+    @Test
+    public void changeLocalizedEnumValueOrder() {
+        withUpdateableType(client(), type -> {
+            final String fieldName = TypeFixtures.LOCALIZED_ENUM_FIELD_NAME;
+            final FieldType fieldType = type.getFieldDefinitionByName(fieldName).getType();
+            final List<LocalizedEnumValue> oldEnumValues = ((LocalizedEnumFieldType) fieldType).getValues();
+            final List<String> enumKeys = reverse(oldEnumValues
+                    .stream()
+                    .map(enumValue -> enumValue.getKey())
+                    .collect(Collectors.toList())
+            );
+            final Type updatedType = client().executeBlocking(TypeUpdateCommand.of(type, ChangeLocalizedEnumValueOrder.of(fieldName, enumKeys)));
+            final FieldType updatedFieldType = updatedType.getFieldDefinitionByName(fieldName).getType();
+            final List<LocalizedEnumValue> newEnumValues = ((LocalizedEnumFieldType) updatedFieldType).getValues();
+            assertThat(newEnumValues).containsAll(oldEnumValues);
+            assertThat(newEnumValues.size()).isEqualTo(oldEnumValues.size());
             return updatedType;
         });
     }
