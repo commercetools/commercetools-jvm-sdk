@@ -83,6 +83,9 @@ public class CustomerCreateCommandIntegrationTest extends CustomerIntegrationTes
         assertThat(customer.getCustomerGroup().getObj())
                 .as("customer group can be expanded")
                 .isNotNull();
+        String addressId = customer.getAddresses().get(0).getId();
+        final Address addressById = customer.findAddressById(addressId).get();
+        assertThat(addressById.equals(customer.getAddresses().get(0)));
     }
 
     @Test
