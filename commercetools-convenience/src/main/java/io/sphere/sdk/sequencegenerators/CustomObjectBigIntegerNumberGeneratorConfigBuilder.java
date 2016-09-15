@@ -11,7 +11,7 @@ import java.math.BigInteger;
  *
  * Builds {@link CustomObjectBigIntegerNumberGeneratorConfig} instances using the Builder pattern.
  */
-public class CustomObjectBigIntegerNumberGeneratorConfigBuilder extends Base implements Builder<CustomObjectBigIntegerNumberGeneratorConfig> {
+public final class CustomObjectBigIntegerNumberGeneratorConfigBuilder extends Base implements Builder<CustomObjectBigIntegerNumberGeneratorConfig> {
 
     private SphereClient sphereClient;
     private int maxRetryAttempts = 100;
