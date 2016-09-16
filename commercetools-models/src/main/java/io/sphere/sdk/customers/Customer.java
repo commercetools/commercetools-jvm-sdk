@@ -259,6 +259,23 @@ public interface Customer extends Resource<Customer>, Custom {
                 .findFirst();
     }
 
+    /**
+     *
+     * @param addressId Is the Id of the address to find.
+     *
+     * @return Address or null
+     */
+    @Nullable
+    default Address getAddressById(final String addressId) {
+        return findAddressById(addressId).orElse(null);
+    }
+
+    default Optional<Address> findAddressById(final String addressId) {
+        return getAddresses().stream()
+                .filter( address -> address.getId().equals(addressId) )
+                .findFirst();
+    }
+
     Boolean isEmailVerified();
 
     /**
