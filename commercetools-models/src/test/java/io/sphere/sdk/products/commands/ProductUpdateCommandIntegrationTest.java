@@ -128,6 +128,33 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
         });
     }
 
+    @Test
+    public void addExternalImageVariantId() throws Exception {
+        withUpdateableProduct(client(), (Product product) -> {
+            assertThat(product.getMasterData().getStaged().getMasterVariant().getImages()).hasSize(0);
+
+            final Image image = Image.ofWidthAndHeight("http://www.commercetools.com/assets/img/ct_logo_farbe.gif", 460, 102, "commercetools logo");
+            final Product updatedProduct = client().executeBlocking(ProductUpdateCommand.of(product, AddExternalImage.ofVariantId(image, MASTER_VARIANT_ID)));
+
+            assertThat(updatedProduct.getMasterData().getStaged().getMasterVariant().getImages()).isEqualTo(asList(image));
+            return updatedProduct;
+        });
+    }
+
+    @Test
+    public void addExternalImageSku() throws Exception {
+        withUpdateableProduct(client(), (Product product) -> {
+            final ProductVariant masterVariant = product.getMasterData().getStaged().getMasterVariant();
+            assertThat(masterVariant.getImages()).hasSize(0);
+
+            final Image image = Image.ofWidthAndHeight("http://www.commercetools.com/assets/img/ct_logo_farbe.gif", 460, 102, "commercetools logo");
+            final Product updatedProduct = client().executeBlocking(ProductUpdateCommand.of(product, AddExternalImage.ofSku(image, masterVariant.getSku())));
+
+            assertThat(updatedProduct.getMasterData().getStaged().getMasterVariant().getImages()).isEqualTo(asList(image));
+            return updatedProduct;
+        });
+    }
+
     //do not inline, it is example code
     @Test
     public void addPrice() throws Exception {
@@ -547,6 +574,76 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
             return productWithoutMoney;
         });
     }
+
+//    @Test
+//    public void setAttributeVariantId() throws Exception {
+//        withUpdateableProduct(client(), product -> {
+//            //the setter contains the name and a JSON mapper, declare it only one time in your project per attribute
+//            //example for MonetaryAmount attribute
+//            final String moneyAttributeName = MONEY_ATTRIBUTE_NAME;
+//            final NamedAttributeAccess<MonetaryAmount> moneyAttribute =
+//                    AttributeAccess.ofMoney().ofName(moneyAttributeName);
+//            final MonetaryAmount newValueForMoney = EURO_10;
+//
+//            //example for LocalizedEnumValue attribute
+//            final NamedAttributeAccess<LocalizedEnumValue> colorAttribute = Colors.ATTRIBUTE;
+//            final LocalizedEnumValue oldValueForColor = Colors.GREEN;
+//            final LocalizedEnumValue newValueForColor = Colors.RED;
+//
+//            assertThat(product.getMasterData().getStaged().getMasterVariant().findAttribute(moneyAttribute)).isEmpty();
+//            assertThat(product.getMasterData().getStaged().getMasterVariant().findAttribute(colorAttribute)).contains(oldValueForColor);
+//
+//            final SetAttribute moneyUpdate = SetAttribute.ofVariantId(MASTER_VARIANT_ID, moneyAttribute, newValueForMoney);
+//            final SetAttribute localizedEnumUpdate = SetAttribute.ofVariantId(MASTER_VARIANT_ID, colorAttribute, newValueForColor);
+//
+//            final Product updatedProduct = client().executeBlocking(ProductUpdateCommand.of(product, asList(moneyUpdate, localizedEnumUpdate)));
+//            assertThat(updatedProduct.getMasterData().getStaged().getMasterVariant().findAttribute(moneyAttribute)).contains(newValueForMoney);
+//            assertThat(updatedProduct.getMasterData().getStaged().getMasterVariant().findAttribute(colorAttribute)).contains(newValueForColor);
+//
+//            final SetAttribute unsetAction = SetAttribute.ofVariantIdUnsetAttribute(MASTER_VARIANT_ID, moneyAttribute);
+//            final Product productWithoutMoney = client().executeBlocking(ProductUpdateCommand.of(updatedProduct, unsetAction));
+//
+//            assertThat(productWithoutMoney.getMasterData().getStaged().getMasterVariant().findAttribute(moneyAttribute)).isEmpty();
+//
+//            return productWithoutMoney;
+//        });
+//    }
+
+//    @Test
+//    public void setAttributeSku() throws Exception {
+//        withUpdateableProduct(client(), product -> {
+//            final String sku = product.getMasterData().getStaged().getMasterVariant().getSku();
+//
+//            //the setter contains the name and a JSON mapper, declare it only one time in your project per attribute
+//            //example for MonetaryAmount attribute
+//            final String moneyAttributeName = MONEY_ATTRIBUTE_NAME;
+//            final NamedAttributeAccess<MonetaryAmount> moneyAttribute =
+//                    AttributeAccess.ofMoney().ofName(moneyAttributeName);
+//            final MonetaryAmount newValueForMoney = EURO_10;
+//
+//            //example for LocalizedEnumValue attribute
+//            final NamedAttributeAccess<LocalizedEnumValue> colorAttribute = Colors.ATTRIBUTE;
+//            final LocalizedEnumValue oldValueForColor = Colors.GREEN;
+//            final LocalizedEnumValue newValueForColor = Colors.RED;
+//
+//            assertThat(product.getMasterData().getStaged().getMasterVariant().findAttribute(moneyAttribute)).isEmpty();
+//            assertThat(product.getMasterData().getStaged().getMasterVariant().findAttribute(colorAttribute)).contains(oldValueForColor);
+//
+//            final SetAttribute moneyUpdate = SetAttribute.ofSku("1", moneyAttribute, newValueForMoney);
+//            final SetAttribute localizedEnumUpdate = SetAttribute.ofSku("1", colorAttribute, newValueForColor);
+//
+//            final Product updatedProduct = client().executeBlocking(ProductUpdateCommand.of(product, asList(moneyUpdate, localizedEnumUpdate)));
+//            assertThat(updatedProduct.getMasterData().getStaged().getMasterVariant().findAttribute(moneyAttribute)).contains(newValueForMoney);
+//            assertThat(updatedProduct.getMasterData().getStaged().getMasterVariant().findAttribute(colorAttribute)).contains(newValueForColor);
+//
+//            final SetAttribute unsetAction = SetAttribute.ofSkuUnsetAttribute("1", moneyAttribute);
+//            final Product productWithoutMoney = client().executeBlocking(ProductUpdateCommand.of(updatedProduct, unsetAction));
+//
+//            assertThat(productWithoutMoney.getMasterData().getStaged().getMasterVariant().findAttribute(moneyAttribute)).isEmpty();
+//
+//            return productWithoutMoney;
+//        });
+//    }
 
     @Test
     public void setAttributeInAllVariants() throws Exception {
