@@ -429,6 +429,33 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
     }
 
     @Test
+    public void removeImageVariantId() throws Exception {
+        final Image image = Image.ofWidthAndHeight("http://www.commercetools.com/assets/img/ct_logo_farbe.gif", 460, 102, "commercetools logo");
+        withUpdateableProduct(client(), product -> {
+            final Product productWithImage = client().executeBlocking(ProductUpdateCommand.of(product, AddExternalImage.ofVariantId(image, MASTER_VARIANT_ID)));
+            assertThat(productWithImage.getMasterData().getStaged().getMasterVariant().getImages()).isEqualTo(asList(image));
+
+            final Product updatedProduct = client().executeBlocking(ProductUpdateCommand.of(productWithImage, RemoveImage.ofVariantId(image, MASTER_VARIANT_ID)));
+            assertThat(updatedProduct.getMasterData().getStaged().getMasterVariant().getImages()).hasSize(0);
+            return updatedProduct;
+        });
+    }
+
+    @Test
+    public void removeImageSku() throws Exception {
+        final Image image = Image.ofWidthAndHeight("http://www.commercetools.com/assets/img/ct_logo_farbe.gif", 460, 102, "commercetools logo");
+        withUpdateableProduct(client(), product -> {
+            final String sku = product.getMasterData().getStaged().getMasterVariant().getSku();
+            final Product productWithImage = client().executeBlocking(ProductUpdateCommand.of(product, AddExternalImage.ofSku(image, sku)));
+            assertThat(productWithImage.getMasterData().getStaged().getMasterVariant().getImages()).isEqualTo(asList(image));
+
+            final Product updatedProduct = client().executeBlocking(ProductUpdateCommand.of(productWithImage, RemoveImage.ofSku(image, sku)));
+            assertThat(updatedProduct.getMasterData().getStaged().getMasterVariant().getImages()).hasSize(0);
+            return updatedProduct;
+        });
+    }
+
+    @Test
     public void removePrice() throws Exception {
         withUpdateablePricedProduct(client(), product -> {
             final Price oldPrice = getFirstPrice(product);
