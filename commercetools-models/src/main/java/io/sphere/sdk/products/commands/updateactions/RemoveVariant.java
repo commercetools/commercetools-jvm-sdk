@@ -4,6 +4,8 @@ import io.sphere.sdk.commands.UpdateActionImpl;
 import io.sphere.sdk.products.Product;
 import io.sphere.sdk.products.ProductVariant;
 
+import javax.annotation.Nullable;
+
 /**
  * Removes a variant from a product.
  *
@@ -14,22 +16,36 @@ import io.sphere.sdk.products.ProductVariant;
  * @see io.sphere.sdk.products.commands.updateactions.AddVariant
  */
 public final class RemoveVariant extends UpdateActionImpl<Product> {
+    @Nullable
     private final Integer id;
+    @Nullable
+    private final String sku;
 
-    private RemoveVariant(final Integer id) {
+    private RemoveVariant(@Nullable final Integer id, @Nullable final String sku) {
         super("removeVariant");
         this.id = id;
+        this.sku = sku;
     }
 
+    @Nullable
     public Integer getId() {
         return id;
     }
 
-    public static RemoveVariant of(final ProductVariant variant) {
-        return of(variant.getId());
+    @Nullable
+    public String getSku() {
+        return sku;
     }
 
-    public static RemoveVariant of(final Integer id) {
-        return new RemoveVariant(id);
+    public static RemoveVariant of(final ProductVariant variant) {
+        return ofVariantId(variant.getId());
+    }
+
+    public static RemoveVariant ofVariantId(final Integer id) {
+        return new RemoveVariant(id, null);
+    }
+
+    public static RemoveVariant ofVariantSku(final String sku) {
+        return new RemoveVariant(null, sku);
     }
 }
