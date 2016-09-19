@@ -162,6 +162,42 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
     }
 
     @Test
+    public void addPriceVariantId() throws Exception {
+        final PriceDraft priceDraft = PriceDraft.of(MoneyImpl.of(new BigDecimal("12345"), "JPY"));
+        withUpdateableProduct(client(), product -> {
+            final Product updatedProduct = client()
+                    .executeBlocking(ProductUpdateCommand.of(product, AddPrice.ofVariantId(1, priceDraft)));
+
+            final List<Price> prices = updatedProduct.getMasterData().getStaged().getMasterVariant().getPrices();
+            assertThat(prices).hasSize(1);
+            final Price actualPrice = prices.get(0);
+
+            assertThat(priceDraft).isEqualTo(PriceDraft.of(actualPrice));
+
+            return updatedProduct;
+        });
+    }
+
+    @Test
+    public void addPriceSku() throws Exception {
+        final PriceDraft priceDraft = PriceDraft.of(MoneyImpl.of(new BigDecimal("12345"), "JPY"));
+        withUpdateableProduct(client(), product -> {
+
+            final String sku = product.getMasterData().getStaged().getMasterVariant().getSku();
+            final Product updatedProduct = client()
+                    .executeBlocking(ProductUpdateCommand.of(product, AddPrice.ofSku(sku, priceDraft)));
+
+            final List<Price> prices = updatedProduct.getMasterData().getStaged().getMasterVariant().getPrices();
+            assertThat(prices).hasSize(1);
+            final Price actualPrice = prices.get(0);
+
+            assertThat(priceDraft).isEqualTo(PriceDraft.of(actualPrice));
+
+            return updatedProduct;
+        });
+    }
+
+    @Test
     public void setPrices() throws Exception {
         final PriceDraft expectedPrice1 = PriceDraft.of(MoneyImpl.of(123, EUR));
         final PriceDraft expectedPrice2 = PriceDraft.of(MoneyImpl.of(123, EUR)).withCountry(DE);
