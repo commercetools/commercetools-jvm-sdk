@@ -4,6 +4,7 @@ import io.sphere.sdk.commands.UpdateActionImpl;
 import io.sphere.sdk.products.PriceDraft;
 import io.sphere.sdk.products.Product;
 
+import javax.annotation.Nullable;
 import java.util.List;
 
 /**
@@ -16,17 +17,27 @@ import java.util.List;
  * @see io.sphere.sdk.products.ProductVariant#getPrices()
  */
 public final class SetPrices extends UpdateActionImpl<Product> {
+    @Nullable
     private final Integer variantId;
+    @Nullable
+    private final String sku;
     private final List<PriceDraft> prices;
 
-    private SetPrices(final Integer variantId, final List<PriceDraft> prices) {
+    private SetPrices(@Nullable final Integer variantId, @Nullable final String sku, final List<PriceDraft> prices) {
         super("setPrices");
         this.variantId = variantId;
+        this.sku = sku;
         this.prices = prices;
     }
 
+    @Nullable
     public Integer getVariantId() {
         return variantId;
+    }
+
+    @Nullable
+    public String getSku() {
+        return sku;
     }
 
     public List<PriceDraft> getPrices() {
@@ -34,6 +45,14 @@ public final class SetPrices extends UpdateActionImpl<Product> {
     }
 
     public static SetPrices of(final Integer variantId, final List<PriceDraft> prices) {
-        return new SetPrices(variantId, prices);
+        return new SetPrices(variantId, null, prices);
+    }
+
+    public static SetPrices ofVariantId(final Integer variantId, final List<PriceDraft> prices) {
+        return new SetPrices(variantId, null, prices);
+    }
+
+    public static SetPrices ofSku(final String sku, final List<PriceDraft> prices) {
+        return new SetPrices(null, sku, prices);
     }
 }

@@ -217,6 +217,43 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
     }
 
     @Test
+    public void setPricesVariantId() throws Exception {
+        final PriceDraft priceDraft = PriceDraft.of(MoneyImpl.of(123, EUR));
+        final PriceDraft priceDraft2 = PriceDraft.of(MoneyImpl.of(123, EUR)).withCountry(DE);
+        final List<PriceDraft> expectedPriceList = asList(priceDraft, priceDraft2);
+
+        withUpdateableProduct(client(), product -> {
+            final Product updatedProduct = client()
+                    .executeBlocking(ProductUpdateCommand.of(product, SetPrices.ofVariantId(1, expectedPriceList)));
+
+            final List<Price> prices = updatedProduct.getMasterData().getStaged().getMasterVariant().getPrices();
+            List<PriceDraft> draftPricesList = prices.stream().map(PriceDraft::of).collect(toList());
+            assertThat(draftPricesList).containsOnly(priceDraft, priceDraft2);
+
+            return updatedProduct;
+        });
+    }
+
+    @Test
+    public void setPricesSku() throws Exception {
+        final PriceDraft priceDraft = PriceDraft.of(MoneyImpl.of(123, EUR));
+        final PriceDraft priceDraft2 = PriceDraft.of(MoneyImpl.of(123, EUR)).withCountry(DE);
+        final List<PriceDraft> expectedPriceList = asList(priceDraft, priceDraft2);
+
+        withUpdateableProduct(client(), product -> {
+            final String sku = product.getMasterData().getStaged().getMasterVariant().getSku();
+            final Product updatedProduct = client()
+                    .executeBlocking(ProductUpdateCommand.of(product, SetPrices.ofSku(sku, expectedPriceList)));
+
+            final List<Price> prices = updatedProduct.getMasterData().getStaged().getMasterVariant().getPrices();
+            List<PriceDraft> draftPricesList = prices.stream().map(PriceDraft::of).collect(toList());
+            assertThat(draftPricesList).containsOnly(priceDraft, priceDraft2);
+
+            return updatedProduct;
+        });
+    }
+
+    @Test
     public void setPricesWithAlreadyExisting() {
         final PriceDraft expectedPrice1 = PriceDraft.of(MoneyImpl.of(123, EUR));
         final PriceDraft expectedPrice2 = PriceDraft.of(MoneyImpl.of(123, EUR)).withCountry(CountryCode.DE);
