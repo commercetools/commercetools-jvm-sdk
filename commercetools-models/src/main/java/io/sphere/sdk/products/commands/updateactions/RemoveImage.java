@@ -28,7 +28,7 @@ public final class RemoveImage extends UpdateActionImpl<Product> {
     private final String sku;
     private final String imageUrl;
 
-    private RemoveImage(final String imageUrl, final Integer variantId, final String sku) {
+    private RemoveImage(final String imageUrl, @Nullable final Integer variantId, @Nullable final String sku) {
         super("removeImage");
         this.imageUrl = imageUrl;
         this.variantId = variantId;
