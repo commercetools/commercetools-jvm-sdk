@@ -109,7 +109,8 @@ public class ScopedPriceSearchIntegrationTest extends IntegrationTest {
                             .withPriceSelection(PriceSelection.of(EUR).withPriceCountry(DE))
                             .plusQueryFilters(m -> m.id().is(product.getId()))
                             .plusQueryFilters(m -> m.allVariants().scopedPrice().currentValue()
-                                    .centAmount().isLessThanOrEqualTo(2500L));
+                                        .centAmount().isLessThanOrEqualTo(2500L))
+                            .plusQueryFilters(m -> m.allVariants().scopedPriceDiscounted().is(true));
                     final PagedSearchResult<ProductProjection> resultForCurrentValue =
                             client().executeBlocking(searchForCurrentValue);
                     assertThat(resultForCurrentValue.getResults()).hasSize(1)
@@ -165,6 +166,7 @@ public class ScopedPriceSearchIntegrationTest extends IntegrationTest {
                 .prices(priceDrafts)
                 .build();
         final ProductDraft productDraft = ProductDraftBuilder.of(productType,  randomSlug(),  randomSlug(), masterVariant)
+                .publish(true)
                 .build();
         withProduct(client(), () -> productDraft, productConsumer);
     }
