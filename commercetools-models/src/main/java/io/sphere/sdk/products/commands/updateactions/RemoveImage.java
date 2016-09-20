@@ -53,6 +53,10 @@ public final class RemoveImage extends UpdateActionImpl<Product> {
         return ofVariantId(image.getUrl(), variantId);
     }
 
+    public static RemoveImage of(final String imageUrl, final Integer variantId) {
+        return ofVariantId(imageUrl, variantId);
+    }
+
     public static RemoveImage ofVariantId(final Image image, final Integer variantId) {
         return ofVariantId(image.getUrl(), variantId);
     }

@@ -111,7 +111,7 @@ public final class SetAttribute extends UpdateActionImpl<Product> {
      * @param name the name of the attribute, consult the product type to find the name
      * @return update action
      */
-    public static SetAttribute ofVariantIdUnsetAttribute(final Integer variantId, final String name) {
+    public static SetAttribute ofUnsetAttributeForVariantId(final Integer variantId, final String name) {
         return ofVariantId(variantId, name, null);
     }
 
@@ -121,7 +121,7 @@ public final class SetAttribute extends UpdateActionImpl<Product> {
      * @param name the name of the attribute, consult the product type to find the name
      * @return update action
      */
-    public static SetAttribute ofSkuUnsetAttribute(final String sku, final String name) {
+    public static SetAttribute ofUnsetAttributeForSku(final String sku, final String name) {
         return ofSku(sku, name, null);
     }
 
@@ -147,7 +147,7 @@ public final class SetAttribute extends UpdateActionImpl<Product> {
      * @param <T> type of the attribute
      * @return update action
      */
-    public static <T> SetAttribute ofVariantIdUnsetAttribute(final Integer variantId, final NamedAttributeAccess<T> NamedAttributeAccess) {
+    public static <T> SetAttribute ofUnsetAttributeForVariantId(final Integer variantId, final NamedAttributeAccess<T> NamedAttributeAccess) {
         return ofVariantId(variantId, NamedAttributeAccess.getName(), null);
     }
 
@@ -160,7 +160,7 @@ public final class SetAttribute extends UpdateActionImpl<Product> {
      * @param <T> type of the attribute
      * @return update action
      */
-    public static <T> SetAttribute ofSkuUnsetAttribute(final String sku, final NamedAttributeAccess<T> NamedAttributeAccess) {
+    public static <T> SetAttribute ofUnsetAttributeForSku(final String sku, final NamedAttributeAccess<T> NamedAttributeAccess) {
         return ofSku(sku, NamedAttributeAccess.getName(), null);
     }
 

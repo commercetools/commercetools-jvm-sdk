@@ -47,6 +47,10 @@ public final class RemoveVariant extends UpdateActionImpl<Product> {
         return ofVariantId(variant.getId());
     }
 
+    public static RemoveVariant of(final Integer id) {
+        return ofVariantId(id);
+    }
+
     public static RemoveVariant ofVariantId(final Integer id) {
         return new RemoveVariant(id, null);
     }

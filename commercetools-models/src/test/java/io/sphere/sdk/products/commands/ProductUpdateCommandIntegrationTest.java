@@ -627,7 +627,7 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
             assertThat(updatedProduct.getMasterData().getStaged().getMasterVariant().findAttribute(moneyAttribute)).contains(newValueForMoney);
             assertThat(updatedProduct.getMasterData().getStaged().getMasterVariant().findAttribute(colorAttribute)).contains(newValueForColor);
 
-            final SetAttribute unsetAction = SetAttribute.ofVariantIdUnsetAttribute(MASTER_VARIANT_ID, moneyAttribute);
+            final SetAttribute unsetAction = SetAttribute.ofUnsetAttributeForVariantId(MASTER_VARIANT_ID, moneyAttribute);
             final Product productWithoutMoney = client().executeBlocking(ProductUpdateCommand.of(updatedProduct, unsetAction));
 
             assertThat(productWithoutMoney.getMasterData().getStaged().getMasterVariant().findAttribute(moneyAttribute)).isEmpty();
@@ -663,7 +663,7 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
             assertThat(updatedProduct.getMasterData().getStaged().getMasterVariant().findAttribute(moneyAttribute)).contains(newValueForMoney);
             assertThat(updatedProduct.getMasterData().getStaged().getMasterVariant().findAttribute(colorAttribute)).contains(newValueForColor);
 
-            final SetAttribute unsetAction = SetAttribute.ofSkuUnsetAttribute(sku, moneyAttribute);
+            final SetAttribute unsetAction = SetAttribute.ofUnsetAttributeForSku(sku, moneyAttribute);
             final Product productWithoutMoney = client().executeBlocking(ProductUpdateCommand.of(updatedProduct, unsetAction));
 
             assertThat(productWithoutMoney.getMasterData().getStaged().getMasterVariant().findAttribute(moneyAttribute)).isEmpty();
