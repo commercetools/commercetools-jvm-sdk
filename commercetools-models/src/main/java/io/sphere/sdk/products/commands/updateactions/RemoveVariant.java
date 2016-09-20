@@ -13,6 +13,12 @@ import javax.annotation.Nullable;
  *
  * {@include.example io.sphere.sdk.products.commands.ProductUpdateCommandIntegrationTest#addVariant()}
  *
+ * * <p>By variant ID (every variant has a variantId):</p>
+ * {@include.example io.sphere.sdk.products.commands.ProductUpdateCommandIntegrationTest#removeVariantById()}
+ *
+ * <p>By SKU (attention, SKU is optional field in a variant):</p>
+ * {@include.example io.sphere.sdk.products.commands.ProductUpdateCommandIntegrationTest#removeVariantBySku()}
+ *
  * @see io.sphere.sdk.products.commands.updateactions.AddVariant
  */
 public final class RemoveVariant extends UpdateActionImpl<Product> {

@@ -129,7 +129,7 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
     }
 
     @Test
-    public void addExternalImageVariantId() throws Exception {
+    public void addExternalImageByVariantId() throws Exception {
         withUpdateableProduct(client(), (Product product) -> {
             assertThat(product.getMasterData().getStaged().getMasterVariant().getImages()).hasSize(0);
 
@@ -142,7 +142,7 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
     }
 
     @Test
-    public void addExternalImageSku() throws Exception {
+    public void addExternalImageBySku() throws Exception {
         withUpdateableProduct(client(), (Product product) -> {
             final ProductVariant masterVariant = product.getMasterData().getStaged().getMasterVariant();
             assertThat(masterVariant.getImages()).hasSize(0);
@@ -189,7 +189,7 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
     }
 
     @Test
-    public void addPriceVariantId() throws Exception {
+    public void addPriceByVariantId() throws Exception {
         final PriceDraft priceDraft = PriceDraft.of(MoneyImpl.of(new BigDecimal("12345"), "JPY"));
         withUpdateableProduct(client(), product -> {
             final Product updatedProduct = client()
@@ -206,7 +206,7 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
     }
 
     @Test
-    public void addPriceSku() throws Exception {
+    public void addPriceBySku() throws Exception {
         final PriceDraft priceDraft = PriceDraft.of(MoneyImpl.of(new BigDecimal("12345"), "JPY"));
         withUpdateableProduct(client(), product -> {
 
@@ -244,7 +244,7 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
     }
 
     @Test
-    public void setPricesVariantId() throws Exception {
+    public void setPricesByVariantId() throws Exception {
         final PriceDraft priceDraft = PriceDraft.of(MoneyImpl.of(123, EUR));
         final PriceDraft priceDraft2 = PriceDraft.of(MoneyImpl.of(123, EUR)).withCountry(DE);
         final List<PriceDraft> expectedPriceList = asList(priceDraft, priceDraft2);
@@ -262,7 +262,7 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
     }
 
     @Test
-    public void setPricesSku() throws Exception {
+    public void setPricesBySku() throws Exception {
         final PriceDraft priceDraft = PriceDraft.of(MoneyImpl.of(123, EUR));
         final PriceDraft priceDraft2 = PriceDraft.of(MoneyImpl.of(123, EUR)).withCountry(DE);
         final List<PriceDraft> expectedPriceList = asList(priceDraft, priceDraft2);
@@ -429,7 +429,7 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
     }
 
     @Test
-    public void removeImageVariantId() throws Exception {
+    public void removeImageByVariantId() throws Exception {
         final Image image = Image.ofWidthAndHeight("http://www.commercetools.com/assets/img/ct_logo_farbe.gif", 460, 102, "commercetools logo");
         withUpdateableProduct(client(), product -> {
             final Product productWithImage = client().executeBlocking(ProductUpdateCommand.of(product, AddExternalImage.ofVariantId(image, MASTER_VARIANT_ID)));
@@ -442,7 +442,7 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
     }
 
     @Test
-    public void removeImageSku() throws Exception {
+    public void removeImageBySku() throws Exception {
         final Image image = Image.ofWidthAndHeight("http://www.commercetools.com/assets/img/ct_logo_farbe.gif", 460, 102, "commercetools logo");
         withUpdateableProduct(client(), product -> {
             final String sku = product.getMasterData().getStaged().getMasterVariant().getSku();
@@ -603,7 +603,7 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
     }
 
     @Test
-    public void setAttributeVariantId() throws Exception {
+    public void setAttributeByVariantId() throws Exception {
         withUpdateableProduct(client(), product -> {
             //the setter contains the name and a JSON mapper, declare it only one time in your project per attribute
             //example for MonetaryAmount attribute
@@ -637,7 +637,7 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
     }
 
     @Test
-    public void setAttributeSku() throws Exception {
+    public void setAttributeBySku() throws Exception {
         withUpdateableProduct(client(), product -> {
             final String sku = product.getMasterData().getStaged().getMasterVariant().getSku();
 

@@ -14,6 +14,12 @@ import javax.annotation.Nullable;
  *
  *  {@include.example io.sphere.sdk.products.commands.ProductUpdateCommandIntegrationTest#addExternalImage()}
  *
+ *  <p>By variant ID (every variant has a variantId):</p>
+ * {@include.example io.sphere.sdk.products.commands.ProductUpdateCommandIntegrationTest#addExternalImageByVariantId()}
+ *
+ * <p>By SKU (attention, SKU is optional field in a variant):</p>
+ * {@include.example io.sphere.sdk.products.commands.ProductUpdateCommandIntegrationTest#addExternalImageBySku()}
+ *
  *  @see ProductVariant#getImages()
  *  @see RemoveImage
  */

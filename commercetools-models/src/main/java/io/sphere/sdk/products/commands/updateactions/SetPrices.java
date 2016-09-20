@@ -14,6 +14,12 @@ import java.util.List;
  *
  * {@include.example io.sphere.sdk.products.commands.ProductUpdateCommandIntegrationTest#setPrices()}
  *
+ * <p>By variant ID (every variant has a variantId):</p>
+ * {@include.example io.sphere.sdk.products.commands.ProductUpdateCommandIntegrationTest#setPricesByVariantId()}
+ *
+ * <p>By SKU (attention, SKU is optional field in a variant):</p>
+ * {@include.example io.sphere.sdk.products.commands.ProductUpdateCommandIntegrationTest#setPricesBySku()}
+ *
  * @see io.sphere.sdk.products.ProductVariant#getPrices()
  */
 public final class SetPrices extends UpdateActionImpl<Product> {

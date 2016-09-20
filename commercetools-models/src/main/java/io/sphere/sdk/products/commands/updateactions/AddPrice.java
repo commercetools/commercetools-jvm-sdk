@@ -14,6 +14,12 @@ import javax.annotation.Nullable;
  *
  * {@include.example io.sphere.sdk.products.commands.ProductUpdateCommandIntegrationTest#addPrice()}
  *
+ * <p>By variant ID (every variant has a variantId):</p>
+ * {@include.example io.sphere.sdk.products.commands.ProductUpdateCommandIntegrationTest#addPriceByVariantId()}
+ *
+ * <p>By SKU (attention, SKU is optional field in a variant):</p>
+ * {@include.example io.sphere.sdk.products.commands.ProductUpdateCommandIntegrationTest#addPriceBySku()}
+ *
  * @see ProductVariant#getPrices()
  */
 public final class AddPrice extends UpdateActionImpl<Product> {

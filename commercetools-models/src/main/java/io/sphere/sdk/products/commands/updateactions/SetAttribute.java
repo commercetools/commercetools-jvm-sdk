@@ -15,6 +15,12 @@ import javax.annotation.Nullable;
  *
  * {@include.example io.sphere.sdk.products.commands.ProductUpdateCommandIntegrationTest#setAttribute()}
  *
+ * <p>By variant ID (every variant has a variantId):</p>
+ * {@include.example io.sphere.sdk.products.commands.ProductUpdateCommandIntegrationTest#setAttributeByVariantId()}
+ *
+ * <p>By SKU (attention, SKU is optional field in a variant):</p>
+ * {@include.example io.sphere.sdk.products.commands.ProductUpdateCommandIntegrationTest#setAttributeBySku()}
+ *
  * @see SetAttributeInAllVariants
  */
 public final class SetAttribute extends UpdateActionImpl<Product> {
