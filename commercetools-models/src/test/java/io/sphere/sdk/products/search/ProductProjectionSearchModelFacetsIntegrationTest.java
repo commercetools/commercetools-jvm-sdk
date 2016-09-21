@@ -272,9 +272,9 @@ public class ProductProjectionSearchModelFacetsIntegrationTest extends ProductPr
                     assertThat(rangeStats.getUpperEndpoint()).isEqualTo(null);
                     assertThat(rangeStats.getCount()).isEqualTo(2L);
                     assertThat(rangeStats.getMin()).isEqualTo("5.0");
-                    assertThat(rangeStats.getMax()).isEqualTo("10.0");
-                    assertThat(rangeStats.getSum()).isEqualTo("20.0");
-                    assertThat(rangeStats.getMean()).isEqualTo(6.666666666666667D);
+                    assertThat(rangeStats.getMax()).isEqualTo(withAggregations("10.0").otherwise("5.0"));
+                    assertThat(rangeStats.getSum()).isEqualTo(withAggregations("20.0").otherwise("10.0"));
+                    assertThat(rangeStats.getMean()).isEqualTo(withAggregations(6.666666666666667D).otherwise(5.0D));
                 });
     }
 
@@ -294,9 +294,9 @@ public class ProductProjectionSearchModelFacetsIntegrationTest extends ProductPr
                     assertThat(rangeStats.getUpperEndpoint()).isEqualTo(null);
                     assertThat(rangeStats.getCount()).isEqualTo(2L);
                     assertThat(rangeStats.getMin()).isEqualTo("50000.0");
-                    assertThat(rangeStats.getMax()).isEqualTo("100000.0");
-                    assertThat(rangeStats.getSum()).isEqualTo("200000.0");
-                    assertThat(rangeStats.getMean()).isEqualTo(66666.66666666667D);
+                    assertThat(rangeStats.getMax()).isEqualTo(withAggregations("100000.0").otherwise("50000.0"));
+                    assertThat(rangeStats.getSum()).isEqualTo(withAggregations("200000.0").otherwise("100000.0"));
+                    assertThat(rangeStats.getMean()).isEqualTo(withAggregations(66666.66666666667D).otherwise(50000D));
                 });
     }
 
@@ -324,9 +324,9 @@ public class ProductProjectionSearchModelFacetsIntegrationTest extends ProductPr
                     assertThat(rangeStats.getUpperEndpoint()).isEqualTo(null);
                     assertThat(rangeStats.getCount()).isEqualTo(2L);
                     assertThat(rangeStats.getMin()).isEqualTo("1.0001664E12");
-                    assertThat(rangeStats.getMax()).isEqualTo("1.0343808E12");
-                    assertThat(rangeStats.getSum()).isEqualTo("3.0347136E12");
-                    assertThat(rangeStats.getMean()).isEqualTo(1.0115712E12D);
+                    assertThat(rangeStats.getMax()).isEqualTo(withAggregations("1.0343808E12").otherwise("1.0001664E12"));
+                    assertThat(rangeStats.getSum()).isEqualTo(withAggregations("3.0347136E12").otherwise("2.0003328E12"));
+                    assertThat(rangeStats.getMean()).isEqualTo(withAggregations(1.0115712E12D).otherwise(1.0001664E12D));
                 });
     }
 
@@ -346,9 +346,9 @@ public class ProductProjectionSearchModelFacetsIntegrationTest extends ProductPr
                     assertThat(rangeStats.getUpperEndpoint()).isEqualTo(null);
                     assertThat(rangeStats.getCount()).isEqualTo(2L);
                     assertThat(rangeStats.getMin()).isEqualTo("7.9509203E7");
-                    assertThat(rangeStats.getMax()).isEqualTo("8.3170204E7");
-                    assertThat(rangeStats.getSum()).isEqualTo("2.4218861E8");
-                    assertThat(rangeStats.getMean()).isEqualTo(8.072953666666667E7D);
+                    assertThat(rangeStats.getMax()).isEqualTo(withAggregations("8.3170204E7").otherwise("7.9509203E7"));
+                    assertThat(rangeStats.getSum()).isEqualTo(withAggregations("2.4218861E8").otherwise("1.59018406E8"));
+                    assertThat(rangeStats.getMean()).isEqualTo(withAggregations(8.072953666666667E7D).otherwise(7.9509203E7D));
                 });
     }
 
@@ -368,9 +368,9 @@ public class ProductProjectionSearchModelFacetsIntegrationTest extends ProductPr
                     assertThat(rangeStats.getUpperEndpoint()).isEqualTo(null);
                     assertThat(rangeStats.getCount()).isEqualTo(2L);
                     assertThat(rangeStats.getMin()).isEqualTo("1.000245909203E12");
-                    assertThat(rangeStats.getMax()).isEqualTo("1.034463970204E12");
-                    assertThat(rangeStats.getSum()).isEqualTo("3.03495578861E12");
-                    assertThat(rangeStats.getMean()).isEqualTo(1.0116519295366666E12D);
+                    assertThat(rangeStats.getMax()).isEqualTo(withAggregations("1.034463970204E12").otherwise("1.000245909203E12"));
+                    assertThat(rangeStats.getSum()).isEqualTo(withAggregations("3.03495578861E12").otherwise("2.000491818406E12"));
+                    assertThat(rangeStats.getMean()).isEqualTo(withAggregations(1.0116519295366666E12D).otherwise(1.000245909203E12D));
                 });
     }
 
