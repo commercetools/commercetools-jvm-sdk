@@ -22,6 +22,6 @@ public class RangeStatsTest {
     }
 
     private RangeStats stats(final String from, final String to, final String fromStr, final String toStr) {
-        return new RangeStats(from, to, fromStr, toStr, 2L, 2L, "4.0", "5.0", "3.0", 6.0);
+        return new RangeStats(from, to, fromStr, toStr, 2L, null, 2L, "4.0", "5.0", "3.0", 6.0);
     }
 }
