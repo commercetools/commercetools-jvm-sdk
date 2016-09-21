@@ -8,8 +8,8 @@ import java.util.function.Function;
 
 class RangeFacetExpressionImpl<T, V extends Comparable<? super V>> extends RangeExpression<T, V> implements RangeFacetExpression<T> {
 
-    RangeFacetExpressionImpl(final SearchModel<T> searchModel, final Function<V, String> typeSerializer, final Iterable<? extends Range<V>> ranges, @Nullable final String alias) {
-        super(searchModel, typeSerializer, ranges, alias);
+    RangeFacetExpressionImpl(final SearchModel<T> searchModel, final Function<V, String> typeSerializer, final Iterable<? extends Range<V>> ranges, @Nullable final String alias, final Boolean isCountingProducts) {
+        super(searchModel, typeSerializer, ranges, alias, isCountingProducts);
     }
 
     @Override
@@ -21,5 +21,11 @@ class RangeFacetExpressionImpl<T, V extends Comparable<? super V>> extends Range
     @Override
     public String alias() {
         return super.alias();
+    }
+
+    // Todo why override a method x with a call to super.x ?
+    @Override
+    public Boolean isCountingProducts() {
+        return super.isCountingProducts();
     }
 }

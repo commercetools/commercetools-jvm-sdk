@@ -9,8 +9,8 @@ import static java.util.stream.Collectors.joining;
 abstract class TermExpression<T, V> extends SearchModelExpression<T, V> {
     private final Iterable<V> terms;
 
-    TermExpression(final SearchModel<T> searchModel, final Function<V, String> typeSerializer, final Iterable<V> terms, @Nullable final String alias) {
-        super(searchModel, typeSerializer, alias);
+    TermExpression(final SearchModel<T> searchModel, final Function<V, String> typeSerializer, final Iterable<V> terms, @Nullable final String alias, final Boolean isCountingProducts) {
+        super(searchModel, typeSerializer, alias, isCountingProducts);
         this.terms = terms;
     }
 

@@ -13,6 +13,8 @@ public final class RangeStats extends Base {
     @Nullable
     private final String upperEndpoint;
     private final Long count;
+    @Nullable
+    private final Long productCount;
     private final String min;
     private final String max;
     private final String sum;
@@ -20,10 +22,12 @@ public final class RangeStats extends Base {
 
     @JsonIgnore
     private RangeStats(@Nullable final String lowerEndpoint, @Nullable final String upperEndpoint, final Long count,
-                       final String min, final String max, final String sum, final Double mean) {
+                       @Nullable final Long productCount, final String min, final String max, final String sum,
+                       final Double mean) {
         this.lowerEndpoint = lowerEndpoint;
         this.upperEndpoint = upperEndpoint;
         this.count = count;
+        this.productCount = productCount;
         this.sum = sum;
         this.min = min;
         this.max = max;
@@ -32,8 +36,9 @@ public final class RangeStats extends Base {
 
     @JsonCreator
     RangeStats(final String from, final String to, final String fromStr, final String toStr, final Long count,
-               final Long totalCount, final String min, final String max, final String total, final Double mean) {
-        this(parseEndpoint(from, fromStr), parseEndpoint(to, toStr), count, min, max, total, mean);
+               final Long productCount, final Long totalCount, final String min, final String max, final String total,
+               final Double mean) {
+        this(parseEndpoint(from, fromStr), parseEndpoint(to, toStr), count, productCount, min, max, total, mean);
     }
 
     /**
@@ -55,11 +60,20 @@ public final class RangeStats extends Base {
     }
 
     /**
-     * Number of results that fall into this range.
-     * @return the amount of results in the range.
+     * Number of variants that fall into this range.
+     * @return the amount of variants in the range.
      */
     public Long getCount() {
         return count;
+    }
+
+    /**
+     * Number of products that fall into this range.
+     * @return the amount of products in the range.
+     */
+    @Nullable
+    public Long getProductCount() {
+        return productCount;
     }
 
     /**
@@ -96,8 +110,9 @@ public final class RangeStats extends Base {
 
     @JsonIgnore
     public static RangeStats of(@Nullable final String lowerEndpoint, @Nullable final String upperEndpoint, final Long count,
-                                final String min, final String max, final String sum, final Double mean) {
-        return new RangeStats(lowerEndpoint, upperEndpoint, count, min, max, sum, mean);
+                                @Nullable final Long productCount, final String min, final String max, final String sum,
+                                final Double mean) {
+        return new RangeStats(lowerEndpoint, upperEndpoint, count, productCount, min, max, sum, mean);
     }
 
     @JsonIgnore

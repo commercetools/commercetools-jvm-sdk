@@ -17,8 +17,8 @@ final class ProductCategoriesIdTermFacetSearchModelImpl<T> extends TermFacetSear
         super(searchModel, typeSerializer);
     }
 
-    ProductCategoriesIdTermFacetSearchModelImpl(final SearchModel<T> searchModel, final Function<String, String> typeSerializer, final String alias) {
-        super(searchModel, typeSerializer, alias);
+    ProductCategoriesIdTermFacetSearchModelImpl(final SearchModel<T> searchModel, final Function<String, String> typeSerializer, final String alias, final Boolean isCountingProducts) {
+        super(searchModel, typeSerializer, alias, isCountingProducts);
     }
 
     @Override
@@ -28,11 +28,16 @@ final class ProductCategoriesIdTermFacetSearchModelImpl<T> extends TermFacetSear
 
     @Override
     public FilteredFacetExpression<T> onlyTermSubtree(final Iterable<String> values) {
-        return new ProductCategoriesIdTermFacetSearchModelImpl<>(searchModel, SUBTREE_TYPE_SERIALIZER, getAlias()).onlyTerm(values);
+        return new ProductCategoriesIdTermFacetSearchModelImpl<>(searchModel, SUBTREE_TYPE_SERIALIZER, getAlias(), isCountingProducts()).onlyTerm(values); // Todo why are getters used here
     }
 
     @Override
     public ProductCategoriesIdTermFacetSearchModel<T> withAlias(final String alias) {
-        return new ProductCategoriesIdTermFacetSearchModelImpl<>(searchModel, typeSerializer, alias);
+        return new ProductCategoriesIdTermFacetSearchModelImpl<>(searchModel, typeSerializer, alias, isCountingProducts);
+    }
+
+    @Override
+    public ProductCategoriesIdTermFacetSearchModel<T> countingProducts(final Boolean isCountingProducts) {
+        return new ProductCategoriesIdTermFacetSearchModelImpl<>(searchModel, typeSerializer, alias, isCountingProducts);
     }
 }

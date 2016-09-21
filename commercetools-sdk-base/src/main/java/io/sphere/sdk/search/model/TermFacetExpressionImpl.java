@@ -10,8 +10,8 @@ import static java.util.Collections.emptyList;
 
 class TermFacetExpressionImpl<T, V> extends TermExpression<T, V> implements TermFacetExpression<T> {
 
-    TermFacetExpressionImpl(final SearchModel<T> searchModel, final Function<V, String> typeSerializer, @Nullable final String alias) {
-        super(searchModel, typeSerializer, emptyList(), alias);
+    TermFacetExpressionImpl(final SearchModel<T> searchModel, final Function<V, String> typeSerializer, @Nullable final String alias, final Boolean isCountingProducts) {
+        super(searchModel, typeSerializer, emptyList(), alias, isCountingProducts);
     }
 
     @Override
@@ -23,6 +23,12 @@ class TermFacetExpressionImpl<T, V> extends TermExpression<T, V> implements Term
     @Override
     public String alias() {
         return super.alias();
+    }
+
+    // Todo why override a method x with a call to super.x ?
+    @Override
+    public Boolean isCountingProducts() {
+        return super.isCountingProducts();
     }
 
     @Nullable

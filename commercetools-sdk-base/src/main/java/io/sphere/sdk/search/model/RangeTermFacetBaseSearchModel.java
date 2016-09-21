@@ -16,8 +16,8 @@ import static java.util.Collections.singletonList;
  */
 abstract class RangeTermFacetBaseSearchModel<T, V extends Comparable<? super V>> extends TermFacetBaseSearchModel<T, V> {
 
-    RangeTermFacetBaseSearchModel(final SearchModel<T> searchModel, final Function<V, String> typeSerializer, final String alias) {
-        super(searchModel, typeSerializer, alias);
+    RangeTermFacetBaseSearchModel(final SearchModel<T> searchModel, final Function<V, String> typeSerializer, final String alias, final Boolean isCountingProducts) {
+        super(searchModel, typeSerializer, alias, isCountingProducts);
     }
 
     RangeTermFacetBaseSearchModel(final SearchModel<T> searchModel, final Function<V, String> typeSerializer) {
@@ -51,7 +51,7 @@ abstract class RangeTermFacetBaseSearchModel<T, V extends Comparable<? super V>>
      * @return a facet expression for only the given ranges
      */
     public RangeFacetExpression<T> onlyRange(final Iterable<FacetRange<V>> ranges) {
-        return new RangeFacetExpressionImpl<>(searchModel, typeSerializer, ranges, alias);
+        return new RangeFacetExpressionImpl<>(searchModel, typeSerializer, ranges, alias, isCountingProducts);
     }
 
     /**
@@ -102,6 +102,6 @@ abstract class RangeTermFacetBaseSearchModel<T, V extends Comparable<? super V>>
      * @return a facet expression for only the given ranges
      */
     public RangeFacetExpression<T> onlyRangeAsString(final Iterable<FacetRange<String>> ranges) {
-        return new RangeFacetExpressionImpl<>(searchModel, TypeSerializer.ofString(), ranges, alias);
+        return new RangeFacetExpressionImpl<>(searchModel, TypeSerializer.ofString(), ranges, alias, isCountingProducts);
     }
 }

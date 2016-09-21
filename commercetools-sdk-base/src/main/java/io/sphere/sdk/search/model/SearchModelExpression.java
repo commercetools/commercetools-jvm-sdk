@@ -13,15 +13,17 @@ abstract class SearchModelExpression<T, V> extends Base {
     private final Function<V, String> typeSerializer;
     @Nullable
     protected final String alias;
+    protected final Boolean isCountingProducts;
 
-    protected SearchModelExpression(final SearchModel<T> searchModel, final Function<V, String> typeSerializer, @Nullable final String alias) {
+    protected SearchModelExpression(final SearchModel<T> searchModel, final Function<V, String> typeSerializer, @Nullable final String alias, final Boolean isCountingProducts) {
         this.searchModel = requireNonNull(searchModel);
         this.typeSerializer = requireNonNull(typeSerializer);
         this.alias = alias;
+        this.isCountingProducts = isCountingProducts;
     }
 
     public final String expression() {
-        return searchModel.attributePath() + Optional.ofNullable(value()).orElse("") + Optional.ofNullable(alias).map(a -> " as " + a).orElse("");
+        return searchModel.attributePath() + Optional.ofNullable(value()).orElse("") + Optional.ofNullable(alias).map(a -> " as " + a).orElse("") + (isCountingProducts ? " counting products" : "");
     }
 
     public final String attributePath() {
@@ -35,6 +37,10 @@ abstract class SearchModelExpression<T, V> extends Base {
     @Nullable
     protected String alias() {
         return alias;
+    }
+
+    protected Boolean isCountingProducts() {
+        return isCountingProducts;
     }
 
     @Nullable
