@@ -23,7 +23,6 @@ class RangeFacetExpressionImpl<T, V extends Comparable<? super V>> extends Range
         return super.alias();
     }
 
-    // Todo why override a method x with a call to super.x ?
     @Override
     public Boolean isCountingProducts() {
         return super.isCountingProducts();

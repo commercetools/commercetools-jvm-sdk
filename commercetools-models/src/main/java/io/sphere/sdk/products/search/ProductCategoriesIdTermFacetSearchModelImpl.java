@@ -28,7 +28,7 @@ final class ProductCategoriesIdTermFacetSearchModelImpl<T> extends TermFacetSear
 
     @Override
     public FilteredFacetExpression<T> onlyTermSubtree(final Iterable<String> values) {
-        return new ProductCategoriesIdTermFacetSearchModelImpl<>(searchModel, SUBTREE_TYPE_SERIALIZER, getAlias(), isCountingProducts()).onlyTerm(values); // Todo why are getters used here
+        return new ProductCategoriesIdTermFacetSearchModelImpl<>(searchModel, SUBTREE_TYPE_SERIALIZER, alias, isCountingProducts).onlyTerm(values);
     }
 
     @Override
