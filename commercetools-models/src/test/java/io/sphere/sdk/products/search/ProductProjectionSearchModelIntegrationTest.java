@@ -14,6 +14,7 @@ import org.slf4j.LoggerFactory;
 import javax.money.MonetaryAmount;
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -29,6 +30,9 @@ public abstract class ProductProjectionSearchModelIntegrationTest extends Integr
     protected static Product productA;
     protected static Product productB;
     protected static ProductType productType;
+
+    private static final boolean expectAggregations = Optional.ofNullable(System.getenv("EXPECT_AGGREGATIONS"))
+            .map("true"::equals).orElse(false);
 
     @Rule
     public RetryIntegrationTest retry = new RetryIntegrationTest(10, 10000, LoggerFactory.getLogger(this.getClass()));
@@ -58,7 +62,23 @@ public abstract class ProductProjectionSearchModelIntegrationTest extends Integr
         return client().executeBlocking(sphereRequest);
     }
 
+    protected static <T> WithAggregations<T> withAggregations(final T expectedWithAggregations) {
+        return new WithAggregations<>(expectedWithAggregations);
+    }
+
     protected List<String> getAllIds() {
         return Stream.of(product1, product2, productA, productB).map(p -> p.getId()).collect(Collectors.toList());
+    }
+
+    protected static class WithAggregations<T> {
+        private final T expectedWithAggregations;
+
+        WithAggregations(final T expectedWithAggregations) {
+            this.expectedWithAggregations = expectedWithAggregations;
+        }
+
+        T otherwise(final T expectedOtherwise) {
+            return expectAggregations ? expectedWithAggregations : expectedOtherwise;
+        }
     }
 }
