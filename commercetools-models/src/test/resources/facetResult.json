@@ -1,9 +1,9 @@
 {
- "offset": 0,
- "count": 1,
- "total": 4162,
- "results": [],
- "facets": {
+  "offset": 0,
+  "count": 1,
+  "total": 4162,
+  "results": [],
+  "facets": {
     "variants.attributes.size": {
       "type": "filter",
       "count": 2
