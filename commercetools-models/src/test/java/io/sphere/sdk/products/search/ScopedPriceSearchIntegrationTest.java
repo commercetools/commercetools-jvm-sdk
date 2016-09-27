@@ -8,6 +8,8 @@ import io.sphere.sdk.producttypes.ProductTypeDraft;
 import io.sphere.sdk.producttypes.commands.ProductTypeCreateCommand;
 import io.sphere.sdk.search.PagedSearchResult;
 import io.sphere.sdk.search.SortExpression;
+import io.sphere.sdk.search.TermFacetExpression;
+import io.sphere.sdk.search.TermStats;
 import io.sphere.sdk.test.IntegrationTest;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
@@ -19,6 +21,8 @@ import java.util.function.Consumer;
 
 import static io.sphere.sdk.productdiscounts.ProductDiscountFixtures.withProductDiscount;
 import static io.sphere.sdk.products.ProductFixtures.withProduct;
+import static io.sphere.sdk.products.ProductsScenario1Fixtures.BOOL_FALSE;
+import static io.sphere.sdk.products.ProductsScenario1Fixtures.BOOL_TRUE;
 import static io.sphere.sdk.test.SphereTestUtils.*;
 import static java.util.Arrays.asList;
 import static java.util.Collections.emptyList;
@@ -171,13 +175,41 @@ public class ScopedPriceSearchIntegrationTest extends IntegrationTest {
                         s.assertThat(results.getResults()).extracting(ResourceView::getId).containsExactly(product2.getId(), product1.getId());
 
                         //Products ordered by scopedPriceDiscounted (descending)
-                        final ProductProjectionSearch searchDescengind = ProductProjectionSearch.ofStaged()
+                        final ProductProjectionSearch searchDescending = ProductProjectionSearch.ofStaged()
                                 .withPriceSelection(PriceSelection.of(EUR).withPriceCountry(DE))
                                 .plusQueryFilters(m -> m.id().isIn(asList(product1.getId(), product2.getId())))
                                 .plusSort(m -> m.allVariants().scopedPriceDiscounted().desc());
-                        final PagedSearchResult<ProductProjection> resultsDescending = client().executeBlocking(searchDescengind);
+                        final PagedSearchResult<ProductProjection> resultsDescending = client().executeBlocking(searchDescending);
                         assertThat(resultsDescending.getResults()).hasSize(2);
                         s.assertThat(resultsDescending.getResults()).extracting(ResourceView::getId).containsExactly(product1.getId(), product2.getId());
+                        assertThat(resultsDescending.getResults().get(0).getMasterVariant().getPrice().getDiscounted()).isNotNull();
+                    });
+                });
+            });
+        });
+    }
+
+    @Test
+    public void facetsForScopedPriceDiscounted() {
+        withProductOfPrices(asList(PriceDraft.of(EURO_20), PriceDraft.of(EURO_30).withCountry(DE)), product1 -> {
+            withProductOfPrices(asList(PriceDraft.of(EURO_30), PriceDraft.of(EURO_40).withCountry(DE)), product2 -> {
+                withProductOfPrices(asList(PriceDraft.of(EURO_40), PriceDraft.of(EURO_25).withCountry(DE)), product3 -> {
+                    final ProductDiscountDraft productDiscountDraft1 = discountDraftOfAbsoluteValue(product1, EURO_5);
+                    withProductDiscount(client(), productDiscountDraft1, productDiscount1 -> {
+                        assertEventually(s -> {
+                            final TermFacetExpression<ProductProjection> facetExpression = ProductProjectionSearchModel.of()
+                                    .facet().allVariants().scopedPriceDiscounted().allTerms();
+                            final ProductProjectionSearch search = ProductProjectionSearch.ofStaged()
+                                    .withPriceSelection(PriceSelection.of(EUR).withPriceCountry(DE))
+                                    .plusQueryFilters(m -> m.id().isIn(asList(product1.getId(), product2.getId(), product3.getId())))
+                                    .withFacets(facetExpression);
+                            final PagedSearchResult<ProductProjection> results = client().executeBlocking(search);
+                            assertThat(results.getResults()).hasSize(3);
+                            final List<TermStats> termStats = results.getFacetResult(facetExpression).getTerms();
+                            s.assertThat(termStats).containsOnly(
+                                    TermStats.of(BOOL_TRUE, 1L),
+                                    TermStats.of(BOOL_FALSE, 2L));
+                        });
                     });
                 });
             });
