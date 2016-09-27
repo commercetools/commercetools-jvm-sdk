@@ -190,7 +190,7 @@ public class ScopedPriceSearchIntegrationTest extends IntegrationTest {
     }
 
     @Test
-    public void facetsForScopedPriceDiscounted() {
+    public void facetSearchByScopedPriceDiscounted() {
         withProductOfPrices(asList(PriceDraft.of(EURO_20), PriceDraft.of(EURO_30).withCountry(DE)), product1 -> {
             withProductOfPrices(asList(PriceDraft.of(EURO_30), PriceDraft.of(EURO_40).withCountry(DE)), product2 -> {
                 withProductOfPrices(asList(PriceDraft.of(EURO_40), PriceDraft.of(EURO_25).withCountry(DE)), product3 -> {
