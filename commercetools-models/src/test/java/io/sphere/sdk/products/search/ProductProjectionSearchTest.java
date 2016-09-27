@@ -85,6 +85,13 @@ public class ProductProjectionSearchTest {
     }
 
     @Test
+    public void canAccessScopedPriceDiscounted() throws Exception {
+        assertThat(FACET_MODEL.allVariants().scopedPriceDiscounted().allTerms().expression()).isEqualTo("variants.scopedPriceDiscounted");
+        assertThat(FILTER_MODEL.allVariants().scopedPriceDiscounted().is(true)).extracting(expression()).containsExactly("variants.scopedPriceDiscounted:true");
+        assertThat(SORT_MODEL.allVariants().scopedPriceDiscounted().asc().expression()).isEqualTo("variants.scopedPriceDiscounted asc");
+    }
+
+    @Test
     public void canAccessTextCustomAttributes() throws Exception {
         final String attrName = "brand";
         assertThat(FACET_ATTR.ofString(attrName).allTerms().expression()).isEqualTo("variants.attributes.brand");
