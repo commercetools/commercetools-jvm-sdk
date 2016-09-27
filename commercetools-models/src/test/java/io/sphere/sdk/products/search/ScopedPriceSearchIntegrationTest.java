@@ -109,7 +109,7 @@ public class ScopedPriceSearchIntegrationTest extends IntegrationTest {
                             .withPriceSelection(PriceSelection.of(EUR).withPriceCountry(DE))
                             .plusQueryFilters(m -> m.id().is(product.getId()))
                             .plusQueryFilters(m -> m.allVariants().scopedPrice().currentValue()
-                                        .centAmount().isLessThanOrEqualTo(2500L))
+                                    .centAmount().isLessThanOrEqualTo(2500L))
                             .plusQueryFilters(m -> m.allVariants().scopedPriceDiscounted().is(true));
                     final PagedSearchResult<ProductProjection> resultForCurrentValue =
                             client().executeBlocking(searchForCurrentValue);
@@ -123,8 +123,8 @@ public class ScopedPriceSearchIntegrationTest extends IntegrationTest {
                     s.assertThat(matchingVariant.getScopedPrice().getDiscounted()).isNotNull();
                     final MonetaryAmount discountedValue = matchingVariant.getScopedPrice().getDiscounted().getValue();
                     s.assertThat(discountedValue).as("discountedValue from the selected scope").isEqualTo(EURO_25)
-                    .as("does not use the fallback price").isNotEqualTo(EURO_20)
-                    .as("or the discounted fallback price").isNotEqualTo(EURO_15);
+                            .as("does not use the fallback price").isNotEqualTo(EURO_20)
+                            .as("or the discounted fallback price").isNotEqualTo(EURO_15);
                     s.assertThat(matchingVariant.getScopedPrice().getDiscounted().getDiscount())
                             .isEqualTo(productDiscount.toReference());
                     s.assertThat(matchingVariant.isScopedPriceDiscounted()).isTrue();
@@ -154,6 +154,36 @@ public class ScopedPriceSearchIntegrationTest extends IntegrationTest {
         });
     }
 
+    @Test
+    public void sortByScopedPriceDiscounted() {
+        withProductOfPrices(asList(PriceDraft.of(EURO_20), PriceDraft.of(EURO_30).withCountry(DE)), product1 -> {
+            withProductOfPrices(asList(PriceDraft.of(EURO_30), PriceDraft.of(EURO_40).withCountry(DE)), product2 -> {
+                final ProductDiscountDraft productDiscountDraft1 = discountDraftOfAbsoluteValue(product1, EURO_5);
+                withProductDiscount(client(), productDiscountDraft1, productDiscount1 -> {
+                    assertEventually(s -> {
+                        //Products ordered by scopedPriceDiscounted (ascending)
+                        final ProductProjectionSearch search = ProductProjectionSearch.ofStaged()
+                                .withPriceSelection(PriceSelection.of(EUR).withPriceCountry(DE))
+                                .plusQueryFilters(m -> m.id().isIn(asList(product1.getId(), product2.getId())))
+                                .plusSort(m -> m.allVariants().scopedPriceDiscounted().asc());
+                        final PagedSearchResult<ProductProjection> results = client().executeBlocking(search);
+                        assertThat(results.getResults()).hasSize(2);
+                        s.assertThat(results.getResults()).extracting(ResourceView::getId).containsExactly(product2.getId(), product1.getId());
+
+                        //Products ordered by scopedPriceDiscounted (descending)
+                        final ProductProjectionSearch searchDescengind = ProductProjectionSearch.ofStaged()
+                                .withPriceSelection(PriceSelection.of(EUR).withPriceCountry(DE))
+                                .plusQueryFilters(m -> m.id().isIn(asList(product1.getId(), product2.getId())))
+                                .plusSort(m -> m.allVariants().scopedPriceDiscounted().desc());
+                        final PagedSearchResult<ProductProjection> resultsDescending = client().executeBlocking(searchDescengind);
+                        assertThat(resultsDescending.getResults()).hasSize(2);
+                        s.assertThat(resultsDescending.getResults()).extracting(ResourceView::getId).containsExactly(product1.getId(), product2.getId());
+                    });
+                });
+            });
+        });
+    }
+
     private ProductDiscountDraft discountDraftOfAbsoluteValue(final Product product, final MonetaryAmount amount) {
         final AbsoluteProductDiscountValue value = ProductDiscountValue.ofAbsolute(amount);
         final ProductDiscountPredicate predicate =
@@ -165,7 +195,7 @@ public class ScopedPriceSearchIntegrationTest extends IntegrationTest {
         final ProductVariantDraft masterVariant = ProductVariantDraftBuilder.of()
                 .prices(priceDrafts)
                 .build();
-        final ProductDraft productDraft = ProductDraftBuilder.of(productType,  randomSlug(),  randomSlug(), masterVariant)
+        final ProductDraft productDraft = ProductDraftBuilder.of(productType, randomSlug(), randomSlug(), masterVariant)
                 .publish(true)
                 .build();
         withProduct(client(), () -> productDraft, productConsumer);
