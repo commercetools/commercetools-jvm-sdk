@@ -27,8 +27,9 @@ public class BigIntegerNumberGeneratorIntegrationTest extends IntegrationTest {
 
     @Test
     public void firstNumberIsOne() throws Exception {
+        final String key = randomKey();//this could be something like "orderNumber"
         final CustomObjectBigIntegerNumberGeneratorConfig config =
-                CustomObjectBigIntegerNumberGeneratorConfigBuilder.of(client(), randomKey())
+                CustomObjectBigIntegerNumberGeneratorConfigBuilder.of(client(), key)
                         .build();
         final BigIntegerNumberGenerator generator = CustomObjectBigIntegerNumberGenerator.of(config);
         final BigInteger firstNumber = generator.getNextNumber().toCompletableFuture().join();
