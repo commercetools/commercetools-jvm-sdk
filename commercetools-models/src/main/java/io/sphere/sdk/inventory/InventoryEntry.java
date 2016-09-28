@@ -129,4 +129,8 @@ public interface InventoryEntry extends Resource<InventoryEntry>, Custom {
     static String resourceTypeId() {
         return "inventory-entry";
     }
+
+    @Nullable
+    @Override
+    CustomFields getCustom();
 }

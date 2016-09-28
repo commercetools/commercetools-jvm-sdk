@@ -128,6 +128,33 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
         });
     }
 
+    @Test
+    public void addExternalImageByVariantId() throws Exception {
+        withUpdateableProduct(client(), (Product product) -> {
+            assertThat(product.getMasterData().getStaged().getMasterVariant().getImages()).hasSize(0);
+
+            final Image image = Image.ofWidthAndHeight("http://www.commercetools.com/assets/img/ct_logo_farbe.gif", 460, 102, "commercetools logo");
+            final Product updatedProduct = client().executeBlocking(ProductUpdateCommand.of(product, AddExternalImage.ofVariantId(image, MASTER_VARIANT_ID)));
+
+            assertThat(updatedProduct.getMasterData().getStaged().getMasterVariant().getImages()).isEqualTo(asList(image));
+            return updatedProduct;
+        });
+    }
+
+    @Test
+    public void addExternalImageBySku() throws Exception {
+        withUpdateableProduct(client(), (Product product) -> {
+            final ProductVariant masterVariant = product.getMasterData().getStaged().getMasterVariant();
+            assertThat(masterVariant.getImages()).hasSize(0);
+
+            final Image image = Image.ofWidthAndHeight("http://www.commercetools.com/assets/img/ct_logo_farbe.gif", 460, 102, "commercetools logo");
+            final Product updatedProduct = client().executeBlocking(ProductUpdateCommand.of(product, AddExternalImage.ofSku(image, masterVariant.getSku())));
+
+            assertThat(updatedProduct.getMasterData().getStaged().getMasterVariant().getImages()).isEqualTo(asList(image));
+            return updatedProduct;
+        });
+    }
+
     //do not inline, it is example code
     @Test
     public void addPrice() throws Exception {
@@ -162,6 +189,42 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
     }
 
     @Test
+    public void addPriceByVariantId() throws Exception {
+        final PriceDraft priceDraft = PriceDraft.of(MoneyImpl.of(new BigDecimal("12345"), "JPY"));
+        withUpdateableProduct(client(), product -> {
+            final Product updatedProduct = client()
+                    .executeBlocking(ProductUpdateCommand.of(product, AddPrice.ofVariantId(1, priceDraft)));
+
+            final List<Price> prices = updatedProduct.getMasterData().getStaged().getMasterVariant().getPrices();
+            assertThat(prices).hasSize(1);
+            final Price actualPrice = prices.get(0);
+
+            assertThat(priceDraft).isEqualTo(PriceDraft.of(actualPrice));
+
+            return updatedProduct;
+        });
+    }
+
+    @Test
+    public void addPriceBySku() throws Exception {
+        final PriceDraft priceDraft = PriceDraft.of(MoneyImpl.of(new BigDecimal("12345"), "JPY"));
+        withUpdateableProduct(client(), product -> {
+
+            final String sku = product.getMasterData().getStaged().getMasterVariant().getSku();
+            final Product updatedProduct = client()
+                    .executeBlocking(ProductUpdateCommand.of(product, AddPrice.ofSku(sku, priceDraft)));
+
+            final List<Price> prices = updatedProduct.getMasterData().getStaged().getMasterVariant().getPrices();
+            assertThat(prices).hasSize(1);
+            final Price actualPrice = prices.get(0);
+
+            assertThat(priceDraft).isEqualTo(PriceDraft.of(actualPrice));
+
+            return updatedProduct;
+        });
+    }
+
+    @Test
     public void setPrices() throws Exception {
         final PriceDraft expectedPrice1 = PriceDraft.of(MoneyImpl.of(123, EUR));
         final PriceDraft expectedPrice2 = PriceDraft.of(MoneyImpl.of(123, EUR)).withCountry(DE);
@@ -175,6 +238,43 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
             assertThat(prices).hasSize(2);
             List<PriceDraft> draftPricesList = prices.stream().map(PriceDraft::of).collect(toList());
             assertThat(draftPricesList).containsOnly(expectedPrice1, expectedPrice2);
+
+            return updatedProduct;
+        });
+    }
+
+    @Test
+    public void setPricesByVariantId() throws Exception {
+        final PriceDraft priceDraft = PriceDraft.of(MoneyImpl.of(123, EUR));
+        final PriceDraft priceDraft2 = PriceDraft.of(MoneyImpl.of(123, EUR)).withCountry(DE);
+        final List<PriceDraft> expectedPriceList = asList(priceDraft, priceDraft2);
+
+        withUpdateableProduct(client(), product -> {
+            final Product updatedProduct = client()
+                    .executeBlocking(ProductUpdateCommand.of(product, SetPrices.ofVariantId(1, expectedPriceList)));
+
+            final List<Price> prices = updatedProduct.getMasterData().getStaged().getMasterVariant().getPrices();
+            List<PriceDraft> draftPricesList = prices.stream().map(PriceDraft::of).collect(toList());
+            assertThat(draftPricesList).containsOnly(priceDraft, priceDraft2);
+
+            return updatedProduct;
+        });
+    }
+
+    @Test
+    public void setPricesBySku() throws Exception {
+        final PriceDraft priceDraft = PriceDraft.of(MoneyImpl.of(123, EUR));
+        final PriceDraft priceDraft2 = PriceDraft.of(MoneyImpl.of(123, EUR)).withCountry(DE);
+        final List<PriceDraft> expectedPriceList = asList(priceDraft, priceDraft2);
+
+        withUpdateableProduct(client(), product -> {
+            final String sku = product.getMasterData().getStaged().getMasterVariant().getSku();
+            final Product updatedProduct = client()
+                    .executeBlocking(ProductUpdateCommand.of(product, SetPrices.ofSku(sku, expectedPriceList)));
+
+            final List<Price> prices = updatedProduct.getMasterData().getStaged().getMasterVariant().getPrices();
+            List<PriceDraft> draftPricesList = prices.stream().map(PriceDraft::of).collect(toList());
+            assertThat(draftPricesList).containsOnly(priceDraft, priceDraft2);
 
             return updatedProduct;
         });
@@ -329,6 +429,33 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
     }
 
     @Test
+    public void removeImageByVariantId() throws Exception {
+        final Image image = Image.ofWidthAndHeight("http://www.commercetools.com/assets/img/ct_logo_farbe.gif", 460, 102, "commercetools logo");
+        withUpdateableProduct(client(), product -> {
+            final Product productWithImage = client().executeBlocking(ProductUpdateCommand.of(product, AddExternalImage.ofVariantId(image, MASTER_VARIANT_ID)));
+            assertThat(productWithImage.getMasterData().getStaged().getMasterVariant().getImages()).isEqualTo(asList(image));
+
+            final Product updatedProduct = client().executeBlocking(ProductUpdateCommand.of(productWithImage, RemoveImage.ofVariantId(image, MASTER_VARIANT_ID)));
+            assertThat(updatedProduct.getMasterData().getStaged().getMasterVariant().getImages()).hasSize(0);
+            return updatedProduct;
+        });
+    }
+
+    @Test
+    public void removeImageBySku() throws Exception {
+        final Image image = Image.ofWidthAndHeight("http://www.commercetools.com/assets/img/ct_logo_farbe.gif", 460, 102, "commercetools logo");
+        withUpdateableProduct(client(), product -> {
+            final String sku = product.getMasterData().getStaged().getMasterVariant().getSku();
+            final Product productWithImage = client().executeBlocking(ProductUpdateCommand.of(product, AddExternalImage.ofSku(image, sku)));
+            assertThat(productWithImage.getMasterData().getStaged().getMasterVariant().getImages()).isEqualTo(asList(image));
+
+            final Product updatedProduct = client().executeBlocking(ProductUpdateCommand.of(productWithImage, RemoveImage.ofSku(image, sku)));
+            assertThat(updatedProduct.getMasterData().getStaged().getMasterVariant().getImages()).hasSize(0);
+            return updatedProduct;
+        });
+    }
+
+    @Test
     public void removePrice() throws Exception {
         withUpdateablePricedProduct(client(), product -> {
             final Price oldPrice = getFirstPrice(product);
@@ -476,6 +603,76 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
     }
 
     @Test
+    public void setAttributeByVariantId() throws Exception {
+        withUpdateableProduct(client(), product -> {
+            //the setter contains the name and a JSON mapper, declare it only one time in your project per attribute
+            //example for MonetaryAmount attribute
+            final String moneyAttributeName = MONEY_ATTRIBUTE_NAME;
+            final NamedAttributeAccess<MonetaryAmount> moneyAttribute =
+                    AttributeAccess.ofMoney().ofName(moneyAttributeName);
+            final MonetaryAmount newValueForMoney = EURO_10;
+
+            //example for LocalizedEnumValue attribute
+            final NamedAttributeAccess<LocalizedEnumValue> colorAttribute = Colors.ATTRIBUTE;
+            final LocalizedEnumValue oldValueForColor = Colors.GREEN;
+            final LocalizedEnumValue newValueForColor = Colors.RED;
+
+            assertThat(product.getMasterData().getStaged().getMasterVariant().findAttribute(moneyAttribute)).isEmpty();
+            assertThat(product.getMasterData().getStaged().getMasterVariant().findAttribute(colorAttribute)).contains(oldValueForColor);
+
+            final SetAttribute moneyUpdate = SetAttribute.ofVariantId(MASTER_VARIANT_ID, moneyAttribute, newValueForMoney);
+            final SetAttribute localizedEnumUpdate = SetAttribute.ofVariantId(MASTER_VARIANT_ID, colorAttribute, newValueForColor);
+
+            final Product updatedProduct = client().executeBlocking(ProductUpdateCommand.of(product, asList(moneyUpdate, localizedEnumUpdate)));
+            assertThat(updatedProduct.getMasterData().getStaged().getMasterVariant().findAttribute(moneyAttribute)).contains(newValueForMoney);
+            assertThat(updatedProduct.getMasterData().getStaged().getMasterVariant().findAttribute(colorAttribute)).contains(newValueForColor);
+
+            final SetAttribute unsetAction = SetAttribute.ofUnsetAttributeForVariantId(MASTER_VARIANT_ID, moneyAttribute);
+            final Product productWithoutMoney = client().executeBlocking(ProductUpdateCommand.of(updatedProduct, unsetAction));
+
+            assertThat(productWithoutMoney.getMasterData().getStaged().getMasterVariant().findAttribute(moneyAttribute)).isEmpty();
+
+            return productWithoutMoney;
+        });
+    }
+
+    @Test
+    public void setAttributeBySku() throws Exception {
+        withUpdateableProduct(client(), product -> {
+            final String sku = product.getMasterData().getStaged().getMasterVariant().getSku();
+
+            //the setter contains the name and a JSON mapper, declare it only one time in your project per attribute
+            //example for MonetaryAmount attribute
+            final String moneyAttributeName = MONEY_ATTRIBUTE_NAME;
+            final NamedAttributeAccess<MonetaryAmount> moneyAttribute =
+                    AttributeAccess.ofMoney().ofName(moneyAttributeName);
+            final MonetaryAmount newValueForMoney = EURO_10;
+
+            //example for LocalizedEnumValue attribute
+            final NamedAttributeAccess<LocalizedEnumValue> colorAttribute = Colors.ATTRIBUTE;
+            final LocalizedEnumValue oldValueForColor = Colors.GREEN;
+            final LocalizedEnumValue newValueForColor = Colors.RED;
+
+            assertThat(product.getMasterData().getStaged().getMasterVariant().findAttribute(moneyAttribute)).isEmpty();
+            assertThat(product.getMasterData().getStaged().getMasterVariant().findAttribute(colorAttribute)).contains(oldValueForColor);
+
+            final SetAttribute moneyUpdate = SetAttribute.ofSku(sku, moneyAttribute, newValueForMoney);
+            final SetAttribute localizedEnumUpdate = SetAttribute.ofSku(sku, colorAttribute, newValueForColor);
+
+            final Product updatedProduct = client().executeBlocking(ProductUpdateCommand.of(product, asList(moneyUpdate, localizedEnumUpdate)));
+            assertThat(updatedProduct.getMasterData().getStaged().getMasterVariant().findAttribute(moneyAttribute)).contains(newValueForMoney);
+            assertThat(updatedProduct.getMasterData().getStaged().getMasterVariant().findAttribute(colorAttribute)).contains(newValueForColor);
+
+            final SetAttribute unsetAction = SetAttribute.ofUnsetAttributeForSku(sku, moneyAttribute);
+            final Product productWithoutMoney = client().executeBlocking(ProductUpdateCommand.of(updatedProduct, unsetAction));
+
+            assertThat(productWithoutMoney.getMasterData().getStaged().getMasterVariant().findAttribute(moneyAttribute)).isEmpty();
+
+            return productWithoutMoney;
+        });
+    }
+
+    @Test
     public void setAttributeInAllVariants() throws Exception {
         withUpdateableProduct(client(), product -> {
             //the setter contains the name and a JSON mapper, declare it only one time in your project per attribute
@@ -586,6 +783,72 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
             assertThat(variant.findAttribute(sizeAttribute).get()).isEqualTo(Sizes.M);
 
             final Product productWithoutVariant = client().executeBlocking(ProductUpdateCommand.of(productWithVariant, RemoveVariant.of(variant)));
+            assertThat(productWithoutVariant.getMasterData().getStaged().getVariants()).isEmpty();
+
+            return productWithoutVariant;
+        });
+    }
+
+    @Test
+    public void removeVariantById() throws Exception {
+        final NamedAttributeAccess<MonetaryAmount> moneyAttribute =
+                AttributeAccess.ofMoney().ofName(MONEY_ATTRIBUTE_NAME);
+        final AttributeDraft moneyAttributeValue = AttributeDraft.of(moneyAttribute, EURO_10);
+
+        final NamedAttributeAccess<LocalizedEnumValue> colorAttribute = Colors.ATTRIBUTE;
+        final LocalizedEnumValue color = Colors.RED;
+        final AttributeDraft colorAttributeValue = AttributeDraft.of(colorAttribute, color);
+
+        final NamedAttributeAccess<EnumValue> sizeAttribute = Sizes.ATTRIBUTE;
+        final AttributeDraft sizeValue = AttributeDraft.of(sizeAttribute, Sizes.M);
+
+
+        withUpdateableProduct(client(), product -> {
+            assertThat(product.getMasterData().getStaged().getVariants()).isEmpty();
+
+            final PriceDraft price = PriceDraft.of(MoneyImpl.of(new BigDecimal("12.34"), EUR)).withCountry(DE);
+            final List<PriceDraft> prices = asList(price);
+            final List<AttributeDraft> attributeValues = asList(moneyAttributeValue, colorAttributeValue, sizeValue);
+            final ProductUpdateCommand addVariantCommand =
+                    ProductUpdateCommand.of(product, AddVariant.of(attributeValues, prices, randomKey()));
+
+            final Product productWithVariant = client().executeBlocking(addVariantCommand);
+            final ProductVariant variant = productWithVariant.getMasterData().getStaged().getVariants().get(0);
+
+            final Product productWithoutVariant = client().executeBlocking(ProductUpdateCommand.of(productWithVariant, RemoveVariant.ofVariantId(variant.getId())));
+            assertThat(productWithoutVariant.getMasterData().getStaged().getVariants()).isEmpty();
+
+            return productWithoutVariant;
+        });
+    }
+
+    @Test
+    public void removeVariantBySku() throws Exception {
+        final NamedAttributeAccess<MonetaryAmount> moneyAttribute =
+                AttributeAccess.ofMoney().ofName(MONEY_ATTRIBUTE_NAME);
+        final AttributeDraft moneyAttributeValue = AttributeDraft.of(moneyAttribute, EURO_10);
+
+        final NamedAttributeAccess<LocalizedEnumValue> colorAttribute = Colors.ATTRIBUTE;
+        final LocalizedEnumValue color = Colors.RED;
+        final AttributeDraft colorAttributeValue = AttributeDraft.of(colorAttribute, color);
+
+        final NamedAttributeAccess<EnumValue> sizeAttribute = Sizes.ATTRIBUTE;
+        final AttributeDraft sizeValue = AttributeDraft.of(sizeAttribute, Sizes.M);
+
+
+        withUpdateableProduct(client(), product -> {
+            assertThat(product.getMasterData().getStaged().getVariants()).isEmpty();
+
+            final PriceDraft price = PriceDraft.of(MoneyImpl.of(new BigDecimal("12.34"), EUR)).withCountry(DE);
+            final List<PriceDraft> prices = asList(price);
+            final List<AttributeDraft> attributeValues = asList(moneyAttributeValue, colorAttributeValue, sizeValue);
+            final ProductUpdateCommand addVariantCommand =
+                    ProductUpdateCommand.of(product, AddVariant.of(attributeValues, prices, randomKey()));
+
+            final Product productWithVariant = client().executeBlocking(addVariantCommand);
+            final ProductVariant variant = productWithVariant.getMasterData().getStaged().getVariants().get(0);
+
+            final Product productWithoutVariant = client().executeBlocking(ProductUpdateCommand.of(productWithVariant, RemoveVariant.ofVariantSku(variant.getSku())));
             assertThat(productWithoutVariant.getMasterData().getStaged().getVariants()).isEmpty();
 
             return productWithoutVariant;

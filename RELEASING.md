@@ -7,7 +7,7 @@
     * ~ 2 min
 1. `mvn release:perform -Darguments="-DskipTests" -DskipTests`
     * ~ 10 min
-1. https://oss.sonatype.org/ release
+1. https://oss.sonatype.org/ click "release" for commercetools/sphere stuff in "Staging Repositories"
 1. publish the Javadoc to GitHub pages: `git checkout $(git describe --abbrev=0 --tags) && mvn clean javadoc:aggregate scm-publish:publish-scm -P publish-site && git checkout master`
 1. update GitHub release on https://github.com/commercetools/commercetools-jvm-sdk/releases
 1. add version badges to http://dev.commercetools.com/release-notes.html

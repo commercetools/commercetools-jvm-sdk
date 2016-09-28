@@ -290,7 +290,7 @@ public class ProductProjectionSearchModelFacetedSearchIntegrationTest extends Pr
                     assertThat(rangeStats.getUpperEndpoint()).isEqualTo(null);
                     assertThat(rangeStats.getCount()).isEqualTo(2L);
                     assertThat(rangeStats.getMin()).isEqualTo("5.0");
-                    assertThat(rangeStats.getMax()).isEqualTo("5.0");
+                    assertThat(rangeStats.getMax()).isEqualTo(withAggregations("10.0").otherwise("5.0"));
                 });
     }
 
@@ -312,7 +312,7 @@ public class ProductProjectionSearchModelFacetedSearchIntegrationTest extends Pr
                     assertThat(rangeStats.getUpperEndpoint()).isEqualTo(null);
                     assertThat(rangeStats.getCount()).isEqualTo(2L);
                     assertThat(rangeStats.getMin()).isEqualTo("50000.0");
-                    assertThat(rangeStats.getMax()).isEqualTo("50000.0");
+                    assertThat(rangeStats.getMax()).isEqualTo(withAggregations("100000.0").otherwise("50000.0"));
                 });
     }
 
@@ -343,7 +343,7 @@ public class ProductProjectionSearchModelFacetedSearchIntegrationTest extends Pr
                     assertThat(rangeStats.getUpperEndpoint()).isEqualTo(null);
                     assertThat(rangeStats.getCount()).isEqualTo(2L);
                     assertThat(rangeStats.getMin()).isEqualTo("1.0001664E12");
-                    assertThat(rangeStats.getMax()).isEqualTo("1.0001664E12");
+                    assertThat(rangeStats.getMax()).isEqualTo(withAggregations("1.0343808E12").otherwise("1.0001664E12"));
                 });
     }
 
@@ -365,7 +365,7 @@ public class ProductProjectionSearchModelFacetedSearchIntegrationTest extends Pr
                     assertThat(rangeStats.getUpperEndpoint()).isEqualTo(null);
                     assertThat(rangeStats.getCount()).isEqualTo(2L);
                     assertThat(rangeStats.getMin()).isEqualTo("7.9509203E7");
-                    assertThat(rangeStats.getMax()).isEqualTo("7.9509203E7");
+                    assertThat(rangeStats.getMax()).isEqualTo(withAggregations("8.3170204E7").otherwise("7.9509203E7"));
                 });
     }
 
@@ -387,7 +387,7 @@ public class ProductProjectionSearchModelFacetedSearchIntegrationTest extends Pr
                     assertThat(rangeStats.getUpperEndpoint()).isEqualTo(null);
                     assertThat(rangeStats.getCount()).isEqualTo(2L);
                     assertThat(rangeStats.getMin()).isEqualTo("1.000245909203E12");
-                    assertThat(rangeStats.getMax()).isEqualTo("1.000245909203E12");
+                    assertThat(rangeStats.getMax()).isEqualTo(withAggregations("1.034463970204E12").otherwise("1.000245909203E12"));
                 });
     }
 
