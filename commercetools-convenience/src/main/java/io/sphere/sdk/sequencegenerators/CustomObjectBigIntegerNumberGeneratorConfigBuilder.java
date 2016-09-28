@@ -12,10 +12,12 @@ import java.math.BigInteger;
  * Builds {@link CustomObjectBigIntegerNumberGeneratorConfig} instances using the Builder pattern.
  */
 public final class CustomObjectBigIntegerNumberGeneratorConfigBuilder extends Base implements Builder<CustomObjectBigIntegerNumberGeneratorConfig> {
+    public static final int DEFAULT_RETRY_ATTEMPTS = 100;
+    public static final String DEFAULT_CONTAINER = "io.sphere.sdk.sequencegenerators";
 
     private SphereClient sphereClient;
-    private int maxRetryAttempts = 100;
-    private String container = "io.sphere.sdk.sequencegenerators";
+    private int maxRetryAttempts = DEFAULT_RETRY_ATTEMPTS;
+    private String container = DEFAULT_CONTAINER;
     private String key;
     private BigInteger initialValue = BigInteger.ONE;
 
@@ -25,11 +27,9 @@ public final class CustomObjectBigIntegerNumberGeneratorConfigBuilder extends Ba
     }
 
     /**
+     * Sets the container for the {@link CustomObject} storing the last used sequence number.
      *
-     * @param container
-     * Container and key are namespaces like in a key-value store.
-     *
-     * @see CustomObject
+     * @param container container name of the underlying {@link CustomObject}. If this method is not used the default value is {@value DEFAULT_CONTAINER}.
      */
     public CustomObjectBigIntegerNumberGeneratorConfigBuilder container(final String container) {
         this.container = container;
@@ -37,10 +37,10 @@ public final class CustomObjectBigIntegerNumberGeneratorConfigBuilder extends Ba
     }
 
     /**
+     * Sets the maximum amount of retries.
      *
-     * @param maxRetryAttempts
-     * If there is a concurrency exception, the generator retries to generate the number. This value sets the maximum number of retries.
-     * (By default it is set to 100)
+     * @param maxRetryAttempts the maximum amount of attempts to retry the number generation if a {@link io.sphere.sdk.client.ConcurrentModificationException} occurs
+     * By default it is set to {@value DEFAULT_RETRY_ATTEMPTS}.
      */
     public CustomObjectBigIntegerNumberGeneratorConfigBuilder maxRetryAttempts(final int maxRetryAttempts) {
         this.maxRetryAttempts = maxRetryAttempts;
@@ -48,9 +48,9 @@ public final class CustomObjectBigIntegerNumberGeneratorConfigBuilder extends Ba
     }
 
     /**
+     * Sets the first number generated if the underlying {@link CustomObject} does not exist.
      *
-     * @param initialValue
-     * The initial value allows to start the number sequence in a given number. (By default it is set to 1)
+     * @param initialValue first number generated. By default it is set to 1.
      */
     public CustomObjectBigIntegerNumberGeneratorConfigBuilder initialValue(final BigInteger initialValue) {
         this.initialValue = initialValue;
@@ -58,9 +58,10 @@ public final class CustomObjectBigIntegerNumberGeneratorConfigBuilder extends Ba
     }
 
     /**
+     * Creates a new builder instance.
      *
      * @param sphereClient A client to perform requests to the platform.
-     * @param key Container and key are namespaces like in a key-value store.
+     * @param key the key is part of the namespace to store the {@link CustomObject} with the last used sequence number, it normally is sth. like "orderNumber" or "customerNumber"
      *
      * @see CustomObject
      */

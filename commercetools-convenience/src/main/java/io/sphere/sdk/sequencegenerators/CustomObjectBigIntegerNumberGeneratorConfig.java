@@ -1,7 +1,6 @@
 package io.sphere.sdk.sequencegenerators;
 
 import io.sphere.sdk.client.SphereClient;
-import io.sphere.sdk.customobjects.CustomObject;
 import io.sphere.sdk.models.Base;
 
 import java.math.BigInteger;
