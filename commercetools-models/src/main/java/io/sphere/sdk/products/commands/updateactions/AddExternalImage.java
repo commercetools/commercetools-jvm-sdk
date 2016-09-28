@@ -12,8 +12,6 @@ import javax.annotation.Nullable;
  *
  *  {@doc.gen intro}
  *
- *  {@include.example io.sphere.sdk.products.commands.ProductUpdateCommandIntegrationTest#addExternalImage()}
- *
  *  <p>By variant ID (every variant has a variantId):</p>
  * {@include.example io.sphere.sdk.products.commands.ProductUpdateCommandIntegrationTest#addExternalImageByVariantId()}
  *
@@ -41,11 +39,11 @@ public final class AddExternalImage extends UpdateActionImpl<Product> {
         return new AddExternalImage(image, variantId, null);
     }
 
-    public static AddExternalImage ofVariantId(final Image image, final Integer variantId) {
+    public static AddExternalImage ofVariantId(final Integer variantId, final Image image) {
         return new AddExternalImage(image, variantId, null);
     }
 
-    public static AddExternalImage ofSku(final Image image, final String sku) {
+    public static AddExternalImage ofSku(final String sku, final Image image) {
         return new AddExternalImage(image, null, sku);
     }
 
