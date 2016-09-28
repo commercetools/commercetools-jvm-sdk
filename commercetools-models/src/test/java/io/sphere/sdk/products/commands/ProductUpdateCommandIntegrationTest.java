@@ -848,7 +848,7 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
             final Product productWithVariant = client().executeBlocking(addVariantCommand);
             final ProductVariant variant = productWithVariant.getMasterData().getStaged().getVariants().get(0);
 
-            final Product productWithoutVariant = client().executeBlocking(ProductUpdateCommand.of(productWithVariant, RemoveVariant.ofVariantSku(variant.getSku())));
+            final Product productWithoutVariant = client().executeBlocking(ProductUpdateCommand.of(productWithVariant, RemoveVariant.ofSku(variant.getSku())));
             assertThat(productWithoutVariant.getMasterData().getStaged().getVariants()).isEmpty();
 
             return productWithoutVariant;
