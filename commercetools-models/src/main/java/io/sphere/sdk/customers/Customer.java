@@ -260,9 +260,8 @@ public interface Customer extends Resource<Customer>, Custom {
     }
 
     /**
-     *
-     * @param addressId Is the Id of the address to find.
-     *
+     * Find the address in {@link #getAddresses()} by the address id
+     * @param addressId the Id string of the address to find
      * @return Address or null
      */
     @Nullable
