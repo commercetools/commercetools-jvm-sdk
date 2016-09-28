@@ -106,4 +106,15 @@ public class StateUpdateCommandIntegrationTest extends IntegrationTest {
         });
     }
 
+    @Test
+    public void addRoles() throws Exception {
+        withUpdateableState(client(), builder -> builder.type(StateType.REVIEW_STATE), state -> {
+            final Set<StateRole> roles = asSet(REVIEW_INCLUDED_IN_STATISTICS);
+            final StateUpdateCommand command = StateUpdateCommand.of(state, AddRoles.of(roles));
+            final State updatedState = client().executeBlocking(command);
+            assertThat(updatedState.getRoles()).isEqualTo(roles);
+            return updatedState;
+        });
+    }
+
 }
