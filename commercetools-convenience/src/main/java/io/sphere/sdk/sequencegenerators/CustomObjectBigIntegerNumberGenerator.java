@@ -15,7 +15,7 @@ import java.util.concurrent.CompletionStage;
 
 /**
  Creates an incremental sequence of BigInteger numbers, storing the last used number in a CustomObject. It is thread safe, by using optimistic concurrency control based on the version of the CustomObject.
- When there is a concurrency exception, it is automatically retried to generate the number (with a maximum number of retries configured in {@link CustomObjectBigIntegerNumberGeneratorConfig}).
+ When there is a concurrency exception, it is automatically retries to generate the number (with a maximum number of retries configured in {@link CustomObjectBigIntegerNumberGeneratorConfig}).
 
  <h3 id="create-type">Create number sequence starting with 1</h3>
 
