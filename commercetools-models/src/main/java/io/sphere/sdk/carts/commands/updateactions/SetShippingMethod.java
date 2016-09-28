@@ -10,13 +10,10 @@ import javax.annotation.Nullable;
 
 /**
  * Sets the shipping method.
- *
- *  {@doc.gen intro}
+ * {@doc.gen intro}
  *
  * {@include.example io.sphere.sdk.carts.commands.CartUpdateCommandIntegrationTest#setShippingMethod()}
- *
  * {@include.example io.sphere.sdk.carts.commands.CartUpdateCommandIntegrationTest#setShippingMethodById()}
- *
  */
 public final class SetShippingMethod extends UpdateActionImpl<Cart> {
     @Nullable
