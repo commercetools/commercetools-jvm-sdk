@@ -12,8 +12,6 @@ import java.util.List;
  *
  * {@doc.gen intro}
  *
- * {@include.example io.sphere.sdk.products.commands.ProductUpdateCommandIntegrationTest#setPrices()}
- *
  * <p>By variant ID (every variant has a variantId):</p>
  * {@include.example io.sphere.sdk.products.commands.ProductUpdateCommandIntegrationTest#setPricesByVariantId()}
  *
