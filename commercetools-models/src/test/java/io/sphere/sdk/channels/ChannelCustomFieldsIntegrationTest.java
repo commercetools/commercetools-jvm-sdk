@@ -12,7 +12,7 @@ import org.junit.Test;
 
 import java.util.HashMap;
 
-import static io.sphere.sdk.channels.ChannelFixtures.withChannelOfRole;
+import static io.sphere.sdk.channels.ChannelFixtures.withUpdatableChannelOfRole;
 import static io.sphere.sdk.test.SphereTestUtils.randomKey;
 import static io.sphere.sdk.types.TypeFixtures.STRING_FIELD_NAME;
 import static io.sphere.sdk.types.TypeFixtures.withUpdateableType;
@@ -47,7 +47,7 @@ public class ChannelCustomFieldsIntegrationTest extends IntegrationTest {
     @Test
     public void setCustomType() {
         withUpdateableType(client(), type -> {
-            withChannelOfRole(client(), ChannelRole.INVENTORY_SUPPLY, channel -> {
+            withUpdatableChannelOfRole(client(), ChannelRole.INVENTORY_SUPPLY, channel -> {
                 final HashMap<String, Object> fields = new HashMap<>();
                 fields.put(STRING_FIELD_NAME, "hello");
                 final ChannelUpdateCommand updateCommand =
@@ -59,6 +59,7 @@ public class ChannelCustomFieldsIntegrationTest extends IntegrationTest {
                 final Channel updated2 =
                         client().executeBlocking(ChannelUpdateCommand.of(updatedChannel, SetCustomType.ofRemoveType()));
                 assertThat(updated2.getCustom()).isNull();
+                return updated2;
             });
             return type;
         });
