@@ -64,4 +64,8 @@ public final class ProductVariantFilterSearchModel extends SearchModelImpl<Produ
         return stringSearchModel("sku").filtered();
     }
 
+    public TermFilterSearchModel<ProductProjection, String> key() {
+        return stringSearchModel("key").filtered();
+    }
+
 }

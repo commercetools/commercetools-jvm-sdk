@@ -101,6 +101,36 @@ public class ProductProjectionSearchFiltersIntegrationTest extends ProductProjec
         });
     }
 
+    @Test
+    public void filterByProductVariantKey() {
+        final List<String> keys = Stream.of(product1, product2)
+                .map(product -> product.getMasterData().getStaged().getMasterVariant().getKey())
+                .collect(toList());
+        final ProductProjectionSearch search = ProductProjectionSearch.ofStaged()
+                .plusQueryFilters(m -> m.allVariants().key().isIn(keys));
+        assertEventually(Duration.ofSeconds(45), Duration.ofMillis(200), () -> {
+            final List<ProductProjection> results = client().executeBlocking(search).getResults();
+            assertThat(results)
+            .extracting(m -> m.getMasterVariant().getKey())
+            .containsOnly(keys.get(0), keys.get(1));
+        });
+    }
+
+    @Test
+    public void filterByProductKey() {
+        final List<String> keys = Stream.of(product1, product2)
+                .map(product -> product.getKey())
+                .collect(toList());
+        final ProductProjectionSearch search = ProductProjectionSearch.ofStaged()
+                .plusQueryFilters(m -> m.key().isIn(keys));
+        assertEventually(Duration.ofSeconds(45), Duration.ofMillis(200), () -> {
+            final List<ProductProjection> results = client().executeBlocking(search).getResults();
+            assertThat(results)
+            .extracting(m -> m.getKey())
+            .containsOnly(keys.get(0), keys.get(1));
+        });
+    }
+
     private static void testResultIds(final ProductProjectionSearch search, final Consumer<List<String>> test) {
         assertEventually(Duration.ofSeconds(45), Duration.ofMillis(200), () -> {
             final PagedSearchResult<ProductProjection> result = executeSearch(search);

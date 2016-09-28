@@ -96,4 +96,13 @@ public interface ProductVariant extends AttributeContainer {
      * @throws UnsupportedOperationException if the operation is not available
      */
     ByIdVariantIdentifier getIdentifier();
+
+    /**
+     * Key of the variant.
+     * @return key
+     *
+     * @see io.sphere.sdk.products.commands.updateactions.SetProductVariantKey
+     */
+    @Nullable
+    String getKey();
 }

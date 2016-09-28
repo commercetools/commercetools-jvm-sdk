@@ -12,12 +12,14 @@ class ProductVariantDraftImpl extends Base implements ProductVariantDraft {
     private final List<PriceDraft> prices;
     private final List<AttributeDraft> attributes;
     private final List<Image> images;
+    private final String key;
 
-    public ProductVariantDraftImpl(@Nullable final String sku, final List<PriceDraft> prices, final List<AttributeDraft> attributes, final List<Image> images) {
+    public ProductVariantDraftImpl(@Nullable final String sku, final List<PriceDraft> prices, final List<AttributeDraft> attributes, final List<Image> images, @Nullable final String key) {
         this.sku = sku;
         this.prices = prices;
         this.attributes = attributes;
         this.images = images;
+        this.key = key;
     }
 
     @Override
@@ -39,5 +41,11 @@ class ProductVariantDraftImpl extends Base implements ProductVariantDraft {
     @Override
     public List<Image> getImages() {
         return images;
+    }
+
+    @Nullable
+    @Override
+    public String getKey() {
+        return key;
     }
 }

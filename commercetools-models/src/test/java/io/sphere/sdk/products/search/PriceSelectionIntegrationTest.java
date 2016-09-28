@@ -7,10 +7,7 @@ import io.sphere.sdk.customergroups.CustomerGroup;
 import io.sphere.sdk.products.*;
 import io.sphere.sdk.products.commands.ProductUpdateCommand;
 import io.sphere.sdk.products.commands.updateactions.SetPrices;
-import io.sphere.sdk.products.queries.ProductByIdGet;
-import io.sphere.sdk.products.queries.ProductProjectionByIdGet;
-import io.sphere.sdk.products.queries.ProductProjectionQuery;
-import io.sphere.sdk.products.queries.ProductQuery;
+import io.sphere.sdk.products.queries.*;
 import io.sphere.sdk.producttypes.ProductType;
 import io.sphere.sdk.producttypes.ProductTypeDraft;
 import io.sphere.sdk.producttypes.commands.ProductTypeCreateCommand;
@@ -134,6 +131,26 @@ public class PriceSelectionIntegrationTest extends IntegrationTest {
     }
 
     @Test
+    public void selectAPriceByCurrencyInProductProjectionByKeyGet() {
+        final List<PriceDraft> prices = asList(PriceDraft.of(EURO_30), PriceDraft.of(USD_20));
+        withProductOfPrices(prices, product -> {
+            final ProductProjection productProjection = client().executeBlocking(ProductProjectionByKeyGet.ofStaged(product.getKey()).withPriceSelection(PriceSelection.of(EUR)));
+            final ProductVariant masterVariant = productProjection.getMasterVariant();
+            assertThat(masterVariant.getPrice()).isNotNull().has(price(PriceDraft.of(EURO_30)));
+        });
+    }
+
+    @Test
+    public void selectAPriceByCurrencyInProductByKeyGet() {
+        final List<PriceDraft> prices = asList(PriceDraft.of(EURO_30), PriceDraft.of(USD_20));
+        withProductOfPrices(prices, product -> {
+            final Product loadedProduct = client().executeBlocking(ProductByKeyGet.of(product.getKey()).withPriceSelection(PriceSelection.of(EUR)));
+            final ProductVariant masterVariant = loadedProduct.getMasterData().getStaged().getMasterVariant();
+            assertThat(masterVariant.getPrice()).isNotNull().has(price(PriceDraft.of(EURO_30)));
+        });
+    }
+
+    @Test
     public void verboseTest() {
         withResources((CustomerGroup b2c) -> (CustomerGroup b2b) -> (Channel channel) -> {
             final PriceDraftDsl simplePriceInEuro = PriceDraft.of(EURO_30);
@@ -217,6 +234,7 @@ public class PriceSelectionIntegrationTest extends IntegrationTest {
                 .prices(priceDrafts)
                 .build();
         final ProductDraft productDraft = ProductDraftBuilder.of(productType,  randomSlug(),  randomSlug(), masterVariant)
+                .key(randomKey())
                 .build();
         ProductFixtures.withProduct(client(), () -> productDraft, productConsumer);
     }

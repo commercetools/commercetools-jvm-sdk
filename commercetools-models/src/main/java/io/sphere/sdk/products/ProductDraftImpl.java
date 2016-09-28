@@ -35,6 +35,8 @@ class ProductDraftImpl extends Base implements ProductDraft {
     private final CategoryOrderHints categoryOrderHints;
     @Nullable
     private final Boolean publish;
+    @Nullable
+    private final String key;
 
     @JsonCreator
     ProductDraftImpl(final ResourceIdentifier<ProductType> productType, final LocalizedString name, final LocalizedString slug,
@@ -42,7 +44,9 @@ class ProductDraftImpl extends Base implements ProductDraft {
                      @Nullable final LocalizedString metaTitle, @Nullable final LocalizedString metaDescription, @Nullable final LocalizedString metaKeywords, final ProductVariantDraft masterVariant,
                      final List<ProductVariantDraft> variants, final Reference<TaxCategory> taxCategory,
                      final SearchKeywords searchKeywords, @Nullable final Reference<State> state,
-                     @Nullable final CategoryOrderHints categoryOrderHints, @Nullable final Boolean publish) {
+                     @Nullable final CategoryOrderHints categoryOrderHints,
+                     @Nullable final Boolean publish,
+                     @Nullable final String key) {
         this.name = name;
         this.productType = productType;
         this.slug = slug;
@@ -58,6 +62,7 @@ class ProductDraftImpl extends Base implements ProductDraft {
         this.variants = variants;
         this.categoryOrderHints = categoryOrderHints;
         this.publish = publish;
+        this.key = key;
     }
 
     @Override
@@ -141,5 +146,11 @@ class ProductDraftImpl extends Base implements ProductDraft {
     @Override
     public Boolean isPublish() {
         return publish;
+    }
+
+    @Override
+    @Nullable
+    public String getKey() {
+        return key;
     }
 }

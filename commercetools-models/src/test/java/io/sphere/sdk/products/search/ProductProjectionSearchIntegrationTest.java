@@ -1,21 +1,18 @@
 package io.sphere.sdk.products.search;
 
+import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.products.*;
 import io.sphere.sdk.products.attributes.*;
-import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.products.commands.ProductCreateCommand;
 import io.sphere.sdk.products.queries.ProductQuery;
-import io.sphere.sdk.producttypes.ProductTypeDraft;
 import io.sphere.sdk.producttypes.ProductType;
+import io.sphere.sdk.producttypes.ProductTypeDraft;
 import io.sphere.sdk.producttypes.commands.ProductTypeCreateCommand;
 import io.sphere.sdk.producttypes.queries.ProductTypeQuery;
 import io.sphere.sdk.queries.Query;
-import io.sphere.sdk.search.*;
+import io.sphere.sdk.search.PagedSearchResult;
 import io.sphere.sdk.test.IntegrationTest;
-import io.sphere.sdk.test.RetryIntegrationTest;
 import org.junit.BeforeClass;
-import org.junit.Rule;
-import org.slf4j.LoggerFactory;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -54,7 +51,7 @@ public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
     private static final String EVIL_PRODUCT_TYPE_NAME = "Evil" + TEST_CLASS_NAME;
     private static final String SKU_A = EVIL_PRODUCT_TYPE_NAME + "-skuA";
     private static final String SKU_B = EVIL_PRODUCT_TYPE_NAME + "-skuB";
-    private static final String PRODUCT_TYPE_NAME = TEST_CLASS_NAME;
+    private static final String PRODUCT_TYPE_NAME = TEST_CLASS_NAME + "-2";//change the postfix to create new products for lazy initialized tests
     protected static final String SKU1 = PRODUCT_TYPE_NAME + "-sku1";
     protected static final String SKU2 = PRODUCT_TYPE_NAME + "-sku2";
     protected static final String SKU3 = PRODUCT_TYPE_NAME + "-sku3";
@@ -125,13 +122,17 @@ public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
                 .attributes(AttributeDraft.of(ATTR_NAME_SIZE, size1), AttributeDraft.of(ATTR_NAME_COLOR, color))
                 .price(PriceDraft.of(new BigDecimal("23.45"), EUR))
                 .sku(sku)
+                .key(slug + "-master-variant-key")
                 .build();
         final ProductVariantDraft variant = ProductVariantDraftBuilder.of()
                 .attributes(AttributeDraft.of(ATTR_NAME_SIZE, size2))
                 .price(PriceDraft.of(new BigDecimal("27.45"), EUR))
+                .key(slug + "-variant2-key")
                 .build();
         final ProductDraft productDraft = ProductDraftBuilder.of(productType, name, LocalizedString.of(ENGLISH, slug), masterVariant)
-                .plusVariants(variant).build();
+                .plusVariants(variant)
+                .key(slug + "-product-key")
+                .build();
         return client().executeBlocking(ProductCreateCommand.of(productDraft));
     }
 

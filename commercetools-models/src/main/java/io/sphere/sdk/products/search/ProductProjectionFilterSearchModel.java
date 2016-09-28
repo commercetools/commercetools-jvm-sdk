@@ -27,6 +27,10 @@ public final class ProductProjectionFilterSearchModel extends SearchModelImpl<Pr
         return stringSearchModel("id").filtered();
     }
 
+    public TermFilterSearchModel<ProductProjection, String> key() {
+        return stringSearchModel("key").filtered();
+    }
+
     public LocalizedStringFilterSearchModel<ProductProjection> name() {
         return localizedStringFilterSearchModel("name");
     }

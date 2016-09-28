@@ -22,6 +22,9 @@ public final class ProductVariantDraftBuilder extends Base implements Builder<Pr
 
     private List<Image> images = Collections.emptyList();
 
+    @Nullable
+    private String key;
+
     private ProductVariantDraftBuilder() {
     }
 
@@ -85,8 +88,13 @@ public final class ProductVariantDraftBuilder extends Base implements Builder<Pr
         return attributes(listOf(attributes, attribute));
     }
 
+    public ProductVariantDraftBuilder key(@Nullable final String key) {
+        this.key = key;
+        return this;
+    }
+
     @Override
     public ProductVariantDraft build() {
-        return new ProductVariantDraftImpl(sku, prices, attributes, images);
+        return new ProductVariantDraftImpl(sku, prices, attributes, images, key);
     }
 }

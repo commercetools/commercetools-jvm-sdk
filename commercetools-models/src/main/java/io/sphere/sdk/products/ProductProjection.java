@@ -163,4 +163,8 @@ public interface ProductProjection extends ProductLike<ProductProjection, Produc
     @Nullable
     @Override
     Reference<State> getState();
+
+    @Nullable
+    @Override
+    String getKey();
 }

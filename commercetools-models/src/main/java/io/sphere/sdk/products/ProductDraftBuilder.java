@@ -33,6 +33,8 @@ public final class ProductDraftBuilder extends Base implements Builder<ProductDr
     private CategoryOrderHints categoryOrderHints;
     @Nullable
     private Boolean publish;
+    @Nullable
+    private String key;
 
     private ProductDraftBuilder(final ResourceIdentifier<ProductType> productType, final LocalizedString name, final LocalizedString slug, final ProductVariantDraft masterVariant) {
         this.name = name;
@@ -62,7 +64,7 @@ public final class ProductDraftBuilder extends Base implements Builder<ProductDr
 
     @Override
     public ProductDraft build() {
-        return new ProductDraftImpl(productType, getName(), getSlug(), getDescription(), getCategories(), getMetaTitle(), getMetaDescription(), getMetaKeywords(), masterVariant, variants, getTaxCategory(), getSearchKeywords(), getState(), getCategoryOrderHints(), publish);
+        return new ProductDraftImpl(productType, getName(), getSlug(), getDescription(), getCategories(), getMetaTitle(), getMetaDescription(), getMetaKeywords(), masterVariant, variants, getTaxCategory(), getSearchKeywords(), getState(), getCategoryOrderHints(), publish, key);
     }
 
     protected ProductDraftBuilder getThis() {
@@ -164,6 +166,11 @@ public final class ProductDraftBuilder extends Base implements Builder<ProductDr
         return getThis();
     }
 
+    public ProductDraftBuilder key(@Nullable final String key) {
+        this.key = key;
+        return getThis();
+    }
+
     public LocalizedString getName() {
         return name;
     }
@@ -232,5 +239,10 @@ public final class ProductDraftBuilder extends Base implements Builder<ProductDr
     @Nullable
     public Boolean isPublish() {
         return publish;
+    }
+
+    @Nullable
+    public String getKey() {
+        return key;
     }
 }
