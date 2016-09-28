@@ -4,6 +4,7 @@ import io.sphere.sdk.products.ProductProjection;
 import io.sphere.sdk.search.model.SearchModel;
 import io.sphere.sdk.search.model.SearchModelImpl;
 import io.sphere.sdk.search.model.MoneyFacetSearchModel;
+import io.sphere.sdk.search.model.TermFacetSearchModel;
 
 import javax.annotation.Nullable;
 
@@ -23,5 +24,9 @@ public final class ProductVariantFacetSearchModel extends SearchModelImpl<Produc
 
     public ProductVariantAvailabilityFacetSearchModel<ProductProjection> availability() {
         return new ProductVariantAvailabilityFacetSearchModelImpl<>(this, "availability");
+    }
+
+    public TermFacetSearchModel<ProductProjection, Boolean> scopedPriceDiscounted() {
+        return booleanSearchModel("scopedPriceDiscounted").faceted();
     }
 }

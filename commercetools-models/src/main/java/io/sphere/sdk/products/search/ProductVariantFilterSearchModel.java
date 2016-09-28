@@ -38,6 +38,17 @@ public final class ProductVariantFilterSearchModel extends SearchModelImpl<Produ
         return new ScopedPriceFilterSearchModel<>(this, "scopedPrice");
     }
 
+    /**
+     * Creates filters for the scopedPriceDiscounted property of a product variant.
+     *
+     * {@include.example io.sphere.sdk.products.search.ScopedPriceSearchIntegrationTest#discounts()}
+     *
+     * @return filters model
+     */
+    public TermFilterSearchModel<ProductProjection, Boolean> scopedPriceDiscounted() {
+        return booleanSearchModel("scopedPriceDiscounted").filtered();
+    }
+
     public ExistsAndMissingFilterSearchModelSupport<ProductProjection> prices() {
         return existsAndMissingFilterSearchModelSupport("prices");
     }
