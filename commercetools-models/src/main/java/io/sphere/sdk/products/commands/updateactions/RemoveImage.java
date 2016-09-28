@@ -13,8 +13,6 @@ import javax.annotation.Nullable;
  *
  * {@doc.gen intro}
  *
- * {@include.example io.sphere.sdk.products.commands.ProductUpdateCommandIntegrationTest#removeImage()}
- *
  * <p>By variant ID (every variant has a variantId):</p>
  * {@include.example io.sphere.sdk.products.commands.ProductUpdateCommandIntegrationTest#removeImageByVariantId()}
  *
@@ -50,26 +48,26 @@ public final class RemoveImage extends UpdateActionImpl<Product> {
     }
 
     public static RemoveImage of(final Image image, final Integer variantId) {
-        return ofVariantId(image.getUrl(), variantId);
+        return ofVariantId(variantId, image.getUrl());
     }
 
     public static RemoveImage of(final String imageUrl, final Integer variantId) {
-        return ofVariantId(imageUrl, variantId);
+        return ofVariantId(variantId, imageUrl);
     }
 
-    public static RemoveImage ofVariantId(final Image image, final Integer variantId) {
-        return ofVariantId(image.getUrl(), variantId);
+    public static RemoveImage ofVariantId(final Integer variantId, final Image image) {
+        return ofVariantId(variantId, image.getUrl());
     }
 
-    public static RemoveImage ofSku(final Image image, final String sku) {
-        return ofSku(image.getUrl(), sku);
+    public static RemoveImage ofSku(final String sku, final Image image) {
+        return ofSku(sku, image.getUrl());
     }
 
-    public static RemoveImage ofVariantId(final String imageUrl, final Integer variantId) {
+    public static RemoveImage ofVariantId(final Integer variantId, final String imageUrl) {
         return new RemoveImage(imageUrl, variantId, null);
     }
 
-    public static RemoveImage ofSku(final String imageUrl, final String sku) {
+    public static RemoveImage ofSku(final String sku, final String imageUrl) {
         return new RemoveImage(imageUrl, null, sku);
     }
 }
