@@ -12,6 +12,7 @@ import io.sphere.sdk.http.NameValuePair;
 import io.sphere.sdk.http.HttpResponse;
 import io.sphere.sdk.http.UrlQueryBuilder;
 import io.sphere.sdk.models.Base;
+import org.apache.commons.lang3.StringUtils;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -267,8 +268,7 @@ public abstract class MetaModelQueryDslImpl<T, C extends MetaModelQueryDsl<T, C,
 
     @Override
     public final HttpRequestIntent httpRequestIntent() {
-        final String additions = queryParametersToString(true);
-        return HttpRequestIntent.of(HttpMethod.GET, endpoint + (additions.length() > 1 ? additions : ""));
+        return HttpRequestIntent.of(HttpMethod.GET, completePath(endpoint, true));
     }
 
     @Override
@@ -276,7 +276,7 @@ public abstract class MetaModelQueryDslImpl<T, C extends MetaModelQueryDsl<T, C,
         return resultMapper.apply(httpResponse);
     }
 
-    private String queryParametersToString(final boolean urlEncoded) {
+    private String completePath(final String endpoint, final boolean urlEncoded) {
         final UrlQueryBuilder builder = UrlQueryBuilder.of();
         predicates().forEach(predicate -> builder.add(WHERE, predicate.toSphereQuery(), urlEncoded));
         sort().forEach(sort -> builder.add(SORT, sort.toSphereSort(), urlEncoded));
@@ -285,7 +285,12 @@ public abstract class MetaModelQueryDslImpl<T, C extends MetaModelQueryDsl<T, C,
         Optional.ofNullable(fetchTotal()).ifPresent(withTotal -> builder.add(WITH_TOTAL, withTotal.toString(), urlEncoded));
         expansionPaths().forEach(path -> builder.add(EXPAND, path.toSphereExpand(), urlEncoded));
         additionalHttpQueryParameters().forEach(parameter -> builder.add(parameter.getName(), parameter.getValue(), urlEncoded));
-        return builder.toStringWithOptionalQuestionMark();
+        final String extractedQueryParameters = builder.build();
+        if (StringUtils.isEmpty(extractedQueryParameters)) {
+            return endpoint;
+        } else {
+            return endpoint + (endpoint.contains("?") ? "&" : "?" ) + extractedQueryParameters;
+        }
     }
 
     @Override
@@ -300,7 +305,7 @@ public abstract class MetaModelQueryDslImpl<T, C extends MetaModelQueryDsl<T, C,
 
     @Override
     public String toString() {
-        final String readablePath = endpoint + queryParametersToString(false);
+        final String readablePath = completePath(endpoint, false);
 
         return this.getClass().getSimpleName() +"{" +
                 "predicate=" + predicate +
