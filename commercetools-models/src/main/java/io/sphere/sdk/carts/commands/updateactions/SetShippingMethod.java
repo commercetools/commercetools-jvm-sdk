@@ -10,10 +10,10 @@ import javax.annotation.Nullable;
 
 /**
  * Sets the shipping method.
- *
- *  {@doc.gen intro}
+ * {@doc.gen intro}
  *
  * {@include.example io.sphere.sdk.carts.commands.CartUpdateCommandIntegrationTest#setShippingMethod()}
+ * {@include.example io.sphere.sdk.carts.commands.CartUpdateCommandIntegrationTest#setShippingMethodById()}
  */
 public final class SetShippingMethod extends UpdateActionImpl<Cart> {
     @Nullable
@@ -32,6 +32,12 @@ public final class SetShippingMethod extends UpdateActionImpl<Cart> {
     public static SetShippingMethod of(@Nullable final Referenceable<ShippingMethod> shippingMethod) {
         return shippingMethod != null
                 ? new SetShippingMethod(shippingMethod.toReference())
+                : ofRemove();
+    }
+
+    public static SetShippingMethod ofId(@Nullable String shippingMethodId) {
+        return shippingMethodId != null
+                ? of(ShippingMethod.referenceOfId(shippingMethodId))
                 : ofRemove();
     }
 

@@ -284,6 +284,31 @@ public class CartUpdateCommandIntegrationTest extends IntegrationTest {
     }
 
     @Test
+    public void setShippingMethodById() throws Exception {
+        withShippingMethodForGermany(client(), shippingMethod -> {
+            withCart(client(), createCartWithShippingAddress(client()), cart -> {
+                //add shipping method
+                assertThat(cart.getShippingInfo()).isNull();
+                final CartUpdateCommand updateCommand =
+                        CartUpdateCommand.of(cart, SetShippingMethod.ofId(shippingMethod.getId()))
+                                .plusExpansionPaths(m -> m.shippingInfo().shippingMethod().taxCategory())
+                                .plusExpansionPaths(m -> m.shippingInfo().taxCategory());
+                final Cart cartWithShippingMethod = client().executeBlocking(updateCommand);
+                assertThat(cartWithShippingMethod.getShippingInfo().getShippingMethod()).isEqualTo(shippingMethod.toReference());
+                assertThat(cartWithShippingMethod.getShippingInfo().getShippingMethod().getObj())
+                        .as("reference expansion shippingMethod")
+                        .isEqualTo(shippingMethod);
+
+                //remove shipping method
+                final Cart cartWithoutShippingMethod = client().executeBlocking(CartUpdateCommand.of(cartWithShippingMethod, SetShippingMethod.ofRemove()));
+                assertThat(cartWithoutShippingMethod.getShippingInfo()).isNull();
+
+                return cartWithoutShippingMethod;
+            });
+        });
+    }
+
+    @Test
     public void setCustomerId() throws Exception {
         withCustomer(client(), customer -> {
             final Cart cart = createCartWithCountry(client());
