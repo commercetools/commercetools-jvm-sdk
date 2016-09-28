@@ -76,7 +76,7 @@ public class ProductFixtures {
             if (productToDelete.getMasterData().isPublished()) {
                 productToDelete = client.executeBlocking(ProductUpdateCommand.of(productToDelete, Unpublish.of()));
             }
-            client.executeBlocking(ProductDeleteCommand.of(productToDelete));
+            delete(client, productToDelete);
         });
     }
 
