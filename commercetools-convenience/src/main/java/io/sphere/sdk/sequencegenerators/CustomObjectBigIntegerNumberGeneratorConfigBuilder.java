@@ -6,6 +6,7 @@ import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.Builder;
 
 import java.math.BigInteger;
+import java.util.Objects;
 
 /**
  *
@@ -22,8 +23,8 @@ public final class CustomObjectBigIntegerNumberGeneratorConfigBuilder extends Ba
     private BigInteger initialValue = BigInteger.ONE;
 
     CustomObjectBigIntegerNumberGeneratorConfigBuilder(final SphereClient sphereClient, final String key) {
-        this.sphereClient = sphereClient;
-        this.key = key;
+        this.sphereClient = Objects.requireNonNull(sphereClient, "sphereClient");
+        this.key = Objects.requireNonNull(key, "key");
     }
 
     /**
@@ -32,7 +33,7 @@ public final class CustomObjectBigIntegerNumberGeneratorConfigBuilder extends Ba
      * @param container container name of the underlying {@link CustomObject}. If this method is not used the default value is {@value DEFAULT_CONTAINER}.
      */
     public CustomObjectBigIntegerNumberGeneratorConfigBuilder container(final String container) {
-        this.container = container;
+        this.container = Objects.requireNonNull(container, "container");
         return this;
     }
 
@@ -43,6 +44,9 @@ public final class CustomObjectBigIntegerNumberGeneratorConfigBuilder extends Ba
      * By default it is set to {@value DEFAULT_RETRY_ATTEMPTS}.
      */
     public CustomObjectBigIntegerNumberGeneratorConfigBuilder maxRetryAttempts(final int maxRetryAttempts) {
+        if (maxRetryAttempts < 0) {
+            throw new IllegalArgumentException(String.format("maxRetryAttempts needs to be 0 or positive but was %d", maxRetryAttempts));
+        }
         this.maxRetryAttempts = maxRetryAttempts;
         return this;
     }
@@ -53,7 +57,7 @@ public final class CustomObjectBigIntegerNumberGeneratorConfigBuilder extends Ba
      * @param initialValue first number generated. By default it is set to 1.
      */
     public CustomObjectBigIntegerNumberGeneratorConfigBuilder initialValue(final BigInteger initialValue) {
-        this.initialValue = initialValue;
+        this.initialValue = Objects.requireNonNull(initialValue, "initialValue");
         return this;
     }
 
