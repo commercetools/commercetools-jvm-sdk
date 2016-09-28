@@ -5,12 +5,15 @@ import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.productdiscounts.commands.ProductDiscountCreateCommand;
 import io.sphere.sdk.productdiscounts.commands.ProductDiscountDeleteCommand;
 import io.sphere.sdk.products.Product;
+import io.sphere.sdk.products.ProductVariantDraftBuilder;
+import io.sphere.sdk.products.queries.ProductByIdGet;
 
 import java.util.function.BiFunction;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
-import static io.sphere.sdk.products.ProductFixtures.referenceableProduct;
+import static io.sphere.sdk.products.ProductFixtures.PRICE;
+import static io.sphere.sdk.products.ProductFixtures.withUpdateableProduct;
 import static io.sphere.sdk.test.SphereTestUtils.*;
 
 public class ProductDiscountFixtures {
@@ -19,21 +22,23 @@ public class ProductDiscountFixtures {
     }
 
     public static void withUpdateableProductDiscount(final BlockingSphereClient client, final BiFunction<ProductDiscount, Product, ProductDiscount> function) {
-        final Product product = referenceableProduct(client);
-        final ProductDiscountPredicate predicate =
-                ProductDiscountPredicate.of("product.id = \"" + product.getId() + "\"");
-        final AbsoluteProductDiscountValue discountValue = AbsoluteProductDiscountValue.of(EURO_1);
-        final LocalizedString name = en("demo product discount");
-        final LocalizedString description = en("description");
-        final boolean active = true;
-        final String sortOrder = randomSortOrder();
-        final ProductDiscountDraft discountDraft =
-                ProductDiscountDraft.of(name, description, predicate, discountValue, sortOrder, active);
+        withUpdateableProduct(client, builder -> builder.masterVariant(ProductVariantDraftBuilder.of().price(PRICE).build()), product -> {
+            final ProductDiscountPredicate predicate =
+                    ProductDiscountPredicate.of("product.id = \"" + product.getId() + "\"");
+            final AbsoluteProductDiscountValue discountValue = AbsoluteProductDiscountValue.of(EURO_1);
+            final LocalizedString name = en("demo product discount");
+            final LocalizedString description = en("description");
+            final boolean active = true;
+            final String sortOrder = randomSortOrder();
+            final ProductDiscountDraft discountDraft =
+                    ProductDiscountDraft.of(name, description, predicate, discountValue, sortOrder, active);
 
-        final ProductDiscount productDiscount = client.executeBlocking(ProductDiscountCreateCommand.of(discountDraft));
+            final ProductDiscount productDiscount = client.executeBlocking(ProductDiscountCreateCommand.of(discountDraft));
 
-        final ProductDiscount updatedDiscount = function.apply(productDiscount, product);
-        client.executeBlocking(ProductDiscountDeleteCommand.of(updatedDiscount));
+            final ProductDiscount updatedDiscount = function.apply(productDiscount, product);
+            client.executeBlocking(ProductDiscountDeleteCommand.of(updatedDiscount));
+            return client.executeBlocking(ProductByIdGet.of(product));
+        });
     }
 
     public static void withProductDiscount(final BlockingSphereClient client, final ProductDiscountDraft draft, final Consumer<ProductDiscount> consumer) {

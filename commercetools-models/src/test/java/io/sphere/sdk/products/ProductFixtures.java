@@ -45,6 +45,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
+import java.util.concurrent.CompletionException;
 import java.util.concurrent.CompletionStage;
 import java.util.concurrent.TimeUnit;
 import java.util.function.*;
@@ -187,12 +188,21 @@ public class ProductFixtures {
             } else {
                 unPublishedProduct = loadedProduct;
             }
+            deleteWithRetry(client, unPublishedProduct, 5);
+        });
+    }
+
+    private static void deleteWithRetry(final BlockingSphereClient client, final Versioned<Product> unPublishedProduct, final int ttl) {
+        if (ttl > 0) {
             try {
                 client.executeBlocking(ProductDeleteCommand.of(unPublishedProduct));
             } catch(final ConcurrentModificationException e) {
-                client.executeBlocking(ProductDeleteCommand.of(Versioned.of(unPublishedProduct.getId(), e.getCurrentVersion())));
+                final Versioned<Product> versioned = Versioned.of(unPublishedProduct.getId(), e.getCurrentVersion());
+                deleteWithRetry(client, versioned, ttl - 1);
             }
-        });
+        } else {
+            throw new RuntimeException("cannot delete product due to too much concurrent updates, product: " + unPublishedProduct);
+        }
     }
 
     public static void withUpdateablePricedProduct(final BlockingSphereClient client, final Function<Product, Product> f) {

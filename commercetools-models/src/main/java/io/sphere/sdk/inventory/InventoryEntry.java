@@ -5,12 +5,17 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import io.sphere.sdk.channels.Channel;
 import io.sphere.sdk.models.Resource;
 import io.sphere.sdk.models.Reference;
+import io.sphere.sdk.types.Custom;
+import io.sphere.sdk.types.CustomFields;
+import io.sphere.sdk.types.TypeDraft;
 
 import javax.annotation.Nullable;
 import java.time.ZonedDateTime;
 
 /**
  * Inventory allows you to track stock quantity per SKU and optionally per supply {@link Channel}.
+ *
+ * <p>An InventoryEntry can have {@link io.sphere.sdk.types.Custom custom fields}.</p>
  *
  * @see io.sphere.sdk.inventory.commands.InventoryEntryCreateCommand
  * @see io.sphere.sdk.inventory.commands.InventoryEntryUpdateCommand
@@ -19,7 +24,7 @@ import java.time.ZonedDateTime;
  * @see io.sphere.sdk.inventory.queries.InventoryEntryByIdGet
  */
 @JsonDeserialize(as = InventoryEntryImpl.class)
-public interface InventoryEntry extends Resource<InventoryEntry> {
+public interface InventoryEntry extends Resource<InventoryEntry>, Custom {
     /**
      * Available amount of stock. (available means: quantityOnStock - reserved quantity)
      * @return quantity
@@ -114,4 +119,18 @@ public interface InventoryEntry extends Resource<InventoryEntry> {
     static Reference<InventoryEntry> referenceOfId(final String id) {
         return Reference.of(referenceTypeId(), id);
     }
+
+    /**
+     * An identifier for this resource which supports {@link CustomFields}.
+     * @see TypeDraft#getResourceTypeIds()
+     * @see io.sphere.sdk.types.Custom
+     * @return ID of this resource type
+     */
+    static String resourceTypeId() {
+        return "inventory-entry";
+    }
+
+    @Nullable
+    @Override
+    CustomFields getCustom();
 }

@@ -3,8 +3,10 @@ package io.sphere.sdk.inventory.queries;
 import io.sphere.sdk.channels.Channel;
 import io.sphere.sdk.inventory.InventoryEntry;
 import io.sphere.sdk.queries.*;
+import io.sphere.sdk.types.queries.CustomQueryModel;
+import io.sphere.sdk.types.queries.CustomResourceQueryModelImpl;
 
-final class InventoryEntryQueryModelImpl extends ResourceQueryModelImpl<InventoryEntry> implements InventoryEntryQueryModel {
+final class InventoryEntryQueryModelImpl extends CustomResourceQueryModelImpl<InventoryEntry> implements InventoryEntryQueryModel {
     private InventoryEntryQueryModelImpl(final QueryModel<InventoryEntry> parent, final String pathSegment) {
         super(parent, pathSegment);
     }
@@ -37,4 +39,11 @@ final class InventoryEntryQueryModelImpl extends ResourceQueryModelImpl<Inventor
     public IntegerQuerySortingModel<InventoryEntry> restockableInDays() {
         return integerModel("restockableInDays");
     }
+
+    @Override
+    public CustomQueryModel<InventoryEntry> custom() {
+        return super.custom();
+    }
+
+
 }
