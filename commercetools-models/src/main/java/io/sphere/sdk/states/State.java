@@ -47,6 +47,9 @@ public interface State extends Resource<State>, WithKey {
     @Nullable
     Set<Reference<State>> getTransitions();
 
+    @Nullable
+    Set<StateRole> getRoles();
+
     default Reference<State> toReference() {
         return Reference.of(referenceTypeId(), getId(), this);
     }
