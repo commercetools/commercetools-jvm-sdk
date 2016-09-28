@@ -27,9 +27,25 @@ public class BigIntegerNumberGeneratorIntegrationTest extends IntegrationTest {
 
     @Test
     public void firstNumberIsOne() throws Exception {
-        final BigIntegerNumberGenerator generator = createGenerator();
+        final String key = randomKey();//this could be something like "orderNumber"
+        final CustomObjectBigIntegerNumberGeneratorConfig config =
+                CustomObjectBigIntegerNumberGeneratorConfigBuilder.of(client(), key)
+                        .build();
+        final BigIntegerNumberGenerator generator = CustomObjectBigIntegerNumberGenerator.of(config);
         final BigInteger firstNumber = generator.getNextNumber().toCompletableFuture().join();
         assertThat(firstNumber).isEqualTo(BigInteger.ONE);
+    }
+
+    @Test
+    public void checkNumbersBiggerThanLongMax() {
+        final BigInteger overSized = BigInteger.valueOf(Long.MAX_VALUE).add(BigInteger.TEN);
+        final CustomObjectBigIntegerNumberGeneratorConfig config =
+                CustomObjectBigIntegerNumberGeneratorConfigBuilder.of(client(), randomKey())
+                        .initialValue(overSized)
+                        .build();
+        final BigIntegerNumberGenerator generator = CustomObjectBigIntegerNumberGenerator.of(config);
+        final BigInteger firstNumber = generator.getNextNumber().toCompletableFuture().join();
+        assertThat(firstNumber).isEqualTo(new BigInteger("9223372036854775817"));
     }
 
     @Test
