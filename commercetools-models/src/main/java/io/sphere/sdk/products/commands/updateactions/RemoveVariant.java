@@ -11,9 +11,7 @@ import javax.annotation.Nullable;
  *
  * {@doc.gen intro}
  *
- * {@include.example io.sphere.sdk.products.commands.ProductUpdateCommandIntegrationTest#addVariant()}
- *
- * * <p>By variant ID (every variant has a variantId):</p>
+ * <p>By variant ID (every variant has a variantId):</p>
  * {@include.example io.sphere.sdk.products.commands.ProductUpdateCommandIntegrationTest#removeVariantById()}
  *
  * <p>By SKU (attention, SKU is optional field in a variant):</p>
@@ -55,7 +53,7 @@ public final class RemoveVariant extends UpdateActionImpl<Product> {
         return new RemoveVariant(id, null);
     }
 
-    public static RemoveVariant ofVariantSku(final String sku) {
+    public static RemoveVariant ofSku(final String sku) {
         return new RemoveVariant(null, sku);
     }
 }
