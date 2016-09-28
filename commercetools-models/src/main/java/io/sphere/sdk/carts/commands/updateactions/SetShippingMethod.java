@@ -40,7 +40,7 @@ public final class SetShippingMethod extends UpdateActionImpl<Cart> {
 
     public static SetShippingMethod ofId(@Nullable String shippingMethodId){
         return shippingMethodId != null
-                ? of(Reference.of(ShippingMethod.referenceTypeId(), shippingMethodId))
+                ? of(ShippingMethod.referenceOfId(shippingMethodId))
                 : ofRemove();
     }
 
