@@ -4,6 +4,7 @@ import io.sphere.sdk.cartdiscounts.CartDiscountDraft;
 import io.sphere.sdk.carts.*;
 import io.sphere.sdk.carts.commands.updateactions.SetShippingMethod;
 import io.sphere.sdk.carts.expansion.CartExpansionModel;
+import io.sphere.sdk.carts.expansion.ShippingInfoExpansionModel;
 import io.sphere.sdk.carts.queries.CartByIdGet;
 import io.sphere.sdk.carts.queries.CartQueryModel;
 import io.sphere.sdk.categories.Category;
@@ -26,6 +27,7 @@ import io.sphere.sdk.customobjects.queries.CustomObjectQuery;
 import io.sphere.sdk.customobjects.queries.CustomObjectQueryModel;
 import io.sphere.sdk.expansion.ExpansionPath;
 import io.sphere.sdk.http.*;
+import io.sphere.sdk.inventory.InventoryEntry;
 import io.sphere.sdk.json.SphereJsonUtils;
 import io.sphere.sdk.models.*;
 import io.sphere.sdk.orders.Order;
@@ -55,6 +57,7 @@ import io.sphere.sdk.reviews.ReviewDraft;
 import io.sphere.sdk.search.SearchKeywords;
 import io.sphere.sdk.search.model.ExistsFilterSearchModelSupport;
 import io.sphere.sdk.search.model.MissingFilterSearchModelSupport;
+import io.sphere.sdk.states.State;
 import io.sphere.sdk.taxcategories.TaxRate;
 import io.sphere.sdk.types.CustomFields;
 import io.sphere.sdk.types.FieldType;
@@ -87,6 +90,29 @@ import java.util.function.Function;
  <li class=fixed-in-release></li>
  </ul>
  -->
+
+ <h3 class=released-version id="v1_4_0">1.4.0 (29.09.2016)</h3>
+
+ <ul>
+ <li class=new-in-release>{@link State#getRoles()}, {@link io.sphere.sdk.states.commands.updateactions.AddRoles}, {@link io.sphere.sdk.states.commands.updateactions.RemoveRoles} and {@link io.sphere.sdk.states.commands.updateactions.SetRoles} </li>
+ <li class=new-in-release>{@link Reference#ofResourceTypeIdAndId(String, String)} and others</li>
+ <li class=new-in-release>key on products and product variants: {@link Product#getKey()}, {@link ProductProjection#getKey()}, {@link ProductVariant#getKey()}, {@link io.sphere.sdk.products.commands.ProductDeleteCommand#ofKey(String, Long)}, {@link io.sphere.sdk.products.commands.ProductUpdateCommand#ofKey(String, Long, List)}</li>
+ <li class=new-in-release>{@link io.sphere.sdk.products.commands.updateactions.AddVariant#withImages(List)}, {@link io.sphere.sdk.products.commands.updateactions.AddVariant#withKey(String)}, {@link io.sphere.sdk.products.commands.updateactions.AddVariant#withSku(String)}, {@link io.sphere.sdk.products.commands.updateactions.SetKey}, {@link io.sphere.sdk.products.commands.updateactions.SetProductVariantKey}, {@link ProductByKeyGet}, {@link ProductProjectionByKeyGet}</li>
+ <li class=new-in-release>{@link io.sphere.sdk.orders.errors.OutOfStockError}</li>
+ <li class=new-in-release>{@link SetShippingMethod#ofId(String)} which is easier to use in a form than {@link SetShippingMethod#of(Referenceable)} </li>
+ <li class=new-in-release>product update actions like {@link io.sphere.sdk.products.commands.updateactions.RemoveImage} now support to address a {@link ProductVariant} by using the SKU with {@link io.sphere.sdk.products.commands.updateactions.RemoveImage#ofSku(String, String)} </li>
+ <li class=new-in-release>type update actions: {@link io.sphere.sdk.types.commands.updateactions.ChangeEnumValueOrder}, {@link io.sphere.sdk.types.commands.updateactions.ChangeFieldDefinitionOrder} and {@link io.sphere.sdk.types.commands.updateactions.ChangeLocalizedEnumValueOrder}</li>
+ <li class=new-in-release>{@link io.sphere.sdk.customers.Customer#findAddressById(String)} </li>
+ <li class=new-in-release>a simple generator for customer and order numbers by using {@link CustomObject}s as storage: {@link io.sphere.sdk.sequencegenerators.CustomObjectBigIntegerNumberGenerator}</li>
+ <li class=new-in-release>{@link io.sphere.sdk.inventory.messages.InventoryEntryDeletedMessage}</li>
+ <li class=new-in-release>custom fields for {@link io.sphere.sdk.inventory.InventoryEntry}s</li>
+ <li class=new-in-release>{@link io.sphere.sdk.products.commands.updateactions.MoveImageToPosition}</li>
+ <li class=new-in-release>{@link PaymentTransactionStateChangedMessage#getTransactionId()} </li>
+ <li class=new-in-release>{@link CartShippingInfo#getDiscountedPrice()} and the {@link ShippingInfoExpansionModel#discountedPrice()} to receive the value of discounts for shipping costs and maybe expand in the {@link Cart} the {@link io.sphere.sdk.cartdiscounts.CartDiscount} objects.</li>
+ <li class=fixed-in-release>{@link Category}s {@link Category#toString()} is now using reflection so former missing fields like "metaTitle" will be included in the output.</li>
+ <li class=fixed-in-release>{@link io.sphere.sdk.jsonnodes.queries.JsonNodeQuery#of(String)} accepts now also query parameters</li>
+ <li class=fixed-in-release>{@link ProductDraftBuilder#of(ProductDraft)} is not leaky anymore, in previous versions not all fields were copied</li>
+ </ul>
 
  <h3 class=released-version id="v1_3_0">1.3.0 (22.07.2016)</h3>
 
