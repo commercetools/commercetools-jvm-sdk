@@ -3,6 +3,7 @@ package io.sphere.sdk.states.commands;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.states.State;
+import io.sphere.sdk.states.StateRole;
 import io.sphere.sdk.states.StateType;
 import io.sphere.sdk.states.commands.updateactions.*;
 import io.sphere.sdk.states.queries.StateByIdGet;
@@ -12,7 +13,9 @@ import org.junit.Test;
 import java.util.LinkedList;
 import java.util.Set;
 
+import static io.sphere.sdk.states.StateFixtures.withUpdatableStateOfRole;
 import static io.sphere.sdk.states.StateFixtures.withUpdateableState;
+import static io.sphere.sdk.states.StateRole.REVIEW_INCLUDED_IN_STATISTICS;
 import static io.sphere.sdk.test.SphereTestUtils.randomKey;
 import static io.sphere.sdk.test.SphereTestUtils.randomSlug;
 import static io.sphere.sdk.utils.SphereInternalUtils.asSet;
@@ -92,4 +95,39 @@ public class StateUpdateCommandIntegrationTest extends IntegrationTest {
             return updatedState;
         });
     }
+
+    @Test
+    public void setRoles() throws Exception {
+        withUpdateableState(client(), builder -> builder.type(StateType.REVIEW_STATE), state -> {
+            final Set<StateRole> roles = asSet(REVIEW_INCLUDED_IN_STATISTICS);
+            final StateUpdateCommand command = StateUpdateCommand.of(state, SetRoles.of(roles));
+            final State updatedState = client().executeBlocking(command);
+            assertThat(updatedState.getRoles()).isEqualTo(roles);
+            return updatedState;
+        });
+    }
+
+    @Test
+    public void addRoles() throws Exception {
+        withUpdateableState(client(), builder -> builder.type(StateType.REVIEW_STATE), state -> {
+            final Set<StateRole> roles = asSet(REVIEW_INCLUDED_IN_STATISTICS);
+            final StateUpdateCommand command = StateUpdateCommand.of(state, AddRoles.of(roles));
+            final State updatedState = client().executeBlocking(command);
+            assertThat(updatedState.getRoles()).isEqualTo(roles);
+            return updatedState;
+        });
+    }
+
+    @Test
+    public void removeRoles() throws Exception {
+        final Set<StateRole> roles = asSet(REVIEW_INCLUDED_IN_STATISTICS);
+        withUpdatableStateOfRole(client(), roles, state -> {
+            assertThat(state.getRoles()).isEqualTo(roles);
+            final StateUpdateCommand cmdRemove = StateUpdateCommand.of(state, RemoveRoles.of(roles));
+            final State updatedState = client().executeBlocking(cmdRemove);
+            assertThat(updatedState.getRoles()).doesNotContainAnyElementsOf(roles);
+            return updatedState;
+        });
+    }
+
 }

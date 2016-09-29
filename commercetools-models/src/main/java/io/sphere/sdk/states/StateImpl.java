@@ -21,11 +21,13 @@ final class StateImpl extends ResourceImpl<State> implements State {
     private final Boolean builtIn;
     @Nullable
     private final Set<Reference<State>> transitions;
+    @Nullable
+    private final Set<StateRole> roles;
 
     @JsonCreator
     public StateImpl(String id, Long version, ZonedDateTime createdAt, ZonedDateTime lastModifiedAt, String key, StateType type,
                      @Nullable LocalizedString name, @Nullable LocalizedString description, Boolean initial,
-                     Boolean builtIn, @Nullable Set<Reference<State>> transitions) {
+                     Boolean builtIn, @Nullable Set<Reference<State>> transitions, @Nullable final Set<StateRole> roles) {
         super(id, version, createdAt, lastModifiedAt);
         this.key = key;
         this.type = type;
@@ -34,6 +36,7 @@ final class StateImpl extends ResourceImpl<State> implements State {
         this.initial = initial;
         this.builtIn = builtIn;
         this.transitions = transitions;
+        this.roles = roles;
     }
 
     public String getKey() {
@@ -65,5 +68,10 @@ final class StateImpl extends ResourceImpl<State> implements State {
     @Nullable
     public Set<Reference<State>> getTransitions() {
         return transitions;
+    }
+
+    @Nullable
+    public Set<StateRole> getRoles() {
+        return roles;
     }
 }

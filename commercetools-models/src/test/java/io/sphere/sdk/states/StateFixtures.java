@@ -69,7 +69,8 @@ public class StateFixtures {
     /**
      * Provides states where the first one is an initial state and has a transition to the second one.
      * The states may reused and won't be deleted.
-     * @param client sphere test client
+     *
+     * @param client   sphere test client
      * @param consumer consumer which uses the two states
      */
     public static void withStandardStates(final BlockingSphereClient client, final BiConsumer<State, State> consumer) {
@@ -99,6 +100,15 @@ public class StateFixtures {
 
     public static void withUpdateableState(final BlockingSphereClient client, final Function<State, State> f) {
         final State state = createStateByKey(client, randomKey());
+        final State updatedState = f.apply(state);
+        client.executeBlocking(StateDeleteCommand.of(updatedState));
+    }
+
+    public static void withUpdatableStateOfRole(final BlockingSphereClient client, final Set<StateRole> roles, final UnaryOperator<State> f) {
+        final StateDraft draft = StateDraftBuilder.of(randomKey(), StateType.REVIEW_STATE)
+                .roles(roles)
+                .build();
+        final State state = client.executeBlocking(StateCreateCommand.of(draft));
         final State updatedState = f.apply(state);
         client.executeBlocking(StateDeleteCommand.of(updatedState));
     }
