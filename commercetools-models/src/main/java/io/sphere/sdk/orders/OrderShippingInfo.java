@@ -48,6 +48,6 @@ public interface OrderShippingInfo extends CartShippingInfo {
      * @return OrderShippingInfo
      */
     static OrderShippingInfo of(final String shippingMethodName, final MonetaryAmount price, final ShippingRate shippingRate, final TaxRate taxRate, final Reference<TaxCategory> taxCategory, final Reference<ShippingMethod> shippingMethod, final List<Delivery> deliveries) {
-        return new OrderShippingInfoImpl(shippingMethodName, price, shippingRate, taxRate, taxCategory, shippingMethod, deliveries, null);
+        return new OrderShippingInfoImpl(shippingMethodName, price, shippingRate, taxRate, taxCategory, shippingMethod, deliveries, null, null);
     }
 }

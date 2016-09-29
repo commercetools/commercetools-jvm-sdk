@@ -1,6 +1,7 @@
 package io.sphere.sdk.carts;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import io.sphere.sdk.cartdiscounts.DiscountedLineItemPrice;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.shippingmethods.ShippingMethod;
 import io.sphere.sdk.shippingmethods.ShippingRate;
@@ -32,4 +33,7 @@ public interface CartShippingInfo {
 
     @Nullable
     Reference<ShippingMethod> getShippingMethod();
+
+    @Nullable
+    DiscountedLineItemPrice getDiscountedPrice();
 }

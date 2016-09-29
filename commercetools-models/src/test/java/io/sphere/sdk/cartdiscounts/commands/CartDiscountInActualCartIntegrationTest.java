@@ -4,11 +4,16 @@ import io.sphere.sdk.cartdiscounts.*;
 import io.sphere.sdk.cartdiscounts.queries.CartDiscountByIdGet;
 import io.sphere.sdk.carts.Cart;
 import io.sphere.sdk.carts.LineItem;
+import io.sphere.sdk.carts.commands.CartDeleteCommand;
 import io.sphere.sdk.carts.commands.CartUpdateCommand;
 import io.sphere.sdk.carts.commands.updateactions.Recalculate;
 import io.sphere.sdk.carts.commands.updateactions.SetCustomerId;
+import io.sphere.sdk.carts.commands.updateactions.SetShippingMethod;
+import io.sphere.sdk.carts.queries.CartByIdGet;
 import io.sphere.sdk.carts.queries.CartQuery;
 import io.sphere.sdk.models.LocalizedString;
+import io.sphere.sdk.models.Reference;
+import io.sphere.sdk.models.Versioned;
 import io.sphere.sdk.test.IntegrationTest;
 import io.sphere.sdk.utils.MoneyImpl;
 import org.javamoney.moneta.function.MonetaryUtil;
@@ -18,8 +23,10 @@ import javax.money.MonetaryAmount;
 import java.util.Comparator;
 import java.util.List;
 
+import static io.sphere.sdk.carts.CartFixtures.withCustomerAndFilledCart;
 import static io.sphere.sdk.carts.CartFixtures.withFilledCart;
 import static io.sphere.sdk.customers.CustomerFixtures.withCustomer;
+import static io.sphere.sdk.shippingmethods.ShippingMethodFixtures.withShippingMethodForGermany;
 import static io.sphere.sdk.test.SphereTestUtils.*;
 import static java.lang.String.format;
 import static java.util.stream.Collectors.toList;
@@ -100,5 +107,34 @@ public class CartDiscountInActualCartIntegrationTest extends IntegrationTest {
                     });
                 }
         );
+    }
+
+    @Test
+    public void shippingDiscount() {
+        withShippingMethodForGermany(client(), shippingMethod -> {
+            withCustomerAndFilledCart(client(), (customer, cart) -> {
+                client().executeBlocking(CartUpdateCommand.of(cart, SetShippingMethod.of(shippingMethod)));
+                CartDiscountFixtures.withCartDiscount(client(), builder -> builder
+                        .value(RelativeCartDiscountValue.of(10000))
+                        .target(ShippingCostTarget.of())
+                        .cartPredicate(CartDiscountPredicate.of("customer.id =\"" + customer.getId() + "\"")), cartDiscount -> {
+                    assertEventually(() -> {
+                        final Versioned<Cart> cartVersion = client().executeBlocking(CartByIdGet.of(cart));
+                        final CartUpdateCommand cmd =
+                                CartUpdateCommand.of(cartVersion, Recalculate.of().withUpdateProductData(true))
+                                .withExpansionPaths(c -> c.shippingInfo().discountedPrice().includedDiscounts().discount());
+                        final Cart loadedCart = client().executeBlocking(cmd);
+                        final DiscountedLineItemPrice discountedPrice = loadedCart.getShippingInfo().getDiscountedPrice();
+                        assertThat(discountedPrice).isNotNull();
+                        final MonetaryAmount value = discountedPrice.getValue();
+                        assertThat(value).isEqualTo(MoneyImpl.of(0, EUR));
+                        final Reference<CartDiscount> discount = discountedPrice.getIncludedDiscounts().get(0).getDiscount();
+                        assertThat(discount.getObj()).isNotNull().isEqualTo(cartDiscount);
+                    });
+                });
+                final Cart cartToDelete = client().executeBlocking(CartByIdGet.of(cart));
+                client().executeBlocking(CartDeleteCommand.of(cartToDelete));
+            });
+        });
     }
 }

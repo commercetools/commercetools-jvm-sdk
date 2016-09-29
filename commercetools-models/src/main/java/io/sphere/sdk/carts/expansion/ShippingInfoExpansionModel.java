@@ -7,4 +7,6 @@ public interface ShippingInfoExpansionModel<T> {
     TaxCategoryExpansionModel<T> taxCategory();
 
     ShippingMethodExpansionModel<T> shippingMethod();
+
+    DiscountedLineItemPriceExpansionModel<T> discountedPrice();
 }
