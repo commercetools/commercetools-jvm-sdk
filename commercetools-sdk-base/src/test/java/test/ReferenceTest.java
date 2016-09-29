@@ -41,6 +41,7 @@ public class ReferenceTest {
         assertThat(newFilledReference()).isEqualTo(newEmptyReference());
         assertThat(newFilledReference()).isEqualTo(newEmptyReference().filled(new TestEntity("other value")));
         assertThat(Reference.<String>of(typeId, "Foo", "x")).isNotEqualTo(newEmptyReference());
+        assertThat(Reference.<String>ofResourceTypeIdAndIdAndObj(typeId, "Foo", "x")).isNotEqualTo(newEmptyReference());
     }
 
     @Test
@@ -68,6 +69,11 @@ public class ReferenceTest {
         deserializationWithOutExpandedObject(json);
     }
 
+    @Test
+    public void ofResourceTypeIdAndId() throws Exception {
+        assertThat(newEmptyReference()).isEqualTo(Reference.<TestEntity>of(typeId, id));
+    }
+
     private void deserializationWithOutExpandedObject(final String json) throws java.io.IOException {
         final Reference<TestEntity> actual = newObjectMapper().<Reference<TestEntity>>readValue(json, new TypeReference<Reference<TestEntity>>() {
         });
@@ -79,6 +85,6 @@ public class ReferenceTest {
     }
 
     private Reference<TestEntity> newEmptyReference() {
-        return Reference.<TestEntity>of(typeId, id);
+        return Reference.<TestEntity>ofResourceTypeIdAndId(typeId, id);
     }
 }
