@@ -1,6 +1,7 @@
 package io.sphere.sdk.orders;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import io.sphere.sdk.cartdiscounts.DiscountedLineItemPrice;
 import io.sphere.sdk.carts.CartShippingInfoImpl;
 import io.sphere.sdk.carts.TaxedItemPrice;
 import io.sphere.sdk.models.Reference;
@@ -17,8 +18,8 @@ final class OrderShippingInfoImpl extends CartShippingInfoImpl implements OrderS
     private final List<Delivery> deliveries;
 
     @JsonCreator
-    OrderShippingInfoImpl(final String shippingMethodName, final MonetaryAmount price, final ShippingRate shippingRate, final TaxRate taxRate, final Reference<TaxCategory> taxCategory, final Reference<ShippingMethod> shippingMethod, final List<Delivery> deliveries, @Nullable final TaxedItemPrice taxedPrice) {
-        super(shippingMethodName, price, shippingRate, taxRate, taxCategory, shippingMethod, taxedPrice);
+    OrderShippingInfoImpl(final String shippingMethodName, final MonetaryAmount price, final ShippingRate shippingRate, final TaxRate taxRate, final Reference<TaxCategory> taxCategory, final Reference<ShippingMethod> shippingMethod, final List<Delivery> deliveries, @Nullable final TaxedItemPrice taxedPrice, @Nullable final DiscountedLineItemPrice discountedPrice) {
+        super(shippingMethodName, price, shippingRate, taxRate, taxCategory, shippingMethod, taxedPrice, discountedPrice);
         this.deliveries = deliveries;
     }
 

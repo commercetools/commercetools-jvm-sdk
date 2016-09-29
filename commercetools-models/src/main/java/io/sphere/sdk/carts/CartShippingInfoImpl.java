@@ -1,6 +1,7 @@
 package io.sphere.sdk.carts;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import io.sphere.sdk.cartdiscounts.DiscountedLineItemPrice;
 import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.shippingmethods.ShippingMethod;
@@ -24,9 +25,11 @@ public class CartShippingInfoImpl extends Base implements CartShippingInfo {
     private final Reference<ShippingMethod> shippingMethod;
     @Nullable
     private final TaxedItemPrice taxedPrice;
+    @Nullable
+    private final DiscountedLineItemPrice discountedPrice;
 
     @JsonCreator
-    protected CartShippingInfoImpl(final String shippingMethodName, final MonetaryAmount price, final ShippingRate shippingRate, final TaxRate taxRate, final Reference<TaxCategory> taxCategory, @Nullable final Reference<ShippingMethod> shippingMethod, @Nullable final TaxedItemPrice taxedPrice) {
+    protected CartShippingInfoImpl(final String shippingMethodName, final MonetaryAmount price, final ShippingRate shippingRate, final TaxRate taxRate, final Reference<TaxCategory> taxCategory, @Nullable final Reference<ShippingMethod> shippingMethod, @Nullable final TaxedItemPrice taxedPrice, @Nullable final DiscountedLineItemPrice discountedPrice) {
         this.shippingMethodName = shippingMethodName;
         this.price = price;
         this.shippingRate = shippingRate;
@@ -34,6 +37,7 @@ public class CartShippingInfoImpl extends Base implements CartShippingInfo {
         this.taxCategory = taxCategory;
         this.shippingMethod = shippingMethod;
         this.taxedPrice = taxedPrice;
+        this.discountedPrice = discountedPrice;
     }
 
     @Override
@@ -71,5 +75,11 @@ public class CartShippingInfoImpl extends Base implements CartShippingInfo {
     @Nullable
     public TaxedItemPrice getTaxedPrice() {
         return taxedPrice;
+    }
+
+    @Override
+    @Nullable
+    public DiscountedLineItemPrice getDiscountedPrice() {
+        return discountedPrice;
     }
 }

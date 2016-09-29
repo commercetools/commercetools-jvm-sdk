@@ -21,4 +21,9 @@ final class ShippingInfoExpansionModelImpl<T> extends ExpansionModelImpl<T> impl
     public ShippingMethodExpansionModel<T> shippingMethod() {
         return ShippingMethodExpansionModel.of(buildPathExpression(), "shippingMethod");
     }
+
+    @Override
+    public DiscountedLineItemPriceExpansionModel<T> discountedPrice() {
+        return new DiscountedLineItemPriceExpansionModelImpl<>(buildPathExpression(), "discountedPrice");
+    }
 }
