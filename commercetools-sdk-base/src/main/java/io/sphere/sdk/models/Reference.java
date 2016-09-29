@@ -67,6 +67,18 @@ public interface Reference<T> extends Referenceable<T>, Identifiable<T>, Resourc
         return Reference.of(typeId, obj.getId(), obj);
     }
 
+    static <T> Reference<T> ofResourceTypeIdAndId(final String typeId, final String id) {
+        return new ReferenceImpl<>(typeId, id, null);
+    }
+
+    static <T> Reference<T> ofResourceTypeIdAndIdAndObj(final String typeId, final String id, T obj) {
+        return Reference.<T>ofResourceTypeIdAndId(typeId, id).filled(obj);
+    }
+
+    static <T extends Identifiable<T>> Reference<T> ofResourceTypeIdAndObj(final String typeId, final T obj) {
+        return Reference.ofResourceTypeIdAndIdAndObj(typeId, obj.getId(), obj);
+    }
+
     default boolean referencesSameResource(final Referenceable<T> counterpart) {
         final Reference<T> reference = counterpart.toReference();
         return reference.getId().equals(getId()) && reference.getTypeId().equals(getTypeId());
