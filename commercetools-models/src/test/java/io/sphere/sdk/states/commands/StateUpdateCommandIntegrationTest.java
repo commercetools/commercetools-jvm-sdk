@@ -13,6 +13,7 @@ import org.junit.Test;
 import java.util.LinkedList;
 import java.util.Set;
 
+import static io.sphere.sdk.states.StateFixtures.withUpdatableStateOfRole;
 import static io.sphere.sdk.states.StateFixtures.withUpdateableState;
 import static io.sphere.sdk.states.StateRole.REVIEW_INCLUDED_IN_STATISTICS;
 import static io.sphere.sdk.test.SphereTestUtils.randomKey;
@@ -113,6 +114,18 @@ public class StateUpdateCommandIntegrationTest extends IntegrationTest {
             final StateUpdateCommand command = StateUpdateCommand.of(state, AddRoles.of(roles));
             final State updatedState = client().executeBlocking(command);
             assertThat(updatedState.getRoles()).isEqualTo(roles);
+            return updatedState;
+        });
+    }
+
+    @Test
+    public void removeRoles() throws Exception {
+        final Set<StateRole> roles = asSet(REVIEW_INCLUDED_IN_STATISTICS);
+        withUpdatableStateOfRole(client(), roles, state -> {
+            assertThat(state.getRoles()).isEqualTo(roles);
+            final StateUpdateCommand cmdRemove = StateUpdateCommand.of(state, RemoveRoles.of(roles));
+            final State updatedState = client().executeBlocking(cmdRemove);
+            assertThat(updatedState.getRoles()).doesNotContainAnyElementsOf(roles);
             return updatedState;
         });
     }
