@@ -34,6 +34,11 @@ import java.util.Set;
 public interface CustomLineItem extends LineItemLike {
     LocalizedString getName();
 
+    /**
+     * The positive or negative monetary amount of this custom line item.
+     * @return monetary amount
+     * @see io.sphere.sdk.carts.commands.updateactions.ChangeCustomLineItemMoney
+     */
     MonetaryAmount getMoney();
 
     String getSlug();
@@ -49,6 +54,11 @@ public interface CustomLineItem extends LineItemLike {
     @Override
     String getId();
 
+    /**
+     * The item count of this custom line item.
+     * @return quantity
+     * @see io.sphere.sdk.carts.commands.updateactions.ChangeCustomLineItemQuantity
+     */
     @Override
     Long getQuantity();
 
