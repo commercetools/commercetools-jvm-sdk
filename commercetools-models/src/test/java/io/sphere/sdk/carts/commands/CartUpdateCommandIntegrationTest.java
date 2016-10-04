@@ -183,6 +183,24 @@ public class CartUpdateCommandIntegrationTest extends IntegrationTest {
     }
 
     @Test
+    public void changeCustomLineItemMoney() throws Exception {
+        withTaxCategory(client(), taxCategory -> {
+            final Cart cart = createCartWithCountry(client());
+            assertThat(cart.getCustomLineItems()).hasSize(0);
+            final CustomLineItemDraft draftItem = createCustomLineItemDraft(taxCategory);//money=MoneyImpl.ofCents(2350, EUR)
+
+            final Cart cartWithCustomLineItem = client().executeBlocking(CartUpdateCommand.of(cart, AddCustomLineItem.of(draftItem)));
+            assertThat(cartWithCustomLineItem.getCustomLineItems()).hasSize(1);
+            final CustomLineItem customLineItem = cartWithCustomLineItem.getCustomLineItems().get(0);
+            assertThat(customLineItem.getMoney()).isEqualTo(MoneyImpl.ofCents(2350, EUR));
+
+            final MonetaryAmount newAmount = MoneyImpl.ofCents(1234, EUR);
+            final Cart updatedCart = client().executeBlocking(CartUpdateCommand.of(cartWithCustomLineItem, ChangeCustomLineItemMoney.of(customLineItem, newAmount)));
+            assertThat(updatedCart.getCustomLineItems().get(0).getMoney()).isEqualTo(newAmount);
+        });
+    }
+
+    @Test
     public void removeCustomLineItem() throws Exception {
         withTaxCategory(client(), taxCategory -> {
             final Cart cart = createCartWithCountry(client());

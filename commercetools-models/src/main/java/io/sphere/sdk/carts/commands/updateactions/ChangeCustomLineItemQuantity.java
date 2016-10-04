@@ -11,6 +11,8 @@ import io.sphere.sdk.commands.UpdateActionImpl;
  {@doc.gen intro}
 
  {@include.example io.sphere.sdk.carts.commands.CartUpdateCommandIntegrationTest#changeCustomLineItemQuantity()}
+
+ @see CustomLineItem#getQuantity()
  */
 public final class ChangeCustomLineItemQuantity extends UpdateActionImpl<Cart> {
     private final String customLineItemId;
