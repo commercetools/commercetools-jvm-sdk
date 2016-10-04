@@ -1,8 +1,10 @@
 package io.sphere.sdk.products;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import io.sphere.sdk.models.Asset;
 import io.sphere.sdk.products.search.PriceSelection;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;
 
@@ -105,4 +107,7 @@ public interface ProductVariant extends AttributeContainer {
      */
     @Nullable
     String getKey();
+
+    @Nonnull
+    List<Asset> getAssets();
 }
