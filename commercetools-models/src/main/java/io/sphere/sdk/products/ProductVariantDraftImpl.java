@@ -1,5 +1,6 @@
 package io.sphere.sdk.products;
 
+import io.sphere.sdk.models.AssetDraft;
 import io.sphere.sdk.products.attributes.AttributeDraft;
 import io.sphere.sdk.models.Base;
 
@@ -13,13 +14,15 @@ class ProductVariantDraftImpl extends Base implements ProductVariantDraft {
     private final List<AttributeDraft> attributes;
     private final List<Image> images;
     private final String key;
+    private final List<AssetDraft> assets;
 
-    public ProductVariantDraftImpl(@Nullable final String sku, final List<PriceDraft> prices, final List<AttributeDraft> attributes, final List<Image> images, @Nullable final String key) {
+    public ProductVariantDraftImpl(@Nullable final String sku, final List<PriceDraft> prices, final List<AttributeDraft> attributes, final List<Image> images, @Nullable final String key, final List<AssetDraft> assets) {
         this.sku = sku;
         this.prices = prices;
         this.attributes = attributes;
         this.images = images;
         this.key = key;
+        this.assets = assets;
     }
 
     @Override
@@ -47,5 +50,11 @@ class ProductVariantDraftImpl extends Base implements ProductVariantDraft {
     @Override
     public String getKey() {
         return key;
+    }
+
+    @Nullable
+    @Override
+    public List<AssetDraft> getAssets() {
+        return assets;
     }
 }
