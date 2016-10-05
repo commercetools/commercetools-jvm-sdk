@@ -1170,7 +1170,7 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
 
     @Test
     public void removeAssetByVariantId() {
-        ProductFixtures.withProductHavingAssets(client(), product -> {
+        withProductHavingAssets(client(), product -> {
             final List<Asset> originalAssets = product.getMasterData().getStaged().getMasterVariant().getAssets();
             final Asset assetToRemove = originalAssets.get(0);
             final String assetId = assetToRemove.getId();
@@ -1186,7 +1186,7 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
 
     @Test
     public void removeAssetBySku() {
-        ProductFixtures.withProductHavingAssets(client(), product -> {
+        withProductHavingAssets(client(), product -> {
             final ProductVariant masterVariant = product.getMasterData().getStaged().getMasterVariant();
             final String assetId = masterVariant.getAssets().get(0).getId();
             final String sku = masterVariant.getSku();
@@ -1194,6 +1194,47 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
 
             final List<Asset> assets = updatedProduct.getMasterData().getStaged().getMasterVariant().getAssets();
             assertThat(assets).allMatch(asset -> !asset.getId().equals(assetId));
+
+            return updatedProduct;
+        });
+    }
+
+    @Test
+    public void changeAssetOrderByVariantId() {
+        withProductHavingAssets(client(), product -> {
+            final List<Asset> originalAssets = product.getMasterData().getStaged().getMasterVariant().getAssets();
+
+            final List<String> newAssetOrder =
+                    new LinkedList<>(originalAssets.stream().map(Asset::getId).collect(toList()));
+            Collections.reverse(newAssetOrder);
+
+            final ProductUpdateCommand cmd =
+                    ProductUpdateCommand.of(product, ChangeAssetOrder.ofVariantId(MASTER_VARIANT_ID, newAssetOrder));
+            final Product updatedProduct = client().executeBlocking(cmd);
+
+            final List<Asset> assets = updatedProduct.getMasterData().getStaged().getMasterVariant().getAssets();
+            assertThat(assets).extracting(Asset::getId).isEqualTo(newAssetOrder);
+
+            return updatedProduct;
+        });
+    }
+
+    @Test
+    public void changeAssetOrderBySku() {
+        withProductHavingAssets(client(), product -> {
+            final ProductVariant masterVariant = product.getMasterData().getStaged().getMasterVariant();
+            final List<Asset> originalAssets = masterVariant.getAssets();
+
+            final List<String> newAssetOrder =
+                    new LinkedList<>(originalAssets.stream().map(Asset::getId).collect(toList()));
+            Collections.reverse(newAssetOrder);
+
+            final ProductUpdateCommand cmd =
+                    ProductUpdateCommand.of(product, ChangeAssetOrder.ofSku(masterVariant.getSku(), newAssetOrder));
+            final Product updatedProduct = client().executeBlocking(cmd);
+
+            final List<Asset> assets = updatedProduct.getMasterData().getStaged().getMasterVariant().getAssets();
+            assertThat(assets).extracting(Asset::getId).isEqualTo(newAssetOrder);
 
             return updatedProduct;
         });
