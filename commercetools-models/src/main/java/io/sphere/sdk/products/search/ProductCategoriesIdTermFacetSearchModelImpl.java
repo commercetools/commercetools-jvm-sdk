@@ -37,7 +37,7 @@ final class ProductCategoriesIdTermFacetSearchModelImpl<T> extends TermFacetSear
     }
 
     @Override
-    public ProductCategoriesIdTermFacetSearchModel<T> countingProducts(final Boolean isCountingProducts) {
+    public ProductCategoriesIdTermFacetSearchModel<T> withCountingProducts(final Boolean isCountingProducts) {
         return new ProductCategoriesIdTermFacetSearchModelImpl<>(searchModel, typeSerializer, alias, isCountingProducts);
     }
 }

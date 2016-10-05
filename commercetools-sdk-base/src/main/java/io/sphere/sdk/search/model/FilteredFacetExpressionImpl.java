@@ -26,8 +26,4 @@ class FilteredFacetExpressionImpl<T, V> extends TermExpression<T, V> implements 
         return super.alias();
     }
 
-    @Override
-    public Boolean isCountingProducts() {
-        return super.isCountingProducts();
-    }
 }

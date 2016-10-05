@@ -43,7 +43,7 @@ public interface FacetSearchModel<T, V> {
      * Allows to enable/disable the counting of products.
      * @return a new facet search model identical to the current one, but with the counting of products enabled/disabled
      */
-    FacetSearchModel<T, V> countingProducts(final Boolean isCountingProducts);
+    FacetSearchModel<T, V> withCountingProducts(final Boolean isCountingProducts);
 
     /**
      * Generates an expression to obtain the facets of the attribute for all values.

@@ -25,13 +25,13 @@ public class FacetSearchModelTest {
     public void termFacetsAllowCountingProducts() throws Exception {
         final TermFacetSearchModel<Object, String> facetModel = new TermFacetSearchModelImpl<>(null, ofString());
         assertThat(facetModel.isCountingProducts()).isFalse();
-        assertThat(facetModel.countingProducts(true).isCountingProducts()).isTrue();
+        assertThat(facetModel.withCountingProducts(true).isCountingProducts()).isTrue();
     }
 
     @Test
     public void rangeFacetsAllowCountingProducts() throws Exception {
         final RangeTermFacetSearchModel<Object, String> facetModel = new RangeTermFacetSearchModel<>(null, ofString());
         assertThat(facetModel.isCountingProducts()).isFalse();
-        assertThat(facetModel.countingProducts(true).isCountingProducts()).isTrue();
+        assertThat(facetModel.withCountingProducts(true).isCountingProducts()).isTrue();
     }
 }

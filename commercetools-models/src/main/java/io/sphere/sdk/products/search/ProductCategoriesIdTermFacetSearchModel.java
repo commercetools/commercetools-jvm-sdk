@@ -25,7 +25,7 @@ public interface ProductCategoriesIdTermFacetSearchModel<T> extends TermFacetSea
     ProductCategoriesIdTermFacetSearchModel<T> withAlias(final String alias);
 
     @Override
-    ProductCategoriesIdTermFacetSearchModel<T> countingProducts(final Boolean isCountingProducts);
+    ProductCategoriesIdTermFacetSearchModel<T> withCountingProducts(final Boolean isCountingProducts);
 
     FilteredFacetExpression<T> onlyTermSubtree(final String categoryId);
 

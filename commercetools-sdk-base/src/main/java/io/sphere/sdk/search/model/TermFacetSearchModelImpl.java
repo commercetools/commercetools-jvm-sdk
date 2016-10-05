@@ -32,7 +32,7 @@ public class TermFacetSearchModelImpl<T, V> extends TermFacetBaseSearchModel<T, 
      * {@inheritDoc}
      */
     @Override
-    public TermFacetSearchModel<T, V> countingProducts(final Boolean isCountingProducts) {
+    public TermFacetSearchModel<T, V> withCountingProducts(final Boolean isCountingProducts) {
         return new TermFacetSearchModelImpl<>(searchModel, typeSerializer, alias, isCountingProducts);
     }
 
@@ -71,4 +71,6 @@ public class TermFacetSearchModelImpl<T, V> extends TermFacetBaseSearchModel<T, 
     public static <T, V> TermFacetSearchModelImpl<T, V> of(final String attributePath, final Function<V, String> typeSerializer) {
         return new TermFacetSearchModelImpl<>(new SearchModelImpl<>(attributePath), typeSerializer);
     }
+
+
 }

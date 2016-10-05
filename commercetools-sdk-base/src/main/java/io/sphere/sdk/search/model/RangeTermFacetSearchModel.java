@@ -31,7 +31,7 @@ public final class RangeTermFacetSearchModel<T, V extends Comparable<? super V>>
      * {@inheritDoc}
      */
     @Override
-    public RangeTermFacetSearchModel<T, V> countingProducts(final Boolean isCountingProducts) {
+    public RangeTermFacetSearchModel<T, V> withCountingProducts(final Boolean isCountingProducts) {
         return new RangeTermFacetSearchModel<>(searchModel, typeSerializer, alias, isCountingProducts);
     }
 

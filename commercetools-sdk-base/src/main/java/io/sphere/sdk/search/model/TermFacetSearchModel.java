@@ -26,7 +26,7 @@ public interface TermFacetSearchModel<T, V> extends FacetSearchModel<T, V> {
     TermFacetSearchModel<T, V> withAlias(final String alias);
 
     @Override
-    TermFacetSearchModel<T, V> countingProducts(final Boolean isCountingProducts);
+    TermFacetSearchModel<T, V> withCountingProducts(final Boolean isCountingProducts);
 
     /**
      * Creates an instance of the search model to generate term facet expressions.

@@ -70,13 +70,13 @@ public class FacetExpressionTest {
 
     @Test
     public void facetsCountingProducts() throws Exception {
-        testExpression(stringModel().countingProducts(true).allTerms(), (expr) ->
+        testExpression(stringModel().withCountingProducts(true).allTerms(), (expr) ->
                 assertThat(expr).isEqualTo("path.to.attribute counting products"));
     }
 
     @Test
     public void facetsWithAliasCountingProducts() throws Exception {
-        testExpression(stringModel().withAlias("testAlias").countingProducts(true).allTerms(), (expr) ->
+        testExpression(stringModel().withAlias("testAlias").withCountingProducts(true).allTerms(), (expr) ->
                 assertThat(expr).isEqualTo("path.to.attribute as testAlias counting products"));
     }
 
