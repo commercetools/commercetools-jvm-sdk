@@ -8,6 +8,11 @@ import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Set;
 
+/**
+ * Draft for an {@link Asset}.
+ *
+ * @see AssetDraftBuilder
+ */
 @JsonDeserialize(as = AssetDraftImpl.class)
 public interface AssetDraft extends CustomDraft {
     List<AssetSource> getSources();

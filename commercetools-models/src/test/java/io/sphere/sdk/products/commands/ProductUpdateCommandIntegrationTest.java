@@ -1115,6 +1115,59 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
         });
     }
 
+    @Test
+    public void addAssetByVariantId() {
+        withProduct(client(), (Product product) -> {
+            final AssetSource assetSource = AssetSourceBuilder.ofUri("https://commercetools.com/binaries/content/gallery/commercetoolswebsite/homepage/cases/rewe.jpg")
+                    .key("rewe-showcase")
+                    .contentType("image/jpg")
+                    .dimensionsOfWidthAndHeight(1934, 1115)
+                    .build();
+            final LocalizedString name = LocalizedString.ofEnglish("REWE show case");
+            final LocalizedString description = LocalizedString.ofEnglish("screenshot of the REWE webshop on a mobile and a notebook");
+            final AssetDraft assetDraft = AssetDraftBuilder.of(singletonList(assetSource), name)
+                    .description(description)
+                    .tags("desktop-sized", "jpg-format", "REWE", "awesome")
+                    .build();
+            final Product updatedProduct = client().executeBlocking(ProductUpdateCommand.of(product, AddAsset.ofVariantId(MASTER_VARIANT_ID, assetDraft)));
+
+            final List<Asset> assets = updatedProduct.getMasterData().getStaged().getMasterVariant().getAssets();
+            assertThat(assets).hasSize(1);
+            final Asset asset = assets.get(0);
+            assertThat(asset.getId()).isNotEmpty();
+            assertThat(asset.getDescription()).isEqualTo(description);
+            assertThat(asset.getName()).isEqualTo(name);
+            assertThat(asset.getSources()).hasSize(1);
+            final AssetSource source = asset.getSources().get(0);
+            assertThat(source.getUri()).isEqualTo("https://commercetools.com/binaries/content/gallery/commercetoolswebsite/homepage/cases/rewe.jpg");
+            assertThat(source.getKey()).isEqualTo("rewe-showcase");
+            assertThat(source.getContentType()).isEqualTo("image/jpg");
+            assertThat(source.getDimensions()).isEqualTo(AssetDimensions.ofWidthAndHeight(1934, 1115));
+        });
+    }
+
+    @Test
+    public void addAssetBySku() {
+        withProduct(client(), (Product product) -> {
+            final AssetSource assetSource = AssetSourceBuilder.ofUri("https://commercetools.com/binaries/content/gallery/commercetoolswebsite/homepage/cases/rewe.jpg")
+                    .build();
+            final LocalizedString name = LocalizedString.ofEnglish("REWE show case");
+            final AssetDraft assetDraft = AssetDraftBuilder.of(singletonList(assetSource), name)
+                    .build();
+            final String sku = product.getMasterData().getStaged().getMasterVariant().getSku();
+            final ProductUpdateCommand cmd = ProductUpdateCommand.of(product, AddAsset.ofSku(sku, assetDraft));
+            final Product updatedProduct = client().executeBlocking(cmd);
+
+            final List<Asset> assets = updatedProduct.getMasterData().getStaged().getMasterVariant().getAssets();
+            assertThat(assets).hasSize(1);
+            final Asset asset = assets.get(0);
+            assertThat(asset.getName()).isEqualTo(name);
+            assertThat(asset.getSources()).hasSize(1);
+            final AssetSource source = asset.getSources().get(0);
+            assertThat(source.getUri()).isEqualTo("https://commercetools.com/binaries/content/gallery/commercetoolswebsite/homepage/cases/rewe.jpg");
+        });
+    }
+
     private void withProductOfSku(final String sku, final Function<Product, Product> productProductFunction) {
         withUpdateableProduct(client(), builder -> {
             return builder.masterVariant(ProductVariantDraftBuilder.of(builder.getMasterVariant()).sku(sku).build());

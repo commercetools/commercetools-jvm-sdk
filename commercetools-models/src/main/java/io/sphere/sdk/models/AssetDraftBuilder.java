@@ -3,8 +3,11 @@ package io.sphere.sdk.models;
 import io.sphere.sdk.types.CustomFieldsDraft;
 
 import javax.annotation.Nullable;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
+import static java.util.Arrays.asList;
 
 public final class AssetDraftBuilder extends Base implements Builder<AssetDraft> {
     private List<AssetSource> sources;
@@ -35,32 +38,16 @@ public final class AssetDraftBuilder extends Base implements Builder<AssetDraft>
         return this;
     }
 
+    public AssetDraftBuilder tags(final String tag, final String ... moreTags) {
+        final HashSet<String> tags = new HashSet<>();
+        tags.add(tag);
+        tags.addAll(asList(moreTags));
+        return tags(tags);
+    }
+
     public AssetDraftBuilder custom(final CustomFieldsDraft custom) {
         this.custom = custom;
         return this;
-    }
-
-    public List<AssetSource> getSources() {
-        return sources;
-    }
-
-    public LocalizedString getName() {
-        return name;
-    }
-
-    @Nullable
-    public LocalizedString getDescription() {
-        return description;
-    }
-
-    @Nullable
-    public Set<String> getTags() {
-        return tags;
-    }
-
-    @Nullable
-    public CustomFieldsDraft getCustom() {
-        return custom;
     }
 
     @Override
