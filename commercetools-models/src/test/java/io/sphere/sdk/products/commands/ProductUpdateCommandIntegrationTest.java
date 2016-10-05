@@ -1168,6 +1168,37 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
         });
     }
 
+    @Test
+    public void removeAssetByVariantId() {
+        ProductFixtures.withProductHavingAssets(client(), product -> {
+            final List<Asset> originalAssets = product.getMasterData().getStaged().getMasterVariant().getAssets();
+            final Asset assetToRemove = originalAssets.get(0);
+            final String assetId = assetToRemove.getId();
+            final Product updatedProduct = client().executeBlocking(ProductUpdateCommand.of(product, RemoveAsset.ofVariantId(MASTER_VARIANT_ID, assetId)));
+
+            final List<Asset> assets = updatedProduct.getMasterData().getStaged().getMasterVariant().getAssets();
+            assertThat(assets).hasSize(originalAssets.size() - 1);
+            assertThat(assets).allMatch(asset -> !asset.getId().equals(assetId));
+
+            return updatedProduct;
+        });
+    }
+
+    @Test
+    public void removeAssetBySku() {
+        ProductFixtures.withProductHavingAssets(client(), product -> {
+            final ProductVariant masterVariant = product.getMasterData().getStaged().getMasterVariant();
+            final String assetId = masterVariant.getAssets().get(0).getId();
+            final String sku = masterVariant.getSku();
+            final Product updatedProduct = client().executeBlocking(ProductUpdateCommand.of(product, RemoveAsset.ofSku(sku, assetId)));
+
+            final List<Asset> assets = updatedProduct.getMasterData().getStaged().getMasterVariant().getAssets();
+            assertThat(assets).allMatch(asset -> !asset.getId().equals(assetId));
+
+            return updatedProduct;
+        });
+    }
+
     private void withProductOfSku(final String sku, final Function<Product, Product> productProductFunction) {
         withUpdateableProduct(client(), builder -> {
             return builder.masterVariant(ProductVariantDraftBuilder.of(builder.getMasterVariant()).sku(sku).build());
