@@ -137,9 +137,25 @@ public class OrderUpdateCommandIntegrationTest extends IntegrationTest {
             final ParcelDraft parcelDraft = ParcelDraft.of(PARCEL_MEASUREMENTS, TRACKING_DATA);
             final AddParcelToDelivery action = AddParcelToDelivery.of(delivery, parcelDraft);
             final Order updatedOrder = client().executeBlocking(OrderUpdateCommand.of(orderWithDelivery, action));
-            final Parcel actual = updatedOrder.getShippingInfo().getDeliveries().get(0).getParcels().get(0);
-            assertThat(actual.getMeasurements()).isEqualTo(PARCEL_MEASUREMENTS);
-            assertThat(actual.getTrackingData()).isEqualTo(TRACKING_DATA);
+            final Parcel actualParcel = updatedOrder.getShippingInfo().getDeliveries().get(0).getParcels().get(0);
+            assertThat(actualParcel.getMeasurements()).isEqualTo(PARCEL_MEASUREMENTS);
+            assertThat(actualParcel.getTrackingData()).isEqualTo(TRACKING_DATA);
+
+            //you can observe a message
+            final Query<ParcelAddedToDeliveryMessage> messageQuery = MessageQuery.of()
+                    .withPredicates(m -> m.resource().is(order))
+                    .forMessageType(ParcelAddedToDeliveryMessage.MESSAGE_HINT);
+            assertEventually(() -> {
+                final Optional<ParcelAddedToDeliveryMessage> parcelAddedToDeliveryMessageOptional = client().executeBlocking(messageQuery).head();
+                assertThat(parcelAddedToDeliveryMessageOptional).isPresent();
+                final ParcelAddedToDeliveryMessage parcelAddedToDeliveryMessage = parcelAddedToDeliveryMessageOptional.get();
+                final Delivery deliveryFromMessage = parcelAddedToDeliveryMessage.getDelivery();
+                assertThat(deliveryFromMessage.getId()).isEqualTo(delivery.getId());
+                assertThat(deliveryFromMessage.getCreatedAt()).isEqualTo(delivery.getCreatedAt());
+                assertThat(deliveryFromMessage.getItems()).isEqualTo(delivery.getItems());
+                final Parcel parcelFromMessage = parcelAddedToDeliveryMessage.getParcel();
+                assertThat(parcelFromMessage).isEqualTo(actualParcel);
+            });
 
             return updatedOrder;
         });
