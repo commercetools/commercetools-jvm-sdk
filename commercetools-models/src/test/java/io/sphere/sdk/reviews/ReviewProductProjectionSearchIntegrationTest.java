@@ -112,7 +112,7 @@ public class ReviewProductProjectionSearchIntegrationTest extends IntegrationTes
             final ProductProjection productProjection = result.getResults().get(0);
             assertThat(productProjection.getReviewRatingStatistics().getCount()).isEqualTo(REVIEWS_PER_PRODUCT);
             final RangeFacetResult facetResult = (RangeFacetResult) result.getFacetResult("reviewRatingStatistics.averageRating");
-            assertThat(facetResult.getRanges().get(2)).isEqualTo(RangeStats.of("2.0", "3.0", 2L, "2.2", "2.7", "4.9", 2.45));
+            assertThat(facetResult.getRanges().get(2)).isEqualTo(RangeStats.of("2.0", "3.0", 2L, null, "2.2", "2.7", "4.9", 2.45));
 
         });
     }

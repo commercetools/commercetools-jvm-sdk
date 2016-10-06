@@ -12,8 +12,8 @@ import java.util.function.Function;
  */
 public class TermFacetSearchModelImpl<T, V> extends TermFacetBaseSearchModel<T, V> implements TermFacetSearchModel<T, V> {
 
-    protected TermFacetSearchModelImpl(final SearchModel<T> searchModel, final Function<V, String> typeSerializer, final String alias) {
-        super(searchModel, typeSerializer, alias);
+    protected TermFacetSearchModelImpl(final SearchModel<T> searchModel, final Function<V, String> typeSerializer, final String alias, final Boolean isCountingProducts) {
+        super(searchModel, typeSerializer, alias, isCountingProducts);
     }
 
     protected TermFacetSearchModelImpl(final SearchModel<T> searchModel, final Function<V, String> typeSerializer) {
@@ -25,7 +25,15 @@ public class TermFacetSearchModelImpl<T, V> extends TermFacetBaseSearchModel<T, 
      */
     @Override
     public TermFacetSearchModel<T, V> withAlias(final String alias) {
-        return new TermFacetSearchModelImpl<>(searchModel, typeSerializer, alias);
+        return new TermFacetSearchModelImpl<>(searchModel, typeSerializer, alias, isCountingProducts);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public TermFacetSearchModel<T, V> withCountingProducts(final Boolean isCountingProducts) {
+        return new TermFacetSearchModelImpl<>(searchModel, typeSerializer, alias, isCountingProducts);
     }
 
     /**
@@ -63,4 +71,6 @@ public class TermFacetSearchModelImpl<T, V> extends TermFacetBaseSearchModel<T, 
     public static <T, V> TermFacetSearchModelImpl<T, V> of(final String attributePath, final Function<V, String> typeSerializer) {
         return new TermFacetSearchModelImpl<>(new SearchModelImpl<>(attributePath), typeSerializer);
     }
+
+
 }

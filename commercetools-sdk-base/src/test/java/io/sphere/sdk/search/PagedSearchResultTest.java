@@ -21,7 +21,7 @@ public class PagedSearchResultTest {
     private static final FilteredFacetExpression<Object> FILTERED_FACET_EXPR = FilteredFacetExpression.of("foo:\"a\" as filteredFacet");
 
     private static final TermFacetResult TERM_FACET_RESULT = TermFacetResult.of(0L, 2L, 0L, asList(TermStats.of("a", 1L), TermStats.of("b", 2L)));
-    private static final RangeFacetResult RANGE_FACET_RESULT = RangeFacetResult.of(singletonList(RangeStats.of(null, null, 4L, "3.0", "10.0", "20.0", 7.0)));
+    private static final RangeFacetResult RANGE_FACET_RESULT = RangeFacetResult.of(singletonList(RangeStats.of(null, null, 4L, null, "3.0", "10.0", "20.0", 7.0)));
     private static final FilteredFacetResult FILTERED_FACET_RESULT = FilteredFacetResult.of(4L);
 
     @Test
@@ -63,24 +63,24 @@ public class PagedSearchResultTest {
     @Test
     public void rangeFacetOfAllRanges() throws Exception {
         testPagedSearchResultWithAllRanges(asList(
-                        RangeStats.of(null, "0.0", 6L, "-10.0", "-3.0", "-20.0", -7.0),
-                        RangeStats.of("0.0", null, 4L, "3.0", "10.0", "20.0", 7.0)),
+                        RangeStats.of(null, "0.0", 6L, null, "-10.0", "-3.0", "-20.0", -7.0),
+                        RangeStats.of("0.0", null, 4L, null, "3.0", "10.0", "20.0", 7.0)),
                 simpleRangeStats -> assertThat(simpleRangeStats).isEqualTo(SimpleRangeStats.of(null, null, 10L, "-10.0", "10.0")));
     }
 
     @Test
     public void rangeFacetOfAllRangesWithOnlyPositiveRange() throws Exception {
         testPagedSearchResultWithAllRanges(asList(
-                        RangeStats.of(null, "0.0", 0L, "0.0", "0.0", "0.0", 0.0),
-                        RangeStats.of("0.0", null, 4L, "3.0", "10.0", "20.0", 7.0)),
+                        RangeStats.of(null, "0.0", 0L, null, "0.0", "0.0", "0.0", 0.0),
+                        RangeStats.of("0.0", null, 4L, null, "3.0", "10.0", "20.0", 7.0)),
                 simpleRangeStats -> assertThat(simpleRangeStats).isEqualTo(SimpleRangeStats.of(null, null, 4L, "3.0", "10.0")));
     }
 
     @Test
     public void rangeFacetOfAllRangesWithOnlyNegativeRange() throws Exception {
         testPagedSearchResultWithAllRanges(asList(
-                        RangeStats.of(null, "0.0", 6L, "-10.0", "-3.0", "-20.0", -7.0),
-                        RangeStats.of("0.0", null, 0L, "0.0", "0.0", "0.0", 0.0)),
+                        RangeStats.of(null, "0.0", 6L, null, "-10.0", "-3.0", "-20.0", -7.0),
+                        RangeStats.of("0.0", null, 0L, null, "0.0", "0.0", "0.0", 0.0)),
                 simpleRangeStats -> assertThat(simpleRangeStats).isEqualTo(SimpleRangeStats.of(null, null, 6L, "-10.0", "-3.0")));
     }
 

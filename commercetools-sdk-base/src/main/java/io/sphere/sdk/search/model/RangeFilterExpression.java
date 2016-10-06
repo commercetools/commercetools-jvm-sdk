@@ -7,7 +7,7 @@ import java.util.function.Function;
 class RangeFilterExpression<T, V extends Comparable<? super V>> extends RangeExpression<T, V> implements FilterExpression<T> {
 
     RangeFilterExpression(final SearchModel<T> searchModel, final Function<V, String> typeSerializer, final Iterable<FilterRange<V>> ranges) {
-        super(searchModel, typeSerializer, ranges, null);
+        super(searchModel, typeSerializer, ranges, null, false);
     }
 
     @Override

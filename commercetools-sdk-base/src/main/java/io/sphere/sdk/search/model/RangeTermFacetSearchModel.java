@@ -11,8 +11,8 @@ import java.util.function.Function;
  */
 public final class RangeTermFacetSearchModel<T, V extends Comparable<? super V>> extends RangeTermFacetBaseSearchModel<T, V> {
 
-    RangeTermFacetSearchModel(final SearchModel<T> searchModel, final Function<V, String> typeSerializer, final String alias) {
-        super(searchModel, typeSerializer, alias);
+    RangeTermFacetSearchModel(final SearchModel<T> searchModel, final Function<V, String> typeSerializer, final String alias, final Boolean isCountingProducts) {
+        super(searchModel, typeSerializer, alias, isCountingProducts);
     }
 
     RangeTermFacetSearchModel(final SearchModel<T> searchModel, final Function<V, String> typeSerializer) {
@@ -24,7 +24,15 @@ public final class RangeTermFacetSearchModel<T, V extends Comparable<? super V>>
      */
     @Override
     public RangeTermFacetSearchModel<T, V> withAlias(final String alias) {
-        return new RangeTermFacetSearchModel<>(searchModel, typeSerializer, alias);
+        return new RangeTermFacetSearchModel<>(searchModel, typeSerializer, alias, isCountingProducts);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public RangeTermFacetSearchModel<T, V> withCountingProducts(final Boolean isCountingProducts) {
+        return new RangeTermFacetSearchModel<>(searchModel, typeSerializer, alias, isCountingProducts);
     }
 
     /**

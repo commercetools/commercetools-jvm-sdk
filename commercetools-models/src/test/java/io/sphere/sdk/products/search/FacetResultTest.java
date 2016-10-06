@@ -14,6 +14,9 @@ public class FacetResultTest {
     private static final String TERM_FACET_KEY = "variants.attributes.filterColor.key";
     private static final String RANGE_FACET_KEY = "variants.attributes.priceb2c.centAmount";
     private static final String FILTERED_FACET_KEY = "variants.attributes.size";
+    private static final String TERM_FACET_COUNTING_PRODUCTS_KEY = "filterColorKeyInProducts";
+    private static final String RANGE_FACET_COUNTING_PRODUCTS_KEY = "priceb2cCentAmountInProducts";
+    private static final String FILTERED_FACET_COUNTING_PRODUCTS_KEY = "sizeInProducts";
     private PagedSearchResult<ProductProjection> searchResult;
 
     @Before
@@ -49,5 +52,27 @@ public class FacetResultTest {
     public void parsesFilteredFacetResults() throws Exception {
         final FilteredFacetResult filteredFacet = searchResult.getFilteredFacetResult(FILTERED_FACET_KEY);
         assertThat(filteredFacet.getCount()).isEqualTo(2);
+    }
+
+    @Test
+    public void parsesFilteredFacetResultsWithProductCounts() throws Exception {
+        final FilteredFacetResult filteredFacet = searchResult.getFilteredFacetResult(FILTERED_FACET_COUNTING_PRODUCTS_KEY);
+        assertThat(filteredFacet.getProductCount()).isEqualTo(1);
+    }
+
+    @Test
+    public void parsesTermFacetResultsProductCounts() throws Exception {
+        final TermFacetResult termFacet = searchResult.getTermFacetResult(TERM_FACET_COUNTING_PRODUCTS_KEY);
+        assertThat(termFacet.getTerms()).hasSize(2);
+        assertThat(termFacet.getTerms().get(0).getProductCount()).isEqualTo(372);
+        assertThat(termFacet.getTerms().get(1).getProductCount()).isEqualTo(195);
+    }
+
+    @Test
+    public void parsesRangeFacetResultsProductCounts() throws Exception {
+        final RangeFacetResult rangeFacet = searchResult.getRangeFacetResult(RANGE_FACET_COUNTING_PRODUCTS_KEY);
+        assertThat(rangeFacet.getRanges()).hasSize(2);
+        assertThat(rangeFacet.getRanges().get(0).getProductCount()).isEqualTo(2302);
+        assertThat(rangeFacet.getRanges().get(1).getProductCount()).isEqualTo(978);
     }
 }

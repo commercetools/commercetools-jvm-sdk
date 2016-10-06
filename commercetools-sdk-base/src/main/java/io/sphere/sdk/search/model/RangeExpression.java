@@ -10,8 +10,8 @@ import static java.util.stream.Collectors.joining;
 abstract class RangeExpression<T, V extends Comparable<? super V>> extends SearchModelExpression<T, V> {
     private final Iterable<? extends Range<V>> ranges;
 
-    RangeExpression(final SearchModel<T> searchModel, final Function<V, String> typeSerializer, final Iterable<? extends Range<V>> ranges, @Nullable final String alias) {
-        super(searchModel, typeSerializer, alias);
+    RangeExpression(final SearchModel<T> searchModel, final Function<V, String> typeSerializer, final Iterable<? extends Range<V>> ranges, @Nullable final String alias, final Boolean isCountingProducts) {
+        super(searchModel, typeSerializer, alias, isCountingProducts);
         this.ranges = requireNonEmpty(ranges);
     }
 

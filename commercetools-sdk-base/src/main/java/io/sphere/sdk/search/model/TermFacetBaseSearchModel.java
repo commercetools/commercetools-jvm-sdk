@@ -20,15 +20,17 @@ abstract class TermFacetBaseSearchModel<T, V> extends Base implements FacetSearc
     protected final Function<V, String> typeSerializer;
     @Nullable
     protected final String alias;
+    protected final Boolean isCountingProducts;
 
-    TermFacetBaseSearchModel(final SearchModel<T> searchModel, final Function<V, String> typeSerializer, @Nullable final String alias) {
+    TermFacetBaseSearchModel(final SearchModel<T> searchModel, final Function<V, String> typeSerializer, @Nullable final String alias, final Boolean isCountingProducts) {
         this.searchModel = searchModel;
         this.typeSerializer = typeSerializer;
         this.alias = alias;
+        this.isCountingProducts = isCountingProducts;
     }
 
     TermFacetBaseSearchModel(final SearchModel<T> searchModel, final Function<V, String> typeSerializer) {
-        this(searchModel, typeSerializer, null);
+        this(searchModel, typeSerializer, null, false);
     }
 
     /**
@@ -38,6 +40,14 @@ abstract class TermFacetBaseSearchModel<T, V> extends Base implements FacetSearc
     @Nullable
     public String getAlias() {
         return alias;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Boolean isCountingProducts() {
+        return isCountingProducts;
     }
 
     @Override
@@ -50,7 +60,7 @@ abstract class TermFacetBaseSearchModel<T, V> extends Base implements FacetSearc
      */
     @Override
     public TermFacetExpression<T> allTerms() {
-        return new TermFacetExpressionImpl<>(searchModel, typeSerializer, alias);
+        return new TermFacetExpressionImpl<>(searchModel, typeSerializer, alias, isCountingProducts);
     }
 
     /**
@@ -66,7 +76,7 @@ abstract class TermFacetBaseSearchModel<T, V> extends Base implements FacetSearc
      */
     @Override
     public FilteredFacetExpression<T> onlyTerm(final Iterable<V> values) {
-        return new FilteredFacetExpressionImpl<>(searchModel, typeSerializer, values, alias);
+        return new FilteredFacetExpressionImpl<>(searchModel, typeSerializer, values, alias, isCountingProducts);
     }
 
     /**
@@ -74,6 +84,6 @@ abstract class TermFacetBaseSearchModel<T, V> extends Base implements FacetSearc
      */
     @Override
     public FilteredFacetExpression<T> onlyTermAsString(final Iterable<String> values) {
-        return new FilteredFacetExpressionImpl<>(searchModel, TypeSerializer.ofString(), values, alias);
+        return new FilteredFacetExpressionImpl<>(searchModel, TypeSerializer.ofString(), values, alias, isCountingProducts);
     }
 }

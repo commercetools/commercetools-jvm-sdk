@@ -25,6 +25,9 @@ public interface TermFacetSearchModel<T, V> extends FacetSearchModel<T, V> {
     @Override
     TermFacetSearchModel<T, V> withAlias(final String alias);
 
+    @Override
+    TermFacetSearchModel<T, V> withCountingProducts(final Boolean isCountingProducts);
+
     /**
      * Creates an instance of the search model to generate term facet expressions.
      * @param attributePath the path of the attribute as expected by Commercetools Platform (e.g. "variants.attributes.color.key")

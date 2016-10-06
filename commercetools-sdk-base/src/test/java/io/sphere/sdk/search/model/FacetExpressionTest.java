@@ -62,6 +62,24 @@ public class FacetExpressionTest {
                 assertThat(expr).isEqualTo("path.to.attribute:range(* to 3)"));
     }
 
+    @Test
+    public void facetsWithAlias() throws Exception {
+        testExpression(stringModel().withAlias("testAlias").allTerms(), (expr) ->
+                assertThat(expr).isEqualTo("path.to.attribute as testAlias"));
+    }
+
+    @Test
+    public void facetsCountingProducts() throws Exception {
+        testExpression(stringModel().withCountingProducts(true).allTerms(), (expr) ->
+                assertThat(expr).isEqualTo("path.to.attribute counting products"));
+    }
+
+    @Test
+    public void facetsWithAliasCountingProducts() throws Exception {
+        testExpression(stringModel().withAlias("testAlias").withCountingProducts(true).allTerms(), (expr) ->
+                assertThat(expr).isEqualTo("path.to.attribute as testAlias counting products"));
+    }
+
     private TermFacetSearchModel<Object, String> stringModel() {
         return new StringSearchModel<>(null, "path.to.attribute").faceted();
     }

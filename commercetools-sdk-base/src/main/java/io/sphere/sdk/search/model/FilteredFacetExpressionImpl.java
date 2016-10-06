@@ -11,8 +11,8 @@ import static io.sphere.sdk.utils.SphereInternalUtils.requireNonEmpty;
 class FilteredFacetExpressionImpl<T, V> extends TermExpression<T, V> implements FilteredFacetExpression<T> {
 
     FilteredFacetExpressionImpl(final SearchModel<T> searchModel, final Function<V, String> typeSerializer,
-                                final Iterable<V> terms, @Nullable final String alias) {
-        super(searchModel, typeSerializer, requireNonEmpty(terms), alias);
+                                final Iterable<V> terms, @Nullable final String alias, final Boolean isCountingProducts) {
+        super(searchModel, typeSerializer, requireNonEmpty(terms), alias, isCountingProducts);
     }
 
     @Override
@@ -25,4 +25,5 @@ class FilteredFacetExpressionImpl<T, V> extends TermExpression<T, V> implements 
     public String alias() {
         return super.alias();
     }
+
 }

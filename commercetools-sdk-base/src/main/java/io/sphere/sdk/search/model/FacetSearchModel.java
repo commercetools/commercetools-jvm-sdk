@@ -26,11 +26,24 @@ public interface FacetSearchModel<T, V> {
     String getAlias();
 
     /**
+     * Whether the facet is counting products.
+     * @return whether the facet is counting products
+     */
+    @Nullable
+    Boolean isCountingProducts();
+
+    /**
      * Allows to set an alias to identify the facet.
      * @param alias the identifier to use for the facet
      * @return a new facet search model identical to the current one, but with the given alias
      */
     FacetSearchModel<T, V> withAlias(final String alias);
+
+    /**
+     * Allows to enable/disable the counting of products.
+     * @return a new facet search model identical to the current one, but with the counting of products enabled/disabled
+     */
+    FacetSearchModel<T, V> withCountingProducts(final Boolean isCountingProducts);
 
     /**
      * Generates an expression to obtain the facets of the attribute for all values.

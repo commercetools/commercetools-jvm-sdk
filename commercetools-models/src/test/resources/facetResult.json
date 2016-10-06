@@ -1,9 +1,9 @@
 {
- "offset": 0,
- "count": 1,
- "total": 4162,
- "results": [],
- "facets": {
+  "offset": 0,
+  "count": 1,
+  "total": 4162,
+  "results": [],
+  "facets": {
     "variants.attributes.size": {
       "type": "filter",
       "count": 2
@@ -155,6 +155,60 @@
           "min": 1406160000000,
           "max": 1412553600000,
           "mean": 1409513372777.9412
+        }
+      ]
+    },
+    "sizeInProducts": {
+      "type": "filter",
+      "count": 2,
+      "productCount": 1
+    },
+    "filterColorKeyInProducts": {
+      "type": "terms",
+      "missing": 44,
+      "total": 6937,
+      "other": 0,
+      "terms": [
+        {
+          "term": "FFFFFF_1",
+          "count": 1118,
+          "productCount": 372
+        },
+        {
+          "term": "4B432E_1",
+          "count": 585,
+          "productCount": 195
+        }
+      ]
+    },
+    "priceb2cCentAmountInProducts": {
+      "type": "range",
+      "ranges": [
+        {
+          "from": 0,
+          "fromStr": "0",
+          "to": 5000,
+          "toStr": "5000",
+          "count": 4269,
+          "productCount": 2302,
+          "totalCount": 4269,
+          "total": 7063549,
+          "min": 50,
+          "max": 4950,
+          "mean": 1654.6144296088078
+        },
+        {
+          "from": 5001,
+          "fromStr": "5001",
+          "to": 0,
+          "toStr": "",
+          "count": 1799,
+          "productCount": 978,
+          "totalCount": 1799,
+          "total": 92868378,
+          "min": 5100,
+          "max": 590000,
+          "mean": 51622.222345747636
         }
       ]
     }
