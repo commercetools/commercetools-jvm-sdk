@@ -254,6 +254,28 @@ public class OrderUpdateCommandIntegrationTest extends IntegrationTest {
                 final Order updatedOrder = client().executeBlocking(OrderUpdateCommand.of(order, TransitionLineItemState.of(lineItem, quantity, initialState, nextState, actualTransitionDate)));
                 assertThat(updatedOrder.getLineItems().get(0)).has(itemStates(ItemState.of(nextState, quantity)));
 
+                //you can observe a message
+                final Query<LineItemStateTransitionMessage> messageQuery = MessageQuery.of()
+                        .withPredicates(m -> m.resource().is(order))
+                        .forMessageType(LineItemStateTransitionMessage.MESSAGE_HINT);
+                assertEventually(() -> {
+                    final Optional<LineItemStateTransitionMessage> lineItemStateTransitionMessageOptional = client().executeBlocking(messageQuery).head();
+                    assertThat(lineItemStateTransitionMessageOptional).isPresent();
+
+                    final LineItemStateTransitionMessage lineItemStateTransitionMessage = lineItemStateTransitionMessageOptional.get();
+
+                    final String lineItemIdFromMessage = lineItemStateTransitionMessage.getLineItemId();
+                    assertThat(lineItemIdFromMessage).isEqualTo(order.getLineItems().get(0).getId());
+                    final ZonedDateTime transitionDateFromMessage = lineItemStateTransitionMessage.getTransitionDate();
+                    assertThat(transitionDateFromMessage).isEqualTo(actualTransitionDate);
+                    final Long quantityFromMessage = lineItemStateTransitionMessage.getQuantity();
+                    assertThat(quantityFromMessage).isEqualTo(quantity);
+                    final Reference<State> fromStateFromMessage = lineItemStateTransitionMessage.getFromState();
+                    assertThat(fromStateFromMessage).isEqualTo(Reference.of("state", initialState.getId()));
+                    final Reference<State> toStateFromMessage = lineItemStateTransitionMessage.getToState();
+                    assertThat(toStateFromMessage).isEqualTo(Reference.of("state", nextState.getId()));
+                });
+
                 return updatedOrder;
             })
         );
