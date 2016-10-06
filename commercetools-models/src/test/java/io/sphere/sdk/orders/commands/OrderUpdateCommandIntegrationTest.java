@@ -300,6 +300,29 @@ public class OrderUpdateCommandIntegrationTest extends IntegrationTest {
                 final ZonedDateTime actualTransitionDate = ZonedDateTime_IN_PAST;
                 final Order updatedOrder = client().executeBlocking(OrderUpdateCommand.of(order, TransitionCustomLineItemState.of(customLineItem, quantity, initialState, nextState, actualTransitionDate)));
                 assertThat(updatedOrder.getCustomLineItems().get(0)).has(itemStates(ItemState.of(nextState, quantity)));
+
+                //you can observe a message
+                final Query<CustomLineItemStateTransitionMessage> messageQuery = MessageQuery.of()
+                        .withPredicates(m -> m.resource().is(order))
+                        .forMessageType(CustomLineItemStateTransitionMessage.MESSAGE_HINT);
+                assertEventually(() -> {
+                    final Optional<CustomLineItemStateTransitionMessage> lineItemStateTransitionMessageOptional = client().executeBlocking(messageQuery).head();
+                    assertThat(lineItemStateTransitionMessageOptional).isPresent();
+
+                    final CustomLineItemStateTransitionMessage customLineItemStateTransitionMessage = lineItemStateTransitionMessageOptional.get();
+
+                    final String customLineItemIdFromMessage = customLineItemStateTransitionMessage.getCustomLineItemId();
+                    assertThat(customLineItemIdFromMessage).isEqualTo(order.getCustomLineItems().get(0).getId());
+                    final ZonedDateTime transitionDateFromMessage = customLineItemStateTransitionMessage.getTransitionDate();
+                    assertThat(transitionDateFromMessage).isEqualTo(actualTransitionDate);
+                    final Long quantityFromMessage = customLineItemStateTransitionMessage.getQuantity();
+                    assertThat(quantityFromMessage).isEqualTo(quantity);
+                    final Reference<State> fromStateFromMessage = customLineItemStateTransitionMessage.getFromState();
+                    assertThat(fromStateFromMessage).isEqualTo(Reference.of("state", initialState.getId()));
+                    final Reference<State> toStateFromMessage = customLineItemStateTransitionMessage.getToState();
+                    assertThat(toStateFromMessage).isEqualTo(Reference.of("state", nextState.getId()));
+                });
+
             })
         );
     }
