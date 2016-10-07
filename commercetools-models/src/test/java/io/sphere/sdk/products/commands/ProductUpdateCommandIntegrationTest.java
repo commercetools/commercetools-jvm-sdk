@@ -1240,6 +1240,42 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
         });
     }
 
+    @Test
+    public void changeAssetNameByVariantId() throws Exception {
+        withProductHavingAssets(client(), product -> {
+            final LocalizedString newName = LocalizedString.ofEnglish("new name");
+            final ProductVariant masterVariant = product.getMasterData().getStaged().getMasterVariant();
+            final String assetId = masterVariant.getAssets().get(0).getId();
+
+            final ProductUpdateCommand cmd =
+                    ProductUpdateCommand.of(product, ChangeAssetName.ofVariantId(masterVariant.getId(), assetId, newName));
+            final Product updatedProduct = client().executeBlocking(cmd);
+
+            final Asset updatedAsset = updatedProduct.getMasterData().getStaged().getMasterVariant().getAssets().get(0);
+            assertThat(updatedAsset.getName()).isEqualTo(newName);
+
+            return updatedProduct;
+        });
+    }
+
+    @Test
+    public void changeAssetNameBySku() throws Exception {
+        withProductHavingAssets(client(), product -> {
+            final LocalizedString newName = LocalizedString.ofEnglish("new name");
+            final ProductVariant masterVariant = product.getMasterData().getStaged().getMasterVariant();
+            final String assetId = masterVariant.getAssets().get(0).getId();
+
+            final ProductUpdateCommand cmd =
+                    ProductUpdateCommand.of(product, ChangeAssetName.ofSku(masterVariant.getSku(), assetId, newName));
+            final Product updatedProduct = client().executeBlocking(cmd);
+
+            final Asset updatedAsset = updatedProduct.getMasterData().getStaged().getMasterVariant().getAssets().get(0);
+            assertThat(updatedAsset.getName()).isEqualTo(newName);
+
+            return updatedProduct;
+        });
+    }
+
     private void withProductOfSku(final String sku, final Function<Product, Product> productProductFunction) {
         withUpdateableProduct(client(), builder -> {
             return builder.masterVariant(ProductVariantDraftBuilder.of(builder.getMasterVariant()).sku(sku).build());
@@ -1256,7 +1292,7 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
 
     private static void withUpdateableProductProjectionOfMultipleVariants(final BlockingSphereClient client,
                                                                           final Function<ProductProjection, Versioned<Product>> f) {
-        withUpdateableProductOfMultipleVariants(client(), product -> {
+        withUpdateableProductOfMultipleVariants(client, product -> {
             //given
             final ProductProjection productProjection =
                     client().executeBlocking(ProductProjectionByIdGet.of(product, STAGED));
