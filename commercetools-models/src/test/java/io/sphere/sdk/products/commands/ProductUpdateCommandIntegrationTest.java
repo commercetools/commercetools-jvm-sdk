@@ -1276,6 +1276,42 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
         });
     }
 
+    @Test
+    public void setAssetDescriptionByVariantId() throws Exception {
+        withProductHavingAssets(client(), product -> {
+            final LocalizedString newDescription = LocalizedString.ofEnglish("new description");
+            final ProductVariant masterVariant = product.getMasterData().getStaged().getMasterVariant();
+            final String assetId = masterVariant.getAssets().get(0).getId();
+
+            final ProductUpdateCommand cmd =
+                    ProductUpdateCommand.of(product, SetAssetDescription.ofVariantId(masterVariant.getId(), assetId, newDescription));
+            final Product updatedProduct = client().executeBlocking(cmd);
+
+            final Asset updatedAsset = updatedProduct.getMasterData().getStaged().getMasterVariant().getAssets().get(0);
+            assertThat(updatedAsset.getDescription()).isEqualTo(newDescription);
+
+            return updatedProduct;
+        });
+    }
+
+    @Test
+    public void setAssetDescriptionBySku() throws Exception {
+        withProductHavingAssets(client(), product -> {
+            final LocalizedString newDescription = LocalizedString.ofEnglish("new description");
+            final ProductVariant masterVariant = product.getMasterData().getStaged().getMasterVariant();
+            final String assetId = masterVariant.getAssets().get(0).getId();
+
+            final ProductUpdateCommand cmd =
+                    ProductUpdateCommand.of(product, SetAssetDescription.ofSku(masterVariant.getSku(), assetId, newDescription));
+            final Product updatedProduct = client().executeBlocking(cmd);
+
+            final Asset updatedAsset = updatedProduct.getMasterData().getStaged().getMasterVariant().getAssets().get(0);
+            assertThat(updatedAsset.getDescription()).isEqualTo(newDescription);
+
+            return updatedProduct;
+        });
+    }
+
     private void withProductOfSku(final String sku, final Function<Product, Product> productProductFunction) {
         withUpdateableProduct(client(), builder -> {
             return builder.masterVariant(ProductVariantDraftBuilder.of(builder.getMasterVariant()).sku(sku).build());
