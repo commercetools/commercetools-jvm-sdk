@@ -479,4 +479,25 @@ public class CartUpdateCommandIntegrationTest extends IntegrationTest {
             return updatedCart;
         });
     }
+
+    @Test
+    public void setLineItemTotalPrice() throws Exception {
+        withFilledCart(client(), (Cart cart) -> {
+            final LineItem originalLineItem = cart.getLineItems().get(0);
+            assertThat(originalLineItem.getPrice().getValue()).isEqualTo(MoneyImpl.ofCents(1234, EUR));
+            assertThat(originalLineItem.getTotalPrice()).isEqualTo(MoneyImpl.ofCents(3702, EUR));
+            assertThat(originalLineItem.getQuantity()).isEqualTo(3L);
+
+            final String lineItemId = originalLineItem.getId();
+            final MonetaryAmount itemPrice = MoneyImpl.ofCents(100, EUR);
+            final MonetaryAmount totalPrice = MoneyImpl.ofCents(300, EUR);
+            final SetLineItemTotalPrice updateAction = SetLineItemTotalPrice.of(lineItemId,
+                    ExternalLineItemTotalPrice.ofPriceAndTotalPrice(itemPrice, totalPrice));
+            final Cart updatedCart = client().executeBlocking(CartUpdateCommand.of(cart, updateAction));
+
+            final LineItem lineItem = updatedCart.getLineItems().get(0);
+            assertThat(lineItem.getPrice().getValue()).isEqualTo(itemPrice);
+            assertThat(lineItem.getTotalPrice()).isEqualTo(totalPrice);
+        });
+    }
 }
