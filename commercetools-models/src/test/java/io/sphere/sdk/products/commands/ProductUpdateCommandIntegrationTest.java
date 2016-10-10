@@ -29,6 +29,9 @@ import io.sphere.sdk.suppliers.TShirtProductTypeDraftSupplier.Sizes;
 import io.sphere.sdk.taxcategories.TaxCategoryFixtures;
 import io.sphere.sdk.test.IntegrationTest;
 import io.sphere.sdk.test.SphereTestUtils;
+import io.sphere.sdk.types.CustomFieldsDraft;
+import io.sphere.sdk.types.CustomFieldsDraftBuilder;
+import io.sphere.sdk.types.Type;
 import io.sphere.sdk.utils.MoneyImpl;
 import org.junit.Test;
 
@@ -1345,6 +1348,78 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
             assertThat(updatedAsset.getTags()).isEqualTo(newTags);
 
             return updatedProduct;
+        });
+    }
+
+    @Test
+    public void assetCustomTypeByVariantId() throws Exception {
+        withUpdateableType(client(), (Type type) -> {
+            withProductHavingAssets(client(), product -> {
+                final ProductVariant masterVariant = product.getMasterData().getStaged().getMasterVariant();
+                final Asset assetWithoutCustomType = masterVariant.getAssets().get(0);
+                final String assetId = assetWithoutCustomType.getId();
+
+                final String firstFieldValue = "commercetools";
+                final CustomFieldsDraft customFieldsDraft = CustomFieldsDraftBuilder.ofType(type)
+                        .addObject(STRING_FIELD_NAME, firstFieldValue)
+                        .build();
+                final Integer variantId = masterVariant.getId();
+                final ProductUpdateCommand cmd = ProductUpdateCommand.of(product,
+                        SetAssetCustomType.ofVariantId(variantId, assetId, customFieldsDraft));
+                final Product updatedProductWithCustomTypeInAssets = client().executeBlocking(cmd);
+
+                final String actualFieldValue = updatedProductWithCustomTypeInAssets.getMasterData()
+                        .getStaged().getMasterVariant()
+                        .getAssets().get(0).getCustom().getFieldAsString(STRING_FIELD_NAME);
+                assertThat(actualFieldValue).isEqualTo(actualFieldValue);
+
+                final Product updatedProduct = client().executeBlocking(ProductUpdateCommand.of(updatedProductWithCustomTypeInAssets,
+                        SetAssetCustomField.ofVariantId(variantId, assetId, STRING_FIELD_NAME, "new")));
+
+                assertThat(updatedProduct.getMasterData()
+                        .getStaged().getMasterVariant()
+                        .getAssets().get(0).getCustom().getFieldAsString(STRING_FIELD_NAME))
+                        .isEqualTo("new");
+
+                return updatedProduct;
+            });
+            return type;
+        });
+    }
+
+    @Test
+    public void assetCustomTypeBySku() throws Exception {
+        withUpdateableType(client(), (Type type) -> {
+            withProductHavingAssets(client(), product -> {
+                final ProductVariant masterVariant = product.getMasterData().getStaged().getMasterVariant();
+                final Asset assetWithoutCustomType = masterVariant.getAssets().get(0);
+                final String assetId = assetWithoutCustomType.getId();
+
+                final String firstFieldValue = "commercetools";
+                final CustomFieldsDraft customFieldsDraft = CustomFieldsDraftBuilder.ofType(type)
+                        .addObject(STRING_FIELD_NAME, firstFieldValue)
+                        .build();
+                final String sku = masterVariant.getSku();
+                final ProductUpdateCommand cmd = ProductUpdateCommand.of(product,
+                        SetAssetCustomType.ofSku(sku, assetId, customFieldsDraft));
+                final Product updatedProductWithCustomTypeInAssets = client().executeBlocking(cmd);
+
+                final String actualFieldValue = updatedProductWithCustomTypeInAssets.getMasterData()
+                        .getStaged().getMasterVariant()
+                        .getAssets().get(0).getCustom().getFieldAsString(STRING_FIELD_NAME);
+                assertThat(actualFieldValue).isEqualTo(actualFieldValue);
+
+                final Product updatedProduct = client().executeBlocking(ProductUpdateCommand.of(updatedProductWithCustomTypeInAssets,
+                        SetAssetCustomField.ofSku(sku, assetId, STRING_FIELD_NAME, "new")));
+
+                assertThat(updatedProduct.getMasterData()
+                        .getStaged().getMasterVariant()
+                        .getAssets().get(0).getCustom().getFieldAsString(STRING_FIELD_NAME))
+                        .isEqualTo("new");
+
+                return updatedProduct;
+            });
+            return type;
         });
     }
 

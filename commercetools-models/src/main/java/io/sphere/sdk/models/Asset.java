@@ -3,6 +3,7 @@ package io.sphere.sdk.models;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import io.sphere.sdk.types.Custom;
 import io.sphere.sdk.types.CustomFields;
+import io.sphere.sdk.types.TypeDraft;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -31,4 +32,14 @@ public interface Asset extends Custom {
     @Override
     @Nullable
     CustomFields getCustom();
+
+    /**
+     * An identifier for this sub-resource which supports {@link CustomFields}.
+     * @see TypeDraft#getResourceTypeIds()
+     * @see io.sphere.sdk.types.Custom
+     * @return ID of this resource type
+     */
+    static String resourceTypeId() {
+        return "asset";
+    }
 }
