@@ -9,9 +9,7 @@ import io.sphere.sdk.inventory.InventoryEntry;
 import io.sphere.sdk.inventory.InventoryEntryDraft;
 import io.sphere.sdk.inventory.commands.InventoryEntryCreateCommand;
 import io.sphere.sdk.inventory.commands.InventoryEntryDeleteCommand;
-import io.sphere.sdk.models.Reference;
-import io.sphere.sdk.models.Referenceable;
-import io.sphere.sdk.models.Versioned;
+import io.sphere.sdk.models.*;
 import io.sphere.sdk.productdiscounts.commands.ProductDiscountDeleteCommand;
 import io.sphere.sdk.productdiscounts.queries.ProductDiscountQuery;
 import io.sphere.sdk.products.attributes.AttributeDraft;
@@ -356,5 +354,41 @@ public class ProductFixtures {
                     .build();
             ProductFixtures.withProduct(client, () -> productDraft, productConsumer);
         });
+    }
+
+    public static void withProductHavingAssets(final BlockingSphereClient client, final UnaryOperator<Product> op) {
+        withUpdateableProduct(client, productDraftBuilder -> {
+            final ProductVariantDraft masterVariant = productDraftBuilder.getMasterVariant();
+            final ProductVariantDraft variantDraft = ProductVariantDraftBuilder.of(masterVariant)
+                    .assets(asList(getAssetDraft1(), getAssetDraft2()))
+                    .sku(randomKey())
+                    .build();
+            return productDraftBuilder.masterVariant(variantDraft);
+        }, op);
+    }
+
+    private static AssetDraft getAssetDraft1() {
+        final AssetSource assetSource1 = AssetSourceBuilder.ofUri("https://commercetools.com/binaries/content/gallery/commercetoolswebsite/homepage/cases/rewe.jpg")
+                .key(randomKey())
+                .contentType("image/jpg")
+                .dimensionsOfWidthAndHeight(1934, 1115)
+                .build();
+        final LocalizedString name = LocalizedString.ofEnglish("REWE show case");
+        final LocalizedString description = LocalizedString.ofEnglish("screenshot of the REWE webshop on a mobile and a notebook");
+        return AssetDraftBuilder.of(singletonList(assetSource1), name)
+                .description(description)
+                .tags("desktop-sized", "jpg-format", "REWE", "awesome")
+                .build();
+    }
+
+    private static AssetDraft getAssetDraft2() {
+        final AssetSource assetSource1 = AssetSourceBuilder.ofUri("http://dev.commercetools.com/assets/img/CT-logo.svg")
+                .key(randomKey())
+                .contentType("image/svg+xml")
+                .build();
+        final LocalizedString name = LocalizedString.ofEnglish("commercetools logo");
+        return AssetDraftBuilder.of(singletonList(assetSource1), name)
+                .tags("desktop-sized", "svg-format", "commercetools", "awesome")
+                .build();
     }
 }

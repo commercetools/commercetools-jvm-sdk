@@ -12,6 +12,7 @@ public class ResourceDraftBuildersCanBeCreatedByDrafts extends ClassStrategyRule
                 && !simpleName.equals("OrderImportDraftBuilder")
                 && !simpleName.equals("ProductVariantImportDraftBuilder")
                 && !simpleName.equals("ExternalTaxRateDraftBuilder")
+                && !simpleName.equals("AssetDraftBuilder")
                 && !simpleName.equals("LineItemImportDraftBuilder");
     }
 

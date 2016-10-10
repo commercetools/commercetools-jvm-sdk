@@ -9,7 +9,6 @@ import io.sphere.sdk.types.Type;
 
 import javax.annotation.Nullable;
 import java.util.Map;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 public abstract class SetCustomTypeBase<T> extends UpdateActionImpl<T> {

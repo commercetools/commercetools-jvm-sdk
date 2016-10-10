@@ -1,5 +1,6 @@
 package io.sphere.sdk.products;
 
+import io.sphere.sdk.models.AssetDraft;
 import io.sphere.sdk.products.attributes.AttributeDraft;
 import io.sphere.sdk.products.attributes.NamedAttributeAccess;
 import io.sphere.sdk.models.Base;
@@ -21,6 +22,8 @@ public final class ProductVariantDraftBuilder extends Base implements Builder<Pr
     private List<AttributeDraft> attributes = Collections.emptyList();
 
     private List<Image> images = Collections.emptyList();
+
+    private List<AssetDraft> assets = Collections.emptyList();
 
     @Nullable
     private String key;
@@ -93,8 +96,13 @@ public final class ProductVariantDraftBuilder extends Base implements Builder<Pr
         return this;
     }
 
+    public ProductVariantDraftBuilder assets(@Nullable final List<AssetDraft> assets) {
+        this.assets = assets;
+        return this;
+    }
+
     @Override
     public ProductVariantDraft build() {
-        return new ProductVariantDraftImpl(sku, prices, attributes, images, key);
+        return new ProductVariantDraftImpl(sku, prices, attributes, images, key, assets);
     }
 }

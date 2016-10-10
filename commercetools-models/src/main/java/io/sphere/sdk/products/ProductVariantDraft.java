@@ -1,6 +1,7 @@
 package io.sphere.sdk.products;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import io.sphere.sdk.models.AssetDraft;
 import io.sphere.sdk.products.attributes.AttributeDraft;
 
 import javax.annotation.Nullable;
@@ -22,4 +23,7 @@ public interface ProductVariantDraft {
 
     @Nullable
     String getKey();
+
+    @Nullable
+    List<AssetDraft> getAssets();
 }

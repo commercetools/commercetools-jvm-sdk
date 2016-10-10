@@ -29,6 +29,9 @@ import io.sphere.sdk.suppliers.TShirtProductTypeDraftSupplier.Sizes;
 import io.sphere.sdk.taxcategories.TaxCategoryFixtures;
 import io.sphere.sdk.test.IntegrationTest;
 import io.sphere.sdk.test.SphereTestUtils;
+import io.sphere.sdk.types.CustomFieldsDraft;
+import io.sphere.sdk.types.CustomFieldsDraftBuilder;
+import io.sphere.sdk.types.Type;
 import io.sphere.sdk.utils.MoneyImpl;
 import org.junit.Test;
 
@@ -1115,6 +1118,311 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
         });
     }
 
+    @Test
+    public void addAssetByVariantId() {
+        withProduct(client(), (Product product) -> {
+            final AssetSource assetSource = AssetSourceBuilder.ofUri("https://commercetools.com/binaries/content/gallery/commercetoolswebsite/homepage/cases/rewe.jpg")
+                    .key("rewe-showcase")
+                    .contentType("image/jpg")
+                    .dimensionsOfWidthAndHeight(1934, 1115)
+                    .build();
+            final LocalizedString name = LocalizedString.ofEnglish("REWE show case");
+            final LocalizedString description = LocalizedString.ofEnglish("screenshot of the REWE webshop on a mobile and a notebook");
+            final AssetDraft assetDraft = AssetDraftBuilder.of(singletonList(assetSource), name)
+                    .description(description)
+                    .tags("desktop-sized", "jpg-format", "REWE", "awesome")
+                    .build();
+            final Product updatedProduct = client().executeBlocking(ProductUpdateCommand.of(product, AddAsset.ofVariantId(MASTER_VARIANT_ID, assetDraft)));
+
+            final List<Asset> assets = updatedProduct.getMasterData().getStaged().getMasterVariant().getAssets();
+            assertThat(assets).hasSize(1);
+            final Asset asset = assets.get(0);
+            assertThat(asset.getId()).isNotEmpty();
+            assertThat(asset.getDescription()).isEqualTo(description);
+            assertThat(asset.getName()).isEqualTo(name);
+            assertThat(asset.getSources()).hasSize(1);
+            final AssetSource source = asset.getSources().get(0);
+            assertThat(source.getUri()).isEqualTo("https://commercetools.com/binaries/content/gallery/commercetoolswebsite/homepage/cases/rewe.jpg");
+            assertThat(source.getKey()).isEqualTo("rewe-showcase");
+            assertThat(source.getContentType()).isEqualTo("image/jpg");
+            assertThat(source.getDimensions()).isEqualTo(AssetDimensions.ofWidthAndHeight(1934, 1115));
+        });
+    }
+
+    @Test
+    public void addAssetBySku() {
+        withProduct(client(), (Product product) -> {
+            final AssetSource assetSource = AssetSourceBuilder.ofUri("https://commercetools.com/binaries/content/gallery/commercetoolswebsite/homepage/cases/rewe.jpg")
+                    .build();
+            final LocalizedString name = LocalizedString.ofEnglish("REWE show case");
+            final AssetDraft assetDraft = AssetDraftBuilder.of(singletonList(assetSource), name)
+                    .build();
+            final String sku = product.getMasterData().getStaged().getMasterVariant().getSku();
+            final ProductUpdateCommand cmd = ProductUpdateCommand.of(product, AddAsset.ofSku(sku, assetDraft));
+            final Product updatedProduct = client().executeBlocking(cmd);
+
+            final List<Asset> assets = updatedProduct.getMasterData().getStaged().getMasterVariant().getAssets();
+            assertThat(assets).hasSize(1);
+            final Asset asset = assets.get(0);
+            assertThat(asset.getName()).isEqualTo(name);
+            assertThat(asset.getSources()).hasSize(1);
+            final AssetSource source = asset.getSources().get(0);
+            assertThat(source.getUri()).isEqualTo("https://commercetools.com/binaries/content/gallery/commercetoolswebsite/homepage/cases/rewe.jpg");
+        });
+    }
+
+    @Test
+    public void removeAssetByVariantId() {
+        withProductHavingAssets(client(), product -> {
+            final List<Asset> originalAssets = product.getMasterData().getStaged().getMasterVariant().getAssets();
+            final Asset assetToRemove = originalAssets.get(0);
+            final String assetId = assetToRemove.getId();
+            final Product updatedProduct = client().executeBlocking(ProductUpdateCommand.of(product, RemoveAsset.ofVariantId(MASTER_VARIANT_ID, assetId)));
+
+            final List<Asset> assets = updatedProduct.getMasterData().getStaged().getMasterVariant().getAssets();
+            assertThat(assets).hasSize(originalAssets.size() - 1);
+            assertThat(assets).allMatch(asset -> !asset.getId().equals(assetId));
+
+            return updatedProduct;
+        });
+    }
+
+    @Test
+    public void removeAssetBySku() {
+        withProductHavingAssets(client(), product -> {
+            final ProductVariant masterVariant = product.getMasterData().getStaged().getMasterVariant();
+            final String assetId = masterVariant.getAssets().get(0).getId();
+            final String sku = masterVariant.getSku();
+            final Product updatedProduct = client().executeBlocking(ProductUpdateCommand.of(product, RemoveAsset.ofSku(sku, assetId)));
+
+            final List<Asset> assets = updatedProduct.getMasterData().getStaged().getMasterVariant().getAssets();
+            assertThat(assets).allMatch(asset -> !asset.getId().equals(assetId));
+
+            return updatedProduct;
+        });
+    }
+
+    @Test
+    public void changeAssetOrderByVariantId() {
+        withProductHavingAssets(client(), product -> {
+            final List<Asset> originalAssets = product.getMasterData().getStaged().getMasterVariant().getAssets();
+
+            final List<String> newAssetOrder =
+                    new LinkedList<>(originalAssets.stream().map(Asset::getId).collect(toList()));
+            Collections.reverse(newAssetOrder);
+
+            final ProductUpdateCommand cmd =
+                    ProductUpdateCommand.of(product, ChangeAssetOrder.ofVariantId(MASTER_VARIANT_ID, newAssetOrder));
+            final Product updatedProduct = client().executeBlocking(cmd);
+
+            final List<Asset> assets = updatedProduct.getMasterData().getStaged().getMasterVariant().getAssets();
+            assertThat(assets).extracting(Asset::getId).isEqualTo(newAssetOrder);
+
+            return updatedProduct;
+        });
+    }
+
+    @Test
+    public void changeAssetOrderBySku() {
+        withProductHavingAssets(client(), product -> {
+            final ProductVariant masterVariant = product.getMasterData().getStaged().getMasterVariant();
+            final List<Asset> originalAssets = masterVariant.getAssets();
+
+            final List<String> newAssetOrder =
+                    new LinkedList<>(originalAssets.stream().map(Asset::getId).collect(toList()));
+            Collections.reverse(newAssetOrder);
+
+            final ProductUpdateCommand cmd =
+                    ProductUpdateCommand.of(product, ChangeAssetOrder.ofSku(masterVariant.getSku(), newAssetOrder));
+            final Product updatedProduct = client().executeBlocking(cmd);
+
+            final List<Asset> assets = updatedProduct.getMasterData().getStaged().getMasterVariant().getAssets();
+            assertThat(assets).extracting(Asset::getId).isEqualTo(newAssetOrder);
+
+            return updatedProduct;
+        });
+    }
+
+    @Test
+    public void changeAssetNameByVariantId() throws Exception {
+        withProductHavingAssets(client(), product -> {
+            final LocalizedString newName = LocalizedString.ofEnglish("new name");
+            final ProductVariant masterVariant = product.getMasterData().getStaged().getMasterVariant();
+            final String assetId = masterVariant.getAssets().get(0).getId();
+
+            final ProductUpdateCommand cmd =
+                    ProductUpdateCommand.of(product, ChangeAssetName.ofVariantId(masterVariant.getId(), assetId, newName));
+            final Product updatedProduct = client().executeBlocking(cmd);
+
+            final Asset updatedAsset = updatedProduct.getMasterData().getStaged().getMasterVariant().getAssets().get(0);
+            assertThat(updatedAsset.getName()).isEqualTo(newName);
+
+            return updatedProduct;
+        });
+    }
+
+    @Test
+    public void changeAssetNameBySku() throws Exception {
+        withProductHavingAssets(client(), product -> {
+            final LocalizedString newName = LocalizedString.ofEnglish("new name");
+            final ProductVariant masterVariant = product.getMasterData().getStaged().getMasterVariant();
+            final String assetId = masterVariant.getAssets().get(0).getId();
+
+            final ProductUpdateCommand cmd =
+                    ProductUpdateCommand.of(product, ChangeAssetName.ofSku(masterVariant.getSku(), assetId, newName));
+            final Product updatedProduct = client().executeBlocking(cmd);
+
+            final Asset updatedAsset = updatedProduct.getMasterData().getStaged().getMasterVariant().getAssets().get(0);
+            assertThat(updatedAsset.getName()).isEqualTo(newName);
+
+            return updatedProduct;
+        });
+    }
+
+    @Test
+    public void setAssetDescriptionByVariantId() throws Exception {
+        withProductHavingAssets(client(), product -> {
+            final LocalizedString newDescription = LocalizedString.ofEnglish("new description");
+            final ProductVariant masterVariant = product.getMasterData().getStaged().getMasterVariant();
+            final String assetId = masterVariant.getAssets().get(0).getId();
+
+            final ProductUpdateCommand cmd =
+                    ProductUpdateCommand.of(product, SetAssetDescription.ofVariantId(masterVariant.getId(), assetId, newDescription));
+            final Product updatedProduct = client().executeBlocking(cmd);
+
+            final Asset updatedAsset = updatedProduct.getMasterData().getStaged().getMasterVariant().getAssets().get(0);
+            assertThat(updatedAsset.getDescription()).isEqualTo(newDescription);
+
+            return updatedProduct;
+        });
+    }
+
+    @Test
+    public void setAssetDescriptionBySku() throws Exception {
+        withProductHavingAssets(client(), product -> {
+            final LocalizedString newDescription = LocalizedString.ofEnglish("new description");
+            final ProductVariant masterVariant = product.getMasterData().getStaged().getMasterVariant();
+            final String assetId = masterVariant.getAssets().get(0).getId();
+
+            final ProductUpdateCommand cmd =
+                    ProductUpdateCommand.of(product, SetAssetDescription.ofSku(masterVariant.getSku(), assetId, newDescription));
+            final Product updatedProduct = client().executeBlocking(cmd);
+
+            final Asset updatedAsset = updatedProduct.getMasterData().getStaged().getMasterVariant().getAssets().get(0);
+            assertThat(updatedAsset.getDescription()).isEqualTo(newDescription);
+
+            return updatedProduct;
+        });
+    }
+
+    @Test
+    public void setAssetTagsByVariantId() throws Exception {
+        withProductHavingAssets(client(), product -> {
+            final Set<String> newTags = new HashSet<>(asList("tag1", "tag2"));
+            final ProductVariant masterVariant = product.getMasterData().getStaged().getMasterVariant();
+            final String assetId = masterVariant.getAssets().get(0).getId();
+
+            final ProductUpdateCommand cmd =
+                    ProductUpdateCommand.of(product, SetAssetTags.ofVariantId(masterVariant.getId(), assetId, newTags));
+            final Product updatedProduct = client().executeBlocking(cmd);
+
+            final Asset updatedAsset = updatedProduct.getMasterData().getStaged().getMasterVariant().getAssets().get(0);
+            assertThat(updatedAsset.getTags()).isEqualTo(newTags);
+
+            return updatedProduct;
+        });
+    }
+
+    @Test
+    public void setAssetTagsBySku() throws Exception {
+        withProductHavingAssets(client(), product -> {
+            final Set<String> newTags = new HashSet<>(asList("tag1", "tag2"));
+            final ProductVariant masterVariant = product.getMasterData().getStaged().getMasterVariant();
+            final String assetId = masterVariant.getAssets().get(0).getId();
+
+            final ProductUpdateCommand cmd =
+                    ProductUpdateCommand.of(product, SetAssetTags.ofSku(masterVariant.getSku(), assetId, newTags));
+            final Product updatedProduct = client().executeBlocking(cmd);
+
+            final Asset updatedAsset = updatedProduct.getMasterData().getStaged().getMasterVariant().getAssets().get(0);
+            assertThat(updatedAsset.getTags()).isEqualTo(newTags);
+
+            return updatedProduct;
+        });
+    }
+
+    @Test
+    public void assetCustomTypeByVariantId() throws Exception {
+        withUpdateableType(client(), (Type type) -> {
+            withProductHavingAssets(client(), product -> {
+                final ProductVariant masterVariant = product.getMasterData().getStaged().getMasterVariant();
+                final Asset assetWithoutCustomType = masterVariant.getAssets().get(0);
+                final String assetId = assetWithoutCustomType.getId();
+
+                final String firstFieldValue = "commercetools";
+                final CustomFieldsDraft customFieldsDraft = CustomFieldsDraftBuilder.ofType(type)
+                        .addObject(STRING_FIELD_NAME, firstFieldValue)
+                        .build();
+                final Integer variantId = masterVariant.getId();
+                final ProductUpdateCommand cmd = ProductUpdateCommand.of(product,
+                        SetAssetCustomType.ofVariantId(variantId, assetId, customFieldsDraft));
+                final Product updatedProductWithCustomTypeInAssets = client().executeBlocking(cmd);
+
+                final String actualFieldValue = updatedProductWithCustomTypeInAssets.getMasterData()
+                        .getStaged().getMasterVariant()
+                        .getAssets().get(0).getCustom().getFieldAsString(STRING_FIELD_NAME);
+                assertThat(actualFieldValue).isEqualTo(actualFieldValue);
+
+                final Product updatedProduct = client().executeBlocking(ProductUpdateCommand.of(updatedProductWithCustomTypeInAssets,
+                        SetAssetCustomField.ofVariantId(variantId, assetId, STRING_FIELD_NAME, "new")));
+
+                assertThat(updatedProduct.getMasterData()
+                        .getStaged().getMasterVariant()
+                        .getAssets().get(0).getCustom().getFieldAsString(STRING_FIELD_NAME))
+                        .isEqualTo("new");
+
+                return updatedProduct;
+            });
+            return type;
+        });
+    }
+
+    @Test
+    public void assetCustomTypeBySku() throws Exception {
+        withUpdateableType(client(), (Type type) -> {
+            withProductHavingAssets(client(), product -> {
+                final ProductVariant masterVariant = product.getMasterData().getStaged().getMasterVariant();
+                final Asset assetWithoutCustomType = masterVariant.getAssets().get(0);
+                final String assetId = assetWithoutCustomType.getId();
+
+                final String firstFieldValue = "commercetools";
+                final CustomFieldsDraft customFieldsDraft = CustomFieldsDraftBuilder.ofType(type)
+                        .addObject(STRING_FIELD_NAME, firstFieldValue)
+                        .build();
+                final String sku = masterVariant.getSku();
+                final ProductUpdateCommand cmd = ProductUpdateCommand.of(product,
+                        SetAssetCustomType.ofSku(sku, assetId, customFieldsDraft));
+                final Product updatedProductWithCustomTypeInAssets = client().executeBlocking(cmd);
+
+                final String actualFieldValue = updatedProductWithCustomTypeInAssets.getMasterData()
+                        .getStaged().getMasterVariant()
+                        .getAssets().get(0).getCustom().getFieldAsString(STRING_FIELD_NAME);
+                assertThat(actualFieldValue).isEqualTo(actualFieldValue);
+
+                final Product updatedProduct = client().executeBlocking(ProductUpdateCommand.of(updatedProductWithCustomTypeInAssets,
+                        SetAssetCustomField.ofSku(sku, assetId, STRING_FIELD_NAME, "new")));
+
+                assertThat(updatedProduct.getMasterData()
+                        .getStaged().getMasterVariant()
+                        .getAssets().get(0).getCustom().getFieldAsString(STRING_FIELD_NAME))
+                        .isEqualTo("new");
+
+                return updatedProduct;
+            });
+            return type;
+        });
+    }
+
     private void withProductOfSku(final String sku, final Function<Product, Product> productProductFunction) {
         withUpdateableProduct(client(), builder -> {
             return builder.masterVariant(ProductVariantDraftBuilder.of(builder.getMasterVariant()).sku(sku).build());
@@ -1131,7 +1439,7 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
 
     private static void withUpdateableProductProjectionOfMultipleVariants(final BlockingSphereClient client,
                                                                           final Function<ProductProjection, Versioned<Product>> f) {
-        withUpdateableProductOfMultipleVariants(client(), product -> {
+        withUpdateableProductOfMultipleVariants(client, product -> {
             //given
             final ProductProjection productProjection =
                     client().executeBlocking(ProductProjectionByIdGet.of(product, STAGED));

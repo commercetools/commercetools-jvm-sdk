@@ -8,6 +8,7 @@ import io.sphere.sdk.channels.Channel;
 import io.sphere.sdk.client.BlockingSphereClient;
 import io.sphere.sdk.customers.Customer;
 import io.sphere.sdk.inventory.InventoryEntry;
+import io.sphere.sdk.models.Asset;
 import io.sphere.sdk.models.EnumValue;
 import io.sphere.sdk.models.LocalizedEnumValue;
 import io.sphere.sdk.models.TextInputHint;
@@ -41,7 +42,7 @@ public class TypeFixtures {
     public static final String ENUM_FIELD_NAME = "enum-field-name";
     public static final String CAT_REFERENCE_FIELD_NAME = "catref";
     public static final String LOCALIZED_ENUM_FIELD_NAME = "localized-enum-field-name";
-    public static final Set<String> TYPE_IDS = new HashSet<>(asList(Category.resourceTypeId(), Customer.resourceTypeId(), Cart.resourceTypeId(), Order.resourceTypeId(), LineItem.resourceTypeId(), CustomLineItem.resourceTypeId(), Payment.resourceTypeId(), AddInterfaceInteraction.resourceTypeId(), Price.resourceTypeId(), Review.resourceTypeId(), Channel.referenceTypeId(), InventoryEntry.resourceTypeId()));
+    public static final Set<String> TYPE_IDS = new HashSet<>(asList(Category.resourceTypeId(), Customer.resourceTypeId(), Cart.resourceTypeId(), Order.resourceTypeId(), LineItem.resourceTypeId(), CustomLineItem.resourceTypeId(), Payment.resourceTypeId(), AddInterfaceInteraction.resourceTypeId(), Price.resourceTypeId(), Review.resourceTypeId(), Channel.referenceTypeId(), InventoryEntry.resourceTypeId(), Asset.resourceTypeId()));
     public static final String STRING_FIELD_NAME = "string-field-name";
     public static final String STRING_SET_FIELD_NAME = "string-set-field-name";
     public static final String TYPE_NAME = "name of the custom type";

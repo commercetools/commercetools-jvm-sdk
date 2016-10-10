@@ -2,10 +2,13 @@ package io.sphere.sdk.products;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import io.sphere.sdk.json.JsonException;
+import io.sphere.sdk.models.Asset;
 import io.sphere.sdk.products.attributes.Attribute;
 import io.sphere.sdk.products.attributes.AttributeMapper;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -31,13 +34,15 @@ class ProductVariantImpl extends AttributeContainerImpl implements ProductVarian
     private final Boolean scopedPriceDiscounted;
     @Nullable
     private final String key;
+    private final List<Asset> assets;
 
     @JsonCreator
     ProductVariantImpl(final Integer id, @Nullable final String sku, final List<Price> prices, final List<Attribute> attributes,
                        final List<Image> images, @Nullable final ProductVariantAvailability availability,
                        @Nullable final Boolean isMatchingVariant, @Nullable final String productId,
                        @Nullable final Price price, @Nullable final ScopedPrice scopedPrice,
-                       @Nullable final Boolean scopedPriceDiscounted, @Nullable final String key) {
+                       @Nullable final Boolean scopedPriceDiscounted, @Nullable final String key,
+                       @Nullable final List<Asset> assets) {
         super(attributes);
         this.id = id;
         this.sku = sku;
@@ -50,6 +55,7 @@ class ProductVariantImpl extends AttributeContainerImpl implements ProductVarian
         this.scopedPrice = scopedPrice;
         this.scopedPriceDiscounted = scopedPriceDiscounted;
         this.key = key;
+        this.assets = assets == null ? Collections.emptyList() : assets;
     }
 
     @Override
@@ -112,6 +118,12 @@ class ProductVariantImpl extends AttributeContainerImpl implements ProductVarian
     @Nullable
     public String getKey() {
         return key;
+    }
+
+    @Nonnull
+    @Override
+    public List<Asset> getAssets() {
+        return assets;
     }
 
     @Override
