@@ -184,12 +184,25 @@ public class ProductFixtures {
             final boolean isPublished = loadedProduct.getMasterData().isPublished();
             final Product unPublishedProduct;
             if (isPublished) {
-                unPublishedProduct = client.executeBlocking(ProductUpdateCommand.of(loadedProduct, asList(Unpublish.of())));
+                unPublishedProduct = unpublishWithRetry(client, loadedProduct, 5);
             } else {
                 unPublishedProduct = loadedProduct;
             }
             deleteWithRetry(client, unPublishedProduct, 5);
         });
+    }
+
+    private static Product unpublishWithRetry(final BlockingSphereClient client, final Versioned<Product> product, final int ttl) {
+        if (ttl > 0) {
+            try {
+                return client.executeBlocking(ProductUpdateCommand.of(product, Unpublish.of()));
+            } catch(final ConcurrentModificationException e) {
+                final Versioned<Product> versioned = Versioned.of(product.getId(), e.getCurrentVersion());
+                return unpublishWithRetry(client, versioned, ttl - 1);
+            }
+        } else {
+            throw new RuntimeException("cannot unpublish product due to too much concurrent updates, product: " + product);
+        }
     }
 
     private static void deleteWithRetry(final BlockingSphereClient client, final Versioned<Product> unPublishedProduct, final int ttl) {
