@@ -13,6 +13,7 @@ import org.slf4j.LoggerFactory;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionStage;
 
 import static io.sphere.sdk.client.HttpResponseBodyUtils.bytesToString;
@@ -36,13 +37,14 @@ final class SphereClientImpl extends AutoCloseableService implements SphereClien
     public <T> CompletionStage<T> execute(final SphereRequest<T> sphereRequest) {
         rejectExcutionIfClosed("Client is already closed.");
         try {
-            return tokenSupplier.get().thenComposeAsync(token -> execute(sphereRequest, token));
+            final int ttl = 1;
+            return tokenSupplier.get().thenComposeAsync(token -> execute(sphereRequest, token, ttl));
         } catch (final Throwable throwable) {
             return CompletableFutureUtils.failed(throwable);
         }
     }
 
-    private <T> CompletionStage<T> execute(final SphereRequest<T> sphereRequest, final String token) {
+    private <T> CompletionStage<T> execute(final SphereRequest<T> sphereRequest, final String token, final int ttl) {
         final HttpRequest httpRequest = createHttpRequest(sphereRequest, token);
         final SphereInternalLogger logger = getLogger(httpRequest);
         logger.debug(() -> sphereRequest);
@@ -70,7 +72,11 @@ final class SphereClientImpl extends AutoCloseableService implements SphereClien
             }
             return output;
         });
-        return httpClient.execute(httpRequest).thenApplyAsync(httpResponse -> {
+        return executeWithRecover(sphereRequest, httpRequest, ttl);
+    }
+
+    private <T> CompletableFuture<T> executeWithRecover(final SphereRequest<T> sphereRequest, final HttpRequest httpRequest, final int ttl) {
+        final CompletionStage<T> intermediateResult = httpClient.execute(httpRequest).thenApplyAsync(httpResponse -> {
             try {
                 return processHttpResponse(sphereRequest, objectMapper, config, httpResponse, httpRequest);
             } catch (final SphereException e) {
@@ -78,6 +84,21 @@ final class SphereClientImpl extends AutoCloseableService implements SphereClien
                 throw e;
             }
         });
+        final CompletableFuture<T> result = new CompletableFuture<T>();
+        intermediateResult.whenCompleteAsync((value, throwable) -> {
+            if (throwable != null) {
+                if (throwable.getCause() instanceof InvalidTokenException && ttl > 0 && tokenSupplier instanceof RefreshableSphereAccessTokenSupplier) {
+                    final RefreshableSphereAccessTokenSupplier supplier = (RefreshableSphereAccessTokenSupplier) tokenSupplier;
+                    final CompletionStage<T> nextAttemptCompletionStage = supplier.getNewToken().thenComposeAsync(token -> execute(sphereRequest, token, ttl - 1));
+                    CompletableFutureUtils.transferResult(nextAttemptCompletionStage, result);
+                } else {
+                    result.completeExceptionally(throwable);
+                }
+            } else {
+                result.complete(value);
+            }
+        });
+        return result;
     }
 
     private <T> HttpRequest createHttpRequest(final SphereRequest<T> sphereRequest, final String token) {
@@ -96,7 +117,7 @@ final class SphereClientImpl extends AutoCloseableService implements SphereClien
         logger.trace(() -> httpResponse.getStatusCode() + "\n" + Optional.ofNullable(httpResponse.getResponseBody()).map(body -> SphereJsonUtils.prettyPrint(bytesToString(body))).orElse("No body present."));
         final List<String> notices = httpResponse.getHeaders().getHeadersAsMap().get(SphereHttpHeaders.X_DEPRECATION_NOTICE);
         if (notices != null) {
-            notices.stream().forEach(message -> logger.warn(() -> "Deprecation notice : " + message));
+            notices.forEach(message -> logger.warn(() -> "Deprecation notice : " + message));
         }
         return parse(sphereRequest, objectMapper, config, httpResponse, httpRequest);
     }
