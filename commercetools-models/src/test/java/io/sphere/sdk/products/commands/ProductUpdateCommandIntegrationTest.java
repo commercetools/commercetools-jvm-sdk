@@ -1312,6 +1312,42 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
         });
     }
 
+    @Test
+    public void setAssetTagsByVariantId() throws Exception {
+        withProductHavingAssets(client(), product -> {
+            final Set<String> newTags = new HashSet<>(asList("tag1", "tag2"));
+            final ProductVariant masterVariant = product.getMasterData().getStaged().getMasterVariant();
+            final String assetId = masterVariant.getAssets().get(0).getId();
+
+            final ProductUpdateCommand cmd =
+                    ProductUpdateCommand.of(product, SetAssetTags.ofVariantId(masterVariant.getId(), assetId, newTags));
+            final Product updatedProduct = client().executeBlocking(cmd);
+
+            final Asset updatedAsset = updatedProduct.getMasterData().getStaged().getMasterVariant().getAssets().get(0);
+            assertThat(updatedAsset.getTags()).isEqualTo(newTags);
+
+            return updatedProduct;
+        });
+    }
+
+    @Test
+    public void setAssetTagsBySku() throws Exception {
+        withProductHavingAssets(client(), product -> {
+            final Set<String> newTags = new HashSet<>(asList("tag1", "tag2"));
+            final ProductVariant masterVariant = product.getMasterData().getStaged().getMasterVariant();
+            final String assetId = masterVariant.getAssets().get(0).getId();
+
+            final ProductUpdateCommand cmd =
+                    ProductUpdateCommand.of(product, SetAssetTags.ofSku(masterVariant.getSku(), assetId, newTags));
+            final Product updatedProduct = client().executeBlocking(cmd);
+
+            final Asset updatedAsset = updatedProduct.getMasterData().getStaged().getMasterVariant().getAssets().get(0);
+            assertThat(updatedAsset.getTags()).isEqualTo(newTags);
+
+            return updatedProduct;
+        });
+    }
+
     private void withProductOfSku(final String sku, final Function<Product, Product> productProductFunction) {
         withUpdateableProduct(client(), builder -> {
             return builder.masterVariant(ProductVariantDraftBuilder.of(builder.getMasterVariant()).sku(sku).build());
