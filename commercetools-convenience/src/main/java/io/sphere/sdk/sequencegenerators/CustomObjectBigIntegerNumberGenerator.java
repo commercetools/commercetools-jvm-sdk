@@ -63,12 +63,7 @@ public final class CustomObjectBigIntegerNumberGenerator extends Base implements
     }
 
     private boolean isNullOrConcurrentException(final Throwable throwable) {
-        if (throwable == null) {
-            return true;
-        } else if (throwable.getCause() instanceof ConcurrentModificationException) {
-            return true;
-        }
-        return false;
+        return throwable == null || throwable.getCause() instanceof ConcurrentModificationException;
     }
 
     private CompletionStage<BigInteger> incrementAndGetSequenceNumber() {
