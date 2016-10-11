@@ -82,7 +82,7 @@ public class BigIntegerNumberGeneratorIntegrationTest extends IntegrationTest {
     @Test
     public void concurrentUsageTest() throws Exception {
         final int firstNumber = 1;
-        final int lastNumber = 20;
+        final int lastNumber = 50;
         final BigIntegerNumberGenerator generator = createGenerator();
         final List<CompletionStage<BigInteger>> completionStageNumbers = IntStream.range(firstNumber, lastNumber)
                 .mapToObj(i -> generator.getNextNumber())
