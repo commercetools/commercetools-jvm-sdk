@@ -8,10 +8,14 @@ import io.sphere.sdk.meta.BuildInfo;
 import io.sphere.sdk.models.SphereException;
 import io.sphere.sdk.utils.CompletableFutureUtils;
 import io.sphere.sdk.utils.SphereInternalLogger;
+import org.apache.commons.lang3.SystemUtils;
+import org.apache.commons.lang3.text.StrSubstitutor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.CompletionStage;
 
@@ -24,12 +28,28 @@ final class SphereClientImpl extends AutoCloseableService implements SphereClien
     private final HttpClient httpClient;
     private final SphereApiConfig config;
     private final SphereAccessTokenSupplier tokenSupplier;
+    private final String userAgent;
 
 
     private SphereClientImpl(final SphereApiConfig config, final SphereAccessTokenSupplier tokenSupplier, final HttpClient httpClient) {
         this.httpClient = httpClient;
         this.config = config;
         this.tokenSupplier = tokenSupplier;
+        userAgent = obtainUserAgent(httpClient);
+    }
+
+    private String obtainUserAgent(final HttpClient httpClient) {
+        final String template = "${sdkLikeGitHubRepo}/${sdkVersion} (${underlyingHttpClient}) ${runtime}/${runtimeVersion} (${optionalOs}; ${optionalOsarch})";
+        final Map<String, String> values = new HashMap<>();
+        values.put("sdkLikeGitHubRepo", "commercetools-jvm-sdk");
+        values.put("sdkVersion", BuildInfo.version());
+        final String underlyingHttpClient = Optional.ofNullable(httpClient.getUserAgent()).orElse("unknown/" + BuildInfo.version());
+        values.put("underlyingHttpClient", underlyingHttpClient);
+        values.put("runtime", SystemUtils.JAVA_RUNTIME_NAME.replace("(TM)", ""));
+        values.put("runtimeVersion", SystemUtils.JAVA_RUNTIME_VERSION);
+        values.put("optionalOs", SystemUtils.OS_NAME);
+        values.put("optionalOsarch", SystemUtils.OS_ARCH);
+        return new StrSubstitutor(values).replace(template);
     }
 
     @Override
@@ -83,7 +103,7 @@ final class SphereClientImpl extends AutoCloseableService implements SphereClien
     private <T> HttpRequest createHttpRequest(final SphereRequest<T> sphereRequest, final String token) {
         return sphereRequest
                 .httpRequestIntent()
-                .plusHeader(HttpHeaders.USER_AGENT, BuildInfo.userAgent())
+                .plusHeader(HttpHeaders.USER_AGENT, userAgent)
                 .plusHeader(HttpHeaders.ACCEPT_ENCODING, "gzip")
                 .plusHeader(HttpHeaders.AUTHORIZATION, "Bearer " + token)
                 .prefixPath("/" + config.getProjectKey())

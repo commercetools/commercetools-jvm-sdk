@@ -2,15 +2,18 @@ package io.sphere.sdk.http;
 
 import org.asynchttpclient.*;
 
+import javax.annotation.Nullable;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionStage;
 
 final class DefaultAsyncHttpClient2_0AdapterImpl extends HttpClientAdapterBase {
     private final AsyncHttpClient asyncHttpClient;
+    private final String userAgent;
 
     DefaultAsyncHttpClient2_0AdapterImpl(final AsyncHttpClient asyncHttpClient) {
         this.asyncHttpClient = asyncHttpClient;
+        userAgent = new DefaultAsyncHttpClientConfig.Builder().build().getUserAgent();
     }
 
     @Override
@@ -60,5 +63,11 @@ final class DefaultAsyncHttpClient2_0AdapterImpl extends HttpClientAdapterBase {
     @Override
     protected void closeDelegate() throws Throwable {
         asyncHttpClient.close();
+    }
+
+    @Nullable
+    @Override
+    public String getUserAgent() {
+        return userAgent;
     }
 }
