@@ -9,6 +9,7 @@ import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.utils.MoneyImpl;
 import io.sphere.sdk.utils.SphereInternalUtils;
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.assertj.core.api.SoftAssertions;
 
 import javax.money.CurrencyUnit;
@@ -205,7 +206,8 @@ public final class SphereTestUtils {
     }
 
     public static void assertEventually(final Runnable block) {
-        final Boolean useLongTimeout = Optional.ofNullable(System.getenv("TRAVIS")).map(s -> "true".equals(s)).orElse(false);
+        final Boolean useLongTimeout = "true".equals(System.getenv("TRAVIS"))
+                || StringUtils.isNotEmpty(System.getenv("TEAMCITY_VERSION"));
         final Duration maxWaitTime = Duration.ofSeconds(useLongTimeout ? 60 : 30);
         final Duration waitBeforeRetry = Duration.ofMillis(100);
         assertEventually(maxWaitTime, waitBeforeRetry, block);
