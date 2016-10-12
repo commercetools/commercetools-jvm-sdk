@@ -16,16 +16,16 @@ import java.time.ZonedDateTime;
  * {@include.example io.sphere.sdk.orders.commands.OrderUpdateCommandIntegrationTest#transitionLineItemState()}
  *
  */
-@JsonDeserialize(as = LineItemStateTransitionMessage.class)//important to override annotation in Message class
-public class LineItemStateTransitionMessage extends LikeLineItemStateTranstition {
+@JsonDeserialize(as = LineItemLikeStateTransitionMessage.class)//important to override annotation in Message class
+public final class LineItemLikeStateTransitionMessage extends LineItemLikeStateTransition {
 
     public static final String MESSAGE_TYPE = "LineItemStateTransition";
-    public static final MessageDerivateHint<LineItemStateTransitionMessage> MESSAGE_HINT = MessageDerivateHint.ofSingleMessageType(MESSAGE_TYPE, LineItemStateTransitionMessage.class, Order.referenceTypeId());
+    public static final MessageDerivateHint<LineItemLikeStateTransitionMessage> MESSAGE_HINT = MessageDerivateHint.ofSingleMessageType(MESSAGE_TYPE, LineItemLikeStateTransitionMessage.class, Order.referenceTypeId());
 
     private final String lineItemId;
 
     @JsonCreator
-    public LineItemStateTransitionMessage(final String id, final Long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt, final JsonNode resource, final Long sequenceNumber, final Long resourceVersion, final String type, final Class<Order> clazz, final ZonedDateTime transitionDate, final Long quantity, final Reference<State> fromState, final Reference<State> toState, final String lineItemId) {
+    public LineItemLikeStateTransitionMessage(final String id, final Long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt, final JsonNode resource, final Long sequenceNumber, final Long resourceVersion, final String type, final Class<Order> clazz, final ZonedDateTime transitionDate, final Long quantity, final Reference<State> fromState, final Reference<State> toState, final String lineItemId) {
         super(id, version, createdAt, lastModifiedAt, resource, sequenceNumber, resourceVersion, type, clazz, transitionDate, quantity, fromState, toState);
         this.lineItemId = lineItemId;
     }

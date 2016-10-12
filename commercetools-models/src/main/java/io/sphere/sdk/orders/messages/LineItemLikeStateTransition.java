@@ -8,14 +8,14 @@ import io.sphere.sdk.states.State;
 
 import java.time.ZonedDateTime;
 
-public class LikeLineItemStateTranstition extends GenericMessageImpl<Order> {
+abstract class LineItemLikeStateTransition extends GenericMessageImpl<Order> {
 
     protected final ZonedDateTime transitionDate;
     protected final Long quantity;
     protected final Reference<State> fromState;
     protected final Reference<State> toState;
 
-    public LikeLineItemStateTranstition(final String id, final Long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt, final JsonNode resource, final Long sequenceNumber, final Long resourceVersion, final String type, final Class<Order> clazz, final ZonedDateTime transitionDate, final Long quantity, final Reference<State> fromState, final Reference<State> toState) {
+    public LineItemLikeStateTransition(final String id, final Long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt, final JsonNode resource, final Long sequenceNumber, final Long resourceVersion, final String type, final Class<Order> clazz, final ZonedDateTime transitionDate, final Long quantity, final Reference<State> fromState, final Reference<State> toState) {
         super(id, version, createdAt, lastModifiedAt, resource, sequenceNumber, resourceVersion, type, Order.class);
         this.transitionDate = transitionDate;
         this.quantity = quantity;

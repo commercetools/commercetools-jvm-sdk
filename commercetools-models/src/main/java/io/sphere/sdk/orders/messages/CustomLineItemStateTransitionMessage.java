@@ -17,7 +17,7 @@ import java.time.ZonedDateTime;
  *
  */
 @JsonDeserialize(as = CustomLineItemStateTransitionMessage.class)//important to override annotation in Message class
-public class CustomLineItemStateTransitionMessage extends LikeLineItemStateTranstition {
+public final class CustomLineItemStateTransitionMessage extends LineItemLikeStateTransition {
 
     public static final String MESSAGE_TYPE = "CustomLineItemStateTransition";
     public static final MessageDerivateHint<CustomLineItemStateTransitionMessage> MESSAGE_HINT = MessageDerivateHint.ofSingleMessageType(MESSAGE_TYPE, CustomLineItemStateTransitionMessage.class, Order.referenceTypeId());
