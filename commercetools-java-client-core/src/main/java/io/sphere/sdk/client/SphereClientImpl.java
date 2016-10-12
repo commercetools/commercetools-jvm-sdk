@@ -18,9 +18,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.CompletionStage;
+import java.util.stream.Stream;
 
 import static io.sphere.sdk.client.HttpResponseBodyUtils.bytesToString;
 import static io.sphere.sdk.utils.SphereInternalLogger.getLogger;
+import static java.util.stream.Collectors.joining;
+import static org.apache.commons.lang3.StringUtils.isNotEmpty;
 
 final class SphereClientImpl extends AutoCloseableService implements SphereClient {
     private static final Logger classLogger = LoggerFactory.getLogger(SphereClient.class);
@@ -39,7 +42,7 @@ final class SphereClientImpl extends AutoCloseableService implements SphereClien
     }
 
     private String obtainUserAgent(final HttpClient httpClient) {
-        final String template = "${sdkLikeGitHubRepo}/${sdkVersion} (${underlyingHttpClient}) ${runtime}/${runtimeVersion} (${optionalOs}; ${optionalOsarch})";
+        final String template = "${sdkLikeGitHubRepo}/${sdkVersion} (${underlyingHttpClient}) ${runtime}/${runtimeVersion} (${optionalOs}; ${optionalOsarch}) ${solutionInfos}";
         final Map<String, String> values = new HashMap<>();
         values.put("sdkLikeGitHubRepo", "commercetools-jvm-sdk");
         values.put("sdkVersion", BuildInfo.version());
@@ -49,7 +52,32 @@ final class SphereClientImpl extends AutoCloseableService implements SphereClien
         values.put("runtimeVersion", SystemUtils.JAVA_RUNTIME_VERSION);
         values.put("optionalOs", SystemUtils.OS_NAME);
         values.put("optionalOsarch", SystemUtils.OS_ARCH);
-        return new StrSubstitutor(values).replace(template);
+        values.put("solutionInfos", getSolutionInfoString());
+        return new StrSubstitutor(values).replace(template).trim();
+    }
+
+    private String getSolutionInfoString() {
+        return SolutionInfoService.getInstance().getSolutionInfos().stream()
+                .map(this::format)
+                .collect(joining(" "));
+    }
+
+    private String format(final SolutionInfo solutionInfo) {
+        final StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder
+                .append(solutionInfo.getName())
+                .append("/")
+                .append(solutionInfo.getVersion());
+        if (isNotEmpty(solutionInfo.getWebsite()) && isNotEmpty(solutionInfo.getEmergencyContact())) {
+            stringBuilder.append(" (");
+            final String details = Stream.of(solutionInfo.getWebsite(), solutionInfo.getEmergencyContact())
+                    .filter(x -> x != null)
+                    .map(s -> "+" + s)
+                    .collect(joining("; "));
+            stringBuilder.append(details);
+            stringBuilder.append(")");
+        }
+        return stringBuilder.toString();
     }
 
     @Override
