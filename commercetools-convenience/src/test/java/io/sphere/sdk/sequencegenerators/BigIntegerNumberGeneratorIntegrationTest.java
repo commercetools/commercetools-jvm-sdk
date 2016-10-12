@@ -1,13 +1,21 @@
 package io.sphere.sdk.sequencegenerators;
 
+import io.sphere.sdk.client.NotFoundException;
+import io.sphere.sdk.client.SphereAccessTokenSupplier;
+import io.sphere.sdk.client.SphereApiConfig;
+import io.sphere.sdk.client.SphereClient;
 import io.sphere.sdk.customobjects.CustomObject;
 import io.sphere.sdk.customobjects.queries.CustomObjectByKeyGet;
+import io.sphere.sdk.http.HttpClient;
+import io.sphere.sdk.http.HttpRequest;
+import io.sphere.sdk.http.HttpResponse;
 import io.sphere.sdk.test.IntegrationTest;
 import io.sphere.sdk.utils.CompletableFutureUtils;
 import org.junit.Test;
 
 import java.math.BigInteger;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionStage;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -90,6 +98,44 @@ public class BigIntegerNumberGeneratorIntegrationTest extends IntegrationTest {
         final List<BigInteger> numbersGenerated = CompletableFutureUtils.listOfFuturesToFutureOfList(completionStageNumbers).toCompletableFuture().join();
         final List<BigInteger> expectedNumbers = IntStream.range(firstNumber, lastNumber).mapToObj(i -> BigInteger.valueOf(i)).collect(Collectors.toList());
         assertThat(numbersGenerated.containsAll(expectedNumbers)).isTrue();
+    }
+
+    @Test
+    public void failWithNotConcurrentModificationException() {
+        final String container = randomKey();
+        final String key = randomKey();
+        final CustomObjectBigIntegerNumberGeneratorConfig config =
+                CustomObjectBigIntegerNumberGeneratorConfigBuilder.of(getSphereClient(getBadRequestHttpClient()), key)
+                        .container(container)
+                        .build();
+        final BigIntegerNumberGenerator generator = CustomObjectBigIntegerNumberGenerator.of(config);
+        try {
+            generator.getNextNumber().toCompletableFuture().join();
+        } catch (Exception e) {
+            assertThat(e.getCause() instanceof NotFoundException).isTrue();
+        }
+    }
+
+    private HttpClient getBadRequestHttpClient() {
+        return new HttpClient() {
+            @Override
+            public CompletionStage<HttpResponse> execute(final HttpRequest httpRequest) {
+                final String message = "{\n" +
+                        "  \"statusCode\" : 404,\n" +
+                        "  \"message\" : \"The addressed resource was not found / does not exist..\"\n" +
+                        "}";
+                return CompletableFuture.completedFuture(HttpResponse.of(404, message));
+            }
+
+            @Override
+            public void close() {
+
+            }
+        };
+    }
+
+    private SphereClient getSphereClient(final HttpClient httpClient) {
+        return SphereClient.of(SphereApiConfig.of("projectKey"), httpClient, SphereAccessTokenSupplier.ofConstantToken("accessToken"));
     }
 
     private BigIntegerNumberGenerator createGenerator() {
