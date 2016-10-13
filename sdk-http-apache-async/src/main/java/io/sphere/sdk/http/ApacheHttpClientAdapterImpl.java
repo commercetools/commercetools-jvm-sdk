@@ -125,6 +125,6 @@ final class ApacheHttpClientAdapterImpl extends HttpClientAdapterBase {
     @Nullable
     @Override
     public String getUserAgent() {
-        return null;
+        return "Apache-CloseableHttpAsyncClient/unkown";
     }
 }

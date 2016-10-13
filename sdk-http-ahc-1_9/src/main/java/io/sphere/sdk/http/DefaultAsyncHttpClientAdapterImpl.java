@@ -4,6 +4,7 @@ import com.ning.http.client.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.annotation.Nullable;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.Optional;
@@ -14,9 +15,11 @@ final class DefaultAsyncHttpClientAdapterImpl extends HttpClientAdapterBase {
     private static final Logger LOGGER = LoggerFactory.getLogger(HttpClient.class);
     private final AsyncHttpClient asyncHttpClient;
     private final ForkJoinPool threadPool = new ForkJoinPool();
+    private String userAgent;
 
     DefaultAsyncHttpClientAdapterImpl(final AsyncHttpClient asyncHttpClient) {
         this.asyncHttpClient = asyncHttpClient;
+        userAgent = new AsyncHttpClientConfig.Builder().build().getUserAgent();
     }
 
     @Override
@@ -91,5 +94,11 @@ final class DefaultAsyncHttpClientAdapterImpl extends HttpClientAdapterBase {
     @Override
     protected void closeDelegate() {
         asyncHttpClient.close();
+    }
+
+    @Nullable
+    @Override
+    public String getUserAgent() {
+        return userAgent;
     }
 }
