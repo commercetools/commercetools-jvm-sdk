@@ -4,6 +4,7 @@ import io.sphere.sdk.http.HttpClient;
 import io.sphere.sdk.meta.BuildInfo;
 import org.apache.commons.lang3.SystemUtils;
 import org.apache.commons.lang3.text.StrSubstitutor;
+import org.slf4j.LoggerFactory;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -18,6 +19,15 @@ final class UserAgentUtils {
     }
 
     static String obtainUserAgent(final HttpClient httpClient) {
+        try {
+            return userAgent(httpClient);
+        } catch (final Exception e) {
+            LoggerFactory.getLogger(UserAgentUtils.class).error("cannot determine user agent", e);
+            return "commercetools-jvm-sdk/unknown";
+        }
+    }
+
+    private static String userAgent(final HttpClient httpClient) {
         final String template = "${sdkLikeGitHubRepo}/${sdkVersion} (${underlyingHttpClient}) ${runtime}/${runtimeVersion} (${optionalOs}; ${optionalOsarch}) ${solutionInfos}";
         final Map<String, String> values = new HashMap<>();
         values.put("sdkLikeGitHubRepo", "commercetools-jvm-sdk");
