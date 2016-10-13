@@ -4,15 +4,12 @@ import io.sphere.sdk.http.HttpClient;
 import io.sphere.sdk.http.HttpHeaders;
 import io.sphere.sdk.http.HttpRequest;
 import io.sphere.sdk.http.HttpResponse;
-import io.sphere.sdk.projects.Project;
+import io.sphere.sdk.meta.BuildInfo;
 import io.sphere.sdk.projects.queries.ProjectGet;
 import io.sphere.sdk.test.IntegrationTest;
-import io.sphere.sdk.utils.CompletableFutureUtils;
-import org.asynchttpclient.DefaultAsyncHttpClientConfig;
 import org.junit.Test;
 
 import javax.annotation.Nullable;
-import java.util.List;
 import java.util.concurrent.CompletionStage;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -23,7 +20,10 @@ public class UserAgentIntegrationTest extends IntegrationTest {
         final FakeHttpClient httpClient = new FakeHttpClient();
         final SphereClient client = SphereClientFactory.of(() -> httpClient).createClient(getSphereClientConfig());
         client.execute(ProjectGet.of()).toCompletableFuture().join();
-        assertThat(httpClient.getLastUserAgent()).isEqualTo("commercetools-jvm-sdk/1.0.0 (commercetools-java-client-ahc/2.0) Java/1.8.0_53 (Ubuntu; Linux x86_64) commercetools-payone-integration/0.1 (+https://github.com/commercetools/commercetools-payone-integration/; +helpdesk@commercetools.com)");
+        assertThat(httpClient.getLastUserAgent())
+                .startsWith("commercetools-jvm-sdk")
+                .contains("JVM-SDK-integration-tests")
+                .contains(BuildInfo.version());
     }
 
     private static class FakeHttpClient implements HttpClient {

@@ -7,10 +7,10 @@ import java.util.*;
 //for architecture see https://docs.oracle.com/javase/tutorial/ext/basics/spi.html
 final class SolutionInfoService extends Base {
     private static SolutionInfoService instance;
-    private ServiceLoader<SolutionInfoSupplier> loader;
+    private ServiceLoader<SolutionInfo> loader;
 
     private SolutionInfoService() {
-        loader = ServiceLoader.load(SolutionInfoSupplier.class);
+        loader = ServiceLoader.load(SolutionInfo.class);
     }
 
     public static synchronized SolutionInfoService getInstance() {
@@ -22,7 +22,7 @@ final class SolutionInfoService extends Base {
 
     public List<SolutionInfo> getSolutionInfos() {
         final List<SolutionInfo> solutions = new LinkedList<>();
-        loader.iterator().forEachRemaining(supplier -> solutions.add(supplier.get()));
+        loader.iterator().forEachRemaining(solution -> solutions.add(solution));
         Collections.sort(solutions, Comparator.comparing(SolutionInfo::getName));
         return Collections.unmodifiableList(solutions);
     }
