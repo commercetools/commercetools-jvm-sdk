@@ -1,4 +1,6 @@
-package io.sphere.sdk.http;
+package io.sphere.sdk.client;
+
+import io.sphere.sdk.models.Base;
 
 public final class SolutionInfo extends Base {
     private String name;

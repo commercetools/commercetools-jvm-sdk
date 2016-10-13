@@ -1,8 +1,6 @@
 package io.sphere.sdk.client;
 
 import io.sphere.sdk.http.HttpClient;
-import io.sphere.sdk.http.SolutionInfo;
-import io.sphere.sdk.http.SolutionInfoService;
 import io.sphere.sdk.meta.BuildInfo;
 import org.apache.commons.lang3.SystemUtils;
 import org.apache.commons.lang3.text.StrSubstitutor;

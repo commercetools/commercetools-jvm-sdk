@@ -1,9 +1,11 @@
-package io.sphere.sdk.http;
+package io.sphere.sdk.client;
+
+import io.sphere.sdk.models.Base;
 
 import java.util.*;
 
 //for architecture see https://docs.oracle.com/javase/tutorial/ext/basics/spi.html
-public final class SolutionInfoService extends Base {
+final class SolutionInfoService extends Base {
     private static SolutionInfoService instance;
     private ServiceLoader<SolutionInfoSupplier> loader;
 

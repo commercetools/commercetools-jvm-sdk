@@ -1,4 +1,4 @@
-package io.sphere.sdk.http;
+package io.sphere.sdk.client;
 
 import java.util.function.Supplier;
 

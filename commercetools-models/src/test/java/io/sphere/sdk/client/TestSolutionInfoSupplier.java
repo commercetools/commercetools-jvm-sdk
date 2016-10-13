@@ -1,7 +1,5 @@
 package io.sphere.sdk.client;
 
-import io.sphere.sdk.http.SolutionInfo;
-import io.sphere.sdk.http.SolutionInfoSupplier;
 import io.sphere.sdk.meta.BuildInfo;
 import io.sphere.sdk.models.Base;
 
