@@ -1,6 +1,5 @@
 package io.sphere.sdk.orders.commands;
 
-import com.neovisionaries.i18n.CountryCode;
 import io.sphere.sdk.carts.*;
 import io.sphere.sdk.messages.queries.MessageQuery;
 import io.sphere.sdk.models.Address;
@@ -137,9 +136,25 @@ public class OrderUpdateCommandIntegrationTest extends IntegrationTest {
             final ParcelDraft parcelDraft = ParcelDraft.of(PARCEL_MEASUREMENTS, TRACKING_DATA);
             final AddParcelToDelivery action = AddParcelToDelivery.of(delivery, parcelDraft);
             final Order updatedOrder = client().executeBlocking(OrderUpdateCommand.of(orderWithDelivery, action));
-            final Parcel actual = updatedOrder.getShippingInfo().getDeliveries().get(0).getParcels().get(0);
-            assertThat(actual.getMeasurements()).isEqualTo(PARCEL_MEASUREMENTS);
-            assertThat(actual.getTrackingData()).isEqualTo(TRACKING_DATA);
+            final Parcel actualParcel = updatedOrder.getShippingInfo().getDeliveries().get(0).getParcels().get(0);
+            assertThat(actualParcel.getMeasurements()).isEqualTo(PARCEL_MEASUREMENTS);
+            assertThat(actualParcel.getTrackingData()).isEqualTo(TRACKING_DATA);
+
+            //you can observe a message
+            final Query<ParcelAddedToDeliveryMessage> messageQuery = MessageQuery.of()
+                    .withPredicates(m -> m.resource().is(order))
+                    .forMessageType(ParcelAddedToDeliveryMessage.MESSAGE_HINT);
+            assertEventually(() -> {
+                final Optional<ParcelAddedToDeliveryMessage> parcelAddedToDeliveryMessageOptional = client().executeBlocking(messageQuery).head();
+                assertThat(parcelAddedToDeliveryMessageOptional).isPresent();
+                final ParcelAddedToDeliveryMessage parcelAddedToDeliveryMessage = parcelAddedToDeliveryMessageOptional.get();
+                final Delivery deliveryFromMessage = parcelAddedToDeliveryMessage.getDelivery();
+                assertThat(deliveryFromMessage.getId()).isEqualTo(delivery.getId());
+                assertThat(deliveryFromMessage.getCreatedAt()).isEqualTo(delivery.getCreatedAt());
+                assertThat(deliveryFromMessage.getItems()).isEqualTo(delivery.getItems());
+                final Parcel parcelFromMessage = parcelAddedToDeliveryMessage.getParcel();
+                assertThat(parcelFromMessage).isEqualTo(actualParcel);
+            });
 
             return updatedOrder;
         });
@@ -254,6 +269,28 @@ public class OrderUpdateCommandIntegrationTest extends IntegrationTest {
                 final Order updatedOrder = client().executeBlocking(OrderUpdateCommand.of(order, TransitionLineItemState.of(lineItem, quantity, initialState, nextState, actualTransitionDate)));
                 assertThat(updatedOrder.getLineItems().get(0)).has(itemStates(ItemState.of(nextState, quantity)));
 
+                //you can observe a message
+                final Query<LineItemLikeStateTransitionMessage> messageQuery = MessageQuery.of()
+                        .withPredicates(m -> m.resource().is(order))
+                        .forMessageType(LineItemLikeStateTransitionMessage.MESSAGE_HINT);
+                assertEventually(() -> {
+                    final Optional<LineItemLikeStateTransitionMessage> lineItemStateTransitionMessageOptional = client().executeBlocking(messageQuery).head();
+                    assertThat(lineItemStateTransitionMessageOptional).isPresent();
+
+                    final LineItemLikeStateTransitionMessage lineItemStateTransitionMessage = lineItemStateTransitionMessageOptional.get();
+
+                    final String lineItemIdFromMessage = lineItemStateTransitionMessage.getLineItemId();
+                    assertThat(lineItemIdFromMessage).isEqualTo(order.getLineItems().get(0).getId());
+                    final ZonedDateTime transitionDateFromMessage = lineItemStateTransitionMessage.getTransitionDate();
+                    assertThat(transitionDateFromMessage).isEqualTo(actualTransitionDate);
+                    final Long quantityFromMessage = lineItemStateTransitionMessage.getQuantity();
+                    assertThat(quantityFromMessage).isEqualTo(quantity);
+                    final Reference<State> fromStateReference = lineItemStateTransitionMessage.getFromState();
+                    assertThat(fromStateReference).isEqualTo(initialState.toReference());
+                    final Reference<State> toStateReference = lineItemStateTransitionMessage.getToState();
+                    assertThat(toStateReference).isEqualTo(nextState.toReference());
+                });
+
                 return updatedOrder;
             })
         );
@@ -278,6 +315,29 @@ public class OrderUpdateCommandIntegrationTest extends IntegrationTest {
                 final ZonedDateTime actualTransitionDate = ZonedDateTime_IN_PAST;
                 final Order updatedOrder = client().executeBlocking(OrderUpdateCommand.of(order, TransitionCustomLineItemState.of(customLineItem, quantity, initialState, nextState, actualTransitionDate)));
                 assertThat(updatedOrder.getCustomLineItems().get(0)).has(itemStates(ItemState.of(nextState, quantity)));
+
+                //you can observe a message
+                final Query<CustomLineItemStateTransitionMessage> messageQuery = MessageQuery.of()
+                        .withPredicates(m -> m.resource().is(order))
+                        .forMessageType(CustomLineItemStateTransitionMessage.MESSAGE_HINT);
+                assertEventually(() -> {
+                    final Optional<CustomLineItemStateTransitionMessage> lineItemStateTransitionMessageOptional = client().executeBlocking(messageQuery).head();
+                    assertThat(lineItemStateTransitionMessageOptional).isPresent();
+
+                    final CustomLineItemStateTransitionMessage customLineItemStateTransitionMessage = lineItemStateTransitionMessageOptional.get();
+
+                    final String customLineItemIdFromMessage = customLineItemStateTransitionMessage.getCustomLineItemId();
+                    assertThat(customLineItemIdFromMessage).isEqualTo(order.getCustomLineItems().get(0).getId());
+                    final ZonedDateTime transitionDateFromMessage = customLineItemStateTransitionMessage.getTransitionDate();
+                    assertThat(transitionDateFromMessage).isEqualTo(actualTransitionDate);
+                    final Long quantityFromMessage = customLineItemStateTransitionMessage.getQuantity();
+                    assertThat(quantityFromMessage).isEqualTo(quantity);
+                    final Reference<State> fromStateReference = customLineItemStateTransitionMessage.getFromState();
+                    assertThat(fromStateReference).isEqualTo(initialState.toReference());
+                    final Reference<State> toStateReference = customLineItemStateTransitionMessage.getToState();
+                    assertThat(toStateReference).isEqualTo(nextState.toReference());
+                });
+
             })
         );
     }
