@@ -9,7 +9,7 @@ public class TestSolutionInfoSupplier extends Base implements SolutionInfoSuppli
     @Override
     public SolutionInfo get() {
         final SolutionInfo solutionInfo = new SolutionInfo();
-        solutionInfo.setName("JVM SDK integration tests");
+        solutionInfo.setName("JVM-SDK-integration-tests");
         solutionInfo.setVersion(BuildInfo.version());
         solutionInfo.setWebsite("https://github.com/commercetools/commercetools-jvm-sdk");
         solutionInfo.setEmergencyContact("helpdesk@commercetools.com");
