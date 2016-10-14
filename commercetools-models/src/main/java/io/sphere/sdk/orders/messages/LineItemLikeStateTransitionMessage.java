@@ -1,37 +1,41 @@
 package io.sphere.sdk.orders.messages;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import io.sphere.sdk.messages.MessageDerivateHint;
+import io.sphere.sdk.messages.GenericMessageImpl;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.orders.Order;
 import io.sphere.sdk.states.State;
 
 import java.time.ZonedDateTime;
 
-/**
- * This message is the result of the {@link io.sphere.sdk.orders.commands.updateactions.TransitionLineItemState} update action.
- *
- * {@include.example io.sphere.sdk.orders.commands.OrderUpdateCommandIntegrationTest#transitionLineItemState()}
- *
- */
-@JsonDeserialize(as = LineItemLikeStateTransitionMessage.class)//important to override annotation in Message class
-public final class LineItemLikeStateTransitionMessage extends LineItemLikeStateTransition {
+abstract class LineItemLikeStateTransitionMessage extends GenericMessageImpl<Order> {
 
-    public static final String MESSAGE_TYPE = "LineItemStateTransition";
-    public static final MessageDerivateHint<LineItemLikeStateTransitionMessage> MESSAGE_HINT = MessageDerivateHint.ofSingleMessageType(MESSAGE_TYPE, LineItemLikeStateTransitionMessage.class, Order.referenceTypeId());
+    protected final ZonedDateTime transitionDate;
+    protected final Long quantity;
+    protected final Reference<State> fromState;
+    protected final Reference<State> toState;
 
-    private final String lineItemId;
-
-    @JsonCreator
-    public LineItemLikeStateTransitionMessage(final String id, final Long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt, final JsonNode resource, final Long sequenceNumber, final Long resourceVersion, final String type, final Class<Order> clazz, final ZonedDateTime transitionDate, final Long quantity, final Reference<State> fromState, final Reference<State> toState, final String lineItemId) {
-        super(id, version, createdAt, lastModifiedAt, resource, sequenceNumber, resourceVersion, type, clazz, transitionDate, quantity, fromState, toState);
-        this.lineItemId = lineItemId;
+    public LineItemLikeStateTransitionMessage(final String id, final Long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt, final JsonNode resource, final Long sequenceNumber, final Long resourceVersion, final String type, final Class<Order> clazz, final ZonedDateTime transitionDate, final Long quantity, final Reference<State> fromState, final Reference<State> toState) {
+        super(id, version, createdAt, lastModifiedAt, resource, sequenceNumber, resourceVersion, type, Order.class);
+        this.transitionDate = transitionDate;
+        this.quantity = quantity;
+        this.fromState = fromState;
+        this.toState = toState;
     }
 
-    public String getLineItemId() {
-        return lineItemId;
+    public ZonedDateTime getTransitionDate() {
+        return transitionDate;
     }
 
+    public Long getQuantity() {
+        return quantity;
+    }
+
+    public Reference<State> getFromState() {
+        return fromState;
+    }
+
+    public Reference<State> getToState() {
+        return toState;
+    }
 }

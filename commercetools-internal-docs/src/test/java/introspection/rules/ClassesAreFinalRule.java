@@ -12,7 +12,7 @@ public class ClassesAreFinalRule extends ClassStrategyRule {
                     "PagedQueryResult, SortableSearchModel, QueryModelImpl, SearchModelImpl," +
                     "SphereError, LocalizedToStringProductAttributeConverter,ExpansionModelImpl," +
                     "ReferenceFacetSearchModelImpl,TermFacetSearchModelImpl,TermFilterExpression," +
-                    "TermFilterSearchModelImpl, DefaultProductAttributeFormatter").split(",( )?"));
+                    "TermFilterSearchModelImpl, DefaultProductAttributeFormatter, SolutionInfo").split(",( )?"));
 
 
     @Override

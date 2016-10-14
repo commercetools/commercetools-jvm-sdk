@@ -27,7 +27,7 @@ public final class ParcelAddedToDeliveryMessage extends GenericMessageImpl<Order
     private final Parcel parcel;
 
     @JsonCreator
-    public ParcelAddedToDeliveryMessage(final String id, final Long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt, final JsonNode resource, final Long sequenceNumber, final Long resourceVersion, final String type, final Class<Order> clazz, final Delivery delivery, final Parcel parcel) {
+    private ParcelAddedToDeliveryMessage(final String id, final Long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt, final JsonNode resource, final Long sequenceNumber, final Long resourceVersion, final String type, final Class<Order> clazz, final Delivery delivery, final Parcel parcel) {
         super(id, version, createdAt, lastModifiedAt, resource, sequenceNumber, resourceVersion, type, Order.class);
         this.delivery = delivery;
         this.parcel = parcel;

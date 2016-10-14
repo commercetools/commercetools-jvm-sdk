@@ -17,7 +17,7 @@ import java.time.ZonedDateTime;
  *
  */
 @JsonDeserialize(as = CustomLineItemStateTransitionMessage.class)//important to override annotation in Message class
-public final class CustomLineItemStateTransitionMessage extends LineItemLikeStateTransition {
+public final class CustomLineItemStateTransitionMessage extends LineItemLikeStateTransitionMessage {
 
     public static final String MESSAGE_TYPE = "CustomLineItemStateTransition";
     public static final MessageDerivateHint<CustomLineItemStateTransitionMessage> MESSAGE_HINT = MessageDerivateHint.ofSingleMessageType(MESSAGE_TYPE, CustomLineItemStateTransitionMessage.class, Order.referenceTypeId());
@@ -25,7 +25,7 @@ public final class CustomLineItemStateTransitionMessage extends LineItemLikeStat
     private final String customLineItemId;
 
     @JsonCreator
-    public CustomLineItemStateTransitionMessage(final String id, final Long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt, final JsonNode resource, final Long sequenceNumber, final Long resourceVersion, final String type, final Class<Order> clazz, final ZonedDateTime transitionDate, final Long quantity, final Reference<State> fromState, final Reference<State> toState, final String customLineItemId) {
+    private CustomLineItemStateTransitionMessage(final String id, final Long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt, final JsonNode resource, final Long sequenceNumber, final Long resourceVersion, final String type, final Class<Order> clazz, final ZonedDateTime transitionDate, final Long quantity, final Reference<State> fromState, final Reference<State> toState, final String customLineItemId) {
         super(id, version, createdAt, lastModifiedAt, resource, sequenceNumber, resourceVersion, type, clazz, transitionDate, quantity, fromState, toState);
         this.customLineItemId = customLineItemId;
     }

@@ -270,14 +270,14 @@ public class OrderUpdateCommandIntegrationTest extends IntegrationTest {
                 assertThat(updatedOrder.getLineItems().get(0)).has(itemStates(ItemState.of(nextState, quantity)));
 
                 //you can observe a message
-                final Query<LineItemLikeStateTransitionMessage> messageQuery = MessageQuery.of()
+                final Query<LineItemStateTransitionMessage> messageQuery = MessageQuery.of()
                         .withPredicates(m -> m.resource().is(order))
-                        .forMessageType(LineItemLikeStateTransitionMessage.MESSAGE_HINT);
+                        .forMessageType(LineItemStateTransitionMessage.MESSAGE_HINT);
                 assertEventually(() -> {
-                    final Optional<LineItemLikeStateTransitionMessage> lineItemStateTransitionMessageOptional = client().executeBlocking(messageQuery).head();
+                    final Optional<LineItemStateTransitionMessage> lineItemStateTransitionMessageOptional = client().executeBlocking(messageQuery).head();
                     assertThat(lineItemStateTransitionMessageOptional).isPresent();
 
-                    final LineItemLikeStateTransitionMessage lineItemStateTransitionMessage = lineItemStateTransitionMessageOptional.get();
+                    final LineItemStateTransitionMessage lineItemStateTransitionMessage = lineItemStateTransitionMessageOptional.get();
 
                     final String lineItemIdFromMessage = lineItemStateTransitionMessage.getLineItemId();
                     assertThat(lineItemIdFromMessage).isEqualTo(order.getLineItems().get(0).getId());
