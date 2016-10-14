@@ -51,7 +51,7 @@ import io.sphere.sdk.models.LocalizedString;
  *
  *  The 'with copy'-methods are inspired by Scala and the Java date and time API: {@link java.time.OffsetDateTime#withMinute(int)}.
  *
- *  <h3 id=persistent-objects>Persistent objects vs. local test doubles</h3>
+ *  <h3 id=persisting-changes>Persisting Changes</h3>
  *
  *
  *  <p>For persistent changes you need to use a commercetools platform
