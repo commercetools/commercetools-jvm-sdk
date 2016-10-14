@@ -91,6 +91,17 @@ import java.util.function.Function;
  </ul>
  -->
 
+ <h3 class=released-version id="v1_5_0">1.5.0 (14.10.2016)</h3>
+ <ul>
+ <li class=new-in-release>{@link Asset}s on products</li>
+ <li class=new-in-release>{@link io.sphere.sdk.carts.commands.updateactions.SetLineItemTotalPrice}</li>
+ <li class=new-in-release>{@link io.sphere.sdk.carts.commands.updateactions.ChangeCustomLineItemQuantity} and {@link io.sphere.sdk.carts.commands.updateactions.ChangeCustomLineItemMoney}</li>
+ <li class=change-in-release>The format of the User-Agent header changed to sth. like
+ "{@code commercetools-jvm-sdk/1.5.0 (AHC/2.0) Java/1.8.0_101-b13 (Linux; amd64)}" from originally "{@code commercetools JVM SDK 1.4.0}". It is also possible to add a solution info, see {@link io.sphere.sdk.client.SolutionInfo}.</li>
+ <li class=change-in-release>Using the default {@link SphereClient} will attempt to fetch a new token if an {@link io.sphere.sdk.client.InvalidTokenException} occurs.</li>
+ <li class=change-in-release>{@link LocalizedString#slugified()} and {@link LocalizedString#slugifiedUnique()} generate a String with a max length of 256 to be valid for the commercetools platform. In addition, only allowed characters like {@code [-_a-zA-Z0-9]} will be in the output. Before that it was possible to keep for example a "+".</li>
+ </ul>
+
  <h3 class=released-version id="v1_4_0">1.4.0 (29.09.2016)</h3>
 
  <ul>
