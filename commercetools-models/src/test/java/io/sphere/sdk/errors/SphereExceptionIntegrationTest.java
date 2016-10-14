@@ -33,6 +33,8 @@ import org.hamcrest.CustomTypeSafeMatcher;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Collections;
 import java.util.List;
@@ -51,6 +53,8 @@ import static org.assertj.core.api.Assertions.*;
 import static org.junit.Assert.fail;
 
 public class SphereExceptionIntegrationTest extends IntegrationTest {
+
+    private static final Logger logger = LoggerFactory.getLogger(SphereExceptionIntegrationTest.class);
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
@@ -251,7 +255,9 @@ public class SphereExceptionIntegrationTest extends IntegrationTest {
 
             @Override
             public CompletionStage<HttpResponse> execute(final HttpRequest httpRequest) {
-                return CompletableFutureUtils.successful(executeSync(httpRequest));
+                final HttpResponse httpResponse = executeSync(httpRequest);
+                logger.info("request: {} response: {} tokenIsValid: {}", httpRequest, httpResponse, tokenIsValid);
+                return CompletableFutureUtils.successful(httpResponse);
             }
 
             private HttpResponse executeSync(final HttpRequest httpRequest) {
