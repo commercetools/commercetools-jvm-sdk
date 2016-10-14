@@ -81,14 +81,16 @@ public final class SphereInternalUtils {
 
     public static String slugify(final String s) {
         //algorithm used in https://github.com/slugify/slugify/blob/master/core/src/main/java/com/github/slugify/Slugify.java
-        return Normalizer.normalize(s, Normalizer.Form.NFD)
+        final String intermediateResult = Normalizer.normalize(s, Normalizer.Form.NFD)
                 .replaceAll("[^\\p{ASCII}]", "")
-                .replaceAll("[^\\w+]", "-")
+                .replaceAll("[^-_a-zA-Z0-9]", "-")
                 .replaceAll("\\s+", "-")
                 .replaceAll("[-]+", "-")
                 .replaceAll("^-", "")
                 .replaceAll("-$", "")
                 .toLowerCase();
+        final int maxAllowedCharactersForSlugInCommercetoolsPlatform = 256;
+        return intermediateResult.substring(0, Math.min(maxAllowedCharactersForSlugInCommercetoolsPlatform, intermediateResult.length()));
     }
 
     public static <K, V, E extends Throwable> V getOrThrow(final Map<K, V> map, final K key, Supplier<E> exceptionSupplier) throws E {

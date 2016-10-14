@@ -1,6 +1,7 @@
 package io.sphere.sdk.models;
 
 import io.sphere.sdk.json.SphereJsonUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
 
 import java.util.*;
@@ -220,6 +221,22 @@ public class LocalizedStringTest {
         final LocalizedString actual = LocalizedString.of(Locale.GERMAN, "Aa -A_", Locale.ENGLISH, "dog food").slugified();
         final LocalizedString expected = LocalizedString.of(Locale.GERMAN, "aa-a_", Locale.ENGLISH, "dog-food");
         assertThat(actual).isEqualTo(expected);
+    }
+
+    @Test
+    public void slugifyRespectsAllowedCharacters() {
+        final String actual = LocalizedString.ofEnglish("Pick + Mix 18 Volt").slugified().get(Locale.ENGLISH);
+        final String expected = "pick-mix-18-volt";
+        assertThat(actual).isEqualTo(expected);
+    }
+
+    @Test
+    public void slugifyRespectsAllowedLength() {
+        final int allowedLength = 256;
+        final String tooLongString = StringUtils.repeat("a", allowedLength - 1) + "bc";
+        assertThat(tooLongString).hasSize(allowedLength + 1);
+        final String actual = LocalizedString.ofEnglish(tooLongString).slugified().get(Locale.ENGLISH);
+        assertThat(actual).hasSize(allowedLength).endsWith("ab");
     }
 
     @Test
