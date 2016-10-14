@@ -231,6 +231,15 @@ public class LocalizedStringTest {
     }
 
     @Test
+    public void slugifyUniqueRespectsAllowedLength() {
+        final int allowedLength = 256;
+        final String tooLongString = StringUtils.repeat("a", allowedLength + 1);
+        assertThat(tooLongString).hasSize(allowedLength + 1);
+        final String actual = LocalizedString.ofEnglish(tooLongString).slugifiedUnique().get(Locale.ENGLISH);
+        assertThat(actual).hasSize(allowedLength).matches("a{247}-\\d{8}");
+    }
+
+    @Test
     public void slugifyRespectsAllowedLength() {
         final int allowedLength = 256;
         final String tooLongString = StringUtils.repeat("a", allowedLength - 1) + "bc";

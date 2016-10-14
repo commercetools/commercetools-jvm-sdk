@@ -12,6 +12,9 @@ import static java.util.Arrays.asList;
 import static java.util.stream.Collectors.joining;
 
 public final class SphereInternalUtils {
+
+    private static final int MAX_SLUG_LENGTH = 256;
+
     private SphereInternalUtils() {
     }
 
@@ -76,7 +79,10 @@ public final class SphereInternalUtils {
     }
 
     public static String slugifyUnique(final String s) {
-        return slugify(s + "-" + RandomStringUtils.randomNumeric(8));
+        final String postFix = "-" + RandomStringUtils.randomNumeric(8);
+        final String intermediate = slugify(s);
+        final String result = intermediate.substring(0, Math.min(intermediate.length(), MAX_SLUG_LENGTH - postFix.length())) + postFix;
+        return result;
     }
 
     public static String slugify(final String s) {
@@ -89,8 +95,7 @@ public final class SphereInternalUtils {
                 .replaceAll("^-", "")
                 .replaceAll("-$", "")
                 .toLowerCase();
-        final int maxAllowedCharactersForSlugInCommercetoolsPlatform = 256;
-        return intermediateResult.substring(0, Math.min(maxAllowedCharactersForSlugInCommercetoolsPlatform, intermediateResult.length()));
+        return intermediateResult.substring(0, Math.min(MAX_SLUG_LENGTH, intermediateResult.length()));
     }
 
     public static <K, V, E extends Throwable> V getOrThrow(final Map<K, V> map, final K key, Supplier<E> exceptionSupplier) throws E {
