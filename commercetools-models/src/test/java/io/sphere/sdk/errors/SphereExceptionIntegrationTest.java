@@ -247,7 +247,7 @@ public class SphereExceptionIntegrationTest extends IntegrationTest {
     @Test
     public void retryOnInvalidToken() throws Exception {
         final HttpClient httpClient = new HttpClient() {
-            private boolean tokenIsValid = true;
+            private volatile boolean tokenIsValid = true;
 
             @Override
             public CompletionStage<HttpResponse> execute(final HttpRequest httpRequest) {
