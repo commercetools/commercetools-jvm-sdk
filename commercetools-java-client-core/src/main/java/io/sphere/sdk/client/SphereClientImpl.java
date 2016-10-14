@@ -4,7 +4,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import io.sphere.sdk.http.*;
 import io.sphere.sdk.json.JsonException;
 import io.sphere.sdk.json.SphereJsonUtils;
-import io.sphere.sdk.meta.BuildInfo;
 import io.sphere.sdk.models.SphereException;
 import io.sphere.sdk.utils.CompletableFutureUtils;
 import io.sphere.sdk.utils.SphereInternalLogger;
@@ -25,12 +24,14 @@ final class SphereClientImpl extends AutoCloseableService implements SphereClien
     private final HttpClient httpClient;
     private final SphereApiConfig config;
     private final SphereAccessTokenSupplier tokenSupplier;
+    private final String userAgent;
 
 
     private SphereClientImpl(final SphereApiConfig config, final SphereAccessTokenSupplier tokenSupplier, final HttpClient httpClient) {
         this.httpClient = httpClient;
         this.config = config;
         this.tokenSupplier = tokenSupplier;
+        userAgent = UserAgentUtils.obtainUserAgent(httpClient);
     }
 
     @Override
@@ -104,7 +105,7 @@ final class SphereClientImpl extends AutoCloseableService implements SphereClien
     private <T> HttpRequest createHttpRequest(final SphereRequest<T> sphereRequest, final String token) {
         return sphereRequest
                 .httpRequestIntent()
-                .plusHeader(HttpHeaders.USER_AGENT, BuildInfo.userAgent())
+                .plusHeader(HttpHeaders.USER_AGENT, userAgent)
                 .plusHeader(HttpHeaders.ACCEPT_ENCODING, "gzip")
                 .plusHeader(HttpHeaders.AUTHORIZATION, "Bearer " + token)
                 .prefixPath("/" + config.getProjectKey())

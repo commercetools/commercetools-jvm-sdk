@@ -3,6 +3,7 @@ package io.sphere.sdk.http;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.annotation.Nullable;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionException;
 import java.util.concurrent.CompletionStage;
@@ -73,4 +74,8 @@ public abstract class HttpClientAdapterBase extends Base implements HttpClient {
     protected final ForkJoinPool threadPool() {
         return threadPool;
     }
+
+    @Nullable
+    @Override
+    public abstract String getUserAgent();
 }

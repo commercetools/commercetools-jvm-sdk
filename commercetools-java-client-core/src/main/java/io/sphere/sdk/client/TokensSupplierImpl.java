@@ -87,7 +87,7 @@ final class TokensSupplierImpl extends AutoCloseableService implements TokensSup
         final String encodedString = Base64.getEncoder().encodeToString(usernamePassword.getBytes(StandardCharsets.UTF_8));
         final HttpHeaders httpHeaders = HttpHeaders
                 .of(HttpHeaders.AUTHORIZATION, "Basic " + encodedString)
-                .plus(HttpHeaders.USER_AGENT, BuildInfo.userAgent())
+                .plus(HttpHeaders.USER_AGENT, UserAgentUtils.obtainUserAgent(httpClient))
                 .plus(HttpHeaders.CONTENT_TYPE, "application/x-www-form-urlencoded");
         final String projectKey = config.getProjectKey();
         final Map<String, String> data = new HashMap<>();

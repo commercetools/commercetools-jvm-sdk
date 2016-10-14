@@ -66,6 +66,13 @@ public abstract class HttpClientAdapterTest {
         checkBodyRequest(port() + 200, requestBody, length);
     }
 
+    @Test
+    public final void userAgent() throws Exception {
+        try (final HttpClient client = createClient()) {
+            assertThat(client.getUserAgent()).matches("\\S+/\\S+");
+        }
+    }
+
     private void checkBodyRequest(final int port, final HttpRequestBody requestBody, final int length) throws Exception {
         final ServerSocket serverSocket = new ServerSocket(port);
         final CompletableFuture<String> future = CompletableFuture.supplyAsync(() -> {

@@ -12,6 +12,7 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.nio.client.CloseableHttpAsyncClient;
 import org.apache.http.message.BasicNameValuePair;
 
+import javax.annotation.Nullable;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
@@ -119,5 +120,11 @@ final class ApacheHttpClientAdapterImpl extends HttpClientAdapterBase {
 
     private static HttpEntity stringEntityOf(final String body) throws UnsupportedEncodingException {
         return new StringEntity(body);
+    }
+
+    @Nullable
+    @Override
+    public String getUserAgent() {
+        return "Apache-CloseableHttpAsyncClient/unkown";
     }
 }

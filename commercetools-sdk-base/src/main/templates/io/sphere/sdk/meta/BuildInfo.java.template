@@ -1,13 +1,8 @@
 package io.sphere.sdk.meta;
 
-import java.io.IOException;
-import java.net.URL;
-import java.net.URLClassLoader;
-import java.util.jar.Manifest;
-
 public final class BuildInfo {
     private static final String version = "version-replaced-through-maven-replacer-plugin";
-    private static final String userAgent = "commercetools JVM SDK " + version;
+    private static final String userAgent = "commercetools-jvm-sdk/" + version;
 
     private BuildInfo() {
         //utility class
