@@ -29,7 +29,7 @@ public class UserAgentIntegrationTest extends IntegrationTest {
     }
 
     private static class FakeHttpClient implements HttpClient {
-        private final HttpClient delegate = SphereClientFactory.of().createHttpClient();
+        private final HttpClient delegate = IntegrationTest.newHttpClient();//necessary for CI and self-signed certificates
         private String lastUserAgent;
 
         @Override
