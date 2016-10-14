@@ -21,7 +21,8 @@ import static java.util.Arrays.asList;
  *  Holds OAuth access tokenCache for accessing protected Sphere HTTP API endpoints.
  *  Refreshes the access token as needed automatically.
  */
-final class AutoRefreshSphereAccessTokenSupplierImpl extends AutoCloseableService implements SphereAccessTokenSupplier {
+final class AutoRefreshSphereAccessTokenSupplierImpl extends AutoCloseableService implements RefreshableSphereAccessTokenSupplier {
+    private final TokensSupplier tokensSupplier;//managed by the authActor
     private volatile CompletableFuture<String> currentAccessTokenFuture = new CompletableFuture<>();
     private volatile Optional<Tokens> currentTokensOption = Optional.empty();
     private final Actor authActor;
@@ -29,8 +30,8 @@ final class AutoRefreshSphereAccessTokenSupplierImpl extends AutoCloseableServic
     private final AsyncRetrySupervisor supervisor = AsyncRetrySupervisor.of(retryRules);
 
     private AutoRefreshSphereAccessTokenSupplierImpl(final SphereAuthConfig config, final HttpClient httpClient, final boolean closeHttpClient) {
-        final TokensSupplier internalTokensSupplier = TokensSupplierImpl.of(config, httpClient, closeHttpClient);
-        authActor = new AuthActor(internalTokensSupplier, this::supervisedTokenSupplier, this::requestUpdateTokens, this::requestUpdateFailedStatus);
+        tokensSupplier = TokensSupplierImpl.of(config, httpClient, closeHttpClient);
+        authActor = new AuthActor(tokensSupplier, this::supervisedTokenSupplier, this::requestUpdateTokens, this::requestUpdateFailedStatus);
         authActor.tell(new AuthActorProtocol.FetchTokenFromSphereMessage());
     }
 
@@ -54,6 +55,18 @@ final class AutoRefreshSphereAccessTokenSupplierImpl extends AutoCloseableServic
     public CompletionStage<String> get() {
         rejectExcutionIfClosed("Token supplier is already closed.");
         return currentAccessTokenFuture;
+    }
+
+    @Override
+    public CompletionStage<String> getNewToken() {
+        authActor.tell(new AuthActorProtocol.FetchTokenFromSphereMessage());
+        /*
+        Two times a token will be fetched, once to update the cached token
+        and the other time to get a new token to the caller.
+        This way it minimizes the possibility of race conditions but is less effective.
+        But this should be okay since it should be a rare case that his happens.
+         */
+        return tokensSupplier.get().thenApplyAsync(tokens -> tokens.getAccessToken());
     }
 
     @Override

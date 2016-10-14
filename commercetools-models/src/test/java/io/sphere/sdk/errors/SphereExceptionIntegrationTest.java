@@ -12,12 +12,13 @@ import io.sphere.sdk.categories.commands.CategoryCreateCommand;
 import io.sphere.sdk.categories.commands.CategoryDeleteCommand;
 import io.sphere.sdk.categories.commands.CategoryUpdateCommand;
 import io.sphere.sdk.categories.commands.updateactions.ChangeName;
+import io.sphere.sdk.categories.queries.CategoryByIdGet;
 import io.sphere.sdk.categories.queries.CategoryQuery;
+import io.sphere.sdk.channels.queries.ChannelByIdGet;
 import io.sphere.sdk.client.*;
 import io.sphere.sdk.commands.UpdateActionImpl;
 import io.sphere.sdk.customers.queries.CustomerQuery;
-import io.sphere.sdk.http.HttpResponse;
-import io.sphere.sdk.http.HttpStatusCode;
+import io.sphere.sdk.http.*;
 import io.sphere.sdk.meta.BuildInfo;
 import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.LocalizedString;
@@ -27,17 +28,16 @@ import io.sphere.sdk.models.errors.InvalidJsonInputError;
 import io.sphere.sdk.models.errors.SphereError;
 import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.test.IntegrationTest;
+import io.sphere.sdk.utils.CompletableFutureUtils;
 import org.hamcrest.CustomTypeSafeMatcher;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.CompletionException;
 import java.util.concurrent.CompletionStage;
-import java.util.concurrent.TimeUnit;
 import java.util.function.Supplier;
 
 import static io.sphere.sdk.carts.CartFixtures.withCart;
@@ -239,6 +239,56 @@ public class SphereExceptionIntegrationTest extends IntegrationTest {
                 return updated2;
             });
         });
+    }
+
+    /*
+     Sometimes while development a computer is hibernated and the token expires and then needs to be refreshed.
+     */
+    @Test
+    public void retryOnInvalidToken() throws Exception {
+        final HttpClient httpClient = new HttpClient() {
+            private boolean tokenIsValid = true;
+
+            @Override
+            public CompletionStage<HttpResponse> execute(final HttpRequest httpRequest) {
+                return CompletableFutureUtils.successful(executeSync(httpRequest));
+            }
+
+            private HttpResponse executeSync(final HttpRequest httpRequest) {
+                if (httpRequest.getUrl().contains("oauth")) {
+                    if (tokenIsValid) {
+                        return HttpResponse.of(200, String.format("{\"access_token\":\"first-token\",\"token_type\":\"Bearer\",\"expires_in\":172800,\"scope\":\"manage_project:%s\"}", getSphereClientConfig().getProjectKey()));
+                    } else {
+                        tokenIsValid = true;
+                        return HttpResponse.of(200, String.format("{\"access_token\":\"second-token\",\"token_type\":\"Bearer\",\"expires_in\":172800,\"scope\":\"manage_project:%s\"}", getSphereClientConfig().getProjectKey()));
+                    }
+                }
+                if (httpRequest.getUrl().contains("cat-id")) {
+                    tokenIsValid = false;//after that, the token expires
+                    return HttpResponse.of(404);
+                }
+                if (httpRequest.getUrl().contains("channel-id")) {
+                    if (tokenIsValid && httpRequest.getHeaders().getHeader(HttpHeaders.AUTHORIZATION).get(0).equals("Bearer second-token")) {
+                        return HttpResponse.of(404);
+                    } else {
+                        return HttpResponse.of(401, "{\"statusCode\":401,\"message\":\"invalid_token\",\"errors\":[{\"code\":\"invalid_token\",\"message\":\"invalid_token\"}],\"error\":\"invalid_token\"}");
+                    }
+                }
+                return HttpResponse.of(500);
+            }
+
+            @Override
+            public void close() {
+
+            }
+        };
+        final SphereAccessTokenSupplier tokenSupplier =
+                SphereAccessTokenSupplier.ofAutoRefresh(getSphereClientConfig(), httpClient, false);
+        try(final SphereClient client = SphereClient.of(getSphereClientConfig(), httpClient, tokenSupplier)) {
+            assertThat(client.execute(CategoryByIdGet.of("cat-id")).toCompletableFuture().join()).isNull();
+            //here is the point where the token expires
+            assertThat(client.execute(ChannelByIdGet.of("channel-id")).toCompletableFuture().join()).isNull();
+        }
     }
 
     private CategoryDraftBuilder categoryDraftOf(final LocalizedString slug) {
