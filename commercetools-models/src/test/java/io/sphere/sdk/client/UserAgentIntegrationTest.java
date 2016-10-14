@@ -17,13 +17,15 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class UserAgentIntegrationTest extends IntegrationTest {
     @Test
     public void userAgent() throws Exception {
-        final FakeHttpClient httpClient = new FakeHttpClient();
-        final SphereClient client = SphereClientFactory.of(() -> httpClient).createClient(getSphereClientConfig());
-        client.execute(ProjectGet.of()).toCompletableFuture().join();
-        assertThat(httpClient.getLastUserAgent())
-                .startsWith("commercetools-jvm-sdk")
-                .contains("JVM-SDK-integration-tests")
-                .contains(BuildInfo.version());
+        try (final FakeHttpClient httpClient = new FakeHttpClient()) {
+            try (final SphereClient client = SphereClientFactory.of(() -> httpClient).createClient(getSphereClientConfig())) {
+                client.execute(ProjectGet.of()).toCompletableFuture().join();
+                assertThat(httpClient.getLastUserAgent())
+                        .startsWith("commercetools-jvm-sdk")
+                        .contains("JVM-SDK-integration-tests")
+                        .contains(BuildInfo.version());
+            }
+        }
     }
 
     private static class FakeHttpClient implements HttpClient {
