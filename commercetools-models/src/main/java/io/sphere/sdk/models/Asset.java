@@ -1,6 +1,7 @@
 package io.sphere.sdk.models;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import io.sphere.sdk.products.ProductVariant;
 import io.sphere.sdk.types.Custom;
 import io.sphere.sdk.types.CustomFields;
 import io.sphere.sdk.types.TypeDraft;
@@ -10,6 +11,19 @@ import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Set;
 
+/**
+ * Media assets for product variants.
+ *
+ * @see ProductVariant#getAssets()
+ * @see io.sphere.sdk.products.commands.updateactions.AddAsset
+ * @see io.sphere.sdk.products.commands.updateactions.RemoveAsset
+ * @see io.sphere.sdk.products.commands.updateactions.ChangeAssetOrder
+ * @see io.sphere.sdk.products.commands.updateactions.ChangeAssetName
+ * @see io.sphere.sdk.products.commands.updateactions.SetAssetDescription
+ * @see io.sphere.sdk.products.commands.updateactions.SetAssetTags
+ * @see io.sphere.sdk.products.commands.updateactions.SetAssetCustomType
+ * @see io.sphere.sdk.products.commands.updateactions.SetAssetCustomField
+ */
 @JsonDeserialize(as = AssetImpl.class)
 public interface Asset extends Custom {
     String getId();
