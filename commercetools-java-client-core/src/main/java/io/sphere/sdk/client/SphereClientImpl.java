@@ -12,6 +12,7 @@ import org.slf4j.LoggerFactory;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.ServiceLoader;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionStage;
 
@@ -26,6 +27,9 @@ final class SphereClientImpl extends AutoCloseableService implements SphereClien
     private final SphereAccessTokenSupplier tokenSupplier;
     private final String userAgent;
 
+    static {
+        ServiceLoader.load(SphereClientModule.class).iterator().forEachRemaining(m -> {});
+    }
 
     private SphereClientImpl(final SphereApiConfig config, final SphereAccessTokenSupplier tokenSupplier, final HttpClient httpClient) {
         this.httpClient = httpClient;
