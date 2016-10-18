@@ -117,7 +117,6 @@ public class ProductProjectionSearchMainIntegrationTest extends ProductProjectio
         testBlueFilter(filters -> ProductProjectionSearch.ofStaged().withText(ENGLISH, "blue"));
     }
 
-    @Ignore // HTTP API still not having at least one matching variant flag true
     @Test
     public void findMatchingVariantByFulltextSearch() throws Exception {
         final Condition<ProductVariant> allMatchingVariants = new Condition<>(variant -> variant.isMatchingVariant(), "all are matching variants");
