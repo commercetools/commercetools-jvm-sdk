@@ -15,6 +15,7 @@ import io.sphere.sdk.zones.queries.ZoneQuery;
 import java.util.Optional;
 import java.util.function.Consumer;
 import java.util.function.Function;
+import java.util.function.UnaryOperator;
 
 import static io.sphere.sdk.taxcategories.TaxCategoryFixtures.withTaxCategory;
 import static io.sphere.sdk.test.SphereTestUtils.*;
@@ -31,7 +32,7 @@ public class ShippingMethodFixtures {
         withUpdateableShippingMethod(client, consumerToFunction(consumer));
     }
 
-    public static void withShippingMethodForGermany(final BlockingSphereClient client, final Consumer<ShippingMethod> consumer) {
+    public static void withUpdateableShippingMethodForGermany(final BlockingSphereClient client, final UnaryOperator<ShippingMethod> consumer) {
         final Optional<Zone> zoneOptional = client.executeBlocking(ZoneQuery.of().byCountry(DE)).head();
         final Zone zone;
         if (zoneOptional.isPresent()) {
@@ -41,8 +42,14 @@ public class ShippingMethodFixtures {
         }
         withUpdateableShippingMethod(client, shippingMethodWithOutZone -> {
             final ShippingMethod updated = client.executeBlocking(ShippingMethodUpdateCommand.of(shippingMethodWithOutZone, asList(AddZone.of(zone), AddShippingRate.of(ShippingRate.of(EURO_1), zone))));
-            consumer.accept(updated);
-            return updated;
+            return consumer.apply(updated);
+        });
+    }
+
+    public static void withShippingMethodForGermany(final BlockingSphereClient client, final Consumer<ShippingMethod> consumer) {
+        withUpdateableShippingMethodForGermany(client, m -> {
+            consumer.accept(m);
+            return m;
         });
     }
 
