@@ -13,6 +13,11 @@ import java.util.Optional;
 
 /**
  * A {@link SphereRequest} which returns {@link JsonNode} instances instead of deserialized Java domain model classes.
+ * On errors like 409, 502 etc. the normal typed exceptions will be thrown.
+ *
+ * {@include.example io.sphere.sdk.client.JsonNodeSphereRequestIntegrationTest#execution()}
+ * {@include.example io.sphere.sdk.client.JsonNodeSphereRequestIntegrationTest#execution2()}
+ *
  */
 public final class JsonNodeSphereRequest extends Base implements SphereRequest<JsonNode> {
     private final HttpRequestIntent httpRequestIntent;
