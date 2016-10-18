@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 
 import static io.sphere.sdk.utils.SphereInternalUtils.listOf;
 
-public final class ProductDraftBuilder extends Base implements Builder<ProductDraft>,WithLocalizedSlug, MetaAttributes {
+public final class ProductDraftBuilder extends Base implements Builder<ProductDraft>, WithLocalizedSlug, MetaAttributes {
 
     private final ResourceIdentifier<ProductType> productType;
     private ProductVariantDraft masterVariant;
@@ -56,6 +56,13 @@ public final class ProductDraftBuilder extends Base implements Builder<ProductDr
                 .state(productDraft.getState())
                 .categoryOrderHints(productDraft.getCategoryOrderHints())
                 .publish(productDraft.isPublish());
+    }
+
+    public static ProductDraftBuilder of(final ResourceIdentifiable<ProductType> productType, final LocalizedString name, final LocalizedString slug, final List<ProductVariantDraft> allVariants) {
+        final ProductVariantDraft masterVariant = allVariants.stream().findFirst().orElse(null);
+        final List<ProductVariantDraft> variants = allVariants.stream().skip(1).collect(Collectors.toList());
+        return of(productType, name, slug, masterVariant)
+                .plusVariants(variants);
     }
 
     public static ProductDraftBuilder of(final ResourceIdentifiable<ProductType> productType, final LocalizedString name, final LocalizedString slug, final ProductVariantDraft masterVariant) {
