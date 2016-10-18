@@ -35,16 +35,16 @@ public class OutOfStockErrorIntegrationTest extends IntegrationTest {
 
             final Cart cart = client().executeBlocking(CartCreateCommand.of(draft));
 
-            try {
-                client().executeBlocking(OrderFromCartCreateCommand.of(cart));
-            } catch (final ErrorResponseException e) {
-                assertThat(e.hasErrorCode(OutOfStockError.CODE));
-                final OutOfStockError outOfStockError = e.getErrors().stream()
-                        .filter(err -> err.getCode().equals(OutOfStockError.CODE))
-                        .findFirst().get().as(OutOfStockError.class);
-                assertThat(outOfStockError.getSkus()).containsExactly(sku);
-                assertThat(outOfStockError.getLineItems()).containsExactly(cart.getLineItems().get(0).getId());
-            }
+            final Throwable throwable = catchThrowable(() -> client().executeBlocking(OrderFromCartCreateCommand.of(cart)));
+
+            assertThat(throwable).isInstanceOf(ErrorResponseException.class);
+            final ErrorResponseException e = (ErrorResponseException) throwable;
+            assertThat(e.hasErrorCode(OutOfStockError.CODE));
+            final OutOfStockError outOfStockError = e.getErrors().stream()
+                    .filter(err -> err.getCode().equals(OutOfStockError.CODE))
+                    .findFirst().get().as(OutOfStockError.class);
+            assertThat(outOfStockError.getSkus()).containsExactly(sku);
+            assertThat(outOfStockError.getLineItems()).containsExactly(cart.getLineItems().get(0).getId());
         });
 
     }
