@@ -1,6 +1,7 @@
 package io.sphere.sdk.products.commands.updateactions;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import io.sphere.sdk.json.SphereJsonUtils;
 import io.sphere.sdk.products.attributes.AttributeDraft;
 import io.sphere.sdk.products.attributes.NamedAttributeAccess;
 import io.sphere.sdk.commands.UpdateActionImpl;
@@ -84,6 +85,18 @@ public final class SetAttribute extends UpdateActionImpl<Product> {
     /**
      * Action to add/remove/change a custom attribute.
      *
+     * @param variantId the variant the attribute value should be set or unset
+     * @param name the name of the attribute, consult the product type to find the name
+     * @param value embedded in an optional the new value of the attribute or an empty Optional to remove the value from the attribute
+     * @return update action
+     */
+    public static SetAttribute ofVariantId(final Integer variantId, final String name, @Nullable final Object value) {
+        return new SetAttribute(variantId, null, name, SphereJsonUtils.toJsonNode(value));
+    }
+
+    /**
+     * Action to add/remove/change a custom attribute.
+     *
      * @param sku
      * @param name the name of the attribute, consult the product type to find the name
      * @param value embedded in an optional the new value of the attribute or an empty Optional to remove the value from the attribute
@@ -91,6 +104,18 @@ public final class SetAttribute extends UpdateActionImpl<Product> {
      */
     public static SetAttribute ofSku(final String sku, final String name, @Nullable final JsonNode value) {
         return new SetAttribute(null, sku, name, value);
+    }
+
+    /**
+     * Action to add/remove/change a custom attribute.
+     *
+     * @param sku
+     * @param name the name of the attribute, consult the product type to find the name
+     * @param value embedded in an optional the new value of the attribute or an empty Optional to remove the value from the attribute
+     * @return update action
+     */
+    public static SetAttribute ofSku(final String sku, final String name, @Nullable final Object value) {
+        return new SetAttribute(null, sku, name, SphereJsonUtils.toJsonNode(value));
     }
 
     /**
