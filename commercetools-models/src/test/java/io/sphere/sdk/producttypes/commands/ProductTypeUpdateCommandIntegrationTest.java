@@ -208,4 +208,26 @@ public class ProductTypeUpdateCommandIntegrationTest extends IntegrationTest {
             return updatedProductType;
         });
     }
+
+    @Test
+    public void changePlainEnumValueLabel() throws Exception {
+        final String attributeName = randomKey();
+        final AttributeDefinition attributeDefinition = AttributeDefinitionBuilder.of(attributeName, randomSlug(),
+                EnumAttributeType.of(
+                        EnumValue.of("key1", "label 1"),
+                        EnumValue.of("key2", "label 2")
+                )).build();
+        final String key = randomKey();
+        final ProductTypeDraft productTypeDraft = ProductTypeDraft.of(key, key, key, singletonList(attributeDefinition));
+        withUpdateableProductType(client(), () -> productTypeDraft, productType -> {
+            final ProductType updatedProductType = client().executeBlocking(ProductTypeUpdateCommand.of(productType, ChangePlainEnumValueLabel.of(attributeName, EnumValue.of("key2", "label 2 (updated)"))));
+
+            final EnumAttributeType updatedAttributeType = (EnumAttributeType) updatedProductType.getAttribute(attributeName).getAttributeType();
+            assertThat(updatedAttributeType.getValues())
+                    .containsExactly(EnumValue.of("key1", "label 1"),
+                    EnumValue.of("key2", "label 2 (updated)"));
+
+            return updatedProductType;
+        });
+    }
 }
