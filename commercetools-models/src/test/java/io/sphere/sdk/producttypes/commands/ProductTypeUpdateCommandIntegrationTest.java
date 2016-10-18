@@ -224,8 +224,32 @@ public class ProductTypeUpdateCommandIntegrationTest extends IntegrationTest {
 
             final EnumAttributeType updatedAttributeType = (EnumAttributeType) updatedProductType.getAttribute(attributeName).getAttributeType();
             assertThat(updatedAttributeType.getValues())
-                    .containsExactly(EnumValue.of("key1", "label 1"),
-                    EnumValue.of("key2", "label 2 (updated)"));
+                    .containsExactly(EnumValue.of("key1", "label 1"), EnumValue.of("key2", "label 2 (updated)"));
+
+            return updatedProductType;
+        });
+    }
+
+    @Test
+    public void changeLocalizedEnumValueLabel() throws Exception {
+        final String attributeName = randomKey();
+        final LocalizedString label1 = LocalizedString.ofEnglish("label 1");
+        final LocalizedString label2 = LocalizedString.ofEnglish("label 2");
+        final LocalizedString newLabel2 = LocalizedString.ofEnglish("label 2 (updated)");
+        final AttributeDefinition attributeDefinition = AttributeDefinitionBuilder.of(attributeName, randomSlug(),
+                LocalizedEnumAttributeType.of(
+                        LocalizedEnumValue.of("key1", label1),
+                        LocalizedEnumValue.of("key2", label2)
+                )).build();
+        final String key = randomKey();
+        final ProductTypeDraft productTypeDraft = ProductTypeDraft.of(key, key, key, singletonList(attributeDefinition));
+        withUpdateableProductType(client(), () -> productTypeDraft, productType -> {
+            final ProductType updatedProductType = client().executeBlocking(ProductTypeUpdateCommand.of(productType, ChangeLocalizedEnumValueLabel.of(attributeName, LocalizedEnumValue.of("key2", newLabel2))));
+
+            final LocalizedEnumAttributeType updatedAttributeType =
+                    (LocalizedEnumAttributeType) updatedProductType.getAttribute(attributeName).getAttributeType();
+            assertThat(updatedAttributeType.getValues())
+                    .containsExactly(LocalizedEnumValue.of("key1", label1), LocalizedEnumValue.of("key2", newLabel2));
 
             return updatedProductType;
         });
