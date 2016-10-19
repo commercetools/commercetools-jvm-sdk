@@ -47,7 +47,7 @@ public class JsonNodeSphereRequestIntegrationTest extends IntegrationTest {
                     .plusExpansionPaths(m -> m.productType());
             final JsonNodeSphereRequest jsonNodeSphereRequest = JsonNodeSphereRequest.of(normalSphereRequest);
             assertThat(normalSphereRequest.httpRequestIntent())
-                    .as("a JsonNodeSphereRequest creates the same request to the platform, but differes in the response")
+                    .as("a JsonNodeSphereRequest creates the same request to the platform, but differs in the response")
                     .isEqualTo(jsonNodeSphereRequest.httpRequestIntent());
             final PagedQueryResult<ProductProjection> productProjectionPagedSearchResult =
                     client().executeBlocking(normalSphereRequest);
