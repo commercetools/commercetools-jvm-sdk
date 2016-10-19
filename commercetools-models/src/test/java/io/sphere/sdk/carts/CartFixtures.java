@@ -1,17 +1,16 @@
 package io.sphere.sdk.carts;
 
 import com.neovisionaries.i18n.CountryCode;
-import io.sphere.sdk.cartdiscounts.CartDiscount;
-import io.sphere.sdk.cartdiscounts.CartDiscountDraft;
-import io.sphere.sdk.cartdiscounts.CartDiscountFixtures;
-import io.sphere.sdk.cartdiscounts.CartDiscountPredicate;
+import io.sphere.sdk.cartdiscounts.*;
 import io.sphere.sdk.cartdiscounts.commands.CartDiscountCreateCommand;
 import io.sphere.sdk.cartdiscounts.commands.CartDiscountDeleteCommand;
 import io.sphere.sdk.carts.commands.CartCreateCommand;
 import io.sphere.sdk.carts.commands.CartDeleteCommand;
 import io.sphere.sdk.carts.commands.CartUpdateCommand;
 import io.sphere.sdk.carts.commands.updateactions.*;
+import io.sphere.sdk.carts.queries.CartByIdGet;
 import io.sphere.sdk.client.BlockingSphereClient;
+import io.sphere.sdk.commands.UpdateActionImpl;
 import io.sphere.sdk.customers.Customer;
 import io.sphere.sdk.discountcodes.DiscountCode;
 import io.sphere.sdk.discountcodes.DiscountCodeDraftDsl;
@@ -22,10 +21,15 @@ import io.sphere.sdk.models.AddressBuilder;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.orders.Order;
 import io.sphere.sdk.orders.commands.OrderDeleteCommand;
+import io.sphere.sdk.productdiscounts.AbsoluteProductDiscountValue;
+import io.sphere.sdk.productdiscounts.ProductDiscountDraft;
+import io.sphere.sdk.productdiscounts.ProductDiscountPredicate;
+import io.sphere.sdk.productdiscounts.ProductDiscountValue;
 import io.sphere.sdk.products.Product;
 import io.sphere.sdk.utils.MoneyImpl;
 
 import javax.money.MonetaryAmount;
+import java.util.List;
 import java.util.function.*;
 
 import static io.sphere.sdk.customers.CustomerFixtures.withCustomer;
@@ -92,7 +96,7 @@ public class CartFixtures {
     }
 
     public static void withFilledCart(final BlockingSphereClient client, final Consumer<Cart> f) {
-        withTaxedProduct(client,  product -> {
+        withTaxedProduct(client, product -> {
             final Cart cart = createCartWithShippingAddress(client);
             assertThat(cart.getLineItems()).hasSize(0);
             final long quantity = 3;
@@ -107,7 +111,6 @@ public class CartFixtures {
             f.accept(updatedCart);
         });
     }
-
 
     public static void withCustomerAndFilledCart(final BlockingSphereClient client, final BiConsumer<Customer, Cart> consumer) {
         withCustomer(client, customer -> {
@@ -153,6 +156,59 @@ public class CartFixtures {
             final Cart cartToDelete = op.apply(updatedCart);
             client.executeBlocking(CartDeleteCommand.of(cartToDelete));
         });
+    }
+
+    public static void withDiscountedLineItem(final BlockingSphereClient client, final RelativeCartDiscountValue relativeCartDiscountValue, final Consumer<Cart> consumer) {
+        withTaxedProduct(client, product -> {
+            withCart(client, (cart) -> {
+                withCustomer(client, (customer) -> {
+                    CartDiscountFixtures.withCartDiscount(client, builder -> builder
+                            .cartPredicate(CartDiscountPredicate.of("customer.id=\"" + customer.getId() + "\""))
+                            .value(relativeCartDiscountValue)
+                            .target(LineItemsTarget.of("product.id=\"" + product.getId() + "\"")), cartDiscount -> {
+                        assertThat(cart.getLineItems()).hasSize(0);
+                        final long quantity = 3;
+                        final String productId = product.getId();
+                        final AddLineItem addLineItemAction = AddLineItem.of(productId, 1, quantity);
+                        final List<UpdateActionImpl<Cart>> updateActions =
+                                asList(addLineItemAction, SetCustomerId.of(customer.getId()), Recalculate.of().withUpdateProductData(true));
+                        final Cart updatedCart = client.executeBlocking(CartUpdateCommand.of(cart, updateActions));
+                        consumer.accept(updatedCart);
+                    });
+                });
+                final Cart cartToDelete = client.executeBlocking(CartByIdGet.of(cart));
+                return cartToDelete;
+            });
+        });
+    }
+
+    public static void withDiscountedCustomLineItem(final BlockingSphereClient client, final RelativeCartDiscountValue relativeCartDiscountValue, final Consumer<Cart> consumer) {
+        withTaxedProduct(client, product -> {
+            withCustomerAndFilledCart(client, (customer, cart) -> {
+                CartDiscountFixtures.withCartDiscount(client, builder -> builder
+                        .cartPredicate(CartDiscountPredicate.of("customer.id=\"" + customer.getId() + "\""))
+                        .value(relativeCartDiscountValue)
+                        .target(CustomLineItemsTarget.of("slug =\"thing-discounted-slug\"")), cartDiscount -> {
+                    assertThat(cart.getCustomLineItems()).hasSize(0);
+                    final MonetaryAmount money = MoneyImpl.of("23.50", EUR);
+                    final String slug = "thing-discounted-slug";
+                    final LocalizedString name = en("thing");
+                    final CustomLineItemDraft item = CustomLineItemDraft.of(name, slug, money, product.getTaxCategory(), 5L, null);
+                    final AddCustomLineItem addCustomLineItemAction = AddCustomLineItem.of(item);
+                    final Cart updatedCart = client.executeBlocking(CartUpdateCommand.of(cart, asList(addCustomLineItemAction)));
+                    consumer.accept(updatedCart);
+                });
+                final Cart cartToDelete = client.executeBlocking(CartByIdGet.of(cart));
+                client.executeBlocking(CartDeleteCommand.of(cartToDelete));
+            });
+        });
+    }
+
+    private static ProductDiscountDraft discountDraftOfAbsoluteValue(final Product product, final MonetaryAmount amount) {
+        final AbsoluteProductDiscountValue value = ProductDiscountValue.ofAbsolute(amount);
+        final ProductDiscountPredicate predicate =
+                ProductDiscountPredicate.of("product.id = \"" + product.getId() + "\"");
+        return ProductDiscountDraft.of(randomSlug(), randomSlug(), predicate, value, randomSortOrder(), true);
     }
 
     public static void withCartAndDiscountCode(final BlockingSphereClient client, final BiFunction<Cart, DiscountCode, Cart> user) {

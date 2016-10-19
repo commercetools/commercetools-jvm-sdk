@@ -47,4 +47,14 @@ final class CartExpansionModelImpl<T> extends CartLikeExpansionModelImpl<T> impl
     public ShippingInfoExpansionModel<T> shippingInfo() {
         return super.shippingInfo();
     }
+
+    @Override
+    public CustomLineItemExpansionModel<T> customLineItems() {
+        return super.customLineItems();
+    }
+
+    @Override
+    public CustomLineItemExpansionModel<T> customLineItems(final int index) {
+        return super.customLineItems(index);
+    }
 }
