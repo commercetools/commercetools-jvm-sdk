@@ -58,6 +58,8 @@ public final class CustomObjectBigIntegerNumberGenerator extends Base implements
             final CompletionStage<BigInteger> bigIntegerCompletionStage = incrementAndGetSequenceNumber();
             return CompletableFutureUtils.recoverWith(bigIntegerCompletionStage, (error) -> tryGetNextNumber(timeToLive - 1, error));
         } else {
+            final int retries = config.getMaxRetryAttempts() - timeToLive;
+//            return CompletableFutureUtils.failed(new  Exception(String.format("number of retries: %d", retries)));
             return CompletableFutureUtils.failed(throwable);
         }
     }

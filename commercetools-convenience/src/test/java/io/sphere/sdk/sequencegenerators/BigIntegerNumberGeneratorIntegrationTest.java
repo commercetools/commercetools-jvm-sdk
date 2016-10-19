@@ -22,6 +22,7 @@ import java.util.stream.IntStream;
 
 import static io.sphere.sdk.test.SphereTestUtils.randomKey;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.AssertionsForClassTypes.catchThrowable;
 
 public class BigIntegerNumberGeneratorIntegrationTest extends IntegrationTest {
 
@@ -90,7 +91,7 @@ public class BigIntegerNumberGeneratorIntegrationTest extends IntegrationTest {
     @Test
     public void concurrentUsageTest() throws Exception {
         final int firstNumber = 1;
-        final int lastNumber = 50;
+        final int lastNumber = 20;
         final BigIntegerNumberGenerator generator = createGenerator();
         final List<CompletionStage<BigInteger>> completionStageNumbers = IntStream.range(firstNumber, lastNumber)
                 .mapToObj(i -> generator.getNextNumber())
@@ -109,11 +110,11 @@ public class BigIntegerNumberGeneratorIntegrationTest extends IntegrationTest {
                         .container(container)
                         .build();
         final BigIntegerNumberGenerator generator = CustomObjectBigIntegerNumberGenerator.of(config);
-        try {
-            generator.getNextNumber().toCompletableFuture().join();
-        } catch (Exception e) {
-            assertThat(e.getCause() instanceof NotFoundException).isTrue();
-        }
+
+        Throwable thrown = catchThrowable(() -> { generator.getNextNumber().toCompletableFuture().join(); });
+        assertThat(thrown).isNotNull();
+        assertThat(thrown).hasCauseInstanceOf(NotFoundException.class);
+
     }
 
     private HttpClient getBadRequestHttpClient() {
