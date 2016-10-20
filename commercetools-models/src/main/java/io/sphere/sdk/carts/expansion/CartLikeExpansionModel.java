@@ -18,6 +18,10 @@ public interface CartLikeExpansionModel<T> extends ExpansionPathContainer<T> {
 
     LineItemExpansionModel<T> lineItems(int index);
 
+    CustomLineItemExpansionModel<T> customLineItems();
+
+    CustomLineItemExpansionModel<T> customLineItems(int index);
+
     PaymentInfoExpansionModel<T> paymentInfo();
 
     ShippingInfoExpansionModel<T> shippingInfo();

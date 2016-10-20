@@ -2,6 +2,8 @@ package io.sphere.sdk.carts.expansion;
 
 import io.sphere.sdk.channels.expansion.ChannelExpansionModel;
 import io.sphere.sdk.expansion.ExpansionModelImpl;
+import io.sphere.sdk.products.ProductVariant;
+import io.sphere.sdk.products.expansion.ProductVariantExpansionModel;
 
 import java.util.List;
 
@@ -30,7 +32,26 @@ final class LineItemExpansionModelImpl<T> extends ExpansionModelImpl<T> implemen
         return state("" + index);
     }
 
+    @Override
+    public ProductVariantExpansionModel<T> variant() {
+        return ProductVariantExpansionModel.of(buildPathExpression(), "variant");
+    }
+
+    @Override
+    public DiscountedLineItemPricePerQuantityExpansionModel<T> discountedPricePerQuantity() {
+        return discountedPricePerQuantity("*");
+    }
+
+    @Override
+    public DiscountedLineItemPricePerQuantityExpansionModel<T> discountedPricePerQuantity(final int index) {
+        return discountedPricePerQuantity("" + index);
+    }
+
     private ItemStateExpansionModel<T> state(final String s) {
         return new ItemStateExpansionModelImpl<>(pathExpression(), "state[" + s + "]");
+    }
+
+    private DiscountedLineItemPricePerQuantityExpansionModel<T> discountedPricePerQuantity(final String s) {
+        return new DiscountedLineItemPricePerQuantityExpansionModelImpl<>(pathExpression(), "discountedPricePerQuantity[" + s + "]");
     }
 }

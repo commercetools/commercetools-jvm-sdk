@@ -27,6 +27,12 @@ public interface CartExpansionModel<T> extends CartLikeExpansionModel<T> {
     LineItemExpansionModel<T> lineItems(int index);
 
     @Override
+    CustomLineItemExpansionModel<T> customLineItems();
+
+    @Override
+    CustomLineItemExpansionModel<T> customLineItems(int index);
+
+    @Override
     PaymentInfoExpansionModel<T> paymentInfo();
 
     @Override
