@@ -8,7 +8,8 @@ import {{this}};
 {{#each modifiers}}{{this}} {{/each}} {{type}} {{name}}{{#if baseClass}} extends {{baseClass}}{{/if}}{{#if interfaces}} implements {{#each interfaces}} {{this}} {{/each}}{{/if}} {
     {{#each fields}}{{> field this}}
     {{/each}}
-    {{#each constructors}}{{this}}{{/each}}
+    {{#each constructors}}{{> method this}}
+    {{/each}}
 
     {{#each methods}}{{> method this}}
     {{/each}}

@@ -1,3 +1,3 @@
-{{#each modifiers}}{{this}} {{/each}} {{returnType}} {{name}}({{#each parameters}}{{#each modifiers}}{{this}} {{/each}} {{type}} {{name}} {{/each}}) {
+{{#each modifiers}}{{this}} {{/each}} {{returnType}} {{name}}({{#each parameters}}{{#unless @first}}, {{/unless}}{{> parameter this}}{{/each}}) {
         {{body}}
     }

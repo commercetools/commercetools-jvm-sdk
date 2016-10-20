@@ -11,6 +11,7 @@ final class ClassModelBuilder {
     private String type;
     private List<String> modifiers = new LinkedList<>();
     private List<MethodModel> methods = new LinkedList<>();
+    private List<MethodModel> constructors = new LinkedList<>();
     private List<FieldModel> fields = new LinkedList<>();
     private List<String> imports = new LinkedList<>();
     private List<String> interfaces = new LinkedList<>();
@@ -38,6 +39,7 @@ final class ClassModelBuilder {
         r.setFields(fields);
         r.setImports(imports);
         r.setInterfaces(interfaces);
+        r.setConstructors(constructors);
         return r;
     }
 
@@ -71,4 +73,8 @@ final class ClassModelBuilder {
     }
 
 
+    public ClassModelBuilder addConstructor(final MethodModel methodModel) {
+        constructors.add(methodModel);
+        return this;
+    }
 }

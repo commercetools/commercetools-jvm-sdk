@@ -17,12 +17,12 @@ import javax.tools.Diagnostic;
 import javax.tools.JavaFileObject;
 import java.io.IOException;
 import java.io.Writer;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.CompletionException;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
+import static java.util.Arrays.asList;
 import static java.util.Collections.singletonList;
 
 @SupportedAnnotationTypes({"io.sphere.sdk.annotations.ResourceDraftValue"})
@@ -70,8 +70,28 @@ public class ResourceDraftValueAnnotationProcessor extends AbstractProcessor {
         addDslMethods(typeElement, builder);
         addNewBuilderMethod(typeElement, builder, packageName);
         builder.interfaces(singletonList(typeElement.getSimpleName().toString()));
+        addDslConstructor(name, typeElement, builder);
 
         writeClass(typeElement, name, builder);
+    }
+
+    private void addDslConstructor(final String name, final TypeElement typeElement, final ClassModelBuilder builder) {
+        final MethodModel c = new MethodModel();
+        //no modifiers since it should be package scope
+        final List<MethodParameterModel> parameters = builder.build().getFields().stream()
+                .filter(f -> !f.getModifiers().contains("static"))
+                .sorted(Comparator.comparing(f -> f.getName()))
+                .map(f -> {
+                    final MethodParameterModel p = new MethodParameterModel();
+                    p.setModifiers(asList("final"));
+                    p.setType(f.getType());
+                    p.setName(f.getName());
+                    return p;
+                })
+                .collect(Collectors.toList());
+        c.setParameters(parameters);
+        c.setName(name);
+        builder.addConstructor(c);
     }
 
     private String dslName(final TypeElement typeElement) {

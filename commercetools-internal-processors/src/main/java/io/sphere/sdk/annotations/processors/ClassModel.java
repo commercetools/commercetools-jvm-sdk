@@ -9,6 +9,7 @@ final class ClassModel {
     private String packageName;
     private List<String> modifiers = new LinkedList<>();
     private List<MethodModel> methods = new LinkedList<>();
+    private List<MethodModel> constructors = new LinkedList<>();
     private List<FieldModel> fields = new LinkedList<>();
     private List<String> imports = new LinkedList<>();
     private List<String> interfaces = new LinkedList<>();
@@ -75,5 +76,13 @@ final class ClassModel {
 
     public void setInterfaces(final List<String> interfaces) {
         this.interfaces = interfaces;
+    }
+
+    public List<MethodModel> getConstructors() {
+        return constructors;
+    }
+
+    public void setConstructors(final List<MethodModel> constructors) {
+        this.constructors = constructors;
     }
 }
