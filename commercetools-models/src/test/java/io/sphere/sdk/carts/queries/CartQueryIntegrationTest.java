@@ -65,7 +65,7 @@ public class CartQueryIntegrationTest extends IntegrationTest {
     @Test
     public void expandLineItemsDiscount() throws Exception {
         final RelativeCartDiscountValue relativeCartDiscountValue = RelativeCartDiscountValue.of(15000);
-        withDiscountedLineItem(client(), relativeCartDiscountValue, (cart) -> {
+        withCartHavingCartDiscountedLineItem(client(), relativeCartDiscountValue, (cart) -> {
             final CartQuery query = CartQuery.of()
                     .withPredicates(m -> m.id().is(cart.getId()))
                     .withExpansionPaths(m -> m.lineItems().discountedPricePerQuantity().discountedPrice().includedDiscounts().discount());
@@ -75,7 +75,6 @@ public class CartQueryIntegrationTest extends IntegrationTest {
                         loadedCart.getLineItems().get(0).getDiscountedPricePerQuantity().get(0).getDiscountedPrice().getIncludedDiscounts().get(0).getDiscount();
                 assertThat(cartDiscountReference.getObj()).isNotNull();
                 final CartDiscount lineItemDiscount = cartDiscountReference.getObj();
-                assertThat(lineItemDiscount).isNotNull();
                 final CartDiscountValue customLineItemDiscountValue = lineItemDiscount.getValue();
                 assertThat(customLineItemDiscountValue).isEqualTo(relativeCartDiscountValue);
             });
@@ -85,7 +84,7 @@ public class CartQueryIntegrationTest extends IntegrationTest {
     @Test
     public void expandCustomLineItemsDiscount() throws Exception {
         final RelativeCartDiscountValue relativeCartDiscountValue = RelativeCartDiscountValue.of(10000);
-        withDiscountedCustomLineItem(client(), relativeCartDiscountValue, (cart) -> {
+        withCartHavingDiscountedCustomLineItem(client(), relativeCartDiscountValue, (cart) -> {
             final CartQuery query = CartQuery.of()
                     .withPredicates(m -> m.id().is(cart.getId()))
                     .withExpansionPaths(m -> m.customLineItems().discountedPricePerQuantity().discountedPrice().includedDiscounts().discount());
@@ -95,7 +94,6 @@ public class CartQueryIntegrationTest extends IntegrationTest {
                         loadedCart.getCustomLineItems().get(0).getDiscountedPricePerQuantity().get(0).getDiscountedPrice().getIncludedDiscounts().get(0).getDiscount();
                 assertThat(cartDiscountReference.getObj()).isNotNull();
                 final CartDiscount customLineItemDiscount = cartDiscountReference.getObj();
-                assertThat(customLineItemDiscount).isNotNull();
                 final CartDiscountValue customLineItemDiscountValue = customLineItemDiscount.getValue();
                 assertThat(customLineItemDiscountValue).isEqualTo(relativeCartDiscountValue);
             });

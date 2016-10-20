@@ -10,7 +10,7 @@ import io.sphere.sdk.carts.commands.CartUpdateCommand;
 import io.sphere.sdk.carts.commands.updateactions.*;
 import io.sphere.sdk.carts.queries.CartByIdGet;
 import io.sphere.sdk.client.BlockingSphereClient;
-import io.sphere.sdk.commands.UpdateActionImpl;
+import io.sphere.sdk.commands.UpdateAction;
 import io.sphere.sdk.customers.Customer;
 import io.sphere.sdk.discountcodes.DiscountCode;
 import io.sphere.sdk.discountcodes.DiscountCodeDraftDsl;
@@ -21,10 +21,6 @@ import io.sphere.sdk.models.AddressBuilder;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.orders.Order;
 import io.sphere.sdk.orders.commands.OrderDeleteCommand;
-import io.sphere.sdk.productdiscounts.AbsoluteProductDiscountValue;
-import io.sphere.sdk.productdiscounts.ProductDiscountDraft;
-import io.sphere.sdk.productdiscounts.ProductDiscountPredicate;
-import io.sphere.sdk.productdiscounts.ProductDiscountValue;
 import io.sphere.sdk.products.Product;
 import io.sphere.sdk.utils.MoneyImpl;
 
@@ -158,7 +154,7 @@ public class CartFixtures {
         });
     }
 
-    public static void withDiscountedLineItem(final BlockingSphereClient client, final RelativeCartDiscountValue relativeCartDiscountValue, final Consumer<Cart> consumer) {
+    public static void withCartHavingCartDiscountedLineItem(final BlockingSphereClient client, final RelativeCartDiscountValue relativeCartDiscountValue, final Consumer<Cart> consumer) {
         withTaxedProduct(client, product -> {
             withCart(client, (cart) -> {
                 withCustomer(client, (customer) -> {
@@ -170,7 +166,7 @@ public class CartFixtures {
                         final long quantity = 3;
                         final String productId = product.getId();
                         final AddLineItem addLineItemAction = AddLineItem.of(productId, 1, quantity);
-                        final List<UpdateActionImpl<Cart>> updateActions =
+                        final List<UpdateAction<Cart>> updateActions =
                                 asList(addLineItemAction, SetCustomerId.of(customer.getId()), Recalculate.of().withUpdateProductData(true));
                         final Cart updatedCart = client.executeBlocking(CartUpdateCommand.of(cart, updateActions));
                         consumer.accept(updatedCart);
@@ -182,7 +178,7 @@ public class CartFixtures {
         });
     }
 
-    public static void withDiscountedCustomLineItem(final BlockingSphereClient client, final RelativeCartDiscountValue relativeCartDiscountValue, final Consumer<Cart> consumer) {
+    public static void withCartHavingDiscountedCustomLineItem(final BlockingSphereClient client, final RelativeCartDiscountValue relativeCartDiscountValue, final Consumer<Cart> consumer) {
         withTaxedProduct(client, product -> {
             withCustomerAndFilledCart(client, (customer, cart) -> {
                 CartDiscountFixtures.withCartDiscount(client, builder -> builder
@@ -202,13 +198,6 @@ public class CartFixtures {
                 client.executeBlocking(CartDeleteCommand.of(cartToDelete));
             });
         });
-    }
-
-    private static ProductDiscountDraft discountDraftOfAbsoluteValue(final Product product, final MonetaryAmount amount) {
-        final AbsoluteProductDiscountValue value = ProductDiscountValue.ofAbsolute(amount);
-        final ProductDiscountPredicate predicate =
-                ProductDiscountPredicate.of("product.id = \"" + product.getId() + "\"");
-        return ProductDiscountDraft.of(randomSlug(), randomSlug(), predicate, value, randomSortOrder(), true);
     }
 
     public static void withCartAndDiscountCode(final BlockingSphereClient client, final BiFunction<Cart, DiscountCode, Cart> user) {
