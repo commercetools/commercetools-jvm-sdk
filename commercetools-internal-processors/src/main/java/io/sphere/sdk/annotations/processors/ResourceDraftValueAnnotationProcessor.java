@@ -117,15 +117,25 @@ public class ResourceDraftValueAnnotationProcessor extends AbstractProcessor {
         values.put("fieldName", fieldName);
         method.setBody(handlebars.compile("builderMethodBody").apply(values));
         builder.addMethod(method);
+        final FieldModel field = new FieldModel();
+        field.addModifiers("private");
+        field.setType(getType(element));
+        field.setName(fieldName);
+        builder.addField(field);
     }
 
     private MethodParameterModel getBuilderMethodParameterModel(final Element element, final String fieldName) {
         final MethodParameterModel parameter = new MethodParameterModel();
-        parameter.setModifiers(singletonList("public"));
+        parameter.setModifiers(singletonList("final"));
         parameter.setName(fieldName);
-        final ReturnTypeElementVisitor visitor = new ReturnTypeElementVisitor();
-        parameter.setType(element.accept(visitor, null));
+        final String type = getType(element);
+        parameter.setType(type);
         return parameter;
+    }
+
+    private String getType(final Element element) {
+        final ReturnTypeElementVisitor visitor = new ReturnTypeElementVisitor();
+        return element.accept(visitor, null);
     }
 
     private String fieldNameFromGetter(final String methodName) {

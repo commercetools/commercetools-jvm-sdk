@@ -9,6 +9,7 @@ final class ClassModel {
     private String packageName;
     private List<String> modifiers = new LinkedList<>();
     private List<MethodModel> methods = new LinkedList<>();
+    private List<FieldModel> fields = new LinkedList<>();
 
     public String getName() {
         return name;
@@ -48,5 +49,13 @@ final class ClassModel {
 
     public void setMethods(final List<MethodModel> methods) {
         this.methods = methods;
+    }
+
+    public List<FieldModel> getFields() {
+        return fields;
+    }
+
+    public void setFields(final List<FieldModel> fields) {
+        this.fields = fields;
     }
 }

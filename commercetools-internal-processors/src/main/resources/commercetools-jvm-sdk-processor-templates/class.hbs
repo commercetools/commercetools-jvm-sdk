@@ -6,12 +6,13 @@
 
 {{#if javadoc}}/** {{javadoc}} */{{/if}}
 {{#each modifiers}}{{this}} {{/each}} {{type}} {{name}} {
-    {{#each fields}}{{this}}{{/each}}
+    {{#each fields}}
+        {{> field this}} {{/each}}
     {{#each constructors}}{{this}}{{/each}}
 
     {{#each methods}}
-        {{#each modifiers}}{{this}} {{/each}} {{returnType}} {{name}}({{#each parameters}}{{#each modifiers}}{{this}} {{/each}} {{type}} {{name}} {{/each}}) {
-            {{body}}
-        }
+        {{> method this}}
     {{/each}}
+
+fail
 }
