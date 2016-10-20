@@ -154,14 +154,14 @@ public class CartFixtures {
         });
     }
 
-    public static void withCartHavingCartDiscountedLineItem(final BlockingSphereClient client, final RelativeCartDiscountValue relativeCartDiscountValue, final Consumer<Cart> consumer) {
+    public static void withCartHavingCartDiscountedLineItem(final BlockingSphereClient client, final RelativeCartDiscountValue relativeCartDiscountValue, final UnaryOperator<Cart> op) {
         withTaxedProduct(client, product -> {
-            withCart(client, (cart) -> {
-                withCustomer(client, (customer) -> {
-                    CartDiscountFixtures.withCartDiscount(client, builder -> builder
-                            .cartPredicate(CartDiscountPredicate.of("customer.id=\"" + customer.getId() + "\""))
-                            .value(relativeCartDiscountValue)
-                            .target(LineItemsTarget.of("product.id=\"" + product.getId() + "\"")), cartDiscount -> {
+            withCustomer(client, (customer) -> {
+                CartDiscountFixtures.withCartDiscount(client, builder -> builder
+                        .cartPredicate(CartDiscountPredicate.of("customer.id=\"" + customer.getId() + "\""))
+                        .value(relativeCartDiscountValue)
+                        .target(LineItemsTarget.of("product.id=\"" + product.getId() + "\"")), cartDiscount -> {
+                    withCart(client, (cart) -> {
                         assertThat(cart.getLineItems()).hasSize(0);
                         final long quantity = 3;
                         final String productId = product.getId();
@@ -169,33 +169,35 @@ public class CartFixtures {
                         final List<UpdateAction<Cart>> updateActions =
                                 asList(addLineItemAction, SetCustomerId.of(customer.getId()), Recalculate.of().withUpdateProductData(true));
                         final Cart updatedCart = client.executeBlocking(CartUpdateCommand.of(cart, updateActions));
-                        consumer.accept(updatedCart);
+                        final Cart cartToDelete = op.apply(updatedCart);
+                        return cartToDelete;
                     });
                 });
-                final Cart cartToDelete = client.executeBlocking(CartByIdGet.of(cart));
-                return cartToDelete;
             });
         });
     }
 
-    public static void withCartHavingDiscountedCustomLineItem(final BlockingSphereClient client, final RelativeCartDiscountValue relativeCartDiscountValue, final Consumer<Cart> consumer) {
+    public static void withCartHavingDiscountedCustomLineItem(final BlockingSphereClient client, final RelativeCartDiscountValue relativeCartDiscountValue, final UnaryOperator<Cart> op) {
         withTaxedProduct(client, product -> {
-            withCustomerAndFilledCart(client, (customer, cart) -> {
+            withCustomer(client, (customer) -> {
                 CartDiscountFixtures.withCartDiscount(client, builder -> builder
                         .cartPredicate(CartDiscountPredicate.of("customer.id=\"" + customer.getId() + "\""))
                         .value(relativeCartDiscountValue)
                         .target(CustomLineItemsTarget.of("slug =\"thing-discounted-slug\"")), cartDiscount -> {
-                    assertThat(cart.getCustomLineItems()).hasSize(0);
-                    final MonetaryAmount money = MoneyImpl.of("23.50", EUR);
-                    final String slug = "thing-discounted-slug";
-                    final LocalizedString name = en("thing");
-                    final CustomLineItemDraft item = CustomLineItemDraft.of(name, slug, money, product.getTaxCategory(), 5L, null);
-                    final AddCustomLineItem addCustomLineItemAction = AddCustomLineItem.of(item);
-                    final Cart updatedCart = client.executeBlocking(CartUpdateCommand.of(cart, asList(addCustomLineItemAction)));
-                    consumer.accept(updatedCart);
+                    withCart(client, (cart) -> {
+                        assertThat(cart.getCustomLineItems()).hasSize(0);
+                        final MonetaryAmount money = MoneyImpl.of("23.50", EUR);
+                        final String slug = "thing-discounted-slug";
+                        final LocalizedString name = en("thing");
+                        final CustomLineItemDraft item = CustomLineItemDraft.of(name, slug, money, product.getTaxCategory(), 5L, null);
+                        final AddCustomLineItem addCustomLineItemAction = AddCustomLineItem.of(item);
+                        final List<UpdateAction<Cart>> updateActions =
+                                asList(addCustomLineItemAction, SetCustomerId.of(customer.getId()), Recalculate.of().withUpdateProductData(true));
+                        final Cart updatedCart = client.executeBlocking(CartUpdateCommand.of(cart, updateActions));
+                        final Cart cartToDelete = op.apply(updatedCart);
+                        return cartToDelete;
+                    });
                 });
-                final Cart cartToDelete = client.executeBlocking(CartByIdGet.of(cart));
-                client.executeBlocking(CartDeleteCommand.of(cartToDelete));
             });
         });
     }

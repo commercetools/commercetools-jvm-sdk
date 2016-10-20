@@ -69,15 +69,14 @@ public class CartQueryIntegrationTest extends IntegrationTest {
             final CartQuery query = CartQuery.of()
                     .withPredicates(m -> m.id().is(cart.getId()))
                     .withExpansionPaths(m -> m.lineItems().discountedPricePerQuantity().discountedPrice().includedDiscounts().discount());
-            assertEventually(() -> {
-                final Cart loadedCart = client().executeBlocking(query).head().get();
-                final Reference<CartDiscount> cartDiscountReference =
-                        loadedCart.getLineItems().get(0).getDiscountedPricePerQuantity().get(0).getDiscountedPrice().getIncludedDiscounts().get(0).getDiscount();
-                assertThat(cartDiscountReference.getObj()).isNotNull();
-                final CartDiscount lineItemDiscount = cartDiscountReference.getObj();
-                final CartDiscountValue customLineItemDiscountValue = lineItemDiscount.getValue();
-                assertThat(customLineItemDiscountValue).isEqualTo(relativeCartDiscountValue);
-            });
+            final Cart loadedCart = client().executeBlocking(query).head().get();
+            final Reference<CartDiscount> cartDiscountReference =
+                    loadedCart.getLineItems().get(0).getDiscountedPricePerQuantity().get(0).getDiscountedPrice().getIncludedDiscounts().get(0).getDiscount();
+            assertThat(cartDiscountReference.getObj()).isNotNull();
+            final CartDiscount lineItemDiscount = cartDiscountReference.getObj();
+            final CartDiscountValue customLineItemDiscountValue = lineItemDiscount.getValue();
+            assertThat(customLineItemDiscountValue).isEqualTo(relativeCartDiscountValue);
+            return loadedCart;
         });
     }
 
@@ -88,15 +87,14 @@ public class CartQueryIntegrationTest extends IntegrationTest {
             final CartQuery query = CartQuery.of()
                     .withPredicates(m -> m.id().is(cart.getId()))
                     .withExpansionPaths(m -> m.customLineItems().discountedPricePerQuantity().discountedPrice().includedDiscounts().discount());
-            assertEventually(() -> {
-                final Cart loadedCart = client().executeBlocking(query).head().get();
-                final Reference<CartDiscount> cartDiscountReference =
-                        loadedCart.getCustomLineItems().get(0).getDiscountedPricePerQuantity().get(0).getDiscountedPrice().getIncludedDiscounts().get(0).getDiscount();
-                assertThat(cartDiscountReference.getObj()).isNotNull();
-                final CartDiscount customLineItemDiscount = cartDiscountReference.getObj();
-                final CartDiscountValue customLineItemDiscountValue = customLineItemDiscount.getValue();
-                assertThat(customLineItemDiscountValue).isEqualTo(relativeCartDiscountValue);
-            });
+            final Cart loadedCart = client().executeBlocking(query).head().get();
+            final Reference<CartDiscount> cartDiscountReference =
+                    loadedCart.getCustomLineItems().get(0).getDiscountedPricePerQuantity().get(0).getDiscountedPrice().getIncludedDiscounts().get(0).getDiscount();
+            assertThat(cartDiscountReference.getObj()).isNotNull();
+            final CartDiscount customLineItemDiscount = cartDiscountReference.getObj();
+            final CartDiscountValue customLineItemDiscountValue = customLineItemDiscount.getValue();
+            assertThat(customLineItemDiscountValue).isEqualTo(relativeCartDiscountValue);
+            return loadedCart;
         });
     }
 
