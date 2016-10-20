@@ -1,12 +1,12 @@
 package io.sphere.sdk.sequencegenerators;
 
-import io.sphere.sdk.client.NotFoundException;
 import io.sphere.sdk.client.SphereAccessTokenSupplier;
 import io.sphere.sdk.client.SphereApiConfig;
 import io.sphere.sdk.client.SphereClient;
 import io.sphere.sdk.customobjects.CustomObject;
 import io.sphere.sdk.customobjects.queries.CustomObjectByKeyGet;
 import io.sphere.sdk.http.HttpClient;
+import io.sphere.sdk.http.HttpMethod;
 import io.sphere.sdk.http.HttpRequest;
 import io.sphere.sdk.http.HttpResponse;
 import io.sphere.sdk.test.IntegrationTest;
@@ -20,6 +20,8 @@ import java.util.concurrent.CompletionStage;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import static io.sphere.sdk.http.HttpStatusCode.CONFLICT_409;
+import static io.sphere.sdk.http.HttpStatusCode.NOT_FOUND_404;
 import static io.sphere.sdk.test.SphereTestUtils.randomKey;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.catchThrowable;
@@ -105,34 +107,27 @@ public class BigIntegerNumberGeneratorIntegrationTest extends IntegrationTest {
     public void failWithNotConcurrentModificationException() {
         final String container = randomKey();
         final String key = randomKey();
+
+        //Validate that generator is executed just once when there is a non 409 exception
+        final HttpBadRequestClient notFoundRequestClient = new HttpBadRequestClient(NOT_FOUND_404);
         final CustomObjectBigIntegerNumberGeneratorConfig config =
-                CustomObjectBigIntegerNumberGeneratorConfigBuilder.of(getSphereClient(getBadRequestHttpClient()), key)
+                CustomObjectBigIntegerNumberGeneratorConfigBuilder.of(getSphereClient(notFoundRequestClient), key)
                         .container(container)
                         .build();
         final BigIntegerNumberGenerator generator = CustomObjectBigIntegerNumberGenerator.of(config);
-
         Throwable thrown = catchThrowable(() -> { generator.getNextNumber().toCompletableFuture().join(); });
         assertThat(thrown).isNotNull();
-        assertThat(thrown).hasCauseInstanceOf(NotFoundException.class);
+        assertThat(notFoundRequestClient.getCountGetRequests()).isEqualTo(1);
 
-    }
-
-    private HttpClient getBadRequestHttpClient() {
-        return new HttpClient() {
-            @Override
-            public CompletionStage<HttpResponse> execute(final HttpRequest httpRequest) {
-                final String message = "{\n" +
-                        "  \"statusCode\" : 404,\n" +
-                        "  \"message\" : \"The addressed resource was not found / does not exist..\"\n" +
-                        "}";
-                return CompletableFuture.completedFuture(HttpResponse.of(404, message));
-            }
-
-            @Override
-            public void close() {
-
-            }
-        };
+        //Validate that generator is executed more than once when there is a 409 exception
+        final HttpBadRequestClient concurrentRequestClient = new HttpBadRequestClient(CONFLICT_409);
+        final CustomObjectBigIntegerNumberGeneratorConfig config2 =
+                CustomObjectBigIntegerNumberGeneratorConfigBuilder.of(getSphereClient(concurrentRequestClient), key)
+                        .container(container)
+                        .build();
+        final BigIntegerNumberGenerator generator2 = CustomObjectBigIntegerNumberGenerator.of(config2);
+        catchThrowable(() -> { generator2.getNextNumber().toCompletableFuture().join(); });
+        assertThat(concurrentRequestClient.getCountGetRequests()).isGreaterThan(1);
     }
 
     private SphereClient getSphereClient(final HttpClient httpClient) {
@@ -145,5 +140,34 @@ public class BigIntegerNumberGeneratorIntegrationTest extends IntegrationTest {
                         .container(randomKey())
                         .build();
         return CustomObjectBigIntegerNumberGenerator.of(config);
+    }
+
+    private class HttpBadRequestClient implements HttpClient {
+        private int countGetRequests = 0;
+        private int errorCode;
+
+        HttpBadRequestClient(final int errorCode) {
+            this.errorCode = errorCode;
+        }
+
+        @Override
+        public CompletionStage<HttpResponse> execute(final HttpRequest httpRequest) {
+            if (httpRequest.getHttpMethod() == HttpMethod.GET) {
+                countGetRequests++;
+            }
+            final String message = "{\n" +
+                    "  \"statusCode\" : " + this.errorCode + "\n" +
+                    "}";
+            return CompletableFuture.completedFuture(HttpResponse.of(this.errorCode, message));
+        }
+
+        @Override
+        public void close() {
+
+        }
+
+        public int getCountGetRequests() {
+            return countGetRequests;
+        }
     }
 }
