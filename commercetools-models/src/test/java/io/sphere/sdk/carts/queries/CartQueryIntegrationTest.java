@@ -2,6 +2,7 @@ package io.sphere.sdk.carts.queries;
 
 import io.sphere.sdk.cartdiscounts.CartDiscount;
 import io.sphere.sdk.cartdiscounts.CartDiscountValue;
+import io.sphere.sdk.cartdiscounts.DiscountedLineItemPriceForQuantity;
 import io.sphere.sdk.cartdiscounts.RelativeCartDiscountValue;
 import io.sphere.sdk.carts.*;
 import io.sphere.sdk.carts.commands.CartCreateCommand;
@@ -73,8 +74,10 @@ public class CartQueryIntegrationTest extends IntegrationTest {
                         .withPredicates(m -> m.id().is(cart.getId()))
                         .withExpansionPaths(m -> m.lineItems().discountedPricePerQuantity().discountedPrice().includedDiscounts().discount());
                 final Cart loadedCart = client().executeBlocking(query).head().get();
+                final List<DiscountedLineItemPriceForQuantity> discountedPricePerQuantity = loadedCart.getLineItems().get(0).getDiscountedPricePerQuantity();
+                assertThat(discountedPricePerQuantity).hasSize(1);
                 final Reference<CartDiscount> cartDiscountReference =
-                        loadedCart.getLineItems().get(0).getDiscountedPricePerQuantity().get(0).getDiscountedPrice().getIncludedDiscounts().get(0).getDiscount();
+                        discountedPricePerQuantity.get(0).getDiscountedPrice().getIncludedDiscounts().get(0).getDiscount();
                 assertThat(cartDiscountReference.getObj()).isNotNull();
                 final CartDiscount lineItemDiscount = cartDiscountReference.getObj();
                 final CartDiscountValue customLineItemDiscountValue = lineItemDiscount.getValue();
@@ -95,8 +98,10 @@ public class CartQueryIntegrationTest extends IntegrationTest {
                         .withPredicates(m -> m.id().is(cart.getId()))
                         .withExpansionPaths(m -> m.customLineItems().discountedPricePerQuantity().discountedPrice().includedDiscounts().discount());
                 final Cart loadedCart = client().executeBlocking(query).head().get();
+                final List<DiscountedLineItemPriceForQuantity> discountedPricePerQuantity = loadedCart.getCustomLineItems().get(0).getDiscountedPricePerQuantity();
+                assertThat(discountedPricePerQuantity).hasSize(1);
                 final Reference<CartDiscount> cartDiscountReference =
-                        loadedCart.getCustomLineItems().get(0).getDiscountedPricePerQuantity().get(0).getDiscountedPrice().getIncludedDiscounts().get(0).getDiscount();
+                        discountedPricePerQuantity.get(0).getDiscountedPrice().getIncludedDiscounts().get(0).getDiscount();
                 assertThat(cartDiscountReference.getObj()).isNotNull();
                 final CartDiscount customLineItemDiscount = cartDiscountReference.getObj();
                 final CartDiscountValue customLineItemDiscountValue = customLineItemDiscount.getValue();
