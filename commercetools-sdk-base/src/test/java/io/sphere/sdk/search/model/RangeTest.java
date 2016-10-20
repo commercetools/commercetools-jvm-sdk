@@ -67,7 +67,9 @@ public class RangeTest {
     public void isNotInvalidWhenBoundsAreInverted() throws Exception {
         final Bound<Integer> lowerBound = Bound.exclusive(5);
         final Bound<Integer> upperBound = Bound.exclusive(4);
-        assertThatThrownBy(() -> range(lowerBound, upperBound)).isNotInstanceOf(InvertedBoundsException.class);
+        final Range<Integer> range = range(lowerBound, upperBound);
+        assertThat(range.lowerBound()).isEqualTo(lowerBound);
+        assertThat(range.upperBound()).isEqualTo(upperBound);
     }
 
     @Test
