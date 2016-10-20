@@ -17,9 +17,6 @@ class Range<T extends Comparable<? super T>> extends Base {
     Range(@Nullable final Bound<T> lowerBound, @Nullable final Bound<T> upperBound) {
         this.lowerBound = lowerBound;
         this.upperBound = upperBound;
-        if (hasInvertedBounds()) {
-            throw new InvertedBoundsException(this);
-        }
         if (hasSameExclusiveBounds()) {
             throw new SameExclusiveBoundsException(this);
         }
@@ -105,8 +102,8 @@ class Range<T extends Comparable<? super T>> extends Base {
 
     public String serialize(final Function<T, String> serializer) {
         return String.format("(%s to %s)",
-                Optional.ofNullable(lowerEndpoint()).map(serializer::apply).orElse(UNBOUND),
-                Optional.ofNullable(upperEndpoint()).map(serializer::apply).orElse(UNBOUND));
+                Optional.ofNullable(lowerEndpoint()).map(serializer).orElse(UNBOUND),
+                Optional.ofNullable(upperEndpoint()).map(serializer).orElse(UNBOUND));
     }
 
     @Override
@@ -114,14 +111,6 @@ class Range<T extends Comparable<? super T>> extends Base {
         final String lower = Optional.ofNullable(lowerBound()).map(b -> (b.isExclusive() ? "(" : "[") + b.endpoint()).orElse("(*");
         final String upper = Optional.ofNullable(upperBound()).map(b -> b.endpoint() + (b.isExclusive() ? ")" : "]")).orElse("*)");
         return lower + " to " + upper;
-    }
-
-    /**
-     * Determines whether the lower endpoint is greater than the upper endpoint.
-     * @return true if the bounds are inverted, false otherwise.
-     */
-    private boolean hasInvertedBounds() {
-        return isBounded() && ObjectUtils.compare(lowerEndpoint(), upperEndpoint()) > 0;
     }
 
     /**

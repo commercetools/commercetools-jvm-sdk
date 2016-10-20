@@ -3,7 +3,6 @@ package io.sphere.sdk.search.model;
 /**
  * Exception for invalid {@link Range}s.
  *
- * @see InvertedBoundsException
  * @see SameExclusiveBoundsException
  */
 public class InvalidRangeException extends IllegalArgumentException {

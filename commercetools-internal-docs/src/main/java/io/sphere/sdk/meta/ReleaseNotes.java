@@ -91,6 +91,11 @@ import java.util.function.Function;
  </ul>
  -->
 
+ <h3 class=released-version id="v1_6_0">1.6.0 (21.10.2016)</h3>
+ <ul>
+ <li class=change-in-release>Deleted {@code InvalidRangeException}, which is no longer thrown on {@link io.sphere.sdk.search.model.Range} creation. See <a href="https://github.com/commercetools/commercetools-jvm-sdk/issues/1247">#1247</a></li>
+ </ul>
+
  <h3 class=released-version id="v1_5_0">1.5.0 (14.10.2016)</h3>
  <ul>
  <li class=new-in-release>{@link Asset}s on products</li>

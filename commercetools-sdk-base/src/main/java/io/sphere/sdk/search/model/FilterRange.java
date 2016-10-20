@@ -16,7 +16,6 @@ public final class FilterRange<T extends Comparable<? super T>> extends Range<T>
      * @param upperEndpoint upper endpoint, included in the range.
      * @param <T> type of the range domain.
      * @return the range with the given bounds of the form [a, b].
-     * @throws InvertedBoundsException if the lower endpoint is greater than the upper endpoint.
      */
     public static <T extends Comparable<? super T>> FilterRange<T> of(final T lowerEndpoint, final T upperEndpoint) {
         return new FilterRange<>(Bound.inclusive(lowerEndpoint), Bound.inclusive(upperEndpoint));
