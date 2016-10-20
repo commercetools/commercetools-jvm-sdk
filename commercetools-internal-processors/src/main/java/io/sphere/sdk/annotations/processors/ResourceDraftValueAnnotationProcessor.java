@@ -5,6 +5,7 @@ import com.github.jknack.handlebars.Handlebars;
 import com.github.jknack.handlebars.Template;
 import com.github.jknack.handlebars.io.ClassPathTemplateLoader;
 import io.sphere.sdk.annotations.ResourceDraftValue;
+import org.apache.commons.lang3.StringUtils;
 
 import javax.annotation.processing.AbstractProcessor;
 import javax.annotation.processing.RoundEnvironment;
@@ -20,12 +21,14 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Set;
 import java.util.concurrent.CompletionException;
+import java.util.function.Predicate;
 
 import static java.util.Collections.singletonList;
 
 @SupportedAnnotationTypes({"io.sphere.sdk.annotations.ResourceDraftValue"})
 @SupportedSourceVersion(SourceVersion.RELEASE_8)
 public class ResourceDraftValueAnnotationProcessor extends AbstractProcessor {
+    public static final Predicate<Element> NORMAL_GETTERS_PREDICATE = e -> ElementKind.METHOD.equals(e.getKind()) && e.getSimpleName().toString().matches("^get[A-Z].*");
     private static Handlebars handlebars;
 
     static {
@@ -53,19 +56,88 @@ public class ResourceDraftValueAnnotationProcessor extends AbstractProcessor {
 
 
             writeBuilderClass(typeElement, packageElement);
+            writeDslClass(typeElement, packageElement);
         }
     }
 
+    private void writeDslClass(final TypeElement typeElement, final PackageElement packageElement) {
+        String name = dslName(typeElement);
+        final ClassModelBuilder builder = ClassModelBuilder.of(name, ClassType.CLASS);
+        builder.addModifiers("abstract");
+        final String packageName = packageElement.getQualifiedName().toString();
+        builder.packageName(packageName);
+
+        addDslMethods(typeElement, builder);
+        addNewBuilderMethod(typeElement, builder, packageName);
+        builder.interfaces(singletonList(typeElement.getSimpleName().toString()));
+
+        writeClass(typeElement, name, builder);
+    }
+
+    private String dslName(final TypeElement typeElement) {
+        return "Generated" + typeElement.getSimpleName() + "Dsl";
+    }
+
+    private void addNewBuilderMethod(final TypeElement typeElement, final ClassModelBuilder builder, final String packageName) {
+        final MethodModel method = new MethodModel();
+        method.setModifiers(singletonList("private"));
+        final String associatedBuilderName = associatedBuilderName(typeElement);
+        builder.addImport(packageName + "." + associatedBuilderName);
+        method.setReturnType(associatedBuilderName);
+        method.setName("newBuilder");
+        method.setBody("return null;");//TODO
+        builder.addMethod(method);
+    }
+
+    private void writeClass(final TypeElement typeElement, final String name, final ClassModelBuilder builder) {
+        final ClassModel classModel = builder.build();
+        writeClass(typeElement, name, classModel);
+    }
+
     private void writeBuilderClass(final TypeElement typeElement, final PackageElement packageElement) {
-        String name = "Generated" + typeElement.getSimpleName() + "Builder";
+        String name = associatedBuilderName(typeElement);
         final ClassModelBuilder builder = ClassModelBuilder.of(name, ClassType.CLASS);
         builder.addModifiers("abstract");
         builder.packageName(packageElement.getQualifiedName().toString());
 
         addBuilderMethods(typeElement, builder);
 
-        final ClassModel classModel = builder.build();
-        writeClass(typeElement, name, classModel);
+        addBuildMethod(typeElement, builder);
+
+        writeClass(typeElement, name, builder);
+    }
+
+    private void addBuildMethod(final TypeElement typeElement, final ClassModelBuilder builder) {
+        final MethodModel method = new MethodModel();
+        method.addModifiers("public");
+        method.setReturnType(dslName(typeElement));
+        method.setName("build");
+        method.setBody("return null;");//TODO
+        builder.addMethod(method);
+    }
+
+    private String associatedBuilderName(final TypeElement typeElement) {
+        return "Generated" + typeElement.getSimpleName() + "Builder";
+    }
+
+    private void addDslMethods(final TypeElement typeElement, final ClassModelBuilder builder) {
+        typeElement.getEnclosedElements()
+                .stream()
+                .filter(NORMAL_GETTERS_PREDICATE)
+                .forEach(element -> addDslMethod(element, builder));
+    }
+
+    private void addBuilderMethods(final TypeElement typeElement, final ClassModelBuilder builder) {
+        typeElement.getEnclosedElements()
+                .stream()
+                .filter(e -> ElementKind.METHOD.equals(e.getKind()) && e.getSimpleName().toString().matches("^get[A-Z].*"))
+                .forEach(element -> {
+                    try {
+                        addBuilderMethod(element, builder);
+                    } catch (IOException e) {
+                        throw new CompletionException(e);
+                    }
+                });
     }
 
     private void writeClass(final TypeElement typeElement, final String name, final ClassModel classModel) {
@@ -100,17 +172,34 @@ public class ResourceDraftValueAnnotationProcessor extends AbstractProcessor {
         }
     }
 
-    private void addBuilderMethods(final TypeElement typeElement, final ClassModelBuilder builder) {
-        typeElement.getEnclosedElements()
-                .stream()
-                .filter(e -> ElementKind.METHOD.equals(e.getKind()) && e.getSimpleName().toString().matches("^get[A-Z].*"))
-                .forEach(element -> {
-                    try {
-                        addBuilderMethod(element, builder);
-                    } catch (IOException e) {
-                        throw new CompletionException(e);
-                    }
-                });
+    private void addDslMethod(final Element element, final ClassModelBuilder builder) {
+        final FieldModel field = createField(element);
+        builder.addField(field);
+        final String fieldName = fieldNameFromGetter(element.toString());
+
+        final MethodModel method = new MethodModel();
+        final String name = witherNameFromGetter(element);
+        method.setName(name);
+        method.setReturnType(builder.getName());
+        method.addModifiers("public");
+        method.setParameters(singletonList(getBuilderMethodParameterModel(element, fieldName)));
+        final HashMap<String, Object> values = new HashMap<>();
+        values.put("fieldName", fieldName);
+        method.setBody(renderTemplate("witherMethodBody", values));
+
+        builder.addMethod(method);
+    }
+
+    private String renderTemplate(final String templateName, final HashMap<String, Object> values) {
+        try {
+            return handlebars.compile(templateName).apply(values);
+        } catch (IOException e) {
+            throw new CompletionException(e);
+        }
+    }
+
+    private String witherNameFromGetter(final Element element) {
+        return "with" + StringUtils.capitalize(fieldNameFromGetter(element.toString()));
     }
 
     private void addBuilderMethod(final Element element, final ClassModelBuilder builder) throws IOException {
@@ -123,13 +212,21 @@ public class ResourceDraftValueAnnotationProcessor extends AbstractProcessor {
         method.setParameters(singletonList(getBuilderMethodParameterModel(element, fieldName)));
         final HashMap<String, Object> values = new HashMap<>();
         values.put("fieldName", fieldName);
-        method.setBody(handlebars.compile("builderMethodBody").apply(values));
+        method.setBody(renderTemplate("builderMethodBody", values));
         builder.addMethod(method);
+
+        final FieldModel field = createField(element);
+        builder.addField(field);
+    }
+
+    private FieldModel createField(final Element element) {
+        final String methodName = element.getSimpleName().toString();
+        final String fieldName = fieldNameFromGetter(methodName);
         final FieldModel field = new FieldModel();
         field.addModifiers("private");
         field.setType(getType(element));
         field.setName(fieldName);
-        builder.addField(field);
+        return field;
     }
 
     private MethodParameterModel getBuilderMethodParameterModel(final Element element, final String fieldName) {
@@ -148,6 +245,7 @@ public class ResourceDraftValueAnnotationProcessor extends AbstractProcessor {
 
     private String fieldNameFromGetter(final String methodName) {
         final String s1 = methodName.toString().replaceAll("^get", "");
-        return ("" + s1.charAt(0)).toLowerCase() + s1.substring(1);
+        final String s = ("" + s1.charAt(0)).toLowerCase() + s1.substring(1);
+        return StringUtils.substringBefore(s, "(");
     }
 }

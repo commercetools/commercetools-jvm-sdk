@@ -10,6 +10,8 @@ final class ClassModel {
     private List<String> modifiers = new LinkedList<>();
     private List<MethodModel> methods = new LinkedList<>();
     private List<FieldModel> fields = new LinkedList<>();
+    private List<String> imports = new LinkedList<>();
+    private List<String> interfaces = new LinkedList<>();
 
     public String getName() {
         return name;
@@ -57,5 +59,21 @@ final class ClassModel {
 
     public void setFields(final List<FieldModel> fields) {
         this.fields = fields;
+    }
+
+    public List<String> getImports() {
+        return imports;
+    }
+
+    public void setImports(final List<String> imports) {
+        this.imports = imports;
+    }
+
+    public List<String> getInterfaces() {
+        return interfaces;
+    }
+
+    public void setInterfaces(final List<String> interfaces) {
+        this.interfaces = interfaces;
     }
 }

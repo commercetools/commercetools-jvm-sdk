@@ -1,18 +1,15 @@
 {{#if packageName}}package {{packageName}};{{/if}}
 
 {{#each imports}}
-{{this}};
+import {{this}};
 {{/each}}
 
 {{#if javadoc}}/** {{javadoc}} */{{/if}}
-{{#each modifiers}}{{this}} {{/each}} {{type}} {{name}} {
+{{#each modifiers}}{{this}} {{/each}} {{type}} {{name}}{{#if baseClass}} extends {{baseClass}}{{/if}}{{#if interfaces}} implements {{#each interfaces}} {{this}} {{/each}}{{/if}} {
     {{#each fields}}{{> field this}}
     {{/each}}
     {{#each constructors}}{{this}}{{/each}}
 
-    {{#each methods}}
-        {{> method this}}
+    {{#each methods}}{{> method this}}
     {{/each}}
-
-fail
 }
