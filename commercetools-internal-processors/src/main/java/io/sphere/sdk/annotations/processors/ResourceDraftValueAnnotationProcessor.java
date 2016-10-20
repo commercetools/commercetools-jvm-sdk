@@ -52,43 +52,51 @@ public class ResourceDraftValueAnnotationProcessor extends AbstractProcessor {
             PackageElement packageElement = (PackageElement)typeElement.getEnclosingElement();
 
 
+            writeBuilderClass(typeElement, packageElement);
+        }
+    }
+
+    private void writeBuilderClass(final TypeElement typeElement, final PackageElement packageElement) {
+        String name = "Generated" + typeElement.getSimpleName() + "Builder";
+        final ClassModelBuilder builder = ClassModelBuilder.of(name, ClassType.CLASS);
+        builder.addModifiers("abstract");
+        builder.packageName(packageElement.getQualifiedName().toString());
+
+        addBuilderMethods(typeElement, builder);
+
+        final ClassModel classModel = builder.build();
+        writeClass(typeElement, name, classModel);
+    }
+
+    private void writeClass(final TypeElement typeElement, final String name, final ClassModel classModel) {
+        try {
+            JavaFileObject fileObject = this.processingEnv.getFiler().createSourceFile(name, new Element[]{typeElement});
+            Writer writer = fileObject.openWriter();
+            Throwable t = null;
             try {
-                String name = typeElement.getSimpleName() + "BuilderTODO";
-                final ClassModelBuilder builder = ClassModelBuilder.of(name, ClassType.CLASS);
-                builder.addModifiers("public", "final");
-                builder.packageName(packageElement.getQualifiedName().toString());
 
-                addBuilderMethods(typeElement, builder);
+                Template template = handlebars.compile("class");
 
-
-                JavaFileObject fileObject = this.processingEnv.getFiler().createSourceFile(name, new Element[]{typeElement});
-                Writer writer = fileObject.openWriter();
-                Throwable var11 = null;
-
-                try {
-
-                    Template template = handlebars.compile("class");
-                    template.apply(builder.build(), writer);
-                } catch (Throwable var23) {
-                    var11 = var23;
-                    throw var23;
-                } finally {
-                    if(writer != null) {
-                        if(var11 != null) {
-                            try {
-                                writer.close();
-                            } catch (Throwable var24) {
-                                var11.addSuppressed(var24);
-                            }
-                        } else {
+                template.apply(classModel, writer);
+            } catch (Throwable throwable) {
+                t = throwable;
+                throw throwable;
+            } finally {
+                if(writer != null) {
+                    if(t != null) {
+                        try {
                             writer.close();
+                        } catch (Throwable var24) {
+                            t.addSuppressed(var24);
                         }
+                    } else {
+                        writer.close();
                     }
-
                 }
-            } catch (IOException e) {
-                this.processingEnv.getMessager().printMessage(Diagnostic.Kind.ERROR, e.getMessage());
+
             }
+        } catch (IOException e) {
+            this.processingEnv.getMessager().printMessage(Diagnostic.Kind.ERROR, e.getMessage());
         }
     }
 

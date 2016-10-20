@@ -6,8 +6,8 @@
 
 {{#if javadoc}}/** {{javadoc}} */{{/if}}
 {{#each modifiers}}{{this}} {{/each}} {{type}} {{name}} {
-    {{#each fields}}
-        {{> field this}} {{/each}}
+    {{#each fields}}{{> field this}}
+    {{/each}}
     {{#each constructors}}{{this}}{{/each}}
 
     {{#each methods}}
