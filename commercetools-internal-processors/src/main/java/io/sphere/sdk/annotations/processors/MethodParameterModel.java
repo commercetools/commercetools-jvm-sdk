@@ -3,12 +3,10 @@ package io.sphere.sdk.annotations.processors;
 import java.util.LinkedList;
 import java.util.List;
 
-final class ClassModel {
+final class MethodParameterModel {
     private String name;
     private String type;
-    private String packageName;
     private List<String> modifiers = new LinkedList<>();
-    private List<MethodModel> methods = new LinkedList<>();
 
     public String getName() {
         return name;
@@ -32,21 +30,5 @@ final class ClassModel {
 
     public void setModifiers(final List<String> modifiers) {
         this.modifiers = modifiers;
-    }
-
-    public String getPackageName() {
-        return packageName;
-    }
-
-    public void setPackageName(final String packageName) {
-        this.packageName = packageName;
-    }
-
-    public List<MethodModel> getMethods() {
-        return methods;
-    }
-
-    public void setMethods(final List<MethodModel> methods) {
-        this.methods = methods;
     }
 }
