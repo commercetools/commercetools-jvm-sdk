@@ -22,6 +22,7 @@ import org.javamoney.moneta.function.MonetaryUtil;
 import org.junit.Test;
 
 import javax.money.MonetaryAmount;
+import java.time.Duration;
 import java.util.List;
 import java.util.Locale;
 
@@ -69,7 +70,7 @@ public class CartQueryIntegrationTest extends IntegrationTest {
         final RelativeCartDiscountValue relativeCartDiscountValue = RelativeCartDiscountValue.of(15000);
         withCartHavingCartDiscountedLineItem(client(), relativeCartDiscountValue, (cart) -> {
             final Cart[] cartsToCleanUp = new Cart[1];
-            assertEventually(() -> {
+            assertEventually(Duration.ofSeconds(80), Duration.ofMillis(200), () -> {
                 final CartQuery query = CartQuery.of()
                         .withPredicates(m -> m.id().is(cart.getId()))
                         .withExpansionPaths(m -> m.lineItems().discountedPricePerQuantity().discountedPrice().includedDiscounts().discount());
@@ -93,7 +94,7 @@ public class CartQueryIntegrationTest extends IntegrationTest {
         final RelativeCartDiscountValue relativeCartDiscountValue = RelativeCartDiscountValue.of(10000);
         withCartHavingDiscountedCustomLineItem(client(), relativeCartDiscountValue, (cart) -> {
             final Cart[] cartsToCleanUp = new Cart[1];
-            assertEventually(() -> {
+            assertEventually(Duration.ofSeconds(80), Duration.ofMillis(200), () -> {
                 final CartQuery query = CartQuery.of()
                         .withPredicates(m -> m.id().is(cart.getId()))
                         .withExpansionPaths(m -> m.customLineItems().discountedPricePerQuantity().discountedPrice().includedDiscounts().discount());
