@@ -169,7 +169,7 @@
                         <encoding>${project.build.sourceEncoding}</encoding>
                         <compilerArguments>
                             <parameters />
-                            <Werror />
+                            <!--<Werror />--><!--  actually this setting breaks the build for annotation processing -->
                             <Xlint:all />
                             <!--<arg>-Xlint:unchecked</arg>-->
                             <!--<arg>-Xlint:-options</arg>-->
