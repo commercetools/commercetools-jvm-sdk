@@ -72,7 +72,7 @@ public class ResourceDraftValueAnnotationProcessor extends AbstractProcessor {
         builder.interfaces(singletonList(typeElement.getSimpleName().toString()));
         addDslConstructor(name, typeElement, builder);
 
-        writeClass(typeElement, name, builder);
+        writeClass(typeElement, builder);
     }
 
     private void addDslConstructor(final String name, final TypeElement typeElement, final ClassModelBuilder builder) {
@@ -109,22 +109,23 @@ public class ResourceDraftValueAnnotationProcessor extends AbstractProcessor {
         builder.addMethod(method);
     }
 
-    private void writeClass(final TypeElement typeElement, final String name, final ClassModelBuilder builder) {
+    private void writeClass(final TypeElement typeElement, final ClassModelBuilder builder) {
         final ClassModel classModel = builder.build();
-        writeClass(typeElement, name, classModel);
+        writeClass(typeElement, classModel);
     }
 
     private void writeBuilderClass(final TypeElement typeElement, final PackageElement packageElement) {
         String name = associatedBuilderName(typeElement);
         final ClassModelBuilder builder = ClassModelBuilder.of(name, ClassType.CLASS);
         builder.addModifiers("abstract");
-        builder.packageName(packageElement.getQualifiedName().toString());
-
+        final String packageName = packageElement.getQualifiedName().toString();
+        builder.packageName(packageName);
+        builder.addImport(packageName + "." + dslName(typeElement));
         addBuilderMethods(typeElement, builder);
 
         addBuildMethod(typeElement, builder);
 
-        writeClass(typeElement, name, builder);
+        writeClass(typeElement, builder);
     }
 
     private void addBuildMethod(final TypeElement typeElement, final ClassModelBuilder builder) {
@@ -160,9 +161,9 @@ public class ResourceDraftValueAnnotationProcessor extends AbstractProcessor {
                 });
     }
 
-    private void writeClass(final TypeElement typeElement, final String name, final ClassModel classModel) {
+    private void writeClass(final TypeElement typeElement, final ClassModel classModel) {
         try {
-            JavaFileObject fileObject = this.processingEnv.getFiler().createSourceFile(name, new Element[]{typeElement});
+            JavaFileObject fileObject = this.processingEnv.getFiler().createSourceFile(classModel.getFullyQualifiedName(), new Element[]{typeElement});
             Writer writer = fileObject.openWriter();
             Throwable t = null;
             try {

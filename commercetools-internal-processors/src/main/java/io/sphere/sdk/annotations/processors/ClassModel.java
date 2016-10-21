@@ -85,4 +85,8 @@ final class ClassModel {
     public void setConstructors(final List<MethodModel> constructors) {
         this.constructors = constructors;
     }
+
+    public String getFullyQualifiedName() {
+        return packageName + "." + name;
+    }
 }
