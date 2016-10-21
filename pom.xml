@@ -59,7 +59,6 @@
     <scm>
         <url>git@github.com:commercetools/commercetools-jvm-sdk.git</url>
         <connection>scm:git:git@github.com:commercetools/commercetools-jvm-sdk.git</connection>
-    <tag>HEAD</tag>
   </scm>
     <properties>
         <jackson.version>2.6.5</jackson.version>
