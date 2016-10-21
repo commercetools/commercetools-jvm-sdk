@@ -41,6 +41,8 @@ import io.sphere.sdk.products.*;
 import io.sphere.sdk.products.attributes.Attribute;
 import io.sphere.sdk.products.attributes.AttributeAccess;
 import io.sphere.sdk.products.attributes.AttributeDefinition;
+import io.sphere.sdk.products.attributes.AttributeDraft;
+import io.sphere.sdk.products.commands.updateactions.SetAttribute;
 import io.sphere.sdk.products.commands.updateactions.SetMetaDescription;
 import io.sphere.sdk.products.commands.updateactions.SetMetaKeywords;
 import io.sphere.sdk.products.commands.updateactions.SetMetaTitle;
@@ -93,7 +95,14 @@ import java.util.function.Function;
 
  <h3 class=released-version id="v1_6_0">1.6.0 (21.10.2016)</h3>
  <ul>
+ <li class=new-in-release>expansion paths for discounts in line items and custom line items</li>
+ <li class=new-in-release>change enum labels for product types: {@link io.sphere.sdk.producttypes.commands.updateactions.ChangePlainEnumValueLabel} and {@link io.sphere.sdk.producttypes.commands.updateactions.ChangeLocalizedEnumValueLabel}</li>
+ <li class=new-in-release>add convenience factory methods for {@link SetAttribute}: {@link SetAttribute#ofVariantId(java.lang.Integer, java.lang.String, java.lang.Object)}, {@link SetAttribute#ofSku(java.lang.String, java.lang.String, java.lang.Object)}</li>
+ <li class=new-in-release>{@link io.sphere.sdk.orders.errors.PriceChangedError}</li>
+ <li class=new-in-release>{@link ProductDraftBuilder#of(ResourceIdentifiable, LocalizedString, LocalizedString, List)} to pass all variants as one list</li>
  <li class=change-in-release>{@link io.sphere.sdk.search.model.Range} constructor no longer throws {@code InvertedBoundsException}. See <a href="https://github.com/commercetools/commercetools-jvm-sdk/issues/1247">#1247</a></li>
+ <li class=fixed-in-release>A JavaMoney initialization issue with sbt has been fixed.</li>
+ <li class=fixed-in-release>{@link io.sphere.sdk.sequencegenerators.CustomObjectBigIntegerNumberGenerator} does retries only on {@link io.sphere.sdk.client.ConcurrentModificationException}s.</li>
  </ul>
 
  <h3 class=released-version id="v1_5_0">1.5.0 (14.10.2016)</h3>
