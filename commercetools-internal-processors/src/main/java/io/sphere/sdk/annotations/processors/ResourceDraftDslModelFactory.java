@@ -5,13 +5,9 @@ import org.apache.commons.lang3.StringUtils;
 import javax.lang.model.element.Element;
 import javax.lang.model.element.TypeElement;
 
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
 
-import static java.util.Arrays.asList;
 import static java.util.Collections.singletonList;
 import static java.util.Collections.singletonMap;
 import static java.util.stream.Collectors.joining;
@@ -27,17 +23,14 @@ public class ResourceDraftDslModelFactory extends ClassModelFactory {
     public ClassModel createClassModel() {
         String name = dslName(typeElement);
         final ClassModelBuilder builder = ClassModelBuilder.of(name, ClassType.CLASS);
-        builder.addModifiers("public");
+        builder.addModifiers("public", "final");
         final String packageName = packageName(typeElement);
         builder.packageName(packageName);
-
         addDslMethods(typeElement, builder);
         addNewBuilderMethod(typeElement, builder, packageName);
         builder.interfaces(singletonList(typeElement.getSimpleName().toString()));
-        addDslConstructor(name, typeElement, builder);
-
+        addConstructor(name, typeElement, builder);
         addGettersForInstanceFields(builder);
-
         return builder.build();
     }
 
@@ -67,7 +60,7 @@ public class ResourceDraftDslModelFactory extends ClassModelFactory {
                 .forEach(element -> addDslMethod(element, builder));
     }
 
-    private void addDslConstructor(final String name, final TypeElement typeElement, final ClassModelBuilder builder) {
+    private void addConstructor(final String name, final TypeElement typeElement, final ClassModelBuilder builder) {
         final MethodModel c = new MethodModel();
         //no modifiers since it should be package scope
         final List<MethodParameterModel> parameters = parametersForInstanceFields(builder);
