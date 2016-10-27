@@ -76,6 +76,12 @@ public abstract class ClassModelFactory {
         parameter.setName(fieldName);
         final String type = getType(element);
         parameter.setType(type);
+        element.getAnnotationMirrors().forEach(a -> {
+            final String annotationName = a.getAnnotationType().asElement().getSimpleName().toString();
+            if ("Nullable".equals(annotationName)) {
+                parameter.setAnnotations(singletonList(createNullableAnnotation()));
+            }
+        });
         return parameter;
     }
 

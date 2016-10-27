@@ -7,6 +7,7 @@ final class MethodParameterModel {
     private String name;
     private String type;
     private List<String> modifiers = new LinkedList<>();
+    private List<AnnotationModel> annotations = new LinkedList<>();
 
     public String getName() {
         return name;
@@ -30,5 +31,13 @@ final class MethodParameterModel {
 
     public void setModifiers(final List<String> modifiers) {
         this.modifiers = modifiers;
+    }
+
+    public List<AnnotationModel> getAnnotations() {
+        return annotations;
+    }
+
+    public void setAnnotations(final List<AnnotationModel> annotations) {
+        this.annotations = annotations;
     }
 }
