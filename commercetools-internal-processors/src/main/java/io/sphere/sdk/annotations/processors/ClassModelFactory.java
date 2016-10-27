@@ -68,11 +68,17 @@ public abstract class ClassModelFactory {
     }
 
     protected List<String> fieldNamesSorted(final ClassModelBuilder builder) {
-        return builder.build().getFields().stream()
-                .filter(f -> !f.getModifiers().contains("static"))
+        return instanceFieldsSorted(builder)
+                .stream()
                 .map(field -> field.getName())
-                .sorted()
                 .collect(Collectors.toList());
+    }
+
+    protected List<FieldModel> instanceFieldsSorted(final ClassModelBuilder builder) {
+        return builder.build().getFields().stream()
+                    .filter(f -> !f.getModifiers().contains("static"))
+                    .sorted(Comparator.comparing(f -> f.getName()))
+                    .collect(Collectors.toList());
     }
 
     protected String fieldNamesSortedString(final ClassModelBuilder builder) {

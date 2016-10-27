@@ -8,7 +8,7 @@ import com.github.jknack.handlebars.io.ClassPathTemplateLoader;
 import java.io.IOException;
 import java.io.UncheckedIOException;
 import java.io.Writer;
-import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.CompletionException;
 
 public final class Templates {
@@ -33,7 +33,7 @@ public final class Templates {
         classTemplate.apply(context, writer);
     }
 
-    public static String render(final String templateName, final HashMap<String, Object> values) {
+    public static String render(final String templateName, final Map<String, Object> values) {
         try {
             return handlebars.compile(templateName).apply(values);
         } catch (IOException e) {

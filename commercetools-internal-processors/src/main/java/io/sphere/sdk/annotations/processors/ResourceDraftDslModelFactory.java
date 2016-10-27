@@ -1,15 +1,19 @@
 package io.sphere.sdk.annotations.processors;
 
+import org.apache.commons.lang3.StringUtils;
+
 import javax.lang.model.element.Element;
 import javax.lang.model.element.TypeElement;
 
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import static java.util.Arrays.asList;
 import static java.util.Collections.singletonList;
+import static java.util.Collections.singletonMap;
 import static java.util.stream.Collectors.joining;
 
 public class ResourceDraftDslModelFactory extends ClassModelFactory {
@@ -23,7 +27,7 @@ public class ResourceDraftDslModelFactory extends ClassModelFactory {
     public ClassModel createClassModel() {
         String name = dslName(typeElement);
         final ClassModelBuilder builder = ClassModelBuilder.of(name, ClassType.CLASS);
-//        builder.addModifiers("abstract");
+        builder.addModifiers("public");
         final String packageName = packageName(typeElement);
         builder.packageName(packageName);
 
@@ -32,7 +36,24 @@ public class ResourceDraftDslModelFactory extends ClassModelFactory {
         builder.interfaces(singletonList(typeElement.getSimpleName().toString()));
         addDslConstructor(name, typeElement, builder);
 
+        addGettersForInstanceFields(builder);
+
         return builder.build();
+    }
+
+    private void addGettersForInstanceFields(final ClassModelBuilder builder) {
+        final List<FieldModel> fieldModels = instanceFieldsSorted(builder);
+        fieldModels.forEach(field -> builder.addMethod(createGetter(field)));
+    }
+
+    private MethodModel createGetter(final FieldModel field) {
+        final String methodName = "get" + StringUtils.capitalize(field.getName());
+        final MethodModel method = new MethodModel();
+        method.setName(methodName);
+        method.setReturnType(field.getType());
+        method.setBody("return " + field.getName() + ";");
+        method.addModifiers("public");
+        return method;
     }
 
     public static String dslName(final TypeElement typeElement) {
@@ -53,6 +74,7 @@ public class ResourceDraftDslModelFactory extends ClassModelFactory {
         c.setParameters(parameters);
         c.setName(name);
         c.setAnnotations(singletonList(createJsonCreatorAnnotation()));
+        c.setBody(Templates.render("fieldAssignments", singletonMap("assignments", parameters)));
         builder.addImport("com.fasterxml.jackson.annotation.JsonCreator");
         builder.addConstructor(c);
     }

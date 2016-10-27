@@ -12,6 +12,7 @@ import java.util.stream.Collectors;
 
 import static java.util.Arrays.asList;
 import static java.util.Collections.singletonList;
+import static java.util.Collections.singletonMap;
 
 public class ResourceDraftBuilderClassModelFactory extends ClassModelFactory {
     private final TypeElement typeElement;
@@ -42,6 +43,7 @@ public class ResourceDraftBuilderClassModelFactory extends ClassModelFactory {
         final List<MethodParameterModel> parameters = parametersForInstanceFields(builder);
         c.setParameters(parameters);
         c.setName(builder.getName());
+        c.setBody(Templates.render("fieldAssignments", singletonMap("assignments", parameters)));
         builder.addConstructor(c);
     }
 
