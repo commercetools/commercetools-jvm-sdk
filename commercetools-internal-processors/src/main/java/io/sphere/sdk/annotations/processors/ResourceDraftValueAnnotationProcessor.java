@@ -91,7 +91,15 @@ public class ResourceDraftValueAnnotationProcessor extends AbstractProcessor {
                 .collect(Collectors.toList());
         c.setParameters(parameters);
         c.setName(name);
+        c.setAnnotations(singletonList(createJsonCreatorAnnotation()));
+        builder.addImport("com.fasterxml.jackson.annotation.JsonCreator");
         builder.addConstructor(c);
+    }
+
+    private AnnotationModel createJsonCreatorAnnotation() {
+        final AnnotationModel jsonCreator = new AnnotationModel();
+        jsonCreator.setName("JsonCreator");
+        return jsonCreator;
     }
 
     private String dslName(final TypeElement typeElement) {

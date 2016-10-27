@@ -2,7 +2,7 @@
 {{#each imports}}
 import {{this}};{{/each}}
 {{#if javadoc}}/** {{javadoc}} */{{/if}}
-{{#each modifiers}}{{this}} {{/each}} {{type}} {{name}}{{#if baseClass}} extends {{baseClass}}{{/if}}{{#if interfaces}} implements {{#each interfaces}}{{this}}{{#unless @first}}, {{/unless}}{{/each}}{{/if}} {
+{{#each modifiers}}{{this}} {{/each}}{{type}} {{name}}{{#if baseClass}} extends {{baseClass}}{{/if}}{{#if interfaces}} implements {{#each interfaces}}{{this}}{{#unless @first}}, {{/unless}}{{/each}}{{/if}} {
     {{#each fields}}{{> field this}}
     {{/each}}
     {{#each constructors}}{{> method this}}
