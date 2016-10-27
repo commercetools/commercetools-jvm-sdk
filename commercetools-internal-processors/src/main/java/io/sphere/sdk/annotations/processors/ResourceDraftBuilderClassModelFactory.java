@@ -4,9 +4,13 @@ import javax.lang.model.element.Element;
 import javax.lang.model.element.ElementKind;
 import javax.lang.model.element.TypeElement;
 import java.io.IOException;
+import java.util.Comparator;
 import java.util.HashMap;
+import java.util.List;
 import java.util.concurrent.CompletionException;
+import java.util.stream.Collectors;
 
+import static java.util.Arrays.asList;
 import static java.util.Collections.singletonList;
 
 public class ResourceDraftBuilderClassModelFactory extends ClassModelFactory {
@@ -20,15 +24,25 @@ public class ResourceDraftBuilderClassModelFactory extends ClassModelFactory {
     public ClassModel createClassModel() {
         String name = ResourceDraftBuilderClassModelFactory.associatedBuilderName(typeElement);
         final ClassModelBuilder builder = ClassModelBuilder.of(name, ClassType.CLASS);
-        builder.addModifiers("abstract");
+//        builder.addModifiers("abstract");
         final String packageName = packageName(typeElement);
         builder.packageName(packageName);
         builder.addImport(packageName + "." + ResourceDraftDslModelFactory.dslName(typeElement));
         addBuilderMethods(typeElement, builder);
 
         addBuildMethod(typeElement, builder);
+        addConstructors(builder);
 
         return builder.build();
+    }
+
+    private void addConstructors(final ClassModelBuilder builder) {
+        final MethodModel c = new MethodModel();
+        //no modifiers since it should be package scope
+        final List<MethodParameterModel> parameters = parametersForInstanceFields(builder);
+        c.setParameters(parameters);
+        c.setName(builder.getName());
+        builder.addConstructor(c);
     }
 
     private void addBuilderMethod(final Element element, final ClassModelBuilder builder) throws IOException {
@@ -68,9 +82,10 @@ public class ResourceDraftBuilderClassModelFactory extends ClassModelFactory {
     private void addBuildMethod(final TypeElement typeElement, final ClassModelBuilder builder) {
         final MethodModel method = new MethodModel();
         method.addModifiers("public");
-        method.setReturnType(ResourceDraftDslModelFactory.dslName(typeElement));
+        final String dslName = ResourceDraftDslModelFactory.dslName(typeElement);
+        method.setReturnType(dslName);
         method.setName("build");
-        method.setBody("return null;");//TODO
+        method.setBody("return new " + dslName + "(" + fieldNamesSortedString(builder) + ");");
         builder.addMethod(method);
     }
 }

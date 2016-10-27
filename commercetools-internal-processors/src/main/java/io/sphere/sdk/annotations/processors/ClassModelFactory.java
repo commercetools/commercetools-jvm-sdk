@@ -6,9 +6,14 @@ import javax.lang.model.element.Element;
 import javax.lang.model.element.ElementKind;
 import javax.lang.model.element.PackageElement;
 import javax.lang.model.element.TypeElement;
+import java.util.Comparator;
+import java.util.List;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
+import static java.util.Arrays.asList;
 import static java.util.Collections.singletonList;
+import static java.util.stream.Collectors.joining;
 
 public abstract class ClassModelFactory {
 
@@ -60,5 +65,31 @@ public abstract class ClassModelFactory {
         final String type = getType(element);
         parameter.setType(type);
         return parameter;
+    }
+
+    protected List<String> fieldNamesSorted(final ClassModelBuilder builder) {
+        return builder.build().getFields().stream()
+                .filter(f -> !f.getModifiers().contains("static"))
+                .map(field -> field.getName())
+                .sorted()
+                .collect(Collectors.toList());
+    }
+
+    protected String fieldNamesSortedString(final ClassModelBuilder builder) {
+        return fieldNamesSorted(builder).stream().collect(joining(", "));
+    }
+
+    protected List<MethodParameterModel> parametersForInstanceFields(final ClassModelBuilder builder) {
+        return builder.build().getFields().stream()
+                    .filter(f -> !f.getModifiers().contains("static"))
+                    .sorted(Comparator.comparing(f -> f.getName()))
+                    .map(f -> {
+                        final MethodParameterModel p = new MethodParameterModel();
+                        p.setModifiers(asList("final"));
+                        p.setType(f.getType());
+                        p.setName(f.getName());
+                        return p;
+                    })
+                    .collect(Collectors.toList());
     }
 }

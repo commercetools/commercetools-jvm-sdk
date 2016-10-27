@@ -10,6 +10,7 @@ import java.util.stream.Collectors;
 
 import static java.util.Arrays.asList;
 import static java.util.Collections.singletonList;
+import static java.util.stream.Collectors.joining;
 
 public class ResourceDraftDslModelFactory extends ClassModelFactory {
     private final TypeElement typeElement;
@@ -22,7 +23,7 @@ public class ResourceDraftDslModelFactory extends ClassModelFactory {
     public ClassModel createClassModel() {
         String name = dslName(typeElement);
         final ClassModelBuilder builder = ClassModelBuilder.of(name, ClassType.CLASS);
-        builder.addModifiers("abstract");
+//        builder.addModifiers("abstract");
         final String packageName = packageName(typeElement);
         builder.packageName(packageName);
 
@@ -48,17 +49,7 @@ public class ResourceDraftDslModelFactory extends ClassModelFactory {
     private void addDslConstructor(final String name, final TypeElement typeElement, final ClassModelBuilder builder) {
         final MethodModel c = new MethodModel();
         //no modifiers since it should be package scope
-        final List<MethodParameterModel> parameters = builder.build().getFields().stream()
-                .filter(f -> !f.getModifiers().contains("static"))
-                .sorted(Comparator.comparing(f -> f.getName()))
-                .map(f -> {
-                    final MethodParameterModel p = new MethodParameterModel();
-                    p.setModifiers(asList("final"));
-                    p.setType(f.getType());
-                    p.setName(f.getName());
-                    return p;
-                })
-                .collect(Collectors.toList());
+        final List<MethodParameterModel> parameters = parametersForInstanceFields(builder);
         c.setParameters(parameters);
         c.setName(name);
         c.setAnnotations(singletonList(createJsonCreatorAnnotation()));
@@ -91,7 +82,8 @@ public class ResourceDraftDslModelFactory extends ClassModelFactory {
         builder.addImport(packageName + "." + associatedBuilderName);
         method.setReturnType(associatedBuilderName);
         method.setName("newBuilder");
-        method.setBody("return null;");//TODO
+        method.setBody("return new " + associatedBuilderName + "(" + fieldNamesSortedString(builder) + ");");
         builder.addMethod(method);
     }
+
 }
