@@ -7,6 +7,7 @@ import javax.lang.model.element.Element;
 import javax.lang.model.element.TypeElement;
 
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 
 import static java.util.Collections.singletonList;
@@ -54,6 +55,13 @@ public class ResourceDraftDslModelFactory extends ClassModelFactory {
                 .filter(a -> "Nullable".equals(a.getName()))
                 .findFirst()
                 .ifPresent(a -> method.setAnnotations(singletonList(createNullableAnnotation())));
+
+        final List<AnnotationModel> list = new LinkedList<>(method.getAnnotations());
+        final AnnotationModel a = new AnnotationModel();
+        a.setName("Override");
+        list.add(a);
+        method.setAnnotations(list);
+
         return method;
     }
 
