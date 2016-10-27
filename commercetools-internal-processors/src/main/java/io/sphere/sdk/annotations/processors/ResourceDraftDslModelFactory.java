@@ -48,6 +48,12 @@ public class ResourceDraftDslModelFactory extends ClassModelFactory {
         method.setReturnType(field.getType());
         method.setBody("return " + field.getName() + ";");
         method.addModifiers("public");
+
+        field.getAnnotations()
+                .stream()
+                .filter(a -> "Nullable".equals(a.getName()))
+                .findFirst()
+                .ifPresent(a -> method.setAnnotations(singletonList(createNullableAnnotation())));
         return method;
     }
 
