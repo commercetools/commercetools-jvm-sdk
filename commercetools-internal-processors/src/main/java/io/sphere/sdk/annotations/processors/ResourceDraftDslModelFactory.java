@@ -2,6 +2,7 @@ package io.sphere.sdk.annotations.processors;
 
 import org.apache.commons.lang3.StringUtils;
 
+import javax.lang.model.element.AnnotationMirror;
 import javax.lang.model.element.Element;
 import javax.lang.model.element.TypeElement;
 
@@ -24,6 +25,7 @@ public class ResourceDraftDslModelFactory extends ClassModelFactory {
         String name = dslName(typeElement);
         final ClassModelBuilder builder = ClassModelBuilder.of(name, ClassType.CLASS);
         builder.addModifiers("public", "final");
+        builder.addImport("javax.annotation.Nullable");
         final String packageName = packageName(typeElement);
         builder.packageName(packageName);
         addDslMethods(typeElement, builder);
@@ -76,7 +78,6 @@ public class ResourceDraftDslModelFactory extends ClassModelFactory {
         final FieldModel field = createField(element);
         builder.addField(field);
         final String fieldName = fieldNameFromGetter(element.toString());
-
         final MethodModel method = new MethodModel();
         final String name = witherNameFromGetter(element);
         method.setName(name);

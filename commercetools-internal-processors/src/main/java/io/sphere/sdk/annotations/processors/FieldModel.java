@@ -9,6 +9,7 @@ public class FieldModel {
     private String name;
     private String type;
     private List<String> modifiers = new LinkedList<>();
+    private List<AnnotationModel> annotations = new LinkedList<>();
 
     public String getName() {
         return name;
@@ -37,5 +38,13 @@ public class FieldModel {
     public void addModifiers(final String modifier, final String ... moreModifiers) {
         modifiers.add(modifier);
         modifiers.addAll(asList(moreModifiers));
+    }
+
+    public List<AnnotationModel> getAnnotations() {
+        return annotations;
+    }
+
+    public void setAnnotations(final List<AnnotationModel> annotations) {
+        this.annotations = annotations;
     }
 }

@@ -25,7 +25,7 @@ public class ResourceDraftBuilderClassModelFactory extends ClassModelFactory {
     public ClassModel createClassModel() {
         String name = ResourceDraftBuilderClassModelFactory.associatedBuilderName(typeElement);
         final ClassModelBuilder builder = ClassModelBuilder.of(name, ClassType.CLASS);
-//        builder.addModifiers("abstract");
+        builder.addImport("javax.annotation.Nullable");
         final String packageName = packageName(typeElement);
         builder.packageName(packageName);
         builder.addImport(packageName + "." + ResourceDraftDslModelFactory.dslName(typeElement));

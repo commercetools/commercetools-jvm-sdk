@@ -40,6 +40,14 @@ public abstract class ClassModelFactory {
         field.addModifiers("private");
         field.setType(getType(element));
         field.setName(fieldName);
+        element.getAnnotationMirrors().forEach(a -> {
+            final String annotationName = a.getAnnotationType().asElement().getSimpleName().toString();
+            if ("Nullable".equals(annotationName)) {
+                final AnnotationModel am = new AnnotationModel();
+                am.setName(annotationName);
+                field.setAnnotations(singletonList(am));
+            }
+        });
         return field;
     }
 
