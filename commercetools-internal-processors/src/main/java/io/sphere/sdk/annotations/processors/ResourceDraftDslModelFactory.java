@@ -34,6 +34,7 @@ public class ResourceDraftDslModelFactory extends ClassModelFactory {
         builder.interfaces(singletonList(typeElement.getSimpleName().toString()));
         addConstructor(name, typeElement, builder);
         addGettersForInstanceFields(builder);
+        addFactoryMethods(typeElement, builder);
         return builder.build();
     }
 

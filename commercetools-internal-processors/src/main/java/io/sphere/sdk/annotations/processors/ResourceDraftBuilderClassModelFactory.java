@@ -34,51 +34,10 @@ public class ResourceDraftBuilderClassModelFactory extends ClassModelFactory {
         builder.packageName(packageName);
         builder.addImport(packageName + "." + ResourceDraftDslModelFactory.dslName(typeElement));
         addBuilderMethods(typeElement, builder);
-
         addBuildMethod(typeElement, builder);
         addConstructors(builder);
-
-
         addFactoryMethods(typeElement, builder);
-
         return builder.build();
-    }
-
-    private void addFactoryMethods(final TypeElement typeElement, final ClassModelBuilder builder) {
-        final ResourceDraftValue annotation = typeElement.getAnnotation(ResourceDraftValue.class);
-        if (annotation != null) {
-            for (final FactoryMethod factoryMethod : annotation.factoryMethods()) {
-                addFactoryMethod(builder, factoryMethod);
-            }
-        }
-    }
-
-    private void addFactoryMethod(final ClassModelBuilder builder, final FactoryMethod factoryMethod) {
-        final String name = factoryMethod.methodName();
-        final MethodModel method = new MethodModel();
-        method.setName(name);
-        method.setModifiers(asList("public", "static"));
-        method.setParameters(createParameterModels(builder, factoryMethod));
-        method.setReturnType(builder.getName());
-        final List<String> parameterNameList = asList(factoryMethod.parameterNames());
-        final String constructorParameters = parametersForInstanceFields(builder).stream()
-                .map(p -> parameterNameList.contains(p.getName()) ? p.getName() : null)
-                .collect(joining(", "));
-        method.setBody("return new " + builder.getName() + "(" + constructorParameters +");");
-        builder.addMethod(method);
-    }
-
-    private List<MethodParameterModel> createParameterModels(final ClassModelBuilder builder, final FactoryMethod factoryMethod) {
-        return Arrays.stream(factoryMethod.parameterNames())
-                .map(parameterName -> {
-                    final FieldModel field = getField(builder, parameterName);
-                    final MethodParameterModel m = new MethodParameterModel();
-                    m.setName(parameterName);
-                    m.setType(field.getType());
-                    m.setModifiers(asList("final"));
-                    return m;
-                })
-                .collect(Collectors.toList());
     }
 
     private void addConstructors(final ClassModelBuilder builder) {

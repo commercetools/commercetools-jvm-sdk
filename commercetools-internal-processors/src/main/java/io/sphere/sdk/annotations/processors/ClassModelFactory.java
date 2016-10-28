@@ -1,11 +1,14 @@
 package io.sphere.sdk.annotations.processors;
 
+import io.sphere.sdk.annotations.FactoryMethod;
+import io.sphere.sdk.annotations.ResourceDraftValue;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.lang.model.element.Element;
 import javax.lang.model.element.ElementKind;
 import javax.lang.model.element.PackageElement;
 import javax.lang.model.element.TypeElement;
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 import java.util.function.Predicate;
@@ -122,5 +125,42 @@ public abstract class ClassModelFactory {
                 .filter(f -> f.getName().equals(fieldName))
                 .findFirst().orElseThrow(() -> new RuntimeException("field " + fieldName + " not found in " + builder));
         return fieldModel;
+    }
+
+    protected void addFactoryMethod(final ClassModelBuilder builder, final FactoryMethod factoryMethod) {
+        final String name = factoryMethod.methodName();
+        final MethodModel method = new MethodModel();
+        method.setName(name);
+        method.setModifiers(asList("public", "static"));
+        method.setParameters(createParameterModels(builder, factoryMethod));
+        method.setReturnType(builder.getName());
+        final List<String> parameterNameList = asList(factoryMethod.parameterNames());
+        final String constructorParameters = parametersForInstanceFields(builder).stream()
+                .map(p -> parameterNameList.contains(p.getName()) ? p.getName() : null)
+                .collect(joining(", "));
+        method.setBody("return new " + builder.getName() + "(" + constructorParameters +");");
+        builder.addMethod(method);
+    }
+
+    private List<MethodParameterModel> createParameterModels(final ClassModelBuilder builder, final FactoryMethod factoryMethod) {
+        return Arrays.stream(factoryMethod.parameterNames())
+                .map(parameterName -> {
+                    final FieldModel field = getField(builder, parameterName);
+                    final MethodParameterModel m = new MethodParameterModel();
+                    m.setName(parameterName);
+                    m.setType(field.getType());
+                    m.setModifiers(asList("final"));
+                    return m;
+                })
+                .collect(Collectors.toList());
+    }
+
+    protected void addFactoryMethods(final TypeElement typeElement, final ClassModelBuilder builder) {
+        final ResourceDraftValue annotation = typeElement.getAnnotation(ResourceDraftValue.class);
+        if (annotation != null) {
+            for (final FactoryMethod factoryMethod : annotation.factoryMethods()) {
+                addFactoryMethod(builder, factoryMethod);
+            }
+        }
     }
 }
