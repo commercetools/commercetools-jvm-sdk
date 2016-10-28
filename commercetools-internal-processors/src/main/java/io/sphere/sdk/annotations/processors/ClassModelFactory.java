@@ -116,4 +116,11 @@ public abstract class ClassModelFactory {
                     })
                     .collect(Collectors.toList());
     }
+
+    protected FieldModel getField(final ClassModelBuilder builder, final String fieldName) {
+        final FieldModel fieldModel = builder.build().getFields().stream()
+                .filter(f -> f.getName().equals(fieldName))
+                .findFirst().orElseThrow(() -> new RuntimeException("field " + fieldName + " not found in " + builder));
+        return fieldModel;
+    }
 }

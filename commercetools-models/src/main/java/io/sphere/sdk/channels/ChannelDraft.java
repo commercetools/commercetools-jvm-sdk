@@ -1,6 +1,7 @@
 package io.sphere.sdk.channels;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import io.sphere.sdk.annotations.FactoryMethod;
 import io.sphere.sdk.annotations.ResourceDraftValue;
 import io.sphere.sdk.models.Address;
 import io.sphere.sdk.models.LocalizedString;
@@ -19,7 +20,7 @@ import java.util.Set;
  * @see ChannelDraftDsl
  */
 @JsonDeserialize(as = ChannelDraftDsl.class)
-@ResourceDraftValue
+@ResourceDraftValue(factoryMethods = @FactoryMethod(parameterNames = {"key"}))
 public interface ChannelDraft extends WithKey {
     String getKey();
 

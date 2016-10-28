@@ -1,10 +1,13 @@
 package io.sphere.sdk.annotations.processors;
 
+import io.sphere.sdk.annotations.FactoryMethod;
+import io.sphere.sdk.annotations.ResourceDraftValue;
+
 import javax.lang.model.element.Element;
 import javax.lang.model.element.ElementKind;
 import javax.lang.model.element.TypeElement;
 import java.io.IOException;
-import java.util.Comparator;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.CompletionException;
@@ -13,6 +16,7 @@ import java.util.stream.Collectors;
 import static java.util.Arrays.asList;
 import static java.util.Collections.singletonList;
 import static java.util.Collections.singletonMap;
+import static java.util.stream.Collectors.joining;
 
 public class ResourceDraftBuilderClassModelFactory extends ClassModelFactory {
     private final TypeElement typeElement;
@@ -34,7 +38,47 @@ public class ResourceDraftBuilderClassModelFactory extends ClassModelFactory {
         addBuildMethod(typeElement, builder);
         addConstructors(builder);
 
+
+        addFactoryMethods(typeElement, builder);
+
         return builder.build();
+    }
+
+    private void addFactoryMethods(final TypeElement typeElement, final ClassModelBuilder builder) {
+        final ResourceDraftValue annotation = typeElement.getAnnotation(ResourceDraftValue.class);
+        if (annotation != null) {
+            for (final FactoryMethod factoryMethod : annotation.factoryMethods()) {
+                addFactoryMethod(builder, factoryMethod);
+            }
+        }
+    }
+
+    private void addFactoryMethod(final ClassModelBuilder builder, final FactoryMethod factoryMethod) {
+        final String name = factoryMethod.methodName();
+        final MethodModel method = new MethodModel();
+        method.setName(name);
+        method.setModifiers(asList("public", "static"));
+        method.setParameters(createParameterModels(builder, factoryMethod));
+        method.setReturnType(builder.getName());
+        final List<String> parameterNameList = asList(factoryMethod.parameterNames());
+        final String constructorParameters = parametersForInstanceFields(builder).stream()
+                .map(p -> parameterNameList.contains(p.getName()) ? p.getName() : null)
+                .collect(joining(", "));
+        method.setBody("return new " + builder.getName() + "(" + constructorParameters +");");
+        builder.addMethod(method);
+    }
+
+    private List<MethodParameterModel> createParameterModels(final ClassModelBuilder builder, final FactoryMethod factoryMethod) {
+        return Arrays.stream(factoryMethod.parameterNames())
+                .map(parameterName -> {
+                    final FieldModel field = getField(builder, parameterName);
+                    final MethodParameterModel m = new MethodParameterModel();
+                    m.setName(parameterName);
+                    m.setType(field.getType());
+                    m.setModifiers(asList("final"));
+                    return m;
+                })
+                .collect(Collectors.toList());
     }
 
     private void addConstructors(final ClassModelBuilder builder) {
