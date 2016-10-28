@@ -2,15 +2,18 @@ package io.sphere.sdk.annotations.processors;
 
 import io.sphere.sdk.annotations.FactoryMethod;
 import io.sphere.sdk.annotations.ResourceDraftValue;
+import io.sphere.sdk.models.Base;
 
 import javax.lang.model.element.Element;
 import javax.lang.model.element.ElementKind;
+import javax.lang.model.element.Name;
 import javax.lang.model.element.TypeElement;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.CompletionException;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import static java.util.Arrays.asList;
@@ -19,10 +22,22 @@ import static java.util.Collections.singletonMap;
 import static java.util.stream.Collectors.joining;
 
 public class ResourceDraftBuilderClassModelFactory extends ClassModelFactory {
+    public static final Predicate<Element> BEAN_GETTER_PREDICATE = e -> ElementKind.METHOD.equals(e.getKind()) && e.getSimpleName().toString().matches("^get[A-Z].*");
     private final TypeElement typeElement;
 
     public ResourceDraftBuilderClassModelFactory(final TypeElement typeElement) {
         this.typeElement = typeElement;
+    }
+
+    private void pocBuilderCreation() {
+        ClassConfigurer.ofSource(typeElement)
+        .samePackageFromSource()
+        .withDefaultImports()
+        .modifiers("public", "final")
+        .className(input -> associatedBuilderName(input))
+        .extending(Base.class)
+        .implementing(typeElement)
+        .fieldsFromBeanGetters();
     }
 
     @Override
@@ -50,7 +65,7 @@ public class ResourceDraftBuilderClassModelFactory extends ClassModelFactory {
         builder.addConstructor(c);
     }
 
-    private void addBuilderMethod(final Element element, final ClassModelBuilder builder) throws IOException {
+    private void addBuilderMethod(final Element element, final ClassModelBuilder builder) {
         final String methodName = element.getSimpleName().toString();
         final String fieldName = fieldNameFromGetter(methodName);
         final MethodModel method = new MethodModel();
@@ -70,18 +85,16 @@ public class ResourceDraftBuilderClassModelFactory extends ClassModelFactory {
     private void addBuilderMethods(final TypeElement typeElement, final ClassModelBuilder builder) {
         typeElement.getEnclosedElements()
                 .stream()
-                .filter(e -> ElementKind.METHOD.equals(e.getKind()) && e.getSimpleName().toString().matches("^get[A-Z].*"))
-                .forEach(element -> {
-                    try {
-                        addBuilderMethod(element, builder);
-                    } catch (IOException e) {
-                        throw new CompletionException(e);
-                    }
-                });
+                .filter(BEAN_GETTER_PREDICATE)
+                .forEach(element -> addBuilderMethod(element, builder));
     }
 
     public static String associatedBuilderName(final TypeElement typeElement) {
-        return "Generated" + typeElement.getSimpleName() + "Builder";
+        return associatedBuilderName(typeElement.getSimpleName().toString());
+    }
+
+    private static String associatedBuilderName(final String originClassName) {
+        return "Generated" + originClassName + "Builder";
     }
 
     private void addBuildMethod(final TypeElement typeElement, final ClassModelBuilder builder) {

@@ -25,7 +25,7 @@ public abstract class ClassModelFactory {
 
       public abstract ClassModel createClassModel();
 
-    protected String packageName(final TypeElement typeElement) {
+    public static String packageName(final TypeElement typeElement) {
         final PackageElement packageElement = (PackageElement) typeElement.getEnclosingElement();
         return packageElement.getQualifiedName().toString();
     }
@@ -36,7 +36,7 @@ public abstract class ClassModelFactory {
         return jsonCreator;
     }
 
-    protected FieldModel createField(final Element element) {
+    public static FieldModel createField(final Element element) {
         final String methodName = element.getSimpleName().toString();
         final String fieldName = fieldNameFromGetter(methodName);
         final FieldModel field = new FieldModel();
@@ -52,19 +52,19 @@ public abstract class ClassModelFactory {
         return field;
     }
 
-    protected AnnotationModel createNullableAnnotation() {
+    public static AnnotationModel createNullableAnnotation() {
         final AnnotationModel am = new AnnotationModel();
         am.setName("Nullable");
         return am;
     }
 
-    protected String fieldNameFromGetter(final String methodName) {
+    public static String fieldNameFromGetter(final String methodName) {
         final String s1 = methodName.toString().replaceAll("^get", "");
         final String s = ("" + s1.charAt(0)).toLowerCase() + s1.substring(1);
         return StringUtils.substringBefore(s, "(");
     }
 
-    protected String getType(final Element element) {
+    public static String getType(final Element element) {
         final ReturnTypeElementVisitor visitor = new ReturnTypeElementVisitor();
         return element.accept(visitor, null);
     }
