@@ -34,6 +34,7 @@ public class ResourceDraftBuilderClassModelFactory extends ClassModelFactory {
                 .builderMethods()
                 .buildMethod()
                 .factoryMethodsAccordingToAnnotations()
+                .factoryMethodFromInterfaceInstance()
                 .build();
     }
 

@@ -1,9 +1,11 @@
 package io.sphere.sdk.annotations.processors;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.ImmutablePair;
 
 import javax.lang.model.element.Element;
 import javax.lang.model.element.TypeElement;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -13,8 +15,10 @@ import java.util.stream.Collectors;
 
 import static io.sphere.sdk.annotations.processors.ClassModelFactory.*;
 import static io.sphere.sdk.annotations.processors.ResourceDraftBuilderClassModelFactory.BEAN_GETTER_PREDICATE;
+import static java.lang.String.format;
 import static java.util.Arrays.asList;
 import static java.util.Collections.singletonList;
+import static java.util.stream.Collectors.joining;
 
 final class ClassConfigurer {
     public static SourceHolder ofSource(final TypeElement typeElement) {
@@ -273,6 +277,32 @@ final class ClassConfigurer {
         public MethodsHolder withers() {
             addDslMethods(builder, typeElement);
             addNewBuilderMethod(builder, typeElement);
+            return this;
+        }
+
+        public MethodsHolder factoryMethodFromInterfaceInstance() {
+            final MethodModel m = new MethodModel();
+            m.setModifiers(asList("public", "static"));
+            m.setName("of");
+            m.setReturnType(builder.getName());
+            final MethodParameterModel p = new MethodParameterModel();
+            p.setModifiers(singletonList("final"));
+            p.setType(typeElement.getSimpleName().toString());
+            p.setName("template");
+            m.setParameters(singletonList(p));
+            final String dsd = typeElement.getEnclosedElements()
+                    .stream()
+                    .filter(BEAN_GETTER_PREDICATE)
+                    .map(element -> {
+                        final FieldModel field = createField(element);
+                        return ImmutablePair.of(field.getName(), element.getSimpleName().toString());
+                    })
+                    .sorted(Comparator.comparing(ImmutablePair::getLeft))
+                    .map(pair -> format("template.%s()", pair.getRight()))
+                    .collect(joining(", "));
+            final String body = "return new " + builder.getName() + "(" + dsd + ");";
+            m.setBody(body);
+            builder.addMethod(m);
             return this;
         }
     }
