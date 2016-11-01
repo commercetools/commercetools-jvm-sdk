@@ -106,7 +106,7 @@ public abstract class ClassModelFactory {
         return fieldNamesSorted(builder).stream().collect(joining(", "));
     }
 
-    protected List<MethodParameterModel> parametersForInstanceFields(final ClassModelBuilder builder) {
+    public static List<MethodParameterModel> parametersForInstanceFields(final ClassModelBuilder builder) {
         return builder.build().getFields().stream()
                     .filter(f -> !f.getModifiers().contains("static"))
                     .sorted(Comparator.comparing(f -> f.getName()))
@@ -120,14 +120,14 @@ public abstract class ClassModelFactory {
                     .collect(Collectors.toList());
     }
 
-    protected FieldModel getField(final ClassModelBuilder builder, final String fieldName) {
+    public static FieldModel getField(final ClassModelBuilder builder, final String fieldName) {
         final FieldModel fieldModel = builder.build().getFields().stream()
                 .filter(f -> f.getName().equals(fieldName))
                 .findFirst().orElseThrow(() -> new RuntimeException("field " + fieldName + " not found in " + builder));
         return fieldModel;
     }
 
-    protected void addFactoryMethod(final ClassModelBuilder builder, final FactoryMethod factoryMethod) {
+    public static void addFactoryMethod(final ClassModelBuilder builder, final FactoryMethod factoryMethod) {
         final String name = factoryMethod.methodName();
         final MethodModel method = new MethodModel();
         method.setName(name);
@@ -142,7 +142,7 @@ public abstract class ClassModelFactory {
         builder.addMethod(method);
     }
 
-    private List<MethodParameterModel> createParameterModels(final ClassModelBuilder builder, final FactoryMethod factoryMethod) {
+    public static List<MethodParameterModel> createParameterModels(final ClassModelBuilder builder, final FactoryMethod factoryMethod) {
         return Arrays.stream(factoryMethod.parameterNames())
                 .map(parameterName -> {
                     final FieldModel field = getField(builder, parameterName);
@@ -155,7 +155,7 @@ public abstract class ClassModelFactory {
                 .collect(Collectors.toList());
     }
 
-    protected void addFactoryMethods(final TypeElement typeElement, final ClassModelBuilder builder) {
+    public static void addFactoryMethods(final ClassModelBuilder builder, final TypeElement typeElement) {
         final ResourceDraftValue annotation = typeElement.getAnnotation(ResourceDraftValue.class);
         if (annotation != null) {
             for (final FactoryMethod factoryMethod : annotation.factoryMethods()) {

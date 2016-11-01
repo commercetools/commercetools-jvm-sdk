@@ -1,7 +1,5 @@
 package io.sphere.sdk.annotations.processors;
 
-import io.sphere.sdk.models.Base;
-
 import javax.lang.model.element.TypeElement;
 import java.util.LinkedList;
 import java.util.List;
@@ -30,17 +28,17 @@ final class ClassConfigurer {
 
         public PackageHolder packageFrom(final TypeElement typeElement) {
             final String packageName = ClassModelFactory.packageName(typeElement);
-            return new PackageHolder(packageName, this);
+            return new PackageHolder(packageName, typeElement);
         }
     }
 
     public static class PackageHolder {
         private String packageName;
-        private SourceHolder sourceHolder;
+        private TypeElement typeElement;
 
-        private PackageHolder(final String packageName, final SourceHolder sourceHolder) {
+        private PackageHolder(final String packageName, final TypeElement typeElement) {
             this.packageName = packageName;
-            this.sourceHolder = sourceHolder;
+            this.typeElement = typeElement;
         }
 
         public ImportHolder withDefaultImports() {
@@ -78,22 +76,41 @@ final class ClassConfigurer {
             this.importHolder = importHolder;
         }
 
+        public ClassTypeHolder classType() {
+            return new ClassTypeHolder(ClassType.CLASS, this, importHolder.packageHolder.typeElement);
+        }
+    }
+
+    public static class ClassTypeHolder {
+        private final ClassType classType;
+        private final ClassModifierHolder classModifierHolder;
+        private final TypeElement typeElement;
+
+        private ClassTypeHolder(final ClassType classType, final ClassModifierHolder classModifierHolder, final TypeElement typeElement) {
+            this.classType = classType;
+            this.classModifierHolder = classModifierHolder;
+            this.typeElement = typeElement;
+        }
+
         public ClassNameHolder className(final UnaryOperator<String> op) {
-            return new ClassNameHolder(op.apply(importHolder.packageHolder.sourceHolder.typeElement.getSimpleName().toString()), this);
+            return new ClassNameHolder(op.apply(this.classModifierHolder.importHolder.packageHolder.typeElement.getSimpleName().toString()), this, typeElement);
         }
     }
 
     public static class ClassNameHolder {
-        private String name;
-        private ClassModifierHolder classModifierHolder;
+        private final TypeElement typeElement;
+        private ClassModelBuilder builder;
 
-        private ClassNameHolder(final String name, final ClassModifierHolder classModifierHolder) {
-            this.name = name;
-            this.classModifierHolder = classModifierHolder;
+        private ClassNameHolder(final String name, final ClassTypeHolder classTypeHolder, final TypeElement typeElement) {
+            this.typeElement = typeElement;
+            this.builder = ClassModelBuilder.of(name, classTypeHolder.classType);
+            this.builder.packageName(classTypeHolder.classModifierHolder.importHolder.packageHolder.packageName);
+            classTypeHolder.classModifierHolder.importHolder.imports.forEach(imp -> builder.addImport(imp));
+            classTypeHolder.classModifierHolder.modifiers.forEach(modifier -> builder.addModifiers(modifier));
         }
 
         public BaseClassHolder extending(final String baseClassName) {
-            return new BaseClassHolder(baseClassName, this);
+            return new BaseClassHolder(baseClassName, builder, typeElement);
         }
 
         public BaseClassHolder extending(final Class<?> baseClass) {
@@ -102,16 +119,17 @@ final class ClassConfigurer {
     }
 
     public static class BaseClassHolder {
-        private String baseClassName;
-        private ClassNameHolder classNameHolder;
+        private final ClassModelBuilder builder;
+        private final TypeElement typeElement;
 
-        private BaseClassHolder(final String baseClassName, final ClassNameHolder classNameHolder) {
-            this.baseClassName = baseClassName;
-            this.classNameHolder = classNameHolder;
+        private BaseClassHolder(final String baseClassName, final ClassModelBuilder builder, final TypeElement typeElement) {
+            this.builder = builder;
+            this.typeElement = typeElement;
+            builder.setBaseClassName(baseClassName);
         }
 
         public InterfacesHolder implementing(final String ... interfaces) {
-            return new InterfacesHolder(asList(interfaces), this);
+            return new InterfacesHolder(asList(interfaces), builder, typeElement);
         }
 
         public InterfacesHolder implementing(final TypeElement typeElement) {
@@ -120,16 +138,17 @@ final class ClassConfigurer {
     }
 
     public static class InterfacesHolder {
-        private final List<String> interfaces;
-        private final BaseClassHolder baseClassHolder;
+        private final ClassModelBuilder builder;
+        private final TypeElement typeElement;
 
-        private InterfacesHolder(final List<String> interfaces, final BaseClassHolder baseClassHolder) {
-            this.interfaces = interfaces;
-            this.baseClassHolder = baseClassHolder;
+        private InterfacesHolder(final List<String> interfaces, final ClassModelBuilder builder, final TypeElement typeElement) {
+            this.builder = builder;
+            this.typeElement = typeElement;
+            builder.interfaces(interfaces);
         }
 
-        public FieldsHolder fieldsFromBeanGetters() {
-            final List<FieldModel> fields = this.baseClassHolder.classNameHolder.classModifierHolder.importHolder.packageHolder.sourceHolder.typeElement.getEnclosedElements()
+        public FieldsHolder fieldsFromInterfaceBeanGetters() {
+            final List<FieldModel> fields = typeElement.getEnclosedElements()
                     .stream()
                     .filter(BEAN_GETTER_PREDICATE)
                     .map(typeElement -> createField(typeElement))
@@ -138,17 +157,38 @@ final class ClassConfigurer {
         }
 
         public FieldsHolder fields(final List<FieldModel> fields) {
-            return new FieldsHolder(fields, this);
+            return new FieldsHolder(fields, builder, typeElement);
         }
     }
 
     public static class FieldsHolder {
-        private List<FieldModel> fields;
-        private InterfacesHolder interfacesHolder;
+        private ClassModelBuilder builder;
+        private final TypeElement typeElement;
 
-        private FieldsHolder(final List<FieldModel> fields, final InterfacesHolder interfacesHolder) {
-            this.fields = fields;
-            this.interfacesHolder = interfacesHolder;
+        private FieldsHolder(final List<FieldModel> fields, final ClassModelBuilder builder, final TypeElement typeElement) {
+            this.builder = builder;
+            this.typeElement = typeElement;
+            fields.forEach(builder::addField);
+        }
+
+        public ConstructorsHolder constructorForAllFields() {
+            ResourceDraftBuilderClassModelFactory.addConstructors(builder);
+            return new ConstructorsHolder(builder, typeElement);
+        }
+    }
+
+    public static class ConstructorsHolder {
+        private final ClassModelBuilder builder;
+        private final TypeElement typeElement;
+
+        private ConstructorsHolder(final ClassModelBuilder builder, final TypeElement typeElement) {
+
+            this.builder = builder;
+            this.typeElement = typeElement;
+        }
+
+        public void factoryMethodsAccordingToAnnotations() {
+            ClassModelFactory.addFactoryMethods(builder, typeElement);
         }
     }
 }

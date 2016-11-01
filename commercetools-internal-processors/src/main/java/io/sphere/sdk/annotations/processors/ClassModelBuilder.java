@@ -7,6 +7,7 @@ import static java.util.Arrays.asList;
 
 final class ClassModelBuilder {
     private String name;
+    private String baseClassName;
     private String packageName;
     private String type;
     private List<String> modifiers = new LinkedList<>();
@@ -76,5 +77,13 @@ final class ClassModelBuilder {
     public ClassModelBuilder addConstructor(final MethodModel methodModel) {
         constructors.add(methodModel);
         return this;
+    }
+
+    public String getBaseClassName() {
+        return baseClassName;
+    }
+
+    public void setBaseClassName(final String baseClassName) {
+        this.baseClassName = baseClassName;
     }
 }

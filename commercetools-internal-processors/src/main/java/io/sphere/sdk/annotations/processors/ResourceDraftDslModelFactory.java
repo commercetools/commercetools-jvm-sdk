@@ -2,7 +2,6 @@ package io.sphere.sdk.annotations.processors;
 
 import org.apache.commons.lang3.StringUtils;
 
-import javax.lang.model.element.AnnotationMirror;
 import javax.lang.model.element.Element;
 import javax.lang.model.element.TypeElement;
 
@@ -34,7 +33,7 @@ public class ResourceDraftDslModelFactory extends ClassModelFactory {
         builder.interfaces(singletonList(typeElement.getSimpleName().toString()));
         addConstructor(name, typeElement, builder);
         addGettersForInstanceFields(builder);
-        addFactoryMethods(typeElement, builder);
+        addFactoryMethods(builder, typeElement);
         return builder.build();
     }
 

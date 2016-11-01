@@ -1,25 +1,16 @@
 package io.sphere.sdk.annotations.processors;
 
-import io.sphere.sdk.annotations.FactoryMethod;
-import io.sphere.sdk.annotations.ResourceDraftValue;
 import io.sphere.sdk.models.Base;
 
 import javax.lang.model.element.Element;
 import javax.lang.model.element.ElementKind;
-import javax.lang.model.element.Name;
 import javax.lang.model.element.TypeElement;
-import java.io.IOException;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
-import java.util.concurrent.CompletionException;
 import java.util.function.Predicate;
-import java.util.stream.Collectors;
 
-import static java.util.Arrays.asList;
 import static java.util.Collections.singletonList;
 import static java.util.Collections.singletonMap;
-import static java.util.stream.Collectors.joining;
 
 public class ResourceDraftBuilderClassModelFactory extends ClassModelFactory {
     public static final Predicate<Element> BEAN_GETTER_PREDICATE = e -> ElementKind.METHOD.equals(e.getKind()) && e.getSimpleName().toString().matches("^get[A-Z].*");
@@ -31,13 +22,16 @@ public class ResourceDraftBuilderClassModelFactory extends ClassModelFactory {
 
     private void pocBuilderCreation() {
         ClassConfigurer.ofSource(typeElement)
-        .samePackageFromSource()
-        .withDefaultImports()
-        .modifiers("public", "final")
-        .className(input -> associatedBuilderName(input))
-        .extending(Base.class)
-        .implementing(typeElement)
-        .fieldsFromBeanGetters();
+                .samePackageFromSource()
+                .withDefaultImports()
+                .modifiers("public", "final")
+                .classType()
+                .className(input -> associatedBuilderName(input))
+                .extending(Base.class)//TODO missing
+                .implementing(typeElement)
+                .fieldsFromInterfaceBeanGetters()
+                .constructorForAllFields()
+                .factoryMethodsAccordingToAnnotations();
     }
 
     @Override
@@ -51,11 +45,11 @@ public class ResourceDraftBuilderClassModelFactory extends ClassModelFactory {
         addBuilderMethods(typeElement, builder);
         addBuildMethod(typeElement, builder);
         addConstructors(builder);
-        addFactoryMethods(typeElement, builder);
+        addFactoryMethods(builder, typeElement);
         return builder.build();
     }
 
-    private void addConstructors(final ClassModelBuilder builder) {
+    public static void addConstructors(final ClassModelBuilder builder) {
         final MethodModel c = new MethodModel();
         //no modifiers since it should be package scope
         final List<MethodParameterModel> parameters = parametersForInstanceFields(builder);
