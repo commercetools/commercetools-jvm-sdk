@@ -147,6 +147,25 @@ final class ClassConfigurer {
             builder.interfaces(interfaces);
         }
 
+        public FieldsHolder fields() {
+            return new FieldsHolder(builder, typeElement);
+        }
+    }
+
+    public static class FieldsHolder {
+        private ClassModelBuilder builder;
+        private final TypeElement typeElement;
+
+        private FieldsHolder(final ClassModelBuilder builder, final TypeElement typeElement) {
+            this.builder = builder;
+            this.typeElement = typeElement;
+        }
+
+        public FieldsHolder fields(final List<FieldModel> fields) {
+            fields.forEach(builder::addField);
+            return this;
+        }
+
         public FieldsHolder fieldsFromInterfaceBeanGetters() {
             final List<FieldModel> fields = typeElement.getEnclosedElements()
                     .stream()
@@ -156,23 +175,7 @@ final class ClassConfigurer {
             return fields(fields);
         }
 
-        public FieldsHolder fields(final List<FieldModel> fields) {
-            return new FieldsHolder(fields, builder, typeElement);
-        }
-    }
-
-    public static class FieldsHolder {
-        private ClassModelBuilder builder;
-        private final TypeElement typeElement;
-
-        private FieldsHolder(final List<FieldModel> fields, final ClassModelBuilder builder, final TypeElement typeElement) {
-            this.builder = builder;
-            this.typeElement = typeElement;
-            fields.forEach(builder::addField);
-        }
-
-        public ConstructorsHolder constructorForAllFields() {
-            ResourceDraftBuilderClassModelFactory.addConstructors(builder);
+        public ConstructorsHolder constructors() {
             return new ConstructorsHolder(builder, typeElement);
         }
     }
@@ -182,13 +185,46 @@ final class ClassConfigurer {
         private final TypeElement typeElement;
 
         private ConstructorsHolder(final ClassModelBuilder builder, final TypeElement typeElement) {
-
             this.builder = builder;
             this.typeElement = typeElement;
         }
 
-        public void factoryMethodsAccordingToAnnotations() {
+        public ConstructorsHolder constructorForAllFields() {
+            ResourceDraftBuilderClassModelFactory.addConstructors(builder);
+            return new ConstructorsHolder(builder, typeElement);
+        }
+
+        public MethodsHolder methods() {
+            return new MethodsHolder(builder, typeElement);
+        }
+    }
+
+    public static class MethodsHolder {
+        private final ClassModelBuilder builder;
+        private final TypeElement typeElement;
+
+        private MethodsHolder(final ClassModelBuilder builder, final TypeElement typeElement) {
+            this.builder = builder;
+            this.typeElement = typeElement;
+        }
+
+        public MethodsHolder factoryMethodsAccordingToAnnotations() {
             ClassModelFactory.addFactoryMethods(builder, typeElement);
+            return this;
+        }
+
+        public MethodsHolder builderMethods() {
+            ResourceDraftBuilderClassModelFactory.addBuilderMethods(builder, typeElement);
+            return this;
+        }
+
+        public MethodsHolder buildMethod() {
+            ResourceDraftBuilderClassModelFactory.addBuildMethod(builder, typeElement);
+            return this;
+        }
+
+        public ClassModel build() {
+            return builder.build();
         }
     }
 }

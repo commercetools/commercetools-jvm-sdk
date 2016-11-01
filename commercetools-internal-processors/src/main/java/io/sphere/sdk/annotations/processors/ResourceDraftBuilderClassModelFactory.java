@@ -20,8 +20,8 @@ public class ResourceDraftBuilderClassModelFactory extends ClassModelFactory {
         this.typeElement = typeElement;
     }
 
-    private void pocBuilderCreation() {
-        ClassConfigurer.ofSource(typeElement)
+    private ClassModel pocBuilderCreation() {
+        return ClassConfigurer.ofSource(typeElement)
                 .samePackageFromSource()
                 .withDefaultImports()
                 .modifiers("public", "final")
@@ -29,9 +29,15 @@ public class ResourceDraftBuilderClassModelFactory extends ClassModelFactory {
                 .className(input -> associatedBuilderName(input))
                 .extending(Base.class)//TODO missing
                 .implementing(typeElement)
+                .fields()
                 .fieldsFromInterfaceBeanGetters()
+                .constructors()
                 .constructorForAllFields()
-                .factoryMethodsAccordingToAnnotations();
+                .methods()
+                .builderMethods()
+                .buildMethod()
+                .factoryMethodsAccordingToAnnotations()
+                .build();
     }
 
     @Override
@@ -42,8 +48,8 @@ public class ResourceDraftBuilderClassModelFactory extends ClassModelFactory {
         final String packageName = packageName(typeElement);
         builder.packageName(packageName);
         builder.addImport(packageName + "." + ResourceDraftDslModelFactory.dslName(typeElement));
-        addBuilderMethods(typeElement, builder);
-        addBuildMethod(typeElement, builder);
+        addBuilderMethods(builder, typeElement);
+        addBuildMethod(builder, typeElement);
         addConstructors(builder);
         addFactoryMethods(builder, typeElement);
         return builder.build();
@@ -59,7 +65,7 @@ public class ResourceDraftBuilderClassModelFactory extends ClassModelFactory {
         builder.addConstructor(c);
     }
 
-    private void addBuilderMethod(final Element element, final ClassModelBuilder builder) {
+    static void addBuilderMethod(final Element element, final ClassModelBuilder builder) {
         final String methodName = element.getSimpleName().toString();
         final String fieldName = fieldNameFromGetter(methodName);
         final MethodModel method = new MethodModel();
@@ -76,7 +82,7 @@ public class ResourceDraftBuilderClassModelFactory extends ClassModelFactory {
         builder.addField(field);
     }
 
-    private void addBuilderMethods(final TypeElement typeElement, final ClassModelBuilder builder) {
+    public static void addBuilderMethods(final ClassModelBuilder builder, final TypeElement typeElement) {
         typeElement.getEnclosedElements()
                 .stream()
                 .filter(BEAN_GETTER_PREDICATE)
@@ -91,7 +97,7 @@ public class ResourceDraftBuilderClassModelFactory extends ClassModelFactory {
         return "Generated" + originClassName + "Builder";
     }
 
-    private void addBuildMethod(final TypeElement typeElement, final ClassModelBuilder builder) {
+    public static void addBuildMethod(final ClassModelBuilder builder, final TypeElement typeElement) {
         final MethodModel method = new MethodModel();
         method.addModifiers("public");
         final String dslName = ResourceDraftDslModelFactory.dslName(typeElement);

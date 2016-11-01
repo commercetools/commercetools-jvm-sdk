@@ -73,7 +73,7 @@ public abstract class ClassModelFactory {
         return "with" + StringUtils.capitalize(fieldNameFromGetter(element.toString()));
     }
 
-    protected MethodParameterModel getBuilderMethodParameterModel(final Element element, final String fieldName) {
+    static MethodParameterModel getBuilderMethodParameterModel(final Element element, final String fieldName) {
         final MethodParameterModel parameter = new MethodParameterModel();
         parameter.setModifiers(singletonList("final"));
         parameter.setName(fieldName);
@@ -88,21 +88,21 @@ public abstract class ClassModelFactory {
         return parameter;
     }
 
-    protected List<String> fieldNamesSorted(final ClassModelBuilder builder) {
+    static List<String> fieldNamesSorted(final ClassModelBuilder builder) {
         return instanceFieldsSorted(builder)
                 .stream()
                 .map(field -> field.getName())
                 .collect(Collectors.toList());
     }
 
-    protected List<FieldModel> instanceFieldsSorted(final ClassModelBuilder builder) {
+    static List<FieldModel> instanceFieldsSorted(final ClassModelBuilder builder) {
         return builder.build().getFields().stream()
                     .filter(f -> !f.getModifiers().contains("static"))
                     .sorted(Comparator.comparing(f -> f.getName()))
                     .collect(Collectors.toList());
     }
 
-    protected String fieldNamesSortedString(final ClassModelBuilder builder) {
+    static String fieldNamesSortedString(final ClassModelBuilder builder) {
         return fieldNamesSorted(builder).stream().collect(joining(", "));
     }
 
