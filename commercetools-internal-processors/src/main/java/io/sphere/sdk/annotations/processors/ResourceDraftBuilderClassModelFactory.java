@@ -4,6 +4,7 @@ import io.sphere.sdk.models.Base;
 
 import javax.lang.model.element.TypeElement;
 
+import static io.sphere.sdk.annotations.processors.ResourceDraftDslClassModelFactory.dslName;
 import static java.lang.String.format;
 
 public class ResourceDraftBuilderClassModelFactory extends ClassModelFactory {
@@ -24,7 +25,7 @@ public class ResourceDraftBuilderClassModelFactory extends ClassModelFactory {
                 .classType()
                 .className(input -> builderName(input))
                 .extending(Base.class)//TODO missing
-                .implementingBasedOnSourceName(name -> "Builder<" + name + ">")
+                .implementingBasedOnSourceName(name -> "Builder<" + dslName(typeElement) + ">")
                 .fields()
                 .fieldsFromInterfaceBeanGetters()
                 .constructors()
