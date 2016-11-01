@@ -30,6 +30,7 @@ public class ResourceDraftDslClassModelFactory extends ClassModelFactory {
                 .gettersForFields()
                 .withers()
                 .factoryMethodsAccordingToAnnotations()
+                .factoryMethodFromInterfaceInstance()
                 .build();
     }
 
