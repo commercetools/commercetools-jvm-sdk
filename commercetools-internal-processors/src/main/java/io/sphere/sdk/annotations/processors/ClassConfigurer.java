@@ -1,14 +1,17 @@
 package io.sphere.sdk.annotations.processors;
 
 import javax.lang.model.element.TypeElement;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.function.Function;
 import java.util.function.UnaryOperator;
 import java.util.stream.Collectors;
 
 import static io.sphere.sdk.annotations.processors.ClassModelFactory.createField;
 import static io.sphere.sdk.annotations.processors.ResourceDraftBuilderClassModelFactory.BEAN_GETTER_PREDICATE;
 import static java.util.Arrays.asList;
+import static java.util.Collections.singletonList;
 
 final class ClassConfigurer {
     public static SourceHolder ofSource(final TypeElement typeElement) {
@@ -41,21 +44,29 @@ final class ClassConfigurer {
             this.typeElement = typeElement;
         }
 
-        public ImportHolder withDefaultImports() {
-            final List<String> imports = new LinkedList<>();
-            return new ImportHolder(imports, this);
+        public ImportHolder imports() {
+            return new ImportHolder(typeElement, this);
         }
     }
 
-
-
     public static class ImportHolder {
-        private List<String> imports;
+        private final TypeElement typeElement;
+        private List<String> imports = new LinkedList<>();
         private PackageHolder packageHolder;
 
-        private ImportHolder(final List<String> imports, final PackageHolder packageHolder) {
-            this.imports = imports;
+        public ImportHolder(final TypeElement typeElement, final PackageHolder packageHolder) {
+
+            this.typeElement = typeElement;
             this.packageHolder = packageHolder;
+        }
+
+        public ImportHolder withDefaultImports() {
+            return addImport("javax.annotation.Nullable");
+        }
+
+        public ImportHolder addImport(final String s) {
+            imports.add(s);
+            return this;
         }
 
         public ClassModifierHolder modifiers(final String ... modifiers) {
@@ -126,6 +137,10 @@ final class ClassConfigurer {
             this.builder = builder;
             this.typeElement = typeElement;
             builder.setBaseClassName(baseClassName);
+        }
+
+        public InterfacesHolder implementingBasedOnSourceName(final Function<String, String> op) {
+            return implementing(op.apply(typeElement.getSimpleName().toString()));
         }
 
         public InterfacesHolder implementing(final String ... interfaces) {

@@ -20,15 +20,18 @@ public class ResourceDraftBuilderClassModelFactory extends ClassModelFactory {
         this.typeElement = typeElement;
     }
 
-    private ClassModel pocBuilderCreation() {
+    @Override
+    public ClassModel createClassModel() {
         return ClassConfigurer.ofSource(typeElement)
                 .samePackageFromSource()
+                .imports()
                 .withDefaultImports()
+                .addImport("io.sphere.sdk.models.Builder")
                 .modifiers("public", "final")
                 .classType()
                 .className(input -> associatedBuilderName(input))
                 .extending(Base.class)//TODO missing
-                .implementing(typeElement)
+                .implementingBasedOnSourceName(name -> "Builder<" + name + ">")
                 .fields()
                 .fieldsFromInterfaceBeanGetters()
                 .constructors()
@@ -38,21 +41,6 @@ public class ResourceDraftBuilderClassModelFactory extends ClassModelFactory {
                 .buildMethod()
                 .factoryMethodsAccordingToAnnotations()
                 .build();
-    }
-
-    @Override
-    public ClassModel createClassModel() {
-        String name = ResourceDraftBuilderClassModelFactory.associatedBuilderName(typeElement);
-        final ClassModelBuilder builder = ClassModelBuilder.of(name, ClassType.CLASS);
-        builder.addImport("javax.annotation.Nullable");
-        final String packageName = packageName(typeElement);
-        builder.packageName(packageName);
-        builder.addImport(packageName + "." + ResourceDraftDslModelFactory.dslName(typeElement));
-        addBuilderMethods(builder, typeElement);
-        addBuildMethod(builder, typeElement);
-        addConstructors(builder);
-        addFactoryMethods(builder, typeElement);
-        return builder.build();
     }
 
     public static void addConstructors(final ClassModelBuilder builder) {
@@ -77,9 +65,6 @@ public class ResourceDraftBuilderClassModelFactory extends ClassModelFactory {
         values.put("fieldName", fieldName);
         method.setBody(Templates.render("builderMethodBody", values));
         builder.addMethod(method);
-
-        final FieldModel field = createField(element);
-        builder.addField(field);
     }
 
     public static void addBuilderMethods(final ClassModelBuilder builder, final TypeElement typeElement) {
