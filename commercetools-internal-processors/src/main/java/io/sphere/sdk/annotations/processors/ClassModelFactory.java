@@ -121,10 +121,9 @@ public abstract class ClassModelFactory {
     }
 
     public static FieldModel getField(final ClassModelBuilder builder, final String fieldName) {
-        final FieldModel fieldModel = builder.build().getFields().stream()
+        return builder.build().getFields().stream()
                 .filter(f -> f.getName().equals(fieldName))
                 .findFirst().orElseThrow(() -> new RuntimeException("field " + fieldName + " not found in " + builder));
-        return fieldModel;
     }
 
     public static void addFactoryMethod(final ClassModelBuilder builder, final FactoryMethod factoryMethod) {

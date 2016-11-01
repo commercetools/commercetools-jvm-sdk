@@ -15,8 +15,8 @@ public final class Templates {
     private Templates() {
     }
 
-    private static Handlebars handlebars;
-    private static Template classTemplate;
+    private static final Handlebars handlebars;
+    private static final Template classTemplate;
 
     static {
         final ClassPathTemplateLoader loader = new ClassPathTemplateLoader();

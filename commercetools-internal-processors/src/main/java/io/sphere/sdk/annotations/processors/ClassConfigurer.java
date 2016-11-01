@@ -19,7 +19,7 @@ final class ClassConfigurer {
     }
 
     public static class SourceHolder {
-        private TypeElement typeElement;
+        private final TypeElement typeElement;
 
         private SourceHolder(final TypeElement typeElement) {
             this.typeElement = typeElement;
@@ -36,8 +36,8 @@ final class ClassConfigurer {
     }
 
     public static class PackageHolder {
-        private String packageName;
-        private TypeElement typeElement;
+        private final String packageName;
+        private final TypeElement typeElement;
 
         private PackageHolder(final String packageName, final TypeElement typeElement) {
             this.packageName = packageName;
@@ -51,8 +51,8 @@ final class ClassConfigurer {
 
     public static class ImportHolder {
         private final TypeElement typeElement;
-        private List<String> imports = new LinkedList<>();
-        private PackageHolder packageHolder;
+        private final List<String> imports = new LinkedList<>();
+        private final PackageHolder packageHolder;
 
         public ImportHolder(final TypeElement typeElement, final PackageHolder packageHolder) {
 
@@ -79,8 +79,8 @@ final class ClassConfigurer {
     }
 
     public static class ClassModifierHolder {
-        private List<String> modifiers;
-        private ImportHolder importHolder;
+        private final List<String> modifiers;
+        private final ImportHolder importHolder;
 
         private ClassModifierHolder(final List<String> modifiers, final ImportHolder importHolder) {
             this.modifiers = modifiers;
@@ -110,7 +110,7 @@ final class ClassConfigurer {
 
     public static class ClassNameHolder {
         private final TypeElement typeElement;
-        private ClassModelBuilder builder;
+        private final ClassModelBuilder builder;
 
         private ClassNameHolder(final String name, final ClassTypeHolder classTypeHolder, final TypeElement typeElement) {
             this.typeElement = typeElement;
@@ -168,7 +168,7 @@ final class ClassConfigurer {
     }
 
     public static class FieldsHolder {
-        private ClassModelBuilder builder;
+        private final ClassModelBuilder builder;
         private final TypeElement typeElement;
 
         private FieldsHolder(final ClassModelBuilder builder, final TypeElement typeElement) {
