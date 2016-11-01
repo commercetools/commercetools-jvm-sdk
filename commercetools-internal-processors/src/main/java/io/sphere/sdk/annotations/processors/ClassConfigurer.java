@@ -207,11 +207,11 @@ final class ClassConfigurer {
             return this;
         }
 
-        public FieldsHolder fieldsFromInterfaceBeanGetters() {
+        public FieldsHolder fieldsFromInterfaceBeanGetters(final boolean finalFields) {
             final List<FieldModel> fields = typeElement.getEnclosedElements()
                     .stream()
                     .filter(BEAN_GETTER_PREDICATE)
-                    .map(typeElement -> createField(typeElement))
+                    .map(typeElement -> createField(typeElement, finalFields))
                     .collect(Collectors.toList());
             return fields(fields);
         }
@@ -280,7 +280,7 @@ final class ClassConfigurer {
             return this;
         }
 
-        public MethodsHolder factoryMethodFromInterfaceInstance() {
+        public MethodsHolder factoryMethodFromInterfaceInstance(final boolean finalFields) {
             final MethodModel m = new MethodModel();
             m.setModifiers(asList("public", "static"));
             m.setName("of");
@@ -294,7 +294,7 @@ final class ClassConfigurer {
                     .stream()
                     .filter(BEAN_GETTER_PREDICATE)
                     .map(element -> {
-                        final FieldModel field = createField(element);
+                        final FieldModel field = createField(element, finalFields);
                         return ImmutablePair.of(field.getName(), element.getSimpleName().toString());
                     })
                     .sorted(Comparator.comparing(ImmutablePair::getLeft))

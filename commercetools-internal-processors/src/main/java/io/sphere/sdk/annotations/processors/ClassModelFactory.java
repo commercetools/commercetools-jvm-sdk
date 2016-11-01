@@ -84,11 +84,14 @@ public abstract class ClassModelFactory {
         return jsonCreator;
     }
 
-    public static FieldModel createField(final Element element) {
+    public static FieldModel createField(final Element element, final boolean finalFields) {
         final String methodName = element.getSimpleName().toString();
         final String fieldName = fieldNameFromGetter(methodName);
         final FieldModel field = new FieldModel();
         field.addModifiers("private");
+        if (finalFields) {
+            field.addModifiers("final");
+        }
         field.setType(getType(element));
         field.setName(fieldName);
         element.getAnnotationMirrors().forEach(a -> {

@@ -27,14 +27,14 @@ public class ResourceDraftBuilderClassModelFactory extends ClassModelFactory {
                 .extending(Base.class)//TODO missing
                 .implementingBasedOnSourceName(name -> "Builder<" + dslName(typeElement) + ">")
                 .fields()
-                .fieldsFromInterfaceBeanGetters()
+                .fieldsFromInterfaceBeanGetters(false)
                 .constructors()
                 .constructorForAllFields()
                 .methods()
                 .builderMethods()
                 .buildMethod()
                 .factoryMethodsAccordingToAnnotations()
-                .factoryMethodFromInterfaceInstance()
+                .factoryMethodFromInterfaceInstance(false)
                 .build();
     }
 

@@ -23,14 +23,14 @@ public class ResourceDraftDslClassModelFactory extends ClassModelFactory {
                 .extending(Base.class)
                 .implementing(typeElement)
                 .fields()
-                .fieldsFromInterfaceBeanGetters()
+                .fieldsFromInterfaceBeanGetters(true)
                 .constructors()
                 .constructorForAllFields()
                 .methods()
                 .gettersForFields()
                 .withers()
                 .factoryMethodsAccordingToAnnotations()
-                .factoryMethodFromInterfaceInstance()
+                .factoryMethodFromInterfaceInstance(true)
                 .build();
     }
 
