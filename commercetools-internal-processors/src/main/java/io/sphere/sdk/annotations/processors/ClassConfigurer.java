@@ -5,6 +5,8 @@ import org.apache.commons.lang3.tuple.ImmutablePair;
 
 import javax.lang.model.element.Element;
 import javax.lang.model.element.TypeElement;
+import javax.lang.model.type.TypeKind;
+import javax.lang.model.type.TypeMirror;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -208,6 +210,11 @@ final class ClassConfigurer {
         }
 
         public FieldsHolder fieldsFromInterfaceBeanGetters(final boolean finalFields) {
+            if (typeElement.getSimpleName().toString().equals("Channel")) {
+                final List<? extends TypeMirror> interfaces = typeElement.getInterfaces();
+                //TODO use visitor to get also other methods
+            }
+
             final List<FieldModel> fields = typeElement.getEnclosedElements()
                     .stream()
                     .filter(BEAN_GETTER_PREDICATE)
@@ -230,13 +237,18 @@ final class ClassConfigurer {
             this.typeElement = typeElement;
         }
 
-        public ConstructorsHolder constructorForAllFields() {
-            addConstructors(builder);
+        public ConstructorsHolder draftConstructorForAllFields() {
+            addDraftConstructors(builder);
             return new ConstructorsHolder(builder, typeElement);
         }
 
         public MethodsHolder methods() {
             return new MethodsHolder(builder, typeElement);
+        }
+
+        public ConstructorsHolder resourceConstructorForAllFields() {
+            addResourceConstructor(builder);
+            return this;
         }
     }
 

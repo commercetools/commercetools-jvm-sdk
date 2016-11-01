@@ -25,7 +25,7 @@ public class ResourceDraftDslClassModelFactory extends ClassModelFactory {
                 .fields()
                 .fieldsFromInterfaceBeanGetters(true)
                 .constructors()
-                .constructorForAllFields()
+                .draftConstructorForAllFields()
                 .methods()
                 .gettersForFields()
                 .withers()

@@ -2,6 +2,7 @@ package io.sphere.sdk.channels;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import io.sphere.sdk.annotations.ResourceValue;
 import io.sphere.sdk.carts.LineItem;
 import io.sphere.sdk.models.*;
 import io.sphere.sdk.orders.SyncInfo;
@@ -32,6 +33,7 @@ import java.util.Set;
  @see Review#getTarget()
  */
 @JsonDeserialize(as = ChannelImpl.class)
+@ResourceValue
 public interface Channel extends Resource<Channel>, WithKey, Custom {
     /**
      * Any arbitrary string key that unique identifies this channel within the project.
