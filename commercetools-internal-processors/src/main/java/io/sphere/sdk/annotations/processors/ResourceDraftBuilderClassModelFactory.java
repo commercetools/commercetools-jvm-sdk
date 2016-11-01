@@ -19,7 +19,7 @@ public class ResourceDraftBuilderClassModelFactory extends ClassModelFactory {
                 .addImport("io.sphere.sdk.models.Builder")
                 .modifiers("public", "final")
                 .classType()
-                .className(input -> associatedBuilderName(input))
+                .className(input -> builderName(input))
                 .extending(Base.class)//TODO missing
                 .implementingBasedOnSourceName(name -> "Builder<" + name + ">")
                 .fields()
@@ -33,4 +33,11 @@ public class ResourceDraftBuilderClassModelFactory extends ClassModelFactory {
                 .build();
     }
 
+    public static String builderName(final String originClassName) {
+        return "Generated" + originClassName + "Builder";
+    }
+
+    public static String builderName(final TypeElement typeElement) {
+        return builderName(typeElement.getSimpleName().toString());
+    }
 }

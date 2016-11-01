@@ -61,14 +61,6 @@ public abstract class ClassModelFactory {
                 .forEach(element -> addBuilderMethod(element, builder));
     }
 
-    public static String associatedBuilderName(final TypeElement typeElement) {
-        return associatedBuilderName(typeElement.getSimpleName().toString());
-    }
-
-    protected static String associatedBuilderName(final String originClassName) {
-        return "Generated" + originClassName + "Builder";
-    }
-
     public static void addBuildMethod(final ClassModelBuilder builder, final TypeElement typeElement) {
         final MethodModel method = new MethodModel();
         method.addModifiers("public");

@@ -105,7 +105,7 @@ public class ResourceDraftDslModelFactory extends ClassModelFactory {
     private void addNewBuilderMethod(final TypeElement typeElement, final ClassModelBuilder builder, final String packageName) {
         final MethodModel method = new MethodModel();
         method.setModifiers(singletonList("private"));
-        final String associatedBuilderName = ClassModelFactory.associatedBuilderName(typeElement);
+        final String associatedBuilderName = ResourceDraftBuilderClassModelFactory.builderName(typeElement);
         builder.addImport(packageName + "." + associatedBuilderName);
         method.setReturnType(associatedBuilderName);
         method.setName("newBuilder");
