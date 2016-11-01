@@ -15,7 +15,7 @@ public class ResourceDraftBuilderClassModelFactory extends ClassModelFactory {
         return ClassConfigurer.ofSource(typeElement)
                 .samePackageFromSource()
                 .imports()
-                .withDefaultImports()
+                .defaultImports()
                 .addImport("io.sphere.sdk.models.Builder")
                 .modifiers("public", "final")
                 .classType()

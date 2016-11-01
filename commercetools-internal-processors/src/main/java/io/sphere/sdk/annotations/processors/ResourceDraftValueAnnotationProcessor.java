@@ -33,7 +33,7 @@ public class ResourceDraftValueAnnotationProcessor extends AbstractProcessor {
             } while(!(element instanceof TypeElement));
 
             TypeElement typeElement = (TypeElement)element;
-            writeClass(typeElement, new ResourceDraftDslModelFactory(typeElement).createClassModel());
+            writeClass(typeElement, new ResourceDraftDslClassModelFactory(typeElement).createClassModel());
             writeClass(typeElement, new ResourceDraftBuilderClassModelFactory(typeElement).createClassModel());
         }
     }

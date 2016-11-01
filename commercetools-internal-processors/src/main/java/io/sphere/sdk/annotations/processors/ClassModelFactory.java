@@ -64,7 +64,7 @@ public abstract class ClassModelFactory {
     public static void addBuildMethod(final ClassModelBuilder builder, final TypeElement typeElement) {
         final MethodModel method = new MethodModel();
         method.addModifiers("public");
-        final String dslName = ResourceDraftDslModelFactory.dslName(typeElement);
+        final String dslName = ResourceDraftDslClassModelFactory.dslName(typeElement);
         method.setReturnType(dslName);
         method.setName("build");
         method.setBody("return new " + dslName + "(" + fieldNamesSortedString(builder) + ");");
@@ -78,7 +78,7 @@ public abstract class ClassModelFactory {
         return packageElement.getQualifiedName().toString();
     }
 
-    protected AnnotationModel createJsonCreatorAnnotation() {
+    public static AnnotationModel createJsonCreatorAnnotation() {
         final AnnotationModel jsonCreator = new AnnotationModel();
         jsonCreator.setName("JsonCreator");
         return jsonCreator;
@@ -117,7 +117,7 @@ public abstract class ClassModelFactory {
         return element.accept(visitor, null);
     }
 
-    protected String witherNameFromGetter(final Element element) {
+    public static String witherNameFromGetter(final Element element) {
         return "with" + StringUtils.capitalize(fieldNameFromGetter(element.toString()));
     }
 
@@ -209,7 +209,9 @@ public abstract class ClassModelFactory {
         final List<MethodParameterModel> parameters = parametersForInstanceFields(builder);
         c.setParameters(parameters);
         c.setName(builder.getName());
+        c.setAnnotations(singletonList(createJsonCreatorAnnotation()));
         c.setBody(Templates.render("fieldAssignments", singletonMap("assignments", parameters)));
+        builder.addImport("com.fasterxml.jackson.annotation.JsonCreator");
         builder.addConstructor(c);
     }
 }

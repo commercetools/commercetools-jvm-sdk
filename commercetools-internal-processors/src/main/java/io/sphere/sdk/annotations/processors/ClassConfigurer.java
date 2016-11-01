@@ -1,16 +1,20 @@
 package io.sphere.sdk.annotations.processors;
 
+import org.apache.commons.lang3.StringUtils;
+
+import javax.lang.model.element.Element;
 import javax.lang.model.element.TypeElement;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.function.Function;
 import java.util.function.UnaryOperator;
 import java.util.stream.Collectors;
 
-import static io.sphere.sdk.annotations.processors.ClassModelFactory.addConstructors;
-import static io.sphere.sdk.annotations.processors.ClassModelFactory.createField;
+import static io.sphere.sdk.annotations.processors.ClassModelFactory.*;
 import static io.sphere.sdk.annotations.processors.ResourceDraftBuilderClassModelFactory.BEAN_GETTER_PREDICATE;
 import static java.util.Arrays.asList;
+import static java.util.Collections.singletonList;
 
 final class ClassConfigurer {
     public static SourceHolder ofSource(final TypeElement typeElement) {
@@ -59,7 +63,7 @@ final class ClassConfigurer {
             this.packageHolder = packageHolder;
         }
 
-        public ImportHolder withDefaultImports() {
+        public ImportHolder defaultImports() {
             return addImport("javax.annotation.Nullable");
         }
 
@@ -240,5 +244,73 @@ final class ClassConfigurer {
         public ClassModel build() {
             return builder.build();
         }
+
+        public MethodsHolder gettersForFields() {
+            final List<FieldModel> fieldModels = instanceFieldsSorted(builder);
+            fieldModels.forEach(field -> builder.addMethod(createGetter(field)));
+            return this;
+        }
+
+        public MethodsHolder withers() {
+            addDslMethods(builder, typeElement);
+            addNewBuilderMethod(builder, typeElement);
+            return this;
+        }
+    }
+
+    private static MethodModel createGetter(final FieldModel field) {
+        final String methodName = "get" + StringUtils.capitalize(field.getName());
+        final MethodModel method = new MethodModel();
+        method.setName(methodName);
+        method.setReturnType(field.getType());
+        method.setBody("return " + field.getName() + ";");
+        method.addModifiers("public");
+
+        field.getAnnotations()
+                .stream()
+                .filter(a -> "Nullable".equals(a.getName()))
+                .findFirst()
+                .ifPresent(a -> method.setAnnotations(singletonList(createNullableAnnotation())));
+
+        final List<AnnotationModel> list = new LinkedList<>(method.getAnnotations());
+        final AnnotationModel a = new AnnotationModel();
+        a.setName("Override");
+        list.add(a);
+        method.setAnnotations(list);
+
+        return method;
+    }
+
+    private static void addDslMethods(final ClassModelBuilder builder, final TypeElement typeElement) {
+        typeElement.getEnclosedElements()
+                .stream()
+                .filter(NORMAL_GETTERS_PREDICATE)
+                .forEach(element -> addDslMethod(element, builder));
+    }
+
+    private static void addDslMethod(final Element element, final ClassModelBuilder builder) {
+        final String fieldName = fieldNameFromGetter(element.toString());
+        final MethodModel method = new MethodModel();
+        final String name = witherNameFromGetter(element);
+        method.setName(name);
+        method.setReturnType(builder.getName());
+        method.addModifiers("public");
+        method.setParameters(singletonList(getBuilderMethodParameterModel(element, fieldName)));
+        final HashMap<String, Object> values = new HashMap<>();
+        values.put("fieldName", fieldName);
+        method.setBody(Templates.render("witherMethodBody", values));
+
+        builder.addMethod(method);
+    }
+
+    private static void addNewBuilderMethod(final ClassModelBuilder builder, final TypeElement typeElement) {
+        final MethodModel method = new MethodModel();
+        method.setModifiers(singletonList("private"));
+        final String associatedBuilderName = ResourceDraftBuilderClassModelFactory.builderName(typeElement);
+        builder.addImport(builder.build().getPackageName() + "." + associatedBuilderName);
+        method.setReturnType(associatedBuilderName);
+        method.setName("newBuilder");
+        method.setBody("return new " + associatedBuilderName + "(" + fieldNamesSortedString(builder) + ");");
+        builder.addMethod(method);
     }
 }
