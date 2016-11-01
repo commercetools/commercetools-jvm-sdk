@@ -10,20 +10,76 @@ import javax.lang.model.element.PackageElement;
 import javax.lang.model.element.TypeElement;
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import static java.util.Arrays.asList;
 import static java.util.Collections.singletonList;
+import static java.util.Collections.singletonMap;
 import static java.util.stream.Collectors.joining;
 
 public abstract class ClassModelFactory {
 
 
+    public static final Predicate<Element> BEAN_GETTER_PREDICATE = e -> ElementKind.METHOD.equals(e.getKind()) && e.getSimpleName().toString().matches("^get[A-Z].*");
     protected static final Predicate<Element> NORMAL_GETTERS_PREDICATE = e -> ElementKind.METHOD.equals(e.getKind()) && e.getSimpleName().toString().matches("^get[A-Z].*");
+    protected final TypeElement typeElement;
 
-      public abstract ClassModel createClassModel();
+    public ClassModelFactory(final TypeElement typeElement) {
+        this.typeElement = typeElement;
+    }
+
+    public static void addFactoryMethods(final ClassModelBuilder builder, final TypeElement typeElement) {
+        final ResourceDraftValue annotation = typeElement.getAnnotation(ResourceDraftValue.class);
+        if (annotation != null) {
+            for (final FactoryMethod factoryMethod : annotation.factoryMethods()) {
+                addFactoryMethod(builder, factoryMethod);
+            }
+        }
+    }
+
+    static void addBuilderMethod(final Element element, final ClassModelBuilder builder) {
+        final String methodName = element.getSimpleName().toString();
+        final String fieldName = fieldNameFromGetter(methodName);
+        final MethodModel method = new MethodModel();
+        method.setName(fieldName);
+        method.setReturnType(builder.getName());
+        method.addModifiers("public");
+        method.setParameters(singletonList(getBuilderMethodParameterModel(element, fieldName)));
+        final HashMap<String, Object> values = new HashMap<>();
+        values.put("fieldName", fieldName);
+        method.setBody(Templates.render("builderMethodBody", values));
+        builder.addMethod(method);
+    }
+
+    public static void addBuilderMethods(final ClassModelBuilder builder, final TypeElement typeElement) {
+        typeElement.getEnclosedElements()
+                .stream()
+                .filter(ClassModelFactory.BEAN_GETTER_PREDICATE)
+                .forEach(element -> addBuilderMethod(element, builder));
+    }
+
+    public static String associatedBuilderName(final TypeElement typeElement) {
+        return associatedBuilderName(typeElement.getSimpleName().toString());
+    }
+
+    protected static String associatedBuilderName(final String originClassName) {
+        return "Generated" + originClassName + "Builder";
+    }
+
+    public static void addBuildMethod(final ClassModelBuilder builder, final TypeElement typeElement) {
+        final MethodModel method = new MethodModel();
+        method.addModifiers("public");
+        final String dslName = ResourceDraftDslModelFactory.dslName(typeElement);
+        method.setReturnType(dslName);
+        method.setName("build");
+        method.setBody("return new " + dslName + "(" + fieldNamesSortedString(builder) + ");");
+        builder.addMethod(method);
+    }
+
+    public abstract ClassModel createClassModel();
 
     public static String packageName(final TypeElement typeElement) {
         final PackageElement packageElement = (PackageElement) typeElement.getEnclosingElement();
@@ -154,12 +210,14 @@ public abstract class ClassModelFactory {
                 .collect(Collectors.toList());
     }
 
-    public static void addFactoryMethods(final ClassModelBuilder builder, final TypeElement typeElement) {
-        final ResourceDraftValue annotation = typeElement.getAnnotation(ResourceDraftValue.class);
-        if (annotation != null) {
-            for (final FactoryMethod factoryMethod : annotation.factoryMethods()) {
-                addFactoryMethod(builder, factoryMethod);
-            }
-        }
+
+    public static void addConstructors(final ClassModelBuilder builder) {
+        final MethodModel c = new MethodModel();
+        //no modifiers since it should be package scope
+        final List<MethodParameterModel> parameters = parametersForInstanceFields(builder);
+        c.setParameters(parameters);
+        c.setName(builder.getName());
+        c.setBody(Templates.render("fieldAssignments", singletonMap("assignments", parameters)));
+        builder.addConstructor(c);
     }
 }

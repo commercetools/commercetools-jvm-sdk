@@ -7,6 +7,7 @@ final class ClassModel {
     private String name;
     private String type;
     private String packageName;
+    private String baseClassName;
     private List<String> modifiers = new LinkedList<>();
     private List<MethodModel> methods = new LinkedList<>();
     private List<MethodModel> constructors = new LinkedList<>();
@@ -88,5 +89,13 @@ final class ClassModel {
 
     public String getFullyQualifiedName() {
         return packageName + "." + name;
+    }
+
+    public String getBaseClassName() {
+        return baseClassName;
+    }
+
+    public void setBaseClassName(final String baseClassName) {
+        this.baseClassName = baseClassName;
     }
 }

@@ -41,6 +41,7 @@ final class ClassModelBuilder {
         r.setImports(imports);
         r.setInterfaces(interfaces);
         r.setConstructors(constructors);
+        r.setBaseClassName(baseClassName);
         return r;
     }
 

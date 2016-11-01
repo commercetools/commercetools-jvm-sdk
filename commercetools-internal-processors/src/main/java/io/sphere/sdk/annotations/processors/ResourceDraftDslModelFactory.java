@@ -4,20 +4,17 @@ import org.apache.commons.lang3.StringUtils;
 
 import javax.lang.model.element.Element;
 import javax.lang.model.element.TypeElement;
-
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 
 import static java.util.Collections.singletonList;
 import static java.util.Collections.singletonMap;
-import static java.util.stream.Collectors.joining;
 
 public class ResourceDraftDslModelFactory extends ClassModelFactory {
-    private final TypeElement typeElement;
 
     public ResourceDraftDslModelFactory(final TypeElement typeElement) {
-        this.typeElement = typeElement;
+        super(typeElement);
     }
 
     @Override
@@ -108,7 +105,7 @@ public class ResourceDraftDslModelFactory extends ClassModelFactory {
     private void addNewBuilderMethod(final TypeElement typeElement, final ClassModelBuilder builder, final String packageName) {
         final MethodModel method = new MethodModel();
         method.setModifiers(singletonList("private"));
-        final String associatedBuilderName = ResourceDraftBuilderClassModelFactory.associatedBuilderName(typeElement);
+        final String associatedBuilderName = ClassModelFactory.associatedBuilderName(typeElement);
         builder.addImport(packageName + "." + associatedBuilderName);
         method.setReturnType(associatedBuilderName);
         method.setName("newBuilder");

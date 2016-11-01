@@ -1,17 +1,16 @@
 package io.sphere.sdk.annotations.processors;
 
 import javax.lang.model.element.TypeElement;
-import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.function.Function;
 import java.util.function.UnaryOperator;
 import java.util.stream.Collectors;
 
+import static io.sphere.sdk.annotations.processors.ClassModelFactory.addConstructors;
 import static io.sphere.sdk.annotations.processors.ClassModelFactory.createField;
 import static io.sphere.sdk.annotations.processors.ResourceDraftBuilderClassModelFactory.BEAN_GETTER_PREDICATE;
 import static java.util.Arrays.asList;
-import static java.util.Collections.singletonList;
 
 final class ClassConfigurer {
     public static SourceHolder ofSource(final TypeElement typeElement) {
@@ -205,7 +204,7 @@ final class ClassConfigurer {
         }
 
         public ConstructorsHolder constructorForAllFields() {
-            ResourceDraftBuilderClassModelFactory.addConstructors(builder);
+            addConstructors(builder);
             return new ConstructorsHolder(builder, typeElement);
         }
 
@@ -229,12 +228,12 @@ final class ClassConfigurer {
         }
 
         public MethodsHolder builderMethods() {
-            ResourceDraftBuilderClassModelFactory.addBuilderMethods(builder, typeElement);
+            ClassModelFactory.addBuilderMethods(builder, typeElement);
             return this;
         }
 
         public MethodsHolder buildMethod() {
-            ResourceDraftBuilderClassModelFactory.addBuildMethod(builder, typeElement);
+            ClassModelFactory.addBuildMethod(builder, typeElement);
             return this;
         }
 
