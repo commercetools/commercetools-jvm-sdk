@@ -4,6 +4,8 @@ import io.sphere.sdk.models.Base;
 
 import javax.lang.model.element.TypeElement;
 
+import static java.lang.String.format;
+
 public class ResourceDraftBuilderClassModelFactory extends ClassModelFactory {
 
     public ResourceDraftBuilderClassModelFactory(final TypeElement typeElement) {
@@ -17,6 +19,7 @@ public class ResourceDraftBuilderClassModelFactory extends ClassModelFactory {
                 .imports()
                 .defaultImports()
                 .addImport("io.sphere.sdk.models.Builder")
+                .classJavadoc(format("Builder for {@link %s}.", typeElement.getSimpleName().toString()))
                 .modifiers("public", "final")
                 .classType()
                 .className(input -> builderName(input))

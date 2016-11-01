@@ -9,6 +9,7 @@ final class ClassModelBuilder {
     private String name;
     private String baseClassName;
     private String packageName;
+    private String javadoc;
     private String type;
     private final List<String> modifiers = new LinkedList<>();
     private final List<MethodModel> methods = new LinkedList<>();
@@ -42,6 +43,7 @@ final class ClassModelBuilder {
         r.setInterfaces(interfaces);
         r.setConstructors(constructors);
         r.setBaseClassName(baseClassName);
+        r.setJavadoc(javadoc);
         return r;
     }
 
@@ -86,5 +88,13 @@ final class ClassModelBuilder {
 
     public void setBaseClassName(final String baseClassName) {
         this.baseClassName = baseClassName;
+    }
+
+    public String getJavadoc() {
+        return javadoc;
+    }
+
+    public void setJavadoc(final String javadoc) {
+        this.javadoc = javadoc;
     }
 }

@@ -72,6 +72,24 @@ final class ClassConfigurer {
             return this;
         }
 
+
+        public JavadocHolder classJavadoc(final String s) {
+            return new JavadocHolder(typeElement, this, s);
+        }
+    }
+
+    public static class JavadocHolder {
+        private final TypeElement typeElement;
+        private final ImportHolder importHolder;
+        private final String javadoc;
+
+        public JavadocHolder(final TypeElement typeElement, final ImportHolder importHolder, final String javadoc) {
+            this.typeElement = typeElement;
+            this.importHolder = importHolder;
+            this.javadoc = javadoc;
+        }
+
+
         public ClassModifierHolder modifiers(final String ... modifiers) {
             return modifiers(asList(modifiers));
         }
@@ -83,15 +101,15 @@ final class ClassConfigurer {
 
     public static class ClassModifierHolder {
         private final List<String> modifiers;
-        private final ImportHolder importHolder;
+        private final JavadocHolder holder;
 
-        private ClassModifierHolder(final List<String> modifiers, final ImportHolder importHolder) {
+        private ClassModifierHolder(final List<String> modifiers, final JavadocHolder holder) {
             this.modifiers = modifiers;
-            this.importHolder = importHolder;
+            this.holder = holder;
         }
 
         public ClassTypeHolder classType() {
-            return new ClassTypeHolder(ClassType.CLASS, this, importHolder.packageHolder.typeElement);
+            return new ClassTypeHolder(ClassType.CLASS, this, holder.importHolder.packageHolder.typeElement);
         }
     }
 
@@ -107,7 +125,7 @@ final class ClassConfigurer {
         }
 
         public ClassNameHolder className(final UnaryOperator<String> op) {
-            return new ClassNameHolder(op.apply(this.classModifierHolder.importHolder.packageHolder.typeElement.getSimpleName().toString()), this, typeElement);
+            return new ClassNameHolder(op.apply(this.classModifierHolder.holder.importHolder.packageHolder.typeElement.getSimpleName().toString()), this, typeElement);
         }
     }
 
@@ -118,9 +136,10 @@ final class ClassConfigurer {
         private ClassNameHolder(final String name, final ClassTypeHolder classTypeHolder, final TypeElement typeElement) {
             this.typeElement = typeElement;
             this.builder = ClassModelBuilder.of(name, classTypeHolder.classType);
-            this.builder.packageName(classTypeHolder.classModifierHolder.importHolder.packageHolder.packageName);
-            classTypeHolder.classModifierHolder.importHolder.imports.forEach(imp -> builder.addImport(imp));
+            this.builder.packageName(classTypeHolder.classModifierHolder.holder.importHolder.packageHolder.packageName);
+            classTypeHolder.classModifierHolder.holder.importHolder.imports.forEach(imp -> builder.addImport(imp));
             classTypeHolder.classModifierHolder.modifiers.forEach(modifier -> builder.addModifiers(modifier));
+            builder.setJavadoc(classTypeHolder.classModifierHolder.holder.javadoc);
         }
 
         public BaseClassHolder extending(final String baseClassName) {

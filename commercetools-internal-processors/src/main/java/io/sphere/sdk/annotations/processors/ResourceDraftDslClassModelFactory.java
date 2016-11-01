@@ -16,6 +16,7 @@ public class ResourceDraftDslClassModelFactory extends ClassModelFactory {
                 .samePackageFromSource()
                 .imports()
                 .defaultImports()
+                .classJavadoc(null)
                 .modifiers("public", "final")
                 .classType()
                 .className(ResourceDraftDslClassModelFactory::dslName)

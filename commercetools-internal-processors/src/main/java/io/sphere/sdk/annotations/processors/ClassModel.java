@@ -6,6 +6,7 @@ import java.util.List;
 final class ClassModel {
     private String name;
     private String type;
+    private String javadoc;
     private String packageName;
     private String baseClassName;
     private List<String> modifiers = new LinkedList<>();
@@ -97,5 +98,13 @@ final class ClassModel {
 
     public void setBaseClassName(final String baseClassName) {
         this.baseClassName = baseClassName;
+    }
+
+    public String getJavadoc() {
+        return javadoc;
+    }
+
+    public void setJavadoc(final String javadoc) {
+        this.javadoc = javadoc;
     }
 }
