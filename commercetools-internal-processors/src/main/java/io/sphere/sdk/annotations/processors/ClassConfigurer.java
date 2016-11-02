@@ -5,15 +5,12 @@ import org.apache.commons.lang3.tuple.ImmutablePair;
 
 import javax.lang.model.element.Element;
 import javax.lang.model.element.TypeElement;
-import javax.lang.model.type.TypeKind;
-import javax.lang.model.type.TypeMirror;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
+import javax.lang.model.type.*;
+import java.util.*;
 import java.util.function.Function;
 import java.util.function.UnaryOperator;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static io.sphere.sdk.annotations.processors.ClassModelFactory.*;
 import static io.sphere.sdk.annotations.processors.ResourceDraftBuilderClassModelFactory.BEAN_GETTER_PREDICATE;
@@ -210,21 +207,131 @@ final class ClassConfigurer {
         }
 
         public FieldsHolder fieldsFromInterfaceBeanGetters(final boolean finalFields) {
-            if (typeElement.getSimpleName().toString().equals("Channel")) {
-                final List<? extends TypeMirror> interfaces = typeElement.getInterfaces();
-                //TODO use visitor to get also other methods
-            }
+//            if (typeElement.getSimpleName().toString().equals("Channel")) {
+//                final List<? extends TypeMirror> interfaces = typeElement.getInterfaces();
+//
+////                final String s = interfaces.get(0).accept(new StringStringTypeVisitor(), "");
+//                final DeclaredType declaredType = (DeclaredType) interfaces.get(0);
+//                final String s = declaredType.asElement().getEnclosedElements().toString();
+//                //TODO use visitor to get also other methods
+//                //todo check for default implemented, also toReference
+//                throw new RuntimeException(s);
+//            }
 
-            final List<FieldModel> fields = typeElement.getEnclosedElements()
-                    .stream()
+            final Stream<? extends Element> elementStream = elementStreamIncludingInterfaces();
+            final List<FieldModel> fields = elementStream
                     .filter(BEAN_GETTER_PREDICATE)
+                    .map(DistinctElementWrapper::new)
+                    .distinct()
+                    .map(wrapper -> wrapper.element)
                     .map(typeElement -> createField(typeElement, finalFields))
                     .collect(Collectors.toList());
             return fields(fields);
         }
 
+        private Stream<? extends Element> elementStreamIncludingInterfaces() {
+            final Stream<? extends Element> interfacesMethodsStream = typeElement.getInterfaces().stream()
+                    .filter(i -> i instanceof DeclaredType)
+                    .map(i -> (DeclaredType) i)
+                    .flatMap(i -> i.asElement().getEnclosedElements().stream());
+            return Stream.concat(typeElement.getEnclosedElements().stream(), interfacesMethodsStream);
+        }
+
+        private static class DistinctElementWrapper {
+            private final Element element;
+
+            private DistinctElementWrapper(final Element element) {
+                this.element = element;
+            }
+
+            @Override
+            public boolean equals(final Object o) {
+                if (this == o) return true;
+                if (!(o instanceof DistinctElementWrapper)) return false;
+                final DistinctElementWrapper that = (DistinctElementWrapper) o;
+                return Objects.equals(element.getSimpleName(), that.element.getSimpleName());
+            }
+
+            @Override
+            public int hashCode() {
+                return Objects.hash(element.getSimpleName());
+            }
+        }
+
         public ConstructorsHolder constructors() {
             return new ConstructorsHolder(builder, typeElement);
+        }
+
+        private static class StringStringTypeVisitor implements TypeVisitor<String, String> {
+            @Override
+            public String visit(final TypeMirror t, final String s) {
+                return null;
+            }
+
+            @Override
+            public String visit(final TypeMirror t) {
+                return null;
+            }
+
+            @Override
+            public String visitPrimitive(final PrimitiveType t, final String s) {
+                return null;
+            }
+
+            @Override
+            public String visitNull(final NullType t, final String s) {
+                return null;
+            }
+
+            @Override
+            public String visitArray(final ArrayType t, final String s) {
+                return null;
+            }
+
+            @Override
+            public String visitDeclared(final DeclaredType t, final String s) {
+                return "declared " + t.toString();
+            }
+
+            @Override
+            public String visitError(final ErrorType t, final String s) {
+                return null;
+            }
+
+            @Override
+            public String visitTypeVariable(final TypeVariable t, final String s) {
+                return null;
+            }
+
+            @Override
+            public String visitWildcard(final WildcardType t, final String s) {
+                return null;
+            }
+
+            @Override
+            public String visitExecutable(final ExecutableType t, final String s) {
+                return null;
+            }
+
+            @Override
+            public String visitNoType(final NoType t, final String s) {
+                return null;
+            }
+
+            @Override
+            public String visitUnknown(final TypeMirror t, final String s) {
+                return null;
+            }
+
+            @Override
+            public String visitUnion(final UnionType t, final String s) {
+                return null;
+            }
+
+            @Override
+            public String visitIntersection(final IntersectionType t, final String s) {
+                return null;
+            }
         }
     }
 
@@ -237,18 +344,13 @@ final class ClassConfigurer {
             this.typeElement = typeElement;
         }
 
-        public ConstructorsHolder draftConstructorForAllFields() {
+        public ConstructorsHolder constructorForAllFields() {
             addDraftConstructors(builder);
             return new ConstructorsHolder(builder, typeElement);
         }
 
         public MethodsHolder methods() {
             return new MethodsHolder(builder, typeElement);
-        }
-
-        public ConstructorsHolder resourceConstructorForAllFields() {
-            addResourceConstructor(builder);
-            return this;
         }
     }
 

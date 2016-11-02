@@ -1,5 +1,7 @@
 package io.sphere.sdk.annotations.processors;
 
+import io.sphere.sdk.models.Base;
+
 import javax.lang.model.element.TypeElement;
 
 public class ResourceValueImplClassModelFactory extends ClassModelFactory {
@@ -14,17 +16,15 @@ public class ResourceValueImplClassModelFactory extends ClassModelFactory {
                 .samePackageFromSource()
                 .imports()
                 .defaultImports()
-                .addImport("io.sphere.sdk.models.ResourceImpl")
                 .classJavadoc(null)
                 .modifiers("final")
                 .classType()
                 .className(ResourceValueImplClassModelFactory::implName)
-                .extending("ResourceImpl<" + implName(typeElement) + ">")
+                .extending(Base.class)
                 .implementing(typeElement)
                 .fields()
                 .fieldsFromInterfaceBeanGetters(true)
-                .constructors()
-                .resourceConstructorForAllFields()
+                .constructors().constructorForAllFields()
                 .methods()
                 .gettersForFields()
                 .build();

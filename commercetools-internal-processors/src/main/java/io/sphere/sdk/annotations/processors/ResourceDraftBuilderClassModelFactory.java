@@ -29,7 +29,7 @@ public class ResourceDraftBuilderClassModelFactory extends ClassModelFactory {
                 .fields()
                 .fieldsFromInterfaceBeanGetters(false)
                 .constructors()
-                .draftConstructorForAllFields()
+                .constructorForAllFields()
                 .methods()
                 .builderMethods()
                 .buildMethod()
