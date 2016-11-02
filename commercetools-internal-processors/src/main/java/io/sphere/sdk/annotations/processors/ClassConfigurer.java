@@ -5,7 +5,7 @@ import org.apache.commons.lang3.tuple.ImmutablePair;
 
 import javax.lang.model.element.Element;
 import javax.lang.model.element.TypeElement;
-import javax.lang.model.type.*;
+import javax.lang.model.type.DeclaredType;
 import java.lang.annotation.Annotation;
 import java.util.*;
 import java.util.function.Function;
@@ -95,7 +95,6 @@ final class ClassConfigurer {
             this.importHolder = importHolder;
             this.javadoc = javadoc;
         }
-
 
         public ClassModifierHolder modifiers(final String ... modifiers) {
             return modifiers(asList(modifiers));
@@ -371,7 +370,6 @@ final class ClassConfigurer {
         a.setName("Override");
         list.add(a);
         method.setAnnotations(list);
-
         return method;
     }
 
@@ -393,7 +391,6 @@ final class ClassConfigurer {
         final HashMap<String, Object> values = new HashMap<>();
         values.put("fieldName", fieldName);
         method.setBody(Templates.render("witherMethodBody", values));
-
         builder.addMethod(method);
     }
 
