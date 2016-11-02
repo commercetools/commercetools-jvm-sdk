@@ -32,6 +32,10 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>${maven-compiler-plugin.version}</version>
                 <configuration>
+                    <!--
+                    proc:none means that compilation takes place without annotation processing
+                    which is required for a module with annotation processors
+                    -->
                     <compilerArgument>-proc:none</compilerArgument>
                 </configuration>
             </plugin>
