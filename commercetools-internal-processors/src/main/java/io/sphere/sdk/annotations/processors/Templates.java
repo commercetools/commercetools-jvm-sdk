@@ -9,7 +9,6 @@ import java.io.IOException;
 import java.io.UncheckedIOException;
 import java.io.Writer;
 import java.util.Map;
-import java.util.concurrent.CompletionException;
 
 final class Templates {
     private Templates() {
@@ -37,7 +36,7 @@ final class Templates {
         try {
             return handlebars.compile(templateName).apply(values);
         } catch (IOException e) {
-            throw new CompletionException(e);
+            throw new UncheckedIOException(e);
         }
     }
 }
