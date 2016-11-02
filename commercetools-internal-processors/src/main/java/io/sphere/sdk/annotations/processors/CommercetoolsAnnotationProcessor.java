@@ -14,7 +14,7 @@ import java.lang.annotation.Annotation;
 import java.util.Iterator;
 import java.util.Set;
 
-public abstract class CommercetoolsAnnotationProcessor extends AbstractProcessor {
+abstract class CommercetoolsAnnotationProcessor extends AbstractProcessor {
     public boolean process(Set<? extends TypeElement> annotations, RoundEnvironment roundEnv) {
         Iterator var3 = roundEnv.getElementsAnnotatedWith(getAnnotationClass()).iterator();
 

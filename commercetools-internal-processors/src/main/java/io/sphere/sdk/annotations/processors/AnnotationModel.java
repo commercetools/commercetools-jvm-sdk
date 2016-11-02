@@ -1,6 +1,6 @@
 package io.sphere.sdk.annotations.processors;
 
-public class AnnotationModel {
+final class AnnotationModel {
     private String name;
 
     public String getName() {

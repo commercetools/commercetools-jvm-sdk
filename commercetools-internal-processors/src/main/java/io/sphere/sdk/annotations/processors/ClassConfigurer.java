@@ -1,11 +1,14 @@
 package io.sphere.sdk.annotations.processors;
 
+import io.sphere.sdk.annotations.FactoryMethod;
+import javafx.beans.property.adapter.JavaBeanObjectPropertyBuilder;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 
 import javax.lang.model.element.Element;
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.type.*;
+import java.lang.annotation.Annotation;
 import java.util.*;
 import java.util.function.Function;
 import java.util.function.UnaryOperator;
@@ -417,6 +420,16 @@ final class ClassConfigurer {
             final String body = "return new " + builder.getName() + "(" + dsd + ");";
             m.setBody(body);
             builder.addMethod(m);
+            return this;
+        }
+
+        public <A extends Annotation> MethodsHolder additionalContents(final Class<A> a, final Function<A, String[]> op) {
+            final A annotation = typeElement.getAnnotation(a);
+            if (annotation != null) {
+                final String[] thingsToAdd = op.apply(annotation);
+                final String s = Arrays.stream(thingsToAdd).collect(joining("\n"));
+                builder.setAdditions(s);
+            }
             return this;
         }
     }

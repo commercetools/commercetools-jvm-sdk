@@ -1,10 +1,11 @@
 package io.sphere.sdk.annotations.processors;
 
+import io.sphere.sdk.annotations.ResourceDraftValue;
 import io.sphere.sdk.models.Base;
 
 import javax.lang.model.element.TypeElement;
 
-public class ResourceDraftDslClassModelFactory extends ClassModelFactory {
+final class ResourceDraftDslClassModelFactory extends ClassModelFactory {
 
     public ResourceDraftDslClassModelFactory(final TypeElement typeElement) {
         super(typeElement);
@@ -31,6 +32,7 @@ public class ResourceDraftDslClassModelFactory extends ClassModelFactory {
                 .withers()
                 .factoryMethodsAccordingToAnnotations()
                 .factoryMethodFromInterfaceInstance(true)
+                .additionalContents(ResourceDraftValue.class, ResourceDraftValue::additionalDslClassContents)
                 .build();
     }
 
@@ -39,6 +41,6 @@ public class ResourceDraftDslClassModelFactory extends ClassModelFactory {
     }
 
     public static String dslName(final String name) {
-        return "Generated" + name + "Dsl";
+        return name + "Dsl";
     }
 }

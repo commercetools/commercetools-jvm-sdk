@@ -10,7 +10,7 @@ import java.lang.annotation.Annotation;
 
 @SupportedAnnotationTypes({"io.sphere.sdk.annotations.ResourceValue"})
 @SupportedSourceVersion(SourceVersion.RELEASE_8)
-public class ResourceValueAnnotationProcessor extends CommercetoolsAnnotationProcessor {
+public final class ResourceValueAnnotationProcessor extends CommercetoolsAnnotationProcessor {
 
     @Override
     protected Class<? extends Annotation> getAnnotationClass() {

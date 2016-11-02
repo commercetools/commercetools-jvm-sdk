@@ -9,6 +9,7 @@ final class ClassModelBuilder {
     private String name;
     private String baseClassName;
     private String packageName;
+    private String additions;
     private String javadoc;
     private String type;
     private final List<String> modifiers = new LinkedList<>();
@@ -44,6 +45,7 @@ final class ClassModelBuilder {
         r.setConstructors(constructors);
         r.setBaseClassName(baseClassName);
         r.setJavadoc(javadoc);
+        r.setAdditions(additions);
         return r;
     }
 
@@ -96,5 +98,13 @@ final class ClassModelBuilder {
 
     public void setJavadoc(final String javadoc) {
         this.javadoc = javadoc;
+    }
+
+    public String getAdditions() {
+        return additions;
+    }
+
+    public void setAdditions(final String additions) {
+        this.additions = additions;
     }
 }

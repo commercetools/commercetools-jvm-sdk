@@ -7,7 +7,7 @@ import javax.lang.model.element.TypeElement;
 import static io.sphere.sdk.annotations.processors.ResourceDraftDslClassModelFactory.dslName;
 import static java.lang.String.format;
 
-public class ResourceDraftBuilderClassModelFactory extends ClassModelFactory {
+final class ResourceDraftBuilderClassModelFactory extends ClassModelFactory {
 
     public ResourceDraftBuilderClassModelFactory(final TypeElement typeElement) {
         super(typeElement);
@@ -38,8 +38,8 @@ public class ResourceDraftBuilderClassModelFactory extends ClassModelFactory {
                 .build();
     }
 
-    public static String builderName(final String originClassName) {
-        return "Generated" + originClassName + "Builder";
+    public static String builderName(final String originalClassName) {
+        return originalClassName + "Builder";
     }
 
     public static String builderName(final TypeElement typeElement) {

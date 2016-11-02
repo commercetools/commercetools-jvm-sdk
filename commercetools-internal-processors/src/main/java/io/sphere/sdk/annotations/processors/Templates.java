@@ -11,7 +11,7 @@ import java.io.Writer;
 import java.util.Map;
 import java.util.concurrent.CompletionException;
 
-public final class Templates {
+final class Templates {
     private Templates() {
     }
 

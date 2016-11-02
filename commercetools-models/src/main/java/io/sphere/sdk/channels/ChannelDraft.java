@@ -20,7 +20,11 @@ import java.util.Set;
  * @see ChannelDraftDsl
  */
 @JsonDeserialize(as = ChannelDraftDsl.class)
-@ResourceDraftValue(factoryMethods = @FactoryMethod(parameterNames = {"key"}))
+@ResourceDraftValue(factoryMethods = @FactoryMethod(parameterNames = {"key"}),
+additionalDslClassContents = {
+        "public ChannelDraftDsl withRoles(final ChannelRole ... roles) {\n" +
+        "        return newBuilder().roles(io.sphere.sdk.utils.SphereInternalUtils.asSet(roles)).build();\n" +
+        "    }"})
 public interface ChannelDraft extends WithKey {
     String getKey();
 

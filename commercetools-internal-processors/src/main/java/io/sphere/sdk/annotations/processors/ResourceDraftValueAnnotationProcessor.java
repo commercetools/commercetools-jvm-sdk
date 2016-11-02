@@ -10,7 +10,7 @@ import java.lang.annotation.Annotation;
 
 @SupportedAnnotationTypes({"io.sphere.sdk.annotations.ResourceDraftValue"})
 @SupportedSourceVersion(SourceVersion.RELEASE_8)
-public class ResourceDraftValueAnnotationProcessor extends CommercetoolsAnnotationProcessor {
+public final class ResourceDraftValueAnnotationProcessor extends CommercetoolsAnnotationProcessor {
 
     @Override
     protected void generate(final TypeElement typeElement) {

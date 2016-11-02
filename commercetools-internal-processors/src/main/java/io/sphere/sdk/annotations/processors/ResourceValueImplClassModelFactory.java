@@ -4,7 +4,7 @@ import io.sphere.sdk.models.Base;
 
 import javax.lang.model.element.TypeElement;
 
-public class ResourceValueImplClassModelFactory extends ClassModelFactory {
+final class ResourceValueImplClassModelFactory extends ClassModelFactory {
 
     public ResourceValueImplClassModelFactory(final TypeElement typeElement) {
         super(typeElement);
@@ -35,6 +35,6 @@ public class ResourceValueImplClassModelFactory extends ClassModelFactory {
     }
 
     public static String implName(final String name) {
-        return "Generated" + name + "Impl";
+        return name + "Impl";
     }
 }

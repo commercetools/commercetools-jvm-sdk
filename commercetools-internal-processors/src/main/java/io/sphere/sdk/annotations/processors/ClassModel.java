@@ -8,6 +8,7 @@ final class ClassModel {
     private String type;
     private String javadoc;
     private String packageName;
+    private String additions;
     private String baseClassName;
     private List<String> modifiers = new LinkedList<>();
     private List<MethodModel> methods = new LinkedList<>();
@@ -106,5 +107,13 @@ final class ClassModel {
 
     public void setJavadoc(final String javadoc) {
         this.javadoc = javadoc;
+    }
+
+    public String getAdditions() {
+        return additions;
+    }
+
+    public void setAdditions(final String additions) {
+        this.additions = additions;
     }
 }
