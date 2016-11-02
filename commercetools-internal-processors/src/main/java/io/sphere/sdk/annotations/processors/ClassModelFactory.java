@@ -20,6 +20,9 @@ import static java.util.Collections.singletonList;
 import static java.util.Collections.singletonMap;
 import static java.util.stream.Collectors.joining;
 
+/**
+ * Creates a {@link ClassModel}.
+ */
 public abstract class ClassModelFactory {
 
 
@@ -206,19 +209,7 @@ public abstract class ClassModelFactory {
     }
 
 
-    public static void addDraftConstructors(final ClassModelBuilder builder) {
-        final MethodModel c = new MethodModel();
-        //no modifiers since it should be package scope
-        final List<MethodParameterModel> parameters = parametersForInstanceFields(builder);
-        c.setParameters(parameters);
-        c.setName(builder.getName());
-        c.setAnnotations(singletonList(createJsonCreatorAnnotation()));
-        c.setBody(Templates.render("fieldAssignments", singletonMap("assignments", parameters)));
-        builder.addImport("com.fasterxml.jackson.annotation.JsonCreator");
-        builder.addConstructor(c);
-    }
-
-    public static void addResourceConstructor(final ClassModelBuilder builder) {
+    public static void addConstructor(final ClassModelBuilder builder) {
         final MethodModel c = new MethodModel();
         //no modifiers since it should be package scope
         final List<MethodParameterModel> parameters = parametersForInstanceFields(builder);

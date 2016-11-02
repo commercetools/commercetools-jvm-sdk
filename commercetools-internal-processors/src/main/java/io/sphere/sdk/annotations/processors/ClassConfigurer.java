@@ -1,7 +1,5 @@
 package io.sphere.sdk.annotations.processors;
 
-import io.sphere.sdk.annotations.FactoryMethod;
-import javafx.beans.property.adapter.JavaBeanObjectPropertyBuilder;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 
@@ -22,6 +20,9 @@ import static java.util.Arrays.asList;
 import static java.util.Collections.singletonList;
 import static java.util.stream.Collectors.joining;
 
+/**
+ * high level configuration util to generate classes based on an existing class or interface
+ */
 final class ClassConfigurer {
     public static SourceHolder ofSource(final TypeElement typeElement) {
         return new SourceHolder(typeElement);
@@ -115,7 +116,7 @@ final class ClassConfigurer {
         }
 
         public ClassTypeHolder classType() {
-            return new ClassTypeHolder(ClassType.CLASS, this, holder.importHolder.packageHolder.typeElement);
+            return new ClassTypeHolder(ClassType.CLASS, this, holder.typeElement);
         }
     }
 
@@ -210,17 +211,6 @@ final class ClassConfigurer {
         }
 
         public FieldsHolder fieldsFromInterfaceBeanGetters(final boolean finalFields) {
-//            if (typeElement.getSimpleName().toString().equals("Channel")) {
-//                final List<? extends TypeMirror> interfaces = typeElement.getInterfaces();
-//
-////                final String s = interfaces.get(0).accept(new StringStringTypeVisitor(), "");
-//                final DeclaredType declaredType = (DeclaredType) interfaces.get(0);
-//                final String s = declaredType.asElement().getEnclosedElements().toString();
-//                //TODO use visitor to get also other methods
-//                //todo check for default implemented, also toReference
-//                throw new RuntimeException(s);
-//            }
-
             final Stream<? extends Element> elementStream = elementStreamIncludingInterfaces();
             final List<FieldModel> fields = elementStream
                     .filter(BEAN_GETTER_PREDICATE)
@@ -264,78 +254,6 @@ final class ClassConfigurer {
         public ConstructorsHolder constructors() {
             return new ConstructorsHolder(builder, typeElement);
         }
-
-        private static class StringStringTypeVisitor implements TypeVisitor<String, String> {
-            @Override
-            public String visit(final TypeMirror t, final String s) {
-                return null;
-            }
-
-            @Override
-            public String visit(final TypeMirror t) {
-                return null;
-            }
-
-            @Override
-            public String visitPrimitive(final PrimitiveType t, final String s) {
-                return null;
-            }
-
-            @Override
-            public String visitNull(final NullType t, final String s) {
-                return null;
-            }
-
-            @Override
-            public String visitArray(final ArrayType t, final String s) {
-                return null;
-            }
-
-            @Override
-            public String visitDeclared(final DeclaredType t, final String s) {
-                return "declared " + t.toString();
-            }
-
-            @Override
-            public String visitError(final ErrorType t, final String s) {
-                return null;
-            }
-
-            @Override
-            public String visitTypeVariable(final TypeVariable t, final String s) {
-                return null;
-            }
-
-            @Override
-            public String visitWildcard(final WildcardType t, final String s) {
-                return null;
-            }
-
-            @Override
-            public String visitExecutable(final ExecutableType t, final String s) {
-                return null;
-            }
-
-            @Override
-            public String visitNoType(final NoType t, final String s) {
-                return null;
-            }
-
-            @Override
-            public String visitUnknown(final TypeMirror t, final String s) {
-                return null;
-            }
-
-            @Override
-            public String visitUnion(final UnionType t, final String s) {
-                return null;
-            }
-
-            @Override
-            public String visitIntersection(final IntersectionType t, final String s) {
-                return null;
-            }
-        }
     }
 
     public static class ConstructorsHolder {
@@ -348,7 +266,7 @@ final class ClassConfigurer {
         }
 
         public ConstructorsHolder constructorForAllFields() {
-            addDraftConstructors(builder);
+            addConstructor(builder);
             return new ConstructorsHolder(builder, typeElement);
         }
 
