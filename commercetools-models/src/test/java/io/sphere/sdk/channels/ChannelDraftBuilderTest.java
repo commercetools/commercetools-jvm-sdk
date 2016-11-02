@@ -7,9 +7,7 @@ import static org.assertj.core.api.Assertions.*;
 
 public class ChannelDraftBuilderTest {
     @Test
-    public void name() {
-        ChannelDraftBuilder.of("key").build();
-        final Class<GeneratedChannelDraftBuilder> generatedChannelDraftBuilderClass = GeneratedChannelDraftBuilder.class;
-        final Class<GeneratedChannelDraftDsl> generatedChannelDraftDslClass = GeneratedChannelDraftDsl.class;
+    public void key() {
+        assertThat(ChannelDraftBuilder.of("key").build().getKey()).isEqualTo("key");
     }
 }
