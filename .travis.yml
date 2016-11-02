@@ -17,4 +17,4 @@ notifications:
 branches:
   only:
     - master
-    - remove-direct-retry-rules-in-client
+    - code-generation
