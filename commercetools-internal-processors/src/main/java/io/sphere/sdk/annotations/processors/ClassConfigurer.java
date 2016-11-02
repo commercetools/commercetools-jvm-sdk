@@ -65,7 +65,6 @@ final class ClassConfigurer {
         private final PackageHolder packageHolder;
 
         public ImportHolder(final TypeElement typeElement, final PackageHolder packageHolder) {
-
             this.typeElement = typeElement;
             this.packageHolder = packageHolder;
         }
@@ -78,7 +77,6 @@ final class ClassConfigurer {
             imports.add(s);
             return this;
         }
-
 
         public JavadocHolder classJavadoc(final String s) {
             return new JavadocHolder(typeElement, this, s);
