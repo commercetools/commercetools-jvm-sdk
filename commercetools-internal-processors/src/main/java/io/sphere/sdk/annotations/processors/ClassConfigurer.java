@@ -374,7 +374,7 @@ final class ClassConfigurer {
     private static void addDslMethods(final ClassModelBuilder builder, final TypeElement typeElement) {
         typeElement.getEnclosedElements()
                 .stream()
-                .filter(NORMAL_GETTERS_PREDICATE)
+                .filter(BEAN_GETTER_PREDICATE)
                 .forEach(element -> addDslMethod(element, builder));
     }
 

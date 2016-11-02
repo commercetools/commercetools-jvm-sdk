@@ -25,9 +25,7 @@ import static java.util.stream.Collectors.joining;
  */
 public abstract class ClassModelFactory {
 
-
     public static final Predicate<Element> BEAN_GETTER_PREDICATE = e -> ElementKind.METHOD.equals(e.getKind()) && e.getSimpleName().toString().matches("^get[A-Z].*");
-    protected static final Predicate<Element> NORMAL_GETTERS_PREDICATE = e -> ElementKind.METHOD.equals(e.getKind()) && e.getSimpleName().toString().matches("^get[A-Z].*");
     protected final TypeElement typeElement;
 
     public ClassModelFactory(final TypeElement typeElement) {
