@@ -24,7 +24,8 @@ final class ResourceValueImplClassModelFactory extends ClassModelFactory {
                 .implementing(typeElement)
                 .fields()
                 .fieldsFromInterfaceBeanGetters(true)
-                .constructors().constructorForAllFields()
+                .constructors()
+                .constructorForAllFields()
                 .methods()
                 .gettersForFields()
                 .build();

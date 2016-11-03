@@ -1,8 +1,7 @@
 package io.sphere.sdk.customers;
 
+import io.sphere.sdk.json.SphereJsonUtils;
 import org.junit.Test;
-
-import java.util.Collections;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -10,7 +9,8 @@ public class CustomerImplTest {
     @Test
     public void toStringDoesNotIncludeThePassword() throws Exception {
         final String secret = "123456";
-        final CustomerImpl customer = new CustomerImpl(null, 1L, null, null, null, null, null, null, secret, null, null, Collections.emptyList(), null, null, false, null, null, null, null, null, null, null);
+        final String json = String.format("{\"password\":\"%s\"}", secret);
+        final Customer customer = SphereJsonUtils.readObject(json, Customer.class);
         assertThat(customer.toString()).doesNotContain(secret);
     }
 }

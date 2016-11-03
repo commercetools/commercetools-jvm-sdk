@@ -1,8 +1,10 @@
 package io.sphere.sdk.customers;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import io.sphere.sdk.annotations.ResourceValue;
 import io.sphere.sdk.carts.Cart;
 import io.sphere.sdk.customergroups.CustomerGroup;
 import io.sphere.sdk.customers.commands.CustomerCreatePasswordTokenCommand;
@@ -111,6 +113,7 @@ import java.util.Optional;
  * @see io.sphere.sdk.reviews.commands.updateactions.SetCustomer
  */
 @JsonDeserialize(as = CustomerImpl.class)
+@ResourceValue
 public interface Customer extends Resource<Customer>, Custom {
     /**
      * Gets the ID of this customer.
@@ -275,6 +278,7 @@ public interface Customer extends Resource<Customer>, Custom {
                 .findFirst();
     }
 
+    @JsonProperty("isEmailVerified")
     Boolean isEmailVerified();
 
     /**

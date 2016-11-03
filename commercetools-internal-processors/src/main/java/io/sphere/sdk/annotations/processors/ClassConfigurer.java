@@ -1,14 +1,12 @@
 package io.sphere.sdk.annotations.processors;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import io.sphere.sdk.annotations.FactoryMethod;
 import io.sphere.sdk.annotations.ResourceDraftValue;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 
-import javax.lang.model.element.Element;
-import javax.lang.model.element.ElementKind;
-import javax.lang.model.element.PackageElement;
-import javax.lang.model.element.TypeElement;
+import javax.lang.model.element.*;
 import javax.lang.model.type.DeclaredType;
 import java.lang.annotation.Annotation;
 import java.util.*;
@@ -23,12 +21,25 @@ import static java.util.Arrays.asList;
 import static java.util.Collections.singletonList;
 import static java.util.Collections.singletonMap;
 import static java.util.stream.Collectors.joining;
+import static org.apache.commons.lang3.StringUtils.capitalize;
 
 /**
  * high level configuration util to generate classes based on an existing class or interface
  */
 final class ClassConfigurer {
-    public static final Predicate<Element> BEAN_GETTER_PREDICATE = e -> ElementKind.METHOD.equals(e.getKind()) && e.getSimpleName().toString().matches("^get[A-Z].*");
+    public static final Predicate<Element> BEAN_GETTER_PREDICATE = e -> {
+        final String simpleName = e.getSimpleName().toString();
+        final boolean isMethod = ElementKind.METHOD.equals(e.getKind());
+        return isMethod && hasBeanGetterName(simpleName) && hasNoParameters(e);
+    };
+
+    private static boolean hasNoParameters(final Element e) {
+        return e instanceof ExecutableElement && ((ExecutableElement) e).getParameters().isEmpty();
+    }
+
+    private static boolean hasBeanGetterName(final String simpleName) {
+        return simpleName.matches("^get[A-Z].*") || simpleName.matches("^is[A-Z].*");
+    }
 
     public static SourceHolder ofSource(final TypeElement typeElement) {
         return new SourceHolder(typeElement);
@@ -214,7 +225,7 @@ final class ClassConfigurer {
         }
 
         public FieldsHolder fieldsFromInterfaceBeanGetters(final boolean finalFields) {
-            final Stream<? extends Element> elementStream = elementStreamIncludingInterfaces();
+            final Stream<? extends Element> elementStream = elementStreamIncludingInterfaces(typeElement);
             final List<FieldModel> fields = elementStream
                     .filter(BEAN_GETTER_PREDICATE)
                     .map(DistinctElementWrapper::new)
@@ -223,14 +234,6 @@ final class ClassConfigurer {
                     .map(typeElement -> createField(typeElement, finalFields))
                     .collect(Collectors.toList());
             return fields(fields);
-        }
-
-        private Stream<? extends Element> elementStreamIncludingInterfaces() {
-            final Stream<? extends Element> interfacesMethodsStream = typeElement.getInterfaces().stream()
-                    .filter(i -> i instanceof DeclaredType)
-                    .map(i -> (DeclaredType) i)
-                    .flatMap(i -> i.asElement().getEnclosedElements().stream());
-            return Stream.concat(typeElement.getEnclosedElements().stream(), interfacesMethodsStream);
         }
 
         private static class DistinctElementWrapper {
@@ -259,6 +262,14 @@ final class ClassConfigurer {
         }
     }
 
+    private static Stream<? extends Element> elementStreamIncludingInterfaces(final TypeElement typeElement) {
+        final Stream<? extends Element> interfacesMethodsStream = typeElement.getInterfaces().stream()
+                .filter(i -> i instanceof DeclaredType)
+                .map(i -> (DeclaredType) i)
+                .flatMap(i -> i.asElement().getEnclosedElements().stream());
+        return Stream.concat(typeElement.getEnclosedElements().stream(), interfacesMethodsStream);
+    }
+
     public static class ConstructorsHolder {
         private final ClassModelBuilder builder;
         private final TypeElement typeElement;
@@ -271,7 +282,7 @@ final class ClassConfigurer {
         public ConstructorsHolder constructorForAllFields() {
             final MethodModel c = new MethodModel();
             //no modifiers since it should be package scope
-            final List<MethodParameterModel> parameters = parametersForInstanceFields(builder);
+            final List<MethodParameterModel> parameters = parametersForInstanceFields(builder, typeElement);
             c.setParameters(parameters);
             c.setName(builder.getName());
             c.setAnnotations(singletonList(createJsonCreatorAnnotation()));
@@ -299,7 +310,7 @@ final class ClassConfigurer {
             final ResourceDraftValue annotation = typeElement.getAnnotation(ResourceDraftValue.class);
             if (annotation != null) {
                 for (final FactoryMethod factoryMethod : annotation.factoryMethods()) {
-                    addFactoryMethod(builder, factoryMethod);
+                    addFactoryMethod(builder, factoryMethod, typeElement);
                 }
             }
             return this;
@@ -369,7 +380,8 @@ final class ClassConfigurer {
     }
 
     private static MethodModel createGetter(final FieldModel field) {
-        final String methodName = "get" + StringUtils.capitalize(field.getName());
+        final String methodNameStart = field.getType().equals("java.lang.Boolean") ? "is" : "get";
+        final String methodName = methodNameStart + capitalize(field.getName());
         final MethodModel method = new MethodModel();
         method.setName(methodName);
         method.setReturnType(field.getType());
@@ -398,7 +410,7 @@ final class ClassConfigurer {
     }
 
     private static void addDslMethod(final Element element, final ClassModelBuilder builder) {
-        final String fieldName = fieldNameFromGetter(element.toString());
+        final String fieldName = fieldNameFromGetter(element);
         final MethodModel method = new MethodModel();
         final String name = witherNameFromGetter(element);
         method.setName(name);
@@ -410,6 +422,8 @@ final class ClassConfigurer {
         method.setBody(Templates.render("witherMethodBody", values));
         builder.addMethod(method);
     }
+
+
 
     private static void addNewBuilderMethod(final ClassModelBuilder builder, final TypeElement typeElement) {
         final MethodModel method = new MethodModel();
@@ -423,8 +437,7 @@ final class ClassConfigurer {
     }
 
     private static FieldModel createField(final Element element, final boolean finalFields) {
-        final String methodName = element.getSimpleName().toString();
-        final String fieldName = fieldNameFromGetter(methodName);
+        final String fieldName = fieldNameFromGetter(element);
         final FieldModel field = new FieldModel();
         field.addModifiers("private");
         if (finalFields) {
@@ -441,7 +454,7 @@ final class ClassConfigurer {
         return field;
     }
 
-    private static void addFactoryMethod(final ClassModelBuilder builder, final FactoryMethod factoryMethod) {
+    private static void addFactoryMethod(final ClassModelBuilder builder, final FactoryMethod factoryMethod, final TypeElement typeElement) {
         final String name = factoryMethod.methodName();
         final MethodModel method = new MethodModel();
         method.setName(name);
@@ -449,7 +462,7 @@ final class ClassConfigurer {
         method.setParameters(createParameterModels(builder, factoryMethod));
         method.setReturnType(builder.getName());
         final List<String> parameterNameList = asList(factoryMethod.parameterNames());
-        final String constructorParameters = parametersForInstanceFields(builder).stream()
+        final String constructorParameters = parametersForInstanceFields(builder, typeElement).stream()
                 .map(p -> parameterNameList.contains(p.getName()) ? p.getName() : null)
                 .collect(joining(", "));
         method.setBody("return new " + builder.getName() + "(" + constructorParameters +");");
@@ -475,27 +488,40 @@ final class ClassConfigurer {
                 .findFirst().orElseThrow(() -> new RuntimeException("field " + fieldName + " not found in " + builder));
     }
 
-    private static List<MethodParameterModel> parametersForInstanceFields(final ClassModelBuilder builder) {
+    private static List<MethodParameterModel> parametersForInstanceFields(final ClassModelBuilder builder, final TypeElement typeElement) {
         return builder.build().getFields().stream()
                 .filter(f -> !f.getModifiers().contains("static"))
-                .sorted(Comparator.comparing(f -> f.getName()))
+                .sorted(Comparator.comparing(FieldModel::getName))
                 .map(f -> {
                     final MethodParameterModel p = new MethodParameterModel();
                     p.setModifiers(asList("final"));
                     p.setType(f.getType());
                     p.setName(f.getName());
+                    if (f.getType().endsWith("Boolean")) {
+                        final Element element = elementStreamIncludingInterfaces(typeElement)
+                                .filter(t -> t.getSimpleName().toString().equals("is" + capitalize(f.getName())))
+                                .filter(t -> t.getAnnotation(JsonProperty.class) != null)
+                                .findFirst()
+                                .orElseThrow(() -> new RuntimeException("Boolean getter for " + typeElement + " needs @JsonProperty annotation to find the right name"));
+
+                        final JsonProperty jsonProperty = element.getAnnotation(JsonProperty.class);
+                        final AnnotationModel annotationModel = new AnnotationModel();
+                        annotationModel.setName(jsonProperty.annotationType().getName());
+                        annotationModel.setValue(jsonProperty.value());
+
+                        p.setAnnotations(singletonList(annotationModel));
+                    }
                     return p;
                 })
                 .collect(Collectors.toList());
     }
 
     private static String witherNameFromGetter(final Element element) {
-        return "with" + StringUtils.capitalize(fieldNameFromGetter(element.toString()));
+        return "with" + capitalize(fieldNameFromGetter(element));
     }
 
     private static void addBuilderMethod(final Element element, final ClassModelBuilder builder) {
-        final String methodName = element.getSimpleName().toString();
-        final String fieldName = fieldNameFromGetter(methodName);
+        final String fieldName = fieldNameFromGetter(element);
         final MethodModel method = new MethodModel();
         method.setName(fieldName);
         method.setReturnType(builder.getName());
@@ -541,8 +567,10 @@ final class ClassConfigurer {
         return am;
     }
 
-    private static String fieldNameFromGetter(final String methodName) {
-        final String s1 = methodName.toString().replaceAll("^get", "");
+    private static String fieldNameFromGetter(final Element element) {
+        final String methodName = element.getSimpleName().toString();
+        final String firstPartGetterName = methodName.startsWith("get") ? "get" : "is";
+        final String s1 = methodName.toString().replaceAll("^" + firstPartGetterName, "");
         final String s = ("" + s1.charAt(0)).toLowerCase() + s1.substring(1);
         return StringUtils.substringBefore(s, "(");
     }
