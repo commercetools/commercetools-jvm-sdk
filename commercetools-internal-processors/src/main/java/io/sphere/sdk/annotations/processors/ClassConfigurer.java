@@ -8,7 +8,10 @@ import org.apache.commons.lang3.tuple.ImmutablePair;
 
 import javax.lang.model.element.*;
 import javax.lang.model.type.DeclaredType;
+import java.io.IOException;
 import java.lang.annotation.Annotation;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.*;
 import java.util.function.Function;
 import java.util.function.Predicate;
@@ -93,7 +96,8 @@ final class ClassConfigurer {
         public ImportHolder defaultImports() {
             return addImport("javax.annotation.Nullable")
                     .addImport("java.util.Optional")
-                    .addImport("java.util.Objects");
+                    .addImport("java.util.Objects")
+                    .addImport("io.sphere.sdk.models.Referenceable");
         }
 
         public ImportHolder addImport(final String s) {
@@ -323,7 +327,10 @@ final class ClassConfigurer {
         }
 
         public MethodsHolder builderMethods() {
-            addBuilderMethods(builder, typeElement);
+            typeElement.getEnclosedElements()
+                    .stream()
+                    .filter(BEAN_GETTER_PREDICATE)
+                    .forEach(element -> addBuilderMethod(element, builder));
             return this;
         }
 
@@ -422,10 +429,12 @@ final class ClassConfigurer {
         method.setName(name);
         method.setReturnType(builder.getName());
         method.addModifiers("public");
-        method.setParameters(singletonList(getBuilderMethodParameterModel(element, fieldName)));
+        final MethodParameterModel parameter = getBuilderMethodParameterModel(element, fieldName);
+        method.setParameters(singletonList(parameter));
         final HashMap<String, Object> values = new HashMap<>();
         values.put("fieldName", fieldName);
-        method.setBody(Templates.render("witherMethodBody", values));
+        final String template = parameter.getType().contains("io.sphere.sdk.models.Referenceable<") ? "referenceableWitherMethodBody" : "witherMethodBody";
+        method.setBody(Templates.render(template, values));
         builder.addMethod(method);
     }
 
@@ -532,18 +541,13 @@ final class ClassConfigurer {
         method.setName(fieldName);
         method.setReturnType(builder.getName());
         method.addModifiers("public");
-        method.setParameters(singletonList(getBuilderMethodParameterModel(element, fieldName)));
+        final MethodParameterModel parameter = getBuilderMethodParameterModel(element, fieldName);
+        method.setParameters(singletonList(parameter));
         final HashMap<String, Object> values = new HashMap<>();
         values.put("fieldName", fieldName);
-        method.setBody(Templates.render("builderMethodBody", values));
+        final String template = parameter.getType().contains("io.sphere.sdk.models.Referenceable<") ? "referenceableBuilderMethodBody" : "builderMethodBody";
+        method.setBody(Templates.render(template, values));
         builder.addMethod(method);
-    }
-
-    private static void addBuilderMethods(final ClassModelBuilder builder, final TypeElement typeElement) {
-        typeElement.getEnclosedElements()
-                .stream()
-                .filter(BEAN_GETTER_PREDICATE)
-                .forEach(element -> addBuilderMethod(element, builder));
     }
 
     private static void addBuildMethod(final ClassModelBuilder builder, final TypeElement typeElement) {
@@ -591,7 +595,12 @@ final class ClassConfigurer {
         parameter.setModifiers(singletonList("final"));
         parameter.setName(fieldName);
         final String type = getType(element);
-        parameter.setType(type);
+        if (type.contains("io.sphere.sdk.models.Reference<")) {
+            final String newType = type.replace("io.sphere.sdk.models.Reference<", "io.sphere.sdk.models.Referenceable<");
+            parameter.setType(newType);
+        } else {
+            parameter.setType(type);
+        }
         element.getAnnotationMirrors().forEach(a -> {
             final String annotationName = a.getAnnotationType().asElement().getSimpleName().toString();
             if ("Nullable".equals(annotationName)) {

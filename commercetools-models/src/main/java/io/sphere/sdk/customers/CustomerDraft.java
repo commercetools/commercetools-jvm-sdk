@@ -31,9 +31,6 @@ import java.util.Locale;
                 "    public CustomerDraftDsl withCart(final io.sphere.sdk.carts.Cart cart) {\n" +
                         "        Objects.requireNonNull(cart);\n" +
                         "        return withAnonymousCartId(cart.getId());\n" +
-                        "    }",
-                "   public CustomerDraftDsl withCustomerGroup(@Nullable final io.sphere.sdk.models.Referenceable<io.sphere.sdk.customergroups.CustomerGroup> customerGroup) {\n" +
-                        "        return newBuilder().customerGroup(Optional.ofNullable(customerGroup).map(io.sphere.sdk.models.Referenceable::toReference).orElse(null)).build();\n" +
                         "    }"},
         additionalBuilderClassContents = {
                 "    public static CustomerDraftBuilder of(final CustomerName customerName, final String email, final String password) {\n" +
