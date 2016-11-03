@@ -1,5 +1,6 @@
 package io.sphere.sdk.annotations.processors;
 
+import io.sphere.sdk.annotations.ResourceDraftValue;
 import io.sphere.sdk.models.Base;
 
 import javax.lang.model.element.TypeElement;
@@ -35,6 +36,7 @@ final class ResourceDraftBuilderClassModelFactory extends ClassModelFactory {
                 .buildMethod()
                 .factoryMethodsAccordingToAnnotations()
                 .factoryMethodFromInterfaceInstance(false)
+                .additionalContents(ResourceDraftValue.class, ResourceDraftValue::additionalBuilderClassContents)
                 .build();
     }
 

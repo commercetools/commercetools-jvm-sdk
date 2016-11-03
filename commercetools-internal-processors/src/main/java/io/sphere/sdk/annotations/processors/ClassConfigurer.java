@@ -91,7 +91,9 @@ final class ClassConfigurer {
         }
 
         public ImportHolder defaultImports() {
-            return addImport("javax.annotation.Nullable");
+            return addImport("javax.annotation.Nullable")
+                    .addImport("java.util.Optional")
+                    .addImport("java.util.Objects");
         }
 
         public ImportHolder addImport(final String s) {

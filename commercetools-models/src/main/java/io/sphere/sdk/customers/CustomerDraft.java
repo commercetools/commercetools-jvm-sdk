@@ -2,6 +2,8 @@ package io.sphere.sdk.customers;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import io.sphere.sdk.annotations.FactoryMethod;
+import io.sphere.sdk.annotations.ResourceDraftValue;
 import io.sphere.sdk.customergroups.CustomerGroup;
 import io.sphere.sdk.models.Address;
 import io.sphere.sdk.models.Reference;
@@ -21,6 +23,26 @@ import java.util.Locale;
  *
  */
 @JsonDeserialize(as = CustomerDraftDsl.class)
+@ResourceDraftValue(factoryMethods = {
+        @FactoryMethod(parameterNames = {"email", "password"})},
+        additionalDslClassContents = {"public static CustomerDraftDsl of(final CustomerName customerName, final String email, final String password) {\n" +
+                "        return CustomerDraftBuilder.of(customerName, email, password).build();\n" +
+                "    }",
+                "    public CustomerDraftDsl withCart(final io.sphere.sdk.carts.Cart cart) {\n" +
+                        "        Objects.requireNonNull(cart);\n" +
+                        "        return withAnonymousCartId(cart.getId());\n" +
+                        "    }",
+                "   public CustomerDraftDsl withCustomerGroup(@Nullable final io.sphere.sdk.models.Referenceable<io.sphere.sdk.customergroups.CustomerGroup> customerGroup) {\n" +
+                        "        return newBuilder().customerGroup(Optional.ofNullable(customerGroup).map(io.sphere.sdk.models.Referenceable::toReference).orElse(null)).build();\n" +
+                        "    }"},
+        additionalBuilderClassContents = {
+                "    public static CustomerDraftBuilder of(final CustomerName customerName, final String email, final String password) {\n" +
+                        "        return CustomerDraftBuilder.of(email, password)\n" +
+                        "                .firstName(customerName.getFirstName())\n" +
+                        "                .middleName(customerName.getMiddleName())\n" +
+                        "                .lastName(customerName.getLastName())\n" +
+                        "                .title(customerName.getTitle());\n" +
+                        "    }"})
 public interface CustomerDraft extends CustomDraft {
     @Nullable
     String getCustomerNumber();
