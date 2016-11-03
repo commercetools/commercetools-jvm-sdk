@@ -30,8 +30,12 @@ final class ClassConfigurer {
     public static final Predicate<Element> BEAN_GETTER_PREDICATE = e -> {
         final String simpleName = e.getSimpleName().toString();
         final boolean isMethod = ElementKind.METHOD.equals(e.getKind());
-        return isMethod && hasBeanGetterName(simpleName) && hasNoParameters(e);
+        return isMethod && hasBeanGetterName(simpleName) && hasNoParameters(e) && !isDefaultMethod(e);
     };
+
+    private static boolean isDefaultMethod(final Element e) {
+        return e instanceof ExecutableElement && ((ExecutableElement) e).isDefault();
+    }
 
     private static boolean hasNoParameters(final Element e) {
         return e instanceof ExecutableElement && ((ExecutableElement) e).getParameters().isEmpty();
