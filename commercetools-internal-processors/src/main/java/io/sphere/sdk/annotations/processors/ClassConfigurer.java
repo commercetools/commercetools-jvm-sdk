@@ -536,6 +536,18 @@ final class ClassConfigurer {
     }
 
     private static void addBuilderMethod(final Element element, final ClassModelBuilder builder) {
+        final MethodModel method = createMethodModelForBuilderMethod(element, builder);
+        builder.addMethod(method);
+
+        if (method.getParameters().get(0).getType().equals("java.lang.Boolean") && !method.getName().startsWith("is")) {
+            final MethodModel methodStartingWithIs = createMethodModelForBuilderMethod(element, builder);
+            final String newName = "is" + capitalize(method.getName());
+            methodStartingWithIs.setName(newName);
+            builder.addMethod(methodStartingWithIs);
+        }
+    }
+
+    private static MethodModel createMethodModelForBuilderMethod(final Element element, final ClassModelBuilder builder) {
         final String fieldName = fieldNameFromGetter(element);
         final MethodModel method = new MethodModel();
         method.setName(fieldName);
@@ -547,7 +559,7 @@ final class ClassConfigurer {
         values.put("fieldName", fieldName);
         final String template = parameter.getType().contains("io.sphere.sdk.models.Referenceable<") ? "referenceableBuilderMethodBody" : "builderMethodBody";
         method.setBody(Templates.render(template, values));
-        builder.addMethod(method);
+        return method;
     }
 
     private static void addBuildMethod(final ClassModelBuilder builder, final TypeElement typeElement) {
