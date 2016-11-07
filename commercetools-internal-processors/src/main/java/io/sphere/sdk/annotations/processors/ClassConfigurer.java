@@ -8,6 +8,7 @@ import org.apache.commons.lang3.tuple.ImmutablePair;
 
 import javax.lang.model.element.*;
 import javax.lang.model.type.DeclaredType;
+import javax.lang.model.util.Types;
 import java.io.IOException;
 import java.lang.annotation.Annotation;
 import java.nio.file.Files;
@@ -276,7 +277,10 @@ final class ClassConfigurer {
         final Stream<? extends Element> interfacesMethodsStream = typeElement.getInterfaces().stream()
                 .filter(i -> i instanceof DeclaredType)
                 .map(i -> (DeclaredType) i)
-                .flatMap(i -> i.asElement().getEnclosedElements().stream());
+                .flatMap(i -> {
+                    if (i.asElement() instanceof TypeElement) return elementStreamIncludingInterfaces((TypeElement) i.asElement());
+                    else return Stream.empty();
+                });
         return Stream.concat(typeElement.getEnclosedElements().stream(), interfacesMethodsStream);
     }
 
