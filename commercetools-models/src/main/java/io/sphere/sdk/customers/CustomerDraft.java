@@ -69,7 +69,9 @@ public interface CustomerDraft extends CustomDraft {
     @Nullable
     String getAnonymousId();
 
-    CustomerName getName();
+    default CustomerName getName() {
+        return CustomerName.of(getTitle(), getFirstName(), getMiddleName(), getLastName());
+    }
 
     @Nullable
     String getCompanyName();
