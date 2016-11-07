@@ -1,8 +1,10 @@
 package io.sphere.sdk.cartdiscounts;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import io.sphere.sdk.annotations.ResourceValue;
 import io.sphere.sdk.discountcodes.DiscountCode;
 import io.sphere.sdk.models.Resource;
 import io.sphere.sdk.models.LocalizedString;
@@ -23,6 +25,7 @@ import java.util.List;
  * @see DiscountCode#getCartDiscounts()
  */
 @JsonDeserialize(as=CartDiscountImpl.class)
+@ResourceValue
 public interface CartDiscount extends Resource<CartDiscount> {
     /**
      * Predicate where the discounts should be applied to.
@@ -51,6 +54,7 @@ public interface CartDiscount extends Resource<CartDiscount> {
      *
      * @return true if active
      */
+    @JsonProperty("isActive")
     Boolean isActive();
 
     /**
@@ -71,6 +75,7 @@ public interface CartDiscount extends Resource<CartDiscount> {
      *
      * @return true if requires a discount code
      */
+    @JsonProperty("requiresDiscountCode")
     Boolean isRequiringDiscountCode();
 
     /**
