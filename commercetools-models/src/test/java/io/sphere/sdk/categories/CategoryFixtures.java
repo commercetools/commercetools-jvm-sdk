@@ -31,7 +31,7 @@ public class CategoryFixtures {
         user.accept(category);
     }
 
-    public static void withCategory(final BlockingSphereClient client, final Supplier<CategoryDraft> creator, final Consumer<Category> user) {
+    public static void withCategory(final BlockingSphereClient client, final Supplier<? extends CategoryDraft> creator, final Consumer<Category> user) {
         final CategoryDraft categoryDraft = creator.get();
         final String slug = englishSlugOf(categoryDraft);
         final PagedQueryResult<Category> pagedQueryResult = client.executeBlocking(CategoryQuery.of().bySlug(Locale.ENGLISH, slug));
