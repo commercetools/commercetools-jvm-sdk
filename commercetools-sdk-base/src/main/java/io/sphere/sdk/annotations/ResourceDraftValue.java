@@ -6,4 +6,6 @@ public @interface ResourceDraftValue {
     String[] additionalDslClassContents() default {};
 
     String[] additionalBuilderClassContents() default {};
+
+    boolean gettersForBuilder() default false;
 }

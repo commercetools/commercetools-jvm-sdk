@@ -8,11 +8,7 @@ import org.apache.commons.lang3.tuple.ImmutablePair;
 
 import javax.lang.model.element.*;
 import javax.lang.model.type.DeclaredType;
-import javax.lang.model.util.Types;
-import java.io.IOException;
 import java.lang.annotation.Annotation;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.*;
 import java.util.function.Function;
 import java.util.function.Predicate;
@@ -349,7 +345,7 @@ final class ClassConfigurer {
 
         public MethodsHolder gettersForFields() {
             final List<FieldModel> fieldModels = instanceFieldsSorted(builder);
-            fieldModels.forEach(field -> builder.addMethod(createGetter(field)));
+            fieldModels.forEach(field -> builder.addMethod(createGetter(field, typeElement)));
             return this;
         }
 
@@ -394,9 +390,13 @@ final class ClassConfigurer {
             }
             return this;
         }
+
+        public <A extends Annotation> MethodsHolder gettersForFieldsInCase(final Class<A> clazz, final Predicate<A> predicate) {
+            return predicate.test(typeElement.getAnnotation(clazz)) ? gettersForFields() : this;
+        }
     }
 
-    private static MethodModel createGetter(final FieldModel field) {
+    private static MethodModel createGetter(final FieldModel field, final TypeElement typeElement) {
         final String methodNameStart = field.getType().equals("java.lang.Boolean") ? "is" : "get";
         final String methodName = methodNameStart + capitalize(field.getName());
         final MethodModel method = new MethodModel();
@@ -412,11 +412,18 @@ final class ClassConfigurer {
                 .ifPresent(a -> method.setAnnotations(singletonList(createNullableAnnotation())));
 
         final List<AnnotationModel> list = new LinkedList<>(method.getAnnotations());
-        final AnnotationModel a = new AnnotationModel();
-        a.setName("Override");
-        list.add(a);
+        final boolean overrides = elementStreamIncludingInterfaces(typeElement).anyMatch(x -> x.getSimpleName().equals(methodName));
+        if (overrides) {
+            list.add(overrideAnnotation());
+        }
         method.setAnnotations(list);
         return method;
+    }
+
+    private static AnnotationModel overrideAnnotation() {
+        final AnnotationModel a = new AnnotationModel();
+        a.setName("Override");
+        return a;
     }
 
     private static void addDslMethods(final ClassModelBuilder builder, final TypeElement typeElement) {
