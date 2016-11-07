@@ -94,7 +94,8 @@ final class ClassConfigurer {
             return addImport("javax.annotation.Nullable")
                     .addImport("java.util.Optional")
                     .addImport("java.util.Objects")
-                    .addImport("io.sphere.sdk.models.Referenceable");
+                    .addImport("io.sphere.sdk.models.Referenceable")
+                    .addImport("java.util.Collections");
         }
 
         public ImportHolder addImport(final String s) {
@@ -434,6 +435,16 @@ final class ClassConfigurer {
     }
 
     private static void addDslMethod(final Element element, final ClassModelBuilder builder) {
+        final MethodModel method = createWitherMethod(element, builder);
+        builder.addMethod(method);
+        if (method.getParameters().get(0).getType().equals("java.lang.Boolean")) {
+            final MethodModel methodWithIsName = createWitherMethod(element, builder);
+            methodWithIsName.setName(methodWithIsName.getName().replaceFirst("with", "withIs"));
+            builder.addMethod(methodWithIsName);
+        }
+    }
+
+    private static MethodModel createWitherMethod(final Element element, final ClassModelBuilder builder) {
         final String fieldName = fieldNameFromGetter(element);
         final MethodModel method = new MethodModel();
         final String name = witherNameFromGetter(element);
@@ -444,12 +455,10 @@ final class ClassConfigurer {
         method.setParameters(singletonList(parameter));
         final HashMap<String, Object> values = new HashMap<>();
         values.put("fieldName", fieldName);
-        final String template = parameter.getType().contains("io.sphere.sdk.models.Referenceable<") ? "referenceableWitherMethodBody" : "witherMethodBody";
+        final String template = parameter.getType().startsWith("io.sphere.sdk.models.Referenceable<") ? "referenceableWitherMethodBody" : "witherMethodBody";
         method.setBody(Templates.render(template, values));
-        builder.addMethod(method);
+        return method;
     }
-
-
 
     private static void addNewBuilderMethod(final ClassModelBuilder builder, final TypeElement typeElement) {
         final MethodModel method = new MethodModel();
@@ -568,7 +577,7 @@ final class ClassConfigurer {
         method.setParameters(singletonList(parameter));
         final HashMap<String, Object> values = new HashMap<>();
         values.put("fieldName", fieldName);
-        final String template = parameter.getType().contains("io.sphere.sdk.models.Referenceable<") ? "referenceableBuilderMethodBody" : "builderMethodBody";
+        final String template = parameter.getType().startsWith("io.sphere.sdk.models.Referenceable<") ? "referenceableBuilderMethodBody" : "builderMethodBody";
         method.setBody(Templates.render(template, values));
         return method;
     }
@@ -618,7 +627,7 @@ final class ClassConfigurer {
         parameter.setModifiers(singletonList("final"));
         parameter.setName(fieldName);
         final String type = getType(element);
-        if (type.contains("io.sphere.sdk.models.Reference<")) {
+        if (type.startsWith("io.sphere.sdk.models.Reference<")) {
             final String newType = type.replace("io.sphere.sdk.models.Reference<", "io.sphere.sdk.models.Referenceable<");
             parameter.setType(newType);
         } else {

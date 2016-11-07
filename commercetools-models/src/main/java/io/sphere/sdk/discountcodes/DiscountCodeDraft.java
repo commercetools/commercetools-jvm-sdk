@@ -2,6 +2,8 @@ package io.sphere.sdk.discountcodes;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import io.sphere.sdk.annotations.FactoryMethod;
+import io.sphere.sdk.annotations.ResourceDraftValue;
 import io.sphere.sdk.cartdiscounts.CartDiscount;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Reference;
@@ -16,6 +18,16 @@ import java.util.List;
  * @see DiscountCodeDraftDsl
  */
 @JsonDeserialize(as = DiscountCodeDraftDsl.class)
+@ResourceDraftValue(factoryMethods = {@FactoryMethod(parameterNames = {"code", "cartDiscounts"})},
+additionalDslClassContents = {"    public DiscountCodeDraftDsl withCartDiscounts(final Referenceable<io.sphere.sdk.cartdiscounts.CartDiscount> cartDiscount) {\n" +
+        "        return withCartDiscounts(Collections.singletonList(cartDiscount.toReference()));\n" +
+        "    }",
+"    public static DiscountCodeDraftDsl of(final String code, final Referenceable<io.sphere.sdk.cartdiscounts.CartDiscount> cartDiscount) {\n" +
+        "        return of(code, Collections.singletonList(cartDiscount.toReference()));\n" +
+        "    }",
+"    public DiscountCodeDraftDsl withCartPredicate(@Nullable final io.sphere.sdk.cartdiscounts.CartDiscountPredicate cartPredicate) {\n" +
+        "        return newBuilder().cartPredicate(cartPredicate.toSphereCartPredicate()).build();\n" +
+        "    }"})
 public interface DiscountCodeDraft {
     @Nullable
     LocalizedString getName();
@@ -40,7 +52,7 @@ public interface DiscountCodeDraft {
     Long getMaxApplicationsPerCustomer();
 
     static DiscountCodeDraftDsl of(final String code, final Referenceable<CartDiscount> cartDiscount) {
-        return DiscountCodeDraftDsl.of(code, cartDiscount);
+        return DiscountCodeDraft.of(code, Collections.singletonList(cartDiscount.toReference()));
     }
 
     static DiscountCodeDraftDsl of(final String code, final List<Reference<CartDiscount>> cartDiscounts) {
