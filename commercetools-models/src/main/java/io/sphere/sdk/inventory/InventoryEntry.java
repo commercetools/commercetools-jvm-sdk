@@ -2,6 +2,7 @@ package io.sphere.sdk.inventory;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import io.sphere.sdk.annotations.ResourceValue;
 import io.sphere.sdk.channels.Channel;
 import io.sphere.sdk.models.Resource;
 import io.sphere.sdk.models.Reference;
@@ -24,6 +25,7 @@ import java.time.ZonedDateTime;
  * @see io.sphere.sdk.inventory.queries.InventoryEntryByIdGet
  */
 @JsonDeserialize(as = InventoryEntryImpl.class)
+@ResourceValue
 public interface InventoryEntry extends Resource<InventoryEntry>, Custom {
     /**
      * Available amount of stock. (available means: quantityOnStock - reserved quantity)
