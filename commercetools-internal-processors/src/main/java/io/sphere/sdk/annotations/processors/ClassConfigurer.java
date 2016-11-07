@@ -517,7 +517,7 @@ final class ClassConfigurer {
                                 .filter(t -> t.getSimpleName().toString().equals("is" + capitalize(f.getName())))
                                 .filter(t -> t.getAnnotation(JsonProperty.class) != null)
                                 .findFirst()
-                                .orElseThrow(() -> new RuntimeException("Boolean getter for " + typeElement + " needs @JsonProperty annotation to find the right name"));
+                                .orElseThrow(() -> new RuntimeException("Boolean getter '" + f.getName() + "' for " + typeElement + " needs @JsonProperty annotation to find the right name"));
 
                         final JsonProperty jsonProperty = element.getAnnotation(JsonProperty.class);
                         final AnnotationModel annotationModel = new AnnotationModel();
