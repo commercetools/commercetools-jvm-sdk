@@ -2,6 +2,7 @@ package io.sphere.sdk.taxcategories;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import io.sphere.sdk.annotations.ResourceValue;
 import io.sphere.sdk.carts.CartShippingInfo;
 import io.sphere.sdk.carts.CustomLineItem;
 import io.sphere.sdk.models.Resource;
@@ -26,6 +27,7 @@ import java.util.List;
  @see io.sphere.sdk.shippingmethods.ShippingMethod#getTaxCategory()
  */
 @JsonDeserialize(as=TaxCategoryImpl.class)
+@ResourceValue
 public interface TaxCategory extends Resource<TaxCategory> {
     String getName();
 
