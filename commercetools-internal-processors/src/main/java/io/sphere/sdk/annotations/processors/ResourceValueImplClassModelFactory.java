@@ -1,5 +1,6 @@
 package io.sphere.sdk.annotations.processors;
 
+import io.sphere.sdk.annotations.ResourceValue;
 import io.sphere.sdk.models.Base;
 
 import javax.lang.model.element.TypeElement;
@@ -26,6 +27,7 @@ final class ResourceValueImplClassModelFactory extends ClassModelFactory {
                 .fieldsFromInterfaceBeanGetters(true)
                 .constructors()
                 .constructorForAllFields()
+                .additionalConstructorContent(ResourceValue.class, ResourceValue::additionalConstructorEndContent)
                 .methods()
                 .gettersForFields()
                 .build();

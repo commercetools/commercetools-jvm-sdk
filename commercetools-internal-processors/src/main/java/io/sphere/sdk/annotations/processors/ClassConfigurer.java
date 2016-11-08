@@ -92,11 +92,8 @@ final class ClassConfigurer {
 
         public ImportHolder defaultImports() {
             return addImport("javax.annotation.Nullable")
-                    .addImport("java.util.Optional")
-                    .addImport("java.util.Objects")
                     .addImport("io.sphere.sdk.models.*")
-                    .addImport("java.util.Collections")
-                    .addImport("java.util.List");
+                    .addImport("java.util.*");
         }
 
         public ImportHolder addImport(final String s) {
