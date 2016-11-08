@@ -361,7 +361,7 @@ final class ClassConfigurer {
             return this;
         }
 
-        public MethodsHolder factoryMethodFromInterfaceInstance(final boolean finalFields) {
+        public MethodsHolder factoryMethodOfInterfaceInstance(final boolean finalFields) {
             final MethodModel m = new MethodModel();
             m.setModifiers(asList("public", "static"));
             m.setName("of");

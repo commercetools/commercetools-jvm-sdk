@@ -32,7 +32,7 @@ final class ResourceDraftDslClassModelFactory extends ClassModelFactory {
                 .gettersForFields()
                 .withers()
                 .factoryMethodsAccordingToAnnotations()
-                .factoryMethodFromInterfaceInstance(true)
+                .factoryMethodOfInterfaceInstance(true)
                 .additionalContents(ResourceDraftValue.class, ResourceDraftValue::additionalDslClassContents)
                 .build();
     }

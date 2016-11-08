@@ -35,7 +35,7 @@ final class ResourceDraftBuilderClassModelFactory extends ClassModelFactory {
                 .builderMethods()
                 .buildMethod()
                 .factoryMethodsAccordingToAnnotations()
-                .factoryMethodFromInterfaceInstance(false)
+                .factoryMethodOfInterfaceInstance(false)
                 .gettersForFieldsInCase(ResourceDraftValue.class, ResourceDraftValue::gettersForBuilder)
                 .additionalContents(ResourceDraftValue.class, ResourceDraftValue::additionalBuilderClassContents)
                 .build();
