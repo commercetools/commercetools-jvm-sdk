@@ -18,6 +18,7 @@ final class ClassModelBuilder {
     private final List<FieldModel> fields = new LinkedList<>();
     private final List<String> imports = new LinkedList<>();
     private List<String> interfaces = new LinkedList<>();
+    private String constructorEndContent;
 
     public ClassModelBuilder addModifiers(final String modifier, final String ... more) {
         modifiers.add(modifier);
@@ -46,6 +47,7 @@ final class ClassModelBuilder {
         r.setBaseClassName(baseClassName);
         r.setJavadoc(javadoc);
         r.setAdditions(additions);
+        r.setConstructorEndContent(constructorEndContent);
         return r;
     }
 
@@ -106,5 +108,13 @@ final class ClassModelBuilder {
 
     public void setAdditions(final String additions) {
         this.additions = additions;
+    }
+
+    public void setConstructorEndContent(final String constructorEndContent) {
+        this.constructorEndContent = constructorEndContent;
+    }
+
+    public String getConstructorEndContent() {
+        return constructorEndContent;
     }
 }

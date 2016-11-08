@@ -27,6 +27,7 @@ final class ResourceDraftDslClassModelFactory extends ClassModelFactory {
                 .fieldsFromInterfaceBeanGetters(true)
                 .constructors()
                 .constructorForAllFields()
+                .additionalConstructorContent(ResourceDraftValue.class, ResourceDraftValue::additionalDslConstructorEndContent)
                 .methods()
                 .gettersForFields()
                 .withers()

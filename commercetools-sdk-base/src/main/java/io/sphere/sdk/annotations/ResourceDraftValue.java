@@ -7,5 +7,7 @@ public @interface ResourceDraftValue {
 
     String[] additionalBuilderClassContents() default {};
 
+    String additionalDslConstructorEndContent() default "";
+
     boolean gettersForBuilder() default false;
 }

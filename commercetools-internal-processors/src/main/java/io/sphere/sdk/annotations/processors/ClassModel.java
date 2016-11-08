@@ -16,6 +16,7 @@ final class ClassModel {
     private List<FieldModel> fields = new LinkedList<>();
     private List<String> imports = new LinkedList<>();
     private List<String> interfaces = new LinkedList<>();
+    private String constructorEndContent;
 
     public String getName() {
         return name;
@@ -115,5 +116,13 @@ final class ClassModel {
 
     public void setAdditions(final String additions) {
         this.additions = additions;
+    }
+
+    public String getConstructorEndContent() {
+        return constructorEndContent;
+    }
+
+    public void setConstructorEndContent(final String constructorEndContent) {
+        this.constructorEndContent = constructorEndContent;
     }
 }

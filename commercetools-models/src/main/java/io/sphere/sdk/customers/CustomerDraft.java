@@ -31,7 +31,10 @@ import java.util.Locale;
                 "    public CustomerDraftDsl withCart(final io.sphere.sdk.carts.Cart cart) {\n" +
                         "        Objects.requireNonNull(cart);\n" +
                         "        return withAnonymousCartId(cart.getId());\n" +
-                        "    }"},
+                        "    }",
+        "private static boolean isValidAddressIndex(final List<Address> addresses, final Integer addressIndex) {\n" +
+                "        return Optional.ofNullable(addressIndex).map(i -> i < addresses.size() && i >= 0).orElse(true);\n" +
+                "    }"},
         additionalBuilderClassContents = {
                 "    public static CustomerDraftBuilder of(final CustomerName customerName, final String email, final String password) {\n" +
                         "        return CustomerDraftBuilder.of(email, password)\n" +
@@ -39,7 +42,10 @@ import java.util.Locale;
                         "                .middleName(customerName.getMiddleName())\n" +
                         "                .lastName(customerName.getLastName())\n" +
                         "                .title(customerName.getTitle());\n" +
-                        "    }"})
+                        "    }"}, additionalDslConstructorEndContent = "if (!isValidAddressIndex(addresses, defaultBillingAddress)\n" +
+        "                || !isValidAddressIndex(addresses, defaultShippingAddress)) {\n" +
+        "            throw new IllegalArgumentException(\"The defaultBillingAddress and defaultShippingAddress cannot contain an index which is not in the address list\");\n" +
+        "        }")
 public interface CustomerDraft extends CustomDraft {
     @Nullable
     String getCustomerNumber();

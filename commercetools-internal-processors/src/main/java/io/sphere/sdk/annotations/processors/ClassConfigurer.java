@@ -94,8 +94,9 @@ final class ClassConfigurer {
             return addImport("javax.annotation.Nullable")
                     .addImport("java.util.Optional")
                     .addImport("java.util.Objects")
-                    .addImport("io.sphere.sdk.models.Referenceable")
-                    .addImport("java.util.Collections");
+                    .addImport("io.sphere.sdk.models.*")
+                    .addImport("java.util.Collections")
+                    .addImport("java.util.List");
         }
 
         public ImportHolder addImport(final String s) {
@@ -305,6 +306,12 @@ final class ClassConfigurer {
 
         public MethodsHolder methods() {
             return new MethodsHolder(builder, typeElement);
+        }
+
+        public <A extends Annotation> ConstructorsHolder additionalConstructorContent(final Class<A> clazz, final Function<A, String> endContentGetter) {
+            final A annotation = typeElement.getAnnotation(clazz);
+            builder.setConstructorEndContent(endContentGetter.apply(annotation));
+            return this;
         }
     }
 
