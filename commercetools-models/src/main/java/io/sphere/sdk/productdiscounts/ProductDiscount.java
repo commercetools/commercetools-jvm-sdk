@@ -1,8 +1,10 @@
 package io.sphere.sdk.productdiscounts;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import io.sphere.sdk.annotations.ResourceValue;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Resource;
 import io.sphere.sdk.models.Reference;
@@ -20,6 +22,7 @@ import java.util.List;
  * @see io.sphere.sdk.productdiscounts.queries.ProductDiscountByIdGet
  */
 @JsonDeserialize(as=ProductDiscountImpl.class)
+@ResourceValue
 public interface ProductDiscount extends Resource<ProductDiscount> {
 
     LocalizedString getName();
@@ -33,6 +36,7 @@ public interface ProductDiscount extends Resource<ProductDiscount> {
 
     String getSortOrder();
 
+    @JsonProperty("isActive")
     Boolean isActive();
 
     List<Reference<JsonNode>> getReferences();
@@ -80,5 +84,10 @@ public interface ProductDiscount extends Resource<ProductDiscount> {
      */
     static Reference<ProductDiscount> referenceOfId(final String id) {
         return Reference.of(referenceTypeId(), id);
+    }
+
+    @Override
+    default Reference<ProductDiscount> toReference() {
+        return Reference.of(ProductDiscount.referenceTypeId(), this);
     }
 }
