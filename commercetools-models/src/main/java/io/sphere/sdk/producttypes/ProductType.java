@@ -2,6 +2,7 @@ package io.sphere.sdk.producttypes;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import io.sphere.sdk.annotations.ResourceValue;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Resource;
 import io.sphere.sdk.models.WithKey;
@@ -23,6 +24,7 @@ import java.util.Optional;
  @see Product#getProductType()
  */
 @JsonDeserialize(as=ProductTypeImpl.class)
+@ResourceValue
 public interface ProductType extends Resource<ProductType>, AttributeDefinitionContainer, WithKey {
 
     String getName();
