@@ -6,6 +6,7 @@ import com.neovisionaries.i18n.CountryCode;
 import io.sphere.sdk.models.CreationTimestamped;
 import io.sphere.sdk.models.WithKey;
 
+import javax.annotation.Nullable;
 import javax.money.CurrencyUnit;
 import javax.money.Monetary;
 import java.time.ZonedDateTime;
@@ -53,6 +54,7 @@ public interface Project extends CreationTimestamped, WithKey {
                 .collect(toList());
     }
 
+    @Nullable
     ZonedDateTime getTrialUntil();
 
     @Override
