@@ -1,9 +1,5 @@
 package io.sphere.sdk.projects.queries;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import io.sphere.sdk.client.JsonNodeSphereRequest;
-import io.sphere.sdk.client.SphereRequest;
-import io.sphere.sdk.json.SphereJsonUtils;
 import io.sphere.sdk.projects.Project;
 import io.sphere.sdk.test.IntegrationTest;
 import org.junit.Test;
@@ -15,9 +11,6 @@ import static io.sphere.sdk.models.DefaultCurrencyUnits.EUR;
 public class ProjectGetIntegrationTest extends IntegrationTest {
     @Test
     public void execution() throws Exception {
-        final JsonNode jsonNode = client().executeBlocking(JsonNodeSphereRequest.of(ProjectGet.of()));
-        System.err.println(SphereJsonUtils.toPrettyJsonString(jsonNode));
-
         final Project project = client().executeBlocking(ProjectGet.of());
         softAssert(soft -> {
             soft.assertThat(project.getKey()).isEqualTo(getSphereClientConfig().getProjectKey());
