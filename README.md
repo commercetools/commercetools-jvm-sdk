@@ -58,7 +58,7 @@ Users gain type-safety, encapsulation, IDE auto completion and an internal domai
 see https://github.com/commercetools/commercetools-jvm-sdk-scala-add-ons
 
 ### reactive streams
-* https://github.com/commercetools/commercetools-jvm-sdk-reactive-streams-addons
+* https://github.com/commercetools/commercetools-jvm-sdk-reactive-streams-add-ons
 
 ### JVM SDK Contrib
 
