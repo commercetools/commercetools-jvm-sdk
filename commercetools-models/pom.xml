@@ -73,6 +73,35 @@
                 <artifactId>jacoco-maven-plugin</artifactId>
                 <version>${jacoco.version}</version>
             </plugin>
+            <plugin>
+                <!--
+                http://revapi.org/modules/revapi-maven-plugin/examples/comparing-specific-artifacts.html
+
+                mvn clean install -Darguments="-DskipTests" -DskipTests
+
+                mvn -pl commercetools-models revapi:report -Darguments="-DskipTests" -DskipTests
+
+                open commercetools-models/target/site/revapi-report.html
+                -->
+                <groupId>org.revapi</groupId>
+                <artifactId>revapi-maven-plugin</artifactId>
+                <version>0.7.0</version>
+                <configuration>
+                    <oldArtifacts>
+                        <artifact>${project.groupId}:${project.artifactId}:1.5.0</artifact>
+                    </oldArtifacts>
+                    <newArtifacts>
+                        <artifact>${project.groupId}:${project.artifactId}:${project.version}</artifact>
+                    </newArtifacts>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.revapi</groupId>
+                        <artifactId>revapi-java</artifactId>
+                        <version>0.11.0</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
         </plugins>
     </build>
 </project>
