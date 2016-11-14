@@ -10,4 +10,8 @@ public @interface ResourceDraftValue {
     String additionalDslConstructorEndContent() default "";
 
     boolean gettersForBuilder() default false;
+
+    boolean useBuilderStereotypeDslClass() default false;
+
+    String[] additionalBuilderInterfaces() default {};
 }

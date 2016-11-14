@@ -22,7 +22,7 @@ import java.util.Locale;
  * @see CartDraftBuilder
  */
 @JsonDeserialize(as = CartDraftDsl.class)
-@ResourceDraftValue(factoryMethods = @FactoryMethod(parameterNames = "currency"), gettersForBuilder = true)
+@ResourceDraftValue(factoryMethods = @FactoryMethod(parameterNames = "currency"), gettersForBuilder = true, useBuilderStereotypeDslClass = true)
 public interface CartDraft extends CustomDraft {
     CurrencyUnit getCurrency();
 

@@ -28,7 +28,7 @@ import java.util.Set;
         "    }"}, additionalDslClassContents = "        public static TypeDraftDsl of(final String key, final LocalizedString name, final ResourceTypeIdsSetBuilder resourceTypeIdsSetBuilder) {\n" +
         "            return of(key, name, resourceTypeIdsSetBuilder.build());\n" +
         "        }",
-gettersForBuilder = true)
+gettersForBuilder = true, additionalBuilderInterfaces = "io.sphere.sdk.models.WithKey")
 public interface TypeDraft extends WithKey {
     String getKey();
 

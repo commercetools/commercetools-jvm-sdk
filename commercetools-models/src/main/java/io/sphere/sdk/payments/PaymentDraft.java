@@ -22,7 +22,7 @@ import java.util.List;
 @JsonDeserialize(as = PaymentDraftDsl.class)
 @ResourceDraftValue(gettersForBuilder = true, factoryMethods = {
         @FactoryMethod(parameterNames = {"amountPlanned"})
-})
+}, additionalBuilderInterfaces = "io.sphere.sdk.types.CustomDraft")
 public interface PaymentDraft extends CustomDraft {
     @Nullable
     Reference<Customer> getCustomer();

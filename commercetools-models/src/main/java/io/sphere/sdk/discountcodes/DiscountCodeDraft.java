@@ -27,7 +27,7 @@ additionalDslClassContents = {"    public DiscountCodeDraftDsl withCartDiscounts
         "    }",
 "    public DiscountCodeDraftDsl withCartPredicate(@Nullable final io.sphere.sdk.cartdiscounts.CartDiscountPredicate cartPredicate) {\n" +
         "        return newBuilder().cartPredicate(cartPredicate.toSphereCartPredicate()).build();\n" +
-        "    }"})
+        "    }"}, useBuilderStereotypeDslClass = true)
 public interface DiscountCodeDraft {
     @Nullable
     LocalizedString getName();

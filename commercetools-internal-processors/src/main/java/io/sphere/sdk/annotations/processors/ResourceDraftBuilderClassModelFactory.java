@@ -16,17 +16,21 @@ final class ResourceDraftBuilderClassModelFactory extends ClassModelFactory {
 
     @Override
     public ClassModel createClassModel() {
+        final ResourceDraftValue a = typeElement.getAnnotation(ResourceDraftValue.class);
+        final boolean builderStereotypeDslClass = a.useBuilderStereotypeDslClass();
+        final String interfaceSimpleName = typeElement.getSimpleName().toString();
         return ClassConfigurer.ofSource(typeElement)
                 .samePackageFromSource()
                 .imports()
                 .defaultImports()
                 .addImport("io.sphere.sdk.models.Builder")
-                .classJavadoc(format("Builder for {@link %s}.", typeElement.getSimpleName().toString()))
+                .classJavadoc(format("Builder for {@link %s}.", interfaceSimpleName))
                 .modifiers("public", "final")
                 .classType()
                 .className(input -> builderName(input))
                 .extending(Base.class)//TODO missing
-                .implementingBasedOnSourceName(name -> "Builder<" + dslName(typeElement) + ">")
+                .implementingBasedOnSourceName(name -> builderStereotypeDslClass ? "Builder<" + dslName(typeElement) + ">" : "Builder<" + interfaceSimpleName + ">")
+                .implementing(a.additionalBuilderInterfaces())
                 .fields()
                 .fieldsFromInterfaceBeanGetters(false)
                 .constructors()

@@ -170,35 +170,13 @@ final class ClassConfigurer {
             builder.setJavadoc(classTypeHolder.classModifierHolder.holder.javadoc);
         }
 
-        public BaseClassHolder extending(final String baseClassName) {
-            return new BaseClassHolder(baseClassName, builder, typeElement);
-        }
-
-        public BaseClassHolder extending(final Class<?> baseClass) {
-            return extending(baseClass.getName());
-        }
-    }
-
-    public static class BaseClassHolder {
-        private final ClassModelBuilder builder;
-        private final TypeElement typeElement;
-
-        private BaseClassHolder(final String baseClassName, final ClassModelBuilder builder, final TypeElement typeElement) {
-            this.builder = builder;
-            this.typeElement = typeElement;
+        public InterfacesHolder extending(final String baseClassName) {
             builder.setBaseClassName(baseClassName);
+            return new InterfacesHolder(builder, typeElement);
         }
 
-        public InterfacesHolder implementingBasedOnSourceName(final Function<String, String> op) {
-            return implementing(op.apply(typeElement.getSimpleName().toString()));
-        }
-
-        public InterfacesHolder implementing(final String ... interfaces) {
-            return new InterfacesHolder(asList(interfaces), builder, typeElement);
-        }
-
-        public InterfacesHolder implementing(final TypeElement typeElement) {
-            return implementing(typeElement.getSimpleName().toString());
+        public InterfacesHolder extending(final Class<?> baseClass) {
+            return extending(baseClass.getName());
         }
     }
 
@@ -206,10 +184,24 @@ final class ClassConfigurer {
         private final ClassModelBuilder builder;
         private final TypeElement typeElement;
 
-        private InterfacesHolder(final List<String> interfaces, final ClassModelBuilder builder, final TypeElement typeElement) {
+        private InterfacesHolder(final ClassModelBuilder builder, final TypeElement typeElement) {
             this.builder = builder;
             this.typeElement = typeElement;
-            builder.interfaces(interfaces);
+        }
+
+        public InterfacesHolder implementingBasedOnSourceName(final Function<String, String> op) {
+            return implementing(op.apply(typeElement.getSimpleName().toString()));
+        }
+
+        public InterfacesHolder implementing(final String ... interfaces) {
+            final List<String> i = new LinkedList<>(builder.build().getInterfaces());
+            i.addAll(asList(interfaces));
+            builder.interfaces(i);
+            return this;
+        }
+
+        public InterfacesHolder implementing(final TypeElement typeElement) {
+            return implementing(typeElement.getSimpleName().toString());
         }
 
         public FieldsHolder fields() {

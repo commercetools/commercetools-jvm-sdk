@@ -45,7 +45,7 @@ import java.util.Locale;
                         "    }"}, additionalDslConstructorEndContent = "if (!isValidAddressIndex(addresses, defaultBillingAddress)\n" +
         "                || !isValidAddressIndex(addresses, defaultShippingAddress)) {\n" +
         "            throw new IllegalArgumentException(\"The defaultBillingAddress and defaultShippingAddress cannot contain an index which is not in the address list\");\n" +
-        "        }")
+        "        }", useBuilderStereotypeDslClass = true)
 public interface CustomerDraft extends CustomDraft {
     @Nullable
     String getCustomerNumber();
