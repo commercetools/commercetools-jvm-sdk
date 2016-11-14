@@ -21,7 +21,7 @@ public class CartDiscountFixtures {
     }
 
     private static CartDiscountDraftBuilder newCartDiscountDraftBuilder(final String predicate) {
-        final ZonedDateTime validFrom = ZonedDateTime.now();
+        final ZonedDateTime validFrom = ZonedDateTime.now().minusHours(1);
         final ZonedDateTime validUntil = validFrom.plusSeconds(8000);
         final LocalizedString name = en("discount name");
         final LocalizedString description = en("discount descriptions");
