@@ -34,7 +34,16 @@ public interface TaxCategory extends Resource<TaxCategory> {
     @Nullable
     String getDescription();
 
-    List<TaxRate> getTaxRates();
+    /**
+     * Gets the tax rates. Alias for {@link #getRates()}.
+     *
+     * @return rates
+     */
+    default List<TaxRate> getTaxRates() {
+        return getRates();
+    }
+
+    List<TaxRate> getRates();
 
     /**
      * Creates a container which contains the full Java type information to deserialize this class from JSON.
