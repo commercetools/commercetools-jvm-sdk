@@ -507,7 +507,10 @@ final class ClassConfigurer {
                     final FieldModel field = getField(builder, parameterName);
                     final MethodParameterModel m = new MethodParameterModel();
                     m.setName(parameterName);
-                    m.setType(field.getType());
+                    final String type = factoryMethod.useLowercaseBooleans() && field.getType().endsWith(".Boolean")
+                            ? "boolean"
+                            : field.getType();
+                    m.setType(type);
                     m.setModifiers(asList("final"));
                     return m;
                 })

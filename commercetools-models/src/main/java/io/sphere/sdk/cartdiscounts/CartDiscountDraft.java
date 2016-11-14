@@ -14,13 +14,25 @@ import java.time.ZonedDateTime;
  * @see CartDiscountDraftBuilder
  */
 @JsonDeserialize(as = CartDiscountDraftDsl.class)
-@ResourceDraftValue(factoryMethods = @FactoryMethod(parameterNames = {"name", "cartPredicate", "value", "target", "sortOrder", "requiresDiscountCode"}), additionalBuilderClassContents = {"    public CartDiscountDraftBuilder cartPredicate(final CartDiscountPredicate cartPredicate) {\n" +
+@ResourceDraftValue(factoryMethods = @FactoryMethod(parameterNames = {"name", "cartPredicate", "value", "target", "sortOrder", "requiresDiscountCode"}, useLowercaseBooleans = true), additionalBuilderClassContents = {"    public CartDiscountDraftBuilder cartPredicate(final CartDiscountPredicate cartPredicate) {\n" +
         "        this.cartPredicate = cartPredicate.toSphereCartPredicate();\n" +
         "return this;\n" +
         "    }",
-"    public static CartDiscountDraftBuilder of(final io.sphere.sdk.models.LocalizedString name, final CartDiscountPredicate cartPredicate, final io.sphere.sdk.cartdiscounts.CartDiscountValue value, final io.sphere.sdk.cartdiscounts.CartDiscountTarget target, final java.lang.String sortOrder, final java.lang.Boolean requiresDiscountCode) {\n" +
+"    public static CartDiscountDraftBuilder of(final io.sphere.sdk.models.LocalizedString name, final CartDiscountPredicate cartPredicate, final io.sphere.sdk.cartdiscounts.CartDiscountValue value, final io.sphere.sdk.cartdiscounts.CartDiscountTarget target, final java.lang.String sortOrder, final boolean requiresDiscountCode) {\n" +
         "        return of(name, cartPredicate.toSphereCartPredicate(), value, target, sortOrder, requiresDiscountCode);\n" +
-        "    }"})
+        "    }",
+"    public CartDiscountDraftBuilder active(final boolean active) {\n" +
+        "        this.active = active;\n" +
+        "        return this;\n" +
+        "    }\n" +
+        "\n" +
+        "    public CartDiscountDraftBuilder isActive(final boolean active) {\n" +
+        "        this.active = active;\n" +
+        "        return this;\n" +
+        "    }", "    public CartDiscountDraftBuilder requiresDiscountCode(final boolean requiresDiscountCode) {\n" +
+        "        this.requiresDiscountCode = requiresDiscountCode;\n" +
+        "return this;\n" +
+        "    } "})
 public interface CartDiscountDraft {
     String getCartPredicate();
 
