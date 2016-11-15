@@ -94,7 +94,8 @@ final class ClassConfigurer {
             return addImport("javax.annotation.Nullable")
                     .addImport("io.sphere.sdk.models.*")
                     .addImport("java.util.*")
-                    .addImport("io.sphere.sdk.utils.*");
+                    .addImport("io.sphere.sdk.utils.*")
+                    .addImport("com.fasterxml.jackson.annotation.*");
         }
 
         public ImportHolder addImport(final String s) {
@@ -395,7 +396,8 @@ final class ClassConfigurer {
     }
 
     private static MethodModel createGetter(final FieldModel field, final TypeElement typeElement) {
-        final String methodNameStart = field.getType().equals("java.lang.Boolean") ? "is" : "get";
+        final boolean isBoolean = field.getType().equals("java.lang.Boolean");
+        final String methodNameStart = isBoolean ? "is" : "get";
         final String methodName = methodNameStart + capitalize(field.getName());
         final MethodModel method = new MethodModel();
         method.setName(methodName);
@@ -403,11 +405,17 @@ final class ClassConfigurer {
         method.setBody("return " + field.getName() + ";");
         method.addModifiers("public");
 
-        field.getAnnotations()
+        final List<AnnotationModel> annotationModels = field.getAnnotations()
                 .stream()
-                .filter(a -> "Nullable".equals(a.getName()))
-                .findFirst()
-                .ifPresent(a -> method.setAnnotations(singletonList(createNullableAnnotation())));
+                .filter(a -> asList("Nullable", "JsonProperty").contains(a.getName()))
+                .map(a -> {
+                    final AnnotationModel am = new AnnotationModel();
+                    am.setName(a.getName());
+                    am.setValue(a.getValue());
+                    return am;
+                })
+                .collect(Collectors.toList());
+        method.setAnnotations(annotationModels);
 
         final List<AnnotationModel> list = new LinkedList<>(method.getAnnotations());
         final boolean overrides = elementStreamIncludingInterfaces(typeElement).anyMatch(x -> x.getSimpleName().equals(methodName));
@@ -477,12 +485,23 @@ final class ClassConfigurer {
         }
         field.setType(getType(element));
         field.setName(fieldName);
-        element.getAnnotationMirrors().forEach(a -> {
+        final List<AnnotationModel> annotations = element.getAnnotationMirrors().stream().map(a -> {
             final String annotationName = a.getAnnotationType().asElement().getSimpleName().toString();
-            if ("Nullable".equals(annotationName)) {
-                field.setAnnotations(singletonList(createNullableAnnotation()));
+            if (asList("Nullable", "JsonProperty").contains(annotationName)) {
+                final AnnotationModel annotationModel = new AnnotationModel();
+                annotationModel.setName(annotationName);
+                if (annotationName.equals("JsonProperty")) {
+                    final String value = element.getAnnotation(JsonProperty.class).value();
+                    annotationModel.setValue(value);
+                }
+                return annotationModel;
+            } else {
+                return null;
             }
-        });
+        })
+                .filter(x -> x != null)
+                .collect(Collectors.toList());
+        field.setAnnotations(annotations);
         return field;
     }
 
