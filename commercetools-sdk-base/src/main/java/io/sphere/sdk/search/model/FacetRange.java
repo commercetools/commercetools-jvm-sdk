@@ -18,7 +18,6 @@ public final class FacetRange<T extends Comparable<? super T>> extends Range<T> 
      * @param upperEndpoint upper endpoint, excluded in the range.
      * @param <T> type of the range domain.
      * @return the range with the given bounds of the form [a, b).
-     * @throws InvertedBoundsException if the lower endpoint is greater than the upper endpoint.
      */
     public static <T extends Comparable<? super T>> FacetRange<T> of(final T lowerEndpoint, final T upperEndpoint) {
         return new FacetRange<>(Bound.inclusive(lowerEndpoint), Bound.exclusive(upperEndpoint));

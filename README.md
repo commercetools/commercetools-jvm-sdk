@@ -58,7 +58,7 @@ Users gain type-safety, encapsulation, IDE auto completion and an internal domai
 see https://github.com/commercetools/commercetools-jvm-sdk-scala-add-ons
 
 ### reactive streams
-* https://github.com/commercetools/commercetools-jvm-sdk-reactive-streams-addons
+* https://github.com/commercetools/commercetools-jvm-sdk-reactive-streams-add-ons
 
 ### JVM SDK Contrib
 
@@ -113,7 +113,7 @@ authUrl=https://auth.sphere.io
 1. use `mvn -Dit.test=*Product* -DfailIfNoTests=false verify` to execute all integration test classes which have "Product" in the class name
 1. for running the unit tests use `mvn test`
 1. alternatively use your IDE to execute the tests
-1. for some IDEs like IntelliJ IDEA you need to add the Javac flag "-parameters"
+1. for some IDEs like IntelliJ IDEA you need to add the Javac flag "-parameters", then also rebuild the whole project to apply the change
 
 
 [](definitions for the top badges)

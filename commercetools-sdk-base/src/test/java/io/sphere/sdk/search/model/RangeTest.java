@@ -64,10 +64,12 @@ public class RangeTest {
     }
 
     @Test
-    public void isInvalidWhenBoundsAreInverted() throws Exception {
+    public void isNotInvalidWhenBoundsAreInverted() throws Exception {
         final Bound<Integer> lowerBound = Bound.exclusive(5);
         final Bound<Integer> upperBound = Bound.exclusive(4);
-        assertThatThrownBy(() -> range(lowerBound, upperBound)).isInstanceOf(InvertedBoundsException.class);
+        final Range<Integer> range = range(lowerBound, upperBound);
+        assertThat(range.lowerBound()).isEqualTo(lowerBound);
+        assertThat(range.upperBound()).isEqualTo(upperBound);
     }
 
     @Test

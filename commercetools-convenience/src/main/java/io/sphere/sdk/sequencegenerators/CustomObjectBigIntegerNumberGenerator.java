@@ -1,5 +1,6 @@
 package io.sphere.sdk.sequencegenerators;
 
+import io.sphere.sdk.client.ConcurrentModificationException;
 import io.sphere.sdk.client.SphereClient;
 import io.sphere.sdk.customobjects.CustomObject;
 import io.sphere.sdk.customobjects.CustomObjectDraft;
@@ -53,12 +54,16 @@ public final class CustomObjectBigIntegerNumberGenerator extends Base implements
     }
 
     private CompletionStage<BigInteger> tryGetNextNumber(final int timeToLive, final Throwable throwable) {
-        if (timeToLive > 0) {
+        if (timeToLive > 0 && isNullOrConcurrentException(throwable)) {
             final CompletionStage<BigInteger> bigIntegerCompletionStage = incrementAndGetSequenceNumber();
             return CompletableFutureUtils.recoverWith(bigIntegerCompletionStage, (error) -> tryGetNextNumber(timeToLive - 1, error));
         } else {
             return CompletableFutureUtils.failed(throwable);
         }
+    }
+
+    private boolean isNullOrConcurrentException(final Throwable throwable) {
+        return throwable == null || throwable.getCause() instanceof ConcurrentModificationException;
     }
 
     private CompletionStage<BigInteger> incrementAndGetSequenceNumber() {
