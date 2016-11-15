@@ -14,8 +14,7 @@ import java.util.List;
  */
 @JsonDeserialize(as = ProductTypeDraftDsl.class)
 @ResourceDraftValue(factoryMethods = {
-        @FactoryMethod(parameterNames = {"key", "name", "description", "attributes"}),
-        @FactoryMethod(methodName = "ofKey", parameterNames = {"key"})
+        @FactoryMethod(parameterNames = {"key", "name", "description", "attributes"})
 })
 public interface ProductTypeDraft extends WithKey {
     String getName();
