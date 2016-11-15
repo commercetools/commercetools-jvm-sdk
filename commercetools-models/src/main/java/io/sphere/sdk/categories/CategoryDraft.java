@@ -1,6 +1,8 @@
 package io.sphere.sdk.categories;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import io.sphere.sdk.annotations.FactoryMethod;
+import io.sphere.sdk.annotations.ResourceDraftValue;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.MetaAttributes;
 import io.sphere.sdk.models.Reference;
@@ -15,7 +17,8 @@ import javax.annotation.Nullable;
  *
  * <p>For construction see {@link CategoryDraftBuilder}.</p>
  */
-@JsonDeserialize(as = CategoryDraftImpl.class)
+@JsonDeserialize(as = CategoryDraftDsl.class)
+@ResourceDraftValue(factoryMethods = @FactoryMethod(parameterNames = {"name", "slug"}))
 public interface CategoryDraft extends CustomDraft, WithLocalizedSlug, MetaAttributes {
     LocalizedString getName();
 

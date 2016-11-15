@@ -2,6 +2,8 @@ package io.sphere.sdk.customers;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import io.sphere.sdk.annotations.FactoryMethod;
+import io.sphere.sdk.annotations.ResourceDraftValue;
 import io.sphere.sdk.customergroups.CustomerGroup;
 import io.sphere.sdk.models.Address;
 import io.sphere.sdk.models.Reference;
@@ -21,6 +23,29 @@ import java.util.Locale;
  *
  */
 @JsonDeserialize(as = CustomerDraftDsl.class)
+@ResourceDraftValue(factoryMethods = {
+        @FactoryMethod(parameterNames = {"email", "password"})},
+        additionalDslClassContents = {"public static CustomerDraftDsl of(final CustomerName customerName, final String email, final String password) {\n" +
+                "        return CustomerDraftBuilder.of(customerName, email, password).build();\n" +
+                "    }",
+                "    public CustomerDraftDsl withCart(final io.sphere.sdk.carts.Cart cart) {\n" +
+                        "        Objects.requireNonNull(cart);\n" +
+                        "        return withAnonymousCartId(cart.getId());\n" +
+                        "    }",
+        "private static boolean isValidAddressIndex(final List<Address> addresses, final Integer addressIndex) {\n" +
+                "        return Optional.ofNullable(addressIndex).map(i -> i < addresses.size() && i >= 0).orElse(true);\n" +
+                "    }"},
+        additionalBuilderClassContents = {
+                "    public static CustomerDraftBuilder of(final CustomerName customerName, final String email, final String password) {\n" +
+                        "        return CustomerDraftBuilder.of(email, password)\n" +
+                        "                .firstName(customerName.getFirstName())\n" +
+                        "                .middleName(customerName.getMiddleName())\n" +
+                        "                .lastName(customerName.getLastName())\n" +
+                        "                .title(customerName.getTitle());\n" +
+                        "    }"}, additionalDslConstructorEndContent = "if (!isValidAddressIndex(addresses, defaultBillingAddress)\n" +
+        "                || !isValidAddressIndex(addresses, defaultShippingAddress)) {\n" +
+        "            throw new IllegalArgumentException(\"The defaultBillingAddress and defaultShippingAddress cannot contain an index which is not in the address list\");\n" +
+        "        }", useBuilderStereotypeDslClass = true)
 public interface CustomerDraft extends CustomDraft {
     @Nullable
     String getCustomerNumber();
@@ -50,7 +75,9 @@ public interface CustomerDraft extends CustomDraft {
     @Nullable
     String getAnonymousId();
 
-    CustomerName getName();
+    default CustomerName getName() {
+        return CustomerName.of(getTitle(), getFirstName(), getMiddleName(), getLastName());
+    }
 
     @Nullable
     String getCompanyName();

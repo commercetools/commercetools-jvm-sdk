@@ -1,6 +1,8 @@
 package io.sphere.sdk.producttypes;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import io.sphere.sdk.annotations.FactoryMethod;
+import io.sphere.sdk.annotations.ResourceDraftValue;
 import io.sphere.sdk.models.WithKey;
 import io.sphere.sdk.products.attributes.AttributeDefinition;
 
@@ -10,7 +12,11 @@ import java.util.List;
 /**
  * @see io.sphere.sdk.producttypes.commands.ProductTypeCreateCommand
  */
-@JsonDeserialize(as = ProductTypeDraftImpl.class)
+@JsonDeserialize(as = ProductTypeDraftDsl.class)
+@ResourceDraftValue(factoryMethods = {
+        @FactoryMethod(parameterNames = {"key", "name", "description", "attributes"}),
+        @FactoryMethod(methodName = "ofKey", parameterNames = {"key"})
+})
 public interface ProductTypeDraft extends WithKey {
     String getName();
 
@@ -31,6 +37,6 @@ public interface ProductTypeDraft extends WithKey {
      * @return draft for a product type
      */
     static ProductTypeDraft of(@Nullable final String key, final String name, final String description, final List<AttributeDefinition> attributes) {
-        return new ProductTypeDraftImpl(key, name, description, attributes);
+        return ProductTypeDraftDsl.of(key, name, description, attributes);
     }
 }

@@ -19,10 +19,10 @@ public class ProjectGetIntegrationTest extends IntegrationTest {
             soft.assertThat(project.getLanguages()).as("languages").contains("en");
             soft.assertThat(project.getLanguageLocales()).as("languages as locale").contains(Locale.ENGLISH);
             soft.assertThat(project.getCreatedAt()).as("createdAt").isNotNull();
-            soft.assertThat(project.getTrialUntil()).as("trialUntil").isNotNull();
             soft.assertThat(project.getCurrencies()).as("currencies").contains("EUR");
             soft.assertThat(project.getCurrencyUnits()).as("currencies as unit").contains(EUR);
             soft.assertThat(project.getMessages().isEnabled()).isTrue();
+            //there is a test for trialUntil missing since some ci test projects don't possess a value for this field
         });
     }
 }

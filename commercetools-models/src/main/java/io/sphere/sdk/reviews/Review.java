@@ -1,7 +1,9 @@
 package io.sphere.sdk.reviews;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import io.sphere.sdk.annotations.ResourceValue;
 import io.sphere.sdk.customers.Customer;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Resource;
@@ -68,6 +70,7 @@ import java.util.Locale;
  @see io.sphere.sdk.reviews.queries.ReviewByKeyGet
  */
 @JsonDeserialize(as = ReviewImpl.class)
+@ResourceValue
 public interface Review extends Resource<Review>, Custom, WithKey {
     /**
      * The name of the author which created this review or null.
@@ -160,6 +163,7 @@ public interface Review extends Resource<Review>, Custom, WithKey {
      If the role of a State is modified after the calculation of this field, the calculation is not updated.
      * @return is included in review rating of target
      */
+    @JsonProperty("includedInStatistics")
     Boolean isIncludedInStatistics();
 
     /**

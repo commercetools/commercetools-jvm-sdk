@@ -2,6 +2,8 @@ package io.sphere.sdk.carts;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.neovisionaries.i18n.CountryCode;
+import io.sphere.sdk.annotations.FactoryMethod;
+import io.sphere.sdk.annotations.ResourceDraftValue;
 import io.sphere.sdk.models.Address;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.shippingmethods.ShippingMethod;
@@ -20,6 +22,7 @@ import java.util.Locale;
  * @see CartDraftBuilder
  */
 @JsonDeserialize(as = CartDraftDsl.class)
+@ResourceDraftValue(factoryMethods = @FactoryMethod(parameterNames = "currency"), gettersForBuilder = true, useBuilderStereotypeDslClass = true)
 public interface CartDraft extends CustomDraft {
     CurrencyUnit getCurrency();
 

@@ -1,8 +1,10 @@
 package io.sphere.sdk.states;
 
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import io.sphere.sdk.annotations.ResourceValue;
 import io.sphere.sdk.carts.ItemState;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Resource;
@@ -28,6 +30,7 @@ import java.util.Set;
  @see io.sphere.sdk.reviews.Review#getState()
  */
 @JsonDeserialize(as = StateImpl.class)
+@ResourceValue
 public interface State extends Resource<State>, WithKey {
 
     String getKey();
@@ -40,8 +43,10 @@ public interface State extends Resource<State>, WithKey {
     @Nullable
     LocalizedString getDescription();
 
+    @JsonProperty("initial")
     Boolean isInitial();
 
+    @JsonProperty("builtin")
     Boolean isBuiltIn();
 
     @Nullable

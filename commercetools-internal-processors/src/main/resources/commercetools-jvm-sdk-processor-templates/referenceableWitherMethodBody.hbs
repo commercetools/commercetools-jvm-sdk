@@ -1,0 +1,1 @@
+return newBuilder().{{fieldName}}(Optional.ofNullable({{fieldName}}).map(Referenceable::toReference).orElse(null)).build();

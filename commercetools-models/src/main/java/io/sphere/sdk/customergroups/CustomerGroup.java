@@ -2,6 +2,7 @@ package io.sphere.sdk.customergroups;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import io.sphere.sdk.annotations.ResourceValue;
 import io.sphere.sdk.carts.Cart;
 import io.sphere.sdk.customers.Customer;
 import io.sphere.sdk.models.Resource;
@@ -22,6 +23,7 @@ import io.sphere.sdk.models.Reference;
  * @see io.sphere.sdk.products.Price#getCustomerGroup()
  */
 @JsonDeserialize(as = CustomerGroupImpl.class)
+@ResourceValue
 public interface CustomerGroup extends Resource<CustomerGroup> {
 
     /**

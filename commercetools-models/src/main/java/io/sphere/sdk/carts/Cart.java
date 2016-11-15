@@ -3,6 +3,7 @@ package io.sphere.sdk.carts;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.neovisionaries.i18n.CountryCode;
+import io.sphere.sdk.annotations.ResourceValue;
 import io.sphere.sdk.customergroups.CustomerGroup;
 import io.sphere.sdk.discountcodes.DiscountCodeInfo;
 import io.sphere.sdk.models.Address;
@@ -31,6 +32,7 @@ import java.util.List;
  @see Order#getCart()
  */
 @JsonDeserialize(as=CartImpl.class)
+@ResourceValue
 public interface Cart extends CartLike<Cart> {
 
     /**

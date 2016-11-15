@@ -2,6 +2,7 @@ package io.sphere.sdk.types;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import io.sphere.sdk.annotations.ResourceValue;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Resource;
@@ -25,6 +26,7 @@ import java.util.Set;
 
  */
 @JsonDeserialize(as = TypeImpl.class)
+@ResourceValue
 public interface Type extends Resource<Type>, WithKey {
     String getKey();
 
@@ -38,7 +40,9 @@ public interface Type extends Resource<Type>, WithKey {
     List<FieldDefinition> getFieldDefinitions();
 
     @Nullable
-    FieldDefinition getFieldDefinitionByName(final String name);
+    default FieldDefinition getFieldDefinitionByName(final String name) {
+        return getFieldDefinitions().stream().filter(def -> def.getName().equals(name)).findFirst().orElse(null);
+    }
 
     @Override
     default Reference<Type> toReference() {

@@ -2,11 +2,20 @@ package io.sphere.sdk.productdiscounts;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import io.sphere.sdk.annotations.FactoryMethod;
+import io.sphere.sdk.annotations.ResourceDraftValue;
 import io.sphere.sdk.models.LocalizedString;
 
 import javax.annotation.Nullable;
 
-@JsonDeserialize(as = ProductDiscountDraftImpl.class)
+@JsonDeserialize(as = ProductDiscountDraftDsl.class)
+@ResourceDraftValue(factoryMethods = {
+        @FactoryMethod(parameterNames = {}),
+        @FactoryMethod(parameterNames = {"active", "description", "name", "predicate", "sortOrder", "value"})
+}, additionalBuilderClassContents = {"    public ProductDiscountDraftBuilder predicate(final ProductDiscountPredicate predicate) {\n" +
+        "        this.predicate = predicate.toSpherePredicate();\n" +
+        "return this;\n" +
+        "    }"})
 public interface ProductDiscountDraft {
     @JsonProperty("isActive")
     Boolean isActive();
@@ -23,6 +32,6 @@ public interface ProductDiscountDraft {
     ProductDiscountValue getValue();
 
     static ProductDiscountDraft of(final LocalizedString name, final LocalizedString description, final ProductDiscountPredicate predicate, final ProductDiscountValue value, final String sortOrder, final boolean active) {
-        return new ProductDiscountDraftImpl(name, description, predicate, value, sortOrder, active);
+        return ProductDiscountDraftDsl.of(active, description, name, predicate.toSpherePredicate(), sortOrder, value);
     }
 }

@@ -2,6 +2,7 @@ package io.sphere.sdk.taxcategories;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import io.sphere.sdk.annotations.ResourceValue;
 import io.sphere.sdk.carts.CartShippingInfo;
 import io.sphere.sdk.carts.CustomLineItem;
 import io.sphere.sdk.models.Resource;
@@ -26,13 +27,23 @@ import java.util.List;
  @see io.sphere.sdk.shippingmethods.ShippingMethod#getTaxCategory()
  */
 @JsonDeserialize(as=TaxCategoryImpl.class)
+@ResourceValue
 public interface TaxCategory extends Resource<TaxCategory> {
     String getName();
 
     @Nullable
     String getDescription();
 
-    List<TaxRate> getTaxRates();
+    /**
+     * Gets the tax rates. Alias for {@link #getRates()}.
+     *
+     * @return rates
+     */
+    default List<TaxRate> getTaxRates() {
+        return getRates();
+    }
+
+    List<TaxRate> getRates();
 
     /**
      * Creates a container which contains the full Java type information to deserialize this class from JSON.

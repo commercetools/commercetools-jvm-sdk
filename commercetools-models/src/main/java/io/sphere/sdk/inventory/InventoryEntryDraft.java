@@ -1,6 +1,8 @@
 package io.sphere.sdk.inventory;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import io.sphere.sdk.annotations.FactoryMethod;
+import io.sphere.sdk.annotations.ResourceDraftValue;
 import io.sphere.sdk.channels.Channel;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Referenceable;
@@ -12,6 +14,11 @@ import java.time.ZonedDateTime;
 import java.util.Optional;
 
 @JsonDeserialize(as = InventoryEntryDraftDsl.class)
+@ResourceDraftValue(factoryMethods = {
+        @FactoryMethod(parameterNames = {"sku", "quantityOnStock"}),
+        @FactoryMethod(parameterNames = {"sku", "quantityOnStock", "expectedDelivery"}),
+        @FactoryMethod(parameterNames = {"sku", "quantityOnStock", "expectedDelivery", "restockableInDays", "supplyChannel"})
+})
 public interface InventoryEntryDraft extends CustomDraft {
     @Nullable
     ZonedDateTime getExpectedDelivery();
@@ -32,11 +39,12 @@ public interface InventoryEntryDraft extends CustomDraft {
     CustomFieldsDraft getCustom();
 
     static InventoryEntryDraftDsl of(final String sku, final long quantityOnStock) {
-        return of(sku, quantityOnStock, null, null, null);
+        return InventoryEntryDraftDsl.of(sku, quantityOnStock);
     }
 
     static InventoryEntryDraftDsl of(final String sku, final long quantityOnStock, @Nullable final ZonedDateTime expectedDelivery, @Nullable final Integer restockableInDays, final Referenceable<Channel> supplyChannel) {
-        final Reference<Channel> channel = Optional.ofNullable(supplyChannel).map(s -> s.toReference()).orElse(null);
-        return new InventoryEntryDraftDsl(sku, quantityOnStock, expectedDelivery, restockableInDays, channel, null);
+        final Reference<Channel> channel =
+                Optional.ofNullable(supplyChannel).map(Referenceable::toReference).orElse(null);
+        return InventoryEntryDraftDsl.of(sku, quantityOnStock, expectedDelivery, restockableInDays, channel);
     }
 }

@@ -3,6 +3,8 @@ package io.sphere.sdk.products;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import java.util.Optional;
+
+import io.sphere.sdk.annotations.ResourceValue;
 import io.sphere.sdk.models.Resource;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.productdiscounts.ProductDiscount;
@@ -33,6 +35,9 @@ import javax.annotation.Nullable;
  @see Review#getTarget()
  */
 @JsonDeserialize(as=ProductImpl.class)
+@ResourceValue(additionalConstructorEndContent = "Optional.of(masterData)\n" +
+        "                .filter(d -> d instanceof ProductCatalogDataImpl)\n" +
+        "                .ifPresent(d -> ((ProductCatalogDataImpl)d).setProductId(id));")
 public interface Product extends ProductLike<Product, Product>, Resource<Product> {
 
     ProductCatalogData getMasterData();

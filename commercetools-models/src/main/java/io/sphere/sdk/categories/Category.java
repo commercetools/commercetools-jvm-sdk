@@ -2,7 +2,7 @@ package io.sphere.sdk.categories;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-
+import io.sphere.sdk.annotations.ResourceValue;
 import io.sphere.sdk.models.*;
 import io.sphere.sdk.products.ProductData;
 import io.sphere.sdk.products.ProductProjection;
@@ -10,12 +10,9 @@ import io.sphere.sdk.types.Custom;
 import io.sphere.sdk.types.CustomFields;
 import io.sphere.sdk.types.TypeDraft;
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import javax.annotation.Nullable;
 import java.util.List;
-
-import static io.sphere.sdk.utils.SphereInternalUtils.join;
 
 /**
  * Categories are used to organize products in a hierarchical structure.
@@ -37,6 +34,7 @@ import static io.sphere.sdk.utils.SphereInternalUtils.join;
  * @see io.sphere.sdk.products.commands.updateactions.RemoveFromCategory
  */
 @JsonDeserialize(as=CategoryImpl.class)
+@ResourceValue
 public interface Category extends Resource<Category>, WithLocalizedSlug, MetaAttributes, Custom {
 
     /**
