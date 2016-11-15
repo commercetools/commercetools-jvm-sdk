@@ -3,6 +3,7 @@ package io.sphere.sdk.projects;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.neovisionaries.i18n.CountryCode;
+import io.sphere.sdk.annotations.ResourceValue;
 import io.sphere.sdk.models.CreationTimestamped;
 import io.sphere.sdk.models.WithKey;
 
@@ -16,6 +17,7 @@ import java.util.Locale;
 import static java.util.stream.Collectors.toList;
 
 @JsonDeserialize(as = ProjectImpl.class)
+@ResourceValue
 public interface Project extends CreationTimestamped, WithKey {
     /**
      * The unique key of the project.
