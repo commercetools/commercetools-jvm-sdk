@@ -1,6 +1,9 @@
 package io.sphere.sdk.shippingmethods;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import io.sphere.sdk.annotations.FactoryMethod;
+import io.sphere.sdk.annotations.ResourceDraftValue;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Referenceable;
 import io.sphere.sdk.taxcategories.TaxCategory;
@@ -8,7 +11,11 @@ import io.sphere.sdk.taxcategories.TaxCategory;
 import javax.annotation.Nullable;
 import java.util.List;
 
-@JsonDeserialize(as = ShippingMethodDraftImpl.class)
+@JsonDeserialize(as = ShippingMethodDraftDsl.class)
+@ResourceDraftValue(factoryMethods = {
+        @FactoryMethod(parameterNames = {"name", "description", "taxCategory", "zoneRates", "default"}),
+        @FactoryMethod(parameterNames = {"name", "taxCategory", "zoneRates", "default"})
+})
 public interface ShippingMethodDraft {
     String getName();
 
@@ -19,6 +26,7 @@ public interface ShippingMethodDraft {
 
     List<ZoneRate> getZoneRates();
 
+    @JsonProperty("isDefault")
     Boolean isDefault();
 
 
@@ -27,6 +35,6 @@ public interface ShippingMethodDraft {
     }
 
     static ShippingMethodDraft of(final String name, @Nullable final String description, final Referenceable<TaxCategory> taxCategory, final List<ZoneRate> zoneRates, final boolean isDefault) {
-        return new ShippingMethodDraftImpl(name, description, taxCategory.toReference(), zoneRates, isDefault);
+        return ShippingMethodDraftDsl.of(name, description, taxCategory.toReference(), zoneRates, isDefault);
     }
 }

@@ -1,7 +1,9 @@
 package io.sphere.sdk.shippingmethods;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import io.sphere.sdk.annotations.ResourceValue;
 import io.sphere.sdk.carts.CartShippingInfo;
 import io.sphere.sdk.models.Resource;
 import io.sphere.sdk.models.Reference;
@@ -29,6 +31,7 @@ import static java.util.stream.Collectors.toList;
  * @see io.sphere.sdk.orders.OrderShippingInfo#getShippingMethod()
  */
 @JsonDeserialize(as = ShippingMethodImpl.class)
+@ResourceValue
 public interface ShippingMethod extends Resource<ShippingMethod> {
     String getName();
 
@@ -51,6 +54,7 @@ public interface ShippingMethod extends Resource<ShippingMethod> {
         return getZoneRates().stream().map(rate -> rate.getZone()).collect(toList());
     }
 
+    @JsonProperty("isDefault")
     Boolean isDefault();
 
     @Override
