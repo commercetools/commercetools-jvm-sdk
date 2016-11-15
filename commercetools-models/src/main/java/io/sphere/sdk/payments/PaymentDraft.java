@@ -47,14 +47,18 @@ public interface PaymentDraft extends CustomDraft {
     @Nullable
     MonetaryAmount getAmountRefunded();
 
+    @Nullable
     PaymentMethodInfo getPaymentMethodInfo();
 
     @Nullable
     CustomFieldsDraft getCustom();
 
+    @Nullable
     PaymentStatus getPaymentStatus();
 
+    @Nullable
     List<TransactionDraft> getTransactions();
 
+    @Nullable
     List<CustomFieldsDraft> getInterfaceInteractions();
 }
