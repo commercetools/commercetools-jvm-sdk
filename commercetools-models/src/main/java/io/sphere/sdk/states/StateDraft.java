@@ -21,9 +21,11 @@ import java.util.Set;
 additionalBuilderClassContents = "    public StateDraftBuilder roles(final StateRole role) {\n" +
         "        return roles(Collections.singleton(role));\n" +
         "    }",
-additionalDslClassContents = "    public StateDraftDsl withRoles(final StateRole role) {\n" +
+additionalDslClassContents = {"    public StateDraftDsl withRoles(final StateRole role) {\n" +
         "        return withRoles(Collections.singleton(role));\n" +
-        "    }", useBuilderStereotypeDslClass = true)
+        "    }", "    public StateDraftDsl withInitial(final boolean initial) {\n" +
+        "        return newBuilder().initial(initial).build();\n" +
+        "    } "}, useBuilderStereotypeDslClass = true)
 public interface StateDraft extends WithKey {
     String getKey();
 
