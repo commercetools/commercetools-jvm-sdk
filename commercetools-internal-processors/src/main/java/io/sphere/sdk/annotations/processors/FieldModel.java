@@ -1,11 +1,13 @@
 package io.sphere.sdk.annotations.processors;
 
+import io.sphere.sdk.models.Base;
+
 import java.util.LinkedList;
 import java.util.List;
 
 import static java.util.Arrays.asList;
 
-public class FieldModel {
+public class FieldModel extends Base {
     private String name;
     private String type;
     private List<String> modifiers = new LinkedList<>();

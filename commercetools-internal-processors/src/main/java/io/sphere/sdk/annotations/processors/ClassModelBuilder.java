@@ -1,11 +1,13 @@
 package io.sphere.sdk.annotations.processors;
 
+import io.sphere.sdk.models.Base;
+
 import java.util.LinkedList;
 import java.util.List;
 
 import static java.util.Arrays.asList;
 
-final class ClassModelBuilder {
+final class ClassModelBuilder extends Base {
     private String name;
     private String baseClassName;
     private String packageName;
