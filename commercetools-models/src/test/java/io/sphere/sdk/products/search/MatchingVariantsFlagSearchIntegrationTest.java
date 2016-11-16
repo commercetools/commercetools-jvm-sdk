@@ -41,7 +41,7 @@ public class MatchingVariantsFlagSearchIntegrationTest extends ProductProjection
                     assertThat(productProjection.getMasterVariant().isMatchingVariant()).isFalse();
                     final ProductVariant variantWithAttribute2 = productProjection.getVariants().get(0);
                     assertThat(variantWithAttribute2.isMatchingVariant()).isFalse();
-                    final ProductVariant positiveVariant = productProjection.getVariants().get(2);
+                    final ProductVariant positiveVariant = productProjection.getVariants().get(1);
                     assertThat(positiveVariant.getAttribute(attributeName).getValueAsString()).isEqualTo("3");
                     assertThat(positiveVariant.isMatchingVariant()).isTrue();
                 });
@@ -51,7 +51,7 @@ public class MatchingVariantsFlagSearchIntegrationTest extends ProductProjection
                     assertThat(productProjectionOptional).isPresent();
                     assertThat(productProjectionOptional.get().getMasterVariant().isMatchingVariant()).isNull();
                     assertThat(productProjectionOptional.get().getVariants().get(0).isMatchingVariant()).isNull();
-                    final ProductVariant positiveVariant = productProjectionOptional.get().getVariants().get(2);
+                    final ProductVariant positiveVariant = productProjectionOptional.get().getVariants().get(1);
                     assertThat(positiveVariant.getAttribute(attributeName).getValueAsString()).isEqualTo("3");
                     assertThat(positiveVariant.isMatchingVariant()).isNull();
                 });
