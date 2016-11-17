@@ -62,6 +62,8 @@ public final class AddressBuilder extends Base implements Builder<Address> {
     String additionalAddressInfo;
     @Nullable
     String fax;
+    @Nullable
+    String externalId;
 
 
     AddressBuilder(final CountryCode country) {
@@ -92,6 +94,7 @@ public final class AddressBuilder extends Base implements Builder<Address> {
         builder.email = address.email;
         builder.additionalAddressInfo = address.additionalAddressInfo;
         builder.fax = address.fax;
+        builder.externalId = address.externalId;
         return builder;
     }
 
@@ -217,6 +220,11 @@ public final class AddressBuilder extends Base implements Builder<Address> {
 
     public AddressBuilder fax(@Nullable final String fax) {
         this.fax = fax;
+        return this;
+    }
+
+    public AddressBuilder externalId(@Nullable final String externalId) {
+        this.externalId = externalId;
         return this;
     }
 }
