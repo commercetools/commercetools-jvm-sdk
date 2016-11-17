@@ -19,10 +19,10 @@ public final class HasQueryEndpointAnnotationProcessor extends CommercetoolsAnno
 
     @Override
     protected void generate(final TypeElement typeElement) {
-        final String resourceName = getResourceName(typeElement);
-        final String fullyQualifiedName = typeElement.getQualifiedName() + "Query";
-        writeClass(typeElement, fullyQualifiedName, "queries/resourceQueryInterface", queryInterfaceClassValues(typeElement));
-        //add ResourceQueryImpl class
+        final String fullyQualifiedNameQueryInterface = ClassConfigurer.packageName(typeElement) + ".queries." + typeElement.getSimpleName() + "Query";
+        final Map<String, Object> values = queryInterfaceClassValues(typeElement);
+        writeClass(typeElement, fullyQualifiedNameQueryInterface, "queries/resourceQueryInterface", values);
+        writeClass(typeElement, fullyQualifiedNameQueryInterface + "Impl", "queries/resourceQueryImplementation", values);
         //add ResourceQueryBuilder class
     }
 
@@ -36,6 +36,7 @@ public final class HasQueryEndpointAnnotationProcessor extends CommercetoolsAnno
         map.put("resourceName", getResourceName(typeElement));
         final ResourceInfo resourceInfo = typeElement.getAnnotation(ResourceInfo.class);
         map.put("resourcePluralName", resourceInfo.pluralName());
+        map.put("pathElement", resourceInfo.pathElement());
         final HasQueryEndpoint queryInfo = typeElement.getAnnotation(HasQueryEndpoint.class);
         map.put("extras", asList(queryInfo.additionalContents()));
         return map;

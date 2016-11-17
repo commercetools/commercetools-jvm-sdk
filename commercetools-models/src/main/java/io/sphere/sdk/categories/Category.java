@@ -56,7 +56,7 @@ import java.util.List;
         "    default CategoryQuery byExternalId(final String externalId) {\n" +
         "        return withPredicates(m -> m.externalId().is(externalId));\n" +
         "    }"})
-@ResourceInfo(pluralName = "categories")
+@ResourceInfo(pluralName = "categories", pathElement = "categories")
 public interface Category extends Resource<Category>, WithLocalizedSlug, MetaAttributes, Custom {
 
     /**
