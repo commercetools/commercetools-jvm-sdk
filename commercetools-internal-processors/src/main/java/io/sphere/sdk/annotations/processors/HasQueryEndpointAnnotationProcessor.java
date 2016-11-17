@@ -23,7 +23,7 @@ public final class HasQueryEndpointAnnotationProcessor extends CommercetoolsAnno
         final Map<String, Object> values = queryInterfaceClassValues(typeElement);
         writeClass(typeElement, fullyQualifiedNameQueryInterface, "queries/resourceQueryInterface", values);
         writeClass(typeElement, fullyQualifiedNameQueryInterface + "Impl", "queries/resourceQueryImplementation", values);
-        //add ResourceQueryBuilder class
+        writeClass(typeElement, fullyQualifiedNameQueryInterface + "Builder", "queries/resourceQueryBuilder", values);
     }
 
     private String getResourceName(final TypeElement typeElement) {

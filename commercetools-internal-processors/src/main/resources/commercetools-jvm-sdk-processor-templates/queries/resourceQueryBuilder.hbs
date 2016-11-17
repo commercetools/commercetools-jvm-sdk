@@ -1,0 +1,137 @@
+package {{package}}.queries;
+
+import {{package}}.{{resourceName}};
+import io.sphere.sdk.categories.expansion.{{resourceName}}ExpansionModel;
+import io.sphere.sdk.expansion.ExpansionPathContainer;
+import io.sphere.sdk.queries.QueryPredicate;
+import io.sphere.sdk.queries.QuerySort;
+import io.sphere.sdk.queries.ResourceMetaModelQueryDslBuilderImpl;
+
+import java.util.List;
+import java.util.function.Function;
+
+/**
+
+ {@doc.gen summary }
+
+ */
+public final class {{resourceName}}QueryBuilder extends ResourceMetaModelQueryDslBuilderImpl<{{resourceName}}QueryBuilder, {{resourceName}}, {{resourceName}}Query, {{resourceName}}QueryModel, {{resourceName}}ExpansionModel<{{resourceName}}>> {
+
+    private {{resourceName}}QueryBuilder(final {{resourceName}}Query template) {
+        super(template);
+    }
+
+    public static {{resourceName}}QueryBuilder of() {
+        return new {{resourceName}}QueryBuilder({{resourceName}}Query.of());
+    }
+
+    @Override
+    protected {{resourceName}}QueryBuilder getThis() {
+        return this;
+    }
+
+    @Override
+    public {{resourceName}}Query build() {
+        return super.build();
+    }
+
+    @Override
+    public {{resourceName}}QueryBuilder fetchTotal(final boolean fetchTotal) {
+        return super.fetchTotal(fetchTotal);
+    }
+
+    @Override
+    public {{resourceName}}QueryBuilder limit(final Long limit) {
+        return super.limit(limit);
+    }
+
+    @Override
+    public {{resourceName}}QueryBuilder limit(final long limit) {
+        return super.limit(limit);
+    }
+
+    @Override
+    public {{resourceName}}QueryBuilder offset(final Long offset) {
+        return super.offset(offset);
+    }
+
+    @Override
+    public {{resourceName}}QueryBuilder offset(final long offset) {
+        return super.offset(offset);
+    }
+
+    @Override
+    public {{resourceName}}QueryBuilder plusExpansionPaths(final Function<{{resourceName}}ExpansionModel<{{resourceName}}>, ExpansionPathContainer<{{resourceName}}>> m) {
+        return super.plusExpansionPaths(m);
+    }
+
+    @Override
+    public {{resourceName}}QueryBuilder plusPredicates(final Function<{{resourceName}}QueryModel, QueryPredicate<{{resourceName}}>> m) {
+        return super.plusPredicates(m);
+    }
+
+    @Override
+    public {{resourceName}}QueryBuilder plusPredicates(final QueryPredicate<{{resourceName}}> queryPredicate) {
+        return super.plusPredicates(queryPredicate);
+    }
+
+    @Override
+    public {{resourceName}}QueryBuilder plusPredicates(final List<QueryPredicate<{{resourceName}}>> queryPredicates) {
+        return super.plusPredicates(queryPredicates);
+    }
+
+    @Override
+    public {{resourceName}}QueryBuilder plusSort(final Function<{{resourceName}}QueryModel, QuerySort<{{resourceName}}>> m) {
+        return super.plusSort(m);
+    }
+
+    @Override
+    public {{resourceName}}QueryBuilder plusSort(final List<QuerySort<{{resourceName}}>> sort) {
+        return super.plusSort(sort);
+    }
+
+    @Override
+    public {{resourceName}}QueryBuilder plusSort(final QuerySort<{{resourceName}}> sort) {
+        return super.plusSort(sort);
+    }
+
+    @Override
+    public {{resourceName}}QueryBuilder predicates(final Function<{{resourceName}}QueryModel, QueryPredicate<{{resourceName}}>> m) {
+        return super.predicates(m);
+    }
+
+    @Override
+    public {{resourceName}}QueryBuilder predicates(final QueryPredicate<{{resourceName}}> queryPredicate) {
+        return super.predicates(queryPredicate);
+    }
+
+    @Override
+    public {{resourceName}}QueryBuilder predicates(final List<QueryPredicate<{{resourceName}}>> queryPredicates) {
+        return super.predicates(queryPredicates);
+    }
+
+    @Override
+    public {{resourceName}}QueryBuilder sort(final Function<{{resourceName}}QueryModel, QuerySort<{{resourceName}}>> m) {
+        return super.sort(m);
+    }
+
+    @Override
+    public {{resourceName}}QueryBuilder sort(final List<QuerySort<{{resourceName}}>> sort) {
+        return super.sort(sort);
+    }
+
+    @Override
+    public {{resourceName}}QueryBuilder sort(final QuerySort<{{resourceName}}> sort) {
+        return super.sort(sort);
+    }
+
+    @Override
+    public {{resourceName}}QueryBuilder sortMulti(final Function<{{resourceName}}QueryModel, List<QuerySort<{{resourceName}}>>> m) {
+        return super.sortMulti(m);
+    }
+
+    @Override
+    public {{resourceName}}QueryBuilder expansionPaths(final Function<{{resourceName}}ExpansionModel<{{resourceName}}>, ExpansionPathContainer<{{resourceName}}>> m) {
+        return super.expansionPaths(m);
+    }
+}
