@@ -5,6 +5,7 @@ import io.sphere.sdk.test.IntegrationTest;
 import org.junit.Test;
 
 import java.time.Duration;
+import java.util.Optional;
 
 import static io.sphere.sdk.orders.OrderFixtures.withOrderAndReturnInfo;
 import static io.sphere.sdk.test.SphereTestUtils.assertEventually;
@@ -20,7 +21,9 @@ public class MessageByIdGetIntegrationTest extends IntegrationTest {
                     .withSort(m -> m.createdAt().sort().desc())
                     .withLimit(1L);
             assertEventually(Duration.ofSeconds(45), Duration.ofMillis(100), () -> {
-                final Message messageFromQueryEndpoint = client().executeBlocking(query).head().get();
+                final Optional<Message> messageOptional = client().executeBlocking(query).head();
+                assertThat(messageOptional).isPresent();
+                final Message messageFromQueryEndpoint = messageOptional.get();
                 final Message message = client().executeBlocking(MessageByIdGet.of(messageFromQueryEndpoint));
                 assertThat(message).isEqualTo(messageFromQueryEndpoint);
             });
