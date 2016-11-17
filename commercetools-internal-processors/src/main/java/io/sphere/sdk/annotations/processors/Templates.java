@@ -39,4 +39,8 @@ final class Templates {
             throw new UncheckedIOException(e);
         }
     }
+
+    public static void write(final String template, final Map<String, Object> values, final Writer writer) throws IOException {
+        handlebars.compile(template).apply(values, writer);
+    }
 }

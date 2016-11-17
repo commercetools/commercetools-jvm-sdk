@@ -1,2 +1,3 @@
 io.sphere.sdk.annotations.processors.ResourceDraftValueAnnotationProcessor
 io.sphere.sdk.annotations.processors.ResourceValueAnnotationProcessor
+io.sphere.sdk.annotations.processors.HasQueryEndpointAnnotationProcessor

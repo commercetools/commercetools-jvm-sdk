@@ -64,6 +64,11 @@ final class ClassConfigurer {
             final String packageName = packageName(typeElement);
             return new PackageHolder(packageName, typeElement);
         }
+
+        public PackageHolder subPackageFrom(final TypeElement typeElement, final String subpackage) {
+            final String packageName = packageName(typeElement) + "." + subpackage;
+            return new PackageHolder(packageName, typeElement);
+        }
     }
 
     public static class PackageHolder {
@@ -139,6 +144,10 @@ final class ClassConfigurer {
 
         public ClassTypeHolder classType() {
             return new ClassTypeHolder(ClassType.CLASS, this, holder.typeElement);
+        }
+
+        public ClassTypeHolder interfaceType() {
+            return new ClassTypeHolder(ClassType.INTERFACE, this, holder.typeElement);
         }
     }
 
@@ -611,7 +620,7 @@ final class ClassConfigurer {
         builder.addMethod(method);
     }
 
-    private static String packageName(final TypeElement typeElement) {
+    public static String packageName(final TypeElement typeElement) {
         final PackageElement packageElement = (PackageElement) typeElement.getEnclosingElement();
         return packageElement.getQualifiedName().toString();
     }

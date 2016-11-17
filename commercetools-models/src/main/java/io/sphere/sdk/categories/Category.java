@@ -2,6 +2,8 @@ package io.sphere.sdk.categories;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import io.sphere.sdk.annotations.HasQueryEndpoint;
+import io.sphere.sdk.annotations.ResourceInfo;
 import io.sphere.sdk.annotations.ResourceValue;
 import io.sphere.sdk.models.*;
 import io.sphere.sdk.products.ProductData;
@@ -35,6 +37,26 @@ import java.util.List;
  */
 @JsonDeserialize(as=CategoryImpl.class)
 @ResourceValue
+@HasQueryEndpoint(additionalContents = {"    default CategoryQuery bySlug(final Locale locale, final String slug) {\n" +
+        "        return withPredicates(m -> m.slug().lang(locale).is(slug));\n" +
+        "    }\n" +
+        "\n" +
+        "    default CategoryQuery byName(final Locale locale, final String name) {\n" +
+        "        return withPredicates(m -> m.name().lang(locale).is(name));\n" +
+        "    }\n" +
+        "\n" +
+        "    default CategoryQuery byId(final String id) {\n" +
+        "        return withPredicates(m -> m.id().is(id));\n" +
+        "    }\n" +
+        "\n" +
+        "    default CategoryQuery byIsRoot() {\n" +
+        "        return withPredicates(m -> m.parent().isNotPresent());\n" +
+        "    }\n" +
+        "\n" +
+        "    default CategoryQuery byExternalId(final String externalId) {\n" +
+        "        return withPredicates(m -> m.externalId().is(externalId));\n" +
+        "    }"})
+@ResourceInfo(pluralName = "categories")
 public interface Category extends Resource<Category>, WithLocalizedSlug, MetaAttributes, Custom {
 
     /**
