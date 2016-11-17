@@ -218,10 +218,10 @@ public interface ProductProjectionSearch extends MetaModelSearchDsl<ProductProje
      */
     ProductProjectionSearch withPriceSelection(@Nullable final PriceSelection priceSelection);
 
-    ProductProjectionSearch withMatchingVariants(final Boolean matchingVariants);
+    ProductProjectionSearch withMarkingMatchingVariants(final Boolean markMatchingVariants);
 
     @Nullable
-    Boolean isMatchingVariants();
+    Boolean isMarkingMatchingVariants();
 
     @Nullable
     PriceSelection getPriceSelection();

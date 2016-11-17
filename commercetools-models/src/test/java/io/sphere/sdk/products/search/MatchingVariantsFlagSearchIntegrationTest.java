@@ -46,7 +46,7 @@ public class MatchingVariantsFlagSearchIntegrationTest extends ProductProjection
                     assertThat(positiveVariant.isMatchingVariant()).isTrue();
                 });
                 assertEventually(() -> {
-                    final ProductProjectionSearch withoutFlagSearchRequest = searchRequest.withMatchingVariants(false);
+                    final ProductProjectionSearch withoutFlagSearchRequest = searchRequest.withMarkingMatchingVariants(false);
                     final Optional<ProductProjection> productProjectionOptional = client().executeBlocking(withoutFlagSearchRequest).head();
                     assertThat(productProjectionOptional).isPresent();
                     assertThat(productProjectionOptional.get().getMasterVariant().isMatchingVariant()).isNull();
