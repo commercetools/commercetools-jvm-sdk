@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import io.sphere.sdk.annotations.HasQueryEndpoint;
+import io.sphere.sdk.annotations.ResourceInfo;
 import io.sphere.sdk.annotations.ResourceValue;
 import io.sphere.sdk.discountcodes.DiscountCode;
 import io.sphere.sdk.models.Resource;
@@ -26,6 +28,8 @@ import java.util.List;
  */
 @JsonDeserialize(as=CartDiscountImpl.class)
 @ResourceValue
+@HasQueryEndpoint()
+@ResourceInfo(pluralName = "cart discounts", pathElement = "cart-discounts")
 public interface CartDiscount extends Resource<CartDiscount> {
     /**
      * Predicate where the discounts should be applied to.
