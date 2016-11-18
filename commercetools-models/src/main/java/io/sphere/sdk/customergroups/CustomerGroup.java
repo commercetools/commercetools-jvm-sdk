@@ -2,6 +2,8 @@ package io.sphere.sdk.customergroups;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import io.sphere.sdk.annotations.HasQueryEndpoint;
+import io.sphere.sdk.annotations.ResourceInfo;
 import io.sphere.sdk.annotations.ResourceValue;
 import io.sphere.sdk.carts.Cart;
 import io.sphere.sdk.customers.Customer;
@@ -24,6 +26,10 @@ import io.sphere.sdk.models.Reference;
  */
 @JsonDeserialize(as = CustomerGroupImpl.class)
 @ResourceValue
+@HasQueryEndpoint(additionalContents = "    default CustomerGroupQuery byName(final String name) {\n" +
+        "        return withPredicates(m -> m.name().is(name));\n" +
+        "    }")
+@ResourceInfo(pluralName = "carts", pathElement = "carts")
 public interface CustomerGroup extends Resource<CustomerGroup> {
 
     /**
