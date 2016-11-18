@@ -6,7 +6,7 @@ import io.sphere.sdk.queries.*;
 
 final class {{resourceName}}QueryImpl extends MetaModelQueryDslImpl<{{resourceName}}, {{resourceName}}Query, {{resourceName}}QueryModel, {{resourceName}}ExpansionModel<{{resourceName}}>> implements {{resourceName}}Query {
     {{resourceName}}QueryImpl(){
-        super("{{pathElement}}", {{resourceName}}Query.resultTypeReference(), {{resourceName}}QueryModel.of(), {{resourceName}}ExpansionModel.of(), {{resourceName}}QueryImpl::new);
+        super("/{{pathElement}}", {{resourceName}}Query.resultTypeReference(), {{resourceName}}QueryModel.of(), {{resourceName}}ExpansionModel.of(), {{resourceName}}QueryImpl::new);
     }
 
     private {{resourceName}}QueryImpl(final MetaModelQueryDslBuilder<{{resourceName}}, {{resourceName}}Query, {{resourceName}}QueryModel, {{resourceName}}ExpansionModel<{{resourceName}}>> builder) {
