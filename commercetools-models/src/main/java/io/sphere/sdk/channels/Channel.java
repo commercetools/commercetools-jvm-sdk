@@ -36,7 +36,7 @@ import java.util.Set;
  */
 @JsonDeserialize(as = ChannelImpl.class)
 @ResourceValue
-@HasQueryEndpoint(additionalContents = "    default ChannelQuery byKey(final String key) {\n" +
+@HasQueryEndpoint(additionalContentsQueryImpl = "    default ChannelQuery byKey(final String key) {\n" +
         "        return withPredicates(m -> m.key().is(key));\n" +
         "    }")
 @ResourceInfo(pluralName = "channels", pathElement = "channels")

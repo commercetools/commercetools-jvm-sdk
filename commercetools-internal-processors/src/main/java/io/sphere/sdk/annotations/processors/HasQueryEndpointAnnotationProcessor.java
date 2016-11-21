@@ -38,7 +38,7 @@ public final class HasQueryEndpointAnnotationProcessor extends CommercetoolsAnno
         map.put("resourcePluralName", resourceInfo.pluralName());
         map.put("pathElement", resourceInfo.pathElement());
         final HasQueryEndpoint queryInfo = typeElement.getAnnotation(HasQueryEndpoint.class);
-        map.put("extras", asList(queryInfo.additionalContents()));
+        map.put("extras", asList(queryInfo.additionalContentsQueryImpl()));
         return map;
     }
 

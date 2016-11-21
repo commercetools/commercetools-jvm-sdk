@@ -38,7 +38,7 @@ import java.util.Set;
  */
 @JsonDeserialize(as=OrderImpl.class)
 @ResourceValue
-@HasQueryEndpoint(additionalContents = {"\n" +
+@HasQueryEndpoint(additionalContentsQueryImpl = {"\n" +
         "    default OrderQuery byCustomerId(final String customerId) {\n" +
         "        return withPredicates(m -> m.customerId().is(customerId));\n" +
         "    }\n" +
