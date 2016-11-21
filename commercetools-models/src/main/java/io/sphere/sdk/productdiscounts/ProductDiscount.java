@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import io.sphere.sdk.annotations.HasByIdGetEndpoint;
 import io.sphere.sdk.annotations.HasQueryEndpoint;
 import io.sphere.sdk.annotations.ResourceInfo;
 import io.sphere.sdk.annotations.ResourceValue;
@@ -27,6 +28,7 @@ import java.util.List;
 @ResourceValue
 @HasQueryEndpoint()
 @ResourceInfo(pluralName = "product discounts", pathElement = "product-discounts")
+@HasByIdGetEndpoint
 public interface ProductDiscount extends Resource<ProductDiscount> {
 
     LocalizedString getName();
