@@ -33,7 +33,7 @@ import java.util.Set;
  */
 @JsonDeserialize(as = StateImpl.class)
 @ResourceValue
-@HasQueryEndpoint(additionalContentsQueryImpl = "    default StateQuery byKey(final String key) {\n" +
+@HasQueryEndpoint(additionalContentsQueryInterface = "    default StateQuery byKey(final String key) {\n" +
         "        return withPredicates(StateQueryModel.of().key().is(key));\n" +
         "    }")
 @ResourceInfo(pluralName = "states", pathElement = "states")

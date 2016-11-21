@@ -37,7 +37,7 @@ import java.util.List;
  */
 @JsonDeserialize(as=CategoryImpl.class)
 @ResourceValue
-@HasQueryEndpoint(additionalContentsQueryImpl = {"    default CategoryQuery bySlug(final Locale locale, final String slug) {\n" +
+@HasQueryEndpoint(additionalContentsQueryInterface = {"    default CategoryQuery bySlug(final Locale locale, final String slug) {\n" +
         "        return withPredicates(m -> m.slug().lang(locale).is(slug));\n" +
         "    }\n" +
         "\n" +

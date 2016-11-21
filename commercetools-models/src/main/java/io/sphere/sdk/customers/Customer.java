@@ -116,7 +116,7 @@ import java.util.Optional;
  */
 @JsonDeserialize(as = CustomerImpl.class)
 @ResourceValue
-@HasQueryEndpoint(additionalContentsQueryImpl = "    default CustomerQuery byEmail(final String email) {\n" +
+@HasQueryEndpoint(additionalContentsQueryInterface = "    default CustomerQuery byEmail(final String email) {\n" +
         "        return withPredicates(m -> m.lowercaseEmail().is(email.toLowerCase()));\n" +
         "    }")
 @ResourceInfo(pluralName = "customers", pathElement = "customers")

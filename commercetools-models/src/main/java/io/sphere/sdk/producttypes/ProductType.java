@@ -27,7 +27,7 @@ import java.util.Optional;
  */
 @JsonDeserialize(as=ProductTypeImpl.class)
 @ResourceValue
-@HasQueryEndpoint(additionalContentsQueryImpl = "\n" +
+@HasQueryEndpoint(additionalContentsQueryInterface = "\n" +
         "    default ProductTypeQuery byName(String name) {\n" +
         "        return withPredicates(m -> m.name().is(name));\n" +
         "    }\n" +

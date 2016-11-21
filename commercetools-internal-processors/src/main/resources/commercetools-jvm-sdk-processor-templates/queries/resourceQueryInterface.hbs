@@ -9,9 +9,17 @@ import io.sphere.sdk.queries.MetaModelQueryDsl;
 import io.sphere.sdk.queries.QueryPredicate;
 import io.sphere.sdk.queries.QuerySort;
 
+{{#if commonImports}}
+//common imports
+    {{#each commonImports}}
+import {{this}};
+    {{/each}}
+{{/if}}
+
 import java.util.List;
 import java.util.Locale;
 import java.util.function.Function;
+import java.util.Optional;
 
 /**
  * {@doc.gen summary {{resourcePluralName}}

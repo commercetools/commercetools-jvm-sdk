@@ -31,7 +31,7 @@ import static java.util.stream.Collectors.toList;
  * @see io.sphere.sdk.orders.OrderShippingInfo#getShippingMethod()
  */
 @JsonDeserialize(as = ShippingMethodImpl.class)
-@HasQueryEndpoint(additionalContentsQueryImpl = "\n" +
+@HasQueryEndpoint(additionalContentsQueryInterface = "\n" +
         "    default ShippingMethodQuery byName(final String name) {\n" +
         "        return withPredicates(ShippingMethodQueryModel.of().name().is(name));\n" +
         "    }\n" +

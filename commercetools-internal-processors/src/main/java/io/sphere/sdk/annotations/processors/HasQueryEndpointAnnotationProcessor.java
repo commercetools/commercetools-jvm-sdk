@@ -8,6 +8,7 @@ import javax.annotation.processing.SupportedSourceVersion;
 import javax.lang.model.SourceVersion;
 import javax.lang.model.element.TypeElement;
 import java.lang.annotation.Annotation;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -37,8 +38,9 @@ public final class HasQueryEndpointAnnotationProcessor extends CommercetoolsAnno
         final ResourceInfo resourceInfo = typeElement.getAnnotation(ResourceInfo.class);
         map.put("resourcePluralName", resourceInfo.pluralName());
         map.put("pathElement", resourceInfo.pathElement());
+        map.put("commonImports", Arrays.asList(resourceInfo.commonImports()));
         final HasQueryEndpoint queryInfo = typeElement.getAnnotation(HasQueryEndpoint.class);
-        map.put("extras", asList(queryInfo.additionalContentsQueryImpl()));
+        map.put("extras", asList(queryInfo.additionalContentsQueryInterface()));
         return map;
     }
 

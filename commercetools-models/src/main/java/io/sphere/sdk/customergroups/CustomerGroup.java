@@ -26,7 +26,7 @@ import io.sphere.sdk.models.Reference;
  */
 @JsonDeserialize(as = CustomerGroupImpl.class)
 @ResourceValue
-@HasQueryEndpoint(additionalContentsQueryImpl = "    default CustomerGroupQuery byName(final String name) {\n" +
+@HasQueryEndpoint(additionalContentsQueryInterface = "    default CustomerGroupQuery byName(final String name) {\n" +
         "        return withPredicates(m -> m.name().is(name));\n" +
         "    }")
 @ResourceInfo(pluralName = "carts", pathElement = "carts")

@@ -30,7 +30,7 @@ import java.util.List;
  */
 @JsonDeserialize(as=TaxCategoryImpl.class)
 @ResourceValue
-@HasQueryEndpoint(additionalContentsQueryImpl = "\n" +
+@HasQueryEndpoint(additionalContentsQueryInterface = "\n" +
         "    default TaxCategoryQuery byName(final String name) {\n" +
         "        return withPredicates(m -> m.name().is(name));\n" +
         "    }")

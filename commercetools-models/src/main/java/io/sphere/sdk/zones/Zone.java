@@ -3,6 +3,8 @@ package io.sphere.sdk.zones;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.neovisionaries.i18n.CountryCode;
+import io.sphere.sdk.annotations.HasQueryEndpoint;
+import io.sphere.sdk.annotations.ResourceInfo;
 import io.sphere.sdk.models.Resource;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.shippingmethods.ShippingMethod;
@@ -23,6 +25,39 @@ import java.util.Set;
  * @see ZoneRate#getZone()
  */
 @JsonDeserialize(as = ZoneImpl.class)
+@HasQueryEndpoint(additionalContentsQueryInterface = "\n" +
+        "    default ZoneQuery byName(final String name) {\n" +
+        "        return withPredicates(m -> m.name().is(name));\n" +
+        "    }\n" +
+        "\n" +
+        "    /**\n" +
+        "     * Predicate which matches the country of a location, does not take the state into the consideration.\n" +
+        "     * For considering also the state use {@link #byLocation(io.sphere.sdk.zones.Location)}.\n" +
+        "     * @param countryCode the country to query for\n" +
+        "     * @return query with the same values but a predicate searching for a specific country\n" +
+        "     */\n" +
+        "    default ZoneQuery byCountry(final CountryCode countryCode) {\n" +
+        "        return withPredicates(m -> m.locations().country().is(countryCode));\n" +
+        "    }\n" +
+        "\n" +
+        "    /**\n" +
+        "     * Predicate which matches the country and state of a location.\n" +
+        "     *\n" +
+        "     * For ignoring the state use {@link #byCountry(com.neovisionaries.i18n.CountryCode)}.\n" +
+        "     * @param location the location to query for\n" +
+        "     * @return query with the same values but a predicate searching for a specific location\n" +
+        "     */\n" +
+        "    default ZoneQuery byLocation(final Location location) {\n" +
+        "        final QueryPredicate<Zone> predicate =\n" +
+        "                Optional.ofNullable(location.getState())\n" +
+        "                        .map(state -> ZoneQueryModel.of().locations().where(l -> l.country().is(location.getCountry()).and(l.state().is(state))))\n" +
+        "                        .orElseGet(() -> ZoneQueryModel.of().locations().where(l -> l.country().is(location.getCountry()).and(l.state().isNotPresent())));\n" +
+        "        return withPredicates(predicate);\n" +
+        "    }")
+@ResourceInfo(pluralName = "zones", pathElement = "zones", commonImports = {
+        "com.neovisionaries.i18n.CountryCode",
+        "io.sphere.sdk.zones.Location"
+})
 public interface Zone extends Resource<Zone> {
 
     String getName();
