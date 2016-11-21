@@ -5,13 +5,13 @@ import io.sphere.sdk.test.IntegrationTest;
 import org.junit.Test;
 
 import static io.sphere.sdk.reviews.ReviewFixtures.withReview;
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
-public class ReviewByIdGetIntegrationTest extends IntegrationTest {
+public class ReviewByKeyGetIntegrationTest extends IntegrationTest {
     @Test
     public void execution() {
         withReview(client(), (Review review) -> {
-            final Review loadedReview = client().executeBlocking(ReviewByKeyGet.of(review.getKey()));
+            final Review loadedReview = client().executeBlocking(ReviewByIdGet.of(review.getId()));
             assertThat(loadedReview.getId()).isEqualTo(review.getId());
         });
     }
