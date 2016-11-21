@@ -2,6 +2,8 @@ package io.sphere.sdk.taxcategories;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import io.sphere.sdk.annotations.HasQueryEndpoint;
+import io.sphere.sdk.annotations.ResourceInfo;
 import io.sphere.sdk.annotations.ResourceValue;
 import io.sphere.sdk.carts.CartShippingInfo;
 import io.sphere.sdk.carts.CustomLineItem;
@@ -28,6 +30,11 @@ import java.util.List;
  */
 @JsonDeserialize(as=TaxCategoryImpl.class)
 @ResourceValue
+@HasQueryEndpoint(additionalContentsQueryImpl = "\n" +
+        "    default TaxCategoryQuery byName(final String name) {\n" +
+        "        return withPredicates(m -> m.name().is(name));\n" +
+        "    }")
+@ResourceInfo(pluralName = "tax categories", pathElement = "tax-categories")
 public interface TaxCategory extends Resource<TaxCategory> {
     String getName();
 
