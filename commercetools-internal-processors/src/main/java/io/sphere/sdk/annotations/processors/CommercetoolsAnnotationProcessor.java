@@ -1,21 +1,24 @@
 package io.sphere.sdk.annotations.processors;
 
-import io.sphere.sdk.annotations.ResourceDraftValue;
-
 import javax.annotation.processing.AbstractProcessor;
 import javax.annotation.processing.RoundEnvironment;
 import javax.lang.model.element.Element;
 import javax.lang.model.element.TypeElement;
 import javax.tools.Diagnostic;
 import javax.tools.JavaFileObject;
-import java.io.IOException;
 import java.io.Writer;
 import java.lang.annotation.Annotation;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
-abstract class CommercetoolsAnnotationProcessor extends AbstractProcessor {
+abstract class CommercetoolsAnnotationProcessor<A extends Annotation> extends AbstractProcessor {
+    private final Class<A> clazz;
+
+    protected CommercetoolsAnnotationProcessor(final Class<A> clazz) {
+        this.clazz = clazz;
+    }
+
     public boolean process(Set<? extends TypeElement> annotations, RoundEnvironment roundEnv) {
         Iterator var3 = roundEnv.getElementsAnnotatedWith(getAnnotationClass()).iterator();
 
@@ -34,7 +37,9 @@ abstract class CommercetoolsAnnotationProcessor extends AbstractProcessor {
         }
     }
 
-    protected abstract Class<? extends Annotation> getAnnotationClass();
+    protected final Class<? extends Annotation> getAnnotationClass() {
+        return clazz;
+    }
 
     protected abstract void generate(TypeElement typeElement);
 

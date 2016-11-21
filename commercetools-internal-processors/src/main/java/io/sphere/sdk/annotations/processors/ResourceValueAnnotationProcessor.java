@@ -6,20 +6,17 @@ import javax.annotation.processing.SupportedAnnotationTypes;
 import javax.annotation.processing.SupportedSourceVersion;
 import javax.lang.model.SourceVersion;
 import javax.lang.model.element.TypeElement;
-import java.lang.annotation.Annotation;
 
 @SupportedAnnotationTypes({"io.sphere.sdk.annotations.ResourceValue"})
 @SupportedSourceVersion(SourceVersion.RELEASE_8)
-public final class ResourceValueAnnotationProcessor extends CommercetoolsAnnotationProcessor {
+public final class ResourceValueAnnotationProcessor extends CommercetoolsAnnotationProcessor<ResourceValue> {
 
-    @Override
-    protected Class<? extends Annotation> getAnnotationClass() {
-        return ResourceValue.class;
+    public ResourceValueAnnotationProcessor() {
+        super(ResourceValue.class);
     }
 
     @Override
     protected void generate(final TypeElement typeElement) {
         writeClass(typeElement, new ResourceValueImplClassModelFactory(typeElement).createClassModel());
     }
-
 }

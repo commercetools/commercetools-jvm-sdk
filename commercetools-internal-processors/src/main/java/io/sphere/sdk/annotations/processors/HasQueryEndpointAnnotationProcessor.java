@@ -16,7 +16,11 @@ import static java.util.Arrays.asList;
 
 @SupportedAnnotationTypes({"io.sphere.sdk.annotations.HasQueryEndpoint"})
 @SupportedSourceVersion(SourceVersion.RELEASE_8)
-public final class HasQueryEndpointAnnotationProcessor extends CommercetoolsAnnotationProcessor {
+public final class HasQueryEndpointAnnotationProcessor extends CommercetoolsAnnotationProcessor<HasQueryEndpoint> {
+
+    public HasQueryEndpointAnnotationProcessor() {
+        super(HasQueryEndpoint.class);
+    }
 
     @Override
     protected void generate(final TypeElement typeElement) {
@@ -42,9 +46,5 @@ public final class HasQueryEndpointAnnotationProcessor extends CommercetoolsAnno
         final HasQueryEndpoint queryInfo = typeElement.getAnnotation(HasQueryEndpoint.class);
         map.put("extras", asList(queryInfo.additionalContentsQueryInterface()));
         return map;
-    }
-
-    protected Class<? extends Annotation> getAnnotationClass() {
-        return HasQueryEndpoint.class;
     }
 }
