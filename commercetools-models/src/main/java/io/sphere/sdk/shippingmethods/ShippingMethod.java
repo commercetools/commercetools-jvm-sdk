@@ -2,6 +2,7 @@ package io.sphere.sdk.shippingmethods;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import io.sphere.sdk.annotations.HasByIdGetEndpoint;
 import io.sphere.sdk.annotations.HasQueryEndpoint;
 import io.sphere.sdk.annotations.ResourceInfo;
 import io.sphere.sdk.carts.CartShippingInfo;
@@ -44,6 +45,7 @@ import static java.util.stream.Collectors.toList;
         "        return withPredicates(m -> m.isDefault().is(true));\n" +
         "    }")
 @ResourceInfo(pluralName = "shipping methods", pathElement = "shipping-methods")
+@HasByIdGetEndpoint(javadocSummary = "Fetches a shipping method by ID.", includeExamples = "io.sphere.sdk.shippingmethods.queries.ShippingMethodByIdGetIntegrationTest#execution()")
 public interface ShippingMethod extends Resource<ShippingMethod> {
     String getName();
 
