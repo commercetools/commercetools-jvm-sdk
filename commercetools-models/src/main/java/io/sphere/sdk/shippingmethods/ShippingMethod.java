@@ -31,7 +31,18 @@ import static java.util.stream.Collectors.toList;
  * @see io.sphere.sdk.orders.OrderShippingInfo#getShippingMethod()
  */
 @JsonDeserialize(as = ShippingMethodImpl.class)
-@HasQueryEndpoint()
+@HasQueryEndpoint(additionalContentsQueryImpl = "\n" +
+        "    default ShippingMethodQuery byName(final String name) {\n" +
+        "        return withPredicates(ShippingMethodQueryModel.of().name().is(name));\n" +
+        "    }\n" +
+        "\n" +
+        "    default ShippingMethodQuery byTaxCategory(final io.sphere.sdk.models.Referenceable<io.sphere.sdk.taxcategories.TaxCategory> taxCategory) {\n" +
+        "        return withPredicates(m -> m.taxCategory().is(taxCategory));\n" +
+        "    }\n" +
+        "\n" +
+        "    default ShippingMethodQuery byIsDefault() {\n" +
+        "        return withPredicates(m -> m.isDefault().is(true));\n" +
+        "    }")
 @ResourceInfo(pluralName = "shipping methods", pathElement = "shipping-methods")
 public interface ShippingMethod extends Resource<ShippingMethod> {
     String getName();
