@@ -19,4 +19,8 @@ public interface InventoryEntryQueryModel extends ResourceQueryModel<InventoryEn
 
     @Override
     CustomQueryModel<InventoryEntry> custom();
+
+    static InventoryEntryQueryModel of() {
+        return InventoryEntryQueryModelImpl.of();
+    }
 }
