@@ -27,6 +27,7 @@ public class IntrospectionUtils {
                     .filter(name -> !name.contains("io.sphere.sdk.client.metrics."))
                     .filter(name -> !name.contains("io.sphere.sdk.client.metrics."))
                     .filter(name -> !name.contains("AsyncRetrySupervisor"))
+                    .filter(name -> !name.contains("io.sphere.sdk.annotations.processors"))
                     .map(name -> {
                         try {
                             return Class.forName(name);

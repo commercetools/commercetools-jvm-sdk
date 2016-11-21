@@ -19,6 +19,7 @@ public class PublicConstructorsAreTheExceptionRule extends ConstructorStrategyRu
                     "io.sphere.sdk.http.HttpClientAdapterBase," +
                     "io.sphere.sdk.products.attributes.DefaultProductAttributeFormatter," +
                     "io.sphere.sdk.search.model.TermFilterExpression," +
+                    "io.sphere.sdk.utils.JavaMoneySphereClientModule," +
                     "io.sphere.sdk.client.SolutionInfo").split(",( )?"));
 
     @Override
