@@ -2,6 +2,7 @@ package io.sphere.sdk.categories;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import io.sphere.sdk.annotations.HasByIdGetEndpoint;
 import io.sphere.sdk.annotations.HasQueryEndpoint;
 import io.sphere.sdk.annotations.ResourceInfo;
 import io.sphere.sdk.annotations.ResourceValue;
@@ -57,6 +58,7 @@ import java.util.List;
         "        return withPredicates(m -> m.externalId().is(externalId));\n" +
         "    }"})
 @ResourceInfo(pluralName = "categories", pathElement = "categories")
+@HasByIdGetEndpoint(javadocSummary = "Retrieves a category by a known ID.", includeExamples = "io.sphere.sdk.categories.queries.CategoryByIdGetIntegrationTest#execution()")
 public interface Category extends Resource<Category>, WithLocalizedSlug, MetaAttributes, Custom {
 
     /**
