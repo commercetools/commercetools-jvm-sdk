@@ -32,7 +32,7 @@ public abstract class ProductProjectionSearchModelIntegrationTest extends Integr
     protected static ProductType productType;
 
     private static final boolean expectAggregations = Optional.ofNullable(System.getenv("EXPECT_AGGREGATIONS"))
-            .map("false"::equals).orElse(true);
+            .map("true"::equals).orElse(true);
 
     @Rule
     public RetryIntegrationTest retry = new RetryIntegrationTest(10, 10000, LoggerFactory.getLogger(this.getClass()));
