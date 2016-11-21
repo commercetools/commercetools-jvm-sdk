@@ -3,6 +3,7 @@ package io.sphere.sdk.orders;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.neovisionaries.i18n.CountryCode;
+import io.sphere.sdk.annotations.HasByIdGetEndpoint;
 import io.sphere.sdk.annotations.HasQueryEndpoint;
 import io.sphere.sdk.annotations.ResourceInfo;
 import io.sphere.sdk.annotations.ResourceValue;
@@ -47,6 +48,7 @@ import java.util.Set;
         "        return withPredicates(m -> m.customerEmail().is(customerEmail));\n" +
         "    }"})
 @ResourceInfo(pluralName = "orders", pathElement = "orders")
+@HasByIdGetEndpoint(javadocSummary = "Gets an order by ID.", includeExamples = "io.sphere.sdk.orders.commands.OrderFromCartCreateCommandIntegrationTest#execution()")
 public interface Order extends CartLike<Order> {
     /**
      * An identifier for this resource which supports {@link CustomFields}.
