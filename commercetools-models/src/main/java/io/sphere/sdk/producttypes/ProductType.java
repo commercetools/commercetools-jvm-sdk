@@ -2,6 +2,8 @@ package io.sphere.sdk.producttypes;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import io.sphere.sdk.annotations.HasQueryEndpoint;
+import io.sphere.sdk.annotations.ResourceInfo;
 import io.sphere.sdk.annotations.ResourceValue;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Resource;
@@ -25,6 +27,15 @@ import java.util.Optional;
  */
 @JsonDeserialize(as=ProductTypeImpl.class)
 @ResourceValue
+@HasQueryEndpoint(additionalContentsQueryImpl = "\n" +
+        "    default ProductTypeQuery byName(String name) {\n" +
+        "        return withPredicates(m -> m.name().is(name));\n" +
+        "    }\n" +
+        "\n" +
+        "    default ProductTypeQuery byKey(String key) {\n" +
+        "        return withPredicates(m -> m.key().is(key));\n" +
+        "    }")
+@ResourceInfo(pluralName = "product types", pathElement = "product-types")
 public interface ProductType extends Resource<ProductType>, AttributeDefinitionContainer, WithKey {
 
     String getName();
