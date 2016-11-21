@@ -3,6 +3,8 @@ package io.sphere.sdk.reviews;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import io.sphere.sdk.annotations.HasQueryEndpoint;
+import io.sphere.sdk.annotations.ResourceInfo;
 import io.sphere.sdk.annotations.ResourceValue;
 import io.sphere.sdk.customers.Customer;
 import io.sphere.sdk.models.Reference;
@@ -71,6 +73,8 @@ import java.util.Locale;
  */
 @JsonDeserialize(as = ReviewImpl.class)
 @ResourceValue
+@HasQueryEndpoint()
+@ResourceInfo(pluralName = "reviews", pathElement = "reviews")
 public interface Review extends Resource<Review>, Custom, WithKey {
     /**
      * The name of the author which created this review or null.
