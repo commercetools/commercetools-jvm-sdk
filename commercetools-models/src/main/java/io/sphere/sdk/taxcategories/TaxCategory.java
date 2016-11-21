@@ -2,6 +2,7 @@ package io.sphere.sdk.taxcategories;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import io.sphere.sdk.annotations.HasByIdGetEndpoint;
 import io.sphere.sdk.annotations.HasQueryEndpoint;
 import io.sphere.sdk.annotations.ResourceInfo;
 import io.sphere.sdk.annotations.ResourceValue;
@@ -35,6 +36,7 @@ import java.util.List;
         "        return withPredicates(m -> m.name().is(name));\n" +
         "    }")
 @ResourceInfo(pluralName = "tax categories", pathElement = "tax-categories")
+@HasByIdGetEndpoint(javadocSummary = "Fetches a tax category by a known ID.", includeExamples = "io.sphere.sdk.taxcategories.queries.TaxCategoryByIdGetIntegrationTest#execution()")
 public interface TaxCategory extends Resource<TaxCategory> {
     String getName();
 
