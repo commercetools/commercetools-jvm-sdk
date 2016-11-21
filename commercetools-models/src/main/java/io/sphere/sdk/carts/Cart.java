@@ -3,6 +3,7 @@ package io.sphere.sdk.carts;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.neovisionaries.i18n.CountryCode;
+import io.sphere.sdk.annotations.HasByIdGetEndpoint;
 import io.sphere.sdk.annotations.HasQueryEndpoint;
 import io.sphere.sdk.annotations.ResourceInfo;
 import io.sphere.sdk.annotations.ResourceValue;
@@ -37,6 +38,7 @@ import java.util.List;
 @ResourceValue
 @HasQueryEndpoint()
 @ResourceInfo(pluralName = "carts", pathElement = "carts")
+@HasByIdGetEndpoint(javadocSummary = "Gets a cart by ID.", includeExamples = "io.sphere.sdk.carts.queries.CartByIdGetIntegrationTest#fetchById()")
 public interface Cart extends CartLike<Cart> {
 
     /**
