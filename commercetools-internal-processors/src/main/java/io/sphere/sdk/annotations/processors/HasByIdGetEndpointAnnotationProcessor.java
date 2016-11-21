@@ -24,6 +24,7 @@ public final class HasByIdGetEndpointAnnotationProcessor extends HasByFieldGetEn
         final HasByIdGetEndpoint annotation = typeElement.getAnnotation(HasByIdGetEndpoint.class);
         final List<String> examples = Arrays.asList(annotation.includeExamples());
         map.put("includeExamples", examples);
+        map.put("isForId", true);
         map.put("javadocSummary", annotation.javadocSummary());
     }
 }
