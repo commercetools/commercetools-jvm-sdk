@@ -2,6 +2,8 @@ package io.sphere.sdk.payments;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import io.sphere.sdk.annotations.HasQueryEndpoint;
+import io.sphere.sdk.annotations.ResourceInfo;
 import io.sphere.sdk.annotations.ResourceValue;
 import io.sphere.sdk.customers.Customer;
 import io.sphere.sdk.models.Reference;
@@ -30,6 +32,8 @@ import java.util.List;
  */
 @JsonDeserialize(as = PaymentImpl.class)
 @ResourceValue
+@HasQueryEndpoint()
+@ResourceInfo(pluralName = "payments", pathElement = "payments")
 public interface Payment extends Resource<Payment>, Custom {
     @Nullable
     Reference<Customer> getCustomer();
