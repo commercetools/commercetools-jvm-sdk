@@ -9,14 +9,17 @@ import io.sphere.sdk.search.MetaModelSearchDslImpl;
 
 import javax.annotation.Nullable;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
-import static io.sphere.sdk.products.search.PriceSelectionQueryParameters.*;
+import static io.sphere.sdk.products.search.PriceSelectionQueryParameters.extractPriceSelectionFromHttpQueryParameters;
+import static io.sphere.sdk.products.search.PriceSelectionQueryParameters.getQueryParametersWithPriceSelection;
 import static java.util.Collections.singletonList;
 
 final class ProductProjectionSearchImpl extends MetaModelSearchDslImpl<ProductProjection, ProductProjectionSearch, ProductProjectionSortSearchModel,
         ProductProjectionFilterSearchModel, ProductProjectionFacetSearchModel, ProductProjectionExpansionModel<ProductProjection>> implements ProductProjectionSearch {
+
+    private static final String MARK_MATCHING_VARIANTS = "markMatchingVariants";
 
     ProductProjectionSearchImpl(final ProductProjectionType productProjectionType){
         super("/product-projections/search", ProductProjectionSearch.resultTypeReference(), ProductProjectionSearchModel.of().sort(),
@@ -37,6 +40,27 @@ final class ProductProjectionSearchImpl extends MetaModelSearchDslImpl<ProductPr
     public ProductProjectionSearch withPriceSelection(@Nullable final PriceSelection priceSelection) {
         final List<NameValuePair> resultingParameters = getQueryParametersWithPriceSelection(priceSelection, additionalQueryParameters());
         return withAdditionalQueryParameters(resultingParameters);
+    }
+
+    @Override
+    public ProductProjectionSearch withMarkingMatchingVariants(final Boolean markMatchingVariants) {
+        final Stream<NameValuePair> oldQueryParametersStream = additionalQueryParameters().stream()
+                .filter(p -> !MARK_MATCHING_VARIANTS.equals(p.getName()));
+        final Stream<NameValuePair> parameter = markMatchingVariants == null
+                ? Stream.empty()
+                : Stream.of(NameValuePair.of(MARK_MATCHING_VARIANTS, markMatchingVariants.toString()));
+        final List<NameValuePair> parameters = Stream.concat(oldQueryParametersStream, parameter).collect(Collectors.toList());
+        return withAdditionalQueryParameters(parameters);
+    }
+
+    @Nullable
+    @Override
+    public Boolean isMarkingMatchingVariants() {
+        return additionalQueryParameters().stream()
+                .filter(p -> MARK_MATCHING_VARIANTS.equals(p.getName()))
+                .map(p -> Boolean.parseBoolean(p.getValue()))
+                .findFirst()
+                .orElse(null);
     }
 
     @Nullable
