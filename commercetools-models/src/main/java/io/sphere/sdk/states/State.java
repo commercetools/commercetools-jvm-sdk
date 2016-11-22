@@ -4,6 +4,9 @@ package io.sphere.sdk.states;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import io.sphere.sdk.annotations.HasByIdGetEndpoint;
+import io.sphere.sdk.annotations.HasQueryEndpoint;
+import io.sphere.sdk.annotations.ResourceInfo;
 import io.sphere.sdk.annotations.ResourceValue;
 import io.sphere.sdk.carts.ItemState;
 import io.sphere.sdk.models.LocalizedString;
@@ -31,6 +34,11 @@ import java.util.Set;
  */
 @JsonDeserialize(as = StateImpl.class)
 @ResourceValue
+@HasQueryEndpoint(additionalContentsQueryInterface = "    default StateQuery byKey(final String key) {\n" +
+        "        return withPredicates(StateQueryModel.of().key().is(key));\n" +
+        "    }")
+@ResourceInfo(pluralName = "states", pathElement = "states")
+@HasByIdGetEndpoint
 public interface State extends Resource<State>, WithKey {
 
     String getKey();

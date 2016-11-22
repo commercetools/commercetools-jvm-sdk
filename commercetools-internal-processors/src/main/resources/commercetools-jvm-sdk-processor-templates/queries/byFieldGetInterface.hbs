@@ -1,0 +1,43 @@
+package {{package}}.queries;
+
+import io.sphere.sdk.expansion.ExpansionPath;
+import io.sphere.sdk.queries.MetaModelGetDsl;
+import {{package}}.{{resourceName}};
+import {{package}}.expansion.{{resourceName}}ExpansionModel;
+import io.sphere.sdk.models.Identifiable;
+
+import java.util.List;
+
+/**
+ * {{{javadocSummary}}}
+
+    {{#if includeExamples}}
+        {{#each includeExamples}}
+   {@include.example {{{this}}} }
+        {{/each}}
+
+    {{/if}}
+ */
+public interface {{resourceName}}{{endpointSuffix}} extends MetaModelGetDsl<{{resourceName}}, {{resourceName}}, {{resourceName}}{{endpointSuffix}}, {{resourceName}}ExpansionModel<{{resourceName}}>> {
+    static {{resourceName}}{{endpointSuffix}} of(final String {{fieldName}}) {
+        return new {{resourceName}}{{endpointSuffix}}Impl({{fieldName}});
+    }
+
+{{#if isForId}}
+    static {{resourceName}}{{endpointSuffix}} of(final Identifiable<{{resourceName}}> resource) {
+        return of(resource.getId());
+    }
+{{/if}}
+
+    @Override
+    List<ExpansionPath<{{resourceName}}>> expansionPaths();
+
+    @Override
+    {{resourceName}}{{endpointSuffix}} plusExpansionPaths(final ExpansionPath<{{resourceName}}> expansionPath);
+
+    @Override
+    {{resourceName}}{{endpointSuffix}} withExpansionPaths(final ExpansionPath<{{resourceName}}> expansionPath);
+
+    @Override
+    {{resourceName}}{{endpointSuffix}} withExpansionPaths(final List<ExpansionPath<{{resourceName}}>> expansionPaths);
+}

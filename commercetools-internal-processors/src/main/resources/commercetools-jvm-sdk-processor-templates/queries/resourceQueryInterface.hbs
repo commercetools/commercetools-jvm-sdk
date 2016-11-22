@@ -1,0 +1,107 @@
+package {{package}}.queries;
+
+import com.fasterxml.jackson.core.type.TypeReference;
+import {{package}}.{{resourceName}};
+import {{package}}.expansion.{{resourceName}}ExpansionModel;
+import io.sphere.sdk.expansion.ExpansionPathContainer;
+import io.sphere.sdk.queries.PagedQueryResult;
+import io.sphere.sdk.queries.MetaModelQueryDsl;
+import io.sphere.sdk.queries.QueryPredicate;
+import io.sphere.sdk.queries.QuerySort;
+
+{{#if commonImports}}
+//common imports
+    {{#each commonImports}}
+import {{this}};
+    {{/each}}
+{{/if}}
+
+import java.util.List;
+import java.util.Locale;
+import java.util.function.Function;
+import java.util.Optional;
+
+/**
+ * {@doc.gen summary {{resourcePluralName}}
+ */
+public interface {{resourceName}}Query extends MetaModelQueryDsl<{{resourceName}}, {{resourceName}}Query, {{resourceName}}QueryModel, {{resourceName}}ExpansionModel<{{resourceName}}>> {
+
+    /**
+     * Creates a container which contains the full Java type information to deserialize the query result (NOT this class) from JSON.
+     *
+     * @see io.sphere.sdk.json.SphereJsonUtils#readObject(byte[], TypeReference)
+     * @see io.sphere.sdk.json.SphereJsonUtils#readObject(String, TypeReference)
+     * @see io.sphere.sdk.json.SphereJsonUtils#readObject(com.fasterxml.jackson.databind.JsonNode, TypeReference)
+     * @see io.sphere.sdk.json.SphereJsonUtils#readObjectFromResource(String, TypeReference)
+     *
+     * @return type reference
+     */
+    static TypeReference<PagedQueryResult<{{resourceName}}>> resultTypeReference() {
+        return new TypeReference<PagedQueryResult<{{resourceName}}>>() {
+            @Override
+            public String toString() {
+                return "TypeReference<PagedQueryResult<{{resourceName}}>>";
+            }
+        };
+    }
+
+    static {{resourceName}}Query of() {
+        return new {{resourceName}}QueryImpl();
+    }
+
+    @Override
+    {{resourceName}}Query plusPredicates(final Function<{{resourceName}}QueryModel, QueryPredicate<{{resourceName}}>> m);
+
+    @Override
+    {{resourceName}}Query plusPredicates(final QueryPredicate<{{resourceName}}> queryPredicate);
+
+    @Override
+    {{resourceName}}Query plusPredicates(final List<QueryPredicate<{{resourceName}}>> queryPredicates);
+
+    @Override
+    {{resourceName}}Query plusSort(final Function<{{resourceName}}QueryModel, QuerySort<{{resourceName}}>> m);
+
+    @Override
+    {{resourceName}}Query plusSort(final List<QuerySort<{{resourceName}}>> sort);
+
+    @Override
+    {{resourceName}}Query plusSort(final QuerySort<{{resourceName}}> sort);
+
+    @Override
+    {{resourceName}}Query withPredicates(final Function<{{resourceName}}QueryModel, QueryPredicate<{{resourceName}}>> predicateFunction);
+
+    @Override
+    {{resourceName}}Query withPredicates(final QueryPredicate<{{resourceName}}> queryPredicate);
+
+    @Override
+    {{resourceName}}Query withPredicates(final List<QueryPredicate<{{resourceName}}>> queryPredicates);
+
+    @Override
+    {{resourceName}}Query withSort(final Function<{{resourceName}}QueryModel, QuerySort<{{resourceName}}>> m);
+
+    @Override
+    {{resourceName}}Query withSort(final List<QuerySort<{{resourceName}}>> sort);
+
+    @Override
+    {{resourceName}}Query withSort(final QuerySort<{{resourceName}}> sort);
+
+    @Override
+    {{resourceName}}Query withSortMulti(final Function<{{resourceName}}QueryModel, List<QuerySort<{{resourceName}}>>> m);
+
+    @Override
+    {{resourceName}}Query plusExpansionPaths(final Function<{{resourceName}}ExpansionModel<{{resourceName}}>, ExpansionPathContainer<{{resourceName}}>> m);
+
+    @Override
+    {{resourceName}}Query withExpansionPaths(final Function<{{resourceName}}ExpansionModel<{{resourceName}}>, ExpansionPathContainer<{{resourceName}}>> m);
+
+    @Override
+    {{resourceName}}Query withFetchTotal(final boolean fetchTotal);
+
+    @Override
+    {{resourceName}}Query withLimit(final Long limit);
+
+    @Override
+    {{resourceName}}Query withOffset(final Long offset);
+
+    {{#each extras}}{{this}}{{/each}}
+}

@@ -1,20 +1,24 @@
 package io.sphere.sdk.annotations.processors;
 
-import io.sphere.sdk.annotations.ResourceDraftValue;
-
 import javax.annotation.processing.AbstractProcessor;
 import javax.annotation.processing.RoundEnvironment;
 import javax.lang.model.element.Element;
 import javax.lang.model.element.TypeElement;
 import javax.tools.Diagnostic;
 import javax.tools.JavaFileObject;
-import java.io.IOException;
 import java.io.Writer;
 import java.lang.annotation.Annotation;
 import java.util.Iterator;
+import java.util.Map;
 import java.util.Set;
 
-abstract class CommercetoolsAnnotationProcessor extends AbstractProcessor {
+abstract class CommercetoolsAnnotationProcessor<A extends Annotation> extends AbstractProcessor {
+    private final Class<A> clazz;
+
+    protected CommercetoolsAnnotationProcessor(final Class<A> clazz) {
+        this.clazz = clazz;
+    }
+
     public boolean process(Set<? extends TypeElement> annotations, RoundEnvironment roundEnv) {
         Iterator var3 = roundEnv.getElementsAnnotatedWith(getAnnotationClass()).iterator();
 
@@ -33,17 +37,27 @@ abstract class CommercetoolsAnnotationProcessor extends AbstractProcessor {
         }
     }
 
-    protected abstract Class<? extends Annotation> getAnnotationClass();
+    protected final Class<? extends Annotation> getAnnotationClass() {
+        return clazz;
+    }
 
     protected abstract void generate(TypeElement typeElement);
 
+    protected final void writeClass(final TypeElement typeElement, final String fullyQualifiedName, final String template, final Map<String, Object> values) {
+        writeClass(typeElement, fullyQualifiedName, writer -> Templates.write(template, values, writer));
+    }
+
     protected final void writeClass(final TypeElement typeElement, final ClassModel classModel) {
+        writeClass(typeElement, classModel.getFullyQualifiedName(), writer -> Templates.writeClass(classModel, writer));
+    }
+
+    protected final void writeClass(final TypeElement typeElement, final String fullyQualifiedName, final CheckedConsumer<Writer> writerCheckedConsumer) {
         try {
-            JavaFileObject fileObject = this.processingEnv.getFiler().createSourceFile(classModel.getFullyQualifiedName(), new Element[]{typeElement});
+            JavaFileObject fileObject = this.processingEnv.getFiler().createSourceFile(fullyQualifiedName, new Element[]{typeElement});
             Writer writer = fileObject.openWriter();
             Throwable t = null;
             try {
-                Templates.writeClass(classModel, writer);
+                writerCheckedConsumer.accept(writer);
             } catch (Throwable throwable) {
                 t = throwable;
                 throw throwable;
@@ -60,8 +74,12 @@ abstract class CommercetoolsAnnotationProcessor extends AbstractProcessor {
                     }
                 }
             }
-        } catch (IOException e) {
+        } catch (Throwable e) {
             this.processingEnv.getMessager().printMessage(Diagnostic.Kind.ERROR, e.getMessage());
         }
+    }
+
+    public interface CheckedConsumer<T> {
+        void accept(T t) throws Throwable;
     }
 }

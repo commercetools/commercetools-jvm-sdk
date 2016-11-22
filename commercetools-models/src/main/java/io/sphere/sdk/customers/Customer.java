@@ -4,6 +4,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import io.sphere.sdk.annotations.HasByIdGetEndpoint;
+import io.sphere.sdk.annotations.HasQueryEndpoint;
+import io.sphere.sdk.annotations.ResourceInfo;
 import io.sphere.sdk.annotations.ResourceValue;
 import io.sphere.sdk.carts.Cart;
 import io.sphere.sdk.customergroups.CustomerGroup;
@@ -114,6 +117,11 @@ import java.util.Optional;
  */
 @JsonDeserialize(as = CustomerImpl.class)
 @ResourceValue
+@HasQueryEndpoint(additionalContentsQueryInterface = "    default CustomerQuery byEmail(final String email) {\n" +
+        "        return withPredicates(m -> m.lowercaseEmail().is(email.toLowerCase()));\n" +
+        "    }")
+@ResourceInfo(pluralName = "customers", pathElement = "customers")
+@HasByIdGetEndpoint(javadocSummary = "Fetches a customer by a known ID.", includeExamples = "io.sphere.sdk.customers.queries.CustomerByIdGetIntegrationTest#execution()")
 public interface Customer extends Resource<Customer>, Custom {
     /**
      * Gets the ID of this customer.

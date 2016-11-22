@@ -1,0 +1,17 @@
+package {{package}}.queries;
+
+import io.sphere.sdk.queries.MetaModelGetDslBuilder;
+import io.sphere.sdk.queries.MetaModelGetDslImpl;
+import {{package}}.{{resourceName}};
+import {{package}}.expansion.{{resourceName}}ExpansionModel;
+import io.sphere.sdk.client.JsonEndpoint;
+
+final class {{resourceName}}{{endpointSuffix}}Impl extends MetaModelGetDslImpl<{{resourceName}}, {{resourceName}}, {{resourceName}}{{endpointSuffix}}, {{resourceName}}ExpansionModel<{{resourceName}}>> implements {{resourceName}}{{endpointSuffix}} {
+    {{resourceName}}{{endpointSuffix}}Impl(final String {{fieldName}}) {
+        super({{{identifier}}}, JsonEndpoint.of({{resourceName}}.typeReference(), "/{{pathElement}}"), {{resourceName}}ExpansionModel.of(), {{resourceName}}{{endpointSuffix}}Impl::new);
+    }
+
+    public {{resourceName}}{{endpointSuffix}}Impl(final MetaModelGetDslBuilder<{{resourceName}}, {{resourceName}}, {{resourceName}}{{endpointSuffix}}, {{resourceName}}ExpansionModel<{{resourceName}}>> builder) {
+        super(builder);
+    }
+}

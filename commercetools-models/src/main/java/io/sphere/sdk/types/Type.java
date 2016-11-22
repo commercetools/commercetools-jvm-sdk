@@ -2,6 +2,9 @@ package io.sphere.sdk.types;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import io.sphere.sdk.annotations.HasByIdGetEndpoint;
+import io.sphere.sdk.annotations.HasQueryEndpoint;
+import io.sphere.sdk.annotations.ResourceInfo;
 import io.sphere.sdk.annotations.ResourceValue;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Reference;
@@ -27,6 +30,9 @@ import java.util.Set;
  */
 @JsonDeserialize(as = TypeImpl.class)
 @ResourceValue
+@HasQueryEndpoint()
+@ResourceInfo(pluralName = "types", pathElement = "types")
+@HasByIdGetEndpoint
 public interface Type extends Resource<Type>, WithKey {
     String getKey();
 

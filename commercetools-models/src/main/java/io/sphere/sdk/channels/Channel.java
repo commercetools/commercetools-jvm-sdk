@@ -2,6 +2,9 @@ package io.sphere.sdk.channels;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import io.sphere.sdk.annotations.HasByIdGetEndpoint;
+import io.sphere.sdk.annotations.HasQueryEndpoint;
+import io.sphere.sdk.annotations.ResourceInfo;
 import io.sphere.sdk.annotations.ResourceValue;
 import io.sphere.sdk.carts.LineItem;
 import io.sphere.sdk.models.*;
@@ -34,6 +37,11 @@ import java.util.Set;
  */
 @JsonDeserialize(as = ChannelImpl.class)
 @ResourceValue
+@HasQueryEndpoint(additionalContentsQueryInterface = "    default ChannelQuery byKey(final String key) {\n" +
+        "        return withPredicates(m -> m.key().is(key));\n" +
+        "    }")
+@ResourceInfo(pluralName = "channels", pathElement = "channels")
+@HasByIdGetEndpoint(javadocSummary = "Fetches a channel by a known ID.", includeExamples = "io.sphere.sdk.channels.queries.ChannelByIdGetIntegrationTest#execution()")
 public interface Channel extends Resource<Channel>, WithKey, Custom {
     /**
      * Any arbitrary string key that unique identifies this channel within the project.
