@@ -17,7 +17,6 @@ import java.util.Locale;
 import static java.util.stream.Collectors.toList;
 
 @JsonDeserialize(as = ProjectImpl.class)
-@ResourceValue
 public interface Project extends CreationTimestamped, WithKey {
     /**
      * The unique key of the project.
