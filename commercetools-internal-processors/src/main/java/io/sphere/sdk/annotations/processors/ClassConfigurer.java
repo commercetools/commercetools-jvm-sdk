@@ -398,11 +398,12 @@ final class ClassConfigurer {
     private static MethodModel createGetter(final FieldModel field, final TypeElement typeElement) {
         final boolean isBoolean = field.getType().equals("java.lang.Boolean");
         final String methodNameStart = isBoolean ? "is" : "get";
-        final String methodName = methodNameStart + capitalize(field.getName());
+        final String fieldName = field.getName();
+        final String methodName = methodNameStart + capitalize(unescapeJavaKeyword(fieldName));
         final MethodModel method = new MethodModel();
         method.setName(methodName);
         method.setReturnType(field.getType());
-        method.setBody("return " + field.getName() + ";");
+        method.setBody("return " + fieldName + ";");
         method.addModifiers("public");
 
         final List<AnnotationModel> annotationModels = field.getAnnotations()
@@ -424,6 +425,10 @@ final class ClassConfigurer {
         }
         method.setAnnotations(list);
         return method;
+    }
+
+    private static String unescapeJavaKeyword(final String fieldName) {
+        return fieldName.replace("_", "");
     }
 
     private static AnnotationModel overrideAnnotation() {
@@ -514,7 +519,7 @@ final class ClassConfigurer {
         method.setReturnType(builder.getName());
         final List<String> parameterNameList = asList(factoryMethod.parameterNames());
         final String constructorParameters = parametersForInstanceFields(builder, typeElement).stream()
-                .map(p -> parameterNameList.contains(p.getName()) ? p.getName() : null)
+                .map(p -> parameterNameList.contains(unescapeJavaKeyword(p.getName())) ? p.getName() : null)
                 .collect(joining(", "));
         method.setBody("return new " + builder.getName() + "(" + constructorParameters +");");
         builder.addMethod(method);
@@ -525,7 +530,7 @@ final class ClassConfigurer {
                 .map(parameterName -> {
                     final FieldModel field = getField(builder, parameterName);
                     final MethodParameterModel m = new MethodParameterModel();
-                    m.setName(parameterName);
+                    m.setName(escapeJavaKeyword(parameterName));
                     final String type = factoryMethod.useLowercaseBooleans() && field.getType().endsWith(".Boolean")
                             ? "boolean"
                             : field.getType();
@@ -536,16 +541,20 @@ final class ClassConfigurer {
                 .collect(Collectors.toList());
     }
 
+    private static String escapeJavaKeyword(final String parameterName) {
+        return parameterName.replaceAll("^default$", "_default");
+    }
+
     private static FieldModel getField(final ClassModelBuilder builder, final String fieldName) {
         return builder.build().getFields().stream()
-                .filter(f -> f.getName().equals(fieldName))
+                .filter(f -> f.getName().equals(fieldName) || unescapeJavaKeyword(f.getName()).equals(fieldName))
                 .findFirst().orElseThrow(() -> new RuntimeException("field " + fieldName + " not found in " + builder));
     }
 
     private static List<MethodParameterModel> parametersForInstanceFields(final ClassModelBuilder builder, final TypeElement typeElement) {
         return builder.build().getFields().stream()
                 .filter(f -> !f.getModifiers().contains("static"))
-                .sorted(Comparator.comparing(FieldModel::getName))
+                .sorted(Comparator.comparing(fieldModel -> unescapeJavaKeyword(fieldModel.getName())))
                 .map(f -> {
                     final MethodParameterModel p = new MethodParameterModel();
                     p.setModifiers(asList("final"));
@@ -553,7 +562,7 @@ final class ClassConfigurer {
                     p.setName(f.getName());
                     if (f.getType().endsWith("Boolean")) {
                         final Element element = elementStreamIncludingInterfaces(typeElement)
-                                .filter(t -> t.getSimpleName().toString().equals("is" + capitalize(f.getName())))
+                                .filter(t -> t.getSimpleName().toString().equals("is" + capitalize(unescapeJavaKeyword(f.getName()))))
                                 .filter(t -> t.getAnnotation(JsonProperty.class) != null)
                                 .findFirst()
                                 .orElseThrow(() -> new RuntimeException("Boolean getter '" + f.getName() + "' for " + typeElement + " needs @JsonProperty annotation to find the right name"));
@@ -571,7 +580,7 @@ final class ClassConfigurer {
     }
 
     private static String witherNameFromGetter(final Element element) {
-        return "with" + capitalize(fieldNameFromGetter(element));
+        return "with" + capitalize(unescapeJavaKeyword(fieldNameFromGetter(element)));
     }
 
     private static void addBuilderMethod(final Element element, final ClassModelBuilder builder) {
@@ -580,7 +589,7 @@ final class ClassConfigurer {
 
         if (method.getParameters().get(0).getType().equals("java.lang.Boolean") && !method.getName().startsWith("is")) {
             final MethodModel methodStartingWithIs = createMethodModelForBuilderMethod(element, builder);
-            final String newName = "is" + capitalize(method.getName());
+            final String newName = "is" + capitalize(unescapeJavaKeyword(method.getName()));
             methodStartingWithIs.setName(newName);
             builder.addMethod(methodStartingWithIs);
         }
@@ -633,7 +642,7 @@ final class ClassConfigurer {
         final String firstPartGetterName = methodName.startsWith("get") ? "get" : "is";
         final String s1 = methodName.toString().replaceAll("^" + firstPartGetterName, "");
         final String s = ("" + s1.charAt(0)).toLowerCase() + s1.substring(1);
-        return StringUtils.substringBefore(s, "(");
+        return escapeJavaKeyword(StringUtils.substringBefore(s, "("));
     }
 
     private static String getType(final Element element) {

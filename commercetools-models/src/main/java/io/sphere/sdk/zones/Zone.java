@@ -3,6 +3,7 @@ package io.sphere.sdk.zones;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.neovisionaries.i18n.CountryCode;
+import io.sphere.sdk.annotations.ResourceValue;
 import io.sphere.sdk.models.Resource;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.shippingmethods.ShippingMethod;
@@ -23,6 +24,7 @@ import java.util.Set;
  * @see ZoneRate#getZone()
  */
 @JsonDeserialize(as = ZoneImpl.class)
+@ResourceValue
 public interface Zone extends Resource<Zone> {
 
     String getName();
