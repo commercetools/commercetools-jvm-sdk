@@ -12,6 +12,7 @@ import java.util.List;
  *
  * @see RelativeProductDiscountValue
  * @see AbsoluteProductDiscountValue
+ * @see ExternalProductDiscountValue
  */
 @JsonTypeInfo(
         use = JsonTypeInfo.Id.NAME,
@@ -19,7 +20,9 @@ import java.util.List;
         property = "type")
 @JsonSubTypes({
         @JsonSubTypes.Type(value = RelativeProductDiscountValue.class, name = "relative"),
-        @JsonSubTypes.Type(value = AbsoluteProductDiscountValue.class, name = "absolute") })
+        @JsonSubTypes.Type(value = AbsoluteProductDiscountValue.class, name = "absolute"),
+        @JsonSubTypes.Type(value = ExternalProductDiscountValue.class, name = "external")
+})
 public interface ProductDiscountValue {
     static AbsoluteProductDiscountValue ofAbsolute(final List<MonetaryAmount> money) {
         return AbsoluteProductDiscountValue.of(money);
@@ -31,5 +34,9 @@ public interface ProductDiscountValue {
 
     static RelativeProductDiscountValue ofRelative(final int permyriad) {
         return RelativeProductDiscountValue.of(permyriad);
+    }
+
+    static ExternalProductDiscountValue ofExternal() {
+        return ExternalProductDiscountValue.of();
     }
 }

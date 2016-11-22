@@ -8,6 +8,7 @@ import io.sphere.sdk.client.BlockingSphereClient;
 import io.sphere.sdk.commands.UpdateAction;
 import io.sphere.sdk.messages.queries.MessageQuery;
 import io.sphere.sdk.models.*;
+import io.sphere.sdk.productdiscounts.*;
 import io.sphere.sdk.products.*;
 import io.sphere.sdk.products.attributes.AttributeAccess;
 import io.sphere.sdk.products.attributes.AttributeDraft;
@@ -43,6 +44,7 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import static io.sphere.sdk.models.DefaultCurrencyUnits.EUR;
+import static io.sphere.sdk.productdiscounts.ProductDiscountFixtures.withProductDiscount;
 import static io.sphere.sdk.products.ProductFixtures.*;
 import static io.sphere.sdk.products.ProductProjectionType.STAGED;
 import static io.sphere.sdk.states.StateFixtures.withStateByBuilder;
@@ -1434,6 +1436,29 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
             final ProductVariant masterVariant = updatedProduct.getMasterData().getStaged().getMasterVariant();
             assertThat(masterVariant.getAttribute("size").getValueAsEnumValue()).isEqualTo(EnumValue.of("M", "M"));
             assertThat(masterVariant.getAttribute("color").getValueAsLocalizedEnumValue().getKey()).isEqualTo("red");
+        });
+    }
+
+    @Test
+    public void setDiscountedPrice() {
+        final ProductDiscountPredicate predicate = ProductDiscountPredicate.of("1 = 1");//can be used for all products
+        final ProductDiscountDraft productDiscountDraft = ProductDiscountDraft.of(randomSlug(), randomSlug(),
+                predicate, ExternalProductDiscountValue.of(), randomSortOrder(), true);
+        //don't forget that one product discount can be used for multiple products
+        withProductDiscount(client(), productDiscountDraft, externalProductDiscount -> {
+            withProductOfPrices(client(), singletonList(PriceDraft.of(EURO_40)), product -> {
+                final Price originalPrice = product.getMasterData().getStaged().getMasterVariant().getPrices().get(0);
+                assertThat(originalPrice.getDiscounted()).isNull();
+
+                final String priceId = originalPrice.getId();
+                final SetDiscountedPrice action =
+                        SetDiscountedPrice.of(priceId, DiscountedPrice.of(EURO_5, externalProductDiscount.toReference()));
+                final Product updatedProduct = client().executeBlocking(ProductUpdateCommand.of(product, action));
+                final Price updatedPrice = updatedProduct.getMasterData().getStaged().getMasterVariant().getPrices().get(0);
+                assertThat(updatedPrice.getValue()).isEqualTo(EURO_40);
+                assertThat(updatedPrice.getDiscounted().getValue()).isEqualTo(EURO_5);
+                assertThat(updatedPrice.getDiscounted().getDiscount()).isEqualTo(externalProductDiscount.toReference());
+            });
         });
     }
 
