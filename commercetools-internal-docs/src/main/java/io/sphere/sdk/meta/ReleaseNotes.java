@@ -93,6 +93,15 @@ import java.util.function.Function;
  </ul>
  -->
 
+ <h3 class=released-version id="v1_7_0">1.7.0 (22.11.2016)</h3>
+ <ul>
+ <li class=new-in-release>For each resource draft builders and implementation classes are generated</li>
+ <li class=new-in-release>{@link io.sphere.sdk.products.commands.updateactions.SetDiscountedPrice}</li>
+ <li class=new-in-release>{@link Address#getExternalId()} </li>
+ <li class=new-in-release>{@link ProductProjectionSearch#withMarkingMatchingVariants(Boolean)}</li>
+ </ul>
+
+
  <h3 class=released-version id="v1_6_0">1.6.0 (21.10.2016)</h3>
  <ul>
  <li class=new-in-release>expansion paths for discounts in line items and custom line items</li>

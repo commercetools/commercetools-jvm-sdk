@@ -218,6 +218,17 @@ public interface ProductProjectionSearch extends MetaModelSearchDsl<ProductProje
      */
     ProductProjectionSearch withPriceSelection(@Nullable final PriceSelection priceSelection);
 
+    /**
+     * Flag to control if the {@link ProductVariant#isMatchingVariant()} should be filled.
+     *
+     * If markMatchingVariants parameter is true those ProductVariants that match the search query have the additional field isMatchingVariant set to true. For the other variants in the same product projection this field is set to false.
+     If markMatchingVariants parameter is false the ProductVariants do not contain the field isMatchingVariant.
+
+     * @param markMatchingVariants flag to populate the {@link ProductVariant#isMatchingVariant()} field
+     * @return this request with updated marking matching variants parameter
+     *
+     * {@include.example io.sphere.sdk.products.search.MatchingVariantsFlagSearchIntegrationTest#disableMatchingVariantsFlag()}
+     */
     ProductProjectionSearch withMarkingMatchingVariants(final Boolean markMatchingVariants);
 
     @Nullable
