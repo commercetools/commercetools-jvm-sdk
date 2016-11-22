@@ -21,4 +21,11 @@ public final class AddressTest {
         final Address address = Address.of(CountryCode.DE).withFax(fax);
         assertThat(address.getFax()).isEqualTo(fax);
     }
+
+    @Test
+    public void externalId() {
+        final String externalId = "030000000";
+        final Address address = Address.of(CountryCode.DE).withExternalId(externalId);
+        assertThat(address.getExternalId()).isEqualTo(externalId);
+    }
 }

@@ -10,7 +10,8 @@
   "addresses": [
     {
       "lastName": "Osgood",
-      "country": "DE"
+      "country": "DE",
+      "externalId": "external-ID-DE"
     },
     {
       "lastName": "Osgood",

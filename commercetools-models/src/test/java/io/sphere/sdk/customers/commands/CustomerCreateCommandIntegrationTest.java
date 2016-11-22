@@ -108,7 +108,8 @@ public class CustomerCreateCommandIntegrationTest extends CustomerIntegrationTes
                 assertThat(customer.getLastName()).isEqualTo("Osgood");
                 assertThat(customer.getCustomerGroup()).isEqualTo(customerGroup.toReference());
                 assertThat(customer.getAddresses()).hasSize(2);
-                assertThat(customer.getDefaultShippingAddress().withId(null)).isEqualTo(Address.of(DE).withLastName("Osgood"));
+                assertThat(customer.getDefaultShippingAddress().withId(null))
+                        .isEqualTo(Address.of(DE).withLastName("Osgood").withExternalId("external-ID-DE"));
             });
         });
 

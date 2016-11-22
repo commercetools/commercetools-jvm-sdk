@@ -81,9 +81,11 @@ public final class Address extends Base {
     final String additionalAddressInfo;
     @Nullable
     final String fax;
+    @Nullable
+    final String externalId;
 
     @JsonCreator
-    private Address(final CountryCode country, @Nullable final String id, @Nullable final String title, @Nullable final String salutation, @Nullable final String firstName, @Nullable final String lastName, @Nullable final String streetName, @Nullable final String streetNumber, @Nullable final String additionalStreetInfo, @Nullable final String postalCode, @Nullable final String city, @Nullable final String region, @Nullable final String state, @Nullable final String company, @Nullable final String department, @Nullable final String building, @Nullable final String apartment, @Nullable final String poBox, @Nullable final String phone, @Nullable final String mobile, @Nullable final String email, @Nullable final String additionalAddressInfo, @Nullable final String fax) {
+    private Address(final CountryCode country, @Nullable final String id, @Nullable final String title, @Nullable final String salutation, @Nullable final String firstName, @Nullable final String lastName, @Nullable final String streetName, @Nullable final String streetNumber, @Nullable final String additionalStreetInfo, @Nullable final String postalCode, @Nullable final String city, @Nullable final String region, @Nullable final String state, @Nullable final String company, @Nullable final String department, @Nullable final String building, @Nullable final String apartment, @Nullable final String poBox, @Nullable final String phone, @Nullable final String mobile, @Nullable final String email, @Nullable final String additionalAddressInfo, @Nullable final String fax, @Nullable final String externalId) {
         this.country = country;
         this.id = id;
         this.title = title;
@@ -107,6 +109,7 @@ public final class Address extends Base {
         this.email = email;
         this.additionalAddressInfo = additionalAddressInfo;
         this.fax = fax;
+        this.externalId = externalId;
     }
 
     @JsonIgnore
@@ -134,6 +137,7 @@ public final class Address extends Base {
         this.email = builder.email;
         this.additionalAddressInfo = builder.additionalAddressInfo;
         this.fax = builder.fax;
+        this.externalId = builder.externalId;
     }
 
     public CountryCode getCountry() {
@@ -250,6 +254,11 @@ public final class Address extends Base {
         return fax;
     }
 
+    @Nullable
+    public String getExternalId() {
+        return externalId;
+    }
+
     public Address withCountry(final CountryCode country) {
         return AddressBuilder.of(this).country(country).build();
     }
@@ -342,6 +351,10 @@ public final class Address extends Base {
         return AddressBuilder.of(this).fax(fax).build();
     }
 
+    public Address withExternalId(@Nullable final String externalId) {
+        return AddressBuilder.of(this).externalId(externalId).build();
+    }
+
     public static Address of(final CountryCode country) {
         Objects.requireNonNull(country);
         return AddressBuilder.of(country).build();
@@ -373,6 +386,7 @@ public final class Address extends Base {
                 ", email=" + email +
                 ", additionalAddressInfo=" + additionalAddressInfo +
                 ", fax=" + fax +
+                ", externalId=" + externalId +
                 '}';
     }
 
