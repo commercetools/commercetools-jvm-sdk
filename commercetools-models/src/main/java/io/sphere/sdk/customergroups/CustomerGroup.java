@@ -2,10 +2,7 @@ package io.sphere.sdk.customergroups;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import io.sphere.sdk.annotations.HasByIdGetEndpoint;
-import io.sphere.sdk.annotations.HasQueryEndpoint;
-import io.sphere.sdk.annotations.ResourceInfo;
-import io.sphere.sdk.annotations.ResourceValue;
+import io.sphere.sdk.annotations.*;
 import io.sphere.sdk.carts.Cart;
 import io.sphere.sdk.customers.Customer;
 import io.sphere.sdk.models.Resource;
@@ -32,6 +29,11 @@ import io.sphere.sdk.models.Reference;
         "    }")
 @ResourceInfo(pluralName = "customer groups", pathElement = "customer-groups")
 @HasByIdGetEndpoint(javadocSummary = "Fetches a customer group based on a known ID.", includeExamples = "io.sphere.sdk.customergroups.queries.CustomerGroupByIdGetIntegrationTest#execution()")
+@HasCreateCommand(javadocSummary = "Creates a new customer group", includeExamples = "io.sphere.sdk.customergroups.commands.CustomerGroupCreateCommandIntegrationTest#execution()", interfaceContents = "static CustomerGroupCreateCommand of(final String groupName) {\n" +
+        "        return of(CustomerGroupDraft.of(groupName));\n" +
+        "    }")
+@HasUpdateCommand(javadocSummary = "Updates a customer group.")
+@HasDeleteCommand(javadocSummary = "Deletes a customer group.", includeExamples = "io.sphere.sdk.customergroups.commands.CustomerGroupDeleteCommandIntegrationTest#execution()")
 public interface CustomerGroup extends Resource<CustomerGroup> {
 
     /**
