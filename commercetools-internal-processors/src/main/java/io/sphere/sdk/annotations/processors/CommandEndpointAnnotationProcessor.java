@@ -38,6 +38,9 @@ public abstract class CommandEndpointAnnotationProcessor<A extends Annotation> e
         map.put("package", ClassConfigurer.packageName(typeElement));
         map.put("resourceName", getResourceName(typeElement));
         final ResourceInfo resourceInfo = typeElement.getAnnotation(ResourceInfo.class);
+        if (resourceInfo == null) {
+            throw new NullPointerException("" + ResourceInfo.class.getSimpleName() + " is missing in " + typeElement);
+        }
         map.put("resourcePluralName", resourceInfo.pluralName());
         map.put("pathElement", resourceInfo.pathElement());
         map.put("commonImports", Arrays.asList(resourceInfo.commonImports()));

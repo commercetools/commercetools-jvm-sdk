@@ -8,6 +8,7 @@ import javax.annotation.processing.SupportedAnnotationTypes;
 import javax.annotation.processing.SupportedSourceVersion;
 import javax.lang.model.SourceVersion;
 import java.lang.annotation.Annotation;
+import java.util.HashMap;
 import java.util.List;
 
 import static java.util.Arrays.asList;
@@ -35,5 +36,10 @@ public class DeleteCommandEndpointAnnotationProcessor<A extends Annotation> exte
     @Override
     protected String javadocSummaryExtraction(final HasDeleteCommand annotation) {
         return annotation.javadocSummary();
+    }
+
+    @Override
+    protected void additions(final HasDeleteCommand annotation, final HashMap<String, Object> map) {
+        map.put("deleteWithKey", annotation.deleteWithKey());
     }
 }

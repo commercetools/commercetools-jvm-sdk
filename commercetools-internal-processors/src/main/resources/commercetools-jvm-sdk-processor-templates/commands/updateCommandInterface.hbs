@@ -31,6 +31,8 @@ public interface {{resourceName}}UpdateCommand extends UpdateCommandDsl<{{resour
         return new {{resourceName}}UpdateCommandImpl(versioned, Collections.singletonList(updateAction));
     }
 
+{{#if updateWithKey}}
+
     static {{resourceName}}UpdateCommand ofKey(final String key, final Long version, final List<? extends UpdateAction<{{resourceName}}>> updateActions) {
         final Versioned<{{resourceName}}> versioned = Versioned.of("key=" + key, version);//hack for simple reuse
         return new {{resourceName}}UpdateCommandImpl(versioned, updateActions);
@@ -39,4 +41,5 @@ public interface {{resourceName}}UpdateCommand extends UpdateCommandDsl<{{resour
     static {{resourceName}}UpdateCommand ofKey(final String key, final Long version, final UpdateAction<{{resourceName}}> updateAction) {
         return ofKey(key, version, Collections.singletonList(updateAction));
     }
+{{/if}}
 }

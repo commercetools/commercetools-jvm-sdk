@@ -21,8 +21,10 @@ public interface {{resourceName}}DeleteCommand extends MetaModelReferenceExpansi
         return new {{resourceName}}DeleteCommandImpl(versioned);
     }
 
+{{#if deleteWithKey}}
     static {{resourceName}}DeleteCommand ofKey(final String key, final Long version) {
         final Versioned<{{resourceName}}> versioned = Versioned.of("key=" + key, version);//hack for simple reuse
         return of(versioned);
     }
+{{/if}}
 }
