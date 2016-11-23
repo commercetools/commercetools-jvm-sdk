@@ -1,0 +1,21 @@
+package {{package}}.commands;
+
+import io.sphere.sdk.commands.MetaModelUpdateCommandDslBuilder;
+import io.sphere.sdk.commands.MetaModelUpdateCommandDslImpl;
+import io.sphere.sdk.commands.UpdateAction;
+import io.sphere.sdk.models.Versioned;
+import {{package}}.{{resourceName}};
+import {{package}}.expansion.{{resourceName}}ExpansionModel;
+import io.sphere.sdk.client.JsonEndpoint;
+
+import java.util.List;
+
+final class {{resourceName}}UpdateCommandImpl extends MetaModelUpdateCommandDslImpl<{{resourceName}}, {{resourceName}}UpdateCommand, {{resourceName}}ExpansionModel<{{resourceName}}>> implements {{resourceName}}UpdateCommand {
+    {{resourceName}}UpdateCommandImpl(final Versioned<{{resourceName}}> versioned, final List<? extends UpdateAction<{{resourceName}}>> updateActions) {
+        super(versioned, updateActions, JsonEndpoint.of({{resourceName}}.typeReference(), "/{{pathElement}}"), {{resourceName}}UpdateCommandImpl::new, {{resourceName}}ExpansionModel.of());
+    }
+
+    {{resourceName}}UpdateCommandImpl(final MetaModelUpdateCommandDslBuilder<{{resourceName}}, {{resourceName}}UpdateCommand, {{resourceName}}ExpansionModel<{{resourceName}}>> builder) {
+        super(builder);
+    }
+}

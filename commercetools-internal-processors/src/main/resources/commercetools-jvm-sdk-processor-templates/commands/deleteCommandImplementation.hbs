@@ -1,0 +1,19 @@
+package {{package}}.commands;
+
+import io.sphere.sdk.commands.MetaModelByIdDeleteCommandBuilder;
+import io.sphere.sdk.commands.MetaModelByIdDeleteCommandImpl;
+import io.sphere.sdk.models.Versioned;
+import {{package}}.{{resourceName}};
+import {{package}}.expansion.{{resourceName}}ExpansionModel;
+import io.sphere.sdk.client.JsonEndpoint;
+
+final class {{resourceName}}DeleteCommandImpl extends MetaModelByIdDeleteCommandImpl<{{resourceName}}, {{resourceName}}DeleteCommand, {{resourceName}}ExpansionModel<{{resourceName}}>> implements {{resourceName}}DeleteCommand {
+    {{resourceName}}DeleteCommandImpl(final Versioned<{{resourceName}}> versioned) {
+        super(versioned, JsonEndpoint.of({{resourceName}}.typeReference(), "/{{pathElement}}"), {{resourceName}}ExpansionModel.of(), {{resourceName}}DeleteCommandImpl::new);
+    }
+
+
+    {{resourceName}}DeleteCommandImpl(final MetaModelByIdDeleteCommandBuilder<{{resourceName}}, {{resourceName}}DeleteCommand, {{resourceName}}ExpansionModel<{{resourceName}}>> builder) {
+        super(builder);
+    }
+}

@@ -1,0 +1,28 @@
+package {{package}}.commands;
+
+import io.sphere.sdk.commands.DeleteCommand;
+import io.sphere.sdk.expansion.MetaModelReferenceExpansionDsl;
+import io.sphere.sdk.models.Versioned;
+import {{package}}.{{resourceName}};
+import {{package}}.expansion.{{resourceName}}ExpansionModel;
+
+/**
+ * {{{javadocSummary}}}
+
+    {{#if includeExamples}}
+        {{#each includeExamples}}
+   {@include.example {{{this}}} }
+        {{/each}}
+
+    {{/if}}
+ */
+public interface {{resourceName}}DeleteCommand extends MetaModelReferenceExpansionDsl<{{resourceName}}, {{resourceName}}DeleteCommand, {{resourceName}}ExpansionModel<{{resourceName}}>>, DeleteCommand<{{resourceName}}> {
+    static {{resourceName}}DeleteCommand of(final Versioned<{{resourceName}}> versioned) {
+        return new {{resourceName}}DeleteCommandImpl(versioned);
+    }
+
+    static {{resourceName}}DeleteCommand ofKey(final String key, final Long version) {
+        final Versioned<{{resourceName}}> versioned = Versioned.of("key=" + key, version);//hack for simple reuse
+        return of(versioned);
+    }
+}

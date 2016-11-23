@@ -1,0 +1,23 @@
+package {{package}}.commands;
+
+import io.sphere.sdk.commands.DraftBasedCreateCommand;
+import io.sphere.sdk.expansion.MetaModelReferenceExpansionDsl;
+import {{package}}.{{resourceName}};
+import {{package}}.{{resourceName}}Draft;
+import {{package}}.expansion.{{resourceName}}ExpansionModel;
+
+/**
+ * {{{javadocSummary}}}
+
+    {{#if includeExamples}}
+        {{#each includeExamples}}
+   {@include.example {{{this}}} }
+        {{/each}}
+
+    {{/if}}
+ */
+public interface {{resourceName}}CreateCommand extends DraftBasedCreateCommand<{{resourceName}}, {{resourceName}}Draft>, MetaModelReferenceExpansionDsl<{{resourceName}}, {{resourceName}}CreateCommand, {{resourceName}}ExpansionModel<{{resourceName}}>> {
+    static {{resourceName}}CreateCommand of(final {{resourceName}}Draft draft) {
+        return new {{resourceName}}CreateCommandImpl(draft);
+    }
+}

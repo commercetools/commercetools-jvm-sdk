@@ -24,8 +24,9 @@ public abstract class CommandEndpointAnnotationProcessor<A extends Annotation> e
     protected void generate(final TypeElement typeElement) {
         final Map<String, Object> values = values(typeElement);
         final String resourceName = getResourceName(typeElement);
+        final String packagePrefix = ClassConfigurer.packageName(typeElement) + ".commands.";
         final List<Pair<String, String>> templates = getClassNameTemplateNameList(resourceName);
-        templates.forEach(p -> writeClass(typeElement, p.getLeft(), p.getRight(), values));
+        templates.forEach(p -> writeClass(typeElement, packagePrefix + p.getLeft(), p.getRight(), values));
     }
 
     protected abstract List<Pair<String, String>> getClassNameTemplateNameList(final String resourceName);

@@ -1,0 +1,42 @@
+package {{package}}.commands;
+
+import io.sphere.sdk.commands.UpdateAction;
+import io.sphere.sdk.commands.UpdateCommandDsl;
+import io.sphere.sdk.expansion.MetaModelReferenceExpansionDsl;
+import io.sphere.sdk.models.Versioned;
+import {{package}}.{{resourceName}};
+import {{package}}.expansion.{{resourceName}}ExpansionModel;
+
+import java.util.Collections;
+import java.util.List;
+
+/**
+* {{{javadocSummary}}}
+
+{@doc.gen list actions}
+
+ {{#if includeExamples}}
+     {{#each includeExamples}}
+{@include.example {{{this}}} }
+     {{/each}}
+
+ {{/if}}
+*/
+public interface {{resourceName}}UpdateCommand extends UpdateCommandDsl<{{resourceName}}, {{resourceName}}UpdateCommand>, MetaModelReferenceExpansionDsl<{{resourceName}}, {{resourceName}}UpdateCommand, {{resourceName}}ExpansionModel<{{resourceName}}>> {
+    static {{resourceName}}UpdateCommand of(final Versioned<{{resourceName}}> versioned, final List<? extends UpdateAction<{{resourceName}}>> updateActions) {
+        return new {{resourceName}}UpdateCommandImpl(versioned, updateActions);
+    }
+
+    static {{resourceName}}UpdateCommand of(final Versioned<{{resourceName}}> versioned, final UpdateAction<{{resourceName}}> updateAction) {
+        return new {{resourceName}}UpdateCommandImpl(versioned, Collections.singletonList(updateAction));
+    }
+
+    static {{resourceName}}UpdateCommand ofKey(final String key, final Long version, final List<? extends UpdateAction<{{resourceName}}>> updateActions) {
+        final Versioned<{{resourceName}}> versioned = Versioned.of("key=" + key, version);//hack for simple reuse
+        return new {{resourceName}}UpdateCommandImpl(versioned, updateActions);
+    }
+
+    static {{resourceName}}UpdateCommand ofKey(final String key, final Long version, final UpdateAction<{{resourceName}}> updateAction) {
+        return ofKey(key, version, Collections.singletonList(updateAction));
+    }
+}

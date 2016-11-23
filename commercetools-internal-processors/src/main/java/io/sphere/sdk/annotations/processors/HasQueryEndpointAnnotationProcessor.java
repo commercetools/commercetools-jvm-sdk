@@ -31,10 +31,6 @@ public final class HasQueryEndpointAnnotationProcessor extends CommercetoolsAnno
         writeClass(typeElement, fullyQualifiedNameQueryInterface + "Builder", "queries/resourceQueryBuilder", values);
     }
 
-    private String getResourceName(final TypeElement typeElement) {
-        return typeElement.getSimpleName().toString();
-    }
-
     private Map<String, Object> queryInterfaceClassValues(final TypeElement typeElement) {
         final HashMap<String, Object> map = new HashMap<>();
         map.put("package", ClassConfigurer.packageName(typeElement));

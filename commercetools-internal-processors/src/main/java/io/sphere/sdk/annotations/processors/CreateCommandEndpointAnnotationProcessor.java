@@ -4,11 +4,16 @@ import io.sphere.sdk.annotations.HasCreateCommand;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 
+import javax.annotation.processing.SupportedAnnotationTypes;
+import javax.annotation.processing.SupportedSourceVersion;
+import javax.lang.model.SourceVersion;
 import java.lang.annotation.Annotation;
 import java.util.List;
 
 import static java.util.Arrays.asList;
 
+@SupportedAnnotationTypes({"io.sphere.sdk.annotations.HasCreateCommand"})
+@SupportedSourceVersion(SourceVersion.RELEASE_8)
 public class CreateCommandEndpointAnnotationProcessor<A extends Annotation> extends CommandEndpointAnnotationProcessor<HasCreateCommand> {
     public CreateCommandEndpointAnnotationProcessor() {
         super(HasCreateCommand.class);
@@ -17,8 +22,8 @@ public class CreateCommandEndpointAnnotationProcessor<A extends Annotation> exte
     @Override
     protected List<Pair<String, String>> getClassNameTemplateNameList(final String resourceName) {
         return asList(
-                ImmutablePair.of(resourceName + "CreateCommand", "commands/createCommandInterface.hbs"),
-                ImmutablePair.of(resourceName + "CreateCommandImpl", "commands/createCommandImplementation.hbs")
+                ImmutablePair.of(resourceName + "CreateCommand", "commands/createCommandInterface"),
+                ImmutablePair.of(resourceName + "CreateCommandImpl", "commands/createCommandImplementation")
         );
     }
 
