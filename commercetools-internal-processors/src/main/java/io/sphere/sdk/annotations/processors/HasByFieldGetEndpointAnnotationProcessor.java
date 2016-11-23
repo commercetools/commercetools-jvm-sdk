@@ -1,6 +1,5 @@
 package io.sphere.sdk.annotations.processors;
 
-import io.sphere.sdk.annotations.HasByIdGetEndpoint;
 import io.sphere.sdk.annotations.ResourceInfo;
 
 import javax.annotation.processing.SupportedAnnotationTypes;
@@ -10,7 +9,6 @@ import javax.lang.model.element.TypeElement;
 import java.lang.annotation.Annotation;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import static org.apache.commons.lang3.StringUtils.*;
@@ -24,11 +22,6 @@ public abstract class HasByFieldGetEndpointAnnotationProcessor<A extends Annotat
     protected HasByFieldGetEndpointAnnotationProcessor(final Class<A> clazz, final String endpointSuffix) {
         super(clazz);
         this.endpointSuffix = endpointSuffix;
-    }
-
-
-    protected final String getResourceName(final TypeElement typeElement) {
-        return typeElement.getSimpleName().toString();
     }
 
     @Override

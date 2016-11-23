@@ -13,7 +13,7 @@ import java.util.Map;
 import java.util.Set;
 
 abstract class CommercetoolsAnnotationProcessor<A extends Annotation> extends AbstractProcessor {
-    private final Class<A> clazz;
+    protected final Class<A> clazz;
 
     protected CommercetoolsAnnotationProcessor(final Class<A> clazz) {
         this.clazz = clazz;
@@ -81,5 +81,9 @@ abstract class CommercetoolsAnnotationProcessor<A extends Annotation> extends Ab
 
     public interface CheckedConsumer<T> {
         void accept(T t) throws Throwable;
+    }
+
+    protected final String getResourceName(final TypeElement typeElement) {
+        return typeElement.getSimpleName().toString();
     }
 }
