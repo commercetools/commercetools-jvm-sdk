@@ -8,6 +8,7 @@ import javax.annotation.processing.SupportedAnnotationTypes;
 import javax.annotation.processing.SupportedSourceVersion;
 import javax.lang.model.SourceVersion;
 import java.lang.annotation.Annotation;
+import java.util.HashMap;
 import java.util.List;
 
 import static java.util.Arrays.asList;
@@ -30,6 +31,11 @@ public class CreateCommandEndpointAnnotationProcessor<A extends Annotation> exte
     @Override
     protected String[] includeExamplesExtraction(final HasCreateCommand annotation) {
         return annotation.includeExamples();
+    }
+
+    @Override
+    protected void additions(final HasCreateCommand annotation, final HashMap<String, Object> map) {
+        map.put("interfaceContents", asList(annotation.interfaceContents()));
     }
 
     @Override

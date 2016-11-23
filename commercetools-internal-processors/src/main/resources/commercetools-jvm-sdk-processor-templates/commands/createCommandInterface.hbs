@@ -20,4 +20,7 @@ public interface {{resourceName}}CreateCommand extends DraftBasedCreateCommand<{
     static {{resourceName}}CreateCommand of(final {{resourceName}}Draft draft) {
         return new {{resourceName}}CreateCommandImpl(draft);
     }
+
+
+    {{#each interfaceContents}}{{this}}{{/each}}
 }

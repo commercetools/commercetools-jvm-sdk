@@ -13,6 +13,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static java.util.Arrays.asList;
+
 @SupportedSourceVersion(SourceVersion.RELEASE_8)
 public abstract class CommandEndpointAnnotationProcessor<A extends Annotation> extends CommercetoolsAnnotationProcessor<A> {
 
@@ -45,7 +47,12 @@ public abstract class CommandEndpointAnnotationProcessor<A extends Annotation> e
         map.put("includeExamples", examples);
         map.put("isForId", true);
         map.put("javadocSummary", javadocSummaryExtraction(annotation));
+        additions(annotation, map);
         return map;
+    }
+
+    protected void additions(final A annotation, final HashMap<String, Object> map) {
+
     }
 
     protected abstract String[] includeExamplesExtraction(final A annotation);
