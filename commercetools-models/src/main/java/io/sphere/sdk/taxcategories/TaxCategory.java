@@ -2,10 +2,7 @@ package io.sphere.sdk.taxcategories;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import io.sphere.sdk.annotations.HasByIdGetEndpoint;
-import io.sphere.sdk.annotations.HasQueryEndpoint;
-import io.sphere.sdk.annotations.ResourceInfo;
-import io.sphere.sdk.annotations.ResourceValue;
+import io.sphere.sdk.annotations.*;
 import io.sphere.sdk.carts.CartShippingInfo;
 import io.sphere.sdk.carts.CustomLineItem;
 import io.sphere.sdk.models.Resource;
@@ -37,6 +34,9 @@ import java.util.List;
         "    }")
 @ResourceInfo(pluralName = "tax categories", pathElement = "tax-categories")
 @HasByIdGetEndpoint(javadocSummary = "Fetches a tax category by a known ID.", includeExamples = "io.sphere.sdk.taxcategories.queries.TaxCategoryByIdGetIntegrationTest#execution()")
+@HasCreateCommand(javadocSummary = "Creates a tax category.", includeExamples = "io.sphere.sdk.taxcategories.TaxCategoryIntegrationTest#createTaxCategory()")
+@HasUpdateCommand
+@HasDeleteCommand(javadocSummary = "Deletes a tax category.", includeExamples = "io.sphere.sdk.taxcategories.TaxCategoryIntegrationTest#demoForDeletion()")
 public interface TaxCategory extends Resource<TaxCategory> {
     String getName();
 
