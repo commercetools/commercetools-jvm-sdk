@@ -2,10 +2,7 @@ package io.sphere.sdk.types;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import io.sphere.sdk.annotations.HasByIdGetEndpoint;
-import io.sphere.sdk.annotations.HasQueryEndpoint;
-import io.sphere.sdk.annotations.ResourceInfo;
-import io.sphere.sdk.annotations.ResourceValue;
+import io.sphere.sdk.annotations.*;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Resource;
@@ -33,6 +30,9 @@ import java.util.Set;
 @HasQueryEndpoint()
 @ResourceInfo(pluralName = "types", pathElement = "types")
 @HasByIdGetEndpoint
+@HasCreateCommand(includeExamples = "io.sphere.sdk.types.commands.TypeCreateCommandIntegrationTest#execution()")
+@HasUpdateCommand(updateWithKey = true)
+@HasDeleteCommand(deleteWithKey = true)
 public interface Type extends Resource<Type>, WithKey {
     String getKey();
 
