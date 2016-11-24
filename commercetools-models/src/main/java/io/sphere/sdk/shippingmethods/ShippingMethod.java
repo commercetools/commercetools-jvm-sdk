@@ -46,6 +46,9 @@ import static java.util.stream.Collectors.toList;
         "    }")
 @ResourceInfo(pluralName = "shipping methods", pathElement = "shipping-methods")
 @HasByIdGetEndpoint(javadocSummary = "Fetches a shipping method by ID.", includeExamples = "io.sphere.sdk.shippingmethods.queries.ShippingMethodByIdGetIntegrationTest#execution()")
+@HasCreateCommand(javadocSummary = "Creates a {@link io.sphere.sdk.shippingmethods.ShippingMethod}.", includeExamples = "io.sphere.sdk.shippingmethods.commands.ShippingMethodCreateCommandIntegrationTest#execution()")
+@HasUpdateCommand
+@HasDeleteCommand
 public interface ShippingMethod extends Resource<ShippingMethod> {
     String getName();
 
