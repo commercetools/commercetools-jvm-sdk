@@ -86,10 +86,10 @@ public class CustomerCreateCommandIntegrationTest extends CustomerIntegrationTes
         assertThat(customer.findDefaultShippingAddress().get().withId(null)).isEqualTo(addresses.get(1));
         assertThat(customer.getBillingAddressIds())
                 .containsExactly(loadedAddresses.get(0).getId(), loadedAddresses.get(3).getId());
-        assertThat(customer.findBillingAddresses()).extracting(Address::getCountry).containsExactly(DE, FR);
+        assertThat(customer.getBillingAddresses()).extracting(Address::getCountry).containsExactly(DE, FR);
         assertThat(customer.getShippingAddressIds())
                 .containsExactly(loadedAddresses.get(1).getId(), loadedAddresses.get(2).getId());
-        assertThat(customer.findShippingAddresses()).extracting(Address::getCountry).containsExactly(GB, US);
+        assertThat(customer.getShippingAddresses()).extracting(Address::getCountry).containsExactly(GB, US);
         assertThat(customer.getCustomerGroup().getObj())
                 .as("customer group can be expanded")
                 .isNotNull();
@@ -152,5 +152,8 @@ public class CustomerCreateCommandIntegrationTest extends CustomerIntegrationTes
         final Customer customer = customerSignInResult.getCustomer();
         assertThat(customer.getBillingAddressIds()).isNotNull().isEmpty();
         assertThat(customer.getShippingAddressIds()).isNotNull().isEmpty();
+        assertThat(customer.getAddresses()).isNotNull().isEmpty();
+        assertThat(customer.getShippingAddresses()).isNotNull().isEmpty();
+        assertThat(customer.getBillingAddresses()).isNotNull().isEmpty();
     }
 }

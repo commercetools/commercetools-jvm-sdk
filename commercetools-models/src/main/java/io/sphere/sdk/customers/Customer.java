@@ -223,6 +223,7 @@ public interface Customer extends Resource<Customer>, Custom {
      *
      * @return addressbook
      */
+    @Nonnull
     List<Address> getAddresses();
 
     /**
@@ -419,14 +420,14 @@ public interface Customer extends Resource<Customer>, Custom {
     @Nonnull
     List<String> getBillingAddressIds();
 
-    default List<Address> findShippingAddresses() {
+    default List<Address> getShippingAddresses() {
         final Set<String> ids = new HashSet<>(getShippingAddressIds());
         return getAddresses().stream()
                 .filter(id -> ids.contains(id.getId()))
                 .collect(toList());
     }
 
-    default List<Address> findBillingAddresses() {
+    default List<Address> getBillingAddresses() {
         final Set<String> ids = new HashSet<>(getBillingAddressIds());
         return getAddresses().stream()
                 .filter(id -> ids.contains(id.getId()))
