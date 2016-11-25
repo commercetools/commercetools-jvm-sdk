@@ -56,7 +56,7 @@ import java.util.List;
         "    }"})
 @ResourceInfo(pluralName = "categories", pathElement = "categories")
 @HasByIdGetEndpoint(javadocSummary = "Retrieves a category by a known ID.", includeExamples = "io.sphere.sdk.categories.queries.CategoryByIdGetIntegrationTest#execution()")
-@HasCreateCommand(javadocSummary = "Command to create a category.", includeExamples = "io.sphere.sdk.categories.commands.CategoryCreateCommandIntegrationTest#execution()")
+@HasCreateCommand(includeExamples = "io.sphere.sdk.categories.commands.CategoryCreateCommandIntegrationTest#execution()")
 @HasUpdateCommand(javadocSummary = "Updates a category.")
 @HasDeleteCommand(javadocSummary = "Deletes a category.", includeExamples = "io.sphere.sdk.categories.commands.CategoryDeleteCommandIntegrationTest#execution()")
 public interface Category extends Resource<Category>, WithLocalizedSlug, MetaAttributes, Custom {

@@ -29,7 +29,7 @@ import java.util.List;
 @HasQueryEndpoint()
 @ResourceInfo(pluralName = "cart discounts", pathElement = "cart-discounts")
 @HasByIdGetEndpoint(javadocSummary = "Gets a {@link CartDiscount} by a known ID.", includeExamples = "io.sphere.sdk.cartdiscounts.queries.CartDiscountByIdGetIntegrationTest#execution()")
-@HasCreateCommand(javadocSummary = "Creates a {@link CartDiscount}.", includeExamples = "io.sphere.sdk.cartdiscounts.commands.CartDiscountCreateCommandIntegrationTest#execution()")
+@HasCreateCommand(includeExamples = "io.sphere.sdk.cartdiscounts.commands.CartDiscountCreateCommandIntegrationTest#execution()")
 @HasUpdateCommand
 @HasDeleteCommand(javadocSummary = "Deletes a {@link CartDiscount}.")
 public interface CartDiscount extends Resource<CartDiscount> {

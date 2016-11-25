@@ -36,7 +36,7 @@ import java.util.Set;
         "    }")
 @ResourceInfo(pluralName = "states", pathElement = "states")
 @HasByIdGetEndpoint
-@HasCreateCommand(javadocSummary = "Creates a state.", includeExamples = "io.sphere.sdk.states.commands.StateCreateCommandIntegrationTest#execution()")
+@HasCreateCommand(includeExamples = "io.sphere.sdk.states.commands.StateCreateCommandIntegrationTest#execution()")
 @HasUpdateCommand
 @HasDeleteCommand(javadocSummary = "Deletes a state.", includeExamples = "io.sphere.sdk.states.commands.StateDeleteCommandIntegrationTest#execution()")
 public interface State extends Resource<State>, WithKey {

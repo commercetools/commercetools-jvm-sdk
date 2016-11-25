@@ -7,14 +7,14 @@ import {{package}}.{{resourceName}}Draft;
 import {{package}}.expansion.{{resourceName}}ExpansionModel;
 
 /**
- * {{{javadocSummary}}}
-
-    {{#if includeExamples}}
-        {{#each includeExamples}}
+{{#if javadocSummary}}{{{javadocSummary}}}{{else}}Creates a {@link {{resourceName}}{{!}}}.{{/if}}
+{{#if includeExamples}}
+{{#each includeExamples}}
    {@include.example {{{this}}} }
-        {{/each}}
-
-    {{/if}}
+{{/each}}
+{{/if}}
+  @see {{resourceName}}Draft
+  @see {{resourceName}}
  */
 public interface {{resourceName}}CreateCommand extends DraftBasedCreateCommand<{{resourceName}}, {{resourceName}}Draft>, MetaModelReferenceExpansionDsl<{{resourceName}}, {{resourceName}}CreateCommand, {{resourceName}}ExpansionModel<{{resourceName}}>> {
     static {{resourceName}}CreateCommand of(final {{resourceName}}Draft draft) {

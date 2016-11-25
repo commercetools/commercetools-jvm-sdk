@@ -59,7 +59,7 @@ import java.util.Set;
         "io.sphere.sdk.zones.Location"
 })
 @HasByIdGetEndpoint(javadocSummary = "Gets a zone by ID.", includeExamples = "io.sphere.sdk.zones.queries.ZoneByIdGetIntegrationTest#fetchById()")
-@HasCreateCommand(javadocSummary = "Creates a zone.", includeExamples = "io.sphere.sdk.zones.commands.ZoneCreateCommandIntegrationTest#execution()")
+@HasCreateCommand(includeExamples = "io.sphere.sdk.zones.commands.ZoneCreateCommandIntegrationTest#execution()")
 @HasUpdateCommand
 @HasDeleteCommand
 public interface Zone extends Resource<Zone> {
