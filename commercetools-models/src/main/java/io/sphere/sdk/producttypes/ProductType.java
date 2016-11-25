@@ -36,6 +36,25 @@ import java.util.Optional;
 @ResourceInfo(pluralName = "product types", pathElement = "product-types")
 @HasByIdGetEndpoint(javadocSummary = "Retrieves a product type by a known ID.", includeExamples = "io.sphere.sdk.producttypes.queries.ProductTypeByIdGetIntegrationTest#execution()")
 @HasByKeyGetEndpoint(javadocSummary = "Retrieves a product type by a known key.", includeExamples = "io.sphere.sdk.producttypes.queries.ProductTypeByKeyGetIntegrationTest#execution()")
+@HasCreateCommand(javadocSummary = "Command to create a {@link io.sphere.sdk.producttypes.ProductType} in the platform.\n" +
+        "\n" +
+        "\n" +
+        "  <p>{@link io.sphere.sdk.producttypes.ProductType}s can be created in the backend by executing a {@link io.sphere.sdk.producttypes.commands.ProductTypeCreateCommand}:</p>\n" +
+        "\n" +
+        "  {@include.example io.sphere.sdk.producttypes.commands.ProductTypeCreateCommandIntegrationTest#execution()}\n" +
+        "\n" +
+        "  {@include.example io.sphere.sdk.producttypes.Example#createDemo()}\n" +
+        "\n" +
+        "  {@include.example io.sphere.sdk.suppliers.TShirtProductTypeDraftSupplier}\n" +
+        "\n" +
+        "  <p>To create attribute definitions refer to {@link io.sphere.sdk.products.attributes.AttributeDefinition}.</p>")
+@HasUpdateCommand(updateWithKey = true)
+@HasDeleteCommand(javadocSummary = "Deletes a product type.\n" +
+        "\n" +
+        " <p>Delete by ID:</p>\n" +
+        " {@include.example io.sphere.sdk.producttypes.commands.ProductTypeDeleteCommandIntegrationTest#execution()}\n" +
+        " <p>Delete by key:</p>\n" +
+        " {@include.example io.sphere.sdk.producttypes.commands.ProductTypeDeleteCommandIntegrationTest#executionByKey()}", deleteWithKey = true)
 public interface ProductType extends Resource<ProductType>, AttributeDefinitionContainer, WithKey {
 
     String getName();

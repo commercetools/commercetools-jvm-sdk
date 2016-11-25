@@ -3,10 +3,7 @@ package io.sphere.sdk.orders;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.neovisionaries.i18n.CountryCode;
-import io.sphere.sdk.annotations.HasByIdGetEndpoint;
-import io.sphere.sdk.annotations.HasQueryEndpoint;
-import io.sphere.sdk.annotations.ResourceInfo;
-import io.sphere.sdk.annotations.ResourceValue;
+import io.sphere.sdk.annotations.*;
 import io.sphere.sdk.carts.*;
 import io.sphere.sdk.customergroups.CustomerGroup;
 import io.sphere.sdk.discountcodes.DiscountCodeInfo;
@@ -49,6 +46,8 @@ import java.util.Set;
         "    }"})
 @ResourceInfo(pluralName = "orders", pathElement = "orders")
 @HasByIdGetEndpoint(javadocSummary = "Gets an order by ID.", includeExamples = "io.sphere.sdk.orders.commands.OrderFromCartCreateCommandIntegrationTest#execution()")
+@HasUpdateCommand
+@HasDeleteCommand
 public interface Order extends CartLike<Order> {
     /**
      * An identifier for this resource which supports {@link CustomFields}.

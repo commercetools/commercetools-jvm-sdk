@@ -2,10 +2,7 @@ package io.sphere.sdk.categories;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import io.sphere.sdk.annotations.HasByIdGetEndpoint;
-import io.sphere.sdk.annotations.HasQueryEndpoint;
-import io.sphere.sdk.annotations.ResourceInfo;
-import io.sphere.sdk.annotations.ResourceValue;
+import io.sphere.sdk.annotations.*;
 import io.sphere.sdk.models.*;
 import io.sphere.sdk.products.ProductData;
 import io.sphere.sdk.products.ProductProjection;
@@ -59,6 +56,9 @@ import java.util.List;
         "    }"})
 @ResourceInfo(pluralName = "categories", pathElement = "categories")
 @HasByIdGetEndpoint(javadocSummary = "Retrieves a category by a known ID.", includeExamples = "io.sphere.sdk.categories.queries.CategoryByIdGetIntegrationTest#execution()")
+@HasCreateCommand(includeExamples = "io.sphere.sdk.categories.commands.CategoryCreateCommandIntegrationTest#execution()")
+@HasUpdateCommand(javadocSummary = "Updates a category.")
+@HasDeleteCommand(javadocSummary = "Deletes a category.", includeExamples = "io.sphere.sdk.categories.commands.CategoryDeleteCommandIntegrationTest#execution()")
 public interface Category extends Resource<Category>, WithLocalizedSlug, MetaAttributes, Custom {
 
     /**

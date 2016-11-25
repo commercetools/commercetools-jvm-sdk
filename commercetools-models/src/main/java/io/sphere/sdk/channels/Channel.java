@@ -2,10 +2,7 @@ package io.sphere.sdk.channels;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import io.sphere.sdk.annotations.HasByIdGetEndpoint;
-import io.sphere.sdk.annotations.HasQueryEndpoint;
-import io.sphere.sdk.annotations.ResourceInfo;
-import io.sphere.sdk.annotations.ResourceValue;
+import io.sphere.sdk.annotations.*;
 import io.sphere.sdk.carts.LineItem;
 import io.sphere.sdk.models.*;
 import io.sphere.sdk.orders.SyncInfo;
@@ -42,6 +39,16 @@ import java.util.Set;
         "    }")
 @ResourceInfo(pluralName = "channels", pathElement = "channels")
 @HasByIdGetEndpoint(javadocSummary = "Fetches a channel by a known ID.", includeExamples = "io.sphere.sdk.channels.queries.ChannelByIdGetIntegrationTest#execution()")
+@HasCreateCommand(javadocSummary = "Creates a channel.\n" +
+        "\n" +
+        " <p>Example:</p>\n" +
+        " {@include.example io.sphere.sdk.channels.commands.ChannelCreateCommandIntegrationTest#execution()}\n" +
+        "\n" +
+        "\n" +
+        "  <p>Example for creation a channel with custom fields:</p>\n" +
+        "  {@include.example io.sphere.sdk.channels.ChannelCustomFieldsIntegrationTest#createChannelWithCustomType()}")
+@HasUpdateCommand(javadocSummary = "Updates a channel.")
+@HasDeleteCommand(javadocSummary = "Deletes a channel.", includeExamples = "io.sphere.sdk.channels.commands.ChannelDeleteCommandIntegrationTest#execution()")
 public interface Channel extends Resource<Channel>, WithKey, Custom {
     /**
      * Any arbitrary string key that unique identifies this channel within the project.

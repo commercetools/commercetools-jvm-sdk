@@ -3,10 +3,7 @@ package io.sphere.sdk.zones;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.neovisionaries.i18n.CountryCode;
-import io.sphere.sdk.annotations.ResourceValue;
-import io.sphere.sdk.annotations.HasByIdGetEndpoint;
-import io.sphere.sdk.annotations.HasQueryEndpoint;
-import io.sphere.sdk.annotations.ResourceInfo;
+import io.sphere.sdk.annotations.*;
 import io.sphere.sdk.models.Resource;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.shippingmethods.ShippingMethod;
@@ -62,6 +59,9 @@ import java.util.Set;
         "io.sphere.sdk.zones.Location"
 })
 @HasByIdGetEndpoint(javadocSummary = "Gets a zone by ID.", includeExamples = "io.sphere.sdk.zones.queries.ZoneByIdGetIntegrationTest#fetchById()")
+@HasCreateCommand(includeExamples = "io.sphere.sdk.zones.commands.ZoneCreateCommandIntegrationTest#execution()")
+@HasUpdateCommand
+@HasDeleteCommand
 public interface Zone extends Resource<Zone> {
 
     String getName();

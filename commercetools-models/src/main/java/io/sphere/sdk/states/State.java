@@ -4,10 +4,7 @@ package io.sphere.sdk.states;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import io.sphere.sdk.annotations.HasByIdGetEndpoint;
-import io.sphere.sdk.annotations.HasQueryEndpoint;
-import io.sphere.sdk.annotations.ResourceInfo;
-import io.sphere.sdk.annotations.ResourceValue;
+import io.sphere.sdk.annotations.*;
 import io.sphere.sdk.carts.ItemState;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Resource;
@@ -39,6 +36,9 @@ import java.util.Set;
         "    }")
 @ResourceInfo(pluralName = "states", pathElement = "states")
 @HasByIdGetEndpoint
+@HasCreateCommand(includeExamples = "io.sphere.sdk.states.commands.StateCreateCommandIntegrationTest#execution()")
+@HasUpdateCommand
+@HasDeleteCommand(javadocSummary = "Deletes a state.", includeExamples = "io.sphere.sdk.states.commands.StateDeleteCommandIntegrationTest#execution()")
 public interface State extends Resource<State>, WithKey {
 
     String getKey();

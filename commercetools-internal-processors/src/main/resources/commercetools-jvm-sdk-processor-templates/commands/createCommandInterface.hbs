@@ -1,0 +1,32 @@
+package {{package}}.commands;
+
+import io.sphere.sdk.commands.DraftBasedCreateCommand;
+import io.sphere.sdk.expansion.MetaModelReferenceExpansionDsl;
+import {{package}}.{{resourceName}};
+import {{package}}.{{resourceName}}Draft;
+import {{package}}.expansion.{{resourceName}}ExpansionModel;
+
+/**
+{{#if javadocSummary}}{{{javadocSummary}}}{{else}}Command object to create a {@link {{resourceName}}{{!}}}.{{/if}}
+{{#if includeExamples}}
+{{#each includeExamples}}
+   {@include.example {{{this}}} }
+{{/each}}
+{{/if}}
+  @see {{resourceName}}Draft
+  @see {{resourceName}}
+ */
+public interface {{resourceName}}CreateCommand extends DraftBasedCreateCommand<{{resourceName}}, {{resourceName}}Draft>, MetaModelReferenceExpansionDsl<{{resourceName}}, {{resourceName}}CreateCommand, {{resourceName}}ExpansionModel<{{resourceName}}>> {
+
+    /**
+        Creates a command object to create a {@link {{resourceName}}{{!}}}.
+        @param draft template to create the new object
+        @return a new create command
+     */
+    static {{resourceName}}CreateCommand of(final {{resourceName}}Draft draft) {
+        return new {{resourceName}}CreateCommandImpl(draft);
+    }
+
+
+    {{#each interfaceContents}}{{this}}{{/each}}
+}

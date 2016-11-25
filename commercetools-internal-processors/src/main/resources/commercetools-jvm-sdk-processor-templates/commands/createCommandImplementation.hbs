@@ -1,0 +1,18 @@
+package {{package}}.commands;
+
+import io.sphere.sdk.commands.MetaModelCreateCommandBuilder;
+import io.sphere.sdk.commands.MetaModelCreateCommandImpl;
+import {{package}}.{{resourceName}};
+import {{package}}.{{resourceName}}Draft;
+import {{package}}.expansion.{{resourceName}}ExpansionModel;
+import io.sphere.sdk.client.JsonEndpoint;
+
+final class {{resourceName}}CreateCommandImpl extends MetaModelCreateCommandImpl<{{resourceName}}, {{resourceName}}CreateCommand, {{resourceName}}Draft, {{resourceName}}ExpansionModel<{{resourceName}}>> implements {{resourceName}}CreateCommand {
+    {{resourceName}}CreateCommandImpl(final MetaModelCreateCommandBuilder<{{resourceName}}, {{resourceName}}CreateCommand, {{resourceName}}Draft, {{resourceName}}ExpansionModel<{{resourceName}}>> builder) {
+        super(builder);
+    }
+
+    {{resourceName}}CreateCommandImpl(final {{resourceName}}Draft body) {
+        super(body, JsonEndpoint.of({{resourceName}}.typeReference(), "/{{pathElement}}"), {{resourceName}}ExpansionModel.of(), {{resourceName}}CreateCommandImpl::new);
+    }
+}

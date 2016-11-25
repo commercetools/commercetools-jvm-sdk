@@ -1,0 +1,41 @@
+package {{package}}.commands;
+
+import io.sphere.sdk.commands.DeleteCommand;
+import io.sphere.sdk.expansion.MetaModelReferenceExpansionDsl;
+import io.sphere.sdk.models.Versioned;
+import {{package}}.{{resourceName}};
+import {{package}}.expansion.{{resourceName}}ExpansionModel;
+
+/**
+{{#if javadocSummary}}{{{javadocSummary}}}{{else}}Command object to delete a {@link {{resourceName}}{{!}}}.{{/if}}
+{{#if includeExamples}}
+    {{#each includeExamples}}
+        {@include.example {{{this}}} }
+    {{/each}}
+{{/if}}
+@see {{resourceName}}
+ */
+public interface {{resourceName}}DeleteCommand extends MetaModelReferenceExpansionDsl<{{resourceName}}, {{resourceName}}DeleteCommand, {{resourceName}}ExpansionModel<{{resourceName}}>>, DeleteCommand<{{resourceName}}> {
+
+    /**
+        Creates a command object to delete a {@link {{resourceName}}{{!}}} by ID.
+        @param versioned the object to delete (so directly a {@link {{resourceName}}{{!}}}) or just the version/ID information of it
+        @return delete command
+     */
+    static {{resourceName}}DeleteCommand of(final Versioned<{{resourceName}}> versioned) {
+        return new {{resourceName}}DeleteCommandImpl(versioned);
+    }
+
+{{#if deleteWithKey}}
+    /**
+        Creates a command object to delete a {@link {{resourceName}}{{!}}} by its key.
+        @param key the key of the {{resourceName}} to delete, see {@link {{resourceName}}#getKey()}
+        @param version the current version of the {{resourceName}}, see {@link {{resourceName}}#getVersion()}
+        @return delete command
+    */
+    static {{resourceName}}DeleteCommand ofKey(final String key, final Long version) {
+        final Versioned<{{resourceName}}> versioned = Versioned.of("key=" + key, version);//hack for simple reuse
+        return of(versioned);
+    }
+{{/if}}
+}
