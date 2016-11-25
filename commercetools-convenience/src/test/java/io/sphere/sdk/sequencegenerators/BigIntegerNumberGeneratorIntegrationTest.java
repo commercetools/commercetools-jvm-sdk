@@ -11,6 +11,7 @@ import io.sphere.sdk.http.HttpRequest;
 import io.sphere.sdk.http.HttpResponse;
 import io.sphere.sdk.test.IntegrationTest;
 import io.sphere.sdk.utils.CompletableFutureUtils;
+import net.jcip.annotations.NotThreadSafe;
 import org.junit.Test;
 
 import java.math.BigInteger;
@@ -26,6 +27,7 @@ import static io.sphere.sdk.test.SphereTestUtils.randomKey;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.catchThrowable;
 
+@NotThreadSafe
 public class BigIntegerNumberGeneratorIntegrationTest extends IntegrationTest {
 
     @Test
