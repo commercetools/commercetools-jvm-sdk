@@ -1,6 +1,5 @@
 package io.sphere.sdk.customers.commands;
 
-import com.neovisionaries.i18n.CountryCode;
 import io.sphere.sdk.carts.Cart;
 import io.sphere.sdk.carts.CartDraft;
 import io.sphere.sdk.carts.commands.CartCreateCommand;
@@ -15,9 +14,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.time.LocalDate;
-import java.util.Collections;
 import java.util.List;
-import java.util.Locale;
 
 import static com.neovisionaries.i18n.CountryCode.FR;
 import static io.sphere.sdk.customergroups.CustomerGroupFixtures.withB2cCustomerGroup;
@@ -89,8 +86,10 @@ public class CustomerCreateCommandIntegrationTest extends CustomerIntegrationTes
         assertThat(customer.findDefaultShippingAddress().get().withId(null)).isEqualTo(addresses.get(1));
         assertThat(customer.getBillingAddressIds())
                 .containsExactly(loadedAddresses.get(0).getId(), loadedAddresses.get(3).getId());
+        assertThat(customer.findBillingAddresses()).extracting(Address::getCountry).containsExactly(DE, FR);
         assertThat(customer.getShippingAddressIds())
                 .containsExactly(loadedAddresses.get(1).getId(), loadedAddresses.get(2).getId());
+        assertThat(customer.findShippingAddresses()).extracting(Address::getCountry).containsExactly(GB, US);
         assertThat(customer.getCustomerGroup().getObj())
                 .as("customer group can be expanded")
                 .isNotNull();

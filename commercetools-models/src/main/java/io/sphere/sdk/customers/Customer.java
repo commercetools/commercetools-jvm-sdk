@@ -21,9 +21,10 @@ import io.sphere.sdk.types.TypeDraft;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.time.LocalDate;
-import java.util.List;
-import java.util.Locale;
-import java.util.Optional;
+import java.util.*;
+import java.util.stream.Collectors;
+
+import static java.util.stream.Collectors.toList;
 
 /**
  * A customer is a person purchasing products. Carts, Orders and Reviews can be associated to a customer.
@@ -417,4 +418,18 @@ public interface Customer extends Resource<Customer>, Custom {
 
     @Nonnull
     List<String> getBillingAddressIds();
+
+    default List<Address> findShippingAddresses() {
+        final Set<String> ids = new HashSet<>(getShippingAddressIds());
+        return getAddresses().stream()
+                .filter(id -> ids.contains(id.getId()))
+                .collect(toList());
+    }
+
+    default List<Address> findBillingAddresses() {
+        final Set<String> ids = new HashSet<>(getBillingAddressIds());
+        return getAddresses().stream()
+                .filter(id -> ids.contains(id.getId()))
+                .collect(toList());
+    }
 }
