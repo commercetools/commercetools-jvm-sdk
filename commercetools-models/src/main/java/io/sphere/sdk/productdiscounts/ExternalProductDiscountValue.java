@@ -1,5 +1,7 @@
 package io.sphere.sdk.productdiscounts;
 
+import io.sphere.sdk.models.Base;
+
 /**
  *
  * An external discount.
@@ -10,7 +12,7 @@ package io.sphere.sdk.productdiscounts;
  * @see ProductDiscount#getValue()
  * @see io.sphere.sdk.products.commands.updateactions.SetDiscountedPrice
  */
-public final class ExternalProductDiscountValue implements ProductDiscountValue {
+public final class ExternalProductDiscountValue extends Base implements ProductDiscountValue {
 
     private ExternalProductDiscountValue() {
     }
