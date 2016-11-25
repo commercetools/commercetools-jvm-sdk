@@ -11,6 +11,7 @@ import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.products.Price;
 import io.sphere.sdk.products.ProductVariant;
+import io.sphere.sdk.producttypes.ProductType;
 import io.sphere.sdk.taxcategories.TaxRate;
 import io.sphere.sdk.types.CustomFields;
 
@@ -42,8 +43,10 @@ final class LineItemImpl extends LineItemLikeImpl implements LineItem {
     @Nullable
     private final TaxedItemPrice taxedPrice;
     private final LineItemPriceMode priceMode;
+    @Nullable
+    private final Reference<ProductType> productType;
 
-    @JsonCreator
+            @JsonCreator
     LineItemImpl(final String id, final String productId, final LocalizedString name,
                  final JsonNode variant, final Price price, final Long quantity,
                  final Set<ItemState> state, @Nullable final TaxRate taxRate,
@@ -51,12 +54,14 @@ final class LineItemImpl extends LineItemLikeImpl implements LineItem {
                  @Nullable final LocalizedString productSlug, @Nullable final Reference<Channel> distributionChannel,
                  @Nullable final CustomFields custom, final MonetaryAmount totalPrice,
                  final List<DiscountedLineItemPriceForQuantity> discountedPricePerQuantity,
-                 @Nullable final TaxedItemPrice taxedPrice, final LineItemPriceMode priceMode) {
+                 @Nullable final TaxedItemPrice taxedPrice, final LineItemPriceMode priceMode,
+                 @Nullable final Reference<ProductType> productType) {
         super(id, state, quantity, discountedPrice);
         this.productId = productId;
         this.name = name;
         this.taxedPrice = taxedPrice;
-        if (variant instanceof ObjectNode) {
+        this.productType = productType;
+                if (variant instanceof ObjectNode) {
             ((ObjectNode) variant).put("productId", productId);
         }
         this.variant = SphereJsonUtils.readObject(variant, ProductVariant.class);
@@ -140,5 +145,11 @@ final class LineItemImpl extends LineItemLikeImpl implements LineItem {
     @Override
     public LineItemPriceMode getPriceMode() {
         return priceMode;
+    }
+
+    @Override
+    @Nullable
+    public Reference<ProductType> getProductType() {
+        return productType;
     }
 }
