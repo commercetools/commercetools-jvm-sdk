@@ -18,6 +18,7 @@ import io.sphere.sdk.types.Custom;
 import io.sphere.sdk.types.CustomFields;
 import io.sphere.sdk.types.TypeDraft;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.time.LocalDate;
 import java.util.List;
@@ -410,4 +411,10 @@ public interface Customer extends Resource<Customer>, Custom {
 
     @Nullable
     Locale getLocale();
+
+    @Nonnull
+    List<String> getShippingAddressIds();
+
+    @Nonnull
+    List<String> getBillingAddressIds();
 }
