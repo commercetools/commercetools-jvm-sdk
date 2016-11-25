@@ -2,6 +2,7 @@ package io.sphere.sdk.customers.commands;
 
 import io.sphere.sdk.commands.UpdateAction;
 import io.sphere.sdk.customers.Customer;
+import io.sphere.sdk.customers.CustomerDraft;
 import io.sphere.sdk.customers.CustomerIntegrationTest;
 import io.sphere.sdk.customers.CustomerName;
 import io.sphere.sdk.customers.commands.updateactions.*;
@@ -15,10 +16,11 @@ import java.util.List;
 import java.util.Locale;
 import java.util.function.Predicate;
 
+import static com.neovisionaries.i18n.CountryCode.FR;
 import static io.sphere.sdk.customergroups.CustomerGroupFixtures.withB2cCustomerGroup;
-import static io.sphere.sdk.customers.CustomerFixtures.withCustomer;
-import static io.sphere.sdk.customers.CustomerFixtures.withCustomerWithOneAddress;
+import static io.sphere.sdk.customers.CustomerFixtures.*;
 import static io.sphere.sdk.test.SphereTestUtils.*;
+import static java.util.Collections.singletonList;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @NotThreadSafe
@@ -231,6 +233,76 @@ public class CustomerUpdateCommandIntegrationTest extends CustomerIntegrationTes
             assertThat(customer.getLocale()).isNull();
             final Customer updatedCustomer = client().executeBlocking(CustomerUpdateCommand.of(customer, SetLocale.of(Locale.GERMAN)));
             assertThat(updatedCustomer.getLocale()).isEqualTo(GERMAN);
+        });
+    }
+
+    @Test
+    public void addToShippingAddressIds() {
+        final List<Address> addresses = asList(Address.of(DE), Address.of(FR));
+        final CustomerDraft draft = newCustomerDraft().withAddresses(addresses);
+        withCustomer(client(), draft, customer -> {
+            assertThat(customer.getShippingAddressIds()).isEmpty();
+
+            final Address addressForShipping = customer.getAddresses().get(1);
+            final String addressId = addressForShipping.getId();
+            final AddToShippingAddressIds updateAction = AddToShippingAddressIds.of(addressId);
+            final Customer updatedCustomer =
+                    client().executeBlocking(CustomerUpdateCommand.of(customer, updateAction));
+
+            assertThat(updatedCustomer.getShippingAddressIds()).containsExactly(addressId);
+        });
+    }
+    
+    @Test
+    public void addToBillingAddressIds() {
+        final List<Address> addresses = asList(Address.of(DE), Address.of(FR));
+        final CustomerDraft draft = newCustomerDraft().withAddresses(addresses);
+        withCustomer(client(), draft, customer -> {
+            assertThat(customer.getBillingAddressIds()).isEmpty();
+
+            final Address addressForBilling = customer.getAddresses().get(1);
+            final String addressId = addressForBilling.getId();
+            final AddToBillingAddressIds updateAction = AddToBillingAddressIds.of(addressId);
+            final Customer updatedCustomer =
+                    client().executeBlocking(CustomerUpdateCommand.of(customer, updateAction));
+
+            assertThat(updatedCustomer.getBillingAddressIds()).containsExactly(addressId);
+        });
+    }
+
+    @Test
+    public void removeFromBillingAddressIds() {
+        final List<Address> addresses = asList(Address.of(DE), Address.of(FR));
+        final CustomerDraft draft = newCustomerDraft()
+                .withAddresses(addresses)
+                .withBillingAddresses(singletonList(1));
+        withCustomer(client(), draft, customer -> {
+            assertThat(customer.getBillingAddressIds()).isNotEmpty();
+
+            final String addressId = customer.getBillingAddressIds().get(0);
+            final RemoveFromBillingAddressIds updateAction = RemoveFromBillingAddressIds.of(addressId);
+            final Customer updatedCustomer =
+                    client().executeBlocking(CustomerUpdateCommand.of(customer, updateAction));
+
+            assertThat(updatedCustomer.getBillingAddressIds()).isEmpty();
+        });
+    }
+    
+    @Test
+    public void removeFromShippingAddressIds() {
+        final List<Address> addresses = asList(Address.of(DE), Address.of(FR));
+        final CustomerDraft draft = newCustomerDraft()
+                .withAddresses(addresses)
+                .withShippingAddresses(singletonList(1));
+        withCustomer(client(), draft, customer -> {
+            assertThat(customer.getShippingAddressIds()).isNotEmpty();
+
+            final String addressId = customer.getShippingAddressIds().get(0);
+            final RemoveFromShippingAddressIds updateAction = RemoveFromShippingAddressIds.of(addressId);
+            final Customer updatedCustomer =
+                    client().executeBlocking(CustomerUpdateCommand.of(customer, updateAction));
+
+            assertThat(updatedCustomer.getShippingAddressIds()).isEmpty();
         });
     }
 }
