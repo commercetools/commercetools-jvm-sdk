@@ -15,4 +15,9 @@ final class {{resourceName}}CreateCommandImpl extends MetaModelCreateCommandImpl
     {{resourceName}}CreateCommandImpl(final {{resourceName}}Draft body) {
         super(body, JsonEndpoint.of({{resourceName}}.typeReference(), "/{{pathElement}}"), {{resourceName}}ExpansionModel.of(), {{resourceName}}CreateCommandImpl::new);
     }
+
+    @Override
+    public {{resourceName}}CreateCommand withDraft(final {{resourceName}}Draft draft) {
+        return new {{resourceName}}CreateCommandImpl(copyBuilder().draft(draft));
+    }
 }

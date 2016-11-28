@@ -1,6 +1,7 @@
 package io.sphere.sdk.products.commands;
 
 import io.sphere.sdk.commands.DraftBasedCreateCommand;
+import io.sphere.sdk.commands.DraftBasedCreateCommandDsl;
 import io.sphere.sdk.expansion.MetaModelReferenceExpansionDsl;
 import io.sphere.sdk.products.Product;
 import io.sphere.sdk.products.ProductDraft;
@@ -20,7 +21,7 @@ import io.sphere.sdk.products.expansion.ProductExpansionModel;
 
  @see io.sphere.sdk.products.messages.ProductCreatedMessage
  */
-public interface ProductCreateCommand extends DraftBasedCreateCommand<Product, ProductDraft>, MetaModelReferenceExpansionDsl<Product, ProductCreateCommand, ProductExpansionModel<Product>> {
+public interface ProductCreateCommand extends DraftBasedCreateCommandDsl<Product, ProductDraft, ProductCreateCommand>, MetaModelReferenceExpansionDsl<Product, ProductCreateCommand, ProductExpansionModel<Product>> {
     static ProductCreateCommand of(final ProductDraft draft) {
         return new ProductCreateCommandImpl(draft);
     }

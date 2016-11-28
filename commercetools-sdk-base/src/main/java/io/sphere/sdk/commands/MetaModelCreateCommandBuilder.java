@@ -13,7 +13,7 @@ import java.util.function.Function;
 Internal builder.
  */
 public final class MetaModelCreateCommandBuilder<T, C, D, E> extends Base implements Builder<C> {
-    final D body;
+    D body;
     final E expansionModel;
     final JavaType javaType;
     final String endpoint;
@@ -37,6 +37,11 @@ public final class MetaModelCreateCommandBuilder<T, C, D, E> extends Base implem
 
     public MetaModelCreateCommandBuilder<T, C, D, E> expansionPaths(final List<ExpansionPath<T>> expansionPaths) {
         this.expansionPaths = expansionPaths;
+        return this;
+    }
+
+    public MetaModelCreateCommandBuilder<T, C, D, E> draft(final D draft) {
+        this.body = draft;
         return this;
     }
 }
