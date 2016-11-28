@@ -2,6 +2,7 @@ package io.sphere.sdk.meta;
 
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.products.ProductVariantDraftBuilder;
+import io.sphere.sdk.products.attributes.Attribute;
 import io.sphere.sdk.products.attributes.AttributeAccess;
 
 /**
@@ -78,7 +79,15 @@ import io.sphere.sdk.products.attributes.AttributeAccess;
 
  <h3 id="attribute-access-without-product-type">Reading Attributes</h3>
 
- <p>To get a value out of an attribute you need an instance of {@link AttributeAccess}
+ <p>The simplest way to get the value of the attribute is to use {@code getAsType} methods of {@link io.sphere.sdk.products.attributes.Attribute}, like {@link Attribute#getValueAsEnumValue()}:</p>
+
+ {@include.example io.sphere.sdk.attributestutorial.ProductTypeCreationDemoIntegrationTest#readAttributeGetValueAs()}
+
+ <p>If you use a wrong conversion for the attribute, like you have a {@link io.sphere.sdk.models.EnumValue} but extract it as boolean then you get a {@link io.sphere.sdk.json.JsonException}:</p>
+
+ {@include.example io.sphere.sdk.attributestutorial.ProductTypeCreationDemoIntegrationTest#readAttributeGetValueAsWithWrongType()}
+
+ <p>An alternative way to get a value out of an attribute is to use an instance of {@link AttributeAccess}
  which keeps the type info to deserialize the attribute.</p>
 
  <p>You can reuse the {@link io.sphere.sdk.products.attributes.NamedAttributeAccess} declaration if you want to:</p>

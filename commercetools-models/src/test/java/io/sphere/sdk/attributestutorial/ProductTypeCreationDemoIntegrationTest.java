@@ -52,6 +52,7 @@ import static java.util.Locale.US;
 import static java.util.stream.Collectors.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.assertj.core.api.Assertions.catchThrowable;
 
 @NotThreadSafe
 public class ProductTypeCreationDemoIntegrationTest extends IntegrationTest {
@@ -291,6 +292,31 @@ public class ProductTypeCreationDemoIntegrationTest extends IntegrationTest {
 
         final Optional<EnumValue> attributeOption = masterVariant.findAttribute(size);
         assertThat(attributeOption).contains(EnumValue.of("S", "S"));
+    }
+
+    @Test
+    public void readAttributeGetValueAs() throws Exception {
+        final ProductVariant masterVariant = createProduct().getMasterData().getStaged().getMasterVariant();
+
+        final String attributeValue = masterVariant.findAttribute(SIZE_ATTR_NAME)
+                .map((Attribute a) -> {
+                    final EnumValue enumValue = a.getValueAsEnumValue();
+                    return enumValue.getLabel();
+                })
+                .orElse("not found");
+        assertThat(attributeValue).isEqualTo("S");
+    }
+
+    @Test
+    public void readAttributeGetValueAsWithWrongType() throws Exception {
+        final ProductVariant masterVariant = createProduct().getMasterData().getStaged().getMasterVariant();
+
+        final Throwable throwable = catchThrowable(
+                () -> masterVariant.findAttribute(SIZE_ATTR_NAME)
+                        .map((Attribute a) -> a.getValueAsBoolean())
+                        .orElse(true)
+        );
+        assertThat(throwable).isInstanceOf(JsonException.class);
     }
 
     @Test
