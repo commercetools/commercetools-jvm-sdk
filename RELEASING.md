@@ -11,6 +11,7 @@
 1. publish the Javadoc to GitHub pages: `git checkout $(git describe --abbrev=0 --tags) && mvn clean javadoc:aggregate scm-publish:publish-scm -P publish-site && git checkout master`
 1. update GitHub release on https://github.com/commercetools/commercetools-jvm-sdk/releases
 1. add version badges to http://dev.commercetools.com/release-notes.html
+1. update version in the GitHub README
 
 
 ## Rollback on failures
