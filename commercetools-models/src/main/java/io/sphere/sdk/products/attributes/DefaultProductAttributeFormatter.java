@@ -4,10 +4,12 @@ import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.channels.Channel;
 import io.sphere.sdk.models.*;
 import io.sphere.sdk.products.Product;
+import io.sphere.sdk.products.ProductVariant;
 import io.sphere.sdk.producttypes.ProductType;
 import io.sphere.sdk.producttypes.ProductTypeLocalRepository;
 import org.javamoney.moneta.function.MonetaryFunctions;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.money.MonetaryAmount;
 import javax.money.format.MonetaryAmountFormat;
@@ -21,6 +23,7 @@ import java.util.*;
 import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.joining;
+import static java.util.stream.Collectors.toList;
 
 public class DefaultProductAttributeFormatter extends ProductAttributeConverterBase<String> implements ProductAttributeConverter<String> {
     private final List<Locale> locales;
@@ -62,6 +65,65 @@ public class DefaultProductAttributeFormatter extends ProductAttributeConverterB
     @Nullable
     public String format(final Attribute attribute, final Referenceable<ProductType> productType) {
         return convert(attribute, productType);
+    }
+
+    /**
+     * Creates a view model to show a table of attribute translated and formatted labels and values.
+     * @param variant the product variant which holds attributes
+     * @param productType the product type belonging to the product variant
+     * @param attrNamesToShow a list containing the attribute names (the name is used as key) which clafies which attributes are allowed to displayed and also give an order to display them
+     * @return table data
+     */
+    public AttributeTable createAttributesTable(final ProductVariant variant, final Reference<ProductType> productType, final List<String> attrNamesToShow) {
+        final List<AttributeTableRow> rows = variant.getAttributes().stream()
+                .filter(a -> attrNamesToShow.contains(a.getName()))//remove attributes not in whitelist
+                //sort so that the order is like in attrNamesToShow
+                .sorted(Comparator.comparingInt(a -> attrNamesToShow.indexOf(a.getName())))
+                .map(attribute -> createAttributeRow(attribute, productType))
+                .collect(toList());
+        return new AttributeTableImpl(rows);
+    }
+
+    /**
+     * Creates a view model for a single attribute with translated and formatted label and value by requiring a reference to the product type.
+     *
+     * @param attribute the attribute as data source
+     * @param productTypeRef the product type belonging to product containing the attributes
+     * @return row data
+     */
+    @Nullable
+    public AttributeTableRow createAttributeRow(final Attribute attribute, final Referenceable<ProductType> productTypeRef) {
+        return findProductType(productTypeRef)
+                .map(productType -> createAttributeRow(attribute, productType))
+                .orElse(null);
+    }
+
+    /**
+     * Creates a view model for a single attribute with translated and formatted label and value requiring the full product type object.
+     *
+     * @param attribute the attribute as data source
+     * @param productType the product type belonging to product containing the attributes
+     * @return row data
+     */
+    @Nonnull
+    private AttributeTableRow createAttributeRow(final Attribute attribute, final ProductType productType) {
+        final String translatedValue = convertWithProductType(attribute, productType);
+        final String translatedLabel = productType.findAttribute(attribute.getName())
+                .map(ptA -> ptA.getLabel().get(locales))
+                .orElse(null);
+        return new AttributeTableRow() {
+            @Nullable
+            @Override
+            public String getTranslatedValue() {
+                return translatedValue;
+            }
+
+            @Nullable
+            @Override
+            public String getTranslatedLabel() {
+                return translatedLabel;
+            }
+        };
     }
 
     protected Locale locale() {

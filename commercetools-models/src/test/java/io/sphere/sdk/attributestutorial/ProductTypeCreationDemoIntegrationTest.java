@@ -37,10 +37,7 @@ import javax.money.MonetaryAmount;
 import javax.money.format.MonetaryAmountFormat;
 import javax.money.format.MonetaryFormats;
 import java.time.LocalDate;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 import java.util.function.Function;
 
 import static io.sphere.sdk.test.SphereTestUtils.*;
@@ -342,6 +339,25 @@ public class ProductTypeCreationDemoIntegrationTest extends IntegrationTest {
         final Attribute attr = masterVariant.getAttribute(SIZE_ATTR_NAME);
         final JsonNode expectedJsonNode = SphereJsonUtils.toJsonNode(EnumValue.of("S", "S"));
         assertThat(attr.getValue(AttributeAccess.ofJsonNode())).isEqualTo(expectedJsonNode);
+    }
+
+    @Test
+    public void showProductAttributeTableWithDefaultFormatter() throws Exception {
+        final List<String> attrNamesToShow = asList(COLOR_ATTR_NAME, SIZE_ATTR_NAME,
+                MATCHING_PRODUCTS_ATTR_NAME, LAUNDRY_SYMBOLS_ATTR_NAME, RRP_ATTR_NAME, AVAILABLE_SINCE_ATTR_NAME);
+
+        final Product product = createProduct();
+        final ProductProjectionQuery query = ProductProjectionQuery.ofStaged()
+                .withPredicates(m -> m.id().is(product.getId()))
+                .plusExpansionPaths(m -> m.masterVariant().attributes().valueSet())
+                .plusExpansionPaths(m -> m.productType());
+
+        final ProductProjection productProjection = client().executeBlocking(query).head().get();
+
+        final List<ProductType> productTypes = Collections.singletonList(productProjection.getProductType().getObj());
+        final List<Locale> locales = Collections.singletonList(ENGLISH);
+        final DefaultProductAttributeFormatter formatter = DefaultProductAttributeFormatterDemo.createFormatter(productTypes, locales);
+        DefaultProductAttributeFormatterDemo.example(attrNamesToShow, productProjection, formatter);
     }
 
     @Test

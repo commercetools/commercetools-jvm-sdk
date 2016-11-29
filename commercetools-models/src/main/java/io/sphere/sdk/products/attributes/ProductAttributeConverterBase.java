@@ -34,10 +34,13 @@ public abstract class ProductAttributeConverterBase<T> extends Base implements P
     @Nullable
     @Override
     public T convert(final Attribute attribute, final Referenceable<ProductType> productType) {
-
-        final String productTypeId = productType.toReference().getId();
-        final Optional<ProductType> productTypeOptional = productTypes.findById(productTypeId);
+        final Optional<ProductType> productTypeOptional = findProductType(productType);
         return productTypeOptional.map(pt -> convertWithProductType(attribute, pt)).orElse(null);
+    }
+
+    protected Optional<ProductType> findProductType(final Referenceable<ProductType> productType) {
+        final String productTypeId = productType.toReference().getId();
+        return productTypes.findById(productTypeId);
     }
 
     protected T convertWithProductType(final Attribute attribute, final ProductType productType) {
