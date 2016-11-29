@@ -21,4 +21,9 @@ final class CustomerCreateCommandImpl extends MetaModelCreateCommandImpl<Custome
     CustomerCreateCommandImpl(final CustomerDraft body) {
         super(body, CustomerEndpoint.ENDPOINT_SIGNIN_RESULT, CustomerSignInResultExpansionModel.of(), CustomerCreateCommandImpl::new);
     }
+
+    @Override
+    public CustomerCreateCommand withDraft(final CustomerDraft draft) {
+        return new CustomerCreateCommandImpl(copyBuilder().draft(draft));
+    }
 }

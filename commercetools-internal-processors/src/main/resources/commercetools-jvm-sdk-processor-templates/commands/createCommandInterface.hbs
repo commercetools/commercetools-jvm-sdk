@@ -1,6 +1,6 @@
 package {{package}}.commands;
 
-import io.sphere.sdk.commands.DraftBasedCreateCommand;
+import io.sphere.sdk.commands.DraftBasedCreateCommandDsl;
 import io.sphere.sdk.expansion.MetaModelReferenceExpansionDsl;
 import {{package}}.{{resourceName}};
 import {{package}}.{{resourceName}}Draft;
@@ -16,7 +16,7 @@ import {{package}}.expansion.{{resourceName}}ExpansionModel;
   @see {{resourceName}}Draft
   @see {{resourceName}}
  */
-public interface {{resourceName}}CreateCommand extends DraftBasedCreateCommand<{{resourceName}}, {{resourceName}}Draft>, MetaModelReferenceExpansionDsl<{{resourceName}}, {{resourceName}}CreateCommand, {{resourceName}}ExpansionModel<{{resourceName}}>> {
+public interface {{resourceName}}CreateCommand extends DraftBasedCreateCommandDsl<{{resourceName}}, {{resourceName}}Draft, {{resourceName}}CreateCommand>, MetaModelReferenceExpansionDsl<{{resourceName}}, {{resourceName}}CreateCommand, {{resourceName}}ExpansionModel<{{resourceName}}>> {
 
     /**
         Creates a command object to create a {@link {{resourceName}}{{!}}}.

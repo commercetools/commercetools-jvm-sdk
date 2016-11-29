@@ -166,6 +166,17 @@ public class CartCreateCommandIntegrationTest extends IntegrationTest {
         assertThat(cart.getAnonymousId()).isEqualTo(anonymousId);
     }
 
+    @Test
+    public void withDraft() {
+        final CartDraft draft = CartDraftDsl.of(EUR);
+        final CartDraft newDraft = CartDraftDsl.of(USD);
+        final CartCreateCommand prevCmd = CartCreateCommand.of(draft).withExpansionPaths(m -> m.lineItems().state().state().transitions());
+        final CartCreateCommand cmd = prevCmd
+                .withDraft(newDraft);
+        assertThat(cmd.getDraft()).isEqualTo(newDraft);
+        assertThat(cmd.expansionPaths()).isEqualTo(prevCmd.expansionPaths());
+    }
+
     private void testInventoryMode(final InventoryMode inventoryMode) {
         final Cart cart = client().executeBlocking(CartCreateCommand.of(CartDraft.of(EUR).withInventoryMode(inventoryMode)));
         assertThat(cart.getInventoryMode()).isEqualTo(inventoryMode);

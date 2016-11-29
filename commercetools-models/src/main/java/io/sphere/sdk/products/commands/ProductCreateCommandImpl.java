@@ -26,4 +26,9 @@ final class ProductCreateCommandImpl extends MetaModelCreateCommandImpl<Product,
     ProductCreateCommandImpl(final ProductDraft body) {
         super(body, ProductEndpoint.ENDPOINT, ProductExpansionModel.of(), ProductCreateCommandImpl::new);
     }
+
+    @Override
+    public ProductCreateCommand withDraft(final ProductDraft draft) {
+        return new ProductCreateCommandImpl(copyBuilder().draft(draft));
+    }
 }
