@@ -10,7 +10,7 @@ final class QueryModelClassModelFactory extends ClassModelFactory {
 
     @Override
     public ClassModel createClassModel() {
-        return ClassConfigurer.ofSource(typeElement)
+        final ClassModelBuilder builder = ClassConfigurer.ofSource(typeElement)
                 .subPackageFrom(typeElement, "queries")
                 .imports()
                 .defaultImports()
@@ -22,6 +22,9 @@ final class QueryModelClassModelFactory extends ClassModelFactory {
                 .fields()
                 .constructors()
                 .methods()
-                .build();
+                .getBuilder();
+        final QueryModelRules queryModelRules = new QueryModelRules(typeElement, builder);
+        queryModelRules.execute();
+        return builder.build();
     }
 }

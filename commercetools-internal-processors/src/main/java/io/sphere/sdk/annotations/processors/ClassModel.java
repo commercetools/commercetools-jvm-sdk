@@ -17,6 +17,7 @@ final class ClassModel {
     private List<String> imports = new LinkedList<>();
     private List<String> interfaces = new LinkedList<>();
     private String constructorEndContent;
+    private boolean isInterface;
 
     public String getName() {
         return name;
@@ -32,6 +33,7 @@ final class ClassModel {
 
     public void setType(final String type) {
         this.type = type;
+        isInterface = ClassType.INTERFACE.toString().toLowerCase().equals(type);
     }
 
     public List<String> getModifiers() {
@@ -124,5 +126,9 @@ final class ClassModel {
 
     public void setConstructorEndContent(final String constructorEndContent) {
         this.constructorEndContent = constructorEndContent;
+    }
+
+    public boolean isInterface() {
+        return isInterface;
     }
 }

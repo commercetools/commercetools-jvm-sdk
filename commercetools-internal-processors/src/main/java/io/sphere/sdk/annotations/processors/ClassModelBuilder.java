@@ -58,6 +58,11 @@ final class ClassModelBuilder extends Base {
         return this;
     }
 
+    public ClassModelBuilder addInterface(final String interfaceName) {
+        interfaces.add(interfaceName);
+        return this;
+    }
+
     public ClassModelBuilder interfaces(final List<String> interfaces) {
         this.interfaces = interfaces;
         return this;
