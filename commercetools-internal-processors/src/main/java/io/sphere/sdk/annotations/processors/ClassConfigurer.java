@@ -182,11 +182,15 @@ final class ClassConfigurer {
 
         public InterfacesHolder extending(final String baseClassName) {
             builder.setBaseClassName(baseClassName);
-            return new InterfacesHolder(builder, typeElement);
+            return interfaces();
         }
 
         public InterfacesHolder extending(final Class<?> baseClass) {
             return extending(baseClass.getName());
+        }
+
+        public InterfacesHolder interfaces() {
+            return new InterfacesHolder(builder, typeElement);
         }
     }
 

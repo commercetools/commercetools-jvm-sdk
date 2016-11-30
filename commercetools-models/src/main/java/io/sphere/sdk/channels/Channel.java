@@ -49,6 +49,7 @@ import java.util.Set;
         "  {@include.example io.sphere.sdk.channels.ChannelCustomFieldsIntegrationTest#createChannelWithCustomType()}")
 @HasUpdateCommand(javadocSummary = "Updates a channel.")
 @HasDeleteCommand(javadocSummary = "Deletes a channel.", includeExamples = "io.sphere.sdk.channels.commands.ChannelDeleteCommandIntegrationTest#execution()")
+@HasQueryModel
 public interface Channel extends Resource<Channel>, WithKey, Custom {
     /**
      * Any arbitrary string key that unique identifies this channel within the project.
