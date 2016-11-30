@@ -37,7 +37,7 @@ final class QueryModelRules {
         beanMethodRules.add(new GenerateMethodRule());
         queryModelSelectionRules.add(new LocalizedStringQueryModelSelectionRule());
         queryModelSelectionRules.add(new SetOfSphereEnumerationQueryModelSelectionRule());
-        queryModelSelectionRules.add(new SimpleQueryModelSelectionRule("java.lang.String", "StringQuerySortingModel"));
+        queryModelSelectionRules.add(new SimpleQueryModelSelectionRule("java.lang.String", "io.sphere.sdk.queries.StringQuerySortingModel"));
         queryModelSelectionRules.add(new SimpleQueryModelSelectionRule("io.sphere.sdk.reviews.ReviewRatingStatistics", "io.sphere.sdk.reviews.queries.ReviewRatingStatisticsQueryModel"));
         queryModelSelectionRules.add(new SimpleQueryModelSelectionRule("io.sphere.sdk.models.Address", "io.sphere.sdk.queries.AddressQueryModel"));
     }
@@ -130,6 +130,7 @@ final class QueryModelRules {
                     if (isSphereEnumeration) {
                         final String typeParameterName = typeParameterOptional.get().getQualifiedName().toString();
                         methodModel.setReturnType("SphereEnumerationCollectionQueryModel<" + contextType + ", " + typeParameterName + ">");
+                        builder.addImport("io.sphere.sdk.queries.SphereEnumerationCollectionQueryModel");
                         return true;
                     }
                 }
@@ -166,8 +167,7 @@ final class QueryModelRules {
         @Override
         public boolean x(final ExecutableElement beanGetter, final MethodModel methodModel, final String contextType) {
             if (beanGetter.getReturnType().toString().equals(LocalizedString.class.getCanonicalName())) {
-                final boolean optional = beanGetter.getAnnotation(Nullable.class) == null;
-                final String type = optional ? "LocalizedStringOptionalQueryModel" : "LocalizedStringQueryModel";
+                final String type = beanGetter.getAnnotation(Nullable.class) != null ? "io.sphere.sdk.queries.LocalizedStringOptionalQueryModel" : "io.sphere.sdk.queries.LocalizedStringQueryModel";
                 methodModel.setReturnType(type + "<" + contextType + ">");
                 return true;
             }
