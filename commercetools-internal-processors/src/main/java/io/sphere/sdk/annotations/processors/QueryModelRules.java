@@ -37,9 +37,9 @@ final class QueryModelRules {
         beanMethodRules.add(new GenerateMethodRule());
         queryModelSelectionRules.add(new LocalizedStringQueryModelSelectionRule());
         queryModelSelectionRules.add(new SetOfSphereEnumerationQueryModelSelectionRule());
-        queryModelSelectionRules.add(new SimpleQueryModelSelectionRule("java.lang.String", "io.sphere.sdk.queries.StringQuerySortingModel"));
-        queryModelSelectionRules.add(new SimpleQueryModelSelectionRule("io.sphere.sdk.reviews.ReviewRatingStatistics", "io.sphere.sdk.reviews.queries.ReviewRatingStatisticsQueryModel"));
-        queryModelSelectionRules.add(new SimpleQueryModelSelectionRule("io.sphere.sdk.models.Address", "io.sphere.sdk.queries.AddressQueryModel"));
+        queryModelSelectionRules.add(new SimpleQueryModelSelectionRule("java.lang.String", "StringQuerySortingModel"));
+        queryModelSelectionRules.add(new SimpleQueryModelSelectionRule("io.sphere.sdk.reviews.ReviewRatingStatistics", "ReviewRatingStatisticsQueryModel"));
+        queryModelSelectionRules.add(new SimpleQueryModelSelectionRule("io.sphere.sdk.models.Address", "AddressQueryModel"));
     }
 
     void execute() {
@@ -167,7 +167,7 @@ final class QueryModelRules {
         @Override
         public boolean x(final ExecutableElement beanGetter, final MethodModel methodModel, final String contextType) {
             if (beanGetter.getReturnType().toString().equals(LocalizedString.class.getCanonicalName())) {
-                final String type = beanGetter.getAnnotation(Nullable.class) != null ? "io.sphere.sdk.queries.LocalizedStringOptionalQueryModel" : "io.sphere.sdk.queries.LocalizedStringQueryModel";
+                final String type = beanGetter.getAnnotation(Nullable.class) != null ? "LocalizedStringOptionalQueryModel" : "LocalizedStringQueryModel";
                 methodModel.setReturnType(type + "<" + contextType + ">");
                 return true;
             }

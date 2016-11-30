@@ -14,6 +14,8 @@ final class QueryModelClassModelFactory extends ClassModelFactory {
                 .subPackageFrom(typeElement, "queries")
                 .imports()
                 .defaultImports()
+                .addImport("io.sphere.sdk.queries.*")
+                .addImport("io.sphere.sdk.reviews.queries.*")
                 .classJavadoc(null)
                 .modifiers("public")
                 .interfaceType()
