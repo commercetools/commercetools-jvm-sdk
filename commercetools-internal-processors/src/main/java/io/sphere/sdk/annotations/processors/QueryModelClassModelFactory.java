@@ -13,6 +13,7 @@ final class QueryModelClassModelFactory extends ClassModelFactory {
         final ClassModelBuilder builder = ClassConfigurer.ofSource(typeElement)
                 .subPackageFrom(typeElement, "queries")
                 .imports()
+                .addImport("import io.sphere.sdk.queries.")
                 .defaultImports()
                 .classJavadoc(null)
                 .modifiers("public")

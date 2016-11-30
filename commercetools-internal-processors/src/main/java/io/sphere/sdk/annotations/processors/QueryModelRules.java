@@ -33,11 +33,13 @@ final class QueryModelRules {
         this.typeElement = typeElement;
         this.builder = builder;
         interfaceRules.add(new ResourceRule());
+        interfaceRules.add(new CustomFieldsRule());
         beanMethodRules.add(new GenerateMethodRule());
         queryModelSelectionRules.add(new LocalizedStringQueryModelSelectionRule());
         queryModelSelectionRules.add(new SetOfSphereEnumerationQueryModelSelectionRule());
         queryModelSelectionRules.add(new SimpleQueryModelSelectionRule("java.lang.String", "StringQuerySortingModel"));
-        queryModelSelectionRules.add(new SimpleQueryModelSelectionRule("io.sphere.sdk.reviews.ReviewRatingStatistics", "ReviewRatingStatisticsQueryModel"));
+        queryModelSelectionRules.add(new SimpleQueryModelSelectionRule("io.sphere.sdk.reviews.ReviewRatingStatistics", "io.sphere.sdk.reviews.queries.ReviewRatingStatisticsQueryModel"));
+        queryModelSelectionRules.add(new SimpleQueryModelSelectionRule("io.sphere.sdk.models.Address", "io.sphere.sdk.queries.AddressQueryModel"));
     }
 
     void execute() {
@@ -63,7 +65,7 @@ final class QueryModelRules {
                 builder.addImport(ResourceQueryModel.class.getCanonicalName());
                 beanMethodRules.addFirst(new IgnoreStandardResourceFields());
             }
-            return true;
+            return false;
         }
     }
 
@@ -166,10 +168,29 @@ final class QueryModelRules {
             if (beanGetter.getReturnType().toString().equals(LocalizedString.class.getCanonicalName())) {
                 final boolean optional = beanGetter.getAnnotation(Nullable.class) == null;
                 final String type = optional ? "LocalizedStringOptionalQueryModel" : "LocalizedStringQueryModel";
-                methodModel.setReturnType(type);
+                methodModel.setReturnType(type + "<" + contextType + ">");
                 return true;
             }
             return false;
+        }
+    }
+
+    private class CustomFieldsRule extends InterfaceRule {
+        @Override
+        public boolean accept(final ReferenceType typeMirror) {
+            if (typeMirror.toString().equals("io.sphere.sdk.types.Custom")) {
+                builder.addInterface("WithCustomQueryModel");
+                builder.addImport("io.sphere.sdk.types.queries.WithCustomQueryModel");
+                beanMethodRules.addFirst(new IgnoreCustomFields());
+            }
+            return false;
+        }
+    }
+
+    private class IgnoreCustomFields extends BeanMethodRule {
+        @Override
+        public boolean accept(final ExecutableElement beanGetter) {
+            return beanGetter.getSimpleName().toString().equals("getCustom");
         }
     }
 }
