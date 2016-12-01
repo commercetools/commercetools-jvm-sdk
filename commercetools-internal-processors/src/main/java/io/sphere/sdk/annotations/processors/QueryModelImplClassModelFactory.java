@@ -15,7 +15,6 @@ final class QueryModelImplClassModelFactory extends ClassModelFactory {
                 .imports()
                 .defaultImports()
                 .addImport("io.sphere.sdk.queries.*")
-                .addImport("io.sphere.sdk.reviews.queries.*")
                 .classJavadoc(null)
                 .modifiers("final")
                 .classType()
