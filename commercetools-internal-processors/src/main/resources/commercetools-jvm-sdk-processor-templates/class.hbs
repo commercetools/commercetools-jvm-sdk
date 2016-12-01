@@ -2,6 +2,8 @@
 {{#each imports}}
 import {{this}};{{/each}}
 {{#if javadoc}}/** {{javadoc}} */{{/if}}
+{{#if annotations}}{{> annotations annotations}}
+{{/if}}
 {{#each modifiers}}{{this}} {{/each}}{{type}} {{name}}{{#if baseClassName}} extends {{baseClassName}}{{/if}}{{#if interfaces}} {{#if interface}}extends{{else}}implements{{/if}} {{> interfaces interfaces}}{{/if}} {
 {{#each fields}}
     {{~> field this}}

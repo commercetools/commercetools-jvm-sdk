@@ -21,6 +21,7 @@ final class ClassModelBuilder extends Base {
     private final List<String> imports = new LinkedList<>();
     private List<String> interfaces = new LinkedList<>();
     private String constructorEndContent;
+    private List<AnnotationModel> annotations = new LinkedList<>();
 
     public ClassModelBuilder addModifiers(final String modifier, final String ... more) {
         modifiers.add(modifier);
@@ -50,6 +51,7 @@ final class ClassModelBuilder extends Base {
         r.setJavadoc(javadoc);
         r.setAdditions(additions);
         r.setConstructorEndContent(constructorEndContent);
+        r.setAnnotations(annotations);
         return r;
     }
 
@@ -90,6 +92,11 @@ final class ClassModelBuilder extends Base {
 
     public ClassModelBuilder addConstructor(final MethodModel methodModel) {
         constructors.add(methodModel);
+        return this;
+    }
+
+    public ClassModelBuilder addAnnotation(final AnnotationModel annotationModel) {
+        annotations.add(annotationModel);
         return this;
     }
 

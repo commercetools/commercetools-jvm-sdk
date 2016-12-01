@@ -18,6 +18,7 @@ final class ClassModel {
     private List<String> interfaces = new LinkedList<>();
     private String constructorEndContent;
     private boolean isInterface;
+    private List<AnnotationModel> annotations = new LinkedList<>();
 
     public String getName() {
         return name;
@@ -130,5 +131,13 @@ final class ClassModel {
 
     public boolean isInterface() {
         return isInterface;
+    }
+
+    public List<AnnotationModel> getAnnotations() {
+        return annotations;
+    }
+
+    public void setAnnotations(final List<AnnotationModel> annotations) {
+        this.annotations = annotations;
     }
 }

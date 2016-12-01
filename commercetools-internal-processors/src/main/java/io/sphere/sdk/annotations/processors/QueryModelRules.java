@@ -32,6 +32,10 @@ final class QueryModelRules {
     QueryModelRules(final TypeElement typeElement, final ClassModelBuilder builder) {
         this.typeElement = typeElement;
         this.builder = builder;
+        builder.addImport("io.sphere.sdk.annotations.HasQueryModelImplementation");
+        final AnnotationModel a = new AnnotationModel();
+        a.setName("HasQueryModelImplementation");
+        builder.addAnnotation(a);
         interfaceRules.add(new ResourceRule());
         interfaceRules.add(new CustomFieldsRule());
         beanMethodRules.add(new GenerateMethodRule());
@@ -43,7 +47,6 @@ final class QueryModelRules {
     }
 
     void execute() {
-        builder.addImport("TODO");
         builder.addImport(typeElement.getQualifiedName().toString());
         typeElement.getInterfaces().forEach(i -> interfaceRules.stream()
                 .filter(r -> r.accept((ReferenceType)i))
