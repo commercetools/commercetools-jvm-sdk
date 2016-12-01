@@ -19,23 +19,13 @@ import java.util.stream.Collectors;
 
 import static io.sphere.sdk.annotations.processors.ClassConfigurer.createBeanGetterStream;
 import static io.sphere.sdk.annotations.processors.ClassConfigurer.fieldNameFromGetter;
-import static io.sphere.sdk.annotations.processors.ClassConfigurer.getType;
 import static java.util.Arrays.asList;
 
-final class QueryModelRules {
-    private final TypeElement typeElement;
-    private final ClassModelBuilder builder;
-    private final LinkedList<InterfaceRule> interfaceRules = new LinkedList<>();
-    private final LinkedList<BeanMethodRule> beanMethodRules = new LinkedList<>();
+final class QueryModelRules extends GenerationRules {
     private final LinkedList<QueryModelSelectionRule> queryModelSelectionRules = new LinkedList<>();
 
     QueryModelRules(final TypeElement typeElement, final ClassModelBuilder builder) {
-        this.typeElement = typeElement;
-        this.builder = builder;
-        builder.addImport("io.sphere.sdk.annotations.HasQueryModelImplementation");
-        final AnnotationModel a = new AnnotationModel();
-        a.setName("HasQueryModelImplementation");
-        builder.addAnnotation(a);
+        super(typeElement, builder);
         interfaceRules.add(new ResourceRule());
         interfaceRules.add(new CustomFieldsRule());
         beanMethodRules.add(new GenerateMethodRule());
@@ -46,7 +36,12 @@ final class QueryModelRules {
         queryModelSelectionRules.add(new SimpleQueryModelSelectionRule("io.sphere.sdk.models.Address", "AddressQueryModel"));
     }
 
+    @Override
     void execute() {
+        builder.addImport("io.sphere.sdk.annotations.HasQueryModelImplementation");
+        final AnnotationModel a = new AnnotationModel();
+        a.setName("HasQueryModelImplementation");
+        builder.addAnnotation(a);
         builder.addImport(typeElement.getQualifiedName().toString());
         typeElement.getInterfaces().forEach(i -> interfaceRules.stream()
                 .filter(r -> r.accept((ReferenceType)i))
@@ -54,10 +49,6 @@ final class QueryModelRules {
         createBeanGetterStream(typeElement).forEach(beanGetter -> beanMethodRules.stream()
                 .filter(r -> r.accept((ExecutableElement)beanGetter))
                 .findFirst());
-    }
-
-    private abstract class InterfaceRule {
-        public abstract boolean accept(final ReferenceType i);
     }
 
     private class ResourceRule extends InterfaceRule {
@@ -72,15 +63,10 @@ final class QueryModelRules {
         }
     }
 
-    private abstract class BeanMethodRule {
-        public abstract boolean accept(final ExecutableElement beanGetter);
-    }
-
     public class GenerateMethodRule extends BeanMethodRule {
         @Override
         public boolean accept(final ExecutableElement beanGetter) {
             final String fieldName = fieldNameFromGetter(beanGetter);
-            final String type = getType(beanGetter);
             final MethodModel methodModel = new MethodModel();
             methodModel.setName(fieldName);
 

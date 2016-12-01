@@ -24,8 +24,7 @@ final class QueryModelImplClassModelFactory extends ClassModelFactory {
                 .constructors()
                 .methods()
                 .getBuilder();
-//        final QueryModelRules queryModelRules = new QueryModelRules(typeElement, builder);
-//        queryModelRules.execute();
+        new QueryModelImplRules(typeElement, builder).execute();
         return builder.build();
     }
 }
