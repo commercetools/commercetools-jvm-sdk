@@ -1,5 +1,7 @@
 package io.sphere.sdk.annotations.processors;
 
+import org.apache.commons.lang3.StringUtils;
+
 import javax.lang.model.element.ExecutableElement;
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.type.ReferenceType;
@@ -14,6 +16,7 @@ final class QueryModelImplRules extends GenerationRules {
 
     QueryModelImplRules(final TypeElement typeElement, final ClassModelBuilder builder) {
         super(typeElement, builder);
+        builder.addImport(builder.build().getPackageName().replace("queries", "") + getContextType());
         interfaceRules.add(new ExtendCustomResourceQueryModelImplRule());
         beanMethodRules.add(new GenerateMethodRule());
     }
@@ -87,6 +90,7 @@ final class QueryModelImplRules extends GenerationRules {
     }
 
     private String getContextType() {
-        return builder.getName().replace("QueryModelImpl", "");
+        final String name = builder.getName();
+        return name.substring(0, name.indexOf("QueryModel"));
     }
 }
