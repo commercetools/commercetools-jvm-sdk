@@ -8,20 +8,20 @@ import io.sphere.sdk.customers.Customer;
  *
  *  {@doc.gen intro}
  *
- *  {@include.example io.sphere.sdk.customers.commands.CustomerUpdateCommandIntegrationTest#addToBillingAddressIds()}
+ *  {@include.example io.sphere.sdk.customers.commands.CustomerUpdateCommandIntegrationTest#addBillingAddressId()}
  *
  *  @see Customer
  */
-public final class AddToBillingAddressIds extends UpdateActionImpl<Customer> {
+public final class AddBillingAddressId extends UpdateActionImpl<Customer> {
     private final String addressId;
 
-    private AddToBillingAddressIds(final String addressId) {
-        super("addtoBillingAddressIds");
+    private AddBillingAddressId(final String addressId) {
+        super("addBillingAddressId");
         this.addressId = addressId;
     }
 
-    public static AddToBillingAddressIds of(final String addressId) {
-        return new AddToBillingAddressIds(addressId);
+    public static AddBillingAddressId of(final String addressId) {
+        return new AddBillingAddressId(addressId);
     }
 
     public String getAddressId() {

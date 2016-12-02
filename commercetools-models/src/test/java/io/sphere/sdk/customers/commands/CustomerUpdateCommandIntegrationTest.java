@@ -237,7 +237,7 @@ public class CustomerUpdateCommandIntegrationTest extends CustomerIntegrationTes
     }
 
     @Test
-    public void addToShippingAddressIds() {
+    public void addShippingAddressId() {
         final List<Address> addresses = asList(Address.of(DE), Address.of(FR));
         final CustomerDraft draft = newCustomerDraft().withAddresses(addresses);
         withCustomer(client(), draft, customer -> {
@@ -245,7 +245,7 @@ public class CustomerUpdateCommandIntegrationTest extends CustomerIntegrationTes
 
             final Address addressForShipping = customer.getAddresses().get(1);
             final String addressId = addressForShipping.getId();
-            final AddToShippingAddressIds updateAction = AddToShippingAddressIds.of(addressId);
+            final AddShippingAddressIds updateAction = AddShippingAddressIds.of(addressId);
             final Customer updatedCustomer =
                     client().executeBlocking(CustomerUpdateCommand.of(customer, updateAction));
 
@@ -254,7 +254,7 @@ public class CustomerUpdateCommandIntegrationTest extends CustomerIntegrationTes
     }
     
     @Test
-    public void addToBillingAddressIds() {
+    public void addBillingAddressId() {
         final List<Address> addresses = asList(Address.of(DE), Address.of(FR));
         final CustomerDraft draft = newCustomerDraft().withAddresses(addresses);
         withCustomer(client(), draft, customer -> {
@@ -262,7 +262,7 @@ public class CustomerUpdateCommandIntegrationTest extends CustomerIntegrationTes
 
             final Address addressForBilling = customer.getAddresses().get(1);
             final String addressId = addressForBilling.getId();
-            final AddToBillingAddressIds updateAction = AddToBillingAddressIds.of(addressId);
+            final AddBillingAddressId updateAction = AddBillingAddressId.of(addressId);
             final Customer updatedCustomer =
                     client().executeBlocking(CustomerUpdateCommand.of(customer, updateAction));
 
@@ -271,7 +271,7 @@ public class CustomerUpdateCommandIntegrationTest extends CustomerIntegrationTes
     }
 
     @Test
-    public void removeFromBillingAddressIds() {
+    public void removeBillingAddressId() {
         final List<Address> addresses = asList(Address.of(DE), Address.of(FR));
         final CustomerDraft draft = newCustomerDraft()
                 .withAddresses(addresses)
@@ -280,7 +280,7 @@ public class CustomerUpdateCommandIntegrationTest extends CustomerIntegrationTes
             assertThat(customer.getBillingAddressIds()).isNotEmpty();
 
             final String addressId = customer.getBillingAddressIds().get(0);
-            final RemoveFromBillingAddressIds updateAction = RemoveFromBillingAddressIds.of(addressId);
+            final RemoveBillingAddressId updateAction = RemoveBillingAddressId.of(addressId);
             final Customer updatedCustomer =
                     client().executeBlocking(CustomerUpdateCommand.of(customer, updateAction));
 
@@ -289,7 +289,7 @@ public class CustomerUpdateCommandIntegrationTest extends CustomerIntegrationTes
     }
     
     @Test
-    public void removeFromShippingAddressIds() {
+    public void removeShippingAddressId() {
         final List<Address> addresses = asList(Address.of(DE), Address.of(FR));
         final CustomerDraft draft = newCustomerDraft()
                 .withAddresses(addresses)
@@ -298,7 +298,7 @@ public class CustomerUpdateCommandIntegrationTest extends CustomerIntegrationTes
             assertThat(customer.getShippingAddressIds()).isNotEmpty();
 
             final String addressId = customer.getShippingAddressIds().get(0);
-            final RemoveFromShippingAddressIds updateAction = RemoveFromShippingAddressIds.of(addressId);
+            final RemoveShippingAddressId updateAction = RemoveShippingAddressId.of(addressId);
             final Customer updatedCustomer =
                     client().executeBlocking(CustomerUpdateCommand.of(customer, updateAction));
 

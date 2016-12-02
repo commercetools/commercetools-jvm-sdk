@@ -2,9 +2,6 @@ package io.sphere.sdk.customers.commands.updateactions;
 
 import io.sphere.sdk.commands.UpdateActionImpl;
 import io.sphere.sdk.customers.Customer;
-import io.sphere.sdk.models.Address;
-
-import javax.annotation.Nullable;
 
 import static java.lang.String.format;
 
@@ -13,20 +10,20 @@ import static java.lang.String.format;
  *
  *  {@doc.gen intro}
  *
- *  {@include.example io.sphere.sdk.customers.commands.CustomerUpdateCommandIntegrationTest#addToShippingAddressIds()}
+ *  {@include.example io.sphere.sdk.customers.commands.CustomerUpdateCommandIntegrationTest#addShippingAddressId()}
  *
  *  @see Customer
  */
-public final class AddToShippingAddressIds extends UpdateActionImpl<Customer> {
+public final class AddShippingAddressIds extends UpdateActionImpl<Customer> {
     private final String addressId;
 
-    private AddToShippingAddressIds(final String addressId) {
-        super("addToShippingAddressIds");
+    private AddShippingAddressIds(final String addressId) {
+        super("addShippingAddressId");
         this.addressId = addressId;
     }
 
-    public static AddToShippingAddressIds of(final String addressId) {
-        return new AddToShippingAddressIds(addressId);
+    public static AddShippingAddressIds of(final String addressId) {
+        return new AddShippingAddressIds(addressId);
     }
 
     public String getAddressId() {

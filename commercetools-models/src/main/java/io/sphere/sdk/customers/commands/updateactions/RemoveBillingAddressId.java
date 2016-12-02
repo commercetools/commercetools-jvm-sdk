@@ -9,20 +9,20 @@ import io.sphere.sdk.customers.Customer;
  *
  *  {@doc.gen intro}
  *
- *  {@include.example io.sphere.sdk.customers.commands.CustomerUpdateCommandIntegrationTest#removeFromBillingAddressIds()}
+ *  {@include.example io.sphere.sdk.customers.commands.CustomerUpdateCommandIntegrationTest#removeBillingAddressId()}
  *
  *  @see Customer
  */
-public final class RemoveFromBillingAddressIds extends UpdateActionImpl<Customer> {
+public final class RemoveBillingAddressId extends UpdateActionImpl<Customer> {
     private final String addressId;
 
-    private RemoveFromBillingAddressIds(final String addressId) {
-        super("removeFromBillingAddressIds");
+    private RemoveBillingAddressId(final String addressId) {
+        super("removeBillingAddressId");
         this.addressId = addressId;
     }
 
-    public static RemoveFromBillingAddressIds of(final String addressId) {
-        return new RemoveFromBillingAddressIds(addressId);
+    public static RemoveBillingAddressId of(final String addressId) {
+        return new RemoveBillingAddressId(addressId);
     }
 
     public String getAddressId() {
