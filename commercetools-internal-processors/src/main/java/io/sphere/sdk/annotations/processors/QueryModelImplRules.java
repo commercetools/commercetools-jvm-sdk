@@ -1,6 +1,5 @@
 package io.sphere.sdk.annotations.processors;
 
-import io.sphere.sdk.models.Resource;
 import io.sphere.sdk.queries.ResourceQueryModelImpl;
 import org.apache.commons.lang3.StringUtils;
 
@@ -13,9 +12,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static io.sphere.sdk.annotations.processors.ClassConfigurer.createBeanGetterStream;
 import static io.sphere.sdk.annotations.processors.ClassConfigurer.fieldNameFromGetter;
-import static io.sphere.sdk.annotations.processors.ClassConfigurer.methodStream;
+import static io.sphere.sdk.annotations.processors.ClassConfigurer.instanceMethodStream;
 import static java.util.Arrays.asList;
 
 final class QueryModelImplRules extends GenerationRules {
@@ -27,7 +25,7 @@ final class QueryModelImplRules extends GenerationRules {
         interfaceRules.add(new ExtendCustomResourceQueryModelImplRule());
         beanMethodRules.add(new IgnoreResourceFields());
         beanMethodRules.add(new GenerateMethodRule());
-        queryModelSelectionRules.add(new XSelectionRule());
+        queryModelSelectionRules.add(new DefaultSelectionRule());
         queryModelSelectionRules.add(new ReviewRatingStatisticsQueryModelRule());
     }
 
@@ -42,7 +40,7 @@ final class QueryModelImplRules extends GenerationRules {
         typeElement.getInterfaces().forEach(i -> interfaceRules.stream()
                 .filter(r -> r.accept((ReferenceType)i))
                 .findFirst());
-        methodStream(typeElement)
+        instanceMethodStream(typeElement)
                 .forEach(beanGetter -> beanMethodRules.stream()
                 .filter(r -> r.accept(beanGetter))
                 .findFirst());
@@ -118,7 +116,7 @@ final class QueryModelImplRules extends GenerationRules {
         return name.substring(0, name.indexOf("QueryModel"));
     }
 
-    private class XSelectionRule extends QueryModelMethodRule {
+    private class DefaultSelectionRule extends QueryModelMethodRule {
         @Override
         public boolean apply(final ExecutableElement method, final MethodModel methodModel, final String contextType) {
             final String returnType = method.getReturnType().toString();

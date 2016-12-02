@@ -11,10 +11,7 @@ import javax.lang.model.element.TypeElement;
 import javax.lang.model.type.DeclaredType;
 import javax.lang.model.type.ReferenceType;
 import javax.lang.model.type.TypeMirror;
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import static io.sphere.sdk.annotations.processors.ClassConfigurer.createBeanGetterStream;
@@ -58,9 +55,19 @@ final class QueryModelRules extends GenerationRules {
                 builder.addInterface(ResourceQueryModel.class.getSimpleName() + "<" + typeElement.getSimpleName() + ">");
                 builder.addImport(ResourceQueryModel.class.getCanonicalName());
                 beanMethodRules.addFirst(new IgnoreStandardResourceFields());
+                builder.addMethod(createFactoryMethod());
             }
             return false;
         }
+    }
+
+    private MethodModel createFactoryMethod() {
+        final MethodModel method = new MethodModel();
+        method.setModifiers(Collections.singletonList("static"));
+        method.setReturnType(builder.getName());
+        method.setName("of");
+        method.setBody("return new " + builder.getName() + "Impl(null, null);");
+        return method;
     }
 
     public class GenerateMethodRule extends BeanMethodRule {

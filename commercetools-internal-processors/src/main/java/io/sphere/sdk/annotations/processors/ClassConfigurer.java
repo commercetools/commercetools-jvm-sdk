@@ -9,6 +9,7 @@ import org.apache.commons.lang3.tuple.ImmutablePair;
 import javax.lang.model.element.*;
 import javax.lang.model.type.DeclaredType;
 import java.lang.annotation.Annotation;
+import java.lang.reflect.*;
 import java.util.*;
 import java.util.function.Function;
 import java.util.function.Predicate;
@@ -21,6 +22,7 @@ import static java.util.Arrays.asList;
 import static java.util.Collections.singletonList;
 import static java.util.Collections.singletonMap;
 import static java.util.stream.Collectors.joining;
+import static javax.lang.model.element.Modifier.STATIC;
 import static org.apache.commons.lang3.StringUtils.capitalize;
 
 /**
@@ -714,10 +716,10 @@ final class ClassConfigurer {
                 .map(wrapper -> wrapper.element);
     }
 
-    public static Stream<ExecutableElement> methodStream(final TypeElement typeElement) {
+    public static Stream<ExecutableElement> instanceMethodStream(final TypeElement typeElement) {
         final Stream<? extends Element> elementStream = elementStreamIncludingInterfaces(typeElement);
         return elementStream
-                .filter(e -> ElementKind.METHOD.equals(e.getKind()))
+                .filter(e -> ElementKind.METHOD.equals(e.getKind()) && !e.getModifiers().contains(STATIC))
                 .map(FieldsHolder.DistinctElementWrapper::new)
                 .distinct()
                 .map(wrapper -> (ExecutableElement) wrapper.element);
