@@ -68,6 +68,7 @@ final class QueryModelImplRules extends GenerationRules {
             final MethodModel methodModel = new MethodModel();
             methodModel.setName(fieldName);
             methodModel.setReturnType(method.getReturnType().toString());
+            methodModel.setModifiers(asList("public", "final"));
             queryModelSelectionRules.stream()
                     .filter(rule -> rule.apply(method, methodModel, getContextType()))
                     .findFirst()

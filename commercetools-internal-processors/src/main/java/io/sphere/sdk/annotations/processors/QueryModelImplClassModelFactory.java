@@ -1,5 +1,7 @@
 package io.sphere.sdk.annotations.processors;
 
+import io.sphere.sdk.queries.ResourceQueryModelImpl;
+
 import javax.lang.model.element.TypeElement;
 
 final class QueryModelImplClassModelFactory extends ClassModelFactory {
@@ -20,6 +22,7 @@ final class QueryModelImplClassModelFactory extends ClassModelFactory {
                 .classType()
                 .className(s -> s + "Impl")
                 .interfaces()
+                .implementing(typeElement)
                 .fields()
                 .constructors()
                 .methods()

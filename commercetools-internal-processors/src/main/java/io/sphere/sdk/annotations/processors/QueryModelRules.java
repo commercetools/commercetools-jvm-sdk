@@ -168,7 +168,8 @@ final class QueryModelRules extends GenerationRules {
         @Override
         public boolean accept(final ReferenceType typeMirror) {
             if (typeMirror.toString().equals("io.sphere.sdk.types.Custom")) {
-                builder.addInterface("WithCustomQueryModel");
+                final String contextType = typeElement.getSimpleName().toString();
+                builder.addInterface("WithCustomQueryModel<" + contextType + ">");
                 builder.addImport("io.sphere.sdk.types.queries.WithCustomQueryModel");
                 beanMethodRules.addFirst(new IgnoreCustomFields());
             }
