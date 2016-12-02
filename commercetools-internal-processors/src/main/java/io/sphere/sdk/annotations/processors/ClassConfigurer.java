@@ -652,6 +652,10 @@ final class ClassConfigurer {
 
     static String fieldNameFromGetter(final Element element) {
         final String methodName = element.getSimpleName().toString();
+        return fieldNameFromGetter(methodName);
+    }
+
+    static String fieldNameFromGetter(final String methodName) {
         final String firstPartGetterName = methodName.startsWith("get") ? "get" : "is";
         final String s1 = methodName.toString().replaceAll("^" + firstPartGetterName, "");
         final String s = ("" + s1.charAt(0)).toLowerCase() + s1.substring(1);
@@ -708,5 +712,14 @@ final class ClassConfigurer {
                 .map(FieldsHolder.DistinctElementWrapper::new)
                 .distinct()
                 .map(wrapper -> wrapper.element);
+    }
+
+    public static Stream<ExecutableElement> methodStream(final TypeElement typeElement) {
+        final Stream<? extends Element> elementStream = elementStreamIncludingInterfaces(typeElement);
+        return elementStream
+                .filter(e -> ElementKind.METHOD.equals(e.getKind()))
+                .map(FieldsHolder.DistinctElementWrapper::new)
+                .distinct()
+                .map(wrapper -> (ExecutableElement) wrapper.element);
     }
 }

@@ -75,7 +75,7 @@ final class QueryModelRules extends GenerationRules {
             queryModelSelectionRules.stream()
                     .filter(rule -> rule.x(beanGetter, methodModel, contextType))
                     .findFirst()
-            .orElseThrow(() -> new RuntimeException("no query model type for " + typeElement + " " + beanGetter));
+            .orElseThrow(() -> new RuntimeException("no query model type for " + typeElement + " " + beanGetter + " in " + queryModelSelectionRules));
             builder.addMethod(methodModel);
             return true;
         }

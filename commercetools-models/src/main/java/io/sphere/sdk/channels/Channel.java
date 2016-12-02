@@ -175,4 +175,11 @@ public interface Channel extends Resource<Channel>, WithKey, Custom {
      */
     @Nullable
     Address getAddress();
+
+
+
+
+
+
+
 }
