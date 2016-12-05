@@ -49,6 +49,7 @@ import static java.util.stream.Collectors.toList;
 @HasCreateCommand(javadocSummary = "Creates a {@link io.sphere.sdk.shippingmethods.ShippingMethod}.", includeExamples = "io.sphere.sdk.shippingmethods.commands.ShippingMethodCreateCommandIntegrationTest#execution()")
 @HasUpdateCommand
 @HasDeleteCommand
+@HasQueryModel
 public interface ShippingMethod extends Resource<ShippingMethod> {
     String getName();
 
@@ -57,6 +58,7 @@ public interface ShippingMethod extends Resource<ShippingMethod> {
 
     Reference<TaxCategory> getTaxCategory();
 
+    @QueryModelHint(type = "ZoneRateCollectionQueryModel<ShippingMethod>", impl = "return new ZoneRateCollectionQueryModelImpl<>(this, fieldName);")
     List<ZoneRate> getZoneRates();
 
     default List<ShippingRate> getShippingRatesForZone(final Referenceable<Zone> zone) {
