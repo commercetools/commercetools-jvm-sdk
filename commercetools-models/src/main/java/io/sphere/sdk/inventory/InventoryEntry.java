@@ -32,6 +32,7 @@ import java.time.ZonedDateTime;
 @HasCreateCommand(includeExamples = "io.sphere.sdk.inventory.commands.InventoryEntryCreateCommandIntegrationTest#execution()")
 @HasUpdateCommand
 @HasDeleteCommand
+@HasQueryModel
 public interface InventoryEntry extends Resource<InventoryEntry>, Custom {
     /**
      * Available amount of stock. (available means: quantityOnStock - reserved quantity)

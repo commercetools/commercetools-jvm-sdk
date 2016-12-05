@@ -47,6 +47,8 @@ final class QueryModelRules extends GenerationRules {
         queryModelSelectionRules.add(new SimpleQueryModelSelectionRule("com.neovisionaries.i18n.CountryCode", "io.sphere.sdk.queries.CountryQueryModel"));
         queryModelSelectionRules.add(new SimpleQueryModelSelectionRule("javax.money.MonetaryAmount", "io.sphere.sdk.queries.MoneyQueryModel"));
         queryModelSelectionRules.add(new SimpleQueryModelSelectionRule("java.util.Locale", "io.sphere.sdk.queries.LocaleQueryModel"));
+        queryModelSelectionRules.add(new SimpleQueryModelSelectionRule("java.lang.Long", "io.sphere.sdk.queries.LongQuerySortingModel"));
+        queryModelSelectionRules.add(new SimpleQueryModelSelectionRule("java.lang.Integer", "io.sphere.sdk.queries.IntegerQuerySortingModel"));
     }
 
     @Override

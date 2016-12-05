@@ -118,8 +118,16 @@ public class QueryModelImpl<T> extends Base implements QueryModel<T> {
         return new LongQuerySortingModelImpl<>(parent, pathSegment);
     }
 
+    protected LongQuerySortingModel<T> longQuerySortingModel(final String pathSegment) {
+        return longModel(this, pathSegment);
+    }
+
     protected LongQuerySortingModel<T> longModel(final String pathSegment) {
         return longModel(this, pathSegment);
+    }
+
+    protected IntegerQuerySortingModel<T> integerQuerySortingModel(final String pathSegment) {
+        return integerModel(this, pathSegment);
     }
 
     protected IntegerQuerySortingModel<T> integerModel(final String pathSegment) {
