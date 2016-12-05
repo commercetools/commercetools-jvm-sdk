@@ -123,6 +123,7 @@ import java.util.Optional;
         " \n" +
         " To update the properties {@link Customer#isEmailVerified()} or {@link Customer#getPassword()} special commands are required which are documented in the {@link Customer customer Javadoc}.")
 @HasDeleteCommand(javadocSummary = "Deletes a customer.", includeExamples = "io.sphere.sdk.customers.commands.CustomerDeleteCommandIntegrationTest#execution()")
+@HasQueryModel
 public interface Customer extends Resource<Customer>, Custom {
     /**
      * Gets the ID of this customer.
@@ -221,6 +222,7 @@ public interface Customer extends Resource<Customer>, Custom {
      *
      * @return addressbook
      */
+    @IgnoreInQueryModel
     List<Address> getAddresses();
 
     /**
@@ -342,6 +344,7 @@ public interface Customer extends Resource<Customer>, Custom {
      * @return date of birth or null
      */
     @Nullable
+    @IgnoreInQueryModel
     LocalDate getDateOfBirth();
 
     @Override
