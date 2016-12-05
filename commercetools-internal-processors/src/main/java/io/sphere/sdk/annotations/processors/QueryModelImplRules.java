@@ -1,6 +1,7 @@
 package io.sphere.sdk.annotations.processors;
 
 import io.sphere.sdk.annotations.QueryModelHint;
+import io.sphere.sdk.queries.QueryModelImpl;
 import io.sphere.sdk.queries.ResourceQueryModelImpl;
 import org.apache.commons.lang3.StringUtils;
 
@@ -26,8 +27,8 @@ final class QueryModelImplRules extends GenerationRules {
         interfaceRules.add(new ExtendCustomResourceQueryModelImplRule());
         beanMethodRules.add(new IgnoreResourceFields());
         beanMethodRules.add(new GenerateMethodRule());
-        queryModelSelectionRules.add(new DefaultSelectionRule());
         queryModelSelectionRules.add(new AnnotationHintRule());
+        queryModelSelectionRules.add(new DefaultSelectionRule());
         queryModelSelectionRules.add(new ReviewRatingStatisticsQueryModelRule());
     }
 
@@ -72,7 +73,7 @@ final class QueryModelImplRules extends GenerationRules {
             queryModelSelectionRules.stream()
                     .filter(rule -> rule.apply(method, methodModel, getContextType()))
                     .findFirst()
-                    .orElseThrow(() -> new RuntimeException("no query model impl type for " + method.getReturnType() + " " + typeElement + " " + method));
+                    .orElseThrow(() -> new RuntimeException("Cannot create method body for " + builder.getName() + "." + method + " with return type " + method.getReturnType() +" to create implementation class for " + typeElement + ". You have to fix it in " + QueryModelImplRules.class + " or annotate the resource class method of '" + getContextType() + "' with " + QueryModelHint.class.getCanonicalName() + "."));
             builder.addMethod(methodModel);
             return true;
         }
@@ -151,7 +152,9 @@ final class QueryModelImplRules extends GenerationRules {
         public boolean apply(final ExecutableElement method, final MethodModel methodModel, final String contextType) {
             final QueryModelHint a = method.getAnnotation(QueryModelHint.class);
             if (a != null) {
-                methodModel.setBody(a.impl());
+                final String fieldName = method.getSimpleName().toString();
+                final String body = "final String fieldName = \"" + fieldName + "\";\n" + a.impl();
+                methodModel.setBody(body);
                 return true;
             }
             return false;

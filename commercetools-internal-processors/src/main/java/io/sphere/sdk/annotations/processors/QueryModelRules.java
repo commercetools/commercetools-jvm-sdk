@@ -7,6 +7,7 @@ import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Resource;
 import io.sphere.sdk.models.SphereEnumeration;
 import io.sphere.sdk.queries.ResourceQueryModel;
+import org.apache.commons.lang3.StringUtils;
 
 import javax.annotation.Nullable;
 import javax.lang.model.AnnotatedConstruct;
@@ -23,6 +24,8 @@ import java.util.stream.Stream;
 import static io.sphere.sdk.annotations.processors.ClassConfigurer.createBeanGetterStream;
 import static io.sphere.sdk.annotations.processors.ClassConfigurer.fieldNameFromGetter;
 import static java.util.Arrays.asList;
+import static org.apache.commons.lang3.StringUtils.removeEnd;
+import static org.apache.commons.lang3.StringUtils.removeStart;
 
 final class QueryModelRules extends GenerationRules {
     private final LinkedList<QueryModelSelectionRule> queryModelSelectionRules = new LinkedList<>();
@@ -43,9 +46,9 @@ final class QueryModelRules extends GenerationRules {
         queryModelSelectionRules.add(new SimpleQueryModelSelectionRule("io.sphere.sdk.reviews.ReviewRatingStatistics", "ReviewRatingStatisticsQueryModel"));
         queryModelSelectionRules.add(new SimpleQueryModelSelectionRule("io.sphere.sdk.models.Address", "AddressQueryModel"));
         queryModelSelectionRules.add(new SimpleQueryModelSelectionRule("java.time.ZonedDateTime", "TimestampSortingModel"));
-        queryModelSelectionRules.add(new SimpleQueryModelSelectionRule("com.neovisionaries.i18n.CountryCode", "io.sphere.sdk.carts.queries.CartShippingInfoQueryModel"));
-        queryModelSelectionRules.add(new SimpleQueryModelSelectionRule("io.sphere.sdk.carts.TaxedPrice", "io.sphere.sdk.carts.queries.TaxedPriceOptionalQueryModel"));
+        queryModelSelectionRules.add(new SimpleQueryModelSelectionRule("com.neovisionaries.i18n.CountryCode", "io.sphere.sdk.queries.CountryQueryModel"));
         queryModelSelectionRules.add(new SimpleQueryModelSelectionRule("javax.money.MonetaryAmount", "io.sphere.sdk.queries.MoneyQueryModel"));
+        queryModelSelectionRules.add(new SimpleQueryModelSelectionRule("java.util.Locale", "io.sphere.sdk.queries.LocaleQueryModel"));
     }
 
     @Override
@@ -238,6 +241,11 @@ final class QueryModelRules extends GenerationRules {
             final QueryModelHint a = beanGetter.getAnnotation(QueryModelHint.class);
             if (a != null) {
                 methodModel.setReturnType(a.type());
+                final AnnotationModel annotationModel = new AnnotationModel();
+                annotationModel.setName(QueryModelHint.class.getCanonicalName());
+                annotationModel.getValues().put("type", a.type());
+                annotationModel.getValues().put("impl", a.impl());
+                methodModel.addAnnotation(annotationModel);
                 return true;
             }
             return false;
@@ -249,7 +257,8 @@ final class QueryModelRules extends GenerationRules {
         public boolean x(final ExecutableElement beanGetter, final MethodModel methodModel, final String contextType) {
             if (beanGetter.getReturnType().toString().startsWith(Reference.class.getCanonicalName() + "<")) {
                 final String type = beanGetter.getAnnotation(Nullable.class) != null ? "ReferenceOptionalQueryModel" : "ReferenceQueryModel";
-                methodModel.setReturnType(type + "<" + contextType + ">");
+                final String paramType = removeEnd(removeStart(beanGetter.getReturnType().toString(), Reference.class.getCanonicalName() + "<"), ">");
+                methodModel.setReturnType(type + "<" + contextType + ", " + paramType + ">");
                 return true;
             }
             return false;

@@ -68,4 +68,8 @@ final class MethodModel {
     public void setAnnotations(final List<AnnotationModel> annotations) {
         this.annotations = annotations;
     }
+
+    public void addAnnotation(final AnnotationModel annotationModel) {
+        annotations.add(annotationModel);
+    }
 }

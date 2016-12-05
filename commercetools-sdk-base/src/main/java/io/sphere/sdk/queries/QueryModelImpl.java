@@ -38,6 +38,10 @@ public class QueryModelImpl<T> extends Base implements QueryModel<T> {
         return new CurrencyCodeQueryModelImpl<>(this, pathSegment);
     }
 
+    protected MoneyQueryModel<T> moneyQueryModel(final String pathSegment) {
+        return moneyModel(pathSegment);
+    }
+
     protected MoneyQueryModel<T> moneyModel(final String pathSegment) {
         return new MoneyQueryModelImpl<>(this, pathSegment);
     }
@@ -54,8 +58,16 @@ public class QueryModelImpl<T> extends Base implements QueryModel<T> {
         return new ReferenceOptionalQueryModelImpl<>(this, pathSegment);
     }
 
+    protected <R> ReferenceOptionalQueryModel<T, R> referenceOptionalQueryModel(final String pathSegment) {
+        return referenceOptionalModel(pathSegment);
+    }
+
     protected <R> ReferenceCollectionQueryModel<T, R> referenceCollectionModel(final String pathSegment) {
         return new ReferenceCollectionQueryModelImpl<>(this, pathSegment);
+    }
+
+    protected <E extends SphereEnumeration> SphereEnumerationQueryModelImpl<T, E> sphereEnumerationQueryModel(final String pathSegment) {
+        return enumerationQueryModel(pathSegment);
     }
 
     protected <E extends SphereEnumeration> SphereEnumerationQueryModelImpl<T, E> enumerationQueryModel(final String pathSegment) {
@@ -140,6 +152,10 @@ public class QueryModelImpl<T> extends Base implements QueryModel<T> {
 
     protected final AddressQueryModel<T> addressQueryModel(final String pathSegment) {
         return addressModel(pathSegment);
+    }
+
+    protected final LocaleQuerySortingModel<T> localeQueryModel(final String pathSegment) {
+        return new LocaleQuerySortingModelImpl<>(this, pathSegment);
     }
 
     protected final LocaleQuerySortingModel<T> localeQuerySortingModel(final String pathSegment) {

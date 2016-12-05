@@ -148,6 +148,7 @@ public interface Cart extends CartLike<Cart> {
 
     @Override
     @Nullable
+    @QueryModelHint(type = "TaxedPriceOptionalQueryModel<Cart>", impl = "return new TaxedPriceOptionalQueryModelImpl<>(this, fieldName);")
     TaxedPrice getTaxedPrice();
 
     @Override
@@ -163,6 +164,7 @@ public interface Cart extends CartLike<Cart> {
 
     @Nullable
     @Override
+    @QueryModelHint(type = "PaymentInfoQueryModel<Cart>", impl = "return new PaymentInfoQueryModelImpl<>(this, fieldName);")
     PaymentInfo getPaymentInfo();
 
     /**
