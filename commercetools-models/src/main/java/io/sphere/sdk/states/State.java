@@ -39,6 +39,7 @@ import java.util.Set;
 @HasCreateCommand(includeExamples = "io.sphere.sdk.states.commands.StateCreateCommandIntegrationTest#execution()")
 @HasUpdateCommand
 @HasDeleteCommand(javadocSummary = "Deletes a state.", includeExamples = "io.sphere.sdk.states.commands.StateDeleteCommandIntegrationTest#execution()")
+@HasQueryModel
 public interface State extends Resource<State>, WithKey {
 
     String getKey();
