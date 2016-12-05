@@ -12,7 +12,7 @@ final class CartQueryModelImpl extends CartLikeQueryModelImpl<Cart> implements C
     }
 
     @Override
-    public CountryQueryModel<Cart> country() {
+    public CountryQueryModel <Cart> country() {
         return super.country();
     }
 

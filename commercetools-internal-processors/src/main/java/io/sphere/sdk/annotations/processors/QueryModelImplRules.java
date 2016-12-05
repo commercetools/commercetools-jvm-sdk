@@ -1,5 +1,6 @@
 package io.sphere.sdk.annotations.processors;
 
+import io.sphere.sdk.annotations.QueryModelHint;
 import io.sphere.sdk.queries.ResourceQueryModelImpl;
 import org.apache.commons.lang3.StringUtils;
 
@@ -26,6 +27,7 @@ final class QueryModelImplRules extends GenerationRules {
         beanMethodRules.add(new IgnoreResourceFields());
         beanMethodRules.add(new GenerateMethodRule());
         queryModelSelectionRules.add(new DefaultSelectionRule());
+        queryModelSelectionRules.add(new AnnotationHintRule());
         queryModelSelectionRules.add(new ReviewRatingStatisticsQueryModelRule());
     }
 
@@ -138,6 +140,18 @@ final class QueryModelImplRules extends GenerationRules {
                 final String fieldName = method.getSimpleName().toString();
                 methodModel.setBody("return ReviewRatingStatisticsQueryModel.of(this, \"" + fieldName + "\");");
                 builder.addImport("io.sphere.sdk.reviews.queries.ReviewRatingStatisticsQueryModel");
+                return true;
+            }
+            return false;
+        }
+    }
+
+    private class AnnotationHintRule extends QueryModelMethodRule {
+        @Override
+        public boolean apply(final ExecutableElement method, final MethodModel methodModel, final String contextType) {
+            final QueryModelHint a = method.getAnnotation(QueryModelHint.class);
+            if (a != null) {
+                methodModel.setBody(a.impl());
                 return true;
             }
             return false;

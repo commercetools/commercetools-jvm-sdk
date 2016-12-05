@@ -1,12 +1,16 @@
 package io.sphere.sdk.annotations.processors;
 
 import io.sphere.sdk.annotations.IgnoreInQueryModel;
+import io.sphere.sdk.annotations.QueryModelHint;
 import io.sphere.sdk.models.LocalizedString;
+import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Resource;
 import io.sphere.sdk.models.SphereEnumeration;
 import io.sphere.sdk.queries.ResourceQueryModel;
 
 import javax.annotation.Nullable;
+import javax.lang.model.AnnotatedConstruct;
+import javax.lang.model.element.Element;
 import javax.lang.model.element.ExecutableElement;
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.type.DeclaredType;
@@ -14,6 +18,7 @@ import javax.lang.model.type.ReferenceType;
 import javax.lang.model.type.TypeMirror;
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static io.sphere.sdk.annotations.processors.ClassConfigurer.createBeanGetterStream;
 import static io.sphere.sdk.annotations.processors.ClassConfigurer.fieldNameFromGetter;
@@ -28,13 +33,19 @@ final class QueryModelRules extends GenerationRules {
         interfaceRules.add(new CustomFieldsRule());
         beanMethodRules.add(new IgnoreAnnotatedElements());
         beanMethodRules.add(new GenerateMethodRule());
+        queryModelSelectionRules.add(new AnnotationSelectionRule());
         queryModelSelectionRules.add(new LocalizedStringQueryModelSelectionRule());
+        queryModelSelectionRules.add(new ReferenceQueryModelSelectionRule());
         queryModelSelectionRules.add(new SetOfSphereEnumerationQueryModelSelectionRule());
+        queryModelSelectionRules.add(new SphereEnumerationQueryModelSelectionRule());
         queryModelSelectionRules.add(new SimpleQueryModelSelectionRule("java.lang.Boolean", "BooleanQueryModel"));
         queryModelSelectionRules.add(new SimpleQueryModelSelectionRule("java.lang.String", "StringQuerySortingModel"));
         queryModelSelectionRules.add(new SimpleQueryModelSelectionRule("io.sphere.sdk.reviews.ReviewRatingStatistics", "ReviewRatingStatisticsQueryModel"));
         queryModelSelectionRules.add(new SimpleQueryModelSelectionRule("io.sphere.sdk.models.Address", "AddressQueryModel"));
         queryModelSelectionRules.add(new SimpleQueryModelSelectionRule("java.time.ZonedDateTime", "TimestampSortingModel"));
+        queryModelSelectionRules.add(new SimpleQueryModelSelectionRule("com.neovisionaries.i18n.CountryCode", "io.sphere.sdk.carts.queries.CartShippingInfoQueryModel"));
+        queryModelSelectionRules.add(new SimpleQueryModelSelectionRule("io.sphere.sdk.carts.TaxedPrice", "io.sphere.sdk.carts.queries.TaxedPriceOptionalQueryModel"));
+        queryModelSelectionRules.add(new SimpleQueryModelSelectionRule("javax.money.MonetaryAmount", "io.sphere.sdk.queries.MoneyQueryModel"));
     }
 
     @Override
@@ -44,7 +55,12 @@ final class QueryModelRules extends GenerationRules {
         a.setName("HasQueryModelImplementation");
         builder.addAnnotation(a);
         builder.addImport(typeElement.getQualifiedName().toString());
-        typeElement.getInterfaces().forEach(i -> interfaceRules.stream()
+        final List<? extends TypeMirror> interfaces = typeElement.getInterfaces();
+            final Stream<? extends TypeMirror> subInterfaces = interfaces.stream()
+                    .map(i -> (DeclaredType) i)
+                    .map(i -> (TypeElement) i.asElement())
+                    .flatMap(i -> i.getInterfaces().stream());
+        Stream.concat(interfaces.stream(), subInterfaces).distinct().forEach(i -> interfaceRules.stream()
                 .filter(r -> r.accept((ReferenceType)i))
                 .findFirst());
         createBeanGetterStream(typeElement).forEach(beanGetter -> beanMethodRules.stream()
@@ -139,6 +155,20 @@ final class QueryModelRules extends GenerationRules {
         }
     }
 
+    private class SphereEnumerationQueryModelSelectionRule extends QueryModelSelectionRule {
+        @Override
+        public boolean x(final ExecutableElement beanGetter, final MethodModel methodModel, final String contextType) {
+            final DeclaredType returnType = (DeclaredType) beanGetter.getReturnType();
+            final TypeElement element = (TypeElement) returnType.asElement();
+            if (element.getInterfaces().stream().anyMatch(i -> i.toString().contains(SphereEnumeration.class.getSimpleName()))) {
+                methodModel.setReturnType("SphereEnumerationQueryModel<" + contextType + ", " + returnType.toString() + ">");
+                builder.addImport("io.sphere.sdk.queries.SphereEnumerationCollectionQueryModel");
+                return true;
+            }
+            return false;
+        }
+    }
+
     public class SimpleQueryModelSelectionRule extends QueryModelSelectionRule {
 
         private final String expectedType;
@@ -199,6 +229,30 @@ final class QueryModelRules extends GenerationRules {
         @Override
         public boolean accept(final ExecutableElement beanGetter) {
             return beanGetter.getAnnotation(IgnoreInQueryModel.class) != null;
+        }
+    }
+
+    private class AnnotationSelectionRule extends QueryModelSelectionRule {
+        @Override
+        public boolean x(final ExecutableElement beanGetter, final MethodModel methodModel, final String contextType) {
+            final QueryModelHint a = beanGetter.getAnnotation(QueryModelHint.class);
+            if (a != null) {
+                methodModel.setReturnType(a.type());
+                return true;
+            }
+            return false;
+        }
+    }
+
+    private class ReferenceQueryModelSelectionRule extends QueryModelSelectionRule {
+        @Override
+        public boolean x(final ExecutableElement beanGetter, final MethodModel methodModel, final String contextType) {
+            if (beanGetter.getReturnType().toString().startsWith(Reference.class.getCanonicalName() + "<")) {
+                final String type = beanGetter.getAnnotation(Nullable.class) != null ? "ReferenceOptionalQueryModel" : "ReferenceQueryModel";
+                methodModel.setReturnType(type + "<" + contextType + ">");
+                return true;
+            }
+            return false;
         }
     }
 }

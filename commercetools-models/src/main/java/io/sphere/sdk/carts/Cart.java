@@ -39,6 +39,7 @@ import java.util.List;
 @HasCreateCommand(javadocSummary = "Creates a cart.", includeExamples = {"io.sphere.sdk.carts.commands.CartCreateCommandIntegrationTest#execution()", "io.sphere.sdk.carts.commands.CartCreateCommandIntegrationTest#fullExample()"})
 @HasUpdateCommand(javadocSummary = "Updates a cart.")
 @HasDeleteCommand(javadocSummary = "Deletes a cart.")
+@HasQueryModel
 public interface Cart extends CartLike<Cart> {
 
     /**
@@ -98,6 +99,7 @@ public interface Cart extends CartLike<Cart> {
 
     @Override
     @Nullable
+    @QueryModelHint(type = "CartShippingInfoQueryModel<Cart>", impl = "return new CartShippingInfoQueryModelImpl<>(this, fieldName);")
     CartShippingInfo getShippingInfo();
 
     @Nullable
@@ -133,9 +135,11 @@ public interface Cart extends CartLike<Cart> {
      * @see Order#getCustomLineItems()
      */
     @Override
+    @QueryModelHint(type = "CustomLineItemCollectionQueryModel<Cart>", impl = "return new LineItemLikeCollectionQueryModelImpl<>(this, fieldName);")
     List<CustomLineItem> getCustomLineItems();
 
     @Override
+    @QueryModelHint(type = "LineItemCollectionQueryModel<Cart>", impl = "return new LineItemLikeCollectionQueryModelImpl<>(this, fieldName);")
     List<LineItem> getLineItems();
 
     @Override
@@ -150,6 +154,7 @@ public interface Cart extends CartLike<Cart> {
     MonetaryAmount getTotalPrice();
 
     @Override
+    @QueryModelHint(type = "DiscountCodeInfoCollectionQueryModel<Cart>", impl = "return new DiscountCodeInfoCollectionQueryModelImpl<>(this, fieldName);")
     List<DiscountCodeInfo> getDiscountCodes();
 
     @Nullable
