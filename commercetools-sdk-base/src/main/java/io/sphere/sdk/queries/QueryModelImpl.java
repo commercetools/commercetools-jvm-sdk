@@ -46,6 +46,10 @@ public class QueryModelImpl<T> extends Base implements QueryModel<T> {
         return new MoneyQueryModelImpl<>(this, pathSegment);
     }
 
+    protected AnyReferenceQueryModel<T> anyReferenceQueryModel(final String pathSegment) {
+        return new AnyReferenceQueryModelImpl <>(this, pathSegment);
+    }
+
     protected AnyReferenceQueryModel<T> anyReferenceModel(final String pathSegment) {
         return new AnyReferenceQueryModelImpl <>(this, pathSegment);
     }

@@ -78,6 +78,7 @@ import java.util.Locale;
 @HasCreateCommand(includeExamples = "io.sphere.sdk.reviews.commands.ReviewCreateCommandIntegrationTest#createByCode()")
 @HasUpdateCommand(javadocSummary = "Updates a review.")
 @HasDeleteCommand
+@HasQueryModel()
 public interface Review extends Resource<Review>, Custom, WithKey {
     /**
      * The name of the author which created this review or null.

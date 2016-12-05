@@ -276,7 +276,10 @@ final class QueryModelRules extends GenerationRules {
             if (beanGetter.getReturnType().toString().startsWith(Reference.class.getCanonicalName() + "<")) {
                 final String type = beanGetter.getAnnotation(Nullable.class) != null ? "ReferenceOptionalQueryModel" : "ReferenceQueryModel";
                 final String paramType = removeEnd(removeStart(beanGetter.getReturnType().toString(), Reference.class.getCanonicalName() + "<"), ">");
-                methodModel.setReturnType(type + "<" + contextType + ", " + paramType + ">");
+                final String returnType = "?".equals(paramType)
+                        ? "AnyReferenceQueryModel" + "<" + contextType + ">"
+                        : type + "<" + contextType + ", " + paramType + ">";
+                methodModel.setReturnType(returnType);
                 return true;
             }
             return false;
