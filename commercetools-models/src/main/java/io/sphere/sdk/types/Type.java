@@ -33,6 +33,7 @@ import java.util.Set;
 @HasCreateCommand(includeExamples = "io.sphere.sdk.types.commands.TypeCreateCommandIntegrationTest#execution()")
 @HasUpdateCommand(updateWithKey = true)
 @HasDeleteCommand(deleteWithKey = true)
+@HasQueryModel
 public interface Type extends Resource<Type>, WithKey {
     String getKey();
 
@@ -43,6 +44,7 @@ public interface Type extends Resource<Type>, WithKey {
 
     Set<String> getResourceTypeIds();
 
+    @QueryModelHint(type = "FieldDefinitionCollectionQueryModel<Type>", impl = "return new FieldDefinitionCollectionQueryModelImpl<>(this, fieldName);")
     List<FieldDefinition> getFieldDefinitions();
 
     @Nullable

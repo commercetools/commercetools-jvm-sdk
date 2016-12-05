@@ -40,6 +40,7 @@ final class QueryModelRules extends GenerationRules {
         queryModelSelectionRules.add(new ReferenceQueryModelSelectionRule());
         queryModelSelectionRules.add(new SetOfSphereEnumerationQueryModelSelectionRule());
         queryModelSelectionRules.add(new SetOfReferenceSelectionRule());
+        queryModelSelectionRules.add(new SetOfStringSelectionRule());
         queryModelSelectionRules.add(new SphereEnumerationQueryModelSelectionRule());
         queryModelSelectionRules.add(new SimpleQueryModelSelectionRule("java.lang.Boolean", "BooleanQueryModel"));
         queryModelSelectionRules.add(new SimpleQueryModelSelectionRule("java.lang.String", "StringQuerySortingModel"));
@@ -300,6 +301,24 @@ final class QueryModelRules extends GenerationRules {
             declaredTypeOptional.ifPresent(returnType -> {
                 final String param = ((DeclaredType)returnType.getTypeArguments().get(0)).getTypeArguments().get(0).toString();
                 methodModel.setReturnType("ReferenceCollectionQueryModel<" + param + ", " + contextType + ">");
+            });
+            return declaredTypeOptional.isPresent();
+        }
+    }
+
+    private class SetOfStringSelectionRule extends QueryModelSelectionRule {
+        @Override
+        public boolean x(final ExecutableElement beanGetter, final MethodModel methodModel, final String contextType) {
+            final Optional<DeclaredType> declaredTypeOptional = collectionTypeReturnType(beanGetter)
+                    .filter(returnType -> {
+
+                        final DeclaredType declaredType = (DeclaredType) returnType.getTypeArguments().get(0);
+
+                        final boolean contains = declaredType.asElement().getSimpleName().toString().equals("String");
+                        return contains;
+                    });
+            declaredTypeOptional.ifPresent(returnType -> {
+                methodModel.setReturnType("StringCollectionQueryModel<" + contextType + ">");
             });
             return declaredTypeOptional.isPresent();
         }

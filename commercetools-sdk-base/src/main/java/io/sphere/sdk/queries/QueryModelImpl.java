@@ -102,6 +102,10 @@ public class QueryModelImpl<T> extends Base implements QueryModel<T> {
         return stringModel(this, pathSegment);
     }
 
+    protected StringCollectionQueryModel<T> stringCollectionQueryModel(final String pathSegment) {
+        return new StringCollectionQueryModelImpl<>(this, pathSegment);
+    }
+
     protected StringCollectionQueryModel<T> stringCollectionModel(final String pathSegment) {
         return new StringCollectionQueryModelImpl<>(this, pathSegment);
     }
