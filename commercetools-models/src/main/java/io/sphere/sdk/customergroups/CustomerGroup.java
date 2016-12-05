@@ -34,6 +34,7 @@ import io.sphere.sdk.models.Reference;
         "    }")
 @HasUpdateCommand(javadocSummary = "Updates a customer group.")
 @HasDeleteCommand(javadocSummary = "Deletes a customer group.", includeExamples = "io.sphere.sdk.customergroups.commands.CustomerGroupDeleteCommandIntegrationTest#execution()")
+@HasQueryModel
 public interface CustomerGroup extends Resource<CustomerGroup> {
 
     /**
