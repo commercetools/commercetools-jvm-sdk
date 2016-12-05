@@ -37,6 +37,7 @@ import java.util.List;
 @HasCreateCommand(includeExamples = "io.sphere.sdk.taxcategories.TaxCategoryIntegrationTest#createTaxCategory()")
 @HasUpdateCommand
 @HasDeleteCommand(javadocSummary = "Deletes a tax category.", includeExamples = "io.sphere.sdk.taxcategories.TaxCategoryIntegrationTest#demoForDeletion()")
+@HasQueryModel
 public interface TaxCategory extends Resource<TaxCategory> {
     String getName();
 
@@ -48,10 +49,12 @@ public interface TaxCategory extends Resource<TaxCategory> {
      *
      * @return rates
      */
+    @IgnoreInQueryModel
     default List<TaxRate> getTaxRates() {
         return getRates();
     }
 
+    @IgnoreInQueryModel
     List<TaxRate> getRates();
 
     /**
