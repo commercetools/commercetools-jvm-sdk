@@ -309,18 +309,20 @@ final class QueryModelRules extends GenerationRules {
     private class SetOfStringSelectionRule extends QueryModelSelectionRule {
         @Override
         public boolean x(final ExecutableElement beanGetter, final MethodModel methodModel, final String contextType) {
-            final Optional<DeclaredType> declaredTypeOptional = collectionTypeReturnType(beanGetter)
-                    .filter(returnType -> {
+            final Map<String, String> map = new HashMap<>();
+            map.put("String", "StringCollectionQueryModel");
+            final Optional<String> typerParameterOptional = collectionTypeReturnType(beanGetter)
+                    .map(returnType -> {
 
                         final DeclaredType declaredType = (DeclaredType) returnType.getTypeArguments().get(0);
 
-                        final boolean contains = declaredType.asElement().getSimpleName().toString().equals("String");
-                        return contains;
+                        final String beanGetterCollectionTypeParameter = declaredType.asElement().getSimpleName().toString();
+                        return map.get(beanGetterCollectionTypeParameter);
                     });
-            declaredTypeOptional.ifPresent(returnType -> {
-                methodModel.setReturnType("StringCollectionQueryModel<" + contextType + ">");
+            typerParameterOptional.ifPresent(param -> {
+                methodModel.setReturnType(map.get(param) + "<" + contextType + ">");
             });
-            return declaredTypeOptional.isPresent();
+            return typerParameterOptional.isPresent();
         }
     }
 }

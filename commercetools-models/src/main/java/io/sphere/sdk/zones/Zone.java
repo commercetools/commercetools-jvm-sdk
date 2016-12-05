@@ -62,6 +62,7 @@ import java.util.Set;
 @HasCreateCommand(includeExamples = "io.sphere.sdk.zones.commands.ZoneCreateCommandIntegrationTest#execution()")
 @HasUpdateCommand
 @HasDeleteCommand
+@HasQueryModel
 public interface Zone extends Resource<Zone> {
 
     String getName();
@@ -69,6 +70,7 @@ public interface Zone extends Resource<Zone> {
     @Nullable
     String getDescription();
 
+    @QueryModelHint(type = "LocationsCollectionQueryModel<Zone>", impl = "return new LocationsCollectionQueryModelImpl<>(this, fieldName);")
     Set<Location> getLocations();
 
     @Override
