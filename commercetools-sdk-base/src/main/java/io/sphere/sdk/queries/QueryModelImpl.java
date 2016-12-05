@@ -90,6 +90,10 @@ public class QueryModelImpl<T> extends Base implements QueryModel<T> {
         return booleanModel(this, pathSegment);
     }
 
+    protected BooleanQueryModel<T> booleanQueryModel(final String pathSegment) {
+        return booleanModel(this, pathSegment);
+    }
+
     protected CountryQueryModel<T> countryQueryModel(final String pathSegment) {
         return new CountryQueryModelImpl<>(this, pathSegment);
     }
@@ -115,6 +119,10 @@ public class QueryModelImpl<T> extends Base implements QueryModel<T> {
     }
 
     protected LocalizedStringQuerySortingModelImpl<T> localizedStringQuerySortingModel(final String pathSegment) {
+        return new LocalizedStringQuerySortingModelImpl<>(this, pathSegment);
+    }
+
+    protected LocalizedStringQuerySortingModel<T> localizedStringQueryModel(final String pathSegment) {
         return new LocalizedStringQuerySortingModelImpl<>(this, pathSegment);
     }
 

@@ -1,5 +1,6 @@
 package io.sphere.sdk.annotations.processors;
 
+import io.sphere.sdk.annotations.IgnoreInQueryModel;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Resource;
 import io.sphere.sdk.models.SphereEnumeration;
@@ -25,12 +26,15 @@ final class QueryModelRules extends GenerationRules {
         super(typeElement, builder);
         interfaceRules.add(new ResourceRule());
         interfaceRules.add(new CustomFieldsRule());
+        beanMethodRules.add(new IgnoreAnnotatedElements());
         beanMethodRules.add(new GenerateMethodRule());
         queryModelSelectionRules.add(new LocalizedStringQueryModelSelectionRule());
         queryModelSelectionRules.add(new SetOfSphereEnumerationQueryModelSelectionRule());
+        queryModelSelectionRules.add(new SimpleQueryModelSelectionRule("java.lang.Boolean", "BooleanQueryModel"));
         queryModelSelectionRules.add(new SimpleQueryModelSelectionRule("java.lang.String", "StringQuerySortingModel"));
         queryModelSelectionRules.add(new SimpleQueryModelSelectionRule("io.sphere.sdk.reviews.ReviewRatingStatistics", "ReviewRatingStatisticsQueryModel"));
         queryModelSelectionRules.add(new SimpleQueryModelSelectionRule("io.sphere.sdk.models.Address", "AddressQueryModel"));
+        queryModelSelectionRules.add(new SimpleQueryModelSelectionRule("java.time.ZonedDateTime", "TimestampSortingModel"));
     }
 
     @Override
@@ -82,7 +86,7 @@ final class QueryModelRules extends GenerationRules {
             queryModelSelectionRules.stream()
                     .filter(rule -> rule.x(beanGetter, methodModel, contextType))
                     .findFirst()
-            .orElseThrow(() -> new RuntimeException("no query model type for " + typeElement + " " + beanGetter + " in " + queryModelSelectionRules));
+            .orElseThrow(() -> new RuntimeException("no query model type for " + beanGetter.getReturnType()+ " " + typeElement + " " + beanGetter + " in " + queryModelSelectionRules));
             builder.addMethod(methodModel);
             return true;
         }
@@ -188,6 +192,13 @@ final class QueryModelRules extends GenerationRules {
         @Override
         public boolean accept(final ExecutableElement beanGetter) {
             return beanGetter.getSimpleName().toString().equals("getCustom");
+        }
+    }
+
+    private class IgnoreAnnotatedElements extends BeanMethodRule {
+        @Override
+        public boolean accept(final ExecutableElement beanGetter) {
+            return beanGetter.getAnnotation(IgnoreInQueryModel.class) != null;
         }
     }
 }

@@ -70,7 +70,7 @@ final class QueryModelImplRules extends GenerationRules {
             queryModelSelectionRules.stream()
                     .filter(rule -> rule.apply(method, methodModel, getContextType()))
                     .findFirst()
-                    .orElseThrow(() -> new RuntimeException("no query model impl type for " + typeElement + " " + method));
+                    .orElseThrow(() -> new RuntimeException("no query model impl type for " + method.getReturnType() + " " + typeElement + " " + method));
             builder.addMethod(methodModel);
             return true;
         }
@@ -120,7 +120,7 @@ final class QueryModelImplRules extends GenerationRules {
         @Override
         public boolean apply(final ExecutableElement method, final MethodModel methodModel, final String contextType) {
             final String returnType = method.getReturnType().toString();
-            final boolean standardQueryModel = returnType.matches("io.sphere.sdk.queries.\\w+Query\\w*Model[<].*");
+            final boolean standardQueryModel = returnType.matches("io.sphere.sdk.queries.(\\w+Query\\w*Model|TimestampSortingModel)[<].*");
             if (standardQueryModel) {
                 final String intermediate = returnType.replace("io.sphere.sdk.queries.", "");
                 final String type = intermediate.substring(0, intermediate.indexOf("<"));
