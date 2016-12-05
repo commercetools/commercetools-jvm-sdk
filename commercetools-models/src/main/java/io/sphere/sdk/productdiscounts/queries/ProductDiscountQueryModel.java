@@ -6,7 +6,9 @@ import io.sphere.sdk.queries.LocalizedStringQuerySortingModel;
 import io.sphere.sdk.queries.ResourceQueryModel;
 
 public interface ProductDiscountQueryModel extends ResourceQueryModel<ProductDiscount> {
-    BooleanQueryModel<ProductDiscount> isActive();
+    default BooleanQueryModel<ProductDiscount> isActive() {
+        return active();
+    }
 
     BooleanQueryModel<ProductDiscount> active();
 

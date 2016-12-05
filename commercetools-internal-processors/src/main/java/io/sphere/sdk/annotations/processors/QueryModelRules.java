@@ -1,5 +1,6 @@
 package io.sphere.sdk.annotations.processors;
 
+import io.sphere.sdk.annotations.HasQueryModel;
 import io.sphere.sdk.annotations.IgnoreInQueryModel;
 import io.sphere.sdk.annotations.QueryModelHint;
 import io.sphere.sdk.models.LocalizedString;
@@ -21,6 +22,7 @@ import java.util.stream.Stream;
 import static io.sphere.sdk.annotations.processors.ClassConfigurer.createBeanGetterStream;
 import static io.sphere.sdk.annotations.processors.ClassConfigurer.fieldNameFromGetter;
 import static java.util.Arrays.asList;
+import static java.util.stream.Collectors.joining;
 import static org.apache.commons.lang3.StringUtils.removeEnd;
 import static org.apache.commons.lang3.StringUtils.removeStart;
 
@@ -57,6 +59,11 @@ final class QueryModelRules extends GenerationRules {
         final AnnotationModel a = new AnnotationModel();
         a.setName("HasQueryModelImplementation");
         builder.addAnnotation(a);
+        Optional.ofNullable(typeElement.getAnnotation(HasQueryModel.class))
+                .ifPresent(anno -> {
+                    final String content = Arrays.stream(anno.additionalContents()).collect(joining(" "));
+                    builder.setAdditions(content);
+                });
         builder.addImport(typeElement.getQualifiedName().toString());
         final List<? extends TypeMirror> interfaces = typeElement.getInterfaces();
             final Stream<? extends TypeMirror> subInterfaces = interfaces.stream()
