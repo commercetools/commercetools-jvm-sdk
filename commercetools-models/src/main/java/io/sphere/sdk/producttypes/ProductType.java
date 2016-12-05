@@ -55,6 +55,7 @@ import java.util.Optional;
         " {@include.example io.sphere.sdk.producttypes.commands.ProductTypeDeleteCommandIntegrationTest#execution()}\n" +
         " <p>Delete by key:</p>\n" +
         " {@include.example io.sphere.sdk.producttypes.commands.ProductTypeDeleteCommandIntegrationTest#executionByKey()}", deleteWithKey = true)
+@HasQueryModel
 public interface ProductType extends Resource<ProductType>, AttributeDefinitionContainer, WithKey {
 
     String getName();
@@ -62,6 +63,7 @@ public interface ProductType extends Resource<ProductType>, AttributeDefinitionC
     String getDescription();
 
     @Override
+    @QueryModelHint(type = "AttributeDefinitionQueryModel<ProductType>", impl = "return new AttributeDefinitionQueryModelImpl<>(this, fieldName);")
     List<AttributeDefinition> getAttributes();
 
     @Nullable
