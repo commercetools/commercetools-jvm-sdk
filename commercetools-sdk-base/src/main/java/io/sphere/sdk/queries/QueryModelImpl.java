@@ -62,6 +62,10 @@ public class QueryModelImpl<T> extends Base implements QueryModel<T> {
         return referenceOptionalModel(pathSegment);
     }
 
+    protected <R> ReferenceCollectionQueryModel<T, R> referenceCollectionQueryModel(final String pathSegment) {
+        return new ReferenceCollectionQueryModelImpl<>(this, pathSegment);
+    }
+
     protected <R> ReferenceCollectionQueryModel<T, R> referenceCollectionModel(final String pathSegment) {
         return new ReferenceCollectionQueryModelImpl<>(this, pathSegment);
     }

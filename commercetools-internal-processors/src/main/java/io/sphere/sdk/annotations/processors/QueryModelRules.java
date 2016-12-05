@@ -7,11 +7,8 @@ import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Resource;
 import io.sphere.sdk.models.SphereEnumeration;
 import io.sphere.sdk.queries.ResourceQueryModel;
-import org.apache.commons.lang3.StringUtils;
 
 import javax.annotation.Nullable;
-import javax.lang.model.AnnotatedConstruct;
-import javax.lang.model.element.Element;
 import javax.lang.model.element.ExecutableElement;
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.type.DeclaredType;
@@ -40,6 +37,7 @@ final class QueryModelRules extends GenerationRules {
         queryModelSelectionRules.add(new LocalizedStringQueryModelSelectionRule());
         queryModelSelectionRules.add(new ReferenceQueryModelSelectionRule());
         queryModelSelectionRules.add(new SetOfSphereEnumerationQueryModelSelectionRule());
+        queryModelSelectionRules.add(new SetOfReferenceSelectionRule());
         queryModelSelectionRules.add(new SphereEnumerationQueryModelSelectionRule());
         queryModelSelectionRules.add(new SimpleQueryModelSelectionRule("java.lang.Boolean", "BooleanQueryModel"));
         queryModelSelectionRules.add(new SimpleQueryModelSelectionRule("java.lang.String", "StringQuerySortingModel"));
@@ -105,7 +103,7 @@ final class QueryModelRules extends GenerationRules {
             queryModelSelectionRules.stream()
                     .filter(rule -> rule.x(beanGetter, methodModel, contextType))
                     .findFirst()
-            .orElseThrow(() -> new RuntimeException("no query model type for " + beanGetter.getReturnType()+ " " + typeElement + " " + beanGetter + " in " + queryModelSelectionRules));
+            .orElseThrow(() -> new RuntimeException("Cannot generate " + builder.getName() + ", does not know query model class for " + beanGetter.getReturnType()+ " " + beanGetter.getSimpleName() + "() in " + typeElement + " with rules " + queryModelSelectionRules));
             builder.addMethod(methodModel);
             return true;
         }
@@ -131,14 +129,25 @@ final class QueryModelRules extends GenerationRules {
         public abstract boolean x(final ExecutableElement beanGetter, final MethodModel methodModel, final String contextType);
     }
 
+    private static Optional<DeclaredType> collectionTypeReturnType(final ExecutableElement beanGetter) {
+        return Optional.ofNullable(beanGetter.getReturnType())
+                .filter(g -> g instanceof DeclaredType)
+                .map(g -> (DeclaredType) g)
+                .filter(g -> {
+                    final String uncheckedType = g.asElement().getSimpleName().toString();
+                    return asList("Set", "List").contains(uncheckedType) && g.getTypeArguments().size() == 1;
+                });
+    }
+
     public class SetOfSphereEnumerationQueryModelSelectionRule extends QueryModelSelectionRule {
         @Override
         public boolean x(final ExecutableElement beanGetter, final MethodModel methodModel, final String contextType) {
-            final TypeMirror returnType = beanGetter.getReturnType();
-            if (returnType instanceof DeclaredType) {
-                final DeclaredType x = (DeclaredType) returnType;
+            final Optional<DeclaredType> returnTypeOptional = collectionTypeReturnType(beanGetter);
+            if (returnTypeOptional.isPresent()) {
+                final DeclaredType x = returnTypeOptional.get();
                 final String uncheckedType = x.asElement().getSimpleName().toString();
-                if (asList("Set", "List").contains(uncheckedType) && x.getTypeArguments().size() == 1) {
+                final boolean isCollection = asList("Set", "List").contains(uncheckedType) && x.getTypeArguments().size() == 1;
+                if (isCollection) {
                     final DeclaredType declaredType = (DeclaredType) x.getTypeArguments().get(0);
                     final TypeElement classInList = (TypeElement) declaredType.asElement();
                     final Optional<TypeElement> typeParameterOptional = classInList.getInterfaces().stream()
@@ -262,6 +271,25 @@ final class QueryModelRules extends GenerationRules {
                 return true;
             }
             return false;
+        }
+    }
+
+    private class SetOfReferenceSelectionRule extends QueryModelSelectionRule {
+        @Override
+        public boolean x(final ExecutableElement beanGetter, final MethodModel methodModel, final String contextType) {
+            final Optional<DeclaredType> declaredTypeOptional = collectionTypeReturnType(beanGetter)
+                    .filter(returnType -> {
+
+                        final DeclaredType declaredType = (DeclaredType) returnType.getTypeArguments().get(0);
+
+                        final boolean contains = declaredType.asElement().getSimpleName().toString().equals(Reference.class.getSimpleName());
+                        return contains;
+                    });
+            declaredTypeOptional.ifPresent(returnType -> {
+                final String param = ((DeclaredType)returnType.getTypeArguments().get(0)).getTypeArguments().get(0).toString();
+                methodModel.setReturnType("ReferenceCollectionQueryModel<" + param + ", " + contextType + ">");
+            });
+            return declaredTypeOptional.isPresent();
         }
     }
 }
