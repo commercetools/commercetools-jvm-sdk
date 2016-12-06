@@ -49,7 +49,7 @@ import java.util.Set;
 @HasByIdGetEndpoint(javadocSummary = "Gets an order by ID.", includeExamples = "io.sphere.sdk.orders.commands.OrderFromCartCreateCommandIntegrationTest#execution()")
 @HasUpdateCommand
 @HasDeleteCommand
-@HasQueryModel(implBaseClass = "io.sphere.sdk.carts.queries.CartLikeQueryModelImpl<Order>")
+@HasQueryModel(implBaseClass = "io.sphere.sdk.carts.queries.CartLikeQueryModelImpl<Order>", baseInterfaces = {"CartLikeQueryModel<Order>"})
 public interface Order extends CartLike<Order> {
     /**
      * An identifier for this resource which supports {@link CustomFields}.
@@ -130,7 +130,7 @@ public interface Order extends CartLike<Order> {
     PaymentState getPaymentState();
 
     @Nullable
-    @QueryModelHint(type = "CartShippingInfoQueryModel<Order>", impl = "return new CartShippingInfoQueryModelImpl<>(this, fieldName);")
+    @QueryModelHint(type = "CartShippingInfoQueryModel<Order>")
     OrderShippingInfo getShippingInfo();
 
     /**
@@ -173,11 +173,11 @@ public interface Order extends CartLike<Order> {
     String getCustomerId();
 
     @Override
-    @QueryModelHint(type = "CustomLineItemCollectionQueryModel<Order>", impl = "return new LineItemLikeCollectionQueryModelImpl<>(this, fieldName);")
+    @QueryModelHint(type = "CustomLineItemCollectionQueryModel<Order>")
     List<CustomLineItem> getCustomLineItems();
 
     @Override
-    @QueryModelHint(type = "LineItemCollectionQueryModel<Order>", impl = "return new LineItemLikeCollectionQueryModelImpl<>(this, fieldName);")
+    @QueryModelHint(type = "LineItemCollectionQueryModel<Order>")
     List<LineItem> getLineItems();
 
     /**
@@ -193,7 +193,7 @@ public interface Order extends CartLike<Order> {
 
     @Override
     @Nullable
-    @QueryModelHint(type = "TaxedPriceOptionalQueryModel<Order>", impl = "return new TaxedPriceOptionalQueryModelImpl<>(this, fieldName);")
+    @QueryModelHint(type = "TaxedPriceOptionalQueryModel<Order>")
     TaxedPrice getTaxedPrice();
 
     @Override
@@ -210,7 +210,7 @@ public interface Order extends CartLike<Order> {
     Reference<Cart> getCart();
 
     @Override
-    @QueryModelHint(type = "DiscountCodeInfoCollectionQueryModel<Order>", impl = "return new DiscountCodeInfoCollectionQueryModelImpl<>(this, fieldName);")
+    @QueryModelHint(type = "DiscountCodeInfoCollectionQueryModel<Order>")
     List<DiscountCodeInfo> getDiscountCodes();
 
     @Nullable
@@ -236,7 +236,7 @@ public interface Order extends CartLike<Order> {
      */
     @Nullable
     @Override
-    @QueryModelHint(type = "PaymentInfoQueryModel<Order>", impl = "return new PaymentInfoQueryModelImpl<>(this, fieldName);")
+    @QueryModelHint(type = "PaymentInfoQueryModel<Order>")
     PaymentInfo getPaymentInfo();
 
     /**

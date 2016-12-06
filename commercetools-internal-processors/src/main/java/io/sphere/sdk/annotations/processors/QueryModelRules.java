@@ -68,6 +68,9 @@ final class QueryModelRules extends GenerationRules {
                     if (anno.implBaseClass() != null) {
                         a.setValues(Collections.singletonMap("implBaseClass", anno.implBaseClass()));
                     }
+                    for (final String baseInterface : anno.baseInterfaces()) {
+                        builder.addInterface(baseInterface);
+                    }
                 });
         builder.addImport(typeElement.getQualifiedName().toString());
         final List<? extends TypeMirror> interfaces = typeElement.getInterfaces();

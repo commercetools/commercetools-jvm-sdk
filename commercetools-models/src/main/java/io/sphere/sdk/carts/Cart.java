@@ -39,7 +39,7 @@ import java.util.List;
 @HasCreateCommand(javadocSummary = "Creates a cart.", includeExamples = {"io.sphere.sdk.carts.commands.CartCreateCommandIntegrationTest#execution()", "io.sphere.sdk.carts.commands.CartCreateCommandIntegrationTest#fullExample()"})
 @HasUpdateCommand(javadocSummary = "Updates a cart.")
 @HasDeleteCommand(javadocSummary = "Deletes a cart.")
-@HasQueryModel
+@HasQueryModel(implBaseClass = "CartLikeQueryModelImpl<Cart>", baseInterfaces = {"CartLikeQueryModel<Cart>"})
 public interface Cart extends CartLike<Cart> {
 
     /**
@@ -99,7 +99,7 @@ public interface Cart extends CartLike<Cart> {
 
     @Override
     @Nullable
-    @QueryModelHint(type = "CartShippingInfoQueryModel<Cart>", impl = "return new CartShippingInfoQueryModelImpl<>(this, fieldName);")
+    @QueryModelHint(type = "CartShippingInfoQueryModel<Cart>")
     CartShippingInfo getShippingInfo();
 
     @Nullable
@@ -135,11 +135,11 @@ public interface Cart extends CartLike<Cart> {
      * @see Order#getCustomLineItems()
      */
     @Override
-    @QueryModelHint(type = "CustomLineItemCollectionQueryModel<Cart>", impl = "return new LineItemLikeCollectionQueryModelImpl<>(this, fieldName);")
+    @QueryModelHint(type = "CustomLineItemCollectionQueryModel<Cart>")
     List<CustomLineItem> getCustomLineItems();
 
     @Override
-    @QueryModelHint(type = "LineItemCollectionQueryModel<Cart>", impl = "return new LineItemLikeCollectionQueryModelImpl<>(this, fieldName);")
+    @QueryModelHint(type = "LineItemCollectionQueryModel<Cart>")
     List<LineItem> getLineItems();
 
     @Override
@@ -148,14 +148,14 @@ public interface Cart extends CartLike<Cart> {
 
     @Override
     @Nullable
-    @QueryModelHint(type = "TaxedPriceOptionalQueryModel<Cart>", impl = "return new TaxedPriceOptionalQueryModelImpl<>(this, fieldName);")
+    @QueryModelHint(type = "TaxedPriceOptionalQueryModel<Cart>")
     TaxedPrice getTaxedPrice();
 
     @Override
     MonetaryAmount getTotalPrice();
 
     @Override
-    @QueryModelHint(type = "DiscountCodeInfoCollectionQueryModel<Cart>", impl = "return new DiscountCodeInfoCollectionQueryModelImpl<>(this, fieldName);")
+    @QueryModelHint(type = "DiscountCodeInfoCollectionQueryModel<Cart>")
     List<DiscountCodeInfo> getDiscountCodes();
 
     @Nullable
@@ -164,7 +164,7 @@ public interface Cart extends CartLike<Cart> {
 
     @Nullable
     @Override
-    @QueryModelHint(type = "PaymentInfoQueryModel<Cart>", impl = "return new PaymentInfoQueryModelImpl<>(this, fieldName);")
+    @QueryModelHint(type = "PaymentInfoQueryModel<Cart>")
     PaymentInfo getPaymentInfo();
 
     /**
