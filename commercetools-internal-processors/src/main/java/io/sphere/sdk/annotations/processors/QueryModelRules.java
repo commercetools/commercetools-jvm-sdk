@@ -60,10 +60,14 @@ final class QueryModelRules extends GenerationRules {
         final AnnotationModel a = new AnnotationModel();
         a.setName("HasQueryModelImplementation");
         builder.addAnnotation(a);
+        addImportsForCartOrder();
         Optional.ofNullable(typeElement.getAnnotation(HasQueryModel.class))
                 .ifPresent(anno -> {
                     final String content = Arrays.stream(anno.additionalContents()).collect(joining(" "));
                     builder.setAdditions(content);
+                    if (anno.implBaseClass() != null) {
+                        a.setValues(Collections.singletonMap("implBaseClass", anno.implBaseClass()));
+                    }
                 });
         builder.addImport(typeElement.getQualifiedName().toString());
         final List<? extends TypeMirror> interfaces = typeElement.getInterfaces();
@@ -77,6 +81,14 @@ final class QueryModelRules extends GenerationRules {
         createBeanGetterStream(typeElement).forEach(beanGetter -> beanMethodRules.stream()
                 .filter(r -> r.accept((ExecutableElement)beanGetter))
                 .findFirst());
+    }
+
+    private void addImportsForCartOrder() {
+        if ((Stream.of("Order", "Cart").anyMatch(name -> builder.getName().contains(name)))) {
+            builder.addImport("io.sphere.sdk.carts.queries.*");
+            builder.addImport("io.sphere.sdk.orders.queries.*");
+            builder.addImport("io.sphere.sdk.payments.queries.*");
+        }
     }
 
     private class ResourceRule extends InterfaceRule {

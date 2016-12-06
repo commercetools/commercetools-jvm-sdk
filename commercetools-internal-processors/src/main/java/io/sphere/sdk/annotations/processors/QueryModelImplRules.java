@@ -1,5 +1,6 @@
 package io.sphere.sdk.annotations.processors;
 
+import io.sphere.sdk.annotations.HasQueryModelImplementation;
 import io.sphere.sdk.annotations.QueryModelHint;
 import io.sphere.sdk.queries.QueryModelImpl;
 import io.sphere.sdk.queries.ResourceQueryModelImpl;
@@ -8,10 +9,9 @@ import org.apache.commons.lang3.StringUtils;
 import javax.lang.model.element.ExecutableElement;
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.type.ReferenceType;
+import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import static io.sphere.sdk.annotations.processors.ClassConfigurer.fieldNameFromGetter;
@@ -24,6 +24,7 @@ final class QueryModelImplRules extends GenerationRules {
     QueryModelImplRules(final TypeElement typeElement, final ClassModelBuilder builder) {
         super(typeElement, builder);
         builder.addImport(builder.build().getPackageName().replace("queries", "") + getContextType());
+        interfaceRules.add(new AnnotationBaseClassRule());
         interfaceRules.add(new ExtendCustomResourceQueryModelImplRule());
         beanMethodRules.add(new IgnoreResourceFields());
         beanMethodRules.add(new GenerateMethodRule());
@@ -86,16 +87,9 @@ final class QueryModelImplRules extends GenerationRules {
                 builder.addImport("io.sphere.sdk.types.queries.CustomResourceQueryModelImpl");
                 final String contextType = getContextType();
                 builder.setBaseClassName("CustomResourceQueryModelImpl<" + contextType + ">");
-                beanMethodRules.addFirst(new IgnoreCustomFields());
+                beanMethodRules.addFirst(new IgnoreFields("custom"));
             }
             return false;
-        }
-    }
-
-    private class IgnoreCustomFields extends BeanMethodRule {
-        @Override
-        public boolean accept(final ExecutableElement beanGetter) {
-            return beanGetter.getSimpleName().toString().equals("custom");
         }
     }
 
@@ -158,6 +152,34 @@ final class QueryModelImplRules extends GenerationRules {
                 return true;
             }
             return false;
+        }
+    }
+
+    private class AnnotationBaseClassRule extends InterfaceRule {
+        @Override
+        public boolean accept(final ReferenceType i) {
+            return Optional.ofNullable(typeElement.getAnnotation(HasQueryModelImplementation.class))
+                    .map(HasQueryModelImplementation::implBaseClass)
+                    .filter(StringUtils::isNotEmpty)
+                    .map(baseClass -> {
+                        builder.setBaseClassName(baseClass);
+                        beanMethodRules.addFirst(new IgnoreFields("customerId", "customerEmail", "totalPrice", "taxedPrice", "country", "customerGroup", "lineItems", "customLineItems", "shippingAddress", "billingAddress", "shippingInfo", "discountCodes", "paymentInfo", "anonymousId", "locale", "custom"));
+                        return true;
+                    })
+                    .orElse(false);
+        }
+    }
+
+    private class IgnoreFields extends BeanMethodRule {
+        private final Set<String> fields;
+
+        public IgnoreFields(final String ... fields) {
+            this.fields = new HashSet<>(asList(fields));
+        }
+
+        @Override
+        public boolean accept(final ExecutableElement beanGetter) {
+            return fields.contains(beanGetter.getSimpleName().toString());
         }
     }
 }

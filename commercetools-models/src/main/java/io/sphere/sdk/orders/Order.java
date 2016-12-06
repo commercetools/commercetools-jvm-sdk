@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.neovisionaries.i18n.CountryCode;
 import io.sphere.sdk.annotations.*;
 import io.sphere.sdk.carts.*;
+import io.sphere.sdk.carts.queries.CartLikeQueryModelImpl;
 import io.sphere.sdk.customergroups.CustomerGroup;
 import io.sphere.sdk.discountcodes.DiscountCodeInfo;
 import io.sphere.sdk.models.Address;
@@ -48,6 +49,7 @@ import java.util.Set;
 @HasByIdGetEndpoint(javadocSummary = "Gets an order by ID.", includeExamples = "io.sphere.sdk.orders.commands.OrderFromCartCreateCommandIntegrationTest#execution()")
 @HasUpdateCommand
 @HasDeleteCommand
+@HasQueryModel(implBaseClass = "io.sphere.sdk.carts.queries.CartLikeQueryModelImpl<Order>")
 public interface Order extends CartLike<Order> {
     /**
      * An identifier for this resource which supports {@link CustomFields}.
@@ -128,6 +130,7 @@ public interface Order extends CartLike<Order> {
     PaymentState getPaymentState();
 
     @Nullable
+    @QueryModelHint(type = "CartShippingInfoQueryModel<Order>", impl = "return new CartShippingInfoQueryModelImpl<>(this, fieldName);")
     OrderShippingInfo getShippingInfo();
 
     /**
@@ -135,8 +138,10 @@ public interface Order extends CartLike<Order> {
      * @return sync infos
      * @see io.sphere.sdk.orders.commands.updateactions.UpdateSyncInfo
      */
+    @QueryModelHint(type = "SyncInfoQueryModel<Order>", impl = "return new SyncInfoQueryModelImpl<>(this, fieldName);")
     Set<SyncInfo> getSyncInfo();
 
+    @IgnoreInQueryModel
     List<ReturnInfo> getReturnInfo();
 
     Long getLastMessageSequenceNumber();
@@ -168,9 +173,11 @@ public interface Order extends CartLike<Order> {
     String getCustomerId();
 
     @Override
+    @QueryModelHint(type = "CustomLineItemCollectionQueryModel<Order>", impl = "return new LineItemLikeCollectionQueryModelImpl<>(this, fieldName);")
     List<CustomLineItem> getCustomLineItems();
 
     @Override
+    @QueryModelHint(type = "LineItemCollectionQueryModel<Order>", impl = "return new LineItemLikeCollectionQueryModelImpl<>(this, fieldName);")
     List<LineItem> getLineItems();
 
     /**
@@ -186,6 +193,7 @@ public interface Order extends CartLike<Order> {
 
     @Override
     @Nullable
+    @QueryModelHint(type = "TaxedPriceOptionalQueryModel<Order>", impl = "return new TaxedPriceOptionalQueryModelImpl<>(this, fieldName);")
     TaxedPrice getTaxedPrice();
 
     @Override
@@ -202,6 +210,7 @@ public interface Order extends CartLike<Order> {
     Reference<Cart> getCart();
 
     @Override
+    @QueryModelHint(type = "DiscountCodeInfoCollectionQueryModel<Order>", impl = "return new DiscountCodeInfoCollectionQueryModelImpl<>(this, fieldName);")
     List<DiscountCodeInfo> getDiscountCodes();
 
     @Nullable
@@ -227,6 +236,7 @@ public interface Order extends CartLike<Order> {
      */
     @Nullable
     @Override
+    @QueryModelHint(type = "PaymentInfoQueryModel<Order>", impl = "return new PaymentInfoQueryModelImpl<>(this, fieldName);")
     PaymentInfo getPaymentInfo();
 
     /**
