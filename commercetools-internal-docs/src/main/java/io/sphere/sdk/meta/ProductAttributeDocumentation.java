@@ -115,7 +115,7 @@ import io.sphere.sdk.products.attributes.AttributeAccess;
 
  <h3 id="attribute-table-creation">Creating a table of attributes using {@link io.sphere.sdk.products.attributes.DefaultProductAttributeFormatter}</h3>
 
- <p>To create a table of attributes using a subclass of {@link io.sphere.sdk.products.attributes.DefaultProductAttributeFormatter} is the most convenient way. Since you can rely on defaults and just override the behaviour you want to specify. To initialize the class you need the supported locales of the user viewing the table and the cached {@link io.sphere.sdk.producttypes.ProductType}s of the commercetools project. You can fetch them all with {@link io.sphere.sdk.queries.QueryExecutionUtils}. </p>
+ <p>The most convenient way of creating a table of attributes is using a subclass of {@link io.sphere.sdk.products.attributes.DefaultProductAttributeFormatter}, since you can rely on defaults and just override the behaviour you want to specify. To initialize the class you need the supported locales of the user viewing the table and the cached {@link io.sphere.sdk.producttypes.ProductType}s of the commercetools project. Remember that you can fetch them all using {@link io.sphere.sdk.queries.QueryExecutionUtils}.</p>
 
  <p>One example for a subclass:</p>
 
