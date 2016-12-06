@@ -234,7 +234,7 @@ final class QueryModelRules extends GenerationRules {
         @Override
         public boolean x(final ExecutableElement beanGetter, final MethodModel methodModel, final String contextType) {
             if (beanGetter.getReturnType().toString().equals(LocalizedString.class.getCanonicalName())) {
-                final String type = beanGetter.getAnnotation(Nullable.class) != null ? "LocalizedStringOptionalQueryModel" : "LocalizedStringQueryModel";
+                final String type = beanGetter.getAnnotation(Nullable.class) != null ? "LocalizedStringOptionalQueryModel" : "LocalizedStringQuerySortingModel";
                 methodModel.setReturnType(type + "<" + contextType + ">");
                 return true;
             }
@@ -326,18 +326,18 @@ final class QueryModelRules extends GenerationRules {
         public boolean x(final ExecutableElement beanGetter, final MethodModel methodModel, final String contextType) {
             final Map<String, String> map = new HashMap<>();
             map.put("String", "StringCollectionQueryModel");
-            final Optional<String> typerParameterOptional = collectionTypeReturnType(beanGetter)
+            final Optional<String> typeParameterOptional = collectionTypeReturnType(beanGetter)
                     .map(returnType -> {
 
                         final DeclaredType declaredType = (DeclaredType) returnType.getTypeArguments().get(0);
 
                         final String beanGetterCollectionTypeParameter = declaredType.asElement().getSimpleName().toString();
-                        return map.get(beanGetterCollectionTypeParameter);
+                        return beanGetterCollectionTypeParameter;
                     });
-            typerParameterOptional.ifPresent(param -> {
+            typeParameterOptional.ifPresent(param -> {
                 methodModel.setReturnType(map.get(param) + "<" + contextType + ">");
             });
-            return typerParameterOptional.isPresent();
+            return typeParameterOptional.isPresent();
         }
     }
 }

@@ -49,7 +49,9 @@ import static java.util.stream.Collectors.toList;
 @HasCreateCommand(javadocSummary = "Creates a {@link io.sphere.sdk.shippingmethods.ShippingMethod}.", includeExamples = "io.sphere.sdk.shippingmethods.commands.ShippingMethodCreateCommandIntegrationTest#execution()")
 @HasUpdateCommand
 @HasDeleteCommand
-@HasQueryModel
+@HasQueryModel(additionalContents = "    default BooleanQueryModel<ShippingMethod> isDefault() {\n" +
+        "        return _default();\n" +
+        "    }")
 public interface ShippingMethod extends Resource<ShippingMethod> {
     String getName();
 

@@ -123,7 +123,9 @@ import java.util.Optional;
         " \n" +
         " To update the properties {@link Customer#isEmailVerified()} or {@link Customer#getPassword()} special commands are required which are documented in the {@link Customer customer Javadoc}.")
 @HasDeleteCommand(javadocSummary = "Deletes a customer.", includeExamples = "io.sphere.sdk.customers.commands.CustomerDeleteCommandIntegrationTest#execution()")
-@HasQueryModel
+@HasQueryModel(additionalContents = "StringQuerySortingModel<Customer> lowercaseEmail();     default BooleanQueryModel<Customer> isEmailVerified() {\n" +
+        "        return emailVerified();\n" +
+        "    }")
 public interface Customer extends Resource<Customer>, Custom {
     /**
      * Gets the ID of this customer.

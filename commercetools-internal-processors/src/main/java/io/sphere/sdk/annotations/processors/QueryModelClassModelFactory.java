@@ -19,7 +19,7 @@ final class QueryModelClassModelFactory extends ClassModelFactory {
                 .classJavadoc(null)
                 .modifiers("public")
                 .interfaceType()
-                .className(s -> s + "QueryModelTODO")
+                .className(s -> s + "QueryModel")
                 .interfaces()
                 .fields()
                 .constructors()
