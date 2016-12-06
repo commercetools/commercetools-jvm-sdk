@@ -26,6 +26,7 @@ final class QueryModelImplRules extends GenerationRules {
         builder.addImport(builder.build().getPackageName().replace("queries", "") + getContextType());
         interfaceRules.add(new AnnotationBaseClassRule());
         interfaceRules.add(new ExtendCustomResourceQueryModelImplRule());
+        beanMethodRules.add(new IgnoreQueryModelFields());
         beanMethodRules.add(new IgnoreResourceFields());
         beanMethodRules.add(new GenerateMethodRule());
         queryModelSelectionRules.add(new AnnotationHintRule());
@@ -180,6 +181,12 @@ final class QueryModelImplRules extends GenerationRules {
         @Override
         public boolean accept(final ExecutableElement beanGetter) {
             return fields.contains(beanGetter.getSimpleName().toString());
+        }
+    }
+
+    private class IgnoreQueryModelFields extends IgnoreFields {
+        public IgnoreQueryModelFields() {
+            super("getParent", "getPathSegment");
         }
     }
 }

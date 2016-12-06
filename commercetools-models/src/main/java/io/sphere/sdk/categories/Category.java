@@ -59,7 +59,7 @@ import java.util.List;
 @HasCreateCommand(includeExamples = "io.sphere.sdk.categories.commands.CategoryCreateCommandIntegrationTest#execution()")
 @HasUpdateCommand(javadocSummary = "Updates a category.")
 @HasDeleteCommand(javadocSummary = "Deletes a category.", includeExamples = "io.sphere.sdk.categories.commands.CategoryDeleteCommandIntegrationTest#execution()")
-@HasQueryModel()
+@HasQueryModel(baseInterfaces = {"io.sphere.sdk.queries.QueryModel<io.sphere.sdk.categories.Category>"})
 public interface Category extends Resource<Category>, WithLocalizedSlug, MetaAttributes, Custom {
 
     /**

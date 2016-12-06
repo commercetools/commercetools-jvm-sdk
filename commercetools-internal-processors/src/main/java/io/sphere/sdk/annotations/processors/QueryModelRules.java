@@ -245,7 +245,8 @@ final class QueryModelRules extends GenerationRules {
     private class CustomFieldsRule extends InterfaceRule {
         @Override
         public boolean accept(final ReferenceType typeMirror) {
-            if (typeMirror.toString().equals("io.sphere.sdk.types.Custom")) {
+            final String refType = typeMirror.toString();
+            if (refType.matches("^(io.sphere.sdk.types.)?Custom$")) {
                 final String contextType = typeElement.getSimpleName().toString();
                 builder.addInterface("WithCustomQueryModel<" + contextType + ">");
                 builder.addImport("io.sphere.sdk.types.queries.WithCustomQueryModel");
