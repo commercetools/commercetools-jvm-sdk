@@ -108,4 +108,10 @@ public interface CustomerDraft extends CustomDraft {
 
     @Nullable
     Locale getLocale();
+
+    @Nullable
+    List<Integer> getBillingAddresses();
+
+    @Nullable
+    List<Integer> getShippingAddresses();
 }

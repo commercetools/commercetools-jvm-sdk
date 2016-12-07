@@ -71,7 +71,7 @@ public class CustomerFixtures {
         });
     }
 
-    public static CustomerDraft newCustomerDraft() {
+    public static CustomerDraftDsl newCustomerDraft() {
         return CustomerDraftDsl.of(CUSTOMER_NAME, randomEmail(CustomerFixtures.class), PASSWORD);
     }
 }
