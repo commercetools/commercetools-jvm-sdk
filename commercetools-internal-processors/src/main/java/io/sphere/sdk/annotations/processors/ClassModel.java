@@ -10,6 +10,7 @@ final class ClassModel {
     private String packageName;
     private String additions;
     private String baseClassName;
+    private String codeGeneratedInfo;
     private List<String> modifiers = new LinkedList<>();
     private List<MethodModel> methods = new LinkedList<>();
     private List<MethodModel> constructors = new LinkedList<>();
@@ -139,5 +140,13 @@ final class ClassModel {
 
     public void setAnnotations(final List<AnnotationModel> annotations) {
         this.annotations = annotations;
+    }
+
+    public String getCodeGeneratedInfo() {
+        return codeGeneratedInfo;
+    }
+
+    public void setCodeGeneratedInfo(final String codeGeneratedInfo) {
+        this.codeGeneratedInfo = codeGeneratedInfo;
     }
 }
