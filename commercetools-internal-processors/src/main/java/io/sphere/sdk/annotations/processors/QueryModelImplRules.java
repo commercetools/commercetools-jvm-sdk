@@ -57,7 +57,7 @@ final class QueryModelImplRules extends GenerationRules {
         final int i = fullName.indexOf(".queries.");
         return i == -1
                 ? fullName.substring(0, fullName.lastIndexOf(".")) + ".*;"
-                : fullName.substring(0, i) + ".*; //here3";
+                : fullName.substring(0, i) + ".*;";
     }
 
     private void addBaseClassAndConstructor() {
