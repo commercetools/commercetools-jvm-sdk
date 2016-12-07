@@ -37,13 +37,16 @@ public interface ProductDiscount extends Resource<ProductDiscount> {
     LocalizedString getName();
 
     @Nullable
+    @IgnoreInQueryModel
     LocalizedString getDescription();
 
     @IgnoreInQueryModel
     ProductDiscountValue getValue();
 
+    @IgnoreInQueryModel
     String getPredicate();
 
+    @IgnoreInQueryModel
     String getSortOrder();
 
     @JsonProperty("isActive")

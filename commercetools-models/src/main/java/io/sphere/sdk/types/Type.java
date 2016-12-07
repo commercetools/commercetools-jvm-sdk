@@ -37,9 +37,11 @@ import java.util.Set;
 public interface Type extends Resource<Type>, WithKey {
     String getKey();
 
+    @IgnoreInQueryModel
     LocalizedString getName();
 
     @Nullable
+    @IgnoreInQueryModel
     LocalizedString getDescription();
 
     Set<String> getResourceTypeIds();

@@ -49,6 +49,7 @@ public interface InventoryEntry extends Resource<InventoryEntry>, Custom {
      * @see io.sphere.sdk.inventory.commands.updateactions.SetExpectedDelivery
      */
     @Nullable
+    @IgnoreInQueryModel
     ZonedDateTime getExpectedDelivery();
 
     /**

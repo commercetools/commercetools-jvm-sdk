@@ -42,6 +42,7 @@ public interface TaxCategory extends Resource<TaxCategory> {
     String getName();
 
     @Nullable
+    @IgnoreInQueryModel
     String getDescription();
 
     /**

@@ -47,21 +47,27 @@ public interface State extends Resource<State>, WithKey {
     StateType getType();
 
     @Nullable
+    @IgnoreInQueryModel
     LocalizedString getName();
 
     @Nullable
+    @IgnoreInQueryModel
     LocalizedString getDescription();
 
     @JsonProperty("initial")
+    @IgnoreInQueryModel
     Boolean isInitial();
 
+    @IgnoreInQueryModel
     @JsonProperty("builtin")
     Boolean isBuiltIn();
 
     @Nullable
+    @IgnoreInQueryModel
     Set<Reference<State>> getTransitions();
 
     @Nullable
+    @IgnoreInQueryModel
     Set<StateRole> getRoles();
 
     default Reference<State> toReference() {

@@ -42,6 +42,7 @@ public interface CartDiscount extends Resource<CartDiscount> {
      *
      * @return predicate
      */
+    @IgnoreInQueryModel
     String getCartPredicate();
 
     /**
@@ -52,6 +53,7 @@ public interface CartDiscount extends Resource<CartDiscount> {
      * @return description or null
      */
     @Nullable
+    @IgnoreInQueryModel
     LocalizedString getDescription();
 
     /**
@@ -62,6 +64,7 @@ public interface CartDiscount extends Resource<CartDiscount> {
      * @return true if active
      */
     @JsonProperty("isActive")
+    @IgnoreInQueryModel
     Boolean isActive();
 
     /**
@@ -96,6 +99,7 @@ public interface CartDiscount extends Resource<CartDiscount> {
      *
      * @return sort order
      */
+    @IgnoreInQueryModel
     String getSortOrder();
 
     /**
@@ -116,6 +120,7 @@ public interface CartDiscount extends Resource<CartDiscount> {
      * @return valid from date or null
      */
     @Nullable
+    @IgnoreInQueryModel
     ZonedDateTime getValidFrom();
 
     /**
@@ -126,6 +131,7 @@ public interface CartDiscount extends Resource<CartDiscount> {
      * @return valid to date or null
      */
     @Nullable
+    @IgnoreInQueryModel
     ZonedDateTime getValidUntil();
 
     /**

@@ -60,6 +60,7 @@ public interface ProductType extends Resource<ProductType>, AttributeDefinitionC
 
     String getName();
 
+    @IgnoreInQueryModel
     String getDescription();
 
     @Override

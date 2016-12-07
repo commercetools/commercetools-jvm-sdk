@@ -120,6 +120,7 @@ public interface Review extends Resource<Review>, Custom, WithKey {
      * @return locale
      */
     @Nullable
+    @QueryModelHint(type = "io.sphere.sdk.queries.LocaleQuerySortingModel<io.sphere.sdk.reviews.Review>", impl = "return localeQuerySortingModel(fieldName);")
     Locale getLocale();
 
     /**

@@ -101,6 +101,7 @@ public interface Order extends CartLike<Order> {
     @Nullable
     String getOrderNumber();
 
+    @IgnoreInQueryModel
     InventoryMode getInventoryMode();
 
     /**
@@ -144,6 +145,7 @@ public interface Order extends CartLike<Order> {
     @IgnoreInQueryModel
     List<ReturnInfo> getReturnInfo();
 
+    @IgnoreInQueryModel
     Long getLastMessageSequenceNumber();
 
     /**
@@ -199,6 +201,7 @@ public interface Order extends CartLike<Order> {
     @Override
     MonetaryAmount getTotalPrice();
 
+    @IgnoreInQueryModel
     ZonedDateTime getCompletedAt();
 
     /**

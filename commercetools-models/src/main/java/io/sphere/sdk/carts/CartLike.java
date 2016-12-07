@@ -2,6 +2,7 @@ package io.sphere.sdk.carts;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.neovisionaries.i18n.CountryCode;
+import io.sphere.sdk.annotations.IgnoreInQueryModel;
 import io.sphere.sdk.carts.commands.updateactions.ChangeTaxMode;
 import io.sphere.sdk.customergroups.CustomerGroup;
 import io.sphere.sdk.customers.Customer;
@@ -178,6 +179,7 @@ public interface CartLike<T> extends Resource<T>, Custom {
      *
      * @return tax mode
      */
+    @IgnoreInQueryModel
     TaxMode getTaxMode();
 
     /**

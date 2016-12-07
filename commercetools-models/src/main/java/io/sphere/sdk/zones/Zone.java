@@ -68,6 +68,7 @@ public interface Zone extends Resource<Zone> {
     String getName();
 
     @Nullable
+    @IgnoreInQueryModel
     String getDescription();
 
     @QueryModelHint(type = "LocationsCollectionQueryModel<Zone>", impl = "return new LocationsCollectionQueryModelImpl<>(this, fieldName);")

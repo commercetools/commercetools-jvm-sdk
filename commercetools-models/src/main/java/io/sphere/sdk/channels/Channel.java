@@ -173,5 +173,6 @@ public interface Channel extends Resource<Channel>, WithKey, Custom {
      * @see io.sphere.sdk.channels.commands.updateactions.SetAddress
      */
     @Nullable
+    @IgnoreInQueryModel
     Address getAddress();
 }

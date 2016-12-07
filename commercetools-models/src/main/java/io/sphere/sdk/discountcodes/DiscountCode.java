@@ -64,6 +64,7 @@ public interface DiscountCode extends Resource<DiscountCode> {
      * @see io.sphere.sdk.discountcodes.commands.updateactions.SetDescription
      */
     @Nullable
+    @IgnoreInQueryModel
     LocalizedString getDescription();
 
     /**
@@ -102,6 +103,7 @@ public interface DiscountCode extends Resource<DiscountCode> {
      * @see io.sphere.sdk.discountcodes.commands.updateactions.SetName
      */
     @Nullable
+    @IgnoreInQueryModel
     LocalizedString getName();
 
     /**

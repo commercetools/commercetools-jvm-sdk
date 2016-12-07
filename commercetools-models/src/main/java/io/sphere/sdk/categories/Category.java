@@ -88,8 +88,10 @@ public interface Category extends Resource<Category>, WithLocalizedSlug, MetaAtt
      * @return description or null
      */
     @Nullable
+    @IgnoreInQueryModel
     LocalizedString getDescription();
 
+    @IgnoreInQueryModel
     List<Reference<Category>> getAncestors();
 
     /**
@@ -110,6 +112,7 @@ public interface Category extends Resource<Category>, WithLocalizedSlug, MetaAtt
      * @return order hint or null
      */
     @Nullable
+    @IgnoreInQueryModel
     String getOrderHint();
 
     /**
@@ -131,6 +134,7 @@ public interface Category extends Resource<Category>, WithLocalizedSlug, MetaAtt
      */
     @Nullable
     @Override
+    @IgnoreInQueryModel
     LocalizedString getMetaTitle();
 
     /**
@@ -142,6 +146,7 @@ public interface Category extends Resource<Category>, WithLocalizedSlug, MetaAtt
      */
     @Nullable
     @Override
+    @IgnoreInQueryModel
     LocalizedString getMetaDescription();
 
     /**
@@ -153,6 +158,7 @@ public interface Category extends Resource<Category>, WithLocalizedSlug, MetaAtt
      */
     @Nullable
     @Override
+    @IgnoreInQueryModel
     LocalizedString getMetaKeywords();
 
     /**

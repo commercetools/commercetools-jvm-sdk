@@ -95,6 +95,7 @@ public interface Cart extends CartLike<Cart> {
      */
     CartState getCartState();
 
+    @IgnoreInQueryModel
     InventoryMode getInventoryMode();
 
     @Override
