@@ -1,4 +1,5 @@
-{{#if packageName}}package {{packageName}};{{/if}}
+{{#if codeGeneratedInfo}}{{codeGeneratedInfo}}
+{{/if}}{{#if packageName}}package {{packageName}};{{/if}}
 {{#each imports}}
 import {{this}};{{/each}}
 {{#if javadoc}}/** {{javadoc}} */{{/if}}

@@ -19,4 +19,5 @@ public final class HasQueryModelAnnotationProcessor extends CommercetoolsAnnotat
     protected void generate(final TypeElement typeElement) {
         writeClass(typeElement, new QueryModelClassModelFactory(typeElement).createClassModel());
     }
+
 }
