@@ -42,6 +42,7 @@ final class QueryModelImplRules extends GenerationRules {
     void execute() {
         addBaseClassAndConstructor();
         builder.addImport(typeElement.getQualifiedName().toString());
+        builder.addImport(packageOfModels(typeElement));
         typeElement.getInterfaces().forEach(i -> interfaceRules.stream()
                 .filter(r -> r.accept((ReferenceType)i))
                 .findFirst());
@@ -49,6 +50,14 @@ final class QueryModelImplRules extends GenerationRules {
                 .forEach(beanGetter -> beanMethodRules.stream()
                 .filter(r -> r.accept(beanGetter))
                 .findFirst());
+    }
+
+    static String packageOfModels(final TypeElement typeElement) {
+        final String fullName = typeElement.getQualifiedName().toString();
+        final int i = fullName.indexOf(".queries.");
+        return i == -1
+                ? fullName.substring(0, fullName.lastIndexOf(".")) + ".*;"
+                : fullName.substring(0, i) + ".*; //here3";
     }
 
     private void addBaseClassAndConstructor() {
