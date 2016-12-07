@@ -1,20 +1,18 @@
 package io.sphere.sdk.annotations.processors;
 
 import io.sphere.sdk.annotations.HasQueryModelImplementation;
+import io.sphere.sdk.annotations.QueryModelFieldName;
 import io.sphere.sdk.annotations.QueryModelHint;
-import io.sphere.sdk.queries.QueryModelImpl;
 import io.sphere.sdk.queries.ResourceQueryModelImpl;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.lang.model.element.ExecutableElement;
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.type.ReferenceType;
-import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import static io.sphere.sdk.annotations.processors.ClassConfigurer.fieldNameFromGetter;
 import static io.sphere.sdk.annotations.processors.ClassConfigurer.instanceMethodStream;
 import static java.util.Arrays.asList;
 
@@ -76,7 +74,7 @@ final class QueryModelImplRules extends GenerationRules {
     public class GenerateMethodRule extends BeanMethodRule {
         @Override
         public boolean accept(final ExecutableElement method) {
-            final String fieldName = method.getSimpleName().toString();
+            final String fieldName = method.getSimpleName().toString();//do not use obtainFieldName() here since it is implementing a base class method
             final MethodModel methodModel = new MethodModel();
             methodModel.setName(fieldName);
             methodModel.setReturnType(method.getReturnType().toString());
@@ -131,7 +129,8 @@ final class QueryModelImplRules extends GenerationRules {
             if (standardQueryModel) {
                 final String intermediate = returnType.replace("io.sphere.sdk.queries.", "");
                 final String type = intermediate.substring(0, intermediate.indexOf("<"));
-                methodModel.setBody("return " + StringUtils.uncapitalize(type) + "(\"" + method.getSimpleName().toString() + "\");");
+                final String fieldName = obtainFieldName(method);
+                methodModel.setBody("return " + StringUtils.uncapitalize(type) + "(\"" + fieldName + "\");");
                 return true;
             }
             return false;
@@ -142,7 +141,7 @@ final class QueryModelImplRules extends GenerationRules {
         @Override
         public boolean apply(final ExecutableElement method, final MethodModel methodModel, final String contextType) {
             if (method.getReturnType().toString().contains("ReviewRatingStatisticsQueryModel")) {
-                final String fieldName = method.getSimpleName().toString();
+                final String fieldName =  method.getSimpleName().toString();
                 methodModel.setBody("return ReviewRatingStatisticsQueryModel.of(this, \"" + fieldName + "\");");
                 builder.addImport("io.sphere.sdk.reviews.queries.ReviewRatingStatisticsQueryModel");
                 return true;
@@ -151,12 +150,18 @@ final class QueryModelImplRules extends GenerationRules {
         }
     }
 
+    private String obtainFieldName(final ExecutableElement method) {
+        return Optional.ofNullable(method.getAnnotation(QueryModelFieldName.class))
+                .map(QueryModelFieldName::value)
+                .orElseGet(() -> method.getSimpleName().toString());
+    }
+
     private class AnnotationHintRule extends QueryModelMethodRule {
         @Override
         public boolean apply(final ExecutableElement method, final MethodModel methodModel, final String contextType) {
             final QueryModelHint a = method.getAnnotation(QueryModelHint.class);
             if (a != null) {
-                final String fieldName = method.getSimpleName().toString();
+                final String fieldName = obtainFieldName(method);
                 final String body = "final String fieldName = \"" + fieldName + "\";\n" + a.impl();
                 methodModel.setBody(body);
                 return true;

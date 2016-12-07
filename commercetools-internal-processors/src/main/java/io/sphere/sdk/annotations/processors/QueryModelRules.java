@@ -1,5 +1,6 @@
 package io.sphere.sdk.annotations.processors;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import io.sphere.sdk.annotations.HasQueryModel;
 import io.sphere.sdk.annotations.IgnoreInQueryModel;
 import io.sphere.sdk.annotations.QueryModelHint;
@@ -126,6 +127,8 @@ final class QueryModelRules extends GenerationRules {
             final MethodModel methodModel = new MethodModel();
             methodModel.setName(fieldName);
 
+            addHintForFieldName(beanGetter, methodModel);
+
             final String contextType = typeElement.getSimpleName().toString();
 
             queryModelSelectionRules.stream()
@@ -134,6 +137,18 @@ final class QueryModelRules extends GenerationRules {
             .orElseThrow(() -> new RuntimeException("Cannot generate " + builder.getName() + ", does not know query model class for " + beanGetter.getReturnType()+ " " + beanGetter.getSimpleName() + "() in " + typeElement + " with rules " + queryModelSelectionRules));
             builder.addMethod(methodModel);
             return true;
+        }
+
+        //so for boolean values important if they start with "is"
+        private void addHintForFieldName(final ExecutableElement beanGetter, final MethodModel methodModel) {
+            Optional.ofNullable(beanGetter.getAnnotation(JsonProperty.class))
+                    .map(JsonProperty::value)
+                    .ifPresent(platformFieldName -> {
+                        final AnnotationModel a = new AnnotationModel();
+                        a.setName("io.sphere.sdk.annotations.QueryModelFieldName");
+                        a.setValue(platformFieldName);
+                        methodModel.addAnnotation(a);
+                    });
         }
     }
 
