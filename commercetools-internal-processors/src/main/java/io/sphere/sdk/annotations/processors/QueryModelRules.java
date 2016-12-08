@@ -12,18 +12,17 @@ import io.sphere.sdk.queries.ResourceQueryModel;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.annotation.Nullable;
+import javax.lang.model.element.Element;
 import javax.lang.model.element.ExecutableElement;
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.type.DeclaredType;
 import javax.lang.model.type.ReferenceType;
-import javax.lang.model.type.TypeMirror;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static io.sphere.sdk.annotations.processors.ClassConfigurer.createBeanGetterStream;
 import static io.sphere.sdk.annotations.processors.ClassConfigurer.fieldNameFromGetter;
-import static io.sphere.sdk.annotations.processors.QueryModelImplRules.packageOfModels;
 import static java.util.Arrays.asList;
 import static java.util.stream.Collectors.joining;
 import static org.apache.commons.lang3.StringUtils.removeEnd;
@@ -39,34 +38,24 @@ final class QueryModelRules extends GenerationRules {
     }
 
     @Override
-    void execute() {
+    protected void beforeExecute() {
         final HasQueryModel hasQueryModel = typeElement.getAnnotation(HasQueryModel.class);
-        builder.addImport(packageOfModels(typeElement) +  ".*");
         addAnnotationHasQueryModelImplementation(hasQueryModel);
         addAdditions(hasQueryModel);
+        addSuperInterfaces(hasQueryModel);
+        addImportsForCartOrder();
+
+    }
+
+    @Override
+    protected Stream<Element> createMethodElementStream() {
+        return createBeanGetterStream(typeElement);
+    }
+
+    private void addSuperInterfaces(final HasQueryModel hasQueryModel) {
         for (final String baseInterface : hasQueryModel.baseInterfaces()) {
             builder.addInterface(baseInterface);
         }
-        addImportsForCartOrder();
-        applyInterfaceRules();
-        applyBeanMethodRules();
-    }
-
-    private void applyBeanMethodRules() {
-        createBeanGetterStream(typeElement).forEach(beanGetter -> methodRules.stream()
-                .filter(r -> r.accept((ExecutableElement)beanGetter))
-                .findFirst());
-    }
-
-    private void applyInterfaceRules() {
-        final List<? extends TypeMirror> interfaces = typeElement.getInterfaces();
-        final Stream<? extends TypeMirror> subInterfaces = interfaces.stream()
-                .map(i -> (DeclaredType) i)
-                .map(i -> (TypeElement) i.asElement())
-                .flatMap(i -> i.getInterfaces().stream());
-        Stream.concat(interfaces.stream(), subInterfaces).distinct().forEach(i -> interfaceRules.stream()
-                .filter(r -> r.accept((ReferenceType)i))
-                .findFirst());
     }
 
     private void addAdditions(final HasQueryModel hasQueryModel) {
@@ -124,7 +113,7 @@ final class QueryModelRules extends GenerationRules {
         private final LinkedList<QueryModelSelectionRule> queryModelSelectionRules = new LinkedList<>();
 
         public GenerateMethodRule() {
-            queryModelSelectionRules.add(new AnnotationSelectionRule());
+            queryModelSelectionRules.add(new UseQueryModelHintRule());
             queryModelSelectionRules.add(new LocalizedStringQueryModelSelectionRule());
             queryModelSelectionRules.add(new ReferenceQueryModelSelectionRule());
             queryModelSelectionRules.add(new SetOfSphereEnumerationQueryModelSelectionRule());
@@ -311,7 +300,7 @@ final class QueryModelRules extends GenerationRules {
         }
     }
 
-    private class AnnotationSelectionRule extends QueryModelSelectionRule {
+    private class UseQueryModelHintRule extends QueryModelSelectionRule {
         @Override
         public boolean accept(final ExecutableElement beanGetter, final MethodModel methodModel, final String contextType) {
             final QueryModelHint a = beanGetter.getAnnotation(QueryModelHint.class);

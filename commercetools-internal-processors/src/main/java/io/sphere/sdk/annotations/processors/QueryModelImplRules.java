@@ -6,12 +6,14 @@ import io.sphere.sdk.annotations.QueryModelHint;
 import io.sphere.sdk.queries.ResourceQueryModelImpl;
 import org.apache.commons.lang3.StringUtils;
 
+import javax.lang.model.element.Element;
 import javax.lang.model.element.ExecutableElement;
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.type.ReferenceType;
 import java.lang.reflect.Method;
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static io.sphere.sdk.annotations.processors.ClassConfigurer.instanceMethodStream;
 import static java.util.Arrays.asList;
@@ -32,17 +34,13 @@ final class QueryModelImplRules extends GenerationRules {
     }
 
     @Override
-    void execute() {
+    protected void beforeExecute() {
         addBaseClassAndConstructor();
-        builder.addImport(typeElement.getQualifiedName().toString());
-        builder.addImport(packageOfModels(typeElement) +  ".*");
-        typeElement.getInterfaces().forEach(i -> interfaceRules.stream()
-                .filter(r -> r.accept((ReferenceType)i))
-                .findFirst());
-        instanceMethodStream(typeElement)
-                .forEach(beanGetter -> methodRules.stream()
-                .filter(r -> r.accept(beanGetter))
-                .findFirst());
+    }
+
+    @Override
+    protected Stream<? extends Element> createMethodElementStream() {
+        return instanceMethodStream(typeElement);
     }
 
     static String packageOfModels(final TypeElement typeElement) {

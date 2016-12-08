@@ -1,9 +1,16 @@
 package io.sphere.sdk.annotations.processors;
 
+import javax.lang.model.element.Element;
 import javax.lang.model.element.ExecutableElement;
 import javax.lang.model.element.TypeElement;
+import javax.lang.model.type.DeclaredType;
 import javax.lang.model.type.ReferenceType;
+import javax.lang.model.type.TypeMirror;
 import java.util.LinkedList;
+import java.util.List;
+import java.util.stream.Stream;
+
+import static io.sphere.sdk.annotations.processors.QueryModelImplRules.packageOfModels;
 
 /**
  * Some rules to apply while generating a class model with a {@link ClassModelBuilder}.
@@ -23,7 +30,35 @@ public abstract class GenerationRules {
     /**
      * Applies the rules to the {@link ClassModelBuilder} (side effects).
      */
-    abstract void execute();
+    public final void execute() {
+        beforeExecute();
+        builder.addImport(packageOfModels(typeElement) +  ".*");
+        applyInterfaceRules();
+        applyMethodRules(createMethodElementStream());
+    }
+
+    protected abstract Stream<? extends Element> createMethodElementStream();
+
+    protected void beforeExecute() {
+    }
+
+    private void applyInterfaceRules() {
+        final List<? extends TypeMirror> interfaces = typeElement.getInterfaces();
+        final Stream<? extends TypeMirror> subInterfaces = interfaces.stream()
+                .map(i -> (DeclaredType) i)
+                .map(i -> (TypeElement) i.asElement())
+                .flatMap(i -> i.getInterfaces().stream());
+        Stream.concat(interfaces.stream(), subInterfaces).distinct().forEach(i -> interfaceRules.stream()
+                .filter(r -> r.accept((ReferenceType)i))
+                .findFirst());
+    }
+
+    private void applyMethodRules(final Stream<? extends Element> beanGetterStream) {
+        beanGetterStream.forEach(beanGetter -> methodRules.stream()
+                .filter(r -> r.accept((ExecutableElement)beanGetter))
+                .findFirst());
+    }
+
 
     /**
      * A rule concerning the interface of a class which is processed.
