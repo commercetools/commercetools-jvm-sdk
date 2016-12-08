@@ -112,6 +112,11 @@ public class CustomerQueryIntegrationTest extends IntegrationTest {
     }
 
     @Test
+    public void customerNumber() throws Exception {
+        check((model) -> model.customerNumber().is(customer.getCustomerNumber()));
+    }
+
+    @Test
     public void customerGroup() throws Exception {
         check((model) -> model.customerGroup().is(customer.getCustomerGroup()), false);
     }
@@ -141,7 +146,8 @@ public class CustomerQueryIntegrationTest extends IntegrationTest {
         final CustomerName customerName = CustomerName.ofFirstAndLastName(firstName, lastName);
         final CustomerDraft draft = CustomerDraftDsl.of(customerName, randomEmail(CustomerQueryIntegrationTest.class), "secret")
                 .withLocale(Locale.GERMAN)
-                .withExternalId(randomString()+firstName);
+                .withExternalId(randomString()+firstName)
+                .withCustomerNumber(randomKey());
         final CustomerSignInResult signInResult = client().executeBlocking(CustomerCreateCommand.of(draft));
         final Customer initialCustomer = signInResult.getCustomer();
 

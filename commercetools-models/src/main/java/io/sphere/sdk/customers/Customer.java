@@ -147,7 +147,6 @@ public interface Customer extends Resource<Customer>, Custom {
      * @return customer number or null
      */
     @Nullable
-    @IgnoreInQueryModel
     String getCustomerNumber();
 
     /**
