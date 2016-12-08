@@ -30,37 +30,18 @@ import static org.apache.commons.lang3.StringUtils.removeEnd;
 import static org.apache.commons.lang3.StringUtils.removeStart;
 
 final class QueryModelRules extends GenerationRules {
-    private final LinkedList<QueryModelSelectionRule> queryModelSelectionRules = new LinkedList<>();
-
     QueryModelRules(final TypeElement typeElement, final ClassModelBuilder builder) {
         super(typeElement, builder);
         interfaceRules.add(new ResourceSuperInterfaceRule());
         interfaceRules.add(new CustomFieldsRule());
-        methodRules.add(new IgnoreAnnotatedElements());
+        methodRules.add(new IgnoreMethodsAnnotatedWithIgnoreInQueryModel());
         methodRules.add(new GenerateMethodRule());
-        queryModelSelectionRules.add(new AnnotationSelectionRule());
-        queryModelSelectionRules.add(new LocalizedStringQueryModelSelectionRule());
-        queryModelSelectionRules.add(new ReferenceQueryModelSelectionRule());
-        queryModelSelectionRules.add(new SetOfSphereEnumerationQueryModelSelectionRule());
-        queryModelSelectionRules.add(new SetOfReferenceSelectionRule());
-        queryModelSelectionRules.add(new SetOfStringSelectionRule());
-        queryModelSelectionRules.add(new SphereEnumerationQueryModelSelectionRule());
-        queryModelSelectionRules.add(new SimpleQueryModelSelectionRule("java.lang.Boolean", "BooleanQueryModel"));
-        queryModelSelectionRules.add(new SimpleQueryModelSelectionRule("java.lang.String", "StringQuerySortingModel"));
-        queryModelSelectionRules.add(new SimpleQueryModelSelectionRule("io.sphere.sdk.reviews.ReviewRatingStatistics", "ReviewRatingStatisticsQueryModel"));
-        queryModelSelectionRules.add(new SimpleQueryModelSelectionRule("io.sphere.sdk.models.Address", "AddressQueryModel"));
-        queryModelSelectionRules.add(new SimpleQueryModelSelectionRule("java.time.ZonedDateTime", "TimestampSortingModel"));
-        queryModelSelectionRules.add(new SimpleQueryModelSelectionRule("com.neovisionaries.i18n.CountryCode", "io.sphere.sdk.queries.CountryQueryModel"));
-        queryModelSelectionRules.add(new SimpleQueryModelSelectionRule("javax.money.MonetaryAmount", "io.sphere.sdk.queries.MoneyQueryModel"));
-        queryModelSelectionRules.add(new SimpleQueryModelSelectionRule("java.util.Locale", "io.sphere.sdk.queries.LocaleQueryModel"));
-        queryModelSelectionRules.add(new SimpleQueryModelSelectionRule("java.lang.Long", "io.sphere.sdk.queries.LongQuerySortingModel"));
-        queryModelSelectionRules.add(new SimpleQueryModelSelectionRule("java.lang.Integer", "io.sphere.sdk.queries.IntegerQuerySortingModel"));
     }
 
     @Override
     void execute() {
         final HasQueryModel hasQueryModel = typeElement.getAnnotation(HasQueryModel.class);
-        builder.addImport(packageOfModels(typeElement));
+        builder.addImport(packageOfModels(typeElement) +  ".*");
         addAnnotationHasQueryModelImplementation(hasQueryModel);
         addAdditions(hasQueryModel);
         for (final String baseInterface : hasQueryModel.baseInterfaces()) {
@@ -140,6 +121,28 @@ final class QueryModelRules extends GenerationRules {
     }
 
     public class GenerateMethodRule extends MethodRule {
+        private final LinkedList<QueryModelSelectionRule> queryModelSelectionRules = new LinkedList<>();
+
+        public GenerateMethodRule() {
+            queryModelSelectionRules.add(new AnnotationSelectionRule());
+            queryModelSelectionRules.add(new LocalizedStringQueryModelSelectionRule());
+            queryModelSelectionRules.add(new ReferenceQueryModelSelectionRule());
+            queryModelSelectionRules.add(new SetOfSphereEnumerationQueryModelSelectionRule());
+            queryModelSelectionRules.add(new SetOfReferenceSelectionRule());
+            queryModelSelectionRules.add(new SetOfStringSelectionRule());
+            queryModelSelectionRules.add(new SphereEnumerationQueryModelSelectionRule());
+            queryModelSelectionRules.add(new SimpleQueryModelSelectionRule("java.lang.Boolean", "BooleanQueryModel"));
+            queryModelSelectionRules.add(new SimpleQueryModelSelectionRule("java.lang.String", "StringQuerySortingModel"));
+            queryModelSelectionRules.add(new SimpleQueryModelSelectionRule("io.sphere.sdk.reviews.ReviewRatingStatistics", "ReviewRatingStatisticsQueryModel"));
+            queryModelSelectionRules.add(new SimpleQueryModelSelectionRule("io.sphere.sdk.models.Address", "AddressQueryModel"));
+            queryModelSelectionRules.add(new SimpleQueryModelSelectionRule("java.time.ZonedDateTime", "TimestampSortingModel"));
+            queryModelSelectionRules.add(new SimpleQueryModelSelectionRule("com.neovisionaries.i18n.CountryCode", "io.sphere.sdk.queries.CountryQueryModel"));
+            queryModelSelectionRules.add(new SimpleQueryModelSelectionRule("javax.money.MonetaryAmount", "io.sphere.sdk.queries.MoneyQueryModel"));
+            queryModelSelectionRules.add(new SimpleQueryModelSelectionRule("java.util.Locale", "io.sphere.sdk.queries.LocaleQueryModel"));
+            queryModelSelectionRules.add(new SimpleQueryModelSelectionRule("java.lang.Long", "io.sphere.sdk.queries.LongQuerySortingModel"));
+            queryModelSelectionRules.add(new SimpleQueryModelSelectionRule("java.lang.Integer", "io.sphere.sdk.queries.IntegerQuerySortingModel"));
+        }
+
         @Override
         public boolean accept(final ExecutableElement beanGetter) {
             final String fieldName = fieldNameFromGetter(beanGetter);
@@ -301,7 +304,7 @@ final class QueryModelRules extends GenerationRules {
         }
     }
 
-    private class IgnoreAnnotatedElements extends MethodRule {
+    private class IgnoreMethodsAnnotatedWithIgnoreInQueryModel extends MethodRule {
         @Override
         public boolean accept(final ExecutableElement beanGetter) {
             return beanGetter.getAnnotation(IgnoreInQueryModel.class) != null;

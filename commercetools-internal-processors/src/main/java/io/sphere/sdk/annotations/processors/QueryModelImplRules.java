@@ -17,9 +17,7 @@ import static io.sphere.sdk.annotations.processors.ClassConfigurer.instanceMetho
 import static java.util.Arrays.asList;
 
 final class QueryModelImplRules extends GenerationRules {
-    private final LinkedList<MethodImplementationRule> queryModelSelectionRules = new LinkedList<>();
-
-    QueryModelImplRules(final TypeElement typeElement, final ClassModelBuilder builder) {
+        QueryModelImplRules(final TypeElement typeElement, final ClassModelBuilder builder) {
         super(typeElement, builder);
         builder.addImport(builder.build().getPackageName().replace("queries", "") + getContextType());
         interfaceRules.add(new AnnotationBaseClassRule());
@@ -27,9 +25,6 @@ final class QueryModelImplRules extends GenerationRules {
         methodRules.add(new IgnoreQueryModelFields());
         methodRules.add(new IgnoreResourceFields());
         methodRules.add(new GenerateMethodRule());
-        queryModelSelectionRules.add(new AnnotationHintRule());
-        queryModelSelectionRules.add(new DefaultSelectionRule());
-        queryModelSelectionRules.add(new ReviewRatingStatisticsQueryModelRule());
     }
 
     private abstract class MethodImplementationRule {
@@ -40,7 +35,7 @@ final class QueryModelImplRules extends GenerationRules {
     void execute() {
         addBaseClassAndConstructor();
         builder.addImport(typeElement.getQualifiedName().toString());
-        builder.addImport(packageOfModels(typeElement));
+        builder.addImport(packageOfModels(typeElement) +  ".*");
         typeElement.getInterfaces().forEach(i -> interfaceRules.stream()
                 .filter(r -> r.accept((ReferenceType)i))
                 .findFirst());
@@ -54,8 +49,8 @@ final class QueryModelImplRules extends GenerationRules {
         final String fullName = typeElement.getQualifiedName().toString();
         final int i = fullName.indexOf(".queries.");
         return i == -1
-                ? fullName.substring(0, fullName.lastIndexOf(".")) + ".*;"
-                : fullName.substring(0, i) + ".*;";
+                ? fullName.substring(0, fullName.lastIndexOf("."))
+                : fullName.substring(0, i);
     }
 
     private void addBaseClassAndConstructor() {
@@ -72,6 +67,14 @@ final class QueryModelImplRules extends GenerationRules {
     }
 
     public class GenerateMethodRule extends MethodRule {
+        private final LinkedList<MethodImplementationRule> queryModelSelectionRules = new LinkedList<>();
+
+        public GenerateMethodRule() {
+            queryModelSelectionRules.add(new AnnotationHintRule());
+            queryModelSelectionRules.add(new DefaultSelectionRule());
+            queryModelSelectionRules.add(new ReviewRatingStatisticsQueryModelRule());
+        }
+
         @Override
         public boolean accept(final ExecutableElement method) {
             final String fieldName = method.getSimpleName().toString();//do not use obtainFieldName() here since it is implementing a base class method
