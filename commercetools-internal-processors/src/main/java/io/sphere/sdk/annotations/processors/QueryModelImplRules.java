@@ -17,22 +17,22 @@ import static io.sphere.sdk.annotations.processors.ClassConfigurer.instanceMetho
 import static java.util.Arrays.asList;
 
 final class QueryModelImplRules extends GenerationRules {
-    private final LinkedList<QueryModelMethodRule> queryModelSelectionRules = new LinkedList<>();
+    private final LinkedList<MethodImplementationRule> queryModelSelectionRules = new LinkedList<>();
 
     QueryModelImplRules(final TypeElement typeElement, final ClassModelBuilder builder) {
         super(typeElement, builder);
         builder.addImport(builder.build().getPackageName().replace("queries", "") + getContextType());
         interfaceRules.add(new AnnotationBaseClassRule());
         interfaceRules.add(new ExtendCustomResourceQueryModelImplRule());
-        beanMethodRules.add(new IgnoreQueryModelFields());
-        beanMethodRules.add(new IgnoreResourceFields());
-        beanMethodRules.add(new GenerateMethodRule());
+        methodRules.add(new IgnoreQueryModelFields());
+        methodRules.add(new IgnoreResourceFields());
+        methodRules.add(new GenerateMethodRule());
         queryModelSelectionRules.add(new AnnotationHintRule());
         queryModelSelectionRules.add(new DefaultSelectionRule());
         queryModelSelectionRules.add(new ReviewRatingStatisticsQueryModelRule());
     }
 
-    private abstract class QueryModelMethodRule {
+    private abstract class MethodImplementationRule {
         public abstract boolean apply(final ExecutableElement method, final MethodModel methodModel, final String contextType);
     }
 
@@ -45,7 +45,7 @@ final class QueryModelImplRules extends GenerationRules {
                 .filter(r -> r.accept((ReferenceType)i))
                 .findFirst());
         instanceMethodStream(typeElement)
-                .forEach(beanGetter -> beanMethodRules.stream()
+                .forEach(beanGetter -> methodRules.stream()
                 .filter(r -> r.accept(beanGetter))
                 .findFirst());
     }
@@ -71,7 +71,7 @@ final class QueryModelImplRules extends GenerationRules {
         builder.addConstructor(constructor);
     }
 
-    public class GenerateMethodRule extends BeanMethodRule {
+    public class GenerateMethodRule extends MethodRule {
         @Override
         public boolean accept(final ExecutableElement method) {
             final String fieldName = method.getSimpleName().toString();//do not use obtainFieldName() here since it is implementing a base class method
@@ -95,13 +95,13 @@ final class QueryModelImplRules extends GenerationRules {
                 builder.addImport("io.sphere.sdk.types.queries.CustomResourceQueryModelImpl");
                 final String contextType = getContextType();
                 builder.setBaseClassName("CustomResourceQueryModelImpl<" + contextType + ">");
-                beanMethodRules.addFirst(new IgnoreFields("custom"));
+                methodRules.addFirst(new IgnoreFields("custom"));
             }
             return false;
         }
     }
 
-    private class IgnoreResourceFields extends BeanMethodRule {
+    private class IgnoreResourceFields extends MethodRule {
         private final List<String> methodNames;
 
         private IgnoreResourceFields() {
@@ -121,7 +121,7 @@ final class QueryModelImplRules extends GenerationRules {
         return name.substring(0, name.indexOf("QueryModel"));
     }
 
-    private class DefaultSelectionRule extends QueryModelMethodRule {
+    private class DefaultSelectionRule extends MethodImplementationRule {
         @Override
         public boolean apply(final ExecutableElement method, final MethodModel methodModel, final String contextType) {
             final String returnType = method.getReturnType().toString();
@@ -137,7 +137,7 @@ final class QueryModelImplRules extends GenerationRules {
         }
     }
 
-    private class ReviewRatingStatisticsQueryModelRule extends QueryModelMethodRule {
+    private class ReviewRatingStatisticsQueryModelRule extends MethodImplementationRule {
         @Override
         public boolean apply(final ExecutableElement method, final MethodModel methodModel, final String contextType) {
             if (method.getReturnType().toString().contains("ReviewRatingStatisticsQueryModel")) {
@@ -156,7 +156,7 @@ final class QueryModelImplRules extends GenerationRules {
                 .orElseGet(() -> method.getSimpleName().toString());
     }
 
-    private class AnnotationHintRule extends QueryModelMethodRule {
+    private class AnnotationHintRule extends MethodImplementationRule {
         @Override
         public boolean apply(final ExecutableElement method, final MethodModel methodModel, final String contextType) {
             final QueryModelHint a = method.getAnnotation(QueryModelHint.class);
@@ -172,20 +172,20 @@ final class QueryModelImplRules extends GenerationRules {
 
     private class AnnotationBaseClassRule extends InterfaceRule {
         @Override
-        public boolean accept(final ReferenceType i) {
+        public boolean accept(final ReferenceType referenceType) {
             return Optional.ofNullable(typeElement.getAnnotation(HasQueryModelImplementation.class))
                     .map(HasQueryModelImplementation::implBaseClass)
                     .filter(StringUtils::isNotEmpty)
                     .map(baseClass -> {
                         builder.setBaseClassName(baseClass);
-                        beanMethodRules.addFirst(new IgnoreFields("customerId", "customerEmail", "totalPrice", "taxedPrice", "country", "customerGroup", "lineItems", "customLineItems", "shippingAddress", "billingAddress", "shippingInfo", "discountCodes", "paymentInfo", "anonymousId", "locale", "custom"));
+                        methodRules.addFirst(new IgnoreFields("customerId", "customerEmail", "totalPrice", "taxedPrice", "country", "customerGroup", "lineItems", "customLineItems", "shippingAddress", "billingAddress", "shippingInfo", "discountCodes", "paymentInfo", "anonymousId", "locale", "custom"));
                         return true;
                     })
                     .orElse(false);
         }
     }
 
-    private class IgnoreFields extends BeanMethodRule {
+    private class IgnoreFields extends MethodRule {
         private final Set<String> fields;
 
         public IgnoreFields(final String ... fields) {
