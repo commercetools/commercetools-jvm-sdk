@@ -125,34 +125,6 @@ import io.sphere.sdk.products.attributes.AttributeAccess;
 
  {@include.example io.sphere.sdk.products.attributes.DefaultProductAttributeFormatterDemo}
 
-
-
- <h3 id="attribute-table-creation-pattern-matching">Creating a table of attributes (old way)</h3>
-
-<p>With the help of the product type, you can display a table with attributes. Such as:</p>
-
- <pre><code>
- color                    | green
- ----------------------------------------------------------------
- size                     | S
- ----------------------------------------------------------------
- matching products        | referenceable product
- ----------------------------------------------------------------
- washing labels           | tumble drying, Wash at or below 30°C
- ----------------------------------------------------------------
- recommended retail price | EUR300.00
- ----------------------------------------------------------------
- available since          | 2015-02-02
- ----------------------------------------------------------------</code></pre>
-
- <p>In this example the left column is the label of
- the attribute from the product type and the right column is the formatted value from the product:</p>
-
- {@include.example io.sphere.sdk.attributestutorial.ProductTypeCreationDemoIntegrationTest#showProductAttributeTable()}
-
- <!-- it is easy to mix uo product and product type with autocomplete and using the non set variant where set is expected -->
-
-
  <h3 id="attribute-update">Update attribute values of a product</h3>
 
 <p>Setting attribute values is like a a product creation:</p>
