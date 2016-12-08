@@ -21,7 +21,6 @@ import static java.util.Arrays.asList;
 final class QueryModelImplRules extends GenerationRules {
         QueryModelImplRules(final TypeElement typeElement, final ClassModelBuilder builder) {
         super(typeElement, builder);
-        builder.addImport(builder.build().getPackageName().replace("queries", "") + getContextType());
         interfaceRules.add(new AnnotationBaseClassRule());
         interfaceRules.add(new ExtendCustomResourceQueryModelImplRule());
         methodRules.add(new IgnoreQueryModelFields());
@@ -29,12 +28,24 @@ final class QueryModelImplRules extends GenerationRules {
         methodRules.add(new GenerateMethodRule());
     }
 
+    /**
+     * Rule about implementing a query model method.
+     */
     private abstract class MethodImplementationRule {
+        /**
+         * Rule that gets a query model method as {@link ExecutableElement} and sets the method body of a given {@link MethodModel}.
+         *
+         * @param method the method that should be implemented coming from the interface
+         * @param methodModel a model of the method to be generated
+         * @param contextType the context of the query method model, example if the method is for XyzQueryModel then the context is Xyz
+         * @return true, if the {@code method} should not be processed by the next {@link MethodImplementationRule}
+         */
         public abstract boolean apply(final ExecutableElement method, final MethodModel methodModel, final String contextType);
     }
 
     @Override
     protected void beforeExecute() {
+        builder.addImport(builder.build().getPackageName().replace("queries", "") + getContextType());
         addBaseClassAndConstructor();
     }
 

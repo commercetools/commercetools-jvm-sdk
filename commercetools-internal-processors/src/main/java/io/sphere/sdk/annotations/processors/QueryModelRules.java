@@ -65,9 +65,8 @@ final class QueryModelRules extends GenerationRules {
 
     private void addAnnotationHasQueryModelImplementation(final HasQueryModel hasQueryModel) {
         builder.addImport("io.sphere.sdk.annotations.HasQueryModelImplementation");
-        final AnnotationModel a1 = new AnnotationModel();
-        a1.setName("HasQueryModelImplementation");
-        final AnnotationModel a = a1;
+        final AnnotationModel a = new AnnotationModel();
+        a.setName("HasQueryModelImplementation");
         if (StringUtils.isNotEmpty(hasQueryModel.implBaseClass())) {
             a.setValues(Collections.singletonMap("implBaseClass", hasQueryModel.implBaseClass()));
         }
@@ -338,11 +337,8 @@ final class QueryModelRules extends GenerationRules {
         public boolean accept(final ExecutableElement beanGetter, final MethodModel methodModel, final String contextType) {
             final Optional<DeclaredType> declaredTypeOptional = collectionTypeReturnType(beanGetter)
                     .filter(returnType -> {
-
                         final DeclaredType declaredType = (DeclaredType) returnType.getTypeArguments().get(0);
-
-                        final boolean contains = declaredType.asElement().getSimpleName().toString().equals(Reference.class.getSimpleName());
-                        return contains;
+                        return declaredType.asElement().getSimpleName().toString().equals(Reference.class.getSimpleName());
                     });
             declaredTypeOptional.ifPresent(returnType -> {
                 final String param = ((DeclaredType)returnType.getTypeArguments().get(0)).getTypeArguments().get(0).toString();
@@ -359,9 +355,7 @@ final class QueryModelRules extends GenerationRules {
             map.put("String", "StringCollectionQueryModel");
             final Optional<String> typeParameterOptional = collectionTypeReturnType(beanGetter)
                     .map(returnType -> {
-
                         final DeclaredType declaredType = (DeclaredType) returnType.getTypeArguments().get(0);
-
                         final String beanGetterCollectionTypeParameter = declaredType.asElement().getSimpleName().toString();
                         return beanGetterCollectionTypeParameter;
                     });
