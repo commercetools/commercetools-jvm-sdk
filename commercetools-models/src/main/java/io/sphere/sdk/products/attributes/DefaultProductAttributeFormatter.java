@@ -9,7 +9,6 @@ import io.sphere.sdk.producttypes.ProductType;
 import io.sphere.sdk.producttypes.ProductTypeLocalRepository;
 import org.javamoney.moneta.function.MonetaryFunctions;
 
-import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.money.MonetaryAmount;
 import javax.money.format.MonetaryAmountFormat;
@@ -68,62 +67,39 @@ public class DefaultProductAttributeFormatter extends ProductAttributeConverterB
     }
 
     /**
-     * Creates a view model to show a table of attribute translated and formatted labels and values.
+     * Creates a list of attribute translated and formatted labels and values.
      * @param variant the product variant which holds attributes
      * @param productType the product type belonging to the product variant
      * @param attrNamesToShow a list containing the attribute names (the name is used as key) which clafies which attributes are allowed to displayed and also give an order to display them
-     * @return table data
+     * @return a list of pairs where the key corresponds to a translated label and the value to the formatted value
      */
-    public AttributeTable createAttributesTable(final ProductVariant variant, final Reference<ProductType> productType, final List<String> attrNamesToShow) {
-        final List<AttributeTableRow> rows = variant.getAttributes().stream()
+    public List<Map.Entry<String, String>> createAttributeEntryList(final ProductVariant variant, final Reference<ProductType> productType, final List<String> attrNamesToShow) {
+        return variant.getAttributes().stream()
                 .filter(a -> attrNamesToShow.contains(a.getName()))//remove attributes not in whitelist
                 //sort so that the order is like in attrNamesToShow
                 .sorted(Comparator.comparingInt(a -> attrNamesToShow.indexOf(a.getName())))
-                .map(attribute -> createAttributeRow(attribute, productType))
+                .map(attribute -> createAttributeEntry(attribute, productType))
                 .collect(toList());
-        return new AttributeTableImpl(rows);
     }
 
     /**
-     * Creates a view model for a single attribute with translated and formatted label and value by requiring a reference to the product type.
+     * Creates an entry for a single attribute with translated and formatted label and value by requiring a reference to the product type.
      *
      * @param attribute the attribute as data source
      * @param productTypeRef the product type belonging to product containing the attributes
      * @return row data
      */
     @Nullable
-    public AttributeTableRow createAttributeRow(final Attribute attribute, final Referenceable<ProductType> productTypeRef) {
+    public Map.Entry<String, String> createAttributeEntry(final Attribute attribute, final Referenceable<ProductType> productTypeRef) {
         return findProductType(productTypeRef)
-                .map(productType -> createAttributeRow(attribute, productType))
+                .map(productType -> {
+                    final String translatedValue = convertWithProductType(attribute, productType);
+                    final String translatedLabel = productType.findAttribute(attribute.getName())
+                            .map(ptA -> ptA.getLabel().get(locales))
+                            .orElse(null);
+                    return new StringStringMapEntry(translatedLabel, translatedValue);
+                })
                 .orElse(null);
-    }
-
-    /**
-     * Creates a view model for a single attribute with translated and formatted label and value requiring the full product type object.
-     *
-     * @param attribute the attribute as data source
-     * @param productType the product type belonging to product containing the attributes
-     * @return row data
-     */
-    @Nonnull
-    private AttributeTableRow createAttributeRow(final Attribute attribute, final ProductType productType) {
-        final String translatedValue = convertWithProductType(attribute, productType);
-        final String translatedLabel = productType.findAttribute(attribute.getName())
-                .map(ptA -> ptA.getLabel().get(locales))
-                .orElse(null);
-        return new AttributeTableRow() {
-            @Nullable
-            @Override
-            public String getTranslatedValue() {
-                return translatedValue;
-            }
-
-            @Nullable
-            @Override
-            public String getTranslatedLabel() {
-                return translatedLabel;
-            }
-        };
     }
 
     protected Locale locale() {
@@ -319,5 +295,30 @@ public class DefaultProductAttributeFormatter extends ProductAttributeConverterB
     @Override
     protected String convertBoolean(final Boolean booleanValue, final Attribute attribute, final ProductType productType) {
         return booleanValue.toString();
+    }
+
+    private static class StringStringMapEntry extends Base implements Map.Entry<String, String> {
+        private final String key;
+        private String value;
+
+        private StringStringMapEntry(final String key, final String value) {
+            this.key = key;
+            this.value = value;
+        }
+
+        @Override
+        public String getKey() {
+            return key;
+        }
+
+        @Override
+        public String getValue() {
+            return value;
+        }
+
+        @Override
+        public String setValue(final String value) {
+            return value;
+        }
     }
 }
