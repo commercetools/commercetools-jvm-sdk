@@ -37,10 +37,7 @@ import javax.money.MonetaryAmount;
 import javax.money.format.MonetaryAmountFormat;
 import javax.money.format.MonetaryFormats;
 import java.time.LocalDate;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 import java.util.function.Function;
 
 import static io.sphere.sdk.test.SphereTestUtils.*;
@@ -52,6 +49,7 @@ import static java.util.Locale.US;
 import static java.util.stream.Collectors.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.assertj.core.api.Assertions.catchThrowable;
 
 @NotThreadSafe
 public class ProductTypeCreationDemoIntegrationTest extends IntegrationTest {
@@ -294,6 +292,31 @@ public class ProductTypeCreationDemoIntegrationTest extends IntegrationTest {
     }
 
     @Test
+    public void readAttributeGetValueAs() throws Exception {
+        final ProductVariant masterVariant = createProduct().getMasterData().getStaged().getMasterVariant();
+
+        final String attributeValue = masterVariant.findAttribute(SIZE_ATTR_NAME)
+                .map((Attribute a) -> {
+                    final EnumValue enumValue = a.getValueAsEnumValue();
+                    return enumValue.getLabel();
+                })
+                .orElse("not found");
+        assertThat(attributeValue).isEqualTo("S");
+    }
+
+    @Test
+    public void readAttributeGetValueAsWithWrongType() throws Exception {
+        final ProductVariant masterVariant = createProduct().getMasterData().getStaged().getMasterVariant();
+
+        final Throwable throwable = catchThrowable(
+                () -> masterVariant.findAttribute(SIZE_ATTR_NAME)
+                        .map((Attribute a) -> a.getValueAsBoolean())
+                        .orElse(true)
+        );
+        assertThat(throwable).isInstanceOf(JsonException.class);
+    }
+
+    @Test
     public void readAttributeWithoutProductTypeWithNamedAccessWithWrongType() throws Exception {
         final ProductVariant masterVariant = createProduct().getMasterData().getStaged().getMasterVariant();
 
@@ -316,6 +339,25 @@ public class ProductTypeCreationDemoIntegrationTest extends IntegrationTest {
         final Attribute attr = masterVariant.getAttribute(SIZE_ATTR_NAME);
         final JsonNode expectedJsonNode = SphereJsonUtils.toJsonNode(EnumValue.of("S", "S"));
         assertThat(attr.getValue(AttributeAccess.ofJsonNode())).isEqualTo(expectedJsonNode);
+    }
+
+    @Test
+    public void showProductAttributeTableWithDefaultFormatter() throws Exception {
+        final List<String> attrNamesToShow = asList(COLOR_ATTR_NAME, SIZE_ATTR_NAME,
+                MATCHING_PRODUCTS_ATTR_NAME, LAUNDRY_SYMBOLS_ATTR_NAME, RRP_ATTR_NAME, AVAILABLE_SINCE_ATTR_NAME);
+
+        final Product product = createProduct();
+        final ProductProjectionQuery query = ProductProjectionQuery.ofStaged()
+                .withPredicates(m -> m.id().is(product.getId()))
+                .plusExpansionPaths(m -> m.masterVariant().attributes().valueSet())
+                .plusExpansionPaths(m -> m.productType());
+
+        final ProductProjection productProjection = client().executeBlocking(query).head().get();
+
+        final List<ProductType> productTypes = Collections.singletonList(productProjection.getProductType().getObj());
+        final List<Locale> locales = Collections.singletonList(ENGLISH);
+        final DefaultProductAttributeFormatter formatter = DefaultProductAttributeFormatterDemo.createFormatter(productTypes, locales);
+        DefaultProductAttributeFormatterDemo.example(attrNamesToShow, productProjection, formatter);
     }
 
     @Test

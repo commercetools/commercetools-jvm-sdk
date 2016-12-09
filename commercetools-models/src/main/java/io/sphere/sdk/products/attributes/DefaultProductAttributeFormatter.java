@@ -4,6 +4,7 @@ import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.channels.Channel;
 import io.sphere.sdk.models.*;
 import io.sphere.sdk.products.Product;
+import io.sphere.sdk.products.ProductVariant;
 import io.sphere.sdk.producttypes.ProductType;
 import io.sphere.sdk.producttypes.ProductTypeLocalRepository;
 import org.javamoney.moneta.function.MonetaryFunctions;
@@ -21,6 +22,7 @@ import java.util.*;
 import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.joining;
+import static java.util.stream.Collectors.toList;
 
 public class DefaultProductAttributeFormatter extends ProductAttributeConverterBase<String> implements ProductAttributeConverter<String> {
     private final List<Locale> locales;
@@ -62,6 +64,42 @@ public class DefaultProductAttributeFormatter extends ProductAttributeConverterB
     @Nullable
     public String format(final Attribute attribute, final Referenceable<ProductType> productType) {
         return convert(attribute, productType);
+    }
+
+    /**
+     * Creates a list of attribute translated and formatted labels and values.
+     * @param variant the product variant which holds attributes
+     * @param productType the product type belonging to the product variant
+     * @param attrNamesToShow a list containing the attribute names (the name is used as key) which clafies which attributes are allowed to displayed and also give an order to display them
+     * @return a list of pairs where the key corresponds to a translated label and the value to the formatted value
+     */
+    public List<Map.Entry<String, String>> createAttributeEntryList(final ProductVariant variant, final Reference<ProductType> productType, final List<String> attrNamesToShow) {
+        return variant.getAttributes().stream()
+                .filter(a -> attrNamesToShow.contains(a.getName()))//remove attributes not in whitelist
+                //sort so that the order is like in attrNamesToShow
+                .sorted(Comparator.comparingInt(a -> attrNamesToShow.indexOf(a.getName())))
+                .map(attribute -> createAttributeEntry(attribute, productType))
+                .collect(toList());
+    }
+
+    /**
+     * Creates an entry for a single attribute with translated and formatted label and value by requiring a reference to the product type.
+     *
+     * @param attribute the attribute as data source
+     * @param productTypeRef the product type belonging to product containing the attributes
+     * @return row data
+     */
+    @Nullable
+    public Map.Entry<String, String> createAttributeEntry(final Attribute attribute, final Referenceable<ProductType> productTypeRef) {
+        return findProductType(productTypeRef)
+                .map(productType -> {
+                    final String translatedValue = convertWithProductType(attribute, productType);
+                    final String translatedLabel = productType.findAttribute(attribute.getName())
+                            .map(ptA -> ptA.getLabel().get(locales))
+                            .orElse(null);
+                    return new StringStringMapEntry(translatedLabel, translatedValue);
+                })
+                .orElse(null);
     }
 
     protected Locale locale() {
@@ -257,5 +295,30 @@ public class DefaultProductAttributeFormatter extends ProductAttributeConverterB
     @Override
     protected String convertBoolean(final Boolean booleanValue, final Attribute attribute, final ProductType productType) {
         return booleanValue.toString();
+    }
+
+    private static class StringStringMapEntry extends Base implements Map.Entry<String, String> {
+        private final String key;
+        private String value;
+
+        private StringStringMapEntry(final String key, final String value) {
+            this.key = key;
+            this.value = value;
+        }
+
+        @Override
+        public String getKey() {
+            return key;
+        }
+
+        @Override
+        public String getValue() {
+            return value;
+        }
+
+        @Override
+        public String setValue(final String value) {
+            return value;
+        }
     }
 }

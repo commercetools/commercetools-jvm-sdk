@@ -2,6 +2,7 @@ package io.sphere.sdk.meta;
 
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.products.ProductVariantDraftBuilder;
+import io.sphere.sdk.products.attributes.Attribute;
 import io.sphere.sdk.products.attributes.AttributeAccess;
 
 /**
@@ -78,7 +79,15 @@ import io.sphere.sdk.products.attributes.AttributeAccess;
 
  <h3 id="attribute-access-without-product-type">Reading Attributes</h3>
 
- <p>To get a value out of an attribute you need an instance of {@link AttributeAccess}
+ <p>The simplest way to get the value of the attribute is to use {@code getAsType} methods of {@link io.sphere.sdk.products.attributes.Attribute}, like {@link Attribute#getValueAsEnumValue()}:</p>
+
+ {@include.example io.sphere.sdk.attributestutorial.ProductTypeCreationDemoIntegrationTest#readAttributeGetValueAs()}
+
+ <p>If you use a wrong conversion for the attribute, like you have a {@link io.sphere.sdk.models.EnumValue} but extract it as boolean then you get a {@link io.sphere.sdk.json.JsonException}:</p>
+
+ {@include.example io.sphere.sdk.attributestutorial.ProductTypeCreationDemoIntegrationTest#readAttributeGetValueAsWithWrongType()}
+
+ <p>An alternative way to get a value out of an attribute is to use an instance of {@link AttributeAccess}
  which keeps the type info to deserialize the attribute.</p>
 
  <p>You can reuse the {@link io.sphere.sdk.products.attributes.NamedAttributeAccess} declaration if you want to:</p>
@@ -104,31 +113,17 @@ import io.sphere.sdk.products.attributes.AttributeAccess;
 
 
 
- <h3 id="attribute-table-creation">Creating a table of attributes</h3>
+ <h3 id="attribute-table-creation">Creating a table of attributes using {@link io.sphere.sdk.products.attributes.DefaultProductAttributeFormatter}</h3>
 
-<p>With the help of the product type, you can display a table with attributes. Such as:</p>
+ <p>The most convenient way of creating a table of attributes is using a subclass of {@link io.sphere.sdk.products.attributes.DefaultProductAttributeFormatter}, since you can rely on defaults and just override the behaviour you want to specify. To initialize the class you need the supported locales of the user viewing the table and the cached {@link io.sphere.sdk.producttypes.ProductType}s of the commercetools project. Remember that you can fetch them all using {@link io.sphere.sdk.queries.QueryExecutionUtils}.</p>
 
- <pre><code>
- color                    | green
- ----------------------------------------------------------------
- size                     | S
- ----------------------------------------------------------------
- matching products        | referenceable product
- ----------------------------------------------------------------
- washing labels           | tumble drying, Wash at or below 30°C
- ----------------------------------------------------------------
- recommended retail price | EUR300.00
- ----------------------------------------------------------------
- available since          | 2015-02-02
- ----------------------------------------------------------------</code></pre>
+ <p>One example for a subclass:</p>
 
- <p>In this example the left column is the label of
- the attribute from the product type and the right column is the formatted value from the product:</p>
+ {@include.example io.sphere.sdk.products.attributes.ProjectNameProductAttributeFormatter}
 
- {@include.example io.sphere.sdk.attributestutorial.ProductTypeCreationDemoIntegrationTest#showProductAttributeTable()}
+ <p>The example in action:</p>
 
- <!-- it is easy to mix uo product and product type with autocomplete and using the non set variant where set is expected -->
-
+ {@include.example io.sphere.sdk.products.attributes.DefaultProductAttributeFormatterDemo}
 
  <h3 id="attribute-update">Update attribute values of a product</h3>
 

@@ -31,6 +31,10 @@ public interface AttributeContainer {
         return findAttribute(accessor.ofName(name));
     }
 
+    default Optional<Attribute> findAttribute(final String attributeName) {
+        return Optional.ofNullable(getAttribute(attributeName));
+    }
+
     default boolean hasAttribute(final String attributeName) {
         return getAttributes().stream().anyMatch(attr -> attr.getName().equals(attributeName));
     }
