@@ -197,27 +197,29 @@ final class QueryModelRules extends GenerationRules {
         public boolean accept(final ExecutableElement beanGetter, final MethodModel methodModel, final String contextType) {
             final Optional<DeclaredType> returnTypeOptional = collectionTypeReturnType(beanGetter);
             if (returnTypeOptional.isPresent()) {
-                final DeclaredType x = returnTypeOptional.get();
-                final String uncheckedType = x.asElement().getSimpleName().toString();
-                final boolean isCollection = asList("Set", "List").contains(uncheckedType) && x.getTypeArguments().size() == 1;
-                if (isCollection) {
-                    final DeclaredType declaredType = (DeclaredType) x.getTypeArguments().get(0);
-
-                    final TypeElement classInList = (TypeElement) declaredType.asElement();
-                    final boolean isSphereEnumeration = classInList.getInterfaces().stream()
-                            .map(i -> (DeclaredType) i)
-                            .map(i -> (TypeElement) i.asElement())
-                            .filter(i -> i.getQualifiedName().toString().equals(SphereEnumeration.class.getCanonicalName())).findFirst()
-                            .map(xs -> true).orElse(false);
-                    if (isSphereEnumeration) {
-                        final String typeParameterName = declaredType.asElement().getSimpleName().toString();
-                        methodModel.setReturnType("SphereEnumerationCollectionQueryModel<" + contextType + ", " + typeParameterName + ">");
-                        builder.addImport("io.sphere.sdk.queries.SphereEnumerationCollectionQueryModel");
-                        return true;
-                    }
+                final DeclaredType returnType = returnTypeOptional.get();
+                final DeclaredType declaredType = (DeclaredType) returnType.getTypeArguments().get(0);
+                final TypeElement classInList = (TypeElement) declaredType.asElement();
+                if (isSphereEnumeration(classInList)) {
+                    applyEnumerationRule(methodModel, contextType, declaredType);
+                    return true;
                 }
             }
             return false;
+        }
+
+        private boolean isSphereEnumeration(final TypeElement classInList) {
+            return classInList.getInterfaces().stream()
+                                    .map(i -> (DeclaredType) i)
+                                    .map(i -> (TypeElement) i.asElement())
+                                    .filter(i -> i.getQualifiedName().toString().equals(SphereEnumeration.class.getCanonicalName())).findFirst()
+                                    .map(xs -> true).orElse(false);
+        }
+
+        private void applyEnumerationRule(final MethodModel methodModel, final String contextType, final DeclaredType declaredType) {
+            final String typeParameterName = declaredType.asElement().getSimpleName().toString();
+            methodModel.setReturnType("SphereEnumerationCollectionQueryModel<" + contextType + ", " + typeParameterName + ">");
+            builder.addImport("io.sphere.sdk.queries.SphereEnumerationCollectionQueryModel");
         }
     }
 
@@ -247,16 +249,13 @@ final class QueryModelRules extends GenerationRules {
 
         @Override
         public boolean accept(final ExecutableElement beanGetter, final MethodModel methodModel, final String contextType) {
-            return ds(beanGetter, methodModel, contextType, expectedType, resultGenericType);
-        }
-
-        private boolean ds(final ExecutableElement beanGetter, final MethodModel methodModel, final String contextType, final String expectedType, final String resultGenericType) {
             if (beanGetter.getReturnType().toString().equals(expectedType)) {
                 methodModel.setReturnType(resultGenericType + "<" + contextType + ">");
                 return true;
             }
             return false;
         }
+
     }
 
     private class LocalizedStringQueryModelSelectionRule extends QueryModelSelectionRule {

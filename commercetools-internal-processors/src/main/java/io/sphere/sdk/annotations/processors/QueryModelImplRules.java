@@ -45,7 +45,6 @@ final class QueryModelImplRules extends GenerationRules {
 
     @Override
     protected void beforeExecute() {
-        builder.addImport(builder.build().getPackageName().replace("queries", "") + getContextType());
         addBaseClassAndConstructor();
     }
 
