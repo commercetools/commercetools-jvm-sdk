@@ -45,17 +45,17 @@ public abstract class GenerationRules {
     private void applyInterfaceRules() {
         final List<? extends TypeMirror> interfaces = typeElement.getInterfaces();
         final Stream<? extends TypeMirror> subInterfaces = interfaces.stream()
-                .map(i -> (DeclaredType) i)
-                .map(i -> (TypeElement) i.asElement())
-                .flatMap(i -> i.getInterfaces().stream());
-        Stream.concat(interfaces.stream(), subInterfaces).distinct().forEach(i -> interfaceRules.stream()
-                .filter(r -> r.accept((ReferenceType)i))
+                .map(_interface -> (DeclaredType) _interface)
+                .map(_interface -> (TypeElement) _interface.asElement())
+                .flatMap(_interface -> _interface.getInterfaces().stream());
+        Stream.concat(interfaces.stream(), subInterfaces).distinct().forEach(_interface -> interfaceRules.stream()
+                .filter(rule -> rule.accept((ReferenceType)_interface))
                 .findFirst());
     }
 
     private void applyMethodRules(final Stream<? extends Element> beanGetterStream) {
         beanGetterStream.forEach(beanGetter -> methodRules.stream()
-                .filter(r -> r.accept((ExecutableElement)beanGetter))
+                .filter(rule -> rule.accept((ExecutableElement)beanGetter))
                 .findFirst());
     }
 
