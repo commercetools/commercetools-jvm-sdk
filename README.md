@@ -121,8 +121,8 @@ authUrl=https://auth.sphere.io
 [travis]:https://travis-ci.org/commercetools/commercetools-jvm-sdk
 [travis img]:https://travis-ci.org/commercetools/commercetools-jvm-sdk.svg?branch=master
 
-[maven]:http://search.maven.org/#search|gav|1|g:"com.commercetools.sdk.jvm.core"%20AND%20a:"commercetools-jvm-sdk"
-[maven img]:https://maven-badges.herokuapp.com/maven-central/com.commercetools.sdk.jvm.core/commercetools-jvm-sdk/badge.svg
+[maven]:http://search.maven.org/#search|gav|1|g:"com.commercetools.sdk.jvm.core"%20AND%20a:"commercetools-models"
+[maven img]:https://maven-badges.herokuapp.com/maven-central/com.commercetools.sdk.jvm.core/commercetools-models/badge.svg
 
 [license]:LICENSE.md
 [license img]:https://img.shields.io/badge/License-Apache%202-blue.svg
