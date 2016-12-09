@@ -80,7 +80,8 @@
         <assertj.version>3.3.0</assertj.version>
         <commercetools-taglets.version>0.8.4</commercetools-taglets.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <java.version>1.8</java.version>
+        <java.major.version>8</java.major.version>
+        <java.version>1.${java.major.version}</java.version>
         <jacoco.version>0.7.5.201505241946</jacoco.version>
         <maven-scm-publish-plugin.version>1.1</maven-scm-publish-plugin.version>
         <maven-scm-publish-plugin.scm.url>scm:git:git@github.com:commercetools/commercetools-jvm-sdk.git</maven-scm-publish-plugin.scm.url>
@@ -242,6 +243,12 @@
                             <sourceFileExclude>**/*Test.java</sourceFileExclude>
                             <sourceFileExclude>**/test/*.java</sourceFileExclude>
                         </sourceFileExcludes>
+                        <javaApiLinks>
+                            <property>
+                                <name>api_${java.version}</name>
+                                <value>http://docs.oracle.com/javase/${java.major.version}/docs/api/</value>
+                            </property>
+                        </javaApiLinks>
                     </configuration>
                 </plugin>
                 <plugin>
