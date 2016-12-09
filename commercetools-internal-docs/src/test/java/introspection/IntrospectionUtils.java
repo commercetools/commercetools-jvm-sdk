@@ -28,6 +28,10 @@ public class IntrospectionUtils {
                     .filter(name -> !name.contains("io.sphere.sdk.client.metrics."))
                     .filter(name -> !name.contains("AsyncRetrySupervisor"))
                     .filter(name -> !name.contains("io.sphere.sdk.annotations.processors"))
+                    .filter(name -> !name.contains("AddBillingAddressId"))
+                    .filter(name -> !name.contains("AddShippingAddressIds"))
+                    .filter(name -> !name.contains("RemoveBillingAddressId"))
+                    .filter(name -> !name.contains("RemoveShippingAddressId"))
                     .map(name -> {
                         try {
                             return Class.forName(name);
