@@ -125,6 +125,10 @@ import static java.util.stream.Collectors.toList;
         " \n" +
         " To update the properties {@link Customer#isEmailVerified()} or {@link Customer#getPassword()} special commands are required which are documented in the {@link Customer customer Javadoc}.")
 @HasDeleteCommand(javadocSummary = "Deletes a customer.", includeExamples = "io.sphere.sdk.customers.commands.CustomerDeleteCommandIntegrationTest#execution()")
+@HasQueryModel(additionalContents = {
+        "StringQuerySortingModel<Customer> lowercaseEmail();",
+        "BooleanQueryModel<Customer> isEmailVerified();"
+})
 public interface Customer extends Resource<Customer>, Custom {
     /**
      * Gets the ID of this customer.
@@ -188,6 +192,7 @@ public interface Customer extends Resource<Customer>, Custom {
     @Nullable
     String getLastName();
 
+    @IgnoreInQueryModel
     String getPassword();
 
     /**
@@ -199,6 +204,7 @@ public interface Customer extends Resource<Customer>, Custom {
      * @return middle name
      */
     @Nullable
+    @IgnoreInQueryModel
     String getMiddleName();
 
     /**
@@ -210,6 +216,7 @@ public interface Customer extends Resource<Customer>, Custom {
      * @return title
      */
     @Nullable
+    @IgnoreInQueryModel
     String getTitle();
 
     /**
@@ -223,6 +230,7 @@ public interface Customer extends Resource<Customer>, Custom {
      *
      * @return addressbook
      */
+    @IgnoreInQueryModel
     @Nonnull
     List<Address> getAddresses();
 
@@ -291,6 +299,7 @@ public interface Customer extends Resource<Customer>, Custom {
     }
 
     @JsonProperty("isEmailVerified")
+    @IgnoreInQueryModel//see class annotations
     Boolean isEmailVerified();
 
     /**
@@ -325,6 +334,7 @@ public interface Customer extends Resource<Customer>, Custom {
      * @return name or null
      */
     @Nullable
+    @IgnoreInQueryModel
     String getCompanyName();
 
     /**
@@ -335,6 +345,7 @@ public interface Customer extends Resource<Customer>, Custom {
      * @return vat ID or null
      */
     @Nullable
+    @IgnoreInQueryModel
     String getVatId();
 
     /**
@@ -345,6 +356,7 @@ public interface Customer extends Resource<Customer>, Custom {
      * @return date of birth or null
      */
     @Nullable
+    @IgnoreInQueryModel
     LocalDate getDateOfBirth();
 
     @Override

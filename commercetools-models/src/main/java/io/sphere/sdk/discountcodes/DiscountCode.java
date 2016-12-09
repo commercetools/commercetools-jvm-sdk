@@ -31,12 +31,14 @@ import java.util.List;
 @HasCreateCommand(includeExamples = "io.sphere.sdk.discountcodes.commands.DiscountCodeCreateCommandIntegrationTest#execution()")
 @HasUpdateCommand
 @HasDeleteCommand
+@HasQueryModel
 public interface DiscountCode extends Resource<DiscountCode> {
     /**
      * The referenced matching cart discounts can be applied to the cart once the discount code is added ({@link io.sphere.sdk.carts.commands.updateactions.AddDiscountCode}).
      * @return cart discounts
      * @see io.sphere.sdk.discountcodes.commands.updateactions.ChangeCartDiscounts
      */
+    @IgnoreInQueryModel
     List<Reference<CartDiscount>> getCartDiscounts();
 
     /**
@@ -46,6 +48,7 @@ public interface DiscountCode extends Resource<DiscountCode> {
      * @see io.sphere.sdk.discountcodes.commands.updateactions.SetCartPredicate
      */
     @Nullable
+    @IgnoreInQueryModel
     String getCartPredicate();
 
     /**
@@ -61,6 +64,7 @@ public interface DiscountCode extends Resource<DiscountCode> {
      * @see io.sphere.sdk.discountcodes.commands.updateactions.SetDescription
      */
     @Nullable
+    @IgnoreInQueryModel
     LocalizedString getDescription();
 
     /**
@@ -70,6 +74,7 @@ public interface DiscountCode extends Resource<DiscountCode> {
      * @see io.sphere.sdk.cartdiscounts.commands.updateactions.ChangeIsActive
      */
     @JsonProperty("isActive")
+    @IgnoreInQueryModel
     Boolean isActive();
 
     /**
@@ -78,6 +83,7 @@ public interface DiscountCode extends Resource<DiscountCode> {
      * @see io.sphere.sdk.discountcodes.commands.updateactions.SetMaxApplications
      */
     @Nullable
+    @IgnoreInQueryModel
     Long getMaxApplications();
 
     /**
@@ -86,6 +92,7 @@ public interface DiscountCode extends Resource<DiscountCode> {
      * @see io.sphere.sdk.discountcodes.commands.updateactions.SetMaxApplicationsPerCustomer
      */
     @Nullable
+    @IgnoreInQueryModel
     Long getMaxApplicationsPerCustomer();
 
     /**
@@ -96,12 +103,14 @@ public interface DiscountCode extends Resource<DiscountCode> {
      * @see io.sphere.sdk.discountcodes.commands.updateactions.SetName
      */
     @Nullable
+    @IgnoreInQueryModel
     LocalizedString getName();
 
     /**
      * The backend will generate this array from the cartPredicate. It contains the references of all the resources that are addressed in the predicate.
      * @return references
      */
+    @IgnoreInQueryModel
     List<Reference<JsonNode>> getReferences();
 
     @Override

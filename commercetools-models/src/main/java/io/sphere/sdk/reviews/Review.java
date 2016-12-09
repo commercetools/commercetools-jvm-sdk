@@ -76,8 +76,9 @@ import java.util.Locale;
 @HasByIdGetEndpoint(includeExamples = "io.sphere.sdk.reviews.queries.ReviewByIdGetIntegrationTest#execution()", javadocSummary = "Retrieves a review by a known ID.")
 @HasByKeyGetEndpoint
 @HasCreateCommand(includeExamples = "io.sphere.sdk.reviews.commands.ReviewCreateCommandIntegrationTest#createByCode()")
-@HasUpdateCommand(javadocSummary = "Updates a review.")
-@HasDeleteCommand
+@HasUpdateCommand(javadocSummary = "Updates a review.", updateWithKey = true)
+@HasDeleteCommand(deleteWithKey = true)
+@HasQueryModel()
 public interface Review extends Resource<Review>, Custom, WithKey {
     /**
      * The name of the author which created this review or null.
@@ -119,6 +120,7 @@ public interface Review extends Resource<Review>, Custom, WithKey {
      * @return locale
      */
     @Nullable
+    @QueryModelHint(type = "io.sphere.sdk.queries.LocaleQuerySortingModel<io.sphere.sdk.reviews.Review>", impl = "return localeQuerySortingModel(fieldName);")
     Locale getLocale();
 
     /**

@@ -32,6 +32,7 @@ import java.util.List;
 @HasCreateCommand(includeExamples = "io.sphere.sdk.cartdiscounts.commands.CartDiscountCreateCommandIntegrationTest#execution()")
 @HasUpdateCommand
 @HasDeleteCommand(javadocSummary = "Deletes a {@link CartDiscount}.")
+@HasQueryModel
 public interface CartDiscount extends Resource<CartDiscount> {
     /**
      * Predicate where the discounts should be applied to.
@@ -41,6 +42,7 @@ public interface CartDiscount extends Resource<CartDiscount> {
      *
      * @return predicate
      */
+    @IgnoreInQueryModel
     String getCartPredicate();
 
     /**
@@ -51,6 +53,7 @@ public interface CartDiscount extends Resource<CartDiscount> {
      * @return description or null
      */
     @Nullable
+    @IgnoreInQueryModel
     LocalizedString getDescription();
 
     /**
@@ -61,6 +64,7 @@ public interface CartDiscount extends Resource<CartDiscount> {
      * @return true if active
      */
     @JsonProperty("isActive")
+    @IgnoreInQueryModel
     Boolean isActive();
 
     /**
@@ -72,6 +76,7 @@ public interface CartDiscount extends Resource<CartDiscount> {
      */
     LocalizedString getName();
 
+    @IgnoreInQueryModel
     List<Reference<JsonNode>> getReferences();
 
     /**
@@ -82,6 +87,7 @@ public interface CartDiscount extends Resource<CartDiscount> {
      * @return true if requires a discount code
      */
     @JsonProperty("requiresDiscountCode")
+    @IgnoreInQueryModel
     Boolean isRequiringDiscountCode();
 
     /**
@@ -93,6 +99,7 @@ public interface CartDiscount extends Resource<CartDiscount> {
      *
      * @return sort order
      */
+    @IgnoreInQueryModel
     String getSortOrder();
 
     /**
@@ -102,6 +109,7 @@ public interface CartDiscount extends Resource<CartDiscount> {
      *
      * @return target
      */
+    @IgnoreInQueryModel
     CartDiscountTarget getTarget();
 
     /**
@@ -112,6 +120,7 @@ public interface CartDiscount extends Resource<CartDiscount> {
      * @return valid from date or null
      */
     @Nullable
+    @IgnoreInQueryModel
     ZonedDateTime getValidFrom();
 
     /**
@@ -122,6 +131,7 @@ public interface CartDiscount extends Resource<CartDiscount> {
      * @return valid to date or null
      */
     @Nullable
+    @IgnoreInQueryModel
     ZonedDateTime getValidUntil();
 
     /**
@@ -131,6 +141,7 @@ public interface CartDiscount extends Resource<CartDiscount> {
      *
      * @return value
      */
+    @IgnoreInQueryModel
     CartDiscountValue getValue();
 
     /**

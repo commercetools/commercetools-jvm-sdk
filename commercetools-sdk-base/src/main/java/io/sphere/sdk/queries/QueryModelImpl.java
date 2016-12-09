@@ -38,8 +38,16 @@ public class QueryModelImpl<T> extends Base implements QueryModel<T> {
         return new CurrencyCodeQueryModelImpl<>(this, pathSegment);
     }
 
+    protected MoneyQueryModel<T> moneyQueryModel(final String pathSegment) {
+        return moneyModel(pathSegment);
+    }
+
     protected MoneyQueryModel<T> moneyModel(final String pathSegment) {
         return new MoneyQueryModelImpl<>(this, pathSegment);
+    }
+
+    protected AnyReferenceQueryModel<T> anyReferenceQueryModel(final String pathSegment) {
+        return new AnyReferenceQueryModelImpl <>(this, pathSegment);
     }
 
     protected AnyReferenceQueryModel<T> anyReferenceModel(final String pathSegment) {
@@ -50,24 +58,52 @@ public class QueryModelImpl<T> extends Base implements QueryModel<T> {
         return new ReferenceQueryModelImpl<>(this, pathSegment);
     }
 
+    protected <R> ReferenceQueryModel<T, R> referenceQueryModel(final String pathSegment) {
+        return new ReferenceQueryModelImpl<>(this, pathSegment);
+    }
+
     protected <R> ReferenceOptionalQueryModel<T, R> referenceOptionalModel(final String pathSegment) {
         return new ReferenceOptionalQueryModelImpl<>(this, pathSegment);
+    }
+
+    protected <R> ReferenceOptionalQueryModel<T, R> referenceOptionalQueryModel(final String pathSegment) {
+        return referenceOptionalModel(pathSegment);
+    }
+
+    protected <R> ReferenceCollectionQueryModel<T, R> referenceCollectionQueryModel(final String pathSegment) {
+        return new ReferenceCollectionQueryModelImpl<>(this, pathSegment);
     }
 
     protected <R> ReferenceCollectionQueryModel<T, R> referenceCollectionModel(final String pathSegment) {
         return new ReferenceCollectionQueryModelImpl<>(this, pathSegment);
     }
 
+    protected <E extends SphereEnumeration> SphereEnumerationQueryModelImpl<T, E> sphereEnumerationQueryModel(final String pathSegment) {
+        return enumerationQueryModel(pathSegment);
+    }
+
     protected <E extends SphereEnumeration> SphereEnumerationQueryModelImpl<T, E> enumerationQueryModel(final String pathSegment) {
         return new SphereEnumerationQueryModelImpl<>(this, pathSegment);
+    }
+
+    protected <E extends SphereEnumeration> SphereEnumerationQueryModelImpl<T, E> sphereEnumerationCollectionQueryModel(final String pathSegment) {
+        return enumerationQueryModel(pathSegment);
     }
 
     protected StringQuerySortingModel<T> stringModel(@Nullable final QueryModel<T> parent, final String pathSegment) {
         return new StringQuerySortingModelImpl<>(parent, pathSegment);
     }
 
+    protected StringQuerySortingModel<T> stringQuerySortingModel(final String pathSegment) {
+        return stringModel(pathSegment);
+    }
+
     protected StringQuerySortingModel<T> stringModel(final String pathSegment) {
         return stringModel(this, pathSegment);
+    }
+
+    protected StringCollectionQueryModel<T> stringCollectionQueryModel(final String pathSegment) {
+        return new StringCollectionQueryModelImpl<>(this, pathSegment);
     }
 
     protected StringCollectionQueryModel<T> stringCollectionModel(final String pathSegment) {
@@ -82,6 +118,10 @@ public class QueryModelImpl<T> extends Base implements QueryModel<T> {
         return booleanModel(this, pathSegment);
     }
 
+    protected BooleanQueryModel<T> booleanQueryModel(final String pathSegment) {
+        return booleanModel(this, pathSegment);
+    }
+
     protected CountryQueryModel<T> countryQueryModel(final String pathSegment) {
         return new CountryQueryModelImpl<>(this, pathSegment);
     }
@@ -90,8 +130,16 @@ public class QueryModelImpl<T> extends Base implements QueryModel<T> {
         return new LongQuerySortingModelImpl<>(parent, pathSegment);
     }
 
+    protected LongQuerySortingModel<T> longQuerySortingModel(final String pathSegment) {
+        return longModel(this, pathSegment);
+    }
+
     protected LongQuerySortingModel<T> longModel(final String pathSegment) {
         return longModel(this, pathSegment);
+    }
+
+    protected IntegerQuerySortingModel<T> integerQuerySortingModel(final String pathSegment) {
+        return integerModel(this, pathSegment);
     }
 
     protected IntegerQuerySortingModel<T> integerModel(final String pathSegment) {
@@ -110,12 +158,28 @@ public class QueryModelImpl<T> extends Base implements QueryModel<T> {
         return new LocalizedStringQuerySortingModelImpl<>(this, pathSegment);
     }
 
+    protected LocalizedStringQuerySortingModel<T> localizedStringQueryModel(final String pathSegment) {
+        return new LocalizedStringQuerySortingModelImpl<>(this, pathSegment);
+    }
+
+    protected LocalizedStringQuerySortingModelImpl<T> localizedStringOptionalQueryModel(final String pathSegment) {
+        return new LocalizedStringQuerySortingModelImpl<>(this, pathSegment);
+    }
+
     protected final TimestampSortingModel<T> timestampSortingModel(final String pathSegment) {
         return new TimestampSortingModelImpl<>(this, pathSegment);
     }
 
     protected final AddressQueryModel<T> addressModel(final String pathSegment) {
         return new AddressQueryModelImpl<>(this, pathSegment);
+    }
+
+    protected final AddressQueryModel<T> addressQueryModel(final String pathSegment) {
+        return addressModel(pathSegment);
+    }
+
+    protected final LocaleQuerySortingModel<T> localeQueryModel(final String pathSegment) {
+        return new LocaleQuerySortingModelImpl<>(this, pathSegment);
     }
 
     protected final LocaleQuerySortingModel<T> localeQuerySortingModel(final String pathSegment) {

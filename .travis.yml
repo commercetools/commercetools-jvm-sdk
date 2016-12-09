@@ -17,4 +17,4 @@ notifications:
 branches:
   only:
     - master
-    - code-generation
+    - generate-query-models

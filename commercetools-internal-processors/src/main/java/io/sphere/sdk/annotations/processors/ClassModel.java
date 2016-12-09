@@ -10,6 +10,7 @@ final class ClassModel {
     private String packageName;
     private String additions;
     private String baseClassName;
+    private String codeGeneratedInfo;
     private List<String> modifiers = new LinkedList<>();
     private List<MethodModel> methods = new LinkedList<>();
     private List<MethodModel> constructors = new LinkedList<>();
@@ -17,6 +18,8 @@ final class ClassModel {
     private List<String> imports = new LinkedList<>();
     private List<String> interfaces = new LinkedList<>();
     private String constructorEndContent;
+    private boolean isInterface;
+    private List<AnnotationModel> annotations = new LinkedList<>();
 
     public String getName() {
         return name;
@@ -32,6 +35,7 @@ final class ClassModel {
 
     public void setType(final String type) {
         this.type = type;
+        isInterface = ClassType.INTERFACE.toString().toLowerCase().equals(type);
     }
 
     public List<String> getModifiers() {
@@ -124,5 +128,25 @@ final class ClassModel {
 
     public void setConstructorEndContent(final String constructorEndContent) {
         this.constructorEndContent = constructorEndContent;
+    }
+
+    public boolean isInterface() {
+        return isInterface;
+    }
+
+    public List<AnnotationModel> getAnnotations() {
+        return annotations;
+    }
+
+    public void setAnnotations(final List<AnnotationModel> annotations) {
+        this.annotations = annotations;
+    }
+
+    public String getCodeGeneratedInfo() {
+        return codeGeneratedInfo;
+    }
+
+    public void setCodeGeneratedInfo(final String codeGeneratedInfo) {
+        this.codeGeneratedInfo = codeGeneratedInfo;
     }
 }

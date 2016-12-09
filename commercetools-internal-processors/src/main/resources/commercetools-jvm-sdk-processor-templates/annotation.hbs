@@ -1,1 +1,1 @@
-@{{name}}{{#if value}}("{{value}}"){{/if}}
+@{{name}}({{#if value}}"{{value}}"{{/if}}{{#if values}}{{#each values}}{{@key}}="{{this}}"{{#unless @last}}, {{/unless}}{{/each}}{{/if}})

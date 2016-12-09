@@ -1,5 +1,5 @@
 {{#if annotations}}{{> annotations annotations}}
-    {{/if}}{{#each modifiers}}{{this}} {{/each}}{{#if returnType}}{{returnType}} {{/if}}{{name}}({{#each parameters}}{{#unless @first}}, {{/unless}}{{> parameter this}}{{/each}}) {
+    {{/if}}{{#each modifiers}}{{this}} {{/each}}{{#if returnType}}{{returnType}} {{/if}}{{name}}({{#each parameters}}{{#unless @first}}, {{/unless}}{{> parameter this}}{{/each}}){{#if body}} {
         {{body}}{{#unless returnType}}{{! checks if it is a constructor --}}
         {{constructorEndContent}}{{/unless}}
-    }
+}{{else}};{{/if}}

@@ -29,22 +29,30 @@ import java.util.List;
 @HasCreateCommand(includeExamples = "io.sphere.sdk.productdiscounts.commands.ProductDiscountCreateCommandIntegrationTest#execution()")
 @HasUpdateCommand
 @HasDeleteCommand
+@HasQueryModel(additionalContents = "    default BooleanQueryModel<ProductDiscount> isActive() {\n" +
+        "        return active();\n" +
+        "    }")
 public interface ProductDiscount extends Resource<ProductDiscount> {
 
     LocalizedString getName();
 
     @Nullable
+    @IgnoreInQueryModel
     LocalizedString getDescription();
 
+    @IgnoreInQueryModel
     ProductDiscountValue getValue();
 
+    @IgnoreInQueryModel
     String getPredicate();
 
+    @IgnoreInQueryModel
     String getSortOrder();
 
     @JsonProperty("isActive")
     Boolean isActive();
 
+    @IgnoreInQueryModel
     List<Reference<JsonNode>> getReferences();
 
     /**

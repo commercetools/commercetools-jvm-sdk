@@ -1,5 +1,6 @@
 package io.sphere.sdk.annotations.processors;
 
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -39,5 +40,13 @@ final class MethodParameterModel {
 
     public void setAnnotations(final List<AnnotationModel> annotations) {
         this.annotations = annotations;
+    }
+
+    public static MethodParameterModel ofTypeAndName(final String type, final String name) {
+        final MethodParameterModel result = new MethodParameterModel();
+        result.setType(type);
+        result.setName(name);
+        result.setModifiers(Collections.singletonList("final"));
+        return result;
     }
 }

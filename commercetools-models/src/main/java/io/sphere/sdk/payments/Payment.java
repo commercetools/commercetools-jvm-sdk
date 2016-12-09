@@ -36,6 +36,7 @@ import java.util.List;
 @HasCreateCommand(includeExamples = "io.sphere.sdk.payments.commands.PaymentCreateCommandIntegrationTest#payingPerCreditCart()")
 @HasUpdateCommand(javadocSummary = "Updates a payment.")
 @HasDeleteCommand
+@HasQueryModel
 public interface Payment extends Resource<Payment>, Custom {
     @Nullable
     Reference<Customer> getCustomer();
@@ -60,16 +61,20 @@ public interface Payment extends Resource<Payment>, Custom {
     @Nullable
     MonetaryAmount getAmountRefunded();
 
+    @QueryModelHint(type = "PaymentMethodInfoQueryModel<Payment>", impl = "return new PaymentMethodInfoQueryModelImpl<>(this, fieldName);")
     PaymentMethodInfo getPaymentMethodInfo();
 
     @Override
     @Nullable
     CustomFields getCustom();
 
+    @QueryModelHint(type = "PaymentStatusQueryModel<Payment>", impl = "return new PaymentStatusQueryModelImpl<>(this, fieldName);")
     PaymentStatus getPaymentStatus();
 
+    @QueryModelHint(type = "TransactionCollectionQueryModel<Payment>", impl = "return new TransactionCollectionQueryModelImpl<>(this, fieldName);")
     List<Transaction> getTransactions();
 
+    @IgnoreInQueryModel
     List<CustomFields> getInterfaceInteractions();
 
     @Override

@@ -59,6 +59,7 @@ import java.util.List;
 @HasCreateCommand(includeExamples = "io.sphere.sdk.categories.commands.CategoryCreateCommandIntegrationTest#execution()")
 @HasUpdateCommand(javadocSummary = "Updates a category.")
 @HasDeleteCommand(javadocSummary = "Deletes a category.", includeExamples = "io.sphere.sdk.categories.commands.CategoryDeleteCommandIntegrationTest#execution()")
+@HasQueryModel(baseInterfaces = {"io.sphere.sdk.queries.QueryModel<io.sphere.sdk.categories.Category>"})
 public interface Category extends Resource<Category>, WithLocalizedSlug, MetaAttributes, Custom {
 
     /**
@@ -87,8 +88,10 @@ public interface Category extends Resource<Category>, WithLocalizedSlug, MetaAtt
      * @return description or null
      */
     @Nullable
+    @IgnoreInQueryModel
     LocalizedString getDescription();
 
+    @IgnoreInQueryModel
     List<Reference<Category>> getAncestors();
 
     /**
@@ -109,6 +112,7 @@ public interface Category extends Resource<Category>, WithLocalizedSlug, MetaAtt
      * @return order hint or null
      */
     @Nullable
+    @IgnoreInQueryModel
     String getOrderHint();
 
     /**
@@ -130,6 +134,7 @@ public interface Category extends Resource<Category>, WithLocalizedSlug, MetaAtt
      */
     @Nullable
     @Override
+    @IgnoreInQueryModel
     LocalizedString getMetaTitle();
 
     /**
@@ -141,6 +146,7 @@ public interface Category extends Resource<Category>, WithLocalizedSlug, MetaAtt
      */
     @Nullable
     @Override
+    @IgnoreInQueryModel
     LocalizedString getMetaDescription();
 
     /**
@@ -152,6 +158,7 @@ public interface Category extends Resource<Category>, WithLocalizedSlug, MetaAtt
      */
     @Nullable
     @Override
+    @IgnoreInQueryModel
     LocalizedString getMetaKeywords();
 
     /**

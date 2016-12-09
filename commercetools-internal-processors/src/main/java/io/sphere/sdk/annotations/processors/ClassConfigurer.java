@@ -9,6 +9,7 @@ import org.apache.commons.lang3.tuple.ImmutablePair;
 import javax.lang.model.element.*;
 import javax.lang.model.type.DeclaredType;
 import java.lang.annotation.Annotation;
+import java.lang.reflect.*;
 import java.util.*;
 import java.util.function.Function;
 import java.util.function.Predicate;
@@ -21,6 +22,7 @@ import static java.util.Arrays.asList;
 import static java.util.Collections.singletonList;
 import static java.util.Collections.singletonMap;
 import static java.util.stream.Collectors.joining;
+import static javax.lang.model.element.Modifier.STATIC;
 import static org.apache.commons.lang3.StringUtils.capitalize;
 
 /**
@@ -182,11 +184,15 @@ final class ClassConfigurer {
 
         public InterfacesHolder extending(final String baseClassName) {
             builder.setBaseClassName(baseClassName);
-            return new InterfacesHolder(builder, typeElement);
+            return interfaces();
         }
 
         public InterfacesHolder extending(final Class<?> baseClass) {
             return extending(baseClass.getName());
+        }
+
+        public InterfacesHolder interfaces() {
+            return new InterfacesHolder(builder, typeElement);
         }
     }
 
@@ -234,12 +240,8 @@ final class ClassConfigurer {
         }
 
         public FieldsHolder fieldsFromInterfaceBeanGetters(final boolean finalFields) {
-            final Stream<? extends Element> elementStream = elementStreamIncludingInterfaces(typeElement);
-            final List<FieldModel> fields = elementStream
-                    .filter(BEAN_GETTER_PREDICATE)
-                    .map(DistinctElementWrapper::new)
-                    .distinct()
-                    .map(wrapper -> wrapper.element)
+            final Stream<Element> beanGetterStream = createBeanGetterStream(typeElement);
+            final List<FieldModel> fields = beanGetterStream
                     .map(typeElement -> createField(typeElement, finalFields))
                     .collect(Collectors.toList());
             return fields(fields);
@@ -349,6 +351,10 @@ final class ClassConfigurer {
 
         public ClassModel build() {
             return builder.build();
+        }
+
+        public ClassModelBuilder getBuilder() {
+            return builder;
         }
 
         public MethodsHolder gettersForFields() {
@@ -646,15 +652,19 @@ final class ClassConfigurer {
         return am;
     }
 
-    private static String fieldNameFromGetter(final Element element) {
+    static String fieldNameFromGetter(final Element element) {
         final String methodName = element.getSimpleName().toString();
+        return fieldNameFromGetter(methodName);
+    }
+
+    static String fieldNameFromGetter(final String methodName) {
         final String firstPartGetterName = methodName.startsWith("get") ? "get" : "is";
         final String s1 = methodName.toString().replaceAll("^" + firstPartGetterName, "");
         final String s = ("" + s1.charAt(0)).toLowerCase() + s1.substring(1);
         return escapeJavaKeyword(StringUtils.substringBefore(s, "("));
     }
 
-    private static String getType(final Element element) {
+    static String getType(final Element element) {
         final ReturnTypeElementVisitor visitor = new ReturnTypeElementVisitor();
         return element.accept(visitor, null);
     }
@@ -695,5 +705,23 @@ final class ClassConfigurer {
 
     private static String fieldNamesSortedString(final ClassModelBuilder builder) {
         return fieldNamesSorted(builder).stream().collect(joining(", "));
+    }
+
+    public static Stream<Element> createBeanGetterStream(final TypeElement typeElement) {
+        final Stream<? extends Element> elementStream = elementStreamIncludingInterfaces(typeElement);
+        return elementStream
+                .filter(BEAN_GETTER_PREDICATE)
+                .map(FieldsHolder.DistinctElementWrapper::new)
+                .distinct()
+                .map(wrapper -> wrapper.element);
+    }
+
+    public static Stream<ExecutableElement> instanceMethodStream(final TypeElement typeElement) {
+        final Stream<? extends Element> elementStream = elementStreamIncludingInterfaces(typeElement);
+        return elementStream
+                .filter(e -> ElementKind.METHOD.equals(e.getKind()) && !e.getModifiers().contains(STATIC))
+                .map(FieldsHolder.DistinctElementWrapper::new)
+                .distinct()
+                .map(wrapper -> (ExecutableElement) wrapper.element);
     }
 }

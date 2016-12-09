@@ -6,3 +6,5 @@ io.sphere.sdk.annotations.processors.HasByKeyGetEndpointAnnotationProcessor
 io.sphere.sdk.annotations.processors.CreateCommandEndpointAnnotationProcessor
 io.sphere.sdk.annotations.processors.UpdateCommandEndpointAnnotationProcessor
 io.sphere.sdk.annotations.processors.DeleteCommandEndpointAnnotationProcessor
+io.sphere.sdk.annotations.processors.HasQueryModelAnnotationProcessor
+io.sphere.sdk.annotations.processors.HasQueryModelImplementationAnnotationProcessor
