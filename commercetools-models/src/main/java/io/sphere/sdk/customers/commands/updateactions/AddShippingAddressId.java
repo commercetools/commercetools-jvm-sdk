@@ -14,16 +14,16 @@ import static java.lang.String.format;
  *
  *  @see Customer
  */
-public final class AddShippingAddressIds extends UpdateActionImpl<Customer> {
+public final class AddShippingAddressId extends UpdateActionImpl<Customer> {
     private final String addressId;
 
-    private AddShippingAddressIds(final String addressId) {
+    private AddShippingAddressId(final String addressId) {
         super("addShippingAddressId");
         this.addressId = addressId;
     }
 
-    public static AddShippingAddressIds of(final String addressId) {
-        return new AddShippingAddressIds(addressId);
+    public static AddShippingAddressId of(final String addressId) {
+        return new AddShippingAddressId(addressId);
     }
 
     public String getAddressId() {

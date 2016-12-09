@@ -17,9 +17,12 @@ import io.sphere.sdk.client.SphereClient;
 import io.sphere.sdk.client.SphereRequest;
 import io.sphere.sdk.commands.UpdateActionImpl;
 import io.sphere.sdk.commands.UpdateCommand;
+import io.sphere.sdk.customers.Customer;
 import io.sphere.sdk.customers.commands.CustomerCreateEmailTokenCommand;
 import io.sphere.sdk.customers.commands.CustomerPasswordResetCommand;
 import io.sphere.sdk.customers.commands.CustomerVerifyEmailCommand;
+import io.sphere.sdk.customers.commands.updateactions.AddShippingAddressId;
+import io.sphere.sdk.customers.queries.CustomerQueryModel;
 import io.sphere.sdk.customobjects.CustomObject;
 import io.sphere.sdk.customobjects.commands.CustomObjectDeleteCommand;
 import io.sphere.sdk.customobjects.queries.CustomObjectByKeyGet;
@@ -27,7 +30,6 @@ import io.sphere.sdk.customobjects.queries.CustomObjectQuery;
 import io.sphere.sdk.customobjects.queries.CustomObjectQueryModel;
 import io.sphere.sdk.expansion.ExpansionPath;
 import io.sphere.sdk.http.*;
-import io.sphere.sdk.inventory.InventoryEntry;
 import io.sphere.sdk.json.SphereJsonUtils;
 import io.sphere.sdk.models.*;
 import io.sphere.sdk.orders.Order;
@@ -41,7 +43,6 @@ import io.sphere.sdk.products.*;
 import io.sphere.sdk.products.attributes.Attribute;
 import io.sphere.sdk.products.attributes.AttributeAccess;
 import io.sphere.sdk.products.attributes.AttributeDefinition;
-import io.sphere.sdk.products.attributes.AttributeDraft;
 import io.sphere.sdk.products.commands.updateactions.SetAttribute;
 import io.sphere.sdk.products.commands.updateactions.SetMetaDescription;
 import io.sphere.sdk.products.commands.updateactions.SetMetaKeywords;
@@ -56,6 +57,7 @@ import io.sphere.sdk.producttypes.ProductTypeLocalRepository;
 import io.sphere.sdk.projects.Project;
 import io.sphere.sdk.queries.*;
 import io.sphere.sdk.reviews.ReviewDraft;
+import io.sphere.sdk.search.FilteredFacetResult;
 import io.sphere.sdk.search.SearchKeywords;
 import io.sphere.sdk.search.model.ExistsFilterSearchModelSupport;
 import io.sphere.sdk.search.model.MissingFilterSearchModelSupport;
@@ -92,6 +94,16 @@ import java.util.function.Function;
  <li class=fixed-in-release></li>
  </ul>
  -->
+
+ <h3 class=released-version id="v1_8_0">1.8.0 (09.12.2016)</h3>
+ <ul>
+ <li class=new-in-release>{@link CustomerQueryModel#customerNumber()} </li>
+ <li class=new-in-release>links to the Java SE classes are provided in the SDK so for example for {@link String} and {@link CompletionStage}</li>
+ <li class=new-in-release>{@link Customer#getShippingAddressIds()} and {@link Customer#getBillingAddressIds()} as well as the update actions {@link io.sphere.sdk.customers.commands.updateactions.AddBillingAddressId}, {@link io.sphere.sdk.customers.commands.updateactions.RemoveBillingAddressId}, {@link AddShippingAddressId}, {@link io.sphere.sdk.customers.commands.updateactions.RemoveShippingAddressId}</li>
+ <li class=new-in-release>create commands got withers for the draft objects like {@code io.sphere.sdk.products.commands.ProductCreateCommand#withDraft(Object)} </li>
+ <li class=new-in-release>{@link FilteredFacetResult#getProductCount()} </li>
+ </ul>
+
 
  <h3 class=released-version id="v1_7_0">1.7.0 (22.11.2016)</h3>
  <ul>

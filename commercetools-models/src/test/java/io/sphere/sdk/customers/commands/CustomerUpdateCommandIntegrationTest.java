@@ -245,7 +245,7 @@ public class CustomerUpdateCommandIntegrationTest extends CustomerIntegrationTes
 
             final Address addressForShipping = customer.getAddresses().get(1);
             final String addressId = addressForShipping.getId();
-            final AddShippingAddressIds updateAction = AddShippingAddressIds.of(addressId);
+            final AddShippingAddressId updateAction = AddShippingAddressId.of(addressId);
             final Customer updatedCustomer =
                     client().executeBlocking(CustomerUpdateCommand.of(customer, updateAction));
 
