@@ -237,16 +237,6 @@ public interface CartLike<T> extends Resource<T>, Custom {
     }
 
     /**
-     * Tries to calculate all the taxes applied to the cart, without discriminating between different tax portions.
-     * Only possible if taxes have already been applied to the cart.
-     * @return the taxes applied to the cart, or absent if taxes have not been applied yet
-     */
-    default Optional<MonetaryAmount> estimateAppliedTaxes() {
-        return Optional.ofNullable(getTaxedPrice())
-                .map(PriceUtils::calculateAppliedTaxes);
-    }
-
-    /**
      * Estimates the subtotal price of the cart with taxes included, useful for B2C scenarios.
      * The subtotal is calculated by adding the prices of line items and custom line items, thus excluding
      * shipping costs and discounts that are applied to the entire cart.
@@ -286,5 +276,15 @@ public interface CartLike<T> extends Resource<T>, Custom {
                 .map(CustomLineItem::estimateTotalNetPrice)
                 .reduce(zeroAmount(getCurrency()), MonetaryAmount::add);
         return lineItemTotal.add(customLineItemTotal);
+    }
+
+    /**
+     * Tries to calculate all the taxes applied to the cart, without discriminating between different tax portions.
+     * Only possible if taxes have already been applied to the cart.
+     * @return the taxes applied to the cart, or absent if taxes have not been applied yet
+     */
+    default Optional<MonetaryAmount> calculateTotalAppliedTaxes() {
+        return Optional.ofNullable(getTaxedPrice())
+                .map(PriceUtils::calculateAppliedTaxes);
     }
 }

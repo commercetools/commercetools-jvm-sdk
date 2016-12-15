@@ -57,7 +57,7 @@ public final class PriceUtils {
      * @return the gross monetary amount
      */
     public static MonetaryAmount convertNetToGrossPrice(final MonetaryAmount netAmount, final double taxRate) {
-        return netAmount.add(netAmount.multiply(taxRate));
+        return netAmount.multiply(1 + taxRate);
     }
 
     /**
@@ -67,6 +67,6 @@ public final class PriceUtils {
      * @return the net monetary amount
      */
     public static MonetaryAmount convertGrossToNetPrice(final MonetaryAmount grossAmount, final double taxRate) {
-        return grossAmount.multiply(1 / (1 + taxRate));
+        return grossAmount.divide(1 + taxRate);
     }
 }

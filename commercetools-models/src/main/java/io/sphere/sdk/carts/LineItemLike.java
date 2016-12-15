@@ -1,7 +1,6 @@
 package io.sphere.sdk.carts;
 
 import io.sphere.sdk.cartdiscounts.DiscountedLineItemPriceForQuantity;
-import io.sphere.sdk.products.PriceUtils;
 import io.sphere.sdk.types.Custom;
 
 import javax.annotation.Nullable;
@@ -63,14 +62,5 @@ public interface LineItemLike extends Custom {
         return Optional.ofNullable(getTaxedPrice())
                 .map(TaxedItemPrice::getTotalNet)
                 .orElseGet(this::getTotalPrice);
-    }
-
-    /**
-     * Tries to calculate the tax applied to the line item, only possible if taxes have already been applied to the cart.
-     * @return the taxes applied to the line item, or absent if taxes have not been applied yet
-     */
-    default Optional<MonetaryAmount> estimateTotalAppliedTax() {
-        return Optional.ofNullable(getTaxedPrice())
-                .map(PriceUtils::calculateAppliedTaxes);
     }
 }
