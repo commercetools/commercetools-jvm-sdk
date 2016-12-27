@@ -93,6 +93,9 @@
                     <newArtifacts>
                         <artifact>${project.groupId}:${project.artifactId}:${project.version}</artifact>
                     </newArtifacts>
+                    <analysisConfigurationFiles>
+                        <file>${project.parent.basedir}/revapi-config.json</file>
+                    </analysisConfigurationFiles>
                 </configuration>
                 <dependencies>
                     <dependency>

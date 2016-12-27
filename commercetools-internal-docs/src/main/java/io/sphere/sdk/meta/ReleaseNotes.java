@@ -1,6 +1,7 @@
 package io.sphere.sdk.meta;
 
 import io.sphere.sdk.cartdiscounts.CartDiscountDraft;
+import io.sphere.sdk.cartdiscounts.CartDiscountDraftBuilder;
 import io.sphere.sdk.carts.*;
 import io.sphere.sdk.carts.commands.updateactions.SetShippingMethod;
 import io.sphere.sdk.carts.expansion.CartExpansionModel;
@@ -9,6 +10,7 @@ import io.sphere.sdk.carts.queries.CartByIdGet;
 import io.sphere.sdk.carts.queries.CartQueryModel;
 import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.categories.CategoryDraft;
+import io.sphere.sdk.categories.CategoryDraftBuilder;
 import io.sphere.sdk.channels.Channel;
 import io.sphere.sdk.channels.queries.ChannelByIdGet;
 import io.sphere.sdk.client.SphereApiConfig;
@@ -18,6 +20,7 @@ import io.sphere.sdk.client.SphereRequest;
 import io.sphere.sdk.commands.UpdateActionImpl;
 import io.sphere.sdk.commands.UpdateCommand;
 import io.sphere.sdk.customers.Customer;
+import io.sphere.sdk.customers.CustomerDraftBuilder;
 import io.sphere.sdk.customers.commands.CustomerCreateEmailTokenCommand;
 import io.sphere.sdk.customers.commands.CustomerPasswordResetCommand;
 import io.sphere.sdk.customers.commands.CustomerVerifyEmailCommand;
@@ -30,14 +33,17 @@ import io.sphere.sdk.customobjects.queries.CustomObjectQuery;
 import io.sphere.sdk.customobjects.queries.CustomObjectQueryModel;
 import io.sphere.sdk.expansion.ExpansionPath;
 import io.sphere.sdk.http.*;
+import io.sphere.sdk.inventory.InventoryEntryDraftBuilder;
 import io.sphere.sdk.json.SphereJsonUtils;
 import io.sphere.sdk.models.*;
 import io.sphere.sdk.orders.Order;
 import io.sphere.sdk.orders.expansion.OrderExpansionModel;
 import io.sphere.sdk.payments.PaymentDraft;
+import io.sphere.sdk.payments.PaymentDraftBuilder;
 import io.sphere.sdk.payments.Transaction;
 import io.sphere.sdk.payments.TransactionDraft;
 import io.sphere.sdk.payments.messages.PaymentTransactionStateChangedMessage;
+import io.sphere.sdk.productdiscounts.ProductDiscountDraftBuilder;
 import io.sphere.sdk.productdiscounts.queries.ProductDiscountByIdGet;
 import io.sphere.sdk.products.*;
 import io.sphere.sdk.products.attributes.Attribute;
@@ -57,15 +63,18 @@ import io.sphere.sdk.producttypes.ProductTypeLocalRepository;
 import io.sphere.sdk.projects.Project;
 import io.sphere.sdk.queries.*;
 import io.sphere.sdk.reviews.ReviewDraft;
+import io.sphere.sdk.reviews.ReviewDraftBuilder;
 import io.sphere.sdk.search.FilteredFacetResult;
 import io.sphere.sdk.search.SearchKeywords;
 import io.sphere.sdk.search.model.ExistsFilterSearchModelSupport;
 import io.sphere.sdk.search.model.MissingFilterSearchModelSupport;
 import io.sphere.sdk.states.State;
+import io.sphere.sdk.states.StateDraftDsl;
 import io.sphere.sdk.taxcategories.TaxRate;
 import io.sphere.sdk.types.CustomFields;
 import io.sphere.sdk.types.FieldType;
 import io.sphere.sdk.types.TypeDraft;
+import io.sphere.sdk.types.TypeDraftBuilder;
 
 import javax.money.CurrencyUnit;
 import java.time.Duration;
@@ -97,6 +106,7 @@ import java.util.function.Function;
 
  <h3 class=released-version id="v1_8_0">1.8.0 (09.12.2016)</h3>
  <ul>
+ <li class="change-in-release">{@link CustomerQueryModel#customerGroup()}, {@link io.sphere.sdk.inventory.queries.InventoryEntryQueryModel#supplyChannel()} and {@link io.sphere.sdk.orders.queries.OrderQueryModel#cart()} returns a {@link io.sphere.sdk.queries.ReferenceOptionalQueryModel} instead of {@link io.sphere.sdk.queries.ReferenceQueryModel} to enable additional query predicates.</li>
  <li class=new-in-release>{@link CustomerQueryModel#customerNumber()} </li>
  <li class=new-in-release>links to the Java SE classes are provided in the SDK so for example for {@link String} and {@link CompletionStage}</li>
  <li class=new-in-release>{@link Customer#getShippingAddressIds()} and {@link Customer#getBillingAddressIds()} as well as the update actions {@link io.sphere.sdk.customers.commands.updateactions.AddBillingAddressId}, {@link io.sphere.sdk.customers.commands.updateactions.RemoveBillingAddressId}, {@link AddShippingAddressId}, {@link io.sphere.sdk.customers.commands.updateactions.RemoveShippingAddressId}</li>
@@ -107,6 +117,7 @@ import java.util.function.Function;
 
  <h3 class=released-version id="v1_7_0">1.7.0 (22.11.2016)</h3>
  <ul>
+ <li class="change-in-release">In {@code DraftBuilder} classes the {@code build()} method returns a {@code DraftDsl} class instead of its corresponding {@code Draft} interface. Similarly some methods relying on these builders have changed their return type to {@code DraftDsl} as well. The following methods are affected by this change: {@link CartDiscountDraftBuilder#build()}, {@link CategoryDraftBuilder#build()}, {@link CustomerDraftBuilder#build()}, {@link InventoryEntryDraftBuilder#build()}, {@link PaymentDraftBuilder#build()}, {@link ProductDiscountDraftBuilder#build()}, {@link ReviewDraftBuilder#build()}, {@link TypeDraftBuilder#build()}, {@link StateDraftDsl#withRoles(io.sphere.sdk.states.StateRole)}, {@link StateDraftDsl#withRoles(Set)} and {@link StateDraftDsl#withTransitions(Set)}.</li>
  <li class=new-in-release>For each resource draft builders and implementation classes are generated</li>
  <li class=new-in-release>{@link io.sphere.sdk.products.commands.updateactions.SetDiscountedPrice}</li>
  <li class=new-in-release>{@link Address#getExternalId()} </li>
