@@ -205,75 +205,16 @@ public interface CartLike<T> extends Resource<T>, Custom {
     Locale getLocale();
 
     /**
-     * Estimates the total price of the cart with taxes included, useful for B2C scenarios.
-     * This is the sum of the gross price of each item in the cart, shipping and discounts taken into account.
-     *
-     * Be aware that when taxes are not yet applied to the cart (i.e. shipping country/state are missing) then it cannot
-     * be determined whether taxes are included or not in the calculation, as it depends on the tax categories
-     * linked to the items in cart and the country/state of the cart.
-     *
-     * @return the estimated total gross price of the cart
+     * Returns the subtotal price of the cart, which is calculated by adding the prices of line items and custom line items,
+     * thus excluding shipping costs and discounts that are applied to the entire cart.
+     * @return the estimated subtotal price of the cart
      */
-    default MonetaryAmount estimateTotalGrossPrice() {
-        return Optional.ofNullable(getTaxedPrice())
-                .map(TaxedPrice::getTotalGross)
-                .orElseGet(this::getTotalPrice);
-    }
-
-    /**
-     * Estimates the total price of the cart without taxes included, useful for B2B scenarios.
-     * This is the sum of the net price of each item in the cart, shipping and discounts taken into account.
-     *
-     * Be aware that when taxes are not yet applied to the cart (i.e. shipping country/state are missing) then it cannot
-     * be determined whether taxes are included or not in the calculation, as it depends on the tax categories
-     * linked to the items in cart and the country/state of the cart.
-     *
-     * @return the estimated total net price of the cart
-     */
-    default MonetaryAmount estimateTotalNetPrice() {
-        return Optional.ofNullable(getTaxedPrice())
-                .map(TaxedPrice::getTotalNet)
-                .orElseGet(this::getTotalPrice);
-    }
-
-    /**
-     * Estimates the subtotal price of the cart with taxes included, useful for B2C scenarios.
-     * The subtotal is calculated by adding the prices of line items and custom line items, thus excluding
-     * shipping costs and discounts that are applied to the entire cart.
-     *
-     * Be aware that when taxes are not yet applied to the cart (i.e. shipping country/state are missing) then it cannot
-     * be determined whether taxes are included or not in the calculation, as it depends on the tax categories
-     * linked to the products in cart and the country/state of the cart.
-     *
-     * @return the estimated subtotal gross price of the cart
-     */
-    default MonetaryAmount estimateSubTotalGrossPrice() {
+    default MonetaryAmount calculateSubTotalPrice() {
         final MonetaryAmount lineItemTotal = getLineItems().stream()
-                .map(LineItem::estimateTotalGrossPrice)
+                .map(LineItem::getTotalPrice)
                 .reduce(zeroAmount(getCurrency()), MonetaryAmount::add);
         final MonetaryAmount customLineItemTotal = getCustomLineItems().stream()
-                .map(CustomLineItem::estimateTotalGrossPrice)
-                .reduce(zeroAmount(getCurrency()), MonetaryAmount::add);
-        return lineItemTotal.add(customLineItemTotal);
-    }
-
-    /**
-     * Estimates the subtotal price of the cart without taxes included, useful for B2B scenarios.
-     * The subtotal is calculated by adding the prices of line items and custom line items, thus excluding
-     * shipping costs and discounts that are applied to the entire cart.
-     *
-     * Be aware that when taxes are not yet applied to the cart (i.e. shipping country/state are missing) then it cannot
-     * be determined whether taxes are included or not in the calculation, as it depends on the tax categories
-     * linked to the products in cart and the country/state of the cart.
-     *
-     * @return the estimated subtotal net price of the cart
-     */
-    default MonetaryAmount estimateSubTotalNetPrice() {
-        final MonetaryAmount lineItemTotal = getLineItems().stream()
-                .map(LineItem::estimateTotalNetPrice)
-                .reduce(zeroAmount(getCurrency()), MonetaryAmount::add);
-        final MonetaryAmount customLineItemTotal = getCustomLineItems().stream()
-                .map(CustomLineItem::estimateTotalNetPrice)
+                .map(CustomLineItem::getTotalPrice)
                 .reduce(zeroAmount(getCurrency()), MonetaryAmount::add);
         return lineItemTotal.add(customLineItemTotal);
     }
