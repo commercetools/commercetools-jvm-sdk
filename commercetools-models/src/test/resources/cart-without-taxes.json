@@ -1,157 +1,15 @@
 {
   "type": "Cart",
-  "id": "ff5b7f67-5f6e-4f77-b38f-eccb232d38b9",
-  "version": 1,
-  "createdAt": "2016-12-15T13:52:51.998Z",
-  "lastModifiedAt": "2016-12-15T13:52:51.998Z",
   "lineItems": [
     {
-      "id": "209c8df5-e335-4a68-a765-ab11586c38bf",
-      "productId": "640d248b-870b-44d0-bd3d-40583e5172d8",
-      "name": {
-        "de": "Sweater Brunello Cucinelli cream",
-        "en": "Sweater Brunello Cucinelli cream"
-      },
-      "productType": {
-        "typeId": "product-type",
-        "id": "d59b3983-cb99-4b80-a4db-090521592bfa",
-        "version": 2
-      },
-      "variant": {
-        "id": 3,
-        "sku": "M0E20000000DQTJ",
-        "prices": [
-          {
-            "value": {
-              "currencyCode": "EUR",
-              "centAmount": 94375
-            },
-            "id": "e1800414-70e5-455f-9cad-4c617b40f37c"
-          },
-          {
-            "value": {
-              "currencyCode": "EUR",
-              "centAmount": 61885
-            },
-            "id": "62189334-d361-4551-94d7-ee1d18e56023",
-            "customerGroup": {
-              "typeId": "customer-group",
-              "id": "2bfe6b6b-2c46-4bbb-9eb6-b1893d4f7ba6"
-            }
-          },
-          {
-            "value": {
-              "currencyCode": "EUR",
-              "centAmount": 75500
-            },
-            "id": "01cf0b3e-ef8a-4a84-936c-d235a06da5f9",
-            "country": "DE"
-          },
-          {
-            "value": {
-              "currencyCode": "EUR",
-              "centAmount": 75500
-            },
-            "id": "f12b58f6-0ead-46ff-82c7-38c9f8c1b4ae",
-            "country": "IT"
-          },
-          {
-            "value": {
-              "currencyCode": "EUR",
-              "centAmount": 75500
-            },
-            "id": "7f8222b5-32b8-4c4e-b32d-bc2347e0ed9a",
-            "country": "GB"
-          },
-          {
-            "value": {
-              "currencyCode": "EUR",
-              "centAmount": 68705
-            },
-            "id": "b454d8df-4f5c-4f5d-ac92-8d18c813dcd7",
-            "country": "DE",
-            "channel": {
-              "typeId": "channel",
-              "id": "0a5f2b5b-c623-4004-a197-459717d62a5a"
-            }
-          },
-          {
-            "value": {
-              "currencyCode": "EUR",
-              "centAmount": 73235
-            },
-            "id": "8d44d927-ebaf-4192-921a-fe12781bc32c",
-            "country": "DE",
-            "channel": {
-              "typeId": "channel",
-              "id": "eeff7b26-f179-4739-b88d-6b8814da4e5a"
-            }
-          },
-          {
-            "value": {
-              "currencyCode": "EUR",
-              "centAmount": 80785
-            },
-            "id": "d96df18b-6e92-4421-8ca6-39c075172f70",
-            "country": "DE",
-            "channel": {
-              "typeId": "channel",
-              "id": "7ef24a9b-5f76-4bb4-bf69-3f365e29e095"
-            },
-            "discounted": {
-              "value": {
-                "currencyCode": "EUR",
-                "centAmount": 72706
-              },
-              "discount": {
-                "typeId": "product-discount",
-                "id": "7b9fd246-7218-4cde-8794-aee275952d6e"
-              }
-            }
-          },
-          {
-            "value": {
-              "currencyCode": "EUR",
-              "centAmount": 102869
-            },
-            "id": "970afebf-883f-4e63-a656-26435fae7d2c",
-            "channel": {
-              "typeId": "channel",
-              "id": "6a3880f9-eea9-48ec-9fbc-e90eefac2926"
-            }
-          },
-          {
-            "value": {
-              "currencyCode": "EUR",
-              "centAmount": 72480
-            },
-            "id": "e4341ba7-9b3c-4f0e-89d9-ca0f017d149b",
-            "country": "DE",
-            "channel": {
-              "typeId": "channel",
-              "id": "67d22367-d959-4dfe-9ea4-d2fbcbdbff25"
-            }
-          }
-        ]
-      },
       "price": {
         "value": {
           "currencyCode": "EUR",
           "centAmount": 94375
-        },
-        "id": "e1800414-70e5-455f-9cad-4c617b40f37c"
+        }
       },
       "quantity": 2,
       "discountedPricePerQuantity": [],
-      "state": [
-        {
-          "quantity": 2,
-          "state": {
-            "typeId": "state",
-            "id": "db2b1109-27bd-4d67-a18a-526eb5e0062d"
-          }
-        }
-      ],
       "priceMode": "Platform",
       "totalPrice": {
         "currencyCode": "EUR",
@@ -159,152 +17,14 @@
       }
     },
     {
-      "id": "d3143164-ae87-4272-868a-ce46d22626d1",
-      "productId": "45410dc7-fcdb-4b0c-ae08-985f521e6a28",
-      "name": {
-        "de": "Sandalen Tods bordeaux",
-        "en": "sandalen Tods dark red"
-      },
-      "productType": {
-        "typeId": "product-type",
-        "id": "d59b3983-cb99-4b80-a4db-090521592bfa",
-        "version": 2
-      },
-      "variant": {
-        "id": 3,
-        "sku": "M0E20000000DWRF",
-        "prices": [
-          {
-            "value": {
-              "currencyCode": "EUR",
-              "centAmount": 65000
-            },
-            "id": "155cd57d-d872-4162-9c7e-c6bc574e7a77"
-          },
-          {
-            "value": {
-              "currencyCode": "EUR",
-              "centAmount": 42623
-            },
-            "id": "67868a19-58f1-4dba-905d-822ec38adf78",
-            "customerGroup": {
-              "typeId": "customer-group",
-              "id": "2bfe6b6b-2c46-4bbb-9eb6-b1893d4f7ba6"
-            }
-          },
-          {
-            "value": {
-              "currencyCode": "EUR",
-              "centAmount": 52000
-            },
-            "id": "410c9b27-5cf8-4706-ba8e-96fa979f7586",
-            "country": "DE"
-          },
-          {
-            "value": {
-              "currencyCode": "EUR",
-              "centAmount": 52000
-            },
-            "id": "192f9bdb-8187-4e17-8f45-95d9d102b31e",
-            "country": "IT"
-          },
-          {
-            "value": {
-              "currencyCode": "EUR",
-              "centAmount": 52000
-            },
-            "id": "9371e89d-de3f-458c-8377-605ca5b239ce",
-            "country": "GB"
-          },
-          {
-            "value": {
-              "currencyCode": "EUR",
-              "centAmount": 54600
-            },
-            "id": "ca6c7fc1-1e3b-467b-a93a-63a61fd36310",
-            "country": "DE",
-            "channel": {
-              "typeId": "channel",
-              "id": "0a5f2b5b-c623-4004-a197-459717d62a5a"
-            }
-          },
-          {
-            "value": {
-              "currencyCode": "EUR",
-              "centAmount": 53040
-            },
-            "id": "c0605516-adb9-4bf4-b5f3-6127905356cd",
-            "country": "DE",
-            "channel": {
-              "typeId": "channel",
-              "id": "eeff7b26-f179-4739-b88d-6b8814da4e5a"
-            }
-          },
-          {
-            "value": {
-              "currencyCode": "EUR",
-              "centAmount": 54600
-            },
-            "id": "b1ef21d0-0fd9-4fb2-b478-82c336ed5c8c",
-            "country": "DE",
-            "channel": {
-              "typeId": "channel",
-              "id": "7ef24a9b-5f76-4bb4-bf69-3f365e29e095"
-            },
-            "discounted": {
-              "value": {
-                "currencyCode": "EUR",
-                "centAmount": 49140
-              },
-              "discount": {
-                "typeId": "product-discount",
-                "id": "7b9fd246-7218-4cde-8794-aee275952d6e"
-              }
-            }
-          },
-          {
-            "value": {
-              "currencyCode": "EUR",
-              "centAmount": 62400
-            },
-            "id": "cd3eb142-3704-4466-b448-41affb07842c",
-            "channel": {
-              "typeId": "channel",
-              "id": "6a3880f9-eea9-48ec-9fbc-e90eefac2926"
-            }
-          },
-          {
-            "value": {
-              "currencyCode": "EUR",
-              "centAmount": 49920
-            },
-            "id": "939b7cd6-99ba-479c-9d14-886f45f47c20",
-            "country": "DE",
-            "channel": {
-              "typeId": "channel",
-              "id": "67d22367-d959-4dfe-9ea4-d2fbcbdbff25"
-            }
-          }
-        ]
-      },
       "price": {
         "value": {
           "currencyCode": "EUR",
           "centAmount": 65000
-        },
-        "id": "155cd57d-d872-4162-9c7e-c6bc574e7a77"
+        }
       },
       "quantity": 1,
       "discountedPricePerQuantity": [],
-      "state": [
-        {
-          "quantity": 1,
-          "state": {
-            "typeId": "state",
-            "id": "db2b1109-27bd-4d67-a18a-526eb5e0062d"
-          }
-        }
-      ],
       "priceMode": "Platform",
       "totalPrice": {
         "currencyCode": "EUR",
@@ -312,44 +32,23 @@
       }
     }
   ],
-  "cartState": "Active",
   "totalPrice": {
     "currencyCode": "EUR",
     "centAmount": 262150
   },
   "customLineItems": [
     {
-      "id": "fd61518a-b832-47bd-89f7-efcda2f350ec",
-      "name": {
-        "en": "Some product"
-      },
       "money": {
         "currencyCode": "EUR",
         "centAmount": 4200
       },
-      "slug": "Some slug",
       "quantity": 2,
       "discountedPricePerQuantity": [],
-      "taxCategory": {
-        "typeId": "tax-category",
-        "id": "d54da6fe-072d-4d00-939c-a292c18adfc0"
-      },
-      "state": [
-        {
-          "quantity": 2,
-          "state": {
-            "typeId": "state",
-            "id": "db2b1109-27bd-4d67-a18a-526eb5e0062d"
-          }
-        }
-      ],
       "totalPrice": {
         "currencyCode": "EUR",
         "centAmount": 8400
       }
     }
   ],
-  "discountCodes": [],
-  "inventoryMode": "None",
   "taxMode": "Platform"
 }

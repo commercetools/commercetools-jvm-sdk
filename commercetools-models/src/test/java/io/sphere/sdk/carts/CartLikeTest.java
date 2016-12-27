@@ -20,32 +20,13 @@ public class CartLikeTest {
     }
 
     @Test
-    public void estimatesTotalGrossPrice() throws Exception {
-        assertThat(cartWithoutTaxes.estimateTotalGrossPrice()).isEqualTo(MoneyImpl.ofCents(262150, EUR));
-        assertThat(cartWithTaxes.estimateTotalGrossPrice()).isEqualTo(MoneyImpl.ofCents(262540, EUR));
-    }
-
-    @Test
-    public void estimatesTotalNetPrice() throws Exception {
-        assertThat(cartWithoutTaxes.estimateTotalNetPrice()).isEqualTo(MoneyImpl.ofCents(262150, EUR));
-        assertThat(cartWithTaxes.estimateTotalNetPrice()).isEqualTo(MoneyImpl.ofCents(220622, EUR));
-    }
-
-    @Test
     public void calculatesTotalAppliedTaxes() throws Exception {
         assertThat(cartWithoutTaxes.calculateTotalAppliedTaxes()).isEmpty();
         assertThat(cartWithTaxes.calculateTotalAppliedTaxes()).contains(MoneyImpl.ofCents(41918, EUR));
     }
 
     @Test
-    public void estimatesSubTotalGrossPrice() throws Exception {
-        assertThat(cartWithoutTaxes.estimateSubTotalGrossPrice()).isEqualTo(MoneyImpl.ofCents(262150, EUR));
-        assertThat(cartWithTaxes.estimateSubTotalGrossPrice()).isEqualTo(MoneyImpl.ofCents(262150, EUR));
-    }
-
-    @Test
-    public void estimatesSubTotalNetPrice() throws Exception {
-        assertThat(cartWithoutTaxes.estimateSubTotalNetPrice()).isEqualTo(MoneyImpl.ofCents(262150, EUR));
-        assertThat(cartWithTaxes.estimateSubTotalNetPrice()).isEqualTo(MoneyImpl.ofCents(220294, EUR));
+    public void calculatesSubTotalPrice() throws Exception {
+        assertThat(cartWithTaxes.calculateSubTotalPrice()).isEqualTo(MoneyImpl.ofCents(262150, EUR));
     }
 }
