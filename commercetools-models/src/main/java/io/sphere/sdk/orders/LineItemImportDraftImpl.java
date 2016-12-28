@@ -28,7 +28,7 @@ final class LineItemImportDraftImpl extends Base implements LineItemImportDraft 
     @Nullable
     private final Reference<ProductType> productType;
 
-    public LineItemImportDraftImpl(final LocalizedString name, @Nullable final String productId, final ProductVariantImportDraft variant, final Price price, final Long quantity, @Nullable final Set<ItemState> state, @Nullable final Reference<Channel> supplyChannel, @Nullable final TaxRate taxRate, final Reference<ProductType> productType) {
+    public LineItemImportDraftImpl(final LocalizedString name, @Nullable final String productId, final ProductVariantImportDraft variant, final Price price, final Long quantity, @Nullable final Set<ItemState> state, @Nullable final Reference<Channel> supplyChannel, @Nullable final TaxRate taxRate, @Nullable final Reference<ProductType> productType) {
         this.name = name;
         this.productId = productId;
         this.variant = variant;

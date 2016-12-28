@@ -79,7 +79,7 @@ public class OrderImportCommandIntegrationTest extends IntegrationTest {
             assertThat(lineItem.getName()).isEqualTo(name);
             assertThat(lineItem.getQuantity()).isEqualTo(quantity);
             assertThat(lineItem.getPrice()).isEqualTo(price);
-            assertThat(lineItem.getProductType()).isEqualTo(product.getId());
+            assertThat(lineItem.getProductType()).isEqualTo(product.getProductType());
         });
     }
 

@@ -46,7 +46,7 @@ final class LineItemImpl extends LineItemLikeImpl implements LineItem {
     @Nullable
     private final Reference<ProductType> productType;
 
-            @JsonCreator
+    @JsonCreator
     LineItemImpl(final String id, final String productId, final LocalizedString name,
                  final JsonNode variant, final Price price, final Long quantity,
                  final Set<ItemState> state, @Nullable final TaxRate taxRate,
@@ -61,7 +61,7 @@ final class LineItemImpl extends LineItemLikeImpl implements LineItem {
         this.name = name;
         this.taxedPrice = taxedPrice;
         this.productType = productType;
-                if (variant instanceof ObjectNode) {
+        if (variant instanceof ObjectNode) {
             ((ObjectNode) variant).put("productId", productId);
         }
         this.variant = SphereJsonUtils.readObject(variant, ProductVariant.class);
