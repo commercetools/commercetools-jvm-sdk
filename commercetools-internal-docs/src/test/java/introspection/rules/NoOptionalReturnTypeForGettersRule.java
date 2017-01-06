@@ -13,7 +13,7 @@ public class NoOptionalReturnTypeForGettersRule extends MethodStrategyRule {
 
     @Override
     protected boolean methodIsIncludedInRule(final Method method) {
-        return !method.getName().startsWith("find") && !method.getName().equals("head") && !method.getName().equals("calculate");
+        return !method.getName().startsWith("find") && !method.getName().equals("head") && !method.getName().startsWith("calculate");
     }
 
     @Override
