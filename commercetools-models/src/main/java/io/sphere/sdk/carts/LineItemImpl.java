@@ -41,6 +41,7 @@ final class LineItemImpl extends LineItemLikeImpl implements LineItem {
     private final List<DiscountedLineItemPriceForQuantity> discountedPricePerQuantity;
     @Nullable
     private final TaxedItemPrice taxedPrice;
+    private final LineItemPriceMode priceMode;
 
     @JsonCreator
     LineItemImpl(final String id, final String productId, final LocalizedString name,
@@ -50,7 +51,7 @@ final class LineItemImpl extends LineItemLikeImpl implements LineItem {
                  @Nullable final LocalizedString productSlug, @Nullable final Reference<Channel> distributionChannel,
                  @Nullable final CustomFields custom, final MonetaryAmount totalPrice,
                  final List<DiscountedLineItemPriceForQuantity> discountedPricePerQuantity,
-                 @Nullable final TaxedItemPrice taxedPrice) {
+                 @Nullable final TaxedItemPrice taxedPrice, final LineItemPriceMode priceMode) {
         super(id, state, quantity, discountedPrice);
         this.productId = productId;
         this.name = name;
@@ -67,6 +68,7 @@ final class LineItemImpl extends LineItemLikeImpl implements LineItem {
         this.custom = custom;
         this.totalPrice = totalPrice;
         this.discountedPricePerQuantity = discountedPricePerQuantity != null ? discountedPricePerQuantity : emptyList();
+        this.priceMode = priceMode;
     }
 
     @Override
@@ -133,5 +135,10 @@ final class LineItemImpl extends LineItemLikeImpl implements LineItem {
     @Nullable
     public TaxedItemPrice getTaxedPrice() {
         return taxedPrice;
+    }
+
+    @Override
+    public LineItemPriceMode getPriceMode() {
+        return priceMode;
     }
 }

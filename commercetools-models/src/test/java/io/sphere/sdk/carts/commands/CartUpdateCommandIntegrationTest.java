@@ -487,6 +487,7 @@ public class CartUpdateCommandIntegrationTest extends IntegrationTest {
             assertThat(originalLineItem.getPrice().getValue()).isEqualTo(MoneyImpl.ofCents(1234, EUR));
             assertThat(originalLineItem.getTotalPrice()).isEqualTo(MoneyImpl.ofCents(3702, EUR));
             assertThat(originalLineItem.getQuantity()).isEqualTo(3L);
+            assertThat(originalLineItem.getPriceMode()).isEqualTo(LineItemPriceMode.PLATFORM);
 
             final String lineItemId = originalLineItem.getId();
             final MonetaryAmount itemPrice = MoneyImpl.ofCents(100, EUR);
@@ -498,6 +499,7 @@ public class CartUpdateCommandIntegrationTest extends IntegrationTest {
             final LineItem lineItem = updatedCart.getLineItems().get(0);
             assertThat(lineItem.getPrice().getValue()).isEqualTo(itemPrice);
             assertThat(lineItem.getTotalPrice()).isEqualTo(totalPrice);
+            assertThat(lineItem.getPriceMode()).isEqualTo(LineItemPriceMode.EXTERNAL_TOTAL);
         });
     }
 }
