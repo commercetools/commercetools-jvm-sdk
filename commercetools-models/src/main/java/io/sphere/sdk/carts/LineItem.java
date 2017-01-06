@@ -72,6 +72,8 @@ public interface LineItem extends LineItemLike {
     @Override
     TaxedItemPrice getTaxedPrice();
 
+    LineItemPriceMode getPriceMode();
+
     /**
      * An identifier for this resource which supports {@link CustomFields}.
      * @see TypeDraft#getResourceTypeIds()
