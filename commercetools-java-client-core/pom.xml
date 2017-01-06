@@ -3,12 +3,12 @@
     <parent>
         <groupId>com.commercetools.sdk.jvm.core</groupId>
         <artifactId>commercetools-jvm-sdk</artifactId>
-        <version>1.9.0</version>
+        <version>1.9.1-SNAPSHOT</version>
     </parent>
     <groupId>com.commercetools.sdk.jvm.core</groupId>
     <artifactId>commercetools-java-client-core</artifactId>
     <packaging>jar</packaging>
-    <version>1.9.0</version>
+    <version>1.9.1-SNAPSHOT</version>
     <dependencies>
         <dependency>
             <groupId>${project.groupId}</groupId>
