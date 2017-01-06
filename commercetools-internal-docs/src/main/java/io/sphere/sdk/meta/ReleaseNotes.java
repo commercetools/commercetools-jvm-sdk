@@ -104,6 +104,15 @@ import java.util.function.Function;
  </ul>
  -->
 
+
+ <h3 class=released-version id="v1_9_0">1.9.0 (06.01.2017)</h3>
+ <ul>
+ <li class=new-in-release>{@link LineItem#getPriceMode()}</li>
+ <li class=new-in-release>Provided {@link PriceUtils} class to assist on some typical price calculations, such as gross and net conversions</li>
+ <li class=new-in-release>Added {@link CartLike#calculateSubTotalPrice()} and {@link CartLike#calculateTotalAppliedTaxes()}</li>
+ </ul>
+
+
  <h3 class=released-version id="v1_8_0">1.8.0 (09.12.2016)</h3>
  <ul>
  <li class="change-in-release">{@link CustomerQueryModel#customerGroup()}, {@link io.sphere.sdk.inventory.queries.InventoryEntryQueryModel#supplyChannel()} and {@link io.sphere.sdk.orders.queries.OrderQueryModel#cart()} returns a {@link io.sphere.sdk.queries.ReferenceOptionalQueryModel} instead of {@link io.sphere.sdk.queries.ReferenceQueryModel} to enable additional query predicates.</li>
