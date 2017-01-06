@@ -1,0 +1,158 @@
+{
+  "type": "Cart",
+  "lineItems": [
+    {
+      "price": {
+        "value": {
+          "currencyCode": "EUR",
+          "centAmount": 94375
+        }
+      },
+      "quantity": 2,
+      "discountedPricePerQuantity": [],
+      "taxRate": {
+        "name": "standard",
+        "amount": 0.19,
+        "includedInPrice": true,
+        "country": "DE",
+        "id": "gpHy-nob",
+        "subRates": []
+      },
+      "priceMode": "Platform",
+      "totalPrice": {
+        "currencyCode": "EUR",
+        "centAmount": 188750
+      },
+      "taxedPrice": {
+        "totalNet": {
+          "currencyCode": "EUR",
+          "centAmount": 158613
+        },
+        "totalGross": {
+          "currencyCode": "EUR",
+          "centAmount": 188750
+        }
+      }
+    },
+    {
+      "price": {
+        "value": {
+          "currencyCode": "EUR",
+          "centAmount": 65000
+        }
+      },
+      "quantity": 1,
+      "discountedPricePerQuantity": [],
+      "taxRate": {
+        "name": "standard",
+        "amount": 0.19,
+        "includedInPrice": true,
+        "country": "DE",
+        "id": "gpHy-nob",
+        "subRates": []
+      },
+      "priceMode": "Platform",
+      "totalPrice": {
+        "currencyCode": "EUR",
+        "centAmount": 65000
+      },
+      "taxedPrice": {
+        "totalNet": {
+          "currencyCode": "EUR",
+          "centAmount": 54622
+        },
+        "totalGross": {
+          "currencyCode": "EUR",
+          "centAmount": 65000
+        }
+      }
+    }
+  ],
+  "totalPrice": {
+    "currencyCode": "EUR",
+    "centAmount": 262540
+  },
+  "taxedPrice": {
+    "totalNet": {
+      "currencyCode": "EUR",
+      "centAmount": 220622
+    },
+    "totalGross": {
+      "currencyCode": "EUR",
+      "centAmount": 262540
+    },
+    "taxPortions": [
+      {
+        "rate": 0.19,
+        "amount": {
+          "currencyCode": "EUR",
+          "centAmount": 41918
+        },
+        "name": "standard"
+      }
+    ]
+  },
+  "shippingInfo": {
+    "price": {
+      "currencyCode": "EUR",
+      "centAmount": 390
+    },
+    "shippingRate": {
+      "price": {
+        "currencyCode": "EUR",
+        "centAmount": 390
+      }
+    },
+    "taxRate": {
+      "name": "standard",
+      "amount": 0.19,
+      "includedInPrice": true,
+      "country": "DE",
+      "id": "gpHy-nob",
+      "subRates": []
+    },
+    "taxedPrice": {
+      "totalNet": {
+        "currencyCode": "EUR",
+        "centAmount": 328
+      },
+      "totalGross": {
+        "currencyCode": "EUR",
+        "centAmount": 390
+      }
+    }
+  },
+  "customLineItems": [
+    {
+      "money": {
+        "currencyCode": "EUR",
+        "centAmount": 4200
+      },
+      "quantity": 2,
+      "discountedPricePerQuantity": [],
+      "taxRate": {
+        "name": "standard",
+        "amount": 0.19,
+        "includedInPrice": true,
+        "country": "DE",
+        "id": "gpHy-nob",
+        "subRates": []
+      },
+      "totalPrice": {
+        "currencyCode": "EUR",
+        "centAmount": 8400
+      },
+      "taxedPrice": {
+        "totalNet": {
+          "currencyCode": "EUR",
+          "centAmount": 7059
+        },
+        "totalGross": {
+          "currencyCode": "EUR",
+          "centAmount": 8400
+        }
+      }
+    }
+  ],
+  "taxMode": "Platform"
+}

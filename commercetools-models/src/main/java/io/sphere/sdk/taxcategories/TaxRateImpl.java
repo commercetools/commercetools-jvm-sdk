@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.neovisionaries.i18n.CountryCode;
 import io.sphere.sdk.models.Base;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;
 
@@ -63,6 +64,7 @@ final class TaxRateImpl extends Base implements TaxRate {
     }
 
     @Override
+    @Nonnull
     public List<SubRate> getSubRates() {
         return subRates;
     }

@@ -8,8 +8,9 @@ import io.sphere.sdk.customergroups.CustomerGroup;
 import io.sphere.sdk.customers.Customer;
 import io.sphere.sdk.discountcodes.DiscountCodeInfo;
 import io.sphere.sdk.models.Address;
-import io.sphere.sdk.models.Resource;
 import io.sphere.sdk.models.Reference;
+import io.sphere.sdk.models.Resource;
+import io.sphere.sdk.products.PriceUtils;
 import io.sphere.sdk.types.Custom;
 import io.sphere.sdk.types.CustomFields;
 
@@ -19,6 +20,8 @@ import javax.money.MonetaryAmount;
 import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
+
+import static io.sphere.sdk.products.PriceUtils.zeroAmount;
 
 /**
  * Interface to collect the common stuff between carts and orders.
@@ -200,4 +203,29 @@ public interface CartLike<T> extends Resource<T>, Custom {
 
     @Nullable
     Locale getLocale();
+
+    /**
+     * Returns the subtotal price of the cart, which is calculated by adding the prices of line items and custom line items,
+     * thus excluding shipping costs and discounts that are applied to the entire cart.
+     * @return the estimated subtotal price of the cart
+     */
+    default MonetaryAmount calculateSubTotalPrice() {
+        final MonetaryAmount lineItemTotal = getLineItems().stream()
+                .map(LineItem::getTotalPrice)
+                .reduce(zeroAmount(getCurrency()), MonetaryAmount::add);
+        final MonetaryAmount customLineItemTotal = getCustomLineItems().stream()
+                .map(CustomLineItem::getTotalPrice)
+                .reduce(zeroAmount(getCurrency()), MonetaryAmount::add);
+        return lineItemTotal.add(customLineItemTotal);
+    }
+
+    /**
+     * Tries to calculate all the taxes applied to the cart, without discriminating between different tax portions.
+     * Only possible if taxes have already been applied to the cart.
+     * @return the taxes applied to the cart, or absent if taxes have not been applied yet
+     */
+    default Optional<MonetaryAmount> calculateTotalAppliedTaxes() {
+        return Optional.ofNullable(getTaxedPrice())
+                .map(PriceUtils::calculateAppliedTaxes);
+    }
 }

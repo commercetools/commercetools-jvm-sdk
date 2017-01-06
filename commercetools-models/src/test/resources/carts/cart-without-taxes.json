@@ -1,0 +1,54 @@
+{
+  "type": "Cart",
+  "lineItems": [
+    {
+      "price": {
+        "value": {
+          "currencyCode": "EUR",
+          "centAmount": 94375
+        }
+      },
+      "quantity": 2,
+      "discountedPricePerQuantity": [],
+      "priceMode": "Platform",
+      "totalPrice": {
+        "currencyCode": "EUR",
+        "centAmount": 188750
+      }
+    },
+    {
+      "price": {
+        "value": {
+          "currencyCode": "EUR",
+          "centAmount": 65000
+        }
+      },
+      "quantity": 1,
+      "discountedPricePerQuantity": [],
+      "priceMode": "Platform",
+      "totalPrice": {
+        "currencyCode": "EUR",
+        "centAmount": 65000
+      }
+    }
+  ],
+  "totalPrice": {
+    "currencyCode": "EUR",
+    "centAmount": 262150
+  },
+  "customLineItems": [
+    {
+      "money": {
+        "currencyCode": "EUR",
+        "centAmount": 4200
+      },
+      "quantity": 2,
+      "discountedPricePerQuantity": [],
+      "totalPrice": {
+        "currencyCode": "EUR",
+        "centAmount": 8400
+      }
+    }
+  ],
+  "taxMode": "Platform"
+}
