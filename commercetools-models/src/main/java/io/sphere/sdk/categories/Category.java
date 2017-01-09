@@ -175,6 +175,7 @@ public interface Category extends Resource<Category>, WithLocalizedSlug, MetaAtt
     CustomFields getCustom();
 
     @Nonnull
+    @IgnoreInQueryModel
     List<Asset> getAssets();
 
     @Override
