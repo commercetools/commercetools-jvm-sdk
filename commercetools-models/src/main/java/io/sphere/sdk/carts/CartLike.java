@@ -205,6 +205,12 @@ public interface CartLike<T> extends Resource<T>, Custom {
     Locale getLocale();
 
     /**
+     * When calculating taxes in {@code taxedPrice}, the tax rounding mode is used for decimal values.
+     * @return the tax rounding mode
+     */
+    RoundingMode getTaxRoundingMode();
+
+    /**
      * Returns the subtotal price of the cart, which is calculated by adding the prices of line items and custom line items,
      * thus excluding shipping costs and discounts that are applied to the entire cart.
      * @return the estimated subtotal price of the cart

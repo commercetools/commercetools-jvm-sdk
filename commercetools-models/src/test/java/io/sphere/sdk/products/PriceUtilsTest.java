@@ -54,6 +54,7 @@ public class PriceUtilsTest {
         assertThat(convertGrossToNetPrice(grossAmount, taxRate)).isEqualTo(monetaryAmountOf(2.94118));
     }
 
+
     @Test
     public void calculatesGrossWhenTaxesIncluded() throws Exception {
         final TaxRate taxRate = taxRateOf(0.19, true);
