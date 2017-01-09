@@ -11,6 +11,7 @@ import io.sphere.sdk.types.CustomFields;
 import io.sphere.sdk.types.TypeDraft;
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;
 
@@ -172,6 +173,9 @@ public interface Category extends Resource<Category>, WithLocalizedSlug, MetaAtt
      */
     @Nullable
     CustomFields getCustom();
+
+    @Nonnull
+    List<Asset> getAssets();
 
     @Override
     default Reference<Category> toReference() {
