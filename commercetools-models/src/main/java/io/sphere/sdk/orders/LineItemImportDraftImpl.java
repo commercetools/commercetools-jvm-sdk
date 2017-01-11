@@ -6,7 +6,6 @@ import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.products.Price;
-import io.sphere.sdk.producttypes.ProductType;
 import io.sphere.sdk.taxcategories.TaxRate;
 
 import javax.annotation.Nullable;
@@ -25,10 +24,8 @@ final class LineItemImportDraftImpl extends Base implements LineItemImportDraft 
     private final Reference<Channel> supplyChannel;
     @Nullable
     private final TaxRate taxRate;
-    @Nullable
-    private final Reference<ProductType> productType;
 
-    public LineItemImportDraftImpl(final LocalizedString name, @Nullable final String productId, final ProductVariantImportDraft variant, final Price price, final Long quantity, @Nullable final Set<ItemState> state, @Nullable final Reference<Channel> supplyChannel, @Nullable final TaxRate taxRate, @Nullable final Reference<ProductType> productType) {
+    public LineItemImportDraftImpl(final LocalizedString name, @Nullable final String productId, final ProductVariantImportDraft variant, final Price price, final Long quantity, @Nullable final Set<ItemState> state, @Nullable final Reference<Channel> supplyChannel, @Nullable final TaxRate taxRate) {
         this.name = name;
         this.productId = productId;
         this.variant = variant;
@@ -37,7 +34,6 @@ final class LineItemImportDraftImpl extends Base implements LineItemImportDraft 
         this.state = state;
         this.supplyChannel = supplyChannel;
         this.taxRate = taxRate;
-        this.productType = productType;
     }
 
     @Override
@@ -82,11 +78,5 @@ final class LineItemImportDraftImpl extends Base implements LineItemImportDraft 
     @Override
     public ProductVariantImportDraft getVariant() {
         return variant;
-    }
-
-    @Override
-    @Nullable
-    public Reference<ProductType> getProductType() {
-        return productType;
     }
 }

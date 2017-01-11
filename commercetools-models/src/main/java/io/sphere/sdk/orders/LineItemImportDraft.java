@@ -6,7 +6,6 @@ import io.sphere.sdk.channels.Channel;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.products.Price;
-import io.sphere.sdk.producttypes.ProductType;
 import io.sphere.sdk.taxcategories.TaxRate;
 
 import javax.annotation.Nullable;
@@ -37,7 +36,4 @@ public interface LineItemImportDraft {
     TaxRate getTaxRate();
 
     ProductVariantImportDraft getVariant();
-
-    @Nullable
-    Reference<ProductType> getProductType();
 }

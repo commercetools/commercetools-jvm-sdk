@@ -1,6 +1,7 @@
 package io.sphere.sdk.orders.commands;
 
 import com.neovisionaries.i18n.CountryCode;
+import io.sphere.sdk.cartdiscounts.DiscountedLineItemPrice;
 import io.sphere.sdk.cartdiscounts.DiscountedLineItemPriceForQuantity;
 import io.sphere.sdk.carts.*;
 import io.sphere.sdk.channels.ChannelRole;
@@ -33,7 +34,7 @@ import java.util.UUID;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
-import static io.sphere.sdk.channels.ChannelFixtures.withPersistentChannel;
+import static io.sphere.sdk.channels.ChannelFixtures.*;
 import static io.sphere.sdk.customers.CustomerFixtures.withCustomer;
 import static io.sphere.sdk.customers.CustomerFixtures.withCustomerInGroup;
 import static io.sphere.sdk.models.DefaultCurrencyUnits.EUR;
@@ -79,7 +80,6 @@ public class OrderImportCommandIntegrationTest extends IntegrationTest {
             assertThat(lineItem.getName()).isEqualTo(name);
             assertThat(lineItem.getQuantity()).isEqualTo(quantity);
             assertThat(lineItem.getPrice()).isEqualTo(price);
-            assertThat(lineItem.getProductType()).isEqualTo(product.getProductType());
         });
     }
 
@@ -93,7 +93,7 @@ public class OrderImportCommandIntegrationTest extends IntegrationTest {
                                 .build();
                         final Price price = PRICE;
                         final LocalizedString name = randomSlug();
-                        final LineItemImportDraft lineItemImportDraft = LineItemImportDraftBuilder.of(productVariantImportDraft, 2L, price, name).supplyChannel(channel).productType(product.getProductType()).build();
+                        final LineItemImportDraft lineItemImportDraft = LineItemImportDraftBuilder.of(productVariantImportDraft, 2L, price, name).supplyChannel(channel).build();
                         testOrderAspect(
                                 builder -> builder.lineItems(asList(lineItemImportDraft)),
                                 order -> {
@@ -108,7 +108,6 @@ public class OrderImportCommandIntegrationTest extends IntegrationTest {
                                     assertThat(lineItem.getQuantity()).isEqualTo(2);
                                     assertThat(lineItem.getPrice()).isEqualTo(price);
                                     assertThat(lineItem.getName()).isEqualTo(name);
-                                    assertThat(lineItem.getProductType()).isEqualTo(product.getProductType());
                                 }
                         );
                     });

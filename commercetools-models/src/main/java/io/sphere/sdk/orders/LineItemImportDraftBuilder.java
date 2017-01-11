@@ -4,7 +4,6 @@ import io.sphere.sdk.carts.ItemState;
 import io.sphere.sdk.channels.Channel;
 import io.sphere.sdk.models.*;
 import io.sphere.sdk.products.Price;
-import io.sphere.sdk.producttypes.ProductType;
 import io.sphere.sdk.taxcategories.TaxRate;
 
 import javax.annotation.Nullable;
@@ -24,8 +23,6 @@ public final class LineItemImportDraftBuilder extends Base implements Builder<Li
     private Reference<Channel> supplyChannel;
     @Nullable
     private TaxRate taxRate;
-    @Nullable
-    private Reference<ProductType> productType;
 
     private LineItemImportDraftBuilder(final ProductVariantImportDraft variant, final Long quantity, final Price price, @Nullable final String productId, final LocalizedString name) {
         this.price = price;
@@ -60,17 +57,12 @@ public final class LineItemImportDraftBuilder extends Base implements Builder<Li
         return this;
     }
 
-    public LineItemImportDraftBuilder productType(@Nullable final Reference<ProductType> productType) {
-        this.productType = productType;
-        return this;
-    }
-
     public static LineItemImportDraftBuilder of(final ProductVariantImportDraft variant, final long quantity, final Price price, final LocalizedString name) {
         return new LineItemImportDraftBuilder(variant, quantity, price, variant.getProductId(), name);
     }
 
     @Override
     public LineItemImportDraft build() {
-        return new LineItemImportDraftImpl(name, productId, variant, price, quantity, state, supplyChannel, taxRate, productType);
+        return new LineItemImportDraftImpl(name, productId, variant, price, quantity, state, supplyChannel, taxRate);
     }
 }
