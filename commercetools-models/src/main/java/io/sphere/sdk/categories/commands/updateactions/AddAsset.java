@@ -18,4 +18,8 @@ public final class AddAsset extends UpdateActionImpl<Category> {
     public AssetDraft getAsset() {
         return asset;
     }
+
+    public static AddAsset of(final AssetDraft asset) {
+        return new AddAsset(asset);
+    }
 }
