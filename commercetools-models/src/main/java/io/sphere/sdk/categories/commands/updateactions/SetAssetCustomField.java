@@ -22,11 +22,11 @@ public final class SetAssetCustomField extends SetCustomFieldBase<Category> {
         return assetId;
     }
 
-    public static SetAssetCustomField usingJson(final String assetId, final String name, final JsonNode value) {
+    public static SetAssetCustomField ofJsonValue(final String assetId, final String name, final JsonNode value) {
         return new SetAssetCustomField(assetId, name, value);
     }
 
     public static SetAssetCustomField of(final String assetId, final String name, final Object value) {
-        return usingJson(assetId, name, SphereJsonUtils.toJsonNode(value));
+        return ofJsonValue(assetId, name, SphereJsonUtils.toJsonNode(value));
     }
 }
