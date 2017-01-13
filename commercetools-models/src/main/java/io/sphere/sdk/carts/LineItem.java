@@ -8,6 +8,7 @@ import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.orders.Order;
 import io.sphere.sdk.products.Price;
 import io.sphere.sdk.products.ProductVariant;
+import io.sphere.sdk.producttypes.ProductType;
 import io.sphere.sdk.taxcategories.TaxRate;
 import io.sphere.sdk.types.CustomFields;
 import io.sphere.sdk.types.TypeDraft;
@@ -73,6 +74,9 @@ public interface LineItem extends LineItemLike {
     TaxedItemPrice getTaxedPrice();
 
     LineItemPriceMode getPriceMode();
+
+    @Nullable
+    Reference<ProductType> getProductType();
 
     /**
      * An identifier for this resource which supports {@link CustomFields}.

@@ -78,7 +78,9 @@ public class CartCreateCommandIntegrationTest extends IntegrationTest {
                                 .withShippingAddress(shippingAddress)
                                 .withShippingMethod(shippingMethod)
                                 .withCustom(customFieldsDraft);
-                        final Cart cart = client().executeBlocking(CartCreateCommand.of(cartDraft));
+                        final CartCreateCommand cartCreateCommand = CartCreateCommand.of(cartDraft)
+                                .plusExpansionPaths(m -> m.lineItems().productType());
+                        final Cart cart = client().executeBlocking(cartCreateCommand);
 
                         softAssert(s -> {
                             s.assertThat(cart.getCountry()).isEqualTo(DE);
@@ -90,6 +92,8 @@ public class CartCreateCommandIntegrationTest extends IntegrationTest {
                             final LineItem lineItem = cart.getLineItems().get(0);
                             s.assertThat(lineItem.getProductId()).isEqualTo(product.getId());
                             s.assertThat(lineItem.getQuantity()).isEqualTo(15);
+                            s.assertThat(lineItem.getProductType()).isEqualTo(product.getProductType());
+                            s.assertThat(lineItem.getProductType().getObj()).isNotNull();
                             s.assertThat(cart.getCustomLineItems().get(0).getSlug()).isEqualTo("foo-bar");
                             s.assertThat(cart.getBillingAddress()).isEqualTo(billingAddress);
                             s.assertThat(cart.getShippingAddress()).isEqualTo(shippingAddress);
