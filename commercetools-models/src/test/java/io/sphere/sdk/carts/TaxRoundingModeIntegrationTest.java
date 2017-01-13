@@ -113,7 +113,7 @@ public class TaxRoundingModeIntegrationTest extends IntegrationTest {
 
     private static void withFilledImportedOrderDraftBuilder(final BlockingSphereClient client, final Consumer<OrderImportDraftBuilder> operator) {
         withTransientTaxCategory(client, taxCategory -> {
-            final MonetaryAmount lineItemPrice = MoneyImpl.ofCents(randomLong(), EUR);
+            final MonetaryAmount lineItemPrice = MoneyImpl.ofCents(randomInt(), EUR);
             final CustomLineItemImportDraft customLineItemImportDraft = CustomLineItemImportDraftBuilder.of(randomSlug(), 1, lineItemPrice, taxCategory).build();
             final OrderImportDraftBuilder builder = OrderImportDraftBuilder.ofCustomLineItems(lineItemPrice, OrderState.OPEN, singletonList(customLineItemImportDraft));
             operator.accept(builder);
