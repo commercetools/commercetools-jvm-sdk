@@ -95,10 +95,6 @@ public class TaxRoundingModeIntegrationTest extends IntegrationTest {
     }
 
     @Test
-    public void defaultTaxRoundingModeOnOrderImport() throws Exception {
-    }
-
-    @Test
     public void setTaxRoundingModeUpOnOrderImport() throws Exception {
         withFilledImportedOrderDraftBuilder(client(), draftBuilder -> {
             final OrderImportDraft draftWithDefaultRounding = draftBuilder.build();

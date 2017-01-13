@@ -11,7 +11,7 @@ import javax.annotation.Nullable;
 
  {@doc.gen intro}
 
- {@include.example io.sphere.sdk.carts.TaxRoundingModeIntegrationTest#cartTaxRoundingMode()}
+ {@include.example io.sphere.sdk.carts.TaxRoundingModeIntegrationTest#cartTaxRoundingModeWithTaxesExcludedFromPrice()}
 
  */
 public final class ChangeTaxRoundingMode extends UpdateActionImpl<Cart> {
