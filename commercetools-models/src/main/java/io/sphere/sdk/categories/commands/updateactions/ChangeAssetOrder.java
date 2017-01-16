@@ -11,12 +11,16 @@ import java.util.List;
 public final class ChangeAssetOrder extends UpdateActionImpl<Category> {
     private final List<String> assetOrder;
 
-    public ChangeAssetOrder(final List<String> assetOrder) {
+    private ChangeAssetOrder(final List<String> assetOrder) {
         super("changeAssetOrder");
         this.assetOrder = assetOrder;
     }
 
     public List<String> getAssetOrder() {
         return assetOrder;
+    }
+
+    public static ChangeAssetOrder of(final List<String> assetOrder) {
+        return new ChangeAssetOrder(assetOrder);
     }
 }

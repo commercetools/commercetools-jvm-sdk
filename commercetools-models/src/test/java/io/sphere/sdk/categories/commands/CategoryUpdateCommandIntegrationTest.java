@@ -210,7 +210,7 @@ public class CategoryUpdateCommandIntegrationTest extends IntegrationTest {
                     new LinkedList<>(originalAssets.stream().map(Asset::getId).collect(toList()));
             Collections.reverse(newAssetOrder);
 
-            final CategoryUpdateCommand command = CategoryUpdateCommand.of(category, new ChangeAssetOrder(newAssetOrder));
+            final CategoryUpdateCommand command = CategoryUpdateCommand.of(category, ChangeAssetOrder.of(newAssetOrder));
             final Category updatedCategory = client().executeBlocking(command);
 
             final List<Asset> assets = updatedCategory.getAssets();
