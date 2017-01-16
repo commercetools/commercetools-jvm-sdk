@@ -7,7 +7,7 @@ import io.sphere.sdk.products.Product;
 import javax.annotation.Nullable;
 
 /**
- * Changes the name of an asset.
+ * Changes the description of an asset.
  *
  * {@doc.gen intro}
  *

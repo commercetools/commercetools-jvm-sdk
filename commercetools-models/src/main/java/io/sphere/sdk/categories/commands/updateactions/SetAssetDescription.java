@@ -7,7 +7,7 @@ import io.sphere.sdk.models.LocalizedString;
 import javax.annotation.Nullable;
 
 /**
- * Changes the name of an asset.
+ * Changes the description of an asset.
  */
 public final class SetAssetDescription extends UpdateActionImpl<Category> {
     private final String assetId;

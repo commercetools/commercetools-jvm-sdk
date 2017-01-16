@@ -19,6 +19,6 @@ public final class RemoveAsset extends UpdateActionImpl<Category> {
     }
 
     public static RemoveAsset of(final String assetId) {
-        return new RemoveAsset(assetId)
+        return new RemoveAsset(assetId);
     }
 }
