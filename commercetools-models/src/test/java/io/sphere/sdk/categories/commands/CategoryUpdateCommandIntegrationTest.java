@@ -222,7 +222,7 @@ public class CategoryUpdateCommandIntegrationTest extends IntegrationTest {
     public void removeAsset() {
         withCategoryHavingAssets(client(), category -> {
             final String assetId = category.getAssets().get(0).getId();
-            final Category updatedCategory = client().executeBlocking(CategoryUpdateCommand.of(category, new RemoveAsset(assetId)));
+            final Category updatedCategory = client().executeBlocking(CategoryUpdateCommand.of(category, RemoveAsset.of(assetId)));
 
             final List<Asset> assets = updatedCategory.getAssets();
             assertThat(assets).allMatch(asset -> !asset.getId().equals(assetId));
