@@ -27,7 +27,7 @@ public final class SetAssetCustomType extends SetCustomTypeBase<Category> {
         return assetId;
     }
 
-    private static SetAssetCustomType of(final String assetId, @Nullable final CustomFieldsDraft customFieldsDraft) {
+    public static SetAssetCustomType of(final String assetId, @Nullable final CustomFieldsDraft customFieldsDraft) {
         final Optional<CustomFieldsDraft> draft = Optional.ofNullable(customFieldsDraft);
         final String typeId = draft.map(CustomFieldsDraft::getType).map(ResourceIdentifier::getId).orElse(null);
         final String typeKey = draft.map(CustomFieldsDraft::getType).map(ResourceIdentifier::getKey).orElse(null);

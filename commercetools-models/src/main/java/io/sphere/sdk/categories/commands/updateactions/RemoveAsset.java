@@ -9,7 +9,7 @@ import io.sphere.sdk.commands.UpdateActionImpl;
 public final class RemoveAsset extends UpdateActionImpl<Category> {
     private final String assetId;
 
-    private RemoveAsset(final String assetId) {
+    public RemoveAsset(final String assetId) {
         super("removeAsset");
         this.assetId = assetId;
     }

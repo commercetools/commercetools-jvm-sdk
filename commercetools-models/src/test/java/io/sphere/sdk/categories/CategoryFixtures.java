@@ -4,7 +4,7 @@ import io.sphere.sdk.categories.commands.CategoryCreateCommand;
 import io.sphere.sdk.categories.commands.CategoryDeleteCommand;
 import io.sphere.sdk.categories.queries.CategoryQuery;
 import io.sphere.sdk.client.BlockingSphereClient;
-import io.sphere.sdk.models.LocalizedString;
+import io.sphere.sdk.models.*;
 import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.utils.SphereInternalLogger;
 
@@ -15,6 +15,8 @@ import java.util.function.Consumer;
 import java.util.function.Supplier;
 
 import static io.sphere.sdk.test.SphereTestUtils.*;
+import static java.util.Arrays.asList;
+import static java.util.Collections.singletonList;
 import static java.util.Locale.ENGLISH;
 
 public class CategoryFixtures {
@@ -57,8 +59,13 @@ public class CategoryFixtures {
     }
 
     public static void withCategory(final BlockingSphereClient client, final Consumer<Category> consumer) {
-        final LocalizedString slug = randomSlug();
-        final CategoryDraftBuilder catSupplier = CategoryDraftBuilder.of(en(slug.get(ENGLISH) + " name"), slug).externalId(randomKey());
+        final CategoryDraftBuilder catSupplier = categorySupplier();
+        CategoryFixtures.withCategory(client, catSupplier, consumer);
+    }
+
+    public static void withCategoryHavingAssets(final BlockingSphereClient client, final Consumer<Category> consumer) {
+        final CategoryDraftBuilder catSupplier = categorySupplier();
+        catSupplier.assets(asList(getAssetDraft1(), getAssetDraft2()));
         CategoryFixtures.withCategory(client, catSupplier, consumer);
     }
 
@@ -76,5 +83,35 @@ public class CategoryFixtures {
         client.executeBlocking(categoryQuery.withLimit(500)).getResults().forEach(cat -> {
             client.executeBlocking(CategoryDeleteCommand.of(cat));
         });
+    }
+
+    private static CategoryDraftBuilder categorySupplier() {
+        final LocalizedString slug = randomSlug();
+        return CategoryDraftBuilder.of(en(slug.get(ENGLISH) + " name"), slug).externalId(randomKey());
+    }
+
+    private static AssetDraft getAssetDraft1() {
+        final AssetSource assetSource1 = AssetSourceBuilder.ofUri("https://commercetools.com/binaries/content/gallery/commercetoolswebsite/homepage/cases/rewe.jpg")
+                .key(randomKey())
+                .contentType("image/jpg")
+                .dimensionsOfWidthAndHeight(1934, 1115)
+                .build();
+        final LocalizedString name = LocalizedString.ofEnglish("REWE show case");
+        final LocalizedString description = LocalizedString.ofEnglish("screenshot of the REWE webshop on a mobile and a notebook");
+        return AssetDraftBuilder.of(singletonList(assetSource1), name)
+                .description(description)
+                .tags("desktop-sized", "jpg-format", "REWE", "awesome")
+                .build();
+    }
+
+    private static AssetDraft getAssetDraft2() {
+        final AssetSource assetSource1 = AssetSourceBuilder.ofUri("http://dev.commercetools.com/assets/img/CT-logo.svg")
+                .key(randomKey())
+                .contentType("image/svg+xml")
+                .build();
+        final LocalizedString name = LocalizedString.ofEnglish("commercetools logo");
+        return AssetDraftBuilder.of(singletonList(assetSource1), name)
+                .tags("desktop-sized", "svg-format", "commercetools", "awesome")
+                .build();
     }
 }

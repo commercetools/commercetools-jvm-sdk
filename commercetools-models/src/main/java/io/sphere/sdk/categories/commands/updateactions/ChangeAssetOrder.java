@@ -11,7 +11,7 @@ import java.util.List;
 public final class ChangeAssetOrder extends UpdateActionImpl<Category> {
     private final List<String> assetOrder;
 
-    private ChangeAssetOrder(final List<String> assetOrder) {
+    public ChangeAssetOrder(final List<String> assetOrder) {
         super("changeAssetOrder");
         this.assetOrder = assetOrder;
     }
