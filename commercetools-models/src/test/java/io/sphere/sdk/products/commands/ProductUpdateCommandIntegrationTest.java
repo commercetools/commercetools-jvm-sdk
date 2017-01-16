@@ -1373,7 +1373,7 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
                 final String actualFieldValue = updatedProductWithCustomTypeInAssets.getMasterData()
                         .getStaged().getMasterVariant()
                         .getAssets().get(0).getCustom().getFieldAsString(STRING_FIELD_NAME);
-                assertThat(actualFieldValue).isEqualTo(actualFieldValue);
+                assertThat(actualFieldValue).isEqualTo(firstFieldValue);
 
                 final Product updatedProduct = client().executeBlocking(ProductUpdateCommand.of(updatedProductWithCustomTypeInAssets,
                         SetAssetCustomField.ofVariantId(variantId, assetId, STRING_FIELD_NAME, "new")));
@@ -1409,7 +1409,7 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
                 final String actualFieldValue = updatedProductWithCustomTypeInAssets.getMasterData()
                         .getStaged().getMasterVariant()
                         .getAssets().get(0).getCustom().getFieldAsString(STRING_FIELD_NAME);
-                assertThat(actualFieldValue).isEqualTo(actualFieldValue);
+                assertThat(actualFieldValue).isEqualTo(firstFieldValue);
 
                 final Product updatedProduct = client().executeBlocking(ProductUpdateCommand.of(updatedProductWithCustomTypeInAssets,
                         SetAssetCustomField.ofSku(sku, assetId, STRING_FIELD_NAME, "new")));
