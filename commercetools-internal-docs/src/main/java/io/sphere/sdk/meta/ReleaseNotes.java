@@ -105,7 +105,7 @@ import java.util.function.Function;
  -->
 
 
- <h3 class=released-version id="v1_10_0">1.10.0 (13.01.2017)</h3>
+ <h3 class=released-version id="v1_10_0">1.10.0 (17.01.2017)</h3>
  <ul>
  <li class=new-in-release>Carts and orders have a new field taxRoundingMode. This rounding mode is used when calculating taxes. On Cart it is possible to set this field either at creation time or via the new update action {@link io.sphere.sdk.carts.commands.updateactions.ChangeTaxRoundingMode}. When creating an Order from a Cart, the Order has the tax rounding mode of the Cart it was created from.</li>
  <li class=new-in-release>{@link LineItem#getProductType()}</li>
