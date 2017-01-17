@@ -3,6 +3,7 @@ package io.sphere.sdk.carts;
 import com.neovisionaries.i18n.CountryCode;
 import io.sphere.sdk.carts.commands.CartUpdateCommand;
 import io.sphere.sdk.carts.commands.updateactions.ChangeTaxRoundingMode;
+import io.sphere.sdk.carts.queries.CartQuery;
 import io.sphere.sdk.client.BlockingSphereClient;
 import io.sphere.sdk.models.Address;
 import io.sphere.sdk.orders.*;
@@ -91,6 +92,25 @@ public class TaxRoundingModeIntegrationTest extends IntegrationTest {
                     .isEqualTo(0.03);
 
             return cartWithHalfDownRounding;
+        });
+    }
+
+    @Test
+    public void queryCartTaxRoundingMode() {
+        final int centAmount = 25;
+        final double taxRate = 0.14;
+        final boolean isTaxIncluded = false;
+        withTaxedCartWithProduct(client(), centAmount, taxRate, isTaxIncluded, cartWithDefaultRounding -> {
+            final CartQuery cartQuery = CartQuery.of()
+                    .plusPredicates(cart -> cart.is(cartWithDefaultRounding))
+                    .plusPredicates(cart -> cart.taxRoundingMode().is(RoundingMode.HALF_UP));
+            assertThat(client().executeBlocking(cartQuery).getResults()).isEmpty();
+
+            final CartUpdateCommand updateToHalfUp = CartUpdateCommand.of(cartWithDefaultRounding, ChangeTaxRoundingMode.of(RoundingMode.HALF_UP));
+            final Cart cartWithHalfUpRounding = client().executeBlocking(updateToHalfUp);
+            assertThat(client().executeBlocking(cartQuery).getResults()).hasSize(1);
+
+            return cartWithHalfUpRounding;
         });
     }
 
