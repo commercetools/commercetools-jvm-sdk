@@ -9,6 +9,7 @@ import io.sphere.sdk.models.Address;
 import io.sphere.sdk.orders.*;
 import io.sphere.sdk.orders.commands.OrderDeleteCommand;
 import io.sphere.sdk.orders.commands.OrderImportCommand;
+import io.sphere.sdk.orders.queries.OrderQuery;
 import io.sphere.sdk.products.PriceDraft;
 import io.sphere.sdk.products.Product;
 import io.sphere.sdk.products.commands.ProductUpdateCommand;
@@ -96,25 +97,6 @@ public class TaxRoundingModeIntegrationTest extends IntegrationTest {
     }
 
     @Test
-    public void queryCartTaxRoundingMode() {
-        final int centAmount = 25;
-        final double taxRate = 0.14;
-        final boolean isTaxIncluded = false;
-        withTaxedCartWithProduct(client(), centAmount, taxRate, isTaxIncluded, cartWithDefaultRounding -> {
-            final CartQuery cartQuery = CartQuery.of()
-                    .plusPredicates(cart -> cart.is(cartWithDefaultRounding))
-                    .plusPredicates(cart -> cart.taxRoundingMode().is(RoundingMode.HALF_UP));
-            assertThat(client().executeBlocking(cartQuery).getResults()).isEmpty();
-
-            final CartUpdateCommand updateToHalfUp = CartUpdateCommand.of(cartWithDefaultRounding, ChangeTaxRoundingMode.of(RoundingMode.HALF_UP));
-            final Cart cartWithHalfUpRounding = client().executeBlocking(updateToHalfUp);
-            assertThat(client().executeBlocking(cartQuery).getResults()).hasSize(1);
-
-            return cartWithHalfUpRounding;
-        });
-    }
-
-    @Test
     public void setTaxRoundingModeUpOnOrderImport() throws Exception {
         withFilledImportedOrderDraftBuilder(client(), draftBuilder -> {
             final OrderImportDraft draftWithDefaultRounding = draftBuilder.build();
@@ -127,6 +109,45 @@ public class TaxRoundingModeIntegrationTest extends IntegrationTest {
             withImportedOrder(client(), draftWithRoundingUp, order -> {
                 assertThat(order.getTaxRoundingMode()).isEqualTo(RoundingMode.HALF_UP);
                 return order;
+            });
+        });
+    }
+
+    @Test
+    public void queryCartTaxRoundingMode() {
+        final int centAmount = 25;
+        final double taxRate = 0.14;
+        final boolean isTaxIncluded = false;
+        withTaxedCartWithProduct(client(), centAmount, taxRate, isTaxIncluded, cartWithDefaultRounding -> {
+            final CartQuery cartQueryHalfUpRounding = CartQuery.of()
+                    .plusPredicates(cart -> cart.is(cartWithDefaultRounding))
+                    .plusPredicates(cart -> cart.taxRoundingMode().is(RoundingMode.HALF_UP));
+            assertThat(client().executeBlocking(cartQueryHalfUpRounding).getResults()).isEmpty();
+
+            final CartUpdateCommand updateToHalfUp = CartUpdateCommand.of(cartWithDefaultRounding, ChangeTaxRoundingMode.of(RoundingMode.HALF_UP));
+            final Cart cartWithHalfUpRounding = client().executeBlocking(updateToHalfUp);
+            assertThat(client().executeBlocking(cartQueryHalfUpRounding).getResults()).hasSize(1);
+
+            return cartWithHalfUpRounding;
+        });
+    }
+
+    @Test
+    public void queryOrderTaxRoundingMode() throws Exception {
+        withFilledImportedOrderDraftBuilder(client(), draftBuilder -> {
+            final OrderImportDraft draftWithDefaultRounding = draftBuilder.taxRoundingMode(RoundingMode.HALF_UP).build();
+            withImportedOrder(client(), draftWithDefaultRounding, orderWithHalfUpRounding -> {
+                final OrderQuery orderQueryHalfDownRounding = OrderQuery.of()
+                        .plusPredicates(order -> order.is(orderWithHalfUpRounding))
+                        .plusPredicates(order -> order.taxRoundingMode().is(RoundingMode.HALF_DOWN));
+                assertThat(client().executeBlocking(orderQueryHalfDownRounding).getResults()).isEmpty();
+
+                final OrderQuery orderQueryHalfUpRounding = OrderQuery.of()
+                        .plusPredicates(order -> order.is(orderWithHalfUpRounding))
+                        .plusPredicates(order -> order.taxRoundingMode().is(RoundingMode.HALF_UP));
+                assertThat(client().executeBlocking(orderQueryHalfUpRounding).getResults()).hasSize(1);
+
+                return orderWithHalfUpRounding;
             });
         });
     }
