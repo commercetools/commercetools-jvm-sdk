@@ -35,9 +35,9 @@ import static java.util.stream.Collectors.toList;
 
 /**
  * Generates some products to perform integration search, as shows the following table:
- *
- *
- *                  | Product 1                     | Product 2
+ * <p>
+ * <p>
+ * | Product 1                     | Product 2
  * ---------------------------------------------------------------------------------
  * boolean          | true                          | false
  * text             | foo                           | bar
@@ -62,7 +62,6 @@ import static java.util.stream.Collectors.toList;
  * time Set         | 22:05:09.203, 23:06:10.204    | 22:05:09.203
  * dateTime Set     | 2001-..T22:.., 2002-..T23:..  | 2001-..T22:..
  * reference Set    | productA, productB            | productA
- *
  */
 public class ProductsScenario1Fixtures {
     public static final String PRODUCT_TYPE_NAME = "ProductSearchTypeIT3";
@@ -99,6 +98,9 @@ public class ProductsScenario1Fixtures {
     public static final String BOOL_FALSE = "false";
     public static final String TEXT_FOO = "foo";
     public static final String TEXT_BAR = "bar";
+    public static final String TEXT_ONE = "1";
+    public static final String TEXT_TWO = "2";
+    public static final String TEXT_THREE = "3";
     public static final LocalizedString LOC_TEXT_FOO = LocalizedString.ofEnglish("localized foo");
     public static final LocalizedString LOC_TEXT_FOO2 = LOC_TEXT_FOO.plus(GERMAN, "German foo");
     public static final LocalizedString LOC_TEXT_BAR = LocalizedString.ofEnglish("localized bar");
@@ -202,7 +204,7 @@ public class ProductsScenario1Fixtures {
                         AttributeAccess.ofDateTime().ofName(ATTR_NAME_DATE_TIME).draftOf(DATE_TIME_2001_22H),
                         AttributeAccess.ofProductReference().ofName(ATTR_NAME_REF).draftOf(referencedProductA.toReference()),
                         AttributeAccess.ofBooleanSet().ofName(ATTR_NAME_BOOLEAN_SET).draftOf(asSet(true, false)),
-                        AttributeAccess.ofStringSet().ofName(ATTR_NAME_TEXT_SET).draftOf(asSet(TEXT_FOO, TEXT_BAR)),
+                        AttributeAccess.ofStringSet().ofName(ATTR_NAME_TEXT_SET).draftOf(asSet(TEXT_FOO, TEXT_BAR, TEXT_THREE, TEXT_ONE, TEXT_TWO)),
                         AttributeAccess.ofLocalizedStringSet().ofName(ATTR_NAME_LOC_TEXT_SET).draftOf(asSet(LOC_TEXT_FOO, LOC_TEXT_BAR)),
                         AttributeAccess.ofEnumValueSet().ofName(ATTR_NAME_ENUM_SET).draftOf(asSet(ENUM_TWO, ENUM_THREE)),
                         AttributeAccess.ofLocalizedEnumValueSet().ofName(ATTR_NAME_LOC_ENUM_SET).draftOf(asSet(LOC_ENUM_TWO, LOC_ENUM_THREE)),
