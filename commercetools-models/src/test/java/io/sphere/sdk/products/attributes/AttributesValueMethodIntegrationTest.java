@@ -32,7 +32,12 @@ public class AttributesValueMethodIntegrationTest extends IntegrationTest {
 
     @Test
     public void stringSetType() {
-        assertThat(attribute(ATTR_NAME_TEXT_SET).getValueAsStringSet()).containsExactly("foo", "bar", TEXT_THREE, TEXT_ONE, TEXT_TWO);
+        assertThat(attribute(ATTR_NAME_TEXT_SET).getValueAsStringSet()).containsExactly("foo", "bar");
+    }
+
+    @Test
+    public void stringSetTypeRemainOrdered() {
+        assertThat(attribute(ATTR_NAME_TEXT_SET2).getValueAsStringSet()).containsExactly(TEXT_THREE, TEXT_ONE, TEXT_TWO);
     }
 
     @Test
