@@ -41,6 +41,7 @@ public interface FacetSearchModel<T, V> {
 
     /**
      * Allows to enable/disable the counting of products.
+     * @param isCountingProducts whether to count products or not
      * @return a new facet search model identical to the current one, but with the counting of products enabled/disabled
      */
     FacetSearchModel<T, V> withCountingProducts(final Boolean isCountingProducts);
