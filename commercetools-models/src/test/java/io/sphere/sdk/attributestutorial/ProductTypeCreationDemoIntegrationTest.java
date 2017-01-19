@@ -438,7 +438,7 @@ public class ProductTypeCreationDemoIntegrationTest extends IntegrationTest {
                 "----------------------------------------------------------------\n" +
                 "matching products        | referenceable product                \n" +
                 "----------------------------------------------------------------\n" +
-                "washing labels           | tumble drying, Wash at or below 30°C \n" +
+                "washing labels           | Wash at or below 30°C , tumble drying\n" +
                 "----------------------------------------------------------------\n" +
                 "recommended retail price | EUR300.00                            \n" +
                 "----------------------------------------------------------------\n" +
