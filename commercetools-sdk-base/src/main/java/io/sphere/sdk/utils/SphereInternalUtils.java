@@ -28,7 +28,7 @@ public final class SphereInternalUtils {
 
     @SafeVarargs
     @SuppressWarnings("varargs")
-    public static <T> List<T> asImmutableList(final T... elements) {
+    public static <T> List<T> asImmutableList(final T ... elements) {
         return Collections.unmodifiableList(asList(elements));
     }
 
@@ -63,7 +63,7 @@ public final class SphereInternalUtils {
 
     @SafeVarargs
     @SuppressWarnings("varargs")
-    public static <T> Set<T> asSet(final T... params) {
+    public static <T> Set<T> asSet(final T ... params) {
         return new LinkedHashSet<>(asList(params));
     }
 
