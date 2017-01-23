@@ -35,9 +35,9 @@ import static java.util.stream.Collectors.toList;
 
 /**
  * Generates some products to perform integration search, as shows the following table:
- * <p>
- * <p>
- * | Product 1                     | Product 2
+ *
+ *
+ *                  | Product 1                     | Product 2
  * ---------------------------------------------------------------------------------
  * boolean          | true                          | false
  * text             | foo                           | bar
@@ -62,6 +62,7 @@ import static java.util.stream.Collectors.toList;
  * time Set         | 22:05:09.203, 23:06:10.204    | 22:05:09.203
  * dateTime Set     | 2001-..T22:.., 2002-..T23:..  | 2001-..T22:..
  * reference Set    | productA, productB            | productA
+ *
  */
 public class ProductsScenario1Fixtures {
     public static final String PRODUCT_TYPE_NAME = "ProductSearchTypeIT3";
