@@ -3,14 +3,12 @@ package io.sphere.sdk.categories;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import io.sphere.sdk.annotations.FactoryMethod;
 import io.sphere.sdk.annotations.ResourceDraftValue;
-import io.sphere.sdk.models.LocalizedString;
-import io.sphere.sdk.models.MetaAttributes;
-import io.sphere.sdk.models.Reference;
-import io.sphere.sdk.models.WithLocalizedSlug;
+import io.sphere.sdk.models.*;
 import io.sphere.sdk.types.CustomDraft;
 import io.sphere.sdk.types.CustomFieldsDraft;
 
 import javax.annotation.Nullable;
+import java.util.List;
 
 /**
  * Template for a new category.
@@ -47,4 +45,7 @@ public interface CategoryDraft extends CustomDraft, WithLocalizedSlug, MetaAttri
 
     @Nullable
     LocalizedString getMetaKeywords();
+
+    @Nullable
+    List<AssetDraft> getAssets();
 }

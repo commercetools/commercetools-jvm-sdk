@@ -25,6 +25,7 @@ public final class CategoryBuilder extends Base implements Builder<Category> {
     @Nullable
     private LocalizedString description;
     private List<Reference<Category>> ancestors = Collections.emptyList();
+    private List<Asset> assets = Collections.emptyList();
     @Nullable
     private Reference<Category> parent;
     @Nullable
@@ -47,7 +48,7 @@ public final class CategoryBuilder extends Base implements Builder<Category> {
                 version(category.getVersion()).createdAt(category.getCreatedAt()).
                 lastModifiedAt(category.getLastModifiedAt()).
                 name(category.getName()).slug(category.getSlug()).description(category.getDescription()).
-                ancestors(category.getAncestors()).parent(category.getParent()).
+                ancestors(category.getAncestors()).parent(category.getParent()).assets(category.getAssets()).
                 orderHint(category.getOrderHint()).externalId(category.getExternalId());
     }
 
@@ -74,6 +75,11 @@ public final class CategoryBuilder extends Base implements Builder<Category> {
 
     public CategoryBuilder ancestors(final List<Reference<Category>> ancestors) {
         this.ancestors = ancestors;
+        return this;
+    }
+
+    public CategoryBuilder assets(final List<Asset> assets) {
+        this.assets = assets;
         return this;
     }
 
@@ -109,7 +115,7 @@ public final class CategoryBuilder extends Base implements Builder<Category> {
 
     @Override
     public Category build() {
-        return new CategoryImpl(ancestors, createdAt, null, description, externalId, id, lastModifiedAt, metaDescription, metaKeywords, metaTitle, name, orderHint, parent, slug, version);
+        return new CategoryImpl(ancestors, assets, createdAt, null, description, externalId, id, lastModifiedAt, metaDescription, metaKeywords, metaTitle, name, orderHint, parent, slug, version);
     }
 
     protected CategoryBuilder getThis() {
