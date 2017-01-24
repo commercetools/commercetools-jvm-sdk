@@ -85,6 +85,7 @@ public class ProductsScenario1Fixtures {
     public static final String ATTR_NAME_REF = ("Ref" + PRODUCT_TYPE_NAME);
     public static final String ATTR_NAME_BOOLEAN_SET = ("BooleanSet" + PRODUCT_TYPE_NAME);
     public static final String ATTR_NAME_TEXT_SET = ("TextSet" + PRODUCT_TYPE_NAME);
+    public static final String ATTR_NAME_TEXT_SET2 = ("TextSet2" + PRODUCT_TYPE_NAME);
     public static final String ATTR_NAME_LOC_TEXT_SET = ("LocTextSet" + PRODUCT_TYPE_NAME);
     public static final String ATTR_NAME_ENUM_SET = ("EnumSet" + PRODUCT_TYPE_NAME);
     public static final String ATTR_NAME_LOC_ENUM_SET = ("LocEnumSet" + PRODUCT_TYPE_NAME);
@@ -99,6 +100,9 @@ public class ProductsScenario1Fixtures {
     public static final String BOOL_FALSE = "false";
     public static final String TEXT_FOO = "foo";
     public static final String TEXT_BAR = "bar";
+    public static final String TEXT_ONE = "1";
+    public static final String TEXT_TWO = "2";
+    public static final String TEXT_THREE = "3";
     public static final LocalizedString LOC_TEXT_FOO = LocalizedString.ofEnglish("localized foo");
     public static final LocalizedString LOC_TEXT_FOO2 = LOC_TEXT_FOO.plus(GERMAN, "German foo");
     public static final LocalizedString LOC_TEXT_BAR = LocalizedString.ofEnglish("localized bar");
@@ -203,6 +207,7 @@ public class ProductsScenario1Fixtures {
                         AttributeAccess.ofProductReference().ofName(ATTR_NAME_REF).draftOf(referencedProductA.toReference()),
                         AttributeAccess.ofBooleanSet().ofName(ATTR_NAME_BOOLEAN_SET).draftOf(asSet(true, false)),
                         AttributeAccess.ofStringSet().ofName(ATTR_NAME_TEXT_SET).draftOf(asSet(TEXT_FOO, TEXT_BAR)),
+                        AttributeAccess.ofStringSet().ofName(ATTR_NAME_TEXT_SET2).draftOf(asSet(TEXT_THREE, TEXT_ONE, TEXT_TWO)),
                         AttributeAccess.ofLocalizedStringSet().ofName(ATTR_NAME_LOC_TEXT_SET).draftOf(asSet(LOC_TEXT_FOO, LOC_TEXT_BAR)),
                         AttributeAccess.ofEnumValueSet().ofName(ATTR_NAME_ENUM_SET).draftOf(asSet(ENUM_TWO, ENUM_THREE)),
                         AttributeAccess.ofLocalizedEnumValueSet().ofName(ATTR_NAME_LOC_ENUM_SET).draftOf(asSet(LOC_ENUM_TWO, LOC_ENUM_THREE)),
@@ -267,6 +272,7 @@ public class ProductsScenario1Fixtures {
         final AttributeDefinition refAttrDef = AttributeDefinitionBuilder.of(ATTR_NAME_REF, LocalizedString.ofEnglish(ATTR_NAME_REF), ReferenceAttributeType.of(Product.referenceTypeId())).build();
         final AttributeDefinition booleanSetAttrDef = AttributeDefinitionBuilder.of(ATTR_NAME_BOOLEAN_SET, LocalizedString.ofEnglish(ATTR_NAME_BOOLEAN_SET), SetAttributeType.of(BooleanAttributeType.of())).build();
         final AttributeDefinition textSetAttrDef = AttributeDefinitionBuilder.of(ATTR_NAME_TEXT_SET, LocalizedString.ofEnglish(ATTR_NAME_TEXT_SET), SetAttributeType.of(StringAttributeType.of())).build();
+        final AttributeDefinition textSetAttrDef2 = AttributeDefinitionBuilder.of(ATTR_NAME_TEXT_SET2, LocalizedString.ofEnglish(ATTR_NAME_TEXT_SET2), SetAttributeType.of(StringAttributeType.of())).build();
         final AttributeDefinition locTextSetAttrDef = AttributeDefinitionBuilder.of(ATTR_NAME_LOC_TEXT_SET, LocalizedString.ofEnglish(ATTR_NAME_LOC_TEXT_SET), SetAttributeType.of(LocalizedStringAttributeType.of())).build();
         final AttributeDefinition enumSetAttrDef = AttributeDefinitionBuilder.of(ATTR_NAME_ENUM_SET, LocalizedString.ofEnglish(ATTR_NAME_ENUM_SET), SetAttributeType.of(enumType)).build();
         final AttributeDefinition locEnumSetAttrDef = AttributeDefinitionBuilder.of(ATTR_NAME_LOC_ENUM_SET, LocalizedString.ofEnglish(ATTR_NAME_LOC_ENUM_SET), SetAttributeType.of(enumLocType)).build();
@@ -278,7 +284,7 @@ public class ProductsScenario1Fixtures {
         final AttributeDefinition refSetAttrDef = AttributeDefinitionBuilder.of(ATTR_NAME_REF_SET, LocalizedString.ofEnglish(ATTR_NAME_REF_SET), SetAttributeType.of(ReferenceAttributeType.of(Product.referenceTypeId()))).build();
         final ProductTypeDraft productTypeDraft = ProductTypeDraft.of(randomKey(), PRODUCT_TYPE_NAME, "", asList(booleanAttrDef, textAttrDef,
                 locTextAttrDef, enumAttrDef, locEnumAttrDef, numberAttrDef, moneyAttrDef, dateAttrDef, timeAttrDef, dateTimeAttrDef,
-                refAttrDef, booleanSetAttrDef, textSetAttrDef, locTextSetAttrDef, locTextAttrDef2, enumSetAttrDef, locEnumSetAttrDef, numberSetAttrDef,
+                refAttrDef, booleanSetAttrDef, textSetAttrDef, textSetAttrDef2, locTextSetAttrDef, locTextAttrDef2, enumSetAttrDef, locEnumSetAttrDef, numberSetAttrDef,
                 moneySetAttrDef, dateSetAttrDef, timeSetAttrDef, dateTimeSetAttrDef, refSetAttrDef));
         final ProductTypeCreateCommand productTypeCreateCommand = ProductTypeCreateCommand.of(productTypeDraft);
         return client.executeBlocking(productTypeCreateCommand);

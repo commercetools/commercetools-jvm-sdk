@@ -3,6 +3,7 @@ package io.sphere.sdk.json;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.*;
+import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.fasterxml.jackson.databind.type.TypeFactory;
@@ -14,7 +15,9 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.Iterator;
+import java.util.LinkedHashSet;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * Public utility class to work with JSON from the commercetools platform.
@@ -32,6 +35,7 @@ public final class SphereJsonUtils {
 
     /**
      * Creates a new {@link ObjectMapper} which is configured for sphere projects.
+     *
      * @return new object mapper
      */
     public static ObjectMapper newObjectMapper() {
@@ -43,6 +47,7 @@ public final class SphereJsonUtils {
                 .registerModule(new DateTimeSerializationModule())
                 .registerModule(new JavaMoneyModule())
                 .registerModule(new SphereEnumModule())
+                .registerModule(new SimpleModule().addAbstractTypeMapping(Set.class, LinkedHashSet.class))
                 .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
                 .configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false)
                 .configure(MapperFeature.USE_GETTERS_AS_SETTERS, false)
@@ -131,7 +136,6 @@ public final class SphereJsonUtils {
     }
 
     /**
-     *
      * Reads a UTF-8 JSON text file from the classpath of the current thread and transforms it into a Java object.
      *
      * @param resourcePath the path to the resource. Example: If the file is located in "src/test/resources/foo/bar/product.json" then the path should be "foo/bar/product.json"
@@ -242,11 +246,13 @@ public final class SphereJsonUtils {
         return typeFactory.constructType(typeReference);
     }
 
-    /** Very simple way to "erase" passwords -
-     *  replaces all field values whose names contains {@code 'pass'} by {@code '**removed from output**'}. */
+    /**
+     * Very simple way to "erase" passwords -
+     * replaces all field values whose names contains {@code 'pass'} by {@code '**removed from output**'}.
+     */
     private static JsonNode secure(JsonNode node) {
         if (node.isObject()) {
-            ObjectNode objectNode = (ObjectNode)node;
+            ObjectNode objectNode = (ObjectNode) node;
             Iterator<Map.Entry<String, JsonNode>> fields = node.fields();
             while (fields.hasNext()) {
                 Map.Entry<String, JsonNode> field = fields.next();
@@ -258,7 +264,7 @@ public final class SphereJsonUtils {
             }
             return objectNode;
         } else if (node.isArray()) {
-            ArrayNode arrayNode = (ArrayNode)node;
+            ArrayNode arrayNode = (ArrayNode) node;
             Iterator<JsonNode> elements = arrayNode.elements();
             while (elements.hasNext()) {
                 secure(elements.next());

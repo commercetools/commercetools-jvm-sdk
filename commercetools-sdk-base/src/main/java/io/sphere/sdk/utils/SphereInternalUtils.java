@@ -64,7 +64,7 @@ public final class SphereInternalUtils {
     @SafeVarargs
     @SuppressWarnings("varargs")
     public static <T> Set<T> asSet(final T ... params) {
-        return new HashSet<>(asList(params));
+        return new LinkedHashSet<>(asList(params));
     }
 
     public static <T> Set<T> setOf(final T element, final Set<T> set) {
@@ -106,7 +106,7 @@ public final class SphereInternalUtils {
         }
     }
 
-    public static  <K, V> Map<K, V> immutableCopyOf(final Map<K, V> map) {
+    public static <K, V> Map<K, V> immutableCopyOf(final Map<K, V> map) {
         return Collections.unmodifiableMap(copyOf(map));
     }
 
