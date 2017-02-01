@@ -104,7 +104,7 @@ import java.util.function.Function;
  </ul>
  -->
 
- <h3 class=released-version id="v1_10_0">1.11.0 (01.02.2017)</h3>
+ <h3 class=released-version id="v1_11_0">1.11.0 (01.02.2017)</h3>
  <ul>
  <li class=new-in-release>{@link Asset}s on categories</li></li>
  <li class=fixed-in-release>{@code Set} types preserve input order, see <a href="https://github.com/commercetools/commercetools-jvm-sdk/issues/1294">#1294</a></li>
