@@ -1,6 +1,11 @@
 language: java
 jdk:
   - oraclejdk8
+sudo: false
+addons:
+  apt:
+    packages:
+      - oracle-java8-installer
 cache:
   directories:
   - .autoconf
@@ -18,3 +23,4 @@ branches:
   only:
     - master
     - generate-query-models
+    - javadoc-8u121-fix
