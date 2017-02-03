@@ -1,6 +1,7 @@
 package io.sphere.sdk.attributestutorial;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import io.sphere.sdk.carts.InventoryMode;
 import io.sphere.sdk.products.attributes.*;
 import io.sphere.sdk.client.ErrorResponseException;
 import io.sphere.sdk.json.JsonException;
@@ -528,6 +529,7 @@ public class ProductTypeCreationDemoIntegrationTest extends IntegrationTest {
                 .build();
         final OrderImportDraft orderImportDraft = OrderImportDraftBuilder
                 .ofLineItems(EURO_20, OrderState.COMPLETE, asList(lineItemImportDraft))
+                .inventoryMode(InventoryMode.NONE)
                 .build();
 
         final Order order = client().executeBlocking(OrderImportCommand.of(orderImportDraft));
