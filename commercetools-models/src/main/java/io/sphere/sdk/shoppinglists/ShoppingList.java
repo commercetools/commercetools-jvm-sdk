@@ -14,8 +14,12 @@ import java.util.List;
 @JsonDeserialize(as = ShoppingListImpl.class)
 @ResourceValue
 @ResourceInfo(pluralName = "shopping lists", pathElement = "shopping-lists")
+@HasQueryEndpoint
+@HasByIdGetEndpoint
+@HasUpdateCommand
 @HasCreateCommand
 @HasDeleteCommand
+@HasQueryModel
 public interface ShoppingList extends Resource<ShoppingList> {
 
     LocalizedString getName();
@@ -26,6 +30,7 @@ public interface ShoppingList extends Resource<ShoppingList> {
 
     LocalizedString getSlug();
 
+    @IgnoreInQueryModel
     List<LineItem> getLineItems();
 
 
