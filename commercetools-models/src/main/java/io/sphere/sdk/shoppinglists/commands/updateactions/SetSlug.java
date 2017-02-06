@@ -8,18 +8,18 @@ import io.sphere.sdk.shoppinglists.ShoppingList;
  * Sets the slug of the shopping list.
  */
 public final class SetSlug extends UpdateActionImpl<ShoppingList> {
-    private final LocalizedString note;
+    private final LocalizedString slug;
 
-    private SetSlug(final LocalizedString note) {
+    private SetSlug(final LocalizedString slug) {
         super("setSlug");
-        this.note = note;
+        this.slug = slug;
     }
 
-    public static SetSlug of(final LocalizedString name) {
-        return new SetSlug(name);
+    public static SetSlug of(final LocalizedString slug) {
+        return new SetSlug(slug);
     }
 
-    public LocalizedString getNote() {
-        return note;
+    public LocalizedString getSlug() {
+        return slug;
     }
 }
