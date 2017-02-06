@@ -8,6 +8,7 @@ import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Resource;
 
+import javax.annotation.Nullable;
 import java.util.List;
 
 @JsonDeserialize(as = ShoppingListDraftDsl.class)
@@ -18,10 +19,16 @@ public interface ShoppingListDraft {
 
     LocalizedString getName();
 
+    @Nullable
+    LocalizedString getDescription();
+
+    @Nullable
+    String getKey();
+
+    @Nullable
     Reference<Customer> getCustomer();
 
-    LocalizedString getNote();
-
+    @Nullable
     LocalizedString getSlug();
 
     List<LineItem> getLineItems();

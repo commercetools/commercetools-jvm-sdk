@@ -9,6 +9,7 @@ import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Resource;
 
+import javax.annotation.Nullable;
 import java.util.List;
 
 @JsonDeserialize(as = ShoppingListImpl.class)
@@ -24,10 +25,17 @@ public interface ShoppingList extends Resource<ShoppingList> {
 
     LocalizedString getName();
 
+    @IgnoreInQueryModel
+    @Nullable
+    LocalizedString getDescription();
+
+    @Nullable
+    String getKey();
+
+    @Nullable
     Reference<Customer> getCustomer();
 
-    LocalizedString getNote();
-
+    @Nullable
     LocalizedString getSlug();
 
     @IgnoreInQueryModel
