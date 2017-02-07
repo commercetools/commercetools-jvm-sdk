@@ -2,6 +2,7 @@ package io.sphere.sdk.orders;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.neovisionaries.i18n.CountryCode;
+import io.sphere.sdk.carts.InventoryMode;
 import io.sphere.sdk.carts.RoundingMode;
 import io.sphere.sdk.carts.TaxedPrice;
 import io.sphere.sdk.customergroups.CustomerGroup;
@@ -66,4 +67,7 @@ public interface OrderImportDraft {
 
     @Nullable
     RoundingMode getTaxRoundingMode();
+
+    @Nullable
+    InventoryMode getInventoryMode();
 }

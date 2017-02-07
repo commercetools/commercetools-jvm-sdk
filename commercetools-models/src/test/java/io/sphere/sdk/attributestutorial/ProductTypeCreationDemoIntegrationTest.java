@@ -1,7 +1,6 @@
 package io.sphere.sdk.attributestutorial;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import io.sphere.sdk.products.attributes.*;
 import io.sphere.sdk.client.ErrorResponseException;
 import io.sphere.sdk.json.JsonException;
 import io.sphere.sdk.json.SphereJsonUtils;
@@ -13,6 +12,7 @@ import io.sphere.sdk.models.errors.InvalidField;
 import io.sphere.sdk.orders.*;
 import io.sphere.sdk.orders.commands.OrderImportCommand;
 import io.sphere.sdk.products.*;
+import io.sphere.sdk.products.attributes.*;
 import io.sphere.sdk.products.commands.ProductCreateCommand;
 import io.sphere.sdk.products.commands.ProductDeleteCommand;
 import io.sphere.sdk.products.commands.ProductUpdateCommand;
@@ -47,9 +47,7 @@ import static java.util.Locale.ENGLISH;
 import static java.util.Locale.GERMAN;
 import static java.util.Locale.US;
 import static java.util.stream.Collectors.*;
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.assertj.core.api.Assertions.catchThrowable;
+import static org.assertj.core.api.Assertions.*;
 
 @NotThreadSafe
 public class ProductTypeCreationDemoIntegrationTest extends IntegrationTest {
