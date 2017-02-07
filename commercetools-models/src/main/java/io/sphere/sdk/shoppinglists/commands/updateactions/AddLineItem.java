@@ -12,6 +12,15 @@ import io.sphere.sdk.types.CustomFieldsDraft;
 
 import javax.annotation.Nullable;
 
+/**
+ * Adds a line item.
+ *
+ * {@doc.gen intro}
+ *
+ * {@include.example io.sphere.sdk.shoppinglists.commands.ShoppingListUpdateCommandIntegrationTest#addLineItem()}
+ *
+ * @see ShoppingList#getLineItems()
+ */
 public final class AddLineItem extends UpdateActionImpl<ShoppingList> implements CustomDraft {
     private final String productId;
     private final Integer variantId;

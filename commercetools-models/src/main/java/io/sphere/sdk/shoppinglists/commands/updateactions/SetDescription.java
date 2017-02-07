@@ -6,6 +6,12 @@ import io.sphere.sdk.shoppinglists.ShoppingList;
 
 /**
  * Sets the description of the shopping list.
+ *
+ * {@doc.gen intro}
+ *
+ * {@include.example io.sphere.sdk.shoppinglists.commands.ShoppingListUpdateCommandIntegrationTest#setDescription()}
+ *
+ * @see ShoppingList#getDescription()
  */
 public final class SetDescription extends UpdateActionImpl<ShoppingList> {
     private final LocalizedString description;

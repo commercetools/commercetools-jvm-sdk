@@ -16,9 +16,9 @@ import java.util.List;
 @ResourceValue
 @ResourceInfo(pluralName = "shopping lists", pathElement = "shopping-lists")
 @HasQueryEndpoint
-@HasByIdGetEndpoint
+@HasByIdGetEndpoint(javadocSummary = "Fetches a shopping list by ID.", includeExamples = "io.sphere.sdk.shoppinglists.queries.ShoppingListByIdGetIntegrationTest#execution()")
 @HasUpdateCommand
-@HasCreateCommand
+@HasCreateCommand(javadocSummary = "Creates a {@link io.sphere.sdk.shoppinglists.ShoppingList}.", includeExamples = "io.sphere.sdk.shoppinglists.commands.ShoppingListCreateCommandIntegrationTest#execution()")
 @HasDeleteCommand
 @HasQueryModel
 public interface ShoppingList extends Resource<ShoppingList> {

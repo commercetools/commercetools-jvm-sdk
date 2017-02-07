@@ -6,6 +6,12 @@ import io.sphere.sdk.shoppinglists.ShoppingList;
 
 /**
  * Sets the slug of the shopping list.
+ *
+ * {@doc.gen intro}
+ *
+ * {@include.example io.sphere.sdk.shoppinglists.commands.ShoppingListUpdateCommandIntegrationTest#setSlug()}
+ *
+ * @see ShoppingList#getSlug()
  */
 public final class SetSlug extends UpdateActionImpl<ShoppingList> {
     private final LocalizedString slug;

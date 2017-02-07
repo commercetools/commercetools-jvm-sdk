@@ -13,6 +13,11 @@ import java.util.Optional;
 /**
  * Sets the reference to the customer. If not defined, the reference is unset.
  *
+ * {@doc.gen intro}
+ *
+ * {@include.example io.sphere.sdk.shoppinglists.commands.ShoppingListUpdateCommandIntegrationTest#setCustomer()}
+ *
+ * @see ShoppingList#getCustomer()
  */
 public final class SetCustomer extends UpdateActionImpl<ShoppingList> {
     @Nullable

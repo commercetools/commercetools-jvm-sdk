@@ -8,6 +8,15 @@ import io.sphere.sdk.types.CustomFieldsDraft;
 
 import javax.annotation.Nullable;
 
+/**
+ * Adds a text line item.
+ *
+ * {@doc.gen intro}
+ *
+ * {@include.example io.sphere.sdk.shoppinglists.commands.ShoppingListUpdateCommandIntegrationTest#addTextLineItem()}
+ *
+ * @see ShoppingList#getTextLineItems()
+ */
 public final class AddTextLineItem extends UpdateActionImpl<ShoppingList> implements CustomDraft {
     private final LocalizedString name;
     private final Long quantity;

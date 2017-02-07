@@ -5,6 +5,12 @@ import io.sphere.sdk.shoppinglists.ShoppingList;
 
 /**
  * Sets the key of the shopping list.
+ *
+ * {@doc.gen intro}
+ *
+ * {@include.example io.sphere.sdk.shoppinglists.commands.ShoppingListUpdateCommandIntegrationTest#setKey()}
+ *
+ * @see ShoppingList#getKey()
  */
 public final class SetKey extends UpdateActionImpl<ShoppingList> {
     private final String key;

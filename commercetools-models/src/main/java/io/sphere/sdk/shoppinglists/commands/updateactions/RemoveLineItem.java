@@ -6,6 +6,15 @@ import io.sphere.sdk.shoppinglists.ShoppingList;
 
 import javax.annotation.Nullable;
 
+/**
+ * Removes a line item.
+ *
+ * {@doc.gen intro}
+ *
+ * {@include.example io.sphere.sdk.shoppinglists.commands.ShoppingListUpdateCommandIntegrationTest#removeLineItem()}
+ *
+ * @see ShoppingList#getLineItems()
+ */
 public final class RemoveLineItem extends UpdateActionImpl<ShoppingList> {
     private final String lineItemId;
     @Nullable

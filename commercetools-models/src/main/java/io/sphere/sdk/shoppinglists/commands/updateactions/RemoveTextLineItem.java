@@ -6,6 +6,15 @@ import io.sphere.sdk.shoppinglists.TextLineItem;
 
 import javax.annotation.Nullable;
 
+/**
+ * Removes a text line item.
+ *
+ * {@doc.gen intro}
+ *
+ * {@include.example io.sphere.sdk.shoppinglists.commands.ShoppingListUpdateCommandIntegrationTest#removeTextLineItem()}
+ *
+ * @see ShoppingList#getTextLineItems()
+ */
 public final class RemoveTextLineItem extends UpdateActionImpl<ShoppingList> {
     private final String textLineItemId;
     @Nullable
