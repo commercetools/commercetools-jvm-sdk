@@ -1,12 +1,7 @@
 package io.sphere.sdk.shoppinglists;
 
-import io.sphere.sdk.cartdiscounts.CartDiscountFixtures;
 import io.sphere.sdk.client.BlockingSphereClient;
 import io.sphere.sdk.models.LocalizedString;
-import io.sphere.sdk.shippingmethods.ShippingMethod;
-import io.sphere.sdk.shippingmethods.ShippingMethodDraft;
-import io.sphere.sdk.shippingmethods.commands.ShippingMethodCreateCommand;
-import io.sphere.sdk.shippingmethods.commands.ShippingMethodDeleteCommand;
 import io.sphere.sdk.shoppinglists.commands.ShoppingListCreateCommand;
 import io.sphere.sdk.shoppinglists.commands.ShoppingListDeleteCommand;
 import io.sphere.sdk.shoppinglists.queries.ShoppingListQuery;
@@ -17,7 +12,6 @@ import java.util.Optional;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
-import static io.sphere.sdk.taxcategories.TaxCategoryFixtures.withTaxCategory;
 import static io.sphere.sdk.test.SphereTestUtils.*;
 
 public class ShoppingListFixtures {
@@ -42,9 +36,9 @@ public class ShoppingListFixtures {
                 .description(en(randomString()))
                 .key(randomKey())
                 .slug(randomSlug()).build();
-        final ShoppingList shippingMethod = client.executeBlocking(ShoppingListCreateCommand.of(draft));
-        final ShoppingList possiblyUpdatedShippingMethod = f.apply(shippingMethod);
-        client.executeBlocking(ShoppingListDeleteCommand.of(possiblyUpdatedShippingMethod));
+        final ShoppingList shoppingList = client.executeBlocking(ShoppingListCreateCommand.of(draft));
+        final ShoppingList possiblyUpdatedShoppingList = f.apply(shoppingList);
+        client.executeBlocking(ShoppingListDeleteCommand.of(possiblyUpdatedShoppingList));
     }
 
     private static ShoppingList createShoppingList(final BlockingSphereClient client, final String name) {

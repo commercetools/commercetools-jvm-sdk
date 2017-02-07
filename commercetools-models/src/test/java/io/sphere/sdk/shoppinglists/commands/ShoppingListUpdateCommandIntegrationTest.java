@@ -1,16 +1,14 @@
 package io.sphere.sdk.shoppinglists.commands;
 
 import io.sphere.sdk.models.LocalizedString;
-import io.sphere.sdk.shoppinglists.commands.updateactions.ChangeName;
 import io.sphere.sdk.shoppinglists.ShoppingList;
-import io.sphere.sdk.shoppinglists.commands.updateactions.SetDescription;
-import io.sphere.sdk.shoppinglists.commands.updateactions.SetKey;
-import io.sphere.sdk.shoppinglists.commands.updateactions.SetSlug;
+import io.sphere.sdk.shoppinglists.commands.updateactions.*;
 import io.sphere.sdk.test.IntegrationTest;
 import org.junit.Test;
 
 import java.util.Locale;
 
+import static io.sphere.sdk.customers.CustomerFixtures.withCustomer;
 import static io.sphere.sdk.shoppinglists.ShoppingListFixtures.withUpdateableShoppingList;
 import static io.sphere.sdk.test.SphereTestUtils.*;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -64,4 +62,18 @@ public class ShoppingListUpdateCommandIntegrationTest extends IntegrationTest {
             return updatedShoppingList;
         });
     }
+
+    @Test
+    public void setCustomer() throws Exception {
+        withCustomer(client(), customer -> {
+            withUpdateableShoppingList(client(), shoppingList -> {
+                assertThat(shoppingList.getCustomer()).isNotEqualTo(customer);
+                final ShoppingListUpdateCommand cmd = ShoppingListUpdateCommand.of(shoppingList, SetCustomer.of(customer));
+                final ShoppingList updatedShoppingList = client().executeBlocking(cmd);
+                assertThat(updatedShoppingList.getCustomer()).isEqualTo(customer.toReference());
+                return updatedShoppingList;
+            });
+        });
+    }
 }
+
