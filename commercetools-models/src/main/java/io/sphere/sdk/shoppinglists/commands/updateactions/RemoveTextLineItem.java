@@ -17,20 +17,20 @@ public final class RemoveTextLineItem extends UpdateActionImpl<ShoppingList> {
         this.quantity = quantity;
     }
 
-    public static RemoveTextLineItem of(final String lineItemId, @Nullable final Long quantity) {
-        return new RemoveTextLineItem(lineItemId, quantity);
+    public static RemoveTextLineItem of(final String textLineItemId, @Nullable final Long quantity) {
+        return new RemoveTextLineItem(textLineItemId, quantity);
     }
 
-    public static RemoveTextLineItem of(final String lineItemId) {
-        return of(lineItemId, null);
+    public static RemoveTextLineItem of(final String textLineItemId) {
+        return of(textLineItemId, null);
     }
 
-    public static RemoveTextLineItem of(final TextLineItem lineItem, @Nullable final Long quantity) {
-        return of(lineItem.getId(), quantity);
+    public static RemoveTextLineItem of(final TextLineItem textLineItem, @Nullable final Long quantity) {
+        return of(textLineItem.getId(), quantity);
     }
 
-    public static RemoveTextLineItem of(final TextLineItem lineItem) {
-        return of(lineItem.getId());
+    public static RemoveTextLineItem of(final TextLineItem textLineItem) {
+        return of(textLineItem.getId());
     }
 
     public String getTextLineItemId() {
