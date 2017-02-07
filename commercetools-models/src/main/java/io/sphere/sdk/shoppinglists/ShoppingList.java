@@ -41,6 +41,8 @@ public interface ShoppingList extends Resource<ShoppingList> {
     @IgnoreInQueryModel
     List<LineItem> getLineItems();
 
+    @IgnoreInQueryModel
+    List<TextLineItem> getTextLineItems();
 
     /**
      * Creates a container which contains the full Java type information to deserialize this class from JSON.

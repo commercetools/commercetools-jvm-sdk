@@ -32,4 +32,6 @@ public interface ShoppingListDraft {
     LocalizedString getSlug();
 
     List<LineItem> getLineItems();
+
+    List<TextLineItem> getTextLineItems();
 }
