@@ -1,7 +1,6 @@
 package io.sphere.sdk.orders.commands;
 
 import com.neovisionaries.i18n.CountryCode;
-import io.sphere.sdk.cartdiscounts.DiscountedLineItemPrice;
 import io.sphere.sdk.cartdiscounts.DiscountedLineItemPriceForQuantity;
 import io.sphere.sdk.carts.*;
 import io.sphere.sdk.channels.ChannelRole;
@@ -34,7 +33,7 @@ import java.util.UUID;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
-import static io.sphere.sdk.channels.ChannelFixtures.*;
+import static io.sphere.sdk.channels.ChannelFixtures.withPersistentChannel;
 import static io.sphere.sdk.customers.CustomerFixtures.withCustomer;
 import static io.sphere.sdk.customers.CustomerFixtures.withCustomerInGroup;
 import static io.sphere.sdk.models.DefaultCurrencyUnits.EUR;
@@ -347,6 +346,19 @@ public class OrderImportCommandIntegrationTest extends IntegrationTest {
                     },
                     order -> assertThat(order.getCustomerId()).contains(customerId));
         });
+    }
+
+    @Test
+    public void inventoryMode() throws Exception {
+        testOrderAspect(builder -> {
+                    builder.inventoryMode(null);
+                },
+                order -> assertThat(order.getInventoryMode()).isEqualTo(InventoryMode.NONE));
+
+        testOrderAspect(builder -> {
+                    builder.inventoryMode(InventoryMode.NONE);
+                },
+                order -> assertThat(order.getInventoryMode()).isEqualTo(InventoryMode.NONE));
     }
 
     @Test
