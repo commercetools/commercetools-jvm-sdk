@@ -37,8 +37,7 @@ import static io.sphere.sdk.channels.ChannelFixtures.withPersistentChannel;
 import static io.sphere.sdk.customers.CustomerFixtures.withCustomer;
 import static io.sphere.sdk.customers.CustomerFixtures.withCustomerInGroup;
 import static io.sphere.sdk.models.DefaultCurrencyUnits.EUR;
-import static io.sphere.sdk.products.ProductFixtures.withProduct;
-import static io.sphere.sdk.products.ProductFixtures.withTaxedProduct;
+import static io.sphere.sdk.products.ProductFixtures.*;
 import static io.sphere.sdk.shippingmethods.ShippingMethodFixtures.withShippingMethodForGermany;
 import static io.sphere.sdk.taxcategories.TaxCategoryFixtures.defaultTaxCategory;
 import static io.sphere.sdk.taxcategories.TaxCategoryFixtures.withTransientTaxCategory;
@@ -355,10 +354,28 @@ public class OrderImportCommandIntegrationTest extends IntegrationTest {
                 },
                 order -> assertThat(order.getInventoryMode()).isEqualTo(InventoryMode.NONE));
 
-        testOrderAspect(builder -> {
-                    builder.inventoryMode(InventoryMode.NONE);
-                },
-                order -> assertThat(order.getInventoryMode()).isEqualTo(InventoryMode.NONE));
+        withProductOfStock(client(), 5, product -> {
+            final int variantId = 1;
+            final String sku = product.getMasterData().getStaged().getMasterVariant().getSku();
+
+            final String productId = product.getId();
+            final LocalizedString name = en("a name");
+            final long quantity = 1;
+            final Price price = Price.of(EURO_10);
+            final OrderState orderState = OrderState.COMPLETE;
+            final MonetaryAmount amount = EURO_10;
+
+            final ProductVariantImportDraft variant = ProductVariantImportDraftBuilder.of(productId, variantId, sku).build();
+            final LineItemImportDraft lineItemImportDraft = LineItemImportDraftBuilder.of(variant, quantity, price, name).build();
+            final OrderImportDraft orderImportDraft = OrderImportDraftBuilder.ofLineItems(amount, orderState, asList(lineItemImportDraft))
+                    .inventoryMode(InventoryMode.TRACK_ONLY).build();
+            final OrderImportCommand cmd = OrderImportCommand.of(orderImportDraft);
+
+            final Order order = client().executeBlocking(cmd);
+            assertThat(order.getInventoryMode()).isEqualTo(InventoryMode.TRACK_ONLY);
+
+            client().executeBlocking(OrderDeleteCommand.of(order));
+        });
     }
 
     @Test
