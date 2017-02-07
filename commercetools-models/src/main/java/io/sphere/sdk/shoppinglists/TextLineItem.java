@@ -11,6 +11,8 @@ import javax.annotation.Nullable;
 @ResourceValue
 public interface TextLineItem extends Custom
 {
+    String getId();
+
     LocalizedString getName();
 
     @Nullable

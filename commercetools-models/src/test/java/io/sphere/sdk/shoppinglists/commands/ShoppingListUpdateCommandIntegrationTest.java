@@ -3,6 +3,7 @@ package io.sphere.sdk.shoppinglists.commands;
 import io.sphere.sdk.carts.LineItem;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.shoppinglists.ShoppingList;
+import io.sphere.sdk.shoppinglists.TextLineItem;
 import io.sphere.sdk.shoppinglists.commands.updateactions.*;
 import io.sphere.sdk.test.IntegrationTest;
 import org.junit.Test;
@@ -115,6 +116,52 @@ public class ShoppingListUpdateCommandIntegrationTest extends IntegrationTest {
                 final ShoppingList updatedShoppingList3 = client().executeBlocking(removeLineItemCmd2);
 
                 assertThat(updatedShoppingList3.getLineItems().size()).isEqualTo(0);
+
+                return updatedShoppingList3;
+            });
+        });
+    }
+
+    @Test
+    public void addTextLineItem() throws Exception {
+        withTaxedProduct(client(), product -> {
+            withUpdateableShoppingList(client(), shoppingList -> {
+                final LocalizedString name = en(randomString());
+                final ShoppingListUpdateCommand cmd = ShoppingListUpdateCommand.of(shoppingList, AddTextLineItem.of(name, 2));
+                final ShoppingList updatedShoppingList = client().executeBlocking(cmd);
+
+                assertThat(updatedShoppingList.getTextLineItems().size()).isEqualTo(1);
+                final TextLineItem textLineItem = updatedShoppingList.getTextLineItems().get(0);
+                assertThat(textLineItem.getName()).isEqualTo(name);
+                assertThat(textLineItem.getQuantity()).isEqualTo(2);
+
+                return updatedShoppingList;
+            });
+        });
+    }
+
+    @Test
+    public void removeTextLineItem() throws Exception {
+        withTaxedProduct(client(), product -> {
+            withUpdateableShoppingList(client(), shoppingList -> {
+                final LocalizedString name = en(randomString());
+                final ShoppingListUpdateCommand addTextLineItemCmd = ShoppingListUpdateCommand.of(shoppingList, AddTextLineItem.of(name, 3));
+                final ShoppingList updatedShoppingList1 = client().executeBlocking(addTextLineItemCmd);
+
+                assertThat(updatedShoppingList1.getTextLineItems().size()).isEqualTo(1);
+                final TextLineItem textLineItem1 = updatedShoppingList1.getTextLineItems().get(0);
+
+                final ShoppingListUpdateCommand removeTextLineItemCmd1 = ShoppingListUpdateCommand.of(updatedShoppingList1, RemoveTextLineItem.of(textLineItem1, 2L));
+                final ShoppingList updatedShoppingList2 = client().executeBlocking(removeTextLineItemCmd1);
+
+                assertThat(updatedShoppingList2.getTextLineItems().size()).isEqualTo(1);
+                final TextLineItem textLineItem2 = updatedShoppingList2.getTextLineItems().get(0);
+                assertThat(textLineItem2.getQuantity()).isEqualTo(1L);
+
+                final ShoppingListUpdateCommand removeTextLineItemCmd2 = ShoppingListUpdateCommand.of(updatedShoppingList2, RemoveTextLineItem.of(textLineItem2, 1L));
+                final ShoppingList updatedShoppingList3 = client().executeBlocking(removeTextLineItemCmd2);
+
+                assertThat(updatedShoppingList3.getTextLineItems().size()).isEqualTo(0);
 
                 return updatedShoppingList3;
             });
