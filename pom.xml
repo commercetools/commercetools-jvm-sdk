@@ -425,6 +425,10 @@
         </profile>
         <profile>
             <id>javadoc-jdk-8u121</id>
+            <!--
+                This profile is currently only activated for the given JDK, but can be manually activated by passing
+                the -Pjavadoc-jdk-8u121 option to maven.
+            -->
             <activation>
                 <jdk>1.8.0_121</jdk>
             </activation>
