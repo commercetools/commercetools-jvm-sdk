@@ -1,18 +1,19 @@
 package io.sphere.sdk.shoppinglists.commands;
 
 import io.sphere.sdk.models.LocalizedString;
-import io.sphere.sdk.shoppinglists.LineItem;
-import io.sphere.sdk.shoppinglists.ShoppingList;
-import io.sphere.sdk.shoppinglists.TextLineItem;
+import io.sphere.sdk.shoppinglists.*;
 import io.sphere.sdk.shoppinglists.commands.updateactions.*;
 import io.sphere.sdk.test.IntegrationTest;
 import org.junit.Test;
 
+import java.util.Collections;
+import java.util.List;
 import java.util.Locale;
+import java.util.stream.Collectors;
 
 import static io.sphere.sdk.customers.CustomerFixtures.withCustomer;
 import static io.sphere.sdk.products.ProductFixtures.withTaxedProduct;
-import static io.sphere.sdk.shoppinglists.ShoppingListFixtures.withUpdateableShoppingList;
+import static io.sphere.sdk.shoppinglists.ShoppingListFixtures.*;
 import static io.sphere.sdk.test.SphereTestUtils.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -235,6 +236,46 @@ public class ShoppingListUpdateCommandIntegrationTest extends IntegrationTest {
                 assertThat(textLineItem2.getDescription()).isEqualTo(description);
 
                 return updatedShoppingList2;
+            });
+        });
+    }
+
+    @Test
+    public void changeTextLineItemsOrder() throws Exception {
+        List<TextLineItemDraft> textLineItemDrafts = asList(
+                TextLineItemDraftBuilder.of(en(randomString()), 1L).build(),
+                TextLineItemDraftBuilder.of(en(randomString()), 2L).build(),
+                TextLineItemDraftBuilder.of(en(randomString()), 3L).build());
+        ShoppingListDraftDsl shoppingListDraft = newShoppingListDraftBuilder().textLineItems(textLineItemDrafts).build();
+        withShoppingList(client(), shoppingListDraft, shoppingList -> {
+            List<String> newTextLineItemOrder = shoppingList.getTextLineItems().stream().map(TextLineItem::getId).collect(Collectors.toList());
+            Collections.reverse(newTextLineItemOrder);
+
+            final ShoppingList updatedShoppingList = client().executeBlocking(ShoppingListUpdateCommand.of(shoppingList, ChangeTextLineItemsOrder.of(newTextLineItemOrder)));
+
+            assertThat(updatedShoppingList.getTextLineItems().stream().map(TextLineItem::getId).collect(Collectors.toList())).isEqualTo(newTextLineItemOrder);
+
+            return updatedShoppingList;
+        });
+    }
+
+    @Test
+    public void changeLineItemsOrder() throws Exception {
+        withTaxedProduct(client(), product -> {
+            List<LineItemDraft> lineItemDrafts = asList(
+                    LineItemDraftBuilder.of(product.getId()).quantity(1L).build(),
+                    LineItemDraftBuilder.of(product.getId()).quantity(2L).build(),
+                    LineItemDraftBuilder.of(product.getId()).quantity(3L).build());
+            ShoppingListDraftDsl shoppingListDraft = newShoppingListDraftBuilder().lineItems(lineItemDrafts).build();
+            withShoppingList(client(), shoppingListDraft, shoppingList -> {
+                final List<String> newListItemOrder = shoppingList.getLineItems().stream().map(LineItem::getId).collect(Collectors.toList());
+                Collections.reverse(newListItemOrder);
+
+                final ShoppingList updatedShoppingList = client().executeBlocking(ShoppingListUpdateCommand.of(shoppingList, ChangeLineItemsOrder.of(newListItemOrder)));
+
+                assertThat(updatedShoppingList.getLineItems().stream().map(LineItem::getId).collect(Collectors.toList())).isEqualTo(newListItemOrder);
+
+                return updatedShoppingList;
             });
         });
     }

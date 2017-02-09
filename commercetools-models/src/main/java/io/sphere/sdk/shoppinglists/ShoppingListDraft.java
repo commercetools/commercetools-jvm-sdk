@@ -31,9 +31,9 @@ public interface ShoppingListDraft {
     @Nullable
     LocalizedString getSlug();
 
-    List<LineItem> getLineItems();
+    List<LineItemDraft> getLineItems();
 
-    List<TextLineItem> getTextLineItems();
+    List<TextLineItemDraft> getTextLineItems();
 
     @Nullable
     CustomFieldsDraft getCustom();
