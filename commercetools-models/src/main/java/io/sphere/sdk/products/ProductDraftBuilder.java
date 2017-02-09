@@ -55,7 +55,8 @@ public final class ProductDraftBuilder extends Base implements Builder<ProductDr
                 .taxCategory(productDraft.getTaxCategory())
                 .state(productDraft.getState())
                 .categoryOrderHints(productDraft.getCategoryOrderHints())
-                .publish(productDraft.isPublish());
+                .publish(productDraft.isPublish())
+                .key(productDraft.getKey());
     }
 
     public static ProductDraftBuilder of(final ResourceIdentifiable<ProductType> productType, final LocalizedString name, final LocalizedString slug, final List<ProductVariantDraft> allVariants) {

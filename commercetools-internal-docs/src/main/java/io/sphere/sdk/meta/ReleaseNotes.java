@@ -37,6 +37,7 @@ import io.sphere.sdk.inventory.InventoryEntryDraftBuilder;
 import io.sphere.sdk.json.SphereJsonUtils;
 import io.sphere.sdk.models.*;
 import io.sphere.sdk.orders.Order;
+import io.sphere.sdk.orders.OrderImportDraft;
 import io.sphere.sdk.orders.expansion.OrderExpansionModel;
 import io.sphere.sdk.payments.PaymentDraft;
 import io.sphere.sdk.payments.PaymentDraftBuilder;
@@ -104,10 +105,12 @@ import java.util.function.Function;
  </ul>
  -->
 
- <h3 class=released-version id="v1_11_0">1.11.0 (01.02.2017)</h3>
+ <h3 class=released-version id="v1_11_0">1.11.0 (07.02.2017)</h3>
  <ul>
  <li class=new-in-release>{@link Asset}s on categories</li></li>
+ <li class=new-in-release>{@link OrderImportDraft#getInventoryMode()}</li>
  <li class=fixed-in-release>{@code Set} types preserve input order, see <a href="https://github.com/commercetools/commercetools-jvm-sdk/issues/1294">#1294</a></li>
+ <li class=fixed-in-release>{@link ProductDraftBuilder} was not preserving the {@code key} when using a {@link ProductDraft}</li>
  </ul>
 
  <h3 class=released-version id="v1_10_0">1.10.0 (17.01.2017)</h3>
