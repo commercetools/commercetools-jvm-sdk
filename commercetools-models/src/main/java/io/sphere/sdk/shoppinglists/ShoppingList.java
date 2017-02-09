@@ -3,11 +3,12 @@ package io.sphere.sdk.shoppinglists;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import io.sphere.sdk.annotations.*;
-import io.sphere.sdk.carts.LineItem;
 import io.sphere.sdk.customers.Customer;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Resource;
+import io.sphere.sdk.types.Custom;
+import io.sphere.sdk.types.CustomFields;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -22,7 +23,7 @@ import java.util.List;
 @HasCreateCommand(javadocSummary = "Creates a {@link io.sphere.sdk.shoppinglists.ShoppingList}.", includeExamples = "io.sphere.sdk.shoppinglists.commands.ShoppingListCreateCommandIntegrationTest#execution()")
 @HasDeleteCommand(javadocSummary = "Deletes a shopping list.", deleteWithKey = true)
 @HasQueryModel
-public interface ShoppingList extends Resource<ShoppingList> {
+public interface ShoppingList extends Resource<ShoppingList>, Custom {
 
     LocalizedString getName();
 
@@ -44,6 +45,9 @@ public interface ShoppingList extends Resource<ShoppingList> {
 
     @IgnoreInQueryModel
     List<TextLineItem> getTextLineItems();
+
+    @Nullable
+    CustomFields getCustom();
 
     /**
      * Creates a container which contains the full Java type information to deserialize this class from JSON.

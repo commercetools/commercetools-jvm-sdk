@@ -1,16 +1,13 @@
 package io.sphere.sdk.shoppinglists.commands.updateactions;
 
-import io.sphere.sdk.channels.Channel;
 import io.sphere.sdk.commands.UpdateActionImpl;
-import io.sphere.sdk.models.Reference;
-import io.sphere.sdk.models.Referenceable;
 import io.sphere.sdk.products.ProductIdentifiable;
 import io.sphere.sdk.shoppinglists.ShoppingList;
-import io.sphere.sdk.taxcategories.ExternalTaxRateDraft;
 import io.sphere.sdk.types.CustomDraft;
 import io.sphere.sdk.types.CustomFieldsDraft;
 
 import javax.annotation.Nullable;
+import java.time.ZonedDateTime;
 
 /**
  * Adds a line item.
@@ -23,34 +20,30 @@ import javax.annotation.Nullable;
  */
 public final class AddLineItem extends UpdateActionImpl<ShoppingList> implements CustomDraft {
     private final String productId;
+    @Nullable
     private final Integer variantId;
+    @Nullable
     private final Long quantity;
     @Nullable
-    private final Reference<Channel> supplyChannel;
-    @Nullable
-    private final Reference<Channel> distributionChannel;
+    private final ZonedDateTime addedAt;
     @Nullable
     private final CustomFieldsDraft custom;
-    @Nullable
-    private final ExternalTaxRateDraft externalTaxRate;
 
-    private AddLineItem(final String productId, final Integer variantId, final Long quantity, @Nullable final Reference<Channel> supplyChannel, @Nullable final Reference<Channel> distributionChannel, @Nullable final CustomFieldsDraft custom, @Nullable final ExternalTaxRateDraft externalTaxRate) {
+    private AddLineItem(final String productId, final Integer variantId, @Nullable final Long quantity, @Nullable final ZonedDateTime addedAt, @Nullable final CustomFieldsDraft custom) {
         super("addLineItem");
         this.productId = productId;
         this.variantId = variantId;
         this.quantity = quantity;
-        this.supplyChannel = supplyChannel;
-        this.distributionChannel = distributionChannel;
+        this.addedAt = addedAt;
         this.custom = custom;
-        this.externalTaxRate = externalTaxRate;
     }
 
-    public static AddLineItem of(final ProductIdentifiable product, final int variantId, final long quantity) {
+    public static AddLineItem of(final ProductIdentifiable product, final int variantId, final Long quantity) {
         return of(product.getId(), variantId, quantity);
     }
 
-    public static AddLineItem of(final String productId, final int variantId, final long quantity) {
-        return new AddLineItem(productId, variantId, quantity, null, null, null, null);
+    public static AddLineItem of(final String productId, final int variantId, final Long quantity) {
+        return new AddLineItem(productId, variantId, quantity, null, null);
     }
 
     public String getProductId() {
@@ -66,38 +59,22 @@ public final class AddLineItem extends UpdateActionImpl<ShoppingList> implements
     }
 
     @Nullable
-    public Reference<Channel> getDistributionChannel() {
-        return distributionChannel;
+    public ZonedDateTime getAddedAt() {
+        return addedAt;
     }
 
-    @Nullable
-    public Reference<Channel> getSupplyChannel() {
-        return supplyChannel;
-    }
-
+    @Override
     @Nullable
     public CustomFieldsDraft getCustom() {
         return custom;
     }
 
-    @Nullable
-    public ExternalTaxRateDraft getExternalTaxRate() {
-        return externalTaxRate;
+    public AddLineItem withCustom(@Nullable final CustomFieldsDraft custom) {
+        return new AddLineItem(getProductId(), getVariantId(), getQuantity(), getAddedAt(), custom);
     }
 
-    public AddLineItem withSupplyChannel(final Referenceable<Channel> supplyChannel) {
-        return new AddLineItem(getProductId(), getVariantId(), getQuantity(), supplyChannel.toReference(), getDistributionChannel(), getCustom(), getExternalTaxRate());
+    public AddLineItem withAddedAt(@Nullable final ZonedDateTime addedAt) {
+        return new AddLineItem(getProductId(), getVariantId(), getQuantity(), addedAt, getCustom());
     }
 
-    public AddLineItem withDistributionChannel(final Referenceable<Channel> distributionChannel) {
-        return new AddLineItem(getProductId(), getVariantId(), getQuantity(), getSupplyChannel(), distributionChannel.toReference(), getCustom(), getExternalTaxRate());
-    }
-
-    public AddLineItem withCustom(final CustomFieldsDraft custom) {
-        return new AddLineItem(getProductId(), getVariantId(), getQuantity(), getSupplyChannel(), getDistributionChannel(), custom, getExternalTaxRate());
-    }
-
-    public AddLineItem withExternalTaxRate(@Nullable final ExternalTaxRateDraft externalTaxRate) {
-        return new AddLineItem(getProductId(), getVariantId(), getQuantity(), getSupplyChannel(), getDistributionChannel(), getCustom(), externalTaxRate);
-    }
 }

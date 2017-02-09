@@ -3,26 +3,44 @@ package io.sphere.sdk.shoppinglists;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import io.sphere.sdk.annotations.ResourceValue;
 import io.sphere.sdk.models.LocalizedString;
+import io.sphere.sdk.models.Reference;
+import io.sphere.sdk.products.ProductVariant;
+import io.sphere.sdk.producttypes.ProductType;
 import io.sphere.sdk.types.CustomFields;
 import io.sphere.sdk.types.TypeDraft;
 
 import javax.annotation.Nullable;
+import java.time.ZonedDateTime;
 
-@JsonDeserialize(as = TextLineItemImpl.class)
+@JsonDeserialize(as = LineItemImpl.class)
 @ResourceValue
-public interface TextLineItem
-{
+public interface LineItem {
     String getId();
 
-    LocalizedString getName();
+    String getProductId();
 
     @Nullable
-    LocalizedString getDescription();
+    Integer getVariantId();
+
+    @Nullable
+    Reference<ProductType> getProductType();
 
     Long getQuantity();
 
-    @Nullable
     CustomFields getCustom();
+
+    LocalizedString getName();
+
+    ZonedDateTime getAddedAt();
+
+    @Nullable
+    ZonedDateTime getDeactivatedAt();
+
+    @Nullable
+    LocalizedString getProductSlug();
+
+    @Nullable
+    ProductVariant getProductVariant();
 
     /**
      * An identifier for this resource which supports {@link CustomFields}.
@@ -31,7 +49,6 @@ public interface TextLineItem
      * @return ID of this resource type
      */
     static String resourceTypeId() {
-        return "shopping-list-text-line-item";
+        return "line-item";
     }
-
 }

@@ -1,7 +1,7 @@
 package io.sphere.sdk.shoppinglists.commands.updateactions;
 
-import io.sphere.sdk.carts.LineItem;
 import io.sphere.sdk.commands.UpdateActionImpl;
+import io.sphere.sdk.shoppinglists.LineItem;
 import io.sphere.sdk.shoppinglists.ShoppingList;
 
 import javax.annotation.Nullable;

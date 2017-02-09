@@ -3,10 +3,10 @@ package io.sphere.sdk.shoppinglists;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import io.sphere.sdk.annotations.FactoryMethod;
 import io.sphere.sdk.annotations.ResourceDraftValue;
-import io.sphere.sdk.carts.LineItem;
 import io.sphere.sdk.customers.Customer;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Reference;
+import io.sphere.sdk.types.CustomFieldsDraft;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -34,4 +34,7 @@ public interface ShoppingListDraft {
     List<LineItem> getLineItems();
 
     List<TextLineItem> getTextLineItems();
+
+    @Nullable
+    CustomFieldsDraft getCustom();
 }
