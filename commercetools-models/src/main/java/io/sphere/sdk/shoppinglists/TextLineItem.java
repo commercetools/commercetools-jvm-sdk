@@ -33,5 +33,4 @@ public interface TextLineItem
     static String resourceTypeId() {
         return "shopping-list-text-line-item";
     }
-
 }

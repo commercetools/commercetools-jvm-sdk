@@ -9,6 +9,7 @@ import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Resource;
 import io.sphere.sdk.types.Custom;
 import io.sphere.sdk.types.CustomFields;
+import io.sphere.sdk.types.TypeDraft;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -46,9 +47,6 @@ public interface ShoppingList extends Resource<ShoppingList>, Custom {
     @IgnoreInQueryModel
     List<TextLineItem> getTextLineItems();
 
-    @Nullable
-    CustomFields getCustom();
-
     /**
      * Creates a container which contains the full Java type information to deserialize this class from JSON.
      *
@@ -74,6 +72,16 @@ public interface ShoppingList extends Resource<ShoppingList>, Custom {
      * @return type hint
      */
     static String referenceTypeId() {
+        return "shopping-list";
+    }
+
+    /**
+     * An identifier for this resource which supports {@link CustomFields}.
+     * @see TypeDraft#getResourceTypeIds()
+     * @see io.sphere.sdk.types.Custom
+     * @return ID of this resource type
+     */
+    static String resourceTypeId() {
         return "shopping-list";
     }
 

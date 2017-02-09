@@ -33,6 +33,12 @@ public class ShoppingListFixtures {
         return ShoppingListDraftBuilder.of(name);
     }
 
+    public static void withShoppingList(final BlockingSphereClient client, final ShoppingListDraft draft, final Function<ShoppingList, ShoppingList> f){
+        final ShoppingList shoppingList = client.executeBlocking(ShoppingListCreateCommand.of(draft));
+        final ShoppingList possiblyUpdatedShoppingList = f.apply(shoppingList);
+        client.executeBlocking(ShoppingListDeleteCommand.of(possiblyUpdatedShoppingList));
+    }
+
     public static void withUpdateableShoppingList(final BlockingSphereClient client, final Function<ShoppingList, ShoppingList> f){
         final ShoppingListDraft draft = newShoppingListDraftBuilder()
                 .name(en(randomString()))
