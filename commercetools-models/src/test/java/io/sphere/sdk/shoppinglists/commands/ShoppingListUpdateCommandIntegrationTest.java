@@ -91,6 +91,7 @@ public class ShoppingListUpdateCommandIntegrationTest extends IntegrationTest {
                 final LineItem lineItem = updatedShoppingList.getLineItems().get(0);
                 assertThat(lineItem.getProductId()).isEqualTo(product.getId());
                 assertThat(lineItem.getQuantity()).isEqualTo(2);
+                assertThat(lineItem.getAddedAt()).isNotNull();
 
                 return updatedShoppingList;
             });
@@ -135,6 +136,7 @@ public class ShoppingListUpdateCommandIntegrationTest extends IntegrationTest {
                 final TextLineItem textLineItem = updatedShoppingList.getTextLineItems().get(0);
                 assertThat(textLineItem.getName()).isEqualTo(name);
                 assertThat(textLineItem.getQuantity()).isEqualTo(2);
+                assertThat(textLineItem.getAddedAt()).isNotNull();
 
                 return updatedShoppingList;
             });

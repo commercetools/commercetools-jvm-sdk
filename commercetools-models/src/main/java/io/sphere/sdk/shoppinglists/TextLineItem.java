@@ -7,6 +7,7 @@ import io.sphere.sdk.types.CustomFields;
 import io.sphere.sdk.types.TypeDraft;
 
 import javax.annotation.Nullable;
+import java.time.ZonedDateTime;
 
 @JsonDeserialize(as = TextLineItemImpl.class)
 @ResourceValue
@@ -23,6 +24,8 @@ public interface TextLineItem
 
     @Nullable
     CustomFields getCustom();
+
+    ZonedDateTime getAddedAt();
 
     /**
      * An identifier for this resource which supports {@link CustomFields}.

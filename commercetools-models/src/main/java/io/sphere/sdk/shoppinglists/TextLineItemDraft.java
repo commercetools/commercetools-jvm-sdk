@@ -7,6 +7,7 @@ import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.types.CustomFieldsDraft;
 
 import javax.annotation.Nullable;
+import java.time.ZonedDateTime;
 
 @JsonDeserialize(as = TextLineItemDraftDsl.class)
 @ResourceDraftValue(factoryMethods = {
@@ -23,4 +24,7 @@ public interface TextLineItemDraft
 
     @Nullable
     CustomFieldsDraft getCustom();
+
+    @Nullable
+    ZonedDateTime getAddedAt();
 }
