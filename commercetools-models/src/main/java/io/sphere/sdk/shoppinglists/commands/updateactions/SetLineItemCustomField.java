@@ -10,6 +10,8 @@ import io.sphere.sdk.types.customupdateactions.SetCustomFieldBase;
  *
  * {@doc.gen intro}
  *
+ * {@include.example io.sphere.sdk.shoppinglists.commands.LineItemCustomFieldsIntegrationTest#setCustomField()}
+ *
  * @see io.sphere.sdk.types.Custom
  */
 public final class SetLineItemCustomField extends SetCustomFieldBase<ShoppingList> {

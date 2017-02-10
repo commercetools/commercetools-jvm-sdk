@@ -8,6 +8,7 @@ import io.sphere.sdk.shoppinglists.commands.ShoppingListDeleteCommand;
 import io.sphere.sdk.shoppinglists.queries.ShoppingListQuery;
 import io.sphere.sdk.shoppinglists.queries.ShoppingListQueryModel;
 
+import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
 import java.util.function.BiFunction;
@@ -20,17 +21,58 @@ import static io.sphere.sdk.test.SphereTestUtils.*;
 public class ShoppingListFixtures {
 
     public static void withPersistentShoppingList(final BlockingSphereClient client, final Consumer<ShoppingList> consumer) {
-        final LocalizedString name = en("shopping list name");
-        final Optional<ShoppingList> fetchedDiscountCode = client.executeBlocking(ShoppingListQuery.of()
-                .withPredicates(ShoppingListQueryModel.of().name().lang(Locale.ENGLISH).is("shopping list name"))).head();
+        final String name = randomString();
+        final Optional<ShoppingList> fetchedShoppingList = client.executeBlocking(ShoppingListQuery.of()
+                .withPredicates(ShoppingListQueryModel.of().name().lang(Locale.ENGLISH).is(name))).head();
 
-        final ShoppingList discountCode = fetchedDiscountCode.orElseGet(() -> createShoppingList(client, "shopping list name"));
-        consumer.accept(discountCode);
+        final ShoppingList shoppingList = fetchedShoppingList.orElseGet(() -> createShoppingList(client, name));
+        consumer.accept(shoppingList);
     }
 
     public static ShoppingListDraftBuilder newShoppingListDraftBuilder() {
         final LocalizedString name = en("shopping list name");
         return ShoppingListDraftBuilder.of(name);
+    }
+
+    public static ShoppingListDraftDsl newShoppingListDraftWithLineItem(final Product product, final Long quantity) {
+        final List<LineItemDraft> lineItemDrafts = asList(
+                LineItemDraftBuilder.of(product.getId()).quantity(quantity).build());
+
+        final ShoppingListDraftDsl shoppingListDraft = newShoppingListDraftBuilder().lineItems(lineItemDrafts).build();
+        return shoppingListDraft;
+    }
+
+    public static ShoppingListDraftDsl newShoppingListDraftWithTextLineItem(final Long quantity) {
+        final List<TextLineItemDraft> textLineItemDrafts = asList(
+                TextLineItemDraftBuilder.of(en(randomString()), quantity).build());
+
+        final ShoppingListDraftDsl shoppingListDraft = newShoppingListDraftBuilder().textLineItems(textLineItemDrafts).build();
+        return shoppingListDraft;
+    }
+
+
+    public static ShoppingListDraftDsl newShoppingListDraftWithTextLineItems() {
+        final List<TextLineItemDraft> textLineItemDrafts = asList(
+                TextLineItemDraftBuilder.of(en(randomString()), 1L).build(),
+                TextLineItemDraftBuilder.of(en(randomString()), 2L).build(),
+                TextLineItemDraftBuilder.of(en(randomString()), 3L).build());
+
+        final ShoppingListDraftDsl shoppingListDraft = newShoppingListDraftBuilder().textLineItems(textLineItemDrafts).build();
+        return shoppingListDraft;
+    }
+    public static ShoppingListDraftDsl newShoppingListDraftWithLineItems(final Product product) {
+        final List<LineItemDraft> lineItemDrafts = asList(
+                LineItemDraftBuilder.of(product.getId()).quantity(1L).build(),
+                LineItemDraftBuilder.of(product.getId()).quantity(2L).build(),
+                LineItemDraftBuilder.of(product.getId()).quantity(3L).build());
+        final ShoppingListDraftDsl shoppingListDraft = newShoppingListDraftBuilder().lineItems(lineItemDrafts).build();
+        return shoppingListDraft;
+    }
+
+    public static void withShoppingList(final BlockingSphereClient client, final Function<ShoppingList, ShoppingList> f) {
+        final ShoppingList shoppingList = createShoppingList(client, randomString());
+        final ShoppingList possiblyUpdatedShoppingList = f.apply(shoppingList);
+        client.executeBlocking(ShoppingListDeleteCommand.of(possiblyUpdatedShoppingList));
     }
 
     public static void withShoppingList(final BlockingSphereClient client, final ShoppingListDraft draft, final Function<ShoppingList, ShoppingList> f){
@@ -63,6 +105,7 @@ public class ShoppingListFixtures {
     private static ShoppingList createShoppingList(final BlockingSphereClient client, final String name) {
         final ShoppingListDraft draft = newShoppingListDraftBuilder()
                 .name(LocalizedString.ofEnglish(name))
+                .key(randomKey())
                 .build();
         return client.executeBlocking(ShoppingListCreateCommand.of(draft));
     }

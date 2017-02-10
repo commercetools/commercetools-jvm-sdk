@@ -5,7 +5,7 @@ import io.sphere.sdk.expansion.ExpansionModelImpl;
 
 import java.util.List;
 
-public class ShoppingListExpansionModelImpl<T> extends ExpansionModelImpl<T> implements ShoppingListExpansionModel<T> {
+final class ShoppingListExpansionModelImpl<T> extends ExpansionModelImpl<T> implements ShoppingListExpansionModel<T> {
     public ShoppingListExpansionModelImpl(final List<String> parentPath, final String path) {
         super(parentPath, path);
     }
@@ -19,4 +19,8 @@ public class ShoppingListExpansionModelImpl<T> extends ExpansionModelImpl<T> imp
         return CustomerExpansionModel.of(buildPathExpression(), "customer");
     }
 
+    @Override
+    public LineItemExpansionModel<T> lineItems() {
+        return LineItemExpansionModel.of(buildPathExpression(), "lineItems[*]");
+    }
 }

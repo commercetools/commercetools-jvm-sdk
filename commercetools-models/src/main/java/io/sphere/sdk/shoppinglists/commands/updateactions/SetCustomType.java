@@ -13,6 +13,8 @@ import java.util.Map;
  *
  * {@doc.gen intro}
  *
+ * {@include.example io.sphere.sdk.shoppinglists.commands.ShoppingListCustomFieldsIntegrationTest#setCustomType()}
+ *
  * @see io.sphere.sdk.types.Custom
  */
 public class SetCustomType  extends SetCustomTypeBase<ShoppingList> {

@@ -18,7 +18,7 @@ import java.util.List;
 @ResourceValue
 @ResourceInfo(pluralName = "shopping lists", pathElement = "shopping-lists")
 @HasQueryEndpoint
-@HasByIdGetEndpoint(javadocSummary = "Fetches a shopping list by ID.", includeExamples = "io.sphere.sdk.shoppinglists.queries.ShoppingListByIdGetIntegrationTest#execution()")
+@HasByIdGetEndpoint(javadocSummary = "Fetches a shopping list by ID.", includeExamples = "io.sphere.sdk.shoppinglists.queries.ShoppingListByIdGetIntegrationTest#byIdGet()")
 @HasByKeyGetEndpoint
 @HasUpdateCommand(javadocSummary = "Updates a shopping list.", updateWithKey = true)
 @HasCreateCommand(javadocSummary = "Creates a {@link io.sphere.sdk.shoppinglists.ShoppingList}.", includeExamples = "io.sphere.sdk.shoppinglists.commands.ShoppingListCreateCommandIntegrationTest#execution()")

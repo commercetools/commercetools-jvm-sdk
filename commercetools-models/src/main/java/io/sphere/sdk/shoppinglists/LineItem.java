@@ -40,7 +40,7 @@ public interface LineItem {
     LocalizedString getProductSlug();
 
     @Nullable
-    ProductVariant getProductVariant();
+    Reference<ProductVariant> getProductVariant();
 
     /**
      * An identifier for this resource which supports {@link CustomFields}.

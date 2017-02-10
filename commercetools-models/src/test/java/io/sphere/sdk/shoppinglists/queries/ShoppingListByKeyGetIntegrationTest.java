@@ -7,15 +7,17 @@ import org.junit.Test;
 import static io.sphere.sdk.shoppinglists.ShoppingListFixtures.withShoppingList;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class ShoppingListByIdGetIntegrationTest extends IntegrationTest
+public class ShoppingListByKeyGetIntegrationTest extends IntegrationTest
 {
     @Test
-    public void byIdGet() throws Exception {
+    public void byKeyGet() throws Exception {
         withShoppingList(client(), shoppingList -> {
-            final ShoppingList fetchedShoppingList = client().executeBlocking(ShoppingListByIdGet.of(shoppingList.getId()));
-            assertThat(fetchedShoppingList.getId()).isEqualTo(shoppingList.getId());
+            final ShoppingList fetchedShoppingList = client().executeBlocking(ShoppingListByKeyGet.of(shoppingList.getKey()));
 
-            return fetchedShoppingList;
+            assertThat(fetchedShoppingList.getId()).isEqualTo(shoppingList.getId());
+            assertThat(fetchedShoppingList.getKey()).isEqualTo(shoppingList.getKey());
+
+            return shoppingList;
         });
     }
 }

@@ -56,20 +56,20 @@ public class ShoppingListCustomFieldsIntegrationTest extends IntegrationTest {
             final CustomFieldsDraft customFieldsDraft = CustomFieldsDraftBuilder.ofType(type).addObject(STRING_FIELD_NAME, "a value").build();
             final ShoppingListDraftDsl shoppingListDraft = newShoppingListDraftBuilder().custom(customFieldsDraft).build();
             withShoppingList(client(), shoppingListDraft, shoppingList -> {
-                final ShoppingList updatedShoppingList1 = client().executeBlocking(ShoppingListUpdateCommand.of(shoppingList,
+                final ShoppingList shoppingListWithCustomType = client().executeBlocking(ShoppingListUpdateCommand.of(shoppingList,
                         SetCustomType.ofTypeIdAndObjects(type.getId(), STRING_FIELD_NAME, "a value")));
 
-                assertThat(updatedShoppingList1.getCustom().getField(STRING_FIELD_NAME, TypeReferences.stringTypeReference()))
+                assertThat(shoppingListWithCustomType.getCustom().getField(STRING_FIELD_NAME, TypeReferences.stringTypeReference()))
                         .isEqualTo("a value");
 
                 final String newValue = randomString();
-                final ShoppingList updatedShoppingList2 = client().executeBlocking(ShoppingListUpdateCommand.of(updatedShoppingList1,
+                final ShoppingList shoppingListWithCustomField = client().executeBlocking(ShoppingListUpdateCommand.of(shoppingListWithCustomType,
                         SetCustomField.ofObject(STRING_FIELD_NAME, newValue)));
 
-                assertThat(updatedShoppingList2.getCustom().getField(STRING_FIELD_NAME, TypeReferences.stringTypeReference()))
+                assertThat(shoppingListWithCustomField.getCustom().getField(STRING_FIELD_NAME, TypeReferences.stringTypeReference()))
                         .isEqualTo(newValue);
 
-                return updatedShoppingList2;
+                return shoppingListWithCustomField;
             });
             return type;
         });
