@@ -108,7 +108,7 @@ import java.util.function.Function;
  <h3 class=released-version id="v1_11_0">1.11.0 (07.02.2017)</h3>
  <ul>
  <li class=new-in-release>{@link Asset}s on categories</li></li>
- <li class=new-in-release>{@link OrderImportDraft#getInventoryMode()}</li>
+ <li class=new-in-release>{@link OrderImportDraft} can now provide the {@code inventoryMode} to track inventory</li>
  <li class=fixed-in-release>{@code Set} types preserve input order, see <a href="https://github.com/commercetools/commercetools-jvm-sdk/issues/1294">#1294</a></li>
  <li class=fixed-in-release>{@link ProductDraftBuilder} was not preserving the {@code key} when using a {@link ProductDraft}</li>
  </ul>
