@@ -15,7 +15,7 @@ import javax.annotation.Nullable;
  *
  * {@include.example io.sphere.sdk.carts.commands.CartUpdateCommandIntegrationTest#addShoppingList()}
  */
-public class AddShoppingList extends UpdateActionImpl<Cart> {
+public final class AddShoppingList extends UpdateActionImpl<Cart> {
     private final Reference<ShoppingList> shoppingList;
     @Nullable
     private final Reference<Channel> supplyChannel;

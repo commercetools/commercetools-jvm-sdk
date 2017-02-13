@@ -3,6 +3,7 @@ package io.sphere.sdk.shoppinglists;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import io.sphere.sdk.annotations.*;
+import io.sphere.sdk.cartdiscounts.CartDiscount;
 import io.sphere.sdk.customers.Customer;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Reference;
@@ -64,6 +65,23 @@ public interface ShoppingList extends Resource<ShoppingList>, Custom {
                 return "TypeReference<ShoppingList>";
             }
         };
+    }
+
+    /**
+     * Creates a reference for one item of this class by a known ID.
+     *
+     * <p>An example for categories but this applies for other resources, too:</p>
+     * {@include.example io.sphere.sdk.categories.CategoryTest#referenceOfId()}
+     *
+     * <p>If you already have a resource object, then use {@link #toReference()} instead:</p>
+     *
+     * {@include.example io.sphere.sdk.categories.CategoryTest#toReference()}
+     *
+     * @param id the ID of the resource which should be referenced.
+     * @return reference
+     */
+    static Reference<CartDiscount> referenceOfId(final String id) {
+        return Reference.of(referenceTypeId(), id);
     }
 
     /**
