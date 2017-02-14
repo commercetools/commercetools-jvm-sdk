@@ -1,12 +1,15 @@
 package io.sphere.sdk.sequencegenerators;
 
 import io.sphere.sdk.client.ConcurrentModificationException;
+import io.sphere.sdk.client.ErrorResponseException;
 import io.sphere.sdk.client.SphereClient;
 import io.sphere.sdk.customobjects.CustomObject;
 import io.sphere.sdk.customobjects.CustomObjectDraft;
 import io.sphere.sdk.customobjects.commands.CustomObjectUpsertCommand;
 import io.sphere.sdk.customobjects.queries.CustomObjectByKeyGet;
 import io.sphere.sdk.models.Base;
+import io.sphere.sdk.models.errors.DuplicateFieldError;
+import io.sphere.sdk.models.errors.ErrorResponse;
 import io.sphere.sdk.utils.CompletableFutureUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -54,7 +57,7 @@ public final class CustomObjectBigIntegerNumberGenerator extends Base implements
     }
 
     private CompletionStage<BigInteger> tryGetNextNumber(final int timeToLive, final Throwable throwable) {
-        if (timeToLive > 0 && isNullOrConcurrentException(throwable)) {
+        if (timeToLive > 0 && isRecoverableException(throwable)) {
             final CompletionStage<BigInteger> bigIntegerCompletionStage = incrementAndGetSequenceNumber();
             return CompletableFutureUtils.recoverWith(bigIntegerCompletionStage, (error) -> tryGetNextNumber(timeToLive - 1, error));
         } else {
@@ -62,8 +65,14 @@ public final class CustomObjectBigIntegerNumberGenerator extends Base implements
         }
     }
 
-    private boolean isNullOrConcurrentException(final Throwable throwable) {
-        return throwable == null || throwable.getCause() instanceof ConcurrentModificationException;
+    private boolean isRecoverableException(final Throwable throwable) {
+        if (throwable != null) {
+            final Throwable cause = throwable.getCause();
+            return cause instanceof ConcurrentModificationException
+                    || (cause instanceof ErrorResponseException
+                        && ((ErrorResponse) cause).getErrors().stream().anyMatch(e -> e.getCode().equals(DuplicateFieldError.CODE)));
+        }
+        return true;
     }
 
     private CompletionStage<BigInteger> incrementAndGetSequenceNumber() {
