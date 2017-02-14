@@ -12,17 +12,18 @@ import io.sphere.sdk.inventory.commands.InventoryEntryDeleteCommand;
 import io.sphere.sdk.products.ProductFixtures;
 import io.sphere.sdk.products.ProductProjection;
 import io.sphere.sdk.products.ProductVariantAvailability;
-import io.sphere.sdk.search.*;
-import io.sphere.sdk.search.model.RangeTermFacetSearchModel;
+import io.sphere.sdk.search.PagedSearchResult;
+import io.sphere.sdk.search.RangeFacetExpression;
+import io.sphere.sdk.search.RangeFacetResult;
 import io.sphere.sdk.test.IntegrationTest;
 import org.junit.Test;
 
 import java.math.BigDecimal;
 import java.time.ZonedDateTime;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.function.Function;
 
 import static io.sphere.sdk.channels.ChannelFixtures.withChannelOfRole;
 import static io.sphere.sdk.products.ProductFixtures.*;
@@ -52,6 +53,22 @@ public class ProductAvailabilitySearchIntegrationTest extends IntegrationTest {
                         .plusQueryFilters(m -> m.id().is(product.getId()))
                         .plusQueryFilters(m -> m.allVariants().availability()
                                 .channels().channelId(channel.getId()).isOnStock().is(true));
+                assertEventually(() -> {
+                    final PagedSearchResult<ProductProjection> res = client().executeBlocking(request);
+                    assertThat(res.getResults()).hasSize(1);
+                });
+            });
+        });
+    }
+
+    @Test
+    public void searchForIsOnStockInChannels() {
+        withChannelOfRole(client(), ChannelRole.INVENTORY_SUPPLY, channel -> {
+            withProductOfStockAndChannel(client(), 2, channel, product -> {
+                final ProductProjectionSearch request = ProductProjectionSearch.ofStaged()
+                        .plusQueryFilters(m -> m.id().is(product.getId()))
+                        .plusQueryFilters(m -> m.allVariants().availability()
+                                .isOnStockInChannels().channels(Arrays.asList("noChannelId", channel.getId())));
                 assertEventually(() -> {
                     final PagedSearchResult<ProductProjection> res = client().executeBlocking(request);
                     assertThat(res.getResults()).hasSize(1);

@@ -10,6 +10,8 @@ public interface ProductVariantAvailabilityFilterSearchModel<T> extends ProductV
     @Override
     TermFilterSearchModel<T, Boolean> isOnStock();
 
+    IsOnStockInChannelsSearchModel<T> isOnStockInChannels();
+
     @Override
     RangeTermFilterSearchModel<T, BigDecimal> availableQuantity();
 
