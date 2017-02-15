@@ -85,7 +85,7 @@
                 -->
                 <groupId>org.revapi</groupId>
                 <artifactId>revapi-maven-plugin</artifactId>
-                <version>0.7.0</version>
+                <version>0.8.2</version>
                 <configuration>
                     <oldArtifacts>
                         <artifact>${project.groupId}:${project.artifactId}:1.10.0</artifact>
@@ -93,15 +93,12 @@
                     <newArtifacts>
                         <artifact>${project.groupId}:${project.artifactId}:${project.version}</artifact>
                     </newArtifacts>
-                    <analysisConfigurationFiles>
-                        <file>${project.parent.basedir}/revapi-config.json</file>
-                    </analysisConfigurationFiles>
                 </configuration>
                 <dependencies>
                     <dependency>
                         <groupId>org.revapi</groupId>
                         <artifactId>revapi-java</artifactId>
-                        <version>0.11.0</version>
+                        <version>0.13.2</version>
                     </dependency>
                 </dependencies>
             </plugin>
