@@ -9,6 +9,7 @@ import io.sphere.sdk.http.HttpClient;
 import io.sphere.sdk.http.HttpMethod;
 import io.sphere.sdk.http.HttpRequest;
 import io.sphere.sdk.http.HttpResponse;
+import io.sphere.sdk.models.errors.DuplicateFieldError;
 import io.sphere.sdk.test.IntegrationTest;
 import io.sphere.sdk.utils.CompletableFutureUtils;
 import net.jcip.annotations.NotThreadSafe;
@@ -21,8 +22,7 @@ import java.util.concurrent.CompletionStage;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import static io.sphere.sdk.http.HttpStatusCode.CONFLICT_409;
-import static io.sphere.sdk.http.HttpStatusCode.NOT_FOUND_404;
+import static io.sphere.sdk.http.HttpStatusCode.*;
 import static io.sphere.sdk.test.SphereTestUtils.randomKey;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.catchThrowable;
@@ -105,31 +105,53 @@ public class BigIntegerNumberGeneratorIntegrationTest extends IntegrationTest {
         assertThat(numbersGenerated.containsAll(expectedNumbers)).isTrue();
     }
 
+
     @Test
-    public void failWithNotConcurrentModificationException() {
+    public void failWithNotFoundException() {
         final String container = randomKey();
         final String key = randomKey();
 
-        //Validate that generator is executed just once when there is a non 409 exception
         final ErrorResponseHttpClient notFoundRequestClient = new ErrorResponseHttpClient(NOT_FOUND_404);
         final CustomObjectBigIntegerNumberGeneratorConfig config =
                 CustomObjectBigIntegerNumberGeneratorConfigBuilder.of(getSphereClient(notFoundRequestClient), key)
                         .container(container)
                         .build();
         final BigIntegerNumberGenerator generator = CustomObjectBigIntegerNumberGenerator.of(config);
-        Throwable thrown = catchThrowable(() -> { generator.getNextNumber().toCompletableFuture().join(); });
+        Throwable thrown = catchThrowable(() -> {
+            generator.getNextNumber().toCompletableFuture().join();
+        });
         assertThat(thrown).isNotNull();
         assertThat(notFoundRequestClient.getGetRequestsCount()).isEqualTo(1);
+    }
 
-        //Validate that generator is executed more than once when there is a 409 exception
+    @Test
+    public void tryToRecoverWithConflictException() {
+        final String container = randomKey();
+        final String key = randomKey();
+
         final ErrorResponseHttpClient concurrentRequestClient = new ErrorResponseHttpClient(CONFLICT_409);
-        final CustomObjectBigIntegerNumberGeneratorConfig config2 =
+        final CustomObjectBigIntegerNumberGeneratorConfig config =
                 CustomObjectBigIntegerNumberGeneratorConfigBuilder.of(getSphereClient(concurrentRequestClient), key)
                         .container(container)
                         .build();
-        final BigIntegerNumberGenerator generator2 = CustomObjectBigIntegerNumberGenerator.of(config2);
-        catchThrowable(() -> { generator2.getNextNumber().toCompletableFuture().join(); });
-        assertThat(concurrentRequestClient.getGetRequestsCount()).isEqualTo(config2.getMaxRetryAttempts());
+        final BigIntegerNumberGenerator generator = CustomObjectBigIntegerNumberGenerator.of(config);
+        catchThrowable(() -> { generator.getNextNumber().toCompletableFuture().join(); });
+        assertThat(concurrentRequestClient.getGetRequestsCount()).isEqualTo(config.getMaxRetryAttempts());
+    }
+
+    @Test
+    public void tryToRecoverWithDuplicateFieldException() {
+        final String container = randomKey();
+        final String key = randomKey();
+
+        final ErrorResponseHttpClient concurrentRequestClient = new ErrorResponseHttpClient(BAD_REQUEST_400, DuplicateFieldError.CODE, "");
+        final CustomObjectBigIntegerNumberGeneratorConfig config =
+                CustomObjectBigIntegerNumberGeneratorConfigBuilder.of(getSphereClient(concurrentRequestClient), key)
+                        .container(container)
+                        .build();
+        final BigIntegerNumberGenerator generator = CustomObjectBigIntegerNumberGenerator.of(config);
+        catchThrowable(() -> { generator.getNextNumber().toCompletableFuture().join(); });
+        assertThat(concurrentRequestClient.getGetRequestsCount()).isEqualTo(config.getMaxRetryAttempts());
     }
 
     private SphereClient getSphereClient(final HttpClient httpClient) {
@@ -146,10 +168,18 @@ public class BigIntegerNumberGeneratorIntegrationTest extends IntegrationTest {
 
     private class ErrorResponseHttpClient implements HttpClient {
         private int getRequestsCount = 0;
-        private int errorCode;
+        private int statusCode;
+        private String errorCode;
+        private String errorMessage;
 
-        ErrorResponseHttpClient(final int errorCode) {
+        ErrorResponseHttpClient(final int statusCode) {
+            this(statusCode, "", "");
+        }
+
+        ErrorResponseHttpClient(final int statusCode, final String errorCode, final String errorMessage) {
+            this.statusCode = statusCode;
             this.errorCode = errorCode;
+            this.errorMessage = errorMessage;
         }
 
         @Override
@@ -158,9 +188,13 @@ public class BigIntegerNumberGeneratorIntegrationTest extends IntegrationTest {
                 getRequestsCount++;
             }
             final String message = "{\n" +
-                    "  \"statusCode\" : " + this.errorCode + "\n" +
+                    "  \"statusCode\" : " + this.statusCode + ",\n" +
+                    "  \"errors\" : [{ \n" +
+                    "       \"code\" : \"" + this.errorCode + "\",\n" +
+                    "       \"message\" : \"" + this.errorMessage + "\"\n" +
+                    "  }]\n" +
                     "}";
-            return CompletableFuture.completedFuture(HttpResponse.of(this.errorCode, message));
+            return CompletableFuture.completedFuture(HttpResponse.of(this.statusCode, message));
         }
 
         @Override
