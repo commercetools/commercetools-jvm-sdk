@@ -8,6 +8,11 @@ import io.sphere.sdk.types.CustomFields;
 import javax.annotation.Nullable;
 import java.time.ZonedDateTime;
 
+/**
+ * A draft for a new {@link LineItem}.
+ *
+ * @see LineItemDraftBuilder
+ */
 @JsonDeserialize(as = LineItemDraftDsl.class)
 @ResourceDraftValue(factoryMethods = {
         @FactoryMethod(parameterNames = {"productId"}),

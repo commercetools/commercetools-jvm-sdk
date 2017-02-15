@@ -6,7 +6,7 @@ import io.sphere.sdk.shoppinglists.ShoppingList;
 import io.sphere.sdk.shoppinglists.TextLineItem;
 
 /**
- * Changes the text line item quantity.
+ * Changes the text line item name.
  *
  * {@doc.gen intro}
  *

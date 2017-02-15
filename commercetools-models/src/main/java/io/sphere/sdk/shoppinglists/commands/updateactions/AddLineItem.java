@@ -10,7 +10,7 @@ import javax.annotation.Nullable;
 import java.time.ZonedDateTime;
 
 /**
- * Adds a line item.
+ * Adds a line item to a shopping list.
  *
  * {@doc.gen intro}
  *
@@ -38,22 +38,24 @@ public final class AddLineItem extends UpdateActionImpl<ShoppingList> implements
         this.custom = custom;
     }
 
-    public static AddLineItem of(final ProductIdentifiable product, final int variantId, final Long quantity) {
-        return of(product.getId(), variantId, quantity);
+    public static AddLineItem of(final ProductIdentifiable product) {
+        return of(product.getId());
     }
 
-    public static AddLineItem of(final String productId, final int variantId, final Long quantity) {
-        return new AddLineItem(productId, variantId, quantity, null, null);
+    public static AddLineItem of(final String productId) {
+        return new AddLineItem(productId, null, null, null, null);
     }
 
     public String getProductId() {
         return productId;
     }
 
+    @Nullable
     public Integer getVariantId() {
         return variantId;
     }
 
+    @Nullable
     public Long getQuantity() {
         return quantity;
     }
@@ -67,6 +69,14 @@ public final class AddLineItem extends UpdateActionImpl<ShoppingList> implements
     @Nullable
     public CustomFieldsDraft getCustom() {
         return custom;
+    }
+
+    public AddLineItem withVariantId(@Nullable final Integer variantId) {
+        return new AddLineItem(getProductId(), variantId, getQuantity(), getAddedAt(), getCustom());
+    }
+
+    public AddLineItem withQuantity(@Nullable final Long quantity) {
+        return new AddLineItem(getProductId(), getVariantId(), quantity, getAddedAt(), getCustom());
     }
 
     public AddLineItem withCustom(@Nullable final CustomFieldsDraft custom) {

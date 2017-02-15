@@ -28,7 +28,7 @@ public class TextLineItemCustomFieldsIntegrationTest extends IntegrationTest {
                 final String value = randomString();
                 final CustomFieldsDraft customFieldsDraft = CustomFieldsDraftBuilder.ofType(type).addObject(STRING_FIELD_NAME, value).build();
                 final ShoppingList updatedShoppingList = client().executeBlocking(
-                        ShoppingListUpdateCommand.of(shoppingList, AddTextLineItem.of(en(randomString()), 1L).withCustom(customFieldsDraft)));
+                        ShoppingListUpdateCommand.of(shoppingList, AddTextLineItem.of(en(randomString())).withQuantity(1L).withCustom(customFieldsDraft)));
 
                 final CustomFields custom = updatedShoppingList.getTextLineItems().get(0).getCustom();
                 assertThat(custom.getField(STRING_FIELD_NAME, TypeReferences.stringTypeReference())).isEqualTo(value);

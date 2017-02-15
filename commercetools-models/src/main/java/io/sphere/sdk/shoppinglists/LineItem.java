@@ -6,12 +6,25 @@ import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.products.ProductVariant;
 import io.sphere.sdk.producttypes.ProductType;
+import io.sphere.sdk.shoppinglists.commands.updateactions.*;
 import io.sphere.sdk.types.CustomFields;
 import io.sphere.sdk.types.TypeDraft;
 
 import javax.annotation.Nullable;
 import java.time.ZonedDateTime;
 
+/**
+ * A LineItem is a reference to a product variant in a product in its current version with a quantity.
+ * A LineItem can have {@link io.sphere.sdk.types.Custom custom fields}.
+ *
+ * @see AddLineItem
+ * @see RemoveLineItem
+ * @see ChangeLineItemQuantity
+ * @see SetLineItemCustomField
+ * @see SetLineItemCustomType
+ *
+ * @see ShoppingList#getLineItems()
+ */
 @JsonDeserialize(as = LineItemImpl.class)
 @ResourceValue
 public interface LineItem {
@@ -22,7 +35,6 @@ public interface LineItem {
     @Nullable
     Integer getVariantId();
 
-    @Nullable
     Reference<ProductType> getProductType();
 
     Long getQuantity();

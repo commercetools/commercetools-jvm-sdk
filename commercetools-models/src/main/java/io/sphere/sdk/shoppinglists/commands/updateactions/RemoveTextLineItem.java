@@ -7,7 +7,7 @@ import io.sphere.sdk.shoppinglists.TextLineItem;
 import javax.annotation.Nullable;
 
 /**
- * Removes a text line item.
+ * Removes a text line item from a shopping list.
  *
  * {@doc.gen intro}
  *
@@ -26,16 +26,8 @@ public final class RemoveTextLineItem extends UpdateActionImpl<ShoppingList> {
         this.quantity = quantity;
     }
 
-    public static RemoveTextLineItem of(final String textLineItemId, @Nullable final Long quantity) {
-        return new RemoveTextLineItem(textLineItemId, quantity);
-    }
-
     public static RemoveTextLineItem of(final String textLineItemId) {
-        return of(textLineItemId, null);
-    }
-
-    public static RemoveTextLineItem of(final TextLineItem textLineItem, @Nullable final Long quantity) {
-        return of(textLineItem.getId(), quantity);
+        return new RemoveTextLineItem(textLineItemId, null);
     }
 
     public static RemoveTextLineItem of(final TextLineItem textLineItem) {
@@ -49,5 +41,9 @@ public final class RemoveTextLineItem extends UpdateActionImpl<ShoppingList> {
     @Nullable
     public Long getQuantity() {
         return quantity;
+    }
+
+    public RemoveTextLineItem withQuantity(@Nullable final Long quantity) {
+        return new RemoveTextLineItem(getTextLineItemId(), quantity);
     }
 }

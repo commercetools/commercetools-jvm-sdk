@@ -21,8 +21,8 @@ public final class ChangeName extends UpdateActionImpl<ShoppingList> {
         this.name = name;
     }
 
-    public static io.sphere.sdk.shoppinglists.commands.updateactions.ChangeName of(final LocalizedString name) {
-        return new io.sphere.sdk.shoppinglists.commands.updateactions.ChangeName(name);
+    public static ChangeName of(final LocalizedString name) {
+        return new ChangeName(name);
     }
 
     public LocalizedString getName() {

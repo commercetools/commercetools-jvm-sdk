@@ -93,13 +93,14 @@ public class ShoppingListUpdateCommandIntegrationTest extends IntegrationTest {
         withTaxedProduct(client(), product -> {
             withUpdateableShoppingList(client(), shoppingList -> {
                 final ShoppingList updatedShoppingList = client().executeBlocking(
-                        ShoppingListUpdateCommand.of(shoppingList, AddLineItem.of(product, 1 , 2L)));
+                        ShoppingListUpdateCommand.of(shoppingList, AddLineItem.of(product).withVariantId(1).withQuantity(2L)));
 
                 assertThat(updatedShoppingList.getLineItems()).hasSize(1);
 
                 final LineItem lineItem = updatedShoppingList.getLineItems().get(0);
 
                 assertThat(lineItem.getProductId()).isEqualTo(product.getId());
+                assertThat(lineItem.getVariantId()).isEqualTo(1);
                 assertThat(lineItem.getQuantity()).isEqualTo(2);
                 assertThat(lineItem.getAddedAt()).isNotNull();
 
@@ -117,18 +118,38 @@ public class ShoppingListUpdateCommandIntegrationTest extends IntegrationTest {
                 final LineItem lineItem = shoppingList.getLineItems().get(0);
 
                 final ShoppingList shoppingListWithRemovedLineItem = client().executeBlocking(
-                        ShoppingListUpdateCommand.of(shoppingList, RemoveLineItem.of(lineItem, 2L)));
+                        ShoppingListUpdateCommand.of(shoppingList, RemoveLineItem.of(lineItem).withQuantity(2L)));
 
                 assertThat(shoppingListWithRemovedLineItem.getLineItems()).hasSize(1);
                 final LineItem updatedLineItem = shoppingListWithRemovedLineItem.getLineItems().get(0);
                 assertThat(updatedLineItem.getQuantity()).isEqualTo(1L);
 
                 final ShoppingList shoppingListWithoutLineItem = client().executeBlocking(
-                        ShoppingListUpdateCommand.of(shoppingListWithRemovedLineItem, RemoveLineItem.of(lineItem, 1L)));
+                        ShoppingListUpdateCommand.of(shoppingListWithRemovedLineItem, RemoveLineItem.of(lineItem).withQuantity(1L)));
 
                 assertThat(shoppingListWithoutLineItem.getLineItems()).isEmpty();
 
                 return shoppingListWithoutLineItem;
+            });
+        });
+    }
+
+    @Test
+    public void changeLineItemQuantity() throws Exception {
+        withTaxedProduct(client(), product -> {
+            final ShoppingListDraftDsl shoppingListDraft = newShoppingListDraftWithLineItem(product, 3L);
+
+            withShoppingList(client(), shoppingListDraft, shoppingList -> {
+                final LineItem lineItem = shoppingList.getLineItems().get(0);
+
+                final ShoppingList updatedShoppingList = client().executeBlocking(
+                        ShoppingListUpdateCommand.of(shoppingList, ChangeLineItemQuantity.of(lineItem, 2L)));
+
+                assertThat(updatedShoppingList.getLineItems()).hasSize(1);
+                final LineItem updatedTextLineItem = updatedShoppingList.getLineItems().get(0);
+                assertThat(updatedTextLineItem.getQuantity()).isEqualTo(2L);
+
+                return updatedShoppingList;
             });
         });
     }
@@ -139,7 +160,7 @@ public class ShoppingListUpdateCommandIntegrationTest extends IntegrationTest {
             withUpdateableShoppingList(client(), shoppingList -> {
                 final LocalizedString name = en(randomString());
                 final ShoppingList updatedShoppingList = client().executeBlocking(
-                        ShoppingListUpdateCommand.of(shoppingList, AddTextLineItem.of(name, 2)));
+                        ShoppingListUpdateCommand.of(shoppingList, AddTextLineItem.of(name).withQuantity(2L)));
 
                 assertThat(updatedShoppingList.getTextLineItems()).hasSize(1);
 
@@ -163,14 +184,14 @@ public class ShoppingListUpdateCommandIntegrationTest extends IntegrationTest {
                 final TextLineItem textLineItemToRemove = shoppingList.getTextLineItems().get(0);
 
                 final ShoppingList shappingListWithRemovedLineItem = client().executeBlocking(
-                        ShoppingListUpdateCommand.of(shoppingList, RemoveTextLineItem.of(textLineItemToRemove, 2L)));
+                        ShoppingListUpdateCommand.of(shoppingList, RemoveTextLineItem.of(textLineItemToRemove).withQuantity(2L)));
 
                 assertThat(shappingListWithRemovedLineItem.getTextLineItems()).hasSize(1);
                 final TextLineItem textLineItem = shappingListWithRemovedLineItem.getTextLineItems().get(0);
                 assertThat(textLineItem.getQuantity()).isEqualTo(1L);
 
                 final ShoppingList shoppingListWithoutTextLine = client().executeBlocking(
-                        ShoppingListUpdateCommand.of(shappingListWithRemovedLineItem, RemoveTextLineItem.of(textLineItem, 1L)));
+                        ShoppingListUpdateCommand.of(shappingListWithRemovedLineItem, RemoveTextLineItem.of(textLineItem).withQuantity(1L)));
 
                 assertThat(shoppingListWithoutTextLine.getTextLineItems()).isEmpty();
 
@@ -230,7 +251,7 @@ public class ShoppingListUpdateCommandIntegrationTest extends IntegrationTest {
 
                 final LocalizedString newDescription = en(randomString());
                 final ShoppingList updatedShoppingList = client().executeBlocking(
-                        ShoppingListUpdateCommand.of(shoppingList, SetTextLineItemDescription.of(textLineItem, newDescription)));
+                        ShoppingListUpdateCommand.of(shoppingList, SetTextLineItemDescription.of(textLineItem).withDescription(newDescription)));
 
                 assertThat(updatedShoppingList.getTextLineItems()).hasSize(1);
                 final TextLineItem updatedTextLineItem = updatedShoppingList.getTextLineItems().get(0);

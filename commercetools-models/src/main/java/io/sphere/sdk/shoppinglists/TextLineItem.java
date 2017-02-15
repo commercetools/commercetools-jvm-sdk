@@ -9,6 +9,20 @@ import io.sphere.sdk.types.TypeDraft;
 import javax.annotation.Nullable;
 import java.time.ZonedDateTime;
 
+/**
+ * A TextLineItem has a name, a description and a quantity.
+ * A TextLineItem can have {@link io.sphere.sdk.types.Custom custom fields}.
+ *
+ * @see io.sphere.sdk.shoppinglists.commands.updateactions.AddTextLineItem
+ * @see io.sphere.sdk.shoppinglists.commands.updateactions.RemoveTextLineItem
+ * @see io.sphere.sdk.shoppinglists.commands.updateactions.ChangeTextLineItemQuantity
+ * @see io.sphere.sdk.shoppinglists.commands.updateactions.ChangeTextLineItemName
+ * @see io.sphere.sdk.shoppinglists.commands.updateactions.SetTextLineItemDescription
+ * @see io.sphere.sdk.shoppinglists.commands.updateactions.SetTextLineItemCustomField
+ * @see io.sphere.sdk.shoppinglists.commands.updateactions.SetTextLineItemCustomType
+ * * @see ShoppingList#getTextLineItems()
+ */
+
 @JsonDeserialize(as = TextLineItemImpl.class)
 @ResourceValue
 public interface TextLineItem

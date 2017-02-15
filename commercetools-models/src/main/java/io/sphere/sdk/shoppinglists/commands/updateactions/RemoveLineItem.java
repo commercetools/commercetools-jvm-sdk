@@ -7,7 +7,7 @@ import io.sphere.sdk.shoppinglists.ShoppingList;
 import javax.annotation.Nullable;
 
 /**
- * Removes a line item.
+ * Removes a line item from a shopping list.
  *
  * {@doc.gen intro}
  *
@@ -26,16 +26,9 @@ public final class RemoveLineItem extends UpdateActionImpl<ShoppingList> {
         this.quantity = quantity;
     }
 
-    public static RemoveLineItem of(final String lineItemId, @Nullable final Long quantity) {
-        return new RemoveLineItem(lineItemId, quantity);
-    }
 
     public static RemoveLineItem of(final String lineItemId) {
-        return of(lineItemId, null);
-    }
-
-    public static RemoveLineItem of(final LineItem lineItem, @Nullable final Long quantity) {
-        return of(lineItem.getId(), quantity);
+        return new RemoveLineItem(lineItemId, null);
     }
 
     public static RemoveLineItem of(final LineItem lineItem) {
@@ -49,5 +42,9 @@ public final class RemoveLineItem extends UpdateActionImpl<ShoppingList> {
     @Nullable
     public Long getQuantity() {
         return quantity;
+    }
+
+    public RemoveLineItem withQuantity(@Nullable final Long quantity) {
+        return new RemoveLineItem(getLineItemId(), quantity);
     }
 }

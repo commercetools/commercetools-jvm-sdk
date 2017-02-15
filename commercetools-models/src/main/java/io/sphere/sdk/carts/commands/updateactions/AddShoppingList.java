@@ -9,7 +9,7 @@ import io.sphere.sdk.shoppinglists.ShoppingList;
 import javax.annotation.Nullable;
 
 /**
- * Adds a shopping list to a cart.
+ * Adds all line items of a shopping list to the cart. If a channel is provided, it will be set for all line items that are added to the cart.
  *
  * {@doc.gen intro}
  *
@@ -23,7 +23,7 @@ public final class AddShoppingList extends UpdateActionImpl<Cart> {
     private final Reference<Channel> distributionChannel;
 
     private AddShoppingList(final Reference<ShoppingList> shoppingList,
-                            final @Nullable Reference<Channel> supplyChannel, final @Nullable Reference<Channel> distributionChannel) {
+                            @Nullable final Reference<Channel> supplyChannel, @Nullable final Reference<Channel> distributionChannel) {
         super("addShoppingList");
         this.shoppingList = shoppingList;
         this.supplyChannel = supplyChannel;
@@ -46,11 +46,15 @@ public final class AddShoppingList extends UpdateActionImpl<Cart> {
 
 
     public static AddShoppingList of(final Reference<ShoppingList> shoppingList) {
-        return of(shoppingList, null, null);
+        return new AddShoppingList(shoppingList, null, null);
     }
 
-    public static AddShoppingList of(final Reference<ShoppingList> shoppingList,
-                                     final @Nullable Reference<Channel> supplyChannel, final @Nullable Reference<Channel> distributionChannel) {
-        return new AddShoppingList(shoppingList, supplyChannel, distributionChannel);
+    public AddShoppingList withSupplyChannel(@Nullable final Reference<Channel> supplyChannel) {
+        return new AddShoppingList(getShoppingList(), supplyChannel, getDistributionChannel());
+    }
+
+
+    public AddShoppingList withDistributionChannel(@Nullable final Reference<Channel> distributionChannel) {
+        return new AddShoppingList(getShoppingList(), getSupplyChannel(), distributionChannel);
     }
 }

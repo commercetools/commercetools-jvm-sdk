@@ -11,6 +11,11 @@ import io.sphere.sdk.types.CustomFieldsDraft;
 import javax.annotation.Nullable;
 import java.util.List;
 
+/**
+ * A draft for a new {@link ShoppingList}.
+ *
+ * @see ShoppingListDraftBuilder
+ */
 @JsonDeserialize(as = ShoppingListDraftDsl.class)
 @ResourceDraftValue(factoryMethods = {
         @FactoryMethod(parameterNames = {"name"}),
@@ -31,8 +36,10 @@ public interface ShoppingListDraft {
     @Nullable
     LocalizedString getSlug();
 
+    @Nullable
     List<LineItemDraft> getLineItems();
 
+    @Nullable
     List<TextLineItemDraft> getTextLineItems();
 
     @Nullable

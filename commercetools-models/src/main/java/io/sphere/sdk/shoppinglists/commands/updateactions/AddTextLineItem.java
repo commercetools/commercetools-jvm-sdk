@@ -9,7 +9,7 @@ import io.sphere.sdk.types.CustomFieldsDraft;
 import javax.annotation.Nullable;
 
 /**
- * Adds a text line item.
+ * Adds a text line item to a shopping list.
  *
  * {@doc.gen intro}
  *
@@ -19,13 +19,14 @@ import javax.annotation.Nullable;
  */
 public final class AddTextLineItem extends UpdateActionImpl<ShoppingList> implements CustomDraft {
     private final LocalizedString name;
+    @Nullable
     private final Long quantity;
     @Nullable
     private final LocalizedString description;
     @Nullable
     private final CustomFieldsDraft custom;
 
-    private AddTextLineItem(final LocalizedString name, final Long quantity, @Nullable final LocalizedString description, @Nullable final CustomFieldsDraft custom) {
+    private AddTextLineItem(final LocalizedString name, @Nullable final Long quantity, @Nullable final LocalizedString description, @Nullable final CustomFieldsDraft custom) {
         super("addTextLineItem");
         this.name = name;
         this.quantity = quantity;
@@ -33,15 +34,15 @@ public final class AddTextLineItem extends UpdateActionImpl<ShoppingList> implem
         this.custom = custom;
     }
 
-    public static AddTextLineItem of(final LocalizedString name, final long quantity) {
-        return new AddTextLineItem(name, quantity, null, null);
+    public static AddTextLineItem of(final LocalizedString name) {
+        return new AddTextLineItem(name, null, null, null);
     }
 
-    @Nullable
     public LocalizedString getName() {
         return name;
     }
 
+    @Nullable
     public Long getQuantity() {
         return quantity;
     }
@@ -54,6 +55,10 @@ public final class AddTextLineItem extends UpdateActionImpl<ShoppingList> implem
     @Nullable
     public CustomFieldsDraft getCustom() {
         return custom;
+    }
+
+    public AddTextLineItem withQuantity(@Nullable final Long quantity) {
+        return new AddTextLineItem(getName(), quantity, getDescription(), getCustom());
     }
 
     public AddTextLineItem withCustom(@Nullable final CustomFieldsDraft custom) {

@@ -3,11 +3,11 @@ package io.sphere.sdk.shoppinglists;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import io.sphere.sdk.annotations.*;
-import io.sphere.sdk.cartdiscounts.CartDiscount;
 import io.sphere.sdk.customers.Customer;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Resource;
+import io.sphere.sdk.shoppinglists.commands.updateactions.*;
 import io.sphere.sdk.types.Custom;
 import io.sphere.sdk.types.CustomFields;
 import io.sphere.sdk.types.TypeDraft;
@@ -15,6 +15,24 @@ import io.sphere.sdk.types.TypeDraft;
 import javax.annotation.Nullable;
 import java.util.List;
 
+/**
+ * A shopping list holds items which can be added to a cart.
+ * A ShoppingList can have {@link io.sphere.sdk.types.Custom custom fields}.
+ *
+ * @see AddLineItem
+ * @see AddTextLineItem
+ * @see ChangeName
+ * @see RemoveLineItem
+ * @see RemoveTextLineItem
+ * @see SetCustomer
+ * @see SetCustomField
+ * @see SetCustomType
+ * @see SetDescription
+ * @see SetKey
+ * @see SetSlug
+ *
+ * @see io.sphere.sdk.carts.commands.updateactions.AddShoppingList
+ */
 @JsonDeserialize(as = ShoppingListImpl.class)
 @ResourceValue
 @ResourceInfo(pluralName = "shopping lists", pathElement = "shopping-lists")
@@ -42,9 +60,11 @@ public interface ShoppingList extends Resource<ShoppingList>, Custom {
     @Nullable
     LocalizedString getSlug();
 
+    @Nullable
     @IgnoreInQueryModel
     List<LineItem> getLineItems();
 
+    @Nullable
     @IgnoreInQueryModel
     List<TextLineItem> getTextLineItems();
 
@@ -80,7 +100,7 @@ public interface ShoppingList extends Resource<ShoppingList>, Custom {
      * @param id the ID of the resource which should be referenced.
      * @return reference
      */
-    static Reference<CartDiscount> referenceOfId(final String id) {
+    static Reference<ShoppingList> referenceOfId(final String id) {
         return Reference.of(referenceTypeId(), id);
     }
 
