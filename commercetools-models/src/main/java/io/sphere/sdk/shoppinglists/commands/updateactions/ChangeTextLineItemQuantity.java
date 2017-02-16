@@ -23,11 +23,11 @@ public final class ChangeTextLineItemQuantity extends UpdateActionImpl<ShoppingL
         this.quantity = quantity;
     }
 
-    public static ChangeTextLineItemQuantity of(final String textLineItemId, final long quantity) {
+    public static ChangeTextLineItemQuantity of(final String textLineItemId, final Long quantity) {
         return new ChangeTextLineItemQuantity(textLineItemId, quantity);
     }
 
-    public static ChangeTextLineItemQuantity of(final TextLineItem textLineItem, final long quantity) {
+    public static ChangeTextLineItemQuantity of(final TextLineItem textLineItem, final Long quantity) {
         return of(textLineItem.getId(), quantity);
     }
 
