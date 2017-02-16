@@ -11,7 +11,10 @@ import io.sphere.sdk.client.SphereRequest;
 import io.sphere.sdk.discountcodes.DiscountCodeInfo;
 import io.sphere.sdk.models.*;
 import io.sphere.sdk.payments.Payment;
-import io.sphere.sdk.products.*;
+import io.sphere.sdk.products.ByIdVariantIdentifier;
+import io.sphere.sdk.products.Price;
+import io.sphere.sdk.products.PriceDraft;
+import io.sphere.sdk.products.Product;
 import io.sphere.sdk.products.attributes.NamedAttributeAccess;
 import io.sphere.sdk.products.commands.ProductUpdateCommand;
 import io.sphere.sdk.products.commands.updateactions.ChangePrice;
@@ -19,6 +22,8 @@ import io.sphere.sdk.products.commands.updateactions.Publish;
 import io.sphere.sdk.products.commands.updateactions.SetAttribute;
 import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.shippingmethods.ShippingRate;
+import io.sphere.sdk.shoppinglists.LineItemDraftBuilder;
+import io.sphere.sdk.shoppinglists.ShoppingListDraftDsl;
 import io.sphere.sdk.test.IntegrationTest;
 import io.sphere.sdk.utils.MoneyImpl;
 import org.junit.Test;
@@ -27,7 +32,6 @@ import javax.money.MonetaryAmount;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Locale;
-import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -36,7 +40,9 @@ import static io.sphere.sdk.carts.CustomLineItemFixtures.createCustomLineItemDra
 import static io.sphere.sdk.customers.CustomerFixtures.withCustomer;
 import static io.sphere.sdk.payments.PaymentFixtures.withPayment;
 import static io.sphere.sdk.shippingmethods.ShippingMethodFixtures.withShippingMethodForGermany;
-import static io.sphere.sdk.suppliers.TShirtProductTypeDraftSupplier.*;
+import static io.sphere.sdk.shoppinglists.ShoppingListFixtures.newShoppingListDraftBuilder;
+import static io.sphere.sdk.shoppinglists.ShoppingListFixtures.withShoppingList;
+import static io.sphere.sdk.suppliers.TShirtProductTypeDraftSupplier.Colors;
 import static io.sphere.sdk.taxcategories.TaxCategoryFixtures.withTaxCategory;
 import static io.sphere.sdk.test.SphereTestUtils.*;
 import static java.util.Collections.singletonList;
@@ -500,6 +506,33 @@ public class CartUpdateCommandIntegrationTest extends IntegrationTest {
             assertThat(lineItem.getPrice().getValue()).isEqualTo(itemPrice);
             assertThat(lineItem.getTotalPrice()).isEqualTo(totalPrice);
             assertThat(lineItem.getPriceMode()).isEqualTo(LineItemPriceMode.EXTERNAL_TOTAL);
+        });
+    }
+
+    @Test
+    public void addShoppingList() throws Exception {
+        withEmptyCartAndProduct(client(), (cart, product) -> {
+            assertThat(cart.getLineItems()).isEmpty();
+
+            final List<io.sphere.sdk.shoppinglists.LineItemDraft> lineItemDrafts = asList(
+                    LineItemDraftBuilder.of(product.getId()).quantity(1L).build(),
+                    LineItemDraftBuilder.of(product.getId()).quantity(2L).build(),
+                    LineItemDraftBuilder.of(product.getId()).quantity(3L).build());
+            final ShoppingListDraftDsl shoppingListDraft = newShoppingListDraftBuilder().lineItems(lineItemDrafts).build();
+
+            withShoppingList(client(), shoppingListDraft, shoppingList -> {
+                final Cart updatedCart = client().executeBlocking(
+                        CartUpdateCommand.of(cart, AddShoppingList.of(shoppingList.toReference())));
+
+                final List<LineItem> lineItems = updatedCart.getLineItems();
+                assertThat(lineItems.size()).isEqualTo(1);
+
+                final LineItem lineItem = lineItems.get(0);
+                assertThat(lineItem.getQuantity()).isEqualTo(6);
+                assertThat(lineItem.getProductId()).isEqualTo(product.getId());
+
+                return shoppingList;
+            });
         });
     }
 }

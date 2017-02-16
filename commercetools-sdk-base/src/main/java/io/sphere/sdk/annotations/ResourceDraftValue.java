@@ -1,5 +1,8 @@
 package io.sphere.sdk.annotations;
 
+/**
+ * This annotation marks an interface as resource draft representation.
+ */
 public @interface ResourceDraftValue {
     FactoryMethod[] factoryMethods();
 
