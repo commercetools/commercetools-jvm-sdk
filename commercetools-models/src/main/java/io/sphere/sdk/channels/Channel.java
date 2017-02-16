@@ -175,4 +175,8 @@ public interface Channel extends Resource<Channel>, WithKey, Custom {
     @Nullable
     @IgnoreInQueryModel
     Address getAddress();
+
+    @Nullable
+    @IgnoreInQueryModel
+    GeoJSON getGeoLocation();
 }
