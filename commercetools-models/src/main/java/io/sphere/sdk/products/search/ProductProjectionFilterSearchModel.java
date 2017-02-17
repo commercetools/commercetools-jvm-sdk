@@ -23,11 +23,11 @@ public final class ProductProjectionFilterSearchModel extends SearchModelImpl<Pr
         return new ProductVariantFilterSearchModel(this, "variants");
     }
 
-    public TermFilterSearchModel<ProductProjection, String> id() {
+    public TermFilterExistsAndMissingSearchModel<ProductProjection, String> id() {
         return stringSearchModel("id").filtered();
     }
 
-    public TermFilterSearchModel<ProductProjection, String> key() {
+    public TermFilterExistsAndMissingSearchModel<ProductProjection, String> key() {
         return stringSearchModel("key").filtered();
     }
 

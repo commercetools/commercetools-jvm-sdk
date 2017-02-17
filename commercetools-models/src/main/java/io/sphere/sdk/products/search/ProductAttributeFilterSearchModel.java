@@ -15,11 +15,11 @@ public final class ProductAttributeFilterSearchModel extends SearchModelImpl<Pro
         super(parent, pathSegment);
     }
 
-    public TermFilterSearchModel<ProductProjection, Boolean> ofBoolean(final String attributeName) {
+    public TermFilterExistsAndMissingSearchModel<ProductProjection, Boolean> ofBoolean(final String attributeName) {
         return booleanSearchModel(attributeName).filtered();
     }
 
-    public TermFilterSearchModel<ProductProjection, String> ofString(final String attributeName) {
+    public TermFilterExistsAndMissingSearchModel<ProductProjection, String> ofString(final String attributeName) {
         return stringSearchModel(attributeName).filtered();
     }
 
@@ -59,11 +59,11 @@ public final class ProductAttributeFilterSearchModel extends SearchModelImpl<Pro
         return referenceFilterSearchModel(attributeName);
     }
 
-    public TermFilterSearchModel<ProductProjection, Boolean> ofBooleanSet(final String attributeName) {
+    public TermFilterExistsAndMissingSearchModel<ProductProjection, Boolean> ofBooleanSet(final String attributeName) {
         return ofBoolean(attributeName);
     }
 
-    public TermFilterSearchModel<ProductProjection, String> ofStringSet(final String attributeName) {
+    public TermFilterExistsAndMissingSearchModel<ProductProjection, String> ofStringSet(final String attributeName) {
         return ofString(attributeName);
     }
 

@@ -10,7 +10,7 @@ import java.util.function.Function;
  * @param <T> type of the resource
  * @param <V> type of the value
  */
-public class TermFilterSearchModelImpl<T, V> extends TermFilterBaseSearchModel<T, V> implements TermFilterSearchModel<T, V> {
+public class TermFilterSearchModelImpl<T, V> extends TermFilterBaseSearchModel<T, V> implements TermFilterExistsAndMissingSearchModel<T, V> {
 
     public TermFilterSearchModelImpl(final SearchModel<T> searchModel, final Function<V, String> typeSerializer) {
         super(searchModel, typeSerializer);

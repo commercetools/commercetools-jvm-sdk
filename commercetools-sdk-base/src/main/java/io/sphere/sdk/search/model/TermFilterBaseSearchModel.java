@@ -16,7 +16,7 @@ import static java.util.stream.Collectors.toList;
  * @param <T> type of the resource
  * @param <V> type of the value
  */
-abstract class TermFilterBaseSearchModel<T, V> extends Base implements FilterSearchModel<T, V> {
+abstract class TermFilterBaseSearchModel<T, V> extends Base implements FilterSearchModel<T, V>, ExistsAndMissingFilterSearchModelSupport<T> {
     protected final SearchModel<T> searchModel;
     protected final Function<V, String> typeSerializer;
 
@@ -30,12 +30,10 @@ abstract class TermFilterBaseSearchModel<T, V> extends Base implements FilterSea
         return searchModel;
     }
 
-    @Override
     public List<FilterExpression<T>> exists() {
         return ExistsAndMissingFilterSearchModelSupportUtils.exists(searchModel);
     }
 
-    @Override
     public List<FilterExpression<T>> missing() {
         return ExistsAndMissingFilterSearchModelSupportUtils.missing(searchModel);
     }
