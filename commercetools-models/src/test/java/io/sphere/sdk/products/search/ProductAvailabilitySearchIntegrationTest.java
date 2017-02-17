@@ -63,15 +63,34 @@ public class ProductAvailabilitySearchIntegrationTest extends IntegrationTest {
 
     @Test
     public void searchForIsOnStockInChannels() {
+        final String nonExistingChannel = "nonExistingChannelId";
         withChannelOfRole(client(), ChannelRole.INVENTORY_SUPPLY, channel -> {
             withProductOfStockAndChannel(client(), 2, channel, product -> {
-                final ProductProjectionSearch request = ProductProjectionSearch.ofStaged()
+                final ProductProjectionSearch isOnStockInAnyChannelRequest = ProductProjectionSearch.ofStaged()
                         .plusQueryFilters(m -> m.id().is(product.getId()))
                         .plusQueryFilters(m -> m.allVariants().availability()
-                                .isOnStockInChannels().channels(Arrays.asList("noChannelId", channel.getId())));
+                                .isOnStockByChannels().containsAny(Arrays.asList(nonExistingChannel, channel.getId())));
                 assertEventually(() -> {
-                    final PagedSearchResult<ProductProjection> res = client().executeBlocking(request);
+                    final PagedSearchResult<ProductProjection> res = client().executeBlocking(isOnStockInAnyChannelRequest);
                     assertThat(res.getResults()).hasSize(1);
+                });
+
+                final ProductProjectionSearch isOnStockInAnyChannelExistsRequest = ProductProjectionSearch.ofStaged()
+                        .plusQueryFilters(m -> m.id().is(product.getId()))
+                        .plusQueryFilters(m -> m.allVariants().availability()
+                                .isOnStockByChannels().exists());
+                assertEventually(() -> {
+                    final PagedSearchResult<ProductProjection> res = client().executeBlocking(isOnStockInAnyChannelExistsRequest);
+                    assertThat(res.getResults()).hasSize(1);
+                });
+
+                final ProductProjectionSearch isOnStockInAllChannelsRequest = ProductProjectionSearch.ofStaged()
+                        .plusQueryFilters(m -> m.id().is(product.getId()))
+                        .plusQueryFilters(m -> m.allVariants().availability()
+                                .isOnStockByChannels().containsAll(Arrays.asList(nonExistingChannel, channel.getId())));
+                assertEventually(() -> {
+                    final PagedSearchResult<ProductProjection> res = client().executeBlocking(isOnStockInAllChannelsRequest);
+                    assertThat(res.getResults()).isEmpty();
                 });
             });
         });

@@ -12,13 +12,14 @@ public interface ProductVariantAvailabilityFilterSearchModel<T> extends ProductV
     TermFilterSearchModel<T, Boolean> isOnStock();
 
     /**
-     * Returns a search model for product variant availabilities with {@link ProductVariantAvailability#isOnStock()}
-     * equal to <code></code> in at least one of the channels specified with
-     * {@link IsOnStockInChannelsSearchModel#channels(Iterable)}.
+     * Returns a filter search model for product variant availabilities by channels with
+     * {@link ProductVariantAvailability#isOnStock()} equal to {@code true}.
      *
-     * @return the search model for <code>isOnStockInChannels</code>
+     * {@include.example io.sphere.sdk.products.search.ProductAvailabilitySearchIntegrationTest#searchForIsOnStockInChannels()}
+     *
+     * @return a filter search model for specifying the channels by their id
      */
-    IsOnStockInChannelsSearchModel<T> isOnStockInChannels();
+    TermFilterSearchModel<T, String>  isOnStockByChannels();
 
     @Override
     RangeTermFilterSearchModel<T, BigDecimal> availableQuantity();
