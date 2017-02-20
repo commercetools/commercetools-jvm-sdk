@@ -18,7 +18,7 @@ import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.test.IntegrationTest;
 import io.sphere.sdk.utils.MoneyImpl;
 import net.jcip.annotations.NotThreadSafe;
-import org.javamoney.moneta.function.MonetaryUtil;
+import org.javamoney.moneta.function.MonetaryQueries;
 import org.junit.Test;
 
 import javax.money.MonetaryAmount;
@@ -30,7 +30,6 @@ import static io.sphere.sdk.carts.CartFixtures.*;
 import static io.sphere.sdk.customers.CustomerFixtures.withCustomerAndCart;
 import static io.sphere.sdk.shippingmethods.ShippingMethodFixtures.withShippingMethodForGermany;
 import static io.sphere.sdk.test.SphereTestUtils.*;
-import static io.sphere.sdk.test.SphereTestUtils.assertEventually;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @NotThreadSafe
@@ -180,7 +179,7 @@ public class CartQueryIntegrationTest extends IntegrationTest {
             final LineItem lineItem = cart.getLineItems().get(0);
             final String englishName = lineItem.getName().get(Locale.ENGLISH);
             final Price price = lineItem.getPrice();
-            final Long centAmount = price.getValue().query(MonetaryUtil.minorUnits());
+            final Long centAmount = price.getValue().query(MonetaryQueries.convertMinorPart());
             final ItemState itemState = lineItem.getState().stream().findFirst().get();
             final CartQuery query = CartQuery.of()
                     .withLimit(1L)

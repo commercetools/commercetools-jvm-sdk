@@ -2,7 +2,7 @@ package io.sphere.sdk.utils;
 
 import io.sphere.sdk.models.Base;
 import org.javamoney.moneta.FastMoney;
-import org.javamoney.moneta.function.MonetaryUtil;
+import org.javamoney.moneta.function.MonetaryQueries;
 
 import javax.annotation.Nonnull;
 import javax.money.*;
@@ -296,6 +296,6 @@ public final class MoneyImpl extends Base implements MonetaryAmount {
     }
 
     public static Long centAmountOf(@Nonnull final MonetaryAmount monetaryAmount) {
-        return monetaryAmount.query(MonetaryUtil.minorUnits());
+        return monetaryAmount.query(MonetaryQueries.convertMinorPart());
     }
 }

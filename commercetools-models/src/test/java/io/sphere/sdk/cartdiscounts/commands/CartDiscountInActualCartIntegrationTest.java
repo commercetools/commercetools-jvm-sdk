@@ -16,7 +16,7 @@ import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Versioned;
 import io.sphere.sdk.test.IntegrationTest;
 import io.sphere.sdk.utils.MoneyImpl;
-import org.javamoney.moneta.function.MonetaryUtil;
+import org.javamoney.moneta.function.MonetaryQueries;
 import org.junit.Test;
 
 import javax.money.MonetaryAmount;
@@ -86,8 +86,8 @@ public class CartDiscountInActualCartIntegrationTest extends IntegrationTest {
                         final DiscountedLineItemPrice discountedPrice = lineItemWithDiscount.getDiscountedPricePerQuantity().get(0).getDiscountedPrice();
                         final CartQuery cartQuery = CartQuery.of()
                                 .plusPredicates(m -> m.lineItems().discountedPricePerQuantity().discountedPrice().includedDiscounts().discount().is(cartDiscount))
-                                .plusPredicates(m -> m.lineItems().discountedPricePerQuantity().discountedPrice().includedDiscounts().discountedAmount().centAmount().is(discountedPrice.getIncludedDiscounts().get(0).getDiscountedAmount().query(MonetaryUtil.minorUnits())))
-                                .plusPredicates(m -> m.lineItems().discountedPricePerQuantity().discountedPrice().value().centAmount().is(discountedPrice.getValue().query(MonetaryUtil.minorUnits())))
+                                .plusPredicates(m -> m.lineItems().discountedPricePerQuantity().discountedPrice().includedDiscounts().discountedAmount().centAmount().is(discountedPrice.getIncludedDiscounts().get(0).getDiscountedAmount().query(MonetaryQueries.convertMinorPart())))
+                                .plusPredicates(m -> m.lineItems().discountedPricePerQuantity().discountedPrice().value().centAmount().is(discountedPrice.getValue().query(MonetaryQueries.convertMinorPart())))
                                 .plusPredicates(m -> m.lineItems().discountedPricePerQuantity().quantity().is(lineItemWithDiscount.getDiscountedPricePerQuantity().get(0).getQuantity()))
                                 .plusPredicates(m -> m.id().is(cart.getId()));
                         assertThat(client().executeBlocking(cartQuery).head().get().getId()).as("line item queries").isEqualTo(cart.getId());
