@@ -1,6 +1,7 @@
 package io.sphere.sdk.queries;
 
 import io.sphere.sdk.models.Base;
+import io.sphere.sdk.models.Point;
 import io.sphere.sdk.models.SphereEnumeration;
 
 import javax.annotation.Nullable;
@@ -204,6 +205,10 @@ public class QueryModelImpl<T> extends Base implements QueryModel<T> {
         return new IsInQueryPredicate<>(this, args);
     }
 
+    protected QueryPredicate<T> withinCirclePredicate(final Point center, final Double radius) {
+        return new WithinCircleQueryPredicate<T>(this, center, radius);
+    }
+
     protected <V> QueryPredicate<T> isNotInPredicate(final Iterable<V> args) {
         return new IsNotInQueryPredicate<>(this, args);
     }
@@ -276,5 +281,9 @@ public class QueryModelImpl<T> extends Base implements QueryModel<T> {
 
     protected LocalizedEnumQueryModel<T> localizedEnumQueryModel(final String name) {
         return new EnumLikeQueryModelImpl<>(this, name);
+    }
+
+    protected GeoJSONQueryModel<T> geoJSONQueryModel(final String pathName) {
+        return new GeoJSONQueryModelImpl<>(this, pathName);
     }
 }

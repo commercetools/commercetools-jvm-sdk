@@ -2,18 +2,16 @@ package io.sphere.sdk.channels.queries;
 
 import io.sphere.sdk.channels.Channel;
 import io.sphere.sdk.channels.ChannelDraft;
-import io.sphere.sdk.channels.ChannelDraftDsl;
 import io.sphere.sdk.channels.ChannelRole;
 import io.sphere.sdk.models.LocalizedString;
+import io.sphere.sdk.models.Point;
 import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.test.IntegrationTest;
 import org.junit.Test;
 
 import java.util.List;
 
-import static io.sphere.sdk.channels.ChannelFixtures.withChannel;
-import static io.sphere.sdk.channels.ChannelFixtures.withChannelOfRole;
-import static io.sphere.sdk.channels.ChannelFixtures.withUpdatableChannelOfRole;
+import static io.sphere.sdk.channels.ChannelFixtures.*;
 import static io.sphere.sdk.reviews.ReviewFixtures.withReview;
 import static io.sphere.sdk.test.SphereTestUtils.*;
 import static java.util.Collections.singleton;
@@ -79,6 +77,29 @@ public class ChannelQueryIntegrationTest extends IntegrationTest {
                     .plusPredicates(m -> m.description().locale(ENGLISH).is(description.get(ENGLISH)));
             final List<Channel> results = client().executeBlocking(query).getResults();
             assertThat(results).hasSize(1);
+        });
+    }
+
+    @Test
+    public void queryByGeoLocation() {
+        final Point geoLocation = Point.of(52.0, 40.0);
+        final ChannelDraft channelDraft =
+                ChannelDraft.of(randomKey())
+                        .withGeoLocation(geoLocation);
+        withChannel(client(), channelDraft, channel -> {
+            final ChannelQuery withinCircleQuery = ChannelQuery.of()
+                    .plusPredicates(m -> m.is(channel))
+                    .plusPredicates(m -> m.geoLocation().withinCircle(geoLocation, 1.0));
+            final List<Channel> withinCircleResults = client().executeBlocking(withinCircleQuery).getResults();
+            assertThat(withinCircleResults).hasSize(1);
+            assertThat(withinCircleResults.get(0)).isEqualTo(channel);
+
+            final ChannelQuery isPresentQuery = ChannelQuery.of()
+                    .plusPredicates(m -> m.is(channel))
+                    .plusPredicates(m -> m.geoLocation().isPresent());
+            final List<Channel> isPresentResults = client().executeBlocking(isPresentQuery).getResults();
+            assertThat(isPresentResults).hasSize(1);
+            assertThat(isPresentResults.get(0)).isEqualTo(channel);
         });
     }
 }
