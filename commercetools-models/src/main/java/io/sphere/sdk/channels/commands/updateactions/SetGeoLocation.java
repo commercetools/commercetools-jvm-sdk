@@ -13,7 +13,7 @@ import javax.annotation.Nullable;
  *
  * {@include.example io.sphere.sdk.channels.commands.ChannelUpdateCommandIntegrationTest#setGeoLocation()}
  */
-public class SetGeoLocation extends UpdateActionImpl<Channel> {
+public final class SetGeoLocation extends UpdateActionImpl<Channel> {
     @Nullable
     private GeoJSON geoLocation;
 

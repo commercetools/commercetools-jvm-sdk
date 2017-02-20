@@ -2,7 +2,6 @@ package io.sphere.sdk.channels;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import io.sphere.sdk.annotations.FactoryMethod;
-import io.sphere.sdk.annotations.IgnoreInQueryModel;
 import io.sphere.sdk.annotations.ResourceDraftValue;
 import io.sphere.sdk.models.Address;
 import io.sphere.sdk.models.GeoJSON;
@@ -46,7 +45,6 @@ public interface ChannelDraft extends WithKey {
     Address getAddress();
 
     @Nullable
-    @IgnoreInQueryModel
     GeoJSON getGeoLocation();
 
     static ChannelDraftDsl of(final String key) {
