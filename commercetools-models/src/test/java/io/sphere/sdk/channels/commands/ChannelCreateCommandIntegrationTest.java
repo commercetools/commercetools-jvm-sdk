@@ -7,6 +7,7 @@ import io.sphere.sdk.channels.queries.ChannelQuery;
 import io.sphere.sdk.json.SphereJsonUtils;
 import io.sphere.sdk.models.Address;
 import io.sphere.sdk.models.LocalizedString;
+import io.sphere.sdk.models.Point;
 import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.test.IntegrationTest;
 import net.jcip.annotations.NotThreadSafe;
@@ -37,17 +38,20 @@ public class ChannelCreateCommandIntegrationTest extends IntegrationTest {
     public void execution() throws Exception {
         final String key = "demo-key";
         final Address address = Address.of(DE).withCity("Berlin");
+        final Point geoLocation = Point.of(52.5200070, 13.4049540);
         final ChannelDraft channelDraft = ChannelDraft.of(key)
                 .withName(LocalizedString.of(ENGLISH, "name"))
                 .withDescription(LocalizedString.of(ENGLISH, "description"))
                 .withRoles(ChannelRole.INVENTORY_SUPPLY)
-                .withAddress(address);
+                .withAddress(address)
+                .withGeoLocation(geoLocation);
         final Channel channel = client().executeBlocking(ChannelCreateCommand.of(channelDraft));
         assertThat(channel.getKey()).isEqualTo(key);
         assertThat(channel.getName()).isEqualTo(LocalizedString.of(ENGLISH, "name"));
         assertThat(channel.getDescription()).isEqualTo(LocalizedString.of(ENGLISH, "description"));
         assertThat(channel.getRoles()).isEqualTo(asSet(ChannelRole.INVENTORY_SUPPLY));
         assertThat(channel.getAddress()).isEqualTo(address);
+        assertThat(channel.getGeoLocation()).isEqualTo(geoLocation);
     }
 
     @Test
