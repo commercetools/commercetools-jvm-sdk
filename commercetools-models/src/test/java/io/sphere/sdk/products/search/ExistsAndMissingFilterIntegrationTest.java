@@ -1,5 +1,6 @@
 package io.sphere.sdk.products.search;
 
+import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.products.*;
 import io.sphere.sdk.products.attributes.AttributeDraft;
 import io.sphere.sdk.search.model.ExistsAndMissingFilterSearchModelSupport;
@@ -7,6 +8,7 @@ import io.sphere.sdk.test.IntegrationTest;
 import org.junit.Test;
 
 import java.util.List;
+import java.util.Locale;
 import java.util.function.Function;
 import java.util.function.UnaryOperator;
 
@@ -106,6 +108,19 @@ public class ExistsAndMissingFilterIntegrationTest extends IntegrationTest {
                     .build();
             return builder.masterVariant(masterVariant);
         }, m -> m.allVariants().sku());
+    }
+
+    @Test
+    public void nameLocale() {
+        checkFilter(builder -> builder.name(LocalizedString.of(Locale.GERMAN, "foo")),
+                m -> m.name().locale(Locale.GERMAN));
+    }
+
+    @Test
+    public void slugLocale() {
+        final Locale locale = Locale.forLanguageTag("de-AT");
+        checkFilter(builder -> builder.slug(LocalizedString.of(locale, randomKey())),
+                m -> m.slug().locale(locale));
     }
 
     @Test
