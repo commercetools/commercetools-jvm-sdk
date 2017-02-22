@@ -6,7 +6,8 @@ import java.util.List;
 import java.util.function.Function;
 
 /**
- * Model to build term filters.
+ * Model to build term filters with exits and missing predicates
+ * .
  * @param <T> type of the resource
  * @param <V> type of the value
  */
