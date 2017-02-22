@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 /**
  * Base class for GeoJSON objects that provides the required annotation
- * to map to the correct sub type via the <code>type</code> property.
+ * to map to the correct sub type via the {@code type} property.
  *
  * @see <a href="http://geojson.org/geojson-spec.html#geojson-objects">GeoJSON specification</a>
  */
