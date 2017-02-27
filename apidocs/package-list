@@ -113,6 +113,11 @@ io.sphere.sdk.shippingmethods.commands
 io.sphere.sdk.shippingmethods.commands.updateactions
 io.sphere.sdk.shippingmethods.expansion
 io.sphere.sdk.shippingmethods.queries
+io.sphere.sdk.shoppinglists
+io.sphere.sdk.shoppinglists.commands
+io.sphere.sdk.shoppinglists.commands.updateactions
+io.sphere.sdk.shoppinglists.expansion
+io.sphere.sdk.shoppinglists.queries
 io.sphere.sdk.states
 io.sphere.sdk.states.commands
 io.sphere.sdk.states.commands.updateactions
