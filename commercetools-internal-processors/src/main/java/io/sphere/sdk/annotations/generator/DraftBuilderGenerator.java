@@ -6,6 +6,7 @@ import io.sphere.sdk.annotations.ResourceDraftValue;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.annotation.Nullable;
+import javax.lang.model.SourceVersion;
 import javax.lang.model.element.ExecutableElement;
 import javax.lang.model.element.Modifier;
 import javax.lang.model.element.TypeElement;
@@ -25,7 +26,7 @@ public class DraftBuilderGenerator {
         this.elements = elements;
     }
 
-    public JavaFile generate(final TypeElement draftTypeElement) throws Exception {
+    public JavaFile generate(final TypeElement draftTypeElement) {
         final String packageName = elements.getPackageOf(draftTypeElement).getQualifiedName().toString();
         final String draftName = draftTypeElement.getSimpleName().toString();
         final ResourceDraftValue resourceDraftValue = draftTypeElement.getAnnotation(ResourceDraftValue.class);
@@ -42,9 +43,10 @@ public class DraftBuilderGenerator {
                 .collect(Collectors.toList());
 
         final TypeSpec.Builder builder = TypeSpec.classBuilder(builderBaseName);
+        final TypeName builderTypeArgument = ClassName.get(packageName, draftName + (resourceDraftValue.useBuilderStereotypeDslClass() ? "Dsl" : ""));
         builder
                 .superclass(ClassName.get("io.sphere.sdk.models", "Base"))
-                .addSuperinterface(ParameterizedTypeName.get(ClassName.get("io.sphere.sdk.models", "Builder"), ClassName.get(packageName, draftName)));
+                .addSuperinterface(ParameterizedTypeName.get(ClassName.get("io.sphere.sdk.models", "Builder"), builderTypeArgument));
         if (resourceDraftValue.abstractBaseClass()) {
             builder.addModifiers(Modifier.ABSTRACT).addTypeVariable(TypeVariableName.get("T").withBounds(builderName));
         } else {
@@ -58,7 +60,7 @@ public class DraftBuilderGenerator {
             List<MethodSpec> getMethods = getterMethods.stream().map(this::createGetMethod).collect(Collectors.toList());
             builder.addMethods(getMethods);
         }
-        builder.addMethod(createBuildMethod(packageName, draftName, getterMethods.stream().map(this::getFieldName).collect(Collectors.toList())))
+        builder.addMethod(createBuildMethod(builderTypeArgument, getterMethods.stream().map(this::getFieldName).collect(Collectors.toList())))
                 .addMethods(createFactoryMethods(resourceDraftValue, builderName, getterMethods))
                 .addMethod(createCopyFactoryMethod(draftTypeElement, builderName, getterMethods));
 
@@ -133,8 +135,6 @@ public class DraftBuilderGenerator {
         final MethodSpec.Builder builder = MethodSpec.constructorBuilder();
         if (resourceDraftValue.abstractBaseClass()) {
             builder.addModifiers(Modifier.PROTECTED);
-        } else {
-            builder.addModifiers(Modifier.PRIVATE);
         }
 
         return builder.build();
@@ -147,8 +147,6 @@ public class DraftBuilderGenerator {
 
         if (resourceDraftValue.abstractBaseClass()) {
             builder.addModifiers(Modifier.PROTECTED);
-        } else {
-            builder.addModifiers(Modifier.PRIVATE);
         }
         final List<String> parameterNames = parameterTemplates.stream()
                 .map(this::getFieldName)
@@ -164,12 +162,12 @@ public class DraftBuilderGenerator {
                 .collect(Collectors.toList());
     }
 
-    private MethodSpec createBuildMethod(final String draftPackageName, final String draftName, final List<String> parameterNames) {
+    private MethodSpec createBuildMethod(final TypeName returnType, final List<String> parameterNames) {
         final String callParameters = String.join(", ", parameterNames);
         return MethodSpec.methodBuilder("build")
                 .addModifiers(Modifier.PUBLIC)
-                .returns(ClassName.get(draftPackageName, draftName))
-                .addCode("return new $LDsl($L);\n", draftName, callParameters)
+                .returns(returnType)
+                .addCode("return new $T($L);\n", returnType, callParameters)
                 .build();
     }
 
@@ -247,8 +245,13 @@ public class DraftBuilderGenerator {
     private String getFieldName(final ExecutableElement getterMethod) {
         final String name = getterMethod.getSimpleName().toString();
         final int fieldNameIndex = name.startsWith("is") ? 2 : 3;
-        return StringUtils.uncapitalize(name.substring(fieldNameIndex));
+        return StringUtils.uncapitalize(escapeJavaKeyword(name.substring(fieldNameIndex)));
     }
+
+    private static String escapeJavaKeyword(final String name) {
+        return SourceVersion.isKeyword(name) ? "_" + name : name;
+    }
+
 
     private List<ExecutableElement> getGetterMethodsSorted(TypeElement clazz) {
         return ElementFilter.methodsIn(elements.getAllMembers(clazz)).stream()

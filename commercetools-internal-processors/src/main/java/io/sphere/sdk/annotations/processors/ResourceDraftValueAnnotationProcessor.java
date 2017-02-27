@@ -1,6 +1,8 @@
 package io.sphere.sdk.annotations.processors;
 
+import com.squareup.javapoet.JavaFile;
 import io.sphere.sdk.annotations.ResourceDraftValue;
+import io.sphere.sdk.annotations.generator.DraftBuilderGenerator;
 
 import javax.annotation.processing.SupportedAnnotationTypes;
 import javax.annotation.processing.SupportedSourceVersion;
@@ -18,6 +20,9 @@ public final class ResourceDraftValueAnnotationProcessor extends CommercetoolsAn
     @Override
     protected void generate(final TypeElement typeElement) {
         writeClass(typeElement, new ResourceDraftDslClassModelFactory(typeElement).createClassModel());
-        writeClass(typeElement, new ResourceDraftBuilderClassModelFactory(typeElement).createClassModel());
+//        writeClass(typeElement, new ResourceDraftBuilderClassModelFactory(typeElement).createClassModel());
+        final JavaFile javaFile = new DraftBuilderGenerator(processingEnv.getElementUtils()).generate(typeElement);
+        writeClass(javaFile);
     }
+
 }
