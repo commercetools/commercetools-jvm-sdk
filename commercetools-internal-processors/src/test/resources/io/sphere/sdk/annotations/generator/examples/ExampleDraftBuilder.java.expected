@@ -1,0 +1,88 @@
+package io.sphere.sdk.annotations.generator.examples;
+
+import io.sphere.sdk.models.Base;
+import io.sphere.sdk.models.Builder;
+import java.lang.Boolean;
+import java.lang.String;
+import java.util.List;
+import javax.annotation.Nullable;
+
+public final class ExampleDraftBuilder extends Base implements Builder<ExampleDraft> {
+  private Boolean active;
+
+  @Nullable
+  private List<String> assets;
+
+  private List<String> attributes;
+
+  private List<String> images;
+
+  @Nullable
+  private String key;
+
+  private List<String> prices;
+
+  private String sku;
+
+  private ExampleDraftBuilder() {
+  }
+
+  private ExampleDraftBuilder(final Boolean active, @Nullable final List<String> assets,
+      final List<String> attributes, final List<String> images, @Nullable final String key,
+      final List<String> prices, final String sku) {
+    this.active = active;
+    this.assets = assets;
+    this.attributes = attributes;
+    this.images = images;
+    this.key = key;
+    this.prices = prices;
+    this.sku = sku;
+  }
+
+  public ExampleDraftBuilder active(final Boolean active) {
+    this.active = active;
+    return this;
+  }
+
+  public ExampleDraftBuilder assets(@Nullable final List<String> assets) {
+    this.assets = assets;
+    return this;
+  }
+
+  public ExampleDraftBuilder attributes(final List<String> attributes) {
+    this.attributes = attributes;
+    return this;
+  }
+
+  public ExampleDraftBuilder images(final List<String> images) {
+    this.images = images;
+    return this;
+  }
+
+  public ExampleDraftBuilder key(@Nullable final String key) {
+    this.key = key;
+    return this;
+  }
+
+  public ExampleDraftBuilder prices(final List<String> prices) {
+    this.prices = prices;
+    return this;
+  }
+
+  public ExampleDraftBuilder sku(final String sku) {
+    this.sku = sku;
+    return this;
+  }
+
+  public ExampleDraft build() {
+    return new ExampleDraftDsl(active, assets, attributes, images, key, prices, sku);
+  }
+
+  public static ExampleDraftBuilder of(final Boolean active, final String sku) {
+    return new ExampleDraftBuilder(active, null, null, null, null, null, sku);
+  }
+
+  public static ExampleDraftBuilder of(final ExampleDraft template) {
+    return new ExampleDraftBuilder(template.isActive(), template.getAssets(), template.getAttributes(), template.getImages(), template.getKey(), template.getPrices(), template.getSku());
+  }
+}

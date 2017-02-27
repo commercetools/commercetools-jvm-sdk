@@ -1,0 +1,97 @@
+package io.sphere.sdk.annotations.generator.examples;
+
+import io.sphere.sdk.models.Base;
+import io.sphere.sdk.models.Builder;
+import java.lang.Boolean;
+import java.lang.String;
+import java.util.List;
+import javax.annotation.Nullable;
+
+public final class ExampleWithSuperInterfaceDraftBuilder extends Base implements Builder<ExampleWithSuperInterfaceDraft> {
+  private Boolean active;
+
+  @Nullable
+  private List<String> assets;
+
+  private List<String> attributes;
+
+  private List<String> images;
+
+  @Nullable
+  private String key;
+
+  private String name;
+
+  private List<String> prices;
+
+  private String sku;
+
+  private ExampleWithSuperInterfaceDraftBuilder() {
+  }
+
+  private ExampleWithSuperInterfaceDraftBuilder(final Boolean active,
+      @Nullable final List<String> assets, final List<String> attributes, final List<String> images,
+      @Nullable final String key, final String name, final List<String> prices, final String sku) {
+    this.active = active;
+    this.assets = assets;
+    this.attributes = attributes;
+    this.images = images;
+    this.key = key;
+    this.name = name;
+    this.prices = prices;
+    this.sku = sku;
+  }
+
+  public ExampleWithSuperInterfaceDraftBuilder active(final Boolean active) {
+    this.active = active;
+    return this;
+  }
+
+  public ExampleWithSuperInterfaceDraftBuilder assets(@Nullable final List<String> assets) {
+    this.assets = assets;
+    return this;
+  }
+
+  public ExampleWithSuperInterfaceDraftBuilder attributes(final List<String> attributes) {
+    this.attributes = attributes;
+    return this;
+  }
+
+  public ExampleWithSuperInterfaceDraftBuilder images(final List<String> images) {
+    this.images = images;
+    return this;
+  }
+
+  public ExampleWithSuperInterfaceDraftBuilder key(@Nullable final String key) {
+    this.key = key;
+    return this;
+  }
+
+  public ExampleWithSuperInterfaceDraftBuilder name(final String name) {
+    this.name = name;
+    return this;
+  }
+
+  public ExampleWithSuperInterfaceDraftBuilder prices(final List<String> prices) {
+    this.prices = prices;
+    return this;
+  }
+
+  public ExampleWithSuperInterfaceDraftBuilder sku(final String sku) {
+    this.sku = sku;
+    return this;
+  }
+
+  public ExampleWithSuperInterfaceDraft build() {
+    return new ExampleWithSuperInterfaceDraftDsl(active, assets, attributes, images, key, name, prices, sku);
+  }
+
+  public static ExampleWithSuperInterfaceDraftBuilder of(final Boolean active, final String name,
+      final String sku) {
+    return new ExampleWithSuperInterfaceDraftBuilder(active, null, null, null, null, name, null, sku);
+  }
+
+  public static ExampleWithSuperInterfaceDraftBuilder of(final ExampleWithSuperInterfaceDraft template) {
+    return new ExampleWithSuperInterfaceDraftBuilder(template.isActive(), template.getAssets(), template.getAttributes(), template.getImages(), template.getKey(), template.getName(), template.getPrices(), template.getSku());
+  }
+}

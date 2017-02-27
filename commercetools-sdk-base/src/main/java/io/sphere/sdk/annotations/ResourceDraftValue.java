@@ -17,4 +17,11 @@ public @interface ResourceDraftValue {
     boolean useBuilderStereotypeDslClass() default false;
 
     String[] additionalBuilderInterfaces() default {};
+
+    /**
+     * If set to true, the generated builder class will be abstract so that it can be further customized.
+     *
+     * @return true iff. the generated builder should be abstract
+     */
+    boolean abstractBaseClass() default false;
 }
