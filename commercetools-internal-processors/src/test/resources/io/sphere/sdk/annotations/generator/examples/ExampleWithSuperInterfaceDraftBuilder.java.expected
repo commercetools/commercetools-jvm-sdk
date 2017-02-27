@@ -26,12 +26,12 @@ public final class ExampleWithSuperInterfaceDraftBuilder extends Base implements
 
   private String sku;
 
-  private ExampleWithSuperInterfaceDraftBuilder() {
+  ExampleWithSuperInterfaceDraftBuilder() {
   }
 
-  private ExampleWithSuperInterfaceDraftBuilder(final Boolean active,
-      @Nullable final List<String> assets, final List<String> attributes, final List<String> images,
-      @Nullable final String key, final String name, final List<String> prices, final String sku) {
+  ExampleWithSuperInterfaceDraftBuilder(final Boolean active, @Nullable final List<String> assets,
+      final List<String> attributes, final List<String> images, @Nullable final String key,
+      final String name, final List<String> prices, final String sku) {
     this.active = active;
     this.assets = assets;
     this.attributes = attributes;
@@ -82,7 +82,7 @@ public final class ExampleWithSuperInterfaceDraftBuilder extends Base implements
     return this;
   }
 
-  public ExampleWithSuperInterfaceDraft build() {
+  public ExampleWithSuperInterfaceDraftDsl build() {
     return new ExampleWithSuperInterfaceDraftDsl(active, assets, attributes, images, key, name, prices, sku);
   }
 

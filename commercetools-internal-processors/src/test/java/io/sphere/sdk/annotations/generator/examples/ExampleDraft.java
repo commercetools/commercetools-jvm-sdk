@@ -26,4 +26,8 @@ public interface ExampleDraft {
 
     @Nullable
     List<String> getAssets();
+
+    default String getIgnored() {
+        return "default getter methods are ignored";
+    }
 }

@@ -43,6 +43,7 @@ public class DraftBuilderGenerator {
                 .collect(Collectors.toList());
 
         final TypeSpec.Builder builder = TypeSpec.classBuilder(builderBaseName);
+
         final TypeName builderTypeArgument = ClassName.get(packageName, draftName + (resourceDraftValue.useBuilderStereotypeDslClass() ? "Dsl" : ""));
         builder
                 .superclass(ClassName.get("io.sphere.sdk.models", "Base"))
@@ -57,10 +58,13 @@ public class DraftBuilderGenerator {
                 .addMethod(createConstructor(resourceDraftValue, getterMethods))
                 .addMethods(builderMethodSpecs);
         if (resourceDraftValue.gettersForBuilder()) {
-            List<MethodSpec> getMethods = getterMethods.stream().map(this::createGetMethod).collect(Collectors.toList());
+            List<MethodSpec> getMethods = getterMethods.stream()
+                    .map(this::createGetMethod)
+                    .collect(Collectors.toList());
             builder.addMethods(getMethods);
         }
-        builder.addMethod(createBuildMethod(builderTypeArgument, getterMethods.stream().map(this::getFieldName).collect(Collectors.toList())))
+        final TypeName draftImplType = ClassName.get(packageName, draftName + "Dsl");
+        builder.addMethod(createBuildMethod(draftImplType, getterMethods.stream().map(this::getFieldName).collect(Collectors.toList())))
                 .addMethods(createFactoryMethods(resourceDraftValue, builderName, getterMethods))
                 .addMethod(createCopyFactoryMethod(draftTypeElement, builderName, getterMethods));
 
@@ -73,6 +77,9 @@ public class DraftBuilderGenerator {
     }
 
     private List<MethodSpec> createFactoryMethods(final ResourceDraftValue resourceDraftValue, final ClassName builderName, final List<ExecutableElement> getterMethods) {
+        if (resourceDraftValue.abstractBaseClass()) {
+            return Collections.emptyList();
+        }
         final FactoryMethod[] factoryMethods = resourceDraftValue.factoryMethods();
         return Stream.of(factoryMethods)
                 .map(f -> createFactoryMethod(builderName, f, getterMethods))
@@ -104,11 +111,14 @@ public class DraftBuilderGenerator {
         final ResourceDraftValue resourceDraftValue = draftTypeElement.getAnnotation(ResourceDraftValue.class);
         if (resourceDraftValue.abstractBaseClass()) {
             final MethodSpec.Builder builder = MethodSpec.methodBuilder("from").addModifiers(Modifier.PROTECTED)
+                    .returns(TypeVariableName.get("T"))
                     .addParameter(templateParameter);
 
             for (final ExecutableElement getterMethod : getterMethods) {
                 builder.addCode("this.$L = template.$L();\n", getFieldName(getterMethod), getterMethod.getSimpleName().toString());
             }
+            addSuppressWarnings(builder);
+            builder.addCode("return (T) this;\n");
             return builder.build();
 
         } else {
@@ -197,14 +207,18 @@ public class DraftBuilderGenerator {
         builder.addParameter(createParameter(getterMethod))
                 .addCode("this.$L = $L;\n", builderMethodName, builderMethodName);
         if (resourceDraftValue.abstractBaseClass()) {
-            final AnnotationSpec suppressWarnings = AnnotationSpec.builder(SuppressWarnings.class)
-                    .addMember("value", "$S", "unchecked").build();
-            builder.addAnnotation(suppressWarnings);
+            addSuppressWarnings(builder);
             builder.addCode("return (T) this;\n");
         } else {
             builder.addCode("return this;\n");
         }
         return Arrays.asList(builder.build());
+    }
+
+    private void addSuppressWarnings(final MethodSpec.Builder builder) {
+        final AnnotationSpec suppressWarnings = AnnotationSpec.builder(SuppressWarnings.class)
+                .addMember("value", "$S", "unchecked").build();
+        builder.addAnnotation(suppressWarnings);
     }
 
     private void copyNullableAnnotation(final ExecutableElement method, final FieldSpec.Builder builder) {
@@ -245,7 +259,7 @@ public class DraftBuilderGenerator {
     private String getFieldName(final ExecutableElement getterMethod) {
         final String name = getterMethod.getSimpleName().toString();
         final int fieldNameIndex = name.startsWith("is") ? 2 : 3;
-        return StringUtils.uncapitalize(escapeJavaKeyword(name.substring(fieldNameIndex)));
+        return escapeJavaKeyword(StringUtils.uncapitalize(name.substring(fieldNameIndex)));
     }
 
     private static String escapeJavaKeyword(final String name) {
@@ -268,7 +282,8 @@ public class DraftBuilderGenerator {
      */
     private boolean isGetterMethod(final ExecutableElement method) {
         final String methodName = method.getSimpleName().toString();
-        final boolean hasGetMethodName = !"getClass".equals(methodName) && methodName.startsWith("get") || methodName.startsWith("is");
-        return hasGetMethodName && !method.getModifiers().contains(Modifier.STATIC);
+        final boolean hasGetterMethodName = !"getClass".equals(methodName) && methodName.startsWith("get") || methodName.startsWith("is");
+        final Set<Modifier> modifiers = method.getModifiers();
+        return hasGetterMethodName && !modifiers.contains(Modifier.STATIC) && !modifiers.contains(Modifier.DEFAULT);
     }
 }

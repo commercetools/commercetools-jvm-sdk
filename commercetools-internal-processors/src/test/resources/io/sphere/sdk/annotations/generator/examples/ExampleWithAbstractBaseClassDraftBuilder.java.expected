@@ -82,16 +82,12 @@ abstract class ExampleWithAbstractBaseClassDraftBuilderBase<T extends ExampleWit
     return (T) this;
   }
 
-  public ExampleWithAbstractBaseClassDraft build() {
+  public ExampleWithAbstractBaseClassDraftDsl build() {
     return new ExampleWithAbstractBaseClassDraftDsl(active, assets, attributes, images, key, prices, sku);
   }
 
-  public static ExampleWithAbstractBaseClassDraftBuilderBase of(final Boolean active,
-      final String sku) {
-    return new ExampleWithAbstractBaseClassDraftBuilderBase(active, null, null, null, null, null, sku);
-  }
-
-  protected void from(final ExampleWithAbstractBaseClassDraft template) {
+  @SuppressWarnings("unchecked")
+  protected T from(final ExampleWithAbstractBaseClassDraft template) {
     this.active = template.isActive();
     this.assets = template.getAssets();
     this.attributes = template.getAttributes();
@@ -99,5 +95,6 @@ abstract class ExampleWithAbstractBaseClassDraftBuilderBase<T extends ExampleWit
     this.key = template.getKey();
     this.prices = template.getPrices();
     this.sku = template.getSku();
+    return (T) this;
   }
 }

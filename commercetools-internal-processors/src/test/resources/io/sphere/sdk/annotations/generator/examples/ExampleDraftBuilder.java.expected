@@ -24,10 +24,10 @@ public final class ExampleDraftBuilder extends Base implements Builder<ExampleDr
 
   private String sku;
 
-  private ExampleDraftBuilder() {
+  ExampleDraftBuilder() {
   }
 
-  private ExampleDraftBuilder(final Boolean active, @Nullable final List<String> assets,
+  ExampleDraftBuilder(final Boolean active, @Nullable final List<String> assets,
       final List<String> attributes, final List<String> images, @Nullable final String key,
       final List<String> prices, final String sku) {
     this.active = active;
@@ -74,7 +74,7 @@ public final class ExampleDraftBuilder extends Base implements Builder<ExampleDr
     return this;
   }
 
-  public ExampleDraft build() {
+  public ExampleDraftDsl build() {
     return new ExampleDraftDsl(active, assets, attributes, images, key, prices, sku);
   }
 
