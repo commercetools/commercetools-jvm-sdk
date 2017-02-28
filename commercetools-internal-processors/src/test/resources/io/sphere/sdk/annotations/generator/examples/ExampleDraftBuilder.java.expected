@@ -70,8 +70,12 @@ public final class ExampleDraftBuilder extends Base implements Builder<ExampleDr
     return new ExampleDraftDsl(_default, active, key, names, sku);
   }
 
-  public static ExampleDraftBuilder of(final Boolean active, final String sku) {
+  public static ExampleDraftBuilder of(final String sku, final Boolean active) {
     return new ExampleDraftBuilder(null, active, null, null, sku);
+  }
+
+  public static ExampleDraftBuilder of(final Boolean _default, final Boolean active) {
+    return new ExampleDraftBuilder(_default, active, null, null, null);
   }
 
   public static ExampleDraftBuilder of(final ExampleDraft template) {

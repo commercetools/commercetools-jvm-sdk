@@ -18,6 +18,7 @@ import javax.lang.model.util.ElementFilter;
 import javax.lang.model.util.Elements;
 import javax.lang.model.util.Types;
 import java.util.*;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -94,15 +95,17 @@ public class DraftBuilderGenerator {
     }
 
     private MethodSpec createFactoryMethod(final ClassName builderName, final FactoryMethod factoryMethod, final List<ExecutableElement> getterMethods) {
-        final Set<String> parameterNames = Stream.of(factoryMethod.parameterNames()).collect(Collectors.toCollection(LinkedHashSet::new));
-        final List<ExecutableElement> parameterTemplates = getterMethods.stream()
-                .filter(e -> parameterNames.contains(getFieldName(e)))
+        final Set<String> factoryParameterNames = Stream.of(factoryMethod.parameterNames()).collect(Collectors.toCollection(LinkedHashSet::new));
+        final Map<String, ExecutableElement> getterMethodByName = getterMethods.stream()
+                .collect(Collectors.toMap(e -> getFieldName(e, false), Function.identity()));
+        final List<ExecutableElement> parameterTemplates = factoryParameterNames.stream()
+                .map(getterMethodByName::get)
                 .collect(Collectors.toList());
-        assert parameterNames.size() == parameterTemplates.size();
+        assert factoryParameterNames.size() == parameterTemplates.size();
 
         final String callArguments = getterMethods.stream()
-                .map(e -> getFieldName(e))
-                .map(n -> parameterNames.contains(n) ? n : "null")
+                .map(e -> getFieldName(e, false))
+                .map(n -> factoryParameterNames.contains(n) ? escapeJavaKeyword(n) : "null")
                 .collect(Collectors.joining(", "));
 
         return MethodSpec.methodBuilder(factoryMethod.methodName()).addModifiers(Modifier.PUBLIC, Modifier.STATIC)
@@ -323,7 +326,7 @@ public class DraftBuilderGenerator {
         return getFieldName(getterMethod, true);
     }
 
-    private static String escapeJavaKeyword(final String name) {
+    private String escapeJavaKeyword(final String name) {
         return SourceVersion.isKeyword(name) ? "_" + name : name;
     }
 

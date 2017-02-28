@@ -9,7 +9,10 @@ import java.util.List;
 /**
  * Example draft class used in our tests.
  */
-@ResourceDraftValue(factoryMethods = {@FactoryMethod(parameterNames = {"sku", "active"})})
+@ResourceDraftValue(factoryMethods = {
+        @FactoryMethod(parameterNames = {"sku", "active"}),
+        @FactoryMethod(parameterNames = {"default", "active"}
+        )})
 public interface ExampleDraft {
     /**
      * This test a reference type. Our generator only supports reference type.

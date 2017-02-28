@@ -35,6 +35,10 @@ import java.util.Locale;
         "private static boolean isValidAddressIndex(final List<Address> addresses, final Integer addressIndex) {\n" +
                 "        return Optional.ofNullable(addressIndex).map(i -> i < addresses.size() && i >= 0).orElse(true);\n" +
                 "    }"},
+        additionalDslConstructorEndContent = "if (!isValidAddressIndex(addresses, defaultBillingAddress)\n" +
+                "                || !isValidAddressIndex(addresses, defaultShippingAddress)) {\n" +
+                "            throw new IllegalArgumentException(\"The defaultBillingAddress and defaultShippingAddress cannot contain an index which is not in the address list\");\n" +
+                "        }",
         abstractBaseClass = true , useBuilderStereotypeDslClass = true)
 public interface CustomerDraft extends CustomDraft {
     @Nullable
