@@ -27,16 +27,7 @@ additionalDslClassContents = {"    public DiscountCodeDraftDsl withCartDiscounts
         "    }",
 "    public DiscountCodeDraftDsl withCartPredicate(@Nullable final io.sphere.sdk.cartdiscounts.CartDiscountPredicate cartPredicate) {\n" +
         "        return newBuilder().cartPredicate(cartPredicate.toSphereCartPredicate()).build();\n" +
-        "    }"}, useBuilderStereotypeDslClass = true, additionalBuilderClassContents = {"    public DiscountCodeDraftBuilder cartPredicate(@Nullable final io.sphere.sdk.cartdiscounts.CartDiscountPredicate cartPredicate) {\n" +
-        "        return cartPredicate(cartPredicate.toSphereCartPredicate());\n" +
-        "    }",
-"    public DiscountCodeDraftBuilder isActive(final boolean active) {\n" +
-        "        this.active = active;\n" +
-        "return this;\n" +
-        "    }",
-"   public static DiscountCodeDraftBuilder of(final java.lang.String code, final io.sphere.sdk.models.Referenceable<io.sphere.sdk.cartdiscounts.CartDiscount> cartDiscount) {\n" +
-        "        return of(code, Collections.singletonList(cartDiscount.toReference()));\n" +
-        "    }"})
+        "    }"}, useBuilderStereotypeDslClass = true, abstractBaseClass = true)
 public interface DiscountCodeDraft {
     @Nullable
     LocalizedString getName();

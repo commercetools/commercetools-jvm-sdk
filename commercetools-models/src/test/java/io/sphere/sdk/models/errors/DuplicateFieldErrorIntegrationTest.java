@@ -1,6 +1,7 @@
 package io.sphere.sdk.models.errors;
 
 import io.sphere.sdk.client.ErrorResponseException;
+import io.sphere.sdk.customers.CustomerDraftBuilder;
 import io.sphere.sdk.customers.CustomerDraftDsl;
 import io.sphere.sdk.customers.commands.CustomerCreateCommand;
 import io.sphere.sdk.test.IntegrationTest;

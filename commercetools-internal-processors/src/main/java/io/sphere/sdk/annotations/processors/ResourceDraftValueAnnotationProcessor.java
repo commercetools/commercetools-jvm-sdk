@@ -21,7 +21,7 @@ public final class ResourceDraftValueAnnotationProcessor extends CommercetoolsAn
     protected void generate(final TypeElement typeElement) {
         writeClass(typeElement, new ResourceDraftDslClassModelFactory(typeElement).createClassModel());
 //        writeClass(typeElement, new ResourceDraftBuilderClassModelFactory(typeElement).createClassModel());
-        final JavaFile javaFile = new DraftBuilderGenerator(processingEnv.getElementUtils()).generate(typeElement);
+        final JavaFile javaFile = new DraftBuilderGenerator(processingEnv.getElementUtils(), processingEnv.getTypeUtils()).generate(typeElement);
         writeClass(javaFile);
     }
 

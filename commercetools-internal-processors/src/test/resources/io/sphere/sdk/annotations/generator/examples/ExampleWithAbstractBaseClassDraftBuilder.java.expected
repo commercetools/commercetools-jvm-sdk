@@ -2,99 +2,32 @@ package io.sphere.sdk.annotations.generator.examples;
 
 import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.Builder;
-import java.lang.Boolean;
 import java.lang.String;
 import java.lang.SuppressWarnings;
-import java.util.List;
-import javax.annotation.Nullable;
 
 abstract class ExampleWithAbstractBaseClassDraftBuilderBase<T extends ExampleWithAbstractBaseClassDraftBuilderBase> extends Base implements Builder<ExampleWithAbstractBaseClassDraft> {
-  protected Boolean active;
-
-  @Nullable
-  protected List<String> assets;
-
-  protected List<String> attributes;
-
-  protected List<String> images;
-
-  @Nullable
-  protected String key;
-
-  protected List<String> prices;
-
-  protected String sku;
+  protected String name;
 
   protected ExampleWithAbstractBaseClassDraftBuilderBase() {
   }
 
-  protected ExampleWithAbstractBaseClassDraftBuilderBase(final Boolean active,
-      @Nullable final List<String> assets, final List<String> attributes, final List<String> images,
-      @Nullable final String key, final List<String> prices, final String sku) {
-    this.active = active;
-    this.assets = assets;
-    this.attributes = attributes;
-    this.images = images;
-    this.key = key;
-    this.prices = prices;
-    this.sku = sku;
+  protected ExampleWithAbstractBaseClassDraftBuilderBase(final String name) {
+    this.name = name;
   }
 
   @SuppressWarnings("unchecked")
-  public T active(final Boolean active) {
-    this.active = active;
-    return (T) this;
-  }
-
-  @SuppressWarnings("unchecked")
-  public T assets(@Nullable final List<String> assets) {
-    this.assets = assets;
-    return (T) this;
-  }
-
-  @SuppressWarnings("unchecked")
-  public T attributes(final List<String> attributes) {
-    this.attributes = attributes;
-    return (T) this;
-  }
-
-  @SuppressWarnings("unchecked")
-  public T images(final List<String> images) {
-    this.images = images;
-    return (T) this;
-  }
-
-  @SuppressWarnings("unchecked")
-  public T key(@Nullable final String key) {
-    this.key = key;
-    return (T) this;
-  }
-
-  @SuppressWarnings("unchecked")
-  public T prices(final List<String> prices) {
-    this.prices = prices;
-    return (T) this;
-  }
-
-  @SuppressWarnings("unchecked")
-  public T sku(final String sku) {
-    this.sku = sku;
+  public T name(final String name) {
+    this.name = name;
     return (T) this;
   }
 
   public ExampleWithAbstractBaseClassDraftDsl build() {
-    return new ExampleWithAbstractBaseClassDraftDsl(active, assets, attributes, images, key, prices, sku);
+    return new ExampleWithAbstractBaseClassDraftDsl(name);
   }
 
   @SuppressWarnings("unchecked")
   protected T from(final ExampleWithAbstractBaseClassDraft template) {
-    this.active = template.isActive();
-    this.assets = template.getAssets();
-    this.attributes = template.getAttributes();
-    this.images = template.getImages();
-    this.key = template.getKey();
-    this.prices = template.getPrices();
-    this.sku = template.getSku();
+    this.name = template.getName();
     return (T) this;
   }
 }

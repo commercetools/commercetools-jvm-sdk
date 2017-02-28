@@ -1,0 +1,36 @@
+package io.sphere.sdk.annotations.generator.examples;
+
+import io.sphere.sdk.models.Base;
+import io.sphere.sdk.models.Builder;
+import io.sphere.sdk.models.Reference;
+import io.sphere.sdk.models.Referenceable;
+import java.lang.String;
+import java.util.Optional;
+
+public final class ExampleWithReferenceDraftBuilder extends Base implements Builder<ExampleWithReferenceDraft> {
+  private Reference<String> name;
+
+  ExampleWithReferenceDraftBuilder() {
+  }
+
+  ExampleWithReferenceDraftBuilder(final Reference<String> name) {
+    this.name = name;
+  }
+
+  public ExampleWithReferenceDraftBuilder name(final Referenceable<String> name) {
+    this.name = Optional.ofNullable(name).map(Referenceable::toReference).orElse(null);;
+    return this;
+  }
+
+  public ExampleWithReferenceDraftDsl build() {
+    return new ExampleWithReferenceDraftDsl(name);
+  }
+
+  public static ExampleWithReferenceDraftBuilder of(final Reference<String> name) {
+    return new ExampleWithReferenceDraftBuilder(name);
+  }
+
+  public static ExampleWithReferenceDraftBuilder of(final ExampleWithReferenceDraft template) {
+    return new ExampleWithReferenceDraftBuilder(template.getName());
+  }
+}

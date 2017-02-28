@@ -4,9 +4,9 @@ import io.sphere.sdk.annotations.FactoryMethod;
 import io.sphere.sdk.annotations.ResourceDraftValue;
 
 /**
- * Example draft class for generating a builder for a draft class wich extends an interface.
+ * Example draft class for generating a builder for a draft class which extends another interface.
  */
-@ResourceDraftValue(factoryMethods = {@FactoryMethod(parameterNames = {"name", "sku", "active"})})
-public interface ExampleWithSuperInterfaceDraft extends ExampleDraft {
+@ResourceDraftValue(factoryMethods = {@FactoryMethod(parameterNames = {"name", "sku"})})
+public interface ExampleWithSuperInterfaceDraft extends ExampleDraftSuperInterface {
     String getName();
 }

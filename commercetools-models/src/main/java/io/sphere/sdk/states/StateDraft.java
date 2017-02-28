@@ -18,9 +18,7 @@ import java.util.Set;
  */
 @JsonDeserialize(as = StateDraftDsl.class)
 @ResourceDraftValue(factoryMethods = @FactoryMethod(parameterNames = {"key", "type"}),
-additionalBuilderClassContents = "    public StateDraftBuilder roles(final StateRole role) {\n" +
-        "        return roles(Collections.singleton(role));\n" +
-        "    }",
+abstractBaseClass = true,
 additionalDslClassContents = {"    public StateDraftDsl withRoles(final StateRole role) {\n" +
         "        return withRoles(Collections.singleton(role));\n" +
         "    }", "    public StateDraftDsl withInitial(final boolean initial) {\n" +

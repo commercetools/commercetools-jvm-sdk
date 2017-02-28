@@ -16,16 +16,8 @@ import java.util.Set;
  * @see TypeDraftDsl
  */
 @JsonDeserialize(as = TypeDraftDsl.class)
-@ResourceDraftValue(factoryMethods = @FactoryMethod(parameterNames = {"key", "name", "resourceTypeIds"}), additionalBuilderClassContents = {"    public static TypeDraftBuilder of(final String key, final LocalizedString name, final ResourceTypeIdsSetBuilder resourceTypeIdsSetBuilder) {\n" +
-        "        return of(key, name, resourceTypeIdsSetBuilder.build());\n" +
-        "    }", "    public TypeDraftBuilder plusFieldDefinitions(final List<FieldDefinition> fieldDefinitions) {\n" +
-        "        this.fieldDefinitions = SphereInternalUtils.listOf(getFieldDefinitions(), fieldDefinitions);\n" +
-        "        return this;\n" +
-        "    }\n" +
-        "\n" +
-        "    public TypeDraftBuilder plusFieldDefinitions(final FieldDefinition fieldDefinition) {\n" +
-        "        return plusFieldDefinitions(Collections.singletonList(fieldDefinition));\n" +
-        "    }"}, additionalDslClassContents = "        public static TypeDraftDsl of(final String key, final LocalizedString name, final ResourceTypeIdsSetBuilder resourceTypeIdsSetBuilder) {\n" +
+@ResourceDraftValue(factoryMethods = @FactoryMethod(parameterNames = {"key", "name", "resourceTypeIds"}), abstractBaseClass = true,
+        additionalDslClassContents = "        public static TypeDraftDsl of(final String key, final LocalizedString name, final ResourceTypeIdsSetBuilder resourceTypeIdsSetBuilder) {\n" +
         "            return of(key, name, resourceTypeIdsSetBuilder.build());\n" +
         "        }",
 gettersForBuilder = true, additionalBuilderInterfaces = "io.sphere.sdk.models.WithKey")

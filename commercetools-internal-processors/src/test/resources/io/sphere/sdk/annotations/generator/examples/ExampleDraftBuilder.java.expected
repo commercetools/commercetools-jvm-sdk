@@ -8,35 +8,37 @@ import java.util.List;
 import javax.annotation.Nullable;
 
 public final class ExampleDraftBuilder extends Base implements Builder<ExampleDraft> {
+  private Boolean _default;
+
   private Boolean active;
-
-  @Nullable
-  private List<String> assets;
-
-  private List<String> attributes;
-
-  private List<String> images;
 
   @Nullable
   private String key;
 
-  private List<String> prices;
+  private List<String> names;
 
   private String sku;
 
   ExampleDraftBuilder() {
   }
 
-  ExampleDraftBuilder(final Boolean active, @Nullable final List<String> assets,
-      final List<String> attributes, final List<String> images, @Nullable final String key,
-      final List<String> prices, final String sku) {
+  ExampleDraftBuilder(final Boolean _default, final Boolean active, @Nullable final String key,
+      final List<String> names, final String sku) {
+    this._default = _default;
     this.active = active;
-    this.assets = assets;
-    this.attributes = attributes;
-    this.images = images;
     this.key = key;
-    this.prices = prices;
+    this.names = names;
     this.sku = sku;
+  }
+
+  public ExampleDraftBuilder _default(final Boolean _default) {
+    this._default = _default;
+    return this;
+  }
+
+  public ExampleDraftBuilder isDefault(final Boolean _default) {
+    this._default = _default;
+    return this;
   }
 
   public ExampleDraftBuilder active(final Boolean active) {
@@ -44,18 +46,8 @@ public final class ExampleDraftBuilder extends Base implements Builder<ExampleDr
     return this;
   }
 
-  public ExampleDraftBuilder assets(@Nullable final List<String> assets) {
-    this.assets = assets;
-    return this;
-  }
-
-  public ExampleDraftBuilder attributes(final List<String> attributes) {
-    this.attributes = attributes;
-    return this;
-  }
-
-  public ExampleDraftBuilder images(final List<String> images) {
-    this.images = images;
+  public ExampleDraftBuilder isActive(final Boolean active) {
+    this.active = active;
     return this;
   }
 
@@ -64,8 +56,8 @@ public final class ExampleDraftBuilder extends Base implements Builder<ExampleDr
     return this;
   }
 
-  public ExampleDraftBuilder prices(final List<String> prices) {
-    this.prices = prices;
+  public ExampleDraftBuilder names(final List<String> names) {
+    this.names = names;
     return this;
   }
 
@@ -75,14 +67,14 @@ public final class ExampleDraftBuilder extends Base implements Builder<ExampleDr
   }
 
   public ExampleDraftDsl build() {
-    return new ExampleDraftDsl(active, assets, attributes, images, key, prices, sku);
+    return new ExampleDraftDsl(_default, active, key, names, sku);
   }
 
   public static ExampleDraftBuilder of(final Boolean active, final String sku) {
-    return new ExampleDraftBuilder(active, null, null, null, null, null, sku);
+    return new ExampleDraftBuilder(null, active, null, null, sku);
   }
 
   public static ExampleDraftBuilder of(final ExampleDraft template) {
-    return new ExampleDraftBuilder(template.isActive(), template.getAssets(), template.getAttributes(), template.getImages(), template.getKey(), template.getPrices(), template.getSku());
+    return new ExampleDraftBuilder(template.isDefault(), template.isActive(), template.getKey(), template.getNames(), template.getSku());
   }
 }

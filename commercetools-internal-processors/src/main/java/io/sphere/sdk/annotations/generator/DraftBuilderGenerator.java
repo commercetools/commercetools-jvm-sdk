@@ -3,6 +3,8 @@ package io.sphere.sdk.annotations.generator;
 import com.squareup.javapoet.*;
 import io.sphere.sdk.annotations.FactoryMethod;
 import io.sphere.sdk.annotations.ResourceDraftValue;
+import io.sphere.sdk.models.Reference;
+import io.sphere.sdk.models.Referenceable;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.annotation.Nullable;
@@ -10,8 +12,11 @@ import javax.lang.model.SourceVersion;
 import javax.lang.model.element.ExecutableElement;
 import javax.lang.model.element.Modifier;
 import javax.lang.model.element.TypeElement;
+import javax.lang.model.type.DeclaredType;
+import javax.lang.model.type.TypeMirror;
 import javax.lang.model.util.ElementFilter;
 import javax.lang.model.util.Elements;
+import javax.lang.model.util.Types;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -21,9 +26,11 @@ import java.util.stream.Stream;
  */
 public class DraftBuilderGenerator {
     private final Elements elements;
+    private final Types types;
 
-    public DraftBuilderGenerator(final Elements elements) {
+    public DraftBuilderGenerator(final Elements elements, final Types types) {
         this.elements = elements;
+        this.types = types;
     }
 
     public JavaFile generate(final TypeElement draftTypeElement) {
@@ -100,7 +107,7 @@ public class DraftBuilderGenerator {
 
         return MethodSpec.methodBuilder(factoryMethod.methodName()).addModifiers(Modifier.PUBLIC, Modifier.STATIC)
                 .returns(builderName)
-                .addParameters(createParameters(parameterTemplates))
+                .addParameters(createParameters(parameterTemplates, factoryMethod.useLowercaseBooleans()))
                 .addCode("return new $L($L);\n", builderName.simpleName(), callArguments)
                 .build();
     }
@@ -151,7 +158,7 @@ public class DraftBuilderGenerator {
     }
 
     private MethodSpec createConstructor(final ResourceDraftValue resourceDraftValue, final List<ExecutableElement> parameterTemplates) {
-        final List<ParameterSpec> parameters = createParameters(parameterTemplates);
+        final List<ParameterSpec> parameters = createParameters(parameterTemplates, false);
         final MethodSpec.Builder builder = MethodSpec.constructorBuilder()
                 .addParameters(parameters);
 
@@ -166,9 +173,9 @@ public class DraftBuilderGenerator {
         return builder.build();
     }
 
-    private List<ParameterSpec> createParameters(final List<ExecutableElement> parameterTemplates) {
+    private List<ParameterSpec> createParameters(final List<ExecutableElement> parameterTemplates, final boolean useLowercaseBooleans) {
         return parameterTemplates.stream()
-                .map(this::createParameter)
+                .map(m -> createParameter(m, useLowercaseBooleans))
                 .collect(Collectors.toList());
     }
 
@@ -197,22 +204,55 @@ public class DraftBuilderGenerator {
      * @return a list of builder methods - this will allow us later to create additional builder methods for collection types
      */
     private List<MethodSpec> createBuilderMethods(final ClassName builderName, final ResourceDraftValue resourceDraftValue, final ExecutableElement getterMethod) {
+        final String builderMethodName = getFieldName(getterMethod);
+        final List<MethodSpec> builderMethods = new ArrayList<>();
+        builderMethods.add(createBuilderMethod(builderMethodName, builderName, resourceDraftValue, getterMethod));
+
+        final TypeMirror type = getterMethod.getReturnType();
+        if (isSameType(type, Boolean.class) && !builderMethodName.startsWith("is")) {
+            final String additionalBooleanBuilderMethodName = "is" + StringUtils.capitalize(getFieldName(getterMethod, false));
+            builderMethods.add(createBuilderMethod(additionalBooleanBuilderMethodName, builderName, resourceDraftValue, getterMethod));
+        }
+        return builderMethods;
+    }
+
+
+    private MethodSpec createBuilderMethod(final String builderMethodName, final ClassName builderName, final ResourceDraftValue resourceDraftValue, final ExecutableElement getterMethod) {
+
+        final TypeMirror parameterType = getterMethod.getReturnType();
+        final TypeName builderParameterTypeName;
+
         final TypeName returnType = resourceDraftValue.abstractBaseClass() ?
                 TypeVariableName.get("T") : builderName;
-        final String builderMethodName = getFieldName(getterMethod);
         final MethodSpec.Builder builder = MethodSpec.methodBuilder(builderMethodName)
                 .addModifiers(Modifier.PUBLIC)
                 .returns(returnType);
 
-        builder.addParameter(createParameter(getterMethod))
-                .addCode("this.$L = $L;\n", builderMethodName, builderMethodName);
+        final boolean parameterTypeIsReference = isSameType(parameterType, Reference.class);
+        if (parameterTypeIsReference) {
+            final DeclaredType declaredType = (DeclaredType) parameterType;
+            builderParameterTypeName = ParameterizedTypeName.get(ClassName.get(Referenceable.class), TypeName.get(declaredType.getTypeArguments().get(0)));
+        } else {
+            builderParameterTypeName = TypeName.get(parameterType);
+        }
+
+        final String fieldName = getFieldName(getterMethod);
+        final ParameterSpec parameter = createParameter(fieldName, builderParameterTypeName, getterMethod);
+
+
+        builder.addParameter(parameter);
+        if (parameterTypeIsReference) {
+            builder.addCode("this.$L = $T.ofNullable($N).map($T::toReference).orElse(null);;\n", fieldName, Optional.class, parameter, Referenceable.class);
+        } else {
+            builder.addCode("this.$L = $N;\n", fieldName, parameter);
+        }
         if (resourceDraftValue.abstractBaseClass()) {
             addSuppressWarnings(builder);
             builder.addCode("return (T) this;\n");
         } else {
             builder.addCode("return this;\n");
         }
-        return Arrays.asList(builder.build());
+        return builder.build();
     }
 
     private void addSuppressWarnings(final MethodSpec.Builder builder) {
@@ -242,10 +282,26 @@ public class DraftBuilderGenerator {
         }
     }
 
-    private ParameterSpec createParameter(final ExecutableElement method) {
-        final TypeName type = ClassName.get(method.getReturnType());
-        final String name = getFieldName(method);
-        final ParameterSpec.Builder builder = ParameterSpec.builder(type, name).addModifiers(Modifier.FINAL);
+    /**
+     *
+     * @param method
+     * @param useLowercaseBooleans {@link FactoryMethod#useLowercaseBooleans()}
+     * @return
+     */
+    private ParameterSpec createParameter(final ExecutableElement method, final boolean useLowercaseBooleans) {
+        final TypeMirror returnType = method.getReturnType();
+        final String parameterName = getFieldName(method);
+        final TypeName type;
+        if (useLowercaseBooleans && isSameType(returnType, Boolean.class)) {
+            type = ClassName.get(types.unboxedType(returnType));
+        } else{
+            type = ClassName.get(returnType);
+        }
+        return createParameter(parameterName, type, method);
+    }
+
+    private ParameterSpec createParameter(final String parameterName, final TypeName type, final ExecutableElement method) {
+        final ParameterSpec.Builder builder = ParameterSpec.builder(type, parameterName).addModifiers(Modifier.FINAL);
         copyNullableAnnotation(method, builder);
         return builder.build();
     }
@@ -256,16 +312,20 @@ public class DraftBuilderGenerator {
      * @param getterMethod the getter method
      * @return the uncapitalized name of the method without the {@code get} prefix
      */
-    private String getFieldName(final ExecutableElement getterMethod) {
+    private String getFieldName(final ExecutableElement getterMethod, final boolean escapeJavaKeyword) {
         final String name = getterMethod.getSimpleName().toString();
         final int fieldNameIndex = name.startsWith("is") ? 2 : 3;
-        return escapeJavaKeyword(StringUtils.uncapitalize(name.substring(fieldNameIndex)));
+        final String fieldName = StringUtils.uncapitalize(name.substring(fieldNameIndex));
+        return escapeJavaKeyword ? escapeJavaKeyword(fieldName) : fieldName;
+    }
+
+    private String getFieldName(final ExecutableElement getterMethod) {
+        return getFieldName(getterMethod, true);
     }
 
     private static String escapeJavaKeyword(final String name) {
         return SourceVersion.isKeyword(name) ? "_" + name : name;
     }
-
 
     private List<ExecutableElement> getGetterMethodsSorted(TypeElement clazz) {
         return ElementFilter.methodsIn(elements.getAllMembers(clazz)).stream()
@@ -285,5 +345,22 @@ public class DraftBuilderGenerator {
         final boolean hasGetterMethodName = !"getClass".equals(methodName) && methodName.startsWith("get") || methodName.startsWith("is");
         final Set<Modifier> modifiers = method.getModifiers();
         return hasGetterMethodName && !modifiers.contains(Modifier.STATIC) && !modifiers.contains(Modifier.DEFAULT);
+    }
+
+    /**
+     * Checks that the given type has the same type as the given class.
+     *
+     * @param type the type
+     * @param clazz the class
+     * @return true if the given parameters have the same type
+     */
+    private boolean isSameType(final TypeMirror type, final Class<?> clazz) {
+        final TypeMirror type1 = types.erasure(type);
+        final TypeMirror type2 = types.erasure(asType(clazz));
+        return types.isSameType(type1, type2);
+    }
+
+    private TypeMirror asType(final Class<?> clazz) {
+        return elements.getTypeElement(clazz.getCanonicalName()).asType();
     }
 }
