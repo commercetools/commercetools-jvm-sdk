@@ -6,7 +6,15 @@ import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Referenceable;
 import java.lang.String;
 import java.util.Optional;
+import javax.annotation.Generated;
 
+/**
+ * Builder for {@link ExampleWithReferenceDraft}.
+ */
+@Generated(
+    value = "io.sphere.sdk.annotations.generator.DraftBuilderGenerator",
+    comments = "Generated from: io.sphere.sdk.annotations.generator.examples.ExampleWithReferenceDraft"
+)
 public final class ExampleWithReferenceDraftBuilder extends Base implements Builder<ExampleWithReferenceDraft> {
   private Reference<String> name;
 
@@ -22,6 +30,11 @@ public final class ExampleWithReferenceDraftBuilder extends Base implements Buil
     return this;
   }
 
+  /**
+   * Builds the instance.
+   *
+   * @return the instance
+   */
   public ExampleWithReferenceDraftDsl build() {
     return new ExampleWithReferenceDraftDsl(name);
   }
@@ -30,6 +43,12 @@ public final class ExampleWithReferenceDraftBuilder extends Base implements Buil
     return new ExampleWithReferenceDraftBuilder(name);
   }
 
+  /**
+   * Creates a builder initialized with the fields of the template parameter.
+   *
+   * @param template the template
+   * @return a new builder initialized from the template
+   */
   public static ExampleWithReferenceDraftBuilder of(final ExampleWithReferenceDraft template) {
     return new ExampleWithReferenceDraftBuilder(template.getName());
   }

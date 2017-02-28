@@ -5,8 +5,16 @@ import io.sphere.sdk.models.Builder;
 import java.lang.Boolean;
 import java.lang.String;
 import java.util.List;
+import javax.annotation.Generated;
 import javax.annotation.Nullable;
 
+/**
+ * Builder for {@link ExampleDraft}.
+ */
+@Generated(
+    value = "io.sphere.sdk.annotations.generator.DraftBuilderGenerator",
+    comments = "Generated from: io.sphere.sdk.annotations.generator.examples.ExampleDraft"
+)
 public final class ExampleDraftBuilder extends Base implements Builder<ExampleDraft> {
   private Boolean _default;
 
@@ -66,6 +74,11 @@ public final class ExampleDraftBuilder extends Base implements Builder<ExampleDr
     return this;
   }
 
+  /**
+   * Builds the instance.
+   *
+   * @return the instance
+   */
   public ExampleDraftDsl build() {
     return new ExampleDraftDsl(_default, active, names, optional, sku);
   }
@@ -82,6 +95,12 @@ public final class ExampleDraftBuilder extends Base implements Builder<ExampleDr
     return new ExampleDraftBuilder(_default, null, null, optional, null);
   }
 
+  /**
+   * Creates a builder initialized with the fields of the template parameter.
+   *
+   * @param template the template
+   * @return a new builder initialized from the template
+   */
   public static ExampleDraftBuilder of(final ExampleDraft template) {
     return new ExampleDraftBuilder(template.isDefault(), template.isActive(), template.getNames(), template.getOptional(), template.getSku());
   }

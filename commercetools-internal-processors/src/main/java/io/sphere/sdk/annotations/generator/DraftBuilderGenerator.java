@@ -9,6 +9,7 @@ import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Referenceable;
 import org.apache.commons.lang3.StringUtils;
 
+import javax.annotation.Generated;
 import javax.annotation.Nullable;
 import javax.lang.model.SourceVersion;
 import javax.lang.model.element.ExecutableElement;
@@ -56,16 +57,23 @@ public class DraftBuilderGenerator {
                 .map(interfaceName -> ClassName.get(elements.getTypeElement(interfaceName)))
                 .collect(Collectors.toList());
         final TypeSpec.Builder builder = TypeSpec.classBuilder(generatedBuilderName)
-                .addSuperinterfaces(additionalInterfaceNames);
+                .addSuperinterfaces(additionalInterfaceNames)
+                .addAnnotation(AnnotationSpec.builder(Generated.class)
+                        .addMember("value", "$S", getClass().getCanonicalName())
+                        .addMember("comments", "$S", "Generated from: " + draftTypeElement.getQualifiedName().toString())
+                        .build());
 
         final TypeName builderTypeArgument = ClassName.get(packageName, draftName + (resourceDraftValue.useBuilderStereotypeDslClass() ? "Dsl" : ""));
         builder
                 .superclass(ClassName.get(Base.class))
                 .addSuperinterface(ParameterizedTypeName.get(ClassName.get(Builder.class), builderTypeArgument));
         if (resourceDraftValue.abstractBaseClass()) {
+            builder.addJavadoc("Abstract base builder for {@link $T} which needs to be extended to add additional methods.\n", draftTypeElement);
+            builder.addJavadoc("Subclasses have to provide the same non-default constructor as this class.\n", draftTypeElement);
             builder.addModifiers(Modifier.ABSTRACT)
                     .addTypeVariable(TypeVariableName.get("T").withBounds(generatedBuilderName));
         } else {
+            builder.addJavadoc("Builder for {@link $T}.\n", draftTypeElement);
             builder.addModifiers(Modifier.PUBLIC, Modifier.FINAL);
         }
         builder.addFields(fieldSpecs)
@@ -127,6 +135,9 @@ public class DraftBuilderGenerator {
                 .collect(Collectors.joining(", "));
         return MethodSpec.methodBuilder("of").addModifiers(Modifier.PUBLIC, Modifier.STATIC)
                 .returns(concreteBuilderName)
+                .addJavadoc("Creates a builder initialized with the fields of the template parameter.\n\n")
+                .addJavadoc("@param template the template\n")
+                .addJavadoc("@return a new builder initialized from the template\n")
                 .addParameter(templateParameter)
                 .addCode("return new $L($L);\n", concreteBuilderName.simpleName(), callArguments)
                 .build();
@@ -180,6 +191,8 @@ public class DraftBuilderGenerator {
                 .collect(Collectors.toList());
         final String callArgumentss = String.join(", ", argumentNames);
         return MethodSpec.methodBuilder("build")
+                .addJavadoc("Builds the instance.\n\n")
+                .addJavadoc("@return the instance\n")
                 .addModifiers(Modifier.PUBLIC)
                 .returns(returnType)
                 .addCode("return new $T($L);\n", returnType, callArgumentss)

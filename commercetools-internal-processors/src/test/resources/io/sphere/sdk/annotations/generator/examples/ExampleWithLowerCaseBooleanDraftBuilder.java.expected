@@ -3,7 +3,15 @@ package io.sphere.sdk.annotations.generator.examples;
 import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.Builder;
 import java.lang.Boolean;
+import javax.annotation.Generated;
 
+/**
+ * Builder for {@link ExampleWithLowerCaseBooleanDraft}.
+ */
+@Generated(
+    value = "io.sphere.sdk.annotations.generator.DraftBuilderGenerator",
+    comments = "Generated from: io.sphere.sdk.annotations.generator.examples.ExampleWithLowerCaseBooleanDraft"
+)
 public final class ExampleWithLowerCaseBooleanDraftBuilder extends Base implements Builder<ExampleWithLowerCaseBooleanDraft> {
   private Boolean lowerCased;
 
@@ -24,6 +32,11 @@ public final class ExampleWithLowerCaseBooleanDraftBuilder extends Base implemen
     return this;
   }
 
+  /**
+   * Builds the instance.
+   *
+   * @return the instance
+   */
   public ExampleWithLowerCaseBooleanDraftDsl build() {
     return new ExampleWithLowerCaseBooleanDraftDsl(lowerCased);
   }
@@ -32,6 +45,12 @@ public final class ExampleWithLowerCaseBooleanDraftBuilder extends Base implemen
     return new ExampleWithLowerCaseBooleanDraftBuilder(lowerCased);
   }
 
+  /**
+   * Creates a builder initialized with the fields of the template parameter.
+   *
+   * @param template the template
+   * @return a new builder initialized from the template
+   */
   public static ExampleWithLowerCaseBooleanDraftBuilder of(final ExampleWithLowerCaseBooleanDraft template) {
     return new ExampleWithLowerCaseBooleanDraftBuilder(template.isLowerCased());
   }
