@@ -1,8 +1,10 @@
 package io.sphere.sdk.discountcodes;
 
 import io.sphere.sdk.cartdiscounts.CartDiscount;
+import io.sphere.sdk.cartdiscounts.CartDiscountPredicate;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Reference;
+import io.sphere.sdk.models.Referenceable;
 
 import javax.annotation.Nullable;
 import java.util.Collections;
