@@ -11,8 +11,9 @@ import java.util.List;
  */
 @ResourceDraftValue(factoryMethods = {
         @FactoryMethod(parameterNames = {"sku", "active"}),
-        @FactoryMethod(parameterNames = {"default", "active"}
-        )})
+        @FactoryMethod(parameterNames = {"default", "active"}),
+        @FactoryMethod(parameterNames = {"default", "optional"})
+        })
 public interface ExampleDraft {
     /**
      * This test a reference type. Our generator only supports reference type.
@@ -40,7 +41,7 @@ public interface ExampleDraft {
      * This tests an optional field.
      */
     @Nullable
-    String getKey();
+    String getOptional();
 
     /**
      * This tests that a default method doesn't generate a builder method.

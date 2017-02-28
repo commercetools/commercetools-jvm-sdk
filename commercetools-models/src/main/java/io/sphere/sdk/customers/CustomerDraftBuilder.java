@@ -12,10 +12,7 @@ import java.util.Locale;
 
 public class CustomerDraftBuilder extends CustomerDraftBuilderBase<CustomerDraftBuilder> {
 
-    public CustomerDraftBuilder() {
-    }
-
-    public CustomerDraftBuilder(@Nullable final List<Address> addresses, @Nullable final String anonymousCartId, @Nullable final String anonymousId, @Nullable final List<Integer> billingAddresses, @Nullable final String companyName, @Nullable final CustomFieldsDraft custom, @Nullable final Reference<CustomerGroup> customerGroup, @Nullable final String customerNumber, @Nullable final LocalDate dateOfBirth, @Nullable final Integer defaultBillingAddress, @Nullable final Integer defaultShippingAddress, final String email, final Boolean emailVerified, @Nullable final String externalId, @Nullable final String firstName, @Nullable final String lastName, @Nullable final Locale locale, @Nullable final String middleName, final String password, @Nullable final List<Integer> shippingAddresses, @Nullable final String title, @Nullable final String vatId) {
+    CustomerDraftBuilder(@Nullable final List<Address> addresses, @Nullable final String anonymousCartId, @Nullable final String anonymousId, @Nullable final List<Integer> billingAddresses, @Nullable final String companyName, @Nullable final CustomFieldsDraft custom, @Nullable final Reference<CustomerGroup> customerGroup, @Nullable final String customerNumber, @Nullable final LocalDate dateOfBirth, @Nullable final Integer defaultBillingAddress, @Nullable final Integer defaultShippingAddress, final String email, final Boolean emailVerified, @Nullable final String externalId, @Nullable final String firstName, @Nullable final String lastName, @Nullable final Locale locale, @Nullable final String middleName, final String password, @Nullable final List<Integer> shippingAddresses, @Nullable final String title, @Nullable final String vatId) {
         super(addresses, anonymousCartId, anonymousId, billingAddresses, companyName, custom, customerGroup, customerNumber, dateOfBirth, defaultBillingAddress, defaultShippingAddress, email, emailVerified, externalId, firstName, lastName, locale, middleName, password, shippingAddresses, title, vatId);
     }
 
@@ -25,13 +22,5 @@ public class CustomerDraftBuilder extends CustomerDraftBuilderBase<CustomerDraft
                 .middleName(customerName.getMiddleName())
                 .lastName(customerName.getLastName())
                 .title(customerName.getTitle());
-    }
-
-    public static CustomerDraftBuilder of(final String email, final String password) {
-        return new CustomerDraftBuilder().email(email).password(password);
-    }
-
-    public static CustomerDraftBuilder of(final CustomerDraft template) {
-        return new CustomerDraftBuilder().from(template);
     }
 }

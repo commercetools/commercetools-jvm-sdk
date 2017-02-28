@@ -25,9 +25,11 @@ abstract class ExampleWithAbstractBaseClassDraftBuilderBase<T extends ExampleWit
     return new ExampleWithAbstractBaseClassDraftDsl(name);
   }
 
-  @SuppressWarnings("unchecked")
-  protected T from(final ExampleWithAbstractBaseClassDraft template) {
-    this.name = template.getName();
-    return (T) this;
+  public static ExampleWithAbstractBaseClassDraftBuilder of(final String name) {
+    return new ExampleWithAbstractBaseClassDraftBuilder(name);
+  }
+
+  public static ExampleWithAbstractBaseClassDraftBuilder of(final ExampleWithAbstractBaseClassDraft template) {
+    return new ExampleWithAbstractBaseClassDraftBuilder(template.getName());
   }
 }

@@ -6,7 +6,7 @@ import io.sphere.sdk.annotations.ResourceDraftValue;
 /**
  * Example draft class for generating an abstract builder base class.
  */
-@ResourceDraftValue(abstractBaseClass = true, factoryMethods = {@FactoryMethod(parameterNames = {"sku", "active"})})
+@ResourceDraftValue(abstractBaseClass = true, factoryMethods = {@FactoryMethod(parameterNames = {"name"})})
 public interface ExampleWithAbstractBaseClassDraft {
     String getName();
 }

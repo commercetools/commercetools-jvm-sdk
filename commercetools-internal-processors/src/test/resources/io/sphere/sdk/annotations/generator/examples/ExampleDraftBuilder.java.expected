@@ -12,22 +12,22 @@ public final class ExampleDraftBuilder extends Base implements Builder<ExampleDr
 
   private Boolean active;
 
-  @Nullable
-  private String key;
-
   private List<String> names;
+
+  @Nullable
+  private String optional;
 
   private String sku;
 
   ExampleDraftBuilder() {
   }
 
-  ExampleDraftBuilder(final Boolean _default, final Boolean active, @Nullable final String key,
-      final List<String> names, final String sku) {
+  ExampleDraftBuilder(final Boolean _default, final Boolean active, final List<String> names,
+      @Nullable final String optional, final String sku) {
     this._default = _default;
     this.active = active;
-    this.key = key;
     this.names = names;
+    this.optional = optional;
     this.sku = sku;
   }
 
@@ -51,13 +51,13 @@ public final class ExampleDraftBuilder extends Base implements Builder<ExampleDr
     return this;
   }
 
-  public ExampleDraftBuilder key(@Nullable final String key) {
-    this.key = key;
+  public ExampleDraftBuilder names(final List<String> names) {
+    this.names = names;
     return this;
   }
 
-  public ExampleDraftBuilder names(final List<String> names) {
-    this.names = names;
+  public ExampleDraftBuilder optional(@Nullable final String optional) {
+    this.optional = optional;
     return this;
   }
 
@@ -67,7 +67,7 @@ public final class ExampleDraftBuilder extends Base implements Builder<ExampleDr
   }
 
   public ExampleDraftDsl build() {
-    return new ExampleDraftDsl(_default, active, key, names, sku);
+    return new ExampleDraftDsl(_default, active, names, optional, sku);
   }
 
   public static ExampleDraftBuilder of(final String sku, final Boolean active) {
@@ -78,7 +78,11 @@ public final class ExampleDraftBuilder extends Base implements Builder<ExampleDr
     return new ExampleDraftBuilder(_default, active, null, null, null);
   }
 
+  public static ExampleDraftBuilder of(final Boolean _default, final String optional) {
+    return new ExampleDraftBuilder(_default, null, null, optional, null);
+  }
+
   public static ExampleDraftBuilder of(final ExampleDraft template) {
-    return new ExampleDraftBuilder(template.isDefault(), template.isActive(), template.getKey(), template.getNames(), template.getSku());
+    return new ExampleDraftBuilder(template.isDefault(), template.isActive(), template.getNames(), template.getOptional(), template.getSku());
   }
 }

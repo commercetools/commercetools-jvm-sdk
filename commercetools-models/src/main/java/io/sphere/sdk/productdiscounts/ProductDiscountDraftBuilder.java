@@ -14,7 +14,7 @@ public final class ProductDiscountDraftBuilder extends ProductDiscountDraftBuild
     }
 
     public static ProductDiscountDraftBuilder of(final Boolean active,
-                                                 @Nullable final LocalizedString description, final LocalizedString name,
+                                                 final LocalizedString description, final LocalizedString name,
                                                  final String predicate, final String sortOrder, final ProductDiscountValue value) {
         return new ProductDiscountDraftBuilder(active, description, name, predicate, sortOrder, value);
     }

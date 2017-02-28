@@ -10,15 +10,7 @@ import static java.util.Arrays.asList;
 
 public final class ProductVariantDraftBuilder extends ProductVariantDraftBuilderBase<ProductVariantDraftBuilder> {
 
-    private ProductVariantDraftBuilder() {
-    }
-
-    public static ProductVariantDraftBuilder of(final ProductVariantDraft productVariantDraft) {
-        return of().from(productVariantDraft);
-    }
-
-    public static ProductVariantDraftBuilder of() {
-        return new ProductVariantDraftBuilder();
+    ProductVariantDraftBuilder() {
     }
 
     public ProductVariantDraftBuilder images(final Image image) {

@@ -68,6 +68,15 @@ abstract class ProductVariantDraftBuilderBase<T extends ProductVariantDraftBuild
                 .assets(template.getAssets());
     }
 
+
+    public static ProductVariantDraftBuilder of(final ProductVariantDraft productVariantDraft) {
+        return of().from(productVariantDraft);
+    }
+
+    public static ProductVariantDraftBuilder of() {
+        return new ProductVariantDraftBuilder();
+    }
+
     @Override
     public ProductVariantDraft build() {
         return new ProductVariantDraftImpl(sku, prices, attributes, images, key, assets);
