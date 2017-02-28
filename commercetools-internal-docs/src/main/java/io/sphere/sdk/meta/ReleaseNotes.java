@@ -13,6 +13,7 @@ import io.sphere.sdk.categories.CategoryDraft;
 import io.sphere.sdk.categories.CategoryDraftBuilder;
 import io.sphere.sdk.channels.Channel;
 import io.sphere.sdk.channels.queries.ChannelByIdGet;
+import io.sphere.sdk.channels.queries.ChannelQueryModel;
 import io.sphere.sdk.client.SphereApiConfig;
 import io.sphere.sdk.client.SphereAuthConfig;
 import io.sphere.sdk.client.SphereClient;
@@ -104,10 +105,18 @@ import java.util.function.Function;
  <li class=fixed-in-release></li>
  </ul>
  -->
+ <h3 class=released-version id="v1_11_1">1.11.1 (27.02.2017)</h3>
+ <ul>
+ <li class=new-in-release>Added {@link Channel#getGeoLocation()}, added support for it in {@link ChannelQueryModel#geoLocation()} and support for {@code withinCircle}
+    predicate {@link GeoJSONQueryModel#withinCircle(Point, Double)}.</li>
+ <li class=new-in-release>Added shopping list resource {@link io.sphere.sdk.shoppinglists.ShoppingList} with new cart update action {@link io.sphere.sdk.carts.commands.updateactions.AddShoppingList}.</li>
+ <li class=change-in-release>Improved recovery strategy for {@link io.sphere.sdk.sequencegenerators.CustomObjectBigIntegerNumberGenerator} so that it retries when the id already exists.</li>
+ <li class=change-in-release>Updated {@code org.asynchttpclient:async-http-client} version of the {@code sdk-http-ahc-2_0} module to version {@code 2.0.28}.</li>
+ </ul>
 
  <h3 class=released-version id="v1_11_0">1.11.0 (07.02.2017)</h3>
  <ul>
- <li class=new-in-release>{@link Asset}s on categories</li></li>
+ <li class=new-in-release>{@link Asset}s on categories</li>
  <li class=new-in-release>{@link OrderImportDraft} can now provide the {@code inventoryMode} to track inventory</li>
  <li class=fixed-in-release>{@code Set} types preserve input order, see <a href="https://github.com/commercetools/commercetools-jvm-sdk/issues/1294">#1294</a></li>
  <li class=fixed-in-release>{@link ProductDraftBuilder} was not preserving the {@code key} when using a {@link ProductDraft}</li>
