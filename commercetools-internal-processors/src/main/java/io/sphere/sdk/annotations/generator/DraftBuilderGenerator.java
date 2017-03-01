@@ -4,6 +4,7 @@ import com.squareup.javapoet.*;
 import io.sphere.sdk.annotations.FactoryMethod;
 import io.sphere.sdk.annotations.ResourceDraftValue;
 import io.sphere.sdk.annotations.model.PropertyGenModel;
+import io.sphere.sdk.annotations.model.TypeUtils;
 import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.Builder;
 import io.sphere.sdk.models.Reference;
@@ -16,7 +17,6 @@ import javax.lang.model.SourceVersion;
 import javax.lang.model.element.ExecutableElement;
 import javax.lang.model.element.Modifier;
 import javax.lang.model.element.TypeElement;
-import javax.lang.model.util.ElementFilter;
 import javax.lang.model.util.Elements;
 import java.util.*;
 import java.util.function.Function;
@@ -28,23 +28,23 @@ import java.util.stream.Stream;
  */
 public class DraftBuilderGenerator {
     private final Elements elements;
-
+    private final TypeUtils typeUtils;
 
     public DraftBuilderGenerator(final Elements elements) {
         this.elements = elements;
+        this.typeUtils = new TypeUtils(elements);
     }
 
     public JavaFile generate(final TypeElement draftTypeElement) {
-        final String packageName = elements.getPackageOf(draftTypeElement).getQualifiedName().toString();
-        final String draftName = draftTypeElement.getSimpleName().toString();
-        final ResourceDraftValue resourceDraftValue = draftTypeElement.getAnnotation(ResourceDraftValue.class);
-        final ClassName concreteBuilderName = ClassName.get(packageName, draftName + "Builder");
-        final ClassName generatedBuilderName = ClassName.get(packageName, concreteBuilderName.simpleName() + (resourceDraftValue.abstractBaseClass() ? "Base" : ""));
+        final ClassName concreteBuilderName = typeUtils.getConcreteBuilderType(draftTypeElement);
+        final ClassName generatedBuilderName = typeUtils.getBuilderType(draftTypeElement);
 
         final List<ExecutableElement> getterMethods = getGetterMethodsSorted(draftTypeElement);
         final List<PropertyGenModel> properties = getterMethods.stream()
                 .map(PropertyGenModel::of)
                 .collect(Collectors.toList());
+
+        final ResourceDraftValue resourceDraftValue = draftTypeElement.getAnnotation(ResourceDraftValue.class);
 
         final List<MethodSpec> builderMethodSpecs = properties.stream()
                 .flatMap(m -> createBuilderMethods(generatedBuilderName, resourceDraftValue, m).stream())
@@ -64,13 +64,13 @@ public class DraftBuilderGenerator {
                         .addMember("comments", "$S", "Generated from: " + draftTypeElement.getQualifiedName().toString())
                         .build());
 
-        final TypeName builderTypeArgument = ClassName.get(packageName, draftName + (resourceDraftValue.useBuilderStereotypeDslClass() ? "Dsl" : ""));
+        final TypeName builderTypeArgument = typeUtils.getBuilderTypeArgument(draftTypeElement);
         builder
                 .superclass(ClassName.get(Base.class))
                 .addSuperinterface(ParameterizedTypeName.get(ClassName.get(Builder.class), builderTypeArgument));
-        if (resourceDraftValue.abstractBaseClass()) {
+        if (resourceDraftValue.abstractBuilderClass()) {
             builder.addJavadoc("Abstract base builder for {@link $T} which needs to be extended to add additional methods.\n", draftTypeElement);
-            builder.addJavadoc("Subclasses have to provide the same non-default constructor as this class.\n", draftTypeElement);
+            builder.addJavadoc("Subclasses have to provide the same non-default constructor as this class.\n");
             builder.addModifiers(Modifier.ABSTRACT)
                     .addTypeVariable(TypeVariableName.get("T").withBounds(generatedBuilderName));
         } else {
@@ -87,14 +87,14 @@ public class DraftBuilderGenerator {
                     .collect(Collectors.toList());
             builder.addMethods(getMethods);
         }
-        final TypeName draftImplType = ClassName.get(packageName, draftName + "Dsl");
+        final TypeName draftImplType = typeUtils.getDraftImplType(draftTypeElement);
         builder.addMethod(createBuildMethod(draftImplType, getterMethods))
                 .addMethods(createFactoryMethods(resourceDraftValue.factoryMethods(), properties, concreteBuilderName))
                 .addMethod(createCopyFactoryMethod(draftTypeElement, concreteBuilderName, getterMethods));
 
         final TypeSpec draftBuilderBaseClass = builder.build();
 
-        final JavaFile javaFile = JavaFile.builder(packageName, draftBuilderBaseClass)
+        final JavaFile javaFile = JavaFile.builder(generatedBuilderName.packageName(), draftBuilderBaseClass)
                 .build();
 
         return javaFile;
@@ -145,7 +145,7 @@ public class DraftBuilderGenerator {
         final FieldSpec.Builder builder = FieldSpec.builder(property.getType(), property.getJavaIdentifier());
 
         // we use package private for abstract classes so that the fields aren't visible in the generated javadoc
-        if (!resourceDraftValue.abstractBaseClass()) {
+        if (!resourceDraftValue.abstractBuilderClass()) {
             builder.addModifiers(Modifier.PRIVATE);
         }
         if (property.isOptional()) {
@@ -156,7 +156,7 @@ public class DraftBuilderGenerator {
 
     private MethodSpec createDefaultConstructor(final ResourceDraftValue resourceDraftValue) {
         final MethodSpec.Builder builder = MethodSpec.constructorBuilder();
-        if (resourceDraftValue.abstractBaseClass()) {
+        if (resourceDraftValue.abstractBuilderClass()) {
             builder.addModifiers(Modifier.PROTECTED);
         }
 
@@ -168,7 +168,7 @@ public class DraftBuilderGenerator {
         final MethodSpec.Builder builder = MethodSpec.constructorBuilder()
                 .addParameters(parameters);
 
-        if (resourceDraftValue.abstractBaseClass()) {
+        if (resourceDraftValue.abstractBuilderClass()) {
             builder.addModifiers(Modifier.PROTECTED);
         }
         final List<String> parameterNames = properties.stream()
@@ -234,7 +234,7 @@ public class DraftBuilderGenerator {
 
     private MethodSpec createBuilderMethod(final String methodName, final ClassName builderType, final ResourceDraftValue resourceDraftValue, final PropertyGenModel property) {
         final TypeName builderParameterTypeName;
-        final TypeName returnType = resourceDraftValue.abstractBaseClass() ?
+        final TypeName returnType = resourceDraftValue.abstractBuilderClass() ?
                 TypeVariableName.get("T") : builderType;
         final MethodSpec.Builder builder = MethodSpec.methodBuilder(methodName)
                 .addModifiers(Modifier.PUBLIC)
@@ -257,7 +257,7 @@ public class DraftBuilderGenerator {
         } else {
             builder.addCode("this.$L = $N;\n", fieldName, parameter);
         }
-        if (resourceDraftValue.abstractBaseClass()) {
+        if (resourceDraftValue.abstractBuilderClass()) {
             addSuppressWarnings(builder);
             builder.addCode("return (T) this;\n");
         } else {
@@ -313,28 +313,14 @@ public class DraftBuilderGenerator {
     }
 
     /**
-     * Returns all getter methods - including inherited methods - sorted by their field name.
+     * Returns all getter methods - including inherited methods - sorted by their property name.
      *
      * @param typeElement the type element
      * @return methods sorted by their {@link PropertyGenModel#getPropertyName(ExecutableElement)}
      */
     private List<ExecutableElement> getGetterMethodsSorted(TypeElement typeElement) {
-        return ElementFilter.methodsIn(elements.getAllMembers(typeElement)).stream()
-                .filter(this::isGetterMethod)
+        return typeUtils.getAllGetterMethods(typeElement)
                 .sorted(Comparator.comparing(methodName -> escapeJavaKeyword(PropertyGenModel.getPropertyName(methodName))))
                 .collect(Collectors.toList());
-    }
-
-    /**
-     * Returns true iff. the given method name starts with {@code get} or {@code is} and if the given method isn't static.
-     *
-     * @param method the method
-     * @return true iff. the given method is a getter method
-     */
-    private boolean isGetterMethod(final ExecutableElement method) {
-        final String methodName = method.getSimpleName().toString();
-        final boolean hasGetterMethodName = !"getClass".equals(methodName) && methodName.startsWith("get") || methodName.startsWith("is");
-        final Set<Modifier> modifiers = method.getModifiers();
-        return hasGetterMethodName && !modifiers.contains(Modifier.STATIC) && !modifiers.contains(Modifier.DEFAULT);
     }
 }

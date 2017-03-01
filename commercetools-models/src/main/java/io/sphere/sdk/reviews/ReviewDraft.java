@@ -24,7 +24,7 @@ import java.util.Locale;
         @FactoryMethod(methodName = "ofTitle", parameterNames = "title"),
         @FactoryMethod(methodName = "ofText", parameterNames = "text"),
         @FactoryMethod(methodName = "ofRating", parameterNames = "rating")
-}, abstractBaseClass = true)
+}, abstractBuilderClass = true)
 public interface ReviewDraft extends WithKey {
     @Nullable
     String getAuthorName();

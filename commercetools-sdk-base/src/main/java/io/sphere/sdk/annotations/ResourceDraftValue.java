@@ -8,8 +8,6 @@ public @interface ResourceDraftValue {
 
     String[] additionalDslClassContents() default {};
 
-    String[] additionalBuilderClassContents() default {};
-
     String additionalDslConstructorEndContent() default "";
 
     boolean gettersForBuilder() default false;
@@ -23,5 +21,5 @@ public @interface ResourceDraftValue {
      *
      * @return true iff. the generated builder should be abstract
      */
-    boolean abstractBaseClass() default false;
+    boolean abstractBuilderClass() default false;
 }
