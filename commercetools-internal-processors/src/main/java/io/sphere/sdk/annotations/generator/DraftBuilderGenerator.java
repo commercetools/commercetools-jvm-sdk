@@ -144,10 +144,14 @@ public class DraftBuilderGenerator {
     }
 
     private FieldSpec createField(final ResourceDraftValue resourceDraftValue, final ExecutableElement method) {
-        final Modifier modifier = resourceDraftValue.abstractBaseClass() ? Modifier.PROTECTED : Modifier.PRIVATE;
         final String fieldName = escapeJavaKeyword(getPropertyName(method));
         final TypeName fieldType = TypeName.get(method.getReturnType());
-        final FieldSpec.Builder builder = FieldSpec.builder(fieldType, fieldName, modifier);
+        final FieldSpec.Builder builder = FieldSpec.builder(fieldType, fieldName);
+
+        // we use package private for abstract classes so that the fields aren't visible in the generated javadoc
+        if (!resourceDraftValue.abstractBaseClass()) {
+            builder.addModifiers(Modifier.PRIVATE);
+        }
         copyNullableAnnotation(method, builder);
         return builder.build();
     }

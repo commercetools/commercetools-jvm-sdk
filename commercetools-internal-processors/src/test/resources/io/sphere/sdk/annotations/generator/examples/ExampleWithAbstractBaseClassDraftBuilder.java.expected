@@ -15,7 +15,7 @@ import javax.annotation.Generated;
     comments = "Generated from: io.sphere.sdk.annotations.generator.examples.ExampleWithAbstractBaseClassDraft"
 )
 abstract class ExampleWithAbstractBaseClassDraftBuilderBase<T extends ExampleWithAbstractBaseClassDraftBuilderBase> extends Base implements Builder<ExampleWithAbstractBaseClassDraft> {
-  protected String name;
+  String name;
 
   protected ExampleWithAbstractBaseClassDraftBuilderBase() {
   }
