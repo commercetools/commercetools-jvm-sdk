@@ -1,20 +1,65 @@
 package io.sphere.sdk.products;
 
+import io.sphere.sdk.models.AssetDraft;
+import io.sphere.sdk.models.Base;
+import io.sphere.sdk.models.Builder;
 import io.sphere.sdk.products.attributes.AttributeDraft;
 import io.sphere.sdk.products.attributes.NamedAttributeAccess;
 
+import javax.annotation.Nullable;
 import java.util.Collections;
+import java.util.List;
 
 import static io.sphere.sdk.utils.SphereInternalUtils.listOf;
 import static java.util.Arrays.asList;
 
-public final class ProductVariantDraftBuilder extends ProductVariantDraftBuilderBase<ProductVariantDraftBuilder> {
+public final class ProductVariantDraftBuilder extends Base implements Builder<ProductVariantDraft> {
+    @Nullable
+    private String sku;
 
-    ProductVariantDraftBuilder() {
+    private List<PriceDraft> prices = Collections.emptyList();
+
+    private List<AttributeDraft> attributes = Collections.emptyList();
+
+    private List<Image> images = Collections.emptyList();
+
+    private List<AssetDraft> assets = Collections.emptyList();
+
+    @Nullable
+    private String key;
+
+    private ProductVariantDraftBuilder() {
+    }
+
+    public static ProductVariantDraftBuilder of(final ProductVariantDraft productVariantDraft) {
+        return of()
+                .sku(productVariantDraft.getSku())
+                .prices(productVariantDraft.getPrices())
+                .attributes(productVariantDraft.getAttributes())
+                .images(productVariantDraft.getImages());
+    }
+
+    public static ProductVariantDraftBuilder of() {
+        return new ProductVariantDraftBuilder();
+    }
+
+    public ProductVariantDraftBuilder sku(@Nullable final String sku) {
+        this.sku = sku;
+        return this;
+    }
+
+    public ProductVariantDraftBuilder images(final List<Image> images) {
+        this.images = images != null ? images : Collections.emptyList();
+        return this;
     }
 
     public ProductVariantDraftBuilder images(final Image image) {
         return images(Collections.singletonList(image));
+    }
+
+    public ProductVariantDraftBuilder prices(final List<PriceDraft> prices) {
+        this.prices = prices != null ? prices : Collections.emptyList();
+        return this;
     }
 
     public ProductVariantDraftBuilder prices(final PriceDraft ... prices) {
@@ -23,6 +68,11 @@ public final class ProductVariantDraftBuilder extends ProductVariantDraftBuilder
 
     public ProductVariantDraftBuilder price(final PriceDraft price) {
         return prices(Collections.singletonList(price));
+    }
+
+    public ProductVariantDraftBuilder attributes(final List<AttributeDraft> attributes) {
+        this.attributes = attributes != null ? attributes : Collections.emptyList();
+        return this;
     }
 
     public ProductVariantDraftBuilder attributes(final AttributeDraft ... attributes) {
@@ -39,5 +89,20 @@ public final class ProductVariantDraftBuilder extends ProductVariantDraftBuilder
 
     public ProductVariantDraftBuilder plusAttribute(final AttributeDraft attribute) {
         return attributes(listOf(attributes, attribute));
+    }
+
+    public ProductVariantDraftBuilder key(@Nullable final String key) {
+        this.key = key;
+        return this;
+    }
+
+    public ProductVariantDraftBuilder assets(@Nullable final List<AssetDraft> assets) {
+        this.assets = assets;
+        return this;
+    }
+
+    @Override
+    public ProductVariantDraft build() {
+        return new ProductVariantDraftImpl(sku, prices, attributes, images, key, assets);
     }
 }
