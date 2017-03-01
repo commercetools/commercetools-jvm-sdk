@@ -55,7 +55,7 @@ public class DraftBuilderGeneratorTest {
     private String generateAsString(final Class<?> clazz) throws Exception {
         final TypeElement typeElement = compilationRule.getElements().getTypeElement(clazz.getCanonicalName());
 
-        final JavaFile javaFile = new DraftBuilderGenerator(compilationRule.getElements(), compilationRule.getTypes()).generate(typeElement);
+        final JavaFile javaFile = new DraftBuilderGenerator(compilationRule.getElements()).generate(typeElement);
         StringBuilder stringBuilder = new StringBuilder();
         javaFile.writeTo(stringBuilder);
         return stringBuilder.toString();
