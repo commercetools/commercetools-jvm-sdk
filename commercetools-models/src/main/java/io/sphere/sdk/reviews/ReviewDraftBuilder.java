@@ -10,7 +10,7 @@ import javax.annotation.Nullable;
 import java.util.Locale;
 import java.util.Optional;
 
-public class ReviewDraftBuilder extends ReviewDraftBuilderBase<ReviewDraftBuilder> {
+public final class ReviewDraftBuilder extends ReviewDraftBuilderBase<ReviewDraftBuilder> {
     ReviewDraftBuilder() {
     }
 
