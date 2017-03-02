@@ -1,4 +1,4 @@
-package io.sphere.sdk.annotations.generator.examples;
+package io.sphere.sdk.annotations.processors.generators.examples;
 
 import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.Builder;
@@ -11,8 +11,8 @@ import javax.annotation.Generated;
  * Subclasses have to provide the same non-default constructor as this class.
  */
 @Generated(
-    value = "io.sphere.sdk.annotations.generator.DraftBuilderGenerator",
-    comments = "Generated from: io.sphere.sdk.annotations.generator.examples.ExampleWithAbstractBaseClassDraft"
+    value = "io.sphere.sdk.annotations.processors.generators.DraftBuilderGenerator",
+    comments = "Generated from: io.sphere.sdk.annotations.processors.generators.examples.ExampleWithAbstractBaseClassDraft"
 )
 abstract class ExampleWithAbstractBaseClassDraftBuilderBase<T extends ExampleWithAbstractBaseClassDraftBuilderBase> extends Base implements Builder<ExampleWithAbstractBaseClassDraft> {
   String name;

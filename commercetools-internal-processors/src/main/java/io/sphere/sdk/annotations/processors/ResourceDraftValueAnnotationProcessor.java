@@ -2,8 +2,8 @@ package io.sphere.sdk.annotations.processors;
 
 import com.squareup.javapoet.JavaFile;
 import io.sphere.sdk.annotations.ResourceDraftValue;
-import io.sphere.sdk.annotations.generator.DraftBuilderGenerator;
-import io.sphere.sdk.annotations.validator.ResourceDraftValueValidator;
+import io.sphere.sdk.annotations.processors.generators.DraftBuilderGenerator;
+import io.sphere.sdk.annotations.processors.validators.ResourceDraftValueValidator;
 
 import javax.annotation.processing.SupportedAnnotationTypes;
 import javax.annotation.processing.SupportedSourceVersion;

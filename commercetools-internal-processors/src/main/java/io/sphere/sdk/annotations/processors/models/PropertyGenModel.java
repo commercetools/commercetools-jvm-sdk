@@ -1,4 +1,4 @@
-package io.sphere.sdk.annotations.model;
+package io.sphere.sdk.annotations.processors.models;
 
 import com.squareup.javapoet.ClassName;
 import com.squareup.javapoet.ParameterizedTypeName;

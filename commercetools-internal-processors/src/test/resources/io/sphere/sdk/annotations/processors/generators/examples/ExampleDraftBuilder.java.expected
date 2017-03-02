@@ -1,4 +1,4 @@
-package io.sphere.sdk.annotations.generator.examples;
+package io.sphere.sdk.annotations.processors.generators.examples;
 
 import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.Builder;
@@ -12,8 +12,8 @@ import javax.annotation.Nullable;
  * Builder for {@link ExampleDraft}.
  */
 @Generated(
-    value = "io.sphere.sdk.annotations.generator.DraftBuilderGenerator",
-    comments = "Generated from: io.sphere.sdk.annotations.generator.examples.ExampleDraft"
+    value = "io.sphere.sdk.annotations.processors.generators.DraftBuilderGenerator",
+    comments = "Generated from: io.sphere.sdk.annotations.processors.generators.examples.ExampleDraft"
 )
 public final class ExampleDraftBuilder extends Base implements Builder<ExampleDraft> {
   private Boolean _default;

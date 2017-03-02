@@ -1,10 +1,10 @@
-package io.sphere.sdk.annotations.validator;
+package io.sphere.sdk.annotations.processors.validators;
 
 import com.squareup.javapoet.ClassName;
 import io.sphere.sdk.annotations.FactoryMethod;
 import io.sphere.sdk.annotations.ResourceDraftValue;
-import io.sphere.sdk.annotations.model.PropertyGenModel;
-import io.sphere.sdk.annotations.model.TypeUtils;
+import io.sphere.sdk.annotations.processors.models.PropertyGenModel;
+import io.sphere.sdk.annotations.processors.models.TypeUtils;
 
 import javax.annotation.processing.Messager;
 import javax.annotation.processing.ProcessingEnvironment;

@@ -1,4 +1,4 @@
-package io.sphere.sdk.annotations.generator.examples;
+package io.sphere.sdk.annotations.processors.generators.examples;
 
 import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.Builder;
@@ -12,8 +12,8 @@ import javax.annotation.Generated;
  * Builder for {@link ExampleWithReferenceDraft}.
  */
 @Generated(
-    value = "io.sphere.sdk.annotations.generator.DraftBuilderGenerator",
-    comments = "Generated from: io.sphere.sdk.annotations.generator.examples.ExampleWithReferenceDraft"
+    value = "io.sphere.sdk.annotations.processors.generators.DraftBuilderGenerator",
+    comments = "Generated from: io.sphere.sdk.annotations.processors.generators.examples.ExampleWithReferenceDraft"
 )
 public final class ExampleWithReferenceDraftBuilder extends Base implements Builder<ExampleWithReferenceDraft> {
   private Reference<String> name;

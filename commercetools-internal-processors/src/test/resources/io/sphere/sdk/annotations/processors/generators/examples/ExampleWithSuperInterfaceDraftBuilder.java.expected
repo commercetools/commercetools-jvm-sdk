@@ -1,4 +1,4 @@
-package io.sphere.sdk.annotations.generator.examples;
+package io.sphere.sdk.annotations.processors.generators.examples;
 
 import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.Builder;
@@ -9,8 +9,8 @@ import javax.annotation.Generated;
  * Builder for {@link ExampleWithSuperInterfaceDraft}.
  */
 @Generated(
-    value = "io.sphere.sdk.annotations.generator.DraftBuilderGenerator",
-    comments = "Generated from: io.sphere.sdk.annotations.generator.examples.ExampleWithSuperInterfaceDraft"
+    value = "io.sphere.sdk.annotations.processors.generators.DraftBuilderGenerator",
+    comments = "Generated from: io.sphere.sdk.annotations.processors.generators.examples.ExampleWithSuperInterfaceDraft"
 )
 public final class ExampleWithSuperInterfaceDraftBuilder extends Base implements Builder<ExampleWithSuperInterfaceDraft> {
   private String name;

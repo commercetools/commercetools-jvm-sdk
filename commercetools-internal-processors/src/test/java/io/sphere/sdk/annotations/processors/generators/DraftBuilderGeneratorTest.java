@@ -1,9 +1,9 @@
-package io.sphere.sdk.annotations.generator;
+package io.sphere.sdk.annotations.processors.generators;
 
 import com.google.common.base.Charsets;
 import com.google.testing.compile.CompilationRule;
 import com.squareup.javapoet.JavaFile;
-import io.sphere.sdk.annotations.generator.examples.*;
+import io.sphere.sdk.annotations.processors.generators.examples.*;
 import org.apache.commons.io.IOUtils;
 import org.junit.Rule;
 import org.junit.Test;

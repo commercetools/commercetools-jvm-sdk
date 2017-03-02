@@ -1,10 +1,10 @@
-package io.sphere.sdk.annotations.generator;
+package io.sphere.sdk.annotations.processors.generators;
 
 import com.squareup.javapoet.*;
 import io.sphere.sdk.annotations.FactoryMethod;
 import io.sphere.sdk.annotations.ResourceDraftValue;
-import io.sphere.sdk.annotations.model.PropertyGenModel;
-import io.sphere.sdk.annotations.model.TypeUtils;
+import io.sphere.sdk.annotations.processors.models.PropertyGenModel;
+import io.sphere.sdk.annotations.processors.models.TypeUtils;
 import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.Builder;
 import io.sphere.sdk.models.Reference;
