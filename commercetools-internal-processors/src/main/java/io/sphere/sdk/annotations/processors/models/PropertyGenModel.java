@@ -24,12 +24,15 @@ public class PropertyGenModel {
 
     private final TypeMirror type;
 
+    private final String javadocLinkTag;
+
     private final boolean optional;
 
-    private PropertyGenModel(final String name, final TypeMirror type, final boolean optional) {
+    private PropertyGenModel(final String name, final TypeMirror type, final String javaDocLinkTag, final boolean optional) {
         this.name = name;
         this.javaIdentifier = (SourceVersion.isKeyword(name) ? "_" : "") + name;
         this.type = type;
+        this.javadocLinkTag = javaDocLinkTag;
         this.optional = optional;
     }
 
@@ -43,6 +46,15 @@ public class PropertyGenModel {
 
     public TypeName getType() {
         return TypeName.get(type);
+    }
+
+    /**
+     * Returns the javadoc link tag that links back this properties getter method.
+     *
+     * @return the javadoc link tag pointing to this property
+     */
+    public String getJavadocLinkTag() {
+        return javadocLinkTag;
     }
 
     public boolean isOptional() {
@@ -119,7 +131,9 @@ public class PropertyGenModel {
      */
     public static PropertyGenModel of(final ExecutableElement getterMethod) {
         final boolean optional = getterMethod.getAnnotation(Nullable.class) != null;
-        return new PropertyGenModel(getPropertyName(getterMethod), getterMethod.getReturnType(), optional);
+        final String javadocLinkTag =
+                String.format("{@link %s#%s()}", getterMethod.getEnclosingElement().getSimpleName(), getterMethod.getSimpleName());
+        return new PropertyGenModel(getPropertyName(getterMethod), getterMethod.getReturnType(), javadocLinkTag, optional);
     }
 
     /**

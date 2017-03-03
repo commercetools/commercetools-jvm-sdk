@@ -52,6 +52,13 @@ public class DraftBuilderGeneratorTest {
         assertThat(content).isEqualTo(expectedContent(ExampleWithReferenceDraft.class));
     }
 
+    @Test
+    public void generateBuilderWhichReturnsDraftClass() throws Exception {
+        final String content = generateAsString(ExampleWithBuilderReturnsInterfaceDraft.class);
+
+        assertThat(content).isEqualTo(expectedContent(ExampleWithBuilderReturnsInterfaceDraft.class));
+    }
+
     private String generateAsString(final Class<?> clazz) throws Exception {
         final TypeElement typeElement = compilationRule.getElements().getTypeElement(clazz.getCanonicalName());
 
@@ -65,6 +72,9 @@ public class DraftBuilderGeneratorTest {
         final String fixtureFile = clazz.getSimpleName() + "Builder.java.expected";
         try (InputStream resourceAsStream = clazz.getResourceAsStream(fixtureFile)) {
             return IOUtils.toString(resourceAsStream, Charsets.UTF_8);
+        } catch (NullPointerException e) {
+            // this just makes it easier to diagnose missing files
+            throw new IllegalStateException("Fixture file '" + fixtureFile + "' not found.", e);
         }
     }
 }

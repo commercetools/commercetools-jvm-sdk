@@ -39,7 +39,7 @@ import java.util.Locale;
                 "                || !isValidAddressIndex(addresses, defaultShippingAddress)) {\n" +
                 "            throw new IllegalArgumentException(\"The defaultBillingAddress and defaultShippingAddress cannot contain an index which is not in the address list\");\n" +
                 "        }",
-        abstractBuilderClass = true , useBuilderStereotypeDslClass = true)
+        abstractBuilderClass = true)
 public interface CustomerDraft extends CustomDraft {
     @Nullable
     String getCustomerNumber();

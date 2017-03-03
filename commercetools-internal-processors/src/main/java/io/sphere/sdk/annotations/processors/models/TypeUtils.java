@@ -2,6 +2,7 @@ package io.sphere.sdk.annotations.processors.models;
 
 import com.squareup.javapoet.ClassName;
 import io.sphere.sdk.annotations.ResourceDraftValue;
+import io.sphere.sdk.models.Builder;
 
 import javax.lang.model.element.Element;
 import javax.lang.model.element.ExecutableElement;
@@ -36,10 +37,18 @@ public class TypeUtils {
         return ClassName.get(draftType.packageName(), draftType.simpleName() + "Dsl");
     }
 
-    public ClassName getBuilderTypeArgument(final TypeElement typeElement) {
+    /**
+     * Returns the type that the builder should return {@link Builder#build()}.
+     *
+     * @see ResourceDraftValue#builderReturnsDslClass()
+     *
+     * @param typeElement the type annotated with {@link ResourceDraftValue}
+     * @return the builder return type
+     */
+    public ClassName getBuilderReturnType(final TypeElement typeElement) {
         final ResourceDraftValue resourceDraftValue = typeElement.getAnnotation(ResourceDraftValue.class);
         final ClassName draftType = ClassName.get(typeElement);
-        return resourceDraftValue.useBuilderStereotypeDslClass() ?
+        return resourceDraftValue.builderReturnsDslClass() ?
                 getDraftImplType(typeElement) : draftType;
     }
 

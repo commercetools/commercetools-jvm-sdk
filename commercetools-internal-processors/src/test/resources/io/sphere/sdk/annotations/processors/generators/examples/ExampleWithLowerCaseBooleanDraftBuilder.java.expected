@@ -12,7 +12,7 @@ import javax.annotation.Generated;
     value = "io.sphere.sdk.annotations.processors.generators.DraftBuilderGenerator",
     comments = "Generated from: io.sphere.sdk.annotations.processors.generators.examples.ExampleWithLowerCaseBooleanDraft"
 )
-public final class ExampleWithLowerCaseBooleanDraftBuilder extends Base implements Builder<ExampleWithLowerCaseBooleanDraft> {
+public final class ExampleWithLowerCaseBooleanDraftBuilder extends Base implements Builder<ExampleWithLowerCaseBooleanDraftDsl> {
   private Boolean lowerCased;
 
   ExampleWithLowerCaseBooleanDraftBuilder() {
@@ -22,18 +22,30 @@ public final class ExampleWithLowerCaseBooleanDraftBuilder extends Base implemen
     this.lowerCased = lowerCased;
   }
 
+  /**
+   * Sets the {@code lowerCased} property of this builder.
+   *
+   * @param lowerCased the value for {@link ExampleWithLowerCaseBooleanDraft#isLowerCased()}
+   * @return this builder
+   */
   public ExampleWithLowerCaseBooleanDraftBuilder lowerCased(final Boolean lowerCased) {
     this.lowerCased = lowerCased;
     return this;
   }
 
+  /**
+   * Sets the {@code lowerCased} property of this builder.
+   *
+   * @param lowerCased the value for {@link ExampleWithLowerCaseBooleanDraft#isLowerCased()}
+   * @return this builder
+   */
   public ExampleWithLowerCaseBooleanDraftBuilder isLowerCased(final Boolean lowerCased) {
     this.lowerCased = lowerCased;
     return this;
   }
 
   /**
-   * Builds the instance.
+   * Creates a new instance of {@code ExampleWithLowerCaseBooleanDraftDsl} with the values of this builder.
    *
    * @return the instance
    */
@@ -41,6 +53,11 @@ public final class ExampleWithLowerCaseBooleanDraftBuilder extends Base implemen
     return new ExampleWithLowerCaseBooleanDraftDsl(lowerCased);
   }
 
+  /**
+   * Creates a builder initialized with the given values.
+   *
+   * @param lowerCased initial value for the {@link #lowerCased(Boolean)} property
+   */
   public static ExampleWithLowerCaseBooleanDraftBuilder of(final boolean lowerCased) {
     return new ExampleWithLowerCaseBooleanDraftBuilder(lowerCased);
   }

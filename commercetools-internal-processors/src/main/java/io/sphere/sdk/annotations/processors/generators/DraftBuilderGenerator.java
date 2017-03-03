@@ -35,16 +35,16 @@ public class DraftBuilderGenerator {
         this.typeUtils = new TypeUtils(elements);
     }
 
-    public JavaFile generate(final TypeElement draftTypeElement) {
-        final ClassName concreteBuilderName = typeUtils.getConcreteBuilderType(draftTypeElement);
-        final ClassName generatedBuilderName = typeUtils.getBuilderType(draftTypeElement);
+    public JavaFile generate(final TypeElement annotatedTypeElement) {
+        final ClassName concreteBuilderName = typeUtils.getConcreteBuilderType(annotatedTypeElement);
+        final ClassName generatedBuilderName = typeUtils.getBuilderType(annotatedTypeElement);
 
-        final List<ExecutableElement> getterMethods = getGetterMethodsSorted(draftTypeElement);
+        final List<ExecutableElement> getterMethods = getGetterMethodsSorted(annotatedTypeElement);
         final List<PropertyGenModel> properties = getterMethods.stream()
                 .map(PropertyGenModel::of)
                 .collect(Collectors.toList());
 
-        final ResourceDraftValue resourceDraftValue = draftTypeElement.getAnnotation(ResourceDraftValue.class);
+        final ResourceDraftValue resourceDraftValue = annotatedTypeElement.getAnnotation(ResourceDraftValue.class);
 
         final List<MethodSpec> builderMethodSpecs = properties.stream()
                 .flatMap(m -> createBuilderMethods(generatedBuilderName, resourceDraftValue, m).stream())
@@ -61,21 +61,21 @@ public class DraftBuilderGenerator {
                 .addSuperinterfaces(additionalInterfaceNames)
                 .addAnnotation(AnnotationSpec.builder(Generated.class)
                         .addMember("value", "$S", getClass().getCanonicalName())
-                        .addMember("comments", "$S", "Generated from: " + draftTypeElement.getQualifiedName().toString())
+                        .addMember("comments", "$S", "Generated from: " + annotatedTypeElement.getQualifiedName().toString())
                         .build());
 
-        final TypeName builderTypeArgument = typeUtils.getBuilderTypeArgument(draftTypeElement);
+        final TypeName builderReturnType = typeUtils.getBuilderReturnType(annotatedTypeElement);
         builder
                 .superclass(ClassName.get(Base.class))
-                .addSuperinterface(ParameterizedTypeName.get(ClassName.get(Builder.class), builderTypeArgument));
+                .addSuperinterface(ParameterizedTypeName.get(ClassName.get(Builder.class), builderReturnType));
         if (resourceDraftValue.abstractBuilderClass()) {
-            builder.addJavadoc("Abstract base builder for {@link $T} which needs to be extended to add additional methods.\n", draftTypeElement);
-            builder.addJavadoc("Subclasses have to provide the same non-default constructor as this class.\n");
-            builder.addModifiers(Modifier.ABSTRACT)
+            builder.addJavadoc("Abstract base builder for {@link $T} which needs to be extended to add additional methods.\n", annotatedTypeElement)
+                    .addJavadoc("Subclasses have to provide the same non-default constructor as this class.\n")
+                    .addModifiers(Modifier.ABSTRACT)
                     .addTypeVariable(TypeVariableName.get("T").withBounds(generatedBuilderName));
         } else {
-            builder.addJavadoc("Builder for {@link $T}.\n", draftTypeElement);
-            builder.addModifiers(Modifier.PUBLIC, Modifier.FINAL);
+            builder.addJavadoc("Builder for {@link $T}.\n", annotatedTypeElement)
+                .addModifiers(Modifier.PUBLIC, Modifier.FINAL);
         }
         builder.addFields(fieldSpecs)
                 .addMethod(createDefaultConstructor(resourceDraftValue))
@@ -87,10 +87,11 @@ public class DraftBuilderGenerator {
                     .collect(Collectors.toList());
             builder.addMethods(getMethods);
         }
-        final TypeName draftImplType = typeUtils.getDraftImplType(draftTypeElement);
-        builder.addMethod(createBuildMethod(draftImplType, getterMethods))
+        final TypeName draftImplType = typeUtils.getDraftImplType(annotatedTypeElement);
+        final TypeName buildMethodReturnType = builderReturnType;
+        builder.addMethod(createBuildMethod(buildMethodReturnType, draftImplType, getterMethods))
                 .addMethods(createFactoryMethods(resourceDraftValue.factoryMethods(), properties, concreteBuilderName))
-                .addMethod(createCopyFactoryMethod(draftTypeElement, concreteBuilderName, getterMethods));
+                .addMethod(createCopyFactoryMethod(annotatedTypeElement, concreteBuilderName, getterMethods));
 
         final TypeSpec draftBuilderBaseClass = builder.build();
 
@@ -119,8 +120,12 @@ public class DraftBuilderGenerator {
                 .map(p -> factoryParameterNames.contains(p.getName()) ? p.getJavaIdentifier() : "null")
                 .collect(Collectors.joining(", "));
 
-        return MethodSpec.methodBuilder(factoryMethod.methodName()).addModifiers(Modifier.PUBLIC, Modifier.STATIC)
+        final MethodSpec.Builder builder = MethodSpec.methodBuilder(factoryMethod.methodName()).addModifiers(Modifier.PUBLIC, Modifier.STATIC)
                 .returns(returnType)
+                .addJavadoc("Creates a builder initialized with the given values.\n\n");
+        parameterTemplates.forEach(p -> builder.addJavadoc("@param $L initial value for the {@link #$L($T)} property\n",
+                p.getJavaIdentifier(), p.getJavaIdentifier(), p.getType()));
+        return builder
                 .addParameters(createParameters(parameterTemplates, factoryMethod.useLowercaseBooleans(), false))
                 .addCode("return new $L($L);\n", returnType.simpleName(), callArguments)
                 .build();
@@ -185,18 +190,18 @@ public class DraftBuilderGenerator {
                 .collect(Collectors.toList());
     }
 
-    private MethodSpec createBuildMethod(final TypeName returnType, final List<ExecutableElement> getterMethods) {
+    private MethodSpec createBuildMethod(final TypeName returnType, final TypeName draftImplType, final List<ExecutableElement> getterMethods) {
         final List<String> argumentNames = getterMethods.stream()
                 .map((getterMethod) -> PropertyGenModel.getPropertyName(getterMethod))
                 .map(this::escapeJavaKeyword)
                 .collect(Collectors.toList());
         final String callArgumentss = String.join(", ", argumentNames);
         return MethodSpec.methodBuilder("build")
-                .addJavadoc("Builds the instance.\n\n")
+                .addJavadoc("Creates a new instance of {@code $T} with the values of this builder.\n\n", returnType)
                 .addJavadoc("@return the instance\n")
                 .addModifiers(Modifier.PUBLIC)
                 .returns(returnType)
-                .addCode("return new $T($L);\n", returnType, callArgumentss)
+                .addCode("return new $T($L);\n", draftImplType, callArgumentss)
                 .build();
     }
 
@@ -238,8 +243,10 @@ public class DraftBuilderGenerator {
                 TypeVariableName.get("T") : builderType;
         final MethodSpec.Builder builder = MethodSpec.methodBuilder(methodName)
                 .addModifiers(Modifier.PUBLIC)
-                .returns(returnType);
-
+                .returns(returnType)
+                .addJavadoc("Sets the {@code $L} property of this builder.\n\n", property.getName())
+                .addJavadoc("@param $L the value for $L\n", property.getJavaIdentifier(), property.getJavadocLinkTag())
+                .addJavadoc("@return this builder\n");
         final boolean hasReferenceType = property.hasSameType(Reference.class);
         if (hasReferenceType) {
             builderParameterTypeName = property.replaceParameterizedType(Referenceable.class);

@@ -23,7 +23,7 @@ additionalDslClassContents = {"    public StateDraftDsl withRoles(final StateRol
         "        return withRoles(Collections.singleton(role));\n" +
         "    }", "    public StateDraftDsl withInitial(final boolean initial) {\n" +
         "        return newBuilder().initial(initial).build();\n" +
-        "    } "}, useBuilderStereotypeDslClass = true)
+        "    } "})
 public interface StateDraft extends WithKey {
     String getKey();
 

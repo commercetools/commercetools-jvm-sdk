@@ -15,7 +15,7 @@ import javax.annotation.Generated;
     value = "io.sphere.sdk.annotations.processors.generators.DraftBuilderGenerator",
     comments = "Generated from: io.sphere.sdk.annotations.processors.generators.examples.ExampleWithReferenceDraft"
 )
-public final class ExampleWithReferenceDraftBuilder extends Base implements Builder<ExampleWithReferenceDraft> {
+public final class ExampleWithReferenceDraftBuilder extends Base implements Builder<ExampleWithReferenceDraftDsl> {
   private Reference<String> name;
 
   ExampleWithReferenceDraftBuilder() {
@@ -25,13 +25,19 @@ public final class ExampleWithReferenceDraftBuilder extends Base implements Buil
     this.name = name;
   }
 
+  /**
+   * Sets the {@code name} property of this builder.
+   *
+   * @param name the value for {@link ExampleWithReferenceDraft#getName()}
+   * @return this builder
+   */
   public ExampleWithReferenceDraftBuilder name(final Referenceable<String> name) {
     this.name = Optional.ofNullable(name).map(Referenceable::toReference).orElse(null);;
     return this;
   }
 
   /**
-   * Builds the instance.
+   * Creates a new instance of {@code ExampleWithReferenceDraftDsl} with the values of this builder.
    *
    * @return the instance
    */
@@ -39,6 +45,11 @@ public final class ExampleWithReferenceDraftBuilder extends Base implements Buil
     return new ExampleWithReferenceDraftDsl(name);
   }
 
+  /**
+   * Creates a builder initialized with the given values.
+   *
+   * @param name initial value for the {@link #name(Reference<String>)} property
+   */
   public static ExampleWithReferenceDraftBuilder of(final Reference<String> name) {
     return new ExampleWithReferenceDraftBuilder(name);
   }

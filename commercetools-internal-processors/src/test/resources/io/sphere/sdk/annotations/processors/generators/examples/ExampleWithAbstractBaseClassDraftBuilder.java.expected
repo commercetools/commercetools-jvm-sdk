@@ -14,7 +14,7 @@ import javax.annotation.Generated;
     value = "io.sphere.sdk.annotations.processors.generators.DraftBuilderGenerator",
     comments = "Generated from: io.sphere.sdk.annotations.processors.generators.examples.ExampleWithAbstractBaseClassDraft"
 )
-abstract class ExampleWithAbstractBaseClassDraftBuilderBase<T extends ExampleWithAbstractBaseClassDraftBuilderBase> extends Base implements Builder<ExampleWithAbstractBaseClassDraft> {
+abstract class ExampleWithAbstractBaseClassDraftBuilderBase<T extends ExampleWithAbstractBaseClassDraftBuilderBase> extends Base implements Builder<ExampleWithAbstractBaseClassDraftDsl> {
   String name;
 
   protected ExampleWithAbstractBaseClassDraftBuilderBase() {
@@ -24,6 +24,12 @@ abstract class ExampleWithAbstractBaseClassDraftBuilderBase<T extends ExampleWit
     this.name = name;
   }
 
+  /**
+   * Sets the {@code name} property of this builder.
+   *
+   * @param name the value for {@link ExampleWithAbstractBaseClassDraft#getName()}
+   * @return this builder
+   */
   @SuppressWarnings("unchecked")
   public T name(final String name) {
     this.name = name;
@@ -31,7 +37,7 @@ abstract class ExampleWithAbstractBaseClassDraftBuilderBase<T extends ExampleWit
   }
 
   /**
-   * Builds the instance.
+   * Creates a new instance of {@code ExampleWithAbstractBaseClassDraftDsl} with the values of this builder.
    *
    * @return the instance
    */
@@ -39,6 +45,11 @@ abstract class ExampleWithAbstractBaseClassDraftBuilderBase<T extends ExampleWit
     return new ExampleWithAbstractBaseClassDraftDsl(name);
   }
 
+  /**
+   * Creates a builder initialized with the given values.
+   *
+   * @param name initial value for the {@link #name(String)} property
+   */
   public static ExampleWithAbstractBaseClassDraftBuilder of(final String name) {
     return new ExampleWithAbstractBaseClassDraftBuilder(name);
   }

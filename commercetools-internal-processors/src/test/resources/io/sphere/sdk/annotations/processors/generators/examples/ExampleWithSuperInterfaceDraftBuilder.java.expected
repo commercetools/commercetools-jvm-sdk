@@ -12,7 +12,7 @@ import javax.annotation.Generated;
     value = "io.sphere.sdk.annotations.processors.generators.DraftBuilderGenerator",
     comments = "Generated from: io.sphere.sdk.annotations.processors.generators.examples.ExampleWithSuperInterfaceDraft"
 )
-public final class ExampleWithSuperInterfaceDraftBuilder extends Base implements Builder<ExampleWithSuperInterfaceDraft> {
+public final class ExampleWithSuperInterfaceDraftBuilder extends Base implements Builder<ExampleWithSuperInterfaceDraftDsl> {
   private String name;
 
   private String sku;
@@ -25,18 +25,30 @@ public final class ExampleWithSuperInterfaceDraftBuilder extends Base implements
     this.sku = sku;
   }
 
+  /**
+   * Sets the {@code name} property of this builder.
+   *
+   * @param name the value for {@link ExampleWithSuperInterfaceDraft#getName()}
+   * @return this builder
+   */
   public ExampleWithSuperInterfaceDraftBuilder name(final String name) {
     this.name = name;
     return this;
   }
 
+  /**
+   * Sets the {@code sku} property of this builder.
+   *
+   * @param sku the value for {@link ExampleDraftSuperInterface#getSku()}
+   * @return this builder
+   */
   public ExampleWithSuperInterfaceDraftBuilder sku(final String sku) {
     this.sku = sku;
     return this;
   }
 
   /**
-   * Builds the instance.
+   * Creates a new instance of {@code ExampleWithSuperInterfaceDraftDsl} with the values of this builder.
    *
    * @return the instance
    */
@@ -44,6 +56,12 @@ public final class ExampleWithSuperInterfaceDraftBuilder extends Base implements
     return new ExampleWithSuperInterfaceDraftDsl(name, sku);
   }
 
+  /**
+   * Creates a builder initialized with the given values.
+   *
+   * @param name initial value for the {@link #name(String)} property
+   * @param sku initial value for the {@link #sku(String)} property
+   */
   public static ExampleWithSuperInterfaceDraftBuilder of(final String name, final String sku) {
     return new ExampleWithSuperInterfaceDraftBuilder(name, sku);
   }

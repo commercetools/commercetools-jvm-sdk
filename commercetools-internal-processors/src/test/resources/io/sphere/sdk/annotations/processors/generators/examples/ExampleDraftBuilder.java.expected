@@ -15,7 +15,7 @@ import javax.annotation.Nullable;
     value = "io.sphere.sdk.annotations.processors.generators.DraftBuilderGenerator",
     comments = "Generated from: io.sphere.sdk.annotations.processors.generators.examples.ExampleDraft"
 )
-public final class ExampleDraftBuilder extends Base implements Builder<ExampleDraft> {
+public final class ExampleDraftBuilder extends Base implements Builder<ExampleDraftDsl> {
   private Boolean _default;
 
   private Boolean active;
@@ -39,43 +39,85 @@ public final class ExampleDraftBuilder extends Base implements Builder<ExampleDr
     this.sku = sku;
   }
 
+  /**
+   * Sets the {@code default} property of this builder.
+   *
+   * @param _default the value for {@link ExampleDraft#isDefault()}
+   * @return this builder
+   */
   public ExampleDraftBuilder _default(final Boolean _default) {
     this._default = _default;
     return this;
   }
 
+  /**
+   * Sets the {@code default} property of this builder.
+   *
+   * @param _default the value for {@link ExampleDraft#isDefault()}
+   * @return this builder
+   */
   public ExampleDraftBuilder isDefault(final Boolean _default) {
     this._default = _default;
     return this;
   }
 
+  /**
+   * Sets the {@code active} property of this builder.
+   *
+   * @param active the value for {@link ExampleDraft#isActive()}
+   * @return this builder
+   */
   public ExampleDraftBuilder active(final Boolean active) {
     this.active = active;
     return this;
   }
 
+  /**
+   * Sets the {@code active} property of this builder.
+   *
+   * @param active the value for {@link ExampleDraft#isActive()}
+   * @return this builder
+   */
   public ExampleDraftBuilder isActive(final Boolean active) {
     this.active = active;
     return this;
   }
 
+  /**
+   * Sets the {@code names} property of this builder.
+   *
+   * @param names the value for {@link ExampleDraft#getNames()}
+   * @return this builder
+   */
   public ExampleDraftBuilder names(final List<String> names) {
     this.names = names;
     return this;
   }
 
+  /**
+   * Sets the {@code optional} property of this builder.
+   *
+   * @param optional the value for {@link ExampleDraft#getOptional()}
+   * @return this builder
+   */
   public ExampleDraftBuilder optional(@Nullable final String optional) {
     this.optional = optional;
     return this;
   }
 
+  /**
+   * Sets the {@code sku} property of this builder.
+   *
+   * @param sku the value for {@link ExampleDraft#getSku()}
+   * @return this builder
+   */
   public ExampleDraftBuilder sku(final String sku) {
     this.sku = sku;
     return this;
   }
 
   /**
-   * Builds the instance.
+   * Creates a new instance of {@code ExampleDraftDsl} with the values of this builder.
    *
    * @return the instance
    */
@@ -83,14 +125,32 @@ public final class ExampleDraftBuilder extends Base implements Builder<ExampleDr
     return new ExampleDraftDsl(_default, active, names, optional, sku);
   }
 
+  /**
+   * Creates a builder initialized with the given values.
+   *
+   * @param sku initial value for the {@link #sku(String)} property
+   * @param active initial value for the {@link #active(Boolean)} property
+   */
   public static ExampleDraftBuilder of(final String sku, final Boolean active) {
     return new ExampleDraftBuilder(null, active, null, null, sku);
   }
 
+  /**
+   * Creates a builder initialized with the given values.
+   *
+   * @param _default initial value for the {@link #_default(Boolean)} property
+   * @param active initial value for the {@link #active(Boolean)} property
+   */
   public static ExampleDraftBuilder of(final Boolean _default, final Boolean active) {
     return new ExampleDraftBuilder(_default, active, null, null, null);
   }
 
+  /**
+   * Creates a builder initialized with the given values.
+   *
+   * @param _default initial value for the {@link #_default(Boolean)} property
+   * @param optional initial value for the {@link #optional(String)} property
+   */
   public static ExampleDraftBuilder of(final Boolean _default, final String optional) {
     return new ExampleDraftBuilder(_default, null, null, optional, null);
   }
