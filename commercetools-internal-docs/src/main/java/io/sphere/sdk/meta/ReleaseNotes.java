@@ -105,7 +105,7 @@ import java.util.function.Function;
  <li class=fixed-in-release></li>
  </ul>
  -->
- <h3 class=released-version id="v1_11_1">1.11.1 (27.02.2017)</h3>
+ <h3 class=released-version id="v1_12_0">1.12.0 (27.02.2017)</h3>
  <ul>
  <li class=new-in-release>Added {@link Channel#getGeoLocation()}, added support for it in {@link ChannelQueryModel#geoLocation()} and support for {@code withinCircle}
     predicate {@link GeoJSONQueryModel#withinCircle(Point, Double)}.</li>
