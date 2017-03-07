@@ -25,7 +25,7 @@ import java.util.Set;
 additionalDslClassContents = {
         "public ChannelDraftDsl withRoles(final ChannelRole ... roles) {\n" +
         "        return newBuilder().roles(io.sphere.sdk.utils.SphereInternalUtils.asSet(roles)).build();\n" +
-        "    }"}, useBuilderStereotypeDslClass = true)
+        "    }"})
 public interface ChannelDraft extends WithKey {
     String getKey();
 
