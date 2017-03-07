@@ -27,7 +27,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class OrderImportDraftBuilderTest {
 
     @Test
-    public void createsFromOrderImportDraft() throws Exception {
+    public void constructWithAllValuesSet() {
         final LocalizedEnumValue yellow = LocalizedEnumValue.of("yellow", LocalizedString.of(ENGLISH, "yellow").plus(GERMAN, "gelb"));
         final ProductVariantImportDraft productVariantImportDraft = ProductVariantImportDraftBuilder.of("product-id", 1)
                 .attributes(
