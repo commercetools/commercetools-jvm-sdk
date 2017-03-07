@@ -6,6 +6,7 @@ import io.sphere.sdk.carts.RoundingMode;
 import io.sphere.sdk.carts.TaxedPrice;
 import io.sphere.sdk.customergroups.CustomerGroup;
 import io.sphere.sdk.models.*;
+import io.sphere.sdk.types.CustomFieldsDraft;
 
 import javax.annotation.Nullable;
 import javax.money.MonetaryAmount;
@@ -45,6 +46,8 @@ public final class OrderImportDraftBuilder extends Base implements Builder<Order
     @Nullable
     private ZonedDateTime completedAt;
     @Nullable
+    private CustomFieldsDraft custom;
+    @Nullable
     private RoundingMode taxRoundingMode;
     @Nullable
     private InventoryMode inventoryMode;
@@ -56,6 +59,7 @@ public final class OrderImportDraftBuilder extends Base implements Builder<Order
 
     /**
      * String that unique identifies an order. It can be used to create more human-readable (in contrast to ID) identifier for the order. It should be unique within a project.
+     *
      * @param orderNumber ID to set
      * @return this builder
      */
@@ -89,7 +93,7 @@ public final class OrderImportDraftBuilder extends Base implements Builder<Order
         return this;
     }
 
-    public OrderImportDraftBuilder taxedPrice(@Nullable  final TaxedPrice taxedPrice) {
+    public OrderImportDraftBuilder taxedPrice(@Nullable final TaxedPrice taxedPrice) {
         this.taxedPrice = taxedPrice;
         return this;
     }
@@ -105,7 +109,7 @@ public final class OrderImportDraftBuilder extends Base implements Builder<Order
     }
 
     public OrderImportDraftBuilder customerGroup(@Nullable final Referenceable<CustomerGroup> customerGroup) {
-        this.customerGroup =  Optional.ofNullable(customerGroup).map(Referenceable::toReference).orElse(null);
+        this.customerGroup = Optional.ofNullable(customerGroup).map(Referenceable::toReference).orElse(null);
         return this;
     }
 
@@ -139,6 +143,11 @@ public final class OrderImportDraftBuilder extends Base implements Builder<Order
         return this;
     }
 
+    public OrderImportDraftBuilder custom(@Nullable final CustomFieldsDraft custom) {
+        this.custom = custom;
+        return this;
+    }
+
     public OrderImportDraftBuilder taxRoundingMode(@Nullable final RoundingMode taxRoundingMode) {
         this.taxRoundingMode = taxRoundingMode;
         return this;
@@ -155,7 +164,7 @@ public final class OrderImportDraftBuilder extends Base implements Builder<Order
      *
      * @param totalPrice the total price of the order
      * @param orderState the state of the order
-     * @param lineItems a list of line items with at least one element
+     * @param lineItems  a list of line items with at least one element
      * @return a new builder
      */
     public static OrderImportDraftBuilder ofLineItems(final MonetaryAmount totalPrice, final OrderState orderState, final List<LineItemImportDraft> lineItems) {
@@ -166,8 +175,8 @@ public final class OrderImportDraftBuilder extends Base implements Builder<Order
      * Creates a builder for {@link OrderImportDraft} with at least one custom line item.
      * You can add {@link io.sphere.sdk.carts.LineItem}s with {@link #lineItems(java.util.List)}.
      *
-     * @param totalPrice the total price of the order
-     * @param orderState the state of the order
+     * @param totalPrice      the total price of the order
+     * @param orderState      the state of the order
      * @param customLineItems a list of custom line items with at least one element
      * @return a new builder
      */
@@ -177,6 +186,6 @@ public final class OrderImportDraftBuilder extends Base implements Builder<Order
 
     @Override
     public OrderImportDraft build() {
-        return new OrderImportDraftImpl(billingAddress, orderNumber, customerId, customerEmail, lineItems, customLineItems, totalPrice, taxedPrice, shippingAddress, customerGroup, country, orderState, shipmentState, paymentState, shippingInfo, completedAt, taxRoundingMode, inventoryMode);
+        return new OrderImportDraftImpl(billingAddress, orderNumber, customerId, customerEmail, lineItems, customLineItems, totalPrice, taxedPrice, shippingAddress, customerGroup, country, orderState, shipmentState, paymentState, shippingInfo, completedAt, custom, taxRoundingMode, inventoryMode);
     }
 }
