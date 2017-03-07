@@ -45,7 +45,7 @@ public final class ProductVariantFilterSearchModel extends SearchModelImpl<Produ
      *
      * @return filters model
      */
-    public TermFilterSearchModel<ProductProjection, Boolean> scopedPriceDiscounted() {
+    public TermFilterExistsAndMissingSearchModel<ProductProjection, Boolean> scopedPriceDiscounted() {
         return booleanSearchModel("scopedPriceDiscounted").filtered();
     }
 
@@ -60,11 +60,11 @@ public final class ProductVariantFilterSearchModel extends SearchModelImpl<Produ
      *
      * @return filters model
      */
-    public TermFilterSearchModel<ProductProjection, String> sku() {
+    public TermFilterExistsAndMissingSearchModel<ProductProjection, String> sku() {
         return stringSearchModel("sku").filtered();
     }
 
-    public TermFilterSearchModel<ProductProjection, String> key() {
+    public TermFilterExistsAndMissingSearchModel<ProductProjection, String> key() {
         return stringSearchModel("key").filtered();
     }
 
