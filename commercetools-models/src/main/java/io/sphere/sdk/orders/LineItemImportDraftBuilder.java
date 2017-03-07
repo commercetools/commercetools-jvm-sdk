@@ -5,6 +5,7 @@ import io.sphere.sdk.channels.Channel;
 import io.sphere.sdk.models.*;
 import io.sphere.sdk.products.Price;
 import io.sphere.sdk.taxcategories.TaxRate;
+import io.sphere.sdk.types.CustomFieldsDraft;
 
 import javax.annotation.Nullable;
 import java.util.Optional;
@@ -23,6 +24,8 @@ public final class LineItemImportDraftBuilder extends Base implements Builder<Li
     private Reference<Channel> supplyChannel;
     @Nullable
     private TaxRate taxRate;
+    @Nullable
+    private CustomFieldsDraft custom;
 
     private LineItemImportDraftBuilder(final ProductVariantImportDraft variant, final Long quantity, final Price price, @Nullable final String productId, final LocalizedString name) {
         this.price = price;
@@ -48,12 +51,17 @@ public final class LineItemImportDraftBuilder extends Base implements Builder<Li
     }
 
     public LineItemImportDraftBuilder supplyChannel(@Nullable final Referenceable<Channel> supplyChannel) {
-        this.supplyChannel =  Optional.ofNullable(supplyChannel).map(Referenceable::toReference).orElse(null);
+        this.supplyChannel = Optional.ofNullable(supplyChannel).map(Referenceable::toReference).orElse(null);
         return this;
     }
 
     public LineItemImportDraftBuilder taxRate(@Nullable final TaxRate taxRate) {
         this.taxRate = taxRate;
+        return this;
+    }
+
+    public LineItemImportDraftBuilder custom(@Nullable final CustomFieldsDraft custom) {
+        this.custom = custom;
         return this;
     }
 
@@ -63,6 +71,6 @@ public final class LineItemImportDraftBuilder extends Base implements Builder<Li
 
     @Override
     public LineItemImportDraft build() {
-        return new LineItemImportDraftImpl(name, productId, variant, price, quantity, state, supplyChannel, taxRate);
+        return new LineItemImportDraftImpl(name, productId, variant, price, quantity, state, supplyChannel, taxRate, custom);
     }
 }
