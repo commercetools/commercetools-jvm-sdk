@@ -1,5 +1,6 @@
 package io.sphere.sdk.annotations.processors.generators.examples;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.sphere.sdk.models.Base;
 import java.lang.Boolean;
@@ -18,7 +19,9 @@ final class ExampleResourceImpl extends Base implements ExampleResource {
 
   private String name;
 
-  ExampleResourceImpl(final Boolean _return, final String name) {
+  @JsonCreator
+  ExampleResourceImpl(@Nullable @JsonProperty("isReturn") final Boolean _return,
+      final String name) {
     this._return = _return;
     this.name = name;
   }

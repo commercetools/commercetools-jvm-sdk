@@ -1,6 +1,8 @@
 package io.sphere.sdk.annotations.processors;
 
+import com.squareup.javapoet.JavaFile;
 import io.sphere.sdk.annotations.ResourceValue;
+import io.sphere.sdk.annotations.processors.generators.ResourceValueImplGenerator;
 
 import javax.annotation.processing.SupportedAnnotationTypes;
 import javax.annotation.processing.SupportedSourceVersion;
@@ -17,6 +19,8 @@ public final class ResourceValueAnnotationProcessor extends CommercetoolsAnnotat
 
     @Override
     protected void generate(final TypeElement typeElement) {
-        writeClass(typeElement, new ResourceValueImplClassModelFactory(typeElement).createClassModel());
+        final JavaFile javaFile = new ResourceValueImplGenerator(processingEnv.getElementUtils()).generate(typeElement);
+
+        writeClass(javaFile);
     }
 }

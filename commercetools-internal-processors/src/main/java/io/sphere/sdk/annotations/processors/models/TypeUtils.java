@@ -10,7 +10,10 @@ import javax.lang.model.element.Modifier;
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.util.ElementFilter;
 import javax.lang.model.util.Elements;
+import java.util.Comparator;
+import java.util.List;
 import java.util.Set;
+import java.util.TreeSet;
 import java.util.stream.Stream;
 
 /**
@@ -76,7 +79,13 @@ public class TypeUtils {
      * @return methods sorted by their {@link PropertyGenModel#getPropertyName(ExecutableElement)}
      */
     public Stream<ExecutableElement> getAllGetterMethods(TypeElement typeElement) {
-        return ElementFilter.methodsIn(elements.getAllMembers(typeElement)).stream()
+        final List<ExecutableElement> allMethods = ElementFilter.methodsIn(elements.getAllMembers(typeElement));
+        final Comparator<ExecutableElement> nameComparator = Comparator.comparing(e -> e.getSimpleName().toString());
+        final Comparator<ExecutableElement> typeComparator = Comparator.comparing(e -> e.getReturnType().toString());
+        final Set<ExecutableElement> uniqueMethods = new TreeSet<>(nameComparator.thenComparing(typeComparator));
+        uniqueMethods.addAll(allMethods);
+
+        return uniqueMethods.stream()
                 .filter(this::isGetterMethod);
     }
 
