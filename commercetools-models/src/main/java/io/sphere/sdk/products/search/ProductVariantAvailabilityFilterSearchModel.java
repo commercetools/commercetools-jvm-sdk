@@ -19,7 +19,7 @@ public interface ProductVariantAvailabilityFilterSearchModel<T> extends ProductV
      *
      * @return a filter search model for specifying the channels by their id
      */
-    TermFilterSearchModel<T, String>  isOnStockByChannels();
+    TermFilterSearchModel<T, String> onStockInChannels();
 
     @Override
     RangeTermFilterSearchModel<T, BigDecimal> availableQuantity();

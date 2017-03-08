@@ -20,7 +20,7 @@ final class ProductVariantAvailabilityFilterSearchModelImpl<T> extends SearchMod
     }
 
     @Override
-    public TermFilterSearchModel<T, String>  isOnStockByChannels() {
+    public TermFilterSearchModel<T, String> onStockInChannels() {
         return stringSearchModel("isOnStockInChannels").filtered();
     }
 

@@ -69,7 +69,7 @@ public class ProductAvailabilitySearchIntegrationTest extends IntegrationTest {
                 final ProductProjectionSearch isOnStockInAnyChannelRequest = ProductProjectionSearch.ofStaged()
                         .plusQueryFilters(m -> m.id().is(product.getId()))
                         .plusQueryFilters(m -> m.allVariants().availability()
-                                .isOnStockByChannels().containsAny(Arrays.asList(nonExistingChannel, channel.getId())));
+                                .onStockInChannels().containsAny(Arrays.asList(nonExistingChannel, channel.getId())));
                 assertEventually(() -> {
                     final PagedSearchResult<ProductProjection> res = client().executeBlocking(isOnStockInAnyChannelRequest);
                     assertThat(res.getResults()).hasSize(1);
@@ -78,7 +78,7 @@ public class ProductAvailabilitySearchIntegrationTest extends IntegrationTest {
                 final ProductProjectionSearch isOnStockInAllChannelsRequest = ProductProjectionSearch.ofStaged()
                         .plusQueryFilters(m -> m.id().is(product.getId()))
                         .plusQueryFilters(m -> m.allVariants().availability()
-                                .isOnStockByChannels().containsAll(Arrays.asList(nonExistingChannel, channel.getId())));
+                                .onStockInChannels().containsAll(Arrays.asList(nonExistingChannel, channel.getId())));
                 assertEventually(() -> {
                     final PagedSearchResult<ProductProjection> res = client().executeBlocking(isOnStockInAllChannelsRequest);
                     assertThat(res.getResults()).isEmpty();
