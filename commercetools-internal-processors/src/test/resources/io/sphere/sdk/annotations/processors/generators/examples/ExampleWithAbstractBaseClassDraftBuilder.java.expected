@@ -48,7 +48,7 @@ abstract class ExampleWithAbstractBaseClassDraftBuilderBase<T extends ExampleWit
   /**
    * Creates a builder initialized with the given values.
    *
-   * @param name initial value for the {@link #name(String)} property
+   * @param name initial value for the {@link ExampleWithAbstractBaseClassDraft#getName()} property
    * @return new builder initialized with the given values
    */
   public static ExampleWithAbstractBaseClassDraftBuilder of(final String name) {
