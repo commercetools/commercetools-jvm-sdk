@@ -75,15 +75,6 @@ public class ProductAvailabilitySearchIntegrationTest extends IntegrationTest {
                     assertThat(res.getResults()).hasSize(1);
                 });
 
-                final ProductProjectionSearch isOnStockInAnyChannelExistsRequest = ProductProjectionSearch.ofStaged()
-                        .plusQueryFilters(m -> m.id().is(product.getId()))
-                        .plusQueryFilters(m -> m.allVariants().availability()
-                                .isOnStockByChannels().exists());
-                assertEventually(() -> {
-                    final PagedSearchResult<ProductProjection> res = client().executeBlocking(isOnStockInAnyChannelExistsRequest);
-                    assertThat(res.getResults()).hasSize(1);
-                });
-
                 final ProductProjectionSearch isOnStockInAllChannelsRequest = ProductProjectionSearch.ofStaged()
                         .plusQueryFilters(m -> m.id().is(product.getId()))
                         .plusQueryFilters(m -> m.allVariants().availability()
