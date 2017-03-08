@@ -518,6 +518,12 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
     }
 
     @Test
+    public void setDescriptionWithStaged() {
+        setDescriptionWithStaged(true);
+        setDescriptionWithStaged(false);
+    }
+
+    @Test
     public void setMetaKeywords() throws Exception {
         withUpdateableProduct(client(), product -> {
             final LocalizedString metaKeywords = LocalizedString
@@ -1553,6 +1559,18 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
             final LocalizedString newName = LocalizedString.ofEnglish("newName " + RANDOM.nextInt());
             final Product updatedProduct = client().executeBlocking(ProductUpdateCommand.of(product, ChangeName.of(newName, staged)));
             assertThat(updatedProduct.getMasterData().getStaged().getName()).isEqualTo(newName);
+            assertThat(updatedProduct.getMasterData().hasStagedChanges()).isEqualTo(staged);
+            return updatedProduct;
+        });
+    }
+
+    public void setDescriptionWithStaged(final boolean staged) {
+        withUpdateableProduct(client(), product -> {
+            assertThat(product.getMasterData().hasStagedChanges()).isFalse();
+            final LocalizedString newDescription = LocalizedString.ofEnglish("new description " + RANDOM.nextInt());
+            final ProductUpdateCommand cmd = ProductUpdateCommand.of(product, SetDescription.of(newDescription, staged));
+            final Product updatedProduct = client().executeBlocking(cmd);
+            assertThat(updatedProduct.getMasterData().getStaged().getDescription()).isEqualTo(newDescription);
             assertThat(updatedProduct.getMasterData().hasStagedChanges()).isEqualTo(staged);
             return updatedProduct;
         });
