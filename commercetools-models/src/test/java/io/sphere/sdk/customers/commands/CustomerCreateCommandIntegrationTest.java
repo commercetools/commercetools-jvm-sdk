@@ -109,6 +109,20 @@ public class CustomerCreateCommandIntegrationTest extends CustomerIntegrationTes
     }
 
     @Test
+    public void createCustomerWithCartWithCartExpansion() {
+        final CustomerGroup customerGroup = CustomerGroupFixtures.b2cCustomerGroup(client());
+        final Cart cart = client().executeBlocking(CartCreateCommand.of(CartDraft.of(EUR)));
+        final String email = randomEmail(CustomerCreateCommandIntegrationTest.class);
+        final CustomerDraft draft = CustomerDraftDsl.of(CUSTOMER_NAME, email, PASSWORD).withCart(cart).withCustomerGroup(customerGroup);
+        final CustomerCreateCommand customerCreateCommand = CustomerCreateCommand.of(draft)
+                .withExpansionPaths(m -> m.cart().customerGroup());
+        final CustomerSignInResult result = client().executeBlocking(customerCreateCommand);
+        assertThat(result.getCart()).isNotNull();
+        assertThat(result.getCart().getId()).isEqualTo(cart.getId());
+        assertThat(result.getCart().getCustomerGroup().getObj()).isEqualTo(customerGroup);
+    }
+
+    @Test
     public void createByJson() {
         final JsonNodeReferenceResolver referenceResolver = new JsonNodeReferenceResolver();
         withB2cCustomerGroup(client(), customerGroup -> {
