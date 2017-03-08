@@ -26,12 +26,15 @@ public final class SetPrices extends UpdateActionImpl<Product> {
     @Nullable
     private final String sku;
     private final List<PriceDraft> prices;
+    @Nullable
+    private final boolean staged;
 
-    private SetPrices(@Nullable final Integer variantId, @Nullable final String sku, final List<PriceDraft> prices) {
+    private SetPrices(@Nullable final Integer variantId, @Nullable final String sku, final List<PriceDraft> prices, @Nullable final boolean staged) {
         super("setPrices");
         this.variantId = variantId;
         this.sku = sku;
         this.prices = prices;
+        this.staged = staged;
     }
 
     @Nullable
@@ -44,19 +47,32 @@ public final class SetPrices extends UpdateActionImpl<Product> {
         return sku;
     }
 
+    @Nullable
+    public boolean isStaged() {
+        return staged;
+    }
+
     public List<PriceDraft> getPrices() {
         return prices;
     }
 
     public static SetPrices of(final Integer variantId, final List<PriceDraft> prices) {
-        return new SetPrices(variantId, null, prices);
+        return new SetPrices(variantId, null, prices, true);
     }
 
     public static SetPrices ofVariantId(final Integer variantId, final List<PriceDraft> prices) {
-        return new SetPrices(variantId, null, prices);
+        return ofVariantId(variantId, prices, true);
+    }
+
+    public static SetPrices ofVariantId(final Integer variantId, final List<PriceDraft> prices, @Nullable boolean staged) {
+        return new SetPrices(variantId, null, prices, staged);
     }
 
     public static SetPrices ofSku(final String sku, final List<PriceDraft> prices) {
-        return new SetPrices(null, sku, prices);
+        return ofSku(sku, prices, true);
+    }
+
+    public static SetPrices ofSku(final String sku, final List<PriceDraft> prices, @Nullable boolean staged) {
+        return new SetPrices(null, sku, prices, staged);
     }
 }
