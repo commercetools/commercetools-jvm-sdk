@@ -1,0 +1,36 @@
+package io.sphere.sdk.annotations.processors.generators;
+
+import com.google.common.base.Charsets;
+import com.google.testing.compile.CompilationRule;
+import com.squareup.javapoet.JavaFile;
+import org.apache.commons.io.IOUtils;
+import org.junit.Rule;
+
+import javax.lang.model.element.TypeElement;
+import java.io.InputStream;
+
+public abstract class AbstractGeneratorTest {
+    @Rule
+    public CompilationRule compilationRule = new CompilationRule();
+
+    protected AbstractGenerator generator;
+
+    protected String expectedContent(final Class<?> clazz) throws Exception {
+        final String fixtureFile = clazz.getSimpleName() + generator.getGeneratedFileSuffix() + ".java.expected";
+        try (InputStream resourceAsStream = clazz.getResourceAsStream(fixtureFile)) {
+            return IOUtils.toString(resourceAsStream, Charsets.UTF_8);
+        } catch (NullPointerException e) {
+            // this just makes it easier to diagnose missing files
+            throw new IllegalStateException("Fixture file '" + fixtureFile + "' not found.", e);
+        }
+    }
+
+    protected String generateAsString(final Class<?> clazz) throws Exception {
+        final TypeElement typeElement = compilationRule.getElements().getTypeElement(clazz.getCanonicalName());
+
+        final JavaFile javaFile = generator.generate(typeElement);
+        StringBuilder stringBuilder = new StringBuilder();
+        javaFile.writeTo(stringBuilder);
+        return stringBuilder.toString();
+    }
+}

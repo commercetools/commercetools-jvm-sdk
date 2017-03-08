@@ -37,6 +37,12 @@ public class TypeUtils {
         return ClassName.get(draftType.packageName(), draftType.simpleName() + "Dsl");
     }
 
+
+    public ClassName getValueImplType(final TypeElement typeElement) {
+        final ClassName draftType = ClassName.get(typeElement);
+        return ClassName.get(draftType.packageName(), draftType.simpleName() + "Impl");
+    }
+
     /**
      * Returns the type that the builder should return {@link Builder#build()}.
      *

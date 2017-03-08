@@ -1,0 +1,35 @@
+package io.sphere.sdk.annotations.processors.generators.examples;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+import io.sphere.sdk.models.Base;
+import java.lang.Boolean;
+import java.lang.String;
+import javax.annotation.Generated;
+import javax.annotation.Nullable;
+
+@Generated(
+    value = "io.sphere.sdk.annotations.processors.generators.ResourceValueImplGenerator",
+    comments = "Generated from: io.sphere.sdk.annotations.processors.generators.examples.ExampleResource"
+)
+final class ExampleResourceImpl extends Base implements ExampleResource {
+  @Nullable
+  @JsonProperty("isReturn")
+  private Boolean _return;
+
+  private String name;
+
+  ExampleResourceImpl(final Boolean _return, final String name) {
+    this._return = _return;
+    this.name = name;
+  }
+
+  @Nullable
+  @JsonProperty("isReturn")
+  public Boolean isReturn() {
+    return _return;
+  }
+
+  public String getName() {
+    return name;
+  }
+}

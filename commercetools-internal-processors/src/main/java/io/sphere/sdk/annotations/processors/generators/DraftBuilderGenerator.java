@@ -4,7 +4,6 @@ import com.squareup.javapoet.*;
 import io.sphere.sdk.annotations.FactoryMethod;
 import io.sphere.sdk.annotations.ResourceDraftValue;
 import io.sphere.sdk.annotations.processors.models.PropertyGenModel;
-import io.sphere.sdk.annotations.processors.models.TypeUtils;
 import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.Builder;
 import io.sphere.sdk.models.Reference;
@@ -13,7 +12,6 @@ import org.apache.commons.lang3.StringUtils;
 
 import javax.annotation.Generated;
 import javax.annotation.Nullable;
-import javax.lang.model.SourceVersion;
 import javax.lang.model.element.ExecutableElement;
 import javax.lang.model.element.Modifier;
 import javax.lang.model.element.TypeElement;
@@ -26,13 +24,10 @@ import java.util.stream.Stream;
 /**
  * Generator for {@code *DraftBuilder} classes.
  */
-public class DraftBuilderGenerator {
-    private final Elements elements;
-    private final TypeUtils typeUtils;
+public class DraftBuilderGenerator extends AbstractGenerator {
 
     public DraftBuilderGenerator(final Elements elements) {
-        this.elements = elements;
-        this.typeUtils = new TypeUtils(elements);
+        super(elements);
     }
 
     public JavaFile generate(final TypeElement annotatedTypeElement) {
@@ -40,9 +35,7 @@ public class DraftBuilderGenerator {
         final ClassName generatedBuilderName = typeUtils.getBuilderType(annotatedTypeElement);
 
         final List<ExecutableElement> getterMethods = getGetterMethodsSorted(annotatedTypeElement);
-        final List<PropertyGenModel> properties = getterMethods.stream()
-                .map(PropertyGenModel::of)
-                .collect(Collectors.toList());
+        final List<PropertyGenModel> properties = getPropertyGenModels(getterMethods);
 
         final ResourceDraftValue resourceDraftValue = annotatedTypeElement.getAnnotation(ResourceDraftValue.class);
 
@@ -99,6 +92,11 @@ public class DraftBuilderGenerator {
                 .build();
 
         return javaFile;
+    }
+
+    @Override
+    public String getGeneratedFileSuffix() {
+        return "Builder"; // TODO add base
     }
 
     private List<MethodSpec> createFactoryMethods(final FactoryMethod[] factoryMethods, final List<PropertyGenModel> properties, final ClassName returnType) {
@@ -184,8 +182,8 @@ public class DraftBuilderGenerator {
         return builder.build();
     }
 
-    private List<ParameterSpec> createParameters(final List<PropertyGenModel> propertis, final boolean useLowercaseBooleans, final boolean copyNullable) {
-        return propertis.stream()
+    private List<ParameterSpec> createParameters(final List<PropertyGenModel> properties, final boolean useLowercaseBooleans, final boolean copyNullable) {
+        return properties.stream()
                 .map(m -> createParameter(m, useLowercaseBooleans, copyNullable))
                 .collect(Collectors.toList());
     }
@@ -203,15 +201,6 @@ public class DraftBuilderGenerator {
                 .returns(returnType)
                 .addCode("return new $T($L);\n", draftImplType, callArgumentss)
                 .build();
-    }
-
-    private MethodSpec createGetMethod(final ExecutableElement getterMethod) {
-        final MethodSpec.Builder builder = MethodSpec.methodBuilder(getterMethod.getSimpleName().toString())
-                .addModifiers(Modifier.PUBLIC)
-                .returns(TypeName.get(getterMethod.getReturnType()))
-                .addCode("return $L;\n", escapeJavaKeyword(PropertyGenModel.getPropertyName(getterMethod)));
-        copyNullableAnnotation(getterMethod, builder);
-        return builder.build();
     }
 
     /**
@@ -279,13 +268,6 @@ public class DraftBuilderGenerator {
         builder.addAnnotation(suppressWarnings);
     }
 
-    private void copyNullableAnnotation(final ExecutableElement method, final MethodSpec.Builder builder) {
-        final Nullable nullable = method.getAnnotation(Nullable.class);
-        if (nullable != null) {
-            builder.addAnnotation(Nullable.class);
-        }
-    }
-
     /**
      * @param property the property to generate the parameter
      * @param useLowercaseBooleans {@link FactoryMethod#useLowercaseBooleans()}
@@ -307,27 +289,5 @@ public class DraftBuilderGenerator {
             builder.addAnnotation(Nullable.class);
         }
         return builder.build();
-    }
-
-    /**
-     * Escapes the given name with an {@code "_"} if it's a java keyword (e.g. {@code default}.
-     *
-     * @param name the name to escape
-     * @return the escaped name
-     */
-    private String escapeJavaKeyword(final String name) {
-        return SourceVersion.isKeyword(name) ? "_" + name : name;
-    }
-
-    /**
-     * Returns all getter methods - including inherited methods - sorted by their property name.
-     *
-     * @param typeElement the type element
-     * @return methods sorted by their {@link PropertyGenModel#getPropertyName(ExecutableElement)}
-     */
-    private List<ExecutableElement> getGetterMethodsSorted(TypeElement typeElement) {
-        return typeUtils.getAllGetterMethods(typeElement)
-                .sorted(Comparator.comparing(methodName -> escapeJavaKeyword(PropertyGenModel.getPropertyName(methodName))))
-                .collect(Collectors.toList());
     }
 }
