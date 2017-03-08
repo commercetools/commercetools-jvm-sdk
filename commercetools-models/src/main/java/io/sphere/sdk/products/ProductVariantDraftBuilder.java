@@ -42,6 +42,6 @@ public final class ProductVariantDraftBuilder extends ProductVariantDraftBuilder
     }
 
     public ProductVariantDraftBuilder plusAttribute(final AttributeDraft attribute) {
-        return attributes(listOf(attributes, attribute));
+        return attributes != null ? attributes(listOf(attributes, attribute)) : attributes(attribute);
     }
 }
