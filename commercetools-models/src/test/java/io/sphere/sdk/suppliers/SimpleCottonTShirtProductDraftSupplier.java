@@ -3,9 +3,13 @@ package io.sphere.sdk.suppliers;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Referenceable;
-import io.sphere.sdk.products.*;
+import io.sphere.sdk.products.ProductDraft;
+import io.sphere.sdk.products.ProductDraftBuilder;
+import io.sphere.sdk.products.ProductVariantDraft;
+import io.sphere.sdk.products.ProductVariantDraftBuilder;
 import io.sphere.sdk.producttypes.ProductType;
-import io.sphere.sdk.suppliers.TShirtProductTypeDraftSupplier.*;
+import io.sphere.sdk.suppliers.TShirtProductTypeDraftSupplier.Colors;
+import io.sphere.sdk.suppliers.TShirtProductTypeDraftSupplier.Sizes;
 
 import java.util.Locale;
 import java.util.UUID;
@@ -23,8 +27,7 @@ public class SimpleCottonTShirtProductDraftSupplier implements Supplier<ProductD
     @Override
     public ProductDraft get() {
         final ProductVariantDraft masterVariant = ProductVariantDraftBuilder.of()
-                .plusAttribute(Sizes.ATTRIBUTE.draftOf(Sizes.S))
-                .plusAttribute(Colors.ATTRIBUTE.draftOf(Colors.GREEN))
+                .attributes(Sizes.ATTRIBUTE.draftOf(Sizes.S), Colors.ATTRIBUTE.draftOf(Colors.GREEN))
                 .sku(UUID.randomUUID().toString())
                 .build();
         final LocalizedString slug = en(name).slugifiedUnique();

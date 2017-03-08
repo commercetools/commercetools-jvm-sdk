@@ -1,21 +1,21 @@
 package io.sphere.sdk.producttypes;
 
-import io.sphere.sdk.products.attributes.*;
 import io.sphere.sdk.models.Referenceable;
 import io.sphere.sdk.products.*;
+import io.sphere.sdk.products.attributes.*;
 import io.sphere.sdk.test.IntegrationTest;
 import org.junit.Test;
 
-import java.util.*;
+import java.util.List;
+import java.util.Set;
 
 import static io.sphere.sdk.products.ProductFixtures.withProduct;
 import static io.sphere.sdk.producttypes.ProductTypeFixtures.withProductType;
+import static io.sphere.sdk.test.SphereTestUtils.*;
 import static io.sphere.sdk.utils.SphereInternalUtils.asSet;
 import static java.util.Arrays.asList;
-import static org.assertj.core.api.Assertions.assertThat;
-import static io.sphere.sdk.test.SphereTestUtils.*;
-
 import static java.util.stream.Collectors.toList;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public final class NestedAttributeIntegrationTest extends IntegrationTest {
 
@@ -96,8 +96,8 @@ public final class NestedAttributeIntegrationTest extends IntegrationTest {
 
     private ProductVariantDraft createBananaVariant() {
         return ProductVariantDraftBuilder.of()
-                .plusAttribute(Banana.bananaColor.draftOf("blue"))
-                .plusAttribute(Banana.nutrients.draftOf(asSet(AttributeContainerDraft.of(asList(
+                .attributes(Banana.bananaColor.draftOf("blue"),
+                        Banana.nutrients.draftOf(asSet(AttributeContainerDraft.of(asList(
                         Nutrient.servingSize.draftOf(1.5D),
                         Nutrient.servingSizeUOM.draftOf("M"),
                         Nutrient.nutrientInformation.draftOf(asSet(AttributeContainerDraft.of(
