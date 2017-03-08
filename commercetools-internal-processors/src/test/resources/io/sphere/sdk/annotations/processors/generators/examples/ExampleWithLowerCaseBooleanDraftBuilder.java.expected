@@ -57,6 +57,7 @@ public final class ExampleWithLowerCaseBooleanDraftBuilder extends Base implemen
    * Creates a builder initialized with the given values.
    *
    * @param lowerCased initial value for the {@link #lowerCased(Boolean)} property
+   * @return new builder initialized with the given values
    */
   public static ExampleWithLowerCaseBooleanDraftBuilder of(final boolean lowerCased) {
     return new ExampleWithLowerCaseBooleanDraftBuilder(lowerCased);

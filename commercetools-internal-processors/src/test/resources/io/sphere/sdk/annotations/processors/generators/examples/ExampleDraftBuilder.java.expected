@@ -130,6 +130,7 @@ public final class ExampleDraftBuilder extends Base implements Builder<ExampleDr
    *
    * @param sku initial value for the {@link #sku(String)} property
    * @param active initial value for the {@link #active(Boolean)} property
+   * @return new builder initialized with the given values
    */
   public static ExampleDraftBuilder of(final String sku, final Boolean active) {
     return new ExampleDraftBuilder(null, active, null, null, sku);
@@ -140,6 +141,7 @@ public final class ExampleDraftBuilder extends Base implements Builder<ExampleDr
    *
    * @param _default initial value for the {@link #_default(Boolean)} property
    * @param active initial value for the {@link #active(Boolean)} property
+   * @return new builder initialized with the given values
    */
   public static ExampleDraftBuilder of(final Boolean _default, final Boolean active) {
     return new ExampleDraftBuilder(_default, active, null, null, null);
@@ -150,6 +152,7 @@ public final class ExampleDraftBuilder extends Base implements Builder<ExampleDr
    *
    * @param _default initial value for the {@link #_default(Boolean)} property
    * @param optional initial value for the {@link #optional(String)} property
+   * @return new builder initialized with the given values
    */
   public static ExampleDraftBuilder of(final Boolean _default, final String optional) {
     return new ExampleDraftBuilder(_default, null, null, optional, null);

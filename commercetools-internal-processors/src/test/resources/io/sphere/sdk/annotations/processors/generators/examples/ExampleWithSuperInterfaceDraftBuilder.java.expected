@@ -61,6 +61,7 @@ public final class ExampleWithSuperInterfaceDraftBuilder extends Base implements
    *
    * @param name initial value for the {@link #name(String)} property
    * @param sku initial value for the {@link #sku(String)} property
+   * @return new builder initialized with the given values
    */
   public static ExampleWithSuperInterfaceDraftBuilder of(final String name, final String sku) {
     return new ExampleWithSuperInterfaceDraftBuilder(name, sku);
