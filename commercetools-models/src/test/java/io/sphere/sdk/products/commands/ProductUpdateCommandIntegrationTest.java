@@ -275,6 +275,22 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
         setPricesByVariantIdWithStaged(false);
     }
 
+    private void setPricesByVariantIdWithStaged(final boolean staged) {
+        final PriceDraft priceDraft = PriceDraft.of(MoneyImpl.of(123, EUR));
+        final PriceDraft priceDraft2 = PriceDraft.of(MoneyImpl.of(123, EUR)).withCountry(DE);
+        final List<PriceDraft> expectedPriceList = asList(priceDraft, priceDraft2);
+        withUpdateableProduct(client(), product -> {
+            assertThat(product.getMasterData().hasStagedChanges()).isFalse();
+            final Product updatedProduct = client()
+                    .executeBlocking(ProductUpdateCommand.of(product, SetPrices.ofVariantId(1, expectedPriceList, staged)));
+            final List<Price> prices = updatedProduct.getMasterData().getStaged().getMasterVariant().getPrices();
+            List<PriceDraft> draftPricesList = prices.stream().map(PriceDraft::of).collect(toList());
+            assertThat(draftPricesList).containsOnly(priceDraft, priceDraft2);
+            assertThat(updatedProduct.getMasterData().hasStagedChanges()).isEqualTo(staged);
+            return updatedProduct;
+        });
+    }
+
     @Test
     public void setPricesBySku() throws Exception {
         final PriceDraft priceDraft = PriceDraft.of(MoneyImpl.of(123, EUR));
@@ -394,6 +410,17 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
         changeNameWithStaged(false);
     }
 
+    public void changeNameWithStaged(final boolean staged) {
+        withUpdateableProduct(client(), product -> {
+            assertThat(product.getMasterData().hasStagedChanges()).isFalse();
+            final LocalizedString newName = LocalizedString.ofEnglish("newName " + RANDOM.nextInt());
+            final Product updatedProduct = client().executeBlocking(ProductUpdateCommand.of(product, ChangeName.of(newName, staged)));
+            assertThat(updatedProduct.getMasterData().getStaged().getName()).isEqualTo(newName);
+            assertThat(updatedProduct.getMasterData().hasStagedChanges()).isEqualTo(staged);
+            return updatedProduct;
+        });
+    }
+
     @Test
     public void changePrice() throws Exception {
         withUpdateablePricedProduct(client(), product -> {
@@ -432,6 +459,23 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
                 assertThat(message.getSlug()).isEqualTo(newSlug);
             });
 
+            return updatedProduct;
+        });
+    }
+
+    @Test
+    public void changeSlugWithStaged() {
+        changeSlugWithStaged(true);
+        changeSlugWithStaged(false);
+    }
+
+    public void changeSlugWithStaged(final boolean staged) {
+        withUpdateableProduct(client(), product -> {
+            assertThat(product.getMasterData().hasStagedChanges()).isFalse();
+            final LocalizedString newSlug = LocalizedString.ofEnglish("new-slug-" + RANDOM.nextInt());
+            final Product updatedProduct = client().executeBlocking(ProductUpdateCommand.of(product, ChangeSlug.of(newSlug, staged)));
+            assertThat(updatedProduct.getMasterData().getStaged().getSlug()).isEqualTo(newSlug);
+            assertThat(updatedProduct.getMasterData().hasStagedChanges()).isEqualTo(staged);
             return updatedProduct;
         });
     }
@@ -521,6 +565,18 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
     public void setDescriptionWithStaged() {
         setDescriptionWithStaged(true);
         setDescriptionWithStaged(false);
+    }
+
+    public void setDescriptionWithStaged(final boolean staged) {
+        withUpdateableProduct(client(), product -> {
+            assertThat(product.getMasterData().hasStagedChanges()).isFalse();
+            final LocalizedString newDescription = LocalizedString.ofEnglish("new description " + RANDOM.nextInt());
+            final ProductUpdateCommand cmd = ProductUpdateCommand.of(product, SetDescription.of(newDescription, staged));
+            final Product updatedProduct = client().executeBlocking(cmd);
+            assertThat(updatedProduct.getMasterData().getStaged().getDescription()).isEqualTo(newDescription);
+            assertThat(updatedProduct.getMasterData().hasStagedChanges()).isEqualTo(staged);
+            return updatedProduct;
+        });
     }
 
     @Test
@@ -1535,45 +1591,6 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
             variantDraftBuilder.sku(randomKey());
             return builder.masterVariant(variantDraftBuilder.build());
         }, productProductFunction);
-    }
-
-    private void setPricesByVariantIdWithStaged(final boolean staged) {
-        final PriceDraft priceDraft = PriceDraft.of(MoneyImpl.of(123, EUR));
-        final PriceDraft priceDraft2 = PriceDraft.of(MoneyImpl.of(123, EUR)).withCountry(DE);
-        final List<PriceDraft> expectedPriceList = asList(priceDraft, priceDraft2);
-        withUpdateableProduct(client(), product -> {
-            assertThat(product.getMasterData().hasStagedChanges()).isFalse();
-            final Product updatedProduct = client()
-                    .executeBlocking(ProductUpdateCommand.of(product, SetPrices.ofVariantId(1, expectedPriceList, staged)));
-            final List<Price> prices = updatedProduct.getMasterData().getStaged().getMasterVariant().getPrices();
-            List<PriceDraft> draftPricesList = prices.stream().map(PriceDraft::of).collect(toList());
-            assertThat(draftPricesList).containsOnly(priceDraft, priceDraft2);
-            assertThat(updatedProduct.getMasterData().hasStagedChanges()).isEqualTo(staged);
-            return updatedProduct;
-        });
-    }
-
-    public void changeNameWithStaged(final boolean staged) {
-        withUpdateableProduct(client(), product -> {
-            assertThat(product.getMasterData().hasStagedChanges()).isFalse();
-            final LocalizedString newName = LocalizedString.ofEnglish("newName " + RANDOM.nextInt());
-            final Product updatedProduct = client().executeBlocking(ProductUpdateCommand.of(product, ChangeName.of(newName, staged)));
-            assertThat(updatedProduct.getMasterData().getStaged().getName()).isEqualTo(newName);
-            assertThat(updatedProduct.getMasterData().hasStagedChanges()).isEqualTo(staged);
-            return updatedProduct;
-        });
-    }
-
-    public void setDescriptionWithStaged(final boolean staged) {
-        withUpdateableProduct(client(), product -> {
-            assertThat(product.getMasterData().hasStagedChanges()).isFalse();
-            final LocalizedString newDescription = LocalizedString.ofEnglish("new description " + RANDOM.nextInt());
-            final ProductUpdateCommand cmd = ProductUpdateCommand.of(product, SetDescription.of(newDescription, staged));
-            final Product updatedProduct = client().executeBlocking(cmd);
-            assertThat(updatedProduct.getMasterData().getStaged().getDescription()).isEqualTo(newDescription);
-            assertThat(updatedProduct.getMasterData().hasStagedChanges()).isEqualTo(staged);
-            return updatedProduct;
-        });
     }
 
 }
