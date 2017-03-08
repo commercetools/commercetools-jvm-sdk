@@ -102,8 +102,8 @@ public class ProductCrudIntegrationTest extends IntegrationTest {
         final String sku = "sku2000";
         final ProductVariantDraft masterVariant = ProductVariantDraftBuilder.of()
                 .sku(sku)
-                .plusAttribute(Sizes.ATTRIBUTE.draftOf(Sizes.S))
-                .plusAttribute(Colors.ATTRIBUTE.draftOf(Colors.GREEN)).build();
+                .attributes(Sizes.ATTRIBUTE.draftOf(Sizes.S), Colors.ATTRIBUTE.draftOf(Colors.GREEN))
+                .build();
         final ProductDraft productDraft = ProductDraftBuilder.of(productType, en("foo"), en("foo-slug"), masterVariant).build();
         client().executeBlocking(ProductCreateCommand.of(productDraft));
         final PagedQueryResult<Product> result = client().executeBlocking(ProductQuery.of().bySku(sku, STAGED));
