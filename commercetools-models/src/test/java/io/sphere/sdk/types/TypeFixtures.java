@@ -17,6 +17,8 @@ import io.sphere.sdk.payments.Payment;
 import io.sphere.sdk.payments.commands.updateactions.AddInterfaceInteraction;
 import io.sphere.sdk.products.Price;
 import io.sphere.sdk.reviews.Review;
+import io.sphere.sdk.shoppinglists.ShoppingList;
+import io.sphere.sdk.shoppinglists.TextLineItem;
 import io.sphere.sdk.types.commands.TypeCreateCommand;
 import io.sphere.sdk.types.commands.TypeDeleteCommand;
 
@@ -42,7 +44,10 @@ public class TypeFixtures {
     public static final String ENUM_FIELD_NAME = "enum-field-name";
     public static final String CAT_REFERENCE_FIELD_NAME = "catref";
     public static final String LOCALIZED_ENUM_FIELD_NAME = "localized-enum-field-name";
-    public static final Set<String> TYPE_IDS = new HashSet<>(asList(Category.resourceTypeId(), Customer.resourceTypeId(), Cart.resourceTypeId(), Order.resourceTypeId(), LineItem.resourceTypeId(), CustomLineItem.resourceTypeId(), Payment.resourceTypeId(), AddInterfaceInteraction.resourceTypeId(), Price.resourceTypeId(), Review.resourceTypeId(), Channel.referenceTypeId(), InventoryEntry.resourceTypeId(), Asset.resourceTypeId()));
+    public static final Set<String> TYPE_IDS = new HashSet<>(asList(Category.resourceTypeId(), Customer.resourceTypeId(), Cart.resourceTypeId(),
+            Order.resourceTypeId(), LineItem.resourceTypeId(), CustomLineItem.resourceTypeId(), Payment.resourceTypeId(), AddInterfaceInteraction.resourceTypeId(),
+            Price.resourceTypeId(), Review.resourceTypeId(), Channel.referenceTypeId(), InventoryEntry.resourceTypeId(), Asset.resourceTypeId(), ShoppingList.referenceTypeId(),
+            TextLineItem.resourceTypeId()));
     public static final String STRING_FIELD_NAME = "string-field-name";
     public static final String STRING_SET_FIELD_NAME = "string-set-field-name";
     public static final String TYPE_NAME = "name of the custom type";

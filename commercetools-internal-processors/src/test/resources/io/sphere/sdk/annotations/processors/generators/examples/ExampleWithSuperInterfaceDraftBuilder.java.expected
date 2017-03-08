@@ -1,0 +1,78 @@
+package io.sphere.sdk.annotations.processors.generators.examples;
+
+import io.sphere.sdk.models.Base;
+import io.sphere.sdk.models.Builder;
+import java.lang.String;
+import javax.annotation.Generated;
+
+/**
+ * Builder for {@link ExampleWithSuperInterfaceDraft}.
+ */
+@Generated(
+    value = "io.sphere.sdk.annotations.processors.generators.DraftBuilderGenerator",
+    comments = "Generated from: io.sphere.sdk.annotations.processors.generators.examples.ExampleWithSuperInterfaceDraft"
+)
+public final class ExampleWithSuperInterfaceDraftBuilder extends Base implements Builder<ExampleWithSuperInterfaceDraftDsl> {
+  private String name;
+
+  private String sku;
+
+  ExampleWithSuperInterfaceDraftBuilder() {
+  }
+
+  ExampleWithSuperInterfaceDraftBuilder(final String name, final String sku) {
+    this.name = name;
+    this.sku = sku;
+  }
+
+  /**
+   * Sets the {@code name} property of this builder.
+   *
+   * @param name the value for {@link ExampleWithSuperInterfaceDraft#getName()}
+   * @return this builder
+   */
+  public ExampleWithSuperInterfaceDraftBuilder name(final String name) {
+    this.name = name;
+    return this;
+  }
+
+  /**
+   * Sets the {@code sku} property of this builder.
+   *
+   * @param sku the value for {@link ExampleDraftSuperInterface#getSku()}
+   * @return this builder
+   */
+  public ExampleWithSuperInterfaceDraftBuilder sku(final String sku) {
+    this.sku = sku;
+    return this;
+  }
+
+  /**
+   * Creates a new instance of {@code ExampleWithSuperInterfaceDraftDsl} with the values of this builder.
+   *
+   * @return the instance
+   */
+  public ExampleWithSuperInterfaceDraftDsl build() {
+    return new ExampleWithSuperInterfaceDraftDsl(name, sku);
+  }
+
+  /**
+   * Creates a builder initialized with the given values.
+   *
+   * @param name initial value for the {@link #name(String)} property
+   * @param sku initial value for the {@link #sku(String)} property
+   */
+  public static ExampleWithSuperInterfaceDraftBuilder of(final String name, final String sku) {
+    return new ExampleWithSuperInterfaceDraftBuilder(name, sku);
+  }
+
+  /**
+   * Creates a builder initialized with the fields of the template parameter.
+   *
+   * @param template the template
+   * @return a new builder initialized from the template
+   */
+  public static ExampleWithSuperInterfaceDraftBuilder of(final ExampleWithSuperInterfaceDraft template) {
+    return new ExampleWithSuperInterfaceDraftBuilder(template.getName(), template.getSku());
+  }
+}

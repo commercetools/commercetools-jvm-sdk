@@ -1,11 +1,14 @@
 package io.sphere.sdk.annotations.processors;
 
+import com.squareup.javapoet.JavaFile;
+
 import javax.annotation.processing.AbstractProcessor;
 import javax.annotation.processing.RoundEnvironment;
 import javax.lang.model.element.Element;
 import javax.lang.model.element.TypeElement;
 import javax.tools.Diagnostic;
 import javax.tools.JavaFileObject;
+import java.io.IOException;
 import java.io.Writer;
 import java.lang.annotation.Annotation;
 import java.util.Iterator;
@@ -53,9 +56,17 @@ abstract class CommercetoolsAnnotationProcessor<A extends Annotation> extends Ab
         writeClass(typeElement, classModel.getFullyQualifiedName(), writer -> Templates.writeClass(classModel, writer));
     }
 
+    protected final void writeClass(final JavaFile javaFile) {
+        try {
+            javaFile.writeTo(processingEnv.getFiler());
+        } catch (IOException e) {
+            this.processingEnv.getMessager().printMessage(Diagnostic.Kind.ERROR, e.getMessage());
+        }
+    }
+
     protected final void writeClass(final TypeElement typeElement, final String fullyQualifiedName, final CheckedConsumer<Writer> writerCheckedConsumer) {
         try {
-            JavaFileObject fileObject = this.processingEnv.getFiler().createSourceFile(fullyQualifiedName, new Element[]{typeElement});
+            JavaFileObject fileObject = this.processingEnv.getFiler().createSourceFile(fullyQualifiedName, typeElement);
             Writer writer = fileObject.openWriter();
             Throwable t = null;
             try {

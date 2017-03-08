@@ -1,10 +1,10 @@
 package io.sphere.sdk.products;
 
 import io.sphere.sdk.models.AssetDraft;
-import io.sphere.sdk.products.attributes.AttributeDraft;
-import io.sphere.sdk.products.attributes.NamedAttributeAccess;
 import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.Builder;
+import io.sphere.sdk.products.attributes.AttributeDraft;
+import io.sphere.sdk.products.attributes.NamedAttributeAccess;
 
 import javax.annotation.Nullable;
 import java.util.Collections;

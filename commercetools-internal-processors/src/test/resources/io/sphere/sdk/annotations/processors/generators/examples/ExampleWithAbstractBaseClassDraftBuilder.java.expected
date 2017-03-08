@@ -1,0 +1,66 @@
+package io.sphere.sdk.annotations.processors.generators.examples;
+
+import io.sphere.sdk.models.Base;
+import io.sphere.sdk.models.Builder;
+import java.lang.String;
+import java.lang.SuppressWarnings;
+import javax.annotation.Generated;
+
+/**
+ * Abstract base builder for {@link ExampleWithAbstractBaseClassDraft} which needs to be extended to add additional methods.
+ * Subclasses have to provide the same non-default constructor as this class.
+ */
+@Generated(
+    value = "io.sphere.sdk.annotations.processors.generators.DraftBuilderGenerator",
+    comments = "Generated from: io.sphere.sdk.annotations.processors.generators.examples.ExampleWithAbstractBaseClassDraft"
+)
+abstract class ExampleWithAbstractBaseClassDraftBuilderBase<T extends ExampleWithAbstractBaseClassDraftBuilderBase> extends Base implements Builder<ExampleWithAbstractBaseClassDraftDsl> {
+  String name;
+
+  protected ExampleWithAbstractBaseClassDraftBuilderBase() {
+  }
+
+  protected ExampleWithAbstractBaseClassDraftBuilderBase(final String name) {
+    this.name = name;
+  }
+
+  /**
+   * Sets the {@code name} property of this builder.
+   *
+   * @param name the value for {@link ExampleWithAbstractBaseClassDraft#getName()}
+   * @return this builder
+   */
+  @SuppressWarnings("unchecked")
+  public T name(final String name) {
+    this.name = name;
+    return (T) this;
+  }
+
+  /**
+   * Creates a new instance of {@code ExampleWithAbstractBaseClassDraftDsl} with the values of this builder.
+   *
+   * @return the instance
+   */
+  public ExampleWithAbstractBaseClassDraftDsl build() {
+    return new ExampleWithAbstractBaseClassDraftDsl(name);
+  }
+
+  /**
+   * Creates a builder initialized with the given values.
+   *
+   * @param name initial value for the {@link #name(String)} property
+   */
+  public static ExampleWithAbstractBaseClassDraftBuilder of(final String name) {
+    return new ExampleWithAbstractBaseClassDraftBuilder(name);
+  }
+
+  /**
+   * Creates a builder initialized with the fields of the template parameter.
+   *
+   * @param template the template
+   * @return a new builder initialized from the template
+   */
+  public static ExampleWithAbstractBaseClassDraftBuilder of(final ExampleWithAbstractBaseClassDraft template) {
+    return new ExampleWithAbstractBaseClassDraftBuilder(template.getName());
+  }
+}

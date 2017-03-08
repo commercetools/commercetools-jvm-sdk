@@ -5,6 +5,7 @@ import io.sphere.sdk.channels.ChannelRole;
 import io.sphere.sdk.channels.commands.updateactions.*;
 import io.sphere.sdk.models.Address;
 import io.sphere.sdk.models.LocalizedString;
+import io.sphere.sdk.models.Point;
 import io.sphere.sdk.test.IntegrationTest;
 import org.junit.Test;
 
@@ -12,9 +13,7 @@ import java.util.Set;
 
 import static io.sphere.sdk.channels.ChannelFixtures.withUpdatableChannelOfRole;
 import static io.sphere.sdk.channels.ChannelRole.*;
-import static io.sphere.sdk.test.SphereTestUtils.DE;
-import static io.sphere.sdk.test.SphereTestUtils.randomKey;
-import static io.sphere.sdk.test.SphereTestUtils.randomSlug;
+import static io.sphere.sdk.test.SphereTestUtils.*;
 import static io.sphere.sdk.utils.SphereInternalUtils.asSet;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -88,4 +87,15 @@ public class ChannelUpdateCommandIntegrationTest extends IntegrationTest {
             return updatedChannel;
         });
     }
+
+    @Test
+    public void setGeoLocation() throws Exception {
+        withUpdatableChannelOfRole(client(), asSet(PRIMARY), channel -> {
+            final Point point = Point.of(52.0, 10.0);
+            final Channel updatedChannel = client().executeBlocking(ChannelUpdateCommand.of(channel, SetGeoLocation.of(point)));
+            assertThat(updatedChannel.getGeoLocation()).isEqualTo(point);
+            return updatedChannel;
+        });
+    }
+
 }
