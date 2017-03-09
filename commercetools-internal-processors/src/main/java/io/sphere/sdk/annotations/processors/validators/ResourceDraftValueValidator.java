@@ -4,28 +4,26 @@ import com.squareup.javapoet.ClassName;
 import io.sphere.sdk.annotations.FactoryMethod;
 import io.sphere.sdk.annotations.ResourceDraftValue;
 import io.sphere.sdk.annotations.processors.models.PropertyGenModel;
-import io.sphere.sdk.annotations.processors.models.TypeUtils;
 
-import javax.annotation.processing.Messager;
 import javax.annotation.processing.ProcessingEnvironment;
 import javax.lang.model.element.TypeElement;
-import javax.lang.model.util.Elements;
 import javax.tools.Diagnostic;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
- * Validator for types annotated with  {@link ResourceDraftValue}.
+ * Validator for types annotated with {@link ResourceDraftValue}.
+ *
+ * Validates that:
+ * <ol>
+ *     <li>that at least one {@link FactoryMethod} is specified {@link ResourceDraftValue#factoryMethods()}</li>
+ *     <li>that the annotated type has properties for all specified {@link FactoryMethod#parameterNames()}</li>
+ * </ol>
  */
-public class ResourceDraftValueValidator {
-    private final Messager messager;
-    private final Elements elements;
-    private final TypeUtils typeUtils;
+public class ResourceDraftValueValidator extends AbstractValidator {
 
     public ResourceDraftValueValidator(final ProcessingEnvironment processingEnvironment) {
-        this.messager = processingEnvironment.getMessager();
-        this.elements = processingEnvironment.getElementUtils();
-        this.typeUtils = new TypeUtils(elements);
+        super(processingEnvironment);
     }
 
     /**
