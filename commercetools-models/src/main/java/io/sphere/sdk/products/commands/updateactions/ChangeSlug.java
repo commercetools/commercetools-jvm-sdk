@@ -1,6 +1,5 @@
 package io.sphere.sdk.products.commands.updateactions;
 
-import io.sphere.sdk.commands.UpdateActionImpl;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.products.Product;
 
@@ -13,15 +12,12 @@ import javax.annotation.Nullable;
  *
  * {@include.example io.sphere.sdk.products.commands.ProductUpdateCommandIntegrationTest#changeSlug()}
  */
-public final class ChangeSlug extends UpdateActionImpl<Product> {
+public final class ChangeSlug extends StagedBase<Product> {
     private final LocalizedString slug;
-    @Nullable
-    private final boolean staged;
 
     private ChangeSlug(final LocalizedString slug, final boolean staged) {
-        super("changeSlug");
+        super("changeSlug", staged);
         this.slug = slug;
-        this.staged = staged;
     }
 
     public static ChangeSlug of(final LocalizedString slug) {
@@ -36,8 +32,4 @@ public final class ChangeSlug extends UpdateActionImpl<Product> {
         return slug;
     }
 
-    @Nullable
-    public boolean isStaged() {
-        return staged;
-    }
 }

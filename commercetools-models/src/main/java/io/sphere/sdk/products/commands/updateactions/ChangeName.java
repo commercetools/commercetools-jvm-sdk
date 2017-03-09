@@ -1,6 +1,5 @@
 package io.sphere.sdk.products.commands.updateactions;
 
-import io.sphere.sdk.commands.UpdateActionImpl;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.products.Product;
 
@@ -13,15 +12,12 @@ import javax.annotation.Nullable;
  *
  * {@include.example io.sphere.sdk.products.commands.ProductUpdateCommandIntegrationTest#changeName()}
  */
-public final class ChangeName extends UpdateActionImpl<Product> {
+public final class ChangeName extends StagedBase<Product> {
     private final LocalizedString name;
-    @Nullable
-    private final boolean staged;
 
     private ChangeName(final LocalizedString name, final boolean staged) {
-        super("changeName");
+        super("changeName", staged);
         this.name = name;
-        this.staged = staged;
     }
 
     public static ChangeName of(final LocalizedString name) {
@@ -34,10 +30,5 @@ public final class ChangeName extends UpdateActionImpl<Product> {
 
     public LocalizedString getName() {
         return name;
-    }
-
-    @Nullable
-    public boolean isStaged() {
-        return staged;
     }
 }
