@@ -60,7 +60,7 @@ public interface ProductVariant extends AttributeContainer {
      *
      * @return
      */
-    @JsonProperty("isScopedPriceDiscounted")
+    @JsonProperty("scopedPriceDiscounted")
     @Nullable
     Boolean isScopedPriceDiscounted();
 
