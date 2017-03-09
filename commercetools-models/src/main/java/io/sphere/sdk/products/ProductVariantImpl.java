@@ -14,7 +14,6 @@ import java.util.Optional;
 import static java.lang.String.format;
 
 class ProductVariantImpl extends ProductVariantImplBase {
-    @JsonIgnore
     @Nullable
     // hack for VariantIdentifier getter
     // https://github.com/commercetools/commercetools-jvm-sdk/issues/239
