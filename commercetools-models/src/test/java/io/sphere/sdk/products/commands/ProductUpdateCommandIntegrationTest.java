@@ -293,6 +293,7 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
         final List<PriceDraft> expectedPriceList = asList(expectedPrice1, expectedPrice2);
 
         withUpdateableProduct(client(), product -> {
+            assertThat(product.getMasterData().hasStagedChanges()).isFalse();
             final Product updatedProduct = client()
                     .executeBlocking(ProductUpdateCommand.of(product, SetPrices.of(1, expectedPriceList)));
 
@@ -300,6 +301,7 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
             assertThat(prices).hasSize(2);
             List<PriceDraft> draftPricesList = prices.stream().map(PriceDraft::of).collect(toList());
             assertThat(draftPricesList).containsOnly(expectedPrice1, expectedPrice2);
+            assertThat(updatedProduct.getMasterData().hasStagedChanges()).isTrue();
 
             return updatedProduct;
         });
@@ -312,19 +314,21 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
         final List<PriceDraft> expectedPriceList = asList(priceDraft, priceDraft2);
 
         withUpdateableProduct(client(), product -> {
+            assertThat(product.getMasterData().hasStagedChanges()).isFalse();
             final Product updatedProduct = client()
                     .executeBlocking(ProductUpdateCommand.of(product, SetPrices.ofVariantId(1, expectedPriceList)));
 
             final List<Price> prices = updatedProduct.getMasterData().getStaged().getMasterVariant().getPrices();
             List<PriceDraft> draftPricesList = prices.stream().map(PriceDraft::of).collect(toList());
             assertThat(draftPricesList).containsOnly(priceDraft, priceDraft2);
+            assertThat(updatedProduct.getMasterData().hasStagedChanges()).isTrue();
 
             return updatedProduct;
         });
     }
 
     @Test
-    public void setPricesByVariantWithStaged() {
+    public void setPricesByVariantIdWithStaged() {
         setPricesByVariantIdWithStaged(true);
         setPricesByVariantIdWithStaged(false);
     }
@@ -352,6 +356,7 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
         final List<PriceDraft> expectedPriceList = asList(priceDraft, priceDraft2);
 
         withUpdateableProduct(client(), product -> {
+            assertThat(product.getMasterData().hasStagedChanges()).isFalse();
             final String sku = product.getMasterData().getStaged().getMasterVariant().getSku();
             final Product updatedProduct = client()
                     .executeBlocking(ProductUpdateCommand.of(product, SetPrices.ofSku(sku, expectedPriceList)));
@@ -359,6 +364,33 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
             final List<Price> prices = updatedProduct.getMasterData().getStaged().getMasterVariant().getPrices();
             List<PriceDraft> draftPricesList = prices.stream().map(PriceDraft::of).collect(toList());
             assertThat(draftPricesList).containsOnly(priceDraft, priceDraft2);
+            assertThat(updatedProduct.getMasterData().hasStagedChanges()).isTrue();
+
+            return updatedProduct;
+        });
+    }
+
+    @Test
+    public void setPricesBySkuWithStaged() {
+        setPricesBySkuWithStaged(true);
+        setPricesBySkuWithStaged(false);
+    }
+
+    public void setPricesBySkuWithStaged(final boolean staged) {
+        final PriceDraft priceDraft = PriceDraft.of(MoneyImpl.of(123, EUR));
+        final PriceDraft priceDraft2 = PriceDraft.of(MoneyImpl.of(123, EUR)).withCountry(DE);
+        final List<PriceDraft> expectedPriceList = asList(priceDraft, priceDraft2);
+
+        withUpdateableProduct(client(), product -> {
+            assertThat(product.getMasterData().hasStagedChanges()).isFalse();
+            final String sku = product.getMasterData().getStaged().getMasterVariant().getSku();
+            final Product updatedProduct = client()
+                    .executeBlocking(ProductUpdateCommand.of(product, SetPrices.ofSku(sku, expectedPriceList, staged)));
+
+            final List<Price> prices = updatedProduct.getMasterData().getStaged().getMasterVariant().getPrices();
+            List<PriceDraft> draftPricesList = prices.stream().map(PriceDraft::of).collect(toList());
+            assertThat(draftPricesList).containsOnly(priceDraft, priceDraft2);
+            assertThat(updatedProduct.getMasterData().hasStagedChanges()).isEqualTo(staged);
 
             return updatedProduct;
         });

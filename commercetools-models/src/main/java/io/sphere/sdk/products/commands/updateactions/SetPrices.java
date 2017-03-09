@@ -1,6 +1,5 @@
 package io.sphere.sdk.products.commands.updateactions;
 
-import io.sphere.sdk.commands.UpdateActionImpl;
 import io.sphere.sdk.products.PriceDraft;
 import io.sphere.sdk.products.Product;
 
@@ -20,21 +19,18 @@ import java.util.List;
  *
  * @see io.sphere.sdk.products.ProductVariant#getPrices()
  */
-public final class SetPrices extends UpdateActionImpl<Product> {
+public final class SetPrices extends StagedBase<Product> {
     @Nullable
     private final Integer variantId;
     @Nullable
     private final String sku;
     private final List<PriceDraft> prices;
-    @Nullable
-    private final boolean staged;
 
-    private SetPrices(@Nullable final Integer variantId, @Nullable final String sku, final List<PriceDraft> prices, @Nullable final boolean staged) {
-        super("setPrices");
+    private SetPrices(@Nullable final Integer variantId, @Nullable final String sku, final List<PriceDraft> prices, final boolean staged) {
+        super("setPrices", staged);
         this.variantId = variantId;
         this.sku = sku;
         this.prices = prices;
-        this.staged = staged;
     }
 
     @Nullable
@@ -47,17 +43,12 @@ public final class SetPrices extends UpdateActionImpl<Product> {
         return sku;
     }
 
-    @Nullable
-    public boolean isStaged() {
-        return staged;
-    }
-
     public List<PriceDraft> getPrices() {
         return prices;
     }
 
     public static SetPrices of(final Integer variantId, final List<PriceDraft> prices) {
-        return new SetPrices(variantId, null, prices, true);
+        return ofVariantId(variantId, prices);
     }
 
     public static SetPrices ofVariantId(final Integer variantId, final List<PriceDraft> prices) {
