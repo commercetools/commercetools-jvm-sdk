@@ -3,6 +3,7 @@ package io.sphere.sdk.annotations.processors.generators;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.squareup.javapoet.*;
+import io.sphere.sdk.annotations.ResourceValue;
 import io.sphere.sdk.annotations.processors.models.PropertyGenModel;
 import io.sphere.sdk.models.Base;
 
@@ -24,22 +25,25 @@ public class ResourceValueImplGenerator extends AbstractGenerator {
     }
 
     @Override
-    public JavaFile generate(final TypeElement annotatedTypeElement) {
-        final ClassName implTypeName = typeUtils.getValueImplType(annotatedTypeElement);
+    public JavaFile generate(final TypeElement resourceValueTypeElement) {
+        final ClassName implTypeName = typeUtils.getResourceValueImplType(resourceValueTypeElement);
 
-        final List<ExecutableElement> getterMethods = getGetterMethodsSorted(annotatedTypeElement);
+        final List<ExecutableElement> getterMethods = getGetterMethodsSorted(resourceValueTypeElement);
         final List<PropertyGenModel> propertyGenModels = getPropertyGenModels(getterMethods);
         final List<FieldSpec> fields = propertyGenModels.stream().map(this::createField).collect(Collectors.toList());
 
         final List<MethodSpec> getMethods = getterMethods.stream().map(this::createGetMethod).collect(Collectors.toList());
 
+        final ResourceValue resourceValue = resourceValueTypeElement.getAnnotation(ResourceValue.class);
+
+        final Modifier implModifier = resourceValue.abstractResourceClass() ? Modifier.ABSTRACT : Modifier.FINAL;
         TypeSpec typeSpec = TypeSpec.classBuilder(implTypeName)
                 .superclass(ClassName.get(Base.class))
-                .addSuperinterface(ClassName.get(annotatedTypeElement.asType()))
-                .addModifiers(Modifier.FINAL)
+                .addSuperinterface(ClassName.get(resourceValueTypeElement.asType()))
+                .addModifiers(implModifier)
                 .addAnnotation(AnnotationSpec.builder(Generated.class)
                     .addMember("value", "$S", getClass().getCanonicalName())
-                    .addMember("comments", "$S", "Generated from: " + annotatedTypeElement.getQualifiedName().toString()).build())
+                    .addMember("comments", "$S", "Generated from: " + resourceValueTypeElement.getQualifiedName().toString()).build())
                 .addFields(fields)
                 .addMethod(createConstructor(propertyGenModels))
                 .addMethods(getMethods)

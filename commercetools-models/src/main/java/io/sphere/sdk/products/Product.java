@@ -2,17 +2,18 @@ package io.sphere.sdk.products;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import java.util.Optional;
-
-import io.sphere.sdk.annotations.*;
-import io.sphere.sdk.models.Resource;
+import io.sphere.sdk.annotations.HasDeleteCommand;
+import io.sphere.sdk.annotations.ResourceInfo;
+import io.sphere.sdk.annotations.ResourceValue;
 import io.sphere.sdk.models.Reference;
+import io.sphere.sdk.models.Resource;
 import io.sphere.sdk.productdiscounts.ProductDiscount;
 import io.sphere.sdk.reviews.Review;
 import io.sphere.sdk.reviews.ReviewRatingStatistics;
 import io.sphere.sdk.states.State;
 
 import javax.annotation.Nullable;
+import java.util.Optional;
 
 /**
 
@@ -35,9 +36,7 @@ import javax.annotation.Nullable;
  @see Review#getTarget()
  */
 @JsonDeserialize(as=ProductImpl.class)
-@ResourceValue(additionalConstructorEndContent = "Optional.of(masterData)\n" +
-        "                .filter(d -> d instanceof ProductCatalogDataImpl)\n" +
-        "                .ifPresent(d -> ((ProductCatalogDataImpl)d).setProductId(id));")
+@ResourceValue(abstractResourceClass = true)
 @ResourceInfo(pluralName = "products", pathElement = "products")
 @HasDeleteCommand(includeExamples = "io.sphere.sdk.products.ProductDeleteExample#delete()", deleteWithKey = true)
 public interface Product extends ProductLike<Product, Product>, Resource<Product> {

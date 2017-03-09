@@ -2,6 +2,7 @@ package io.sphere.sdk.annotations.processors.models;
 
 import com.squareup.javapoet.ClassName;
 import io.sphere.sdk.annotations.ResourceDraftValue;
+import io.sphere.sdk.annotations.ResourceValue;
 import io.sphere.sdk.models.Builder;
 
 import javax.lang.model.element.Element;
@@ -41,9 +42,12 @@ public class TypeUtils {
     }
 
 
-    public ClassName getValueImplType(final TypeElement typeElement) {
-        final ClassName draftType = ClassName.get(typeElement);
-        return ClassName.get(draftType.packageName(), draftType.simpleName() + "Impl");
+    public ClassName getResourceValueImplType(final TypeElement resourceValueTypeElement) {
+        final ClassName draftType = ClassName.get(resourceValueTypeElement);
+        final ResourceValue resourceValue = resourceValueTypeElement.getAnnotation(ResourceValue.class);
+
+        final String implSuffix = "Impl" + (resourceValue.abstractResourceClass() ? "Base" : "");
+        return ClassName.get(draftType.packageName(), draftType.simpleName() + implSuffix);
     }
 
     /**
