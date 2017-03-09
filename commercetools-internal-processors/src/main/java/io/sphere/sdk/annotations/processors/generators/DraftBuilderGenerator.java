@@ -34,8 +34,8 @@ public class DraftBuilderGenerator extends AbstractGenerator {
         final ClassName concreteBuilderName = typeUtils.getConcreteBuilderType(annotatedTypeElement);
         final ClassName generatedBuilderName = typeUtils.getBuilderType(annotatedTypeElement);
 
-        final List<ExecutableElement> getterMethods = getGetterMethodsSorted(annotatedTypeElement);
-        final List<PropertyGenModel> properties = getPropertyGenModels(getterMethods);
+        final List<ExecutableElement> propertyMethods = getAllPropertyMethodsSorted(annotatedTypeElement);
+        final List<PropertyGenModel> properties = getPropertyGenModels(propertyMethods);
 
         final ResourceDraftValue resourceDraftValue = annotatedTypeElement.getAnnotation(ResourceDraftValue.class);
 
@@ -75,16 +75,16 @@ public class DraftBuilderGenerator extends AbstractGenerator {
                 .addMethod(createConstructor(resourceDraftValue, properties))
                 .addMethods(builderMethodSpecs);
         if (resourceDraftValue.gettersForBuilder()) {
-            List<MethodSpec> getMethods = getterMethods.stream()
+            List<MethodSpec> getMethods = propertyMethods.stream()
                     .map(this::createGetMethod)
                     .collect(Collectors.toList());
             builder.addMethods(getMethods);
         }
         final TypeName draftImplType = typeUtils.getDraftImplType(annotatedTypeElement);
         final TypeName buildMethodReturnType = builderReturnType;
-        builder.addMethod(createBuildMethod(buildMethodReturnType, draftImplType, getterMethods))
+        builder.addMethod(createBuildMethod(buildMethodReturnType, draftImplType, propertyMethods))
                 .addMethods(createFactoryMethods(resourceDraftValue.factoryMethods(), properties, concreteBuilderName))
-                .addMethod(createCopyFactoryMethod(annotatedTypeElement, concreteBuilderName, getterMethods));
+                .addMethod(createCopyFactoryMethod(annotatedTypeElement, concreteBuilderName, propertyMethods));
 
         final TypeSpec draftBuilderBaseClass = builder.build();
 
@@ -129,9 +129,9 @@ public class DraftBuilderGenerator extends AbstractGenerator {
                 .build();
     }
 
-    private MethodSpec createCopyFactoryMethod(final TypeElement draftTypeElement, final ClassName returnType, final List<ExecutableElement> getterMethods) {
+    private MethodSpec createCopyFactoryMethod(final TypeElement draftTypeElement, final ClassName returnType, final List<ExecutableElement> propertyMethods) {
         final ParameterSpec templateParameter = ParameterSpec.builder(ClassName.get(draftTypeElement), "template", Modifier.FINAL).build();
-        final String callArguments = getterMethods.stream()
+        final String callArguments = propertyMethods.stream()
                 .map(getterMethod -> String.format("template.%s()", getterMethod.getSimpleName()))
                 .collect(Collectors.joining(", "));
         return MethodSpec.methodBuilder("of").addModifiers(Modifier.PUBLIC, Modifier.STATIC)
@@ -188,8 +188,8 @@ public class DraftBuilderGenerator extends AbstractGenerator {
                 .collect(Collectors.toList());
     }
 
-    private MethodSpec createBuildMethod(final TypeName returnType, final TypeName draftImplType, final List<ExecutableElement> getterMethods) {
-        final List<String> argumentNames = getterMethods.stream()
+    private MethodSpec createBuildMethod(final TypeName returnType, final TypeName draftImplType, final List<ExecutableElement> propertyMethods) {
+        final List<String> argumentNames = propertyMethods.stream()
                 .map((getterMethod) -> PropertyGenModel.getPropertyName(getterMethod))
                 .map(this::escapeJavaKeyword)
                 .collect(Collectors.toList());

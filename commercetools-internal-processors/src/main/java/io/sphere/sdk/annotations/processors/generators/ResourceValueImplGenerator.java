@@ -5,13 +5,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.squareup.javapoet.*;
 import io.sphere.sdk.annotations.ResourceValue;
 import io.sphere.sdk.annotations.processors.models.PropertyGenModel;
-import io.sphere.sdk.models.Base;
 
 import javax.annotation.Generated;
 import javax.annotation.Nullable;
 import javax.lang.model.element.ExecutableElement;
 import javax.lang.model.element.Modifier;
 import javax.lang.model.element.TypeElement;
+import javax.lang.model.type.TypeMirror;
 import javax.lang.model.util.Elements;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -28,17 +28,20 @@ public class ResourceValueImplGenerator extends AbstractGenerator {
     public JavaFile generate(final TypeElement resourceValueTypeElement) {
         final ClassName implTypeName = typeUtils.getResourceValueImplType(resourceValueTypeElement);
 
-        final List<ExecutableElement> getterMethods = getGetterMethodsSorted(resourceValueTypeElement);
-        final List<PropertyGenModel> propertyGenModels = getPropertyGenModels(getterMethods);
+        final List<ExecutableElement> propertyMethods = getAllPropertyMethodsSorted(resourceValueTypeElement);
+        final List<PropertyGenModel> propertyGenModels = getPropertyGenModels(propertyMethods);
         final List<FieldSpec> fields = propertyGenModels.stream().map(this::createField).collect(Collectors.toList());
 
-        final List<MethodSpec> getMethods = getterMethods.stream().map(this::createGetMethod).collect(Collectors.toList());
+        final List<MethodSpec> getMethods = propertyMethods.stream().map(this::createGetMethod).collect(Collectors.toList());
 
         final ResourceValue resourceValue = resourceValueTypeElement.getAnnotation(ResourceValue.class);
 
+        final TypeMirror baseClass = typeUtils.getAnnotationValue(resourceValueTypeElement, ResourceValue.class, "baseClass")
+                .map(v -> (TypeMirror) v.getValue()).get();
+
         final Modifier implModifier = resourceValue.abstractResourceClass() ? Modifier.ABSTRACT : Modifier.FINAL;
         TypeSpec typeSpec = TypeSpec.classBuilder(implTypeName)
-                .superclass(ClassName.get(Base.class))
+                .superclass(ClassName.get(baseClass))
                 .addSuperinterface(ClassName.get(resourceValueTypeElement.asType()))
                 .addModifiers(implModifier)
                 .addAnnotation(AnnotationSpec.builder(Generated.class)
@@ -89,10 +92,10 @@ public class ResourceValueImplGenerator extends AbstractGenerator {
     }
 
     @Override
-    protected MethodSpec.Builder createGetMethodBuilder(final ExecutableElement getterMethod) {
-        final MethodSpec.Builder builder = super.createGetMethodBuilder(getterMethod);
+    protected MethodSpec.Builder createGetMethodBuilder(final ExecutableElement propertyMethod) {
+        final MethodSpec.Builder builder = super.createGetMethodBuilder(propertyMethod);
 
-        final JsonProperty jsonProperty = getterMethod.getAnnotation(JsonProperty.class);
+        final JsonProperty jsonProperty = propertyMethod.getAnnotation(JsonProperty.class);
         final String jsonName = jsonProperty != null ? jsonProperty.value() : null;
 
         if (jsonName != null) {

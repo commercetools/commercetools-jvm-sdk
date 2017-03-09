@@ -69,34 +69,34 @@ abstract class AbstractGenerator {
     }
 
     /**
-     * Returns all getter methods - including inherited methods - sorted by their property name.
+     * Returns all property methods - including inherited methods - sorted by their property name.
      *
      * @param typeElement the type element
      * @return methods sorted by their {@link PropertyGenModel#getPropertyName(ExecutableElement)}
      */
-    protected List<ExecutableElement> getGetterMethodsSorted(TypeElement typeElement) {
-        return typeUtils.getAllGetterMethods(typeElement)
+    protected List<ExecutableElement> getAllPropertyMethodsSorted(TypeElement typeElement) {
+        return typeUtils.getAllPropertyMethods(typeElement)
                 .sorted(Comparator.comparing(methodName -> escapeJavaKeyword(PropertyGenModel.getPropertyName(methodName))))
                 .collect(Collectors.toList());
     }
 
-    protected List<PropertyGenModel> getPropertyGenModels(final List<ExecutableElement> getterMethods) {
-        return getterMethods.stream()
+    protected List<PropertyGenModel> getPropertyGenModels(final List<ExecutableElement> propertyMethods) {
+        return propertyMethods.stream()
                     .map(PropertyGenModel::of)
                     .collect(Collectors.toList());
     }
 
-    protected MethodSpec createGetMethod(final ExecutableElement getterMethod) {
-        final MethodSpec.Builder builder = createGetMethodBuilder(getterMethod);
+    protected MethodSpec createGetMethod(final ExecutableElement propertyMethod) {
+        final MethodSpec.Builder builder = createGetMethodBuilder(propertyMethod);
         return builder.build();
     }
 
-    protected MethodSpec.Builder createGetMethodBuilder(final ExecutableElement getterMethod) {
-        final MethodSpec.Builder builder = MethodSpec.methodBuilder(getterMethod.getSimpleName().toString())
+    protected MethodSpec.Builder createGetMethodBuilder(final ExecutableElement propertyMethod) {
+        final MethodSpec.Builder builder = MethodSpec.methodBuilder(propertyMethod.getSimpleName().toString())
                 .addModifiers(Modifier.PUBLIC)
-                .returns(TypeName.get(getterMethod.getReturnType()))
-                .addCode("return $L;\n", escapeJavaKeyword(PropertyGenModel.getPropertyName(getterMethod)));
-        copyNullableAnnotation(getterMethod, builder);
+                .returns(TypeName.get(propertyMethod.getReturnType()))
+                .addCode("return $L;\n", escapeJavaKeyword(PropertyGenModel.getPropertyName(propertyMethod)));
+        copyNullableAnnotation(propertyMethod, builder);
         return builder;
     }
 

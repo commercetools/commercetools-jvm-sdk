@@ -152,14 +152,14 @@ public class PropertyGenModel {
     }
 
     /**
-     * Returns the property name of the given getter method.
+     * Returns the property name of the given property method.
      *
-     * @param getterMethod the getter method
+     * @param propertyMethod the getter method
      * @return the uncapitalized name of the property
      */
-    public static String getPropertyName(final ExecutableElement getterMethod) {
-        final String name = getterMethod.getSimpleName().toString();
-        final int propertyNameIndex = name.startsWith("is") ? 2 : 3;
+    public static String getPropertyName(final ExecutableElement propertyMethod) {
+        final String name = propertyMethod.getSimpleName().toString();
+        final int propertyNameIndex = name.startsWith("get") ? 3 : name.startsWith("is") ? 2 : 0;
         final String propertyName = StringUtils.uncapitalize(name.substring(propertyNameIndex));
         return propertyName;
     }

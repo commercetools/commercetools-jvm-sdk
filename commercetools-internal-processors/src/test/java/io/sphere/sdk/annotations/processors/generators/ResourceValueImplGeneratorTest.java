@@ -2,6 +2,7 @@ package io.sphere.sdk.annotations.processors.generators;
 
 import io.sphere.sdk.annotations.processors.generators.examples.ExampleResource;
 import io.sphere.sdk.annotations.processors.generators.examples.ExampleResourceWithAbstractBaseClass;
+import io.sphere.sdk.annotations.processors.generators.examples.ExampleResourceWithBaseClass;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -29,5 +30,12 @@ public class ResourceValueImplGeneratorTest extends AbstractGeneratorTest {
         final String content = generateAsString(ExampleResourceWithAbstractBaseClass.class);
 
         assertThat(content).isEqualTo(expectedContent(ExampleResourceWithAbstractBaseClass.class));
+    }
+
+    @Test
+    public void generateExampleResourceWithBaseClass() throws Exception {
+        final String content = generateAsString(ExampleResourceWithBaseClass.class);
+
+        assertThat(content).isEqualTo(expectedContent(ExampleResourceWithBaseClass.class));
     }
 }

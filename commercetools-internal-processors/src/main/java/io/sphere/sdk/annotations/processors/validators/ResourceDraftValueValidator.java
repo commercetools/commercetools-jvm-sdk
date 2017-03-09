@@ -50,7 +50,7 @@ public class ResourceDraftValueValidator {
         } else {
             for (final FactoryMethod factoryMethod : factoryMethods) {
                 final String[] parameterNames = factoryMethod.parameterNames();
-                final Set<String> allPropertyNames = typeUtils.getAllGetterMethods(resourceDraftType)
+                final Set<String> allPropertyNames = typeUtils.getAllPropertyMethods(resourceDraftType)
                         .map(PropertyGenModel::getPropertyName)
                         .collect(Collectors.toSet());
 

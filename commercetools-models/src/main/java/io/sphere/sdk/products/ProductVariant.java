@@ -1,6 +1,9 @@
 package io.sphere.sdk.products;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import io.sphere.sdk.annotations.ResourceValue;
 import io.sphere.sdk.models.Asset;
 import io.sphere.sdk.products.search.PriceSelection;
 
@@ -8,6 +11,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;
 
+@ResourceValue(abstractResourceClass = true, baseClass = AttributeContainerBase.class)
 @JsonDeserialize(as = ProductVariantImpl.class)
 public interface ProductVariant extends AttributeContainer {
     Integer getId();
@@ -56,6 +60,7 @@ public interface ProductVariant extends AttributeContainer {
      *
      * @return
      */
+    @JsonProperty("isScopedPriceDiscounted")
     @Nullable
     Boolean isScopedPriceDiscounted();
 
@@ -87,6 +92,7 @@ public interface ProductVariant extends AttributeContainer {
      *
      * @return whether the variant matches the search request parameters
      */
+    @JsonProperty("isMatchingVariant")
     @Nullable
     Boolean isMatchingVariant();
 
@@ -97,6 +103,7 @@ public interface ProductVariant extends AttributeContainer {
      * @return identifier for this variant
      * @throws UnsupportedOperationException if the operation is not available
      */
+    @JsonIgnore
     ByIdVariantIdentifier getIdentifier();
 
     /**

@@ -17,12 +17,16 @@ final class ExampleResourceImpl extends Base implements ExampleResource {
   @JsonProperty("isReturn")
   private Boolean _return;
 
+  @JsonProperty("hasStagedChanges")
+  private Boolean hasStagedChanges;
+
   private String name;
 
   @JsonCreator
   ExampleResourceImpl(@Nullable @JsonProperty("isReturn") final Boolean _return,
-      final String name) {
+      @JsonProperty("hasStagedChanges") final Boolean hasStagedChanges, final String name) {
     this._return = _return;
+    this.hasStagedChanges = hasStagedChanges;
     this.name = name;
   }
 
@@ -30,6 +34,11 @@ final class ExampleResourceImpl extends Base implements ExampleResource {
   @JsonProperty("isReturn")
   public Boolean isReturn() {
     return _return;
+  }
+
+  @JsonProperty("hasStagedChanges")
+  public Boolean hasStagedChanges() {
+    return hasStagedChanges;
   }
 
   public String getName() {
