@@ -104,6 +104,7 @@ public interface ProductVariant extends AttributeContainer {
      * @throws UnsupportedOperationException if the operation is not available
      */
     @JsonIgnore
+    @Nullable
     ByIdVariantIdentifier getIdentifier();
 
     /**

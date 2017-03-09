@@ -28,6 +28,7 @@ class ProductVariantImpl extends ProductVariantImplBase {
     }
 
     @JsonIgnore
+    @Nullable
     @Override
     public ByIdVariantIdentifier getIdentifier() {
         return Optional.ofNullable(productId).map(pId -> ByIdVariantIdentifier.of(pId, getId())).orElseThrow(UnsupportedOperationException::new);
