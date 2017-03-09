@@ -903,7 +903,7 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
         addVariantWithStaged(false);
     }
 
-    public void addVariantWithStaged(final boolean staged) {
+    private void addVariantWithStaged(final boolean staged) {
         final NamedAttributeAccess<MonetaryAmount> moneyAttribute =
                 AttributeAccess.ofMoney().ofName(MONEY_ATTRIBUTE_NAME);
         final AttributeDraft moneyAttributeValue = AttributeDraft.of(moneyAttribute, EURO_10);
@@ -992,7 +992,7 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
         removeVariantByIdWithStaged(false);
     }
 
-    public void removeVariantByIdWithStaged(final boolean staged) {
+    private void removeVariantByIdWithStaged(final boolean staged) {
         final NamedAttributeAccess<MonetaryAmount> moneyAttribute =
                 AttributeAccess.ofMoney().ofName(MONEY_ATTRIBUTE_NAME);
         final AttributeDraft moneyAttributeValue = AttributeDraft.of(moneyAttribute, EURO_10);
@@ -1068,7 +1068,7 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
         removeVariantBySkuWithStaged(false);
     }
 
-    public void removeVariantBySkuWithStaged(final boolean staged) {
+    private void removeVariantBySkuWithStaged(final boolean staged) {
         final NamedAttributeAccess<MonetaryAmount> moneyAttribute =
                 AttributeAccess.ofMoney().ofName(MONEY_ATTRIBUTE_NAME);
         final AttributeDraft moneyAttributeValue = AttributeDraft.of(moneyAttribute, EURO_10);
@@ -1141,6 +1141,29 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
     }
 
     @Test
+    public void changeMasterVariantWithVariantIdWithStaged() {
+        changeMasterVariantWithVariantIdWithStaged(true);
+        changeMasterVariantWithVariantIdWithStaged(false);
+    }
+
+    private void changeMasterVariantWithVariantIdWithStaged(final boolean staged) {
+        withUpdateableProductOfMultipleVariants(client(), product -> {
+            assertThat(product.getMasterData().hasStagedChanges()).isFalse();
+
+            final ProductVariant variantSupposedToBeMaster = product.getMasterData().getStaged().getAllVariants().get(2);
+            final Integer variantId = variantSupposedToBeMaster.getId();
+
+            final ChangeMasterVariant updateAction = ChangeMasterVariant.ofVariantId(variantId, staged);
+            final Product updatedProduct = client().executeBlocking(ProductUpdateCommand.of(product, updateAction));
+
+            assertThat(updatedProduct.getMasterData().hasStagedChanges()).isEqualTo(staged);
+            assertThat(updatedProduct.getMasterData().getStaged().getMasterVariant().getId()).isEqualTo(variantId);
+
+            return updatedProduct;
+        });
+    }
+
+    @Test
     public void changeMasterVariantWithSku() {
         withUpdateableProductProjectionOfMultipleVariants(client(), (ProductProjection productProjection) -> {
             final int originalMasterVariantId = productProjection.getMasterVariant().getId();
@@ -1159,6 +1182,34 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
                     .isEqualTo(variantSupposedToBeMaster.getId());
 
             return productProjectionWithNewMasterVariant;
+        });
+    }
+
+    @Test
+    public void changeMasterVariantWithSkuWithStaged() {
+        changeMasterVariantWithSkuWithStaged(true);
+        changeMasterVariantWithSkuWithStaged(false);
+    }
+
+    private void changeMasterVariantWithSkuWithStaged(final boolean staged) {
+        withUpdateableProductOfMultipleVariants(client(), product -> {
+            assertThat(product.getMasterData().hasStagedChanges()).isFalse();
+
+            final int originalMasterVariantId = product.getMasterData().getStaged().getMasterVariant().getId();
+            final ProductVariant variantSupposedToBeMaster = product.getMasterData().getStaged().getAllVariants().get(2);
+            final String sku = variantSupposedToBeMaster.getSku();
+
+            final ChangeMasterVariant updateAction = ChangeMasterVariant.ofSku(sku, staged);
+            final Product updatedProduct = client().executeBlocking(ProductUpdateCommand.of(product, updateAction));
+
+            assertThat(updatedProduct.getMasterData().hasStagedChanges()).isEqualTo(staged);
+            assertThat(updatedProduct.getMasterData().getStaged().getMasterVariant().getSku()).isEqualTo(sku);
+            assertThat(updatedProduct.getMasterData().getStaged().getMasterVariant().getId())
+                    .as("variant IDs don't change in reordering")
+                    .isNotEqualTo(originalMasterVariantId)
+                    .isEqualTo(variantSupposedToBeMaster.getId());
+
+            return updatedProduct;
         });
     }
 
