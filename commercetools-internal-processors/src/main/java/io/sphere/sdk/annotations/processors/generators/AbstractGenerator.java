@@ -1,9 +1,6 @@
 package io.sphere.sdk.annotations.processors.generators;
 
-import com.squareup.javapoet.FieldSpec;
-import com.squareup.javapoet.JavaFile;
-import com.squareup.javapoet.MethodSpec;
-import com.squareup.javapoet.TypeName;
+import com.squareup.javapoet.*;
 import io.sphere.sdk.annotations.processors.models.PropertyGenModel;
 import io.sphere.sdk.annotations.processors.models.TypeUtils;
 
@@ -29,15 +26,22 @@ abstract class AbstractGenerator {
         this.elements = elements;
     }
 
-    public abstract String getGeneratedFileSuffix();
-
     /**
      * Generates code for the given annotated type element.
      *
      * @param annotatedTypeElement the annotated type element
      * @return the java file to write
      */
-    public abstract JavaFile generate(final TypeElement annotatedTypeElement);
+    public final JavaFile generate(final TypeElement annotatedTypeElement) {
+        final TypeSpec typeSpec = generateType(annotatedTypeElement);
+
+        final JavaFile javaFile = JavaFile.builder(typeUtils.getPackageName(annotatedTypeElement), typeSpec)
+                .build();
+
+        return javaFile;
+    }
+
+    public abstract TypeSpec generateType(final TypeElement annotatedTypeElement);
 
     protected FieldSpec createField(final PropertyGenModel property) {
         return createField(property, Modifier.PRIVATE);

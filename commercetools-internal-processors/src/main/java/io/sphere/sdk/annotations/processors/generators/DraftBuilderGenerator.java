@@ -30,14 +30,14 @@ public class DraftBuilderGenerator extends AbstractGenerator {
         super(elements);
     }
 
-    public JavaFile generate(final TypeElement annotatedTypeElement) {
-        final ClassName concreteBuilderName = typeUtils.getConcreteBuilderType(annotatedTypeElement);
-        final ClassName generatedBuilderName = typeUtils.getBuilderType(annotatedTypeElement);
+    public TypeSpec generateType(final TypeElement resourceDraftValueType) {
+        final ClassName concreteBuilderName = typeUtils.getConcreteBuilderType(resourceDraftValueType);
+        final ClassName generatedBuilderName = typeUtils.getBuilderType(resourceDraftValueType);
 
-        final List<ExecutableElement> propertyMethods = getAllPropertyMethodsSorted(annotatedTypeElement);
+        final List<ExecutableElement> propertyMethods = getAllPropertyMethodsSorted(resourceDraftValueType);
         final List<PropertyGenModel> properties = getPropertyGenModels(propertyMethods);
 
-        final ResourceDraftValue resourceDraftValue = annotatedTypeElement.getAnnotation(ResourceDraftValue.class);
+        final ResourceDraftValue resourceDraftValue = resourceDraftValueType.getAnnotation(ResourceDraftValue.class);
 
         final List<MethodSpec> builderMethodSpecs = properties.stream()
                 .flatMap(m -> createBuilderMethods(generatedBuilderName, resourceDraftValue, m).stream())
@@ -54,20 +54,20 @@ public class DraftBuilderGenerator extends AbstractGenerator {
                 .addSuperinterfaces(additionalInterfaceNames)
                 .addAnnotation(AnnotationSpec.builder(Generated.class)
                         .addMember("value", "$S", getClass().getCanonicalName())
-                        .addMember("comments", "$S", "Generated from: " + annotatedTypeElement.getQualifiedName().toString())
+                        .addMember("comments", "$S", "Generated from: " + resourceDraftValueType.getQualifiedName().toString())
                         .build());
 
-        final TypeName builderReturnType = typeUtils.getBuilderReturnType(annotatedTypeElement);
+        final TypeName builderReturnType = typeUtils.getBuilderReturnType(resourceDraftValueType);
         builder
                 .superclass(ClassName.get(Base.class))
                 .addSuperinterface(ParameterizedTypeName.get(ClassName.get(Builder.class), builderReturnType));
         if (resourceDraftValue.abstractBuilderClass()) {
-            builder.addJavadoc("Abstract base builder for {@link $T} which needs to be extended to add additional methods.\n", annotatedTypeElement)
+            builder.addJavadoc("Abstract base builder for {@link $T} which needs to be extended to add additional methods.\n", resourceDraftValueType)
                     .addJavadoc("Subclasses have to provide the same non-default constructor as this class.\n")
                     .addModifiers(Modifier.ABSTRACT)
                     .addTypeVariable(TypeVariableName.get("T").withBounds(generatedBuilderName));
         } else {
-            builder.addJavadoc("Builder for {@link $T}.\n", annotatedTypeElement)
+            builder.addJavadoc("Builder for {@link $T}.\n", resourceDraftValueType)
                 .addModifiers(Modifier.PUBLIC, Modifier.FINAL);
         }
         builder.addFields(fieldSpecs)
@@ -80,23 +80,15 @@ public class DraftBuilderGenerator extends AbstractGenerator {
                     .collect(Collectors.toList());
             builder.addMethods(getMethods);
         }
-        final TypeName draftImplType = typeUtils.getDraftImplType(annotatedTypeElement);
+        final TypeName draftImplType = typeUtils.getDraftImplType(resourceDraftValueType);
         final TypeName buildMethodReturnType = builderReturnType;
         builder.addMethod(createBuildMethod(buildMethodReturnType, draftImplType, propertyMethods))
                 .addMethods(createFactoryMethods(resourceDraftValue.factoryMethods(), properties, concreteBuilderName))
-                .addMethod(createCopyFactoryMethod(annotatedTypeElement, concreteBuilderName, propertyMethods));
+                .addMethod(createCopyFactoryMethod(resourceDraftValueType, concreteBuilderName, propertyMethods));
 
         final TypeSpec draftBuilderBaseClass = builder.build();
 
-        final JavaFile javaFile = JavaFile.builder(generatedBuilderName.packageName(), draftBuilderBaseClass)
-                .build();
-
-        return javaFile;
-    }
-
-    @Override
-    public String getGeneratedFileSuffix() {
-        return "Builder"; // TODO add base
+        return draftBuilderBaseClass;
     }
 
     private List<MethodSpec> createFactoryMethods(final FactoryMethod[] factoryMethods, final List<PropertyGenModel> properties, final ClassName returnType) {

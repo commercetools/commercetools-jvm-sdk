@@ -25,7 +25,7 @@ public class ResourceValueImplGenerator extends AbstractGenerator {
     }
 
     @Override
-    public JavaFile generate(final TypeElement resourceValueTypeElement) {
+    public TypeSpec generateType(final TypeElement resourceValueTypeElement) {
         final ClassName implTypeName = typeUtils.getResourceValueImplType(resourceValueTypeElement);
 
         final List<ExecutableElement> propertyMethods = getAllPropertyMethodsSorted(resourceValueTypeElement);
@@ -40,7 +40,7 @@ public class ResourceValueImplGenerator extends AbstractGenerator {
                 .map(v -> (TypeMirror) v.getValue()).get();
 
         final Modifier implModifier = resourceValue.abstractResourceClass() ? Modifier.ABSTRACT : Modifier.FINAL;
-        TypeSpec typeSpec = TypeSpec.classBuilder(implTypeName)
+        final TypeSpec typeSpec = TypeSpec.classBuilder(implTypeName)
                 .superclass(ClassName.get(baseClass))
                 .addSuperinterface(ClassName.get(resourceValueTypeElement.asType()))
                 .addModifiers(implModifier)
@@ -52,13 +52,7 @@ public class ResourceValueImplGenerator extends AbstractGenerator {
                 .addMethods(getMethods)
                 .build();
 
-        final JavaFile javaFile = JavaFile.builder(implTypeName.packageName(), typeSpec).build();
-        return javaFile;
-    }
-
-    @Override
-    public String getGeneratedFileSuffix() {
-        return "Impl";
+        return typeSpec;
     }
 
     private MethodSpec createConstructor(final List<PropertyGenModel> properties) {

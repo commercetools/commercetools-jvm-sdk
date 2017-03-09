@@ -16,7 +16,9 @@ public abstract class AbstractGeneratorTest {
     protected AbstractGenerator generator;
 
     protected String expectedContent(final Class<?> clazz) throws Exception {
-        final String fixtureFile = clazz.getSimpleName() + generator.getGeneratedFileSuffix() + ".java.expected";
+        final TypeElement typeElement = compilationRule.getElements().getTypeElement(clazz.getCanonicalName());
+        final String typeName = generator.generateType(typeElement).name;
+        final String fixtureFile = typeName + ".java.expected";
         try (InputStream resourceAsStream = clazz.getResourceAsStream(fixtureFile)) {
             return IOUtils.toString(resourceAsStream, Charsets.UTF_8);
         } catch (NullPointerException e) {
