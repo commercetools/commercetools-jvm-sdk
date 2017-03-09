@@ -7,7 +7,7 @@ import javax.annotation.Nullable;
 public abstract class StagedBase<T> extends UpdateActionImpl<T> {
 
     @Nullable
-    private final boolean staged;
+    protected final boolean staged;
 
     protected StagedBase(final String action, final boolean staged) {
         super(action);

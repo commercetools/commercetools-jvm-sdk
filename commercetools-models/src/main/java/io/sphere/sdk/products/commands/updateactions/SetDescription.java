@@ -1,6 +1,5 @@
 package io.sphere.sdk.products.commands.updateactions;
 
-import io.sphere.sdk.commands.UpdateActionImpl;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.products.Product;
 
@@ -13,15 +12,12 @@ import javax.annotation.Nullable;
  *
  * {@include.example io.sphere.sdk.products.commands.ProductUpdateCommandIntegrationTest#setDescription()}
  */
-public final class SetDescription extends UpdateActionImpl<Product> {
+public final class SetDescription extends StagedBase<Product> {
     private final LocalizedString description;
-    @Nullable
-    private final boolean staged;
 
     private SetDescription(final LocalizedString description, final boolean staged) {
-        super("setDescription");
+        super("setDescription", staged);
         this.description = description;
-        this.staged = staged;
     }
 
     public static SetDescription of(final LocalizedString description) {
@@ -36,8 +32,4 @@ public final class SetDescription extends UpdateActionImpl<Product> {
         return description;
     }
 
-    @Nullable
-    public boolean isStaged() {
-        return staged;
-    }
 }

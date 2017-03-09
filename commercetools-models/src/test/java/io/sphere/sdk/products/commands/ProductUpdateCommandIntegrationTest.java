@@ -865,6 +865,7 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
 
         withUpdateableProduct(client(), product -> {
             assertThat(product.getMasterData().getStaged().getVariants()).isEmpty();
+            assertThat(product.getMasterData().hasStagedChanges()).isFalse();
 
             final PriceDraft price = PriceDraft.of(MoneyImpl.of(new BigDecimal("12.34"), EUR)).withCountry(DE);
             final List<PriceDraft> prices = asList(price);
@@ -880,6 +881,60 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
 
             final Product productWithVariant = client().executeBlocking(addVariantCommand);
             final ProductVariant variant = productWithVariant.getMasterData().getStaged().getVariants().get(0);
+            assertThat(productWithVariant.getMasterData().hasStagedChanges()).isTrue();
+            assertThat(variant.getId()).isEqualTo(2);
+            assertThat(variant.findAttribute(moneyAttribute).get()).isEqualTo(EURO_10);
+            assertThat(variant.findAttribute(colorAttribute).get()).isEqualTo(color);
+            assertThat(variant.findAttribute(sizeAttribute).get()).isEqualTo(Sizes.M);
+            assertThat(variant.getSku()).isEqualTo(sku);
+            assertThat(variant.getKey()).isEqualTo(key);
+            assertThat(variant.getImages()).containsExactly(image);
+
+            final Product productWithoutVariant = client().executeBlocking(ProductUpdateCommand.of(productWithVariant, RemoveVariant.of(variant)));
+            assertThat(productWithoutVariant.getMasterData().getStaged().getVariants()).isEmpty();
+
+            return productWithoutVariant;
+        });
+    }
+
+    @Test
+    public void addVariantWithStaged() {
+        addVariantWithStaged(true);
+        addVariantWithStaged(false);
+    }
+
+    public void addVariantWithStaged(final boolean staged) {
+        final NamedAttributeAccess<MonetaryAmount> moneyAttribute =
+                AttributeAccess.ofMoney().ofName(MONEY_ATTRIBUTE_NAME);
+        final AttributeDraft moneyAttributeValue = AttributeDraft.of(moneyAttribute, EURO_10);
+
+        final NamedAttributeAccess<LocalizedEnumValue> colorAttribute = Colors.ATTRIBUTE;
+        final LocalizedEnumValue color = Colors.RED;
+        final AttributeDraft colorAttributeValue = AttributeDraft.of(colorAttribute, color);
+
+        final NamedAttributeAccess<EnumValue> sizeAttribute = Sizes.ATTRIBUTE;
+        final AttributeDraft sizeValue = AttributeDraft.of(sizeAttribute, Sizes.M);
+
+
+        withUpdateableProduct(client(), product -> {
+            assertThat(product.getMasterData().getStaged().getVariants()).isEmpty();
+            assertThat(product.getMasterData().hasStagedChanges()).isFalse();
+
+            final PriceDraft price = PriceDraft.of(MoneyImpl.of(new BigDecimal("12.34"), EUR)).withCountry(DE);
+            final List<PriceDraft> prices = asList(price);
+            final List<AttributeDraft> attributeValues = asList(moneyAttributeValue, colorAttributeValue, sizeValue);
+            final String sku = randomKey();
+            final String key = randomKey();
+            final Image image = Image.of("url", ImageDimensions.of(3, 5));
+            final AddVariant updateAction = AddVariant.of(attributeValues, prices, sku, staged)
+                    .withKey(key)
+                    .withImages(singletonList(image));
+            final ProductUpdateCommand addVariantCommand =
+                    ProductUpdateCommand.of(product, updateAction);
+
+            final Product productWithVariant = client().executeBlocking(addVariantCommand);
+            final ProductVariant variant = productWithVariant.getMasterData().getStaged().getVariants().get(0);
+            assertThat(productWithVariant.getMasterData().hasStagedChanges()).isEqualTo(staged);
             assertThat(variant.getId()).isEqualTo(2);
             assertThat(variant.findAttribute(moneyAttribute).get()).isEqualTo(EURO_10);
             assertThat(variant.findAttribute(colorAttribute).get()).isEqualTo(color);
