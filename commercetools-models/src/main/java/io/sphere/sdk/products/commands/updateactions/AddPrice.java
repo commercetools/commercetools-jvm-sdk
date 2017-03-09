@@ -1,6 +1,5 @@
 package io.sphere.sdk.products.commands.updateactions;
 
-import io.sphere.sdk.commands.UpdateActionImpl;
 import io.sphere.sdk.products.PriceDraft;
 import io.sphere.sdk.products.Product;
 import io.sphere.sdk.products.ProductVariant;
@@ -20,15 +19,15 @@ import javax.annotation.Nullable;
  *
  * @see ProductVariant#getPrices()
  */
-public final class AddPrice extends UpdateActionImpl<Product> {
+public final class AddPrice extends StagedBase<Product> {
     @Nullable
     private final Integer variantId;
     @Nullable
     private final String sku;
     private final PriceDraft price;
 
-    private AddPrice(@Nullable final Integer variantId, @Nullable final String sku, final PriceDraft price) {
-        super("addPrice");
+    private AddPrice(@Nullable final Integer variantId, @Nullable final String sku, final PriceDraft price, final boolean staged) {
+        super("addPrice", staged);
         this.variantId = variantId;
         this.sku = sku;
         this.price = price;
@@ -49,14 +48,22 @@ public final class AddPrice extends UpdateActionImpl<Product> {
     }
 
     public static AddPrice of(final Integer variantId, final PriceDraft price) {
-        return new AddPrice(variantId, null, price);
+        return ofVariantId(variantId, price);
     }
 
     public static AddPrice ofVariantId(final Integer variantId, final PriceDraft price) {
-        return new AddPrice(variantId, null, price);
+        return ofVariantId(variantId, price, true);
+    }
+
+    public static AddPrice ofVariantId(final Integer variantId, final PriceDraft price, @Nullable final boolean staged) {
+        return new AddPrice(variantId, null, price, staged);
     }
 
     public static AddPrice ofSku(final String sku, final PriceDraft price) {
-        return new AddPrice(null, sku, price);
+        return ofSku(sku, price, true);
+    }
+
+    public static AddPrice ofSku(final String sku, final PriceDraft price, @Nullable final boolean staged) {
+        return new AddPrice(null, sku, price, staged);
     }
 }

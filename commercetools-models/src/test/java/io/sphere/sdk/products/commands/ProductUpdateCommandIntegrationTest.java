@@ -200,6 +200,7 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
     public void addPriceByVariantId() throws Exception {
         final PriceDraft priceDraft = PriceDraft.of(MoneyImpl.of(new BigDecimal("12345"), "JPY"));
         withUpdateableProduct(client(), product -> {
+            assertThat(product.getMasterData().hasStagedChanges()).isFalse();
             final Product updatedProduct = client()
                     .executeBlocking(ProductUpdateCommand.of(product, AddPrice.ofVariantId(1, priceDraft)));
 
@@ -208,6 +209,31 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
             final Price actualPrice = prices.get(0);
 
             assertThat(priceDraft).isEqualTo(PriceDraft.of(actualPrice));
+            assertThat(updatedProduct.getMasterData().hasStagedChanges()).isTrue();
+
+            return updatedProduct;
+        });
+    }
+
+    @Test
+    public void addPriceByVariantIdWithStaged() {
+        addPriceByVariantIdWithStaged(true);
+        addPriceByVariantIdWithStaged(false);
+    }
+
+    public void addPriceByVariantIdWithStaged(final boolean staged) {
+        final PriceDraft priceDraft = PriceDraft.of(MoneyImpl.of(new BigDecimal("12345"), "JPY"));
+        withUpdateableProduct(client(), product -> {
+            assertThat(product.getMasterData().hasStagedChanges()).isFalse();
+            final Product updatedProduct = client()
+                    .executeBlocking(ProductUpdateCommand.of(product, AddPrice.ofVariantId(1, priceDraft, staged)));
+
+            final List<Price> prices = updatedProduct.getMasterData().getStaged().getMasterVariant().getPrices();
+            assertThat(prices).hasSize(1);
+            final Price actualPrice = prices.get(0);
+
+            assertThat(priceDraft).isEqualTo(PriceDraft.of(actualPrice));
+            assertThat(updatedProduct.getMasterData().hasStagedChanges()).isEqualTo(staged);
 
             return updatedProduct;
         });
@@ -217,6 +243,7 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
     public void addPriceBySku() throws Exception {
         final PriceDraft priceDraft = PriceDraft.of(MoneyImpl.of(new BigDecimal("12345"), "JPY"));
         withUpdateableProduct(client(), product -> {
+            assertThat(product.getMasterData().hasStagedChanges()).isFalse();
 
             final String sku = product.getMasterData().getStaged().getMasterVariant().getSku();
             final Product updatedProduct = client()
@@ -227,6 +254,33 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
             final Price actualPrice = prices.get(0);
 
             assertThat(priceDraft).isEqualTo(PriceDraft.of(actualPrice));
+            assertThat(updatedProduct.getMasterData().hasStagedChanges()).isTrue();
+
+            return updatedProduct;
+        });
+    }
+
+    @Test
+    public void addPriceBySkuWithStaged() {
+        addPriceBySkuWithStaged(true);
+        addPriceBySkuWithStaged(false);
+    }
+
+    public void addPriceBySkuWithStaged(final boolean staged) {
+        final PriceDraft priceDraft = PriceDraft.of(MoneyImpl.of(new BigDecimal("12345"), "JPY"));
+        withUpdateableProduct(client(), product -> {
+            assertThat(product.getMasterData().hasStagedChanges()).isFalse();
+
+            final String sku = product.getMasterData().getStaged().getMasterVariant().getSku();
+            final Product updatedProduct = client()
+                    .executeBlocking(ProductUpdateCommand.of(product, AddPrice.ofSku(sku, priceDraft, staged)));
+
+            final List<Price> prices = updatedProduct.getMasterData().getStaged().getMasterVariant().getPrices();
+            assertThat(prices).hasSize(1);
+            final Price actualPrice = prices.get(0);
+
+            assertThat(priceDraft).isEqualTo(PriceDraft.of(actualPrice));
+            assertThat(updatedProduct.getMasterData().hasStagedChanges()).isEqualTo(staged);
 
             return updatedProduct;
         });
