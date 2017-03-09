@@ -526,6 +526,34 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
     }
 
     @Test
+    public void changePriceWithStaged() {
+        changePriceWithStaged(true);
+        changePriceWithStaged(false);
+    }
+
+    public void changePriceWithStaged(final boolean staged) {
+        withUpdateableProduct(client(), product -> {
+            final ProductUpdateCommand command = ProductUpdateCommand.of(product, AddPrice.ofVariantId(1, PriceDraft.of(MoneyImpl.of(123, EUR)), false));
+            final Product productWithPrice = client().executeBlocking(command);
+            assertThat(productWithPrice.getMasterData().hasStagedChanges()).isFalse();
+
+            final PriceDraft newPrice = PriceDraft.of(MoneyImpl.of(234, EUR));
+            final List<Price> prices = productWithPrice.getMasterData().getStaged().getMasterVariant()
+                    .getPrices();
+            assertThat(prices.stream().anyMatch(p -> p.equals(newPrice))).isFalse();
+
+            final Product updatedProduct = client()
+                    .executeBlocking(ProductUpdateCommand.of(productWithPrice, ChangePrice.of(prices.get(0), newPrice, staged)));
+
+            final Price actualPrice = getFirstPrice(updatedProduct);
+            assertThat(PriceDraft.of(actualPrice)).isEqualTo(newPrice);
+            assertThat(updatedProduct.getMasterData().hasStagedChanges()).isEqualTo(staged);
+
+            return updatedProduct;
+        });
+    }
+
+    @Test
     public void changeSlug() throws Exception {
         withUpdateableProduct(client(), product -> {
             final LocalizedString newSlug = LocalizedString.ofEnglish("new-slug-" + RANDOM.nextInt());
