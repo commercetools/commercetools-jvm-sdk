@@ -48,7 +48,8 @@ public final class ExampleWithReferenceDraftBuilder extends Base implements Buil
   /**
    * Creates a builder initialized with the given values.
    *
-   * @param name initial value for the {@link #name(Reference<String>)} property
+   * @param name initial value for the {@link ExampleWithReferenceDraft#getName()} property
+   * @return new builder initialized with the given values
    */
   public static ExampleWithReferenceDraftBuilder of(final Reference<String> name) {
     return new ExampleWithReferenceDraftBuilder(name);

@@ -30,6 +30,7 @@ public final class ExampleWithBuilderReturnsInterfaceDraftBuilder extends Base i
   /**
    * Creates a builder initialized with the given values.
    *
+   * @return new builder initialized with the given values
    */
   public static ExampleWithBuilderReturnsInterfaceDraftBuilder of() {
     return new ExampleWithBuilderReturnsInterfaceDraftBuilder();

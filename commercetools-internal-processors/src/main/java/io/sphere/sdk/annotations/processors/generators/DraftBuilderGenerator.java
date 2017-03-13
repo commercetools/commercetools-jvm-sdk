@@ -123,8 +123,9 @@ public class DraftBuilderGenerator {
         final MethodSpec.Builder builder = MethodSpec.methodBuilder(factoryMethod.methodName()).addModifiers(Modifier.PUBLIC, Modifier.STATIC)
                 .returns(returnType)
                 .addJavadoc("Creates a builder initialized with the given values.\n\n");
-        parameterTemplates.forEach(p -> builder.addJavadoc("@param $L initial value for the {@link #$L($T)} property\n",
-                p.getJavaIdentifier(), p.getJavaIdentifier(), p.getType()));
+        parameterTemplates.forEach(p -> builder.addJavadoc("@param $L initial value for the $L property\n",
+                p.getJavaIdentifier(), p.getJavadocLinkTag()));
+        builder.addJavadoc("@return new builder initialized with the given values\n");
         return builder
                 .addParameters(createParameters(parameterTemplates, factoryMethod.useLowercaseBooleans(), false))
                 .addCode("return new $L($L);\n", returnType.simpleName(), callArguments)
