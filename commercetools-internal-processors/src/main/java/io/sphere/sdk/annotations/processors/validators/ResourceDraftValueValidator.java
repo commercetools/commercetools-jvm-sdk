@@ -16,8 +16,8 @@ import java.util.stream.Collectors;
  *
  * Validates that:
  * <ol>
- *     <li>that at least one {@link FactoryMethod} is specified {@link ResourceDraftValue#factoryMethods()}</li>
- *     <li>that the annotated type has properties for all specified {@link FactoryMethod#parameterNames()}</li>
+ *     <li>At least one {@link FactoryMethod} is specified {@link ResourceDraftValue#factoryMethods()}</li>
+ *     <li>The annotated type has corresponding properties for all specified {@link FactoryMethod#parameterNames()}</li>
  * </ol>
  */
 public class ResourceDraftValueValidator extends AbstractValidator {
@@ -32,7 +32,7 @@ public class ResourceDraftValueValidator extends AbstractValidator {
      * @param resourceDraftType the type annotated with {@link ResourceDraftValue}
      * @return true iff. the given type is valid
      */
-    public boolean validate(final TypeElement resourceDraftType) {
+    public boolean isValid(final TypeElement resourceDraftType) {
         boolean isValid = true;
         final ResourceDraftValue resourceDraftValue = resourceDraftType.getAnnotation(ResourceDraftValue.class);
 

@@ -21,7 +21,7 @@ public final class ResourceValueAnnotationProcessor extends CommercetoolsAnnotat
     @Override
     protected void generate(final TypeElement typeElement) {
         final ResourceValueValidator validator = new ResourceValueValidator(processingEnv);
-        if (validator.validate(typeElement)) {
+        if (validator.isValid(typeElement)) {
 
             final JavaFile javaFile = new ResourceValueImplGenerator(processingEnv.getElementUtils()).generate(typeElement);
 

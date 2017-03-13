@@ -12,6 +12,15 @@ import java.util.stream.Collectors;
 
 /**
  * Validator for types annotated with {@link ResourceValue}.
+ *
+* Validates that:
+ * <ol>
+ *     <li>
+ *          All methods starting with "is" are annotated with {@link JsonProperty}.
+ *          This avoids confusion with the java bean standard, which requires that getter methods for boolean properties
+ *          start with 'is'.
+ *     </li>
+ * </ol>
  */
 public class ResourceValueValidator extends AbstractValidator {
 
@@ -19,8 +28,14 @@ public class ResourceValueValidator extends AbstractValidator {
         super(processingEnvironment);
     }
 
+    /**
+     * Validates the given type.
+     *
+     * @param resourceValueType the type annotated with {@link ResourceValue}
+     * @return true iff. the given type is valid
+     */
     @Override
-    public boolean validate(final TypeElement resourceValueType) {
+    public boolean isValid(final TypeElement resourceValueType) {
         final List<ExecutableElement> methodsWithoutRequiredJsonProperty = typeUtils.getAllPropertyMethods(resourceValueType)
                 .filter(m -> m.getSimpleName().toString().startsWith("is"))
                 .filter(m -> m.getAnnotation(JsonProperty.class) == null).collect(Collectors.toList());

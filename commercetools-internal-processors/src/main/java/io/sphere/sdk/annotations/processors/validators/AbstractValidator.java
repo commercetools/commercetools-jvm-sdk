@@ -28,5 +28,5 @@ abstract class AbstractValidator {
      * @param typeElement the type to validate
      * @return true iff. the given type is valid
      */
-    public abstract boolean validate(final TypeElement typeElement);
+    public abstract boolean isValid(final TypeElement typeElement);
 }
