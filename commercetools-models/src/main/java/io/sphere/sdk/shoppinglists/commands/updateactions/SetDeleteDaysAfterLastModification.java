@@ -14,7 +14,7 @@ import javax.annotation.Nullable;
  *
  * @see ShoppingList#getDeleteDaysAfterLastModification()
  */
-public class SetDeleteDaysAfterLastModification extends UpdateActionImpl<ShoppingList> {
+public final class SetDeleteDaysAfterLastModification extends UpdateActionImpl<ShoppingList> {
     @Nullable
     private final Integer deleteDaysAfterLastModification;
 
