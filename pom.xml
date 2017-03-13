@@ -25,6 +25,11 @@
             <name>Laura Luiz</name>
             <url>https://github.com/lauraluiz</url>
         </developer>
+        <developer>
+            <id>matthiaskoester</id>
+            <name>Matthias Köster</name>
+            <url>https://github.com/katmatt</url>
+        </developer>
     </developers>
     <distributionManagement>
         <snapshotRepository>

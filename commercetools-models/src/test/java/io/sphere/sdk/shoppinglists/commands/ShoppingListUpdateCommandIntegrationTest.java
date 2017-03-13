@@ -89,6 +89,21 @@ public class ShoppingListUpdateCommandIntegrationTest extends IntegrationTest {
     }
 
     @Test
+    public void setDeleteDaysAfterLastModification() throws Exception {
+        withCustomer(client(), customer -> {
+            withUpdateableShoppingList(client(), shoppingList -> {
+                final int deleteDaysAfterLastModification = 11;
+                final ShoppingList updatedShoppingList = client().executeBlocking(
+                    ShoppingListUpdateCommand.of(shoppingList, SetDeleteDaysAfterLastModification.of(deleteDaysAfterLastModification)));
+
+                assertThat(updatedShoppingList.getDeleteDaysAfterLastModification()).isEqualTo(deleteDaysAfterLastModification);
+
+                return updatedShoppingList;
+            });
+        });
+    }
+
+    @Test
     public void addLineItem() throws Exception {
         withTaxedProduct(client(), product -> {
             withUpdateableShoppingList(client(), shoppingList -> {
