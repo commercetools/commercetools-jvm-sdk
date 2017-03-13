@@ -26,15 +26,18 @@ public class ShoppingListCreateCommandIntegrationTest extends IntegrationTest {
 
     @Test
     public void execution() {
+        final int deleteDaysAfterLastModification = 1;
         ShoppingListDraftDsl draft = ShoppingListFixtures.newShoppingListDraftBuilder()
                 .key(DEMO_SHOPPING_LIST_KEY)
                 .description(en("Demo shopping list description."))
                 .slug(en("demo-shopping-list-slug"))
+                .deleteDaysAfterLastModification(deleteDaysAfterLastModification)
                 .build();
         ShoppingList shoppingList = client().executeBlocking(ShoppingListCreateCommand.of(draft));
 
         assertThat(shoppingList).isNotNull();
         assertThat(shoppingList.getId()).isNotNull();
         assertThat(shoppingList.getKey()).isEqualTo(DEMO_SHOPPING_LIST_KEY);
+        assertThat(shoppingList.getDeleteDaysAfterLastModification()).isEqualTo(deleteDaysAfterLastModification);
     }
 }

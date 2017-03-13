@@ -68,6 +68,9 @@ public interface ShoppingList extends Resource<ShoppingList>, Custom {
     @IgnoreInQueryModel
     List<TextLineItem> getTextLineItems();
 
+    @Nullable
+    Integer getDeleteDaysAfterLastModification();
+
     /**
      * Creates a container which contains the full Java type information to deserialize this class from JSON.
      *

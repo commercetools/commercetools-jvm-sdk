@@ -44,4 +44,7 @@ public interface ShoppingListDraft {
 
     @Nullable
     CustomFieldsDraft getCustom();
+
+    @Nullable
+    Integer getDeleteDaysAfterLastModification();
 }
