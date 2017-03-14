@@ -1865,6 +1865,42 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
         });
     }
 
+    @Test
+    public void setDiscountedPriceWithStaged() {
+        setDiscountedPriceWithStaged(true);
+        setDiscountedPriceWithStaged(false);
+    }
+
+    public void setDiscountedPriceWithStaged(final Boolean staged) {
+        final ProductDiscountPredicate predicate = ProductDiscountPredicate.of("1 = 1");//can be used for all products
+        final ProductDiscountDraft productDiscountDraft = ProductDiscountDraft.of(randomSlug(), randomSlug(),
+                predicate, ExternalProductDiscountValue.of(), randomSortOrder(), true);
+        //don't forget that one product discount can be used for multiple products
+        withProductDiscount(client(), productDiscountDraft, externalProductDiscount -> {
+            withProductOfPrices(client(), singletonList(PriceDraft.of(EURO_40)), product -> {
+                final Product publishedProduct = client().executeBlocking(ProductUpdateCommand.of(product, Publish.of()));
+                final Price originalPrice = publishedProduct.getMasterData().getStaged().getMasterVariant().getPrices().get(0);
+                assertThat(originalPrice.getDiscounted()).isNull();
+
+                final String priceId = originalPrice.getId();
+                final SetDiscountedPrice action =
+                        SetDiscountedPrice.of(priceId, DiscountedPrice.of(EURO_5, externalProductDiscount.toReference()), staged);
+                final Product updatedProduct = client().executeBlocking(ProductUpdateCommand.of(publishedProduct, action));
+                final Price stagedPrice = updatedProduct.getMasterData().getStaged().getMasterVariant().getPrices().get(0);
+                assertThat(stagedPrice.getValue()).isEqualTo(EURO_40);
+                assertThat(stagedPrice.getDiscounted().getValue()).isEqualTo(EURO_5);
+                assertThat(stagedPrice.getDiscounted().getDiscount()).isEqualTo(externalProductDiscount.toReference());
+
+                final Price currentPrice = updatedProduct.getMasterData().getCurrent().getMasterVariant().getPrices().get(0);
+                if (staged) {
+                    assertThat(stagedPrice).isNotEqualTo(currentPrice);
+                } else {
+                    assertThat(stagedPrice).isEqualTo(currentPrice);
+                }
+            });
+        });
+    }
+
     private void withProductOfSku(final String sku, final Function<Product, Product> productProductFunction) {
         withUpdateableProduct(client(), builder -> {
             return builder.masterVariant(ProductVariantDraftBuilder.of(builder.getMasterVariant()).sku(sku).build());
