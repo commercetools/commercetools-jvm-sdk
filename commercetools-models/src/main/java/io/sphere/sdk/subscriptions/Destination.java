@@ -1,5 +1,6 @@
 package io.sphere.sdk.subscriptions;
 
+import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 /**
@@ -7,6 +8,11 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
  * Message Queues can be differentiated by the sub types of this interface.
  */
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "type", visible = true)
-// @JsonSubTypes({@JsonSubTypes.Type(value = PointImpl.class, name = "Point")})
+@JsonSubTypes({
+        @JsonSubTypes.Type(value = IronMqDestinationImpl.class, name = "IronMQ"),
+        @JsonSubTypes.Type(value = AwsSqsDestinationImpl.class, name = "SQS"),
+        @JsonSubTypes.Type(value = AwsSnsDestinationImpl.class, name = "SNS")
+})
 public interface Destination {
+    String getType();
 }
