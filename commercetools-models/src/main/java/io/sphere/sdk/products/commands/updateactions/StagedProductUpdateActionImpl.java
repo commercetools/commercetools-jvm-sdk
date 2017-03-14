@@ -9,7 +9,7 @@ abstract class StagedProductUpdateActionImpl<T> extends UpdateActionImpl<T> {
     @Nullable
     protected final Boolean staged;
 
-    protected StagedProductUpdateActionImpl(final String action, final Boolean staged) {
+    protected StagedProductUpdateActionImpl(final String action, @Nullable final Boolean staged) {
         super(action);
         this.staged = staged;
     }

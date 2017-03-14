@@ -17,7 +17,6 @@ import io.sphere.sdk.products.attributes.NamedAttributeAccess;
 import io.sphere.sdk.products.commands.updateactions.*;
 import io.sphere.sdk.products.messages.ProductSlugChangedMessage;
 import io.sphere.sdk.products.messages.ProductStateTransitionMessage;
-import io.sphere.sdk.products.queries.ProductByIdGet;
 import io.sphere.sdk.products.queries.ProductProjectionByIdGet;
 import io.sphere.sdk.products.queries.ProductQuery;
 import io.sphere.sdk.queries.PagedQueryResult;
@@ -1345,22 +1344,6 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
                     .as("variant IDs don't change in reordering")
                     .isNotEqualTo(originalMasterVariantId)
                     .isEqualTo(variantSupposedToBeMaster.getId());
-
-            return updatedProduct;
-        });
-    }
-
-    @Test
-    public void possibleToHackUpdateForStagedAndCurrent() throws Exception {
-        withUpdateableProduct(client(), product -> {
-            final LocalizedString newName = randomSlug();
-            final UpdateAction<Product> staged = ChangeName.of(newName, false);
-            final Product updatedProduct = client().executeBlocking(ProductUpdateCommand.of(product, asList(Publish.of(), staged)));
-
-            final Product fetchedProduct = client().executeBlocking(ProductByIdGet.of(product));
-            assertThat(fetchedProduct.getMasterData().getCurrent().getName())
-                    .isEqualTo(fetchedProduct.getMasterData().getStaged().getName())
-                    .isEqualTo(newName);
 
             return updatedProduct;
         });
