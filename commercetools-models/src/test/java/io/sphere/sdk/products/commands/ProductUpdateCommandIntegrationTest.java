@@ -219,7 +219,7 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
         addPriceByVariantIdWithStaged(false);
     }
 
-    public void addPriceByVariantIdWithStaged(final boolean staged) {
+    public void addPriceByVariantIdWithStaged(final Boolean staged) {
         final PriceDraft priceDraft = PriceDraft.of(MoneyImpl.of(new BigDecimal("12345"), "JPY"));
         withUpdateableProduct(client(), product -> {
             assertThat(product.getMasterData().hasStagedChanges()).isFalse();
@@ -264,7 +264,7 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
         addPriceBySkuWithStaged(false);
     }
 
-    public void addPriceBySkuWithStaged(final boolean staged) {
+    public void addPriceBySkuWithStaged(final Boolean staged) {
         final PriceDraft priceDraft = PriceDraft.of(MoneyImpl.of(new BigDecimal("12345"), "JPY"));
         withUpdateableProduct(client(), product -> {
             assertThat(product.getMasterData().hasStagedChanges()).isFalse();
@@ -331,7 +331,7 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
         setPricesByVariantIdWithStaged(false);
     }
 
-    private void setPricesByVariantIdWithStaged(final boolean staged) {
+    private void setPricesByVariantIdWithStaged(final Boolean staged) {
         final PriceDraft priceDraft = PriceDraft.of(MoneyImpl.of(123, EUR));
         final PriceDraft priceDraft2 = PriceDraft.of(MoneyImpl.of(123, EUR)).withCountry(DE);
         final List<PriceDraft> expectedPriceList = asList(priceDraft, priceDraft2);
@@ -374,7 +374,7 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
         setPricesBySkuWithStaged(false);
     }
 
-    public void setPricesBySkuWithStaged(final boolean staged) {
+    public void setPricesBySkuWithStaged(final Boolean staged) {
         final PriceDraft priceDraft = PriceDraft.of(MoneyImpl.of(123, EUR));
         final PriceDraft priceDraft2 = PriceDraft.of(MoneyImpl.of(123, EUR)).withCountry(DE);
         final List<PriceDraft> expectedPriceList = asList(priceDraft, priceDraft2);
@@ -494,7 +494,7 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
         changeNameWithStaged(false);
     }
 
-    public void changeNameWithStaged(final boolean staged) {
+    public void changeNameWithStaged(final Boolean staged) {
         withUpdateableProduct(client(), product -> {
             assertThat(product.getMasterData().hasStagedChanges()).isFalse();
             final LocalizedString newName = LocalizedString.ofEnglish("newName " + RANDOM.nextInt());
@@ -529,7 +529,7 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
         changePriceWithStaged(false);
     }
 
-    public void changePriceWithStaged(final boolean staged) {
+    public void changePriceWithStaged(final Boolean staged) {
         withUpdateableProduct(client(), product -> {
             final ProductUpdateCommand command = ProductUpdateCommand.of(product, AddPrice.ofVariantId(1, PriceDraft.of(MoneyImpl.of(123, EUR)), false));
             final Product productWithPrice = client().executeBlocking(command);
@@ -581,7 +581,7 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
         changeSlugWithStaged(false);
     }
 
-    public void changeSlugWithStaged(final boolean staged) {
+    public void changeSlugWithStaged(final Boolean staged) {
         withUpdateableProduct(client(), product -> {
             assertThat(product.getMasterData().hasStagedChanges()).isFalse();
             final LocalizedString newSlug = LocalizedString.ofEnglish("new-slug-" + RANDOM.nextInt());
@@ -662,6 +662,31 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
     }
 
     @Test
+    public void removePriceWithStaged() {
+        removePriceWithStaged(true);
+        removePriceWithStaged(false);
+    }
+
+    public void removePriceWithStaged(final Boolean staged) {
+        withUpdateableProduct(client(), product -> {
+            final ProductUpdateCommand command = ProductUpdateCommand.of(product, AddPrice.ofVariantId(1, PriceDraft.of(MoneyImpl.of(123, EUR)), false));
+            final Product productWithPrice = client().executeBlocking(command);
+            assertThat(productWithPrice.getMasterData().hasStagedChanges()).isFalse();
+
+            final Price oldPrice = getFirstPrice(productWithPrice);
+
+            final Product updatedProduct = client()
+                    .executeBlocking(ProductUpdateCommand.of(productWithPrice, RemovePrice.of(oldPrice, staged)));
+
+            assertThat(updatedProduct.getMasterData().getStaged().getMasterVariant()
+                    .getPrices().stream().anyMatch(p -> p.equals(oldPrice))).isFalse();
+            assertThat(updatedProduct.getMasterData().hasStagedChanges()).isEqualTo(staged);
+
+            return updatedProduct;
+        });
+    }
+
+    @Test
     public void setDescription() throws Exception {
         withUpdateableProduct(client(), product -> {
             final LocalizedString newDescription = LocalizedString.ofEnglish("new description " + RANDOM.nextInt());
@@ -679,7 +704,7 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
         setDescriptionWithStaged(false);
     }
 
-    public void setDescriptionWithStaged(final boolean staged) {
+    public void setDescriptionWithStaged(final Boolean staged) {
         withUpdateableProduct(client(), product -> {
             assertThat(product.getMasterData().hasStagedChanges()).isFalse();
             final LocalizedString newDescription = LocalizedString.ofEnglish("new description " + RANDOM.nextInt());
@@ -1015,7 +1040,7 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
         addVariantWithStaged(false);
     }
 
-    private void addVariantWithStaged(final boolean staged) {
+    private void addVariantWithStaged(final Boolean staged) {
         final NamedAttributeAccess<MonetaryAmount> moneyAttribute =
                 AttributeAccess.ofMoney().ofName(MONEY_ATTRIBUTE_NAME);
         final AttributeDraft moneyAttributeValue = AttributeDraft.of(moneyAttribute, EURO_10);
@@ -1104,7 +1129,7 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
         removeVariantByIdWithStaged(false);
     }
 
-    private void removeVariantByIdWithStaged(final boolean staged) {
+    private void removeVariantByIdWithStaged(final Boolean staged) {
         final NamedAttributeAccess<MonetaryAmount> moneyAttribute =
                 AttributeAccess.ofMoney().ofName(MONEY_ATTRIBUTE_NAME);
         final AttributeDraft moneyAttributeValue = AttributeDraft.of(moneyAttribute, EURO_10);
@@ -1180,7 +1205,7 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
         removeVariantBySkuWithStaged(false);
     }
 
-    private void removeVariantBySkuWithStaged(final boolean staged) {
+    private void removeVariantBySkuWithStaged(final Boolean staged) {
         final NamedAttributeAccess<MonetaryAmount> moneyAttribute =
                 AttributeAccess.ofMoney().ofName(MONEY_ATTRIBUTE_NAME);
         final AttributeDraft moneyAttributeValue = AttributeDraft.of(moneyAttribute, EURO_10);
@@ -1258,7 +1283,7 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
         changeMasterVariantWithVariantIdWithStaged(false);
     }
 
-    private void changeMasterVariantWithVariantIdWithStaged(final boolean staged) {
+    private void changeMasterVariantWithVariantIdWithStaged(final Boolean staged) {
         withUpdateableProductOfMultipleVariants(client(), product -> {
             assertThat(product.getMasterData().hasStagedChanges()).isFalse();
 
@@ -1303,7 +1328,7 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
         changeMasterVariantWithSkuWithStaged(false);
     }
 
-    private void changeMasterVariantWithSkuWithStaged(final boolean staged) {
+    private void changeMasterVariantWithSkuWithStaged(final Boolean staged) {
         withUpdateableProductOfMultipleVariants(client(), product -> {
             assertThat(product.getMasterData().hasStagedChanges()).isFalse();
 
