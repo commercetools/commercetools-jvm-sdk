@@ -18,13 +18,13 @@ import javax.annotation.Nullable;
  *
  * @see io.sphere.sdk.products.commands.updateactions.AddVariant
  */
-public final class RemoveVariant extends StagedBase<Product> {
+public final class RemoveVariant extends StagedProductUpdateActionImpl<Product> {
     @Nullable
     private final Integer id;
     @Nullable
     private final String sku;
 
-    private RemoveVariant(@Nullable final Integer id, @Nullable final String sku, final boolean staged) {
+    private RemoveVariant(@Nullable final Integer id, @Nullable final String sku, @Nullable final Boolean staged) {
         super("removeVariant", staged);
         this.id = id;
         this.sku = sku;
@@ -52,7 +52,7 @@ public final class RemoveVariant extends StagedBase<Product> {
         return ofVariantId(id, true);
     }
 
-    public static RemoveVariant ofVariantId(final Integer id, @Nullable final boolean staged) {
+    public static RemoveVariant ofVariantId(final Integer id, @Nullable final Boolean staged) {
         return new RemoveVariant(id, null, staged);
     }
 
@@ -60,7 +60,7 @@ public final class RemoveVariant extends StagedBase<Product> {
         return ofSku(sku, true);
     }
 
-    public static RemoveVariant ofSku(final String sku, @Nullable final boolean staged) {
+    public static RemoveVariant ofSku(final String sku, @Nullable final Boolean staged) {
         return new RemoveVariant(null, sku, staged);
     }
 }

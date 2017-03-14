@@ -14,11 +14,11 @@ import java.util.Optional;
  *
  * {@include.example io.sphere.sdk.products.commands.ProductUpdateCommandIntegrationTest#changePrice()}
  */
-public final class ChangePrice extends StagedBase<Product> {
+public final class ChangePrice extends StagedProductUpdateActionImpl<Product> {
     private final PriceDraft price;
     private final String priceId;
 
-    private ChangePrice(final String priceId, final PriceDraft price, final boolean staged) {
+    private ChangePrice(final String priceId, final PriceDraft price, @Nullable final Boolean staged) {
         super("changePrice", staged);
         this.priceId = priceId;
         this.price = price;
@@ -36,7 +36,7 @@ public final class ChangePrice extends StagedBase<Product> {
         return of(oldPrice, price, true);
     }
 
-    public static ChangePrice of(final Price oldPrice, final PriceDraft price, @Nullable final boolean staged) {
+    public static ChangePrice of(final Price oldPrice, final PriceDraft price, @Nullable final Boolean staged) {
         final String priceId = Optional.ofNullable(oldPrice.getId())
                 .orElseThrow(() -> new IllegalArgumentException("The old price should have an ID: " + oldPrice));
         return of(priceId, price, staged);
@@ -46,7 +46,7 @@ public final class ChangePrice extends StagedBase<Product> {
         return of(priceId, price, true);
     }
 
-    public static ChangePrice of(final String priceId, final PriceDraft price, @Nullable final boolean staged) {
+    public static ChangePrice of(final String priceId, final PriceDraft price, @Nullable final Boolean staged) {
         return new ChangePrice(priceId, price, staged);
     }
 }

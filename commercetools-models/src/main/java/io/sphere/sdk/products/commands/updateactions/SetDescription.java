@@ -12,10 +12,10 @@ import javax.annotation.Nullable;
  *
  * {@include.example io.sphere.sdk.products.commands.ProductUpdateCommandIntegrationTest#setDescription()}
  */
-public final class SetDescription extends StagedBase<Product> {
+public final class SetDescription extends StagedProductUpdateActionImpl<Product> {
     private final LocalizedString description;
 
-    private SetDescription(final LocalizedString description, final boolean staged) {
+    private SetDescription(final LocalizedString description, @Nullable final Boolean staged) {
         super("setDescription", staged);
         this.description = description;
     }
@@ -24,7 +24,7 @@ public final class SetDescription extends StagedBase<Product> {
         return of(description, true);
     }
 
-    public static SetDescription of(final LocalizedString description, @Nullable final boolean staged) {
+    public static SetDescription of(final LocalizedString description, @Nullable final Boolean staged) {
         return new SetDescription(description, staged);
     }
 

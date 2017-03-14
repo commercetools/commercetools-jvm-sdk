@@ -19,14 +19,14 @@ import java.util.List;
  *
  * @see io.sphere.sdk.products.ProductVariant#getPrices()
  */
-public final class SetPrices extends StagedBase<Product> {
+public final class SetPrices extends StagedProductUpdateActionImpl<Product> {
     @Nullable
     private final Integer variantId;
     @Nullable
     private final String sku;
     private final List<PriceDraft> prices;
 
-    private SetPrices(@Nullable final Integer variantId, @Nullable final String sku, final List<PriceDraft> prices, final boolean staged) {
+    private SetPrices(@Nullable final Integer variantId, @Nullable final String sku, final List<PriceDraft> prices, @Nullable final Boolean staged) {
         super("setPrices", staged);
         this.variantId = variantId;
         this.sku = sku;
@@ -55,7 +55,7 @@ public final class SetPrices extends StagedBase<Product> {
         return ofVariantId(variantId, prices, true);
     }
 
-    public static SetPrices ofVariantId(final Integer variantId, final List<PriceDraft> prices, @Nullable boolean staged) {
+    public static SetPrices ofVariantId(final Integer variantId, final List<PriceDraft> prices, @Nullable Boolean staged) {
         return new SetPrices(variantId, null, prices, staged);
     }
 
@@ -63,7 +63,7 @@ public final class SetPrices extends StagedBase<Product> {
         return ofSku(sku, prices, true);
     }
 
-    public static SetPrices ofSku(final String sku, final List<PriceDraft> prices, @Nullable boolean staged) {
+    public static SetPrices ofSku(final String sku, final List<PriceDraft> prices, @Nullable Boolean staged) {
         return new SetPrices(null, sku, prices, staged);
     }
 }

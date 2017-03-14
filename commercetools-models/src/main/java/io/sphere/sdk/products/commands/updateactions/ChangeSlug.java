@@ -12,10 +12,10 @@ import javax.annotation.Nullable;
  *
  * {@include.example io.sphere.sdk.products.commands.ProductUpdateCommandIntegrationTest#changeSlug()}
  */
-public final class ChangeSlug extends StagedBase<Product> {
+public final class ChangeSlug extends StagedProductUpdateActionImpl<Product> {
     private final LocalizedString slug;
 
-    private ChangeSlug(final LocalizedString slug, final boolean staged) {
+    private ChangeSlug(final LocalizedString slug, @Nullable final Boolean staged) {
         super("changeSlug", staged);
         this.slug = slug;
     }
@@ -24,7 +24,7 @@ public final class ChangeSlug extends StagedBase<Product> {
         return of(slug, true);
     }
 
-    public static ChangeSlug of(final LocalizedString slug, @Nullable final boolean staged) {
+    public static ChangeSlug of(final LocalizedString slug, @Nullable final Boolean staged) {
         return new ChangeSlug(slug, staged);
     }
 

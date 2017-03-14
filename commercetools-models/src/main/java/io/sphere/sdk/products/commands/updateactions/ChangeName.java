@@ -12,10 +12,10 @@ import javax.annotation.Nullable;
  *
  * {@include.example io.sphere.sdk.products.commands.ProductUpdateCommandIntegrationTest#changeName()}
  */
-public final class ChangeName extends StagedBase<Product> {
+public final class ChangeName extends StagedProductUpdateActionImpl<Product> {
     private final LocalizedString name;
 
-    private ChangeName(final LocalizedString name, final boolean staged) {
+    private ChangeName(final LocalizedString name, @Nullable final Boolean staged) {
         super("changeName", staged);
         this.name = name;
     }
@@ -24,7 +24,7 @@ public final class ChangeName extends StagedBase<Product> {
         return of(name, true);
     }
 
-    public static ChangeName of(final LocalizedString name, @Nullable final boolean staged) {
+    public static ChangeName of(final LocalizedString name, @Nullable final Boolean staged) {
         return new ChangeName(name, staged);
     }
 

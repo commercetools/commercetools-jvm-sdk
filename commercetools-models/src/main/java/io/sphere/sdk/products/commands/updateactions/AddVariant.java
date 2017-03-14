@@ -24,7 +24,7 @@ import java.util.List;
  * @see io.sphere.sdk.products.ProductProjection#getMasterVariant()
  * @see io.sphere.sdk.products.ProductProjection#getVariants()
  */
-public final class AddVariant extends StagedBase<Product> {
+public final class AddVariant extends StagedProductUpdateActionImpl<Product> {
     @Nullable
     private final String sku;
     private final List<PriceDraft> prices;
@@ -34,7 +34,7 @@ public final class AddVariant extends StagedBase<Product> {
     @Nullable
     private final List<Image> images;
 
-    private AddVariant(final List<AttributeDraft> attributes, final List<PriceDraft> prices, @Nullable final String sku, final String key, final List<Image> images, final boolean staged) {
+    private AddVariant(final List<AttributeDraft> attributes, final List<PriceDraft> prices, @Nullable final String sku, final String key, final List<Image> images, @Nullable final Boolean staged) {
         super("addVariant", staged);
         this.attributes = attributes;
         this.prices = prices;
@@ -82,7 +82,7 @@ public final class AddVariant extends StagedBase<Product> {
         return of(attributes, prices, sku, true);
     }
 
-    public static AddVariant of(final List<AttributeDraft> attributes, final List<PriceDraft> prices, @Nullable final String sku, @Nullable final boolean staged) {
+    public static AddVariant of(final List<AttributeDraft> attributes, final List<PriceDraft> prices, @Nullable final String sku, @Nullable final Boolean staged) {
         return new AddVariant(attributes, prices, sku, null, null, staged);
     }
 
@@ -90,7 +90,7 @@ public final class AddVariant extends StagedBase<Product> {
         return of(attributes, prices, true);
     }
 
-    public static AddVariant of(final List<AttributeDraft> attributes, final List<PriceDraft> prices, @Nullable final boolean staged) {
+    public static AddVariant of(final List<AttributeDraft> attributes, final List<PriceDraft> prices, @Nullable final Boolean staged) {
         return new AddVariant(attributes, prices, null, null, null, staged);
     }
 }

@@ -4,18 +4,18 @@ import io.sphere.sdk.commands.UpdateActionImpl;
 
 import javax.annotation.Nullable;
 
-public abstract class StagedBase<T> extends UpdateActionImpl<T> {
+abstract class StagedProductUpdateActionImpl<T> extends UpdateActionImpl<T> {
 
     @Nullable
-    protected final boolean staged;
+    protected final Boolean staged;
 
-    protected StagedBase(final String action, final boolean staged) {
+    protected StagedProductUpdateActionImpl(final String action, final Boolean staged) {
         super(action);
         this.staged = staged;
     }
 
     @Nullable
-    public boolean isStaged() {
+    public Boolean isStaged() {
         return staged;
     }
 }

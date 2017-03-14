@@ -19,14 +19,14 @@ import javax.annotation.Nullable;
  *
  * @see ProductVariant#getPrices()
  */
-public final class AddPrice extends StagedBase<Product> {
+public final class AddPrice extends StagedProductUpdateActionImpl<Product> {
     @Nullable
     private final Integer variantId;
     @Nullable
     private final String sku;
     private final PriceDraft price;
 
-    private AddPrice(@Nullable final Integer variantId, @Nullable final String sku, final PriceDraft price, final boolean staged) {
+    private AddPrice(@Nullable final Integer variantId, @Nullable final String sku, final PriceDraft price, @Nullable final Boolean staged) {
         super("addPrice", staged);
         this.variantId = variantId;
         this.sku = sku;
@@ -55,7 +55,7 @@ public final class AddPrice extends StagedBase<Product> {
         return ofVariantId(variantId, price, true);
     }
 
-    public static AddPrice ofVariantId(final Integer variantId, final PriceDraft price, @Nullable final boolean staged) {
+    public static AddPrice ofVariantId(final Integer variantId, final PriceDraft price, @Nullable final Boolean staged) {
         return new AddPrice(variantId, null, price, staged);
     }
 
@@ -63,7 +63,7 @@ public final class AddPrice extends StagedBase<Product> {
         return ofSku(sku, price, true);
     }
 
-    public static AddPrice ofSku(final String sku, final PriceDraft price, @Nullable final boolean staged) {
+    public static AddPrice ofSku(final String sku, final PriceDraft price, @Nullable final Boolean staged) {
         return new AddPrice(null, sku, price, staged);
     }
 }

@@ -20,13 +20,13 @@ import javax.annotation.Nullable;
  * @see ProductProjection#getMasterVariant()
  * @see ProductProjection#getVariants()
  */
-public final class ChangeMasterVariant extends StagedBase<Product> {
+public final class ChangeMasterVariant extends StagedProductUpdateActionImpl<Product> {
     @Nullable
     private final Integer variantId;
     @Nullable
     private final String sku;
 
-    private ChangeMasterVariant(@Nullable final Integer variantId, @Nullable final String sku, final boolean staged) {
+    private ChangeMasterVariant(@Nullable final Integer variantId, @Nullable final String sku, @Nullable final Boolean staged) {
         super("changeMasterVariant", staged);
         this.variantId = variantId;
         this.sku = sku;
@@ -36,7 +36,7 @@ public final class ChangeMasterVariant extends StagedBase<Product> {
         return ofSku(sku, true);
     }
 
-    public static ChangeMasterVariant ofSku(final String sku, @Nullable final boolean staged) {
+    public static ChangeMasterVariant ofSku(final String sku, @Nullable final Boolean staged) {
         return new ChangeMasterVariant(null, sku, staged);
     }
 
@@ -44,7 +44,7 @@ public final class ChangeMasterVariant extends StagedBase<Product> {
         return ofVariantId(variantId, true);
     }
 
-    public static ChangeMasterVariant ofVariantId(final Integer variantId, @Nullable final boolean staged) {
+    public static ChangeMasterVariant ofVariantId(final Integer variantId, @Nullable final Boolean staged) {
         return new ChangeMasterVariant(variantId, null, staged);
     }
 

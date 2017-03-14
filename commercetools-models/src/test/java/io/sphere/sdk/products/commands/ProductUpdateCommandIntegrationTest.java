@@ -1,7 +1,5 @@
 package io.sphere.sdk.products.commands;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonUnwrapped;
 import com.neovisionaries.i18n.CountryCode;
 import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.client.BlockingSphereClient;
@@ -1327,33 +1325,12 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
         });
     }
 
-    private static class StagedWrapper extends Base implements UpdateAction<Product> {
-        private final UpdateAction<Product> delegate;
-        @JsonProperty("staged")
-        private final boolean staged;
-
-        private StagedWrapper(final UpdateAction<Product> action, final boolean staged) {
-            this.delegate = action;
-            this.staged = staged;
-        }
-
-        @Override
-        public String getAction() {
-            return delegate.getAction();
-        }
-
-        @JsonUnwrapped
-        public UpdateAction<Product> getDelegate() {
-            return delegate;
-        }
-    }
-
     @Test
     public void possibleToHackUpdateForStagedAndCurrent() throws Exception {
         withUpdateableProduct(client(), product -> {
             final LocalizedString newName = randomSlug();
-            final UpdateAction<Product> stagedWrapper = new StagedWrapper(ChangeName.of(newName), false);
-            final Product updatedProduct = client().executeBlocking(ProductUpdateCommand.of(product, asList(Publish.of(), stagedWrapper)));
+            final UpdateAction<Product> staged = ChangeName.of(newName, false);
+            final Product updatedProduct = client().executeBlocking(ProductUpdateCommand.of(product, asList(Publish.of(), staged)));
 
             final Product fetchedProduct = client().executeBlocking(ProductByIdGet.of(product));
             assertThat(fetchedProduct.getMasterData().getCurrent().getName())
