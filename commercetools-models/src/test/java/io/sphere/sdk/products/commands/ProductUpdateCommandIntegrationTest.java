@@ -1431,6 +1431,41 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
     }
 
     @Test
+    public void setProductPriceCustomTypeAndsetProductPriceCustomFieldWithStaged() {
+        setProductPriceCustomTypeAndsetProductPriceCustomFieldWithStaged(true);
+        setProductPriceCustomTypeAndsetProductPriceCustomFieldWithStaged(false);
+    }
+
+    public void setProductPriceCustomTypeAndsetProductPriceCustomFieldWithStaged(final Boolean staged) {
+        withUpdateableType(client(), type -> {
+            withUpdateableProduct(client(), product -> {
+
+                final ProductUpdateCommand command = ProductUpdateCommand.of(product, AddPrice.ofVariantId(1, PriceDraft.of(MoneyImpl.of(123, EUR)), false));
+                final Product productWithPrice = client().executeBlocking(command);
+                assertThat(productWithPrice.getMasterData().hasStagedChanges()).isFalse();
+
+                final String priceId = getFirstPrice(productWithPrice).getId();
+                final UpdateAction<Product> updateAction = SetProductPriceCustomType.
+                        ofTypeIdAndObjects(type.getId(), STRING_FIELD_NAME, "a value", priceId, staged);
+                final ProductUpdateCommand productUpdateCommand = ProductUpdateCommand.of(productWithPrice, updateAction);
+                final Product updatedProduct = client().executeBlocking(productUpdateCommand);
+
+                final Price price = getFirstPrice(updatedProduct);
+                assertThat(price.getCustom().getFieldAsString(STRING_FIELD_NAME))
+                        .isEqualTo("a value");
+                assertThat(updatedProduct.getMasterData().hasStagedChanges()).isEqualTo(staged);
+
+                final Product updated2 = client().executeBlocking(ProductUpdateCommand.of(updatedProduct, SetProductPriceCustomField.ofObject(STRING_FIELD_NAME, "a new value", priceId, staged)));
+                assertThat(getFirstPrice(updated2).getCustom().getFieldAsString(STRING_FIELD_NAME))
+                        .isEqualTo("a new value");
+                assertThat(updated2.getMasterData().hasStagedChanges()).isEqualTo(staged);
+                return updated2;
+            });
+            return type;
+        });
+    }
+
+    @Test
     public void setSku() throws Exception {
         final String oldSku = randomKey();
         withProductOfSku(oldSku, (Product product) -> {
