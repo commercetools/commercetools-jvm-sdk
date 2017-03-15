@@ -908,6 +908,8 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
     @Test
     public void setAttributeInAllVariants() throws Exception {
         withUpdateableProduct(client(), product -> {
+            assertThat(product.getMasterData().hasStagedChanges()).isFalse();
+
             //the setter contains the name and a JSON mapper, declare it only one time in your project per attribute
             //example for MonetaryAmount attribute
             final String moneyAttributeName = MONEY_ATTRIBUTE_NAME;
@@ -929,6 +931,7 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
             final Product updatedProduct = client().executeBlocking(ProductUpdateCommand.of(product, asList(moneyUpdate, localizedEnumUpdate)));
             assertThat(updatedProduct.getMasterData().getStaged().getMasterVariant().findAttribute(moneyAttribute)).contains(newValueForMoney);
             assertThat(updatedProduct.getMasterData().getStaged().getMasterVariant().findAttribute(colorAttribute)).contains(newValueForColor);
+            assertThat(updatedProduct.getMasterData().hasStagedChanges()).isTrue();
 
             final SetAttributeInAllVariants unsetAction = SetAttributeInAllVariants.ofUnsetAttribute(moneyAttribute);
             final Product productWithoutMoney = client().executeBlocking(ProductUpdateCommand.of(updatedProduct, unsetAction));
@@ -936,6 +939,43 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
             assertThat(productWithoutMoney.getMasterData().getStaged().getMasterVariant().findAttribute(moneyAttribute)).isEmpty();
 
             return productWithoutMoney;
+        });
+    }
+
+    @Test
+    public void setAttributeInAllVariantsWithStaged() {
+        setAttributeInAllVariantsWithStaged(true);
+        setAttributeInAllVariantsWithStaged(false);
+    }
+
+    public void setAttributeInAllVariantsWithStaged(final Boolean staged) {
+        withUpdateableProduct(client(), product -> {
+            assertThat(product.getMasterData().hasStagedChanges()).isFalse();
+
+            //the setter contains the name and a JSON mapper, declare it only one time in your project per attribute
+            //example for MonetaryAmount attribute
+            final String moneyAttributeName = MONEY_ATTRIBUTE_NAME;
+            final NamedAttributeAccess<MonetaryAmount> moneyAttribute =
+                    AttributeAccess.ofMoney().ofName(moneyAttributeName);
+            final MonetaryAmount newValueForMoney = EURO_10;
+
+            //example for LocalizedEnumValue attribute
+            final NamedAttributeAccess<LocalizedEnumValue> colorAttribute = Colors.ATTRIBUTE;
+            final LocalizedEnumValue oldValueForColor = Colors.GREEN;
+            final LocalizedEnumValue newValueForColor = Colors.RED;
+
+            assertThat(product.getMasterData().getStaged().getMasterVariant().findAttribute(moneyAttribute)).isEmpty();
+            assertThat(product.getMasterData().getStaged().getMasterVariant().findAttribute(colorAttribute)).contains(oldValueForColor);
+
+            final SetAttributeInAllVariants moneyUpdate = SetAttributeInAllVariants.of(moneyAttribute, newValueForMoney, staged);
+            final SetAttributeInAllVariants localizedEnumUpdate = SetAttributeInAllVariants.of(colorAttribute, newValueForColor, staged);
+
+            final Product updatedProduct = client().executeBlocking(ProductUpdateCommand.of(product, asList(moneyUpdate, localizedEnumUpdate)));
+            assertThat(updatedProduct.getMasterData().getStaged().getMasterVariant().findAttribute(moneyAttribute)).contains(newValueForMoney);
+            assertThat(updatedProduct.getMasterData().getStaged().getMasterVariant().findAttribute(colorAttribute)).contains(newValueForColor);
+            assertThat(updatedProduct.getMasterData().hasStagedChanges()).isEqualTo(staged);
+
+            return updatedProduct;
         });
     }
 
