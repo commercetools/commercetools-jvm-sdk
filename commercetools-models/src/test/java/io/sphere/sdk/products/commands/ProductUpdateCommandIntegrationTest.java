@@ -466,9 +466,15 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
                 final String orderHint = "0.123";
                 final Product productWithCategory = client()
                         .executeBlocking(ProductUpdateCommand.of(product, AddToCategory.of(category, orderHint, staged)));
-
                 assertThat(productWithCategory.getMasterData().hasStagedChanges()).isEqualTo(staged);
-                return productWithCategory;
+
+                final Product publishedProductWithCategory = client().executeBlocking(ProductUpdateCommand.of(productWithCategory, Publish.of()));
+                final Product productWithoutCategory = client()
+                        .executeBlocking(ProductUpdateCommand.of(publishedProductWithCategory, RemoveFromCategory.of(category, staged)));
+                assertThat(productWithoutCategory.getMasterData().hasStagedChanges()).isEqualTo(staged);
+                assertThat(productWithoutCategory.getMasterData().getStaged().getCategories()).isEmpty();
+
+                return productWithoutCategory;
             });
         });
     }
