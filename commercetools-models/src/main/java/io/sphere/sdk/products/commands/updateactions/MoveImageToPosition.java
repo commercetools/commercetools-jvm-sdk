@@ -1,6 +1,5 @@
 package io.sphere.sdk.products.commands.updateactions;
 
-import io.sphere.sdk.commands.UpdateActionImpl;
 import io.sphere.sdk.products.Product;
 import io.sphere.sdk.products.ProductVariant;
 
@@ -16,7 +15,7 @@ import javax.annotation.Nullable;
  *
  *  @see ProductVariant#getImages()
  */
-public final class MoveImageToPosition extends UpdateActionImpl<Product> {
+public final class MoveImageToPosition extends StagedProductUpdateActionImpl<Product> {
     @Nullable
     private final Integer variantId;
     private final String imageUrl;
@@ -25,8 +24,8 @@ public final class MoveImageToPosition extends UpdateActionImpl<Product> {
     private final String sku;
 
 
-    private MoveImageToPosition(final Integer position, final String imageUrl, @Nullable final Integer variantId, @Nullable final String sku) {
-        super("moveImageToPosition");
+    private MoveImageToPosition(final Integer position, final String imageUrl, @Nullable final Integer variantId, @Nullable final String sku, @Nullable final Boolean staged) {
+        super("moveImageToPosition", staged);
         this.position = position;
         this.imageUrl = imageUrl;
         this.variantId = variantId;
@@ -34,11 +33,19 @@ public final class MoveImageToPosition extends UpdateActionImpl<Product> {
     }
 
     public static MoveImageToPosition ofImageUrlAndVariantId(final String imageUrl, final Integer variantId, final Integer position) {
-        return new MoveImageToPosition(position, imageUrl, variantId, null);
+        return ofImageUrlAndVariantId(imageUrl, variantId, position, true);
+    }
+
+    public static MoveImageToPosition ofImageUrlAndVariantId(final String imageUrl, final Integer variantId, final Integer position, @Nullable final Boolean staged) {
+        return new MoveImageToPosition(position, imageUrl, variantId, null, staged);
     }
 
     public static MoveImageToPosition ofImageUrlAndSku(final String imageUrl, final String sku, final Integer position) {
-        return new MoveImageToPosition(position, imageUrl, null, sku);
+        return ofImageUrlAndSku(imageUrl, sku, position, true);
+    }
+
+    public static MoveImageToPosition ofImageUrlAndSku(final String imageUrl, final String sku, final Integer position, @Nullable final Boolean staged) {
+        return new MoveImageToPosition(position, imageUrl, null, sku, staged);
     }
 
     @Nullable

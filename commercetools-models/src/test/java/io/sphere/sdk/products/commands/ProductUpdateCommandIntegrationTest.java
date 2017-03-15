@@ -75,6 +75,7 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
                     .map(image -> image.getUrl())
                     .collect(toList());
             assertThat(oldImageOrderUrls).containsExactly(url1, url2, url3);
+            assertThat(product.getMasterData().hasStagedChanges()).isFalse();
 
             final Integer position = 0;
             final List<Image> images = product.getMasterData().getStaged().getMasterVariant().getImages();
@@ -87,6 +88,42 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
                     .map(image -> image.getUrl())
                     .collect(toList());
             assertThat(urls).containsExactly(url2, url1, url3);
+            assertThat(updatedProduct.getMasterData().hasStagedChanges()).isTrue();
+
+            return updatedProduct;
+        });
+    }
+
+    @Test
+    public void moveImageToPositionByVariantIdWithStaged() {
+        moveImageToPositionByVariantIdWithStaged(true);
+        moveImageToPositionByVariantIdWithStaged(false);
+    }
+
+    public void moveImageToPositionByVariantIdWithStaged(final Boolean staged) {
+        final String url1 = "http://www.commercetools.com/ct_logo_farbe_1.gif";
+        final String url2 = "http://www.commercetools.com/ct_logo_farbe_2.gif";
+        final String url3 = "http://www.commercetools.com/ct_logo_farbe_3.gif";
+        withProductWithImages(client(), url1, url2, url3, (Product product) -> {
+            final List<String> oldImageOrderUrls = product.getMasterData().getStaged().getMasterVariant().getImages()
+                    .stream()
+                    .map(image -> image.getUrl())
+                    .collect(toList());
+            assertThat(oldImageOrderUrls).containsExactly(url1, url2, url3);
+            assertThat(product.getMasterData().hasStagedChanges()).isFalse();
+
+            final Integer position = 0;
+            final List<Image> images = product.getMasterData().getStaged().getMasterVariant().getImages();
+            final ProductUpdateCommand cmd = ProductUpdateCommand.of(product, MoveImageToPosition.ofImageUrlAndVariantId(images.get(1).getUrl(), MASTER_VARIANT_ID, position, staged));
+
+            final Product updatedProduct = client().executeBlocking(cmd);
+
+            final List<String> urls = updatedProduct.getMasterData().getStaged().getMasterVariant().getImages()
+                    .stream()
+                    .map(image -> image.getUrl())
+                    .collect(toList());
+            assertThat(urls).containsExactly(url2, url1, url3);
+            assertThat(updatedProduct.getMasterData().hasStagedChanges()).isEqualTo(staged);
 
             return updatedProduct;
         });
@@ -103,6 +140,7 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
                     .map(image -> image.getUrl())
                     .collect(toList());
             assertThat(oldImageOrderUrls).containsExactly(url1, url2, url3);
+            assertThat(product.getMasterData().hasStagedChanges()).isFalse();
 
             final Integer position = 0;
             final ProductVariant masterVariant = product.getMasterData().getStaged().getMasterVariant();
@@ -116,6 +154,43 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
                     .map(image -> image.getUrl())
                     .collect(toList());
             assertThat(urls).containsExactly(url2, url1, url3);
+            assertThat(updatedProduct.getMasterData().hasStagedChanges()).isTrue();
+
+            return updatedProduct;
+        });
+    }
+
+    @Test
+    public void moveImageToPositionBySkuWithStaged() {
+        moveImageToPositionBySkuWithStaged(true);
+        moveImageToPositionBySkuWithStaged(false);
+    }
+
+    public void moveImageToPositionBySkuWithStaged(final Boolean staged) {
+        final String url1 = "http://www.commercetools.com/ct_logo_farbe_1.gif";
+        final String url2 = "http://www.commercetools.com/ct_logo_farbe_2.gif";
+        final String url3 = "http://www.commercetools.com/ct_logo_farbe_3.gif";
+        withProductWithImages(client(), url1, url2, url3, (Product product) -> {
+            final List<String> oldImageOrderUrls = product.getMasterData().getStaged().getMasterVariant().getImages()
+                    .stream()
+                    .map(image -> image.getUrl())
+                    .collect(toList());
+            assertThat(oldImageOrderUrls).containsExactly(url1, url2, url3);
+            assertThat(product.getMasterData().hasStagedChanges()).isFalse();
+
+            final Integer position = 0;
+            final ProductVariant masterVariant = product.getMasterData().getStaged().getMasterVariant();
+            final List<Image> images = masterVariant.getImages();
+            final ProductUpdateCommand cmd = ProductUpdateCommand.of(product, MoveImageToPosition.ofImageUrlAndSku(images.get(1).getUrl(), masterVariant.getSku(), position, staged));
+
+            final Product updatedProduct = client().executeBlocking(cmd);
+
+            final List<String> urls = updatedProduct.getMasterData().getStaged().getMasterVariant().getImages()
+                    .stream()
+                    .map(image -> image.getUrl())
+                    .collect(toList());
+            assertThat(urls).containsExactly(url2, url1, url3);
+            assertThat(updatedProduct.getMasterData().hasStagedChanges()).isEqualTo(staged);
 
             return updatedProduct;
         });
