@@ -809,6 +809,28 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
     }
 
     @Test
+    public void removeImageByVariantIdWithStaged() {
+        removeImageByVariantIdWithStaged(true);
+        removeImageByVariantIdWithStaged(false);
+    }
+
+    public void removeImageByVariantIdWithStaged(final Boolean staged) {
+        final Image image = Image.ofWidthAndHeight("http://www.commercetools.com/assets/img/ct_logo_farbe.gif", 460, 102, "commercetools logo");
+        withUpdateableProduct(client(), product -> {
+            assertThat(product.getMasterData().hasStagedChanges()).isFalse();
+            final Product productWithImage = client().executeBlocking(ProductUpdateCommand.of(product, AddExternalImage.ofVariantId(MASTER_VARIANT_ID, image, staged)));
+            assertThat(productWithImage.getMasterData().getStaged().getMasterVariant().getImages()).isEqualTo(asList(image));
+            assertThat(productWithImage.getMasterData().hasStagedChanges()).isEqualTo(staged);
+
+            final Product publishedProduct = client().executeBlocking(ProductUpdateCommand.of(productWithImage, Publish.of()));
+            final Product updatedProduct = client().executeBlocking(ProductUpdateCommand.of(publishedProduct, RemoveImage.ofVariantId(MASTER_VARIANT_ID, image, staged)));
+            assertThat(updatedProduct.getMasterData().getStaged().getMasterVariant().getImages()).hasSize(0);
+            assertThat(updatedProduct.getMasterData().hasStagedChanges()).isEqualTo(staged);
+            return updatedProduct;
+        });
+    }
+
+    @Test
     public void removeImageBySku() throws Exception {
         final Image image = Image.ofWidthAndHeight("http://www.commercetools.com/assets/img/ct_logo_farbe.gif", 460, 102, "commercetools logo");
         withUpdateableProduct(client(), product -> {
@@ -818,6 +840,29 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
 
             final Product updatedProduct = client().executeBlocking(ProductUpdateCommand.of(productWithImage, RemoveImage.ofSku(sku, image)));
             assertThat(updatedProduct.getMasterData().getStaged().getMasterVariant().getImages()).hasSize(0);
+            return updatedProduct;
+        });
+    }
+
+    @Test
+    public void removeImageBySkuWithStaged() {
+        removeImageBySkuWithStaged(true);
+        removeImageBySkuWithStaged(false);
+    }
+
+    public void removeImageBySkuWithStaged(final Boolean staged) {
+        final Image image = Image.ofWidthAndHeight("http://www.commercetools.com/assets/img/ct_logo_farbe.gif", 460, 102, "commercetools logo");
+        withUpdateableProduct(client(), product -> {
+            assertThat(product.getMasterData().hasStagedChanges()).isFalse();
+            final String sku = product.getMasterData().getStaged().getMasterVariant().getSku();
+            final Product productWithImage = client().executeBlocking(ProductUpdateCommand.of(product, AddExternalImage.ofSku(sku, image, staged)));
+            assertThat(productWithImage.getMasterData().getStaged().getMasterVariant().getImages()).isEqualTo(asList(image));
+            assertThat(productWithImage.getMasterData().hasStagedChanges()).isEqualTo(staged);
+
+            final Product publishedProduct = client().executeBlocking(ProductUpdateCommand.of(productWithImage, Publish.of()));
+            final Product updatedProduct = client().executeBlocking(ProductUpdateCommand.of(publishedProduct, RemoveImage.ofSku(sku, image, staged)));
+            assertThat(updatedProduct.getMasterData().getStaged().getMasterVariant().getImages()).hasSize(0);
+            assertThat(updatedProduct.getMasterData().hasStagedChanges()).isEqualTo(staged);
             return updatedProduct;
         });
     }
