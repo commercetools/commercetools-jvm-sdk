@@ -138,11 +138,33 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
     public void addExternalImageByVariantId() throws Exception {
         withUpdateableProduct(client(), (Product product) -> {
             assertThat(product.getMasterData().getStaged().getMasterVariant().getImages()).hasSize(0);
+            assertThat(product.getMasterData().hasStagedChanges()).isFalse();
 
             final Image image = Image.ofWidthAndHeight("http://www.commercetools.com/assets/img/ct_logo_farbe.gif", 460, 102, "commercetools logo");
             final Product updatedProduct = client().executeBlocking(ProductUpdateCommand.of(product, AddExternalImage.ofVariantId(MASTER_VARIANT_ID, image)));
 
             assertThat(updatedProduct.getMasterData().getStaged().getMasterVariant().getImages()).isEqualTo(asList(image));
+            assertThat(updatedProduct.getMasterData().hasStagedChanges()).isTrue();
+            return updatedProduct;
+        });
+    }
+
+    @Test
+    public void addExternalImageByVariantIdWithStaged() {
+        addExternalImageByVariantIdWithStaged(true);
+        addExternalImageByVariantIdWithStaged(false);
+    }
+
+    public void addExternalImageByVariantIdWithStaged(final Boolean staged) {
+        withUpdateableProduct(client(), (Product product) -> {
+            assertThat(product.getMasterData().getStaged().getMasterVariant().getImages()).hasSize(0);
+            assertThat(product.getMasterData().hasStagedChanges()).isFalse();
+
+            final Image image = Image.ofWidthAndHeight("http://www.commercetools.com/assets/img/ct_logo_farbe.gif", 460, 102, "commercetools logo");
+            final Product updatedProduct = client().executeBlocking(ProductUpdateCommand.of(product, AddExternalImage.ofVariantId(MASTER_VARIANT_ID, image, staged)));
+
+            assertThat(updatedProduct.getMasterData().getStaged().getMasterVariant().getImages()).isEqualTo(asList(image));
+            assertThat(updatedProduct.getMasterData().hasStagedChanges()).isEqualTo(staged);
             return updatedProduct;
         });
     }
@@ -152,11 +174,34 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
         withUpdateableProduct(client(), (Product product) -> {
             final ProductVariant masterVariant = product.getMasterData().getStaged().getMasterVariant();
             assertThat(masterVariant.getImages()).hasSize(0);
+            assertThat(product.getMasterData().hasStagedChanges()).isFalse();
 
             final Image image = Image.ofWidthAndHeight("http://www.commercetools.com/assets/img/ct_logo_farbe.gif", 460, 102, "commercetools logo");
             final Product updatedProduct = client().executeBlocking(ProductUpdateCommand.of(product, AddExternalImage.ofSku(masterVariant.getSku(), image)));
 
             assertThat(updatedProduct.getMasterData().getStaged().getMasterVariant().getImages()).isEqualTo(asList(image));
+            assertThat(updatedProduct.getMasterData().hasStagedChanges()).isTrue();
+            return updatedProduct;
+        });
+    }
+
+    @Test
+    public void addExternalImageBySkuWithStaged() {
+        addExternalImageBySkuWithStaged(true);
+        addExternalImageBySkuWithStaged(false);
+    }
+
+    public void addExternalImageBySkuWithStaged(final Boolean staged) {
+        withUpdateableProduct(client(), (Product product) -> {
+            final ProductVariant masterVariant = product.getMasterData().getStaged().getMasterVariant();
+            assertThat(masterVariant.getImages()).hasSize(0);
+            assertThat(product.getMasterData().hasStagedChanges()).isFalse();
+
+            final Image image = Image.ofWidthAndHeight("http://www.commercetools.com/assets/img/ct_logo_farbe.gif", 460, 102, "commercetools logo");
+            final Product updatedProduct = client().executeBlocking(ProductUpdateCommand.of(product, AddExternalImage.ofSku(masterVariant.getSku(), image, staged)));
+
+            assertThat(updatedProduct.getMasterData().getStaged().getMasterVariant().getImages()).isEqualTo(asList(image));
+            assertThat(updatedProduct.getMasterData().hasStagedChanges()).isEqualTo(staged);
             return updatedProduct;
         });
     }
