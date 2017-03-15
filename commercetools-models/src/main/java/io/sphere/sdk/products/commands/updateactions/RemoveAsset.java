@@ -1,6 +1,5 @@
 package io.sphere.sdk.products.commands.updateactions;
 
-import io.sphere.sdk.commands.UpdateActionImpl;
 import io.sphere.sdk.products.Product;
 
 import javax.annotation.Nullable;
@@ -16,15 +15,15 @@ import javax.annotation.Nullable;
  * <p>By SKU (attention, SKU is optional field in a variant):</p>
  * {@include.example io.sphere.sdk.products.commands.ProductUpdateCommandIntegrationTest#removeAssetBySku()}
  */
-public final class RemoveAsset extends UpdateActionImpl<Product> {
+public final class RemoveAsset extends StagedProductUpdateActionImpl<Product> {
     @Nullable
     private final Integer variantId;
     @Nullable
     private final String sku;
     private final String assetId;
 
-    private RemoveAsset(final String assetId, @Nullable final Integer variantId, @Nullable final String sku) {
-        super("removeAsset");
+    private RemoveAsset(final String assetId, @Nullable final Integer variantId, @Nullable final String sku, @Nullable final Boolean staged) {
+        super("removeAsset", staged);
         this.assetId = assetId;
         this.variantId = variantId;
         this.sku = sku;
@@ -45,10 +44,18 @@ public final class RemoveAsset extends UpdateActionImpl<Product> {
     }
 
     public static RemoveAsset ofVariantId(final Integer variantId, final String assetId) {
-        return new RemoveAsset(assetId, variantId, null);
+        return ofVariantId(variantId, assetId, true);
+    }
+
+    public static RemoveAsset ofVariantId(final Integer variantId, final String assetId, @Nullable final Boolean staged) {
+        return new RemoveAsset(assetId, variantId, null, staged);
     }
 
     public static RemoveAsset ofSku(final String sku, final String assetId) {
-        return new RemoveAsset(assetId, null, sku);
+        return ofSku(sku, assetId, true);
+    }
+
+    public static RemoveAsset ofSku(final String sku, final String assetId, @Nullable final Boolean staged) {
+        return new RemoveAsset(assetId, null, sku, staged);
     }
 }

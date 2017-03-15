@@ -1907,6 +1907,7 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
     @Test
     public void removeAssetByVariantId() {
         withProductHavingAssets(client(), product -> {
+            assertThat(product.getMasterData().hasStagedChanges()).isFalse();
             final List<Asset> originalAssets = product.getMasterData().getStaged().getMasterVariant().getAssets();
             final Asset assetToRemove = originalAssets.get(0);
             final String assetId = assetToRemove.getId();
@@ -1915,6 +1916,30 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
             final List<Asset> assets = updatedProduct.getMasterData().getStaged().getMasterVariant().getAssets();
             assertThat(assets).hasSize(originalAssets.size() - 1);
             assertThat(assets).allMatch(asset -> !asset.getId().equals(assetId));
+            assertThat(updatedProduct.getMasterData().hasStagedChanges()).isTrue();
+
+            return updatedProduct;
+        });
+    }
+
+    @Test
+    public void removeAssetByVariantIdWithStaged() {
+        removeAssetByVariantIdWithStaged(true);
+        removeAssetByVariantIdWithStaged(false);
+    }
+
+    public void removeAssetByVariantIdWithStaged(final Boolean staged) {
+        withProductHavingAssets(client(), product -> {
+            assertThat(product.getMasterData().hasStagedChanges()).isFalse();
+            final List<Asset> originalAssets = product.getMasterData().getStaged().getMasterVariant().getAssets();
+            final Asset assetToRemove = originalAssets.get(0);
+            final String assetId = assetToRemove.getId();
+            final Product updatedProduct = client().executeBlocking(ProductUpdateCommand.of(product, RemoveAsset.ofVariantId(MASTER_VARIANT_ID, assetId, staged)));
+
+            final List<Asset> assets = updatedProduct.getMasterData().getStaged().getMasterVariant().getAssets();
+            assertThat(assets).hasSize(originalAssets.size() - 1);
+            assertThat(assets).allMatch(asset -> !asset.getId().equals(assetId));
+            assertThat(updatedProduct.getMasterData().hasStagedChanges()).isEqualTo(staged);
 
             return updatedProduct;
         });
@@ -1923,6 +1948,7 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
     @Test
     public void removeAssetBySku() {
         withProductHavingAssets(client(), product -> {
+            assertThat(product.getMasterData().hasStagedChanges()).isFalse();
             final ProductVariant masterVariant = product.getMasterData().getStaged().getMasterVariant();
             final String assetId = masterVariant.getAssets().get(0).getId();
             final String sku = masterVariant.getSku();
@@ -1930,6 +1956,29 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
 
             final List<Asset> assets = updatedProduct.getMasterData().getStaged().getMasterVariant().getAssets();
             assertThat(assets).allMatch(asset -> !asset.getId().equals(assetId));
+            assertThat(updatedProduct.getMasterData().hasStagedChanges()).isTrue();
+
+            return updatedProduct;
+        });
+    }
+
+    @Test
+    public void removeAssetBySkuWithStaged() {
+        removeAssetBySkuWithStaged(true);
+        removeAssetBySkuWithStaged(false);
+    }
+
+    public void removeAssetBySkuWithStaged(final Boolean staged) {
+        withProductHavingAssets(client(), product -> {
+            assertThat(product.getMasterData().hasStagedChanges()).isFalse();
+            final ProductVariant masterVariant = product.getMasterData().getStaged().getMasterVariant();
+            final String assetId = masterVariant.getAssets().get(0).getId();
+            final String sku = masterVariant.getSku();
+            final Product updatedProduct = client().executeBlocking(ProductUpdateCommand.of(product, RemoveAsset.ofSku(sku, assetId, staged)));
+
+            final List<Asset> assets = updatedProduct.getMasterData().getStaged().getMasterVariant().getAssets();
+            assertThat(assets).allMatch(asset -> !asset.getId().equals(assetId));
+            assertThat(updatedProduct.getMasterData().hasStagedChanges()).isEqualTo(staged);
 
             return updatedProduct;
         });
