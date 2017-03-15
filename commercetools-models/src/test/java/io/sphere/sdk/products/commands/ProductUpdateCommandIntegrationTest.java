@@ -1987,6 +1987,7 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
     @Test
     public void changeAssetOrderByVariantId() {
         withProductHavingAssets(client(), product -> {
+            assertThat(product.getMasterData().hasStagedChanges()).isFalse();
             final List<Asset> originalAssets = product.getMasterData().getStaged().getMasterVariant().getAssets();
 
             final List<String> newAssetOrder =
@@ -1999,6 +2000,34 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
 
             final List<Asset> assets = updatedProduct.getMasterData().getStaged().getMasterVariant().getAssets();
             assertThat(assets).extracting(Asset::getId).isEqualTo(newAssetOrder);
+            assertThat(updatedProduct.getMasterData().hasStagedChanges()).isTrue();
+
+            return updatedProduct;
+        });
+    }
+
+    @Test
+    public void changeAssetOrderByVariantIdWithStaged() {
+        changeAssetOrderByVariantIdWithStaged(true);
+        changeAssetOrderByVariantIdWithStaged(false);
+    }
+
+    public void changeAssetOrderByVariantIdWithStaged(final Boolean staged) {
+        withProductHavingAssets(client(), product -> {
+            assertThat(product.getMasterData().hasStagedChanges()).isFalse();
+            final List<Asset> originalAssets = product.getMasterData().getStaged().getMasterVariant().getAssets();
+
+            final List<String> newAssetOrder =
+                    new LinkedList<>(originalAssets.stream().map(Asset::getId).collect(toList()));
+            Collections.reverse(newAssetOrder);
+
+            final ProductUpdateCommand cmd =
+                    ProductUpdateCommand.of(product, ChangeAssetOrder.ofVariantId(MASTER_VARIANT_ID, newAssetOrder, staged));
+            final Product updatedProduct = client().executeBlocking(cmd);
+
+            final List<Asset> assets = updatedProduct.getMasterData().getStaged().getMasterVariant().getAssets();
+            assertThat(assets).extracting(Asset::getId).isEqualTo(newAssetOrder);
+            assertThat(updatedProduct.getMasterData().hasStagedChanges()).isEqualTo(staged);
 
             return updatedProduct;
         });
@@ -2007,6 +2036,7 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
     @Test
     public void changeAssetOrderBySku() {
         withProductHavingAssets(client(), product -> {
+            assertThat(product.getMasterData().hasStagedChanges()).isFalse();
             final ProductVariant masterVariant = product.getMasterData().getStaged().getMasterVariant();
             final List<Asset> originalAssets = masterVariant.getAssets();
 
@@ -2020,6 +2050,35 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
 
             final List<Asset> assets = updatedProduct.getMasterData().getStaged().getMasterVariant().getAssets();
             assertThat(assets).extracting(Asset::getId).isEqualTo(newAssetOrder);
+            assertThat(updatedProduct.getMasterData().hasStagedChanges()).isTrue();
+
+            return updatedProduct;
+        });
+    }
+
+    @Test
+    public void changeAssetOrderBySkuWithStaged() {
+        changeAssetOrderBySkuWithStaged(true);
+        changeAssetOrderBySkuWithStaged(false);
+    }
+
+    public void changeAssetOrderBySkuWithStaged(final Boolean staged) {
+        withProductHavingAssets(client(), product -> {
+            assertThat(product.getMasterData().hasStagedChanges()).isFalse();
+            final ProductVariant masterVariant = product.getMasterData().getStaged().getMasterVariant();
+            final List<Asset> originalAssets = masterVariant.getAssets();
+
+            final List<String> newAssetOrder =
+                    new LinkedList<>(originalAssets.stream().map(Asset::getId).collect(toList()));
+            Collections.reverse(newAssetOrder);
+
+            final ProductUpdateCommand cmd =
+                    ProductUpdateCommand.of(product, ChangeAssetOrder.ofSku(masterVariant.getSku(), newAssetOrder, staged));
+            final Product updatedProduct = client().executeBlocking(cmd);
+
+            final List<Asset> assets = updatedProduct.getMasterData().getStaged().getMasterVariant().getAssets();
+            assertThat(assets).extracting(Asset::getId).isEqualTo(newAssetOrder);
+            assertThat(updatedProduct.getMasterData().hasStagedChanges()).isEqualTo(staged);
 
             return updatedProduct;
         });
