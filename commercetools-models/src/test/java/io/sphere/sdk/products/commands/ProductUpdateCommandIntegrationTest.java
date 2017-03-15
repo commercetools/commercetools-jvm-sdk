@@ -1831,6 +1831,7 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
     @Test
     public void setAttributeWithObjects() {
         withProduct(client(), (Product product) -> {
+            assertThat(product.getMasterData().hasStagedChanges()).isFalse();
             final String sku = product.getMasterData().getStaged().getMasterVariant().getSku();
             final Product updatedProduct = client().executeBlocking(ProductUpdateCommand.of(product, asList(
                     SetAttribute.ofSku(sku, "size", "M"),
@@ -1839,6 +1840,28 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
             final ProductVariant masterVariant = updatedProduct.getMasterData().getStaged().getMasterVariant();
             assertThat(masterVariant.getAttribute("size").getValueAsEnumValue()).isEqualTo(EnumValue.of("M", "M"));
             assertThat(masterVariant.getAttribute("color").getValueAsLocalizedEnumValue().getKey()).isEqualTo("red");
+            assertThat(updatedProduct.getMasterData().hasStagedChanges()).isTrue();
+        });
+    }
+
+    @Test
+    public void setAttributeWithObjectsWithStaged() {
+        setAttributeWithObjectsWithStaged(true);
+        setAttributeWithObjectsWithStaged(false);
+    }
+
+    public void setAttributeWithObjectsWithStaged(final Boolean staged) {
+        withProduct(client(), (Product product) -> {
+            assertThat(product.getMasterData().hasStagedChanges()).isFalse();
+            final String sku = product.getMasterData().getStaged().getMasterVariant().getSku();
+            final Product updatedProduct = client().executeBlocking(ProductUpdateCommand.of(product, asList(
+                    SetAttribute.ofSku(sku, "size", "M", staged),
+                    SetAttribute.ofVariantId(MASTER_VARIANT_ID, "color", "red", staged)
+            )));
+            final ProductVariant masterVariant = updatedProduct.getMasterData().getStaged().getMasterVariant();
+            assertThat(masterVariant.getAttribute("size").getValueAsEnumValue()).isEqualTo(EnumValue.of("M", "M"));
+            assertThat(masterVariant.getAttribute("color").getValueAsLocalizedEnumValue().getKey()).isEqualTo("red");
+            assertThat(updatedProduct.getMasterData().hasStagedChanges()).isEqualTo(staged);
         });
     }
 
