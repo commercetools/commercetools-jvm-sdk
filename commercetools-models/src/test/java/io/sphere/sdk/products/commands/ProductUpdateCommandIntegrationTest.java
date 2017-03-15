@@ -1622,12 +1622,33 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
     public void setProductVariantKeyByVariantId() throws Exception {
         final String key = randomKey();
         withProduct(client(), (Product product) -> {
+            assertThat(product.getMasterData().hasStagedChanges()).isFalse();
             final Integer variantId = product.getMasterData().getStaged().getMasterVariant().getId();
             final ProductUpdateCommand cmd =
                     ProductUpdateCommand.of(product, SetProductVariantKey.ofKeyAndVariantId(key, variantId));
             final Product updatedProduct = client().executeBlocking(cmd);
             assertThat(updatedProduct.getMasterData().getStaged().getMasterVariant().getKey()).isEqualTo(key);
             assertThat(updatedProduct.getKey()).isNotEqualTo(key);
+            assertThat(updatedProduct.getMasterData().hasStagedChanges()).isTrue();
+        });
+    }
+
+    @Test
+    public void setProductVariantKeyByVariantIdWithStaged() {
+        setProductVariantKeyByVariantIdWithStaged(true);
+        setProductVariantKeyByVariantIdWithStaged(false);
+    }
+
+    public void setProductVariantKeyByVariantIdWithStaged(final Boolean staged) {
+        final String key = randomKey();
+        withProduct(client(), (Product product) -> {
+            assertThat(product.getMasterData().hasStagedChanges()).isFalse();
+            final Integer variantId = product.getMasterData().getStaged().getMasterVariant().getId();
+            final ProductUpdateCommand cmd =
+                    ProductUpdateCommand.of(product, SetProductVariantKey.ofKeyAndVariantId(key, variantId, staged));
+            final Product updatedProduct = client().executeBlocking(cmd);
+            assertThat(updatedProduct.getMasterData().getStaged().getMasterVariant().getKey()).isEqualTo(key);
+            assertThat(updatedProduct.getMasterData().hasStagedChanges()).isEqualTo(staged);
         });
     }
 
@@ -1635,12 +1656,33 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
     public void setProductVariantKeyBySku() throws Exception {
         final String key = randomKey();
         withProduct(client(), (Product product) -> {
+            assertThat(product.getMasterData().hasStagedChanges()).isFalse();
             final String sku = product.getMasterData().getStaged().getMasterVariant().getSku();
             final ProductUpdateCommand cmd =
                     ProductUpdateCommand.of(product, SetProductVariantKey.ofKeyAndSku(key, sku));
             final Product updatedProduct = client().executeBlocking(cmd);
             assertThat(updatedProduct.getMasterData().getStaged().getMasterVariant().getKey()).isEqualTo(key);
             assertThat(updatedProduct.getKey()).isNotEqualTo(key);
+            assertThat(updatedProduct.getMasterData().hasStagedChanges()).isTrue();
+        });
+    }
+
+    @Test
+    public void setProductVariantKeyBySkuWithStaged() {
+        setProductVariantKeyBySkuWithStaged(true);
+        setProductVariantKeyBySkuWithStaged(false);
+    }
+
+    public void setProductVariantKeyBySkuWithStaged(final Boolean staged) {
+        final String key = randomKey();
+        withProduct(client(), (Product product) -> {
+            assertThat(product.getMasterData().hasStagedChanges()).isFalse();
+            final String sku = product.getMasterData().getStaged().getMasterVariant().getSku();
+            final ProductUpdateCommand cmd =
+                    ProductUpdateCommand.of(product, SetProductVariantKey.ofKeyAndSku(key, sku, staged));
+            final Product updatedProduct = client().executeBlocking(cmd);
+            assertThat(updatedProduct.getMasterData().getStaged().getMasterVariant().getKey()).isEqualTo(key);
+            assertThat(updatedProduct.getMasterData().hasStagedChanges()).isEqualTo(staged);
         });
     }
 
