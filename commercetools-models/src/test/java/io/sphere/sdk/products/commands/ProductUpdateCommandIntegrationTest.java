@@ -485,6 +485,34 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
     }
 
     @Test
+    public void setCategoryOrderHintWithStaged() {
+        setCategoryOrderHintWithStaged(true);
+        setCategoryOrderHintWithStaged(false);
+    }
+
+    public void setCategoryOrderHintWithStaged(final Boolean staged) {
+        withCategory(client(), category -> {
+            withUpdateableProduct(client(), product -> {
+                assertThat(product.getMasterData().getStaged().getCategories()).isEmpty();
+
+                final String orderHint = "0.123";
+                final Product productWithCategory = client()
+                        .executeBlocking(ProductUpdateCommand.of(product, AddToCategory.of(category, orderHint, false)));
+                assertThat(productWithCategory.getMasterData().hasStagedChanges()).isFalse();
+
+                final Product updatedProduct = client().executeBlocking(ProductUpdateCommand.of(productWithCategory, SetCategoryOrderHint.of(category.getId(), "0.1234", staged)));
+
+                final CategoryOrderHints actual = updatedProduct.getMasterData().getStaged().getCategoryOrderHints();
+                assertThat(actual).isEqualTo(CategoryOrderHints.of(category.getId(), "0.1234"));
+                assertThat(actual.getAsMap()).isEqualTo(Collections.singletonMap(category.getId(), "0.1234"));
+
+                assertThat(updatedProduct.getMasterData().hasStagedChanges()).isEqualTo(staged);
+                return productWithCategory;
+            });
+        });
+    }
+
+    @Test
     public void productUpdateByKey() throws Exception {
         final String key = randomKey();
         withUpdateableProduct(client(), builder -> builder.key(key), product -> {
