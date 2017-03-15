@@ -1,7 +1,6 @@
 package io.sphere.sdk.products.commands.updateactions;
 
 import io.sphere.sdk.categories.Category;
-import io.sphere.sdk.commands.UpdateActionImpl;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Referenceable;
 import io.sphere.sdk.products.Product;
@@ -20,13 +19,13 @@ import javax.annotation.Nullable;
  * @see ProductProjection#getCategories()
  * @see io.sphere.sdk.products.ProductData#getCategories()
  */
-public final class AddToCategory extends UpdateActionImpl<Product> {
+public final class AddToCategory extends StagedProductUpdateActionImpl<Product> {
     private final Reference<Category> category;
     @Nullable
     private final String orderHint;
 
-    private AddToCategory(final Reference<Category> category, @Nullable final String orderHint) {
-        super("addToCategory");
+    private AddToCategory(final Reference<Category> category, @Nullable final String orderHint, @Nullable final Boolean staged) {
+        super("addToCategory", staged);
         this.category = category;
         this.orderHint = orderHint;
     }
@@ -36,11 +35,19 @@ public final class AddToCategory extends UpdateActionImpl<Product> {
     }
 
     public static AddToCategory of(final Referenceable<Category> category) {
-        return new AddToCategory(category.toReference(), null);
+        return of(category, true);
+    }
+
+    public static AddToCategory of(final Referenceable<Category> category, @Nullable final Boolean staged) {
+        return new AddToCategory(category.toReference(), null, staged);
     }
 
     public static AddToCategory of(final Referenceable<Category> category, final String orderHint) {
-        return new AddToCategory(category.toReference(), orderHint);
+        return of(category, orderHint, true);
+    }
+
+    public static AddToCategory of(final Referenceable<Category> category, final String orderHint, @Nullable final Boolean staged) {
+        return new AddToCategory(category.toReference(), orderHint, staged);
     }
 
     @Nullable

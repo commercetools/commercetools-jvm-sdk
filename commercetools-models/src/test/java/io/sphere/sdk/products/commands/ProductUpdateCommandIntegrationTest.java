@@ -43,6 +43,7 @@ import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
+import static io.sphere.sdk.categories.CategoryFixtures.withCategory;
 import static io.sphere.sdk.models.DefaultCurrencyUnits.EUR;
 import static io.sphere.sdk.productdiscounts.ProductDiscountFixtures.withProductDiscount;
 import static io.sphere.sdk.products.ProductFixtures.*;
@@ -447,6 +448,28 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
                     .executeBlocking(ProductUpdateCommand.of(productWithCategory, RemoveFromCategory.of(category)));
 
             assertThat(productWithoutCategory.getMasterData().getStaged().getCategories()).isEmpty();
+        });
+    }
+
+    @Test
+    public void addToCategoryWithStaged() {
+        addToCategoryWithStaged(true);
+        addToCategoryWithStaged(false);
+    }
+
+    public void addToCategoryWithStaged(final Boolean staged) {
+        withCategory(client(), category -> {
+            withUpdateableProduct(client(), product -> {
+                assertThat(product.getMasterData().getStaged().getCategories()).isEmpty();
+                assertThat(product.getMasterData().hasStagedChanges()).isFalse();
+
+                final String orderHint = "0.123";
+                final Product productWithCategory = client()
+                        .executeBlocking(ProductUpdateCommand.of(product, AddToCategory.of(category, orderHint, staged)));
+
+                assertThat(productWithCategory.getMasterData().hasStagedChanges()).isEqualTo(staged);
+                return productWithCategory;
+            });
         });
     }
 
