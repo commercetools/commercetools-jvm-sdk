@@ -1568,6 +1568,7 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
         withProductOfSku(oldSku, (Product product) -> {
             assertThat(product.getMasterData().getStaged().getMasterVariant().getSku()).isEqualTo(oldSku);
             assertThat(product.getMasterData().getCurrent().getMasterVariant().getSku()).isEqualTo(oldSku);
+            assertThat(product.getMasterData().hasStagedChanges()).isFalse();
 
             final String newSku = randomKey();
 
@@ -1581,6 +1582,29 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
                     .as("update action updates NOT directly in current")
                     .isEqualTo(oldSku)
                     .isNotEqualTo(newSku);
+            assertThat(updatedProduct.getMasterData().hasStagedChanges()).isTrue();
+            return updatedProduct;
+        });
+    }
+
+    @Test
+    public void setSkuWithStaged() {
+        setSkuWithStaged(true);
+        setSkuWithStaged(false);
+    }
+
+    public void setSkuWithStaged(final Boolean staged) {
+        final String oldSku = randomKey();
+        withProductOfSku(oldSku, (Product product) -> {
+            assertThat(product.getMasterData().getStaged().getMasterVariant().getSku()).isEqualTo(oldSku);
+            assertThat(product.getMasterData().getCurrent().getMasterVariant().getSku()).isEqualTo(oldSku);
+            assertThat(product.getMasterData().hasStagedChanges()).isFalse();
+
+            final String newSku = randomKey();
+            final ProductUpdateCommand cmd = ProductUpdateCommand.of(product, SetSku.of(MASTER_VARIANT_ID, newSku, staged));
+            final Product updatedProduct = client().executeBlocking(cmd);
+
+            assertThat(updatedProduct.getMasterData().hasStagedChanges()).isEqualTo(staged);
             return updatedProduct;
         });
     }

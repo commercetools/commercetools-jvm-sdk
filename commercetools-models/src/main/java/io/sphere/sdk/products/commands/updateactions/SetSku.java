@@ -1,6 +1,5 @@
 package io.sphere.sdk.products.commands.updateactions;
 
-import io.sphere.sdk.commands.UpdateActionImpl;
 import io.sphere.sdk.products.Product;
 
 import javax.annotation.Nullable;
@@ -22,13 +21,13 @@ import javax.annotation.Nullable;
  * which updates in staged and current and has been moved to the deprecated class {@link LegacySetSku}.
  * See also <a href="http://dev.commercetools.com/http-api-projects-products.html#set-sku" target="_blank">the HTTP API doc of SetSku.</a>
  */
-public final class SetSku extends UpdateActionImpl<Product> {
+public final class SetSku extends StagedProductUpdateActionImpl<Product> {
     private final Integer variantId;
     @Nullable
     private final String sku;
 
-    private SetSku(final Integer variantId, @Nullable final String sku) {
-        super("setSku");
+    private SetSku(final Integer variantId, @Nullable final String sku, @Nullable final Boolean staged) {
+        super("setSku", staged);
         this.variantId = variantId;
         this.sku = sku;
     }
@@ -43,6 +42,10 @@ public final class SetSku extends UpdateActionImpl<Product> {
     }
 
     public static SetSku of(final Integer variantId, @Nullable final String sku) {
-        return new SetSku(variantId, sku);
+        return of(variantId, sku, true);
+    }
+
+    public static SetSku of(final Integer variantId, @Nullable final String sku, @Nullable final Boolean staged) {
+        return new SetSku(variantId, sku, staged);
     }
 }
