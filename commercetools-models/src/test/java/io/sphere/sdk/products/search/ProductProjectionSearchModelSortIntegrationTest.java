@@ -176,7 +176,7 @@ public class ProductProjectionSearchModelSortIntegrationTest extends ProductProj
 
     @Test
     public void onSku() throws Exception {
-        testProductIds(PRODUCT_MODEL.allVariants().sku().desc(),
+        testProductIds(PRODUCT_MODEL.allVariants().sku().asc(),
                 ids -> assertThat(ids).containsExactly(product1.getId(), product2.getId()));
     }
 
