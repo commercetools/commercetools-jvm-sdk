@@ -21,7 +21,7 @@ public final class ChangeSlug extends StagedProductUpdateActionImpl<Product> {
     }
 
     public static ChangeSlug of(final LocalizedString slug) {
-        return of(slug, true);
+        return of(slug, null);
     }
 
     public static ChangeSlug of(final LocalizedString slug, @Nullable final Boolean staged) {

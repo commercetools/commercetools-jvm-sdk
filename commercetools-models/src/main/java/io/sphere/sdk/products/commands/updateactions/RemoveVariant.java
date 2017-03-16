@@ -49,7 +49,7 @@ public final class RemoveVariant extends StagedProductUpdateActionImpl<Product> 
     }
 
     public static RemoveVariant ofVariantId(final Integer id) {
-        return ofVariantId(id, true);
+        return ofVariantId(id, null);
     }
 
     public static RemoveVariant ofVariantId(final Integer id, @Nullable final Boolean staged) {
@@ -57,7 +57,7 @@ public final class RemoveVariant extends StagedProductUpdateActionImpl<Product> 
     }
 
     public static RemoveVariant ofSku(final String sku) {
-        return ofSku(sku, true);
+        return ofSku(sku, null);
     }
 
     public static RemoveVariant ofSku(final String sku, @Nullable final Boolean staged) {

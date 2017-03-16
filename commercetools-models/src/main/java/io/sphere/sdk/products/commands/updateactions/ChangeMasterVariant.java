@@ -33,7 +33,7 @@ public final class ChangeMasterVariant extends StagedProductUpdateActionImpl<Pro
     }
 
     public static ChangeMasterVariant ofSku(final String sku) {
-        return ofSku(sku, true);
+        return ofSku(sku, null);
     }
 
     public static ChangeMasterVariant ofSku(final String sku, @Nullable final Boolean staged) {
@@ -41,7 +41,7 @@ public final class ChangeMasterVariant extends StagedProductUpdateActionImpl<Pro
     }
 
     public static ChangeMasterVariant ofVariantId(final Integer variantId) {
-        return ofVariantId(variantId, true);
+        return ofVariantId(variantId, null);
     }
 
     public static ChangeMasterVariant ofVariantId(final Integer variantId, @Nullable final Boolean staged) {

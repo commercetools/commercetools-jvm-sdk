@@ -55,11 +55,11 @@ public final class RemoveImage extends StagedProductUpdateActionImpl<Product> {
     }
 
     public static RemoveImage ofVariantId(final Integer variantId, final Image image) {
-        return ofVariantId(variantId, image.getUrl(), true);
+        return ofVariantId(variantId, image.getUrl(), null);
     }
 
     public static RemoveImage ofVariantId(final Integer variantId, final String imageUrl) {
-        return ofVariantId(variantId, imageUrl, true);
+        return ofVariantId(variantId, imageUrl, null);
     }
 
     public static RemoveImage ofVariantId(final Integer variantId, final Image image, @Nullable final Boolean staged) {
@@ -71,7 +71,7 @@ public final class RemoveImage extends StagedProductUpdateActionImpl<Product> {
     }
 
     public static RemoveImage ofSku(final String sku, final Image image) {
-        return ofSku(sku, image.getUrl(), true);
+        return ofSku(sku, image.getUrl(), null);
     }
 
     public static RemoveImage ofSku(final String sku, final Image image, @Nullable final Boolean staged) {
@@ -79,7 +79,7 @@ public final class RemoveImage extends StagedProductUpdateActionImpl<Product> {
     }
 
     public static RemoveImage ofSku(final String sku, final String imageUrl) {
-        return ofSku(sku, imageUrl, true);
+        return ofSku(sku, imageUrl, null);
     }
 
     public static RemoveImage ofSku(final String sku, final String imageUrl, @Nullable final Boolean staged) {

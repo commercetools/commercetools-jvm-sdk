@@ -35,7 +35,7 @@ public final class AddToCategory extends StagedProductUpdateActionImpl<Product> 
     }
 
     public static AddToCategory of(final Referenceable<Category> category) {
-        return of(category, true);
+        return of(category, null, null);
     }
 
     public static AddToCategory of(final Referenceable<Category> category, @Nullable final Boolean staged) {
@@ -43,7 +43,7 @@ public final class AddToCategory extends StagedProductUpdateActionImpl<Product> 
     }
 
     public static AddToCategory of(final Referenceable<Category> category, final String orderHint) {
-        return of(category, orderHint, true);
+        return of(category, orderHint, null);
     }
 
     public static AddToCategory of(final Referenceable<Category> category, final String orderHint, @Nullable final Boolean staged) {

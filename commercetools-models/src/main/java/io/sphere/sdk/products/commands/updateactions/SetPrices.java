@@ -52,7 +52,7 @@ public final class SetPrices extends StagedProductUpdateActionImpl<Product> {
     }
 
     public static SetPrices ofVariantId(final Integer variantId, final List<PriceDraft> prices) {
-        return ofVariantId(variantId, prices, true);
+        return ofVariantId(variantId, prices, null);
     }
 
     public static SetPrices ofVariantId(final Integer variantId, final List<PriceDraft> prices, @Nullable Boolean staged) {
@@ -60,7 +60,7 @@ public final class SetPrices extends StagedProductUpdateActionImpl<Product> {
     }
 
     public static SetPrices ofSku(final String sku, final List<PriceDraft> prices) {
-        return ofSku(sku, prices, true);
+        return ofSku(sku, prices, null);
     }
 
     public static SetPrices ofSku(final String sku, final List<PriceDraft> prices, @Nullable Boolean staged) {

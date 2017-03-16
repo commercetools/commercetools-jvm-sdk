@@ -32,7 +32,7 @@ public final class RemovePrice extends StagedProductUpdateActionImpl<Product> {
      * @return action
      */
     public static RemovePrice of(final Price price) {
-        return of(price, true);
+        return of(price, null);
     }
 
     public static RemovePrice of(final Price price, @Nullable final Boolean staged) {
@@ -40,7 +40,7 @@ public final class RemovePrice extends StagedProductUpdateActionImpl<Product> {
     }
 
     public static RemovePrice of(final String priceId) {
-        return of(priceId, true);
+        return of(priceId, null);
     }
 
     public static RemovePrice of(final String priceId, @Nullable final Boolean staged) {

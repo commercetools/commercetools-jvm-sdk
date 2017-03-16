@@ -21,7 +21,7 @@ public final class ChangeName extends StagedProductUpdateActionImpl<Product> {
     }
 
     public static ChangeName of(final LocalizedString name) {
-        return of(name, true);
+        return of(name, null);
     }
 
     public static ChangeName of(final LocalizedString name, @Nullable final Boolean staged) {

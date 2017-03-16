@@ -66,7 +66,7 @@ public final class SetAttribute extends StagedProductUpdateActionImpl<Product> {
      * @return update action
      */
     public static SetAttribute of(final Integer variantId, final String name, @Nullable final JsonNode value) {
-        return of(variantId, name, value, true);
+        return of(variantId, name, value, null);
     }
 
     public static SetAttribute of(final Integer variantId, final String name, @Nullable final JsonNode value, @Nullable final Boolean staged) {
@@ -82,7 +82,7 @@ public final class SetAttribute extends StagedProductUpdateActionImpl<Product> {
      * @return update action
      */
     public static SetAttribute ofVariantId(final Integer variantId, final String name, @Nullable final JsonNode value) {
-        return ofVariantId(variantId, name, value, true);
+        return ofVariantId(variantId, name, value, null);
     }
 
     public static SetAttribute ofVariantId(final Integer variantId, final String name, @Nullable final JsonNode value, @Nullable final Boolean staged) {
@@ -98,7 +98,7 @@ public final class SetAttribute extends StagedProductUpdateActionImpl<Product> {
      * @return update action
      */
     public static SetAttribute ofVariantId(final Integer variantId, final String name, @Nullable final Object value) {
-        return ofVariantId(variantId, name, value, true);
+        return ofVariantId(variantId, name, value, null);
     }
 
     public static SetAttribute ofVariantId(final Integer variantId, final String name, @Nullable final Object value, @Nullable final Boolean staged) {
@@ -114,7 +114,7 @@ public final class SetAttribute extends StagedProductUpdateActionImpl<Product> {
      * @return update action
      */
     public static SetAttribute ofSku(final String sku, final String name, @Nullable final JsonNode value) {
-        return ofSku(sku, name, value, true);
+        return ofSku(sku, name, value, null);
     }
 
     public static SetAttribute ofSku(final String sku, final String name, @Nullable final JsonNode value, @Nullable final Boolean staged) {
@@ -130,7 +130,7 @@ public final class SetAttribute extends StagedProductUpdateActionImpl<Product> {
      * @return update action
      */
     public static SetAttribute ofSku(final String sku, final String name, @Nullable final Object value) {
-        return ofSku(sku, name, value, true);
+        return ofSku(sku, name, value, null);
     }
 
     public static SetAttribute ofSku(final String sku, final String name, @Nullable final Object value, @Nullable final Boolean staged) {
@@ -144,7 +144,7 @@ public final class SetAttribute extends StagedProductUpdateActionImpl<Product> {
      * @return update action
      */
     public static SetAttribute ofUnsetAttribute(final Integer variantId, final String name) {
-        return ofUnsetAttribute(variantId, name, true);
+        return ofUnsetAttribute(variantId, name, null);
     }
 
     public static SetAttribute ofUnsetAttribute(final Integer variantId, final String name, @Nullable final Boolean staged) {
@@ -158,7 +158,7 @@ public final class SetAttribute extends StagedProductUpdateActionImpl<Product> {
      * @return update action
      */
     public static SetAttribute ofUnsetAttributeForVariantId(final Integer variantId, final String name) {
-        return ofUnsetAttributeForVariantId(variantId, name, true);
+        return ofUnsetAttributeForVariantId(variantId, name, null);
     }
 
     public static SetAttribute ofUnsetAttributeForVariantId(final Integer variantId, final String name, @Nullable final Boolean staged) {
@@ -172,7 +172,7 @@ public final class SetAttribute extends StagedProductUpdateActionImpl<Product> {
      * @return update action
      */
     public static SetAttribute ofUnsetAttributeForSku(final String sku, final String name) {
-        return ofUnsetAttributeForSku(sku, name, true);
+        return ofUnsetAttributeForSku(sku, name, null);
     }
 
     public static SetAttribute ofUnsetAttributeForSku(final String sku, final String name, @Nullable final Boolean staged) {
@@ -189,7 +189,7 @@ public final class SetAttribute extends StagedProductUpdateActionImpl<Product> {
      * @return update action
      */
     public static <T> SetAttribute ofUnsetAttribute(final Integer variantId, final NamedAttributeAccess<T> NamedAttributeAccess) {
-        return ofUnsetAttribute(variantId, NamedAttributeAccess, true);
+        return ofUnsetAttribute(variantId, NamedAttributeAccess, null);
     }
 
     public static <T> SetAttribute ofUnsetAttribute(final Integer variantId, final NamedAttributeAccess<T> NamedAttributeAccess, @Nullable final Boolean staged) {
@@ -206,7 +206,7 @@ public final class SetAttribute extends StagedProductUpdateActionImpl<Product> {
      * @return update action
      */
     public static <T> SetAttribute ofUnsetAttributeForVariantId(final Integer variantId, final NamedAttributeAccess<T> NamedAttributeAccess) {
-        return ofUnsetAttributeForVariantId(variantId, NamedAttributeAccess, true);
+        return ofUnsetAttributeForVariantId(variantId, NamedAttributeAccess, null);
     }
 
     public static <T> SetAttribute ofUnsetAttributeForVariantId(final Integer variantId, final NamedAttributeAccess<T> NamedAttributeAccess, @Nullable final Boolean staged) {
@@ -223,7 +223,7 @@ public final class SetAttribute extends StagedProductUpdateActionImpl<Product> {
      * @return update action
      */
     public static <T> SetAttribute ofUnsetAttributeForSku(final String sku, final NamedAttributeAccess<T> NamedAttributeAccess) {
-        return ofUnsetAttributeForSku(sku, NamedAttributeAccess, true);
+        return ofUnsetAttributeForSku(sku, NamedAttributeAccess, null);
     }
 
     public static <T> SetAttribute ofUnsetAttributeForSku(final String sku, final NamedAttributeAccess<T> NamedAttributeAccess, @Nullable final Boolean staged) {
@@ -238,7 +238,7 @@ public final class SetAttribute extends StagedProductUpdateActionImpl<Product> {
      * @return update action
      */
     public static SetAttribute of(final Integer variantId, final AttributeDraft attribute) {
-        return of(variantId, attribute, true);
+        return of(variantId, attribute, null);
     }
 
     public static SetAttribute of(final Integer variantId, final AttributeDraft attribute, @Nullable final Boolean staged) {
@@ -253,7 +253,7 @@ public final class SetAttribute extends StagedProductUpdateActionImpl<Product> {
      * @return update action
      */
     public static SetAttribute ofVariantId(final Integer variantId, final AttributeDraft attribute) {
-        return ofVariantId(variantId, attribute, true);
+        return ofVariantId(variantId, attribute, null);
     }
 
     public static SetAttribute ofVariantId(final Integer variantId, final AttributeDraft attribute, @Nullable final Boolean staged) {
@@ -268,7 +268,7 @@ public final class SetAttribute extends StagedProductUpdateActionImpl<Product> {
      * @return update action
      */
     public static SetAttribute ofSku(final String sku, final AttributeDraft attribute) {
-        return ofSku(sku, attribute, true);
+        return ofSku(sku, attribute, null);
     }
 
     public static SetAttribute ofSku(final String sku, final AttributeDraft attribute, @Nullable final Boolean staged) {
@@ -285,7 +285,7 @@ public final class SetAttribute extends StagedProductUpdateActionImpl<Product> {
      * @return update action
      */
     public static <T> SetAttribute of(final Integer variantId, final NamedAttributeAccess<T> setter, final T value) {
-        return of(variantId, setter, value, true);
+        return of(variantId, setter, value, null);
     }
 
     public static <T> SetAttribute of(final Integer variantId, final NamedAttributeAccess<T> setter, final T value, @Nullable final Boolean staged) {
@@ -302,7 +302,7 @@ public final class SetAttribute extends StagedProductUpdateActionImpl<Product> {
      * @return update action
      */
     public static <T> SetAttribute ofVariantId(final Integer variantId, final NamedAttributeAccess<T> setter, final T value) {
-        return ofVariantId(variantId, setter, value, true);
+        return ofVariantId(variantId, setter, value, null);
     }
 
     public static <T> SetAttribute ofVariantId(final Integer variantId, final NamedAttributeAccess<T> setter, final T value, @Nullable final Boolean staged) {
@@ -319,7 +319,7 @@ public final class SetAttribute extends StagedProductUpdateActionImpl<Product> {
      * @return update action
      */
     public static <T> SetAttribute ofSku(final String sku, final NamedAttributeAccess<T> setter, final T value) {
-        return ofSku(sku, setter, value, true);
+        return ofSku(sku, setter, value, null);
     }
 
     public static <T> SetAttribute ofSku(final String sku, final NamedAttributeAccess<T> setter, final T value, @Nullable final Boolean staged) {

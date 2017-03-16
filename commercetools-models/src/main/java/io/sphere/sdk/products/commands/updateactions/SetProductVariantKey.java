@@ -49,7 +49,7 @@ public final class SetProductVariantKey extends StagedProductUpdateActionImpl<Pr
     }
 
     public static SetProductVariantKey ofKeyAndVariantId(@Nullable final String key, @Nonnull final Integer variantId) {
-        return ofKeyAndVariantId(key, variantId, true);
+        return ofKeyAndVariantId(key, variantId, null);
     }
 
     public static SetProductVariantKey ofKeyAndVariantId(@Nullable final String key, @Nonnull final Integer variantId, @Nullable final Boolean staged) {
@@ -57,7 +57,7 @@ public final class SetProductVariantKey extends StagedProductUpdateActionImpl<Pr
     }
 
     public static SetProductVariantKey ofKeyAndSku(@Nullable final String key, @Nonnull final String sku) {
-        return ofKeyAndSku(key, sku, true);
+        return ofKeyAndSku(key, sku, null);
     }
 
     public static SetProductVariantKey ofKeyAndSku(@Nullable final String key, @Nonnull final String sku, @Nullable final Boolean staged) {

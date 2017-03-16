@@ -55,7 +55,7 @@ public final class SetAssetCustomType extends SetCustomTypeBase<Product> {
     }
 
     private static SetAssetCustomType of(final String assetId, @Nullable final Integer variantId, @Nullable final String sku, @Nullable final CustomFieldsDraft customFieldsDraft) {
-        return of(assetId, variantId, sku, customFieldsDraft, true);
+        return of(assetId, variantId, sku, customFieldsDraft, null);
     }
 
     private static SetAssetCustomType of(final String assetId, @Nullable final Integer variantId, @Nullable final String sku, @Nullable final CustomFieldsDraft customFieldsDraft, @Nullable final Boolean staged) {
@@ -68,7 +68,7 @@ public final class SetAssetCustomType extends SetCustomTypeBase<Product> {
     }
 
     public static SetAssetCustomType ofVariantId(final Integer variantId, final String assetId, @Nullable final CustomFieldsDraft customFieldsDraft) {
-        return ofVariantId(variantId, assetId, customFieldsDraft, true);
+        return ofVariantId(variantId, assetId, customFieldsDraft, null);
     }
 
     public static SetAssetCustomType ofVariantId(final Integer variantId, final String assetId, @Nullable final CustomFieldsDraft customFieldsDraft, @Nullable final Boolean staged) {
@@ -76,7 +76,7 @@ public final class SetAssetCustomType extends SetCustomTypeBase<Product> {
     }
 
     public static SetAssetCustomType ofSku(final String sku, final String assetId, @Nullable final CustomFieldsDraft customFieldsDraft) {
-        return ofSku(sku, assetId, customFieldsDraft, true);
+        return ofSku(sku, assetId, customFieldsDraft, null);
     }
 
     public static SetAssetCustomType ofSku(final String sku, final String assetId, @Nullable final CustomFieldsDraft customFieldsDraft, @Nullable final Boolean staged) {

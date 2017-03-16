@@ -28,7 +28,7 @@ public final class SetProductPriceCustomField extends SetCustomFieldBase<Product
     }
 
     public static SetProductPriceCustomField ofJson(final String name, final JsonNode value, final String priceId) {
-        return ofJson(name, value, priceId, true);
+        return ofJson(name, value, priceId, null);
     }
 
     public static SetProductPriceCustomField ofJson(final String name, final JsonNode value, final String priceId, @Nullable final Boolean staged) {
@@ -36,7 +36,7 @@ public final class SetProductPriceCustomField extends SetCustomFieldBase<Product
     }
 
     public static SetProductPriceCustomField ofObject(final String name, final Object value, final String priceId) {
-        return ofObject(name, value, priceId, true);
+        return ofObject(name, value, priceId, null);
     }
 
     public static SetProductPriceCustomField ofObject(final String name, final Object value, final String priceId, @Nullable final Boolean staged) {
@@ -45,7 +45,7 @@ public final class SetProductPriceCustomField extends SetCustomFieldBase<Product
     }
 
     public static SetProductPriceCustomField ofUnset(final String name, final String priceId) {
-        return ofUnset(name, priceId, true);
+        return ofUnset(name, priceId, null);
     }
 
     public static SetProductPriceCustomField ofUnset(final String name, final String priceId, @Nullable final Boolean staged) {

@@ -79,7 +79,7 @@ public final class AddVariant extends StagedProductUpdateActionImpl<Product> {
     }
 
     public static AddVariant of(final List<AttributeDraft> attributes, final List<PriceDraft> prices, @Nullable final String sku) {
-        return of(attributes, prices, sku, true);
+        return of(attributes, prices, sku, null);
     }
 
     public static AddVariant of(final List<AttributeDraft> attributes, final List<PriceDraft> prices, @Nullable final String sku, @Nullable final Boolean staged) {
@@ -87,7 +87,7 @@ public final class AddVariant extends StagedProductUpdateActionImpl<Product> {
     }
 
     public static AddVariant of(final List<AttributeDraft> attributes, final List<PriceDraft> prices) {
-        return of(attributes, prices, true);
+        return of(attributes, prices, null, null);
     }
 
     public static AddVariant of(final List<AttributeDraft> attributes, final List<PriceDraft> prices, @Nullable final Boolean staged) {

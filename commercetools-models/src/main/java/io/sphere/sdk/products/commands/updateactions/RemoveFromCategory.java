@@ -29,7 +29,7 @@ public final class RemoveFromCategory extends StagedProductUpdateActionImpl<Prod
     }
 
     public static RemoveFromCategory of(final Referenceable<Category> category) {
-        return of(category, true);
+        return of(category, null);
     }
 
     public static RemoveFromCategory of(final Referenceable<Category> category, @Nullable final Boolean staged) {

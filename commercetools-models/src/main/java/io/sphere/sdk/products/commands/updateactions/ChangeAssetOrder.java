@@ -45,7 +45,7 @@ public final class ChangeAssetOrder extends StagedProductUpdateActionImpl<Produc
     }
 
     public static ChangeAssetOrder ofVariantId(final Integer variantId, final List<String> assetOrder) {
-        return ofVariantId(variantId, assetOrder, true);
+        return ofVariantId(variantId, assetOrder, null);
     }
 
     public static ChangeAssetOrder ofVariantId(final Integer variantId, final List<String> assetOrder, @Nullable final Boolean staged) {
@@ -53,7 +53,7 @@ public final class ChangeAssetOrder extends StagedProductUpdateActionImpl<Produc
     }
 
     public static ChangeAssetOrder ofSku(final String sku, final List<String> assetOrder) {
-        return ofSku(sku, assetOrder, true);
+        return ofSku(sku, assetOrder, null);
     }
 
     public static ChangeAssetOrder ofSku(final String sku, final List<String> assetOrder, @Nullable final Boolean staged) {

@@ -51,7 +51,7 @@ public final class ChangeAssetName extends StagedProductUpdateActionImpl<Product
     }
 
     public static ChangeAssetName ofVariantId(final Integer variantId, final String assetId, final LocalizedString name) {
-        return ofVariantId(variantId, assetId, name, true);
+        return ofVariantId(variantId, assetId, name, null);
     }
 
     public static ChangeAssetName ofVariantId(final Integer variantId, final String assetId, final LocalizedString name, @Nullable final Boolean staged) {
@@ -59,7 +59,7 @@ public final class ChangeAssetName extends StagedProductUpdateActionImpl<Product
     }
 
     public static ChangeAssetName ofSku(final String sku, final String assetId, final LocalizedString name) {
-        return ofSku(sku, assetId, name, true);
+        return ofSku(sku, assetId, name, null);
     }
 
     public static ChangeAssetName ofSku(final String sku, final String assetId, final LocalizedString name, @Nullable final Boolean staged) {

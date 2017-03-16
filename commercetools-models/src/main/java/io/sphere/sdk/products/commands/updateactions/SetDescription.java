@@ -21,7 +21,7 @@ public final class SetDescription extends StagedProductUpdateActionImpl<Product>
     }
 
     public static SetDescription of(final LocalizedString description) {
-        return of(description, true);
+        return of(description, null);
     }
 
     public static SetDescription of(final LocalizedString description, @Nullable final Boolean staged) {

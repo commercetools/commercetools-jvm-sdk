@@ -33,7 +33,7 @@ public final class ChangePrice extends StagedProductUpdateActionImpl<Product> {
     }
 
     public static ChangePrice of(final Price oldPrice, final PriceDraft price) {
-        return of(oldPrice, price, true);
+        return of(oldPrice, price, null);
     }
 
     public static ChangePrice of(final Price oldPrice, final PriceDraft price, @Nullable final Boolean staged) {
@@ -43,7 +43,7 @@ public final class ChangePrice extends StagedProductUpdateActionImpl<Product> {
     }
 
     public static ChangePrice of(final String priceId, final PriceDraft price) {
-        return of(priceId, price, true);
+        return of(priceId, price, null);
     }
 
     public static ChangePrice of(final String priceId, final PriceDraft price, @Nullable final Boolean staged) {

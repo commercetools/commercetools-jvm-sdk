@@ -44,7 +44,7 @@ public final class RemoveAsset extends StagedProductUpdateActionImpl<Product> {
     }
 
     public static RemoveAsset ofVariantId(final Integer variantId, final String assetId) {
-        return ofVariantId(variantId, assetId, true);
+        return ofVariantId(variantId, assetId, null);
     }
 
     public static RemoveAsset ofVariantId(final Integer variantId, final String assetId, @Nullable final Boolean staged) {
@@ -52,7 +52,7 @@ public final class RemoveAsset extends StagedProductUpdateActionImpl<Product> {
     }
 
     public static RemoveAsset ofSku(final String sku, final String assetId) {
-        return ofSku(sku, assetId, true);
+        return ofSku(sku, assetId, null);
     }
 
     public static RemoveAsset ofSku(final String sku, final String assetId, @Nullable final Boolean staged) {

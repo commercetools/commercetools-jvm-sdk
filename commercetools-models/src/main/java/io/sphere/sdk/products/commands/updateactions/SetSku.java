@@ -42,7 +42,7 @@ public final class SetSku extends StagedProductUpdateActionImpl<Product> {
     }
 
     public static SetSku of(final Integer variantId, @Nullable final String sku) {
-        return of(variantId, sku, true);
+        return of(variantId, sku, null);
     }
 
     public static SetSku of(final Integer variantId, @Nullable final String sku, @Nullable final Boolean staged) {

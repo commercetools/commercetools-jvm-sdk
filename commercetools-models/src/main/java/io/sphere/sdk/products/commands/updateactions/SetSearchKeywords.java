@@ -25,7 +25,7 @@ public final class SetSearchKeywords extends StagedProductUpdateActionImpl<Produ
     }
 
     public static SetSearchKeywords of(final SearchKeywords searchKeywords) {
-        return of(searchKeywords, true);
+        return of(searchKeywords, null);
     }
 
     public static SetSearchKeywords of(final SearchKeywords searchKeywords, @Nullable final Boolean staged) {

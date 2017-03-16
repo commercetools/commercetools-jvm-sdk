@@ -21,7 +21,7 @@ public final class SetCategoryOrderHint extends StagedProductUpdateActionImpl<Pr
     }
 
     public static SetCategoryOrderHint of(final String categoryId, @Nullable final String orderHint) {
-        return of(categoryId, orderHint, true);
+        return of(categoryId, orderHint, null);
     }
 
     public static SetCategoryOrderHint of(final String categoryId, @Nullable final String orderHint, @Nullable final Boolean staged) {

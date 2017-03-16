@@ -33,7 +33,7 @@ public final class SetDiscountedPrice extends StagedProductUpdateActionImpl<Prod
     }
 
     public static SetDiscountedPrice of(final String priceId, @Nullable final DiscountedPrice discounted) {
-        return of(priceId, discounted, true);
+        return of(priceId, discounted, null);
     }
 
     public static SetDiscountedPrice of(final String priceId, @Nullable final DiscountedPrice discounted, @Nullable final Boolean staged) {

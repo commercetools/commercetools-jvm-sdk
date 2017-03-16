@@ -53,7 +53,7 @@ public final class SetAssetDescription extends StagedProductUpdateActionImpl<Pro
     }
 
     public static SetAssetDescription ofVariantId(final Integer variantId, final String assetId, @Nullable final LocalizedString description) {
-        return ofVariantId(variantId, assetId, description, true);
+        return ofVariantId(variantId, assetId, description, null);
     }
 
     public static SetAssetDescription ofVariantId(final Integer variantId, final String assetId, @Nullable final LocalizedString description, @Nullable final Boolean staged) {
@@ -61,7 +61,7 @@ public final class SetAssetDescription extends StagedProductUpdateActionImpl<Pro
     }
 
     public static SetAssetDescription ofSku(final String sku, final String assetId, @Nullable final LocalizedString description) {
-        return ofSku(sku, assetId, description, true);
+        return ofSku(sku, assetId, description, null);
     }
 
     public static SetAssetDescription ofSku(final String sku, final String assetId, @Nullable final LocalizedString description, @Nullable final Boolean staged) {

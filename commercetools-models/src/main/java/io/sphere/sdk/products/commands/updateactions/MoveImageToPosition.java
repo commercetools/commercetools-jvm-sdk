@@ -33,7 +33,7 @@ public final class MoveImageToPosition extends StagedProductUpdateActionImpl<Pro
     }
 
     public static MoveImageToPosition ofImageUrlAndVariantId(final String imageUrl, final Integer variantId, final Integer position) {
-        return ofImageUrlAndVariantId(imageUrl, variantId, position, true);
+        return ofImageUrlAndVariantId(imageUrl, variantId, position, null);
     }
 
     public static MoveImageToPosition ofImageUrlAndVariantId(final String imageUrl, final Integer variantId, final Integer position, @Nullable final Boolean staged) {
@@ -41,7 +41,7 @@ public final class MoveImageToPosition extends StagedProductUpdateActionImpl<Pro
     }
 
     public static MoveImageToPosition ofImageUrlAndSku(final String imageUrl, final String sku, final Integer position) {
-        return ofImageUrlAndSku(imageUrl, sku, position, true);
+        return ofImageUrlAndSku(imageUrl, sku, position, null);
     }
 
     public static MoveImageToPosition ofImageUrlAndSku(final String imageUrl, final String sku, final Integer position, @Nullable final Boolean staged) {

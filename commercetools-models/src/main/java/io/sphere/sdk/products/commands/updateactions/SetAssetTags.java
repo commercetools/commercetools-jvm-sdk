@@ -53,7 +53,7 @@ public final class SetAssetTags extends StagedProductUpdateActionImpl<Product> {
     }
 
     public static SetAssetTags ofVariantId(final Integer variantId, final String assetId, @Nullable final Set<String> tags) {
-        return ofVariantId(variantId, assetId, tags, true);
+        return ofVariantId(variantId, assetId, tags, null);
     }
 
     public static SetAssetTags ofVariantId(final Integer variantId, final String assetId, @Nullable final Set<String> tags, @Nullable final Boolean staged) {
@@ -61,7 +61,7 @@ public final class SetAssetTags extends StagedProductUpdateActionImpl<Product> {
     }
 
     public static SetAssetTags ofSku(final String sku, final String assetId, @Nullable final Set<String> tags) {
-        return ofSku(sku, assetId, tags, true);
+        return ofSku(sku, assetId, tags, null);
     }
 
     public static SetAssetTags ofSku(final String sku, final String assetId, @Nullable final Set<String> tags, @Nullable final Boolean staged) {

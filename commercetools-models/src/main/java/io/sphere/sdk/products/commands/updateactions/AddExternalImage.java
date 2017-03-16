@@ -39,7 +39,7 @@ public final class AddExternalImage extends StagedProductUpdateActionImpl<Produc
     }
 
     public static AddExternalImage ofVariantId(final Integer variantId, final Image image) {
-        return ofVariantId(variantId, image, true);
+        return ofVariantId(variantId, image, null);
     }
 
     public static AddExternalImage ofVariantId(final Integer variantId, final Image image, @Nullable final Boolean staged) {
@@ -47,7 +47,7 @@ public final class AddExternalImage extends StagedProductUpdateActionImpl<Produc
     }
 
     public static AddExternalImage ofSku(final String sku, final Image image) {
-        return ofSku(sku, image, true);
+        return ofSku(sku, image, null);
     }
 
     public static AddExternalImage ofSku(final String sku, final Image image, @Nullable final Boolean staged) {

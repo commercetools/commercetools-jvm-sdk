@@ -44,7 +44,7 @@ public final class SetAttributeInAllVariants extends StagedProductUpdateActionIm
      * @return update action
      */
     public static SetAttributeInAllVariants of(final String name, final JsonNode value) {
-        return of(name, value, true);
+        return of(name, value, null);
     }
 
     public static SetAttributeInAllVariants of(final String name, final JsonNode value, @Nullable final Boolean staged) {
@@ -58,7 +58,7 @@ public final class SetAttributeInAllVariants extends StagedProductUpdateActionIm
      * @return update action
      */
     public static SetAttributeInAllVariants ofUnsetAttribute(final String name) {
-        return ofUnsetAttribute(name, true);
+        return ofUnsetAttribute(name, null);
     }
 
     public static SetAttributeInAllVariants ofUnsetAttribute(final String name, @Nullable final Boolean staged) {
@@ -74,7 +74,7 @@ public final class SetAttributeInAllVariants extends StagedProductUpdateActionIm
      * @return update action
      */
     public static <T> SetAttributeInAllVariants ofUnsetAttribute(final NamedAttributeAccess<T> NamedAttributeAccess) {
-        return ofUnsetAttribute(NamedAttributeAccess, true);
+        return ofUnsetAttribute(NamedAttributeAccess, null);
     }
 
     public static <T> SetAttributeInAllVariants ofUnsetAttribute(final NamedAttributeAccess<T> NamedAttributeAccess, @Nullable final Boolean staged) {
@@ -88,7 +88,7 @@ public final class SetAttributeInAllVariants extends StagedProductUpdateActionIm
      * @return update action
      */
     public static SetAttributeInAllVariants of(final AttributeDraft attribute) {
-        return of(attribute, true);
+        return of(attribute, null);
     }
 
     public static SetAttributeInAllVariants of(final AttributeDraft attribute, @Nullable final Boolean staged) {
@@ -104,7 +104,7 @@ public final class SetAttributeInAllVariants extends StagedProductUpdateActionIm
      * @return update action
      */
     public static <T> SetAttributeInAllVariants of(final NamedAttributeAccess<T> setter, final T value) {
-        return of(setter, value, true);
+        return of(setter, value, null);
     }
 
     public static <T> SetAttributeInAllVariants of(final NamedAttributeAccess<T> setter, final T value, @Nullable final Boolean staged) {

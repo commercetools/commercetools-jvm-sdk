@@ -52,7 +52,7 @@ public final class AddPrice extends StagedProductUpdateActionImpl<Product> {
     }
 
     public static AddPrice ofVariantId(final Integer variantId, final PriceDraft price) {
-        return ofVariantId(variantId, price, true);
+        return ofVariantId(variantId, price, null);
     }
 
     public static AddPrice ofVariantId(final Integer variantId, final PriceDraft price, @Nullable final Boolean staged) {
@@ -60,7 +60,7 @@ public final class AddPrice extends StagedProductUpdateActionImpl<Product> {
     }
 
     public static AddPrice ofSku(final String sku, final PriceDraft price) {
-        return ofSku(sku, price, true);
+        return ofSku(sku, price, null);
     }
 
     public static AddPrice ofSku(final String sku, final PriceDraft price, @Nullable final Boolean staged) {

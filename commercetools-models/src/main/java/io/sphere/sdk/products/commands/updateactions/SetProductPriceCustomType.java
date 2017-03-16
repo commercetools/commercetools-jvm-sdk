@@ -29,7 +29,7 @@ public final class SetProductPriceCustomType extends SetCustomTypeBase<Product> 
     }
 
     public static SetProductPriceCustomType ofTypeKeyAndObjects(final String typeKey, final Map<String, Object> fields, final String priceId) {
-        return ofTypeKeyAndObjects(typeKey, fields, priceId, true);
+        return ofTypeKeyAndObjects(typeKey, fields, priceId, null);
     }
 
     public static SetProductPriceCustomType ofTypeKeyAndObjects(final String typeKey, final Map<String, Object> fields, final String priceId, @Nullable final Boolean staged) {
@@ -38,7 +38,7 @@ public final class SetProductPriceCustomType extends SetCustomTypeBase<Product> 
     }
 
     public static SetProductPriceCustomType ofTypeIdAndObjects(final String typeId, final Map<String, Object> fields, final String priceId) {
-        return ofTypeIdAndObjects(typeId, fields, priceId, true);
+        return ofTypeIdAndObjects(typeId, fields, priceId, null);
     }
 
     public static SetProductPriceCustomType ofTypeIdAndObjects(final String typeId, final Map<String, Object> fields, final String priceId, @Nullable final Boolean staged) {
@@ -47,7 +47,7 @@ public final class SetProductPriceCustomType extends SetCustomTypeBase<Product> 
     }
 
     public static SetProductPriceCustomType ofTypeIdAndObjects(final String typeId, final String fieldName, final Object value, final String priceId) {
-        return ofTypeIdAndObjects(typeId, fieldName, value, priceId, true);
+        return ofTypeIdAndObjects(typeId, fieldName, value, priceId, null);
     }
 
     public static SetProductPriceCustomType ofTypeIdAndObjects(final String typeId, final String fieldName, final Object value, final String priceId, @Nullable final Boolean staged) {
@@ -56,7 +56,7 @@ public final class SetProductPriceCustomType extends SetCustomTypeBase<Product> 
     }
 
     public static SetProductPriceCustomType ofTypeIdAndJson(final String typeId, final Map<String, JsonNode> fields, final String priceId) {
-        return ofTypeIdAndJson(typeId, fields, priceId, true);
+        return ofTypeIdAndJson(typeId, fields, priceId, null);
     }
 
     public static SetProductPriceCustomType ofTypeIdAndJson(final String typeId, final Map<String, JsonNode> fields, final String priceId, @Nullable final Boolean staged) {
@@ -64,7 +64,7 @@ public final class SetProductPriceCustomType extends SetCustomTypeBase<Product> 
     }
 
     public static SetProductPriceCustomType ofTypeKeyAndJson(final String typeKey, final Map<String, JsonNode> fields, final String priceId) {
-        return ofTypeKeyAndJson(typeKey, fields, priceId, true);
+        return ofTypeKeyAndJson(typeKey, fields, priceId, null);
     }
 
     public static SetProductPriceCustomType ofTypeKeyAndJson(final String typeKey, final Map<String, JsonNode> fields, final String priceId, @Nullable final Boolean staged) {
@@ -72,7 +72,7 @@ public final class SetProductPriceCustomType extends SetCustomTypeBase<Product> 
     }
 
     public static SetProductPriceCustomType ofRemoveType(final String priceId) {
-        return ofRemoveType(priceId, true);
+        return ofRemoveType(priceId, null);
     }
 
     public static SetProductPriceCustomType ofRemoveType(final String priceId, @Nullable final Boolean staged) {
