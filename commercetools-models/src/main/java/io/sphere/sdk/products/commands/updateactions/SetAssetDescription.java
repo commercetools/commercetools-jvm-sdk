@@ -1,6 +1,5 @@
 package io.sphere.sdk.products.commands.updateactions;
 
-import io.sphere.sdk.commands.UpdateActionImpl;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.products.Product;
 
@@ -17,7 +16,7 @@ import javax.annotation.Nullable;
  * <p>By SKU (attention, SKU is optional field in a variant):</p>
  * {@include.example io.sphere.sdk.products.commands.ProductUpdateCommandIntegrationTest#setAssetDescriptionBySku()}
  */
-public final class SetAssetDescription extends UpdateActionImpl<Product> {
+public final class SetAssetDescription extends StagedProductUpdateActionImpl<Product> {
     @Nullable
     private final Integer variantId;
     @Nullable
@@ -26,8 +25,8 @@ public final class SetAssetDescription extends UpdateActionImpl<Product> {
     @Nullable
     private final LocalizedString description;
 
-    private SetAssetDescription(final String assetId, @Nullable final Integer variantId, @Nullable final String sku, @Nullable final LocalizedString description) {
-        super("setAssetDescription");
+    private SetAssetDescription(final String assetId, @Nullable final Integer variantId, @Nullable final String sku, @Nullable final LocalizedString description, @Nullable final Boolean staged) {
+        super("setAssetDescription", staged);
         this.assetId = assetId;
         this.variantId = variantId;
         this.sku = sku;
@@ -54,10 +53,18 @@ public final class SetAssetDescription extends UpdateActionImpl<Product> {
     }
 
     public static SetAssetDescription ofVariantId(final Integer variantId, final String assetId, @Nullable final LocalizedString description) {
-        return new SetAssetDescription(assetId, variantId, null, description);
+        return ofVariantId(variantId, assetId, description, true);
+    }
+
+    public static SetAssetDescription ofVariantId(final Integer variantId, final String assetId, @Nullable final LocalizedString description, @Nullable final Boolean staged) {
+        return new SetAssetDescription(assetId, variantId, null, description, staged);
     }
 
     public static SetAssetDescription ofSku(final String sku, final String assetId, @Nullable final LocalizedString description) {
-        return new SetAssetDescription(assetId, null, sku, description);
+        return ofSku(sku, assetId, description, true);
+    }
+
+    public static SetAssetDescription ofSku(final String sku, final String assetId, @Nullable final LocalizedString description, @Nullable final Boolean staged) {
+        return new SetAssetDescription(assetId, null, sku, description, staged);
     }
 }

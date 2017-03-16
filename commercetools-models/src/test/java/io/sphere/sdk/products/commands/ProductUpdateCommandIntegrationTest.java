@@ -2176,6 +2176,7 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
     @Test
     public void setAssetDescriptionByVariantId() throws Exception {
         withProductHavingAssets(client(), product -> {
+            assertThat(product.getMasterData().hasStagedChanges()).isFalse();
             final LocalizedString newDescription = LocalizedString.ofEnglish("new description");
             final ProductVariant masterVariant = product.getMasterData().getStaged().getMasterVariant();
             final String assetId = masterVariant.getAssets().get(0).getId();
@@ -2186,6 +2187,32 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
 
             final Asset updatedAsset = updatedProduct.getMasterData().getStaged().getMasterVariant().getAssets().get(0);
             assertThat(updatedAsset.getDescription()).isEqualTo(newDescription);
+            assertThat(updatedProduct.getMasterData().hasStagedChanges()).isTrue();
+
+            return updatedProduct;
+        });
+    }
+
+    @Test
+    public void setAssetDescriptionByVariantIdWithStaged() {
+        setAssetDescriptionByVariantIdWithStaged(true);
+        setAssetDescriptionByVariantIdWithStaged(false);
+    }
+
+    public void setAssetDescriptionByVariantIdWithStaged(final Boolean staged) {
+        withProductHavingAssets(client(), product -> {
+            assertThat(product.getMasterData().hasStagedChanges()).isFalse();
+            final LocalizedString newDescription = LocalizedString.ofEnglish("new description");
+            final ProductVariant masterVariant = product.getMasterData().getStaged().getMasterVariant();
+            final String assetId = masterVariant.getAssets().get(0).getId();
+
+            final ProductUpdateCommand cmd =
+                    ProductUpdateCommand.of(product, SetAssetDescription.ofVariantId(masterVariant.getId(), assetId, newDescription, staged));
+            final Product updatedProduct = client().executeBlocking(cmd);
+
+            final Asset updatedAsset = updatedProduct.getMasterData().getStaged().getMasterVariant().getAssets().get(0);
+            assertThat(updatedAsset.getDescription()).isEqualTo(newDescription);
+            assertThat(updatedProduct.getMasterData().hasStagedChanges()).isEqualTo(staged);
 
             return updatedProduct;
         });
@@ -2194,6 +2221,7 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
     @Test
     public void setAssetDescriptionBySku() throws Exception {
         withProductHavingAssets(client(), product -> {
+            assertThat(product.getMasterData().hasStagedChanges()).isFalse();
             final LocalizedString newDescription = LocalizedString.ofEnglish("new description");
             final ProductVariant masterVariant = product.getMasterData().getStaged().getMasterVariant();
             final String assetId = masterVariant.getAssets().get(0).getId();
@@ -2204,6 +2232,32 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
 
             final Asset updatedAsset = updatedProduct.getMasterData().getStaged().getMasterVariant().getAssets().get(0);
             assertThat(updatedAsset.getDescription()).isEqualTo(newDescription);
+            assertThat(updatedProduct.getMasterData().hasStagedChanges()).isTrue();
+
+            return updatedProduct;
+        });
+    }
+
+    @Test
+    public void setAssetDescriptionBySkuWithStaged() {
+        setAssetDescriptionBySkuWithStaged(true);
+        setAssetDescriptionBySkuWithStaged(false);
+    }
+
+    public void setAssetDescriptionBySkuWithStaged(final Boolean staged) {
+        withProductHavingAssets(client(), product -> {
+            assertThat(product.getMasterData().hasStagedChanges()).isFalse();
+            final LocalizedString newDescription = LocalizedString.ofEnglish("new description");
+            final ProductVariant masterVariant = product.getMasterData().getStaged().getMasterVariant();
+            final String assetId = masterVariant.getAssets().get(0).getId();
+
+            final ProductUpdateCommand cmd =
+                    ProductUpdateCommand.of(product, SetAssetDescription.ofSku(masterVariant.getSku(), assetId, newDescription, staged));
+            final Product updatedProduct = client().executeBlocking(cmd);
+
+            final Asset updatedAsset = updatedProduct.getMasterData().getStaged().getMasterVariant().getAssets().get(0);
+            assertThat(updatedAsset.getDescription()).isEqualTo(newDescription);
+            assertThat(updatedProduct.getMasterData().hasStagedChanges()).isEqualTo(staged);
 
             return updatedProduct;
         });
