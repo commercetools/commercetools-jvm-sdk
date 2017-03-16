@@ -1237,12 +1237,34 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
     @Test
     public void setSearchKeywords() throws Exception {
         withUpdateableProduct(client(), product -> {
+            assertThat(product.getMasterData().hasStagedChanges()).isFalse();
             final SearchKeywords searchKeywords = SearchKeywords.of(Locale.ENGLISH, asList(SearchKeyword.of("Raider", CustomSuggestTokenizer.of(singletonList("Twix")))));
             final ProductUpdateCommand command = ProductUpdateCommand.of(product, SetSearchKeywords.of(searchKeywords));
             final Product updatedProduct = client().executeBlocking(command);
 
             final SearchKeywords actualKeywords = updatedProduct.getMasterData().getStaged().getSearchKeywords();
             assertThat(actualKeywords).isEqualTo(searchKeywords);
+            assertThat(updatedProduct.getMasterData().hasStagedChanges()).isTrue();
+            return updatedProduct;
+        });
+    }
+
+    @Test
+    public void setSearchKeywordsWithStaged() {
+        setSearchKeywordsWithStaged(true);
+        setSearchKeywordsWithStaged(false);
+    }
+
+    public void setSearchKeywordsWithStaged(final Boolean staged) {
+        withUpdateableProduct(client(), product -> {
+            assertThat(product.getMasterData().hasStagedChanges()).isFalse();
+            final SearchKeywords searchKeywords = SearchKeywords.of(Locale.ENGLISH, asList(SearchKeyword.of("Raider", CustomSuggestTokenizer.of(singletonList("Twix")))));
+            final ProductUpdateCommand command = ProductUpdateCommand.of(product, SetSearchKeywords.of(searchKeywords, staged));
+            final Product updatedProduct = client().executeBlocking(command);
+
+            final SearchKeywords actualKeywords = updatedProduct.getMasterData().getStaged().getSearchKeywords();
+            assertThat(actualKeywords).isEqualTo(searchKeywords);
+            assertThat(updatedProduct.getMasterData().hasStagedChanges()).isEqualTo(staged);
             return updatedProduct;
         });
     }
