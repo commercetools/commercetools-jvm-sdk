@@ -2266,6 +2266,7 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
     @Test
     public void setAssetTagsByVariantId() throws Exception {
         withProductHavingAssets(client(), product -> {
+            assertThat(product.getMasterData().hasStagedChanges()).isFalse();
             final Set<String> newTags = new HashSet<>(asList("tag1", "tag2"));
             final ProductVariant masterVariant = product.getMasterData().getStaged().getMasterVariant();
             final String assetId = masterVariant.getAssets().get(0).getId();
@@ -2276,6 +2277,32 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
 
             final Asset updatedAsset = updatedProduct.getMasterData().getStaged().getMasterVariant().getAssets().get(0);
             assertThat(updatedAsset.getTags()).isEqualTo(newTags);
+            assertThat(updatedProduct.getMasterData().hasStagedChanges()).isTrue();
+
+            return updatedProduct;
+        });
+    }
+
+    @Test
+    public void setAssetTagsByVariantIdWithStaged() {
+        setAssetTagsByVariantIdWithStaged(true);
+        setAssetTagsByVariantIdWithStaged(false);
+    }
+
+    public void setAssetTagsByVariantIdWithStaged(final Boolean staged) {
+        withProductHavingAssets(client(), product -> {
+            assertThat(product.getMasterData().hasStagedChanges()).isFalse();
+            final Set<String> newTags = new HashSet<>(asList("tag1", "tag2"));
+            final ProductVariant masterVariant = product.getMasterData().getStaged().getMasterVariant();
+            final String assetId = masterVariant.getAssets().get(0).getId();
+
+            final ProductUpdateCommand cmd =
+                    ProductUpdateCommand.of(product, SetAssetTags.ofVariantId(masterVariant.getId(), assetId, newTags, staged));
+            final Product updatedProduct = client().executeBlocking(cmd);
+
+            final Asset updatedAsset = updatedProduct.getMasterData().getStaged().getMasterVariant().getAssets().get(0);
+            assertThat(updatedAsset.getTags()).isEqualTo(newTags);
+            assertThat(updatedProduct.getMasterData().hasStagedChanges()).isEqualTo(staged);
 
             return updatedProduct;
         });
