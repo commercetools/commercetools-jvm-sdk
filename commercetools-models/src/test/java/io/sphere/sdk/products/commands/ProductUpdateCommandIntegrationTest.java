@@ -2087,6 +2087,7 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
     @Test
     public void changeAssetNameByVariantId() throws Exception {
         withProductHavingAssets(client(), product -> {
+            assertThat(product.getMasterData().hasStagedChanges()).isFalse();
             final LocalizedString newName = LocalizedString.ofEnglish("new name");
             final ProductVariant masterVariant = product.getMasterData().getStaged().getMasterVariant();
             final String assetId = masterVariant.getAssets().get(0).getId();
@@ -2097,7 +2098,32 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
 
             final Asset updatedAsset = updatedProduct.getMasterData().getStaged().getMasterVariant().getAssets().get(0);
             assertThat(updatedAsset.getName()).isEqualTo(newName);
+            assertThat(updatedProduct.getMasterData().hasStagedChanges()).isTrue();
 
+            return updatedProduct;
+        });
+    }
+
+    @Test
+    public void changeAssetNameByVariantIdWithStaged() {
+        changeAssetNameByVariantIdWithStaged(true);
+        changeAssetNameByVariantIdWithStaged(false);
+    }
+
+    public void changeAssetNameByVariantIdWithStaged(final Boolean staged) {
+        withProductHavingAssets(client(), product -> {
+            assertThat(product.getMasterData().hasStagedChanges()).isFalse();
+            final LocalizedString newName = LocalizedString.ofEnglish("new name");
+            final ProductVariant masterVariant = product.getMasterData().getStaged().getMasterVariant();
+            final String assetId = masterVariant.getAssets().get(0).getId();
+
+            final ProductUpdateCommand cmd =
+                    ProductUpdateCommand.of(product, ChangeAssetName.ofVariantId(masterVariant.getId(), assetId, newName, staged));
+            final Product updatedProduct = client().executeBlocking(cmd);
+
+            final Asset updatedAsset = updatedProduct.getMasterData().getStaged().getMasterVariant().getAssets().get(0);
+            assertThat(updatedAsset.getName()).isEqualTo(newName);
+            assertThat(updatedProduct.getMasterData().hasStagedChanges()).isEqualTo(staged);
             return updatedProduct;
         });
     }
@@ -2105,6 +2131,7 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
     @Test
     public void changeAssetNameBySku() throws Exception {
         withProductHavingAssets(client(), product -> {
+            assertThat(product.getMasterData().hasStagedChanges()).isFalse();
             final LocalizedString newName = LocalizedString.ofEnglish("new name");
             final ProductVariant masterVariant = product.getMasterData().getStaged().getMasterVariant();
             final String assetId = masterVariant.getAssets().get(0).getId();
@@ -2115,6 +2142,32 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
 
             final Asset updatedAsset = updatedProduct.getMasterData().getStaged().getMasterVariant().getAssets().get(0);
             assertThat(updatedAsset.getName()).isEqualTo(newName);
+            assertThat(updatedProduct.getMasterData().hasStagedChanges()).isTrue();
+
+            return updatedProduct;
+        });
+    }
+
+    @Test
+    public void changeAssetNameBySkuWithStaged() {
+        changeAssetNameBySkuWithStaged(true);
+        changeAssetNameBySkuWithStaged(false);
+    }
+
+    public void changeAssetNameBySkuWithStaged(final Boolean staged) {
+        withProductHavingAssets(client(), product -> {
+            assertThat(product.getMasterData().hasStagedChanges()).isFalse();
+            final LocalizedString newName = LocalizedString.ofEnglish("new name");
+            final ProductVariant masterVariant = product.getMasterData().getStaged().getMasterVariant();
+            final String assetId = masterVariant.getAssets().get(0).getId();
+
+            final ProductUpdateCommand cmd =
+                    ProductUpdateCommand.of(product, ChangeAssetName.ofSku(masterVariant.getSku(), assetId, newName, staged));
+            final Product updatedProduct = client().executeBlocking(cmd);
+
+            final Asset updatedAsset = updatedProduct.getMasterData().getStaged().getMasterVariant().getAssets().get(0);
+            assertThat(updatedAsset.getName()).isEqualTo(newName);
+            assertThat(updatedProduct.getMasterData().hasStagedChanges()).isEqualTo(staged);
 
             return updatedProduct;
         });
