@@ -10,10 +10,9 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.function.Consumer;
 
+import static io.sphere.sdk.products.ProductsScenario1Fixtures.*;
 import static io.sphere.sdk.test.SphereTestUtils.*;
 import static org.assertj.core.api.Assertions.assertThat;
-
-import static io.sphere.sdk.products.ProductsScenario1Fixtures.*;
 
 public class ProductProjectionSearchModelSortIntegrationTest extends ProductProjectionSearchModelIntegrationTest {
 
@@ -172,6 +171,12 @@ public class ProductProjectionSearchModelSortIntegrationTest extends ProductProj
     @Test
     public void onDateTimeSetAttributes() throws Exception {
         testProductIds(PRODUCT_MODEL.allVariants().attribute().ofDateTimeSet(ATTR_NAME_DATE_TIME_SET).desc(),
+                ids -> assertThat(ids).containsExactly(product1.getId(), product2.getId()));
+    }
+
+    @Test
+    public void onSku() throws Exception {
+        testProductIds(PRODUCT_MODEL.allVariants().sku().desc(),
                 ids -> assertThat(ids).containsExactly(product1.getId(), product2.getId()));
     }
 
