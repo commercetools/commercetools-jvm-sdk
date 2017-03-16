@@ -26,12 +26,15 @@ public final class SetAssetCustomField extends SetCustomFieldBase<Product> {
     @Nullable
     private final String sku;
     private final String assetId;
+    @Nullable
+    private final Boolean staged;
 
-    private SetAssetCustomField(final String assetId, @Nullable final Integer variantId, @Nullable final String sku, final String name, final JsonNode value) {
+    private SetAssetCustomField(final String assetId, @Nullable final Integer variantId, @Nullable final String sku, final String name, final JsonNode value, @Nullable final Boolean staged) {
         super("setAssetCustomField", name, value);
         this.assetId = assetId;
         this.variantId = variantId;
         this.sku = sku;
+        this.staged = staged;
     }
 
     public String getAssetId() {
@@ -49,18 +52,39 @@ public final class SetAssetCustomField extends SetCustomFieldBase<Product> {
     }
 
     public static SetAssetCustomField ofVariantIdUsingJson(final Integer variantId, final String assetId, final String name, final JsonNode value) {
-        return new SetAssetCustomField(assetId, variantId, null, name, value);
+        return ofVariantIdUsingJson(variantId, assetId, name, value, true);
+    }
+
+    public static SetAssetCustomField ofVariantIdUsingJson(final Integer variantId, final String assetId, final String name, final JsonNode value, @Nullable final Boolean staged) {
+        return new SetAssetCustomField(assetId, variantId, null, name, value, staged);
     }
 
     public static SetAssetCustomField ofSkuUsingJson(final String sku, final String assetId, final String name, final JsonNode value) {
-        return new SetAssetCustomField(assetId, null, sku, name, value);
+        return ofSkuUsingJson(sku, assetId, name, value, true);
+    }
+
+    public static SetAssetCustomField ofSkuUsingJson(final String sku, final String assetId, final String name, final JsonNode value, @Nullable final Boolean staged) {
+        return new SetAssetCustomField(assetId, null, sku, name, value, staged);
     }
 
     public static SetAssetCustomField ofVariantId(final Integer variantId, final String assetId, final String name, final Object value) {
-        return ofVariantIdUsingJson(variantId, assetId, name, SphereJsonUtils.toJsonNode(value));
+        return ofVariantId(variantId, assetId, name, value, true);
+    }
+
+    public static SetAssetCustomField ofVariantId(final Integer variantId, final String assetId, final String name, final Object value, @Nullable final Boolean staged) {
+        return ofVariantIdUsingJson(variantId, assetId, name, SphereJsonUtils.toJsonNode(value), staged);
     }
 
     public static SetAssetCustomField ofSku(final String sku, final String assetId, final String name, final Object value) {
-        return ofSkuUsingJson(sku, assetId, name, SphereJsonUtils.toJsonNode(value));
+        return ofSku(sku, assetId, name, value, true);
+    }
+
+    public static SetAssetCustomField ofSku(final String sku, final String assetId, final String name, final Object value, @Nullable final boolean staged) {
+        return ofSkuUsingJson(sku, assetId, name, SphereJsonUtils.toJsonNode(value), staged);
+    }
+
+    @Nullable
+    public Boolean getStaged() {
+        return staged;
     }
 }
