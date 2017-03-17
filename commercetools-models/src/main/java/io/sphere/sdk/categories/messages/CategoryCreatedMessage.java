@@ -4,16 +4,15 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import io.sphere.sdk.annotations.MessageTypeInfo;
 import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.messages.GenericMessageImpl;
 import io.sphere.sdk.messages.MessageDerivateHint;
 
 import java.time.ZonedDateTime;
 
+
 @JsonDeserialize(as = CategoryCreatedMessage.class)//important to override annotation in Message class
-@MessageTypeInfo(type = CategoryCreatedMessage.MESSAGE_TYPE, resourceType = "category") // TODO improve this further
-@JsonTypeName("message")
+@JsonTypeName(CategoryCreatedMessage.MESSAGE_TYPE)
 public final class CategoryCreatedMessage extends GenericMessageImpl<Category> {
     public static final String MESSAGE_TYPE = "CategoryCreated";
     public static final MessageDerivateHint<CategoryCreatedMessage> MESSAGE_HINT =
