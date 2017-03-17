@@ -51,6 +51,19 @@ public class CartCreateCommandIntegrationTest extends IntegrationTest {
     }
 
     @Test
+    public void cartCreationWithTTL() throws Exception {
+        final int deleteDaysAfterLastModification = 1;
+        final CartDraft cartDraft = CartDraft.of(EUR)
+                .withCountry(DE)
+                .withDeleteDaysAfterLastModification(deleteDaysAfterLastModification);
+        final Cart cart = client().executeBlocking(CartCreateCommand.of(cartDraft));
+        assertThat(cart.getTotalPrice().getCurrency().getCurrencyCode()).isEqualTo(EUR.getCurrencyCode());
+        assertThat(cart.getCountry()).isEqualTo(DE);
+        assertThat(cart.getTotalPrice().isZero()).isTrue();
+        assertThat(cart.getDeleteDaysAfterLastModification()).isEqualTo(deleteDaysAfterLastModification);
+    }
+
+    @Test
     public void fullExample() throws Exception {
         final Address shippingAddress = Address.of(CountryCode.DE).withAdditionalAddressInfo("shipping");
         final Address billingAddress = Address.of(CountryCode.DE).withAdditionalAddressInfo("billing");
