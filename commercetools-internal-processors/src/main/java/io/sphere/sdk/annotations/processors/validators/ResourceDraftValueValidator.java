@@ -4,28 +4,26 @@ import com.squareup.javapoet.ClassName;
 import io.sphere.sdk.annotations.FactoryMethod;
 import io.sphere.sdk.annotations.ResourceDraftValue;
 import io.sphere.sdk.annotations.processors.models.PropertyGenModel;
-import io.sphere.sdk.annotations.processors.models.TypeUtils;
 
-import javax.annotation.processing.Messager;
 import javax.annotation.processing.ProcessingEnvironment;
 import javax.lang.model.element.TypeElement;
-import javax.lang.model.util.Elements;
 import javax.tools.Diagnostic;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
- * Validator for types annotated with  {@link ResourceDraftValue}.
+ * Validator for types annotated with {@link ResourceDraftValue}.
+ *
+ * Validates that:
+ * <ol>
+ *     <li>At least one {@link FactoryMethod} is specified {@link ResourceDraftValue#factoryMethods()}</li>
+ *     <li>The annotated type has corresponding properties for all specified {@link FactoryMethod#parameterNames()}</li>
+ * </ol>
  */
-public class ResourceDraftValueValidator {
-    private final Messager messager;
-    private final Elements elements;
-    private final TypeUtils typeUtils;
+public class ResourceDraftValueValidator extends AbstractValidator {
 
     public ResourceDraftValueValidator(final ProcessingEnvironment processingEnvironment) {
-        this.messager = processingEnvironment.getMessager();
-        this.elements = processingEnvironment.getElementUtils();
-        this.typeUtils = new TypeUtils(elements);
+        super(processingEnvironment);
     }
 
     /**
@@ -34,7 +32,7 @@ public class ResourceDraftValueValidator {
      * @param resourceDraftType the type annotated with {@link ResourceDraftValue}
      * @return true iff. the given type is valid
      */
-    public boolean validate(final TypeElement resourceDraftType) {
+    public boolean isValid(final TypeElement resourceDraftType) {
         boolean isValid = true;
         final ResourceDraftValue resourceDraftValue = resourceDraftType.getAnnotation(ResourceDraftValue.class);
 
@@ -50,7 +48,7 @@ public class ResourceDraftValueValidator {
         } else {
             for (final FactoryMethod factoryMethod : factoryMethods) {
                 final String[] parameterNames = factoryMethod.parameterNames();
-                final Set<String> allPropertyNames = typeUtils.getAllGetterMethods(resourceDraftType)
+                final Set<String> allPropertyNames = typeUtils.getAllPropertyMethods(resourceDraftType)
                         .map(PropertyGenModel::getPropertyName)
                         .collect(Collectors.toSet());
 

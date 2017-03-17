@@ -21,7 +21,7 @@ public final class ResourceDraftValueAnnotationProcessor extends CommercetoolsAn
     @Override
     protected void generate(final TypeElement typeElement) {
         final ResourceDraftValueValidator validator = new ResourceDraftValueValidator(processingEnv);
-        if (validator.validate(typeElement)) {
+        if (validator.isValid(typeElement)) {
 
             writeClass(typeElement, new ResourceDraftDslClassModelFactory(typeElement).createClassModel());
 
