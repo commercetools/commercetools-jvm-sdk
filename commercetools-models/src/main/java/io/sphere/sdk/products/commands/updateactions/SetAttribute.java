@@ -2,10 +2,9 @@ package io.sphere.sdk.products.commands.updateactions;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import io.sphere.sdk.json.SphereJsonUtils;
+import io.sphere.sdk.products.Product;
 import io.sphere.sdk.products.attributes.AttributeDraft;
 import io.sphere.sdk.products.attributes.NamedAttributeAccess;
-import io.sphere.sdk.commands.UpdateActionImpl;
-import io.sphere.sdk.products.Product;
 
 import javax.annotation.Nullable;
 
@@ -22,7 +21,7 @@ import javax.annotation.Nullable;
  *
  * @see SetAttributeInAllVariants
  */
-public final class SetAttribute extends UpdateActionImpl<Product> {
+public final class SetAttribute extends StagedProductUpdateActionImpl<Product> {
     @Nullable
     private final Integer variantId;
     @Nullable
@@ -31,8 +30,8 @@ public final class SetAttribute extends UpdateActionImpl<Product> {
     @Nullable
     private final JsonNode value;
 
-    SetAttribute(@Nullable final Integer variantId, @Nullable final String sku, final String name, @Nullable final JsonNode value) {
-        super("setAttribute");
+    SetAttribute(@Nullable final Integer variantId, @Nullable final String sku, final String name, @Nullable final JsonNode value, @Nullable final Boolean staged) {
+        super("setAttribute", staged);
         this.variantId = variantId;
         this.sku = sku;
         this.name = name;
@@ -67,7 +66,11 @@ public final class SetAttribute extends UpdateActionImpl<Product> {
      * @return update action
      */
     public static SetAttribute of(final Integer variantId, final String name, @Nullable final JsonNode value) {
-        return new SetAttribute(variantId, null, name, value);
+        return of(variantId, name, value, null);
+    }
+
+    public static SetAttribute of(final Integer variantId, final String name, @Nullable final JsonNode value, @Nullable final Boolean staged) {
+        return ofVariantId(variantId, name, value, staged);
     }
 
     /**
@@ -79,7 +82,11 @@ public final class SetAttribute extends UpdateActionImpl<Product> {
      * @return update action
      */
     public static SetAttribute ofVariantId(final Integer variantId, final String name, @Nullable final JsonNode value) {
-        return new SetAttribute(variantId, null, name, value);
+        return ofVariantId(variantId, name, value, null);
+    }
+
+    public static SetAttribute ofVariantId(final Integer variantId, final String name, @Nullable final JsonNode value, @Nullable final Boolean staged) {
+        return new SetAttribute(variantId, null, name, value, staged);
     }
 
     /**
@@ -91,7 +98,11 @@ public final class SetAttribute extends UpdateActionImpl<Product> {
      * @return update action
      */
     public static SetAttribute ofVariantId(final Integer variantId, final String name, @Nullable final Object value) {
-        return new SetAttribute(variantId, null, name, SphereJsonUtils.toJsonNode(value));
+        return ofVariantId(variantId, name, value, null);
+    }
+
+    public static SetAttribute ofVariantId(final Integer variantId, final String name, @Nullable final Object value, @Nullable final Boolean staged) {
+        return new SetAttribute(variantId, null, name, SphereJsonUtils.toJsonNode(value), staged);
     }
 
     /**
@@ -103,7 +114,11 @@ public final class SetAttribute extends UpdateActionImpl<Product> {
      * @return update action
      */
     public static SetAttribute ofSku(final String sku, final String name, @Nullable final JsonNode value) {
-        return new SetAttribute(null, sku, name, value);
+        return ofSku(sku, name, value, null);
+    }
+
+    public static SetAttribute ofSku(final String sku, final String name, @Nullable final JsonNode value, @Nullable final Boolean staged) {
+        return new SetAttribute(null, sku, name, value, staged);
     }
 
     /**
@@ -115,7 +130,11 @@ public final class SetAttribute extends UpdateActionImpl<Product> {
      * @return update action
      */
     public static SetAttribute ofSku(final String sku, final String name, @Nullable final Object value) {
-        return new SetAttribute(null, sku, name, SphereJsonUtils.toJsonNode(value));
+        return ofSku(sku, name, value, null);
+    }
+
+    public static SetAttribute ofSku(final String sku, final String name, @Nullable final Object value, @Nullable final Boolean staged) {
+        return new SetAttribute(null, sku, name, SphereJsonUtils.toJsonNode(value), staged);
     }
 
     /**
@@ -125,7 +144,11 @@ public final class SetAttribute extends UpdateActionImpl<Product> {
      * @return update action
      */
     public static SetAttribute ofUnsetAttribute(final Integer variantId, final String name) {
-        return ofVariantId(variantId, name, null);
+        return ofUnsetAttribute(variantId, name, null);
+    }
+
+    public static SetAttribute ofUnsetAttribute(final Integer variantId, final String name, @Nullable final Boolean staged) {
+        return ofVariantId(variantId, name, null, staged);
     }
 
     /**
@@ -135,7 +158,11 @@ public final class SetAttribute extends UpdateActionImpl<Product> {
      * @return update action
      */
     public static SetAttribute ofUnsetAttributeForVariantId(final Integer variantId, final String name) {
-        return ofVariantId(variantId, name, null);
+        return ofUnsetAttributeForVariantId(variantId, name, null);
+    }
+
+    public static SetAttribute ofUnsetAttributeForVariantId(final Integer variantId, final String name, @Nullable final Boolean staged) {
+        return ofVariantId(variantId, name, null, staged);
     }
 
     /**
@@ -145,7 +172,11 @@ public final class SetAttribute extends UpdateActionImpl<Product> {
      * @return update action
      */
     public static SetAttribute ofUnsetAttributeForSku(final String sku, final String name) {
-        return ofSku(sku, name, null);
+        return ofUnsetAttributeForSku(sku, name, null);
+    }
+
+    public static SetAttribute ofUnsetAttributeForSku(final String sku, final String name, @Nullable final Boolean staged) {
+        return ofSku(sku, name, null, staged);
     }
 
     /**
@@ -158,7 +189,11 @@ public final class SetAttribute extends UpdateActionImpl<Product> {
      * @return update action
      */
     public static <T> SetAttribute ofUnsetAttribute(final Integer variantId, final NamedAttributeAccess<T> NamedAttributeAccess) {
-        return ofVariantId(variantId, NamedAttributeAccess.getName(), null);
+        return ofUnsetAttribute(variantId, NamedAttributeAccess, null);
+    }
+
+    public static <T> SetAttribute ofUnsetAttribute(final Integer variantId, final NamedAttributeAccess<T> NamedAttributeAccess, @Nullable final Boolean staged) {
+        return ofVariantId(variantId, NamedAttributeAccess.getName(), null, staged);
     }
 
     /**
@@ -171,7 +206,11 @@ public final class SetAttribute extends UpdateActionImpl<Product> {
      * @return update action
      */
     public static <T> SetAttribute ofUnsetAttributeForVariantId(final Integer variantId, final NamedAttributeAccess<T> NamedAttributeAccess) {
-        return ofVariantId(variantId, NamedAttributeAccess.getName(), null);
+        return ofUnsetAttributeForVariantId(variantId, NamedAttributeAccess, null);
+    }
+
+    public static <T> SetAttribute ofUnsetAttributeForVariantId(final Integer variantId, final NamedAttributeAccess<T> NamedAttributeAccess, @Nullable final Boolean staged) {
+        return ofVariantId(variantId, NamedAttributeAccess.getName(), null, staged);
     }
 
     /**
@@ -184,7 +223,11 @@ public final class SetAttribute extends UpdateActionImpl<Product> {
      * @return update action
      */
     public static <T> SetAttribute ofUnsetAttributeForSku(final String sku, final NamedAttributeAccess<T> NamedAttributeAccess) {
-        return ofSku(sku, NamedAttributeAccess.getName(), null);
+        return ofUnsetAttributeForSku(sku, NamedAttributeAccess, null);
+    }
+
+    public static <T> SetAttribute ofUnsetAttributeForSku(final String sku, final NamedAttributeAccess<T> NamedAttributeAccess, @Nullable final Boolean staged) {
+        return ofSku(sku, NamedAttributeAccess.getName(), null, staged);
     }
 
     /**
@@ -195,7 +238,11 @@ public final class SetAttribute extends UpdateActionImpl<Product> {
      * @return update action
      */
     public static SetAttribute of(final Integer variantId, final AttributeDraft attribute) {
-        return ofVariantId(variantId, attribute.getName(), attribute.getValue());
+        return of(variantId, attribute, null);
+    }
+
+    public static SetAttribute of(final Integer variantId, final AttributeDraft attribute, @Nullable final Boolean staged) {
+        return ofVariantId(variantId, attribute.getName(), attribute.getValue(), staged);
     }
 
     /**
@@ -206,7 +253,11 @@ public final class SetAttribute extends UpdateActionImpl<Product> {
      * @return update action
      */
     public static SetAttribute ofVariantId(final Integer variantId, final AttributeDraft attribute) {
-        return ofVariantId(variantId, attribute.getName(), attribute.getValue());
+        return ofVariantId(variantId, attribute, null);
+    }
+
+    public static SetAttribute ofVariantId(final Integer variantId, final AttributeDraft attribute, @Nullable final Boolean staged) {
+        return ofVariantId(variantId, attribute.getName(), attribute.getValue(), staged);
     }
 
     /**
@@ -217,7 +268,11 @@ public final class SetAttribute extends UpdateActionImpl<Product> {
      * @return update action
      */
     public static SetAttribute ofSku(final String sku, final AttributeDraft attribute) {
-        return ofSku(sku, attribute.getName(), attribute.getValue());
+        return ofSku(sku, attribute, null);
+    }
+
+    public static SetAttribute ofSku(final String sku, final AttributeDraft attribute, @Nullable final Boolean staged) {
+        return ofSku(sku, attribute.getName(), attribute.getValue(), staged);
     }
 
     /**
@@ -230,7 +285,11 @@ public final class SetAttribute extends UpdateActionImpl<Product> {
      * @return update action
      */
     public static <T> SetAttribute of(final Integer variantId, final NamedAttributeAccess<T> setter, final T value) {
-        return ofVariantId(variantId, AttributeDraft.of(setter, value));
+        return of(variantId, setter, value, null);
+    }
+
+    public static <T> SetAttribute of(final Integer variantId, final NamedAttributeAccess<T> setter, final T value, @Nullable final Boolean staged) {
+        return ofVariantId(variantId, AttributeDraft.of(setter, value), staged);
     }
 
     /**
@@ -243,7 +302,11 @@ public final class SetAttribute extends UpdateActionImpl<Product> {
      * @return update action
      */
     public static <T> SetAttribute ofVariantId(final Integer variantId, final NamedAttributeAccess<T> setter, final T value) {
-        return ofVariantId(variantId, AttributeDraft.of(setter, value));
+        return ofVariantId(variantId, setter, value, null);
+    }
+
+    public static <T> SetAttribute ofVariantId(final Integer variantId, final NamedAttributeAccess<T> setter, final T value, @Nullable final Boolean staged) {
+        return ofVariantId(variantId, AttributeDraft.of(setter, value), staged);
     }
 
     /**
@@ -251,11 +314,15 @@ public final class SetAttribute extends UpdateActionImpl<Product> {
      *
      * @param sku
      * @param setter the serializer of the attribute
-     * @param value the value to set
-     * @param <T> type of the attribute
+     * @param value  the value to set
+     * @param <T>    type of the attribute
      * @return update action
      */
     public static <T> SetAttribute ofSku(final String sku, final NamedAttributeAccess<T> setter, final T value) {
-        return ofSku(sku, AttributeDraft.of(setter, value));
+        return ofSku(sku, setter, value, null);
+    }
+
+    public static <T> SetAttribute ofSku(final String sku, final NamedAttributeAccess<T> setter, final T value, @Nullable final Boolean staged) {
+        return ofSku(sku, AttributeDraft.of(setter, value), staged);
     }
 }

@@ -1,6 +1,5 @@
 package io.sphere.sdk.products.commands.updateactions;
 
-import io.sphere.sdk.commands.UpdateActionImpl;
 import io.sphere.sdk.products.Product;
 
 import javax.annotation.Nullable;
@@ -17,7 +16,7 @@ import java.util.Set;
  * <p>By SKU (attention, SKU is optional field in a variant):</p>
  * {@include.example io.sphere.sdk.products.commands.ProductUpdateCommandIntegrationTest#setAssetTagsBySku()}
  */
-public final class SetAssetTags extends UpdateActionImpl<Product> {
+public final class SetAssetTags extends StagedProductUpdateActionImpl<Product> {
     @Nullable
     private final Integer variantId;
     @Nullable
@@ -26,8 +25,8 @@ public final class SetAssetTags extends UpdateActionImpl<Product> {
     @Nullable
     private final Set<String> tags;
 
-    private SetAssetTags(final String assetId, @Nullable final Integer variantId, @Nullable final String sku, @Nullable final Set<String> tags) {
-        super("setAssetTags");
+    private SetAssetTags(final String assetId, @Nullable final Integer variantId, @Nullable final String sku, @Nullable final Set<String> tags, @Nullable final Boolean staged) {
+        super("setAssetTags", staged);
         this.assetId = assetId;
         this.variantId = variantId;
         this.sku = sku;
@@ -54,10 +53,18 @@ public final class SetAssetTags extends UpdateActionImpl<Product> {
     }
 
     public static SetAssetTags ofVariantId(final Integer variantId, final String assetId, @Nullable final Set<String> tags) {
-        return new SetAssetTags(assetId, variantId, null, tags);
+        return ofVariantId(variantId, assetId, tags, null);
+    }
+
+    public static SetAssetTags ofVariantId(final Integer variantId, final String assetId, @Nullable final Set<String> tags, @Nullable final Boolean staged) {
+        return new SetAssetTags(assetId, variantId, null, tags, staged);
     }
 
     public static SetAssetTags ofSku(final String sku, final String assetId, @Nullable final Set<String> tags) {
-        return new SetAssetTags(assetId, null, sku, tags);
+        return ofSku(sku, assetId, tags, null);
+    }
+
+    public static SetAssetTags ofSku(final String sku, final String assetId, @Nullable final Set<String> tags, @Nullable final Boolean staged) {
+        return new SetAssetTags(assetId, null, sku, tags, staged);
     }
 }

@@ -1,6 +1,5 @@
 package io.sphere.sdk.products.commands.updateactions;
 
-import io.sphere.sdk.commands.UpdateActionImpl;
 import io.sphere.sdk.products.Product;
 import io.sphere.sdk.products.ProductProjection;
 
@@ -21,24 +20,32 @@ import javax.annotation.Nullable;
  * @see ProductProjection#getMasterVariant()
  * @see ProductProjection#getVariants()
  */
-public final class ChangeMasterVariant extends UpdateActionImpl<Product> {
+public final class ChangeMasterVariant extends StagedProductUpdateActionImpl<Product> {
     @Nullable
     private final Integer variantId;
     @Nullable
     private final String sku;
 
-    private ChangeMasterVariant(@Nullable final Integer variantId, @Nullable final String sku) {
-        super("changeMasterVariant");
+    private ChangeMasterVariant(@Nullable final Integer variantId, @Nullable final String sku, @Nullable final Boolean staged) {
+        super("changeMasterVariant", staged);
         this.variantId = variantId;
         this.sku = sku;
     }
 
     public static ChangeMasterVariant ofSku(final String sku) {
-        return new ChangeMasterVariant(null, sku);
+        return ofSku(sku, null);
+    }
+
+    public static ChangeMasterVariant ofSku(final String sku, @Nullable final Boolean staged) {
+        return new ChangeMasterVariant(null, sku, staged);
     }
 
     public static ChangeMasterVariant ofVariantId(final Integer variantId) {
-        return new ChangeMasterVariant(variantId, null);
+        return ofVariantId(variantId, null);
+    }
+
+    public static ChangeMasterVariant ofVariantId(final Integer variantId, @Nullable final Boolean staged) {
+        return new ChangeMasterVariant(variantId, null, staged);
     }
 
     @Nullable

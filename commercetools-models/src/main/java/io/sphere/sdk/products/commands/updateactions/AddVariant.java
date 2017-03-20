@@ -1,6 +1,5 @@
 package io.sphere.sdk.products.commands.updateactions;
 
-import io.sphere.sdk.commands.UpdateActionImpl;
 import io.sphere.sdk.products.Image;
 import io.sphere.sdk.products.PriceDraft;
 import io.sphere.sdk.products.Product;
@@ -25,7 +24,7 @@ import java.util.List;
  * @see io.sphere.sdk.products.ProductProjection#getMasterVariant()
  * @see io.sphere.sdk.products.ProductProjection#getVariants()
  */
-public final class AddVariant extends UpdateActionImpl<Product> {
+public final class AddVariant extends StagedProductUpdateActionImpl<Product> {
     @Nullable
     private final String sku;
     private final List<PriceDraft> prices;
@@ -35,8 +34,8 @@ public final class AddVariant extends UpdateActionImpl<Product> {
     @Nullable
     private final List<Image> images;
 
-    private AddVariant(final List<AttributeDraft> attributes, final List<PriceDraft> prices, @Nullable final String sku, final String key, final List<Image> images) {
-        super("addVariant");
+    private AddVariant(final List<AttributeDraft> attributes, final List<PriceDraft> prices, @Nullable final String sku, final String key, final List<Image> images, @Nullable final Boolean staged) {
+        super("addVariant", staged);
         this.attributes = attributes;
         this.prices = prices;
         this.sku = sku;
@@ -68,22 +67,30 @@ public final class AddVariant extends UpdateActionImpl<Product> {
     }
 
     public AddVariant withSku(@Nullable final String sku) {
-        return new AddVariant(attributes, prices, sku, key, images);
+        return new AddVariant(attributes, prices, sku, key, images, staged);
     }
 
     public AddVariant withKey(@Nullable final String key) {
-        return new AddVariant(attributes, prices, sku, key, images);
+        return new AddVariant(attributes, prices, sku, key, images, staged);
     }
 
     public AddVariant withImages(final List<Image> images) {
-        return new AddVariant(attributes, prices, sku, key, images);
+        return new AddVariant(attributes, prices, sku, key, images, staged);
     }
 
     public static AddVariant of(final List<AttributeDraft> attributes, final List<PriceDraft> prices, @Nullable final String sku) {
-        return new AddVariant(attributes, prices, sku, null, null);
+        return of(attributes, prices, sku, null);
+    }
+
+    public static AddVariant of(final List<AttributeDraft> attributes, final List<PriceDraft> prices, @Nullable final String sku, @Nullable final Boolean staged) {
+        return new AddVariant(attributes, prices, sku, null, null, staged);
     }
 
     public static AddVariant of(final List<AttributeDraft> attributes, final List<PriceDraft> prices) {
-        return new AddVariant(attributes, prices, null, null, null);
+        return of(attributes, prices, null, null);
+    }
+
+    public static AddVariant of(final List<AttributeDraft> attributes, final List<PriceDraft> prices, @Nullable final Boolean staged) {
+        return new AddVariant(attributes, prices, null, null, null, staged);
     }
 }
