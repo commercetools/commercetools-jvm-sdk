@@ -1,21 +1,17 @@
 package io.sphere.sdk.annotations.processors.generators;
 
-import com.google.common.base.Charsets;
-import com.google.testing.compile.CompilationRule;
-import com.squareup.javapoet.JavaFile;
 import io.sphere.sdk.annotations.processors.generators.examples.*;
-import org.apache.commons.io.IOUtils;
-import org.junit.Rule;
+import org.junit.Before;
 import org.junit.Test;
-
-import javax.lang.model.element.TypeElement;
-import java.io.InputStream;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
-public class DraftBuilderGeneratorTest {
-    @Rule
-    public CompilationRule compilationRule = new CompilationRule();
+public class DraftBuilderGeneratorTest extends AbstractGeneratorTest {
+
+    @Before
+    public void setup() {
+        generator = new DraftBuilderGenerator(compilationRule.getElements());
+    }
 
     @Test
     public void generateDraftBuilderClass() throws Exception {
@@ -57,24 +53,5 @@ public class DraftBuilderGeneratorTest {
         final String content = generateAsString(ExampleWithBuilderReturnsInterfaceDraft.class);
 
         assertThat(content).isEqualTo(expectedContent(ExampleWithBuilderReturnsInterfaceDraft.class));
-    }
-
-    private String generateAsString(final Class<?> clazz) throws Exception {
-        final TypeElement typeElement = compilationRule.getElements().getTypeElement(clazz.getCanonicalName());
-
-        final JavaFile javaFile = new DraftBuilderGenerator(compilationRule.getElements()).generate(typeElement);
-        StringBuilder stringBuilder = new StringBuilder();
-        javaFile.writeTo(stringBuilder);
-        return stringBuilder.toString();
-    }
-
-    private String expectedContent(final Class<?> clazz) throws Exception {
-        final String fixtureFile = clazz.getSimpleName() + "Builder.java.expected";
-        try (InputStream resourceAsStream = clazz.getResourceAsStream(fixtureFile)) {
-            return IOUtils.toString(resourceAsStream, Charsets.UTF_8);
-        } catch (NullPointerException e) {
-            // this just makes it easier to diagnose missing files
-            throw new IllegalStateException("Fixture file '" + fixtureFile + "' not found.", e);
-        }
     }
 }

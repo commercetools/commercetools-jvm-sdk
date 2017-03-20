@@ -1,5 +1,6 @@
 package io.sphere.sdk.annotations.processors.models;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.squareup.javapoet.ClassName;
 import com.squareup.javapoet.ParameterizedTypeName;
 import com.squareup.javapoet.TypeName;
@@ -20,6 +21,8 @@ import java.util.Objects;
 public class PropertyGenModel {
     private final String name;
 
+    private final String jsonName;
+
     private final String javaIdentifier;
 
     private final TypeMirror type;
@@ -28,8 +31,9 @@ public class PropertyGenModel {
 
     private final boolean optional;
 
-    private PropertyGenModel(final String name, final TypeMirror type, final String javaDocLinkTag, final boolean optional) {
+    private PropertyGenModel(final String name, final String jsonName, final TypeMirror type, final String javaDocLinkTag, final boolean optional) {
         this.name = name;
+        this.jsonName = jsonName;
         this.javaIdentifier = (SourceVersion.isKeyword(name) ? "_" : "") + name;
         this.type = type;
         this.javadocLinkTag = javaDocLinkTag;
@@ -38,6 +42,15 @@ public class PropertyGenModel {
 
     public String getName() {
         return name;
+    }
+
+    /**
+     * Returns the name of this poroperty as specified with {@link com.fasterxml.jackson.annotation.JsonProperty}
+     *
+     * @return the json name or null if the {@link com.fasterxml.jackson.annotation.JsonProperty} isn't present
+     */
+    public String getJsonName() {
+        return jsonName;
     }
 
     public String getJavaIdentifier() {
@@ -131,20 +144,22 @@ public class PropertyGenModel {
      */
     public static PropertyGenModel of(final ExecutableElement getterMethod) {
         final boolean optional = getterMethod.getAnnotation(Nullable.class) != null;
+        final JsonProperty jsonProperty = getterMethod.getAnnotation(JsonProperty.class);
+        final String jsonName = jsonProperty != null ? jsonProperty.value() : null;
         final String javadocLinkTag =
                 String.format("{@link %s#%s()}", getterMethod.getEnclosingElement().getSimpleName(), getterMethod.getSimpleName());
-        return new PropertyGenModel(getPropertyName(getterMethod), getterMethod.getReturnType(), javadocLinkTag, optional);
+        return new PropertyGenModel(getPropertyName(getterMethod), jsonName, getterMethod.getReturnType(), javadocLinkTag, optional);
     }
 
     /**
-     * Returns the property name of the given getter method.
+     * Returns the property name of the given property method.
      *
-     * @param getterMethod the getter method
+     * @param propertyMethod the getter method
      * @return the uncapitalized name of the property
      */
-    public static String getPropertyName(final ExecutableElement getterMethod) {
-        final String name = getterMethod.getSimpleName().toString();
-        final int propertyNameIndex = name.startsWith("is") ? 2 : 3;
+    public static String getPropertyName(final ExecutableElement propertyMethod) {
+        final String name = propertyMethod.getSimpleName().toString();
+        final int propertyNameIndex = name.startsWith("get") ? 3 : name.startsWith("is") ? 2 : 0;
         final String propertyName = StringUtils.uncapitalize(name.substring(propertyNameIndex));
         return propertyName;
     }

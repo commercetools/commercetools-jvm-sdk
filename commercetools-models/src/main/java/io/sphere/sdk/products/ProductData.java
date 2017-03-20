@@ -1,6 +1,7 @@
 package io.sphere.sdk.products;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import io.sphere.sdk.annotations.ResourceValue;
 import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Reference;
@@ -10,6 +11,7 @@ import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Set;
 
+@ResourceValue(abstractResourceClass = true)
 @JsonDeserialize(as=ProductDataImpl.class)
 public interface ProductData extends ProductDataLike {
     @Override
