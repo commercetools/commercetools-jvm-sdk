@@ -1,5 +1,8 @@
 io.sphere.sdk.annotations
 io.sphere.sdk.annotations.processors
+io.sphere.sdk.annotations.processors.generators
+io.sphere.sdk.annotations.processors.models
+io.sphere.sdk.annotations.processors.validators
 io.sphere.sdk.cartdiscounts
 io.sphere.sdk.cartdiscounts.commands
 io.sphere.sdk.cartdiscounts.commands.updateactions
