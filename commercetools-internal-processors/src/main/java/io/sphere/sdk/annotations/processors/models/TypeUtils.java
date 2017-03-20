@@ -3,6 +3,8 @@ package io.sphere.sdk.annotations.processors.models;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.squareup.javapoet.ClassName;
+import com.squareup.javapoet.ParameterizedTypeName;
+import com.squareup.javapoet.TypeName;
 import io.sphere.sdk.annotations.ResourceDraftValue;
 import io.sphere.sdk.annotations.ResourceValue;
 import io.sphere.sdk.models.Builder;
@@ -11,6 +13,7 @@ import javax.lang.model.element.*;
 import javax.lang.model.util.ElementFilter;
 import javax.lang.model.util.Elements;
 import java.lang.annotation.Annotation;
+import java.lang.reflect.ParameterizedType;
 import java.util.*;
 import java.util.stream.Stream;
 
@@ -39,7 +42,9 @@ public class TypeUtils {
     }
 
     public ClassName getResourceValueImplType(final TypeElement resourceValueTypeElement) {
-        final ClassName draftType = ClassName.get(resourceValueTypeElement);
+        List<? extends TypeParameterElement> typeParameters = resourceValueTypeElement.getTypeParameters();
+        final TypeName draftType = typeParameters.size() > 0 ?
+                ParameterizedTypeName.get((ParameterizedType) resourceValueTypeElement.asType()) : ClassName.get(resourceValueTypeElement);
         final ResourceValue resourceValue = resourceValueTypeElement.getAnnotation(ResourceValue.class);
 
         final String implSuffix = "Impl" + (resourceValue.abstractResourceClass() ? "Base" : "");

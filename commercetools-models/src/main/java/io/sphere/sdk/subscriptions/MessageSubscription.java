@@ -1,6 +1,8 @@
 package io.sphere.sdk.subscriptions;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeName;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import io.sphere.sdk.annotations.ResourceValue;
 import io.sphere.sdk.messages.GenericMessage;
 import org.apache.commons.lang3.Validate;
@@ -10,10 +12,13 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+@JsonDeserialize(as = MessageSubscriptionImpl.class)
 @ResourceValue
-public interface MessageSubscription<R> {
+public interface MessageSubscription {
+    @JsonProperty("resourceTypeId")
     String getResourceTypeId();
 
+    @JsonProperty("types")
     @Nullable
     List<String> getTypes();
 
@@ -24,7 +29,7 @@ public interface MessageSubscription<R> {
      *
      * @return a copy of this object with the added message type
      */
-    default MessageSubscription<R> addType(final Class<? extends GenericMessage<R>> messageType) {
+    default <R> MessageSubscription addType(final Class<? extends GenericMessage<R>> messageType) {
         final String type = messageType.getAnnotation(JsonTypeName.class).value();
         final List<String> types = Stream.concat(getTypes().stream(), Stream.of(type)).collect(Collectors.toList());
         return new MessageSubscriptionImpl(getResourceTypeId(), types);
@@ -37,7 +42,7 @@ public interface MessageSubscription<R> {
      *
      * @return a copy of this object with the removed message type
      */
-    default MessageSubscription<R> removeType(final Class<? extends GenericMessage<R>> messageType) {
+    default <R> MessageSubscription removeType(final Class<? extends GenericMessage<R>> messageType) {
         final String type = messageType.getAnnotation(JsonTypeName.class).value();
         final List<String> removedTypes = getTypes().stream()
                 .filter(t -> !t.equals(type))
@@ -47,7 +52,7 @@ public interface MessageSubscription<R> {
     }
 
     @SafeVarargs
-    static <R> MessageSubscription<R> of(final Class<R> resoureClass, final Class<? extends GenericMessage<R>>... messageClasses) {
+    static <R> MessageSubscription of(final Class<R> resoureClass, final Class<? extends GenericMessage<R>>... messageClasses) {
         final boolean allTypeInfosAvailable = Stream.of(messageClasses)
                 .allMatch(m -> m.getAnnotation(JsonTypeName.class) != null);
 

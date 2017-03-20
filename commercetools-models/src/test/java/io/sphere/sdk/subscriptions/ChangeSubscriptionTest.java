@@ -14,14 +14,13 @@ public class ChangeSubscriptionTest {
 
     @Test
     public void of() throws Exception {
-        final ChangeSubscription<Category> categoryChangeSubscription = ChangeSubscription.of(Category.class);
+        final ChangeSubscription categoryChangeSubscription = ChangeSubscription.of(Category.class);
         assertThat(categoryChangeSubscription.getResourceTypeId()).isEqualTo(Category.referenceTypeId());
     }
 
-
     @Test
     public void serialize() throws Exception {
-        final ChangeSubscription<Category> categoryChangeSubscription = ChangeSubscription.of(Category.class);
+        final ChangeSubscription categoryChangeSubscription = ChangeSubscription.of(Category.class);
         final JsonNode jsonNode = SphereJsonUtils.toJsonNode(categoryChangeSubscription);
 
         assertThat(jsonNode.get("resourceTypeId").asText()).isEqualTo(Category.referenceTypeId());
