@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.neovisionaries.i18n.CountryCode;
 import io.sphere.sdk.annotations.FactoryMethod;
 import io.sphere.sdk.annotations.HasBuilder;
+import io.sphere.sdk.annotations.ResourceValue;
 import io.sphere.sdk.channels.Channel;
 import io.sphere.sdk.customergroups.CustomerGroup;
 import io.sphere.sdk.models.Reference;
@@ -33,6 +34,7 @@ import java.util.Optional;
  * @see io.sphere.sdk.products.commands.updateactions.RemovePrice
  * @see ProductVariant#getPrices()
  */
+@ResourceValue
 @HasBuilder(factoryMethods = @FactoryMethod(parameterNames = { "value" }))
 @JsonDeserialize(as = PriceImpl.class)
 public interface Price extends PriceLike {
