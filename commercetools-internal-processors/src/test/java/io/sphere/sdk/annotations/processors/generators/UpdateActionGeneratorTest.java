@@ -14,7 +14,7 @@ public class UpdateActionGeneratorTest extends AbstractGeneratorTest {
     }
 
     @Test
-    public void initialTest() throws Exception {
+    public void generateUpdateActionOfString() throws Exception {
         final String content = generateAsString(MyResource.class);
 
         assertThat(content).isEqualTo(expectedContent(MyResource.class));

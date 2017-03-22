@@ -1,0 +1,31 @@
+package io.sphere.sdk.annotations.processors.generators.examples;
+
+import io.sphere.sdk.commands.UpdateActionImpl;
+import java.lang.String;
+import javax.annotation.Generated;
+
+/**
+ * Sets name to MyResource
+ *
+ * {@doc.gen intro}
+ */
+@Generated(
+    value = "io.sphere.sdk.annotations.processors.generators.UpdateActionGenerator",
+    comments = "Generated from: io.sphere.sdk.annotations.processors.generators.examples.MyResource"
+)
+public final class SetName extends UpdateActionImpl<MyResource> {
+  private final String name;
+
+  private SetName(final String name) {
+    super("setName");
+    this.name = name;
+  }
+
+  public String getName() {
+    return name;
+  }
+
+  public static SetName of(final String name) {
+    return new SetName(name);
+  }
+}

@@ -1,7 +1,6 @@
 package io.sphere.sdk.annotations.processors.generators;
 
 import com.squareup.javapoet.*;
-import io.sphere.sdk.annotations.HasUpdateActions;
 import io.sphere.sdk.annotations.processors.models.PropertyGenModel;
 import io.sphere.sdk.commands.UpdateActionImpl;
 import org.apache.commons.lang3.StringUtils;
@@ -22,32 +21,31 @@ public class UpdateActionGenerator extends AbstractGenerator {
 
     @Override
     public TypeSpec generateType(final TypeElement resourceValueTypeElement) {
-
-        final HasUpdateActions annotation = resourceValueTypeElement.getAnnotation(HasUpdateActions.class);
-
         final List<ExecutableElement> propertyMethods = getAllPropertyMethodsSorted(resourceValueTypeElement);
         final List<PropertyGenModel> propertyGenModels = getPropertyGenModels(propertyMethods);
+        final List<MethodSpec> getMethods = propertyMethods.stream().map(this::createGetMethod).collect(Collectors.toList());
         final List<FieldSpec> fields = propertyGenModels.stream()
                 .map((property) -> createFieldBuilder(property, Modifier.PRIVATE)
                         .addModifiers(Modifier.FINAL)
                         .build())
                 .collect(Collectors.toList());
-        final List<MethodSpec> getMethods = propertyMethods.stream().map(this::createGetMethod).collect(Collectors.toList());
-        final String updateAction = "set" + StringUtils.capitalize(fields.get(0).name);
+        final FieldSpec fieldSpec = fields.get(0);
+        final String updateAction = "set" + StringUtils.capitalize(fieldSpec.name);
         final String updateActionClassName = StringUtils.capitalize(updateAction);
-
         final TypeSpec typeSpec = TypeSpec.classBuilder(updateActionClassName)
+                .addJavadoc("Sets $L to $L\n", fieldSpec.name, ClassName.get(resourceValueTypeElement).simpleName())
+                .addJavadoc("\n")
+                .addJavadoc("{@doc.gen intro}\n")
                 .superclass(ParameterizedTypeName.get(ClassName.get(UpdateActionImpl.class), ClassName.get(resourceValueTypeElement)))
-                .addModifiers(Modifier.FINAL)
+                .addModifiers(Modifier.PUBLIC, Modifier.FINAL)
                 .addAnnotation(AnnotationSpec.builder(Generated.class)
                         .addMember("value", "$S", getClass().getCanonicalName())
                         .addMember("comments", "$S", "Generated from: " + resourceValueTypeElement.getQualifiedName().toString()).build())
                 .addFields(fields)
                 .addMethod(createConstructor(propertyGenModels, updateAction))
                 .addMethods(getMethods)
-//                .addMethod(createFactoryMethod(annotation.factoryMethod(), propertyGenModels, ))
+                .addMethod(createFactoryMethod(propertyGenModels, updateActionClassName))
                 .build();
-
         return typeSpec;
     }
 
@@ -55,7 +53,6 @@ public class UpdateActionGenerator extends AbstractGenerator {
         final List<ParameterSpec> parameters = properties.stream()
                 .map(this::createConstructorParameter)
                 .collect(Collectors.toList());
-
         final MethodSpec.Builder builder = MethodSpec.constructorBuilder()
                 .addParameters(parameters)
                 .addModifiers(Modifier.PRIVATE)
@@ -64,7 +61,6 @@ public class UpdateActionGenerator extends AbstractGenerator {
                 .map(PropertyGenModel::getJavaIdentifier)
                 .collect(Collectors.toList());
         parameterNames.forEach(n -> builder.addCode("this.$L = $L;\n", n, n));
-
         return builder.build();
     }
 
@@ -73,5 +69,18 @@ public class UpdateActionGenerator extends AbstractGenerator {
         return builder.build();
     }
 
+    private MethodSpec createFactoryMethod(final List<PropertyGenModel> properties, final String updateActionClassName) {
+        final List<ParameterSpec> parameters = properties.stream()
+                .map(this::createConstructorParameter)
+                .collect(Collectors.toList());
+        final ParameterSpec parameterSpec = parameters.get(0);
+        final MethodSpec of = MethodSpec.methodBuilder("of")
+                .addParameter(parameterSpec)
+                .addModifiers(Modifier.PUBLIC, Modifier.STATIC)
+                .returns(ClassName.bestGuess(updateActionClassName))
+                .addStatement("return new $T($L)", ClassName.bestGuess(updateActionClassName), parameterSpec.name)
+                .build();
+        return of;
+    }
 
 }

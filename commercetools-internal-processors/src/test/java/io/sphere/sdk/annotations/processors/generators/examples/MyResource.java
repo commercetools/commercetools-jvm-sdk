@@ -1,11 +1,11 @@
 package io.sphere.sdk.annotations.processors.generators.examples;
 
-import io.sphere.sdk.annotations.ResourceValue;
+import io.sphere.sdk.annotations.HasUpdateActions;
 
 /**
- * Example for a resource for an update action.
+ * Example of update action for a resource with primitive type.
  */
-@ResourceValue
+@HasUpdateActions
 public interface MyResource {
     String getName();
 }
