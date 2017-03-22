@@ -1,6 +1,7 @@
 package io.sphere.sdk.annotations.processors.generators;
 
 import com.squareup.javapoet.*;
+import io.sphere.sdk.annotations.FactoryMethod;
 import io.sphere.sdk.annotations.processors.models.PropertyGenModel;
 import io.sphere.sdk.annotations.processors.models.TypeUtils;
 
@@ -109,5 +110,72 @@ abstract class AbstractGenerator {
         if (nullable != null) {
             builder.addAnnotation(Nullable.class);
         }
+    }
+
+    protected void addSuppressWarnings(final MethodSpec.Builder builder) {
+        final AnnotationSpec suppressWarnings = AnnotationSpec.builder(SuppressWarnings.class)
+                .addMember("value", "$S", "unchecked").build();
+        builder.addAnnotation(suppressWarnings);
+    }
+
+    /**
+     * @param property the property to generate the parameter
+     * @param useLowercaseBooleans {@link FactoryMethod#useLowercaseBooleans()}
+     * @param copyNullable         if true, an existing {@link Nullable} annotation on the model will be copied to the parameter
+     * @return
+     */
+    protected ParameterSpec createParameter(final PropertyGenModel property, final boolean useLowercaseBooleans, final boolean copyNullable) {
+        TypeName type = property.getType();
+        if (useLowercaseBooleans && type.isBoxedPrimitive() && type.unbox().equals(TypeName.BOOLEAN)) {
+            type = TypeName.BOOLEAN;
+        }
+        return createParameter(property, type, copyNullable);
+    }
+
+    protected ParameterSpec createParameter(final PropertyGenModel property, final TypeName parameterType, final boolean copyNullable) {
+        final ParameterSpec.Builder builder = ParameterSpec.builder(parameterType, property.getJavaIdentifier())
+                .addModifiers(Modifier.FINAL);
+        if (property.isOptional() && copyNullable) {
+            builder.addAnnotation(Nullable.class);
+        }
+        return builder.build();
+    }
+
+    protected FieldSpec createField(final PropertyGenModel property, final List<Modifier> modifiers) {
+        final FieldSpec.Builder builder = FieldSpec.builder(property.getType(), property.getJavaIdentifier());
+
+        builder.addModifiers(modifiers.toArray(new Modifier[modifiers.size()]));
+        if (property.isOptional()) {
+            builder.addAnnotation(Nullable.class);
+        }
+        return builder.build();
+    }
+
+    protected MethodSpec createDefaultConstructor(final List<Modifier> modifiers) {
+        final MethodSpec.Builder builder = MethodSpec.constructorBuilder();
+        builder.addModifiers(modifiers);
+
+        return builder.build();
+    }
+
+    protected MethodSpec createConstructor(final List<PropertyGenModel> properties, final List<Modifier> modifiers) {
+        final List<ParameterSpec> parameters = createParameters(properties, false, true);
+        final MethodSpec.Builder builder = MethodSpec.constructorBuilder()
+                .addParameters(parameters);
+
+        builder.addModifiers(modifiers);
+
+        final List<String> parameterNames = properties.stream()
+                .map(PropertyGenModel::getJavaIdentifier)
+                .collect(Collectors.toList());
+        parameterNames.forEach(n -> builder.addCode("this.$L = $L;\n", n, n));
+
+        return builder.build();
+    }
+
+    protected List<ParameterSpec> createParameters(final List<PropertyGenModel> properties, final boolean useLowercaseBooleans, final boolean copyNullable) {
+        return properties.stream()
+                .map(m -> createParameter(m, useLowercaseBooleans, copyNullable))
+                .collect(Collectors.toList());
     }
 }

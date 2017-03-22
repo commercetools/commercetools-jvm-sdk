@@ -3,6 +3,7 @@ package io.sphere.sdk.annotations.processors.models;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.squareup.javapoet.ClassName;
+import io.sphere.sdk.annotations.HasBuilder;
 import io.sphere.sdk.annotations.ResourceDraftValue;
 import io.sphere.sdk.annotations.ResourceValue;
 import io.sphere.sdk.models.Builder;
@@ -31,6 +32,12 @@ public class TypeUtils {
 
     public String getSimpleName(final Element element) {
         return element.getSimpleName().toString();
+    }
+
+    public ClassName getHasBuilderImplType(final TypeElement typeElement) {
+        final ClassName draftType = ClassName.get(typeElement);
+        final HasBuilder hasBuilder = typeElement.getAnnotation(HasBuilder.class);
+        return ClassName.get(draftType.packageName(), draftType.simpleName() + hasBuilder.implPrefix());
     }
 
     public ClassName getDraftImplType(final TypeElement typeElement) {
@@ -91,7 +98,7 @@ public class TypeUtils {
 
     /**
      * Returns true iff. the given method name starts with {@code get} or {@code is} or is annotated with {@link JsonProperty}
-     * and if the given method doesn't have a {@code static}, {@caode default} modifier and isn't annotated with
+     * and if the given method doesn't have a {@code static}, {@code default} modifier and isn't annotated with
      * {@link JsonIgnore}.
      *
      * @param method the method
