@@ -1,8 +1,6 @@
 package io.sphere.sdk.annotations.processors;
 
-import com.squareup.javapoet.JavaFile;
 import io.sphere.sdk.annotations.HasUpdateActions;
-import io.sphere.sdk.annotations.processors.generators.UpdateActionGenerator;
 
 import javax.annotation.processing.SupportedAnnotationTypes;
 import javax.annotation.processing.SupportedSourceVersion;
@@ -19,8 +17,8 @@ public class HasUpdateActionsProcessor extends CommercetoolsAnnotationProcessor<
 
     @Override
     protected void generate(final TypeElement typeElement) {
-        final JavaFile javaFile = new UpdateActionGenerator(processingEnv.getElementUtils()).generate(typeElement);
-        writeClass(javaFile);
+//        final JavaFile javaFile = new SimpleUpdateActionGenerator(processingEnv.getElementUtils()).generate(typeElement);
+//        writeClass(javaFile);
     }
 
 }

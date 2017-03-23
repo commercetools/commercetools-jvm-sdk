@@ -13,9 +13,9 @@ import javax.lang.model.util.Elements;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class MultipleUpdateActionsGenerator extends AbstractMultipleGenerator {
+public class UpdateActionsGenerator extends AbstractMultipleGenerator {
 
-    MultipleUpdateActionsGenerator(final Elements elements) {
+    UpdateActionsGenerator(final Elements elements) {
         super(elements);
     }
 

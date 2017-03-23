@@ -12,7 +12,7 @@ import javax.annotation.Nullable;
  * {@doc.gen intro}
  */
 @Generated(
-    value = "io.sphere.sdk.annotations.processors.generators.MultipleUpdateActionsGenerator",
+    value = "io.sphere.sdk.annotations.processors.generators.UpdateActionsGenerator",
     comments = "Generated from: io.sphere.sdk.annotations.processors.generators.examples.MyResource"
 )
 public final class SetDescription extends UpdateActionImpl<MyResource> {

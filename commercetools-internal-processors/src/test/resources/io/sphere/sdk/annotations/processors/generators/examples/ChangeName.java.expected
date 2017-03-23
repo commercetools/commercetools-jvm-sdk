@@ -11,7 +11,7 @@ import javax.annotation.Generated;
  * {@doc.gen intro}
  */
 @Generated(
-    value = "io.sphere.sdk.annotations.processors.generators.MultipleUpdateActionsGenerator",
+    value = "io.sphere.sdk.annotations.processors.generators.UpdateActionsGenerator",
     comments = "Generated from: io.sphere.sdk.annotations.processors.generators.examples.MyResource"
 )
 public final class ChangeName extends UpdateActionImpl<MyResource> {
