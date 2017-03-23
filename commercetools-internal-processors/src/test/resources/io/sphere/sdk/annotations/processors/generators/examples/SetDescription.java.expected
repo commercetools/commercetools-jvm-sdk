@@ -19,7 +19,7 @@ public final class SetDescription extends UpdateActionImpl<MyResource> {
   @Nullable
   private final String description;
 
-  private SetDescription(final String description) {
+  private SetDescription(@Nullable final String description) {
     super("setDescription");
     this.description = description;
   }
@@ -29,7 +29,11 @@ public final class SetDescription extends UpdateActionImpl<MyResource> {
     return description;
   }
 
-  public static SetDescription of(final String description) {
+  public static SetDescription of(@Nullable final String description) {
     return new SetDescription(description);
+  }
+
+  public static SetDescription ofUnset() {
+    return new SetDescription(null);
   }
 }

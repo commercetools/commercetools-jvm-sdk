@@ -67,6 +67,18 @@ abstract class BaseAbstractGenerator {
                 .collect(Collectors.toList());
     }
 
+    /**
+     * Returns all property methods - sorted by their property name.
+     *
+     * @param typeElement the type element
+     * @return methods sorted by their {@link PropertyGenModel#getPropertyName(ExecutableElement)}
+     */
+    protected List<ExecutableElement> getPropertyMethodsSorted(TypeElement typeElement) {
+        return typeUtils.getPropertyMethods(typeElement)
+                .sorted(Comparator.comparing(methodName -> escapeJavaKeyword(PropertyGenModel.getPropertyName(methodName))))
+                .collect(Collectors.toList());
+    }
+
     protected List<PropertyGenModel> getPropertyGenModels(final List<ExecutableElement> propertyMethods) {
         return propertyMethods.stream()
                 .map(PropertyGenModel::of)

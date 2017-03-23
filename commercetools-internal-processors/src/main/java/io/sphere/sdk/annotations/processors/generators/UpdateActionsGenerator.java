@@ -6,6 +6,7 @@ import io.sphere.sdk.commands.UpdateActionImpl;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.annotation.Generated;
+import javax.annotation.Nullable;
 import javax.lang.model.element.ExecutableElement;
 import javax.lang.model.element.Modifier;
 import javax.lang.model.element.TypeElement;
@@ -26,7 +27,7 @@ public class UpdateActionsGenerator extends AbstractMultipleGenerator {
 
     @Override
     public List<TypeSpec> generateTypes(final TypeElement resourceValueTypeElement) {
-        final List<ExecutableElement> propertyMethods = getAllPropertyMethodsSorted(resourceValueTypeElement);
+        final List<ExecutableElement> propertyMethods = getPropertyMethodsSorted(resourceValueTypeElement);
         final List<TypeSpec> typeSpecList = propertyMethods.stream().map(propertyMethod -> {
             final MethodSpec getMethod = createGetMethodBuilder(propertyMethod).build();
             final PropertyGenModel property = PropertyGenModel.of(propertyMethod);
@@ -36,7 +37,7 @@ public class UpdateActionsGenerator extends AbstractMultipleGenerator {
                     .build();
             final String updateAction = actionPrefix + StringUtils.capitalize(fieldSpec.name);
             final String updateActionClassName = StringUtils.capitalize(updateAction);
-            final TypeSpec typeSpec = TypeSpec.classBuilder(updateActionClassName)
+            final TypeSpec.Builder typeSpecBuilder = TypeSpec.classBuilder(updateActionClassName)
                     .addJavadoc("$L $L to $L\n", property.isOptional() ? "Sets" : "Updates", fieldSpec.name, ClassName.get(resourceValueTypeElement).simpleName())
                     .addJavadoc("\n")
                     .addJavadoc("{@doc.gen intro}\n")
@@ -50,12 +51,23 @@ public class UpdateActionsGenerator extends AbstractMultipleGenerator {
                             .build())
                     .addMethod(createConstructor(property, updateAction))
                     .addMethod(getMethod)
-                    .addMethod(createFactoryMethod(property, updateActionClassName))
-                    .build();
-            return typeSpec;
+                    .addMethod(createFactoryMethod(property, updateActionClassName));
+            if (property.isOptional()) {
+                typeSpecBuilder.addMethod(createUnsetMethod(updateActionClassName));
+            }
+            return typeSpecBuilder.build();
         }).collect(Collectors.toList());
 
         return typeSpecList;
+    }
+
+    private MethodSpec createUnsetMethod(final String updateActionClassName) {
+        final MethodSpec ofUnset = MethodSpec.methodBuilder("ofUnset")
+                .addModifiers(Modifier.PUBLIC, Modifier.STATIC)
+                .returns(ClassName.bestGuess(updateActionClassName))
+                .addStatement("return new $T($L)", ClassName.bestGuess(updateActionClassName), "null")
+                .build();
+        return ofUnset;
     }
 
     private MethodSpec createConstructor(final PropertyGenModel property, final String updateAction) {
@@ -70,6 +82,9 @@ public class UpdateActionsGenerator extends AbstractMultipleGenerator {
 
     private ParameterSpec createConstructorParameter(final PropertyGenModel propertyGenModel) {
         final ParameterSpec.Builder builder = ParameterSpec.builder(propertyGenModel.getType(), propertyGenModel.getJavaIdentifier(), Modifier.FINAL);
+        if (propertyGenModel.isOptional()) {
+            builder.addAnnotation(Nullable.class);
+        }
         return builder.build();
     }
 

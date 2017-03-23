@@ -89,6 +89,23 @@ public class TypeUtils {
                 .filter(this::isPropertyMethod);
     }
 
+
+    /**
+     * Returns all property methods as stream.
+     *
+     * @param typeElement the type element
+     * @return methods sorted by their {@link PropertyGenModel#getPropertyName(ExecutableElement)}
+     */
+    public Stream<ExecutableElement> getPropertyMethods(TypeElement typeElement) {
+        final List<ExecutableElement> allMethods = ElementFilter.methodsIn(typeElement.getEnclosedElements());
+        final Comparator<ExecutableElement> nameComparator = Comparator.comparing(e -> e.getSimpleName().toString());
+        final Comparator<ExecutableElement> typeComparator = Comparator.comparing(e -> e.getReturnType().toString());
+        final Set<ExecutableElement> uniqueMethods = new TreeSet<>(nameComparator.thenComparing(typeComparator));
+        uniqueMethods.addAll(allMethods);
+
+        return uniqueMethods.stream()
+                .filter(this::isPropertyMethod);
+    }
     /**
      * Returns true iff. the given method name starts with {@code get} or {@code is} or is annotated with {@link JsonProperty}
      * and if the given method doesn't have a {@code static}, {@caode default} modifier and isn't annotated with
