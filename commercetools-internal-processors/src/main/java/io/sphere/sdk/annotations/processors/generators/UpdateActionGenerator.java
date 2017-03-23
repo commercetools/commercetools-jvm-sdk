@@ -20,8 +20,13 @@ public class UpdateActionGenerator extends AbstractGenerator {
     }
 
     @Override
-    public TypeSpec generateType(final TypeElement resourceValueTypeElement) {
-        final List<ExecutableElement> propertyMethods = getAllPropertyMethodsSorted(resourceValueTypeElement);
+    protected String getPackageName(final TypeElement annotatedTypeElement) {
+        return super.getPackageName(annotatedTypeElement).concat(".commands.updateactions");
+    }
+
+    @Override
+    public TypeSpec generateType(final TypeElement annotatedTypeElement) {
+        final List<ExecutableElement> propertyMethods = getAllPropertyMethodsSorted(annotatedTypeElement);
         final List<PropertyGenModel> propertyGenModels = getPropertyGenModels(propertyMethods);
         final List<MethodSpec> getMethods = propertyMethods.stream().map(this::createGetMethod).collect(Collectors.toList());
         final List<FieldSpec> fields = propertyGenModels.stream()
@@ -34,14 +39,14 @@ public class UpdateActionGenerator extends AbstractGenerator {
         final String updateAction = actionPrefix + StringUtils.capitalize(fieldSpec.name);
         final String updateActionClassName = StringUtils.capitalize(updateAction);
         final TypeSpec typeSpec = TypeSpec.classBuilder(updateActionClassName)
-                .addJavadoc("$L $L to $L\n", propertyGenModels.get(0).isOptional() ? "Sets" : "Updates", fieldSpec.name, ClassName.get(resourceValueTypeElement).simpleName())
+                .addJavadoc("$L $L to $L\n", propertyGenModels.get(0).isOptional() ? "Sets" : "Updates", fieldSpec.name, ClassName.get(annotatedTypeElement).simpleName())
                 .addJavadoc("\n")
                 .addJavadoc("{@doc.gen intro}\n")
-                .superclass(ParameterizedTypeName.get(ClassName.get(UpdateActionImpl.class), ClassName.get(resourceValueTypeElement)))
+                .superclass(ParameterizedTypeName.get(ClassName.get(UpdateActionImpl.class), ClassName.get(annotatedTypeElement)))
                 .addModifiers(Modifier.PUBLIC, Modifier.FINAL)
                 .addAnnotation(AnnotationSpec.builder(Generated.class)
                         .addMember("value", "$S", getClass().getCanonicalName())
-                        .addMember("comments", "$S", "Generated from: " + resourceValueTypeElement.getQualifiedName().toString()).build())
+                        .addMember("comments", "$S", "Generated from: " + annotatedTypeElement.getQualifiedName().toString()).build())
                 .addFields(fields)
                 .addMethod(createConstructor(propertyGenModels, updateAction))
                 .addMethods(getMethods)

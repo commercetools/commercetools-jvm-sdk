@@ -1,5 +1,6 @@
-package io.sphere.sdk.annotations.processors.generators.examples;
+package io.sphere.sdk.annotations.processors.generators.examples.commands.updateactions;
 
+import io.sphere.sdk.annotations.processors.generators.examples.MyResource;
 import io.sphere.sdk.commands.UpdateActionImpl;
 import java.lang.String;
 import javax.annotation.Generated;
