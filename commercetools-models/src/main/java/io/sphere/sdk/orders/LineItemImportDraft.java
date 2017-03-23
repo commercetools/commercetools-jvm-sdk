@@ -7,12 +7,12 @@ import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.products.Price;
 import io.sphere.sdk.taxcategories.TaxRate;
+import io.sphere.sdk.types.CustomFieldsDraft;
 
 import javax.annotation.Nullable;
 import java.util.Set;
 
 /**
- *
  * @see LineItemImportDraftBuilder
  */
 @JsonDeserialize(as = LineItemImportDraftImpl.class)
@@ -34,6 +34,9 @@ public interface LineItemImportDraft {
 
     @Nullable
     TaxRate getTaxRate();
+
+    @Nullable
+    CustomFieldsDraft getCustom();
 
     ProductVariantImportDraft getVariant();
 }

@@ -175,4 +175,13 @@ public interface Channel extends Resource<Channel>, WithKey, Custom {
     @Nullable
     @IgnoreInQueryModel
     Address getAddress();
+
+    /**
+     * Returns the geo location of this channel.
+     *
+     * @return the geo location of this channel or null
+     */
+    @Nullable
+    @QueryModelHint(type = "GeoJSONQueryModel<Channel>", impl = "return geoJSONQueryModel(fieldName);")
+    GeoJSON getGeoLocation();
 }

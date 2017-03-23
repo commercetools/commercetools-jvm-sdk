@@ -31,14 +31,12 @@ public class VariantsCottonTShirtProductDraftSupplier implements Supplier<Produc
     @Override
     public ProductDraft get() {
         final ProductVariantDraft masterVariant = ProductVariantDraftBuilder.of()
-                .plusAttribute(Sizes.ATTRIBUTE.draftOf(Sizes.S))
-                .plusAttribute(Colors.ATTRIBUTE.draftOf(Colors.GREEN))
+                .attributes(Sizes.ATTRIBUTE.draftOf(Sizes.S), Colors.ATTRIBUTE.draftOf(Colors.GREEN))
                 .sku(UUID.randomUUID().toString())
                 .prices(PriceDraft.of(MoneyImpl.ofCents(1234, EUR)))
                 .build();
         final ProductVariantDraft secondVariant = ProductVariantDraftBuilder.of()
-                .plusAttribute(Sizes.ATTRIBUTE.draftOf(Sizes.M))
-                .plusAttribute(Colors.ATTRIBUTE.draftOf(Colors.GREEN))
+                .attributes(Sizes.ATTRIBUTE.draftOf(Sizes.M), Colors.ATTRIBUTE.draftOf(Colors.GREEN))
                 .sku(UUID.randomUUID().toString())
                 .prices(PriceDraft.of(MoneyImpl.ofCents(1234, EUR)), PriceDraft.of(MoneyImpl.ofCents(600, EUR)).withCustomerGroup(customerGroup))
                 .build();

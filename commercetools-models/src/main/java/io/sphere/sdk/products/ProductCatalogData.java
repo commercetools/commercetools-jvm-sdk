@@ -1,15 +1,20 @@
 package io.sphere.sdk.products;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import io.sphere.sdk.annotations.ResourceValue;
 
 import javax.annotation.Nullable;
 
 import static io.sphere.sdk.products.ProductProjectionType.CURRENT;
 
+@ResourceValue(abstractResourceClass = true)
 @JsonDeserialize(as=ProductCatalogDataImpl.class)
 public interface ProductCatalogData {
+    @JsonProperty("published")
     Boolean isPublished();
 
+    @JsonProperty("hasStagedChanges")
     Boolean hasStagedChanges();
 
     /**

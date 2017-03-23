@@ -13,18 +13,21 @@ import io.sphere.sdk.categories.CategoryDraft;
 import io.sphere.sdk.categories.CategoryDraftBuilder;
 import io.sphere.sdk.channels.Channel;
 import io.sphere.sdk.channels.queries.ChannelByIdGet;
+import io.sphere.sdk.channels.queries.ChannelQueryModel;
 import io.sphere.sdk.client.SphereApiConfig;
 import io.sphere.sdk.client.SphereAuthConfig;
 import io.sphere.sdk.client.SphereClient;
 import io.sphere.sdk.client.SphereRequest;
 import io.sphere.sdk.commands.UpdateActionImpl;
 import io.sphere.sdk.commands.UpdateCommand;
+import io.sphere.sdk.customergroups.CustomerGroupDraftBuilder;
 import io.sphere.sdk.customers.Customer;
 import io.sphere.sdk.customers.CustomerDraftBuilder;
 import io.sphere.sdk.customers.commands.CustomerCreateEmailTokenCommand;
 import io.sphere.sdk.customers.commands.CustomerPasswordResetCommand;
 import io.sphere.sdk.customers.commands.CustomerVerifyEmailCommand;
 import io.sphere.sdk.customers.commands.updateactions.AddShippingAddressId;
+import io.sphere.sdk.customers.expansion.CustomerSignInResultExpansionModel;
 import io.sphere.sdk.customers.queries.CustomerQueryModel;
 import io.sphere.sdk.customobjects.CustomObject;
 import io.sphere.sdk.customobjects.commands.CustomObjectDeleteCommand;
@@ -36,6 +39,7 @@ import io.sphere.sdk.http.*;
 import io.sphere.sdk.inventory.InventoryEntryDraftBuilder;
 import io.sphere.sdk.json.SphereJsonUtils;
 import io.sphere.sdk.models.*;
+import io.sphere.sdk.orders.LineItemImportDraft;
 import io.sphere.sdk.orders.Order;
 import io.sphere.sdk.orders.OrderImportDraft;
 import io.sphere.sdk.orders.expansion.OrderExpansionModel;
@@ -60,6 +64,7 @@ import io.sphere.sdk.products.queries.*;
 import io.sphere.sdk.products.search.*;
 import io.sphere.sdk.producttypes.ProductType;
 import io.sphere.sdk.producttypes.ProductTypeDraft;
+import io.sphere.sdk.producttypes.ProductTypeDraftBuilder;
 import io.sphere.sdk.producttypes.ProductTypeLocalRepository;
 import io.sphere.sdk.projects.Project;
 import io.sphere.sdk.queries.*;
@@ -69,13 +74,18 @@ import io.sphere.sdk.search.FilteredFacetResult;
 import io.sphere.sdk.search.SearchKeywords;
 import io.sphere.sdk.search.model.ExistsFilterSearchModelSupport;
 import io.sphere.sdk.search.model.MissingFilterSearchModelSupport;
+import io.sphere.sdk.shippingmethods.ShippingMethodDraftBuilder;
+import io.sphere.sdk.shoppinglists.ShoppingList;
+import io.sphere.sdk.shoppinglists.ShoppingListDraft;
 import io.sphere.sdk.states.State;
 import io.sphere.sdk.states.StateDraftDsl;
+import io.sphere.sdk.taxcategories.TaxCategoryDraftBuilder;
 import io.sphere.sdk.taxcategories.TaxRate;
 import io.sphere.sdk.types.CustomFields;
 import io.sphere.sdk.types.FieldType;
 import io.sphere.sdk.types.TypeDraft;
 import io.sphere.sdk.types.TypeDraftBuilder;
+import io.sphere.sdk.zones.ZoneDraftBuilder;
 
 import javax.money.CurrencyUnit;
 import java.time.Duration;
@@ -105,9 +115,58 @@ import java.util.function.Function;
  </ul>
  -->
 
+ <h3 class=released-version id="v1_13_0">1.13.0 (20.03.2017)</h3>
+ <ul>
+ <li class=new-in-release>{@link OrderImportDraft} now provides custom fields {@link OrderImportDraft#getCustom()}</li>
+ <li class=new-in-release>{@link LineItemImportDraft} now provides custom fields {@link LineItemImportDraft#getCustom()}</li>
+ <li class=new-in-release>{@link CustomerSignInResultExpansionModel} now provides expansion of the cart {@link CustomerSignInResultExpansionModel#cart}</li>
+ <li class=new-in-release>{@link ProductVariantAvailabilityFilterSearchModel} now provides filtering by {@code isOnStockInChannels} via {@link ProductVariantAvailabilityFilterSearchModel#onStockInChannels()}</li>
+ <li class=new-in-release>{@link ShoppingList} and {@link ShoppingListDraft} now provide time to live attribute {@link ShoppingList#getDeleteDaysAfterLastModification()} and {@link ShoppingListDraft#getDeleteDaysAfterLastModification()}</li>
+ <li class=new-in-release>{@link Cart} and {@link CartDraft} now provide time to live attribute {@link Cart#getDeleteDaysAfterLastModification()} and {@link CartDraft#getDeleteDaysAfterLastModification()}</li>
+ <li class=new-in-release>{@link ProductVariantSortSearchModel} now provides sorting by {@code sku} {@link ProductVariantSortSearchModel#sku()}</li>
+ <li class=new-in-release>Product update actions now support {@code staged} parameter</li>
+ <li class=change-in-release>Some of our draft builder now return the more specific {@code <Draft>Dsl} types.
+    This change doesn't require you to change your source code, but requires a recompilation of all projects that depend on these classes.
+    The following classes changed:
+    <ul>
+        <li>{@link CartDiscountDraftBuilder}</li>
+        <li>{@link CategoryDraftBuilder}</li>
+        <li>{@link CustomerGroupDraftBuilder}</li>
+        <li>{@link InventoryEntryDraftBuilder}</li>
+        <li>{@link PaymentDraftBuilder}</li>
+        <li>{@link ProductDiscountDraftBuilder}</li>
+        <li>{@link ProductVariantDraftBuilder}</li>
+        <li>{@link ProductTypeDraftBuilder}</li>
+        <li>{@link ReviewDraftBuilder}</li>
+        <li>{@link ShippingMethodDraftBuilder}</li>
+        <li>{@link TaxCategoryDraftBuilder}</li>
+        <li>{@link TypeDraftBuilder}</li>
+        <li>{@link ZoneDraftBuilder}</li>
+        <li>{@link ZoneDraftBuilder}</li>
+    </ul>
+ <li class=change-in-release>The missing and exists filter support is now using separate interfaces.
+    This change doesn't require you to change your source code, but requires a recompilation of all projects that depend on these classes.
+    The following classes changed:
+    <ul>
+        <li>{@link ProductAttributeFilterSearchModel}</li>
+        <li>{@link ProductVariantFilterSearchModel}</li>
+    </ul>
+ </li>
+ <li class=fixed-in-release>{@link ProductVariantDraftBuilder#of(ProductVariantDraft)} now correctly copies all attributes of the given {@code template}</li>
+ </ul>
+
+ <h3 class=released-version id="v1_12_0">1.12.0 (27.02.2017)</h3>
+ <ul>
+ <li class=new-in-release>Added {@link Channel#getGeoLocation()}, added support for it in {@link ChannelQueryModel#geoLocation()} and support for {@code withinCircle}
+    predicate {@link GeoJSONQueryModel#withinCircle(Point, Double)}.</li>
+ <li class=new-in-release>Added shopping list resource {@link io.sphere.sdk.shoppinglists.ShoppingList} with new cart update action {@link io.sphere.sdk.carts.commands.updateactions.AddShoppingList}.</li>
+ <li class=change-in-release>Improved recovery strategy for {@link io.sphere.sdk.sequencegenerators.CustomObjectBigIntegerNumberGenerator} so that it retries when the id already exists.</li>
+ <li class=change-in-release>Updated {@code org.asynchttpclient:async-http-client} version of the {@code sdk-http-ahc-2_0} module to version {@code 2.0.28}.</li>
+ </ul>
+
  <h3 class=released-version id="v1_11_0">1.11.0 (07.02.2017)</h3>
  <ul>
- <li class=new-in-release>{@link Asset}s on categories</li></li>
+ <li class=new-in-release>{@link Asset}s on categories</li>
  <li class=new-in-release>{@link OrderImportDraft} can now provide the {@code inventoryMode} to track inventory</li>
  <li class=fixed-in-release>{@code Set} types preserve input order, see <a href="https://github.com/commercetools/commercetools-jvm-sdk/issues/1294">#1294</a></li>
  <li class=fixed-in-release>{@link ProductDraftBuilder} was not preserving the {@code key} when using a {@link ProductDraft}</li>

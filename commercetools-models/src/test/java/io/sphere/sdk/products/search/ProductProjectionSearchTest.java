@@ -2,8 +2,8 @@ package io.sphere.sdk.products.search;
 
 import io.sphere.sdk.http.StringHttpRequestBody;
 import io.sphere.sdk.products.ProductProjection;
-import io.sphere.sdk.search.*;
-import io.sphere.sdk.search.model.*;
+import io.sphere.sdk.search.FilterExpression;
+import io.sphere.sdk.search.model.RangeTermFacetSearchModel;
 import org.assertj.core.api.iterable.Extractor;
 import org.junit.Test;
 
@@ -16,9 +16,7 @@ import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static io.sphere.sdk.test.SphereTestUtils.DE;
-import static io.sphere.sdk.test.SphereTestUtils.EUR;
-import static io.sphere.sdk.test.SphereTestUtils.asList;
+import static io.sphere.sdk.test.SphereTestUtils.*;
 import static java.math.BigDecimal.valueOf;
 import static java.util.Locale.ENGLISH;
 import static java.util.Locale.GERMAN;
@@ -89,6 +87,13 @@ public class ProductProjectionSearchTest {
         assertThat(FACET_MODEL.allVariants().scopedPriceDiscounted().allTerms().expression()).isEqualTo("variants.scopedPriceDiscounted");
         assertThat(FILTER_MODEL.allVariants().scopedPriceDiscounted().is(true)).extracting(expression()).containsExactly("variants.scopedPriceDiscounted:true");
         assertThat(SORT_MODEL.allVariants().scopedPriceDiscounted().asc().expression()).isEqualTo("variants.scopedPriceDiscounted asc");
+    }
+
+    @Test
+    public void canAccessSku() throws Exception {
+        final String sku = "sku-test";
+        assertThat(FILTER_MODEL.allVariants().sku().is(sku)).extracting(expression()).containsExactly("variants.sku:\"" + sku +"\"");
+        assertThat(SORT_MODEL.allVariants().sku().asc().expression()).isEqualTo("variants.sku asc");
     }
 
     @Test

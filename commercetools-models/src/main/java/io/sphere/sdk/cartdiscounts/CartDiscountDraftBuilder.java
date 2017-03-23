@@ -1,0 +1,43 @@
+package io.sphere.sdk.cartdiscounts;
+
+import io.sphere.sdk.models.LocalizedString;
+
+import javax.annotation.Nullable;
+import java.time.ZonedDateTime;
+
+public final class CartDiscountDraftBuilder extends CartDiscountDraftBuilderBase<CartDiscountDraftBuilder> {
+
+    CartDiscountDraftBuilder(final Boolean active, final String cartPredicate, @Nullable final LocalizedString description, final LocalizedString name, final Boolean requiresDiscountCode, final String sortOrder, final CartDiscountTarget target, @Nullable final ZonedDateTime validFrom, @Nullable final ZonedDateTime validUntil, final CartDiscountValue value) {
+        super(active, cartPredicate, description, name, requiresDiscountCode, sortOrder, target, validFrom, validUntil, value);
+    }
+
+    public static CartDiscountDraftBuilder of(final String cartPredicate, final LocalizedString name,
+                                              final boolean requiresDiscountCode, final String sortOrder, final CartDiscountTarget target,
+                                              final CartDiscountValue value) {
+        return new CartDiscountDraftBuilder(null, cartPredicate, null, name, requiresDiscountCode, sortOrder, target, null, null, value);
+    }
+
+    public static CartDiscountDraftBuilder of(final LocalizedString name, final CartDiscountPredicate cartPredicate, final CartDiscountValue value, final CartDiscountTarget target, final String sortOrder, final boolean requiresDiscountCode) {
+        return of(name, cartPredicate.toSphereCartPredicate(), value, target, sortOrder, requiresDiscountCode);
+    }
+
+    public CartDiscountDraftBuilder cartPredicate(final CartDiscountPredicate cartPredicate) {
+        this.cartPredicate = cartPredicate.toSphereCartPredicate();
+        return this;
+    }
+
+    public CartDiscountDraftBuilder active(final boolean active) {
+        this.active = active;
+        return this;
+    }
+
+    public CartDiscountDraftBuilder isActive(final boolean active) {
+        this.active = active;
+        return this;
+    }
+
+    public CartDiscountDraftBuilder requiresDiscountCode(final boolean requiresDiscountCode) {
+        this.requiresDiscountCode = requiresDiscountCode;
+        return this;
+    }
+}

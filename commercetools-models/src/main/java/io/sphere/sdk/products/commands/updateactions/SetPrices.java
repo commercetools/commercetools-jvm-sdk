@@ -1,6 +1,5 @@
 package io.sphere.sdk.products.commands.updateactions;
 
-import io.sphere.sdk.commands.UpdateActionImpl;
 import io.sphere.sdk.products.PriceDraft;
 import io.sphere.sdk.products.Product;
 
@@ -20,15 +19,15 @@ import java.util.List;
  *
  * @see io.sphere.sdk.products.ProductVariant#getPrices()
  */
-public final class SetPrices extends UpdateActionImpl<Product> {
+public final class SetPrices extends StagedProductUpdateActionImpl<Product> {
     @Nullable
     private final Integer variantId;
     @Nullable
     private final String sku;
     private final List<PriceDraft> prices;
 
-    private SetPrices(@Nullable final Integer variantId, @Nullable final String sku, final List<PriceDraft> prices) {
-        super("setPrices");
+    private SetPrices(@Nullable final Integer variantId, @Nullable final String sku, final List<PriceDraft> prices, @Nullable final Boolean staged) {
+        super("setPrices", staged);
         this.variantId = variantId;
         this.sku = sku;
         this.prices = prices;
@@ -49,14 +48,22 @@ public final class SetPrices extends UpdateActionImpl<Product> {
     }
 
     public static SetPrices of(final Integer variantId, final List<PriceDraft> prices) {
-        return new SetPrices(variantId, null, prices);
+        return ofVariantId(variantId, prices);
     }
 
     public static SetPrices ofVariantId(final Integer variantId, final List<PriceDraft> prices) {
-        return new SetPrices(variantId, null, prices);
+        return ofVariantId(variantId, prices, null);
+    }
+
+    public static SetPrices ofVariantId(final Integer variantId, final List<PriceDraft> prices, @Nullable Boolean staged) {
+        return new SetPrices(variantId, null, prices, staged);
     }
 
     public static SetPrices ofSku(final String sku, final List<PriceDraft> prices) {
-        return new SetPrices(null, sku, prices);
+        return ofSku(sku, prices, null);
+    }
+
+    public static SetPrices ofSku(final String sku, final List<PriceDraft> prices, @Nullable Boolean staged) {
+        return new SetPrices(null, sku, prices, staged);
     }
 }

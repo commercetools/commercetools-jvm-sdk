@@ -12,10 +12,7 @@ import javax.annotation.Nullable;
 @ResourceDraftValue(factoryMethods = {
         @FactoryMethod(parameterNames = {}),
         @FactoryMethod(parameterNames = {"active", "description", "name", "predicate", "sortOrder", "value"})
-}, additionalBuilderClassContents = {"    public ProductDiscountDraftBuilder predicate(final ProductDiscountPredicate predicate) {\n" +
-        "        this.predicate = predicate.toSpherePredicate();\n" +
-        "return this;\n" +
-        "    }"})
+}, abstractBuilderClass = true)
 public interface ProductDiscountDraft {
     @JsonProperty("isActive")
     Boolean isActive();

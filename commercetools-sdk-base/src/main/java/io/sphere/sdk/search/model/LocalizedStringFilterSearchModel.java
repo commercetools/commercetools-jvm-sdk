@@ -12,7 +12,7 @@ public final class LocalizedStringFilterSearchModel<T> extends SearchModelImpl<T
         super(parent, pathSegment);
     }
 
-    public TermFilterSearchModel<T, String> locale(final Locale locale) {
+    public TermFilterExistsAndMissingSearchModel<T, String> locale(final Locale locale) {
         return new StringSearchModel<>(this, locale.toLanguageTag()).filtered();
     }
 

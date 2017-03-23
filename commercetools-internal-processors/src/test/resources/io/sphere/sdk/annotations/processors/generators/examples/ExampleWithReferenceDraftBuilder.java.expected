@@ -1,0 +1,67 @@
+package io.sphere.sdk.annotations.processors.generators.examples;
+
+import io.sphere.sdk.models.Base;
+import io.sphere.sdk.models.Builder;
+import io.sphere.sdk.models.Reference;
+import io.sphere.sdk.models.Referenceable;
+import java.lang.String;
+import java.util.Optional;
+import javax.annotation.Generated;
+
+/**
+ * Builder for {@link ExampleWithReferenceDraft}.
+ */
+@Generated(
+    value = "io.sphere.sdk.annotations.processors.generators.DraftBuilderGenerator",
+    comments = "Generated from: io.sphere.sdk.annotations.processors.generators.examples.ExampleWithReferenceDraft"
+)
+public final class ExampleWithReferenceDraftBuilder extends Base implements Builder<ExampleWithReferenceDraftDsl> {
+  private Reference<String> name;
+
+  ExampleWithReferenceDraftBuilder() {
+  }
+
+  ExampleWithReferenceDraftBuilder(final Reference<String> name) {
+    this.name = name;
+  }
+
+  /**
+   * Sets the {@code name} property of this builder.
+   *
+   * @param name the value for {@link ExampleWithReferenceDraft#getName()}
+   * @return this builder
+   */
+  public ExampleWithReferenceDraftBuilder name(final Referenceable<String> name) {
+    this.name = Optional.ofNullable(name).map(Referenceable::toReference).orElse(null);;
+    return this;
+  }
+
+  /**
+   * Creates a new instance of {@code ExampleWithReferenceDraftDsl} with the values of this builder.
+   *
+   * @return the instance
+   */
+  public ExampleWithReferenceDraftDsl build() {
+    return new ExampleWithReferenceDraftDsl(name);
+  }
+
+  /**
+   * Creates a builder initialized with the given values.
+   *
+   * @param name initial value for the {@link ExampleWithReferenceDraft#getName()} property
+   * @return new builder initialized with the given values
+   */
+  public static ExampleWithReferenceDraftBuilder of(final Reference<String> name) {
+    return new ExampleWithReferenceDraftBuilder(name);
+  }
+
+  /**
+   * Creates a builder initialized with the fields of the template parameter.
+   *
+   * @param template the template
+   * @return a new builder initialized from the template
+   */
+  public static ExampleWithReferenceDraftBuilder of(final ExampleWithReferenceDraft template) {
+    return new ExampleWithReferenceDraftBuilder(template.getName());
+  }
+}

@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import io.sphere.sdk.annotations.FactoryMethod;
 import io.sphere.sdk.annotations.ResourceDraftValue;
 import io.sphere.sdk.models.Address;
+import io.sphere.sdk.models.GeoJSON;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.WithKey;
 import io.sphere.sdk.types.CustomFieldsDraft;
@@ -24,7 +25,7 @@ import java.util.Set;
 additionalDslClassContents = {
         "public ChannelDraftDsl withRoles(final ChannelRole ... roles) {\n" +
         "        return newBuilder().roles(io.sphere.sdk.utils.SphereInternalUtils.asSet(roles)).build();\n" +
-        "    }"}, useBuilderStereotypeDslClass = true)
+        "    }"})
 public interface ChannelDraft extends WithKey {
     String getKey();
 
@@ -42,6 +43,9 @@ public interface ChannelDraft extends WithKey {
 
     @Nullable
     Address getAddress();
+
+    @Nullable
+    GeoJSON getGeoLocation();
 
     static ChannelDraftDsl of(final String key) {
         return ChannelDraftDsl.of(key);

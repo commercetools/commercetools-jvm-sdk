@@ -1,0 +1,23 @@
+package io.sphere.sdk.annotations.processors.generators.examples;
+
+import com.fasterxml.jackson.annotation.JsonCreator;
+import io.sphere.sdk.models.Base;
+import java.lang.String;
+import javax.annotation.Generated;
+
+@Generated(
+    value = "io.sphere.sdk.annotations.processors.generators.ResourceValueImplGenerator",
+    comments = "Generated from: io.sphere.sdk.annotations.processors.generators.examples.ExampleResourceWithAbstractBaseClass"
+)
+abstract class ExampleResourceWithAbstractBaseClassImplBase extends Base implements ExampleResourceWithAbstractBaseClass {
+  private String name;
+
+  @JsonCreator
+  ExampleResourceWithAbstractBaseClassImplBase(final String name) {
+    this.name = name;
+  }
+
+  public String getName() {
+    return name;
+  }
+}

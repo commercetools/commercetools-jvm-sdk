@@ -168,6 +168,9 @@ public interface Cart extends CartLike<Cart> {
     @QueryModelHint(type = "PaymentInfoQueryModel<Cart>")
     PaymentInfo getPaymentInfo();
 
+    @Nullable
+    Integer getDeleteDaysAfterLastModification();
+
     /**
      * Creates a reference for one item of this class by a known ID.
      *

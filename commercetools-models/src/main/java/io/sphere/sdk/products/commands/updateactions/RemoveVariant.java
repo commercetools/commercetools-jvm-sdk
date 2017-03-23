@@ -1,6 +1,5 @@
 package io.sphere.sdk.products.commands.updateactions;
 
-import io.sphere.sdk.commands.UpdateActionImpl;
 import io.sphere.sdk.products.Product;
 import io.sphere.sdk.products.ProductVariant;
 
@@ -19,14 +18,14 @@ import javax.annotation.Nullable;
  *
  * @see io.sphere.sdk.products.commands.updateactions.AddVariant
  */
-public final class RemoveVariant extends UpdateActionImpl<Product> {
+public final class RemoveVariant extends StagedProductUpdateActionImpl<Product> {
     @Nullable
     private final Integer id;
     @Nullable
     private final String sku;
 
-    private RemoveVariant(@Nullable final Integer id, @Nullable final String sku) {
-        super("removeVariant");
+    private RemoveVariant(@Nullable final Integer id, @Nullable final String sku, @Nullable final Boolean staged) {
+        super("removeVariant", staged);
         this.id = id;
         this.sku = sku;
     }
@@ -50,10 +49,18 @@ public final class RemoveVariant extends UpdateActionImpl<Product> {
     }
 
     public static RemoveVariant ofVariantId(final Integer id) {
-        return new RemoveVariant(id, null);
+        return ofVariantId(id, null);
+    }
+
+    public static RemoveVariant ofVariantId(final Integer id, @Nullable final Boolean staged) {
+        return new RemoveVariant(id, null, staged);
     }
 
     public static RemoveVariant ofSku(final String sku) {
-        return new RemoveVariant(null, sku);
+        return ofSku(sku, null);
+    }
+
+    public static RemoveVariant ofSku(final String sku, @Nullable final Boolean staged) {
+        return new RemoveVariant(null, sku, staged);
     }
 }

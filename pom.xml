@@ -3,7 +3,7 @@
     <groupId>com.commercetools.sdk.jvm.core</groupId>
     <artifactId>commercetools-jvm-sdk</artifactId>
     <packaging>pom</packaging>
-    <version>1.11.1-SNAPSHOT</version>
+    <version>1.13.1-SNAPSHOT</version>
     <name>commercetools JVM SDK</name>
     <description>Java bindings for the commercetools platform</description>
     <url>https://github.com/commercetools/commercetools-jvm-sdk</url>
@@ -24,6 +24,11 @@
             <id>lauraluiz</id>
             <name>Laura Luiz</name>
             <url>https://github.com/lauraluiz</url>
+        </developer>
+        <developer>
+            <id>matthiaskoester</id>
+            <name>Matthias Köster</name>
+            <url>https://github.com/katmatt</url>
         </developer>
     </developers>
     <distributionManagement>
@@ -95,7 +100,7 @@
         <maven-surefire-plugin.version>2.19.1</maven-surefire-plugin.version>
         <maven-deploy-plugin.version>2.8.2</maven-deploy-plugin.version>
         <handlebars.version>4.0.6</handlebars.version>
-        <javadoc.additionalparams></javadoc.additionalparams>
+        <javadoc.additionalparams />
     </properties>
     <dependencyManagement>
         <dependencies>

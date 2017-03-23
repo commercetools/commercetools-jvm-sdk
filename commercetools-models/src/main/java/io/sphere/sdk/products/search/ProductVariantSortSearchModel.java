@@ -1,7 +1,10 @@
 package io.sphere.sdk.products.search;
 
 import io.sphere.sdk.products.ProductProjection;
-import io.sphere.sdk.search.model.*;
+import io.sphere.sdk.search.model.MultiValueSortSearchModel;
+import io.sphere.sdk.search.model.MultiValueSortSearchModelFactory;
+import io.sphere.sdk.search.model.SearchModel;
+import io.sphere.sdk.search.model.SortableSearchModel;
 
 import javax.annotation.Nullable;
 
@@ -29,5 +32,9 @@ public final class ProductVariantSortSearchModel extends SortableSearchModel<Pro
 
     public MultiValueSortSearchModel<ProductProjection> scopedPriceDiscounted() {
         return searchModel("scopedPriceDiscounted").sorted();
+    }
+
+    public MultiValueSortSearchModel<ProductProjection> sku() {
+        return searchModel("sku").sorted();
     }
 }
