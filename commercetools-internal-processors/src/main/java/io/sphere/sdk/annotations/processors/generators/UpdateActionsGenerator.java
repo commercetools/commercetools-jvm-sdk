@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 
 public class UpdateActionsGenerator extends AbstractMultipleGenerator {
 
-    UpdateActionsGenerator(final Elements elements) {
+    public UpdateActionsGenerator(final Elements elements) {
         super(elements);
     }
 

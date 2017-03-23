@@ -14,7 +14,7 @@ abstract class AbstractMultipleGenerator extends BaseAbstractGenerator {
         super(elements);
     }
 
-    public final List<JavaFile> generateMultiple(final TypeElement annotatedTypeElement) {
+    public final List<JavaFile> generate(final TypeElement annotatedTypeElement) {
         List<JavaFile> javaFiles = new LinkedList<>();
         final List<TypeSpec> typeSpecs = generateTypes(annotatedTypeElement);
         typeSpecs.forEach(typeSpec -> {
@@ -25,6 +25,6 @@ abstract class AbstractMultipleGenerator extends BaseAbstractGenerator {
         return javaFiles;
     }
 
-    public abstract List<TypeSpec> generateTypes(final TypeElement annotatedTypeElement);
+    protected abstract List<TypeSpec> generateTypes(final TypeElement annotatedTypeElement);
 
 }

@@ -41,7 +41,7 @@ public abstract class AbstractMultipleGeneratorTest {
         final TypeElement typeElement = compilationRule.getElements().getTypeElement(clazz.getCanonicalName());
 
         final List<String> filesAsString = new ArrayList<>();
-        final List<JavaFile> javaFiles = generator.generateMultiple(typeElement);
+        final List<JavaFile> javaFiles = generator.generate(typeElement);
         javaFiles.forEach(javaFile -> {
             StringBuilder stringBuilder = new StringBuilder();
             try {
