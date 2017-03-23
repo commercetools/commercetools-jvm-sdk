@@ -30,10 +30,11 @@ public class UpdateActionGenerator extends AbstractGenerator {
                         .build())
                 .collect(Collectors.toList());
         final FieldSpec fieldSpec = fields.get(0);
-        final String updateAction = "set" + StringUtils.capitalize(fieldSpec.name);
+        final String actionPrefix = propertyGenModels.get(0).isOptional() ? "set" : "change";
+        final String updateAction = actionPrefix + StringUtils.capitalize(fieldSpec.name);
         final String updateActionClassName = StringUtils.capitalize(updateAction);
         final TypeSpec typeSpec = TypeSpec.classBuilder(updateActionClassName)
-                .addJavadoc("Sets $L to $L\n", fieldSpec.name, ClassName.get(resourceValueTypeElement).simpleName())
+                .addJavadoc("$L $L to $L\n", propertyGenModels.get(0).isOptional() ? "Sets" : "Updates", fieldSpec.name, ClassName.get(resourceValueTypeElement).simpleName())
                 .addJavadoc("\n")
                 .addJavadoc("{@doc.gen intro}\n")
                 .superclass(ParameterizedTypeName.get(ClassName.get(UpdateActionImpl.class), ClassName.get(resourceValueTypeElement)))
