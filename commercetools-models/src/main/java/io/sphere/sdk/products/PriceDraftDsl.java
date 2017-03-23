@@ -152,6 +152,7 @@ public final class PriceDraftDsl extends Base implements PriceDraft {
                 .validFrom(template.getValidFrom())
                 .validUntil(template.getValidUntil())
                 .custom(customFieldsDraftOrNull(template))
+                .tiers(template.getTiers())
                 .build();
     }
 
