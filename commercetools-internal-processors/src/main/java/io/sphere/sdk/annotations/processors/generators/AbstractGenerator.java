@@ -30,10 +30,6 @@ abstract class AbstractGenerator extends BaseAbstractGenerator {
         return javaFile;
     }
 
-    protected String getPackageName(final TypeElement annotatedTypeElement) {
-        return typeUtils.getPackageName(annotatedTypeElement);
-    }
-
     public abstract TypeSpec generateType(final TypeElement annotatedTypeElement);
 
 }

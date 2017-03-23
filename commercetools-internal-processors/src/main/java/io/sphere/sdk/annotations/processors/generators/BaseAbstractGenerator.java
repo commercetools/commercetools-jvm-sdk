@@ -93,4 +93,8 @@ abstract class BaseAbstractGenerator {
             builder.addAnnotation(Nullable.class);
         }
     }
+
+    protected String getPackageName(final TypeElement annotatedTypeElement) {
+        return typeUtils.getPackageName(annotatedTypeElement);
+    }
 }

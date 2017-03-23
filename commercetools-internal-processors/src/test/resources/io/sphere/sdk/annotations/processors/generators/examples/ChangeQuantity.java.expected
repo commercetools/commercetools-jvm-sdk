@@ -2,11 +2,11 @@ package io.sphere.sdk.annotations.processors.generators.examples.commands.update
 
 import io.sphere.sdk.annotations.processors.generators.examples.MyResource;
 import io.sphere.sdk.commands.UpdateActionImpl;
-import java.lang.String;
+import java.lang.Integer;
 import javax.annotation.Generated;
 
 /**
- * Updates name to MyResource
+ * Updates quantity to MyResource
  *
  * {@doc.gen intro}
  */
@@ -14,19 +14,19 @@ import javax.annotation.Generated;
     value = "io.sphere.sdk.annotations.processors.generators.MultipleUpdateActionsGenerator",
     comments = "Generated from: io.sphere.sdk.annotations.processors.generators.examples.MyResource"
 )
-public final class ChangeName extends UpdateActionImpl<MyResource> {
-  private final String name;
+public final class ChangeQuantity extends UpdateActionImpl<MyResource> {
+  private final Integer quantity;
 
-  private ChangeName(final String name) {
-    super("changeName");
-    this.name = name;
+  private ChangeQuantity(final Integer quantity) {
+    super("changeQuantity");
+    this.quantity = quantity;
   }
 
-  public String getName() {
-    return name;
+  public Integer getQuantity() {
+    return quantity;
   }
 
-  public static ChangeName of(final String name) {
-    return new ChangeName(name);
+  public static ChangeQuantity of(final Integer quantity) {
+    return new ChangeQuantity(quantity);
   }
 }

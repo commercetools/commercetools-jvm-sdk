@@ -4,9 +4,10 @@ import io.sphere.sdk.annotations.processors.generators.examples.MyResource;
 import io.sphere.sdk.commands.UpdateActionImpl;
 import java.lang.String;
 import javax.annotation.Generated;
+import javax.annotation.Nullable;
 
 /**
- * Updates name to MyResource
+ * Sets description to MyResource
  *
  * {@doc.gen intro}
  */
@@ -14,19 +15,21 @@ import javax.annotation.Generated;
     value = "io.sphere.sdk.annotations.processors.generators.MultipleUpdateActionsGenerator",
     comments = "Generated from: io.sphere.sdk.annotations.processors.generators.examples.MyResource"
 )
-public final class ChangeName extends UpdateActionImpl<MyResource> {
-  private final String name;
+public final class SetDescription extends UpdateActionImpl<MyResource> {
+  @Nullable
+  private final String description;
 
-  private ChangeName(final String name) {
-    super("changeName");
-    this.name = name;
+  private SetDescription(final String description) {
+    super("setDescription");
+    this.description = description;
   }
 
-  public String getName() {
-    return name;
+  @Nullable
+  public String getDescription() {
+    return description;
   }
 
-  public static ChangeName of(final String name) {
-    return new ChangeName(name);
+  public static SetDescription of(final String description) {
+    return new SetDescription(description);
   }
 }
