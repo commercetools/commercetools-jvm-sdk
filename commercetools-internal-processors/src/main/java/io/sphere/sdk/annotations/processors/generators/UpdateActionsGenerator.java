@@ -26,39 +26,45 @@ public class UpdateActionsGenerator extends AbstractMultipleGenerator {
     }
 
     @Override
-    public List<TypeSpec> generateTypes(final TypeElement resourceValueTypeElement) {
-        final List<ExecutableElement> propertyMethods = getPropertyMethodsSorted(resourceValueTypeElement);
-        final List<TypeSpec> typeSpecList = propertyMethods.stream().map(propertyMethod -> {
-            final MethodSpec getMethod = createGetMethodBuilder(propertyMethod).build();
-            final PropertyGenModel property = PropertyGenModel.of(propertyMethod);
-            final String actionPrefix = property.isOptional() ? "set" : "change";
-            final FieldSpec fieldSpec = createFieldBuilder(property, Modifier.PRIVATE)
-                    .addModifiers(Modifier.FINAL)
-                    .build();
-            final String updateAction = actionPrefix + StringUtils.capitalize(fieldSpec.name);
-            final String updateActionClassName = StringUtils.capitalize(updateAction);
-            final TypeSpec.Builder typeSpecBuilder = TypeSpec.classBuilder(updateActionClassName)
-                    .addJavadoc("$L $L to $L\n", property.isOptional() ? "Sets" : "Updates", fieldSpec.name, ClassName.get(resourceValueTypeElement).simpleName())
-                    .addJavadoc("\n")
-                    .addJavadoc("{@doc.gen intro}\n")
-                    .superclass(ParameterizedTypeName.get(ClassName.get(UpdateActionImpl.class), ClassName.get(resourceValueTypeElement)))
-                    .addModifiers(Modifier.PUBLIC, Modifier.FINAL)
-                    .addAnnotation(AnnotationSpec.builder(Generated.class)
-                            .addMember("value", "$S", getClass().getCanonicalName())
-                            .addMember("comments", "$S", "Generated from: " + resourceValueTypeElement.getQualifiedName().toString()).build())
-                    .addField(createFieldBuilder(property, Modifier.PRIVATE)
+    public List<TypeSpec> generateTypes(final TypeElement annotatedTypeElement) {
+        final List<ExecutableElement> propertyMethods = getPropertyMethodsSorted(annotatedTypeElement);
+        final List<TypeSpec> typeSpecList = propertyMethods.stream()
+                .filter(m -> isPrimitiveType(PropertyGenModel.of(m).getType()))
+                .map(propertyMethod -> {
+                    final PropertyGenModel property = PropertyGenModel.of(propertyMethod);
+                    final MethodSpec getMethod = createGetMethodBuilder(propertyMethod).build();
+                    final String actionPrefix = property.isOptional() ? "set" : "change";
+                    final FieldSpec fieldSpec = createFieldBuilder(property, Modifier.PRIVATE)
                             .addModifiers(Modifier.FINAL)
-                            .build())
-                    .addMethod(createConstructor(property, updateAction))
-                    .addMethod(getMethod)
-                    .addMethod(createFactoryMethod(property, updateActionClassName));
-            if (property.isOptional()) {
-                typeSpecBuilder.addMethod(createUnsetMethod(updateActionClassName));
-            }
-            return typeSpecBuilder.build();
-        }).collect(Collectors.toList());
+                            .build();
+                    final String updateAction = actionPrefix + StringUtils.capitalize(fieldSpec.name);
+                    final String updateActionClassName = StringUtils.capitalize(updateAction);
+                    final TypeSpec.Builder typeSpecBuilder = TypeSpec.classBuilder(updateActionClassName)
+                            .addJavadoc("$L $L to $L\n", property.isOptional() ? "Sets" : "Updates", fieldSpec.name, ClassName.get(annotatedTypeElement).simpleName())
+                            .addJavadoc("\n")
+                            .addJavadoc("{@doc.gen intro}\n")
+                            .superclass(ParameterizedTypeName.get(ClassName.get(UpdateActionImpl.class), ClassName.get(annotatedTypeElement)))
+                            .addModifiers(Modifier.PUBLIC, Modifier.FINAL)
+                            .addAnnotation(AnnotationSpec.builder(Generated.class)
+                                    .addMember("value", "$S", getClass().getCanonicalName())
+                                    .addMember("comments", "$S", "Generated from: " + annotatedTypeElement.getQualifiedName().toString()).build())
+                            .addField(createFieldBuilder(property, Modifier.PRIVATE)
+                                    .addModifiers(Modifier.FINAL)
+                                    .build())
+                            .addMethod(createConstructor(property, updateAction))
+                            .addMethod(getMethod)
+                            .addMethod(createFactoryMethod(property, updateActionClassName));
+                    if (property.isOptional()) {
+                        typeSpecBuilder.addMethod(createUnsetMethod(updateActionClassName));
+                    }
+                    return typeSpecBuilder.build();
+                }).collect(Collectors.toList());
 
         return typeSpecList;
+    }
+
+    protected boolean isPrimitiveType(final TypeName propertyType) {
+        return propertyType.isPrimitive() || propertyType.isBoxedPrimitive() || propertyType.toString().equals("java.lang.String");
     }
 
     private MethodSpec createUnsetMethod(final String updateActionClassName) {
