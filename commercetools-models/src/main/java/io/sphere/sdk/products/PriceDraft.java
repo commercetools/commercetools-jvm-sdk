@@ -15,6 +15,7 @@ import javax.money.CurrencyUnit;
 import javax.money.MonetaryAmount;
 import java.math.BigDecimal;
 import java.time.ZonedDateTime;
+import java.util.List;
 
 @JsonDeserialize(as = PriceDraftDsl.class)
 public interface PriceDraft extends CustomDraft {
@@ -33,6 +34,9 @@ public interface PriceDraft extends CustomDraft {
     ZonedDateTime getValidUntil();
 
     CustomFieldsDraft getCustom();
+
+    @Nullable
+    List<PriceTier> getTiers();
 
     @JsonIgnore
     static PriceDraftDsl of(final MonetaryAmount money) {

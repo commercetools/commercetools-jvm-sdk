@@ -20,6 +20,7 @@ import javax.money.CurrencyUnit;
 import javax.money.MonetaryAmount;
 import java.math.BigDecimal;
 import java.time.ZonedDateTime;
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -72,6 +73,9 @@ public interface Price extends PriceLike {
 
     @Override
     MonetaryAmount getValue();
+
+    @Nullable
+    List<PriceTier> getTiers();
 
     default Price withCustomerGroup(@Nullable final Referenceable<CustomerGroup> customerGroup) {
         return PriceBuilder.of(this).customerGroup(Optional.ofNullable(customerGroup).map(c -> c.toReference()).orElse(null)).build();

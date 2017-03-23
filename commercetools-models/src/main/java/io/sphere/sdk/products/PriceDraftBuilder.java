@@ -14,6 +14,7 @@ import io.sphere.sdk.utils.MoneyImpl;
 import javax.annotation.Nullable;
 import javax.money.MonetaryAmount;
 import java.time.ZonedDateTime;
+import java.util.List;
 import java.util.Optional;
 
 public final class PriceDraftBuilder extends Base implements Builder<PriceDraftDsl>, CustomDraft {
@@ -30,6 +31,8 @@ public final class PriceDraftBuilder extends Base implements Builder<PriceDraftD
     private ZonedDateTime validUntil;
     @Nullable
     private CustomFieldsDraft custom;
+    @Nullable
+    private List<PriceTier> tiers;
 
     private PriceDraftBuilder(final MonetaryAmount value) {
         this.value = value;
@@ -93,6 +96,11 @@ public final class PriceDraftBuilder extends Base implements Builder<PriceDraftD
         return this;
     }
 
+    public PriceDraftBuilder tiers(final List<PriceTier> tiers) {
+        this.tiers = tiers;
+        return this;
+    }
+
     @Nullable
     public Reference<Channel> getChannel() {
         return channel;
@@ -127,8 +135,13 @@ public final class PriceDraftBuilder extends Base implements Builder<PriceDraftD
         return value;
     }
 
+    @Nullable
+    public List<PriceTier> getTiers() {
+        return tiers;
+    }
+
     @Override
     public PriceDraftDsl build() {
-        return new PriceDraftDsl(value, country, customerGroup, channel, validFrom, validUntil, custom);
+        return new PriceDraftDsl(value, country, customerGroup, channel, validFrom, validUntil, custom, tiers);
     }
 }

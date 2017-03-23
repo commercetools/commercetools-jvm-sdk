@@ -16,6 +16,7 @@ import javax.money.CurrencyUnit;
 import javax.money.MonetaryAmount;
 import java.math.BigDecimal;
 import java.time.ZonedDateTime;
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -37,12 +38,14 @@ public final class PriceDraftDsl extends Base implements PriceDraft {
     private final ZonedDateTime validUntil;
     @Nullable
     private final CustomFieldsDraft custom;
+    @Nullable
+    private final List<PriceTier> tiers;
 
-    @JsonCreator
+     @JsonCreator
     PriceDraftDsl(final MonetaryAmount value, @Nullable final CountryCode country,
                   @Nullable final Reference<CustomerGroup> customerGroup, @Nullable final Reference<Channel> channel,
                   @Nullable final ZonedDateTime validFrom, @Nullable final ZonedDateTime validUntil,
-                  @Nullable final CustomFieldsDraft custom) {
+                  @Nullable final CustomFieldsDraft custom, @Nullable final List<PriceTier> tiers) {
         this.value = value;
         this.country = country;
         this.customerGroup = customerGroup;
@@ -50,6 +53,7 @@ public final class PriceDraftDsl extends Base implements PriceDraft {
         this.validFrom = validFrom;
         this.validUntil = validUntil;
         this.custom = custom;
+        this.tiers = tiers;
     }
 
     public MonetaryAmount getValue() {
@@ -85,6 +89,12 @@ public final class PriceDraftDsl extends Base implements PriceDraft {
     @Nullable
     public CustomFieldsDraft getCustom() {
         return custom;
+    }
+
+    @Nullable
+    @Override
+    public List<PriceTier> getTiers() {
+        return tiers;
     }
 
     public PriceDraftDsl withCustomerGroup(@Nullable final Referenceable<CustomerGroup> customerGroup) {
