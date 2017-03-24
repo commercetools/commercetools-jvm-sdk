@@ -301,6 +301,27 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
     }
 
     @Test
+    public void addPriceWithTiers() throws Exception {
+        final List<PriceTier> tiers = Arrays.asList(PriceTierBuilder.of(10, EURO_1).build(), PriceTierBuilder.of(5, EURO_5).build());
+        final PriceDraft expectedPriceWithTiers = PriceDraftBuilder.of(MoneyImpl.of(123, EUR))
+                .tiers(tiers)
+                .build();
+        withUpdateableProduct(client(), product -> {
+            final Product updatedProduct = client()
+                    .executeBlocking(ProductUpdateCommand.of(product, AddPrice.of(1, expectedPriceWithTiers)));
+
+
+            final List<Price> prices = updatedProduct.getMasterData().getStaged().getMasterVariant().getPrices();
+            assertThat(prices).hasSize(1);
+            final Price actualPrice = prices.get(0);
+
+            assertThat(expectedPriceWithTiers).isEqualTo(PriceDraft.of(actualPrice));
+
+            return updatedProduct;
+        });
+    }
+
+    @Test
     public void addPriceYen() throws Exception {
         final PriceDraft expectedPrice = PriceDraft.of(MoneyImpl.of(new BigDecimal("12345"), "JPY"));
         testAddPrice(expectedPrice);
@@ -408,7 +429,12 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
     public void setPrices() throws Exception {
         final PriceDraft expectedPrice1 = PriceDraft.of(MoneyImpl.of(123, EUR));
         final PriceDraft expectedPrice2 = PriceDraft.of(MoneyImpl.of(123, EUR)).withCountry(DE);
-        final List<PriceDraft> expectedPriceList = asList(expectedPrice1, expectedPrice2);
+        final List<PriceTier> tiers = Arrays.asList(PriceTierBuilder.of(10, EURO_1).build());
+        final PriceDraft expectedPriceWithTiers = PriceDraftBuilder.of(MoneyImpl.of(123, EUR))
+                .country(CountryCode.AT)
+                .tiers(tiers)
+                .build();
+        final List<PriceDraft> expectedPriceList = asList(expectedPrice1, expectedPrice2, expectedPriceWithTiers);
 
         withUpdateableProduct(client(), product -> {
             assertThat(product.getMasterData().hasStagedChanges()).isFalse();
@@ -416,9 +442,8 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
                     .executeBlocking(ProductUpdateCommand.of(product, SetPrices.of(1, expectedPriceList)));
 
             final List<Price> prices = updatedProduct.getMasterData().getStaged().getMasterVariant().getPrices();
-            assertThat(prices).hasSize(2);
             List<PriceDraft> draftPricesList = prices.stream().map(PriceDraft::of).collect(toList());
-            assertThat(draftPricesList).containsOnly(expectedPrice1, expectedPrice2);
+            assertThat(draftPricesList).containsOnly(expectedPrice1, expectedPrice2, expectedPriceWithTiers);
             assertThat(updatedProduct.getMasterData().hasStagedChanges()).isTrue();
 
             return updatedProduct;
