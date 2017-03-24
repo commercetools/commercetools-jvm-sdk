@@ -725,6 +725,27 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
     }
 
     @Test
+    public void changePriceAddTiers() throws Exception {
+        withUpdateablePricedProduct(client(), product -> {
+            final List<PriceTier> tiers = Arrays.asList(PriceTierBuilder.of(10, EURO_5).build());
+            final PriceDraft newPrice = PriceDraftBuilder.of(MoneyImpl.of(234, EUR))
+                    .tiers(tiers)
+                    .build();
+            final List<Price> prices = product.getMasterData().getStaged().getMasterVariant()
+                    .getPrices();
+            assertThat(prices.stream().anyMatch(p -> p.equals(newPrice))).isFalse();
+
+            final Product updatedProduct = client()
+                    .executeBlocking(ProductUpdateCommand.of(product, ChangePrice.of(prices.get(0), newPrice)));
+
+            final Price actualPrice = getFirstPrice(updatedProduct);
+            assertThat(PriceDraft.of(actualPrice)).isEqualTo(newPrice);
+
+            return updatedProduct;
+        });
+    }
+
+    @Test
     public void changePriceWithStaged() {
         changePriceWithStaged(true);
         changePriceWithStaged(false);
