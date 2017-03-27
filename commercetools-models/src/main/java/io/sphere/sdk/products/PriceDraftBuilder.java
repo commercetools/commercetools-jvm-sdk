@@ -96,7 +96,7 @@ public final class PriceDraftBuilder extends Base implements Builder<PriceDraftD
         return this;
     }
 
-    public PriceDraftBuilder tiers(final List<PriceTier> tiers) {
+    public PriceDraftBuilder tiers(@Nullable final List<PriceTier> tiers) {
         this.tiers = tiers;
         return this;
     }
