@@ -3,6 +3,9 @@ package io.sphere.sdk.products;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.neovisionaries.i18n.CountryCode;
+import io.sphere.sdk.annotations.FactoryMethod;
+import io.sphere.sdk.annotations.HasBuilder;
+import io.sphere.sdk.annotations.ResourceValue;
 import io.sphere.sdk.channels.Channel;
 import io.sphere.sdk.customergroups.CustomerGroup;
 import io.sphere.sdk.models.Reference;
@@ -17,6 +20,7 @@ import javax.money.CurrencyUnit;
 import javax.money.MonetaryAmount;
 import java.math.BigDecimal;
 import java.time.ZonedDateTime;
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -31,6 +35,8 @@ import java.util.Optional;
  * @see io.sphere.sdk.products.commands.updateactions.RemovePrice
  * @see ProductVariant#getPrices()
  */
+@ResourceValue
+@HasBuilder(factoryMethods = @FactoryMethod(parameterNames = { "value" }))
 @JsonDeserialize(as = PriceImpl.class)
 public interface Price extends PriceLike {
     @Nullable
@@ -67,6 +73,9 @@ public interface Price extends PriceLike {
 
     @Override
     MonetaryAmount getValue();
+
+    @Nullable
+    List<PriceTier> getTiers();
 
     default Price withCustomerGroup(@Nullable final Referenceable<CustomerGroup> customerGroup) {
         return PriceBuilder.of(this).customerGroup(Optional.ofNullable(customerGroup).map(c -> c.toReference()).orElse(null)).build();
