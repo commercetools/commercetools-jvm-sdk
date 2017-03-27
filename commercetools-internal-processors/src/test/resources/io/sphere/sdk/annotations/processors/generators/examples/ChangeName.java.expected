@@ -26,6 +26,9 @@ public final class ChangeName extends UpdateActionImpl<MyResource> {
     return name;
   }
 
+  /**
+   * @param name the name {@link MyResource#getName()}
+   */
   public static ChangeName of(final String name) {
     return new ChangeName(name);
   }

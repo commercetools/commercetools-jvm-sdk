@@ -16,6 +16,9 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Abstract base class for implementing javapoet based generators.
+ */
 abstract class BaseAbstractGenerator {
 
     protected final Elements elements;
@@ -61,19 +64,19 @@ abstract class BaseAbstractGenerator {
      * @param typeElement the type element
      * @return methods sorted by their {@link PropertyGenModel#getPropertyName(ExecutableElement)}
      */
-    protected List<ExecutableElement> getAllPropertyMethodsSorted(TypeElement typeElement) {
+    protected List<ExecutableElement> getAllPropertyMethodsSorted(final TypeElement typeElement) {
         return typeUtils.getAllPropertyMethods(typeElement)
                 .sorted(Comparator.comparing(methodName -> escapeJavaKeyword(PropertyGenModel.getPropertyName(methodName))))
                 .collect(Collectors.toList());
     }
 
     /**
-     * Returns all property methods - sorted by their property name.
+     * Returns property methods - not included inherited methods - sorted by their property name.
      *
      * @param typeElement the type element
      * @return methods sorted by their {@link PropertyGenModel#getPropertyName(ExecutableElement)}
      */
-    protected List<ExecutableElement> getPropertyMethodsSorted(TypeElement typeElement) {
+    protected List<ExecutableElement> getPropertyMethodsSorted(final TypeElement typeElement) {
         return typeUtils.getPropertyMethods(typeElement)
                 .sorted(Comparator.comparing(methodName -> escapeJavaKeyword(PropertyGenModel.getPropertyName(methodName))))
                 .collect(Collectors.toList());

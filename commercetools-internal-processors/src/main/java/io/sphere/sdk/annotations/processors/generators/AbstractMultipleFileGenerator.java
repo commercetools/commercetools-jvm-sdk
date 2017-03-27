@@ -8,12 +8,21 @@ import javax.lang.model.util.Elements;
 import java.util.ArrayList;
 import java.util.List;
 
-abstract class AbstractMultipleGenerator extends BaseAbstractGenerator {
+/**
+ * Abstract base class for implementing javapoet based generators - to generate multiple classes.
+ */
+abstract class AbstractMultipleFileGenerator extends BaseAbstractGenerator {
 
-    AbstractMultipleGenerator(final Elements elements) {
+    AbstractMultipleFileGenerator(final Elements elements) {
         super(elements);
     }
 
+    /**
+     * Generates the classes for the given annotated type element.
+     *
+     * @param annotatedTypeElement the annotated type element
+     * @return the list of java files to write
+     */
     public final List<JavaFile> generate(final TypeElement annotatedTypeElement) {
         List<JavaFile> javaFiles = new ArrayList<>();
         final List<TypeSpec> typeSpecs = generateTypes(annotatedTypeElement);
@@ -26,5 +35,7 @@ abstract class AbstractMultipleGenerator extends BaseAbstractGenerator {
     }
 
     protected abstract List<TypeSpec> generateTypes(final TypeElement annotatedTypeElement);
+
+    protected abstract List<String> expectedClassNames(final TypeElement annotatedTypeElement);
 
 }

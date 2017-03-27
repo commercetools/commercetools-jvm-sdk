@@ -19,9 +19,10 @@ public class UpdateActionsGeneratorTest extends AbstractMultipleGeneratorTest {
     public void createMultipleUpdateActions() throws Exception {
         final List<String> contentList = generateAsStrings(MyResource.class);
         final List<String> expectedContent = expectedContent(MyResource.class);
-        int index = 0;
-        for (String content : contentList) {
-            assertThat(content).isEqualTo(expectedContent.get(index++));
+
+        assertThat(contentList).hasSameSizeAs(expectedContent);
+        for (int index = 0; index < contentList.size(); index++) {
+            assertThat(contentList.get(index)).isEqualTo(expectedContent.get(index));
         }
     }
 

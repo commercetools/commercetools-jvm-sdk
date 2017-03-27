@@ -7,7 +7,7 @@ import javax.lang.model.element.TypeElement;
 import javax.lang.model.util.Elements;
 
 /**
- * Abstract base class for implementing javapoet based generators.
+ * Abstract base class for implementing javapoet based generators - to generate a single class.
  */
 abstract class AbstractGenerator extends BaseAbstractGenerator {
 

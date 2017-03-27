@@ -26,6 +26,9 @@ public final class ChangeQuantity extends UpdateActionImpl<MyResource> {
     return quantity;
   }
 
+  /**
+   * @param quantity the quantity {@link MyResource#getQuantity()}
+   */
   public static ChangeQuantity of(final Integer quantity) {
     return new ChangeQuantity(quantity);
   }

@@ -2,7 +2,6 @@ package io.sphere.sdk.annotations.processors.generators;
 
 import com.google.testing.compile.CompilationRule;
 import com.squareup.javapoet.JavaFile;
-import com.squareup.javapoet.TypeSpec;
 import org.apache.commons.io.Charsets;
 import org.apache.commons.io.IOUtils;
 import org.junit.Rule;
@@ -18,15 +17,14 @@ public abstract class AbstractMultipleGeneratorTest {
     @Rule
     public CompilationRule compilationRule = new CompilationRule();
 
-    protected AbstractMultipleGenerator generator;
+    protected AbstractMultipleFileGenerator generator;
 
     protected List<String> expectedContent(final Class<?> clazz) throws Exception {
         List<String> expectedContentList = new ArrayList<>();
         final TypeElement typeElement = compilationRule.getElements().getTypeElement(clazz.getCanonicalName());
-        final List<TypeSpec> typeSpecs = generator.generateTypes(typeElement);
-        typeSpecs.forEach(typeSpec -> {
-            final String typeName = typeSpec.name;
-            final String fixtureFile = typeName + ".java.expected";
+        final List<String> classNames = generator.expectedClassNames(typeElement);
+        classNames.forEach(className -> {
+            final String fixtureFile = className + ".java.expected";
             InputStream resourceAsStream = clazz.getResourceAsStream(fixtureFile);
             try {
                 expectedContentList.add(IOUtils.toString(resourceAsStream, Charsets.UTF_8));

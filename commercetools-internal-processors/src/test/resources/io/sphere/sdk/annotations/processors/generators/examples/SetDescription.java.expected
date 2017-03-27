@@ -29,6 +29,9 @@ public final class SetDescription extends UpdateActionImpl<MyResource> {
     return description;
   }
 
+  /**
+   * @param description the description {@link MyResource#getDescription()}
+   */
   public static SetDescription of(@Nullable final String description) {
     return new SetDescription(description);
   }

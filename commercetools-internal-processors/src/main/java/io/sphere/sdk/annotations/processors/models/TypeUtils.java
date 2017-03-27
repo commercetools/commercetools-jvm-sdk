@@ -3,6 +3,7 @@ package io.sphere.sdk.annotations.processors.models;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.squareup.javapoet.ClassName;
+import com.squareup.javapoet.TypeName;
 import io.sphere.sdk.annotations.ResourceDraftValue;
 import io.sphere.sdk.annotations.ResourceValue;
 import io.sphere.sdk.models.Builder;
@@ -78,7 +79,7 @@ public class TypeUtils {
      * @param typeElement the type element
      * @return methods sorted by their {@link PropertyGenModel#getPropertyName(ExecutableElement)}
      */
-    public Stream<ExecutableElement> getAllPropertyMethods(TypeElement typeElement) {
+    public Stream<ExecutableElement> getAllPropertyMethods(final TypeElement typeElement) {
         final List<ExecutableElement> allMethods = ElementFilter.methodsIn(elements.getAllMembers(typeElement));
         final Comparator<ExecutableElement> nameComparator = Comparator.comparing(e -> e.getSimpleName().toString());
         final Comparator<ExecutableElement> typeComparator = Comparator.comparing(e -> e.getReturnType().toString());
@@ -91,12 +92,12 @@ public class TypeUtils {
 
 
     /**
-     * Returns all property methods as stream.
+     * Returns property methods - not included inherited methods - as stream.
      *
      * @param typeElement the type element
      * @return methods sorted by their {@link PropertyGenModel#getPropertyName(ExecutableElement)}
      */
-    public Stream<ExecutableElement> getPropertyMethods(TypeElement typeElement) {
+    public Stream<ExecutableElement> getPropertyMethods(final TypeElement typeElement) {
         final List<ExecutableElement> allMethods = ElementFilter.methodsIn(typeElement.getEnclosedElements());
         final Comparator<ExecutableElement> nameComparator = Comparator.comparing(e -> e.getSimpleName().toString());
         final Comparator<ExecutableElement> typeComparator = Comparator.comparing(e -> e.getReturnType().toString());
@@ -106,6 +107,7 @@ public class TypeUtils {
         return uniqueMethods.stream()
                 .filter(this::isPropertyMethod);
     }
+
     /**
      * Returns true iff. the given method name starts with {@code get} or {@code is} or is annotated with {@link JsonProperty}
      * and if the given method doesn't have a {@code static}, {@caode default} modifier and isn't annotated with
@@ -147,5 +149,13 @@ public class TypeUtils {
         final Optional<AnnotationValue> annotationValue = first.map(Map.Entry::getValue);
 
         return annotationValue;
+    }
+
+    /**
+     * @param propertyType the property type element
+     * @return true if the property type is a primitive type.
+     */
+    public boolean isPrimitiveType(final TypeName propertyType) {
+        return propertyType.isPrimitive() || propertyType.isBoxedPrimitive() || propertyType.toString().equals("java.lang.String");
     }
 }
