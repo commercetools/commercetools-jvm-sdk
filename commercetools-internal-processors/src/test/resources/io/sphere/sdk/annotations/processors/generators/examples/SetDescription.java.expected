@@ -1,0 +1,42 @@
+package io.sphere.sdk.annotations.processors.generators.examples.commands.updateactions;
+
+import io.sphere.sdk.annotations.processors.generators.examples.MyResource;
+import io.sphere.sdk.commands.UpdateActionImpl;
+import java.lang.String;
+import javax.annotation.Generated;
+import javax.annotation.Nullable;
+
+/**
+ * Sets description to MyResource
+ *
+ * {@doc.gen intro}
+ */
+@Generated(
+    value = "io.sphere.sdk.annotations.processors.generators.UpdateActionsGenerator",
+    comments = "Generated from: io.sphere.sdk.annotations.processors.generators.examples.MyResource"
+)
+public final class SetDescription extends UpdateActionImpl<MyResource> {
+  @Nullable
+  private final String description;
+
+  private SetDescription(@Nullable final String description) {
+    super("setDescription");
+    this.description = description;
+  }
+
+  @Nullable
+  public String getDescription() {
+    return description;
+  }
+
+  /**
+   * @param description the description {@link MyResource#getDescription()}
+   */
+  public static SetDescription of(@Nullable final String description) {
+    return new SetDescription(description);
+  }
+
+  public static SetDescription ofUnset() {
+    return new SetDescription(null);
+  }
+}

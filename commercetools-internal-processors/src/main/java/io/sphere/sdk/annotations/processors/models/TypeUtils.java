@@ -3,6 +3,7 @@ package io.sphere.sdk.annotations.processors.models;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.squareup.javapoet.ClassName;
+import com.squareup.javapoet.TypeName;
 import io.sphere.sdk.annotations.HasBuilder;
 import io.sphere.sdk.annotations.ResourceDraftValue;
 import io.sphere.sdk.annotations.ResourceValue;
@@ -85,8 +86,26 @@ public class TypeUtils {
      * @param typeElement the type element
      * @return methods sorted by their {@link PropertyGenModel#getPropertyName(ExecutableElement)}
      */
-    public Stream<ExecutableElement> getAllPropertyMethods(TypeElement typeElement) {
+    public Stream<ExecutableElement> getAllPropertyMethods(final TypeElement typeElement) {
         final List<ExecutableElement> allMethods = ElementFilter.methodsIn(elements.getAllMembers(typeElement));
+        final Comparator<ExecutableElement> nameComparator = Comparator.comparing(e -> e.getSimpleName().toString());
+        final Comparator<ExecutableElement> typeComparator = Comparator.comparing(e -> e.getReturnType().toString());
+        final Set<ExecutableElement> uniqueMethods = new TreeSet<>(nameComparator.thenComparing(typeComparator));
+        uniqueMethods.addAll(allMethods);
+
+        return uniqueMethods.stream()
+                .filter(this::isPropertyMethod);
+    }
+
+
+    /**
+     * Returns property methods - not included inherited methods - as stream.
+     *
+     * @param typeElement the type element
+     * @return methods sorted by their {@link PropertyGenModel#getPropertyName(ExecutableElement)}
+     */
+    public Stream<ExecutableElement> getPropertyMethods(final TypeElement typeElement) {
+        final List<ExecutableElement> allMethods = ElementFilter.methodsIn(typeElement.getEnclosedElements());
         final Comparator<ExecutableElement> nameComparator = Comparator.comparing(e -> e.getSimpleName().toString());
         final Comparator<ExecutableElement> typeComparator = Comparator.comparing(e -> e.getReturnType().toString());
         final Set<ExecutableElement> uniqueMethods = new TreeSet<>(nameComparator.thenComparing(typeComparator));
@@ -137,5 +156,13 @@ public class TypeUtils {
         final Optional<AnnotationValue> annotationValue = first.map(Map.Entry::getValue);
 
         return annotationValue;
+    }
+
+    /**
+     * @param propertyType the property type element
+     * @return true if the property type is a primitive type.
+     */
+    public boolean isPrimitiveType(final TypeName propertyType) {
+        return propertyType.isPrimitive() || propertyType.isBoxedPrimitive() || propertyType.toString().equals("java.lang.String");
     }
 }
