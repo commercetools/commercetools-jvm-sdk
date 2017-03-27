@@ -343,6 +343,11 @@
                         </execution>
                     </executions>
                 </plugin>
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>license-maven-plugin</artifactId>
+                    <version>1.12</version>
+                </plugin>
             </plugins>
         </pluginManagement>
         <plugins>
@@ -440,6 +445,40 @@
             <properties>
                 <javadoc.additionalparams>--allow-script-in-comments</javadoc.additionalparams>
             </properties>
+        </profile>
+        <profile>
+            <id>third-party-licenses</id>
+            <!--
+                This profile generates third party licenses files for each module under <module-dir>/target/generated-sources/license
+                and for the whole project under target/generated-sources/license
+
+                This profile currently isn't activated by default, but can be activated by passing the -Pthird-party-licenses option
+                to maven.
+            -->
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>license-maven-plugin</artifactId>
+                        <configuration>
+                            <licenseMerges>
+                                <licenseMerge>Apache License 2.0|The Apache Software License, Version 2.0|Apache License, Version 2.0|Apache 2 License|Apache 2.0|Apache 2</licenseMerge>
+                                <licenseMerge>Eclipse Public License 1.0|Eclipse Public License - v 1.0</licenseMerge>
+                            </licenseMerges>
+                            <excludedScopes>test,provided</excludedScopes>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <id>aggregate-third-party-licenses</id>
+                                <goals>
+                                    <goal>add-third-party</goal>
+                                    <goal>aggregate-add-third-party</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
         </profile>
     </profiles>
 </project>
