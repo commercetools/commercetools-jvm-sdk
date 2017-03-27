@@ -1,6 +1,5 @@
 package io.sphere.sdk.products.commands.updateactions;
 
-import io.sphere.sdk.commands.UpdateActionImpl;
 import io.sphere.sdk.products.Product;
 
 import javax.annotation.Nullable;
@@ -17,15 +16,15 @@ import java.util.List;
  * <p>By SKU (attention, SKU is optional field in a variant):</p>
  * {@include.example io.sphere.sdk.products.commands.ProductUpdateCommandIntegrationTest#changeAssetOrderBySku()}
  */
-public final class ChangeAssetOrder extends UpdateActionImpl<Product> {
+public final class ChangeAssetOrder extends StagedProductUpdateActionImpl<Product> {
     @Nullable
     private final Integer variantId;
     @Nullable
     private final String sku;
     private final List<String> assetOrder;
 
-    private ChangeAssetOrder(final List<String> assetOrder, @Nullable final Integer variantId, @Nullable final String sku) {
-        super("changeAssetOrder");
+    private ChangeAssetOrder(final List<String> assetOrder, @Nullable final Integer variantId, @Nullable final String sku, @Nullable final Boolean staged) {
+        super("changeAssetOrder", staged);
         this.assetOrder = assetOrder;
         this.variantId = variantId;
         this.sku = sku;
@@ -46,10 +45,18 @@ public final class ChangeAssetOrder extends UpdateActionImpl<Product> {
     }
 
     public static ChangeAssetOrder ofVariantId(final Integer variantId, final List<String> assetOrder) {
-        return new ChangeAssetOrder(assetOrder, variantId, null);
+        return ofVariantId(variantId, assetOrder, null);
+    }
+
+    public static ChangeAssetOrder ofVariantId(final Integer variantId, final List<String> assetOrder, @Nullable final Boolean staged) {
+        return new ChangeAssetOrder(assetOrder, variantId, null, staged);
     }
 
     public static ChangeAssetOrder ofSku(final String sku, final List<String> assetOrder) {
-        return new ChangeAssetOrder(assetOrder, null, sku);
+        return ofSku(sku, assetOrder, null);
+    }
+
+    public static ChangeAssetOrder ofSku(final String sku, final List<String> assetOrder, @Nullable final Boolean staged) {
+        return new ChangeAssetOrder(assetOrder, null, sku, staged);
     }
 }

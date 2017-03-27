@@ -71,6 +71,17 @@ public class CartUpdateCommandIntegrationTest extends IntegrationTest {
     }
 
     @Test
+    public void setDeleteDaysAfterLastModification() throws Exception {
+        withCart(client(), cart -> {
+            final int deleteDaysAfterLastModification = 11;
+            final Cart updatedCart = client().executeBlocking(
+                    CartUpdateCommand.of(cart, SetDeleteDaysAfterLastModification.of(deleteDaysAfterLastModification)));
+            assertThat(updatedCart.getDeleteDaysAfterLastModification()).isEqualTo(deleteDaysAfterLastModification);
+            return updatedCart;
+        });
+    }
+
+    @Test
     public void addLineItemWithChannels() throws Exception {
         final Channel inventorySupplyChannel = ChannelFixtures.persistentChannelOfRole(client(), ChannelRole.INVENTORY_SUPPLY);
         final Channel distributionChannel = ChannelFixtures.persistentChannelOfRole(client(), ChannelRole.PRODUCT_DISTRIBUTION);

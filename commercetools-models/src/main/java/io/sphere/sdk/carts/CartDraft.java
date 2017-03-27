@@ -66,6 +66,9 @@ public interface CartDraft extends CustomDraft {
     Locale getLocale();
 
     @Nullable
+    Integer getDeleteDaysAfterLastModification();
+
+    @Nullable
     RoundingMode getTaxRoundingMode();
 
     static CartDraftDsl of(final CurrencyUnit currency) {

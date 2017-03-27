@@ -3,8 +3,7 @@ package io.sphere.sdk.annotations.processors.models;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.squareup.javapoet.ClassName;
-import com.squareup.javapoet.ParameterizedTypeName;
-import com.squareup.javapoet.TypeName;
+import io.sphere.sdk.annotations.HasBuilder;
 import io.sphere.sdk.annotations.ResourceDraftValue;
 import io.sphere.sdk.annotations.ResourceValue;
 import io.sphere.sdk.models.Builder;
@@ -13,7 +12,6 @@ import javax.lang.model.element.*;
 import javax.lang.model.util.ElementFilter;
 import javax.lang.model.util.Elements;
 import java.lang.annotation.Annotation;
-import java.lang.reflect.ParameterizedType;
 import java.util.*;
 import java.util.stream.Stream;
 
@@ -36,15 +34,19 @@ public class TypeUtils {
         return element.getSimpleName().toString();
     }
 
+    public ClassName getHasBuilderImplType(final TypeElement typeElement) {
+        final ClassName draftType = ClassName.get(typeElement);
+        final HasBuilder hasBuilder = typeElement.getAnnotation(HasBuilder.class);
+        return ClassName.get(draftType.packageName(), draftType.simpleName() + hasBuilder.implPrefix());
+    }
+
     public ClassName getDraftImplType(final TypeElement typeElement) {
         final ClassName draftType = ClassName.get(typeElement);
         return ClassName.get(draftType.packageName(), draftType.simpleName() + "Dsl");
     }
 
     public ClassName getResourceValueImplType(final TypeElement resourceValueTypeElement) {
-        List<? extends TypeParameterElement> typeParameters = resourceValueTypeElement.getTypeParameters();
-        final TypeName draftType = typeParameters.size() > 0 ?
-                ParameterizedTypeName.get((ParameterizedType) resourceValueTypeElement.asType()) : ClassName.get(resourceValueTypeElement);
+        final ClassName draftType = ClassName.get(resourceValueTypeElement);
         final ResourceValue resourceValue = resourceValueTypeElement.getAnnotation(ResourceValue.class);
 
         final String implSuffix = "Impl" + (resourceValue.abstractResourceClass() ? "Base" : "");
@@ -96,7 +98,7 @@ public class TypeUtils {
 
     /**
      * Returns true iff. the given method name starts with {@code get} or {@code is} or is annotated with {@link JsonProperty}
-     * and if the given method doesn't have a {@code static}, {@caode default} modifier and isn't annotated with
+     * and if the given method doesn't have a {@code static}, {@code default} modifier and isn't annotated with
      * {@link JsonIgnore}.
      *
      * @param method the method
