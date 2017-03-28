@@ -1,5 +1,7 @@
 package io.sphere.sdk.annotations.processors.generators;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.squareup.javapoet.*;
 import io.sphere.sdk.annotations.FactoryMethod;
 import io.sphere.sdk.annotations.processors.models.PropertyGenModel;
@@ -177,5 +179,41 @@ abstract class BaseAbstractGenerator {
         return properties.stream()
                 .map(m -> createParameter(m, useLowercaseBooleans, copyNullable))
                 .collect(Collectors.toList());
+    }
+
+    protected MethodSpec createConstructor(final List<PropertyGenModel> properties) {
+        final List<ParameterSpec> parameters = properties.stream()
+                .map(this::createConstructorParameter)
+                .collect(Collectors.toList());
+
+        final MethodSpec.Builder builder = MethodSpec.constructorBuilder()
+                .addParameters(parameters)
+                .addAnnotation(JsonCreator.class);
+        final List<String> parameterNames = properties.stream()
+                .map(PropertyGenModel::getJavaIdentifier)
+                .collect(Collectors.toList());
+        parameterNames.forEach(n -> builder.addCode("this.$L = $L;\n", n, n));
+
+        return builder.build();
+    }
+
+    private ParameterSpec createConstructorParameter(final PropertyGenModel propertyGenModel) {
+        final ParameterSpec.Builder builder = ParameterSpec.builder(propertyGenModel.getType(), propertyGenModel.getJavaIdentifier(), Modifier.FINAL);
+
+        if (propertyGenModel.isOptional()) {
+            builder.addAnnotation(Nullable.class);
+        }
+        final String jsonName = propertyGenModel.getJsonName();
+        if (jsonName != null) {
+            builder.addAnnotation(createJsonPropertyAnnotation(jsonName));
+        }
+
+        return builder.build();
+    }
+
+    protected AnnotationSpec createJsonPropertyAnnotation(final String jsonName) {
+        return AnnotationSpec.builder(JsonProperty.class)
+                .addMember("value", "$S", jsonName)
+                .build();
     }
 }
