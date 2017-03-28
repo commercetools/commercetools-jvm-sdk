@@ -1,6 +1,7 @@
 package io.sphere.sdk.reviews;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import io.sphere.sdk.annotations.*;
@@ -79,6 +80,7 @@ import java.util.Locale;
 @HasUpdateCommand(javadocSummary = "Updates a review.", updateWithKey = true)
 @HasDeleteCommand(deleteWithKey = true)
 @HasQueryModel()
+@JsonTypeName("review")
 public interface Review extends Resource<Review>, Custom, WithKey {
     /**
      * The name of the author which created this review or null.

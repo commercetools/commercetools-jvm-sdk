@@ -1,11 +1,11 @@
 package io.sphere.sdk.subscriptions;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import io.sphere.sdk.annotations.ResourceValue;
 import io.sphere.sdk.messages.GenericMessage;
-import org.apache.commons.lang3.Validate;
+import io.sphere.sdk.models.TypeRegistry;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -18,9 +18,19 @@ public interface MessageSubscription {
     @JsonProperty("resourceTypeId")
     String getResourceTypeId();
 
+    @JsonIgnore
+    default <R> Class<R> getResourceType() {
+        return TypeRegistry.of().toClass(getResourceTypeId());
+    }
+
     @JsonProperty("types")
     @Nullable
-    List<String> getTypes();
+    List<String> getTypeNames();
+
+    @JsonIgnore
+    default List<Class<?>> getTypes() {
+        return TypeRegistry.of().toClasses(getTypeNames());
+    }
 
     /**
      * This builder method adds the given message type to a new copy of this subscription.
@@ -30,8 +40,9 @@ public interface MessageSubscription {
      * @return a copy of this object with the added message type
      */
     default <R> MessageSubscription addType(final Class<? extends GenericMessage<R>> messageType) {
-        final String type = messageType.getAnnotation(JsonTypeName.class).value();
-        final List<String> types = Stream.concat(getTypes().stream(), Stream.of(type)).collect(Collectors.toList());
+        final String type = TypeRegistry.of().toType(messageType);
+        final List<String> types = Stream.concat(getTypeNames().stream(), Stream.of(type)).collect(Collectors.toList());
+
         return new MessageSubscriptionImpl(getResourceTypeId(), types);
     }
 
@@ -43,8 +54,8 @@ public interface MessageSubscription {
      * @return a copy of this object with the removed message type
      */
     default <R> MessageSubscription removeType(final Class<? extends GenericMessage<R>> messageType) {
-        final String type = messageType.getAnnotation(JsonTypeName.class).value();
-        final List<String> removedTypes = getTypes().stream()
+        final String type = TypeRegistry.of().toType(messageType);
+        final List<String> removedTypes = getTypeNames().stream()
                 .filter(t -> !t.equals(type))
                 .collect(Collectors.toList());
 
@@ -53,18 +64,9 @@ public interface MessageSubscription {
 
     @SafeVarargs
     static <R> MessageSubscription of(final Class<R> resoureClass, final Class<? extends GenericMessage<R>>... messageClasses) {
-        final boolean allTypeInfosAvailable = Stream.of(messageClasses)
-                .allMatch(m -> m.getAnnotation(JsonTypeName.class) != null);
+        final List<String> types  = TypeRegistry.of().toTypes(messageClasses);
 
-        Validate.isTrue(allTypeInfosAvailable, "Not all provided message types are annotated with {}",
-                JsonTypeName.class.getCanonicalName());
-
-        final List<String> types  = Stream.of(messageClasses)
-                .map(m -> m.getAnnotation(JsonTypeName.class))
-                .map(JsonTypeName::value)
-                .collect(Collectors.toList());
-
-        final String resourceTypeId = resoureClass.getAnnotation(JsonTypeName.class).value();
+        final String resourceTypeId = TypeRegistry.of().toType(resoureClass);
 
         return new MessageSubscriptionImpl(resourceTypeId, types);
     }

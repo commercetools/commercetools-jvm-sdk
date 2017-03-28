@@ -1,5 +1,6 @@
 package io.sphere.sdk.carts;
 
+import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.neovisionaries.i18n.CountryCode;
@@ -40,6 +41,7 @@ import java.util.List;
 @HasUpdateCommand(javadocSummary = "Updates a cart.")
 @HasDeleteCommand(javadocSummary = "Deletes a cart.")
 @HasQueryModel(implBaseClass = "CartLikeQueryModelImpl<Cart>", baseInterfaces = {"CartLikeQueryModel<Cart>"})
+@JsonTypeName("cart")
 public interface Cart extends CartLike<Cart> {
 
     /**

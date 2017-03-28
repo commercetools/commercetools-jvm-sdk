@@ -1,11 +1,11 @@
 package io.sphere.sdk.orders;
 
+import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.neovisionaries.i18n.CountryCode;
 import io.sphere.sdk.annotations.*;
 import io.sphere.sdk.carts.*;
-import io.sphere.sdk.carts.queries.CartLikeQueryModelImpl;
 import io.sphere.sdk.customergroups.CustomerGroup;
 import io.sphere.sdk.discountcodes.DiscountCodeInfo;
 import io.sphere.sdk.models.Address;
@@ -50,6 +50,7 @@ import java.util.Set;
 @HasUpdateCommand
 @HasDeleteCommand
 @HasQueryModel(implBaseClass = "io.sphere.sdk.carts.queries.CartLikeQueryModelImpl<Order>", baseInterfaces = {"CartLikeQueryModel<Order>"})
+@JsonTypeName("order")
 public interface Order extends CartLike<Order> {
     /**
      * An identifier for this resource which supports {@link CustomFields}.

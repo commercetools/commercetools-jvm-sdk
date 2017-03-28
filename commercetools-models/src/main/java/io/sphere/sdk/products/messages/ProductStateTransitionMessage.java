@@ -1,6 +1,7 @@
 package io.sphere.sdk.products.messages;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import io.sphere.sdk.messages.GenericMessageImpl;
@@ -19,6 +20,7 @@ import java.time.ZonedDateTime;
  * @see io.sphere.sdk.products.commands.updateactions.TransitionState
  */
 @JsonDeserialize(as = ProductStateTransitionMessage.class)//important to override annotation in Message class
+@JsonTypeName(ProductStateTransitionMessage.MESSAGE_TYPE)
 public final class ProductStateTransitionMessage extends GenericMessageImpl<Product> {
     public static final String MESSAGE_TYPE = "ProductStateTransition";
     public static final MessageDerivateHint<ProductStateTransitionMessage> MESSAGE_HINT =

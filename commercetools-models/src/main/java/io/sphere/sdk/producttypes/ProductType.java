@@ -1,5 +1,6 @@
 package io.sphere.sdk.producttypes;
 
+import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import io.sphere.sdk.annotations.*;
@@ -56,6 +57,7 @@ import java.util.Optional;
         " <p>Delete by key:</p>\n" +
         " {@include.example io.sphere.sdk.producttypes.commands.ProductTypeDeleteCommandIntegrationTest#executionByKey()}", deleteWithKey = true)
 @HasQueryModel
+@JsonTypeName("product-type")
 public interface ProductType extends Resource<ProductType>, AttributeDefinitionContainer, WithKey {
 
     String getName();

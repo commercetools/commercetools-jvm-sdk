@@ -1,5 +1,6 @@
 package io.sphere.sdk.payments;
 
+import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import io.sphere.sdk.annotations.*;
@@ -37,6 +38,7 @@ import java.util.List;
 @HasUpdateCommand(javadocSummary = "Updates a payment.")
 @HasDeleteCommand
 @HasQueryModel
+@JsonTypeName("payment")
 public interface Payment extends Resource<Payment>, Custom {
     @Nullable
     Reference<Customer> getCustomer();

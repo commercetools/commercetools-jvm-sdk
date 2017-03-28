@@ -1,11 +1,12 @@
 package io.sphere.sdk.inventory;
 
+import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import io.sphere.sdk.annotations.*;
 import io.sphere.sdk.channels.Channel;
-import io.sphere.sdk.models.Resource;
 import io.sphere.sdk.models.Reference;
+import io.sphere.sdk.models.Resource;
 import io.sphere.sdk.types.Custom;
 import io.sphere.sdk.types.CustomFields;
 import io.sphere.sdk.types.TypeDraft;
@@ -33,6 +34,7 @@ import java.time.ZonedDateTime;
 @HasUpdateCommand
 @HasDeleteCommand
 @HasQueryModel
+@JsonTypeName("inventory-entry")
 public interface InventoryEntry extends Resource<InventoryEntry>, Custom {
     /**
      * Available amount of stock. (available means: quantityOnStock - reserved quantity)

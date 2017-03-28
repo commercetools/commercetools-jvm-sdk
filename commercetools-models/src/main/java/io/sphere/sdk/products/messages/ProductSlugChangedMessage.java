@@ -1,6 +1,7 @@
 package io.sphere.sdk.products.messages;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import io.sphere.sdk.messages.GenericMessageImpl;
@@ -16,6 +17,7 @@ import java.time.ZonedDateTime;
  * {@include.example io.sphere.sdk.products.commands.ProductUpdateCommandIntegrationTest#changeSlug()}
  */
 @JsonDeserialize(as = ProductSlugChangedMessage.class)//important to override annotation in Message class
+@JsonTypeName(ProductSlugChangedMessage.MESSAGE_TYPE)
 public final class ProductSlugChangedMessage extends GenericMessageImpl<Product> {
     public static final String MESSAGE_TYPE = "ProductSlugChanged";
     public static final MessageDerivateHint<ProductSlugChangedMessage> MESSAGE_HINT =

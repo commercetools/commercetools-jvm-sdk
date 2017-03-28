@@ -1,5 +1,6 @@
 package io.sphere.sdk.products;
 
+import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import io.sphere.sdk.annotations.HasDeleteCommand;
@@ -39,6 +40,7 @@ import java.util.Optional;
 @ResourceValue(abstractResourceClass = true)
 @ResourceInfo(pluralName = "products", pathElement = "products")
 @HasDeleteCommand(includeExamples = "io.sphere.sdk.products.ProductDeleteExample#delete()", deleteWithKey = true)
+@JsonTypeName("product")
 public interface Product extends ProductLike<Product, Product>, Resource<Product> {
 
     ProductCatalogData getMasterData();
