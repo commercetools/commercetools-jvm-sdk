@@ -13,9 +13,10 @@ import javax.lang.model.element.ExecutableElement;
 import javax.lang.model.element.Modifier;
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.util.Elements;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
+import java.util.function.Function;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * Abstract base class for implementing javapoet based generators.
@@ -216,4 +217,51 @@ abstract class BaseAbstractGenerator {
                 .addMember("value", "$S", jsonName)
                 .build();
     }
+
+    protected List<MethodSpec> createFactoryMethods(final FactoryMethod[] factoryMethods, final List<PropertyGenModel> properties, final ClassName returnType) {
+        return Stream.of(factoryMethods)
+                .map(f -> createFactoryMethod(f, properties, returnType))
+                .collect(Collectors.toList());
+    }
+
+    protected MethodSpec createFactoryMethod(final FactoryMethod factoryMethod, final List<PropertyGenModel> properties, final ClassName returnType) {
+        final Set<String> factoryParameterNames = Stream.of(factoryMethod.parameterNames()).collect(Collectors.toCollection(LinkedHashSet::new));
+        final Map<String, PropertyGenModel> getterMethodByPropertyName = properties.stream()
+                .collect(Collectors.toMap(PropertyGenModel::getName, Function.identity()));
+        final List<PropertyGenModel> parameterTemplates = factoryParameterNames.stream()
+                .map(getterMethodByPropertyName::get)
+                .collect(Collectors.toList());
+        assert factoryParameterNames.size() == parameterTemplates.size();
+
+        final String callArguments = properties.stream()
+                .map(p -> factoryParameterNames.contains(p.getName()) ? p.getJavaIdentifier() : "null")
+                .collect(Collectors.joining(", "));
+
+        final MethodSpec.Builder builder = MethodSpec.methodBuilder(factoryMethod.methodName()).addModifiers(Modifier.PUBLIC, Modifier.STATIC)
+                .returns(returnType)
+                .addJavadoc("Creates a builder initialized with the given values.\n\n");
+        parameterTemplates.forEach(p -> builder.addJavadoc("@param $L initial value for the $L property\n",
+                p.getJavaIdentifier(), p.getJavadocLinkTag()));
+        builder.addJavadoc("@return new builder initialized with the given values\n");
+        return builder
+                .addParameters(createParameters(parameterTemplates, factoryMethod.useLowercaseBooleans(), false))
+                .addCode("return new $L($L);\n", returnType.simpleName(), callArguments)
+                .build();
+    }
+
+    protected MethodSpec createCopyFactoryMethod(final TypeElement typeElement, final ClassName returnType, final List<ExecutableElement> propertyMethods) {
+        final ParameterSpec templateParameter = ParameterSpec.builder(ClassName.get(typeElement), "template", Modifier.FINAL).build();
+        final String callArguments = propertyMethods.stream()
+                .map(getterMethod -> String.format("template.%s()", getterMethod.getSimpleName()))
+                .collect(Collectors.joining(", "));
+        return MethodSpec.methodBuilder("of").addModifiers(Modifier.PUBLIC, Modifier.STATIC)
+                .returns(returnType)
+                .addJavadoc("Creates a builder initialized with the fields of the template parameter.\n\n")
+                .addJavadoc("@param template the template\n")
+                .addJavadoc("@return a new builder initialized from the template\n")
+                .addParameter(templateParameter)
+                .addCode("return new $L($L);\n", returnType.simpleName(), callArguments)
+                .build();
+    }
+
 }

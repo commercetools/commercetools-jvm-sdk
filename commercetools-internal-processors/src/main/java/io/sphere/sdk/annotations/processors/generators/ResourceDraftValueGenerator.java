@@ -1,6 +1,7 @@
 package io.sphere.sdk.annotations.processors.generators;
 
 import com.squareup.javapoet.*;
+import io.sphere.sdk.annotations.ResourceDraftValue;
 import io.sphere.sdk.annotations.processors.models.PropertyGenModel;
 import io.sphere.sdk.models.Base;
 
@@ -23,12 +24,15 @@ public class ResourceDraftValueGenerator extends AbstractGenerator {
 
     @Override
     public TypeSpec generateType(final TypeElement resourceValueTypeElement) {
+
+        final ResourceDraftValue resourceDraftValue = resourceValueTypeElement.getAnnotation(ResourceDraftValue.class);
         final List<ExecutableElement> propertyMethods = getAllPropertyMethodsSorted(resourceValueTypeElement);
         final List<PropertyGenModel> propertyGenModels = getPropertyGenModels(propertyMethods);
         final List<FieldSpec> fields = propertyGenModels.stream().map(this::createField).collect(Collectors.toList());
         final List<MethodSpec> getMethods = propertyMethods.stream().map(this::createGetMethod).collect(Collectors.toList());
 
-        final String className = ClassName.get(resourceValueTypeElement) + "Dsl";
+        final String className = typeUtils.getDraftImplType(resourceValueTypeElement).simpleName();
+        final ClassName builderType = getBuilderType(resourceValueTypeElement);
         final TypeSpec typeSpec = TypeSpec.classBuilder(className)
                 .superclass(ClassName.get(Base.class))
                 .addSuperinterface(ClassName.get(resourceValueTypeElement.asType()))
@@ -39,57 +43,52 @@ public class ResourceDraftValueGenerator extends AbstractGenerator {
                 .addFields(fields)
                 .addMethod(createConstructor(propertyGenModels))
                 .addMethods(getMethods)
-                .addMethod(createBuilderMethod(resourceValueTypeElement, fields))
-                .addMethods(createWithMethods(propertyGenModels, resourceValueTypeElement))
+                .addMethod(createBuilderMethod(builderType, propertyMethods))
+                .addMethods(createWithMethods(resourceValueTypeElement, propertyGenModels))
+                .addMethods(createFactoryMethods(resourceDraftValue.factoryMethods(), propertyGenModels, typeUtils.getDraftImplType(resourceValueTypeElement)))
+                .addMethod(createCopyFactoryMethod(resourceValueTypeElement, typeUtils.getDraftImplType(resourceValueTypeElement), propertyMethods))
                 .build();
 
         return typeSpec;
     }
 
-    private MethodSpec createBuilderMethod(final TypeElement typeElement, final List<FieldSpec> fields) {
-        final ClassName builderType = getBuilderType(typeElement);
+    protected MethodSpec createBuilderMethod(final TypeName type, final List<ExecutableElement> propertyMethods) {
+        final List<String> argumentNames = propertyMethods.stream()
+                .map((getterMethod) -> PropertyGenModel.getPropertyName(getterMethod))
+                .map(this::escapeJavaKeyword)
+                .collect(Collectors.toList());
+        final String callArguments = String.join(", ", argumentNames);
         return MethodSpec.methodBuilder("newBuilder")
-                .addModifiers(Modifier.PRIVATE)
-                .returns(builderType)
-                .addCode("return new $T($L);\n", builderType, createBuilderInputParameters(fields))
+                .addJavadoc("Creates a new instance of {@code $T} with the values of this builder.\n\n", type)
+                .addJavadoc("@return the instance\n")
+                .addModifiers(Modifier.PUBLIC)
+                .returns(type)
+                .addCode("return new $T($L);\n", type, callArguments)
                 .build();
     }
 
-    private String createBuilderInputParameters(final List<FieldSpec> fields) {
-        String inputParameters = "";
-        for (FieldSpec field : fields) {
-            inputParameters += field.name + ",";
-        }
-        return inputParameters.substring(0, inputParameters.length() - 1);
-    }
-
-    private Iterable<MethodSpec> createWithMethods(final List<PropertyGenModel> propertyGenModels, final TypeElement typeElement) {
+    private Iterable<MethodSpec> createWithMethods(final TypeElement typeElement, final List<PropertyGenModel> propertyGenModels) {
         return propertyGenModels.stream()
                 .map(property -> createWithMethod(property, typeElement))
                 .collect(Collectors.toList());
     }
 
     private MethodSpec createWithMethod(final PropertyGenModel property, final TypeElement typeElement) {
-        final ClassName dslType = getConcreteDslType(typeElement);
+        final ClassName dslType = typeUtils.getDraftImplType(typeElement);
         return MethodSpec.methodBuilder("with" + capitalize(property.getJavaIdentifier()))
                 .addModifiers(Modifier.PUBLIC)
-                .addParameter(createWithMethodParameter(property))
+                .addParameter(createWithMethodArgument(property))
                 .returns(ClassName.get(dslType.packageName(), dslType.simpleName()))
                 .addCode("return newBuilder().$L($L).build();\n", property.getJavaIdentifier(), property.getJavaIdentifier())
                 .build();
     }
 
-    public ClassName getBuilderType(final TypeElement typeElement) {
+    private ClassName getBuilderType(final TypeElement typeElement) {
         final ClassName type = typeUtils.getConcreteBuilderType(typeElement);
         return ClassName.get(type.packageName(), type.simpleName());
     }
 
-    public ClassName getConcreteDslType(final TypeElement typeElement) {
-        final ClassName type = ClassName.get(typeElement);
-        return ClassName.get(type.packageName(), type.simpleName() + "Dsl");
-    }
-
-    private ParameterSpec createWithMethodParameter(final PropertyGenModel propertyGenModel) {
+    private ParameterSpec createWithMethodArgument(final PropertyGenModel propertyGenModel) {
         final ParameterSpec.Builder builder = ParameterSpec.builder(propertyGenModel.getType(), propertyGenModel.getJavaIdentifier(), Modifier.FINAL);
         if (propertyGenModel.isOptional()) {
             builder.addAnnotation(Nullable.class);
