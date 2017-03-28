@@ -25,20 +25,23 @@ public class TypeRegistryImplGenerator {
     public static final String CLASS_TO_TYPE_FIELD = "classToType";
 
     /**
-     * Generates a java file from the given type element.
+     * Generates a java file containing the type registry implementation from the given
+     * type elements.
      *
      * @param annotatedTypeElements type elements annotated with {@link JsonTypeName}
      *
      * @return the java file
      */
     public final JavaFile generate(final List<TypeElement> annotatedTypeElements) {
+        final ParameterizedTypeName classType = ParameterizedTypeName.get(ClassName.get(Class.class), TypeVariableName.get("?"));
+
         final ParameterizedTypeName typeToClassTypeName =
-                ParameterizedTypeName.get(ClassName.get(Map.class), ClassName.get(String.class), ClassName.get(Class.class));
+                ParameterizedTypeName.get(ClassName.get(Map.class), ClassName.get(String.class), classType);
         final FieldSpec typeToClassField = FieldSpec.builder(typeToClassTypeName, TYPE_TO_CLASS_FIELD, Modifier.PRIVATE, Modifier.FINAL)
                 .initializer("new $T<>()", HashMap.class).build();
 
         final ParameterizedTypeName classToTypeName =
-                ParameterizedTypeName.get(ClassName.get(Map.class), ClassName.get(Class.class), ClassName.get(String.class));
+                ParameterizedTypeName.get(ClassName.get(Map.class), classType, ClassName.get(String.class));
         final FieldSpec classToTypeField = FieldSpec.builder(classToTypeName, CLASS_TO_TYPE_FIELD, Modifier.PRIVATE, Modifier.FINAL)
                 .initializer("new $T<>()", HashMap.class).build();
 
@@ -54,10 +57,8 @@ public class TypeRegistryImplGenerator {
                 .sorted(Comparator.comparing(Map.Entry::getKey))
                 .forEach(e -> constructorBuilder.addCode("$L.put($T.class, $S);\n", CLASS_TO_TYPE_FIELD, e.getValue(), e.getKey()));
 
-        final TypeVariableName typeVariable = TypeVariableName.get("T");
         final MethodSpec toClassMethod = MethodSpec.methodBuilder("toClass")
-                .returns(ParameterizedTypeName.get(ClassName.get(Class.class), typeVariable))
-                .addTypeVariable(typeVariable)
+                .returns(classType)
                 .addModifiers(Modifier.PUBLIC)
                 .addParameter(String.class, "type", Modifier.FINAL)
                 .addCode("return $L.get(type);\n", TYPE_TO_CLASS_FIELD)
@@ -67,7 +68,7 @@ public class TypeRegistryImplGenerator {
         final MethodSpec toTypeMethod = MethodSpec.methodBuilder("toType")
                 .returns(ClassName.get(String.class))
                 .addModifiers(Modifier.PUBLIC)
-                .addParameter(Class.class, "clazz", Modifier.FINAL)
+                .addParameter(classType, "clazz", Modifier.FINAL)
                 .addCode("return $L.get(clazz);\n", CLASS_TO_TYPE_FIELD)
                 .addAnnotation(Override.class)
                 .build();

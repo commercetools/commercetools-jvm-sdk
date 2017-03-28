@@ -1,0 +1,35 @@
+package io.sphere.sdk.annotations.processors.generators.examples.commands.updateactions;
+
+import io.sphere.sdk.annotations.processors.generators.examples.MyResource;
+import io.sphere.sdk.commands.UpdateActionImpl;
+import java.lang.Integer;
+import javax.annotation.Generated;
+
+/**
+ * Updates quantity to MyResource
+ *
+ * {@doc.gen intro}
+ */
+@Generated(
+    value = "io.sphere.sdk.annotations.processors.generators.UpdateActionsGenerator",
+    comments = "Generated from: io.sphere.sdk.annotations.processors.generators.examples.MyResource"
+)
+public final class ChangeQuantity extends UpdateActionImpl<MyResource> {
+  private final Integer quantity;
+
+  private ChangeQuantity(final Integer quantity) {
+    super("changeQuantity");
+    this.quantity = quantity;
+  }
+
+  public Integer getQuantity() {
+    return quantity;
+  }
+
+  /**
+   * @param quantity the quantity {@link MyResource#getQuantity()}
+   */
+  public static ChangeQuantity of(final Integer quantity) {
+    return new ChangeQuantity(quantity);
+  }
+}

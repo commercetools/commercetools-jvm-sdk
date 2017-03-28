@@ -17,11 +17,10 @@ public interface TypeRegistry {
      * Returns the class of the given type.
      *
      * @param type the type
-     * @param <T> the class type
      *
      * @return class of the given type
      */
-    <T> Class<T> toClass(String type);
+    Class<?> toClass(String type);
 
     /**
      * Returns the classes of the given type names.
@@ -59,9 +58,9 @@ public interface TypeRegistry {
     }
 
     /**
-     * Creates a new type registry.
+     * Returns the type registry.
      *
-     * @return new type registry
+     * @return the type registry
      */
     static TypeRegistry of() {
         return TypeRegistryImpl.INSTANCE;
