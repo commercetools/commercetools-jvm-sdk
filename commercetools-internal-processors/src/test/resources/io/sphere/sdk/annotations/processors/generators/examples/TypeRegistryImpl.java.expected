@@ -1,0 +1,35 @@
+package io.sphere.sdk.models;
+
+import io.sphere.sdk.annotations.processors.generators.examples.ExampleTypes;
+import java.lang.Class;
+import java.lang.Override;
+import java.lang.String;
+import java.util.HashMap;
+import java.util.Map;
+import javax.annotation.Generated;
+
+@Generated("io.sphere.sdk.annotations.processors.generators.TypeRegistryImplGenerator")
+class TypeRegistryImpl implements TypeRegistry {
+  static final TypeRegistry INSTANCE = new TypeRegistryImpl();
+
+  private final Map<String, Class> typeToClass = new HashMap<>();
+
+  private final Map<Class, String> classToType = new HashMap<>();
+
+  private TypeRegistryImpl() {
+    typeToClass.put("type1", ExampleTypes.Type1.class);
+    typeToClass.put("type2", ExampleTypes.Type2.class);
+    classToType.put(ExampleTypes.Type1.class, "type1");
+    classToType.put(ExampleTypes.Type2.class, "type2");
+  }
+
+  @Override
+  public <T> Class<T> toClass(final String type) {
+    return typeToClass.get(type);
+  }
+
+  @Override
+  public String toType(final Class clazz) {
+    return classToType.get(clazz);
+  }
+}
