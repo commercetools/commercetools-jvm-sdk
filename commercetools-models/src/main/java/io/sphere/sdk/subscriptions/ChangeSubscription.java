@@ -13,7 +13,7 @@ public interface ChangeSubscription {
     String getResourceTypeId();
 
     @JsonIgnore
-    default <T> Class<T> getResourceType() {
+    default Class<?> getResourceType() {
         return TypeRegistry.of().toClass(getResourceTypeId());
     }
 

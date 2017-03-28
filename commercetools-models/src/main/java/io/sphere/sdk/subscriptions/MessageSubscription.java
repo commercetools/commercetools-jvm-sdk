@@ -19,7 +19,7 @@ public interface MessageSubscription {
     String getResourceTypeId();
 
     @JsonIgnore
-    default <R> Class<R> getResourceType() {
+    default Class<?> getResourceType() {
         return TypeRegistry.of().toClass(getResourceTypeId());
     }
 
