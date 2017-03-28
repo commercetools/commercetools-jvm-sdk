@@ -4,7 +4,7 @@ import io.sphere.sdk.queries.*;
 
 import javax.annotation.Nullable;
 
-public class PriceTierQueryModelImpl<T> extends QueryModelImpl<T> implements PriceTierQueryModel<T> {
+final class PriceTierQueryModelImpl<T> extends QueryModelImpl<T> implements PriceTierQueryModel<T> {
     PriceTierQueryModelImpl(@Nullable final QueryModel<T> parent, @Nullable final String pathSegment) {
         super(parent, pathSegment);
     }
