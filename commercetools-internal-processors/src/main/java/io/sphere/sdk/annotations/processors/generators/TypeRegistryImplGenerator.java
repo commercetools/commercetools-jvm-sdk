@@ -25,7 +25,8 @@ public class TypeRegistryImplGenerator {
     public static final String CLASS_TO_TYPE_FIELD = "classToType";
 
     /**
-     * Generates a java file from the given type element.
+     * Generates a java file containing the type registry implementation from the given
+     * type elements.
      *
      * @param annotatedTypeElements type elements annotated with {@link JsonTypeName}
      *

@@ -13,7 +13,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
- * Base class for annotation processor that generate a single java file from multiple type elements
+ * Base class for annotation processors that generate a single java file from multiple type elements
  * annotated with the same annotation.
  */
 abstract class AggregatorAnnotationProcessor<A extends Annotation> extends AbstractProcessor {

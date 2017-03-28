@@ -58,9 +58,9 @@ public interface TypeRegistry {
     }
 
     /**
-     * Creates a new type registry.
+     * Returns the type registry.
      *
-     * @return new type registry
+     * @return the type registry
      */
     static TypeRegistry of() {
         return TypeRegistryImpl.INSTANCE;
