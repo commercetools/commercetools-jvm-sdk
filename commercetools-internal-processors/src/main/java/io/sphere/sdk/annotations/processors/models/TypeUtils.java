@@ -48,10 +48,7 @@ public class TypeUtils {
 
     public ClassName getDraftImplType(final TypeElement typeElement) {
         final ClassName draftType = ClassName.get(typeElement);
-        final ResourceDraftValue resourceDraftValue = typeElement.getAnnotation(ResourceDraftValue.class);
-
-        final String implSuffix = "Dsl" + (resourceDraftValue.abstractResourceDraftValueClass() ? "Base" : "");
-        return ClassName.get(draftType.packageName(), draftType.simpleName() + implSuffix);
+        return ClassName.get(draftType.packageName(), draftType.simpleName() + "Dsl");
     }
 
     public ClassName getResourceValueImplType(final TypeElement resourceValueTypeElement) {

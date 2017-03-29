@@ -2,6 +2,7 @@ package io.sphere.sdk.annotations.processors.generators;
 
 import io.sphere.sdk.annotations.processors.generators.examples.ExampleDraft;
 import io.sphere.sdk.annotations.processors.generators.examples.ExampleDraftWithAbstractClass;
+import io.sphere.sdk.annotations.processors.generators.examples.ExampleWithReferenceDraft;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -26,6 +27,13 @@ public class ResourceDraftValueGeneratorTest extends AbstractGeneratorTest {
         final String content = generateAsString(ExampleDraftWithAbstractClass.class);
 
         assertThat(content).isEqualTo(expectedContent(ExampleDraftWithAbstractClass.class));
+    }
+
+    @Test
+    public void generateExampleResourceWithReference() throws Exception {
+        final String content = generateAsString(ExampleWithReferenceDraft.class);
+
+        assertThat(content).isEqualTo(expectedContent(ExampleWithReferenceDraft.class));
     }
 
 }
