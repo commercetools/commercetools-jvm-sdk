@@ -12,7 +12,7 @@ import java.util.List;
  *
  * {@doc.gen intro}
  */
-public class SetChanges extends UpdateActionImpl<Subscription> {
+public final class SetChanges extends UpdateActionImpl<Subscription> {
     @Nullable
     private final List<ChangeSubscription> changes;
 
