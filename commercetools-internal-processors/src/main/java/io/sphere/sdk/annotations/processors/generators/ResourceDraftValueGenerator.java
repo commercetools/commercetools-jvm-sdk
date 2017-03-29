@@ -14,11 +14,12 @@ import javax.lang.model.util.Elements;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static com.squareup.javapoet.MethodSpec.methodBuilder;
 import static org.apache.commons.lang3.StringUtils.capitalize;
 
 public class ResourceDraftValueGenerator extends AbstractGenerator {
 
-    ResourceDraftValueGenerator(final Elements elements) {
+    public ResourceDraftValueGenerator(final Elements elements) {
         super(elements);
     }
 
@@ -31,18 +32,22 @@ public class ResourceDraftValueGenerator extends AbstractGenerator {
         final List<FieldSpec> fields = propertyGenModels.stream().map(this::createField).collect(Collectors.toList());
         final List<MethodSpec> getMethods = propertyMethods.stream().map(this::createGetMethod).collect(Collectors.toList());
 
-        final String className = typeUtils.getDraftImplType(resourceValueTypeElement).simpleName();
+        final ClassName concreteDraftType = typeUtils.getConcreteDraftType(resourceValueTypeElement);
+        final ClassName draftImplType = typeUtils.getDraftImplType(resourceValueTypeElement);
+        final String className = draftImplType.simpleName();
         final ClassName builderType = getBuilderType(resourceValueTypeElement);
         final TypeSpec.Builder builder = TypeSpec.classBuilder(className)
                 .superclass(ClassName.get(Base.class))
                 .addSuperinterface(ClassName.get(resourceValueTypeElement.asType()));
-
         if (resourceDraftValue.abstractResourceDraftValueClass()) {
-            builder.addModifiers(Modifier.ABSTRACT);
+            builder.addJavadoc("Abstract base Dsl class for {@link $T} which needs to be extended to add additional methods.\n", resourceValueTypeElement)
+                    .addJavadoc("Subclasses have to provide the same non-default constructor as this class.\n")
+                    .addModifiers(Modifier.ABSTRACT)
+                    .addTypeVariable(TypeVariableName.get("T").withBounds(draftImplType));
         } else {
-            builder.addModifiers(Modifier.PUBLIC, Modifier.FINAL);
+            builder.addJavadoc("Abstract Dsl class {@link $T}.\n", resourceValueTypeElement)
+                    .addModifiers(Modifier.PUBLIC, Modifier.FINAL);
         }
-
         builder.addAnnotation(AnnotationSpec.builder(Generated.class)
                 .addMember("value", "$S", getClass().getCanonicalName())
                 .addMember("comments", "$S", "Generated from: " + resourceValueTypeElement.getQualifiedName().toString()).build())
@@ -51,8 +56,8 @@ public class ResourceDraftValueGenerator extends AbstractGenerator {
                 .addMethods(getMethods)
                 .addMethod(createBuilderMethod(builderType, propertyMethods))
                 .addMethods(createWithMethods(resourceValueTypeElement, propertyGenModels))
-                .addMethods(createFactoryMethods(resourceDraftValue.factoryMethods(), propertyGenModels, typeUtils.getDraftImplType(resourceValueTypeElement)))
-                .addMethod(createCopyFactoryMethod(resourceValueTypeElement, typeUtils.getDraftImplType(resourceValueTypeElement), propertyMethods));
+                .addMethods(createFactoryMethods(resourceDraftValue.factoryMethods(), propertyGenModels, concreteDraftType))
+                .addMethod(createCopyFactoryMethod(resourceValueTypeElement, concreteDraftType, propertyMethods));
 
         return builder.build();
     }
@@ -63,7 +68,7 @@ public class ResourceDraftValueGenerator extends AbstractGenerator {
                 .map(this::escapeJavaKeyword)
                 .collect(Collectors.toList());
         final String callArguments = String.join(", ", argumentNames);
-        return MethodSpec.methodBuilder("newBuilder")
+        return methodBuilder("newBuilder")
                 .addJavadoc("Creates a new instance of {@code $T} with the values of this builder.\n\n", type)
                 .addJavadoc("@return the instance\n")
                 .addModifiers(Modifier.PUBLIC)
@@ -79,13 +84,18 @@ public class ResourceDraftValueGenerator extends AbstractGenerator {
     }
 
     private MethodSpec createWithMethod(final PropertyGenModel property, final TypeElement typeElement) {
-        final ClassName dslType = typeUtils.getDraftImplType(typeElement);
-        return MethodSpec.methodBuilder("with" + capitalize(property.getJavaIdentifier()))
+        final ResourceDraftValue typeElementAnnotation = typeElement.getAnnotation(ResourceDraftValue.class);
+        final MethodSpec.Builder builder = methodBuilder("with" + capitalize(property.getJavaIdentifier()))
                 .addModifiers(Modifier.PUBLIC)
-                .addParameter(createWithMethodArgument(property))
-                .returns(ClassName.get(dslType.packageName(), dslType.simpleName()))
-                .addCode("return newBuilder().$L($L).build();\n", property.getJavaIdentifier(), property.getJavaIdentifier())
-                .build();
+                .addParameter(createWithMethodArgument(property));
+        if (typeElementAnnotation.abstractResourceDraftValueClass()) {
+            builder.returns(TypeVariableName.get("T"))
+                    .addCode("return (T) newBuilder().$L($L).build();\n", property.getJavaIdentifier(), property.getJavaIdentifier());
+        } else {
+            builder.returns(typeUtils.getConcreteDraftType(typeElement))
+                    .addCode("return newBuilder().$L($L).build();\n", property.getJavaIdentifier(), property.getJavaIdentifier());
+        }
+        return builder.build();
     }
 
     private ClassName getBuilderType(final TypeElement typeElement) {

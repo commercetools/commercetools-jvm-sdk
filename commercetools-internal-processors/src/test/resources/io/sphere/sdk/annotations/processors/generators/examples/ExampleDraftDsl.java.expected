@@ -8,6 +8,9 @@ import java.util.List;
 import javax.annotation.Generated;
 import javax.annotation.Nullable;
 
+/**
+ * Abstract Dsl class {@link ExampleDraft}.
+ */
 @Generated(
     value = "io.sphere.sdk.annotations.processors.generators.ResourceDraftValueGenerator",
     comments = "Generated from: io.sphere.sdk.annotations.processors.generators.examples.ExampleDraft"
