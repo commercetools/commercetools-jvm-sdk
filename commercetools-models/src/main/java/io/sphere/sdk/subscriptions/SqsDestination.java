@@ -12,9 +12,9 @@ import static java.util.Objects.requireNonNull;
  * AWS SQS is a pull-queue on AWS.
  */
 @JsonTypeName("SQS")
-@JsonDeserialize(as = AwsSqsDestinationImpl.class)
+@JsonDeserialize(as = SqsDestinationImpl.class)
 @ResourceValue
-public interface AwsSqsDestination extends Destination {
+public interface SqsDestination extends Destination {
 
     URI getQueueURL();
 
@@ -24,8 +24,8 @@ public interface AwsSqsDestination extends Destination {
 
     String getRegion();
 
-    static AwsSqsDestination of(final AwsCredentials awsCredentials, final String region, final URI queueURL) {
-        return new AwsSqsDestinationImpl(awsCredentials.getAccessKey(), awsCredentials.getAccessSecret(),
+    static SqsDestination of(final AwsCredentials awsCredentials, final String region, final URI queueURL) {
+        return new SqsDestinationImpl(awsCredentials.getAccessKey(), awsCredentials.getAccessSecret(),
                 requireNonNull(queueURL), requireNonNull(region), "SQS");
     }
 }

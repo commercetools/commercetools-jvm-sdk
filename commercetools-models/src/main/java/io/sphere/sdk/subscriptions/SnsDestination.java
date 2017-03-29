@@ -10,9 +10,9 @@ import static java.util.Objects.requireNonNull;
  * AWS SNS can be used to push messages to AWS Lambda, HTTP endpoints (webhooks) or fan-out messages to SQS queues.
  */
 @JsonTypeName("SNS")
-@JsonDeserialize(as = AwsSnsDestinationImpl.class)
+@JsonDeserialize(as = SnsDestinationImpl.class)
 @ResourceValue
-public interface AwsSnsDestination extends Destination {
+public interface SnsDestination extends Destination {
 
     String getTopicArn();
 
@@ -20,8 +20,8 @@ public interface AwsSnsDestination extends Destination {
 
     String getAccessSecret();
 
-    static AwsSnsDestination of(final AwsCredentials awsCredentials, final String topicArn) {
-        return new AwsSnsDestinationImpl(awsCredentials.getAccessKey(), awsCredentials.getAccessSecret(),
+    static SnsDestination of(final AwsCredentials awsCredentials, final String topicArn) {
+        return new SnsDestinationImpl(awsCredentials.getAccessKey(), awsCredentials.getAccessSecret(),
                 requireNonNull(topicArn), "SNS");
     }
 }

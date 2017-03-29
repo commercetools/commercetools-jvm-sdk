@@ -5,7 +5,7 @@ import io.sphere.sdk.models.Base;
 import static java.util.Objects.requireNonNull;
 
 /**
- * This class represents the credentials required to use {@link AwsSnsDestination} and {@link AwsSqsDestination}.
+ * This class represents the credentials required to use {@link SnsDestination} and {@link SqsDestination}.
  *
  * It allows the retrieval of the aws credentials from environment variables {@link #ofEnv(String, String)} and
  * from the standard aws cli environment variables {@link #ofAwsCliEnv()}.

@@ -1,24 +1,28 @@
 package io.sphere.sdk.subscriptions;
 
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import io.sphere.sdk.annotations.*;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Resource;
-import io.sphere.sdk.types.Custom;
 import io.sphere.sdk.types.CustomFields;
 import io.sphere.sdk.types.TypeDraft;
 
 import javax.annotation.Nullable;
 import java.util.List;
 
+@JsonDeserialize(as = SubscriptionImpl.class)
 @ResourceValue
 @ResourceInfo(pluralName = "subscriptions", pathElement = "subscriptions")
 @HasQueryEndpoint
 @HasQueryModel
+@HasUpdateCommand(javadocSummary = "Updates a subscripton.", updateWithKey = true)
+@HasCreateCommand(javadocSummary = "Creates a {@link io.sphere.sdk.subscriptions.Subscription}.") // , includeExamples = "io.sphere.sdk.shoppinglists.commands.ShoppingListCreateCommandIntegrationTest#execution()")
+@HasDeleteCommand(javadocSummary = "Deletes a subscripton.", deleteWithKey = true)
 @HasByIdGetEndpoint(javadocSummary = "Fetches a subscription by id.")
 // includeExamples = "io.sphere.sdk.shoppinglists.queries.ShoppingListByIdGetIntegrationTest#byIdGet()")
 @HasByKeyGetEndpoint(javadocSummary = "Fetches a subscription by key.")
-public interface Subscription extends Resource<Subscription>, Custom {
+public interface Subscription extends Resource<Subscription> {
 
     @Nullable
     String getKey();
