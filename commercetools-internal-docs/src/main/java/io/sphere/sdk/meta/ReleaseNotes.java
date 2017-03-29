@@ -115,6 +115,12 @@ import java.util.function.Function;
  </ul>
  -->
 
+ <h3 class=released-version id="v1_14_0">1.14.0 (28.03.2017)</h3>
+ <ul>
+ <li class=new-in-release>Added {@link PriceTier} for tired prices, which are accessible via {@link Price#getTiers()} and {@link PriceDraft#getTiers()}</li>
+ </ul>
+ </h3>
+
  <h3 class=released-version id="v1_13_0">1.13.0 (20.03.2017)</h3>
  <ul>
  <li class=new-in-release>{@link OrderImportDraft} now provides custom fields {@link OrderImportDraft#getCustom()}</li>
