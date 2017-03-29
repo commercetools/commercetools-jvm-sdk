@@ -40,4 +40,11 @@ public @interface ResourceDraftValue {
      * @return true iff. the generated builder should be abstract
      */
     boolean abstractBuilderClass() default false;
+
+    /**
+     * If set to true, the generated resource value class will be abstract so that it can be further customized.
+     *
+     * @return true iff. the generated class should be abstract
+     */
+    boolean abstractResourceDraftValueClass() default false;
 }

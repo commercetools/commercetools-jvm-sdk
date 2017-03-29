@@ -1,0 +1,131 @@
+package io.sphere.sdk.annotations.processors.generators.examples;
+
+import com.fasterxml.jackson.annotation.JsonCreator;
+import io.sphere.sdk.models.Base;
+import java.lang.Boolean;
+import java.lang.String;
+import java.util.List;
+import javax.annotation.Generated;
+import javax.annotation.Nullable;
+
+@Generated(
+    value = "io.sphere.sdk.annotations.processors.generators.ResourceDraftValueGenerator",
+    comments = "Generated from: io.sphere.sdk.annotations.processors.generators.examples.ExampleDraftWithAbstractClass"
+)
+abstract class ExampleDraftWithAbstractClassDslBase extends Base implements ExampleDraftWithAbstractClass {
+  private Boolean _default;
+
+  private Boolean active;
+
+  private List<String> names;
+
+  @Nullable
+  private String optional;
+
+  private String sku;
+
+  @JsonCreator
+  ExampleDraftWithAbstractClassDslBase(final Boolean _default, final Boolean active,
+      final List<String> names, @Nullable final String optional, final String sku) {
+    this._default = _default;
+    this.active = active;
+    this.names = names;
+    this.optional = optional;
+    this.sku = sku;
+  }
+
+  public Boolean isDefault() {
+    return _default;
+  }
+
+  public Boolean isActive() {
+    return active;
+  }
+
+  public List<String> getNames() {
+    return names;
+  }
+
+  @Nullable
+  public String getOptional() {
+    return optional;
+  }
+
+  public String getSku() {
+    return sku;
+  }
+
+  /**
+   * Creates a new instance of {@code ExampleDraftWithAbstractClassBuilder} with the values of this builder.
+   *
+   * @return the instance
+   */
+  public ExampleDraftWithAbstractClassBuilder newBuilder() {
+    return new ExampleDraftWithAbstractClassBuilder(_default, active, names, optional, sku);
+  }
+
+  public ExampleDraftWithAbstractClassDslBase with_default(final Boolean _default) {
+    return newBuilder()._default(_default).build();
+  }
+
+  public ExampleDraftWithAbstractClassDslBase withActive(final Boolean active) {
+    return newBuilder().active(active).build();
+  }
+
+  public ExampleDraftWithAbstractClassDslBase withNames(final List<String> names) {
+    return newBuilder().names(names).build();
+  }
+
+  public ExampleDraftWithAbstractClassDslBase withOptional(@Nullable final String optional) {
+    return newBuilder().optional(optional).build();
+  }
+
+  public ExampleDraftWithAbstractClassDslBase withSku(final String sku) {
+    return newBuilder().sku(sku).build();
+  }
+
+  /**
+   * Creates a builder initialized with the given values.
+   *
+   * @param sku initial value for the {@link ExampleDraftWithAbstractClass#getSku()} property
+   * @param active initial value for the {@link ExampleDraftWithAbstractClass#isActive()} property
+   * @return new builder initialized with the given values
+   */
+  public static ExampleDraftWithAbstractClassDslBase of(final String sku, final Boolean active) {
+    return new ExampleDraftWithAbstractClassDslBase(null, active, null, null, sku);
+  }
+
+  /**
+   * Creates a builder initialized with the given values.
+   *
+   * @param _default initial value for the {@link ExampleDraftWithAbstractClass#isDefault()} property
+   * @param active initial value for the {@link ExampleDraftWithAbstractClass#isActive()} property
+   * @return new builder initialized with the given values
+   */
+  public static ExampleDraftWithAbstractClassDslBase of(final Boolean _default,
+      final Boolean active) {
+    return new ExampleDraftWithAbstractClassDslBase(_default, active, null, null, null);
+  }
+
+  /**
+   * Creates a builder initialized with the given values.
+   *
+   * @param _default initial value for the {@link ExampleDraftWithAbstractClass#isDefault()} property
+   * @param optional initial value for the {@link ExampleDraftWithAbstractClass#getOptional()} property
+   * @return new builder initialized with the given values
+   */
+  public static ExampleDraftWithAbstractClassDslBase of(final Boolean _default,
+      final String optional) {
+    return new ExampleDraftWithAbstractClassDslBase(_default, null, null, optional, null);
+  }
+
+  /**
+   * Creates a builder initialized with the fields of the template parameter.
+   *
+   * @param template the template
+   * @return a new builder initialized from the template
+   */
+  public static ExampleDraftWithAbstractClassDslBase of(final ExampleDraftWithAbstractClass template) {
+    return new ExampleDraftWithAbstractClassDslBase(template.isDefault(), template.isActive(), template.getNames(), template.getOptional(), template.getSku());
+  }
+}

@@ -33,23 +33,28 @@ public class ResourceDraftValueGenerator extends AbstractGenerator {
 
         final String className = typeUtils.getDraftImplType(resourceValueTypeElement).simpleName();
         final ClassName builderType = getBuilderType(resourceValueTypeElement);
-        final TypeSpec typeSpec = TypeSpec.classBuilder(className)
+        final TypeSpec.Builder builder = TypeSpec.classBuilder(className)
                 .superclass(ClassName.get(Base.class))
-                .addSuperinterface(ClassName.get(resourceValueTypeElement.asType()))
-                .addModifiers(Modifier.PUBLIC, Modifier.FINAL)
-                .addAnnotation(AnnotationSpec.builder(Generated.class)
-                        .addMember("value", "$S", getClass().getCanonicalName())
-                        .addMember("comments", "$S", "Generated from: " + resourceValueTypeElement.getQualifiedName().toString()).build())
+                .addSuperinterface(ClassName.get(resourceValueTypeElement.asType()));
+
+        if (resourceDraftValue.abstractResourceDraftValueClass()) {
+            builder.addModifiers(Modifier.ABSTRACT);
+        } else {
+            builder.addModifiers(Modifier.PUBLIC, Modifier.FINAL);
+        }
+
+        builder.addAnnotation(AnnotationSpec.builder(Generated.class)
+                .addMember("value", "$S", getClass().getCanonicalName())
+                .addMember("comments", "$S", "Generated from: " + resourceValueTypeElement.getQualifiedName().toString()).build())
                 .addFields(fields)
                 .addMethod(createConstructor(propertyGenModels))
                 .addMethods(getMethods)
                 .addMethod(createBuilderMethod(builderType, propertyMethods))
                 .addMethods(createWithMethods(resourceValueTypeElement, propertyGenModels))
                 .addMethods(createFactoryMethods(resourceDraftValue.factoryMethods(), propertyGenModels, typeUtils.getDraftImplType(resourceValueTypeElement)))
-                .addMethod(createCopyFactoryMethod(resourceValueTypeElement, typeUtils.getDraftImplType(resourceValueTypeElement), propertyMethods))
-                .build();
+                .addMethod(createCopyFactoryMethod(resourceValueTypeElement, typeUtils.getDraftImplType(resourceValueTypeElement), propertyMethods));
 
-        return typeSpec;
+        return builder.build();
     }
 
     protected MethodSpec createBuilderMethod(final TypeName type, final List<ExecutableElement> propertyMethods) {
