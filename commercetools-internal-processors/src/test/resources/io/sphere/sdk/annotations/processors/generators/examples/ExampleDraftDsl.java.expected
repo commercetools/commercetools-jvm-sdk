@@ -67,7 +67,7 @@ public final class ExampleDraftDsl extends Base implements ExampleDraft {
     return new ExampleDraftBuilder(_default, active, names, optional, sku);
   }
 
-  public ExampleDraftDsl with_default(final Boolean _default) {
+  public ExampleDraftDsl withDefault(final Boolean _default) {
     return newBuilder()._default(_default).build();
   }
 

@@ -100,7 +100,7 @@ public class ResourceDraftValueGenerator extends AbstractGenerator {
     private MethodSpec createWithMethod(final PropertyGenModel property, final TypeElement typeElement, @Nullable final String methodName) {
         final ResourceDraftValue typeElementAnnotation = typeElement.getAnnotation(ResourceDraftValue.class);
 
-        final MethodSpec.Builder builder = methodBuilder(methodName == null ? "with" + capitalize(property.getJavaIdentifier()) : methodName)
+        final MethodSpec.Builder builder = methodBuilder(methodName == null ? "with" + capitalize(property.getName()) : methodName)
                 .addModifiers(Modifier.PUBLIC);
 
         final boolean hasReferenceType = property.hasSameType(Reference.class);

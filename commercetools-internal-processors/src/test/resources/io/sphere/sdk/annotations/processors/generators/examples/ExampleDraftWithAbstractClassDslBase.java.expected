@@ -68,7 +68,7 @@ abstract class ExampleDraftWithAbstractClassDslBase<T extends ExampleDraftWithAb
     return new ExampleDraftWithAbstractClassBuilder(_default, active, names, optional, sku);
   }
 
-  public T with_default(final Boolean _default) {
+  public T withDefault(final Boolean _default) {
     return (T) newBuilder()._default(_default).build();
   }
 
