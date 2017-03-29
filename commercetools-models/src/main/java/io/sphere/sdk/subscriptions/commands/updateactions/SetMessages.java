@@ -11,6 +11,10 @@ import java.util.List;
  * Sets the messages of the subscription.
  *
  * {@doc.gen intro}
+ *
+ * {@include.example io.sphere.sdk.subscriptions.commands.SubscriptionUpdateCommandIntegrationTest#setMessagesIronMq()}
+ *
+ * @see Subscription#getMessages()
  */
 public final class SetMessages extends UpdateActionImpl<Subscription> {
     @Nullable

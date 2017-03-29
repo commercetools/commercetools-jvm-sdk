@@ -11,6 +11,10 @@ import java.util.List;
  * Sets the changes of the subscription.
  *
  * {@doc.gen intro}
+ *
+ * {@include.example io.sphere.sdk.subscriptions.commands.SubscriptionUpdateCommandIntegrationTest#setChangesIronMq()}
+ *
+ * @see Subscription#getChanges()
  */
 public final class SetChanges extends UpdateActionImpl<Subscription> {
     @Nullable

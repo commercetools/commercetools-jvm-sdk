@@ -39,7 +39,7 @@ public interface MessageSubscription {
      *
      * @return a copy of this object with the added message type
      */
-    default <R> MessageSubscription addType(final Class<? extends GenericMessage<R>> messageType) {
+    default MessageSubscription addType(final Class<? extends GenericMessage<?>> messageType) {
         final String type = TypeRegistry.of().toType(messageType);
         final List<String> types = Stream.concat(getTypeNames().stream(), Stream.of(type)).collect(Collectors.toList());
 
@@ -53,7 +53,7 @@ public interface MessageSubscription {
      *
      * @return a copy of this object with the removed message type
      */
-    default <R> MessageSubscription removeType(final Class<? extends GenericMessage<R>> messageType) {
+    default MessageSubscription removeType(final Class<? extends GenericMessage<?>> messageType) {
         final String type = TypeRegistry.of().toType(messageType);
         final List<String> removedTypes = getTypeNames().stream()
                 .filter(t -> !t.equals(type))

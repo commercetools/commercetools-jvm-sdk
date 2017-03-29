@@ -1,16 +1,16 @@
 package io.sphere.sdk.subscriptions.commands;
 
-import io.sphere.sdk.categories.Category;
-import io.sphere.sdk.categories.messages.CategoryCreatedMessage;
-import io.sphere.sdk.subscriptions.*;
+import io.sphere.sdk.subscriptions.Subscription;
+import io.sphere.sdk.subscriptions.SubscriptionDraftDsl;
+import io.sphere.sdk.subscriptions.SubscriptionFixtures;
 import io.sphere.sdk.subscriptions.queries.SubscriptionQuery;
 import io.sphere.sdk.test.IntegrationTest;
-import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 
-import java.util.Collections;
 import java.util.List;
 
+import static io.sphere.sdk.subscriptions.SubscriptionFixtures.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
@@ -18,7 +18,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 public class SubscriptionCreateCommandIntegrationTest extends IntegrationTest {
 
-    @After
+    @Before
     public void clean() {
         List<Subscription> results = client().executeBlocking(SubscriptionQuery.of()
                 .withPredicates(l -> l.key().is(SubscriptionFixtures.IRON_MQ_SUBSCRIPTION_KEY)))
@@ -28,9 +28,7 @@ public class SubscriptionCreateCommandIntegrationTest extends IntegrationTest {
 
     @Test
     public void createIronMqChangesSubscription() throws Exception {
-        final SubscriptionDraftDsl subscriptionDraft = SubscriptionFixtures.ironMqSubscriptionDraftBuilder()
-                .changes(Collections.singletonList(ChangeSubscription.of(Category.class)))
-                .build();
+        final SubscriptionDraftDsl subscriptionDraft = withCategoryChanges(ironMqSubscriptionDraftBuilder()).build();
 
         final SubscriptionCreateCommand createCommand = SubscriptionCreateCommand.of(subscriptionDraft);
         final Subscription subscription = client().executeBlocking(createCommand);
@@ -42,9 +40,7 @@ public class SubscriptionCreateCommandIntegrationTest extends IntegrationTest {
 
     @Test
     public void createIronMqMessagesSubscription() throws Exception {
-        final SubscriptionDraftDsl subscriptionDraft = SubscriptionFixtures.ironMqSubscriptionDraftBuilder()
-                .messages(Collections.singletonList(MessageSubscription.of(Category.class, CategoryCreatedMessage.class)))
-                .build();
+        final SubscriptionDraftDsl subscriptionDraft = withCategoryCreatedMessage(ironMqSubscriptionDraftBuilder()).build();
 
         final SubscriptionCreateCommand createCommand = SubscriptionCreateCommand.of(subscriptionDraft);
         final Subscription subscription = client().executeBlocking(createCommand);
