@@ -22,6 +22,7 @@ import java.util.List;
 @HasByIdGetEndpoint(javadocSummary = "Fetches a subscription by id.")
 // includeExamples = "io.sphere.sdk.shoppinglists.queries.ShoppingListByIdGetIntegrationTest#byIdGet()")
 @HasByKeyGetEndpoint(javadocSummary = "Fetches a subscription by key.")
+@HasUpdateActions
 public interface Subscription extends Resource<Subscription> {
 
     @Nullable
