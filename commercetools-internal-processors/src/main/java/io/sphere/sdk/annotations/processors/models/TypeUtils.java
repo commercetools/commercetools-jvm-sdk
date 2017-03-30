@@ -41,11 +41,6 @@ public class TypeUtils {
         return ClassName.get(draftType.packageName(), draftType.simpleName() + hasBuilder.implPrefix());
     }
 
-    public ClassName getConcreteDraftType(final TypeElement typeElement) {
-        final ClassName type = ClassName.get(typeElement);
-        return ClassName.get(type.packageName(), type.simpleName() + "Dsl");
-    }
-
     public ClassName getDraftImplType(final TypeElement typeElement) {
         final ClassName draftType = ClassName.get(typeElement);
         return ClassName.get(draftType.packageName(), draftType.simpleName() + "Dsl");

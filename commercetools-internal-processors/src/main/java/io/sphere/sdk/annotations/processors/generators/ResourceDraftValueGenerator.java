@@ -35,7 +35,7 @@ public class ResourceDraftValueGenerator extends AbstractGenerator {
         final List<FieldSpec> fields = propertyGenModels.stream().map(this::createField).collect(Collectors.toList());
         final List<MethodSpec> getMethods = propertyMethods.stream().map(this::createGetMethod).collect(Collectors.toList());
 
-        final ClassName concreteDraftType = typeUtils.getConcreteDraftType(resourceValueTypeElement);
+        final ClassName concreteDraftType = typeUtils.getDraftImplType(resourceValueTypeElement);
         final ClassName draftImplType = getDraftImplType(resourceValueTypeElement);
         final String className = draftImplType.simpleName();
         final ClassName builderType = getBuilderType(resourceValueTypeElement);
@@ -117,16 +117,18 @@ public class ResourceDraftValueGenerator extends AbstractGenerator {
 
         final boolean abstractResourceDraftValueClass = typeElementAnnotation.abstractResourceDraftValueClass();
         if (hasReferenceType && abstractResourceDraftValueClass) {
+            addSuppressWarnings(builder);
             builder.returns(TypeVariableName.get("T"));
             builder.addCode("return (T) newBuilder().$L($T.ofNullable($N).map($T::toReference).orElse(null)).build();\n", fieldName, Optional.class, parameter, Referenceable.class);
         } else if(hasReferenceType){
-            builder.returns(typeUtils.getConcreteDraftType(typeElement));
+            builder.returns(typeUtils.getDraftImplType(typeElement));
             builder.addCode("return newBuilder().$L($T.ofNullable($N).map($T::toReference).orElse(null)).build();\n", fieldName, Optional.class, parameter, Referenceable.class);
         } else if (abstractResourceDraftValueClass){
+            addSuppressWarnings(builder);
             builder.returns(TypeVariableName.get("T"))
                     .addCode("return (T) newBuilder().$L($N).build();\n", fieldName, parameter);
         } else {
-            builder.returns(typeUtils.getConcreteDraftType(typeElement))
+            builder.returns(typeUtils.getDraftImplType(typeElement))
                     .addCode("return newBuilder().$L($N).build();\n", fieldName, parameter);
         }
 

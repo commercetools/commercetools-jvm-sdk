@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import io.sphere.sdk.models.Base;
 import java.lang.Boolean;
 import java.lang.String;
+import java.lang.SuppressWarnings;
 import java.util.List;
 import javax.annotation.Generated;
 import javax.annotation.Nullable;
@@ -68,22 +69,27 @@ abstract class ExampleDraftWithAbstractClassDslBase<T extends ExampleDraftWithAb
     return new ExampleDraftWithAbstractClassBuilder(_default, active, names, optional, sku);
   }
 
+  @SuppressWarnings("unchecked")
   public T withDefault(final Boolean _default) {
     return (T) newBuilder()._default(_default).build();
   }
 
+  @SuppressWarnings("unchecked")
   public T withActive(final Boolean active) {
     return (T) newBuilder().active(active).build();
   }
 
+  @SuppressWarnings("unchecked")
   public T withNames(final List<String> names) {
     return (T) newBuilder().names(names).build();
   }
 
+  @SuppressWarnings("unchecked")
   public T withOptional(@Nullable final String optional) {
     return (T) newBuilder().optional(optional).build();
   }
 
+  @SuppressWarnings("unchecked")
   public T withSku(final String sku) {
     return (T) newBuilder().sku(sku).build();
   }
