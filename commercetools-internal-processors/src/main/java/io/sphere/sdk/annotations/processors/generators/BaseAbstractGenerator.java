@@ -104,6 +104,15 @@ abstract class BaseAbstractGenerator {
         return builder;
     }
 
+    protected void copyJsonAnnotation(final ExecutableElement propertyMethod, final MethodSpec.Builder builder) {
+        final JsonProperty jsonProperty = propertyMethod.getAnnotation(JsonProperty.class);
+        final String jsonName = jsonProperty != null ? jsonProperty.value() : null;
+
+        if (jsonName != null) {
+            builder.addAnnotation(createJsonPropertyAnnotation(jsonName));
+        }
+    }
+
     private void copyNullableAnnotation(final ExecutableElement method, final MethodSpec.Builder builder) {
         final Nullable nullable = method.getAnnotation(Nullable.class);
         if (nullable != null) {

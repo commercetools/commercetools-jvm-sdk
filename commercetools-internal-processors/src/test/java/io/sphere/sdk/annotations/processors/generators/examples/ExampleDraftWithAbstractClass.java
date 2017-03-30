@@ -1,5 +1,6 @@
 package io.sphere.sdk.annotations.processors.generators.examples;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import io.sphere.sdk.annotations.FactoryMethod;
 import io.sphere.sdk.annotations.ResourceDraftValue;
 
@@ -35,6 +36,7 @@ public interface ExampleDraftWithAbstractClass {
      * The generated builder has a {@code isDefault(Boolean)} builder method and for to stay
      * backward compatible with the previous generator also a {@code _default(Boolean)} builder method.
      */
+    @JsonProperty("isDefault")
     Boolean isDefault();
 
     /**
