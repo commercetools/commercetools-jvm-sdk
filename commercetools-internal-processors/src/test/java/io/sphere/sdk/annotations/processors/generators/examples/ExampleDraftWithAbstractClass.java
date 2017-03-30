@@ -13,8 +13,8 @@ import java.util.List;
         @FactoryMethod(parameterNames = {"sku", "active"}),
         @FactoryMethod(parameterNames = {"default", "active"}),
         @FactoryMethod(parameterNames = {"default", "optional"})
-})
-public interface ExampleDraft {
+}, abstractResourceDraftValueClass = true)
+public interface ExampleDraftWithAbstractClass {
     /**
      * This test a reference type. Our generator only supports reference type.
      */

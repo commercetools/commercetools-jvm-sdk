@@ -1,8 +1,11 @@
 package io.sphere.sdk.annotations.processors.generators;
 
 import com.squareup.javapoet.*;
+import io.sphere.sdk.annotations.ResourceDraftValue;
 import io.sphere.sdk.annotations.processors.models.PropertyGenModel;
 import io.sphere.sdk.models.Base;
+import io.sphere.sdk.models.Reference;
+import io.sphere.sdk.models.Referenceable;
 
 import javax.annotation.Generated;
 import javax.annotation.Nullable;
@@ -11,90 +14,136 @@ import javax.lang.model.element.Modifier;
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.util.Elements;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
+import static com.squareup.javapoet.MethodSpec.methodBuilder;
 import static org.apache.commons.lang3.StringUtils.capitalize;
 
 public class ResourceDraftValueGenerator extends AbstractGenerator {
 
-    ResourceDraftValueGenerator(final Elements elements) {
+    public ResourceDraftValueGenerator(final Elements elements) {
         super(elements);
     }
 
     @Override
     public TypeSpec generateType(final TypeElement resourceValueTypeElement) {
+
+        final ResourceDraftValue resourceDraftValue = resourceValueTypeElement.getAnnotation(ResourceDraftValue.class);
         final List<ExecutableElement> propertyMethods = getAllPropertyMethodsSorted(resourceValueTypeElement);
         final List<PropertyGenModel> propertyGenModels = getPropertyGenModels(propertyMethods);
         final List<FieldSpec> fields = propertyGenModels.stream().map(this::createField).collect(Collectors.toList());
         final List<MethodSpec> getMethods = propertyMethods.stream().map(this::createGetMethod).collect(Collectors.toList());
 
-        final String className = ClassName.get(resourceValueTypeElement) + "Dsl";
-        final TypeSpec typeSpec = TypeSpec.classBuilder(className)
+        final ClassName concreteDraftType = typeUtils.getConcreteDraftType(resourceValueTypeElement);
+        final ClassName draftImplType = getDraftImplType(resourceValueTypeElement);
+        final String className = draftImplType.simpleName();
+        final ClassName builderType = getBuilderType(resourceValueTypeElement);
+        final TypeSpec.Builder builder = TypeSpec.classBuilder(className)
                 .superclass(ClassName.get(Base.class))
-                .addSuperinterface(ClassName.get(resourceValueTypeElement.asType()))
-                .addModifiers(Modifier.PUBLIC, Modifier.FINAL)
-                .addAnnotation(AnnotationSpec.builder(Generated.class)
-                        .addMember("value", "$S", getClass().getCanonicalName())
-                        .addMember("comments", "$S", "Generated from: " + resourceValueTypeElement.getQualifiedName().toString()).build())
+                .addSuperinterface(ClassName.get(resourceValueTypeElement.asType()));
+        if (resourceDraftValue.abstractResourceDraftValueClass()) {
+            builder.addJavadoc("Abstract base Dsl class for {@link $T} which needs to be extended to add additional methods.\n", resourceValueTypeElement)
+                    .addJavadoc("Subclasses have to provide the same non-default constructor as this class.\n")
+                    .addModifiers(Modifier.ABSTRACT)
+                    .addTypeVariable(TypeVariableName.get("T").withBounds(draftImplType));
+        } else {
+            builder.addJavadoc("Abstract Dsl class {@link $T}.\n", resourceValueTypeElement)
+                    .addModifiers(Modifier.PUBLIC, Modifier.FINAL);
+        }
+        builder.addAnnotation(AnnotationSpec.builder(Generated.class)
+                .addMember("value", "$S", getClass().getCanonicalName())
+                .addMember("comments", "$S", "Generated from: " + resourceValueTypeElement.getQualifiedName().toString()).build())
                 .addFields(fields)
                 .addMethod(createConstructor(propertyGenModels))
                 .addMethods(getMethods)
-                .addMethod(createBuilderMethod(resourceValueTypeElement, fields))
-                .addMethods(createWithMethods(propertyGenModels, resourceValueTypeElement))
+                .addMethod(createBuilderMethod(builderType, propertyMethods))
+                .addMethods(createWithMethods(resourceValueTypeElement, propertyGenModels))
+                .addMethods(createWithMethodsWithJsonName(resourceValueTypeElement, propertyGenModels))
+                .addMethods(createFactoryMethods(resourceDraftValue.factoryMethods(), propertyGenModels, concreteDraftType))
+                .addMethod(createCopyFactoryMethod(resourceValueTypeElement, concreteDraftType, propertyMethods));
+
+        return builder.build();
+    }
+
+    protected MethodSpec createBuilderMethod(final TypeName type, final List<ExecutableElement> propertyMethods) {
+        final List<String> argumentNames = propertyMethods.stream()
+                .map((getterMethod) -> PropertyGenModel.getPropertyName(getterMethod))
+                .map(this::escapeJavaKeyword)
+                .collect(Collectors.toList());
+        final String callArguments = String.join(", ", argumentNames);
+        return methodBuilder("newBuilder")
+                .addJavadoc("Creates a new instance of {@code $T} with the values of this builder.\n\n", type)
+                .addJavadoc("@return the instance\n")
+                .addModifiers(Modifier.PUBLIC)
+                .returns(type)
+                .addCode("return new $T($L);\n", type, callArguments)
                 .build();
-
-        return typeSpec;
     }
 
-    private MethodSpec createBuilderMethod(final TypeElement typeElement, final List<FieldSpec> fields) {
-        final ClassName builderType = getBuilderType(typeElement);
-        return MethodSpec.methodBuilder("newBuilder")
-                .addModifiers(Modifier.PRIVATE)
-                .returns(builderType)
-                .addCode("return new $T($L);\n", builderType, createBuilderInputParameters(fields))
-                .build();
-    }
-
-    private String createBuilderInputParameters(final List<FieldSpec> fields) {
-        String inputParameters = "";
-        for (FieldSpec field : fields) {
-            inputParameters += field.name + ",";
-        }
-        return inputParameters.substring(0, inputParameters.length() - 1);
-    }
-
-    private Iterable<MethodSpec> createWithMethods(final List<PropertyGenModel> propertyGenModels, final TypeElement typeElement) {
+    private Iterable<MethodSpec> createWithMethods(final TypeElement typeElement, final List<PropertyGenModel> propertyGenModels) {
         return propertyGenModels.stream()
-                .map(property -> createWithMethod(property, typeElement))
+                .map(property -> createWithMethod(property, typeElement, null))
                 .collect(Collectors.toList());
     }
 
-    private MethodSpec createWithMethod(final PropertyGenModel property, final TypeElement typeElement) {
-        final ClassName dslType = getConcreteDslType(typeElement);
-        return MethodSpec.methodBuilder("with" + capitalize(property.getJavaIdentifier()))
-                .addModifiers(Modifier.PUBLIC)
-                .addParameter(createWithMethodParameter(property))
-                .returns(ClassName.get(dslType.packageName(), dslType.simpleName()))
-                .addCode("return newBuilder().$L($L).build();\n", property.getJavaIdentifier(), property.getJavaIdentifier())
-                .build();
+    private Iterable<MethodSpec> createWithMethodsWithJsonName(final TypeElement typeElement, final List<PropertyGenModel> propertyGenModels) {
+        return propertyGenModels.stream()
+                .filter(property -> property.getJsonName() != null && !property.getJsonName().equals(property.getName()))
+                .map(property -> {
+                    final String methodName = "with" + capitalize(property.getJsonName());
+                    return createWithMethod(property, typeElement, methodName);
+                })
+                .collect(Collectors.toList());
     }
 
-    public ClassName getBuilderType(final TypeElement typeElement) {
+    private MethodSpec createWithMethod(final PropertyGenModel property, final TypeElement typeElement, @Nullable final String methodName) {
+        final ResourceDraftValue typeElementAnnotation = typeElement.getAnnotation(ResourceDraftValue.class);
+
+        final MethodSpec.Builder builder = methodBuilder(methodName == null ? "with" + capitalize(property.getName()) : methodName)
+                .addModifiers(Modifier.PUBLIC);
+
+        final boolean hasReferenceType = property.hasSameType(Reference.class);
+        final TypeName typeName;
+        if (hasReferenceType) {
+            typeName = property.replaceParameterizedType(Referenceable.class);
+        } else {
+            typeName = property.getType();
+        }
+
+        final String fieldName = property.getJavaIdentifier();
+        final ParameterSpec parameter = createParameter(property, typeName, true);
+        builder.addParameter(parameter);
+
+        final boolean abstractResourceDraftValueClass = typeElementAnnotation.abstractResourceDraftValueClass();
+        if (hasReferenceType && abstractResourceDraftValueClass) {
+            builder.returns(TypeVariableName.get("T"));
+            builder.addCode("return (T) newBuilder().$L($T.ofNullable($N).map($T::toReference).orElse(null)).build();\n", fieldName, Optional.class, parameter, Referenceable.class);
+        } else if(hasReferenceType){
+            builder.returns(typeUtils.getConcreteDraftType(typeElement));
+            builder.addCode("return newBuilder().$L($T.ofNullable($N).map($T::toReference).orElse(null)).build();\n", fieldName, Optional.class, parameter, Referenceable.class);
+        } else if (abstractResourceDraftValueClass){
+            builder.returns(TypeVariableName.get("T"))
+                    .addCode("return (T) newBuilder().$L($N).build();\n", fieldName, parameter);
+        } else {
+            builder.returns(typeUtils.getConcreteDraftType(typeElement))
+                    .addCode("return newBuilder().$L($N).build();\n", fieldName, parameter);
+        }
+
+        return builder.build();
+    }
+
+    private ClassName getBuilderType(final TypeElement typeElement) {
         final ClassName type = typeUtils.getConcreteBuilderType(typeElement);
         return ClassName.get(type.packageName(), type.simpleName());
     }
 
-    public ClassName getConcreteDslType(final TypeElement typeElement) {
-        final ClassName type = ClassName.get(typeElement);
-        return ClassName.get(type.packageName(), type.simpleName() + "Dsl");
-    }
+    public ClassName getDraftImplType(final TypeElement typeElement) {
+        final ClassName draftType = ClassName.get(typeElement);
+        final ResourceDraftValue resourceDraftValue = typeElement.getAnnotation(ResourceDraftValue.class);
 
-    private ParameterSpec createWithMethodParameter(final PropertyGenModel propertyGenModel) {
-        final ParameterSpec.Builder builder = ParameterSpec.builder(propertyGenModel.getType(), propertyGenModel.getJavaIdentifier(), Modifier.FINAL);
-        if (propertyGenModel.isOptional()) {
-            builder.addAnnotation(Nullable.class);
-        }
-        return builder.build();
+        final String implSuffix = "Dsl" + (resourceDraftValue.abstractResourceDraftValueClass() ? "Base" : "");
+        return ClassName.get(draftType.packageName(), draftType.simpleName() + implSuffix);
     }
 
 }

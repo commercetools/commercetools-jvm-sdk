@@ -14,7 +14,7 @@ import java.util.Set;
 
 /**
  * Template to create a new Channel.
- *
+ * <p>
  * {@include.example io.sphere.sdk.channels.commands.ChannelCreateCommandIntegrationTest#execution()}
  *
  * @see ChannelDraftBuilder
@@ -22,10 +22,7 @@ import java.util.Set;
  */
 @JsonDeserialize(as = ChannelDraftDsl.class)
 @ResourceDraftValue(factoryMethods = @FactoryMethod(parameterNames = {"key"}),
-additionalDslClassContents = {
-        "public ChannelDraftDsl withRoles(final ChannelRole ... roles) {\n" +
-        "        return newBuilder().roles(io.sphere.sdk.utils.SphereInternalUtils.asSet(roles)).build();\n" +
-        "    }"})
+        abstractResourceDraftValueClass = true)
 public interface ChannelDraft extends WithKey {
     String getKey();
 
