@@ -6,10 +6,6 @@ package io.sphere.sdk.annotations;
 public @interface ResourceDraftValue {
     FactoryMethod[] factoryMethods();
 
-    String[] additionalDslClassContents() default {};
-
-    String additionalDslConstructorEndContent() default "";
-
     /**
      * If set to true, the generated builder will also provide getter methods.
      *

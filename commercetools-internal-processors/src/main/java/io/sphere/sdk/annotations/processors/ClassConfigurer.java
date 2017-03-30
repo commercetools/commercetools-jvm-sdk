@@ -343,11 +343,6 @@ final class ClassConfigurer {
             return this;
         }
 
-        public MethodsHolder buildMethod() {
-            addBuildMethod(builder, typeElement);
-            return this;
-        }
-
         public ClassModel build() {
             return builder.build();
         }
@@ -630,16 +625,6 @@ final class ClassConfigurer {
         final String template = parameter.getType().startsWith("io.sphere.sdk.models.Referenceable<") ? "referenceableBuilderMethodBody" : "builderMethodBody";
         method.setBody(Templates.render(template, values));
         return method;
-    }
-
-    private static void addBuildMethod(final ClassModelBuilder builder, final TypeElement typeElement) {
-        final MethodModel method = new MethodModel();
-        method.addModifiers("public");
-        final String dslName = ResourceDraftDslClassModelFactory.dslName(typeElement);
-        method.setReturnType(dslName);
-        method.setName("build");
-        method.setBody("return new " + dslName + "(" + fieldNamesSortedString(builder) + ");");
-        builder.addMethod(method);
     }
 
     public static String packageName(final TypeElement typeElement) {
