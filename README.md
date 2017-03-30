@@ -26,24 +26,24 @@ Users gain type-safety, encapsulation, IDE auto completion and an internal domai
 <dependency>
   <groupId>com.commercetools.sdk.jvm.core</groupId>
   <artifactId>commercetools-models</artifactId>
-  <version>1.13.0</version>
+  <version>1.14.1</version>
 </dependency>
 <dependency>
   <groupId>com.commercetools.sdk.jvm.core</groupId>
   <artifactId>commercetools-java-client</artifactId>
-  <version>1.13.0</version>
+  <version>1.14.1</version>
 </dependency>
 
 <!-- experimental -->
 <dependency>
   <groupId>com.commercetools.sdk.jvm.core</groupId>
   <artifactId>commercetools-convenience</artifactId>
-  <version>1.13.0</version>
+  <version>1.14.1</version>
 </dependency>
 ````
-* http://search.maven.org/#artifactdetails%7Ccom.commercetools.sdk.jvm.core%7Ccommercetools-models%7C1.13.0%7Cjar
-* http://search.maven.org/#artifactdetails%7Ccom.commercetools.sdk.jvm.core%7Ccommercetools-java-client%7C1.13.0%7Cjar
-* http://search.maven.org/#artifactdetails%7Ccom.commercetools.sdk.jvm.core%7Ccommercetools-convenience%7C1.13.0%7Cjar
+* http://search.maven.org/#artifactdetails%7Ccom.commercetools.sdk.jvm.core%7Ccommercetools-models%7C1.14.1%7Cjar
+* http://search.maven.org/#artifactdetails%7Ccom.commercetools.sdk.jvm.core%7Ccommercetools-java-client%7C1.14.1%7Cjar
+* http://search.maven.org/#artifactdetails%7Ccom.commercetools.sdk.jvm.core%7Ccommercetools-convenience%7C1.14.1%7Cjar
 
 ### Modules
 * `commercetools-java-client`: alias for commercetools-java-client-ahc-2_0

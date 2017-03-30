@@ -77,6 +77,7 @@ import io.sphere.sdk.search.model.MissingFilterSearchModelSupport;
 import io.sphere.sdk.shippingmethods.ShippingMethodDraftBuilder;
 import io.sphere.sdk.shoppinglists.ShoppingList;
 import io.sphere.sdk.shoppinglists.ShoppingListDraft;
+import io.sphere.sdk.shoppinglists.expansion.LineItemExpansionModel;
 import io.sphere.sdk.states.State;
 import io.sphere.sdk.states.StateDraftDsl;
 import io.sphere.sdk.taxcategories.TaxCategoryDraftBuilder;
@@ -114,6 +115,14 @@ import java.util.function.Function;
  <li class=fixed-in-release></li>
  </ul>
  -->
+
+ <h3 class=released-version id="v1_14_1">1.14.1 (30.03.2017)</h3>
+ <ul>
+ <li class=fixed-in-release>Fix for {@link LineItemExpansionModel#variant()} so that it works correctly.
+ This is a breaking change, but the previous version was incorrect and didn't work.</li>
+ </ul>
+ </h3>
+
 
  <h3 class=released-version id="v1_14_0">1.14.0 (28.03.2017)</h3>
  <ul>

@@ -1,14 +1,13 @@
 package io.sphere.sdk.shoppinglists.expansion;
 
 import io.sphere.sdk.expansion.ExpansionPathContainer;
-import io.sphere.sdk.products.expansion.ProductVariantExpansionModel;
 import io.sphere.sdk.producttypes.expansion.ProductTypeExpansionModel;
 
 import java.util.List;
 
 public interface LineItemExpansionModel<T> extends ExpansionPathContainer<T> {
 
-    ProductVariantExpansionModel<T> variant();
+    ExpansionPathContainer<T> variant();
 
     ProductTypeExpansionModel<T> productType();
 
