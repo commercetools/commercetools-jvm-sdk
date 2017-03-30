@@ -8,7 +8,7 @@ import io.sphere.sdk.types.CustomFieldsDraft;
 import javax.annotation.Nullable;
 import java.util.Set;
 
-public class ChannelDraftDsl extends ChannelDraftDslBase<ChannelDraftDsl> {
+public final class ChannelDraftDsl extends ChannelDraftDslBase<ChannelDraftDsl> {
 
     ChannelDraftDsl(@Nullable final Address address, @Nullable final CustomFieldsDraft custom, @Nullable final LocalizedString description, @Nullable final GeoJSON geoLocation, final String key, @Nullable final LocalizedString name, @Nullable final Set<ChannelRole> roles) {
         super(address, custom, description, geoLocation, key, name, roles);

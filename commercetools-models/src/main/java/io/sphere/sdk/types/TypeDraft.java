@@ -16,11 +16,10 @@ import java.util.Set;
  * @see TypeDraftDsl
  */
 @JsonDeserialize(as = TypeDraftDsl.class)
-@ResourceDraftValue(factoryMethods = @FactoryMethod(parameterNames = {"key", "name", "resourceTypeIds"}), abstractBuilderClass = true,
-        additionalDslClassContents = "        public static TypeDraftDsl of(final String key, final LocalizedString name, final ResourceTypeIdsSetBuilder resourceTypeIdsSetBuilder) {\n" +
-        "            return of(key, name, resourceTypeIdsSetBuilder.build());\n" +
-        "        }",
-gettersForBuilder = true, additionalBuilderInterfaces = "io.sphere.sdk.models.WithKey")
+@ResourceDraftValue(factoryMethods = @FactoryMethod(parameterNames = {"key", "name", "resourceTypeIds"}),
+        abstractBuilderClass = true,
+        abstractResourceDraftValueClass = true,
+        gettersForBuilder = true, additionalBuilderInterfaces = "io.sphere.sdk.models.WithKey")
 public interface TypeDraft extends WithKey {
     String getKey();
 

@@ -10,7 +10,7 @@ import javax.annotation.Nullable;
 import java.util.Collections;
 import java.util.List;
 
-public class DiscountCodeDraftDsl extends DiscountCodeDraftDslBase<DiscountCodeDraftDsl> {
+public final class DiscountCodeDraftDsl extends DiscountCodeDraftDslBase<DiscountCodeDraftDsl> {
 
     DiscountCodeDraftDsl(@JsonProperty("isActive") final Boolean active, final List<Reference<CartDiscount>> cartDiscounts, @Nullable final String cartPredicate, final String code, @Nullable final LocalizedString description, @Nullable final Long maxApplications, @Nullable final Long maxApplicationsPerCustomer, @Nullable final LocalizedString name) {
         super(active, cartDiscounts, cartPredicate, code, description, maxApplications, maxApplicationsPerCustomer, name);

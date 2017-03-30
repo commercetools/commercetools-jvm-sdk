@@ -8,7 +8,7 @@ import javax.annotation.Nullable;
 import java.util.Collections;
 import java.util.Set;
 
-public class StateDraftDsl extends StateDraftDslBase<StateDraftDsl> {
+public final class StateDraftDsl extends StateDraftDslBase<StateDraftDsl> {
 
     StateDraftDsl(@Nullable final LocalizedString description, @Nullable @JsonProperty("initial") final Boolean initial, final String key, @Nullable final LocalizedString name, @Nullable final Set<StateRole> roles, @Nullable final Set<Reference<State>> transitions, final StateType type) {
         super(description, initial, key, name, roles, transitions, type);
