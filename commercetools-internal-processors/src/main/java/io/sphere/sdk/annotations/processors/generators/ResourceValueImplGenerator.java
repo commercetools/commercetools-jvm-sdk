@@ -1,13 +1,11 @@
 package io.sphere.sdk.annotations.processors.generators;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.squareup.javapoet.*;
 import io.sphere.sdk.annotations.ResourceValue;
 import io.sphere.sdk.annotations.processors.models.PropertyGenModel;
 
 import javax.annotation.Generated;
-import javax.annotation.Nullable;
 import javax.lang.model.element.ExecutableElement;
 import javax.lang.model.element.Modifier;
 import javax.lang.model.element.TypeElement;
@@ -45,44 +43,14 @@ public class ResourceValueImplGenerator extends AbstractGenerator {
                 .addSuperinterface(ClassName.get(resourceValueTypeElement.asType()))
                 .addModifiers(implModifier)
                 .addAnnotation(AnnotationSpec.builder(Generated.class)
-                    .addMember("value", "$S", getClass().getCanonicalName())
-                    .addMember("comments", "$S", "Generated from: " + resourceValueTypeElement.getQualifiedName().toString()).build())
+                        .addMember("value", "$S", getClass().getCanonicalName())
+                        .addMember("comments", "$S", "Generated from: " + resourceValueTypeElement.getQualifiedName().toString()).build())
                 .addFields(fields)
                 .addMethod(createConstructor(propertyGenModels))
                 .addMethods(getMethods)
                 .build();
 
         return typeSpec;
-    }
-
-    private MethodSpec createConstructor(final List<PropertyGenModel> properties) {
-        final List<ParameterSpec> parameters = properties.stream()
-                .map(this::createConstructorParameter)
-                .collect(Collectors.toList());
-
-        final MethodSpec.Builder builder = MethodSpec.constructorBuilder()
-                .addParameters(parameters)
-                .addAnnotation(JsonCreator.class);
-        final List<String> parameterNames = properties.stream()
-                .map(PropertyGenModel::getJavaIdentifier)
-                .collect(Collectors.toList());
-        parameterNames.forEach(n -> builder.addCode("this.$L = $L;\n", n, n));
-
-        return builder.build();
-    }
-
-    private ParameterSpec createConstructorParameter(final PropertyGenModel propertyGenModel) {
-        final ParameterSpec.Builder builder = ParameterSpec.builder(propertyGenModel.getType(), propertyGenModel.getJavaIdentifier(), Modifier.FINAL);
-
-        if (propertyGenModel.isOptional()) {
-            builder.addAnnotation(Nullable.class);
-        }
-        final String jsonName = propertyGenModel.getJsonName();
-        if (jsonName != null) {
-            builder.addAnnotation(createJsonPropertyAnnotation(jsonName));
-        }
-
-        return builder.build();
     }
 
     @Override
@@ -112,9 +80,4 @@ public class ResourceValueImplGenerator extends AbstractGenerator {
         return builder;
     }
 
-    private AnnotationSpec createJsonPropertyAnnotation(final String jsonName) {
-        return AnnotationSpec.builder(JsonProperty.class)
-                        .addMember("value", "$S", jsonName)
-                        .build();
-    }
 }

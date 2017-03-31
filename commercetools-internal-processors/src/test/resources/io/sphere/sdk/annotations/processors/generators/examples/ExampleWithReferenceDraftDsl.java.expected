@@ -1,0 +1,62 @@
+package io.sphere.sdk.annotations.processors.generators.examples;
+
+import com.fasterxml.jackson.annotation.JsonCreator;
+import io.sphere.sdk.models.Base;
+import io.sphere.sdk.models.Reference;
+import io.sphere.sdk.models.Referenceable;
+import java.lang.String;
+import java.util.Optional;
+import javax.annotation.Generated;
+
+/**
+ * Dsl class for {@link ExampleWithReferenceDraft}.
+ */
+@Generated(
+    value = "io.sphere.sdk.annotations.processors.generators.ResourceDraftValueGenerator",
+    comments = "Generated from: io.sphere.sdk.annotations.processors.generators.examples.ExampleWithReferenceDraft"
+)
+public final class ExampleWithReferenceDraftDsl extends Base implements ExampleWithReferenceDraft {
+  private Reference<String> name;
+
+  @JsonCreator
+  ExampleWithReferenceDraftDsl(final Reference<String> name) {
+    this.name = name;
+  }
+
+  public Reference<String> getName() {
+    return name;
+  }
+
+  /**
+   * Creates a new builder with the values of this object.
+   *
+   * @return new builder
+   */
+  public ExampleWithReferenceDraftBuilder newBuilder() {
+    return new ExampleWithReferenceDraftBuilder(name);
+  }
+
+  public ExampleWithReferenceDraftDsl withName(final Referenceable<String> name) {
+    return newBuilder().name(Optional.ofNullable(name).map(Referenceable::toReference).orElse(null)).build();
+  }
+
+  /**
+   * Creates a new object initialized with the given values.
+   *
+   * @param name initial value for the {@link ExampleWithReferenceDraft#getName()} property
+   * @return new object initialized with the given values
+   */
+  public static ExampleWithReferenceDraftDsl of(final Reference<String> name) {
+    return new ExampleWithReferenceDraftDsl(name);
+  }
+
+  /**
+   * Creates a new object initialized with the fields of the template parameter.
+   *
+   * @param template the template
+   * @return a new object initialized from the template
+   */
+  public static ExampleWithReferenceDraftDsl of(final ExampleWithReferenceDraft template) {
+    return new ExampleWithReferenceDraftDsl(template.getName());
+  }
+}

@@ -1,5 +1,7 @@
 package io.sphere.sdk.annotations.processors.generators;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.squareup.javapoet.*;
 import io.sphere.sdk.annotations.FactoryMethod;
 import io.sphere.sdk.annotations.processors.models.PropertyGenModel;
@@ -11,9 +13,10 @@ import javax.lang.model.element.ExecutableElement;
 import javax.lang.model.element.Modifier;
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.util.Elements;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
+import java.util.function.Function;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * Abstract base class for implementing javapoet based generators.
@@ -101,6 +104,15 @@ abstract class BaseAbstractGenerator {
         return builder;
     }
 
+    protected void copyJsonAnnotation(final ExecutableElement propertyMethod, final MethodSpec.Builder builder) {
+        final JsonProperty jsonProperty = propertyMethod.getAnnotation(JsonProperty.class);
+        final String jsonName = jsonProperty != null ? jsonProperty.value() : null;
+
+        if (jsonName != null) {
+            builder.addAnnotation(createJsonPropertyAnnotation(jsonName));
+        }
+    }
+
     private void copyNullableAnnotation(final ExecutableElement method, final MethodSpec.Builder builder) {
         final Nullable nullable = method.getAnnotation(Nullable.class);
         if (nullable != null) {
@@ -178,4 +190,87 @@ abstract class BaseAbstractGenerator {
                 .map(m -> createParameter(m, useLowercaseBooleans, copyNullable))
                 .collect(Collectors.toList());
     }
+
+    protected MethodSpec createConstructor(final List<PropertyGenModel> properties) {
+        final List<ParameterSpec> parameters = properties.stream()
+                .map(this::createConstructorParameter)
+                .collect(Collectors.toList());
+
+        final MethodSpec.Builder builder = MethodSpec.constructorBuilder()
+                .addParameters(parameters)
+                .addAnnotation(JsonCreator.class);
+        final List<String> parameterNames = properties.stream()
+                .map(PropertyGenModel::getJavaIdentifier)
+                .collect(Collectors.toList());
+        parameterNames.forEach(n -> builder.addCode("this.$L = $L;\n", n, n));
+
+        return builder.build();
+    }
+
+    private ParameterSpec createConstructorParameter(final PropertyGenModel propertyGenModel) {
+        final ParameterSpec.Builder builder = ParameterSpec.builder(propertyGenModel.getType(), propertyGenModel.getJavaIdentifier(), Modifier.FINAL);
+
+        if (propertyGenModel.isOptional()) {
+            builder.addAnnotation(Nullable.class);
+        }
+        final String jsonName = propertyGenModel.getJsonName();
+        if (jsonName != null) {
+            builder.addAnnotation(createJsonPropertyAnnotation(jsonName));
+        }
+
+        return builder.build();
+    }
+
+    protected AnnotationSpec createJsonPropertyAnnotation(final String jsonName) {
+        return AnnotationSpec.builder(JsonProperty.class)
+                .addMember("value", "$S", jsonName)
+                .build();
+    }
+
+    protected List<MethodSpec> createFactoryMethods(final FactoryMethod[] factoryMethods, final List<PropertyGenModel> properties, final ClassName returnType) {
+        return Stream.of(factoryMethods)
+                .map(f -> createFactoryMethod(f, properties, returnType))
+                .collect(Collectors.toList());
+    }
+
+    protected MethodSpec createFactoryMethod(final FactoryMethod factoryMethod, final List<PropertyGenModel> properties, final ClassName returnType) {
+        final Set<String> factoryParameterNames = Stream.of(factoryMethod.parameterNames()).collect(Collectors.toCollection(LinkedHashSet::new));
+        final Map<String, PropertyGenModel> getterMethodByPropertyName = properties.stream()
+                .collect(Collectors.toMap(PropertyGenModel::getName, Function.identity()));
+        final List<PropertyGenModel> parameterTemplates = factoryParameterNames.stream()
+                .map(getterMethodByPropertyName::get)
+                .collect(Collectors.toList());
+        assert factoryParameterNames.size() == parameterTemplates.size();
+
+        final String callArguments = properties.stream()
+                .map(p -> factoryParameterNames.contains(p.getName()) ? p.getJavaIdentifier() : "null")
+                .collect(Collectors.joining(", "));
+
+        final MethodSpec.Builder builder = MethodSpec.methodBuilder(factoryMethod.methodName()).addModifiers(Modifier.PUBLIC, Modifier.STATIC)
+                .returns(returnType)
+                .addJavadoc("Creates a new object initialized with the given values.\n\n");
+        parameterTemplates.forEach(p -> builder.addJavadoc("@param $L initial value for the $L property\n",
+                p.getJavaIdentifier(), p.getJavadocLinkTag()));
+        builder.addJavadoc("@return new object initialized with the given values\n");
+        return builder
+                .addParameters(createParameters(parameterTemplates, factoryMethod.useLowercaseBooleans(), false))
+                .addCode("return new $L($L);\n", returnType.simpleName(), callArguments)
+                .build();
+    }
+
+    protected MethodSpec createCopyFactoryMethod(final TypeElement typeElement, final ClassName returnType, final List<ExecutableElement> propertyMethods) {
+        final ParameterSpec templateParameter = ParameterSpec.builder(ClassName.get(typeElement), "template", Modifier.FINAL).build();
+        final String callArguments = propertyMethods.stream()
+                .map(getterMethod -> String.format("template.%s()", getterMethod.getSimpleName()))
+                .collect(Collectors.joining(", "));
+        return MethodSpec.methodBuilder("of").addModifiers(Modifier.PUBLIC, Modifier.STATIC)
+                .returns(returnType)
+                .addJavadoc("Creates a new object initialized with the fields of the template parameter.\n\n")
+                .addJavadoc("@param template the template\n")
+                .addJavadoc("@return a new object initialized from the template\n")
+                .addParameter(templateParameter)
+                .addCode("return new $L($L);\n", returnType.simpleName(), callArguments)
+                .build();
+    }
+
 }
