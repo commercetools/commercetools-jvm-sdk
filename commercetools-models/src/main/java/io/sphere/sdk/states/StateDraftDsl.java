@@ -22,4 +22,16 @@ public final class StateDraftDsl extends StateDraftDslBase<StateDraftDsl> {
         return newBuilder().initial(initial).build();
     }
 
+    /**
+     * Sets the initial field to the given value.
+     *
+     * @param initial the initial value
+     *
+     * @return this object with the {@link #isInitial()} field set to the given value
+     * @deprecated please use {@link #withInitial(Boolean)} instead
+     */
+    @Deprecated
+    public StateDraftDsl withIsInitial(@Nullable final Boolean initial) {
+        return withInitial(initial);
+    }
 }
