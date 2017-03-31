@@ -239,10 +239,10 @@ abstract class BaseAbstractGenerator {
 
         final MethodSpec.Builder builder = MethodSpec.methodBuilder(factoryMethod.methodName()).addModifiers(Modifier.PUBLIC, Modifier.STATIC)
                 .returns(returnType)
-                .addJavadoc("Creates a builder initialized with the given values.\n\n");
+                .addJavadoc("Creates a new object initialized with the given values.\n\n");
         parameterTemplates.forEach(p -> builder.addJavadoc("@param $L initial value for the $L property\n",
                 p.getJavaIdentifier(), p.getJavadocLinkTag()));
-        builder.addJavadoc("@return new builder initialized with the given values\n");
+        builder.addJavadoc("@return new object initialized with the given values\n");
         return builder
                 .addParameters(createParameters(parameterTemplates, factoryMethod.useLowercaseBooleans(), false))
                 .addCode("return new $L($L);\n", returnType.simpleName(), callArguments)
@@ -256,9 +256,9 @@ abstract class BaseAbstractGenerator {
                 .collect(Collectors.joining(", "));
         return MethodSpec.methodBuilder("of").addModifiers(Modifier.PUBLIC, Modifier.STATIC)
                 .returns(returnType)
-                .addJavadoc("Creates a builder initialized with the fields of the template parameter.\n\n")
+                .addJavadoc("Creates a new object initialized with the fields of the template parameter.\n\n")
                 .addJavadoc("@param template the template\n")
-                .addJavadoc("@return a new builder initialized from the template\n")
+                .addJavadoc("@return a new object initialized from the template\n")
                 .addParameter(templateParameter)
                 .addCode("return new $L($L);\n", returnType.simpleName(), callArguments)
                 .build();

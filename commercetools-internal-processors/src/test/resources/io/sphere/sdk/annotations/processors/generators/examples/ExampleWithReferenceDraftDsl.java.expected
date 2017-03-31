@@ -9,7 +9,7 @@ import java.util.Optional;
 import javax.annotation.Generated;
 
 /**
- * Abstract Dsl class {@link ExampleWithReferenceDraft}.
+ * Dsl class for {@link ExampleWithReferenceDraft}.
  */
 @Generated(
     value = "io.sphere.sdk.annotations.processors.generators.ResourceDraftValueGenerator",
@@ -28,9 +28,9 @@ public final class ExampleWithReferenceDraftDsl extends Base implements ExampleW
   }
 
   /**
-   * Creates a new instance of {@code ExampleWithReferenceDraftBuilder} with the values of this builder.
+   * Creates a new builder with the values of this object.
    *
-   * @return the instance
+   * @return new builder
    */
   public ExampleWithReferenceDraftBuilder newBuilder() {
     return new ExampleWithReferenceDraftBuilder(name);
@@ -41,20 +41,20 @@ public final class ExampleWithReferenceDraftDsl extends Base implements ExampleW
   }
 
   /**
-   * Creates a builder initialized with the given values.
+   * Creates a new object initialized with the given values.
    *
    * @param name initial value for the {@link ExampleWithReferenceDraft#getName()} property
-   * @return new builder initialized with the given values
+   * @return new object initialized with the given values
    */
   public static ExampleWithReferenceDraftDsl of(final Reference<String> name) {
     return new ExampleWithReferenceDraftDsl(name);
   }
 
   /**
-   * Creates a builder initialized with the fields of the template parameter.
+   * Creates a new object initialized with the fields of the template parameter.
    *
    * @param template the template
-   * @return a new builder initialized from the template
+   * @return a new object initialized from the template
    */
   public static ExampleWithReferenceDraftDsl of(final ExampleWithReferenceDraft template) {
     return new ExampleWithReferenceDraftDsl(template.getName());

@@ -97,20 +97,20 @@ public final class ExampleResourceBuilder extends Base implements Builder<Exampl
   }
 
   /**
-   * Creates a builder initialized with the given values.
+   * Creates a new object initialized with the given values.
    *
    * @param name initial value for the {@link ExampleResource#getName()} property
-   * @return new builder initialized with the given values
+   * @return new object initialized with the given values
    */
   public static ExampleResourceBuilder of(final String name) {
     return new ExampleResourceBuilder(null, null, name);
   }
 
   /**
-   * Creates a builder initialized with the fields of the template parameter.
+   * Creates a new object initialized with the fields of the template parameter.
    *
    * @param template the template
-   * @return a new builder initialized from the template
+   * @return a new object initialized from the template
    */
   public static ExampleResourceBuilder of(final ExampleResource template) {
     return new ExampleResourceBuilder(template.isReturn(), template.hasStagedChanges(), template.getName());

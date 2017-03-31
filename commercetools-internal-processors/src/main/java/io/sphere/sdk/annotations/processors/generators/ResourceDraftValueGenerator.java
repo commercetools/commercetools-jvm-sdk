@@ -43,12 +43,12 @@ public class ResourceDraftValueGenerator extends AbstractGenerator {
                 .superclass(ClassName.get(Base.class))
                 .addSuperinterface(ClassName.get(resourceValueTypeElement.asType()));
         if (resourceDraftValue.abstractResourceDraftValueClass()) {
-            builder.addJavadoc("Abstract base Dsl class for {@link $T} which needs to be extended to add additional methods.\n", resourceValueTypeElement)
+            builder.addJavadoc("Abstract base dsl class for {@link $T} which needs to be extended to add additional methods.\n", resourceValueTypeElement)
                     .addJavadoc("Subclasses have to provide the same non-default constructor as this class.\n")
                     .addModifiers(Modifier.ABSTRACT)
                     .addTypeVariable(TypeVariableName.get("T").withBounds(draftImplType));
         } else {
-            builder.addJavadoc("Abstract Dsl class {@link $T}.\n", resourceValueTypeElement)
+            builder.addJavadoc("Dsl class for {@link $T}.\n", resourceValueTypeElement)
                     .addModifiers(Modifier.PUBLIC, Modifier.FINAL);
         }
         builder.addAnnotation(AnnotationSpec.builder(Generated.class)
@@ -73,8 +73,8 @@ public class ResourceDraftValueGenerator extends AbstractGenerator {
                 .collect(Collectors.toList());
         final String callArguments = String.join(", ", argumentNames);
         return methodBuilder("newBuilder")
-                .addJavadoc("Creates a new instance of {@code $T} with the values of this builder.\n\n", type)
-                .addJavadoc("@return the instance\n")
+                .addJavadoc("Creates a new builder with the values of this object.\n\n", type)
+                .addJavadoc("@return new builder\n")
                 .addModifiers(Modifier.PUBLIC)
                 .returns(type)
                 .addCode("return new $T($L);\n", type, callArguments)
