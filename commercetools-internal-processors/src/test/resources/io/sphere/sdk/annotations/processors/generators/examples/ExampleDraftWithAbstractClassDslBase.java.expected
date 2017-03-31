@@ -1,6 +1,7 @@
 package io.sphere.sdk.annotations.processors.generators.examples;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import io.sphere.sdk.models.Base;
 import java.lang.Boolean;
 import java.lang.String;
@@ -30,8 +31,9 @@ abstract class ExampleDraftWithAbstractClassDslBase<T extends ExampleDraftWithAb
   private String sku;
 
   @JsonCreator
-  ExampleDraftWithAbstractClassDslBase(final Boolean _default, final Boolean active,
-      final List<String> names, @Nullable final String optional, final String sku) {
+  ExampleDraftWithAbstractClassDslBase(@JsonProperty("isDefault") final Boolean _default,
+      final Boolean active, final List<String> names, @Nullable final String optional,
+      final String sku) {
     this._default = _default;
     this.active = active;
     this.names = names;
@@ -39,6 +41,7 @@ abstract class ExampleDraftWithAbstractClassDslBase<T extends ExampleDraftWithAb
     this.sku = sku;
   }
 
+  @JsonProperty("isDefault")
   public Boolean isDefault() {
     return _default;
   }
@@ -92,6 +95,11 @@ abstract class ExampleDraftWithAbstractClassDslBase<T extends ExampleDraftWithAb
   @SuppressWarnings("unchecked")
   public T withSku(final String sku) {
     return (T) newBuilder().sku(sku).build();
+  }
+
+  @SuppressWarnings("unchecked")
+  public T withIsDefault(final Boolean _default) {
+    return (T) newBuilder()._default(_default).build();
   }
 
   /**

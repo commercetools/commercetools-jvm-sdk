@@ -1,6 +1,7 @@
 package io.sphere.sdk.annotations.processors.generators.examples;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import io.sphere.sdk.models.Base;
 import java.lang.Boolean;
 import java.lang.String;
@@ -28,8 +29,8 @@ public final class ExampleDraftDsl extends Base implements ExampleDraft {
   private String sku;
 
   @JsonCreator
-  ExampleDraftDsl(final Boolean _default, final Boolean active, final List<String> names,
-      @Nullable final String optional, final String sku) {
+  ExampleDraftDsl(final Boolean _default, @JsonProperty("isActive") final Boolean active,
+      final List<String> names, @Nullable final String optional, final String sku) {
     this._default = _default;
     this.active = active;
     this.names = names;
@@ -41,6 +42,7 @@ public final class ExampleDraftDsl extends Base implements ExampleDraft {
     return _default;
   }
 
+  @JsonProperty("isActive")
   public Boolean isActive() {
     return active;
   }
@@ -85,6 +87,10 @@ public final class ExampleDraftDsl extends Base implements ExampleDraft {
 
   public ExampleDraftDsl withSku(final String sku) {
     return newBuilder().sku(sku).build();
+  }
+
+  public ExampleDraftDsl withIsActive(final Boolean active) {
+    return newBuilder().active(active).build();
   }
 
   /**

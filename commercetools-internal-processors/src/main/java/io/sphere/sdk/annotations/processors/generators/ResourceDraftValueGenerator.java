@@ -81,6 +81,13 @@ public class ResourceDraftValueGenerator extends AbstractGenerator {
                 .build();
     }
 
+    @Override
+    protected MethodSpec.Builder createGetMethodBuilder(final ExecutableElement propertyMethod) {
+        final MethodSpec.Builder builder = super.createGetMethodBuilder(propertyMethod);
+        copyJsonAnnotation(propertyMethod, builder);
+        return builder;
+    }
+
     private Iterable<MethodSpec> createWithMethods(final TypeElement typeElement, final List<PropertyGenModel> propertyGenModels) {
         return propertyGenModels.stream()
                 .map(property -> createWithMethod(property, typeElement, null))
