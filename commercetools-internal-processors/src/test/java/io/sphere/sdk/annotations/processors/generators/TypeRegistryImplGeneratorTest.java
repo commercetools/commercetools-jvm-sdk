@@ -3,6 +3,7 @@ package io.sphere.sdk.annotations.processors.generators;
 import com.google.common.base.Charsets;
 import com.google.testing.compile.CompilationRule;
 import com.squareup.javapoet.JavaFile;
+import io.sphere.sdk.annotations.processors.generators.examples.ExampleGenericResource;
 import io.sphere.sdk.annotations.processors.generators.examples.ExampleTypes;
 import org.apache.commons.io.IOUtils;
 import org.junit.Rule;
@@ -28,7 +29,7 @@ public class TypeRegistryImplGeneratorTest {
 
     @Test
     public void generate() throws Exception {
-        final List<TypeElement> typeElements = Stream.of(ExampleTypes.Type1.class, ExampleTypes.Type2.class)
+        final List<TypeElement> typeElements = Stream.of(ExampleTypes.Type1.class, ExampleTypes.Type2.class, ExampleGenericResource.class)
                 .map(c -> compilationRule.getElements().getTypeElement(c.getCanonicalName()))
                 .collect(Collectors.toList());
         final String generatedSource = generateToString(typeElements);

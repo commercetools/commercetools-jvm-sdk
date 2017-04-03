@@ -1,5 +1,6 @@
 package io.sphere.sdk.models;
 
+import io.sphere.sdk.annotations.processors.generators.examples.ExampleGenericResource;
 import io.sphere.sdk.annotations.processors.generators.examples.ExampleTypes;
 import java.lang.Class;
 import java.lang.Override;
@@ -17,8 +18,10 @@ class TypeRegistryImpl implements TypeRegistry {
   private final Map<Class<?>, String> classToType = new HashMap<>();
 
   private TypeRegistryImpl() {
+    typeToClass.put("generic-resource", ExampleGenericResource.class);
     typeToClass.put("type1", ExampleTypes.Type1.class);
     typeToClass.put("type2", ExampleTypes.Type2.class);
+    classToType.put(ExampleGenericResource.class, "generic-resource");
     classToType.put(ExampleTypes.Type1.class, "type1");
     classToType.put(ExampleTypes.Type2.class, "type2");
   }

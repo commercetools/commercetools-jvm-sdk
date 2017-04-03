@@ -1,0 +1,15 @@
+package io.sphere.sdk.annotations.processors.generators.examples;
+
+import com.fasterxml.jackson.annotation.JsonCreator;
+import io.sphere.sdk.models.Base;
+import javax.annotation.Generated;
+
+@Generated(
+    value = "io.sphere.sdk.annotations.processors.generators.ResourceValueImplGenerator",
+    comments = "Generated from: io.sphere.sdk.annotations.processors.generators.examples.ExampleGenericResource"
+)
+final class ExampleGenericResourceImpl<T> extends Base implements ExampleGenericResource<T> {
+  @JsonCreator
+  ExampleGenericResourceImpl() {
+  }
+}

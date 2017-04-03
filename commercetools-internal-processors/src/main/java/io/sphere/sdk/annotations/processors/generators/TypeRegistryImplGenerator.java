@@ -51,11 +51,11 @@ public class TypeRegistryImplGenerator {
 
         typeNames.entrySet().stream()
                 .sorted(Comparator.comparing(Map.Entry::getKey))
-                .forEach(e -> constructorBuilder.addCode("$L.put($S, $T.class);\n", TYPE_TO_CLASS_FIELD, e.getKey(), e.getValue()));
+                .forEach(e -> constructorBuilder.addCode("$L.put($S, $T.class);\n", TYPE_TO_CLASS_FIELD, e.getKey(), ClassName.get(e.getValue())));
 
         typeNames.entrySet().stream()
                 .sorted(Comparator.comparing(Map.Entry::getKey))
-                .forEach(e -> constructorBuilder.addCode("$L.put($T.class, $S);\n", CLASS_TO_TYPE_FIELD, e.getValue(), e.getKey()));
+                .forEach(e -> constructorBuilder.addCode("$L.put($T.class, $S);\n", CLASS_TO_TYPE_FIELD, ClassName.get(e.getValue()), e.getKey()));
 
         final MethodSpec toClassMethod = MethodSpec.methodBuilder("toClass")
                 .returns(classType)
