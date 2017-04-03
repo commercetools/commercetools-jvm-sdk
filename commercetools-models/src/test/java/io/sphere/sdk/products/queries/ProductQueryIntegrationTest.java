@@ -28,9 +28,7 @@ import static io.sphere.sdk.models.DefaultCurrencyUnits.EUR;
 import static io.sphere.sdk.productdiscounts.ProductDiscountFixtures.withUpdateableProductDiscount;
 import static io.sphere.sdk.products.ProductFixtures.*;
 import static io.sphere.sdk.reviews.ReviewFixtures.withReview;
-import static io.sphere.sdk.test.SphereTestUtils.DE;
-import static io.sphere.sdk.test.SphereTestUtils.assertEventually;
-import static io.sphere.sdk.test.SphereTestUtils.randomString;
+import static io.sphere.sdk.test.SphereTestUtils.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class ProductQueryIntegrationTest extends IntegrationTest {
@@ -166,6 +164,30 @@ public class ProductQueryIntegrationTest extends IntegrationTest {
                     });
                 });
             });
+        });
+    }
+
+    @Test
+    public void queryByTiersWithMinimumQuantity() {
+        withProduct(client(), product -> {
+            final ProductQuery productQuery = ProductQuery.of()
+                    .withPredicates(m -> m.masterData().current().variants().prices().tiers().minimumQuantity().isGreaterThan(5))
+                    .plusPredicates(m -> m.is(product));
+
+            final List<Product> results = client().executeBlocking(productQuery).getResults();
+            assertThat(results).hasSize(0);
+        });
+    }
+
+    @Test
+    public void queryByTiersWithValue() {
+        withProduct(client(), product -> {
+            final ProductQuery productQuery = ProductQuery.of()
+                    .withPredicates(m -> m.masterData().current().variants().prices().tiers().value().currencyCode().is("EUR"))
+                    .plusPredicates(m -> m.is(product));
+
+            final List<Product> results = client().executeBlocking(productQuery).getResults();
+            assertThat(results).hasSize(0);
         });
     }
 

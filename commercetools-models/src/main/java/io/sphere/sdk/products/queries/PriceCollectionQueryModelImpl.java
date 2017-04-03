@@ -57,5 +57,10 @@ final class PriceCollectionQueryModelImpl<T> extends QueryModelImpl<T> implement
     public CustomQueryModel<T> custom() {
         return CustomQueryModel.of(this, "custom");
     }
+
+    @Override
+    public PriceTierQueryModel<T> tiers() {
+        return new PriceTierQueryModelImpl<T>(this, "tiers");
+    }
 }
 
