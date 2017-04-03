@@ -8,6 +8,7 @@ import io.sphere.sdk.test.IntegrationTest;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.Arrays;
 import java.util.List;
 
 import static io.sphere.sdk.subscriptions.SubscriptionFixtures.*;
@@ -21,7 +22,7 @@ public class SubscriptionCreateCommandIntegrationTest extends IntegrationTest {
     @Before
     public void clean() {
         List<Subscription> results = client().executeBlocking(SubscriptionQuery.of()
-                .withPredicates(l -> l.key().is(SubscriptionFixtures.IRON_MQ_SUBSCRIPTION_KEY)))
+                .withPredicates(l -> l.key().isIn(Arrays.asList(SubscriptionFixtures.IRON_MQ_SUBSCRIPTION_KEY, SubscriptionFixtures.AWS_SQS_SUBSCRIPTION_KEY))))
                 .getResults();
         results.forEach(subscription -> client().executeBlocking(SubscriptionDeleteCommand.of(subscription)));
     }
@@ -48,5 +49,29 @@ public class SubscriptionCreateCommandIntegrationTest extends IntegrationTest {
         assertThat(subscription).isNotNull();
         assertThat(subscription.getDestination()).isEqualTo(subscriptionDraft.getDestination());
         assertThat(subscription.getMessages()).isEqualTo(subscriptionDraft.getMessages());
+    }
+
+    @Test
+    public void createSqsChangesSubscription() throws Exception {
+        final SubscriptionDraftDsl subscriptionDraft = withCategoryChanges(sqsSubscriptionDraftBuilder()).build();
+
+        final SubscriptionCreateCommand createCommand = SubscriptionCreateCommand.of(subscriptionDraft);
+        final Subscription subscription = client().executeBlocking(createCommand);
+
+        assertThat(subscription).isNotNull();
+        assertThat(subscription.getDestination()).isEqualTo(subscriptionDraft.getDestination());
+        assertThat(subscription.getChanges()).isEqualTo(subscriptionDraft.getChanges());
+    }
+
+    @Test
+    public void createSnsChangesSubscription() throws Exception {
+        final SubscriptionDraftDsl subscriptionDraft = withCategoryChanges(snsSubscriptionDraftBuilder()).build();
+
+        final SubscriptionCreateCommand createCommand = SubscriptionCreateCommand.of(subscriptionDraft);
+        final Subscription subscription = client().executeBlocking(createCommand);
+
+        assertThat(subscription).isNotNull();
+        assertThat(subscription.getDestination()).isEqualTo(subscriptionDraft.getDestination());
+        assertThat(subscription.getChanges()).isEqualTo(subscriptionDraft.getChanges());
     }
 }

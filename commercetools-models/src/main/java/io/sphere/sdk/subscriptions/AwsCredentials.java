@@ -66,6 +66,10 @@ public final class AwsCredentials extends Base {
         return ofEnv(AWS_ACCESS_KEY_ID_ENV, AWS_SECRET_ACCESS_KEY_ENV);
     }
 
+    static boolean hasAwsCliEnv() {
+        return System.getenv(AWS_ACCESS_KEY_ID_ENV) != null && System.getenv(AWS_SECRET_ACCESS_KEY_ENV) != null;
+    }
+
     public static AwsCredentials of(final String accessKey, final String accessSecret) {
         return new AwsCredentials(requireNonNull(accessKey), requireNonNull(accessSecret));
     }

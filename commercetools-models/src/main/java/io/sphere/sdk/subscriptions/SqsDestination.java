@@ -16,7 +16,7 @@ import static java.util.Objects.requireNonNull;
 @ResourceValue
 public interface SqsDestination extends Destination {
 
-    URI getQueueURL();
+    URI getQueueUrl();
 
     String getAccessKey();
 
