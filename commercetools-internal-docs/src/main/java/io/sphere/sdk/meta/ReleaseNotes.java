@@ -116,6 +116,12 @@ import java.util.function.Function;
  </ul>
  -->
 
+ <h3 class=released-version id="v1_15_0">1.15.0 (04.04.2017)</h3>
+ <ul>
+ <li class=new-in-release>Added query model {@link PriceTierQueryModel} for tiered prices {@link PriceQueryModel#tiers()}.</li>
+ </ul
+ </h3>
+
  <h3 class=released-version id="v1_14_1">1.14.1 (30.03.2017)</h3>
  <ul>
  <li class=fixed-in-release>Fix for {@link LineItemExpansionModel#variant()} so that it works correctly.
