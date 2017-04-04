@@ -95,9 +95,6 @@
                 <artifactId>revapi-maven-plugin</artifactId>
                 <version>0.8.2</version>
                 <configuration>
-                    <oldArtifacts>
-                        <artifact>${project.groupId}:${project.artifactId}:1.14.1</artifact>
-                    </oldArtifacts>
                     <newArtifacts>
                         <artifact>${project.groupId}:${project.artifactId}:${project.version}</artifact>
                     </newArtifacts>
