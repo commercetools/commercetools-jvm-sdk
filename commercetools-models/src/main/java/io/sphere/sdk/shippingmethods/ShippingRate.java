@@ -16,7 +16,7 @@ public interface ShippingRate {
     MonetaryAmount getPrice();
 
     /**
-     * The shipping is free if the order total (the sum of line item prices) exceeds the this value.
+     * The shipping is free if the order total (the sum of line item prices) exceeds the free above value.
      *
      * @return the free aboce property
      */
