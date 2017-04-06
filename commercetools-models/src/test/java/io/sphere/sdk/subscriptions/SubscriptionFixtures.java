@@ -3,6 +3,7 @@ package io.sphere.sdk.subscriptions;
 import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.categories.messages.CategoryCreatedMessage;
 import io.sphere.sdk.client.BlockingSphereClient;
+import io.sphere.sdk.products.Product;
 import io.sphere.sdk.subscriptions.commands.SubscriptionCreateCommand;
 import io.sphere.sdk.subscriptions.commands.SubscriptionDeleteCommand;
 
@@ -25,7 +26,7 @@ public class SubscriptionFixtures {
      */
     private final static String CTP_IRON_MQ_URI_ENV = "CTP_IRON_MQ_URI";
 
-    private final static String CTP_AWS_REGION = "CTP_AWS_REGION";
+    private final static String CTP_AWS_REGION = "AWS_REGION";
 
     private final static String CTP_AWS_SQS_QUEUE_URL = "CTP_AWS_SQS_QUEUE_URL";
 
@@ -43,7 +44,9 @@ public class SubscriptionFixtures {
     public static SubscriptionDraftBuilder sqsSubscriptionDraftBuilder() {
         assumeTrue(AwsCredentials.hasAwsCliEnv());
         final AwsCredentials awsCredentials = AwsCredentials.ofAwsCliEnv();
-        final String awsRegion = System.getenv(CTP_AWS_REGION);
+        final String awsRegion = System.getenv(CTP_AWS_REGION) == null ?
+                "us-west-2" :
+                System.getenv(CTP_AWS_REGION);
         final String sqsQueueUrl = System.getenv(CTP_AWS_SQS_QUEUE_URL);
         assumeNotNull(awsRegion);
 
@@ -63,6 +66,10 @@ public class SubscriptionFixtures {
 
     public static SubscriptionDraftBuilder withCategoryChanges(final SubscriptionDraftBuilder subscriptionDraftBuilder) {
         return subscriptionDraftBuilder.changes(Collections.singletonList(ChangeSubscription.of(Category.class)));
+    }
+
+    public static SubscriptionDraftBuilder withProductChanges(final SubscriptionDraftBuilder subscriptionDraftBuilder) {
+        return subscriptionDraftBuilder.changes(Collections.singletonList(ChangeSubscription.of(Product.class)));
     }
 
     public static SubscriptionDraftBuilder withCategoryCreatedMessage(final SubscriptionDraftBuilder subscriptionDraftBuilder) {
