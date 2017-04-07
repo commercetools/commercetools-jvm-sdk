@@ -19,7 +19,7 @@ public final class HasBuilderAnnotationProcessor extends CommercetoolsAnnotation
 
     @Override
     protected void generate(final TypeElement typeElement) {
-        final JavaFile javaFile = new HasBuilderGenerator(processingEnv.getElementUtils()).generate(typeElement);
+        final JavaFile javaFile = new HasBuilderGenerator(processingEnv.getElementUtils(), processingEnv.getTypeUtils()).generate(typeElement);
         writeClass(javaFile);
     }
 }

@@ -11,6 +11,7 @@ import javax.lang.model.element.Modifier;
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.type.TypeMirror;
 import javax.lang.model.util.Elements;
+import javax.lang.model.util.Types;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -18,8 +19,8 @@ import java.util.stream.Collectors;
  * Generates implementation classes for interfaces annotated with {@link io.sphere.sdk.annotations.ResourceValue}.
  */
 public class ResourceValueImplGenerator extends AbstractGenerator {
-    public ResourceValueImplGenerator(final Elements elements) {
-        super(elements);
+    public ResourceValueImplGenerator(final Elements elements, final Types types) {
+        super(elements, types);
     }
 
     @Override

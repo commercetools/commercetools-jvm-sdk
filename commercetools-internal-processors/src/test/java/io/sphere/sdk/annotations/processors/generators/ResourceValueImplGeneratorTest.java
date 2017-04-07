@@ -15,7 +15,7 @@ public class ResourceValueImplGeneratorTest extends AbstractGeneratorTest {
 
     @Before
     public void setup() {
-        generator = new ResourceValueImplGenerator(compilationRule.getElements());
+        generator = new ResourceValueImplGenerator(compilationRule.getElements(), compilationRule.getTypes());
     }
 
     @Test

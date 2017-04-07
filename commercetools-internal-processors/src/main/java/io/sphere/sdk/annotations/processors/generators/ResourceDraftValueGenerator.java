@@ -13,6 +13,7 @@ import javax.lang.model.element.ExecutableElement;
 import javax.lang.model.element.Modifier;
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.util.Elements;
+import javax.lang.model.util.Types;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -22,8 +23,8 @@ import static org.apache.commons.lang3.StringUtils.capitalize;
 
 public class ResourceDraftValueGenerator extends AbstractGenerator {
 
-    public ResourceDraftValueGenerator(final Elements elements) {
-        super(elements);
+    public ResourceDraftValueGenerator(final Elements elements, final Types types) {
+        super(elements, types);
     }
 
     @Override

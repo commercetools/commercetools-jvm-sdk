@@ -23,7 +23,7 @@ public final class ResourceValueAnnotationProcessor extends CommercetoolsAnnotat
         final ResourceValueValidator validator = new ResourceValueValidator(processingEnv);
         if (validator.isValid(typeElement)) {
 
-            final JavaFile javaFile = new ResourceValueImplGenerator(processingEnv.getElementUtils()).generate(typeElement);
+            final JavaFile javaFile = new ResourceValueImplGenerator(processingEnv.getElementUtils(), processingEnv.getTypeUtils()).generate(typeElement);
 
             writeClass(javaFile);
         }

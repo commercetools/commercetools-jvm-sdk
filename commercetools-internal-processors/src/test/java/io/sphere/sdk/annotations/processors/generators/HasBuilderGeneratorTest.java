@@ -12,7 +12,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 public class HasBuilderGeneratorTest extends AbstractGeneratorTest {
     @Before
     public void setup() {
-        generator = new HasBuilderGenerator(compilationRule.getElements());
+        generator = new HasBuilderGenerator(compilationRule.getElements(), compilationRule.getTypes());
     }
 
     @Test

@@ -10,8 +10,10 @@ import io.sphere.sdk.annotations.ResourceValue;
 import io.sphere.sdk.models.Builder;
 
 import javax.lang.model.element.*;
+import javax.lang.model.type.TypeMirror;
 import javax.lang.model.util.ElementFilter;
 import javax.lang.model.util.Elements;
+import javax.lang.model.util.Types;
 import java.lang.annotation.Annotation;
 import java.util.*;
 import java.util.stream.Stream;
@@ -21,9 +23,11 @@ import java.util.stream.Stream;
  */
 public class TypeUtils {
     private final Elements elements;
+    private final Types types;
 
-    public TypeUtils(final Elements elements) {
+    public TypeUtils(final Elements elements, final Types types) {
         this.elements = elements;
+        this.types = types;
     }
 
 
@@ -67,6 +71,11 @@ public class TypeUtils {
         final ClassName draftType = ClassName.get(typeElement);
         return resourceDraftValue.builderReturnsDslClass() ?
                 getDraftImplType(typeElement) : draftType;
+    }
+
+    public ClassName getConcreteBuilderType(final TypeMirror typeMirror) {
+        final TypeElement typeElement = (TypeElement) types.asElement(typeMirror);
+        return getConcreteBuilderType(typeElement);
     }
 
     public ClassName getConcreteBuilderType(final TypeElement typeElement) {

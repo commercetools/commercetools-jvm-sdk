@@ -5,6 +5,7 @@ import com.squareup.javapoet.TypeSpec;
 
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.util.Elements;
+import javax.lang.model.util.Types;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,8 +14,8 @@ import java.util.List;
  */
 abstract class AbstractMultipleFileGenerator extends BaseAbstractGenerator {
 
-    AbstractMultipleFileGenerator(final Elements elements) {
-        super(elements);
+    public AbstractMultipleFileGenerator(final Elements elements, final Types types) {
+        super(elements, types);
     }
 
     /**
