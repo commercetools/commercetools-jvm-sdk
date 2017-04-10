@@ -42,15 +42,19 @@ public class SubscriptionFixtures {
     }
 
     public static SubscriptionDraftBuilder sqsSubscriptionDraftBuilder() {
+        final String queueUrl = System.getenv(CTP_AWS_SQS_QUEUE_URL);
+        return sqsSubscriptionDraftBuilder(queueUrl);
+    }
+
+    public static SubscriptionDraftBuilder sqsSubscriptionDraftBuilder(final String queueUrl) {
         assumeTrue(AwsCredentials.hasAwsCliEnv());
         final AwsCredentials awsCredentials = AwsCredentials.ofAwsCliEnv();
         final String awsRegion = System.getenv(CTP_AWS_REGION) == null ?
                 "us-west-2" :
                 System.getenv(CTP_AWS_REGION);
-        final String sqsQueueUrl = System.getenv(CTP_AWS_SQS_QUEUE_URL);
         assumeNotNull(awsRegion);
 
-        return SubscriptionDraftBuilder.of(SqsDestination.of(awsCredentials, awsRegion, URI.create(sqsQueueUrl)))
+        return SubscriptionDraftBuilder.of(SqsDestination.of(awsCredentials, awsRegion, URI.create(queueUrl)))
                 .key(AWS_SQS_SUBSCRIPTION_KEY);
     }
 
