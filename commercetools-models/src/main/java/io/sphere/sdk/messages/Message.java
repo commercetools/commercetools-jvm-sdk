@@ -1,12 +1,15 @@
 package io.sphere.sdk.messages;
 
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import io.sphere.sdk.annotations.HasByIdGetEndpoint;
 import io.sphere.sdk.annotations.ResourceInfo;
-import io.sphere.sdk.models.Resource;
+import io.sphere.sdk.categories.messages.CategoryCreatedMessage;
 import io.sphere.sdk.models.Reference;
+import io.sphere.sdk.models.Resource;
 
 /**
  * A message represents a change or an action performed on a resource (like an Order or a Product). Messages can be seen as a subset of the change history for a resource inside a project. It is a subset because not all changes on resources result in messages.
@@ -19,6 +22,8 @@ import io.sphere.sdk.models.Reference;
         "\n" +
         "If you need to receive one specific message class, like {@link io.sphere.sdk.orders.messages.DeliveryAddedMessage},\n" +
         "use {@link MessageQuery} with a predicate by id.")
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "type", visible = true)
+@JsonSubTypes(@JsonSubTypes.Type(value = CategoryCreatedMessage.class, name = CategoryCreatedMessage.MESSAGE_TYPE))
 public interface Message extends Resource<Message> {
     /**
      * A type hint for references which resource type is linked in a reference.

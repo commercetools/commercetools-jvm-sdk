@@ -1,5 +1,6 @@
 package io.sphere.sdk.subscriptions;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.annotation.JsonUnwrapped;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
@@ -33,5 +34,6 @@ public interface MessageSubscriptionPayload<T, M extends Message> extends Payloa
      * @return the message payload
      */
     @JsonUnwrapped
+    @JsonProperty("message")
     M getMessage();
 }
