@@ -1,6 +1,5 @@
 package io.sphere.sdk.subscriptions;
 
-import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import io.sphere.sdk.annotations.ResourceValue;
 
@@ -9,7 +8,6 @@ import io.sphere.sdk.annotations.ResourceValue;
  *
  * @param <T> the resource type
  */
-@JsonTypeName("ResourceUpdated")
 @JsonDeserialize(as = ResourceUpdatedPayloadImpl.class)
 @ResourceValue
 public interface ResourceUpdatedPayload<T> extends Payload<T> {

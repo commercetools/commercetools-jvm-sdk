@@ -1,7 +1,6 @@
 package io.sphere.sdk.payments.messages;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import io.sphere.sdk.messages.GenericMessageImpl;
@@ -21,7 +20,6 @@ import java.time.ZonedDateTime;
  @see io.sphere.sdk.payments.commands.updateactions.TransitionState
  */
 @JsonDeserialize(as = PaymentStatusStateTransitionMessage.class)//important to override annotation in Message class
-@JsonTypeName(PaymentStatusStateTransitionMessage.MESSAGE_TYPE)
 public final class PaymentStatusStateTransitionMessage extends GenericMessageImpl<Payment> {
     public static final String MESSAGE_TYPE = "PaymentStatusStateTransition";
     public static final MessageDerivateHint<PaymentStatusStateTransitionMessage> MESSAGE_HINT =

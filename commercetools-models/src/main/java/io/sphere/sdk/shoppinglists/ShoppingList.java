@@ -1,6 +1,5 @@
 package io.sphere.sdk.shoppinglists;
 
-import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import io.sphere.sdk.annotations.*;
@@ -44,7 +43,6 @@ import java.util.List;
 @HasCreateCommand(javadocSummary = "Creates a {@link io.sphere.sdk.shoppinglists.ShoppingList}.", includeExamples = "io.sphere.sdk.shoppinglists.commands.ShoppingListCreateCommandIntegrationTest#execution()")
 @HasDeleteCommand(javadocSummary = "Deletes a shopping list.", deleteWithKey = true)
 @HasQueryModel
-@JsonTypeName("shopping-list")
 public interface ShoppingList extends Resource<ShoppingList>, Custom {
 
     LocalizedString getName();

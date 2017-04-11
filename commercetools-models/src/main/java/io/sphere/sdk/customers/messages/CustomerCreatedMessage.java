@@ -1,7 +1,6 @@
 package io.sphere.sdk.customers.messages;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import io.sphere.sdk.customers.Customer;
@@ -11,7 +10,6 @@ import io.sphere.sdk.messages.MessageDerivateHint;
 import java.time.ZonedDateTime;
 
 @JsonDeserialize(as = CustomerCreatedMessage.class)//important to override annotation in Message class
-@JsonTypeName(CustomerCreatedMessage.MESSAGE_TYPE)
 public final class CustomerCreatedMessage extends GenericMessageImpl<Customer> {
     public static final String MESSAGE_TYPE = "CustomerCreated";
     public static final MessageDerivateHint<CustomerCreatedMessage> MESSAGE_HINT =

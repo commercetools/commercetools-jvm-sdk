@@ -1,6 +1,5 @@
 package io.sphere.sdk.categories;
 
-import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import io.sphere.sdk.annotations.*;
@@ -62,7 +61,6 @@ import java.util.List;
 @HasUpdateCommand(javadocSummary = "Updates a category.")
 @HasDeleteCommand(javadocSummary = "Deletes a category.", includeExamples = "io.sphere.sdk.categories.commands.CategoryDeleteCommandIntegrationTest#execution()")
 @HasQueryModel(baseInterfaces = {"io.sphere.sdk.queries.QueryModel<io.sphere.sdk.categories.Category>"})
-@JsonTypeName("category")
 public interface Category extends Resource<Category>, WithLocalizedSlug, MetaAttributes, Custom {
 
     /**

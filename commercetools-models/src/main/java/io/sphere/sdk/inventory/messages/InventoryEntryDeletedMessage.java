@@ -1,7 +1,6 @@
 package io.sphere.sdk.inventory.messages;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import io.sphere.sdk.channels.Channel;
@@ -14,7 +13,6 @@ import javax.annotation.Nullable;
 import java.time.ZonedDateTime;
 
 @JsonDeserialize(as = InventoryEntryDeletedMessage.class)//important to override annotation in Message class
-@JsonTypeName(InventoryEntryDeletedMessage.MESSAGE_TYPE)
 public final class InventoryEntryDeletedMessage extends GenericMessageImpl<InventoryEntry> {
     public static final String MESSAGE_TYPE = "InventoryEntryDeleted";
     public static final MessageDerivateHint<InventoryEntryDeletedMessage> MESSAGE_HINT =

@@ -1,7 +1,6 @@
 package io.sphere.sdk.payments.messages;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import io.sphere.sdk.messages.GenericMessageImpl;
@@ -20,7 +19,6 @@ import java.time.ZonedDateTime;
  *
  */
 @JsonDeserialize(as = PaymentCreatedMessage.class)//important to override annotation in Message class
-@JsonTypeName(PaymentCreatedMessage.MESSAGE_TYPE)
 public final class PaymentCreatedMessage extends GenericMessageImpl<Payment> {
     public static final String MESSAGE_TYPE = "PaymentCreated";
     public static final MessageDerivateHint<PaymentCreatedMessage> MESSAGE_HINT =

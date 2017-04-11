@@ -1,7 +1,6 @@
 package io.sphere.sdk.reviews.messages;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import io.sphere.sdk.messages.GenericMessageImpl;
@@ -23,7 +22,6 @@ import java.time.ZonedDateTime;
  * @see io.sphere.sdk.reviews.commands.updateactions.TransitionState
  */
 @JsonDeserialize(as = ReviewStateTransitionMessage.class)//important to override annotation in Message class
-@JsonTypeName(ReviewStateTransitionMessage.MESSAGE_TYPE)
 public final class ReviewStateTransitionMessage  extends GenericMessageImpl<Review> {
     public static final String MESSAGE_TYPE = "ReviewStateTransition";
     public static final MessageDerivateHint<ReviewStateTransitionMessage> MESSAGE_HINT =

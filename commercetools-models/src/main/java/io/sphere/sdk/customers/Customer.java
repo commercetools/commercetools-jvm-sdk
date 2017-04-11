@@ -2,7 +2,6 @@ package io.sphere.sdk.customers;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import io.sphere.sdk.annotations.*;
@@ -129,7 +128,6 @@ import static java.util.stream.Collectors.toList;
         "StringQuerySortingModel<Customer> lowercaseEmail();",
         "BooleanQueryModel<Customer> isEmailVerified();"
 })
-@JsonTypeName("customer")
 public interface Customer extends Resource<Customer>, Custom {
     /**
      * Gets the ID of this customer.

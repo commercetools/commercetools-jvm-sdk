@@ -49,7 +49,7 @@ public class SubscriptionUpdateCommandIntegrationTest extends IntegrationTest {
     @Test
     public void setChangesIronMq() {
         withSubscription(client(), withCategoryChanges(ironMqSubscriptionDraftBuilder()), subscription -> {
-            final List<ChangeSubscription> newChanges = Collections.singletonList(ChangeSubscription.of(Payment.class));
+            final List<ChangeSubscription> newChanges = Collections.singletonList(ChangeSubscription.of(Payment.resourceTypeId()));
 
             final SubscriptionUpdateCommand setChangesCommand = SubscriptionUpdateCommand.of(subscription, SetChanges.of(newChanges));
             final Subscription updatedSubscription = client().executeBlocking(setChangesCommand);
@@ -63,7 +63,7 @@ public class SubscriptionUpdateCommandIntegrationTest extends IntegrationTest {
     @Test
     public void setMessagesIronMq() {
         withSubscription(client(), withCategoryCreatedMessage(ironMqSubscriptionDraftBuilder()), subscription -> {
-            final List<MessageSubscription> newMessages = Collections.singletonList(MessageSubscription.of(Payment.class));
+            final List<MessageSubscription> newMessages = Collections.singletonList(MessageSubscription.of(Payment.resourceTypeId()));
 
             final SubscriptionUpdateCommand setMessagesCommand = SubscriptionUpdateCommand.of(subscription, SetMessages.of(newMessages));
             final Subscription updatedSubscription = client().executeBlocking(setMessagesCommand);

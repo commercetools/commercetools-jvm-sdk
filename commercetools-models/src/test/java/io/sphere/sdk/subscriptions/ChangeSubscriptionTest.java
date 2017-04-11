@@ -22,13 +22,13 @@ public class ChangeSubscriptionTest {
 
     @Test
     public void of() throws Exception {
-        final ChangeSubscription changeSubscription = ChangeSubscription.of(Category.class);
+        final ChangeSubscription changeSubscription = ChangeSubscription.of(Category.resourceTypeId());
         assertThat(changeSubscription.getResourceTypeId()).isEqualTo(Category.referenceTypeId());
     }
 
     @Test
     public void serializeWithCart() throws Exception {
-        final ChangeSubscription changeSubscription = ChangeSubscription.of(Cart.class);
+        final ChangeSubscription changeSubscription = ChangeSubscription.of(Cart.referenceTypeId());
         final JsonNode jsonNode = SphereJsonUtils.toJsonNode(changeSubscription);
 
         assertThat(jsonNode.get("resourceTypeId").asText()).isEqualTo(Cart.referenceTypeId());
@@ -36,7 +36,7 @@ public class ChangeSubscriptionTest {
 
     @Test
     public void serializeWithCategory() throws Exception {
-        final ChangeSubscription changeSubscription = ChangeSubscription.of(Category.class);
+        final ChangeSubscription changeSubscription = ChangeSubscription.of(Category.resourceTypeId());
         final JsonNode jsonNode = SphereJsonUtils.toJsonNode(changeSubscription);
 
         assertThat(jsonNode.get("resourceTypeId").asText()).isEqualTo(Category.referenceTypeId());
@@ -44,7 +44,7 @@ public class ChangeSubscriptionTest {
 
     @Test
     public void serializeWithCustomer() throws Exception {
-        final ChangeSubscription changeSubscription = ChangeSubscription.of(Customer.class);
+        final ChangeSubscription changeSubscription = ChangeSubscription.of(Customer.resourceTypeId());
         final JsonNode jsonNode = SphereJsonUtils.toJsonNode(changeSubscription);
 
         assertThat(jsonNode.get("resourceTypeId").asText()).isEqualTo(Customer.referenceTypeId());
@@ -52,7 +52,7 @@ public class ChangeSubscriptionTest {
 
     @Test
     public void serializeWithInventoryEntry() throws Exception {
-        final ChangeSubscription changeSubscription = ChangeSubscription.of(InventoryEntry.class);
+        final ChangeSubscription changeSubscription = ChangeSubscription.of(InventoryEntry.resourceTypeId());
         final JsonNode jsonNode = SphereJsonUtils.toJsonNode(changeSubscription);
 
         assertThat(jsonNode.get("resourceTypeId").asText()).isEqualTo(InventoryEntry.referenceTypeId());
@@ -60,7 +60,7 @@ public class ChangeSubscriptionTest {
 
     @Test
     public void serializeWithOrder() throws Exception {
-        final ChangeSubscription changeSubscription = ChangeSubscription.of(Order.class);
+        final ChangeSubscription changeSubscription = ChangeSubscription.of(Order.resourceTypeId());
         final JsonNode jsonNode = SphereJsonUtils.toJsonNode(changeSubscription);
 
         assertThat(jsonNode.get("resourceTypeId").asText()).isEqualTo(Order.referenceTypeId());
@@ -68,7 +68,7 @@ public class ChangeSubscriptionTest {
 
     @Test
     public void serializeWithPayment() throws Exception {
-        final ChangeSubscription changeSubscription = ChangeSubscription.of(Payment.class);
+        final ChangeSubscription changeSubscription = ChangeSubscription.of(Payment.resourceTypeId());
         final JsonNode jsonNode = SphereJsonUtils.toJsonNode(changeSubscription);
 
         assertThat(jsonNode.get("resourceTypeId").asText()).isEqualTo(Payment.referenceTypeId());
@@ -76,7 +76,7 @@ public class ChangeSubscriptionTest {
 
     @Test
     public void serializeWithProduct() throws Exception {
-        final ChangeSubscription changeSubscription = ChangeSubscription.of(Product.class);
+        final ChangeSubscription changeSubscription = ChangeSubscription.of(Product.resourceTypeId());
         final JsonNode jsonNode = SphereJsonUtils.toJsonNode(changeSubscription);
 
         assertThat(jsonNode.get("resourceTypeId").asText()).isEqualTo(Product.referenceTypeId());
@@ -84,24 +84,23 @@ public class ChangeSubscriptionTest {
 
     @Test
     public void serializeWithProductType() throws Exception {
-        final ChangeSubscription changeSubscription = ChangeSubscription.of(ProductType.class);
+        final ChangeSubscription changeSubscription = ChangeSubscription.of(ProductType.resourceTypeId());
         final JsonNode jsonNode = SphereJsonUtils.toJsonNode(changeSubscription);
 
-        assertThat(jsonNode.get("resourceTypeId").asText()).isEqualTo(ProductType.referenceTypeId());
+        assertThat(jsonNode.get("resourceTypeId").asText()).isEqualTo(ProductType.resourceTypeId());
     }
 
     @Test
     public void serializeWithReview() throws Exception {
-        final ChangeSubscription changeSubscription = ChangeSubscription.of(Review.class);
+        final ChangeSubscription changeSubscription = ChangeSubscription.of(Review.resourceTypeId());
         final JsonNode jsonNode = SphereJsonUtils.toJsonNode(changeSubscription);
 
-        assertThat(jsonNode.get("resourceTypeId").asText()).isEqualTo(Review.referenceTypeId());
+        assertThat(jsonNode.get("resourceTypeId").asText()).isEqualTo(Review.resourceTypeId());
     }
 
     @Test
     public void deserialize() throws Exception {
         ChangeSubscription changeSubscription = SphereJsonUtils.readObject("{\"resourceTypeId\":\"category\"}", ChangeSubscription.class);
         assertThat(changeSubscription.getResourceTypeId()).isEqualTo(Category.resourceTypeId());
-        assertThat(changeSubscription.getResourceType()).isEqualTo(Category.class);
     }
 }

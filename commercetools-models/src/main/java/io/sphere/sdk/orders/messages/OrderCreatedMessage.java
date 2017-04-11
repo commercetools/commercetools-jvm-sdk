@@ -1,7 +1,6 @@
 package io.sphere.sdk.orders.messages;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import io.sphere.sdk.messages.GenericMessageImpl;
@@ -12,7 +11,6 @@ import io.sphere.sdk.orders.Order;
 import java.time.ZonedDateTime;
 
 @JsonDeserialize(as = OrderCreatedMessage.class)//important to override annotation in Message class
-@JsonTypeName(OrderCreatedMessage.MESSAGE_TYPE)
 public final class OrderCreatedMessage extends GenericMessageImpl<Order> {
     public static final String MESSAGE_TYPE = "OrderCreated";
     public static final MessageDerivateHint<OrderCreatedMessage> MESSAGE_HINT =

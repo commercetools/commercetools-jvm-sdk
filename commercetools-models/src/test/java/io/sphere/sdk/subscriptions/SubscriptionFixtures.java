@@ -69,15 +69,15 @@ public class SubscriptionFixtures {
     }
 
     public static SubscriptionDraftBuilder withCategoryChanges(final SubscriptionDraftBuilder subscriptionDraftBuilder) {
-        return subscriptionDraftBuilder.changes(Collections.singletonList(ChangeSubscription.of(Category.class)));
+        return subscriptionDraftBuilder.changes(Collections.singletonList(ChangeSubscription.of(Category.resourceTypeId())));
     }
 
     public static SubscriptionDraftBuilder withProductChanges(final SubscriptionDraftBuilder subscriptionDraftBuilder) {
-        return subscriptionDraftBuilder.changes(Collections.singletonList(ChangeSubscription.of(Product.class)));
+        return subscriptionDraftBuilder.changes(Collections.singletonList(ChangeSubscription.of(Product.resourceTypeId())));
     }
 
     public static SubscriptionDraftBuilder withCategoryCreatedMessage(final SubscriptionDraftBuilder subscriptionDraftBuilder) {
-        return subscriptionDraftBuilder.messages(Collections.singletonList(MessageSubscription.of(Category.class, CategoryCreatedMessage.class)));
+        return subscriptionDraftBuilder.messages(Collections.singletonList(MessageSubscription.of(Category.resourceTypeId(), CategoryCreatedMessage.MESSAGE_TYPE)));
     }
 
     public static void withSubscription(final BlockingSphereClient client, final SubscriptionDraftBuilder builder, final Function<Subscription, Subscription> f) {

@@ -1,7 +1,6 @@
 package io.sphere.sdk.categories.messages;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import io.sphere.sdk.categories.Category;
@@ -12,7 +11,6 @@ import io.sphere.sdk.models.LocalizedString;
 import java.time.ZonedDateTime;
 
 @JsonDeserialize(as = CategorySlugChangedMessage.class)//important to override annotation in Message class
-@JsonTypeName(CategorySlugChangedMessage.MESSAGE_TYPE)
 public final class CategorySlugChangedMessage extends GenericMessageImpl<Category> {
     public static final String MESSAGE_TYPE = "CategorySlugChanged";
     public static final MessageDerivateHint<CategorySlugChangedMessage> MESSAGE_HINT =

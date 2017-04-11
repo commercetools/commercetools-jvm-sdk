@@ -1,7 +1,6 @@
 package io.sphere.sdk.orders.messages;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import io.sphere.sdk.messages.MessageDerivateHint;
@@ -18,7 +17,6 @@ import java.time.ZonedDateTime;
  *
  */
 @JsonDeserialize(as = CustomLineItemStateTransitionMessage.class)//important to override annotation in Message class
-@JsonTypeName(CustomLineItemStateTransitionMessage.MESSAGE_TYPE)
 public final class CustomLineItemStateTransitionMessage extends LineItemLikeStateTransitionMessage {
 
     public static final String MESSAGE_TYPE = "CustomLineItemStateTransition";

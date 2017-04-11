@@ -17,10 +17,9 @@ import java.util.List;
 @HasQueryEndpoint
 @HasQueryModel
 @HasUpdateCommand(javadocSummary = "Updates a subscripton.", updateWithKey = true)
-@HasCreateCommand(javadocSummary = "Creates a {@link io.sphere.sdk.subscriptions.Subscription}.") // , includeExamples = "io.sphere.sdk.shoppinglists.commands.ShoppingListCreateCommandIntegrationTest#execution()")
+@HasCreateCommand(javadocSummary = "Creates a {@link io.sphere.sdk.subscriptions.Subscription}.")
 @HasDeleteCommand(javadocSummary = "Deletes a subscripton.", deleteWithKey = true)
 @HasByIdGetEndpoint(javadocSummary = "Fetches a subscription by id.")
-// includeExamples = "io.sphere.sdk.shoppinglists.queries.ShoppingListByIdGetIntegrationTest#byIdGet()")
 @HasByKeyGetEndpoint(javadocSummary = "Fetches a subscription by key.")
 @HasUpdateActions
 public interface Subscription extends Resource<Subscription> {

@@ -17,58 +17,25 @@ public class MessageSubscriptionTest {
     @Test
     public void ofMessageTypes() throws Exception {
         final MessageSubscription categoryMessageSubscription =
-                MessageSubscription.of(Category.class, CategoryCreatedMessage.class, CategorySlugChangedMessage.class);
+                MessageSubscription.of(Category.resourceTypeId(), CategoryCreatedMessage.MESSAGE_TYPE, CategorySlugChangedMessage.MESSAGE_TYPE);
 
         assertThat(categoryMessageSubscription.getResourceTypeId()).isEqualTo(Category.referenceTypeId());
-        assertThat(categoryMessageSubscription.getResourceType()).isEqualTo(Category.class);
-        assertThat(categoryMessageSubscription.getTypeNames())
-                .containsExactly(CategoryCreatedMessage.MESSAGE_TYPE, CategorySlugChangedMessage.MESSAGE_TYPE);
         assertThat(categoryMessageSubscription.getTypes())
-                .containsExactly(CategoryCreatedMessage.class, CategorySlugChangedMessage.class);
+                .containsExactly(CategoryCreatedMessage.MESSAGE_TYPE, CategorySlugChangedMessage.MESSAGE_TYPE);
     }
 
     @Test
     public void ofResourceType() throws Exception {
         final MessageSubscription categoryMessageSubscription =
-                MessageSubscription.of(Category.class);
+                MessageSubscription.of(Category.resourceTypeId());
         assertThat(categoryMessageSubscription.getResourceTypeId()).isEqualTo(Category.referenceTypeId());
-        assertThat(categoryMessageSubscription.getResourceType()).isEqualTo(Category.class);
-        assertThat(categoryMessageSubscription.getTypeNames()).isEmpty();
         assertThat(categoryMessageSubscription.getTypes()).isEmpty();
-    }
-
-    @Test
-    public void addType() throws Exception {
-        final MessageSubscription categoryMessageSubscription =
-                MessageSubscription.of(Category.class, CategoryCreatedMessage.class);
-
-        final MessageSubscription addType = categoryMessageSubscription.addType(CategorySlugChangedMessage.class);
-        assertThat(addType.getResourceTypeId()).isEqualTo(Category.referenceTypeId());
-        assertThat(addType.getResourceType()).isEqualTo(Category.class);
-        assertThat(addType.getTypeNames())
-                .containsExactly(CategoryCreatedMessage.MESSAGE_TYPE, CategorySlugChangedMessage.MESSAGE_TYPE);
-        assertThat(addType.getTypes())
-                .containsExactly(CategoryCreatedMessage.class, CategorySlugChangedMessage.class);
-    }
-
-    @Test
-    public void removeType() throws Exception {
-        final MessageSubscription categoryMessageSubscription =
-                MessageSubscription.of(Category.class, CategoryCreatedMessage.class, CategorySlugChangedMessage.class);
-
-        final MessageSubscription removeType = categoryMessageSubscription.removeType(CategorySlugChangedMessage.class);
-        assertThat(removeType.getResourceTypeId()).isEqualTo(Category.referenceTypeId());
-        assertThat(removeType.getResourceType()).isEqualTo(Category.class);
-        assertThat(removeType.getTypeNames())
-                .containsExactly(CategoryCreatedMessage.MESSAGE_TYPE);
-        assertThat(removeType.getTypes())
-                .containsExactly(CategoryCreatedMessage.class);
     }
 
     @Test
     public void serialize() throws Exception {
         final MessageSubscription categoryMessageSubscription =
-                MessageSubscription.of(Category.class, CategoryCreatedMessage.class);
+                MessageSubscription.of(Category.resourceTypeId(), CategoryCreatedMessage.MESSAGE_TYPE);
         final JsonNode jsonNode = SphereJsonUtils.toJsonNode(categoryMessageSubscription);
 
         assertThat(jsonNode.get("resourceTypeId").asText()).isEqualTo(Category.referenceTypeId());
@@ -79,6 +46,5 @@ public class MessageSubscriptionTest {
     public void deserialize() throws Exception {
         MessageSubscription messageSubscription = SphereJsonUtils.readObject("{\"resourceTypeId\":\"category\"}", MessageSubscription.class);
         assertThat(messageSubscription.getResourceTypeId()).isEqualTo(Category.resourceTypeId());
-        assertThat(messageSubscription.getResourceType()).isEqualTo(Category.class);
     }
 }
