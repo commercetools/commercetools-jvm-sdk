@@ -2,7 +2,6 @@ package io.sphere.sdk.shoppinglists.expansion;
 
 import io.sphere.sdk.expansion.ExpansionModelImpl;
 import io.sphere.sdk.expansion.ExpansionPathContainer;
-import io.sphere.sdk.products.expansion.ProductVariantExpansionModel;
 import io.sphere.sdk.producttypes.expansion.ProductTypeExpansionModel;
 
 import java.util.List;
@@ -13,8 +12,8 @@ final class LineItemExpansionModelImpl<T> extends ExpansionModelImpl<T> implemen
     }
 
     @Override
-    public ProductVariantExpansionModel<T> variant() {
-        return ProductVariantExpansionModel.of(buildPathExpression(), "variant");
+    public ExpansionPathContainer<T> variant() {
+        return expansionPath("variant");
     }
 
     @Override
@@ -24,6 +23,6 @@ final class LineItemExpansionModelImpl<T> extends ExpansionModelImpl<T> implemen
 
     @Override
     public ExpansionPathContainer<T> productSlug() {
-        return new ExpansionModelImpl<T>(buildPathExpression(), "productSlug");
+        return expansionPath("productSlug");
     }
 }

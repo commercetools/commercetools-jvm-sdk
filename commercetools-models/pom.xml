@@ -3,11 +3,11 @@
     <parent>
         <groupId>com.commercetools.sdk.jvm.core</groupId>
         <artifactId>commercetools-jvm-sdk</artifactId>
-        <version>1.14.1-SNAPSHOT</version>
+        <version>1.15.1-SNAPSHOT</version>
     </parent>
     <artifactId>commercetools-models</artifactId>
     <packaging>jar</packaging>
-    <version>1.14.1-SNAPSHOT</version>
+    <version>1.15.1-SNAPSHOT</version>
     <licenses>
         <license>
             <name>Apache License, Version 2.0</name>
@@ -101,9 +101,6 @@
                 <artifactId>revapi-maven-plugin</artifactId>
                 <version>0.8.2</version>
                 <configuration>
-                    <oldArtifacts>
-                        <artifact>${project.groupId}:${project.artifactId}:1.10.0</artifact>
-                    </oldArtifacts>
                     <newArtifacts>
                         <artifact>${project.groupId}:${project.artifactId}:${project.version}</artifact>
                     </newArtifacts>

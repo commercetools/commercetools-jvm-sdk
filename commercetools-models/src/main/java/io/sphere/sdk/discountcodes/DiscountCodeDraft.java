@@ -19,15 +19,8 @@ import java.util.List;
  */
 @JsonDeserialize(as = DiscountCodeDraftDsl.class)
 @ResourceDraftValue(factoryMethods = {@FactoryMethod(parameterNames = {"code", "cartDiscounts"})},
-additionalDslClassContents = {"    public DiscountCodeDraftDsl withCartDiscounts(final Referenceable<io.sphere.sdk.cartdiscounts.CartDiscount> cartDiscount) {\n" +
-        "        return withCartDiscounts(Collections.singletonList(cartDiscount.toReference()));\n" +
-        "    }",
-"    public static DiscountCodeDraftDsl of(final String code, final Referenceable<io.sphere.sdk.cartdiscounts.CartDiscount> cartDiscount) {\n" +
-        "        return of(code, Collections.singletonList(cartDiscount.toReference()));\n" +
-        "    }",
-"    public DiscountCodeDraftDsl withCartPredicate(@Nullable final io.sphere.sdk.cartdiscounts.CartDiscountPredicate cartPredicate) {\n" +
-        "        return newBuilder().cartPredicate(cartPredicate.toSphereCartPredicate()).build();\n" +
-        "    }"}, abstractBuilderClass = true)
+        abstractBuilderClass = true,
+        abstractResourceDraftValueClass = true)
 public interface DiscountCodeDraft {
     @Nullable
     LocalizedString getName();

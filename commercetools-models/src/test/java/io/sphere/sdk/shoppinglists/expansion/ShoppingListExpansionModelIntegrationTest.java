@@ -1,10 +1,10 @@
-package io.sphere.sdk.shoppinglists.queries;
+package io.sphere.sdk.shoppinglists.expansion;
 
 import io.sphere.sdk.expansion.ExpansionPathContainer;
 import io.sphere.sdk.shoppinglists.LineItem;
 import io.sphere.sdk.shoppinglists.ShoppingList;
 import io.sphere.sdk.shoppinglists.ShoppingListDraftDsl;
-import io.sphere.sdk.shoppinglists.expansion.ShoppingListExpansionModel;
+import io.sphere.sdk.shoppinglists.queries.ShoppingListByIdGet;
 import io.sphere.sdk.test.IntegrationTest;
 import org.junit.Test;
 
@@ -37,7 +37,7 @@ public class ShoppingListExpansionModelIntegrationTest extends IntegrationTest {
     }
 
     @Test
-    public void lineItemsProductVariant() {
+    public void lineItemsProductType() {
         withTaxedProduct(client(), product -> {
             final ShoppingListDraftDsl shoppingListDraft = newShoppingListDraftWithLineItems(product);
             withShoppingList(client(), shoppingListDraft, shoppingList -> {
@@ -50,6 +50,25 @@ public class ShoppingListExpansionModelIntegrationTest extends IntegrationTest {
 
                 assertThat(lineItem.getProductType()).isNotNull();
                 assertThat(lineItem.getProductType().getObj()).isNotNull();
+
+                return fetchedShoppingList;
+            });
+        });
+    }
+
+    @Test
+    public void lineItemsVariant() {
+        withTaxedProduct(client(), product -> {
+            final ShoppingListDraftDsl shoppingListDraft = newShoppingListDraftWithLineItems(product);
+            withShoppingList(client(), shoppingListDraft, shoppingList -> {
+                final ExpansionPathContainer<ShoppingList> productVariantExpansion = ShoppingListExpansionModel.of().lineItems().variant();
+                final ShoppingList fetchedShoppingList = client().executeBlocking(ShoppingListByIdGet.of(shoppingList.getId()).
+                        withExpansionPaths(productVariantExpansion));
+
+                assertThat(fetchedShoppingList.getLineItems().size()).isEqualTo(3);
+                final LineItem lineItem = fetchedShoppingList.getLineItems().get(0);
+
+                assertThat(lineItem.getVariant()).isNotNull();
 
                 return fetchedShoppingList;
             });

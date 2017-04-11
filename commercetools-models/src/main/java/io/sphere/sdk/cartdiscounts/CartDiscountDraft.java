@@ -14,7 +14,11 @@ import java.time.ZonedDateTime;
  * @see CartDiscountDraftBuilder
  */
 @JsonDeserialize(as = CartDiscountDraftDsl.class)
-@ResourceDraftValue(factoryMethods = @FactoryMethod(parameterNames = {"name", "cartPredicate", "value", "target", "sortOrder", "requiresDiscountCode"}, useLowercaseBooleans = true), abstractBuilderClass = true)
+@ResourceDraftValue(
+        factoryMethods = @FactoryMethod(parameterNames = {"name", "cartPredicate", "value", "target", "sortOrder", "requiresDiscountCode"},
+        useLowercaseBooleans = true),
+        abstractResourceDraftValueClass = true,
+        abstractBuilderClass = true)
 public interface CartDiscountDraft {
     String getCartPredicate();
 
