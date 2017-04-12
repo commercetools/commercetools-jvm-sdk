@@ -7,7 +7,6 @@ import com.amazonaws.services.sqs.model.Message;
 import com.amazonaws.services.sqs.model.ReceiveMessageResult;
 import com.fasterxml.jackson.core.type.TypeReference;
 import io.sphere.sdk.categories.Category;
-import io.sphere.sdk.categories.messages.CategoryCreatedMessage;
 import io.sphere.sdk.json.SphereJsonUtils;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.subscriptions.commands.SubscriptionCreateCommand;
@@ -48,9 +47,8 @@ public class MessageSubscriptionSqsIntegrationTest extends IntegrationTest {
                 final Message sqsMessage = sqsMessages.get(0);
                 sqsClient.deleteMessage(queueUrl, sqsMessage.getReceiptHandle());
 
-                final MessageSubscriptionPayload<Category, CategoryCreatedMessage> messageSubscriptionPayload =
-                        SphereJsonUtils.readObject(sqsMessage.getBody(), new TypeReference<MessageSubscriptionPayload<Category, CategoryCreatedMessage>>() {
-                        });
+                final MessageSubscriptionPayload<Category> messageSubscriptionPayload =
+                        SphereJsonUtils.readObject(sqsMessage.getBody(), new TypeReference<MessageSubscriptionPayload<Category>>() {});
                 assertThat(messageSubscriptionPayload).isNotNull();
                 final Reference resource = messageSubscriptionPayload.getResource();
                 assertThat(resource).isNotNull();

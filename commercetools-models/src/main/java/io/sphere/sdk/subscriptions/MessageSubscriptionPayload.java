@@ -14,7 +14,7 @@ import io.sphere.sdk.messages.Message;
  */
 @JsonDeserialize(as = MessageSubscriptionPayloadImpl.class)
 @ResourceValue
-public interface MessageSubscriptionPayload<T, M extends Message> extends Payload<T> {
+public interface MessageSubscriptionPayload<T> extends Payload<T> {
     /**
      * The message payload will always contain the common fields:
      * <ul>
@@ -33,5 +33,5 @@ public interface MessageSubscriptionPayload<T, M extends Message> extends Payloa
      */
     @JsonUnwrapped
     @JsonProperty("message")
-    M getMessage();
+    Message getMessage();
 }
