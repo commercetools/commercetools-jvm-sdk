@@ -8,7 +8,6 @@ import io.sphere.sdk.subscriptions.SubscriptionFixtures;
 import io.sphere.sdk.subscriptions.commands.updateactions.SetChanges;
 import io.sphere.sdk.subscriptions.commands.updateactions.SetKey;
 import io.sphere.sdk.subscriptions.commands.updateactions.SetMessages;
-import io.sphere.sdk.subscriptions.queries.SubscriptionQuery;
 import io.sphere.sdk.test.IntegrationTest;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -27,10 +26,7 @@ public class SubscriptionUpdateCommandIntegrationTest extends IntegrationTest {
 
     @BeforeClass
     public static void clean() {
-        List<Subscription> results = client().executeBlocking(SubscriptionQuery.of()
-                .withPredicates(l -> l.key().is(SubscriptionFixtures.IRON_MQ_SUBSCRIPTION_KEY)))
-                .getResults();
-        results.forEach(subscription -> client().executeBlocking(SubscriptionDeleteCommand.of(subscription)));
+        SubscriptionFixtures.deleteSubscription(client(), SubscriptionFixtures.IRON_MQ_SUBSCRIPTION_KEY);
     }
 
     @Test

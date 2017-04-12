@@ -6,9 +6,11 @@ import io.sphere.sdk.client.BlockingSphereClient;
 import io.sphere.sdk.products.Product;
 import io.sphere.sdk.subscriptions.commands.SubscriptionCreateCommand;
 import io.sphere.sdk.subscriptions.commands.SubscriptionDeleteCommand;
+import io.sphere.sdk.subscriptions.queries.SubscriptionQuery;
 
 import java.net.URI;
 import java.util.Collections;
+import java.util.List;
 import java.util.function.Function;
 
 import static org.junit.Assume.assumeNotNull;
@@ -26,7 +28,7 @@ public class SubscriptionFixtures {
      */
     private final static String CTP_IRON_MQ_URI_ENV = "CTP_IRON_MQ_URI";
 
-    private final static String CTP_AWS_REGION = "AWS_REGION";
+    private final static String AWS_REGION = "AWS_REGION";
 
     private final static String CTP_AWS_SQS_QUEUE_URL = "CTP_AWS_SQS_QUEUE_URL";
 
@@ -49,22 +51,18 @@ public class SubscriptionFixtures {
     public static SubscriptionDraftBuilder sqsSubscriptionDraftBuilder(final String queueUrl) {
         assumeTrue(AwsCredentials.hasAwsCliEnv());
         final AwsCredentials awsCredentials = AwsCredentials.ofAwsCliEnv();
-        final String awsRegion = System.getenv(CTP_AWS_REGION) == null ?
-                "us-west-2" :
-                System.getenv(CTP_AWS_REGION);
+        final String awsRegion = System.getenv(AWS_REGION);
         assumeNotNull(awsRegion);
 
         return SubscriptionDraftBuilder.of(SqsDestination.of(awsCredentials, awsRegion, URI.create(queueUrl)))
                 .key(AWS_SQS_SUBSCRIPTION_KEY);
     }
 
-    public static SubscriptionDraftBuilder snsSubscriptionDraftBuilder() {
+    public static SubscriptionDraftBuilder snsSubscriptionDraftBuilder(final String topicArn) {
         assumeTrue(AwsCredentials.hasAwsCliEnv());
         final AwsCredentials awsCredentials = AwsCredentials.ofAwsCliEnv();
-        final String snsTopicArn = System.getenv(CTP_AWS_SNS_TOPIC_ARN);
-        assumeNotNull(snsTopicArn);
 
-        return SubscriptionDraftBuilder.of(SnsDestination.of(awsCredentials, snsTopicArn))
+        return SubscriptionDraftBuilder.of(SnsDestination.of(awsCredentials, topicArn))
                 .key(AWS_SQS_SUBSCRIPTION_KEY);
     }
 
@@ -90,5 +88,12 @@ public class SubscriptionFixtures {
     public static Subscription createSubscription(final BlockingSphereClient client, final SubscriptionDraftBuilder builder) {
         final SubscriptionDraftDsl subscriptionDraftDsl = builder.build();
         return client.executeBlocking(SubscriptionCreateCommand.of(subscriptionDraftDsl));
+    }
+
+    public static void deleteSubscription(final BlockingSphereClient client, final String subscriptionKey) {
+        List<Subscription> results = client.executeBlocking(SubscriptionQuery.of()
+                .withPredicates(l -> l.key().is(subscriptionKey)))
+                .getResults();
+        results.forEach(subscription -> client.executeBlocking(SubscriptionDeleteCommand.of(subscription)));
     }
 }

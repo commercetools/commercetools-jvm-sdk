@@ -7,8 +7,6 @@ import io.sphere.sdk.test.IntegrationTest;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import java.util.List;
-
 import static io.sphere.sdk.subscriptions.SubscriptionFixtures.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -19,10 +17,7 @@ public class SubscriptionDeleteCommandIntegrationTest extends IntegrationTest {
 
     @BeforeClass
     public static void clean() {
-        List<Subscription> results = client().executeBlocking(SubscriptionQuery.of()
-                .withPredicates(l -> l.key().is(SubscriptionFixtures.IRON_MQ_SUBSCRIPTION_KEY)))
-                .getResults();
-        results.forEach(subscription -> client().executeBlocking(SubscriptionDeleteCommand.of(subscription)));
+        SubscriptionFixtures.deleteSubscription(client(), SubscriptionFixtures.IRON_MQ_SUBSCRIPTION_KEY);
     }
 
     @Test

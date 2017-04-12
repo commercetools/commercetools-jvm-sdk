@@ -1,15 +1,13 @@
 package io.sphere.sdk.subscriptions.commands;
 
-import io.sphere.sdk.subscriptions.Subscription;
-import io.sphere.sdk.subscriptions.SubscriptionDraftDsl;
-import io.sphere.sdk.subscriptions.SubscriptionFixtures;
-import io.sphere.sdk.subscriptions.queries.SubscriptionQuery;
+import com.amazonaws.services.sns.AmazonSNS;
+import com.amazonaws.services.sns.AmazonSNSClientBuilder;
+import com.amazonaws.services.sqs.AmazonSQS;
+import com.amazonaws.services.sqs.AmazonSQSClientBuilder;
+import io.sphere.sdk.subscriptions.*;
 import io.sphere.sdk.test.IntegrationTest;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
-
-import java.util.Arrays;
-import java.util.List;
 
 import static io.sphere.sdk.subscriptions.SubscriptionFixtures.*;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -19,12 +17,10 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 public class SubscriptionCreateCommandIntegrationTest extends IntegrationTest {
 
-    @Before
-    public void clean() {
-        List<Subscription> results = client().executeBlocking(SubscriptionQuery.of()
-                .withPredicates(l -> l.key().isIn(Arrays.asList(SubscriptionFixtures.IRON_MQ_SUBSCRIPTION_KEY, SubscriptionFixtures.AWS_SQS_SUBSCRIPTION_KEY))))
-                .getResults();
-        results.forEach(subscription -> client().executeBlocking(SubscriptionDeleteCommand.of(subscription)));
+    @BeforeClass
+    public static void setup() {
+        SubscriptionFixtures.deleteSubscription(client(), SubscriptionFixtures.IRON_MQ_SUBSCRIPTION_KEY);
+        SubscriptionFixtures.deleteSubscription(client(), SubscriptionFixtures.AWS_SQS_SUBSCRIPTION_KEY);
     }
 
     @Test
@@ -53,25 +49,39 @@ public class SubscriptionCreateCommandIntegrationTest extends IntegrationTest {
 
     @Test
     public void createSqsChangesSubscription() throws Exception {
-        final SubscriptionDraftDsl subscriptionDraft = withCategoryChanges(sqsSubscriptionDraftBuilder()).build();
+        final AmazonSQS sqsClient = AmazonSQSClientBuilder.defaultClient();
+        final String queueUrl = SqsUtils.createTestQueue(sqsClient);
 
-        final SubscriptionCreateCommand createCommand = SubscriptionCreateCommand.of(subscriptionDraft);
-        final Subscription subscription = client().executeBlocking(createCommand);
+        try {
+            final SubscriptionDraftDsl subscriptionDraft = withCategoryChanges(sqsSubscriptionDraftBuilder(queueUrl)).build();
 
-        assertThat(subscription).isNotNull();
-        assertThat(subscription.getDestination()).isEqualTo(subscriptionDraft.getDestination());
-        assertThat(subscription.getChanges()).isEqualTo(subscriptionDraft.getChanges());
+            final SubscriptionCreateCommand createCommand = SubscriptionCreateCommand.of(subscriptionDraft);
+            final Subscription subscription = client().executeBlocking(createCommand);
+
+            assertThat(subscription).isNotNull();
+            assertThat(subscription.getDestination()).isEqualTo(subscriptionDraft.getDestination());
+            assertThat(subscription.getChanges()).isEqualTo(subscriptionDraft.getChanges());
+        } finally {
+            // snsClient is unfortunately not a AutoCloseable, so we have to release it manually
+            SqsUtils.deleteQueueAndShutdown(queueUrl, sqsClient);
+        }
     }
 
     @Test
     public void createSnsChangesSubscription() throws Exception {
-        final SubscriptionDraftDsl subscriptionDraft = withCategoryChanges(snsSubscriptionDraftBuilder()).build();
+        final AmazonSNS snsClient = AmazonSNSClientBuilder.defaultClient();
+        final String topicArn = SnsUtils.createTestTopic(snsClient);
+        try {
+            final SubscriptionDraftDsl subscriptionDraft = withCategoryChanges(snsSubscriptionDraftBuilder(topicArn)).build();
 
-        final SubscriptionCreateCommand createCommand = SubscriptionCreateCommand.of(subscriptionDraft);
-        final Subscription subscription = client().executeBlocking(createCommand);
+            final SubscriptionCreateCommand createCommand = SubscriptionCreateCommand.of(subscriptionDraft);
+            final Subscription subscription = client().executeBlocking(createCommand);
 
-        assertThat(subscription).isNotNull();
-        assertThat(subscription.getDestination()).isEqualTo(subscriptionDraft.getDestination());
-        assertThat(subscription.getChanges()).isEqualTo(subscriptionDraft.getChanges());
+            assertThat(subscription).isNotNull();
+            assertThat(subscription.getDestination()).isEqualTo(subscriptionDraft.getDestination());
+            assertThat(subscription.getChanges()).isEqualTo(subscriptionDraft.getChanges());
+        } finally {
+            SnsUtils.deleteTopicAndShutdown(topicArn, snsClient);
+        }
     }
 }
