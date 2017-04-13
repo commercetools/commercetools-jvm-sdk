@@ -123,12 +123,12 @@ public class DraftBuilderGenerator extends AbstractBuilderGenerator<ResourceDraf
                         final ClassName concreteBuilderType = typeUtils.getConcreteBuilderType(typeArgument);
                         copyMethodBuilder
                                 .addParameter(ClassName.get(templatePropertyMethodByName.get(needsCopyMethod.getSimpleName()).getReturnType()), "templates", Modifier.FINAL)
-                                .addCode("return templates.stream().map(template -> $T.of(template).build()).collect($T.toList());\n", concreteBuilderType, Collectors.class);
+                                .addCode("return templates == null ? null : templates.stream().map(template -> $T.of(template).build()).collect($T.toList());\n", concreteBuilderType, Collectors.class);
                     } else {
                         final ClassName concreteBuilderType = typeUtils.getConcreteBuilderType(needsCopyMethod.getReturnType());
                         copyMethodBuilder
                                 .addParameter(ClassName.get(templatePropertyMethodByName.get(needsCopyMethod.getSimpleName()).getReturnType()), "template", Modifier.FINAL)
-                                .addCode("return $T.of(template).build();\n", concreteBuilderType);
+                                .addCode("return template == null ? null : $T.of(template).build();\n", concreteBuilderType);
                     }
 
 
