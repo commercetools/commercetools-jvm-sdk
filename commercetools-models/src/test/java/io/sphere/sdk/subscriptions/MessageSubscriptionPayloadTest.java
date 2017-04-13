@@ -1,6 +1,5 @@
 package io.sphere.sdk.subscriptions;
 
-import com.fasterxml.jackson.core.type.TypeReference;
 import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.categories.messages.CategoryCreatedMessage;
 import io.sphere.sdk.json.SphereJsonUtils;
@@ -8,6 +7,7 @@ import io.sphere.sdk.messages.Message;
 import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 /**
  * Unit tests for {@link MessageSubscriptionPayload}.
@@ -16,11 +16,8 @@ public class MessageSubscriptionPayloadTest {
 
     @Test
     public void deserialize() throws Exception {
-        final TypeReference<MessageSubscriptionPayload<Category>> typeReference =
-                new TypeReference<MessageSubscriptionPayload<Category>>() {};
-
         final MessageSubscriptionPayload<Category> messageSubscriptionPayload =
-                SphereJsonUtils.readObjectFromResource("MessageSubscriptionPayload.json", typeReference);
+                SphereJsonUtils.readObjectFromResource("MessageSubscriptionPayload.json", MessageSubscriptionPayload.class);
 
         assertThat(messageSubscriptionPayload).isNotNull();
 
@@ -33,5 +30,20 @@ public class MessageSubscriptionPayloadTest {
         final Category category = categoryCreatedMessage.getCategory();
         assertThat(category).isNotNull();
         assertThat(category.getId()).isEqualTo("test-category-id");
+    }
+
+    @Test
+    public void deserializeIncompleteMessage() throws Exception {
+        final MessageSubscriptionPayload<Category> messageSubscriptionPayload =
+                SphereJsonUtils.readObjectFromResource("MessageSubscriptionIncompletePayload.json", MessageSubscriptionPayload.class);
+
+        assertThat(messageSubscriptionPayload).isNotNull();
+        assertThat(messageSubscriptionPayload.hasCompleteMessage()).isFalse();
+        final Message message = messageSubscriptionPayload.getMessage();
+        assertThat(message)
+                .describedAs("Partial message is available").isNotNull();
+        assertThat(message.getType()).isNull();
+
+        assertThatThrownBy(() -> messageSubscriptionPayload.as(CategoryCreatedMessage.class)).isInstanceOf(IllegalStateException.class);
     }
 }

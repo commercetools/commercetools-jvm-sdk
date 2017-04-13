@@ -11,7 +11,6 @@ import org.junit.Test;
 import java.util.List;
 
 import static io.sphere.sdk.categories.CategoryFixtures.withCategory;
-import static io.sphere.sdk.subscriptions.SubscriptionFixtures.assumeHasAwsCliEnv;
 import static io.sphere.sdk.test.SphereTestUtils.assertEventually;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -22,8 +21,6 @@ public class MessageSubscriptionSqsIntegrationTest extends SqsIntegrationTest {
 
     @Test
     public void categoryCreated() throws Exception {
-        assumeHasAwsCliEnv();
-
         withCategory(client(), category -> {
             assertEventually(() -> {
                 final ReceiveMessageResult result = sqsClient.receiveMessage(queueUrl);
@@ -41,7 +38,7 @@ public class MessageSubscriptionSqsIntegrationTest extends SqsIntegrationTest {
                 assertThat(resource).isNotNull();
                 assertThat(resource.getTypeId()).isEqualTo(Category.referenceTypeId());
 
-                assertThat(messageSubscriptionPayload.isCompleteMessage()).isTrue();
+                assertThat(messageSubscriptionPayload.hasCompleteMessage()).isTrue();
                 assertThat(messageSubscriptionPayload.as(CategoryCreatedMessage.class)).isNotNull();
 
                 sqsClient.deleteMessage(queueUrl, sqsMessage.getReceiptHandle());

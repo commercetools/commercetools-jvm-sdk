@@ -28,6 +28,8 @@ public abstract class SqsIntegrationTest extends IntegrationTest {
 
     @BeforeClass
     public static void setup() throws Exception {
+        assumeHasAwsCliEnv();
+
         deleteSubscription(client(), SubscriptionFixtures.AWS_SQS_SUBSCRIPTION_KEY);
 
         sqsClient = AmazonSQSClientBuilder.defaultClient();

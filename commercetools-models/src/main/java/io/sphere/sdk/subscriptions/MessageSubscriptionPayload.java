@@ -29,7 +29,7 @@ public interface MessageSubscriptionPayload<T> extends Payload<T> {
      * all additional fields for the specific message are included as well (along with the {@link Message#getType()} property).
      * If the payload did not fit, it can be retrieved from the Messages endpoint if messages are enabled.
      * <p>
-     * You can check if this payloads contains a complete message with {@link #isCompleteMessage()}.
+     * You can check if this payloads contains a complete message with {@link #hasCompleteMessage()}.
      * In this case you can use {@link #as(Class)} to retrieve the typed message.
      *
      * @return the message payload
@@ -45,7 +45,7 @@ public interface MessageSubscriptionPayload<T> extends Payload<T> {
      * @see #getMessage()
      */
     @JsonIgnore
-    default boolean isCompleteMessage() {
+    default boolean hasCompleteMessage() {
         return getMessage().getType() != null;
     }
 
@@ -56,11 +56,11 @@ public interface MessageSubscriptionPayload<T> extends Payload<T> {
      * @param <M>          the message type
      *
      * @return the typed message
-     * @throws IllegalStateException if this payload contains an incomplete message {@link #isCompleteMessage()}
+     * @throws IllegalStateException if this payload contains an incomplete message {@link #hasCompleteMessage()}
      */
     @JsonIgnore
     default <M extends Message> M as(final Class<M> messageClass) {
-        if (!isCompleteMessage()) {
+        if (!hasCompleteMessage()) {
             throw new IllegalStateException("Can't retrieve typed message for an incomplete message");
         }
         return getMessage().as(messageClass);
