@@ -3,9 +3,11 @@ package io.sphere.sdk.shippingmethods.queries;
 import io.sphere.sdk.carts.Cart;
 import io.sphere.sdk.carts.commands.CartUpdateCommand;
 import io.sphere.sdk.carts.commands.updateactions.SetShippingAddress;
+import io.sphere.sdk.client.SphereRequest;
 import io.sphere.sdk.shippingmethods.ShippingMethod;
 import io.sphere.sdk.shippingmethods.ShippingRate;
 import io.sphere.sdk.test.IntegrationTest;
+import io.sphere.sdk.test.utils.VrapRequestDecorator;
 import org.assertj.core.api.Condition;
 import org.junit.Test;
 
@@ -25,8 +27,11 @@ public class ShippingMethodsByCartGetIntegrationTest extends IntegrationTest {
             withCart(client(), cart -> {
                 final Cart cartWithShippingAddress = client().executeBlocking(CartUpdateCommand.of(cart, SetShippingAddress.of(GERMAN_ADDRESS)));
 
+                final SphereRequest<List<ShippingMethod>> sphereRequest =
+                        new VrapRequestDecorator<>(ShippingMethodsByCartGet.of(cartWithShippingAddress), "response");
+
                 final List<ShippingMethod> shippingMethods =
-                        client().executeBlocking(ShippingMethodsByCartGet.of(cartWithShippingAddress));
+                        client().executeBlocking(sphereRequest);
                 assertThat(shippingMethods).isNotEmpty();
 
                 for (final ShippingMethod cartShippingMethod : shippingMethods) {
