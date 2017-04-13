@@ -26,13 +26,15 @@ public class SqsUtils {
     }
 
     /**
-     * Deletes the queue and shutdown the given sqs client.
+     * Deletes the queue and shutdown the given sqs client if they are not null.
      *
      * @param queueUrl  the url of the queue to delete
      * @param sqsClient the sqs client
      */
     public static void deleteQueueAndShutdown(final String queueUrl, final AmazonSQS sqsClient) {
-        sqsClient.deleteQueue(queueUrl);
-        sqsClient.shutdown();
+        if (queueUrl != null && sqsClient != null) {
+            sqsClient.deleteQueue(queueUrl);
+            sqsClient.shutdown();
+        }
     }
 }

@@ -44,7 +44,9 @@ public class MessageSubscriptionTest {
 
     @Test
     public void deserialize() throws Exception {
-        MessageSubscription messageSubscription = SphereJsonUtils.readObject("{\"resourceTypeId\":\"category\"}", MessageSubscription.class);
+        final MessageSubscription messageSubscription =
+                SphereJsonUtils.readObject("{\"resourceTypeId\":\"category\"}", MessageSubscription.class);
+
         assertThat(messageSubscription.getResourceTypeId()).isEqualTo(Category.resourceTypeId());
     }
 }

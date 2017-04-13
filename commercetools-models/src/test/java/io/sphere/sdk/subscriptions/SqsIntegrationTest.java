@@ -9,8 +9,8 @@ import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.subscriptions.commands.SubscriptionCreateCommand;
 import io.sphere.sdk.subscriptions.commands.SubscriptionDeleteCommand;
 import io.sphere.sdk.test.IntegrationTest;
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
+import org.junit.After;
+import org.junit.Before;
 
 import java.util.List;
 
@@ -26,11 +26,11 @@ public abstract class SqsIntegrationTest extends IntegrationTest {
     protected static String queueUrl;
     protected static Subscription subscription;
 
-    @BeforeClass
-    public static void setup() throws Exception {
-        assumeHasAwsCliEnv();
-
+    @Before
+    public void setup() throws Exception {
         deleteSubscription(client(), SubscriptionFixtures.AWS_SQS_SUBSCRIPTION_KEY);
+
+        assumeHasAwsCliEnv();
 
         sqsClient = AmazonSQSClientBuilder.defaultClient();
         queueUrl = SqsUtils.createTestQueue(sqsClient);
@@ -45,8 +45,8 @@ public abstract class SqsIntegrationTest extends IntegrationTest {
         waitForSubscriptionTestMessage();
     }
 
-    @AfterClass
-    public static void clean() throws Exception {
+    @After
+    public void clean() throws Exception {
          final SubscriptionDeleteCommand deleteCommand = SubscriptionDeleteCommand.of(subscription);
 
         client().executeBlocking(deleteCommand);

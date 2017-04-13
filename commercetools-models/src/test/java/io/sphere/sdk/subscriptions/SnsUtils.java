@@ -16,7 +16,7 @@ public class SnsUtils {
      * Creates a new sns test topic.
      *
      * @param snsClient the sqs client
-     * @return the url of the created sqs queue
+     * @return the arn of the created sns topic
      */
     public static String createTestTopic(final AmazonSNS snsClient) {
         final String queueName = "jvm-sdk-test-topic-" + randomInt();
@@ -26,13 +26,15 @@ public class SnsUtils {
     }
 
     /**
-     * Deletes the topic and shutdown the given sns client.
+     * Deletes the given topic and shuts down the given sns client if they are not null.
      *
-     * @param topicArn  the url of the queue to delete
-     * @param snsClient the sqs client
+     * @param topicArn  the arn of the topic to delete
+     * @param snsClient the sns client
      */
     public static void deleteTopicAndShutdown(final String topicArn, final AmazonSNS snsClient) {
-        snsClient.deleteTopic(topicArn);
-        snsClient.shutdown();
+        if (topicArn != null && snsClient != null) {
+            snsClient.deleteTopic(topicArn);
+            snsClient.shutdown();
+        }
     }
 }

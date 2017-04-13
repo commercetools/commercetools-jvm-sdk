@@ -42,6 +42,7 @@ public class SubscriptionFixtures {
     /**
      * Checks if the environment variables required for IronMQ tests are set.
      *
+     * @see #CTP_IRON_MQ_URI_ENV
      * @see Assume#assumeTrue(boolean)
      */
     public static void assumeHasIronMqEnv() {
