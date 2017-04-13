@@ -27,29 +27,31 @@ public abstract class SqsIntegrationTest extends IntegrationTest {
     protected static Subscription subscription;
 
     @Before
-    public void setup() throws Exception {
+    public void setup() {
         deleteSubscription(client(), SubscriptionFixtures.AWS_SQS_SUBSCRIPTION_KEY);
 
-        assumeHasAwsCliEnv();
+        if (AwsCredentials.hasAwsCliEnv()) {
+            sqsClient = AmazonSQSClientBuilder.defaultClient();
+            queueUrl = SqsUtils.createTestQueue(sqsClient);
 
-        sqsClient = AmazonSQSClientBuilder.defaultClient();
-        queueUrl = SqsUtils.createTestQueue(sqsClient);
+            final SubscriptionDraftDsl subscriptionDraft = withCategoryCreatedMessage(sqsSubscriptionDraftBuilder(queueUrl)).build();
 
-        final SubscriptionDraftDsl subscriptionDraft = withCategoryCreatedMessage(sqsSubscriptionDraftBuilder(queueUrl)).build();
+            final SubscriptionCreateCommand createCommand = SubscriptionCreateCommand.of(subscriptionDraft);
+            subscription = client().executeBlocking(createCommand);
 
-        final SubscriptionCreateCommand createCommand = SubscriptionCreateCommand.of(subscriptionDraft);
-        subscription = client().executeBlocking(createCommand);
+            assertThat(subscription).isNotNull();
 
-        assertThat(subscription).isNotNull();
-
-        waitForSubscriptionTestMessage();
+            waitForSubscriptionTestMessage();
+        }
     }
 
     @After
-    public void clean() throws Exception {
-         final SubscriptionDeleteCommand deleteCommand = SubscriptionDeleteCommand.of(subscription);
+    public void clean() {
+        if (subscription != null) {
+            final SubscriptionDeleteCommand deleteCommand = SubscriptionDeleteCommand.of(subscription);
 
-        client().executeBlocking(deleteCommand);
+            client().executeBlocking(deleteCommand);
+        }
 
         SqsUtils.deleteQueueAndShutdown(queueUrl, sqsClient);
     }
