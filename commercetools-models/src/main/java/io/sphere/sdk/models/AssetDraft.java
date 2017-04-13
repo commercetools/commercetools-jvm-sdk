@@ -17,7 +17,7 @@ import java.util.Set;
  * @see AssetDraftBuilder
  */
 @JsonDeserialize(as = AssetDraftDsl.class)
-@ResourceDraftValue(abstractBuilderClass = true, copyFactoryMethods = @CopyFactoryMethod(templateClass = Asset.class), factoryMethods = @FactoryMethod(parameterNames = { "sources", "name"}))
+@ResourceDraftValue(abstractBuilderClass = true, copyFactoryMethods = @CopyFactoryMethod(Asset.class), factoryMethods = @FactoryMethod(parameterNames = { "sources", "name"}))
 public interface AssetDraft extends CustomDraft {
     List<AssetSource> getSources();
 
