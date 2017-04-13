@@ -10,6 +10,7 @@ import org.junit.Test;
 import java.util.List;
 
 import static io.sphere.sdk.products.ProductFixtures.withProduct;
+import static io.sphere.sdk.subscriptions.SubscriptionFixtures.assumeHasAwsCliEnv;
 import static io.sphere.sdk.test.SphereTestUtils.assertEventually;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -20,6 +21,8 @@ public class ChangeSubscriptionSqsIntegrationTest extends SqsIntegrationTest {
 
     @Test
     public void productCreated() throws Exception {
+        assumeHasAwsCliEnv();
+
         withProduct(client(), product -> {
             assertEventually(() -> {
                 final ReceiveMessageResult result = sqsClient.receiveMessage(queueUrl);

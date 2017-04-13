@@ -22,6 +22,8 @@ public class SubscriptionDeleteCommandIntegrationTest extends IntegrationTest {
 
     @Test
     public void deleteByIdIronMq() throws Exception {
+        assumeHasIronMqEnv();
+
         final Subscription subscription = createSubscription(client(), withCategoryChanges(ironMqSubscriptionDraftBuilder()));
 
         final SubscriptionDeleteCommand subscriptionDeleteCommand = SubscriptionDeleteCommand.ofKey(subscription.getKey(), subscription.getVersion());
@@ -34,6 +36,8 @@ public class SubscriptionDeleteCommandIntegrationTest extends IntegrationTest {
 
     @Test
     public void deleteByKeyIronMq() throws Exception {
+        assumeHasIronMqEnv();
+
         final Subscription subscription = createSubscription(client(), withCategoryChanges(ironMqSubscriptionDraftBuilder()));
 
         final SubscriptionDeleteCommand subscriptionDeleteCommand = SubscriptionDeleteCommand.of(subscription);

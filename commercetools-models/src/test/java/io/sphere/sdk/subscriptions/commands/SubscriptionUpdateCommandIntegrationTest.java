@@ -31,6 +31,8 @@ public class SubscriptionUpdateCommandIntegrationTest extends IntegrationTest {
 
     @Test
     public void setKeyIronMq() {
+        assumeHasIronMqEnv();
+
         withSubscription(client(), withCategoryChanges(ironMqSubscriptionDraftBuilder()), subscription -> {
             final String newKey = randomKey();
             final SubscriptionUpdateCommand setKeyCommand = SubscriptionUpdateCommand.of(subscription, SetKey.of(newKey));
@@ -44,6 +46,8 @@ public class SubscriptionUpdateCommandIntegrationTest extends IntegrationTest {
 
     @Test
     public void setChangesIronMq() {
+        assumeHasIronMqEnv();
+
         withSubscription(client(), withCategoryChanges(ironMqSubscriptionDraftBuilder()), subscription -> {
             final List<ChangeSubscription> newChanges = Collections.singletonList(ChangeSubscription.of(Payment.resourceTypeId()));
 
@@ -58,6 +62,8 @@ public class SubscriptionUpdateCommandIntegrationTest extends IntegrationTest {
 
     @Test
     public void setMessagesIronMq() {
+        assumeHasIronMqEnv();
+
         withSubscription(client(), withCategoryCreatedMessage(ironMqSubscriptionDraftBuilder()), subscription -> {
             final List<MessageSubscription> newMessages = Collections.singletonList(MessageSubscription.of(Payment.resourceTypeId()));
 

@@ -7,6 +7,7 @@ import io.sphere.sdk.products.Product;
 import io.sphere.sdk.subscriptions.commands.SubscriptionCreateCommand;
 import io.sphere.sdk.subscriptions.commands.SubscriptionDeleteCommand;
 import io.sphere.sdk.subscriptions.queries.SubscriptionQuery;
+import org.junit.Assume;
 
 import java.net.URI;
 import java.util.Collections;
@@ -30,26 +31,38 @@ public class SubscriptionFixtures {
 
     private final static String AWS_REGION = "AWS_REGION";
 
-    private final static String CTP_AWS_SQS_QUEUE_URL = "CTP_AWS_SQS_QUEUE_URL";
-
-    private final static String CTP_AWS_SNS_TOPIC_ARN = "CTP_AWS_SNS_TOPIC_ARN";
-
     public static SubscriptionDraftBuilder ironMqSubscriptionDraftBuilder() {
-        final String ironMqUriEnv = System.getenv(CTP_IRON_MQ_URI_ENV);
-        assumeNotNull(ironMqUriEnv);
+        final String ironMqUriFromEnv = ironMqUriFromEnv();
 
-        final URI ironMqUri = URI.create(ironMqUriEnv);
+        final URI ironMqUri = URI.create(ironMqUriFromEnv);
         return SubscriptionDraftBuilder.of(IronMqDestination.of(ironMqUri))
                 .key(IRON_MQ_SUBSCRIPTION_KEY);
     }
 
-    public static SubscriptionDraftBuilder sqsSubscriptionDraftBuilder() {
-        final String queueUrl = System.getenv(CTP_AWS_SQS_QUEUE_URL);
-        return sqsSubscriptionDraftBuilder(queueUrl);
+    /**
+     * Checks if the environment variables required for IronMQ tests are set.
+     *
+     * @see Assume#assumeTrue(boolean)
+     */
+    public static void assumeHasIronMqEnv() {
+        final String ironMqUri = ironMqUriFromEnv();
+
+        assumeNotNull(ironMqUri);
+    }
+
+    /**
+     * Returns the iron mq uri to run tests against.
+     *
+     * @see #CTP_IRON_MQ_URI_ENV
+     *
+     * @return the IronMQ uri or null
+     */
+    public static String ironMqUriFromEnv() {
+        final String ironMqUriEnv = System.getenv(CTP_IRON_MQ_URI_ENV);
+        return ironMqUriEnv;
     }
 
     public static SubscriptionDraftBuilder sqsSubscriptionDraftBuilder(final String queueUrl) {
-        assumeTrue(AwsCredentials.hasAwsCliEnv());
         final AwsCredentials awsCredentials = AwsCredentials.ofAwsCliEnv();
         final String awsRegion = System.getenv(AWS_REGION);
         assumeNotNull(awsRegion);
@@ -58,8 +71,17 @@ public class SubscriptionFixtures {
                 .key(AWS_SQS_SUBSCRIPTION_KEY);
     }
 
-    public static SubscriptionDraftBuilder snsSubscriptionDraftBuilder(final String topicArn) {
+    /**
+     * Checks if the environment variable required for AWS tests are set.
+     *
+     * @see Assume#assumeTrue(boolean)
+     * @see AwsCredentials#hasAwsCliEnv()
+     */
+    public static void assumeHasAwsCliEnv() {
         assumeTrue(AwsCredentials.hasAwsCliEnv());
+    }
+
+    public static SubscriptionDraftBuilder snsSubscriptionDraftBuilder(final String topicArn) {
         final AwsCredentials awsCredentials = AwsCredentials.ofAwsCliEnv();
 
         return SubscriptionDraftBuilder.of(SnsDestination.of(awsCredentials, topicArn))

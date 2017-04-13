@@ -25,6 +25,8 @@ public class SubscriptionCreateCommandIntegrationTest extends IntegrationTest {
 
     @Test
     public void createIronMqChangesSubscription() throws Exception {
+        assumeHasIronMqEnv();
+
         final SubscriptionDraftDsl subscriptionDraft = withCategoryChanges(ironMqSubscriptionDraftBuilder()).build();
 
         final SubscriptionCreateCommand createCommand = SubscriptionCreateCommand.of(subscriptionDraft);
@@ -37,6 +39,8 @@ public class SubscriptionCreateCommandIntegrationTest extends IntegrationTest {
 
     @Test
     public void createIronMqMessagesSubscription() throws Exception {
+        assumeHasIronMqEnv();
+
         final SubscriptionDraftDsl subscriptionDraft = withCategoryCreatedMessage(ironMqSubscriptionDraftBuilder()).build();
 
         final SubscriptionCreateCommand createCommand = SubscriptionCreateCommand.of(subscriptionDraft);
@@ -49,6 +53,8 @@ public class SubscriptionCreateCommandIntegrationTest extends IntegrationTest {
 
     @Test
     public void createSqsChangesSubscription() throws Exception {
+        assumeHasAwsCliEnv();
+
         final AmazonSQS sqsClient = AmazonSQSClientBuilder.defaultClient();
         final String queueUrl = SqsUtils.createTestQueue(sqsClient);
 
@@ -62,13 +68,14 @@ public class SubscriptionCreateCommandIntegrationTest extends IntegrationTest {
             assertThat(subscription.getDestination()).isEqualTo(subscriptionDraft.getDestination());
             assertThat(subscription.getChanges()).isEqualTo(subscriptionDraft.getChanges());
         } finally {
-            // snsClient is unfortunately not a AutoCloseable, so we have to release it manually
             SqsUtils.deleteQueueAndShutdown(queueUrl, sqsClient);
         }
     }
 
     @Test
     public void createSnsChangesSubscription() throws Exception {
+        assumeHasAwsCliEnv();
+
         final AmazonSNS snsClient = AmazonSNSClientBuilder.defaultClient();
         final String topicArn = SnsUtils.createTestTopic(snsClient);
         try {
