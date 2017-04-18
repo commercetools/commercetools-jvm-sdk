@@ -5,6 +5,7 @@ import io.sphere.sdk.annotations.ResourceDraftValue;
 import io.sphere.sdk.annotations.processors.models.PropertyGenModel;
 import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.Builder;
+import org.apache.commons.lang3.StringUtils;
 
 import javax.annotation.Generated;
 import javax.lang.model.element.*;
@@ -112,7 +113,7 @@ public class DraftBuilderGenerator extends AbstractBuilderGenerator<ResourceDraf
 
                 final TypeElement listTypeElement = elements.getTypeElement("java.util.List");
                 for (final ExecutableElement needsCopyMethod : needsCopyMethods) {
-                    MethodSpec.Builder copyMethodBuilder = MethodSpec.methodBuilder("copy");
+                    MethodSpec.Builder copyMethodBuilder = MethodSpec.methodBuilder(getCopyMethodName(PropertyGenModel.of(needsCopyMethod)));
                     copyMethodBuilder
                             .addModifiers(Modifier.PRIVATE, Modifier.STATIC)
                             .returns(ClassName.get(needsCopyMethod.getReturnType()));
@@ -170,7 +171,12 @@ public class DraftBuilderGenerator extends AbstractBuilderGenerator<ResourceDraf
         final Name simpleName = propertyMethod.getSimpleName();
         return isAssignable(templatePropertyMethod, propertyMethod) ?
                 String.format("template.%s()", simpleName) :
-                String.format("copy(template.%s())", simpleName);
+                String.format("%s(template.%s())", getCopyMethodName(PropertyGenModel.of(templatePropertyMethod)), simpleName);
+    }
+
+    private String getCopyMethodName(final PropertyGenModel executableElement) {
+        final String copyMethodSuffix = StringUtils.capitalize(executableElement.getJavaIdentifier());
+        return String.format("copy%s", copyMethodSuffix);
     }
 
     private boolean isAssignable(final ExecutableElement executableElement1, final ExecutableElement executableElement2) {

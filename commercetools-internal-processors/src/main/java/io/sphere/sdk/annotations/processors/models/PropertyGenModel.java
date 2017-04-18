@@ -90,6 +90,15 @@ public class PropertyGenModel {
         }
     }
 
+    public TypeName getTypeArgument(final int index) {
+        if (type.getKind() == TypeKind.DECLARED) {
+            final DeclaredType declaredType = (DeclaredType) this.type;
+
+            return TypeName.get(declaredType.getTypeArguments().get(index));
+        }
+        return null;
+    }
+
     /**
      * Replaces the parameterized type of this type with the given replacement type.
      *

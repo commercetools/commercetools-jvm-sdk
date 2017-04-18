@@ -39,6 +39,11 @@ public class TypeUtils {
         return element.getSimpleName().toString();
     }
 
+    public String getSimpleName(final TypeMirror typeMirror) {
+        final TypeElement typeElement = (TypeElement) types.asElement(typeMirror);
+        return getSimpleName(typeElement);
+    }
+
     public ClassName getHasBuilderImplType(final TypeElement typeElement) {
         final ClassName draftType = ClassName.get(typeElement);
         final HasBuilder hasBuilder = typeElement.getAnnotation(HasBuilder.class);
@@ -80,7 +85,11 @@ public class TypeUtils {
 
     public ClassName getConcreteBuilderType(final TypeElement typeElement) {
         final ClassName type = ClassName.get(typeElement);
-        return ClassName.get(type.packageName(), type.simpleName() + "Builder");
+        return getConcreteBuilderType(type);
+    }
+
+    public ClassName getConcreteBuilderType(final TypeName type) {
+        return ClassName.bestGuess(type.toString() + "Builder");
     }
 
     public ClassName getBuilderType(final TypeElement typeElement) {

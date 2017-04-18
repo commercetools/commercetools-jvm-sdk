@@ -1,6 +1,7 @@
 package io.sphere.sdk.inventory;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import io.sphere.sdk.annotations.CopyFactoryMethod;
 import io.sphere.sdk.annotations.FactoryMethod;
 import io.sphere.sdk.annotations.ResourceDraftValue;
 import io.sphere.sdk.channels.Channel;
@@ -14,10 +15,13 @@ import java.time.ZonedDateTime;
 import java.util.Optional;
 
 @JsonDeserialize(as = InventoryEntryDraftDsl.class)
-@ResourceDraftValue(factoryMethods = {
-        @FactoryMethod(parameterNames = {"sku", "quantityOnStock"}),
-        @FactoryMethod(parameterNames = {"sku", "quantityOnStock", "expectedDelivery"}),
-        @FactoryMethod(parameterNames = {"sku", "quantityOnStock", "expectedDelivery", "restockableInDays", "supplyChannel"})
+@ResourceDraftValue(
+        copyFactoryMethods = @CopyFactoryMethod(InventoryEntry.class),
+        factoryMethods = {
+            @FactoryMethod(parameterNames = {"sku", "quantityOnStock"}),
+            @FactoryMethod(parameterNames = {"sku", "quantityOnStock", "expectedDelivery"}),
+            @FactoryMethod(parameterNames = {"sku", "quantityOnStock", "expectedDelivery", "restockableInDays", "supplyChannel"
+         })
 })
 public interface InventoryEntryDraft extends CustomDraft {
     @Nullable
