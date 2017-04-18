@@ -61,4 +61,13 @@ public interface PaymentDraft extends CustomDraft {
 
     @Nullable
     List<CustomFieldsDraft> getInterfaceInteractions();
+
+
+    /**
+     * User-specific unique identifier for the payment.
+     *
+     * @return the user defined key
+     */
+    @Nullable
+    String getKey();
 }
