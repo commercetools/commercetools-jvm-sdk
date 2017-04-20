@@ -23,9 +23,9 @@ import static org.assertj.core.api.Assertions.assertThat;
  * Base class for aws sqs integration tests.
  */
 public abstract class SqsIntegrationTest extends IntegrationTest {
-    protected static AmazonSQS sqsClient;
-    protected static String queueUrl;
-    protected static Subscription subscription;
+    protected AmazonSQS sqsClient;
+    protected String queueUrl;
+    protected Subscription subscription;
 
     @Before
     public void setup() {
@@ -59,7 +59,7 @@ public abstract class SqsIntegrationTest extends IntegrationTest {
      * Waits for the test subscription message.
      * (as documented at http://dev.commercetools.com/http-api-projects-subscriptions.html#create-a-subscription)
      */
-    protected static void waitForSubscriptionTestMessage() {
+    protected void waitForSubscriptionTestMessage() {
         assertEventually(() -> {
             final ReceiveMessageResult result = sqsClient.receiveMessage(queueUrl);
             assertThat(result).isNotNull();

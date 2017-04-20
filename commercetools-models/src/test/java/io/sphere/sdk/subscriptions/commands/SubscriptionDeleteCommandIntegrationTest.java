@@ -6,6 +6,7 @@ import io.sphere.sdk.test.IntegrationTest;
 import org.junit.Test;
 
 import static io.sphere.sdk.subscriptions.SubscriptionFixtures.*;
+import static io.sphere.sdk.test.SphereTestUtils.assertEventually;
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
@@ -23,8 +24,10 @@ public class SubscriptionDeleteCommandIntegrationTest extends IntegrationTest {
 
         client().executeBlocking(subscriptionDeleteCommand);
 
-        final SubscriptionQuery subscriptionQuery = SubscriptionQuery.of().withPredicates(m -> m.is(subscription));
-        assertThat(client().executeBlocking(subscriptionQuery).head()).isEmpty();
+        assertEventually(() -> {
+            final SubscriptionQuery subscriptionQuery = SubscriptionQuery.of().withPredicates(m -> m.is(subscription));
+            assertThat(client().executeBlocking(subscriptionQuery).head()).isEmpty();
+        });
     }
 
     @Test
@@ -37,7 +40,9 @@ public class SubscriptionDeleteCommandIntegrationTest extends IntegrationTest {
 
         client().executeBlocking(subscriptionDeleteCommand);
 
-        final SubscriptionQuery subscriptionQuery = SubscriptionQuery.of().withPredicates(m -> m.is(subscription));
-        assertThat(client().executeBlocking(subscriptionQuery).head()).isEmpty();
+        assertEventually(() -> {
+            final SubscriptionQuery subscriptionQuery = SubscriptionQuery.of().withPredicates(m -> m.is(subscription));
+            assertThat(client().executeBlocking(subscriptionQuery).head()).isEmpty();
+        });
     }
 }

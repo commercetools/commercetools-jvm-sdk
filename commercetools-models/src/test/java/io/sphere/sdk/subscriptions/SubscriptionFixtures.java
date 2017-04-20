@@ -6,12 +6,10 @@ import io.sphere.sdk.client.BlockingSphereClient;
 import io.sphere.sdk.products.Product;
 import io.sphere.sdk.subscriptions.commands.SubscriptionCreateCommand;
 import io.sphere.sdk.subscriptions.commands.SubscriptionDeleteCommand;
-import io.sphere.sdk.subscriptions.queries.SubscriptionQuery;
 import org.junit.Assume;
 
 import java.net.URI;
 import java.util.Collections;
-import java.util.List;
 import java.util.function.Function;
 
 import static io.sphere.sdk.test.SphereTestUtils.randomInt;
@@ -116,10 +114,9 @@ public class SubscriptionFixtures {
         return client.executeBlocking(SubscriptionCreateCommand.of(subscriptionDraftDsl));
     }
 
-    public static void deleteSubscription(final BlockingSphereClient client, final String subscriptionKey) {
-        List<Subscription> results = client.executeBlocking(SubscriptionQuery.of()
-                .withPredicates(l -> l.key().is(subscriptionKey)))
-                .getResults();
-        results.forEach(subscription -> client.executeBlocking(SubscriptionDeleteCommand.of(subscription)));
+    public static void deleteSubscription(final BlockingSphereClient client, final Subscription subscription) {
+        if (subscription != null) {
+            client.executeBlocking(SubscriptionDeleteCommand.of(subscription));
+        }
     }
 }
