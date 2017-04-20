@@ -18,6 +18,10 @@ public final class AttributeDraftBuilder extends Base implements Builder<Attribu
         return new AttributeDraftImpl(name, value);
     }
 
+    public static AttributeDraftBuilder of(final AttributeDraft template) {
+        return new AttributeDraftBuilder(template.getName(), template.getValue());
+    }
+
     public static AttributeDraftBuilder of(final Attribute template) {
         return new AttributeDraftBuilder(template.getName(), template.getValueAsJsonNode());
     }
