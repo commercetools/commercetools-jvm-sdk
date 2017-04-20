@@ -6,7 +6,6 @@ import com.amazonaws.services.sqs.AmazonSQS;
 import com.amazonaws.services.sqs.AmazonSQSClientBuilder;
 import io.sphere.sdk.subscriptions.*;
 import io.sphere.sdk.test.IntegrationTest;
-import org.junit.Before;
 import org.junit.Test;
 
 import static io.sphere.sdk.subscriptions.SubscriptionFixtures.*;
@@ -16,12 +15,6 @@ import static org.assertj.core.api.Assertions.assertThat;
  * Integration tests for {@link SubscriptionCreateCommand}.
  */
 public class SubscriptionCreateCommandIntegrationTest extends IntegrationTest {
-
-    @Before
-    public void clean() {
-        SubscriptionFixtures.deleteSubscription(client(), SubscriptionFixtures.IRON_MQ_SUBSCRIPTION_KEY);
-        SubscriptionFixtures.deleteSubscription(client(), SubscriptionFixtures.AWS_SQS_SUBSCRIPTION_KEY);
-    }
 
     @Test
     public void createIronMqChangesSubscription() throws Exception {
@@ -35,6 +28,8 @@ public class SubscriptionCreateCommandIntegrationTest extends IntegrationTest {
         assertThat(subscription).isNotNull();
         assertThat(subscription.getDestination()).isEqualTo(subscriptionDraft.getDestination());
         assertThat(subscription.getChanges()).isEqualTo(subscriptionDraft.getChanges());
+
+        SubscriptionFixtures.deleteSubscription(client(), subscription.getKey());
     }
 
     @Test
@@ -49,6 +44,8 @@ public class SubscriptionCreateCommandIntegrationTest extends IntegrationTest {
         assertThat(subscription).isNotNull();
         assertThat(subscription.getDestination()).isEqualTo(subscriptionDraft.getDestination());
         assertThat(subscription.getMessages()).isEqualTo(subscriptionDraft.getMessages());
+
+        SubscriptionFixtures.deleteSubscription(client(), subscription.getKey());
     }
 
     @Test
@@ -67,6 +64,8 @@ public class SubscriptionCreateCommandIntegrationTest extends IntegrationTest {
             assertThat(subscription).isNotNull();
             assertThat(subscription.getDestination()).isEqualTo(subscriptionDraft.getDestination());
             assertThat(subscription.getChanges()).isEqualTo(subscriptionDraft.getChanges());
+
+            SubscriptionFixtures.deleteSubscription(client(), subscription.getKey());
         } finally {
             SqsUtils.deleteQueueAndShutdown(queueUrl, sqsClient);
         }
@@ -87,6 +86,8 @@ public class SubscriptionCreateCommandIntegrationTest extends IntegrationTest {
             assertThat(subscription).isNotNull();
             assertThat(subscription.getDestination()).isEqualTo(subscriptionDraft.getDestination());
             assertThat(subscription.getChanges()).isEqualTo(subscriptionDraft.getChanges());
+
+            SubscriptionFixtures.deleteSubscription(client(), subscription.getKey());
         } finally {
             SnsUtils.deleteTopicAndShutdown(topicArn, snsClient);
         }

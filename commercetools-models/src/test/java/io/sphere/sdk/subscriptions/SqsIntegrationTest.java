@@ -14,7 +14,8 @@ import org.junit.Before;
 
 import java.util.List;
 
-import static io.sphere.sdk.subscriptions.SubscriptionFixtures.*;
+import static io.sphere.sdk.subscriptions.SubscriptionFixtures.sqsSubscriptionDraftBuilder;
+import static io.sphere.sdk.subscriptions.SubscriptionFixtures.withCategoryCreatedMessage;
 import static io.sphere.sdk.test.SphereTestUtils.assertEventually;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -28,8 +29,6 @@ public abstract class SqsIntegrationTest extends IntegrationTest {
 
     @Before
     public void setup() {
-        deleteSubscription(client(), SubscriptionFixtures.AWS_SQS_SUBSCRIPTION_KEY);
-
         if (AwsCredentials.hasAwsCliEnv()) {
             sqsClient = AmazonSQSClientBuilder.defaultClient();
             queueUrl = SqsUtils.createTestQueue(sqsClient);

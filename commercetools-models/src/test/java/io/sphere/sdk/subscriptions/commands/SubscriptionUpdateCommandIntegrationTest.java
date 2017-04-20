@@ -4,12 +4,10 @@ import io.sphere.sdk.payments.Payment;
 import io.sphere.sdk.subscriptions.ChangeSubscription;
 import io.sphere.sdk.subscriptions.MessageSubscription;
 import io.sphere.sdk.subscriptions.Subscription;
-import io.sphere.sdk.subscriptions.SubscriptionFixtures;
 import io.sphere.sdk.subscriptions.commands.updateactions.SetChanges;
 import io.sphere.sdk.subscriptions.commands.updateactions.SetKey;
 import io.sphere.sdk.subscriptions.commands.updateactions.SetMessages;
 import io.sphere.sdk.test.IntegrationTest;
-import org.junit.Before;
 import org.junit.Test;
 
 import java.util.Collections;
@@ -23,11 +21,6 @@ import static org.assertj.core.api.Assertions.assertThat;
  * Integration tests for {@link SubscriptionUpdateCommand}.
  */
 public class SubscriptionUpdateCommandIntegrationTest extends IntegrationTest {
-
-    @Before
-    public void clean() {
-        SubscriptionFixtures.deleteSubscription(client(), SubscriptionFixtures.IRON_MQ_SUBSCRIPTION_KEY);
-    }
 
     @Test
     public void setKeyIronMq() {

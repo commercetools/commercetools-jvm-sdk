@@ -14,6 +14,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.function.Function;
 
+import static io.sphere.sdk.test.SphereTestUtils.randomInt;
 import static org.junit.Assume.assumeNotNull;
 import static org.junit.Assume.assumeTrue;
 
@@ -21,9 +22,6 @@ import static org.junit.Assume.assumeTrue;
  * Test fixtures for {@link Subscription} tests.
  */
 public class SubscriptionFixtures {
-    public final static String IRON_MQ_SUBSCRIPTION_KEY = "iron-mq-subscription-integration-test";
-    public final static String AWS_SQS_SUBSCRIPTION_KEY = "aws-sqs-subscription-integration-test";
-
     /**
      * We will run an IronMQ test if this environment variable is set to an IronMQ URI.
      */
@@ -34,9 +32,10 @@ public class SubscriptionFixtures {
     public static SubscriptionDraftBuilder ironMqSubscriptionDraftBuilder() {
         final String ironMqUriFromEnv = ironMqUriFromEnv();
 
+        final String ironMqKey = "iron-mq-test-subscription-" + randomInt();
         final URI ironMqUri = URI.create(ironMqUriFromEnv);
         return SubscriptionDraftBuilder.of(IronMqDestination.of(ironMqUri))
-                .key(IRON_MQ_SUBSCRIPTION_KEY);
+                .key(ironMqKey);
     }
 
     /**
@@ -68,8 +67,10 @@ public class SubscriptionFixtures {
         final String awsRegion = System.getenv(AWS_REGION);
         assumeNotNull(awsRegion);
 
+        final String sqsKey = "sqs-test-subscription-" + randomInt();
+
         return SubscriptionDraftBuilder.of(SqsDestination.of(awsCredentials, awsRegion, URI.create(queueUrl)))
-                .key(AWS_SQS_SUBSCRIPTION_KEY);
+                .key(sqsKey);
     }
 
     /**
@@ -85,8 +86,10 @@ public class SubscriptionFixtures {
     public static SubscriptionDraftBuilder snsSubscriptionDraftBuilder(final String topicArn) {
         final AwsCredentials awsCredentials = AwsCredentials.ofAwsCliEnv();
 
+        final String snsKey = "sns-test-subscription-" + randomInt();
+
         return SubscriptionDraftBuilder.of(SnsDestination.of(awsCredentials, topicArn))
-                .key(AWS_SQS_SUBSCRIPTION_KEY);
+                .key(snsKey);
     }
 
     public static SubscriptionDraftBuilder withCategoryChanges(final SubscriptionDraftBuilder subscriptionDraftBuilder) {
