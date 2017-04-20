@@ -4,7 +4,7 @@ import io.sphere.sdk.subscriptions.Subscription;
 import io.sphere.sdk.subscriptions.SubscriptionFixtures;
 import io.sphere.sdk.subscriptions.queries.SubscriptionQuery;
 import io.sphere.sdk.test.IntegrationTest;
-import org.junit.BeforeClass;
+import org.junit.Before;
 import org.junit.Test;
 
 import static io.sphere.sdk.subscriptions.SubscriptionFixtures.*;
@@ -15,8 +15,8 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 public class SubscriptionDeleteCommandIntegrationTest extends IntegrationTest {
 
-    @BeforeClass
-    public static void clean() {
+    @Before
+    public void clean() {
         SubscriptionFixtures.deleteSubscription(client(), SubscriptionFixtures.IRON_MQ_SUBSCRIPTION_KEY);
     }
 

@@ -9,7 +9,7 @@ import io.sphere.sdk.subscriptions.commands.updateactions.SetChanges;
 import io.sphere.sdk.subscriptions.commands.updateactions.SetKey;
 import io.sphere.sdk.subscriptions.commands.updateactions.SetMessages;
 import io.sphere.sdk.test.IntegrationTest;
-import org.junit.BeforeClass;
+import org.junit.Before;
 import org.junit.Test;
 
 import java.util.Collections;
@@ -24,8 +24,8 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 public class SubscriptionUpdateCommandIntegrationTest extends IntegrationTest {
 
-    @BeforeClass
-    public static void clean() {
+    @Before
+    public void clean() {
         SubscriptionFixtures.deleteSubscription(client(), SubscriptionFixtures.IRON_MQ_SUBSCRIPTION_KEY);
     }
 

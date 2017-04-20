@@ -6,7 +6,7 @@ import com.amazonaws.services.sqs.AmazonSQS;
 import com.amazonaws.services.sqs.AmazonSQSClientBuilder;
 import io.sphere.sdk.subscriptions.*;
 import io.sphere.sdk.test.IntegrationTest;
-import org.junit.BeforeClass;
+import org.junit.Before;
 import org.junit.Test;
 
 import static io.sphere.sdk.subscriptions.SubscriptionFixtures.*;
@@ -17,8 +17,8 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 public class SubscriptionCreateCommandIntegrationTest extends IntegrationTest {
 
-    @BeforeClass
-    public static void setup() {
+    @Before
+    public void clean() {
         SubscriptionFixtures.deleteSubscription(client(), SubscriptionFixtures.IRON_MQ_SUBSCRIPTION_KEY);
         SubscriptionFixtures.deleteSubscription(client(), SubscriptionFixtures.AWS_SQS_SUBSCRIPTION_KEY);
     }
