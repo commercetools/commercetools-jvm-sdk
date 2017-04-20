@@ -37,13 +37,27 @@ import java.util.List;
 @HasUpdateCommand(javadocSummary = "Updates a payment.")
 @HasDeleteCommand
 @HasQueryModel
+@HasUpdateActions(exampleBaseClass = "io.sphere.sdk.payments.commands.PaymentUpdateCommandIntegrationTest")
 public interface Payment extends Resource<Payment>, Custom {
     @Nullable
     Reference<Customer> getCustomer();
 
+    /**
+     * The external id  can be used as additional identifier for external systems like CRM or ERP.
+     *
+     * @return the external id
+     */
     @Nullable
     String getExternalId();
 
+    /**
+     * The identifier that is used by the interface that manages the payment (usually the PSP).
+     *
+     * Can not be changed once it has been set. The combination of {@link #getInterfaceId()}
+     * and {@link #getPaymentMethodInfo#getPaymentMethodInfo()}  must be unique.
+     *
+     * @return the interface id
+     */
     @Nullable
     String getInterfaceId();
 
@@ -76,6 +90,14 @@ public interface Payment extends Resource<Payment>, Custom {
 
     @IgnoreInQueryModel
     List<CustomFields> getInterfaceInteractions();
+
+    /**
+     * User-specific unique identifier for the payment.
+     *
+     * @return the user defined key
+     */
+    @Nullable
+    String getKey();
 
     @Override
     default Reference<Payment> toReference() {

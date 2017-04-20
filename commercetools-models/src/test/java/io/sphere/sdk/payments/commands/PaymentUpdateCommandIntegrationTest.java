@@ -368,4 +368,17 @@ public class PaymentUpdateCommandIntegrationTest extends IntegrationTest {
             return updatedPayment;
         });
     }
+
+    @Test
+    public void setKey() {
+        withPayment(client(), (Payment payment) -> {
+            final String newKey = randomKey();
+            final PaymentUpdateCommand cmd = PaymentUpdateCommand.of(payment, SetKey.of(newKey));
+            final Payment updatedPayment = client().executeBlocking(cmd);
+
+            assertThat(updatedPayment.getKey()).isEqualTo(newKey);
+
+            return updatedPayment;
+        });
+    }
 }

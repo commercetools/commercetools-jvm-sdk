@@ -6,9 +6,9 @@ import java.lang.String;
 import javax.annotation.Generated;
 
 /**
- * Updates name to MyResource
+ * Updates the {@code name} property of a {@link MyResource}.
  *
- * {@doc.gen intro}
+ * @see MyResource#getName()
  */
 @Generated(
     value = "io.sphere.sdk.annotations.processors.generators.UpdateActionsGenerator",
@@ -27,7 +27,9 @@ public final class ChangeName extends UpdateActionImpl<MyResource> {
   }
 
   /**
-   * @param name the name {@link MyResource#getName()}
+   * Creates a new update action from the given parameters.
+   *
+   * @param name the {@code name} property {@link MyResource#getName()}
    */
   public static ChangeName of(final String name) {
     return new ChangeName(name);

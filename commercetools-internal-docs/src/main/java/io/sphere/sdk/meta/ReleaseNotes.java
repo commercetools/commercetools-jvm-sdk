@@ -75,6 +75,7 @@ import io.sphere.sdk.search.SearchKeywords;
 import io.sphere.sdk.search.model.ExistsFilterSearchModelSupport;
 import io.sphere.sdk.search.model.MissingFilterSearchModelSupport;
 import io.sphere.sdk.shippingmethods.ShippingMethodDraftBuilder;
+import io.sphere.sdk.shippingmethods.ShippingRate;
 import io.sphere.sdk.shoppinglists.ShoppingList;
 import io.sphere.sdk.shoppinglists.ShoppingListDraft;
 import io.sphere.sdk.shoppinglists.expansion.LineItemExpansionModel;
@@ -115,6 +116,15 @@ import java.util.function.Function;
  <li class=fixed-in-release></li>
  </ul>
  -->
+
+ <h3 class=released-version id="v1_16_0">1.16.0 (12.04.2017)</h3>
+ <ul>
+ <li class=new-in-release>Added {@link ShippingRate#isMatching()}.</li>
+ <li class=change-in-release>To enable code generation, we changed the type of {@link ShippingRate} from class to interface.
+ This change doesn't require you to change your source code, but requires a recompilation of all projects that depend on this class.
+ </li>
+ </ul
+ </h3>
 
  <h3 class=released-version id="v1_15_0">1.15.0 (04.04.2017)</h3>
  <ul>

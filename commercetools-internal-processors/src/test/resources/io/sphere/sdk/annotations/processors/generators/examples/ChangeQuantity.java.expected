@@ -6,9 +6,9 @@ import java.lang.Integer;
 import javax.annotation.Generated;
 
 /**
- * Updates quantity to MyResource
+ * Updates the {@code quantity} property of a {@link MyResource}.
  *
- * {@doc.gen intro}
+ * @see MyResource#getQuantity()
  */
 @Generated(
     value = "io.sphere.sdk.annotations.processors.generators.UpdateActionsGenerator",
@@ -27,7 +27,9 @@ public final class ChangeQuantity extends UpdateActionImpl<MyResource> {
   }
 
   /**
-   * @param quantity the quantity {@link MyResource#getQuantity()}
+   * Creates a new update action from the given parameters.
+   *
+   * @param quantity the {@code quantity} property {@link MyResource#getQuantity()}
    */
   public static ChangeQuantity of(final Integer quantity) {
     return new ChangeQuantity(quantity);
