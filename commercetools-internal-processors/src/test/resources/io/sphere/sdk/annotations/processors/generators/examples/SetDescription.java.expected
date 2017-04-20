@@ -7,9 +7,9 @@ import javax.annotation.Generated;
 import javax.annotation.Nullable;
 
 /**
- * Sets description to MyResource
+ * Sets the {@code description} property of a {@link MyResource}.
  *
- * {@doc.gen intro}
+ * @see MyResource#getDescription()
  */
 @Generated(
     value = "io.sphere.sdk.annotations.processors.generators.UpdateActionsGenerator",
@@ -30,12 +30,17 @@ public final class SetDescription extends UpdateActionImpl<MyResource> {
   }
 
   /**
-   * @param description the description {@link MyResource#getDescription()}
+   * Creates a new update action from the given parameters.
+   *
+   * @param description the {@code description} property {@link MyResource#getDescription()}
    */
   public static SetDescription of(@Nullable final String description) {
     return new SetDescription(description);
   }
 
+  /**
+   * Creates a new update action to unset the {@code description} property.
+   */
   public static SetDescription ofUnset() {
     return new SetDescription(null);
   }

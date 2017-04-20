@@ -1,6 +1,7 @@
 package io.sphere.sdk.annotations.processors.generators;
 
 import com.squareup.javapoet.*;
+import io.sphere.sdk.annotations.HasUpdateActions;
 import io.sphere.sdk.annotations.processors.models.PropertyGenModel;
 import io.sphere.sdk.commands.UpdateActionImpl;
 import org.apache.commons.lang3.StringUtils;
@@ -48,10 +49,16 @@ public class UpdateActionsGenerator extends AbstractMultipleFileGenerator {
                 .build();
         final String updateAction = actionPrefix + StringUtils.capitalize(fieldSpec.name);
         final String updateActionClassName = StringUtils.capitalize(updateAction);
+        final String includeExample = annotatedTypeElement.getAnnotation(HasUpdateActions.class).exampleBaseClass();
+        final String includeExampleJavaDoc = includeExample.isEmpty() ?
+                "" :
+                String.format("{@include.example %s#%s()}\n\n", includeExample, propertyMethod.getSimpleName().toString().replaceFirst("g", "s"));
         final TypeSpec.Builder typeSpecBuilder = TypeSpec.classBuilder(updateActionClassName)
-                .addJavadoc("$L $L to $L\n", property.isOptional() ? "Sets" : "Updates", fieldSpec.name, ClassName.get(annotatedTypeElement).simpleName())
+                .addJavadoc("$L the {@code $L} property of a {@link $T}.\n",
+                        property.isOptional() ? "Sets" : "Updates", fieldSpec.name, ClassName.get(annotatedTypeElement))
                 .addJavadoc("\n")
-                .addJavadoc("{@doc.gen intro}\n")
+                .addJavadoc(includeExampleJavaDoc)
+                .addJavadoc("@see $T#$L()\n", ClassName.get(annotatedTypeElement), propertyMethod.getSimpleName())
                 .superclass(ParameterizedTypeName.get(ClassName.get(UpdateActionImpl.class), ClassName.get(annotatedTypeElement)))
                 .addModifiers(Modifier.PUBLIC, Modifier.FINAL)
                 .addAnnotation(AnnotationSpec.builder(Generated.class)
@@ -64,7 +71,7 @@ public class UpdateActionsGenerator extends AbstractMultipleFileGenerator {
                 .addMethod(getMethod)
                 .addMethod(createFactoryMethod(property, updateActionClassName));
         if (property.isOptional()) {
-            typeSpecBuilder.addMethod(createUnsetMethod(updateActionClassName));
+            typeSpecBuilder.addMethod(createUnsetMethod(updateActionClassName, property));
         }
         return typeSpecBuilder.build();
     }
@@ -87,8 +94,9 @@ public class UpdateActionsGenerator extends AbstractMultipleFileGenerator {
         return updateActionClassNames;
     }
 
-    private MethodSpec createUnsetMethod(final String updateActionClassName) {
+    private MethodSpec createUnsetMethod(final String updateActionClassName, final PropertyGenModel property) {
         final MethodSpec ofUnset = MethodSpec.methodBuilder("ofUnset")
+                .addJavadoc("Creates a new update action to unset the {@code $L} property.\n", property.getName())
                 .addModifiers(Modifier.PUBLIC, Modifier.STATIC)
                 .returns(ClassName.bestGuess(updateActionClassName))
                 .addStatement("return new $T($L)", ClassName.bestGuess(updateActionClassName), "null")
@@ -117,7 +125,8 @@ public class UpdateActionsGenerator extends AbstractMultipleFileGenerator {
     private MethodSpec createFactoryMethod(final PropertyGenModel property, final String updateActionClassName) {
         final ParameterSpec parameterSpec = createConstructorParameter(property);
         final MethodSpec of = MethodSpec.methodBuilder("of")
-                .addJavadoc("@param $L the $L $L\n", parameterSpec.name, parameterSpec.name, property.getJavadocLinkTag())
+                .addJavadoc("Creates a new update action from the given parameters.\n\n")
+                .addJavadoc("@param $L the {@code $L} property $L\n", parameterSpec.name, parameterSpec.name, property.getJavadocLinkTag())
                 .addParameter(parameterSpec)
                 .addModifiers(Modifier.PUBLIC, Modifier.STATIC)
                 .returns(ClassName.bestGuess(updateActionClassName))
