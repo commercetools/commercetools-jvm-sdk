@@ -23,13 +23,15 @@ import java.util.stream.Stream;
  * Abstract base class for implementing javapoet based generators.
  */
 abstract class BaseAbstractGenerator {
-
     protected final Elements elements;
+    protected final Types types;
+
     protected final TypeUtils typeUtils;
 
     BaseAbstractGenerator(final Elements elements, final Types types) {
-        this.typeUtils = new TypeUtils(elements, types);
         this.elements = elements;
+        this.types = types;
+        this.typeUtils = new TypeUtils(elements, types);
     }
 
     protected FieldSpec createField(final PropertyGenModel property) {

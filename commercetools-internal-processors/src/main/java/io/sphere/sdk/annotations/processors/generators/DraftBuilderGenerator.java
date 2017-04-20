@@ -27,11 +27,8 @@ import java.util.stream.Stream;
  */
 public class DraftBuilderGenerator extends AbstractBuilderGenerator<ResourceDraftValue> {
 
-    private final Types types;
-
     public DraftBuilderGenerator(final Elements elements, final Types types) {
         super(elements, types, ResourceDraftValue.class);
-        this.types = types;
     }
 
     public TypeSpec generateType(final TypeElement resourceDraftValueType) {
@@ -76,7 +73,7 @@ public class DraftBuilderGenerator extends AbstractBuilderGenerator<ResourceDraf
                     .addTypeVariable(TypeVariableName.get("T").withBounds(generatedBuilderName));
         } else {
             builder.addJavadoc("Builder for {@link $T}.\n", resourceDraftValueType)
-                .addModifiers(Modifier.PUBLIC, Modifier.FINAL);
+                    .addModifiers(Modifier.PUBLIC, Modifier.FINAL);
         }
         final List<Modifier> constructorModifiers = new ArrayList<>();
         if (resourceDraftValue.abstractBuilderClass()) {
@@ -97,48 +94,9 @@ public class DraftBuilderGenerator extends AbstractBuilderGenerator<ResourceDraf
         builder.addMethod(createBuildMethod(buildMethodReturnType, draftImplType, propertyMethods))
                 .addMethods(createFactoryMethods(resourceDraftValue.factoryMethods(), properties, concreteBuilderName))
                 .addMethod(createCopyFactoryMethod(resourceDraftValueType, concreteBuilderName, propertyMethods));
+
         if (resourceDraftValue.copyFactoryMethods().length > 0) {
-
-            AnnotationValue copyFactoryMethods = typeUtils.getAnnotationValue(resourceDraftValueType, ResourceDraftValue.class, "copyFactoryMethods").get();
-            final List<TypeElement> templateClasses = copyFactoryMethods.accept(new TemplateClassCollector(), new ArrayList<>()).stream()
-                    .map(types::asElement).map(TypeElement.class::cast).collect(Collectors.toList());
-
-            for (final TypeElement templateTypeElement : templateClasses) {
-                final Map<Name, ExecutableElement> templatePropertyMethodByName = getAllPropertyMethodsSorted(templateTypeElement).stream()
-                        .collect(Collectors.toMap(ExecutableElement::getSimpleName, Function.identity()));
-                final List<ExecutableElement> needsCopyMethods = propertyMethods.stream()
-                        .filter(propertyMethod -> templatePropertyMethodByName.containsKey(propertyMethod.getSimpleName()))
-                        .filter(propertyMethod -> !isAssignable(templatePropertyMethodByName.get(propertyMethod.getSimpleName()), propertyMethod))
-                        .collect(Collectors.toList());
-
-                final TypeElement listTypeElement = elements.getTypeElement("java.util.List");
-                for (final ExecutableElement needsCopyMethod : needsCopyMethods) {
-                    MethodSpec.Builder copyMethodBuilder = MethodSpec.methodBuilder(getCopyMethodName(PropertyGenModel.of(needsCopyMethod)));
-                    copyMethodBuilder
-                            .addModifiers(Modifier.PRIVATE, Modifier.STATIC)
-                            .returns(ClassName.get(needsCopyMethod.getReturnType()));
-
-                    if (types.isAssignable(types.erasure(needsCopyMethod.getReturnType()), listTypeElement.asType())) {
-                        final DeclaredType declaredType = (DeclaredType) needsCopyMethod.getReturnType();
-                        final TypeMirror typeArgument = declaredType.getTypeArguments().get(0);
-                        final ClassName concreteBuilderType = typeUtils.getConcreteBuilderType(typeArgument);
-                        copyMethodBuilder
-                                .addParameter(ClassName.get(templatePropertyMethodByName.get(needsCopyMethod.getSimpleName()).getReturnType()), "templates", Modifier.FINAL)
-                                .addCode("return templates == null ? null : templates.stream().map(template -> $T.of(template).build()).collect($T.toList());\n", concreteBuilderType, Collectors.class);
-                    } else {
-                        final ClassName concreteBuilderType = typeUtils.getConcreteBuilderType(needsCopyMethod.getReturnType());
-                        copyMethodBuilder
-                                .addParameter(ClassName.get(templatePropertyMethodByName.get(needsCopyMethod.getSimpleName()).getReturnType()), "template", Modifier.FINAL)
-                                .addCode("return template == null ? null : $T.of(template).build();\n", concreteBuilderType);
-                    }
-
-
-                    builder.addMethod(copyMethodBuilder.build());
-                }
-            }
-            for (final TypeElement templateTypeElement : templateClasses) {
-                builder.addMethod(createCopyFactoryMethod(templateTypeElement, resourceDraftValueType, concreteBuilderName, propertyMethods));
-            }
+            createCopyFactoryMethods(resourceDraftValueType, propertyMethods, builder);
         }
 
         final TypeSpec draftBuilderBaseClass = builder.build();
@@ -146,8 +104,64 @@ public class DraftBuilderGenerator extends AbstractBuilderGenerator<ResourceDraf
         return draftBuilderBaseClass;
     }
 
-    private MethodSpec createCopyFactoryMethod(final TypeElement templateTypeElement, final TypeElement typeElement,
-                                               final ClassName returnType, final List<ExecutableElement> propertyMethods) {
+    /**
+     * This creates private {@code copy<i>Suffix</i>} methods that are used by copy factories
+     * {@link io.sphere.sdk.annotations.CopyFactoryMethod} to transform between the differently
+     * typed properties of the classes.
+     *
+     * @param resourceDraftValueType the type element for which copy methods should be added
+     * @param propertyMethods        the property methods of the source class
+     * @param builder                the type spec builder
+     */
+    private void createCopyFactoryMethods(final TypeElement resourceDraftValueType, final List<ExecutableElement> propertyMethods, final TypeSpec.Builder builder) {
+        final AnnotationValue copyFactoryMethods = typeUtils.getAnnotationValue(resourceDraftValueType, ResourceDraftValue.class, "copyFactoryMethods").get();
+        final List<TypeElement> templateClasses = copyFactoryMethods.accept(new TemplateClassCollector(), new ArrayList<>()).stream()
+                .map(types::asElement).map(TypeElement.class::cast).collect(Collectors.toList());
+
+        for (final TypeElement templateTypeElement : templateClasses) {
+            createCopyMethods(templateTypeElement, propertyMethods, builder);
+        }
+        final ClassName concreteBuilderName = typeUtils.getConcreteBuilderType(resourceDraftValueType);
+        for (final TypeElement templateTypeElement : templateClasses) {
+            builder.addMethod(createCopyFactoryMethod(templateTypeElement, concreteBuilderName, propertyMethods));
+        }
+    }
+
+    private void createCopyMethods(final TypeElement templateTypeElement, final List<ExecutableElement> propertyMethods, final TypeSpec.Builder builder) {
+        final Map<Name, ExecutableElement> templatePropertyMethodByName = getAllPropertyMethodsSorted(templateTypeElement).stream()
+                .collect(Collectors.toMap(ExecutableElement::getSimpleName, Function.identity()));
+        final List<ExecutableElement> needsCopyMethods = propertyMethods.stream()
+                .filter(propertyMethod -> templatePropertyMethodByName.containsKey(propertyMethod.getSimpleName()))
+                .filter(propertyMethod -> !isAssignable(templatePropertyMethodByName.get(propertyMethod.getSimpleName()), propertyMethod))
+                .collect(Collectors.toList());
+
+        final TypeElement listTypeElement = elements.getTypeElement("java.util.List");
+        for (final ExecutableElement needsCopyMethod : needsCopyMethods) {
+            MethodSpec.Builder copyMethodBuilder = MethodSpec.methodBuilder(getCopyMethodName(PropertyGenModel.of(needsCopyMethod)));
+            copyMethodBuilder
+                    .addModifiers(Modifier.PRIVATE, Modifier.STATIC)
+                    .returns(ClassName.get(needsCopyMethod.getReturnType()));
+
+            if (types.isAssignable(types.erasure(needsCopyMethod.getReturnType()), listTypeElement.asType())) {
+                final DeclaredType declaredType = (DeclaredType) needsCopyMethod.getReturnType();
+                final TypeMirror typeArgument = declaredType.getTypeArguments().get(0);
+                final ClassName concreteBuilderType = typeUtils.getConcreteBuilderType(typeArgument);
+                copyMethodBuilder
+                        .addParameter(ClassName.get(templatePropertyMethodByName.get(needsCopyMethod.getSimpleName()).getReturnType()), "templates", Modifier.FINAL)
+                        .addCode("return templates == null ? null : templates.stream().map(template -> $T.of(template).build()).collect($T.toList());\n", concreteBuilderType, Collectors.class);
+            } else {
+                final ClassName concreteBuilderType = typeUtils.getConcreteBuilderType(needsCopyMethod.getReturnType());
+                copyMethodBuilder
+                        .addParameter(ClassName.get(templatePropertyMethodByName.get(needsCopyMethod.getSimpleName()).getReturnType()), "template", Modifier.FINAL)
+                        .addCode("return template == null ? null : $T.of(template).build();\n", concreteBuilderType);
+            }
+
+
+            builder.addMethod(copyMethodBuilder.build());
+        }
+    }
+
+    protected MethodSpec createCopyFactoryMethod(final TypeElement templateTypeElement, final ClassName returnType, final List<ExecutableElement> propertyMethods) {
         final ParameterSpec templateParameter = ParameterSpec.builder(ClassName.get(templateTypeElement), "template", Modifier.FINAL).build();
         final Map<Name, ExecutableElement> templatePropertyMethodByName = getAllPropertyMethodsSorted(templateTypeElement).stream()
                 .collect(Collectors.toMap(ExecutableElement::getSimpleName, Function.identity()));
@@ -219,7 +233,7 @@ public class DraftBuilderGenerator extends AbstractBuilderGenerator<ResourceDraf
             final Optional<? extends Map.Entry<? extends ExecutableElement, ? extends AnnotationValue>> templateClassEntry =
                     elementValues.entrySet().stream()
                             .findFirst();
-            return visit(templateClassEntry.get().getValue(),templateClasses);
+            return visit(templateClassEntry.get().getValue(), templateClasses);
         }
     }
 }
