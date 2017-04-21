@@ -14,8 +14,6 @@ import org.junit.Before;
 
 import java.util.List;
 
-import static io.sphere.sdk.subscriptions.SubscriptionFixtures.sqsSubscriptionDraftBuilder;
-import static io.sphere.sdk.subscriptions.SubscriptionFixtures.withCategoryCreatedMessage;
 import static io.sphere.sdk.test.SphereTestUtils.assertEventually;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -27,13 +25,15 @@ public abstract class SqsIntegrationTest extends IntegrationTest {
     protected String queueUrl;
     protected Subscription subscription;
 
+    protected abstract SubscriptionDraft createSubscriptionDraft();
+
     @Before
     public void setup() {
         if (AwsCredentials.hasAwsCliEnv()) {
             sqsClient = AmazonSQSClientBuilder.defaultClient();
             queueUrl = SqsUtils.createTestQueue(sqsClient);
 
-            final SubscriptionDraftDsl subscriptionDraft = withCategoryCreatedMessage(sqsSubscriptionDraftBuilder(queueUrl)).build();
+            final SubscriptionDraft subscriptionDraft = createSubscriptionDraft();
 
             final SubscriptionCreateCommand createCommand = SubscriptionCreateCommand.of(subscriptionDraft);
             subscription = client().executeBlocking(createCommand);

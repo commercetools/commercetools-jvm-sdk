@@ -11,6 +11,7 @@ import java.util.List;
 
 import static io.sphere.sdk.products.ProductFixtures.withProduct;
 import static io.sphere.sdk.subscriptions.SubscriptionFixtures.assumeHasAwsCliEnv;
+import static io.sphere.sdk.subscriptions.SubscriptionFixtures.sqsSubscriptionDraftBuilder;
 import static io.sphere.sdk.test.SphereTestUtils.assertEventually;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -42,5 +43,10 @@ public class ChangeSubscriptionSqsIntegrationTest extends SqsIntegrationTest {
                 assertThat(resource.getTypeId()).isEqualTo(Product.referenceTypeId());
             });
         });
+    }
+
+    @Override
+    protected SubscriptionDraft createSubscriptionDraft() {
+        return SubscriptionFixtures.withProductChanges(sqsSubscriptionDraftBuilder(queueUrl)).build();
     }
 }
