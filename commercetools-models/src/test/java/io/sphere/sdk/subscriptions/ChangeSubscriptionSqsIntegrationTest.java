@@ -7,6 +7,7 @@ import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.products.Product;
 import org.junit.Test;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static io.sphere.sdk.products.ProductFixtures.withProduct;
@@ -24,24 +25,24 @@ public class ChangeSubscriptionSqsIntegrationTest extends SqsIntegrationTest {
     public void productCreated() throws Exception {
         assumeHasAwsCliEnv();
 
+        final List<Message> sqsMessages = new ArrayList<>();
         withProduct(client(), product -> {
             assertEventually(() -> {
                 final ReceiveMessageResult result = sqsClient.receiveMessage(queueUrl);
 
                 assertThat(result).isNotNull();
-                final List<Message> sqsMessages = result.getMessages();
+                sqsMessages.addAll(result.getMessages());
                 assertThat(sqsMessages).hasSize(1);
-
-                final Message sqsMessage = sqsMessages.get(0);
-                sqsClient.deleteMessage(queueUrl, sqsMessage.getReceiptHandle());
-
-                final ResourceCreatedPayload<Product> resourceCreatedPayload =
-                        SphereJsonUtils.readObject(sqsMessage.getBody(), ResourceCreatedPayload.class);
-                assertThat(resourceCreatedPayload).isNotNull();
-                final Reference resource = resourceCreatedPayload.getResource();
-                assertThat(resource).isNotNull();
-                assertThat(resource.getTypeId()).isEqualTo(Product.referenceTypeId());
             });
+            final Message sqsMessage = sqsMessages.get(0);
+            sqsClient.deleteMessage(queueUrl, sqsMessage.getReceiptHandle());
+
+            final ResourceCreatedPayload<Product> resourceCreatedPayload =
+                    SphereJsonUtils.readObject(sqsMessage.getBody(), ResourceCreatedPayload.class);
+            assertThat(resourceCreatedPayload).isNotNull();
+            final Reference resource = resourceCreatedPayload.getResource();
+            assertThat(resource).isNotNull();
+            assertThat(resource.getTypeId()).isEqualTo(Product.referenceTypeId());
         });
     }
 

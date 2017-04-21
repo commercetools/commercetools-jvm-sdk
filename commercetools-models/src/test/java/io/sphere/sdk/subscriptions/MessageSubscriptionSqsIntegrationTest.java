@@ -8,6 +8,7 @@ import io.sphere.sdk.json.SphereJsonUtils;
 import io.sphere.sdk.models.Reference;
 import org.junit.Test;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static io.sphere.sdk.categories.CategoryFixtures.withCategory;
@@ -25,27 +26,27 @@ public class MessageSubscriptionSqsIntegrationTest extends SqsIntegrationTest {
         assumeHasAwsCliEnv();
 
         withCategory(client(), category -> {
+            final List<Message> sqsMessages = new ArrayList<>();
             assertEventually(() -> {
                 final ReceiveMessageResult result = sqsClient.receiveMessage(queueUrl);
 
                 assertThat(result).isNotNull();
-                final List<Message> sqsMessages = result.getMessages();
+                sqsMessages.addAll(result.getMessages());
                 assertThat(sqsMessages).hasSize(1);
-
-                final Message sqsMessage = sqsMessages.get(0);
-                final MessageSubscriptionPayload<Category> messageSubscriptionPayload =
-                        SphereJsonUtils.readObject(sqsMessage.getBody(), MessageSubscriptionPayload.class);
-
-                assertThat(messageSubscriptionPayload).isNotNull();
-                final Reference resource = messageSubscriptionPayload.getResource();
-                assertThat(resource).isNotNull();
-                assertThat(resource.getTypeId()).isEqualTo(Category.referenceTypeId());
-
-                assertThat(messageSubscriptionPayload.hasCompleteMessage()).isTrue();
-                assertThat(messageSubscriptionPayload.as(CategoryCreatedMessage.class)).isNotNull();
-
-                sqsClient.deleteMessage(queueUrl, sqsMessage.getReceiptHandle());
             });
+            final Message sqsMessage = sqsMessages.get(0);
+            final MessageSubscriptionPayload<Category> messageSubscriptionPayload =
+                    SphereJsonUtils.readObject(sqsMessage.getBody(), MessageSubscriptionPayload.class);
+
+            assertThat(messageSubscriptionPayload).isNotNull();
+            final Reference resource = messageSubscriptionPayload.getResource();
+            assertThat(resource).isNotNull();
+            assertThat(resource.getTypeId()).isEqualTo(Category.referenceTypeId());
+
+            assertThat(messageSubscriptionPayload.hasCompleteMessage()).isTrue();
+            assertThat(messageSubscriptionPayload.as(CategoryCreatedMessage.class)).isNotNull();
+
+            sqsClient.deleteMessage(queueUrl, sqsMessage.getReceiptHandle());
         });
     }
 

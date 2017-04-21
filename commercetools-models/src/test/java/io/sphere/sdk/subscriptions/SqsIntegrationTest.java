@@ -50,9 +50,12 @@ public abstract class SqsIntegrationTest extends IntegrationTest {
             final SubscriptionDeleteCommand deleteCommand = SubscriptionDeleteCommand.of(subscription);
 
             client().executeBlocking(deleteCommand);
+            subscription = null;
         }
 
         SqsUtils.deleteQueueAndShutdown(queueUrl, sqsClient);
+        queueUrl = null;
+        sqsClient = null;
     }
 
     /**
