@@ -3,7 +3,7 @@ package io.sphere.sdk.subscriptions;
 import com.amazonaws.services.sqs.AmazonSQS;
 import com.amazonaws.services.sqs.model.CreateQueueResult;
 
-import static io.sphere.sdk.test.SphereTestUtils.randomInt;
+import java.util.UUID;
 
 /**
  * Util methods for working with aws sqs.
@@ -19,7 +19,7 @@ public class SqsUtils {
      * @return the url of the created sqs queue
      */
     public static String createTestQueue(final AmazonSQS sqsClient) {
-        final String queueName = "jvm-sdk-test-queue-" + randomInt();
+        final String queueName = "jvm-sdk-test-queue-" + UUID.randomUUID();
         final CreateQueueResult queueCreationResult = sqsClient.createQueue(queueName);
 
         return queueCreationResult.getQueueUrl();

@@ -3,7 +3,7 @@ package io.sphere.sdk.subscriptions;
 import com.amazonaws.services.sns.AmazonSNS;
 import com.amazonaws.services.sns.model.CreateTopicResult;
 
-import static io.sphere.sdk.test.SphereTestUtils.randomInt;
+import java.util.UUID;
 
 /**
  * Util methods for working with aws sns.
@@ -19,7 +19,7 @@ public class SnsUtils {
      * @return the arn of the created sns topic
      */
     public static String createTestTopic(final AmazonSNS snsClient) {
-        final String queueName = "jvm-sdk-test-topic-" + randomInt();
+        final String queueName = "jvm-sdk-test-topic-" + UUID.randomUUID();
         final CreateTopicResult queueCreationResult = snsClient.createTopic(queueName);
 
         return queueCreationResult.getTopicArn();
