@@ -10,3 +10,4 @@ io.sphere.sdk.annotations.processors.HasQueryModelAnnotationProcessor
 io.sphere.sdk.annotations.processors.HasQueryModelImplementationAnnotationProcessor
 io.sphere.sdk.annotations.processors.HasBuilderAnnotationProcessor
 io.sphere.sdk.annotations.processors.HasUpdateActionsProcessor
+io.sphere.sdk.annotations.processors.TypeNameAnnotationProcessor
