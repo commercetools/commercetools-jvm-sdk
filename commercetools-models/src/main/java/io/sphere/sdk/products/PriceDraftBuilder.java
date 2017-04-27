@@ -7,8 +7,8 @@ import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.Builder;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Referenceable;
-import io.sphere.sdk.types.CustomDraft;
 import io.sphere.sdk.types.CustomFieldsDraft;
+import io.sphere.sdk.types.CustomFieldsDraftBuilder;
 import io.sphere.sdk.utils.MoneyImpl;
 
 import javax.annotation.Nullable;
@@ -17,7 +17,7 @@ import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Optional;
 
-public final class PriceDraftBuilder extends Base implements Builder<PriceDraftDsl>, CustomDraft {
+public final class PriceDraftBuilder extends Base implements Builder<PriceDraftDsl> {
     private MonetaryAmount value;
     @Nullable
     private CountryCode country;
@@ -36,20 +36,6 @@ public final class PriceDraftBuilder extends Base implements Builder<PriceDraftD
 
     private PriceDraftBuilder(final MonetaryAmount value) {
         this.value = value;
-    }
-
-    public static PriceDraftBuilder of(final MonetaryAmount value) {
-        return new PriceDraftBuilder(MoneyImpl.of(value));
-    }
-
-    public static PriceDraftBuilder of(final PriceDraft template) {
-        return of(template.getValue())
-                .country(template.getCountry())
-                .customerGroup(template.getCustomerGroup())
-                .channel(template.getChannel())
-                .validFrom(template.getValidFrom())
-                .validUntil(template.getValidUntil())
-                .custom(template.getCustom());
     }
 
     public PriceDraftBuilder countryCode(@Nullable final String countryCode) {
@@ -143,5 +129,30 @@ public final class PriceDraftBuilder extends Base implements Builder<PriceDraftD
     @Override
     public PriceDraftDsl build() {
         return new PriceDraftDsl(value, country, customerGroup, channel, validFrom, validUntil, custom, tiers);
+    }
+
+
+    public static PriceDraftBuilder of(final MonetaryAmount value) {
+        return new PriceDraftBuilder(MoneyImpl.of(value));
+    }
+
+    public static PriceDraftBuilder of(final PriceDraft template) {
+        return of(template.getValue())
+                .country(template.getCountry())
+                .customerGroup(template.getCustomerGroup())
+                .channel(template.getChannel())
+                .validFrom(template.getValidFrom())
+                .validUntil(template.getValidUntil())
+                .custom(template.getCustom());
+    }
+
+    public static PriceDraftBuilder of(final Price template) {
+        return of(template.getValue())
+                .country(template.getCountry())
+                .customerGroup(template.getCustomerGroup())
+                .channel(template.getChannel())
+                .validFrom(template.getValidFrom())
+                .validUntil(template.getValidUntil())
+                .custom(CustomFieldsDraftBuilder.of(template.getCustom()).build());
     }
 }

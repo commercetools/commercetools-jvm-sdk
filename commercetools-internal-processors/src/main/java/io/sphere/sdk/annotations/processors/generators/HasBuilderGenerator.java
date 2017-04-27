@@ -11,6 +11,7 @@ import javax.lang.model.element.ExecutableElement;
 import javax.lang.model.element.Modifier;
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.util.Elements;
+import javax.lang.model.util.Types;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -20,8 +21,8 @@ import java.util.stream.Collectors;
  */
 public class HasBuilderGenerator extends AbstractBuilderGenerator<HasBuilder> {
 
-    public HasBuilderGenerator(final Elements elements) {
-        super(elements, HasBuilder.class);
+    public HasBuilderGenerator(final Elements elements, final Types types) {
+        super(elements, types, HasBuilder.class);
     }
 
     public TypeSpec generateType(final TypeElement builderType) {

@@ -10,7 +10,7 @@ public class DraftBuilderGeneratorTest extends AbstractGeneratorTest {
 
     @Before
     public void setup() {
-        generator = new DraftBuilderGenerator(compilationRule.getElements());
+        generator = new DraftBuilderGenerator(compilationRule.getElements(), compilationRule.getTypes());
     }
 
     @Test
@@ -53,5 +53,13 @@ public class DraftBuilderGeneratorTest extends AbstractGeneratorTest {
         final String content = generateAsString(ExampleWithBuilderReturnsInterfaceDraft.class);
 
         assertThat(content).isEqualTo(expectedContent(ExampleWithBuilderReturnsInterfaceDraft.class));
+    }
+
+
+    @Test
+    public void generateBuilderWithCopyFactoryMethod() throws Exception {
+        final String content = generateAsString(ExampleDraftWithCopyFactoryMethod.class);
+
+        assertThat(content).isEqualTo(expectedContent(ExampleDraftWithCopyFactoryMethod.class));
     }
 }

@@ -18,7 +18,7 @@ abstract class AbstractValidator {
 
     protected AbstractValidator(final ProcessingEnvironment processingEnvironment) {
         this.elements = processingEnvironment.getElementUtils();
-        this.typeUtils = new TypeUtils(elements);
+        this.typeUtils = new TypeUtils(elements, processingEnvironment.getTypeUtils());
         this.messager = processingEnvironment.getMessager();
     }
 

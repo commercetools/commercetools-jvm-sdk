@@ -1,6 +1,9 @@
 package io.sphere.sdk.models;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import io.sphere.sdk.annotations.CopyFactoryMethod;
+import io.sphere.sdk.annotations.FactoryMethod;
+import io.sphere.sdk.annotations.ResourceDraftValue;
 import io.sphere.sdk.types.CustomDraft;
 import io.sphere.sdk.types.CustomFieldsDraft;
 
@@ -13,7 +16,8 @@ import java.util.Set;
  *
  * @see AssetDraftBuilder
  */
-@JsonDeserialize(as = AssetDraftImpl.class)
+@JsonDeserialize(as = AssetDraftDsl.class)
+@ResourceDraftValue(abstractBuilderClass = true, copyFactoryMethods = @CopyFactoryMethod(Asset.class), factoryMethods = @FactoryMethod(parameterNames = { "sources", "name"}))
 public interface AssetDraft extends CustomDraft {
     List<AssetSource> getSources();
 

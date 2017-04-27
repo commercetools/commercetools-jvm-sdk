@@ -20,7 +20,7 @@ public class HasUpdateActionsProcessor extends CommercetoolsAnnotationProcessor<
 
     @Override
     protected void generate(final TypeElement typeElement) {
-        final List<JavaFile> javaFiles = new UpdateActionsGenerator(processingEnv.getElementUtils()).generate(typeElement);
+        final List<JavaFile> javaFiles = new UpdateActionsGenerator(processingEnv.getElementUtils(), processingEnv.getTypeUtils()).generate(typeElement);
         javaFiles.forEach(javaFile -> writeClass(javaFile));
     }
 

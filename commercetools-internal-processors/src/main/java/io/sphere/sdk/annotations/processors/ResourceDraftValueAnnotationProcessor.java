@@ -23,10 +23,10 @@ public final class ResourceDraftValueAnnotationProcessor extends CommercetoolsAn
     protected void generate(final TypeElement typeElement) {
         final ResourceDraftValueValidator validator = new ResourceDraftValueValidator(processingEnv);
         if (validator.isValid(typeElement)) {
-            final JavaFile javaFile = new ResourceDraftValueGenerator(processingEnv.getElementUtils()).generate(typeElement);
+            final JavaFile javaFile = new ResourceDraftValueGenerator(processingEnv.getElementUtils(), processingEnv.getTypeUtils()).generate(typeElement);
             writeClass(javaFile);
 
-            final JavaFile javaFileBuilder = new DraftBuilderGenerator(processingEnv.getElementUtils()).generate(typeElement);
+            final JavaFile javaFileBuilder = new DraftBuilderGenerator(processingEnv.getElementUtils(),processingEnv.getTypeUtils()).generate(typeElement);
             writeClass(javaFileBuilder);
         }
     }

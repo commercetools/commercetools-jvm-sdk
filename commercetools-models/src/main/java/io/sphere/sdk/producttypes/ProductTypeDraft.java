@@ -1,6 +1,7 @@
 package io.sphere.sdk.producttypes;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import io.sphere.sdk.annotations.CopyFactoryMethod;
 import io.sphere.sdk.annotations.FactoryMethod;
 import io.sphere.sdk.annotations.ResourceDraftValue;
 import io.sphere.sdk.models.WithKey;
@@ -13,8 +14,9 @@ import java.util.List;
  * @see io.sphere.sdk.producttypes.commands.ProductTypeCreateCommand
  */
 @JsonDeserialize(as = ProductTypeDraftDsl.class)
-@ResourceDraftValue(factoryMethods = {
-        @FactoryMethod(parameterNames = {"key", "name", "description", "attributes"})
+@ResourceDraftValue(
+        copyFactoryMethods = { @CopyFactoryMethod(ProductType.class)},
+        factoryMethods = { @FactoryMethod(parameterNames = {"key", "name", "description", "attributes"})
 })
 public interface ProductTypeDraft extends WithKey {
     String getName();

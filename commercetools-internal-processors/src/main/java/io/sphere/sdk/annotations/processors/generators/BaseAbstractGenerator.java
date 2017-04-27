@@ -13,6 +13,7 @@ import javax.lang.model.element.ExecutableElement;
 import javax.lang.model.element.Modifier;
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.util.Elements;
+import javax.lang.model.util.Types;
 import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -22,13 +23,15 @@ import java.util.stream.Stream;
  * Abstract base class for implementing javapoet based generators.
  */
 abstract class BaseAbstractGenerator {
-
     protected final Elements elements;
+    protected final Types types;
+
     protected final TypeUtils typeUtils;
 
-    BaseAbstractGenerator(final Elements elements) {
-        this.typeUtils = new TypeUtils(elements);
+    BaseAbstractGenerator(final Elements elements, final Types types) {
         this.elements = elements;
+        this.types = types;
+        this.typeUtils = new TypeUtils(elements, types);
     }
 
     protected FieldSpec createField(final PropertyGenModel property) {

@@ -5,14 +5,15 @@ import com.squareup.javapoet.TypeSpec;
 
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.util.Elements;
+import javax.lang.model.util.Types;
 
 /**
  * Abstract base class for implementing javapoet based generators - to generate a single class.
  */
 abstract class AbstractGenerator extends BaseAbstractGenerator {
 
-    AbstractGenerator(final Elements elements) {
-        super(elements);
+    AbstractGenerator(final Elements elements, final Types types) {
+        super(elements, types);
     }
 
     /**
