@@ -4,7 +4,6 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import io.sphere.sdk.annotations.ResourceValue;
 
 import javax.annotation.Nullable;
-import java.util.Arrays;
 import java.util.List;
 
 @JsonDeserialize(as = MessageSubscriptionImpl.class)
@@ -15,7 +14,24 @@ public interface MessageSubscription {
     @Nullable
     List<String> getTypes();
 
-    static MessageSubscription of(final String resourceTypeId, final String... types) {
-        return new MessageSubscriptionImpl(resourceTypeId, Arrays.asList(types));
+    /**
+     * Creates a message subscription for all message types of the given resource type.
+     *
+     * @param resourceTypeId the resource type id
+     * @return new message subscription
+     */
+    static MessageSubscription of(final String resourceTypeId) {
+        return new MessageSubscriptionImpl(resourceTypeId, null);
+    }
+
+    /**
+     * Creates a message subscription for the given messages types of the given resource type.
+     *
+     * @param resourceTypeId the resource type id
+     * @param types          the message type ids
+     * @return new message subscription
+     */
+    static MessageSubscription of(final String resourceTypeId, final List<String> types) {
+        return new MessageSubscriptionImpl(resourceTypeId, types);
     }
 }

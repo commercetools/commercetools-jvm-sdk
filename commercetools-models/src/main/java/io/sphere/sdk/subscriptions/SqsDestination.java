@@ -8,7 +8,7 @@ import java.net.URI;
 import static java.util.Objects.requireNonNull;
 
 /**
- * AWS SQS is a pull-queue on AWS.
+ * Amazon Simple Queue Service (SQS) is a pull-queue on AWS and can be used as a subscription destination.
  */
 @JsonDeserialize(as = SqsDestinationImpl.class)
 @ResourceValue

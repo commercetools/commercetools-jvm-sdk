@@ -9,6 +9,7 @@ import io.sphere.sdk.subscriptions.commands.SubscriptionDeleteCommand;
 import org.junit.Assume;
 
 import java.net.URI;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.function.Function;
 
@@ -99,7 +100,8 @@ public class SubscriptionFixtures {
     }
 
     public static SubscriptionDraftBuilder withCategoryCreatedMessage(final SubscriptionDraftBuilder subscriptionDraftBuilder) {
-        return subscriptionDraftBuilder.messages(Collections.singletonList(MessageSubscription.of(Category.resourceTypeId(), CategoryCreatedMessage.MESSAGE_TYPE)));
+        return subscriptionDraftBuilder.messages(Collections.singletonList(MessageSubscription.of(Category.resourceTypeId(),
+                Arrays.asList(CategoryCreatedMessage.MESSAGE_TYPE))));
     }
 
     public static void withSubscription(final BlockingSphereClient client, final SubscriptionDraftBuilder builder, final Function<Subscription, Subscription> f) {

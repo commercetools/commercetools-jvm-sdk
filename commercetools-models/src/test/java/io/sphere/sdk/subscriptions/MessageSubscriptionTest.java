@@ -7,6 +7,8 @@ import io.sphere.sdk.categories.messages.CategorySlugChangedMessage;
 import io.sphere.sdk.json.SphereJsonUtils;
 import org.junit.Test;
 
+import java.util.Arrays;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
@@ -17,7 +19,8 @@ public class MessageSubscriptionTest {
     @Test
     public void ofMessageTypes() throws Exception {
         final MessageSubscription categoryMessageSubscription =
-                MessageSubscription.of(Category.resourceTypeId(), CategoryCreatedMessage.MESSAGE_TYPE, CategorySlugChangedMessage.MESSAGE_TYPE);
+                MessageSubscription.of(Category.resourceTypeId(),
+                        Arrays.asList(CategoryCreatedMessage.MESSAGE_TYPE, CategorySlugChangedMessage.MESSAGE_TYPE));
 
         assertThat(categoryMessageSubscription.getResourceTypeId()).isEqualTo(Category.referenceTypeId());
         assertThat(categoryMessageSubscription.getTypes())
@@ -29,13 +32,13 @@ public class MessageSubscriptionTest {
         final MessageSubscription categoryMessageSubscription =
                 MessageSubscription.of(Category.resourceTypeId());
         assertThat(categoryMessageSubscription.getResourceTypeId()).isEqualTo(Category.referenceTypeId());
-        assertThat(categoryMessageSubscription.getTypes()).isEmpty();
+        assertThat(categoryMessageSubscription.getTypes()).isNull();
     }
 
     @Test
     public void serialize() throws Exception {
         final MessageSubscription categoryMessageSubscription =
-                MessageSubscription.of(Category.resourceTypeId(), CategoryCreatedMessage.MESSAGE_TYPE);
+                MessageSubscription.of(Category.resourceTypeId(), Arrays.asList(CategoryCreatedMessage.MESSAGE_TYPE));
         final JsonNode jsonNode = SphereJsonUtils.toJsonNode(categoryMessageSubscription);
 
         assertThat(jsonNode.get("resourceTypeId").asText()).isEqualTo(Category.referenceTypeId());
