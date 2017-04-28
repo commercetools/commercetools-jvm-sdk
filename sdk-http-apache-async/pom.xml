@@ -3,12 +3,12 @@
     <parent>
         <groupId>com.commercetools.sdk.jvm.core</groupId>
         <artifactId>commercetools-jvm-sdk</artifactId>
-        <version>1.17.0</version>
+        <version>1.17.1-SNAPSHOT</version>
     </parent>
     <groupId>com.commercetools.sdk.jvm.core</groupId>
     <artifactId>sdk-http-apache-async</artifactId>
     <packaging>jar</packaging>
-    <version>1.17.0</version>
+    <version>1.17.1-SNAPSHOT</version>
     <name>commercetools Apache Async Java client</name>
     <licenses>
         <license>
