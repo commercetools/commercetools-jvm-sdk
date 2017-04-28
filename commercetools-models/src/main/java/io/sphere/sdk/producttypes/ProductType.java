@@ -94,6 +94,10 @@ public interface ProductType extends Resource<ProductType>, AttributeDefinitionC
         return "product-type";
     }
 
+    static String resourceTypeId() {
+        return "product-type";
+    }
+
     static Reference<ProductType> reference(final ProductType productType) {
         return Reference.of(referenceTypeId(), productType.getId(), productType);
     }

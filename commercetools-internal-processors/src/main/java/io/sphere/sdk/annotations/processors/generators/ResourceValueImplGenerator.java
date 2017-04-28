@@ -25,7 +25,7 @@ public class ResourceValueImplGenerator extends AbstractGenerator {
 
     @Override
     public TypeSpec generateType(final TypeElement resourceValueTypeElement) {
-        final ClassName implTypeName = typeUtils.getResourceValueImplType(resourceValueTypeElement);
+        final TypeName implTypeName = typeUtils.getResourceValueImplType(resourceValueTypeElement);
 
         final List<ExecutableElement> propertyMethods = getAllPropertyMethodsSorted(resourceValueTypeElement);
         final List<PropertyGenModel> propertyGenModels = getPropertyGenModels(propertyMethods);
@@ -39,7 +39,7 @@ public class ResourceValueImplGenerator extends AbstractGenerator {
                 .map(v -> (TypeMirror) v.getValue()).get();
 
         final Modifier implModifier = resourceValue.abstractResourceClass() ? Modifier.ABSTRACT : Modifier.FINAL;
-        final TypeSpec typeSpec = TypeSpec.classBuilder(implTypeName)
+        final TypeSpec.Builder builder = TypeSpec.classBuilder(implTypeName instanceof ClassName ? (ClassName) implTypeName : ((ParameterizedTypeName) implTypeName).rawType)
                 .superclass(ClassName.get(baseClass))
                 .addSuperinterface(ClassName.get(resourceValueTypeElement.asType()))
                 .addModifiers(implModifier)
@@ -48,7 +48,16 @@ public class ResourceValueImplGenerator extends AbstractGenerator {
                         .addMember("comments", "$S", "Generated from: " + resourceValueTypeElement.getQualifiedName().toString()).build())
                 .addFields(fields)
                 .addMethod(createConstructor(propertyGenModels))
-                .addMethods(getMethods)
+                .addMethods(getMethods);
+        if (implTypeName instanceof ParameterizedTypeName) {
+            final ParameterizedTypeName parameterizedTypeName = (ParameterizedTypeName) implTypeName;
+            final List<TypeVariableName> typeVariables = parameterizedTypeName.typeArguments.stream()
+                    .map(TypeVariableName.class::cast)
+                    .collect(Collectors.toList());
+
+            builder.addTypeVariables(typeVariables);
+        }
+        final TypeSpec typeSpec = builder
                 .build();
 
         return typeSpec;

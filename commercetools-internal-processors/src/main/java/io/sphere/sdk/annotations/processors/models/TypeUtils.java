@@ -3,7 +3,9 @@ package io.sphere.sdk.annotations.processors.models;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.squareup.javapoet.ClassName;
+import com.squareup.javapoet.ParameterizedTypeName;
 import com.squareup.javapoet.TypeName;
+import com.squareup.javapoet.TypeVariableName;
 import io.sphere.sdk.annotations.HasBuilder;
 import io.sphere.sdk.annotations.ResourceDraftValue;
 import io.sphere.sdk.annotations.ResourceValue;
@@ -16,6 +18,7 @@ import javax.lang.model.util.Elements;
 import javax.lang.model.util.Types;
 import java.lang.annotation.Annotation;
 import java.util.*;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
@@ -55,12 +58,16 @@ public class TypeUtils {
         return ClassName.get(draftType.packageName(), draftType.simpleName() + "Dsl");
     }
 
-    public ClassName getResourceValueImplType(final TypeElement resourceValueTypeElement) {
+    public TypeName getResourceValueImplType(final TypeElement resourceValueTypeElement) {
         final ClassName draftType = ClassName.get(resourceValueTypeElement);
         final ResourceValue resourceValue = resourceValueTypeElement.getAnnotation(ResourceValue.class);
 
         final String implSuffix = "Impl" + (resourceValue.abstractResourceClass() ? "Base" : "");
-        return ClassName.get(draftType.packageName(), draftType.simpleName() + implSuffix);
+        final List<TypeName> typeParameters = resourceValueTypeElement.getTypeParameters().stream().map(TypeVariableName::get).collect(Collectors.toList());
+        final ClassName resourceValueImpl = ClassName.get(draftType.packageName(), draftType.simpleName() + implSuffix);
+        return typeParameters.isEmpty() ?
+                resourceValueImpl :
+                ParameterizedTypeName.get(resourceValueImpl, typeParameters.toArray(new TypeVariableName[typeParameters.size()]));
     }
 
     /**
