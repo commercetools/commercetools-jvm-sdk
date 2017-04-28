@@ -127,6 +127,11 @@ io.sphere.sdk.states.commands.updateactions
 io.sphere.sdk.states.expansion
 io.sphere.sdk.states.queries
 io.sphere.sdk.states.relatedupdateactions
+io.sphere.sdk.subscriptions
+io.sphere.sdk.subscriptions.commands
+io.sphere.sdk.subscriptions.commands.updateactions
+io.sphere.sdk.subscriptions.expansion
+io.sphere.sdk.subscriptions.queries
 io.sphere.sdk.taxcategories
 io.sphere.sdk.taxcategories.commands
 io.sphere.sdk.taxcategories.commands.updateactions
