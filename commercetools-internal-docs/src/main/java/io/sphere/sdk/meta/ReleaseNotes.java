@@ -36,6 +36,7 @@ import io.sphere.sdk.customobjects.queries.CustomObjectQuery;
 import io.sphere.sdk.customobjects.queries.CustomObjectQueryModel;
 import io.sphere.sdk.expansion.ExpansionPath;
 import io.sphere.sdk.http.*;
+import io.sphere.sdk.inventory.InventoryEntry;
 import io.sphere.sdk.inventory.InventoryEntryDraftBuilder;
 import io.sphere.sdk.json.SphereJsonUtils;
 import io.sphere.sdk.models.*;
@@ -43,10 +44,7 @@ import io.sphere.sdk.orders.LineItemImportDraft;
 import io.sphere.sdk.orders.Order;
 import io.sphere.sdk.orders.OrderImportDraft;
 import io.sphere.sdk.orders.expansion.OrderExpansionModel;
-import io.sphere.sdk.payments.PaymentDraft;
-import io.sphere.sdk.payments.PaymentDraftBuilder;
-import io.sphere.sdk.payments.Transaction;
-import io.sphere.sdk.payments.TransactionDraft;
+import io.sphere.sdk.payments.*;
 import io.sphere.sdk.payments.messages.PaymentTransactionStateChangedMessage;
 import io.sphere.sdk.productdiscounts.ProductDiscountDraftBuilder;
 import io.sphere.sdk.productdiscounts.queries.ProductDiscountByIdGet;
@@ -116,6 +114,21 @@ import java.util.function.Function;
  <li class=fixed-in-release></li>
  </ul>
  -->
+
+ <h3 class=released-version id="v1_17_0">1.17.0 (28.04.2017)</h3>
+ <ul>
+ <li class=new-in-release>Added {@link Payment#getKey()}, {@link PaymentDraft#getKey()} and
+ corresponding update action {@link io.sphere.sdk.payments.commands.updateactions.SetKey}.</li>
+ <li class=new-in-release>Added copy factor methods to draft builder classes ({@link CategoryDraftBuilder#of(Category)},
+ {@link InventoryEntryDraftBuilder#of(InventoryEntry)}, {@link AssetDraftBuilder#of(Asset)}, {@link PriceDraftBuilder#of(Price)},
+ {@link ProductVariantDraftBuilder#of(ProductVariant)}, {@link io.sphere.sdk.products.attributes.AttributeDraftBuilder#of(Attribute)} and
+ {@link ProductTypeDraftBuilder#of(ProductType)}) to convert from a resource to the corresponding resource draft.
+ These changes don't require changes to your source code, but they require a recompilation of all projects that depend on these classes.</li>
+ <li class=new-in-release>Added support for change subscriptions {@link io.sphere.sdk.subscriptions.ChangeSubscription} and
+ message subscriptions {@link io.sphere.sdk.subscriptions.MessageSubscription}.
+ </li>
+ </ul
+ </h3>
 
  <h3 class=released-version id="v1_16_0">1.16.0 (12.04.2017)</h3>
  <ul>
