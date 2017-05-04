@@ -39,6 +39,7 @@ public interface LineItem {
 
     Long getQuantity();
 
+    @Nullable
     CustomFields getCustom();
 
     LocalizedString getName();
