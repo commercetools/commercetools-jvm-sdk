@@ -40,6 +40,7 @@ public class TypeFixtures {
     public static final String DATETIME_FIELD_NAME = "datetime-field-name";
     public static final String MONEY_FIELD_NAME = "money-field-name";
     public static final String INT_FIELD_NAME = "int-field-name";
+    public static final String BIG_DECIMAL_FIELD_NAME = "big-dec-field-name";
     public static final String DOUBLE_FIELD_NAME = "double-field-name";
     public static final String ENUM_FIELD_NAME = "enum-field-name";
     public static final String CAT_REFERENCE_FIELD_NAME = "catref";
@@ -78,7 +79,7 @@ public class TypeFixtures {
         return TypeDraftBuilder.of(typeKey, en(TYPE_NAME), TYPE_IDS)
                 .description(en("description"))
                 .fieldDefinitions(asList(stringfieldDefinition(), enumFieldDefinition(), localizedEnumFieldDefinition(), catRefDefinition(),
-                        booleanDefinition(), LocalizedStringDefinition(), intDefinition(), doubleDefinition(), moneyDefinition(),
+                        booleanDefinition(), LocalizedStringDefinition(), intDefinition(), doubleDefinition(), bigDecimalDefinition(), moneyDefinition(),
                         dateDefinition(), dateTimeDefinition(), timeDefinition(), stringSetDefinition()));
     }
 
@@ -116,6 +117,10 @@ public class TypeFixtures {
 
     private static FieldDefinition intDefinition() {
         return fieldDefinition(NumberFieldType.of(), INT_FIELD_NAME);
+    }
+
+    private  static FieldDefinition bigDecimalDefinition(){
+        return fieldDefinition(NumberFieldType.of(), BIG_DECIMAL_FIELD_NAME);
     }
 
     private static FieldDefinition doubleDefinition() {

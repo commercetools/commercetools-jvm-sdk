@@ -8,6 +8,7 @@ import io.sphere.sdk.types.TypeFixtureRule;
 import org.junit.ClassRule;
 import org.junit.Test;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Locale;
 import java.util.function.Function;
@@ -52,6 +53,11 @@ public class WithCustomQueryModelIntegrationTest extends IntegrationTest {
     }
 
     @Test
+    public void queryByDecimal() {
+        checkQuery(fields -> fields.ofBigDecimal(BIG_DECIMAL_FIELD_NAME).is(BIG_DECIMAL));
+    }
+
+    @Test
     public void queryByMoneyCentAmount() {
         checkQuery(fields -> fields.ofMoney(MONEY_FIELD_NAME).centAmount().is(1234L));
     }
@@ -81,11 +87,11 @@ public class WithCustomQueryModelIntegrationTest extends IntegrationTest {
     }
 
     private void checkQuery(final Function<FieldsQueryModel<Category>, QueryPredicate<Category>> f) {
+
         final CategoryQuery categoryQuery = CategoryQuery.of()
                 .plusPredicates(m -> m.is(typeFixtureRule.getCategory()))
-                .plusPredicates(m -> {
-                    return f.apply(m.custom().fields());
-                });
+                .plusPredicates(m -> f.apply(m.custom().fields()));
+
         final List<Category> results = client().executeBlocking(categoryQuery).getResults();
         assertThat(results).hasSize(1);
         assertThat(results.get(0)).isEqualTo(typeFixtureRule.getCategory());

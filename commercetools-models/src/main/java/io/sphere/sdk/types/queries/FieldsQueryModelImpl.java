@@ -38,6 +38,11 @@ final class FieldsQueryModelImpl<T> extends QueryModelImpl<T> implements FieldsQ
     }
 
     @Override
+    public BigDecimalQueryModel<T> ofBigDecimal(final String name) {
+        return bigDecimalModel(name);
+    }
+
+    @Override
     public MoneyQueryModel<T> ofMoney(final String name) {
         return moneyModel(name);
     }
