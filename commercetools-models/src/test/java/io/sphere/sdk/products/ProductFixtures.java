@@ -43,7 +43,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
-import java.util.concurrent.CompletionException;
 import java.util.concurrent.CompletionStage;
 import java.util.concurrent.TimeUnit;
 import java.util.function.*;
@@ -390,5 +389,9 @@ public class ProductFixtures {
         return AssetDraftBuilder.of(singletonList(assetSource1), name)
                 .tags("desktop-sized", "svg-format", "commercetools", "awesome")
                 .build();
+    }
+
+    public static Image createExternalImage() {
+        return Image.ofWidthAndHeight("http://www.commercetools.com/assets/img/ct_logo_farbe.gif", 460, 102, "commercetools logo");
     }
 }

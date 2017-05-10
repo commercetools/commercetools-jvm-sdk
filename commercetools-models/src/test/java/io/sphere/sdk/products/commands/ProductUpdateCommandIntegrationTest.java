@@ -201,7 +201,7 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
         withUpdateableProduct(client(), (Product product) -> {
             assertThat(product.getMasterData().getStaged().getMasterVariant().getImages()).hasSize(0);
 
-            final Image image = Image.ofWidthAndHeight("http://www.commercetools.com/assets/img/ct_logo_farbe.gif", 460, 102, "commercetools logo");
+            final Image image = createExternalImage();
             final Product updatedProduct = client().executeBlocking(ProductUpdateCommand.of(product, AddExternalImage.of(image, MASTER_VARIANT_ID)));
 
             assertThat(updatedProduct.getMasterData().getStaged().getMasterVariant().getImages()).isEqualTo(asList(image));
@@ -215,7 +215,7 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
             assertThat(product.getMasterData().getStaged().getMasterVariant().getImages()).hasSize(0);
             assertThat(product.getMasterData().hasStagedChanges()).isFalse();
 
-            final Image image = Image.ofWidthAndHeight("http://www.commercetools.com/assets/img/ct_logo_farbe.gif", 460, 102, "commercetools logo");
+            final Image image = createExternalImage();
             final Product updatedProduct = client().executeBlocking(ProductUpdateCommand.of(product, AddExternalImage.ofVariantId(MASTER_VARIANT_ID, image)));
 
             assertThat(updatedProduct.getMasterData().getStaged().getMasterVariant().getImages()).isEqualTo(asList(image));
@@ -235,7 +235,7 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
             assertThat(product.getMasterData().getStaged().getMasterVariant().getImages()).hasSize(0);
             assertThat(product.getMasterData().hasStagedChanges()).isFalse();
 
-            final Image image = Image.ofWidthAndHeight("http://www.commercetools.com/assets/img/ct_logo_farbe.gif", 460, 102, "commercetools logo");
+            final Image image = createExternalImage();
             final Product updatedProduct = client().executeBlocking(ProductUpdateCommand.of(product, AddExternalImage.ofVariantId(MASTER_VARIANT_ID, image, staged)));
 
             assertThat(updatedProduct.getMasterData().getStaged().getMasterVariant().getImages()).isEqualTo(asList(image));
@@ -251,7 +251,7 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
             assertThat(masterVariant.getImages()).hasSize(0);
             assertThat(product.getMasterData().hasStagedChanges()).isFalse();
 
-            final Image image = Image.ofWidthAndHeight("http://www.commercetools.com/assets/img/ct_logo_farbe.gif", 460, 102, "commercetools logo");
+            final Image image = createExternalImage();
             final Product updatedProduct = client().executeBlocking(ProductUpdateCommand.of(product, AddExternalImage.ofSku(masterVariant.getSku(), image)));
 
             assertThat(updatedProduct.getMasterData().getStaged().getMasterVariant().getImages()).isEqualTo(asList(image));
@@ -272,7 +272,7 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
             assertThat(masterVariant.getImages()).hasSize(0);
             assertThat(product.getMasterData().hasStagedChanges()).isFalse();
 
-            final Image image = Image.ofWidthAndHeight("http://www.commercetools.com/assets/img/ct_logo_farbe.gif", 460, 102, "commercetools logo");
+            final Image image = createExternalImage();
             final Product updatedProduct = client().executeBlocking(ProductUpdateCommand.of(product, AddExternalImage.ofSku(masterVariant.getSku(), image, staged)));
 
             assertThat(updatedProduct.getMasterData().getStaged().getMasterVariant().getImages()).isEqualTo(asList(image));
@@ -830,7 +830,7 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
 
     @Test
     public void removeImage() throws Exception {
-        final Image image = Image.ofWidthAndHeight("http://www.commercetools.com/assets/img/ct_logo_farbe.gif", 460, 102, "commercetools logo");
+        final Image image = createExternalImage();
         withUpdateableProduct(client(), product -> {
             final Product productWithImage = client().executeBlocking(ProductUpdateCommand.of(product, AddExternalImage.of(image, MASTER_VARIANT_ID)));
             assertThat(productWithImage.getMasterData().getStaged().getMasterVariant().getImages()).isEqualTo(asList(image));
@@ -843,7 +843,7 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
 
     @Test
     public void removeImageByVariantId() throws Exception {
-        final Image image = Image.ofWidthAndHeight("http://www.commercetools.com/assets/img/ct_logo_farbe.gif", 460, 102, "commercetools logo");
+        final Image image = createExternalImage();
         withUpdateableProduct(client(), product -> {
             final Product productWithImage = client().executeBlocking(ProductUpdateCommand.of(product, AddExternalImage.ofVariantId(MASTER_VARIANT_ID, image)));
             assertThat(productWithImage.getMasterData().getStaged().getMasterVariant().getImages()).isEqualTo(asList(image));
@@ -861,7 +861,7 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
     }
 
     public void removeImageByVariantIdWithStaged(final Boolean staged) {
-        final Image image = Image.ofWidthAndHeight("http://www.commercetools.com/assets/img/ct_logo_farbe.gif", 460, 102, "commercetools logo");
+        final Image image = createExternalImage();
         withUpdateableProduct(client(), product -> {
             assertThat(product.getMasterData().hasStagedChanges()).isFalse();
             final Product productWithImage = client().executeBlocking(ProductUpdateCommand.of(product, AddExternalImage.ofVariantId(MASTER_VARIANT_ID, image, staged)));
@@ -878,7 +878,7 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
 
     @Test
     public void removeImageBySku() throws Exception {
-        final Image image = Image.ofWidthAndHeight("http://www.commercetools.com/assets/img/ct_logo_farbe.gif", 460, 102, "commercetools logo");
+        final Image image = createExternalImage();
         withUpdateableProduct(client(), product -> {
             final String sku = product.getMasterData().getStaged().getMasterVariant().getSku();
             final Product productWithImage = client().executeBlocking(ProductUpdateCommand.of(product, AddExternalImage.ofSku(sku, image)));
@@ -897,7 +897,7 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
     }
 
     public void removeImageBySkuWithStaged(final Boolean staged) {
-        final Image image = Image.ofWidthAndHeight("http://www.commercetools.com/assets/img/ct_logo_farbe.gif", 460, 102, "commercetools logo");
+        final Image image = createExternalImage();
         withUpdateableProduct(client(), product -> {
             assertThat(product.getMasterData().hasStagedChanges()).isFalse();
             final String sku = product.getMasterData().getStaged().getMasterVariant().getSku();
