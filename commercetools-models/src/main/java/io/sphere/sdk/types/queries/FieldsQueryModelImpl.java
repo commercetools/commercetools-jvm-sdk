@@ -38,7 +38,7 @@ final class FieldsQueryModelImpl<T> extends QueryModelImpl<T> implements FieldsQ
     }
 
     @Override
-    public BigDecimalQueryModel<T> ofBigDecimal(String name) {
+    public BigDecimalQueryModel<T> ofBigDecimal(final String name) {
         return bigDecimalModel(name);
     }
 
