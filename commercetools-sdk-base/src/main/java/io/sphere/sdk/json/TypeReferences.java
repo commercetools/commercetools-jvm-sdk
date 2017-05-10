@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import io.sphere.sdk.models.Base;
 
 import javax.money.MonetaryAmount;
+import java.math.BigDecimal;
 import java.time.ZonedDateTime;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -33,6 +34,14 @@ public final class TypeReferences extends Base {
         };
     }
 
+    public static TypeReference<BigDecimal> bigDecimalTypeReference() {
+        return new TypeReference<BigDecimal>() {
+            @Override
+            public String toString() {
+                return "TypeReference<BigDecimal>";
+            }
+        };
+    }
     public static TypeReference<Long> longTypeReference() {
         return new TypeReference<Long>() {
             @Override

@@ -139,6 +139,19 @@ public class QueryModelImpl<T> extends Base implements QueryModel<T> {
         return longModel(this, pathSegment);
     }
 
+    protected BigDecimalQuerySortingModel<T> bigDecimalModel(@Nullable final QueryModel<T> parent, final String pathSegment) {
+        return new BigDecimalQuerySortingModelImpl<>(parent, pathSegment);
+    }
+
+    protected BigDecimalQuerySortingModel<T> bigDecimalQuerySortingModel(final String pathSegment) {
+        return bigDecimalModel(this, pathSegment);
+    }
+
+    protected BigDecimalQuerySortingModel<T> bigDecimalModel(final String pathSegment) {
+        return bigDecimalModel(this, pathSegment);
+    }
+
+
     protected IntegerQuerySortingModel<T> integerQuerySortingModel(final String pathSegment) {
         return integerModel(this, pathSegment);
     }

@@ -13,6 +13,7 @@ import io.sphere.sdk.utils.MoneyImpl;
 import org.junit.rules.ExternalResource;
 
 import javax.money.MonetaryAmount;
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.ZonedDateTime;
@@ -33,6 +34,7 @@ public class TypeFixtureRule extends ExternalResource {
     public static final boolean BOOLEAN = true;
     public static final ZonedDateTime ZONED_DATE_TIME = ZonedDateTime.now();
     public static final double DOUBLE = 3223.43;
+    public static final BigDecimal BIG_DECIMAL = new BigDecimal("3223.43");
     public static final String ENUM_KEY = "key1";
     public static final String LOC_ENUM_KEY = "key1";
     public static final int INT = 4343;
@@ -69,6 +71,7 @@ public class TypeFixtureRule extends ExternalResource {
         fields.put(DATE_FIELD_NAME, DATE);
         fields.put(DATETIME_FIELD_NAME, ZONED_DATE_TIME);
         fields.put(DOUBLE_FIELD_NAME, DOUBLE);
+        fields.put(BIG_DECIMAL_FIELD_NAME,BIG_DECIMAL);
         fields.put(ENUM_FIELD_NAME, ENUM_KEY);
         fields.put(INT_FIELD_NAME, INT);
         fields.put(LOCALIZED_ENUM_FIELD_NAME, LOC_ENUM_KEY);
