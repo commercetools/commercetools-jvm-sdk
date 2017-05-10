@@ -19,6 +19,8 @@ public interface FieldsQueryModel<T> {
 
     LongQueryModel<T> ofLong(String name);
 
+    BigDecimalQueryModel<T> ofBigDecimal(String name);
+
     MoneyQueryModel<T> ofMoney(String name);
 
     TimestampSortingModel<T> ofDateTime(String name);

@@ -12,6 +12,7 @@ import io.sphere.sdk.models.Reference;
 
 import javax.annotation.Nullable;
 import javax.money.MonetaryAmount;
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.ZonedDateTime;
@@ -99,6 +100,12 @@ final class CustomFieldsImpl extends Base implements CustomFields {
     @Nullable
     public Double getFieldAsDouble(final String name) {
         return getField(name, TypeReferences.doubleTypeReference());
+    }
+
+    @Override
+    @Nullable
+    public BigDecimal getFieldAsBigDecimal(final String name) {
+        return getField(name, TypeReferences.bigDecimalTypeReference());
     }
 
     @Override

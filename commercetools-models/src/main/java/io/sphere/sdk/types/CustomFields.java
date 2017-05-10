@@ -8,6 +8,7 @@ import io.sphere.sdk.models.Reference;
 
 import javax.annotation.Nullable;
 import javax.money.MonetaryAmount;
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.ZonedDateTime;
@@ -52,6 +53,9 @@ public interface CustomFields {
 
     @Nullable
     Double getFieldAsDouble(String name);
+
+    @Nullable
+    BigDecimal getFieldAsBigDecimal(String name);
 
     @Nullable
     MonetaryAmount getFieldAsMoney(String name);
