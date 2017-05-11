@@ -16,7 +16,7 @@ import java.util.Objects;
 /**
  * Created by abeniasaad on 11.05.17.
  */
-public class LineItemImpl extends LineItemImplBase {
+public final class LineItemImpl extends LineItemImplBase {
 
     private final ProductVariant variant;
 
