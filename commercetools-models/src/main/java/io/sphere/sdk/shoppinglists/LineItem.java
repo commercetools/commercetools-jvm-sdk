@@ -26,7 +26,7 @@ import java.time.ZonedDateTime;
  * @see ShoppingList#getLineItems()
  */
 @JsonDeserialize(as = LineItemImpl.class)
-@ResourceValue
+@ResourceValue(abstractResourceClass = true)
 public interface LineItem {
     String getId();
 

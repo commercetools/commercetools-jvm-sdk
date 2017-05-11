@@ -18,6 +18,7 @@ import io.sphere.sdk.types.CustomFields;
 import javax.annotation.Nullable;
 import javax.money.MonetaryAmount;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 import static java.util.Collections.emptyList;
@@ -30,7 +31,7 @@ final class LineItemImpl extends LineItemImplBase {
 
     @JsonCreator
     LineItemImpl(final String id, final String productId, final LocalizedString name,
-                 final JsonNode variant, final Price price, final Long quantity,
+                 @Nullable  final ObjectNode variant, final Price price, final Long quantity,
                  final Set<ItemState> state, @Nullable final TaxRate taxRate,
                  @Nullable final Reference<Channel> supplyChannel, final DiscountedLineItemPrice discountedPrice,
                  @Nullable final LocalizedString productSlug, @Nullable final Reference<Channel> distributionChannel,
@@ -41,12 +42,17 @@ final class LineItemImpl extends LineItemImplBase {
         super(custom, discountedPricePerQuantity, distributionChannel, id, name, price, priceMode, productId, productSlug,
                 productType, quantity, state, supplyChannel, taxRate, taxedPrice, totalPrice, null);
 
-        if (variant instanceof ObjectNode) {
-            ((ObjectNode) variant).put("productId", productId);
+        this.variant = asVariant(variant,productId);
+
+    }
+
+    private ProductVariant asVariant(final ObjectNode variant,final String productId){
+        if(variant == null) {
+            return null;
         }
-
-        this.variant = SphereJsonUtils.readObject(variant, ProductVariant.class);
-
+        Objects.requireNonNull(productId);
+        variant.put("productId", productId);
+        return SphereJsonUtils.readObject(variant, ProductVariant.class);
     }
 
 
