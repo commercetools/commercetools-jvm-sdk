@@ -18,7 +18,6 @@ import java.util.Objects;
  */
 final class LineItemImpl extends LineItemImplBase {
 
-    private final ProductVariant variant;
 
     @JsonCreator
     public LineItemImpl(@Nullable  final ObjectNode variant, final ZonedDateTime addedAt, @Nullable final CustomFields custom,
@@ -26,13 +25,12 @@ final class LineItemImpl extends LineItemImplBase {
                         final String productId, @Nullable final LocalizedString productSlug,
                         final Reference<ProductType> productType, final Long quantity, @Nullable final Integer variantId) {
 
-        super(addedAt, custom, deactivatedAt, id, name, productId, productSlug, productType, quantity, null, variantId);
+        super(addedAt, custom, deactivatedAt, id, name, productId, productSlug, productType, quantity, asVariant(variant, productId), variantId);
 
-        this.variant = asVariant(variant, productId);
 
     }
 
-    private ProductVariant asVariant(final ObjectNode variant, final String productId) {
+    private static ProductVariant asVariant(final ObjectNode variant, final String productId) {
         if (variant == null) {
             return null;
         }
@@ -41,10 +39,5 @@ final class LineItemImpl extends LineItemImplBase {
         return SphereJsonUtils.readObject(variant, ProductVariant.class);
     }
 
-
-    @Override
-    public ProductVariant getVariant() {
-        return variant;
-    }
 
 }

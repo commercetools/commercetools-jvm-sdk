@@ -26,9 +26,6 @@ import static java.util.Collections.emptyList;
 final class LineItemImpl extends LineItemImplBase {
 
 
-    private final ProductVariant variant;
-
-
     @JsonCreator
     LineItemImpl(final String id, final String productId, final LocalizedString name,
                  @Nullable  final ObjectNode variant, final Price price, final Long quantity,
@@ -40,25 +37,17 @@ final class LineItemImpl extends LineItemImplBase {
                  @Nullable final TaxedItemPrice taxedPrice, final LineItemPriceMode priceMode,
                  @Nullable final Reference<ProductType> productType) {
         super(custom, discountedPricePerQuantity, distributionChannel, id, name, price, priceMode, productId, productSlug,
-                productType, quantity, state, supplyChannel, taxRate, taxedPrice, totalPrice, null);
-
-        this.variant = asVariant(variant,productId);
+                productType, quantity, state, supplyChannel, taxRate, taxedPrice, totalPrice, asVariant(variant,productId));
 
     }
 
-    private ProductVariant asVariant(final ObjectNode variant,final String productId){
+    private static ProductVariant asVariant(final ObjectNode variant,final String productId){
         if(variant == null) {
             return null;
         }
         Objects.requireNonNull(productId);
         variant.put("productId", productId);
         return SphereJsonUtils.readObject(variant, ProductVariant.class);
-    }
-
-
-    @Override
-    public ProductVariant getVariant() {
-        return variant;
     }
 
 
