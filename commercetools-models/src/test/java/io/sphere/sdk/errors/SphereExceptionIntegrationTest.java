@@ -28,6 +28,7 @@ import io.sphere.sdk.models.errors.InvalidJsonInputError;
 import io.sphere.sdk.models.errors.SphereError;
 import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.test.IntegrationTest;
+import io.sphere.sdk.test.utils.VrapHeaders;
 import org.hamcrest.CustomTypeSafeMatcher;
 import org.junit.Rule;
 import org.junit.Test;
@@ -66,7 +67,8 @@ public class SphereExceptionIntegrationTest extends IntegrationTest {
 
     @Test
     public void invalidJsonInHttpRequestIntent() throws Throwable {
-        executing(() -> TestSphereRequest.of(HttpRequestIntent.of(POST, "/categories", "{invalidJson :)")))
+        final HttpHeaders headers = VrapHeaders.disableValidation("request", "response");
+        executing(() -> TestSphereRequest.of(HttpRequestIntent.of(POST, "/categories", "{invalidJson :)").withHeaders(headers)))
                 .resultsInA(ErrorResponseException.class, InvalidJsonInputError.class);
     }
 
