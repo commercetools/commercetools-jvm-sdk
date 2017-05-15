@@ -13,50 +13,18 @@ import java.util.stream.Collectors;
 
 import static io.sphere.sdk.utils.SphereInternalUtils.listOf;
 
-public final class ProductDraftBuilder extends Base implements Builder<ProductDraft>, WithLocalizedSlug, MetaAttributes {
+public final class ProductDraftBuilder extends ProductDraftBuilderBase<ProductDraftBuilder> {
 
-    private final ResourceIdentifier<ProductType> productType;
-    private ProductVariantDraft masterVariant;
-    private List<ProductVariantDraft> variants = Collections.emptyList();
-    private LocalizedString name;
-    private LocalizedString slug;
-    private LocalizedString description;
-    private LocalizedString metaTitle;
-    private LocalizedString metaDescription;
-    private LocalizedString metaKeywords;
-    private Set<Reference<Category>> categories = Collections.emptySet();
-    private SearchKeywords searchKeywords = SearchKeywords.of();
-    private Reference<TaxCategory> taxCategory;
-    @Nullable
-    private Reference<State> state;
-    @Nullable
-    private CategoryOrderHints categoryOrderHints;
-    @Nullable
-    private Boolean publish;
-    @Nullable
-    private String key;
 
-    private ProductDraftBuilder(final ResourceIdentifier<ProductType> productType, final LocalizedString name, final LocalizedString slug, final ProductVariantDraft masterVariant) {
-        this.name = name;
-        this.slug = slug;
-        this.productType = productType;
-        this.masterVariant = masterVariant;
+    ProductDraftBuilder(Set<Reference<Category>> categories, @Nullable CategoryOrderHints categoryOrderHints, @Nullable LocalizedString description, @Nullable String key, ProductVariantDraft masterVariant, @Nullable LocalizedString metaDescription, @Nullable LocalizedString metaKeywords, @Nullable LocalizedString metaTitle, LocalizedString name, ResourceIdentifier<ProductType> productType, @Nullable Boolean publish, SearchKeywords searchKeywords, LocalizedString slug, @Nullable Reference<State> state, @Nullable Reference<TaxCategory> taxCategory, List<ProductVariantDraft> variants) {
+        super(categories, categoryOrderHints, description, key, masterVariant, metaDescription, metaKeywords, metaTitle, name, productType, publish, searchKeywords, slug, state, taxCategory, variants);
+        init();
     }
 
-    public static ProductDraftBuilder of(final ProductDraft productDraft) {
-        return of(productDraft.getProductType(), productDraft.getName(), productDraft.getSlug(), productDraft.getMasterVariant())
-                .variants(productDraft.getVariants())
-                .description(productDraft.getDescription())
-                .metaTitle(productDraft.getMetaTitle())
-                .metaDescription(productDraft.getMetaDescription())
-                .metaKeywords(productDraft.getMetaKeywords())
-                .categories(productDraft.getCategories())
-                .searchKeywords(productDraft.getSearchKeywords())
-                .taxCategory(productDraft.getTaxCategory())
-                .state(productDraft.getState())
-                .categoryOrderHints(productDraft.getCategoryOrderHints())
-                .publish(productDraft.isPublish())
-                .key(productDraft.getKey());
+    private void init(){
+        variants = Optional.ofNullable(variants).orElse(Collections.emptyList());
+        categories = Optional.ofNullable(categories).orElse(Collections.emptySet());
+        searchKeywords = Optional.ofNullable(searchKeywords).orElse(SearchKeywords.of());
     }
 
     public static ProductDraftBuilder of(final ResourceIdentifiable<ProductType> productType, final LocalizedString name, final LocalizedString slug, final List<ProductVariantDraft> allVariants) {
@@ -67,23 +35,15 @@ public final class ProductDraftBuilder extends Base implements Builder<ProductDr
     }
 
     public static ProductDraftBuilder of(final ResourceIdentifiable<ProductType> productType, final LocalizedString name, final LocalizedString slug, final ProductVariantDraft masterVariant) {
-        return new ProductDraftBuilder(productType.toResourceIdentifier(), name, slug, masterVariant);
+        return of(productType.toResourceIdentifier(),name,slug,masterVariant);
     }
 
-    @Override
-    public ProductDraft build() {
-        return new ProductDraftImpl(productType, getName(), getSlug(), getDescription(), getCategories(), getMetaTitle(), getMetaDescription(), getMetaKeywords(), masterVariant, variants, getTaxCategory(), getSearchKeywords(), getState(), getCategoryOrderHints(), publish, key);
-    }
-
-    protected ProductDraftBuilder getThis() {
-        return this;
-    }
 
     public ProductDraftBuilder variants(final List<ProductVariantDraft> variants) {
         this.variants = variants != null
                 ? Collections.unmodifiableList(new ArrayList<>(variants))
                 : Collections.emptyList();
-        return getThis();
+        return ProductDraftBuilder.this;
     }
 
     public ProductDraftBuilder plusVariants(final ProductVariantDraft variantToAdd) {
@@ -94,57 +54,6 @@ public final class ProductDraftBuilder extends Base implements Builder<ProductDr
         return variants(listOf(this.variants, variantsToAdd));
     }
 
-    public ProductDraftBuilder masterVariant(final ProductVariantDraft masterVariant) {
-        this.masterVariant = masterVariant;
-        return getThis();
-    }
-
-    public ProductVariantDraft getMasterVariant() {
-        return masterVariant;
-    }
-
-    public ResourceIdentifier<ProductType> getProductType() {
-        return productType;
-    }
-
-    public List<ProductVariantDraft> getVariants() {
-        return variants;
-    }
-
-    public ProductDraftBuilder slug(final LocalizedString slug) {
-        this.slug = slug;
-        return getThis();
-    }
-
-    public ProductDraftBuilder name(final LocalizedString name) {
-        this.name = name;
-        return getThis();
-    }
-
-    public ProductDraftBuilder description(@Nullable final LocalizedString description) {
-        this.description = description;
-        return getThis();
-    }
-
-    public ProductDraftBuilder metaTitle(@Nullable final LocalizedString metaTitle) {
-        this.metaTitle = metaTitle;
-        return getThis();
-    }
-
-    public ProductDraftBuilder metaDescription(@Nullable final LocalizedString metaDescription) {
-        this.metaDescription = metaDescription;
-        return getThis();
-    }
-
-    public ProductDraftBuilder metaKeywords(@Nullable final LocalizedString metaKeywords) {
-        this.metaKeywords = metaKeywords;
-        return getThis();
-    }
-
-    public ProductDraftBuilder categories(final Set<Reference<Category>> categories) {
-        this.categories = categories;
-        return getThis();
-    }
 
     public ProductDraftBuilder categories(final List<Reference<Category>> categories) {
         return categories(new LinkedHashSet<>(categories));
@@ -158,99 +67,18 @@ public final class ProductDraftBuilder extends Base implements Builder<ProductDr
      */
     public ProductDraftBuilder categoriesAsObjectList(final List<Category> categories) {
         final List<Reference<Category>> referenceList = categories.stream()
-                .filter(x -> x != null)
-                .map(cat -> cat.toReference())
+                .filter(Objects::nonNull)
+                .map(Category::toReference)
                 .collect(Collectors.toList());
         return categories(referenceList);
     }
 
-    public ProductDraftBuilder searchKeywords(final SearchKeywords searchKeywords) {
-        this.searchKeywords = searchKeywords;
-        return getThis();
-    }
-
-    public ProductDraftBuilder categoryOrderHints(@Nullable final CategoryOrderHints categoryOrderHints) {
-        this.categoryOrderHints = categoryOrderHints;
-        return getThis();
-    }
-
-    public ProductDraftBuilder key(@Nullable final String key) {
-        this.key = key;
-        return getThis();
-    }
-
-    public LocalizedString getName() {
-        return name;
-    }
-
-    public LocalizedString getSlug() {
-        return slug;
-    }
-
-    @Nullable
-    public LocalizedString getDescription() {
-        return description;
-    }
-
-    @Nullable
-    public LocalizedString getMetaTitle() {
-        return metaTitle;
-    }
-
-    @Nullable
-    public LocalizedString getMetaDescription() {
-        return metaDescription;
-    }
-
-    @Nullable
-    public LocalizedString getMetaKeywords() {
-        return metaKeywords;
-    }
-
-    public Set<Reference<Category>> getCategories() {
-        return categories;
-    }
-
-    public SearchKeywords getSearchKeywords() {
-        return searchKeywords;
-    }
-
-    public Reference<TaxCategory> getTaxCategory() {
-        return taxCategory;
-    }
-
-    public ProductDraftBuilder taxCategory(final Referenceable<TaxCategory> taxCategory) {
-        this.taxCategory = taxCategory != null ? taxCategory.toReference() : null;
-        return getThis();
-    }
 
     public ProductDraftBuilder state(@Nullable final Referenceable<State> state) {
         this.state = Optional.ofNullable(state).map(Referenceable::toReference).orElse(null);
-        return getThis();
+        return ProductDraftBuilder.this;
     }
 
-    public ProductDraftBuilder publish(@Nullable final Boolean publish) {
-        this.publish = publish;
-        return getThis();
-    }
 
-    @Nullable
-    public Reference<State> getState() {
-        return state;
-    }
 
-    @Nullable
-    public CategoryOrderHints getCategoryOrderHints() {
-        return categoryOrderHints;
-    }
-
-    @Nullable
-    public Boolean isPublish() {
-        return publish;
-    }
-
-    @Nullable
-    public String getKey() {
-        return key;
-    }
 }
