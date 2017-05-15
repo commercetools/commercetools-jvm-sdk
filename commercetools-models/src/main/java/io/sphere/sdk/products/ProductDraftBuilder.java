@@ -18,6 +18,13 @@ public final class ProductDraftBuilder extends ProductDraftBuilderBase<ProductDr
 
     public ProductDraftBuilder(Set<Reference<Category>> categories, @Nullable CategoryOrderHints categoryOrderHints, @Nullable LocalizedString description, @Nullable String key, ProductVariantDraft masterVariant, @Nullable LocalizedString metaDescription, @Nullable LocalizedString metaKeywords, @Nullable LocalizedString metaTitle, LocalizedString name, ResourceIdentifier<ProductType> productType, @Nullable Boolean publish, SearchKeywords searchKeywords, LocalizedString slug, @Nullable Reference<State> state, @Nullable Reference<TaxCategory> taxCategory, List<ProductVariantDraft> variants) {
         super(categories, categoryOrderHints, description, key, masterVariant, metaDescription, metaKeywords, metaTitle, name, productType, publish, searchKeywords, slug, state, taxCategory, variants);
+        init();
+    }
+
+    private void init(){
+        variants = Optional.ofNullable(variants).orElse(Collections.emptyList());
+        categories = Optional.ofNullable(categories).orElse(Collections.emptySet());
+        searchKeywords = Optional.ofNullable(searchKeywords).orElse(SearchKeywords.of());
     }
 
     public static ProductDraftBuilder of(final ResourceIdentifiable<ProductType> productType, final LocalizedString name, final LocalizedString slug, final List<ProductVariantDraft> allVariants) {
