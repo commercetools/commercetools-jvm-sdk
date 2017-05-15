@@ -1,6 +1,8 @@
 package io.sphere.sdk.products;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import io.sphere.sdk.annotations.*;
 import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.models.*;
 import io.sphere.sdk.producttypes.ProductType;
@@ -13,12 +15,17 @@ import java.util.List;
 import java.util.Set;
 
 /**
-  A template for a new {@link io.sphere.sdk.products.Product}.
-
-  @see ProductDraftBuilder
-  @see io.sphere.sdk.products.commands.ProductCreateCommand
+ * A template for a new {@link io.sphere.sdk.products.Product}.
+ *
+ * @see ProductDraftBuilder
+ * @see io.sphere.sdk.products.commands.ProductCreateCommand
  */
-@JsonDeserialize(as = ProductDraftImpl.class)
+
+
+@ResourceDraftValue(gettersForBuilder = true,
+        factoryMethods = {@FactoryMethod(parameterNames = {"productType", "name", "slug", "masterVariant"})},
+        abstractBuilderClass = true)
+@JsonDeserialize(as = ProductDraftDsl.class)
 public interface ProductDraft extends WithLocalizedSlug, MetaAttributes {
 
 
@@ -62,12 +69,13 @@ public interface ProductDraft extends WithLocalizedSlug, MetaAttributes {
 
     /**
      * Flag for publishing the product immediately.
-     *
+     * <p>
      * {@include.example io.sphere.sdk.products.commands.ProductCreateCommandIntegrationTest#createPublishedProduct()}
      *
      * @return true if product should be published
      */
     @Nullable
+    @JsonProperty
     Boolean isPublish();
 
     @Nullable
