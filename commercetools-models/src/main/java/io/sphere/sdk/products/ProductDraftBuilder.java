@@ -39,15 +39,11 @@ public final class ProductDraftBuilder extends ProductDraftBuilderBase<ProductDr
     }
 
 
-    protected ProductDraftBuilder getThis() {
-        return this;
-    }
-
     public ProductDraftBuilder variants(final List<ProductVariantDraft> variants) {
         this.variants = variants != null
                 ? Collections.unmodifiableList(new ArrayList<>(variants))
                 : Collections.emptyList();
-        return getThis();
+        return ProductDraftBuilder.this;
     }
 
     public ProductDraftBuilder plusVariants(final ProductVariantDraft variantToAdd) {
@@ -78,15 +74,9 @@ public final class ProductDraftBuilder extends ProductDraftBuilderBase<ProductDr
     }
 
 
-
-    public ProductDraftBuilder taxCategory(final Referenceable<TaxCategory> taxCategory) {
-        this.taxCategory = taxCategory != null ? taxCategory.toReference() : null;
-        return getThis();
-    }
-
     public ProductDraftBuilder state(@Nullable final Referenceable<State> state) {
         this.state = Optional.ofNullable(state).map(Referenceable::toReference).orElse(null);
-        return getThis();
+        return ProductDraftBuilder.this;
     }
 
 

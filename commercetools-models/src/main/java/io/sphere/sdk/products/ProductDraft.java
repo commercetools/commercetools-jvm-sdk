@@ -75,7 +75,7 @@ public interface ProductDraft extends WithLocalizedSlug, MetaAttributes {
      * @return true if product should be published
      */
     @Nullable
-    @JsonProperty
+    @JsonProperty("publish")
     Boolean isPublish();
 
     @Nullable
