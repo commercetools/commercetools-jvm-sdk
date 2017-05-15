@@ -143,7 +143,7 @@ public class ProductFixtures {
         withUpdateableProduct(client, testName, consumerToFunction(consumer));
     }
 
-    public static void withUpdateableProduct(final BlockingSphereClient client, final Supplier<ProductDraft> creator, final Function<Product, Product> user) {
+    public static void withUpdateableProduct(final BlockingSphereClient client, final Supplier<? extends ProductDraft> creator, final Function<Product, Product> user) {
         final ProductDraft productDraft = creator.get();
         final String slug = englishSlugOf(productDraft);
         final PagedQueryResult<Product> pagedQueryResult = client.executeBlocking(ProductQuery.of().bySlug(ProductProjectionType.CURRENT, Locale.ENGLISH, slug));
@@ -163,7 +163,7 @@ public class ProductFixtures {
         });
     }
 
-    public static void withProduct(final BlockingSphereClient client, final Supplier<ProductDraft> creator, final Consumer<Product> user) {
+    public static void withProduct(final BlockingSphereClient client, final Supplier<? extends ProductDraft> creator, final Consumer<Product> user) {
         withUpdateableProduct(client, creator, consumerToFunction(user));
     }
 
