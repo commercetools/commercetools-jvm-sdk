@@ -1,0 +1,74 @@
+{
+  "id": "9532d501-8cec-4d3a-a3c4-5a25beb9b5c2",
+  "productId": "73f002a1-0c5a-4849-b985-fa1145a8c76d",
+  "name": {
+    "en": "foorandom string -3024787841494578293191-2"
+  },
+  "productType": {
+    "typeId": "product-type",
+    "id": "a51b92b4-b4dc-42ad-90a4-5939e82258a5",
+    "version": 1
+  },
+  "productSlug": {
+    "en": "foorandom-string-3024787841494578293191-2-06601151"
+  },
+  "variant": {
+    "id": 1,
+    "sku": "1f92d491-2180-489c-bcef-3966cdc68c0b",
+    "prices": [
+      {
+        "value": {
+          "currencyCode": "EUR",
+          "centAmount": 1234
+        },
+        "id": "70a56289-bd20-4c47-8364-47b498ad993b",
+        "country": "DE"
+      }
+    ],
+    "images": [],
+    "attributes": [],
+    "assets": []
+  },
+  "price": {
+    "value": {
+      "currencyCode": "EUR",
+      "centAmount": 1234
+    },
+    "id": "70a56289-bd20-4c47-8364-47b498ad993b",
+    "country": "DE"
+  },
+  "quantity": 3,
+  "discountedPricePerQuantity": [],
+  "taxRate": {
+    "name": "de19",
+    "amount": 0.19,
+    "includedInPrice": true,
+    "country": "DE",
+    "id": "CVUy-guD",
+    "subRates": []
+  },
+  "state": [
+    {
+      "quantity": 3,
+      "state": {
+        "typeId": "state",
+        "id": "3242fa75-0cbe-4b9f-b852-dab162f3a7a9"
+      }
+    }
+  ],
+  "priceMode": "Platform",
+  "totalPrice": {
+    "currencyCode": "EUR",
+    "centAmount": 3702
+  },
+  "taxedPrice": {
+    "totalNet": {
+      "currencyCode": "EUR",
+      "centAmount": 3111
+    },
+    "totalGross": {
+      "currencyCode": "EUR",
+      "centAmount": 3702
+    }
+  }
+}
