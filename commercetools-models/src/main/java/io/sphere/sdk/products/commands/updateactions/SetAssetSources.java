@@ -5,6 +5,7 @@ import io.sphere.sdk.products.Product;
 
 import javax.annotation.Nullable;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Sets the sources of an asset.
@@ -23,7 +24,7 @@ public final class SetAssetSources extends StagedProductUpdateActionImpl<Product
     private final List<AssetSource> sources;
 
     private SetAssetSources(final String assetId, @Nullable final Integer variantId, @Nullable final String sku, @Nullable final List<AssetSource> sources, @Nullable final Boolean staged) {
-        super("setAssetSources",staged);
+        super("setAssetSources", Optional.ofNullable(staged).orElse(true));
         this.assetId = assetId;
         this.variantId = variantId;
         this.sku = sku;
