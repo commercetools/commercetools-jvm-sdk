@@ -2394,6 +2394,84 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
         });
     }
 
+
+
+    @Test
+    public void setAssetSourcesByVariantId() throws Exception {
+        withProductHavingAssets(client(), product -> {
+            assertThat(product.getMasterData().hasStagedChanges()).isFalse();
+            final AssetSource assetSource = AssetSourceBuilder.ofUri("http://dev.commercetools.com/assets/img/CT-logo.svg")
+                    .key("commercetools-logo")
+                    .contentType("image/svg+xml")
+                    .build();
+            final ProductVariant masterVariant = product.getMasterData().getStaged().getMasterVariant();
+            final String assetId = masterVariant.getAssets().get(0).getId();
+
+            final ProductUpdateCommand cmd =
+                    ProductUpdateCommand.of(product, SetAssetSources.ofVariantId(masterVariant.getId(), assetId, Collections.singletonList(assetSource)));
+            final Product updatedProduct = client().executeBlocking(cmd);
+
+            AssetSource source  = updatedProduct.getMasterData().getStaged().getMasterVariant().getAssets().get(0).getSources().get(0);
+            assertThat(source.getUri()).isEqualTo("http://dev.commercetools.com/assets/img/CT-logo.svg");
+            assertThat(source.getKey()).isEqualTo("commercetools-logo");
+            assertThat(source.getContentType()).isEqualTo("image/svg+xml");
+            return updatedProduct;
+        });
+    }
+
+    @Test
+    public void setAssetSourcesBySku() throws Exception {
+        withProductHavingAssets(client(), product -> {
+            assertThat(product.getMasterData().hasStagedChanges()).isFalse();
+            final AssetSource assetSource = AssetSourceBuilder.ofUri("http://dev.commercetools.com/assets/img/CT-logo.svg")
+                    .key("commercetools-logo")
+                    .contentType("image/svg+xml")
+                    .build();
+            final ProductVariant masterVariant = product.getMasterData().getStaged().getMasterVariant();
+            final String assetId = masterVariant.getAssets().get(0).getId();
+
+            final ProductUpdateCommand cmd =
+                    ProductUpdateCommand.of(product, SetAssetSources.ofSku(masterVariant.getSku(), assetId, Collections.singletonList(assetSource)));
+            final Product updatedProduct = client().executeBlocking(cmd);
+
+            AssetSource source  = updatedProduct.getMasterData().getStaged().getMasterVariant().getAssets().get(0).getSources().get(0);
+            assertThat(source.getUri()).isEqualTo("http://dev.commercetools.com/assets/img/CT-logo.svg");
+            assertThat(source.getKey()).isEqualTo("commercetools-logo");
+            assertThat(source.getContentType()).isEqualTo("image/svg+xml");
+            return updatedProduct;
+        });
+    }
+
+
+    @Test
+    public void setAssetSourcesByVariantIdWithStaged() {
+        setAssetSourcesByVariantIdWithStaged(true);
+        setAssetSourcesByVariantIdWithStaged(false);
+    }
+
+    public void setAssetSourcesByVariantIdWithStaged(final Boolean staged) {
+        withProductHavingAssets(client(), product -> {
+            assertThat(product.getMasterData().hasStagedChanges()).isFalse();
+            final AssetSource assetSource = AssetSourceBuilder.ofUri("http://dev.commercetools.com/assets/img/CT-logo.svg")
+                    .key("commercetools-logo")
+                    .contentType("image/svg+xml")
+                    .build();
+            final ProductVariant masterVariant = product.getMasterData().getStaged().getMasterVariant();
+            final String assetId = masterVariant.getAssets().get(0).getId();
+
+            final ProductUpdateCommand cmd =
+                    ProductUpdateCommand.of(product, SetAssetSources.ofVariantId(masterVariant.getId(), assetId, Collections.singletonList(assetSource),staged));
+            final Product updatedProduct = client().executeBlocking(cmd);
+
+            AssetSource source  = updatedProduct.getMasterData().getStaged().getMasterVariant().getAssets().get(0).getSources().get(0);
+            assertThat(source.getUri()).isEqualTo("http://dev.commercetools.com/assets/img/CT-logo.svg");
+            assertThat(source.getKey()).isEqualTo("commercetools-logo");
+            assertThat(source.getContentType()).isEqualTo("image/svg+xml");
+            assertThat(updatedProduct.getMasterData().hasStagedChanges()).isEqualTo(staged);
+            return updatedProduct;
+        });
+    }
+
     @Test
     public void assetCustomTypeByVariantId() throws Exception {
         withUpdateableType(client(), (Type type) -> {
