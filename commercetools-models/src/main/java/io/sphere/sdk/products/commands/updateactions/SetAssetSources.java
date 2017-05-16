@@ -11,10 +11,6 @@ import java.util.Optional;
  * Sets the sources of an asset.
  */
 public final class SetAssetSources extends StagedProductUpdateActionImpl<Product> {
-
-
-
-
     @Nullable
     private final Integer variantId;
     @Nullable
