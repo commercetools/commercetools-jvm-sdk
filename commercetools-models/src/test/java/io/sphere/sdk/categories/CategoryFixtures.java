@@ -8,11 +8,13 @@ import io.sphere.sdk.models.*;
 import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.utils.SphereInternalLogger;
 
+import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
+import java.util.stream.Collectors;
 
 import static io.sphere.sdk.test.SphereTestUtils.*;
 import static java.util.Arrays.asList;
@@ -47,6 +49,28 @@ public class CategoryFixtures {
             //need to update because category could be changed
             client.executeBlocking(CategoryDeleteCommand.of(res.head().get()));
             LOGGER.debug(() -> "deleted category " + category.getId());
+        }
+    }
+
+    public static void withCategories(final BlockingSphereClient client, final List<Supplier<? extends CategoryDraft>> creator, final Consumer<List<Category>> user) {
+
+        List<Category> categories = creator.stream().map(singleCreator -> {
+            final CategoryDraft categoryDraft = singleCreator.get();
+            final String slug = englishSlugOf(categoryDraft);
+            final PagedQueryResult<Category> pagedQueryResult = client.executeBlocking(CategoryQuery.of().bySlug(Locale.ENGLISH, slug));
+            pagedQueryResult.head().ifPresent(
+                    category -> client.executeBlocking(CategoryDeleteCommand.of(category))
+            );
+            final Category category = client.executeBlocking(CategoryCreateCommand.of(categoryDraft));
+            return category;
+        }).collect(Collectors.toList());
+        try {
+            user.accept(categories);
+        } finally {
+
+            categories.forEach(category -> {
+                client.executeBlocking(CategoryDeleteCommand.of(category));
+            });
         }
     }
 

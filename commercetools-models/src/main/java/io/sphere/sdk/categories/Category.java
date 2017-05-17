@@ -113,7 +113,6 @@ public interface Category extends Resource<Category>, WithLocalizedSlug, MetaAtt
      * @return order hint or null
      */
     @Nullable
-    @IgnoreInQueryModel
     String getOrderHint();
 
     /**
