@@ -365,6 +365,16 @@ public class ProductFixtures {
             return productDraftBuilder.masterVariant(variantDraft);
         }, op);
     }
+    public static void withProductHavingImages(final BlockingSphereClient client, final UnaryOperator<Product> op) {
+        withUpdateableProduct(client, productDraftBuilder -> {
+            final ProductVariantDraft masterVariant = productDraftBuilder.getMasterVariant();
+            final ProductVariantDraft variantDraft = ProductVariantDraftBuilder.of(masterVariant)
+                    .images(createExternalImage())
+                    .sku(randomKey())
+                    .build();
+            return productDraftBuilder.masterVariant(variantDraft);
+        }, op);
+    }
 
     private static AssetDraft getAssetDraft1() {
         final AssetSource assetSource1 = AssetSourceBuilder.ofUri("https://commercetools.com/binaries/content/gallery/commercetoolswebsite/homepage/cases/rewe.jpg")
