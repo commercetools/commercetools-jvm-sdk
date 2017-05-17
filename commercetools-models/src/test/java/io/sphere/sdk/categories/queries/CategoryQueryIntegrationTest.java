@@ -140,7 +140,7 @@ public class CategoryQueryIntegrationTest extends IntegrationTest {
     @Test
     public void sortByOrderHint() {
 
-        List<String> hints = Arrays.asList("0.03539970150419025", "0.9124532896017283", "0.4677879627352788", "0.9306522049331096", "0.8442774484430258", "0.3002734797783949",
+        final List<String> hints = Arrays.asList("0.03539970150419025", "0.9124532896017283", "0.4677879627352788", "0.9306522049331096", "0.8442774484430258", "0.3002734797783949",
                 "0.9053018615787292", "0.5897829295233494", "0.9736635784904704", "0.393321565584442", "0.605741386570728", "0.6644442788442779", "0.8541807248539874", "0.9945130750802729", "0.12979277595041627");
 
         List<String> sortedHints = new ArrayList<>(hints);
@@ -150,11 +150,9 @@ public class CategoryQueryIntegrationTest extends IntegrationTest {
                 hints.stream().map(CategoryQueryIntegrationTest::categoryWithHint).collect(Collectors.toList()),
 
                 categories -> {
-
                     PagedQueryResult<Category> res = client().executeBlocking(CategoryQuery.of().plusSort(m -> m.orderHint().sort().asc()).withLimit(500));
                     List<String> queryResultHints = res.getResults().stream().filter(cat -> categories.contains(cat)).map(cat -> cat.getOrderHint()).collect(Collectors.toList());
-                    assertThat(queryResultHints).containsExactly(sortedHints.toArray(new String[sortedHints.size()]));
-
+                    assertThat(queryResultHints).containsExactlyElementsOf(sortedHints);
                 });
     }
 

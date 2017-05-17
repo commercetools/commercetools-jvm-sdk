@@ -62,7 +62,6 @@ public class CategoryFixtures {
                     category -> client.executeBlocking(CategoryDeleteCommand.of(category))
             );
             final Category category = client.executeBlocking(CategoryCreateCommand.of(categoryDraft));
-            LOGGER.debug(() -> "created category " + category.getSlug() + " id: " + category.getId());
             return category;
         }).collect(Collectors.toList());
         try {
@@ -70,10 +69,7 @@ public class CategoryFixtures {
         } finally {
 
             categories.forEach(category -> {
-                final PagedQueryResult<Category> res = client.executeBlocking(CategoryQuery.of().byId(category.getId()));
-                //need to update because category could be changed
-                client.executeBlocking(CategoryDeleteCommand.of(res.head().get()));
-                LOGGER.debug(() -> "deleted category " + category.getId());
+                client.executeBlocking(CategoryDeleteCommand.of(category));
             });
         }
     }
