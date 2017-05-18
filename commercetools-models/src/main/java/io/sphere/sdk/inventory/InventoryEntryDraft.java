@@ -27,7 +27,12 @@ public interface InventoryEntryDraft extends CustomDraft {
     @Nullable
     ZonedDateTime getExpectedDelivery();
 
-    @Nullable
+    /**
+     * Overall amount of stock. (available + reserved).
+     *
+     * @see InventoryEntryDraft#getQuantityOnStock()
+     * @return the overall amount of stock
+     */
     Long getQuantityOnStock();
 
     @Nullable
