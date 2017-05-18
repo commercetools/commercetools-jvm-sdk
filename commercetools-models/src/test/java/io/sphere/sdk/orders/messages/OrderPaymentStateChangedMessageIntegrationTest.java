@@ -12,7 +12,7 @@ import org.junit.Test;
 
 import java.util.Optional;
 
-import static io.sphere.sdk.orders.OrderFixtures.withOrder;
+import static io.sphere.sdk.orders.OrderFixtures.withNonUpdatedOrder;
 import static io.sphere.sdk.test.SphereTestUtils.assertEventually;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -20,7 +20,7 @@ public class OrderPaymentStateChangedMessageIntegrationTest extends IntegrationT
 
     @Test
     public void changePaymentState() throws Exception {
-        withOrder(client(), order -> {
+        withNonUpdatedOrder(client(), order -> {
             final PaymentState newState = PaymentState.PAID;
             assertThat(order.getPaymentState()).isNotEqualTo(newState);
             final Order updatedOrder = client().executeBlocking(OrderUpdateCommand.of(order, ChangePaymentState.of(newState)));
@@ -40,10 +40,11 @@ public class OrderPaymentStateChangedMessageIntegrationTest extends IntegrationT
                 assertThat(optMessage).isPresent();
                 OrderPaymentStateChangedMessage message = optMessage.get();
                 assertThat(message.getId()).isEqualTo(updatedOrder.getId());
-                assertThat(message.getPaymentState()).isEqualTo(PaymentState.PAID);
+                assertThat(message.getPaymentState()).isEqualTo(newState);
             });
 
             return updatedOrder;
         });
+
     }
 }
