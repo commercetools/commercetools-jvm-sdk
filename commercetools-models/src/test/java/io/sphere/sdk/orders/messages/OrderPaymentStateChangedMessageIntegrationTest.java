@@ -28,10 +28,12 @@ public class OrderPaymentStateChangedMessageIntegrationTest extends IntegrationT
 
             final Query<OrderPaymentStateChangedMessage> query =
                     MessageQuery.of()
+                            .withPredicates(m -> m.resource().id().is(updatedOrder.getId()))
                             .withSort(m -> m.createdAt().sort().desc())
                             .withExpansionPaths(m -> m.resource())
                             .withLimit(1L)
                             .forMessageType(OrderPaymentStateChangedMessage.MESSAGE_HINT);
+
             assertEventually(() -> {
                 final PagedQueryResult<OrderPaymentStateChangedMessage> pagedQueryResult = client().executeBlocking(query);
                 final Optional<OrderPaymentStateChangedMessage> optMessage = pagedQueryResult.head();

@@ -1,7 +1,6 @@
 package io.sphere.sdk.orders.messages;
 
 import io.sphere.sdk.messages.queries.MessageQuery;
-import io.sphere.sdk.orders.PaymentState;
 import io.sphere.sdk.payments.Payment;
 import io.sphere.sdk.payments.commands.PaymentUpdateCommand;
 import io.sphere.sdk.payments.commands.updateactions.SetStatusInterfaceCode;
@@ -39,10 +38,12 @@ public class PaymentStatusInterfaceCodeSetMessageIntegrationTest extends Integra
 
             final Query<PaymentStatusInterfaceCodeSetMessage> query =
                     MessageQuery.of()
+                            .withPredicates(m -> m.resource().id().is(updatedPayment.getId()))
                             .withSort(m -> m.createdAt().sort().desc())
                             .withExpansionPaths(m -> m.resource())
                             .withLimit(1L)
                             .forMessageType(PaymentStatusInterfaceCodeSetMessage.MESSAGE_HINT);
+
             assertEventually(() -> {
                 final PagedQueryResult<PaymentStatusInterfaceCodeSetMessage> pagedQueryResult = client().executeBlocking(query);
                 final Optional<PaymentStatusInterfaceCodeSetMessage> optMessage = pagedQueryResult.head();
