@@ -13,7 +13,7 @@ import javax.annotation.Nullable;
 import java.time.ZonedDateTime;
 
 @JsonDeserialize(as = ProductDeletedMessage.class)//important to override annotation in Message class
-public class ProductDeletedMessage extends AbstractImageDeletionMessage {
+public final class ProductDeletedMessage extends AbstractImageDeletionMessage {
 
     public static final String MESSAGE_TYPE = "ProductDeleted";
     public static final MessageDerivateHint<ProductDeletedMessage> MESSAGE_HINT =

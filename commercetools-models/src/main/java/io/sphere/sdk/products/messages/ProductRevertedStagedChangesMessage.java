@@ -10,7 +10,7 @@ import io.sphere.sdk.products.Product;
 import java.time.ZonedDateTime;
 
 @JsonDeserialize(as = ProductRevertedStagedChangesMessage.class)//important to override annotation in Message class
-public class ProductRevertedStagedChangesMessage extends AbstractImageDeletionMessage {
+public final class ProductRevertedStagedChangesMessage extends AbstractImageDeletionMessage {
 
     public static final String MESSAGE_TYPE = "ProductRevertedStagedChanges";
     public static final MessageDerivateHint<ProductRevertedStagedChangesMessage> MESSAGE_HINT =

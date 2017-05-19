@@ -20,6 +20,7 @@ public class OrderPaymentStateChangedMessageIntegrationTest extends IntegrationT
 
     @Test
     public void changePaymentState() throws Exception {
+
         withNonUpdatedOrder(client(), order -> {
             final PaymentState newState = PaymentState.PAID;
             assertThat(order.getPaymentState()).isNotEqualTo(newState);
@@ -45,6 +46,5 @@ public class OrderPaymentStateChangedMessageIntegrationTest extends IntegrationT
 
             return updatedOrder;
         });
-
     }
 }
