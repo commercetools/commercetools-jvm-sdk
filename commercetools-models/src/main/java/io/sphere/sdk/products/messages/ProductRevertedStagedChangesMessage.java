@@ -17,7 +17,7 @@ public final class ProductRevertedStagedChangesMessage extends AbstractImageDele
             MessageDerivateHint.ofSingleMessageType(MESSAGE_TYPE, ProductRevertedStagedChangesMessage.class, Product.referenceTypeId());
 
     @JsonCreator
-    private ProductRevertedStagedChangesMessage(String id, Long version, ZonedDateTime createdAt, ZonedDateTime lastModifiedAt, JsonNode resource, Long sequenceNumber, Long resourceVersion, String type, String[] removedImageUrls) {
+    private ProductRevertedStagedChangesMessage(final String id,final Long version,final ZonedDateTime createdAt,final ZonedDateTime lastModifiedAt,final JsonNode resource,final Long sequenceNumber,final Long resourceVersion,final String type,final String[] removedImageUrls) {
         super(id, version, createdAt, lastModifiedAt, resource, sequenceNumber, resourceVersion, type, removedImageUrls);
     }
 

@@ -23,7 +23,7 @@ public final class OrderPaymentStateChangedMessage extends GenericMessageImpl<Or
     private final PaymentState paymentState;
 
     @JsonCreator
-    private OrderPaymentStateChangedMessage(String id, Long version, ZonedDateTime createdAt, ZonedDateTime lastModifiedAt, JsonNode resource, Long sequenceNumber, Long resourceVersion, String type, PaymentState paymentState) {
+    private OrderPaymentStateChangedMessage(final String id,final Long version,final ZonedDateTime createdAt,final ZonedDateTime lastModifiedAt,final JsonNode resource,final Long sequenceNumber,final Long resourceVersion,final String type,final PaymentState paymentState) {
         super(id, version, createdAt, lastModifiedAt, resource, sequenceNumber, resourceVersion,type,Order.class);
         this.paymentState = paymentState;
     }
