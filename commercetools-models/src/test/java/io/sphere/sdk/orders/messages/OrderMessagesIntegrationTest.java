@@ -28,10 +28,12 @@ public class OrderMessagesIntegrationTest extends IntegrationTest {
             final Order updatedOrder = client().executeBlocking(OrderUpdateCommand.of(order, ChangeOrderState.of(OrderState.CANCELLED)));
             final Query<OrderStateChangedMessage> query =
                     MessageQuery.of()
+                            .withPredicates(m -> m.resource().id().is(updatedOrder.getId()))
                             .withSort(m -> m.createdAt().sort().desc())
                             .withExpansionPaths(m -> m.resource())
                             .withLimit(1L)
                             .forMessageType(OrderStateChangedMessage.MESSAGE_HINT);
+
             assertEventually(() -> {
                 final PagedQueryResult<OrderStateChangedMessage> pagedQueryResult = client().executeBlocking(query);
                 final Optional<OrderStateChangedMessage> message = pagedQueryResult.head();
@@ -51,10 +53,9 @@ public class OrderMessagesIntegrationTest extends IntegrationTest {
         withOrderAndReturnInfo(client(), ((order, returnInfo) -> {
             final Query<OrderCreatedMessage> query =
                     MessageQuery.of()
-                            .withSort(m -> m.createdAt().sort().desc())
+                            .withPredicates(m -> m.resource().is(order))
                             .withExpansionPaths(m -> m.resource())
                             .withLimit(1L)
-                            .withPredicates(m -> m.resource().is(order))
                             .forMessageType(OrderCreatedMessage.MESSAGE_HINT);
 
             assertEventually(() -> {
@@ -92,10 +93,11 @@ public class OrderMessagesIntegrationTest extends IntegrationTest {
 
             //you can observe a message
             final Query<OrderImportedMessage> messageQuery = MessageQuery.of()
+                    .withPredicates(m -> m.resource().is(order))
                     .withExpansionPaths(m -> m.resource())
                     .withLimit(1L)
-                    .withPredicates(m -> m.resource().is(order))
                     .forMessageType(OrderImportedMessage.MESSAGE_HINT);
+
             assertEventually(() -> {
                 final Optional<OrderImportedMessage> orderImportedMessageOptional = client().executeBlocking(messageQuery).head();
                 assertThat(orderImportedMessageOptional).isPresent();
