@@ -65,7 +65,7 @@ public interface Category extends Resource<Category>, WithLocalizedSlug, MetaAtt
 
 
     /**
-     * User-specific unique identifier for the payment.
+     * User-specific unique identifier for the Category.
      *
      * @return the user defined key
      */
