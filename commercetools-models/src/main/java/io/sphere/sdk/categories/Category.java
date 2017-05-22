@@ -64,6 +64,14 @@ import java.util.List;
 public interface Category extends Resource<Category>, WithLocalizedSlug, MetaAttributes, Custom {
 
     /**
+     * User-specific unique identifier for the payment.
+     *
+     * @return the user defined key
+     */
+    @Nullable
+    String getKey();
+
+    /**
      * Name of this category.
      *
      * @see io.sphere.sdk.categories.commands.updateactions.ChangeName

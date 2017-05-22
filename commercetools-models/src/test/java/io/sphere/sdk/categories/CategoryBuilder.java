@@ -17,6 +17,7 @@ import java.util.Random;
 public final class CategoryBuilder extends Base implements Builder<Category> {
     private static final Random RANDOM = new Random();
     protected String id = "id" + CategoryBuilder.RANDOM.nextInt();
+    protected String key;
     protected long version = 1;
     protected ZonedDateTime createdAt = ZonedDateTime.now();
     protected ZonedDateTime lastModifiedAt = ZonedDateTime.now();
@@ -113,9 +114,14 @@ public final class CategoryBuilder extends Base implements Builder<Category> {
         return getThis();
     }
 
+    public CategoryBuilder key(String key){
+        this.key = key;
+        return getThis();
+    }
+
     @Override
     public Category build() {
-        return new CategoryImpl(ancestors, assets, createdAt, null, description, externalId, id, lastModifiedAt, metaDescription, metaKeywords, metaTitle, name, orderHint, parent, slug, version);
+        return new CategoryImpl(ancestors, assets, createdAt, null, description, externalId, id, key, lastModifiedAt, metaDescription, metaKeywords, metaTitle, name, orderHint, parent, slug, version);
     }
 
     protected CategoryBuilder getThis() {
