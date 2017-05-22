@@ -94,4 +94,7 @@ public interface CustomerDraft extends CustomDraft {
 
     @Nullable
     List<Integer> getShippingAddresses();
+
+    @Nullable
+    String getSalutation();
 }
