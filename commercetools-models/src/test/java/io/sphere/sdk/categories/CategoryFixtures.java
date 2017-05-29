@@ -76,7 +76,7 @@ public class CategoryFixtures {
 
     public static void withCategoryAndParentCategory(final BlockingSphereClient client, final BiConsumer<Category, Category> consumer) {
         withCategory(client, parent ->
-            withCategory(client, CategoryDraftBuilder.of(randomSlug(), randomSlug()).parent(parent), category -> {
+            withCategory(client, CategoryDraftBuilder.of(randomSlug(), randomSlug()).key(randomKey()).parent(parent), category -> {
                 consumer.accept(category, parent);
             })
         );
