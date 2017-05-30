@@ -2,6 +2,7 @@ package io.sphere.sdk.queries;
 
 import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.categories.queries.CategoryQuery;
+import io.sphere.sdk.client.SphereApiConfig;
 import io.sphere.sdk.client.SphereClient;
 import io.sphere.sdk.client.SphereRequest;
 import io.sphere.sdk.json.SphereJsonUtils;
@@ -106,6 +107,11 @@ public class QueryExecutionUtilsTest {
                 return LongStream.range(offset, offset + count)
                         .mapToObj(i -> SphereJsonUtils.readObject(String.format("{ \"slug\" : {\"en\": \"category-%04d\"} }", i), Category.class))
                         .collect(toList());
+            }
+
+            @Override
+            public SphereApiConfig getConfig() {
+                return null;
             }
         };
     }
