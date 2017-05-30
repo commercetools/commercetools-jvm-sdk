@@ -35,6 +35,11 @@ public class TimeoutSphereClientDecoratorTest {
             public void close() {
 
             }
+
+            @Override
+            public SphereApiConfig getConfig() {
+                return null;
+            }
         };
         final SphereClient decoratedClient = TimeoutSphereClientDecorator.of(sphereClient, 50, TimeUnit.MILLISECONDS);
         final String s = decoratedClient.execute(DummySphereRequest.of()).toCompletableFuture().join();
@@ -53,6 +58,11 @@ public class TimeoutSphereClientDecoratorTest {
             @Override
             public void close() {
 
+            }
+
+            @Override
+            public SphereApiConfig getConfig() {
+                return null;
             }
         };
         final SphereClient decoratedClient = TimeoutSphereClientDecorator.of(sphereClient, 50, TimeUnit.MILLISECONDS);

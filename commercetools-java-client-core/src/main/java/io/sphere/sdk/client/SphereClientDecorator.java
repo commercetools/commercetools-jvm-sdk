@@ -23,4 +23,9 @@ public abstract class SphereClientDecorator extends Base implements SphereClient
     public <T> CompletionStage<T> execute(final SphereRequest<T> sphereRequest) {
         return delegate.execute(sphereRequest);
     }
+
+    @Override
+    public SphereApiConfig getConfig() {
+        return delegate.getConfig();
+    }
 }

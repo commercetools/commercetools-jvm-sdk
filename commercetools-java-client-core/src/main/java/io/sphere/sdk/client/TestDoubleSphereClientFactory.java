@@ -52,6 +52,11 @@ public final class TestDoubleSphereClientFactory extends Base {
             public String toString() {
                 return "SphereClientHttpTestDouble";
             }
+
+            @Override
+            public SphereApiConfig getConfig() {
+                return null;
+            }
         };
     }
 
@@ -80,6 +85,11 @@ public final class TestDoubleSphereClientFactory extends Base {
             @Override
             public String toString() {
                 return "SphereClientObjectTestDouble";
+            }
+
+            @Override
+            public SphereApiConfig getConfig() {
+                return null;
             }
         };
     }

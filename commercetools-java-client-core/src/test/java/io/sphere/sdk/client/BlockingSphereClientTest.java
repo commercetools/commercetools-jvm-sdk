@@ -24,6 +24,11 @@ public class BlockingSphereClientTest {
             public void close() {
 
             }
+
+            @Override
+            public SphereApiConfig getConfig() {
+                return null;
+            }
         });
         assertThat(blockingSphereClient)
                 .isInstanceOf(BlockingSphereClient.class)
