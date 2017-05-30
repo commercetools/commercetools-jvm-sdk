@@ -19,6 +19,9 @@ import java.util.List;
 @JsonDeserialize(as = CategoryDraftDsl.class)
 @ResourceDraftValue(copyFactoryMethods = @CopyFactoryMethod(Category.class), factoryMethods = @FactoryMethod(parameterNames = {"name", "slug"}))
 public interface CategoryDraft extends CustomDraft, WithLocalizedSlug, MetaAttributes {
+
+    String getKey();
+
     LocalizedString getName();
 
     LocalizedString getSlug();

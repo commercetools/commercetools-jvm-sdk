@@ -20,6 +20,9 @@ abstract class CategoryWrapper extends Base implements Category {
     }
 
     @Override
+    public String getKey(){ return delegate.getKey(); }
+
+    @Override
     public String getId() {
         return delegate.getId();
     }

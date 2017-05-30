@@ -2,6 +2,7 @@ package io.sphere.sdk.annotations.processors.generators;
 
 import com.squareup.javapoet.*;
 import io.sphere.sdk.annotations.HasUpdateActions;
+import io.sphere.sdk.annotations.HasNoUpdateAction;
 import io.sphere.sdk.annotations.processors.models.PropertyGenModel;
 import io.sphere.sdk.commands.UpdateActionImpl;
 import org.apache.commons.lang3.StringUtils;
@@ -35,6 +36,7 @@ public class UpdateActionsGenerator extends AbstractMultipleFileGenerator {
         final List<ExecutableElement> propertyMethods = getPropertyMethodsSorted(annotatedTypeElement);
         final List<TypeSpec> typeSpecList = propertyMethods.stream()
                 .filter(m -> typeUtils.isPrimitiveType(PropertyGenModel.of(m).getType()))
+                .filter(m -> m.getAnnotation(HasNoUpdateAction.class) == null)
                 .map(propertyMethod -> generateUpdateAction(annotatedTypeElement, propertyMethod)).collect(Collectors.toList());
 
         return typeSpecList;
