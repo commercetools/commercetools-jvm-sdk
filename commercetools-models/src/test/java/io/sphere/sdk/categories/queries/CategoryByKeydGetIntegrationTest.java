@@ -8,7 +8,7 @@ import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class CategoryByKeyGetIntegrationTest extends IntegrationTest {
+public class CategoryByKeydGetIntegrationTest extends IntegrationTest {
     @Test
     public void execution() throws Exception {
         CategoryFixtures.withCategoryAndParentCategory(client(), (category, parent) -> {
