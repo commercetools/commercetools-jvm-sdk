@@ -15,19 +15,32 @@ public class ProductImageUploadCommandIntegrationTest extends IntegrationTest {
 
 
     @Test
-    public void upload() {
-        withUpdateableProduct(client(), (Product product) -> {
+    public void uploadImage() {
+        withUpdateableProduct(client(),  product -> {
             final ByIdVariantIdentifier identifier = product.getMasterData().getStaged().getMasterVariant().getIdentifier();
             final ProductImageUploadCommand cmd = ProductImageUploadCommand
                     .ofVariantId(new File("src/test/resources/ct_logo_farbe.gif"), identifier)
                     .withFilename("logo.gif")
                     .withStaged(true);
-            final Product productRes = client().executeBlocking(cmd);
-            final Image image = productRes.getMasterData().getStaged().getMasterVariant().getImages().get(0);
+            final Product updatedProduct = client().executeBlocking(cmd);
+            final Image image = updatedProduct.getMasterData().getStaged().getMasterVariant().getImages().get(0);
             assertThat(image.getDimensions().getHeight()).isEqualTo(102);
             assertThat(image.getDimensions().getWidth()).isEqualTo(460);
             assertThat(image.getUrl()).contains("logo");
-            return productRes;
+            return updatedProduct;
+        });
+    }
+
+    @Test(expected = IllegalStateException.class)
+    public void uploadInvalidImageType() {
+        withUpdateableProduct(client(),  product -> {
+            final ByIdVariantIdentifier identifier = product.getMasterData().getStaged().getMasterVariant().getIdentifier();
+            final ProductImageUploadCommand cmd = ProductImageUploadCommand
+                    .ofVariantId(new File("src/test/resources/ct_logo_farbe.bmp"), identifier)
+                    .withFilename("logo.bmp")
+                    .withStaged(true);
+            final Product updatedProduct = client().executeBlocking(cmd);
+            return updatedProduct;
         });
     }
 }
