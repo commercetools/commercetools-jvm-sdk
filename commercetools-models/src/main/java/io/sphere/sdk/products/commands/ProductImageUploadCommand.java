@@ -18,14 +18,13 @@ import java.util.Map;
 import static org.apache.commons.lang3.StringUtils.isEmpty;
 
 /**
- Uploads an Image for a product.
-
- <p>Uploads a binary image file to a given {@link io.sphere.sdk.products.ProductVariant}. The supported image formats are JPEG, PNG and GIF.</p>
-
- Example usage executing the command:
- {@include.example io.sphere.sdk.products.commands.ProductImageUploadCommandIntegrationTest#uploadImage()}
+ * Uploads an Image for a product.
+ * <p>
+ * <p>Uploads a binary image file to a given {@link io.sphere.sdk.products.ProductVariant}. The supported image formats are JPEG, PNG and GIF.</p>
+ * <p>
+ * Example usage executing the command:
+ * {@include.example io.sphere.sdk.products.commands.ProductImageUploadCommandIntegrationTest#uploadImage()}
  */
-
 public final class ProductImageUploadCommand extends CommandImpl<Product> {
     private final String productId;
     @Nullable
@@ -40,19 +39,21 @@ public final class ProductImageUploadCommand extends CommandImpl<Product> {
     @Nullable
     private final String givenContentType;
 
-    private static final Map<String,String> ACCEPTABLE_IMAGE_FORMATS_MAP ;
+    private static final Map<String, String> ACCEPTABLE_IMAGE_FORMATS_MAP;
 
-    static{
-        HashMap<String,String> map = new HashMap();
-        map.put(".jpeg","image/jpeg");
-        map.put(".jpg","image/jpeg");
-        map.put(".gif","image/gif");
-        map.put(".png","image/png");
+    static {
+        final HashMap<String, String> map = new HashMap();
+
+        map.put(".jpeg", "image/jpeg");
+        map.put(".jpg", "image/jpeg");
+        map.put(".gif", "image/gif");
+        map.put(".png", "image/png");
+
         ACCEPTABLE_IMAGE_FORMATS_MAP = Collections.unmodifiableMap(map);
     }
 
-
-    private ProductImageUploadCommand(final File body, final String productId, final Integer variant, final String sku, final String filename, final Boolean staged,final String givenContentType) {
+    private ProductImageUploadCommand(final File body, final String productId, final Integer variant, final String sku,
+                                      final String filename, final Boolean staged, final String givenContentType) {
         this.productId = productId;
         this.variant = variant;
         this.sku = sku;
@@ -63,19 +64,19 @@ public final class ProductImageUploadCommand extends CommandImpl<Product> {
     }
 
     public static ProductImageUploadCommand ofMasterVariant(final File body, final String productId) {
-        return new ProductImageUploadCommand(body, productId, null, null, null, null,null);
+        return new ProductImageUploadCommand(body, productId, null, null, null, null, null);
     }
 
     public static ProductImageUploadCommand ofProductIdAndSku(final File body, final String productId, final String sku) {
-        return new ProductImageUploadCommand(body, productId, null, sku, null, null,null);
+        return new ProductImageUploadCommand(body, productId, null, sku, null, null, null);
     }
 
     public static ProductImageUploadCommand ofVariantId(final File body, final ByIdVariantIdentifier variantIdentifier) {
-        return new ProductImageUploadCommand(body, variantIdentifier.getProductId(), variantIdentifier.getVariantId(), null, null, null,null);
+        return new ProductImageUploadCommand(body, variantIdentifier.getProductId(), variantIdentifier.getVariantId(), null, null, null, null);
     }
 
     public ProductImageUploadCommand withFilename(final String newFilename) {
-        return new ProductImageUploadCommand(body, productId, variant, sku, newFilename, staged,givenContentType);
+        return new ProductImageUploadCommand(body, productId, variant, sku, newFilename, staged, givenContentType);
     }
 
     public ProductImageUploadCommand withStaged(final Boolean newStaged) {
@@ -84,6 +85,7 @@ public final class ProductImageUploadCommand extends CommandImpl<Product> {
 
     /**
      * Sets the type of the Type of the uploaded image
+     *
      * @param contentType must be one of "image/jpeg", "image/png" or "image/gif"
      * @return ProductImageUploadCommand the new constructed productImageUploadCommand
      */
@@ -102,11 +104,10 @@ public final class ProductImageUploadCommand extends CommandImpl<Product> {
     public HttpRequestIntent httpRequestIntent() {
         final String contentType;
 
-
         if (givenContentType != null) {
-            if(!ACCEPTABLE_IMAGE_FORMATS_MAP.values().contains(givenContentType))
-                throw new IllegalStateException("Content Type "+ givenContentType + " is not accepted.");
-            else {
+            if (!ACCEPTABLE_IMAGE_FORMATS_MAP.values().contains(givenContentType)) {
+                throw new IllegalStateException("Content Type " + givenContentType + " is not accepted.");
+            } else {
                 contentType = givenContentType;
             }
         } else {
@@ -116,8 +117,9 @@ public final class ProductImageUploadCommand extends CommandImpl<Product> {
                 extension = body.getName().substring(i);
             }
             contentType = ACCEPTABLE_IMAGE_FORMATS_MAP.get(extension);
-            if(contentType == null)
+            if (contentType == null) {
                 throw new IllegalStateException("cannot determine content type for " + body.getName());
+            }
         }
         final UrlQueryBuilder builder = UrlQueryBuilder.of();
         if (!isEmpty(sku)) {
@@ -135,6 +137,4 @@ public final class ProductImageUploadCommand extends CommandImpl<Product> {
         final String path = String.format("/products/%s/images%s", productId, builder.toStringWithOptionalQuestionMark());
         return HttpRequestIntent.of(HttpMethod.POST, path, body, contentType);
     }
-
-
 }
