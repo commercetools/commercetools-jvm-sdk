@@ -25,6 +25,7 @@ public interface CartDiscountDraft {
     @Nullable
     LocalizedString getDescription();
 
+    @Nullable
     @JsonProperty("isActive")
     Boolean isActive();
 
@@ -35,6 +36,7 @@ public interface CartDiscountDraft {
 
     String getSortOrder();
 
+    @Nullable
     CartDiscountTarget getTarget();
 
     @Nullable

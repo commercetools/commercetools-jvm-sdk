@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.neovisionaries.i18n.CountryCode;
 import io.sphere.sdk.annotations.*;
+import io.sphere.sdk.cartdiscounts.CartDiscount;
 import io.sphere.sdk.customergroups.CustomerGroup;
 import io.sphere.sdk.discountcodes.DiscountCodeInfo;
 import io.sphere.sdk.models.Address;
@@ -170,6 +171,16 @@ public interface Cart extends CartLike<Cart> {
 
     @Nullable
     Integer getDeleteDaysAfterLastModification();
+
+    /**
+     * The refused gifts of this cart. Automatically filled when a line item with {@link LineItemMode#GIFT_LINE_ITEM}
+     * is removed from this cart.
+     *
+     * @return the refused gifts of this cart
+     */
+    @Nullable
+    @IgnoreInQueryModel
+    List<Reference<CartDiscount>> getRefusedGifts();
 
     /**
      * Creates a reference for one item of this class by a known ID.

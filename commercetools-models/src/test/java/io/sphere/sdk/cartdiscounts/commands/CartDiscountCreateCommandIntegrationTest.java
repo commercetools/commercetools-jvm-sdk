@@ -4,6 +4,9 @@ import io.sphere.sdk.cartdiscounts.*;
 import io.sphere.sdk.cartdiscounts.queries.CartDiscountQuery;
 import io.sphere.sdk.json.SphereJsonUtils;
 import io.sphere.sdk.models.LocalizedString;
+import io.sphere.sdk.products.ByIdVariantIdentifier;
+import io.sphere.sdk.products.ProductCatalogData;
+import io.sphere.sdk.products.ProductData;
 import io.sphere.sdk.test.IntegrationTest;
 import io.sphere.sdk.test.SphereTestUtils;
 import io.sphere.sdk.utils.MoneyImpl;
@@ -20,6 +23,8 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 
 import static io.sphere.sdk.cartdiscounts.CartDiscountFixtures.newCartDiscountDraftBuilder;
+import static io.sphere.sdk.products.ProductFixtures.withProduct;
+import static io.sphere.sdk.products.ProductFixtures.withUpdateableProduct;
 import static org.assertj.core.api.Assertions.*;
 import static io.sphere.sdk.test.SphereTestUtils.*;
 
@@ -81,12 +86,24 @@ public class CartDiscountCreateCommandIntegrationTest extends IntegrationTest {
     }
 
     @Test
+    public void giftLineItemCartDiscountValue() throws Exception {
+        withProduct(client(), product -> {
+            final ByIdVariantIdentifier variantId = product.getMasterData().getStaged().getMasterVariant().getIdentifier();
+            final GiftLineItemCartDiscountValue value =
+                    CartDiscountValue.ofGiftLineItem(variantId,
+                            null, null);
+
+            checkCreation(builder -> builder.value(value).target(null), discount -> assertThat(discount.getValue()).isEqualTo(value));
+        });
+    }
+
+    @Test
     public void lineItemTarget() throws Exception {
         checkTargetSerialization(LineItemsTarget.of("1 = 1"));
     }
 
     @Test
-    public void ShippingCostTarget() throws Exception {
+    public void shippingCostTarget() throws Exception {
         checkTargetSerialization(ShippingCostTarget.of());
     }
 
@@ -110,15 +127,15 @@ public class CartDiscountCreateCommandIntegrationTest extends IntegrationTest {
         client().executeBlocking(CartDiscountDeleteCommand.of(cartDiscount));
     }
 
-    private void checkCartDiscountValueSerialization(final CartDiscountValue value) throws Exception {
+    private void checkCartDiscountValueSerialization(final CartDiscountValue value) {
         checkCreation(builder -> builder.value(value), discount -> assertThat(discount.getValue()).isEqualTo(value));
     }
 
-    private void checkTargetSerialization(final CartDiscountTarget target) throws Exception {
+    private void checkTargetSerialization(final CartDiscountTarget target) {
         checkCreation(builder -> builder.target(target), discount -> assertThat(discount.getTarget()).isEqualTo(target));
     }
 
-    private void checkCreation(final Function<CartDiscountDraftBuilder, CartDiscountDraftBuilder> f, final Consumer<CartDiscount> assertions) throws Exception {
+    private void checkCreation(final Function<CartDiscountDraftBuilder, CartDiscountDraftBuilder> f, final Consumer<CartDiscount> assertions) {
         final CartDiscountDraft draft = f.apply(newCartDiscountDraftBuilder())
                 .build();
         final CartDiscount discount = client().executeBlocking(CartDiscountCreateCommand.of(draft));
