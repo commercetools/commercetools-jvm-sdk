@@ -19,6 +19,12 @@ abstract class CategoryWrapper extends Base implements Category {
         this.delegate = delegate;
     }
 
+    @Nullable
+    @Override
+    public String getKey() {
+        return delegate.getKey();
+    }
+
     @Override
     public String getId() {
         return delegate.getId();

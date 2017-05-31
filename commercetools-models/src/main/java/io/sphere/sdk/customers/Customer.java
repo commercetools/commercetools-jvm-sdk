@@ -128,6 +128,7 @@ import static java.util.stream.Collectors.toList;
         "StringQuerySortingModel<Customer> lowercaseEmail();",
         "BooleanQueryModel<Customer> isEmailVerified();"
 })
+@HasUpdateActions
 public interface Customer extends Resource<Customer>, Custom {
     /**
      * Gets the ID of this customer.
@@ -136,6 +137,7 @@ public interface Customer extends Resource<Customer>, Custom {
      * @see io.sphere.sdk.carts.queries.CartByCustomerIdGet
      * @return ID
      */
+    @HasNoUpdateAction
     @Override
     String getId();
 
@@ -191,6 +193,7 @@ public interface Customer extends Resource<Customer>, Custom {
     @Nullable
     String getLastName();
 
+    @HasNoUpdateAction
     @IgnoreInQueryModel
     String getPassword();
 
@@ -242,6 +245,7 @@ public interface Customer extends Resource<Customer>, Custom {
      *
      * @return ID or null
      */
+    @HasNoUpdateAction
     @Nullable
     String getDefaultShippingAddressId();
 
@@ -265,8 +269,10 @@ public interface Customer extends Resource<Customer>, Custom {
      *
      * @return ID or null
      */
+    @HasNoUpdateAction
     @Nullable
     String getDefaultBillingAddressId();
+
 
     @Nullable
     default Address getDefaultBillingAddress() {
@@ -286,6 +292,7 @@ public interface Customer extends Resource<Customer>, Custom {
      * @param addressId the Id string of the address to find
      * @return Address or null
      */
+    @HasNoUpdateAction
     @Nullable
     default Address getAddressById(final String addressId) {
         return findAddressById(addressId).orElse(null);
@@ -297,6 +304,7 @@ public interface Customer extends Resource<Customer>, Custom {
                 .findFirst();
     }
 
+    @HasNoUpdateAction
     @JsonProperty("isEmailVerified")
     @IgnoreInQueryModel//see class annotations
     Boolean isEmailVerified();
@@ -430,6 +438,17 @@ public interface Customer extends Resource<Customer>, Custom {
 
     @Nonnull
     List<String> getBillingAddressIds();
+
+
+    /**
+     * Customer’s salutation
+     *
+     * @see io.sphere.sdk.customers.commands.updateactions.SetSalutation
+     *
+     * @return salutation
+     */
+    @Nullable
+    String getSalutation();
 
     default List<Address> getShippingAddresses() {
         final Set<String> ids = new HashSet<>(getShippingAddressIds());
