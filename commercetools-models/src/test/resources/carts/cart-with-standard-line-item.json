@@ -1,0 +1,16 @@
+{
+  "type": "Cart",
+  "lineItems": [
+    {
+      "lineItemMode": "Standard",
+      "productId": "<product-id>",
+      "variant": { "id": 1 }
+    }
+  ],
+  "totalPrice": {
+    "currencyCode": "EUR",
+    "centAmount": 0
+  },
+  "customLineItems": [],
+  "taxMode": "Platform"
+}

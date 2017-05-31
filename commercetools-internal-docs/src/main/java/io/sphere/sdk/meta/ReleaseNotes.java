@@ -11,6 +11,7 @@ import io.sphere.sdk.carts.queries.CartQueryModel;
 import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.categories.CategoryDraft;
 import io.sphere.sdk.categories.CategoryDraftBuilder;
+import io.sphere.sdk.categories.queries.CategoryQueryModel;
 import io.sphere.sdk.channels.Channel;
 import io.sphere.sdk.channels.queries.ChannelByIdGet;
 import io.sphere.sdk.channels.queries.ChannelQueryModel;
@@ -37,6 +38,7 @@ import io.sphere.sdk.customobjects.queries.CustomObjectQueryModel;
 import io.sphere.sdk.expansion.ExpansionPath;
 import io.sphere.sdk.http.*;
 import io.sphere.sdk.inventory.InventoryEntry;
+import io.sphere.sdk.inventory.InventoryEntryDraft;
 import io.sphere.sdk.inventory.InventoryEntryDraftBuilder;
 import io.sphere.sdk.json.SphereJsonUtils;
 import io.sphere.sdk.models.*;
@@ -115,6 +117,20 @@ import java.util.function.Function;
  </ul>
  -->
 
+ <h3 class=released-version id="v1_18_0">1.18.0 (18.05.2017)</h3>
+ <ul>
+ <li class=change-in-release>The {@link ProductDraftBuilder} class is now using a generated base class. This change doesn't require changes to your source code,
+ but requires a recompilation of all projects that depend on this class.</li>
+ <li class=new-in-release>{@link io.sphere.sdk.categories.queries.CategoryQuery} now
+ supports sorting by {@link Category#getOrderHint()} via {@link CategoryQueryModel#orderHint()}.</li>
+ </li>
+ <li class=new-in-release>Added {@link io.sphere.sdk.products.commands.updateactions.SetAssetSources} update action for products.</li>
+ <li class=new-in-release>Added new message {@link io.sphere.sdk.products.messages.ProductImageAddedMessage}.</li>
+ <li class=fixed-in-release>The shopping lists {@link io.sphere.sdk.shoppinglists.LineItem#getVariant()} {@link ProductVariant#getIdentifier()}
+ is now correctly initialized.</li>
+ <li class=fixed-in-release>Removed the incorrect nullable annotation from {@link InventoryEntryDraft#getQuantityOnStock()}.</li>
+ </ul>
+
  <h3 class=released-version id="v1_17_0">1.17.0 (28.04.2017)</h3>
  <ul>
  <li class=new-in-release>Added {@link Payment#getKey()}, {@link PaymentDraft#getKey()} and
@@ -127,8 +143,7 @@ import java.util.function.Function;
  <li class=new-in-release>Added support for change subscriptions {@link io.sphere.sdk.subscriptions.ChangeSubscription} and
  message subscriptions {@link io.sphere.sdk.subscriptions.MessageSubscription}.
  </li>
- </ul
- </h3>
+ </ul>
 
  <h3 class=released-version id="v1_16_0">1.16.0 (12.04.2017)</h3>
  <ul>
@@ -136,28 +151,24 @@ import java.util.function.Function;
  <li class=change-in-release>To enable code generation, we changed the type of {@link ShippingRate} from class to interface.
  This change doesn't require you to change your source code, but requires a recompilation of all projects that depend on this class.
  </li>
- </ul
- </h3>
+ </ul>
 
  <h3 class=released-version id="v1_15_0">1.15.0 (04.04.2017)</h3>
  <ul>
  <li class=new-in-release>Added query model {@link PriceTierQueryModel} for tiered prices {@link PriceQueryModel#tiers()}.</li>
  </ul
- </h3>
 
  <h3 class=released-version id="v1_14_1">1.14.1 (30.03.2017)</h3>
  <ul>
  <li class=fixed-in-release>Fix for {@link LineItemExpansionModel#variant()} so that it works correctly.
  This is a breaking change, but the previous version was incorrect and didn't work.</li>
  </ul>
- </h3>
 
 
  <h3 class=released-version id="v1_14_0">1.14.0 (28.03.2017)</h3>
  <ul>
  <li class=new-in-release>Added {@link PriceTier} for tired prices, which are accessible via {@link Price#getTiers()} and {@link PriceDraft#getTiers()}</li>
  </ul>
- </h3>
 
  <h3 class=released-version id="v1_13_0">1.13.0 (20.03.2017)</h3>
  <ul>

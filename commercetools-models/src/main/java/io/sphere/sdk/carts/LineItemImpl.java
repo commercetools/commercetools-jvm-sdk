@@ -25,30 +25,28 @@ import static java.util.Collections.emptyList;
 
 final class LineItemImpl extends LineItemImplBase {
 
-
     @JsonCreator
-    LineItemImpl(final String id, final String productId, final LocalizedString name,
-                 @Nullable  final ObjectNode variant, final Price price, final Long quantity,
-                 final Set<ItemState> state, @Nullable final TaxRate taxRate,
-                 @Nullable final Reference<Channel> supplyChannel, final DiscountedLineItemPrice discountedPrice,
-                 @Nullable final LocalizedString productSlug, @Nullable final Reference<Channel> distributionChannel,
-                 @Nullable final CustomFields custom, final MonetaryAmount totalPrice,
+    LineItemImpl(final CustomFields custom,
                  final List<DiscountedLineItemPriceForQuantity> discountedPricePerQuantity,
-                 @Nullable final TaxedItemPrice taxedPrice, final LineItemPriceMode priceMode,
-                 @Nullable final Reference<ProductType> productType) {
-        super(custom, discountedPricePerQuantity, distributionChannel, id, name, price, priceMode, productId, productSlug,
-                productType, quantity, state, supplyChannel, taxRate, taxedPrice, totalPrice, asVariant(variant,productId));
+                 @Nullable final Reference<Channel> distributionChannel, final String id,
+                 final LineItemMode lineItemMode, final LocalizedString name, final Price price,
+                 final LineItemPriceMode priceMode, final String productId,
+                 @Nullable final LocalizedString productSlug,
+                 @Nullable final Reference<ProductType> productType, final Long quantity,
+                 final Set<ItemState> state, @Nullable final Reference<Channel> supplyChannel,
+                 @Nullable final TaxRate taxRate, @Nullable final TaxedItemPrice taxedPrice,
+                 final MonetaryAmount totalPrice, final ObjectNode variant) {
+        super(custom, discountedPricePerQuantity, distributionChannel, id, lineItemMode, name, price, priceMode, productId, productSlug,
+                productType, quantity, state, supplyChannel, taxRate, taxedPrice, totalPrice, asVariant(variant, productId));
 
     }
 
-    private static ProductVariant asVariant(final ObjectNode variant,final String productId){
-        if(variant == null) {
+    private static ProductVariant asVariant(final ObjectNode variant, final String productId) {
+        if (variant == null) {
             return null;
         }
         Objects.requireNonNull(productId);
         variant.put("productId", productId);
         return SphereJsonUtils.readObject(variant, ProductVariant.class);
     }
-
-
 }
