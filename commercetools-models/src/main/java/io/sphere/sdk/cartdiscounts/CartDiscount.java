@@ -107,8 +107,9 @@ public interface CartDiscount extends Resource<CartDiscount> {
      *
      * @see io.sphere.sdk.cartdiscounts.commands.updateactions.ChangeTarget
      *
-     * @return target
+     * @return the target or null if {@link #getValue()} is a {@link GiftLineItemCartDiscountValue}
      */
+    @Nullable
     @IgnoreInQueryModel
     CartDiscountTarget getTarget();
 

@@ -80,6 +80,8 @@ public interface LineItem extends LineItemLike {
     @Nullable
     Reference<ProductType> getProductType();
 
+    LineItemMode getLineItemMode();
+
     /**
      * An identifier for this resource which supports {@link CustomFields}.
      * @see TypeDraft#getResourceTypeIds()
