@@ -50,7 +50,7 @@ public class ProductDeleteMessageIntegrationTest extends IntegrationTest {
                 assertThat(queryResult.head()).isPresent();
                 final ProductDeletedMessage message = queryResult.head().get();
                 assertThat(message.getResource().getId()).isEqualTo(product.getId());
-                assertThat(message.getRemovedImageUrls()).containsExactly(image.getUrl(),image.getUrl());
+                assertThat(message.getRemovedImageUrls()).containsExactly(image.getUrl());
             });
         });
     }
