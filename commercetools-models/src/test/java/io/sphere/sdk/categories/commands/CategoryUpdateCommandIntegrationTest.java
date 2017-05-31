@@ -71,7 +71,7 @@ public class CategoryUpdateCommandIntegrationTest extends IntegrationTest {
     public void changeKey() throws Exception {
         withCategory(client(), category -> {
             final String key = randomKey();
-            final CategoryUpdateCommand command = CategoryUpdateCommand.of(category, SetKey.of(key));
+            final CategoryUpdateCommand command = CategoryUpdateCommand.of(category, SetKey.ofUnset(key));
 
             final Category updatedCategory = client().executeBlocking(command);
 

@@ -101,6 +101,10 @@ public final class SphereTestUtils {
         return  "random-slug-" + random.nextInt();
     }
 
+    public static String randomLocalizedString() {
+        return  "random-localized-string-" + random.nextInt();
+    }
+
     public static String randomEmail(final Class<?> clazz) {
         return  "random-email-" + random.nextInt() + "-" + clazz.getSimpleName() + "@test.commercetools.de";
     }
