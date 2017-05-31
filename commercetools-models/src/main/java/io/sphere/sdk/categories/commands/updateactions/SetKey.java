@@ -30,7 +30,12 @@ public final class SetKey extends UpdateActionImpl<Category> {
         return key;
     }
 
-    public static SetKey ofUnset(@Nullable final String key) {
+    public static SetKey of(@Nullable final String key) {
         return new SetKey(key);
     }
+
+    public static SetKey ofUnset() {
+        return new SetKey(null);
+    }
+
 }
