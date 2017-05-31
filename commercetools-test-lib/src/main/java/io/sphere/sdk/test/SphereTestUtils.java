@@ -101,8 +101,13 @@ public final class SphereTestUtils {
         return  "random-slug-" + random.nextInt();
     }
 
-    public static String randomLocalizedString() {
-        return  "random-localized-string-" + random.nextInt();
+    /**
+     * Creates an english random localized string.
+     *
+     * @return a random localized
+     */
+    public static LocalizedString randomLocalizedString() {
+        return  en("random-localized-string-" + random.nextInt());
     }
 
     public static String randomEmail(final Class<?> clazz) {

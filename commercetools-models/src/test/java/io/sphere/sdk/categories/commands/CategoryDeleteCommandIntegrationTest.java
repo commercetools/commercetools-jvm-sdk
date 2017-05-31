@@ -7,8 +7,7 @@ import io.sphere.sdk.categories.queries.CategoryQuery;
 import io.sphere.sdk.test.IntegrationTest;
 import org.junit.Test;
 
-import static io.sphere.sdk.test.SphereTestUtils.randomLocalizedString;
-import static io.sphere.sdk.test.SphereTestUtils.randomSlug;
+import static io.sphere.sdk.test.SphereTestUtils.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class CategoryDeleteCommandIntegrationTest extends IntegrationTest {
@@ -35,8 +34,8 @@ public class CategoryDeleteCommandIntegrationTest extends IntegrationTest {
 
     @Test
     public void executionForDeletionByKey() throws Exception {
-        final String key = randomLocalizedString();
-        final CategoryDraft draft = CategoryDraftBuilder.of(randomSlug(), randomSlug()).key(key).build();
+        final String key = randomKey();
+        final CategoryDraft draft = CategoryDraftBuilder.of(randomLocalizedString(), randomSlug()).key(key).build();
         final Category category = client().executeBlocking(CategoryCreateCommand.of(draft));
 
         client().executeBlocking(CategoryDeleteCommand.ofKey(key,category.getVersion()));
@@ -45,9 +44,9 @@ public class CategoryDeleteCommandIntegrationTest extends IntegrationTest {
 
     @Test
     public void referenceExpansionForDeletionByKey() throws Exception {
-        final String key = randomLocalizedString();
-        final Category parent = client().executeBlocking(CategoryCreateCommand.of(CategoryDraftBuilder.of(randomSlug(), randomSlug()).build()));
-        final Category category = client().executeBlocking(CategoryCreateCommand.of(CategoryDraftBuilder.of(randomSlug(), randomSlug()).key(key).parent(parent).build()));
+        final String key = randomKey();
+        final Category parent = client().executeBlocking(CategoryCreateCommand.of(CategoryDraftBuilder.of(randomLocalizedString(), randomSlug()).build()));
+        final Category category = client().executeBlocking(CategoryCreateCommand.of(CategoryDraftBuilder.of(randomLocalizedString(), randomSlug()).key(key).parent(parent).build()));
         final CategoryDeleteCommand deleteCommand = CategoryDeleteCommand.ofKey(key, category.getVersion()).plusExpansionPaths(m -> m.parent());
         final Category deletedCategory = client().executeBlocking(deleteCommand);
 
