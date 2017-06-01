@@ -16,6 +16,12 @@ import static io.sphere.sdk.utils.CompletableFutureUtils.successful;
 
  */
 public final class TestDoubleSphereClientFactory extends Base {
+
+    /**
+     * Dummy configuraion for test clients
+     */
+    private static final SphereApiConfig sphereApiConfig = SphereApiConfig.of("fake-project-key-for-testing", "https://createHttpTestDouble.tld");
+
     private TestDoubleSphereClientFactory() {
     }
 
@@ -30,6 +36,7 @@ public final class TestDoubleSphereClientFactory extends Base {
      */
     public static SphereClient createHttpTestDouble(final Function<HttpRequestIntent, HttpResponse> function) {
         return new SphereClient() {
+
             private final ObjectMapper objectMapper = SphereJsonUtils.newObjectMapper();
 
             @Override
@@ -37,7 +44,7 @@ public final class TestDoubleSphereClientFactory extends Base {
                 final HttpRequestIntent httpRequest = sphereRequest.httpRequestIntent();
                 final HttpResponse httpResponse = function.apply(httpRequest);
                 try {
-                    final T t = SphereClientImpl.parse(sphereRequest, objectMapper, SphereApiConfig.of("fake-project-key-for-testing", "https://createHttpTestDouble.tld"), httpResponse, null);
+                    final T t = SphereClientImpl.parse(sphereRequest, objectMapper, sphereApiConfig, httpResponse, null);
                     return CompletableFutureUtils.successful(t);
                 } catch (final Exception e) {
                     return CompletableFutureUtils.failed(e);
@@ -55,8 +62,7 @@ public final class TestDoubleSphereClientFactory extends Base {
 
             @Override
             public SphereApiConfig getConfig() {
-
-                return SphereApiConfig.of("DUMMY_PROJECT_KEY","DUMMY_API_URL");
+                return sphereApiConfig;
 
             }
         };
@@ -91,7 +97,7 @@ public final class TestDoubleSphereClientFactory extends Base {
 
             @Override
             public SphereApiConfig getConfig() {
-                return null;
+                return sphereApiConfig;
             }
         };
     }
