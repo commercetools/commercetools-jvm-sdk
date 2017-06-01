@@ -55,7 +55,9 @@ public final class TestDoubleSphereClientFactory extends Base {
 
             @Override
             public SphereApiConfig getConfig() {
-                return null;
+
+                return SphereApiConfig.of("DUMMY_PROJECT_KEY","DUMMY_API_URL");
+
             }
         };
     }

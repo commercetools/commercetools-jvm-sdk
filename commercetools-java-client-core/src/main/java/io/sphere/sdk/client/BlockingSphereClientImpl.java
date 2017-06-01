@@ -48,6 +48,6 @@ final class BlockingSphereClientImpl extends Base implements BlockingSphereClien
 
     @Override
     public SphereApiConfig getConfig() {
-        return null;
+        return this.delegate.getConfig();
     }
 }
