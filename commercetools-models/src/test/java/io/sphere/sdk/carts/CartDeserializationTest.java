@@ -19,7 +19,7 @@ public class CartDeserializationTest {
         final Cart cart = SphereJsonUtils.readObjectFromResource("carts/cart-with-refused-gifts.json", Cart.class);
 
         final List<Reference<CartDiscount>> refusedGifts = cart.getRefusedGifts();
-        assertThat(refusedGifts.size()).isEqualTo(1);
+        assertThat(refusedGifts).hasSize(1);
 
         final Reference<CartDiscount> refusedGift = refusedGifts.get(0);
         assertThat(refusedGift.getId()).isEqualTo("<my-cart-discount-id>");
@@ -30,7 +30,7 @@ public class CartDeserializationTest {
         final Cart cart = SphereJsonUtils.readObjectFromResource("carts/cart-with-gift-line-item.json", Cart.class);
 
         final List<LineItem> lineItems = cart.getLineItems();
-        assertThat(lineItems.size()).isEqualTo(1);
+        assertThat(lineItems).hasSize(1);
 
         final LineItem lineItem = lineItems.get(0);
         assertThat(lineItem.getLineItemMode()).isEqualTo(LineItemMode.GIFT_LINE_ITEM);
@@ -41,7 +41,7 @@ public class CartDeserializationTest {
         final Cart cart = SphereJsonUtils.readObjectFromResource("carts/cart-with-standard-line-item.json", Cart.class);
 
         final List<LineItem> lineItems = cart.getLineItems();
-        assertThat(lineItems.size()).isEqualTo(1);
+        assertThat(lineItems).hasSize(1);
 
         final LineItem lineItem = lineItems.get(0);
         assertThat(lineItem.getLineItemMode()).isEqualTo(LineItemMode.STANDARD);

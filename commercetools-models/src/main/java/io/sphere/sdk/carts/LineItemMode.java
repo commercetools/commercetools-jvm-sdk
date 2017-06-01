@@ -13,7 +13,7 @@ public enum LineItemMode implements SphereEnumeration {
      * The line item was added during cart creation {@link io.sphere.sdk.carts.commands.CartCreateCommand}
      * or with the update action {@link io.sphere.sdk.carts.commands.updateactions.AddLineItem}.
      *
-     * It's quantity can be changed without restrictions.
+     * Its quantity can be changed without restrictions.
      */
     STANDARD,
 
