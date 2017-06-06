@@ -50,4 +50,9 @@ public class WrappedClientDemo implements SphereClient {
     public void close() {
         client.close();
     }
+
+    @Override
+    public SphereApiConfig getConfig() {
+        return client.getConfig();
+    }
 }

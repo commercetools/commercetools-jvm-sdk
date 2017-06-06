@@ -45,4 +45,11 @@ public interface SphereClient extends AutoCloseable {
     static SphereClient of(final SphereApiConfig config, final HttpClient httpClient, final SphereAccessTokenSupplier tokenSupplier) {
         return SphereClientImpl.of(config, httpClient, tokenSupplier);
     }
+
+    /**
+     * Getter for the SphereApiConfig used for this client
+     * @return the configuration used for this client
+     * @see SphereApiConfig
+     */
+    SphereApiConfig getConfig();
 }
