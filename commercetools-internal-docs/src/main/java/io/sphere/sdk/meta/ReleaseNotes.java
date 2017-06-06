@@ -2,6 +2,7 @@ package io.sphere.sdk.meta;
 
 import io.sphere.sdk.cartdiscounts.CartDiscountDraft;
 import io.sphere.sdk.cartdiscounts.CartDiscountDraftBuilder;
+import io.sphere.sdk.cartdiscounts.GiftLineItemCartDiscountValue;
 import io.sphere.sdk.carts.*;
 import io.sphere.sdk.carts.commands.updateactions.SetShippingMethod;
 import io.sphere.sdk.carts.expansion.CartExpansionModel;
@@ -11,6 +12,7 @@ import io.sphere.sdk.carts.queries.CartQueryModel;
 import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.categories.CategoryDraft;
 import io.sphere.sdk.categories.CategoryDraftBuilder;
+import io.sphere.sdk.categories.commands.updateactions.SetKey;
 import io.sphere.sdk.categories.queries.CategoryQueryModel;
 import io.sphere.sdk.channels.Channel;
 import io.sphere.sdk.channels.queries.ChannelByIdGet;
@@ -23,11 +25,13 @@ import io.sphere.sdk.commands.UpdateActionImpl;
 import io.sphere.sdk.commands.UpdateCommand;
 import io.sphere.sdk.customergroups.CustomerGroupDraftBuilder;
 import io.sphere.sdk.customers.Customer;
+import io.sphere.sdk.customers.CustomerDraft;
 import io.sphere.sdk.customers.CustomerDraftBuilder;
 import io.sphere.sdk.customers.commands.CustomerCreateEmailTokenCommand;
 import io.sphere.sdk.customers.commands.CustomerPasswordResetCommand;
 import io.sphere.sdk.customers.commands.CustomerVerifyEmailCommand;
 import io.sphere.sdk.customers.commands.updateactions.AddShippingAddressId;
+import io.sphere.sdk.customers.commands.updateactions.SetSalutation;
 import io.sphere.sdk.customers.expansion.CustomerSignInResultExpansionModel;
 import io.sphere.sdk.customers.queries.CustomerQueryModel;
 import io.sphere.sdk.customobjects.CustomObject;
@@ -46,7 +50,9 @@ import io.sphere.sdk.orders.LineItemImportDraft;
 import io.sphere.sdk.orders.Order;
 import io.sphere.sdk.orders.OrderImportDraft;
 import io.sphere.sdk.orders.expansion.OrderExpansionModel;
+import io.sphere.sdk.orders.messages.OrderPaymentStateChangedMessage;
 import io.sphere.sdk.payments.*;
+import io.sphere.sdk.payments.messages.PaymentStatusInterfaceCodeSetMessage;
 import io.sphere.sdk.payments.messages.PaymentTransactionStateChangedMessage;
 import io.sphere.sdk.productdiscounts.ProductDiscountDraftBuilder;
 import io.sphere.sdk.productdiscounts.queries.ProductDiscountByIdGet;
@@ -54,12 +60,16 @@ import io.sphere.sdk.products.*;
 import io.sphere.sdk.products.attributes.Attribute;
 import io.sphere.sdk.products.attributes.AttributeAccess;
 import io.sphere.sdk.products.attributes.AttributeDefinition;
+import io.sphere.sdk.products.commands.ProductImageUploadCommand;
 import io.sphere.sdk.products.commands.updateactions.SetAttribute;
 import io.sphere.sdk.products.commands.updateactions.SetMetaDescription;
 import io.sphere.sdk.products.commands.updateactions.SetMetaKeywords;
 import io.sphere.sdk.products.commands.updateactions.SetMetaTitle;
 import io.sphere.sdk.products.expansion.ProductDataExpansionModel;
 import io.sphere.sdk.products.expansion.ProductProjectionExpansionModel;
+import io.sphere.sdk.products.messages.ProductDeletedMessage;
+import io.sphere.sdk.products.messages.ProductRevertedStagedChangesMessage;
+import io.sphere.sdk.products.messages.ProductVariantDeletedMessage;
 import io.sphere.sdk.products.queries.*;
 import io.sphere.sdk.products.search.*;
 import io.sphere.sdk.producttypes.ProductType;
@@ -71,6 +81,7 @@ import io.sphere.sdk.queries.*;
 import io.sphere.sdk.reviews.ReviewDraft;
 import io.sphere.sdk.reviews.ReviewDraftBuilder;
 import io.sphere.sdk.search.FilteredFacetResult;
+import io.sphere.sdk.search.PagedSearchResult;
 import io.sphere.sdk.search.SearchKeywords;
 import io.sphere.sdk.search.model.ExistsFilterSearchModelSupport;
 import io.sphere.sdk.search.model.MissingFilterSearchModelSupport;
@@ -116,6 +127,20 @@ import java.util.function.Function;
  <li class=fixed-in-release></li>
  </ul>
  -->
+
+ <h3 class=released-version id="v1_19_0">1.19.0 (06.06.2017)</h3>
+ <ul>
+ <li class=new-in-release>Added getter method {@link SphereClient#getConfig()} for accessing the {@link SphereApiConfig}.</li>
+ <li class=new-in-release>Added new messages {@link OrderPaymentStateChangedMessage}, {@link PaymentStatusInterfaceCodeSetMessage},
+ {@link ProductRevertedStagedChangesMessage}, {@link ProductVariantDeletedMessage} and {@link ProductDeletedMessage}.</li>
+ <li class=new-in-release>Added new cart discount value {@link GiftLineItemCartDiscountValue} for gift line items {@link LineItem#getLineItemMode()},
+    {@link LineItemMode#GIFT_LINE_ITEM}.</li>
+ <li class=new-in-release>Added new key property for category {@link Category#getKey()}, {@link CategoryDraft#getKey()} and corresponding update action {@link SetKey}.</li>
+ <li class=new-in-release>Added new salutation for customer {@link Customer#getSalutation()}, {@link CustomerDraft#getSalutation()} and
+ corresponding update action {@link SetSalutation ()}.</li>
+ <li class=new-in-release>Added {@link ProductImageUploadCommand}, which previously was only available via a separate module.</li>
+ <li class=change-in-release>Added missing {@link javax.annotation.Nullable} annotations to {@link PagedSearchResult}.</li>
+ </ul>
 
  <h3 class=released-version id="v1_18_0">1.18.0 (18.05.2017)</h3>
  <ul>
