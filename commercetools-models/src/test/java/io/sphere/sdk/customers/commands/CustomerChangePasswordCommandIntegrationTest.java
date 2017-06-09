@@ -6,12 +6,14 @@ import io.sphere.sdk.customers.Customer;
 import io.sphere.sdk.customers.CustomerIntegrationTest;
 import io.sphere.sdk.customers.CustomerSignInResult;
 import io.sphere.sdk.customers.errors.CustomerInvalidCredentials;
+import io.sphere.sdk.customers.errors.CustomerInvalidCurrentPassword;
 import org.junit.Test;
 
 import java.util.concurrent.CompletionStage;
 
 import static io.sphere.sdk.customers.CustomerFixtures.PASSWORD;
 import static io.sphere.sdk.customers.CustomerFixtures.withCustomer;
+import static io.sphere.sdk.test.SphereTestUtils.randomInt;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.catchThrowable;
 import static org.junit.Assert.fail;
@@ -35,6 +37,19 @@ public class CustomerChangePasswordCommandIntegrationTest extends CustomerIntegr
             assertThat(throwable).isInstanceOf(ErrorResponseException.class);
             final ErrorResponseException errorResponseException = (ErrorResponseException) throwable;
             assertThat(errorResponseException.hasErrorCode(CustomerInvalidCredentials.CODE)).isTrue();
+        });
+    }
+
+    @Test
+    public void invalidCurrentPassword() throws Exception {
+        withCustomer(client(), customer -> {
+            final String oldPassword = PASSWORD + randomInt();
+            final String newPassword = "newSecret";
+            final Throwable throwable = catchThrowable(() -> client().executeBlocking(CustomerChangePasswordCommand.of(customer, oldPassword, newPassword)));
+
+            assertThat(throwable).isInstanceOf(ErrorResponseException.class);
+            final ErrorResponseException errorResponseException = (ErrorResponseException) throwable;
+            assertThat(errorResponseException.hasErrorCode(CustomerInvalidCurrentPassword.CODE)).isTrue();
         });
     }
 
