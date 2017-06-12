@@ -6,6 +6,7 @@ import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.products.ProductIdentifiable;
 import io.sphere.sdk.taxcategories.ExternalTaxRateDraft;
 import io.sphere.sdk.types.CustomFieldsDraft;
+import org.javamoney.moneta.Money;
 
 import javax.annotation.Nullable;
 
@@ -42,11 +43,17 @@ public interface LineItemDraft {
     @Nullable
     ExternalTaxRateDraft getExternalTaxRate();
 
+    @Nullable
+    Money getExternalPrice();
+
+    @Nullable
+    ExternalLineItemTotalPrice getExternalTotalPrice();
+
     static LineItemDraftDsl of(final ProductIdentifiable product, final Integer variantId, final long quantity) {
         return of(product.getId(), variantId, quantity);
     }
 
     static LineItemDraftDsl of(final String productId, final Integer variantId, final long quantity) {
-        return new LineItemDraftDsl(productId, variantId, quantity, null, null, null, null);
+        return new LineItemDraftDsl(productId, variantId, quantity, null, null, null, null, null, null);
     }
 }
