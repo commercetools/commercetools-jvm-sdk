@@ -9,9 +9,11 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
  */
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "type", visible = true)
 @JsonSubTypes(
-        {@JsonSubTypes.Type(value = IronMqDestinationImpl.class, name = "IronMQ"),
-                @JsonSubTypes.Type(value = SnsDestinationImpl.class, name = "SNS"),
-                @JsonSubTypes.Type(value = SqsDestinationImpl.class, name = "SQS")}
+            {       @JsonSubTypes.Type(value = IronMqDestinationImpl.class, name = "IronMQ"),
+                    @JsonSubTypes.Type(value = AzureServiceBusDestinationImpl.class, name = "AzureServiceBus"),
+                    @JsonSubTypes.Type(value = SnsDestinationImpl.class, name = "SNS"),
+                    @JsonSubTypes.Type(value = SqsDestinationImpl.class, name = "SQS")
+            }
         )
 public interface Destination {
     String getType();
