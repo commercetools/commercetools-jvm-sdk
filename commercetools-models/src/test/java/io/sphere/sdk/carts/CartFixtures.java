@@ -218,15 +218,15 @@ public class CartFixtures {
         });
     }
 
-    public static void withCartWithLineItems(final BlockingSphereClient client, final List<LineItemDraft> lineItemDraft, final Consumer<Cart> consumer) {
+    public static void withCartWithLineItems(final BlockingSphereClient client, final List<LineItemDraft> lineItemsDraft, final UnaryOperator<Cart> op) {
         final CartDraftDsl cartDraft = CartDraft.of(EUR)
                 .withTaxMode(TaxMode.EXTERNAL)
                 .withCountry(DE)
                 .withShippingAddress(Address.of(DE))
-                .withLineItems(lineItemDraft);
+                .withLineItems(lineItemsDraft);
         final CartCreateCommand cmd = CartCreateCommand.of(cartDraft);
         final Cart cart = client.executeBlocking(cmd);
-        consumer.accept(cart);
-        client.executeBlocking(CartDeleteCommand.of(cart));
+        final Cart updatedCart = op.apply(cart);
+        client.executeBlocking(CartDeleteCommand.of(updatedCart));
     }
 }
