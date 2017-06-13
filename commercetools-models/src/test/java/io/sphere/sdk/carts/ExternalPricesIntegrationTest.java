@@ -14,6 +14,7 @@ import static io.sphere.sdk.carts.CartFixtures.withCartWithLineItems;
 import static io.sphere.sdk.carts.CartFixtures.withEmptyCartAndProduct;
 import static io.sphere.sdk.carts.LineItemPriceMode.EXTERNAL_PRICE;
 import static io.sphere.sdk.carts.LineItemPriceMode.EXTERNAL_TOTAL;
+import static io.sphere.sdk.carts.LineItemPriceMode.PLATFORM;
 import static io.sphere.sdk.products.ProductFixtures.withProduct;
 import static io.sphere.sdk.test.SphereTestUtils.*;
 import static java.util.Collections.singletonList;
@@ -196,6 +197,30 @@ public class ExternalPricesIntegrationTest extends IntegrationTest {
 
                 return updatedCart;
             });
+        });
+    }
+
+    @Test
+    public void changeLineItemQuantityWithoutExternalTotalPrice() throws Exception {
+        withEmptyCartAndProduct(client(), (cart, product) -> {
+            assertThat(cart.getLineItems()).hasSize(0);
+            final MonetaryAmount price = EURO_1;
+            final MonetaryAmount totalPrice = EURO_5;
+            final ExternalLineItemTotalPrice externalTotalPrice = ExternalLineItemTotalPrice.ofPriceAndTotalPrice(price, totalPrice);
+            final AddLineItem action = AddLineItem.of(product.getId(), MASTER_VARIANT_ID, 3L).withExternalTotalPrice(externalTotalPrice);
+
+            final Cart cartWith3 = client().executeBlocking(CartUpdateCommand.of(cart, action));
+            final LineItem lineItem = cartWith3.getLineItems().get(0);
+            assertThat(lineItem.getQuantity()).isEqualTo(3);
+            assertThat(lineItem.getPriceMode()).isEqualTo(EXTERNAL_TOTAL);
+            assertThat(lineItem.getTotalPrice()).isEqualTo(totalPrice);
+            assertThat(lineItem.getPrice().getValue()).isEqualTo(price);
+
+            final Cart cartWith2 = client().executeBlocking(CartUpdateCommand.of(cartWith3, ChangeLineItemQuantity.of(lineItem, 2L)));
+            final LineItem updatedLineItem = cartWith2.getLineItems().get(0);
+            assertThat(updatedLineItem.getQuantity()).isEqualTo(2);
+            assertThat(updatedLineItem.getPriceMode()).isEqualTo(PLATFORM);
+            assertThat(updatedLineItem.getPrice().getValue()).isEqualTo(Money.of(12.34, "EUR"));
         });
     }
 
