@@ -1,6 +1,7 @@
 package io.sphere.sdk.carts.commands.updateactions;
 
 import io.sphere.sdk.carts.Cart;
+import io.sphere.sdk.carts.LineItem;
 import io.sphere.sdk.commands.UpdateActionImpl;
 import org.javamoney.moneta.Money;
 
@@ -21,10 +22,22 @@ public final class SetLineItemPrice extends UpdateActionImpl<Cart> {
     @Nullable
     final private Money externalPrice;
 
-    private SetLineItemPrice(final String lineItemId, final Money externalPrice) {
+    private SetLineItemPrice(final String lineItemId, @Nullable final Money externalPrice) {
         super("setLineItemPrice");
         this.lineItemId = lineItemId;
         this.externalPrice = externalPrice;
+    }
+
+    public static SetLineItemPrice of(final LineItem lineItem) {
+        return of(lineItem.getId());
+    }
+
+    public static SetLineItemPrice of(final String lineItemId) {
+        return of(lineItemId, null);
+    }
+
+    public static SetLineItemPrice of(final LineItem lineItem, @Nullable final Money externalPrice) {
+        return of(lineItem.getId(), externalPrice);
     }
 
     public static SetLineItemPrice of(final String lineItemId, @Nullable final Money externalPrice) {

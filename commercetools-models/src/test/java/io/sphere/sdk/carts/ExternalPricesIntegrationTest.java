@@ -4,6 +4,7 @@ import io.sphere.sdk.carts.commands.CartUpdateCommand;
 import io.sphere.sdk.carts.commands.updateactions.AddLineItem;
 import io.sphere.sdk.carts.commands.updateactions.ChangeLineItemQuantity;
 import io.sphere.sdk.carts.commands.updateactions.RemoveLineItem;
+import io.sphere.sdk.carts.commands.updateactions.SetLineItemPrice;
 import io.sphere.sdk.test.IntegrationTest;
 import org.javamoney.moneta.Money;
 import org.junit.Test;
@@ -56,6 +57,26 @@ public class ExternalPricesIntegrationTest extends IntegrationTest {
                 assertThat(cartLineItem.getPriceMode()).isEqualTo(EXTERNAL_TOTAL);
                 return cart;
             });
+        });
+    }
+
+    @Test
+    public void setLineItemPriceWithoutExternalPrice() {
+        withEmptyCartAndProduct(client(), (cart, product) -> {
+            assertThat(cart.getLineItems()).hasSize(0);
+            final Money externalPrice = Money.from(EURO_20);
+            final AddLineItem action = AddLineItem.of(product.getId(), MASTER_VARIANT_ID, 3L).withExternalPrice(externalPrice);
+
+            final Cart cartWithLineItem = client().executeBlocking(CartUpdateCommand.of(cart, action));
+            final LineItem lineItem = cartWithLineItem.getLineItems().get(0);
+            assertThat(lineItem.getQuantity()).isEqualTo(3);
+            assertThat(lineItem.getPriceMode()).isEqualTo(EXTERNAL_PRICE);
+            assertThat(lineItem.getPrice().getValue()).isEqualTo(externalPrice);
+
+            final Cart updatedCart = client().executeBlocking(CartUpdateCommand.of(cartWithLineItem, SetLineItemPrice.of(lineItem.getId())));
+            final LineItem updatedLineItem = updatedCart.getLineItems().get(0);
+            assertThat(updatedLineItem.getPriceMode()).isEqualTo(PLATFORM);
+            assertThat(updatedLineItem.getPrice().getValue()).isEqualTo(Money.of(12.34, "EUR"));
         });
     }
 
