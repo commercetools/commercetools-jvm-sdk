@@ -10,9 +10,9 @@ import io.sphere.sdk.products.ProductIdentifiable;
 import io.sphere.sdk.taxcategories.ExternalTaxRateDraft;
 import io.sphere.sdk.types.CustomDraft;
 import io.sphere.sdk.types.CustomFieldsDraft;
-import org.javamoney.moneta.Money;
 
 import javax.annotation.Nullable;
+import javax.money.MonetaryAmount;
 
 /**
     Adds a product variant in the given quantity to the cart.
@@ -40,11 +40,11 @@ public final class AddLineItem extends UpdateActionImpl<Cart> implements CustomD
     @Nullable
     private final ExternalTaxRateDraft externalTaxRate;
     @Nullable
-    private final Money externalPrice;
+    private final MonetaryAmount externalPrice;
     @Nullable
     private final ExternalLineItemTotalPrice externalTotalPrice;
 
-    private AddLineItem(final String productId, final Integer variantId, final Long quantity, @Nullable final Reference<Channel> supplyChannel, @Nullable final Reference<Channel> distributionChannel, @Nullable final CustomFieldsDraft custom, @Nullable final ExternalTaxRateDraft externalTaxRate, @Nullable final Money externalPrice, @Nullable final ExternalLineItemTotalPrice externalTotalPrice) {
+    private AddLineItem(final String productId, final Integer variantId, final Long quantity, @Nullable final Reference<Channel> supplyChannel, @Nullable final Reference<Channel> distributionChannel, @Nullable final CustomFieldsDraft custom, @Nullable final ExternalTaxRateDraft externalTaxRate, @Nullable final MonetaryAmount externalPrice, @Nullable final ExternalLineItemTotalPrice externalTotalPrice) {
         super("addLineItem");
         this.productId = productId;
         this.variantId = variantId;
@@ -98,7 +98,7 @@ public final class AddLineItem extends UpdateActionImpl<Cart> implements CustomD
     }
 
     @Nullable
-    public Money getExternalPrice() {
+    public MonetaryAmount getExternalPrice() {
         return externalPrice;
     }
 
@@ -123,7 +123,7 @@ public final class AddLineItem extends UpdateActionImpl<Cart> implements CustomD
         return new AddLineItem(getProductId(), getVariantId(), getQuantity(), getSupplyChannel(), getDistributionChannel(), getCustom(), externalTaxRate, getExternalPrice(), getExternalTotalPrice());
     }
 
-    public AddLineItem withExternalPrice(@Nullable final Money externalPrice) {
+    public AddLineItem withExternalPrice(@Nullable final MonetaryAmount externalPrice) {
         return new AddLineItem(getProductId(), getVariantId(), getQuantity(), getSupplyChannel(), getDistributionChannel(), getCustom(), getExternalTaxRate(), externalPrice, getExternalTotalPrice());
     }
 

@@ -6,9 +6,9 @@ import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.products.ProductIdentifiable;
 import io.sphere.sdk.taxcategories.ExternalTaxRateDraft;
 import io.sphere.sdk.types.CustomFieldsDraft;
-import org.javamoney.moneta.Money;
 
 import javax.annotation.Nullable;
+import javax.money.MonetaryAmount;
 
 /**
  * Draft for a new line item.
@@ -44,7 +44,7 @@ public interface LineItemDraft {
     ExternalTaxRateDraft getExternalTaxRate();
 
     @Nullable
-    Money getExternalPrice();
+    MonetaryAmount getExternalPrice();
 
     @Nullable
     ExternalLineItemTotalPrice getExternalTotalPrice();

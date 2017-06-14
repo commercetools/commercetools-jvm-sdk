@@ -4,9 +4,9 @@ import io.sphere.sdk.carts.Cart;
 import io.sphere.sdk.carts.ExternalLineItemTotalPrice;
 import io.sphere.sdk.carts.LineItem;
 import io.sphere.sdk.commands.UpdateActionImpl;
-import org.javamoney.moneta.Money;
 
 import javax.annotation.Nullable;
+import javax.money.MonetaryAmount;
 
 /**
  Decreases the quantity of the given line item. If after the update the quantity of the line item is not greater than 0 or the quantity is not specified, the line item is removed from the cart.
@@ -20,11 +20,11 @@ public final class RemoveLineItem extends UpdateActionImpl<Cart> {
     @Nullable
     private final Long quantity;
     @Nullable
-    private final Money externalPrice;
+    private final MonetaryAmount externalPrice;
     @Nullable
     private final ExternalLineItemTotalPrice externalTotalPrice;
 
-    private RemoveLineItem(final String lineItemId, @Nullable final Long quantity, @Nullable final Money externalPrice, @Nullable final ExternalLineItemTotalPrice externalTotalPrice) {
+    private RemoveLineItem(final String lineItemId, @Nullable final Long quantity, @Nullable final MonetaryAmount externalPrice, @Nullable final ExternalLineItemTotalPrice externalTotalPrice) {
         super("removeLineItem");
         this.lineItemId = lineItemId;
         this.quantity = quantity;
@@ -32,7 +32,7 @@ public final class RemoveLineItem extends UpdateActionImpl<Cart> {
         this.externalTotalPrice = externalTotalPrice;
     }
 
-    private static RemoveLineItem of(final String lineItemId, @Nullable final Long quantity, @Nullable final Money externalPrice, @Nullable final ExternalLineItemTotalPrice externalTotalPrice) {
+    private static RemoveLineItem of(final String lineItemId, @Nullable final Long quantity, @Nullable final MonetaryAmount externalPrice, @Nullable final ExternalLineItemTotalPrice externalTotalPrice) {
         return new RemoveLineItem(lineItemId, quantity, externalPrice, externalTotalPrice);
     }
 
@@ -52,11 +52,11 @@ public final class RemoveLineItem extends UpdateActionImpl<Cart> {
         return of(lineItem.getId());
     }
 
-    public static RemoveLineItem ofLineItemAndExternalPrice(final LineItem lineItem, @Nullable final Long quantity, @Nullable final Money externalPrice) {
+    public static RemoveLineItem ofLineItemAndExternalPrice(final LineItem lineItem, @Nullable final Long quantity, @Nullable final MonetaryAmount externalPrice) {
         return ofLineItemAndExternalPrice(lineItem.getId(), quantity, externalPrice);
     }
 
-    public static RemoveLineItem ofLineItemAndExternalPrice(final String lineItemId, @Nullable final Long quantity, @Nullable final Money externalPrice) {
+    public static RemoveLineItem ofLineItemAndExternalPrice(final String lineItemId, @Nullable final Long quantity, @Nullable final MonetaryAmount externalPrice) {
         return of(lineItemId, quantity, externalPrice, null);
     }
 
@@ -78,7 +78,7 @@ public final class RemoveLineItem extends UpdateActionImpl<Cart> {
     }
 
     @Nullable
-    public Money getExternalPrice() {
+    public MonetaryAmount getExternalPrice() {
         return externalPrice;
     }
 

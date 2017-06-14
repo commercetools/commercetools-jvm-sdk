@@ -8,9 +8,9 @@ import io.sphere.sdk.models.Referenceable;
 import io.sphere.sdk.products.ProductIdentifiable;
 import io.sphere.sdk.taxcategories.ExternalTaxRateDraft;
 import io.sphere.sdk.types.CustomFieldsDraft;
-import org.javamoney.moneta.Money;
 
 import javax.annotation.Nullable;
+import javax.money.MonetaryAmount;
 
 public final class LineItemDraftDsl extends Base implements LineItemDraft {
 
@@ -27,12 +27,12 @@ public final class LineItemDraftDsl extends Base implements LineItemDraft {
     @Nullable
     private final ExternalTaxRateDraft externalTaxRate;
     @Nullable
-    private final Money externalPrice;
+    private final MonetaryAmount externalPrice;
     @Nullable
     private final ExternalLineItemTotalPrice externalTotalPrice;
 
     @JsonCreator
-    LineItemDraftDsl(final String productId, final Integer variantId, @Nullable final Long quantity, @Nullable final Reference<Channel> supplyChannel, @Nullable final Reference<Channel> distributionChannel, @Nullable final CustomFieldsDraft custom, final ExternalTaxRateDraft externalTaxRate, @Nullable final Money externalPrice, @Nullable final ExternalLineItemTotalPrice externalTotalPrice) {
+    LineItemDraftDsl(final String productId, final Integer variantId, @Nullable final Long quantity, @Nullable final Reference<Channel> supplyChannel, @Nullable final Reference<Channel> distributionChannel, @Nullable final CustomFieldsDraft custom, final ExternalTaxRateDraft externalTaxRate, @Nullable final MonetaryAmount externalPrice, @Nullable final ExternalLineItemTotalPrice externalTotalPrice) {
         this.custom = custom;
         this.productId = productId;
         this.variantId = variantId;
@@ -94,7 +94,7 @@ public final class LineItemDraftDsl extends Base implements LineItemDraft {
 
     @Nullable
     @Override
-    public Money getExternalPrice() {
+    public MonetaryAmount getExternalPrice() {
         return externalPrice;
     }
 
@@ -120,7 +120,7 @@ public final class LineItemDraftDsl extends Base implements LineItemDraft {
         return new LineItemDraftDsl(getProductId(), getVariantId(), getQuantity(), getSupplyChannel(), getDistributionChannel(), getCustom(), externalTaxRate, getExternalPrice(), getExternalTotalPrice());
     }
 
-    public LineItemDraftDsl withExternalPrice(final Money externalPrice) {
+    public LineItemDraftDsl withExternalPrice(final MonetaryAmount externalPrice) {
         return new LineItemDraftDsl(getProductId(), getVariantId(), getQuantity(), getSupplyChannel(), getDistributionChannel(), getCustom(), getExternalTaxRate(), externalPrice, getExternalTotalPrice());
     }
 

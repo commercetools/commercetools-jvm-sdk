@@ -6,16 +6,14 @@ import io.sphere.sdk.carts.commands.updateactions.ChangeLineItemQuantity;
 import io.sphere.sdk.carts.commands.updateactions.RemoveLineItem;
 import io.sphere.sdk.carts.commands.updateactions.SetLineItemPrice;
 import io.sphere.sdk.test.IntegrationTest;
-import org.javamoney.moneta.Money;
+import io.sphere.sdk.utils.MoneyImpl;
 import org.junit.Test;
 
 import javax.money.MonetaryAmount;
 
 import static io.sphere.sdk.carts.CartFixtures.withCartWithLineItems;
 import static io.sphere.sdk.carts.CartFixtures.withEmptyCartAndProduct;
-import static io.sphere.sdk.carts.LineItemPriceMode.EXTERNAL_PRICE;
-import static io.sphere.sdk.carts.LineItemPriceMode.EXTERNAL_TOTAL;
-import static io.sphere.sdk.carts.LineItemPriceMode.PLATFORM;
+import static io.sphere.sdk.carts.LineItemPriceMode.*;
 import static io.sphere.sdk.products.ProductFixtures.withProduct;
 import static io.sphere.sdk.test.SphereTestUtils.*;
 import static java.util.Collections.singletonList;
@@ -28,7 +26,7 @@ public class ExternalPricesIntegrationTest extends IntegrationTest {
         withProduct(client(), product -> {
             final int quantity = 5;
             final int variantId = 1;
-            final Money externalPrice = Money.from(EURO_12);
+            final MonetaryAmount externalPrice = EURO_12;
             final LineItemDraft lineItemDraft = LineItemDraft.of(product, variantId, quantity)
                     .withExternalPrice(externalPrice);
             withCartWithLineItems(client(), singletonList(lineItemDraft), cart -> {
@@ -64,7 +62,7 @@ public class ExternalPricesIntegrationTest extends IntegrationTest {
     public void setLineItemPriceWithoutExternalPrice() {
         withEmptyCartAndProduct(client(), (cart, product) -> {
             assertThat(cart.getLineItems()).hasSize(0);
-            final Money externalPrice = Money.from(EURO_20);
+            final MonetaryAmount externalPrice = EURO_20;
             final AddLineItem action = AddLineItem.of(product.getId(), MASTER_VARIANT_ID, 3L).withExternalPrice(externalPrice);
 
             final Cart cartWithLineItem = client().executeBlocking(CartUpdateCommand.of(cart, action));
@@ -76,7 +74,7 @@ public class ExternalPricesIntegrationTest extends IntegrationTest {
             final Cart updatedCart = client().executeBlocking(CartUpdateCommand.of(cartWithLineItem, SetLineItemPrice.of(lineItem.getId())));
             final LineItem updatedLineItem = updatedCart.getLineItems().get(0);
             assertThat(updatedLineItem.getPriceMode()).isEqualTo(PLATFORM);
-            assertThat(updatedLineItem.getPrice().getValue()).isEqualTo(Money.of(12.34, "EUR"));
+            assertThat(updatedLineItem.getPrice().getValue()).isEqualTo(MoneyImpl.ofCents(1234, EUR));
         });
     }
 
@@ -87,7 +85,7 @@ public class ExternalPricesIntegrationTest extends IntegrationTest {
             final int quantity = 5;
             final int variantId = 1;
             final String productId = product.getId();
-            final Money externalPrice = Money.from(EURO_30);
+            final MonetaryAmount externalPrice = EURO_30;
             final AddLineItem updateAction = AddLineItem.of(productId, variantId, quantity)
                     .withExternalPrice(externalPrice);
             final Cart cartWithLineItem = client().executeBlocking(CartUpdateCommand.of(cart, updateAction));
@@ -122,13 +120,13 @@ public class ExternalPricesIntegrationTest extends IntegrationTest {
         withProduct(client(), product -> {
             final int quantity = 5;
             final int variantId = 1;
-            final Money initialExternalPrice = Money.from(EURO_20);
+            final MonetaryAmount initialExternalPrice = EURO_20;
             final LineItemDraft lineItemDraft = LineItemDraft.of(product, variantId, quantity).withExternalPrice(initialExternalPrice);
             withCartWithLineItems(client(), singletonList(lineItemDraft), cart -> {
                 final LineItem cartLineItem = cart.getLineItems().get(0);
                 assertThat(cartLineItem.getQuantity()).isEqualTo(quantity);
 
-                final Money newExternalPrice = Money.from(EURO_25);
+                final MonetaryAmount newExternalPrice = EURO_25;
                 final Cart updatedCart = client().executeBlocking(CartUpdateCommand.of(cart, RemoveLineItem.ofLineItemAndExternalPrice(cartLineItem, 4L, newExternalPrice)));
                 final LineItem updatedLineItem = updatedCart.getLineItems().get(0);
                 assertThat(updatedLineItem.getQuantity()).isEqualTo(1);
@@ -173,13 +171,13 @@ public class ExternalPricesIntegrationTest extends IntegrationTest {
         withProduct(client(), product -> {
             final int quantity = 5;
             final int variantId = 1;
-            final Money initialExternalPrice = Money.from(EURO_20);
+            final MonetaryAmount initialExternalPrice = EURO_20;
             final LineItemDraft lineItemDraft = LineItemDraft.of(product, variantId, quantity).withExternalPrice(initialExternalPrice);
             withCartWithLineItems(client(), singletonList(lineItemDraft), cart -> {
                 final LineItem cartLineItem = cart.getLineItems().get(0);
                 assertThat(cartLineItem.getQuantity()).isEqualTo(quantity);
 
-                final Money newExternalPrice = Money.from(EURO_25);
+                final MonetaryAmount newExternalPrice = EURO_25;
                 final long newQuantity = 3L;
                 final Cart updatedCart = client().executeBlocking(CartUpdateCommand.of(cart, ChangeLineItemQuantity.ofLineItemAndExternalPrice(cartLineItem, newQuantity, newExternalPrice)));
                 final LineItem updatedLineItem = updatedCart.getLineItems().get(0);
@@ -241,7 +239,7 @@ public class ExternalPricesIntegrationTest extends IntegrationTest {
             final LineItem updatedLineItem = cartWith2.getLineItems().get(0);
             assertThat(updatedLineItem.getQuantity()).isEqualTo(2);
             assertThat(updatedLineItem.getPriceMode()).isEqualTo(PLATFORM);
-            assertThat(updatedLineItem.getPrice().getValue()).isEqualTo(Money.of(12.34, "EUR"));
+            assertThat(updatedLineItem.getPrice().getValue()).isEqualTo(MoneyImpl.ofCents(1234, EUR));
         });
     }
 
