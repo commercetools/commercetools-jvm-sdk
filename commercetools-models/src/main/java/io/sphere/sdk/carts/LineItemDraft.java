@@ -1,6 +1,8 @@
 package io.sphere.sdk.carts;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import io.sphere.sdk.annotations.FactoryMethod;
+import io.sphere.sdk.annotations.ResourceDraftValue;
 import io.sphere.sdk.channels.Channel;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.products.ProductIdentifiable;
@@ -16,6 +18,9 @@ import javax.money.MonetaryAmount;
  * @see io.sphere.sdk.carts.commands.CartCreateCommand
  */
 @JsonDeserialize(as = LineItemDraftDsl.class)
+@ResourceDraftValue(factoryMethods = {
+        @FactoryMethod(parameterNames = {"productId", "variantId", "quantity", "supplyChannel", "distributionChannel", "custom", "externalTaxRate", "externalPrice", "externalTotalPrice"})
+})
 public interface LineItemDraft {
     @Nullable
     CustomFieldsDraft getCustom();
@@ -54,6 +59,6 @@ public interface LineItemDraft {
     }
 
     static LineItemDraftDsl of(final String productId, final Integer variantId, final long quantity) {
-        return new LineItemDraftDsl(productId, variantId, quantity, null, null, null, null, null, null);
+        return LineItemDraftDsl.of(productId, variantId, quantity, null, null, null, null, null, null);
     }
 }
