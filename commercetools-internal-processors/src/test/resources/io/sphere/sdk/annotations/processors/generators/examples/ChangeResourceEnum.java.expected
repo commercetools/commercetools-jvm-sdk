@@ -1,0 +1,37 @@
+package io.sphere.sdk.annotations.processors.generators.examples.commands.updateactions;
+
+import io.sphere.sdk.annotations.processors.generators.examples.MyResource;
+import io.sphere.sdk.annotations.processors.generators.examples.MyResourceEnum;
+import io.sphere.sdk.commands.UpdateActionImpl;
+import javax.annotation.Generated;
+
+/**
+ * Updates the {@code resourceEnum} property of a {@link MyResource}.
+ *
+ * @see MyResource#getResourceEnum()
+ */
+@Generated(
+    value = "io.sphere.sdk.annotations.processors.generators.UpdateActionsGenerator",
+    comments = "Generated from: io.sphere.sdk.annotations.processors.generators.examples.MyResource"
+)
+public final class ChangeResourceEnum extends UpdateActionImpl<MyResource> {
+  private final MyResourceEnum resourceEnum;
+
+  private ChangeResourceEnum(final MyResourceEnum resourceEnum) {
+    super("changeResourceEnum");
+    this.resourceEnum = resourceEnum;
+  }
+
+  public MyResourceEnum getResourceEnum() {
+    return resourceEnum;
+  }
+
+  /**
+   * Creates a new update action from the given parameters.
+   *
+   * @param resourceEnum the {@code resourceEnum} property {@link MyResource#getResourceEnum()}
+   */
+  public static ChangeResourceEnum of(final MyResourceEnum resourceEnum) {
+    return new ChangeResourceEnum(resourceEnum);
+  }
+}

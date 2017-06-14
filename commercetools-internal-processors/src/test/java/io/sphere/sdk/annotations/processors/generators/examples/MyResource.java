@@ -18,4 +18,6 @@ public interface MyResource {
     Integer getQuantity();
 
     Locale getLocale();
+
+    MyResourceEnum getResourceEnum();
 }
