@@ -16,9 +16,9 @@ import java.util.List;
 @ResourceInfo(pluralName = "subscriptions", pathElement = "subscriptions")
 @HasQueryEndpoint
 @HasQueryModel
-@HasUpdateCommand(javadocSummary = "Updates a subscripton.", updateWithKey = true)
+@HasUpdateCommand(javadocSummary = "Updates a subscription.", updateWithKey = true)
 @HasCreateCommand(javadocSummary = "Creates a {@link io.sphere.sdk.subscriptions.Subscription}.")
-@HasDeleteCommand(javadocSummary = "Deletes a subscripton.", deleteWithKey = true)
+@HasDeleteCommand(javadocSummary = "Deletes a subscription.", deleteWithKey = true)
 @HasByIdGetEndpoint(javadocSummary = "Fetches a subscription by id.")
 @HasByKeyGetEndpoint(javadocSummary = "Fetches a subscription by key.")
 @HasUpdateActions
