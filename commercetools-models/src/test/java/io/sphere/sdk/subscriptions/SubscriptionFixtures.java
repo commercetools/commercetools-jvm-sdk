@@ -28,6 +28,8 @@ public class SubscriptionFixtures {
 
     private final static String AWS_REGION = "AWS_REGION";
 
+    private final static String AZURE_SERVICE_BUS_CONNECTION_STRING_ENV = "AZURE_SERVICE_BUS_CONNECTION_STRING_ENV";
+
     public static SubscriptionDraftBuilder ironMqSubscriptionDraftBuilder() {
         final String ironMqUriFromEnv = ironMqUriFromEnv();
 
@@ -37,6 +39,12 @@ public class SubscriptionFixtures {
                 .key(ironMqKey);
     }
 
+
+    public static SubscriptionDraftBuilder azureServiceBusSubscriptionDraftBuilder() {
+        final String connectionString = azureSBConnectionStringFromEnv();
+        final String subscriptionQueue = "azure-sb-test-subscription-" + randomInt();
+        return SubscriptionDraftBuilder.of(AzureServiceBusDestination.of(connectionString)).key(subscriptionQueue);
+    }
     /**
      * Checks if the environment variables required for IronMQ tests are set.
      *
@@ -50,6 +58,19 @@ public class SubscriptionFixtures {
     }
 
     /**
+     * Checks if the environment variables required for AzureServiceBus tests are set.
+     *
+     * @see #AZURE_SERVICE_BUS_CONNECTION_STRING_ENV
+     * @see Assume#assumeTrue(boolean)
+     */
+    public static void assumeHasAzureSBEnv() {
+        final String azureSBConnectionString = azureSBConnectionStringFromEnv();
+
+        assumeNotNull(azureSBConnectionString);
+    }
+
+
+    /**
      * Returns the iron mq uri to run tests against.
      *
      * @see #CTP_IRON_MQ_URI_ENV
@@ -59,6 +80,16 @@ public class SubscriptionFixtures {
     public static String ironMqUriFromEnv() {
         final String ironMqUriEnv = System.getenv(CTP_IRON_MQ_URI_ENV);
         return ironMqUriEnv;
+    }
+
+    /**
+     * Gets the connection string from the environment
+     *
+     * @return the Azure Service Bus Connection String
+     */
+    public static String azureSBConnectionStringFromEnv(){
+        final String connectionString = System.getenv(AZURE_SERVICE_BUS_CONNECTION_STRING_ENV);
+        return connectionString;
     }
 
     public static SubscriptionDraftBuilder sqsSubscriptionDraftBuilder(final String queueUrl) {
@@ -118,7 +149,7 @@ public class SubscriptionFixtures {
 
     public static void deleteSubscription(final BlockingSphereClient client, final Subscription subscription) {
         if (subscription != null) {
-            client.executeBlocking(SubscriptionDeleteCommand.of(subscription));
+            Subscription subs = client.executeBlocking(SubscriptionDeleteCommand.of(subscription));
         }
     }
 }

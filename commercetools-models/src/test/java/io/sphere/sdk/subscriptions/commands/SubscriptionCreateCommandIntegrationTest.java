@@ -36,6 +36,24 @@ public class SubscriptionCreateCommandIntegrationTest extends IntegrationTest {
     }
 
     @Test
+    public void createAzureSBChangesSubscription() throws Exception {
+        assumeHasAzureSBEnv();
+
+        final SubscriptionDraftDsl subscriptionDraft = withCategoryChanges(azureServiceBusSubscriptionDraftBuilder()).build();
+
+        final SubscriptionCreateCommand createCommand = SubscriptionCreateCommand.of(subscriptionDraft);
+        Subscription subscription = null;
+        try {
+            subscription = client().executeBlocking(createCommand);
+            assertThat(subscription).isNotNull();
+            assertThat(subscription.getDestination()).isEqualTo(subscriptionDraft.getDestination());
+            assertThat(subscription.getChanges()).isEqualTo(subscriptionDraft.getChanges());
+        } finally {
+            SubscriptionFixtures.deleteSubscription(client(), subscription);
+        }
+    }
+
+    @Test
     public void createIronMqMessagesSubscription() throws Exception {
         assumeHasIronMqEnv();
 

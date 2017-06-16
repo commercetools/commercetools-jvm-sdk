@@ -17,11 +17,15 @@ public interface AzureServiceBusDestination extends Destination {
     /**
      * The connection string for either one of the two generated keys for the Shared Access Policy
      *
+     * the strcture of this String is as follow
+     *
+     * "Endpoint={Endpoint obtained from azure portal};SharedAccessKey={can be also obtained fro the azure portal};EntityPath={name of the referred entity in our case its the name of the queue}";
+     *
      * @return the connection uri
      */
-    URI getConnectionString();
+    String getConnectionString();
 
-    static AzureServiceBusDestination of(final URI uri) {
-        return new AzureServiceBusDestinationImpl(requireNonNull(uri), "AzureServiceBus");
+    static AzureServiceBusDestination of(final String connectString) {
+        return new AzureServiceBusDestinationImpl(requireNonNull(connectString), "AzureServiceBus");
     }
 }
