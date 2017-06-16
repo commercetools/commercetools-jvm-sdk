@@ -29,7 +29,7 @@ public class SubscriptionUpdateCommandIntegrationTest extends IntegrationTest {
     }
 
     @Test
-    public void setChangeAzureSBQueue(){
+    public void setChangesAzureSBQueue(){
         assumeHasAzureSBEnv();
         setChangesQueue(SubscriptionFixtures::azureServiceBusSubscriptionDraftBuilder);
     }
@@ -41,19 +41,19 @@ public class SubscriptionUpdateCommandIntegrationTest extends IntegrationTest {
     }
 
     @Test
-    public void setKeyIronMQ(){
+    public void setKeyIronMq(){
         assumeHasIronMqEnv();
         setKeyQueue(SubscriptionFixtures::ironMqSubscriptionDraftBuilder);
     }
 
     @Test
-    public void setChangeIronMQ(){
+    public void setChangesIronMq(){
         assumeHasIronMqEnv();
         setChangesQueue(SubscriptionFixtures::ironMqSubscriptionDraftBuilder);
     }
 
     @Test
-    public void setMessageIronMQ(){
+    public void setMessageIronMq(){
         assumeHasIronMqEnv();
         setMessagesQueue(SubscriptionFixtures::ironMqSubscriptionDraftBuilder);
     }
