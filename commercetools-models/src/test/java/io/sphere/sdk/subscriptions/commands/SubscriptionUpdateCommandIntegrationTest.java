@@ -29,7 +29,7 @@ public class SubscriptionUpdateCommandIntegrationTest extends IntegrationTest {
     }
 
     @Test
-    public void setChangesAzureSBQueue(){
+    public void setChangeAzureSBQueue(){
         assumeHasAzureSBEnv();
         setChangesQueue(SubscriptionFixtures::azureServiceBusSubscriptionDraftBuilder);
     }
@@ -41,19 +41,19 @@ public class SubscriptionUpdateCommandIntegrationTest extends IntegrationTest {
     }
 
     @Test
-    public void setKeyIronMq(){
+    public void setKeyIronMQ(){
         assumeHasIronMqEnv();
         setKeyQueue(SubscriptionFixtures::ironMqSubscriptionDraftBuilder);
     }
 
     @Test
-    public void setChangesIronMq(){
+    public void setChangeIronMQ(){
         assumeHasIronMqEnv();
         setChangesQueue(SubscriptionFixtures::ironMqSubscriptionDraftBuilder);
     }
 
     @Test
-    public void setMessagesIronMq(){
+    public void setMessageIronMQ(){
         assumeHasIronMqEnv();
         setMessagesQueue(SubscriptionFixtures::ironMqSubscriptionDraftBuilder);
     }
@@ -82,6 +82,7 @@ public class SubscriptionUpdateCommandIntegrationTest extends IntegrationTest {
             final List<ChangeSubscription> newChangeSubscriptions = Collections.singletonList(ChangeSubscription.of(Payment.resourceTypeId()));
 
 
+            final SubscriptionUpdateCommand setChangesCommand = SubscriptionUpdateCommand.of(subscription, SetChanges.of(newChangeSubscriptions));
             final SubscriptionUpdateCommand setChangesCommand = SubscriptionUpdateCommand.of(subscription, SetChanges.of(newChangeSubscriptions));
             final Subscription updatedSubscription = client().executeBlocking(setChangesCommand);
 
