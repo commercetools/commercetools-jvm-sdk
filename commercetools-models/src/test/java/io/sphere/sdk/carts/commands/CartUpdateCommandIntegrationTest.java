@@ -26,7 +26,6 @@ import io.sphere.sdk.shoppinglists.LineItemDraftBuilder;
 import io.sphere.sdk.shoppinglists.ShoppingListDraftDsl;
 import io.sphere.sdk.test.IntegrationTest;
 import io.sphere.sdk.utils.MoneyImpl;
-import org.javamoney.moneta.Money;
 import org.junit.Test;
 
 import javax.money.MonetaryAmount;
@@ -531,7 +530,7 @@ public class CartUpdateCommandIntegrationTest extends IntegrationTest {
             assertThat(originalLineItem.getPriceMode()).isEqualTo(LineItemPriceMode.PLATFORM);
 
             final String lineItemId = originalLineItem.getId();
-            final Money externalPrice = Money.from(EURO_30);
+            final MonetaryAmount externalPrice = EURO_30;
             final SetLineItemPrice updateAction = SetLineItemPrice.of(lineItemId, externalPrice);
             final Cart updatedCart = client().executeBlocking(CartUpdateCommand.of(cart, updateAction));
 
