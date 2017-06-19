@@ -129,7 +129,7 @@ public class UpdateActionsGenerator extends AbstractMultipleFileGenerator {
         final MethodSpec of = MethodSpec.methodBuilder("of")
                 .addJavadoc("Creates a new update action from the given parameters.\n\n")
                 .addJavadoc("@param $L the {@code $L} property $L\n", parameterSpec.name, parameterSpec.name, property.getJavadocLinkTag())
-                .addJavadoc("@return the {@code $T} update action", ClassName.bestGuess(updateActionClassName))
+                .addJavadoc("@return the {@code $T} update action\n", ClassName.bestGuess(updateActionClassName))
                 .addParameter(parameterSpec)
                 .addModifiers(Modifier.PUBLIC, Modifier.STATIC)
                 .returns(ClassName.bestGuess(updateActionClassName))
