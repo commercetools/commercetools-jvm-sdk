@@ -16,7 +16,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 /**
  * Integration tests for {@link SubscriptionDeleteCommand}.
  */
-public class SubscriptionDeleteCommandIntegrationTest extends IntegrationTest {
+public class SubscriptionDeleteCommandIntegrationTest extends AbtsractQueueIntegrationTest {
 
 
 

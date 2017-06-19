@@ -14,7 +14,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 /**
  * Integration tests for {@link SubscriptionCreateCommand}.
  */
-public class SubscriptionCreateCommandIntegrationTest extends IntegrationTest {
+public class SubscriptionCreateCommandIntegrationTest extends AbtsractQueueIntegrationTest {
 
     @Test
     public void createIronMqChangesSubscription() throws Exception {
