@@ -11,7 +11,7 @@ import io.sphere.sdk.producttypes.ProductType;
  *
  * {@include.example io.sphere.sdk.producttypes.commands.ProductTypeUpdateCommandIntegrationTest#changeInputHint()}
  */
-public class ChangeInputHint extends UpdateActionImpl<ProductType> {
+public final class ChangeInputHint extends UpdateActionImpl<ProductType> {
 
     private final String attributeName;
     private final TextInputHint newValue;
