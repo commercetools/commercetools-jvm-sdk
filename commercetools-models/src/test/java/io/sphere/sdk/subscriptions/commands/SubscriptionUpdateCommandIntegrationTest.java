@@ -77,13 +77,22 @@ public class SubscriptionUpdateCommandIntegrationTest extends IntegrationTest {
     public void setChangesQueue(Supplier<SubscriptionDraftBuilder> subscriptionDraftBuilderSupplier) {
 
 
+<<<<<<< HEAD
         withSubscription(client(), withCategoryChanges(subscriptionDraftBuilderSupplier.get()), subscription -> {
             final List<ChangeSubscription> newChanges = Collections.singletonList(ChangeSubscription.of(Payment.resourceTypeId()));
+=======
+        withSubscription(client(), withCategoryChanges(ironMqSubscriptionDraftBuilder()), subscription -> {
+            final List<ChangeSubscription> newChangeSubscriptions = Collections.singletonList(ChangeSubscription.of(Payment.resourceTypeId()));
+>>>>>>> 5b90a73f11e4b08f4ac9885180b756dcfb3702ea
 
-            final SubscriptionUpdateCommand setChangesCommand = SubscriptionUpdateCommand.of(subscription, SetChanges.of(newChanges));
+            final SubscriptionUpdateCommand setChangesCommand = SubscriptionUpdateCommand.of(subscription, SetChanges.of(newChangeSubscriptions));
             final Subscription updatedSubscription = client().executeBlocking(setChangesCommand);
 
-            assertThat(updatedSubscription.getChanges()).isEqualTo(newChanges);
+            final List<ChangeSubscription> changeSubscriptions = updatedSubscription.getChanges();
+            assertThat(changeSubscriptions).hasSize(newChangeSubscriptions.size());
+
+            final ChangeSubscription changeSubscription = changeSubscriptions.get(0);
+            assertThat(changeSubscription.getResourceTypeId()).isEqualTo(Payment.referenceTypeId());
 
             return updatedSubscription;
         });
@@ -91,13 +100,19 @@ public class SubscriptionUpdateCommandIntegrationTest extends IntegrationTest {
 
     public void setMessagesQueue(Supplier<SubscriptionDraftBuilder> subscriptionDraftBuilderSupplier) {
 
-        withSubscription(client(), withCategoryCreatedMessage(subscriptionDraftBuilderSupplier.get()), subscription -> {
-            final List<MessageSubscription> newMessages = Collections.singletonList(MessageSubscription.of(Payment.resourceTypeId(),Collections.emptyList()));
 
-            final SubscriptionUpdateCommand setMessagesCommand = SubscriptionUpdateCommand.of(subscription, SetMessages.of(newMessages));
+        withSubscription(client(), withCategoryCreatedMessage(subscriptionDraftBuilderSupplier.get()), subscription -> {
+            final List<MessageSubscription> newMessageSubscriptions = Collections.singletonList(MessageSubscription.of(Payment.resourceTypeId(),Collections.emptyList()));
+
+
+            final SubscriptionUpdateCommand setMessagesCommand = SubscriptionUpdateCommand.of(subscription, SetMessages.of(newMessageSubscriptions));
             final Subscription updatedSubscription = client().executeBlocking(setMessagesCommand);
 
-            assertThat(updatedSubscription.getMessages()).isEqualTo(newMessages);
+            final List<MessageSubscription> messageSubscriptions = updatedSubscription.getMessages();
+            assertThat(messageSubscriptions).hasSize(newMessageSubscriptions.size());
+
+            final MessageSubscription messageSubscription = messageSubscriptions.get(0);
+            assertThat(messageSubscription.getResourceTypeId()).isEqualTo(Payment.referenceTypeId());
 
 
             return updatedSubscription;
