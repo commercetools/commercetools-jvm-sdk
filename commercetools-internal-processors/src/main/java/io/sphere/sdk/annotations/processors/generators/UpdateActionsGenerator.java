@@ -99,6 +99,7 @@ public class UpdateActionsGenerator extends AbstractMultipleFileGenerator {
     private MethodSpec createUnsetMethod(final String updateActionClassName, final PropertyGenModel property) {
         final MethodSpec ofUnset = MethodSpec.methodBuilder("ofUnset")
                 .addJavadoc("Creates a new update action to unset the {@code $L} property.\n", property.getName())
+                .addJavadoc("@return the {@code $T} update action.\n", ClassName.bestGuess(updateActionClassName))
                 .addModifiers(Modifier.PUBLIC, Modifier.STATIC)
                 .returns(ClassName.bestGuess(updateActionClassName))
                 .addStatement("return new $T($L)", ClassName.bestGuess(updateActionClassName), "null")
@@ -128,8 +129,8 @@ public class UpdateActionsGenerator extends AbstractMultipleFileGenerator {
         final ParameterSpec parameterSpec = createConstructorParameter(property);
         final MethodSpec of = MethodSpec.methodBuilder("of")
                 .addJavadoc("Creates a new update action from the given parameters.\n\n")
-                .addJavadoc("@param $L the {@code $L} property $L\n", parameterSpec.name, parameterSpec.name, property.getJavadocLinkTag())
-                .addJavadoc("@return the {@code $T} update action\n", ClassName.bestGuess(updateActionClassName))
+                .addJavadoc("@param $L the {@code $L} property $L.\n", parameterSpec.name, parameterSpec.name, property.getJavadocLinkTag())
+                .addJavadoc("@return the {@code $T} update action.\n", ClassName.bestGuess(updateActionClassName))
                 .addParameter(parameterSpec)
                 .addModifiers(Modifier.PUBLIC, Modifier.STATIC)
                 .returns(ClassName.bestGuess(updateActionClassName))

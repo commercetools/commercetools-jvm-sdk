@@ -29,8 +29,8 @@ public final class ChangeQuantity extends UpdateActionImpl<MyResource> {
   /**
    * Creates a new update action from the given parameters.
    *
-   * @param quantity the {@code quantity} property {@link MyResource#getQuantity()}
-   * @return the {@code ChangeQuantity} update action
+   * @param quantity the {@code quantity} property {@link MyResource#getQuantity()}.
+   * @return the {@code ChangeQuantity} update action.
    */
   public static ChangeQuantity of(final Integer quantity) {
     return new ChangeQuantity(quantity);
