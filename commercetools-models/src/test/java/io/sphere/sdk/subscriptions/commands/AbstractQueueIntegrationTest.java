@@ -13,7 +13,7 @@ import java.util.concurrent.CompletableFuture;
 import static io.sphere.sdk.subscriptions.SubscriptionFixtures.*;
 
 
-public class AbtsractQueueIntegrationTest extends IntegrationTest {
+public abstract class AbstractQueueIntegrationTest extends IntegrationTest {
 
 
     @AfterClass
