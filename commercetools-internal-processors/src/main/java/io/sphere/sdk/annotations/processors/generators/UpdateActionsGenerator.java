@@ -11,7 +11,6 @@ import javax.annotation.Generated;
 import javax.annotation.Nullable;
 import javax.lang.model.element.ExecutableElement;
 import javax.lang.model.element.Modifier;
-import javax.lang.model.element.Name;
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.util.Elements;
 import javax.lang.model.util.Types;
@@ -43,13 +42,6 @@ public class UpdateActionsGenerator extends AbstractMultipleFileGenerator {
     }
 
     protected TypeSpec generateUpdateAction(final TypeElement annotatedTypeElement, final ExecutableElement propertyMethod) {
-
-//        final HasUpdateAction hasUpdateAction = propertyMethod.getAnnotation(HasUpdateAction.class);
-//        if (hasUpdateAction != null) {
-//            final String includeExampleLink = hasUpdateAction.includeExample();
-//            System.err.println("" + includeExampleLink);
-//        }
-
         final PropertyGenModel property = PropertyGenModel.of(propertyMethod);
         final MethodSpec getMethod = createGetMethodBuilder(propertyMethod).build();
         final FieldSpec fieldSpec = createFieldBuilder(property, Modifier.PRIVATE)
@@ -59,12 +51,14 @@ public class UpdateActionsGenerator extends AbstractMultipleFileGenerator {
         final String updateActionClassName = StringUtils.capitalize(updateAction);
         final String includeExample = annotatedTypeElement.getAnnotation(HasUpdateActions.class).exampleBaseClass();
 
-        final String includeExampleJavaDoc = deriveExampleName(includeExample, propertyMethod, annotatedTypeElement);
+        final String includeExampleJavaDoc = includeExample.isEmpty() ?
+                deriveTestExamplePath(propertyMethod, annotatedTypeElement) :
+                String.format("{@include.example %s#%s()}", includeExample, propertyMethod.getSimpleName().toString().replaceFirst("g", "s"));
         final TypeSpec.Builder typeSpecBuilder = TypeSpec.classBuilder(updateActionClassName)
                 .addJavadoc("$L the {@code $L} property of a {@link $T}.\n",
                         property.isOptional() ? "Sets" : "Updates", fieldSpec.name, ClassName.get(annotatedTypeElement))
                 .addJavadoc("\n")
-                .addJavadoc(includeExampleJavaDoc)
+                .addJavadoc(includeExampleJavaDoc + "\n\n")
                 .addJavadoc("@see $T#$L()\n", ClassName.get(annotatedTypeElement), propertyMethod.getSimpleName())
                 .superclass(ParameterizedTypeName.get(ClassName.get(UpdateActionImpl.class), ClassName.get(annotatedTypeElement)))
                 .addModifiers(Modifier.PUBLIC, Modifier.FINAL)
@@ -83,24 +77,16 @@ public class UpdateActionsGenerator extends AbstractMultipleFileGenerator {
         return typeSpecBuilder.build();
     }
 
-    private String deriveExampleName(final String includeExample, final ExecutableElement propertyMethod, final TypeElement annotatedTypeElement) {
-
-        final String simpleName1 = annotatedTypeElement.getSimpleName().toString();
-
-        final String packageName = super.getPackageName(annotatedTypeElement)
+    private String deriveTestExamplePath(final ExecutableElement propertyMethod, final TypeElement annotatedTypeElement) {
+        final String resourceName = annotatedTypeElement.getSimpleName().toString();
+        final String testPath = super.getPackageName(annotatedTypeElement)
                 .concat(".commands.")
-                .concat(simpleName1)
+                .concat(resourceName)
                 .concat("UpdateCommandIntegrationTest")
                 .concat("#")
                 .concat(retrieveUpdateActionName(PropertyGenModel.of(propertyMethod)))
                 .concat("()");
-
-        final Name simpleName = propertyMethod.getSimpleName();
-
-        final String includeExampleJavaDoc = includeExample.isEmpty() ?
-                "" :
-                String.format("{@include.example %s#%s()}\n\n", includeExample, propertyMethod.getSimpleName().toString().replaceFirst("g", "s"));
-        return includeExampleJavaDoc;
+        return testPath;
     }
 
     @Override
