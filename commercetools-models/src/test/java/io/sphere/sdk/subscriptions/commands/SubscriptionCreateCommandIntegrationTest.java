@@ -5,7 +5,6 @@ import com.amazonaws.services.sns.AmazonSNSClientBuilder;
 import com.amazonaws.services.sqs.AmazonSQS;
 import com.amazonaws.services.sqs.AmazonSQSClientBuilder;
 import io.sphere.sdk.subscriptions.*;
-import io.sphere.sdk.test.IntegrationTest;
 import org.junit.Test;
 
 import static io.sphere.sdk.subscriptions.SubscriptionFixtures.*;
@@ -14,7 +13,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 /**
  * Integration tests for {@link SubscriptionCreateCommand}.
  */
-public class SubscriptionCreateCommandIntegrationTest extends AbtsractQueueIntegrationTest {
+public class SubscriptionCreateCommandIntegrationTest extends AbstractQueueIntegrationTest {
 
     @Test
     public void createIronMqChangesSubscription() throws Exception {

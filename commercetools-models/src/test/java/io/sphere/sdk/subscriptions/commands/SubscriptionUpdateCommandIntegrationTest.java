@@ -5,7 +5,6 @@ import io.sphere.sdk.subscriptions.*;
 import io.sphere.sdk.subscriptions.commands.updateactions.SetChanges;
 import io.sphere.sdk.subscriptions.commands.updateactions.SetKey;
 import io.sphere.sdk.subscriptions.commands.updateactions.SetMessages;
-import io.sphere.sdk.test.IntegrationTest;
 import org.junit.Test;
 
 import java.util.Collections;
@@ -19,7 +18,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 /**
  * Integration tests for {@link SubscriptionUpdateCommand}.
  */
-public class SubscriptionUpdateCommandIntegrationTest extends AbtsractQueueIntegrationTest {
+public class SubscriptionUpdateCommandIntegrationTest extends AbstractQueueIntegrationTest {
 
 
     @Test
