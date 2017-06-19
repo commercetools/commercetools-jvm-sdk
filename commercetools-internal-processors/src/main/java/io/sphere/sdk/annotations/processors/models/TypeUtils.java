@@ -185,9 +185,31 @@ public class TypeUtils {
 
     /**
      * @param propertyType the property type element
+     * @return true if the property type is a primitive type or an Enum.
+     */
+    public boolean isPrimitiveOrEnum(final TypeName propertyType){
+        return isPrimitiveType(propertyType) || isEnumType(propertyType);
+    }
+
+    /**
+     * @param propertyType the property type element
      * @return true if the property type is a primitive type.
      */
     public boolean isPrimitiveType(final TypeName propertyType) {
         return propertyType.isPrimitive() || propertyType.isBoxedPrimitive() || propertyType.toString().equals("java.lang.String");
+    }
+
+    /**
+     * @param propertyType the property type element
+     * @return true if the property type is an Enum type.
+     */
+    public boolean isEnumType(final TypeName propertyType) {
+        boolean isEnum = false;
+        try {
+            isEnum = Class.forName(propertyType.toString()).isEnum();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return isEnum;
     }
 }

@@ -35,7 +35,7 @@ public class UpdateActionsGenerator extends AbstractMultipleFileGenerator {
     public List<TypeSpec> generateTypes(final TypeElement annotatedTypeElement) {
         final List<ExecutableElement> propertyMethods = getPropertyMethodsSorted(annotatedTypeElement);
         final List<TypeSpec> typeSpecList = propertyMethods.stream()
-                .filter(m -> typeUtils.isPrimitiveType(PropertyGenModel.of(m).getType()))
+                .filter(m -> typeUtils.isPrimitiveOrEnum(PropertyGenModel.of(m).getType()))
                 .filter(m -> m.getAnnotation(HasNoUpdateAction.class) == null)
                 .map(propertyMethod -> generateUpdateAction(annotatedTypeElement, propertyMethod)).collect(Collectors.toList());
 
@@ -82,7 +82,7 @@ public class UpdateActionsGenerator extends AbstractMultipleFileGenerator {
     protected List<String> expectedClassNames(final TypeElement annotatedTypeElement) {
         final List<ExecutableElement> propertyMethods = getPropertyMethodsSorted(annotatedTypeElement);
         final List<String> updateActionClassNames = propertyMethods.stream()
-                .filter(m -> typeUtils.isPrimitiveType(PropertyGenModel.of(m).getType()))
+                .filter(m -> typeUtils.isPrimitiveOrEnum(PropertyGenModel.of(m).getType()))
                 .map(propertyMethod -> {
                     final PropertyGenModel property = PropertyGenModel.of(propertyMethod);
                     final String actionPrefix = property.isOptional() ? "set" : "change";
