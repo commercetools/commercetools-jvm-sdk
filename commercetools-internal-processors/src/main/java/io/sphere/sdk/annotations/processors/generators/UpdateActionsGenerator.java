@@ -1,8 +1,8 @@
 package io.sphere.sdk.annotations.processors.generators;
 
 import com.squareup.javapoet.*;
-import io.sphere.sdk.annotations.HasNoUpdateAction;
 import io.sphere.sdk.annotations.HasUpdateActions;
+import io.sphere.sdk.annotations.HasNoUpdateAction;
 import io.sphere.sdk.annotations.processors.models.PropertyGenModel;
 import io.sphere.sdk.commands.UpdateActionImpl;
 import org.apache.commons.lang3.StringUtils;
@@ -35,16 +35,7 @@ public class UpdateActionsGenerator extends AbstractMultipleFileGenerator {
     public List<TypeSpec> generateTypes(final TypeElement annotatedTypeElement) {
         final List<ExecutableElement> propertyMethods = getPropertyMethodsSorted(annotatedTypeElement);
         final List<TypeSpec> typeSpecList = propertyMethods.stream()
-                .filter(m -> {
-
-                    try {
-                        return typeUtils.isPrimitiveType(PropertyGenModel.of(m).getType()) || typeUtils.isEnumType(PropertyGenModel.of(m).getType());
-                    } catch (ClassNotFoundException e) {
-                        e.printStackTrace();
-                    }
-
-                    return typeUtils.isPrimitiveType(PropertyGenModel.of(m).getType());
-                })
+                .filter(m -> typeUtils.isPrimitiveType(PropertyGenModel.of(m).getType()))
                 .filter(m -> m.getAnnotation(HasNoUpdateAction.class) == null)
                 .map(propertyMethod -> generateUpdateAction(annotatedTypeElement, propertyMethod)).collect(Collectors.toList());
 
@@ -91,16 +82,7 @@ public class UpdateActionsGenerator extends AbstractMultipleFileGenerator {
     protected List<String> expectedClassNames(final TypeElement annotatedTypeElement) {
         final List<ExecutableElement> propertyMethods = getPropertyMethodsSorted(annotatedTypeElement);
         final List<String> updateActionClassNames = propertyMethods.stream()
-                .filter(m -> {
-
-                    try {
-                        return typeUtils.isPrimitiveType(PropertyGenModel.of(m).getType()) || typeUtils.isEnumType(PropertyGenModel.of(m).getType());
-                    } catch (ClassNotFoundException e) {
-                        e.printStackTrace();
-                    }
-
-                    return typeUtils.isPrimitiveType(PropertyGenModel.of(m).getType());
-                })
+                .filter(m -> typeUtils.isPrimitiveType(PropertyGenModel.of(m).getType()))
                 .map(propertyMethod -> {
                     final PropertyGenModel property = PropertyGenModel.of(propertyMethod);
                     final String actionPrefix = property.isOptional() ? "set" : "change";
