@@ -77,13 +77,9 @@ public class SubscriptionUpdateCommandIntegrationTest extends IntegrationTest {
     public void setChangesQueue(Supplier<SubscriptionDraftBuilder> subscriptionDraftBuilderSupplier) {
 
 
-<<<<<<< HEAD
         withSubscription(client(), withCategoryChanges(subscriptionDraftBuilderSupplier.get()), subscription -> {
-            final List<ChangeSubscription> newChanges = Collections.singletonList(ChangeSubscription.of(Payment.resourceTypeId()));
-=======
-        withSubscription(client(), withCategoryChanges(ironMqSubscriptionDraftBuilder()), subscription -> {
             final List<ChangeSubscription> newChangeSubscriptions = Collections.singletonList(ChangeSubscription.of(Payment.resourceTypeId()));
->>>>>>> 5b90a73f11e4b08f4ac9885180b756dcfb3702ea
+
 
             final SubscriptionUpdateCommand setChangesCommand = SubscriptionUpdateCommand.of(subscription, SetChanges.of(newChangeSubscriptions));
             final Subscription updatedSubscription = client().executeBlocking(setChangesCommand);
