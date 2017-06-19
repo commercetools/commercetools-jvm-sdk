@@ -17,7 +17,7 @@ public class AbtsractQueueIntegrationTest extends IntegrationTest {
 
 
     @AfterClass
-    public void consumeMassages() throws Exception {
+    public static void consumeMassages() throws Exception {
         assumeHasAzureSBEnv();
         final String connectionString = azureSBConnectionStringFromEnv();
         final QueueClient queueClient = new QueueClient(new ConnectionStringBuilder(connectionString), ReceiveMode.PeekLock);
