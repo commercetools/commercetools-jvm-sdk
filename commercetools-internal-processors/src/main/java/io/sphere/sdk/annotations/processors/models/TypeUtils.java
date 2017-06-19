@@ -207,9 +207,7 @@ public class TypeUtils {
         boolean isEnum = false;
         try {
             isEnum = Class.forName(propertyType.toString()).isEnum();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
+        } catch (ClassNotFoundException e) { }
         return isEnum;
     }
 }
