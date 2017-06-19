@@ -19,7 +19,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 /**
  * Integration tests for {@link SubscriptionUpdateCommand}.
  */
-public class SubscriptionUpdateCommandIntegrationTest extends IntegrationTest {
+public class SubscriptionUpdateCommandIntegrationTest extends AbtsractQueueIntegrationTest {
 
 
     @Test

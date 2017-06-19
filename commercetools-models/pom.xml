@@ -59,6 +59,12 @@
             <version>1.11.116</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>com.microsoft.azure</groupId>
+            <artifactId>azure-servicebus</artifactId>
+            <version>1.0.0-PREVIEW-2</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
     <build>
         <plugins>
