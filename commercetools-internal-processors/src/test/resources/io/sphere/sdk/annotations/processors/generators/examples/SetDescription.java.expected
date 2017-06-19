@@ -32,7 +32,8 @@ public final class SetDescription extends UpdateActionImpl<MyResource> {
   /**
    * Creates a new update action from the given parameters.
    *
-   * @param description the {@code description} property {@link MyResource#getDescription()}
+   * @param description the {@code description} property {@link MyResource#getDescription()}.
+   * @return the {@code SetDescription} update action.
    */
   public static SetDescription of(@Nullable final String description) {
     return new SetDescription(description);
@@ -40,6 +41,7 @@ public final class SetDescription extends UpdateActionImpl<MyResource> {
 
   /**
    * Creates a new update action to unset the {@code description} property.
+   * @return the {@code SetDescription} update action.
    */
   public static SetDescription ofUnset() {
     return new SetDescription(null);
