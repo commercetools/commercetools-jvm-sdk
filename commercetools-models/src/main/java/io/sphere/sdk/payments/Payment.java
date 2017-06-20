@@ -37,7 +37,7 @@ import java.util.List;
 @HasUpdateCommand(javadocSummary = "Updates a payment.")
 @HasDeleteCommand
 @HasQueryModel
-@HasUpdateActions(exampleBaseClass = "io.sphere.sdk.payments.commands.PaymentUpdateCommandIntegrationTest")
+@HasUpdateActions
 public interface Payment extends Resource<Payment>, Custom {
     @Nullable
     Reference<Customer> getCustomer();

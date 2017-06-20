@@ -49,11 +49,10 @@ public class UpdateActionsGenerator extends AbstractMultipleFileGenerator {
                 .build();
         final String updateAction = retrieveUpdateActionName(property);
         final String updateActionClassName = StringUtils.capitalize(updateAction);
-        final String includeExample = annotatedTypeElement.getAnnotation(HasUpdateActions.class).exampleBaseClass();
-
-        final String includeExampleJavaDoc = includeExample.isEmpty() ?
-                deriveTestExamplePath(propertyMethod, annotatedTypeElement) :
-                String.format("{@include.example %s#%s()}", includeExample, propertyMethod.getSimpleName().toString().replaceFirst("g", "s"));
+        final String annotatedExampleLink = annotatedTypeElement.getAnnotation(HasUpdateActions.class).exampleBaseClass();
+        final String includeExampleJavaDoc = String.format("{@include.example %s#%s()}",
+                annotatedExampleLink.isEmpty() ? deriveDefaultExampleLink(annotatedTypeElement) : annotatedExampleLink,
+                updateAction);
         final TypeSpec.Builder typeSpecBuilder = TypeSpec.classBuilder(updateActionClassName)
                 .addJavadoc("$L the {@code $L} property of a {@link $T}.\n",
                         property.isOptional() ? "Sets" : "Updates", fieldSpec.name, ClassName.get(annotatedTypeElement))
@@ -77,16 +76,10 @@ public class UpdateActionsGenerator extends AbstractMultipleFileGenerator {
         return typeSpecBuilder.build();
     }
 
-    private String deriveTestExamplePath(final ExecutableElement propertyMethod, final TypeElement annotatedTypeElement) {
-        final String resourceName = annotatedTypeElement.getSimpleName().toString();
-        final String testPath = super.getPackageName(annotatedTypeElement)
-                .concat(".commands.")
-                .concat(resourceName)
-                .concat("UpdateCommandIntegrationTest")
-                .concat("#")
-                .concat(retrieveUpdateActionName(PropertyGenModel.of(propertyMethod)))
-                .concat("()");
-        return testPath;
+    private String deriveDefaultExampleLink(final TypeElement annotatedTypeElement) {
+        return String.format("%s.commands.%sUpdateCommandIntegrationTest",
+                super.getPackageName(annotatedTypeElement),
+                annotatedTypeElement.getSimpleName().toString());
     }
 
     @Override

@@ -9,6 +9,8 @@ import javax.annotation.Nullable;
 /**
  * Sets the {@code description} property of a {@link MyResource}.
  *
+ * {@include.example io.sphere.sdk.annotations.processors.generators.examples.commands.MyResourceUpdateCommandIntegrationTest#setDescription()}
+ *
  * @see MyResource#getDescription()
  */
 @Generated(
