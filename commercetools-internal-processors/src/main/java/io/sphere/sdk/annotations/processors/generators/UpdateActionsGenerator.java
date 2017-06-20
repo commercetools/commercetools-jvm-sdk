@@ -50,9 +50,12 @@ public class UpdateActionsGenerator extends AbstractMultipleFileGenerator {
         final String updateAction = retrieveUpdateActionName(property);
         final String updateActionClassName = StringUtils.capitalize(updateAction);
         final String annotatedExampleLink = annotatedTypeElement.getAnnotation(HasUpdateActions.class).exampleBaseClass();
-        final String includeExampleJavaDoc = String.format("{@include.example %s#%s()}\n\n",
-                annotatedExampleLink.isEmpty() ? deriveDefaultExampleLink(annotatedTypeElement) : annotatedExampleLink,
-                updateAction);
+        String includeExampleJavaDoc = "";
+        if (annotatedTypeElement.getAnnotation(HasUpdateActions.class).deriveExampleBaseClass()) {
+            includeExampleJavaDoc = String.format("{@include.example %s#%s()}\n\n",
+                    annotatedExampleLink.isEmpty() ? deriveDefaultExampleLink(annotatedTypeElement) : annotatedExampleLink,
+                    updateAction);
+        }
         final TypeSpec.Builder typeSpecBuilder = TypeSpec.classBuilder(updateActionClassName)
                 .addJavadoc("$L the {@code $L} property of a {@link $T}.\n",
                         property.isOptional() ? "Sets" : "Updates", fieldSpec.name, ClassName.get(annotatedTypeElement))

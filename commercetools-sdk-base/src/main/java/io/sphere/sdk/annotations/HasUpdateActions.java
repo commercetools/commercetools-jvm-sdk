@@ -16,4 +16,6 @@ public @interface HasUpdateActions {
      * @return the example base class name
      */
     String exampleBaseClass() default "";
+
+    boolean deriveExampleBaseClass() default true;
 }
