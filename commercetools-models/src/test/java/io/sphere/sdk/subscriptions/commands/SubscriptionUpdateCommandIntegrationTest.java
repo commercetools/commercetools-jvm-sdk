@@ -28,7 +28,7 @@ public class SubscriptionUpdateCommandIntegrationTest extends AbstractQueueInteg
     }
 
     @Test
-    public void setChangeAzureSBQueue(){
+    public void setChangesAzureSBQueue(){
         assumeHasAzureSBEnv();
         setChangesQueue(SubscriptionFixtures::azureServiceBusSubscriptionDraftBuilder);
     }
@@ -40,19 +40,19 @@ public class SubscriptionUpdateCommandIntegrationTest extends AbstractQueueInteg
     }
 
     @Test
-    public void setKeyIronMQ(){
+    public void setKeyIronMq(){
         assumeHasIronMqEnv();
         setKeyQueue(SubscriptionFixtures::ironMqSubscriptionDraftBuilder);
     }
 
     @Test
-    public void setChangeIronMQ(){
+    public void setChangesIronMq(){
         assumeHasIronMqEnv();
         setChangesQueue(SubscriptionFixtures::ironMqSubscriptionDraftBuilder);
     }
 
     @Test
-    public void setMessageIronMQ(){
+    public void setMessagesIronMq(){
         assumeHasIronMqEnv();
         setMessagesQueue(SubscriptionFixtures::ironMqSubscriptionDraftBuilder);
     }
@@ -76,7 +76,6 @@ public class SubscriptionUpdateCommandIntegrationTest extends AbstractQueueInteg
     public void setChangesQueue(Supplier<SubscriptionDraftBuilder> subscriptionDraftBuilderSupplier) {
 
 
-
         withSubscription(client(), withCategoryChanges(subscriptionDraftBuilderSupplier.get()), subscription -> {
             final List<ChangeSubscription> newChangeSubscriptions = Collections.singletonList(ChangeSubscription.of(Payment.resourceTypeId()));
 
@@ -95,6 +94,7 @@ public class SubscriptionUpdateCommandIntegrationTest extends AbstractQueueInteg
     }
 
     public void setMessagesQueue(Supplier<SubscriptionDraftBuilder> subscriptionDraftBuilderSupplier) {
+
 
         withSubscription(client(), withCategoryCreatedMessage(subscriptionDraftBuilderSupplier.get()), subscription -> {
             final List<MessageSubscription> newMessageSubscriptions = Collections.singletonList(MessageSubscription.of(Payment.resourceTypeId(),Collections.emptyList()));
