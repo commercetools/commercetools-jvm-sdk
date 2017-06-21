@@ -82,7 +82,6 @@ public class SubscriptionUpdateCommandIntegrationTest extends AbstractQueueInteg
 
 
             final SubscriptionUpdateCommand setChangesCommand = SubscriptionUpdateCommand.of(subscription, SetChanges.of(newChangeSubscriptions));
-            final SubscriptionUpdateCommand setChangesCommand = SubscriptionUpdateCommand.of(subscription, SetChanges.of(newChangeSubscriptions));
             final Subscription updatedSubscription = client().executeBlocking(setChangesCommand);
 
             final List<ChangeSubscription> changeSubscriptions = updatedSubscription.getChanges();
