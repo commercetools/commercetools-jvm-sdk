@@ -92,6 +92,7 @@ public class SubscriptionFixtures {
         return connectionString;
     }
 
+
     public static SubscriptionDraftBuilder sqsSubscriptionDraftBuilder(final String queueUrl) {
         final AwsCredentials awsCredentials = AwsCredentials.ofAwsCliEnv();
         final String awsRegion = System.getenv(AWS_REGION);
