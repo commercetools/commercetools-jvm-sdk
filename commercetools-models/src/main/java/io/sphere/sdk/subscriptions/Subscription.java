@@ -21,7 +21,7 @@ import java.util.List;
 @HasDeleteCommand(javadocSummary = "Deletes a subscription.", deleteWithKey = true)
 @HasByIdGetEndpoint(javadocSummary = "Fetches a subscription by id.")
 @HasByKeyGetEndpoint(javadocSummary = "Fetches a subscription by key.")
-@HasUpdateActions(deriveExampleBaseClass = false)
+@HasUpdateActions
 public interface Subscription extends Resource<Subscription> {
 
     @Nullable

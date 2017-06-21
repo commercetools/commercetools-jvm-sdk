@@ -128,7 +128,7 @@ import static java.util.stream.Collectors.toList;
         "StringQuerySortingModel<Customer> lowercaseEmail();",
         "BooleanQueryModel<Customer> isEmailVerified();"
 })
-@HasUpdateActions(deriveExampleBaseClass = false)
+@HasUpdateActions
 public interface Customer extends Resource<Customer>, Custom {
     /**
      * Gets the ID of this customer.

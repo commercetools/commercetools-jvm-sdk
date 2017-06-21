@@ -23,7 +23,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class SubscriptionUpdateCommandIntegrationTest extends IntegrationTest {
 
     @Test
-    public void setKeyIronMq() {
+    public void setKey() {
         assumeHasIronMqEnv();
 
         withSubscription(client(), withCategoryChanges(ironMqSubscriptionDraftBuilder()), subscription -> {

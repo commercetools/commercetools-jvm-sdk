@@ -17,5 +17,11 @@ public @interface HasUpdateActions {
      */
     String exampleBaseClass() default "";
 
+    /**
+     * This allows to disable the generation of the {code @include.example <i>exampleBaseClass</i>#<i>updateActionTestName</i>()}
+     * javadoc tag within the update actions.
+     *
+     * @return the example javadoc tag generation preference. If false, the tag is not created. By default it is true and the tag is created
+     */
     boolean deriveExampleBaseClass() default true;
 }
