@@ -30,7 +30,7 @@ public final class CustomFieldsDraftBuilder extends Base implements Builder<Cust
     }
 
     private CustomFieldsDraftBuilder(final CustomFieldsDraft customFieldsDraft) {
-        typeId = customFieldsDraft.getType().getTypeId();
+        typeId = customFieldsDraft.getType().getId();
         typeKey = customFieldsDraft.getType().getKey();
         fields = customFieldsDraft.getFields();
     }
@@ -55,7 +55,7 @@ public final class CustomFieldsDraftBuilder extends Base implements Builder<Cust
 
     public static CustomFieldsDraftBuilder of(final CustomFields customFields) {
         final Reference<Type> type = customFields.getType();
-        return new CustomFieldsDraftBuilder(type.getTypeId(), type.getKey()).fields(customFields.getFieldsJsonMap());
+        return new CustomFieldsDraftBuilder(type.getId(), type.getKey()).fields(customFields.getFieldsJsonMap());
     }
 
     public CustomFieldsDraftBuilder addObject(final String fieldName, final Object object) {
