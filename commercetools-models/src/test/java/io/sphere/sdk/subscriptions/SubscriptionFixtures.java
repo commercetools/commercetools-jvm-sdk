@@ -149,7 +149,7 @@ public class SubscriptionFixtures {
 
     public static void deleteSubscription(final BlockingSphereClient client, final Subscription subscription) {
         if (subscription != null) {
-            Subscription subs = client.executeBlocking(SubscriptionDeleteCommand.of(subscription));
+            client.executeBlocking(SubscriptionDeleteCommand.of(subscription));
         }
     }
 }

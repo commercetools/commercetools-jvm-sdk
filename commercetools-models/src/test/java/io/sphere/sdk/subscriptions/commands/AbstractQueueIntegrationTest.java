@@ -11,19 +11,28 @@ import java.time.Duration;
 import java.util.concurrent.CompletableFuture;
 
 import static io.sphere.sdk.subscriptions.SubscriptionFixtures.*;
+import static org.junit.Assume.assumeNotNull;
 
 
 public abstract class AbstractQueueIntegrationTest extends IntegrationTest {
 
 
+    public static String AZURE_CONSUME_MESSAGES_TIMEOUT_IN_SECONDS = "AZURE_CONSUME_MESSAGES_TIMEOUT_IN_SECONDS";
+
     @AfterClass
-    public static void consumeMassages() throws Exception {
+    public static void consumeMessages() throws Exception {
         assumeHasAzureSBEnv();
         final String connectionString = azureSBConnectionStringFromEnv();
         final QueueClient queueClient = new QueueClient(new ConnectionStringBuilder(connectionString), ReceiveMode.PeekLock);
         receiveMessages(queueClient);
-        Thread.sleep(60 * 1000);
+        Thread.sleep(getAzureTimeoutFromEnvInMillis());
         queueClient.close();
+    }
+
+    private static long getAzureTimeoutFromEnvInMillis(){
+        String azureTimeout = System.getenv(AZURE_CONSUME_MESSAGES_TIMEOUT_IN_SECONDS);
+        assumeNotNull(azureTimeout);
+        return Long.parseLong(azureTimeout)*1000;
     }
 
     private static void receiveMessages(QueueClient queueClient) throws InterruptedException, ServiceBusException {
@@ -38,6 +47,6 @@ public abstract class AbstractQueueIntegrationTest extends IntegrationTest {
             public void notifyException(Throwable exception, ExceptionPhase phase) {
                 System.out.println(phase + " encountered exception:" + exception.getMessage());
             }
-        }, new MessageHandlerOptions(10, true, Duration.ofMinutes(2)));
+        }, new MessageHandlerOptions(10000, true, Duration.ofMinutes(2)));
     }
 }
