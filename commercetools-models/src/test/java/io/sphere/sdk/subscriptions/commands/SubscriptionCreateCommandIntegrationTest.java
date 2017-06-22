@@ -5,7 +5,11 @@ import com.amazonaws.services.sns.AmazonSNSClientBuilder;
 import com.amazonaws.services.sqs.AmazonSQS;
 import com.amazonaws.services.sqs.AmazonSQSClientBuilder;
 import io.sphere.sdk.subscriptions.*;
+import io.sphere.sdk.test.IntegrationTest;
+import org.junit.AfterClass;
 import org.junit.Test;
+
+import java.io.IOException;
 
 import static io.sphere.sdk.subscriptions.SubscriptionFixtures.*;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -13,7 +17,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 /**
  * Integration tests for {@link SubscriptionCreateCommand}.
  */
-public class SubscriptionCreateCommandIntegrationTest extends AbstractQueueIntegrationTest {
+public class SubscriptionCreateCommandIntegrationTest extends IntegrationTest {
 
     @Test
     public void createIronMqChangesSubscription() throws Exception {
@@ -49,6 +53,7 @@ public class SubscriptionCreateCommandIntegrationTest extends AbstractQueueInteg
             assertThat(subscription.getChanges()).isEqualTo(subscriptionDraft.getChanges());
         } finally {
             SubscriptionFixtures.deleteSubscription(client(), subscription);
+            AzureSBUtils.consumeMessages();
         }
     }
 
@@ -113,5 +118,10 @@ public class SubscriptionCreateCommandIntegrationTest extends AbstractQueueInteg
             SnsUtils.deleteTopicAndShutdown(topicArn, snsClient);
             SubscriptionFixtures.deleteSubscription(client(), subscription);
         }
+    }
+
+    @AfterClass
+    public void cleanUPQueues() throws Exception{
+        AzureSBUtils.consumeMessages();
     }
 }

@@ -14,12 +14,12 @@ import static io.sphere.sdk.subscriptions.SubscriptionFixtures.*;
 import static org.junit.Assume.assumeNotNull;
 
 
-public abstract class AbstractQueueIntegrationTest extends IntegrationTest {
+public abstract class AzureSBUtils  {
 
 
     public static String AZURE_CONSUME_MESSAGES_TIMEOUT_IN_SECONDS = "AZURE_CONSUME_MESSAGES_TIMEOUT_IN_SECONDS";
 
-    @AfterClass
+
     public static void consumeMessages() throws Exception {
         assumeHasAzureSBEnv();
         final String connectionString = azureSBConnectionStringFromEnv();
@@ -40,13 +40,10 @@ public abstract class AbstractQueueIntegrationTest extends IntegrationTest {
         queueClient.registerMessageHandler(new IMessageHandler() {
 
             public CompletableFuture<Void> onMessageAsync(IMessage message) {
-                System.out.println(new String(message.getBody()));
                 return CompletableFuture.completedFuture(null);
             }
 
-            public void notifyException(Throwable exception, ExceptionPhase phase) {
-                System.out.println(phase + " encountered exception:" + exception.getMessage());
-            }
+            public void notifyException(Throwable exception, ExceptionPhase phase) {}
         }, new MessageHandlerOptions(10000, true, Duration.ofMinutes(2)));
     }
 }
