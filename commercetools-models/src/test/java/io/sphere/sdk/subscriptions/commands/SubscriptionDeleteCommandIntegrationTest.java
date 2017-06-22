@@ -75,7 +75,7 @@ public class SubscriptionDeleteCommandIntegrationTest extends IntegrationTest {
     }
 
     @AfterClass
-    public void cleanUPQueues() throws Exception{
+    public static void cleanUPQueues() throws Exception{
         AzureSBUtils.consumeMessages();
     }
 
