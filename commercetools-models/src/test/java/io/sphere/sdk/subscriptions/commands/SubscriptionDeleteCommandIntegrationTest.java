@@ -1,9 +1,14 @@
 package io.sphere.sdk.subscriptions.commands;
 
 import io.sphere.sdk.subscriptions.Subscription;
+import io.sphere.sdk.subscriptions.SubscriptionDraftBuilder;
+import io.sphere.sdk.subscriptions.SubscriptionFixtures;
 import io.sphere.sdk.subscriptions.queries.SubscriptionQuery;
 import io.sphere.sdk.test.IntegrationTest;
+import org.junit.AfterClass;
 import org.junit.Test;
+
+import java.util.function.Supplier;
 
 import static io.sphere.sdk.subscriptions.SubscriptionFixtures.*;
 import static io.sphere.sdk.test.SphereTestUtils.assertEventually;
@@ -14,11 +19,37 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 public class SubscriptionDeleteCommandIntegrationTest extends IntegrationTest {
 
+
+
+    @Test
+    public void deleteByKeyAzureQueue() throws Exception {
+        assumeHasAzureSBEnv();
+        deleteByKey(SubscriptionFixtures::azureServiceBusSubscriptionDraftBuilder);
+
+    }
+
+    @Test
+    public void deleteByIdAzureQueue() throws Exception {
+        assumeHasAzureSBEnv();
+        deleteByID(SubscriptionFixtures::azureServiceBusSubscriptionDraftBuilder);
+
+    }
+
     @Test
     public void deleteByKeyIronMq() throws Exception {
         assumeHasIronMqEnv();
+        deleteByKey(SubscriptionFixtures::ironMqSubscriptionDraftBuilder);
+    }
 
-        final Subscription subscription = createSubscription(client(), withCategoryChanges(ironMqSubscriptionDraftBuilder()));
+    @Test
+    public void deleteByIdIronMq() throws Exception {
+        assumeHasIronMqEnv();
+        deleteByID(SubscriptionFixtures::ironMqSubscriptionDraftBuilder);
+
+    }
+
+    public void deleteByKey(Supplier<SubscriptionDraftBuilder> subscriptionDraftBuilderSupplier) throws Exception {
+        final Subscription subscription = createSubscription(client(), withCategoryChanges(subscriptionDraftBuilderSupplier.get()));
 
         final SubscriptionDeleteCommand subscriptionDeleteCommand = SubscriptionDeleteCommand.ofKey(subscription.getKey(), subscription.getVersion());
 
@@ -30,11 +61,8 @@ public class SubscriptionDeleteCommandIntegrationTest extends IntegrationTest {
         });
     }
 
-    @Test
-    public void deleteByIdIronMq() throws Exception {
-        assumeHasIronMqEnv();
-
-        final Subscription subscription = createSubscription(client(), withCategoryChanges(ironMqSubscriptionDraftBuilder()));
+    public void deleteByID(Supplier<SubscriptionDraftBuilder> subscriptionDraftBuilderSupplier) throws Exception {
+        final Subscription subscription = createSubscription(client(), withCategoryChanges(subscriptionDraftBuilderSupplier.get()));
 
         final SubscriptionDeleteCommand subscriptionDeleteCommand = SubscriptionDeleteCommand.of(subscription);
 
@@ -45,4 +73,10 @@ public class SubscriptionDeleteCommandIntegrationTest extends IntegrationTest {
             assertThat(client().executeBlocking(subscriptionQuery).head()).isEmpty();
         });
     }
+
+    @AfterClass
+    public static void cleanUPQueues() throws Exception{
+        AzureSBUtils.consumeMessages();
+    }
+
 }

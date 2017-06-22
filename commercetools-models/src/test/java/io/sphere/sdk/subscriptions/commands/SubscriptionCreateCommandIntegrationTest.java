@@ -6,7 +6,10 @@ import com.amazonaws.services.sqs.AmazonSQS;
 import com.amazonaws.services.sqs.AmazonSQSClientBuilder;
 import io.sphere.sdk.subscriptions.*;
 import io.sphere.sdk.test.IntegrationTest;
+import org.junit.AfterClass;
 import org.junit.Test;
+
+import java.io.IOException;
 
 import static io.sphere.sdk.subscriptions.SubscriptionFixtures.*;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -32,6 +35,25 @@ public class SubscriptionCreateCommandIntegrationTest extends IntegrationTest {
             assertThat(subscription.getChanges()).isEqualTo(subscriptionDraft.getChanges());
         } finally {
             SubscriptionFixtures.deleteSubscription(client(), subscription);
+        }
+    }
+
+    @Test
+    public void createAzureSBChangesSubscription() throws Exception {
+        assumeHasAzureSBEnv();
+
+        final SubscriptionDraftDsl subscriptionDraft = withCategoryChanges(azureServiceBusSubscriptionDraftBuilder()).build();
+
+        final SubscriptionCreateCommand createCommand = SubscriptionCreateCommand.of(subscriptionDraft);
+        Subscription subscription = null;
+        try {
+            subscription = client().executeBlocking(createCommand);
+            assertThat(subscription).isNotNull();
+            assertThat(subscription.getDestination()).isEqualTo(subscriptionDraft.getDestination());
+            assertThat(subscription.getChanges()).isEqualTo(subscriptionDraft.getChanges());
+        } finally {
+            SubscriptionFixtures.deleteSubscription(client(), subscription);
+            AzureSBUtils.consumeMessages();
         }
     }
 
@@ -96,5 +118,10 @@ public class SubscriptionCreateCommandIntegrationTest extends IntegrationTest {
             SnsUtils.deleteTopicAndShutdown(topicArn, snsClient);
             SubscriptionFixtures.deleteSubscription(client(), subscription);
         }
+    }
+
+    @AfterClass
+    public static void cleanUPQueues() throws Exception{
+        AzureSBUtils.consumeMessages();
     }
 }
