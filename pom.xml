@@ -3,7 +3,7 @@
     <groupId>com.commercetools.sdk.jvm.core</groupId>
     <artifactId>commercetools-jvm-sdk</artifactId>
     <packaging>pom</packaging>
-    <version>1.19.1-SNAPSHOT</version>
+    <version>1.20.0</version>
     <name>commercetools JVM SDK</name>
     <description>Java bindings for the commercetools platform</description>
     <url>https://github.com/commercetools/commercetools-jvm-sdk</url>
@@ -64,7 +64,7 @@
     <scm>
         <url>git@github.com:commercetools/commercetools-jvm-sdk.git</url>
         <connection>scm:git:git@github.com:commercetools/commercetools-jvm-sdk.git</connection>
-      <tag>HEAD</tag>
+      <tag>v1.20.0</tag>
   </scm>
     <properties>
         <jackson.version>2.6.5</jackson.version>
