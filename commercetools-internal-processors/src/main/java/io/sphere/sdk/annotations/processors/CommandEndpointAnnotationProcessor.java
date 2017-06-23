@@ -1,6 +1,5 @@
 package io.sphere.sdk.annotations.processors;
 
-import io.sphere.sdk.annotations.HasByIdGetEndpoint;
 import io.sphere.sdk.annotations.ResourceInfo;
 import org.apache.commons.lang3.tuple.Pair;
 
@@ -13,10 +12,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static java.util.Arrays.asList;
-
 @SupportedSourceVersion(SourceVersion.RELEASE_8)
-public abstract class CommandEndpointAnnotationProcessor<A extends Annotation> extends CommercetoolsAnnotationProcessor<A> {
+public abstract class CommandEndpointAnnotationProcessor<A extends Annotation> extends ClassLevelAnnotationProcessor<A> {
 
     protected CommandEndpointAnnotationProcessor(final Class<A> clazz) {
         super(clazz);

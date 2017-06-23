@@ -1,30 +1,35 @@
 package io.sphere.sdk.annotations.processors.generators;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.squareup.javapoet.*;
+import io.sphere.sdk.annotations.HasUpdateAction;
 import io.sphere.sdk.annotations.HasUpdateActions;
-import io.sphere.sdk.annotations.HasNoUpdateAction;
 import io.sphere.sdk.annotations.processors.models.PropertyGenModel;
 import io.sphere.sdk.commands.UpdateActionImpl;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.annotation.Generated;
 import javax.annotation.Nullable;
+import javax.annotation.processing.Messager;
 import javax.lang.model.element.Element;
 import javax.lang.model.element.ExecutableElement;
 import javax.lang.model.element.Modifier;
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.util.Elements;
 import javax.lang.model.util.Types;
-import java.util.List;
-import java.util.stream.Collectors;
+import javax.tools.Diagnostic;
+import java.lang.annotation.Annotation;
 
 /**
- * Generates update action classes for interfaces annotated with {@link io.sphere.sdk.annotations.HasUpdateActions}.
+ * Generates update action classes for interfaces annotated with {@link io.sphere.sdk.annotations.HasUpdateAction}.
  */
-public class UpdateActionsGenerator extends AbstractMultipleFileGenerator {
+public class UpdateActionGenerator extends AbstractGenerator<ExecutableElement> {
 
-    public UpdateActionsGenerator(final Elements elements, final Types types) {
+    private final Messager messager;
+
+    public UpdateActionGenerator(final Elements elements, final Types types, final Messager messager) {
         super(elements, types);
+        this.messager = messager;
     }
 
     @Override
@@ -33,68 +38,63 @@ public class UpdateActionsGenerator extends AbstractMultipleFileGenerator {
     }
 
     @Override
-    public List<TypeSpec> generateTypes(final TypeElement annotatedTypeElement) {
-        final List<ExecutableElement> propertyMethods = getPropertyMethodsSorted(annotatedTypeElement);
-        final List<TypeSpec> typeSpecList = propertyMethods.stream()
-                .filter(m -> typeUtils.isPrimitiveOrEnum(PropertyGenModel.of(m).getType()))
-                .filter(m -> m.getAnnotation(HasNoUpdateAction.class) == null)
-                .map(propertyMethod -> generateUpdateAction(annotatedTypeElement, propertyMethod)).collect(Collectors.toList());
+    public TypeSpec generateType(final ExecutableElement annotatedTypeElement) {
+
+        final TypeSpec typeSpecList = generateUpdateAction(annotatedTypeElement);
 
         return typeSpecList;
     }
 
-    protected TypeSpec generateUpdateAction(final TypeElement annotatedTypeElement, final ExecutableElement propertyMethod) {
+    protected TypeSpec generateUpdateAction(final ExecutableElement propertyMethod) {
+        if (!(propertyMethod.getEnclosingElement() instanceof TypeElement)) {
+            messager.printMessage(Diagnostic.Kind.ERROR, "@HasUpdateAction Enclosing element should be a class");
+            return null;
+        }
+        final TypeElement annotatedEnclosingElement = (TypeElement) propertyMethod.getEnclosingElement();
         final PropertyGenModel property = PropertyGenModel.of(propertyMethod);
-        final MethodSpec getMethod = createGetMethodBuilder(propertyMethod).build();
+        final MethodSpec.Builder getMethodBuilder = createGetMethodBuilder(propertyMethod);
+        if(!StringUtils.isEmpty(propertyMethod.getAnnotation(HasUpdateAction.class).jsonPropertyName())){
+            AnnotationSpec annotationSpec = AnnotationSpec.builder(JsonProperty.class)
+                    .addMember("value","\""+propertyMethod.getAnnotation(HasUpdateAction.class).jsonPropertyName()+"\"").build();
+            getMethodBuilder.addAnnotation(annotationSpec);
+        }
+
+        final MethodSpec getMethod = getMethodBuilder.build();
         final String actionPrefix = property.isOptional() ? "set" : "change";
         final FieldSpec fieldSpec = createFieldBuilder(property, Modifier.PRIVATE)
                 .addModifiers(Modifier.FINAL)
                 .build();
+
+        final String actionField = propertyMethod.getAnnotation(HasUpdateAction.class).value();
         final String updateAction = actionPrefix + StringUtils.capitalize(fieldSpec.name);
-        final String updateActionClassName = StringUtils.capitalize(updateAction);
-        final String includeExample = annotatedTypeElement.getAnnotation(HasUpdateActions.class).exampleBaseClass();
+        final String updateActionName = StringUtils.isEmpty(actionField) ? actionPrefix + StringUtils.capitalize(fieldSpec.name) : actionField;
+        final String className = propertyMethod.getAnnotation(HasUpdateAction.class).actionClassName();
+        final String updateActionClassName = StringUtils.isEmpty(className) ? StringUtils.capitalize(updateAction) : StringUtils.capitalize(className);
+        final String includeExample = propertyMethod.getAnnotation(HasUpdateAction.class).exampleBaseClass();
         final String includeExampleJavaDoc = includeExample.isEmpty() ?
                 "" :
                 String.format("{@include.example %s#%s()}\n\n", includeExample, propertyMethod.getSimpleName().toString().replaceFirst("g", "s"));
         final TypeSpec.Builder typeSpecBuilder = TypeSpec.classBuilder(updateActionClassName)
                 .addJavadoc("$L the {@code $L} property of a {@link $T}.\n",
-                        property.isOptional() ? "Sets" : "Updates", fieldSpec.name, ClassName.get(annotatedTypeElement))
+                        property.isOptional() ? "Sets" : "Updates", fieldSpec.name, ClassName.get(annotatedEnclosingElement))
                 .addJavadoc("\n")
                 .addJavadoc(includeExampleJavaDoc)
-                .addJavadoc("@see $T#$L()\n", ClassName.get(annotatedTypeElement), propertyMethod.getSimpleName())
-                .superclass(ParameterizedTypeName.get(ClassName.get(UpdateActionImpl.class), ClassName.get(annotatedTypeElement)))
+                .addJavadoc("@see $T#$L()\n", ClassName.get(annotatedEnclosingElement), propertyMethod.getSimpleName())
+                .superclass(ParameterizedTypeName.get(ClassName.get(UpdateActionImpl.class), ClassName.get(annotatedEnclosingElement)))
                 .addModifiers(Modifier.PUBLIC, Modifier.FINAL)
                 .addAnnotation(AnnotationSpec.builder(Generated.class)
                         .addMember("value", "$S", getClass().getCanonicalName())
-                        .addMember("comments", "$S", "Generated from: " + annotatedTypeElement.getQualifiedName().toString()).build())
+                        .addMember("comments", "$S", "Generated from: " + annotatedEnclosingElement.getQualifiedName().toString()).build())
                 .addField(createFieldBuilder(property, Modifier.PRIVATE)
                         .addModifiers(Modifier.FINAL)
                         .build())
-                .addMethod(createConstructor(property, updateAction))
+                .addMethod(createConstructor(property, updateActionName))
                 .addMethod(getMethod)
                 .addMethod(createFactoryMethod(property, updateActionClassName));
         if (property.isOptional()) {
             typeSpecBuilder.addMethod(createUnsetMethod(updateActionClassName, property));
         }
         return typeSpecBuilder.build();
-    }
-
-    @Override
-    protected List<String> expectedClassNames(final TypeElement annotatedTypeElement) {
-        final List<ExecutableElement> propertyMethods = getPropertyMethodsSorted(annotatedTypeElement);
-        final List<String> updateActionClassNames = propertyMethods.stream()
-                .filter(m -> typeUtils.isPrimitiveOrEnum(PropertyGenModel.of(m).getType()))
-                .map(propertyMethod -> {
-                    final PropertyGenModel property = PropertyGenModel.of(propertyMethod);
-                    final String actionPrefix = property.isOptional() ? "set" : "change";
-                    final FieldSpec fieldSpec = createFieldBuilder(property, Modifier.PRIVATE)
-                            .addModifiers(Modifier.FINAL)
-                            .build();
-                    final String updateAction = actionPrefix + StringUtils.capitalize(fieldSpec.name);
-                    final String updateActionClassName = StringUtils.capitalize(updateAction);
-                    return updateActionClassName;
-                }).collect(Collectors.toList());
-        return updateActionClassNames;
     }
 
     private MethodSpec createUnsetMethod(final String updateActionClassName, final PropertyGenModel property) {

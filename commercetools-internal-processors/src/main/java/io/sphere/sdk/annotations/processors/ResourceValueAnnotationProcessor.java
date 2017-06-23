@@ -12,7 +12,7 @@ import javax.lang.model.element.TypeElement;
 
 @SupportedAnnotationTypes({"io.sphere.sdk.annotations.ResourceValue"})
 @SupportedSourceVersion(SourceVersion.RELEASE_8)
-public final class ResourceValueAnnotationProcessor extends CommercetoolsAnnotationProcessor<ResourceValue> {
+public final class ResourceValueAnnotationProcessor extends ClassLevelAnnotationProcessor<ResourceValue> {
 
     public ResourceValueAnnotationProcessor() {
         super(ResourceValue.class);

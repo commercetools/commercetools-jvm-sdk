@@ -9,6 +9,7 @@ import io.sphere.sdk.annotations.processors.models.TypeUtils;
 
 import javax.annotation.Nullable;
 import javax.lang.model.SourceVersion;
+import javax.lang.model.element.Element;
 import javax.lang.model.element.ExecutableElement;
 import javax.lang.model.element.Modifier;
 import javax.lang.model.element.TypeElement;
@@ -123,8 +124,8 @@ abstract class BaseAbstractGenerator {
         }
     }
 
-    protected String getPackageName(final TypeElement annotatedTypeElement) {
-        return typeUtils.getPackageName(annotatedTypeElement);
+    protected String getPackageName(final Element element) {
+        return typeUtils.getPackageName(element);
     }
 
     protected void addSuppressWarnings(final MethodSpec.Builder builder) {

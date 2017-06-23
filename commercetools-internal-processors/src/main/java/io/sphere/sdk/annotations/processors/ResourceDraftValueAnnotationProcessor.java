@@ -13,7 +13,7 @@ import javax.lang.model.element.TypeElement;
 
 @SupportedAnnotationTypes({"io.sphere.sdk.annotations.ResourceDraftValue"})
 @SupportedSourceVersion(SourceVersion.RELEASE_8)
-public final class ResourceDraftValueAnnotationProcessor extends CommercetoolsAnnotationProcessor<ResourceDraftValue> {
+public final class ResourceDraftValueAnnotationProcessor extends ClassLevelAnnotationProcessor<ResourceDraftValue> {
 
     public ResourceDraftValueAnnotationProcessor() {
         super(ResourceDraftValue.class);

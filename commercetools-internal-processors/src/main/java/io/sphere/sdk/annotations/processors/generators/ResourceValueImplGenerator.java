@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 /**
  * Generates implementation classes for interfaces annotated with {@link io.sphere.sdk.annotations.ResourceValue}.
  */
-public class ResourceValueImplGenerator extends AbstractGenerator {
+public class ResourceValueImplGenerator extends AbstractGenerator<TypeElement> {
     public ResourceValueImplGenerator(final Elements elements, final Types types) {
         super(elements, types);
     }

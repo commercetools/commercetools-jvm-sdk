@@ -21,7 +21,7 @@ import java.util.stream.Collectors;
 import static com.squareup.javapoet.MethodSpec.methodBuilder;
 import static org.apache.commons.lang3.StringUtils.capitalize;
 
-public class ResourceDraftValueGenerator extends AbstractGenerator {
+public class ResourceDraftValueGenerator extends AbstractGenerator<TypeElement> {
 
     public ResourceDraftValueGenerator(final Elements elements, final Types types) {
         super(elements, types);

@@ -23,7 +23,7 @@ import java.util.stream.Collectors;
 /**
  * Abstract base class for builder generators.
  */
-abstract class AbstractBuilderGenerator<A extends Annotation> extends AbstractGenerator {
+abstract class AbstractBuilderGenerator<A extends Annotation> extends AbstractGenerator<TypeElement> {
     protected final Class<A> annotationType;
 
     AbstractBuilderGenerator(final Elements elements, final Types types, final Class<A> annotationType) {

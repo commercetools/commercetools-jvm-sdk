@@ -12,7 +12,7 @@ import java.util.List;
 
 @SupportedAnnotationTypes({"io.sphere.sdk.annotations.HasUpdateActions"})
 @SupportedSourceVersion(SourceVersion.RELEASE_8)
-public class HasUpdateActionsProcessor extends CommercetoolsAnnotationProcessor<HasUpdateActions> {
+public class HasUpdateActionsProcessor extends ClassLevelAnnotationProcessor<HasUpdateActions> {
 
     public HasUpdateActionsProcessor() {
         super(HasUpdateActions.class);

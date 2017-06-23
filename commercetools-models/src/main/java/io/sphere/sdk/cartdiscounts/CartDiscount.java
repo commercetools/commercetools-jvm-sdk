@@ -43,6 +43,7 @@ public interface CartDiscount extends Resource<CartDiscount> {
      * @return predicate
      */
     @IgnoreInQueryModel
+    @HasUpdateAction
     String getCartPredicate();
 
     /**
@@ -54,6 +55,7 @@ public interface CartDiscount extends Resource<CartDiscount> {
      */
     @Nullable
     @IgnoreInQueryModel
+    @HasUpdateAction
     LocalizedString getDescription();
 
     /**
@@ -64,6 +66,7 @@ public interface CartDiscount extends Resource<CartDiscount> {
      * @return true if active
      */
     @JsonProperty("isActive")
+    @HasUpdateAction(value = "changeIsActive",actionClassName = "ChangeIsActive",jsonPropertyName = "isActive")
     @IgnoreInQueryModel
     Boolean isActive();
 
@@ -74,6 +77,7 @@ public interface CartDiscount extends Resource<CartDiscount> {
      *
      * @return name
      */
+    @HasUpdateAction
     LocalizedString getName();
 
     @IgnoreInQueryModel
@@ -87,6 +91,7 @@ public interface CartDiscount extends Resource<CartDiscount> {
      * @return true if requires a discount code
      */
     @JsonProperty("requiresDiscountCode")
+    @HasUpdateAction(value = "changeRequiresDiscountCode", actionClassName = "ChangeRequiresDiscountCode" , jsonPropertyName = "requiresDiscountCode")
     @IgnoreInQueryModel
     Boolean isRequiringDiscountCode();
 
@@ -100,6 +105,7 @@ public interface CartDiscount extends Resource<CartDiscount> {
      * @return sort order
      */
     @IgnoreInQueryModel
+    @HasUpdateAction
     String getSortOrder();
 
     /**
@@ -111,6 +117,7 @@ public interface CartDiscount extends Resource<CartDiscount> {
      */
     @Nullable
     @IgnoreInQueryModel
+    @HasUpdateAction(value = "changeTarget",actionClassName = "ChangeTarget")
     CartDiscountTarget getTarget();
 
     /**
@@ -122,6 +129,7 @@ public interface CartDiscount extends Resource<CartDiscount> {
      */
     @Nullable
     @IgnoreInQueryModel
+    @HasUpdateAction
     ZonedDateTime getValidFrom();
 
     /**
@@ -133,6 +141,7 @@ public interface CartDiscount extends Resource<CartDiscount> {
      */
     @Nullable
     @IgnoreInQueryModel
+    @HasUpdateAction
     ZonedDateTime getValidUntil();
 
     /**
@@ -143,6 +152,7 @@ public interface CartDiscount extends Resource<CartDiscount> {
      * @return value
      */
     @IgnoreInQueryModel
+    @HasUpdateAction(value = "changeValue", actionClassName = "ChangeValue")
     CartDiscountValue getValue();
 
     /**
