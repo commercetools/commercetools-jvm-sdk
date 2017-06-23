@@ -29,7 +29,8 @@ public final class ChangeResourceEnum extends UpdateActionImpl<MyResource> {
   /**
    * Creates a new update action from the given parameters.
    *
-   * @param resourceEnum the {@code resourceEnum} property {@link MyResource#getResourceEnum()}
+   * @param resourceEnum the {@code resourceEnum} property {@link MyResource#getResourceEnum()}.
+   * @return the {@code ChangeResourceEnum} update action.
    */
   public static ChangeResourceEnum of(final MyResourceEnum resourceEnum) {
     return new ChangeResourceEnum(resourceEnum);
