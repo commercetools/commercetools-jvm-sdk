@@ -13,7 +13,7 @@ import java.util.regex.Pattern;
  * This class implements the simple string expansion of the
  * URI template specification (https://tools.ietf.org/html/rfc6570).
  */
-public final class UriTemplate {
+public final class UriTemplate extends Base {
     private final static Pattern PARAMETER_PATTERN = Pattern.compile("\\{(.*)\\}");
     private final String uriTemplate;
     private final Set<String> parameterNames;
