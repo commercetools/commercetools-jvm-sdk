@@ -1,6 +1,5 @@
 package io.sphere.sdk.products.attributes;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import io.sphere.sdk.models.LocalizedString;
@@ -45,6 +44,7 @@ public interface AttributeDefinition {
      * Describes how an attribute or a set of attributes should be validated across all variants of a product.
      * @return definition of validation logic
      */
+    @Nullable
     AttributeConstraint getAttributeConstraint();
 
     /**
