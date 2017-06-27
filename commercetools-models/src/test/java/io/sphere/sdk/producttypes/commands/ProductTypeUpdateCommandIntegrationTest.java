@@ -22,6 +22,26 @@ import static java.util.Locale.GERMAN;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class ProductTypeUpdateCommandIntegrationTest extends IntegrationTest {
+
+    @Test
+    public void setInputTip() throws Exception {
+        withUpdateableProductType(client(), productType -> {
+            final String attributeName = "attributeName";
+            final AttributeDefinition attributeDefinition = AttributeDefinitionBuilder
+                    .of(attributeName, randomSlug(), StringAttributeType.of())
+                    .build();
+            assertThat(productType.getAttribute(attributeName)).isNull();
+
+            final LocalizedString inputTip = en("inputTip");
+            final ProductType updatedProductType =
+                    client().executeBlocking(ProductTypeUpdateCommand.of(productType,
+                            asList(AddAttributeDefinition.of(attributeDefinition), SetInputTip.of(attributeName, inputTip))));
+            assertThat(updatedProductType.getAttribute(attributeName).getInputTip()).isEqualTo(inputTip);
+            
+            return updatedProductType;
+        });
+    }
+
     @Test
     public void changeName() throws Exception {
         withUpdateableProductType(client(), productType -> {
