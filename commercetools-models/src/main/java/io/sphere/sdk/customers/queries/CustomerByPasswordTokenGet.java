@@ -8,14 +8,13 @@ import io.sphere.sdk.expansion.ExpansionPath;
 import io.sphere.sdk.queries.MetaModelGetDsl;
 
 import java.util.List;
-import java.util.function.Function;
 
 /**
  * Fetches a cusomter by a known password reset token.
  *
- * {@include.example io.sphere.sdk.customers.commands.CustomerPasswordResetCommandIntegrationTest#execution()}
+ * {@include.example io.sphere.sdk.customers.queries.CustomerByPasswordTokenGetIntegrationTest#execution()}
  *
- * @see io.sphere.sdk.types.Custom
+ * @see Customer
  * @see io.sphere.sdk.customers.commands.CustomerCreatePasswordTokenCommand
  * @see CustomerPasswordResetCommand
  */
