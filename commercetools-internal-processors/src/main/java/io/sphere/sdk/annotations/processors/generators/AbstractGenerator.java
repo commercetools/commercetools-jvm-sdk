@@ -1,113 +1,40 @@
 package io.sphere.sdk.annotations.processors.generators;
 
-import com.squareup.javapoet.*;
-import io.sphere.sdk.annotations.processors.models.PropertyGenModel;
-import io.sphere.sdk.annotations.processors.models.TypeUtils;
+import com.squareup.javapoet.JavaFile;
+import com.squareup.javapoet.TypeSpec;
 
-import javax.annotation.Nullable;
-import javax.lang.model.SourceVersion;
+import javax.lang.model.element.Element;
 import javax.lang.model.element.ExecutableElement;
-import javax.lang.model.element.Modifier;
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.util.Elements;
-import java.util.Comparator;
-import java.util.List;
-import java.util.stream.Collectors;
+import javax.lang.model.util.Types;
 
 /**
- * Abstract base class for implementing javapoet based generators.
+ * Abstract base class for implementing javapoet based generators - to generate a single class.
+ * The generic attribute T should be used to specify whether the annotation is used on the class level in which {@code T} would be {@link TypeElement} or method level,
+ * in that case T would be {@link ExecutableElement}
  */
-abstract class AbstractGenerator {
-    protected final Elements elements;
-    protected final TypeUtils typeUtils;
+abstract class AbstractGenerator<T extends Element> extends BaseAbstractGenerator {
 
-    AbstractGenerator(final Elements elements) {
-        this.typeUtils = new TypeUtils(elements);
-        this.elements = elements;
+    AbstractGenerator(final Elements elements, final Types types) {
+        super(elements, types);
     }
 
     /**
      * Generates code for the given annotated type element.
      *
-     * @param annotatedTypeElement the annotated type element
+     * @param annotatedElement the annotated type element
      * @return the java file to write
      */
-    public final JavaFile generate(final TypeElement annotatedTypeElement) {
-        final TypeSpec typeSpec = generateType(annotatedTypeElement);
+    public final JavaFile generate(final T annotatedElement) {
+        final TypeSpec typeSpec = generateType(annotatedElement);
 
-        final JavaFile javaFile = JavaFile.builder(typeUtils.getPackageName(annotatedTypeElement), typeSpec)
+        final JavaFile javaFile = JavaFile.builder(getPackageName(annotatedElement), typeSpec)
                 .build();
 
         return javaFile;
     }
 
-    public abstract TypeSpec generateType(final TypeElement annotatedTypeElement);
+    public abstract TypeSpec generateType(final T annotatedElement);
 
-    protected FieldSpec createField(final PropertyGenModel property) {
-        return createField(property, Modifier.PRIVATE);
-    }
-
-    protected FieldSpec createField(final PropertyGenModel property, final Modifier modifier) {
-        final FieldSpec.Builder builder = createFieldBuilder(property, modifier);
-        return builder.build();
-    }
-
-    protected FieldSpec.Builder createFieldBuilder(final PropertyGenModel property, final Modifier modifier) {
-        final FieldSpec.Builder builder = FieldSpec.builder(property.getType(), property.getJavaIdentifier())
-                .addModifiers(modifier);
-
-        if (property.isOptional()) {
-            builder.addAnnotation(Nullable.class);
-        }
-        return builder;
-    }
-
-    /**
-     * Escapes the given name with an {@code "_"} if it's a java keyword (e.g. {@code default}.
-     *
-     * @param name the name to escape
-     * @return the escaped name
-     */
-    protected String escapeJavaKeyword(final String name) {
-        return SourceVersion.isKeyword(name) ? "_" + name : name;
-    }
-
-    /**
-     * Returns all property methods - including inherited methods - sorted by their property name.
-     *
-     * @param typeElement the type element
-     * @return methods sorted by their {@link PropertyGenModel#getPropertyName(ExecutableElement)}
-     */
-    protected List<ExecutableElement> getAllPropertyMethodsSorted(TypeElement typeElement) {
-        return typeUtils.getAllPropertyMethods(typeElement)
-                .sorted(Comparator.comparing(methodName -> escapeJavaKeyword(PropertyGenModel.getPropertyName(methodName))))
-                .collect(Collectors.toList());
-    }
-
-    protected List<PropertyGenModel> getPropertyGenModels(final List<ExecutableElement> propertyMethods) {
-        return propertyMethods.stream()
-                    .map(PropertyGenModel::of)
-                    .collect(Collectors.toList());
-    }
-
-    protected MethodSpec createGetMethod(final ExecutableElement propertyMethod) {
-        final MethodSpec.Builder builder = createGetMethodBuilder(propertyMethod);
-        return builder.build();
-    }
-
-    protected MethodSpec.Builder createGetMethodBuilder(final ExecutableElement propertyMethod) {
-        final MethodSpec.Builder builder = MethodSpec.methodBuilder(propertyMethod.getSimpleName().toString())
-                .addModifiers(Modifier.PUBLIC)
-                .returns(TypeName.get(propertyMethod.getReturnType()))
-                .addCode("return $L;\n", escapeJavaKeyword(PropertyGenModel.getPropertyName(propertyMethod)));
-        copyNullableAnnotation(propertyMethod, builder);
-        return builder;
-    }
-
-    private void copyNullableAnnotation(final ExecutableElement method, final MethodSpec.Builder builder) {
-        final Nullable nullable = method.getAnnotation(Nullable.class);
-        if (nullable != null) {
-            builder.addAnnotation(Nullable.class);
-        }
-    }
 }
