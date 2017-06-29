@@ -34,8 +34,8 @@ public class CustomUpdateActionGeneratorTest  {
     @Test
     public void generateExampleUpdaupdateAction() throws Exception {
         final String content = generateAsString(ExampleResourceWithCustomUpdateAction.class,"getUserName");
-       //assertThat(content).isEqualTo(expectedContent(ExampleResourceWithUpdateAction.class,"getLocale"));
-        System.out.println(content);
+
+        assertThat(content).isEqualTo(expectedContent(ExampleResourceWithCustomUpdateAction.class,"getUserName"));
     }
 
 
