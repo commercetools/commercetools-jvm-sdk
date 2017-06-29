@@ -1,0 +1,11 @@
+{
+  "type": "Cart",
+  "lineItems": [],
+  "totalPrice": {
+    "currencyCode": "EUR",
+    "centAmount": 0
+  },
+  "customLineItems": [],
+  "taxMode": "Platform",
+  "refusedGifts": [{"id": "<my-cart-discount-id>"}]
+}

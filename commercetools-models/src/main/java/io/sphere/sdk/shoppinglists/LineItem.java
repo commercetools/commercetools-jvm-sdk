@@ -26,7 +26,7 @@ import java.time.ZonedDateTime;
  * @see ShoppingList#getLineItems()
  */
 @JsonDeserialize(as = LineItemImpl.class)
-@ResourceValue
+@ResourceValue(abstractResourceClass = true)
 public interface LineItem {
     String getId();
 
@@ -39,6 +39,7 @@ public interface LineItem {
 
     Long getQuantity();
 
+    @Nullable
     CustomFields getCustom();
 
     LocalizedString getName();
@@ -52,7 +53,7 @@ public interface LineItem {
     LocalizedString getProductSlug();
 
     @Nullable
-    Reference<ProductVariant> getProductVariant();
+    ProductVariant getVariant();
 
     /**
      * An identifier for this resource which supports {@link CustomFields}.

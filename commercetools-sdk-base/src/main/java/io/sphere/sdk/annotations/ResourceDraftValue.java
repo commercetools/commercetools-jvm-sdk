@@ -6,9 +6,7 @@ package io.sphere.sdk.annotations;
 public @interface ResourceDraftValue {
     FactoryMethod[] factoryMethods();
 
-    String[] additionalDslClassContents() default {};
-
-    String additionalDslConstructorEndContent() default "";
+    CopyFactoryMethod[] copyFactoryMethods() default {};
 
     /**
      * If set to true, the generated builder will also provide getter methods.
@@ -40,4 +38,11 @@ public @interface ResourceDraftValue {
      * @return true iff. the generated builder should be abstract
      */
     boolean abstractBuilderClass() default false;
+
+    /**
+     * If set to true, the generated resource value class will be abstract so that it can be further customized.
+     *
+     * @return true iff. the generated class should be abstract
+     */
+    boolean abstractResourceDraftValueClass() default false;
 }

@@ -57,21 +57,21 @@ public final class ExampleWithSuperInterfaceDraftBuilder extends Base implements
   }
 
   /**
-   * Creates a builder initialized with the given values.
+   * Creates a new object initialized with the given values.
    *
    * @param name initial value for the {@link ExampleWithSuperInterfaceDraft#getName()} property
    * @param sku initial value for the {@link ExampleDraftSuperInterface#getSku()} property
-   * @return new builder initialized with the given values
+   * @return new object initialized with the given values
    */
   public static ExampleWithSuperInterfaceDraftBuilder of(final String name, final String sku) {
     return new ExampleWithSuperInterfaceDraftBuilder(name, sku);
   }
 
   /**
-   * Creates a builder initialized with the fields of the template parameter.
+   * Creates a new object initialized with the fields of the template parameter.
    *
    * @param template the template
-   * @return a new builder initialized from the template
+   * @return a new object initialized from the template
    */
   public static ExampleWithSuperInterfaceDraftBuilder of(final ExampleWithSuperInterfaceDraft template) {
     return new ExampleWithSuperInterfaceDraftBuilder(template.getName(), template.getSku());

@@ -43,7 +43,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
-import java.util.concurrent.CompletionException;
 import java.util.concurrent.CompletionStage;
 import java.util.concurrent.TimeUnit;
 import java.util.function.*;
@@ -144,7 +143,7 @@ public class ProductFixtures {
         withUpdateableProduct(client, testName, consumerToFunction(consumer));
     }
 
-    public static void withUpdateableProduct(final BlockingSphereClient client, final Supplier<ProductDraft> creator, final Function<Product, Product> user) {
+    public static void withUpdateableProduct(final BlockingSphereClient client, final Supplier<? extends ProductDraft> creator, final Function<Product, Product> user) {
         final ProductDraft productDraft = creator.get();
         final String slug = englishSlugOf(productDraft);
         final PagedQueryResult<Product> pagedQueryResult = client.executeBlocking(ProductQuery.of().bySlug(ProductProjectionType.CURRENT, Locale.ENGLISH, slug));
@@ -164,7 +163,7 @@ public class ProductFixtures {
         });
     }
 
-    public static void withProduct(final BlockingSphereClient client, final Supplier<ProductDraft> creator, final Consumer<Product> user) {
+    public static void withProduct(final BlockingSphereClient client, final Supplier<? extends ProductDraft> creator, final Consumer<Product> user) {
         withUpdateableProduct(client, creator, consumerToFunction(user));
     }
 
@@ -366,6 +365,16 @@ public class ProductFixtures {
             return productDraftBuilder.masterVariant(variantDraft);
         }, op);
     }
+    public static void withProductHavingImages(final BlockingSphereClient client, final UnaryOperator<Product> op) {
+        withUpdateableProduct(client, productDraftBuilder -> {
+            final ProductVariantDraft masterVariant = productDraftBuilder.getMasterVariant();
+            final ProductVariantDraft variantDraft = ProductVariantDraftBuilder.of(masterVariant)
+                    .images(createExternalImage())
+                    .sku(randomKey())
+                    .build();
+            return productDraftBuilder.masterVariant(variantDraft);
+        }, op);
+    }
 
     private static AssetDraft getAssetDraft1() {
         final AssetSource assetSource1 = AssetSourceBuilder.ofUri("https://commercetools.com/binaries/content/gallery/commercetoolswebsite/homepage/cases/rewe.jpg")
@@ -390,5 +399,9 @@ public class ProductFixtures {
         return AssetDraftBuilder.of(singletonList(assetSource1), name)
                 .tags("desktop-sized", "svg-format", "commercetools", "awesome")
                 .build();
+    }
+
+    public static Image createExternalImage() {
+        return Image.ofWidthAndHeight("http://www.commercetools.com/assets/img/ct_logo_farbe.gif", 460, 102, "commercetools logo");
     }
 }

@@ -1,0 +1,118 @@
+package io.sphere.sdk.annotations.processors.generators.examples;
+
+import io.sphere.sdk.models.Base;
+import io.sphere.sdk.models.Builder;
+import java.lang.Boolean;
+import java.lang.String;
+import javax.annotation.Generated;
+import javax.annotation.Nullable;
+
+/**
+ * Builder for {@link ExampleResource}.
+ */
+@Generated(
+    value = "io.sphere.sdk.annotations.processors.generators.HasBuilderGenerator",
+    comments = "Generated from: io.sphere.sdk.annotations.processors.generators.examples.ExampleResource"
+)
+public final class ExampleResourceBuilder extends Base implements Builder<ExampleResource> {
+  @Nullable
+  private Boolean _return;
+
+  private Boolean hasStagedChanges;
+
+  private String name;
+
+  ExampleResourceBuilder() {
+  }
+
+  ExampleResourceBuilder(@Nullable final Boolean _return, final Boolean hasStagedChanges,
+      final String name) {
+    this._return = _return;
+    this.hasStagedChanges = hasStagedChanges;
+    this.name = name;
+  }
+
+  /**
+   * Sets the {@code return} property of this builder.
+   *
+   * @param _return the value for {@link ExampleResource#isReturn()}
+   * @return this builder
+   */
+  public ExampleResourceBuilder _return(@Nullable final Boolean _return) {
+    this._return = _return;
+    return this;
+  }
+
+  /**
+   * Sets the {@code return} property of this builder.
+   *
+   * @param _return the value for {@link ExampleResource#isReturn()}
+   * @return this builder
+   */
+  public ExampleResourceBuilder isReturn(@Nullable final Boolean _return) {
+    this._return = _return;
+    return this;
+  }
+
+  /**
+   * Sets the {@code hasStagedChanges} property of this builder.
+   *
+   * @param hasStagedChanges the value for {@link ExampleResource#hasStagedChanges()}
+   * @return this builder
+   */
+  public ExampleResourceBuilder hasStagedChanges(final Boolean hasStagedChanges) {
+    this.hasStagedChanges = hasStagedChanges;
+    return this;
+  }
+
+  /**
+   * Sets the {@code hasStagedChanges} property of this builder.
+   *
+   * @param hasStagedChanges the value for {@link ExampleResource#hasStagedChanges()}
+   * @return this builder
+   */
+  public ExampleResourceBuilder isHasStagedChanges(final Boolean hasStagedChanges) {
+    this.hasStagedChanges = hasStagedChanges;
+    return this;
+  }
+
+  /**
+   * Sets the {@code name} property of this builder.
+   *
+   * @param name the value for {@link ExampleResource#getName()}
+   * @return this builder
+   */
+  public ExampleResourceBuilder name(final String name) {
+    this.name = name;
+    return this;
+  }
+
+  /**
+   * Creates a new instance of {@code ExampleResource} with the values of this builder.
+   *
+   * @return the instance
+   */
+  public ExampleResource build() {
+    return new ExampleResourceImpl(_return, hasStagedChanges, name);
+  }
+
+  /**
+   * Creates a new object initialized with the given values.
+   *
+   * @param name initial value for the {@link ExampleResource#getName()} property
+   * @return new object initialized with the given values
+   */
+  public static ExampleResourceBuilder of(final String name) {
+    return new ExampleResourceBuilder(null, null, name);
+  }
+
+  /**
+   * Creates a new object initialized with the fields of the template parameter.
+   *
+   * @param template the template
+   * @return a new object initialized from the template
+   */
+  public static ExampleResourceBuilder of(final ExampleResource template) {
+    return new ExampleResourceBuilder(template.isReturn(), template.hasStagedChanges(), template.getName());
+  }
+}

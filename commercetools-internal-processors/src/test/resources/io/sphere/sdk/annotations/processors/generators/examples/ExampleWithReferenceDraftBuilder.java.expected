@@ -46,20 +46,20 @@ public final class ExampleWithReferenceDraftBuilder extends Base implements Buil
   }
 
   /**
-   * Creates a builder initialized with the given values.
+   * Creates a new object initialized with the given values.
    *
    * @param name initial value for the {@link ExampleWithReferenceDraft#getName()} property
-   * @return new builder initialized with the given values
+   * @return new object initialized with the given values
    */
   public static ExampleWithReferenceDraftBuilder of(final Reference<String> name) {
     return new ExampleWithReferenceDraftBuilder(name);
   }
 
   /**
-   * Creates a builder initialized with the fields of the template parameter.
+   * Creates a new object initialized with the fields of the template parameter.
    *
    * @param template the template
-   * @return a new builder initialized from the template
+   * @return a new object initialized from the template
    */
   public static ExampleWithReferenceDraftBuilder of(final ExampleWithReferenceDraft template) {
     return new ExampleWithReferenceDraftBuilder(template.getName());

@@ -7,6 +7,7 @@ import io.sphere.sdk.queries.ReferenceOptionalQueryModel;
 import io.sphere.sdk.queries.StringQueryModel;
 import io.sphere.sdk.types.queries.WithCustomQueryModel;
 
+
 public interface PriceQueryModel<T> extends WithCustomQueryModel<T> {
     DiscountedPriceOptionalQueryModel<T> discounted();
 
@@ -19,4 +20,6 @@ public interface PriceQueryModel<T> extends WithCustomQueryModel<T> {
     ReferenceOptionalQueryModel<T, CustomerGroup> customerGroup();
 
     ReferenceOptionalQueryModel<T, CustomerGroup> channel();
+
+    PriceTierQueryModel<T> tiers();
 }

@@ -12,7 +12,7 @@ import javax.lang.model.element.TypeElement;
 
 @SupportedAnnotationTypes({"io.sphere.sdk.annotations.ResourceValue"})
 @SupportedSourceVersion(SourceVersion.RELEASE_8)
-public final class ResourceValueAnnotationProcessor extends CommercetoolsAnnotationProcessor<ResourceValue> {
+public final class ResourceValueAnnotationProcessor extends ClassLevelAnnotationProcessor<ResourceValue> {
 
     public ResourceValueAnnotationProcessor() {
         super(ResourceValue.class);
@@ -23,7 +23,7 @@ public final class ResourceValueAnnotationProcessor extends CommercetoolsAnnotat
         final ResourceValueValidator validator = new ResourceValueValidator(processingEnv);
         if (validator.isValid(typeElement)) {
 
-            final JavaFile javaFile = new ResourceValueImplGenerator(processingEnv.getElementUtils()).generate(typeElement);
+            final JavaFile javaFile = new ResourceValueImplGenerator(processingEnv.getElementUtils(), processingEnv.getTypeUtils()).generate(typeElement);
 
             writeClass(javaFile);
         }

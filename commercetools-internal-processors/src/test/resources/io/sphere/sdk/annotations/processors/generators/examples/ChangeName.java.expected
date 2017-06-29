@@ -1,0 +1,38 @@
+package io.sphere.sdk.annotations.processors.generators.examples.commands.updateactions;
+
+import io.sphere.sdk.annotations.processors.generators.examples.MyResource;
+import io.sphere.sdk.commands.UpdateActionImpl;
+import java.lang.String;
+import javax.annotation.Generated;
+
+/**
+ * Updates the {@code name} property of a {@link MyResource}.
+ *
+ * @see MyResource#getName()
+ */
+@Generated(
+    value = "io.sphere.sdk.annotations.processors.generators.UpdateActionsGenerator",
+    comments = "Generated from: io.sphere.sdk.annotations.processors.generators.examples.MyResource"
+)
+public final class ChangeName extends UpdateActionImpl<MyResource> {
+  private final String name;
+
+  private ChangeName(final String name) {
+    super("changeName");
+    this.name = name;
+  }
+
+  public String getName() {
+    return name;
+  }
+
+  /**
+   * Creates a new update action from the given parameters.
+   *
+   * @param name the {@code name} property {@link MyResource#getName()}.
+   * @return the {@code ChangeName} update action.
+   */
+  public static ChangeName of(final String name) {
+    return new ChangeName(name);
+  }
+}

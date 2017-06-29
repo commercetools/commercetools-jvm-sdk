@@ -20,26 +20,12 @@ import java.util.Locale;
  *
  * @see CustomerDraftDsl
  * @see CustomerDraftBuilder
- *
  */
 @JsonDeserialize(as = CustomerDraftDsl.class)
 @ResourceDraftValue(factoryMethods = {
         @FactoryMethod(parameterNames = {"email", "password"})},
-        additionalDslClassContents = {"public static CustomerDraftDsl of(final CustomerName customerName, final String email, final String password) {\n" +
-                "        return CustomerDraftBuilder.of(customerName, email, password).build();\n" +
-                "    }",
-                "    public CustomerDraftDsl withCart(final io.sphere.sdk.carts.Cart cart) {\n" +
-                        "        Objects.requireNonNull(cart);\n" +
-                        "        return withAnonymousCartId(cart.getId());\n" +
-                        "    }",
-        "private static boolean isValidAddressIndex(final List<Address> addresses, final Integer addressIndex) {\n" +
-                "        return Optional.ofNullable(addressIndex).map(i -> i < addresses.size() && i >= 0).orElse(true);\n" +
-                "    }"},
-        additionalDslConstructorEndContent = "if (!isValidAddressIndex(addresses, defaultBillingAddress)\n" +
-                "                || !isValidAddressIndex(addresses, defaultShippingAddress)) {\n" +
-                "            throw new IllegalArgumentException(\"The defaultBillingAddress and defaultShippingAddress cannot contain an index which is not in the address list\");\n" +
-                "        }",
-        abstractBuilderClass = true)
+        abstractBuilderClass = true,
+        abstractResourceDraftValueClass = true)
 public interface CustomerDraft extends CustomDraft {
     @Nullable
     String getCustomerNumber();
@@ -108,4 +94,7 @@ public interface CustomerDraft extends CustomDraft {
 
     @Nullable
     List<Integer> getShippingAddresses();
+
+    @Nullable
+    String getSalutation();
 }

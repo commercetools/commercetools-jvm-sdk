@@ -67,6 +67,11 @@ public class CustomFieldsGetterIntegrationTest extends IntegrationTest {
     }
 
     @Test
+    public void getFieldAsBigDeciml() throws Exception {
+        assertThat(custom.getFieldAsBigDecimal(BIG_DECIMAL_FIELD_NAME)).isEqualTo(BIG_DECIMAL);
+    }
+
+    @Test
     public void getFieldAsMoney() throws Exception {
         assertThat(custom.getFieldAsMoney(MONEY_FIELD_NAME)).isEqualTo(MONETARY_AMOUNT);
     }

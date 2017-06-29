@@ -9,7 +9,7 @@ import javax.lang.model.element.TypeElement;
 
 @SupportedAnnotationTypes({"io.sphere.sdk.annotations.HasQueryModel"})
 @SupportedSourceVersion(SourceVersion.RELEASE_8)
-public final class HasQueryModelAnnotationProcessor extends CommercetoolsAnnotationProcessor<HasQueryModel> {
+public final class HasQueryModelAnnotationProcessor extends ClassLevelAnnotationProcessor<HasQueryModel> {
 
     public HasQueryModelAnnotationProcessor() {
         super(HasQueryModel.class);

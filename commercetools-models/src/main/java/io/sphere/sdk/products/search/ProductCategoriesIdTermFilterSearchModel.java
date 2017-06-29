@@ -1,6 +1,7 @@
 package io.sphere.sdk.products.search;
 
 import io.sphere.sdk.search.FilterExpression;
+import io.sphere.sdk.search.model.ExistsAndMissingFilterSearchModelSupport;
 import io.sphere.sdk.search.model.TermFilterSearchModel;
 
 import java.util.List;
@@ -14,7 +15,8 @@ import java.util.List;
  *
  * @param <T> type of the resource
  */
-public interface ProductCategoriesIdTermFilterSearchModel<T> extends TermFilterSearchModel<T, String> {
+public interface ProductCategoriesIdTermFilterSearchModel<T>
+        extends ExistsAndMissingFilterSearchModelSupport<T>, TermFilterSearchModel<T, String> {
     /**
      * <p>Creates filters for a product which needs to be in all categories directly ({@code categoryIds}). Does not include the child categories.</p>
      *

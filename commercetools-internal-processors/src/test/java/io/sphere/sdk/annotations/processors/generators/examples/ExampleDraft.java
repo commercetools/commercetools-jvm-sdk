@@ -1,5 +1,6 @@
 package io.sphere.sdk.annotations.processors.generators.examples;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import io.sphere.sdk.annotations.FactoryMethod;
 import io.sphere.sdk.annotations.ResourceDraftValue;
 
@@ -13,7 +14,7 @@ import java.util.List;
         @FactoryMethod(parameterNames = {"sku", "active"}),
         @FactoryMethod(parameterNames = {"default", "active"}),
         @FactoryMethod(parameterNames = {"default", "optional"})
-        })
+})
 public interface ExampleDraft {
     /**
      * This test a reference type. Our generator only supports reference type.
@@ -28,6 +29,7 @@ public interface ExampleDraft {
     /**
      * This tests that an {@code active(Boolean)} and {@code isActive(Boolean)} builder method is generated.
      */
+    @JsonProperty("isActive")
     Boolean isActive();
 
     /**

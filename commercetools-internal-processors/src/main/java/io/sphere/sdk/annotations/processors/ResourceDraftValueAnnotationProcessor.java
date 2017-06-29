@@ -3,6 +3,7 @@ package io.sphere.sdk.annotations.processors;
 import com.squareup.javapoet.JavaFile;
 import io.sphere.sdk.annotations.ResourceDraftValue;
 import io.sphere.sdk.annotations.processors.generators.DraftBuilderGenerator;
+import io.sphere.sdk.annotations.processors.generators.ResourceDraftValueGenerator;
 import io.sphere.sdk.annotations.processors.validators.ResourceDraftValueValidator;
 
 import javax.annotation.processing.SupportedAnnotationTypes;
@@ -12,7 +13,7 @@ import javax.lang.model.element.TypeElement;
 
 @SupportedAnnotationTypes({"io.sphere.sdk.annotations.ResourceDraftValue"})
 @SupportedSourceVersion(SourceVersion.RELEASE_8)
-public final class ResourceDraftValueAnnotationProcessor extends CommercetoolsAnnotationProcessor<ResourceDraftValue> {
+public final class ResourceDraftValueAnnotationProcessor extends ClassLevelAnnotationProcessor<ResourceDraftValue> {
 
     public ResourceDraftValueAnnotationProcessor() {
         super(ResourceDraftValue.class);
@@ -22,12 +23,11 @@ public final class ResourceDraftValueAnnotationProcessor extends CommercetoolsAn
     protected void generate(final TypeElement typeElement) {
         final ResourceDraftValueValidator validator = new ResourceDraftValueValidator(processingEnv);
         if (validator.isValid(typeElement)) {
-
-            writeClass(typeElement, new ResourceDraftDslClassModelFactory(typeElement).createClassModel());
-
-            final JavaFile javaFile = new DraftBuilderGenerator(processingEnv.getElementUtils()).generate(typeElement);
+            final JavaFile javaFile = new ResourceDraftValueGenerator(processingEnv.getElementUtils(), processingEnv.getTypeUtils()).generate(typeElement);
             writeClass(javaFile);
+
+            final JavaFile javaFileBuilder = new DraftBuilderGenerator(processingEnv.getElementUtils(),processingEnv.getTypeUtils()).generate(typeElement);
+            writeClass(javaFileBuilder);
         }
     }
-
 }

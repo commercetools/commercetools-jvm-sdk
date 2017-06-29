@@ -1,10 +1,9 @@
 package io.sphere.sdk.products.commands.updateactions;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import io.sphere.sdk.products.Product;
 import io.sphere.sdk.products.attributes.AttributeDraft;
 import io.sphere.sdk.products.attributes.NamedAttributeAccess;
-import io.sphere.sdk.commands.UpdateActionImpl;
-import io.sphere.sdk.products.Product;
 
 import javax.annotation.Nullable;
 
@@ -17,13 +16,13 @@ import javax.annotation.Nullable;
  *
  * @see io.sphere.sdk.products.commands.updateactions.SetAttribute
  */
-public final class SetAttributeInAllVariants extends UpdateActionImpl<Product> {
+public final class SetAttributeInAllVariants extends StagedProductUpdateActionImpl<Product> {
     private final String name;
     @Nullable
     private final JsonNode value;
 
-    SetAttributeInAllVariants(final String name, final @Nullable JsonNode value) {
-        super("setAttributeInAllVariants");
+    SetAttributeInAllVariants(final String name, final @Nullable JsonNode value, @Nullable final Boolean staged) {
+        super("setAttributeInAllVariants", staged);
         this.name = name;
         this.value = value;
     }
@@ -45,7 +44,11 @@ public final class SetAttributeInAllVariants extends UpdateActionImpl<Product> {
      * @return update action
      */
     public static SetAttributeInAllVariants of(final String name, final JsonNode value) {
-        return new SetAttributeInAllVariants(name, value);
+        return of(name, value, null);
+    }
+
+    public static SetAttributeInAllVariants of(final String name, final JsonNode value, @Nullable final Boolean staged) {
+        return new SetAttributeInAllVariants(name, value, staged);
     }
 
     /**
@@ -55,7 +58,11 @@ public final class SetAttributeInAllVariants extends UpdateActionImpl<Product> {
      * @return update action
      */
     public static SetAttributeInAllVariants ofUnsetAttribute(final String name) {
-        return of(name, null);
+        return ofUnsetAttribute(name, null);
+    }
+
+    public static SetAttributeInAllVariants ofUnsetAttribute(final String name, @Nullable final Boolean staged) {
+        return of(name, null, staged);
     }
 
 
@@ -67,7 +74,11 @@ public final class SetAttributeInAllVariants extends UpdateActionImpl<Product> {
      * @return update action
      */
     public static <T> SetAttributeInAllVariants ofUnsetAttribute(final NamedAttributeAccess<T> NamedAttributeAccess) {
-        return of(NamedAttributeAccess.getName(), null);
+        return ofUnsetAttribute(NamedAttributeAccess, null);
+    }
+
+    public static <T> SetAttributeInAllVariants ofUnsetAttribute(final NamedAttributeAccess<T> NamedAttributeAccess, @Nullable final Boolean staged) {
+        return of(NamedAttributeAccess.getName(), null, staged);
     }
 
     /**
@@ -77,7 +88,11 @@ public final class SetAttributeInAllVariants extends UpdateActionImpl<Product> {
      * @return update action
      */
     public static SetAttributeInAllVariants of(final AttributeDraft attribute) {
-        return of(attribute.getName(), attribute.getValue());
+        return of(attribute, null);
+    }
+
+    public static SetAttributeInAllVariants of(final AttributeDraft attribute, @Nullable final Boolean staged) {
+        return of(attribute.getName(), attribute.getValue(), staged);
     }
 
     /**
@@ -89,6 +104,10 @@ public final class SetAttributeInAllVariants extends UpdateActionImpl<Product> {
      * @return update action
      */
     public static <T> SetAttributeInAllVariants of(final NamedAttributeAccess<T> setter, final T value) {
-        return of(AttributeDraft.of(setter, value));
+        return of(setter, value, null);
+    }
+
+    public static <T> SetAttributeInAllVariants of(final NamedAttributeAccess<T> setter, final T value, @Nullable final Boolean staged) {
+        return of(AttributeDraft.of(setter, value), staged);
     }
 }

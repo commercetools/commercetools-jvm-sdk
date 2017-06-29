@@ -3,15 +3,22 @@ package io.sphere.sdk.annotations.processors.models;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.squareup.javapoet.ClassName;
+import com.squareup.javapoet.ParameterizedTypeName;
+import com.squareup.javapoet.TypeName;
+import com.squareup.javapoet.TypeVariableName;
+import io.sphere.sdk.annotations.HasBuilder;
 import io.sphere.sdk.annotations.ResourceDraftValue;
 import io.sphere.sdk.annotations.ResourceValue;
 import io.sphere.sdk.models.Builder;
 
 import javax.lang.model.element.*;
+import javax.lang.model.type.TypeMirror;
 import javax.lang.model.util.ElementFilter;
 import javax.lang.model.util.Elements;
+import javax.lang.model.util.Types;
 import java.lang.annotation.Annotation;
 import java.util.*;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
@@ -19,18 +26,31 @@ import java.util.stream.Stream;
  */
 public class TypeUtils {
     private final Elements elements;
+    private final Types types;
 
-    public TypeUtils(final Elements elements) {
+    public TypeUtils(final Elements elements, final Types types) {
         this.elements = elements;
+        this.types = types;
     }
 
 
-    public String getPackageName(final TypeElement typeElement) {
-        return elements.getPackageOf(typeElement).getQualifiedName().toString();
+    public String getPackageName(final Element element) {
+        return elements.getPackageOf(element).getQualifiedName().toString();
     }
 
     public String getSimpleName(final Element element) {
         return element.getSimpleName().toString();
+    }
+
+    public String getSimpleName(final TypeMirror typeMirror) {
+        final TypeElement typeElement = (TypeElement) types.asElement(typeMirror);
+        return getSimpleName(typeElement);
+    }
+
+    public ClassName getHasBuilderImplType(final TypeElement typeElement) {
+        final ClassName draftType = ClassName.get(typeElement);
+        final HasBuilder hasBuilder = typeElement.getAnnotation(HasBuilder.class);
+        return ClassName.get(draftType.packageName(), draftType.simpleName() + hasBuilder.implPrefix());
     }
 
     public ClassName getDraftImplType(final TypeElement typeElement) {
@@ -38,12 +58,16 @@ public class TypeUtils {
         return ClassName.get(draftType.packageName(), draftType.simpleName() + "Dsl");
     }
 
-    public ClassName getResourceValueImplType(final TypeElement resourceValueTypeElement) {
+    public TypeName getResourceValueImplType(final TypeElement resourceValueTypeElement) {
         final ClassName draftType = ClassName.get(resourceValueTypeElement);
         final ResourceValue resourceValue = resourceValueTypeElement.getAnnotation(ResourceValue.class);
 
         final String implSuffix = "Impl" + (resourceValue.abstractResourceClass() ? "Base" : "");
-        return ClassName.get(draftType.packageName(), draftType.simpleName() + implSuffix);
+        final List<TypeName> typeParameters = resourceValueTypeElement.getTypeParameters().stream().map(TypeVariableName::get).collect(Collectors.toList());
+        final ClassName resourceValueImpl = ClassName.get(draftType.packageName(), draftType.simpleName() + implSuffix);
+        return typeParameters.isEmpty() ?
+                resourceValueImpl :
+                ParameterizedTypeName.get(resourceValueImpl, typeParameters.toArray(new TypeVariableName[typeParameters.size()]));
     }
 
     /**
@@ -61,9 +85,18 @@ public class TypeUtils {
                 getDraftImplType(typeElement) : draftType;
     }
 
+    public ClassName getConcreteBuilderType(final TypeMirror typeMirror) {
+        final TypeElement typeElement = (TypeElement) types.asElement(typeMirror);
+        return getConcreteBuilderType(typeElement);
+    }
+
     public ClassName getConcreteBuilderType(final TypeElement typeElement) {
         final ClassName type = ClassName.get(typeElement);
-        return ClassName.get(type.packageName(), type.simpleName() + "Builder");
+        return getConcreteBuilderType(type);
+    }
+
+    public ClassName getConcreteBuilderType(final TypeName type) {
+        return ClassName.bestGuess(type.toString() + "Builder");
     }
 
     public ClassName getBuilderType(final TypeElement typeElement) {
@@ -78,8 +111,26 @@ public class TypeUtils {
      * @param typeElement the type element
      * @return methods sorted by their {@link PropertyGenModel#getPropertyName(ExecutableElement)}
      */
-    public Stream<ExecutableElement> getAllPropertyMethods(TypeElement typeElement) {
+    public Stream<ExecutableElement> getAllPropertyMethods(final TypeElement typeElement) {
         final List<ExecutableElement> allMethods = ElementFilter.methodsIn(elements.getAllMembers(typeElement));
+        final Comparator<ExecutableElement> nameComparator = Comparator.comparing(e -> e.getSimpleName().toString());
+        final Comparator<ExecutableElement> typeComparator = Comparator.comparing(e -> e.getReturnType().toString());
+        final Set<ExecutableElement> uniqueMethods = new TreeSet<>(nameComparator.thenComparing(typeComparator));
+        uniqueMethods.addAll(allMethods);
+
+        return uniqueMethods.stream()
+                .filter(this::isPropertyMethod);
+    }
+
+
+    /**
+     * Returns property methods - not included inherited methods - as stream.
+     *
+     * @param typeElement the type element
+     * @return methods sorted by their {@link PropertyGenModel#getPropertyName(ExecutableElement)}
+     */
+    public Stream<ExecutableElement> getPropertyMethods(final TypeElement typeElement) {
+        final List<ExecutableElement> allMethods = ElementFilter.methodsIn(typeElement.getEnclosedElements());
         final Comparator<ExecutableElement> nameComparator = Comparator.comparing(e -> e.getSimpleName().toString());
         final Comparator<ExecutableElement> typeComparator = Comparator.comparing(e -> e.getReturnType().toString());
         final Set<ExecutableElement> uniqueMethods = new TreeSet<>(nameComparator.thenComparing(typeComparator));
@@ -91,7 +142,7 @@ public class TypeUtils {
 
     /**
      * Returns true iff. the given method name starts with {@code get} or {@code is} or is annotated with {@link JsonProperty}
-     * and if the given method doesn't have a {@code static}, {@caode default} modifier and isn't annotated with
+     * and if the given method doesn't have a {@code static}, {@code default} modifier and isn't annotated with
      * {@link JsonIgnore}.
      *
      * @param method the method
@@ -130,5 +181,33 @@ public class TypeUtils {
         final Optional<AnnotationValue> annotationValue = first.map(Map.Entry::getValue);
 
         return annotationValue;
+    }
+
+    /**
+     * @param propertyType the property type element
+     * @return true if the property type is a primitive type or an Enum.
+     */
+    public boolean isPrimitiveOrEnum(final TypeName propertyType){
+        return isPrimitiveType(propertyType) || isEnumType(propertyType);
+    }
+
+    /**
+     * @param propertyType the property type element
+     * @return true if the property type is a primitive type.
+     */
+    public boolean isPrimitiveType(final TypeName propertyType) {
+        return propertyType.isPrimitive() || propertyType.isBoxedPrimitive() || propertyType.toString().equals("java.lang.String");
+    }
+
+    /**
+     * @param propertyType the property type element
+     * @return true if the property type is an Enum type.
+     */
+    public boolean isEnumType(final TypeName propertyType) {
+        boolean isEnum = false;
+        try {
+            isEnum = Class.forName(propertyType.toString()).isEnum();
+        } catch (ClassNotFoundException e) { }
+        return isEnum;
     }
 }

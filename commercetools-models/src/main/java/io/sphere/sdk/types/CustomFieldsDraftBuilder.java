@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import io.sphere.sdk.json.SphereJsonUtils;
 import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.Builder;
+import io.sphere.sdk.models.Reference;
 
 import javax.annotation.Nullable;
 import java.util.HashMap;
@@ -20,7 +21,7 @@ public final class CustomFieldsDraftBuilder extends Base implements Builder<Cust
     private final String typeId;
     @Nullable
     private final String typeKey;
-    private final Map<String, JsonNode> fields;
+    private Map<String, JsonNode> fields;
 
     private CustomFieldsDraftBuilder(@Nullable final String typeId, @Nullable final String typeKey) {
         this.typeId = typeId;
@@ -29,7 +30,7 @@ public final class CustomFieldsDraftBuilder extends Base implements Builder<Cust
     }
 
     private CustomFieldsDraftBuilder(final CustomFieldsDraft customFieldsDraft) {
-        typeId = customFieldsDraft.getType().getTypeId();
+        typeId = customFieldsDraft.getType().getId();
         typeKey = customFieldsDraft.getType().getKey();
         fields = customFieldsDraft.getFields();
     }
@@ -52,6 +53,11 @@ public final class CustomFieldsDraftBuilder extends Base implements Builder<Cust
         return new CustomFieldsDraftBuilder(customFieldsDraft);
     }
 
+    public static CustomFieldsDraftBuilder of(final CustomFields customFields) {
+        final Reference<Type> type = customFields.getType();
+        return new CustomFieldsDraftBuilder(type.getId(), type.getKey()).fields(customFields.getFieldsJsonMap());
+    }
+
     public CustomFieldsDraftBuilder addObject(final String fieldName, final Object object) {
         final JsonNode jsonNode = SphereJsonUtils.toJsonNode(object);
         return addJsonField(fieldName, jsonNode);
@@ -59,6 +65,11 @@ public final class CustomFieldsDraftBuilder extends Base implements Builder<Cust
 
     public CustomFieldsDraftBuilder addObjects(final Map<String, Object> fields) {
         fields.entrySet().forEach(entry -> addObject(entry.getKey(), entry.getValue()));
+        return this;
+    }
+
+    public CustomFieldsDraftBuilder fields(final Map<String, JsonNode> fields) {
+        this.fields = fields;
         return this;
     }
 

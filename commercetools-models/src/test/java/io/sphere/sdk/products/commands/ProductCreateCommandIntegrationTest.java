@@ -19,6 +19,8 @@ import io.sphere.sdk.types.CustomFieldsDraft;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Locale;
 
 import static io.sphere.sdk.categories.CategoryFixtures.withCategory;
@@ -91,6 +93,33 @@ public class ProductCreateCommandIntegrationTest extends IntegrationTest {
                 })
         );
 
+    }
+
+    @Test
+    public void createProductWithTiers() {
+        withEmptyProductType(client(), randomKey(), productType ->
+                withUpdateableType(client(), type -> {
+                    final List<PriceTier> tiers = Arrays.asList(PriceTierBuilder.of(10, EURO_5).build());
+                    final PriceDraft priceWithTiers = PriceDraftBuilder.of(EURO_1)
+                            .tiers(tiers)
+                            .build();
+
+                    final ProductVariantDraft masterVariant = ProductVariantDraftBuilder.of()
+                            .price(priceWithTiers)
+                            .build();
+                    final ProductDraft productDraft = ProductDraftBuilder.of(productType, randomSlug(), randomSlug(), masterVariant).build();
+
+                    final Product product = client().executeBlocking(ProductCreateCommand.of(productDraft));
+                    final Price loadedPrice = product.getMasterData().getStaged().getMasterVariant().getPrices().get(0);
+
+                    assertThat(loadedPrice.getValue()).isEqualTo(EURO_1);
+                    assertThat(loadedPrice.getTiers()).containsExactlyElementsOf(tiers);
+
+                    client().executeBlocking(ProductDeleteCommand.of(product));
+
+                    return type;
+                })
+        );
     }
 
     @Test

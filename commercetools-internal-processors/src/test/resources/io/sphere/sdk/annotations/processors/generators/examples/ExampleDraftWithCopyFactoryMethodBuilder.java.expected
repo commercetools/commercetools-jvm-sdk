@@ -1,0 +1,73 @@
+package io.sphere.sdk.annotations.processors.generators.examples;
+
+import io.sphere.sdk.models.Base;
+import io.sphere.sdk.models.Builder;
+import java.lang.String;
+import javax.annotation.Generated;
+
+/**
+ * Builder for {@link ExampleDraftWithCopyFactoryMethod}.
+ */
+@Generated(
+    value = "io.sphere.sdk.annotations.processors.generators.DraftBuilderGenerator",
+    comments = "Generated from: io.sphere.sdk.annotations.processors.generators.examples.ExampleDraftWithCopyFactoryMethod"
+)
+public final class ExampleDraftWithCopyFactoryMethodBuilder extends Base implements Builder<ExampleDraftWithCopyFactoryMethodDsl> {
+  private String name;
+
+  ExampleDraftWithCopyFactoryMethodBuilder() {
+  }
+
+  ExampleDraftWithCopyFactoryMethodBuilder(final String name) {
+    this.name = name;
+  }
+
+  /**
+   * Sets the {@code name} property of this builder.
+   *
+   * @param name the value for {@link ExampleDraftWithCopyFactoryMethod#getName()}
+   * @return this builder
+   */
+  public ExampleDraftWithCopyFactoryMethodBuilder name(final String name) {
+    this.name = name;
+    return this;
+  }
+
+  /**
+   * Creates a new instance of {@code ExampleDraftWithCopyFactoryMethodDsl} with the values of this builder.
+   *
+   * @return the instance
+   */
+  public ExampleDraftWithCopyFactoryMethodDsl build() {
+    return new ExampleDraftWithCopyFactoryMethodDsl(name);
+  }
+
+  /**
+   * Creates a new object initialized with the given values.
+   *
+   * @return new object initialized with the given values
+   */
+  public static ExampleDraftWithCopyFactoryMethodBuilder of() {
+    return new ExampleDraftWithCopyFactoryMethodBuilder(null);
+  }
+
+  /**
+   * Creates a new object initialized with the fields of the template parameter.
+   *
+   * @param template the template
+   * @return a new object initialized from the template
+   */
+  public static ExampleDraftWithCopyFactoryMethodBuilder of(final ExampleDraftWithCopyFactoryMethod template) {
+    return new ExampleDraftWithCopyFactoryMethodBuilder(template.getName());
+  }
+
+  /**
+   * Creates a new object initialized with the fields of the template parameter.
+   *
+   * @param template the template
+   * @return a new object initialized from the template
+   */
+  public static ExampleDraftWithCopyFactoryMethodBuilder of(final ExampleResource template) {
+    return new ExampleDraftWithCopyFactoryMethodBuilder(template.getName());
+  }
+}

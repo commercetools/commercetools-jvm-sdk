@@ -68,6 +68,18 @@ public class CategoryUpdateCommandIntegrationTest extends IntegrationTest {
     }
 
     @Test
+    public void changeKey() throws Exception {
+        withCategory(client(), category -> {
+            final String key = randomKey();
+            final CategoryUpdateCommand command = CategoryUpdateCommand.of(category, SetKey.of(key));
+
+            final Category updatedCategory = client().executeBlocking(command);
+
+            assertThat(updatedCategory.getKey()).isEqualTo(key);
+        });
+    }
+
+    @Test
     public void setDescription() throws Exception {
         withCategory(client(), category -> {
             final LocalizedString newDescription = randomSlug();

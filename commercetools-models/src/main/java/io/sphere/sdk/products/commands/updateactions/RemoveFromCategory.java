@@ -1,10 +1,11 @@
 package io.sphere.sdk.products.commands.updateactions;
 
 import io.sphere.sdk.categories.Category;
-import io.sphere.sdk.commands.UpdateActionImpl;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Referenceable;
 import io.sphere.sdk.products.Product;
+
+import javax.annotation.Nullable;
 
 /**
  * Removes a product from a category.
@@ -15,11 +16,11 @@ import io.sphere.sdk.products.Product;
  *
  * @see io.sphere.sdk.products.commands.updateactions.AddToCategory
  */
-public final class RemoveFromCategory extends UpdateActionImpl<Product> {
+public final class RemoveFromCategory extends StagedProductUpdateActionImpl<Product> {
     private final Reference<Category> category;
 
-    private RemoveFromCategory(final Reference<Category> category) {
-        super("removeFromCategory");
+    private RemoveFromCategory(final Reference<Category> category, @Nullable final Boolean staged) {
+        super("removeFromCategory", staged);
         this.category = category;
     }
 
@@ -28,6 +29,10 @@ public final class RemoveFromCategory extends UpdateActionImpl<Product> {
     }
 
     public static RemoveFromCategory of(final Referenceable<Category> category) {
-        return new RemoveFromCategory(category.toReference());
+        return of(category, null);
+    }
+
+    public static RemoveFromCategory of(final Referenceable<Category> category, @Nullable final Boolean staged) {
+        return new RemoveFromCategory(category.toReference(), staged);
     }
 }

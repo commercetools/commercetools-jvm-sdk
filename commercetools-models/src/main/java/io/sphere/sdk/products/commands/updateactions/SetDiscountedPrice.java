@@ -1,6 +1,5 @@
 package io.sphere.sdk.products.commands.updateactions;
 
-import io.sphere.sdk.commands.UpdateActionImpl;
 import io.sphere.sdk.productdiscounts.DiscountedPrice;
 import io.sphere.sdk.products.Product;
 
@@ -12,15 +11,14 @@ import javax.annotation.Nullable;
  * {@doc.gen intro}
  *
  * {@include.example io.sphere.sdk.products.commands.ProductUpdateCommandIntegrationTest#setDiscountedPrice()}
- *
  */
-public final class SetDiscountedPrice extends UpdateActionImpl<Product> {
+public final class SetDiscountedPrice extends StagedProductUpdateActionImpl<Product> {
     private final String priceId;
     @Nullable
     private final DiscountedPrice discounted;
 
-    private SetDiscountedPrice(final String priceId, @Nullable final DiscountedPrice discounted) {
-        super("setDiscountedPrice");
+    private SetDiscountedPrice(final String priceId, @Nullable final DiscountedPrice discounted, @Nullable final Boolean staged) {
+        super("setDiscountedPrice", staged);
         this.priceId = priceId;
         this.discounted = discounted;
     }
@@ -35,6 +33,10 @@ public final class SetDiscountedPrice extends UpdateActionImpl<Product> {
     }
 
     public static SetDiscountedPrice of(final String priceId, @Nullable final DiscountedPrice discounted) {
-        return new SetDiscountedPrice(priceId, discounted);
+        return of(priceId, discounted, null);
+    }
+
+    public static SetDiscountedPrice of(final String priceId, @Nullable final DiscountedPrice discounted, @Nullable final Boolean staged) {
+        return new SetDiscountedPrice(priceId, discounted, staged);
     }
 }

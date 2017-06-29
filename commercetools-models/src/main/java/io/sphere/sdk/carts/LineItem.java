@@ -1,6 +1,7 @@
 package io.sphere.sdk.carts;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import io.sphere.sdk.annotations.ResourceValue;
 import io.sphere.sdk.cartdiscounts.DiscountedLineItemPriceForQuantity;
 import io.sphere.sdk.channels.Channel;
 import io.sphere.sdk.models.LocalizedString;
@@ -30,6 +31,7 @@ import java.util.Set;
  @see Cart#getLineItems()
  */
 @JsonDeserialize(as=LineItemImpl.class)
+@ResourceValue(abstractResourceClass = true)
 public interface LineItem extends LineItemLike {
 
     String getProductId();
@@ -77,6 +79,8 @@ public interface LineItem extends LineItemLike {
 
     @Nullable
     Reference<ProductType> getProductType();
+
+    LineItemMode getLineItemMode();
 
     /**
      * An identifier for this resource which supports {@link CustomFields}.

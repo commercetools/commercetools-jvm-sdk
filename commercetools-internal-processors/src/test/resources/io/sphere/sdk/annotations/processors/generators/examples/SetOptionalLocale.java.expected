@@ -1,0 +1,49 @@
+package io.sphere.sdk.annotations.processors.generators.examples.commands.updateactions;
+
+import io.sphere.sdk.annotations.processors.generators.examples.ExampleResourceWithUpdateAction;
+import io.sphere.sdk.commands.UpdateActionImpl;
+import java.util.Locale;
+import javax.annotation.Generated;
+import javax.annotation.Nullable;
+
+/**
+ * Sets the {@code optionalLocale} property of a {@link ExampleResourceWithUpdateAction}.
+ *
+ * @see ExampleResourceWithUpdateAction#getOptionalLocale()
+ */
+@Generated(
+    value = "io.sphere.sdk.annotations.processors.generators.UpdateActionGenerator",
+    comments = "Generated from: io.sphere.sdk.annotations.processors.generators.examples.ExampleResourceWithUpdateAction"
+)
+public final class SetOptionalLocale extends UpdateActionImpl<ExampleResourceWithUpdateAction> {
+  @Nullable
+  private final Locale optionalLocale;
+
+  private SetOptionalLocale(@Nullable final Locale optionalLocale) {
+    super("setOptionalLocale");
+    this.optionalLocale = optionalLocale;
+  }
+
+  @Nullable
+  public Locale getOptionalLocale() {
+    return optionalLocale;
+  }
+
+  /**
+   * Creates a new update action from the given parameters.
+   *
+   * @param optionalLocale the {@code optionalLocale} property {@link ExampleResourceWithUpdateAction#getOptionalLocale()}.
+   * @return the {@code SetOptionalLocale} update action.
+   */
+  public static SetOptionalLocale of(@Nullable final Locale optionalLocale) {
+    return new SetOptionalLocale(optionalLocale);
+  }
+
+  /**
+   * Creates a new update action to unset the {@code optionalLocale} property.
+   * @return the {@code SetOptionalLocale} update action.
+   */
+  public static SetOptionalLocale ofUnset() {
+    return new SetOptionalLocale(null);
+  }
+}

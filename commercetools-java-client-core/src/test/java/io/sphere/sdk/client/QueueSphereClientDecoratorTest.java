@@ -131,6 +131,11 @@ public class QueueSphereClientDecoratorTest {
                 throw new RuntimeException("timeout for request count " + count + ", was only " + responseFutures.size());
             }
         }
+
+        @Override
+        public SphereApiConfig getConfig() {
+            return null;
+        }
     }
 
     @SuppressWarnings("unchecked")

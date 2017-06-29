@@ -1,6 +1,5 @@
 package io.sphere.sdk.products.commands.updateactions;
 
-import io.sphere.sdk.commands.UpdateActionImpl;
 import io.sphere.sdk.products.Image;
 import io.sphere.sdk.products.Product;
 
@@ -19,15 +18,15 @@ import javax.annotation.Nullable;
  * <p>By SKU (attention, SKU is optional field in a variant):</p>
  * {@include.example io.sphere.sdk.products.commands.ProductUpdateCommandIntegrationTest#removeImageBySku()}
  */
-public final class RemoveImage extends UpdateActionImpl<Product> {
+public final class RemoveImage extends StagedProductUpdateActionImpl<Product> {
     @Nullable
     private final Integer variantId;
     @Nullable
     private final String sku;
     private final String imageUrl;
 
-    private RemoveImage(final String imageUrl, @Nullable final Integer variantId, @Nullable final String sku) {
-        super("removeImage");
+    private RemoveImage(final String imageUrl, @Nullable final Integer variantId, @Nullable final String sku, @Nullable final Boolean staged) {
+        super("removeImage", staged);
         this.imageUrl = imageUrl;
         this.variantId = variantId;
         this.sku = sku;
@@ -48,7 +47,7 @@ public final class RemoveImage extends UpdateActionImpl<Product> {
     }
 
     public static RemoveImage of(final Image image, final Integer variantId) {
-        return ofVariantId(variantId, image.getUrl());
+        return of(image.getUrl(), variantId);
     }
 
     public static RemoveImage of(final String imageUrl, final Integer variantId) {
@@ -56,18 +55,34 @@ public final class RemoveImage extends UpdateActionImpl<Product> {
     }
 
     public static RemoveImage ofVariantId(final Integer variantId, final Image image) {
-        return ofVariantId(variantId, image.getUrl());
-    }
-
-    public static RemoveImage ofSku(final String sku, final Image image) {
-        return ofSku(sku, image.getUrl());
+        return ofVariantId(variantId, image.getUrl(), null);
     }
 
     public static RemoveImage ofVariantId(final Integer variantId, final String imageUrl) {
-        return new RemoveImage(imageUrl, variantId, null);
+        return ofVariantId(variantId, imageUrl, null);
+    }
+
+    public static RemoveImage ofVariantId(final Integer variantId, final Image image, @Nullable final Boolean staged) {
+        return ofVariantId(variantId, image.getUrl(), staged);
+    }
+
+    public static RemoveImage ofVariantId(final Integer variantId, final String imageUrl, @Nullable final Boolean staged) {
+        return new RemoveImage(imageUrl, variantId, null, staged);
+    }
+
+    public static RemoveImage ofSku(final String sku, final Image image) {
+        return ofSku(sku, image.getUrl(), null);
+    }
+
+    public static RemoveImage ofSku(final String sku, final Image image, @Nullable final Boolean staged) {
+        return ofSku(sku, image.getUrl(), staged);
     }
 
     public static RemoveImage ofSku(final String sku, final String imageUrl) {
-        return new RemoveImage(imageUrl, null, sku);
+        return ofSku(sku, imageUrl, null);
+    }
+
+    public static RemoveImage ofSku(final String sku, final String imageUrl, @Nullable final Boolean staged) {
+        return new RemoveImage(imageUrl, null, sku, staged);
     }
 }

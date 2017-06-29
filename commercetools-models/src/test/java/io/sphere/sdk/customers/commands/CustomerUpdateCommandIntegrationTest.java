@@ -63,6 +63,16 @@ public class CustomerUpdateCommandIntegrationTest extends CustomerIntegrationTes
     }
 
     @Test
+    public void changeSalutation() throws Exception {
+        withCustomer(client(), customer -> {
+            final String newSalutation = "Hello";
+            assertThat(customer.getSalutation()).isNotEqualTo(newSalutation);
+            final Customer updatedCustomer = client().executeBlocking(CustomerUpdateCommand.of(customer, SetSalutation.of(newSalutation)));
+            assertThat(updatedCustomer.getSalutation()).isEqualTo(newSalutation);
+        });
+    }
+
+    @Test
     public void addAddress() throws Exception {
         withCustomer(client(), customer -> {
             final String city = "addAddress";

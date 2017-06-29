@@ -521,6 +521,26 @@ public class CartUpdateCommandIntegrationTest extends IntegrationTest {
     }
 
     @Test
+    public void setLineItemExternalPrice() throws Exception {
+        withFilledCart(client(), (Cart cart) -> {
+            final LineItem originalLineItem = cart.getLineItems().get(0);
+            assertThat(originalLineItem.getPrice().getValue()).isEqualTo(MoneyImpl.ofCents(1234, EUR));
+            assertThat(originalLineItem.getTotalPrice()).isEqualTo(MoneyImpl.ofCents(3702, EUR));
+            assertThat(originalLineItem.getQuantity()).isEqualTo(3L);
+            assertThat(originalLineItem.getPriceMode()).isEqualTo(LineItemPriceMode.PLATFORM);
+
+            final String lineItemId = originalLineItem.getId();
+            final MonetaryAmount externalPrice = EURO_30;
+            final SetLineItemPrice updateAction = SetLineItemPrice.of(lineItemId, externalPrice);
+            final Cart updatedCart = client().executeBlocking(CartUpdateCommand.of(cart, updateAction));
+
+            final LineItem lineItem = updatedCart.getLineItems().get(0);
+            assertThat(lineItem.getPrice().getValue()).isEqualTo(externalPrice);
+            assertThat(lineItem.getPriceMode()).isEqualTo(LineItemPriceMode.EXTERNAL_PRICE);
+        });
+    }
+
+    @Test
     public void addShoppingList() throws Exception {
         withEmptyCartAndProduct(client(), (cart, product) -> {
             assertThat(cart.getLineItems()).isEmpty();

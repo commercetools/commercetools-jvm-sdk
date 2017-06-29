@@ -2,6 +2,7 @@ package io.sphere.sdk.products;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.neovisionaries.i18n.CountryCode;
+import io.sphere.sdk.annotations.ResourceValue;
 import io.sphere.sdk.channels.Channel;
 import io.sphere.sdk.customergroups.CustomerGroup;
 import io.sphere.sdk.models.Reference;
@@ -12,7 +13,9 @@ import javax.annotation.Nullable;
 import javax.money.MonetaryAmount;
 import java.time.ZonedDateTime;
 
-@JsonDeserialize(as = PriceImpl.class)
+
+@ResourceValue
+@JsonDeserialize(as = ScopedPriceImpl.class)
 public interface ScopedPrice extends PriceLike {
     @Nullable
     @Override

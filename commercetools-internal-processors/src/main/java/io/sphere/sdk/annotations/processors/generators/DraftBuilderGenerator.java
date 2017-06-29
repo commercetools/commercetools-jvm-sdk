@@ -1,33 +1,34 @@
 package io.sphere.sdk.annotations.processors.generators;
 
 import com.squareup.javapoet.*;
-import io.sphere.sdk.annotations.FactoryMethod;
 import io.sphere.sdk.annotations.ResourceDraftValue;
 import io.sphere.sdk.annotations.processors.models.PropertyGenModel;
 import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.Builder;
-import io.sphere.sdk.models.Reference;
-import io.sphere.sdk.models.Referenceable;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.annotation.Generated;
-import javax.annotation.Nullable;
-import javax.lang.model.element.ExecutableElement;
-import javax.lang.model.element.Modifier;
-import javax.lang.model.element.TypeElement;
+import javax.lang.model.element.*;
+import javax.lang.model.type.DeclaredType;
+import javax.lang.model.type.TypeMirror;
 import javax.lang.model.util.Elements;
-import java.util.*;
+import javax.lang.model.util.SimpleAnnotationValueVisitor8;
+import javax.lang.model.util.Types;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
- * Generator for {@code *DraftBuilder} classes.
+ * Generates builders for interfaces annotated with {@link ResourceDraftValue}.
  */
-public class DraftBuilderGenerator extends AbstractGenerator {
+public class DraftBuilderGenerator extends AbstractBuilderGenerator<ResourceDraftValue> {
 
-    public DraftBuilderGenerator(final Elements elements) {
-        super(elements);
+    public DraftBuilderGenerator(final Elements elements, final Types types) {
+        super(elements, types, ResourceDraftValue.class);
     }
 
     public TypeSpec generateType(final TypeElement resourceDraftValueType) {
@@ -40,11 +41,15 @@ public class DraftBuilderGenerator extends AbstractGenerator {
         final ResourceDraftValue resourceDraftValue = resourceDraftValueType.getAnnotation(ResourceDraftValue.class);
 
         final List<MethodSpec> builderMethodSpecs = properties.stream()
-                .flatMap(m -> createBuilderMethods(generatedBuilderName, resourceDraftValue, m).stream())
+                .flatMap(m -> createBuilderMethods(resourceDraftValueType, m).stream())
                 .collect(Collectors.toList());
 
+        final List<Modifier> fieldModifiers = new ArrayList<>();
+        if (!resourceDraftValue.abstractBuilderClass()) {
+            fieldModifiers.add(Modifier.PRIVATE);
+        }
         final List<FieldSpec> fieldSpecs = properties.stream()
-                .map(m -> createField(m, resourceDraftValue))
+                .map(m -> createField(m, fieldModifiers))
                 .collect(Collectors.toList());
 
         final List<ClassName> additionalInterfaceNames = Stream.of(resourceDraftValue.additionalBuilderInterfaces())
@@ -68,11 +73,15 @@ public class DraftBuilderGenerator extends AbstractGenerator {
                     .addTypeVariable(TypeVariableName.get("T").withBounds(generatedBuilderName));
         } else {
             builder.addJavadoc("Builder for {@link $T}.\n", resourceDraftValueType)
-                .addModifiers(Modifier.PUBLIC, Modifier.FINAL);
+                    .addModifiers(Modifier.PUBLIC, Modifier.FINAL);
+        }
+        final List<Modifier> constructorModifiers = new ArrayList<>();
+        if (resourceDraftValue.abstractBuilderClass()) {
+            constructorModifiers.add(Modifier.PROTECTED);
         }
         builder.addFields(fieldSpecs)
-                .addMethod(createDefaultConstructor(resourceDraftValue))
-                .addMethod(createConstructor(resourceDraftValue, properties))
+                .addMethod(createDefaultConstructor(constructorModifiers))
+                .addMethod(createConstructor(properties, constructorModifiers))
                 .addMethods(builderMethodSpecs);
         if (resourceDraftValue.gettersForBuilder()) {
             List<MethodSpec> getMethods = propertyMethods.stream()
@@ -86,201 +95,145 @@ public class DraftBuilderGenerator extends AbstractGenerator {
                 .addMethods(createFactoryMethods(resourceDraftValue.factoryMethods(), properties, concreteBuilderName))
                 .addMethod(createCopyFactoryMethod(resourceDraftValueType, concreteBuilderName, propertyMethods));
 
+        if (resourceDraftValue.copyFactoryMethods().length > 0) {
+            createCopyFactoryMethods(resourceDraftValueType, propertyMethods, builder);
+        }
+
         final TypeSpec draftBuilderBaseClass = builder.build();
 
         return draftBuilderBaseClass;
     }
 
-    private List<MethodSpec> createFactoryMethods(final FactoryMethod[] factoryMethods, final List<PropertyGenModel> properties, final ClassName returnType) {
-        return Stream.of(factoryMethods)
-                .map(f -> createFactoryMethod(f, properties, returnType))
-                .collect(Collectors.toList());
+    /**
+     * This creates private {@code copy<i>Suffix</i>} methods that are used by copy factories
+     * {@link io.sphere.sdk.annotations.CopyFactoryMethod} to transform between the differently
+     * typed properties of the classes.
+     *
+     * @param resourceDraftValueType the type element for which copy methods should be added
+     * @param propertyMethods        the property methods of the source class
+     * @param builder                the type spec builder
+     */
+    private void createCopyFactoryMethods(final TypeElement resourceDraftValueType, final List<ExecutableElement> propertyMethods, final TypeSpec.Builder builder) {
+        final AnnotationValue copyFactoryMethods = typeUtils.getAnnotationValue(resourceDraftValueType, ResourceDraftValue.class, "copyFactoryMethods").get();
+        final List<TypeElement> templateClasses = copyFactoryMethods.accept(new TemplateClassCollector(), new ArrayList<>()).stream()
+                .map(types::asElement).map(TypeElement.class::cast).collect(Collectors.toList());
+
+        for (final TypeElement templateTypeElement : templateClasses) {
+            createCopyMethods(templateTypeElement, propertyMethods, builder);
+        }
+        final ClassName concreteBuilderName = typeUtils.getConcreteBuilderType(resourceDraftValueType);
+        for (final TypeElement templateTypeElement : templateClasses) {
+            builder.addMethod(createCopyFactoryMethod(templateTypeElement, concreteBuilderName, propertyMethods));
+        }
     }
 
-    private MethodSpec createFactoryMethod(final FactoryMethod factoryMethod, final List<PropertyGenModel> properties, final ClassName returnType) {
-        final Set<String> factoryParameterNames = Stream.of(factoryMethod.parameterNames()).collect(Collectors.toCollection(LinkedHashSet::new));
-        final Map<String, PropertyGenModel> getterMethodByPropertyName = properties.stream()
-                .collect(Collectors.toMap(PropertyGenModel::getName, Function.identity()));
-        final List<PropertyGenModel> parameterTemplates = factoryParameterNames.stream()
-                .map(getterMethodByPropertyName::get)
+    private void createCopyMethods(final TypeElement templateTypeElement, final List<ExecutableElement> propertyMethods, final TypeSpec.Builder builder) {
+        final Map<Name, ExecutableElement> templatePropertyMethodByName = getAllPropertyMethodsSorted(templateTypeElement).stream()
+                .collect(Collectors.toMap(ExecutableElement::getSimpleName, Function.identity()));
+        final List<ExecutableElement> needsCopyMethods = propertyMethods.stream()
+                .filter(propertyMethod -> templatePropertyMethodByName.containsKey(propertyMethod.getSimpleName()))
+                .filter(propertyMethod -> !isAssignable(templatePropertyMethodByName.get(propertyMethod.getSimpleName()), propertyMethod))
                 .collect(Collectors.toList());
-        assert factoryParameterNames.size() == parameterTemplates.size();
 
-        final String callArguments = properties.stream()
-                .map(p -> factoryParameterNames.contains(p.getName()) ? p.getJavaIdentifier() : "null")
-                .collect(Collectors.joining(", "));
+        final TypeElement listTypeElement = elements.getTypeElement("java.util.List");
+        for (final ExecutableElement needsCopyMethod : needsCopyMethods) {
+            MethodSpec.Builder copyMethodBuilder = MethodSpec.methodBuilder(getCopyMethodName(PropertyGenModel.of(needsCopyMethod)));
+            copyMethodBuilder
+                    .addModifiers(Modifier.PRIVATE, Modifier.STATIC)
+                    .returns(ClassName.get(needsCopyMethod.getReturnType()));
 
-        final MethodSpec.Builder builder = MethodSpec.methodBuilder(factoryMethod.methodName()).addModifiers(Modifier.PUBLIC, Modifier.STATIC)
-                .returns(returnType)
-                .addJavadoc("Creates a builder initialized with the given values.\n\n");
-        parameterTemplates.forEach(p -> builder.addJavadoc("@param $L initial value for the $L property\n",
-                p.getJavaIdentifier(), p.getJavadocLinkTag()));
-        builder.addJavadoc("@return new builder initialized with the given values\n");
-        return builder
-                .addParameters(createParameters(parameterTemplates, factoryMethod.useLowercaseBooleans(), false))
-                .addCode("return new $L($L);\n", returnType.simpleName(), callArguments)
-                .build();
+            if (types.isAssignable(types.erasure(needsCopyMethod.getReturnType()), listTypeElement.asType())) {
+                final DeclaredType declaredType = (DeclaredType) needsCopyMethod.getReturnType();
+                final TypeMirror typeArgument = declaredType.getTypeArguments().get(0);
+                final ClassName concreteBuilderType = typeUtils.getConcreteBuilderType(typeArgument);
+                copyMethodBuilder
+                        .addParameter(ClassName.get(templatePropertyMethodByName.get(needsCopyMethod.getSimpleName()).getReturnType()), "templates", Modifier.FINAL)
+                        .addCode("return templates == null ? null : templates.stream().map(template -> $T.of(template).build()).collect($T.toList());\n", concreteBuilderType, Collectors.class);
+            } else {
+                final ClassName concreteBuilderType = typeUtils.getConcreteBuilderType(needsCopyMethod.getReturnType());
+                copyMethodBuilder
+                        .addParameter(ClassName.get(templatePropertyMethodByName.get(needsCopyMethod.getSimpleName()).getReturnType()), "template", Modifier.FINAL)
+                        .addCode("return template == null ? null : $T.of(template).build();\n", concreteBuilderType);
+            }
+
+
+            builder.addMethod(copyMethodBuilder.build());
+        }
     }
 
-    private MethodSpec createCopyFactoryMethod(final TypeElement draftTypeElement, final ClassName returnType, final List<ExecutableElement> propertyMethods) {
-        final ParameterSpec templateParameter = ParameterSpec.builder(ClassName.get(draftTypeElement), "template", Modifier.FINAL).build();
+    protected MethodSpec createCopyFactoryMethod(final TypeElement templateTypeElement, final ClassName returnType, final List<ExecutableElement> propertyMethods) {
+        final ParameterSpec templateParameter = ParameterSpec.builder(ClassName.get(templateTypeElement), "template", Modifier.FINAL).build();
+        final Map<Name, ExecutableElement> templatePropertyMethodByName = getAllPropertyMethodsSorted(templateTypeElement).stream()
+                .collect(Collectors.toMap(ExecutableElement::getSimpleName, Function.identity()));
+
         final String callArguments = propertyMethods.stream()
-                .map(getterMethod -> String.format("template.%s()", getterMethod.getSimpleName()))
+                .filter(propertyMethod -> templatePropertyMethodByName.containsKey(propertyMethod.getSimpleName()))
+                .map(propertyMethod -> getCallArgument(propertyMethod, templatePropertyMethodByName.get(propertyMethod.getSimpleName())))
                 .collect(Collectors.joining(", "));
+
         return MethodSpec.methodBuilder("of").addModifiers(Modifier.PUBLIC, Modifier.STATIC)
                 .returns(returnType)
-                .addJavadoc("Creates a builder initialized with the fields of the template parameter.\n\n")
+                .addJavadoc("Creates a new object initialized with the fields of the template parameter.\n\n")
                 .addJavadoc("@param template the template\n")
-                .addJavadoc("@return a new builder initialized from the template\n")
+                .addJavadoc("@return a new object initialized from the template\n")
                 .addParameter(templateParameter)
                 .addCode("return new $L($L);\n", returnType.simpleName(), callArguments)
                 .build();
     }
 
-    private FieldSpec createField(final PropertyGenModel property, final ResourceDraftValue resourceDraftValue) {
-        final FieldSpec.Builder builder = FieldSpec.builder(property.getType(), property.getJavaIdentifier());
-
-        // we use package private for abstract classes so that the fields aren't visible in the generated javadoc
-        if (!resourceDraftValue.abstractBuilderClass()) {
-            builder.addModifiers(Modifier.PRIVATE);
-        }
-        if (property.isOptional()) {
-            builder.addAnnotation(Nullable.class);
-        }
-        return builder.build();
+    private String getCallArgument(final ExecutableElement propertyMethod, final ExecutableElement templatePropertyMethod) {
+        final Name simpleName = propertyMethod.getSimpleName();
+        return isAssignable(templatePropertyMethod, propertyMethod) ?
+                String.format("template.%s()", simpleName) :
+                String.format("%s(template.%s())", getCopyMethodName(PropertyGenModel.of(templatePropertyMethod)), simpleName);
     }
 
-    private MethodSpec createDefaultConstructor(final ResourceDraftValue resourceDraftValue) {
-        final MethodSpec.Builder builder = MethodSpec.constructorBuilder();
+    private String getCopyMethodName(final PropertyGenModel executableElement) {
+        final String copyMethodSuffix = StringUtils.capitalize(executableElement.getJavaIdentifier());
+        return String.format("copy%s", copyMethodSuffix);
+    }
+
+    private boolean isAssignable(final ExecutableElement executableElement1, final ExecutableElement executableElement2) {
+        return types.isAssignable(executableElement1.getReturnType(), executableElement2.getReturnType());
+    }
+
+    @Override
+    protected MethodSpec.Builder addBuilderMethodReturn(final TypeElement builderType, final MethodSpec.Builder builder) {
+        final ResourceDraftValue resourceDraftValue = getAnnotationValue(builderType);
         if (resourceDraftValue.abstractBuilderClass()) {
-            builder.addModifiers(Modifier.PROTECTED);
-        }
-
-        return builder.build();
-    }
-
-    private MethodSpec createConstructor(final ResourceDraftValue resourceDraftValue, final List<PropertyGenModel> properties) {
-        final List<ParameterSpec> parameters = createParameters(properties, false, true);
-        final MethodSpec.Builder builder = MethodSpec.constructorBuilder()
-                .addParameters(parameters);
-
-        if (resourceDraftValue.abstractBuilderClass()) {
-            builder.addModifiers(Modifier.PROTECTED);
-        }
-        final List<String> parameterNames = properties.stream()
-                .map(PropertyGenModel::getJavaIdentifier)
-                .collect(Collectors.toList());
-        parameterNames.forEach(n -> builder.addCode("this.$L = $L;\n", n, n));
-
-        return builder.build();
-    }
-
-    private List<ParameterSpec> createParameters(final List<PropertyGenModel> properties, final boolean useLowercaseBooleans, final boolean copyNullable) {
-        return properties.stream()
-                .map(m -> createParameter(m, useLowercaseBooleans, copyNullable))
-                .collect(Collectors.toList());
-    }
-
-    private MethodSpec createBuildMethod(final TypeName returnType, final TypeName draftImplType, final List<ExecutableElement> propertyMethods) {
-        final List<String> argumentNames = propertyMethods.stream()
-                .map((getterMethod) -> PropertyGenModel.getPropertyName(getterMethod))
-                .map(this::escapeJavaKeyword)
-                .collect(Collectors.toList());
-        final String callArgumentss = String.join(", ", argumentNames);
-        return MethodSpec.methodBuilder("build")
-                .addJavadoc("Creates a new instance of {@code $T} with the values of this builder.\n\n", returnType)
-                .addJavadoc("@return the instance\n")
-                .addModifiers(Modifier.PUBLIC)
-                .returns(returnType)
-                .addCode("return new $T($L);\n", draftImplType, callArgumentss)
-                .build();
-    }
-
-    /**
-     * Creates a builder method for the given getter method.
-     *
-     * @param property the getter method
-     * @return a list of builder methods - this will allow us later to create additional builder methods for collection types
-     */
-    private List<MethodSpec> createBuilderMethods(final ClassName builderName, final ResourceDraftValue resourceDraftValue, final PropertyGenModel property) {
-        final String builderMethodName = property.getJavaIdentifier();
-        final List<MethodSpec> builderMethods = new ArrayList<>();
-        builderMethods.add(createBuilderMethod(builderName, resourceDraftValue, property));
-
-        if (property.getType().equals(ClassName.get(Boolean.class)) && !builderMethodName.startsWith("is")) {
-            final String additionalBooleanBuilderMethodName = "is" + StringUtils.capitalize(property.getName());
-            builderMethods.add(createBuilderMethod(additionalBooleanBuilderMethodName, builderName, resourceDraftValue, property));
-        }
-        return builderMethods;
-    }
-
-    private MethodSpec createBuilderMethod(final ClassName builderType, final ResourceDraftValue resourceDraftValue, final PropertyGenModel property) {
-        final String methodName = property.getJavaIdentifier();
-        return createBuilderMethod(methodName, builderType, resourceDraftValue, property);
-    }
-
-    private MethodSpec createBuilderMethod(final String methodName, final ClassName builderType, final ResourceDraftValue resourceDraftValue, final PropertyGenModel property) {
-        final TypeName builderParameterTypeName;
-        final TypeName returnType = resourceDraftValue.abstractBuilderClass() ?
-                TypeVariableName.get("T") : builderType;
-        final MethodSpec.Builder builder = MethodSpec.methodBuilder(methodName)
-                .addModifiers(Modifier.PUBLIC)
-                .returns(returnType)
-                .addJavadoc("Sets the {@code $L} property of this builder.\n\n", property.getName())
-                .addJavadoc("@param $L the value for $L\n", property.getJavaIdentifier(), property.getJavadocLinkTag())
-                .addJavadoc("@return this builder\n");
-        final boolean hasReferenceType = property.hasSameType(Reference.class);
-        if (hasReferenceType) {
-            builderParameterTypeName = property.replaceParameterizedType(Referenceable.class);
-        } else {
-            builderParameterTypeName = property.getType();
-        }
-
-        final String fieldName = property.getJavaIdentifier();
-        final ParameterSpec parameter = createParameter(property, builderParameterTypeName, true);
-
-
-        builder.addParameter(parameter);
-        if (hasReferenceType) {
-            builder.addCode("this.$L = $T.ofNullable($N).map($T::toReference).orElse(null);;\n", fieldName, Optional.class, parameter, Referenceable.class);
-        } else {
-            builder.addCode("this.$L = $N;\n", fieldName, parameter);
-        }
-        if (resourceDraftValue.abstractBuilderClass()) {
+            builder.returns(TypeVariableName.get("T"));
             addSuppressWarnings(builder);
             builder.addCode("return (T) this;\n");
         } else {
+            final ClassName builderReturnType = typeUtils.getBuilderType(builderType);
+            builder.returns(builderReturnType);
             builder.addCode("return this;\n");
         }
-        return builder.build();
+        return builder;
     }
 
-    private void addSuppressWarnings(final MethodSpec.Builder builder) {
-        final AnnotationSpec suppressWarnings = AnnotationSpec.builder(SuppressWarnings.class)
-                .addMember("value", "$S", "unchecked").build();
-        builder.addAnnotation(suppressWarnings);
-    }
-
-    /**
-     * @param property the property to generate the parameter
-     * @param useLowercaseBooleans {@link FactoryMethod#useLowercaseBooleans()}
-     * @param copyNullable         if true, an existing {@link Nullable} annotation on the model will be copied to the parameter
-     * @return
-     */
-    private ParameterSpec createParameter(final PropertyGenModel property, final boolean useLowercaseBooleans, final boolean copyNullable) {
-        TypeName type = property.getType();
-        if (useLowercaseBooleans && type.isBoxedPrimitive() && type.unbox().equals(TypeName.BOOLEAN)) {
-            type = TypeName.BOOLEAN;
+    private static class TemplateClassCollector extends SimpleAnnotationValueVisitor8<List<TypeMirror>, List<TypeMirror>> {
+        @Override
+        public List<TypeMirror> visitType(final TypeMirror templateClass, final List<TypeMirror> templateClasses) {
+            templateClasses.add(templateClass);
+            return templateClasses;
         }
-        return createParameter(property, type, copyNullable);
-    }
 
-    private ParameterSpec createParameter(final PropertyGenModel property, final TypeName parameterType, final boolean copyNullable) {
-        final ParameterSpec.Builder builder = ParameterSpec.builder(parameterType, property.getJavaIdentifier())
-                .addModifiers(Modifier.FINAL);
-        if (property.isOptional() && copyNullable) {
-            builder.addAnnotation(Nullable.class);
+        @Override
+        public List<TypeMirror> visitArray(final List<? extends AnnotationValue> vals, final List<TypeMirror> templateClasses) {
+            for (final AnnotationValue val : vals) {
+                visit(val, templateClasses);
+            }
+            return templateClasses;
         }
-        return builder.build();
+
+        @Override
+        public List<TypeMirror> visitAnnotation(final AnnotationMirror a, final List<TypeMirror> templateClasses) {
+            final Map<? extends ExecutableElement, ? extends AnnotationValue> elementValues = a.getElementValues();
+            final Optional<? extends Map.Entry<? extends ExecutableElement, ? extends AnnotationValue>> templateClassEntry =
+                    elementValues.entrySet().stream()
+                            .findFirst();
+            return visit(templateClassEntry.get().getValue(), templateClasses);
+        }
     }
 }

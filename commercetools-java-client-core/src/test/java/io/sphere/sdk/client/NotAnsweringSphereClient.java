@@ -18,4 +18,9 @@ public final class NotAnsweringSphereClient extends Base implements SphereClient
     public void close() {
 
     }
+
+    @Override
+    public SphereApiConfig getConfig() {
+        return null;
+    }
 }

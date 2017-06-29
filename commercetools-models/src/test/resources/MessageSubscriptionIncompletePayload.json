@@ -1,0 +1,14 @@
+{
+  "notificationType": "Message",
+  "projectKey": "test",
+  "id": "test-project-id",
+  "version": 1,
+  "sequenceNumber": 1,
+  "resource": {
+    "typeId": "category",
+    "id": "test-category-id"
+  },
+  "resourceVersion": 1,
+  "createdAt": "2017-04-10T12:14:42.281Z",
+  "lastModifiedAt": "2017-04-10T12:14:42.281Z"
+}
