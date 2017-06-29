@@ -21,7 +21,7 @@ import java.util.stream.Collectors;
 /**
  * Generates update action classes for interfaces annotated with {@link io.sphere.sdk.annotations.HasUpdateActions}.
  */
-public class UpdateActionsGenerator extends AbstractMultipleFileGenerator {
+public class UpdateActionsGenerator extends AbstractMultipleFileGenerator<TypeElement> {
 
     public UpdateActionsGenerator(final Elements elements, final Types types) {
         super(elements, types);

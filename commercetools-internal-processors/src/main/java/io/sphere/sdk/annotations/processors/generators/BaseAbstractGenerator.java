@@ -238,11 +238,17 @@ abstract class BaseAbstractGenerator {
     }
 
     protected MethodSpec createFactoryMethod(final FactoryMethod factoryMethod, final List<PropertyGenModel> properties, final ClassName returnType) {
-        final Set<String> factoryParameterNames = Stream.of(factoryMethod.parameterNames()).collect(Collectors.toCollection(LinkedHashSet::new));
+        return createFactoryMethod(properties,returnType,factoryMethod.parameterNames(),factoryMethod.methodName(),factoryMethod.useLowercaseBooleans());
+    }
+
+    protected MethodSpec createFactoryMethod(final List<PropertyGenModel> properties, final ClassName returnType, final String[] parametersName,
+                                             final String methodName,final boolean useLowercaseBooleans) {
+        final Set<String> factoryParameterNames = Stream.of(parametersName).collect(Collectors.toCollection(LinkedHashSet::new));
         final Map<String, PropertyGenModel> getterMethodByPropertyName = properties.stream()
                 .collect(Collectors.toMap(PropertyGenModel::getName, Function.identity()));
         final List<PropertyGenModel> parameterTemplates = factoryParameterNames.stream()
                 .map(getterMethodByPropertyName::get)
+                .filter(Objects::nonNull)
                 .collect(Collectors.toList());
         assert factoryParameterNames.size() == parameterTemplates.size();
 
@@ -250,14 +256,15 @@ abstract class BaseAbstractGenerator {
                 .map(p -> factoryParameterNames.contains(p.getName()) ? p.getJavaIdentifier() : "null")
                 .collect(Collectors.joining(", "));
 
-        final MethodSpec.Builder builder = MethodSpec.methodBuilder(factoryMethod.methodName()).addModifiers(Modifier.PUBLIC, Modifier.STATIC)
+        final MethodSpec.Builder builder = MethodSpec.methodBuilder(methodName).addModifiers(Modifier.PUBLIC, Modifier.STATIC)
                 .returns(returnType)
                 .addJavadoc("Creates a new object initialized with the given values.\n\n");
         parameterTemplates.forEach(p -> builder.addJavadoc("@param $L initial value for the $L property\n",
-                p.getJavaIdentifier(), p.getJavadocLinkTag()));
+                p.getJavaIdentifier(),
+                p.getJavadocLinkTag()));
         builder.addJavadoc("@return new object initialized with the given values\n");
         return builder
-                .addParameters(createParameters(parameterTemplates, factoryMethod.useLowercaseBooleans(), false))
+                .addParameters(createParameters(parameterTemplates, useLowercaseBooleans, false))
                 .addCode("return new $L($L);\n", returnType.simpleName(), callArguments)
                 .build();
     }
@@ -266,6 +273,24 @@ abstract class BaseAbstractGenerator {
         final ParameterSpec templateParameter = ParameterSpec.builder(ClassName.get(typeElement), "template", Modifier.FINAL).build();
         final String callArguments = propertyMethods.stream()
                 .map(getterMethod -> String.format("template.%s()", getterMethod.getSimpleName()))
+                .collect(Collectors.joining(", "));
+        return MethodSpec.methodBuilder("of").addModifiers(Modifier.PUBLIC, Modifier.STATIC)
+                .returns(returnType)
+                .addJavadoc("Creates a new object initialized with the fields of the template parameter.\n\n")
+                .addJavadoc("@param template the template\n")
+                .addJavadoc("@return a new object initialized from the template\n")
+                .addParameter(templateParameter)
+                .addCode("return new $L($L);\n", returnType.simpleName(), callArguments)
+                .build();
+    }
+
+    protected MethodSpec createCopyFactoryMethod(final TypeElement typeElement, final ClassName returnType, final List<ExecutableElement> propertyMethods,List<PropertyGenModel> propertyGenModels) {
+        final ParameterSpec templateParameter = ParameterSpec.builder(ClassName.get(typeElement), "template", Modifier.FINAL).build();
+        Map<String,String> map = propertyMethods.stream().collect(Collectors.toMap(executable -> executable.getSimpleName().toString().toLowerCase(),element -> element.getSimpleName().toString()));
+
+        final String callArguments = propertyGenModels.stream()
+                .map(PropertyGenModel::getName)
+                .map(propName -> map.get("get"+propName.toLowerCase()) == null ? "null" : String.format("template.%s()", map.get("get"+propName.toLowerCase())))
                 .collect(Collectors.joining(", "));
         return MethodSpec.methodBuilder("of").addModifiers(Modifier.PUBLIC, Modifier.STATIC)
                 .returns(returnType)

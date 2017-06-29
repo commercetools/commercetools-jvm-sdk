@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.squareup.javapoet.ClassName;
 import com.squareup.javapoet.ParameterizedTypeName;
 import com.squareup.javapoet.TypeName;
+import io.sphere.sdk.models.Reference;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.annotation.Nullable;
@@ -31,13 +32,16 @@ public class PropertyGenModel {
 
     private final boolean optional;
 
-    private PropertyGenModel(final String name, final String jsonName, final TypeMirror type, final String javaDocLinkTag, final boolean optional) {
+    private final boolean useReference;
+
+    private PropertyGenModel(final String name, final String jsonName, final TypeMirror type, final String javaDocLinkTag, final boolean optional,final boolean useReference) {
         this.name = name;
         this.jsonName = jsonName;
         this.javaIdentifier = (SourceVersion.isKeyword(name) ? "_" : "") + name;
         this.type = type;
         this.javadocLinkTag = javaDocLinkTag;
         this.optional = optional;
+        this.useReference =useReference;
     }
 
     public String getName() {
@@ -58,7 +62,12 @@ public class PropertyGenModel {
     }
 
     public TypeName getType() {
-        return TypeName.get(type);
+        if(useReference){
+            return ParameterizedTypeName.get(ClassName.get(Reference.class),TypeName.get(type));
+        }
+        else {
+            return TypeName.get(type);
+        }
     }
 
     /**
@@ -157,9 +166,13 @@ public class PropertyGenModel {
         final String jsonName = jsonProperty != null ? jsonProperty.value() : null;
         final String javadocLinkTag =
                 String.format("{@link %s#%s()}", getterMethod.getEnclosingElement().getSimpleName(), getterMethod.getSimpleName());
-        return new PropertyGenModel(getPropertyName(getterMethod), jsonName, getterMethod.getReturnType(), javadocLinkTag, optional);
+        return new PropertyGenModel(getPropertyName(getterMethod), jsonName, getterMethod.getReturnType(), javadocLinkTag, optional,false);
     }
 
+
+    public static PropertyGenModel of(final String name, final String jsonName, final TypeMirror type, final String javaDocLinkTag, final boolean optional ,boolean useReference) {
+        return new PropertyGenModel(name, jsonName, type, javaDocLinkTag, optional,useReference);
+    }
     /**
      * Returns the property name of the given property method.
      *
