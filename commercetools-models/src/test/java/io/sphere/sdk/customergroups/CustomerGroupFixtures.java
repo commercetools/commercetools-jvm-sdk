@@ -13,7 +13,9 @@ import static io.sphere.sdk.test.SphereTestUtils.*;
 public class CustomerGroupFixtures {
     public static void withCustomerGroup(final BlockingSphereClient client, final Consumer<CustomerGroup> consumer) {
         final String name = randomString();
-        final CustomerGroup customerGroup = client.executeBlocking(CustomerGroupCreateCommand.of(name));
+        final String key = randomKey();
+        final CustomerGroupDraft customerGroupDraft = CustomerGroupDraft.of(name,key);
+        final CustomerGroup customerGroup = client.executeBlocking(CustomerGroupCreateCommand.of(customerGroupDraft));
         consumer.accept(customerGroup);
         final Optional<CustomerGroup> customerGroupOptional = Optional.ofNullable(client.executeBlocking(CustomerGroupByIdGet.of(customerGroup.getId())));
         customerGroupOptional.ifPresent(group -> client.executeBlocking(CustomerGroupDeleteCommand.of(group)));
