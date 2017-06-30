@@ -7,7 +7,7 @@ import org.junit.Test;
 import static io.sphere.sdk.customergroups.CustomerGroupFixtures.withCustomerGroup;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class CustomerGroupByKeyIntegrationTest extends IntegrationTest {
+public class CustomerGroupByKeyGetIntegrationTest extends IntegrationTest {
     @Test
     public void execution() {
         withCustomerGroup(client(), customerGroup -> {
