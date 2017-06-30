@@ -25,11 +25,9 @@ import java.lang.annotation.Annotation;
  */
 public class UpdateActionGenerator extends AbstractGenerator<ExecutableElement> {
 
-    private final Messager messager;
 
     public UpdateActionGenerator(final Elements elements, final Types types, final Messager messager) {
-        super(elements, types);
-        this.messager = messager;
+        super(elements, types, messager);
     }
 
     @Override
@@ -38,9 +36,9 @@ public class UpdateActionGenerator extends AbstractGenerator<ExecutableElement> 
     }
 
     @Override
-    public TypeSpec generateType(final ExecutableElement annotatedTypeElement) {
+    public TypeSpec generateType(final ExecutableElement propertyMethod) {
 
-        final TypeSpec typeSpecList = generateUpdateAction(annotatedTypeElement);
+        final TypeSpec typeSpecList = generateUpdateAction(propertyMethod);
 
         return typeSpecList;
     }

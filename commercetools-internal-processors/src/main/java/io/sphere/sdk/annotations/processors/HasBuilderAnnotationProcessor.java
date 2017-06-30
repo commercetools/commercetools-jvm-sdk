@@ -19,7 +19,7 @@ public final class HasBuilderAnnotationProcessor extends ClassLevelAnnotationPro
 
     @Override
     protected void generate(final TypeElement typeElement) {
-        final JavaFile javaFile = new HasBuilderGenerator(processingEnv.getElementUtils(), processingEnv.getTypeUtils()).generate(typeElement);
+        final JavaFile javaFile = new HasBuilderGenerator(processingEnv.getElementUtils(), processingEnv.getTypeUtils(),processingEnv.getMessager()).generate(typeElement);
         writeClass(javaFile);
     }
 }

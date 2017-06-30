@@ -17,11 +17,9 @@ import java.util.stream.Collectors;
  */
 public class CustomUpdateActionsGenerator extends AbstractMultipleFileGenerator<ExecutableElement> {
 
-    private final Messager messager;
 
     public CustomUpdateActionsGenerator(final Elements elements, final Types types, final Messager messager) {
-        super(elements, types);
-        this.messager = messager;
+        super(elements, types, messager);
     }
 
     @Override

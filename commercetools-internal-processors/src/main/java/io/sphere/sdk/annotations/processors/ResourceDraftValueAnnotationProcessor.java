@@ -23,10 +23,10 @@ public final class ResourceDraftValueAnnotationProcessor extends ClassLevelAnnot
     protected void generate(final TypeElement typeElement) {
         final ResourceDraftValueValidator validator = new ResourceDraftValueValidator(processingEnv);
         if (validator.isValid(typeElement)) {
-            final JavaFile javaFile = new ResourceDraftValueGenerator(processingEnv.getElementUtils(), processingEnv.getTypeUtils()).generate(typeElement);
+            final JavaFile javaFile = new ResourceDraftValueGenerator(processingEnv.getElementUtils(), processingEnv.getTypeUtils(),processingEnv.getMessager()).generate(typeElement);
             writeClass(javaFile);
 
-            final JavaFile javaFileBuilder = new DraftBuilderGenerator(processingEnv.getElementUtils(),processingEnv.getTypeUtils()).generate(typeElement);
+            final JavaFile javaFileBuilder = new DraftBuilderGenerator(processingEnv.getElementUtils(),processingEnv.getTypeUtils(),processingEnv.getMessager()).generate(typeElement);
             writeClass(javaFileBuilder);
         }
     }

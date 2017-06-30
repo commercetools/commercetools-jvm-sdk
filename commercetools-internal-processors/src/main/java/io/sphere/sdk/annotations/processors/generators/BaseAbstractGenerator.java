@@ -8,6 +8,7 @@ import io.sphere.sdk.annotations.processors.models.PropertyGenModel;
 import io.sphere.sdk.annotations.processors.models.TypeUtils;
 
 import javax.annotation.Nullable;
+import javax.annotation.processing.Messager;
 import javax.lang.model.SourceVersion;
 import javax.lang.model.element.Element;
 import javax.lang.model.element.ExecutableElement;
@@ -15,6 +16,7 @@ import javax.lang.model.element.Modifier;
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.util.Elements;
 import javax.lang.model.util.Types;
+import javax.tools.Diagnostic;
 import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -26,12 +28,14 @@ import java.util.stream.Stream;
 abstract class BaseAbstractGenerator {
     protected final Elements elements;
     protected final Types types;
+    protected final Messager messager;
 
     protected final TypeUtils typeUtils;
 
-    BaseAbstractGenerator(final Elements elements, final Types types) {
+    BaseAbstractGenerator(final Elements elements, final Types types, Messager messager) {
         this.elements = elements;
         this.types = types;
+        this.messager = messager;
         this.typeUtils = new TypeUtils(elements, types);
     }
 
@@ -238,19 +242,21 @@ abstract class BaseAbstractGenerator {
     }
 
     protected MethodSpec createFactoryMethod(final FactoryMethod factoryMethod, final List<PropertyGenModel> properties, final ClassName returnType) {
-        return createFactoryMethod(properties,returnType,factoryMethod.parameterNames(),factoryMethod.methodName(),factoryMethod.useLowercaseBooleans());
+        return createFactoryMethod(properties,returnType,Arrays.asList(factoryMethod.parameterNames()),factoryMethod.methodName(),factoryMethod.useLowercaseBooleans());
     }
 
-    protected MethodSpec createFactoryMethod(final List<PropertyGenModel> properties, final ClassName returnType, final String[] parametersName,
+    protected MethodSpec createFactoryMethod(final List<PropertyGenModel> properties, final ClassName returnType, final List<String> parameterNames,
                                              final String methodName,final boolean useLowercaseBooleans) {
-        final Set<String> factoryParameterNames = Stream.of(parametersName).collect(Collectors.toCollection(LinkedHashSet::new));
+        final Set<String> factoryParameterNames = new LinkedHashSet<>(parameterNames);
         final Map<String, PropertyGenModel> getterMethodByPropertyName = properties.stream()
                 .collect(Collectors.toMap(PropertyGenModel::getName, Function.identity()));
         final List<PropertyGenModel> parameterTemplates = factoryParameterNames.stream()
                 .map(getterMethodByPropertyName::get)
                 .filter(Objects::nonNull)
                 .collect(Collectors.toList());
-        assert factoryParameterNames.size() == parameterTemplates.size();
+        if (factoryParameterNames.size() != parameterTemplates.size()) {
+            messager.printMessage(Diagnostic.Kind.ERROR, "for factory method '" + methodName + "', " + (factoryParameterNames.size() - parameterTemplates.size()) + " properties could not be found!");
+        }
 
         final String callArguments = properties.stream()
                 .map(p -> factoryParameterNames.contains(p.getName()) ? p.getJavaIdentifier() : "null")

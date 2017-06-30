@@ -23,7 +23,9 @@ import javax.lang.model.type.TypeMirror;
 import javax.lang.model.util.Elements;
 import javax.lang.model.util.Types;
 import javax.tools.Diagnostic;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.stream.Collectors;
 
 /**
@@ -31,11 +33,9 @@ import java.util.stream.Collectors;
  */
 public class CustomUpdateActionGenerator extends AbstractGenerator<ExecutableElement> {
 
-    private final Messager messager;
 
-    public CustomUpdateActionGenerator(Elements elements, Types types, Messager messager) {
-        super(elements, types);
-        this.messager = messager;
+    public CustomUpdateActionGenerator(final Elements elements, final Types types, final Messager messager) {
+        super(elements, types, messager);
 
     }
 
@@ -53,10 +53,10 @@ public class CustomUpdateActionGenerator extends AbstractGenerator<ExecutableEle
     }
 
     protected TypeSpec generateUpdateAction(final ExecutableElement propertyMethod) {
-        return generateUpdateAction(propertyMethod,propertyMethod.getAnnotation(HasCustomUpdateAction.class));
+        return generateUpdateAction(propertyMethod, propertyMethod.getAnnotation(HasCustomUpdateAction.class));
     }
 
-    protected TypeSpec generateUpdateAction(final ExecutableElement propertyMethod,HasCustomUpdateAction hasCustomUpdateActionInstance) {
+    protected TypeSpec generateUpdateAction(final ExecutableElement propertyMethod, HasCustomUpdateAction hasCustomUpdateActionInstance) {
 
         if (!(propertyMethod.getEnclosingElement() instanceof TypeElement)) {
             messager.printMessage(Diagnostic.Kind.ERROR, "@" + HasCustomUpdateAction.class.getSimpleName() + "Enclosing element should be a class");
@@ -105,15 +105,15 @@ public class CustomUpdateActionGenerator extends AbstractGenerator<ExecutableEle
                         .addMember("comments", "$S", "Generated from: " + annotatedEnclosingElement.getQualifiedName().toString()).build())
                 .addFields(fields)
                 .addMethods(getters)
-                .addMethod(createConstructor(propertyGenModelList, concreteClassName,actionName, isAbstract ? Modifier.PROTECTED : Modifier.PRIVATE))
-                .addMethod(createFactoryMethod(propertyGenModelList, concreteClassName, allParamsNames, "of", false))
+                .addMethod(createConstructor(propertyGenModelList, concreteClassName, actionName, isAbstract ? Modifier.PROTECTED : Modifier.PRIVATE))
+                .addMethod(createFactoryMethod(propertyGenModelList, concreteClassName, Arrays.asList(allParamsNames), "of", false))
                 .addMethods(createFactoryMethods(factoryMethods, propertyGenModelList, concreteClassName))
                 .addMethods(createCopyFactoryMethods(copyFactoryMethods, concreteClassName, propertyGenModelList))
                 .addMethods(optionalAttributesSetters)
                 .addSuperinterfaces(superInterfaces);
 
         if (allAttributesOptional)
-            typeSpecBuilder.addMethod(createFactoryMethod(propertyGenModelList, concreteClassName, new String[]{}, "ofUnset", false));
+            typeSpecBuilder.addMethod(createFactoryMethod(propertyGenModelList, concreteClassName, Arrays.asList(), "ofUnset", false));
 
         return typeSpecBuilder.build();
     }
@@ -129,7 +129,7 @@ public class CustomUpdateActionGenerator extends AbstractGenerator<ExecutableEle
         return Arrays.asList();
     }
 
-    protected MethodSpec createConstructor(final List<PropertyGenModel> properties, final ClassName actionName,String actionString, final Modifier... modifiers) {
+    protected MethodSpec createConstructor(final List<PropertyGenModel> properties, final ClassName actionName, String actionString, final Modifier... modifiers) {
         final List<ParameterSpec> parameters = properties.stream()
                 .map(this::createConstructorParameter)
                 .collect(Collectors.toList());

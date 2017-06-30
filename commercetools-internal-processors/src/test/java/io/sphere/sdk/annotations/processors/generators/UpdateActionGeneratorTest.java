@@ -18,20 +18,16 @@ import java.util.Optional;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 
-public class UpdateActionGeneratorTest  {
+public class UpdateActionGeneratorTest  extends AbstractGeneratorTest {
 
-    @Rule
-    public CompilationRule compilationRule = new CompilationRule();
-
-    protected AbstractGenerator generator;
 
     @Before
     public void setup() {
-        generator = new UpdateActionGenerator(compilationRule.getElements(), compilationRule.getTypes(),null);
+        generator = new UpdateActionGenerator(compilationRule.getElements(), compilationRule.getTypes(),messager);
     }
 
     @Test
-    public void generateExampleUpdaupdateActionNameteActionForNonNullable() throws Exception {
+    public void generateExampleUpdateActionNameActionForNonNullable() throws Exception {
         final String content = generateAsString(ExampleResourceWithUpdateAction.class,"getLocale");
         assertThat(content).isEqualTo(expectedContent(ExampleResourceWithUpdateAction.class,"getLocale"));
     }

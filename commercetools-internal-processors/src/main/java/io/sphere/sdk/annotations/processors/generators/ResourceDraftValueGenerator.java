@@ -9,6 +9,7 @@ import io.sphere.sdk.models.Referenceable;
 
 import javax.annotation.Generated;
 import javax.annotation.Nullable;
+import javax.annotation.processing.Messager;
 import javax.lang.model.element.ExecutableElement;
 import javax.lang.model.element.Modifier;
 import javax.lang.model.element.TypeElement;
@@ -23,8 +24,8 @@ import static org.apache.commons.lang3.StringUtils.capitalize;
 
 public class ResourceDraftValueGenerator extends AbstractGenerator<TypeElement> {
 
-    public ResourceDraftValueGenerator(final Elements elements, final Types types) {
-        super(elements, types);
+    public ResourceDraftValueGenerator(final Elements elements, final Types types,final Messager messager) {
+        super(elements, types,messager);
     }
 
     @Override

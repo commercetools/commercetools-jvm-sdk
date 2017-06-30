@@ -23,7 +23,7 @@ public final class ResourceValueAnnotationProcessor extends ClassLevelAnnotation
         final ResourceValueValidator validator = new ResourceValueValidator(processingEnv);
         if (validator.isValid(typeElement)) {
 
-            final JavaFile javaFile = new ResourceValueImplGenerator(processingEnv.getElementUtils(), processingEnv.getTypeUtils()).generate(typeElement);
+            final JavaFile javaFile = new ResourceValueImplGenerator(processingEnv.getElementUtils(), processingEnv.getTypeUtils(),processingEnv.getMessager()).generate(typeElement);
 
             writeClass(javaFile);
         }

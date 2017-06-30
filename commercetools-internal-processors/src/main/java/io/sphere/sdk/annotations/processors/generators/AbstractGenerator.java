@@ -3,6 +3,7 @@ package io.sphere.sdk.annotations.processors.generators;
 import com.squareup.javapoet.JavaFile;
 import com.squareup.javapoet.TypeSpec;
 
+import javax.annotation.processing.Messager;
 import javax.lang.model.element.Element;
 import javax.lang.model.element.ExecutableElement;
 import javax.lang.model.element.TypeElement;
@@ -16,8 +17,8 @@ import javax.lang.model.util.Types;
  */
 abstract class AbstractGenerator<T extends Element> extends BaseAbstractGenerator {
 
-    AbstractGenerator(final Elements elements, final Types types) {
-        super(elements, types);
+    AbstractGenerator(final Elements elements, final Types types, Messager messager) {
+        super(elements, types,messager);
     }
 
     /**

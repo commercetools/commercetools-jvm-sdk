@@ -9,6 +9,7 @@ import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Referenceable;
 import org.apache.commons.lang3.StringUtils;
 
+import javax.annotation.processing.Messager;
 import javax.lang.model.element.ExecutableElement;
 import javax.lang.model.element.Modifier;
 import javax.lang.model.element.TypeElement;
@@ -26,8 +27,8 @@ import java.util.stream.Collectors;
 abstract class AbstractBuilderGenerator<A extends Annotation> extends AbstractGenerator<TypeElement> {
     protected final Class<A> annotationType;
 
-    AbstractBuilderGenerator(final Elements elements, final Types types, final Class<A> annotationType) {
-        super(elements, types);
+    AbstractBuilderGenerator(final Elements elements, final Types types, Messager messager, final Class<A> annotationType) {
+        super(elements, types, messager);
         this.annotationType = annotationType;
     }
 

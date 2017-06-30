@@ -19,7 +19,7 @@ import java.util.Optional;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 
-public class CustomUpdateActionGeneratorTest  {
+public class CustomUpdateActionGeneratorTest  extends AbstractGeneratorTest{
 
     @Rule
     public CompilationRule compilationRule = new CompilationRule();
@@ -28,7 +28,7 @@ public class CustomUpdateActionGeneratorTest  {
 
     @Before
     public void setup() {
-        generator = new CustomUpdateActionGenerator(compilationRule.getElements(), compilationRule.getTypes(),null);
+        generator = new CustomUpdateActionGenerator(compilationRule.getElements(), compilationRule.getTypes(),messager);
     }
 
     @Test
