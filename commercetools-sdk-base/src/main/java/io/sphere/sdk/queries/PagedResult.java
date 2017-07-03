@@ -59,7 +59,7 @@ public interface PagedResult<T> {
         if (getOffset() == null) {
             throw new UnsupportedOperationException("Can only be used if the offset is known.");
         }
-        if (getCount() == null || getCount() == 0) {
+        if (getCount() == null || getCount() <= 0) {
             throw new UnsupportedOperationException("Can only be used if the count is known, and is greater than 0");
         }
         return getOffset() / getCount();
