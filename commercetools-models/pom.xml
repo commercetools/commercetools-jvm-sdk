@@ -3,11 +3,11 @@
     <parent>
         <groupId>com.commercetools.sdk.jvm.core</groupId>
         <artifactId>commercetools-jvm-sdk</artifactId>
-        <version>1.19.1-SNAPSHOT</version>
+        <version>1.20.1-SNAPSHOT</version>
     </parent>
     <artifactId>commercetools-models</artifactId>
     <packaging>jar</packaging>
-    <version>1.19.1-SNAPSHOT</version>
+    <version>1.20.1-SNAPSHOT</version>
     <licenses>
         <license>
             <name>Apache License, Version 2.0</name>
@@ -57,6 +57,12 @@
             <groupId>com.amazonaws</groupId>
             <artifactId>aws-java-sdk</artifactId>
             <version>1.11.116</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.microsoft.azure</groupId>
+            <artifactId>azure-servicebus</artifactId>
+            <version>1.0.0-PREVIEW-2</version>
             <scope>test</scope>
         </dependency>
     </dependencies>

@@ -31,7 +31,8 @@ public final class ChangeName extends UpdateActionImpl<MyResource> {
   /**
    * Creates a new update action from the given parameters.
    *
-   * @param name the {@code name} property {@link MyResource#getName()}
+   * @param name the {@code name} property {@link MyResource#getName()}.
+   * @return the {@code ChangeName} update action.
    */
   public static ChangeName of(final String name) {
     return new ChangeName(name);

@@ -8,7 +8,6 @@ import io.sphere.sdk.carts.commands.CartCreateCommand;
 import io.sphere.sdk.carts.commands.CartDeleteCommand;
 import io.sphere.sdk.carts.commands.CartUpdateCommand;
 import io.sphere.sdk.carts.commands.updateactions.*;
-import io.sphere.sdk.carts.queries.CartByIdGet;
 import io.sphere.sdk.client.BlockingSphereClient;
 import io.sphere.sdk.commands.UpdateAction;
 import io.sphere.sdk.customers.Customer;
@@ -217,5 +216,17 @@ public class CartFixtures {
             client.executeBlocking(DiscountCodeDeleteCommand.of(discountCode));
             client.executeBlocking(CartDiscountDeleteCommand.of(cartDiscount));
         });
+    }
+
+    public static void withCartWithLineItems(final BlockingSphereClient client, final List<LineItemDraft> lineItemsDraft, final UnaryOperator<Cart> op) {
+        final CartDraftDsl cartDraft = CartDraft.of(EUR)
+                .withTaxMode(TaxMode.EXTERNAL)
+                .withCountry(DE)
+                .withShippingAddress(Address.of(DE))
+                .withLineItems(lineItemsDraft);
+        final CartCreateCommand cmd = CartCreateCommand.of(cartDraft);
+        final Cart cart = client.executeBlocking(cmd);
+        final Cart updatedCart = op.apply(cart);
+        client.executeBlocking(CartDeleteCommand.of(updatedCart));
     }
 }

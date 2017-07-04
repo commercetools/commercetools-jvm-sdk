@@ -3,6 +3,7 @@ package io.sphere.sdk.producttypes.commands;
 import io.sphere.sdk.models.EnumValue;
 import io.sphere.sdk.models.LocalizedEnumValue;
 import io.sphere.sdk.models.LocalizedString;
+import io.sphere.sdk.models.TextInputHint;
 import io.sphere.sdk.products.attributes.*;
 import io.sphere.sdk.producttypes.ProductType;
 import io.sphere.sdk.producttypes.ProductTypeDraft;
@@ -21,6 +22,26 @@ import static java.util.Locale.GERMAN;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class ProductTypeUpdateCommandIntegrationTest extends IntegrationTest {
+
+    @Test
+    public void setInputTip() throws Exception {
+        withUpdateableProductType(client(), productType -> {
+            final String attributeName = "attributeName";
+            final AttributeDefinition attributeDefinition = AttributeDefinitionBuilder
+                    .of(attributeName, randomSlug(), StringAttributeType.of())
+                    .build();
+            assertThat(productType.getAttribute(attributeName)).isNull();
+
+            final LocalizedString inputTip = en("inputTip");
+            final ProductType updatedProductType =
+                    client().executeBlocking(ProductTypeUpdateCommand.of(productType,
+                            asList(AddAttributeDefinition.of(attributeDefinition), SetInputTip.of(attributeName, inputTip))));
+            assertThat(updatedProductType.getAttribute(attributeName).getInputTip()).isEqualTo(inputTip);
+            
+            return updatedProductType;
+        });
+    }
+
     @Test
     public void changeName() throws Exception {
         withUpdateableProductType(client(), productType -> {
@@ -99,7 +120,7 @@ public class ProductTypeUpdateCommandIntegrationTest extends IntegrationTest {
 
             assertThat(updatedProductType.getAttribute(attributeName).getAttributeType())
                     .isInstanceOf(EnumAttributeType.class)
-                    .matches(type -> ((EnumAttributeType)type).getValues().contains(value));
+                    .matches(type -> ((EnumAttributeType) type).getValues().contains(value));
 
             return updatedProductType;
         });
@@ -119,7 +140,7 @@ public class ProductTypeUpdateCommandIntegrationTest extends IntegrationTest {
 
             assertThat(updatedProductType.getAttribute(attributeName).getAttributeType())
                     .isInstanceOf(LocalizedEnumAttributeType.class)
-                    .matches(type -> ((LocalizedEnumAttributeType)type).getValues().contains(value));
+                    .matches(type -> ((LocalizedEnumAttributeType) type).getValues().contains(value));
 
             return updatedProductType;
         });
@@ -193,6 +214,28 @@ public class ProductTypeUpdateCommandIntegrationTest extends IntegrationTest {
             final ProductType updatedProductType = client().executeBlocking(cmd);
 
             assertThat(updatedProductType.getAttribute(attributeName).isSearchable()).isTrue();
+
+            return updatedProductType;
+        });
+    }
+
+    @Test
+    public void changeInputHint() throws Exception {
+        final String key = randomKey();
+        final String attributeName = "stringAttribute";
+        final AttributeDefinition attributeDefinition = AttributeDefinitionBuilder
+                .of(attributeName, randomSlug(), StringAttributeType.of())
+                .inputHint(TextInputHint.SINGLE_LINE)
+                .build();
+        final List<AttributeDefinition> attributes = singletonList(attributeDefinition);
+        withUpdateableProductType(client(), () -> ProductTypeDraft.of(key, key, key, attributes), productType -> {
+            assertThat(productType.getAttribute(attributeName).getInputHint()).isEqualTo(TextInputHint.SINGLE_LINE);
+
+            final ProductTypeUpdateCommand cmd =
+                    ProductTypeUpdateCommand.of(productType, ChangeInputHint.of(attributeName, TextInputHint.MULTI_LINE));
+            final ProductType updatedProductType = client().executeBlocking(cmd);
+
+            assertThat(updatedProductType.getAttribute(attributeName).getInputHint()).isEqualTo(TextInputHint.MULTI_LINE);
 
             return updatedProductType;
         });
