@@ -16,7 +16,7 @@ import static java.util.Objects.requireNonNull;
 /**
  * Internal class.
  */
-public final class MetaModelUpdateCommandDslBuilder<T extends ResourceView<T, T>, C extends UpdateCommandDsl<T, C>, E> extends Base implements Builder<C>{
+public final class MetaModelUpdateCommandDslBuilder<T extends ResourceView<T, T>, C extends UpdateCommandDsl<T, C>, E> extends Base implements Builder<C> {
     Versioned<T> versioned;
     List<? extends UpdateAction<T>> updateActions;
     JavaType javaType;
@@ -74,6 +74,11 @@ public final class MetaModelUpdateCommandDslBuilder<T extends ResourceView<T, T>
 
     MetaModelUpdateCommandDslBuilder<T, C, E> additionalHttpQueryParameters(final List<NameValuePair> additionalHttpQueryParameters) {
         this.additionalHttpQueryParameters = additionalHttpQueryParameters;
+        return this;
+    }
+
+    MetaModelUpdateCommandDslBuilder<T, C, E> updateActions(final List<? extends UpdateAction<T>> updateActions) {
+        this.updateActions = updateActions;
         return this;
     }
 }

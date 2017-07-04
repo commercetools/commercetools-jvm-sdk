@@ -164,7 +164,7 @@ public class CategoryUpdateCommandIntegrationTest extends IntegrationTest {
     public void readAccessForUpdateActions() {
         final List<UpdateAction<Category>> updateActions = asList(SetMetaTitle.of(randomSlug()), SetMetaDescription.of(randomSlug()));
         final UpdateCommand<Category> updateCommand = CategoryUpdateCommand.of(Versioned.of("id", 4L), updateActions);
-        assertThat(updateCommand.getUpdateActions()).isEqualTo(updateActions);
+        assertThat(updateCommand.updateActions()).isEqualTo(updateActions);
     }
 
     @Test
