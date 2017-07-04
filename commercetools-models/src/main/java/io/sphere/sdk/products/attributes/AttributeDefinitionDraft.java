@@ -15,7 +15,10 @@ import javax.annotation.Nullable;
  * For construction see {@link AttributeDefinitionDraftBuilder}.
  */
 @JsonDeserialize(as = AttributeDefinitionDraftDsl.class)
-@ResourceDraftValue(factoryMethods = @FactoryMethod(parameterNames = {"attributeType", "name", "label", "required"}))
+@ResourceDraftValue(
+        factoryMethods = @FactoryMethod(parameterNames = {"attributeType", "name", "label", "required"}),
+        abstractBuilderClass = true
+)
 public interface AttributeDefinitionDraft {
 
     @JsonProperty("type")
