@@ -30,4 +30,6 @@ public interface UpdateCommandDsl<T extends ResourceView<T, T>, C extends Update
      * @return the new update command
      */
     C plusUpdateActions(List<? extends UpdateAction<T>> updateActions);
+
+    C withUpdateActions(List<? extends UpdateAction<T>> updateActions);
 }

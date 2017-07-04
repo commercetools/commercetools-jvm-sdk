@@ -47,7 +47,7 @@ public final class SphereInternalUtils {
         return result;
     }
 
-    public static <T> List<T> listOf(List<T> first, List<T> second) {
+    public static <T> List<T> listOf(List<? extends T> first, List<? extends T> second) {
         final List<T> result = new ArrayList<>(second.size() + first.size());
         result.addAll(first);
         result.addAll(second);

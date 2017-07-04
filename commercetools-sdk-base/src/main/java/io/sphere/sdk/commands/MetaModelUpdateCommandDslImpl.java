@@ -81,7 +81,7 @@ public class MetaModelUpdateCommandDslImpl<T extends ResourceView<T, T>, C exten
         }
         final String additions = queryParametersToString(true);
         final String path = baseEndpointWithoutId + "/" + getVersioned().getId() + (additions.length() > 1 ? additions : "");
-        return HttpRequestIntent.of(HttpMethod.POST, path, toJsonString(new UpdateCommandBody<>(getVersioned().getVersion(), getUpdateActions())));
+        return HttpRequestIntent.of(HttpMethod.POST, path, toJsonString(new UpdateCommandBody<>(getVersioned().getVersion(), updateActions())));
     }
 
     private String queryParametersToString(final boolean urlEncoded) {
@@ -102,15 +102,20 @@ public class MetaModelUpdateCommandDslImpl<T extends ResourceView<T, T>, C exten
     }
 
     @Override
+    public C withUpdateActions(List<? extends UpdateAction<T>> updateActions) {
+         return copyBuilder().updateActions(updateActions).build();
+    }
+
+    @Override
     public C plusUpdateActions(final List<? extends UpdateAction<T>> updateActions) {
-        return copyBuilder().plusUpdateActions(updateActions).build();
+        return withUpdateActions(listOf(updateActions(),updateActions));
     }
 
     public Versioned<T> getVersioned() {
         return versioned;
     }
 
-    public List<? extends UpdateAction<T>> getUpdateActions() {
+    public List<? extends UpdateAction<T>> updateActions() {
         return updateActions;
     }
 

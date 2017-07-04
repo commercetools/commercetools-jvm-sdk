@@ -10,8 +10,6 @@ import io.sphere.sdk.models.Versioned;
 
 import java.util.List;
 import java.util.function.Function;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import static java.util.Objects.requireNonNull;
 
@@ -79,8 +77,8 @@ public final class MetaModelUpdateCommandDslBuilder<T extends ResourceView<T, T>
         return this;
     }
 
-    MetaModelUpdateCommandDslBuilder<T, C, E> plusUpdateActions(final List<? extends UpdateAction<T>> updateActions) {
-        this.updateActions = Stream.concat(this.updateActions.stream(), updateActions.stream()).collect(Collectors.toList());
+    MetaModelUpdateCommandDslBuilder<T, C, E> updateActions(final List<? extends UpdateAction<T>> updateActions) {
+        this.updateActions = updateActions;
         return this;
     }
 }
