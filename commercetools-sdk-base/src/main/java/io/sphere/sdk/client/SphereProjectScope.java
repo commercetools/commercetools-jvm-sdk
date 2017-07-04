@@ -1,5 +1,6 @@
 package io.sphere.sdk.client;
 
+@Deprecated
 public enum SphereProjectScope implements SphereScope {
 
     /**Grants full access to the APIs for the specified project.*/
