@@ -72,14 +72,14 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
             final Image image = createExternalImage();
             final AddExternalImage updateAction1 = AddExternalImage.of(image, MASTER_VARIANT_ID);
             final ProductUpdateCommand command = ProductUpdateCommand.of(product, updateAction1);
-            assertThat(command.updateActions()).hasSize(1);
-            assertThat(command.updateActions().get(0)).isEqualTo(updateAction1);
+            assertThat(command.getUpdateActions()).hasSize(1);
+            assertThat(command.getUpdateActions().get(0)).isEqualTo(updateAction1);
 
             final LocalizedString localizedName = en("New Name");
             final ChangeName updateAction2 = ChangeName.of(localizedName);
             final ProductUpdateCommand updatedCommand = command.plusUpdateActions(asList(updateAction2));
-            assertThat(updatedCommand.updateActions()).hasSize(2);
-            assertThat(updatedCommand.updateActions().get(1)).isEqualTo(updateAction2);
+            assertThat(updatedCommand.getUpdateActions()).hasSize(2);
+            assertThat(updatedCommand.getUpdateActions().get(1)).isEqualTo(updateAction2);
 
             final Product updatedProduct = client().executeBlocking(updatedCommand);
             assertThat(updatedProduct.getMasterData().getStaged().getMasterVariant().getImages()).isEqualTo(asList(image));
