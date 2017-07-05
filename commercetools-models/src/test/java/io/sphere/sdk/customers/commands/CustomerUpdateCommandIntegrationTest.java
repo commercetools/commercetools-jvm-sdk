@@ -25,6 +25,57 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @NotThreadSafe
 public class CustomerUpdateCommandIntegrationTest extends CustomerIntegrationTest {
+
+    @Test
+    public void setFirstName() {
+        withCustomer(client(), customer -> {
+            String newFirstName = "Jane";
+            assertThat(customer.getFirstName()).isNotEqualTo(newFirstName);
+            final Customer updatedCustomer = client().executeBlocking(CustomerUpdateCommand.of(customer, SetFirstName.of(newFirstName)));
+            assertThat(updatedCustomer.getFirstName()).isEqualTo(newFirstName);
+        });
+    }
+
+    @Test
+    public void setLastName() {
+        withCustomer(client(), customer -> {
+            String newLastName = "Doe";
+            assertThat(customer.getLastName()).isNotEqualTo(newLastName);
+            final Customer updatedCustomer = client().executeBlocking(CustomerUpdateCommand.of(customer, SetLastName.of(newLastName)));
+            assertThat(updatedCustomer.getLastName()).isEqualTo(newLastName);
+        });
+    }
+
+    @Test
+    public void setMiddleName() {
+        withCustomer(client(), customer -> {
+            String newMiddleName = "Petronella";
+            assertThat(customer.getMiddleName()).isNotEqualTo(newMiddleName);
+            final Customer updatedCustomer = client().executeBlocking(CustomerUpdateCommand.of(customer, SetMiddleName.of(newMiddleName)));
+            assertThat(updatedCustomer.getMiddleName()).isEqualTo(newMiddleName);
+        });
+    }
+
+    @Test
+    public void setSalutation() {
+        withCustomer(client(), customer -> {
+            String newSalutation = "Dear Dr.";
+            assertThat(customer.getSalutation()).isNotEqualTo(newSalutation);
+            final Customer updatedCustomer = client().executeBlocking(CustomerUpdateCommand.of(customer, SetSalutation.of(newSalutation)));
+            assertThat(updatedCustomer.getSalutation()).isEqualTo(newSalutation);
+        });
+    }
+
+    @Test
+    public void setTitle() {
+        withCustomer(client(), customer -> {
+            String newTitle = "Dr. Eng.";
+            assertThat(customer.getTitle()).isNotEqualTo(newTitle);
+            final Customer updatedCustomer = client().executeBlocking(CustomerUpdateCommand.of(customer, SetTitle.of(newTitle)));
+            assertThat(updatedCustomer.getTitle()).isEqualTo(newTitle);
+        });
+    }
+
     @Test
     public void changeName() throws Exception {
         withCustomer(client(), customer -> {
@@ -84,7 +135,7 @@ public class CustomerUpdateCommandIntegrationTest extends CustomerIntegrationTes
                     .isFalse();
             final Customer updatedCustomer = client().executeBlocking(CustomerUpdateCommand.of(customer, AddAddress.of(newAddress)));
             assertThat(updatedCustomer.getAddresses().stream()
-            .anyMatch(containsNewAddressPredicate)).isTrue();
+                    .anyMatch(containsNewAddressPredicate)).isTrue();
         });
     }
 
@@ -262,7 +313,7 @@ public class CustomerUpdateCommandIntegrationTest extends CustomerIntegrationTes
             assertThat(updatedCustomer.getShippingAddressIds()).containsExactly(addressId);
         });
     }
-    
+
     @Test
     public void addBillingAddressId() {
         final List<Address> addresses = asList(Address.of(DE), Address.of(FR));
@@ -297,7 +348,7 @@ public class CustomerUpdateCommandIntegrationTest extends CustomerIntegrationTes
             assertThat(updatedCustomer.getBillingAddressIds()).isEmpty();
         });
     }
-    
+
     @Test
     public void removeShippingAddressId() {
         final List<Address> addresses = asList(Address.of(DE), Address.of(FR));
