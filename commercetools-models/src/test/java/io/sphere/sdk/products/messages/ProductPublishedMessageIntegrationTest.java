@@ -34,6 +34,7 @@ public class ProductPublishedMessageIntegrationTest extends IntegrationTest {
                 assertThat(message.getResource().getId()).isEqualTo(product.getId());
                 assertThat(message.getProductProjection().getMasterVariant()).isEqualTo(publishedProduct.getMasterData().getCurrent().getMasterVariant());
                 assertThat(message.getResource().getObj().getMasterData().getCurrent().getSlug()).isEqualTo(message.getProductProjection().getSlug());
+                assertThat(message.getRemovedImageUrls().length).isEqualTo(0);
             });
             return publishedProduct;
         });
