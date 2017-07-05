@@ -2,7 +2,9 @@ package io.sphere.sdk.queries;
 
 import org.junit.Test;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -44,6 +46,19 @@ public class PagedQueryResultTest {
     }
 
     @Test
+    public void getResultPage() throws Exception {
+        final PagedQueryResult<Integer> queryResult = PagedQueryResult.of((long) 80, TOTAL, listOfSize(PAGE_SIZE));
+        assertThat(queryResult.getPage()).isEqualTo(3);
+    }
+
+
+    @Test(expected = UnsupportedOperationException.class)
+    public void getPageForEmptyResults() throws Exception {
+        final PagedQueryResult<Integer> queryResult = PagedQueryResult.of((long) 80, TOTAL, listOfSize(0));
+        queryResult.getPage();
+    }
+
+    @Test
     public void lastFilledOfManyResult() throws Exception {
         final PagedQueryResult<Integer> queryResult = PagedQueryResult.of(TOTAL - PAGE_SIZE, TOTAL, listOfSize(PAGE_SIZE));
         assertThat(queryResult.isFirst()).isFalse();
@@ -66,7 +81,7 @@ public class PagedQueryResultTest {
 
     @Test
     public void beforeLastOneResult() throws Exception {
-        final PagedQueryResult<Integer> queryResult = PagedQueryResult.of(99L, 101L, listOfSize(1));
+        final PagedQueryResult<Integer> queryResult = PagedQueryResult.of(95L, 101L, listOfSize(1));
         assertThat(queryResult.isFirst()).isFalse();
         assertThat(queryResult.isLast()).isFalse();
     }

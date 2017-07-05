@@ -50,18 +50,16 @@ public interface PagedResult<T> {
      }
 
     /**
-     * calculates the page number of the result.
+     * Calculates the page number of the result.
      *
      * @return the page number of the result.
      */
-    default long getPage() {
+    default Long getPage() {
 
-        if (getOffset() == null) {
-            throw new UnsupportedOperationException("Can only be used if the offset is known.");
-        }
-        if (getCount() == null || getCount() <= 0) {
+        if (getCount() == 0) {
             throw new UnsupportedOperationException("Can only be used if the count is known, and is greater than 0");
         }
+
         return getOffset() / getCount();
     }
 
