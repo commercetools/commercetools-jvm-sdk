@@ -81,7 +81,7 @@ public class PagedQueryResultTest {
 
     @Test
     public void beforeLastOneResult() throws Exception {
-        final PagedQueryResult<Integer> queryResult = PagedQueryResult.of(95L, 101L, listOfSize(1));
+        final PagedQueryResult<Integer> queryResult = PagedQueryResult.of(99L, 101L, listOfSize(1));
         assertThat(queryResult.isFirst()).isFalse();
         assertThat(queryResult.isLast()).isFalse();
     }
