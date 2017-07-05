@@ -17,8 +17,8 @@ import javax.lang.model.util.Types;
  */
 abstract class AbstractGenerator<T extends Element> extends BaseAbstractGenerator {
 
-    AbstractGenerator(final Elements elements, final Types types, Messager messager) {
-        super(elements, types,messager);
+    AbstractGenerator(final Elements elements, final Types types, final Messager messager) {
+        super(elements, types, messager);
     }
 
     /**

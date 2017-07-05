@@ -15,7 +15,8 @@ public class FakeMessager implements Messager {
 
     private final SphereInternalLogger logger = SphereInternalLogger.getLogger(this.getClass());
 
-    public FakeMessager() {}
+    public FakeMessager() {
+    }
 
     private void log(String message) {
         logger.trace(() -> message);
@@ -23,38 +24,30 @@ public class FakeMessager implements Messager {
 
 
     public void printMessage(Diagnostic.Kind kind, CharSequence msg) {
-
         printArgs(kind, msg);
-
     }
 
 
     public void printMessage(Diagnostic.Kind kind, CharSequence msg, Element e) {
-
         printArgs(kind, msg, e);
-
     }
 
 
     public void printMessage(Diagnostic.Kind kind, CharSequence msg, Element e, AnnotationMirror a) {
-
         printArgs(kind, msg, e, a);
-
     }
 
 
     public void printMessage(Diagnostic.Kind kind, CharSequence msg, Element e, AnnotationMirror a, AnnotationValue v) {
-
         printArgs(kind, msg, e, a, v);
-
     }
 
-    private void printArgs(Diagnostic.Kind kind,Object... objs) {
+    private void printArgs(Diagnostic.Kind kind, Object... objs) {
 
-        final String str = Arrays.stream(objs).map(o -> o.toString()).collect(Collectors.joining(", ", "Error occurred while processing annotation ", ""));
-        log(str);
-        if(kind == Diagnostic.Kind.ERROR){
-            throw new Error(str);
+        final String str = Arrays.stream(objs).map(o -> o.toString()).collect(Collectors.joining(", "));
+        log("Annotation processor message : " + str);
+        if (kind == Diagnostic.Kind.ERROR) {
+            throw new Error("Error occurred while processing annotation " + str);
         }
     }
 }
