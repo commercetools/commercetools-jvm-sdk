@@ -14,7 +14,7 @@ import javax.annotation.Nullable;
  * @see ExampleResourceWithCustomUpdateAction#getUserName()
  */
 @Generated(
-    value = "io.sphere.sdk.annotations.processors.generators.CustomUpdateActionGenerator",
+    value = "io.sphere.sdk.annotations.processors.generators.UpdateActionGenerator",
     comments = "Generated from: io.sphere.sdk.annotations.processors.generators.examples.ExampleResourceWithCustomUpdateAction"
 )
 public final class CustomUpdateAction extends UpdateActionImpl<ExampleResourceWithCustomUpdateAction> {

@@ -2,8 +2,10 @@ package io.sphere.sdk.annotations.processors.generators;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.squareup.javapoet.*;
+import io.sphere.sdk.annotations.CopyFactoryMethod;
+import io.sphere.sdk.annotations.FactoryMethod;
 import io.sphere.sdk.annotations.HasUpdateAction;
-import io.sphere.sdk.annotations.HasUpdateActions;
+import io.sphere.sdk.annotations.PropertySpec;
 import io.sphere.sdk.annotations.processors.models.PropertyGenModel;
 import io.sphere.sdk.commands.UpdateActionImpl;
 import org.apache.commons.lang3.StringUtils;
@@ -15,19 +17,29 @@ import javax.lang.model.element.Element;
 import javax.lang.model.element.ExecutableElement;
 import javax.lang.model.element.Modifier;
 import javax.lang.model.element.TypeElement;
+import javax.lang.model.type.MirroredTypeException;
+import javax.lang.model.type.MirroredTypesException;
+import javax.lang.model.type.TypeMirror;
 import javax.lang.model.util.Elements;
 import javax.lang.model.util.Types;
 import javax.tools.Diagnostic;
-import java.lang.annotation.Annotation;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 /**
- * Generates update action classes for interfaces annotated with {@link io.sphere.sdk.annotations.HasUpdateAction}.
+ * Generates update action classes for interfaces annotated with {@link HasUpdateAction}.
  */
 public class UpdateActionGenerator extends AbstractGenerator<ExecutableElement> {
 
 
+    private static final ClassName BOXED_BOOLEAN = ClassName.get("java.lang", "Boolean");
+
     public UpdateActionGenerator(final Elements elements, final Types types, final Messager messager) {
         super(elements, types, messager);
+
     }
 
     @Override
@@ -36,85 +48,198 @@ public class UpdateActionGenerator extends AbstractGenerator<ExecutableElement> 
     }
 
     @Override
-    public TypeSpec generateType(final ExecutableElement propertyMethod) {
+    public TypeSpec generateType(final ExecutableElement annotatedTypeElement) {
 
-        final TypeSpec typeSpecList = generateUpdateAction(propertyMethod);
+        final TypeSpec typeSpecList = generateUpdateAction(annotatedTypeElement);
 
         return typeSpecList;
     }
 
     protected TypeSpec generateUpdateAction(final ExecutableElement propertyMethod) {
+        return generateUpdateAction(propertyMethod, propertyMethod.getAnnotation(HasUpdateAction.class));
+    }
+
+    protected TypeSpec generateUpdateAction(final ExecutableElement propertyMethod, HasUpdateAction hasUpdateActionInstance) {
+
         if (!(propertyMethod.getEnclosingElement() instanceof TypeElement)) {
-            messager.printMessage(Diagnostic.Kind.ERROR, "@HasUpdateAction Enclosing element should be a class");
+            messager.printMessage(Diagnostic.Kind.ERROR, "@" + HasUpdateAction.class.getSimpleName() + "Enclosing element should be a class");
             return null;
         }
+
         final TypeElement annotatedEnclosingElement = (TypeElement) propertyMethod.getEnclosingElement();
         final PropertyGenModel property = PropertyGenModel.of(propertyMethod);
-        final MethodSpec.Builder getMethodBuilder = createGetMethodBuilder(propertyMethod);
-        if(!StringUtils.isEmpty(propertyMethod.getAnnotation(HasUpdateAction.class).jsonPropertyName())){
-            AnnotationSpec annotationSpec = AnnotationSpec.builder(JsonProperty.class)
-                    .addMember("value","\""+propertyMethod.getAnnotation(HasUpdateAction.class).jsonPropertyName()+"\"").build();
-            getMethodBuilder.addAnnotation(annotationSpec);
-        }
+        final String actionNameDerivedFromField = (property.isOptional() ? "set" : "change") + StringUtils.capitalize(property.getName());
+        final String actionName = getFirstNonEmpty(hasUpdateActionInstance.value(),actionNameDerivedFromField);
+        final String updateActionClassName = getFirstNonEmpty(hasUpdateActionInstance.className(),StringUtils.capitalize(actionName));
 
-        final MethodSpec getMethod = getMethodBuilder.build();
-        final String actionPrefix = property.isOptional() ? "set" : "change";
-        final FieldSpec fieldSpec = createFieldBuilder(property, Modifier.PRIVATE)
-                .addModifiers(Modifier.FINAL)
-                .build();
+        final String includeExample = hasUpdateActionInstance.exampleBaseClass();
+        final PropertySpec[] properties = hasUpdateActionInstance.fields();
+        final FactoryMethod[] factoryMethods = hasUpdateActionInstance.factoryMethods();
+        final CopyFactoryMethod[] copyFactoryMethods = hasUpdateActionInstance.copyFactoryMethods();
+        boolean isAbstract = hasUpdateActionInstance.makeAbstract();
+        final List<TypeName> superInterfaces = getSuperInterfaces(hasUpdateActionInstance);
 
-        final String actionField = propertyMethod.getAnnotation(HasUpdateAction.class).value();
-        final String updateAction = actionPrefix + StringUtils.capitalize(fieldSpec.name);
-        final String updateActionName = StringUtils.isEmpty(actionField) ? actionPrefix + StringUtils.capitalize(fieldSpec.name) : actionField;
-        final String className = propertyMethod.getAnnotation(HasUpdateAction.class).actionClassName();
-        final String updateActionClassName = StringUtils.isEmpty(className) ? StringUtils.capitalize(updateAction) : StringUtils.capitalize(className);
-        final String includeExample = propertyMethod.getAnnotation(HasUpdateAction.class).exampleBaseClass();
+
+
         final String includeExampleJavaDoc = includeExample.isEmpty() ?
                 "" :
                 String.format("{@include.example %s#%s()}\n\n", includeExample, propertyMethod.getSimpleName().toString().replaceFirst("g", "s"));
-        final TypeSpec.Builder typeSpecBuilder = TypeSpec.classBuilder(updateActionClassName)
+        final ClassName className = ClassName.bestGuess(isAbstract ? "Abstract" + updateActionClassName : updateActionClassName);
+        final ClassName concreteClassName = ClassName.bestGuess(updateActionClassName);
+
+        final List<PropertyGenModel> propertyGenModelList = properties.length != 0 ?
+                Arrays.stream(properties).map(this::toGenModel).collect(Collectors.toList()) : Arrays.asList(property);
+        final String[] allParamsNames = propertyGenModelList.stream().map(propertyGenModel -> propertyGenModel.getName()).toArray(String[]::new);
+        final List<FieldSpec> fields = propertyGenModelList.stream().map(this::createField).collect(Collectors.toList());
+        final List<MethodSpec> getters = propertyGenModelList.stream().map(this::createGetMethod).collect(Collectors.toList());
+        final List<MethodSpec> optionalAttributesSetters = propertyGenModelList.stream().filter(PropertyGenModel::isOptional)
+                .map(propertyGenModel -> createWithMethod(propertyGenModelList, propertyGenModel, concreteClassName))
+                .collect(Collectors.toList());
+        final boolean allAttributesOptional = propertyGenModelList.stream().map(PropertyGenModel::isOptional).reduce(Boolean::logicalAnd).get();
+
+
+        final TypeSpec.Builder typeSpecBuilder = TypeSpec.classBuilder(className)
                 .addJavadoc("$L the {@code $L} property of a {@link $T}.\n",
-                        property.isOptional() ? "Sets" : "Updates", fieldSpec.name, ClassName.get(annotatedEnclosingElement))
+                        "Updates", property.getName(), ClassName.get(annotatedEnclosingElement))
                 .addJavadoc("\n")
                 .addJavadoc(includeExampleJavaDoc)
                 .addJavadoc("@see $T#$L()\n", ClassName.get(annotatedEnclosingElement), propertyMethod.getSimpleName())
                 .superclass(ParameterizedTypeName.get(ClassName.get(UpdateActionImpl.class), ClassName.get(annotatedEnclosingElement)))
-                .addModifiers(Modifier.PUBLIC, Modifier.FINAL)
+                .addModifiers(isAbstract ? new Modifier[]{Modifier.ABSTRACT} : new Modifier[]{Modifier.PUBLIC, Modifier.FINAL})
                 .addAnnotation(AnnotationSpec.builder(Generated.class)
                         .addMember("value", "$S", getClass().getCanonicalName())
                         .addMember("comments", "$S", "Generated from: " + annotatedEnclosingElement.getQualifiedName().toString()).build())
-                .addField(createFieldBuilder(property, Modifier.PRIVATE)
-                        .addModifiers(Modifier.FINAL)
-                        .build())
-                .addMethod(createConstructor(property, updateActionName))
-                .addMethod(getMethod)
-                .addMethod(createFactoryMethod(property, updateActionClassName));
-        if (property.isOptional()) {
-            typeSpecBuilder.addMethod(createUnsetMethod(updateActionClassName, property));
+                .addFields(fields)
+                .addMethods(getters)
+                .addMethod(createConstructor(propertyGenModelList, concreteClassName, actionName, isAbstract ? Modifier.PROTECTED : Modifier.PRIVATE))
+                .addMethod(createFactoryMethod(propertyGenModelList, concreteClassName, Arrays.asList(allParamsNames), "of", false))
+                .addMethods(createFactoryMethods(factoryMethods, propertyGenModelList, concreteClassName))
+                .addMethods(createCopyFactoryMethods(copyFactoryMethods, concreteClassName, propertyGenModelList))
+                .addSuperinterfaces(superInterfaces);
+
+        if (allAttributesOptional) {
+            typeSpecBuilder.addMethod(createFactoryMethod(propertyGenModelList, concreteClassName, Arrays.asList(), "ofUnset", false));
+        }
+        //if there is only one field there is no need for withers since a default factory method would be included
+        if (propertyGenModelList.size() > 1) {
+            typeSpecBuilder.addMethods(optionalAttributesSetters);
         }
         return typeSpecBuilder.build();
     }
 
-    private MethodSpec createUnsetMethod(final String updateActionClassName, final PropertyGenModel property) {
-        final MethodSpec ofUnset = MethodSpec.methodBuilder("ofUnset")
-                .addJavadoc("Creates a new update action to unset the {@code $L} property.\n", property.getName())
-                .addJavadoc("@return the {@code $T} update action.\n", ClassName.bestGuess(updateActionClassName))
-                .addModifiers(Modifier.PUBLIC, Modifier.STATIC)
-                .returns(ClassName.bestGuess(updateActionClassName))
-                .addStatement("return new $T($L)", ClassName.bestGuess(updateActionClassName), "null")
-                .build();
-        return ofUnset;
+
+    private static List<TypeName> getSuperInterfaces(HasUpdateAction annotation) {
+        try {
+            annotation.superInterfaces();
+        } catch (MirroredTypesException e) {
+            return e.getTypeMirrors().stream().map(ClassName::get).collect(Collectors.toList());
+        }
+
+        return Arrays.asList();
     }
 
-    private MethodSpec createConstructor(final PropertyGenModel property, final String updateAction) {
-        final ParameterSpec constructorParameter = createConstructorParameter(property);
+    protected MethodSpec createConstructor(final List<PropertyGenModel> properties, final ClassName actionName, String actionString, final Modifier... modifiers) {
+        final List<ParameterSpec> parameters = properties.stream()
+                .map(this::createConstructorParameter)
+                .collect(Collectors.toList());
+
         final MethodSpec.Builder builder = MethodSpec.constructorBuilder()
-                .addParameter(constructorParameter)
-                .addModifiers(Modifier.PRIVATE)
-                .addStatement("super($S)", updateAction)
-                .addCode("this.$L = $L;\n", property.getJavaIdentifier(), property.getJavaIdentifier());
+                .addParameters(parameters)
+                .addStatement("super($S)", actionString)
+                .addModifiers(modifiers);
+
+        final List<String> parameterNames = properties.stream()
+                .map(PropertyGenModel::getJavaIdentifier)
+                .collect(Collectors.toList());
+        parameterNames.forEach(n -> builder.addCode("this.$L = $L;\n", n, n));
+
         return builder.build();
     }
+
+    private List<MethodSpec> createCopyFactoryMethods(CopyFactoryMethod[] factoryMethods, ClassName returnType, List<PropertyGenModel> propertyGenModels) {
+        List<TypeMirror> typeMirrors = new ArrayList<>();
+        for (int i = 0; i < factoryMethods.length; i++) {
+
+            try {
+                factoryMethods[i].value();
+            } catch (MirroredTypeException e) {
+                typeMirrors.add(e.getTypeMirror());
+            }
+        }
+
+        return typeMirrors.stream()
+                .map(typeMirror -> elements.getTypeElement(typeMirror.toString()))
+                .map(element -> createCopyFactoryMethod(element, returnType, getAllPropertyMethodsSorted(element), propertyGenModels)).collect(Collectors.toList());
+    }
+
+
+    private MethodSpec createGetMethod(final PropertyGenModel propertyGenModel) {
+
+        String prefix = propertyGenModel.getType().equals(BOXED_BOOLEAN)? "is" : "get";
+        MethodSpec.Builder specBuilder = MethodSpec.methodBuilder(prefix + StringUtils.capitalize(propertyGenModel.getName()))
+                .addModifiers(Modifier.PUBLIC)
+                .returns(propertyGenModel.getType())
+                .addCode("return $L;\n", propertyGenModel.getName());
+
+        if (propertyGenModel.isOptional()) {
+            specBuilder.addAnnotation(Nullable.class);
+        }
+
+        if (!StringUtils.isEmpty(propertyGenModel.getJsonName())) {
+            AnnotationSpec annotationSpec = AnnotationSpec.builder(JsonProperty.class)
+                    .addMember("value", "\"" + propertyGenModel.getJsonName() + "\"").build();
+            specBuilder.addAnnotation(annotationSpec);
+        }
+
+        return specBuilder.build();
+    }
+
+    protected MethodSpec createWithMethod(final List<PropertyGenModel> properties, final PropertyGenModel propertyGenModel, final ClassName returnType) {
+
+        final String callArguments = properties.stream()
+                .map(p -> propertyGenModel.getName().equals(p.getName()) ? p.getJavaIdentifier() : "get" + StringUtils.capitalize(p.getName()) + "()")
+                .collect(Collectors.joining(", "));
+
+        final MethodSpec.Builder builder = MethodSpec.methodBuilder("with" + StringUtils.capitalize(propertyGenModel.getName())).addModifiers(Modifier.PUBLIC)
+                .returns(returnType)
+                .addJavadoc("Creates a copied update action initialized with the given parameter, the rest of the parameters are copied from the original object.\n\n");
+
+        builder.addJavadoc("@return new object initialized with the copied values from the original object\n");
+        return builder
+                .addParameters(createParameters(Arrays.asList(propertyGenModel), false, false))
+                .addCode("return new $L($L);\n", returnType.simpleName(), callArguments)
+                .build();
+    }
+
+    private PropertyGenModel toGenModel(final PropertySpec propertySpec) {
+
+        TypeMirror typeMirror = null;
+        try {
+            propertySpec.fieldType();
+        } catch (MirroredTypeException e) {
+            typeMirror = e.getTypeMirror();
+        }
+        final String jsonName = StringUtils.isEmpty(propertySpec.jsonName()) ? null : propertySpec.jsonName();
+        return PropertyGenModel.of(escapeJavaKeyword(propertySpec.name()), jsonName, typeMirror, propertySpec.docLinkTaglet(), propertySpec.isOptional(), propertySpec.useReference());
+
+    }
+
+    @Override
+    protected FieldSpec createField(final PropertyGenModel property, final Modifier modifier) {
+        final FieldSpec.Builder builder = super.createFieldBuilder(property, modifier);
+        final String jsonName = property.getJsonName();
+
+        if (!StringUtils.isEmpty(jsonName)) {
+            final AnnotationSpec jsonProperty = createJsonPropertyAnnotation(jsonName);
+            builder.addAnnotation(jsonProperty);
+        }
+
+        builder.addModifiers(Modifier.FINAL);
+
+
+        return builder.build();
+    }
+
 
     private ParameterSpec createConstructorParameter(final PropertyGenModel propertyGenModel) {
         final ParameterSpec.Builder builder = ParameterSpec.builder(propertyGenModel.getType(), propertyGenModel.getJavaIdentifier(), Modifier.FINAL);
@@ -124,17 +249,10 @@ public class UpdateActionGenerator extends AbstractGenerator<ExecutableElement> 
         return builder.build();
     }
 
-    private MethodSpec createFactoryMethod(final PropertyGenModel property, final String updateActionClassName) {
-        final ParameterSpec parameterSpec = createConstructorParameter(property);
-        final MethodSpec of = MethodSpec.methodBuilder("of")
-                .addJavadoc("Creates a new update action from the given parameters.\n\n")
-                .addJavadoc("@param $L the {@code $L} property $L.\n", parameterSpec.name, parameterSpec.name, property.getJavadocLinkTag())
-                .addJavadoc("@return the {@code $T} update action.\n", ClassName.bestGuess(updateActionClassName))
-                .addParameter(parameterSpec)
-                .addModifiers(Modifier.PUBLIC, Modifier.STATIC)
-                .returns(ClassName.bestGuess(updateActionClassName))
-                .addStatement("return new $T($L)", ClassName.bestGuess(updateActionClassName), parameterSpec.name)
-                .build();
-        return of;
+    private static String getFirstNonEmpty(final String... args) {
+
+        return Arrays.stream(args).filter(((Predicate<String>) StringUtils::isEmpty).negate()).findFirst().orElseGet(String::new);
+
     }
+
 }

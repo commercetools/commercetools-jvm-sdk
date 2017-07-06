@@ -4,7 +4,6 @@ import com.google.common.base.Charsets;
 import com.google.testing.compile.CompilationRule;
 import com.squareup.javapoet.JavaFile;
 import io.sphere.sdk.annotations.processors.generators.examples.ExampleResourceWithCustomUpdateAction;
-import io.sphere.sdk.annotations.processors.generators.examples.ExampleResourceWithUpdateAction;
 import org.apache.commons.io.IOUtils;
 import org.junit.Before;
 import org.junit.Rule;
@@ -28,7 +27,7 @@ public class CustomUpdateActionGeneratorTest  extends AbstractGeneratorTest{
 
     @Before
     public void setup() {
-        generator = new CustomUpdateActionGenerator(compilationRule.getElements(), compilationRule.getTypes(),messager);
+        generator = new UpdateActionGenerator(compilationRule.getElements(), compilationRule.getTypes(),messager);
     }
 
     @Test

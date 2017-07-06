@@ -7,7 +7,7 @@ import javax.annotation.Generated;
 import javax.annotation.Nullable;
 
 /**
- * Sets the {@code optionalUserName} property of a {@link ExampleResourceWithUpdateAction}.
+ * Updates the {@code optionalUserName} property of a {@link ExampleResourceWithUpdateAction}.
  *
  * @see ExampleResourceWithUpdateAction#getOptionalUserName()
  */
@@ -30,18 +30,19 @@ public final class CustomName extends UpdateActionImpl<ExampleResourceWithUpdate
   }
 
   /**
-   * Creates a new update action from the given parameters.
+   * Creates a new object initialized with the given values.
    *
-   * @param optionalUserName the {@code optionalUserName} property {@link ExampleResourceWithUpdateAction#getOptionalUserName()}.
-   * @return the {@code CustomName} update action.
+   * @param optionalUserName initial value for the {@link ExampleResourceWithUpdateAction#getOptionalUserName()} property
+   * @return new object initialized with the given values
    */
   public static CustomName of(@Nullable final String optionalUserName) {
     return new CustomName(optionalUserName);
   }
 
   /**
-   * Creates a new update action to unset the {@code optionalUserName} property.
-   * @return the {@code CustomName} update action.
+   * Creates a new object initialized with the given values.
+   *
+   * @return new object initialized with the given values
    */
   public static CustomName ofUnset() {
     return new CustomName(null);

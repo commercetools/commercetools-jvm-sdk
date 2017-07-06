@@ -20,8 +20,14 @@ public class HasUpdateActionProcessor extends MethodLevelAnnotationProcessor<Has
 
     @Override
     protected void generate(final ExecutableElement executableElement) {
-        final JavaFile javaFile = new UpdateActionGenerator(processingEnv.getElementUtils(), processingEnv.getTypeUtils(), processingEnv.getMessager()).generate(executableElement);
+
+        final JavaFile javaFile = new UpdateActionGenerator(processingEnv.getElementUtils(),
+                processingEnv.getTypeUtils(),
+                processingEnv.getMessager()).
+                generate(executableElement);
+
         writeClass(javaFile);
+
     }
 
 }

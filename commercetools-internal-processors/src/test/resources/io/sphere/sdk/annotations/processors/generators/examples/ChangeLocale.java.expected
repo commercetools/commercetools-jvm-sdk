@@ -27,10 +27,10 @@ public final class ChangeLocale extends UpdateActionImpl<ExampleResourceWithUpda
   }
 
   /**
-   * Creates a new update action from the given parameters.
+   * Creates a new object initialized with the given values.
    *
-   * @param locale the {@code locale} property {@link ExampleResourceWithUpdateAction#getLocale()}.
-   * @return the {@code ChangeLocale} update action.
+   * @param locale initial value for the {@link ExampleResourceWithUpdateAction#getLocale()} property
+   * @return new object initialized with the given values
    */
   public static ChangeLocale of(final Locale locale) {
     return new ChangeLocale(locale);

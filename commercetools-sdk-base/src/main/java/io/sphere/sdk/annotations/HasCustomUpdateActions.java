@@ -6,5 +6,5 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.CLASS)
 @Target(ElementType.METHOD)
 public @interface HasCustomUpdateActions {
-    HasCustomUpdateAction[] value();
+    HasUpdateAction[] value();
 }

@@ -27,10 +27,10 @@ public final class SomeClasse extends UpdateActionImpl<ExampleResourceWithUpdate
   }
 
   /**
-   * Creates a new update action from the given parameters.
+   * Creates a new object initialized with the given values.
    *
-   * @param userName the {@code userName} property {@link ExampleResourceWithUpdateAction#getUserName()}.
-   * @return the {@code SomeClasse} update action.
+   * @param userName initial value for the {@link ExampleResourceWithUpdateAction#getUserName()} property
+   * @return new object initialized with the given values
    */
   public static SomeClasse of(final String userName) {
     return new SomeClasse(userName);

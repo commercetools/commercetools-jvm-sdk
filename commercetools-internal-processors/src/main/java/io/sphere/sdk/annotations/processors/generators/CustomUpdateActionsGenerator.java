@@ -30,7 +30,7 @@ public class CustomUpdateActionsGenerator extends AbstractMultipleFileGenerator<
     protected List<TypeSpec> generateTypes(final ExecutableElement annotatedTypeElement) {
 
         return Arrays.stream(annotatedTypeElement.getAnnotation(HasCustomUpdateActions.class).value())
-                .map(hasCustomUpdateAction -> new CustomUpdateActionGenerator(elements, types, messager).generateUpdateAction(annotatedTypeElement, hasCustomUpdateAction))
+                .map(hasCustomUpdateAction -> new UpdateActionGenerator(elements, types, messager).generateUpdateAction(annotatedTypeElement, hasCustomUpdateAction))
                 .collect(Collectors.toList());
 
 

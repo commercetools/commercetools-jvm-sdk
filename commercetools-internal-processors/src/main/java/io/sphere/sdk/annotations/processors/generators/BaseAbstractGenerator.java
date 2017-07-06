@@ -270,7 +270,7 @@ abstract class BaseAbstractGenerator {
                 p.getJavadocLinkTag()));
         builder.addJavadoc("@return new object initialized with the given values\n");
         return builder
-                .addParameters(createParameters(parameterTemplates, useLowercaseBooleans, false))
+                .addParameters(createParameters(parameterTemplates, useLowercaseBooleans, true))
                 .addCode("return new $L($L);\n", returnType.simpleName(), callArguments)
                 .build();
     }

@@ -8,7 +8,7 @@ import java.util.Locale;
 
 public interface ExampleResourceWithUpdateAction {
 
-    @HasUpdateAction(value = "customName",actionClassName = "SomeClasse")
+    @HasUpdateAction(value = "customName",className = "SomeClasse")
     String getUserName();
 
     @Nullable
@@ -16,7 +16,7 @@ public interface ExampleResourceWithUpdateAction {
     String getOptionalUserName();
 
 
-    @HasUpdateAction
+    @HasUpdateAction("changeLocale")
     Locale getLocale();
 
     @Nullable

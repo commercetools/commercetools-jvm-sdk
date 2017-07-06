@@ -7,7 +7,7 @@ import javax.annotation.Generated;
 import javax.annotation.Nullable;
 
 /**
- * Sets the {@code optionalLocale} property of a {@link ExampleResourceWithUpdateAction}.
+ * Updates the {@code optionalLocale} property of a {@link ExampleResourceWithUpdateAction}.
  *
  * @see ExampleResourceWithUpdateAction#getOptionalLocale()
  */
@@ -30,18 +30,19 @@ public final class SetOptionalLocale extends UpdateActionImpl<ExampleResourceWit
   }
 
   /**
-   * Creates a new update action from the given parameters.
+   * Creates a new object initialized with the given values.
    *
-   * @param optionalLocale the {@code optionalLocale} property {@link ExampleResourceWithUpdateAction#getOptionalLocale()}.
-   * @return the {@code SetOptionalLocale} update action.
+   * @param optionalLocale initial value for the {@link ExampleResourceWithUpdateAction#getOptionalLocale()} property
+   * @return new object initialized with the given values
    */
   public static SetOptionalLocale of(@Nullable final Locale optionalLocale) {
     return new SetOptionalLocale(optionalLocale);
   }
 
   /**
-   * Creates a new update action to unset the {@code optionalLocale} property.
-   * @return the {@code SetOptionalLocale} update action.
+   * Creates a new object initialized with the given values.
+   *
+   * @return new object initialized with the given values
    */
   public static SetOptionalLocale ofUnset() {
     return new SetOptionalLocale(null);

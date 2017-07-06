@@ -65,7 +65,7 @@ public interface CartDiscount extends Resource<CartDiscount> {
      * @return true if active
      */
     @JsonProperty("isActive")
-    @HasUpdateAction(value = "changeIsActive",actionClassName = "ChangeIsActive",jsonPropertyName = "isActive")
+    @HasUpdateAction(value = "changeIsActive",fields = {@PropertySpec(name = "active",fieldType = Boolean.class,jsonName = "isActive")})
     @IgnoreInQueryModel
     Boolean isActive();
 
@@ -90,7 +90,7 @@ public interface CartDiscount extends Resource<CartDiscount> {
      * @return true if requires a discount code
      */
     @JsonProperty("requiresDiscountCode")
-    @HasUpdateAction(value = "changeRequiresDiscountCode", actionClassName = "ChangeRequiresDiscountCode" , jsonPropertyName = "requiresDiscountCode")
+    @HasUpdateAction(value = "changeRequiresDiscountCode", className = "ChangeRequiresDiscountCode")
     @IgnoreInQueryModel
     Boolean isRequiringDiscountCode();
 
@@ -116,7 +116,7 @@ public interface CartDiscount extends Resource<CartDiscount> {
      */
     @Nullable
     @IgnoreInQueryModel
-    @HasUpdateAction(value = "changeTarget",actionClassName = "ChangeTarget")
+    @HasUpdateAction(value = "changeTarget",className = "ChangeTarget")
     CartDiscountTarget getTarget();
 
     /**
@@ -151,7 +151,7 @@ public interface CartDiscount extends Resource<CartDiscount> {
      * @return value
      */
     @IgnoreInQueryModel
-    @HasUpdateAction(value = "changeValue", actionClassName = "ChangeValue")
+    @HasUpdateAction("changeValue")
     CartDiscountValue getValue();
 
     /**

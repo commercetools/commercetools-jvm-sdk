@@ -1,17 +1,23 @@
 package io.sphere.sdk.annotations;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
 
+import java.lang.annotation.*;
 
-/**
- * This interface will be used for action generation
- */
-@Retention(RetentionPolicy.CLASS)
+@Repeatable(HasCustomUpdateActions.class)
 @Target(ElementType.METHOD)
+@Retention(RetentionPolicy.CLASS)
 public @interface HasUpdateAction {
+
+
+    /**
+     * Used to specify the action name
+     * @return the action name
+     */
+    String value() default "";
+
+    String className() default "";
+
+    PropertySpec[] fields() default {};
 
     /**
      * This adds a {code @include.example <i>exampleBaseClass</i>#<i>updateActionTestName</i>()} javadoc tag
@@ -26,24 +32,10 @@ public @interface HasUpdateAction {
      */
 
     String exampleBaseClass() default "";
+    FactoryMethod[] factoryMethods() default {};
+    CopyFactoryMethod[] copyFactoryMethods() default {};
+    Class[] superInterfaces() default {};
+    boolean makeAbstract() default false;
 
-
-    /**
-     * Used to specify the action name
-     * @return the action name
-     */
-    String value() default "";
-
-    /**
-     * This attribute can be used to specify a custom action name rather than the auto generated
-     * @return the custom action class name
-     */
-    String actionClassName() default "";
-
-    /**
-     * specify the json name of the property of the attribute in the action class
-     * @return json property name
-     */
-    String jsonPropertyName() default "";
 
 }
