@@ -43,7 +43,6 @@ public interface CartDiscount extends Resource<CartDiscount> {
      * @return predicate
      */
     @IgnoreInQueryModel
-    @HasUpdateAction
     String getCartPredicate();
 
     /**
