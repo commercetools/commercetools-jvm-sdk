@@ -9,7 +9,7 @@ import javax.annotation.Generated;
 import javax.annotation.Nullable;
 
 /**
- * Updates the {@code getUserName} property of a {@link ExampleResourceWithCustomUpdateAction}.
+ * Updates the {@code userName} property of a {@link ExampleResourceWithCustomUpdateAction}.
  *
  * @see ExampleResourceWithCustomUpdateAction#getUserName()
  */
@@ -25,7 +25,7 @@ public final class CustomUpdateAction extends UpdateActionImpl<ExampleResourceWi
   private final String slug;
 
   @Nullable
-  private Reference<String> taxCategory;
+  private final Reference<String> taxCategory;
 
   private CustomUpdateAction(final String name, final Long quantity, final String slug,
       @Nullable final Reference<String> taxCategory) {
@@ -63,7 +63,7 @@ public final class CustomUpdateAction extends UpdateActionImpl<ExampleResourceWi
    * @return new object initialized with the given values
    */
   public static CustomUpdateAction of(final String name, final Long quantity, final String slug,
-      final Reference<String> taxCategory) {
+      @Nullable final Reference<String> taxCategory) {
     return new CustomUpdateAction(name, quantity, slug, taxCategory);
   }
 
@@ -89,7 +89,7 @@ public final class CustomUpdateAction extends UpdateActionImpl<ExampleResourceWi
   }
 
   /**
-   * Creates a copied object initialized with the given value.
+   * Creates a copied update action initialized with the given parameter, the rest of the parameters are copied from the original object.
    *
    * @return new object initialized with the copied values from the original object
    */

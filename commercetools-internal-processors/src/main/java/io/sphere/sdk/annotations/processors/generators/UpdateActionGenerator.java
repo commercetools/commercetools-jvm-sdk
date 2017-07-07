@@ -99,8 +99,7 @@ public class UpdateActionGenerator extends AbstractGenerator<ExecutableElement> 
 
 
         final TypeSpec.Builder typeSpecBuilder = TypeSpec.classBuilder(className)
-                .addJavadoc("$L the {@code $L} property of a {@link $T}.\n",
-                        "Updates", property.getName(), ClassName.get(annotatedEnclosingElement))
+                .addJavadoc("Updates the {@code $L} property of a {@link $T}.\n", property.getName(), ClassName.get(annotatedEnclosingElement))
                 .addJavadoc("\n")
                 .addJavadoc(includeExampleJavaDoc)
                 .addJavadoc("@see $T#$L()\n", ClassName.get(annotatedEnclosingElement), propertyMethod.getSimpleName())
