@@ -12,7 +12,7 @@ public class ResourceDraftValueGeneratorTest extends AbstractGeneratorTest {
 
     @Before
     public void setup() {
-        generator = new ResourceDraftValueGenerator(compilationRule.getElements(), compilationRule.getTypes());
+        generator = new ResourceDraftValueGenerator(compilationRule.getElements(), compilationRule.getTypes(),messager);
     }
 
     @Test

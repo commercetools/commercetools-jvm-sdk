@@ -1,0 +1,50 @@
+package io.sphere.sdk.annotations.processors.generators.examples.commands.updateactions;
+
+import io.sphere.sdk.annotations.processors.generators.examples.ExampleResourceWithUpdateAction;
+import io.sphere.sdk.commands.UpdateActionImpl;
+import java.util.Locale;
+import javax.annotation.Generated;
+import javax.annotation.Nullable;
+
+/**
+ * Updates the {@code optionalLocale} property of a {@link ExampleResourceWithUpdateAction}.
+ *
+ * @see ExampleResourceWithUpdateAction#getOptionalLocale()
+ */
+@Generated(
+    value = "io.sphere.sdk.annotations.processors.generators.UpdateActionGenerator",
+    comments = "Generated from: io.sphere.sdk.annotations.processors.generators.examples.ExampleResourceWithUpdateAction"
+)
+public final class SetOptionalLocale extends UpdateActionImpl<ExampleResourceWithUpdateAction> {
+  @Nullable
+  private final Locale optionalLocale;
+
+  private SetOptionalLocale(@Nullable final Locale optionalLocale) {
+    super("setOptionalLocale");
+    this.optionalLocale = optionalLocale;
+  }
+
+  @Nullable
+  public Locale getOptionalLocale() {
+    return optionalLocale;
+  }
+
+  /**
+   * Creates a new object initialized with the given values.
+   *
+   * @param optionalLocale initial value for the {@link ExampleResourceWithUpdateAction#getOptionalLocale()} property
+   * @return new object initialized with the given values
+   */
+  public static SetOptionalLocale of(@Nullable final Locale optionalLocale) {
+    return new SetOptionalLocale(optionalLocale);
+  }
+
+  /**
+   * Creates a new object initialized with the given values.
+   *
+   * @return new object initialized with the given values
+   */
+  public static SetOptionalLocale ofUnset() {
+    return new SetOptionalLocale(null);
+  }
+}

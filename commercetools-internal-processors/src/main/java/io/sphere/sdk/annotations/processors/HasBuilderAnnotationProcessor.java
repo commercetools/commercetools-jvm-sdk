@@ -11,7 +11,7 @@ import javax.lang.model.element.TypeElement;
 
 @SupportedAnnotationTypes({"io.sphere.sdk.annotations.HasBuilder"})
 @SupportedSourceVersion(SourceVersion.RELEASE_8)
-public final class HasBuilderAnnotationProcessor extends CommercetoolsAnnotationProcessor<HasBuilder> {
+public final class HasBuilderAnnotationProcessor extends ClassLevelAnnotationProcessor<HasBuilder> {
 
     public HasBuilderAnnotationProcessor() {
         super(HasBuilder.class);
@@ -19,7 +19,7 @@ public final class HasBuilderAnnotationProcessor extends CommercetoolsAnnotation
 
     @Override
     protected void generate(final TypeElement typeElement) {
-        final JavaFile javaFile = new HasBuilderGenerator(processingEnv.getElementUtils(), processingEnv.getTypeUtils()).generate(typeElement);
+        final JavaFile javaFile = new HasBuilderGenerator(processingEnv.getElementUtils(), processingEnv.getTypeUtils(),processingEnv.getMessager()).generate(typeElement);
         writeClass(javaFile);
     }
 }

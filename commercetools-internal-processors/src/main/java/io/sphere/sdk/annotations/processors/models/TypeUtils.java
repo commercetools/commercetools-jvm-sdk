@@ -34,8 +34,8 @@ public class TypeUtils {
     }
 
 
-    public String getPackageName(final TypeElement typeElement) {
-        return elements.getPackageOf(typeElement).getQualifiedName().toString();
+    public String getPackageName(final Element element) {
+        return elements.getPackageOf(element).getQualifiedName().toString();
     }
 
     public String getSimpleName(final Element element) {

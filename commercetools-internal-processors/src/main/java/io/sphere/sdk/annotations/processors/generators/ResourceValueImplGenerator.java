@@ -6,6 +6,7 @@ import io.sphere.sdk.annotations.ResourceValue;
 import io.sphere.sdk.annotations.processors.models.PropertyGenModel;
 
 import javax.annotation.Generated;
+import javax.annotation.processing.Messager;
 import javax.lang.model.element.ExecutableElement;
 import javax.lang.model.element.Modifier;
 import javax.lang.model.element.TypeElement;
@@ -18,9 +19,9 @@ import java.util.stream.Collectors;
 /**
  * Generates implementation classes for interfaces annotated with {@link io.sphere.sdk.annotations.ResourceValue}.
  */
-public class ResourceValueImplGenerator extends AbstractGenerator {
-    public ResourceValueImplGenerator(final Elements elements, final Types types) {
-        super(elements, types);
+public class ResourceValueImplGenerator extends AbstractGenerator<TypeElement> {
+    public ResourceValueImplGenerator(final Elements elements, final Types types, Messager messager) {
+        super(elements, types, messager);
     }
 
     @Override

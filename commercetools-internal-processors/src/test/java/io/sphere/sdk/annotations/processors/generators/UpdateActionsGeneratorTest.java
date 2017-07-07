@@ -12,7 +12,7 @@ public class UpdateActionsGeneratorTest extends AbstractMultipleGeneratorTest {
 
     @Before
     public void setup() {
-        generator = new UpdateActionsGenerator(compilationRule.getElements(), compilationRule.getTypes());
+        generator = new UpdateActionsGenerator(compilationRule.getElements(), compilationRule.getTypes(),messager);
     }
 
     @Test

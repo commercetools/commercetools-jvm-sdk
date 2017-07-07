@@ -7,7 +7,6 @@ import javax.annotation.processing.SupportedAnnotationTypes;
 import javax.annotation.processing.SupportedSourceVersion;
 import javax.lang.model.SourceVersion;
 import javax.lang.model.element.TypeElement;
-import java.lang.annotation.Annotation;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
@@ -16,7 +15,7 @@ import static java.util.Arrays.asList;
 
 @SupportedAnnotationTypes({"io.sphere.sdk.annotations.HasQueryEndpoint"})
 @SupportedSourceVersion(SourceVersion.RELEASE_8)
-public final class HasQueryEndpointAnnotationProcessor extends CommercetoolsAnnotationProcessor<HasQueryEndpoint> {
+public final class HasQueryEndpointAnnotationProcessor extends ClassLevelAnnotationProcessor<HasQueryEndpoint> {
 
     public HasQueryEndpointAnnotationProcessor() {
         super(HasQueryEndpoint.class);

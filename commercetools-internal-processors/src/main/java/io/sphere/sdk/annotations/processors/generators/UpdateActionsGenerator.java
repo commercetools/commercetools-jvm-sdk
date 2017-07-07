@@ -9,6 +9,8 @@ import org.apache.commons.lang3.StringUtils;
 
 import javax.annotation.Generated;
 import javax.annotation.Nullable;
+import javax.annotation.processing.Messager;
+import javax.lang.model.element.Element;
 import javax.lang.model.element.ExecutableElement;
 import javax.lang.model.element.Modifier;
 import javax.lang.model.element.TypeElement;
@@ -20,14 +22,14 @@ import java.util.stream.Collectors;
 /**
  * Generates update action classes for interfaces annotated with {@link io.sphere.sdk.annotations.HasUpdateActions}.
  */
-public class UpdateActionsGenerator extends AbstractMultipleFileGenerator {
+public class UpdateActionsGenerator extends AbstractMultipleFileGenerator<TypeElement> {
 
-    public UpdateActionsGenerator(final Elements elements, final Types types) {
-        super(elements, types);
+    public UpdateActionsGenerator(final Elements elements, final Types types, Messager messager) {
+        super(elements, types, messager);
     }
 
     @Override
-    protected String getPackageName(final TypeElement annotatedTypeElement) {
+    protected String getPackageName(final Element annotatedTypeElement) {
         return super.getPackageName(annotatedTypeElement).concat(".commands.updateactions");
     }
 

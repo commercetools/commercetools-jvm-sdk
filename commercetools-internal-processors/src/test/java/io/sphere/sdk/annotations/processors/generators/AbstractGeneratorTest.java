@@ -3,9 +3,11 @@ package io.sphere.sdk.annotations.processors.generators;
 import com.google.common.base.Charsets;
 import com.google.testing.compile.CompilationRule;
 import com.squareup.javapoet.JavaFile;
+import io.sphere.sdk.utils.SphereInternalLogger;
 import org.apache.commons.io.IOUtils;
 import org.junit.Rule;
 
+import javax.annotation.processing.Messager;
 import javax.lang.model.element.TypeElement;
 import java.io.InputStream;
 
@@ -14,6 +16,8 @@ public abstract class AbstractGeneratorTest {
     public CompilationRule compilationRule = new CompilationRule();
 
     protected AbstractGenerator generator;
+
+    protected final Messager messager = new FakeMessager();
 
     protected String expectedContent(final Class<?> clazz) throws Exception {
         final TypeElement typeElement = compilationRule.getElements().getTypeElement(clazz.getCanonicalName());
@@ -35,4 +39,7 @@ public abstract class AbstractGeneratorTest {
         javaFile.writeTo(stringBuilder);
         return stringBuilder.toString();
     }
+
+
+
 }
