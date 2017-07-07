@@ -34,6 +34,7 @@ import java.util.Set;
 @HasUpdateCommand(updateWithKey = true)
 @HasDeleteCommand(deleteWithKey = true)
 @HasQueryModel
+@HasUpdateActions
 public interface Type extends Resource<Type>, WithKey {
     String getKey();
 

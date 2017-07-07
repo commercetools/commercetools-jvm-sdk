@@ -2,7 +2,8 @@ package io.sphere.sdk.products;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import io.sphere.sdk.annotations.*;
+import io.sphere.sdk.annotations.FactoryMethod;
+import io.sphere.sdk.annotations.ResourceDraftValue;
 import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.models.*;
 import io.sphere.sdk.producttypes.ProductType;
@@ -38,7 +39,7 @@ public interface ProductDraft extends WithLocalizedSlug, MetaAttributes {
     @Nullable
     LocalizedString getDescription();
 
-    Set<Reference<Category>> getCategories();
+    Set<ResourceIdentifier<Category>> getCategories();
 
     @Nullable
     @Override

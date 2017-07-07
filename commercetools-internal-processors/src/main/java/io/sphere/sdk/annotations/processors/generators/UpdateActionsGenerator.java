@@ -1,8 +1,8 @@
 package io.sphere.sdk.annotations.processors.generators;
 
 import com.squareup.javapoet.*;
-import io.sphere.sdk.annotations.HasUpdateActions;
 import io.sphere.sdk.annotations.HasNoUpdateAction;
+import io.sphere.sdk.annotations.HasUpdateActions;
 import io.sphere.sdk.annotations.processors.models.PropertyGenModel;
 import io.sphere.sdk.commands.UpdateActionImpl;
 import org.apache.commons.lang3.StringUtils;
@@ -40,23 +40,24 @@ public class UpdateActionsGenerator extends AbstractMultipleFileGenerator<TypeEl
                 .filter(m -> typeUtils.isPrimitiveOrEnum(PropertyGenModel.of(m).getType()))
                 .filter(m -> m.getAnnotation(HasNoUpdateAction.class) == null)
                 .map(propertyMethod -> generateUpdateAction(annotatedTypeElement, propertyMethod)).collect(Collectors.toList());
-
         return typeSpecList;
     }
 
     protected TypeSpec generateUpdateAction(final TypeElement annotatedTypeElement, final ExecutableElement propertyMethod) {
         final PropertyGenModel property = PropertyGenModel.of(propertyMethod);
         final MethodSpec getMethod = createGetMethodBuilder(propertyMethod).build();
-        final String actionPrefix = property.isOptional() ? "set" : "change";
         final FieldSpec fieldSpec = createFieldBuilder(property, Modifier.PRIVATE)
                 .addModifiers(Modifier.FINAL)
                 .build();
-        final String updateAction = actionPrefix + StringUtils.capitalize(fieldSpec.name);
+        final String updateAction = retrieveUpdateActionName(property);
         final String updateActionClassName = StringUtils.capitalize(updateAction);
-        final String includeExample = annotatedTypeElement.getAnnotation(HasUpdateActions.class).exampleBaseClass();
-        final String includeExampleJavaDoc = includeExample.isEmpty() ?
-                "" :
-                String.format("{@include.example %s#%s()}\n\n", includeExample, propertyMethod.getSimpleName().toString().replaceFirst("g", "s"));
+        final String annotatedExampleLink = annotatedTypeElement.getAnnotation(HasUpdateActions.class).exampleBaseClass();
+        String includeExampleJavaDoc = "";
+        if (annotatedTypeElement.getAnnotation(HasUpdateActions.class).deriveExampleBaseClass()) {
+            includeExampleJavaDoc = String.format("{@include.example %s#%s()}\n\n",
+                    annotatedExampleLink.isEmpty() ? deriveDefaultExampleLink(annotatedTypeElement) : annotatedExampleLink,
+                    updateAction);
+        }
         final TypeSpec.Builder typeSpecBuilder = TypeSpec.classBuilder(updateActionClassName)
                 .addJavadoc("$L the {@code $L} property of a {@link $T}.\n",
                         property.isOptional() ? "Sets" : "Updates", fieldSpec.name, ClassName.get(annotatedTypeElement))
@@ -80,6 +81,12 @@ public class UpdateActionsGenerator extends AbstractMultipleFileGenerator<TypeEl
         return typeSpecBuilder.build();
     }
 
+    private String deriveDefaultExampleLink(final TypeElement annotatedTypeElement) {
+        return String.format("%s.commands.%sUpdateCommandIntegrationTest",
+                super.getPackageName(annotatedTypeElement),
+                annotatedTypeElement.getSimpleName().toString());
+    }
+
     @Override
     protected List<String> expectedClassNames(final TypeElement annotatedTypeElement) {
         final List<ExecutableElement> propertyMethods = getPropertyMethodsSorted(annotatedTypeElement);
@@ -87,11 +94,7 @@ public class UpdateActionsGenerator extends AbstractMultipleFileGenerator<TypeEl
                 .filter(m -> typeUtils.isPrimitiveOrEnum(PropertyGenModel.of(m).getType()))
                 .map(propertyMethod -> {
                     final PropertyGenModel property = PropertyGenModel.of(propertyMethod);
-                    final String actionPrefix = property.isOptional() ? "set" : "change";
-                    final FieldSpec fieldSpec = createFieldBuilder(property, Modifier.PRIVATE)
-                            .addModifiers(Modifier.FINAL)
-                            .build();
-                    final String updateAction = actionPrefix + StringUtils.capitalize(fieldSpec.name);
+                    final String updateAction = retrieveUpdateActionName(property);
                     final String updateActionClassName = StringUtils.capitalize(updateAction);
                     return updateActionClassName;
                 }).collect(Collectors.toList());
@@ -107,6 +110,12 @@ public class UpdateActionsGenerator extends AbstractMultipleFileGenerator<TypeEl
                 .addStatement("return new $T($L)", ClassName.bestGuess(updateActionClassName), "null")
                 .build();
         return ofUnset;
+    }
+
+    private String retrieveUpdateActionName(final PropertyGenModel property) {
+        final String actionPrefix = property.isOptional() ? "set" : "change";
+        final String name = property.getName();
+        return actionPrefix + StringUtils.capitalize(name);
     }
 
     private MethodSpec createConstructor(final PropertyGenModel property, final String updateAction) {

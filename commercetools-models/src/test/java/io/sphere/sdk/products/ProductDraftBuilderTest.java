@@ -3,6 +3,7 @@ package io.sphere.sdk.products;
 import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Reference;
+import io.sphere.sdk.models.ResourceIdentifier;
 import io.sphere.sdk.producttypes.ProductType;
 import io.sphere.sdk.search.SearchKeyword;
 import io.sphere.sdk.search.SearchKeywords;
@@ -15,13 +16,11 @@ import java.util.Locale;
 import java.util.Set;
 import java.util.stream.IntStream;
 
-import static io.sphere.sdk.test.SphereTestUtils.randomKey;
-import static io.sphere.sdk.test.SphereTestUtils.randomSlug;
-import static io.sphere.sdk.test.SphereTestUtils.randomString;
+import static io.sphere.sdk.test.SphereTestUtils.*;
 import static io.sphere.sdk.utils.SphereInternalUtils.asSet;
 import static java.util.Collections.singletonList;
 import static java.util.stream.Collectors.toList;
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class ProductDraftBuilderTest {
 
@@ -45,7 +44,7 @@ public class ProductDraftBuilderTest {
         final LocalizedString metaTitle = LocalizedString.ofEnglish(randomString());
         final LocalizedString metaDescription = LocalizedString.ofEnglish(randomString());
         final LocalizedString metaKeywords = LocalizedString.ofEnglish(randomString());
-        final Set<Reference<Category>> categories = asSet(Category.referenceOfId("category-id"));
+        final Set<ResourceIdentifier<Category>> categories = asSet(Category.referenceOfId("category-id"));
         final Reference<ProductType> productType = ProductType.referenceOfId("product-type-id");
         final Reference<TaxCategory> taxCategory = TaxCategory.referenceOfId("tax-category-id");
         final SearchKeywords searchKeywords = SearchKeywords.of(Locale.ENGLISH, singletonList(SearchKeyword.of(randomString())));

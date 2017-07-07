@@ -6,8 +6,8 @@ import io.sphere.sdk.client.HttpRequestIntent;
 import io.sphere.sdk.commands.CommandImpl;
 import io.sphere.sdk.customers.Customer;
 import io.sphere.sdk.customers.CustomerToken;
-import io.sphere.sdk.models.Versioned;
 import io.sphere.sdk.json.SphereJsonUtils;
+import io.sphere.sdk.models.Versioned;
 
 import javax.annotation.Nullable;
 
@@ -23,7 +23,7 @@ import static io.sphere.sdk.http.HttpMethod.POST;
  *
  * @see Customer
  * @see CustomerCreatePasswordTokenCommand
- * @see io.sphere.sdk.customers.queries.CustomerByTokenGet
+ * @see io.sphere.sdk.customers.queries.CustomerByPasswordTokenGet
  */
 public final class CustomerPasswordResetCommand extends CommandImpl<Customer> {
     @Nullable

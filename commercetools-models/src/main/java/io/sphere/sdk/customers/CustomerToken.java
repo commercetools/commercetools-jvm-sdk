@@ -8,7 +8,8 @@ import io.sphere.sdk.models.Timestamped;
  * A token belonging to a customer to verify an email address or resetting the password.
  *
  * @see Customer
- * @see io.sphere.sdk.customers.queries.CustomerByTokenGet
+ * @see io.sphere.sdk.customers.queries.CustomerByPasswordTokenGet
+ * @see io.sphere.sdk.customers.queries.CustomerByEmailTokenGet
  * @see io.sphere.sdk.customers.commands.CustomerCreateEmailTokenCommand
  * @see io.sphere.sdk.customers.commands.CustomerCreatePasswordTokenCommand
  * @see io.sphere.sdk.customers.commands.CustomerPasswordResetCommand

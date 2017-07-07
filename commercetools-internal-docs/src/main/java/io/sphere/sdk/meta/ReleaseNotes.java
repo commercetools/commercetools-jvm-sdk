@@ -32,6 +32,7 @@ import io.sphere.sdk.customers.commands.CustomerPasswordResetCommand;
 import io.sphere.sdk.customers.commands.CustomerVerifyEmailCommand;
 import io.sphere.sdk.customers.commands.updateactions.AddShippingAddressId;
 import io.sphere.sdk.customers.commands.updateactions.SetSalutation;
+import io.sphere.sdk.customers.errors.CustomerInvalidCurrentPassword;
 import io.sphere.sdk.customers.expansion.CustomerSignInResultExpansionModel;
 import io.sphere.sdk.customers.queries.CustomerQueryModel;
 import io.sphere.sdk.customobjects.CustomObject;
@@ -76,6 +77,7 @@ import io.sphere.sdk.producttypes.ProductType;
 import io.sphere.sdk.producttypes.ProductTypeDraft;
 import io.sphere.sdk.producttypes.ProductTypeDraftBuilder;
 import io.sphere.sdk.producttypes.ProductTypeLocalRepository;
+import io.sphere.sdk.producttypes.commands.updateactions.ChangeInputHint;
 import io.sphere.sdk.projects.Project;
 import io.sphere.sdk.queries.*;
 import io.sphere.sdk.reviews.ReviewDraft;
@@ -92,9 +94,11 @@ import io.sphere.sdk.shoppinglists.ShoppingListDraft;
 import io.sphere.sdk.shoppinglists.expansion.LineItemExpansionModel;
 import io.sphere.sdk.states.State;
 import io.sphere.sdk.states.StateDraftDsl;
+import io.sphere.sdk.subscriptions.AzureServiceBusDestination;
 import io.sphere.sdk.taxcategories.TaxCategoryDraftBuilder;
 import io.sphere.sdk.taxcategories.TaxRate;
 import io.sphere.sdk.types.CustomFields;
+import io.sphere.sdk.types.CustomFieldsDraftBuilder;
 import io.sphere.sdk.types.FieldType;
 import io.sphere.sdk.types.TypeDraft;
 import io.sphere.sdk.types.TypeDraftBuilder;
@@ -127,6 +131,15 @@ import java.util.function.Function;
  <li class=fixed-in-release></li>
  </ul>
  -->
+
+ <h3 class=released-version id="v1_20_0">1.20.0 (23.06.2017)</h3>
+ <ul>
+ <li class=new-in-release>Added support for Azure ServiceBus subscription destinations {@link AzureServiceBusDestination}.</li>
+ <li class=new-in-release>Added support for for external line item prices {@link LineItemDraft#getExternalPrice()}, {@link LineItemPriceMode#EXTERNAL_PRICE}.</li>
+ <li class=new-in-release>Added {@link ChangeInputHint} update action for product types/attribute definitions.</li>
+ <li class=new-in-release>Added {@link CustomerInvalidCurrentPassword} error.</li>
+ <li class=fixed-in-release>Fixed bug in {@link CustomFieldsDraftBuilder#of(CustomFields)}, where the id was confused with the typeId.</li>
+ </ul>
 
  <h3 class=released-version id="v1_19_0">1.19.0 (06.06.2017)</h3>
  <ul>
@@ -581,7 +594,7 @@ import java.util.function.Function;
      <li>{@link ProductDraftBuilder#of(ProductDraft)}</li>
      <li>{@link ProductVariantDraftBuilder#of(ProductVariantDraft)}</li>
      <li>{@link io.sphere.sdk.reviews.ReviewDraftBuilder#of(ReviewDraft)}</li>
-     <li>{@link io.sphere.sdk.types.CustomFieldsDraftBuilder}</li>
+     <li>{@link CustomFieldsDraftBuilder}</li>
      <li>{@link io.sphere.sdk.types.TypeDraftBuilder#of(TypeDraft)}</li>
    </ul>
  </li>
