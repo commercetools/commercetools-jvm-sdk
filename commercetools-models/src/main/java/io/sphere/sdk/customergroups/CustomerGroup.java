@@ -48,10 +48,12 @@ public interface CustomerGroup extends Resource<CustomerGroup>, WithKey {
      *
      * @return name
      */
+    @HasUpdateAction
     String getName();
 
     @Override
     @Nullable
+    @HasUpdateAction
     String getKey();
 
     @Override
