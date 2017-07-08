@@ -1,0 +1,38 @@
+package io.sphere.sdk.annotations.processors.generators.examples.commands.updateactions;
+
+import io.sphere.sdk.annotations.processors.generators.examples.ExampleResourceWithUpdateAction;
+import io.sphere.sdk.commands.UpdateActionImpl;
+import java.util.Locale;
+import javax.annotation.Generated;
+
+/**
+ * Updates the {@code locale} property of a {@link ExampleResourceWithUpdateAction}.
+ *
+ * @see ExampleResourceWithUpdateAction#getLocale()
+ */
+@Generated(
+    value = "io.sphere.sdk.annotations.processors.generators.UpdateActionGenerator",
+    comments = "Generated from: io.sphere.sdk.annotations.processors.generators.examples.ExampleResourceWithUpdateAction"
+)
+public final class ChangeLocale extends UpdateActionImpl<ExampleResourceWithUpdateAction> {
+  private final Locale locale;
+
+  private ChangeLocale(final Locale locale) {
+    super("changeLocale");
+    this.locale = locale;
+  }
+
+  public Locale getLocale() {
+    return locale;
+  }
+
+  /**
+   * Creates a new object initialized with the given values.
+   *
+   * @param locale initial value for the {@link ExampleResourceWithUpdateAction#getLocale()} property
+   * @return new object initialized with the given values
+   */
+  public static ChangeLocale of(final Locale locale) {
+    return new ChangeLocale(locale);
+  }
+}

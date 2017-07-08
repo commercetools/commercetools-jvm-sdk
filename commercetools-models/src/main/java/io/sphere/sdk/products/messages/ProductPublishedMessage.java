@@ -9,6 +9,7 @@ import io.sphere.sdk.products.Product;
 import io.sphere.sdk.products.ProductProjection;
 
 import java.time.ZonedDateTime;
+import java.util.List;
 
 @JsonDeserialize(as = ProductPublishedMessage.class)//important to override annotation in Message class
 public final class ProductPublishedMessage extends GenericMessageImpl<Product> {
@@ -18,13 +19,21 @@ public final class ProductPublishedMessage extends GenericMessageImpl<Product> {
 
     private final ProductProjection productProjection;
 
+    private final List<String> removedImageUrls;
+
     @JsonCreator
-    private ProductPublishedMessage(final String id, final Long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt, final JsonNode resource, final Long sequenceNumber, final Long resourceVersion, final String type, final ProductProjection productProjection) {
+    private ProductPublishedMessage(final String id, final Long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt, final JsonNode resource, final Long sequenceNumber, final Long resourceVersion, final String type, final ProductProjection productProjection, final List<String> removedImageUrls) {
         super(id, version, createdAt, lastModifiedAt, resource, sequenceNumber, resourceVersion, type, Product.class);
         this.productProjection = productProjection;
+        this.removedImageUrls = removedImageUrls;
     }
 
     public ProductProjection getProductProjection() {
         return productProjection;
     }
+
+    public List<String> getRemovedImageUrls(){
+        return removedImageUrls;
+    }
+
 }

@@ -15,7 +15,7 @@ import static org.apache.commons.lang3.StringUtils.*;
 
 @SupportedAnnotationTypes({"io.sphere.sdk.annotations.HasByKeyGetEndpoint"})
 @SupportedSourceVersion(SourceVersion.RELEASE_8)
-public abstract class HasByFieldGetEndpointAnnotationProcessor<A extends Annotation> extends CommercetoolsAnnotationProcessor<A> {
+public abstract class HasByFieldGetEndpointAnnotationProcessor<A extends Annotation> extends ClassLevelAnnotationProcessor<A> {
 
     private final String endpointSuffix;
 

@@ -122,7 +122,7 @@ public final class ExampleDraftDsl extends Base implements ExampleDraft {
    * @param optional initial value for the {@link ExampleDraft#getOptional()} property
    * @return new object initialized with the given values
    */
-  public static ExampleDraftDsl of(final Boolean _default, final String optional) {
+  public static ExampleDraftDsl of(final Boolean _default, @Nullable final String optional) {
     return new ExampleDraftDsl(_default, null, null, optional, null);
   }
 

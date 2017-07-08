@@ -6,6 +6,7 @@ import org.apache.commons.io.Charsets;
 import org.apache.commons.io.IOUtils;
 import org.junit.Rule;
 
+import javax.annotation.processing.Messager;
 import javax.lang.model.element.TypeElement;
 import java.io.IOException;
 import java.io.InputStream;
@@ -16,6 +17,8 @@ public abstract class AbstractMultipleGeneratorTest {
 
     @Rule
     public CompilationRule compilationRule = new CompilationRule();
+
+    protected final Messager messager = new FakeMessager();
 
     protected AbstractMultipleFileGenerator generator;
 

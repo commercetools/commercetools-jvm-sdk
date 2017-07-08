@@ -154,7 +154,7 @@ public final class ExampleDraftBuilder extends Base implements Builder<ExampleDr
    * @param optional initial value for the {@link ExampleDraft#getOptional()} property
    * @return new object initialized with the given values
    */
-  public static ExampleDraftBuilder of(final Boolean _default, final String optional) {
+  public static ExampleDraftBuilder of(final Boolean _default, @Nullable final String optional) {
     return new ExampleDraftBuilder(_default, null, null, optional, null);
   }
 

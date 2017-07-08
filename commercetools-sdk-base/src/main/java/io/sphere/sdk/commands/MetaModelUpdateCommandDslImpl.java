@@ -23,10 +23,12 @@ import static io.sphere.sdk.utils.SphereInternalUtils.listOf;
 import static java.util.Objects.requireNonNull;
 
 /**
- Internal base class to implement commands that change one resource in the platform.
- @param <T> the type of the result of the command
- @param <C> class which will serialized as JSON command body, most likely a template
- @param <E> type of the expansion model */
+ * Internal base class to implement commands that change one resource in the platform.
+ *
+ * @param <T> the type of the result of the command
+ * @param <C> class which will serialized as JSON command body, most likely a template
+ * @param <E> type of the expansion model
+ */
 public class MetaModelUpdateCommandDslImpl<T extends ResourceView<T, T>, C extends UpdateCommandDsl<T, C>, E> extends CommandImpl<T> implements UpdateCommandDsl<T, C>, MetaModelExpansionDslExpansionModelRead<T, C, E> {
     final Versioned<T> versioned;
     final List<? extends UpdateAction<T>> updateActions;
@@ -99,10 +101,21 @@ public class MetaModelUpdateCommandDslImpl<T extends ResourceView<T, T>, C exten
         return withVersion(Versioned.of(getVersioned().getId(), version));
     }
 
+    @Override
+    public C withUpdateActions(List<? extends UpdateAction<T>> updateActions) {
+         return copyBuilder().updateActions(updateActions).build();
+    }
+
+    @Override
+    public C plusUpdateActions(final List<? extends UpdateAction<T>> updateActions) {
+        return withUpdateActions(listOf(getUpdateActions(),updateActions));
+    }
+
     public Versioned<T> getVersioned() {
         return versioned;
     }
 
+    @Override
     public List<? extends UpdateAction<T>> getUpdateActions() {
         return updateActions;
     }

@@ -8,6 +8,7 @@ import io.sphere.sdk.models.Builder;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.annotation.Generated;
+import javax.annotation.processing.Messager;
 import javax.lang.model.element.*;
 import javax.lang.model.type.DeclaredType;
 import javax.lang.model.type.TypeMirror;
@@ -27,8 +28,8 @@ import java.util.stream.Stream;
  */
 public class DraftBuilderGenerator extends AbstractBuilderGenerator<ResourceDraftValue> {
 
-    public DraftBuilderGenerator(final Elements elements, final Types types) {
-        super(elements, types, ResourceDraftValue.class);
+    public DraftBuilderGenerator(final Elements elements, final Types types, final Messager messager) {
+        super(elements, types, messager, ResourceDraftValue.class);
     }
 
     public TypeSpec generateType(final TypeElement resourceDraftValueType) {

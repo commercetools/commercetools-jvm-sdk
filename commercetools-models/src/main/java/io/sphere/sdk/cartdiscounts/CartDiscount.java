@@ -54,6 +54,7 @@ public interface CartDiscount extends Resource<CartDiscount> {
      */
     @Nullable
     @IgnoreInQueryModel
+    @HasUpdateAction
     LocalizedString getDescription();
 
     /**
@@ -64,6 +65,7 @@ public interface CartDiscount extends Resource<CartDiscount> {
      * @return true if active
      */
     @JsonProperty("isActive")
+    @HasUpdateAction(value = "changeIsActive",fields = {@PropertySpec(name = "active",fieldType = Boolean.class,jsonName = "isActive")})
     @IgnoreInQueryModel
     Boolean isActive();
 
@@ -74,6 +76,7 @@ public interface CartDiscount extends Resource<CartDiscount> {
      *
      * @return name
      */
+    @HasUpdateAction
     LocalizedString getName();
 
     @IgnoreInQueryModel
@@ -87,6 +90,7 @@ public interface CartDiscount extends Resource<CartDiscount> {
      * @return true if requires a discount code
      */
     @JsonProperty("requiresDiscountCode")
+    @HasUpdateAction(value = "changeRequiresDiscountCode", className = "ChangeRequiresDiscountCode")
     @IgnoreInQueryModel
     Boolean isRequiringDiscountCode();
 
@@ -100,6 +104,7 @@ public interface CartDiscount extends Resource<CartDiscount> {
      * @return sort order
      */
     @IgnoreInQueryModel
+    @HasUpdateAction
     String getSortOrder();
 
     /**
@@ -111,6 +116,7 @@ public interface CartDiscount extends Resource<CartDiscount> {
      */
     @Nullable
     @IgnoreInQueryModel
+    @HasUpdateAction(value = "changeTarget",className = "ChangeTarget")
     CartDiscountTarget getTarget();
 
     /**
@@ -122,6 +128,7 @@ public interface CartDiscount extends Resource<CartDiscount> {
      */
     @Nullable
     @IgnoreInQueryModel
+    @HasUpdateAction
     ZonedDateTime getValidFrom();
 
     /**
@@ -133,6 +140,7 @@ public interface CartDiscount extends Resource<CartDiscount> {
      */
     @Nullable
     @IgnoreInQueryModel
+    @HasUpdateAction
     ZonedDateTime getValidUntil();
 
     /**
@@ -143,6 +151,7 @@ public interface CartDiscount extends Resource<CartDiscount> {
      * @return value
      */
     @IgnoreInQueryModel
+    @HasUpdateAction("changeValue")
     CartDiscountValue getValue();
 
     /**

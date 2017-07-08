@@ -1,0 +1,38 @@
+package io.sphere.sdk.annotations.processors.generators.examples.commands.updateactions;
+
+import io.sphere.sdk.annotations.processors.generators.examples.ExampleResourceWithUpdateAction;
+import io.sphere.sdk.commands.UpdateActionImpl;
+import java.lang.String;
+import javax.annotation.Generated;
+
+/**
+ * Updates the {@code userName} property of a {@link ExampleResourceWithUpdateAction}.
+ *
+ * @see ExampleResourceWithUpdateAction#getUserName()
+ */
+@Generated(
+    value = "io.sphere.sdk.annotations.processors.generators.UpdateActionGenerator",
+    comments = "Generated from: io.sphere.sdk.annotations.processors.generators.examples.ExampleResourceWithUpdateAction"
+)
+public final class SomeClasse extends UpdateActionImpl<ExampleResourceWithUpdateAction> {
+  private final String userName;
+
+  private SomeClasse(final String userName) {
+    super("customName");
+    this.userName = userName;
+  }
+
+  public String getUserName() {
+    return userName;
+  }
+
+  /**
+   * Creates a new object initialized with the given values.
+   *
+   * @param userName initial value for the {@link ExampleResourceWithUpdateAction#getUserName()} property
+   * @return new object initialized with the given values
+   */
+  public static SomeClasse of(final String userName) {
+    return new SomeClasse(userName);
+  }
+}
