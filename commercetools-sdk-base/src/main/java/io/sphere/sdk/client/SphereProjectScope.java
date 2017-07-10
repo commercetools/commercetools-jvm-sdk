@@ -3,7 +3,7 @@ package io.sphere.sdk.client;
 import com.fasterxml.jackson.annotation.JsonValue;
 import io.sphere.sdk.models.Base;
 
-public class SphereProjectScope extends Base implements SphereScope {
+public final class SphereProjectScope extends Base implements SphereScope {
 
     private final String scope;
 
