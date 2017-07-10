@@ -1,5 +1,7 @@
 package io.sphere.sdk.client;
 
+import com.fasterxml.jackson.annotation.JsonValue;
+
 public class SphereProjectScope implements SphereScope {
 
     private final String scope;
@@ -24,7 +26,7 @@ public class SphereProjectScope implements SphereScope {
         this.scope = scope;
     }
 
-    public static SphereProjectScope of(final String scope){
+    public static SphereProjectScope of(final String scope) {
         return new SphereProjectScope(scope);
     }
 
@@ -37,4 +39,8 @@ public class SphereProjectScope implements SphereScope {
         return of(scope);
     }
 
+    @JsonValue
+    public String getScope() {
+        return scope.toUpperCase();
+    }
 }
