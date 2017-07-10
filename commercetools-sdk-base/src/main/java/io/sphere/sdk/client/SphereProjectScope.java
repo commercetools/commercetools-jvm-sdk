@@ -1,53 +1,40 @@
 package io.sphere.sdk.client;
 
-@Deprecated
-public enum SphereProjectScope implements SphereScope {
+public class SphereProjectScope implements SphereScope {
 
-    /**Grants full access to the APIs for the specified project.*/
-    MANAGE_PROJECT,
+    private final String scope;
 
-    /** Grants access to the APIs for creating, modifying and viewing anything related to products in a project. Implies view_products for the same project.*/
-    MANAGE_PRODUCTS,
+    public final static SphereProjectScope MANAGE_PROJECT = SphereProjectScope.of("manage_project");
+    public final static SphereProjectScope MANAGE_PRODUCTS = SphereProjectScope.of("manage_products");
+    public final static SphereProjectScope VIEW_PRODUCTS = SphereProjectScope.of("view_products");
+    public final static SphereProjectScope MANAGE_ORDERS = SphereProjectScope.of("manage_orders");
+    public final static SphereProjectScope VIEW_ORDERS = SphereProjectScope.of("view_orders");
+    public final static SphereProjectScope MANAGE_MY_ORDERS = SphereProjectScope.of("manage_my_orders");
+    //manage_shopping_lists
+    //view_shopping_lists
+    public final static SphereProjectScope MANAGE_CUSTOMERS = SphereProjectScope.of("manage_customers");
+    public final static SphereProjectScope VIEW_CUSTOMERS = SphereProjectScope.of("view_customers");
+    public final static SphereProjectScope MANAGE_MY_PROFILE = SphereProjectScope.of("manage_my_profile");
+    public final static SphereProjectScope MANAGE_TYPES = SphereProjectScope.of("manage_types");
+    public final static SphereProjectScope VIEW_TYPES = SphereProjectScope.of("view_types");
+    public final static SphereProjectScope MANAGE_PAYMENTS = SphereProjectScope.of("manage_payments");
+    public final static SphereProjectScope VIEW_PAYMENTS = SphereProjectScope.of("view_payments");
 
-    /** Grants access to the APIs for viewing anything related to products in a project.*/
-    VIEW_PRODUCTS,
+    private SphereProjectScope(final String scope) {
+        this.scope = scope;
+    }
 
-    /** Grants access to the APIs for creating, modifying and viewing anything related to orders in a project. Implies view_orders for the same project.*/
-    MANAGE_ORDERS,
-
-    /** Grants access to the APIs for viewing anything related to orders in a project.*/
-    VIEW_ORDERS,
-
-    /** If used with the password flow, grants access to the APIs for creating, modifying and viewing orders and carts of the customer to whom the access token was issued.*/
-    MANAGE_MY_ORDERS,
-
-    /** Grants access to the APIs for creating, modifying and viewing anything related to customers in a project. Implies view_customers for the same project.*/
-    MANAGE_CUSTOMERS,
-
-    /** Grants access to the APIs for viewing anything related to customers in a project.*/
-    VIEW_CUSTOMERS,
-
-    /** If used with the password flow, grants access to the APIs for creating, modifying and viewing the profile of the customer to whom the access token was issued.*/
-    MANAGE_MY_PROFILE,
-
-    /** Grants access to the APIs for creating, modifying and viewing anything related to types in a project.*/
-    MANAGE_TYPES,
-
-    /** Grants access to the APIs for viewing anything related to types in a project.*/
-    VIEW_TYPES,
-
-    /** Grants access to the APIs for creating, modifying and viewing anything related to payments in a project.*/
-    MANAGE_PAYMENTS,
-
-    /** Grants access to the APIs for viewing anything related to payments in a project.*/
-    VIEW_PAYMENTS;
+    public static SphereProjectScope of(final String scope){
+        return new SphereProjectScope(scope);
+    }
 
     @Override
     public String toScopeString() {
-        return name().toLowerCase();
+        return this.scope;
     }
 
     public static SphereProjectScope ofScopeString(final String scope) {
-        return valueOf(scope.toUpperCase());
+        return of(scope);
     }
+
 }
