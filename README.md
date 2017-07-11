@@ -53,6 +53,21 @@ Users gain type-safety, encapsulation, IDE auto completion and an internal domai
 * `commercetools-java-client-ahc-2_0`: uses async HTTP client 2.0 (do not mix it with the other AHC modules)
 * `commercetools-models`: models which do not depend to a client implementation
 
+### Java SDK with gradle
+
+````
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    def jvmSdkVersion = "1.20.0"
+    compile "com.commercetools.sdk.jvm.core:commercetools-models:$jvmSdkVersion"
+    compile "com.commercetools.sdk.jvm.core:commercetools-java-client:$jvmSdkVersion"    
+    compile "com.commercetools.sdk.jvm.core:commercetools-convenience:$jvmSdkVersion"
+}
+````
+
 ### Play/Scala SDK with SBT
 
 see https://github.com/commercetools/commercetools-jvm-sdk-scala-add-ons
