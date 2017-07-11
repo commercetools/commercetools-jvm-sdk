@@ -111,6 +111,14 @@
                         <artifact>${project.groupId}:${project.artifactId}:${project.version}</artifact>
                     </newArtifacts>
                 </configuration>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                    </execution>
+                </executions>
                 <dependencies>
                     <dependency>
                         <groupId>org.revapi</groupId>
