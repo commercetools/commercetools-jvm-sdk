@@ -52,10 +52,10 @@ public class PagedQueryResultTest {
     }
 
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void getPageForEmptyResults() throws Exception {
         final PagedQueryResult<Integer> queryResult = PagedQueryResult.of((long) 80, TOTAL, listOfSize(0));
-        queryResult.getPage();
+        assertThat(queryResult.getPage()).isEqualTo(0);
     }
 
     @Test

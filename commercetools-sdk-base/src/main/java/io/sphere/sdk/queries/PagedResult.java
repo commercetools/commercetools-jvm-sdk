@@ -52,13 +52,12 @@ public interface PagedResult<T> {
     /**
      * Calculates the page number of the result.
      *
-     * @return the page number of the result.
+     * @return the page number of the result, 0 if the page size is 0, meaning "{@code getCount()}" returns 0.
      */
     default Long getPage() {
 
-        if (getCount() == 0) {
-            throw new UnsupportedOperationException("Can only be used if the count is known, and is greater than 0");
-        }
+        if(getCount() == 0)
+            return 0L;
 
         return getOffset() / getCount();
     }
