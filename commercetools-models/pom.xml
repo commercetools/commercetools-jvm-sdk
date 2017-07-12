@@ -105,17 +105,29 @@
                 -->
                 <groupId>org.revapi</groupId>
                 <artifactId>revapi-maven-plugin</artifactId>
-                <version>0.8.2</version>
+                <version>0.9.1</version>
                 <configuration>
                     <newArtifacts>
                         <artifact>${project.groupId}:${project.artifactId}:${project.version}</artifact>
                     </newArtifacts>
+                    <analysisConfiguration>
+                        <revapi.filter>
+                            <elements>
+                                <exclude>
+                                    <item>class io\.sphere\.sdk\.queries\.LocalizedStringQuerySortingModelImpl.*</item>
+                                    <item>class io\.sphere\.sdk\.queries\.SphereEnumerationQueryModelImpl.*</item>
+                                    <item>interface io\.sphere\.sdk\.search\.model\.SearchSortFactory.*</item>
+                                </exclude>
+                            </elements>
+                        </revapi.filter>
+                    </analysisConfiguration>
                 </configuration>
                 <executions>
                     <execution>
                         <phase>package</phase>
                         <goals>
                             <goal>report</goal>
+                            <goal>check</goal>
                         </goals>
                     </execution>
                 </executions>
@@ -123,7 +135,7 @@
                     <dependency>
                         <groupId>org.revapi</groupId>
                         <artifactId>revapi-java</artifactId>
-                        <version>0.13.2</version>
+                        <version>0.14.0</version>
                     </dependency>
                 </dependencies>
             </plugin>
