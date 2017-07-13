@@ -2,7 +2,7 @@ package io.sphere.sdk.json;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.javamoney.moneta.function.MonetaryUtil;
+import org.javamoney.moneta.function.MonetaryQueries;
 
 import javax.money.Monetary;
 import javax.money.MonetaryAmount;
@@ -49,6 +49,6 @@ final class MoneyRepresentation {
     public static long amountToCents(final MonetaryAmount monetaryAmount) {
         return monetaryAmount
                 .with(Monetary.getDefaultRounding())
-                .query(MonetaryUtil.minorUnits());
+                .query(MonetaryQueries.convertMinorPart());
     }
 }

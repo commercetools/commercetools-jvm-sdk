@@ -22,11 +22,24 @@
             <artifactId>sdk-http</artifactId>
             <version>${project.version}</version>
         </dependency>
+
         <dependency>
             <groupId>org.javamoney</groupId>
             <artifactId>moneta</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>javax.annotation</groupId>
+                    <artifactId>javax.annotation-api</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <!-- replaces javax.annotation-api from above and is licensed under the APL 2.0 -->
+            <groupId>org.apache.geronimo.specs</groupId>
+            <artifactId>geronimo-annotation_1.2_spec</artifactId>
             <version>1.0</version>
         </dependency>
+
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
