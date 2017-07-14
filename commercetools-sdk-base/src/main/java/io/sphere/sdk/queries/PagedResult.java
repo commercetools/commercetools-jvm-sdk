@@ -54,12 +54,12 @@ public interface PagedResult<T> {
      *
      * @return the page number of the result, 0 if the page size is 0, meaning "{@code getCount()}" returns 0.
      */
-    default Long getPage() {
+    default Long getPageIndex() {
 
-        if(getCount() == 0)
+        if (getCount() == 0)
             return 0L;
 
-        return getOffset() / getCount();
+        return Math.min(getOffset() / getCount(), getTotalPages());
     }
 
     /**
@@ -67,12 +67,12 @@ public interface PagedResult<T> {
      *
      * @return the total number of pages , 0 if the page size is 0, meaning "{@code getCount()}" returns 0.
      */
-    default Long getPagesCount() {
+    default Long getTotalPages() {
 
-        if(getCount() == 0)
+        if (getCount() == 0)
             return 0L;
 
-        return   getTotal() / getCount();
+        return (long) Math.ceil(((double) getTotal()) / getCount());
     }
 
     /**

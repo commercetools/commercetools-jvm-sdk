@@ -40,35 +40,44 @@ public class PagedQueryResultTest {
 
     @Test
     public void middleOfManyResult() throws Exception {
-        final PagedQueryResult<Integer> queryResult = PagedQueryResult.of((long) PAGE_SIZE, TOTAL, listOfSize(PAGE_SIZE));
+        final PagedQueryResult<Integer> queryResult = PagedQueryResult.of( (long)PAGE_SIZE, TOTAL, listOfSize(PAGE_SIZE));
         assertThat(queryResult.isFirst()).isFalse();
         assertThat(queryResult.isLast()).isFalse();
     }
 
     @Test
-    public void getResultPage() throws Exception {
-        final PagedQueryResult<Integer> queryResult = PagedQueryResult.of((long) 80, TOTAL, listOfSize(PAGE_SIZE));
-        assertThat(queryResult.getPage()).isEqualTo(3);
+    public void pagesIndexingResults() throws Exception {
+        {
+            final PagedQueryResult<Integer> queryResult = PagedQueryResult.of(0L, 0l, listOfSize(0));
+            assertThat(queryResult.getPageIndex()).isEqualTo(0);
+            assertThat(queryResult.getTotalPages()).isEqualTo(0);
+
+        }
+        {
+            final PagedQueryResult<Integer> queryResult = PagedQueryResult.of(0L, 106l, listOfSize(25));
+            assertThat(queryResult.getPageIndex()).isEqualTo(0);
+            assertThat(queryResult.getTotalPages()).isEqualTo(5);
+        }
+        {
+            final PagedQueryResult<Integer> queryResult = PagedQueryResult.of(75L, 106l, listOfSize(25));
+            assertThat(queryResult.getPageIndex()).isEqualTo(3);
+            assertThat(queryResult.getTotalPages()).isEqualTo(5);
+        }
+
+        {
+            final PagedQueryResult<Integer> queryResult = PagedQueryResult.of(100L, 106l, listOfSize(25));
+            assertThat(queryResult.getPageIndex()).isEqualTo(4);
+            assertThat(queryResult.getTotalPages()).isEqualTo(5);
+        }
     }
 
 
-    @Test
-    public void getPageForEmptyResults() throws Exception {
-        final PagedQueryResult<Integer> queryResult = PagedQueryResult.of((long) 80, TOTAL, listOfSize(0));
-        assertThat(queryResult.getPage()).isEqualTo(0);
-    }
-
-    @Test
-    public void getPagesCount() throws Exception {
-        final PagedQueryResult<Integer> queryResult = PagedQueryResult.of((long) 80, TOTAL, listOfSize(PAGE_SIZE));
-        assertThat(queryResult.getPagesCount()).isEqualTo(4);
-    }
 
 
     @Test
     public void getPagesCountForEmptyResults() throws Exception {
-        final PagedQueryResult<Integer> queryResult = PagedQueryResult.of((long) 80, TOTAL, listOfSize(0));
-        assertThat(queryResult.getPagesCount()).isEqualTo(0);
+        final PagedQueryResult<Integer> queryResult = PagedQueryResult.of( 80L, TOTAL, listOfSize(0));
+        assertThat(queryResult.getTotalPages()).isEqualTo(0);
     }
 
     @Test
