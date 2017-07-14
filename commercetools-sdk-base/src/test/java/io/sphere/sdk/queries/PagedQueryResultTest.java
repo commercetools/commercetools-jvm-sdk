@@ -59,6 +59,19 @@ public class PagedQueryResultTest {
     }
 
     @Test
+    public void getPagesCount() throws Exception {
+        final PagedQueryResult<Integer> queryResult = PagedQueryResult.of((long) 80, TOTAL, listOfSize(PAGE_SIZE));
+        assertThat(queryResult.getPagesCount()).isEqualTo(4);
+    }
+
+
+    @Test
+    public void getPagesCountForEmptyResults() throws Exception {
+        final PagedQueryResult<Integer> queryResult = PagedQueryResult.of((long) 80, TOTAL, listOfSize(0));
+        assertThat(queryResult.getPagesCount()).isEqualTo(0);
+    }
+
+    @Test
     public void lastFilledOfManyResult() throws Exception {
         final PagedQueryResult<Integer> queryResult = PagedQueryResult.of(TOTAL - PAGE_SIZE, TOTAL, listOfSize(PAGE_SIZE));
         assertThat(queryResult.isFirst()).isFalse();

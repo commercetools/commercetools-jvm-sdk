@@ -63,6 +63,19 @@ public interface PagedResult<T> {
     }
 
     /**
+     * Calculates the total number of pages matching the request.
+     *
+     * @return the total number of pages , 0 if the page size is 0, meaning "{@code getCount()}" returns 0.
+     */
+    default Long getPagesCount() {
+
+        if(getCount() == 0)
+            return 0L;
+
+        return   getTotal() / getCount();
+    }
+
+    /**
       * Checks if this is the first page of a result.
       * @return true if offset is 0 otherwise false
       */
