@@ -13,6 +13,7 @@ import io.sphere.sdk.products.attributes.AttributeDefinitionDraftDsl;
 import javax.annotation.Nullable;
 import java.util.List;
 
+import static io.sphere.sdk.products.attributes.AttributeDefinitionDraftBuilder.copyAttributes;
 import static java.util.Arrays.asList;
 import static java.util.stream.Collectors.toList;
 
@@ -20,10 +21,10 @@ import static java.util.stream.Collectors.toList;
  * @see io.sphere.sdk.producttypes.commands.ProductTypeCreateCommand
  */
 @JsonDeserialize(as = ProductTypeDraftDsl.class)
-@ResourceDraftValue(/*abstractResourceDraftValueClass = true,*/
-        copyFactoryMethods = { @CopyFactoryMethod(ProductType.class)},
-        factoryMethods = { @FactoryMethod(parameterNames = {"key", "name", "description", "attributes"})
-})
+@ResourceDraftValue(
+        copyFactoryMethods = {@CopyFactoryMethod(ProductType.class)},
+        factoryMethods = {@FactoryMethod(parameterNames = {"key", "name", "description", "attributes"})}
+)
 public interface ProductTypeDraft extends WithKey {
     String getName();
 
@@ -44,11 +45,6 @@ public interface ProductTypeDraft extends WithKey {
      * @return draft for a product type
      */
     static ProductTypeDraft of(@Nullable final String key, final String name, final String description, final List<AttributeDefinition> attributes) {
-        return ofAttributeDefinitionDrafts(key, name, description, attributes.stream().map(m -> AttributeDefinitionDraftBuilder.of(m).build()).collect(toList()));
+        return ProductTypeDraftDsl.of(key, name, description, copyAttributes(attributes));
     }
-
-    static ProductTypeDraft ofAttributeDefinitionDrafts(@Nullable final String key, final String name, final String description, final List<AttributeDefinitionDraft> attributes) {
-        return ProductTypeDraftDsl.of(key, name, description, attributes);
-    }
-
 }
