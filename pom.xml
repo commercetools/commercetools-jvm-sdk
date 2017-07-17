@@ -64,8 +64,8 @@
     <scm>
         <url>git@github.com:commercetools/commercetools-jvm-sdk.git</url>
         <connection>scm:git:git@github.com:commercetools/commercetools-jvm-sdk.git</connection>
-      <tag>HEAD</tag>
-  </scm>
+        <tag>HEAD</tag>
+    </scm>
     <properties>
         <jackson.version>2.6.5</jackson.version>
         <gson.version>2.5</gson.version>
@@ -89,7 +89,8 @@
         <java.version>1.${java.major.version}</java.version>
         <jacoco.version>0.7.5.201505241946</jacoco.version>
         <maven-scm-publish-plugin.version>1.1</maven-scm-publish-plugin.version>
-        <maven-scm-publish-plugin.scm.url>scm:git:git@github.com:commercetools/commercetools-jvm-sdk.git</maven-scm-publish-plugin.scm.url>
+        <maven-scm-publish-plugin.scm.url>scm:git:git@github.com:commercetools/commercetools-jvm-sdk.git
+        </maven-scm-publish-plugin.scm.url>
         <maven-compiler-plugin.version>3.5.1</maven-compiler-plugin.version>
         <maven-javadoc-plugin.version>2.10.3</maven-javadoc-plugin.version>
         <maven-failsafe-plugin.version>2.19.1</maven-failsafe-plugin.version>
@@ -100,7 +101,7 @@
         <maven-surefire-plugin.version>2.19.1</maven-surefire-plugin.version>
         <maven-deploy-plugin.version>2.8.2</maven-deploy-plugin.version>
         <handlebars.version>4.0.6</handlebars.version>
-        <javadoc.additionalparams />
+        <javadoc.additionalparams/>
     </properties>
     <dependencyManagement>
         <dependencies>
@@ -167,6 +168,7 @@
     <build>
         <pluginManagement>
             <plugins>
+
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-compiler-plugin</artifactId>
@@ -176,9 +178,9 @@
                         <target>${java.version}</target>
                         <encoding>${project.build.sourceEncoding}</encoding>
                         <compilerArguments>
-                            <parameters />
+                            <parameters/>
                             <!--<Werror />--><!--  actually this setting breaks the build for annotation processing -->
-                            <Xlint:all />
+                            <Xlint:all/>
                             <!--<arg>-Xlint:unchecked</arg>-->
                             <!--<arg>-Xlint:-options</arg>-->
                             <!--<arg>-Xlint:-path</arg>-->
@@ -215,7 +217,8 @@
                         <encoding>${project.build.sourceEncoding}</encoding>
                         <charset>${project.build.sourceEncoding}</charset>
                         <docencoding>${project.build.sourceEncoding}</docencoding>
-                        <additionalparam>-Xdoclint:missing,syntax,accessibility,reference ${javadoc.additionalparams}</additionalparam>
+                        <additionalparam>-Xdoclint:missing,syntax,accessibility,reference ${javadoc.additionalparams}
+                        </additionalparam>
                         <taglets>
                             <!-- see https://github.com/commercetools/commercetools-taglets -->
                             <taglet>
@@ -243,7 +246,9 @@
                                 </tagletArtifact>
                             </taglet>
                         </taglets>
-                        <excludedocfilessubdir>commercetools-internal-docs:commercetools-java-client-internal-test:commercetools-test-lib</excludedocfilessubdir>
+                        <excludedocfilessubdir>
+                            commercetools-internal-docs:commercetools-java-client-internal-test:commercetools-test-lib
+                        </excludedocfilessubdir>
                         <excludePackageNames>test</excludePackageNames>
                         <sourceFileExcludes>
                             <sourceFileExclude>**/*Test.java</sourceFileExclude>
@@ -320,7 +325,9 @@
                         </execution>
                         <execution>
                             <id>default-prepare-agent</id>
-                            <goals><goal>prepare-agent</goal></goals>
+                            <goals>
+                                <goal>prepare-agent</goal>
+                            </goals>
                         </execution>
                         <execution>
                             <id>default-prepare-agent-integration</id>
@@ -362,6 +369,38 @@
                     <goals>deploy</goals>
                     <tagNameFormat>v@{project.version}</tagNameFormat>
                 </configuration>
+            </plugin>
+            <plugin>
+                <!--
+                http://revapi.org/modules/revapi-maven-plugin/examples/comparing-specific-artifacts.html
+
+                mvn clean package -Darguments="-DskipTests" -DskipTests
+
+                mvn revapi:report -Darguments="-DskipTests" -DskipTests -Pjavadoc-jdk-8u121
+                -->
+                <groupId>org.revapi</groupId>
+                <artifactId>revapi-maven-plugin</artifactId>
+                <version>0.9.1</version>
+                <configuration>
+                    <newArtifacts>
+                        <artifact>${project.groupId}:${project.artifactId}:${project.version}</artifact>
+                    </newArtifacts>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.revapi</groupId>
+                        <artifactId>revapi-java</artifactId>
+                        <version>0.14.0</version>
+                    </dependency>
+                </dependencies>
             </plugin>
         </plugins>
     </build>
@@ -423,7 +462,8 @@
                         <version>${maven-scm-publish-plugin.version}</version>
                         <configuration>
                             <checkoutDirectory>${project.build.directory}/javadoc-stage</checkoutDirectory>
-                            <checkinComment>publishing Javadoc for ${project.artifactId}:${project.version}</checkinComment>
+                            <checkinComment>publishing Javadoc for ${project.artifactId}:${project.version}
+                            </checkinComment>
                             <content>${project.build.directory}/site</content>
                             <skipDeletedFiles>false</skipDeletedFiles>
                             <pubScmUrl>${maven-scm-publish-plugin.scm.url}</pubScmUrl>
@@ -462,7 +502,9 @@
                         <artifactId>license-maven-plugin</artifactId>
                         <configuration>
                             <licenseMerges>
-                                <licenseMerge>Apache License 2.0|The Apache Software License, Version 2.0|Apache License, Version 2.0|Apache 2 License|Apache 2.0|Apache 2</licenseMerge>
+                                <licenseMerge>Apache License 2.0|The Apache Software License, Version 2.0|Apache
+                                    License, Version 2.0|Apache 2 License|Apache 2.0|Apache 2
+                                </licenseMerge>
                                 <licenseMerge>Eclipse Public License 1.0|Eclipse Public License - v 1.0</licenseMerge>
                             </licenseMerges>
                             <excludedScopes>test,provided</excludedScopes>
