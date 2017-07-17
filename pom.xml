@@ -376,7 +376,9 @@
 
                 mvn clean package -Darguments="-DskipTests" -DskipTests -Pjavadoc-jdk-8u121
 
-                mvn revapi:report -Darguments="-DskipTests" -DskipTests -Pjavadoc-jdk-8u121
+                mvn revapi:report-aggregate -Darguments="-DskipTests" -DskipTests -Pjavadoc-jdk-8u121
+
+                open target/site/revapi-aggregate-report.html
                 -->
                 <groupId>org.revapi</groupId>
                 <artifactId>revapi-maven-plugin</artifactId>
