@@ -374,7 +374,7 @@
                 <!--
                 http://revapi.org/modules/revapi-maven-plugin/examples/comparing-specific-artifacts.html
 
-                mvn clean package -Darguments="-DskipTests" -DskipTests
+                mvn clean package -Darguments="-DskipTests" -DskipTests -Pjavadoc-jdk-8u121
 
                 mvn revapi:report -Darguments="-DskipTests" -DskipTests -Pjavadoc-jdk-8u121
                 -->
@@ -391,6 +391,7 @@
                         <phase>package</phase>
                         <goals>
                             <goal>report</goal>
+                            <goal>report-aggregate</goal>
                         </goals>
                     </execution>
                 </executions>
