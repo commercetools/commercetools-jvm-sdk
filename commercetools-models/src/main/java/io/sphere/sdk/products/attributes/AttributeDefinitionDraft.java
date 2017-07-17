@@ -12,12 +12,9 @@ import javax.annotation.Nullable;
 /**
  * Template to create a new Attribute Definition.
  * <p>
- * For construction see {@link AttributeDefinitionDraftBuilder}.
  */
-@JsonDeserialize(as = AttributeDefinitionDraftDsl.class)
-@ResourceDraftValue(
-        factoryMethods = @FactoryMethod(parameterNames = {"attributeType", "name", "label", "required"}),
-        abstractBuilderClass = true
+@ResourceDraftValue(abstractBuilderClass = true,
+        factoryMethods = @FactoryMethod(parameterNames = {"attributeType", "name", "label", "required"})
 )
 public interface AttributeDefinitionDraft {
 
