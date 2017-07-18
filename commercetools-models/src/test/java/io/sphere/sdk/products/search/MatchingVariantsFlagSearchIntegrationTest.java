@@ -14,7 +14,6 @@ import java.util.stream.Stream;
 import static io.sphere.sdk.products.ProductFixtures.withProduct;
 import static io.sphere.sdk.producttypes.ProductTypeFixtures.withProductType;
 import static io.sphere.sdk.test.SphereTestUtils.*;
-import static io.sphere.sdk.test.SphereTestUtils.randomSlug;
 import static java.util.Collections.singletonList;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -64,8 +63,7 @@ public class MatchingVariantsFlagSearchIntegrationTest extends ProductProjection
     }
 
     private AttributeDefinitionDraft attributeDefinition(final String attributeName) {
-        Boolean required = true;
-        AttributeDefinitionDraftDsl definitionDraftDsl = AttributeDefinitionDraftBuilder.of(StringAttributeType.of(), attributeName, randomSlug(), required).build();
-        return AttributeDefinitionDraftBuilder.of(definitionDraftDsl).build();
+        AttributeDefinition attributeDefinition = AttributeDefinitionBuilder.of(attributeName, randomSlug(), StringAttributeType.of()).build();
+        return AttributeDefinitionDraftBuilder.of(attributeDefinition).build();
     }
 }
