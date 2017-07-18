@@ -44,7 +44,6 @@ public interface AttributeDefinition {
      * Describes how an attribute or a set of attributes should be validated across all variants of a product.
      * @return definition of validation logic
      */
-    @Nullable
     AttributeConstraint getAttributeConstraint();
 
     /**
