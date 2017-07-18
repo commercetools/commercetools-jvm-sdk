@@ -5,7 +5,7 @@ import io.sphere.sdk.models.TextInputHint;
 
 import javax.annotation.Nullable;
 
-public class AttributeDefinitionDraftBuilder extends AttributeDefinitionDraftBuilderBase<AttributeDefinitionDraftBuilder> {
+public final class AttributeDefinitionDraftBuilder extends AttributeDefinitionDraftBuilderBase<AttributeDefinitionDraftBuilder> {
 
     AttributeDefinitionDraftBuilder(@Nullable final AttributeConstraint attributeConstraint,
                                     final AttributeType attributeType, final TextInputHint inputHint,
