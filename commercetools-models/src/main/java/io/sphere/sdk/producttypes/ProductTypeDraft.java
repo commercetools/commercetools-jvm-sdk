@@ -8,14 +8,10 @@ import io.sphere.sdk.models.WithKey;
 import io.sphere.sdk.products.attributes.AttributeDefinition;
 import io.sphere.sdk.products.attributes.AttributeDefinitionDraft;
 import io.sphere.sdk.products.attributes.AttributeDefinitionDraftBuilder;
-import io.sphere.sdk.products.attributes.AttributeDefinitionDraftDsl;
 
 import javax.annotation.Nullable;
 import java.util.List;
-
-import static io.sphere.sdk.products.attributes.AttributeDefinitionDraftBuilder.copyAttributes;
-import static java.util.Arrays.asList;
-import static java.util.stream.Collectors.toList;
+import java.util.stream.Collectors;
 
 /**
  * @see io.sphere.sdk.producttypes.commands.ProductTypeCreateCommand
@@ -44,7 +40,16 @@ public interface ProductTypeDraft extends WithKey {
      * @param attributes  definitions of attributes for the product type
      * @return draft for a product type
      */
+    @Deprecated
     static ProductTypeDraft of(@Nullable final String key, final String name, final String description, final List<AttributeDefinition> attributes) {
-        return ProductTypeDraftDsl.of(key, name, description, copyAttributes(attributes));
+        return ofAttributeDefinitionDrafts(key, name, description, copyAttributes(attributes));
+    }
+
+    static ProductTypeDraft ofAttributeDefinitionDrafts(@Nullable final String key, final String name, final String description, final List<AttributeDefinitionDraft> attributes) {
+        return ProductTypeDraftDsl.of(key, name, description, attributes);
+    }
+
+    static List<AttributeDefinitionDraft> copyAttributes(final List<AttributeDefinition> templates) {
+        return templates == null ? null : templates.stream().map(template -> AttributeDefinitionDraftBuilder.of(template).build()).collect(Collectors.toList());
     }
 }

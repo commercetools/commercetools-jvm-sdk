@@ -4,8 +4,6 @@ import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.TextInputHint;
 
 import javax.annotation.Nullable;
-import java.util.List;
-import java.util.stream.Collectors;
 
 public class AttributeDefinitionDraftBuilder extends AttributeDefinitionDraftBuilderBase<AttributeDefinitionDraftBuilder> {
 
@@ -24,10 +22,6 @@ public class AttributeDefinitionDraftBuilder extends AttributeDefinitionDraftBui
      */
     public static AttributeDefinitionDraftBuilder of(final AttributeDefinition template) {
         return new AttributeDefinitionDraftBuilder(template.getAttributeConstraint(), template.getAttributeType(), template.getInputHint(), template.getInputTip(), template.getLabel(), template.getName(), template.isRequired(), template.isSearchable());
-    }
-
-    public static List<AttributeDefinitionDraft> copyAttributes(final List<AttributeDefinition> templates) {
-        return templates == null ? null : templates.stream().map(template -> AttributeDefinitionDraftBuilder.of(template).build()).collect(Collectors.toList());
     }
 
 }

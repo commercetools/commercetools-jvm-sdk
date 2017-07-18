@@ -81,7 +81,6 @@ public final class AttributeDefinitionBuilder extends Base implements Builder<At
     }
 
     @Override
-    @Deprecated
     public AttributeDefinition build() {
         return new AttributeDefinitionImpl(attributeType, name, label, isRequired, attributeConstraint, isSearchable, inputHint, inputTip);
     }
