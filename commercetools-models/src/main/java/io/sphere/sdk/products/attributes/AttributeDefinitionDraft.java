@@ -11,9 +11,9 @@ import javax.annotation.Nullable;
 
 /**
  * Template to create a new Attribute Definition.
- * <p>
  */
-@ResourceDraftValue(abstractBuilderClass = true,
+@ResourceDraftValue(
+        abstractBuilderClass = true,
         factoryMethods = @FactoryMethod(parameterNames = {"attributeType", "name", "label", "required"})
 )
 public interface AttributeDefinitionDraft {

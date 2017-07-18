@@ -1,10 +1,7 @@
 package io.sphere.sdk.products.search;
 
 import io.sphere.sdk.products.*;
-import io.sphere.sdk.products.attributes.AttributeDefinition;
-import io.sphere.sdk.products.attributes.AttributeDefinitionBuilder;
-import io.sphere.sdk.products.attributes.AttributeDraft;
-import io.sphere.sdk.products.attributes.StringAttributeType;
+import io.sphere.sdk.products.attributes.*;
 import io.sphere.sdk.producttypes.ProductTypeDraft;
 import io.sphere.sdk.producttypes.ProductTypeDraftDsl;
 import org.junit.Test;
@@ -17,6 +14,7 @@ import java.util.stream.Stream;
 import static io.sphere.sdk.products.ProductFixtures.withProduct;
 import static io.sphere.sdk.producttypes.ProductTypeFixtures.withProductType;
 import static io.sphere.sdk.test.SphereTestUtils.*;
+import static io.sphere.sdk.test.SphereTestUtils.randomSlug;
 import static java.util.Collections.singletonList;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -65,7 +63,9 @@ public class MatchingVariantsFlagSearchIntegrationTest extends ProductProjection
         return ProductTypeDraftDsl.of(randomKey(), randomKey(), randomKey(), singletonList(attributeDefinition(attributeName)));
     }
 
-    private AttributeDefinition attributeDefinition(final String attributeName) {
-        return AttributeDefinitionBuilder.of(attributeName, randomSlug(), StringAttributeType.of()).build();
+    private AttributeDefinitionDraft attributeDefinition(final String attributeName) {
+        Boolean required = true;
+        AttributeDefinitionDraftDsl definitionDraftDsl = AttributeDefinitionDraftBuilder.of(StringAttributeType.of(), attributeName, randomSlug(), required).build();
+        return AttributeDefinitionDraftBuilder.of(definitionDraftDsl).build();
     }
 }
