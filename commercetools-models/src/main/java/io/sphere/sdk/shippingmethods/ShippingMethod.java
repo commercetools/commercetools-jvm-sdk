@@ -50,7 +50,12 @@ import static java.util.stream.Collectors.toList;
 @HasUpdateCommand
 @HasDeleteCommand
 @HasQueryModel(additionalContents = "BooleanQueryModel<ShippingMethod> isDefault();")
+@HasUpdateActions
 public interface ShippingMethod extends Resource<ShippingMethod> {
+
+    @Nullable
+    String getKey();
+
     String getName();
 
     @Nullable
